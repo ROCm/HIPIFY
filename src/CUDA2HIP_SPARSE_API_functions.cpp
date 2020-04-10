@@ -101,10 +101,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP{
   {"cusparseZsctr",                               {"hipsparseZsctr",                               "", CONV_LIB_FUNC, API_SPARSE}},
 
   // 7. cuSPARSE Level 2 Function Reference
-  {"cusparseSbsrmv",                              {"hipsparseSbsrmv",                              "", CONV_LIB_FUNC, API_SPARSE, HIP_UNSUPPORTED}},
-  {"cusparseDbsrmv",                              {"hipsparseDbsrmv",                              "", CONV_LIB_FUNC, API_SPARSE, HIP_UNSUPPORTED}},
-  {"cusparseCbsrmv",                              {"hipsparseCbsrmv",                              "", CONV_LIB_FUNC, API_SPARSE, HIP_UNSUPPORTED}},
-  {"cusparseZbsrmv",                              {"hipsparseZbsrmv",                              "", CONV_LIB_FUNC, API_SPARSE, HIP_UNSUPPORTED}},
+  {"cusparseSbsrmv",                              {"hipsparseSbsrmv",                              "", CONV_LIB_FUNC, API_SPARSE}},
+  {"cusparseDbsrmv",                              {"hipsparseDbsrmv",                              "", CONV_LIB_FUNC, API_SPARSE}},
+  {"cusparseCbsrmv",                              {"hipsparseCbsrmv",                              "", CONV_LIB_FUNC, API_SPARSE}},
+  {"cusparseZbsrmv",                              {"hipsparseZbsrmv",                              "", CONV_LIB_FUNC, API_SPARSE}},
 
   {"cusparseSbsrxmv",                             {"hipsparseSbsrxmv",                             "", CONV_LIB_FUNC, API_SPARSE, HIP_UNSUPPORTED}},
   {"cusparseDbsrxmv",                             {"hipsparseDbsrxmv",                             "", CONV_LIB_FUNC, API_SPARSE, HIP_UNSUPPORTED}},
@@ -697,10 +697,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP{
   {"cusparseSpruneCsr2csrNnzByPercentage",        {"hipsparseSpruneCsr2csrNnzByPercentage",        "", CONV_LIB_FUNC, API_SPARSE, HIP_UNSUPPORTED}},
   {"cusparseDpruneCsr2csrNnzByPercentage",        {"hipsparseDpruneCsr2csrNnzByPercentage",        "", CONV_LIB_FUNC, API_SPARSE, HIP_UNSUPPORTED}},
 
-  {"cusparseSnnz_compress",                       {"hipsparseSnnz_compress",                       "", CONV_LIB_FUNC, API_SPARSE, HIP_UNSUPPORTED}},
-  {"cusparseDnnz_compress",                       {"hipsparseDnnz_compress",                       "", CONV_LIB_FUNC, API_SPARSE, HIP_UNSUPPORTED}},
-  {"cusparseCnnz_compress",                       {"hipsparseCnnz_compress",                       "", CONV_LIB_FUNC, API_SPARSE, HIP_UNSUPPORTED}},
-  {"cusparseZnnz_compress",                       {"hipsparseZnnz_compress",                       "", CONV_LIB_FUNC, API_SPARSE, HIP_UNSUPPORTED}},
+  {"cusparseSnnz_compress",                       {"hipsparseSnnz_compress",                       "", CONV_LIB_FUNC, API_SPARSE}},
+  {"cusparseDnnz_compress",                       {"hipsparseDnnz_compress",                       "", CONV_LIB_FUNC, API_SPARSE}},
+  {"cusparseCnnz_compress",                       {"hipsparseCnnz_compress",                       "", CONV_LIB_FUNC, API_SPARSE}},
+  {"cusparseZnnz_compress",                       {"hipsparseZnnz_compress",                       "", CONV_LIB_FUNC, API_SPARSE}},
 
   // 13. cuSPARSE Generic API Reference
   // Generic Sparse API helper functions
