@@ -249,9 +249,9 @@ Run `Visual Studio 16 2019`, open the generated `LLVM.sln`, build all, build pro
 
 On Linux the following configurations are tested:
 
-Ubuntu 14: LLVM 5.0.0 - 6.0.1, CUDA 7.0 - 9.0, cudnn-5.0.5 - cudnn-7.6.5.32
+Ubuntu 14: LLVM 5.0.0 - 7.1.0, CUDA 7.0 - 9.0, cuDNN 5.0.5 - 7.6.5.32
 
-Ubuntu 16-18: LLVM 8.0.0 - 10.0.0, CUDA 8.0 - 10.2, cudnn-5.1.10 - cudnn-7.6.5.32
+Ubuntu 16-18: LLVM 8.0.0 - 10.0.0, CUDA 8.0 - 10.2, cuDNN 5.1.10 - 7.6.5.32
 
 Minimum build system requirements for the above configurations:
 
@@ -409,7 +409,7 @@ Testing Time: 3.23s
 | 8.0.0 - 8.0.1  | 10.0     | 7.6.5.32            | 2017.15.9.15              | 3.14.2    | 3.7.4      |
 | 9.0.0 - 9.0.1  | 10.1     | 7.6.5.32            | 2017.15.9.20, 2019.16.4.5 | 3.16.4    | 3.8.0      |
 | 10.0.0         | 10.2     | 7.6.5.32            | 2017.15.9.21, 2019.16.5.1 | 3.17.0    | 3.8.2      |
-| 11.0.0git      | 10.2     | 7.6.5.32            | 2017.15.9.21, 2019.16.5.1 | 3.17.0    | 3.8.2      |
+| 11.0.0git      | 10.2     | 7.6.5.32            | 2017.15.9.22, 2019.16.5.4 | 3.17.1    | 3.8.2      |
 
 *Building with testing support on `Windows 10` by `Visual Studio 16 2019`:*
 
