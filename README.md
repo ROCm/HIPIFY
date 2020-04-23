@@ -1,7 +1,5 @@
 # HIPIFY
 
-**WIP: move HIPIFY from its old location ( https://github.com/ROCm-Developer-Tools/HIP/tree/master/hipify-clang ) to this project ( https://github.com/ROCm-Developer-Tools/HIPIFY/tree/master ).**
-
 ### Tools to translate CUDA source code into portable HIP C++ automatically
 ## Table of Contents
 
