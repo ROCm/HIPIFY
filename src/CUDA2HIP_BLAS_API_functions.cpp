@@ -317,8 +317,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP{
   {"cublasZtrsm",                    {"hipblasZtrsm",                    "",                                         CONV_LIB_FUNC, API_BLAS, UNSUPPORTED}},
 
   // TRMM
-  {"cublasStrmm",                    {"hipblasStrmm",                    "rocblas_strmm",                            CONV_LIB_FUNC, API_BLAS, HIP_UNSUPPORTED}},
-  {"cublasDtrmm",                    {"hipblasDtrmm",                    "rocblas_dtrmm",                            CONV_LIB_FUNC, API_BLAS, HIP_UNSUPPORTED}},
+  {"cublasStrmm",                    {"hipblasStrmm",                    "rocblas_strmm",                            CONV_LIB_FUNC, API_BLAS}},
+  {"cublasDtrmm",                    {"hipblasDtrmm",                    "rocblas_dtrmm",                            CONV_LIB_FUNC, API_BLAS}},
   {"cublasCtrmm",                    {"hipblasCtrmm",                    "",                                         CONV_LIB_FUNC, API_BLAS, UNSUPPORTED}},
   {"cublasZtrmm",                    {"hipblasZtrmm",                    "",                                         CONV_LIB_FUNC, API_BLAS, UNSUPPORTED}},
 
@@ -348,8 +348,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP{
   {"cublasZgetrsBatched",            {"hipblasZgetrsBatched",            "",                                         CONV_LIB_FUNC, API_BLAS, UNSUPPORTED}},
 
   // TRSM - Batched Triangular Solver
-  {"cublasStrsmBatched",             {"hipblasStrsmBatched",             "",                                         CONV_LIB_FUNC, API_BLAS, UNSUPPORTED}},
-  {"cublasDtrsmBatched",             {"hipblasDtrsmBatched",             "",                                         CONV_LIB_FUNC, API_BLAS, UNSUPPORTED}},
+  {"cublasStrsmBatched",             {"hipblasStrsmBatched",             "rocblas_strsm_batched",                    CONV_LIB_FUNC, API_BLAS}},
+  {"cublasDtrsmBatched",             {"hipblasDtrsmBatched",             "rocblas_dtrsm_batched",                    CONV_LIB_FUNC, API_BLAS}},
   {"cublasCtrsmBatched",             {"hipblasCtrsmBatched",             "",                                         CONV_LIB_FUNC, API_BLAS, UNSUPPORTED}},
   {"cublasZtrsmBatched",             {"hipblasZtrsmBatched",             "",                                         CONV_LIB_FUNC, API_BLAS, UNSUPPORTED}},
 
@@ -569,8 +569,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP{
   {"cublasZtrsm_v2",                 {"hipblasZtrsm",                    "",                                         CONV_LIB_FUNC, API_BLAS, UNSUPPORTED}},
 
   // TRMM
-  {"cublasStrmm_v2",                 {"hipblasStrmm",                    "rocblas_strmm",                            CONV_LIB_FUNC, API_BLAS, HIP_UNSUPPORTED}},
-  {"cublasDtrmm_v2",                 {"hipblasDtrmm",                    "rocblas_dtrmm",                            CONV_LIB_FUNC, API_BLAS, HIP_UNSUPPORTED}},
+  {"cublasStrmm_v2",                 {"hipblasStrmm",                    "rocblas_strmm",                            CONV_LIB_FUNC, API_BLAS}},
+  {"cublasDtrmm_v2",                 {"hipblasDtrmm",                    "rocblas_dtrmm",                            CONV_LIB_FUNC, API_BLAS}},
   {"cublasCtrmm_v2",                 {"hipblasCtrmm",                    "",                                         CONV_LIB_FUNC, API_BLAS, UNSUPPORTED}},
   {"cublasZtrmm_v2",                 {"hipblasZtrmm",                    "",                                         CONV_LIB_FUNC, API_BLAS, UNSUPPORTED}},
 

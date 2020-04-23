@@ -471,7 +471,10 @@ sub simpleSubstitutions {
     $ft{'library'} += s/\bcublasDswap_v2\b/hipblasDswap/g;
     $ft{'library'} += s/\bcublasDsyr\b/hipblasDsyr/g;
     $ft{'library'} += s/\bcublasDsyr_v2\b/hipblasDsyr/g;
+    $ft{'library'} += s/\bcublasDtrmm\b/hipblasDtrmm/g;
+    $ft{'library'} += s/\bcublasDtrmm_v2\b/hipblasDtrmm/g;
     $ft{'library'} += s/\bcublasDtrsm\b/hipblasDtrsm/g;
+    $ft{'library'} += s/\bcublasDtrsmBatched\b/hipblasDtrsmBatched/g;
     $ft{'library'} += s/\bcublasDtrsm_v2\b/hipblasDtrsm/g;
     $ft{'library'} += s/\bcublasDtrsv\b/hipblasDtrsv/g;
     $ft{'library'} += s/\bcublasDtrsv_v2\b/hipblasDtrsv/g;
@@ -549,7 +552,10 @@ sub simpleSubstitutions {
     $ft{'library'} += s/\bcublasSswap_v2\b/hipblasSswap/g;
     $ft{'library'} += s/\bcublasSsyr\b/hipblasSsyr/g;
     $ft{'library'} += s/\bcublasSsyr_v2\b/hipblasSsyr/g;
+    $ft{'library'} += s/\bcublasStrmm\b/hipblasStrmm/g;
+    $ft{'library'} += s/\bcublasStrmm_v2\b/hipblasStrmm/g;
     $ft{'library'} += s/\bcublasStrsm\b/hipblasStrsm/g;
+    $ft{'library'} += s/\bcublasStrsmBatched\b/hipblasStrsmBatched/g;
     $ft{'library'} += s/\bcublasStrsm_v2\b/hipblasStrsm/g;
     $ft{'library'} += s/\bcublasStrsv\b/hipblasStrsv/g;
     $ft{'library'} += s/\bcublasStrsv_v2\b/hipblasStrsv/g;
