@@ -74,8 +74,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP{
   {"CUDA_MEMCPY2D",                                                    {"hip_Memcpy2D",                                             "", CONV_TYPE, API_DRIVER}},
 
   // no analogue
-  {"CUDA_MEMCPY3D_st",                                                 {"hip_Memcpy3D",                                             "", CONV_TYPE, API_DRIVER, HIP_UNSUPPORTED}},
-  {"CUDA_MEMCPY3D",                                                    {"hip_Memcpy3D",                                             "", CONV_TYPE, API_DRIVER, HIP_UNSUPPORTED}},
+  {"CUDA_MEMCPY3D_st",                                                 {"HIP_MEMCPY3D",                                             "", CONV_TYPE, API_DRIVER}},
+  {"CUDA_MEMCPY3D",                                                    {"HIP_MEMCPY3D",                                             "", CONV_TYPE, API_DRIVER}},
 
   {"CUDA_MEMCPY3D_PEER_st",                                            {"hip_Memcpy3D_Peer",                                        "", CONV_TYPE, API_DRIVER, HIP_UNSUPPORTED}},
   {"CUDA_MEMCPY3D_PEER",                                               {"hip_Memcpy3D_Peer",                                        "", CONV_TYPE, API_DRIVER, HIP_UNSUPPORTED}},
