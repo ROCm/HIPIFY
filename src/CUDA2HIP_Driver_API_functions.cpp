@@ -188,12 +188,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP{
   {"cuMemcpy2DUnaligned_v2",                               {"hipMemcpy2DUnaligned",                                    "", CONV_MEMORY, API_DRIVER, HIP_UNSUPPORTED}},
   // no analogue
   // NOTE: Not equal to cudaMemcpy3D due to different signatures
-  {"cuMemcpy3D",                                           {"hipMemcpy3D_",                                            "", CONV_MEMORY, API_DRIVER, HIP_UNSUPPORTED}},
-  {"cuMemcpy3D_v2",                                        {"hipMemcpy3D_",                                            "", CONV_MEMORY, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuMemcpy3D",                                           {"hipDrvMemcpy3D",                                          "", CONV_MEMORY, API_DRIVER}},
+  {"cuMemcpy3D_v2",                                        {"hipDrvMemcpy3D",                                          "", CONV_MEMORY, API_DRIVER}},
   // no analogue
   // NOTE: Not equal to cudaMemcpy3DAsync due to different signatures
-  {"cuMemcpy3DAsync",                                      {"hipMemcpy3DAsync_",                                       "", CONV_MEMORY, API_DRIVER, HIP_UNSUPPORTED}},
-  {"cuMemcpy3DAsync_v2",                                   {"hipMemcpy3DAsync_",                                       "", CONV_MEMORY, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuMemcpy3DAsync",                                      {"hipDrvMemcpy3DAsync",                                     "", CONV_MEMORY, API_DRIVER}},
+  {"cuMemcpy3DAsync_v2",                                   {"hipDrvMemcpy3DAsync",                                     "", CONV_MEMORY, API_DRIVER}},
   // no analogue
   // NOTE: Not equal to cudaMemcpy3DPeer due to different signatures
   {"cuMemcpy3DPeer",                                       {"hipMemcpy3DPeer_",                                        "", CONV_MEMORY, API_DRIVER, HIP_UNSUPPORTED}},
