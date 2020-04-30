@@ -491,10 +491,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP{
   {"cublasZhpr_v2",                  {"hipblasZhpr",                     "",                                         CONV_LIB_FUNC, API_BLAS}},
 
   // SYR2/HER2
-  {"cublasSsyr2_v2",                 {"hipblasSsyr2",                    "",                                         CONV_LIB_FUNC, API_BLAS, UNSUPPORTED}},
-  {"cublasDsyr2_v2",                 {"hipblasDsyr2",                    "",                                         CONV_LIB_FUNC, API_BLAS, UNSUPPORTED}},
-  {"cublasCsyr2_v2",                 {"hipblasCsyr2",                    "",                                         CONV_LIB_FUNC, API_BLAS, UNSUPPORTED}},
-  {"cublasZsyr2_v2",                 {"hipblasZsyr2",                    "",                                         CONV_LIB_FUNC, API_BLAS, UNSUPPORTED}},
+  {"cublasSsyr2_v2",                 {"hipblasSsyr2",                    "",                                         CONV_LIB_FUNC, API_BLAS}},
+  {"cublasDsyr2_v2",                 {"hipblasDsyr2",                    "",                                         CONV_LIB_FUNC, API_BLAS}},
+  {"cublasCsyr2_v2",                 {"hipblasCsyr2",                    "",                                         CONV_LIB_FUNC, API_BLAS}},
+  {"cublasZsyr2_v2",                 {"hipblasZsyr2",                    "",                                         CONV_LIB_FUNC, API_BLAS}},
   {"cublasCher2_v2",                 {"hipblasCher2",                    "",                                         CONV_LIB_FUNC, API_BLAS}},
   {"cublasZher2_v2",                 {"hipblasZher2",                    "",                                         CONV_LIB_FUNC, API_BLAS}},
 

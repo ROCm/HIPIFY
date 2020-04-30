@@ -472,6 +472,7 @@ sub simpleSubstitutions {
     $ft{'library'} += s/\bcublasCsymv_v2\b/hipblasCsymv/g;
     $ft{'library'} += s/\bcublasCsyr\b/hipblasCsyr/g;
     $ft{'library'} += s/\bcublasCsyr2\b/hipblasCsyr2/g;
+    $ft{'library'} += s/\bcublasCsyr2_v2\b/hipblasCsyr2/g;
     $ft{'library'} += s/\bcublasCsyr2k\b/hipblasCsyr2k/g;
     $ft{'library'} += s/\bcublasCsyr2k_v2\b/hipblasCsyr2k/g;
     $ft{'library'} += s/\bcublasCsyr_v2\b/hipblasCsyr/g;
@@ -543,6 +544,7 @@ sub simpleSubstitutions {
     $ft{'library'} += s/\bcublasDsymv_v2\b/hipblasDsymv/g;
     $ft{'library'} += s/\bcublasDsyr\b/hipblasDsyr/g;
     $ft{'library'} += s/\bcublasDsyr2\b/hipblasDsyr2/g;
+    $ft{'library'} += s/\bcublasDsyr2_v2\b/hipblasDsyr2/g;
     $ft{'library'} += s/\bcublasDsyr2k\b/hipblasDsyr2k/g;
     $ft{'library'} += s/\bcublasDsyr2k_v2\b/hipblasDsyr2k/g;
     $ft{'library'} += s/\bcublasDsyr_v2\b/hipblasDsyr/g;
@@ -653,6 +655,7 @@ sub simpleSubstitutions {
     $ft{'library'} += s/\bcublasSsymv_v2\b/hipblasSsymv/g;
     $ft{'library'} += s/\bcublasSsyr\b/hipblasSsyr/g;
     $ft{'library'} += s/\bcublasSsyr2\b/hipblasSsyr2/g;
+    $ft{'library'} += s/\bcublasSsyr2_v2\b/hipblasSsyr2/g;
     $ft{'library'} += s/\bcublasSsyr2k\b/hipblasSsyr2k/g;
     $ft{'library'} += s/\bcublasSsyr2k_v2\b/hipblasSsyr2k/g;
     $ft{'library'} += s/\bcublasSsyr_v2\b/hipblasSsyr/g;
@@ -732,6 +735,7 @@ sub simpleSubstitutions {
     $ft{'library'} += s/\bcublasZsymv_v2\b/hipblasZsymv/g;
     $ft{'library'} += s/\bcublasZsyr\b/hipblasZsyr/g;
     $ft{'library'} += s/\bcublasZsyr2\b/hipblasZsyr2/g;
+    $ft{'library'} += s/\bcublasZsyr2_v2\b/hipblasZsyr2/g;
     $ft{'library'} += s/\bcublasZsyr2k\b/hipblasZsyr2k/g;
     $ft{'library'} += s/\bcublasZsyr2k_v2\b/hipblasZsyr2k/g;
     $ft{'library'} += s/\bcublasZsyr_v2\b/hipblasZsyr/g;
