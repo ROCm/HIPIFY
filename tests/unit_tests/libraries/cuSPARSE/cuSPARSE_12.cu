@@ -333,8 +333,7 @@ void CRS_to_BCRS(CRSArrays& csr, BCRSArrays* bcrs, const int blockSize) {
   cusparseSetMatType(descr,CUSPARSE_MATRIX_TYPE_GENERAL);
   cusparseSetMatIndexBase(descr,CUSPARSE_INDEX_BASE_ZERO);
   int nbNnzBlocks;
-  // NOTE: cusparseXcsr2bsrNnz and CUSPARSE_DIRECTION_COLUMN (of type cusparseDirection_t) are yet unsupported by HIP
-  // CHECK-NOT: hipsparseXcsr2bsrNnz(bcrs->cusparseHandle, HIPSPARSE_DIRECTION_COLUMN, csr.m, csr.m, descr, csr.cu_csrRowPtrA, csr.cu_csrColIndA,
+  // CHECK: hipsparseXcsr2bsrNnz(bcrs->cusparseHandle, HIPSPARSE_DIRECTION_COLUMN, csr.m, csr.m, descr, csr.cu_csrRowPtrA, csr.cu_csrColIndA,
   cusparseXcsr2bsrNnz(bcrs->cusparseHandle, CUSPARSE_DIRECTION_COLUMN, csr.m, csr.m, descr, csr.cu_csrRowPtrA, csr.cu_csrColIndA,
                       blockSize, descr, bcrs->cu_bsrRowPtrC, &nbNnzBlocks);
   {
@@ -351,8 +350,7 @@ void CRS_to_BCRS(CRSArrays& csr, BCRSArrays* bcrs, const int blockSize) {
   // CHECK: CudaCheck(hipMalloc((void**)&bcrs->cu_bsrValC, sizeof(double)*(blockSize*blockSize)*nbNnzBlocks));
   CudaCheck(cudaMalloc((void**)&bcrs->cu_bsrColIndC, sizeof(int)*nbNnzBlocks));
   CudaCheck(cudaMalloc((void**)&bcrs->cu_bsrValC, sizeof(double)*(blockSize*blockSize)*nbNnzBlocks));
-  // NOTE: cusparseDcsr2bsr and CUSPARSE_DIRECTION_COLUMN (of type cusparseDirection_t) are yet unsupported by HIP
-  // CHECK-NOT: hipsparseDcsr2bsr(bcrs->cusparseHandle, HIPSPARSE_DIRECTION_COLUMN,
+  // CHECK: hipsparseDcsr2bsr(bcrs->cusparseHandle, HIPSPARSE_DIRECTION_COLUMN,
   cusparseDcsr2bsr(bcrs->cusparseHandle, CUSPARSE_DIRECTION_COLUMN,
                    csr.m, csr.m, descr, csr.cu_csrValA, csr.cu_csrRowPtrA, csr.cu_csrColIndA, blockSize, descr, bcrs->cu_bsrValC, bcrs->cu_bsrRowPtrC, bcrs->cu_bsrColIndC);
 }
