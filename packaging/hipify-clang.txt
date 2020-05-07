@@ -4,25 +4,6 @@ project(hipify-clang)
 install(PROGRAMS @HIPIFY_INSTALL_PATH@/hipify-clang DESTINATION bin)
 install(DIRECTORY @HIPIFY_INSTALL_PATH@/include DESTINATION bin)
 
-# Check if .hipversion exists(only exists when hipify-clang is built with HIP)
-if(EXISTS "@HIPIFY_INSTALL_PATH@/.hipVersion")
-    set(HIP_BUILD "TRUE")
-else()
-    set(HIP_BUILD "FALSE")
-endif()
-
-if(${HIP_BUILD})
-    file(STRINGS @HIPIFY_INSTALL_PATH@/.hipVersion HipVersion)
-    foreach(NameAndValue ${HipVersion})
-        # Get variable name
-        string(REGEX MATCH "^[^=]+" Name ${NameAndValue})
-        # Get the value
-        string(REPLACE "${Name}=" "" Value ${NameAndValue})
-        # Assign the vale to the variable
-        set(${Name} "${Value}")
-    endforeach()
-endif()
-
 #############################
 # Packaging steps
 #############################
@@ -33,17 +14,10 @@ set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "hipify-clang: a clang-based tool to trans
 set(CPACK_PACKAGE_VENDOR "Advanced Micro Devices, Inc.")
 set(CPACK_PACKAGE_CONTACT "Mankov Evgeny <Evgeniy.Mankov@amd.com>")
 
-if(${HIP_BUILD})
-    set(CPACK_PACKAGE_VERSION ${HIP_VERSION_MAJOR}.${HIP_VERSION_MINOR}.${HIP_VERSION_PATCH})
-    set(CPACK_PACKAGE_VERSION_MAJOR ${HIP_VERSION_MAJOR})
-    set(CPACK_PACKAGE_VERSION_MINOR ${HIP_VERSION_MINOR})
-    set(CPACK_PACKAGE_VERSION_PATCH ${HIP_VERSION_PATCH})
-else()
-    set(CPACK_PACKAGE_VERSION @LLVM_VERSION_MAJOR@.@LLVM_VERSION_MINOR@.@LLVM_VERSION_PATCH@)
-    set(CPACK_PACKAGE_VERSION_MAJOR @LLVM_VERSION_MAJOR@)
-    set(CPACK_PACKAGE_VERSION_MINOR @LLVM_VERSION_MINOR@)
-    set(CPACK_PACKAGE_VERSION_PATCH @LLVM_VERSION_PATCH@)
-endif()
+set(CPACK_PACKAGE_VERSION @LLVM_VERSION_MAJOR@.@LLVM_VERSION_MINOR@.@LLVM_VERSION_PATCH@)
+set(CPACK_PACKAGE_VERSION_MAJOR @LLVM_VERSION_MAJOR@)
+set(CPACK_PACKAGE_VERSION_MINOR @LLVM_VERSION_MINOR@)
+set(CPACK_PACKAGE_VERSION_PATCH @LLVM_VERSION_PATCH@)
 
 set(CPACK_PACKAGE_FILE_NAME ${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION_MAJOR}.${CPACK_PACKAGE_VERSION_MINOR}.${CPACK_PACKAGE_VERSION_PATCH})
 set(CPACK_GENERATOR "TGZ;DEB;RPM")
