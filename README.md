@@ -407,7 +407,7 @@ Testing Time: 3.23s
 | 8.0.0 - 8.0.1  | 10.0     | 7.6.5.32            | 2017.15.9.15              | 3.14.2    | 3.7.4      |
 | 9.0.0 - 9.0.1  | 10.1     | 7.6.5.32            | 2017.15.9.20, 2019.16.4.5 | 3.16.4    | 3.8.0      |
 | 10.0.0         | 10.2     | 7.6.5.32            | 2017.15.9.21, 2019.16.5.1 | 3.17.0    | 3.8.2      |
-| 11.0.0git      | 10.2     | 7.6.5.32            | 2017.15.9.22, 2019.16.5.4 | 3.17.1    | 3.8.2      |
+| 11.0.0git      | 10.2     | 7.6.5.32            | 2017.15.9.23, 2019.16.5.5 | 3.17.2    | 3.8.3      |
 
 *Building with testing support on `Windows 10` by `Visual Studio 16 2019`:*
 
@@ -433,7 +433,7 @@ cmake
 --    - CMake module path: d:/LLVM/10.0.0/dist/lib/cmake/llvm
 --    - Include path     : d:/LLVM/10.0.0/dist/include
 --    - Binary path      : d:/LLVM/10.0.0/dist/bin
--- Found PythonInterp: c:/Program Files/Python38/python.exe (found suitable version "3.8.2", minimum required is "3.6")
+-- Found PythonInterp: c:/Program Files/Python38/python.exe (found suitable version "3.8.3", minimum required is "3.6")
 -- Found lit: c:/Program Files/Python38/Scripts/lit.exe
 -- Found FileCheck: d:/LLVM/10.0.0/dist/bin/FileCheck.exe
 -- Found CUDA: c:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v10.2 (found version "10.2")
