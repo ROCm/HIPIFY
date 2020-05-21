@@ -356,12 +356,20 @@ bool Statistics::isRocUnsupported(const hipCounter &counter) {
   return ROC_UNSUPPORTED == (counter.supportDegree & ROC_UNSUPPORTED);
 }
 
+bool Statistics::isDeprecated(const hipCounter& counter) {
+  return DEPRECATED == (counter.supportDegree & DEPRECATED);
+}
+
 bool Statistics::isUnsupported(const hipCounter &counter) {
+  if (UNSUPPORTED == (counter.supportDegree & UNSUPPORTED)) {
+    return true;
+  }
   if (Statistics::isToRoc(counter)) {
     return Statistics::isRocUnsupported(counter);
   } else {
     return Statistics::isHipUnsupported(counter);
   }
+
 }
 
 std::map<std::string, Statistics> Statistics::stats = {};

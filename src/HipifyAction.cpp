@@ -159,6 +159,10 @@ void HipifyAction::FindAndReplace(StringRef name,
   }
   Statistics::current().incrementCounter(found->second, name.str());
   clang::DiagnosticsEngine &DE = getCompilerInstance().getDiagnostics();
+  // Warn the user about deprecated idenrifier.
+  if (Statistics::isDeprecated(found->second)) {
+    DE.Report(sl, DE.getCustomDiagID(clang::DiagnosticsEngine::Warning, "CUDA identifier is deprecated."));
+  }
   // Warn the user about unsupported identifier.
   if (Statistics::isUnsupported(found->second)) {
     std::string sWarn;

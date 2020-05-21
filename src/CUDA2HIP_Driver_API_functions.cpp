@@ -61,10 +61,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP{
   {"cuDeviceTotalMem_v2",                                  {"hipDeviceTotalMem",                                       "", CONV_DEVICE, API_DRIVER}},
 
   // 5.6. Device Management [DEPRECATED]
-  {"cuDeviceComputeCapability",                            {"hipDeviceComputeCapability",                              "", CONV_DEVICE, API_DRIVER}},
+  {"cuDeviceComputeCapability",                            {"hipDeviceComputeCapability",                              "", CONV_DEVICE, API_DRIVER, DEPRECATED}},
   // no analogue
   // NOTE: Not equal to cudaGetDeviceProperties due to different attributes: cudaDeviceProp and CUdevprop
-  {"cuDeviceGetProperties",                                {"hipGetDeviceProperties_",                                 "", CONV_DEVICE, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuDeviceGetProperties",                                {"hipGetDeviceProperties_",                                 "", CONV_DEVICE, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
 
   // 5.7. Primary Context Management
   // no analogues
@@ -111,8 +111,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP{
 
   // 5.9. Context Management [DEPRECATED]
   // no analogues
-  {"cuCtxAttach",                                          {"hipCtxAttach",                                            "", CONV_CONTEXT, API_DRIVER, HIP_UNSUPPORTED}},
-  {"cuCtxDetach",                                          {"hipCtxDetach",                                            "", CONV_CONTEXT, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuCtxAttach",                                          {"hipCtxAttach",                                            "", CONV_CONTEXT, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cuCtxDetach",                                          {"hipCtxDetach",                                            "", CONV_CONTEXT, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
 
   // 5.10. Module Management
   // no analogues
@@ -448,26 +448,26 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP{
 
   // 5.19.Execution Control [DEPRECATED]
   // no analogue
-  {"cuFuncSetBlockShape",                                  {"hipFuncSetBlockShape",                                    "", CONV_EXECUTION, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuFuncSetBlockShape",                                  {"hipFuncSetBlockShape",                                    "", CONV_EXECUTION, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
   // no analogue
-  {"cuFuncSetSharedSize",                                  {"hipFuncSetSharedSize",                                    "", CONV_EXECUTION, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuFuncSetSharedSize",                                  {"hipFuncSetSharedSize",                                    "", CONV_EXECUTION, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
   // no analogue
   // NOTE: Not equal to cudaLaunch due to different signatures
-  {"cuLaunch",                                             {"hipLaunch",                                               "", CONV_EXECUTION, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuLaunch",                                             {"hipLaunch",                                               "", CONV_EXECUTION, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
   // no analogue
-  {"cuLaunchGrid",                                         {"hipLaunchGrid",                                           "", CONV_EXECUTION, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuLaunchGrid",                                         {"hipLaunchGrid",                                           "", CONV_EXECUTION, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
   // no analogue
-  {"cuLaunchGridAsync",                                    {"hipLaunchGridAsync",                                      "", CONV_EXECUTION, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuLaunchGridAsync",                                    {"hipLaunchGridAsync",                                      "", CONV_EXECUTION, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
   // no analogue
-  {"cuParamSetf",                                          {"hipParamSetf",                                            "", CONV_EXECUTION, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuParamSetf",                                          {"hipParamSetf",                                            "", CONV_EXECUTION, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
   // no analogue
-  {"cuParamSeti",                                          {"hipParamSeti",                                            "", CONV_EXECUTION, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuParamSeti",                                          {"hipParamSeti",                                            "", CONV_EXECUTION, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
   // no analogue
-  {"cuParamSetSize",                                       {"hipParamSetSize",                                         "", CONV_EXECUTION, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuParamSetSize",                                       {"hipParamSetSize",                                         "", CONV_EXECUTION, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
   // no analogue
-  {"cuParamSetTexRef",                                     {"hipParamSetTexRef",                                       "", CONV_EXECUTION, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuParamSetTexRef",                                     {"hipParamSetTexRef",                                       "", CONV_EXECUTION, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
   // no analogue
-  {"cuParamSetv",                                          {"hipParamSetv",                                            "", CONV_EXECUTION, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuParamSetv",                                          {"hipParamSetv",                                            "", CONV_EXECUTION, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
 
   // 5.20. Graph Management
   // cudaGraphAddChildGraphNode
@@ -555,42 +555,42 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP{
 
   // 5.22. Texture Reference Management [DEPRECATED]
   // no analogues
-  {"cuTexRefGetAddress",                                   {"hipTexRefGetAddress",                                     "", CONV_TEXTURE, API_DRIVER}},
-  {"cuTexRefGetAddress_v2",                                {"hipTexRefGetAddress",                                     "", CONV_TEXTURE, API_DRIVER}},
-  {"cuTexRefGetAddressMode",                               {"hipTexRefGetAddressMode",                                 "", CONV_TEXTURE, API_DRIVER}},
-  {"cuTexRefGetArray",                                     {"hipTexRefGetArray",                                       "", CONV_TEXTURE, API_DRIVER}},
-  {"cuTexRefGetBorderColor",                               {"hipTexRefGetBorderColor",                                 "", CONV_TEXTURE, API_DRIVER, HIP_UNSUPPORTED}},
-  {"cuTexRefGetFilterMode",                                {"hipTexRefGetFilterMode",                                  "", CONV_TEXTURE, API_DRIVER, HIP_UNSUPPORTED}},
-  {"cuTexRefGetFlags",                                     {"hipTexRefGetFlags",                                       "", CONV_TEXTURE, API_DRIVER, HIP_UNSUPPORTED}},
-  {"cuTexRefGetFormat",                                    {"hipTexRefGetFormat",                                      "", CONV_TEXTURE, API_DRIVER, HIP_UNSUPPORTED}},
-  {"cuTexRefGetMaxAnisotropy",                             {"hipTexRefGetMaxAnisotropy",                               "", CONV_TEXTURE, API_DRIVER, HIP_UNSUPPORTED}},
-  {"cuTexRefGetMipmapFilterMode",                          {"hipTexRefGetMipmapFilterMode",                            "", CONV_TEXTURE, API_DRIVER, HIP_UNSUPPORTED}},
-  {"cuTexRefGetMipmapLevelBias",                           {"hipTexRefGetMipmapLevelBias",                             "", CONV_TEXTURE, API_DRIVER, HIP_UNSUPPORTED}},
-  {"cuTexRefGetMipmapLevelClamp",                          {"hipTexRefGetMipmapLevelClamp",                            "", CONV_TEXTURE, API_DRIVER, HIP_UNSUPPORTED}},
-  {"cuTexRefGetMipmappedArray",                            {"hipTexRefGetMipmappedArray",                              "", CONV_TEXTURE, API_DRIVER, HIP_UNSUPPORTED}},
-  {"cuTexRefSetAddress",                                   {"hipTexRefSetAddress",                                     "", CONV_TEXTURE, API_DRIVER}},
-  {"cuTexRefSetAddress_v2",                                {"hipTexRefSetAddress",                                     "", CONV_TEXTURE, API_DRIVER}},
-  {"cuTexRefSetAddress2D",                                 {"hipTexRefSetAddress2D",                                   "", CONV_TEXTURE, API_DRIVER}},
+  {"cuTexRefGetAddress",                                   {"hipTexRefGetAddress",                                     "", CONV_TEXTURE, API_DRIVER, DEPRECATED}},
+  {"cuTexRefGetAddress_v2",                                {"hipTexRefGetAddress",                                     "", CONV_TEXTURE, API_DRIVER, DEPRECATED}},
+  {"cuTexRefGetAddressMode",                               {"hipTexRefGetAddressMode",                                 "", CONV_TEXTURE, API_DRIVER, DEPRECATED}},
+  {"cuTexRefGetArray",                                     {"hipTexRefGetArray",                                       "", CONV_TEXTURE, API_DRIVER, DEPRECATED}},
+  {"cuTexRefGetBorderColor",                               {"hipTexRefGetBorderColor",                                 "", CONV_TEXTURE, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cuTexRefGetFilterMode",                                {"hipTexRefGetFilterMode",                                  "", CONV_TEXTURE, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cuTexRefGetFlags",                                     {"hipTexRefGetFlags",                                       "", CONV_TEXTURE, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cuTexRefGetFormat",                                    {"hipTexRefGetFormat",                                      "", CONV_TEXTURE, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cuTexRefGetMaxAnisotropy",                             {"hipTexRefGetMaxAnisotropy",                               "", CONV_TEXTURE, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cuTexRefGetMipmapFilterMode",                          {"hipTexRefGetMipmapFilterMode",                            "", CONV_TEXTURE, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cuTexRefGetMipmapLevelBias",                           {"hipTexRefGetMipmapLevelBias",                             "", CONV_TEXTURE, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cuTexRefGetMipmapLevelClamp",                          {"hipTexRefGetMipmapLevelClamp",                            "", CONV_TEXTURE, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cuTexRefGetMipmappedArray",                            {"hipTexRefGetMipmappedArray",                              "", CONV_TEXTURE, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cuTexRefSetAddress",                                   {"hipTexRefSetAddress",                                     "", CONV_TEXTURE, API_DRIVER, DEPRECATED}},
+  {"cuTexRefSetAddress_v2",                                {"hipTexRefSetAddress",                                     "", CONV_TEXTURE, API_DRIVER, DEPRECATED}},
+  {"cuTexRefSetAddress2D",                                 {"hipTexRefSetAddress2D",                                   "", CONV_TEXTURE, API_DRIVER, DEPRECATED}},
   {"cuTexRefSetAddress2D_v2",                              {"hipTexRefSetAddress2D",                                   "", CONV_TEXTURE, API_DRIVER}},
   {"cuTexRefSetAddress2D_v3",                              {"hipTexRefSetAddress2D",                                   "", CONV_TEXTURE, API_DRIVER}},
-  {"cuTexRefSetAddressMode",                               {"hipTexRefSetAddressMode",                                 "", CONV_TEXTURE, API_DRIVER}},
-  {"cuTexRefSetArray",                                     {"hipTexRefSetArray",                                       "", CONV_TEXTURE, API_DRIVER}},
-  {"cuTexRefSetBorderColor",                               {"hipTexRefSetBorderColor",                                 "", CONV_TEXTURE, API_DRIVER, HIP_UNSUPPORTED}},
-  {"cuTexRefSetFilterMode",                                {"hipTexRefSetFilterMode",                                  "", CONV_TEXTURE, API_DRIVER}},
-  {"cuTexRefSetFlags",                                     {"hipTexRefSetFlags",                                       "", CONV_TEXTURE, API_DRIVER}},
-  {"cuTexRefSetFormat",                                    {"hipTexRefSetFormat",                                      "", CONV_TEXTURE, API_DRIVER}},
-  {"cuTexRefSetMaxAnisotropy",                             {"hipTexRefSetMaxAnisotropy",                               "", CONV_TEXTURE, API_DRIVER, HIP_UNSUPPORTED}},
-  {"cuTexRefSetMipmapFilterMode",                          {"hipTexRefSetMipmapFilterMode",                            "", CONV_TEXTURE, API_DRIVER, HIP_UNSUPPORTED}},
-  {"cuTexRefSetMipmapLevelBias",                           {"hipTexRefSetMipmapLevelBias",                             "", CONV_TEXTURE, API_DRIVER, HIP_UNSUPPORTED}},
-  {"cuTexRefSetMipmapLevelClamp",                          {"hipTexRefSetMipmapLevelClamp",                            "", CONV_TEXTURE, API_DRIVER, HIP_UNSUPPORTED}},
-  {"cuTexRefSetMipmappedArray",                            {"hipTexRefSetMipmappedArray",                              "", CONV_TEXTURE, API_DRIVER, HIP_UNSUPPORTED}},
-  {"cuTexRefCreate",                                       {"hipTexRefCreate",                                         "", CONV_TEXTURE, API_DRIVER, HIP_UNSUPPORTED}},
-  {"cuTexRefDestroy",                                      {"hipTexRefDestroy",                                        "", CONV_TEXTURE, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuTexRefSetAddressMode",                               {"hipTexRefSetAddressMode",                                 "", CONV_TEXTURE, API_DRIVER, DEPRECATED}},
+  {"cuTexRefSetArray",                                     {"hipTexRefSetArray",                                       "", CONV_TEXTURE, API_DRIVER, DEPRECATED}},
+  {"cuTexRefSetBorderColor",                               {"hipTexRefSetBorderColor",                                 "", CONV_TEXTURE, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cuTexRefSetFilterMode",                                {"hipTexRefSetFilterMode",                                  "", CONV_TEXTURE, API_DRIVER, DEPRECATED}},
+  {"cuTexRefSetFlags",                                     {"hipTexRefSetFlags",                                       "", CONV_TEXTURE, API_DRIVER, DEPRECATED}},
+  {"cuTexRefSetFormat",                                    {"hipTexRefSetFormat",                                      "", CONV_TEXTURE, API_DRIVER, DEPRECATED}},
+  {"cuTexRefSetMaxAnisotropy",                             {"hipTexRefSetMaxAnisotropy",                               "", CONV_TEXTURE, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cuTexRefSetMipmapFilterMode",                          {"hipTexRefSetMipmapFilterMode",                            "", CONV_TEXTURE, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cuTexRefSetMipmapLevelBias",                           {"hipTexRefSetMipmapLevelBias",                             "", CONV_TEXTURE, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cuTexRefSetMipmapLevelClamp",                          {"hipTexRefSetMipmapLevelClamp",                            "", CONV_TEXTURE, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cuTexRefSetMipmappedArray",                            {"hipTexRefSetMipmappedArray",                              "", CONV_TEXTURE, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cuTexRefCreate",                                       {"hipTexRefCreate",                                         "", CONV_TEXTURE, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cuTexRefDestroy",                                      {"hipTexRefDestroy",                                        "", CONV_TEXTURE, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
 
   // 5.23. Surface Reference Management [DEPRECATED]
   // no analogues
-  {"cuSurfRefGetArray",                                    {"hipSurfRefGetArray",                                      "", CONV_SURFACE, API_DRIVER, HIP_UNSUPPORTED}},
-  {"cuSurfRefSetArray",                                    {"hipSurfRefSetArray",                                      "", CONV_SURFACE, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuSurfRefGetArray",                                    {"hipSurfRefGetArray",                                      "", CONV_SURFACE, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cuSurfRefSetArray",                                    {"hipSurfRefSetArray",                                      "", CONV_SURFACE, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
 
   // 5.24. Texture Object Management
   // no analogue
@@ -669,25 +669,25 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP{
 
   // 5.29. OpenGL Interoperability [DEPRECATED]
   // no analogue
-  {"cuGLCtxCreate",                                        {"hipGLCtxCreate",                                          "", CONV_OPENGL, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuGLCtxCreate",                                        {"hipGLCtxCreate",                                          "", CONV_OPENGL, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
   // no analogue
-  {"cuGLInit",                                             {"hipGLInit",                                               "", CONV_OPENGL, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuGLInit",                                             {"hipGLInit",                                               "", CONV_OPENGL, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
   // no analogue
   // NOTE: Not equal to cudaGLMapBufferObject due to different signatures
-  {"cuGLMapBufferObject",                                  {"hipGLMapBufferObject_",                                   "", CONV_OPENGL, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuGLMapBufferObject",                                  {"hipGLMapBufferObject_",                                   "", CONV_OPENGL, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
   // no analogue
   // NOTE: Not equal to cudaGLMapBufferObjectAsync due to different signatures
-  {"cuGLMapBufferObjectAsync",                             {"hipGLMapBufferObjectAsync_",                              "", CONV_OPENGL, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuGLMapBufferObjectAsync",                             {"hipGLMapBufferObjectAsync_",                              "", CONV_OPENGL, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
   // cudaGLRegisterBufferObject
-  {"cuGLRegisterBufferObject",                             {"hipGLRegisterBufferObject",                               "", CONV_OPENGL, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuGLRegisterBufferObject",                             {"hipGLRegisterBufferObject",                               "", CONV_OPENGL, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
   // cudaGLSetBufferObjectMapFlags
-  {"cuGLSetBufferObjectMapFlags",                          {"hipGLSetBufferObjectMapFlags",                            "", CONV_OPENGL, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuGLSetBufferObjectMapFlags",                          {"hipGLSetBufferObjectMapFlags",                            "", CONV_OPENGL, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
   // cudaGLUnmapBufferObject
-  {"cuGLUnmapBufferObject",                                {"hipGLUnmapBufferObject",                                  "", CONV_OPENGL, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuGLUnmapBufferObject",                                {"hipGLUnmapBufferObject",                                  "", CONV_OPENGL, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
   // cudaGLUnmapBufferObjectAsync
-  {"cuGLUnmapBufferObjectAsync",                           {"hipGLUnmapBufferObjectAsync",                             "", CONV_OPENGL, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuGLUnmapBufferObjectAsync",                           {"hipGLUnmapBufferObjectAsync",                             "", CONV_OPENGL, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
   // cudaGLUnregisterBufferObject
-  {"cuGLUnregisterBufferObject",                           {"hipGLUnregisterBufferObject",                             "", CONV_OPENGL, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuGLUnregisterBufferObject",                           {"hipGLUnregisterBufferObject",                             "", CONV_OPENGL, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
 
   // 5.30.Direct3D 9 Interoperability
   // no analogue
@@ -705,25 +705,25 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP{
 
   // 5.30.Direct3D 9 Interoperability [DEPRECATED]
   // cudaD3D9MapResources
-  {"cuD3D9MapResources",                                   {"hipD3D9MapResources",                                     "", CONV_D3D9, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuD3D9MapResources",                                   {"hipD3D9MapResources",                                     "", CONV_D3D9, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
   // cudaD3D9RegisterResource
-  {"cuD3D9RegisterResource",                               {"hipD3D9RegisterResource",                                 "", CONV_D3D9, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuD3D9RegisterResource",                               {"hipD3D9RegisterResource",                                 "", CONV_D3D9, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
   // cudaD3D9ResourceGetMappedArray
-  {"cuD3D9ResourceGetMappedArray",                         {"hipD3D9ResourceGetMappedArray",                           "", CONV_D3D9, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuD3D9ResourceGetMappedArray",                         {"hipD3D9ResourceGetMappedArray",                           "", CONV_D3D9, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
   // cudaD3D9ResourceGetMappedPitch
-  {"cuD3D9ResourceGetMappedPitch",                         {"hipD3D9ResourceGetMappedPitch",                           "", CONV_D3D9, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuD3D9ResourceGetMappedPitch",                         {"hipD3D9ResourceGetMappedPitch",                           "", CONV_D3D9, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
   // cudaD3D9ResourceGetMappedPointer
-  {"cuD3D9ResourceGetMappedPointer",                       {"hipD3D9ResourceGetMappedPointer",                         "", CONV_D3D9, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuD3D9ResourceGetMappedPointer",                       {"hipD3D9ResourceGetMappedPointer",                         "", CONV_D3D9, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
   // cudaD3D9ResourceGetMappedSize
-  {"cuD3D9ResourceGetMappedSize",                          {"hipD3D9ResourceGetMappedSize",                            "", CONV_D3D9, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuD3D9ResourceGetMappedSize",                          {"hipD3D9ResourceGetMappedSize",                            "", CONV_D3D9, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
   // cudaD3D9ResourceGetSurfaceDimensions
-  {"cuD3D9ResourceGetSurfaceDimensions",                   {"hipD3D9ResourceGetSurfaceDimensions",                     "", CONV_D3D9, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuD3D9ResourceGetSurfaceDimensions",                   {"hipD3D9ResourceGetSurfaceDimensions",                     "", CONV_D3D9, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
   // cudaD3D9ResourceSetMapFlags
-  {"cuD3D9ResourceSetMapFlags",                            {"hipD3D9ResourceSetMapFlags",                              "", CONV_D3D9, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuD3D9ResourceSetMapFlags",                            {"hipD3D9ResourceSetMapFlags",                              "", CONV_D3D9, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
   // cudaD3D9UnmapResources
-  {"cuD3D9UnmapResources",                                 {"hipD3D9UnmapResources",                                   "", CONV_D3D9, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuD3D9UnmapResources",                                 {"hipD3D9UnmapResources",                                   "", CONV_D3D9, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
   // cudaD3D9UnregisterResource
-  {"cuD3D9UnregisterResource",                             {"hipD3D9UnregisterResource",                               "", CONV_D3D9, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuD3D9UnregisterResource",                             {"hipD3D9UnregisterResource",                               "", CONV_D3D9, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
 
   // 5.31. Direct3D 10 Interoperability
   // cudaD3D10GetDevice
@@ -735,31 +735,31 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP{
 
   // 5.31. Direct3D 10 Interoperability [DEPRECATED]
   // no analogue
-  {"cuD3D10CtxCreate",                                     {"hipD3D10CtxCreate",                                       "", CONV_D3D10, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuD3D10CtxCreate",                                     {"hipD3D10CtxCreate",                                       "", CONV_D3D10, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
   // no analogue
-  {"cuD3D10CtxCreateOnDevice",                             {"hipD3D10CtxCreateOnDevice",                               "", CONV_D3D10, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuD3D10CtxCreateOnDevice",                             {"hipD3D10CtxCreateOnDevice",                               "", CONV_D3D10, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
   // cudaD3D10GetDirect3DDevice
-  {"cuD3D10GetDirect3DDevice",                             {"hipD3D10GetDirect3DDevice",                               "", CONV_D3D10, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuD3D10GetDirect3DDevice",                             {"hipD3D10GetDirect3DDevice",                               "", CONV_D3D10, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
   // cudaD3D10MapResources
-  {"cuD3D10MapResources",                                  {"hipD3D10MapResources",                                    "", CONV_D3D10, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuD3D10MapResources",                                  {"hipD3D10MapResources",                                    "", CONV_D3D10, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
   // cudaD3D10RegisterResource
-  {"cuD3D10RegisterResource",                              {"hipD3D10RegisterResource",                                "", CONV_D3D10, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuD3D10RegisterResource",                              {"hipD3D10RegisterResource",                                "", CONV_D3D10, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
   // cudaD3D10ResourceGetMappedArray
-  {"cuD3D10ResourceGetMappedArray",                        {"hipD3D10ResourceGetMappedArray",                          "", CONV_D3D10, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuD3D10ResourceGetMappedArray",                        {"hipD3D10ResourceGetMappedArray",                          "", CONV_D3D10, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
   // cudaD3D10ResourceGetMappedPitch
-  {"cuD3D10ResourceGetMappedPitch",                        {"hipD3D10ResourceGetMappedPitch",                          "", CONV_D3D10, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuD3D10ResourceGetMappedPitch",                        {"hipD3D10ResourceGetMappedPitch",                          "", CONV_D3D10, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
   // cudaD3D10ResourceGetMappedPointer
-  {"cuD3D10ResourceGetMappedPointer",                      {"hipD3D10ResourceGetMappedPointer",                        "", CONV_D3D10, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuD3D10ResourceGetMappedPointer",                      {"hipD3D10ResourceGetMappedPointer",                        "", CONV_D3D10, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
   // cudaD3D10ResourceGetMappedSize
-  {"cuD3D10ResourceGetMappedSize",                         {"hipD3D10ResourceGetMappedSize",                           "", CONV_D3D10, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuD3D10ResourceGetMappedSize",                         {"hipD3D10ResourceGetMappedSize",                           "", CONV_D3D10, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
   // cudaD3D10ResourceGetSurfaceDimensions
-  {"cuD3D10ResourceGetSurfaceDimensions",                  {"hipD3D10ResourceGetSurfaceDimensions",                    "", CONV_D3D10, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuD3D10ResourceGetSurfaceDimensions",                  {"hipD3D10ResourceGetSurfaceDimensions",                    "", CONV_D3D10, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
   // cudaD3D10ResourceSetMapFlags
-  {"cuD310ResourceSetMapFlags",                            {"hipD3D10ResourceSetMapFlags",                             "", CONV_D3D10, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuD3D10ResourceSetMapFlags",                           {"hipD3D10ResourceSetMapFlags",                             "", CONV_D3D10, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
   // cudaD3D10UnmapResources
-  {"cuD3D10UnmapResources",                                {"hipD3D10UnmapResources",                                  "", CONV_D3D10, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuD3D10UnmapResources",                                {"hipD3D10UnmapResources",                                  "", CONV_D3D10, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
   // cudaD3D10UnregisterResource
-  {"cuD3D10UnregisterResource",                            {"hipD3D10UnregisterResource",                              "", CONV_D3D10, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuD3D10UnregisterResource",                            {"hipD3D10UnregisterResource",                              "", CONV_D3D10, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
 
   // 5.32. Direct3D 11 Interoperability
   // cudaD3D11GetDevice
@@ -771,11 +771,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP{
 
   // 5.32. Direct3D 11 Interoperability [DEPRECATED]
   // no analogue
-  {"cuD3D11CtxCreate",                                     {"hipD3D11CtxCreate",                                       "", CONV_D3D11, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuD3D11CtxCreate",                                     {"hipD3D11CtxCreate",                                       "", CONV_D3D11, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
   // no analogue
-  {"cuD3D11CtxCreateOnDevice",                             {"hipD3D11CtxCreateOnDevice",                               "", CONV_D3D11, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuD3D11CtxCreateOnDevice",                             {"hipD3D11CtxCreateOnDevice",                               "", CONV_D3D11, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
   // cudaD3D11GetDirect3DDevice
-  {"cuD3D11GetDirect3DDevice",                             {"hipD3D11GetDirect3DDevice",                               "", CONV_D3D11, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuD3D11GetDirect3DDevice",                             {"hipD3D11GetDirect3DDevice",                               "", CONV_D3D11, API_DRIVER, HIP_UNSUPPORTED | DEPRECATED}},
 
   // 5.33. VDPAU Interoperability
   // cudaGraphicsVDPAURegisterOutputSurface
