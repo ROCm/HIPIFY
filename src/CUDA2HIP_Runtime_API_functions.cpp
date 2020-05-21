@@ -85,17 +85,17 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP{
 
   // 5.2. Thread Management [DEPRECATED]
   // no analogue
-  {"cudaThreadExit",                                          {"hipDeviceReset",                                         "", CONV_THREAD, API_RUNTIME}},
+  {"cudaThreadExit",                                          {"hipDeviceReset",                                         "", CONV_THREAD, API_RUNTIME, DEPRECATED}},
   // no analogue
-  {"cudaThreadGetCacheConfig",                                {"hipDeviceGetCacheConfig",                                "", CONV_THREAD, API_RUNTIME}},
+  {"cudaThreadGetCacheConfig",                                {"hipDeviceGetCacheConfig",                                "", CONV_THREAD, API_RUNTIME, DEPRECATED}},
   // no analogue
-  {"cudaThreadGetLimit",                                      {"hipThreadGetLimit",                                      "", CONV_THREAD, API_RUNTIME, HIP_UNSUPPORTED}},
+  {"cudaThreadGetLimit",                                      {"hipThreadGetLimit",                                      "", CONV_THREAD, API_RUNTIME, HIP_UNSUPPORTED | DEPRECATED}},
   // no analogue
-  {"cudaThreadSetCacheConfig",                                {"hipDeviceSetCacheConfig",                                "", CONV_THREAD, API_RUNTIME}},
+  {"cudaThreadSetCacheConfig",                                {"hipDeviceSetCacheConfig",                                "", CONV_THREAD, API_RUNTIME, DEPRECATED}},
   // no analogue
-  {"cudaThreadSetLimit",                                      {"hipThreadSetLimit",                                      "", CONV_THREAD, API_RUNTIME, HIP_UNSUPPORTED}},
+  {"cudaThreadSetLimit",                                      {"hipThreadSetLimit",                                      "", CONV_THREAD, API_RUNTIME, HIP_UNSUPPORTED | DEPRECATED}},
   // cuCtxSynchronize
-  {"cudaThreadSynchronize",                                   {"hipDeviceSynchronize",                                   "", CONV_THREAD, API_RUNTIME}},
+  {"cudaThreadSynchronize",                                   {"hipDeviceSynchronize",                                   "", CONV_THREAD, API_RUNTIME, DEPRECATED}},
 
   // 5.3. Error Handling
   // no analogue
@@ -206,9 +206,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP{
   // NOTE: Not equal to cuLaunchKernel due to different signatures
   {"cudaLaunchKernel",                                        {"hipLaunchKernel",                                        "", CONV_EXECUTION, API_RUNTIME}},
   // no analogue
-  {"cudaSetDoubleForDevice",                                  {"hipSetDoubleForDevice",                                  "", CONV_EXECUTION, API_RUNTIME, HIP_UNSUPPORTED}},
+  {"cudaSetDoubleForDevice",                                  {"hipSetDoubleForDevice",                                  "", CONV_EXECUTION, API_RUNTIME, HIP_UNSUPPORTED | DEPRECATED}},
   // no analogue
-  {"cudaSetDoubleForHost",                                    {"hipSetDoubleForHost",                                    "", CONV_EXECUTION, API_RUNTIME, HIP_UNSUPPORTED}},
+  {"cudaSetDoubleForHost",                                    {"hipSetDoubleForHost",                                    "", CONV_EXECUTION, API_RUNTIME, HIP_UNSUPPORTED | DEPRECATED}},
 
   // 5.8. Occupancy
   // cuOccupancyMaxActiveBlocksPerMultiprocessor
@@ -361,15 +361,15 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP{
   // 5.10. Memory Management [DEPRECATED]
   // no analogue
   // NOTE: Not equal to cuMemcpyAtoA due to different signatures
-  {"cudaMemcpyArrayToArray",                                  {"hipMemcpyArrayToArray",                                  "", CONV_MEMORY, API_RUNTIME, HIP_UNSUPPORTED}},
+  {"cudaMemcpyArrayToArray",                                  {"hipMemcpyArrayToArray",                                  "", CONV_MEMORY, API_RUNTIME, HIP_UNSUPPORTED | DEPRECATED}},
   // no analogue
-  {"cudaMemcpyFromArray",                                     {"hipMemcpyFromArray",                                     "", CONV_MEMORY, API_RUNTIME}},
+  {"cudaMemcpyFromArray",                                     {"hipMemcpyFromArray",                                     "", CONV_MEMORY, API_RUNTIME, DEPRECATED}},
   // no analogue
-  {"cudaMemcpyFromArrayAsync",                                {"hipMemcpyFromArrayAsync",                                "", CONV_MEMORY, API_RUNTIME, HIP_UNSUPPORTED}},
+  {"cudaMemcpyFromArrayAsync",                                {"hipMemcpyFromArrayAsync",                                "", CONV_MEMORY, API_RUNTIME, HIP_UNSUPPORTED | DEPRECATED}},
   // no analogue
-  {"cudaMemcpyToArray",                                       {"hipMemcpyToArray",                                       "", CONV_MEMORY, API_RUNTIME}},
+  {"cudaMemcpyToArray",                                       {"hipMemcpyToArray",                                       "", CONV_MEMORY, API_RUNTIME, DEPRECATED}},
   // no analogue
-  {"cudaMemcpyToArrayAsync",                                  {"hipMemcpyToArrayAsync",                                  "", CONV_MEMORY, API_RUNTIME}},
+  {"cudaMemcpyToArrayAsync",                                  {"hipMemcpyToArrayAsync",                                  "", CONV_MEMORY, API_RUNTIME, DEPRECATED}},
 
   // 5.11.Unified Addressing
   // no analogue
@@ -399,22 +399,22 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP{
   // 5.14. OpenGL Interoperability [DEPRECATED]
   // no analogue
   // NOTE: Not equal to cuGLMapBufferObject due to different signatures
-  {"cudaGLMapBufferObject",                                   {"hipGLMapBufferObject",                                   "", CONV_OPENGL, API_RUNTIME, HIP_UNSUPPORTED}},
+  {"cudaGLMapBufferObject",                                   {"hipGLMapBufferObject",                                   "", CONV_OPENGL, API_RUNTIME, HIP_UNSUPPORTED | DEPRECATED}},
   // no analogue
   // NOTE: Not equal to cuGLMapBufferObjectAsync due to different signatures
-  {"cudaGLMapBufferObjectAsync",                              {"hipGLMapBufferObjectAsync",                              "", CONV_OPENGL, API_RUNTIME, HIP_UNSUPPORTED}},
+  {"cudaGLMapBufferObjectAsync",                              {"hipGLMapBufferObjectAsync",                              "", CONV_OPENGL, API_RUNTIME, HIP_UNSUPPORTED | DEPRECATED}},
   // cuGLRegisterBufferObject
-  {"cudaGLRegisterBufferObject",                              {"hipGLRegisterBufferObject",                              "", CONV_OPENGL, API_RUNTIME, HIP_UNSUPPORTED}},
+  {"cudaGLRegisterBufferObject",                              {"hipGLRegisterBufferObject",                              "", CONV_OPENGL, API_RUNTIME, HIP_UNSUPPORTED | DEPRECATED}},
   // cuGLSetBufferObjectMapFlags
-  {"cudaGLSetBufferObjectMapFlags",                           {"hipGLSetBufferObjectMapFlags",                           "", CONV_OPENGL, API_RUNTIME, HIP_UNSUPPORTED}},
+  {"cudaGLSetBufferObjectMapFlags",                           {"hipGLSetBufferObjectMapFlags",                           "", CONV_OPENGL, API_RUNTIME, HIP_UNSUPPORTED | DEPRECATED}},
   // no analogue
-  {"cudaGLSetGLDevice",                                       {"hipGLSetGLDevice",                                       "", CONV_OPENGL, API_RUNTIME, HIP_UNSUPPORTED}},
+  {"cudaGLSetGLDevice",                                       {"hipGLSetGLDevice",                                       "", CONV_OPENGL, API_RUNTIME, HIP_UNSUPPORTED | DEPRECATED}},
   // cuGLUnmapBufferObject
-  {"cudaGLUnmapBufferObject",                                 {"hipGLUnmapBufferObject",                                 "", CONV_OPENGL, API_RUNTIME, HIP_UNSUPPORTED}},
+  {"cudaGLUnmapBufferObject",                                 {"hipGLUnmapBufferObject",                                 "", CONV_OPENGL, API_RUNTIME, HIP_UNSUPPORTED | DEPRECATED}},
   // cuGLUnmapBufferObjectAsync
-  {"cudaGLUnmapBufferObjectAsync",                            {"hipGLUnmapBufferObjectAsync",                            "", CONV_OPENGL, API_RUNTIME, HIP_UNSUPPORTED}},
+  {"cudaGLUnmapBufferObjectAsync",                            {"hipGLUnmapBufferObjectAsync",                            "", CONV_OPENGL, API_RUNTIME, HIP_UNSUPPORTED | DEPRECATED}},
   // cuGLUnregisterBufferObject
-  {"cudaGLUnregisterBufferObject",                            {"hipGLUnregisterBufferObject",                            "", CONV_OPENGL, API_RUNTIME, HIP_UNSUPPORTED}},
+  {"cudaGLUnregisterBufferObject",                            {"hipGLUnregisterBufferObject",                            "", CONV_OPENGL, API_RUNTIME, HIP_UNSUPPORTED | DEPRECATED}},
 
   // 5.15. Direct3D 9 Interoperability
   // cuD3D9GetDevice
@@ -430,25 +430,25 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP{
 
   // 5.16.Direct3D 9 Interoperability[DEPRECATED]
   // cuD3D9MapResources
-  {"cudaD3D9MapResources",                                    {"hipD3D9MapResources",                                    "", CONV_D3D9, API_RUNTIME, HIP_UNSUPPORTED}},
+  {"cudaD3D9MapResources",                                    {"hipD3D9MapResources",                                    "", CONV_D3D9, API_RUNTIME, HIP_UNSUPPORTED | DEPRECATED}},
   // cuD3D9RegisterResource
-  {"cudaD3D9RegisterResource",                                {"hipD3D9RegisterResource",                                "", CONV_D3D9, API_RUNTIME, HIP_UNSUPPORTED}},
+  {"cudaD3D9RegisterResource",                                {"hipD3D9RegisterResource",                                "", CONV_D3D9, API_RUNTIME, HIP_UNSUPPORTED | DEPRECATED}},
   // cuD3D9ResourceGetMappedArray
-  {"cudaD3D9ResourceGetMappedArray",                          {"hipD3D9ResourceGetMappedArray",                          "", CONV_D3D9, API_RUNTIME, HIP_UNSUPPORTED}},
+  {"cudaD3D9ResourceGetMappedArray",                          {"hipD3D9ResourceGetMappedArray",                          "", CONV_D3D9, API_RUNTIME, HIP_UNSUPPORTED | DEPRECATED}},
   // cudaD3D9ResourceGetMappedPitch
-  {"cudaD3D9ResourceGetMappedPitch",                          {"hipD3D9ResourceGetMappedPitch",                          "", CONV_D3D9, API_RUNTIME, HIP_UNSUPPORTED}},
+  {"cudaD3D9ResourceGetMappedPitch",                          {"hipD3D9ResourceGetMappedPitch",                          "", CONV_D3D9, API_RUNTIME, HIP_UNSUPPORTED | DEPRECATED}},
   // cuD3D9ResourceGetMappedPointer
-  {"cudaD3D9ResourceGetMappedPointer",                        {"hipD3D9ResourceGetMappedPointer",                        "", CONV_D3D9, API_RUNTIME, HIP_UNSUPPORTED}},
+  {"cudaD3D9ResourceGetMappedPointer",                        {"hipD3D9ResourceGetMappedPointer",                        "", CONV_D3D9, API_RUNTIME, HIP_UNSUPPORTED | DEPRECATED}},
   // cuD3D9ResourceGetMappedSize
-  {"cudaD3D9ResourceGetMappedSize",                           {"hipD3D9ResourceGetMappedSize",                           "", CONV_D3D9, API_RUNTIME, HIP_UNSUPPORTED}},
+  {"cudaD3D9ResourceGetMappedSize",                           {"hipD3D9ResourceGetMappedSize",                           "", CONV_D3D9, API_RUNTIME, HIP_UNSUPPORTED | DEPRECATED}},
   // cuD3D9ResourceGetSurfaceDimensions
-  {"cudaD3D9ResourceGetSurfaceDimensions",                    {"hipD3D9ResourceGetSurfaceDimensions",                    "", CONV_D3D9, API_RUNTIME, HIP_UNSUPPORTED}},
+  {"cudaD3D9ResourceGetSurfaceDimensions",                    {"hipD3D9ResourceGetSurfaceDimensions",                    "", CONV_D3D9, API_RUNTIME, HIP_UNSUPPORTED | DEPRECATED}},
   // cuD3D9ResourceSetMapFlags
-  {"cudaD3D9ResourceSetMapFlags",                             {"hipD3D9ResourceSetMapFlags",                             "", CONV_D3D9, API_RUNTIME, HIP_UNSUPPORTED}},
+  {"cudaD3D9ResourceSetMapFlags",                             {"hipD3D9ResourceSetMapFlags",                             "", CONV_D3D9, API_RUNTIME, HIP_UNSUPPORTED | DEPRECATED}},
   // cuD3D9UnmapResources
-  {"cudaD3D9UnmapResources",                                  {"hipD3D9UnmapResources",                                  "", CONV_D3D9, API_RUNTIME, HIP_UNSUPPORTED}},
+  {"cudaD3D9UnmapResources",                                  {"hipD3D9UnmapResources",                                  "", CONV_D3D9, API_RUNTIME, HIP_UNSUPPORTED | DEPRECATED}},
   // cuD3D9UnregisterResource
-  {"cudaD3D9UnregisterResource",                              {"hipD3D9UnregisterResource",                              "", CONV_D3D9, API_RUNTIME, HIP_UNSUPPORTED}},
+  {"cudaD3D9UnregisterResource",                              {"hipD3D9UnregisterResource",                              "", CONV_D3D9, API_RUNTIME, HIP_UNSUPPORTED | DEPRECATED}},
 
   // 5.17. Direct3D 10 Interoperability
   // cuD3D10GetDevice
@@ -460,29 +460,29 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP{
 
   // 5.18. Direct3D 10 Interoperability [DEPRECATED]
   // cudaD3D10GetDirect3DDevice
-  {"cudaD3D10GetDirect3DDevice",                              {"hipD3D10GetDirect3DDevice",                              "", CONV_D3D10, API_RUNTIME, HIP_UNSUPPORTED}},
+  {"cudaD3D10GetDirect3DDevice",                              {"hipD3D10GetDirect3DDevice",                              "", CONV_D3D10, API_RUNTIME, HIP_UNSUPPORTED | DEPRECATED}},
   // cuD3D10MapResources
-  {"cudaD3D10MapResources",                                   {"hipD3D10MapResources",                                   "", CONV_D3D10, API_RUNTIME, HIP_UNSUPPORTED}},
+  {"cudaD3D10MapResources",                                   {"hipD3D10MapResources",                                   "", CONV_D3D10, API_RUNTIME, HIP_UNSUPPORTED | DEPRECATED}},
   // cuD3D10RegisterResource
-  {"cudaD3D10RegisterResource",                               {"hipD3D10RegisterResource",                               "", CONV_D3D10, API_RUNTIME, HIP_UNSUPPORTED}},
+  {"cudaD3D10RegisterResource",                               {"hipD3D10RegisterResource",                               "", CONV_D3D10, API_RUNTIME, HIP_UNSUPPORTED | DEPRECATED}},
   // cuD3D10ResourceGetMappedArray
-  {"cudaD3D10ResourceGetMappedArray",                         {"hipD3D10ResourceGetMappedArray",                         "", CONV_D3D10, API_RUNTIME, HIP_UNSUPPORTED}},
+  {"cudaD3D10ResourceGetMappedArray",                         {"hipD3D10ResourceGetMappedArray",                         "", CONV_D3D10, API_RUNTIME, HIP_UNSUPPORTED | DEPRECATED}},
   // cudaD3D10ResourceGetMappedPitch
-  {"cudaD3D10ResourceGetMappedPitch",                         {"hipD3D10ResourceGetMappedPitch",                         "", CONV_D3D10, API_RUNTIME, HIP_UNSUPPORTED}},
+  {"cudaD3D10ResourceGetMappedPitch",                         {"hipD3D10ResourceGetMappedPitch",                         "", CONV_D3D10, API_RUNTIME, HIP_UNSUPPORTED | DEPRECATED}},
   // cuD3D10ResourceGetMappedPointer
-  {"cudaD3D10ResourceGetMappedPointer",                       {"hipD3D10ResourceGetMappedPointer",                       "", CONV_D3D10, API_RUNTIME, HIP_UNSUPPORTED}},
+  {"cudaD3D10ResourceGetMappedPointer",                       {"hipD3D10ResourceGetMappedPointer",                       "", CONV_D3D10, API_RUNTIME, HIP_UNSUPPORTED | DEPRECATED}},
   // cuD3D10ResourceGetMappedSize
-  {"cudaD3D10ResourceGetMappedSize",                          {"hipD3D10ResourceGetMappedSize",                          "", CONV_D3D10, API_RUNTIME, HIP_UNSUPPORTED}},
+  {"cudaD3D10ResourceGetMappedSize",                          {"hipD3D10ResourceGetMappedSize",                          "", CONV_D3D10, API_RUNTIME, HIP_UNSUPPORTED | DEPRECATED}},
   // cuD3D10ResourceGetSurfaceDimensions
-  {"cudaD3D10ResourceGetSurfaceDimensions",                   {"hipD3D10ResourceGetSurfaceDimensions",                   "", CONV_D3D10, API_RUNTIME, HIP_UNSUPPORTED}},
+  {"cudaD3D10ResourceGetSurfaceDimensions",                   {"hipD3D10ResourceGetSurfaceDimensions",                   "", CONV_D3D10, API_RUNTIME, HIP_UNSUPPORTED | DEPRECATED}},
   // cuD3D10ResourceSetMapFlags
-  {"cudaD3D10ResourceSetMapFlags",                            {"hipD3D10ResourceSetMapFlags",                            "", CONV_D3D10, API_RUNTIME, HIP_UNSUPPORTED}},
+  {"cudaD3D10ResourceSetMapFlags",                            {"hipD3D10ResourceSetMapFlags",                            "", CONV_D3D10, API_RUNTIME, HIP_UNSUPPORTED | DEPRECATED}},
   // no analogue
-  {"cudaD3D10SetDirect3DDevice",                              {"hipD3D10SetDirect3DDevice",                              "", CONV_D3D10, API_RUNTIME, HIP_UNSUPPORTED}},
+  {"cudaD3D10SetDirect3DDevice",                              {"hipD3D10SetDirect3DDevice",                              "", CONV_D3D10, API_RUNTIME, HIP_UNSUPPORTED | DEPRECATED}},
   // cuD3D10UnmapResources
-  {"cudaD3D10UnmapResources",                                 {"hipD3D10UnmapResources",                                 "", CONV_D3D10, API_RUNTIME, HIP_UNSUPPORTED}},
+  {"cudaD3D10UnmapResources",                                 {"hipD3D10UnmapResources",                                 "", CONV_D3D10, API_RUNTIME, HIP_UNSUPPORTED | DEPRECATED}},
   // cuD3D10UnregisterResource
-  {"cudaD3D10UnregisterResource",                             {"hipD3D10UnregisterResource",                             "", CONV_D3D10, API_RUNTIME, HIP_UNSUPPORTED}},
+  {"cudaD3D10UnregisterResource",                             {"hipD3D10UnregisterResource",                             "", CONV_D3D10, API_RUNTIME, HIP_UNSUPPORTED | DEPRECATED}},
 
   // 5.19. Direct3D 11 Interoperability
   // cuD3D11GetDevice
@@ -494,9 +494,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP{
 
   // 5.20. Direct3D 11 Interoperability [DEPRECATED]
   // cuD3D11GetDirect3DDevice
-  {"cudaD3D11GetDirect3DDevice",                              {"hipD3D11GetDirect3DDevice",                              "", CONV_D3D11, API_RUNTIME, HIP_UNSUPPORTED}},
+  {"cudaD3D11GetDirect3DDevice",                              {"hipD3D11GetDirect3DDevice",                              "", CONV_D3D11, API_RUNTIME, HIP_UNSUPPORTED | DEPRECATED}},
   // no analogue
-  {"cudaD3D11SetDirect3DDevice",                              {"hipD3D11SetDirect3DDevice",                              "", CONV_D3D11, API_RUNTIME, HIP_UNSUPPORTED}},
+  {"cudaD3D11SetDirect3DDevice",                              {"hipD3D11SetDirect3DDevice",                              "", CONV_D3D11, API_RUNTIME, HIP_UNSUPPORTED | DEPRECATED}},
 
   // 5.21. VDPAU Interoperability
   // cuGraphicsVDPAURegisterOutputSurface
@@ -552,31 +552,31 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP{
 
   // 5.24. Texture Reference Management [DEPRECATED]
   // no analogue
-  {"cudaBindTexture",                                         {"hipBindTexture",                                         "", CONV_TEXTURE, API_RUNTIME}},
+  {"cudaBindTexture",                                         {"hipBindTexture",                                         "", CONV_TEXTURE, API_RUNTIME, DEPRECATED}},
   // no analogue
-  {"cudaBindTexture2D",                                       {"hipBindTexture2D",                                       "", CONV_TEXTURE, API_RUNTIME}},
+  {"cudaBindTexture2D",                                       {"hipBindTexture2D",                                       "", CONV_TEXTURE, API_RUNTIME, DEPRECATED}},
   // no analogue
-  {"cudaBindTextureToArray",                                  {"hipBindTextureToArray",                                  "", CONV_TEXTURE, API_RUNTIME}},
+  {"cudaBindTextureToArray",                                  {"hipBindTextureToArray",                                  "", CONV_TEXTURE, API_RUNTIME, DEPRECATED}},
   // no analogue
   // NOTE: Unsupported yet on NVCC path
-  {"cudaBindTextureToMipmappedArray",                         {"hipBindTextureToMipmappedArray",                         "", CONV_TEXTURE, API_RUNTIME}},
+  {"cudaBindTextureToMipmappedArray",                         {"hipBindTextureToMipmappedArray",                         "", CONV_TEXTURE, API_RUNTIME, DEPRECATED}},
   // no analogue
   {"cudaCreateChannelDesc",                                   {"hipCreateChannelDesc",                                   "", CONV_TEXTURE, API_RUNTIME}},
   // no analogue
   {"cudaGetChannelDesc",                                      {"hipGetChannelDesc",                                      "", CONV_TEXTURE, API_RUNTIME}},
   // no analogue
-  {"cudaGetTextureAlignmentOffset",                           {"hipGetTextureAlignmentOffset",                           "", CONV_TEXTURE, API_RUNTIME}},
+  {"cudaGetTextureAlignmentOffset",                           {"hipGetTextureAlignmentOffset",                           "", CONV_TEXTURE, API_RUNTIME, DEPRECATED}},
   // TODO: double check cuModuleGetTexRef
   // NOTE: Unsupported yet on NVCC path
-  {"cudaGetTextureReference",                                 {"hipGetTextureReference",                                 "", CONV_TEXTURE, API_RUNTIME}},
+  {"cudaGetTextureReference",                                 {"hipGetTextureReference",                                 "", CONV_TEXTURE, API_RUNTIME, DEPRECATED}},
   // no analogue
-  {"cudaUnbindTexture",                                       {"hipUnbindTexture",                                       "", CONV_TEXTURE, API_RUNTIME}},
+  {"cudaUnbindTexture",                                       {"hipUnbindTexture",                                       "", CONV_TEXTURE, API_RUNTIME, DEPRECATED}},
 
   // 5.25. Surface Reference Management [DEPRECATED]
   // no analogue
-  {"cudaBindSurfaceToArray",                                  {"hipBindSurfaceToArray",                                  "", CONV_SURFACE, API_RUNTIME, HIP_UNSUPPORTED}},
+  {"cudaBindSurfaceToArray",                                  {"hipBindSurfaceToArray",                                  "", CONV_SURFACE, API_RUNTIME, HIP_UNSUPPORTED | DEPRECATED}},
   // TODO: double check cuModuleGetSurfRef
-  {"cudaGetSurfaceReference",                                 {"hipGetSurfaceReference",                                 "", CONV_SURFACE, API_RUNTIME, HIP_UNSUPPORTED}},
+  {"cudaGetSurfaceReference",                                 {"hipGetSurfaceReference",                                 "", CONV_SURFACE, API_RUNTIME, HIP_UNSUPPORTED | DEPRECATED}},
 
   // 5.26. Texture Object Management
   // no analogue
