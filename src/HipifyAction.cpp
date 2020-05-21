@@ -159,6 +159,10 @@ void HipifyAction::FindAndReplace(StringRef name,
   }
   Statistics::current().incrementCounter(found->second, name.str());
   clang::DiagnosticsEngine &DE = getCompilerInstance().getDiagnostics();
+  // Warn the user about deprecated idenrifier.
+  if (Statistics::isDeprecated(found->second)) {
+    DE.Report(sl, DE.getCustomDiagID(clang::DiagnosticsEngine::Warning, "CUDA identifier is deprecated."));
+  }
   // Warn the user about unsupported identifier.
   if (Statistics::isUnsupported(found->second)) {
     std::string sWarn;
@@ -260,7 +264,6 @@ bool HipifyAction::Exclude(const hipCounter &hipToken) {
         default:
           return false;
       }
-      return false;
     case CONV_INCLUDE:
       if (hipToken.hipName.empty()) return true;
       switch (hipToken.apiType) {
@@ -273,11 +276,9 @@ bool HipifyAction::Exclude(const hipCounter &hipToken) {
         default:
           return false;
       }
-      return false;
     default:
       return false;
   }
-  return false;
 }
 
 void HipifyAction::InclusionDirective(clang::SourceLocation hash_loc,

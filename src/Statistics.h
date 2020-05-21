@@ -143,10 +143,11 @@ enum ApiTypes {
 constexpr int NUM_API_TYPES = (int) ApiTypes::API_LAST;
 
 enum SupportDegree {
-  FULL = 0,
-  HIP_UNSUPPORTED = 1,
-  ROC_UNSUPPORTED = 2,
-  UNSUPPORTED = 3
+  FULL = 0x0,
+  HIP_UNSUPPORTED = 0x1,
+  ROC_UNSUPPORTED = 0x2,
+  UNSUPPORTED = 0x4,
+  DEPRECATED = 0x8
 };
 
 // The names of various fields in in the statistics reports.
@@ -160,7 +161,7 @@ struct hipCounter {
   llvm::StringRef rocName;
   ConvTypes type;
   ApiTypes apiType;
-  SupportDegree supportDegree;
+  unsigned int supportDegree;
 };
 
 /**
@@ -240,6 +241,8 @@ public:
   static bool isHipUnsupported(const hipCounter &counter);
   // Check whether the counter is ROC_UNSUPPORTED or not.
   static bool isRocUnsupported(const hipCounter &counter);
+  // Check whether the counter is DEPRECATED or not.
+  static bool isDeprecated(const hipCounter& counter);
   /**
     * Check whether the counter is ROC_UNSUPPORTED/HIP_UNSUPPORTED/UNSUPPORTED or not
     * based on counter's API_TYPE and option TranslateToRoc.
