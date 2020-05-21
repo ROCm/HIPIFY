@@ -264,7 +264,6 @@ bool HipifyAction::Exclude(const hipCounter &hipToken) {
         default:
           return false;
       }
-      return false;
     case CONV_INCLUDE:
       if (hipToken.hipName.empty()) return true;
       switch (hipToken.apiType) {
@@ -280,7 +279,6 @@ bool HipifyAction::Exclude(const hipCounter &hipToken) {
     default:
       return false;
   }
-  return false;
 }
 
 void HipifyAction::InclusionDirective(clang::SourceLocation hash_loc,
