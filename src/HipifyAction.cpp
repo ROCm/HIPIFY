@@ -277,7 +277,6 @@ bool HipifyAction::Exclude(const hipCounter &hipToken) {
         default:
           return false;
       }
-      return false;
     default:
       return false;
   }

@@ -225,12 +225,14 @@ void StatCounter::print(std::ostream* csv, llvm::raw_ostream* printOut, const st
 Statistics::Statistics(const std::string &name): fileName(name) {
   // Compute the total bytes/lines in the input file.
   std::ifstream src_file(name, std::ios::binary | std::ios::ate);
-  src_file.clear();
-  src_file.seekg(0);
-  totalLines = (unsigned) std::count(std::istreambuf_iterator<char>(src_file), std::istreambuf_iterator<char>(), '\n');
-  totalBytes = (int) src_file.tellg();
-  if (totalBytes < 0) {
-    totalBytes = 0;
+  if (src_file.good()) {
+    src_file.clear();
+    src_file.seekg(0);
+    totalLines = (unsigned)std::count(std::istreambuf_iterator<char>(src_file), std::istreambuf_iterator<char>(), '\n');
+    totalBytes = (int)src_file.tellg();
+    if (totalBytes < 0) {
+      totalBytes = 0;
+    }
   }
   startTime = chr::steady_clock::now();
 }
@@ -369,7 +371,6 @@ bool Statistics::isUnsupported(const hipCounter &counter) {
   } else {
     return Statistics::isHipUnsupported(counter);
   }
-
 }
 
 std::map<std::string, Statistics> Statistics::stats = {};
