@@ -7,6 +7,11 @@ if (MSVC AND MSVC_VERSION VERSION_LESS "1900")
     return()
 endif()
 
+#Set configurable install path
+if (UNIX)
+    set(CPACK_PACKAGING_INSTALL_PREFIX "/opt/rocm/hip" CACHE PATH "Package Installation path for HIP")
+endif (UNIX)
+
 find_package(LLVM REQUIRED)
 message(STATUS "Found LLVM ${LLVM_PACKAGE_VERSION}:")
 message(STATUS "   - CMake module path: ${LLVM_CMAKE_DIR}")
