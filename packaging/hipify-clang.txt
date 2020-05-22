@@ -8,7 +8,7 @@ install(DIRECTORY @HIPIFY_INSTALL_PATH@/include DESTINATION bin)
 # Packaging steps
 #############################
 set(CPACK_SET_DESTDIR TRUE)
-set(CPACK_INSTALL_PREFIX "/opt/rocm/hip")
+set(CPACK_INSTALL_PREFIX @CPACK_INSTALL_PREFIX@)
 set(CPACK_PACKAGE_NAME "hipify-clang")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "hipify-clang: a clang-based tool to translate CUDA source code into portable HIP C++ automatically")
 set(CPACK_PACKAGE_VENDOR "Advanced Micro Devices, Inc.")
