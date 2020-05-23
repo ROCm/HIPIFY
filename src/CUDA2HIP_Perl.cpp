@@ -291,6 +291,28 @@ namespace perl {
     *streamPtr.get() << tab << return_k << "}" << endl;
   }
 
+  void generateDeprecatedFunctions(unique_ptr<ostream>& streamPtr) {
+    stringstream sDeprecated;
+    sDeprecated << endl << sub << "warnDeprecatedFunctions" << " {" << endl;
+    sDeprecated << tab << my << "$line_num = shift;" << endl;
+    sDeprecated << tab << my_k << "\n" << tab << foreach_func;
+    unsigned int countDeprecated = 0;
+    for (auto &ma : CUDA_RENAMES_MAP()) {
+        if (Statistics::isDeprecated(ma.second)) {
+            sDeprecated << (countDeprecated ? ",\n" : "") << tab_2 << "\"" << ma.first.str() << "\"";
+            countDeprecated++;
+        }
+    }
+    sDeprecated << endl_tab << ")" << endl;
+    sDeprecated << tab << "{" << endl;
+    sDeprecated << tab_2 << my << "$mt = m/($func)/g;" << endl;
+    sDeprecated << tab_2 << "if ($mt) {" << endl;
+    sDeprecated << tab_3 << "$k += $mt;" << endl;
+    sDeprecated << tab_3 << print << "\"  warning: $fileName:$line_num: deprecated identifier \\\"$func\\\": $_\\n\";" << endl;
+    sDeprecated << tab_2 << "}\n" << tab << "}\n" << tab << return_k << "}" << endl;
+    *streamPtr.get() << sDeprecated.str();
+  }
+
   void generateDeviceFunctions(unique_ptr<ostream> &streamPtr) {
     unsigned int countUnsupported = 0;
     unsigned int countSupported = 0;
@@ -367,6 +389,7 @@ namespace perl {
     generateCubNamespace(streamPtr);
     generateHostFunctions(streamPtr);
     generateDeviceFunctions(streamPtr);
+    generateDeprecatedFunctions(streamPtr);
     *streamPtr.get() << endl << "# Count of transforms in all files" << endl;
     *streamPtr.get() << my << "%tt;" << endl;
     *streamPtr.get() << "clearStats(\\%tt, \\@statNames);" << endl;
@@ -433,6 +456,8 @@ namespace perl {
     *streamPtr.get() << tab_6 << "$warnings++;" << endl;
     *streamPtr.get() << tab_6 << "$warningTags{$tag}++;" << endl;
     *streamPtr.get() << tab_6 << print << "\"  warning: $fileName:#$line_num : $_\\n\";" << endl_tab_5 << "}" << endl;
+    *streamPtr.get() << tab_5 << "$s = warnDeprecatedFunctions($line_num);" << endl;
+    *streamPtr.get() << tab_5 << "$warnings += $s;" << endl;
     *streamPtr.get() << tab_5 << "$s = warnUnsupportedDeviceFunctions($line_num);" << endl;
     *streamPtr.get() << tab_5 << "$warnings += $s;" << endl_tab_4 << "}" << endl;
     *streamPtr.get() << tab_4 << "$_ = $tmp;" << endl_tab_3 << "}" << endl_tab_2 << "}" << endl;
