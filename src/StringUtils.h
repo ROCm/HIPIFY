@@ -23,6 +23,7 @@ THE SOFTWARE.
 #pragma once
 
 #include <string>
+#include <system_error>
 #include "llvm/ADT/StringRef.h"
 
 /**
