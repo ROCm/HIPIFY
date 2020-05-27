@@ -621,7 +621,6 @@ int main(int argc, char *argv[])
     // cudaRuntimeGetVersion is yet unsupported by HIP
     // CHECK: CUDA_CALL(hipRuntimeGetVersion(&runtime_version));
     CUDA_CALL(cudaRuntimeGetVersion(&runtime_version));
-    CUDA_CALL(cuGLInit());
     int device_id;
     // CHECK: CUDA_CALL(hipGetDevice(&device_id));
     // CHECK: hipDeviceProp_t props;
