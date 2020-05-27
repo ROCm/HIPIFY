@@ -7,18 +7,13 @@ if (MSVC AND MSVC_VERSION VERSION_LESS "1900")
     return()
 endif()
 
-#Set configurable install path
-if (UNIX)
-    set(CPACK_PACKAGING_INSTALL_PREFIX "/opt/rocm/hip" CACHE PATH "Package Installation path for HIP")
-endif (UNIX)
-
 find_package(LLVM REQUIRED)
 message(STATUS "Found LLVM ${LLVM_PACKAGE_VERSION}:")
 message(STATUS "   - CMake module path: ${LLVM_CMAKE_DIR}")
 message(STATUS "   - Include path     : ${LLVM_INCLUDE_DIRS}")
 message(STATUS "   - Binary path      : ${LLVM_TOOLS_BINARY_DIR}")
 
-option(HIPIFY_CLANG_TESTS "Build the tests for hipify-clang, if lit is installed" OFF)
+option(HIPIFY_CLANG_TESTS "Build HIPIFY tests, if lit is installed" OFF)
 
 list(APPEND CMAKE_MODULE_PATH ${LLVM_CMAKE_DIR})
 include(AddLLVM)
@@ -89,7 +84,7 @@ endif()
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${EXTRA_CFLAGS}")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${EXTRA_CFLAGS} ${StdCpp} -DHIPIFY_CLANG_RES=\\\"${LLVM_LIBRARY_DIRS}/clang/${LLVM_VERSION_MAJOR}.${LLVM_VERSION_MINOR}.${LLVM_VERSION_PATCH}\\\"")
 
-set(INSTALL_PATH_DOC_STRING "Installation path for hipify-clang")
+set(INSTALL_PATH_DOC_STRING "hipify-clang Installation Path")
 set(HIPIFY_INSTALL_PATH ${CMAKE_INSTALL_PREFIX})
 if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
     if(CMAKE_BUILD_TYPE MATCHES Debug)
@@ -101,7 +96,7 @@ if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
             set(HIPIFY_INSTALL_PATH "${PROJECT_BINARY_DIR}/bin" CACHE PATH ${INSTALL_PATH_DOC_STRING} FORCE)
         endif()
     else()
-        message(FATAL_ERROR "Invalid CMAKE_BUILD_TYPE specified. Valid values are Debug and Release")
+        message(FATAL_ERROR "Invalid CMAKE_BUILD_TYPE specified. Valid values are 'Debug' and 'Release'.")
     endif()
 elseif(BIN_INSTALL_DIR)
     set(HIPIFY_INSTALL_PATH "${BIN_INSTALL_DIR}" CACHE PATH ${INSTALL_PATH_DOC_STRING} FORCE)
@@ -123,6 +118,7 @@ install(
   PATTERN "openmp_wrappers" EXCLUDE)
 
 if (UNIX)
+    set(CPACK_PACKAGING_INSTALL_PREFIX "/opt/rocm/hip" CACHE PATH "HIP Package Installation Path")
     set(BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR}/packages/hipify-clang)
     configure_file(packaging/hipify-clang.txt ${BUILD_DIR}/CMakeLists.txt @ONLY)
     add_custom_target(pkg_hipify-clang  COMMAND ${CMAKE_COMMAND} .
@@ -151,7 +147,7 @@ if (HIPIFY_CLANG_TESTS)
         if (FOUND_${PROGRAM_NAME})
             message(STATUS "Found ${PROGRAM_NAME}: ${FOUND_${PROGRAM_NAME}}")
         else()
-            message(SEND_ERROR "Can't find ${PROGRAM_NAME}. Either set HIPIFY_CLANG_TESTS to OFF to disable hipify tests, or install the missing program.")
+            message(SEND_ERROR "Can't find ${PROGRAM_NAME}. Either set HIPIFY_CLANG_TESTS to OFF to disable HIPIFY tests, or install the missing program.")
         endif()
     endfunction()
 
@@ -191,7 +187,7 @@ if (HIPIFY_CLANG_TESTS)
         ${CMAKE_CURRENT_BINARY_DIR}/tests/lit.site.cfg
         @ONLY)
 
-    add_lit_testsuite(test-hipify "Running HIPify regression tests"
+    add_lit_testsuite(test-hipify "Running HIPIFY regression tests"
         ${CMAKE_CURRENT_LIST_DIR}/tests
         PARAMS site_config=${CMAKE_CURRENT_BINARY_DIR}/tests/lit.site.cfg
         ARGS -v
