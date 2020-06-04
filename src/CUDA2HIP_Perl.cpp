@@ -86,6 +86,7 @@ namespace perl {
   const string printf = "printf STDERR ";
   const string no_warns = "no warnings qw/uninitialized/;";
   const string hipify_perl = "hipify-perl";
+  const string warning = "warning: $fileName:$line_num: ";
 
   const string sCudaDevice = "cudaDevice";
   const string sCudaDeviceId = "cudaDeviceId";
@@ -165,7 +166,7 @@ namespace perl {
     *streamPtr.get() << tab << printf << "\"%s %d CUDA->HIP refs ( \", $label, $total;" << endl;
     *streamPtr.get() << tab << foreach << "$stat (@statNames) {" << endl;
     *streamPtr.get() << tab_2 << printf << "\"%s:%d \", $stat, $counts{$stat};" << endl_tab << "}" << endl;
-    *streamPtr.get() << tab << printf << "\")\\n  warn:%d LOC:%d\", $warnings, $loc;" << endl << "}" << endl;
+    *streamPtr.get() << tab << printf << "\")\\n  warning:%d LOC:%d\", $warnings, $loc;" << endl << "}" << endl;
     for (int i = 0; i < 2; ++i) {
       *streamPtr.get() << endl << sub << (i ? "clearStats" : "addStats") << " {" << endl;
       *streamPtr.get() << tab << my << "$dest_ref  = shift();" << endl;
@@ -291,26 +292,37 @@ namespace perl {
     *streamPtr.get() << tab << return_k << "}" << endl;
   }
 
-  void generateDeprecatedFunctions(unique_ptr<ostream>& streamPtr) {
-    stringstream sDeprecated;
-    sDeprecated << endl << sub << "warnDeprecatedFunctions" << " {" << endl;
-    sDeprecated << tab << my << "$line_num = shift;" << endl;
-    sDeprecated << tab << my_k << "\n" << tab << foreach_func;
-    unsigned int countDeprecated = 0;
+  void generateDeprecatedAndUnsupportedFunctions(unique_ptr<ostream>& streamPtr) {
+    stringstream sDeprecated, sUnsupported, sCommon;
+    sCommon << tab << my << "$line_num = shift;" << endl;
+    sCommon << tab << my_k << "\n" << tab << foreach_func;
+    sDeprecated << endl << sub << "warnDeprecatedFunctions" << " {" << endl << sCommon.str();
+    sUnsupported << endl << sub << "warnUnsupportedFunctions" << " {" << endl << sCommon.str();
+    unsigned int countDeprecated = 0, countUnsupported = 0;
     for (auto &ma : CUDA_RENAMES_MAP()) {
         if (Statistics::isDeprecated(ma.second)) {
             sDeprecated << (countDeprecated ? ",\n" : "") << tab_2 << "\"" << ma.first.str() << "\"";
             countDeprecated++;
         }
+        if (Statistics::isUnsupported(ma.second)) {
+            sUnsupported << (countUnsupported ? ",\n" : "") << tab_2 << "\"" << ma.first.str() << "\"";
+            countUnsupported++;
+        }
     }
-    sDeprecated << endl_tab << ")" << endl;
-    sDeprecated << tab << "{" << endl;
-    sDeprecated << tab_2 << my << "$mt = m/($func)/g;" << endl;
-    sDeprecated << tab_2 << "if ($mt) {" << endl;
-    sDeprecated << tab_3 << "$k += $mt;" << endl;
-    sDeprecated << tab_3 << print << "\"  warning: $fileName:$line_num: deprecated identifier \\\"$func\\\": $_\\n\";" << endl;
-    sDeprecated << tab_2 << "}\n" << tab << "}\n" << tab << return_k << "}" << endl;
+    sCommon.str(std::string());
+    sCommon << endl_tab << ")" << endl;
+    sCommon << tab << "{" << endl;
+    sCommon << tab_2 << my << "$mt = m/($func)/g;" << endl;
+    sCommon << tab_2 << "if ($mt) {" << endl;
+    sCommon << tab_3 << "$k += $mt;" << endl;
+    sDeprecated << sCommon.str();
+    sUnsupported << sCommon.str();
+    sCommon.str(std::string());
+    sCommon << tab_2 << "}\n" << tab << "}\n" << tab << return_k << "}" << endl;
+    sDeprecated << tab_3 << print << "\"  "  << warning << "deprecated identifier \\\"$func\\\": $_\\n\";" << endl << sCommon.str();
+    sUnsupported << tab_3 << print << "\"  "  << warning << "unsupported identifier \\\"$func\\\": $_\\n\";" << endl << sCommon.str();
     *streamPtr.get() << sDeprecated.str();
+    *streamPtr.get() << sUnsupported.str();
   }
 
   void generateDeviceFunctions(unique_ptr<ostream> &streamPtr) {
@@ -344,7 +356,7 @@ namespace perl {
     if (countSupported) subCountSupported << subCommon.str();
     if (countUnsupported) {
       subWarnUnsupported << subCommon.str();
-      subWarnUnsupported << tab_3 << print << "\"  warning: $fileName:$line_num: unsupported device function \\\"$func\\\": $_\\n\";" << endl;
+      subWarnUnsupported << tab_3 << print << "\"  " << warning << "unsupported device function \\\"$func\\\": $_\\n\";" << endl;
     }
     if (countSupported || countUnsupported) sCommon = tab_2 + "}\n" + tab + "}\n" + tab + return_k;
     if (countSupported) subCountSupported << sCommon;
@@ -389,7 +401,7 @@ namespace perl {
     generateCubNamespace(streamPtr);
     generateHostFunctions(streamPtr);
     generateDeviceFunctions(streamPtr);
-    generateDeprecatedFunctions(streamPtr);
+    generateDeprecatedAndUnsupportedFunctions(streamPtr);
     *streamPtr.get() << endl << "# Count of transforms in all files" << endl;
     *streamPtr.get() << my << "%tt;" << endl;
     *streamPtr.get() << "clearStats(\\%tt, \\@statNames);" << endl;
@@ -457,6 +469,8 @@ namespace perl {
     *streamPtr.get() << tab_6 << "$warningTags{$tag}++;" << endl;
     *streamPtr.get() << tab_6 << print << "\"  warning: $fileName:#$line_num : $_\\n\";" << endl_tab_5 << "}" << endl;
     *streamPtr.get() << tab_5 << "$s = warnDeprecatedFunctions($line_num);" << endl;
+    *streamPtr.get() << tab_5 << "$warnings += $s;" << endl;
+    *streamPtr.get() << tab_5 << "$s = warnUnsupportedFunctions($line_num);" << endl;
     *streamPtr.get() << tab_5 << "$warnings += $s;" << endl;
     *streamPtr.get() << tab_5 << "$s = warnUnsupportedDeviceFunctions($line_num);" << endl;
     *streamPtr.get() << tab_5 << "$warnings += $s;" << endl_tab_4 << "}" << endl;
