@@ -127,10 +127,14 @@ void appendArgumentsAdjusters(ct::RefactoringTool &Tool, const std::string &sSou
   std::string clang_inc_path = std::string(llvm::sys::path::parent_path(hipify));
   clang_inc_path.append("/include");
   Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster(clang_inc_path.c_str(), ct::ArgumentInsertPosition::BEGIN));
-  Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-isystem", ct::ArgumentInsertPosition::BEGIN));
+  Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-Xclang", ct::ArgumentInsertPosition::BEGIN));
+  Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-internal-isystem", ct::ArgumentInsertPosition::BEGIN));
+  Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-Xclang", ct::ArgumentInsertPosition::BEGIN));
   clang_inc_path.append("/cuda_wrappers");
   Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster(clang_inc_path.c_str(), ct::ArgumentInsertPosition::BEGIN));
-  Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-isystem", ct::ArgumentInsertPosition::BEGIN));
+  Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-Xclang", ct::ArgumentInsertPosition::BEGIN));
+  Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-internal-isystem", ct::ArgumentInsertPosition::BEGIN));
+  Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-Xclang", ct::ArgumentInsertPosition::BEGIN));
   // Ensure at least c++11 is used.
   std::string stdCpp = "-std=c++11";
 #if defined(_MSC_VER)
