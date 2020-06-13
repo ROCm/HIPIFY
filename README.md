@@ -45,7 +45,7 @@ After applying all the matchers, the output HIP source is produced.
 
 1. [**LLVM+CLANG**](http://releases.llvm.org) of at least version [3.8.0](http://releases.llvm.org/download.html#3.8.0); the latest stable and recommended release: [**10.0.0**](http://releases.llvm.org/download.html#10.0.0).
 
-2. [**CUDA**](https://developer.nvidia.com/cuda-downloads) of at least version [7.0](https://developer.nvidia.com/cuda-toolkit-70), the latest supported version is [**10.2**](https://developer.nvidia.com/cuda-downloads).
+2. [**CUDA**](https://developer.nvidia.com/cuda-downloads) of at least version [7.0](https://developer.nvidia.com/cuda-toolkit-70), the latest supported version is [**11.0**](https://developer.nvidia.com/cuda-downloads).
 
 | **LLVM release version**                                   | **CUDA latest supported version**                                        | **Windows** | **Linux** |
 |:----------------------------------------------------------:|:------------------------------------------------------------------------:|:-----------:|:---------:|
@@ -67,8 +67,8 @@ After applying all the matchers, the output HIP source is produced.
 | [8.0.1](http://releases.llvm.org/download.html#8.0.1)      | [10.0](https://developer.nvidia.com/cuda-10.0-download-archive)          | - <br/> not working due to <br/> the clang's bug [38811](https://bugs.llvm.org/show_bug.cgi?id=38811) <br/>+<br/>[patch](patches/patch_for_clang_8.0.1_bug_38811.zip)*</br> | + |
 | [9.0.0](http://releases.llvm.org/download.html#9.0.0)      | [10.1](https://developer.nvidia.com/cuda-10.1-download-archive-base)     | +           | +         |
 | [9.0.1](http://releases.llvm.org/download.html#9.0.1)      | [10.1](https://developer.nvidia.com/cuda-10.1-download-archive-base)     | +           | +         |
-| [**10.0.0**](http://releases.llvm.org/download.html#10.0.0)| [**10.2**](https://developer.nvidia.com/cuda-downloads)                  | + <br/> **LATEST STABLE RELEASE** | + <br/> **LATEST STABLE RELEASE** |
-| [10.0.1-rc1](https://github.com/llvm/llvm-project/releases/tag/llvmorg-10.0.1-rc1) | [10.2](https://developer.nvidia.com/cuda-downloads)             | +           | +         |
+| [**10.0.0**](http://releases.llvm.org/download.html#10.0.0)| [**11.0**](https://developer.nvidia.com/cuda-downloads)                  | + <br/> **LATEST STABLE RELEASE** | + <br/> **LATEST STABLE RELEASE** |
+| [10.0.1-rc1](https://github.com/llvm/llvm-project/releases/tag/llvmorg-10.0.1-rc1) | [11.0](https://developer.nvidia.com/cuda-downloads)             | +           | +         |
 
 `*` Download the patch and unpack it into your `LLVM` distributive directory; a few header files will be overwritten; rebuilding of `LLVM` is not needed.
 
@@ -84,14 +84,14 @@ To process a file, `hipify-clang` needs access to the same headers that would be
 For example:
 
 ```shell
-./hipify-clang square.cu --cuda-path=/usr/local/cuda-10.2 -I /usr/local/cuda-10.2/samples/common/inc
+./hipify-clang square.cu --cuda-path=/usr/local/cuda-11.0 -I /usr/local/cuda-11.0/samples/common/inc
 ```
 
 `hipify-clang` arguments are given first, followed by a separator `'--'`, and then the arguments you'd pass to `clang` if you
 were compiling the input file. For example:
 
 ```bash
-./hipify-clang cpp17.cu --cuda-path=/usr/local/cuda-10.2 -- -std=c++17
+./hipify-clang cpp17.cu --cuda-path=/usr/local/cuda-11.0 -- -std=c++17
 ```
 
 The [Clang manual for compiling CUDA](https://llvm.org/docs/CompileCudaWithLLVM.html#compiling-cuda-code) may be useful.
@@ -194,19 +194,19 @@ Run `Visual Studio 16 2019`, open the generated `LLVM.sln`, build all, build pro
 
     * Having multiple CUDA installations to choose a particular version the `DCUDA_TOOLKIT_ROOT_DIR` option should be specified:
 
-        - ***Linux***: `-DCUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-10.2`
+        - ***Linux***: `-DCUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-11.0`
 
-        - ***Windows***: `-DCUDA_TOOLKIT_ROOT_DIR="c:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v10.2"`
+        - ***Windows***: `-DCUDA_TOOLKIT_ROOT_DIR="c:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.0"`
 
-          `-DCUDA_SDK_ROOT_DIR="c:/ProgramData/NVIDIA Corporation/CUDA Samples/v10.2"`
+          `-DCUDA_SDK_ROOT_DIR="c:/ProgramData/NVIDIA Corporation/CUDA Samples/v11.0"`
 
 4. Ensure [`cuDNN`](https://developer.nvidia.com/rdp/cudnn-archive) of the version corresponding to CUDA's version is installed.
 
     * Path to cuDNN should be specified by the `CUDA_DNN_ROOT_DIR` option:
 
-        - ***Linux***: `-DCUDA_DNN_ROOT_DIR=/srv/CUDNN/cudnn-10.2-v7.6.5.32`
+        - ***Linux***: `-DCUDA_DNN_ROOT_DIR=/srv/CUDNN/cudnn-11.0-v8.0.0.180`
 
-        - ***Windows***: `-DCUDA_DNN_ROOT_DIR=d:/CUDNN/cudnn-10.2-windows10-x64-v7.6.5.32`
+        - ***Windows***: `-DCUDA_DNN_ROOT_DIR=d:/CUDNN/cudnn-11.0-windows10-x64-v8.0.0.180`
 
 5. Ensure [`CUB`](https://github.com/NVlabs/cub) of the version corresponding to CUDA's version is installed.
 
@@ -250,7 +250,7 @@ On Linux the following configurations are tested:
 
 Ubuntu 14: LLVM 5.0.0 - 7.1.0, CUDA 7.0 - 9.0, cuDNN 5.0.5 - 7.6.5.32
 
-Ubuntu 16-18: LLVM 8.0.0 - 10.0.1-rc1, CUDA 8.0 - 10.2, cuDNN 5.1.10 - 7.6.5.32
+Ubuntu 16-18: LLVM 8.0.0 - 10.0.1-rc1, CUDA 8.0 - 11.0, cuDNN 5.1.10 - 8.0.0.180
 
 Minimum build system requirements for the above configurations:
 
@@ -264,8 +264,8 @@ cmake
  -DCMAKE_BUILD_TYPE=Release \
  -DCMAKE_INSTALL_PREFIX=../dist \
  -DCMAKE_PREFIX_PATH=/srv/git/LLVM/10.0.0/dist \
- -DCUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-10.2 \
- -DCUDA_DNN_ROOT_DIR=/srv/CUDNN/cudnn-10.2-v7.6.5.32 \
+ -DCUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-11.0 \
+ -DCUDA_DNN_ROOT_DIR=/srv/CUDNN/cudnn-11.0-v8.0.0.180 \
  -DCUDA_CUB_ROOT_DIR=/srv/git/CUB \
  -DLLVM_EXTERNAL_LIT=/srv/git/LLVM/10.0.0/build/bin/llvm-lit \
  ..
@@ -303,7 +303,7 @@ cmake
 -- Looking for pthread_create in pthread
 -- Looking for pthread_create in pthread - found
 -- Found Threads: TRUE
--- Found CUDA: /usr/local/cuda-10.2 (found version "10.2")
+-- Found CUDA: /usr/local/cuda-11.0 (found version "11.0")
 -- Configuring done
 -- Generating done
 -- Build files have been written to: /srv/git/HIP/hipify-clang/build
@@ -315,7 +315,7 @@ make test-hipify
 ```shell
 Running HIPify regression tests
 ========================================
-CUDA 10.2 - will be used for testing
+CUDA 11.0 - will be used for testing
 LLVM 10.0.0 - will be used for testing
 x86_64 - Platform architecture
 Linux 5.2.0 - Platform OS
@@ -400,15 +400,15 @@ Testing Time: 3.23s
 
 *Tested configurations:*
 
-|    **LLVM**         | **CUDA** |      **cuDNN**      | **Visual Studio (latest)**| **cmake** | **Python** |
-|:-------------------:|---------:|--------------------:|--------------------------:|----------:|-----------:|
-| 5.0.0 - 5.0.2       | 8.0      | 5.1.10 - 7.1.4.18   | 2017.15.5.2               | 3.5.1     | 3.6.4      |
-| 6.0.0 - 6.0.1       | 9.0      | 7.0.5.15 - 7.6.5.32 | 2017.15.5.5               | 3.6.0     | 3.7.2      |
-| 7.0.0 - 7.1.0       | 9.2      | 7.6.5.32            | 2017.15.9.11              | 3.13.3    | 3.7.3      |
-| 8.0.0 - 8.0.1       | 10.0     | 7.6.5.32            | 2017.15.9.15              | 3.14.2    | 3.7.4      |
-| 9.0.0 - 9.0.1       | 10.1     | 7.6.5.32            | 2017.15.9.20, 2019.16.4.5 | 3.16.4    | 3.8.0      |
-| 10.0.0 - 10.0.1-rc1 | 10.2     | 7.6.5.32            | 2017.15.9.23, 2019.16.5.5 | 3.17.2    | 3.8.3      |
-| 11.0.0git           | 10.2     | 7.6.5.32            | 2017.15.9.23, 2019.16.5.5 | 3.17.2    | 3.8.3      |
+|    **LLVM**         |   **CUDA**  |      **cuDNN**      | **Visual Studio (latest)**| **cmake** | **Python** |
+|:-------------------:|------------:|--------------------:|--------------------------:|----------:|-----------:|
+| 5.0.0 - 5.0.2       | 8.0         | 5.1.10   - 7.1.4.18 | 2017.15.5.2               | 3.5.1     | 3.6.4      |
+| 6.0.0 - 6.0.1       | 9.0         | 7.0.5.15 - 7.6.5.32 | 2017.15.5.5               | 3.6.0     | 3.7.2      |
+| 7.0.0 - 7.1.0       | 9.2         | 7.6.5.32            | 2017.15.9.11              | 3.13.3    | 3.7.3      |
+| 8.0.0 - 8.0.1       | 10.0        | 7.6.5.32            | 2017.15.9.15              | 3.14.2    | 3.7.4      |
+| 9.0.0 - 9.0.1       | 10.1        | 7.6.5.32            | 2017.15.9.20, 2019.16.4.5 | 3.16.4    | 3.8.0      |
+| 10.0.0 - 10.0.1-rc1 | 10.0 - 11.0 | 7.6.5.32 - 8.0.0.180| 2017.15.9.23, 2019.16.6.2 | 3.17.3    | 3.8.3      |
+| 11.0.0git           | 10.0 - 11.0 | 7.6.5.32 - 8.0.0.180| 2017.15.9.23, 2019.16.6.2 | 3.17.3    | 3.8.3      |
 
 *Building with testing support on `Windows 10` by `Visual Studio 16 2019`:*
 
@@ -420,9 +420,9 @@ cmake
  -DCMAKE_BUILD_TYPE=Release \
  -DCMAKE_INSTALL_PREFIX=../dist \
  -DCMAKE_PREFIX_PATH=d:/LLVM/10.0.0/dist \
- -DCUDA_TOOLKIT_ROOT_DIR="c:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v10.2" \
- -DCUDA_SDK_ROOT_DIR="c:/ProgramData/NVIDIA Corporation/CUDA Samples/v10.2" \
- -DCUDA_DNN_ROOT_DIR=d:/CUDNN/cudnn-10.2-windows10-x64-v7.6.5.32 \
+ -DCUDA_TOOLKIT_ROOT_DIR="c:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.0" \
+ -DCUDA_SDK_ROOT_DIR="c:/ProgramData/NVIDIA Corporation/CUDA Samples/v11.0" \
+ -DCUDA_DNN_ROOT_DIR=d:/CUDNN/cudnn-11.0-windows10-x64-v8.0.0.180 \
  -DCUDA_CUB_ROOT_DIR=d:/GIT/cub \
  -DLLVM_EXTERNAL_LIT=d:/LLVM/10.0.0/build/Release/bin/llvm-lit.py \
  -Thost=x64
@@ -437,7 +437,7 @@ cmake
 -- Found PythonInterp: c:/Program Files/Python38/python.exe (found suitable version "3.8.3", minimum required is "3.6")
 -- Found lit: c:/Program Files/Python38/Scripts/lit.exe
 -- Found FileCheck: d:/LLVM/10.0.0/dist/bin/FileCheck.exe
--- Found CUDA: c:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v10.2 (found version "10.2")
+-- Found CUDA: c:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.0 (found version "11.0")
 -- Configuring done
 -- Generating done
 -- Build files have been written to: d:/HIP/hipify-clang/build
