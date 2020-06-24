@@ -70,9 +70,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP{
   // no analogues
   {"cuDevicePrimaryCtxGetState",                           {"hipDevicePrimaryCtxGetState",                             "", CONV_CONTEXT, API_DRIVER}},
   {"cuDevicePrimaryCtxRelease",                            {"hipDevicePrimaryCtxRelease",                              "", CONV_CONTEXT, API_DRIVER}},
+  {"cuDevicePrimaryCtxRelease_v2",                         {"hipDevicePrimaryCtxRelease",                              "", CONV_CONTEXT, API_DRIVER}},
   {"cuDevicePrimaryCtxReset",                              {"hipDevicePrimaryCtxReset",                                "", CONV_CONTEXT, API_DRIVER}},
+  {"cuDevicePrimaryCtxReset_v2",                           {"hipDevicePrimaryCtxReset",                                "", CONV_CONTEXT, API_DRIVER}},
   {"cuDevicePrimaryCtxRetain",                             {"hipDevicePrimaryCtxRetain",                               "", CONV_CONTEXT, API_DRIVER}},
   {"cuDevicePrimaryCtxSetFlags",                           {"hipDevicePrimaryCtxSetFlags",                             "", CONV_CONTEXT, API_DRIVER}},
+  {"cuDevicePrimaryCtxSetFlags_v2",                        {"hipDevicePrimaryCtxSetFlags",                             "", CONV_CONTEXT, API_DRIVER}},
 
   // 5.8. Context Management
   // no analogues, except a few
@@ -508,6 +511,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP{
   {"cuGraphHostNodeSetParams",                             {"hipGraphHostNodeSetParams",                               "", CONV_GRAPH, API_DRIVER, HIP_UNSUPPORTED}},
   // cudaGraphInstantiate
   {"cuGraphInstantiate",                                   {"hipGraphInstantiate",                                     "", CONV_GRAPH, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuGraphInstantiate_v2",                                {"hipGraphInstantiate",                                     "", CONV_GRAPH, API_DRIVER, HIP_UNSUPPORTED}},
   // cudaGraphExecKernelNodeSetParams
   {"cuGraphExecKernelNodeSetParams",                       {"hipGraphExecKernelNodeSetParams",                         "", CONV_GRAPH, API_DRIVER, HIP_UNSUPPORTED}},
   // cudaGraphKernelNodeGetParams
