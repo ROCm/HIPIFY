@@ -102,6 +102,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP{
   {"cuCtxPushCurrent",                                     {"hipCtxPushCurrent",                                       "", CONV_CONTEXT, API_DRIVER}},
   {"cuCtxPushCurrent_v2",                                  {"hipCtxPushCurrent",                                       "", CONV_CONTEXT, API_DRIVER}},
   {"cuCtxSetCacheConfig",                                  {"hipCtxSetCacheConfig",                                    "", CONV_CONTEXT, API_DRIVER}},
+  {"cuCtxResetPersistingL2Cache",                          {"hipCtxResetPersistingL2Cache",                            "", CONV_CONTEXT, API_DRIVER, HIP_UNSUPPORTED}},
   {"cuCtxSetCurrent",                                      {"hipCtxSetCurrent",                                        "", CONV_CONTEXT, API_DRIVER}},
   // cudaDeviceSetLimit
   {"cuCtxSetLimit",                                        {"hipDeviceSetLimit",                                       "", CONV_CONTEXT, API_DRIVER}},
@@ -327,6 +328,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP{
   {"cuMemImportFromShareableHandle",                       {"hipMemImportFromShareableHandle",                         "", CONV_VIRTUAL_MEMORY, API_DRIVER, HIP_UNSUPPORTED}},
   {"cuMemMap",                                             {"hipMemMap",                                               "", CONV_VIRTUAL_MEMORY, API_DRIVER, HIP_UNSUPPORTED}},
   {"cuMemRelease",                                         {"hipMemRelease",                                           "", CONV_VIRTUAL_MEMORY, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuMemRetainAllocationHandle",                          {"hipMemRetainAllocationHandle",                            "", CONV_VIRTUAL_MEMORY, API_DRIVER, HIP_UNSUPPORTED}},
   {"cuMemSetAccess",                                       {"hipMemSetAccess",                                         "", CONV_VIRTUAL_MEMORY, API_DRIVER, HIP_UNSUPPORTED}},
   {"cuMemUnmap",                                           {"hipMemUnmap",                                             "", CONV_VIRTUAL_MEMORY, API_DRIVER, HIP_UNSUPPORTED}},
 
@@ -356,6 +358,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP{
   {"cuStreamBeginCapture",                                 {"hipStreamBeginCapture",                                   "", CONV_STREAM, API_DRIVER, HIP_UNSUPPORTED}},
   {"cuStreamBeginCapture_v2",                              {"hipStreamBeginCapture",                                   "", CONV_STREAM, API_DRIVER, HIP_UNSUPPORTED}},
   {"cuStreamBeginCapture_ptsz",                            {"hipStreamBeginCapture",                                   "", CONV_STREAM, API_DRIVER, HIP_UNSUPPORTED}},
+  {"cuStreamCopyAttributes",                               {"hipStreamCopyAttributes",                                 "", CONV_STREAM, API_DRIVER, HIP_UNSUPPORTED}},
   // cudaStreamCreateWithFlags
   {"cuStreamCreate",                                       {"hipStreamCreateWithFlags",                                "", CONV_STREAM, API_DRIVER}},
   // cudaStreamCreateWithPriority
@@ -365,6 +368,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP{
   {"cuStreamDestroy_v2",                                   {"hipStreamDestroy",                                        "", CONV_STREAM, API_DRIVER}},
   // cudaStreamEndCapture
   {"cuStreamEndCapture",                                   {"hipStreamEndCapture",                                     "", CONV_STREAM, API_DRIVER, HIP_UNSUPPORTED}},
+  //
+  {"cuStreamGetAttribute",                                 {"hipStreamGetAttribute",                                   "", CONV_STREAM, API_DRIVER, HIP_UNSUPPORTED}},
   // cudaStreamGetCaptureInfo
   {"cuStreamGetCaptureInfo",                               {"hipStreamGetCaptureInfo",                                 "", CONV_STREAM, API_DRIVER, HIP_UNSUPPORTED}},
   // no analogue
@@ -377,6 +382,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP{
   {"cuStreamIsCapturing",                                  {"hipStreamIsCapturing",                                    "", CONV_STREAM, API_DRIVER, HIP_UNSUPPORTED}},
   // cudaStreamQuery
   {"cuStreamQuery",                                        {"hipStreamQuery",                                          "", CONV_STREAM, API_DRIVER}},
+  //
+  {"cuStreamSetAttribute",                                 {"hipStreamSetAttribute",                                   "", CONV_STREAM, API_DRIVER, HIP_UNSUPPORTED}},
   // cudaStreamSynchronize
   {"cuStreamSynchronize",                                  {"hipStreamSynchronize",                                    "", CONV_STREAM, API_DRIVER}},
   // cudaStreamWaitEvent
@@ -428,6 +435,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP{
   // 5.18.Execution Control
   // no analogue
   {"cuFuncGetAttribute",                                   {"hipFuncGetAttribute",                                     "", CONV_EXECUTION, API_DRIVER}},
+  //
+  {"cuFuncGetModule",                                      {"hipFuncGetModule",                                        "", CONV_EXECUTION, API_DRIVER, HIP_UNSUPPORTED}},
   // no analogue
   // NOTE: Not equal to cudaFuncSetAttribute due to different signatures
   {"cuFuncSetAttribute",                                   {"hipFuncSetAttribute",                                     "", CONV_EXECUTION, API_DRIVER, HIP_UNSUPPORTED}},
@@ -512,10 +521,16 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP{
   // cudaGraphInstantiate
   {"cuGraphInstantiate",                                   {"hipGraphInstantiate",                                     "", CONV_GRAPH, API_DRIVER, HIP_UNSUPPORTED}},
   {"cuGraphInstantiate_v2",                                {"hipGraphInstantiate",                                     "", CONV_GRAPH, API_DRIVER, HIP_UNSUPPORTED}},
+  //
+  {"cuGraphKernelNodeCopyAttributes",                      {"hipGraphKernelNodeCopyAttributes",                        "", CONV_GRAPH, API_DRIVER, HIP_UNSUPPORTED}},
+  //
+  {"cuGraphKernelNodeGetAttribute",                        {"hipGraphKernelNodeGetAttribute",                          "", CONV_GRAPH, API_DRIVER, HIP_UNSUPPORTED}},
   // cudaGraphExecKernelNodeSetParams
   {"cuGraphExecKernelNodeSetParams",                       {"hipGraphExecKernelNodeSetParams",                         "", CONV_GRAPH, API_DRIVER, HIP_UNSUPPORTED}},
   // cudaGraphKernelNodeGetParams
   {"cuGraphKernelNodeGetParams",                           {"hipGraphKernelNodeGetParams",                             "", CONV_GRAPH, API_DRIVER, HIP_UNSUPPORTED}},
+  //
+  {"cuGraphKernelNodeSetAttribute",                        {"hipGraphKernelNodeSetAttribute",                          "", CONV_GRAPH, API_DRIVER, HIP_UNSUPPORTED}},
   // cudaGraphKernelNodeSetParams
   {"cuGraphKernelNodeSetParams",                           {"hipGraphKernelNodeSetParams",                             "", CONV_GRAPH, API_DRIVER, HIP_UNSUPPORTED}},
   // cudaGraphLaunch
@@ -548,6 +563,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP{
   {"cuGraphExecUpdate",                                    {"hipGraphExecUpdate",                                      "", CONV_GRAPH, API_DRIVER, HIP_UNSUPPORTED}},
 
   // 5.21. Occupancy
+  //
+  {"cuOccupancyAvailableDynamicSMemPerBlock",              {"hipOccupancyAvailableDynamicSMemPerBlock",                "", CONV_OCCUPANCY, API_DRIVER, HIP_UNSUPPORTED}},
   // cudaOccupancyMaxActiveBlocksPerMultiprocessor
   {"cuOccupancyMaxActiveBlocksPerMultiprocessor",          {"hipDrvOccupancyMaxActiveBlocksPerMultiprocessor",         "", CONV_OCCUPANCY, API_DRIVER}},
   // cudaOccupancyMaxActiveBlocksPerMultiprocessorWithFlags
