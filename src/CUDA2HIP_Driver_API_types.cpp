@@ -31,7 +31,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP{
   {"CUDA_ARRAY3D_DESCRIPTOR",                                          {"HIP_ARRAY3D_DESCRIPTOR",                                   "", CONV_TYPE, API_DRIVER}},
 
   {"CUDA_ARRAY_DESCRIPTOR_st",                                         {"HIP_ARRAY_DESCRIPTOR",                                     "", CONV_TYPE, API_DRIVER}},
+  {"CUDA_ARRAY_DESCRIPTOR_v1_st",                                      {"HIP_ARRAY_DESCRIPTOR",                                     "", CONV_TYPE, API_DRIVER}},
   {"CUDA_ARRAY_DESCRIPTOR",                                            {"HIP_ARRAY_DESCRIPTOR",                                     "", CONV_TYPE, API_DRIVER}},
+  {"CUDA_ARRAY_DESCRIPTOR_v1",                                         {"HIP_ARRAY_DESCRIPTOR",                                     "", CONV_TYPE, API_DRIVER}},
 
   // cudaExternalMemoryBufferDesc
   {"CUDA_EXTERNAL_MEMORY_BUFFER_DESC_st",                              {"HIP_EXTERNAL_MEMORY_BUFFER_DESC",                          "", CONV_TYPE, API_DRIVER, HIP_UNSUPPORTED}},
@@ -71,11 +73,15 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP{
   {"CUDA_LAUNCH_PARAMS",                                               {"hipLaunchParams",                                          "", CONV_TYPE, API_DRIVER, HIP_UNSUPPORTED}},
 
   {"CUDA_MEMCPY2D_st",                                                 {"hip_Memcpy2D",                                             "", CONV_TYPE, API_DRIVER}},
+  {"CUDA_MEMCPY2D_v1_st",                                              {"hip_Memcpy2D",                                             "", CONV_TYPE, API_DRIVER}},
   {"CUDA_MEMCPY2D",                                                    {"hip_Memcpy2D",                                             "", CONV_TYPE, API_DRIVER}},
+  {"CUDA_MEMCPY2D_v1",                                                 {"hip_Memcpy2D",                                             "", CONV_TYPE, API_DRIVER}},
 
   // no analogue
   {"CUDA_MEMCPY3D_st",                                                 {"HIP_MEMCPY3D",                                             "", CONV_TYPE, API_DRIVER}},
+  {"CUDA_MEMCPY3D_v1_st",                                              {"HIP_MEMCPY3D",                                             "", CONV_TYPE, API_DRIVER}},
   {"CUDA_MEMCPY3D",                                                    {"HIP_MEMCPY3D",                                             "", CONV_TYPE, API_DRIVER}},
+  {"CUDA_MEMCPY3D_v1",                                                 {"HIP_MEMCPY3D",                                             "", CONV_TYPE, API_DRIVER}},
 
   {"CUDA_MEMCPY3D_PEER_st",                                            {"hip_Memcpy3D_Peer",                                        "", CONV_TYPE, API_DRIVER, HIP_UNSUPPORTED}},
   {"CUDA_MEMCPY3D_PEER",                                               {"hip_Memcpy3D_Peer",                                        "", CONV_TYPE, API_DRIVER, HIP_UNSUPPORTED}},
@@ -1591,6 +1597,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP{
   // no analogue
   {"CUdevice",                                                         {"hipDevice_t",                                              "", CONV_TYPE, API_DRIVER}},
   {"CUdeviceptr",                                                      {"hipDeviceptr_t",                                           "", CONV_TYPE, API_DRIVER}},
+  {"CUdeviceptr_v1",                                                   {"hipDeviceptr_t",                                           "", CONV_TYPE, API_DRIVER}},
 
   // cudaHostFn_t
   {"CUhostFn",                                                         {"hipHostFn",                                                "", CONV_TYPE, API_DRIVER, HIP_UNSUPPORTED}},
@@ -1606,6 +1613,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP{
 
   // cudaTextureObject_t
   {"CUtexObject",                                                      {"hipTextureObject_t",                                       "", CONV_TYPE, API_DRIVER}},
+
+  //
+  {"CUmemGenericAllocationHandle",                                     {"hipMemGenericAllocationHandle",                            "", CONV_DEFINE, API_DRIVER, HIP_UNSUPPORTED}},
 
   // 5. Defines
 
