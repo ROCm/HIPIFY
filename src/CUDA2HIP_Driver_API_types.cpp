@@ -155,6 +155,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP{
 
   // no analogue
   {"CUfunc_st",                                                        {"ihipModuleSymbol_t",                                       "", CONV_TYPE, API_DRIVER}},
+  // cudaFunction_t
   {"CUfunction",                                                       {"hipFunction_t",                                            "", CONV_TYPE, API_DRIVER}},
 
   // the same - CUgraph_st

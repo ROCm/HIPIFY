@@ -179,6 +179,20 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CUstream
   {"cudaStream_t",                                                     {"hipStream_t",                                              "", CONV_TYPE, API_RUNTIME}},
 
+  // CUfunction
+  {"cudaFunction_t",                                                   {"hipFunction_t",                                            "", CONV_TYPE, API_DRIVER}},
+
+  //
+  {"cudaAccessPolicyWindow",                                           {"hipAccessPolicyWindow",                                    "", CONV_TYPE, API_RUNTIME, HIP_UNSUPPORTED}},
+
+  // 2. Unions
+
+  //
+  {"cudaStreamAttrValue",                                              {"hipStreamAttrValue",                                       "", CONV_TYPE, API_RUNTIME, HIP_UNSUPPORTED}},
+
+  //
+  {"cudaKernelNodeAttrValue",                                          {"hipKernelNodeAttrValue",                                   "", CONV_TYPE, API_RUNTIME, HIP_UNSUPPORTED}},
+
   // 3. Enums
 
   // no analogue
@@ -413,6 +427,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaDevAttrPageableMemoryAccessUsesHostPageTables",                {"hipDeviceAttributePageableMemoryAccessUsesHostPageTables", "", CONV_NUMERIC_LITERAL, API_RUNTIME, HIP_UNSUPPORTED}}, // 100
   // CU_DEVICE_ATTRIBUTE_DIRECT_MANAGED_MEM_ACCESS_FROM_HOST
   {"cudaDevAttrDirectManagedMemAccessFromHost",                        {"hipDeviceAttributeDirectManagedMemAccessFromHost",         "", CONV_NUMERIC_LITERAL, API_RUNTIME, HIP_UNSUPPORTED}}, // 101
+  //
+  {"cudaDevAttrMaxBlocksPerMultiprocessor",                            {"hipDevAttrMaxBlocksPerMultiprocessor",                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, HIP_UNSUPPORTED}}, // 106
+  //
+  {"cudaDevAttrReservedSharedMemoryPerBlock",                          {"hipDevAttrReservedSharedMemoryPerBlock",                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, HIP_UNSUPPORTED}}, // 111
 
   // CUdevice_P2PAttribute
   {"cudaDeviceP2PAttr",                                                {"hipDeviceP2PAttribute",                                    "", CONV_TYPE, API_RUNTIME, HIP_UNSUPPORTED}},
@@ -980,6 +998,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaLimitDevRuntimePendingLaunchCount",                            {"hipLimitDevRuntimePendingLaunchCount",                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, HIP_UNSUPPORTED}}, // 0x04
   // CU_LIMIT_MAX_L2_FETCH_GRANULARITY
   {"cudaLimitMaxL2FetchGranularity",                                   {"hipLimitMaxL2FetchGranularity",                            "", CONV_NUMERIC_LITERAL, API_RUNTIME, HIP_UNSUPPORTED}}, // 0x05
+  //
+  {"cudaLimitPersistingL2CacheSize",                                   {"hipLimitPersistingL2CacheSize",                            "", CONV_NUMERIC_LITERAL, API_RUNTIME, HIP_UNSUPPORTED}}, // 0x06
 
   // no analogue
   {"cudaMemcpyKind",                                                   {"hipMemcpyKind",                                            "", CONV_TYPE, API_RUNTIME}},
@@ -1290,6 +1310,41 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"MINOR_VERSION",                                                    {"hipLibraryMinorVersion",                                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, HIP_UNSUPPORTED}},
   // no analogue
   {"PATCH_LEVEL",                                                      {"hipLibraryPatchVersion",                                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, HIP_UNSUPPORTED}},
+
+  //
+  {"cudaAccessProperty",                                               {"hipAccessProperty",                                        "", CONV_TYPE, API_RUNTIME, HIP_UNSUPPORTED}},
+  //
+  {"cudaAccessPropertyNormal",                                         {"hipAccessPropertyNormal",                                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, HIP_UNSUPPORTED}}, // 0
+  //
+  {"cudaAccessPropertyStreaming",                                      {"hipAccessPropertyStreaming",                               "", CONV_NUMERIC_LITERAL, API_RUNTIME, HIP_UNSUPPORTED}}, // 1
+  //
+  {"cudaAccessPropertyPersisting",                                     {"hipAccessPropertyPersisting",                              "", CONV_NUMERIC_LITERAL, API_RUNTIME, HIP_UNSUPPORTED}}, // 2
+
+  //
+  {"cudaSynchronizationPolicy",                                        {"hipSynchronizationPolicy",                                 "", CONV_TYPE, API_RUNTIME, HIP_UNSUPPORTED}},
+  //
+  {"cudaSyncPolicyAuto",                                               {"hipSyncPolicyAuto",                                        "", CONV_NUMERIC_LITERAL, API_RUNTIME, HIP_UNSUPPORTED}}, // 1
+  //
+  {"cudaSyncPolicySpin",                                               {"hipSyncPolicySpin",                                        "", CONV_NUMERIC_LITERAL, API_RUNTIME, HIP_UNSUPPORTED}}, // 2
+  //
+  {"cudaSyncPolicyYield",                                              {"hipSyncPolicyYield",                                       "", CONV_NUMERIC_LITERAL, API_RUNTIME, HIP_UNSUPPORTED}}, // 3
+  //
+  {"cudaSyncPolicyBlockingSync",                                       {"hipSyncPolicyBlockingSync",                                "", CONV_NUMERIC_LITERAL, API_RUNTIME, HIP_UNSUPPORTED}}, // 4
+
+  //
+  {"cudaStreamAttrID",                                                 {"hipStreamAttrID",                                          "", CONV_TYPE, API_RUNTIME, HIP_UNSUPPORTED}},
+  //
+  {"cudaStreamAttributeAccessPolicyWindow",                            {"hipStreamAttributeAccessPolicyWindow",                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, HIP_UNSUPPORTED}}, // 1
+  //
+  {"cudaStreamAttributeSynchronizationPolicy",                         {"hipStreamAttributeSynchronizationPolicy",                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, HIP_UNSUPPORTED}}, // 3
+
+  //
+  {"cudaKernelNodeAttrID",                                             {"hipKernelNodeAttrID",                                      "", CONV_TYPE, API_RUNTIME, HIP_UNSUPPORTED}},
+  //
+  {"cudaKernelNodeAttributeAccessPolicyWindow",                        {"hipKernelNodeAttributeAccessPolicyWindow",                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, HIP_UNSUPPORTED}}, // 1
+  //
+  {"cudaKernelNodeAttributeCooperative",                               {"hipKernelNodeAttributeCooperative",                        "", CONV_NUMERIC_LITERAL, API_RUNTIME, HIP_UNSUPPORTED}}, // 2
+
 
   // 4. Typedefs
 
