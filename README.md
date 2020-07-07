@@ -100,10 +100,7 @@ For a list of `hipify-clang` options, run `hipify-clang --help`.
 
 ### <a name="building"></a> hipify-clang: building
 
-Assuming this repository is at `./HIP`:
-
 ```bash
-cd hipify-clang
 mkdir build dist
 cd build
 
