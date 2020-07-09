@@ -112,10 +112,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP{
   // 5.4. Stream Management
   // cuStreamAddCallback
   {"cudaStreamAddCallback",                                   {"hipStreamAddCallback",                                   "", CONV_STREAM, API_RUNTIME}},
+  // cuCtxResetPersistingL2Cache
+  {"cudaCtxResetPersistingL2Cache",                           {"hipCtxResetPersistingL2Cache",                           "", CONV_STREAM, API_RUNTIME, HIP_UNSUPPORTED}},
   // cuStreamAttachMemAsync
   {"cudaStreamAttachMemAsync",                                {"hipStreamAttachMemAsync",                                "", CONV_STREAM, API_RUNTIME, HIP_UNSUPPORTED}},
   // cuStreamBeginCapture
   {"cudaStreamBeginCapture",                                  {"hipStreamBeginCapture",                                  "", CONV_STREAM, API_RUNTIME, HIP_UNSUPPORTED}},
+  // cuStreamCopyAttributes
+  {"cudaStreamCopyAttributes",                                {"hipStreamCopyAttributes",                                "", CONV_STREAM, API_RUNTIME, HIP_UNSUPPORTED}},
   // no analogue
   // NOTE: Not equal to cuStreamCreate due to different signatures
   {"cudaStreamCreate",                                        {"hipStreamCreate",                                        "", CONV_STREAM, API_RUNTIME}},
@@ -127,6 +131,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP{
   {"cudaStreamDestroy",                                       {"hipStreamDestroy",                                       "", CONV_STREAM, API_RUNTIME}},
   // cuStreamEndCapture
   {"cudaStreamEndCapture",                                    {"hipStreamEndCapture",                                    "", CONV_STREAM, API_RUNTIME, HIP_UNSUPPORTED}},
+  // cuStreamGetAttribute
+  {"cudaStreamGetAttribute",                                  {"hipStreamGetAttribute",                                  "", CONV_STREAM, API_RUNTIME, HIP_UNSUPPORTED}},
+  // cuStreamSetAttribute
+  {"cudaStreamSetAttribute",                                  {"hipStreamSetAttribute",                                  "", CONV_STREAM, API_RUNTIME, HIP_UNSUPPORTED}},
   // cuStreamGetFlags
   {"cudaStreamGetFlags",                                      {"hipStreamGetFlags",                                      "", CONV_STREAM, API_RUNTIME}},
   // cuStreamGetPriority
@@ -211,6 +219,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP{
   {"cudaSetDoubleForHost",                                    {"hipSetDoubleForHost",                                    "", CONV_EXECUTION, API_RUNTIME, HIP_UNSUPPORTED | DEPRECATED}},
 
   // 5.8. Occupancy
+  // cuOccupancyAvailableDynamicSMemPerBlock
+  {"cudaOccupancyAvailableDynamicSMemPerBlock",               {"hipOccupancyAvailableDynamicSMemPerBlock",               "", CONV_OCCUPANCY, API_RUNTIME, HIP_UNSUPPORTED}},
   // cuOccupancyMaxActiveBlocksPerMultiprocessor
   {"cudaOccupancyMaxActiveBlocksPerMultiprocessor",           {"hipOccupancyMaxActiveBlocksPerMultiprocessor",           "", CONV_OCCUPANCY, API_RUNTIME}},
   // cuOccupancyMaxActiveBlocksPerMultiprocessorWithFlags
@@ -648,6 +658,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP{
   {"cudaGraphHostNodeSetParams",                              {"hipGraphHostNodeSetParams",                              "", CONV_GRAPH, API_RUNTIME, HIP_UNSUPPORTED}},
   // cuGraphInstantiate
   {"cudaGraphInstantiate",                                    {"hipGraphInstantiate",                                    "", CONV_GRAPH, API_RUNTIME, HIP_UNSUPPORTED}},
+  // cuGraphKernelNodeCopyAttributes
+  {"cudaGraphKernelNodeCopyAttributes",                       {"hipGraphKernelNodeCopyAttributes",                       "", CONV_GRAPH, API_RUNTIME, HIP_UNSUPPORTED}},
+  // cuGraphKernelNodeGetAttribute
+  {"cudaGraphKernelNodeGetAttribute",                         {"hipGraphKernelNodeGetAttribute",                         "", CONV_GRAPH, API_RUNTIME, HIP_UNSUPPORTED}},
+  // cuGraphKernelNodeSetAttribute
+  {"cudaGraphKernelNodeSetAttribute",                         {"hipGraphKernelNodeSetAttribute",                         "", CONV_GRAPH, API_RUNTIME, HIP_UNSUPPORTED}},
   // cuGraphExecKernelNodeSetParams
   {"cudaGraphExecKernelNodeSetParams",                        {"hipGraphExecKernelNodeSetParams",                        "", CONV_GRAPH, API_RUNTIME, HIP_UNSUPPORTED}},
   // cuGraphExecMemcpyNodeSetParams
