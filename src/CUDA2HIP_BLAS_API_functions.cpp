@@ -54,12 +54,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP{
   {"cublasGetPointerMode",           {"hipblasGetPointerMode",           "rocblas_get_pointer_mode",                 CONV_LIB_FUNC, API_BLAS}},
   {"cublasSetVector",                {"hipblasSetVector",                "rocblas_set_vector",                       CONV_LIB_FUNC, API_BLAS}},
   {"cublasGetVector",                {"hipblasGetVector",                "rocblas_get_vector",                       CONV_LIB_FUNC, API_BLAS}},
-  {"cublasSetVectorAsync",           {"hipblasSetVectorAsync",           "",                                         CONV_LIB_FUNC, API_BLAS, UNSUPPORTED}},
-  {"cublasGetVectorAsync",           {"hipblasGetVectorAsync",           "",                                         CONV_LIB_FUNC, API_BLAS, UNSUPPORTED}},
+  {"cublasSetVectorAsync",           {"hipblasSetVectorAsync",           "rocblas_set_vector_async",                 CONV_LIB_FUNC, API_BLAS}},
+  {"cublasGetVectorAsync",           {"hipblasGetVectorAsync",           "rocblas_get_vector_async",                 CONV_LIB_FUNC, API_BLAS}},
   {"cublasSetMatrix",                {"hipblasSetMatrix",                "rocblas_set_matrix",                       CONV_LIB_FUNC, API_BLAS}},
   {"cublasGetMatrix",                {"hipblasGetMatrix",                "rocblas_get_matrix",                       CONV_LIB_FUNC, API_BLAS}},
-  {"cublasSetMatrixAsync",           {"hipblasSetMatrixAsync",           "",                                         CONV_LIB_FUNC, API_BLAS, UNSUPPORTED}},
-  {"cublasGetMatrixAsync",           {"hipblasGetMatrixAsync",           "",                                         CONV_LIB_FUNC, API_BLAS, UNSUPPORTED}},
+  {"cublasSetMatrixAsync",           {"hipblasSetMatrixAsync",           "rocblas_set_matrix_async",                 CONV_LIB_FUNC, API_BLAS}},
+  {"cublasGetMatrixAsync",           {"hipblasGetMatrixAsync",           "rocblas_get_matrix_async",                 CONV_LIB_FUNC, API_BLAS}},
   {"cublasXerbla",                   {"hipblasXerbla",                   "",                                         CONV_LIB_FUNC, API_BLAS, UNSUPPORTED}},
 
   // NRM2
