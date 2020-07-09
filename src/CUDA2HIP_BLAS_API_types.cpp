@@ -83,9 +83,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP{
   {"cublasDataType_t",               {"hipblasDatatype_t",               "rocblas_datatype",                      CONV_TYPE, API_BLAS}},
 
   // Blas Math mode/tensor operation
-  {"cublasMath_t",                   {"hipblasMath_t",                   "", CONV_TYPE, API_BLAS, UNSUPPORTED}},
-  {"CUBLAS_DEFAULT_MATH",            {"HIPBLAS_DEFAULT_MATH",            "", CONV_NUMERIC_LITERAL, API_BLAS, UNSUPPORTED}},
-  {"CUBLAS_TENSOR_OP_MATH",          {"HIPBLAS_TENSOR_OP_MATH",          "", CONV_NUMERIC_LITERAL, API_BLAS, UNSUPPORTED}},
+  {"cublasMath_t",                                     {"hipblasMath_t",                                     "",  CONV_TYPE, API_BLAS, UNSUPPORTED}},
+  {"CUBLAS_DEFAULT_MATH",                              {"HIPBLAS_DEFAULT_MATH",                              "",  CONV_NUMERIC_LITERAL, API_BLAS, UNSUPPORTED | DEPRECATED}}, // 0
+  {"CUBLAS_TENSOR_OP_MATH",                            {"HIPBLAS_TENSOR_OP_MATH",                            "",  CONV_NUMERIC_LITERAL, API_BLAS, UNSUPPORTED}}, // 1
+  {"CUBLAS_PEDANTIC_MATH",                             {"HIPBLAS_PEDANTIC_MATH",                             "",  CONV_NUMERIC_LITERAL, API_BLAS, UNSUPPORTED}}, // 2
+  {"CUBLAS_TF32_TENSOR_OP_MATH",                       {"HIPBLAS_TF32_TENSOR_OP_MATH",                       "",  CONV_NUMERIC_LITERAL, API_BLAS, UNSUPPORTED}}, // 3
+  {"CUBLAS_MATH_DISALLOW_REDUCED_PRECISION_REDUCTION", {"HIPBLAS_MATH_DISALLOW_REDUCED_PRECISION_REDUCTION", "",  CONV_NUMERIC_LITERAL, API_BLAS, UNSUPPORTED}}, // 16
 
   // Blass different GEMM algorithms
   {"cublasGemmAlgo_t",               {"hipblasGemmAlgo_t",               "rocblas_gemm_algo",                     CONV_TYPE, API_BLAS}},
@@ -155,4 +158,17 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP{
   {"cublasHandle_t",                 {"hipblasHandle_t",                 "rocblas_handle",                        CONV_TYPE, API_BLAS}},
   // TODO: dereferencing: typedef struct cublasContext *cublasHandle_t;
   {"cublasContext",                  {"hipblasHandle_t",                 "_rocblas_handle",                       CONV_TYPE, API_BLAS, HIP_UNSUPPORTED}},
+
+  {"cublasComputeType_t",            {"hipblasComputeType_t",            "",  CONV_TYPE, API_BLAS, UNSUPPORTED}},
+  {"CUBLAS_COMPUTE_16F",             {"HIPBLAS_COMPUTE_16F",             "",  CONV_NUMERIC_LITERAL, API_BLAS, UNSUPPORTED}}, // 64
+  {"CUBLAS_COMPUTE_16F_PEDANTIC",    {"HIPBLAS_COMPUTE_16F_PEDANTIC",    "",  CONV_NUMERIC_LITERAL, API_BLAS, UNSUPPORTED}}, // 65
+  {"CUBLAS_COMPUTE_32F",             {"HIPBLAS_COMPUTE_32F",             "",  CONV_NUMERIC_LITERAL, API_BLAS, UNSUPPORTED}}, // 68
+  {"CUBLAS_COMPUTE_32F_PEDANTIC",    {"HIPBLAS_COMPUTE_32F_PEDANTIC",    "",  CONV_NUMERIC_LITERAL, API_BLAS, UNSUPPORTED}}, // 69
+  {"CUBLAS_COMPUTE_32F_FAST_16F",    {"HIPBLAS_COMPUTE_32F_FAST_16F",    "",  CONV_NUMERIC_LITERAL, API_BLAS, UNSUPPORTED}}, // 74
+  {"CUBLAS_COMPUTE_32F_FAST_16BF",   {"HIPBLAS_COMPUTE_32F_FAST_16BF",   "",  CONV_NUMERIC_LITERAL, API_BLAS, UNSUPPORTED}}, // 75
+  {"CUBLAS_COMPUTE_32F_FAST_TF32",   {"HIPBLAS_COMPUTE_32F_FAST_TF32",   "",  CONV_NUMERIC_LITERAL, API_BLAS, UNSUPPORTED}}, // 77
+  {"CUBLAS_COMPUTE_64F",             {"HIPBLAS_COMPUTE_64F",             "",  CONV_NUMERIC_LITERAL, API_BLAS, UNSUPPORTED}}, // 70
+  {"CUBLAS_COMPUTE_64F_PEDANTIC",    {"HIPBLAS_COMPUTE_64F_PEDANTIC",    "",  CONV_NUMERIC_LITERAL, API_BLAS, UNSUPPORTED}}, // 71
+  {"CUBLAS_COMPUTE_32I",             {"HIPBLAS_COMPUTE_32I",             "",  CONV_NUMERIC_LITERAL, API_BLAS, UNSUPPORTED}}, // 72
+  {"CUBLAS_COMPUTE_32I_PEDANTIC",    {"HIPBLAS_COMPUTE_32I_PEDANTIC",    "",  CONV_NUMERIC_LITERAL, API_BLAS, UNSUPPORTED}}, // 73
 };
