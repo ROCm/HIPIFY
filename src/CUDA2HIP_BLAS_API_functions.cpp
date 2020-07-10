@@ -518,8 +518,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP{
   //IO in FP16 / FP32, computation in float
   {"cublasSgemmEx",                  {"hipblasSgemmEx",                  "",                                         CONV_LIB_FUNC, API_BLAS, UNSUPPORTED}},
   {"cublasGemmEx",                   {"hipblasGemmEx",                   "rocblas_gemm_ex",                          CONV_LIB_FUNC, API_BLAS}},
-  {"cublasGemmBatchedEx",            {"hipblasGemmBatchedEx",            "",                                         CONV_LIB_FUNC, API_BLAS, UNSUPPORTED}},
-  {"cublasGemmStridedBatchedEx",     {"hipblasGemmStridedBatchedEx",     "rocblas_gemm_strided_batched_ex",          CONV_LIB_FUNC, API_BLAS, HIP_UNSUPPORTED}},
+  {"cublasGemmBatchedEx",            {"hipblasGemmBatchedEx",            "rocblas_gemm_batched_ex",                  CONV_LIB_FUNC, API_BLAS}},
+  {"cublasGemmStridedBatchedEx",     {"hipblasGemmStridedBatchedEx",     "rocblas_gemm_strided_batched_ex",          CONV_LIB_FUNC, API_BLAS}},
   // IO in Int8 complex/cuComplex, computation in cuComplex
   {"cublasCgemmEx",                  {"hipblasCgemmEx",                  "",                                         CONV_LIB_FUNC, API_BLAS, UNSUPPORTED}},
   {"cublasUint8gemmBias",            {"hipblasUint8gemmBias",            "",                                         CONV_LIB_FUNC, API_BLAS, UNSUPPORTED}},
