@@ -1,0 +1,7 @@
+[
+  {
+    "directory": "<test dir>",
+    "command": "hipify-clang \"<CUDA dir>\" -I./include -v",
+    "file": "cd_intro.cu"
+  }
+]
