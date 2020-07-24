@@ -177,7 +177,32 @@ bool generatePython() {
 
 int main(int argc, const char **argv) {
   std::vector<const char*> new_argv(argv, argv + argc);
-  if (std::find(new_argv.begin(), new_argv.end(), std::string("--")) == new_argv.end()) {
+  std::string sCompilationDatabaseDir;
+  auto it = std::find(new_argv.begin(), new_argv.end(), std::string("-p"));
+  bool bCompilationDatabase = it == new_argv.end() ? false : true;
+  bool bNoCompilationDatabaseDir = false;
+  if (bCompilationDatabase) {
+    if (it+1 != new_argv.end()) sCompilationDatabaseDir = *(it+1);
+    else bNoCompilationDatabaseDir = true;
+  } else {
+    for (auto& s : new_argv) {
+      std::string str = std::string(s);
+      size_t found = str.find("-p=");
+      if (found != std::string::npos) {
+        bCompilationDatabase = true;
+        sCompilationDatabaseDir = str.substr(3, str.size()-3);
+        if (sCompilationDatabaseDir.empty()) {
+          bNoCompilationDatabaseDir = true;
+        }
+        break;
+      }
+    }
+  }
+  if (bCompilationDatabase && bNoCompilationDatabaseDir) {
+    llvm::errs() << "\n" << sHipify << sError << "Must specify compilation database directory" << "\n";
+    return 1;
+  }
+  if (!bCompilationDatabase && std::find(new_argv.begin(), new_argv.end(), std::string("--")) == new_argv.end()) {
     new_argv.push_back("--");
     new_argv.push_back(nullptr);
     argv = new_argv.data();
@@ -188,7 +213,19 @@ int main(int argc, const char **argv) {
   if (!llcompat::CheckCompatibility()) {
     return 1;
   }
-  std::vector<std::string> fileSources = OptionsParser.getSourcePathList();
+  std::unique_ptr<ct::CompilationDatabase> compilationDatabase;
+  std::vector<std::string> fileSources;
+  if (bCompilationDatabase) {
+    std::string serr;
+    compilationDatabase = ct::CompilationDatabase::loadFromDirectory(sCompilationDatabaseDir, serr);
+    if (nullptr == compilationDatabase.get()) {
+      llvm::errs() << "\n" << sHipify << sError << "loading Compilation Database from \"" << sCompilationDatabaseDir << "compile_commands.json\" failed\n";
+      return 1;
+    }
+    fileSources = compilationDatabase->getAllFiles();
+  } else {
+    fileSources = OptionsParser.getSourcePathList();
+  }
   if (fileSources.empty() && !GeneratePerl && !GeneratePython) {
     llvm::errs() << "\n" << sHipify << sError << "Must specify at least 1 positional argument for source file" << "\n";
     return 1;
@@ -321,7 +358,7 @@ int main(int argc, const char **argv) {
     // RefactoringTool operates on the file in-place. Giving it the output path is no good,
     // because that'll break relative includes, and we don't want to overwrite the input file.
     // So what we do is operate on a copy, which we then move to the output.
-    ct::RefactoringTool Tool(OptionsParser.getCompilations(), std::string(tmpFile.c_str()));
+    ct::RefactoringTool Tool((bCompilationDatabase ? *compilationDatabase.get() : OptionsParser.getCompilations()), std::string(tmpFile.c_str()));
     ct::Replacements &replacementsToUse = llcompat::getReplacements(Tool, tmpFile.c_str());
     ReplacementsFrontendActionFactory<HipifyAction> actionFactory(&replacementsToUse);
     appendArgumentsAdjusters(Tool, sSourceAbsPath, argv[0]);
