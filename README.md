@@ -69,6 +69,7 @@ After applying all the matchers, the output HIP source is produced.
 | [9.0.1](http://releases.llvm.org/download.html#9.0.1)      | [10.1](https://developer.nvidia.com/cuda-10.1-download-archive-base)     | +           | +         |
 | [10.0.0](http://releases.llvm.org/download.html#10.0.0)    | [11.0](https://developer.nvidia.com/cuda-downloads)                      | +           | +         |
 | [**10.0.1**](https://github.com/llvm/llvm-project/releases/tag/llvmorg-10.0.1) | [**11.0**](https://developer.nvidia.com/cuda-downloads)  | + <br/> **LATEST STABLE RELEASE** | + <br/> **LATEST STABLE RELEASE** |
+| [11.0.0-rc1](https://github.com/llvm/llvm-project/releases/tag/llvmorg-11.0.0-rc1) | [11.0](https://developer.nvidia.com/cuda-downloads)             | +           | +         |
 
 `*` Download the patch and unpack it into your `LLVM` distributive directory; a few header files will be overwritten; rebuilding of `LLVM` is not needed.
 
@@ -256,7 +257,7 @@ On Linux the following configurations are tested:
 
 Ubuntu 14: LLVM 5.0.0 - 7.1.0, CUDA 7.0 - 9.0, cuDNN 5.0.5 - 7.6.5.32
 
-Ubuntu 16-18: LLVM 8.0.0 - 10.0.1, CUDA 8.0 - 11.0, cuDNN 5.1.10 - 8.0.1.13
+Ubuntu 16-18: LLVM 8.0.0 - 11.0.0-rc1, CUDA 8.0 - 11.0, cuDNN 5.1.10 - 8.0.1.13
 
 Minimum build system requirements for the above configurations:
 
@@ -407,15 +408,15 @@ Testing Time: 3.28s
 
 *Tested configurations:*
 
-|    **LLVM**     |  **CUDA**   |      **cuDNN**      | **Visual Studio (latest)**| **cmake** | **Python** |
-|:---------------:|------------:|--------------------:|--------------------------:|----------:|-----------:|
-| 5.0.0 - 5.0.2   | 8.0         | 5.1.10   - 7.1.4.18 | 2017.15.5.2               | 3.5.1     | 3.6.4      |
-| 6.0.0 - 6.0.1   | 9.0         | 7.0.5.15 - 7.6.5.32 | 2017.15.5.5               | 3.6.0     | 3.7.2      |
-| 7.0.0 - 7.1.0   | 9.2         | 7.6.5.32            | 2017.15.9.11              | 3.13.3    | 3.7.3      |
-| 8.0.0 - 8.0.1   | 10.0        | 7.6.5.32            | 2017.15.9.15              | 3.14.2    | 3.7.4      |
-| 9.0.0 - 9.0.1   | 10.1        | 7.6.5.32            | 2017.15.9.20, 2019.16.4.5 | 3.16.4    | 3.8.0      |
-| 10.0.0 - 10.0.1 | 10.0 - 11.0 | 7.6.5.32 - 8.0.1.13 | 2017.15.9.25, 2019.16.6.4 | 3.18.0    | 3.8.4      |
-| 12.0.0git       | 10.0 - 11.0 | 7.6.5.32 - 8.0.1.13 | 2017.15.9.25, 2019.16.6.4 | 3.18.0    | 3.8.4      |
+|      **LLVM**       |  **CUDA**   |      **cuDNN**      | **Visual Studio (latest)**| **cmake** | **Python** |
+|:-------------------:|------------:|--------------------:|--------------------------:|----------:|-----------:|
+| 5.0.0 - 5.0.2       | 8.0         | 5.1.10   - 7.1.4.18 | 2017.15.5.2               | 3.5.1     | 3.6.4      |
+| 6.0.0 - 6.0.1       | 9.0         | 7.0.5.15 - 7.6.5.32 | 2017.15.5.5               | 3.6.0     | 3.7.2      |
+| 7.0.0 - 7.1.0       | 9.2         | 7.6.5.32            | 2017.15.9.11              | 3.13.3    | 3.7.3      |
+| 8.0.0 - 8.0.1       | 10.0        | 7.6.5.32            | 2017.15.9.15              | 3.14.2    | 3.7.4      |
+| 9.0.0 - 9.0.1       | 10.1        | 7.6.5.32            | 2017.15.9.20, 2019.16.4.5 | 3.16.4    | 3.8.0      |
+| 10.0.0 - 11.0.0-rc1 | 10.0 - 11.0 | 7.6.5.32 - 8.0.1.13 | 2017.15.9.25, 2019.16.6.5 | 3.18.0    | 3.8.5      |
+| 12.0.0git           | 10.0 - 11.0 | 7.6.5.32 - 8.0.1.13 | 2017.15.9.25, 2019.16.6.5 | 3.18.0    | 3.8.5      |
 
 *Building with testing support by `Visual Studio 16 2019` on `Windows 10`:*
 
