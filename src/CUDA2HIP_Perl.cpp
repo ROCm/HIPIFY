@@ -459,7 +459,7 @@ namespace perl {
     *streamPtr.get() << tab_5 << "$line_num++;" << endl;
     *streamPtr.get() << tab_5 << "# Remove any whitelisted words" << endl;
     *streamPtr.get() << tab_5 << foreach << "$w (@whitelist) {" << endl;
-    *streamPtr.get() << tab_6 << "s/\\b$w\\b/ZAP/" << endl_tab_5 << "}" << endl;
+    *streamPtr.get() << tab_6 << "redo if s/\\b$w\\b/ZAP/" << endl_tab_5 << "}" << endl;
     *streamPtr.get() << tab_5 << my << "$tag;" << endl;
     *streamPtr.get() << tab_5 << "if ((/(\\bcuda[A-Z]\\w+)/) or (/<<<.*>>>/)) {" << endl;
     *streamPtr.get() << tab_6 << "# Flag any remaining code that look like cuda API calls: may want to add these to hipify" << endl;
