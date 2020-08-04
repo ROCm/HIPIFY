@@ -5412,7 +5412,7 @@ while (@ARGV) {
                     $line_num++;
                     # Remove any whitelisted words
                     foreach $w (@whitelist) {
-                        s/\b$w\b/ZAP/
+                        redo if s/\b$w\b/ZAP/
                     }
                     my $tag;
                     if ((/(\bcuda[A-Z]\w+)/) or (/<<<.*>>>/)) {
