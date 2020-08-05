@@ -299,13 +299,13 @@ namespace perl {
     sDeprecated << endl << sub << "warnDeprecatedFunctions" << " {" << endl << sCommon.str();
     sUnsupported << endl << sub << "warnUnsupportedFunctions" << " {" << endl << sCommon.str();
     unsigned int countDeprecated = 0, countUnsupported = 0;
-    for (auto &ma : CUDA_RENAMES_MAP()) {
-        if (Statistics::isDeprecated(ma.second)) {
-            sDeprecated << (countDeprecated ? ",\n" : "") << tab_2 << "\"" << ma.first.str() << "\"";
+    for (auto ma = CUDA_RENAMES_MAP().rbegin(); ma != CUDA_RENAMES_MAP().rend(); ++ma) {
+        if (Statistics::isDeprecated(ma->second)) {
+            sDeprecated << (countDeprecated ? ",\n" : "") << tab_2 << "\"" << ma->first.str() << "\"";
             countDeprecated++;
         }
-        if (Statistics::isUnsupported(ma.second)) {
-            sUnsupported << (countUnsupported ? ",\n" : "") << tab_2 << "\"" << ma.first.str() << "\"";
+        if (Statistics::isUnsupported(ma->second)) {
+            sUnsupported << (countUnsupported ? ",\n" : "") << tab_2 << "\"" << ma->first.str() << "\"";
             countUnsupported++;
         }
     }
@@ -330,9 +330,9 @@ namespace perl {
     unsigned int countSupported = 0;
     stringstream sSupported;
     stringstream sUnsupported;
-    for (auto &ma : CUDA_DEVICE_FUNC_MAP) {
-      bool isUnsupported = Statistics::isUnsupported(ma.second);
-      (isUnsupported ? sUnsupported : sSupported) << ((isUnsupported && countUnsupported) || (!isUnsupported && countSupported) ? ",\n" : "") << tab_2 << "\"" << ma.first.str() << "\"";
+    for (auto ma = CUDA_DEVICE_FUNC_MAP.rbegin(); ma != CUDA_DEVICE_FUNC_MAP.rend(); ++ma) {
+      bool isUnsupported = Statistics::isUnsupported(ma->second);
+      (isUnsupported ? sUnsupported : sSupported) << ((isUnsupported && countUnsupported) || (!isUnsupported && countSupported) ? ",\n" : "") << tab_2 << "\"" << ma->first.str() << "\"";
       if (isUnsupported) countUnsupported++;
       else countSupported++;
     }
