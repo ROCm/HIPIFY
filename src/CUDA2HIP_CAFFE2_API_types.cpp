@@ -23,7 +23,7 @@ THE SOFTWARE.
 #include "CUDA2HIP.h"
 
 // Map of all types
-const std::map<llvm::StringRef, hipCounter> CUDA_CAFFE2_TYPE_NAME_MAP{
+const std::map<llvm::StringRef, hipCounter> CUDA_CAFFE2_TYPE_NAME_MAP {
 
   // 5. Defines
   {"REGISTER_CUDA_OPERATOR",                                  {"REGISTER_HIP_OPERATOR",                                        "", CONV_DEFINE, API_CAFFE2}},

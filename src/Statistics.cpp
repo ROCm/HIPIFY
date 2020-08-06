@@ -141,26 +141,20 @@ namespace {
 
 template<typename ST, typename ST2>
 void conditionalPrint(ST *stream1,
-                      ST2* stream2,
-                      const std::string& s1,
-                      const std::string& s2) {
-  if (stream1) {
-    *stream1 << s1;
-  }
-  if (stream2) {
-    *stream2 << s2;
-  }
+                      ST2 *stream2,
+                      const std::string &s1,
+                      const std::string &s2) {
+  if (stream1) *stream1 << s1;
+  if (stream2) *stream2 << s2;
 }
 
 // Print a named stat value to both the terminal and the CSV file.
 template<typename T>
-void printStat(std::ostream *csv, llvm::raw_ostream* printOut, const std::string &name, T value) {
-  if (printOut) {
+void printStat(std::ostream *csv, llvm::raw_ostream *printOut, const std::string &name, T value) {
+  if (printOut)
     *printOut << "  " << name << ": " << value << "\n";
-  }
-  if (csv) {
+  if (csv)
     *csv << name << ";" << value << "\n";
-  }
 }
 
 } // Anonymous namespace
@@ -172,26 +166,22 @@ void StatCounter::incrementCounter(const hipCounter &counter, const std::string 
 }
 
 void StatCounter::add(const StatCounter &other) {
-  for (const auto &p : other.counters) {
+  for (const auto &p : other.counters)
     counters[p.first] += p.second;
-  }
-  for (int i = 0; i < NUM_API_TYPES; ++i) {
+  for (int i = 0; i < NUM_API_TYPES; ++i)
     apiCounters[i] += other.apiCounters[i];
-  }
-  for (int i = 0; i < NUM_CONV_TYPES; ++i) {
+  for (int i = 0; i < NUM_CONV_TYPES; ++i)
     convTypeCounters[i] += other.convTypeCounters[i];
-  }
 }
 
 int StatCounter::getConvSum() {
   int acc = 0;
-  for (const int &i : convTypeCounters) {
+  for (const int &i : convTypeCounters)
     acc += i;
-  }
   return acc;
 }
 
-void StatCounter::print(std::ostream* csv, llvm::raw_ostream* printOut, const std::string &prefix) {
+void StatCounter::print(std::ostream *csv, llvm::raw_ostream *printOut, const std::string &prefix) {
   for (int i = 0; i < NUM_CONV_TYPES; ++i) {
     if (convTypeCounters[i] > 0) {
       conditionalPrint(csv, printOut, "\nCUDA ref type;Count\n", "[HIPIFY] info: " + prefix + " refs by type:\n");
@@ -254,12 +244,8 @@ void Statistics::add(const Statistics &other) {
   totalBytes += other.totalBytes;
   touchedLines += other.touchedLines;
   totalLines += other.totalLines;
-  if (other.hasErrors && !hasErrors) {
-    hasErrors = true;
-  }
-  if (startTime > other.startTime) {
-    startTime = other.startTime;
-  }
+  if (other.hasErrors && !hasErrors) hasErrors = true;
+  if (startTime > other.startTime)   startTime = other.startTime;
 }
 
 void Statistics::lineTouched(int lineNumber) {
@@ -277,7 +263,7 @@ void Statistics::markCompletion() {
 
 ///////// Output functions //////////
 
-void Statistics::print(std::ostream* csv, llvm::raw_ostream* printOut, bool skipHeader) {
+void Statistics::print(std::ostream *csv, llvm::raw_ostream *printOut, bool skipHeader) {
   if (!skipHeader) {
     std::string str = "file \'" + fileName + "\' statistics:\n";
     conditionalPrint(csv, printOut, "\n" + str, "\n[HIPIFY] info: " + str);
@@ -308,7 +294,7 @@ void Statistics::print(std::ostream* csv, llvm::raw_ostream* printOut, bool skip
   unsupported.print(csv, printOut, "UNCONVERTED");
 }
 
-void Statistics::printAggregate(std::ostream *csv, llvm::raw_ostream* printOut) {
+void Statistics::printAggregate(std::ostream *csv, llvm::raw_ostream *printOut) {
   Statistics globalStats = getAggregate();
   // A file is considered "converted" if we made any changes to it.
   int convertedFiles = 0;
@@ -358,7 +344,7 @@ bool Statistics::isRocUnsupported(const hipCounter &counter) {
   return ROC_UNSUPPORTED == (counter.supportDegree & ROC_UNSUPPORTED);
 }
 
-bool Statistics::isDeprecated(const hipCounter& counter) {
+bool Statistics::isDeprecated(const hipCounter &counter) {
   return DEPRECATED == (counter.supportDegree & DEPRECATED);
 }
 
@@ -374,4 +360,4 @@ bool Statistics::isUnsupported(const hipCounter &counter) {
 }
 
 std::map<std::string, Statistics> Statistics::stats = {};
-Statistics* Statistics::currentStatistics = nullptr;
+Statistics *Statistics::currentStatistics = nullptr;

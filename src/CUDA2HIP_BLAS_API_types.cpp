@@ -23,7 +23,7 @@ THE SOFTWARE.
 #include "CUDA2HIP.h"
 
 // Map of all functions
-const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP{
+const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP {
   // Blas defines
   {"CUBLAS_VER_MAJOR",              {"HIPBLAS_VER_MAJOR",                "", CONV_DEFINE, API_BLAS, HIP_UNSUPPORTED}},
   {"CUBLAS_VER_MINOR",              {"HIPBLAS_VER_MINOR",                "", CONV_DEFINE, API_BLAS, HIP_UNSUPPORTED}},

@@ -185,10 +185,9 @@ int main(int argc, const char **argv) {
     if (it+1 != new_argv.end()) sCompilationDatabaseDir = *(it+1);
     else bNoCompilationDatabaseDir = true;
   } else {
-    for (auto& s : new_argv) {
+    for (auto &s : new_argv) {
       std::string str = std::string(s);
-      size_t found = str.find("-p=");
-      if (found != std::string::npos) {
+      if (str.find("-p=") != std::string::npos) {
         bCompilationDatabase = true;
         sCompilationDatabaseDir = str.substr(3, str.size()-3);
         if (sCompilationDatabaseDir.empty()) {

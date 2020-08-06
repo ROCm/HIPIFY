@@ -23,7 +23,7 @@ THE SOFTWARE.
 #include "CUDA2HIP.h"
 
 // Maps CUDA header names to HIP header names
-const std::map<llvm::StringRef, hipCounter> CUDA_DEVICE_FUNC_MAP{
+const std::map<llvm::StringRef, hipCounter> CUDA_DEVICE_FUNC_MAP {
   // math functions
   {"abs",             {"", "", CONV_DEVICE_FUNC, API_RUNTIME}},
   {"labs",            {"", "", CONV_DEVICE_FUNC, API_RUNTIME}},

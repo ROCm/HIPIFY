@@ -23,7 +23,7 @@ THE SOFTWARE.
 #include "CUDA2HIP.h"
 
 // Maps the names of CUDA DRIVER API types to the corresponding HIP types
-const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP{
+const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
 
   // 1. Structs
 

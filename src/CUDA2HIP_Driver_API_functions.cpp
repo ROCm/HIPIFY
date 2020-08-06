@@ -23,7 +23,7 @@ THE SOFTWARE.
 #include "CUDA2HIP.h"
 
 // Map of all CUDA Driver API functions
-const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP{
+const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   // 5.2. Error Handling
   // no analogue
   // NOTE: cudaGetErrorName and cuGetErrorName have different signatures
