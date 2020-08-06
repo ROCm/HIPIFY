@@ -23,7 +23,7 @@ THE SOFTWARE.
 #include "CUDA2HIP.h"
 
 // Map of all functions
-const std::map<llvm::StringRef, hipCounter> CUDA_FFT_TYPE_NAME_MAP{
+const std::map<llvm::StringRef, hipCounter> CUDA_FFT_TYPE_NAME_MAP {
 
   // cuFFT defines
   {"CUFFT_FORWARD",                                       {"HIPFFT_FORWARD",                                       "", CONV_NUMERIC_LITERAL, API_DNN}},    // -1

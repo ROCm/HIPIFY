@@ -23,7 +23,7 @@ THE SOFTWARE.
 #include "CUDA2HIP.h"
 
 // Map of all functions
-const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP{
+const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   // cuDNN defines
   {"CUDNN_VERSION",                                       {"HIPDNN_VERSION",                                       "", CONV_NUMERIC_LITERAL, API_DNN}},    //  7000
   {"CUDNN_DIM_MAX",                                       {"HIPDNN_DIM_MAX",                                       "", CONV_NUMERIC_LITERAL, API_DNN, HIP_UNSUPPORTED}},    //  8

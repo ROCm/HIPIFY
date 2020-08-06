@@ -23,7 +23,7 @@ THE SOFTWARE.
 #include "CUDA2HIP.h"
 
 // Maps the names of CUDA Complex API functions to the corresponding HIP functions
-const std::map<llvm::StringRef, hipCounter> CUDA_COMPLEX_FUNCTION_MAP{
+const std::map<llvm::StringRef, hipCounter> CUDA_COMPLEX_FUNCTION_MAP {
   {"cuCrealf",               {"hipCrealf",               "", CONV_COMPLEX, API_COMPLEX}},
   {"cuCimagf",               {"hipCimagf",               "", CONV_COMPLEX, API_COMPLEX}},
   {"make_cuFloatComplex",    {"make_hipFloatComplex",    "", CONV_COMPLEX, API_COMPLEX}},

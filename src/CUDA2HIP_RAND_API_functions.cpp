@@ -23,7 +23,7 @@ THE SOFTWARE.
 #include "CUDA2HIP.h"
 
 // Map of all functions
-const std::map<llvm::StringRef, hipCounter> CUDA_RAND_FUNCTION_MAP{
+const std::map<llvm::StringRef, hipCounter> CUDA_RAND_FUNCTION_MAP {
   // RAND Host functions
   {"curandCreateGenerator",                         {"hiprandCreateGenerator",                         "", CONV_LIB_FUNC, API_RAND}},
   {"curandCreateGeneratorHost",                     {"hiprandCreateGeneratorHost",                     "", CONV_LIB_FUNC, API_RAND}},

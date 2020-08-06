@@ -23,7 +23,7 @@ THE SOFTWARE.
 #include "CUDA2HIP.h"
 
 // Map of all functions
-const std::map<llvm::StringRef, hipCounter> CUDA_FFT_FUNCTION_MAP{
+const std::map<llvm::StringRef, hipCounter> CUDA_FFT_FUNCTION_MAP {
   {"cufftPlan1d",                                         {"hipfftPlan1d",                                         "", CONV_LIB_FUNC, API_FFT}},
   {"cufftPlan2d",                                         {"hipfftPlan2d",                                         "", CONV_LIB_FUNC, API_FFT}},
   {"cufftPlan3d",                                         {"hipfftPlan3d",                                         "", CONV_LIB_FUNC, API_FFT}},

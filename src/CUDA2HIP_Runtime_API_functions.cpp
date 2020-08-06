@@ -23,7 +23,7 @@ THE SOFTWARE.
 #include "CUDA2HIP.h"
 
 // Map of all CUDA Runtime API functions
-const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP{
+const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // 5.1. Device Management
   // no analogue
   {"cudaChooseDevice",                                        {"hipChooseDevice",                                        "", CONV_DEVICE, API_RUNTIME}},

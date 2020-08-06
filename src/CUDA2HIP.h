@@ -78,4 +78,4 @@ extern const std::map<llvm::StringRef, hipCounter> CUDA_CUB_TYPE_NAME_MAP;
   * looking in the lookup table for the type of element they are processing, however, saving
   * a great deal of time.
   */
-const std::map<llvm::StringRef, hipCounter>& CUDA_RENAMES_MAP();
+const std::map<llvm::StringRef, hipCounter> &CUDA_RENAMES_MAP();

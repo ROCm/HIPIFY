@@ -23,7 +23,7 @@ THE SOFTWARE.
 #include "CUDA2HIP.h"
 
 // Map of all functions
-const std::map<llvm::StringRef, hipCounter> CUDA_RAND_TYPE_NAME_MAP{
+const std::map<llvm::StringRef, hipCounter> CUDA_RAND_TYPE_NAME_MAP {
   // RAND defines
   {"CURAND_VER_MAJOR",              {"HIPRAND_VER_MAJOR",              "", CONV_DEFINE, API_RAND, HIP_UNSUPPORTED}},
   {"CURAND_VER_MINOR",              {"HIPRAND_VER_MINOR",              "", CONV_DEFINE, API_RAND, HIP_UNSUPPORTED}},

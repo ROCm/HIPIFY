@@ -292,7 +292,7 @@ namespace perl {
     *streamPtr.get() << tab << return_k << "}" << endl;
   }
 
-  void generateDeprecatedAndUnsupportedFunctions(unique_ptr<ostream>& streamPtr) {
+  void generateDeprecatedAndUnsupportedFunctions(unique_ptr<ostream> &streamPtr) {
     stringstream sDeprecated, sUnsupported, sCommon;
     sCommon << tab << my << "$line_num = shift;" << endl;
     sCommon << tab << my_k << "\n" << tab << foreach_func;

@@ -23,6 +23,6 @@ THE SOFTWARE.
 #include "CUDA2HIP.h"
 
 // Maps the names of CUDA SPARSE API functions to the corresponding HIP functions
-const std::map<llvm::StringRef, hipCounter> CUDA_CAFFE2_FUNCTION_MAP{
+const std::map<llvm::StringRef, hipCounter> CUDA_CAFFE2_FUNCTION_MAP {
   {"cuda_stream",                                   {"hip_stream",                               "", CONV_LIB_FUNC, API_CAFFE2}},
 };

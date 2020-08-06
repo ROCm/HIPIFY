@@ -23,7 +23,7 @@ THE SOFTWARE.
 #include "CUDA2HIP.h"
 
 // Maps CUDA header names to HIP header names
-const std::map <llvm::StringRef, hipCounter> CUDA_INCLUDE_MAP{
+const std::map <llvm::StringRef, hipCounter> CUDA_INCLUDE_MAP {
   // CUDA includes
   {"cuda.h",                    {"hip/hip_runtime.h",            "", CONV_INCLUDE_CUDA_MAIN_H, API_DRIVER}},
   {"cuda_runtime.h",            {"hip/hip_runtime.h",            "", CONV_INCLUDE_CUDA_MAIN_H, API_RUNTIME}},
@@ -82,11 +82,10 @@ const std::map <llvm::StringRef, hipCounter> CUDA_INCLUDE_MAP{
   {"caffe2/core/common_cudnn.h",                            {"caffe2/core/hip/common_miopen.h",                       "", CONV_INCLUDE, API_CAFFE2}},
 };
 
-const std::map<llvm::StringRef, hipCounter>& CUDA_RENAMES_MAP() {
+const std::map<llvm::StringRef, hipCounter> &CUDA_RENAMES_MAP() {
   static std::map<llvm::StringRef, hipCounter> ret;
-  if (!ret.empty()) {
+  if (!ret.empty())
     return ret;
-  }
   // First run, so compute the union map.
   ret.insert(CUDA_DRIVER_TYPE_NAME_MAP.begin(), CUDA_DRIVER_TYPE_NAME_MAP.end());
   ret.insert(CUDA_DRIVER_FUNCTION_MAP.begin(), CUDA_DRIVER_FUNCTION_MAP.end());

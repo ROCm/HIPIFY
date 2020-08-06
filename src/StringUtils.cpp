@@ -27,23 +27,19 @@ THE SOFTWARE.
 using namespace llvm;
 
 llvm::StringRef unquoteStr(llvm::StringRef s) {
-  if (s.size() > 1 && s.front() == '"' && s.back() == '"') {
+  if (s.size() > 1 && s.front() == '"' && s.back() == '"')
     return s.substr(1, s.size() - 2);
-  }
   return s;
 }
 
 void removePrefixIfPresent(std::string &s, const std::string &prefix) {
-  if (s.find(prefix) != 0) {
-    return;
-  }
+  if (s.find(prefix) != 0) return;
   s.erase(0, prefix.size());
 }
 
 std::string getAbsoluteFilePath(const std::string &sFile, std::error_code &EC) {
-  if (sFile.empty()) {
+  if (sFile.empty())
     return sFile;
-  }
   if (!sys::fs::exists(sFile)) {
     llvm::errs() << "\n" << sHipify << sError << "source file: " << sFile << " doesn't exist\n";
     EC = std::error_code(static_cast<int>(std::errc::no_such_file_or_directory), std::generic_category());
@@ -61,9 +57,8 @@ std::string getAbsoluteFilePath(const std::string &sFile, std::error_code &EC) {
 
 std::string getAbsoluteDirectoryPath(const std::string &sDir, std::error_code &EC,
   const std::string &sDirType, bool bCreateDir) {
-  if (sDir.empty()) {
+  if (sDir.empty())
     return sDir;
-  }
   EC = std::error_code();
   SmallString<256> dirAbsPath;
   if (sys::fs::exists(sDir)) {
@@ -72,8 +67,7 @@ std::string getAbsoluteDirectoryPath(const std::string &sDir, std::error_code &E
       EC = std::error_code(static_cast<int>(std::errc::not_a_directory), std::generic_category());
       return "";
     }
-  }
-  else {
+  } else {
     if (bCreateDir) {
       EC = sys::fs::create_directory(sDir);
       if (EC) {
