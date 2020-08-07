@@ -915,6 +915,7 @@ sub simpleSubstitutions {
     $ft{'library'} += s/\bcufftExecR2C\b/hipfftExecR2C/g;
     $ft{'library'} += s/\bcufftExecZ2D\b/hipfftExecZ2D/g;
     $ft{'library'} += s/\bcufftExecZ2Z\b/hipfftExecZ2Z/g;
+    $ft{'library'} += s/\bcufftGetProperty\b/hipfftGetProperty/g;
     $ft{'library'} += s/\bcufftGetSize\b/hipfftGetSize/g;
     $ft{'library'} += s/\bcufftGetSize1d\b/hipfftGetSize1d/g;
     $ft{'library'} += s/\bcufftGetSize2d\b/hipfftGetSize2d/g;
@@ -3434,7 +3435,6 @@ sub warnUnsupportedFunctions {
         "curandDirectionVectors64_t",
         "curandDirectionVectorSet_t",
         "curandDirectionVectorSet",
-        "cufftGetProperty",
         "cufftCompatibility_t",
         "cufftCompatibility",
         "cudnnWgradMode_t",

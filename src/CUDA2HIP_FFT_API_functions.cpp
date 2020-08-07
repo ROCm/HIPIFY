@@ -55,5 +55,5 @@ const std::map<llvm::StringRef, hipCounter> CUDA_FFT_FUNCTION_MAP {
   {"cufftSetStream",                                      {"hipfftSetStream",                                      "", CONV_LIB_FUNC, API_FFT}},
   {"cufftDestroy",                                        {"hipfftDestroy",                                        "", CONV_LIB_FUNC, API_FFT}},
   {"cufftGetVersion",                                     {"hipfftGetVersion",                                     "", CONV_LIB_FUNC, API_FFT}},
-  {"cufftGetProperty",                                    {"hipfftGetProperty",                                    "", CONV_LIB_FUNC, API_FFT, HIP_UNSUPPORTED}},
+  {"cufftGetProperty",                                    {"hipfftGetProperty",                                    "", CONV_LIB_FUNC, API_FFT}},
 };
