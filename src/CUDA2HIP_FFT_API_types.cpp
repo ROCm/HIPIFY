@@ -69,3 +69,6 @@ const std::map<llvm::StringRef, hipCounter> CUDA_FFT_TYPE_NAME_MAP {
   {"cufftDoubleComplex",                                  {"hipfftDoubleComplex",                                  "", CONV_TYPE, API_FFT}},
   {"cufftHandle",                                         {"hipfftHandle",                                         "", CONV_TYPE, API_FFT}},
 };
+
+const std::map<llvm::StringRef, cudaAPIversions> CUDA_FFT_TYPE_NAME_VER_MAP {
+};

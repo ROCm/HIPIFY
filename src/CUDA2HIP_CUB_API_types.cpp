@@ -26,3 +26,6 @@ THE SOFTWARE.
 const std::map<llvm::StringRef, hipCounter> CUDA_CUB_TYPE_NAME_MAP {
   {"cub",  {"hipcub",  "", CONV_TYPE, API_CUB}},
 };
+
+const std::map<llvm::StringRef, cudaAPIversions> CUDA_CUB_TYPE_NAME_VER_MAP {
+};

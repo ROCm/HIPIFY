@@ -389,3 +389,6 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"cudnnFusedOpsPlanStruct",                             {"hipdnnFusedOpsPlanStruct",                             "", CONV_TYPE, API_DNN, HIP_UNSUPPORTED}},
   {"cudnnFusedOpsPlan_t",                                 {"hipdnnFusedOpsPlan_t",                                 "", CONV_TYPE, API_DNN, HIP_UNSUPPORTED}},
 };
+
+const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_TYPE_NAME_VER_MAP {
+};

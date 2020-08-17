@@ -185,3 +185,6 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_TYPE_NAME_MAP {
   {"CUSPARSE_VER_BUILD",                        {"HIPSPARSE_VER_BUILD",                        "", CONV_DEFINE, API_SPARSE, HIP_UNSUPPORTED}},
   {"CUSPARSE_VERSION",                          {"HIPSPARSE_VERSION",                          "", CONV_DEFINE, API_SPARSE, HIP_UNSUPPORTED}},
 };
+
+const std::map<llvm::StringRef, cudaAPIversions> CUDA_SPARSE_TYPE_NAME_VER_MAP {
+};

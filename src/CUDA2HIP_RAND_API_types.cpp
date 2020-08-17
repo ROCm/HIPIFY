@@ -139,3 +139,6 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RAND_TYPE_NAME_MAP {
   {"CURAND_DEFINITION",                             {"HIPRAND_DEFINITION",                             "", CONV_NUMERIC_LITERAL, API_RAND, HIP_UNSUPPORTED}},
   {"CURAND_POISSON",                                {"HIPRAND_POISSON",                                "", CONV_NUMERIC_LITERAL, API_RAND, HIP_UNSUPPORTED}},
 };
+
+const std::map<llvm::StringRef, cudaAPIversions> CUDA_RAND_TYPE_NAME_VER_MAP {
+};

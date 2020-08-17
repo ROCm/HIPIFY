@@ -756,3 +756,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   {"cusparseSpMV",                                {"hipsparseSpMV",                                "", CONV_LIB_FUNC, API_SPARSE, HIP_UNSUPPORTED}},
   {"cusparseSpMV_bufferSize",                     {"hipsparseSpMV_bufferSize",                     "", CONV_LIB_FUNC, API_SPARSE, HIP_UNSUPPORTED}},
 };
+
+const std::map<llvm::StringRef, cudaAPIversions> CUDA_SPARSE_FUNCTION_VER_MAP {
+  {"cusparseCreateSolveAnalysisInfo",             {CUDA_70, CUDA_102, CUDA_110}},
+};
