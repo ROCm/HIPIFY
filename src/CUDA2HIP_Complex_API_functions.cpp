@@ -48,3 +48,6 @@ const std::map<llvm::StringRef, hipCounter> CUDA_COMPLEX_FUNCTION_MAP {
   {"cuCfmaf",                {"hipCfmaf",                "", CONV_COMPLEX, API_COMPLEX}},
   {"cuCfma",                 {"hipCfma",                 "", CONV_COMPLEX, API_COMPLEX}},
 };
+
+const std::map<llvm::StringRef, cudaAPIversions> CUDA_COMPLEX_FUNCTION_VER_MAP {
+};

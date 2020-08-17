@@ -57,3 +57,6 @@ const std::map<llvm::StringRef, hipCounter> CUDA_FFT_FUNCTION_MAP {
   {"cufftGetVersion",                                     {"hipfftGetVersion",                                     "", CONV_LIB_FUNC, API_FFT}},
   {"cufftGetProperty",                                    {"hipfftGetProperty",                                    "", CONV_LIB_FUNC, API_FFT}},
 };
+
+const std::map<llvm::StringRef, cudaAPIversions> CUDA_FFT_FUNCTION_VER_MAP {
+};

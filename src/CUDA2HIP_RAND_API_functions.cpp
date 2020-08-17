@@ -84,3 +84,6 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RAND_FUNCTION_MAP {
   {"curand_Philox4x32_10",                          {"hiprand_Philox4x32_10",                          "", CONV_LIB_DEVICE_FUNC, API_RAND, HIP_UNSUPPORTED}},
   // unchanged function names: skipahead, skipahead_sequence, skipahead_subsequence
 };
+
+const std::map<llvm::StringRef, cudaAPIversions> CUDA_RAND_FUNCTION_VER_MAP {
+};

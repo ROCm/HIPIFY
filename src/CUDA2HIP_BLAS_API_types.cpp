@@ -172,3 +172,6 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP {
   {"CUBLAS_COMPUTE_32I",             {"HIPBLAS_COMPUTE_32I",             "",  CONV_NUMERIC_LITERAL, API_BLAS, UNSUPPORTED}}, // 72
   {"CUBLAS_COMPUTE_32I_PEDANTIC",    {"HIPBLAS_COMPUTE_32I_PEDANTIC",    "",  CONV_NUMERIC_LITERAL, API_BLAS, UNSUPPORTED}}, // 73
 };
+
+const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_TYPE_NAME_VER_MAP {
+};

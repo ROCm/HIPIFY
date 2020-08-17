@@ -358,6 +358,34 @@ bool Statistics::isUnsupported(const hipCounter &counter) {
     return Statistics::isHipUnsupported(counter);
   }
 }
+std::string Statistics::getCudaVersion(const cudaVersions& ver) {
+  switch (ver) {
+    case CUDA_0:
+    default:
+      return "";
+    case CUDA_70:
+      return "7.0";
+    case CUDA_75:
+      return "7.5";
+    case CUDA_80:
+      return "8.0";
+    case CUDA_90:
+      return "9.0";
+    case CUDA_91:
+      return "9.1";
+    case CUDA_92:
+      return "9.2";
+    case CUDA_100:
+      return "10.0";
+    case CUDA_101:
+      return "10.1";
+    case CUDA_102:
+      return "10.2";
+    case CUDA_110:
+      return "11.0";
+  }
+  return "";
+}
 
 std::map<std::string, Statistics> Statistics::stats = {};
 Statistics *Statistics::currentStatistics = nullptr;

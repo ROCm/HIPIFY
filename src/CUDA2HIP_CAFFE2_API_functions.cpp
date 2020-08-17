@@ -26,3 +26,6 @@ THE SOFTWARE.
 const std::map<llvm::StringRef, hipCounter> CUDA_CAFFE2_FUNCTION_MAP {
   {"cuda_stream",                                   {"hip_stream",                               "", CONV_LIB_FUNC, API_CAFFE2}},
 };
+
+const std::map<llvm::StringRef, cudaAPIversions> CUDA_CAFFE2_FUNCTION_VER_MAP {
+};

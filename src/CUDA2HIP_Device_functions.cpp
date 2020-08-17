@@ -614,3 +614,6 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DEVICE_FUNC_MAP {
   {"atomicXor",         {"", "", CONV_DEVICE_FUNC, API_RUNTIME}},
   {"atomicCAS",         {"", "", CONV_DEVICE_FUNC, API_RUNTIME}},
 };
+
+const std::map<llvm::StringRef, cudaAPIversions> CUDA_DEVICE_FUNC_VER_MAP {
+};

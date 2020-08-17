@@ -32,3 +32,6 @@ const std::map<llvm::StringRef, hipCounter> CUDA_CAFFE2_TYPE_NAME_MAP {
   // 6. Classes
   {"CUDAContext",                                             {"HIPContext",                                                   "", CONV_TYPE, API_CAFFE2}},
 };
+
+const std::map<llvm::StringRef, cudaAPIversions> CUDA_CAFFE2_TYPE_NAME_VER_MAP {
+};

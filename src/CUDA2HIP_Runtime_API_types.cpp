@@ -1479,3 +1479,6 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CU_STREAM_PER_THREAD ((CUstream)0x2)
   {"cudaStreamPerThread",                                              {"hipStreamPerThread",                                       "", CONV_DEFINE, API_RUNTIME, HIP_UNSUPPORTED}}, // ((cudaStream_t)0x2)
 };
+
+const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_TYPE_NAME_VER_MAP {
+};

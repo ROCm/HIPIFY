@@ -297,3 +297,6 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_FUNCTION_MAP {
   {"cudnnMakeFusedOpsPlan",                               {"hipdnnMakeFusedOpsPlan",                               "", CONV_LIB_FUNC, API_DNN, HIP_UNSUPPORTED}},
   {"cudnnFusedOpsExecute",                                {"hipdnnFusedOpsExecute",                                "", CONV_LIB_FUNC, API_DNN, HIP_UNSUPPORTED}},
 };
+
+const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_FUNCTION_VER_MAP {
+};

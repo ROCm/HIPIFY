@@ -147,7 +147,32 @@ enum SupportDegree {
   HIP_UNSUPPORTED = 0x1,
   ROC_UNSUPPORTED = 0x2,
   UNSUPPORTED = 0x4,
-  DEPRECATED = 0x8
+  DEPRECATED = 0x8,
+  HIP_DEPRECATED = 0x10,
+  REMOVED = 0x20,
+  HIP_REMOVED = 0x40,
+};
+constexpr int CUDA_DEPRECATED = (int) SupportDegree::DEPRECATED;
+constexpr int CUDA_REMOVED = (int) SupportDegree::REMOVED;
+
+enum cudaVersions {
+  CUDA_0 = 0, // Unknown version
+  CUDA_70 = 7000,
+  CUDA_75 = 7050,
+  CUDA_80 = 8000,
+  CUDA_90 = 9000,
+  CUDA_91 = 9010,
+  CUDA_92 = 9020,
+  CUDA_100 = 10000,
+  CUDA_101 = 10010,
+  CUDA_102 = 10020,
+  CUDA_110 = 11000,
+};
+
+struct cudaAPIversions {
+  cudaVersions appeared = cudaVersions::CUDA_70;
+  cudaVersions deprecated = cudaVersions::CUDA_0;
+  cudaVersions removed = cudaVersions::CUDA_0;
 };
 
 // The names of various fields in in the statistics reports.
@@ -248,6 +273,8 @@ public:
     * based on counter's API_TYPE and option TranslateToRoc.
     */
   static bool isUnsupported(const hipCounter &counter);
+  //
+  static std::string getCudaVersion(const cudaVersions &ver);
   // Set this flag in case of hipification errors
   bool hasErrors = false;
 };
