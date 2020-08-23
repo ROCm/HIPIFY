@@ -24,8 +24,13 @@ THE SOFTWARE.
 
 // Maps the names of CUDA SPARSE API functions to the corresponding HIP functions
 const std::map<llvm::StringRef, hipCounter> CUDA_CAFFE2_FUNCTION_MAP {
-  {"cuda_stream",                                   {"hip_stream",                               "", CONV_LIB_FUNC, API_CAFFE2}},
+  {"cuda_stream",                                   {"hip_stream",                               "", CONV_LIB_FUNC, API_CAFFE2, 2}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_CAFFE2_FUNCTION_VER_MAP {
+};
+
+const std::map<unsigned int, llvm::StringRef> CUDA_CAFFE2_API_SECTION_MAP{
+  {1, "CAFFE2 Data types"},
+  {2, "CAFFE2 Functions"},
 };

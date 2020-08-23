@@ -186,6 +186,7 @@ struct hipCounter {
   llvm::StringRef rocName;
   ConvTypes type;
   ApiTypes apiType;
+  unsigned int apiSection;
   unsigned int supportDegree;
 };
 

@@ -131,4 +131,5 @@ const std::map<llvm::StringRef, cudaAPIversions>& CUDA_VERSIONS_MAP() {
   ret.insert(CUDA_SPARSE_FUNCTION_VER_MAP.begin(), CUDA_SPARSE_FUNCTION_VER_MAP.end());
   ret.insert(CUDA_CAFFE2_TYPE_NAME_VER_MAP.begin(), CUDA_CAFFE2_TYPE_NAME_VER_MAP.end());
   ret.insert(CUDA_CAFFE2_FUNCTION_VER_MAP.begin(), CUDA_CAFFE2_FUNCTION_VER_MAP.end());
+  return ret;
 };

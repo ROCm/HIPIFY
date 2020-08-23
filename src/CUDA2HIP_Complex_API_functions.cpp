@@ -24,30 +24,35 @@ THE SOFTWARE.
 
 // Maps the names of CUDA Complex API functions to the corresponding HIP functions
 const std::map<llvm::StringRef, hipCounter> CUDA_COMPLEX_FUNCTION_MAP {
-  {"cuCrealf",               {"hipCrealf",               "", CONV_COMPLEX, API_COMPLEX}},
-  {"cuCimagf",               {"hipCimagf",               "", CONV_COMPLEX, API_COMPLEX}},
-  {"make_cuFloatComplex",    {"make_hipFloatComplex",    "", CONV_COMPLEX, API_COMPLEX}},
-  {"cuConjf",                {"hipConjf",                "", CONV_COMPLEX, API_COMPLEX}},
-  {"cuCaddf",                {"hipCaddf",                "", CONV_COMPLEX, API_COMPLEX}},
-  {"cuCsubf",                {"hipCsubf",                "", CONV_COMPLEX, API_COMPLEX}},
-  {"cuCmulf",                {"hipCmulf",                "", CONV_COMPLEX, API_COMPLEX}},
-  {"cuCdivf",                {"hipCdivf",                "", CONV_COMPLEX, API_COMPLEX}},
-  {"cuCabsf",                {"hipCabsf",                "", CONV_COMPLEX, API_COMPLEX}},
-  {"cuCreal",                {"hipCreal",                "", CONV_COMPLEX, API_COMPLEX}},
-  {"cuCimag",                {"hipCimag",                "", CONV_COMPLEX, API_COMPLEX}},
-  {"make_cuDoubleComplex",   {"make_hipDoubleComplex",   "", CONV_COMPLEX, API_COMPLEX}},
-  {"cuConj",                 {"hipConj",                 "", CONV_COMPLEX, API_COMPLEX}},
-  {"cuCadd",                 {"hipCadd",                 "", CONV_COMPLEX, API_COMPLEX}},
-  {"cuCsub",                 {"hipCsub",                 "", CONV_COMPLEX, API_COMPLEX}},
-  {"cuCmul",                 {"hipCmul",                 "", CONV_COMPLEX, API_COMPLEX}},
-  {"cuCdiv",                 {"hipCdiv",                 "", CONV_COMPLEX, API_COMPLEX}},
-  {"cuCabs",                 {"hipCabs",                 "", CONV_COMPLEX, API_COMPLEX}},
-  {"make_cuComplex",         {"make_hipComplex",         "", CONV_COMPLEX, API_COMPLEX}},
-  {"cuComplexFloatToDouble", {"hipComplexFloatToDouble", "", CONV_COMPLEX, API_COMPLEX}},
-  {"cuComplexDoubleToFloat", {"hipComplexDoubleToFloat", "", CONV_COMPLEX, API_COMPLEX}},
-  {"cuCfmaf",                {"hipCfmaf",                "", CONV_COMPLEX, API_COMPLEX}},
-  {"cuCfma",                 {"hipCfma",                 "", CONV_COMPLEX, API_COMPLEX}},
+  {"cuCrealf",               {"hipCrealf",               "", CONV_COMPLEX, API_COMPLEX, 2}},
+  {"cuCimagf",               {"hipCimagf",               "", CONV_COMPLEX, API_COMPLEX, 2}},
+  {"make_cuFloatComplex",    {"make_hipFloatComplex",    "", CONV_COMPLEX, API_COMPLEX, 2}},
+  {"cuConjf",                {"hipConjf",                "", CONV_COMPLEX, API_COMPLEX, 2}},
+  {"cuCaddf",                {"hipCaddf",                "", CONV_COMPLEX, API_COMPLEX, 2}},
+  {"cuCsubf",                {"hipCsubf",                "", CONV_COMPLEX, API_COMPLEX, 2}},
+  {"cuCmulf",                {"hipCmulf",                "", CONV_COMPLEX, API_COMPLEX, 2}},
+  {"cuCdivf",                {"hipCdivf",                "", CONV_COMPLEX, API_COMPLEX, 2}},
+  {"cuCabsf",                {"hipCabsf",                "", CONV_COMPLEX, API_COMPLEX, 2}},
+  {"cuCreal",                {"hipCreal",                "", CONV_COMPLEX, API_COMPLEX, 2}},
+  {"cuCimag",                {"hipCimag",                "", CONV_COMPLEX, API_COMPLEX, 2}},
+  {"make_cuDoubleComplex",   {"make_hipDoubleComplex",   "", CONV_COMPLEX, API_COMPLEX, 2}},
+  {"cuConj",                 {"hipConj",                 "", CONV_COMPLEX, API_COMPLEX, 2}},
+  {"cuCadd",                 {"hipCadd",                 "", CONV_COMPLEX, API_COMPLEX, 2}},
+  {"cuCsub",                 {"hipCsub",                 "", CONV_COMPLEX, API_COMPLEX, 2}},
+  {"cuCmul",                 {"hipCmul",                 "", CONV_COMPLEX, API_COMPLEX, 2}},
+  {"cuCdiv",                 {"hipCdiv",                 "", CONV_COMPLEX, API_COMPLEX, 2}},
+  {"cuCabs",                 {"hipCabs",                 "", CONV_COMPLEX, API_COMPLEX, 2}},
+  {"make_cuComplex",         {"make_hipComplex",         "", CONV_COMPLEX, API_COMPLEX, 2}},
+  {"cuComplexFloatToDouble", {"hipComplexFloatToDouble", "", CONV_COMPLEX, API_COMPLEX, 2}},
+  {"cuComplexDoubleToFloat", {"hipComplexDoubleToFloat", "", CONV_COMPLEX, API_COMPLEX, 2}},
+  {"cuCfmaf",                {"hipCfmaf",                "", CONV_COMPLEX, API_COMPLEX, 2}},
+  {"cuCfma",                 {"hipCfma",                 "", CONV_COMPLEX, API_COMPLEX, 2}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_COMPLEX_FUNCTION_VER_MAP {
+};
+
+const std::map<unsigned int, llvm::StringRef> CUDA_COMPLEX_API_SECTION_MAP {
+  {1, "cuComplex Data types"},
+  {2, "cuComplex API functions"},
 };
