@@ -26,9 +26,9 @@ THE SOFTWARE.
 const std::map<llvm::StringRef, hipCounter> CUDA_FFT_TYPE_NAME_MAP {
 
   // cuFFT defines
-  {"CUFFT_FORWARD",                                       {"HIPFFT_FORWARD",                                       "", CONV_NUMERIC_LITERAL, API_DNN, 1}},    // -1
-  {"CUFFT_INVERSE",                                       {"HIPFFT_BACKWARD",                                      "", CONV_NUMERIC_LITERAL, API_DNN, 1}},    //  1
-  {"CUFFT_COMPATIBILITY_DEFAULT",                         {"HIPFFT_COMPATIBILITY_DEFAULT",                         "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    //  CUFFT_COMPATIBILITY_FFTW_PADDING
+  {"CUFFT_FORWARD",                                       {"HIPFFT_FORWARD",                                       "", CONV_NUMERIC_LITERAL, API_FFT, 1}},    // -1
+  {"CUFFT_INVERSE",                                       {"HIPFFT_BACKWARD",                                      "", CONV_NUMERIC_LITERAL, API_FFT, 1}},    //  1
+  {"CUFFT_COMPATIBILITY_DEFAULT",                         {"HIPFFT_COMPATIBILITY_DEFAULT",                         "", CONV_NUMERIC_LITERAL, API_FFT, 1, HIP_UNSUPPORTED}},    //  CUFFT_COMPATIBILITY_FFTW_PADDING
 
   // cuFFT enums
   {"cufftResult_t",                                       {"hipfftResult_t",                                       "", CONV_TYPE, API_FFT, 1}},
