@@ -24,8 +24,12 @@ THE SOFTWARE.
 
 // Maps the names of CUDA CUB API types to the corresponding HIP types
 const std::map<llvm::StringRef, hipCounter> CUDA_CUB_TYPE_NAME_MAP {
-  {"cub",  {"hipcub",  "", CONV_TYPE, API_CUB}},
+  {"cub",  {"hipcub",  "", CONV_TYPE, API_CUB, 1}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_CUB_TYPE_NAME_VER_MAP {
+};
+
+const std::map<unsigned int, llvm::StringRef> CUDA_CUB_API_SECTION_MAP {
+  {1, "CUB Data types"},
 };

@@ -26,11 +26,11 @@ THE SOFTWARE.
 const std::map<llvm::StringRef, hipCounter> CUDA_CAFFE2_TYPE_NAME_MAP {
 
   // 5. Defines
-  {"REGISTER_CUDA_OPERATOR",                                  {"REGISTER_HIP_OPERATOR",                                        "", CONV_DEFINE, API_CAFFE2}},
-  {"REGISTER_CUDA_OPERATOR_CREATOR",                          {"REGISTER_HIP_OPERATOR_CREATOR",                                "", CONV_DEFINE, API_CAFFE2}},
+  {"REGISTER_CUDA_OPERATOR",                                  {"REGISTER_HIP_OPERATOR",                                        "", CONV_DEFINE, API_CAFFE2, 1}},
+  {"REGISTER_CUDA_OPERATOR_CREATOR",                          {"REGISTER_HIP_OPERATOR_CREATOR",                                "", CONV_DEFINE, API_CAFFE2, 1}},
 
   // 6. Classes
-  {"CUDAContext",                                             {"HIPContext",                                                   "", CONV_TYPE, API_CAFFE2}},
+  {"CUDAContext",                                             {"HIPContext",                                                   "", CONV_TYPE, API_CAFFE2, 1}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_CAFFE2_TYPE_NAME_VER_MAP {
