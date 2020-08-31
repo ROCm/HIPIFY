@@ -83,6 +83,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_TYPE_NAME_MAP {
   {"cusparseDnVecDescr",                        {"hipsparseDnVecDescr",                        "", CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED}},
   {"cusparseDnVecDescr_t",                      {"hipsparseDnVecDescr_t",                      "", CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED}},
 
+  {"cusparseSpGEMMDescr",                       {"hipsparseSpGEMMDescr",                       "", CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED}},
+  {"cusparseSpGEMMDescr_t",                     {"hipsparseSpGEMMDescr_t",                     "", CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED}},
+
   // 2. Enums
   {"cusparseAction_t",                          {"hipsparseAction_t",                          "", CONV_TYPE, API_SPARSE, 4}},
   {"CUSPARSE_ACTION_SYMBOLIC",                  {"HIPSPARSE_ACTION_SYMBOLIC",                  "", CONV_NUMERIC_LITERAL, API_SPARSE, 4}},
@@ -187,6 +190,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_TYPE_NAME_MAP {
   {"CUSPARSE_INDEX_32I",                        {"HIPSPARSE_INDEX_32I",                        "", CONV_NUMERIC_LITERAL, API_SPARSE, 4, HIP_UNSUPPORTED}},
   {"CUSPARSE_INDEX_64I",                        {"HIPSPARSE_INDEX_64I",                        "", CONV_NUMERIC_LITERAL, API_SPARSE, 4, HIP_UNSUPPORTED}},
 
+  {"cusparseSpGEMMAlg_t",                       {"hipsparseSpGEMMAlg_t",                       "", CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED}},
+  {"CUSPARSE_SPGEMM_DEFAULT",                   {"HIPSPARSE_SPGEMM_DEFAULT",                   "", CONV_NUMERIC_LITERAL, API_SPARSE, 4, HIP_UNSUPPORTED}},
+
   // 3. Defines
   {"CUSPARSE_VER_MAJOR",                        {"HIPSPARSE_VER_MAJOR",                        "", CONV_DEFINE, API_SPARSE, 4, HIP_UNSUPPORTED}},
   {"CUSPARSE_VER_MINOR",                        {"HIPSPARSE_VER_MINOR",                        "", CONV_DEFINE, API_SPARSE, 4, HIP_UNSUPPORTED}},
@@ -261,4 +267,8 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SPARSE_TYPE_NAME_VER_MAP {
   {"CUSPARSE_VER_PATCH",                        {CUDA_102, CUDA_0,   CUDA_0  }},
   {"CUSPARSE_VER_BUILD",                        {CUDA_102, CUDA_0,   CUDA_0  }},
   {"CUSPARSE_VERSION",                          {CUDA_102, CUDA_0,   CUDA_0  }},
+  {"cusparseSpGEMMAlg_t",                       {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"CUSPARSE_SPGEMM_DEFAULT",                   {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"cusparseSpGEMMDescr",                       {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"cusparseSpGEMMDescr_t",                     {CUDA_110, CUDA_0,   CUDA_0  }},
 };
