@@ -117,14 +117,14 @@ namespace perl {
   const string sCudaGauge = "cudaGauge";
   const string sCudaGauge_ex = "cudaGauge_ex";
   const string sCudaInGauge = "cudaInGauge";
-  const string sCudaInGauge_ex = "cudaInGauge_ex";
+  const string sCudaInGaugeEx = "cudaInGaugeEx";
   const string sCudaOutGauge = "cudaOutGauge";
   const string sCudaGaugeTemp = "cudaGaugeTemp";
   const string sCudaSpinorOut = "cudaSpinorOut";
   const string sCudaSpinor = "cudaSpinor";
   const string sCudaColorSpinorField = "cudaColorSpinorField";
   const string sCudaInLink = "cudaInLink";
-  const string sCudaInLink_ex = "cudaInLink_ex";
+  const string sCudaInLinkEx = "cudaInLinkEx";
   const string sCudaSiteLink = "cudaSiteLink";
   const string sCudaFatLink = "cudaFatLink";
   const string sCudaLongLink = "cudaLongLink";
@@ -146,7 +146,7 @@ namespace perl {
   const set<string> Whitelist{
     {sCudaDevice}, {sCudaDevice_t}, {sCudaIDs}, {sCudaGridDim}, {sCudaDimGrid}, {sCudaDimBlock}, {sCudaDeviceId}, {sCudaDevices},
     {sCudaGradInput}, {sCudaGradOutput}, {sCudaInput}, {sCudaOutput}, {sCudaIndices}, {sCudaMom}, {sCudaGauge},
-    {sCudaInGauge}, {sCudaSpinorOut}, {sCudaSpinor}, {sCudaColorSpinorField}, {sCudaSiteLink}, {sCudaFatLink}, {sCudaStaple}, {sCudaCloverField}, {sCudaParam}, {sCudaOutForce}, {sCudaGaugeTemp}, {sCudaResult}, {sCudaForce}, {sCudaInForce}, {sCudaForce_ex}, {sCudaOprod_ex}, {sCudaOutGauge}, {sCudaULink}, {sCudaOprod}, {sCudaGauge_ex}, {sCudaQuark}, {sCudaLongLinkOprod_ex}, {sCudaInGauge_ex}, {sCudaLongLink}, {sCudaUnitarizedLink}, {sCudaQdpGauge}, {sCudaCpsGauge}, {sCudaInLink}, {sCudaInLink_ex}, {sCudaGaugeField}, {sCudaMemcpys}, {sCudaRitzVectors}, {sCudaEigValueSet}, {sCudaLongLinkOprod}, {sCudaEigVecSet}
+    {sCudaInGauge}, {sCudaSpinorOut}, {sCudaSpinor}, {sCudaColorSpinorField}, {sCudaSiteLink}, {sCudaFatLink}, {sCudaStaple}, {sCudaCloverField}, {sCudaParam}, {sCudaOutForce}, {sCudaGaugeTemp}, {sCudaResult}, {sCudaForce}, {sCudaInForce}, {sCudaForce_ex}, {sCudaOprod_ex}, {sCudaOutGauge}, {sCudaULink}, {sCudaOprod}, {sCudaGauge_ex}, {sCudaQuark}, {sCudaLongLinkOprod_ex}, {sCudaInGaugeEx}, {sCudaLongLink}, {sCudaUnitarizedLink}, {sCudaQdpGauge}, {sCudaCpsGauge}, {sCudaInLink}, {sCudaInLinkEx}, {sCudaGaugeField}, {sCudaMemcpys}, {sCudaRitzVectors}, {sCudaEigValueSet}, {sCudaLongLinkOprod}, {sCudaEigVecSet}
   };
 
   void generateHeader(unique_ptr<ostream> &streamPtr) {
