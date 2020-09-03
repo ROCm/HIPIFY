@@ -456,9 +456,10 @@ namespace perl {
     *streamPtr.get() << tab << "$fileName=shift (@ARGV);" << endl;
     *streamPtr.get() << tab << "$fileDir=dirname( $fileName );" << endl;
     *streamPtr.get() << tab << "if ( $exclude_dirhash{ $fileDir } ) { " << endl;
-    *streamPtr.get() << tab_2 <<  print << "\" Skipping file: $fileName in excluded directory $fileDir \\n\";" << endl_tab << "}";
+    *streamPtr.get() << tab_2 <<  print << "\" Skipping file: $fileName in excluded directory $fileDir \\n\";" << endl_tab << "}" << endl;
     *streamPtr.get() << tab << "if ( $exclude_filehash{ $fileName } ) { " << endl;
-    *streamPtr.get() << tab_2 <<  print << "\" Skipping  excluded file: $fileName \\n\";" << endl_tab << "}";
+    *streamPtr.get() << tab_2 <<  print << "\" Skipping  excluded file: $fileName \\n\";" << endl_tab << "}" << endl;
+    
     *streamPtr.get() << tab << "unless( $exclude_dirhash{$fileDir} or $exclude_filehash{$fileName} ) {" << endl;
     *streamPtr.get() << tab_2 << "if ($inplace) {" << endl;
     *streamPtr.get() << tab_3 << my << "$file_prehip = \"$fileName\" . \".prehip\";" << endl;
