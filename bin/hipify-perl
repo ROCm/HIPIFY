@@ -27,7 +27,10 @@
 #usage hipify-perl [OPTIONS] INPUT_FILE
 
 use Getopt::Long;
+use File::Basename;
 my $whitelist = "";
+my $exclude_dirs =  "";
+my $exclude_files = "";
 my $fileName = "";
 my %ft;
 my %Tkernels;
@@ -39,6 +42,8 @@ GetOptions(
     , "print-stats" => \$print_stats          # Print translation statistics.
     , "quiet-warnings" => \$quiet_warnings    # Don't print warnings on unknown CUDA functions.
     , "whitelist=s" => \$whitelist            # TODO: test it beforehand
+    , "exclude-dirs=s" => \$exclude_dirs      # Exclude directories
+    , "exclude-files=s" => \$exclude_files    # Exclude files
 );
 
 $print_stats = 1 if $examine;
@@ -48,30 +53,63 @@ $no_output = 1 if $examine;
 @whitelist = (
       "cudaCloverField"
     , "cudaColorSpinorField"
+    , "cudaCpsGauge"
     , "cudaDevice"
     , "cudaDeviceId"
     , "cudaDevice_t"
     , "cudaDevices"
     , "cudaDimBlock"
     , "cudaDimGrid"
+    , "cudaEigValueSet"
+    , "cudaEigVecSet"
     , "cudaFatLink"
+    , "cudaForce"
+    , "cudaForce_ex"
     , "cudaGauge"
     , "cudaGaugeField"
+    , "cudaGaugeTemp"
+    , "cudaGauge_ex"
     , "cudaGradInput"
     , "cudaGradOutput"
     , "cudaGridDim"
     , "cudaIDs"
+    , "cudaInForce"
     , "cudaInGauge"
+    , "cudaInGaugeEx"
+    , "cudaInLink"
+    , "cudaInLinkEx"
     , "cudaIndices"
     , "cudaInput"
+    , "cudaLongLink"
+    , "cudaLongLinkOprod"
+    , "cudaLongLinkOprod_ex"
+    , "cudaMemcpys"
     , "cudaMom"
+    , "cudaOprod"
+    , "cudaOprod_ex"
+    , "cudaOutForce"
+    , "cudaOutGauge"
     , "cudaOutput"
     , "cudaParam"
+    , "cudaQdpGauge"
+    , "cudaQuark"
+    , "cudaResult"
+    , "cudaRitzVectors"
     , "cudaSiteLink"
+    , "cudaSpinor"
+    , "cudaSpinorOut"
     , "cudaStaple"
+    , "cudaULink"
+    , "cudaUnitarizedLink"
 );
 
 push(@whitelist, split(',', $whitelist));
+push(@exclude_dirlist, split(',', $exclude_dirs));
+push(@exclude_filelist, split(',', $exclude_files));
+
+# Turn exclude dirlist and exclude_filelist into hash maps
+%exclude_dirhash = map { $_ => 1 } @exclude_dirlist;
+%exclude_filehash = map { $_ => 1 } @exclude_filelist;
 
 @statNames = ("error", "init", "version", "device", "context", "module", "memory", "virtual_memory", "addressing", "stream", "event", "external_resource_interop", "stream_memory", "execution", "graph", "occupancy", "texture", "surface", "peer", "graphics", "profiler", "openGL", "D3D9", "D3D10", "D3D11", "VDPAU", "EGL", "thread", "complex", "library", "device_library", "device_function", "include", "include_cuda_main_header", "type", "literal", "numeric_literal", "define", "extern_shared", "kernel_launch");
 
@@ -5548,110 +5586,119 @@ my $fileCount = @ARGV;
 
 while (@ARGV) {
     $fileName=shift (@ARGV);
-    if ($inplace) {
-        my $file_prehip = "$fileName" . ".prehip";
-        my $infile;
-        my $outfile;
-        if (-e $file_prehip) {
-            $infile  = $file_prehip;
-            $outfile = $fileName;
+    $fileDir=dirname( $fileName );
+    if ( $exclude_dirhash{ $fileDir } ) { 
+        print STDERR " Skipping file: $fileName in excluded directory $fileDir \n";
+    }
+    if ( $exclude_filehash{ $fileName } ) { 
+        print STDERR " Skipping  excluded file: $fileName \n";
+    }
+    unless( $exclude_dirhash{$fileDir} or $exclude_filehash{$fileName} ) {
+        if ($inplace) {
+            my $file_prehip = "$fileName" . ".prehip";
+            my $infile;
+            my $outfile;
+            if (-e $file_prehip) {
+                $infile  = $file_prehip;
+                $outfile = $fileName;
+            } else {
+                system ("cp $fileName $file_prehip");
+                $infile = $file_prehip;
+                $outfile = $fileName;
+            }
+            open(INFILE,"<", $infile) or die "error: could not open $infile";
+            open(OUTFILE,">", $outfile) or die "error: could not open $outfile";
+            $OUTFILE = OUTFILE;
         } else {
-            system ("cp $fileName $file_prehip");
-            $infile = $file_prehip;
-            $outfile = $fileName;
+            open(INFILE,"<", $fileName) or die "error: could not open $fileName";
+            $OUTFILE = STDOUT;
         }
-        open(INFILE,"<", $infile) or die "error: could not open $infile";
-        open(OUTFILE,">", $outfile) or die "error: could not open $outfile";
-        $OUTFILE = OUTFILE;
-    } else {
-        open(INFILE,"<", $fileName) or die "error: could not open $fileName";
-        $OUTFILE = STDOUT;
-    }
-    # Count of transforms in this file
-    clearStats(\%ft, \@statNames);
-    my $countIncludes = 0;
-    my $countKeywords = 0;
-    my $warnings = 0;
-    my %warningTags;
-    my $lineCount = 0;
-    undef $/;
-    # Read whole file at once, so we can match newlines
-    while (<INFILE>) {
-        $countKeywords += m/__global__/;
-        $countKeywords += m/__shared__/;
-        simpleSubstitutions();
-        transformExternShared();
-        transformKernelLaunch();
-        transformCubNamespace();
-        if ($print_stats) {
-            while (/(\b(hip|HIP)([A-Z]|_)\w+\b)/g) {
-                $convertedTags{$1}++;
-            }
-        }
-        my $hasDeviceCode = $countKeywords + $ft{'device_function'};
-        unless ($quiet_warnings) {
-            # Copy into array of lines, process line-by-line to show warnings
-            if ($hasDeviceCode or (/\bcu|CU/) or (/<<<.*>>>/)) {
-                my @lines = split /\n/, $_;
-                # Copy the whole file
-                my $tmp = $_;
-                my $line_num = 0;
-                foreach (@lines) {
-                    $line_num++;
-                    # Remove any whitelisted words
-                    foreach $w (@whitelist) {
-                        redo if s/\b$w\b/ZAP/
-                    }
-                    my $tag;
-                    if ((/(\bcuda[A-Z]\w+)/) or (/<<<.*>>>/)) {
-                        # Flag any remaining code that look like cuda API calls: may want to add these to hipify
-                        $tag = (defined $1) ? $1 : "Launch";
-                    }
-                    if (defined $tag) {
-                        $warnings++;
-                        $warningTags{$tag}++;
-                        print STDERR "  warning: $fileName:#$line_num : $_\n";
-                    }
-                    $s = warnDeprecatedFunctions($line_num);
-                    $warnings += $s;
-                    $s = warnUnsupportedFunctions($line_num);
-                    $warnings += $s;
-                    $s = warnUnsupportedDeviceFunctions($line_num);
-                    $warnings += $s;
+        # Count of transforms in this file
+        clearStats(\%ft, \@statNames);
+        my $countIncludes = 0;
+        my $countKeywords = 0;
+        my $warnings = 0;
+        my %warningTags;
+        my $lineCount = 0;
+        undef $/;
+        # Read whole file at once, so we can match newlines
+        while (<INFILE>) {
+            $countKeywords += m/__global__/;
+            $countKeywords += m/__shared__/;
+            simpleSubstitutions();
+            transformExternShared();
+            transformKernelLaunch();
+            transformCubNamespace();
+            if ($print_stats) {
+                while (/(\b(hip|HIP)([A-Z]|_)\w+\b)/g) {
+                    $convertedTags{$1}++;
                 }
-                $_ = $tmp;
             }
-        }
-        if ($hasDeviceCode > 0) {
-            $ft{'device_function'} += countSupportedDeviceFunctions();
-        }
-        transformHostFunctions();
-        # TODO: would like to move this code outside loop but it uses $_ which contains the whole file
-        unless ($no_output) {
-            my $apiCalls   = $ft{'error'} + $ft{'init'} + $ft{'version'} + $ft{'device'} + $ft{'context'} + $ft{'module'} + $ft{'memory'} + $ft{'virtual_memory'} + $ft{'addressing'} + $ft{'stream'} + $ft{'event'} + $ft{'external_resource_interop'} + $ft{'stream_memory'} + $ft{'execution'} + $ft{'graph'} + $ft{'occupancy'} + $ft{'texture'} + $ft{'surface'} + $ft{'peer'} + $ft{'graphics'} + $ft{'profiler'} + $ft{'openGL'} + $ft{'D3D9'} + $ft{'D3D10'} + $ft{'D3D11'} + $ft{'VDPAU'} + $ft{'EGL'} + $ft{'thread'} + $ft{'complex'} + $ft{'library'} + $ft{'device_library'} + $ft{'include'} + $ft{'include_cuda_main_header'} + $ft{'type'} + $ft{'literal'} + $ft{'numeric_literal'} + $ft{'define'};
-            my $kernStuff  = $hasDeviceCode + $ft{'kernel_launch'} + $ft{'device_function'};
-            my $totalCalls = $apiCalls + $kernStuff;
-            $is_dos = m/\r\n$/;
-            if ($totalCalls and ($countIncludes == 0) and ($kernStuff != 0)) {
-                # TODO: implement hipify-clang's logic with header files AMAP
-                print $OUTFILE '#include "hip/hip_runtime.h"' . ($is_dos ? "\r\n" : "\n");
+            my $hasDeviceCode = $countKeywords + $ft{'device_function'};
+            unless ($quiet_warnings) {
+                # Copy into array of lines, process line-by-line to show warnings
+                if ($hasDeviceCode or (/\bcu|CU/) or (/<<<.*>>>/)) {
+                    my @lines = split /\n/, $_;
+                    # Copy the whole file
+                    my $tmp = $_;
+                    my $line_num = 0;
+                    foreach (@lines) {
+                        $line_num++;
+                        # Remove any whitelisted words
+                        foreach $w (@whitelist) {
+                            redo if s/\b$w\b/ZAP/
+                        }
+                        my $tag;
+                        if ((/(\bcuda[A-Z]\w+)/) or (/<<<.*>>>/)) {
+                            # Flag any remaining code that look like cuda API calls: may want to add these to hipify
+                            $tag = (defined $1) ? $1 : "Launch";
+                        }
+                        if (defined $tag) {
+                            $warnings++;
+                            $warningTags{$tag}++;
+                            print STDERR "  warning: $fileName:#$line_num : $_\n";
+                        }
+                        $s = warnDeprecatedFunctions($line_num);
+                        $warnings += $s;
+                        $s = warnUnsupportedFunctions($line_num);
+                        $warnings += $s;
+                        $s = warnUnsupportedDeviceFunctions($line_num);
+                        $warnings += $s;
+                    }
+                    $_ = $tmp;
+                }
             }
-            print $OUTFILE  "$_";
+            if ($hasDeviceCode > 0) {
+                $ft{'device_function'} += countSupportedDeviceFunctions();
+            }
+            transformHostFunctions();
+            # TODO: would like to move this code outside loop but it uses $_ which contains the whole file
+            unless ($no_output) {
+                my $apiCalls   = $ft{'error'} + $ft{'init'} + $ft{'version'} + $ft{'device'} + $ft{'context'} + $ft{'module'} + $ft{'memory'} + $ft{'virtual_memory'} + $ft{'addressing'} + $ft{'stream'} + $ft{'event'} + $ft{'external_resource_interop'} + $ft{'stream_memory'} + $ft{'execution'} + $ft{'graph'} + $ft{'occupancy'} + $ft{'texture'} + $ft{'surface'} + $ft{'peer'} + $ft{'graphics'} + $ft{'profiler'} + $ft{'openGL'} + $ft{'D3D9'} + $ft{'D3D10'} + $ft{'D3D11'} + $ft{'VDPAU'} + $ft{'EGL'} + $ft{'thread'} + $ft{'complex'} + $ft{'library'} + $ft{'device_library'} + $ft{'include'} + $ft{'include_cuda_main_header'} + $ft{'type'} + $ft{'literal'} + $ft{'numeric_literal'} + $ft{'define'};
+                my $kernStuff  = $hasDeviceCode + $ft{'kernel_launch'} + $ft{'device_function'};
+                my $totalCalls = $apiCalls + $kernStuff;
+                $is_dos = m/\r\n$/;
+                if ($totalCalls and ($countIncludes == 0) and ($kernStuff != 0)) {
+                    # TODO: implement hipify-clang's logic with header files AMAP
+                    print $OUTFILE '#include "hip/hip_runtime.h"' . ($is_dos ? "\r\n" : "\n");
+                }
+                print $OUTFILE  "$_";
+            }
+            $lineCount = $_ =~ tr/\n//;
         }
-        $lineCount = $_ =~ tr/\n//;
-    }
-    my $totalConverted = totalStats(\%ft);
-    if (($totalConverted+$warnings) and $print_stats) {
-        printStats("  info: converted", \@statNames, \%ft, $warnings, $lineCount);
-        print STDERR " in '$fileName'\n";
-    }
-    # Update totals for all files
-    addStats(\%tt, \%ft);
-    $Twarnings += $warnings;
-    $TlineCount += $lineCount;
-    foreach $key (keys %warningTags) {
-        $TwarningTags{$key} += $warningTags{$key};
-    }
+        my $totalConverted = totalStats(\%ft);
+        if (($totalConverted+$warnings) and $print_stats) {
+            printStats("  info: converted", \@statNames, \%ft, $warnings, $lineCount);
+            print STDERR " in '$fileName'\n";
+        }
+        # Update totals for all files
+        addStats(\%tt, \%ft);
+        $Twarnings += $warnings;
+        $TlineCount += $lineCount;
+        foreach $key (keys %warningTags) {
+            $TwarningTags{$key} += $warningTags{$key};
+        }
+    }   # Unless filtered direcotry or file 
 }
 # Print total stats for all files processed:
 if ($print_stats and ($fileCount > 1)) {
