@@ -47,6 +47,7 @@ const char *counterNames[NUM_CONV_TYPES] = {
   "surface", // CONV_SURFACE
   "peer", // CONV_PEER
   "graphics", // CONV_GRAPHICS
+  "interactions", // CONV_INTERACTION
   "profiler", // CONV_PROFILER
   "openGL", // CONV_OPENGL
   "D3D9", // CONV_D3D9
@@ -90,6 +91,7 @@ const char *counterTypes[NUM_CONV_TYPES] = {
   "CONV_SURFACE",
   "CONV_PEER",
   "CONV_GRAPHICS",
+  "CONV_INTERACTION",
   "CONV_PROFILER",
   "CONV_OPENGL",
   "CONV_D3D9",

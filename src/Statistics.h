@@ -88,6 +88,8 @@ enum ConvTypes {
   // Driver API : 5.27. Graphics Interoperability
   // Runtime API: 5.23. Graphics Interoperability
   CONV_GRAPHICS,
+  // Runtime API: 5.31. Interactions with the CUDA Driver API
+  CONV_INTERACTION,
   // Driver API : 5.28. Profiler Control
   // Runtime API: 5.32. Profiler Control
   CONV_PROFILER,

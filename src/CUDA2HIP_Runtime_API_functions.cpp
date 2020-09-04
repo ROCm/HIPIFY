@@ -432,10 +432,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuD3D9MapResources
   {"cudaD3D9MapResources",                                    {"hipD3D9MapResources",                                    "", CONV_D3D9, API_RUNTIME, 16, HIP_UNSUPPORTED | DEPRECATED}},
   // cuD3D9RegisterResource
-  {"cudaD3D9RegisterResource",                                {"hipD3D9RegisterResource",                                "", CONV_D3D9, API_RUNTIME, 16, HIP_UNSUPPORTED | DEPRECATED}},
+  // NOTE: cudaD3D9RegisterResource is not marked as deprecated function even in CUDA 11.0
+  {"cudaD3D9RegisterResource",                                {"hipD3D9RegisterResource",                                "", CONV_D3D9, API_RUNTIME, 16, HIP_UNSUPPORTED}},
   // cuD3D9ResourceGetMappedArray
   {"cudaD3D9ResourceGetMappedArray",                          {"hipD3D9ResourceGetMappedArray",                          "", CONV_D3D9, API_RUNTIME, 16, HIP_UNSUPPORTED | DEPRECATED}},
-  // cudaD3D9ResourceGetMappedPitch
+  // cuD3D9ResourceGetMappedPitch
   {"cudaD3D9ResourceGetMappedPitch",                          {"hipD3D9ResourceGetMappedPitch",                          "", CONV_D3D9, API_RUNTIME, 16, HIP_UNSUPPORTED | DEPRECATED}},
   // cuD3D9ResourceGetMappedPointer
   {"cudaD3D9ResourceGetMappedPointer",                        {"hipD3D9ResourceGetMappedPointer",                        "", CONV_D3D9, API_RUNTIME, 16, HIP_UNSUPPORTED | DEPRECATED}},
@@ -459,7 +460,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   {"cudaGraphicsD3D10RegisterResource",                       {"hipGraphicsD3D10RegisterResource",                       "", CONV_D3D10, API_RUNTIME, 17, HIP_UNSUPPORTED}},
 
   // 18. Direct3D 10 Interoperability [DEPRECATED]
-  // cudaD3D10GetDirect3DDevice
+  // cuD3D10GetDirect3DDevice
   {"cudaD3D10GetDirect3DDevice",                              {"hipD3D10GetDirect3DDevice",                              "", CONV_D3D10, API_RUNTIME, 18, HIP_UNSUPPORTED | DEPRECATED}},
   // cuD3D10MapResources
   {"cudaD3D10MapResources",                                   {"hipD3D10MapResources",                                   "", CONV_D3D10, API_RUNTIME, 18, HIP_UNSUPPORTED | DEPRECATED}},
@@ -467,7 +468,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   {"cudaD3D10RegisterResource",                               {"hipD3D10RegisterResource",                               "", CONV_D3D10, API_RUNTIME, 18, HIP_UNSUPPORTED | DEPRECATED}},
   // cuD3D10ResourceGetMappedArray
   {"cudaD3D10ResourceGetMappedArray",                         {"hipD3D10ResourceGetMappedArray",                         "", CONV_D3D10, API_RUNTIME, 18, HIP_UNSUPPORTED | DEPRECATED}},
-  // cudaD3D10ResourceGetMappedPitch
+  // cuD3D10ResourceGetMappedPitch
   {"cudaD3D10ResourceGetMappedPitch",                         {"hipD3D10ResourceGetMappedPitch",                         "", CONV_D3D10, API_RUNTIME, 18, HIP_UNSUPPORTED | DEPRECATED}},
   // cuD3D10ResourceGetMappedPointer
   {"cudaD3D10ResourceGetMappedPointer",                       {"hipD3D10ResourceGetMappedPointer",                       "", CONV_D3D10, API_RUNTIME, 18, HIP_UNSUPPORTED | DEPRECATED}},
@@ -693,7 +694,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // TODO
 
   // 31. Interactions with the CUDA Driver API
-  // TODO
+  {"cudaGetFuncBySymbol",                                     {"hipGetFuncBySymbol",                                     "", CONV_INTERACTION, API_RUNTIME, 31, HIP_UNSUPPORTED}},
 
   // 32. Profiler Control [DEPRECATED]
   // cuProfilerInitialize
@@ -711,15 +712,158 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // 35. Execution Control [REMOVED]
   // NOTE: Removed in CUDA 10.1
   // no analogue
-  {"cudaConfigureCall",                                       {"hipConfigureCall",                                       "", CONV_EXECUTION, API_RUNTIME, 35}},
+  {"cudaConfigureCall",                                       {"hipConfigureCall",                                       "", CONV_EXECUTION, API_RUNTIME, 35, REMOVED}},
   // no analogue
-  // NOTE: Not equal to cudaLaunch due to different signatures
-  {"cudaLaunch",                                              {"hipLaunchByPtr",                                         "", CONV_EXECUTION, API_RUNTIME, 35}},
+  // NOTE: Not equal to cuLaunch due to different signatures
+  {"cudaLaunch",                                              {"hipLaunchByPtr",                                         "", CONV_EXECUTION, API_RUNTIME, 35, REMOVED}},
   // no analogue
-  {"cudaSetupArgument",                                       {"hipSetupArgument",                                       "", CONV_EXECUTION, API_RUNTIME, 35}},
+  {"cudaSetupArgument",                                       {"hipSetupArgument",                                       "", CONV_EXECUTION, API_RUNTIME, 35, REMOVED}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_FUNCTION_VER_MAP {
+  {"cudaDeviceGetNvSciSyncAttributes",                        {CUDA_102, CUDA_0,   CUDA_0  }},
+  {"cudaDeviceGetP2PAttribute",                               {CUDA_80,  CUDA_0,   CUDA_0  }},
+  {"cudaCtxResetPersistingL2Cache",                           {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"cudaThreadExit",                                          {CUDA_70,  CUDA_100, CUDA_0  }},
+  {"cudaThreadGetCacheConfig",                                {CUDA_70,  CUDA_100, CUDA_0  }},
+  {"cudaThreadGetLimit",                                      {CUDA_70,  CUDA_100, CUDA_0  }},
+  {"cudaThreadSetCacheConfig",                                {CUDA_70,  CUDA_100, CUDA_0  }},
+  {"cudaThreadSetLimit",                                      {CUDA_70,  CUDA_100, CUDA_0  }},
+  {"cudaThreadSynchronize",                                   {CUDA_70,  CUDA_100, CUDA_0  }},
+  {"cudaStreamBeginCapture",                                  {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"cudaStreamCopyAttributes",                                {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"cudaStreamEndCapture",                                    {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"cudaStreamGetAttribute",                                  {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"cudaStreamSetAttribute",                                  {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"cudaStreamIsCapturing",                                   {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"cudaStreamGetCaptureInfo",                                {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"cudaThreadExchangeStreamCaptureMode",                     {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"cudaDestroyExternalMemory",                               {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"cudaDestroyExternalSemaphore",                            {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"cudaExternalMemoryGetMappedBuffer",                       {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"cudaExternalMemoryGetMappedMipmappedArray",               {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"cudaImportExternalMemory",                                {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"cudaImportExternalSemaphore",                             {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"cudaSignalExternalSemaphoresAsync",                       {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"cudaWaitExternalSemaphoresAsync",                         {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"cudaFuncSetAttribute",                                    {CUDA_90,  CUDA_0,   CUDA_0  }},
+  {"cudaLaunchCooperativeKernel",                             {CUDA_90,  CUDA_0,   CUDA_0  }},
+  {"cudaLaunchCooperativeKernelMultiDevice",                  {CUDA_90,  CUDA_0,   CUDA_0  }},
+  {"cudaLaunchHostFunc",                                      {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"cudaSetDoubleForDevice",                                  {CUDA_70,  CUDA_100, CUDA_0  }},
+  {"cudaSetDoubleForHost",                                    {CUDA_70,  CUDA_100, CUDA_0  }},
+  {"cudaOccupancyAvailableDynamicSMemPerBlock",               {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"cudaMemAdvise",                                           {CUDA_80,  CUDA_0,   CUDA_0  }},
+  {"cudaMemPrefetchAsync",                                    {CUDA_80,  CUDA_0,   CUDA_0  }},
+  {"cudaMemRangeGetAttribute",                                {CUDA_80,  CUDA_0,   CUDA_0  }},
+  {"cudaMemRangeGetAttributes",                               {CUDA_80,  CUDA_0,   CUDA_0  }},
+  {"cudaMemcpyArrayToArray",                                  {CUDA_70,  CUDA_101, CUDA_0  }},
+  {"cudaMemcpyFromArray",                                     {CUDA_70,  CUDA_101, CUDA_0  }},
+  {"cudaMemcpyFromArrayAsync",                                {CUDA_70,  CUDA_101, CUDA_0  }},
+  {"cudaMemcpyToArray",                                       {CUDA_70,  CUDA_101, CUDA_0  }},
+  {"cudaMemcpyToArrayAsync",                                  {CUDA_70,  CUDA_101, CUDA_0  }},
+  {"cudaGLMapBufferObject",                                   {CUDA_70,  CUDA_100, CUDA_0  }},
+  {"cudaGLMapBufferObjectAsync",                              {CUDA_70,  CUDA_100, CUDA_0  }},
+  {"cudaGLRegisterBufferObject",                              {CUDA_70,  CUDA_100, CUDA_0  }},
+  {"cudaGLSetBufferObjectMapFlags",                           {CUDA_70,  CUDA_100, CUDA_0  }},
+  {"cudaGLSetGLDevice",                                       {CUDA_70,  CUDA_100, CUDA_0  }},
+  {"cudaGLUnmapBufferObject",                                 {CUDA_70,  CUDA_100, CUDA_0  }},
+  {"cudaGLUnmapBufferObjectAsync",                            {CUDA_70,  CUDA_100, CUDA_0  }},
+  {"cudaGLUnregisterBufferObject",                            {CUDA_70,  CUDA_100, CUDA_0  }},
+  {"cudaD3D9MapResources",                                    {CUDA_70,  CUDA_100, CUDA_0  }},
+  {"cudaD3D9ResourceGetMappedArray",                          {CUDA_70,  CUDA_100, CUDA_0  }},
+  {"cudaD3D9ResourceGetMappedPitch",                          {CUDA_70,  CUDA_100, CUDA_0  }},
+  {"cudaD3D9ResourceGetMappedPointer",                        {CUDA_70,  CUDA_100, CUDA_0  }},
+  {"cudaD3D9ResourceGetMappedSize",                           {CUDA_70,  CUDA_100, CUDA_0  }},
+  {"cudaD3D9ResourceGetSurfaceDimensions",                    {CUDA_70,  CUDA_100, CUDA_0  }},
+  {"cudaD3D9ResourceSetMapFlags",                             {CUDA_70,  CUDA_100, CUDA_0  }},
+  {"cudaD3D9UnmapResources",                                  {CUDA_70,  CUDA_100, CUDA_0  }},
+  {"cudaD3D9UnregisterResource",                              {CUDA_70,  CUDA_100, CUDA_0  }},
+  {"cudaD3D10GetDirect3DDevice",                              {CUDA_70,  CUDA_100, CUDA_0  }},
+  {"cudaD3D10MapResources",                                   {CUDA_70,  CUDA_100, CUDA_0  }},
+  {"cudaD3D10RegisterResource",                               {CUDA_70,  CUDA_100, CUDA_0  }},
+  {"cudaD3D10ResourceGetMappedArray",                         {CUDA_70,  CUDA_100, CUDA_0  }},
+  {"cudaD3D10ResourceGetMappedPitch",                         {CUDA_70,  CUDA_100, CUDA_0  }},
+  {"cudaD3D10ResourceGetMappedPointer",                       {CUDA_70,  CUDA_100, CUDA_0  }},
+  {"cudaD3D10ResourceGetMappedSize",                          {CUDA_70,  CUDA_100, CUDA_0  }},
+  {"cudaD3D10ResourceGetSurfaceDimensions",                   {CUDA_70,  CUDA_100, CUDA_0  }},
+  {"cudaD3D10ResourceSetMapFlags",                            {CUDA_70,  CUDA_100, CUDA_0  }},
+  {"cudaD3D10SetDirect3DDevice",                              {CUDA_70,  CUDA_100, CUDA_0  }},
+  {"cudaD3D10UnmapResources",                                 {CUDA_70,  CUDA_100, CUDA_0  }},
+  {"cudaD3D10UnregisterResource",                             {CUDA_70,  CUDA_100, CUDA_0  }},
+  {"cudaD3D11GetDirect3DDevice",                              {CUDA_70,  CUDA_100, CUDA_0  }},
+  {"cudaD3D11SetDirect3DDevice",                              {CUDA_70,  CUDA_100, CUDA_0  }},
+  {"cudaEGLStreamConsumerAcquireFrame",                       {CUDA_91,  CUDA_0,   CUDA_0  }},
+  {"cudaEGLStreamConsumerConnect",                            {CUDA_91,  CUDA_0,   CUDA_0  }},
+  {"cudaEGLStreamConsumerConnectWithFlags",                   {CUDA_91,  CUDA_0,   CUDA_0  }},
+  {"cudaEGLStreamConsumerDisconnect",                         {CUDA_91,  CUDA_0,   CUDA_0  }},
+  {"cudaEGLStreamConsumerReleaseFrame",                       {CUDA_91,  CUDA_0,   CUDA_0  }},
+  {"cudaEGLStreamProducerConnect",                            {CUDA_91,  CUDA_0,   CUDA_0  }},
+  {"cudaEGLStreamProducerDisconnect",                         {CUDA_91,  CUDA_0,   CUDA_0  }},
+  {"cudaEGLStreamProducerPresentFrame",                       {CUDA_91,  CUDA_0,   CUDA_0  }},
+  {"cudaEGLStreamProducerReturnFrame",                        {CUDA_91,  CUDA_0,   CUDA_0  }},
+  {"cudaEventCreateFromEGLSync",                              {CUDA_91,  CUDA_0,   CUDA_0  }},
+  {"cudaGraphicsEGLRegisterImage",                            {CUDA_91,  CUDA_0,   CUDA_0  }},
+  {"cudaGraphicsResourceGetMappedEglFrame",                   {CUDA_91,  CUDA_0,   CUDA_0  }},
+  {"cudaBindTexture",                                         {CUDA_70,  CUDA_110, CUDA_0  }},
+  {"cudaBindTexture2D",                                       {CUDA_70,  CUDA_110, CUDA_0  }},
+  {"cudaBindTextureToArray",                                  {CUDA_70,  CUDA_110, CUDA_0  }},
+  {"cudaBindTextureToMipmappedArray",                         {CUDA_70,  CUDA_110, CUDA_0  }},
+  {"cudaGetTextureAlignmentOffset",                           {CUDA_70,  CUDA_110, CUDA_0  }},
+  {"cudaGetTextureReference",                                 {CUDA_70,  CUDA_110, CUDA_0  }},
+  {"cudaUnbindTexture",                                       {CUDA_70,  CUDA_110, CUDA_0  }},
+  {"cudaBindSurfaceToArray",                                  {CUDA_70,  CUDA_110, CUDA_0  }},
+  {"cudaGetSurfaceReference",                                 {CUDA_70,  CUDA_110, CUDA_0  }},
+  {"cuTexObjectGetTextureDesc",                               {CUDA_90,  CUDA_0,   CUDA_0  }},
+  {"cudaCreateSurfaceObject",                                 {CUDA_90,  CUDA_0,   CUDA_0  }},
+  {"cudaDestroySurfaceObject",                                {CUDA_90,  CUDA_0,   CUDA_0  }},
+  {"cudaGetSurfaceObjectResourceDesc",                        {CUDA_90,  CUDA_0,   CUDA_0  }},
+  {"cudaDriverGetVersion",                                    {CUDA_90,  CUDA_0,   CUDA_0  }},
+  {"cudaRuntimeGetVersion",                                   {CUDA_90,  CUDA_0,   CUDA_0  }},
+  {"cudaGraphAddChildGraphNode",                              {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"cudaGraphAddDependencies",                                {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"cudaGraphAddEmptyNode",                                   {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"cudaGraphAddHostNode",                                    {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"cudaGraphAddKernelNode",                                  {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"cudaGraphAddMemcpyNode",                                  {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"cudaGraphAddMemsetNode",                                  {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"cudaGraphChildGraphNodeGetGraph",                         {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"cudaGraphClone",                                          {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"cudaGraphCreate",                                         {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"cudaGraphDestroy",                                        {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"cudaGraphDestroyNode",                                    {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"cudaGraphExecDestroy",                                    {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"cudaGraphGetEdges",                                       {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"cudaGraphGetNodes",                                       {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"cudaGraphGetRootNodes",                                   {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"cudaGraphHostNodeGetParams",                              {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"cudaGraphHostNodeSetParams",                              {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"cudaGraphInstantiate",                                    {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"cudaGraphKernelNodeCopyAttributes",                       {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"cudaGraphKernelNodeGetAttribute",                         {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"cudaGraphKernelNodeSetAttribute",                         {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"cudaGraphExecKernelNodeSetParams",                        {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"cudaGraphExecMemcpyNodeSetParams",                        {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"cudaGraphExecMemsetNodeSetParams",                        {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"cudaGraphExecHostNodeSetParams",                          {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"cudaGraphExecUpdate",                                     {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"cudaGraphKernelNodeGetParams",                            {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"cudaGraphKernelNodeSetParams",                            {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"cudaGraphLaunch",                                         {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"cudaGraphMemcpyNodeGetParams",                            {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"cudaGraphMemcpyNodeSetParams",                            {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"cudaGraphMemsetNodeGetParams",                            {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"cudaGraphMemsetNodeSetParams",                            {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"cudaGraphNodeFindInClone",                                {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"cudaGraphNodeGetDependencies",                            {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"cudaGraphNodeGetDependentNodes",                          {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"cudaGraphNodeGetType",                                    {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"cudaGraphRemoveDependencies",                             {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"cudaGetFuncBySymbol",                                     {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"cudaProfilerInitialize",                                  {CUDA_70,  CUDA_110, CUDA_0  }},
+  {"cudaConfigureCall",                                       {CUDA_70,  CUDA_0,   CUDA_101}},
+  {"cudaLaunch",                                              {CUDA_70,  CUDA_0,   CUDA_101}},
+  {"cudaSetupArgument",                                       {CUDA_70,  CUDA_0,   CUDA_101}},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_RUNTIME_API_SECTION_MAP {
