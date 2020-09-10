@@ -225,7 +225,7 @@ int main(int argc, const char **argv) {
   } else {
     fileSources = OptionsParser.getSourcePathList();
   }
-  if (fileSources.empty() && !GeneratePerl && !GeneratePython) {
+  if (fileSources.empty() && !GeneratePerl && !GeneratePython && !GenerateMarkdown && !GenerateCSV) {
     llvm::errs() << "\n" << sHipify << sError << "Must specify at least 1 positional argument for source file" << "\n";
     return 1;
   }
@@ -235,6 +235,10 @@ int main(int argc, const char **argv) {
   }
   if (!generatePython()) {
     llvm::errs() << "\n" << sHipify << sError << "hipify-python generating failed" << "\n";
+    return 1;
+  }
+  if (!doc::generate(GenerateMarkdown, GenerateCSV)) {
+    llvm::errs() << "\n" << sHipify << sError << "Documentation generating failed" << "\n";
     return 1;
   }
   if (fileSources.empty()) {
