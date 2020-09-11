@@ -101,6 +101,15 @@ extern const std::map<llvm::StringRef, cudaAPIversions> CUDA_CAFFE2_FUNCTION_VER
 extern const std::map<llvm::StringRef, cudaAPIversions> CUDA_DEVICE_FUNC_VER_MAP;
 extern const std::map<llvm::StringRef, cudaAPIversions> CUDA_CUB_TYPE_NAME_VER_MAP;
 
+extern const std::map<unsigned int, llvm::StringRef> CUDA_DRIVER_API_SECTION_MAP;
+extern const std::map<unsigned int, llvm::StringRef> CUDA_RUNTIME_API_SECTION_MAP;
+extern const std::map<unsigned int, llvm::StringRef> CUDA_COMPLEX_API_SECTION_MAP;
+extern const std::map<unsigned int, llvm::StringRef> CUDA_BLAS_API_SECTION_MAP;
+extern const std::map<unsigned int, llvm::StringRef> CUDA_RAND_API_SECTION_MAP;
+extern const std::map<unsigned int, llvm::StringRef> CUDA_DNN_API_SECTION_MAP;
+extern const std::map<unsigned int, llvm::StringRef> CUDA_FFT_API_SECTION_MAP;
+extern const std::map<unsigned int, llvm::StringRef> CUDA_SPARSE_API_SECTION_MAP;
+
 /**
   * The union of all the above versions maps.
   *

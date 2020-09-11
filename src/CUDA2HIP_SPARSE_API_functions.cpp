@@ -1100,7 +1100,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SPARSE_FUNCTION_VER_MAP {
   {"cusparseConstrainedGeMM_bufferSize",                {CUDA_102, CUDA_0,   CUDA_0  }},
 };
 
-const std::map<unsigned int, llvm::StringRef> CUDA_SPARCE_API_SECTION_MAP {
+const std::map<unsigned int, llvm::StringRef> CUDA_SPARSE_API_SECTION_MAP {
   {4, "CUSPARSE Types References"},
   {5, "CUSPARSE Management Function Reference"},
   {6, "CUSPARSE Helper Function Reference"},

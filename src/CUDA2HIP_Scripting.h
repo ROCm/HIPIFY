@@ -39,3 +39,8 @@ namespace python {
 
   bool generate(bool Generate = true);
 }
+
+namespace doc {
+
+  bool generate(bool GenerateMD = true, bool GenerateCSV = true);
+}
