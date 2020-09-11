@@ -363,10 +363,9 @@ bool Statistics::isUnsupported(const hipCounter &counter) {
 std::string Statistics::getCudaVersion(const cudaVersions& ver) {
   switch (ver) {
     case CUDA_0:
+    case CUDA_70:
     default:
       return "";
-    case CUDA_70:
-      return "7.0";
     case CUDA_75:
       return "7.5";
     case CUDA_80:

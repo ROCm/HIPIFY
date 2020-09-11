@@ -109,10 +109,3 @@ extern const std::map<unsigned int, llvm::StringRef> CUDA_RAND_API_SECTION_MAP;
 extern const std::map<unsigned int, llvm::StringRef> CUDA_DNN_API_SECTION_MAP;
 extern const std::map<unsigned int, llvm::StringRef> CUDA_FFT_API_SECTION_MAP;
 extern const std::map<unsigned int, llvm::StringRef> CUDA_SPARSE_API_SECTION_MAP;
-
-/**
-  * The union of all the above versions maps.
-  *
-  * This should be used for documentation generation.
-  */
-const std::map<llvm::StringRef, cudaAPIversions>& CUDA_VERSIONS_MAP();
