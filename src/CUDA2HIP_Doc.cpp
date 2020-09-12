@@ -172,7 +172,7 @@ namespace doc {
                   r = Statistics::getCudaVersion(v.second.removed);
                 }
               }
-              *streams[md].get() << "|`" << string(f.first) << "`| " << a << " | " << d << " | " << r << " |`" << string(f.second.hipName) << "`|" << endl;
+              *streams[md].get() << "|`" << string(f.first) << "`| " << a << " | " << d << " | " << r << " |" << (Statistics::isHipUnsupported(f.second) ? "" : "`" + string(f.second.hipName) + "`") << "|" << endl;
             }
             *streams[md].get() << endl;
           }
