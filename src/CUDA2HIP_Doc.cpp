@@ -23,7 +23,6 @@ THE SOFTWARE.
 #include <sstream>
 #include <vector>
 #include <map>
-#include "llvm/ADT/StringRef.h"
 #include "CUDA2HIP.h"
 #include "CUDA2HIP_Scripting.h"
 #include "ArgParse.h"
@@ -35,7 +34,10 @@ namespace doc {
   using namespace std;
   using namespace llvm;
 
-  typedef map<unsigned int, llvm::StringRef> sectionMap;
+  typedef map<unsigned int, StringRef> sectionMap;
+  typedef map<StringRef, hipCounter> functionMap;
+  typedef functionMap typeMap;
+  typedef map<StringRef, cudaAPIversions> versionMap;
 
   const string sEmpty = "";
   const string sMd = "md";
@@ -84,6 +86,11 @@ namespace doc {
   const string sCUSPARSE = "CUSPARSE";
 
   const string sAPI_supported = "API supported by HIP";
+  const string sCUDA = "CUDA";
+  const string sHIP = "HIP";
+  const string sA = "A";
+  const string sD = "D";
+  const string sR = "R";
 
   enum docType {
     none = 0,
@@ -105,6 +112,10 @@ namespace doc {
       virtual const string &getFileName(docType format) const = 0;
       virtual const string &getName() const = 0;
       virtual const sectionMap &getSections() const = 0;
+      virtual const functionMap &getFunctions() const = 0;
+      virtual const typeMap &getTypes() const = 0;
+      virtual const versionMap &getFunctionVersions() const = 0;
+      virtual const versionMap &getTypeVersions() const = 0;
 
     private:
       string dir;
@@ -119,7 +130,7 @@ namespace doc {
         SmallString<128> tmpFile;
         EC = sys::fs::createTemporaryFile(file, getExtension(format), tmpFile);
         if (EC) {
-          llvm::errs() << "\n" << sHipify << sError << EC.message() << ": " << tmpFile << "\n";
+          errs() << "\n" << sHipify << sError << EC.message() << ": " << tmpFile << "\n";
           return false;
         }
         files.insert({ format, file });
@@ -135,11 +146,35 @@ namespace doc {
         return bRet;
       }
 
+      bool isTypeSection(unsigned int n, const sectionMap &sections) {
+        string name = string(sections.at(n));
+        for (auto &c : name) c = tolower(c);
+        return name.find("type") != string::npos;
+      }
+
       bool write() {
         if (md == (formats & md)) {
           *streams[md].get() << "# " << getName() << " " << sAPI_supported << endl << endl;
           for (auto &s : getSections()) {
             *streams[md].get() << "## **" << s.first << ". " << string(s.second) << "**" << endl << endl;
+            *streams[md].get() << "| **" << sCUDA << "** | **" << sA << "** | **" << sD << "** | **" << sR << "** | **" << sHIP << "** |" << endl;
+            *streams[md].get() << "|:--|:-:|:-:|:-:|:--|" << endl;
+            const functionMap &ftMap = isTypeSection(s.first, getSections()) ? getTypes() : getFunctions();
+            const versionMap &vMap = isTypeSection(s.first, getSections()) ? getTypeVersions() : getFunctionVersions();
+            functionMap fMap;
+            for (auto &f : ftMap) if (f.second.apiSection == s.first) fMap.insert(f);
+            for (auto &f : fMap) {
+              string a, d, r;
+              for (auto &v : vMap) {
+                if (v.first == f.first) {
+                  a = Statistics::getCudaVersion(v.second.appeared);
+                  d = Statistics::getCudaVersion(v.second.deprecated);
+                  r = Statistics::getCudaVersion(v.second.removed);
+                }
+              }
+              *streams[md].get() << "|`" << string(f.first) << "`| " << a << " | " << d << " | " << r << " |`" << string(f.second.hipName) << "`|" << endl;
+            }
+            *streams[md].get() << endl;
           }
         }
         return true;
@@ -150,7 +185,7 @@ namespace doc {
         bool bRet = true;
         EC = sys::fs::copy_file(tmpFiles[format], files[format]);
         if (EC) {
-          llvm::errs() << "\n" << sHipify << sError << EC.message() << ": while copying " << tmpFiles[format] << " to " << files[format] << "\n";
+          errs() << "\n" << sHipify << sError << EC.message() << ": while copying " << tmpFiles[format] << " to " << files[format] << "\n";
           bRet = false;
         }
         if (!SaveTemps) sys::fs::remove(tmpFiles[format]);
@@ -195,6 +230,10 @@ namespace doc {
       virtual ~DRIVER() {}
     protected:
       const sectionMap &getSections() const override { return CUDA_DRIVER_API_SECTION_MAP; }
+      const functionMap &getFunctions() const override { return CUDA_DRIVER_FUNCTION_MAP; }
+      const typeMap &getTypes() const override { return CUDA_DRIVER_TYPE_NAME_MAP; }
+      const versionMap &getFunctionVersions() const override { return CUDA_DRIVER_FUNCTION_VER_MAP; }
+      const versionMap &getTypeVersions() const override { return CUDA_DRIVER_TYPE_NAME_VER_MAP; }
       const string &getName() const override { return sCUDA_DRIVER; }
       const string &getFileName(docType format) const override {
         switch (format) {
@@ -212,6 +251,10 @@ namespace doc {
       virtual ~RUNTIME() {}
     protected:
       const sectionMap &getSections() const override { return CUDA_RUNTIME_API_SECTION_MAP; }
+      const functionMap &getFunctions() const override { return CUDA_RUNTIME_FUNCTION_MAP; }
+      const typeMap &getTypes() const override { return CUDA_RUNTIME_TYPE_NAME_MAP; }
+      const versionMap &getFunctionVersions() const override { return CUDA_RUNTIME_FUNCTION_VER_MAP; }
+      const versionMap &getTypeVersions() const override { return CUDA_RUNTIME_TYPE_NAME_VER_MAP; }
       const string &getName() const override { return sCUDA_RUNTIME; }
       const string &getFileName(docType format) const override {
         switch (format) {
@@ -229,6 +272,10 @@ namespace doc {
       virtual ~COMPLEX() {}
     protected:
       const sectionMap &getSections() const override { return CUDA_COMPLEX_API_SECTION_MAP; }
+      const functionMap &getFunctions() const override { return CUDA_COMPLEX_FUNCTION_MAP; }
+      const typeMap &getTypes() const override { return CUDA_COMPLEX_TYPE_NAME_MAP; }
+      const versionMap &getFunctionVersions() const override { return CUDA_COMPLEX_FUNCTION_VER_MAP; }
+      const versionMap &getTypeVersions() const override { return CUDA_COMPLEX_TYPE_NAME_VER_MAP; }
       const string &getName() const override { return sCUCOMPLEX; }
       const string &getFileName(docType format) const override {
         switch (format) {
@@ -240,12 +287,37 @@ namespace doc {
       }
   };
 
+  class BLAS: public DOC {
+    public:
+      BLAS(const string &outDir): DOC(outDir) {}
+      virtual ~BLAS() {}
+    protected:
+      const sectionMap &getSections() const override { return CUDA_BLAS_API_SECTION_MAP; }
+      const functionMap &getFunctions() const override { return CUDA_BLAS_FUNCTION_MAP; }
+      const typeMap &getTypes() const override { return CUDA_BLAS_TYPE_NAME_MAP; }
+      const versionMap &getFunctionVersions() const override { return CUDA_BLAS_FUNCTION_VER_MAP; }
+      const versionMap &getTypeVersions() const override { return CUDA_BLAS_TYPE_NAME_VER_MAP; }
+      const string &getName() const override { return sCUBLAS; }
+      const string &getFileName(docType format) const override {
+        switch (format) {
+          case none:
+          default: return sEmpty;
+          case md: return sBLAS_md;
+          case csv: return sBLAS_csv;
+        }
+      }
+  };
+
   class RAND: public DOC {
     public:
       RAND(const string &outDir): DOC(outDir) {}
       virtual ~RAND() {}
     protected:
       const sectionMap &getSections() const override { return CUDA_RAND_API_SECTION_MAP; }
+      const functionMap &getFunctions() const override { return CUDA_RAND_FUNCTION_MAP; }
+      const typeMap &getTypes() const override { return CUDA_RAND_TYPE_NAME_MAP; }
+      const versionMap &getFunctionVersions() const override { return CUDA_RAND_FUNCTION_VER_MAP; }
+      const versionMap &getTypeVersions() const override { return CUDA_RAND_TYPE_NAME_VER_MAP; }
       const string &getName() const override { return sCURAND; }
       const string &getFileName(docType format) const override {
         switch (format) {
@@ -263,6 +335,10 @@ namespace doc {
       virtual ~DNN() {}
     protected:
       const sectionMap &getSections() const override { return CUDA_DNN_API_SECTION_MAP; }
+      const functionMap &getFunctions() const override { return CUDA_DNN_FUNCTION_MAP; }
+      const typeMap &getTypes() const override { return CUDA_DNN_TYPE_NAME_MAP; }
+      const versionMap &getFunctionVersions() const override { return CUDA_DNN_FUNCTION_VER_MAP; }
+      const versionMap &getTypeVersions() const override { return CUDA_DNN_TYPE_NAME_VER_MAP; }
       const string &getName() const override { return sCUDNN; }
       const string &getFileName(docType format) const override {
         switch (format) {
@@ -280,6 +356,10 @@ namespace doc {
       virtual ~FFT() {}
     protected:
       const sectionMap &getSections() const override { return CUDA_FFT_API_SECTION_MAP; }
+      const functionMap &getFunctions() const override { return CUDA_FFT_FUNCTION_MAP; }
+      const typeMap &getTypes() const override { return CUDA_FFT_TYPE_NAME_MAP; }
+      const versionMap &getFunctionVersions() const override { return CUDA_FFT_FUNCTION_VER_MAP; }
+      const versionMap &getTypeVersions() const override { return CUDA_FFT_TYPE_NAME_VER_MAP; }
       const string &getName() const override { return sCUFFT; }
       const string &getFileName(docType format) const override {
         switch (format) {
@@ -297,6 +377,10 @@ namespace doc {
       virtual ~SPARSE() {}
     protected:
       const sectionMap &getSections() const override { return CUDA_SPARSE_API_SECTION_MAP; }
+      const functionMap &getFunctions() const override { return CUDA_SPARSE_FUNCTION_MAP; }
+      const typeMap &getTypes() const override { return CUDA_SPARSE_TYPE_NAME_MAP; }
+      const versionMap &getFunctionVersions() const override { return CUDA_SPARSE_FUNCTION_VER_MAP; }
+      const versionMap &getTypeVersions() const override { return CUDA_SPARSE_TYPE_NAME_VER_MAP; }
       const string &getName() const override { return sCUSPARSE; }
       const string &getFileName(docType format) const override {
         switch (format) {
@@ -310,29 +394,31 @@ namespace doc {
 
   bool generate(bool GenerateMD, bool GenerateCSV) {
     if (!GenerateMD && !GenerateCSV) return true;
-    std::error_code EC;
-    std::string sOutputAbsPath = OutputDir;
-    if (!sOutputAbsPath.empty()) {
-      sOutputAbsPath = getAbsoluteDirectoryPath(sOutputAbsPath, EC, "documentation");
+    error_code EC;
+    string sOut = OutputDir;
+    if (!sOut.empty()) {
+      sOut = getAbsoluteDirectoryPath(sOut, EC, "documentation");
       if (EC) return false;
     }
     unsigned int docFormats = 0;
     if (GenerateMD) docFormats |= md;
     if (GenerateCSV) docFormats |= csv;
     DOCS docs(docFormats);
-    DRIVER driver(sOutputAbsPath);
+    DRIVER driver(sOut);
     docs.addDoc(&driver);
-    RUNTIME runtime(sOutputAbsPath);
+    RUNTIME runtime(sOut);
     docs.addDoc(&runtime);
-    COMPLEX complex(sOutputAbsPath);
+    COMPLEX complex(sOut);
     docs.addDoc(&complex);
-    RAND rand(sOutputAbsPath);
+    BLAS blas(sOut);
+    docs.addDoc(&blas);
+    RAND rand(sOut);
     docs.addDoc(&rand);
-    DNN dnn(sOutputAbsPath);
+    DNN dnn(sOut);
     docs.addDoc(&dnn);
-    FFT fft(sOutputAbsPath);
+    FFT fft(sOut);
     docs.addDoc(&fft);
-    SPARSE sparse(sOutputAbsPath);
+    SPARSE sparse(sOut);
     docs.addDoc(&sparse);
     return docs.generate();
   }
