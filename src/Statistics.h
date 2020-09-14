@@ -159,6 +159,22 @@ constexpr int CUDA_REMOVED = (int) SupportDegree::REMOVED;
 
 enum cudaVersions {
   CUDA_0 = 0, // Unknown version
+  CUDA_10 = 1000,
+  CUDA_11 = 1010,
+  CUDA_20 = 2000,
+  CUDA_21 = 2010,
+  CUDA_22 = 2020,
+  CUDA_23 = 2030,
+  CUDA_30 = 3000,
+  CUDA_31 = 3010,
+  CUDA_32 = 3020,
+  CUDA_40 = 4000,
+  CUDA_41 = 4010,
+  CUDA_42 = 4020,
+  CUDA_50 = 5000,
+  CUDA_55 = 5050,
+  CUDA_60 = 6000,
+  CUDA_65 = 6050,
   CUDA_70 = 7000,
   CUDA_75 = 7050,
   CUDA_80 = 8000,
@@ -172,7 +188,7 @@ enum cudaVersions {
 };
 
 struct cudaAPIversions {
-  cudaVersions appeared = cudaVersions::CUDA_70;
+  cudaVersions appeared = cudaVersions::CUDA_0;
   cudaVersions deprecated = cudaVersions::CUDA_0;
   cudaVersions removed = cudaVersions::CUDA_0;
 };
