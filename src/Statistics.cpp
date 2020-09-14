@@ -363,27 +363,33 @@ bool Statistics::isUnsupported(const hipCounter &counter) {
 std::string Statistics::getCudaVersion(const cudaVersions& ver) {
   switch (ver) {
     case CUDA_0:
-    case CUDA_70:
-    default:
-      return "";
-    case CUDA_75:
-      return "7.5";
-    case CUDA_80:
-      return "8.0";
-    case CUDA_90:
-      return "9.0";
-    case CUDA_91:
-      return "9.1";
-    case CUDA_92:
-      return "9.2";
-    case CUDA_100:
-      return "10.0";
-    case CUDA_101:
-      return "10.1";
-    case CUDA_102:
-      return "10.2";
-    case CUDA_110:
-      return "11.0";
+    default:       return "";
+    case CUDA_10:  return "1.0";
+    case CUDA_11:  return "1.1";
+    case CUDA_20:  return "2.0";
+    case CUDA_21:  return "2.1";
+    case CUDA_22:  return "2.2";
+    case CUDA_23:  return "2.3";
+    case CUDA_30:  return "3.0";
+    case CUDA_31:  return "3.1";
+    case CUDA_32:  return "3.2";
+    case CUDA_40:  return "4.0";
+    case CUDA_41:  return "4.1";
+    case CUDA_42:  return "4.2";
+    case CUDA_50:  return "5.0";
+    case CUDA_55:  return "5.5";
+    case CUDA_60:  return "6.0";
+    case CUDA_65:  return "6.5";
+    case CUDA_70:  return "7.0";
+    case CUDA_75:  return "7.5";
+    case CUDA_80:  return "8.0";
+    case CUDA_90:  return "9.0";
+    case CUDA_91:  return "9.1";
+    case CUDA_92:  return "9.2";
+    case CUDA_100: return "10.0";
+    case CUDA_101: return "10.1";
+    case CUDA_102: return "10.2";
+    case CUDA_110: return "11.0";
   }
   return "";
 }
