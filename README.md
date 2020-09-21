@@ -43,7 +43,7 @@ After applying all the matchers, the output HIP source is produced.
 
 `hipify-clang` requires:
 
-1. [**LLVM+CLANG**](http://releases.llvm.org) of at least version [3.8.0](http://releases.llvm.org/download.html#3.8.0); the latest stable and recommended release: [**10.0.1**](https://github.com/llvm/llvm-project/releases/tag/llvmorg-10.0.1).
+1. [**LLVM+CLANG**](http://releases.llvm.org) of at least version [3.8.0](http://releases.llvm.org/download.html#3.8.0); the latest stable and recommended release: [**10.0.1**](https://releases.llvm.org/download.html#10.0.1).
 
 2. [**CUDA**](https://developer.nvidia.com/cuda-downloads) of at least version [7.0](https://developer.nvidia.com/cuda-toolkit-70), the latest supported version is [**11.0**](https://developer.nvidia.com/cuda-downloads).
 
@@ -57,7 +57,7 @@ After applying all the matchers, the output HIP source is produced.
 | [8.0.0](http://releases.llvm.org/download.html#8.0.0) , [8.0.1](http://releases.llvm.org/download.html#8.0.1) | [10.0](https://developer.nvidia.com/cuda-10.0-download-archive)          | works only with the patch <br> due to the clang's bug [38811](https://bugs.llvm.org/show_bug.cgi?id=38811) <br>[patch for 8.0.0](patches/patch_for_clang_8.0.0_bug_38811.zip)\*\* <br>[patch for 8.0.1](patches/patch_for_clang_8.0.1_bug_38811.zip)\*\*<br>| + |
 | [9.0.0](http://releases.llvm.org/download.html#9.0.0) , [9.0.1](http://releases.llvm.org/download.html#9.0.1) | [10.1](https://developer.nvidia.com/cuda-10.1-download-archive-base)     | +           | +         |
 | [10.0.0](http://releases.llvm.org/download.html#10.0.0)    | [11.0](https://developer.nvidia.com/cuda-downloads)                      | +           | +         |
-| [**10.0.1**](https://github.com/llvm/llvm-project/releases/tag/llvmorg-10.0.1) | [**11.0 Update 1**](https://developer.nvidia.com/cuda-downloads)  | + <br/> **LATEST STABLE RELEASE** | + <br/> **LATEST STABLE RELEASE** |
+| [**10.0.1**](https://releases.llvm.org/download.html#10.0.1) | [**11.0 Update 1**](https://developer.nvidia.com/cuda-downloads)  | + <br/> **LATEST STABLE RELEASE** | + <br/> **LATEST STABLE RELEASE** |
 | [11.0.0-rc1](https://github.com/llvm/llvm-project/releases/tag/llvmorg-11.0.0-rc1) | [11.0 Update 1](https://developer.nvidia.com/cuda-downloads)             | +           | +         |
 
 `*`  `LLVM 3.x` is not supported anymore but might still work.
@@ -157,7 +157,7 @@ Run `Visual Studio 16 2019`, open the generated `LLVM.sln`, build all, build pro
 
 **LLVM 10.0.0 or newer:**
 
-1. download [`LLVM project`](https://github.com/llvm/llvm-project/archive/llvmorg-10.0.1.tar.gz) sources;
+1. download [`LLVM project`](https://releases.llvm.org/download.html#10.0.1) sources;
 2. build [`LLVM project`](http://llvm.org/docs/CMake.html):
 
  **Linux**:
@@ -407,7 +407,7 @@ Testing Time: 3.28s
 | 8.0.0 - 8.0.1       | 10.0          | 7.6.5.32            | 2017.15.9.15              | 3.14.2, 3.18.0 | 3.7.4, 3.8.5 |
 | 9.0.0 - 9.0.1       | 10.1          | 7.6.5.32            | 2017.15.9.20, 2019.16.4.5 | 3.16.4, 3.18.0 | 3.8.0, 3.8.5 |
 | 10.0.0 - 11.0.0-rc1 | 8.0 - 11.0 U1 | 7.6.5.32 - 8.0.2.39 | 2017.15.9.26, 2019.16.7.1 | 3.18.1         | 3.8.5        |
-| 12.0.0git           | 8.0 - 11.0 U1 | 7.6.5.32 - 8.0.2.39 | 2017.15.9.26, 2019.16.7.1 | 3.18.1         | 3.8.5        |
+| 12.0.0git           | 8.0 - 11.0 U1 | 7.6.5.32 - 8.0.2.39 | 2017.15.9.27, 2019.16.7.3 | 3.18.2         | 3.8.5        |
 
 *Building with testing support by `Visual Studio 16 2019` on `Windows 10`:*
 
