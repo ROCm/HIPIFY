@@ -134,7 +134,7 @@ namespace doc {
           return false;
         }
         files.insert({ format, file });
-        tmpFiles.insert({ format, string(tmpFile) });
+        tmpFiles.insert({ format, tmpFile.str().str() });
         streams.insert(make_pair(format, unique_ptr<ostream>(new ofstream(tmpFile.c_str(), ios_base::trunc))));
         return true;
       }
