@@ -64,7 +64,7 @@ endif()
 
 if (MSVC)
     target_link_libraries(hipify-clang PRIVATE version)
-    target_compile_options(hipify-clang PRIVATE "/Od /GR- /EHs- /EHc-")
+    target_compile_options(hipify-clang PRIVATE /Od /GR- /EHs- /EHc-)
     set(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} /SUBSYSTEM:WINDOWS")
     set(StdCpp "/std:c++")
 else()
