@@ -176,6 +176,7 @@ namespace doc {
             }
             *streams[md].get() << endl;
           }
+          *streams[md].get() << endl << "\\* A - Added, D - Deprecated, R - Removed";
         }
         return true;
       }
