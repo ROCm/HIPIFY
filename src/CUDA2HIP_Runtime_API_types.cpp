@@ -275,7 +275,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE3D_WIDTH
   {"cudaDevAttrMaxTexture3DWidth",                                     {"hipDeviceAttributeMaxTexture3DWidth",                      "", CONV_NUMERIC_LITERAL, API_RUNTIME, 34}}, // 24
   // CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE3D_HEIGHT
-  {"cudaDevAttrMaxTexture3DHeight",                                    {"hipDeviceAttributeMaxTexture3DHeight",                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, 34}}, // 25
+  {"cudaDevAttrMaxTexture3DHeight",                                     {"hipDeviceAttributeMaxTexture3DHeight",                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, 34}}, // 25
   // CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE3D_DEPTH
   {"cudaDevAttrMaxTexture3DDepth",                                     {"hipDeviceAttributeMaxTexture3DDepth",                      "", CONV_NUMERIC_LITERAL, API_RUNTIME, 34}}, // 26
   // CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LAYERED_WIDTH
@@ -427,9 +427,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaDevAttrPageableMemoryAccessUsesHostPageTables",                {"hipDeviceAttributePageableMemoryAccessUsesHostPageTables", "", CONV_NUMERIC_LITERAL, API_RUNTIME, 34, HIP_UNSUPPORTED}}, // 100
   // CU_DEVICE_ATTRIBUTE_DIRECT_MANAGED_MEM_ACCESS_FROM_HOST
   {"cudaDevAttrDirectManagedMemAccessFromHost",                        {"hipDeviceAttributeDirectManagedMemAccessFromHost",         "", CONV_NUMERIC_LITERAL, API_RUNTIME, 34, HIP_UNSUPPORTED}}, // 101
-  //
+  // CU_DEVICE_ATTRIBUTE_MAX_BLOCKS_PER_MULTIPROCESSOR
   {"cudaDevAttrMaxBlocksPerMultiprocessor",                            {"hipDevAttrMaxBlocksPerMultiprocessor",                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, 34, HIP_UNSUPPORTED}}, // 106
-  //
+  // CU_DEVICE_ATTRIBUTE_RESERVED_SHARED_MEMORY_PER_BLOCK
   {"cudaDevAttrReservedSharedMemoryPerBlock",                          {"hipDevAttrReservedSharedMemoryPerBlock",                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 34, HIP_UNSUPPORTED}}, // 111
 
   // CUdevice_P2PAttribute
