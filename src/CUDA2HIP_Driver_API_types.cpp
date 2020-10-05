@@ -276,7 +276,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaComputeModeDefault
   {"CU_COMPUTEMODE_DEFAULT",                                           {"hipComputeModeDefault",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0
   // cudaComputeModeExclusive
-  // NOTE: Deprecated since CUDA 10.0
+  // NOTE: Deprecated since CUDA 8.0
   {"CU_COMPUTEMODE_EXCLUSIVE",                                         {"hipComputeModeExclusive",                                  "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, REMOVED}}, // 1
   // cudaComputeModeProhibited
   {"CU_COMPUTEMODE_PROHIBITED",                                        {"hipComputeModeProhibited",                                 "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 2
@@ -328,7 +328,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_DEVICE_ATTRIBUTE_MAX_SHARED_MEMORY_PER_BLOCK",                  {"hipDeviceAttributeMaxSharedMemoryPerBlock",                "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, //  8
   // no analogue
   // NOTE: Deprecated, use CU_DEVICE_ATTRIBUTE_MAX_SHARED_MEMORY_PER_BLOCK
-  {"CU_DEVICE_ATTRIBUTE_SHARED_MEMORY_PER_BLOCK",                      {"hipDeviceAttributeMaxSharedMemoryPerBlock",                "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, //  8
+  {"CU_DEVICE_ATTRIBUTE_SHARED_MEMORY_PER_BLOCK",                      {"hipDeviceAttributeMaxSharedMemoryPerBlock",                "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, DEPRECATED}}, //  8
   // cudaDevAttrTotalConstantMemory
   {"CU_DEVICE_ATTRIBUTE_TOTAL_CONSTANT_MEMORY",                        {"hipDeviceAttributeTotalConstantMemory",                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, //  9
   // cudaDevAttrWarpSize
@@ -338,14 +338,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaDevAttrMaxRegistersPerBlock
   {"CU_DEVICE_ATTRIBUTE_MAX_REGISTERS_PER_BLOCK",                      {"hipDeviceAttributeMaxRegistersPerBlock",                   "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 12
   // no analogue
-  {"CU_DEVICE_ATTRIBUTE_REGISTERS_PER_BLOCK",                          {"hipDeviceAttributeMaxRegistersPerBlock",                   "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 12
+  {"CU_DEVICE_ATTRIBUTE_REGISTERS_PER_BLOCK",                          {"hipDeviceAttributeMaxRegistersPerBlock",                   "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, DEPRECATED}}, // 12
   // cudaDevAttrClockRate
   {"CU_DEVICE_ATTRIBUTE_CLOCK_RATE",                                   {"hipDeviceAttributeClockRate",                              "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 13
   // cudaDevAttrTextureAlignment
   {"CU_DEVICE_ATTRIBUTE_TEXTURE_ALIGNMENT",                            {"hipDeviceAttributeTextureAlignment",                       "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 14
   // cudaDevAttrGpuOverlap
   // NOTE: Deprecated, use instead CU_DEVICE_ATTRIBUTE_ASYNC_ENGINE_COUNT
-  {"CU_DEVICE_ATTRIBUTE_GPU_OVERLAP",                                  {"hipDeviceAttributeAsyncEngineCount",                       "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 15
+  {"CU_DEVICE_ATTRIBUTE_GPU_OVERLAP",                                  {"hipDeviceAttributeAsyncEngineCount",                       "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED | DEPRECATED}}, // 15
   // cudaDevAttrMultiProcessorCount
   {"CU_DEVICE_ATTRIBUTE_MULTIPROCESSOR_COUNT",                         {"hipDeviceAttributeMultiprocessorCount",                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 16
   // cudaDevAttrKernelExecTimeout
@@ -376,13 +376,13 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LAYERED_LAYERS",             {"hipDeviceAttributeMaxTexture2DLayeredLayers",              "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 29
   // cudaDevAttrMaxTexture2DLayeredWidth
   // NOTE: Deprecated, use CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LAYERED_WIDTH
-  {"CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_ARRAY_WIDTH",                {"hipDeviceAttributeMaxTexture2DLayeredWidth",               "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 27
+  {"CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_ARRAY_WIDTH",                {"hipDeviceAttributeMaxTexture2DLayeredWidth",               "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED | DEPRECATED}}, // 27
   // cudaDevAttrMaxTexture2DLayeredHeight
   // NOTE: Deprecated, use CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LAYERED_HEIGHT
-  {"CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_ARRAY_HEIGHT",               {"hipDeviceAttributeMaxTexture2DLayeredHeight",              "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 28
+  {"CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_ARRAY_HEIGHT",               {"hipDeviceAttributeMaxTexture2DLayeredHeight",              "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED | DEPRECATED}}, // 28
   // cudaDevAttrMaxTexture2DLayeredLayers
   // NOTE: Deprecated, use CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LAYERED_LAYERS
-  {"CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_ARRAY_NUMSLICES",            {"hipDeviceAttributeMaxTexture2DLayeredLayers",              "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 29
+  {"CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_ARRAY_NUMSLICES",            {"hipDeviceAttributeMaxTexture2DLayeredLayers",              "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED | DEPRECATED}}, // 29
   // cudaDevAttrSurfaceAlignment
   {"CU_DEVICE_ATTRIBUTE_SURFACE_ALIGNMENT",                            {"hipDeviceAttributeSurfaceAlignment",                       "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 30
   // cudaDevAttrConcurrentKernels
@@ -413,7 +413,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE1D_LAYERED_LAYERS",             {"hipDeviceAttributeMaxTexture1DLayeredLayers",              "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 43
   // no analogue
   // NOTE: Deprecated, do not use
-  {"CU_DEVICE_ATTRIBUTE_CAN_TEX2D_GATHER",                             {"hipDeviceAttributeCanTex2DGather",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 44
+  {"CU_DEVICE_ATTRIBUTE_CAN_TEX2D_GATHER",                             {"hipDeviceAttributeCanTex2DGather",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED | DEPRECATED}}, // 44
   // cudaDevAttrMaxTexture2DGatherWidth
   {"CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_GATHER_WIDTH",               {"hipDeviceAttributeMaxTexture2DGatherWidth",                "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 45
   // cudaDevAttrMaxTexture2DGatherHeight
@@ -565,7 +565,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // NOTE" deprecated, use CU_DEVICE_P2P_ATTRIBUTE_CUDA_ARRAY_ACCESS_SUPPORTED instead
   {"CU_DEVICE_P2P_ATTRIBUTE_ACCESS_ACCESS_SUPPORTED",                  {"hipDevP2PAttributeCudaArrayAccessSupported",               "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED | DEPRECATED}}, // 0x04
   // NOTE" deprecated, use CU_DEVICE_P2P_ATTRIBUTE_CUDA_ARRAY_ACCESS_SUPPORTED instead
-  {"CU_DEVICE_P2P_ATTRIBUTE_ARRAY_ACCESS_ACCESS_SUPPORTED",            {"hipDevP2PAttributeCudaArrayAccessSupported",               "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0x04
+  {"CU_DEVICE_P2P_ATTRIBUTE_ARRAY_ACCESS_ACCESS_SUPPORTED",            {"hipDevP2PAttributeCudaArrayAccessSupported",               "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED | DEPRECATED | REMOVED}}, // 0x04
   // cudaDevP2PAttrCudaArrayAccessSupported = 4
   {"CU_DEVICE_P2P_ATTRIBUTE_CUDA_ARRAY_ACCESS_SUPPORTED",              {"hipDevP2PAttributeCudaArrayAccessSupported",               "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0x04
 
@@ -1653,7 +1653,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_TRSF_SRGB",                                                     {"HIP_TRSF_SRGB",                                            "", CONV_DEFINE, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0x10
   // no analogue
   // NOTE: Deprecated, use CUDA_ARRAY3D_LAYERED
-  {"CUDA_ARRAY3D_2DARRAY",                                             {"HIP_ARRAY3D_2DARRAY",                                      "", CONV_DEFINE, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0x01
+  {"CUDA_ARRAY3D_2DARRAY",                                             {"HIP_ARRAY3D_2DARRAY",                                      "", CONV_DEFINE, API_DRIVER, 1, HIP_UNSUPPORTED | DEPRECATED}}, // 0x01
   // cudaArrayLayered
   {"CUDA_ARRAY3D_LAYERED",                                             {"hipArrayLayered",                                          "", CONV_DEFINE, API_DRIVER, 1}}, // 0x01
   // cudaArraySurfaceLoadStore
@@ -1765,7 +1765,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_TYPE_NAME_VER_MAP {
   {"CU_DEVICE_P2P_ATTRIBUTE_ACCESS_SUPPORTED",                         {CUDA_80,  CUDA_0,   CUDA_0  }},
   {"CU_DEVICE_P2P_ATTRIBUTE_NATIVE_ATOMIC_SUPPORTED",                  {CUDA_80,  CUDA_0,   CUDA_0  }},
   {"CU_DEVICE_P2P_ATTRIBUTE_ACCESS_ACCESS_SUPPORTED",                  {CUDA_101, CUDA_101, CUDA_0  }},
-  {"CU_DEVICE_P2P_ATTRIBUTE_ARRAY_ACCESS_ACCESS_SUPPORTED",            {CUDA_92,  CUDA_100, CUDA_0  }},
+  {"CU_DEVICE_P2P_ATTRIBUTE_ARRAY_ACCESS_ACCESS_SUPPORTED",            {CUDA_92,  CUDA_100, CUDA_101}},
   {"CU_DEVICE_P2P_ATTRIBUTE_CUDA_ARRAY_ACCESS_SUPPORTED",              {CUDA_100, CUDA_0,   CUDA_0  }},
   {"CUeglColorFormat",                                                 {CUDA_90,  CUDA_0,   CUDA_0  }},
   {"CUeglColorFormate_enum",                                           {CUDA_90,  CUDA_0,   CUDA_0  }},
@@ -1902,4 +1902,144 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_TYPE_NAME_VER_MAP {
   {"CU_TARGET_COMPUTE_12",                                             {CUDA_0,   CUDA_0,   CUDA_90 }},
   {"CU_TARGET_COMPUTE_11",                                             {CUDA_0,   CUDA_0,   CUDA_90 }},
   {"CU_TARGET_COMPUTE_10",                                             {CUDA_0,   CUDA_0,   CUDA_90 }},
+  {"CU_LIMIT_MAX_L2_FETCH_GRANULARITY",                                {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"CU_LIMIT_PERSISTING_L2_CACHE_SIZE",                                {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"CUmem_advise",                                                     {CUDA_80,  CUDA_0,   CUDA_0  }},
+  {"CUmem_advise_enum",                                                {CUDA_80,  CUDA_0,   CUDA_0  }},
+  {"CU_MEM_ADVISE_SET_READ_MOSTLY",                                    {CUDA_80,  CUDA_0,   CUDA_0  }},
+  {"CU_MEM_ADVISE_UNSET_READ_MOSTLY",                                  {CUDA_80,  CUDA_0,   CUDA_0  }},
+  {"CU_MEM_ADVISE_SET_PREFERRED_LOCATION",                             {CUDA_80,  CUDA_0,   CUDA_0  }},
+  {"CU_MEM_ADVISE_UNSET_PREFERRED_LOCATION",                           {CUDA_80,  CUDA_0,   CUDA_0  }},
+  {"CU_MEM_ADVISE_SET_ACCESSED_BY",                                    {CUDA_80,  CUDA_0,   CUDA_0  }},
+  {"CU_MEM_ADVISE_UNSET_ACCESSED_BY",                                  {CUDA_80,  CUDA_0,   CUDA_0  }},
+  {"CUmem_range_attribute",                                            {CUDA_80,  CUDA_0,   CUDA_0  }},
+  {"CUmem_range_attribute_enum",                                       {CUDA_80,  CUDA_0,   CUDA_0  }},
+  {"CU_MEM_RANGE_ATTRIBUTE_READ_MOSTLY",                               {CUDA_80,  CUDA_0,   CUDA_0  }},
+  {"CU_MEM_RANGE_ATTRIBUTE_PREFERRED_LOCATION",                        {CUDA_80,  CUDA_0,   CUDA_0  }},
+  {"CU_MEM_RANGE_ATTRIBUTE_ACCESSED_BY",                               {CUDA_80,  CUDA_0,   CUDA_0  }},
+  {"CU_MEM_RANGE_ATTRIBUTE_LAST_PREFETCH_LOCATION",                    {CUDA_80,  CUDA_0,   CUDA_0  }},
+  {"CU_POINTER_ATTRIBUTE_IS_GPU_DIRECT_RDMA_CAPABLE",                  {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"CU_POINTER_ATTRIBUTE_ALLOWED_HANDLE_TYPES",                        {CUDA_102, CUDA_0,   CUDA_0  }},
+  {"CU_POINTER_ATTRIBUTE_MAPPED",                                      {CUDA_102, CUDA_0,   CUDA_0  }},
+  {"CU_POINTER_ATTRIBUTE_RANGE_SIZE",                                  {CUDA_102, CUDA_0,   CUDA_0  }},
+  {"CU_POINTER_ATTRIBUTE_RANGE_START_ADDR",                            {CUDA_102, CUDA_0,   CUDA_0  }},
+  {"CU_POINTER_ATTRIBUTE_IS_LEGACY_CUDA_IPC_CAPABLE",                  {CUDA_102, CUDA_0,   CUDA_0  }},
+  {"CU_POINTER_ATTRIBUTE_DEVICE_ORDINAL",                              {CUDA_92,  CUDA_0,   CUDA_0  }},
+  {"CUDA_ERROR_PROFILER_NOT_INITIALIZED",                              {CUDA_0,   CUDA_50,  CUDA_0  }},
+  {"CUDA_ERROR_PROFILER_ALREADY_STARTED",                              {CUDA_0,   CUDA_50,  CUDA_0  }},
+  {"CUDA_ERROR_PROFILER_ALREADY_STOPPED",                              {CUDA_0,   CUDA_50,  CUDA_0  }},
+  {"CUDA_ERROR_CONTEXT_ALREADY_CURRENT",                               {CUDA_0,   CUDA_32,  CUDA_0  }},
+  {"CUDA_ERROR_NVLINK_UNCORRECTABLE",                                  {CUDA_80,  CUDA_0,   CUDA_0  }},
+  {"CUDA_ERROR_JIT_COMPILER_NOT_FOUND",                                {CUDA_90,  CUDA_0,   CUDA_0  }},
+  {"CUDA_ERROR_ILLEGAL_STATE",                                         {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"CUDA_ERROR_COOPERATIVE_LAUNCH_TOO_LARGE",                          {CUDA_90,  CUDA_0,   CUDA_0  }},
+  {"CUDA_ERROR_SYSTEM_NOT_READY",                                      {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"CUDA_ERROR_SYSTEM_DRIVER_MISMATCH",                                {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUDA_ERROR_COMPAT_NOT_SUPPORTED_ON_DEVICE",                        {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUDA_ERROR_STREAM_CAPTURE_UNSUPPORTED",                            {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"CUDA_ERROR_STREAM_CAPTURE_INVALIDATED",                            {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"CUDA_ERROR_STREAM_CAPTURE_MERGE",                                  {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"CUDA_ERROR_STREAM_CAPTURE_UNMATCHED",                              {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"CUDA_ERROR_STREAM_CAPTURE_UNJOINED",                               {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"CUDA_ERROR_STREAM_CAPTURE_ISOLATION",                              {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"CUDA_ERROR_STREAM_CAPTURE_IMPLICIT",                               {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"CUDA_ERROR_CAPTURED_EVENT",                                        {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"CUDA_ERROR_STREAM_CAPTURE_WRONG_THREAD",                           {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUDA_ERROR_TIMEOUT",                                               {CUDA_102, CUDA_0,   CUDA_0  }},
+  {"CUDA_ERROR_GRAPH_EXEC_UPDATE_FAILURE",                             {CUDA_102, CUDA_0,   CUDA_0  }},
+  {"CUshared_carveout",                                                {CUDA_90,  CUDA_0,   CUDA_0  }},
+  {"CUshared_carveout_enum",                                           {CUDA_90,  CUDA_0,   CUDA_0  }},
+  {"CU_SHAREDMEM_CARVEOUT_DEFAULT",                                    {CUDA_90,  CUDA_0,   CUDA_0  }},
+  {"CU_SHAREDMEM_CARVEOUT_MAX_SHARED",                                 {CUDA_90,  CUDA_0,   CUDA_0  }},
+  {"CU_SHAREDMEM_CARVEOUT_MAX_L1",                                     {CUDA_90,  CUDA_0,   CUDA_0  }},
+  {"CUstreamBatchMemOpType",                                           {CUDA_80,  CUDA_0,   CUDA_0  }},
+  {"CUstreamBatchMemOpType_enum",                                      {CUDA_80,  CUDA_0,   CUDA_0  }},
+  {"CU_STREAM_MEM_OP_WAIT_VALUE_32",                                   {CUDA_80,  CUDA_0,   CUDA_0  }},
+  {"CU_STREAM_MEM_OP_WRITE_VALUE_32",                                  {CUDA_80,  CUDA_0,   CUDA_0  }},
+  {"CU_STREAM_MEM_OP_FLUSH_REMOTE_WRITES",                             {CUDA_80,  CUDA_0,   CUDA_0  }},
+  {"CU_STREAM_MEM_OP_WAIT_VALUE_64",                                   {CUDA_90,  CUDA_0,   CUDA_0  }},
+  {"CU_STREAM_MEM_OP_WRITE_VALUE_64",                                  {CUDA_90,  CUDA_0,   CUDA_0  }},
+  {"CUstreamCaptureStatus",                                            {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"CUstreamCaptureStatus_enum",                                       {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"CU_STREAM_CAPTURE_STATUS_NONE",                                    {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"CU_STREAM_CAPTURE_STATUS_ACTIVE",                                  {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"CU_STREAM_CAPTURE_STATUS_INVALIDATED",                             {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"CUstreamCaptureMode",                                              {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUstreamCaptureMode_enum",                                         {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CU_STREAM_CAPTURE_MODE_GLOBAL",                                    {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CU_STREAM_CAPTURE_MODE_THREAD_LOCAL",                              {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CU_STREAM_CAPTURE_MODE_RELAXED",                                   {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUstreamWaitValue_flags",                                          {CUDA_80,  CUDA_0,   CUDA_0  }},
+  {"CUstreamWaitValue_flags_enum",                                     {CUDA_80,  CUDA_0,   CUDA_0  }},
+  {"CU_STREAM_WAIT_VALUE_GEQ",                                         {CUDA_80,  CUDA_0,   CUDA_0  }},
+  {"CU_STREAM_WAIT_VALUE_EQ",                                          {CUDA_80,  CUDA_0,   CUDA_0  }},
+  {"CU_STREAM_WAIT_VALUE_AND",                                         {CUDA_80,  CUDA_0,   CUDA_0  }},
+  {"CU_STREAM_WAIT_VALUE_FLUSH",                                       {CUDA_80,  CUDA_0,   CUDA_0  }},
+  {"CUstreamWriteValue_flags",                                         {CUDA_80,  CUDA_0,   CUDA_0  }},
+  {"CUstreamWriteValue_flags_enum",                                    {CUDA_80,  CUDA_0,   CUDA_0  }},
+  {"CU_STREAM_WRITE_VALUE_DEFAULT",                                    {CUDA_80,  CUDA_0,   CUDA_0  }},
+  {"CU_STREAM_WRITE_VALUE_NO_MEMORY_BARRIER",                          {CUDA_80,  CUDA_0,   CUDA_0  }},
+  {"CUmemAllocationHandleType",                                        {CUDA_102, CUDA_0,   CUDA_0  }},
+  {"CUmemAllocationHandleType_enum",                                   {CUDA_102, CUDA_0,   CUDA_0  }},
+  {"CU_MEM_HANDLE_TYPE_POSIX_FILE_DESCRIPTOR",                         {CUDA_102, CUDA_0,   CUDA_0  }},
+  {"CU_MEM_HANDLE_TYPE_WIN32",                                         {CUDA_102, CUDA_0,   CUDA_0  }},
+  {"CU_MEM_HANDLE_TYPE_WIN32_KMT",                                     {CUDA_102, CUDA_0,   CUDA_0  }},
+  {"CU_MEM_HANDLE_TYPE_MAX",                                           {CUDA_102, CUDA_0,   CUDA_0  }},
+  {"CUmemAccess_flags",                                                {CUDA_102, CUDA_0,   CUDA_0  }},
+  {"CUmemAccess_flags_enum",                                           {CUDA_102, CUDA_0,   CUDA_0  }},
+  {"CU_MEM_ACCESS_FLAGS_PROT_NONE",                                    {CUDA_102, CUDA_0,   CUDA_0  }},
+  {"CU_MEM_ACCESS_FLAGS_PROT_READ",                                    {CUDA_102, CUDA_0,   CUDA_0  }},
+  {"CU_MEM_ACCESS_FLAGS_PROT_READWRITE",                               {CUDA_102, CUDA_0,   CUDA_0  }},
+  {"CU_MEM_ACCESS_FLAGS_PROT_MAX",                                     {CUDA_102, CUDA_0,   CUDA_0  }},
+  {"CUmemLocationType",                                                {CUDA_102, CUDA_0,   CUDA_0  }},
+  {"CUmemLocationType_enum",                                           {CUDA_102, CUDA_0,   CUDA_0  }},
+  {"CU_MEM_LOCATION_TYPE_INVALID",                                     {CUDA_102, CUDA_0,   CUDA_0  }},
+  {"CU_MEM_LOCATION_TYPE_DEVICE",                                      {CUDA_102, CUDA_0,   CUDA_0  }},
+  {"CU_MEM_LOCATION_TYPE_MAX",                                         {CUDA_102, CUDA_0,   CUDA_0  }},
+  {"CUmemAllocationGranularity_flags",                                 {CUDA_102, CUDA_0,   CUDA_0  }},
+  {"CUmemAllocationGranularity_flags_enum",                            {CUDA_102, CUDA_0,   CUDA_0  }},
+  {"CU_MEM_ALLOC_GRANULARITY_MINIMUM",                                 {CUDA_102, CUDA_0,   CUDA_0  }},
+  {"CU_MEM_ALLOC_GRANULARITY_RECOMMENDED",                             {CUDA_102, CUDA_0,   CUDA_0  }},
+  {"CUaccessProperty",                                                 {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"CUaccessProperty_enum",                                            {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"CU_ACCESS_PROPERTY_NORMAL",                                        {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"CU_ACCESS_PROPERTY_STREAMING",                                     {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"CU_ACCESS_PROPERTY_PERSISTING",                                    {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"CUsynchronizationPolicy",                                          {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"CUsynchronizationPolicy_enum",                                     {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"CU_SYNC_POLICY_AUTO",                                              {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"CU_SYNC_POLICY_SPIN",                                              {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"CU_SYNC_POLICY_YIELD",                                             {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"CU_SYNC_POLICY_BLOCKING_SYNC",                                     {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"CUkernelNodeAttrID",                                               {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"CUkernelNodeAttrID_enum",                                          {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"CU_KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW",                    {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"CU_KERNEL_NODE_ATTRIBUTE_COOPERATIVE",                             {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"CUstreamAttrID",                                                   {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"CUstreamAttrID_enum",                                              {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"CU_STREAM_ATTRIBUTE_ACCESS_POLICY_WINDOW",                         {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"CU_STREAM_ATTRIBUTE_SYNCHRONIZATION_POLICY",                       {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"CUhostFn",                                                         {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"CUmemGenericAllocationHandle",                                     {CUDA_102, CUDA_0,   CUDA_0  }},
+  {"CU_DEVICE_CPU",                                                    {CUDA_80,  CUDA_0,   CUDA_0  }},
+  {"CU_DEVICE_INVALID",                                                {CUDA_80,  CUDA_0,   CUDA_0  }},
+  {"CU_MEMHOSTREGISTER_IOMEMORY",                                      {CUDA_75,  CUDA_0,   CUDA_0  }},
+  {"CUDA_ARRAY3D_COLOR_ATTACHMENT",                                    {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"CUDA_COOPERATIVE_LAUNCH_MULTI_DEVICE_NO_PRE_LAUNCH_SYNC",          {CUDA_90,  CUDA_0,   CUDA_0  }},
+  {"CUDA_COOPERATIVE_LAUNCH_MULTI_DEVICE_NO_POST_LAUNCH_SYNC",         {CUDA_90,  CUDA_0,   CUDA_0  }},
+  {"CUDA_EXTERNAL_MEMORY_DEDICATED",                                   {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"CUDA_EXTERNAL_SEMAPHORE_SIGNAL_SKIP_NVSCIBUF_MEMSYNC",             {CUDA_102, CUDA_0,   CUDA_0  }},
+  {"CUDA_EXTERNAL_SEMAPHORE_WAIT_SKIP_NVSCIBUF_MEMSYNC",               {CUDA_102, CUDA_0,   CUDA_0  }},
+  {"CUDA_NVSCISYNC_ATTR_SIGNAL",                                       {CUDA_102, CUDA_0,   CUDA_0  }},
+  {"CUDA_NVSCISYNC_ATTR_WAIT",                                         {CUDA_102, CUDA_0,   CUDA_0  }},
+  {"CU_TRSF_DISABLE_TRILINEAR_OPTIMIZATION",                           {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"CU_DEVICE_ATTRIBUTE_SHARED_MEMORY_PER_BLOCK",                      {CUDA_0,   CUDA_50,  CUDA_0  }},
+  {"CU_DEVICE_ATTRIBUTE_GPU_OVERLAP",                                  {CUDA_0,   CUDA_50,  CUDA_0  }},
+  {"CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_ARRAY_WIDTH",                {CUDA_0,   CUDA_50,  CUDA_0  }},
+  {"CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_ARRAY_HEIGHT",               {CUDA_0,   CUDA_50,  CUDA_0  }},
+  {"CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_ARRAY_NUMSLICES",            {CUDA_0,   CUDA_50,  CUDA_0  }},
+  {"CU_DEVICE_ATTRIBUTE_CAN_TEX2D_GATHER",                             {CUDA_0,   CUDA_50,  CUDA_0  }},
+  {"CU_DEVICE_P2P_ATTRIBUTE_ARRAY_ACCESS_ACCESS_SUPPORTED",            {CUDA_0,   CUDA_100, CUDA_101}},
+  {"CUDA_ARRAY3D_2DARRAY",                                             {CUDA_0,   CUDA_50,  CUDA_0  }},
+  {"CU_DEVICE_ATTRIBUTE_REGISTERS_PER_BLOCK",                          {CUDA_0,   CUDA_50,  CUDA_0  }},
 };
