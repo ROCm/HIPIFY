@@ -59,6 +59,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_FFT_FUNCTION_MAP {
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_FFT_FUNCTION_VER_MAP {
+  {"cufftMakePlanMany64",                                 {CUDA_75,  CUDA_0, CUDA_0}},
+  {"cufftGetSizeMany64",                                  {CUDA_75,  CUDA_0, CUDA_0}},
+  {"cufftGetProperty",                                    {CUDA_80,  CUDA_0, CUDA_0}},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_FFT_API_SECTION_MAP {
