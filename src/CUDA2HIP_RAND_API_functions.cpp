@@ -86,6 +86,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RAND_FUNCTION_MAP {
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_RAND_FUNCTION_VER_MAP {
+  {"curandGetProperty",                             {CUDA_80,  CUDA_0, CUDA_0}},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_RAND_API_SECTION_MAP {
