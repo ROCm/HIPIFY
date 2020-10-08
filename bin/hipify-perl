@@ -686,7 +686,6 @@ sub simpleSubstitutions {
     $ft{'library'} += s/\bcublasSgemmStridedBatched\b/hipblasSgemmStridedBatched/g;
     $ft{'library'} += s/\bcublasSgemm_v2\b/hipblasSgemm/g;
     $ft{'library'} += s/\bcublasSgemv\b/hipblasSgemv/g;
-    $ft{'library'} += s/\bcublasSgemvBatched\b/hipblasSgemvBatched/g;
     $ft{'library'} += s/\bcublasSgemv_v2\b/hipblasSgemv/g;
     $ft{'library'} += s/\bcublasSgeqrfBatched\b/hipblasSgeqrfBatched/g;
     $ft{'library'} += s/\bcublasSger\b/hipblasSger/g;

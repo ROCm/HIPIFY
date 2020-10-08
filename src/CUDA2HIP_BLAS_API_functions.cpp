@@ -156,8 +156,6 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
 
   // GEMV
   {"cublasSgemv",                    {"hipblasSgemv",                    "rocblas_sgemv",                            CONV_LIB_FUNC, API_BLAS, 6}},
-  // NOTE: there is no such a function in CUDA
-  {"cublasSgemvBatched",             {"hipblasSgemvBatched",             "rocblas_sgemv_batched",                    CONV_LIB_FUNC, API_BLAS, 6}},
   {"cublasDgemv",                    {"hipblasDgemv",                    "rocblas_dgemv",                            CONV_LIB_FUNC, API_BLAS, 6}},
   {"cublasCgemv",                    {"hipblasCgemv",                    "rocblas_cgemv",                            CONV_LIB_FUNC, API_BLAS, 6}},
   {"cublasZgemv",                    {"hipblasZgemv",                    "rocblas_zgemv",                            CONV_LIB_FUNC, API_BLAS, 6}},
@@ -672,8 +670,49 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_FUNCTION_VER_MAP {
+  {"cublasGetMathMode",                          {CUDA_90,  CUDA_0, CUDA_0}},
   {"cublasMigrateComputeType",                   {CUDA_110, CUDA_0, CUDA_0}},
+  {"cublasLogCallback",                          {CUDA_92,  CUDA_0, CUDA_0}},
+  {"cublasLoggerConfigure",                      {CUDA_92,  CUDA_0, CUDA_0}},
+  {"cublasSetLoggerCallback",                    {CUDA_92,  CUDA_0, CUDA_0}},
+  {"cublasGetLoggerCallback",                    {CUDA_92,  CUDA_0, CUDA_0}},
   {"cublasGetCudartVersion",                     {CUDA_101, CUDA_0, CUDA_0}},
+  {"cublasNrm2Ex",                               {CUDA_80,  CUDA_0, CUDA_0}},
+  {"cublasHgemm",                                {CUDA_75,  CUDA_0, CUDA_0}},
+  {"cublasHgemmBatched",                         {CUDA_90,  CUDA_0, CUDA_0}},
+  {"cublasSgemmStridedBatched",                  {CUDA_80,  CUDA_0, CUDA_0}},
+  {"cublasDgemmStridedBatched",                  {CUDA_80,  CUDA_0, CUDA_0}},
+  {"cublasCgemm3mBatched",                       {CUDA_80,  CUDA_0, CUDA_0}},
+  {"cublasCgemmStridedBatched",                  {CUDA_80,  CUDA_0, CUDA_0}},
+  {"cublasCgemm3mStridedBatched",                {CUDA_80,  CUDA_0, CUDA_0}},
+  {"cublasZgemmStridedBatched",                  {CUDA_80,  CUDA_0, CUDA_0}},
+  {"cublasHgemmStridedBatched",                  {CUDA_80,  CUDA_0, CUDA_0}},
+  {"cublasCgemm3m",                              {CUDA_80,  CUDA_0, CUDA_0}},
+  {"cublasCgemm3mEx",                            {CUDA_80,  CUDA_0, CUDA_0}},
+  {"cublasZgemm3m",                              {CUDA_80,  CUDA_0, CUDA_0}},
+  {"cublasSgemmEx",                              {CUDA_75,  CUDA_0, CUDA_0}},
+  {"cublasGemmEx",                               {CUDA_80,  CUDA_0, CUDA_0}},
+  {"cublasGemmBatchedEx",                        {CUDA_91,  CUDA_0, CUDA_0}},
+  {"cublasGemmStridedBatchedEx",                 {CUDA_91,  CUDA_0, CUDA_0}},
+  {"cublasCgemmEx",                              {CUDA_80,  CUDA_0, CUDA_0}},
+  {"cublasUint8gemmBias",                        {CUDA_80,  CUDA_0, CUDA_0}},
+  {"cublasCsyrkEx",                              {CUDA_80,  CUDA_0, CUDA_0}},
+  {"cublasCsyrk3mEx",                            {CUDA_80,  CUDA_0, CUDA_0}},
+  {"cublasCherkEx",                              {CUDA_80,  CUDA_0, CUDA_0}},
+  {"cublasCherk3mEx",                            {CUDA_80,  CUDA_0, CUDA_0}},
+  {"cublasDotEx",                                {CUDA_80,  CUDA_0, CUDA_0}},
+  {"cublasDotcEx",                               {CUDA_80,  CUDA_0, CUDA_0}},
+  {"cublasScalEx",                               {CUDA_80,  CUDA_0, CUDA_0}},
+  {"cublasAxpyEx",                               {CUDA_80,  CUDA_0, CUDA_0}},
+  {"cublasCopyEx",                               {CUDA_101, CUDA_0, CUDA_0}},
+  {"cublasSwapEx",                               {CUDA_101, CUDA_0, CUDA_0}},
+  {"cublasIamaxEx",                              {CUDA_101, CUDA_0, CUDA_0}},
+  {"cublasIaminEx",                              {CUDA_101, CUDA_0, CUDA_0}},
+  {"cublasAsumEx",                               {CUDA_101, CUDA_0, CUDA_0}},
+  {"cublasRotEx",                                {CUDA_101, CUDA_0, CUDA_0}},
+  {"cublasRotgEx",                               {CUDA_101, CUDA_0, CUDA_0}},
+  {"cublasRotmEx",                               {CUDA_101, CUDA_0, CUDA_0}},
+  {"cublasRotmgEx",                              {CUDA_101, CUDA_0, CUDA_0}},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_BLAS_API_SECTION_MAP {
