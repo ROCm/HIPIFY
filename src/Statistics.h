@@ -185,6 +185,7 @@ enum cudaVersions {
   CUDA_101 = 10010,
   CUDA_102 = 10020,
   CUDA_110 = 11000,
+  CUDA_111 = 11010,
 };
 
 struct cudaAPIversions {
