@@ -43,31 +43,32 @@ After applying all the matchers, the output HIP source is produced.
 
 `hipify-clang` requires:
 
-1. [**LLVM+CLANG**](http://releases.llvm.org) of at least version [3.8.0](http://releases.llvm.org/download.html#3.8.0); the latest stable and recommended release: [**10.0.1**](https://releases.llvm.org/download.html#10.0.1).
+1. [**LLVM+CLANG**](http://releases.llvm.org) of at least version [3.8.0](http://releases.llvm.org/download.html#3.8.0); the latest stable and recommended release: [**11.0.0**](https://releases.llvm.org/download.html#11.0.0).
 
 2. [**CUDA**](https://developer.nvidia.com/cuda-downloads) of at least version [7.0](https://developer.nvidia.com/cuda-toolkit-70), the latest supported version is [**11.0**](https://developer.nvidia.com/cuda-downloads).
 
 | **LLVM release version**                                   | **CUDA latest supported version**                                        | **Windows** | **Linux** |
 |:----------------------------------------------------------:|:------------------------------------------------------------------------:|:-----------:|:---------:|
-| [3.8.0](http://releases.llvm.org/download.html#3.8.0)\* , [3.8.1](http://releases.llvm.org/download.html#3.8.1)\* , <br>[3.9.0](http://releases.llvm.org/download.html#3.9.0)\* , [3.9.1](http://releases.llvm.org/download.html#3.9.1)\*         | [7.5](https://developer.nvidia.com/cuda-75-downloads-archive)            | +           | +         |
-| [4.0.0](http://releases.llvm.org/download.html#4.0.0) , [4.0.1](http://releases.llvm.org/download.html#4.0.1) | [8.0](https://developer.nvidia.com/cuda-80-ga2-download-archive)         | +           | +         |
-| [5.0.0](http://releases.llvm.org/download.html#5.0.0) , [5.0.1](http://releases.llvm.org/download.html#5.0.1) , [5.0.2](http://releases.llvm.org/download.html#5.0.2) | [8.0](https://developer.nvidia.com/cuda-80-ga2-download-archive)         | +           | +         |
-| [6.0.0](http://releases.llvm.org/download.html#6.0.0) , [6.0.1](http://releases.llvm.org/download.html#6.0.1) | [9.0](https://developer.nvidia.com/cuda-90-download-archive)             | +           | +         |
-| [7.0.0](http://releases.llvm.org/download.html#7.0.0) , [7.0.1](http://releases.llvm.org/download.html#7.0.1) , [7.1.0](http://releases.llvm.org/download.html#7.1.0) | [9.2](https://developer.nvidia.com/cuda-92-download-archive)             | works only with the patch <br> due to the clang's bug [38811](https://bugs.llvm.org/show_bug.cgi?id=38811) <br> [patch for 7.0.0](patches/patch_for_clang_7.0.0_bug_38811.zip)\*\* <br> [patch for 7.0.1](patches/patch_for_clang_7.0.1_bug_38811.zip)\*\* <br> [patch for 7.1.0](patches/patch_for_clang_7.1.0_bug_38811.zip)\*\* | - <br> not working due to <br> the clang's bug [36384](https://bugs.llvm.org/show_bug.cgi?id=36384) |
-| [8.0.0](http://releases.llvm.org/download.html#8.0.0) , [8.0.1](http://releases.llvm.org/download.html#8.0.1) | [10.0](https://developer.nvidia.com/cuda-10.0-download-archive)          | works only with the patch <br> due to the clang's bug [38811](https://bugs.llvm.org/show_bug.cgi?id=38811) <br>[patch for 8.0.0](patches/patch_for_clang_8.0.0_bug_38811.zip)\*\* <br>[patch for 8.0.1](patches/patch_for_clang_8.0.1_bug_38811.zip)\*\*<br>| + |
-| [9.0.0](http://releases.llvm.org/download.html#9.0.0) , [9.0.1](http://releases.llvm.org/download.html#9.0.1) | [10.1](https://developer.nvidia.com/cuda-10.1-download-archive-base)     | +           | +         |
-| [10.0.0](http://releases.llvm.org/download.html#10.0.0)    | [11.0](https://developer.nvidia.com/cuda-downloads)                      | +           | +         |
-| [**10.0.1**](https://releases.llvm.org/download.html#10.0.1) | [**11.0 Update 1**](https://developer.nvidia.com/cuda-downloads)  | + <br/> **LATEST STABLE RELEASE** | + <br/> **LATEST STABLE RELEASE** |
-| [11.0.0-rc1](https://github.com/llvm/llvm-project/releases/tag/llvmorg-11.0.0-rc1) | [11.0 Update 1](https://developer.nvidia.com/cuda-downloads)             | +           | +         |
+| [3.8.0](http://releases.llvm.org/download.html#3.8.0)\* , [3.8.1](http://releases.llvm.org/download.html#3.8.1)\*  , <br>[3.9.0](http://releases.llvm.org/download.html#3.9.0)\* , [3.9.1](http://releases.llvm.org/download.html#3.9.1)\*         | [7.5](https://developer.nvidia.com/cuda-75-downloads-archive)            | +           | +         |
+| [4.0.0](http://releases.llvm.org/download.html#4.0.0)   , [4.0.1](http://releases.llvm.org/download.html#4.0.1)    | [8.0](https://developer.nvidia.com/cuda-80-ga2-download-archive)         | +           | +         |
+| [5.0.0](http://releases.llvm.org/download.html#5.0.0)   , [5.0.1](http://releases.llvm.org/download.html#5.0.1)    , [5.0.2](http://releases.llvm.org/download.html#5.0.2) | [8.0](https://developer.nvidia.com/cuda-80-ga2-download-archive)         | +           | +         |
+| [6.0.0](http://releases.llvm.org/download.html#6.0.0)   , [6.0.1](http://releases.llvm.org/download.html#6.0.1)    | [9.0](https://developer.nvidia.com/cuda-90-download-archive)             | +           | +         |
+| [7.0.0](http://releases.llvm.org/download.html#7.0.0)   , [7.0.1](http://releases.llvm.org/download.html#7.0.1)    , [7.1.0](http://releases.llvm.org/download.html#7.1.0) | [9.2](https://developer.nvidia.com/cuda-92-download-archive)             | works only with the patch <br> due to the clang's bug [38811](https://bugs.llvm.org/show_bug.cgi?id=38811) <br> [patch for 7.0.0](patches/patch_for_clang_7.0.0_bug_38811.zip)\*\* <br> [patch for 7.0.1](patches/patch_for_clang_7.0.1_bug_38811.zip)\*\* <br> [patch for 7.1.0](patches/patch_for_clang_7.1.0_bug_38811.zip)\*\* | - <br> not working due to <br> the clang's bug [36384](https://bugs.llvm.org/show_bug.cgi?id=36384) |
+| [8.0.0](http://releases.llvm.org/download.html#8.0.0)   , [8.0.1](http://releases.llvm.org/download.html#8.0.1)    | [10.0](https://developer.nvidia.com/cuda-10.0-download-archive)          | works only with the patch <br> due to the clang's bug [38811](https://bugs.llvm.org/show_bug.cgi?id=38811) <br>[patch for 8.0.0](patches/patch_for_clang_8.0.0_bug_38811.zip)\*\* <br>[patch for 8.0.1](patches/patch_for_clang_8.0.1_bug_38811.zip)\*\*<br>| + |
+| [9.0.0](http://releases.llvm.org/download.html#9.0.0)   , [9.0.1](http://releases.llvm.org/download.html#9.0.1)    | [10.1](https://developer.nvidia.com/cuda-10.1-download-archive-base)     | +           | +         |
+| [10.0.0](http://releases.llvm.org/download.html#10.0.0) , [10.0.1](https://releases.llvm.org/download.html#10.0.1) | [**11.0**](https://developer.nvidia.com/cuda-11.0-download-archive), [11.0 Update 1](https://developer.nvidia.com/cuda-11.0-update1-download-archive)\*\*\*, [11.1](https://developer.nvidia.com/cuda-downloads)\*\*\* | +           | +         |
+| [**11.0.0**](https://releases.llvm.org/download.html#11.0.0) | [**11.0**](https://developer.nvidia.com/cuda-11.0-download-archive), [11.0 Update 1](https://developer.nvidia.com/cuda-11.0-update1-download-archive)\*\*\*, [11.1](https://developer.nvidia.com/cuda-downloads)\*\*\* | + <br/> **LATEST STABLE RELEASE** | + <br/> **LATEST STABLE RELEASE** |
 
-`*`  `LLVM 3.x` is not supported anymore but might still work.
+`*`   `LLVM 3.x` is not supported anymore but might still work.
 
-`**` Download the patch and unpack it into your `LLVM` distributive directory: a few header files will be overwritten; rebuilding of `LLVM` is not needed.
+`**`  Download the patch and unpack it into your `LLVM` distributive directory: a few header files will be overwritten; rebuilding of `LLVM` is not needed.
+
+`***` Starting with `CUDA 11 Update 1` there is a clang's bug [47332](https://bugs.llvm.org/show_bug.cgi?id=47332) which is not fixed yet; thus, currently, [CUDA 11.0](https://developer.nvidia.com/cuda-11.0-download-archive) is the latest supported `CUDA Toolkit`.
 
 In most cases, you can get a suitable version of `LLVM+CLANG` with your package manager.
 
 Failing that or having multiple versions of `LLVM`, you can [download a release archive](http://releases.llvm.org/), build or install it, and set
-[CMAKE_PREFIX_PATH](https://cmake.org/cmake/help/v3.5/variable/CMAKE_PREFIX_PATH.html) so `cmake` can find it; for instance: `-DCMAKE_PREFIX_PATH=d:\LLVM\10.0.1\dist`
+[CMAKE_PREFIX_PATH](https://cmake.org/cmake/help/v3.5/variable/CMAKE_PREFIX_PATH.html) so `cmake` can find it; for instance: `-DCMAKE_PREFIX_PATH=d:\LLVM\1.0.1\dist`
 
 ### <a name="hipify-clang-usage"></a> hipify-clang: usage
 
@@ -157,7 +158,7 @@ Run `Visual Studio 16 2019`, open the generated `LLVM.sln`, build all, build pro
 
 **LLVM 10.0.0 or newer:**
 
-1. download [`LLVM project`](https://releases.llvm.org/download.html#10.0.1) sources;
+1. download [`LLVM project`](https://releases.llvm.org/download.html#11.0.0) sources;
 2. build [`LLVM project`](http://llvm.org/docs/CMake.html):
 
  **Linux**:
@@ -202,9 +203,9 @@ Run `Visual Studio 16 2019`, open the generated `LLVM.sln`, build all, build pro
 
     * Path to cuDNN should be specified by the `CUDA_DNN_ROOT_DIR` option:
 
-        - ***Linux***: `-DCUDA_DNN_ROOT_DIR=/srv/CUDNN/cudnn-11.0-v8.0.2.39`
+        - ***Linux***: `-DCUDA_DNN_ROOT_DIR=/srv/CUDNN/cudnn-11.0-v8.0.4.30`
 
-        - ***Windows***: `-DCUDA_DNN_ROOT_DIR=d:/CUDNN/cudnn-11.0-windows10-x64-v8.0.2.39`
+        - ***Windows***: `-DCUDA_DNN_ROOT_DIR=d:/CUDNN/cudnn-11.0-windows10-x64-v8.0.4.30`
 
 5. Ensure [`CUB`](https://github.com/NVlabs/cub) of the version corresponding to CUDA's version is installed.
 
@@ -220,21 +221,21 @@ Run `Visual Studio 16 2019`, open the generated `LLVM.sln`, build all, build pro
 
     * Install `lit` into `python`:
 
-        - ***Linux***: `python /srv/git/LLVM/10.0.1/llvm/utils/lit/setup.py install`
+        - ***Linux***: `python /srv/git/LLVM/11.0.0/llvm/utils/lit/setup.py install`
 
-        - ***Windows***: `python d:/LLVM/10.0.1/llvm/utils/lit/setup.py install`
+        - ***Windows***: `python d:/LLVM/11.0.0/llvm/utils/lit/setup.py install`
 
     * Starting with LLVM 6.0.1 path to `llvm-lit` python script should be specified by the `LLVM_EXTERNAL_LIT` option:
 
-        - ***Linux***: `-DLLVM_EXTERNAL_LIT=/srv/git/LLVM/10.0.1/build/bin/llvm-lit`
+        - ***Linux***: `-DLLVM_EXTERNAL_LIT=/srv/git/LLVM/11.0.0/build/bin/llvm-lit`
 
-        - ***Windows***: `-DLLVM_EXTERNAL_LIT=d:/LLVM/10.0.1/build/Release/bin/llvm-lit.py`
+        - ***Windows***: `-DLLVM_EXTERNAL_LIT=d:/LLVM/11.0.0/build/Release/bin/llvm-lit.py`
 
     * `FileCheck`:
 
-        - ***Linux***: copy from `/srv/git/LLVM/10.0.1/build/bin/` to `CMAKE_INSTALL_PREFIX/dist/bin`
+        - ***Linux***: copy from `/srv/git/LLVM/11.0.0/build/bin/` to `CMAKE_INSTALL_PREFIX/dist/bin`
 
-        - ***Windows***: copy from `d:/LLVM/10.0.1/build/Release/bin` to `CMAKE_INSTALL_PREFIX/dist/bin`
+        - ***Windows***: copy from `d:/LLVM/11.0.0/build/Release/bin` to `CMAKE_INSTALL_PREFIX/dist/bin`
 
         - Or specify the path to `FileCheck` in `CMAKE_INSTALL_PREFIX` option
 
@@ -248,7 +249,7 @@ On Linux the following configurations are tested:
 
 Ubuntu 14: LLVM 4.0.0 - 7.1.0, CUDA 7.0 - 9.0, cuDNN 5.0.5 - 7.6.5.32
 
-Ubuntu 16-18: LLVM 8.0.0 - 11.0.0-rc1, CUDA 8.0 - 11.0, cuDNN 5.1.10 - 8.0.2.39
+Ubuntu 16-18: LLVM 8.0.0 - 11.0.0, CUDA 8.0 - 11.0, cuDNN 5.1.10 - 8.0.4.30
 
 Minimum build system requirements for the above configurations:
 
@@ -261,11 +262,11 @@ cmake
  -DHIPIFY_CLANG_TESTS=1 \
  -DCMAKE_BUILD_TYPE=Release \
  -DCMAKE_INSTALL_PREFIX=../dist \
- -DCMAKE_PREFIX_PATH=/srv/git/LLVM/10.0.1/dist \
+ -DCMAKE_PREFIX_PATH=/srv/git/LLVM/11.0.0/dist \
  -DCUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-11.0 \
- -DCUDA_DNN_ROOT_DIR=/srv/CUDNN/cudnn-11.0-v8.0.2.39 \
+ -DCUDA_DNN_ROOT_DIR=/srv/CUDNN/cudnn-11.0-v8.0.4.30 \
  -DCUDA_CUB_ROOT_DIR=/srv/git/CUB \
- -DLLVM_EXTERNAL_LIT=/srv/git/LLVM/10.0.1/build/bin/llvm-lit \
+ -DLLVM_EXTERNAL_LIT=/srv/git/LLVM/11.0.0/build/bin/llvm-lit \
  ..
 ```
 *A corresponding successful output:*
@@ -284,14 +285,14 @@ cmake
 -- Detecting CXX compiler ABI info - done
 -- Detecting CXX compile features
 -- Detecting CXX compile features - done
--- Found LLVM 10.0.1:
---    - CMake module path: /srv/git/LLVM/10.0.1/dist/lib/cmake/llvm
---    - Include path     : /srv/git/LLVM/10.0.1/dist/include
---    - Binary path      : /srv/git/LLVM/10.0.1/dist/bin
+-- Found LLVM 11.0.0:
+--    - CMake module path: /srv/git/LLVM/11.0.0/dist/lib/cmake/llvm
+--    - Include path     : /srv/git/LLVM/11.0.0/dist/include
+--    - Binary path      : /srv/git/LLVM/11.0.0/dist/bin
 -- Linker detection: GNU ld
 -- Found PythonInterp: /usr/bin/python2.7 (found suitable version "2.7.12", minimum required is "2.7")
 -- Found lit: /usr/local/bin/lit
--- Found FileCheck: /srv/git/LLVM/10.0.1/dist/bin/FileCheck
+-- Found FileCheck: /srv/git/LLVM/11.0.0/dist/bin/FileCheck
 -- Looking for pthread.h
 -- Looking for pthread.h - found
 -- Looking for pthread_create
@@ -314,7 +315,7 @@ make test-hipify
 Running HIPify regression tests
 ========================================
 CUDA 11.0 - will be used for testing
-LLVM 10.0.1 - will be used for testing
+LLVM 11.0.0 - will be used for testing
 x86_64 - Platform architecture
 Linux 5.3.0 - Platform OS
 64 - hipify-clang binary bitness
@@ -399,15 +400,15 @@ Testing Time: 3.28s
 
 *Tested configurations:*
 
-|      **LLVM**       |  **CUDA**     |      **cuDNN**      | **Visual Studio (latest)**|   **cmake**    |  **Python**  |
-|--------------------:|--------------:|--------------------:|--------------------------:|---------------:|-------------:|
-| 4.0.0 - 5.0.2       | 8.0           | 5.1.10   - 7.1.4.18 | 2015.14.0, 2017.15.5.2    | 3.5.1, 3.18.0  | 3.6.4, 3.8.5 |
-| 6.0.0 - 6.0.1       | 9.0           | 7.0.5.15 - 7.6.5.32 | 2015.14.0, 2017.15.5.5    | 3.6.0, 3.18.0  | 3.7.2, 3.8.5 |
-| 7.0.0 - 7.1.0       | 9.2           | 7.6.5.32            | 2017.15.9.11              | 3.13.3, 3.18.0 | 3.7.3, 3.8.5 |
-| 8.0.0 - 8.0.1       | 10.0          | 7.6.5.32            | 2017.15.9.15              | 3.14.2, 3.18.0 | 3.7.4, 3.8.5 |
-| 9.0.0 - 9.0.1       | 10.1          | 7.6.5.32            | 2017.15.9.20, 2019.16.4.5 | 3.16.4, 3.18.0 | 3.8.0, 3.8.5 |
-| 10.0.0 - 11.0.0-rc1 | 8.0 - 11.0 U1 | 7.6.5.32 - 8.0.2.39 | 2017.15.9.26, 2019.16.7.1 | 3.18.1         | 3.8.5        |
-| 12.0.0git           | 8.0 - 11.0 U1 | 7.6.5.32 - 8.0.2.39 | 2017.15.9.27, 2019.16.7.3 | 3.18.2         | 3.8.5        |
+|      **LLVM**   | **CUDA**   |      **cuDNN**      | **Visual Studio (latest)**|   **cmake**    |  **Python**  |
+|----------------:|-----------:|--------------------:|--------------------------:|---------------:|-------------:|
+| 4.0.0 - 5.0.2   | 8.0        | 5.1.10   - 7.1.4.18 | 2015.14.0, 2017.15.5.2    | 3.5.1, 3.18.0  | 3.6.4, 3.8.5 |
+| 6.0.0 - 6.0.1   | 9.0        | 7.0.5.15 - 7.6.5.32 | 2015.14.0, 2017.15.5.5    | 3.6.0, 3.18.0  | 3.7.2, 3.8.5 |
+| 7.0.0 - 7.1.0   | 9.2        | 7.6.5.32            | 2017.15.9.11              | 3.13.3, 3.18.0 | 3.7.3, 3.8.5 |
+| 8.0.0 - 8.0.1   | 10.0       | 7.6.5.32            | 2017.15.9.15              | 3.14.2, 3.18.0 | 3.7.4, 3.8.5 |
+| 9.0.0 - 9.0.1   | 10.1       | 7.6.5.32            | 2017.15.9.20, 2019.16.4.5 | 3.16.4, 3.18.0 | 3.8.0, 3.8.5 |
+| 10.0.0 - 11.0.0 | 8.0 - 11.1 | 7.6.5.32 - 8.0.4.30 | 2017.15.9.26, 2019.16.7.5 | 3.18.4         | 3.9.0        |
+| 12.0.0git       | 8.0 - 11.1 | 7.6.5.32 - 8.0.4.30 | 2017.15.9.27, 2019.16.7.5 | 3.18.4         | 3.9.0        |
 
 *Building with testing support by `Visual Studio 16 2019` on `Windows 10`:*
 
@@ -418,24 +419,24 @@ cmake
  -DHIPIFY_CLANG_TESTS=1 \
  -DCMAKE_BUILD_TYPE=Release \
  -DCMAKE_INSTALL_PREFIX=../dist \
- -DCMAKE_PREFIX_PATH=d:/LLVM/10.0.1/dist \
+ -DCMAKE_PREFIX_PATH=d:/LLVM/11.0.0/dist \
  -DCUDA_TOOLKIT_ROOT_DIR="c:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.0" \
  -DCUDA_SDK_ROOT_DIR="c:/ProgramData/NVIDIA Corporation/CUDA Samples/v11.0" \
- -DCUDA_DNN_ROOT_DIR=d:/CUDNN/cudnn-11.0-windows10-x64-v8.0.2.39 \
+ -DCUDA_DNN_ROOT_DIR=d:/CUDNN/cudnn-11.0-windows10-x64-v8.0.4.30 \
  -DCUDA_CUB_ROOT_DIR=d:/GIT/cub \
- -DLLVM_EXTERNAL_LIT=d:/LLVM/10.0.1/build/Release/bin/llvm-lit.py \
+ -DLLVM_EXTERNAL_LIT=d:/LLVM/11.0.0/build/Release/bin/llvm-lit.py \
  -Thost=x64
  ..
 ```
 *A corresponding successful output:*
 ```shell
--- Found LLVM 10.0.1:
---    - CMake module path: d:/LLVM/10.0.1/dist/lib/cmake/llvm
---    - Include path     : d:/LLVM/10.0.1/dist/include
---    - Binary path      : d:/LLVM/10.0.1/dist/bin
--- Found PythonInterp: c:/Program Files/Python38/python.exe (found suitable version "3.8.3", minimum required is "3.6")
--- Found lit: c:/Program Files/Python38/Scripts/lit.exe
--- Found FileCheck: d:/LLVM/10.0.1/dist/bin/FileCheck.exe
+-- Found LLVM 11.0.0:
+--    - CMake module path: d:/LLVM/11.0.0/dist/lib/cmake/llvm
+--    - Include path     : d:/LLVM/11.0.0/dist/include
+--    - Binary path      : d:/LLVM/11.0.0/dist/bin
+-- Found PythonInterp: c:/Program Files/Python39/python.exe (found suitable version "3.9.0", minimum required is "3.6")
+-- Found lit: c:/Program Files/Python39/Scripts/lit.exe
+-- Found FileCheck: d:/LLVM/11.0.0/dist/bin/FileCheck.exe
 -- Found CUDA: c:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.0 (found version "11.0")
 -- Configuring done
 -- Generating done
