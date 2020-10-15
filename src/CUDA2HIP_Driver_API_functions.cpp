@@ -59,7 +59,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   // no analogue
   {"cuDeviceTotalMem",                                     {"hipDeviceTotalMem",                                       "", CONV_DEVICE, API_DRIVER, 5}},
   {"cuDeviceTotalMem_v2",                                  {"hipDeviceTotalMem",                                       "", CONV_DEVICE, API_DRIVER, 5}},
-  //
+  // cudaDeviceGetTexture1DLinearMaxWidth
   {"cuDeviceGetTexture1DLinearMaxWidth",                   {"hipDeviceGetTexture1DLinearMaxWidth",                     "", CONV_DEVICE, API_DRIVER, 5, HIP_UNSUPPORTED}},
 
   // 6. Device Management [DEPRECATED]
@@ -318,7 +318,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   // no analogue
   // NOTE: Not equal to cudaGetMipmappedArrayLevel due to different signatures
   {"cuMipmappedArrayGetLevel",                             {"hipMipmappedArrayGetLevel",                               "", CONV_MEMORY, API_DRIVER, 11, HIP_UNSUPPORTED}},
-  //
+  // cudaArrayGetSparseProperties
   {"cuArrayGetSparseProperties",                           {"hipArrayGetSparseProperties",                             "", CONV_MEMORY, API_DRIVER, 11, HIP_UNSUPPORTED}},
 
   // 12. Virtual Memory Management
@@ -412,7 +412,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuEventRecord",                                        {"hipEventRecord",                                          "", CONV_EVENT, API_DRIVER, 15}},
   // cudaEventSynchronize
   {"cuEventSynchronize",                                   {"hipEventSynchronize",                                     "", CONV_EVENT, API_DRIVER, 15}},
-  //
+  // cudaEventRecordWithFlags
   {"cuEventRecordWithFlags",                               {"hipEventRecordWithFlags",                                 "", CONV_EVENT, API_DRIVER, 15, HIP_UNSUPPORTED}},
 
   // 16. External Resource Interoperability
@@ -570,25 +570,25 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuGraphExecHostNodeSetParams",                         {"hipGraphExecHostNodeSetParams",                           "", CONV_GRAPH, API_DRIVER, 20, HIP_UNSUPPORTED}},
   // cudaGraphExecUpdate
   {"cuGraphExecUpdate",                                    {"hipGraphExecUpdate",                                      "", CONV_GRAPH, API_DRIVER, 20, HIP_UNSUPPORTED}},
-  //
+  // cudaGraphAddEventRecordNode
   {"cuGraphAddEventRecordNode",                            {"hipGraphAddEventRecordNode",                              "", CONV_GRAPH, API_DRIVER, 20, HIP_UNSUPPORTED}},
-  //
+  // cudaGraphEventRecordNodeGetEvent
   {"cuGraphEventRecordNodeGetEvent",                       {"hipGraphEventRecordNodeGetEvent",                         "", CONV_GRAPH, API_DRIVER, 20, HIP_UNSUPPORTED}},
-  //
+  // cudaGraphEventRecordNodeSetEvent
   {"cuGraphEventRecordNodeSetEvent",                       {"hipGraphEventRecordNodeSetEvent",                         "", CONV_GRAPH, API_DRIVER, 20, HIP_UNSUPPORTED}},
-  //
+  // cudaGraphAddEventWaitNode
   {"cuGraphAddEventWaitNode",                              {"hipGraphAddEventWaitNode",                                "", CONV_GRAPH, API_DRIVER, 20, HIP_UNSUPPORTED}},
-  //
+  // cudaGraphEventWaitNodeGetEvent
   {"cuGraphEventWaitNodeGetEvent",                         {"hipGraphEventWaitNodeGetEvent",                           "", CONV_GRAPH, API_DRIVER, 20, HIP_UNSUPPORTED}},
-  //
+  // cudaGraphEventWaitNodeSetEvent
   {"cuGraphEventWaitNodeSetEvent",                         {"hipGraphEventWaitNodeSetEvent",                           "", CONV_GRAPH, API_DRIVER, 20, HIP_UNSUPPORTED}},
-  //
+  // cudaGraphExecChildGraphNodeSetParams
   {"cuGraphExecChildGraphNodeSetParams",                   {"hipGraphExecChildGraphNodeSetParams",                     "", CONV_GRAPH, API_DRIVER, 20, HIP_UNSUPPORTED}},
-  //
+  // cudaGraphExecEventRecordNodeSetEvent
   {"cuGraphExecEventRecordNodeSetEvent",                   {"hipGraphExecEventRecordNodeSetEvent",                     "", CONV_GRAPH, API_DRIVER, 20, HIP_UNSUPPORTED}},
-  //
+  // cudaGraphExecEventWaitNodeSetEvent
   {"cuGraphExecEventWaitNodeSetEvent",                     {"hipGraphExecEventWaitNodeSetEvent",                       "", CONV_GRAPH, API_DRIVER, 20, HIP_UNSUPPORTED}},
-  //
+  // cudaGraphUpload
   {"cuGraphUpload",                                        {"hipGraphUpload",                                          "", CONV_GRAPH, API_DRIVER, 20, HIP_UNSUPPORTED}},
 
   // 21. Occupancy
