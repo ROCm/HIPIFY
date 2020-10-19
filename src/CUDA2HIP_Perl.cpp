@@ -459,8 +459,8 @@ namespace perl {
     *streamPtr.get() << tab <<  while_ << "(( $direxclude == 0) and ( $fileDir ne \".\" and $fileDir ne \"/\"))  { " << endl;
     *streamPtr.get() << tab_2 << "if ( $exclude_dirhash{ $fileDir } ) {" << endl;
     *streamPtr.get() << tab_3 << "print STDERR \"Skipping file: $fileName in excluded directory $fileDir \\n\";" << endl;
-    *streamPtr.get() << tab_3 << "$direxclude += 1;" <<  endl_tab_2 << "}" << endl;
-    *streamPtr.get() << tab_2 << "else {" << endl;
+    *streamPtr.get() << tab_3 << "$direxclude += 1;" <<  endl ;
+    *streamPtr.get() << tab_2 << "} else {" << endl;
     *streamPtr.get() << tab_3 << "$fileDir = dirname( $fileDir );" << endl_tab_2 << "}" << endl_tab << "}" << endl;
     *streamPtr.get() << tab << "if ( $exclude_filehash{ $fileName } ) { " << endl;
     *streamPtr.get() << tab_2 <<  print << "\"Skipping  excluded file: $fileName \\n\";" << endl_tab << "}" << endl;
