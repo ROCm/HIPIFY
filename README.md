@@ -47,23 +47,102 @@ After applying all the matchers, the output HIP source is produced.
 
 2. [**CUDA**](https://developer.nvidia.com/cuda-downloads) of at least version [7.0](https://developer.nvidia.com/cuda-toolkit-70), the latest supported version is [**11.0**](https://developer.nvidia.com/cuda-downloads).
 
-| **LLVM release version**                                   | **CUDA latest supported version**                                        | **Windows** | **Linux** |
-|:----------------------------------------------------------:|:------------------------------------------------------------------------:|:-----------:|:---------:|
-| [3.8.0](http://releases.llvm.org/download.html#3.8.0)\* , [3.8.1](http://releases.llvm.org/download.html#3.8.1)\*  , <br>[3.9.0](http://releases.llvm.org/download.html#3.9.0)\* , [3.9.1](http://releases.llvm.org/download.html#3.9.1)\*         | [7.5](https://developer.nvidia.com/cuda-75-downloads-archive)            | +           | +         |
-| [4.0.0](http://releases.llvm.org/download.html#4.0.0)   , [4.0.1](http://releases.llvm.org/download.html#4.0.1)    | [8.0](https://developer.nvidia.com/cuda-80-ga2-download-archive)         | +           | +         |
-| [5.0.0](http://releases.llvm.org/download.html#5.0.0)   , [5.0.1](http://releases.llvm.org/download.html#5.0.1)    , [5.0.2](http://releases.llvm.org/download.html#5.0.2) | [8.0](https://developer.nvidia.com/cuda-80-ga2-download-archive)         | +           | +         |
-| [6.0.0](http://releases.llvm.org/download.html#6.0.0)   , [6.0.1](http://releases.llvm.org/download.html#6.0.1)    | [9.0](https://developer.nvidia.com/cuda-90-download-archive)             | +           | +         |
-| [7.0.0](http://releases.llvm.org/download.html#7.0.0)   , [7.0.1](http://releases.llvm.org/download.html#7.0.1)    , [7.1.0](http://releases.llvm.org/download.html#7.1.0) | [9.2](https://developer.nvidia.com/cuda-92-download-archive)             | works only with the patch <br> due to the clang's bug [38811](https://bugs.llvm.org/show_bug.cgi?id=38811) <br> [patch for 7.0.0](patches/patch_for_clang_7.0.0_bug_38811.zip)\*\* <br> [patch for 7.0.1](patches/patch_for_clang_7.0.1_bug_38811.zip)\*\* <br> [patch for 7.1.0](patches/patch_for_clang_7.1.0_bug_38811.zip)\*\* | - <br> not working due to <br> the clang's bug [36384](https://bugs.llvm.org/show_bug.cgi?id=36384) |
-| [8.0.0](http://releases.llvm.org/download.html#8.0.0)   , [8.0.1](http://releases.llvm.org/download.html#8.0.1)    | [10.0](https://developer.nvidia.com/cuda-10.0-download-archive)          | works only with the patch <br> due to the clang's bug [38811](https://bugs.llvm.org/show_bug.cgi?id=38811) <br>[patch for 8.0.0](patches/patch_for_clang_8.0.0_bug_38811.zip)\*\* <br>[patch for 8.0.1](patches/patch_for_clang_8.0.1_bug_38811.zip)\*\*<br>| + |
-| [9.0.0](http://releases.llvm.org/download.html#9.0.0)   , [9.0.1](http://releases.llvm.org/download.html#9.0.1)    | [10.1](https://developer.nvidia.com/cuda-10.1-download-archive-base)     | +           | +         |
-| [10.0.0](http://releases.llvm.org/download.html#10.0.0) , [10.0.1](https://releases.llvm.org/download.html#10.0.1) | [**11.0**](https://developer.nvidia.com/cuda-11.0-download-archive), [11.0 Update 1](https://developer.nvidia.com/cuda-11.0-update1-download-archive)\*\*\*, [11.1](https://developer.nvidia.com/cuda-downloads)\*\*\* | +           | +         |
-| [**11.0.0**](https://releases.llvm.org/download.html#11.0.0) | [**11.0**](https://developer.nvidia.com/cuda-11.0-download-archive), [11.0 Update 1](https://developer.nvidia.com/cuda-11.0-update1-download-archive)\*\*\*, [11.1](https://developer.nvidia.com/cuda-downloads)\*\*\* | + <br/> **LATEST STABLE RELEASE** | + <br/> **LATEST STABLE RELEASE** |
+<table align="center">
+  <thead>
+     <tr align="center">
+       <th>LLVM release version</th>
+       <th>CUDA latest supported version</th>
+       <th>Windows</th>
+       <th>Linux</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr align="center">
+      <td><a href="http://releases.llvm.org/download.html#3.8.0">3.8.0</a>*,
+          <a href="http://releases.llvm.org/download.html#3.8.1">3.8.1</a>*,<br>
+          <a href="http://releases.llvm.org/download.html#3.9.0">3.9.0</a>*,
+          <a href="http://releases.llvm.org/download.html#3.9.1">3.9.1</a>*</td>
+      <td><a href="https://developer.nvidia.com/cuda-75-downloads-archive">7.5</a></td>
+      <td>+</td>
+      <td>+</td>
+    </tr>
+    <tr align="center">
+      <td><a href="http://releases.llvm.org/download.html#4.0.0">4.0.0</a>,
+          <a href="http://releases.llvm.org/download.html#4.0.1">4.0.1</a>,<br>
+          <a href="http://releases.llvm.org/download.html#5.0.0">5.0.0</a>,
+          <a href="http://releases.llvm.org/download.html#5.0.1">5.0.1</a>,
+          <a href="http://releases.llvm.org/download.html#5.0.2">5.0.2</a></td>
+      <td><a href="https://developer.nvidia.com/cuda-80-ga2-download-archive">8.0</a></td>
+      <td>+</td>
+      <td>+</td>
+    </tr>
+    <tr align="center">
+      <td><a href="http://releases.llvm.org/download.html#6.0.0">6.0.0</a>,
+          <a href="http://releases.llvm.org/download.html#6.0.1">6.0.1</a></td>
+      <td><a href="https://developer.nvidia.com/cuda-90-download-archive">9.0</a></td>
+      <td>+</td>
+      <td>+</td>
+    </tr>
+    <tr align="center">
+      <td><a href="http://releases.llvm.org/download.html#7.0.0">7.0.0</a>,
+          <a href="http://releases.llvm.org/download.html#7.0.1">7.0.1</a>,
+          <a href="http://releases.llvm.org/download.html#7.1.0">7.1.0</a></td>
+      <td><a href="https://developer.nvidia.com/cuda-92-download-archive">9.2</a></td>
+      <td>works only with the patch <br> due to the clang's bug <a href="https://bugs.llvm.org/show_bug.cgi?id=38811">38811</a><br>
+          <a href="patches/patch_for_clang_7.0.0_bug_38811.zip">patch for 7.0.0</a>**<br>
+          <a href="patches/patch_for_clang_7.0.1_bug_38811.zip">patch for 7.0.1</a>**<br>
+          <a href="patches/patch_for_clang_7.1.0_bug_38811.zip">patch for 7.1.0</a>**<br></td>
+      <td>-<br> not working due to <br> the clang's bug <a href="https://bugs.llvm.org/show_bug.cgi?id=36384">36384</a></td>
+    </tr>
+    <tr align="center">
+      <td><a href="http://releases.llvm.org/download.html#8.0.0">8.0.0</a>,
+          <a href="http://releases.llvm.org/download.html#8.0.1">8.0.1</a></td>
+      <td><a href="https://developer.nvidia.com/cuda-10.0-download-archive">10.0</a></td>
+      <td>works only with the patch <br> due to the clang's bug <a href="https://bugs.llvm.org/show_bug.cgi?id=38811">38811</a><br>
+          <a href="patches/patch_for_clang_8.0.0_bug_38811.zip">patch for 8.0.0</a>**<br>
+          <a href="patches/patch_for_clang_8.0.1_bug_38811.zip">patch for 8.0.1</a>**<br></td>
+      <td>+</td>
+    </tr>
+    <tr align="center">
+      <td><a href="http://releases.llvm.org/download.html#9.0.0">9.0.0</a>,
+          <a href="http://releases.llvm.org/download.html#9.0.1">9.0.1</a></td>
+      <td><a href="https://developer.nvidia.com/cuda-10.1-download-archive-base">10.1</a></td>
+      <td>+</td>
+      <td>+</td>
+    </tr>
+    <tr align="center">
+      <td rowspan=2><a href="http://releases.llvm.org/download.html#10.0.0">10.0.0</a>,
+          <a href="http://releases.llvm.org/download.html#10.0.1">10.0.1</a></td>
+      <td><a href="https://developer.nvidia.com/cuda-11.0-download-archive">11.0</a></td>
+      <td>+</td>
+      <td>+</td>
+    </tr>
+    <tr align="center">
+      <td><a href="https://developer.nvidia.com/cuda-11.0-update1-download-archive">11.0 Update 1</a>,
+          <a href="https://developer.nvidia.com/cuda-downloads">11.1</a></td>
+      <td colspan=2>works only with the patch <br> due to the clang's bug <a href="https://bugs.llvm.org/show_bug.cgi?id=47332">47332</a><br>
+          <a href="patches/patch_for_clang_10.0.0_bug_47332.zip">patch for 10.0.0</a>***<br>
+          <a href="patches/patch_for_clang_10.0.1_bug_47332.zip">patch for 10.0.1</a>***<br></td>
+    </tr>
+    <tr align="center">
+      <td rowspan=2 bgcolor="eefaeb"><a href="http://releases.llvm.org/download.html#11.0.0"><b>11.0.0</b></a></td>
+      <td bgcolor="eefaeb"><a href="https://developer.nvidia.com/cuda-11.0-download-archive"><b>11.0</b></a></td>
+      <td colspan=2 bgcolor="eefaeb"><font color="green"><b>LATEST STABLE CONFIG</b></font></td>
+    </tr>
+    <tr align="center">
+      <td><a href="https://developer.nvidia.com/cuda-11.0-update1-download-archive">11.0 Update 1</a>,
+          <a href="https://developer.nvidia.com/cuda-downloads">11.1</a></td>
+      <td colspan=2>works only with the patch <br> due to the clang's bug <a href="https://bugs.llvm.org/show_bug.cgi?id=47332">47332</a><br>
+          <a href="patches/patch_for_clang_11.0.0_bug_47332.zip">patch for 11.0.0</a>***</td>
+    </tr>
+  </tbody>
+</table>
 
 `*`   `LLVM 3.x` is not supported anymore but might still work.
 
-`**`  Download the patch and unpack it into your `LLVM` distributive directory: a few header files will be overwritten; rebuilding of `LLVM` is not needed.
+`**`  Download the patch and unpack it into your `LLVM distributive directory`: a few header files will be overwritten; rebuilding of `LLVM` is not needed.
 
-`***` Starting with `CUDA 11 Update 1` there is a clang's bug [47332](https://bugs.llvm.org/show_bug.cgi?id=47332) which is not fixed yet; thus, currently, [CUDA 11.0](https://developer.nvidia.com/cuda-11.0-download-archive) is the latest supported `CUDA Toolkit`.
+`***` Download the patch and unpack it into your `LLVM source directory`: the file `Cuda.cpp` will be overwritten; needs further rebuilding of `LLVM`.
 
 In most cases, you can get a suitable version of `LLVM+CLANG` with your package manager.
 
