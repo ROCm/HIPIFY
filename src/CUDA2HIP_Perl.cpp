@@ -454,13 +454,18 @@ namespace perl {
     *streamPtr.get() << my << "$fileCount = @ARGV;" << endl_2;
     *streamPtr.get() << while_ << "(@ARGV) {" << endl;
     *streamPtr.get() << tab << "$fileName=shift (@ARGV);" << endl;
+    *streamPtr.get() << tab << "my $direxclude = 0;" << endl;
     *streamPtr.get() << tab << "$fileDir=dirname( $fileName );" << endl;
-    *streamPtr.get() << tab << "if ( $exclude_dirhash{ $fileDir } ) { " << endl;
-    *streamPtr.get() << tab_2 <<  print << "\" Skipping file: $fileName in excluded directory $fileDir \\n\";" << endl_tab << "}" << endl;
+    *streamPtr.get() << tab <<  while_ << "(( $direxclude == 0) and ( $fileDir ne \".\" and $fileDir ne \"/\"))  { " << endl;
+    *streamPtr.get() << tab_2 << "if ( $exclude_dirhash{ $fileDir } ) {" << endl;
+    *streamPtr.get() << tab_3 << "print STDERR \"Skipping file: $fileName in excluded directory $fileDir \\n\";" << endl;
+    *streamPtr.get() << tab_3 << "$direxclude += 1;" <<  endl ;
+    *streamPtr.get() << tab_2 << "} else {" << endl;
+    *streamPtr.get() << tab_3 << "$fileDir = dirname( $fileDir );" << endl_tab_2 << "}" << endl_tab << "}" << endl;
     *streamPtr.get() << tab << "if ( $exclude_filehash{ $fileName } ) { " << endl;
-    *streamPtr.get() << tab_2 <<  print << "\" Skipping  excluded file: $fileName \\n\";" << endl_tab << "}" << endl;
+    *streamPtr.get() << tab_2 <<  print << "\"Skipping  excluded file: $fileName \\n\";" << endl_tab << "}" << endl;
     
-    *streamPtr.get() << tab << "unless( $exclude_dirhash{$fileDir} or $exclude_filehash{$fileName} ) {" << endl;
+    *streamPtr.get() << tab << "unless( $direxclude or $exclude_filehash{$fileName} ) {" << endl;
     *streamPtr.get() << tab_2 << "if ($inplace) {" << endl;
     *streamPtr.get() << tab_3 << my << "$file_prehip = \"$fileName\" . \".prehip\";" << endl;
     *streamPtr.get() << tab_3 << my << "$infile;" << endl;
