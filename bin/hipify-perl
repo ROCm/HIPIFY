@@ -41,9 +41,9 @@ GetOptions(
     , "no-output" => \$no_output              # Don't write any translated output to stdout.
     , "print-stats" => \$print_stats          # Print translation statistics.
     , "quiet-warnings" => \$quiet_warnings    # Don't print warnings on unknown CUDA functions.
-    , "whitelist=s" => \$whitelist            # TODO: test it beforehand
-    , "exclude-dirs=s" => \$exclude_dirs      # Exclude directories
-    , "exclude-files=s" => \$exclude_files    # Exclude files
+    , "whitelist=s" => \$whitelist            # Whitelist of identifiers.
+    , "exclude-dirs=s" => \$exclude_dirs      # Exclude directories.
+    , "exclude-files=s" => \$exclude_files    # Exclude files.
 );
 
 $print_stats = 1 if $examine;
@@ -114,7 +114,7 @@ push(@exclude_filelist, split(',', $exclude_files));
 @statNames = ("error", "init", "version", "device", "context", "module", "memory", "virtual_memory", "addressing", "stream", "event", "external_resource_interop", "stream_memory", "execution", "graph", "occupancy", "texture", "surface", "peer", "graphics", "interactions", "profiler", "openGL", "D3D9", "D3D10", "D3D11", "VDPAU", "EGL", "thread", "complex", "library", "device_library", "device_function", "include", "include_cuda_main_header", "type", "literal", "numeric_literal", "define", "extern_shared", "kernel_launch");
 
 sub totalStats {
-    my %count = %{ shift() };
+    my %count = %{shift()};
     my $total = 0;
     foreach $key (keys %count) {
         $total += $count{$key};
@@ -124,8 +124,8 @@ sub totalStats {
 
 sub printStats {
     my $label     = shift();
-    my @statNames = @{ shift() };
-    my %counts    = %{ shift() };
+    my @statNames = @{shift()};
+    my %counts    = %{shift()};
     my $warnings  = shift();
     my $loc       = shift();
     my $total     = totalStats(\%counts);
@@ -138,7 +138,7 @@ sub printStats {
 
 sub addStats {
     my $dest_ref  = shift();
-    my %adder     = %{ shift() };
+    my %adder     = %{shift()};
     foreach $key (keys %adder) {
         $dest_ref->{$key} += $adder{$key};
     }
@@ -146,7 +146,7 @@ sub addStats {
 
 sub clearStats {
     my $dest_ref  = shift();
-    my @statNames = @{ shift() };
+    my @statNames = @{shift()};
     foreach $stat(@statNames) {
         $dest_ref->{$stat} = 0;
     }
@@ -5676,14 +5676,14 @@ my $fileCount = @ARGV;
 
 while (@ARGV) {
     $fileName=shift (@ARGV);
-    $fileDir=dirname( $fileName );
-    if ( $exclude_dirhash{ $fileDir } ) { 
+    $fileDir=dirname($fileName);
+    if ($exclude_dirhash{$fileDir}) { 
         print STDERR " Skipping file: $fileName in excluded directory $fileDir \n";
     }
-    if ( $exclude_filehash{ $fileName } ) { 
+    if ($exclude_filehash{$fileName}) { 
         print STDERR " Skipping  excluded file: $fileName \n";
     }
-    unless( $exclude_dirhash{$fileDir} or $exclude_filehash{$fileName} ) {
+    unless ($exclude_dirhash{$fileDir} or $exclude_filehash{$fileName}) {
         if ($inplace) {
             my $file_prehip = "$fileName" . ".prehip";
             my $infile;

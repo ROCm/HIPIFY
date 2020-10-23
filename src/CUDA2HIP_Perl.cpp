@@ -168,9 +168,9 @@ namespace perl {
     *streamPtr.get() << tab << ", \"no-output\" => \\$no_output              # Don't write any translated output to stdout." << endl;
     *streamPtr.get() << tab << ", \"print-stats\" => \\$print_stats          # Print translation statistics." << endl;
     *streamPtr.get() << tab << ", \"quiet-warnings\" => \\$quiet_warnings    # Don't print warnings on unknown CUDA functions." << endl;
-    *streamPtr.get() << tab << ", \"whitelist=s\" => \\$whitelist            # TODO: test it beforehand" << endl;
-    *streamPtr.get() << tab << ", \"exclude-dirs=s\" => \\$exclude_dirs      # Exclude directories" << endl;
-    *streamPtr.get() << tab << ", \"exclude-files=s\" => \\$exclude_files    # Exclude files" << endl;
+    *streamPtr.get() << tab << ", \"whitelist=s\" => \\$whitelist            # Whitelist of identifiers." << endl;
+    *streamPtr.get() << tab << ", \"exclude-dirs=s\" => \\$exclude_dirs      # Exclude directories." << endl;
+    *streamPtr.get() << tab << ", \"exclude-files=s\" => \\$exclude_files    # Exclude files." << endl;
     *streamPtr.get() << ");" << endl_2;
     *streamPtr.get() << "$print_stats = 1 if $examine;" << endl;
     *streamPtr.get() << "$no_output = 1 if $examine;" << endl_2;
@@ -185,7 +185,6 @@ namespace perl {
     *streamPtr.get() << "push(@whitelist, split(',', $whitelist));" << endl;
     *streamPtr.get() << "push(@exclude_dirlist, split(',', $exclude_dirs));" << endl;
     *streamPtr.get() << "push(@exclude_filelist, split(',', $exclude_files));" << endl_2;
-
     *streamPtr.get() << "# Turn exclude dirlist and exclude_filelist into hash maps" << endl;
     *streamPtr.get() << "\%exclude_dirhash = map { $_ => 1 } @exclude_dirlist;" << endl;
     *streamPtr.get() << "\%exclude_filehash = map { $_ => 1 } @exclude_filelist;" << endl_2;
@@ -194,15 +193,15 @@ namespace perl {
 
   void generateStatFunctions(unique_ptr<ostream> &streamPtr) {
     *streamPtr.get() << endl << sub << "totalStats" << " {" << endl;
-    *streamPtr.get() << tab << my << "%count = %{ shift() };" << endl;
+    *streamPtr.get() << tab << my << "%count = %{shift()};" << endl;
     *streamPtr.get() << tab << my << "$total = 0;" << endl;
     *streamPtr.get() << tab << foreach << "$key (keys %count) {" << endl;
     *streamPtr.get() << tab_2 << "$total += $count{$key};" << endl_tab << "}" << endl;
     *streamPtr.get() << tab << "return $total;" << endl << "};" << endl;
     *streamPtr.get() << endl << sub << "printStats" << " {" << endl;
     *streamPtr.get() << tab << my << "$label     = shift();" << endl;
-    *streamPtr.get() << tab << my << "@statNames = @{ shift() };" << endl;
-    *streamPtr.get() << tab << my << "%counts    = %{ shift() };" << endl;
+    *streamPtr.get() << tab << my << "@statNames = @{shift()};" << endl;
+    *streamPtr.get() << tab << my << "%counts    = %{shift()};" << endl;
     *streamPtr.get() << tab << my << "$warnings  = shift();" << endl;
     *streamPtr.get() << tab << my << "$loc       = shift();" << endl;
     *streamPtr.get() << tab << my << "$total     = totalStats(\\%counts);" << endl;
@@ -213,7 +212,7 @@ namespace perl {
     for (int i = 0; i < 2; ++i) {
       *streamPtr.get() << endl << sub << (i ? "clearStats" : "addStats") << " {" << endl;
       *streamPtr.get() << tab << my << "$dest_ref  = shift();" << endl;
-      *streamPtr.get() << tab << my << (i ? "@statNames = @{ shift() };" : "%adder     = %{ shift() };") << endl;
+      *streamPtr.get() << tab << my << (i ? "@statNames = @{shift()};" : "%adder     = %{shift()};") << endl;
       *streamPtr.get() << tab << foreach << (i ? "$stat(@statNames)" : "$key (keys %adder)") << " {" << endl;
       *streamPtr.get() << tab_2 << "$dest_ref->" << (i ? "{$stat} = 0;" : "{$key} += $adder{$key};") << endl_tab << "}" << endl << "}" << endl;
     }
@@ -455,17 +454,16 @@ namespace perl {
     *streamPtr.get() << while_ << "(@ARGV) {" << endl;
     *streamPtr.get() << tab << "$fileName=shift (@ARGV);" << endl;
     *streamPtr.get() << tab << "my $direxclude = 0;" << endl;
-    *streamPtr.get() << tab << "$fileDir=dirname( $fileName );" << endl;
-    *streamPtr.get() << tab <<  while_ << "(( $direxclude == 0) and ( $fileDir ne \".\" and $fileDir ne \"/\"))  { " << endl;
-    *streamPtr.get() << tab_2 << "if ( $exclude_dirhash{ $fileDir } ) {" << endl;
-    *streamPtr.get() << tab_3 << "print STDERR \"Skipping file: $fileName in excluded directory $fileDir \\n\";" << endl;
+    *streamPtr.get() << tab << "$fileDir=dirname($fileName);" << endl;
+    *streamPtr.get() << tab <<  while_ << "(($direxclude == 0) and ($fileDir ne \".\" and $fileDir ne \"/\"))  { " << endl;
+    *streamPtr.get() << tab_2 << "if ($exclude_dirhash{$fileDir}) {" << endl;
+    *streamPtr.get() << tab_3 << print << "\"Skipping file: $fileName in excluded directory $fileDir \\n\";" << endl;
     *streamPtr.get() << tab_3 << "$direxclude += 1;" <<  endl ;
     *streamPtr.get() << tab_2 << "} else {" << endl;
-    *streamPtr.get() << tab_3 << "$fileDir = dirname( $fileDir );" << endl_tab_2 << "}" << endl_tab << "}" << endl;
-    *streamPtr.get() << tab << "if ( $exclude_filehash{ $fileName } ) { " << endl;
+    *streamPtr.get() << tab_3 << "$fileDir = dirname($fileDir);" << endl_tab_2 << "}" << endl_tab << "}" << endl;
+    *streamPtr.get() << tab << "if ($exclude_filehash{$fileName}) { " << endl;
     *streamPtr.get() << tab_2 <<  print << "\"Skipping  excluded file: $fileName \\n\";" << endl_tab << "}" << endl;
-    
-    *streamPtr.get() << tab << "unless( $direxclude or $exclude_filehash{$fileName} ) {" << endl;
+    *streamPtr.get() << tab << unless_ << "($direxclude or $exclude_filehash{$fileName}) {" << endl;
     *streamPtr.get() << tab_2 << "if ($inplace) {" << endl;
     *streamPtr.get() << tab_3 << my << "$file_prehip = \"$fileName\" . \".prehip\";" << endl;
     *streamPtr.get() << tab_3 << my << "$infile;" << endl;
@@ -545,7 +543,6 @@ namespace perl {
     *streamPtr.get() << tab_4 << "print $OUTFILE  \"$_\";" << endl_tab_3 << "}" << endl;
     *streamPtr.get() << tab_3 << "$lineCount = $_ =~ tr/\\n//;" << endl_tab_2 << "}" << endl;
     *streamPtr.get() << tab_2 << my << "$totalConverted = totalStats(\\%ft);" << endl;
-
     *streamPtr.get() << tab_2 << "if (($totalConverted+$warnings) and $print_stats) {" << endl;
     *streamPtr.get() << tab_3 << "printStats(\"  info: converted\", \\@statNames, \\%ft, $warnings, $lineCount);" << endl;
     *streamPtr.get() << tab_3 << print << "\" in '$fileName'\\n\";" << endl_tab_2 << "}" << endl;
@@ -562,15 +559,15 @@ namespace perl {
     *streamPtr.get() << tab << print << "\"\\n\";" << endl;
     *streamPtr.get() << tab << "printStats(\"  info: TOTAL-converted\", \\@statNames, \\%tt, $Twarnings, $TlineCount);" << endl;
     *streamPtr.get() << tab << print << "\"\\n\";" << endl;
-    *streamPtr.get() << tab << foreach << "my $key (sort { $TwarningTags{$b} <=> $TwarningTags{$a} } keys %TwarningTags) {" << endl;
+    *streamPtr.get() << tab << foreach << my << "$key (sort { $TwarningTags{$b} <=> $TwarningTags{$a} } keys %TwarningTags) {" << endl;
     *streamPtr.get() << tab_2 << printf << "\"  warning: unconverted %s : %d\\n\", $key, $TwarningTags{$key};" << endl_tab << "}" << endl;
     *streamPtr.get() << tab << my << "$kernelCnt = keys %Tkernels;" << endl;
     *streamPtr.get() << tab << printf << "\"  kernels (%d total) : \", $kernelCnt;" << endl;
-    *streamPtr.get() << tab << foreach << "my $key (sort { $Tkernels{$b} <=> $Tkernels{$a} } keys %Tkernels) {" << endl;
+    *streamPtr.get() << tab << foreach << my << "$key (sort { $Tkernels{$b} <=> $Tkernels{$a} } keys %Tkernels) {" << endl;
     *streamPtr.get() << tab_2 << printf << "\"  %s(%d)\", $key, $Tkernels{$key};" << endl_tab << "}" << endl;
     *streamPtr.get() << tab << print << "\"\\n\\n\";" << endl << "}" << endl;
     *streamPtr.get() << "if ($print_stats) {" << endl;
-    *streamPtr.get() << tab << foreach << "my $key (sort { $convertedTags{$b} <=> $convertedTags{$a} } keys %convertedTags) {" << endl;
+    *streamPtr.get() << tab << foreach << my << "$key (sort { $convertedTags{$b} <=> $convertedTags{$a} } keys %convertedTags) {" << endl;
     *streamPtr.get() << tab_2 << printf << "\"  %s %d\\n\", $key, $convertedTags{$key};" << endl_tab << "}" << endl << "}" << endl;
     streamPtr.get()->flush();
     bool ret = true;
