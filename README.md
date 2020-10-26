@@ -205,7 +205,7 @@ The binary can then be found at `./dist/bin/hipify-clang`.
 
 `hipify-clang` has unit tests using `LLVM` [`lit`](https://llvm.org/docs/CommandGuide/lit.html)/[`FileCheck`](https://llvm.org/docs/CommandGuide/FileCheck.html).
 
-`LLVM+CLANG` should be built from sources, pre-built binaries are not exhaustive for testing.
+`LLVM+CLANG` should be built from sources, pre-built binaries are not exhaustive for testing. Before building ensure that the [software required for building](https://releases.llvm.org/11.0.0/docs/GettingStarted.html#software) is of an appropriate version.
 
 **LLVM 9.0.1 or older:**
 
@@ -248,7 +248,7 @@ Run `Visual Studio 16 2019`, open the generated `LLVM.sln`, build all, build pro
          -DLLVM_SOURCE_DIR=../llvm-project \
          -DLLVM_TARGETS_TO_BUILD="X86;NVPTX" \
          -DLLVM_ENABLE_PROJECTS="clang" \
-         -DLLVM_TEMPORARILY_ALLOW_OLD_TOOLCHAIN=ON
+         -DLLVM_TEMPORARILY_ALLOW_OLD_TOOLCHAIN=ON \
          -DCMAKE_BUILD_TYPE=Release \
          ../llvm-project/llvm
         make -j install
@@ -262,7 +262,7 @@ Run `Visual Studio 16 2019`, open the generated `LLVM.sln`, build all, build pro
          -DLLVM_SOURCE_DIR=../llvm-project \
          -DLLVM_TARGETS_TO_BUILD="NVPTX" \
          -DLLVM_ENABLE_PROJECTS="clang" \
-         -DLLVM_TEMPORARILY_ALLOW_OLD_TOOLCHAIN=ON
+         -DLLVM_TEMPORARILY_ALLOW_OLD_TOOLCHAIN=ON \
          -DCMAKE_BUILD_TYPE=Release \
          -Thost=x64 \
          ../llvm-project/llvm
