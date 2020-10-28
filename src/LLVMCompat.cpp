@@ -151,4 +151,12 @@ clang::SourceLocation getEndOfExpansionRangeForLoc(const clang::SourceManager &S
 #endif
 }
 
+Memory_Buffer getMemoryBuffer(const clang::SourceManager &SM) {
+#if LLVM_VERSION_MAJOR >= 12
+  return SM.getBufferOrFake(SM.getMainFileID());
+#else
+  return SM.getBuffer(SM.getMainFileID());
+#endif
+}
+
 } // namespace llcompat
