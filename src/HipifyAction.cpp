@@ -727,7 +727,7 @@ void HipifyAction::ExecuteAction() {
   clang::Preprocessor &PP = getCompilerInstance().getPreprocessor();
   auto &SM = getCompilerInstance().getSourceManager();
   // Start lexing the specified input file.
-  const llvm::MemoryBuffer *FromFile = SM.getBuffer(SM.getMainFileID());
+  llcompat::Memory_Buffer FromFile = llcompat::getMemoryBuffer(SM);
   clang::Lexer RawLex(SM.getMainFileID(), FromFile, SM, PP.getLangOpts());
   RawLex.SetKeepWhitespaceMode(true);
   // Perform a token-level rewrite of CUDA identifiers to hip ones. The raw-mode lexer gives us enough

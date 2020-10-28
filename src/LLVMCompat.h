@@ -91,4 +91,12 @@ bool CheckCompatibility();
 
 clang::SourceLocation getEndOfExpansionRangeForLoc(const clang::SourceManager &SM, const clang::SourceLocation &loc);
 
+#if LLVM_VERSION_MAJOR >= 12
+  typedef MemoryBufferRef Memory_Buffer;
+#else
+  typedef const MemoryBuffer *Memory_Buffer;
+#endif
+
+Memory_Buffer getMemoryBuffer(const clang::SourceManager &SM);
+
 } // namespace llcompat
