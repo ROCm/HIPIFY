@@ -209,7 +209,7 @@ The binary can then be found at `./dist/bin/hipify-clang`.
 
 **LLVM 9.0.1 or older:**
 
-1. download [`LLVM`](http://releases.llvm.org/9.0.1/llvm-9.0.1.src.tar.xz)+[`CLANG`](http://releases.llvm.org/9.0.1/cfe-9.0.1.src.tar.xz) sources; 
+1. download [`LLVM`](https://github.com/llvm/llvm-project/releases/download/llvmorg-9.0.1/llvm-9.0.1.src.tar.xz)+[`CLANG`](https://github.com/llvm/llvm-project/releases/download/llvmorg-9.0.1/clang-9.0.1.src.tar.xz) sources; 
 2. build [`LLVM+CLANG`](http://releases.llvm.org/9.0.0/docs/CMake.html):
 
  **Linux**:
