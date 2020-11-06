@@ -391,6 +391,35 @@ std::string Statistics::getCudaVersion(const cudaVersions& ver) {
     case CUDA_102: return "10.2";
     case CUDA_110: return "11.0";
     case CUDA_111: return "11.1";
+    case CUDNN_10: return "1.0.0";
+    case CUDNN_20: return "2.0.0";
+    case CUDNN_30: return "3.0.0";
+    case CUDNN_40: return "4.0.0";
+    case CUDNN_50: return "5.0.0";
+    case CUDNN_51: return "5.1.0";
+    case CUDNN_60: return "6.0.0";
+    case CUDNN_704: return "7.0.4";
+    case CUDNN_705: return "7.0.5";
+    case CUDNN_712: return "7.1.2";
+    case CUDNN_713: return "7.1.3";
+    case CUDNN_714: return "7.1.4";
+    case CUDNN_721: return "7.2.1";
+    case CUDNN_730: return "7.3.0";
+    case CUDNN_731: return "7.3.1";
+    case CUDNN_741: return "7.4.1";
+    case CUDNN_742: return "7.4.2";
+    case CUDNN_750: return "7.5.0";
+    case CUDNN_751: return "7.5.1";
+    case CUDNN_760: return "7.6.0";
+    case CUDNN_761: return "7.6.1";
+    case CUDNN_762: return "7.6.2";
+    case CUDNN_763: return "7.6.3";
+    case CUDNN_764: return "7.6.4";
+    case CUDNN_765: return "7.6.5";
+    case CUDNN_801: return "8.0.1";
+    case CUDNN_802: return "8.0.2";
+    case CUDNN_803: return "8.0.3";
+    case CUDNN_804: return "8.0.4";
   }
   return "";
 }
