@@ -160,10 +160,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"CUDNN_CONVOLUTION_BWD_FILTER_ALGO_WINOGRAD_NONFUSED",            {"HIPDNN_CONVOLUTION_BWD_FILTER_ALGO_WINOGRAD_NONFUSED",            "", CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 5
   {"CUDNN_CONVOLUTION_BWD_FILTER_ALGO_FFT_TILING",                   {"HIPDNN_CONVOLUTION_BWD_FILTER_ALGO_FFT_TILING",                   "", CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 6
   {"CUDNN_CONVOLUTION_BWD_FILTER_ALGO_COUNT",                        {"HIPDNN_CONVOLUTION_BWD_FILTER_ALGO_COUNT",                        "", CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 7
-  {"cudnnConvolutionBwdFilterPreference_t",                          {"hipdnnConvolutionBwdFilterPreference_t",                          "", CONV_TYPE, API_DNN, 1}},
-  {"CUDNN_CONVOLUTION_BWD_FILTER_NO_WORKSPACE",                      {"HIPDNN_CONVOLUTION_BWD_FILTER_NO_WORKSPACE",                      "", CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 0
-  {"CUDNN_CONVOLUTION_BWD_FILTER_PREFER_FASTEST",                    {"HIPDNN_CONVOLUTION_BWD_FILTER_PREFER_FASTEST",                    "", CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 1
-  {"CUDNN_CONVOLUTION_BWD_FILTER_SPECIFY_WORKSPACE_LIMIT",           {"HIPDNN_CONVOLUTION_BWD_FILTER_SPECIFY_WORKSPACE_LIMIT",           "", CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 2
+  {"cudnnConvolutionBwdFilterPreference_t",                          {"hipdnnConvolutionBwdFilterPreference_t",                          "", CONV_TYPE, API_DNN, 1, DEPRECATED | REMOVED}},
+  {"CUDNN_CONVOLUTION_BWD_FILTER_NO_WORKSPACE",                      {"HIPDNN_CONVOLUTION_BWD_FILTER_NO_WORKSPACE",                      "", CONV_NUMERIC_LITERAL, API_DNN, 1, DEPRECATED | REMOVED}},    // 0
+  {"CUDNN_CONVOLUTION_BWD_FILTER_PREFER_FASTEST",                    {"HIPDNN_CONVOLUTION_BWD_FILTER_PREFER_FASTEST",                    "", CONV_NUMERIC_LITERAL, API_DNN, 1, DEPRECATED | REMOVED}},    // 1
+  {"CUDNN_CONVOLUTION_BWD_FILTER_SPECIFY_WORKSPACE_LIMIT",           {"HIPDNN_CONVOLUTION_BWD_FILTER_SPECIFY_WORKSPACE_LIMIT",           "", CONV_NUMERIC_LITERAL, API_DNN, 1, DEPRECATED | REMOVED}},    // 2
   {"cudnnRNNAlgo_t",                                                 {"hipdnnRNNAlgo_t",                                                 "", CONV_TYPE, API_DNN, 1}},
   {"CUDNN_RNN_ALGO_STANDARD",                                        {"HIPDNN_RNN_ALGO_STANDARD",                                        "", CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 0
   {"CUDNN_RNN_ALGO_PERSIST_STATIC",                                  {"HIPDNN_RNN_ALGO_PERSIST_STATIC",                                  "", CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 1
@@ -199,10 +199,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"cudnnReduceTensorIndices_t",                                     {"hipdnnReduceTensorIndices_t",                                     "", CONV_TYPE, API_DNN, 1}},
   {"CUDNN_REDUCE_TENSOR_NO_INDICES",                                 {"HIPDNN_REDUCE_TENSOR_NO_INDICES",                                 "", CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 0
   {"CUDNN_REDUCE_TENSOR_FLATTENED_INDICES",                          {"HIPDNN_REDUCE_TENSOR_FLATTENED_INDICES",                          "", CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 1
-  {"cudnnConvolutionBwdDataPreference_t",                            {"hipdnnConvolutionBwdDataPreference_t",                            "", CONV_TYPE, API_DNN, 1}},
-  {"CUDNN_CONVOLUTION_BWD_DATA_NO_WORKSPACE",                        {"HIPDNN_CONVOLUTION_BWD_DATA_NO_WORKSPACE",                        "", CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 0
-  {"CUDNN_CONVOLUTION_BWD_DATA_PREFER_FASTEST",                      {"HIPDNN_CONVOLUTION_BWD_DATA_PREFER_FASTEST",                      "", CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 1
-  {"CUDNN_CONVOLUTION_BWD_DATA_SPECIFY_WORKSPACE_LIMIT",             {"HIPDNN_CONVOLUTION_BWD_DATA_SPECIFY_WORKSPACE_LIMIT",             "", CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 2
+  {"cudnnConvolutionBwdDataPreference_t",                            {"hipdnnConvolutionBwdDataPreference_t",                            "", CONV_TYPE, API_DNN, 1, DEPRECATED | REMOVED}},
+  {"CUDNN_CONVOLUTION_BWD_DATA_NO_WORKSPACE",                        {"HIPDNN_CONVOLUTION_BWD_DATA_NO_WORKSPACE",                        "", CONV_NUMERIC_LITERAL, API_DNN, 1, DEPRECATED | REMOVED}},    // 0
+  {"CUDNN_CONVOLUTION_BWD_DATA_PREFER_FASTEST",                      {"HIPDNN_CONVOLUTION_BWD_DATA_PREFER_FASTEST",                      "", CONV_NUMERIC_LITERAL, API_DNN, 1, DEPRECATED | REMOVED}},    // 1
+  {"CUDNN_CONVOLUTION_BWD_DATA_SPECIFY_WORKSPACE_LIMIT",             {"HIPDNN_CONVOLUTION_BWD_DATA_SPECIFY_WORKSPACE_LIMIT",             "", CONV_NUMERIC_LITERAL, API_DNN, 1, DEPRECATED | REMOVED}},    // 2
   {"cudnnIndicesType_t",                                             {"hipdnnIndicesType_t",                                             "", CONV_TYPE, API_DNN, 1}},
   {"CUDNN_32BIT_INDICES",                                            {"HIPDNN_32BIT_INDICES",                                            "", CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 0
   {"CUDNN_64BIT_INDICES",                                            {"HIPDNN_64BIT_INDICES",                                            "", CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 1
@@ -1145,4 +1145,44 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_TYPE_NAME_VER_MAP {
   {"CUDNN_SCALAR_INT64_T_BN_ACCUMULATION_COUNT",                     {CUDNN_760, CUDA_0,   CUDA_0  }},
   {"CUDNN_SCALAR_DOUBLE_BN_EXP_AVG_FACTOR",                          {CUDNN_760, CUDA_0,   CUDA_0  }},
   {"CUDNN_SCALAR_DOUBLE_BN_EPSILON",                                 {CUDNN_760, CUDA_0,   CUDA_0  }},
+  {"cudnnSeqDataAxis_t",                                             {CUDNN_750, CUDA_0,   CUDA_0  }},
+  {"CUDNN_SEQDATA_TIME_DIM",                                         {CUDNN_750, CUDA_0,   CUDA_0  }},
+  {"CUDNN_SEQDATA_BATCH_DIM",                                        {CUDNN_750, CUDA_0,   CUDA_0  }},
+  {"CUDNN_SEQDATA_BEAM_DIM",                                         {CUDNN_750, CUDA_0,   CUDA_0  }},
+  {"CUDNN_SEQDATA_VECT_DIM",                                         {CUDNN_750, CUDA_0,   CUDA_0  }},
+  {"CUDNN_SEQDATA_DIM_COUNT",                                        {CUDNN_750, CUDA_0,   CUDA_0  }},
+  {"cudnnConvolutionBwdFilterPreference_t",                          {CUDNN_30,  CUDNN_765,CUDNN_801}},
+  {"CUDNN_CONVOLUTION_BWD_FILTER_NO_WORKSPACE",                      {CUDNN_30,  CUDNN_765,CUDNN_801}},
+  {"CUDNN_CONVOLUTION_BWD_FILTER_PREFER_FASTEST",                    {CUDNN_30,  CUDNN_765,CUDNN_801}},
+  {"CUDNN_CONVOLUTION_BWD_FILTER_SPECIFY_WORKSPACE_LIMIT",           {CUDNN_30,  CUDNN_765,CUDNN_801}},
+  {"cudnnSeqDataStruct",                                             {CUDNN_750, CUDA_0,   CUDA_0  }},
+  {"cudnnSeqDataDescriptor_t",                                       {CUDNN_750, CUDA_0,   CUDA_0  }},
+  {"cudnnAttnQueryMap_t",                                            {CUDNN_750, CUDA_0,   CUDA_0  }},
+  {"CUDNN_ATTN_QUERYMAP_ALL_TO_ONE",                                 {CUDNN_750, CUDA_0,   CUDA_0  }},
+  {"CUDNN_ATTN_QUERYMAP_ONE_TO_ONE",                                 {CUDNN_750, CUDA_0,   CUDA_0  }},
+  {"CUDNN_ATTN_DISABLE_PROJ_BIASES",                                 {CUDNN_763, CUDA_0,   CUDA_0  }},
+  {"CUDNN_ATTN_ENABLE_PROJ_BIASES",                                  {CUDNN_763, CUDA_0,   CUDA_0  }},
+  {"cudnnAttnStruct",                                                {CUDNN_750, CUDA_0,   CUDA_0  }},
+  {"cudnnAttnDescriptor_t",                                          {CUDNN_750, CUDA_0,   CUDA_0  }},
+  {"cudnnMultiHeadAttnWeightKind_t",                                 {CUDNN_750, CUDA_0,   CUDA_0  }},
+  {"CUDNN_MH_ATTN_Q_WEIGHTS",                                        {CUDNN_750, CUDA_0,   CUDA_0  }},
+  {"CUDNN_MH_ATTN_K_WEIGHTS",                                        {CUDNN_750, CUDA_0,   CUDA_0  }},
+  {"CUDNN_MH_ATTN_V_WEIGHTS",                                        {CUDNN_750, CUDA_0,   CUDA_0  }},
+  {"CUDNN_MH_ATTN_O_WEIGHTS",                                        {CUDNN_750, CUDA_0,   CUDA_0  }},
+  {"CUDNN_MH_ATTN_Q_BIASES",                                         {CUDNN_763, CUDA_0,   CUDA_0  }},
+  {"CUDNN_MH_ATTN_K_BIASES",                                         {CUDNN_763, CUDA_0,   CUDA_0  }},
+  {"CUDNN_MH_ATTN_V_BIASES",                                         {CUDNN_763, CUDA_0,   CUDA_0  }},
+  {"CUDNN_MH_ATTN_O_BIASES",                                         {CUDNN_763, CUDA_0,   CUDA_0  }},
+  {"CUDNN_ATTN_WKIND_COUNT",                                         {CUDNN_763, CUDA_0,   CUDA_0  }},
+  {"cudnnConvolutionBwdDataPreference_t",                            {CUDNN_30,  CUDNN_765,CUDNN_801}},
+  {"CUDNN_CONVOLUTION_BWD_DATA_NO_WORKSPACE",                        {CUDNN_30,  CUDNN_765,CUDNN_801}},
+  {"CUDNN_CONVOLUTION_BWD_DATA_PREFER_FASTEST",                      {CUDNN_30,  CUDNN_765,CUDNN_801}},
+  {"CUDNN_CONVOLUTION_BWD_DATA_SPECIFY_WORKSPACE_LIMIT",             {CUDNN_30,  CUDNN_765,CUDNN_801}},
+  {"cudnnLossNormalizationMode_t",                                   {CUDNN_760, CUDA_0,   CUDA_0  }},
+  {"CUDNN_LOSS_NORMALIZATION_NONE",                                  {CUDNN_760, CUDA_0,   CUDA_0  }},
+  {"CUDNN_LOSS_NORMALIZATION_SOFTMAX",                               {CUDNN_760, CUDA_0,   CUDA_0  }},
+  {"CUDNN_VERSION",                                                  {CUDNN_20,  CUDA_0,   CUDA_0  }},
+  {"cudnnActivationStruct",                                          {CUDNN_40,  CUDA_0,   CUDA_0  }},
+  {"cudnnCTCLossStruct",                                             {CUDNN_705, CUDA_0,   CUDA_0  }},
+  {"cudnnCallback_t",                                                {CUDNN_713, CUDA_0,   CUDA_0  }},
 };
