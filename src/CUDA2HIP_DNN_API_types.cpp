@@ -887,8 +887,9 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_TYPE_NAME_VER_MAP {
   {"cudnnFilterDescriptor_t",                                        {CUDNN_10,  CUDA_0,   CUDA_0  }},
   {"cudnnFilterStruct",                                              {CUDNN_10,  CUDA_0,   CUDA_0  }},
   {"cudnnLRNDescriptor_t",                                           {CUDNN_30,  CUDA_0,   CUDA_0  }},
-  {"cudnnFilterStruct",                                              {CUDNN_30,  CUDA_0,   CUDA_0  }},
+  {"cudnnLRNStruct",                                                 {CUDNN_30,  CUDA_0,   CUDA_0  }},
   {"cudnnActivationDescriptor_t",                                    {CUDNN_40,  CUDA_0,   CUDA_0  }},
+  {"cudnnActivationStruct",                                          {CUDNN_40,  CUDA_0,   CUDA_0  }},
   {"cudnnFilterStruct",                                              {CUDNN_40,  CUDA_0,   CUDA_0  }},
   {"cudnnSpatialTransformerDescriptor_t",                            {CUDNN_50,  CUDA_0,   CUDA_0  }},
   {"cudnnSpatialTransformerStruct",                                  {CUDNN_50,  CUDA_0,   CUDA_0  }},
@@ -1182,7 +1183,6 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_TYPE_NAME_VER_MAP {
   {"CUDNN_LOSS_NORMALIZATION_NONE",                                  {CUDNN_760, CUDA_0,   CUDA_0  }},
   {"CUDNN_LOSS_NORMALIZATION_SOFTMAX",                               {CUDNN_760, CUDA_0,   CUDA_0  }},
   {"CUDNN_VERSION",                                                  {CUDNN_20,  CUDA_0,   CUDA_0  }},
-  {"cudnnActivationStruct",                                          {CUDNN_40,  CUDA_0,   CUDA_0  }},
   {"cudnnCTCLossStruct",                                             {CUDNN_705, CUDA_0,   CUDA_0  }},
   {"cudnnCallback_t",                                                {CUDNN_713, CUDA_0,   CUDA_0  }},
 };
