@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5.1)
+cmake_minimum_required(VERSION 3.6.3)
 
 project(hipify-clang)
 
@@ -7,7 +7,11 @@ if (MSVC AND MSVC_VERSION VERSION_LESS "1900")
     return()
 endif()
 
-find_package(LLVM REQUIRED)
+if (NOT UNIX)
+    find_package(LLVM REQUIRED CONFIG PATHS ${CMAKE_PREFIX_PATH})
+else()
+    find_package(LLVM REQUIRED CONFIG PATHS ${CMAKE_PREFIX_PATH} /opt/rocm )
+endif()
 message(STATUS "Found LLVM ${LLVM_PACKAGE_VERSION}:")
 message(STATUS "   - CMake module path: ${LLVM_CMAKE_DIR}")
 message(STATUS "   - Include path     : ${LLVM_INCLUDE_DIRS}")
@@ -121,7 +125,6 @@ if (UNIX)
     set(CPACK_PACKAGING_INSTALL_PREFIX "/opt/rocm/hip" CACHE PATH "HIP Package Installation Path")
     set(BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR}/packages/hipify-clang)
     configure_file(packaging/hipify-clang.txt ${BUILD_DIR}/CMakeLists.txt @ONLY)
-    configure_file(packaging/cpack_project_config.txt ${BUILD_DIR}/cpack_project_config.txt COPYONLY)
 
     add_custom_target(package_hipify-clang  COMMAND ${CMAKE_COMMAND} .
         WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
