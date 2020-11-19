@@ -7,7 +7,7 @@ if (MSVC AND MSVC_VERSION VERSION_LESS "1900")
     return()
 endif()
 
-find_package(LLVM REQUIRED CONFIG PATHS ${CMAKE_PREFIX_PATH} /opt/rocm )
+find_package(LLVM REQUIRED CONFIG PATHS ${CMAKE_PREFIX_PATH})
 message(STATUS "Found LLVM ${LLVM_PACKAGE_VERSION}:")
 message(STATUS "   - CMake module path: ${LLVM_CMAKE_DIR}")
 message(STATUS "   - Include path     : ${LLVM_INCLUDE_DIRS}")
