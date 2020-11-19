@@ -56,8 +56,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_TYPE_NAME_MAP {
   {"csrilu02Info",                              {"csrilu02Info",                               "", CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED}},
   {"csrilu02Info_t",                            {"csrilu02Info_t",                             "", CONV_TYPE, API_SPARSE, 4}},
 
-  {"bsrilu02Info",                              {"bsrilu02Info",                               "", CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED}},
-  {"bsrilu02Info_t",                            {"bsrilu02Info_t",                             "", CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED}},
+  {"bsrilu02Info",                              {"bsrilu02Info",                               "", CONV_TYPE, API_SPARSE, 4}},
+  {"bsrilu02Info_t",                            {"bsrilu02Info_t",                             "", CONV_TYPE, API_SPARSE, 4}},
 
   {"csru2csrInfo",                              {"csru2csrInfo",                               "", CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED}},
   {"csru2csrInfo_t",                            {"csru2csrInfo_t",                             "", CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED}},
@@ -68,8 +68,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_TYPE_NAME_MAP {
   {"cusparseColorInfo",                         {"hipsparseColorInfo",                         "", CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED}},
   {"cusparseColorInfo_t",                       {"hipsparseColorInfo_t",                       "", CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED}},
 
-  {"pruneInfo",                                 {"pruneInfo",                                  "", CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED}},
-  {"pruneInfo_t",                               {"pruneInfo_t",                                "", CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED}},
+  {"pruneInfo",                                 {"pruneInfo",                                  "", CONV_TYPE, API_SPARSE, 4}},
+  {"pruneInfo_t",                               {"pruneInfo_t",                                "", CONV_TYPE, API_SPARSE, 4}},
 
   {"cusparseSpMatDescr",                        {"hipsparseSpMatDescr",                        "", CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED}},
   {"cusparseSpMatDescr_t",                      {"hipsparseSpMatDescr_t",                      "", CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED}},
