@@ -75,9 +75,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP {
   {"CUBLAS_POINTER_MODE_DEVICE",     {"HIPBLAS_POINTER_MODE_DEVICE",     "rocblas_pointer_mode_device",           CONV_NUMERIC_LITERAL, API_BLAS, 2}},
 
   // Blas Atomics Modes
-  {"cublasAtomicsMode_t",            {"hipblasAtomicsMode_t",            "rocblas_atomics_mode",                  CONV_TYPE, API_BLAS, 2, HIP_UNSUPPORTED}},
-  {"CUBLAS_ATOMICS_NOT_ALLOWED",     {"HIPBLAS_ATOMICS_NOT_ALLOWED",     "rocblas_atomics_not_allowed",           CONV_NUMERIC_LITERAL, API_BLAS, 2, HIP_UNSUPPORTED}},
-  {"CUBLAS_ATOMICS_ALLOWED",         {"HIPBLAS_ATOMICS_ALLOWED",         "rocblas_atomics_allowed",               CONV_NUMERIC_LITERAL, API_BLAS, 2, HIP_UNSUPPORTED}},
+  {"cublasAtomicsMode_t",            {"hipblasAtomicsMode_t",            "rocblas_atomics_mode",                  CONV_TYPE, API_BLAS, 2}},
+  {"CUBLAS_ATOMICS_NOT_ALLOWED",     {"HIPBLAS_ATOMICS_NOT_ALLOWED",     "rocblas_atomics_not_allowed",           CONV_NUMERIC_LITERAL, API_BLAS, 2}},
+  {"CUBLAS_ATOMICS_ALLOWED",         {"HIPBLAS_ATOMICS_ALLOWED",         "rocblas_atomics_allowed",               CONV_NUMERIC_LITERAL, API_BLAS, 2}},
 
   // Blas Data Type
   {"cublasDataType_t",               {"hipblasDatatype_t",               "rocblas_datatype",                      CONV_TYPE, API_BLAS, 2}},

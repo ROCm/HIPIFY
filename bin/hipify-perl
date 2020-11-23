@@ -630,6 +630,7 @@ sub simpleSubstitutions {
     $ft{'library'} += s/\bcublasGemmBatchedEx\b/hipblasGemmBatchedEx/g;
     $ft{'library'} += s/\bcublasGemmEx\b/hipblasGemmEx/g;
     $ft{'library'} += s/\bcublasGemmStridedBatchedEx\b/hipblasGemmStridedBatchedEx/g;
+    $ft{'library'} += s/\bcublasGetAtomicsMode\b/hipblasGetAtomicsMode/g;
     $ft{'library'} += s/\bcublasGetMatrix\b/hipblasGetMatrix/g;
     $ft{'library'} += s/\bcublasGetMatrixAsync\b/hipblasGetMatrixAsync/g;
     $ft{'library'} += s/\bcublasGetPointerMode\b/hipblasGetPointerMode/g;
@@ -670,6 +671,7 @@ sub simpleSubstitutions {
     $ft{'library'} += s/\bcublasSdgmm\b/hipblasSdgmm/g;
     $ft{'library'} += s/\bcublasSdot\b/hipblasSdot/g;
     $ft{'library'} += s/\bcublasSdot_v2\b/hipblasSdot/g;
+    $ft{'library'} += s/\bcublasSetAtomicsMode\b/hipblasSetAtomicsMode/g;
     $ft{'library'} += s/\bcublasSetMatrix\b/hipblasSetMatrix/g;
     $ft{'library'} += s/\bcublasSetMatrixAsync\b/hipblasSetMatrixAsync/g;
     $ft{'library'} += s/\bcublasSetPointerMode\b/hipblasSetPointerMode/g;
@@ -1479,6 +1481,7 @@ sub simpleSubstitutions {
     $ft{'type'} += s/\bcuComplex\b/hipComplex/g;
     $ft{'type'} += s/\bcuDoubleComplex\b/hipDoubleComplex/g;
     $ft{'type'} += s/\bcuFloatComplex\b/hipFloatComplex/g;
+    $ft{'type'} += s/\bcublasAtomicsMode_t\b/hipblasAtomicsMode_t/g;
     $ft{'type'} += s/\bcublasDataType_t\b/hipblasDatatype_t/g;
     $ft{'type'} += s/\bcublasDiagType_t\b/hipblasDiagType_t/g;
     $ft{'type'} += s/\bcublasFillMode_t\b/hipblasFillMode_t/g;
@@ -1623,6 +1626,8 @@ sub simpleSubstitutions {
     $ft{'type'} += s/\bcusparseStatus_t\b/hipsparseStatus_t/g;
     $ft{'type'} += s/\bpruneInfo\b/pruneInfo/g;
     $ft{'type'} += s/\bpruneInfo_t\b/pruneInfo_t/g;
+    $ft{'numeric_literal'} += s/\bCUBLAS_ATOMICS_ALLOWED\b/HIPBLAS_ATOMICS_ALLOWED/g;
+    $ft{'numeric_literal'} += s/\bCUBLAS_ATOMICS_NOT_ALLOWED\b/HIPBLAS_ATOMICS_NOT_ALLOWED/g;
     $ft{'numeric_literal'} += s/\bCUBLAS_DIAG_NON_UNIT\b/HIPBLAS_DIAG_NON_UNIT/g;
     $ft{'numeric_literal'} += s/\bCUBLAS_DIAG_UNIT\b/HIPBLAS_DIAG_UNIT/g;
     $ft{'numeric_literal'} += s/\bCUBLAS_FILL_MODE_FULL\b/HIPBLAS_FILL_MODE_FULL/g;
@@ -4598,7 +4603,6 @@ sub warnUnsupportedFunctions {
         "cublasSetMathMode",
         "cublasSetLoggerCallback",
         "cublasSetKernelStream",
-        "cublasSetAtomicsMode",
         "cublasScalEx",
         "cublasRotmgEx",
         "cublasRotmEx",
@@ -4619,7 +4623,6 @@ sub warnUnsupportedFunctions {
         "cublasGetLoggerCallback",
         "cublasGetError",
         "cublasGetCudartVersion",
-        "cublasGetAtomicsMode",
         "cublasFree",
         "cublasDtrttp",
         "cublasDtpttr",
@@ -4644,7 +4647,6 @@ sub warnUnsupportedFunctions {
         "cublasCgemm3m",
         "cublasCgelsBatched",
         "cublasAxpyEx",
-        "cublasAtomicsMode_t",
         "cublasAsumEx",
         "cublasAlloc",
         "cuWaitExternalSemaphoresAsync",
@@ -6019,9 +6021,7 @@ sub warnUnsupportedFunctions {
         "CUBLAS_COMPUTE_32F_FAST_16BF",
         "CUBLAS_COMPUTE_32F",
         "CUBLAS_COMPUTE_16F_PEDANTIC",
-        "CUBLAS_COMPUTE_16F",
-        "CUBLAS_ATOMICS_NOT_ALLOWED",
-        "CUBLAS_ATOMICS_ALLOWED"
+        "CUBLAS_COMPUTE_16F"
     )
     {
         my $mt = m/($func)/g;
