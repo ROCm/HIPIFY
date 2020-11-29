@@ -285,7 +285,7 @@ Run `Visual Studio 16 2019`, open the generated `LLVM.sln`, build all, build pro
 
         - ***Linux***: `-DCUDA_DNN_ROOT_DIR=/usr/include`
 
-        - ***Windows***: `-DCUDA_DNN_ROOT_DIR=d:/CUDNN/cudnn-11.0-windows10-x64-v8.0.4.30`
+        - ***Windows***: `-DCUDA_DNN_ROOT_DIR=d:/CUDNN/cudnn-11.0-windows10-x64-v8.0.5`
 
 5. Ensure [`CUB`](https://github.com/NVlabs/cub) of the version corresponding to CUDA's version is installed.
 
@@ -329,9 +329,9 @@ On Linux the following configurations are tested:
 
 Ubuntu 14: LLVM 4.0.0 - 7.1.0, CUDA 7.0 - 9.0, cuDNN 5.0.5 - 7.6.5.32
 
-Ubuntu 16-18: LLVM 8.0.0 - 11.0.0, CUDA 8.0 - 10.2, cuDNN 5.1.10 - 8.0.4.30
+Ubuntu 16-18: LLVM 8.0.0 - 11.0.0, CUDA 8.0 - 10.2, cuDNN 5.1.10 - 8.0.5.39
 
-Ubuntu 20: LLVM 9.0.0 - 11.0.0, CUDA 8.0 - 11.1, cuDNN 5.1.10 - 8.0.4.30
+Ubuntu 20: LLVM 9.0.0 - 11.0.0, CUDA 8.0 - 11.1, cuDNN 5.1.10 - 8.0.5.39
 
 Minimum build system requirements for the above configurations:
 
@@ -484,8 +484,8 @@ Testing Time: 2.87s
 | 7.0.0 - 7.1.0   | 9.2        | 7.6.5.32            | 2017.15.9.11              | 3.13.3, 3.18.0 | 3.7.3, 3.8.5 |
 | 8.0.0 - 8.0.1   | 10.0       | 7.6.5.32            | 2017.15.9.15              | 3.14.2, 3.18.0 | 3.7.4, 3.8.5 |
 | 9.0.0 - 9.0.1   | 10.1       | 7.6.5.32            | 2017.15.9.20, 2019.16.4.5 | 3.16.4, 3.18.0 | 3.8.0, 3.8.5 |
-| 10.0.0 - 11.0.0 | 8.0 - 11.1 | 7.6.5.32 - 8.0.4.30 | 2017.15.9.28, 2019.16.7.6 | 3.18.4         | 3.9.0        |
-| 12.0.0git       | 8.0 - 11.1 | 7.6.5.32 - 8.0.4.30 | 2017.15.9.28, 2019.16.7.6 | 3.18.4         | 3.9.0        |
+| 10.0.0 - 11.0.0 | 8.0 - 11.1 | 7.6.5.32 - 8.0.5.39 | 2017.15.9.29, 2019.16.8.2 | 3.19.1         | 3.9.0        |
+| 12.0.0git       | 8.0 - 11.1 | 7.6.5.32 - 8.0.5.39 | 2017.15.9.29, 2019.16.8.2 | 3.19.1         | 3.9.0        |
 
 *Building with testing support by `Visual Studio 16 2019` on `Windows 10`:*
 
@@ -499,7 +499,7 @@ cmake
  -DCMAKE_PREFIX_PATH=d:/LLVM/11.0.0/dist \
  -DCUDA_TOOLKIT_ROOT_DIR="c:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.0" \
  -DCUDA_SDK_ROOT_DIR="c:/ProgramData/NVIDIA Corporation/CUDA Samples/v11.0" \
- -DCUDA_DNN_ROOT_DIR=d:/CUDNN/cudnn-11.0-windows10-x64-v8.0.4.30 \
+ -DCUDA_DNN_ROOT_DIR=d:/CUDNN/cudnn-11.0-windows10-x64-v8.0.5 \
  -DCUDA_CUB_ROOT_DIR=d:/GIT/cub \
  -DLLVM_EXTERNAL_LIT=d:/LLVM/11.0.0/build/Release/bin/llvm-lit.py \
  -Thost=x64
