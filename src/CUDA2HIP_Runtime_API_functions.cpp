@@ -932,6 +932,9 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_FUNCTION_VER_MAP {
   {"cudaGraphUpload",                                         {CUDA_111, CUDA_0,   CUDA_0  }},
 };
 
+const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP {
+};
+
 const std::map<unsigned int, llvm::StringRef> CUDA_RUNTIME_API_SECTION_MAP {
   {1, "Device Management"},
   {2, "Thread Management [DEPRECATED]"},

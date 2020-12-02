@@ -715,6 +715,9 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_FUNCTION_VER_MAP {
   {"cublasRotmgEx",                              {CUDA_101, CUDA_0, CUDA_0}},
 };
 
+const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_FUNCTION_VER_MAP {
+};
+
 const std::map<unsigned int, llvm::StringRef> CUDA_BLAS_API_SECTION_MAP {
   {2, "CUBLAS Data types"},
   {3, "CUDA Datatypes Reference"},

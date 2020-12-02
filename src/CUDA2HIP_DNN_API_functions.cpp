@@ -606,6 +606,9 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_FUNCTION_VER_MAP {
   {"cudnnSetRNNDescriptor_v5",                            {CUDNN_705, CUDNN_765, CUDNN_801}},
 };
 
+const std::map<llvm::StringRef, hipAPIversions> HIP_DNN_FUNCTION_VER_MAP {
+};
+
 const std::map<unsigned int, llvm::StringRef> CUDA_DNN_API_SECTION_MAP {
   {1, "CUNN Data types"},
   {2, "CUNN Functions"},
