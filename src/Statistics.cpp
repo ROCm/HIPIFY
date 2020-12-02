@@ -360,6 +360,7 @@ bool Statistics::isUnsupported(const hipCounter &counter) {
     return Statistics::isHipUnsupported(counter);
   }
 }
+
 std::string Statistics::getCudaVersion(const cudaVersions& ver) {
   switch (ver) {
     case CUDA_0:
@@ -420,6 +421,53 @@ std::string Statistics::getCudaVersion(const cudaVersions& ver) {
     case CUDNN_802: return "8.0.2";
     case CUDNN_803: return "8.0.3";
     case CUDNN_804: return "8.0.4";
+  }
+  return "";
+}
+
+std::string Statistics::getHipVersion(const hipVersions& ver) {
+  switch (ver) {
+    case HIP_0:
+    default:       return "";
+    case HIP_1050: return "1.5.0";
+    case HIP_1051: return "1.5.1";
+    case HIP_1052: return "1.5.2";
+    case HIP_1060: return "1.6.0";
+    case HIP_1061: return "1.6.1";
+    case HIP_1070: return "1.7.0";
+    case HIP_1071: return "1.7.1";
+    case HIP_1080: return "1.8.0";
+    case HIP_1082: return "1.8.2";
+    case HIP_1090: return "1.9.0";
+    case HIP_1091: return "1.9.1";
+    case HIP_1092: return "1.9.2";
+    case HIP_2000: return "2.0.0";
+    case HIP_2010: return "2.1.0";
+    case HIP_2020: return "2.2.0";
+    case HIP_2030: return "2.3.0";
+    case HIP_2040: return "2.4.0";
+    case HIP_2050: return "2.5.0";
+    case HIP_2060: return "2.6.0";
+    case HIP_2070: return "2.7.0";
+    case HIP_2072: return "2.7.2";
+    case HIP_2080: return "2.8.0";
+    case HIP_2090: return "2.9.0";
+    case HIP_2100: return "2.10.0";
+    case HIP_3000: return "3.0.0";
+    case HIP_3010: return "3.1.0";
+    case HIP_3011: return "3.1.1";
+    case HIP_3020: return "3.2.0";
+    case HIP_3021: return "3.2.1";
+    case HIP_3022: return "3.2.2";
+    case HIP_3030: return "3.3.0";
+    case HIP_3040: return "3.4.0";
+    case HIP_3050: return "3.5.0";
+    case HIP_3051: return "3.5.1";
+    case HIP_3060: return "3.6.0";
+    case HIP_3070: return "3.7.0";
+    case HIP_3080: return "3.8.0";
+    case HIP_3090: return "3.9.0";
+    case HIP_3100: return "3.10.0";
   }
   return "";
 }

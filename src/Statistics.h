@@ -217,10 +217,59 @@ enum cudaVersions {
   CUDNN_804 = 804,
 };
 
+enum hipVersions {
+  HIP_0 = 0, // Unknown version
+  HIP_1050 = 1050,
+  HIP_1051 = 1051,
+  HIP_1052 = 1052,
+  HIP_1060 = 1060,
+  HIP_1061 = 1601,
+  HIP_1070 = 1700,
+  HIP_1071 = 1701,
+  HIP_1080 = 1800,
+  HIP_1082 = 1082,
+  HIP_1090 = 1090,
+  HIP_1091 = 1091,
+  HIP_1092 = 1092,
+  HIP_2000 = 2000,
+  HIP_2010 = 2010,
+  HIP_2020 = 2020,
+  HIP_2030 = 2030,
+  HIP_2040 = 2040,
+  HIP_2050 = 2050,
+  HIP_2060 = 2060,
+  HIP_2070 = 2070,
+  HIP_2072 = 2072,
+  HIP_2080 = 2080,
+  HIP_2090 = 2090,
+  HIP_2100 = 2100,
+  HIP_3000 = 3000,
+  HIP_3010 = 3010,
+  HIP_3011 = 3011,
+  HIP_3020 = 3020,
+  HIP_3021 = 3021,
+  HIP_3022 = 3022,
+  HIP_3030 = 3030,
+  HIP_3040 = 3040,
+  HIP_3050 = 3050,
+  HIP_3051 = 3051,
+  HIP_3060 = 3060,
+  HIP_3070 = 3070,
+  HIP_3080 = 3080,
+  HIP_3090 = 3090,
+  HIP_3100 = 3100,
+};
+
 struct cudaAPIversions {
   cudaVersions appeared = cudaVersions::CUDA_0;
   cudaVersions deprecated = cudaVersions::CUDA_0;
   cudaVersions removed = cudaVersions::CUDA_0;
+};
+
+struct hipAPIversions {
+  hipVersions appeared = hipVersions::HIP_0;
+  hipVersions deprecated = hipVersions::HIP_0;
+  hipVersions removed = hipVersions::HIP_0;
 };
 
 // The names of various fields in in the statistics reports.
@@ -322,8 +371,10 @@ public:
     * based on counter's API_TYPE and option TranslateToRoc.
     */
   static bool isUnsupported(const hipCounter &counter);
-  //
+  // Get string CUDA version
   static std::string getCudaVersion(const cudaVersions &ver);
+  // Get string HIP version
+  static std::string getHipVersion(const hipVersions &ver);
   // Set this flag in case of hipification errors
   bool hasErrors = false;
 };
