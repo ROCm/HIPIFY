@@ -1816,3 +1816,6 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_TYPE_NAME_VER_MAP 
   {"cudaGraphNodeTypeWaitEvent",                                       {CUDA_111, CUDA_0,   CUDA_0  }},
   {"cudaGraphNodeTypeEventRecord",                                     {CUDA_111, CUDA_0,   CUDA_0  }},
 };
+
+const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {
+};

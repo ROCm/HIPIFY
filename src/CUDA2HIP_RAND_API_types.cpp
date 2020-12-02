@@ -148,3 +148,6 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RAND_TYPE_NAME_VER_MAP {
   {"CURAND_VERSION",                                {CUDA_102, CUDA_0, CUDA_0}},
   {"CURAND_ORDERING_PSEUDO_LEGACY",                 {CUDA_110, CUDA_0, CUDA_0}},
 };
+
+const std::map<llvm::StringRef, hipAPIversions> HIP_RAND_TYPE_NAME_VER_MAP {
+};

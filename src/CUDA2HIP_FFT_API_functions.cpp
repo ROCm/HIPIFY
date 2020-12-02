@@ -64,6 +64,9 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_FFT_FUNCTION_VER_MAP {
   {"cufftGetProperty",                                    {CUDA_80,  CUDA_0, CUDA_0}},
 };
 
+const std::map<llvm::StringRef, hipAPIversions> HIP_FFT_FUNCTION_VER_MAP {
+};
+
 const std::map<unsigned int, llvm::StringRef> CUDA_FFT_API_SECTION_MAP {
   {1, "CUFFT Data types"},
   {2, "CUFFT API functions"},

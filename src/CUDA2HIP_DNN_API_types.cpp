@@ -1186,3 +1186,6 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_TYPE_NAME_VER_MAP {
   {"cudnnCTCLossStruct",                                             {CUDNN_705, CUDA_0,   CUDA_0  }},
   {"cudnnCallback_t",                                                {CUDNN_713, CUDA_0,   CUDA_0  }},
 };
+
+const std::map<llvm::StringRef, hipAPIversions> HIP_DNN_TYPE_NAME_VER_MAP {
+};

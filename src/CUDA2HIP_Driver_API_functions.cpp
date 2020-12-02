@@ -1070,6 +1070,9 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_FUNCTION_VER_MAP {
   {"cuGraphUpload",                                        {CUDA_111, CUDA_0,   CUDA_0  }},
 };
 
+const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_FUNCTION_VER_MAP {
+};
+
 const std::map<unsigned int, llvm::StringRef> CUDA_DRIVER_API_SECTION_MAP {
   {1, "CUDA Driver Data Types"},
   {2, "Error Handling"},

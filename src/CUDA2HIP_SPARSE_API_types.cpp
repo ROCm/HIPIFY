@@ -292,3 +292,6 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SPARSE_TYPE_NAME_VER_MAP {
   {"CUSPARSE_SPMMA_ALG3",                       {CUDA_111, CUDA_0,   CUDA_0  }},
   {"CUSPARSE_SPMMA_ALG4",                       {CUDA_111, CUDA_0,   CUDA_0  }},
 };
+
+const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_TYPE_NAME_VER_MAP {
+};

@@ -38,6 +38,7 @@ namespace doc {
   typedef map<StringRef, hipCounter> functionMap;
   typedef functionMap typeMap;
   typedef map<StringRef, cudaAPIversions> versionMap;
+  typedef map<StringRef, hipAPIversions> hipVersionMap;
 
   const string sEmpty = "";
   const string sMd = "md";
@@ -115,7 +116,9 @@ namespace doc {
       virtual const functionMap &getFunctions() const = 0;
       virtual const typeMap &getTypes() const = 0;
       virtual const versionMap &getFunctionVersions() const = 0;
+      virtual const hipVersionMap &getHipFunctionVersions() const = 0;
       virtual const versionMap &getTypeVersions() const = 0;
+      virtual const hipVersionMap &getHipTypeVersions() const = 0;
 
     private:
       string dir;
@@ -234,7 +237,9 @@ namespace doc {
       const functionMap &getFunctions() const override { return CUDA_DRIVER_FUNCTION_MAP; }
       const typeMap &getTypes() const override { return CUDA_DRIVER_TYPE_NAME_MAP; }
       const versionMap &getFunctionVersions() const override { return CUDA_DRIVER_FUNCTION_VER_MAP; }
+      const hipVersionMap &getHipFunctionVersions() const override { return HIP_DRIVER_FUNCTION_VER_MAP; }
       const versionMap &getTypeVersions() const override { return CUDA_DRIVER_TYPE_NAME_VER_MAP; }
+      const hipVersionMap &getHipTypeVersions() const override { return HIP_DRIVER_TYPE_NAME_VER_MAP; }
       const string &getName() const override { return sCUDA_DRIVER; }
       const string &getFileName(docType format) const override {
         switch (format) {
@@ -255,7 +260,9 @@ namespace doc {
       const functionMap &getFunctions() const override { return CUDA_RUNTIME_FUNCTION_MAP; }
       const typeMap &getTypes() const override { return CUDA_RUNTIME_TYPE_NAME_MAP; }
       const versionMap &getFunctionVersions() const override { return CUDA_RUNTIME_FUNCTION_VER_MAP; }
+      const hipVersionMap &getHipFunctionVersions() const override { return HIP_RUNTIME_FUNCTION_VER_MAP; }
       const versionMap &getTypeVersions() const override { return CUDA_RUNTIME_TYPE_NAME_VER_MAP; }
+      const hipVersionMap &getHipTypeVersions() const override { return HIP_RUNTIME_TYPE_NAME_VER_MAP; }
       const string &getName() const override { return sCUDA_RUNTIME; }
       const string &getFileName(docType format) const override {
         switch (format) {
@@ -276,7 +283,9 @@ namespace doc {
       const functionMap &getFunctions() const override { return CUDA_COMPLEX_FUNCTION_MAP; }
       const typeMap &getTypes() const override { return CUDA_COMPLEX_TYPE_NAME_MAP; }
       const versionMap &getFunctionVersions() const override { return CUDA_COMPLEX_FUNCTION_VER_MAP; }
+      const hipVersionMap &getHipFunctionVersions() const override { return HIP_COMPLEX_FUNCTION_VER_MAP; }
       const versionMap &getTypeVersions() const override { return CUDA_COMPLEX_TYPE_NAME_VER_MAP; }
+      const hipVersionMap &getHipTypeVersions() const override { return HIP_COMPLEX_TYPE_NAME_VER_MAP; }
       const string &getName() const override { return sCUCOMPLEX; }
       const string &getFileName(docType format) const override {
         switch (format) {
@@ -297,7 +306,9 @@ namespace doc {
       const functionMap &getFunctions() const override { return CUDA_BLAS_FUNCTION_MAP; }
       const typeMap &getTypes() const override { return CUDA_BLAS_TYPE_NAME_MAP; }
       const versionMap &getFunctionVersions() const override { return CUDA_BLAS_FUNCTION_VER_MAP; }
+      const hipVersionMap &getHipFunctionVersions() const override { return HIP_BLAS_FUNCTION_VER_MAP; }
       const versionMap &getTypeVersions() const override { return CUDA_BLAS_TYPE_NAME_VER_MAP; }
+      const hipVersionMap &getHipTypeVersions() const override { return HIP_BLAS_TYPE_NAME_VER_MAP; }
       const string &getName() const override { return sCUBLAS; }
       const string &getFileName(docType format) const override {
         switch (format) {
@@ -318,7 +329,9 @@ namespace doc {
       const functionMap &getFunctions() const override { return CUDA_RAND_FUNCTION_MAP; }
       const typeMap &getTypes() const override { return CUDA_RAND_TYPE_NAME_MAP; }
       const versionMap &getFunctionVersions() const override { return CUDA_RAND_FUNCTION_VER_MAP; }
+      const hipVersionMap &getHipFunctionVersions() const override { return HIP_RAND_FUNCTION_VER_MAP; }
       const versionMap &getTypeVersions() const override { return CUDA_RAND_TYPE_NAME_VER_MAP; }
+      const hipVersionMap &getHipTypeVersions() const override { return HIP_RAND_TYPE_NAME_VER_MAP; }
       const string &getName() const override { return sCURAND; }
       const string &getFileName(docType format) const override {
         switch (format) {
@@ -339,7 +352,9 @@ namespace doc {
       const functionMap &getFunctions() const override { return CUDA_DNN_FUNCTION_MAP; }
       const typeMap &getTypes() const override { return CUDA_DNN_TYPE_NAME_MAP; }
       const versionMap &getFunctionVersions() const override { return CUDA_DNN_FUNCTION_VER_MAP; }
+      const hipVersionMap &getHipFunctionVersions() const override { return HIP_DNN_FUNCTION_VER_MAP; }
       const versionMap &getTypeVersions() const override { return CUDA_DNN_TYPE_NAME_VER_MAP; }
+      const hipVersionMap &getHipTypeVersions() const override { return HIP_DNN_TYPE_NAME_VER_MAP; }
       const string &getName() const override { return sCUDNN; }
       const string &getFileName(docType format) const override {
         switch (format) {
@@ -360,7 +375,9 @@ namespace doc {
       const functionMap &getFunctions() const override { return CUDA_FFT_FUNCTION_MAP; }
       const typeMap &getTypes() const override { return CUDA_FFT_TYPE_NAME_MAP; }
       const versionMap &getFunctionVersions() const override { return CUDA_FFT_FUNCTION_VER_MAP; }
+      const hipVersionMap &getHipFunctionVersions() const override { return HIP_FFT_FUNCTION_VER_MAP; }
       const versionMap &getTypeVersions() const override { return CUDA_FFT_TYPE_NAME_VER_MAP; }
+      const hipVersionMap &getHipTypeVersions() const override { return HIP_FFT_TYPE_NAME_VER_MAP; }
       const string &getName() const override { return sCUFFT; }
       const string &getFileName(docType format) const override {
         switch (format) {
@@ -381,7 +398,9 @@ namespace doc {
       const functionMap &getFunctions() const override { return CUDA_SPARSE_FUNCTION_MAP; }
       const typeMap &getTypes() const override { return CUDA_SPARSE_TYPE_NAME_MAP; }
       const versionMap &getFunctionVersions() const override { return CUDA_SPARSE_FUNCTION_VER_MAP; }
+      const hipVersionMap &getHipFunctionVersions() const override { return HIP_SPARSE_FUNCTION_VER_MAP; }
       const versionMap &getTypeVersions() const override { return CUDA_SPARSE_TYPE_NAME_VER_MAP; }
+      const hipVersionMap &getHipTypeVersions() const override { return HIP_SPARSE_TYPE_NAME_VER_MAP; }
       const string &getName() const override { return sCUSPARSE; }
       const string &getFileName(docType format) const override {
         switch (format) {

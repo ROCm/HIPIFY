@@ -86,3 +86,6 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_FFT_TYPE_NAME_VER_MAP {
   {"CUFFT_VERSION",                    {CUDA_102, CUDA_0, CUDA_0}},
   {"CUFFT_NOT_SUPPORTED",              {CUDA_80,  CUDA_0, CUDA_0}},
 };
+
+const std::map<llvm::StringRef, hipAPIversions> HIP_FFT_TYPE_NAME_VER_MAP {
+};

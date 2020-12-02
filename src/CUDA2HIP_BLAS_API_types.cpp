@@ -263,3 +263,6 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_TYPE_NAME_VER_MAP {
   {"CUBLAS_COMPUTE_32I",                               {CUDA_110, CUDA_0, CUDA_0}},
   {"CUBLAS_COMPUTE_32I_PEDANTIC",                      {CUDA_110, CUDA_0, CUDA_0}},
 };
+
+const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_TYPE_NAME_VER_MAP {
+};

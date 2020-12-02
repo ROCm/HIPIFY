@@ -30,7 +30,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_CAFFE2_FUNCTION_MAP {
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_CAFFE2_FUNCTION_VER_MAP {
 };
 
-const std::map<unsigned int, llvm::StringRef> CUDA_CAFFE2_API_SECTION_MAP{
+const std::map<unsigned int, llvm::StringRef> CUDA_CAFFE2_API_SECTION_MAP {
   {1, "CAFFE2 Data types"},
   {2, "CAFFE2 Functions"},
 };

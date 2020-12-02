@@ -31,3 +31,6 @@ const std::map<llvm::StringRef, hipCounter> CUDA_COMPLEX_TYPE_NAME_MAP {
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_COMPLEX_TYPE_NAME_VER_MAP {
 };
+
+const std::map<llvm::StringRef, hipAPIversions> HIP_COMPLEX_TYPE_NAME_VER_MAP {
+};
