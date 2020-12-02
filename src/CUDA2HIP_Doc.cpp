@@ -160,22 +160,30 @@ namespace doc {
           *streams[md].get() << "# " << getName() << " " << sAPI_supported << endl << endl;
           for (auto &s : getSections()) {
             *streams[md].get() << "## **" << s.first << ". " << string(s.second) << "**" << endl << endl;
-            *streams[md].get() << "| **" << sCUDA << "** | **" << sA << "** | **" << sD << "** | **" << sR << "** | **" << sHIP << "** |" << endl;
-            *streams[md].get() << "|:--|:-:|:-:|:-:|:--|" << endl;
+            *streams[md].get() << "| **" << sCUDA << "** | **" << sA << "** | **" << sD << "** | **" << sR << "** | **" << sHIP << "** | **" << sA << "** | **" << sD << "** | **" << sR << "** |" << endl;
+            *streams[md].get() << "|:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|" << endl;
             const functionMap &ftMap = isTypeSection(s.first, getSections()) ? getTypes() : getFunctions();
             const versionMap &vMap = isTypeSection(s.first, getSections()) ? getTypeVersions() : getFunctionVersions();
+            const hipVersionMap &hMap = isTypeSection(s.first, getSections()) ? getHipTypeVersions() : getHipFunctionVersions();
             functionMap fMap;
             for (auto &f : ftMap) if (f.second.apiSection == s.first) fMap.insert(f);
             for (auto &f : fMap) {
-              string a, d, r;
+              string a, d, r, ha, hd, hr;
               for (auto &v : vMap) {
                 if (v.first == f.first) {
                   a = Statistics::getCudaVersion(v.second.appeared);
                   d = Statistics::getCudaVersion(v.second.deprecated);
                   r = Statistics::getCudaVersion(v.second.removed);
+                  break;
                 }
               }
-              *streams[md].get() << "|`" << string(f.first) << "`| " << a << " | " << d << " | " << r << " |" << (Statistics::isHipUnsupported(f.second) ? "" : "`" + string(f.second.hipName) + "`") << "|" << endl;
+              auto hv = hMap.find(f.second.hipName);
+              if (hv != hMap.end()) {
+                ha = Statistics::getHipVersion(hv->second.appeared);
+                hd = Statistics::getHipVersion(hv->second.deprecated);
+                hr = Statistics::getHipVersion(hv->second.removed);
+              }
+              *streams[md].get() << "|`" << string(f.first) << "`| " << a << " | " << d << " | " << r << " |" << (Statistics::isHipUnsupported(f.second) ? "" : "`" + string(f.second.hipName) + "`") << "| " << ha << " | " << hd << " | " << hr << " |" << endl;
             }
             *streams[md].get() << endl;
           }
