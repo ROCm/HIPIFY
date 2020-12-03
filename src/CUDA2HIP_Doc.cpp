@@ -108,6 +108,7 @@ namespace doc {
         if (init()) return write() & fini();
         return false;
       }
+      virtual void setCommonHipVersionMap() {}
 
     protected:
       virtual const string &getFileName(docType format) const = 0;
@@ -119,6 +120,7 @@ namespace doc {
       virtual const hipVersionMap &getHipFunctionVersions() const = 0;
       virtual const versionMap &getTypeVersions() const = 0;
       virtual const hipVersionMap &getHipTypeVersions() const = 0;
+      hipVersionMap commonHipVersionMap;
 
     private:
       string dir;
@@ -164,7 +166,7 @@ namespace doc {
             *streams[md].get() << "|:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|" << endl;
             const functionMap &ftMap = isTypeSection(s.first, getSections()) ? getTypes() : getFunctions();
             const versionMap &vMap = isTypeSection(s.first, getSections()) ? getTypeVersions() : getFunctionVersions();
-            const hipVersionMap &hMap = isTypeSection(s.first, getSections()) ? getHipTypeVersions() : getHipFunctionVersions();
+            const hipVersionMap &hMap = commonHipVersionMap.empty() ? (isTypeSection(s.first, getSections()) ? getHipTypeVersions() : getHipFunctionVersions()) : commonHipVersionMap;
             functionMap fMap;
             for (auto &f : ftMap) if (f.second.apiSection == s.first) fMap.insert(f);
             for (auto &f : fMap) {
@@ -231,7 +233,10 @@ namespace doc {
       void addDoc(DOC *doc) { docs.push_back(doc); doc->setFormats(formats); }
       bool generate() {
         bool bRet = true;
-        for (auto &d : docs) bRet = d->generate() & bRet;
+        for (auto &d : docs) {
+          d->setCommonHipVersionMap();
+          bRet = d->generate() & bRet;
+        }
         return bRet;
       }
   };
@@ -257,6 +262,12 @@ namespace doc {
           case csv: return sDRIVER_csv;
         }
       }
+      void setCommonHipVersionMap() {
+        commonHipVersionMap.insert(HIP_DRIVER_FUNCTION_VER_MAP.begin(), HIP_DRIVER_FUNCTION_VER_MAP.end());
+        commonHipVersionMap.insert(HIP_DRIVER_TYPE_NAME_VER_MAP.begin(), HIP_DRIVER_TYPE_NAME_VER_MAP.end());
+        commonHipVersionMap.insert(HIP_RUNTIME_FUNCTION_VER_MAP.begin(), HIP_RUNTIME_FUNCTION_VER_MAP.end());
+        commonHipVersionMap.insert(HIP_RUNTIME_TYPE_NAME_VER_MAP.begin(), HIP_RUNTIME_TYPE_NAME_VER_MAP.end());
+      }
   };
 
   class RUNTIME : public DOC {
@@ -279,6 +290,12 @@ namespace doc {
           case md: return sRUNTIME_md;
           case csv: return sRUNTIME_csv;
         }
+      }
+      void setCommonHipVersionMap() {
+        commonHipVersionMap.insert(HIP_DRIVER_FUNCTION_VER_MAP.begin(), HIP_DRIVER_FUNCTION_VER_MAP.end());
+        commonHipVersionMap.insert(HIP_DRIVER_TYPE_NAME_VER_MAP.begin(), HIP_DRIVER_TYPE_NAME_VER_MAP.end());
+        commonHipVersionMap.insert(HIP_RUNTIME_FUNCTION_VER_MAP.begin(), HIP_RUNTIME_FUNCTION_VER_MAP.end());
+        commonHipVersionMap.insert(HIP_RUNTIME_TYPE_NAME_VER_MAP.begin(), HIP_RUNTIME_TYPE_NAME_VER_MAP.end());
       }
   };
 
