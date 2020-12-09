@@ -1464,8 +1464,8 @@ sub simpleSubstitutions {
     $ft{'type'} += s/\bCUaddress_mode\b/hipTextureAddressMode/g;
     $ft{'type'} += s/\bCUaddress_mode_enum\b/hipTextureAddressMode/g;
     $ft{'type'} += s/\bCUarray\b/hipArray */g;
-    $ft{'type'} += s/\bCUarray_format\b/hipArray_format/g;
-    $ft{'type'} += s/\bCUarray_format_enum\b/hipArray_format/g;
+    $ft{'type'} += s/\bCUarray_format\b/hipArray_Format/g;
+    $ft{'type'} += s/\bCUarray_format_enum\b/hipArray_Format/g;
     $ft{'type'} += s/\bCUarray_st\b/hipArray/g;
     $ft{'type'} += s/\bCUcomputemode\b/hipComputeMode/g;
     $ft{'type'} += s/\bCUcomputemode_enum\b/hipComputeMode/g;
@@ -1503,13 +1503,13 @@ sub simpleSubstitutions {
     $ft{'type'} += s/\bCUmemorytype\b/hipMemoryType/g;
     $ft{'type'} += s/\bCUmemorytype_enum\b/hipMemoryType/g;
     $ft{'type'} += s/\bCUmipmappedArray\b/hipMipmappedArray_t/g;
-    $ft{'type'} += s/\bCUmipmappedArray_st\b/hipMipmappedArray_st/g;
+    $ft{'type'} += s/\bCUmipmappedArray_st\b/hipMipmappedArray/g;
     $ft{'type'} += s/\bCUmod_st\b/ihipModule_t/g;
     $ft{'type'} += s/\bCUmodule\b/hipModule_t/g;
     $ft{'type'} += s/\bCUresourceViewFormat\b/hipResourceViewFormat/g;
     $ft{'type'} += s/\bCUresourceViewFormat_enum\b/hipResourceViewFormat/g;
-    $ft{'type'} += s/\bCUresourcetype\b/hipResourceType/g;
-    $ft{'type'} += s/\bCUresourcetype_enum\b/hipResourceType/g;
+    $ft{'type'} += s/\bCUresourcetype\b/HIPresourcetype/g;
+    $ft{'type'} += s/\bCUresourcetype_enum\b/HIPresourcetype_enum/g;
     $ft{'type'} += s/\bCUresult\b/hipError_t/g;
     $ft{'type'} += s/\bCUsharedconfig\b/hipSharedMemConfig/g;
     $ft{'type'} += s/\bCUsharedconfig_enum\b/hipSharedMemConfig/g;
@@ -2096,10 +2096,10 @@ sub simpleSubstitutions {
     $ft{'numeric_literal'} += s/\bCU_MEM_RANGE_ATTRIBUTE_PREFERRED_LOCATION\b/hipMemRangeAttributePreferredLocation/g;
     $ft{'numeric_literal'} += s/\bCU_MEM_RANGE_ATTRIBUTE_READ_MOSTLY\b/hipMemRangeAttributeReadMostly/g;
     $ft{'numeric_literal'} += s/\bCU_OCCUPANCY_DEFAULT\b/hipOccupancyDefault/g;
-    $ft{'numeric_literal'} += s/\bCU_RESOURCE_TYPE_ARRAY\b/hipResourceTypeArray/g;
-    $ft{'numeric_literal'} += s/\bCU_RESOURCE_TYPE_LINEAR\b/hipResourceTypeLinear/g;
-    $ft{'numeric_literal'} += s/\bCU_RESOURCE_TYPE_MIPMAPPED_ARRAY\b/hipResourceTypeMipmappedArray/g;
-    $ft{'numeric_literal'} += s/\bCU_RESOURCE_TYPE_PITCH2D\b/hipResourceTypePitch2D/g;
+    $ft{'numeric_literal'} += s/\bCU_RESOURCE_TYPE_ARRAY\b/HIP_RESOURCE_TYPE_ARRAY/g;
+    $ft{'numeric_literal'} += s/\bCU_RESOURCE_TYPE_LINEAR\b/HIP_RESOURCE_TYPE_LINEAR/g;
+    $ft{'numeric_literal'} += s/\bCU_RESOURCE_TYPE_MIPMAPPED_ARRAY\b/HIP_RESOURCE_TYPE_MIPMAPPED_ARRAY/g;
+    $ft{'numeric_literal'} += s/\bCU_RESOURCE_TYPE_PITCH2D\b/HIP_RESOURCE_TYPE_PITCH2D/g;
     $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_FLOAT_1X16\b/hipResViewFormatHalf1/g;
     $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_FLOAT_1X32\b/hipResViewFormatFloat1/g;
     $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_FLOAT_2X16\b/hipResViewFormatHalf2/g;
@@ -2358,6 +2358,7 @@ sub simpleSubstitutions {
     $ft{'define'} += s/\bCU_TRSA_OVERRIDE_FORMAT\b/HIP_TRSA_OVERRIDE_FORMAT/g;
     $ft{'define'} += s/\bCU_TRSF_NORMALIZED_COORDINATES\b/HIP_TRSF_NORMALIZED_COORDINATES/g;
     $ft{'define'} += s/\bCU_TRSF_READ_AS_INTEGER\b/HIP_TRSF_READ_AS_INTEGER/g;
+    $ft{'define'} += s/\bCU_TRSF_SRGB\b/HIP_TRSF_SRGB/g;
     $ft{'define'} += s/\bREGISTER_CUDA_OPERATOR\b/REGISTER_HIP_OPERATOR/g;
     $ft{'define'} += s/\bREGISTER_CUDA_OPERATOR_CREATOR\b/REGISTER_HIP_OPERATOR_CREATOR/g;
     $ft{'define'} += s/\b__CUDACC__\b/__HIPCC__/g;
@@ -5108,7 +5109,6 @@ sub warnUnsupportedFunctions {
         "CUaccessProperty",
         "CUaccessPolicyWindow_st",
         "CUaccessPolicyWindow",
-        "CU_TRSF_SRGB",
         "CU_TRSF_DISABLE_TRILINEAR_OPTIMIZATION",
         "CU_TARGET_COMPUTE_86",
         "CU_TARGET_COMPUTE_80",
