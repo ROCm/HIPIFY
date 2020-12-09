@@ -179,7 +179,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUgraphNode",                                                      {"hipGraphNode",                                             "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
 
   // cudaMipmappedArray
-  {"CUmipmappedArray_st",                                              {"hipMipmappedArray_st",                                     "", CONV_TYPE, API_DRIVER, 1}},
+  {"CUmipmappedArray_st",                                              {"hipMipmappedArray",                                        "", CONV_TYPE, API_DRIVER, 1}},
   // cudaMipmappedArray_t
   {"CUmipmappedArray",                                                 {"hipMipmappedArray_t",                                      "", CONV_TYPE, API_DRIVER, 1}},
 
@@ -243,9 +243,13 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUaddress_mode",                                                   {"hipTextureAddressMode",                                    "", CONV_TYPE, API_DRIVER, 1}},
   {"CUaddress_mode_enum",                                              {"hipTextureAddressMode",                                    "", CONV_TYPE, API_DRIVER, 1}},
   // CUaddress_mode enum values
+  // cudaAddressModeWrap
   {"CU_TR_ADDRESS_MODE_WRAP",                                          {"hipAddressModeWrap",                                       "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0
+  // cudaAddressModeClamp
   {"CU_TR_ADDRESS_MODE_CLAMP",                                         {"hipAddressModeClamp",                                      "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 1
+  // cudaAddressModeMirror
   {"CU_TR_ADDRESS_MODE_MIRROR",                                        {"hipAddressModeMirror",                                     "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 2
+  // cudaAddressModeBorder
   {"CU_TR_ADDRESS_MODE_BORDER",                                        {"hipAddressModeBorder",                                     "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 3
 
   {"CUarray_cubemap_face",                                             {"hipGraphicsCubeFace",                                      "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
@@ -264,8 +268,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaGraphicsCubeFaceNegativeZ
   {"CU_CUBEMAP_FACE_NEGATIVE_Z",                                       {"hipGraphicsCubeFaceNegativeZ",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0x05
 
-  {"CUarray_format",                                                   {"hipArray_format",                                          "", CONV_TYPE, API_DRIVER, 1}},
-  {"CUarray_format_enum",                                              {"hipArray_format",                                          "", CONV_TYPE, API_DRIVER, 1}},
+  {"CUarray_format",                                                   {"hipArray_Format",                                          "", CONV_TYPE, API_DRIVER, 1}},
+  {"CUarray_format_enum",                                              {"hipArray_Format",                                          "", CONV_TYPE, API_DRIVER, 1}},
   // CUarray_format enum values
   {"CU_AD_FORMAT_UNSIGNED_INT8",                                       {"HIP_AD_FORMAT_UNSIGNED_INT8",                              "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x01
   {"CU_AD_FORMAT_UNSIGNED_INT16",                                      {"HIP_AD_FORMAT_UNSIGNED_INT16",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x02
@@ -1121,18 +1125,19 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_POINTER_ATTRIBUTE_IS_GPU_DIRECT_RDMA_CAPABLE",                  {"hipPointerAttributeIsGpuDirectRdmaCapable",                "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 15
   {"CU_POINTER_ATTRIBUTE_ACCESS_FLAGS",                                {"hipPointerAttributeAccessFlags",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 16
 
+  // TODO: HIPresourcetype_enum and all its values should be hipResourceType as long as they are equal
   // cudaResourceType
-  {"CUresourcetype",                                                   {"hipResourceType",                                          "", CONV_TYPE, API_DRIVER, 1}},
-  {"CUresourcetype_enum",                                              {"hipResourceType",                                          "", CONV_TYPE, API_DRIVER, 1}},
+  {"CUresourcetype",                                                   {"HIPresourcetype",                                          "", CONV_TYPE, API_DRIVER, 1}},
+  {"CUresourcetype_enum",                                              {"HIPresourcetype_enum",                                     "", CONV_TYPE, API_DRIVER, 1}},
   // CUresourcetype enum values
   // cudaResourceTypeArray
-  {"CU_RESOURCE_TYPE_ARRAY",                                           {"hipResourceTypeArray",                                     "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x00
+  {"CU_RESOURCE_TYPE_ARRAY",                                           {"HIP_RESOURCE_TYPE_ARRAY",                                  "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x00
   // cudaResourceTypeMipmappedArray
-  {"CU_RESOURCE_TYPE_MIPMAPPED_ARRAY",                                 {"hipResourceTypeMipmappedArray",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x01
+  {"CU_RESOURCE_TYPE_MIPMAPPED_ARRAY",                                 {"HIP_RESOURCE_TYPE_MIPMAPPED_ARRAY",                        "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x01
   // cudaResourceTypeLinear
-  {"CU_RESOURCE_TYPE_LINEAR",                                          {"hipResourceTypeLinear",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x02
+  {"CU_RESOURCE_TYPE_LINEAR",                                          {"HIP_RESOURCE_TYPE_LINEAR",                                 "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x02
   // cudaResourceTypePitch2D
-  {"CU_RESOURCE_TYPE_PITCH2D",                                         {"hipResourceTypePitch2D",                                   "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x03
+  {"CU_RESOURCE_TYPE_PITCH2D",                                         {"HIP_RESOURCE_TYPE_PITCH2D",                                "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x03
 
   // cudaResourceViewFormat
   {"CUresourceViewFormat",                                             {"hipResourceViewFormat",                                    "", CONV_TYPE, API_DRIVER, 1}},
@@ -1719,7 +1724,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_TRSA_OVERRIDE_FORMAT",                                          {"HIP_TRSA_OVERRIDE_FORMAT",                                 "", CONV_DEFINE, API_DRIVER, 1}}, // 0x01
   {"CU_TRSF_NORMALIZED_COORDINATES",                                   {"HIP_TRSF_NORMALIZED_COORDINATES",                          "", CONV_DEFINE, API_DRIVER, 1}}, // 0x02
   {"CU_TRSF_READ_AS_INTEGER",                                          {"HIP_TRSF_READ_AS_INTEGER",                                 "", CONV_DEFINE, API_DRIVER, 1}}, // 0x01
-  {"CU_TRSF_SRGB",                                                     {"HIP_TRSF_SRGB",                                            "", CONV_DEFINE, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0x10
+  {"CU_TRSF_SRGB",                                                     {"HIP_TRSF_SRGB",                                            "", CONV_DEFINE, API_DRIVER, 1}}, // 0x10
   // no analogue
   // NOTE: Deprecated, use CUDA_ARRAY3D_LAYERED
   {"CUDA_ARRAY3D_2DARRAY",                                             {"HIP_ARRAY3D_2DARRAY",                                      "", CONV_DEFINE, API_DRIVER, 1, HIP_UNSUPPORTED | DEPRECATED}}, // 0x01
@@ -2195,4 +2200,95 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {
   {"hipEventReleaseToDevice",                                          {HIP_1060, HIP_0,    HIP_0   }},
   {"hipEventReleaseToSystem",                                          {HIP_1060, HIP_0,    HIP_0   }},
   {"hipHostMallocDefault",                                             {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipHostMallocMapped",                                              {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipHostMallocWriteCombined",                                       {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipMemAttachGlobal",                                               {HIP_2050, HIP_0,    HIP_0   }},
+  {"hipMemAttachHost",                                                 {HIP_2050, HIP_0,    HIP_0   }},
+  {"hipMemAttachSingle",                                               {HIP_3070, HIP_0,    HIP_0   }},
+  {"hipHostRegisterPortable",                                          {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipHostRegisterMapped",                                            {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipHostRegisterIoMemory",                                          {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipDeviceScheduleAuto",                                            {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipDeviceScheduleSpin",                                            {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipDeviceScheduleYield",                                           {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipDeviceScheduleBlockingSync",                                    {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipDeviceScheduleMask",                                            {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipDeviceMapHost",                                                 {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipDeviceLmemResizeToMax",                                         {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipArrayLayered",                                                  {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipArraySurfaceLoadStore",                                         {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipArrayCubemap",                                                  {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipArrayTextureGather",                                            {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipOccupancyDefault",                                              {HIP_3020, HIP_0,    HIP_0   }},
+  {"hipCooperativeLaunchMultiDeviceNoPreSync",                         {HIP_3020, HIP_0,    HIP_0   }},
+  {"hipCooperativeLaunchMultiDeviceNoPostSync",                        {HIP_3020, HIP_0,    HIP_0   }},
+  {"hipCpuDeviceId",                                                   {HIP_3070, HIP_0,    HIP_0   }},
+  {"hipInvalidDeviceId",                                               {HIP_3070, HIP_0,    HIP_0   }},
+  {"hipMemoryAdvise",                                                  {HIP_3070, HIP_0,    HIP_0   }},
+  {"hipMemAdviseSetReadMostly",                                        {HIP_3070, HIP_0,    HIP_0   }},
+  {"hipMemAdviseUnsetReadMostly",                                      {HIP_3070, HIP_0,    HIP_0   }},
+  {"hipMemAdviseSetPreferredLocation",                                 {HIP_3070, HIP_0,    HIP_0   }},
+  {"hipMemAdviseUnsetPreferredLocation",                               {HIP_3070, HIP_0,    HIP_0   }},
+  {"hipMemAdviseSetAccessedBy",                                        {HIP_3070, HIP_0,    HIP_0   }},
+  {"hipMemAdviseUnsetAccessedBy",                                      {HIP_3070, HIP_0,    HIP_0   }},
+  {"hipMemRangeAttribute",                                             {HIP_3070, HIP_0,    HIP_0   }},
+  {"hipMemRangeAttributeReadMostly",                                   {HIP_3070, HIP_0,    HIP_0   }},
+  {"hipMemRangeAttributePreferredLocation",                            {HIP_3070, HIP_0,    HIP_0   }},
+  {"hipMemRangeAttributeAccessedBy",                                   {HIP_3070, HIP_0,    HIP_0   }},
+  {"hipMemRangeAttributeLastPrefetchLocation",                         {HIP_3070, HIP_0,    HIP_0   }},
+  {"hipJitOption",                                                     {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipJitOptionMaxRegisters",                                         {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipJitOptionThreadsPerBlock",                                      {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipJitOptionWallTime",                                             {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipJitOptionInfoLogBuffer",                                        {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipJitOptionInfoLogBufferSizeBytes",                               {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipJitOptionErrorLogBuffer",                                       {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipJitOptionErrorLogBufferSizeBytes",                              {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipJitOptionOptimizationLevel",                                    {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipJitOptionTargetFromContext",                                    {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipJitOptionTarget",                                               {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipJitOptionFallbackStrategy",                                     {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipJitOptionGenerateDebugInfo",                                    {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipJitOptionLogVerbose",                                           {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipJitOptionGenerateLineInfo",                                     {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipJitOptionCacheMode",                                            {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipJitOptionSm3xOpt",                                              {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipJitOptionFastCompile",                                          {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipJitOptionNumOptions",                                           {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipFuncCache_t",                                                   {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipFuncCachePreferNone",                                           {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipFuncCachePreferShared",                                         {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipFuncCachePreferL1",                                             {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipFuncCachePreferEqual",                                          {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipSharedMemConfig",                                               {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipSharedMemBankSizeDefault",                                      {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipSharedMemBankSizeFourByte",                                     {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipSharedMemBankSizeEightByte",                                    {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipDeviceptr_t",                                                   {HIP_1070, HIP_0,    HIP_0   }},
+  {"HIP_TRSA_OVERRIDE_FORMAT",                                         {HIP_1070, HIP_0,    HIP_0   }},
+  {"HIP_TRSF_READ_AS_INTEGER",                                         {HIP_1070, HIP_0,    HIP_0   }},
+  {"HIP_TRSF_NORMALIZED_COORDINATES",                                  {HIP_1070, HIP_0,    HIP_0   }},
+  {"HIP_TRSF_SRGB",                                                    {HIP_3020, HIP_0,    HIP_0   }},
+  {"hipArray_Format",                                                  {HIP_1070, HIP_0,    HIP_0   }},
+  {"HIP_AD_FORMAT_UNSIGNED_INT8",                                      {HIP_1070, HIP_0,    HIP_0   }},
+  {"HIP_AD_FORMAT_UNSIGNED_INT16",                                     {HIP_1070, HIP_0,    HIP_0   }},
+  {"HIP_AD_FORMAT_UNSIGNED_INT32",                                     {HIP_1070, HIP_0,    HIP_0   }},
+  {"HIP_AD_FORMAT_SIGNED_INT8",                                        {HIP_1070, HIP_0,    HIP_0   }},
+  {"HIP_AD_FORMAT_SIGNED_INT16",                                       {HIP_1070, HIP_0,    HIP_0   }},
+  {"HIP_AD_FORMAT_SIGNED_INT32",                                       {HIP_1070, HIP_0,    HIP_0   }},
+  {"HIP_AD_FORMAT_HALF",                                               {HIP_1070, HIP_0,    HIP_0   }},
+  {"HIP_AD_FORMAT_FLOAT",                                              {HIP_1070, HIP_0,    HIP_0   }},
+  {"HIP_ARRAY_DESCRIPTOR",                                             {HIP_1070, HIP_0,    HIP_0   }},
+  {"HIP_ARRAY3D_DESCRIPTOR",                                           {HIP_2070, HIP_0,    HIP_0   }},
+  {"hipArray",                                                         {HIP_1070, HIP_0,    HIP_0   }},
+  {"hip_Memcpy2D",                                                     {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipArray_t",                                                       {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipMipmappedArray",                                                {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipMipmappedArray_t",                                              {HIP_1070, HIP_0,    HIP_0   }},
+  {"HIPresourcetype_enum",                                             {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIPresourcetype",                                                  {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIP_RESOURCE_TYPE_ARRAY",                                          {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIP_RESOURCE_TYPE_MIPMAPPED_ARRAY",                                {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIP_RESOURCE_TYPE_LINEAR",                                         {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIP_RESOURCE_TYPE_PITCH2D",                                        {HIP_3050, HIP_0,    HIP_0   }},
 };

@@ -1218,12 +1218,16 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaFormatModeForced",                                             {"hipFormatModeForced",                                      "", CONV_NUMERIC_LITERAL, API_RUNTIME, 34, HIP_UNSUPPORTED}}, // 0
   {"cudaFormatModeAuto",                                               {"hipFormatModeAuto",                                        "", CONV_NUMERIC_LITERAL, API_RUNTIME, 34, HIP_UNSUPPORTED}}, // 1
 
-  // no analogue
+  // CUaddress_mode_enum
   {"cudaTextureAddressMode",                                           {"hipTextureAddressMode",                                    "", CONV_TYPE, API_RUNTIME, 34}},
   // cudaTextureAddressMode enum values
+  // CU_TR_ADDRESS_MODE_WRAP
   {"cudaAddressModeWrap",                                              {"hipAddressModeWrap",                                       "", CONV_NUMERIC_LITERAL, API_RUNTIME, 34}}, // 0
+  // CU_TR_ADDRESS_MODE_CLAMP
   {"cudaAddressModeClamp",                                             {"hipAddressModeClamp",                                      "", CONV_NUMERIC_LITERAL, API_RUNTIME, 34}}, // 1
+  // CU_TR_ADDRESS_MODE_MIRROR
   {"cudaAddressModeMirror",                                            {"hipAddressModeMirror",                                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, 34}}, // 2
+  // CU_TR_ADDRESS_MODE_BORDER
   {"cudaAddressModeBorder",                                            {"hipAddressModeBorder",                                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, 34}}, // 3
 
   // CUfilter_mode
@@ -1818,4 +1822,23 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_TYPE_NAME_VER_MAP 
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {
+  {"hipHostRegisterDefault",                                           {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipArrayDefault",                                                  {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipFuncAttribute",                                                 {HIP_3090, HIP_0,    HIP_0   }},
+  {"hipFuncAttributeMaxDynamicSharedMemorySize",                       {HIP_3090, HIP_0,    HIP_0   }},
+  {"hipFuncAttributePreferredSharedMemoryCarveout",                    {HIP_3090, HIP_0,    HIP_0   }},
+  {"hipFuncAttributeMax",                                              {HIP_3090, HIP_0,    HIP_0   }},
+  {"hipChannelFormatKind",                                             {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipChannelFormatKindSigned",                                       {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipChannelFormatKindUnsigned",                                     {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipChannelFormatKindFloat",                                        {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipChannelFormatKindNone",                                         {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipChannelFormatDesc",                                             {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipArray_const_t",                                                 {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipMipmappedArray_const_t",                                        {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipResourceType",                                                  {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipResourceTypeArray",                                             {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipResourceTypeMipmappedArray",                                    {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipResourceTypeLinear",                                            {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipResourceTypePitch2D",                                           {HIP_1070, HIP_0,    HIP_0   }},
 };
