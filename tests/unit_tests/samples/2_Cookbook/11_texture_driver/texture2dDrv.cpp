@@ -92,11 +92,11 @@ bool runTest(int argc, char** argv) {
     CUtexref_st* texref;
     // CHECK: hipModuleGetTexRef(&texref, Module, "tex");
     cuModuleGetTexRef(&texref, Module, "tex");
-    // CHECK: hipTexRefSetAddressMode(texref, 0, hipAddressModeWrap);
+    // CHECK: hipTexRefSetAddressMode(texref, 0, HIP_TR_ADDRESS_MODE_WRAP);
     cuTexRefSetAddressMode(texref, 0, CU_TR_ADDRESS_MODE_WRAP);
-    // CHECK: hipTexRefSetAddressMode(texref, 1, hipAddressModeWrap);
+    // CHECK: hipTexRefSetAddressMode(texref, 1, HIP_TR_ADDRESS_MODE_WRAP);
     cuTexRefSetAddressMode(texref, 1, CU_TR_ADDRESS_MODE_WRAP);
-    // CHECK: hipTexRefSetFilterMode(texref, hipFilterModePoint);
+    // CHECK: hipTexRefSetFilterMode(texref, HIP_TR_FILTER_MODE_POINT);
     cuTexRefSetFilterMode(texref, CU_TR_FILTER_MODE_POINT);
     // CHECK: hipTexRefSetFlags(texref, 0);
     cuTexRefSetFlags(texref, 0);
