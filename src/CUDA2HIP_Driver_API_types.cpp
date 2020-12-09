@@ -95,18 +95,18 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
 
   // no analogue
   // NOTE: cudaResourceDesc struct differs
-  {"CUDA_RESOURCE_DESC_st",                                            {"HIP_RESOURCE_DESC",                                        "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
-  {"CUDA_RESOURCE_DESC",                                               {"HIP_RESOURCE_DESC",                                        "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CUDA_RESOURCE_DESC_st",                                            {"HIP_RESOURCE_DESC_st",                                     "", CONV_TYPE, API_DRIVER, 1}},
+  {"CUDA_RESOURCE_DESC",                                               {"HIP_RESOURCE_DESC",                                        "", CONV_TYPE, API_DRIVER, 1}},
 
   // cudaResourceViewDesc
   // NOTE: cudaResourceViewDesc hasn't reserved bytes in the end
-  {"CUDA_RESOURCE_VIEW_DESC_st",                                       {"HIP_RESOURCE_VIEW_DESC",                                   "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
-  {"CUDA_RESOURCE_VIEW_DESC",                                          {"HIP_RESOURCE_VIEW_DESC",                                   "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CUDA_RESOURCE_VIEW_DESC_st",                                       {"HIP_RESOURCE_VIEW_DESC_st",                                "", CONV_TYPE, API_DRIVER, 1}},
+  {"CUDA_RESOURCE_VIEW_DESC",                                          {"HIP_RESOURCE_VIEW_DESC",                                   "", CONV_TYPE, API_DRIVER, 1}},
 
   // no analogue
   // NOTE: cudaTextureDesc differs
-  {"CUDA_TEXTURE_DESC_st",                                             {"HIP_TEXTURE_DESC",                                         "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
-  {"CUDA_TEXTURE_DESC",                                                {"HIP_TEXTURE_DESC",                                         "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CUDA_TEXTURE_DESC_st",                                             {"HIP_TEXTURE_DESC_st",                                      "", CONV_TYPE, API_DRIVER, 1}},
+  {"CUDA_TEXTURE_DESC",                                                {"HIP_TEXTURE_DESC",                                         "", CONV_TYPE, API_DRIVER, 1}},
 
   // no analogue
   // NOTE: cudaDeviceProp differs
@@ -240,17 +240,18 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUstreamAttrValue_union",                                          {"hipStreamAttrValue",                                       "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
 
   // 3. Enums
-  {"CUaddress_mode",                                                   {"hipTextureAddressMode",                                    "", CONV_TYPE, API_DRIVER, 1}},
-  {"CUaddress_mode_enum",                                              {"hipTextureAddressMode",                                    "", CONV_TYPE, API_DRIVER, 1}},
+  // TODO: HIPaddress_mode_enum and all its values should be hipTextureAddressMode as long as they are equal.
+  {"CUaddress_mode",                                                   {"HIPaddress_mode",                                          "", CONV_TYPE, API_DRIVER, 1}},
+  {"CUaddress_mode_enum",                                              {"HIPaddress_mode_enum",                                     "", CONV_TYPE, API_DRIVER, 1}},
   // CUaddress_mode enum values
   // cudaAddressModeWrap
-  {"CU_TR_ADDRESS_MODE_WRAP",                                          {"hipAddressModeWrap",                                       "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0
+  {"CU_TR_ADDRESS_MODE_WRAP",                                          {"HIP_TR_ADDRESS_MODE_WRAP",                                 "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0
   // cudaAddressModeClamp
-  {"CU_TR_ADDRESS_MODE_CLAMP",                                         {"hipAddressModeClamp",                                      "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 1
+  {"CU_TR_ADDRESS_MODE_CLAMP",                                         {"HIP_TR_ADDRESS_MODE_CLAMP",                                "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 1
   // cudaAddressModeMirror
-  {"CU_TR_ADDRESS_MODE_MIRROR",                                        {"hipAddressModeMirror",                                     "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 2
+  {"CU_TR_ADDRESS_MODE_MIRROR",                                        {"HIP_TR_ADDRESS_MODE_MIRROR",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 2
   // cudaAddressModeBorder
-  {"CU_TR_ADDRESS_MODE_BORDER",                                        {"hipAddressModeBorder",                                     "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 3
+  {"CU_TR_ADDRESS_MODE_BORDER",                                        {"HIP_TR_ADDRESS_MODE_BORDER",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 3
 
   {"CUarray_cubemap_face",                                             {"hipGraphicsCubeFace",                                      "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
   {"CUarray_cubemap_face_enum",                                        {"hipGraphicsCubeFace",                                      "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
@@ -809,14 +810,15 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaExternalSemaphoreHandleTypeKeyedMutexKmt
   {"CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D11_KEYED_MUTEX_KMT",          {"hipExternalSemaphoreHandleTypeKeyedMutexKmt",              "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 8
 
+  // TODO: HIPfilter_mode_enum and all its values should be hipTextureFilterMode as long as they are equal.
   // cudaTextureFilterMode
-  {"CUfilter_mode",                                                    {"hipTextureFilterMode",                                     "", CONV_TYPE, API_DRIVER, 1}},
-  {"CUfilter_mode_enum",                                               {"hipTextureFilterMode",                                     "", CONV_TYPE, API_DRIVER, 1}},
+  {"CUfilter_mode",                                                    {"HIPfilter_mode",                                           "", CONV_TYPE, API_DRIVER, 1}},
+  {"CUfilter_mode_enum",                                               {"HIPfilter_mode_enum",                                      "", CONV_TYPE, API_DRIVER, 1}},
   // CUfilter_mode enum values
   // cudaFilterModePoint
-  {"CU_TR_FILTER_MODE_POINT",                                          {"hipFilterModePoint",                                       "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0
+  {"CU_TR_FILTER_MODE_POINT",                                          {"HIP_TR_FILTER_MODE_POINT",                                 "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0
   // cudaFilterModeLinear
-  {"CU_TR_FILTER_MODE_LINEAR",                                         {"hipFilterModeLinear",                                      "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 1
+  {"CU_TR_FILTER_MODE_LINEAR",                                         {"HIP_TR_FILTER_MODE_LINEAR",                                "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 1
 
   // cudaFuncCache
   {"CUfunc_cache",                                                     {"hipFuncCache_t",                                           "", CONV_TYPE, API_DRIVER, 1}},
@@ -1139,80 +1141,81 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaResourceTypePitch2D
   {"CU_RESOURCE_TYPE_PITCH2D",                                         {"HIP_RESOURCE_TYPE_PITCH2D",                                "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x03
 
+  // TODO: HIPresourceViewFormat_enum and all its values should be hipResourceViewFormat as long as they are equal
   // cudaResourceViewFormat
-  {"CUresourceViewFormat",                                             {"hipResourceViewFormat",                                    "", CONV_TYPE, API_DRIVER, 1}},
-  {"CUresourceViewFormat_enum",                                        {"hipResourceViewFormat",                                    "", CONV_TYPE, API_DRIVER, 1}},
+  {"CUresourceViewFormat",                                             {"HIPresourceViewFormat",                                    "", CONV_TYPE, API_DRIVER, 1}},
+  {"CUresourceViewFormat_enum",                                        {"HIPresourceViewFormat_enum",                               "", CONV_TYPE, API_DRIVER, 1}},
   // CUresourceViewFormat enum values
   // cudaResViewFormatNone
-  {"CU_RES_VIEW_FORMAT_NONE",                                          {"hipResViewFormatNone",                                     "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x00
+  {"CU_RES_VIEW_FORMAT_NONE",                                          {"HIP_RES_VIEW_FORMAT_NONE",                                 "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x00
   // cudaResViewFormatUnsignedChar1
-  {"CU_RES_VIEW_FORMAT_UINT_1X8",                                      {"hipResViewFormatUnsignedChar1",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x01
+  {"CU_RES_VIEW_FORMAT_UINT_1X8",                                      {"HIP_RES_VIEW_FORMAT_UINT_1X8",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x01
   // cudaResViewFormatUnsignedChar2
-  {"CU_RES_VIEW_FORMAT_UINT_2X8",                                      {"hipResViewFormatUnsignedChar2",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x02
+  {"CU_RES_VIEW_FORMAT_UINT_2X8",                                      {"HIP_RES_VIEW_FORMAT_UINT_2X8",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x02
   // cudaResViewFormatUnsignedChar4
-  {"CU_RES_VIEW_FORMAT_UINT_4X8",                                      {"hipResViewFormatUnsignedChar4",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x03
+  {"CU_RES_VIEW_FORMAT_UINT_4X8",                                      {"HIP_RES_VIEW_FORMAT_UINT_4X8",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x03
   // cudaResViewFormatSignedChar1
-  {"CU_RES_VIEW_FORMAT_SINT_1X8",                                      {"hipResViewFormatSignedChar1",                              "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x04
+  {"CU_RES_VIEW_FORMAT_SINT_1X8",                                      {"HIP_RES_VIEW_FORMAT_SINT_1X8",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x04
   // cudaResViewFormatSignedChar2
-  {"CU_RES_VIEW_FORMAT_SINT_2X8",                                      {"hipResViewFormatSignedChar2",                              "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x05
+  {"CU_RES_VIEW_FORMAT_SINT_2X8",                                      {"HIP_RES_VIEW_FORMAT_SINT_2X8",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x05
   // cudaResViewFormatSignedChar4
-  {"CU_RES_VIEW_FORMAT_SINT_4X8",                                      {"hipResViewFormatSignedChar4",                              "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x06
+  {"CU_RES_VIEW_FORMAT_SINT_4X8",                                      {"HIP_RES_VIEW_FORMAT_SINT_4X8",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x06
   // cudaResViewFormatUnsignedShort1
-  {"CU_RES_VIEW_FORMAT_UINT_1X16",                                     {"hipResViewFormatUnsignedShort1",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x07
+  {"CU_RES_VIEW_FORMAT_UINT_1X16",                                     {"HIP_RES_VIEW_FORMAT_UINT_1X16",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x07
   // cudaResViewFormatUnsignedShort2
-  {"CU_RES_VIEW_FORMAT_UINT_2X16",                                     {"hipResViewFormatUnsignedShort2",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x08
+  {"CU_RES_VIEW_FORMAT_UINT_2X16",                                     {"HIP_RES_VIEW_FORMAT_UINT_2X16",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x08
   // cudaResViewFormatUnsignedShort4
-  {"CU_RES_VIEW_FORMAT_UINT_4X16",                                     {"hipResViewFormatUnsignedShort4",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x09
+  {"CU_RES_VIEW_FORMAT_UINT_4X16",                                     {"HIP_RES_VIEW_FORMAT_UINT_4X16",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x09
   // cudaResViewFormatSignedShort1
-  {"CU_RES_VIEW_FORMAT_SINT_1X16",                                     {"hipResViewFormatSignedShort1",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x0a
+  {"CU_RES_VIEW_FORMAT_SINT_1X16",                                     {"HIP_RES_VIEW_FORMAT_SINT_1X16",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x0a
   // cudaResViewFormatSignedShort2
-  {"CU_RES_VIEW_FORMAT_SINT_2X16",                                     {"hipResViewFormatSignedShort2",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x0b
+  {"CU_RES_VIEW_FORMAT_SINT_2X16",                                     {"HIP_RES_VIEW_FORMAT_SINT_2X16",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x0b
   // cudaResViewFormatSignedShort4
-  {"CU_RES_VIEW_FORMAT_SINT_4X16",                                     {"hipResViewFormatSignedShort4",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x0c
+  {"CU_RES_VIEW_FORMAT_SINT_4X16",                                     {"HIP_RES_VIEW_FORMAT_SINT_4X16",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x0c
   // cudaResViewFormatUnsignedInt1
-  {"CU_RES_VIEW_FORMAT_UINT_1X32",                                     {"hipResViewFormatUnsignedInt1",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x0d
+  {"CU_RES_VIEW_FORMAT_UINT_1X32",                                     {"HIP_RES_VIEW_FORMAT_UINT_1X32",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x0d
   // cudaResViewFormatUnsignedInt2
-  {"CU_RES_VIEW_FORMAT_UINT_2X32",                                     {"hipResViewFormatUnsignedInt2",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x0e
+  {"CU_RES_VIEW_FORMAT_UINT_2X32",                                     {"HIP_RES_VIEW_FORMAT_UINT_2X32",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x0e
   // cudaResViewFormatUnsignedInt4
-  {"CU_RES_VIEW_FORMAT_UINT_4X32",                                     {"hipResViewFormatUnsignedInt4",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x0f
+  {"CU_RES_VIEW_FORMAT_UINT_4X32",                                     {"HIP_RES_VIEW_FORMAT_UINT_4X32",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x0f
   // cudaResViewFormatSignedInt1
-  {"CU_RES_VIEW_FORMAT_SINT_1X32",                                     {"hipResViewFormatSignedInt1",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x10
+  {"CU_RES_VIEW_FORMAT_SINT_1X32",                                     {"HIP_RES_VIEW_FORMAT_SINT_1X32",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x10
   // cudaResViewFormatSignedInt2
-  {"CU_RES_VIEW_FORMAT_SINT_2X32",                                     {"hipResViewFormatSignedInt2",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x11
+  {"CU_RES_VIEW_FORMAT_SINT_2X32",                                     {"HIP_RES_VIEW_FORMAT_SINT_2X32",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x11
   // cudaResViewFormatSignedInt4
-  {"CU_RES_VIEW_FORMAT_SINT_4X32",                                     {"hipResViewFormatSignedInt4",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x12
+  {"CU_RES_VIEW_FORMAT_SINT_4X32",                                     {"HIP_RES_VIEW_FORMAT_SINT_4X32",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x12
   // cudaResViewFormatHalf1
-  {"CU_RES_VIEW_FORMAT_FLOAT_1X16",                                    {"hipResViewFormatHalf1",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x13
+  {"CU_RES_VIEW_FORMAT_FLOAT_1X16",                                    {"HIP_RES_VIEW_FORMAT_FLOAT_1X16",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x13
   // cudaResViewFormatHalf2
-  {"CU_RES_VIEW_FORMAT_FLOAT_2X16",                                    {"hipResViewFormatHalf2",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x14
+  {"CU_RES_VIEW_FORMAT_FLOAT_2X16",                                    {"HIP_RES_VIEW_FORMAT_FLOAT_2X16",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x14
   // cudaResViewFormatHalf4
-  {"CU_RES_VIEW_FORMAT_FLOAT_4X16",                                    {"hipResViewFormatHalf4",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x15
+  {"CU_RES_VIEW_FORMAT_FLOAT_4X16",                                    {"HIP_RES_VIEW_FORMAT_FLOAT_4X16",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x15
   // cudaResViewFormatFloat1
-  {"CU_RES_VIEW_FORMAT_FLOAT_1X32",                                    {"hipResViewFormatFloat1",                                   "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x16
+  {"CU_RES_VIEW_FORMAT_FLOAT_1X32",                                    {"HIP_RES_VIEW_FORMAT_FLOAT_1X32",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x16
   // cudaResViewFormatFloat2
-  {"CU_RES_VIEW_FORMAT_FLOAT_2X32",                                    {"hipResViewFormatFloat2",                                   "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x17
+  {"CU_RES_VIEW_FORMAT_FLOAT_2X32",                                    {"HIP_RES_VIEW_FORMAT_FLOAT_2X32",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x17
   // cudaResViewFormatFloat4
-  {"CU_RES_VIEW_FORMAT_FLOAT_4X32",                                    {"hipResViewFormatFloat4",                                   "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x18
+  {"CU_RES_VIEW_FORMAT_FLOAT_4X32",                                    {"HIP_RES_VIEW_FORMAT_FLOAT_4X32",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x18
   // cudaResViewFormatUnsignedBlockCompressed1
-  {"CU_RES_VIEW_FORMAT_UNSIGNED_BC1",                                  {"hipResViewFormatUnsignedBlockCompressed1",                 "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x19
+  {"CU_RES_VIEW_FORMAT_UNSIGNED_BC1",                                  {"HIP_RES_VIEW_FORMAT_UNSIGNED_BC1",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x19
   // cudaResViewFormatUnsignedBlockCompressed2
-  {"CU_RES_VIEW_FORMAT_UNSIGNED_BC2",                                  {"hipResViewFormatUnsignedBlockCompressed2",                 "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x1a
+  {"CU_RES_VIEW_FORMAT_UNSIGNED_BC2",                                  {"HIP_RES_VIEW_FORMAT_UNSIGNED_BC2",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x1a
   // cudaResViewFormatUnsignedBlockCompressed3
-  {"CU_RES_VIEW_FORMAT_UNSIGNED_BC3",                                  {"hipResViewFormatUnsignedBlockCompressed3",                 "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x1b
+  {"CU_RES_VIEW_FORMAT_UNSIGNED_BC3",                                  {"HIP_RES_VIEW_FORMAT_UNSIGNED_BC3",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x1b
   // cudaResViewFormatUnsignedBlockCompressed4
-  {"CU_RES_VIEW_FORMAT_UNSIGNED_BC4",                                  {"hipResViewFormatUnsignedBlockCompressed4",                 "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x1c
+  {"CU_RES_VIEW_FORMAT_UNSIGNED_BC4",                                  {"HIP_RES_VIEW_FORMAT_UNSIGNED_BC4",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x1c
   // cudaResViewFormatSignedBlockCompressed4
-  {"CU_RES_VIEW_FORMAT_SIGNED_BC4",                                    {"hipResViewFormatSignedBlockCompressed4",                   "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x1d
+  {"CU_RES_VIEW_FORMAT_SIGNED_BC4",                                    {"HIP_RES_VIEW_FORMAT_SIGNED_BC4",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x1d
   // cudaResViewFormatUnsignedBlockCompressed5
-  {"CU_RES_VIEW_FORMAT_UNSIGNED_BC5",                                  {"hipResViewFormatUnsignedBlockCompressed5",                 "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x1e
+  {"CU_RES_VIEW_FORMAT_UNSIGNED_BC5",                                  {"HIP_RES_VIEW_FORMAT_UNSIGNED_BC5",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x1e
   // cudaResViewFormatSignedBlockCompressed5
-  {"CU_RES_VIEW_FORMAT_SIGNED_BC5",                                    {"hipResViewFormatSignedBlockCompressed5",                   "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x1f
+  {"CU_RES_VIEW_FORMAT_SIGNED_BC5",                                    {"HIP_RES_VIEW_FORMAT_SIGNED_BC5",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x1f
   // cudaResViewFormatUnsignedBlockCompressed6H
-  {"CU_RES_VIEW_FORMAT_UNSIGNED_BC6H",                                 {"hipResViewFormatUnsignedBlockCompressed6H",                "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x20
+  {"CU_RES_VIEW_FORMAT_UNSIGNED_BC6H",                                 {"HIP_RES_VIEW_FORMAT_UNSIGNED_BC6H",                        "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x20
   // cudaResViewFormatSignedBlockCompressed6H
-  {"CU_RES_VIEW_FORMAT_SIGNED_BC6H",                                   {"hipResViewFormatSignedBlockCompressed6H",                  "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x21
+  {"CU_RES_VIEW_FORMAT_SIGNED_BC6H",                                   {"HIP_RES_VIEW_FORMAT_SIGNED_BC6H",                          "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x21
   // cudaResViewFormatUnsignedBlockCompressed7
-  {"CU_RES_VIEW_FORMAT_UNSIGNED_BC7",                                  {"hipResViewFormatUnsignedBlockCompressed7",                 "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x22
+  {"CU_RES_VIEW_FORMAT_UNSIGNED_BC7",                                  {"HIP_RES_VIEW_FORMAT_UNSIGNED_BC7",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x22
 
   // cudaError
   {"CUresult",                                                         {"hipError_t",                                               "", CONV_TYPE, API_DRIVER, 1}},
@@ -2291,4 +2294,64 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {
   {"HIP_RESOURCE_TYPE_MIPMAPPED_ARRAY",                                {HIP_3050, HIP_0,    HIP_0   }},
   {"HIP_RESOURCE_TYPE_LINEAR",                                         {HIP_3050, HIP_0,    HIP_0   }},
   {"HIP_RESOURCE_TYPE_PITCH2D",                                        {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIPfilter_mode_enum",                                              {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIPfilter_mode",                                                   {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIP_TR_FILTER_MODE_POINT",                                         {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIP_TR_FILTER_MODE_LINEAR",                                        {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIP_TEXTURE_DESC",                                                 {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIPresourceViewFormat_enum",                                       {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIPresourceViewFormat",                                            {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIP_RES_VIEW_FORMAT_NONE",                                         {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIP_RES_VIEW_FORMAT_UINT_1X8",                                     {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIP_RES_VIEW_FORMAT_UINT_2X8",                                     {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIP_RES_VIEW_FORMAT_UINT_4X8",                                     {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIP_RES_VIEW_FORMAT_SINT_1X8",                                     {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIP_RES_VIEW_FORMAT_SINT_2X8",                                     {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIP_RES_VIEW_FORMAT_SINT_4X8",                                     {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIP_RES_VIEW_FORMAT_UINT_1X16",                                    {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIP_RES_VIEW_FORMAT_UINT_2X16",                                    {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIP_RES_VIEW_FORMAT_UINT_4X16",                                    {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIP_RES_VIEW_FORMAT_SINT_1X16",                                    {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIP_RES_VIEW_FORMAT_SINT_2X16",                                    {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIP_RES_VIEW_FORMAT_SINT_4X16",                                    {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIP_RES_VIEW_FORMAT_SINT_4X16",                                    {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIP_RES_VIEW_FORMAT_UINT_1X32",                                    {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIP_RES_VIEW_FORMAT_UINT_2X32",                                    {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIP_RES_VIEW_FORMAT_UINT_4X32",                                    {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIP_RES_VIEW_FORMAT_SINT_1X32",                                    {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIP_RES_VIEW_FORMAT_SINT_2X32",                                    {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIP_RES_VIEW_FORMAT_SINT_4X32",                                    {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIP_RES_VIEW_FORMAT_FLOAT_1X16",                                   {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIP_RES_VIEW_FORMAT_FLOAT_2X16",                                   {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIP_RES_VIEW_FORMAT_FLOAT_4X16",                                   {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIP_RES_VIEW_FORMAT_FLOAT_1X32",                                   {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIP_RES_VIEW_FORMAT_FLOAT_2X32",                                   {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIP_RES_VIEW_FORMAT_FLOAT_4X32",                                   {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIP_RES_VIEW_FORMAT_UNSIGNED_BC1",                                 {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIP_RES_VIEW_FORMAT_UNSIGNED_BC2",                                 {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIP_RES_VIEW_FORMAT_UNSIGNED_BC3",                                 {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIP_RES_VIEW_FORMAT_UNSIGNED_BC4",                                 {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIP_RES_VIEW_FORMAT_SIGNED_BC4",                                   {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIP_RES_VIEW_FORMAT_UNSIGNED_BC5",                                 {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIP_RES_VIEW_FORMAT_SIGNED_BC5",                                   {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIP_RES_VIEW_FORMAT_UNSIGNED_BC6H",                                {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIP_RES_VIEW_FORMAT_SIGNED_BC6H",                                  {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIP_RES_VIEW_FORMAT_UNSIGNED_BC7",                                 {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIP_RESOURCE_DESC_st",                                             {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIP_RESOURCE_DESC",                                                {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIP_RESOURCE_VIEW_DESC_st",                                        {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIP_RESOURCE_VIEW_DESC",                                           {HIP_3050, HIP_0,    HIP_0   }},
+  {"HIP_MEMCPY3D",                                                     {HIP_3020, HIP_0,    HIP_0   }},
+  {"hipFunction_attribute",                                            {HIP_2080, HIP_0,    HIP_0   }},
+  {"HIP_FUNC_ATTRIBUTE_MAX_THREADS_PER_BLOCK",                         {HIP_2080, HIP_0,    HIP_0   }},
+  {"HIP_FUNC_ATTRIBUTE_SHARED_SIZE_BYTES",                             {HIP_2080, HIP_0,    HIP_0   }},
+  {"HIP_FUNC_ATTRIBUTE_CONST_SIZE_BYTES",                              {HIP_2080, HIP_0,    HIP_0   }},
+  {"HIP_FUNC_ATTRIBUTE_LOCAL_SIZE_BYTES",                              {HIP_2080, HIP_0,    HIP_0   }},
+  {"HIP_FUNC_ATTRIBUTE_NUM_REGS",                                      {HIP_2080, HIP_0,    HIP_0   }},
+  {"HIP_FUNC_ATTRIBUTE_PTX_VERSION",                                   {HIP_2080, HIP_0,    HIP_0   }},
+  {"HIP_FUNC_ATTRIBUTE_BINARY_VERSION",                                {HIP_2080, HIP_0,    HIP_0   }},
+  {"HIP_FUNC_ATTRIBUTE_CACHE_MODE_CA",                                 {HIP_2080, HIP_0,    HIP_0   }},
+  {"HIP_FUNC_ATTRIBUTE_MAX_DYNAMIC_SHARED_SIZE_BYTES",                 {HIP_2080, HIP_0,    HIP_0   }},
+  {"HIP_FUNC_ATTRIBUTE_PREFERRED_SHARED_MEMORY_CARVEOUT",              {HIP_2080, HIP_0,    HIP_0   }},
+  {"HIP_FUNC_ATTRIBUTE_MAX",                                           {HIP_2080, HIP_0,    HIP_0   }},
 };

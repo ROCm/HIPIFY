@@ -1461,8 +1461,14 @@ sub simpleSubstitutions {
     $ft{'type'} += s/\bCUDA_MEMCPY3D_st\b/HIP_MEMCPY3D/g;
     $ft{'type'} += s/\bCUDA_MEMCPY3D_v1\b/HIP_MEMCPY3D/g;
     $ft{'type'} += s/\bCUDA_MEMCPY3D_v1_st\b/HIP_MEMCPY3D/g;
-    $ft{'type'} += s/\bCUaddress_mode\b/hipTextureAddressMode/g;
-    $ft{'type'} += s/\bCUaddress_mode_enum\b/hipTextureAddressMode/g;
+    $ft{'type'} += s/\bCUDA_RESOURCE_DESC\b/HIP_RESOURCE_DESC/g;
+    $ft{'type'} += s/\bCUDA_RESOURCE_DESC_st\b/HIP_RESOURCE_DESC_st/g;
+    $ft{'type'} += s/\bCUDA_RESOURCE_VIEW_DESC\b/HIP_RESOURCE_VIEW_DESC/g;
+    $ft{'type'} += s/\bCUDA_RESOURCE_VIEW_DESC_st\b/HIP_RESOURCE_VIEW_DESC_st/g;
+    $ft{'type'} += s/\bCUDA_TEXTURE_DESC\b/HIP_TEXTURE_DESC/g;
+    $ft{'type'} += s/\bCUDA_TEXTURE_DESC_st\b/HIP_TEXTURE_DESC_st/g;
+    $ft{'type'} += s/\bCUaddress_mode\b/HIPaddress_mode/g;
+    $ft{'type'} += s/\bCUaddress_mode_enum\b/HIPaddress_mode_enum/g;
     $ft{'type'} += s/\bCUarray\b/hipArray */g;
     $ft{'type'} += s/\bCUarray_format\b/hipArray_Format/g;
     $ft{'type'} += s/\bCUarray_format_enum\b/hipArray_Format/g;
@@ -1480,8 +1486,8 @@ sub simpleSubstitutions {
     $ft{'type'} += s/\bCUdeviceptr_v1\b/hipDeviceptr_t/g;
     $ft{'type'} += s/\bCUevent\b/hipEvent_t/g;
     $ft{'type'} += s/\bCUevent_st\b/ihipEvent_t/g;
-    $ft{'type'} += s/\bCUfilter_mode\b/hipTextureFilterMode/g;
-    $ft{'type'} += s/\bCUfilter_mode_enum\b/hipTextureFilterMode/g;
+    $ft{'type'} += s/\bCUfilter_mode\b/HIPfilter_mode/g;
+    $ft{'type'} += s/\bCUfilter_mode_enum\b/HIPfilter_mode_enum/g;
     $ft{'type'} += s/\bCUfunc_cache\b/hipFuncCache_t/g;
     $ft{'type'} += s/\bCUfunc_cache_enum\b/hipFuncCache_t/g;
     $ft{'type'} += s/\bCUfunc_st\b/ihipModuleSymbol_t/g;
@@ -1506,8 +1512,8 @@ sub simpleSubstitutions {
     $ft{'type'} += s/\bCUmipmappedArray_st\b/hipMipmappedArray/g;
     $ft{'type'} += s/\bCUmod_st\b/ihipModule_t/g;
     $ft{'type'} += s/\bCUmodule\b/hipModule_t/g;
-    $ft{'type'} += s/\bCUresourceViewFormat\b/hipResourceViewFormat/g;
-    $ft{'type'} += s/\bCUresourceViewFormat_enum\b/hipResourceViewFormat/g;
+    $ft{'type'} += s/\bCUresourceViewFormat\b/HIPresourceViewFormat/g;
+    $ft{'type'} += s/\bCUresourceViewFormat_enum\b/HIPresourceViewFormat_enum/g;
     $ft{'type'} += s/\bCUresourcetype\b/HIPresourcetype/g;
     $ft{'type'} += s/\bCUresourcetype_enum\b/HIPresourcetype_enum/g;
     $ft{'type'} += s/\bCUresult\b/hipError_t/g;
@@ -2100,52 +2106,52 @@ sub simpleSubstitutions {
     $ft{'numeric_literal'} += s/\bCU_RESOURCE_TYPE_LINEAR\b/HIP_RESOURCE_TYPE_LINEAR/g;
     $ft{'numeric_literal'} += s/\bCU_RESOURCE_TYPE_MIPMAPPED_ARRAY\b/HIP_RESOURCE_TYPE_MIPMAPPED_ARRAY/g;
     $ft{'numeric_literal'} += s/\bCU_RESOURCE_TYPE_PITCH2D\b/HIP_RESOURCE_TYPE_PITCH2D/g;
-    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_FLOAT_1X16\b/hipResViewFormatHalf1/g;
-    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_FLOAT_1X32\b/hipResViewFormatFloat1/g;
-    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_FLOAT_2X16\b/hipResViewFormatHalf2/g;
-    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_FLOAT_2X32\b/hipResViewFormatFloat2/g;
-    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_FLOAT_4X16\b/hipResViewFormatHalf4/g;
-    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_FLOAT_4X32\b/hipResViewFormatFloat4/g;
-    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_NONE\b/hipResViewFormatNone/g;
-    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_SIGNED_BC4\b/hipResViewFormatSignedBlockCompressed4/g;
-    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_SIGNED_BC5\b/hipResViewFormatSignedBlockCompressed5/g;
-    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_SIGNED_BC6H\b/hipResViewFormatSignedBlockCompressed6H/g;
-    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_SINT_1X16\b/hipResViewFormatSignedShort1/g;
-    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_SINT_1X32\b/hipResViewFormatSignedInt1/g;
-    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_SINT_1X8\b/hipResViewFormatSignedChar1/g;
-    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_SINT_2X16\b/hipResViewFormatSignedShort2/g;
-    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_SINT_2X32\b/hipResViewFormatSignedInt2/g;
-    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_SINT_2X8\b/hipResViewFormatSignedChar2/g;
-    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_SINT_4X16\b/hipResViewFormatSignedShort4/g;
-    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_SINT_4X32\b/hipResViewFormatSignedInt4/g;
-    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_SINT_4X8\b/hipResViewFormatSignedChar4/g;
-    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_UINT_1X16\b/hipResViewFormatUnsignedShort1/g;
-    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_UINT_1X32\b/hipResViewFormatUnsignedInt1/g;
-    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_UINT_1X8\b/hipResViewFormatUnsignedChar1/g;
-    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_UINT_2X16\b/hipResViewFormatUnsignedShort2/g;
-    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_UINT_2X32\b/hipResViewFormatUnsignedInt2/g;
-    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_UINT_2X8\b/hipResViewFormatUnsignedChar2/g;
-    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_UINT_4X16\b/hipResViewFormatUnsignedShort4/g;
-    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_UINT_4X32\b/hipResViewFormatUnsignedInt4/g;
-    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_UINT_4X8\b/hipResViewFormatUnsignedChar4/g;
-    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_UNSIGNED_BC1\b/hipResViewFormatUnsignedBlockCompressed1/g;
-    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_UNSIGNED_BC2\b/hipResViewFormatUnsignedBlockCompressed2/g;
-    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_UNSIGNED_BC3\b/hipResViewFormatUnsignedBlockCompressed3/g;
-    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_UNSIGNED_BC4\b/hipResViewFormatUnsignedBlockCompressed4/g;
-    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_UNSIGNED_BC5\b/hipResViewFormatUnsignedBlockCompressed5/g;
-    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_UNSIGNED_BC6H\b/hipResViewFormatUnsignedBlockCompressed6H/g;
-    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_UNSIGNED_BC7\b/hipResViewFormatUnsignedBlockCompressed7/g;
+    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_FLOAT_1X16\b/HIP_RES_VIEW_FORMAT_FLOAT_1X16/g;
+    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_FLOAT_1X32\b/HIP_RES_VIEW_FORMAT_FLOAT_1X32/g;
+    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_FLOAT_2X16\b/HIP_RES_VIEW_FORMAT_FLOAT_2X16/g;
+    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_FLOAT_2X32\b/HIP_RES_VIEW_FORMAT_FLOAT_2X32/g;
+    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_FLOAT_4X16\b/HIP_RES_VIEW_FORMAT_FLOAT_4X16/g;
+    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_FLOAT_4X32\b/HIP_RES_VIEW_FORMAT_FLOAT_4X32/g;
+    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_NONE\b/HIP_RES_VIEW_FORMAT_NONE/g;
+    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_SIGNED_BC4\b/HIP_RES_VIEW_FORMAT_SIGNED_BC4/g;
+    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_SIGNED_BC5\b/HIP_RES_VIEW_FORMAT_SIGNED_BC5/g;
+    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_SIGNED_BC6H\b/HIP_RES_VIEW_FORMAT_SIGNED_BC6H/g;
+    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_SINT_1X16\b/HIP_RES_VIEW_FORMAT_SINT_1X16/g;
+    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_SINT_1X32\b/HIP_RES_VIEW_FORMAT_SINT_1X32/g;
+    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_SINT_1X8\b/HIP_RES_VIEW_FORMAT_SINT_1X8/g;
+    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_SINT_2X16\b/HIP_RES_VIEW_FORMAT_SINT_2X16/g;
+    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_SINT_2X32\b/HIP_RES_VIEW_FORMAT_SINT_2X32/g;
+    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_SINT_2X8\b/HIP_RES_VIEW_FORMAT_SINT_2X8/g;
+    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_SINT_4X16\b/HIP_RES_VIEW_FORMAT_SINT_4X16/g;
+    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_SINT_4X32\b/HIP_RES_VIEW_FORMAT_SINT_4X32/g;
+    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_SINT_4X8\b/HIP_RES_VIEW_FORMAT_SINT_4X8/g;
+    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_UINT_1X16\b/HIP_RES_VIEW_FORMAT_UINT_1X16/g;
+    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_UINT_1X32\b/HIP_RES_VIEW_FORMAT_UINT_1X32/g;
+    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_UINT_1X8\b/HIP_RES_VIEW_FORMAT_UINT_1X8/g;
+    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_UINT_2X16\b/HIP_RES_VIEW_FORMAT_UINT_2X16/g;
+    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_UINT_2X32\b/HIP_RES_VIEW_FORMAT_UINT_2X32/g;
+    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_UINT_2X8\b/HIP_RES_VIEW_FORMAT_UINT_2X8/g;
+    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_UINT_4X16\b/HIP_RES_VIEW_FORMAT_UINT_4X16/g;
+    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_UINT_4X32\b/HIP_RES_VIEW_FORMAT_UINT_4X32/g;
+    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_UINT_4X8\b/HIP_RES_VIEW_FORMAT_UINT_4X8/g;
+    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_UNSIGNED_BC1\b/HIP_RES_VIEW_FORMAT_UNSIGNED_BC1/g;
+    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_UNSIGNED_BC2\b/HIP_RES_VIEW_FORMAT_UNSIGNED_BC2/g;
+    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_UNSIGNED_BC3\b/HIP_RES_VIEW_FORMAT_UNSIGNED_BC3/g;
+    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_UNSIGNED_BC4\b/HIP_RES_VIEW_FORMAT_UNSIGNED_BC4/g;
+    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_UNSIGNED_BC5\b/HIP_RES_VIEW_FORMAT_UNSIGNED_BC5/g;
+    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_UNSIGNED_BC6H\b/HIP_RES_VIEW_FORMAT_UNSIGNED_BC6H/g;
+    $ft{'numeric_literal'} += s/\bCU_RES_VIEW_FORMAT_UNSIGNED_BC7\b/HIP_RES_VIEW_FORMAT_UNSIGNED_BC7/g;
     $ft{'numeric_literal'} += s/\bCU_SHARED_MEM_CONFIG_DEFAULT_BANK_SIZE\b/hipSharedMemBankSizeDefault/g;
     $ft{'numeric_literal'} += s/\bCU_SHARED_MEM_CONFIG_EIGHT_BYTE_BANK_SIZE\b/hipSharedMemBankSizeEightByte/g;
     $ft{'numeric_literal'} += s/\bCU_SHARED_MEM_CONFIG_FOUR_BYTE_BANK_SIZE\b/hipSharedMemBankSizeFourByte/g;
     $ft{'numeric_literal'} += s/\bCU_STREAM_DEFAULT\b/hipStreamDefault/g;
     $ft{'numeric_literal'} += s/\bCU_STREAM_NON_BLOCKING\b/hipStreamNonBlocking/g;
-    $ft{'numeric_literal'} += s/\bCU_TR_ADDRESS_MODE_BORDER\b/hipAddressModeBorder/g;
-    $ft{'numeric_literal'} += s/\bCU_TR_ADDRESS_MODE_CLAMP\b/hipAddressModeClamp/g;
-    $ft{'numeric_literal'} += s/\bCU_TR_ADDRESS_MODE_MIRROR\b/hipAddressModeMirror/g;
-    $ft{'numeric_literal'} += s/\bCU_TR_ADDRESS_MODE_WRAP\b/hipAddressModeWrap/g;
-    $ft{'numeric_literal'} += s/\bCU_TR_FILTER_MODE_LINEAR\b/hipFilterModeLinear/g;
-    $ft{'numeric_literal'} += s/\bCU_TR_FILTER_MODE_POINT\b/hipFilterModePoint/g;
+    $ft{'numeric_literal'} += s/\bCU_TR_ADDRESS_MODE_BORDER\b/HIP_TR_ADDRESS_MODE_BORDER/g;
+    $ft{'numeric_literal'} += s/\bCU_TR_ADDRESS_MODE_CLAMP\b/HIP_TR_ADDRESS_MODE_CLAMP/g;
+    $ft{'numeric_literal'} += s/\bCU_TR_ADDRESS_MODE_MIRROR\b/HIP_TR_ADDRESS_MODE_MIRROR/g;
+    $ft{'numeric_literal'} += s/\bCU_TR_ADDRESS_MODE_WRAP\b/HIP_TR_ADDRESS_MODE_WRAP/g;
+    $ft{'numeric_literal'} += s/\bCU_TR_FILTER_MODE_LINEAR\b/HIP_TR_FILTER_MODE_LINEAR/g;
+    $ft{'numeric_literal'} += s/\bCU_TR_FILTER_MODE_POINT\b/HIP_TR_FILTER_MODE_POINT/g;
     $ft{'numeric_literal'} += s/\bcudaAddressModeBorder\b/hipAddressModeBorder/g;
     $ft{'numeric_literal'} += s/\bcudaAddressModeClamp\b/hipAddressModeClamp/g;
     $ft{'numeric_literal'} += s/\bcudaAddressModeMirror\b/hipAddressModeMirror/g;
@@ -5883,12 +5889,6 @@ sub warnUnsupportedFunctions {
         "CUDNN_ADV_INFER_MINOR",
         "CUDNN_ADV_INFER_MAJOR",
         "CUDA_VERSION",
-        "CUDA_TEXTURE_DESC_st",
-        "CUDA_TEXTURE_DESC",
-        "CUDA_RESOURCE_VIEW_DESC_st",
-        "CUDA_RESOURCE_VIEW_DESC",
-        "CUDA_RESOURCE_DESC_st",
-        "CUDA_RESOURCE_DESC",
         "CUDA_POINTER_ATTRIBUTE_P2P_TOKENS_st",
         "CUDA_POINTER_ATTRIBUTE_P2P_TOKENS",
         "CUDA_POINTER_ATTRIBUTE_ACCESS_FLAGS_enum",
