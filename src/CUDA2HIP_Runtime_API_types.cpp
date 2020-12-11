@@ -118,7 +118,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"CUuuid_st",                                                        {"hipUUID",                                                  "", CONV_TYPE, API_RUNTIME, 34, HIP_UNSUPPORTED}},
 
   // NOTE: possibly CUsurfref is analogue
-  {"surfaceReference",                                                 {"hipSurfaceReference",                                      "", CONV_TYPE, API_RUNTIME, 34, HIP_UNSUPPORTED}},
+  {"surfaceReference",                                                 {"surfaceReference",                                         "", CONV_TYPE, API_RUNTIME, 34}},
 
   // the same - CUevent_st
   {"CUevent_st",                                                       {"ihipEvent_t",                                              "", CONV_TYPE, API_RUNTIME, 34}},
@@ -1053,12 +1053,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
 
   // no analogue
   // NOTE: CUmemorytype is partial analogue
-  {"cudaMemoryType",                                                   {"hipMemoryType_t",                                          "", CONV_TYPE, API_RUNTIME, 34, HIP_UNSUPPORTED}},
+  {"cudaMemoryType",                                                   {"hipMemType_t",                                             "", CONV_TYPE, API_RUNTIME, 34, HIP_UNSUPPORTED}},
   // cudaMemoryType enum values
-  {"cudaMemoryTypeUnregistered",                                       {"hipMemoryTypeUnregistered",                                "", CONV_NUMERIC_LITERAL, API_RUNTIME, 34, HIP_UNSUPPORTED}}, // 0
-  {"cudaMemoryTypeHost",                                               {"hipMemoryTypeHost",                                        "", CONV_NUMERIC_LITERAL, API_RUNTIME, 34, HIP_UNSUPPORTED}}, // 1
-  {"cudaMemoryTypeDevice",                                             {"hipMemoryTypeDevice",                                      "", CONV_NUMERIC_LITERAL, API_RUNTIME, 34, HIP_UNSUPPORTED}}, // 2
-  {"cudaMemoryTypeManaged",                                            {"hipMemoryTypeManaged",                                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, 34, HIP_UNSUPPORTED}}, // 3
+  {"cudaMemoryTypeUnregistered",                                       {"hipMemTypeUnregistered",                                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 34, HIP_UNSUPPORTED}}, // 0
+  {"cudaMemoryTypeHost",                                               {"hipMemTypeHost",                                           "", CONV_NUMERIC_LITERAL, API_RUNTIME, 34, HIP_UNSUPPORTED}}, // 1
+  {"cudaMemoryTypeDevice",                                             {"hipMemTypeDevice",                                         "", CONV_NUMERIC_LITERAL, API_RUNTIME, 34, HIP_UNSUPPORTED}}, // 2
+  {"cudaMemoryTypeManaged",                                            {"hipMemTypeManaged",                                        "", CONV_NUMERIC_LITERAL, API_RUNTIME, 34, HIP_UNSUPPORTED}}, // 3
 
   // CUmem_range_attribute
   {"cudaMemRangeAttribute",                                            {"hipMemRangeAttribute",                                     "", CONV_TYPE, API_RUNTIME, 34}},
@@ -1889,4 +1889,40 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {
   {"hipExtent",                                                        {HIP_1070, HIP_0,    HIP_0   }},
   {"hipPos",                                                           {HIP_1070, HIP_0,    HIP_0   }},
   {"hipMemcpy3DParms",                                                 {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipTextureAddressMode",                                            {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipAddressModeWrap",                                               {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipAddressModeClamp",                                              {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipAddressModeMirror",                                             {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipAddressModeBorder",                                             {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipSurfaceBoundaryMode",                                           {HIP_1090, HIP_0,    HIP_0   }},
+  {"hipBoundaryModeZero",                                              {HIP_1090, HIP_0,    HIP_0   }},
+  {"hipBoundaryModeTrap",                                              {HIP_1090, HIP_0,    HIP_0   }},
+  {"hipBoundaryModeClamp",                                             {HIP_1090, HIP_0,    HIP_0   }},
+  {"hipSurfaceObject_t",                                               {HIP_1090, HIP_0,    HIP_0   }},
+  {"surfaceReference",                                                 {HIP_1090, HIP_0,    HIP_0   }},
+  {"hipTextureType1D",                                                 {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipTextureType2D",                                                 {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipTextureType3D",                                                 {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipTextureTypeCubemap",                                            {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipTextureType1DLayered",                                          {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipTextureType2DLayered",                                          {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipTextureTypeCubemapLayered",                                     {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipTextureFilterMode",                                             {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipFilterModePoint",                                               {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipFilterModeLinear",                                              {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipTextureReadMode",                                               {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipReadModeElementType",                                           {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipReadModeNormalizedFloat",                                       {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipTextureDesc",                                                   {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipPointerAttribute_t",                                            {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipLaunchParams",                                                  {HIP_2060, HIP_0,    HIP_0   }},
+  {"hipStreamCallback_t",                                              {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipErrorInvalidConfiguration",                                     {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipErrorInvalidSymbol",                                            {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipErrorInvalidDevicePointer",                                     {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipErrorInvalidMemcpyDirection",                                   {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipErrorInsufficientDriver",                                       {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipErrorMissingConfiguration",                                     {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipErrorPriorLaunchFailure",                                       {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipErrorInvalidDeviceFunction",                                    {HIP_1060, HIP_0,    HIP_0   }},
 };

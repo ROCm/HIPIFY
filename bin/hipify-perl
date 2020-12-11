@@ -1453,6 +1453,8 @@ sub simpleSubstitutions {
     $ft{'type'} += s/\bCUDA_ARRAY_DESCRIPTOR_st\b/HIP_ARRAY_DESCRIPTOR/g;
     $ft{'type'} += s/\bCUDA_ARRAY_DESCRIPTOR_v1\b/HIP_ARRAY_DESCRIPTOR/g;
     $ft{'type'} += s/\bCUDA_ARRAY_DESCRIPTOR_v1_st\b/HIP_ARRAY_DESCRIPTOR/g;
+    $ft{'type'} += s/\bCUDA_LAUNCH_PARAMS\b/hipLaunchParams/g;
+    $ft{'type'} += s/\bCUDA_LAUNCH_PARAMS_st\b/hipLaunchParams/g;
     $ft{'type'} += s/\bCUDA_MEMCPY2D\b/hip_Memcpy2D/g;
     $ft{'type'} += s/\bCUDA_MEMCPY2D_st\b/hip_Memcpy2D/g;
     $ft{'type'} += s/\bCUDA_MEMCPY2D_v1\b/hip_Memcpy2D/g;
@@ -1684,6 +1686,7 @@ sub simpleSubstitutions {
     $ft{'type'} += s/\bcusparseStatus_t\b/hipsparseStatus_t/g;
     $ft{'type'} += s/\bpruneInfo\b/pruneInfo/g;
     $ft{'type'} += s/\bpruneInfo_t\b/pruneInfo_t/g;
+    $ft{'type'} += s/\bsurfaceReference\b/surfaceReference/g;
     $ft{'numeric_literal'} += s/\bCUBLAS_ATOMICS_ALLOWED\b/HIPBLAS_ATOMICS_ALLOWED/g;
     $ft{'numeric_literal'} += s/\bCUBLAS_ATOMICS_NOT_ALLOWED\b/HIPBLAS_ATOMICS_NOT_ALLOWED/g;
     $ft{'numeric_literal'} += s/\bCUBLAS_DIAG_NON_UNIT\b/HIPBLAS_DIAG_NON_UNIT/g;
@@ -3546,7 +3549,6 @@ sub warnUnsupportedFunctions {
     my $line_num = shift;
     my $k = 0;
     foreach $func (
-        "surfaceReference",
         "libraryPropertyType_t",
         "libraryPropertyType",
         "cusparseZhybsv_solve",
@@ -5899,8 +5901,6 @@ sub warnUnsupportedFunctions {
         "CUDA_MEMSET_NODE_PARAMS",
         "CUDA_MEMCPY3D_PEER_st",
         "CUDA_MEMCPY3D_PEER",
-        "CUDA_LAUNCH_PARAMS_st",
-        "CUDA_LAUNCH_PARAMS",
         "CUDA_KERNEL_NODE_PARAMS_st",
         "CUDA_KERNEL_NODE_PARAMS",
         "CUDA_HOST_NODE_PARAMS_st",
