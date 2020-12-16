@@ -107,3 +107,32 @@ const std::map<llvm::StringRef, hipCounter> &CUDA_RENAMES_MAP() {
   ret.insert(CUDA_CAFFE2_FUNCTION_MAP.begin(), CUDA_CAFFE2_FUNCTION_MAP.end());
   return ret;
 };
+
+const std::map<llvm::StringRef, cudaAPIversions> &CUDA_VERSIONS_MAP() {
+  static std::map<llvm::StringRef, cudaAPIversions> ret;
+  if (!ret.empty())
+    return ret;
+  // First run, so compute the union map.
+  ret.insert(CUDA_DRIVER_TYPE_NAME_VER_MAP.begin(), CUDA_DRIVER_TYPE_NAME_VER_MAP.end());
+  ret.insert(CUDA_DRIVER_FUNCTION_VER_MAP.begin(), CUDA_DRIVER_FUNCTION_VER_MAP.end());
+  ret.insert(CUDA_RUNTIME_TYPE_NAME_VER_MAP.begin(), CUDA_RUNTIME_TYPE_NAME_VER_MAP.end());
+  ret.insert(CUDA_RUNTIME_FUNCTION_VER_MAP.begin(), CUDA_RUNTIME_FUNCTION_VER_MAP.end());
+  ret.insert(CUDA_RUNTIME_FUNCTION_VER_MAP.begin(), CUDA_RUNTIME_FUNCTION_VER_MAP.end());
+  ret.insert(CUDA_COMPLEX_TYPE_NAME_VER_MAP.begin(), CUDA_COMPLEX_TYPE_NAME_VER_MAP.end());
+  ret.insert(CUDA_COMPLEX_FUNCTION_VER_MAP.begin(), CUDA_COMPLEX_FUNCTION_VER_MAP.end());
+  ret.insert(CUDA_BLAS_TYPE_NAME_VER_MAP.begin(), CUDA_BLAS_TYPE_NAME_VER_MAP.end());
+  ret.insert(CUDA_BLAS_FUNCTION_VER_MAP.begin(), CUDA_BLAS_FUNCTION_VER_MAP.end());
+  ret.insert(CUDA_RAND_TYPE_NAME_VER_MAP.begin(), CUDA_RAND_TYPE_NAME_VER_MAP.end());
+  ret.insert(CUDA_RAND_FUNCTION_VER_MAP.begin(), CUDA_RAND_FUNCTION_VER_MAP.end());
+  ret.insert(CUDA_DNN_TYPE_NAME_VER_MAP.begin(), CUDA_DNN_TYPE_NAME_VER_MAP.end());
+  ret.insert(CUDA_DNN_FUNCTION_VER_MAP.begin(), CUDA_DNN_FUNCTION_VER_MAP.end());
+  ret.insert(CUDA_FFT_TYPE_NAME_VER_MAP.begin(), CUDA_FFT_TYPE_NAME_VER_MAP.end());
+  ret.insert(CUDA_FFT_FUNCTION_VER_MAP.begin(), CUDA_FFT_FUNCTION_VER_MAP.end());
+  ret.insert(CUDA_SPARSE_TYPE_NAME_VER_MAP.begin(), CUDA_SPARSE_TYPE_NAME_VER_MAP.end());
+  ret.insert(CUDA_SPARSE_FUNCTION_VER_MAP.begin(), CUDA_SPARSE_FUNCTION_VER_MAP.end());
+  ret.insert(CUDA_CAFFE2_TYPE_NAME_VER_MAP.begin(), CUDA_CAFFE2_TYPE_NAME_VER_MAP.end());
+  ret.insert(CUDA_CAFFE2_FUNCTION_VER_MAP.begin(), CUDA_CAFFE2_FUNCTION_VER_MAP.end());
+  ret.insert(CUDA_DEVICE_FUNC_VER_MAP.begin(), CUDA_DEVICE_FUNC_VER_MAP.end());
+  ret.insert(CUDA_CUB_TYPE_NAME_VER_MAP.begin(), CUDA_CUB_TYPE_NAME_VER_MAP.end());
+  return ret;
+}

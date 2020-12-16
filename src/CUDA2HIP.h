@@ -121,6 +121,12 @@ extern const std::map<llvm::StringRef, hipAPIversions>  HIP_DEVICE_FUNC_VER_MAP;
 extern const std::map<llvm::StringRef, cudaAPIversions> CUDA_CUB_TYPE_NAME_VER_MAP;
 extern const std::map<llvm::StringRef, hipAPIversions>  HIP_CUB_TYPE_NAME_VER_MAP;
 
+/**
+  * The union of all the above CUDA maps.
+  *
+  */
+const std::map<llvm::StringRef, cudaAPIversions> &CUDA_VERSIONS_MAP();
+
 extern const std::map<unsigned int, llvm::StringRef> CUDA_DRIVER_API_SECTION_MAP;
 extern const std::map<unsigned int, llvm::StringRef> CUDA_RUNTIME_API_SECTION_MAP;
 extern const std::map<unsigned int, llvm::StringRef> CUDA_COMPLEX_API_SECTION_MAP;
