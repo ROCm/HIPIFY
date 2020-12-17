@@ -366,6 +366,8 @@ public:
   static bool isRocUnsupported(const hipCounter &counter);
   // Check whether the counter is DEPRECATED or not.
   static bool isDeprecated(const hipCounter& counter);
+  // Check whether the counter is REMOVED or not.
+  static bool isRemoved(const hipCounter& counter);
   /**
     * Check whether the counter is ROC_UNSUPPORTED/HIP_UNSUPPORTED/UNSUPPORTED or not
     * based on counter's API_TYPE and option TranslateToRoc.

@@ -350,6 +350,10 @@ bool Statistics::isDeprecated(const hipCounter &counter) {
   return DEPRECATED == (counter.supportDegree & DEPRECATED);
 }
 
+bool Statistics::isRemoved(const hipCounter &counter) {
+  return REMOVED == (counter.supportDegree & REMOVED);
+}
+
 bool Statistics::isUnsupported(const hipCounter &counter) {
   if (UNSUPPORTED == (counter.supportDegree & UNSUPPORTED)) {
     return true;

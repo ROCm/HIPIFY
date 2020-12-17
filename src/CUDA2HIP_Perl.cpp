@@ -172,18 +172,33 @@ namespace perl {
     *streamPtr.get() << tab << ", \"exclude-dirs=s\" => \\$exclude_dirs      # Exclude directories." << endl;
     *streamPtr.get() << tab << ", \"exclude-files=s\" => \\$exclude_files    # Exclude files." << endl;
     *streamPtr.get() << ");" << endl_2;
-    *streamPtr.get() << my << "%deprecated_funcs = (" << endl;
-    unsigned int countDeprecated = 0;
+    stringstream deprecated, removed, common;
+    deprecated << my << "%deprecated_funcs = (" << endl;
+    removed << my << "%removed_funcs = (" << endl;
+    unsigned int countDeprecated = 0, countRemoved = 0;
     for (auto ma = CUDA_RENAMES_MAP().rbegin(); ma != CUDA_RENAMES_MAP().rend(); ++ma) {
-      if (Statistics::isDeprecated(ma->second)) {
+      bool bDeprecated = false, bRemoved = false;
+      if (Statistics::isDeprecated(ma->second)) bDeprecated = true;
+      if (Statistics::isRemoved(ma->second)) bRemoved = true;
+      if (bDeprecated || bRemoved) {
         const auto found = CUDA_VERSIONS_MAP().find(ma->first);
         if (found != CUDA_VERSIONS_MAP().end()) {
-          *streamPtr.get() << (countDeprecated ? ",\n" : "") << tab << "\"" << ma->first.str() << "\" => \"" << Statistics::getCudaVersion(found->second.deprecated) << "\"";
-          countDeprecated++;
+          if (bDeprecated) {
+            deprecated << (countDeprecated ? ",\n" : "") << tab << "\"" << ma->first.str() << "\" => \"" << Statistics::getCudaVersion(found->second.deprecated) << "\"";
+            countDeprecated++;
+          }
+          if (bRemoved) {
+            removed << (countRemoved ? ",\n" : "") << tab << "\"" << ma->first.str() << "\" => \"" << Statistics::getCudaVersion(found->second.removed) << "\"";
+            countRemoved++;
+          }
         }
       }
     }
-    *streamPtr.get() << endl << ");" << endl << endl;
+    common << endl << ");" << endl << endl;
+    deprecated << common.str();
+    removed << common.str();
+    *streamPtr.get() << deprecated.str();
+    *streamPtr.get() << removed.str();
     *streamPtr.get() << "$print_stats = 1 if $examine;" << endl;
     *streamPtr.get() << "$no_output = 1 if $examine;" << endl_2;
     *streamPtr.get() << "# Whitelist of cuda[A-Z] identifiers, which are commonly used in CUDA sources but don't map to any CUDA API:" << endl;
@@ -347,10 +362,11 @@ namespace perl {
   }
 
   void generateDeprecatedAndUnsupportedFunctions(unique_ptr<ostream> &streamPtr) {
-    stringstream sDeprecated, sUnsupported, sCommon;
+    stringstream sDeprecated, sRemoved, sUnsupported, sCommon;
     sCommon << tab << my << "$line_num = shift;" << endl;
     sCommon << tab << my_k << endl;
     sDeprecated << endl << sub << "warnDeprecatedFunctions" << " {" << endl << sCommon.str() << tab << "while (my($func, $val) = each %deprecated_funcs)" << endl;
+    sRemoved << endl << sub << "warnRemovedFunctions" << " {" << endl << sCommon.str() << tab << "while (my($func, $val) = each %removed_funcs)" << endl;
     sUnsupported << endl << sub << "warnUnsupportedFunctions" << " {" << endl << sCommon.str() << tab << foreach_func;
     unsigned int countUnsupported = 0;
     for (auto ma = CUDA_RENAMES_MAP().rbegin(); ma != CUDA_RENAMES_MAP().rend(); ++ma) {
@@ -366,12 +382,15 @@ namespace perl {
     sCommon << tab_2 << "if ($mt) {" << endl;
     sCommon << tab_3 << "$k += $mt;" << endl;
     sDeprecated << sCommon.str();
+    sRemoved << sCommon.str();
     sUnsupported << sCommon.str();
     sCommon.str(std::string());
     sCommon << tab_2 << "}\n" << tab << "}\n" << tab << return_k << "}" << endl;
     sDeprecated << tab_3 << print << "\"  "  << warning << "deprecated identifier \\\"$func\\\" since CUDA $val\\n\";" << endl << sCommon.str();
+    sRemoved << tab_3 << print << "\"  "  << warning << "removed identifier \\\"$func\\\" since CUDA $val\\n\";" << endl << sCommon.str();
     sUnsupported << tab_3 << print << "\"  "  << warning << "unsupported identifier \\\"$func\\\"\\n\";" << endl << sCommon.str();
     *streamPtr.get() << sDeprecated.str();
+    *streamPtr.get() << sRemoved.str();
     *streamPtr.get() << sUnsupported.str();
   }
 
@@ -510,6 +529,8 @@ namespace perl {
     *streamPtr.get() << tab_4 << my << "$line_num = 0;" << endl;
     *streamPtr.get() << tab_4 << foreach << "(@lines) {" << endl;
     *streamPtr.get() << tab_5 << "$line_num++;" << endl;
+    *streamPtr.get() << tab_5 << "$s = warnRemovedFunctions($line_num);" << endl;
+    *streamPtr.get() << tab_5 << "$warnings += $s;" << endl;
     *streamPtr.get() << tab_5 << "$s = warnDeprecatedFunctions($line_num);" << endl;
     *streamPtr.get() << tab_5 << "$warnings += $s;" << endl;
     *streamPtr.get() << tab_5 << "$s = warnUnsupportedFunctions($line_num);" << endl;
