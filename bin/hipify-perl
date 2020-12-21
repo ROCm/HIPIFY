@@ -454,6 +454,166 @@ my %deprecated_funcs = (
     "CUBLAS_TENSOR_OP_MATH" => "11.0"
 );
 
+my %removed_funcs = (
+    "cusparseZhybsv_solve" => "11.0",
+    "cusparseZhybsv_analysis" => "11.0",
+    "cusparseZhybmv" => "11.0",
+    "cusparseZhyb2dense" => "11.0",
+    "cusparseZhyb2csr" => "11.0",
+    "cusparseZhyb2csc" => "11.0",
+    "cusparseZgtsv_nopivot" => "11.0",
+    "cusparseZgtsvStridedBatch" => "11.0",
+    "cusparseZgtsv" => "11.0",
+    "cusparseZdoti" => "11.0",
+    "cusparseZdotci" => "11.0",
+    "cusparseZdense2hyb" => "11.0",
+    "cusparseZcsrsv_solve" => "11.0",
+    "cusparseZcsrsv_analysis" => "11.0",
+    "cusparseZcsrsm_solve" => "11.0",
+    "cusparseZcsrsm_analysis" => "11.0",
+    "cusparseZcsrmv_mp" => "11.0",
+    "cusparseZcsrmv" => "11.0",
+    "cusparseZcsrmm2" => "11.0",
+    "cusparseZcsrmm" => "11.0",
+    "cusparseZcsrilu0" => "11.0",
+    "cusparseZcsric0" => "11.0",
+    "cusparseZcsrgemm" => "11.0",
+    "cusparseZcsrgeam" => "11.0",
+    "cusparseZcsr2hyb" => "11.0",
+    "cusparseZcsr2csc" => "11.0",
+    "cusparseZcsc2hyb" => "11.0",
+    "cusparseXcsrgemmNnz" => "11.0",
+    "cusparseXcsrgeamNnz" => "11.0",
+    "cusparseSolveAnalysisInfo_t" => "11.0",
+    "cusparseSolveAnalysisInfo" => "11.0",
+    "cusparseShybsv_solve" => "11.0",
+    "cusparseShybsv_analysis" => "11.0",
+    "cusparseShybmv" => "11.0",
+    "cusparseShyb2dense" => "11.0",
+    "cusparseShyb2csr" => "11.0",
+    "cusparseShyb2csc" => "11.0",
+    "cusparseSgtsv_nopivot" => "11.0",
+    "cusparseSgtsvStridedBatch" => "11.0",
+    "cusparseSgtsv" => "11.0",
+    "cusparseSdoti" => "11.0",
+    "cusparseSdense2hyb" => "11.0",
+    "cusparseScsrsv_solve" => "11.0",
+    "cusparseScsrsv_analysis" => "11.0",
+    "cusparseScsrsm_solve" => "11.0",
+    "cusparseScsrsm_analysis" => "11.0",
+    "cusparseScsrmv_mp" => "11.0",
+    "cusparseScsrmv" => "11.0",
+    "cusparseScsrmm2" => "11.0",
+    "cusparseScsrmm" => "11.0",
+    "cusparseScsrilu0" => "11.0",
+    "cusparseScsric0" => "11.0",
+    "cusparseScsrgemm" => "11.0",
+    "cusparseScsrgeam" => "11.0",
+    "cusparseScsr2hyb" => "11.0",
+    "cusparseScsr2csc" => "11.0",
+    "cusparseScsc2hyb" => "11.0",
+    "cusparseHybPartition_t" => "11.0",
+    "cusparseHybMat_t" => "11.0",
+    "cusparseHybMat" => "11.0",
+    "cusparseGetLevelInfo" => "11.0",
+    "cusparseDhybsv_solve" => "11.0",
+    "cusparseDhybsv_analysis" => "11.0",
+    "cusparseDhybmv" => "11.0",
+    "cusparseDhyb2dense" => "11.0",
+    "cusparseDhyb2csr" => "11.0",
+    "cusparseDhyb2csc" => "11.0",
+    "cusparseDgtsv_nopivot" => "11.0",
+    "cusparseDgtsvStridedBatch" => "11.0",
+    "cusparseDgtsv" => "11.0",
+    "cusparseDestroySolveAnalysisInfo" => "11.0",
+    "cusparseDestroyHybMat" => "11.0",
+    "cusparseDdoti" => "11.0",
+    "cusparseDdense2hyb" => "11.0",
+    "cusparseDcsrsv_solve" => "11.0",
+    "cusparseDcsrsv_analysis" => "11.0",
+    "cusparseDcsrsm_solve" => "11.0",
+    "cusparseDcsrsm_analysis" => "11.0",
+    "cusparseDcsrmv_mp" => "11.0",
+    "cusparseDcsrmv" => "11.0",
+    "cusparseDcsrmm2" => "11.0",
+    "cusparseDcsrmm" => "11.0",
+    "cusparseDcsrilu0" => "11.0",
+    "cusparseDcsric0" => "11.0",
+    "cusparseDcsrgemm" => "11.0",
+    "cusparseDcsrgeam" => "11.0",
+    "cusparseDcsr2hyb" => "11.0",
+    "cusparseDcsr2csc" => "11.0",
+    "cusparseDcsc2hyb" => "11.0",
+    "cusparseCsrsv_solveEx" => "11.0",
+    "cusparseCsrsv_analysisEx" => "11.0",
+    "cusparseCsrilu0Ex" => "11.0",
+    "cusparseCsr2cscEx" => "11.0",
+    "cusparseCreateSolveAnalysisInfo" => "11.0",
+    "cusparseCreateHybMat" => "11.0",
+    "cusparseChybsv_solve" => "11.0",
+    "cusparseChybsv_analysis" => "11.0",
+    "cusparseChybmv" => "11.0",
+    "cusparseChyb2dense" => "11.0",
+    "cusparseChyb2csr" => "11.0",
+    "cusparseChyb2csc" => "11.0",
+    "cusparseCgtsv_nopivot" => "11.0",
+    "cusparseCgtsvStridedBatch" => "11.0",
+    "cusparseCgtsv" => "11.0",
+    "cusparseCdoti" => "11.0",
+    "cusparseCdotci" => "11.0",
+    "cusparseCdense2hyb" => "11.0",
+    "cusparseCcsrsv_solve" => "11.0",
+    "cusparseCcsrsv_analysis" => "11.0",
+    "cusparseCcsrsm_solve" => "11.0",
+    "cusparseCcsrsm_analysis" => "11.0",
+    "cusparseCcsrmv_mp" => "11.0",
+    "cusparseCcsrmv" => "11.0",
+    "cusparseCcsrmm2" => "11.0",
+    "cusparseCcsrmm" => "11.0",
+    "cusparseCcsrilu0" => "11.0",
+    "cusparseCcsric0" => "11.0",
+    "cusparseCcsrgemm" => "11.0",
+    "cusparseCcsrgeam" => "11.0",
+    "cusparseCcsr2hyb" => "11.0",
+    "cusparseCcsr2csc" => "11.0",
+    "cusparseCcsc2hyb" => "11.0",
+    "cudnnSetRNNDescriptor_v5" => "8.0.1",
+    "cudnnSetRNNDescriptor" => "8.0.1",
+    "cudnnGetRNNDescriptor" => "8.0.1",
+    "cudnnGetConvolutionForwardAlgorithm" => "8.0.1",
+    "cudnnGetConvolutionBackwardFilterAlgorithm" => "8.0.1",
+    "cudnnGetConvolutionBackwardDataAlgorithm" => "8.0.1",
+    "cudnnConvolutionFwdPreference_t" => "8.0.1",
+    "cudnnConvolutionBwdFilterPreference_t" => "8.0.1",
+    "cudnnConvolutionBwdDataPreference_t" => "8.0.1",
+    "cudaSetupArgument" => "10.1",
+    "cudaLaunch" => "10.1",
+    "cudaConfigureCall" => "10.1",
+    "CU_TARGET_COMPUTE_73" => "10.0",
+    "CU_TARGET_COMPUTE_13" => "9.0",
+    "CU_TARGET_COMPUTE_12" => "9.0",
+    "CU_TARGET_COMPUTE_11" => "9.0",
+    "CU_TARGET_COMPUTE_10" => "9.0",
+    "CU_GRAPH_NODE_TYPE_COUNT" => "11.0",
+    "CU_DEVICE_P2P_ATTRIBUTE_ARRAY_ACCESS_ACCESS_SUPPORTED" => "10.1",
+    "CU_COMPUTEMODE_EXCLUSIVE" => "8.0",
+    "CUSPARSE_HYB_PARTITION_USER" => "11.0",
+    "CUSPARSE_HYB_PARTITION_MAX" => "11.0",
+    "CUSPARSE_HYB_PARTITION_AUTO" => "11.0",
+    "CUSPARSE_ALG_NAIVE" => "11.0",
+    "CUSPARSE_ALG1" => "11.0",
+    "CUSPARSE_ALG0" => "11.0",
+    "CUDNN_CONVOLUTION_FWD_SPECIFY_WORKSPACE_LIMIT" => "8.0.1",
+    "CUDNN_CONVOLUTION_FWD_PREFER_FASTEST" => "8.0.1",
+    "CUDNN_CONVOLUTION_FWD_NO_WORKSPACE" => "8.0.1",
+    "CUDNN_CONVOLUTION_BWD_FILTER_SPECIFY_WORKSPACE_LIMIT" => "8.0.1",
+    "CUDNN_CONVOLUTION_BWD_FILTER_PREFER_FASTEST" => "8.0.1",
+    "CUDNN_CONVOLUTION_BWD_FILTER_NO_WORKSPACE" => "8.0.1",
+    "CUDNN_CONVOLUTION_BWD_DATA_SPECIFY_WORKSPACE_LIMIT" => "8.0.1",
+    "CUDNN_CONVOLUTION_BWD_DATA_PREFER_FASTEST" => "8.0.1",
+    "CUDNN_CONVOLUTION_BWD_DATA_NO_WORKSPACE" => "8.0.1"
+);
+
 $print_stats = 1 if $examine;
 $no_output = 1 if $examine;
 
@@ -3544,6 +3704,20 @@ sub warnDeprecatedFunctions {
     return $k;
 }
 
+sub warnRemovedFunctions {
+    my $line_num = shift;
+    my $k = 0;
+    while (my($func, $val) = each %removed_funcs)
+    {
+        my $mt = m/($func)/g;
+        if ($mt) {
+            $k += $mt;
+            print STDERR "  warning: $fileName:$line_num: removed identifier \"$func\" since CUDA $val\n";
+        }
+    }
+    return $k;
+}
+
 sub warnUnsupportedFunctions {
     my $line_num = shift;
     my $k = 0;
@@ -6094,6 +6268,8 @@ while (@ARGV) {
                 my $line_num = 0;
                 foreach (@lines) {
                     $line_num++;
+                    $s = warnRemovedFunctions($line_num);
+                    $warnings += $s;
                     $s = warnDeprecatedFunctions($line_num);
                     $warnings += $s;
                     $s = warnUnsupportedFunctions($line_num);
