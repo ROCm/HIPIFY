@@ -35,6 +35,7 @@ const char *counterNames[NUM_CONV_TYPES] = {
   "module", // CONV_MODULE
   "memory", // CONV_MEMORY
   "virtual_memory", // CONV_VIRTUAL_MEMORY
+  "stream_ordered_memory", // CONV_STREAM_ORDERED_MEMORY
   "addressing", // CONV_ADDRESSING
   "stream", // CONV_STREAM
   "event", // CONV_EVENT
@@ -79,6 +80,7 @@ const char *counterTypes[NUM_CONV_TYPES] = {
   "CONV_MODULE",
   "CONV_MEMORY",
   "CONV_VIRTUAL_MEMORY",
+  "CONV_STREAM_ORDERED_MEMORY",
   "CONV_ADDRESSING",
   "CONV_STREAM",
   "CONV_EVENT",
