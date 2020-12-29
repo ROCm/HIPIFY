@@ -83,6 +83,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   {"cudaSetValidDevices",                                     {"hipSetValidDevices",                                     "", CONV_DEVICE, API_RUNTIME, 1, HIP_UNSUPPORTED}},
   // cuDeviceGetTexture1DLinearMaxWidth
   {"cudaDeviceGetTexture1DLinearMaxWidth",                    {"hipDeviceGetTexture1DLinearMaxWidth",                    "", CONV_DEVICE, API_RUNTIME, 1, HIP_UNSUPPORTED}},
+  // cuDeviceGetDefaultMemPool
+  {"cudaDeviceGetDefaultMemPool",                             {"hipDeviceGetDefaultMemPool",                             "", CONV_DEVICE, API_RUNTIME, 1, HIP_UNSUPPORTED}},
+  // cuDeviceSetMemPool
+  {"cudaDeviceSetMemPool",                                    {"hipDeviceSetMemPool",                                    "", CONV_DEVICE, API_RUNTIME, 1, HIP_UNSUPPORTED}},
+  // cuDeviceGetMemPool
+  {"cudaDeviceGetMemPool",                                    {"hipDeviceGetMemPool",                                    "", CONV_DEVICE, API_RUNTIME, 1, HIP_UNSUPPORTED}},
 
   // 2. Thread Management [DEPRECATED]
   // no analogue
@@ -363,6 +369,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   {"make_cudaPos",                                            {"make_hipPos",                                            "", CONV_MEMORY, API_RUNTIME, 9}},
   // cuArrayGetSparseProperties
   {"cudaArrayGetSparseProperties",                            {"hipArrayGetSparseProperties",                            "", CONV_MEMORY, API_RUNTIME, 9, HIP_UNSUPPORTED}},
+  // cuArrayGetPlane
+  {"cudaArrayGetPlane",                                       {"hipArrayGetPlane",                                       "", CONV_MEMORY, API_RUNTIME, 9, HIP_UNSUPPORTED}},
 
   // 10. Memory Management [DEPRECATED]
   // no analogue
@@ -377,391 +385,439 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // no analogue
   {"cudaMemcpyToArrayAsync",                                  {"hipMemcpyToArrayAsync",                                  "", CONV_MEMORY, API_RUNTIME, 10, DEPRECATED}},
 
-  // 11. Unified Addressing
+  // 11. Stream Ordered Memory Allocator
+
+  // no analogue
+  {"cudaMallocAsync",                                         {"hipMallocAsync",                                         "", CONV_MEMORY, API_RUNTIME, 11, HIP_UNSUPPORTED}},
+  // cuMemFreeAsync?
+  // TODO: double check cuMemFreeAsync
+  {"cudaFreeAsync",                                           {"hipFreeAsync",                                           "", CONV_MEMORY, API_RUNTIME, 11, HIP_UNSUPPORTED}},
+  // no analogue
+  {"cudaMallocFromPoolAsync",                                 {"hipMallocFromPoolAsync",                                 "", CONV_MEMORY, API_RUNTIME, 11, HIP_UNSUPPORTED}},
+  // cuMemPoolTrimTo
+  {"cudaMemPoolTrimTo",                                       {"hipMemPoolTrimTo",                                       "", CONV_MEMORY, API_RUNTIME, 11, HIP_UNSUPPORTED}},
+  // cuMemPoolSetAttribute
+  {"cudaMemPoolSetAttribute",                                 {"hipMemPoolSetAttribute",                                 "", CONV_MEMORY, API_RUNTIME, 11, HIP_UNSUPPORTED}},
+  // cuMemPoolGetAttribute
+  {"cudaMemPoolGetAttribute",                                 {"hipMemPoolGetAttribute",                                 "", CONV_MEMORY, API_RUNTIME, 11, HIP_UNSUPPORTED}},
+  // cuMemPoolSetAccess
+  {"cudaMemPoolSetAccess",                                    {"hipMemPoolSetAccess",                                    "", CONV_MEMORY, API_RUNTIME, 11, HIP_UNSUPPORTED}},
+  // cuMemPoolGetAccess
+  {"cudaMemPoolGetAccess",                                    {"hipMemPoolGetAccess",                                    "", CONV_MEMORY, API_RUNTIME, 11, HIP_UNSUPPORTED}},
+  // cuMemPoolCreate
+  {"cudaMemPoolCreate",                                       {"hipMemPoolCreate",                                       "", CONV_MEMORY, API_RUNTIME, 11, HIP_UNSUPPORTED}},
+  // cuMemPoolDestroy
+  {"cudaMemPoolDestroy",                                      {"hipMemPoolDestroy",                                      "", CONV_MEMORY, API_RUNTIME, 11, HIP_UNSUPPORTED}},
+  // cuMemPoolExportToShareableHandle
+  {"cudaMemPoolExportToShareableHandle",                      {"hipMemPoolExportToShareableHandle",                      "", CONV_MEMORY, API_RUNTIME, 11, HIP_UNSUPPORTED}},
+  // cuMemPoolImportFromShareableHandle
+  {"cudaMemPoolImportFromShareableHandle",                    {"hipMemPoolImportFromShareableHandle",                    "", CONV_MEMORY, API_RUNTIME, 11, HIP_UNSUPPORTED}},
+  // cuMemPoolExportPointer
+  {"cudaMemPoolExportPointer",                                {"hipMemPoolExportPointer",                                "", CONV_MEMORY, API_RUNTIME, 11, HIP_UNSUPPORTED}},
+  // cuMemPoolImportPointer
+  {"cudaMemPoolImportPointer",                                {"hipMemPoolImportPointer",                                "", CONV_MEMORY, API_RUNTIME, 11, HIP_UNSUPPORTED}},
+
+  // 12. Unified Addressing
   // no analogue
   // NOTE: Not equal to cuPointerGetAttributes due to different signatures
-  {"cudaPointerGetAttributes",                                {"hipPointerGetAttributes",                                "", CONV_ADDRESSING, API_RUNTIME, 11}},
+  {"cudaPointerGetAttributes",                                {"hipPointerGetAttributes",                                "", CONV_ADDRESSING, API_RUNTIME, 12}},
 
-  // 12. Peer Device Memory Access
+  // 13. Peer Device Memory Access
   // cuDeviceCanAccessPeer
-  {"cudaDeviceCanAccessPeer",                                 {"hipDeviceCanAccessPeer",                                 "", CONV_PEER, API_RUNTIME, 12}},
+  {"cudaDeviceCanAccessPeer",                                 {"hipDeviceCanAccessPeer",                                 "", CONV_PEER, API_RUNTIME, 13}},
   // no analogue
   // NOTE: Not equal to cuCtxDisablePeerAccess due to different signatures
-  {"cudaDeviceDisablePeerAccess",                             {"hipDeviceDisablePeerAccess",                             "", CONV_PEER, API_RUNTIME, 12}},
+  {"cudaDeviceDisablePeerAccess",                             {"hipDeviceDisablePeerAccess",                             "", CONV_PEER, API_RUNTIME, 13}},
   // no analogue
   // NOTE: Not equal to cuCtxEnablePeerAccess due to different signatures
-  {"cudaDeviceEnablePeerAccess",                              {"hipDeviceEnablePeerAccess",                              "", CONV_PEER, API_RUNTIME, 12}},
+  {"cudaDeviceEnablePeerAccess",                              {"hipDeviceEnablePeerAccess",                              "", CONV_PEER, API_RUNTIME, 13}},
 
-  // 13. OpenGL Interoperability
+  // 14. OpenGL Interoperability
   // cuGLGetDevices
-  {"cudaGLGetDevices",                                        {"hipGLGetDevices",                                        "", CONV_OPENGL, API_RUNTIME, 13, HIP_UNSUPPORTED}},
+  {"cudaGLGetDevices",                                        {"hipGLGetDevices",                                        "", CONV_OPENGL, API_RUNTIME, 14, HIP_UNSUPPORTED}},
   // cuGraphicsGLRegisterBuffer
-  {"cudaGraphicsGLRegisterBuffer",                            {"hipGraphicsGLRegisterBuffer",                            "", CONV_OPENGL, API_RUNTIME, 13, HIP_UNSUPPORTED}},
+  {"cudaGraphicsGLRegisterBuffer",                            {"hipGraphicsGLRegisterBuffer",                            "", CONV_OPENGL, API_RUNTIME, 14, HIP_UNSUPPORTED}},
   // cuGraphicsGLRegisterImage
-  {"cudaGraphicsGLRegisterImage",                             {"hipGraphicsGLRegisterImage",                             "", CONV_OPENGL, API_RUNTIME, 13, HIP_UNSUPPORTED}},
+  {"cudaGraphicsGLRegisterImage",                             {"hipGraphicsGLRegisterImage",                             "", CONV_OPENGL, API_RUNTIME, 14, HIP_UNSUPPORTED}},
   // cuWGLGetDevice
-  {"cudaWGLGetDevice",                                        {"hipWGLGetDevice",                                        "", CONV_OPENGL, API_RUNTIME, 13, HIP_UNSUPPORTED}},
+  {"cudaWGLGetDevice",                                        {"hipWGLGetDevice",                                        "", CONV_OPENGL, API_RUNTIME, 14, HIP_UNSUPPORTED}},
 
-  // 14. OpenGL Interoperability [DEPRECATED]
+  // 15. OpenGL Interoperability [DEPRECATED]
   // no analogue
   // NOTE: Not equal to cuGLMapBufferObject due to different signatures
-  {"cudaGLMapBufferObject",                                   {"hipGLMapBufferObject",                                   "", CONV_OPENGL, API_RUNTIME, 14, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cudaGLMapBufferObject",                                   {"hipGLMapBufferObject",                                   "", CONV_OPENGL, API_RUNTIME, 15, HIP_UNSUPPORTED | DEPRECATED}},
   // no analogue
   // NOTE: Not equal to cuGLMapBufferObjectAsync due to different signatures
-  {"cudaGLMapBufferObjectAsync",                              {"hipGLMapBufferObjectAsync",                              "", CONV_OPENGL, API_RUNTIME, 14, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cudaGLMapBufferObjectAsync",                              {"hipGLMapBufferObjectAsync",                              "", CONV_OPENGL, API_RUNTIME, 15, HIP_UNSUPPORTED | DEPRECATED}},
   // cuGLRegisterBufferObject
-  {"cudaGLRegisterBufferObject",                              {"hipGLRegisterBufferObject",                              "", CONV_OPENGL, API_RUNTIME, 14, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cudaGLRegisterBufferObject",                              {"hipGLRegisterBufferObject",                              "", CONV_OPENGL, API_RUNTIME, 15, HIP_UNSUPPORTED | DEPRECATED}},
   // cuGLSetBufferObjectMapFlags
-  {"cudaGLSetBufferObjectMapFlags",                           {"hipGLSetBufferObjectMapFlags",                           "", CONV_OPENGL, API_RUNTIME, 14, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cudaGLSetBufferObjectMapFlags",                           {"hipGLSetBufferObjectMapFlags",                           "", CONV_OPENGL, API_RUNTIME, 15, HIP_UNSUPPORTED | DEPRECATED}},
   // no analogue
-  {"cudaGLSetGLDevice",                                       {"hipGLSetGLDevice",                                       "", CONV_OPENGL, API_RUNTIME, 14, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cudaGLSetGLDevice",                                       {"hipGLSetGLDevice",                                       "", CONV_OPENGL, API_RUNTIME, 15, HIP_UNSUPPORTED | DEPRECATED}},
   // cuGLUnmapBufferObject
-  {"cudaGLUnmapBufferObject",                                 {"hipGLUnmapBufferObject",                                 "", CONV_OPENGL, API_RUNTIME, 14, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cudaGLUnmapBufferObject",                                 {"hipGLUnmapBufferObject",                                 "", CONV_OPENGL, API_RUNTIME, 15, HIP_UNSUPPORTED | DEPRECATED}},
   // cuGLUnmapBufferObjectAsync
-  {"cudaGLUnmapBufferObjectAsync",                            {"hipGLUnmapBufferObjectAsync",                            "", CONV_OPENGL, API_RUNTIME, 14, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cudaGLUnmapBufferObjectAsync",                            {"hipGLUnmapBufferObjectAsync",                            "", CONV_OPENGL, API_RUNTIME, 15, HIP_UNSUPPORTED | DEPRECATED}},
   // cuGLUnregisterBufferObject
-  {"cudaGLUnregisterBufferObject",                            {"hipGLUnregisterBufferObject",                            "", CONV_OPENGL, API_RUNTIME, 14, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cudaGLUnregisterBufferObject",                            {"hipGLUnregisterBufferObject",                            "", CONV_OPENGL, API_RUNTIME, 15, HIP_UNSUPPORTED | DEPRECATED}},
 
-  // 15. Direct3D 9 Interoperability
+  // 16. Direct3D 9 Interoperability
   // cuD3D9GetDevice
-  {"cudaD3D9GetDevice",                                       {"hipD3D9GetDevice",                                       "", CONV_D3D9, API_RUNTIME, 15, HIP_UNSUPPORTED}},
+  {"cudaD3D9GetDevice",                                       {"hipD3D9GetDevice",                                       "", CONV_D3D9, API_RUNTIME, 16, HIP_UNSUPPORTED}},
   // cuD3D9GetDevices
-  {"cudaD3D9GetDevices",                                      {"hipD3D9GetDevices",                                      "", CONV_D3D9, API_RUNTIME, 15, HIP_UNSUPPORTED}},
+  {"cudaD3D9GetDevices",                                      {"hipD3D9GetDevices",                                      "", CONV_D3D9, API_RUNTIME, 16, HIP_UNSUPPORTED}},
   // cuD3D9GetDirect3DDevice
-  {"cudaD3D9GetDirect3DDevice",                               {"hipD3D9GetDirect3DDevice",                               "", CONV_D3D9, API_RUNTIME, 15, HIP_UNSUPPORTED}},
+  {"cudaD3D9GetDirect3DDevice",                               {"hipD3D9GetDirect3DDevice",                               "", CONV_D3D9, API_RUNTIME, 16, HIP_UNSUPPORTED}},
   // no analogue
-  {"cudaD3D9SetDirect3DDevice",                               {"hipD3D9SetDirect3DDevice",                               "", CONV_D3D9, API_RUNTIME, 15, HIP_UNSUPPORTED}},
+  {"cudaD3D9SetDirect3DDevice",                               {"hipD3D9SetDirect3DDevice",                               "", CONV_D3D9, API_RUNTIME, 16, HIP_UNSUPPORTED}},
   // cuGraphicsD3D9RegisterResource
-  {"cudaGraphicsD3D9RegisterResource",                        {"hipGraphicsD3D9RegisterResource",                        "", CONV_D3D9, API_RUNTIME, 15, HIP_UNSUPPORTED}},
+  {"cudaGraphicsD3D9RegisterResource",                        {"hipGraphicsD3D9RegisterResource",                        "", CONV_D3D9, API_RUNTIME, 16, HIP_UNSUPPORTED}},
 
-  // 16. Direct3D 9 Interoperability[DEPRECATED]
+  // 17. Direct3D 9 Interoperability[DEPRECATED]
   // cuD3D9MapResources
-  {"cudaD3D9MapResources",                                    {"hipD3D9MapResources",                                    "", CONV_D3D9, API_RUNTIME, 16, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cudaD3D9MapResources",                                    {"hipD3D9MapResources",                                    "", CONV_D3D9, API_RUNTIME, 17, HIP_UNSUPPORTED | DEPRECATED}},
   // cuD3D9RegisterResource
   // NOTE: cudaD3D9RegisterResource is not marked as deprecated function even in CUDA 11.0
-  {"cudaD3D9RegisterResource",                                {"hipD3D9RegisterResource",                                "", CONV_D3D9, API_RUNTIME, 16, HIP_UNSUPPORTED}},
+  {"cudaD3D9RegisterResource",                                {"hipD3D9RegisterResource",                                "", CONV_D3D9, API_RUNTIME, 17, HIP_UNSUPPORTED}},
   // cuD3D9ResourceGetMappedArray
-  {"cudaD3D9ResourceGetMappedArray",                          {"hipD3D9ResourceGetMappedArray",                          "", CONV_D3D9, API_RUNTIME, 16, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cudaD3D9ResourceGetMappedArray",                          {"hipD3D9ResourceGetMappedArray",                          "", CONV_D3D9, API_RUNTIME, 17, HIP_UNSUPPORTED | DEPRECATED}},
   // cuD3D9ResourceGetMappedPitch
-  {"cudaD3D9ResourceGetMappedPitch",                          {"hipD3D9ResourceGetMappedPitch",                          "", CONV_D3D9, API_RUNTIME, 16, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cudaD3D9ResourceGetMappedPitch",                          {"hipD3D9ResourceGetMappedPitch",                          "", CONV_D3D9, API_RUNTIME, 17, HIP_UNSUPPORTED | DEPRECATED}},
   // cuD3D9ResourceGetMappedPointer
-  {"cudaD3D9ResourceGetMappedPointer",                        {"hipD3D9ResourceGetMappedPointer",                        "", CONV_D3D9, API_RUNTIME, 16, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cudaD3D9ResourceGetMappedPointer",                        {"hipD3D9ResourceGetMappedPointer",                        "", CONV_D3D9, API_RUNTIME, 17, HIP_UNSUPPORTED | DEPRECATED}},
   // cuD3D9ResourceGetMappedSize
-  {"cudaD3D9ResourceGetMappedSize",                           {"hipD3D9ResourceGetMappedSize",                           "", CONV_D3D9, API_RUNTIME, 16, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cudaD3D9ResourceGetMappedSize",                           {"hipD3D9ResourceGetMappedSize",                           "", CONV_D3D9, API_RUNTIME, 17, HIP_UNSUPPORTED | DEPRECATED}},
   // cuD3D9ResourceGetSurfaceDimensions
-  {"cudaD3D9ResourceGetSurfaceDimensions",                    {"hipD3D9ResourceGetSurfaceDimensions",                    "", CONV_D3D9, API_RUNTIME, 16, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cudaD3D9ResourceGetSurfaceDimensions",                    {"hipD3D9ResourceGetSurfaceDimensions",                    "", CONV_D3D9, API_RUNTIME, 17, HIP_UNSUPPORTED | DEPRECATED}},
   // cuD3D9ResourceSetMapFlags
-  {"cudaD3D9ResourceSetMapFlags",                             {"hipD3D9ResourceSetMapFlags",                             "", CONV_D3D9, API_RUNTIME, 16, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cudaD3D9ResourceSetMapFlags",                             {"hipD3D9ResourceSetMapFlags",                             "", CONV_D3D9, API_RUNTIME, 17, HIP_UNSUPPORTED | DEPRECATED}},
   // cuD3D9UnmapResources
-  {"cudaD3D9UnmapResources",                                  {"hipD3D9UnmapResources",                                  "", CONV_D3D9, API_RUNTIME, 16, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cudaD3D9UnmapResources",                                  {"hipD3D9UnmapResources",                                  "", CONV_D3D9, API_RUNTIME, 17, HIP_UNSUPPORTED | DEPRECATED}},
   // cuD3D9UnregisterResource
-  {"cudaD3D9UnregisterResource",                              {"hipD3D9UnregisterResource",                              "", CONV_D3D9, API_RUNTIME, 16, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cudaD3D9UnregisterResource",                              {"hipD3D9UnregisterResource",                              "", CONV_D3D9, API_RUNTIME, 17, HIP_UNSUPPORTED | DEPRECATED}},
 
-  // 17. Direct3D 10 Interoperability
+  // 18. Direct3D 10 Interoperability
   // cuD3D10GetDevice
-  {"cudaD3D10GetDevice",                                      {"hipD3D10GetDevice",                                      "", CONV_D3D10, API_RUNTIME, 17, HIP_UNSUPPORTED}},
+  {"cudaD3D10GetDevice",                                      {"hipD3D10GetDevice",                                      "", CONV_D3D10, API_RUNTIME, 18, HIP_UNSUPPORTED}},
   // cuD3D10GetDevices
-  {"cudaD3D10GetDevices",                                     {"hipD3D10GetDevices",                                     "", CONV_D3D10, API_RUNTIME, 17, HIP_UNSUPPORTED}},
+  {"cudaD3D10GetDevices",                                     {"hipD3D10GetDevices",                                     "", CONV_D3D10, API_RUNTIME, 18, HIP_UNSUPPORTED}},
   // cuGraphicsD3D10RegisterResource
-  {"cudaGraphicsD3D10RegisterResource",                       {"hipGraphicsD3D10RegisterResource",                       "", CONV_D3D10, API_RUNTIME, 17, HIP_UNSUPPORTED}},
+  {"cudaGraphicsD3D10RegisterResource",                       {"hipGraphicsD3D10RegisterResource",                       "", CONV_D3D10, API_RUNTIME, 18, HIP_UNSUPPORTED}},
 
-  // 18. Direct3D 10 Interoperability [DEPRECATED]
+  // 19. Direct3D 10 Interoperability [DEPRECATED]
   // cuD3D10GetDirect3DDevice
-  {"cudaD3D10GetDirect3DDevice",                              {"hipD3D10GetDirect3DDevice",                              "", CONV_D3D10, API_RUNTIME, 18, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cudaD3D10GetDirect3DDevice",                              {"hipD3D10GetDirect3DDevice",                              "", CONV_D3D10, API_RUNTIME, 19, HIP_UNSUPPORTED | DEPRECATED}},
   // cuD3D10MapResources
-  {"cudaD3D10MapResources",                                   {"hipD3D10MapResources",                                   "", CONV_D3D10, API_RUNTIME, 18, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cudaD3D10MapResources",                                   {"hipD3D10MapResources",                                   "", CONV_D3D10, API_RUNTIME, 19, HIP_UNSUPPORTED | DEPRECATED}},
   // cuD3D10RegisterResource
-  {"cudaD3D10RegisterResource",                               {"hipD3D10RegisterResource",                               "", CONV_D3D10, API_RUNTIME, 18, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cudaD3D10RegisterResource",                               {"hipD3D10RegisterResource",                               "", CONV_D3D10, API_RUNTIME, 19, HIP_UNSUPPORTED | DEPRECATED}},
   // cuD3D10ResourceGetMappedArray
-  {"cudaD3D10ResourceGetMappedArray",                         {"hipD3D10ResourceGetMappedArray",                         "", CONV_D3D10, API_RUNTIME, 18, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cudaD3D10ResourceGetMappedArray",                         {"hipD3D10ResourceGetMappedArray",                         "", CONV_D3D10, API_RUNTIME, 19, HIP_UNSUPPORTED | DEPRECATED}},
   // cuD3D10ResourceGetMappedPitch
-  {"cudaD3D10ResourceGetMappedPitch",                         {"hipD3D10ResourceGetMappedPitch",                         "", CONV_D3D10, API_RUNTIME, 18, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cudaD3D10ResourceGetMappedPitch",                         {"hipD3D10ResourceGetMappedPitch",                         "", CONV_D3D10, API_RUNTIME, 19, HIP_UNSUPPORTED | DEPRECATED}},
   // cuD3D10ResourceGetMappedPointer
-  {"cudaD3D10ResourceGetMappedPointer",                       {"hipD3D10ResourceGetMappedPointer",                       "", CONV_D3D10, API_RUNTIME, 18, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cudaD3D10ResourceGetMappedPointer",                       {"hipD3D10ResourceGetMappedPointer",                       "", CONV_D3D10, API_RUNTIME, 19, HIP_UNSUPPORTED | DEPRECATED}},
   // cuD3D10ResourceGetMappedSize
-  {"cudaD3D10ResourceGetMappedSize",                          {"hipD3D10ResourceGetMappedSize",                          "", CONV_D3D10, API_RUNTIME, 18, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cudaD3D10ResourceGetMappedSize",                          {"hipD3D10ResourceGetMappedSize",                          "", CONV_D3D10, API_RUNTIME, 19, HIP_UNSUPPORTED | DEPRECATED}},
   // cuD3D10ResourceGetSurfaceDimensions
-  {"cudaD3D10ResourceGetSurfaceDimensions",                   {"hipD3D10ResourceGetSurfaceDimensions",                   "", CONV_D3D10, API_RUNTIME, 18, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cudaD3D10ResourceGetSurfaceDimensions",                   {"hipD3D10ResourceGetSurfaceDimensions",                   "", CONV_D3D10, API_RUNTIME, 19, HIP_UNSUPPORTED | DEPRECATED}},
   // cuD3D10ResourceSetMapFlags
-  {"cudaD3D10ResourceSetMapFlags",                            {"hipD3D10ResourceSetMapFlags",                            "", CONV_D3D10, API_RUNTIME, 18, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cudaD3D10ResourceSetMapFlags",                            {"hipD3D10ResourceSetMapFlags",                            "", CONV_D3D10, API_RUNTIME, 19, HIP_UNSUPPORTED | DEPRECATED}},
   // no analogue
-  {"cudaD3D10SetDirect3DDevice",                              {"hipD3D10SetDirect3DDevice",                              "", CONV_D3D10, API_RUNTIME, 18, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cudaD3D10SetDirect3DDevice",                              {"hipD3D10SetDirect3DDevice",                              "", CONV_D3D10, API_RUNTIME, 19, HIP_UNSUPPORTED | DEPRECATED}},
   // cuD3D10UnmapResources
-  {"cudaD3D10UnmapResources",                                 {"hipD3D10UnmapResources",                                 "", CONV_D3D10, API_RUNTIME, 18, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cudaD3D10UnmapResources",                                 {"hipD3D10UnmapResources",                                 "", CONV_D3D10, API_RUNTIME, 19, HIP_UNSUPPORTED | DEPRECATED}},
   // cuD3D10UnregisterResource
-  {"cudaD3D10UnregisterResource",                             {"hipD3D10UnregisterResource",                             "", CONV_D3D10, API_RUNTIME, 18, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cudaD3D10UnregisterResource",                             {"hipD3D10UnregisterResource",                             "", CONV_D3D10, API_RUNTIME, 19, HIP_UNSUPPORTED | DEPRECATED}},
 
-  // 19. Direct3D 11 Interoperability
+  // 20. Direct3D 11 Interoperability
   // cuD3D11GetDevice
-  {"cudaD3D11GetDevice",                                      {"hipD3D11GetDevice",                                      "", CONV_D3D11, API_RUNTIME, 19, HIP_UNSUPPORTED}},
+  {"cudaD3D11GetDevice",                                      {"hipD3D11GetDevice",                                      "", CONV_D3D11, API_RUNTIME, 20, HIP_UNSUPPORTED}},
   // cuD3D11GetDevices
-  {"cudaD3D11GetDevices",                                     {"hipD3D11GetDevices",                                     "", CONV_D3D11, API_RUNTIME, 19, HIP_UNSUPPORTED}},
+  {"cudaD3D11GetDevices",                                     {"hipD3D11GetDevices",                                     "", CONV_D3D11, API_RUNTIME, 20, HIP_UNSUPPORTED}},
   // cuGraphicsD3D11RegisterResource
-  {"cudaGraphicsD3D11RegisterResource",                       {"hipGraphicsD3D11RegisterResource",                       "", CONV_D3D11, API_RUNTIME, 19, HIP_UNSUPPORTED}},
+  {"cudaGraphicsD3D11RegisterResource",                       {"hipGraphicsD3D11RegisterResource",                       "", CONV_D3D11, API_RUNTIME, 20, HIP_UNSUPPORTED}},
 
-  // 20. Direct3D 11 Interoperability [DEPRECATED]
+  // 21. Direct3D 11 Interoperability [DEPRECATED]
   // cuD3D11GetDirect3DDevice
-  {"cudaD3D11GetDirect3DDevice",                              {"hipD3D11GetDirect3DDevice",                              "", CONV_D3D11, API_RUNTIME, 20, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cudaD3D11GetDirect3DDevice",                              {"hipD3D11GetDirect3DDevice",                              "", CONV_D3D11, API_RUNTIME, 21, HIP_UNSUPPORTED | DEPRECATED}},
   // no analogue
-  {"cudaD3D11SetDirect3DDevice",                              {"hipD3D11SetDirect3DDevice",                              "", CONV_D3D11, API_RUNTIME, 20, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cudaD3D11SetDirect3DDevice",                              {"hipD3D11SetDirect3DDevice",                              "", CONV_D3D11, API_RUNTIME, 21, HIP_UNSUPPORTED | DEPRECATED}},
 
-  // 21. VDPAU Interoperability
+  // 22. VDPAU Interoperability
   // cuGraphicsVDPAURegisterOutputSurface
-  {"cudaGraphicsVDPAURegisterOutputSurface",                  {"hipGraphicsVDPAURegisterOutputSurface",                  "", CONV_VDPAU, API_RUNTIME, 21, HIP_UNSUPPORTED}},
+  {"cudaGraphicsVDPAURegisterOutputSurface",                  {"hipGraphicsVDPAURegisterOutputSurface",                  "", CONV_VDPAU, API_RUNTIME, 22, HIP_UNSUPPORTED}},
   // cuGraphicsVDPAURegisterVideoSurface
-  {"cudaGraphicsVDPAURegisterVideoSurface",                   {"hipGraphicsVDPAURegisterVideoSurface",                   "", CONV_VDPAU, API_RUNTIME, 21, HIP_UNSUPPORTED}},
+  {"cudaGraphicsVDPAURegisterVideoSurface",                   {"hipGraphicsVDPAURegisterVideoSurface",                   "", CONV_VDPAU, API_RUNTIME, 22, HIP_UNSUPPORTED}},
   // cuVDPAUGetDevice
-  {"cudaVDPAUGetDevice",                                      {"hipVDPAUGetDevice",                                      "", CONV_VDPAU, API_RUNTIME, 21, HIP_UNSUPPORTED}},
+  {"cudaVDPAUGetDevice",                                      {"hipVDPAUGetDevice",                                      "", CONV_VDPAU, API_RUNTIME, 22, HIP_UNSUPPORTED}},
   // no analogue
-  {"cudaVDPAUSetVDPAUDevice",                                 {"hipVDPAUSetDevice",                                      "", CONV_VDPAU, API_RUNTIME, 21, HIP_UNSUPPORTED}},
+  {"cudaVDPAUSetVDPAUDevice",                                 {"hipVDPAUSetDevice",                                      "", CONV_VDPAU, API_RUNTIME, 22, HIP_UNSUPPORTED}},
 
-  // 22. EGL Interoperability
+  // 23. EGL Interoperability
   // cuEGLStreamConsumerAcquireFrame
-  {"cudaEGLStreamConsumerAcquireFrame",                       {"hipEGLStreamConsumerAcquireFrame",                       "", CONV_EGL, API_RUNTIME, 22, HIP_UNSUPPORTED}},
+  {"cudaEGLStreamConsumerAcquireFrame",                       {"hipEGLStreamConsumerAcquireFrame",                       "", CONV_EGL, API_RUNTIME, 23, HIP_UNSUPPORTED}},
   // cuEGLStreamConsumerConnect
-  {"cudaEGLStreamConsumerConnect",                            {"hipEGLStreamConsumerConnect",                            "", CONV_EGL, API_RUNTIME, 22, HIP_UNSUPPORTED}},
+  {"cudaEGLStreamConsumerConnect",                            {"hipEGLStreamConsumerConnect",                            "", CONV_EGL, API_RUNTIME, 23, HIP_UNSUPPORTED}},
   // cuEGLStreamConsumerConnectWithFlags
-  {"cudaEGLStreamConsumerConnectWithFlags",                   {"hipEGLStreamConsumerConnectWithFlags",                   "", CONV_EGL, API_RUNTIME, 22, HIP_UNSUPPORTED}},
+  {"cudaEGLStreamConsumerConnectWithFlags",                   {"hipEGLStreamConsumerConnectWithFlags",                   "", CONV_EGL, API_RUNTIME, 23, HIP_UNSUPPORTED}},
   // cuEGLStreamConsumerDisconnect
-  {"cudaEGLStreamConsumerDisconnect",                         {"hipEGLStreamConsumerDisconnect",                         "", CONV_EGL, API_RUNTIME, 22, HIP_UNSUPPORTED}},
+  {"cudaEGLStreamConsumerDisconnect",                         {"hipEGLStreamConsumerDisconnect",                         "", CONV_EGL, API_RUNTIME, 23, HIP_UNSUPPORTED}},
   // cuEGLStreamConsumerReleaseFrame
-  {"cudaEGLStreamConsumerReleaseFrame",                       {"hipEGLStreamConsumerReleaseFrame",                       "", CONV_EGL, API_RUNTIME, 22, HIP_UNSUPPORTED}},
+  {"cudaEGLStreamConsumerReleaseFrame",                       {"hipEGLStreamConsumerReleaseFrame",                       "", CONV_EGL, API_RUNTIME, 23, HIP_UNSUPPORTED}},
   // cuEGLStreamProducerConnect
-  {"cudaEGLStreamProducerConnect",                            {"hipEGLStreamProducerConnect",                            "", CONV_EGL, API_RUNTIME, 22, HIP_UNSUPPORTED}},
+  {"cudaEGLStreamProducerConnect",                            {"hipEGLStreamProducerConnect",                            "", CONV_EGL, API_RUNTIME, 23, HIP_UNSUPPORTED}},
   // cuEGLStreamProducerDisconnect
-  {"cudaEGLStreamProducerDisconnect",                         {"hipEGLStreamProducerDisconnect",                         "", CONV_EGL, API_RUNTIME, 22, HIP_UNSUPPORTED}},
+  {"cudaEGLStreamProducerDisconnect",                         {"hipEGLStreamProducerDisconnect",                         "", CONV_EGL, API_RUNTIME, 23, HIP_UNSUPPORTED}},
   // cuEGLStreamProducerPresentFrame
-  {"cudaEGLStreamProducerPresentFrame",                       {"hipEGLStreamProducerPresentFrame",                       "", CONV_EGL, API_RUNTIME, 22, HIP_UNSUPPORTED}},
+  {"cudaEGLStreamProducerPresentFrame",                       {"hipEGLStreamProducerPresentFrame",                       "", CONV_EGL, API_RUNTIME, 23, HIP_UNSUPPORTED}},
   // cuEGLStreamProducerReturnFrame
-  {"cudaEGLStreamProducerReturnFrame",                        {"hipEGLStreamProducerReturnFrame",                        "", CONV_EGL, API_RUNTIME, 22, HIP_UNSUPPORTED}},
+  {"cudaEGLStreamProducerReturnFrame",                        {"hipEGLStreamProducerReturnFrame",                        "", CONV_EGL, API_RUNTIME, 23, HIP_UNSUPPORTED}},
   // cuEventCreateFromEGLSync
-  {"cudaEventCreateFromEGLSync",                              {"hipEventCreateFromEGLSync",                              "", CONV_EGL, API_RUNTIME, 22, HIP_UNSUPPORTED}},
+  {"cudaEventCreateFromEGLSync",                              {"hipEventCreateFromEGLSync",                              "", CONV_EGL, API_RUNTIME, 23, HIP_UNSUPPORTED}},
   // cuGraphicsEGLRegisterImage
-  {"cudaGraphicsEGLRegisterImage",                            {"hipGraphicsEGLRegisterImage",                            "", CONV_EGL, API_RUNTIME, 22, HIP_UNSUPPORTED}},
+  {"cudaGraphicsEGLRegisterImage",                            {"hipGraphicsEGLRegisterImage",                            "", CONV_EGL, API_RUNTIME, 23, HIP_UNSUPPORTED}},
   // cuGraphicsResourceGetMappedEglFrame
-  {"cudaGraphicsResourceGetMappedEglFrame",                   {"hipGraphicsResourceGetMappedEglFrame",                   "", CONV_EGL, API_RUNTIME, 22, HIP_UNSUPPORTED}},
+  {"cudaGraphicsResourceGetMappedEglFrame",                   {"hipGraphicsResourceGetMappedEglFrame",                   "", CONV_EGL, API_RUNTIME, 23, HIP_UNSUPPORTED}},
 
-  // 23. Graphics Interoperability
+  // 24. Graphics Interoperability
   // cuGraphicsMapResources
-  {"cudaGraphicsMapResources",                                {"hipGraphicsMapResources",                                "", CONV_GRAPHICS, API_RUNTIME, 23, HIP_UNSUPPORTED}},
+  {"cudaGraphicsMapResources",                                {"hipGraphicsMapResources",                                "", CONV_GRAPHICS, API_RUNTIME, 24, HIP_UNSUPPORTED}},
   // cuGraphicsResourceGetMappedMipmappedArray
-  {"cudaGraphicsResourceGetMappedMipmappedArray",             {"hipGraphicsResourceGetMappedMipmappedArray",             "", CONV_GRAPHICS, API_RUNTIME, 23, HIP_UNSUPPORTED}},
+  {"cudaGraphicsResourceGetMappedMipmappedArray",             {"hipGraphicsResourceGetMappedMipmappedArray",             "", CONV_GRAPHICS, API_RUNTIME, 24, HIP_UNSUPPORTED}},
   // cuGraphicsResourceGetMappedPointer
-  {"cudaGraphicsResourceGetMappedPointer",                    {"hipGraphicsResourceGetMappedPointer",                    "", CONV_GRAPHICS, API_RUNTIME, 23, HIP_UNSUPPORTED}},
+  {"cudaGraphicsResourceGetMappedPointer",                    {"hipGraphicsResourceGetMappedPointer",                    "", CONV_GRAPHICS, API_RUNTIME, 24, HIP_UNSUPPORTED}},
   // cuGraphicsResourceSetMapFlags
-  {"cudaGraphicsResourceSetMapFlags",                         {"hipGraphicsResourceSetMapFlags",                         "", CONV_GRAPHICS, API_RUNTIME, 23, HIP_UNSUPPORTED}},
+  {"cudaGraphicsResourceSetMapFlags",                         {"hipGraphicsResourceSetMapFlags",                         "", CONV_GRAPHICS, API_RUNTIME, 24, HIP_UNSUPPORTED}},
   // cuGraphicsSubResourceGetMappedArray
-  {"cudaGraphicsSubResourceGetMappedArray",                   {"hipGraphicsSubResourceGetMappedArray",                   "", CONV_GRAPHICS, API_RUNTIME, 23, HIP_UNSUPPORTED}},
+  {"cudaGraphicsSubResourceGetMappedArray",                   {"hipGraphicsSubResourceGetMappedArray",                   "", CONV_GRAPHICS, API_RUNTIME, 24, HIP_UNSUPPORTED}},
   // cuGraphicsUnmapResources
-  {"cudaGraphicsUnmapResources",                              {"hipGraphicsUnmapResources",                              "", CONV_GRAPHICS, API_RUNTIME, 23, HIP_UNSUPPORTED}},
+  {"cudaGraphicsUnmapResources",                              {"hipGraphicsUnmapResources",                              "", CONV_GRAPHICS, API_RUNTIME, 24, HIP_UNSUPPORTED}},
   // cuGraphicsUnregisterResource
-  {"cudaGraphicsUnregisterResource",                          {"hipGraphicsUnregisterResource",                          "", CONV_GRAPHICS, API_RUNTIME, 23, HIP_UNSUPPORTED}},
+  {"cudaGraphicsUnregisterResource",                          {"hipGraphicsUnregisterResource",                          "", CONV_GRAPHICS, API_RUNTIME, 24, HIP_UNSUPPORTED}},
 
-  // 24. Texture Reference Management [DEPRECATED]
+  // 25. Texture Reference Management [DEPRECATED]
   // no analogue
-  {"cudaBindTexture",                                         {"hipBindTexture",                                         "", CONV_TEXTURE, API_RUNTIME, 24, DEPRECATED}},
+  {"cudaBindTexture",                                         {"hipBindTexture",                                         "", CONV_TEXTURE, API_RUNTIME, 25, DEPRECATED}},
   // no analogue
-  {"cudaBindTexture2D",                                       {"hipBindTexture2D",                                       "", CONV_TEXTURE, API_RUNTIME, 24, DEPRECATED}},
+  {"cudaBindTexture2D",                                       {"hipBindTexture2D",                                       "", CONV_TEXTURE, API_RUNTIME, 25, DEPRECATED}},
   // no analogue
-  {"cudaBindTextureToArray",                                  {"hipBindTextureToArray",                                  "", CONV_TEXTURE, API_RUNTIME, 24, DEPRECATED}},
+  {"cudaBindTextureToArray",                                  {"hipBindTextureToArray",                                  "", CONV_TEXTURE, API_RUNTIME, 25, DEPRECATED}},
   // no analogue
   // NOTE: Unsupported yet on NVCC path
-  {"cudaBindTextureToMipmappedArray",                         {"hipBindTextureToMipmappedArray",                         "", CONV_TEXTURE, API_RUNTIME, 24, DEPRECATED}},
+  {"cudaBindTextureToMipmappedArray",                         {"hipBindTextureToMipmappedArray",                         "", CONV_TEXTURE, API_RUNTIME, 25, DEPRECATED}},
   // no analogue
-  {"cudaCreateChannelDesc",                                   {"hipCreateChannelDesc",                                   "", CONV_TEXTURE, API_RUNTIME, 24}},
+  {"cudaCreateChannelDesc",                                   {"hipCreateChannelDesc",                                   "", CONV_TEXTURE, API_RUNTIME, 25}},
   // no analogue
-  {"cudaGetChannelDesc",                                      {"hipGetChannelDesc",                                      "", CONV_TEXTURE, API_RUNTIME, 24}},
+  {"cudaGetChannelDesc",                                      {"hipGetChannelDesc",                                      "", CONV_TEXTURE, API_RUNTIME, 25}},
   // no analogue
-  {"cudaGetTextureAlignmentOffset",                           {"hipGetTextureAlignmentOffset",                           "", CONV_TEXTURE, API_RUNTIME, 24, DEPRECATED}},
+  {"cudaGetTextureAlignmentOffset",                           {"hipGetTextureAlignmentOffset",                           "", CONV_TEXTURE, API_RUNTIME, 25, DEPRECATED}},
   // TODO: double check cuModuleGetTexRef
   // NOTE: Unsupported yet on NVCC path
-  {"cudaGetTextureReference",                                 {"hipGetTextureReference",                                 "", CONV_TEXTURE, API_RUNTIME, 24, DEPRECATED}},
+  {"cudaGetTextureReference",                                 {"hipGetTextureReference",                                 "", CONV_TEXTURE, API_RUNTIME, 25, DEPRECATED}},
   // no analogue
-  {"cudaUnbindTexture",                                       {"hipUnbindTexture",                                       "", CONV_TEXTURE, API_RUNTIME, 24, DEPRECATED}},
+  {"cudaUnbindTexture",                                       {"hipUnbindTexture",                                       "", CONV_TEXTURE, API_RUNTIME, 25, DEPRECATED}},
 
-  // 25. Surface Reference Management [DEPRECATED]
+  // 26. Surface Reference Management [DEPRECATED]
   // no analogue
-  {"cudaBindSurfaceToArray",                                  {"hipBindSurfaceToArray",                                  "", CONV_SURFACE, API_RUNTIME, 25, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cudaBindSurfaceToArray",                                  {"hipBindSurfaceToArray",                                  "", CONV_SURFACE, API_RUNTIME, 26, HIP_UNSUPPORTED | DEPRECATED}},
   // TODO: double check cuModuleGetSurfRef
-  {"cudaGetSurfaceReference",                                 {"hipGetSurfaceReference",                                 "", CONV_SURFACE, API_RUNTIME, 25, HIP_UNSUPPORTED | DEPRECATED}},
+  {"cudaGetSurfaceReference",                                 {"hipGetSurfaceReference",                                 "", CONV_SURFACE, API_RUNTIME, 26, HIP_UNSUPPORTED | DEPRECATED}},
 
-  // 26. Texture Object Management
+  // 27. Texture Object Management
   // no analogue
   // NOTE: Not equal to cuTexObjectCreate due to different signatures
-  {"cudaCreateTextureObject",                                 {"hipCreateTextureObject",                                 "", CONV_TEXTURE, API_RUNTIME, 26}},
+  {"cudaCreateTextureObject",                                 {"hipCreateTextureObject",                                 "", CONV_TEXTURE, API_RUNTIME, 27}},
   // cuTexObjectDestroy
-  {"cudaDestroyTextureObject",                                {"hipDestroyTextureObject",                                "", CONV_TEXTURE, API_RUNTIME, 26}},
+  {"cudaDestroyTextureObject",                                {"hipDestroyTextureObject",                                "", CONV_TEXTURE, API_RUNTIME, 27}},
   // no analogue
   // NOTE: Not equal to cuTexObjectGetResourceDesc due to different signatures
-  {"cudaGetTextureObjectResourceDesc",                        {"hipGetTextureObjectResourceDesc",                        "", CONV_TEXTURE, API_RUNTIME, 26}},
+  {"cudaGetTextureObjectResourceDesc",                        {"hipGetTextureObjectResourceDesc",                        "", CONV_TEXTURE, API_RUNTIME, 27}},
   // cuTexObjectGetResourceViewDesc
-  {"cudaGetTextureObjectResourceViewDesc",                    {"hipGetTextureObjectResourceViewDesc",                    "", CONV_TEXTURE, API_RUNTIME, 26}},
+  {"cudaGetTextureObjectResourceViewDesc",                    {"hipGetTextureObjectResourceViewDesc",                    "", CONV_TEXTURE, API_RUNTIME, 27}},
   // no analogue
   // NOTE: Not equal to cudaGetTextureObjectTextureDesc due to different signatures
-  {"cuTexObjectGetTextureDesc",                               {"hipGetTextureObjectTextureDesc",                         "", CONV_TEXTURE, API_RUNTIME, 26}},
+  {"cuTexObjectGetTextureDesc",                               {"hipGetTextureObjectTextureDesc",                         "", CONV_TEXTURE, API_RUNTIME, 27}},
 
-  // 27. Surface Object Management
+  // 28. Surface Object Management
   // no analogue
   // NOTE: Not equal to cuSurfObjectCreate due to different signatures
-  {"cudaCreateSurfaceObject",                                 {"hipCreateSurfaceObject",                                 "", CONV_SURFACE, API_RUNTIME, 27}},
+  {"cudaCreateSurfaceObject",                                 {"hipCreateSurfaceObject",                                 "", CONV_SURFACE, API_RUNTIME, 28}},
   // cuSurfObjectDestroy
-  {"cudaDestroySurfaceObject",                                {"hipDestroySurfaceObject",                                "", CONV_SURFACE, API_RUNTIME, 27}},
+  {"cudaDestroySurfaceObject",                                {"hipDestroySurfaceObject",                                "", CONV_SURFACE, API_RUNTIME, 28}},
   // no analogue
   // NOTE: Not equal to cuSurfObjectGetResourceDesc due to different signatures
-  {"cudaGetSurfaceObjectResourceDesc",                        {"hipGetSurfaceObjectResourceDesc",                        "", CONV_SURFACE, API_RUNTIME, 27, HIP_UNSUPPORTED}},
+  {"cudaGetSurfaceObjectResourceDesc",                        {"hipGetSurfaceObjectResourceDesc",                        "", CONV_SURFACE, API_RUNTIME, 28, HIP_UNSUPPORTED}},
 
-  // 28. Version Management
+  // 29. Version Management
   // cuDriverGetVersion
-  {"cudaDriverGetVersion",                                    {"hipDriverGetVersion",                                    "", CONV_VERSION, API_RUNTIME, 28}},
+  {"cudaDriverGetVersion",                                    {"hipDriverGetVersion",                                    "", CONV_VERSION, API_RUNTIME, 29}},
   // no analogue
-  {"cudaRuntimeGetVersion",                                   {"hipRuntimeGetVersion",                                   "", CONV_VERSION, API_RUNTIME, 28}},
+  {"cudaRuntimeGetVersion",                                   {"hipRuntimeGetVersion",                                   "", CONV_VERSION, API_RUNTIME, 29}},
 
-  // 29. Graph Management
+  // 30. Graph Management
   // cuGraphAddChildGraphNode
-  {"cudaGraphAddChildGraphNode",                              {"hipGraphAddChildGraphNode",                              "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphAddChildGraphNode",                              {"hipGraphAddChildGraphNode",                              "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphAddDependencies
-  {"cudaGraphAddDependencies",                                {"hipGraphAddDependencies",                                "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphAddDependencies",                                {"hipGraphAddDependencies",                                "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphAddEmptyNode
-  {"cudaGraphAddEmptyNode",                                   {"hipGraphAddEmptyNode",                                   "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphAddEmptyNode",                                   {"hipGraphAddEmptyNode",                                   "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphAddHostNode
-  {"cudaGraphAddHostNode",                                    {"hipGraphAddHostNode",                                    "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphAddHostNode",                                    {"hipGraphAddHostNode",                                    "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphAddKernelNode
-  {"cudaGraphAddKernelNode",                                  {"hipGraphAddKernelNode",                                  "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphAddKernelNode",                                  {"hipGraphAddKernelNode",                                  "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphAddMemcpyNode
-  {"cudaGraphAddMemcpyNode",                                  {"hipGraphAddMemcpyNode",                                  "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphAddMemcpyNode",                                  {"hipGraphAddMemcpyNode",                                  "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphAddMemsetNode
-  {"cudaGraphAddMemsetNode",                                  {"hipGraphAddMemsetNode",                                  "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphAddMemsetNode",                                  {"hipGraphAddMemsetNode",                                  "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphChildGraphNodeGetGraph
-  {"cudaGraphChildGraphNodeGetGraph",                         {"hipGraphChildGraphNodeGetGraph",                         "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphChildGraphNodeGetGraph",                         {"hipGraphChildGraphNodeGetGraph",                         "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphClone
-  {"cudaGraphClone",                                          {"hipGraphClone",                                          "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphClone",                                          {"hipGraphClone",                                          "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphCreate
-  {"cudaGraphCreate",                                         {"hipGraphCreate",                                         "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphCreate",                                         {"hipGraphCreate",                                         "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphDestroy
-  {"cudaGraphDestroy",                                        {"hipGraphDestroy",                                        "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphDestroy",                                        {"hipGraphDestroy",                                        "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphDestroyNode
-  {"cudaGraphDestroyNode",                                    {"hipGraphDestroyNode",                                    "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphDestroyNode",                                    {"hipGraphDestroyNode",                                    "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphExecDestroy
-  {"cudaGraphExecDestroy",                                    {"hipGraphExecDestroy",                                    "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphExecDestroy",                                    {"hipGraphExecDestroy",                                    "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphGetEdges
-  {"cudaGraphGetEdges",                                       {"hipGraphGetEdges",                                       "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphGetEdges",                                       {"hipGraphGetEdges",                                       "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphGetNodes
-  {"cudaGraphGetNodes",                                       {"hipGraphGetNodes",                                       "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphGetNodes",                                       {"hipGraphGetNodes",                                       "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphGetRootNodes
-  {"cudaGraphGetRootNodes",                                   {"hipGraphGetRootNodes",                                   "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphGetRootNodes",                                   {"hipGraphGetRootNodes",                                   "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphHostNodeGetParams
-  {"cudaGraphHostNodeGetParams",                              {"hipGraphHostNodeGetParams",                              "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphHostNodeGetParams",                              {"hipGraphHostNodeGetParams",                              "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphHostNodeSetParams
-  {"cudaGraphHostNodeSetParams",                              {"hipGraphHostNodeSetParams",                              "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphHostNodeSetParams",                              {"hipGraphHostNodeSetParams",                              "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphInstantiate
-  {"cudaGraphInstantiate",                                    {"hipGraphInstantiate",                                    "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphInstantiate",                                    {"hipGraphInstantiate",                                    "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphKernelNodeCopyAttributes
-  {"cudaGraphKernelNodeCopyAttributes",                       {"hipGraphKernelNodeCopyAttributes",                       "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphKernelNodeCopyAttributes",                       {"hipGraphKernelNodeCopyAttributes",                       "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphKernelNodeGetAttribute
-  {"cudaGraphKernelNodeGetAttribute",                         {"hipGraphKernelNodeGetAttribute",                         "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphKernelNodeGetAttribute",                         {"hipGraphKernelNodeGetAttribute",                         "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphKernelNodeSetAttribute
-  {"cudaGraphKernelNodeSetAttribute",                         {"hipGraphKernelNodeSetAttribute",                         "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphKernelNodeSetAttribute",                         {"hipGraphKernelNodeSetAttribute",                         "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphExecKernelNodeSetParams
-  {"cudaGraphExecKernelNodeSetParams",                        {"hipGraphExecKernelNodeSetParams",                        "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphExecKernelNodeSetParams",                        {"hipGraphExecKernelNodeSetParams",                        "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphExecMemcpyNodeSetParams
-  {"cudaGraphExecMemcpyNodeSetParams",                        {"hipGraphExecMemcpyNodeSetParams",                        "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphExecMemcpyNodeSetParams",                        {"hipGraphExecMemcpyNodeSetParams",                        "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphExecMemsetNodeSetParams
-  {"cudaGraphExecMemsetNodeSetParams",                        {"hipGraphExecMemsetNodeSetParams",                        "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphExecMemsetNodeSetParams",                        {"hipGraphExecMemsetNodeSetParams",                        "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphExecHostNodeSetParams
-  {"cudaGraphExecHostNodeSetParams",                          {"hipGraphExecHostNodeSetParams",                          "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphExecHostNodeSetParams",                          {"hipGraphExecHostNodeSetParams",                          "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphExecUpdate
-  {"cudaGraphExecUpdate",                                     {"hipGraphExecUpdate",                                     "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphExecUpdate",                                     {"hipGraphExecUpdate",                                     "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphKernelNodeGetParams
-  {"cudaGraphKernelNodeGetParams",                            {"hipGraphKernelNodeGetParams",                            "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphKernelNodeGetParams",                            {"hipGraphKernelNodeGetParams",                            "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphKernelNodeSetParams
-  {"cudaGraphKernelNodeSetParams",                            {"hipGraphKernelNodeSetParams",                            "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphKernelNodeSetParams",                            {"hipGraphKernelNodeSetParams",                            "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphLaunch
-  {"cudaGraphLaunch",                                         {"hipGraphLaunch",                                         "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphLaunch",                                         {"hipGraphLaunch",                                         "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphMemcpyNodeGetParams
-  {"cudaGraphMemcpyNodeGetParams",                            {"hipGraphMemcpyNodeGetParams",                            "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphMemcpyNodeGetParams",                            {"hipGraphMemcpyNodeGetParams",                            "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphMemcpyNodeSetParams
-  {"cudaGraphMemcpyNodeSetParams",                            {"hipGraphMemcpyNodeSetParams",                            "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphMemcpyNodeSetParams",                            {"hipGraphMemcpyNodeSetParams",                            "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphMemsetNodeGetParams
-  {"cudaGraphMemsetNodeGetParams",                            {"hipGraphMemsetNodeGetParams",                            "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphMemsetNodeGetParams",                            {"hipGraphMemsetNodeGetParams",                            "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphMemsetNodeSetParams
-  {"cudaGraphMemsetNodeSetParams",                            {"hipGraphMemsetNodeSetParams",                            "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphMemsetNodeSetParams",                            {"hipGraphMemsetNodeSetParams",                            "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphNodeFindInClone
-  {"cudaGraphNodeFindInClone",                                {"hipGraphNodeFindInClone",                                "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphNodeFindInClone",                                {"hipGraphNodeFindInClone",                                "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphNodeGetDependencies
-  {"cudaGraphNodeGetDependencies",                            {"hipGraphNodeGetDependencies",                            "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphNodeGetDependencies",                            {"hipGraphNodeGetDependencies",                            "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphNodeGetDependentNodes
-  {"cudaGraphNodeGetDependentNodes",                          {"hipGraphNodeGetDependentNodes",                          "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphNodeGetDependentNodes",                          {"hipGraphNodeGetDependentNodes",                          "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphNodeGetType
-  {"cudaGraphNodeGetType",                                    {"hipGraphNodeGetType",                                    "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphNodeGetType",                                    {"hipGraphNodeGetType",                                    "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphRemoveDependencies
-  {"cudaGraphRemoveDependencies",                             {"hipGraphRemoveDependencies",                             "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphRemoveDependencies",                             {"hipGraphRemoveDependencies",                             "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // no analogue
-  {"cudaGraphAddMemcpyNodeToSymbol",                          {"hipGraphAddMemcpyNodeToSymbol",                          "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphAddMemcpyNodeToSymbol",                          {"hipGraphAddMemcpyNodeToSymbol",                          "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // no analogue
-  {"cudaGraphAddMemcpyNodeFromSymbol",                        {"hipGraphAddMemcpyNodeFromSymbol",                        "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphAddMemcpyNodeFromSymbol",                        {"hipGraphAddMemcpyNodeFromSymbol",                        "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // no analogue
-  {"cudaGraphAddMemcpyNode1D",                                {"hipGraphAddMemcpyNode1D",                                "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphAddMemcpyNode1D",                                {"hipGraphAddMemcpyNode1D",                                "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // no analogue
-  {"cudaGraphMemcpyNodeSetParamsToSymbol",                    {"hipGraphMemcpyNodeSetParamsToSymbol",                    "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphMemcpyNodeSetParamsToSymbol",                    {"hipGraphMemcpyNodeSetParamsToSymbol",                    "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // no analogue
-  {"cudaGraphMemcpyNodeSetParamsFromSymbol",                  {"hipGraphMemcpyNodeSetParamsFromSymbol",                  "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphMemcpyNodeSetParamsFromSymbol",                  {"hipGraphMemcpyNodeSetParamsFromSymbol",                  "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // no analogue
-  {"cudaGraphMemcpyNodeSetParams1D",                          {"hipGraphMemcpyNodeSetParams1D",                          "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphMemcpyNodeSetParams1D",                          {"hipGraphMemcpyNodeSetParams1D",                          "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphAddEventRecordNode
-  {"cudaGraphAddEventRecordNode",                             {"hipGraphAddEventRecordNode",                             "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphAddEventRecordNode",                             {"hipGraphAddEventRecordNode",                             "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphEventRecordNodeGetEvent
-  {"cudaGraphEventRecordNodeGetEvent",                        {"hipGraphEventRecordNodeGetEvent",                        "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphEventRecordNodeGetEvent",                        {"hipGraphEventRecordNodeGetEvent",                        "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphEventRecordNodeSetEvent
-  {"cudaGraphEventRecordNodeSetEvent",                        {"hipGraphEventRecordNodeSetEvent",                        "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphEventRecordNodeSetEvent",                        {"hipGraphEventRecordNodeSetEvent",                        "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphAddEventWaitNode
-  {"cudaGraphAddEventWaitNode",                               {"hipGraphAddEventWaitNode",                               "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphAddEventWaitNode",                               {"hipGraphAddEventWaitNode",                               "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphEventWaitNodeGetEvent
-  {"cudaGraphEventWaitNodeGetEvent",                          {"hipGraphEventWaitNodeGetEvent",                          "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphEventWaitNodeGetEvent",                          {"hipGraphEventWaitNodeGetEvent",                          "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphEventWaitNodeSetEvent
-  {"cudaGraphEventWaitNodeSetEvent",                          {"hipGraphEventWaitNodeSetEvent",                          "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphEventWaitNodeSetEvent",                          {"hipGraphEventWaitNodeSetEvent",                          "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // no analogue
-  {"cudaGraphExecMemcpyNodeSetParamsToSymbol",                {"hipGraphExecMemcpyNodeSetParamsToSymbol",                "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphExecMemcpyNodeSetParamsToSymbol",                {"hipGraphExecMemcpyNodeSetParamsToSymbol",                "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // no analogue
-  {"cudaGraphExecMemcpyNodeSetParamsFromSymbol",              {"hipGraphExecMemcpyNodeSetParamsFromSymbol",              "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphExecMemcpyNodeSetParamsFromSymbol",              {"hipGraphExecMemcpyNodeSetParamsFromSymbol",              "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // no analogue
-  {"cudaGraphExecMemcpyNodeSetParams1D",                      {"hipGraphExecMemcpyNodeSetParams1D",                      "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphExecMemcpyNodeSetParams1D",                      {"hipGraphExecMemcpyNodeSetParams1D",                      "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphExecChildGraphNodeSetParams
-  {"cudaGraphExecChildGraphNodeSetParams",                    {"hipGraphExecChildGraphNodeSetParams",                    "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphExecChildGraphNodeSetParams",                    {"hipGraphExecChildGraphNodeSetParams",                    "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphExecEventRecordNodeSetEvent
-  {"cudaGraphExecEventRecordNodeSetEvent",                    {"hipGraphExecEventRecordNodeSetEvent",                    "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphExecEventRecordNodeSetEvent",                    {"hipGraphExecEventRecordNodeSetEvent",                    "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphExecEventWaitNodeSetEvent
-  {"cudaGraphExecEventWaitNodeSetEvent",                      {"hipGraphExecEventWaitNodeSetEvent",                      "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphExecEventWaitNodeSetEvent",                      {"hipGraphExecEventWaitNodeSetEvent",                      "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphUpload
-  {"cudaGraphUpload",                                         {"hipGraphUpload",                                         "", CONV_GRAPH, API_RUNTIME, 29, HIP_UNSUPPORTED}},
+  {"cudaGraphUpload",                                         {"hipGraphUpload",                                         "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
+  // cuGraphAddExternalSemaphoresSignalNode
+  {"cudaGraphAddExternalSemaphoresSignalNode",                {"hipGraphAddExternalSemaphoresSignalNode",                "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
+  // cuGraphExternalSemaphoresSignalNodeGetParams
+  {"cudaGraphExternalSemaphoresSignalNodeGetParams",          {"hipGraphExternalSemaphoresSignalNodeGetParams",          "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
+  // cuGraphExternalSemaphoresSignalNodeSetParams
+  {"cudaGraphExternalSemaphoresSignalNodeSetParams",          {"hipGraphExternalSemaphoresSignalNodeSetParams",          "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
+  // cuGraphAddExternalSemaphoresWaitNode
+  {"cudaGraphAddExternalSemaphoresWaitNode",                  {"hipGraphAddExternalSemaphoresWaitNode",                  "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
+  // cuGraphExternalSemaphoresWaitNodeGetParams
+  {"cudaGraphExternalSemaphoresWaitNodeGetParams",            {"hipGraphExternalSemaphoresWaitNodeGetParams",            "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
+  // cuGraphExternalSemaphoresWaitNodeSetParams
+  {"cudaGraphExternalSemaphoresWaitNodeSetParams",            {"hipGraphExternalSemaphoresWaitNodeSetParams",            "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
+  // cuGraphExecExternalSemaphoresSignalNodeSetParams
+  {"cudaGraphExecExternalSemaphoresSignalNodeSetParams",      {"hipGraphExecExternalSemaphoresSignalNodeSetParams",      "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
+  // cuGraphExecExternalSemaphoresWaitNodeSetParams
+  {"cudaGraphExecExternalSemaphoresWaitNodeSetParams",        {"hipGraphExecExternalSemaphoresWaitNodeSetParams",        "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
 
-  // 30. C++ API Routines
+  // 31. C++ API Routines
   // TODO
 
-  // 31. Interactions with the CUDA Driver API
-  {"cudaGetFuncBySymbol",                                     {"hipGetFuncBySymbol",                                     "", CONV_INTERACTION, API_RUNTIME, 31, HIP_UNSUPPORTED}},
+  // 32. Interactions with the CUDA Driver API
+  {"cudaGetFuncBySymbol",                                     {"hipGetFuncBySymbol",                                     "", CONV_INTERACTION, API_RUNTIME, 32, HIP_UNSUPPORTED}},
 
-  // 32. Profiler Control [DEPRECATED]
+  // 33. Profiler Control [DEPRECATED]
   // cuProfilerInitialize
-  {"cudaProfilerInitialize",                                  {"hipProfilerInitialize",                                  "", CONV_PROFILER, API_RUNTIME, 32, HIP_UNSUPPORTED}},
+  {"cudaProfilerInitialize",                                  {"hipProfilerInitialize",                                  "", CONV_PROFILER, API_RUNTIME, 33, HIP_UNSUPPORTED}},
 
-  // 33. Profiler Control
+  // 34. Profiler Control
   // cuProfilerStart
-  {"cudaProfilerStart",                                       {"hipProfilerStart",                                       "", CONV_PROFILER, API_RUNTIME, 33}},
+  {"cudaProfilerStart",                                       {"hipProfilerStart",                                       "", CONV_PROFILER, API_RUNTIME, 34}},
   // cuProfilerStop
-  {"cudaProfilerStop",                                        {"hipProfilerStop",                                        "", CONV_PROFILER, API_RUNTIME, 33}},
+  {"cudaProfilerStop",                                        {"hipProfilerStop",                                        "", CONV_PROFILER, API_RUNTIME, 34}},
 
-  // 34. Data types used by CUDA Runtime
+  // 35. Data types used by CUDA Runtime
   // NOTE: in a separate file
 
-  // 35. Execution Control [REMOVED]
+  // 36. Execution Control [REMOVED]
   // NOTE: Removed in CUDA 10.1
   // no analogue
-  {"cudaConfigureCall",                                       {"hipConfigureCall",                                       "", CONV_EXECUTION, API_RUNTIME, 35, REMOVED}},
+  {"cudaConfigureCall",                                       {"hipConfigureCall",                                       "", CONV_EXECUTION, API_RUNTIME, 36, REMOVED}},
   // no analogue
   // NOTE: Not equal to cuLaunch due to different signatures
-  {"cudaLaunch",                                              {"hipLaunchByPtr",                                         "", CONV_EXECUTION, API_RUNTIME, 35, REMOVED}},
+  {"cudaLaunch",                                              {"hipLaunchByPtr",                                         "", CONV_EXECUTION, API_RUNTIME, 36, REMOVED}},
   // no analogue
-  {"cudaSetupArgument",                                       {"hipSetupArgument",                                       "", CONV_EXECUTION, API_RUNTIME, 35, REMOVED}},
+  {"cudaSetupArgument",                                       {"hipSetupArgument",                                       "", CONV_EXECUTION, API_RUNTIME, 36, REMOVED}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_FUNCTION_VER_MAP {
@@ -930,6 +986,32 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_FUNCTION_VER_MAP {
   {"cudaGraphExecEventRecordNodeSetEvent",                    {CUDA_111, CUDA_0,   CUDA_0  }},
   {"cudaGraphExecEventWaitNodeSetEvent",                      {CUDA_111, CUDA_0,   CUDA_0  }},
   {"cudaGraphUpload",                                         {CUDA_111, CUDA_0,   CUDA_0  }},
+  {"cudaMallocAsync",                                         {CUDA_112, CUDA_0,   CUDA_0  }},
+  {"cudaFreeAsync",                                           {CUDA_112, CUDA_0,   CUDA_0  }},
+  {"cudaMallocFromPoolAsync",                                 {CUDA_112, CUDA_0,   CUDA_0  }},
+  {"cudaDeviceGetDefaultMemPool",                             {CUDA_112, CUDA_0,   CUDA_0  }},
+  {"cudaDeviceSetMemPool",                                    {CUDA_112, CUDA_0,   CUDA_0  }},
+  {"cudaDeviceGetMemPool",                                    {CUDA_112, CUDA_0,   CUDA_0  }},
+  {"cudaArrayGetPlane",                                       {CUDA_112, CUDA_0,   CUDA_0  }},
+  {"cudaMemPoolTrimTo",                                       {CUDA_112, CUDA_0,   CUDA_0  }},
+  {"cudaMemPoolSetAttribute",                                 {CUDA_112, CUDA_0,   CUDA_0  }},
+  {"cudaMemPoolGetAttribute",                                 {CUDA_112, CUDA_0,   CUDA_0  }},
+  {"cudaMemPoolSetAccess",                                    {CUDA_112, CUDA_0,   CUDA_0  }},
+  {"cudaMemPoolGetAccess",                                    {CUDA_112, CUDA_0,   CUDA_0  }},
+  {"cudaMemPoolCreate",                                       {CUDA_112, CUDA_0,   CUDA_0  }},
+  {"cudaMemPoolDestroy",                                      {CUDA_112, CUDA_0,   CUDA_0  }},
+  {"cudaMemPoolExportToShareableHandle",                      {CUDA_112, CUDA_0,   CUDA_0  }},
+  {"cudaMemPoolImportFromShareableHandle",                    {CUDA_112, CUDA_0,   CUDA_0  }},
+  {"cudaMemPoolExportPointer",                                {CUDA_112, CUDA_0,   CUDA_0  }},
+  {"cudaMemPoolImportPointer",                                {CUDA_112, CUDA_0,   CUDA_0  }},
+  {"cudaGraphAddExternalSemaphoresSignalNode",                {CUDA_112, CUDA_0,   CUDA_0  }},
+  {"cudaGraphExternalSemaphoresSignalNodeGetParams",          {CUDA_112, CUDA_0,   CUDA_0  }},
+  {"cudaGraphExternalSemaphoresSignalNodeSetParams",          {CUDA_112, CUDA_0,   CUDA_0  }},
+  {"cudaGraphAddExternalSemaphoresWaitNode",                  {CUDA_112, CUDA_0,   CUDA_0  }},
+  {"cudaGraphExternalSemaphoresWaitNodeGetParams",            {CUDA_112, CUDA_0,   CUDA_0  }},
+  {"cudaGraphExternalSemaphoresWaitNodeSetParams",            {CUDA_112, CUDA_0,   CUDA_0  }},
+  {"cudaGraphExecExternalSemaphoresSignalNodeSetParams",      {CUDA_112, CUDA_0,   CUDA_0  }},
+  {"cudaGraphExecExternalSemaphoresWaitNodeSetParams",        {CUDA_112, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP {
@@ -946,29 +1028,30 @@ const std::map<unsigned int, llvm::StringRef> CUDA_RUNTIME_API_SECTION_MAP {
   {8, "Occupancy"},
   {9, "Memory Management"},
   {10, "Memory Management [DEPRECATED]"},
-  {11, "Unified Addressing"},
-  {12, "Peer Device Memory Access"},
-  {13, "OpenGL Interoperability"},
-  {14, "OpenGL Interoperability [DEPRECATED]"},
-  {15, "Direct3D 9 Interoperability"},
-  {16, "Direct3D 9 Interoperability [DEPRECATED]"},
-  {17, "Direct3D 10 Interoperability"},
-  {18, "Direct3D 10 Interoperability [DEPRECATED]"},
-  {19, "Direct3D 11 Interoperability"},
-  {20, "Direct3D 11 Interoperability [DEPRECATED]"},
-  {21, "VDPAU Interoperability"},
-  {22, "EGL Interoperability"},
-  {23, "Graphics Interoperability"},
-  {24, "Texture Reference Management [DEPRECATED]"},
-  {25, "Surface Reference Management [DEPRECATED]"},
-  {26, "Texture Object Management"},
-  {27, "Surface Object Management"},
-  {28, "Version Management"},
-  {29, "Graph Management"},
-  {30, "C++ API Routines"},
-  {31, "Interactions with the CUDA Driver API"},
-  {32, "Profiler Control [DEPRECATED]"},
-  {33, "Profiler Control"},
-  {34, "Data types used by CUDA Runtime"},
-  {35, "Execution Control [REMOVED]"},
+  {11, "Stream Ordered Memory Allocator"},
+  {12, "Unified Addressing"},
+  {13, "Peer Device Memory Access"},
+  {14, "OpenGL Interoperability"},
+  {15, "OpenGL Interoperability [DEPRECATED]"},
+  {16, "Direct3D 9 Interoperability"},
+  {17, "Direct3D 9 Interoperability [DEPRECATED]"},
+  {18, "Direct3D 10 Interoperability"},
+  {19, "Direct3D 10 Interoperability [DEPRECATED]"},
+  {20, "Direct3D 11 Interoperability"},
+  {21, "Direct3D 11 Interoperability [DEPRECATED]"},
+  {22, "VDPAU Interoperability"},
+  {23, "EGL Interoperability"},
+  {24, "Graphics Interoperability"},
+  {25, "Texture Reference Management [DEPRECATED]"},
+  {26, "Surface Reference Management [DEPRECATED]"},
+  {27, "Texture Object Management"},
+  {28, "Surface Object Management"},
+  {29, "Version Management"},
+  {30, "Graph Management"},
+  {31, "C++ API Routines"},
+  {32, "Interactions with the CUDA Driver API"},
+  {33, "Profiler Control [DEPRECATED]"},
+  {34, "Profiler Control"},
+  {35, "Data types used by CUDA Runtime"},
+  {36, "Execution Control [REMOVED]"},
 };
