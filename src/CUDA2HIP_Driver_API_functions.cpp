@@ -61,11 +61,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuDeviceTotalMem_v2",                                  {"hipDeviceTotalMem",                                       "", CONV_DEVICE, API_DRIVER, 5}},
   // cudaDeviceGetTexture1DLinearMaxWidth
   {"cuDeviceGetTexture1DLinearMaxWidth",                   {"hipDeviceGetTexture1DLinearMaxWidth",                     "", CONV_DEVICE, API_DRIVER, 5, HIP_UNSUPPORTED}},
-  //
+  // cudaDeviceSetMemPool
   {"cuDeviceSetMemPool",                                   {"hipDeviceSetMemPool",                                     "", CONV_DEVICE, API_DRIVER, 5, HIP_UNSUPPORTED}},
-  //
+  // cudaDeviceGetMemPool
   {"cuDeviceGetMemPool",                                   {"hipDeviceGetMemPool",                                     "", CONV_DEVICE, API_DRIVER, 5, HIP_UNSUPPORTED}},
-  //
+  // cudaDeviceGetDefaultMemPool
   {"cuDeviceGetDefaultMemPool",                            {"hipDeviceGetDefaultMemPool",                              "", CONV_DEVICE, API_DRIVER, 5, HIP_UNSUPPORTED}},
 
   // 6. Device Management [DEPRECATED]
@@ -326,7 +326,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuMipmappedArrayGetLevel",                             {"hipMipmappedArrayGetLevel",                               "", CONV_MEMORY, API_DRIVER, 11}},
   // cudaArrayGetSparseProperties
   {"cuArrayGetSparseProperties",                           {"hipArrayGetSparseProperties",                             "", CONV_MEMORY, API_DRIVER, 11, HIP_UNSUPPORTED}},
-  //
+  // cudaArrayGetPlane
   {"cuArrayGetPlane",                                      {"hipArrayGetPlane",                                        "", CONV_MEMORY, API_DRIVER, 11, HIP_UNSUPPORTED}},
 
   // 12. Virtual Memory Management
@@ -347,19 +347,33 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuMemMapArrayAsync",                                   {"hipMemMapArrayAsync",                                     "", CONV_VIRTUAL_MEMORY, API_DRIVER, 12, HIP_UNSUPPORTED}},
 
   // 13. Stream Ordered Memory Allocator
+  // no analogue
   {"cuMemFreeAsync",                                       {"hipMemFreeAsync",                                         "", CONV_STREAM_ORDERED_MEMORY, API_DRIVER, 13, HIP_UNSUPPORTED}},
+  // no analogue
   {"cuMemAllocAsync",                                      {"hipMemAllocAsync",                                        "", CONV_STREAM_ORDERED_MEMORY, API_DRIVER, 13, HIP_UNSUPPORTED}},
+  // cudaMemPoolTrimTo
   {"cuMemPoolTrimTo",                                      {"hipMemPoolTrimTo",                                        "", CONV_STREAM_ORDERED_MEMORY, API_DRIVER, 13, HIP_UNSUPPORTED}},
+  // cudaMemPoolSetAttribute
   {"cuMemPoolSetAttribute",                                {"hipMemPoolSetAttribute",                                  "", CONV_STREAM_ORDERED_MEMORY, API_DRIVER, 13, HIP_UNSUPPORTED}},
+  // cudaMemPoolGetAttribute
   {"cuMemPoolGetAttribute",                                {"hipMemPoolGetAttribute",                                  "", CONV_STREAM_ORDERED_MEMORY, API_DRIVER, 13, HIP_UNSUPPORTED}},
+  // cudaMemPoolSetAccess
   {"cuMemPoolSetAccess",                                   {"hipMemPoolSetAccess",                                     "", CONV_STREAM_ORDERED_MEMORY, API_DRIVER, 13, HIP_UNSUPPORTED}},
+  // cudaMemPoolGetAccess
   {"cuMemPoolGetAccess",                                   {"hipMemPoolGetAccess",                                     "", CONV_STREAM_ORDERED_MEMORY, API_DRIVER, 13, HIP_UNSUPPORTED}},
+  // cudaMemPoolCreate
   {"cuMemPoolCreate",                                      {"hipMemPoolCreate",                                        "", CONV_STREAM_ORDERED_MEMORY, API_DRIVER, 13, HIP_UNSUPPORTED}},
+  // cudaMemPoolDestroy
   {"cuMemPoolDestroy",                                     {"hipMemPoolDestroy",                                       "", CONV_STREAM_ORDERED_MEMORY, API_DRIVER, 13, HIP_UNSUPPORTED}},
+  // no analogue
   {"cuMemAllocFromPoolAsync",                              {"hipMemAllocFromPoolAsync",                                "", CONV_STREAM_ORDERED_MEMORY, API_DRIVER, 13, HIP_UNSUPPORTED}},
+  // cudaMemPoolExportToShareableHandle
   {"cuMemPoolExportToShareableHandle",                     {"hipMemPoolExportToShareableHandle",                       "", CONV_STREAM_ORDERED_MEMORY, API_DRIVER, 13, HIP_UNSUPPORTED}},
+  // cudaMemPoolImportFromShareableHandle
   {"cuMemPoolImportFromShareableHandle",                   {"hipMemPoolImportFromShareableHandle",                     "", CONV_STREAM_ORDERED_MEMORY, API_DRIVER, 13, HIP_UNSUPPORTED}},
+  // cudaMemPoolExportPointer
   {"cuMemPoolExportPointer",                               {"hipMemPoolExportPointer",                                 "", CONV_STREAM_ORDERED_MEMORY, API_DRIVER, 13, HIP_UNSUPPORTED}},
+  // cudaMemPoolImportPointer
   {"cuMemPoolImportPointer",                               {"hipMemPoolImportPointer",                                 "", CONV_STREAM_ORDERED_MEMORY, API_DRIVER, 13, HIP_UNSUPPORTED}},
 
   // 14. Unified Addressing
@@ -614,21 +628,21 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuGraphExecEventWaitNodeSetEvent",                     {"hipGraphExecEventWaitNodeSetEvent",                       "", CONV_GRAPH, API_DRIVER, 21, HIP_UNSUPPORTED}},
   // cudaGraphUpload
   {"cuGraphUpload",                                        {"hipGraphUpload",                                          "", CONV_GRAPH, API_DRIVER, 21, HIP_UNSUPPORTED}},
-  //
+  // cudaGraphAddExternalSemaphoresSignalNode
   {"cuGraphAddExternalSemaphoresSignalNode",               {"hipGraphAddExternalSemaphoresSignalNode",                 "", CONV_GRAPH, API_DRIVER, 21, HIP_UNSUPPORTED}},
-  //
+  // cudaGraphExternalSemaphoresSignalNodeGetParams
   {"cuGraphExternalSemaphoresSignalNodeGetParams",         {"hipGraphExternalSemaphoresSignalNodeGetParams",           "", CONV_GRAPH, API_DRIVER, 21, HIP_UNSUPPORTED}},
-  //
+  // cudaGraphExternalSemaphoresSignalNodeSetParams
   {"cuGraphExternalSemaphoresSignalNodeSetParams",         {"hipGraphExternalSemaphoresSignalNodeSetParams",           "", CONV_GRAPH, API_DRIVER, 21, HIP_UNSUPPORTED}},
-  //
+  // cudaGraphAddExternalSemaphoresWaitNode
   {"cuGraphAddExternalSemaphoresWaitNode",                 {"hipGraphAddExternalSemaphoresWaitNode",                   "", CONV_GRAPH, API_DRIVER, 21, HIP_UNSUPPORTED}},
-  //
+  // cudaGraphExternalSemaphoresWaitNodeGetParams
   {"cuGraphExternalSemaphoresWaitNodeGetParams",           {"hipGraphExternalSemaphoresWaitNodeGetParams",             "", CONV_GRAPH, API_DRIVER, 21, HIP_UNSUPPORTED}},
-  //
+  // cudaGraphExternalSemaphoresWaitNodeSetParams
   {"cuGraphExternalSemaphoresWaitNodeSetParams",           {"hipGraphExternalSemaphoresWaitNodeSetParams",             "", CONV_GRAPH, API_DRIVER, 21, HIP_UNSUPPORTED}},
-  //
+  // cudaGraphExecExternalSemaphoresSignalNodeSetParams
   {"cuGraphExecExternalSemaphoresSignalNodeSetParams",     {"hipGraphExecExternalSemaphoresSignalNodeSetParams",       "", CONV_GRAPH, API_DRIVER, 21, HIP_UNSUPPORTED}},
-  //
+  // cudaGraphExecExternalSemaphoresWaitNodeSetParams
   {"cuGraphExecExternalSemaphoresWaitNodeSetParams",       {"hipGraphExecExternalSemaphoresWaitNodeSetParams",         "", CONV_GRAPH, API_DRIVER, 21, HIP_UNSUPPORTED}},
 
   // 22. Occupancy
