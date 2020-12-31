@@ -749,7 +749,6 @@ sub simpleSubstitutions {
     $ft{'device'} += s/\bcudaDeviceGetStreamPriorityRange\b/hipDeviceGetStreamPriorityRange/g;
     $ft{'device'} += s/\bcudaDeviceReset\b/hipDeviceReset/g;
     $ft{'device'} += s/\bcudaDeviceSetCacheConfig\b/hipDeviceSetCacheConfig/g;
-    $ft{'device'} += s/\bcudaDeviceSetLimit\b/hipDeviceSetLimit/g;
     $ft{'device'} += s/\bcudaDeviceSetSharedMemConfig\b/hipDeviceSetSharedMemConfig/g;
     $ft{'device'} += s/\bcudaDeviceSynchronize\b/hipDeviceSynchronize/g;
     $ft{'device'} += s/\bcudaFuncSetCacheConfig\b/hipFuncSetCacheConfig/g;
@@ -909,7 +908,6 @@ sub simpleSubstitutions {
     $ft{'memory'} += s/\bcudaMemcpyPeer\b/hipMemcpyPeer/g;
     $ft{'memory'} += s/\bcudaMemcpyPeerAsync\b/hipMemcpyPeerAsync/g;
     $ft{'memory'} += s/\bcudaMemcpyToArray\b/hipMemcpyToArray/g;
-    $ft{'memory'} += s/\bcudaMemcpyToArrayAsync\b/hipMemcpyToArrayAsync/g;
     $ft{'memory'} += s/\bcudaMemcpyToSymbol\b/hipMemcpyToSymbol/g;
     $ft{'memory'} += s/\bcudaMemcpyToSymbolAsync\b/hipMemcpyToSymbolAsync/g;
     $ft{'memory'} += s/\bcudaMemset\b/hipMemset/g;
@@ -4383,6 +4381,7 @@ sub warnUnsupportedFunctions {
         "cudaMemoryTypeHost",
         "cudaMemoryTypeDevice",
         "cudaMemoryType",
+        "cudaMemcpyToArrayAsync",
         "cudaMemcpyFromArrayAsync",
         "cudaMemcpyArrayToArray",
         "cudaMemcpy3DPeerParms",
@@ -4791,6 +4790,7 @@ sub warnUnsupportedFunctions {
         "cudaEGLStreamConsumerConnect",
         "cudaEGLStreamConsumerAcquireFrame",
         "cudaDeviceSetMemPool",
+        "cudaDeviceSetLimit",
         "cudaDevicePropDontCare",
         "cudaDeviceMask",
         "cudaDeviceGetTexture1DLinearMaxWidth",
