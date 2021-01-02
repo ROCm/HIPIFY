@@ -781,7 +781,6 @@ sub simpleSubstitutions {
     $ft{'context'} += s/\bcuCtxPushCurrent_v2\b/hipCtxPushCurrent/g;
     $ft{'context'} += s/\bcuCtxSetCacheConfig\b/hipCtxSetCacheConfig/g;
     $ft{'context'} += s/\bcuCtxSetCurrent\b/hipCtxSetCurrent/g;
-    $ft{'context'} += s/\bcuCtxSetLimit\b/hipDeviceSetLimit/g;
     $ft{'context'} += s/\bcuCtxSetSharedMemConfig\b/hipCtxSetSharedMemConfig/g;
     $ft{'context'} += s/\bcuCtxSynchronize\b/hipCtxSynchronize/g;
     $ft{'context'} += s/\bcuDevicePrimaryCtxGetState\b/hipDevicePrimaryCtxGetState/g;
@@ -5267,6 +5266,7 @@ sub warnUnsupportedFunctions {
         "cuD3D10GetDevice",
         "cuD3D10CtxCreateOnDevice",
         "cuD3D10CtxCreate",
+        "cuCtxSetLimit",
         "cuCtxResetPersistingL2Cache",
         "cuCtxDetach",
         "cuCtxAttach",
