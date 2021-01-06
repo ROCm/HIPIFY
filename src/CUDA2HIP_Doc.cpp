@@ -185,7 +185,7 @@ namespace doc {
                 hd = Statistics::getHipVersion(hv->second.deprecated);
                 hr = Statistics::getHipVersion(hv->second.removed);
               }
-              *streams[md].get() << "|`" << string(f.first) << "`| " << a << " | " << d << " | " << r << " |" << (Statistics::isHipUnsupported(f.second) ? "" : "`" + string(f.second.hipName) + "`") << "| " << ha << " | " << hd << " | " << hr << " |" << endl;
+              *streams[md].get() << "|`" << string(f.first) << "`| " << a << " | " << d << " | " << r << " |" << (Statistics::isUnsupported(f.second) ? "" : "`" + string(f.second.hipName) + "`") << "| " << ha << " | " << hd << " | " << hr << " |" << endl;
             }
             *streams[md].get() << endl;
           }
