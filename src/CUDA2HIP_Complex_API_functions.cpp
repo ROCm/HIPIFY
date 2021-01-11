@@ -53,6 +53,29 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_COMPLEX_FUNCTION_VER_MAP {
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_COMPLEX_FUNCTION_VER_MAP {
+  {"hipCrealf",               {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipCimagf",               {HIP_1060, HIP_0,    HIP_0   }},
+  {"make_hipFloatComplex",    {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipConjf",                {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipCaddf",                {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipCsubf",                {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipCmulf",                {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipCdivf",                {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipCabsf",                {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipCreal",                {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipCimag",                {HIP_1060, HIP_0,    HIP_0   }},
+  {"make_hipDoubleComplex",   {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipConj",                 {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipCadd",                 {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipCsub",                 {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipCmul",                 {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipCdiv",                 {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipCabs",                 {HIP_1060, HIP_0,    HIP_0   }},
+  {"make_hipComplex",         {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipComplexFloatToDouble", {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipComplexDoubleToFloat", {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipCfmaf",                {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipCfma",                 {HIP_1060, HIP_0,    HIP_0   }},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_COMPLEX_API_SECTION_MAP {
