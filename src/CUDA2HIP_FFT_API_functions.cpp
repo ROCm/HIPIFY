@@ -65,6 +65,38 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_FFT_FUNCTION_VER_MAP {
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_FFT_FUNCTION_VER_MAP {
+  {"hipfftPlan1d",                                        {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipfftPlan2d",                                        {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipfftPlan3d",                                        {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipfftPlanMany",                                      {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipfftMakePlan1d",                                    {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipfftMakePlan2d",                                    {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipfftMakePlan3d",                                    {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipfftMakePlanMany",                                  {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipfftMakePlanMany64",                                {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipfftGetSizeMany64",                                 {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipfftEstimate1d",                                    {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipfftEstimate2d",                                    {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipfftEstimate3d",                                    {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipfftEstimateMany",                                  {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipfftCreate",                                        {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipfftGetSize1d",                                     {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipfftGetSize2d",                                     {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipfftGetSize3d",                                     {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipfftGetSizeMany",                                   {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipfftGetSize",                                       {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipfftSetWorkArea",                                   {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipfftSetAutoAllocation",                             {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipfftExecC2C",                                       {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipfftExecR2C",                                       {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipfftExecC2R",                                       {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipfftExecZ2Z",                                       {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipfftExecD2Z",                                       {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipfftExecZ2D",                                       {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipfftSetStream",                                     {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipfftDestroy",                                       {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipfftGetVersion",                                    {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipfftGetProperty",                                   {HIP_2060, HIP_0,    HIP_0   }},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_FFT_API_SECTION_MAP {
