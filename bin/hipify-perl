@@ -2919,6 +2919,7 @@ sub simpleSubstitutions {
     $ft{'define'} += s/\bCUDA_COOPERATIVE_LAUNCH_MULTI_DEVICE_NO_POST_LAUNCH_SYNC\b/hipCooperativeLaunchMultiDeviceNoPostSync/g;
     $ft{'define'} += s/\bCUDA_COOPERATIVE_LAUNCH_MULTI_DEVICE_NO_PRE_LAUNCH_SYNC\b/hipCooperativeLaunchMultiDeviceNoPreSync/g;
     $ft{'define'} += s/\bCUDA_IPC_HANDLE_SIZE\b/HIP_IPC_HANDLE_SIZE/g;
+    $ft{'define'} += s/\bCURAND_VERSION\b/HIPRAND_VERSION/g;
     $ft{'define'} += s/\bCU_DEVICE_CPU\b/hipCpuDeviceId/g;
     $ft{'define'} += s/\bCU_DEVICE_INVALID\b/hipInvalidDeviceId/g;
     $ft{'define'} += s/\bCU_IPC_HANDLE_SIZE\b/HIP_IPC_HANDLE_SIZE/g;
@@ -5850,7 +5851,6 @@ sub warnUnsupportedFunctions {
         "CURAND_VER_MINOR",
         "CURAND_VER_MAJOR",
         "CURAND_VER_BUILD",
-        "CURAND_VERSION",
         "CURAND_SCRAMBLED_DIRECTION_VECTORS_64_JOEKUO6",
         "CURAND_SCRAMBLED_DIRECTION_VECTORS_32_JOEKUO6",
         "CURAND_REJECTION",
