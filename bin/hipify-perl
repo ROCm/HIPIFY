@@ -2093,12 +2093,11 @@ sub simpleSubstitutions {
     $ft{'type'} += s/\bCUstream_st\b/ihipStream_t/g;
     $ft{'type'} += s/\bCUtexObject\b/hipTextureObject_t/g;
     $ft{'type'} += s/\bCUtexref_st\b/textureReference/g;
-    $ft{'type'} += s/\bbsrilu02Info\b/bsrilu02Info/g;
+    $ft{'type'} += s/\bbsric02Info_t\b/bsric02Info_t/g;
     $ft{'type'} += s/\bbsrilu02Info_t\b/bsrilu02Info_t/g;
-    $ft{'type'} += s/\bcsrgemm2Info\b/csrgemm2Info/g;
+    $ft{'type'} += s/\bbsrsv2Info_t\b/bsrsv2Info_t/g;
     $ft{'type'} += s/\bcsrgemm2Info_t\b/csrgemm2Info_t/g;
     $ft{'type'} += s/\bcsrilu02Info_t\b/csrilu02Info_t/g;
-    $ft{'type'} += s/\bcsrsm2Info\b/csrsm2Info/g;
     $ft{'type'} += s/\bcsrsm2Info_t\b/csrsm2Info_t/g;
     $ft{'type'} += s/\bcsrsv2Info_t\b/csrsv2Info_t/g;
     $ft{'type'} += s/\bcuComplex\b/hipComplex/g;
@@ -2251,7 +2250,6 @@ sub simpleSubstitutions {
     $ft{'type'} += s/\bcusparsePointerMode_t\b/hipsparsePointerMode_t/g;
     $ft{'type'} += s/\bcusparseSolvePolicy_t\b/hipsparseSolvePolicy_t/g;
     $ft{'type'} += s/\bcusparseStatus_t\b/hipsparseStatus_t/g;
-    $ft{'type'} += s/\bpruneInfo\b/pruneInfo/g;
     $ft{'type'} += s/\bpruneInfo_t\b/pruneInfo_t/g;
     $ft{'type'} += s/\bsurfaceReference\b/surfaceReference/g;
     $ft{'numeric_literal'} += s/\bCUBLAS_ATOMICS_ALLOWED\b/HIPBLAS_ATOMICS_ALLOWED/g;
@@ -3768,6 +3766,7 @@ sub warnUnsupportedFunctions {
     my $line_num = shift;
     my $k = 0;
     foreach $func (
+        "pruneInfo",
         "libraryPropertyType_t",
         "libraryPropertyType",
         "cusparseZhybsv_solve",
@@ -5281,12 +5280,13 @@ sub warnUnsupportedFunctions {
         "csru2csrInfo_t",
         "csru2csrInfo",
         "csrsv2Info",
+        "csrsm2Info",
         "csrilu02Info",
-        "bsrsv2Info_t",
+        "csrgemm2Info",
         "bsrsv2Info",
         "bsrsm2Info_t",
         "bsrsm2Info",
-        "bsric02Info_t",
+        "bsrilu02Info",
         "bsric02Info",
         "PATCH_LEVEL",
         "MINOR_VERSION",
