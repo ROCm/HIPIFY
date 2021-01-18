@@ -1624,8 +1624,6 @@ sub simpleSubstitutions {
     $ft{'library'} += s/\bcusparseCcsr2csc\b/hipsparseCcsr2csc/g;
     $ft{'library'} += s/\bcusparseCcsr2csr_compress\b/hipsparseCcsr2csr_compress/g;
     $ft{'library'} += s/\bcusparseCcsr2dense\b/hipsparseCcsr2dense/g;
-    $ft{'library'} += s/\bcusparseCcsr2gebsr\b/hipsparseCcsr2gebsr/g;
-    $ft{'library'} += s/\bcusparseCcsr2gebsr_bufferSize\b/hipsparseCcsr2gebsr_bufferSize/g;
     $ft{'library'} += s/\bcusparseCcsr2hyb\b/hipsparseCcsr2hyb/g;
     $ft{'library'} += s/\bcusparseCcsrgeam\b/hipsparseCcsrgeam/g;
     $ft{'library'} += s/\bcusparseCcsrgeam2\b/hipsparseCcsrgeam2/g;
@@ -1648,7 +1646,6 @@ sub simpleSubstitutions {
     $ft{'library'} += s/\bcusparseCcsrsm2_analysis\b/hipsparseCcsrsm2_analysis/g;
     $ft{'library'} += s/\bcusparseCcsrsm2_bufferSizeExt\b/hipsparseCcsrsm2_bufferSizeExt/g;
     $ft{'library'} += s/\bcusparseCcsrsm2_solve\b/hipsparseCcsrsm2_solve/g;
-    $ft{'library'} += s/\bcusparseCcsrsm_solve\b/hipsparseCcsrsm_solve/g;
     $ft{'library'} += s/\bcusparseCcsrsv2_analysis\b/hipsparseCcsrsv2_analysis/g;
     $ft{'library'} += s/\bcusparseCcsrsv2_bufferSize\b/hipsparseCcsrsv2_bufferSize/g;
     $ft{'library'} += s/\bcusparseCcsrsv2_bufferSizeExt\b/hipsparseCcsrsv2_bufferSizeExt/g;
@@ -1657,11 +1654,6 @@ sub simpleSubstitutions {
     $ft{'library'} += s/\bcusparseCdense2csr\b/hipsparseCdense2csr/g;
     $ft{'library'} += s/\bcusparseCdotci\b/hipsparseCdotci/g;
     $ft{'library'} += s/\bcusparseCdoti\b/hipsparseCdoti/g;
-    $ft{'library'} += s/\bcusparseCgebsr2csr\b/hipsparseCgebsr2csr/g;
-    $ft{'library'} += s/\bcusparseCgebsr2gebsc\b/hipsparseCgebsr2gebsc/g;
-    $ft{'library'} += s/\bcusparseCgebsr2gebsc_bufferSize\b/hipsparseCgebsr2gebsc_bufferSize/g;
-    $ft{'library'} += s/\bcusparseCgebsr2gebsr\b/hipsparseCgebsr2gebsr/g;
-    $ft{'library'} += s/\bcusparseCgebsr2gebsr_bufferSize\b/hipsparseCgebsr2gebsr_bufferSize/g;
     $ft{'library'} += s/\bcusparseCgemmi\b/hipsparseCgemmi/g;
     $ft{'library'} += s/\bcusparseCgthr\b/hipsparseCgthr/g;
     $ft{'library'} += s/\bcusparseCgthrz\b/hipsparseCgthrz/g;
@@ -1672,6 +1664,7 @@ sub simpleSubstitutions {
     $ft{'library'} += s/\bcusparseCreate\b/hipsparseCreate/g;
     $ft{'library'} += s/\bcusparseCreateBsric02Info\b/hipsparseCreateBsric02Info/g;
     $ft{'library'} += s/\bcusparseCreateBsrilu02Info\b/hipsparseCreateBsrilu02Info/g;
+    $ft{'library'} += s/\bcusparseCreateBsrsv2Info\b/hipsparseCreateBsrsv2Info/g;
     $ft{'library'} += s/\bcusparseCreateCsrgemm2Info\b/hipsparseCreateCsrgemm2Info/g;
     $ft{'library'} += s/\bcusparseCreateCsric02Info\b/hipsparseCreateCsric02Info/g;
     $ft{'library'} += s/\bcusparseCreateCsrilu02Info\b/hipsparseCreateCsrilu02Info/g;
@@ -1702,8 +1695,6 @@ sub simpleSubstitutions {
     $ft{'library'} += s/\bcusparseDcsr2csc\b/hipsparseDcsr2csc/g;
     $ft{'library'} += s/\bcusparseDcsr2csr_compress\b/hipsparseDcsr2csr_compress/g;
     $ft{'library'} += s/\bcusparseDcsr2dense\b/hipsparseDcsr2dense/g;
-    $ft{'library'} += s/\bcusparseDcsr2gebsr\b/hipsparseDcsr2gebsr/g;
-    $ft{'library'} += s/\bcusparseDcsr2gebsr_bufferSize\b/hipsparseDcsr2gebsr_bufferSize/g;
     $ft{'library'} += s/\bcusparseDcsr2hyb\b/hipsparseDcsr2hyb/g;
     $ft{'library'} += s/\bcusparseDcsrgeam\b/hipsparseDcsrgeam/g;
     $ft{'library'} += s/\bcusparseDcsrgeam2\b/hipsparseDcsrgeam2/g;
@@ -1726,7 +1717,6 @@ sub simpleSubstitutions {
     $ft{'library'} += s/\bcusparseDcsrsm2_analysis\b/hipsparseDcsrsm2_analysis/g;
     $ft{'library'} += s/\bcusparseDcsrsm2_bufferSizeExt\b/hipsparseDcsrsm2_bufferSizeExt/g;
     $ft{'library'} += s/\bcusparseDcsrsm2_solve\b/hipsparseDcsrsm2_solve/g;
-    $ft{'library'} += s/\bcusparseDcsrsm_solve\b/hipsparseDcsrsm_solve/g;
     $ft{'library'} += s/\bcusparseDcsrsv2_analysis\b/hipsparseDcsrsv2_analysis/g;
     $ft{'library'} += s/\bcusparseDcsrsv2_bufferSize\b/hipsparseDcsrsv2_bufferSize/g;
     $ft{'library'} += s/\bcusparseDcsrsv2_bufferSizeExt\b/hipsparseDcsrsv2_bufferSizeExt/g;
@@ -1737,6 +1727,7 @@ sub simpleSubstitutions {
     $ft{'library'} += s/\bcusparseDestroy\b/hipsparseDestroy/g;
     $ft{'library'} += s/\bcusparseDestroyBsric02Info\b/hipsparseDestroyBsric02Info/g;
     $ft{'library'} += s/\bcusparseDestroyBsrilu02Info\b/hipsparseDestroyBsrilu02Info/g;
+    $ft{'library'} += s/\bcusparseDestroyBsrsv2Info\b/hipsparseDestroyBsrsv2Info/g;
     $ft{'library'} += s/\bcusparseDestroyCsrgemm2Info\b/hipsparseDestroyCsrgemm2Info/g;
     $ft{'library'} += s/\bcusparseDestroyCsric02Info\b/hipsparseDestroyCsric02Info/g;
     $ft{'library'} += s/\bcusparseDestroyCsrilu02Info\b/hipsparseDestroyCsrilu02Info/g;
@@ -1745,11 +1736,6 @@ sub simpleSubstitutions {
     $ft{'library'} += s/\bcusparseDestroyHybMat\b/hipsparseDestroyHybMat/g;
     $ft{'library'} += s/\bcusparseDestroyMatDescr\b/hipsparseDestroyMatDescr/g;
     $ft{'library'} += s/\bcusparseDestroyPruneInfo\b/hipsparseDestroyPruneInfo/g;
-    $ft{'library'} += s/\bcusparseDgebsr2csr\b/hipsparseDgebsr2csr/g;
-    $ft{'library'} += s/\bcusparseDgebsr2gebsc\b/hipsparseDgebsr2gebsc/g;
-    $ft{'library'} += s/\bcusparseDgebsr2gebsc_bufferSize\b/hipsparseDgebsr2gebsc_bufferSize/g;
-    $ft{'library'} += s/\bcusparseDgebsr2gebsr\b/hipsparseDgebsr2gebsr/g;
-    $ft{'library'} += s/\bcusparseDgebsr2gebsr_bufferSize\b/hipsparseDgebsr2gebsr_bufferSize/g;
     $ft{'library'} += s/\bcusparseDgemmi\b/hipsparseDgemmi/g;
     $ft{'library'} += s/\bcusparseDgthr\b/hipsparseDgthr/g;
     $ft{'library'} += s/\bcusparseDgthrz\b/hipsparseDgthrz/g;
@@ -1798,8 +1784,6 @@ sub simpleSubstitutions {
     $ft{'library'} += s/\bcusparseScsr2csc\b/hipsparseScsr2csc/g;
     $ft{'library'} += s/\bcusparseScsr2csr_compress\b/hipsparseScsr2csr_compress/g;
     $ft{'library'} += s/\bcusparseScsr2dense\b/hipsparseScsr2dense/g;
-    $ft{'library'} += s/\bcusparseScsr2gebsr\b/hipsparseScsr2gebsr/g;
-    $ft{'library'} += s/\bcusparseScsr2gebsr_bufferSize\b/hipsparseScsr2gebsr_bufferSize/g;
     $ft{'library'} += s/\bcusparseScsr2hyb\b/hipsparseScsr2hyb/g;
     $ft{'library'} += s/\bcusparseScsrgeam\b/hipsparseScsrgeam/g;
     $ft{'library'} += s/\bcusparseScsrgeam2\b/hipsparseScsrgeam2/g;
@@ -1822,7 +1806,6 @@ sub simpleSubstitutions {
     $ft{'library'} += s/\bcusparseScsrsm2_analysis\b/hipsparseScsrsm2_analysis/g;
     $ft{'library'} += s/\bcusparseScsrsm2_bufferSizeExt\b/hipsparseScsrsm2_bufferSizeExt/g;
     $ft{'library'} += s/\bcusparseScsrsm2_solve\b/hipsparseScsrsm2_solve/g;
-    $ft{'library'} += s/\bcusparseScsrsm_solve\b/hipsparseScsrsm_solve/g;
     $ft{'library'} += s/\bcusparseScsrsv2_analysis\b/hipsparseScsrsv2_analysis/g;
     $ft{'library'} += s/\bcusparseScsrsv2_bufferSize\b/hipsparseScsrsv2_bufferSize/g;
     $ft{'library'} += s/\bcusparseScsrsv2_bufferSizeExt\b/hipsparseScsrsv2_bufferSizeExt/g;
@@ -1836,11 +1819,6 @@ sub simpleSubstitutions {
     $ft{'library'} += s/\bcusparseSetMatType\b/hipsparseSetMatType/g;
     $ft{'library'} += s/\bcusparseSetPointerMode\b/hipsparseSetPointerMode/g;
     $ft{'library'} += s/\bcusparseSetStream\b/hipsparseSetStream/g;
-    $ft{'library'} += s/\bcusparseSgebsr2csr\b/hipsparseSgebsr2csr/g;
-    $ft{'library'} += s/\bcusparseSgebsr2gebsc\b/hipsparseSgebsr2gebsc/g;
-    $ft{'library'} += s/\bcusparseSgebsr2gebsc_bufferSize\b/hipsparseSgebsr2gebsc_bufferSize/g;
-    $ft{'library'} += s/\bcusparseSgebsr2gebsr\b/hipsparseSgebsr2gebsr/g;
-    $ft{'library'} += s/\bcusparseSgebsr2gebsr_bufferSize\b/hipsparseSgebsr2gebsr_bufferSize/g;
     $ft{'library'} += s/\bcusparseSgemmi\b/hipsparseSgemmi/g;
     $ft{'library'} += s/\bcusparseSgthr\b/hipsparseSgthr/g;
     $ft{'library'} += s/\bcusparseSgthrz\b/hipsparseSgthrz/g;
@@ -1873,7 +1851,6 @@ sub simpleSubstitutions {
     $ft{'library'} += s/\bcusparseXcscsort_bufferSizeExt\b/hipsparseXcscsort_bufferSizeExt/g;
     $ft{'library'} += s/\bcusparseXcsr2bsrNnz\b/hipsparseXcsr2bsrNnz/g;
     $ft{'library'} += s/\bcusparseXcsr2coo\b/hipsparseXcsr2coo/g;
-    $ft{'library'} += s/\bcusparseXcsr2gebsrNnz\b/hipsparseXcsr2gebsrNnz/g;
     $ft{'library'} += s/\bcusparseXcsrgeam2Nnz\b/hipsparseXcsrgeam2Nnz/g;
     $ft{'library'} += s/\bcusparseXcsrgeamNnz\b/hipsparseXcsrgeamNnz/g;
     $ft{'library'} += s/\bcusparseXcsrgemm2Nnz\b/hipsparseXcsrgemm2Nnz/g;
@@ -1884,7 +1861,6 @@ sub simpleSubstitutions {
     $ft{'library'} += s/\bcusparseXcsrsort\b/hipsparseXcsrsort/g;
     $ft{'library'} += s/\bcusparseXcsrsort_bufferSizeExt\b/hipsparseXcsrsort_bufferSizeExt/g;
     $ft{'library'} += s/\bcusparseXcsrsv2_zeroPivot\b/hipsparseXcsrsv2_zeroPivot/g;
-    $ft{'library'} += s/\bcusparseXgebsr2gebsrNnz\b/hipsparseXgebsr2gebsrNnz/g;
     $ft{'library'} += s/\bcusparseZaxpyi\b/hipsparseZaxpyi/g;
     $ft{'library'} += s/\bcusparseZbsr2csr\b/hipsparseZbsr2csr/g;
     $ft{'library'} += s/\bcusparseZbsric02\b/hipsparseZbsric02/g;
@@ -1905,8 +1881,6 @@ sub simpleSubstitutions {
     $ft{'library'} += s/\bcusparseZcsr2csc\b/hipsparseZcsr2csc/g;
     $ft{'library'} += s/\bcusparseZcsr2csr_compress\b/hipsparseZcsr2csr_compress/g;
     $ft{'library'} += s/\bcusparseZcsr2dense\b/hipsparseZcsr2dense/g;
-    $ft{'library'} += s/\bcusparseZcsr2gebsr\b/hipsparseZcsr2gebsr/g;
-    $ft{'library'} += s/\bcusparseZcsr2gebsr_bufferSize\b/hipsparseZcsr2gebsr_bufferSize/g;
     $ft{'library'} += s/\bcusparseZcsr2hyb\b/hipsparseZcsr2hyb/g;
     $ft{'library'} += s/\bcusparseZcsrgeam\b/hipsparseZcsrgeam/g;
     $ft{'library'} += s/\bcusparseZcsrgeam2\b/hipsparseZcsrgeam2/g;
@@ -1929,7 +1903,6 @@ sub simpleSubstitutions {
     $ft{'library'} += s/\bcusparseZcsrsm2_analysis\b/hipsparseZcsrsm2_analysis/g;
     $ft{'library'} += s/\bcusparseZcsrsm2_bufferSizeExt\b/hipsparseZcsrsm2_bufferSizeExt/g;
     $ft{'library'} += s/\bcusparseZcsrsm2_solve\b/hipsparseZcsrsm2_solve/g;
-    $ft{'library'} += s/\bcusparseZcsrsm_solve\b/hipsparseZcsrsm_solve/g;
     $ft{'library'} += s/\bcusparseZcsrsv2_analysis\b/hipsparseZcsrsv2_analysis/g;
     $ft{'library'} += s/\bcusparseZcsrsv2_bufferSize\b/hipsparseZcsrsv2_bufferSize/g;
     $ft{'library'} += s/\bcusparseZcsrsv2_bufferSizeExt\b/hipsparseZcsrsv2_bufferSizeExt/g;
@@ -1938,11 +1911,6 @@ sub simpleSubstitutions {
     $ft{'library'} += s/\bcusparseZdense2csr\b/hipsparseZdense2csr/g;
     $ft{'library'} += s/\bcusparseZdotci\b/hipsparseZdotci/g;
     $ft{'library'} += s/\bcusparseZdoti\b/hipsparseZdoti/g;
-    $ft{'library'} += s/\bcusparseZgebsr2csr\b/hipsparseZgebsr2csr/g;
-    $ft{'library'} += s/\bcusparseZgebsr2gebsc\b/hipsparseZgebsr2gebsc/g;
-    $ft{'library'} += s/\bcusparseZgebsr2gebsc_bufferSize\b/hipsparseZgebsr2gebsc_bufferSize/g;
-    $ft{'library'} += s/\bcusparseZgebsr2gebsr\b/hipsparseZgebsr2gebsr/g;
-    $ft{'library'} += s/\bcusparseZgebsr2gebsr_bufferSize\b/hipsparseZgebsr2gebsr_bufferSize/g;
     $ft{'library'} += s/\bcusparseZgemmi\b/hipsparseZgemmi/g;
     $ft{'library'} += s/\bcusparseZgthr\b/hipsparseZgthr/g;
     $ft{'library'} += s/\bcusparseZgthrz\b/hipsparseZgthrz/g;
@@ -3789,17 +3757,25 @@ sub warnUnsupportedFunctions {
         "cusparseZgemvi_bufferSize",
         "cusparseZgemvi",
         "cusparseZgebsr2gebsr_bufferSizeExt",
+        "cusparseZgebsr2gebsr_bufferSize",
+        "cusparseZgebsr2gebsr",
         "cusparseZgebsr2gebsc_bufferSizeExt",
+        "cusparseZgebsr2gebsc_bufferSize",
+        "cusparseZgebsr2gebsc",
+        "cusparseZgebsr2csr",
         "cusparseZdense2hyb",
         "cusparseZcsru2csr_bufferSizeExt",
         "cusparseZcsrsv_solve",
         "cusparseZcsrsv_analysis",
+        "cusparseZcsrsm_solve",
         "cusparseZcsrsm_analysis",
         "cusparseZcsrmv_mp",
         "cusparseZcsrilu0",
         "cusparseZcsric0",
         "cusparseZcsrcolor",
         "cusparseZcsr2gebsr_bufferSizeExt",
+        "cusparseZcsr2gebsr_bufferSize",
+        "cusparseZcsr2gebsr",
         "cusparseZcsr2csru",
         "cusparseZcsc2hyb",
         "cusparseZbsrxmv",
@@ -3809,7 +3785,9 @@ sub warnUnsupportedFunctions {
         "cusparseZbsrsm2_analysis",
         "cusparseZbsrilu02_bufferSizeExt",
         "cusparseZbsric02_bufferSizeExt",
+        "cusparseXgebsr2gebsrNnz",
         "cusparseXgebsr2csr",
+        "cusparseXcsr2gebsrNnz",
         "cusparseXbsrsm2_zeroPivot",
         "cusparseSparseToDense_bufferSize",
         "cusparseSparseToDenseAlg_t",
@@ -3869,17 +3847,25 @@ sub warnUnsupportedFunctions {
         "cusparseSgemvi_bufferSize",
         "cusparseSgemvi",
         "cusparseSgebsr2gebsr_bufferSizeExt",
+        "cusparseSgebsr2gebsr_bufferSize",
+        "cusparseSgebsr2gebsr",
         "cusparseSgebsr2gebsc_bufferSizeExt",
+        "cusparseSgebsr2gebsc_bufferSize",
+        "cusparseSgebsr2gebsc",
+        "cusparseSgebsr2csr",
         "cusparseSdense2hyb",
         "cusparseScsru2csr_bufferSizeExt",
         "cusparseScsrsv_solve",
         "cusparseScsrsv_analysis",
+        "cusparseScsrsm_solve",
         "cusparseScsrsm_analysis",
         "cusparseScsrmv_mp",
         "cusparseScsrilu0",
         "cusparseScsric0",
         "cusparseScsrcolor",
         "cusparseScsr2gebsr_bufferSizeExt",
+        "cusparseScsr2gebsr_bufferSize",
+        "cusparseScsr2gebsr",
         "cusparseScsr2csru",
         "cusparseScsc2hyb",
         "cusparseScatter",
@@ -3942,14 +3928,18 @@ sub warnUnsupportedFunctions {
         "cusparseDgemvi_bufferSize",
         "cusparseDgemvi",
         "cusparseDgebsr2gebsr_bufferSizeExt",
+        "cusparseDgebsr2gebsr_bufferSize",
+        "cusparseDgebsr2gebsr",
         "cusparseDgebsr2gebsc_bufferSizeExt",
+        "cusparseDgebsr2gebsc_bufferSize",
+        "cusparseDgebsr2gebsc",
+        "cusparseDgebsr2csr",
         "cusparseDestroySpVec",
         "cusparseDestroySpMat",
         "cusparseDestroySolveAnalysisInfo",
         "cusparseDestroyDnVec",
         "cusparseDestroyDnMat",
         "cusparseDestroyCsru2csrInfo",
-        "cusparseDestroyBsrsv2Info",
         "cusparseDestroyBsrsm2Info",
         "cusparseDenseToSparse_convert",
         "cusparseDenseToSparse_bufferSize",
@@ -3959,12 +3949,15 @@ sub warnUnsupportedFunctions {
         "cusparseDcsru2csr_bufferSizeExt",
         "cusparseDcsrsv_solve",
         "cusparseDcsrsv_analysis",
+        "cusparseDcsrsm_solve",
         "cusparseDcsrsm_analysis",
         "cusparseDcsrmv_mp",
         "cusparseDcsrilu0",
         "cusparseDcsric0",
         "cusparseDcsrcolor",
         "cusparseDcsr2gebsr_bufferSizeExt",
+        "cusparseDcsr2gebsr_bufferSize",
+        "cusparseDcsr2gebsr",
         "cusparseDcsr2csru",
         "cusparseDcsc2hyb",
         "cusparseDbsrxmv",
@@ -3996,7 +3989,6 @@ sub warnUnsupportedFunctions {
         "cusparseCreateCsc",
         "cusparseCreateCooAoS",
         "cusparseCreateCoo",
-        "cusparseCreateBsrsv2Info",
         "cusparseCreateBsrsm2Info",
         "cusparseCooSetStridedBatch",
         "cusparseCooSetPointers",
@@ -4027,17 +4019,25 @@ sub warnUnsupportedFunctions {
         "cusparseCgemvi_bufferSize",
         "cusparseCgemvi",
         "cusparseCgebsr2gebsr_bufferSizeExt",
+        "cusparseCgebsr2gebsr_bufferSize",
+        "cusparseCgebsr2gebsr",
         "cusparseCgebsr2gebsc_bufferSizeExt",
+        "cusparseCgebsr2gebsc_bufferSize",
+        "cusparseCgebsr2gebsc",
+        "cusparseCgebsr2csr",
         "cusparseCdense2hyb",
         "cusparseCcsru2csr_bufferSizeExt",
         "cusparseCcsrsv_solve",
         "cusparseCcsrsv_analysis",
+        "cusparseCcsrsm_solve",
         "cusparseCcsrsm_analysis",
         "cusparseCcsrmv_mp",
         "cusparseCcsrilu0",
         "cusparseCcsric0",
         "cusparseCcsrcolor",
         "cusparseCcsr2gebsr_bufferSizeExt",
+        "cusparseCcsr2gebsr_bufferSize",
+        "cusparseCcsr2gebsr",
         "cusparseCcsr2csru",
         "cusparseCcsc2hyb",
         "cusparseCbsrxmv",
