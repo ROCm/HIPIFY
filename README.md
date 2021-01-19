@@ -43,7 +43,7 @@ After applying all the matchers, the output HIP source is produced.
 
 `hipify-clang` requires:
 
-1. [**LLVM+CLANG**](http://releases.llvm.org) of at least version [3.8.0](http://releases.llvm.org/download.html#3.8.0); the latest stable and recommended release: [**11.0.1**](https://github.com/llvm/llvm-project/releases/tag/llvmorg-11.0.1).
+1. [**LLVM+CLANG**](http://releases.llvm.org) of at least version [3.8.0](http://releases.llvm.org/download.html#3.8.0); the latest stable and recommended release: [**11.0.1**](https://releases.llvm.org/download.html#11.0.1).
 
 2. [**CUDA**](https://developer.nvidia.com/cuda-downloads) of at least version [7.0](https://developer.nvidia.com/cuda-toolkit-70), the latest supported version is [**11.2**](https://developer.nvidia.com/cuda-downloads).
 
@@ -139,7 +139,7 @@ After applying all the matchers, the output HIP source is produced.
           <a href="patches/patch_for_clang_11.0.0_bug_47332.zip">patch for 11.0.0</a>***</td>
     </tr>
     <tr align="center">
-      <td bgcolor="eefaeb"><a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-11.0.1"><b>11.0.1</b></a>
+      <td bgcolor="eefaeb"><a href="https://releases.llvm.org/download.html#11.0.1"><b>11.0.1</b></a>
       <td bgcolor="eefaeb"><a href="https://developer.nvidia.com/cuda-downloads"><b>11.2</b></a></td>
       <td colspan=2 bgcolor="eefaeb"><font color="green"><b>LATEST STABLE CONFIG</b></font></td>
     </tr>
@@ -246,7 +246,7 @@ Run `Visual Studio 16 2019`, open the generated `LLVM.sln`, build all, build pro
 
 **LLVM 10.0.0 or newer:**
 
-1. download [`LLVM project`](https://github.com/llvm/llvm-project/releases/tag/llvmorg-11.0.1) sources;
+1. download [`LLVM project`](https://releases.llvm.org/download.html#11.0.1) sources;
 2. build [`LLVM project`](http://llvm.org/docs/CMake.html):
 
  **Linux**:
@@ -493,8 +493,8 @@ Testing Time: 2.87s
 | 8.0.0 - 8.0.1   | 10.0       | 7.6.5.32            | 2017.15.9.15              | 3.14.2, 3.18.0 | 3.7.4, 3.8.5 |
 | 9.0.0 - 9.0.1   | 10.1       | 7.6.5.32            | 2017.15.9.20, 2019.16.4.5 | 3.16.4, 3.18.0 | 3.8.0, 3.8.5 |
 | 10.0.0 - 11.0.0 | 8.0 - 11.1 | 7.6.5.32 - 8.0.5.39 | 2017.15.9.30, 2019.16.8.3 | 3.19.2         | 3.9.1        |
-| 10.0.0 - 11.0.1 | 8.0 - 11.2 | 7.6.5.32 - 8.0.5.39 | 2017.15.9.30, 2019.16.8.3 | 3.19.2         | 3.9.1        |
-| 12.0.0git       | 8.0 - 11.2 | 7.6.5.32 - 8.0.5.39 | 2017.15.9.30, 2019.16.8.3 | 3.19.2         | 3.9.1        |
+| 11.0.1          | 8.0 - 11.2 | 7.6.5.32 - 8.0.5.39 | 2017.15.9.31, 2019.16.8.4 | 3.19.3         | 3.9.1        |
+| 12.0.0git       | 8.0 - 11.2 | 7.6.5.32 - 8.0.5.39 | 2017.15.9.31, 2019.16.8.4 | 3.19.2         | 3.9.1        |
 
 *Building with testing support by `Visual Studio 16 2019` on `Windows 10`:*
 
