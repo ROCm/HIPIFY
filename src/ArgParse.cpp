@@ -146,12 +146,12 @@ cl::opt<std::string> CudaGpuArch("cuda-gpu-arch",
   cl::cat(ToolTemplateCategory));
 
 cl::opt<bool> GenerateMarkdown("md",
-  cl::desc("[in progress] Generate Markdown documentation"),
+  cl::desc("Generate documentation in Markdown format"),
   cl::value_desc("markdown"),
   cl::cat(ToolTemplateCategory));
 
 cl::opt<bool> GenerateCSV("csv",
-  cl::desc("[in progress] Generate CSV documentation"),
+  cl::desc("Generate documentation in CSV format"),
   cl::value_desc("csv"),
   cl::cat(ToolTemplateCategory));
 

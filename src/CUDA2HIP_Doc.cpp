@@ -158,17 +158,21 @@ namespace doc {
       }
 
       bool write() {
-        if (md == (formats & md)) {
-          *streams[md].get() << "# " << getName() << " " << sAPI_supported << endl << endl;
+        const docType docs[] = {md, csv};
+        for (auto doc : docs) {
+          if (doc != (formats & doc)) continue;
+          *streams[doc].get() << (doc == md ? "# " : "") << getName() << " " << sAPI_supported << endl << endl;
           for (auto &s : getSections()) {
-            *streams[md].get() << "## **" << s.first << ". " << string(s.second) << "**" << endl << endl;
-            *streams[md].get() << "| **" << sCUDA << "** | **" << sA << "** | **" << sD << "** | **" << sR << "** | **" << sHIP << "** | **" << sA << "** | **" << sD << "** | **" << sR << "** |" << endl;
-            *streams[md].get() << "|:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|" << endl;
+            string sS = (doc == md) ? "** | **" : " , ";
+            *streams[doc].get() << (doc == md ? "## **" : "") << s.first << ". " << string(s.second) << (doc == md ? "**" : "") << endl << endl;
+            *streams[doc].get() << (doc == md ? "| **" : "") << sCUDA << sS << sA << sS << sD << sS << sR << sS << sHIP << sS << sA << sS << sD << sS << sR << (doc == md ? "** |" : "") << endl;
+            if (doc == md) *streams[doc].get() << "|:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|" << endl;
             const functionMap &ftMap = isTypeSection(s.first, getSections()) ? getTypes() : getFunctions();
             const versionMap &vMap = isTypeSection(s.first, getSections()) ? getTypeVersions() : getFunctionVersions();
             const hipVersionMap &hMap = commonHipVersionMap.empty() ? (isTypeSection(s.first, getSections()) ? getHipTypeVersions() : getHipFunctionVersions()) : commonHipVersionMap;
             functionMap fMap;
             for (auto &f : ftMap) if (f.second.apiSection == s.first) fMap.insert(f);
+            sS = (doc == md) ? " | " : " , ";
             for (auto &f : fMap) {
               string a, d, r, ha, hd, hr;
               for (auto &v : vMap) {
@@ -185,11 +189,13 @@ namespace doc {
                 hd = Statistics::getHipVersion(hv->second.deprecated);
                 hr = Statistics::getHipVersion(hv->second.removed);
               }
-              *streams[md].get() << "|`" << string(f.first) << "`| " << a << " | " << d << " | " << r << " |" << (Statistics::isUnsupported(f.second) ? "" : "`" + string(f.second.hipName) + "`") << "| " << ha << " | " << hd << " | " << hr << " |" << endl;
+              string sHip = Statistics::isUnsupported(f.second) ? "" : string(f.second.hipName);
+              if (!sHip.empty() && doc == md) sHip = "`" + sHip + "`";
+              *streams[doc].get() << (doc == md ? "|`" : "") << string(f.first) << (doc == md ? "`| " : sS) << a << sS << d << sS << r << sS << sHip << sS << ha << sS << hd << sS << hr << sS << endl;
             }
-            *streams[md].get() << endl;
+            *streams[doc].get() << endl;
           }
-          *streams[md].get() << endl << "\\* A - Added, D - Deprecated, R - Removed";
+          *streams[doc].get() << endl << (doc == md ? "\\" : "") << "*A - Added; D - Deprecated; R - Removed";
         }
         return true;
       }
