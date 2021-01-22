@@ -151,13 +151,13 @@ enum SupportDegree {
   HIP_UNSUPPORTED = 0x1,
   ROC_UNSUPPORTED = 0x2,
   UNSUPPORTED = 0x4,
-  DEPRECATED = 0x8,
+  CUDA_DEPRECATED = 0x8,
   HIP_DEPRECATED = 0x10,
-  REMOVED = 0x20,
-  HIP_REMOVED = 0x40,
+  DEPRECATED = 0x20,
+  CUDA_REMOVED = 0x40,
+  HIP_REMOVED = 0x80,
+  REMOVED = 0x100,
 };
-constexpr int CUDA_DEPRECATED = (int) SupportDegree::DEPRECATED;
-constexpr int CUDA_REMOVED = (int) SupportDegree::REMOVED;
 
 enum cudaVersions {
   CUDA_0 = 0, // Unknown version
@@ -368,19 +368,24 @@ public:
   static bool isHipUnsupported(const hipCounter &counter);
   // Check whether the counter is ROC_UNSUPPORTED or not.
   static bool isRocUnsupported(const hipCounter &counter);
+  // Check whether the counter is ROC_UNSUPPORTED/HIP_UNSUPPORTED/UNSUPPORTED or not.
+  static bool isUnsupported(const hipCounter& counter);
+  // Check whether the counter is CUDA_DEPRECATED or not.
+  static bool isCudaDeprecated(const hipCounter& counter);
+  // Check whether the counter is HIP_DEPRECATED or not.
+  static bool isHipDeprecated(const hipCounter& counter);
   // Check whether the counter is DEPRECATED or not.
   static bool isDeprecated(const hipCounter& counter);
+  // Check whether the counter is CUDA_REMOVED or not.
+  static bool isCudaRemoved(const hipCounter& counter);
+  // Check whether the counter is HIP_REMOVED or not.
+  static bool isHipRemoved(const hipCounter& counter);
   // Check whether the counter is REMOVED or not.
   static bool isRemoved(const hipCounter& counter);
-  /**
-    * Check whether the counter is ROC_UNSUPPORTED/HIP_UNSUPPORTED/UNSUPPORTED or not
-    * based on counter's API_TYPE and option TranslateToRoc.
-    */
-  static bool isUnsupported(const hipCounter &counter);
-  // Get string CUDA version
+  // Get string CUDA version.
   static std::string getCudaVersion(const cudaVersions &ver);
-  // Get string HIP version
+  // Get string HIP version.
   static std::string getHipVersion(const hipVersions &ver);
-  // Set this flag in case of hipification errors
+  // Set this flag in case of hipification errors.
   bool hasErrors = false;
 };

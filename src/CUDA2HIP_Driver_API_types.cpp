@@ -311,7 +311,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_COMPUTEMODE_DEFAULT",                                           {"hipComputeModeDefault",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0
   // cudaComputeModeExclusive
   // NOTE: Deprecated since CUDA 8.0
-  {"CU_COMPUTEMODE_EXCLUSIVE",                                         {"hipComputeModeExclusive",                                  "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, REMOVED}}, // 1
+  {"CU_COMPUTEMODE_EXCLUSIVE",                                         {"hipComputeModeExclusive",                                  "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, CUDA_REMOVED}}, // 1
   // cudaComputeModeProhibited
   {"CU_COMPUTEMODE_PROHIBITED",                                        {"hipComputeModeProhibited",                                 "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 2
   // cudaComputeModeExclusiveProcess
@@ -330,7 +330,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_CTX_SCHED_BLOCKING_SYNC",                                       {"hipDeviceScheduleBlockingSync",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x04
   // cudaDeviceBlockingSync
   // NOTE: Deprecated since CUDA 4.0 and replaced with CU_CTX_SCHED_BLOCKING_SYNC
-  {"CU_CTX_BLOCKING_SYNC",                                             {"hipDeviceScheduleBlockingSync",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, DEPRECATED}}, // 0x04
+  {"CU_CTX_BLOCKING_SYNC",                                             {"hipDeviceScheduleBlockingSync",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, CUDA_DEPRECATED}}, // 0x04
   // cudaDeviceScheduleMask
   {"CU_CTX_SCHED_MASK",                                                {"hipDeviceScheduleMask",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x07
   // cudaDeviceMapHost
@@ -362,7 +362,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_DEVICE_ATTRIBUTE_MAX_SHARED_MEMORY_PER_BLOCK",                  {"hipDeviceAttributeMaxSharedMemoryPerBlock",                "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, //  8
   // no analogue
   // NOTE: Deprecated, use CU_DEVICE_ATTRIBUTE_MAX_SHARED_MEMORY_PER_BLOCK
-  {"CU_DEVICE_ATTRIBUTE_SHARED_MEMORY_PER_BLOCK",                      {"hipDeviceAttributeMaxSharedMemoryPerBlock",                "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, DEPRECATED}}, //  8
+  {"CU_DEVICE_ATTRIBUTE_SHARED_MEMORY_PER_BLOCK",                      {"hipDeviceAttributeMaxSharedMemoryPerBlock",                "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, CUDA_DEPRECATED}}, //  8
   // cudaDevAttrTotalConstantMemory
   {"CU_DEVICE_ATTRIBUTE_TOTAL_CONSTANT_MEMORY",                        {"hipDeviceAttributeTotalConstantMemory",                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, //  9
   // cudaDevAttrWarpSize
@@ -372,14 +372,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaDevAttrMaxRegistersPerBlock
   {"CU_DEVICE_ATTRIBUTE_MAX_REGISTERS_PER_BLOCK",                      {"hipDeviceAttributeMaxRegistersPerBlock",                   "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 12
   // no analogue
-  {"CU_DEVICE_ATTRIBUTE_REGISTERS_PER_BLOCK",                          {"hipDeviceAttributeMaxRegistersPerBlock",                   "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, DEPRECATED}}, // 12
+  {"CU_DEVICE_ATTRIBUTE_REGISTERS_PER_BLOCK",                          {"hipDeviceAttributeMaxRegistersPerBlock",                   "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, CUDA_DEPRECATED}}, // 12
   // cudaDevAttrClockRate
   {"CU_DEVICE_ATTRIBUTE_CLOCK_RATE",                                   {"hipDeviceAttributeClockRate",                              "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 13
   // cudaDevAttrTextureAlignment
   {"CU_DEVICE_ATTRIBUTE_TEXTURE_ALIGNMENT",                            {"hipDeviceAttributeTextureAlignment",                       "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 14
   // cudaDevAttrGpuOverlap
   // NOTE: Deprecated, use instead CU_DEVICE_ATTRIBUTE_ASYNC_ENGINE_COUNT
-  {"CU_DEVICE_ATTRIBUTE_GPU_OVERLAP",                                  {"hipDeviceAttributeAsyncEngineCount",                       "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED | DEPRECATED}}, // 15
+  {"CU_DEVICE_ATTRIBUTE_GPU_OVERLAP",                                  {"hipDeviceAttributeAsyncEngineCount",                       "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED | CUDA_DEPRECATED}}, // 15
   // cudaDevAttrMultiProcessorCount
   {"CU_DEVICE_ATTRIBUTE_MULTIPROCESSOR_COUNT",                         {"hipDeviceAttributeMultiprocessorCount",                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 16
   // cudaDevAttrKernelExecTimeout
@@ -410,13 +410,13 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LAYERED_LAYERS",             {"hipDeviceAttributeMaxTexture2DLayeredLayers",              "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 29
   // cudaDevAttrMaxTexture2DLayeredWidth
   // NOTE: Deprecated, use CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LAYERED_WIDTH
-  {"CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_ARRAY_WIDTH",                {"hipDeviceAttributeMaxTexture2DLayeredWidth",               "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED | DEPRECATED}}, // 27
+  {"CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_ARRAY_WIDTH",                {"hipDeviceAttributeMaxTexture2DLayeredWidth",               "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED | CUDA_DEPRECATED}}, // 27
   // cudaDevAttrMaxTexture2DLayeredHeight
   // NOTE: Deprecated, use CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LAYERED_HEIGHT
-  {"CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_ARRAY_HEIGHT",               {"hipDeviceAttributeMaxTexture2DLayeredHeight",              "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED | DEPRECATED}}, // 28
+  {"CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_ARRAY_HEIGHT",               {"hipDeviceAttributeMaxTexture2DLayeredHeight",              "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED | CUDA_DEPRECATED}}, // 28
   // cudaDevAttrMaxTexture2DLayeredLayers
   // NOTE: Deprecated, use CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LAYERED_LAYERS
-  {"CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_ARRAY_NUMSLICES",            {"hipDeviceAttributeMaxTexture2DLayeredLayers",              "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED | DEPRECATED}}, // 29
+  {"CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_ARRAY_NUMSLICES",            {"hipDeviceAttributeMaxTexture2DLayeredLayers",              "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED | CUDA_DEPRECATED}}, // 29
   // cudaDevAttrSurfaceAlignment
   {"CU_DEVICE_ATTRIBUTE_SURFACE_ALIGNMENT",                            {"hipDeviceAttributeSurfaceAlignment",                       "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 30
   // cudaDevAttrConcurrentKernels
@@ -447,7 +447,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE1D_LAYERED_LAYERS",             {"hipDeviceAttributeMaxTexture1DLayeredLayers",              "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 43
   // no analogue
   // NOTE: Deprecated, do not use
-  {"CU_DEVICE_ATTRIBUTE_CAN_TEX2D_GATHER",                             {"hipDeviceAttributeCanTex2DGather",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED | DEPRECATED}}, // 44
+  {"CU_DEVICE_ATTRIBUTE_CAN_TEX2D_GATHER",                             {"hipDeviceAttributeCanTex2DGather",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED | CUDA_DEPRECATED}}, // 44
   // cudaDevAttrMaxTexture2DGatherWidth
   {"CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_GATHER_WIDTH",               {"hipDeviceAttributeMaxTexture2DGatherWidth",                "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 45
   // cudaDevAttrMaxTexture2DGatherHeight
@@ -497,7 +497,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaDevAttrMaxSurfaceCubemapLayeredLayers
   {"CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACECUBEMAP_LAYERED_LAYERS",        {"hipDeviceAttributeMaxSurfaceCubemapLayeredLayers",         "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 68
   // cudaDevAttrMaxTexture1DLinearWidth
-  {"CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE1D_LINEAR_WIDTH",               {"hipDeviceAttributeMaxTexture1DLinearWidth",                "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED | DEPRECATED}}, // 69
+  {"CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE1D_LINEAR_WIDTH",               {"hipDeviceAttributeMaxTexture1DLinearWidth",                "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED | CUDA_DEPRECATED}}, // 69
   // cudaDevAttrMaxTexture2DLinearWidth
   {"CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LINEAR_WIDTH",               {"hipDeviceAttributeMaxTexture2DLinearWidth",                "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 70
   // cudaDevAttrMaxTexture2DLinearHeight
@@ -563,7 +563,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaDevAttrDirectManagedMemAccessFromHost
   {"CU_DEVICE_ATTRIBUTE_DIRECT_MANAGED_MEM_ACCESS_FROM_HOST",          {"hipDeviceAttributeDirectManagedMemAccessFromHost",         "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 101
   // no analogue
-  {"CU_DEVICE_ATTRIBUTE_VIRTUAL_ADDRESS_MANAGEMENT_SUPPORTED",         {"hipDeviceAttributeVirtualMemoryManagementSupported",       "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED | DEPRECATED}}, // 102
+  {"CU_DEVICE_ATTRIBUTE_VIRTUAL_ADDRESS_MANAGEMENT_SUPPORTED",         {"hipDeviceAttributeVirtualMemoryManagementSupported",       "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED | CUDA_DEPRECATED}}, // 102
   // no analogue
   {"CU_DEVICE_ATTRIBUTE_VIRTUAL_MEMORY_MANAGEMENT_SUPPORTED",          {"hipDeviceAttributeVirtualMemoryManagementSupported",       "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 102
   // no analogue
@@ -607,9 +607,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_DEVICE_P2P_ATTRIBUTE_NATIVE_ATOMIC_SUPPORTED",                  {"hipDevP2PAttrNativeAtomicSupported",                       "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x03
   // cudaDevP2PAttrCudaArrayAccessSupported = 4
   // NOTE" deprecated, use CU_DEVICE_P2P_ATTRIBUTE_CUDA_ARRAY_ACCESS_SUPPORTED instead
-  {"CU_DEVICE_P2P_ATTRIBUTE_ACCESS_ACCESS_SUPPORTED",                  {"hipDevP2PAttrHipArrayAccessSupported",                     "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, DEPRECATED}}, // 0x04
+  {"CU_DEVICE_P2P_ATTRIBUTE_ACCESS_ACCESS_SUPPORTED",                  {"hipDevP2PAttrHipArrayAccessSupported",                     "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, CUDA_DEPRECATED}}, // 0x04
   // NOTE" deprecated, use CU_DEVICE_P2P_ATTRIBUTE_CUDA_ARRAY_ACCESS_SUPPORTED instead
-  {"CU_DEVICE_P2P_ATTRIBUTE_ARRAY_ACCESS_ACCESS_SUPPORTED",            {"hipDevP2PAttrHipArrayAccessSupported",                     "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, DEPRECATED | REMOVED}}, // 0x04
+  {"CU_DEVICE_P2P_ATTRIBUTE_ARRAY_ACCESS_ACCESS_SUPPORTED",            {"hipDevP2PAttrHipArrayAccessSupported",                     "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, CUDA_DEPRECATED | CUDA_REMOVED}}, // 0x04
   // cudaDevP2PAttrCudaArrayAccessSupported = 4
   {"CU_DEVICE_P2P_ATTRIBUTE_CUDA_ARRAY_ACCESS_SUPPORTED",              {"hipDevP2PAttrHipArrayAccessSupported",                     "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x04
 
@@ -943,7 +943,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   //
   {"CU_GRAPH_NODE_TYPE_EXT_SEMAS_WAIT",                                {"hipGraphNodeTypeExtSemasWait",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 9
   // cudaGraphNodeTypeCount
-  {"CU_GRAPH_NODE_TYPE_COUNT",                                         {"hipGraphNodeTypeCount",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED | REMOVED}}, // 8
+  {"CU_GRAPH_NODE_TYPE_COUNT",                                         {"hipGraphNodeTypeCount",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED | CUDA_REMOVED}}, // 8
 
   // cudaGraphExecUpdateResult
   {"CUgraphExecUpdateResult",                                          {"hipGraphExecUpdateResult",                                 "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
@@ -1023,13 +1023,13 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUjit_target_enum",                                                {"hipJitTarget",                                             "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
   // CUjit_target enum values
   // NOTE: Deprecated since CUDA 9.0
-  {"CU_TARGET_COMPUTE_10",                                             {"hipJitTargetCompute10",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED | REMOVED}}, // 10
+  {"CU_TARGET_COMPUTE_10",                                             {"hipJitTargetCompute10",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED | CUDA_REMOVED}}, // 10
   // NOTE: Deprecated since CUDA 9.0
-  {"CU_TARGET_COMPUTE_11",                                             {"hipJitTargetCompute11",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED | REMOVED}}, // 11
+  {"CU_TARGET_COMPUTE_11",                                             {"hipJitTargetCompute11",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED | CUDA_REMOVED}}, // 11
   // NOTE: Deprecated since CUDA 9.0
-  {"CU_TARGET_COMPUTE_12",                                             {"hipJitTargetCompute12",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED | REMOVED}}, // 12
+  {"CU_TARGET_COMPUTE_12",                                             {"hipJitTargetCompute12",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED | CUDA_REMOVED}}, // 12
   // NOTE: Deprecated since CUDA 9.0
-  {"CU_TARGET_COMPUTE_13",                                             {"hipJitTargetCompute13",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED | REMOVED}}, // 13
+  {"CU_TARGET_COMPUTE_13",                                             {"hipJitTargetCompute13",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED | CUDA_REMOVED}}, // 13
   {"CU_TARGET_COMPUTE_20",                                             {"hipJitTargetCompute20",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 20
   {"CU_TARGET_COMPUTE_21",                                             {"hipJitTargetCompute21",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 21
   {"CU_TARGET_COMPUTE_30",                                             {"hipJitTargetCompute30",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 20
@@ -1045,7 +1045,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_TARGET_COMPUTE_70",                                             {"hipJitTargetCompute70",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 70
   {"CU_TARGET_COMPUTE_72",                                             {"hipJitTargetCompute72",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 70
   // NOTE: Deprecated since CUDA 10.0
-  {"CU_TARGET_COMPUTE_73",                                             {"hipJitTargetCompute73",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED | REMOVED}}, // 73
+  {"CU_TARGET_COMPUTE_73",                                             {"hipJitTargetCompute73",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED | CUDA_REMOVED}}, // 73
   {"CU_TARGET_COMPUTE_75",                                             {"hipJitTargetCompute75",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 75
   {"CU_TARGET_COMPUTE_80",                                             {"hipJitTargetCompute80",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 80
   {"CU_TARGET_COMPUTE_86",                                             {"hipJitTargetCompute86",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 86
@@ -1273,13 +1273,13 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUDA_ERROR_PROFILER_DISABLED",                                     {"hipErrorProfilerDisabled",                                 "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 5
   // cudaErrorProfilerNotInitialized
   // NOTE: Deprecated since CUDA 5.0
-  {"CUDA_ERROR_PROFILER_NOT_INITIALIZED",                              {"hipErrorProfilerNotInitialized",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, DEPRECATED}}, // 6
+  {"CUDA_ERROR_PROFILER_NOT_INITIALIZED",                              {"hipErrorProfilerNotInitialized",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, CUDA_DEPRECATED}}, // 6
   // NOTE: Deprecated since CUDA 5.0
   // cudaErrorProfilerAlreadyStarted
-  {"CUDA_ERROR_PROFILER_ALREADY_STARTED",                              {"hipErrorProfilerAlreadyStarted",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, DEPRECATED}}, // 7
+  {"CUDA_ERROR_PROFILER_ALREADY_STARTED",                              {"hipErrorProfilerAlreadyStarted",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, CUDA_DEPRECATED}}, // 7
   // cudaErrorProfilerAlreadyStopped
   // NOTE: Deprecated since CUDA 5.0
-  {"CUDA_ERROR_PROFILER_ALREADY_STOPPED",                              {"hipErrorProfilerAlreadyStopped",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, DEPRECATED}}, // 8
+  {"CUDA_ERROR_PROFILER_ALREADY_STOPPED",                              {"hipErrorProfilerAlreadyStopped",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, CUDA_DEPRECATED}}, // 8
   // cudaErrorStubLibrary
   {"CUDA_ERROR_STUB_LIBRARY",                                          {"hipErrorStubLibrary",                                      "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 34
   // cudaErrorNoDevice
@@ -1294,7 +1294,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUDA_ERROR_INVALID_CONTEXT",                                       {"hipErrorInvalidContext",                                   "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 201
   // no analogue
   // NOTE: Deprecated since CUDA 3.2
-  {"CUDA_ERROR_CONTEXT_ALREADY_CURRENT",                               {"hipErrorContextAlreadyCurrent",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, DEPRECATED}}, // 202
+  {"CUDA_ERROR_CONTEXT_ALREADY_CURRENT",                               {"hipErrorContextAlreadyCurrent",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, CUDA_DEPRECATED}}, // 202
   // cudaErrorMapBufferObjectFailed
   {"CUDA_ERROR_MAP_FAILED",                                            {"hipErrorMapFailed",                                        "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 205
   // cudaErrorUnmapBufferObjectFailed
@@ -1807,7 +1807,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_TRSF_SRGB",                                                     {"HIP_TRSF_SRGB",                                            "", CONV_DEFINE, API_DRIVER, 1}}, // 0x10
   // no analogue
   // NOTE: Deprecated, use CUDA_ARRAY3D_LAYERED
-  {"CUDA_ARRAY3D_2DARRAY",                                             {"HIP_ARRAY3D_2DARRAY",                                      "", CONV_DEFINE, API_DRIVER, 1, HIP_UNSUPPORTED | DEPRECATED}}, // 0x01
+  {"CUDA_ARRAY3D_2DARRAY",                                             {"HIP_ARRAY3D_2DARRAY",                                      "", CONV_DEFINE, API_DRIVER, 1, HIP_UNSUPPORTED | CUDA_DEPRECATED}}, // 0x01
   // cudaArrayLayered
   {"CUDA_ARRAY3D_LAYERED",                                             {"hipArrayLayered",                                          "", CONV_DEFINE, API_DRIVER, 1}}, // 0x01
   // cudaArraySurfaceLoadStore

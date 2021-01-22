@@ -115,10 +115,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD",                            {"HIPDNN_CONVOLUTION_FWD_ALGO_WINOGRAD",                            "", CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 6
   {"CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD_NONFUSED",                   {"HIPDNN_CONVOLUTION_FWD_ALGO_WINOGRAD_NONFUSED",                   "", CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 7
   {"CUDNN_CONVOLUTION_FWD_ALGO_COUNT",                               {"HIPDNN_CONVOLUTION_FWD_ALGO_COUNT",                               "", CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 8
-  {"cudnnConvolutionFwdPreference_t",                                {"hipdnnConvolutionFwdPreference_t",                                "", CONV_TYPE, API_DNN, 1, DEPRECATED | REMOVED}},
-  {"CUDNN_CONVOLUTION_FWD_NO_WORKSPACE",                             {"HIPDNN_CONVOLUTION_FWD_NO_WORKSPACE",                             "", CONV_NUMERIC_LITERAL, API_DNN, 1, DEPRECATED | REMOVED}},    // 0
-  {"CUDNN_CONVOLUTION_FWD_PREFER_FASTEST",                           {"HIPDNN_CONVOLUTION_FWD_PREFER_FASTEST",                           "", CONV_NUMERIC_LITERAL, API_DNN, 1, DEPRECATED | REMOVED}},    // 1
-  {"CUDNN_CONVOLUTION_FWD_SPECIFY_WORKSPACE_LIMIT",                  {"HIPDNN_CONVOLUTION_FWD_SPECIFY_WORKSPACE_LIMIT",                  "", CONV_NUMERIC_LITERAL, API_DNN, 1, DEPRECATED | REMOVED}},    // 2
+  {"cudnnConvolutionFwdPreference_t",                                {"hipdnnConvolutionFwdPreference_t",                                "", CONV_TYPE, API_DNN, 1, CUDA_DEPRECATED | CUDA_REMOVED}},
+  {"CUDNN_CONVOLUTION_FWD_NO_WORKSPACE",                             {"HIPDNN_CONVOLUTION_FWD_NO_WORKSPACE",                             "", CONV_NUMERIC_LITERAL, API_DNN, 1, CUDA_DEPRECATED | CUDA_REMOVED}},    // 0
+  {"CUDNN_CONVOLUTION_FWD_PREFER_FASTEST",                           {"HIPDNN_CONVOLUTION_FWD_PREFER_FASTEST",                           "", CONV_NUMERIC_LITERAL, API_DNN, 1, CUDA_DEPRECATED | CUDA_REMOVED}},    // 1
+  {"CUDNN_CONVOLUTION_FWD_SPECIFY_WORKSPACE_LIMIT",                  {"HIPDNN_CONVOLUTION_FWD_SPECIFY_WORKSPACE_LIMIT",                  "", CONV_NUMERIC_LITERAL, API_DNN, 1, CUDA_DEPRECATED | CUDA_REMOVED}},    // 2
   {"cudnnDeterminism_t",                                             {"hipdnnDeterminism_t",                                             "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
   {"CUDNN_NON_DETERMINISTIC",                                        {"HIPDNN_NON_DETERMINISTIC",                                        "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 0
   {"CUDNN_DETERMINISTIC",                                            {"HIPDNN_DETERMINISTIC",                                            "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 1
@@ -160,10 +160,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"CUDNN_CONVOLUTION_BWD_FILTER_ALGO_WINOGRAD_NONFUSED",            {"HIPDNN_CONVOLUTION_BWD_FILTER_ALGO_WINOGRAD_NONFUSED",            "", CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 5
   {"CUDNN_CONVOLUTION_BWD_FILTER_ALGO_FFT_TILING",                   {"HIPDNN_CONVOLUTION_BWD_FILTER_ALGO_FFT_TILING",                   "", CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 6
   {"CUDNN_CONVOLUTION_BWD_FILTER_ALGO_COUNT",                        {"HIPDNN_CONVOLUTION_BWD_FILTER_ALGO_COUNT",                        "", CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 7
-  {"cudnnConvolutionBwdFilterPreference_t",                          {"hipdnnConvolutionBwdFilterPreference_t",                          "", CONV_TYPE, API_DNN, 1, DEPRECATED | REMOVED}},
-  {"CUDNN_CONVOLUTION_BWD_FILTER_NO_WORKSPACE",                      {"HIPDNN_CONVOLUTION_BWD_FILTER_NO_WORKSPACE",                      "", CONV_NUMERIC_LITERAL, API_DNN, 1, DEPRECATED | REMOVED}},    // 0
-  {"CUDNN_CONVOLUTION_BWD_FILTER_PREFER_FASTEST",                    {"HIPDNN_CONVOLUTION_BWD_FILTER_PREFER_FASTEST",                    "", CONV_NUMERIC_LITERAL, API_DNN, 1, DEPRECATED | REMOVED}},    // 1
-  {"CUDNN_CONVOLUTION_BWD_FILTER_SPECIFY_WORKSPACE_LIMIT",           {"HIPDNN_CONVOLUTION_BWD_FILTER_SPECIFY_WORKSPACE_LIMIT",           "", CONV_NUMERIC_LITERAL, API_DNN, 1, DEPRECATED | REMOVED}},    // 2
+  {"cudnnConvolutionBwdFilterPreference_t",                          {"hipdnnConvolutionBwdFilterPreference_t",                          "", CONV_TYPE, API_DNN, 1, CUDA_DEPRECATED | CUDA_REMOVED}},
+  {"CUDNN_CONVOLUTION_BWD_FILTER_NO_WORKSPACE",                      {"HIPDNN_CONVOLUTION_BWD_FILTER_NO_WORKSPACE",                      "", CONV_NUMERIC_LITERAL, API_DNN, 1, CUDA_DEPRECATED | CUDA_REMOVED}},    // 0
+  {"CUDNN_CONVOLUTION_BWD_FILTER_PREFER_FASTEST",                    {"HIPDNN_CONVOLUTION_BWD_FILTER_PREFER_FASTEST",                    "", CONV_NUMERIC_LITERAL, API_DNN, 1, CUDA_DEPRECATED | CUDA_REMOVED}},    // 1
+  {"CUDNN_CONVOLUTION_BWD_FILTER_SPECIFY_WORKSPACE_LIMIT",           {"HIPDNN_CONVOLUTION_BWD_FILTER_SPECIFY_WORKSPACE_LIMIT",           "", CONV_NUMERIC_LITERAL, API_DNN, 1, CUDA_DEPRECATED | CUDA_REMOVED}},    // 2
   {"cudnnRNNAlgo_t",                                                 {"hipdnnRNNAlgo_t",                                                 "", CONV_TYPE, API_DNN, 1}},
   {"CUDNN_RNN_ALGO_STANDARD",                                        {"HIPDNN_RNN_ALGO_STANDARD",                                        "", CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 0
   {"CUDNN_RNN_ALGO_PERSIST_STATIC",                                  {"HIPDNN_RNN_ALGO_PERSIST_STATIC",                                  "", CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 1
@@ -199,10 +199,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"cudnnReduceTensorIndices_t",                                     {"hipdnnReduceTensorIndices_t",                                     "", CONV_TYPE, API_DNN, 1}},
   {"CUDNN_REDUCE_TENSOR_NO_INDICES",                                 {"HIPDNN_REDUCE_TENSOR_NO_INDICES",                                 "", CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 0
   {"CUDNN_REDUCE_TENSOR_FLATTENED_INDICES",                          {"HIPDNN_REDUCE_TENSOR_FLATTENED_INDICES",                          "", CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 1
-  {"cudnnConvolutionBwdDataPreference_t",                            {"hipdnnConvolutionBwdDataPreference_t",                            "", CONV_TYPE, API_DNN, 1, DEPRECATED | REMOVED}},
-  {"CUDNN_CONVOLUTION_BWD_DATA_NO_WORKSPACE",                        {"HIPDNN_CONVOLUTION_BWD_DATA_NO_WORKSPACE",                        "", CONV_NUMERIC_LITERAL, API_DNN, 1, DEPRECATED | REMOVED}},    // 0
-  {"CUDNN_CONVOLUTION_BWD_DATA_PREFER_FASTEST",                      {"HIPDNN_CONVOLUTION_BWD_DATA_PREFER_FASTEST",                      "", CONV_NUMERIC_LITERAL, API_DNN, 1, DEPRECATED | REMOVED}},    // 1
-  {"CUDNN_CONVOLUTION_BWD_DATA_SPECIFY_WORKSPACE_LIMIT",             {"HIPDNN_CONVOLUTION_BWD_DATA_SPECIFY_WORKSPACE_LIMIT",             "", CONV_NUMERIC_LITERAL, API_DNN, 1, DEPRECATED | REMOVED}},    // 2
+  {"cudnnConvolutionBwdDataPreference_t",                            {"hipdnnConvolutionBwdDataPreference_t",                            "", CONV_TYPE, API_DNN, 1, CUDA_DEPRECATED | CUDA_REMOVED}},
+  {"CUDNN_CONVOLUTION_BWD_DATA_NO_WORKSPACE",                        {"HIPDNN_CONVOLUTION_BWD_DATA_NO_WORKSPACE",                        "", CONV_NUMERIC_LITERAL, API_DNN, 1, CUDA_DEPRECATED | CUDA_REMOVED}},    // 0
+  {"CUDNN_CONVOLUTION_BWD_DATA_PREFER_FASTEST",                      {"HIPDNN_CONVOLUTION_BWD_DATA_PREFER_FASTEST",                      "", CONV_NUMERIC_LITERAL, API_DNN, 1, CUDA_DEPRECATED | CUDA_REMOVED}},    // 1
+  {"CUDNN_CONVOLUTION_BWD_DATA_SPECIFY_WORKSPACE_LIMIT",             {"HIPDNN_CONVOLUTION_BWD_DATA_SPECIFY_WORKSPACE_LIMIT",             "", CONV_NUMERIC_LITERAL, API_DNN, 1, CUDA_DEPRECATED | CUDA_REMOVED}},    // 2
   {"cudnnIndicesType_t",                                             {"hipdnnIndicesType_t",                                             "", CONV_TYPE, API_DNN, 1}},
   {"CUDNN_32BIT_INDICES",                                            {"HIPDNN_32BIT_INDICES",                                            "", CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 0
   {"CUDNN_64BIT_INDICES",                                            {"HIPDNN_64BIT_INDICES",                                            "", CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 1
