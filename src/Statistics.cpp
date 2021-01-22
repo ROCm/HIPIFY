@@ -348,23 +348,42 @@ bool Statistics::isRocUnsupported(const hipCounter &counter) {
   return ROC_UNSUPPORTED == (counter.supportDegree & ROC_UNSUPPORTED);
 }
 
+bool Statistics::isUnsupported(const hipCounter& counter) {
+  if (UNSUPPORTED == (counter.supportDegree & UNSUPPORTED)) return true;
+  if (Statistics::isToRoc(counter)) return Statistics::isRocUnsupported(counter);
+  else return Statistics::isHipUnsupported(counter);
+}
+
+bool Statistics::isCudaDeprecated(const hipCounter &counter) {
+  return CUDA_DEPRECATED == (counter.supportDegree & CUDA_DEPRECATED) ||
+         DEPRECATED == (counter.supportDegree & DEPRECATED);
+}
+
+bool Statistics::isHipDeprecated(const hipCounter &counter) {
+  return HIP_DEPRECATED == (counter.supportDegree & HIP_DEPRECATED) ||
+         DEPRECATED == (counter.supportDegree & DEPRECATED);
+}
+
 bool Statistics::isDeprecated(const hipCounter &counter) {
-  return DEPRECATED == (counter.supportDegree & DEPRECATED);
+  return DEPRECATED == (counter.supportDegree & DEPRECATED) || (
+         CUDA_DEPRECATED == (counter.supportDegree & CUDA_DEPRECATED) &&
+         HIP_DEPRECATED == (counter.supportDegree & HIP_DEPRECATED));
+}
+
+bool Statistics::isCudaRemoved(const hipCounter &counter) {
+  return CUDA_REMOVED == (counter.supportDegree & CUDA_REMOVED) ||
+         REMOVED == (counter.supportDegree & REMOVED);
+}
+
+bool Statistics::isHipRemoved(const hipCounter &counter) {
+  return HIP_REMOVED == (counter.supportDegree & HIP_REMOVED) ||
+         REMOVED == (counter.supportDegree & REMOVED);
 }
 
 bool Statistics::isRemoved(const hipCounter &counter) {
-  return REMOVED == (counter.supportDegree & REMOVED);
-}
-
-bool Statistics::isUnsupported(const hipCounter &counter) {
-  if (UNSUPPORTED == (counter.supportDegree & UNSUPPORTED)) {
-    return true;
-  }
-  if (Statistics::isToRoc(counter)) {
-    return Statistics::isRocUnsupported(counter);
-  } else {
-    return Statistics::isHipUnsupported(counter);
-  }
+  return REMOVED == (counter.supportDegree & REMOVED) || (
+         CUDA_REMOVED == (counter.supportDegree & CUDA_REMOVED) &&
+         HIP_REMOVED == (counter.supportDegree & HIP_REMOVED));
 }
 
 std::string Statistics::getCudaVersion(const cudaVersions& ver) {

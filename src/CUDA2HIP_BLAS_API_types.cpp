@@ -85,7 +85,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP {
   // Blas Math mode/tensor operation
   {"cublasMath_t",                                     {"hipblasMath_t",                                     "",  CONV_TYPE, API_BLAS, 2, UNSUPPORTED}},
   {"CUBLAS_DEFAULT_MATH",                              {"HIPBLAS_DEFAULT_MATH",                              "",  CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}}, // 0
-  {"CUBLAS_TENSOR_OP_MATH",                            {"HIPBLAS_TENSOR_OP_MATH",                            "",  CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED | DEPRECATED}}, // 1
+  {"CUBLAS_TENSOR_OP_MATH",                            {"HIPBLAS_TENSOR_OP_MATH",                            "",  CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED | CUDA_DEPRECATED}}, // 1
   {"CUBLAS_PEDANTIC_MATH",                             {"HIPBLAS_PEDANTIC_MATH",                             "",  CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}}, // 2
   {"CUBLAS_TF32_TENSOR_OP_MATH",                       {"HIPBLAS_TF32_TENSOR_OP_MATH",                       "",  CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}}, // 3
   {"CUBLAS_MATH_DISALLOW_REDUCED_PRECISION_REDUCTION", {"HIPBLAS_MATH_DISALLOW_REDUCED_PRECISION_REDUCTION", "",  CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}}, // 16

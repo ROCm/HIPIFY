@@ -29,14 +29,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_TYPE_NAME_MAP {
   {"cusparseContext",                           {"hipsparseContext",                           "", CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED}},
   {"cusparseHandle_t",                          {"hipsparseHandle_t",                          "", CONV_TYPE, API_SPARSE, 4}},
 
-  {"cusparseHybMat",                            {"hipsparseHybMat",                            "", CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED | DEPRECATED | REMOVED}},
-  {"cusparseHybMat_t",                          {"hipsparseHybMat_t",                          "", CONV_TYPE, API_SPARSE, 4, DEPRECATED | REMOVED}},
+  {"cusparseHybMat",                            {"hipsparseHybMat",                            "", CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
+  {"cusparseHybMat_t",                          {"hipsparseHybMat_t",                          "", CONV_TYPE, API_SPARSE, 4, CUDA_DEPRECATED | CUDA_REMOVED}},
 
   {"cusparseMatDescr",                          {"hipsparseMatDescr",                          "", CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED}},
   {"cusparseMatDescr_t",                        {"hipsparseMatDescr_t",                        "", CONV_TYPE, API_SPARSE, 4}},
 
-  {"cusparseSolveAnalysisInfo",                 {"hipsparseSolveAnalysisInfo",                 "", CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED | DEPRECATED | REMOVED}},
-  {"cusparseSolveAnalysisInfo_t",               {"hipsparseSolveAnalysisInfo_t",               "", CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED | DEPRECATED | REMOVED}},
+  {"cusparseSolveAnalysisInfo",                 {"hipsparseSolveAnalysisInfo",                 "", CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
+  {"cusparseSolveAnalysisInfo_t",               {"hipsparseSolveAnalysisInfo_t",               "", CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
 
   {"csrsv2Info",                                {"csrsv2Info",                                 "", CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED}},
   {"csrsv2Info_t",                              {"csrsv2Info_t",                               "", CONV_TYPE, API_SPARSE, 4}},
@@ -95,10 +95,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_TYPE_NAME_MAP {
   {"CUSPARSE_DIRECTION_ROW",                    {"HIPSPARSE_DIRECTION_ROW",                    "", CONV_NUMERIC_LITERAL, API_SPARSE, 4}},
   {"CUSPARSE_DIRECTION_COLUMN",                 {"HIPSPARSE_DIRECTION_COLUMN",                 "", CONV_NUMERIC_LITERAL, API_SPARSE, 4}},
 
-  {"cusparseHybPartition_t",                    {"hipsparseHybPartition_t",                    "", CONV_TYPE, API_SPARSE, 4, DEPRECATED | REMOVED}},
-  {"CUSPARSE_HYB_PARTITION_AUTO",               {"HIPSPARSE_HYB_PARTITION_AUTO",               "", CONV_NUMERIC_LITERAL, API_SPARSE, 4, DEPRECATED | REMOVED}},
-  {"CUSPARSE_HYB_PARTITION_USER",               {"HIPSPARSE_HYB_PARTITION_USER",               "", CONV_NUMERIC_LITERAL, API_SPARSE, 4, DEPRECATED | REMOVED}},
-  {"CUSPARSE_HYB_PARTITION_MAX",                {"HIPSPARSE_HYB_PARTITION_MAX",                "", CONV_NUMERIC_LITERAL, API_SPARSE, 4, DEPRECATED | REMOVED}},
+  {"cusparseHybPartition_t",                    {"hipsparseHybPartition_t",                    "", CONV_TYPE, API_SPARSE, 4, CUDA_DEPRECATED | CUDA_REMOVED}},
+  {"CUSPARSE_HYB_PARTITION_AUTO",               {"HIPSPARSE_HYB_PARTITION_AUTO",               "", CONV_NUMERIC_LITERAL, API_SPARSE, 4, CUDA_DEPRECATED | CUDA_REMOVED}},
+  {"CUSPARSE_HYB_PARTITION_USER",               {"HIPSPARSE_HYB_PARTITION_USER",               "", CONV_NUMERIC_LITERAL, API_SPARSE, 4, CUDA_DEPRECATED | CUDA_REMOVED}},
+  {"CUSPARSE_HYB_PARTITION_MAX",                {"HIPSPARSE_HYB_PARTITION_MAX",                "", CONV_NUMERIC_LITERAL, API_SPARSE, 4, CUDA_DEPRECATED | CUDA_REMOVED}},
 
   {"cusparseDiagType_t",                        {"hipsparseDiagType_t",                        "", CONV_TYPE, API_SPARSE, 4}},
   {"CUSPARSE_DIAG_TYPE_NON_UNIT",               {"HIPSPARSE_DIAG_TYPE_NON_UNIT",               "", CONV_NUMERIC_LITERAL, API_SPARSE, 4}},
@@ -128,9 +128,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_TYPE_NAME_MAP {
   {"CUSPARSE_POINTER_MODE_DEVICE",              {"HIPSPARSE_POINTER_MODE_DEVICE",              "", CONV_NUMERIC_LITERAL, API_SPARSE, 4}},
 
   {"cusparseAlgMode_t",                         {"hipsparseAlgMode_t",                         "", CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED}},
-  {"CUSPARSE_ALG0",                             {"CUSPARSE_ALG0",                              "", CONV_NUMERIC_LITERAL, API_SPARSE, 4, HIP_UNSUPPORTED | REMOVED}},
-  {"CUSPARSE_ALG1",                             {"CUSPARSE_ALG1",                              "", CONV_NUMERIC_LITERAL, API_SPARSE, 4, HIP_UNSUPPORTED | REMOVED}},
-  {"CUSPARSE_ALG_NAIVE",                        {"CUSPARSE_ALG_NAIVE",                         "", CONV_NUMERIC_LITERAL, API_SPARSE, 4, HIP_UNSUPPORTED | REMOVED}},
+  {"CUSPARSE_ALG0",                             {"CUSPARSE_ALG0",                              "", CONV_NUMERIC_LITERAL, API_SPARSE, 4, HIP_UNSUPPORTED | CUDA_REMOVED}},
+  {"CUSPARSE_ALG1",                             {"CUSPARSE_ALG1",                              "", CONV_NUMERIC_LITERAL, API_SPARSE, 4, HIP_UNSUPPORTED | CUDA_REMOVED}},
+  {"CUSPARSE_ALG_NAIVE",                        {"CUSPARSE_ALG_NAIVE",                         "", CONV_NUMERIC_LITERAL, API_SPARSE, 4, HIP_UNSUPPORTED | CUDA_REMOVED}},
   {"CUSPARSE_ALG_MERGE_PATH",                   {"CUSPARSE_ALG_MERGE_PATH",                    "", CONV_NUMERIC_LITERAL, API_SPARSE, 4, HIP_UNSUPPORTED}},
 
   {"cusparseSolvePolicy_t",                     {"hipsparseSolvePolicy_t",                     "", CONV_TYPE, API_SPARSE, 4}},
@@ -173,10 +173,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_TYPE_NAME_MAP {
 
   {"cusparseSpMMAlg_t",                         {"hipsparseSpMMAlg_t",                         "", CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED}},
   {"CUSPARSE_MM_ALG_DEFAULT",                   {"HIPSPARSE_MM_ALG_DEFAULT",                   "", CONV_NUMERIC_LITERAL, API_SPARSE, 4, HIP_UNSUPPORTED}},
-  {"CUSPARSE_COOMM_ALG1",                       {"HIPSPARSE_COOMM_ALG1",                       "", CONV_NUMERIC_LITERAL, API_SPARSE, 4, HIP_UNSUPPORTED | DEPRECATED}},
-  {"CUSPARSE_COOMM_ALG2",                       {"HIPSPARSE_COOMM_ALG2",                       "", CONV_NUMERIC_LITERAL, API_SPARSE, 4, HIP_UNSUPPORTED | DEPRECATED}},
-  {"CUSPARSE_COOMM_ALG3",                       {"HIPSPARSE_COOMM_ALG3",                       "", CONV_NUMERIC_LITERAL, API_SPARSE, 4, HIP_UNSUPPORTED | DEPRECATED}},
-  {"CUSPARSE_CSRMM_ALG1",                       {"HIPSPARSE_CSRMM_ALG1",                       "", CONV_NUMERIC_LITERAL, API_SPARSE, 4, HIP_UNSUPPORTED | DEPRECATED}},
+  {"CUSPARSE_COOMM_ALG1",                       {"HIPSPARSE_COOMM_ALG1",                       "", CONV_NUMERIC_LITERAL, API_SPARSE, 4, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"CUSPARSE_COOMM_ALG2",                       {"HIPSPARSE_COOMM_ALG2",                       "", CONV_NUMERIC_LITERAL, API_SPARSE, 4, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"CUSPARSE_COOMM_ALG3",                       {"HIPSPARSE_COOMM_ALG3",                       "", CONV_NUMERIC_LITERAL, API_SPARSE, 4, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"CUSPARSE_CSRMM_ALG1",                       {"HIPSPARSE_CSRMM_ALG1",                       "", CONV_NUMERIC_LITERAL, API_SPARSE, 4, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   {"CUSPARSE_SPMM_ALG_DEFAULT",                 {"HIPSPARSE_SPMM_ALG_DEFAULT",                 "", CONV_NUMERIC_LITERAL, API_SPARSE, 4, HIP_UNSUPPORTED}},
   {"CUSPARSE_SPMM_COO_ALG1",                    {"HIPSPARSE_SPMM_COO_ALG1",                    "", CONV_NUMERIC_LITERAL, API_SPARSE, 4, HIP_UNSUPPORTED}},
   {"CUSPARSE_SPMM_COO_ALG2",                    {"HIPSPARSE_SPMM_COO_ALG2",                    "", CONV_NUMERIC_LITERAL, API_SPARSE, 4, HIP_UNSUPPORTED}},

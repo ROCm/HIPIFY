@@ -178,8 +178,8 @@ namespace perl {
     unsigned int countDeprecated = 0, countRemoved = 0;
     for (auto ma = CUDA_RENAMES_MAP().rbegin(); ma != CUDA_RENAMES_MAP().rend(); ++ma) {
       bool bDeprecated = false, bRemoved = false;
-      if (Statistics::isDeprecated(ma->second)) bDeprecated = true;
-      if (Statistics::isRemoved(ma->second)) bRemoved = true;
+      if (Statistics::isCudaDeprecated(ma->second)) bDeprecated = true;
+      if (Statistics::isCudaRemoved(ma->second)) bRemoved = true;
       if (bDeprecated || bRemoved) {
         const auto found = CUDA_VERSIONS_MAP().find(ma->first);
         if (found != CUDA_VERSIONS_MAP().end()) {

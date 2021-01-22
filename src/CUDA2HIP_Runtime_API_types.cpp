@@ -659,13 +659,13 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaErrorProfilerDisabled",                                        {"hipErrorProfilerDisabled",                                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, 35}}, // 5
   // Deprecated since CUDA 5.0
   // CUDA_ERROR_PROFILER_NOT_INITIALIZED
-  {"cudaErrorProfilerNotInitialized",                                  {"hipErrorProfilerNotInitialized",                           "", CONV_NUMERIC_LITERAL, API_RUNTIME, 35, DEPRECATED}}, // 6
+  {"cudaErrorProfilerNotInitialized",                                  {"hipErrorProfilerNotInitialized",                           "", CONV_NUMERIC_LITERAL, API_RUNTIME, 35, CUDA_DEPRECATED}}, // 6
   // Deprecated since CUDA 5.0
   // CUDA_ERROR_PROFILER_ALREADY_STARTED
-  {"cudaErrorProfilerAlreadyStarted",                                  {"hipErrorProfilerAlreadyStarted",                           "", CONV_NUMERIC_LITERAL, API_RUNTIME, 35, DEPRECATED}}, // 7
+  {"cudaErrorProfilerAlreadyStarted",                                  {"hipErrorProfilerAlreadyStarted",                           "", CONV_NUMERIC_LITERAL, API_RUNTIME, 35, CUDA_DEPRECATED}}, // 7
   // Deprecated since CUDA 5.0
   // CUDA_ERROR_PROFILER_ALREADY_STOPPED
-  {"cudaErrorProfilerAlreadyStopped",                                  {"hipErrorProfilerAlreadyStopped",                           "", CONV_NUMERIC_LITERAL, API_RUNTIME, 35, DEPRECATED}}, // 8
+  {"cudaErrorProfilerAlreadyStopped",                                  {"hipErrorProfilerAlreadyStopped",                           "", CONV_NUMERIC_LITERAL, API_RUNTIME, 35, CUDA_DEPRECATED}}, // 8
   // no analogue
   {"cudaErrorInvalidConfiguration",                                    {"hipErrorInvalidConfiguration",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, 35}}, // 9
   // no analogue
@@ -674,10 +674,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaErrorInvalidSymbol",                                           {"hipErrorInvalidSymbol",                                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, 35}}, // 13
   // Deprecated since CUDA 10.1
   // no analogue
-  {"cudaErrorInvalidHostPointer",                                      {"hipErrorInvalidHostPointer",                               "", CONV_NUMERIC_LITERAL, API_RUNTIME, 35, HIP_UNSUPPORTED | DEPRECATED}}, // 16
+  {"cudaErrorInvalidHostPointer",                                      {"hipErrorInvalidHostPointer",                               "", CONV_NUMERIC_LITERAL, API_RUNTIME, 35, HIP_UNSUPPORTED | CUDA_DEPRECATED}}, // 16
   // Deprecated since CUDA 10.1
   // no analogue
-  {"cudaErrorInvalidDevicePointer",                                    {"hipErrorInvalidDevicePointer",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, 35, DEPRECATED}}, // 17
+  {"cudaErrorInvalidDevicePointer",                                    {"hipErrorInvalidDevicePointer",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, 35, CUDA_DEPRECATED}}, // 17
   // no analogue
   {"cudaErrorInvalidTexture",                                          {"hipErrorInvalidTexture",                                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 35, HIP_UNSUPPORTED}}, // 18
   // no analogue
@@ -688,29 +688,29 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaErrorInvalidMemcpyDirection",                                  {"hipErrorInvalidMemcpyDirection",                           "", CONV_NUMERIC_LITERAL, API_RUNTIME, 35}}, // 21
   // Deprecated since CUDA 3.1
   // no analogue
-  {"cudaErrorAddressOfConstant",                                       {"hipErrorAddressOfConstant",                                "", CONV_NUMERIC_LITERAL, API_RUNTIME, 35, HIP_UNSUPPORTED | DEPRECATED}}, // 22
+  {"cudaErrorAddressOfConstant",                                       {"hipErrorAddressOfConstant",                                "", CONV_NUMERIC_LITERAL, API_RUNTIME, 35, HIP_UNSUPPORTED | CUDA_DEPRECATED}}, // 22
   // Deprecated since CUDA 3.1
   // no analogue
-  {"cudaErrorTextureFetchFailed",                                      {"hipErrorTextureFetchFailed",                               "", CONV_NUMERIC_LITERAL, API_RUNTIME, 35, HIP_UNSUPPORTED | DEPRECATED}}, // 23
+  {"cudaErrorTextureFetchFailed",                                      {"hipErrorTextureFetchFailed",                               "", CONV_NUMERIC_LITERAL, API_RUNTIME, 35, HIP_UNSUPPORTED | CUDA_DEPRECATED}}, // 23
   // Deprecated since CUDA 3.1
   // no analogue
-  {"cudaErrorTextureNotBound",                                         {"hipErrorTextureNotBound",                                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, 35, HIP_UNSUPPORTED | DEPRECATED}}, // 24
+  {"cudaErrorTextureNotBound",                                         {"hipErrorTextureNotBound",                                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, 35, HIP_UNSUPPORTED | CUDA_DEPRECATED}}, // 24
   // Deprecated since CUDA 3.1
   // no analogue
-  {"cudaErrorSynchronizationError",                                    {"hipErrorSynchronizationError",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, 35, HIP_UNSUPPORTED | DEPRECATED}}, // 25
+  {"cudaErrorSynchronizationError",                                    {"hipErrorSynchronizationError",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, 35, HIP_UNSUPPORTED | CUDA_DEPRECATED}}, // 25
   // no analogue
   {"cudaErrorInvalidFilterSetting",                                    {"hipErrorInvalidFilterSetting",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, 35, HIP_UNSUPPORTED}}, // 26
   // no analogue
   {"cudaErrorInvalidNormSetting",                                      {"hipErrorInvalidNormSetting",                               "", CONV_NUMERIC_LITERAL, API_RUNTIME, 35, HIP_UNSUPPORTED}}, // 27
   // Deprecated since CUDA 3.1
   // no analogue
-  {"cudaErrorMixedDeviceExecution",                                    {"hipErrorMixedDeviceExecution",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, 35, HIP_UNSUPPORTED | DEPRECATED}}, // 28
+  {"cudaErrorMixedDeviceExecution",                                    {"hipErrorMixedDeviceExecution",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, 35, HIP_UNSUPPORTED | CUDA_DEPRECATED}}, // 28
   // Deprecated since CUDA 4.1
   // no analogue
-  {"cudaErrorNotYetImplemented",                                       {"hipErrorNotYetImplemented",                                "", CONV_NUMERIC_LITERAL, API_RUNTIME, 35, HIP_UNSUPPORTED | DEPRECATED}}, // 31
+  {"cudaErrorNotYetImplemented",                                       {"hipErrorNotYetImplemented",                                "", CONV_NUMERIC_LITERAL, API_RUNTIME, 35, HIP_UNSUPPORTED | CUDA_DEPRECATED}}, // 31
   // Deprecated since CUDA 3.1
   // no analogue
-  {"cudaErrorMemoryValueTooLarge",                                     {"hipErrorMemoryValueTooLarge",                              "", CONV_NUMERIC_LITERAL, API_RUNTIME, 35, HIP_UNSUPPORTED | DEPRECATED}}, // 32
+  {"cudaErrorMemoryValueTooLarge",                                     {"hipErrorMemoryValueTooLarge",                              "", CONV_NUMERIC_LITERAL, API_RUNTIME, 35, HIP_UNSUPPORTED | CUDA_DEPRECATED}}, // 32
   // CUDA_ERROR_STUB_LIBRARY
   {"cudaErrorStubLibrary",                                             {"hipErrorStubLibrary",                                      "", CONV_NUMERIC_LITERAL, API_RUNTIME, 35, HIP_UNSUPPORTED}}, // 34
   // no analogue
@@ -733,7 +733,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaErrorMissingConfiguration",                                    {"hipErrorMissingConfiguration",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, 35}}, // 52
   // Deprecated since CUDA 3.1
   // no analogue
-  {"cudaErrorPriorLaunchFailure",                                      {"hipErrorPriorLaunchFailure",                               "", CONV_NUMERIC_LITERAL, API_RUNTIME, 35, DEPRECATED}}, // 53
+  {"cudaErrorPriorLaunchFailure",                                      {"hipErrorPriorLaunchFailure",                               "", CONV_NUMERIC_LITERAL, API_RUNTIME, 35, CUDA_DEPRECATED}}, // 53
   // no analogue
   {"cudaErrorLaunchMaxDepthExceeded",                                  {"hipErrorLaunchMaxDepthExceeded",                           "", CONV_NUMERIC_LITERAL, API_RUNTIME, 35, HIP_UNSUPPORTED}}, // 65
   // no analogue
@@ -892,7 +892,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CUDA_ERROR_UNKNOWN
   {"cudaErrorUnknown",                                                 {"hipErrorUnknown",                                          "", CONV_NUMERIC_LITERAL, API_RUNTIME, 35}}, // 999
   // Deprecated since CUDA 4.1
-  {"cudaErrorApiFailureBase",                                          {"hipErrorApiFailureBase",                                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 35, HIP_UNSUPPORTED | DEPRECATED}}, // 10000
+  {"cudaErrorApiFailureBase",                                          {"hipErrorApiFailureBase",                                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 35, HIP_UNSUPPORTED | CUDA_DEPRECATED}}, // 10000
 
   // CUexternalMemoryHandleType
   {"cudaExternalMemoryHandleType",                                     {"hipExternalMemoryHandleType",                              "", CONV_TYPE, API_RUNTIME, 35, HIP_UNSUPPORTED}},
@@ -1511,7 +1511,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaInvalidDeviceId",                                              {"hipInvalidDeviceId",                                       "", CONV_DEFINE, API_RUNTIME, 35}}, // ((int)-2)
   // CU_CTX_BLOCKING_SYNC
   // NOTE: Deprecated since CUDA 4.0 and replaced with cudaDeviceScheduleBlockingSync
-  {"cudaDeviceBlockingSync",                                           {"hipDeviceScheduleBlockingSync",                            "", CONV_DEFINE, API_RUNTIME, 35, DEPRECATED}}, // 0x04
+  {"cudaDeviceBlockingSync",                                           {"hipDeviceScheduleBlockingSync",                            "", CONV_DEFINE, API_RUNTIME, 35, CUDA_DEPRECATED}}, // 0x04
   // CU_CTX_LMEM_RESIZE_TO_MAX
   {"cudaDeviceLmemResizeToMax",                                        {"hipDeviceLmemResizeToMax",                                 "", CONV_DEFINE, API_RUNTIME, 35}}, // 0x10
   // CU_CTX_MAP_HOST
