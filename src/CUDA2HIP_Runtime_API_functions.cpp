@@ -377,11 +377,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // NOTE: Not equal to cuMemcpyAtoA due to different signatures
   {"cudaMemcpyArrayToArray",                                  {"hipMemcpyArrayToArray",                                  "", CONV_MEMORY, API_RUNTIME, 10, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   // no analogue
-  {"cudaMemcpyFromArray",                                     {"hipMemcpyFromArray",                                     "", CONV_MEMORY, API_RUNTIME, 10, CUDA_DEPRECATED}},
+  {"cudaMemcpyFromArray",                                     {"hipMemcpyFromArray",                                     "", CONV_MEMORY, API_RUNTIME, 10, DEPRECATED}},
   // no analogue
   {"cudaMemcpyFromArrayAsync",                                {"hipMemcpyFromArrayAsync",                                "", CONV_MEMORY, API_RUNTIME, 10, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   // no analogue
-  {"cudaMemcpyToArray",                                       {"hipMemcpyToArray",                                       "", CONV_MEMORY, API_RUNTIME, 10, CUDA_DEPRECATED}},
+  {"cudaMemcpyToArray",                                       {"hipMemcpyToArray",                                       "", CONV_MEMORY, API_RUNTIME, 10, DEPRECATED}},
   // no analogue
   {"cudaMemcpyToArrayAsync",                                  {"hipMemcpyToArrayAsync",                                  "", CONV_MEMORY, API_RUNTIME, 10, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
 
@@ -599,11 +599,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
 
   // 25. Texture Reference Management [DEPRECATED]
   // no analogue
-  {"cudaBindTexture",                                         {"hipBindTexture",                                         "", CONV_TEXTURE, API_RUNTIME, 25, CUDA_DEPRECATED}},
+  {"cudaBindTexture",                                         {"hipBindTexture",                                         "", CONV_TEXTURE, API_RUNTIME, 25, DEPRECATED}},
   // no analogue
-  {"cudaBindTexture2D",                                       {"hipBindTexture2D",                                       "", CONV_TEXTURE, API_RUNTIME, 25, CUDA_DEPRECATED}},
+  {"cudaBindTexture2D",                                       {"hipBindTexture2D",                                       "", CONV_TEXTURE, API_RUNTIME, 25, DEPRECATED}},
   // no analogue
-  {"cudaBindTextureToArray",                                  {"hipBindTextureToArray",                                  "", CONV_TEXTURE, API_RUNTIME, 25, CUDA_DEPRECATED}},
+  {"cudaBindTextureToArray",                                  {"hipBindTextureToArray",                                  "", CONV_TEXTURE, API_RUNTIME, 25, DEPRECATED}},
   // no analogue
   // NOTE: Unsupported yet on NVCC path
   {"cudaBindTextureToMipmappedArray",                         {"hipBindTextureToMipmappedArray",                         "", CONV_TEXTURE, API_RUNTIME, 25, CUDA_DEPRECATED}},
@@ -612,12 +612,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // no analogue
   {"cudaGetChannelDesc",                                      {"hipGetChannelDesc",                                      "", CONV_TEXTURE, API_RUNTIME, 25}},
   // no analogue
-  {"cudaGetTextureAlignmentOffset",                           {"hipGetTextureAlignmentOffset",                           "", CONV_TEXTURE, API_RUNTIME, 25, CUDA_DEPRECATED}},
+  {"cudaGetTextureAlignmentOffset",                           {"hipGetTextureAlignmentOffset",                           "", CONV_TEXTURE, API_RUNTIME, 25, DEPRECATED}},
   // TODO: double check cuModuleGetTexRef
   // NOTE: Unsupported yet on NVCC path
   {"cudaGetTextureReference",                                 {"hipGetTextureReference",                                 "", CONV_TEXTURE, API_RUNTIME, 25, CUDA_DEPRECATED}},
   // no analogue
-  {"cudaUnbindTexture",                                       {"hipUnbindTexture",                                       "", CONV_TEXTURE, API_RUNTIME, 25, CUDA_DEPRECATED}},
+  {"cudaUnbindTexture",                                       {"hipUnbindTexture",                                       "", CONV_TEXTURE, API_RUNTIME, 25, DEPRECATED}},
 
   // 26. Surface Reference Management [DEPRECATED]
   // no analogue
@@ -802,9 +802,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
 
   // 34. Profiler Control
   // cuProfilerStart
-  {"cudaProfilerStart",                                       {"hipProfilerStart",                                       "", CONV_PROFILER, API_RUNTIME, 34}},
+  {"cudaProfilerStart",                                       {"hipProfilerStart",                                       "", CONV_PROFILER, API_RUNTIME, 34, HIP_DEPRECATED}},
   // cuProfilerStop
-  {"cudaProfilerStop",                                        {"hipProfilerStop",                                        "", CONV_PROFILER, API_RUNTIME, 34}},
+  {"cudaProfilerStop",                                        {"hipProfilerStop",                                        "", CONV_PROFILER, API_RUNTIME, 34, HIP_DEPRECATED}},
 
   // 35. Data types used by CUDA Runtime
   // NOTE: in a separate file
@@ -1122,21 +1122,21 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP {
   {"make_hipExtent",                                          {HIP_1070, HIP_0,    HIP_0   }},
   {"make_hipPitchedPtr",                                      {HIP_1070, HIP_0,    HIP_0   }},
   {"make_hipPos",                                             {HIP_1070, HIP_0,    HIP_0   }},
-  {"hipMemcpyFromArray",                                      {HIP_1090, HIP_0,    HIP_0   }},
-  {"hipMemcpyToArray",                                        {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipMemcpyFromArray",                                      {HIP_1090, HIP_3080, HIP_0   }},
+  {"hipMemcpyToArray",                                        {HIP_1060, HIP_3080, HIP_0   }},
   {"hipPointerGetAttributes",                                 {HIP_1060, HIP_0,    HIP_0   }},
   {"hipDeviceCanAccessPeer",                                  {HIP_1090, HIP_0,    HIP_0   }},
   {"hipDeviceDisablePeerAccess",                              {HIP_1090, HIP_0,    HIP_0   }},
   {"hipDeviceEnablePeerAccess",                               {HIP_1090, HIP_0,    HIP_0   }},
-  {"hipBindTexture",                                          {HIP_1060, HIP_0,    HIP_0   }},
-  {"hipBindTexture2D",                                        {HIP_1070, HIP_0,    HIP_0   }},
-  {"hipBindTextureToArray",                                   {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipBindTexture",                                          {HIP_1060, HIP_3080, HIP_0   }},
+  {"hipBindTexture2D",                                        {HIP_1070, HIP_3080, HIP_0   }},
+  {"hipBindTextureToArray",                                   {HIP_1060, HIP_3080, HIP_0   }},
   {"hipBindTextureToMipmappedArray",                          {HIP_1070, HIP_0,    HIP_0   }},
   {"hipCreateChannelDesc",                                    {HIP_1060, HIP_0,    HIP_0   }},
   {"hipGetChannelDesc",                                       {HIP_1070, HIP_0,    HIP_0   }},
-  {"hipGetTextureAlignmentOffset",                            {HIP_1090, HIP_0,    HIP_0   }},
+  {"hipGetTextureAlignmentOffset",                            {HIP_1090, HIP_3080, HIP_0   }},
   {"hipGetTextureReference",                                  {HIP_1070, HIP_0,    HIP_0   }},
-  {"hipUnbindTexture",                                        {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipUnbindTexture",                                        {HIP_1060, HIP_3080, HIP_0   }},
   {"hipCreateTextureObject",                                  {HIP_1070, HIP_0,    HIP_0   }},
   {"hipDestroyTextureObject",                                 {HIP_1070, HIP_0,    HIP_0   }},
   {"hipGetTextureObjectResourceDesc",                         {HIP_1070, HIP_0,    HIP_0   }},
@@ -1146,8 +1146,8 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP {
   {"hipDestroySurfaceObject",                                 {HIP_1090, HIP_0,    HIP_0   }},
   {"hipDriverGetVersion",                                     {HIP_1060, HIP_0,    HIP_0   }},
   {"hipRuntimeGetVersion",                                    {HIP_1060, HIP_0,    HIP_0   }},
-  {"hipProfilerStart",                                        {HIP_1060, HIP_0,    HIP_0   }},
-  {"hipProfilerStop",                                         {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipProfilerStart",                                        {HIP_1060, HIP_3000, HIP_0   }},
+  {"hipProfilerStop",                                         {HIP_1060, HIP_3000, HIP_0   }},
   {"hipConfigureCall",                                        {HIP_1090, HIP_0,    HIP_0   }},
   {"hipLaunchByPtr",                                          {HIP_1090, HIP_0,    HIP_0   }},
   {"hipSetupArgument",                                        {HIP_1090, HIP_0,    HIP_0   }},

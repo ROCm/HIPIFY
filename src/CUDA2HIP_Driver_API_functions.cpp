@@ -87,40 +87,40 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
 
   // 8. Context Management
   // no analogues, except a few
-  {"cuCtxCreate",                                          {"hipCtxCreate",                                            "", CONV_CONTEXT, API_DRIVER, 8}},
-  {"cuCtxCreate_v2",                                       {"hipCtxCreate",                                            "", CONV_CONTEXT, API_DRIVER, 8}},
-  {"cuCtxDestroy",                                         {"hipCtxDestroy",                                           "", CONV_CONTEXT, API_DRIVER, 8}},
-  {"cuCtxDestroy_v2",                                      {"hipCtxDestroy",                                           "", CONV_CONTEXT, API_DRIVER, 8}},
-  {"cuCtxGetApiVersion",                                   {"hipCtxGetApiVersion",                                     "", CONV_CONTEXT, API_DRIVER, 8}},
-  {"cuCtxGetCacheConfig",                                  {"hipCtxGetCacheConfig",                                    "", CONV_CONTEXT, API_DRIVER, 8}},
-  {"cuCtxGetCurrent",                                      {"hipCtxGetCurrent",                                        "", CONV_CONTEXT, API_DRIVER, 8}},
-  {"cuCtxGetDevice",                                       {"hipCtxGetDevice",                                         "", CONV_CONTEXT, API_DRIVER, 8}},
+  {"cuCtxCreate",                                          {"hipCtxCreate",                                            "", CONV_CONTEXT, API_DRIVER, 8, HIP_DEPRECATED}},
+  {"cuCtxCreate_v2",                                       {"hipCtxCreate",                                            "", CONV_CONTEXT, API_DRIVER, 8, HIP_DEPRECATED}},
+  {"cuCtxDestroy",                                         {"hipCtxDestroy",                                           "", CONV_CONTEXT, API_DRIVER, 8, HIP_DEPRECATED}},
+  {"cuCtxDestroy_v2",                                      {"hipCtxDestroy",                                           "", CONV_CONTEXT, API_DRIVER, 8, HIP_DEPRECATED}},
+  {"cuCtxGetApiVersion",                                   {"hipCtxGetApiVersion",                                     "", CONV_CONTEXT, API_DRIVER, 8, HIP_DEPRECATED}},
+  {"cuCtxGetCacheConfig",                                  {"hipCtxGetCacheConfig",                                    "", CONV_CONTEXT, API_DRIVER, 8, HIP_DEPRECATED}},
+  {"cuCtxGetCurrent",                                      {"hipCtxGetCurrent",                                        "", CONV_CONTEXT, API_DRIVER, 8, HIP_DEPRECATED}},
+  {"cuCtxGetDevice",                                       {"hipCtxGetDevice",                                         "", CONV_CONTEXT, API_DRIVER, 8, HIP_DEPRECATED}},
   // cudaGetDeviceFlags
   // TODO: rename to hipGetDeviceFlags
-  {"cuCtxGetFlags",                                        {"hipCtxGetFlags",                                          "", CONV_CONTEXT, API_DRIVER, 8}},
+  {"cuCtxGetFlags",                                        {"hipCtxGetFlags",                                          "", CONV_CONTEXT, API_DRIVER, 8, HIP_DEPRECATED}},
   // cudaDeviceGetLimit
   {"cuCtxGetLimit",                                        {"hipDeviceGetLimit",                                       "", CONV_CONTEXT, API_DRIVER, 8}},
   // cudaDeviceGetSharedMemConfig
   // TODO: rename to hipDeviceGetSharedMemConfig
-  {"cuCtxGetSharedMemConfig",                              {"hipCtxGetSharedMemConfig",                                "", CONV_CONTEXT, API_DRIVER, 8}},
+  {"cuCtxGetSharedMemConfig",                              {"hipCtxGetSharedMemConfig",                                "", CONV_CONTEXT, API_DRIVER, 8, HIP_DEPRECATED}},
   // cudaDeviceGetStreamPriorityRange
   {"cuCtxGetStreamPriorityRange",                          {"hipDeviceGetStreamPriorityRange",                         "", CONV_CONTEXT, API_DRIVER, 8}},
-  {"cuCtxPopCurrent",                                      {"hipCtxPopCurrent",                                        "", CONV_CONTEXT, API_DRIVER, 8}},
-  {"cuCtxPopCurrent_v2",                                   {"hipCtxPopCurrent",                                        "", CONV_CONTEXT, API_DRIVER, 8}},
-  {"cuCtxPushCurrent",                                     {"hipCtxPushCurrent",                                       "", CONV_CONTEXT, API_DRIVER, 8}},
-  {"cuCtxPushCurrent_v2",                                  {"hipCtxPushCurrent",                                       "", CONV_CONTEXT, API_DRIVER, 8}},
-  {"cuCtxSetCacheConfig",                                  {"hipCtxSetCacheConfig",                                    "", CONV_CONTEXT, API_DRIVER, 8}},
+  {"cuCtxPopCurrent",                                      {"hipCtxPopCurrent",                                        "", CONV_CONTEXT, API_DRIVER, 8, HIP_DEPRECATED}},
+  {"cuCtxPopCurrent_v2",                                   {"hipCtxPopCurrent",                                        "", CONV_CONTEXT, API_DRIVER, 8, HIP_DEPRECATED}},
+  {"cuCtxPushCurrent",                                     {"hipCtxPushCurrent",                                       "", CONV_CONTEXT, API_DRIVER, 8, HIP_DEPRECATED}},
+  {"cuCtxPushCurrent_v2",                                  {"hipCtxPushCurrent",                                       "", CONV_CONTEXT, API_DRIVER, 8, HIP_DEPRECATED}},
+  {"cuCtxSetCacheConfig",                                  {"hipCtxSetCacheConfig",                                    "", CONV_CONTEXT, API_DRIVER, 8, HIP_DEPRECATED}},
   // cudaCtxResetPersistingL2Cache
   {"cuCtxResetPersistingL2Cache",                          {"hipCtxResetPersistingL2Cache",                            "", CONV_CONTEXT, API_DRIVER, 8, HIP_UNSUPPORTED}},
-  {"cuCtxSetCurrent",                                      {"hipCtxSetCurrent",                                        "", CONV_CONTEXT, API_DRIVER, 8}},
+  {"cuCtxSetCurrent",                                      {"hipCtxSetCurrent",                                        "", CONV_CONTEXT, API_DRIVER, 8, HIP_DEPRECATED}},
   // cudaDeviceSetLimit
   {"cuCtxSetLimit",                                        {"hipDeviceSetLimit",                                       "", CONV_CONTEXT, API_DRIVER, 8, HIP_UNSUPPORTED}},
   // cudaDeviceSetSharedMemConfig
   // TODO: rename to hipDeviceSetSharedMemConfig
-  {"cuCtxSetSharedMemConfig",                              {"hipCtxSetSharedMemConfig",                                "", CONV_CONTEXT, API_DRIVER, 8}},
+  {"cuCtxSetSharedMemConfig",                              {"hipCtxSetSharedMemConfig",                                "", CONV_CONTEXT, API_DRIVER, 8, HIP_DEPRECATED}},
   // cudaDeviceSynchronize
   // TODO: rename to hipDeviceSynchronize
-  {"cuCtxSynchronize",                                     {"hipCtxSynchronize",                                       "", CONV_CONTEXT, API_DRIVER, 8}},
+  {"cuCtxSynchronize",                                     {"hipCtxSynchronize",                                       "", CONV_CONTEXT, API_DRIVER, 8, HIP_DEPRECATED}},
 
   // 9. Context Management [DEPRECATED]
   // no analogues
@@ -725,10 +725,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   // 27. Peer Context Memory Access
   // no analogue
   // NOTE: Not equal to cudaDeviceEnablePeerAccess due to different signatures
-  {"cuCtxEnablePeerAccess",                                {"hipCtxEnablePeerAccess",                                  "", CONV_PEER, API_DRIVER, 27}},
+  {"cuCtxEnablePeerAccess",                                {"hipCtxEnablePeerAccess",                                  "", CONV_PEER, API_DRIVER, 27, HIP_DEPRECATED}},
   // no analogue
   // NOTE: Not equal to cudaDeviceDisablePeerAccess due to different signatures
-  {"cuCtxDisablePeerAccess",                               {"hipCtxDisablePeerAccess",                                 "", CONV_PEER, API_DRIVER, 27}},
+  {"cuCtxDisablePeerAccess",                               {"hipCtxDisablePeerAccess",                                 "", CONV_PEER, API_DRIVER, 27, HIP_DEPRECATED}},
   // cudaDeviceCanAccessPeer
   {"cuDeviceCanAccessPeer",                                {"hipDeviceCanAccessPeer",                                  "", CONV_PEER, API_DRIVER, 27}},
   // cudaDeviceGetP2PAttribute
@@ -1162,21 +1162,21 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_FUNCTION_VER_MAP {
   {"hipDevicePrimaryCtxReset",                             {HIP_1090, HIP_0,    HIP_0   }},
   {"hipDevicePrimaryCtxRetain",                            {HIP_1090, HIP_0,    HIP_0   }},
   {"hipDevicePrimaryCtxSetFlags",                          {HIP_1090, HIP_0,    HIP_0   }},
-  {"hipCtxCreate",                                         {HIP_1060, HIP_0,    HIP_0   }},
-  {"hipCtxDestroy",                                        {HIP_1060, HIP_0,    HIP_0   }},
-  {"hipCtxGetApiVersion",                                  {HIP_1090, HIP_0,    HIP_0   }},
-  {"hipCtxGetCacheConfig",                                 {HIP_1090, HIP_0,    HIP_0   }},
-  {"hipCtxGetCurrent",                                     {HIP_1060, HIP_0,    HIP_0   }},
-  {"hipCtxGetDevice",                                      {HIP_1060, HIP_0,    HIP_0   }},
-  {"hipCtxGetFlags",                                       {HIP_1090, HIP_0,    HIP_0   }},
-  {"hipCtxGetSharedMemConfig",                             {HIP_1090, HIP_0,    HIP_0   }},
+  {"hipCtxCreate",                                         {HIP_1060, HIP_1090, HIP_0   }},
+  {"hipCtxDestroy",                                        {HIP_1060, HIP_1090, HIP_0   }},
+  {"hipCtxGetApiVersion",                                  {HIP_1090, HIP_1090, HIP_0   }},
+  {"hipCtxGetCacheConfig",                                 {HIP_1090, HIP_1090, HIP_0   }},
+  {"hipCtxGetCurrent",                                     {HIP_1060, HIP_1090, HIP_0   }},
+  {"hipCtxGetDevice",                                      {HIP_1060, HIP_1090, HIP_0   }},
+  {"hipCtxGetFlags",                                       {HIP_1090, HIP_1090, HIP_0   }},
+  {"hipCtxGetSharedMemConfig",                             {HIP_1090, HIP_1090, HIP_0   }},
   {"hipDeviceGetStreamPriorityRange",                      {HIP_2000, HIP_0,    HIP_0   }},
-  {"hipCtxPopCurrent",                                     {HIP_1060, HIP_0,    HIP_0   }},
-  {"hipCtxPushCurrent",                                    {HIP_1060, HIP_0,    HIP_0   }},
-  {"hipCtxSetCacheConfig",                                 {HIP_1090, HIP_0,    HIP_0   }},
-  {"hipCtxSetCurrent",                                     {HIP_1060, HIP_0,    HIP_0   }},
-  {"hipCtxSetSharedMemConfig",                             {HIP_1090, HIP_0,    HIP_0   }},
-  {"hipCtxSynchronize",                                    {HIP_1090, HIP_0,    HIP_0   }},
+  {"hipCtxPopCurrent",                                     {HIP_1060, HIP_1090, HIP_0   }},
+  {"hipCtxPushCurrent",                                    {HIP_1060, HIP_1090, HIP_0   }},
+  {"hipCtxSetCacheConfig",                                 {HIP_1090, HIP_1090, HIP_0   }},
+  {"hipCtxSetCurrent",                                     {HIP_1060, HIP_1090, HIP_0   }},
+  {"hipCtxSetSharedMemConfig",                             {HIP_1090, HIP_1090, HIP_0   }},
+  {"hipCtxSynchronize",                                    {HIP_1090, HIP_1090, HIP_0   }},
   {"hipModuleGetFunction",                                 {HIP_1060, HIP_0,    HIP_0   }},
   {"hipModuleGetGlobal",                                   {HIP_1060, HIP_0,    HIP_0   }},
   {"hipModuleGetTexRef",                                   {HIP_1070, HIP_0,    HIP_0   }},
@@ -1244,8 +1244,8 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_FUNCTION_VER_MAP {
   {"hipTexObjectGetResourceDesc",                          {HIP_3050, HIP_0,    HIP_0   }},
   {"hipTexObjectGetResourceViewDesc",                      {HIP_3050, HIP_0,    HIP_0   }},
   {"hipTexObjectGetTextureDesc",                           {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipCtxEnablePeerAccess",                               {HIP_1090, HIP_0,    HIP_0   }},
-  {"hipCtxDisablePeerAccess",                              {HIP_1090, HIP_0,    HIP_0   }},
+  {"hipCtxEnablePeerAccess",                               {HIP_1060, HIP_1090, HIP_0   }},
+  {"hipCtxDisablePeerAccess",                              {HIP_1060, HIP_1090, HIP_0   }},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_DRIVER_API_SECTION_MAP {
