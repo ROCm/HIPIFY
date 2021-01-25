@@ -23,7 +23,7 @@ THE SOFTWARE.
 #include "CUDA2HIP.h"
 
 // Maps CUDA header names to HIP header names
-const std::map<llvm::StringRef, hipCounter> CUDA_DEVICE_FUNC_MAP {
+const std::map<llvm::StringRef, hipCounter> CUDA_DEVICE_FUNCTION_MAP {
   // math functions
   {"abs",             {"", "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
   {"labs",            {"", "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
@@ -669,13 +669,25 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DEVICE_FUNC_MAP {
   {"__assertfail",      {"", "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
 };
 
-const std::map<llvm::StringRef, cudaAPIversions> CUDA_DEVICE_FUNC_VER_MAP {
-  {"__shfl",            {CUDA_75,  CUDA_90,  CUDA_0}},
-  {"__shfl_up",         {CUDA_75,  CUDA_90,  CUDA_0}},
-  {"__shfl_down",       {CUDA_75,  CUDA_90,  CUDA_0}},
-  {"__shfl_xor",        {CUDA_75,  CUDA_90,  CUDA_0}},
+const std::map<llvm::StringRef, cudaAPIversions> CUDA_DEVICE_FUNCTION_VER_MAP {
+  {"__shfl",            {CUDA_75,  CUDA_90,  CUDA_0  }},
+  {"__shfl_up",         {CUDA_75,  CUDA_90,  CUDA_0  }},
+  {"__shfl_down",       {CUDA_75,  CUDA_90,  CUDA_0  }},
+  {"__shfl_xor",        {CUDA_75,  CUDA_90,  CUDA_0  }},
 };
 
-const std::map<unsigned int, llvm::StringRef> CUDA_DEVICE_FUNC_SECTION_MAP {
+const std::map<llvm::StringRef, hipAPIversions> HIP_DEVICE_FUNCTION_VER_MAP {
+};
+
+const std::map<llvm::StringRef, hipCounter> CUDA_DEVICE_TYPE_NAME_MAP {
+};
+
+const std::map<llvm::StringRef, cudaAPIversions> CUDA_DEVICE_TYPE_NAME_VER_MAP {
+};
+
+const std::map<llvm::StringRef, hipAPIversions> HIP_DEVICE_TYPE_NAME_VER_MAP {
+};
+
+const std::map<unsigned int, llvm::StringRef> CUDA_DEVICE_FUNCTION_API_SECTION_MAP {
   {1, "Device Functions"},
 };
