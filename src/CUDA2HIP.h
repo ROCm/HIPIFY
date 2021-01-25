@@ -66,7 +66,9 @@ extern const std::map<llvm::StringRef, hipCounter> CUDA_CAFFE2_TYPE_NAME_MAP;
 // Maps the names of CUDA CAFFE2 API functions to the corresponding HIP functions
 extern const std::map<llvm::StringRef, hipCounter> CUDA_CAFFE2_FUNCTION_MAP;
 // Maps the names of CUDA Device functions to the corresponding HIP functions
-extern const std::map<llvm::StringRef, hipCounter> CUDA_DEVICE_FUNC_MAP;
+extern const std::map<llvm::StringRef, hipCounter> CUDA_DEVICE_FUNCTION_MAP;
+// Maps the names of CUDA Device types to the corresponding HIP types
+extern const std::map<llvm::StringRef, hipCounter> CUDA_DEVICE_TYPE_NAME_MAP;
 // Maps the names of CUDA CUB API types to the corresponding HIP types
 extern const std::map<llvm::StringRef, hipCounter> CUDA_CUB_TYPE_NAME_MAP;
 
@@ -116,8 +118,10 @@ extern const std::map<llvm::StringRef, cudaAPIversions> CUDA_CAFFE2_TYPE_NAME_VE
 extern const std::map<llvm::StringRef, hipAPIversions>  HIP_CAFFE2_TYPE_NAME_VER_MAP;
 extern const std::map<llvm::StringRef, cudaAPIversions> CUDA_CAFFE2_FUNCTION_VER_MAP;
 extern const std::map<llvm::StringRef, hipAPIversions>  HIP_CAFFE2_FUNCTION_VER_MAP;
-extern const std::map<llvm::StringRef, cudaAPIversions> CUDA_DEVICE_FUNC_VER_MAP;
-extern const std::map<llvm::StringRef, hipAPIversions>  HIP_DEVICE_FUNC_VER_MAP;
+extern const std::map<llvm::StringRef, cudaAPIversions> CUDA_DEVICE_TYPE_NAME_VER_MAP;
+extern const std::map<llvm::StringRef, hipAPIversions>  HIP_DEVICE_TYPE_NAME_VER_MAP; 
+extern const std::map<llvm::StringRef, cudaAPIversions> CUDA_DEVICE_FUNCTION_VER_MAP;
+extern const std::map<llvm::StringRef, hipAPIversions>  HIP_DEVICE_FUNCTION_VER_MAP;
 extern const std::map<llvm::StringRef, cudaAPIversions> CUDA_CUB_TYPE_NAME_VER_MAP;
 extern const std::map<llvm::StringRef, hipAPIversions>  HIP_CUB_TYPE_NAME_VER_MAP;
 
@@ -135,3 +139,4 @@ extern const std::map<unsigned int, llvm::StringRef> CUDA_RAND_API_SECTION_MAP;
 extern const std::map<unsigned int, llvm::StringRef> CUDA_DNN_API_SECTION_MAP;
 extern const std::map<unsigned int, llvm::StringRef> CUDA_FFT_API_SECTION_MAP;
 extern const std::map<unsigned int, llvm::StringRef> CUDA_SPARSE_API_SECTION_MAP;
+extern const std::map<unsigned int, llvm::StringRef> CUDA_DEVICE_FUNCTION_API_SECTION_MAP;

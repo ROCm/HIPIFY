@@ -86,6 +86,11 @@ namespace doc {
   const string sSPARSE_csv = sSPARSE + csv_ext;
   const string sCUSPARSE = "CUSPARSE";
 
+  const string sDEVICE = "CUDA_Device_API_supported_by_HIP";
+  const string sDEVICE_md = sDEVICE + md_ext;
+  const string sDEVICE_csv = sDEVICE + csv_ext;
+  const string sCUDEVICE = "CUDA DEVICE";
+
   const string sAPI_supported = "API supported by HIP";
   const string sCUDA = "CUDA";
   const string sHIP = "HIP";
@@ -443,6 +448,29 @@ namespace doc {
       }
   };
 
+   class DEVICE : public DOC {
+    public:
+      DEVICE(const string &outDir): DOC(outDir) {}
+      virtual ~DEVICE() {}
+    protected:
+      const sectionMap &getSections() const override { return CUDA_DEVICE_FUNCTION_API_SECTION_MAP; }
+      const functionMap &getFunctions() const override { return CUDA_DEVICE_FUNCTION_MAP; }
+      const typeMap &getTypes() const override { return CUDA_DEVICE_TYPE_NAME_MAP; }
+      const versionMap &getFunctionVersions() const override { return CUDA_DEVICE_FUNCTION_VER_MAP; }
+      const hipVersionMap &getHipFunctionVersions() const override { return HIP_DEVICE_FUNCTION_VER_MAP; }
+      const versionMap &getTypeVersions() const override { return CUDA_DEVICE_TYPE_NAME_VER_MAP; }
+      const hipVersionMap &getHipTypeVersions() const override { return HIP_DEVICE_TYPE_NAME_VER_MAP; }
+      const string &getName() const override { return sCUDEVICE; }
+      const string &getFileName(docType format) const override {
+        switch (format) {
+          case none:
+          default: return sEmpty;
+          case md: return sDEVICE_md;
+          case csv: return sDEVICE_csv;
+        }
+      }
+  };
+
   bool generate(bool GenerateMD, bool GenerateCSV) {
     if (!GenerateMD && !GenerateCSV) return true;
     error_code EC;
@@ -471,6 +499,8 @@ namespace doc {
     docs.addDoc(&fft);
     SPARSE sparse(sOut);
     docs.addDoc(&sparse);
+    DEVICE device(sOut);
+    docs.addDoc(&device);
     return docs.generate();
   }
 

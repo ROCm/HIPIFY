@@ -455,7 +455,7 @@ bool HipifyAction::cudaDeviceFuncCall(const mat::MatchFinder::MatchResult &Resul
   if (const clang::CallExpr *call = Result.Nodes.getNodeAs<clang::CallExpr>(sCudaDeviceFuncCall)) {
     auto *funcDcl = call->getDirectCallee();
     if (!funcDcl) return false;
-    FindAndReplace(funcDcl->getDeclName().getAsString(), llcompat::getBeginLoc(call), CUDA_DEVICE_FUNC_MAP, false);
+    FindAndReplace(funcDcl->getDeclName().getAsString(), llcompat::getBeginLoc(call), CUDA_DEVICE_FUNCTION_MAP, false);
     return true;
   }
   return false;

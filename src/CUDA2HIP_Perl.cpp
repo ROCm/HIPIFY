@@ -399,7 +399,7 @@ namespace perl {
     unsigned int countSupported = 0;
     stringstream sSupported;
     stringstream sUnsupported;
-    for (auto ma = CUDA_DEVICE_FUNC_MAP.rbegin(); ma != CUDA_DEVICE_FUNC_MAP.rend(); ++ma) {
+    for (auto ma = CUDA_DEVICE_FUNCTION_MAP.rbegin(); ma != CUDA_DEVICE_FUNCTION_MAP.rend(); ++ma) {
       bool isUnsupported = Statistics::isUnsupported(ma->second);
       (isUnsupported ? sUnsupported : sSupported) << ((isUnsupported && countUnsupported) || (!isUnsupported && countSupported) ? ",\n" : "") << tab_2 << "\"" << ma->first.str() << "\"";
       if (isUnsupported) countUnsupported++;
