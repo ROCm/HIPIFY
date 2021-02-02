@@ -208,7 +208,16 @@ int main(int argc, const char **argv) {
     argc++;
   }
   llcompat::PrintStackTraceOnErrorSignal();
+#if LLVM_VERSION_MAJOR > 12
+  auto cop = ct::CommonOptionsParser::create(argc, argv, ToolTemplateCategory, llvm::cl::ZeroOrMore);
+  if (!cop) {
+    llvm::errs() << "\n" << sHipify << sError << cop.takeError() << "\n";
+    return 1;
+  }
+  ct::CommonOptionsParser &OptionsParser = cop.get();
+#else
   ct::CommonOptionsParser OptionsParser(argc, argv, ToolTemplateCategory, llvm::cl::ZeroOrMore);
+#endif
   if (!llcompat::CheckCompatibility()) {
     return 1;
   }
