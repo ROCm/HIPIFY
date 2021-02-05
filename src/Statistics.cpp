@@ -447,6 +447,8 @@ std::string Statistics::getCudaVersion(const cudaVersions& ver) {
     case CUDNN_802: return "8.0.2";
     case CUDNN_803: return "8.0.3";
     case CUDNN_804: return "8.0.4";
+    case CUDNN_805: return "8.0.5";
+    case CUDNN_810: return "8.1.0";
   }
   return "";
 }
