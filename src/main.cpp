@@ -239,6 +239,10 @@ int main(int argc, const char **argv) {
     llvm::errs() << "\n" << sHipify << sError << "Must specify at least 1 positional argument for source file" << "\n";
     return 1;
   }
+  if (!GenerateMarkdown && !GenerateCSV && !DocFormat.empty()) {
+    llvm::errs() << "\n" << sHipify << sError << "Must specify a document type to generate: \"md\" and | or \"csv\"" << "\n";
+    return 1;
+  }
   if (!perl::generate(GeneratePerl)) {
     llvm::errs() << "\n" << sHipify << sError << "hipify-perl generating failed" << "\n";
     return 1;

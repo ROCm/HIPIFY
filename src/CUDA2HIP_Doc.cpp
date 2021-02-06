@@ -104,11 +104,19 @@ namespace doc {
     csv = 2,
   };
 
+  enum docFormat {
+    full = 0,
+    strict = 1,
+  };
+
   class DOC {
     public:
-      DOC(const string &outDir): dir(outDir), formats(0) {}
+      DOC(const string &outDir): dir(outDir), types(0), format(0) {}
       virtual ~DOC() {}
-      void setFormats(unsigned int docFormats) { formats = docFormats; }
+      void setTypesAndFormat(unsigned int docTypes, unsigned int docFormat = full) {
+        types = docTypes;
+        format = docFormat;
+      }
       bool generate() {
         if (init()) return write() & fini();
         return false;
@@ -116,7 +124,7 @@ namespace doc {
       virtual void setCommonHipVersionMap() {}
 
     protected:
-      virtual const string &getFileName(docType format) const = 0;
+      virtual const string &getFileName(docType t) const = 0;
       virtual const string &getName() const = 0;
       virtual const sectionMap &getSections() const = 0;
       virtual const functionMap &getFunctions() const = 0;
@@ -130,29 +138,30 @@ namespace doc {
     private:
       string dir;
       error_code EC;
-      unsigned int formats;
+      unsigned int types;
+      unsigned int format;
       map<docType, string> files;
       map<docType, string> tmpFiles;
       map<docType, unique_ptr<ostream>> streams;
 
-      bool init(docType format) {
-        string file = (dir.empty() ? getFileName(format) : dir + "/" + getFileName(format));
+      bool init(docType t) {
+        string file = (dir.empty() ? getFileName(t) : dir + "/" + getFileName(t));
         SmallString<128> tmpFile;
-        EC = sys::fs::createTemporaryFile(file, getExtension(format), tmpFile);
+        EC = sys::fs::createTemporaryFile(file, getExtension(t), tmpFile);
         if (EC) {
           errs() << "\n" << sHipify << sError << EC.message() << ": " << tmpFile << "\n";
           return false;
         }
-        files.insert({ format, file });
-        tmpFiles.insert({ format, tmpFile.str().str() });
-        streams.insert(make_pair(format, unique_ptr<ostream>(new ofstream(tmpFile.c_str(), ios_base::trunc))));
+        files.insert({ t, file });
+        tmpFiles.insert({ t, tmpFile.str().str() });
+        streams.insert(make_pair(t, unique_ptr<ostream>(new ofstream(tmpFile.c_str(), ios_base::trunc))));
         return true;
       }
 
       bool init() {
         bool bRet = true;
-        if (md == (formats & md)) bRet = init(md);
-        if (csv == (formats & csv)) bRet = init(csv) & bRet;
+        if (md == (types & md)) bRet = init(md);
+        if (csv == (types & csv)) bRet = init(csv) & bRet;
         return bRet;
       }
 
@@ -165,18 +174,29 @@ namespace doc {
       bool write() {
         const docType docs[] = {md, csv};
         for (auto doc : docs) {
-          if (doc != (formats & doc)) continue;
+          if (doc != (types & doc)) continue;
           *streams[doc].get() << (doc == md ? "# " : "") << getName() << " " << sAPI_supported << endl << endl;
           for (auto &s : getSections()) {
             string sS = (doc == md) ? "** | **" : " , ";
             *streams[doc].get() << (doc == md ? "## **" : "") << s.first << ". " << string(s.second) << (doc == md ? "**" : "") << endl << endl;
-            *streams[doc].get() << (doc == md ? "| **" : "") << sCUDA << sS << sA << sS << sD << sS << sR << sS << sHIP << sS << sA << sS << sD << sS << sR << (doc == md ? "** |" : "") << endl;
-            if (doc == md) *streams[doc].get() << "|:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|" << endl;
+            *streams[doc].get() << (doc == md ? "| **" : "") << sCUDA << sS << (format == full ? sA : "") << (format == full ? sS : "") <<
+              sD << sS << (format == full ? sR : "") << (format == full ? sS : "") << sHIP << sS << (format == full ? sA : "") << (format == full ? sS : "") <<
+              sD << (format == full ? sS : "") << (format == full ? sR : "") << (doc == md ? "** |" : "") << endl;
+            if (doc == md) {
+              *streams[doc].get() << "|:--|" << (format == full ? ":-:|" : "") << ":-:|" << (format == full ? ":-:|" : "") <<
+                ":--|" << (format == full ? ":-:|" : "") << ":-:|"<< (format == full ? ":-:|" : "") << endl;
+            }
             const functionMap &ftMap = isTypeSection(s.first, getSections()) ? getTypes() : getFunctions();
             const versionMap &vMap = isTypeSection(s.first, getSections()) ? getTypeVersions() : getFunctionVersions();
             const hipVersionMap &hMap = commonHipVersionMap.empty() ? (isTypeSection(s.first, getSections()) ? getHipTypeVersions() : getHipFunctionVersions()) : commonHipVersionMap;
             functionMap fMap;
-            for (auto &f : ftMap) if (f.second.apiSection == s.first) fMap.insert(f);
+            for (auto &f : ftMap) {
+              if (f.second.apiSection == s.first) {
+                if (format == full || (format == strict && !Statistics::isUnsupported(f.second))) {
+                  fMap.insert(f);
+                }
+              }
+            }
             sS = (doc == md) ? " | " : " , ";
             for (auto &f : fMap) {
               string a, d, r, ha, hd, hr;
@@ -196,11 +216,15 @@ namespace doc {
               }
               string sHip = Statistics::isUnsupported(f.second) ? "" : string(f.second.hipName);
               if (!sHip.empty() && doc == md) sHip = "`" + sHip + "`";
-              *streams[doc].get() << (doc == md ? "|`" : "") << string(f.first) << (doc == md ? "`| " : sS) << a << sS << d << sS << r << sS << sHip << sS << ha << sS << hd << sS << hr << sS << endl;
+              *streams[doc].get() << (doc == md ? "|`" : "") << string(f.first) << (doc == md ? "`| " : sS) <<
+                (format == full ? a : "") << (format == full ? sS : "") << (format == full ? d : (d.empty() ? "" : "+")) << sS <<
+                (format == full ? r : "") << (format == full ? sS : "") << sHip << sS <<
+                (format == full ? ha : "") << (format == full ? sS : "") << (format == full ? hd : (hd.empty() ? "" : "+")) << sS <<
+                (format == full ? hr : "") << (format == full ? sS : "") << endl;
             }
             *streams[doc].get() << endl;
           }
-          *streams[doc].get() << endl << (doc == md ? "\\" : "") << "*A - Added; D - Deprecated; R - Removed";
+          *streams[doc].get() << endl << (doc == md ? "\\" : "") << (format == full ? "*A - Added; D - Deprecated; R - Removed" : "*D - Deprecated");
         }
         return true;
       }
@@ -219,8 +243,8 @@ namespace doc {
 
       bool fini() {
         bool bRet = true;
-        if (md == (formats & md)) bRet = fini(md);
-        if (csv == (formats & csv)) bRet = fini(csv) & bRet;
+        if (md == (types & md)) bRet = fini(md);
+        if (csv == (types & csv)) bRet = fini(csv) & bRet;
         return bRet;
       }
 
@@ -237,11 +261,12 @@ namespace doc {
   class DOCS {
     private:
       vector<DOC*> docs;
-      unsigned int formats;
+      unsigned int types;
+      unsigned int format;
     public:
-      DOCS(unsigned int docFormats): formats(docFormats) {}
+      DOCS(unsigned int docTypes, unsigned int docFormat): types(docTypes), format(docFormat) {}
       virtual ~DOCS() {}
-      void addDoc(DOC *doc) { docs.push_back(doc); doc->setFormats(formats); }
+      void addDoc(DOC *doc) { docs.push_back(doc); doc->setTypesAndFormat(types, format); }
       bool generate() {
         bool bRet = true;
         for (auto &d : docs) {
@@ -479,10 +504,18 @@ namespace doc {
       sOut = getAbsoluteDirectoryPath(sOut, EC, "documentation");
       if (EC) return false;
     }
-    unsigned int docFormats = 0;
-    if (GenerateMD) docFormats |= md;
-    if (GenerateCSV) docFormats |= csv;
-    DOCS docs(docFormats);
+    unsigned int docFormat = full;
+    if (!DocFormat.empty()) {
+      if (DocFormat == "strict") docFormat = strict;
+      else if (DocFormat != "full") {
+        llvm::errs() << "\n" << sHipify << sError << "Unsupported documentation format: '" << DocFormat << "'; supported formats: 'full', 'strict'\n";
+        return false;
+      }
+    }
+    unsigned int docTypes = 0;
+    if (GenerateMD) docTypes |= md;
+    if (GenerateCSV) docTypes |= csv;
+    DOCS docs(docTypes, docFormat);
     DRIVER driver(sOut);
     docs.addDoc(&driver);
     RUNTIME runtime(sOut);
