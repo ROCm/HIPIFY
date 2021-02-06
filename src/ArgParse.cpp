@@ -155,4 +155,9 @@ cl::opt<bool> GenerateCSV("csv",
   cl::value_desc("csv"),
   cl::cat(ToolTemplateCategory));
 
+cl::opt<std::string> DocFormat("doc-format",
+  cl::desc("Documentation format: 'full' (default) or 'strict';\n'--md' or '--csv' option should be specified"),
+  cl::value_desc("value"),
+  cl::cat(ToolTemplateCategory));
+
 cl::extrahelp CommonHelp(ct::CommonOptionsParser::HelpMessage);
