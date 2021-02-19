@@ -26,6 +26,7 @@
 
 #usage hipify-perl [OPTIONS] INPUT_FILE
 
+use Cwd;
 use Getopt::Long;
 use File::Basename;
 my $whitelist = "";
@@ -6448,17 +6449,15 @@ my $fileCount = @ARGV;
 while (@ARGV) {
     $fileName=shift (@ARGV);
     my $direxclude = 0;
-    $fileDir=dirname($fileName);
-    while (($direxclude == 0) and ($fileDir ne "." and $fileDir ne "/"))  { 
-        if ($exclude_dirhash{$fileDir}) {
-            print STDERR "Skipping file: $fileName in excluded directory $fileDir \n";
-            $direxclude += 1;
-        } else {
-            $fileDir = dirname($fileDir);
-        }
+    my $fileDir = dirname(Cwd::realpath($fileName));
+    if ($exclude_dirhash{$fileDir}) {
+        print STDERR "Skipping the file: $fileName in the excluded directory: $fileDir \n";
+        $direxclude = 1;
+    } else {
+        $fileDir = dirname($fileDir);
     }
-    if ($exclude_filehash{$fileName}) { 
-        print STDERR "Skipping  excluded file: $fileName \n";
+    if ($exclude_filehash{$fileName}) {
+        print STDERR "Skipping the excluded file: $fileName \n";
     }
     unless ($direxclude or $exclude_filehash{$fileName}) {
         if ($inplace) {
