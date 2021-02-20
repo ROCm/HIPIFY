@@ -610,6 +610,6 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DNN_FUNCTION_VER_MAP {
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_DNN_API_SECTION_MAP {
-  {1, "CUNN Data types"},
-  {2, "CUNN Functions"},
+  {1, "CUDNN Data types"},
+  {2, "CUDNN Functions"},
 };
