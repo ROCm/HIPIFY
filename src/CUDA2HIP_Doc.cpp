@@ -177,12 +177,12 @@ namespace doc {
           if (doc != (types & doc)) continue;
           *streams[doc].get() << (doc == md ? "# " : "") << getName() << " " << sAPI_supported << endl << endl;
           for (auto &s : getSections()) {
-            string sS = (doc == md) ? "** | **" : " , ";
+            string sS = (doc == md) ? "**|**" : ",";
             *streams[doc].get() << (doc == md ? "## **" : "") << s.first << ". " << string(s.second) << (doc == md ? "**" : "") << endl << endl;
             stringstream section;
-            section << (doc == md ? "| **" : "") << sCUDA << sS << (format == full ? sA : "") << (format == full ? sS : "") <<
+            section << (doc == md ? "|**" : "") << sCUDA << sS << (format == full ? sA : "") << (format == full ? sS : "") <<
               sD << sS << (format == full ? sR : "") << (format == full ? sS : "") << sHIP << sS << (format == full ? sA : "") << (format == full ? sS : "") <<
-              sD << (format == full ? sS : "") << (format == full ? sR : "") << (doc == md ? "** |" : "") << endl;
+              sD << (format == full ? sS : "") << (format == full ? sR : "") << (doc == md ? "**|" : "") << endl;
             if (doc == md) {
               section << "|:--|" << (format == full ? ":-:|" : "") << ":-:|" << (format == full ? ":-:|" : "") <<
                 ":--|" << (format == full ? ":-:|" : "") << ":-:|"<< (format == full ? ":-:|" : "") << endl;
@@ -198,7 +198,7 @@ namespace doc {
                 }
               }
             }
-            sS = (doc == md) ? " | " : " , ";
+            sS = (doc == md) ? "|" : ",";
             stringstream rows;
             for (auto &f : fMap) {
               string a, d, r, ha, hd, hr;
@@ -217,12 +217,36 @@ namespace doc {
                 hr = Statistics::getHipVersion(hv->second.removed);
               }
               string sHip = Statistics::isUnsupported(f.second) ? "" : string(f.second.hipName);
-              if (!sHip.empty() && doc == md) sHip = "`" + sHip + "`";
-              rows << (doc == md ? "|`" : "") << string(f.first) << (doc == md ? "`| " : sS) <<
-                (format == full ? a : "") << (format == full ? sS : "") << (format == full ? d : (d.empty() ? "" : "+")) << sS <<
-                (format == full ? r : "") << (format == full ? sS : "") << sHip << sS <<
-                (format == full ? ha : "") << (format == full ? sS : "") << (format == full ? hd : (hd.empty() ? "" : "+")) << sS <<
-                (format == full ? hr : "") << (format == full ? sS : "") << endl;
+              if (doc == md) {
+                sHip = sHip.empty() ? " " : "`" + sHip + "`";
+              }
+              rows << (doc == md ? "|`" : "") << string(f.first) << (doc == md ? "`|" : sS);
+              switch (doc) {
+                case csv:
+                  switch (format) {
+                    case strict:
+                      rows << (d.empty() ? "" : "+") << sS << sHip << sS << (hd.empty() ? "" : "+") << endl;
+                      break;
+                    case full:
+                    default:
+                      rows << a << sS << d << sS << r << sS << sHip << sS << ha << sS << hd << sS << hr << endl;
+                      break;
+                  }
+                  break;
+                case md:
+                default:
+                  switch (format) {
+                    case strict:
+                      rows << (d.empty() ? " " : "+") << sS << sHip << sS << (hd.empty() ? " " : "+") << sS << endl;
+                      break;
+                    case full:
+                    default:
+                      rows << (a.empty() ? " " : a) << sS << (d.empty() ? " " : d) << sS << (r.empty() ? " " : r) << sS << sHip << sS <<
+                        (ha.empty() ? " " : ha) << sS << (hd.empty() ? " " : hd) << sS << (hr.empty() ? " " : hr) << sS << endl;
+                      break;
+                  }
+                  break;
+              }
             }
             *streams[doc].get() << (fMap.empty() ? "Unsupported\n" : section.str());
             *streams[doc].get() << rows.str();
