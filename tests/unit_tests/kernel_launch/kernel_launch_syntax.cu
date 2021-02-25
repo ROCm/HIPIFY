@@ -10,6 +10,11 @@ __global__ void axpy(T a, T *x, T *y) {
   y[threadIdx.x] = a * x[threadIdx.x];
 }
 
+template<typename T1, typename T2>
+__global__ void axpy_2(T1 a, T2 *x, T2 *y) {
+  y[threadIdx.x] = a * x[threadIdx.x];
+}
+
 template<typename T>
 __global__ void axpy_empty() {
 }
@@ -33,10 +38,8 @@ int main(int argc, char* argv[]) {
 
   // CHECK: hipMalloc(&device_x, kDataLen * sizeof(float));
   cudaMalloc(&device_x, kDataLen * sizeof(float));
-
   // CHECK: hipMalloc(&device_y, kDataLen * sizeof(float));
   cudaMalloc(&device_y, kDataLen * sizeof(float));
-
   // CHECK: hipMemcpy(device_x, host_x, kDataLen * sizeof(float), hipMemcpyHostToDevice);
   cudaMemcpy(device_x, host_x, kDataLen * sizeof(float), cudaMemcpyHostToDevice);
 
@@ -73,6 +76,30 @@ int main(int argc, char* argv[]) {
   axpy<float><<<1, dim3(kDataLen), N, stream>>>(a, device_x, device_y);
   // CHECK: hipLaunchKernelGGL(HIP_KERNEL_NAME(axpy<float>), dim3(1), dim3(kDataLen), N, stream, a, device_x, device_y);
   axpy<float><<<dim3(1), dim3(kDataLen), N, stream>>>(a, device_x, device_y);
+
+  double h_x[kDataLen] = {1.0f, 2.0f, 3.0f, 4.0f};
+  double h_y[kDataLen];
+
+  // Copy input data to device.
+  double* d_x;
+  double* d_y;
+
+  // CHECK: hipMalloc(&d_x, kDataLen * sizeof(double));
+  cudaMalloc(&d_x, kDataLen * sizeof(double));
+  // CHECK: hipMalloc(&d_y, kDataLen * sizeof(double));
+  cudaMalloc(&d_y, kDataLen * sizeof(double));
+  // CHECK: hipMemcpy(d_x, h_x, kDataLen * sizeof(double), hipMemcpyHostToDevice);
+  cudaMemcpy(d_x, h_x, kDataLen * sizeof(double), cudaMemcpyHostToDevice);
+
+  // CHECK: hipLaunchKernelGGL(HIP_KERNEL_NAME(axpy_2<float,double>), dim3(1), dim3(kDataLen*2+10), N*N, stream, a, d_x, d_y);
+  axpy_2<float,double><<<1, kDataLen*2+10, N*N, stream>>>(a, d_x, d_y);
+  // CHECK: hipLaunchKernelGGL(HIP_KERNEL_NAME(axpy_2<float,double>), dim3(1,1,1), dim3(kDataLen*2+10), N*N, stream, a, d_x, d_y);
+  axpy_2<float,double><<<dim3(1,1,1), kDataLen*2+10, N*N, stream>>>(a, d_x, d_y);
+  // CHECK: hipLaunchKernelGGL(HIP_KERNEL_NAME(axpy_2<float,double>), dim3(1), dim3(kDataLen*2+10), N*N, stream, a, d_x, d_y);
+  axpy_2<float,double><<<1, dim3(kDataLen*2+10), N*N, stream>>>(a, d_x, d_y);
+  // CHECK: hipLaunchKernelGGL(HIP_KERNEL_NAME(axpy_2<float,double>), dim3(1,1,1), dim3(kDataLen*2+10), N*N, stream, a, d_x, d_y);
+  axpy_2<float,double><<<dim3(1,1,1), dim3(kDataLen*2+10), N*N, stream>>>(a, d_x, d_y);
+
 
   // CHECK: hipLaunchKernelGGL(HIP_KERNEL_NAME(axpy_empty<float>), dim3(1), dim3(kDataLen), 0, 0);
   axpy_empty<float><<<1, kDataLen>>>();
