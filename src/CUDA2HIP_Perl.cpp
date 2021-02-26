@@ -167,7 +167,8 @@ namespace perl {
     *streamPtr.get() << "      -no-output        - Don't write any translated output to stdout" << endl;
     *streamPtr.get() << "      -print-stats      - Print translation statistics" << endl;
     *streamPtr.get() << "      -quiet-warnings   - Don't print warnings on unknown CUDA identifiers" << endl;
-    *streamPtr.get() << "      -whitelist=s      - Whitelist of identifiers" << endl_2;
+    *streamPtr.get() << "      -version          - The supported HIP version" << endl;
+    *streamPtr.get() << "      -whitelist=s      - Whitelist of identifiers" << endl;
     *streamPtr.get() << "USAGE" << endl;
     *streamPtr.get() << "#" << endl;
     *streamPtr.get() << "use Cwd;" << endl;
@@ -188,6 +189,7 @@ namespace perl {
     *streamPtr.get() << tab << ", \"no-output\" => \\$no_output              # Don't write any translated output to stdout" << endl;
     *streamPtr.get() << tab << ", \"print-stats\" => \\$print_stats          # Print translation statistics" << endl;
     *streamPtr.get() << tab << ", \"quiet-warnings\" => \\$quiet_warnings    # Don't print warnings on unknown CUDA identifiers" << endl;
+    *streamPtr.get() << tab << ", \"version\" => \\$version                  # The supported HIP version" << endl;
     *streamPtr.get() << tab << ", \"whitelist=s\" => \\$whitelist            # Whitelist of identifiers" << endl;
     *streamPtr.get() << ");" << endl_2;
     stringstream deprecated, removed, common;
@@ -577,6 +579,9 @@ namespace perl {
     *streamPtr.get() << my << "$fileCount = @ARGV;" << endl;
     *streamPtr.get() << "if ($help) {" << endl;
     *streamPtr.get() << tab << "print STDERR \"$USAGE\\n\";" << endl;
+    *streamPtr.get() << "}" << endl;
+    *streamPtr.get() << "if ($version) {" << endl;
+    *streamPtr.get() << tab << "print STDERR \"HIP version 4.0.0\\n\";" << endl;
     *streamPtr.get() << "}" << endl;
     *streamPtr.get() << while_ << "(@ARGV) {" << endl;
     *streamPtr.get() << tab << "$fileName=shift (@ARGV);" << endl;

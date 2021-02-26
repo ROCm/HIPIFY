@@ -42,8 +42,8 @@ my $USAGE =<<USAGE;
       -no-output        - Don't write any translated output to stdout
       -print-stats      - Print translation statistics
       -quiet-warnings   - Don't print warnings on unknown CUDA identifiers
+      -version          - The supported HIP version
       -whitelist=s      - Whitelist of identifiers
-
 USAGE
 #
 use Cwd;
@@ -65,6 +65,7 @@ GetOptions(
     , "no-output" => \$no_output              # Don't write any translated output to stdout
     , "print-stats" => \$print_stats          # Print translation statistics
     , "quiet-warnings" => \$quiet_warnings    # Don't print warnings on unknown CUDA identifiers
+    , "version" => \$version                  # The supported HIP version
     , "whitelist=s" => \$whitelist            # Whitelist of identifiers
 );
 
@@ -6546,6 +6547,9 @@ my %TwarningTags;
 my $fileCount = @ARGV;
 if ($help) {
     print STDERR "$USAGE\n";
+}
+if ($version) {
+    print STDERR "HIP version 4.0.0\n";
 }
 while (@ARGV) {
     $fileName=shift (@ARGV);
