@@ -307,113 +307,32 @@ namespace perl {
 
     string s_k = "$k += s/([:|\\w]+)\\s*";
 
-    *streamPtr.get() << tab << "# kern<...><<<dim3(Dg), dim3(Db), Ns, S>>>() syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<(.+)>\\s*<<<\\s*dim3\\((.+)\\)\\s*,\\s*dim3\\((.+)\\)\\s*,\\s*(.+)\\s*,\\s*(.+)\\s*>>>\\s*\\(\\s*\\)/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), dim3($3), dim3($4), $5, $6)/g;" << endl;
-    *streamPtr.get() << tab << "# kern<...><<<dim3(Dg), Db, Ns, S>>>() syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<(.+)>\\s*<<<\\s*dim3\\((.+)\\)\\s*,\\s*((?:(?!dim3).)*)\\s*,\\s*(.+)\\s*,\\s*(.+)\\s*>>>\\s*\\(\\s*\\)/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), dim3($3), dim3($4), $5, $6)/g;" << endl;
-    *streamPtr.get() << tab << "# kern<...><<<Dg, dim3(Db), Ns, S>>>() syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<(.+)>\\s*<<<\\s*((?:(?!dim3).)*)\\s*,\\s*dim3\\((.+)\\)\\s*,\\s*(.+)\\s*,\\s*(.+)\\s*>>>\\s*\\(\\s*\\)/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), dim3($3), dim3($4), $5, $6)/g;" << endl;
-    *streamPtr.get() << tab << "# kern<...><<<Dg, Db, Ns, S>>>() syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<(.+)>\\s*<<<\\s*((?:(?!dim3).)*)\\s*,\\s*((?:(?!dim3).)*)\\s*,\\s*(.+)\\s*,\\s*(.+)\\s*>>>\\s*\\(\\s*\\)/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), dim3($3), dim3($4), $5, $6)/g;" << endl_2;
-
-    *streamPtr.get() << tab << "# kern<<<dim3(Dg), dim3(Db), Ns, S>>>() syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<<<\\s*dim3\\((.+)\\)\\s*,\\s*dim3\\((.+)\\)\\s*,\\s*(.+)\\s*,\\s*(.+)\\s*>>>\\s*\\(\\s*\\)/hipLaunchKernelGGL($1, dim3($2), dim3($3), $4, $5)/g;" << endl;
-    *streamPtr.get() << tab << "# kern<<<dim3(Dg), Db, Ns, S>>>() syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<<<\\s*dim3\\((.+)\\)\\s*,\\s*((?:(?!dim3).)*)\\s*,\\s*(.+)\\s*,\\s*(.+)\\s*>>>\\s*\\(\\s*\\)/hipLaunchKernelGGL($1, dim3($2), dim3($3), $4, $5)/g;" << endl;
-    *streamPtr.get() << tab << "# kern<<<Dg, dim3(Db), Ns, S>>>() syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<<<\\s*((?:(?!dim3).)*)\\s*,\\s*dim3\\((.+)\\)\\s*,\\s*(.+)\\s*,\\s*(.+)\\s*>>>\\s*\\(\\s*\\)/hipLaunchKernelGGL($1, dim3($2), dim3($3), $4, $5)/g;" << endl;
-    *streamPtr.get() << tab << "# kern<<<Dg, Db, Ns, S>>>() syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<<<\\s*((?:(?!dim3).)*)\\s*,\\s*((?:(?!dim3).)*)\\s*,\\s*(.+)\\s*,\\s*(.+)\\s*>>>\\s*\\(\\s*\\)/hipLaunchKernelGGL($1, dim3($2), dim3($3), $4, $5)/g;" << endl_2;
-
-    *streamPtr.get() << tab << "# kern<...><<<dim3(Dg), dim3(Db), Ns, S>>>(...) syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<(.+)>\\s*<<<\\s*dim3\\((.+)\\)\\s*,\\s*dim3\\((.+)\\)\\s*,\\s*(.+)\\s*,\\s*(.+)\\s*>>>\\s*\\(/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), dim3($3), dim3($4), $5, $6, /g;" << endl;
-    *streamPtr.get() << tab << "# kern<...><<<dim3(Dg), Db, Ns, S>>>(...) syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<(.+)>\\s*<<<\\s*dim3\\((.+)\\)\\s*,\\s*((?:(?!dim3).)*)\\s*,\\s*(.+)\\s*,\\s*(.+)\\s*>>>\\s*\\(/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), dim3($3), dim3($4), $5, $6, /g;" << endl;
-    *streamPtr.get() << tab << "# kern<...><<<Dg, dim3(Db), Ns, S>>>(...) syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<(.+)>\\s*<<<\\s*((?:(?!dim3).)*)\\s*,\\s*dim3\\((.+)\\)\\s*,\\s*(.+)\\s*,\\s*(.+)\\s*>>>\\s*\\(/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), dim3($3), dim3($4), $5, $6, /g;" << endl;
-    *streamPtr.get() << tab << "# kern<...><<<Dg, Db, Ns, S>>>(...) syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<(.+)>\\s*<<<\\s*((?:(?!dim3).)*)\\s*,\\s*((?:(?!dim3).)*)\\s*,\\s*(.+)\\s*,\\s*(.+)\\s*>>>\\s*\\(/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), dim3($3), dim3($4), $5, $6, /g;" << endl_2;
-
-    *streamPtr.get() << tab << "# kern<<<dim3(Dg), dim3(Db), Ns, S>>>(...) syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<<<\\s*dim3\\((.+)\\)\\s*,\\s*dim3\\((.+)\\)\\s*,\\s*(.+)\\s*,\\s*(.+)\\s*>>>\\s*\\(/hipLaunchKernelGGL($1, dim3($2), dim3($3), $4, $5, /g;" << endl;
-    *streamPtr.get() << tab << "# kern<<<dim3(Dg), Db, Ns, S>>>(...) syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<<<\\s*dim3\\((.+)\\)\\s*,\\s*((?:(?!dim3).)*)\\s*,\\s*(.+)\\s*,\\s*(.+)\\s*>>>\\s*\\(/hipLaunchKernelGGL($1, dim3($2), dim3($3), $4, $5, /g;" << endl;
-    *streamPtr.get() << tab << "# kern<<<Dg, dim3(Db), Ns, S>>>(...) syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<<<\\s*((?:(?!dim3).)*)\\s*,\\s*dim3\\((.+)\\)\\s*,\\s*(.+)\\s*,\\s*(.+)\\s*>>>\\s*\\(/hipLaunchKernelGGL($1, dim3($2), dim3($3), $4, $5, /g;" << endl;
-    *streamPtr.get() << tab << "# kern<<<Dg, Db, Ns, S>>>(...) syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<<<\\s*((?:(?!dim3).)*)\\s*,\\s*((?:(?!dim3).)*)\\s*,\\s*(.+)\\s*,\\s*(.+)\\s*>>>\\s*\\(/hipLaunchKernelGGL($1, dim3($2), dim3($3), $4, $5, /g;" << endl_2;
-
-    *streamPtr.get() << tab << "# kern<...><<<dim3(Dg), dim3(Db), Ns>>>() syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<(.+)>\\s*<<<\\s*dim3\\((.+)\\)\\s*,\\s*dim3\\((.+)\\)\\s*,\\s*(.+)\\s*>>>\\s*\\(\\s*\\)/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), dim3($3), dim3($4), $5, 0)/g;" << endl;
-    *streamPtr.get() << tab << "# kern<...><<<dim3(Dg), Db, Ns>>>() syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<(.+)>\\s*<<<\\s*dim3\\((.+)\\)\\s*,\\s*((?:(?!dim3).)*)\\s*,\\s*(.+)\\s*>>>\\s*\\(\\s*\\)/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), dim3($3), dim3($4), $5, 0)/g;" << endl;
-    *streamPtr.get() << tab << "# kern<...><<<Dg, dim3(Db), Ns>>>() syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<(.+)>\\s*<<<\\s*((?:(?!dim3).)*)\\s*,\\s*dim3\\((.+)\\)\\s*,\\s*(.+)\\s*>>>\\s*\\(\\s*\\)/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), dim3($3), dim3($4), $5, 0)/g;" << endl;
-    *streamPtr.get() << tab << "# kern<...><<<Dg, Db, Ns>>>() syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<(.+)>\\s*<<<\\s*((?:(?!dim3).)*)\\s*,\\s*((?:(?!dim3).)*)\\s*,\\s*(.+)\\s*>>>\\s*\\(\\s*\\)/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), dim3($3), dim3($4), $5, 0)/g;" << endl_2;
-
-    *streamPtr.get() << tab << "# kern<<<dim3(Dg), dim3(Db), Ns>>>() syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<<<\\s*dim3\\((.+)\\)\\s*,\\s*dim3\\((.+)\\)\\s*,\\s*(.+)\\s*>>>\\s*\\(\\s*\\)/hipLaunchKernelGGL($1, dim3($2), dim3($3), $4, 0)/g;" << endl;
-    *streamPtr.get() << tab << "# kern<<<dim3(Dg), Db, Ns>>>() syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<<<\\s*dim3\\((.+)\\)\\s*,\\s*((?:(?!dim3).)*)\\s*,\\s*(.+)\\s*>>>\\s*\\(\\s*\\)/hipLaunchKernelGGL($1, dim3($2), dim3($3), $4, 0)/g;" << endl;
-    *streamPtr.get() << tab << "# kern<<<Dg, dim3(Db), Ns>>>() syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<<<\\s*((?:(?!dim3).)*)\\s*,\\s*dim3\\((.+)\\)\\s*,\\s*(.+)\\s*>>>\\s*\\(\\s*\\)/hipLaunchKernelGGL($1, dim3($2), dim3($3), $4, 0)/g;" << endl;
-    *streamPtr.get() << tab << "# kern<<<Dg, Db, Ns>>>() syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<<<\\s*((?:(?!dim3).)*)\\s*,\\s*((?:(?!dim3).)*)\\s*,\\s*(.+)\\s*>>>\\s*\\(\\s*\\)/hipLaunchKernelGGL($1, dim3($2), dim3($3), $4, 0)/g;" << endl_2;
-
-    *streamPtr.get() << tab << "# kern<...><<<dim3(Dg), dim3(Db), Ns>>>(...) syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<(.+)>\\s*<<<\\s*dim3\\((.+)\\)\\s*,\\s*dim3\\((.+)\\)\\s*,\\s*(.+)\\s*>>>\\s*\\(/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), dim3($3), dim3($4), $5, 0, /g;" << endl;
-    *streamPtr.get() << tab << "# kern<...><<<dim3(Dg), Db, Ns>>>(...) syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<(.+)>\\s*<<<\\s*dim3\\((.+)\\)\\s*,\\s*((?:(?!dim3).)*)\\s*,\\s*(.+)\\s*>>>\\s*\\(/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), dim3($3), dim3($4), $5, 0, /g;" << endl;
-    *streamPtr.get() << tab << "# kern<...><<<Dg, dim3(Db), Ns>>>(...) syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<(.+)>\\s*<<<\\s*((?:(?!dim3).)*)\\s*,\\s*dim3\\((.+)\\)\\s*,\\s*(.+)\\s*>>>\\s*\\(/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), dim3($3), dim3($4), $5, 0, /g;" << endl;
-    *streamPtr.get() << tab << "# kern<...><<<Dg, Db, Ns>>>(...) syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<(.+)>\\s*<<<\\s*((?:(?!dim3).)*)\\s*,\\s*((?:(?!dim3).)*)\\s*,\\s*(.+)\\s*>>>\\s*\\(/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), dim3($3), dim3($4), $5, 0, /g;" << endl_2;
-
-    *streamPtr.get() << tab << "# kern<<<dim3(Dg), dim3(Db), Ns>>>(...) syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<<<\\s*dim3\\((.+)\\)\\s*,\\s*dim3\\((.+)\\)\\s*,\\s*(.+)\\s*>>>\\s*\\(/hipLaunchKernelGGL($1, dim3($2), dim3($3), $4, 0, /g;" << endl;
-    *streamPtr.get() << tab << "# kern<<<dim3(Dg), Db, Ns>>>(...) syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<<<\\s*dim3\\((.+)\\)\\s*,\\s*((?:(?!dim3).)*)\\s*,\\s*(.+)\\s*>>>\\s*\\(/hipLaunchKernelGGL($1, dim3($2), dim3($3), $4, 0, /g;" << endl;
-    *streamPtr.get() << tab << "# kern<<<Dg, dim3(Db), Ns>>>(...) syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<<<\\s*((?:(?!dim3).)*)\\s*,\\s*dim3\\((.+)\\)\\s*,\\s*(.+)\\s*>>>\\s*\\(/hipLaunchKernelGGL($1, dim3($2), dim3($3), $4, 0, /g;" << endl;
-    *streamPtr.get() << tab << "# kern<<<Dg, Db, Ns>>>(...) syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<<<\\s*((?:(?!dim3).)*)\\s*,\\s*((?:(?!dim3).)*)\\s*,\\s*(.+)\\s*>>>\\s*\\(/hipLaunchKernelGGL($1, dim3($2), dim3($3), $4, 0, /g;" << endl_2;
-
-    *streamPtr.get() << tab << "# kern<...><<<dim3(Dg), dim3(Db)>>>() syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<(.+)>\\s*<<<\\s*dim3\\((.+)\\)\\s*,\\s*dim3\\((.+)\\)\\s*>>>\\s*\\(\\s*\\)/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), dim3($3), dim3($4), 0, 0)/g;" << endl;
-    *streamPtr.get() << tab << "# kern<...><<<dim3(Dg), Db>>>() syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<(.+)>\\s*<<<\\s*dim3\\((.+)\\)\\s*,\\s*((?:(?!dim3).)*)\\s*>>>\\s*\\(\\s*\\)/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), dim3($3), dim3($4), 0, 0)/g;" << endl;
-    *streamPtr.get() << tab << "# kern<...><<<Dg, dim3(Db)>>>() syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<(.+)>\\s*<<<\\s*((?:(?!dim3).)*)\\s*,\\s*dim3\\((.+)\\)\\s*>>>\\s*\\(\\s*\\)/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), dim3($3), dim3($4), 0, 0)/g;" << endl;
     *streamPtr.get() << tab << "# kern<...><<<Dg, Db>>>() syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<(.+)>\\s*<<<\\s*((?:(?!dim3).)*)\\s*,\\s*((?:(?!dim3).)*)\\s*>>>\\s*\\(\\s*\\)/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), dim3($3), dim3($4), 0, 0)/g;" << endl_2;
-
-    *streamPtr.get() << tab << "# kern<<<dim3(Dg), dim3(Db)>>>() syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<<<\\s*dim3\\((.+)\\)\\s*,\\s*dim3\\((.+)\\)\\s*>>>\\s*\\(\\s*\\)/hipLaunchKernelGGL($1, dim3($2), dim3($3), 0, 0)/g;" << endl;
-    *streamPtr.get() << tab << "# kern<<<dim3(Dg), Db>>>() syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<<<\\s*dim3\\((.+)\\)\\s*,\\s*((?:(?!dim3).)*)\\s*>>>\\s*\\(\\s*\\)/hipLaunchKernelGGL($1, dim3($2), dim3($3), 0, 0)/g;" << endl;
-    *streamPtr.get() << tab << "# kern<<<Dg, dim3(Db)>>>() syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<<<\\s*((?:(?!dim3).)*)\\s*,\\s*dim3\\((.+)\\)\\s*>>>\\s*\\(\\s*\\)/hipLaunchKernelGGL($1, dim3($2), dim3($3), 0, 0)/g;" << endl;
-    *streamPtr.get() << tab << "# kern<<<Dg, Db>>>() syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<<<\\s*((?:(?!dim3).)*)\\s*,\\s*((?:(?!dim3).)*)\\s*>>>\\s*\\(\\s*\\)/hipLaunchKernelGGL($1, dim3($2), dim3($3), 0, 0)/g;" << endl_2;
-
-    *streamPtr.get() << tab << "# kern<...><<<dim3(Dg), dim3(Db)>>>(...) syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<(.+)>\\s*<<<\\s*dim3\\((.+)\\)\\s*,\\s*dim3\\((.+)\\)\\s*>>>\\s*\\(/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), dim3($3), dim3($4), 0, 0, /g;" << endl;
-    *streamPtr.get() << tab << "# kern<...><<<dim3(Dg), Db>>>(...) syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<(.+)>\\s*<<<\\s*dim3\\((.+)\\)\\s*,\\s*((?:(?!dim3).)*)\\s*>>>\\s*\\(/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), dim3($3), dim3($4), 0, 0, /g;" << endl;
-    *streamPtr.get() << tab << "# kern<...><<<Dg, dim3(Db)>>>(...) syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<(.+)>\\s*<<<\\s*((?:(?!dim3).)*)\\s*,\\s*dim3\\((.+)\\)\\s*>>>\\s*\\(/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), dim3($3), dim3($4), 0, 0, /g;" << endl;
+    *streamPtr.get() << tab << s_k << "<(.+)>\\s*<<<\\s*([^,]+|[\\w:]*\\([\\w|,|:]+\\))\\s*,\\s*([^,]+|[\\w:]*\\([\\w|,|:]+\\))\\s*>>>\\s*\\(\\s*\\)/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), $3, $4, 0, 0)/g;" << endl;
     *streamPtr.get() << tab << "# kern<...><<<Dg, Db>>>(...) syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<(.+)>\\s*<<<\\s*((?:(?!dim3).)*)\\s*,\\s*((?:(?!dim3).)*)\\s*>>>\\s*\\(/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), dim3($3), dim3($4), 0, 0, /g;" << endl_2;
-
-    *streamPtr.get() << tab << "# kern<<<dim3(Dg), dim3(Db)>>>(...) syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<<<\\s*dim3\\((.+)\\)\\s*,\\s*dim3\\((.+)\\)\\s*>>>\\s*\\(/hipLaunchKernelGGL($1, dim3($2), dim3($3), 0, 0, /g;" << endl;
-    *streamPtr.get() << tab << "# kern<<<dim3(Dg), Db>>>(...) syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<<<\\s*dim3\\((.+)\\)\\s*,\\s*((?:(?!dim3).)*)\\s*>>>\\s*\\(/hipLaunchKernelGGL($1, dim3($2), dim3($3), 0, 0, /g;" << endl;
-    *streamPtr.get() << tab << "# kern<<<Dg, dim3(Db)>>>(...) syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<<<\\s*((?:(?!dim3).)*)\\s*,\\s*dim3\\((.+)\\)\\s*>>>\\s*\\(/hipLaunchKernelGGL($1, dim3($2), dim3($3), 0, 0, /g;" << endl;
+    *streamPtr.get() << tab << s_k << "<(.+)>\\s*<<<\\s*([^,]+|[\\w:]*\\([\\w|,|:]+\\))\\s*,\\s*([^,]+|[\\w:]*\\([\\w|,|:]+\\))\\s*>>>\\s*\\(/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), $3, $4, 0, 0, /g;" << endl;
+    *streamPtr.get() << tab << "# kern<<<Dg, Db>>>() syntax" << endl;
+    *streamPtr.get() << tab << s_k << "<<<\\s*([^,]+|[\\w:]*\\([\\w|,|:]+\\))\\s*,\\s*([^,]+|[\\w:]*\\([\\w|,|:]+\\))\\s*>>>\\s*\\(\\s*\\)/hipLaunchKernelGGL($1, $2, $3, 0, 0)/g;" << endl;
     *streamPtr.get() << tab << "# kern<<<Dg, Db>>>(...) syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<<<\\s*((?:(?!dim3).)*)\\s*,\\s*((?:(?!dim3).)*)\\s*>>>\\s*\\(/hipLaunchKernelGGL($1, dim3($2), dim3($3), 0, 0, /g;" << endl_2;
+    *streamPtr.get() << tab << s_k << "<<<\\s*([^,]+|[\\w:]*\\([\\w|,|:]+\\))\\s*,\\s*([^,]+|[\\w:]*\\([\\w|,|:]+\\))\\s*>>>\\s*\\(/hipLaunchKernelGGL($1, $2, $3, 0, 0, /g;" << endl_2;
+
+    *streamPtr.get() << tab << "# kern<...><<<Dg, Db, Ns>>>() syntax" << endl;
+    *streamPtr.get() << tab << s_k << "<(.+)>\\s*<<<\\s*([^,]+|[\\w:]*\\([\\w|,|:]+\\))\\s*,\\s*([^,]+|[\\w:]*\\([\\w|,|:]+\\))\\s*,\\s*([^,]+|[\\w:]*\\([\\w|,|:]+\\))\\s*>>>\\s*\\(\\s*\\)/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), $3, $4, $5, 0)/g;" << endl;
+    *streamPtr.get() << tab << "# kern<...><<<Dg, Db, Ns>>>(...) syntax" << endl;
+    *streamPtr.get() << tab << s_k << "<(.+)>\\s*<<<\\s*([^,]+|[\\w:]*\\([\\w|,|:]+\\))\\s*,\\s*([^,]+|[\\w:]*\\([\\w|,|:]+\\))\\s*,\\s*([^,]+|[\\w:]*\\([\\w|,|:]+\\))\\s*>>>\\s*\\(/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), $3, $4, $5, 0, /g;" << endl;
+    *streamPtr.get() << tab << "# kern<<<Dg, Db, Ns>>>() syntax" << endl;
+    *streamPtr.get() << tab << s_k << "<<<\\s*([^,]+|[\\w:]*\\([\\w|,|:]+\\))\\s*,\\s*([^,]+|[\\w:]*\\([\\w|,|:]+\\))\\s*,\\s*([^,]+|[\\w:]*\\([\\w|,|:]+\\))\\s*>>>\\s*\\(\\s*\\)/hipLaunchKernelGGL($1, $2, $3, $4, 0)/g;" << endl;
+    *streamPtr.get() << tab << "# kern<<<Dg, Db, Ns>>>(...) syntax" << endl;
+    *streamPtr.get() << tab << s_k << "<<<\\s*([^,]+|[\\w:]*\\([\\w|,|:]+\\))\\s*,\\s*([^,]+|[\\w:]*\\([\\w|,|:]+\\))\\s*,\\s*([^,]+|[\\w:]*\\([\\w|,|:]+\\))\\s*>>>\\s*\\(/hipLaunchKernelGGL($1, $2, $3, $4, 0, /g;" << endl_2;
+
+    *streamPtr.get() << tab << "# kern<...><<<Dg, Db, Ns, S>>>() syntax" << endl;
+    *streamPtr.get() << tab << s_k << "<(.+)>\\s*<<<\\s*([^,]+|[\\w:]*\\([\\w|,|:]+\\))\\s*,\\s*([^,]+|[\\w:]*\\([\\w|,|:]+\\))\\s*,\\s*([^,]+|[\\w:]*\\([\\w|,|:]+\\))\\s*,\\s*([^,]+|[\\w:]*\\([\\w|,|:]+\\))\\s*>>>\\s*\\(\\s*\\)/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), $3, $4, $5, $6)/g;" << endl;
+    *streamPtr.get() << tab << "# kern<...><<<Dg, Db, Ns, S>>>(...) syntax" << endl;
+    *streamPtr.get() << tab << s_k << "<(.+)>\\s*<<<\\s*([^,]+|[\\w:]*\\([\\w|,|:]+\\))\\s*,\\s*([^,]+|[\\w:]*\\([\\w|,|:]+\\))\\s*,\\s*([^,]+|[\\w:]*\\([\\w|,|:]+\\))\\s*,\\s*([^,]+|[\\w:]*\\([\\w|,|:]+\\))\\s*>>>\\s*\\(/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), $3, $4, $5, $6, /g;" << endl;
+    *streamPtr.get() << tab << "# kern<<<Dg, Db, Ns, S>>>() syntax" << endl;
+    *streamPtr.get() << tab << s_k << "<<<\\s*([^,]+|[\\w:]*\\([\\w|,|:]+\\))\\s*,\\s*([^,]+|[\\w:]*\\([\\w|,|:]+\\))\\s*,\\s*([^,]+|[\\w:]*\\([\\w|,|:]+\\))\\s*,\\s*([^,]+|[\\w:]*\\([\\w|,|:]+\\))\\s*>>>\\s*\\(\\s*\\)/hipLaunchKernelGGL($1, $2, $3, $4, $5)/g;" << endl;
+    *streamPtr.get() << tab << "# kern<<<Dg, Db, Ns, S>>>(...) syntax" << endl;
+    *streamPtr.get() << tab << s_k << "<<<\\s*([^,]+|[\\w:]*\\([\\w|,|:]+\\))\\s*,\\s*([^,]+|[\\w:]*\\([\\w|,|:]+\\))\\s*,\\s*([^,]+|[\\w:]*\\([\\w|,|:]+\\))\\s*,\\s*([^,]+|[\\w:]*\\([\\w|,|:]+\\))\\s*>>>\\s*\\(/hipLaunchKernelGGL($1, $2, $3, $4, $5, /g;" << endl_2;
 
     *streamPtr.get() << tab << "if ($k) {" << endl;
     *streamPtr.get() << tab_2 << "$ft{'kernel_launch'} += $k;" << endl;

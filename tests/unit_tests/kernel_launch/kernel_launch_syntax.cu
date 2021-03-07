@@ -1,6 +1,7 @@
 // RUN: %run_test hipify "%s" "%t" %hipify_args %clang_args
 
 #include <iostream>
+#include <algorithm>
 
 // CHECK: #include <hip/hip_runtime.h>
 #include <cuda.h>
@@ -181,6 +182,13 @@ int main(int argc, char* argv[]) {
   nonempty<<<1, dim3(kDataLen), N, stream>>> (x, y, z);
   // CHECK: hipLaunchKernelGGL(nonempty, dim3(1), dim3(kDataLen), N, stream, x, y, z);
   nonempty<<<dim3(1), dim3(kDataLen), N, stream>>> (x, y, z);
+
+  // CHECK: hipLaunchKernelGGL(HIP_KERNEL_NAME(axpy_2<float,double>), dim3(1), dim3(std::min(kDataLen*2+10,x)), std::min(x,y), stream, a, std::min(d_x,d_y), std::max(d_x,d_y));
+  axpy_2<float,double><<<1, std::min(kDataLen*2+10,x), std::min(x,y), stream>>>(a, std::min(d_x,d_y), std::max(d_x,d_y));
+  // CHECK: hipLaunchKernelGGL(HIP_KERNEL_NAME(axpy_2<float,double>), dim3(1), dim3(std::min(kDataLen*2+10,x)), std::min(x,y), 0, a, std::min(d_x,d_y), std::max(d_x,d_y));
+  axpy_2<float,double><<<1, std::min(kDataLen*2+10,x), std::min(x,y)>>>(a, std::min(d_x,d_y), std::max(d_x,d_y));
+  // CHECK: hipLaunchKernelGGL(HIP_KERNEL_NAME(axpy_2<float,double>), dim3(1), dim3(std::min(kDataLen*2+10,x)), 0, 0, a, std::min(d_x,d_y), std::max(d_x,d_y));
+  axpy_2<float,double><<<1, std::min(kDataLen*2+10,x)>>>(a, std::min(d_x,d_y), std::max(d_x,d_y));
 
   // Copy output data to host.
   // CHECK: hipDeviceSynchronize();

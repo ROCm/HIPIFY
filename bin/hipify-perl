@@ -2987,113 +2987,32 @@ sub transformKernelLaunch {
     no warnings qw/uninitialized/;
     my $k = 0;
 
-    # kern<...><<<dim3(Dg), dim3(Db), Ns, S>>>() syntax
-    $k += s/([:|\w]+)\s*<(.+)>\s*<<<\s*dim3\((.+)\)\s*,\s*dim3\((.+)\)\s*,\s*(.+)\s*,\s*(.+)\s*>>>\s*\(\s*\)/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), dim3($3), dim3($4), $5, $6)/g;
-    # kern<...><<<dim3(Dg), Db, Ns, S>>>() syntax
-    $k += s/([:|\w]+)\s*<(.+)>\s*<<<\s*dim3\((.+)\)\s*,\s*((?:(?!dim3).)*)\s*,\s*(.+)\s*,\s*(.+)\s*>>>\s*\(\s*\)/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), dim3($3), dim3($4), $5, $6)/g;
-    # kern<...><<<Dg, dim3(Db), Ns, S>>>() syntax
-    $k += s/([:|\w]+)\s*<(.+)>\s*<<<\s*((?:(?!dim3).)*)\s*,\s*dim3\((.+)\)\s*,\s*(.+)\s*,\s*(.+)\s*>>>\s*\(\s*\)/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), dim3($3), dim3($4), $5, $6)/g;
-    # kern<...><<<Dg, Db, Ns, S>>>() syntax
-    $k += s/([:|\w]+)\s*<(.+)>\s*<<<\s*((?:(?!dim3).)*)\s*,\s*((?:(?!dim3).)*)\s*,\s*(.+)\s*,\s*(.+)\s*>>>\s*\(\s*\)/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), dim3($3), dim3($4), $5, $6)/g;
-
-    # kern<<<dim3(Dg), dim3(Db), Ns, S>>>() syntax
-    $k += s/([:|\w]+)\s*<<<\s*dim3\((.+)\)\s*,\s*dim3\((.+)\)\s*,\s*(.+)\s*,\s*(.+)\s*>>>\s*\(\s*\)/hipLaunchKernelGGL($1, dim3($2), dim3($3), $4, $5)/g;
-    # kern<<<dim3(Dg), Db, Ns, S>>>() syntax
-    $k += s/([:|\w]+)\s*<<<\s*dim3\((.+)\)\s*,\s*((?:(?!dim3).)*)\s*,\s*(.+)\s*,\s*(.+)\s*>>>\s*\(\s*\)/hipLaunchKernelGGL($1, dim3($2), dim3($3), $4, $5)/g;
-    # kern<<<Dg, dim3(Db), Ns, S>>>() syntax
-    $k += s/([:|\w]+)\s*<<<\s*((?:(?!dim3).)*)\s*,\s*dim3\((.+)\)\s*,\s*(.+)\s*,\s*(.+)\s*>>>\s*\(\s*\)/hipLaunchKernelGGL($1, dim3($2), dim3($3), $4, $5)/g;
-    # kern<<<Dg, Db, Ns, S>>>() syntax
-    $k += s/([:|\w]+)\s*<<<\s*((?:(?!dim3).)*)\s*,\s*((?:(?!dim3).)*)\s*,\s*(.+)\s*,\s*(.+)\s*>>>\s*\(\s*\)/hipLaunchKernelGGL($1, dim3($2), dim3($3), $4, $5)/g;
-
-    # kern<...><<<dim3(Dg), dim3(Db), Ns, S>>>(...) syntax
-    $k += s/([:|\w]+)\s*<(.+)>\s*<<<\s*dim3\((.+)\)\s*,\s*dim3\((.+)\)\s*,\s*(.+)\s*,\s*(.+)\s*>>>\s*\(/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), dim3($3), dim3($4), $5, $6, /g;
-    # kern<...><<<dim3(Dg), Db, Ns, S>>>(...) syntax
-    $k += s/([:|\w]+)\s*<(.+)>\s*<<<\s*dim3\((.+)\)\s*,\s*((?:(?!dim3).)*)\s*,\s*(.+)\s*,\s*(.+)\s*>>>\s*\(/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), dim3($3), dim3($4), $5, $6, /g;
-    # kern<...><<<Dg, dim3(Db), Ns, S>>>(...) syntax
-    $k += s/([:|\w]+)\s*<(.+)>\s*<<<\s*((?:(?!dim3).)*)\s*,\s*dim3\((.+)\)\s*,\s*(.+)\s*,\s*(.+)\s*>>>\s*\(/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), dim3($3), dim3($4), $5, $6, /g;
-    # kern<...><<<Dg, Db, Ns, S>>>(...) syntax
-    $k += s/([:|\w]+)\s*<(.+)>\s*<<<\s*((?:(?!dim3).)*)\s*,\s*((?:(?!dim3).)*)\s*,\s*(.+)\s*,\s*(.+)\s*>>>\s*\(/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), dim3($3), dim3($4), $5, $6, /g;
-
-    # kern<<<dim3(Dg), dim3(Db), Ns, S>>>(...) syntax
-    $k += s/([:|\w]+)\s*<<<\s*dim3\((.+)\)\s*,\s*dim3\((.+)\)\s*,\s*(.+)\s*,\s*(.+)\s*>>>\s*\(/hipLaunchKernelGGL($1, dim3($2), dim3($3), $4, $5, /g;
-    # kern<<<dim3(Dg), Db, Ns, S>>>(...) syntax
-    $k += s/([:|\w]+)\s*<<<\s*dim3\((.+)\)\s*,\s*((?:(?!dim3).)*)\s*,\s*(.+)\s*,\s*(.+)\s*>>>\s*\(/hipLaunchKernelGGL($1, dim3($2), dim3($3), $4, $5, /g;
-    # kern<<<Dg, dim3(Db), Ns, S>>>(...) syntax
-    $k += s/([:|\w]+)\s*<<<\s*((?:(?!dim3).)*)\s*,\s*dim3\((.+)\)\s*,\s*(.+)\s*,\s*(.+)\s*>>>\s*\(/hipLaunchKernelGGL($1, dim3($2), dim3($3), $4, $5, /g;
-    # kern<<<Dg, Db, Ns, S>>>(...) syntax
-    $k += s/([:|\w]+)\s*<<<\s*((?:(?!dim3).)*)\s*,\s*((?:(?!dim3).)*)\s*,\s*(.+)\s*,\s*(.+)\s*>>>\s*\(/hipLaunchKernelGGL($1, dim3($2), dim3($3), $4, $5, /g;
-
-    # kern<...><<<dim3(Dg), dim3(Db), Ns>>>() syntax
-    $k += s/([:|\w]+)\s*<(.+)>\s*<<<\s*dim3\((.+)\)\s*,\s*dim3\((.+)\)\s*,\s*(.+)\s*>>>\s*\(\s*\)/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), dim3($3), dim3($4), $5, 0)/g;
-    # kern<...><<<dim3(Dg), Db, Ns>>>() syntax
-    $k += s/([:|\w]+)\s*<(.+)>\s*<<<\s*dim3\((.+)\)\s*,\s*((?:(?!dim3).)*)\s*,\s*(.+)\s*>>>\s*\(\s*\)/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), dim3($3), dim3($4), $5, 0)/g;
-    # kern<...><<<Dg, dim3(Db), Ns>>>() syntax
-    $k += s/([:|\w]+)\s*<(.+)>\s*<<<\s*((?:(?!dim3).)*)\s*,\s*dim3\((.+)\)\s*,\s*(.+)\s*>>>\s*\(\s*\)/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), dim3($3), dim3($4), $5, 0)/g;
-    # kern<...><<<Dg, Db, Ns>>>() syntax
-    $k += s/([:|\w]+)\s*<(.+)>\s*<<<\s*((?:(?!dim3).)*)\s*,\s*((?:(?!dim3).)*)\s*,\s*(.+)\s*>>>\s*\(\s*\)/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), dim3($3), dim3($4), $5, 0)/g;
-
-    # kern<<<dim3(Dg), dim3(Db), Ns>>>() syntax
-    $k += s/([:|\w]+)\s*<<<\s*dim3\((.+)\)\s*,\s*dim3\((.+)\)\s*,\s*(.+)\s*>>>\s*\(\s*\)/hipLaunchKernelGGL($1, dim3($2), dim3($3), $4, 0)/g;
-    # kern<<<dim3(Dg), Db, Ns>>>() syntax
-    $k += s/([:|\w]+)\s*<<<\s*dim3\((.+)\)\s*,\s*((?:(?!dim3).)*)\s*,\s*(.+)\s*>>>\s*\(\s*\)/hipLaunchKernelGGL($1, dim3($2), dim3($3), $4, 0)/g;
-    # kern<<<Dg, dim3(Db), Ns>>>() syntax
-    $k += s/([:|\w]+)\s*<<<\s*((?:(?!dim3).)*)\s*,\s*dim3\((.+)\)\s*,\s*(.+)\s*>>>\s*\(\s*\)/hipLaunchKernelGGL($1, dim3($2), dim3($3), $4, 0)/g;
-    # kern<<<Dg, Db, Ns>>>() syntax
-    $k += s/([:|\w]+)\s*<<<\s*((?:(?!dim3).)*)\s*,\s*((?:(?!dim3).)*)\s*,\s*(.+)\s*>>>\s*\(\s*\)/hipLaunchKernelGGL($1, dim3($2), dim3($3), $4, 0)/g;
-
-    # kern<...><<<dim3(Dg), dim3(Db), Ns>>>(...) syntax
-    $k += s/([:|\w]+)\s*<(.+)>\s*<<<\s*dim3\((.+)\)\s*,\s*dim3\((.+)\)\s*,\s*(.+)\s*>>>\s*\(/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), dim3($3), dim3($4), $5, 0, /g;
-    # kern<...><<<dim3(Dg), Db, Ns>>>(...) syntax
-    $k += s/([:|\w]+)\s*<(.+)>\s*<<<\s*dim3\((.+)\)\s*,\s*((?:(?!dim3).)*)\s*,\s*(.+)\s*>>>\s*\(/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), dim3($3), dim3($4), $5, 0, /g;
-    # kern<...><<<Dg, dim3(Db), Ns>>>(...) syntax
-    $k += s/([:|\w]+)\s*<(.+)>\s*<<<\s*((?:(?!dim3).)*)\s*,\s*dim3\((.+)\)\s*,\s*(.+)\s*>>>\s*\(/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), dim3($3), dim3($4), $5, 0, /g;
-    # kern<...><<<Dg, Db, Ns>>>(...) syntax
-    $k += s/([:|\w]+)\s*<(.+)>\s*<<<\s*((?:(?!dim3).)*)\s*,\s*((?:(?!dim3).)*)\s*,\s*(.+)\s*>>>\s*\(/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), dim3($3), dim3($4), $5, 0, /g;
-
-    # kern<<<dim3(Dg), dim3(Db), Ns>>>(...) syntax
-    $k += s/([:|\w]+)\s*<<<\s*dim3\((.+)\)\s*,\s*dim3\((.+)\)\s*,\s*(.+)\s*>>>\s*\(/hipLaunchKernelGGL($1, dim3($2), dim3($3), $4, 0, /g;
-    # kern<<<dim3(Dg), Db, Ns>>>(...) syntax
-    $k += s/([:|\w]+)\s*<<<\s*dim3\((.+)\)\s*,\s*((?:(?!dim3).)*)\s*,\s*(.+)\s*>>>\s*\(/hipLaunchKernelGGL($1, dim3($2), dim3($3), $4, 0, /g;
-    # kern<<<Dg, dim3(Db), Ns>>>(...) syntax
-    $k += s/([:|\w]+)\s*<<<\s*((?:(?!dim3).)*)\s*,\s*dim3\((.+)\)\s*,\s*(.+)\s*>>>\s*\(/hipLaunchKernelGGL($1, dim3($2), dim3($3), $4, 0, /g;
-    # kern<<<Dg, Db, Ns>>>(...) syntax
-    $k += s/([:|\w]+)\s*<<<\s*((?:(?!dim3).)*)\s*,\s*((?:(?!dim3).)*)\s*,\s*(.+)\s*>>>\s*\(/hipLaunchKernelGGL($1, dim3($2), dim3($3), $4, 0, /g;
-
-    # kern<...><<<dim3(Dg), dim3(Db)>>>() syntax
-    $k += s/([:|\w]+)\s*<(.+)>\s*<<<\s*dim3\((.+)\)\s*,\s*dim3\((.+)\)\s*>>>\s*\(\s*\)/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), dim3($3), dim3($4), 0, 0)/g;
-    # kern<...><<<dim3(Dg), Db>>>() syntax
-    $k += s/([:|\w]+)\s*<(.+)>\s*<<<\s*dim3\((.+)\)\s*,\s*((?:(?!dim3).)*)\s*>>>\s*\(\s*\)/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), dim3($3), dim3($4), 0, 0)/g;
-    # kern<...><<<Dg, dim3(Db)>>>() syntax
-    $k += s/([:|\w]+)\s*<(.+)>\s*<<<\s*((?:(?!dim3).)*)\s*,\s*dim3\((.+)\)\s*>>>\s*\(\s*\)/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), dim3($3), dim3($4), 0, 0)/g;
     # kern<...><<<Dg, Db>>>() syntax
-    $k += s/([:|\w]+)\s*<(.+)>\s*<<<\s*((?:(?!dim3).)*)\s*,\s*((?:(?!dim3).)*)\s*>>>\s*\(\s*\)/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), dim3($3), dim3($4), 0, 0)/g;
-
-    # kern<<<dim3(Dg), dim3(Db)>>>() syntax
-    $k += s/([:|\w]+)\s*<<<\s*dim3\((.+)\)\s*,\s*dim3\((.+)\)\s*>>>\s*\(\s*\)/hipLaunchKernelGGL($1, dim3($2), dim3($3), 0, 0)/g;
-    # kern<<<dim3(Dg), Db>>>() syntax
-    $k += s/([:|\w]+)\s*<<<\s*dim3\((.+)\)\s*,\s*((?:(?!dim3).)*)\s*>>>\s*\(\s*\)/hipLaunchKernelGGL($1, dim3($2), dim3($3), 0, 0)/g;
-    # kern<<<Dg, dim3(Db)>>>() syntax
-    $k += s/([:|\w]+)\s*<<<\s*((?:(?!dim3).)*)\s*,\s*dim3\((.+)\)\s*>>>\s*\(\s*\)/hipLaunchKernelGGL($1, dim3($2), dim3($3), 0, 0)/g;
-    # kern<<<Dg, Db>>>() syntax
-    $k += s/([:|\w]+)\s*<<<\s*((?:(?!dim3).)*)\s*,\s*((?:(?!dim3).)*)\s*>>>\s*\(\s*\)/hipLaunchKernelGGL($1, dim3($2), dim3($3), 0, 0)/g;
-
-    # kern<...><<<dim3(Dg), dim3(Db)>>>(...) syntax
-    $k += s/([:|\w]+)\s*<(.+)>\s*<<<\s*dim3\((.+)\)\s*,\s*dim3\((.+)\)\s*>>>\s*\(/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), dim3($3), dim3($4), 0, 0, /g;
-    # kern<...><<<dim3(Dg), Db>>>(...) syntax
-    $k += s/([:|\w]+)\s*<(.+)>\s*<<<\s*dim3\((.+)\)\s*,\s*((?:(?!dim3).)*)\s*>>>\s*\(/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), dim3($3), dim3($4), 0, 0, /g;
-    # kern<...><<<Dg, dim3(Db)>>>(...) syntax
-    $k += s/([:|\w]+)\s*<(.+)>\s*<<<\s*((?:(?!dim3).)*)\s*,\s*dim3\((.+)\)\s*>>>\s*\(/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), dim3($3), dim3($4), 0, 0, /g;
+    $k += s/([:|\w]+)\s*<(.+)>\s*<<<\s*([^,]+|[\w:]*\([\w|,|:]+\))\s*,\s*([^,]+|[\w:]*\([\w|,|:]+\))\s*>>>\s*\(\s*\)/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), $3, $4, 0, 0)/g;
     # kern<...><<<Dg, Db>>>(...) syntax
-    $k += s/([:|\w]+)\s*<(.+)>\s*<<<\s*((?:(?!dim3).)*)\s*,\s*((?:(?!dim3).)*)\s*>>>\s*\(/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), dim3($3), dim3($4), 0, 0, /g;
-
-    # kern<<<dim3(Dg), dim3(Db)>>>(...) syntax
-    $k += s/([:|\w]+)\s*<<<\s*dim3\((.+)\)\s*,\s*dim3\((.+)\)\s*>>>\s*\(/hipLaunchKernelGGL($1, dim3($2), dim3($3), 0, 0, /g;
-    # kern<<<dim3(Dg), Db>>>(...) syntax
-    $k += s/([:|\w]+)\s*<<<\s*dim3\((.+)\)\s*,\s*((?:(?!dim3).)*)\s*>>>\s*\(/hipLaunchKernelGGL($1, dim3($2), dim3($3), 0, 0, /g;
-    # kern<<<Dg, dim3(Db)>>>(...) syntax
-    $k += s/([:|\w]+)\s*<<<\s*((?:(?!dim3).)*)\s*,\s*dim3\((.+)\)\s*>>>\s*\(/hipLaunchKernelGGL($1, dim3($2), dim3($3), 0, 0, /g;
+    $k += s/([:|\w]+)\s*<(.+)>\s*<<<\s*([^,]+|[\w:]*\([\w|,|:]+\))\s*,\s*([^,]+|[\w:]*\([\w|,|:]+\))\s*>>>\s*\(/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), $3, $4, 0, 0, /g;
+    # kern<<<Dg, Db>>>() syntax
+    $k += s/([:|\w]+)\s*<<<\s*([^,]+|[\w:]*\([\w|,|:]+\))\s*,\s*([^,]+|[\w:]*\([\w|,|:]+\))\s*>>>\s*\(\s*\)/hipLaunchKernelGGL($1, $2, $3, 0, 0)/g;
     # kern<<<Dg, Db>>>(...) syntax
-    $k += s/([:|\w]+)\s*<<<\s*((?:(?!dim3).)*)\s*,\s*((?:(?!dim3).)*)\s*>>>\s*\(/hipLaunchKernelGGL($1, dim3($2), dim3($3), 0, 0, /g;
+    $k += s/([:|\w]+)\s*<<<\s*([^,]+|[\w:]*\([\w|,|:]+\))\s*,\s*([^,]+|[\w:]*\([\w|,|:]+\))\s*>>>\s*\(/hipLaunchKernelGGL($1, $2, $3, 0, 0, /g;
+
+    # kern<...><<<Dg, Db, Ns>>>() syntax
+    $k += s/([:|\w]+)\s*<(.+)>\s*<<<\s*([^,]+|[\w:]*\([\w|,|:]+\))\s*,\s*([^,]+|[\w:]*\([\w|,|:]+\))\s*,\s*([^,]+|[\w:]*\([\w|,|:]+\))\s*>>>\s*\(\s*\)/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), $3, $4, $5, 0)/g;
+    # kern<...><<<Dg, Db, Ns>>>(...) syntax
+    $k += s/([:|\w]+)\s*<(.+)>\s*<<<\s*([^,]+|[\w:]*\([\w|,|:]+\))\s*,\s*([^,]+|[\w:]*\([\w|,|:]+\))\s*,\s*([^,]+|[\w:]*\([\w|,|:]+\))\s*>>>\s*\(/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), $3, $4, $5, 0, /g;
+    # kern<<<Dg, Db, Ns>>>() syntax
+    $k += s/([:|\w]+)\s*<<<\s*([^,]+|[\w:]*\([\w|,|:]+\))\s*,\s*([^,]+|[\w:]*\([\w|,|:]+\))\s*,\s*([^,]+|[\w:]*\([\w|,|:]+\))\s*>>>\s*\(\s*\)/hipLaunchKernelGGL($1, $2, $3, $4, 0)/g;
+    # kern<<<Dg, Db, Ns>>>(...) syntax
+    $k += s/([:|\w]+)\s*<<<\s*([^,]+|[\w:]*\([\w|,|:]+\))\s*,\s*([^,]+|[\w:]*\([\w|,|:]+\))\s*,\s*([^,]+|[\w:]*\([\w|,|:]+\))\s*>>>\s*\(/hipLaunchKernelGGL($1, $2, $3, $4, 0, /g;
+
+    # kern<...><<<Dg, Db, Ns, S>>>() syntax
+    $k += s/([:|\w]+)\s*<(.+)>\s*<<<\s*([^,]+|[\w:]*\([\w|,|:]+\))\s*,\s*([^,]+|[\w:]*\([\w|,|:]+\))\s*,\s*([^,]+|[\w:]*\([\w|,|:]+\))\s*,\s*([^,]+|[\w:]*\([\w|,|:]+\))\s*>>>\s*\(\s*\)/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), $3, $4, $5, $6)/g;
+    # kern<...><<<Dg, Db, Ns, S>>>(...) syntax
+    $k += s/([:|\w]+)\s*<(.+)>\s*<<<\s*([^,]+|[\w:]*\([\w|,|:]+\))\s*,\s*([^,]+|[\w:]*\([\w|,|:]+\))\s*,\s*([^,]+|[\w:]*\([\w|,|:]+\))\s*,\s*([^,]+|[\w:]*\([\w|,|:]+\))\s*>>>\s*\(/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), $3, $4, $5, $6, /g;
+    # kern<<<Dg, Db, Ns, S>>>() syntax
+    $k += s/([:|\w]+)\s*<<<\s*([^,]+|[\w:]*\([\w|,|:]+\))\s*,\s*([^,]+|[\w:]*\([\w|,|:]+\))\s*,\s*([^,]+|[\w:]*\([\w|,|:]+\))\s*,\s*([^,]+|[\w:]*\([\w|,|:]+\))\s*>>>\s*\(\s*\)/hipLaunchKernelGGL($1, $2, $3, $4, $5)/g;
+    # kern<<<Dg, Db, Ns, S>>>(...) syntax
+    $k += s/([:|\w]+)\s*<<<\s*([^,]+|[\w:]*\([\w|,|:]+\))\s*,\s*([^,]+|[\w:]*\([\w|,|:]+\))\s*,\s*([^,]+|[\w:]*\([\w|,|:]+\))\s*,\s*([^,]+|[\w:]*\([\w|,|:]+\))\s*>>>\s*\(/hipLaunchKernelGGL($1, $2, $3, $4, $5, /g;
 
     if ($k) {
         $ft{'kernel_launch'} += $k;
