@@ -380,7 +380,7 @@ namespace perl {
   }
 
   void generateDeprecatedAndUnsupportedFunctions(unique_ptr<ostream> &streamPtr) {
-    stringstream sDeprecated, sRemoved, sUnsupported, sCommon;
+    stringstream sDeprecated, sRemoved, sUnsupported, sCommon, sCommon1;
     sCommon << tab << my << "$line_num = shift;" << endl;
     sCommon << tab << my_k << endl;
     sDeprecated << endl << sub << "warnDeprecatedFunctions" << " {" << endl << sCommon.str() << tab << "while (my($func, $val) = each %deprecated_funcs)" << endl;
@@ -399,13 +399,18 @@ namespace perl {
     sCommon << tab_2 << my << "$mt = m/($func)/g;" << endl;
     sCommon << tab_2 << "if ($mt) {" << endl;
     sCommon << tab_3 << "$k += $mt;" << endl;
-    sDeprecated << sCommon.str();
-    sRemoved << sCommon.str();
+    sCommon1 << tab_3 << my << "$cudnn = \"CUDNN\";" << endl;
+    sCommon1 << tab_3 << my << "$cuda = \"CUDA\";" << endl;
+    sCommon1 << tab_3 << "if (index(lc($func),lc($cudnn)) == 0) {" << endl;
+    sCommon1 << tab_4 << "$cuda = $cudnn;" << endl;
+    sCommon1 << tab_3 << "}" << endl;
+    sDeprecated << sCommon.str() << sCommon1.str();
+    sRemoved << sCommon.str() << sCommon1.str();
     sUnsupported << sCommon.str();
     sCommon.str(std::string());
     sCommon << tab_2 << "}\n" << tab << "}\n" << tab << return_k << "}" << endl;
-    sDeprecated << tab_3 << print << "\"  "  << warning << "deprecated identifier \\\"$func\\\" since CUDA $val\\n\";" << endl << sCommon.str();
-    sRemoved << tab_3 << print << "\"  "  << warning << "removed identifier \\\"$func\\\" since CUDA $val\\n\";" << endl << sCommon.str();
+    sDeprecated << tab_3 << print << "\"  "  << warning << "deprecated identifier \\\"$func\\\" since $cuda $val\\n\";" << endl << sCommon.str();
+    sRemoved << tab_3 << print << "\"  "  << warning << "removed identifier \\\"$func\\\" since $cuda $val\\n\";" << endl << sCommon.str();
     sUnsupported << tab_3 << print << "\"  "  << warning << "unsupported identifier \\\"$func\\\"\\n\";" << endl << sCommon.str();
     *streamPtr.get() << sDeprecated.str();
     *streamPtr.get() << sRemoved.str();
