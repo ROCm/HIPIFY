@@ -3732,7 +3732,12 @@ sub warnDeprecatedFunctions {
         my $mt = m/($func)/g;
         if ($mt) {
             $k += $mt;
-            print STDERR "  warning: $fileName:$line_num: deprecated identifier \"$func\" since CUDA $val\n";
+            my $cudnn = "CUDNN";
+            my $cuda = "CUDA";
+            if (index(lc($func),lc($cudnn)) == 0) {
+                $cuda = $cudnn;
+            }
+            print STDERR "  warning: $fileName:$line_num: deprecated identifier \"$func\" since $cuda $val\n";
         }
     }
     return $k;
@@ -3746,7 +3751,12 @@ sub warnRemovedFunctions {
         my $mt = m/($func)/g;
         if ($mt) {
             $k += $mt;
-            print STDERR "  warning: $fileName:$line_num: removed identifier \"$func\" since CUDA $val\n";
+            my $cudnn = "CUDNN";
+            my $cuda = "CUDA";
+            if (index(lc($func),lc($cudnn)) == 0) {
+                $cuda = $cudnn;
+            }
+            print STDERR "  warning: $fileName:$line_num: removed identifier \"$func\" since $cuda $val\n";
         }
     }
     return $k;
