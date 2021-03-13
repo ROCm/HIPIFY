@@ -40,6 +40,7 @@ my $USAGE =<<USAGE;
       -help             - Display available options
       -inplace          - Backup the input file in .prehip file, modify the input file inplace
       -no-output        - Don't write any translated output to stdout
+      -o=s              - Output filename
       -print-stats      - Print translation statistics
       -quiet-warnings   - Don't print warnings on unknown CUDA identifiers
       -version          - The supported HIP version
@@ -53,6 +54,7 @@ my $whitelist = "";
 my $exclude_dirs =  "";
 my $exclude_files = "";
 my $fileName = "";
+my $hipFileName = "";
 my %ft;
 my %Tkernels;
 
@@ -63,6 +65,7 @@ GetOptions(
     , "help" => \$help                        # Display available options
     , "inplace" => \$inplace                  # Backup the input file in .prehip file, modify the input file inplace
     , "no-output" => \$no_output              # Don't write any translated output to stdout
+    , "o=s" => \$hipFileName                  # Output filename
     , "print-stats" => \$print_stats          # Print translation statistics
     , "quiet-warnings" => \$quiet_warnings    # Don't print warnings on unknown CUDA identifiers
     , "version" => \$version                  # The supported HIP version
@@ -6511,7 +6514,12 @@ while (@ARGV) {
             $OUTFILE = OUTFILE;
         } else {
             open(INFILE,"<", $fileName) or die "error: could not open $fileName";
-            $OUTFILE = STDOUT;
+            if ($hipFileName ne "") {
+                open(OUTFILE,">", $hipFileName) or die "error: could not open $hipFileName";
+                $OUTFILE = OUTFILE;
+            } else {
+                $OUTFILE = STDOUT;
+            }
         }
         # Count of transforms in this file
         clearStats(\%ft, \@statNames);
