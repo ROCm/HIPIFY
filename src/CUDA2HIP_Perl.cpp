@@ -165,6 +165,7 @@ namespace perl {
     *streamPtr.get() << "      -help             - Display available options" << endl;
     *streamPtr.get() << "      -inplace          - Backup the input file in .prehip file, modify the input file inplace" << endl;
     *streamPtr.get() << "      -no-output        - Don't write any translated output to stdout" << endl;
+    *streamPtr.get() << "      -o=s              - Output filename" << endl;
     *streamPtr.get() << "      -print-stats      - Print translation statistics" << endl;
     *streamPtr.get() << "      -quiet-warnings   - Don't print warnings on unknown CUDA identifiers" << endl;
     *streamPtr.get() << "      -version          - The supported HIP version" << endl;
@@ -178,6 +179,7 @@ namespace perl {
     *streamPtr.get() << my << "$exclude_dirs =  \"\";" << endl;
     *streamPtr.get() << my << "$exclude_files = \"\";" << endl;
     *streamPtr.get() << my << "$fileName = \"\";" << endl;
+    *streamPtr.get() << my << "$hipFileName = \"\";" << endl;
     *streamPtr.get() << my << "%ft;" << endl;
     *streamPtr.get() << my << "%Tkernels;" << endl_2;
     *streamPtr.get() << "GetOptions(" << endl;
@@ -187,6 +189,7 @@ namespace perl {
     *streamPtr.get() << tab << ", \"help\" => \\$help                        # Display available options" << endl;
     *streamPtr.get() << tab << ", \"inplace\" => \\$inplace                  # Backup the input file in .prehip file, modify the input file inplace" << endl;
     *streamPtr.get() << tab << ", \"no-output\" => \\$no_output              # Don't write any translated output to stdout" << endl;
+    *streamPtr.get() << tab << ", \"o=s\" => \\$hipFileName                  # Output filename" << endl;
     *streamPtr.get() << tab << ", \"print-stats\" => \\$print_stats          # Print translation statistics" << endl;
     *streamPtr.get() << tab << ", \"quiet-warnings\" => \\$quiet_warnings    # Don't print warnings on unknown CUDA identifiers" << endl;
     *streamPtr.get() << tab << ", \"version\" => \\$version                  # The supported HIP version" << endl;
@@ -235,7 +238,6 @@ namespace perl {
     *streamPtr.get() << "# Turn exclude dirlist and exclude_filelist into hash maps" << endl;
     *streamPtr.get() << "\%exclude_dirhash = map { $_ => 1 } @exclude_dirlist;" << endl;
     *streamPtr.get() << "\%exclude_filehash = map { $_ => 1 } @exclude_filelist;" << endl_2;
-
   }
 
   void generateStatFunctions(unique_ptr<ostream> &streamPtr) {
@@ -535,7 +537,11 @@ namespace perl {
     *streamPtr.get() << tab_3 << "$OUTFILE = OUTFILE;" << endl;
     *streamPtr.get() << tab_2 << "} else {" << endl;
     *streamPtr.get() << tab_3 << "open(INFILE,\"<\", $fileName) or die \"error: could not open $fileName\";" << endl;
-    *streamPtr.get() << tab_3 << "$OUTFILE = STDOUT;" << endl_tab_2 << "}" << endl;
+    *streamPtr.get() << tab_3 << "if ($hipFileName ne \"\") {" << endl;
+    *streamPtr.get() << tab_4 << "open(OUTFILE,\">\", $hipFileName) or die \"error: could not open $hipFileName\";" << endl;
+    *streamPtr.get() << tab_4 << "$OUTFILE = OUTFILE;" << endl;
+    *streamPtr.get() << tab_3 << "} else {" << endl;
+    *streamPtr.get() << tab_4 << "$OUTFILE = STDOUT;" << endl_tab_3 << "}" << endl_tab_2 << "}" << endl;
     *streamPtr.get() << tab_2 << "# Count of transforms in this file" << endl;
     *streamPtr.get() << tab_2 << "clearStats(\\%ft, \\@statNames);" << endl;
     *streamPtr.get() << tab_2 << my << "$countIncludes = 0;" << endl;
@@ -548,8 +554,6 @@ namespace perl {
     *streamPtr.get() << tab_2 << while_ << "(<INFILE>) {" << endl;
     *streamPtr.get() << tab_3 << "$countKeywords += m/__global__/;" << endl;
     *streamPtr.get() << tab_3 << "$countKeywords += m/__shared__/;" << endl;
-
-
     *streamPtr.get() << tab_3 << unless_ << "($quiet_warnings) {" << endl;
     *streamPtr.get() << tab_4 << my << "@lines = split /\\n/, $_;" << endl;
     *streamPtr.get() << tab_4 << "# Copy the whole file" << endl;
