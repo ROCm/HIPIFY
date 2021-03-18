@@ -150,7 +150,7 @@ namespace perl {
   };
 
   void generateHeader(unique_ptr<ostream> &streamPtr) {
-    *streamPtr.get() << "#!/usr/bin/perl -w" << endl_2;
+    *streamPtr.get() << "#!/usr/bin/env perl" << endl_2;
     *streamPtr.get() << sCopyright << endl;
     *streamPtr.get() << sImportant << endl_2;
     *streamPtr.get() << "# USAGE" << endl;
@@ -172,6 +172,7 @@ namespace perl {
     *streamPtr.get() << "      -whitelist=s      - Whitelist of identifiers" << endl;
     *streamPtr.get() << "USAGE" << endl;
     *streamPtr.get() << "#" << endl;
+    *streamPtr.get() << "use warnings;" << endl;
     *streamPtr.get() << "use Cwd;" << endl;
     *streamPtr.get() << "use Getopt::Long;" << endl;
     *streamPtr.get() << "use File::Basename;" << endl;
