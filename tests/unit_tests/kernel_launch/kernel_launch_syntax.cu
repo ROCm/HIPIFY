@@ -183,12 +183,21 @@ int main(int argc, char* argv[]) {
   // CHECK: hipLaunchKernelGGL(nonempty, dim3(1), dim3(kDataLen), N, stream, x, y, z);
   nonempty<<<dim3(1), dim3(kDataLen), N, stream>>> (x, y, z);
 
-  // CHECK: hipLaunchKernelGGL(HIP_KERNEL_NAME(axpy_2<float,double>), dim3(1), dim3(std::min(kDataLen*2+10,x)), std::min(x,y), stream, a, std::min(d_x,d_y), std::max(d_x,d_y));
-  axpy_2<float,double><<<1, std::min(kDataLen*2+10,x), std::min(x,y), stream>>>(a, std::min(d_x,d_y), std::max(d_x,d_y));
-  // CHECK: hipLaunchKernelGGL(HIP_KERNEL_NAME(axpy_2<float,double>), dim3(1), dim3(std::min(kDataLen*2+10,x)), std::min(x,y), 0, a, std::min(d_x,d_y), std::max(d_x,d_y));
-  axpy_2<float,double><<<1, std::min(kDataLen*2+10,x), std::min(x,y)>>>(a, std::min(d_x,d_y), std::max(d_x,d_y));
-  // CHECK: hipLaunchKernelGGL(HIP_KERNEL_NAME(axpy_2<float,double>), dim3(1), dim3(std::min(kDataLen*2+10,x)), 0, 0, a, std::min(d_x,d_y), std::max(d_x,d_y));
-  axpy_2<float,double><<<1, std::min(kDataLen*2+10,x)>>>(a, std::min(d_x,d_y), std::max(d_x,d_y));
+  // CHECK: hipLaunchKernelGGL(HIP_KERNEL_NAME(axpy_2<float,double>), dim3(x,y,z), dim3(std::min(kDataLen*2+10,x)), std::min(x,y), stream, a, std::min(d_x,d_y), std::max(d_x,d_y));
+  axpy_2<float,double><<<dim3(x,y,z), std::min(kDataLen*2+10,x), std::min(x,y), stream>>>(a, std::min(d_x,d_y), std::max(d_x,d_y));
+  // CHECK: hipLaunchKernelGGL(HIP_KERNEL_NAME(axpy_2<float,double>), dim3(x,y,z), dim3(std::min(kDataLen*2+10,x)), std::min(x,y), 0, a, std::min(d_x,d_y), std::max(d_x,d_y));
+  axpy_2<float,double><<<dim3(x,y,z), std::min(kDataLen*2+10,x), std::min(x,y)>>>(a, std::min(d_x,d_y), std::max(d_x,d_y));
+  // CHECK: hipLaunchKernelGGL(HIP_KERNEL_NAME(axpy_2<float,double>), dim3(x,y,z), dim3(std::min(kDataLen*2+10,x)), 0, 0, a, std::min(d_x,d_y), std::max(d_x,d_y));
+  axpy_2<float,double><<<dim3(x,y,z), std::min(kDataLen*2+10,x)>>>(a, std::min(d_x,d_y), std::max(d_x,d_y));
+
+  // CHECK: hipLaunchKernelGGL(nonempty, dim3(x,y,z), dim3(x,y,std::min(y,z)), 0, 0, x, y, z);
+  nonempty<<<dim3(x,y,z), dim3(x,y,std::min(y,z))>>>(x, y, z);
+  // CHECK: hipLaunchKernelGGL(nonempty, dim3(x,y,z), dim3(x,y,std::min(std::max(x,y),z)), 0, 0, x, y, z);
+  nonempty<<<dim3(x,y,z), dim3(x,y,std::min(std::max(x,y),z))>>>(x, y, z);
+  // CHECK: hipLaunchKernelGGL(nonempty, dim3(x,y,z), dim3(x,y,std::min(std::max(x,int(N)),z)), 0, 0, x, y, z);
+  nonempty<<<dim3(x,y,z), dim3(x,y,std::min(std::max(x,int(N)),z))>>>(x, y, z);
+  // CHECK: hipLaunchKernelGGL(nonempty, dim3(x,y,z), dim3(x,y,std::min(std::max(x,int(N+N -x/y + y*1)),z)), 0, 0, x, y, z);
+  nonempty<<<dim3(x,y,z), dim3(x,y,std::min(std::max(x,int(N+N -x/y + y*1)),z))>>>(x, y, z);
 
   // Copy output data to host.
   // CHECK: hipDeviceSynchronize();
