@@ -242,7 +242,7 @@
 |`cublasIzamax_v2`| | | |`hipblasIzamax`|3.0.0| | |
 |`cublasIzamin`| | | |`hipblasIzamin`|3.0.0| | |
 |`cublasIzamin_v2`| | | |`hipblasIzamin`|3.0.0| | |
-|`cublasNrm2Ex`|8.0| | | | | | |
+|`cublasNrm2Ex`|8.0| | |`hipblasNrm2Ex`|4.1.0| | |
 |`cublasSasum`| | | |`hipblasSasum`|1.8.2| | |
 |`cublasSasum_v2`| | | |`hipblasSasum`|1.8.2| | |
 |`cublasSaxpy`| | | |`hipblasSaxpy`|1.8.2| | |
@@ -531,7 +531,7 @@
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|
 |`cublasAsumEx`|10.1| | | | | | |
-|`cublasAxpyEx`|8.0| | | | | | |
+|`cublasAxpyEx`|8.0| | |`hipblasAxpyEx`|4.1.0| | |
 |`cublasCdgmm`| | | |`hipblasCdgmm`|3.6.0| | |
 |`cublasCgeam`| | | |`hipblasCgeam`|3.6.0| | |
 |`cublasCgelsBatched`| | | | | | | |
@@ -557,8 +557,8 @@
 |`cublasDgetriBatched`| | | |`hipblasDgetriBatched`|3.7.0| | |
 |`cublasDgetrsBatched`| | | |`hipblasDgetrsBatched`|3.5.0| | |
 |`cublasDmatinvBatched`| | | | | | | |
-|`cublasDotEx`|8.0| | | | | | |
-|`cublasDotcEx`|8.0| | | | | | |
+|`cublasDotEx`|8.0| | |`hipblasDotEx`|4.1.0| | |
+|`cublasDotcEx`|8.0| | |`hipblasDotcEx`|4.1.0| | |
 |`cublasDtpttr`| | | | | | | |
 |`cublasDtrsmBatched`| | | |`hipblasDtrsmBatched`|3.2.0| | |
 |`cublasDtrttp`| | | | | | | |
@@ -567,11 +567,11 @@
 |`cublasGemmStridedBatchedEx`|9.1| | |`hipblasGemmStridedBatchedEx`|3.6.0| | |
 |`cublasIamaxEx`|10.1| | | | | | |
 |`cublasIaminEx`|10.1| | | | | | |
-|`cublasRotEx`|10.1| | | | | | |
+|`cublasRotEx`|10.1| | |`hipblasRotEx`|4.1.0| | |
 |`cublasRotgEx`|10.1| | | | | | |
 |`cublasRotmEx`|10.1| | | | | | |
 |`cublasRotmgEx`|10.1| | | | | | |
-|`cublasScalEx`|8.0| | | | | | |
+|`cublasScalEx`|8.0| | |`hipblasScalEx`|4.1.0| | |
 |`cublasSdgmm`| | | |`hipblasSdgmm`|3.6.0| | |
 |`cublasSgeam`| | | |`hipblasSgeam`|1.8.2| | |
 |`cublasSgelsBatched`| | | | | | | |
