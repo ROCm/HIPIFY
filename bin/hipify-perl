@@ -1090,6 +1090,7 @@ sub simpleSubstitutions {
     $ft{'complex'} += s/\bmake_cuComplex\b/make_hipComplex/g;
     $ft{'complex'} += s/\bmake_cuDoubleComplex\b/make_hipDoubleComplex/g;
     $ft{'complex'} += s/\bmake_cuFloatComplex\b/make_hipFloatComplex/g;
+    $ft{'library'} += s/\bcublasAxpyEx\b/hipblasAxpyEx/g;
     $ft{'library'} += s/\bcublasCaxpy\b/hipblasCaxpy/g;
     $ft{'library'} += s/\bcublasCaxpy_v2\b/hipblasCaxpy/g;
     $ft{'library'} += s/\bcublasCcopy\b/hipblasCcopy/g;
@@ -1209,6 +1210,8 @@ sub simpleSubstitutions {
     $ft{'library'} += s/\bcublasDgetrsBatched\b/hipblasDgetrsBatched/g;
     $ft{'library'} += s/\bcublasDnrm2\b/hipblasDnrm2/g;
     $ft{'library'} += s/\bcublasDnrm2_v2\b/hipblasDnrm2/g;
+    $ft{'library'} += s/\bcublasDotEx\b/hipblasDotEx/g;
+    $ft{'library'} += s/\bcublasDotcEx\b/hipblasDotcEx/g;
     $ft{'library'} += s/\bcublasDrot\b/hipblasDrot/g;
     $ft{'library'} += s/\bcublasDrot_v2\b/hipblasDrot/g;
     $ft{'library'} += s/\bcublasDrotg\b/hipblasDrotg/g;
@@ -1294,10 +1297,13 @@ sub simpleSubstitutions {
     $ft{'library'} += s/\bcublasIzamax_v2\b/hipblasIzamax/g;
     $ft{'library'} += s/\bcublasIzamin\b/hipblasIzamin/g;
     $ft{'library'} += s/\bcublasIzamin_v2\b/hipblasIzamin/g;
+    $ft{'library'} += s/\bcublasNrm2Ex\b/hipblasNrm2Ex/g;
+    $ft{'library'} += s/\bcublasRotEx\b/hipblasRotEx/g;
     $ft{'library'} += s/\bcublasSasum\b/hipblasSasum/g;
     $ft{'library'} += s/\bcublasSasum_v2\b/hipblasSasum/g;
     $ft{'library'} += s/\bcublasSaxpy\b/hipblasSaxpy/g;
     $ft{'library'} += s/\bcublasSaxpy_v2\b/hipblasSaxpy/g;
+    $ft{'library'} += s/\bcublasScalEx\b/hipblasScalEx/g;
     $ft{'library'} += s/\bcublasScasum\b/hipblasScasum/g;
     $ft{'library'} += s/\bcublasScasum_v2\b/hipblasScasum/g;
     $ft{'library'} += s/\bcublasScnrm2\b/hipblasScnrm2/g;
@@ -5006,12 +5012,9 @@ sub warnUnsupportedFunctions {
         "cublasSetMathMode",
         "cublasSetLoggerCallback",
         "cublasSetKernelStream",
-        "cublasScalEx",
         "cublasRotmgEx",
         "cublasRotmEx",
         "cublasRotgEx",
-        "cublasRotEx",
-        "cublasNrm2Ex",
         "cublasMigrateComputeType",
         "cublasMath_t",
         "cublasLoggerConfigure",
@@ -5029,8 +5032,6 @@ sub warnUnsupportedFunctions {
         "cublasFree",
         "cublasDtrttp",
         "cublasDtpttr",
-        "cublasDotcEx",
-        "cublasDotEx",
         "cublasDmatinvBatched",
         "cublasDgelsBatched",
         "cublasCtrttp",
@@ -5049,7 +5050,6 @@ sub warnUnsupportedFunctions {
         "cublasCgemm3mBatched",
         "cublasCgemm3m",
         "cublasCgelsBatched",
-        "cublasAxpyEx",
         "cublasAsumEx",
         "cublasAlloc",
         "cuWaitExternalSemaphoresAsync",
