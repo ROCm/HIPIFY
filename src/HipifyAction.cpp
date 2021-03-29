@@ -41,6 +41,8 @@ const std::string sHIP_DYNAMIC_SHARED = "HIP_DYNAMIC_SHARED";
 const std::string sHIP_KERNEL_NAME = "HIP_KERNEL_NAME";
 std::string sHIP_SYMBOL = "HIP_SYMBOL";
 std::string s_reinterpret_cast = "reinterpret_cast<const void*>";
+std::string s_int32_t = "int32_t";
+std::string s_int64_t = "int64_t";
 const std::string sHipLaunchKernelGGL = "hipLaunchKernelGGL";
 const std::string sDim3 = "dim3(";
 const std::string s_hiprand_kernel_h = "hiprand_kernel.h";
@@ -56,6 +58,11 @@ const std::string sCudaMemcpyFromSymbol = "cudaMemcpyFromSymbol";
 const std::string sCudaMemcpyFromSymbolAsync = "cudaMemcpyFromSymbolAsync";
 const std::string sCudaFuncSetCacheConfig = "cudaFuncSetCacheConfig";
 const std::string sCudaFuncGetAttributes = "cudaFuncGetAttributes";
+// CUDA functions, which need typecasting of its arguments
+const std::string sCuStreamWaitValue32 = "cuStreamWaitValue32";
+const std::string sCuStreamWaitValue64 = "cuStreamWaitValue64";
+const std::string sCuStreamWriteValue32 = "cuStreamWriteValue32";
+const std::string sCuStreamWriteValue64 = "cuStreamWriteValue64";
 // Matchers' names
 const StringRef sCudaSharedIncompleteArrayVar = "cudaSharedIncompleteArrayVar";
 const StringRef sCudaLaunchKernel = "cudaLaunchKernel";
@@ -64,6 +71,40 @@ const StringRef sCudaDeviceFuncCall = "cudaDeviceFuncCall";
 const StringRef sCubNamespacePrefix = "cubNamespacePrefix";
 const StringRef sCubFunctionTemplateDecl = "cubFunctionTemplateDecl";
 const StringRef sCubUsingNamespaceDecl = "cubUsingNamespaceDecl";
+
+enum CastTypes {
+  e_HIP_SYMBOL,
+  e_reinterpret_cast,
+  e_int32_t,
+  e_int64_t,
+};
+
+std::string getCastType(CastTypes c) {
+  switch (c) {
+    case e_HIP_SYMBOL: return sHIP_SYMBOL;
+    case e_reinterpret_cast: return s_reinterpret_cast;
+    case e_int32_t: return s_int32_t;
+    case e_int64_t: return s_int64_t;
+    default: return "";
+  }
+}
+
+typedef std::map<unsigned, CastTypes> ArgCastMap;
+
+std::map<std::string, ArgCastMap> FuncArgCasts {
+  {sCudaMemcpyToSymbol, {{0, e_HIP_SYMBOL}}},
+  {sCudaMemcpyToSymbolAsync, {{0, e_HIP_SYMBOL}}},
+  {sCudaGetSymbolSize, {{1, e_HIP_SYMBOL}}},
+  {sCudaGetSymbolAddress, {{1, e_HIP_SYMBOL}}},
+  {sCudaMemcpyFromSymbol, {{1, e_HIP_SYMBOL}}},
+  {sCudaMemcpyFromSymbolAsync, {{1, e_HIP_SYMBOL}}},
+  {sCudaFuncSetCacheConfig, {{0, e_reinterpret_cast}}},
+  {sCudaFuncGetAttributes, {{1, e_reinterpret_cast}}},
+  {sCuStreamWaitValue32, {{2, e_int32_t}}},
+  {sCuStreamWaitValue64, {{2, e_int64_t}}},
+  {sCuStreamWriteValue32, {{2, e_int32_t}}},
+  {sCuStreamWriteValue64, {{2, e_int64_t}}},
+};
 
 std::set<std::string> DeviceSymbolFunctions0 {
   {sCudaMemcpyToSymbol},
@@ -77,16 +118,11 @@ std::set<std::string> DeviceSymbolFunctions1 {
   {sCudaMemcpyFromSymbolAsync}
 };
 
-std::set<std::string> ReinterpretFunctions{
-  {sCudaFuncSetCacheConfig},
-  {sCudaFuncGetAttributes}
-};
-
-std::set<std::string> ReinterpretFunctions0{
+std::set<std::string> ReinterpretFunctions0 {
   {sCudaFuncSetCacheConfig}
 };
 
-std::set<std::string> ReinterpretFunctions1{
+std::set<std::string> ReinterpretFunctions1 {
   {sCudaFuncGetAttributes}
 };
 
@@ -524,28 +560,26 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
     auto *funcDcl = call->getDirectCallee();
     if (!funcDcl) return false;
     std::string sName = funcDcl->getDeclName().getAsString();
-    unsigned int argNum = 0;
-    bool b_reinterpret = (ReinterpretFunctions.find(sName) != ReinterpretFunctions.end()) ? true : false;
-    if (DeviceSymbolFunctions0.find(sName) != DeviceSymbolFunctions0.end() || sCudaFuncSetCacheConfig == sName) {
-      argNum = 0;
-    } else if (call->getNumArgs() > 1 && (DeviceSymbolFunctions1.find(sName) != DeviceSymbolFunctions1.end() || sCudaFuncGetAttributes == sName)) {
-      argNum = 1;
-    } else {
-      return false;
+    auto it = FuncArgCasts.find(sName);
+    if (it == FuncArgCasts.end()) return false;
+    auto casts = it->second;
+    for (auto c : casts) {
+      unsigned int argNum = c.first;
+      std::string sCast = getCastType(c.second);
+      clang::SmallString<40> XStr;
+      llvm::raw_svector_ostream OS(XStr);
+      clang::SourceRange sr = call->getArg(argNum)->getSourceRange();
+      auto* SM = Result.SourceManager;
+      OS << sCast << "(" << readSourceText(*SM, sr) << ")";
+      clang::SourceRange replacementRange = getWriteRange(*SM, { sr.getBegin(), sr.getEnd() });
+      clang::SourceLocation s = replacementRange.getBegin();
+      clang::SourceLocation e = replacementRange.getEnd();
+      clang::LangOptions DefaultLangOptions;
+      size_t length = SM->getCharacterData(clang::Lexer::getLocForEndOfToken(e, 0, *SM, DefaultLangOptions)) - SM->getCharacterData(s);
+      ct::Replacement Rep(*SM, s, length, OS.str());
+      clang::FullSourceLoc fullSL(s, *SM);
+      insertReplacement(Rep, fullSL);
     }
-    clang::SmallString<40> XStr;
-    llvm::raw_svector_ostream OS(XStr);
-    clang::SourceRange sr = call->getArg(argNum)->getSourceRange();
-    auto *SM = Result.SourceManager;
-    OS << (b_reinterpret ? s_reinterpret_cast : sHIP_SYMBOL) << "(" << readSourceText(*SM, sr) << ")";
-    clang::SourceRange replacementRange = getWriteRange(*SM, { sr.getBegin(), sr.getEnd() });
-    clang::SourceLocation s = replacementRange.getBegin();
-    clang::SourceLocation e = replacementRange.getEnd();
-    clang::LangOptions DefaultLangOptions;
-    size_t length = SM->getCharacterData(clang::Lexer::getLocForEndOfToken(e, 0, *SM, DefaultLangOptions)) - SM->getCharacterData(s);
-    ct::Replacement Rep(*SM, s, length, OS.str());
-    clang::FullSourceLoc fullSL(s, *SM);
-    insertReplacement(Rep, fullSL);
     return true;
   }
   return false;
@@ -587,7 +621,11 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
             sCudaMemcpyToSymbol,
             sCudaMemcpyToSymbolAsync,
             sCudaFuncSetCacheConfig,
-            sCudaFuncGetAttributes
+            sCudaFuncGetAttributes,
+            sCuStreamWaitValue32,
+            sCuStreamWaitValue64,
+            sCuStreamWriteValue32,
+            sCuStreamWriteValue64
           )
         )
       )
