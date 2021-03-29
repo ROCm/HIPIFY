@@ -671,10 +671,11 @@
 |`CU_STREAM_MEM_OP_WRITE_VALUE_64`|9.0| | | | | | |
 |`CU_STREAM_NON_BLOCKING`| | | |`hipStreamNonBlocking`|1.6.0| | |
 |`CU_STREAM_PER_THREAD`| | | | | | | |
-|`CU_STREAM_WAIT_VALUE_AND`|8.0| | | | | | |
-|`CU_STREAM_WAIT_VALUE_EQ`|8.0| | | | | | |
+|`CU_STREAM_WAIT_VALUE_AND`|8.0| | |`hipStreamWaitValueAnd`|4.2.0| | |
+|`CU_STREAM_WAIT_VALUE_EQ`|8.0| | |`hipStreamWaitValueEq`|4.2.0| | |
 |`CU_STREAM_WAIT_VALUE_FLUSH`|8.0| | | | | | |
-|`CU_STREAM_WAIT_VALUE_GEQ`|8.0| | | | | | |
+|`CU_STREAM_WAIT_VALUE_GEQ`|8.0| | |`hipStreamWaitValueGte`|4.2.0| | |
+|`CU_STREAM_WAIT_VALUE_NOR`| | | |`hipStreamWaitValueNor`|4.2.0| | |
 |`CU_STREAM_WRITE_VALUE_DEFAULT`|8.0| | | | | | |
 |`CU_STREAM_WRITE_VALUE_NO_MEMORY_BARRIER`|8.0| | | | | | |
 |`CU_SYNC_POLICY_AUTO`|11.0| | | | | | |
@@ -1248,10 +1249,10 @@
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|
 |`cuStreamBatchMemOp`|8.0| | | | | | |
-|`cuStreamWaitValue32`|8.0| | | | | | |
-|`cuStreamWaitValue64`|9.0| | | | | | |
-|`cuStreamWriteValue32`|8.0| | | | | | |
-|`cuStreamWriteValue64`|9.0| | | | | | |
+|`cuStreamWaitValue32`|8.0| | |`hipStreamWaitValue32`|4.2.0| | |
+|`cuStreamWaitValue64`|9.0| | |`hipStreamWaitValue64`|4.2.0| | |
+|`cuStreamWriteValue32`|8.0| | |`hipStreamWriteValue32`|4.2.0| | |
+|`cuStreamWriteValue64`|9.0| | |`hipStreamWriteValue64`|4.2.0| | |
 
 ## **19. Execution Control**
 

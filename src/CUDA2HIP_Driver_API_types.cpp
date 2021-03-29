@@ -1491,9 +1491,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUstreamWaitValue_flags",                                          {"hipStreamWaitValueFlags",                                  "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
   {"CUstreamWaitValue_flags_enum",                                     {"hipStreamWaitValueFlags",                                  "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
   // CUstreamWaitValue_flags enum values
-  {"CU_STREAM_WAIT_VALUE_GEQ",                                         {"hipStreamWaitValueGeq",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0x0
-  {"CU_STREAM_WAIT_VALUE_EQ",                                          {"hipStreamWaitValueEq",                                     "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0x1
-  {"CU_STREAM_WAIT_VALUE_AND",                                         {"hipStreamWaitValueAnd",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0x2
+  {"CU_STREAM_WAIT_VALUE_GEQ",                                         {"hipStreamWaitValueGte",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x0
+  {"CU_STREAM_WAIT_VALUE_EQ",                                          {"hipStreamWaitValueEq",                                     "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x1
+  {"CU_STREAM_WAIT_VALUE_AND",                                         {"hipStreamWaitValueAnd",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x2
+  {"CU_STREAM_WAIT_VALUE_NOR",                                         {"hipStreamWaitValueNor",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x3
   {"CU_STREAM_WAIT_VALUE_FLUSH",                                       {"hipStreamWaitValueFlush",                                  "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 1<<30
 
   // no analogue
@@ -2584,4 +2585,8 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {
   {"hipDeviceAttributeConcurrentManagedAccess",                        {HIP_3100, HIP_0,    HIP_0   }},
   {"hipDeviceAttributePageableMemoryAccess",                           {HIP_3100, HIP_0,    HIP_0   }},
   {"hipDeviceAttributePageableMemoryAccessUsesHostPageTables",         {HIP_3100, HIP_0,    HIP_0   }},
+  {"hipStreamWaitValueGte",                                            {HIP_4020, HIP_0,    HIP_0   }},
+  {"hipStreamWaitValueEq",                                             {HIP_4020, HIP_0,    HIP_0   }},
+  {"hipStreamWaitValueAnd",                                            {HIP_4020, HIP_0,    HIP_0   }},
+  {"hipStreamWaitValueNor",                                            {HIP_4020, HIP_0,    HIP_0   }},
 };
