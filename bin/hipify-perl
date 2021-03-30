@@ -3165,6 +3165,20 @@ sub transformHostFunctions {
     {
         $k += s/(?<!\/\/ CHECK: )($func)\s*\(\s*([^,]+)\s*,\s*([^,\)]+)\s*(,\s*|\))\s*/$func\($2, reinterpret_cast<const void*>\($3\)$4/g;
     }
+    foreach $func (
+        "hipStreamWaitValue32",
+        "hipStreamWriteValue32"
+    )
+    {
+        $k += s/(?<!\/\/ CHECK: )($func)\s*\((\s*[^,]+\s*,\s*[^,]+\s*),\s*([^,]+)\s*(,\s*|\))\s*/$func\($2, int32_t\($3\)$4/g;
+    }
+    foreach $func (
+        "hipStreamWaitValue64",
+        "hipStreamWriteValue64"
+    )
+    {
+        $k += s/(?<!\/\/ CHECK: )($func)\s*\((\s*[^,]+\s*,\s*[^,]+\s*),\s*([^,]+)\s*(,\s*|\))\s*/$func\($2, int64_t\($3\)$4/g;
+    }
     return $k;
 }
 

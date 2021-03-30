@@ -23,6 +23,7 @@ THE SOFTWARE.
 #include <algorithm>
 #include <set>
 #include "HipifyAction.h"
+#include "CUDA2HIP_Scripting.h"
 #include "clang/Basic/SourceLocation.h"
 #include "clang/Frontend/CompilerInstance.h"
 #include "clang/ASTMatchers/ASTMatchFinder.h"
@@ -72,13 +73,6 @@ const StringRef sCubNamespacePrefix = "cubNamespacePrefix";
 const StringRef sCubFunctionTemplateDecl = "cubFunctionTemplateDecl";
 const StringRef sCubUsingNamespaceDecl = "cubUsingNamespaceDecl";
 
-enum CastTypes {
-  e_HIP_SYMBOL,
-  e_reinterpret_cast,
-  e_int32_t,
-  e_int64_t,
-};
-
 std::string getCastType(CastTypes c) {
   switch (c) {
     case e_HIP_SYMBOL: return sHIP_SYMBOL;
@@ -88,8 +82,6 @@ std::string getCastType(CastTypes c) {
     default: return "";
   }
 }
-
-typedef std::map<unsigned, CastTypes> ArgCastMap;
 
 std::map<std::string, ArgCastMap> FuncArgCasts {
   {sCudaMemcpyToSymbol, {{0, e_HIP_SYMBOL}}},
@@ -104,26 +96,6 @@ std::map<std::string, ArgCastMap> FuncArgCasts {
   {sCuStreamWaitValue64, {{2, e_int64_t}}},
   {sCuStreamWriteValue32, {{2, e_int32_t}}},
   {sCuStreamWriteValue64, {{2, e_int64_t}}},
-};
-
-std::set<std::string> DeviceSymbolFunctions0 {
-  {sCudaMemcpyToSymbol},
-  {sCudaMemcpyToSymbolAsync}
-};
-
-std::set<std::string> DeviceSymbolFunctions1 {
-  {sCudaGetSymbolSize},
-  {sCudaGetSymbolAddress},
-  {sCudaMemcpyFromSymbol},
-  {sCudaMemcpyFromSymbolAsync}
-};
-
-std::set<std::string> ReinterpretFunctions0 {
-  {sCudaFuncSetCacheConfig}
-};
-
-std::set<std::string> ReinterpretFunctions1 {
-  {sCudaFuncGetAttributes}
 };
 
 void HipifyAction::RewriteString(StringRef s, clang::SourceLocation start) {

@@ -22,13 +22,17 @@ THE SOFTWARE.
 
 #pragma once
 
-extern std::set<std::string> DeviceSymbolFunctions0;
-extern std::set<std::string> DeviceSymbolFunctions1;
-extern std::set<std::string> ReinterpretFunctions0;
-extern std::set<std::string> ReinterpretFunctions1;
+enum CastTypes {
+  e_HIP_SYMBOL,
+  e_reinterpret_cast,
+  e_int32_t,
+  e_int64_t,
+};
 
-extern std::string sHIP_SYMBOL;
-extern std::string s_reinterpret_cast;
+typedef std::map<unsigned, CastTypes> ArgCastMap;
+
+extern std::string getCastType(CastTypes c);
+extern std::map<std::string, ArgCastMap> FuncArgCasts;
 
 namespace perl {
 
