@@ -351,32 +351,77 @@ namespace perl {
 
   void generateHostFunctions(unique_ptr<ostream> &streamPtr) {
     *streamPtr.get() << endl << sub << "transformHostFunctions" << " {" << endl_tab << my_k << endl;
-    set<string> &funcSet = DeviceSymbolFunctions0;
-    const string s0 = "$k += s/(?<!\\/\\/ CHECK: )($func)\\s*\\(\\s*([^,]+)\\s*,/$func\\(";
-    const string s1 = "$k += s/(?<!\\/\\/ CHECK: )($func)\\s*\\(\\s*([^,]+)\\s*,\\s*([^,\\)]+)\\s*(,\\s*|\\))\\s*/$func\\($2, ";
-    for (int i = 0; i < 4; ++i) {
+    const string s = "$k += s/(?<!\\/\\/ CHECK: )($func)\\s*";
+    const string s0 = s + "\\(\\s*([^,]+)\\s*,/$func\\(";
+    const string s1 = s + "\\(\\s*([^,]+)\\s*,\\s*([^,\\)]+)\\s*(,\\s*|\\))\\s*/$func\\($2, ";
+    const string s2 = s + "\\((\\s*[^,]+\\s*,\\s*[^,]+\\s*),\\s*([^,]+)\\s*(,\\s*|\\))\\s*/$func\\($2, ";
+    set<string> DeviceSymbolFunctions0;
+    set<string> DeviceSymbolFunctions1;
+    set<string> ReinterpretFunctions0;
+    set<string> ReinterpretFunctions1;
+    set<string> CastFunctions2_32;
+    set<string> CastFunctions2_64;
+    for (auto f : FuncArgCasts) {
+      auto casts = f.second;
+      for (auto c : casts) {
+        switch (c.first) {
+          case 0:
+            switch (c.second) {
+              case e_HIP_SYMBOL: DeviceSymbolFunctions0.insert(f.first); break;
+              case e_reinterpret_cast: ReinterpretFunctions0.insert(f.first); break;
+              default: break;
+            }
+            break;
+          case 1:
+            switch (c.second) {
+              case e_HIP_SYMBOL: DeviceSymbolFunctions1.insert(f.first); break;
+              case e_reinterpret_cast: ReinterpretFunctions1.insert(f.first); break;
+              default: break;
+            }
+            break;
+          case 2:
+            switch (c.second) {
+              case e_int32_t: CastFunctions2_32.insert(f.first); break;
+              case e_int64_t: CastFunctions2_64.insert(f.first); break;
+              default: break;
+            }
+            break;
+          default: break;
+        }
+      }
+    }
+    set<string>& funcSet = DeviceSymbolFunctions0;
+    for (int i = 0; i < 6; ++i) {
       *streamPtr.get() << tab + foreach_func;
       switch (i) {
-      case 1:  funcSet = DeviceSymbolFunctions1; break;
-      case 2:  funcSet = ReinterpretFunctions0; break;
-      case 3:  funcSet = ReinterpretFunctions1; break;
-      default: funcSet = DeviceSymbolFunctions0;
+        case 1:  funcSet = DeviceSymbolFunctions1; break;
+        case 2:  funcSet = ReinterpretFunctions0; break;
+        case 3:  funcSet = ReinterpretFunctions1; break;
+        case 4:  funcSet = CastFunctions2_32; break;
+        case 5:  funcSet = CastFunctions2_64; break;
+        default: funcSet = DeviceSymbolFunctions0;
       }
       unsigned int count = 0;
+      string sHIPName;
       for (auto &f : funcSet) {
         const auto found = CUDA_RUNTIME_FUNCTION_MAP.find(f);
-        if (found != CUDA_RUNTIME_FUNCTION_MAP.end()) {
-          *streamPtr.get() << (count ? ",\n" : "") << tab_2 << "\"" << found->second.hipName.str() << "\"";
-          count++;
+        if (found != CUDA_RUNTIME_FUNCTION_MAP.end()) sHIPName = found->second.hipName.str();
+        else {
+          const auto found2 = CUDA_DRIVER_FUNCTION_MAP.find(f);
+          if (found2 != CUDA_DRIVER_FUNCTION_MAP.end()) sHIPName = found2->second.hipName.str();
         }
+        *streamPtr.get() << (count ? ",\n" : "") << tab_2 << "\"" << sHIPName << "\"";
+        count++;
       }
       *streamPtr.get() << endl_tab << ")" << endl_tab << "{" << endl_tab_2;
       switch (i) {
-      case 0:
-      default: *streamPtr.get() << s0 << sHIP_SYMBOL << "\\($2\\),/g" << endl; break;
-      case 1:  *streamPtr.get() << s1 << sHIP_SYMBOL << "\\($3\\)$4/g;" << endl; break;
-      case 2:  *streamPtr.get() << s0 << s_reinterpret_cast << "\\($2\\),/g" << endl; break;
-      case 3:  *streamPtr.get() << s1 << s_reinterpret_cast << "\\($3\\)$4/g;" << endl; break;
+        case 0:
+        default: *streamPtr.get() << s0 << getCastType(e_HIP_SYMBOL) << "\\($2\\),/g" << endl; break;
+        case 1:  *streamPtr.get() << s1 << getCastType(e_HIP_SYMBOL) << "\\($3\\)$4/g;" << endl; break;
+        case 2:  *streamPtr.get() << s0 << getCastType(e_reinterpret_cast) << "\\($2\\),/g" << endl; break;
+        case 3:  *streamPtr.get() << s1 << getCastType(e_reinterpret_cast) << "\\($3\\)$4/g;" << endl; break;
+        case 4:  *streamPtr.get() << s2 << getCastType(e_int32_t) << "\\($3\\)$4/g;" << endl; break;
+        case 5:  *streamPtr.get() << s2 << getCastType(e_int64_t) << "\\($3\\)$4/g;" << endl; break;
       }
       *streamPtr.get() << tab << "}" << endl;
     }
