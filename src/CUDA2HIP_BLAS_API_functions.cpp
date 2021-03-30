@@ -936,12 +936,12 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_FUNCTION_VER_MAP {
   {"hipblasGemmEx",                              {HIP_1082, HIP_0,    HIP_0   }},
   {"hipblasGemmBatchedEx",                       {HIP_3060, HIP_0,    HIP_0   }},
   {"hipblasGemmStridedBatchedEx",                {HIP_3060, HIP_0,    HIP_0   }},
-  {"hipblasDotEx",                               {HIP_4100, HIP_0,    HIP_0   }},
-  {"hipblasDotcEx",                              {HIP_4100, HIP_0,    HIP_0   }},
-  {"hipblasAxpyEx",                              {HIP_4100, HIP_0,    HIP_0   }},
-  {"hipblasNrm2Ex",                              {HIP_4100, HIP_0,    HIP_0   }},
-  {"hipblasRotEx",                               {HIP_4100, HIP_0,    HIP_0   }},
-  {"hipblasScalEx",                              {HIP_4100, HIP_0,    HIP_0   }},
+  {"hipblasDotEx",                               {HIP_4010, HIP_0,    HIP_0   }},
+  {"hipblasDotcEx",                              {HIP_4010, HIP_0,    HIP_0   }},
+  {"hipblasAxpyEx",                              {HIP_4010, HIP_0,    HIP_0   }},
+  {"hipblasNrm2Ex",                              {HIP_4010, HIP_0,    HIP_0   }},
+  {"hipblasRotEx",                               {HIP_4010, HIP_0,    HIP_0   }},
+  {"hipblasScalEx",                              {HIP_4010, HIP_0,    HIP_0   }},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_BLAS_API_SECTION_MAP {
