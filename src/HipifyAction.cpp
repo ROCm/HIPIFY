@@ -84,18 +84,18 @@ std::string getCastType(CastTypes c) {
 }
 
 std::map<std::string, ArgCastMap> FuncArgCasts {
-  {sCudaMemcpyToSymbol, {{0, e_HIP_SYMBOL}}},
-  {sCudaMemcpyToSymbolAsync, {{0, e_HIP_SYMBOL}}},
-  {sCudaGetSymbolSize, {{1, e_HIP_SYMBOL}}},
-  {sCudaGetSymbolAddress, {{1, e_HIP_SYMBOL}}},
-  {sCudaMemcpyFromSymbol, {{1, e_HIP_SYMBOL}}},
-  {sCudaMemcpyFromSymbolAsync, {{1, e_HIP_SYMBOL}}},
-  {sCudaFuncSetCacheConfig, {{0, e_reinterpret_cast}}},
-  {sCudaFuncGetAttributes, {{1, e_reinterpret_cast}}},
-  {sCuStreamWaitValue32, {{2, e_int32_t}}},
-  {sCuStreamWaitValue64, {{2, e_int64_t}}},
-  {sCuStreamWriteValue32, {{2, e_int32_t}}},
-  {sCuStreamWriteValue64, {{2, e_int64_t}}},
+  {sCudaMemcpyToSymbol, {{0, {e_HIP_SYMBOL, cw_None}}}},
+  {sCudaMemcpyToSymbolAsync, {{0, {e_HIP_SYMBOL, cw_None}}}},
+  {sCudaGetSymbolSize, {{1, {e_HIP_SYMBOL, cw_None}}}},
+  {sCudaGetSymbolAddress, {{1, {e_HIP_SYMBOL, cw_None}}}},
+  {sCudaMemcpyFromSymbol, {{1, {e_HIP_SYMBOL, cw_None}}}},
+  {sCudaMemcpyFromSymbolAsync, {{1, {e_HIP_SYMBOL, cw_None}}}},
+  {sCudaFuncSetCacheConfig, {{0, {e_reinterpret_cast, cw_None}}}},
+  {sCudaFuncGetAttributes, {{1, {e_reinterpret_cast, cw_None}}}},
+  {sCuStreamWaitValue32, {{2, {e_int32_t, cw_DataLoss}}}},
+  {sCuStreamWaitValue64, {{2, {e_int64_t, cw_DataLoss}}}},
+  {sCuStreamWriteValue32, {{2, {e_int32_t, cw_DataLoss}}}},
+  {sCuStreamWriteValue64, {{2, {e_int64_t, cw_DataLoss}}}},
 };
 
 void HipifyAction::RewriteString(StringRef s, clang::SourceLocation start) {
@@ -537,7 +537,7 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
     auto casts = it->second;
     for (auto c : casts) {
       unsigned int argNum = c.first;
-      std::string sCast = getCastType(c.second);
+      std::string sCast = getCastType(c.second.castType);
       clang::SmallString<40> XStr;
       llvm::raw_svector_ostream OS(XStr);
       clang::SourceRange sr = call->getArg(argNum)->getSourceRange();
@@ -551,6 +551,16 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
       ct::Replacement Rep(*SM, s, length, OS.str());
       clang::FullSourceLoc fullSL(s, *SM);
       insertReplacement(Rep, fullSL);
+      switch (c.second.castWarn) {
+        case cw_DataLoss: {
+          clang::DiagnosticsEngine& DE = getCompilerInstance().getDiagnostics();
+          const auto ID = DE.getCustomDiagID(clang::DiagnosticsEngine::Warning, "Possible data loss in %0 argument.");
+          DE.Report(fullSL, ID) << argNum+1;
+          break;
+        }
+        case cw_None:
+        default: break;
+      }
     }
     return true;
   }

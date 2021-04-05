@@ -29,7 +29,17 @@ enum CastTypes {
   e_int64_t,
 };
 
-typedef std::map<unsigned, CastTypes> ArgCastMap;
+enum CastWarning {
+  cw_None,
+  cw_DataLoss,
+};
+
+struct CastInfo {
+  CastTypes castType;
+  CastWarning castWarn;
+};
+
+typedef std::map<unsigned, CastInfo> ArgCastMap;
 
 extern std::string getCastType(CastTypes c);
 extern std::map<std::string, ArgCastMap> FuncArgCasts;
