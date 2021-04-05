@@ -6486,6 +6486,25 @@ sub warnUnsupportedFunctions {
     return $k;
 }
 
+sub warnDataLossFunctions {
+    my $line_num = shift;
+    my $k = 0;
+    foreach $func (
+        "cuStreamWaitValue32",
+        "cuStreamWaitValue64",
+        "cuStreamWriteValue32",
+        "cuStreamWriteValue64"
+    )
+    {
+        my $mt = m/($func)/g;
+        if ($mt) {
+            $k += $mt;
+            print STDERR "  warning: $fileName:$line_num: possible data loss in 3 argument of \"$func\": $_\n";
+        }
+    }
+    return $k;
+}
+
 # Count of transforms in all files
 my %tt;
 clearStats(\%tt, \@statNames);
@@ -6563,6 +6582,8 @@ while (@ARGV) {
                     $s = warnUnsupportedFunctions($line_num);
                     $warnings += $s;
                     $s = warnUnsupportedDeviceFunctions($line_num);
+                    $warnings += $s;
+                    $s = warnDataLossFunctions($line_num);
                     $warnings += $s;
                 }
                 $_ = $tmp;

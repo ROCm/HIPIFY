@@ -366,21 +366,21 @@ namespace perl {
       for (auto c : casts) {
         switch (c.first) {
           case 0:
-            switch (c.second) {
+            switch (c.second.castType) {
               case e_HIP_SYMBOL: DeviceSymbolFunctions0.insert(f.first); break;
               case e_reinterpret_cast: ReinterpretFunctions0.insert(f.first); break;
               default: break;
             }
             break;
           case 1:
-            switch (c.second) {
+            switch (c.second.castType) {
               case e_HIP_SYMBOL: DeviceSymbolFunctions1.insert(f.first); break;
               case e_reinterpret_cast: ReinterpretFunctions1.insert(f.first); break;
               default: break;
             }
             break;
           case 2:
-            switch (c.second) {
+            switch (c.second.castType) {
               case e_int32_t: CastFunctions2_32.insert(f.first); break;
               case e_int64_t: CastFunctions2_64.insert(f.first); break;
               default: break;
@@ -429,12 +429,13 @@ namespace perl {
   }
 
   void generateDeprecatedAndUnsupportedFunctions(unique_ptr<ostream> &streamPtr) {
-    stringstream sDeprecated, sRemoved, sUnsupported, sCommon, sCommon1;
+    stringstream sDeprecated, sRemoved, sUnsupported, sDataLoss, sCommon, sCommon1;
     sCommon << tab << my << "$line_num = shift;" << endl;
     sCommon << tab << my_k << endl;
     sDeprecated << endl << sub << "warnDeprecatedFunctions" << " {" << endl << sCommon.str() << tab << "while (my($func, $val) = each %deprecated_funcs)" << endl;
     sRemoved << endl << sub << "warnRemovedFunctions" << " {" << endl << sCommon.str() << tab << "while (my($func, $val) = each %removed_funcs)" << endl;
     sUnsupported << endl << sub << "warnUnsupportedFunctions" << " {" << endl << sCommon.str() << tab << foreach_func;
+    sDataLoss << endl << sub << "warnDataLossFunctions" << " {" << endl << sCommon.str() << tab << foreach_func;
     unsigned int countUnsupported = 0;
     for (auto ma = CUDA_RENAMES_MAP().rbegin(); ma != CUDA_RENAMES_MAP().rend(); ++ma) {
         if (Statistics::isUnsupported(ma->second)) {
@@ -442,8 +443,26 @@ namespace perl {
             countUnsupported++;
         }
     }
+    unsigned int argNum = 0;
+    unsigned int countDataLoss = 0;
+    for (auto f : FuncArgCasts) {
+      auto casts = f.second;
+      for (auto c : casts) {
+        switch (c.second.castWarn) {
+          case cw_DataLoss: {
+            sDataLoss << (countDataLoss ? ",\n" : "") << tab_2 << "\"" << f.first << "\"";
+            argNum = c.first;
+            countDataLoss++;
+            break;
+          }
+          case cw_None:
+          default: break;
+        }
+      }
+    }
     sCommon.str(std::string());
     sUnsupported << endl_tab << ")" << endl;
+    sDataLoss << endl_tab << ")" << endl;
     sCommon << tab << "{" << endl;
     sCommon << tab_2 << my << "$mt = m/($func)/g;" << endl;
     sCommon << tab_2 << "if ($mt) {" << endl;
@@ -456,14 +475,17 @@ namespace perl {
     sDeprecated << sCommon.str() << sCommon1.str();
     sRemoved << sCommon.str() << sCommon1.str();
     sUnsupported << sCommon.str();
+    sDataLoss << sCommon.str();
     sCommon.str(std::string());
     sCommon << tab_2 << "}\n" << tab << "}\n" << tab << return_k << "}" << endl;
     sDeprecated << tab_3 << print << "\"  "  << warning << "deprecated identifier \\\"$func\\\" since $cuda $val\\n\";" << endl << sCommon.str();
     sRemoved << tab_3 << print << "\"  "  << warning << "removed identifier \\\"$func\\\" since $cuda $val\\n\";" << endl << sCommon.str();
     sUnsupported << tab_3 << print << "\"  "  << warning << "unsupported identifier \\\"$func\\\"\\n\";" << endl << sCommon.str();
+    sDataLoss << tab_3 << print << "\"  "  << warning << "possible data loss in " << argNum+1 << " argument of \\\"$func\\\": $_\\n\";" << endl << sCommon.str();
     *streamPtr.get() << sDeprecated.str();
     *streamPtr.get() << sRemoved.str();
     *streamPtr.get() << sUnsupported.str();
+    *streamPtr.get() << sDataLoss.str();
   }
 
   void generateDeviceFunctions(unique_ptr<ostream> &streamPtr) {
@@ -615,6 +637,8 @@ namespace perl {
     *streamPtr.get() << tab_5 << "$s = warnUnsupportedFunctions($line_num);" << endl;
     *streamPtr.get() << tab_5 << "$warnings += $s;" << endl;
     *streamPtr.get() << tab_5 << "$s = warnUnsupportedDeviceFunctions($line_num);" << endl;
+    *streamPtr.get() << tab_5 << "$warnings += $s;" << endl;
+    *streamPtr.get() << tab_5 << "$s = warnDataLossFunctions($line_num);" << endl;
     *streamPtr.get() << tab_5 << "$warnings += $s;" << endl_tab_4 << "}" << endl;
     *streamPtr.get() << tab_4 << "$_ = $tmp;" << endl_tab_3 << "}" << endl;
     *streamPtr.get() << tab_3 << "simpleSubstitutions();" << endl;
