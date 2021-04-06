@@ -91,6 +91,17 @@ namespace perl {
   const string no_warns = "no warnings qw/uninitialized/;";
   const string hipify_perl = "hipify-perl";
   const string warning = "warning: $fileName:$line_num: ";
+  const string warningsPlus = "$warnings += $s;";
+  const string sWarnDeprecatedFunctions = "warnDeprecatedFunctions";
+  const string sWarnRemovedFunctions = "warnRemovedFunctions";
+  const string sWarnUnsupportedFunctions = "warnUnsupportedFunctions";
+  const string sWarnDataLossFunctions = "warnDataLossFunctions";
+  const string sWarnUnsupportedDeviceFunctions = "warnUnsupportedDeviceFunctions";
+  const string sSimpleSubstitutions = "simpleSubstitutions";
+  const string sTransformExternShared = "transformExternShared";
+  const string sTansformKernelLaunch = "transformKernelLaunch";
+  const string sTransformCubNamespace = "transformCubNamespace";
+  const string sCountSupportedDeviceFunctions = "countSupportedDeviceFunctions";
 
   const string sCudaDevice = "cudaDevice";
   const string sCudaDeviceId = "cudaDeviceId";
@@ -269,7 +280,7 @@ namespace perl {
   }
 
   void generateSimpleSubstitutions(unique_ptr<ostream> &streamPtr) {
-    *streamPtr.get() << endl << sub << "simpleSubstitutions" << " {" << endl;
+    *streamPtr.get() << endl << sub << sSimpleSubstitutions << " {" << endl;
     for (int i = 0; i < NUM_CONV_TYPES; ++i) {
       if (i == CONV_INCLUDE_CUDA_MAIN_H || i == CONV_INCLUDE) {
         for (auto &ma : CUDA_INCLUDE_MAP) {
@@ -296,7 +307,7 @@ namespace perl {
 
   void generateExternShared(unique_ptr<ostream> &streamPtr) {
     *streamPtr.get() << endl << "# CUDA extern __shared__ syntax replace with HIP_DYNAMIC_SHARED() macro" << endl;
-    *streamPtr.get() << sub << "transformExternShared" << " {" << endl;
+    *streamPtr.get() << sub << sTransformExternShared << " {" << endl;
     *streamPtr.get() << tab << no_warns << endl;
     *streamPtr.get() << tab << my_k << endl;
     *streamPtr.get() << tab << "$k += s/extern\\s+([\\w\\(\\)]+)?\\s*__shared__\\s+([\\w:<>\\s]+)\\s+(\\w+)\\s*\\[\\s*\\]\\s*;/HIP_DYNAMIC_SHARED($1 $2, $3)/g;" << endl;
@@ -304,7 +315,7 @@ namespace perl {
   }
 
   void generateKernelLaunch(unique_ptr<ostream> &streamPtr) {
-    *streamPtr.get() << endl << "# CUDA Kernel Launch Syntax" << endl << sub << "transformKernelLaunch" << " {" << endl;
+    *streamPtr.get() << endl << "# CUDA Kernel Launch Syntax" << endl << sub << sTansformKernelLaunch << " {" << endl;
     *streamPtr.get() << tab << no_warns << endl;
     *streamPtr.get() << tab << my_k << endl_2;
 
@@ -344,7 +355,7 @@ namespace perl {
   }
 
   void generateCubNamespace(unique_ptr<ostream> &streamPtr) {
-    *streamPtr.get() << endl << sub << "transformCubNamespace" << " {" << endl_tab << my_k << endl;
+    *streamPtr.get() << endl << sub << sTransformCubNamespace << " {" << endl_tab << my_k << endl;
     *streamPtr.get() << tab << "$k += s/using\\s*namespace\\s*cub/using namespace hipcub/g;" << endl;
     *streamPtr.get() << tab << "$k += s/\\bcub::\\b/hipcub::/g;" << endl << tab << return_k << "}" << endl;
   }
@@ -432,10 +443,11 @@ namespace perl {
     stringstream sDeprecated, sRemoved, sUnsupported, sDataLoss, sCommon, sCommon1;
     sCommon << tab << my << "$line_num = shift;" << endl;
     sCommon << tab << my_k << endl;
-    sDeprecated << endl << sub << "warnDeprecatedFunctions" << " {" << endl << sCommon.str() << tab << "while (my($func, $val) = each %deprecated_funcs)" << endl;
-    sRemoved << endl << sub << "warnRemovedFunctions" << " {" << endl << sCommon.str() << tab << "while (my($func, $val) = each %removed_funcs)" << endl;
-    sUnsupported << endl << sub << "warnUnsupportedFunctions" << " {" << endl << sCommon.str() << tab << foreach_func;
-    sDataLoss << endl << sub << "warnDataLossFunctions" << " {" << endl << sCommon.str() << tab << foreach_func;
+    string sWhile = "while (my($func, $val) = each ";
+    sDeprecated << endl << sub << sWarnDeprecatedFunctions << " {" << endl << sCommon.str() << tab << sWhile << "%deprecated_funcs)" << endl;
+    sRemoved << endl << sub << sWarnRemovedFunctions << " {" << endl << sCommon.str() << tab << sWhile << "%removed_funcs)" << endl;
+    sUnsupported << endl << sub << sWarnUnsupportedFunctions << " {" << endl << sCommon.str() << tab << foreach_func;
+    sDataLoss << endl << sub << sWarnDataLossFunctions << " {" << endl << sCommon.str() << tab << foreach_func;
     unsigned int countUnsupported = 0;
     for (auto ma = CUDA_RENAMES_MAP().rbegin(); ma != CUDA_RENAMES_MAP().rend(); ++ma) {
         if (Statistics::isUnsupported(ma->second)) {
@@ -503,8 +515,8 @@ namespace perl {
     stringstream subWarnUnsupported;
     stringstream subCommon;
     string sCommon = tab + my_k + "\n" + tab + foreach_func;
-    subCountSupported << endl << sub << "countSupportedDeviceFunctions" << " {" << endl << (countSupported ? sCommon : tab + return_0);
-    subWarnUnsupported << endl << sub << "warnUnsupportedDeviceFunctions" << " {" << endl << (countUnsupported ? tab + my + "$line_num = shift;\n" + sCommon : tab + return_0);
+    subCountSupported << endl << sub << sCountSupportedDeviceFunctions << " {" << endl << (countSupported ? sCommon : tab + return_0);
+    subWarnUnsupported << endl << sub << sWarnUnsupportedDeviceFunctions << " {" << endl << (countUnsupported ? tab + my + "$line_num = shift;\n" + sCommon : tab + return_0);
     if (countSupported) subCountSupported << sSupported.str() << endl_tab << ")" << endl;
     if (countUnsupported) subWarnUnsupported << sUnsupported.str() << endl_tab << ")" << endl;
     if (countSupported || countUnsupported) {
@@ -576,7 +588,7 @@ namespace perl {
     *streamPtr.get() << tab << "print STDERR \"$USAGE\\n\";" << endl;
     *streamPtr.get() << "}" << endl;
     *streamPtr.get() << "if ($version) {" << endl;
-    *streamPtr.get() << tab << "print STDERR \"HIP version 4.0.0\\n\";" << endl;
+    *streamPtr.get() << tab << "print STDERR \"HIP version 4.2.0\\n\";" << endl;
     *streamPtr.get() << "}" << endl;
     *streamPtr.get() << while_ << "(@ARGV) {" << endl;
     *streamPtr.get() << tab << "$fileName=shift (@ARGV);" << endl;
@@ -630,21 +642,21 @@ namespace perl {
     *streamPtr.get() << tab_4 << my << "$line_num = 0;" << endl;
     *streamPtr.get() << tab_4 << foreach << "(@lines) {" << endl;
     *streamPtr.get() << tab_5 << "$line_num++;" << endl;
-    *streamPtr.get() << tab_5 << "$s = warnRemovedFunctions($line_num);" << endl;
-    *streamPtr.get() << tab_5 << "$warnings += $s;" << endl;
-    *streamPtr.get() << tab_5 << "$s = warnDeprecatedFunctions($line_num);" << endl;
-    *streamPtr.get() << tab_5 << "$warnings += $s;" << endl;
-    *streamPtr.get() << tab_5 << "$s = warnUnsupportedFunctions($line_num);" << endl;
-    *streamPtr.get() << tab_5 << "$warnings += $s;" << endl;
-    *streamPtr.get() << tab_5 << "$s = warnUnsupportedDeviceFunctions($line_num);" << endl;
-    *streamPtr.get() << tab_5 << "$warnings += $s;" << endl;
-    *streamPtr.get() << tab_5 << "$s = warnDataLossFunctions($line_num);" << endl;
-    *streamPtr.get() << tab_5 << "$warnings += $s;" << endl_tab_4 << "}" << endl;
+    *streamPtr.get() << tab_5 << "$s = " << sWarnRemovedFunctions << "($line_num);" << endl;
+    *streamPtr.get() << tab_5 << warningsPlus << endl;
+    *streamPtr.get() << tab_5 << "$s = " << sWarnDeprecatedFunctions << "($line_num);" << endl;
+    *streamPtr.get() << tab_5 << warningsPlus << endl;
+    *streamPtr.get() << tab_5 << "$s = " << sWarnUnsupportedFunctions << "($line_num);" << endl;
+    *streamPtr.get() << tab_5 << warningsPlus << endl;
+    *streamPtr.get() << tab_5 << "$s = " << sWarnUnsupportedDeviceFunctions << "($line_num);" << endl;
+    *streamPtr.get() << tab_5 << warningsPlus << endl;
+    *streamPtr.get() << tab_5 << "$s = " << sWarnDataLossFunctions << "($line_num);" << endl;
+    *streamPtr.get() << tab_5 << warningsPlus << endl_tab_4 << "}" << endl;
     *streamPtr.get() << tab_4 << "$_ = $tmp;" << endl_tab_3 << "}" << endl;
-    *streamPtr.get() << tab_3 << "simpleSubstitutions();" << endl;
-    *streamPtr.get() << tab_3 << "transformExternShared();" << endl;
-    *streamPtr.get() << tab_3 << "transformKernelLaunch();" << endl;
-    *streamPtr.get() << tab_3 << "transformCubNamespace();" << endl;
+    *streamPtr.get() << tab_3 << sSimpleSubstitutions << "();" << endl;
+    *streamPtr.get() << tab_3 << sTransformExternShared << "();" << endl;
+    *streamPtr.get() << tab_3 << sTansformKernelLaunch << "();" << endl;
+    *streamPtr.get() << tab_3 << sTransformCubNamespace << "();" << endl;
     *streamPtr.get() << tab_3 << "if ($print_stats) {" << endl;
     *streamPtr.get() << tab_4 << while_ << "(/(\\b(hip|HIP)([A-Z]|_)\\w+\\b)/g) {" << endl;
     *streamPtr.get() << tab_5 << "$convertedTags{$1}++;" << endl_tab_4 << "}" << endl_tab_3 << "}" << endl;
@@ -671,7 +683,7 @@ namespace perl {
     *streamPtr.get() << tab_7 << print << "\"  warning: $fileName:#$line_num : $_\\n\";" << endl_tab_6 << "}" << endl_tab_5 << "}" << endl;
     *streamPtr.get() << tab_5 << "$_ = $tmp;" << endl_tab_4 << "}" << endl_tab_3 << "}" << endl;
     *streamPtr.get() << tab_3 << "if ($hasDeviceCode > 0) {" << endl;
-    *streamPtr.get() << tab_4 << "$ft{'device_function'} += countSupportedDeviceFunctions();" << endl_tab_3 << "}" << endl;
+    *streamPtr.get() << tab_4 << "$ft{'device_function'} += " << sCountSupportedDeviceFunctions << "();" << endl_tab_3 << "}" << endl;
     *streamPtr.get() << tab_3 << "transformHostFunctions();" << endl;
     *streamPtr.get() << tab_3 << "# TODO: would like to move this code outside loop but it uses $_ which contains the whole file" << endl;
     *streamPtr.get() << tab_3 << unless_ << "($no_output) {" << endl;
