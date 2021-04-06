@@ -43,7 +43,7 @@ After applying all the matchers, the output HIP source is produced.
 
 `hipify-clang` requires:
 
-1. [**LLVM+CLANG**](http://releases.llvm.org) of at least version [3.8.0](http://releases.llvm.org/download.html#3.8.0); the latest stable and recommended release: [**11.1.0**](https://github.com/llvm/llvm-project/releases/tag/llvmorg-11.1.0).
+1. [**LLVM+CLANG**](http://releases.llvm.org) of at least version [3.8.0](http://releases.llvm.org/download.html#3.8.0); the latest stable and recommended release: [**11.1.0**](https://releases.llvm.org/download.html#11.1.0).
 
 2. [**CUDA**](https://developer.nvidia.com/cuda-downloads) of at least version [7.0](https://developer.nvidia.com/cuda-toolkit-70), the latest supported version is [**11.2.2**](https://developer.nvidia.com/cuda-downloads).
 
@@ -140,7 +140,7 @@ After applying all the matchers, the output HIP source is produced.
     </tr>
     <tr align="center">
       <td bgcolor="eefaeb"><a href="https://releases.llvm.org/download.html#11.0.1">11.0.1</a>,
-                           <a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-11.1.0"><b>11.1.0</b></a>
+                           <a href="https://releases.llvm.org/download.html#11.1.0"><b>11.1.0</b></a>
       <td bgcolor="eefaeb"><a href="https://developer.nvidia.com/cuda-downloads"><b>11.2.2</b></a></td>
       <td colspan=2 bgcolor="eefaeb"><font color="green"><b>LATEST STABLE CONFIG</b></font></td>
     </tr>
@@ -496,7 +496,7 @@ Testing Time: 2.91s
 | 9.0.0 - 9.0.1   | 10.1         | 7.6.5.32            | 2017.15.9.20, 2019.16.4.5 | 3.16.4, 3.18.0 | 3.8.0, 3.8.5 |
 | 10.0.0 - 11.0.0 | 8.0 - 11.1   | 7.6.5.32 - 8.0.5.39 | 2017.15.9.30, 2019.16.8.3 | 3.19.2         | 3.9.1        |
 | 11.0.1 - 11.1.0 | 8.0 - 11.2.2 | 7.6.5.32 - 8.0.5.39 | 2017.15.9.31, 2019.16.8.4 | 3.19.3         | 3.9.2        |
-| 13.0.0git       | 8.0 - 11.2.2 | 7.6.5.32 - 8.1.1.33 | 2017.15.9.34, 2019.16.9.1 | 3.19.4         | 3.9.2        |
+| 13.0.0git       | 8.0 - 11.2.2 | 7.6.5.32 - 8.1.1.33 | 2017.15.9.34, 2019.16.9.3 | 3.20.0         | 3.9.4        |
 
 *Building with testing support by `Visual Studio 16 2019` on `Windows 10`:*
 
@@ -522,7 +522,7 @@ cmake
 --    - CMake module path: d:/LLVM/11.1.0/dist/lib/cmake/llvm
 --    - Include path     : d:/LLVM/11.1.0/dist/include
 --    - Binary path      : d:/LLVM/11.1.0/dist/bin
--- Found PythonInterp: c:/Program Files/Python39/python.exe (found suitable version "3.9.2", minimum required is "3.6")
+-- Found PythonInterp: c:/Program Files/Python39/python.exe (found suitable version "3.9.4", minimum required is "3.6")
 -- Found lit: c:/Program Files/Python39/Scripts/lit.exe
 -- Found FileCheck: d:/LLVM/11.1.0/dist/bin/FileCheck.exe
 -- Found CUDA: c:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2 (found version "11.2")
