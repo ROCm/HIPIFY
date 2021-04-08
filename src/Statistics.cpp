@@ -449,6 +449,7 @@ std::string Statistics::getCudaVersion(const cudaVersions& ver) {
     case CUDNN_804: return "8.0.4";
     case CUDNN_805: return "8.0.5";
     case CUDNN_810: return "8.1.0";
+    case CUDNN_811: return "8.1.1";
   }
   return "";
 }
@@ -498,6 +499,7 @@ std::string Statistics::getHipVersion(const hipVersions& ver) {
     case HIP_3100: return "3.10.0";
     case HIP_4000: return "4.0.0";
     case HIP_4010: return "4.1.0";
+    case HIP_4011: return "4.1.1";
     case HIP_4020: return "4.2.0";
   }
   return "";
