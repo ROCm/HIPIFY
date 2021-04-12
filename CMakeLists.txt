@@ -87,13 +87,13 @@ endif()
 
 # Address Sanitize Flag
 if (ADDRESS_SANITIZER)
-    set(addr_var address)
+    set(addr_var -fsanitize=address)
 else()
     set(addr_var )
 endif()
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${EXTRA_CFLAGS} -fsanitize=${addr_var}")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${EXTRA_CFLAGS} ${StdCpp} -DHIPIFY_CLANG_RES=\\\"${LLVM_LIBRARY_DIRS}/clang/${LLVM_VERSION_MAJOR}.${LLVM_VERSION_MINOR}.${LLVM_VERSION_PATCH}\\\" -fsanitize=${addr_var}")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${EXTRA_CFLAGS} ${addr_var}")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${EXTRA_CFLAGS} ${StdCpp} -DHIPIFY_CLANG_RES=\\\"${LLVM_LIBRARY_DIRS}/clang/${LLVM_VERSION_MAJOR}.${LLVM_VERSION_MINOR}.${LLVM_VERSION_PATCH}\\\" ${addr_var}")
 
 set(INSTALL_PATH_DOC_STRING "hipify-clang Installation Path")
 set(HIPIFY_INSTALL_PATH ${CMAKE_INSTALL_PREFIX})
