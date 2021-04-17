@@ -417,6 +417,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuStreamGetAttribute",                                 {"hipStreamGetAttribute",                                   "", CONV_STREAM, API_DRIVER, 15, HIP_UNSUPPORTED}},
   // cudaStreamGetCaptureInfo
   {"cuStreamGetCaptureInfo",                               {"hipStreamGetCaptureInfo",                                 "", CONV_STREAM, API_DRIVER, 15, HIP_UNSUPPORTED}},
+  //
+  {"cuStreamGetCaptureInfo_v2",                            {"hipStreamGetCaptureInfo_v2",                              "", CONV_STREAM, API_DRIVER, 15, HIP_UNSUPPORTED}},
+  //
+  {"cuStreamUpdateCaptureDependencies",                    {"hipStreamUpdateCaptureDependencies",                      "", CONV_STREAM, API_DRIVER, 15, HIP_UNSUPPORTED}},
   // no analogue
   {"cuStreamGetCtx",                                       {"hipStreamGetContext",                                     "", CONV_STREAM, API_DRIVER, 15, HIP_UNSUPPORTED}},
   // cudaStreamGetFlags
@@ -507,7 +511,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuLaunchCooperativeKernel",                            {"hipLaunchCooperativeKernel_",                             "", CONV_EXECUTION, API_DRIVER, 19, HIP_UNSUPPORTED}},
   // no analogue
   // NOTE: Not equal to cudaLaunchCooperativeKernelMultiDevice due to different signatures
-  {"cuLaunchCooperativeKernelMultiDevice",                 {"hipLaunchCooperativeKernelMultiDevice_",                  "", CONV_EXECUTION, API_DRIVER, 19, HIP_UNSUPPORTED}},
+  {"cuLaunchCooperativeKernelMultiDevice",                 {"hipLaunchCooperativeKernelMultiDevice_",                  "", CONV_EXECUTION, API_DRIVER, 19, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   // cudaLaunchHostFunc
   {"cuLaunchHostFunc",                                     {"hipLaunchHostFunc",                                       "", CONV_EXECUTION, API_DRIVER, 19, HIP_UNSUPPORTED}},
   // no analogue
@@ -558,6 +562,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuGraphClone",                                         {"hipGraphClone",                                           "", CONV_GRAPH, API_DRIVER, 21, HIP_UNSUPPORTED}},
   // cudaGraphCreate
   {"cuGraphCreate",                                        {"hipGraphCreate",                                          "", CONV_GRAPH, API_DRIVER, 21, HIP_UNSUPPORTED}},
+  //
+  {"cuGraphDebugDotPrint",                                 {"hipGraphDebugDotPrint",                                   "", CONV_GRAPH, API_DRIVER, 21, HIP_UNSUPPORTED}},
   // cudaGraphDestroy
   {"cuGraphDestroy",                                       {"hipGraphDestroy",                                         "", CONV_GRAPH, API_DRIVER, 21, HIP_UNSUPPORTED}},
   // cudaGraphDestroyNode
@@ -653,6 +659,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuGraphExecExternalSemaphoresSignalNodeSetParams",     {"hipGraphExecExternalSemaphoresSignalNodeSetParams",       "", CONV_GRAPH, API_DRIVER, 21, HIP_UNSUPPORTED}},
   // cudaGraphExecExternalSemaphoresWaitNodeSetParams
   {"cuGraphExecExternalSemaphoresWaitNodeSetParams",       {"hipGraphExecExternalSemaphoresWaitNodeSetParams",         "", CONV_GRAPH, API_DRIVER, 21, HIP_UNSUPPORTED}},
+  //
+  {"cuUserObjectCreate",                                   {"hipUserObjectCreate",                                     "", CONV_GRAPH, API_DRIVER, 21, HIP_UNSUPPORTED}},
+  //
+  {"cuUserObjectRetain",                                   {"hipUserObjectRetain",                                     "", CONV_GRAPH, API_DRIVER, 21, HIP_UNSUPPORTED}},
+  //
+  {"cuGraphRetainUserObject",                              {"hipGraphRetainUserObject",                                "", CONV_GRAPH, API_DRIVER, 21, HIP_UNSUPPORTED}},
+  //
+  {"cuGraphReleaseUserObject",                             {"hipGraphReleaseUserObject",                               "", CONV_GRAPH, API_DRIVER, 21, HIP_UNSUPPORTED}},
 
   // 22. Occupancy
   // cudaOccupancyAvailableDynamicSMemPerBlock
@@ -763,171 +777,177 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   // cudaGraphicsUnregisterResource
   {"cuGraphicsUnregisterResource",                         {"hipGraphicsUnregisterResource",                           "", CONV_GRAPHICS, API_DRIVER, 28, HIP_UNSUPPORTED}},
 
-  // 29. Profiler Control [DEPRECATED]
+  // 29. Driver Entry Point Access
+  //
+  {"cuGetProcAddress",                                     {"hipGetProcAddress",                                       "", CONV_PROFILER, API_DRIVER, 29, HIP_UNSUPPORTED}},
+  //
+  {"cuFlushGPUDirectRDMAWrites",                           {"hipFlushGPUDirectRDMAWrites",                             "", CONV_PROFILER, API_DRIVER, 29, HIP_UNSUPPORTED}},
+
+  // 30. Profiler Control [DEPRECATED]
   // cudaProfilerInitialize
-  {"cuProfilerInitialize",                                 {"hipProfilerInitialize",                                   "", CONV_PROFILER, API_DRIVER, 29, HIP_UNSUPPORTED}},
+  {"cuProfilerInitialize",                                 {"hipProfilerInitialize",                                   "", CONV_PROFILER, API_DRIVER, 30, HIP_UNSUPPORTED}},
 
-  // 30. Profiler Control
+  // 31. Profiler Control
   // cudaProfilerStart
-  {"cuProfilerStart",                                      {"hipProfilerStart",                                        "", CONV_PROFILER, API_DRIVER, 30}},
+  {"cuProfilerStart",                                      {"hipProfilerStart",                                        "", CONV_PROFILER, API_DRIVER, 31}},
   // cudaProfilerStop
-  {"cuProfilerStop",                                       {"hipProfilerStop",                                         "", CONV_PROFILER, API_DRIVER, 30}},
+  {"cuProfilerStop",                                       {"hipProfilerStop",                                         "", CONV_PROFILER, API_DRIVER, 31}},
 
-  // 31. OpenGL Interoperability
+  // 32. OpenGL Interoperability
   // cudaGLGetDevices
-  {"cuGLGetDevices",                                       {"hipGLGetDevices",                                         "", CONV_OPENGL, API_DRIVER, 31, HIP_UNSUPPORTED}},
+  {"cuGLGetDevices",                                       {"hipGLGetDevices",                                         "", CONV_OPENGL, API_DRIVER, 32, HIP_UNSUPPORTED}},
   // cudaGraphicsGLRegisterBuffer
-  {"cuGraphicsGLRegisterBuffer",                           {"hipGraphicsGLRegisterBuffer",                             "", CONV_OPENGL, API_DRIVER, 31, HIP_UNSUPPORTED}},
+  {"cuGraphicsGLRegisterBuffer",                           {"hipGraphicsGLRegisterBuffer",                             "", CONV_OPENGL, API_DRIVER, 32, HIP_UNSUPPORTED}},
   // cudaGraphicsGLRegisterImage
-  {"cuGraphicsGLRegisterImage",                            {"hipGraphicsGLRegisterImage",                              "", CONV_OPENGL, API_DRIVER, 31, HIP_UNSUPPORTED}},
+  {"cuGraphicsGLRegisterImage",                            {"hipGraphicsGLRegisterImage",                              "", CONV_OPENGL, API_DRIVER, 32, HIP_UNSUPPORTED}},
   // cudaWGLGetDevice
-  {"cuWGLGetDevice",                                       {"hipWGLGetDevice",                                         "", CONV_OPENGL, API_DRIVER, 31, HIP_UNSUPPORTED}},
+  {"cuWGLGetDevice",                                       {"hipWGLGetDevice",                                         "", CONV_OPENGL, API_DRIVER, 32, HIP_UNSUPPORTED}},
 
-  // 31. OpenGL Interoperability [DEPRECATED]
+  // 32. OpenGL Interoperability [DEPRECATED]
   // no analogue
-  {"cuGLCtxCreate",                                        {"hipGLCtxCreate",                                          "", CONV_OPENGL, API_DRIVER, 31, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cuGLCtxCreate",                                        {"hipGLCtxCreate",                                          "", CONV_OPENGL, API_DRIVER, 32, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   // no analogue
-  {"cuGLInit",                                             {"hipGLInit",                                               "", CONV_OPENGL, API_DRIVER, 31, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cuGLInit",                                             {"hipGLInit",                                               "", CONV_OPENGL, API_DRIVER, 32, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   // no analogue
   // NOTE: Not equal to cudaGLMapBufferObject due to different signatures
-  {"cuGLMapBufferObject",                                  {"hipGLMapBufferObject_",                                   "", CONV_OPENGL, API_DRIVER, 31, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cuGLMapBufferObject",                                  {"hipGLMapBufferObject_",                                   "", CONV_OPENGL, API_DRIVER, 32, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   // no analogue
   // NOTE: Not equal to cudaGLMapBufferObjectAsync due to different signatures
-  {"cuGLMapBufferObjectAsync",                             {"hipGLMapBufferObjectAsync_",                              "", CONV_OPENGL, API_DRIVER, 31, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cuGLMapBufferObjectAsync",                             {"hipGLMapBufferObjectAsync_",                              "", CONV_OPENGL, API_DRIVER, 32, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   // cudaGLRegisterBufferObject
-  {"cuGLRegisterBufferObject",                             {"hipGLRegisterBufferObject",                               "", CONV_OPENGL, API_DRIVER, 31, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cuGLRegisterBufferObject",                             {"hipGLRegisterBufferObject",                               "", CONV_OPENGL, API_DRIVER, 32, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   // cudaGLSetBufferObjectMapFlags
-  {"cuGLSetBufferObjectMapFlags",                          {"hipGLSetBufferObjectMapFlags",                            "", CONV_OPENGL, API_DRIVER, 31, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cuGLSetBufferObjectMapFlags",                          {"hipGLSetBufferObjectMapFlags",                            "", CONV_OPENGL, API_DRIVER, 32, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   // cudaGLUnmapBufferObject
-  {"cuGLUnmapBufferObject",                                {"hipGLUnmapBufferObject",                                  "", CONV_OPENGL, API_DRIVER, 31, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cuGLUnmapBufferObject",                                {"hipGLUnmapBufferObject",                                  "", CONV_OPENGL, API_DRIVER, 32, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   // cudaGLUnmapBufferObjectAsync
-  {"cuGLUnmapBufferObjectAsync",                           {"hipGLUnmapBufferObjectAsync",                             "", CONV_OPENGL, API_DRIVER, 31, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cuGLUnmapBufferObjectAsync",                           {"hipGLUnmapBufferObjectAsync",                             "", CONV_OPENGL, API_DRIVER, 32, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   // cudaGLUnregisterBufferObject
-  {"cuGLUnregisterBufferObject",                           {"hipGLUnregisterBufferObject",                             "", CONV_OPENGL, API_DRIVER, 31, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cuGLUnregisterBufferObject",                           {"hipGLUnregisterBufferObject",                             "", CONV_OPENGL, API_DRIVER, 32, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
 
-  // 32. VDPAU Interoperability
+  // 33. VDPAU Interoperability
   // cudaGraphicsVDPAURegisterOutputSurface
-  {"cuGraphicsVDPAURegisterOutputSurface",                 {"hipGraphicsVDPAURegisterOutputSurface",                   "", CONV_VDPAU, API_DRIVER, 32, HIP_UNSUPPORTED}},
+  {"cuGraphicsVDPAURegisterOutputSurface",                 {"hipGraphicsVDPAURegisterOutputSurface",                   "", CONV_VDPAU, API_DRIVER, 33, HIP_UNSUPPORTED}},
   // cudaGraphicsVDPAURegisterVideoSurface
-  {"cuGraphicsVDPAURegisterVideoSurface",                  {"hipGraphicsVDPAURegisterVideoSurface",                    "", CONV_VDPAU, API_DRIVER, 32, HIP_UNSUPPORTED}},
+  {"cuGraphicsVDPAURegisterVideoSurface",                  {"hipGraphicsVDPAURegisterVideoSurface",                    "", CONV_VDPAU, API_DRIVER, 33, HIP_UNSUPPORTED}},
   // cudaVDPAUGetDevice
-  {"cuVDPAUGetDevice",                                     {"hipVDPAUGetDevice",                                       "", CONV_VDPAU, API_DRIVER, 32, HIP_UNSUPPORTED}},
+  {"cuVDPAUGetDevice",                                     {"hipVDPAUGetDevice",                                       "", CONV_VDPAU, API_DRIVER, 33, HIP_UNSUPPORTED}},
   // no analogue
-  {"cuVDPAUCtxCreate",                                     {"hipVDPAUCtxCreate",                                       "", CONV_VDPAU, API_DRIVER, 32, HIP_UNSUPPORTED}},
+  {"cuVDPAUCtxCreate",                                     {"hipVDPAUCtxCreate",                                       "", CONV_VDPAU, API_DRIVER, 33, HIP_UNSUPPORTED}},
 
-  // 33. EGL Interoperability
+  // 34. EGL Interoperability
   // cudaEGLStreamConsumerAcquireFrame
-  {"cuEGLStreamConsumerAcquireFrame",                      {"hipEGLStreamConsumerAcquireFrame",                        "", CONV_EGL, API_DRIVER, 33, HIP_UNSUPPORTED}},
+  {"cuEGLStreamConsumerAcquireFrame",                      {"hipEGLStreamConsumerAcquireFrame",                        "", CONV_EGL, API_DRIVER, 34, HIP_UNSUPPORTED}},
   // cudaEGLStreamConsumerConnect
-  {"cuEGLStreamConsumerConnect",                           {"hipEGLStreamConsumerConnect",                             "", CONV_EGL, API_DRIVER, 33, HIP_UNSUPPORTED}},
+  {"cuEGLStreamConsumerConnect",                           {"hipEGLStreamConsumerConnect",                             "", CONV_EGL, API_DRIVER, 34, HIP_UNSUPPORTED}},
   // cudaEGLStreamConsumerConnectWithFlags
-  {"cuEGLStreamConsumerConnectWithFlags",                  {"hipEGLStreamConsumerConnectWithFlags",                    "", CONV_EGL, API_DRIVER, 33, HIP_UNSUPPORTED}},
+  {"cuEGLStreamConsumerConnectWithFlags",                  {"hipEGLStreamConsumerConnectWithFlags",                    "", CONV_EGL, API_DRIVER, 34, HIP_UNSUPPORTED}},
   // cudaEGLStreamConsumerDisconnect
-  {"cuEGLStreamConsumerDisconnect",                        {"hipEGLStreamConsumerDisconnect",                          "", CONV_EGL, API_DRIVER, 33, HIP_UNSUPPORTED}},
+  {"cuEGLStreamConsumerDisconnect",                        {"hipEGLStreamConsumerDisconnect",                          "", CONV_EGL, API_DRIVER, 34, HIP_UNSUPPORTED}},
   // cudaEGLStreamConsumerReleaseFrame
-  {"cuEGLStreamConsumerReleaseFrame",                      {"hipEGLStreamConsumerReleaseFrame",                        "", CONV_EGL, API_DRIVER, 33, HIP_UNSUPPORTED}},
+  {"cuEGLStreamConsumerReleaseFrame",                      {"hipEGLStreamConsumerReleaseFrame",                        "", CONV_EGL, API_DRIVER, 34, HIP_UNSUPPORTED}},
   // cudaEGLStreamProducerConnect
-  {"cuEGLStreamProducerConnect",                           {"hipEGLStreamProducerConnect",                             "", CONV_EGL, API_DRIVER, 33, HIP_UNSUPPORTED}},
+  {"cuEGLStreamProducerConnect",                           {"hipEGLStreamProducerConnect",                             "", CONV_EGL, API_DRIVER, 34, HIP_UNSUPPORTED}},
   // cudaEGLStreamProducerDisconnect
-  {"cuEGLStreamProducerDisconnect",                        {"hipEGLStreamProducerDisconnect",                          "", CONV_EGL, API_DRIVER, 33, HIP_UNSUPPORTED}},
+  {"cuEGLStreamProducerDisconnect",                        {"hipEGLStreamProducerDisconnect",                          "", CONV_EGL, API_DRIVER, 34, HIP_UNSUPPORTED}},
   // cudaEGLStreamProducerPresentFrame
-  {"cuEGLStreamProducerPresentFrame",                      {"hipEGLStreamProducerPresentFrame",                        "", CONV_EGL, API_DRIVER, 33, HIP_UNSUPPORTED}},
+  {"cuEGLStreamProducerPresentFrame",                      {"hipEGLStreamProducerPresentFrame",                        "", CONV_EGL, API_DRIVER, 34, HIP_UNSUPPORTED}},
   // cudaEGLStreamProducerReturnFrame
-  {"cuEGLStreamProducerReturnFrame",                       {"hipEGLStreamProducerReturnFrame",                         "", CONV_EGL, API_DRIVER, 33, HIP_UNSUPPORTED}},
+  {"cuEGLStreamProducerReturnFrame",                       {"hipEGLStreamProducerReturnFrame",                         "", CONV_EGL, API_DRIVER, 34, HIP_UNSUPPORTED}},
   // cudaGraphicsEGLRegisterImage
-  {"cuGraphicsEGLRegisterImage",                           {"hipGraphicsEGLRegisterImage",                             "", CONV_EGL, API_DRIVER, 33, HIP_UNSUPPORTED}},
+  {"cuGraphicsEGLRegisterImage",                           {"hipGraphicsEGLRegisterImage",                             "", CONV_EGL, API_DRIVER, 34, HIP_UNSUPPORTED}},
   // cudaGraphicsResourceGetMappedEglFrame
-  {"cuGraphicsResourceGetMappedEglFrame",                  {"hipGraphicsResourceGetMappedEglFrame",                    "", CONV_EGL, API_DRIVER, 33, HIP_UNSUPPORTED}},
+  {"cuGraphicsResourceGetMappedEglFrame",                  {"hipGraphicsResourceGetMappedEglFrame",                    "", CONV_EGL, API_DRIVER, 34, HIP_UNSUPPORTED}},
   // cudaEventCreateFromEGLSync
-  {"cuEventCreateFromEGLSync",                             {"hipEventCreateFromEGLSync",                               "", CONV_EGL, API_DRIVER, 33, HIP_UNSUPPORTED}},
+  {"cuEventCreateFromEGLSync",                             {"hipEventCreateFromEGLSync",                               "", CONV_EGL, API_DRIVER, 34, HIP_UNSUPPORTED}},
 
-  // 34. Direct3D 9 Interoperability
+  // 35. Direct3D 9 Interoperability
   // no analogue
-  {"cuD3D9CtxCreate",                                      {"hipD3D9CtxCreate",                                        "", CONV_D3D9, API_DRIVER, 34, HIP_UNSUPPORTED}},
+  {"cuD3D9CtxCreate",                                      {"hipD3D9CtxCreate",                                        "", CONV_D3D9, API_DRIVER, 35, HIP_UNSUPPORTED}},
     // no analogue
-  {"cuD3D9CtxCreateOnDevice",                              {"hipD3D9CtxCreateOnDevice",                                "", CONV_D3D9, API_DRIVER, 34, HIP_UNSUPPORTED}},
+  {"cuD3D9CtxCreateOnDevice",                              {"hipD3D9CtxCreateOnDevice",                                "", CONV_D3D9, API_DRIVER, 35, HIP_UNSUPPORTED}},
   // cudaD3D9GetDevice
-  {"cuD3D9GetDevice",                                      {"hipD3D9GetDevice",                                        "", CONV_D3D9, API_DRIVER, 34, HIP_UNSUPPORTED}},
+  {"cuD3D9GetDevice",                                      {"hipD3D9GetDevice",                                        "", CONV_D3D9, API_DRIVER, 35, HIP_UNSUPPORTED}},
   // cudaD3D9GetDevices
-  {"cuD3D9GetDevices",                                     {"hipD3D9GetDevices",                                       "", CONV_D3D9, API_DRIVER, 34, HIP_UNSUPPORTED}},
+  {"cuD3D9GetDevices",                                     {"hipD3D9GetDevices",                                       "", CONV_D3D9, API_DRIVER, 35, HIP_UNSUPPORTED}},
   // cudaD3D9GetDirect3DDevice
-  {"cuD3D9GetDirect3DDevice",                              {"hipD3D9GetDirect3DDevice",                                "", CONV_D3D9, API_DRIVER, 34, HIP_UNSUPPORTED}},
+  {"cuD3D9GetDirect3DDevice",                              {"hipD3D9GetDirect3DDevice",                                "", CONV_D3D9, API_DRIVER, 35, HIP_UNSUPPORTED}},
   // cudaGraphicsD3D9RegisterResource
-  {"cuGraphicsD3D9RegisterResource",                       {"hipGraphicsD3D9RegisterResource",                         "", CONV_D3D9, API_DRIVER, 34, HIP_UNSUPPORTED}},
+  {"cuGraphicsD3D9RegisterResource",                       {"hipGraphicsD3D9RegisterResource",                         "", CONV_D3D9, API_DRIVER, 35, HIP_UNSUPPORTED}},
 
-  // 34. Direct3D 9 Interoperability [DEPRECATED]
+  // 35. Direct3D 9 Interoperability [DEPRECATED]
   // cudaD3D9MapResources
-  {"cuD3D9MapResources",                                   {"hipD3D9MapResources",                                     "", CONV_D3D9, API_DRIVER, 34, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cuD3D9MapResources",                                   {"hipD3D9MapResources",                                     "", CONV_D3D9, API_DRIVER, 35, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   // cudaD3D9RegisterResource
-  {"cuD3D9RegisterResource",                               {"hipD3D9RegisterResource",                                 "", CONV_D3D9, API_DRIVER, 34, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cuD3D9RegisterResource",                               {"hipD3D9RegisterResource",                                 "", CONV_D3D9, API_DRIVER, 35, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   // cudaD3D9ResourceGetMappedArray
-  {"cuD3D9ResourceGetMappedArray",                         {"hipD3D9ResourceGetMappedArray",                           "", CONV_D3D9, API_DRIVER, 34, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cuD3D9ResourceGetMappedArray",                         {"hipD3D9ResourceGetMappedArray",                           "", CONV_D3D9, API_DRIVER, 35, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   // cudaD3D9ResourceGetMappedPitch
-  {"cuD3D9ResourceGetMappedPitch",                         {"hipD3D9ResourceGetMappedPitch",                           "", CONV_D3D9, API_DRIVER, 34, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cuD3D9ResourceGetMappedPitch",                         {"hipD3D9ResourceGetMappedPitch",                           "", CONV_D3D9, API_DRIVER, 35, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   // cudaD3D9ResourceGetMappedPointer
-  {"cuD3D9ResourceGetMappedPointer",                       {"hipD3D9ResourceGetMappedPointer",                         "", CONV_D3D9, API_DRIVER, 34, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cuD3D9ResourceGetMappedPointer",                       {"hipD3D9ResourceGetMappedPointer",                         "", CONV_D3D9, API_DRIVER, 35, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   // cudaD3D9ResourceGetMappedSize
-  {"cuD3D9ResourceGetMappedSize",                          {"hipD3D9ResourceGetMappedSize",                            "", CONV_D3D9, API_DRIVER, 34, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cuD3D9ResourceGetMappedSize",                          {"hipD3D9ResourceGetMappedSize",                            "", CONV_D3D9, API_DRIVER, 35, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   // cudaD3D9ResourceGetSurfaceDimensions
-  {"cuD3D9ResourceGetSurfaceDimensions",                   {"hipD3D9ResourceGetSurfaceDimensions",                     "", CONV_D3D9, API_DRIVER, 34, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cuD3D9ResourceGetSurfaceDimensions",                   {"hipD3D9ResourceGetSurfaceDimensions",                     "", CONV_D3D9, API_DRIVER, 35, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   // cudaD3D9ResourceSetMapFlags
-  {"cuD3D9ResourceSetMapFlags",                            {"hipD3D9ResourceSetMapFlags",                              "", CONV_D3D9, API_DRIVER, 34, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cuD3D9ResourceSetMapFlags",                            {"hipD3D9ResourceSetMapFlags",                              "", CONV_D3D9, API_DRIVER, 35, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   // cudaD3D9UnmapResources
-  {"cuD3D9UnmapResources",                                 {"hipD3D9UnmapResources",                                   "", CONV_D3D9, API_DRIVER, 34, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cuD3D9UnmapResources",                                 {"hipD3D9UnmapResources",                                   "", CONV_D3D9, API_DRIVER, 35, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   // cudaD3D9UnregisterResource
-  {"cuD3D9UnregisterResource",                             {"hipD3D9UnregisterResource",                               "", CONV_D3D9, API_DRIVER, 34, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cuD3D9UnregisterResource",                             {"hipD3D9UnregisterResource",                               "", CONV_D3D9, API_DRIVER, 35, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
 
-  // 35. Direct3D 10 Interoperability
+  // 36. Direct3D 10 Interoperability
   // cudaD3D10GetDevice
-  {"cuD3D10GetDevice",                                     {"hipD3D10GetDevice",                                       "", CONV_D3D10, API_DRIVER, 35, HIP_UNSUPPORTED}},
+  {"cuD3D10GetDevice",                                     {"hipD3D10GetDevice",                                       "", CONV_D3D10, API_DRIVER, 36, HIP_UNSUPPORTED}},
   // cudaD3D10GetDevices
-  {"cuD3D10GetDevices",                                    {"hipD3D10GetDevices",                                      "", CONV_D3D10, API_DRIVER, 35, HIP_UNSUPPORTED}},
+  {"cuD3D10GetDevices",                                    {"hipD3D10GetDevices",                                      "", CONV_D3D10, API_DRIVER, 36, HIP_UNSUPPORTED}},
   // cudaGraphicsD3D10RegisterResource
-  {"cuGraphicsD3D10RegisterResource",                      {"hipGraphicsD3D10RegisterResource",                        "", CONV_D3D10, API_DRIVER, 35, HIP_UNSUPPORTED}},
+  {"cuGraphicsD3D10RegisterResource",                      {"hipGraphicsD3D10RegisterResource",                        "", CONV_D3D10, API_DRIVER, 36, HIP_UNSUPPORTED}},
 
-  // 35. Direct3D 10 Interoperability [DEPRECATED]
+  // 36. Direct3D 10 Interoperability [DEPRECATED]
   // no analogue
-  {"cuD3D10CtxCreate",                                     {"hipD3D10CtxCreate",                                       "", CONV_D3D10, API_DRIVER, 35, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cuD3D10CtxCreate",                                     {"hipD3D10CtxCreate",                                       "", CONV_D3D10, API_DRIVER, 36, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   // no analogue
-  {"cuD3D10CtxCreateOnDevice",                             {"hipD3D10CtxCreateOnDevice",                               "", CONV_D3D10, API_DRIVER, 35, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cuD3D10CtxCreateOnDevice",                             {"hipD3D10CtxCreateOnDevice",                               "", CONV_D3D10, API_DRIVER, 36, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   // cudaD3D10GetDirect3DDevice
-  {"cuD3D10GetDirect3DDevice",                             {"hipD3D10GetDirect3DDevice",                               "", CONV_D3D10, API_DRIVER, 35, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cuD3D10GetDirect3DDevice",                             {"hipD3D10GetDirect3DDevice",                               "", CONV_D3D10, API_DRIVER, 36, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   // cudaD3D10MapResources
-  {"cuD3D10MapResources",                                  {"hipD3D10MapResources",                                    "", CONV_D3D10, API_DRIVER, 35, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cuD3D10MapResources",                                  {"hipD3D10MapResources",                                    "", CONV_D3D10, API_DRIVER, 36, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   // cudaD3D10RegisterResource
-  {"cuD3D10RegisterResource",                              {"hipD3D10RegisterResource",                                "", CONV_D3D10, API_DRIVER, 35, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cuD3D10RegisterResource",                              {"hipD3D10RegisterResource",                                "", CONV_D3D10, API_DRIVER, 36, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   // cudaD3D10ResourceGetMappedArray
-  {"cuD3D10ResourceGetMappedArray",                        {"hipD3D10ResourceGetMappedArray",                          "", CONV_D3D10, API_DRIVER, 35, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cuD3D10ResourceGetMappedArray",                        {"hipD3D10ResourceGetMappedArray",                          "", CONV_D3D10, API_DRIVER, 36, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   // cudaD3D10ResourceGetMappedPitch
-  {"cuD3D10ResourceGetMappedPitch",                        {"hipD3D10ResourceGetMappedPitch",                          "", CONV_D3D10, API_DRIVER, 35, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cuD3D10ResourceGetMappedPitch",                        {"hipD3D10ResourceGetMappedPitch",                          "", CONV_D3D10, API_DRIVER, 36, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   // cudaD3D10ResourceGetMappedPointer
-  {"cuD3D10ResourceGetMappedPointer",                      {"hipD3D10ResourceGetMappedPointer",                        "", CONV_D3D10, API_DRIVER, 35, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cuD3D10ResourceGetMappedPointer",                      {"hipD3D10ResourceGetMappedPointer",                        "", CONV_D3D10, API_DRIVER, 36, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   // cudaD3D10ResourceGetMappedSize
-  {"cuD3D10ResourceGetMappedSize",                         {"hipD3D10ResourceGetMappedSize",                           "", CONV_D3D10, API_DRIVER, 35, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cuD3D10ResourceGetMappedSize",                         {"hipD3D10ResourceGetMappedSize",                           "", CONV_D3D10, API_DRIVER, 36, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   // cudaD3D10ResourceGetSurfaceDimensions
-  {"cuD3D10ResourceGetSurfaceDimensions",                  {"hipD3D10ResourceGetSurfaceDimensions",                    "", CONV_D3D10, API_DRIVER, 35, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cuD3D10ResourceGetSurfaceDimensions",                  {"hipD3D10ResourceGetSurfaceDimensions",                    "", CONV_D3D10, API_DRIVER, 36, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   // cudaD3D10ResourceSetMapFlags
-  {"cuD3D10ResourceSetMapFlags",                           {"hipD3D10ResourceSetMapFlags",                             "", CONV_D3D10, API_DRIVER, 35, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cuD3D10ResourceSetMapFlags",                           {"hipD3D10ResourceSetMapFlags",                             "", CONV_D3D10, API_DRIVER, 36, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   // cudaD3D10UnmapResources
-  {"cuD3D10UnmapResources",                                {"hipD3D10UnmapResources",                                  "", CONV_D3D10, API_DRIVER, 35, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cuD3D10UnmapResources",                                {"hipD3D10UnmapResources",                                  "", CONV_D3D10, API_DRIVER, 36, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   // cudaD3D10UnregisterResource
-  {"cuD3D10UnregisterResource",                            {"hipD3D10UnregisterResource",                              "", CONV_D3D10, API_DRIVER, 35, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cuD3D10UnregisterResource",                            {"hipD3D10UnregisterResource",                              "", CONV_D3D10, API_DRIVER, 36, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
 
-  // 36. Direct3D 11 Interoperability
+  // 37. Direct3D 11 Interoperability
   // cudaD3D11GetDevice
-  {"cuD3D11GetDevice",                                     {"hipD3D11GetDevice",                                       "", CONV_D3D11, API_DRIVER, 36, HIP_UNSUPPORTED}},
+  {"cuD3D11GetDevice",                                     {"hipD3D11GetDevice",                                       "", CONV_D3D11, API_DRIVER, 37, HIP_UNSUPPORTED}},
   // cudaD3D11GetDevices
-  {"cuD3D11GetDevices",                                    {"hipD3D11GetDevices",                                      "", CONV_D3D11, API_DRIVER, 36, HIP_UNSUPPORTED}},
+  {"cuD3D11GetDevices",                                    {"hipD3D11GetDevices",                                      "", CONV_D3D11, API_DRIVER, 37, HIP_UNSUPPORTED}},
   // cudaGraphicsD3D11RegisterResource
-  {"cuGraphicsD3D11RegisterResource",                      {"hipGraphicsD3D11RegisterResource",                        "", CONV_D3D11, API_DRIVER, 36, HIP_UNSUPPORTED}},
+  {"cuGraphicsD3D11RegisterResource",                      {"hipGraphicsD3D11RegisterResource",                        "", CONV_D3D11, API_DRIVER, 37, HIP_UNSUPPORTED}},
 
-  // 36. Direct3D 11 Interoperability [DEPRECATED]
+  // 37. Direct3D 11 Interoperability [DEPRECATED]
   // no analogue
-  {"cuD3D11CtxCreate",                                     {"hipD3D11CtxCreate",                                       "", CONV_D3D11, API_DRIVER, 36, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cuD3D11CtxCreate",                                     {"hipD3D11CtxCreate",                                       "", CONV_D3D11, API_DRIVER, 37, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   // no analogue
-  {"cuD3D11CtxCreateOnDevice",                             {"hipD3D11CtxCreateOnDevice",                               "", CONV_D3D11, API_DRIVER, 36, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cuD3D11CtxCreateOnDevice",                             {"hipD3D11CtxCreateOnDevice",                               "", CONV_D3D11, API_DRIVER, 37, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   // cudaD3D11GetDirect3DDevice
-  {"cuD3D11GetDirect3DDevice",                             {"hipD3D11GetDirect3DDevice",                               "", CONV_D3D11, API_DRIVER, 36, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cuD3D11GetDirect3DDevice",                             {"hipD3D11GetDirect3DDevice",                               "", CONV_D3D11, API_DRIVER, 37, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_FUNCTION_VER_MAP {
@@ -984,7 +1004,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_FUNCTION_VER_MAP {
   {"cuFuncGetModule",                                      {CUDA_110, CUDA_0,   CUDA_0  }},
   {"cuFuncSetAttribute",                                   {CUDA_90,  CUDA_0,   CUDA_0  }},
   {"cuLaunchCooperativeKernel",                            {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cuLaunchCooperativeKernelMultiDevice",                 {CUDA_90,  CUDA_0,   CUDA_0  }},
+  {"cuLaunchCooperativeKernelMultiDevice",                 {CUDA_90,  CUDA_113, CUDA_0  }},
   {"cuLaunchHostFunc",                                     {CUDA_100, CUDA_0,   CUDA_0  }},
   {"cuFuncSetBlockShape",                                  {CUDA_0,   CUDA_92,  CUDA_0  }},
   {"cuFuncSetSharedSize",                                  {CUDA_0,   CUDA_92,  CUDA_0  }},
@@ -1157,6 +1177,15 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_FUNCTION_VER_MAP {
   {"cuGraphExternalSemaphoresWaitNodeSetParams",           {CUDA_112, CUDA_0,   CUDA_0  }},
   {"cuGraphExecExternalSemaphoresSignalNodeSetParams",     {CUDA_112, CUDA_0,   CUDA_0  }},
   {"cuGraphExecExternalSemaphoresWaitNodeSetParams",       {CUDA_112, CUDA_0,   CUDA_0  }},
+  {"cuStreamGetCaptureInfo_v2",                            {CUDA_113, CUDA_0,   CUDA_0  }},
+  {"cuStreamUpdateCaptureDependencies",                    {CUDA_113, CUDA_0,   CUDA_0  }},
+  {"cuGraphDebugDotPrint",                                 {CUDA_113, CUDA_0,   CUDA_0  }},
+  {"cuUserObjectCreate",                                   {CUDA_113, CUDA_0,   CUDA_0  }},
+  {"cuUserObjectRetain",                                   {CUDA_113, CUDA_0,   CUDA_0  }},
+  {"cuGraphRetainUserObject",                              {CUDA_113, CUDA_0,   CUDA_0  }},
+  {"cuGraphReleaseUserObject",                             {CUDA_113, CUDA_0,   CUDA_0  }},
+  {"cuGetProcAddress",                                     {CUDA_113, CUDA_0,   CUDA_0  }},
+  {"cuFlushGPUDirectRDMAWrites",                           {CUDA_113, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_FUNCTION_VER_MAP {
@@ -1290,12 +1319,13 @@ const std::map<unsigned int, llvm::StringRef> CUDA_DRIVER_API_SECTION_MAP {
   {26, "Surface Object Management"},
   {27, "Peer Context Memory Access"},
   {28, "Graphics Interoperability"},
-  {29, "Profiler Control [DEPRECATED]"},
-  {30, "Profiler Control"},
-  {31, "OpenGL Interoperability"},
-  {32, "VDPAU Interoperability"},
-  {33, "EGL Interoperability"},
-  {34, "Direct3D 9 Interoperability"},
-  {35, "Direct3D 10 Interoperability"},
-  {36, "Direct3D 11 Interoperability"},
+  {29, "Driver Entry Point Access"},
+  {30, "Profiler Control [DEPRECATED]"},
+  {31, "Profiler Control"},
+  {32, "OpenGL Interoperability"},
+  {33, "VDPAU Interoperability"},
+  {34, "EGL Interoperability"},
+  {35, "Direct3D 9 Interoperability"},
+  {36, "Direct3D 10 Interoperability"},
+  {37, "Direct3D 11 Interoperability"},
 };
