@@ -10,6 +10,7 @@
 |`CUDA_ARRAY3D_DEPTH_TEXTURE`| | | | | | | |
 |`CUDA_ARRAY3D_DESCRIPTOR`| | | |`HIP_ARRAY3D_DESCRIPTOR`|2.7.0| | |
 |`CUDA_ARRAY3D_DESCRIPTOR_st`| | | |`HIP_ARRAY3D_DESCRIPTOR`|2.7.0| | |
+|`CUDA_ARRAY3D_DESCRIPTOR_v2`|11.3| | |`HIP_ARRAY3D_DESCRIPTOR`|2.7.0| | |
 |`CUDA_ARRAY3D_LAYERED`| | | |`hipArrayLayered`|1.7.0| | |
 |`CUDA_ARRAY3D_SPARSE`|11.1| | | | | | |
 |`CUDA_ARRAY3D_SURFACE_LDST`| | | |`hipArraySurfaceLoadStore`|1.7.0| | |
@@ -18,8 +19,10 @@
 |`CUDA_ARRAY_DESCRIPTOR_st`| | | |`HIP_ARRAY_DESCRIPTOR`|1.7.0| | |
 |`CUDA_ARRAY_DESCRIPTOR_v1`| | | |`HIP_ARRAY_DESCRIPTOR`|1.7.0| | |
 |`CUDA_ARRAY_DESCRIPTOR_v1_st`| | | |`HIP_ARRAY_DESCRIPTOR`|1.7.0| | |
+|`CUDA_ARRAY_DESCRIPTOR_v2`|11.3| | |`HIP_ARRAY_DESCRIPTOR`|1.7.0| | |
 |`CUDA_ARRAY_SPARSE_PROPERTIES`|11.1| | | | | | |
 |`CUDA_ARRAY_SPARSE_PROPERTIES_st`|11.1| | | | | | |
+|`CUDA_ARRAY_SPARSE_PROPERTIES_v1`|11.3| | | | | | |
 |`CUDA_CB`| | | | | | | |
 |`CUDA_COOPERATIVE_LAUNCH_MULTI_DEVICE_NO_POST_LAUNCH_SYNC`|9.0| | |`hipCooperativeLaunchMultiDeviceNoPostSync`|3.2.0| | |
 |`CUDA_COOPERATIVE_LAUNCH_MULTI_DEVICE_NO_PRE_LAUNCH_SYNC`|9.0| | |`hipCooperativeLaunchMultiDeviceNoPreSync`|3.2.0| | |
@@ -104,59 +107,80 @@
 |`CUDA_ERROR_UNSUPPORTED_PTX_VERSION`|11.1| | | | | | |
 |`CUDA_EXTERNAL_MEMORY_BUFFER_DESC`|10.0| | | | | | |
 |`CUDA_EXTERNAL_MEMORY_BUFFER_DESC_st`|10.0| | | | | | |
+|`CUDA_EXTERNAL_MEMORY_BUFFER_DESC_v1`|11.3| | | | | | |
 |`CUDA_EXTERNAL_MEMORY_DEDICATED`|10.0| | | | | | |
 |`CUDA_EXTERNAL_MEMORY_HANDLE_DESC`|10.0| | | | | | |
 |`CUDA_EXTERNAL_MEMORY_HANDLE_DESC_st`|10.0| | | | | | |
+|`CUDA_EXTERNAL_MEMORY_HANDLE_DESC_v1`|11.3| | | | | | |
 |`CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC`|10.0| | | | | | |
 |`CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC_st`|10.0| | | | | | |
+|`CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC_v1`|11.3| | | | | | |
 |`CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC`|10.0| | | | | | |
 |`CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC_st`|10.0| | | | | | |
+|`CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC_v1`|11.3| | | | | | |
 |`CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS`|10.0| | | | | | |
 |`CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS_st`|10.0| | | | | | |
+|`CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS_v1`|11.3| | | | | | |
 |`CUDA_EXTERNAL_SEMAPHORE_SIGNAL_SKIP_NVSCIBUF_MEMSYNC`|10.2| | | | | | |
 |`CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS`|10.0| | | | | | |
 |`CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS_st`|10.0| | | | | | |
+|`CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS_v1`|11.3| | | | | | |
 |`CUDA_EXTERNAL_SEMAPHORE_WAIT_SKIP_NVSCIBUF_MEMSYNC`|10.2| | | | | | |
 |`CUDA_EXT_SEM_SIGNAL_NODE_PARAMS`|11.2| | | | | | |
 |`CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_st`|11.2| | | | | | |
+|`CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_v1`|11.3| | | | | | |
 |`CUDA_EXT_SEM_WAIT_NODE_PARAMS`|11.2| | | | | | |
 |`CUDA_EXT_SEM_WAIT_NODE_PARAMS_st`|11.2| | | | | | |
+|`CUDA_EXT_SEM_WAIT_NODE_PARAMS_v1`|11.3| | | | | | |
 |`CUDA_HOST_NODE_PARAMS`|10.0| | | | | | |
 |`CUDA_HOST_NODE_PARAMS_st`|10.0| | | | | | |
+|`CUDA_HOST_NODE_PARAMS_v1`|11.3| | | | | | |
 |`CUDA_KERNEL_NODE_PARAMS`|10.0| | | | | | |
 |`CUDA_KERNEL_NODE_PARAMS_st`|10.0| | | | | | |
+|`CUDA_KERNEL_NODE_PARAMS_v1`|11.3| | | | | | |
 |`CUDA_LAUNCH_PARAMS`|9.0| | |`hipLaunchParams`|2.6.0| | |
 |`CUDA_LAUNCH_PARAMS_st`|9.0| | |`hipLaunchParams`|2.6.0| | |
+|`CUDA_LAUNCH_PARAMS_v1`|11.3| | |`hipLaunchParams`|2.6.0| | |
 |`CUDA_MEMCPY2D`| | | |`hip_Memcpy2D`|1.7.0| | |
 |`CUDA_MEMCPY2D_st`| | | |`hip_Memcpy2D`|1.7.0| | |
 |`CUDA_MEMCPY2D_v1`| | | |`hip_Memcpy2D`|1.7.0| | |
 |`CUDA_MEMCPY2D_v1_st`| | | |`hip_Memcpy2D`|1.7.0| | |
+|`CUDA_MEMCPY2D_v2`|11.3| | |`hip_Memcpy2D`|1.7.0| | |
 |`CUDA_MEMCPY3D`| | | |`HIP_MEMCPY3D`|3.2.0| | |
 |`CUDA_MEMCPY3D_PEER`| | | | | | | |
 |`CUDA_MEMCPY3D_PEER_st`| | | | | | | |
+|`CUDA_MEMCPY3D_PEER_v1`|11.3| | | | | | |
 |`CUDA_MEMCPY3D_st`| | | |`HIP_MEMCPY3D`|3.2.0| | |
 |`CUDA_MEMCPY3D_v1`| | | |`HIP_MEMCPY3D`|3.2.0| | |
 |`CUDA_MEMCPY3D_v1_st`| | | |`HIP_MEMCPY3D`|3.2.0| | |
+|`CUDA_MEMCPY3D_v2`|11.3| | |`HIP_MEMCPY3D`|3.2.0| | |
 |`CUDA_MEMSET_NODE_PARAMS`|10.0| | | | | | |
 |`CUDA_MEMSET_NODE_PARAMS_st`|10.0| | | | | | |
+|`CUDA_MEMSET_NODE_PARAMS_v1`|11.3| | | | | | |
 |`CUDA_NVSCISYNC_ATTR_SIGNAL`|10.2| | | | | | |
 |`CUDA_NVSCISYNC_ATTR_WAIT`|10.2| | | | | | |
 |`CUDA_POINTER_ATTRIBUTE_ACCESS_FLAGS`|11.1| | | | | | |
 |`CUDA_POINTER_ATTRIBUTE_ACCESS_FLAGS_enum`|11.1| | | | | | |
 |`CUDA_POINTER_ATTRIBUTE_P2P_TOKENS`| | | | | | | |
 |`CUDA_POINTER_ATTRIBUTE_P2P_TOKENS_st`| | | | | | | |
+|`CUDA_POINTER_ATTRIBUTE_P2P_TOKENS_v1`|11.3| | | | | | |
 |`CUDA_RESOURCE_DESC`| | | |`HIP_RESOURCE_DESC`|3.5.0| | |
 |`CUDA_RESOURCE_DESC_st`| | | |`HIP_RESOURCE_DESC_st`|3.5.0| | |
+|`CUDA_RESOURCE_DESC_v1`|11.3| | |`HIP_RESOURCE_DESC`|3.5.0| | |
 |`CUDA_RESOURCE_VIEW_DESC`| | | |`HIP_RESOURCE_VIEW_DESC`|3.5.0| | |
 |`CUDA_RESOURCE_VIEW_DESC_st`| | | |`HIP_RESOURCE_VIEW_DESC_st`|3.5.0| | |
+|`CUDA_RESOURCE_VIEW_DESC_v1`|11.3| | |`HIP_RESOURCE_VIEW_DESC`|3.5.0| | |
 |`CUDA_SUCCESS`| | | |`hipSuccess`|1.5.0| | |
 |`CUDA_TEXTURE_DESC`| | | |`HIP_TEXTURE_DESC`|3.5.0| | |
 |`CUDA_TEXTURE_DESC_st`| | | |`HIP_TEXTURE_DESC_st`|3.5.0| | |
+|`CUDA_TEXTURE_DESC_v1`|11.3| | |`HIP_TEXTURE_DESC`|3.5.0| | |
 |`CUDA_VERSION`| | | | | | | |
 |`CUGLDeviceList`| | | | | | | |
 |`CUGLDeviceList_enum`| | | | | | | |
 |`CUGLmap_flags`| | | | | | | |
 |`CUGLmap_flags_enum`| | | | | | | |
+|`CUGPUDirectRDMAWritesOrdering`|11.3| | | | | | |
+|`CUGPUDirectRDMAWritesOrdering_enum`|11.3| | | | | | |
 |`CU_ACCESS_PROPERTY_NORMAL`|11.0| | | | | | |
 |`CU_ACCESS_PROPERTY_PERSISTING`|11.0| | | | | | |
 |`CU_ACCESS_PROPERTY_STREAMING`|11.0| | | | | | |
@@ -232,7 +256,10 @@
 |`CU_DEVICE_ATTRIBUTE_GENERIC_COMPRESSION_SUPPORTED`|11.0| | | | | | |
 |`CU_DEVICE_ATTRIBUTE_GLOBAL_L1_CACHE_SUPPORTED`| | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_GLOBAL_MEMORY_BUS_WIDTH`| | | |`hipDeviceAttributeMemoryBusWidth`|1.6.0| | |
+|`CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_FLUSH_WRITES_OPTIONS`|11.3| | | | | | |
+|`CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_SUPPORTED`|11.3| | | | | | |
 |`CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_WITH_CUDA_VMM_SUPPORTED`|11.0| | | | | | |
+|`CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_WRITES_ORDERING`|11.3| | | | | | |
 |`CU_DEVICE_ATTRIBUTE_GPU_OVERLAP`| |5.0| | | | | |
 |`CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_POSIX_FILE_DESCRIPTOR_SUPPORTED`|10.2| | | | | | |
 |`CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_WIN32_HANDLE_SUPPORTED`|10.2| | | | | | |
@@ -307,6 +334,7 @@
 |`CU_DEVICE_ATTRIBUTE_MAX_THREADS_PER_MULTIPROCESSOR`| | | |`hipDeviceAttributeMaxThreadsPerMultiProcessor`|1.6.0| | |
 |`CU_DEVICE_ATTRIBUTE_MEMORY_CLOCK_RATE`| | | |`hipDeviceAttributeMemoryClockRate`|1.6.0| | |
 |`CU_DEVICE_ATTRIBUTE_MEMORY_POOLS_SUPPORTED`|11.2| | | | | | |
+|`CU_DEVICE_ATTRIBUTE_MEMPOOL_SUPPORTED_HANDLE_TYPES`|11.3| | | | | | |
 |`CU_DEVICE_ATTRIBUTE_MULTIPROCESSOR_COUNT`| | | |`hipDeviceAttributeMultiprocessorCount`|1.6.0| | |
 |`CU_DEVICE_ATTRIBUTE_MULTI_GPU_BOARD`| | | |`hipDeviceAttributeIsMultiGpuBoard`|1.6.0| | |
 |`CU_DEVICE_ATTRIBUTE_MULTI_GPU_BOARD_GROUP_ID`| | | | | | | |
@@ -443,6 +471,11 @@
 |`CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT`|10.0| | | | | | |
 |`CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_TIMELINE_SEMAPHORE_FD`|11.2| | | | | | |
 |`CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_TIMELINE_SEMAPHORE_WIN32`|11.2| | | | | | |
+|`CU_FLUSH_GPU_DIRECT_RDMA_WRITES_OPTION_HOST`|11.3| | | | | | |
+|`CU_FLUSH_GPU_DIRECT_RDMA_WRITES_OPTION_MEMOPS`|11.3| | | | | | |
+|`CU_FLUSH_GPU_DIRECT_RDMA_WRITES_TARGET_CURRENT_CTX`|11.3| | | | | | |
+|`CU_FLUSH_GPU_DIRECT_RDMA_WRITES_TO_ALL_DEVICES`|11.3| | | | | | |
+|`CU_FLUSH_GPU_DIRECT_RDMA_WRITES_TO_OWNER`|11.3| | | | | | |
 |`CU_FUNC_ATTRIBUTE_BINARY_VERSION`| | | |`HIP_FUNC_ATTRIBUTE_BINARY_VERSION`|2.8.0| | |
 |`CU_FUNC_ATTRIBUTE_CACHE_MODE_CA`| | | |`HIP_FUNC_ATTRIBUTE_CACHE_MODE_CA`|2.8.0| | |
 |`CU_FUNC_ATTRIBUTE_CONST_SIZE_BYTES`| | | |`HIP_FUNC_ATTRIBUTE_CONST_SIZE_BYTES`|2.8.0| | |
@@ -458,12 +491,18 @@
 |`CU_FUNC_CACHE_PREFER_L1`| | | |`hipFuncCachePreferL1`|1.6.0| | |
 |`CU_FUNC_CACHE_PREFER_NONE`| | | |`hipFuncCachePreferNone`|1.6.0| | |
 |`CU_FUNC_CACHE_PREFER_SHARED`| | | |`hipFuncCachePreferShared`|1.6.0| | |
+|`CU_GET_PROC_ADDRESS_DEFAULT`|11.3| | | | | | |
+|`CU_GET_PROC_ADDRESS_LEGACY_STREAM`|11.3| | | | | | |
+|`CU_GET_PROC_ADDRESS_PER_THREAD_DEFAULT_STREAM`|11.3| | | | | | |
 |`CU_GL_DEVICE_LIST_ALL`| | | | | | | |
 |`CU_GL_DEVICE_LIST_CURRENT_FRAME`| | | | | | | |
 |`CU_GL_DEVICE_LIST_NEXT_FRAME`| | | | | | | |
 |`CU_GL_MAP_RESOURCE_FLAGS_NONE`| | | | | | | |
 |`CU_GL_MAP_RESOURCE_FLAGS_READ_ONLY`| | | | | | | |
 |`CU_GL_MAP_RESOURCE_FLAGS_WRITE_DISCARD`| | | | | | | |
+|`CU_GPU_DIRECT_RDMA_WRITES_ORDERING_ALL_DEVICES`|11.3| | | | | | |
+|`CU_GPU_DIRECT_RDMA_WRITES_ORDERING_NONE`|11.3| | | | | | |
+|`CU_GPU_DIRECT_RDMA_WRITES_ORDERING_OWNER`|11.3| | | | | | |
 |`CU_GRAPHICS_MAP_RESOURCE_FLAGS_NONE`| | | | | | | |
 |`CU_GRAPHICS_MAP_RESOURCE_FLAGS_READ_ONLY`| | | | | | | |
 |`CU_GRAPHICS_MAP_RESOURCE_FLAGS_WRITE_DISCARD`| | | | | | | |
@@ -472,6 +511,17 @@
 |`CU_GRAPHICS_REGISTER_FLAGS_SURFACE_LDST`| | | | | | | |
 |`CU_GRAPHICS_REGISTER_FLAGS_TEXTURE_GATHER`| | | | | | | |
 |`CU_GRAPHICS_REGISTER_FLAGS_WRITE_DISCARD`| | | | | | | |
+|`CU_GRAPH_DEBUG_DOT_FLAGS_EVENT_NODE_PARAMS`|11.3| | | | | | |
+|`CU_GRAPH_DEBUG_DOT_FLAGS_EXT_SEMAS_SIGNAL_NODE_PARAMS`|11.3| | | | | | |
+|`CU_GRAPH_DEBUG_DOT_FLAGS_EXT_SEMAS_WAIT_NODE_PARAMS`|11.3| | | | | | |
+|`CU_GRAPH_DEBUG_DOT_FLAGS_HANDLES`|11.3| | | | | | |
+|`CU_GRAPH_DEBUG_DOT_FLAGS_HOST_NODE_PARAMS`|11.3| | | | | | |
+|`CU_GRAPH_DEBUG_DOT_FLAGS_KERNEL_NODE_ATTRIBUTES`|11.3| | | | | | |
+|`CU_GRAPH_DEBUG_DOT_FLAGS_KERNEL_NODE_PARAMS`|11.3| | | | | | |
+|`CU_GRAPH_DEBUG_DOT_FLAGS_MEMCPY_NODE_PARAMS`|11.3| | | | | | |
+|`CU_GRAPH_DEBUG_DOT_FLAGS_MEMSET_NODE_PARAMS`|11.3| | | | | | |
+|`CU_GRAPH_DEBUG_DOT_FLAGS_RUNTIME_TYPES`|11.3| | | | | | |
+|`CU_GRAPH_DEBUG_DOT_FLAGS_VERBOSE`|11.3| | | | | | |
 |`CU_GRAPH_EXEC_UPDATE_ERROR`|10.2| | | | | | |
 |`CU_GRAPH_EXEC_UPDATE_ERROR_FUNCTION_CHANGED`|10.2| | | | | | |
 |`CU_GRAPH_EXEC_UPDATE_ERROR_NODE_TYPE_CHANGED`|10.2| | | | | | |
@@ -491,6 +541,7 @@
 |`CU_GRAPH_NODE_TYPE_MEMCPY`|10.0| | | | | | |
 |`CU_GRAPH_NODE_TYPE_MEMSET`|10.0| | | | | | |
 |`CU_GRAPH_NODE_TYPE_WAIT_EVENT`|11.1| | | | | | |
+|`CU_GRAPH_USER_OBJECT_MOVE`|11.3| | | | | | |
 |`CU_IPC_HANDLE_SIZE`| | | |`HIP_IPC_HANDLE_SIZE`|1.6.0| | |
 |`CU_IPC_MEM_LAZY_ENABLE_PEER_ACCESS`| | | |`hipIpcMemLazyEnablePeerAccess`|1.6.0| | |
 |`CU_JIT_CACHE_MODE`| | | |`hipJitOptionCacheMode`|1.6.0| | |
@@ -548,9 +599,13 @@
 |`CU_MEMORYTYPE_HOST`| | | |`hipMemoryTypeHost`|1.6.0| | |
 |`CU_MEMORYTYPE_UNIFIED`| | | |`hipMemoryTypeUnified`|1.6.0| | |
 |`CU_MEMPOOL_ATTR_RELEASE_THRESHOLD`|11.2| | | | | | |
+|`CU_MEMPOOL_ATTR_RESERVED_MEM_CURRENT`|11.3| | | | | | |
+|`CU_MEMPOOL_ATTR_RESERVED_MEM_HIGH`|11.3| | | | | | |
 |`CU_MEMPOOL_ATTR_REUSE_ALLOW_INTERNAL_DEPENDENCIES`|11.2| | | | | | |
 |`CU_MEMPOOL_ATTR_REUSE_ALLOW_OPPORTUNISTIC`|11.2| | | | | | |
 |`CU_MEMPOOL_ATTR_REUSE_FOLLOW_EVENT_DEPENDENCIES`|11.2| | | | | | |
+|`CU_MEMPOOL_ATTR_USED_MEM_CURRENT`|11.3| | | | | | |
+|`CU_MEMPOOL_ATTR_USED_MEM_HIGH`|11.3| | | | | | |
 |`CU_MEM_ACCESS_FLAGS_PROT_MAX`|10.2| | | | | | |
 |`CU_MEM_ACCESS_FLAGS_PROT_NONE`|10.2| | | | | | |
 |`CU_MEM_ACCESS_FLAGS_PROT_READ`|10.2| | | | | | |
@@ -603,6 +658,7 @@
 |`CU_POINTER_ATTRIBUTE_IS_MANAGED`| | | | | | | |
 |`CU_POINTER_ATTRIBUTE_MAPPED`|10.2| | | | | | |
 |`CU_POINTER_ATTRIBUTE_MEMORY_TYPE`| | | | | | | |
+|`CU_POINTER_ATTRIBUTE_MEMPOOL_HANDLE`|11.3| | | | | | |
 |`CU_POINTER_ATTRIBUTE_P2P_TOKENS`| | | | | | | |
 |`CU_POINTER_ATTRIBUTE_RANGE_SIZE`|10.2| | | | | | |
 |`CU_POINTER_ATTRIBUTE_RANGE_START_ADDR`|10.2| | | | | | |
@@ -654,6 +710,7 @@
 |`CU_SHARED_MEM_CONFIG_DEFAULT_BANK_SIZE`| | | |`hipSharedMemBankSizeDefault`|1.6.0| | |
 |`CU_SHARED_MEM_CONFIG_EIGHT_BYTE_BANK_SIZE`| | | |`hipSharedMemBankSizeEightByte`|1.6.0| | |
 |`CU_SHARED_MEM_CONFIG_FOUR_BYTE_BANK_SIZE`| | | |`hipSharedMemBankSizeFourByte`|1.6.0| | |
+|`CU_STREAM_ADD_CAPTURE_DEPENDENCIES`|11.3| | | | | | |
 |`CU_STREAM_ATTRIBUTE_ACCESS_POLICY_WINDOW`|11.0| | | | | | |
 |`CU_STREAM_ATTRIBUTE_SYNCHRONIZATION_POLICY`|11.0| | | | | | |
 |`CU_STREAM_CAPTURE_MODE_GLOBAL`|10.1| | | | | | |
@@ -671,6 +728,7 @@
 |`CU_STREAM_MEM_OP_WRITE_VALUE_64`|9.0| | | | | | |
 |`CU_STREAM_NON_BLOCKING`| | | |`hipStreamNonBlocking`|1.6.0| | |
 |`CU_STREAM_PER_THREAD`| | | | | | | |
+|`CU_STREAM_SET_CAPTURE_DEPENDENCIES`|11.3| | | | | | |
 |`CU_STREAM_WAIT_VALUE_AND`|8.0| | |`hipStreamWaitValueAnd`|4.2.0| | |
 |`CU_STREAM_WAIT_VALUE_EQ`|8.0| | |`hipStreamWaitValueEq`|4.2.0| | |
 |`CU_STREAM_WAIT_VALUE_FLUSH`|8.0| | | | | | |
@@ -715,6 +773,7 @@
 |`CU_TR_ADDRESS_MODE_WRAP`| | | |`HIP_TR_ADDRESS_MODE_WRAP`|3.5.0| | |
 |`CU_TR_FILTER_MODE_LINEAR`| | | |`HIP_TR_FILTER_MODE_LINEAR`|3.5.0| | |
 |`CU_TR_FILTER_MODE_POINT`| | | |`HIP_TR_FILTER_MODE_POINT`|3.5.0| | |
+|`CU_USER_OBJECT_NO_DESTRUCTOR_SYNC`|11.3| | | | | | |
 |`CUaccessPolicyWindow`|11.0| | | | | | |
 |`CUaccessPolicyWindow_st`|11.0| | | | | | |
 |`CUaccessProperty`|11.0| | | | | | |
@@ -724,6 +783,7 @@
 |`CUarray`| | | |`hipArray *`| | | |
 |`CUarrayMapInfo`|11.1| | | | | | |
 |`CUarrayMapInfo_st`|11.1| | | | | | |
+|`CUarrayMapInfo_v1`|11.3| | | | | | |
 |`CUarraySparseSubresourceType`|11.1| | | | | | |
 |`CUarraySparseSubresourceType_enum`|11.1| | | | | | |
 |`CUarray_cubemap_face`| | | | | | | |
@@ -756,10 +816,15 @@
 |`CUdevice_P2PAttribute_enum`|8.0| | |`hipDeviceP2PAttr`|3.8.0| | |
 |`CUdevice_attribute`| | | |`hipDeviceAttribute_t`|1.6.0| | |
 |`CUdevice_attribute_enum`| | | |`hipDeviceAttribute_t`|1.6.0| | |
+|`CUdevice_v1`|11.3| | |`hipDevice_t`|1.6.0| | |
 |`CUdeviceptr`| | | |`hipDeviceptr_t`|1.7.0| | |
 |`CUdeviceptr_v1`| | | |`hipDeviceptr_t`|1.7.0| | |
+|`CUdeviceptr_v2`|11.3| | |`hipDeviceptr_t`|1.7.0| | |
 |`CUdevprop`| | | | | | | |
 |`CUdevprop_st`| | | | | | | |
+|`CUdevprop_v1`|11.3| | | | | | |
+|`CUdriverProcAddress_flags`|11.3| | | | | | |
+|`CUdriverProcAddress_flags_enum`|11.3| | | | | | |
 |`CUeglColorFormat`|9.0| | | | | | |
 |`CUeglColorFormate_enum`|9.0| | | | | | |
 |`CUeglFrameType`|9.0| | | | | | |
@@ -786,6 +851,12 @@
 |`CUexternalSemaphoreHandleType_enum`|10.0| | | | | | |
 |`CUfilter_mode`| | | |`HIPfilter_mode`|3.5.0| | |
 |`CUfilter_mode_enum`| | | |`HIPfilter_mode_enum`|3.5.0| | |
+|`CUflushGPUDirectRDMAWritesOptions`|11.3| | | | | | |
+|`CUflushGPUDirectRDMAWritesOptions_enum`|11.3| | | | | | |
+|`CUflushGPUDirectRDMAWritesScope`|11.3| | | | | | |
+|`CUflushGPUDirectRDMAWritesScope_enum`|11.3| | | | | | |
+|`CUflushGPUDirectRDMAWritesTarget`|11.3| | | | | | |
+|`CUflushGPUDirectRDMAWritesTarget_enum`|11.3| | | | | | |
 |`CUfunc_cache`| | | |`hipFuncCache_t`|1.6.0| | |
 |`CUfunc_cache_enum`| | | |`hipFuncCache_t`|1.6.0| | |
 |`CUfunc_st`| | | |`ihipModuleSymbol_t`|1.6.0| | |
@@ -793,6 +864,8 @@
 |`CUfunction_attribute`| | | |`hipFunction_attribute`|2.8.0| | |
 |`CUfunction_attribute_enum`| | | |`hipFunction_attribute`|2.8.0| | |
 |`CUgraph`|10.0| | | | | | |
+|`CUgraphDebugDot_flags`|11.3| | | | | | |
+|`CUgraphDebugDot_flags_enum`|11.3| | | | | | |
 |`CUgraphExec`|10.0| | | | | | |
 |`CUgraphExecUpdateResult`|10.2| | | | | | |
 |`CUgraphExecUpdateResult_enum`|10.2| | | | | | |
@@ -811,8 +884,10 @@
 |`CUhostFn`|10.0| | | | | | |
 |`CUipcEventHandle`| | | |`hipIpcEventHandle_t`|1.6.0| | |
 |`CUipcEventHandle_st`| | | |`hipIpcEventHandle_st`|3.5.0| | |
+|`CUipcEventHandle_v1`|11.3| | |`hipIpcEventHandle_t`|1.6.0| | |
 |`CUipcMemHandle`| | | |`hipIpcMemHandle_t`|1.6.0| | |
 |`CUipcMemHandle_st`| | | |`hipIpcMemHandle_st`|1.6.0| | |
+|`CUipcMemHandle_v1`|11.3| | |`hipIpcMemHandle_t`|1.6.0| | |
 |`CUipcMem_flags`| | | | | | | |
 |`CUipcMem_flags_enum`| | | | | | | |
 |`CUjitInputType`| | | | | | | |
@@ -829,10 +904,12 @@
 |`CUkernelNodeAttrID_enum`|11.0| | | | | | |
 |`CUkernelNodeAttrValue`|11.0| | | | | | |
 |`CUkernelNodeAttrValue_union`|11.0| | | | | | |
+|`CUkernelNodeAttrValue_v1`|11.3| | | | | | |
 |`CUlimit`| | | |`hipLimit_t`|1.6.0| | |
 |`CUlimit_enum`| | | |`hipLimit_t`|1.6.0| | |
 |`CUmemAccessDesc`|10.2| | | | | | |
 |`CUmemAccessDesc_st`|10.2| | | | | | |
+|`CUmemAccessDesc_v1`|11.3| | | | | | |
 |`CUmemAccess_flags`|10.2| | | | | | |
 |`CUmemAccess_flags_enum`|10.2| | | | | | |
 |`CUmemAllocationGranularity_flags`|10.2| | | | | | |
@@ -841,24 +918,29 @@
 |`CUmemAllocationHandleType_enum`|10.2| | | | | | |
 |`CUmemAllocationProp`|10.2| | | | | | |
 |`CUmemAllocationProp_st`|10.2| | | | | | |
+|`CUmemAllocationProp_v1`|11.3| | | | | | |
 |`CUmemAllocationType`|10.2| | | | | | |
 |`CUmemAllocationType_enum`|10.2| | | | | | |
 |`CUmemAttach_flags`| | | | | | | |
 |`CUmemAttach_flags_enum`| | | | | | | |
 |`CUmemGenericAllocationHandle`|10.2| | | | | | |
+|`CUmemGenericAllocationHandle_v1`|11.3| | | | | | |
 |`CUmemHandleType`|11.1| | | | | | |
 |`CUmemHandleType_enum`|11.1| | | | | | |
 |`CUmemLocation`|10.2| | | | | | |
 |`CUmemLocationType`|10.2| | | | | | |
 |`CUmemLocationType_enum`|10.2| | | | | | |
 |`CUmemLocation_st`|10.2| | | | | | |
+|`CUmemLocation_v1`|11.3| | | | | | |
 |`CUmemOperationType`|11.1| | | | | | |
 |`CUmemOperationType_enum`|11.1| | | | | | |
 |`CUmemPoolHandle_st`|11.2| | | | | | |
 |`CUmemPoolProps`|11.2| | | | | | |
 |`CUmemPoolProps_st`|11.2| | | | | | |
+|`CUmemPoolProps_v1`|11.3| | | | | | |
 |`CUmemPoolPtrExportData`|11.2| | | | | | |
 |`CUmemPoolPtrExportData_st`|11.2| | | | | | |
+|`CUmemPoolPtrExportData_v1`|11.3| | | | | | |
 |`CUmemPool_attribute`|11.2| | | | | | |
 |`CUmemPool_attribute_enum`|11.2| | | | | | |
 |`CUmem_advise`|8.0| | |`hipMemoryAdvise`|3.7.0| | |
@@ -891,8 +973,10 @@
 |`CUstreamAttrID_enum`|11.0| | | | | | |
 |`CUstreamAttrValue`|11.0| | | | | | |
 |`CUstreamAttrValue_union`|11.0| | | | | | |
+|`CUstreamAttrValue_v1`|11.3| | | | | | |
 |`CUstreamBatchMemOpParams`|8.0| | | | | | |
 |`CUstreamBatchMemOpParams_union`|8.0| | | | | | |
+|`CUstreamBatchMemOpParams_v1`|11.3| | | | | | |
 |`CUstreamBatchMemOpType`|8.0| | | | | | |
 |`CUstreamBatchMemOpType_enum`|8.0| | | | | | |
 |`CUstreamCallback`| | | |`hipStreamCallback_t`|1.6.0| | |
@@ -900,6 +984,8 @@
 |`CUstreamCaptureMode_enum`|10.1| | | | | | |
 |`CUstreamCaptureStatus`|10.0| | | | | | |
 |`CUstreamCaptureStatus_enum`|10.0| | | | | | |
+|`CUstreamUpdateCaptureDependencies_flags`|11.3| | | | | | |
+|`CUstreamUpdateCaptureDependencies_flags_enum`|11.3| | | | | | |
 |`CUstreamWaitValue_flags`|8.0| | | | | | |
 |`CUstreamWaitValue_flags_enum`|8.0| | | | | | |
 |`CUstreamWriteValue_flags`|8.0| | | | | | |
@@ -908,13 +994,21 @@
 |`CUstream_flags_enum`| | | | | | | |
 |`CUstream_st`| | | |`ihipStream_t`|1.5.0| | |
 |`CUsurfObject`| | | | | | | |
+|`CUsurfObject_v1`|11.3| | | | | | |
 |`CUsurfref`| | | | | | | |
 |`CUsurfref_st`| | | | | | | |
 |`CUsynchronizationPolicy`|11.0| | | | | | |
 |`CUsynchronizationPolicy_enum`|11.0| | | | | | |
 |`CUtexObject`| | | |`hipTextureObject_t`|1.7.0| | |
+|`CUtexObject_v1`|11.3| | |`hipTextureObject_t`|1.7.0| | |
 |`CUtexref`| | | | | | | |
 |`CUtexref_st`| | | |`textureReference`|1.6.0| | |
+|`CUuserObject`|11.3| | | | | | |
+|`CUuserObjectRetain_flags`|11.3| | | | | | |
+|`CUuserObjectRetain_flags_enum`|11.3| | | | | | |
+|`CUuserObject_flags`|11.3| | | | | | |
+|`CUuserObject_flags_enum`|11.3| | | | | | |
+|`CUuserObject_st`|11.3| | | | | | |
 |`CUuuid`| | | | | | | |
 |`CUuuid_st`| | | | | | | |
 |`__CUDACC__`| | | |`__HIPCC__`|1.6.0| | |
