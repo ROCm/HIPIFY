@@ -1302,6 +1302,7 @@
 |`cuStreamEndCapture`|10.0| | | | | | |
 |`cuStreamGetAttribute`|11.0| | | | | | |
 |`cuStreamGetCaptureInfo`|10.1| | | | | | |
+|`cuStreamGetCaptureInfo_v2`|11.3| | | | | | |
 |`cuStreamGetCtx`|9.2| | | | | | |
 |`cuStreamGetFlags`| | | |`hipStreamGetFlags`|1.6.0| | |
 |`cuStreamGetPriority`| | | |`hipStreamGetPriority`|2.0.0| | |
@@ -1309,6 +1310,7 @@
 |`cuStreamQuery`| | | |`hipStreamQuery`|1.6.0| | |
 |`cuStreamSetAttribute`|11.0| | | | | | |
 |`cuStreamSynchronize`| | | |`hipStreamSynchronize`|1.6.0| | |
+|`cuStreamUpdateCaptureDependencies`|11.3| | | | | | |
 |`cuStreamWaitEvent`| | | |`hipStreamWaitEvent`|1.6.0| | |
 |`cuThreadExchangeStreamCaptureMode`|10.1| | | | | | |
 
@@ -1358,7 +1360,7 @@
 |`cuFuncSetCacheConfig`| | | | | | | |
 |`cuFuncSetSharedMemConfig`| | | | | | | |
 |`cuLaunchCooperativeKernel`|9.0| | | | | | |
-|`cuLaunchCooperativeKernelMultiDevice`|9.0| | | | | | |
+|`cuLaunchCooperativeKernelMultiDevice`|9.0|11.3| | | | | |
 |`cuLaunchHostFunc`|10.0| | | | | | |
 |`cuLaunchKernel`| | | |`hipModuleLaunchKernel`|1.6.0| | |
 
@@ -1395,6 +1397,7 @@
 |`cuGraphChildGraphNodeGetGraph`|10.0| | | | | | |
 |`cuGraphClone`|10.0| | | | | | |
 |`cuGraphCreate`|10.0| | | | | | |
+|`cuGraphDebugDotPrint`|11.3| | | | | | |
 |`cuGraphDestroy`|10.0| | | | | | |
 |`cuGraphDestroyNode`|10.0| | | | | | |
 |`cuGraphEventRecordNodeGetEvent`|11.1| | | | | | |
@@ -1437,8 +1440,12 @@
 |`cuGraphNodeGetDependencies`|10.0| | | | | | |
 |`cuGraphNodeGetDependentNodes`|10.0| | | | | | |
 |`cuGraphNodeGetType`|10.0| | | | | | |
+|`cuGraphReleaseUserObject`|11.3| | | | | | |
 |`cuGraphRemoveDependencies`|10.0| | | | | | |
+|`cuGraphRetainUserObject`|11.3| | | | | | |
 |`cuGraphUpload`|11.1| | | | | | |
+|`cuUserObjectCreate`|11.3| | | | | | |
+|`cuUserObjectRetain`|11.3| | | | | | |
 
 ## **22. Occupancy**
 
@@ -1534,20 +1541,27 @@
 |`cuGraphicsUnmapResources`| | | | | | | |
 |`cuGraphicsUnregisterResource`| | | | | | | |
 
-## **29. Profiler Control [DEPRECATED]**
+## **29. Driver Entry Point Access**
+
+|**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|
+|:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|
+|`cuFlushGPUDirectRDMAWrites`|11.3| | | | | | |
+|`cuGetProcAddress`|11.3| | | | | | |
+
+## **30. Profiler Control [DEPRECATED]**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|
 |`cuProfilerInitialize`| |11.0| | | | | |
 
-## **30. Profiler Control**
+## **31. Profiler Control**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|
 |`cuProfilerStart`| | | |`hipProfilerStart`|1.6.0|3.0.0| |
 |`cuProfilerStop`| | | |`hipProfilerStop`|1.6.0|3.0.0| |
 
-## **31. OpenGL Interoperability**
+## **32. OpenGL Interoperability**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|
@@ -1565,7 +1579,7 @@
 |`cuGraphicsGLRegisterImage`| | | | | | | |
 |`cuWGLGetDevice`| | | | | | | |
 
-## **32. VDPAU Interoperability**
+## **33. VDPAU Interoperability**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|
@@ -1574,7 +1588,7 @@
 |`cuVDPAUCtxCreate`| | | | | | | |
 |`cuVDPAUGetDevice`| | | | | | | |
 
-## **33. EGL Interoperability**
+## **34. EGL Interoperability**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|
@@ -1591,7 +1605,7 @@
 |`cuGraphicsEGLRegisterImage`|9.1| | | | | | |
 |`cuGraphicsResourceGetMappedEglFrame`|9.1| | | | | | |
 
-## **34. Direct3D 9 Interoperability**
+## **35. Direct3D 9 Interoperability**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|
@@ -1612,7 +1626,7 @@
 |`cuD3D9UnregisterResource`| |9.2| | | | | |
 |`cuGraphicsD3D9RegisterResource`| | | | | | | |
 
-## **35. Direct3D 10 Interoperability**
+## **36. Direct3D 10 Interoperability**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|
@@ -1633,7 +1647,7 @@
 |`cuD3D10UnregisterResource`| |9.2| | | | | |
 |`cuGraphicsD3D10RegisterResource`| | | | | | | |
 
-## **36. Direct3D 11 Interoperability**
+## **37. Direct3D 11 Interoperability**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|
