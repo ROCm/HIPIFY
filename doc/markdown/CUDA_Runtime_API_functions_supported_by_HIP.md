@@ -608,6 +608,9 @@ Unsupported
 |`cudaDevAttrCooperativeMultiDeviceLaunch`|9.0| | |`hipDeviceAttributeCooperativeMultiDeviceLaunch`|2.6.0| | |
 |`cudaDevAttrDirectManagedMemAccessFromHost`|9.2| | |`hipDeviceAttributeDirectManagedMemAccessFromHost`|3.10.0| | |
 |`cudaDevAttrEccEnabled`| | | |`hipDeviceAttributeEccEnabled`|2.10.0| | |
+|`cudaDevAttrGPUDirectRDMAFlushWritesOptions`|11.3| | | | | | |
+|`cudaDevAttrGPUDirectRDMASupported`|11.3| | | | | | |
+|`cudaDevAttrGPUDirectRDMAWritesOrdering`|11.3| | | | | | |
 |`cudaDevAttrGlobalL1CacheSupported`| | | | | | | |
 |`cudaDevAttrGlobalMemoryBusWidth`| | | |`hipDeviceAttributeMemoryBusWidth`|1.6.0| | |
 |`cudaDevAttrGpuOverlap`| | | | | | | |
@@ -620,6 +623,7 @@ Unsupported
 |`cudaDevAttrL2CacheSize`| | | |`hipDeviceAttributeL2CacheSize`|1.6.0| | |
 |`cudaDevAttrLocalL1CacheSupported`| | | | | | | |
 |`cudaDevAttrManagedMemory`| | | |`hipDeviceAttributeManagedMemory`|3.10.0| | |
+|`cudaDevAttrMaxAccessPolicyWindowSize`|11.3| | | | | | |
 |`cudaDevAttrMaxBlockDimX`| | | |`hipDeviceAttributeMaxBlockDimX`|1.6.0| | |
 |`cudaDevAttrMaxBlockDimY`| | | |`hipDeviceAttributeMaxBlockDimY`|1.6.0| | |
 |`cudaDevAttrMaxBlockDimZ`| | | |`hipDeviceAttributeMaxBlockDimZ`|1.6.0| | |
@@ -627,6 +631,7 @@ Unsupported
 |`cudaDevAttrMaxGridDimX`| | | |`hipDeviceAttributeMaxGridDimX`|1.6.0| | |
 |`cudaDevAttrMaxGridDimY`| | | |`hipDeviceAttributeMaxGridDimY`|1.6.0| | |
 |`cudaDevAttrMaxGridDimZ`| | | |`hipDeviceAttributeMaxGridDimZ`|1.6.0| | |
+|`cudaDevAttrMaxPersistingL2CacheSize`|11.3| | | | | | |
 |`cudaDevAttrMaxPitch`| | | |`hipDeviceAttributeMaxPitch`|2.10.0| | |
 |`cudaDevAttrMaxRegistersPerBlock`| | | |`hipDeviceAttributeMaxRegistersPerBlock`|1.6.0| | |
 |`cudaDevAttrMaxRegistersPerMultiprocessor`| | | | | | | |
@@ -677,6 +682,7 @@ Unsupported
 |`cudaDevAttrMaxThreadsPerMultiProcessor`| | | |`hipDeviceAttributeMaxThreadsPerMultiProcessor`|1.6.0| | |
 |`cudaDevAttrMaxTimelineSemaphoreInteropSupported`|11.2| | | | | | |
 |`cudaDevAttrMemoryClockRate`| | | |`hipDeviceAttributeMemoryClockRate`|1.6.0| | |
+|`cudaDevAttrMemoryPoolSupportedHandleTypes`|11.3| | | | | | |
 |`cudaDevAttrMemoryPoolsSupported`|11.2| | | | | | |
 |`cudaDevAttrMultiGpuBoardGroupID`| | | | | | | |
 |`cudaDevAttrMultiProcessorCount`| | | |`hipDeviceAttributeMultiprocessorCount`|1.6.0| | |
@@ -800,6 +806,9 @@ Unsupported
 |`cudaEglResourceLocationSysmem`|9.1| | | | | | |
 |`cudaEglResourceLocationVidmem`|9.1| | | | | | |
 |`cudaEglStreamConnection`|9.1| | | | | | |
+|`cudaEnableDefault`|11.3| | | | | | |
+|`cudaEnableLegacyStream`|11.3| | | | | | |
+|`cudaEnablePerThreadDefaultStream`|11.3| | | | | | |
 |`cudaError`| | | |`hipError_t`|1.5.0| | |
 |`cudaErrorAddressOfConstant`| |3.1| | | | | |
 |`cudaErrorAlreadyAcquired`|10.1| | |`hipErrorAlreadyAcquired`|1.6.0| | |
@@ -965,6 +974,14 @@ Unsupported
 |`cudaExternalSemaphore_t`|10.0| | | | | | |
 |`cudaFilterModeLinear`| | | |`hipFilterModeLinear`|1.7.0| | |
 |`cudaFilterModePoint`| | | |`hipFilterModePoint`|1.6.0| | |
+|`cudaFlushGPUDirectRDMAWritesOptionHost`|11.3| | | | | | |
+|`cudaFlushGPUDirectRDMAWritesOptionMemOps`|11.3| | | | | | |
+|`cudaFlushGPUDirectRDMAWritesOptions`|11.3| | | | | | |
+|`cudaFlushGPUDirectRDMAWritesScope`|11.3| | | | | | |
+|`cudaFlushGPUDirectRDMAWritesTarget`|11.3| | | | | | |
+|`cudaFlushGPUDirectRDMAWritesTargetCurrentDevice`|11.3| | | | | | |
+|`cudaFlushGPUDirectRDMAWritesToAllDevices`|11.3| | | | | | |
+|`cudaFlushGPUDirectRDMAWritesToOwner`|11.3| | | | | | |
 |`cudaFormatModeAuto`| | | | | | | |
 |`cudaFormatModeForced`| | | | | | | |
 |`cudaFuncAttribute`|9.0| | |`hipFuncAttribute`|3.9.0| | |
@@ -985,6 +1002,22 @@ Unsupported
 |`cudaGLMapFlagsNone`| | | | | | | |
 |`cudaGLMapFlagsReadOnly`| | | | | | | |
 |`cudaGLMapFlagsWriteDiscard`| | | | | | | |
+|`cudaGPUDirectRDMAWritesOrdering`|11.3| | | | | | |
+|`cudaGPUDirectRDMAWritesOrderingAllDevices`|11.3| | | | | | |
+|`cudaGPUDirectRDMAWritesOrderingNone`|11.3| | | | | | |
+|`cudaGPUDirectRDMAWritesOrderingOwner`|11.3| | | | | | |
+|`cudaGetDriverEntryPointFlags`|11.3| | | | | | |
+|`cudaGraphDebugDotFlags`|11.3| | | | | | |
+|`cudaGraphDebugDotFlagsEventNodeParams`|11.3| | | | | | |
+|`cudaGraphDebugDotFlagsExtSemasSignalNodeParams`|11.3| | | | | | |
+|`cudaGraphDebugDotFlagsExtSemasWaitNodeParams`|11.3| | | | | | |
+|`cudaGraphDebugDotFlagsHandles`|11.3| | | | | | |
+|`cudaGraphDebugDotFlagsHostNodeParams`|11.3| | | | | | |
+|`cudaGraphDebugDotFlagsKernelNodeAttributes`|11.3| | | | | | |
+|`cudaGraphDebugDotFlagsKernelNodeParams`|11.3| | | | | | |
+|`cudaGraphDebugDotFlagsMemcpyNodeParams`|11.3| | | | | | |
+|`cudaGraphDebugDotFlagsMemsetNodeParams`|11.3| | | | | | |
+|`cudaGraphDebugDotFlagsVerbose`|11.3| | | | | | |
 |`cudaGraphExecUpdateError`|10.2| | | | | | |
 |`cudaGraphExecUpdateErrorFunctionChanged`|10.2| | | | | | |
 |`cudaGraphExecUpdateErrorNodeTypeChanged`|10.2| | | | | | |
@@ -1006,6 +1039,7 @@ Unsupported
 |`cudaGraphNodeTypeMemset`|10.0| | | | | | |
 |`cudaGraphNodeTypeWaitEvent`|11.1| | | | | | |
 |`cudaGraphNode_t`|10.0| | | | | | |
+|`cudaGraphUserObjectMove`|11.3| | | | | | |
 |`cudaGraph_t`|10.0| | | | | | |
 |`cudaGraphicsCubeFace`| | | | | | | |
 |`cudaGraphicsCubeFaceNegativeX`| | | | | | | |
@@ -1087,6 +1121,10 @@ Unsupported
 |`cudaMemLocationTypeInvalid`|11.2| | | | | | |
 |`cudaMemPoolAttr`|11.2| | | | | | |
 |`cudaMemPoolAttrReleaseThreshold`|11.2| | | | | | |
+|`cudaMemPoolAttrReservedMemCurrent`|11.3| | | | | | |
+|`cudaMemPoolAttrReservedMemHigh`|11.3| | | | | | |
+|`cudaMemPoolAttrUsedMemCurrent`|11.3| | | | | | |
+|`cudaMemPoolAttrUsedMemHigh`|11.3| | | | | | |
 |`cudaMemPoolProps`|11.2| | | | | | |
 |`cudaMemPoolPtrExportData`|11.2| | | | | | |
 |`cudaMemPoolReuseAllowInternalDependencies`|11.2| | | | | | |
@@ -1178,6 +1216,7 @@ Unsupported
 |`cudaSharedmemCarveoutDefault`|9.0| | | | | | |
 |`cudaSharedmemCarveoutMaxL1`|9.0| | | | | | |
 |`cudaSharedmemCarveoutMaxShared`|9.0| | | | | | |
+|`cudaStreamAddCaptureDependencies`|11.3| | | | | | |
 |`cudaStreamAttrID`|11.0| | | | | | |
 |`cudaStreamAttrValue`|11.0| | | | | | |
 |`cudaStreamAttributeAccessPolicyWindow`|11.0| | | | | | |
@@ -1195,6 +1234,8 @@ Unsupported
 |`cudaStreamLegacy`| | | | | | | |
 |`cudaStreamNonBlocking`| | | |`hipStreamNonBlocking`|1.6.0| | |
 |`cudaStreamPerThread`| | | | | | | |
+|`cudaStreamSetCaptureDependencies`|11.3| | | | | | |
+|`cudaStreamUpdateCaptureDependenciesFlags`|11.3| | | | | | |
 |`cudaStream_t`| | | |`hipStream_t`|1.5.0| | |
 |`cudaSuccess`| | | |`hipSuccess`|1.5.0| | |
 |`cudaSurfaceBoundaryMode`| | | |`hipSurfaceBoundaryMode`|1.9.0| | |
@@ -1218,6 +1259,10 @@ Unsupported
 |`cudaTextureTypeCubemap`| | | |`hipTextureTypeCubemap`|1.7.0| | |
 |`cudaTextureTypeCubemapLayered`| | | |`hipTextureTypeCubemapLayered`|1.7.0| | |
 |`cudaUUID_t`| | | | | | | |
+|`cudaUserObjectFlags`|11.3| | | | | | |
+|`cudaUserObjectNoDestructorSync`|11.3| | | | | | |
+|`cudaUserObjectRetainFlags`|11.3| | | | | | |
+|`cudaUserObject_t`|11.3| | | | | | |
 |`libraryPropertyType`|8.0| | | | | | |
 |`libraryPropertyType_t`|8.0| | | | | | |
 |`surfaceReference`| | | |`surfaceReference`|1.9.0| | |
