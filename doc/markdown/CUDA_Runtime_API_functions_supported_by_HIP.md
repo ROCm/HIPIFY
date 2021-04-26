@@ -5,6 +5,7 @@
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|
 |`cudaChooseDevice`| | | |`hipChooseDevice`|1.6.0| | |
+|`cudaDeviceFlushGPUDirectRDMAWrites`|11.3| | | | | | |
 |`cudaDeviceGetAttribute`| | | |`hipDeviceGetAttribute`|1.6.0| | |
 |`cudaDeviceGetByPCIBusId`| | | |`hipDeviceGetByPCIBusId`|1.6.0| | |
 |`cudaDeviceGetCacheConfig`| | | |`hipDeviceGetCacheConfig`|1.6.0| | |
@@ -118,7 +119,7 @@
 |`cudaGetParameterBuffer`| | | | | | | |
 |`cudaGetParameterBufferV2`| | | | | | | |
 |`cudaLaunchCooperativeKernel`|9.0| | |`hipLaunchCooperativeKernel`|2.6.0| | |
-|`cudaLaunchCooperativeKernelMultiDevice`|9.0| | |`hipLaunchCooperativeKernelMultiDevice`|2.6.0| | |
+|`cudaLaunchCooperativeKernelMultiDevice`|9.0|11.3| |`hipLaunchCooperativeKernelMultiDevice`|2.6.0| | |
 |`cudaLaunchHostFunc`|10.0| | | | | | |
 |`cudaLaunchKernel`| | | |`hipLaunchKernel`|1.6.0| | |
 |`cudaSetDoubleForDevice`| |10.0| | | | | |
@@ -432,6 +433,7 @@
 |`cudaGraphChildGraphNodeGetGraph`|10.0| | | | | | |
 |`cudaGraphClone`|10.0| | | | | | |
 |`cudaGraphCreate`|10.0| | | | | | |
+|`cudaGraphDebugDotPrint`|11.3| | | | | | |
 |`cudaGraphDestroy`|10.0| | | | | | |
 |`cudaGraphDestroyNode`|10.0| | | | | | |
 |`cudaGraphEventRecordNodeGetEvent`|11.1| | | | | | |
@@ -479,33 +481,44 @@
 |`cudaGraphNodeGetDependencies`|11.0| | | | | | |
 |`cudaGraphNodeGetDependentNodes`|11.0| | | | | | |
 |`cudaGraphNodeGetType`|11.0| | | | | | |
+|`cudaGraphReleaseUserObject`|11.3| | | | | | |
 |`cudaGraphRemoveDependencies`|11.0| | | | | | |
+|`cudaGraphRetainUserObject`|11.3| | | | | | |
 |`cudaGraphUpload`|11.1| | | | | | |
+|`cudaUserObjectCreate`|11.3| | | | | | |
+|`cudaUserObjectRelease`|11.3| | | | | | |
+|`cudaUserObjectRetain`|11.3| | | | | | |
 
-## **31. C++ API Routines**
+## **31. Driver Entry Point Access**
+
+|**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|
+|:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|
+|`cudaGetDriverEntryPoint`|11.3| | | | | | |
+
+## **32. C++ API Routines**
 
 Unsupported
 
-## **32. Interactions with the CUDA Driver API**
+## **33. Interactions with the CUDA Driver API**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|
 |`cudaGetFuncBySymbol`|11.0| | | | | | |
 
-## **33. Profiler Control [DEPRECATED]**
+## **34. Profiler Control [DEPRECATED]**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|
 |`cudaProfilerInitialize`| |11.0| | | | | |
 
-## **34. Profiler Control**
+## **35. Profiler Control**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|
 |`cudaProfilerStart`| | | |`hipProfilerStart`|1.6.0|3.0.0| |
 |`cudaProfilerStop`| | | |`hipProfilerStop`|1.6.0|3.0.0| |
 
-## **35. Data types used by CUDA Runtime**
+## **36. Data types used by CUDA Runtime**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|
@@ -1267,7 +1280,7 @@ Unsupported
 |`libraryPropertyType_t`|8.0| | | | | | |
 |`surfaceReference`| | | |`surfaceReference`|1.9.0| | |
 
-## **36. Execution Control [REMOVED]**
+## **37. Execution Control [REMOVED]**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|

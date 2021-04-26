@@ -562,7 +562,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuGraphClone",                                         {"hipGraphClone",                                           "", CONV_GRAPH, API_DRIVER, 21, HIP_UNSUPPORTED}},
   // cudaGraphCreate
   {"cuGraphCreate",                                        {"hipGraphCreate",                                          "", CONV_GRAPH, API_DRIVER, 21, HIP_UNSUPPORTED}},
-  //
+  // cudaGraphDebugDotPrint
   {"cuGraphDebugDotPrint",                                 {"hipGraphDebugDotPrint",                                   "", CONV_GRAPH, API_DRIVER, 21, HIP_UNSUPPORTED}},
   // cudaGraphDestroy
   {"cuGraphDestroy",                                       {"hipGraphDestroy",                                         "", CONV_GRAPH, API_DRIVER, 21, HIP_UNSUPPORTED}},
@@ -659,13 +659,15 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuGraphExecExternalSemaphoresSignalNodeSetParams",     {"hipGraphExecExternalSemaphoresSignalNodeSetParams",       "", CONV_GRAPH, API_DRIVER, 21, HIP_UNSUPPORTED}},
   // cudaGraphExecExternalSemaphoresWaitNodeSetParams
   {"cuGraphExecExternalSemaphoresWaitNodeSetParams",       {"hipGraphExecExternalSemaphoresWaitNodeSetParams",         "", CONV_GRAPH, API_DRIVER, 21, HIP_UNSUPPORTED}},
-  //
+  // cudaUserObjectCreate
   {"cuUserObjectCreate",                                   {"hipUserObjectCreate",                                     "", CONV_GRAPH, API_DRIVER, 21, HIP_UNSUPPORTED}},
-  //
+  // cudaUserObjectRetain
   {"cuUserObjectRetain",                                   {"hipUserObjectRetain",                                     "", CONV_GRAPH, API_DRIVER, 21, HIP_UNSUPPORTED}},
-  //
+  // cudaUserObjectRelease
+  {"cuUserObjectRelease",                                  {"hipUserObjectRelease",                                    "", CONV_GRAPH, API_DRIVER, 21, HIP_UNSUPPORTED}},
+  // cudaGraphRetainUserObject
   {"cuGraphRetainUserObject",                              {"hipGraphRetainUserObject",                                "", CONV_GRAPH, API_DRIVER, 21, HIP_UNSUPPORTED}},
-  //
+  // cudaGraphReleaseUserObject
   {"cuGraphReleaseUserObject",                             {"hipGraphReleaseUserObject",                               "", CONV_GRAPH, API_DRIVER, 21, HIP_UNSUPPORTED}},
 
   // 22. Occupancy
@@ -778,9 +780,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuGraphicsUnregisterResource",                         {"hipGraphicsUnregisterResource",                           "", CONV_GRAPHICS, API_DRIVER, 28, HIP_UNSUPPORTED}},
 
   // 29. Driver Entry Point Access
-  //
+  // cudaGetDriverEntryPoint
   {"cuGetProcAddress",                                     {"hipGetProcAddress",                                       "", CONV_PROFILER, API_DRIVER, 29, HIP_UNSUPPORTED}},
-  //
+  // cudaDeviceFlushGPUDirectRDMAWrites
   {"cuFlushGPUDirectRDMAWrites",                           {"hipFlushGPUDirectRDMAWrites",                             "", CONV_PROFILER, API_DRIVER, 29, HIP_UNSUPPORTED}},
 
   // 30. Profiler Control [DEPRECATED]
@@ -1182,6 +1184,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_FUNCTION_VER_MAP {
   {"cuGraphDebugDotPrint",                                 {CUDA_113, CUDA_0,   CUDA_0  }},
   {"cuUserObjectCreate",                                   {CUDA_113, CUDA_0,   CUDA_0  }},
   {"cuUserObjectRetain",                                   {CUDA_113, CUDA_0,   CUDA_0  }},
+  {"cuUserObjectRelease",                                  {CUDA_113, CUDA_0,   CUDA_0  }},
   {"cuGraphRetainUserObject",                              {CUDA_113, CUDA_0,   CUDA_0  }},
   {"cuGraphReleaseUserObject",                             {CUDA_113, CUDA_0,   CUDA_0  }},
   {"cuGetProcAddress",                                     {CUDA_113, CUDA_0,   CUDA_0  }},
