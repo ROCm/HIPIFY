@@ -1445,6 +1445,7 @@
 |`cuGraphRetainUserObject`|11.3| | | | | | |
 |`cuGraphUpload`|11.1| | | | | | |
 |`cuUserObjectCreate`|11.3| | | | | | |
+|`cuUserObjectRelease`|11.3| | | | | | |
 |`cuUserObjectRetain`|11.3| | | | | | |
 
 ## **22. Occupancy**

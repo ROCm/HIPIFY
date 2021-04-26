@@ -27,6 +27,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // 1. Device Management
   // no analogue
   {"cudaChooseDevice",                                        {"hipChooseDevice",                                        "", CONV_DEVICE, API_RUNTIME, 1}},
+  // cuFlushGPUDirectRDMAWrites
+  {"cudaDeviceFlushGPUDirectRDMAWrites",                      {"hipDeviceFlushGPUDirectRDMAWrites",                      "", CONV_DEVICE, API_RUNTIME, 1, HIP_UNSUPPORTED}},
   // cuDeviceGetAttribute
   {"cudaDeviceGetAttribute",                                  {"hipDeviceGetAttribute",                                  "", CONV_DEVICE, API_RUNTIME, 1}},
   // cuDeviceGetByPCIBusId
@@ -217,7 +219,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   {"cudaLaunchCooperativeKernel",                             {"hipLaunchCooperativeKernel",                             "", CONV_EXECUTION, API_RUNTIME, 7}},
   // no analogue
   // NOTE: Not equal to cuLaunchCooperativeKernelMultiDevice due to different signatures
-  {"cudaLaunchCooperativeKernelMultiDevice",                  {"hipLaunchCooperativeKernelMultiDevice",                  "", CONV_EXECUTION, API_RUNTIME, 7}},
+  {"cudaLaunchCooperativeKernelMultiDevice",                  {"hipLaunchCooperativeKernelMultiDevice",                  "", CONV_EXECUTION, API_RUNTIME, 7, CUDA_DEPRECATED}},
   // cuLaunchHostFunc
   {"cudaLaunchHostFunc",                                      {"hipLaunchHostFunc",                                      "", CONV_EXECUTION, API_RUNTIME, 7, HIP_UNSUPPORTED}},
   // no analogue
@@ -677,6 +679,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   {"cudaGraphClone",                                          {"hipGraphClone",                                          "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphCreate
   {"cudaGraphCreate",                                         {"hipGraphCreate",                                         "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
+  // cuGraphDebugDotPrint
+  {"cudaGraphDebugDotPrint",                                  {"hipGraphDebugDotPrint",                                  "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphDestroy
   {"cudaGraphDestroy",                                        {"hipGraphDestroy",                                        "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphDestroyNode
@@ -789,35 +793,49 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   {"cudaGraphExecExternalSemaphoresSignalNodeSetParams",      {"hipGraphExecExternalSemaphoresSignalNodeSetParams",      "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphExecExternalSemaphoresWaitNodeSetParams
   {"cudaGraphExecExternalSemaphoresWaitNodeSetParams",        {"hipGraphExecExternalSemaphoresWaitNodeSetParams",        "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
+  // cuUserObjectCreate
+  {"cudaUserObjectCreate",                                    {"hipUserObjectCreate",                                    "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
+  // cuUserObjectRetain
+  {"cudaUserObjectRetain",                                    {"hipUserObjectRetain",                                    "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
+  // cuUserObjectRelease
+  {"cudaUserObjectRelease",                                   {"hipUserObjectRelease",                                   "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
+  // cuGraphRetainUserObject
+  {"cudaGraphRetainUserObject",                               {"hipGraphRetainUserObject",                               "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
+  // cuGraphReleaseUserObject
+  {"cudaGraphReleaseUserObject",                              {"hipGraphReleaseUserObject",                              "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
 
-  // 31. C++ API Routines
+  // 31. Driver Entry Point Access
+  // cuGetProcAddress
+  {"cudaGetDriverEntryPoint",                                 {"hipGetProcAddress",                                      "", CONV_GRAPH, API_RUNTIME, 31, HIP_UNSUPPORTED}},
+
+  // 32. C++ API Routines
   // TODO
 
-  // 32. Interactions with the CUDA Driver API
-  {"cudaGetFuncBySymbol",                                     {"hipGetFuncBySymbol",                                     "", CONV_INTERACTION, API_RUNTIME, 32, HIP_UNSUPPORTED}},
+  // 33. Interactions with the CUDA Driver API
+  {"cudaGetFuncBySymbol",                                     {"hipGetFuncBySymbol",                                     "", CONV_INTERACTION, API_RUNTIME, 33, HIP_UNSUPPORTED}},
 
-  // 33. Profiler Control [DEPRECATED]
+  // 34. Profiler Control [DEPRECATED]
   // cuProfilerInitialize
-  {"cudaProfilerInitialize",                                  {"hipProfilerInitialize",                                  "", CONV_PROFILER, API_RUNTIME, 33, HIP_UNSUPPORTED}},
+  {"cudaProfilerInitialize",                                  {"hipProfilerInitialize",                                  "", CONV_PROFILER, API_RUNTIME, 34, HIP_UNSUPPORTED}},
 
-  // 34. Profiler Control
+  // 35. Profiler Control
   // cuProfilerStart
-  {"cudaProfilerStart",                                       {"hipProfilerStart",                                       "", CONV_PROFILER, API_RUNTIME, 34, HIP_DEPRECATED}},
+  {"cudaProfilerStart",                                       {"hipProfilerStart",                                       "", CONV_PROFILER, API_RUNTIME, 35, HIP_DEPRECATED}},
   // cuProfilerStop
-  {"cudaProfilerStop",                                        {"hipProfilerStop",                                        "", CONV_PROFILER, API_RUNTIME, 34, HIP_DEPRECATED}},
+  {"cudaProfilerStop",                                        {"hipProfilerStop",                                        "", CONV_PROFILER, API_RUNTIME, 35, HIP_DEPRECATED}},
 
-  // 35. Data types used by CUDA Runtime
+  // 36. Data types used by CUDA Runtime
   // NOTE: in a separate file
 
-  // 36. Execution Control [REMOVED]
+  // 37. Execution Control [REMOVED]
   // NOTE: Removed in CUDA 10.1
   // no analogue
-  {"cudaConfigureCall",                                       {"hipConfigureCall",                                       "", CONV_EXECUTION, API_RUNTIME, 36, CUDA_REMOVED}},
+  {"cudaConfigureCall",                                       {"hipConfigureCall",                                       "", CONV_EXECUTION, API_RUNTIME, 37, CUDA_REMOVED}},
   // no analogue
   // NOTE: Not equal to cuLaunch due to different signatures
-  {"cudaLaunch",                                              {"hipLaunchByPtr",                                         "", CONV_EXECUTION, API_RUNTIME, 36, CUDA_REMOVED}},
+  {"cudaLaunch",                                              {"hipLaunchByPtr",                                         "", CONV_EXECUTION, API_RUNTIME, 37, CUDA_REMOVED}},
   // no analogue
-  {"cudaSetupArgument",                                       {"hipSetupArgument",                                       "", CONV_EXECUTION, API_RUNTIME, 36, CUDA_REMOVED}},
+  {"cudaSetupArgument",                                       {"hipSetupArgument",                                       "", CONV_EXECUTION, API_RUNTIME, 37, CUDA_REMOVED}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_FUNCTION_VER_MAP {
@@ -848,7 +866,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_FUNCTION_VER_MAP {
   {"cudaWaitExternalSemaphoresAsync",                         {CUDA_100, CUDA_0,   CUDA_0  }},
   {"cudaFuncSetAttribute",                                    {CUDA_90,  CUDA_0,   CUDA_0  }},
   {"cudaLaunchCooperativeKernel",                             {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cudaLaunchCooperativeKernelMultiDevice",                  {CUDA_90,  CUDA_0,   CUDA_0  }},
+  {"cudaLaunchCooperativeKernelMultiDevice",                  {CUDA_90,  CUDA_113, CUDA_0  }},
   {"cudaLaunchHostFunc",                                      {CUDA_100, CUDA_0,   CUDA_0  }},
   {"cudaSetDoubleForDevice",                                  {CUDA_0,   CUDA_100, CUDA_0  }},
   {"cudaSetDoubleForHost",                                    {CUDA_0,   CUDA_100, CUDA_0  }},
@@ -1012,6 +1030,14 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_FUNCTION_VER_MAP {
   {"cudaGraphExternalSemaphoresWaitNodeSetParams",            {CUDA_112, CUDA_0,   CUDA_0  }},
   {"cudaGraphExecExternalSemaphoresSignalNodeSetParams",      {CUDA_112, CUDA_0,   CUDA_0  }},
   {"cudaGraphExecExternalSemaphoresWaitNodeSetParams",        {CUDA_112, CUDA_0,   CUDA_0  }},
+  {"cudaDeviceFlushGPUDirectRDMAWrites",                      {CUDA_113, CUDA_0,   CUDA_0  }},
+  {"cudaGraphDebugDotPrint",                                  {CUDA_113, CUDA_0,   CUDA_0  }},
+  {"cudaUserObjectCreate",                                    {CUDA_113, CUDA_0,   CUDA_0  }},
+  {"cudaUserObjectRetain",                                    {CUDA_113, CUDA_0,   CUDA_0  }},
+  {"cudaUserObjectRelease",                                   {CUDA_113, CUDA_0,   CUDA_0  }},
+  {"cudaGraphRetainUserObject",                               {CUDA_113, CUDA_0,   CUDA_0  }},
+  {"cudaGraphReleaseUserObject",                              {CUDA_113, CUDA_0,   CUDA_0  }},
+  {"cudaGetDriverEntryPoint",                                 {CUDA_113, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP {
@@ -1184,10 +1210,11 @@ const std::map<unsigned int, llvm::StringRef> CUDA_RUNTIME_API_SECTION_MAP {
   {28, "Surface Object Management"},
   {29, "Version Management"},
   {30, "Graph Management"},
-  {31, "C++ API Routines"},
-  {32, "Interactions with the CUDA Driver API"},
-  {33, "Profiler Control [DEPRECATED]"},
-  {34, "Profiler Control"},
-  {35, "Data types used by CUDA Runtime"},
-  {36, "Execution Control [REMOVED]"},
+  {31, "Driver Entry Point Access"},
+  {32, "C++ API Routines"},
+  {33, "Interactions with the CUDA Driver API"},
+  {34, "Profiler Control [DEPRECATED]"},
+  {35, "Profiler Control"},
+  {36, "Data types used by CUDA Runtime"},
+  {37, "Execution Control [REMOVED]"},
 };
