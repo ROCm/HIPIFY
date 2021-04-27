@@ -479,10 +479,15 @@ my %deprecated_funcs = (
     "CU_DEVICE_ATTRIBUTE_GPU_OVERLAP" => "5.0",
     "CU_DEVICE_ATTRIBUTE_CAN_TEX2D_GATHER" => "5.0",
     "CU_CTX_BLOCKING_SYNC" => "4.0",
+    "CUSPARSE_MV_ALG_DEFAULT" => "11.3",
+    "CUSPARSE_MM_ALG_DEFAULT" => "11.0",
     "CUSPARSE_HYB_PARTITION_USER" => "10.2",
     "CUSPARSE_HYB_PARTITION_MAX" => "10.2",
     "CUSPARSE_HYB_PARTITION_AUTO" => "10.2",
+    "CUSPARSE_CSRMV_ALG2" => "11.2",
+    "CUSPARSE_CSRMV_ALG1" => "11.2",
     "CUSPARSE_CSRMM_ALG1" => "11.0",
+    "CUSPARSE_COOMV_ALG" => "11.2",
     "CUSPARSE_COOMM_ALG3" => "11.0",
     "CUSPARSE_COOMM_ALG2" => "11.0",
     "CUSPARSE_COOMM_ALG1" => "11.0",
@@ -2658,6 +2663,10 @@ sub simpleSubstitutions {
     $ft{'numeric_literal'} += s/\bCUSPARSE_SOLVE_POLICY_NO_LEVEL\b/HIPSPARSE_SOLVE_POLICY_NO_LEVEL/g;
     $ft{'numeric_literal'} += s/\bCUSPARSE_SOLVE_POLICY_USE_LEVEL\b/HIPSPARSE_SOLVE_POLICY_USE_LEVEL/g;
     $ft{'numeric_literal'} += s/\bCUSPARSE_SPGEMM_DEFAULT\b/HIPSPARSE_SPGEMM_DEFAULT/g;
+    $ft{'numeric_literal'} += s/\bCUSPARSE_SPMV_ALG_DEFAULT\b/HIPSPARSE_MV_ALG_DEFAULT/g;
+    $ft{'numeric_literal'} += s/\bCUSPARSE_SPMV_COO_ALG1\b/HIPSPARSE_COOMV_ALG/g;
+    $ft{'numeric_literal'} += s/\bCUSPARSE_SPMV_CSR_ALG1\b/HIPSPARSE_CSRMV_ALG1/g;
+    $ft{'numeric_literal'} += s/\bCUSPARSE_SPMV_CSR_ALG2\b/HIPSPARSE_CSRMV_ALG2/g;
     $ft{'numeric_literal'} += s/\bCUSPARSE_STATUS_ALLOC_FAILED\b/HIPSPARSE_STATUS_ALLOC_FAILED/g;
     $ft{'numeric_literal'} += s/\bCUSPARSE_STATUS_ARCH_MISMATCH\b/HIPSPARSE_STATUS_ARCH_MISMATCH/g;
     $ft{'numeric_literal'} += s/\bCUSPARSE_STATUS_EXECUTION_FAILED\b/HIPSPARSE_STATUS_EXECUTION_FAILED/g;
@@ -3976,6 +3985,7 @@ sub warnUnsupportedFunctions {
         "cusparseSpSV_createDescr",
         "cusparseSpSV_bufferSize",
         "cusparseSpSV_analysis",
+        "cusparseSpSVAlg_t",
         "cusparseSpMatSetStridedBatch",
         "cusparseSpMatSetNumBatches",
         "cusparseSpMatSetAttribute",
@@ -3983,6 +3993,7 @@ sub warnUnsupportedFunctions {
         "cusparseSpMatGetNumBatches",
         "cusparseSpMatGetAttribute",
         "cusparseSpMatDescr",
+        "cusparseSpMatAttribute_t",
         "cusparseSpMM_bufferSize",
         "cusparseSpMMAlg_t",
         "cusparseSpMM",
@@ -6040,6 +6051,7 @@ sub warnUnsupportedFunctions {
         "CUSPARSE_VER_MAJOR",
         "CUSPARSE_VER_BUILD",
         "CUSPARSE_VERSION",
+        "CUSPARSE_SPSV_ALG_DEFAULT",
         "CUSPARSE_SPMM_CSR_ALG2",
         "CUSPARSE_SPMM_CSR_ALG1",
         "CUSPARSE_SPMM_COO_ALG4",
@@ -6052,6 +6064,8 @@ sub warnUnsupportedFunctions {
         "CUSPARSE_SPMMA_ALG3",
         "CUSPARSE_SPMMA_ALG2",
         "CUSPARSE_SPMMA_ALG1",
+        "CUSPARSE_SPMAT_FILL_MODE",
+        "CUSPARSE_SPMAT_DIAG_TYPE",
         "CUSPARSE_SPARSETODENSE_ALG_DEFAULT",
         "CUSPARSE_ORDER_ROW",
         "CUSPARSE_ORDER_COL",
