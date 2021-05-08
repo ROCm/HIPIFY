@@ -273,15 +273,15 @@ enum hipVersions {
 };
 
 struct cudaAPIversions {
-  cudaVersions appeared = cudaVersions::CUDA_0;
-  cudaVersions deprecated = cudaVersions::CUDA_0;
-  cudaVersions removed = cudaVersions::CUDA_0;
+  cudaVersions appeared;
+  cudaVersions deprecated;
+  cudaVersions removed;
 };
 
 struct hipAPIversions {
-  hipVersions appeared = hipVersions::HIP_0;
-  hipVersions deprecated = hipVersions::HIP_0;
-  hipVersions removed = hipVersions::HIP_0;
+  hipVersions appeared;
+  hipVersions deprecated;
+  hipVersions removed;
 };
 
 // The names of various fields in in the statistics reports.
