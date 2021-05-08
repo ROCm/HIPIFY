@@ -2527,6 +2527,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_TYPE_NAME_VER_MAP {
   {"CUuserObjectRetain_flags",                                         {CUDA_113, CUDA_0,   CUDA_0  }},
   {"CUuserObjectRetain_flags_enum",                                    {CUDA_113, CUDA_0,   CUDA_0  }},
   {"CU_GRAPH_USER_OBJECT_MOVE",                                        {CUDA_113, CUDA_0,   CUDA_0  }},
+  {"CU_STREAM_WAIT_VALUE_NOR",                                         {CUDA_90,  CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {
