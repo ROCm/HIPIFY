@@ -2277,13 +2277,16 @@ sub simpleSubstitutions {
     $ft{'type'} += s/\bcudnnActivationDescriptor_t\b/hipdnnActivationDescriptor_t/g;
     $ft{'type'} += s/\bcudnnActivationMode_t\b/hipdnnActivationMode_t/g;
     $ft{'type'} += s/\bcudnnBatchNormMode_t\b/hipdnnBatchNormMode_t/g;
+    $ft{'type'} += s/\bcudnnConvolutionBwdDataAlgoPerfStruct\b/hipdnnConvolutionBwdDataAlgoPerf_t/g;
     $ft{'type'} += s/\bcudnnConvolutionBwdDataAlgoPerf_t\b/hipdnnConvolutionBwdDataAlgoPerf_t/g;
     $ft{'type'} += s/\bcudnnConvolutionBwdDataAlgo_t\b/hipdnnConvolutionBwdDataAlgo_t/g;
     $ft{'type'} += s/\bcudnnConvolutionBwdDataPreference_t\b/hipdnnConvolutionBwdDataPreference_t/g;
+    $ft{'type'} += s/\bcudnnConvolutionBwdFilterAlgoPerfStruct\b/hipdnnConvolutionBwdFilterAlgoPerf_t/g;
     $ft{'type'} += s/\bcudnnConvolutionBwdFilterAlgoPerf_t\b/hipdnnConvolutionBwdFilterAlgoPerf_t/g;
     $ft{'type'} += s/\bcudnnConvolutionBwdFilterAlgo_t\b/hipdnnConvolutionBwdFilterAlgo_t/g;
     $ft{'type'} += s/\bcudnnConvolutionBwdFilterPreference_t\b/hipdnnConvolutionBwdFilterPreference_t/g;
     $ft{'type'} += s/\bcudnnConvolutionDescriptor_t\b/hipdnnConvolutionDescriptor_t/g;
+    $ft{'type'} += s/\bcudnnConvolutionFwdAlgoPerfStruct\b/hipdnnConvolutionFwdAlgoPerf_t/g;
     $ft{'type'} += s/\bcudnnConvolutionFwdAlgoPerf_t\b/hipdnnConvolutionFwdAlgoPerf_t/g;
     $ft{'type'} += s/\bcudnnConvolutionFwdAlgo_t\b/hipdnnConvolutionFwdAlgo_t/g;
     $ft{'type'} += s/\bcudnnConvolutionFwdPreference_t\b/hipdnnConvolutionFwdPreference_t/g;
@@ -2470,6 +2473,7 @@ sub simpleSubstitutions {
     $ft{'numeric_literal'} += s/\bCUDNN_ACTIVATION_IDENTITY\b/HIPDNN_ACTIVATION_PATHTRU/g;
     $ft{'numeric_literal'} += s/\bCUDNN_ACTIVATION_RELU\b/HIPDNN_ACTIVATION_RELU/g;
     $ft{'numeric_literal'} += s/\bCUDNN_ACTIVATION_SIGMOID\b/HIPDNN_ACTIVATION_SIGMOID/g;
+    $ft{'numeric_literal'} += s/\bCUDNN_ACTIVATION_SWISH\b/HIPDNN_ACTIVATION_SWISH/g;
     $ft{'numeric_literal'} += s/\bCUDNN_ACTIVATION_TANH\b/HIPDNN_ACTIVATION_TANH/g;
     $ft{'numeric_literal'} += s/\bCUDNN_BATCHNORM_PER_ACTIVATION\b/HIPDNN_BATCHNORM_PER_ACTIVATION/g;
     $ft{'numeric_literal'} += s/\bCUDNN_BATCHNORM_SPATIAL\b/HIPDNN_BATCHNORM_SPATIAL/g;
@@ -4398,6 +4402,7 @@ sub warnUnsupportedFunctions {
         "cudnnDestroyAlgorithmDescriptor",
         "cudnnDeriveNormTensorDescriptor",
         "cudnnDebug_t",
+        "cudnnDebugStruct",
         "cudnnCreateTensorTransformDescriptor",
         "cudnnCreateSpatialTransformerDescriptor",
         "cudnnCreateSeqDataDescriptor",
@@ -4439,12 +4444,14 @@ sub warnUnsupportedFunctions {
         "cudnnBackendDescriptor_t",
         "cudnnBackendDescriptorType_t",
         "cudnnBackendCreateDescriptor",
+        "cudnnBackendBehaviorNote_t",
         "cudnnBackendAttributeType_t",
         "cudnnBackendAttributeName_t",
         "cudnnAttnStruct",
         "cudnnAttnQueryMap_t",
         "cudnnAttnDescriptor_t",
         "cudnnAlgorithm_t",
+        "cudnnAlgorithmUnionStruct",
         "cudnnAlgorithmStruct",
         "cudnnAlgorithmPerformance_t",
         "cudnnAlgorithmPerformanceStruct",
@@ -6141,6 +6148,7 @@ sub warnUnsupportedFunctions {
         "CUDNN_TYPE_CONVOLUTION_MODE",
         "CUDNN_TYPE_BOOLEAN",
         "CUDNN_TYPE_BN_FINALIZE_STATS_MODE",
+        "CUDNN_TYPE_BEHAVIOR_NOTE",
         "CUDNN_TYPE_BACKEND_DESCRIPTOR",
         "CUDNN_TYPE_ATTRIB_NAME",
         "CUDNN_TRANSFORM_UNFOLD",
@@ -6366,6 +6374,8 @@ sub warnUnsupportedFunctions {
         "CUDNN_CNN_INFER_MAJOR",
         "CUDNN_BN_FINALIZE_STATISTICS_TRAINING",
         "CUDNN_BN_FINALIZE_STATISTICS_INFERENCE",
+        "CUDNN_BEHAVIOR_NOTE_TYPE_COUNT",
+        "CUDNN_BEHAVIOR_NOTE_RUNTIME_COMPILATION",
         "CUDNN_BATCHNORM_OPS_BN_ADD_ACTIVATION",
         "CUDNN_BATCHNORM_OPS_BN_ACTIVATION",
         "CUDNN_BATCHNORM_OPS_BN",
@@ -6381,6 +6391,7 @@ sub warnUnsupportedFunctions {
         "CUDNN_BACKEND_OPERATION_CONVOLUTION_BACKWARD_FILTER_DESCRIPTOR",
         "CUDNN_BACKEND_OPERATION_CONVOLUTION_BACKWARD_DATA_DESCRIPTOR",
         "CUDNN_BACKEND_OPERATION_BN_FINALIZE_STATISTICS_DESCRIPTOR",
+        "CUDNN_BACKEND_OPERATION_BN_BWD_WEIGHTS_DESCRIPTOR",
         "CUDNN_BACKEND_OPERATIONGRAPH_DESCRIPTOR",
         "CUDNN_BACKEND_MATMUL_DESCRIPTOR",
         "CUDNN_BACKEND_LAYOUT_INFO_DESCRIPTOR",
@@ -6472,6 +6483,17 @@ sub warnUnsupportedFunctions {
         "CUDNN_ATTR_OPERATION_BN_FINALIZE_EPSILON_DESC",
         "CUDNN_ATTR_OPERATION_BN_FINALIZE_BIAS_DESC",
         "CUDNN_ATTR_OPERATION_BN_FINALIZE_ACCUM_COUNT_DESC",
+        "CUDNN_ATTR_OPERATION_BN_BWD_WEIGHTS_X_DESC",
+        "CUDNN_ATTR_OPERATION_BN_BWD_WEIGHTS_MEAN_DESC",
+        "CUDNN_ATTR_OPERATION_BN_BWD_WEIGHTS_MATH_PREC",
+        "CUDNN_ATTR_OPERATION_BN_BWD_WEIGHTS_INVSTD_DESC",
+        "CUDNN_ATTR_OPERATION_BN_BWD_WEIGHTS_EQ_X_SCALE_DESC",
+        "CUDNN_ATTR_OPERATION_BN_BWD_WEIGHTS_EQ_DY_SCALE_DESC",
+        "CUDNN_ATTR_OPERATION_BN_BWD_WEIGHTS_EQ_BIAS",
+        "CUDNN_ATTR_OPERATION_BN_BWD_WEIGHTS_DY_DESC",
+        "CUDNN_ATTR_OPERATION_BN_BWD_WEIGHTS_DBN_SCALE_DESC",
+        "CUDNN_ATTR_OPERATION_BN_BWD_WEIGHTS_DBN_BIAS_DESC",
+        "CUDNN_ATTR_OPERATION_BN_BWD_WEIGHTS_BN_SCALE_DESC",
         "CUDNN_ATTR_OPERATIONGRAPH_OPS",
         "CUDNN_ATTR_OPERATIONGRAPH_HANDLE",
         "CUDNN_ATTR_OPERATIONGRAPH_ENGINE_GLOBAL_COUNT",
@@ -6498,6 +6520,7 @@ sub warnUnsupportedFunctions {
         "CUDNN_ATTR_ENGINE_LAYOUT_INFO",
         "CUDNN_ATTR_ENGINE_KNOB_INFO",
         "CUDNN_ATTR_ENGINE_GLOBAL_INDEX",
+        "CUDNN_ATTR_ENGINE_BEHAVIOR_NOTE",
         "CUDNN_ATTR_ENGINEHEUR_RESULTS",
         "CUDNN_ATTR_ENGINEHEUR_OPERATION_GRAPH",
         "CUDNN_ATTR_ENGINEHEUR_MODE",

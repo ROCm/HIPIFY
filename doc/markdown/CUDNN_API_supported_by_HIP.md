@@ -13,6 +13,7 @@
 |`CUDNN_ACTIVATION_IDENTITY`|7.1.3| | |`HIPDNN_ACTIVATION_PATHTRU`| | | |
 |`CUDNN_ACTIVATION_RELU`|1.0.0| | |`HIPDNN_ACTIVATION_RELU`| | | |
 |`CUDNN_ACTIVATION_SIGMOID`|1.0.0| | |`HIPDNN_ACTIVATION_SIGMOID`| | | |
+|`CUDNN_ACTIVATION_SWISH`|8.2.0| | |`HIPDNN_ACTIVATION_SWISH`| | | |
 |`CUDNN_ACTIVATION_TANH`|1.0.0| | |`HIPDNN_ACTIVATION_TANH`| | | |
 |`CUDNN_ADV_INFER_MAJOR`|8.0.1| | | | | | |
 |`CUDNN_ADV_INFER_MINOR`|8.0.1| | | | | | |
@@ -38,6 +39,7 @@
 |`CUDNN_ATTR_ENGINEHEUR_MODE`|8.0.1| | | | | | |
 |`CUDNN_ATTR_ENGINEHEUR_OPERATION_GRAPH`|8.0.1| | | | | | |
 |`CUDNN_ATTR_ENGINEHEUR_RESULTS`|8.0.1| | | | | | |
+|`CUDNN_ATTR_ENGINE_BEHAVIOR_NOTE`|8.2.0| | | | | | |
 |`CUDNN_ATTR_ENGINE_GLOBAL_INDEX`|8.0.1| | | | | | |
 |`CUDNN_ATTR_ENGINE_KNOB_INFO`|8.0.2| | | | | | |
 |`CUDNN_ATTR_ENGINE_LAYOUT_INFO`|8.0.2| | | | | | |
@@ -64,6 +66,17 @@
 |`CUDNN_ATTR_OPERATIONGRAPH_ENGINE_GLOBAL_COUNT`|8.0.1| | | | | | |
 |`CUDNN_ATTR_OPERATIONGRAPH_HANDLE`|8.0.1| | | | | | |
 |`CUDNN_ATTR_OPERATIONGRAPH_OPS`|8.0.1| | | | | | |
+|`CUDNN_ATTR_OPERATION_BN_BWD_WEIGHTS_BN_SCALE_DESC`|8.2.0| | | | | | |
+|`CUDNN_ATTR_OPERATION_BN_BWD_WEIGHTS_DBN_BIAS_DESC`|8.2.0| | | | | | |
+|`CUDNN_ATTR_OPERATION_BN_BWD_WEIGHTS_DBN_SCALE_DESC`|8.2.0| | | | | | |
+|`CUDNN_ATTR_OPERATION_BN_BWD_WEIGHTS_DY_DESC`|8.2.0| | | | | | |
+|`CUDNN_ATTR_OPERATION_BN_BWD_WEIGHTS_EQ_BIAS`|8.2.0| | | | | | |
+|`CUDNN_ATTR_OPERATION_BN_BWD_WEIGHTS_EQ_DY_SCALE_DESC`|8.2.0| | | | | | |
+|`CUDNN_ATTR_OPERATION_BN_BWD_WEIGHTS_EQ_X_SCALE_DESC`|8.2.0| | | | | | |
+|`CUDNN_ATTR_OPERATION_BN_BWD_WEIGHTS_INVSTD_DESC`|8.2.0| | | | | | |
+|`CUDNN_ATTR_OPERATION_BN_BWD_WEIGHTS_MATH_PREC`|8.2.0| | | | | | |
+|`CUDNN_ATTR_OPERATION_BN_BWD_WEIGHTS_MEAN_DESC`|8.2.0| | | | | | |
+|`CUDNN_ATTR_OPERATION_BN_BWD_WEIGHTS_X_DESC`|8.2.0| | | | | | |
 |`CUDNN_ATTR_OPERATION_BN_FINALIZE_ACCUM_COUNT_DESC`|8.1.0| | | | | | |
 |`CUDNN_ATTR_OPERATION_BN_FINALIZE_BIAS_DESC`|8.1.0| | | | | | |
 |`CUDNN_ATTR_OPERATION_BN_FINALIZE_EPSILON_DESC`|8.1.0| | | | | | |
@@ -155,6 +168,7 @@
 |`CUDNN_BACKEND_LAYOUT_INFO_DESCRIPTOR`|8.0.1| | | | | | |
 |`CUDNN_BACKEND_MATMUL_DESCRIPTOR`|8.1.0| | | | | | |
 |`CUDNN_BACKEND_OPERATIONGRAPH_DESCRIPTOR`|8.0.1| | | | | | |
+|`CUDNN_BACKEND_OPERATION_BN_BWD_WEIGHTS_DESCRIPTOR`| | | | | | | |
 |`CUDNN_BACKEND_OPERATION_BN_FINALIZE_STATISTICS_DESCRIPTOR`|8.1.0| | | | | | |
 |`CUDNN_BACKEND_OPERATION_CONVOLUTION_BACKWARD_DATA_DESCRIPTOR`|8.0.1| | | | | | |
 |`CUDNN_BACKEND_OPERATION_CONVOLUTION_BACKWARD_FILTER_DESCRIPTOR`|8.0.1| | | | | | |
@@ -173,6 +187,8 @@
 |`CUDNN_BATCHNORM_PER_ACTIVATION`|4.0.0| | |`HIPDNN_BATCHNORM_PER_ACTIVATION`| | | |
 |`CUDNN_BATCHNORM_SPATIAL`|4.0.0| | |`HIPDNN_BATCHNORM_SPATIAL`| | | |
 |`CUDNN_BATCHNORM_SPATIAL_PERSISTENT`|7.0.5| | |`HIPDNN_BATCHNORM_SPATIAL_PERSISTENT`| | | |
+|`CUDNN_BEHAVIOR_NOTE_RUNTIME_COMPILATION`|8.2.0| | | | | | |
+|`CUDNN_BEHAVIOR_NOTE_TYPE_COUNT`|8.2.0| | | | | | |
 |`CUDNN_BIDIRECTIONAL`|5.0.0| | |`HIPDNN_BIDIRECTIONAL`| | | |
 |`CUDNN_BN_FINALIZE_STATISTICS_INFERENCE`|8.1.0| | | | | | |
 |`CUDNN_BN_FINALIZE_STATISTICS_TRAINING`|8.1.0| | | | | | |
@@ -500,6 +516,7 @@
 |`CUDNN_TRANSFORM_UNFOLD`|7.5.0| | | | | | |
 |`CUDNN_TYPE_ATTRIB_NAME`|8.0.1| | | | | | |
 |`CUDNN_TYPE_BACKEND_DESCRIPTOR`|8.0.1| | | | | | |
+|`CUDNN_TYPE_BEHAVIOR_NOTE`|8.2.0| | | | | | |
 |`CUDNN_TYPE_BN_FINALIZE_STATS_MODE`|8.1.0| | | | | | |
 |`CUDNN_TYPE_BOOLEAN`|8.0.1| | | | | | |
 |`CUDNN_TYPE_CONVOLUTION_MODE`|8.0.1| | | | | | |
@@ -528,12 +545,14 @@
 |`cudnnAlgorithmPerformanceStruct`|7.1.3| | | | | | |
 |`cudnnAlgorithmPerformance_t`|7.1.3| | | | | | |
 |`cudnnAlgorithmStruct`|7.1.3| | | | | | |
+|`cudnnAlgorithmUnionStruct`|8.2.0| | | | | | |
 |`cudnnAlgorithm_t`|7.1.3| | | | | | |
 |`cudnnAttnDescriptor_t`|7.5.0| | | | | | |
 |`cudnnAttnQueryMap_t`|7.5.0| | | | | | |
 |`cudnnAttnStruct`|7.5.0| | | | | | |
 |`cudnnBackendAttributeName_t`|8.0.1| | | | | | |
 |`cudnnBackendAttributeType_t`|8.0.1| | | | | | |
+|`cudnnBackendBehaviorNote_t`|8.2.0| | | | | | |
 |`cudnnBackendDescriptorType_t`|8.0.1| | | | | | |
 |`cudnnBackendDescriptor_t`|8.0.1| | | | | | |
 |`cudnnBackendHeurMode_t`|8.0.1| | | | | | |
@@ -548,19 +567,23 @@
 |`cudnnCTCLossStruct`|7.0.5| | | | | | |
 |`cudnnCallback_t`|7.1.3| | | | | | |
 |`cudnnContext`|1.0.0| | | | | | |
+|`cudnnConvolutionBwdDataAlgoPerfStruct`|8.2.0| | |`hipdnnConvolutionBwdDataAlgoPerf_t`| | | |
 |`cudnnConvolutionBwdDataAlgoPerf_t`|3.0.0| | |`hipdnnConvolutionBwdDataAlgoPerf_t`| | | |
 |`cudnnConvolutionBwdDataAlgo_t`|3.0.0| | |`hipdnnConvolutionBwdDataAlgo_t`| | | |
 |`cudnnConvolutionBwdDataPreference_t`|3.0.0|7.6.5|8.0.1|`hipdnnConvolutionBwdDataPreference_t`| | | |
+|`cudnnConvolutionBwdFilterAlgoPerfStruct`|8.2.0| | |`hipdnnConvolutionBwdFilterAlgoPerf_t`| | | |
 |`cudnnConvolutionBwdFilterAlgoPerf_t`|3.0.0| | |`hipdnnConvolutionBwdFilterAlgoPerf_t`| | | |
 |`cudnnConvolutionBwdFilterAlgo_t`|3.0.0| | |`hipdnnConvolutionBwdFilterAlgo_t`| | | |
 |`cudnnConvolutionBwdFilterPreference_t`|3.0.0|7.6.5|8.0.1|`hipdnnConvolutionBwdFilterPreference_t`| | | |
 |`cudnnConvolutionDescriptor_t`|1.0.0| | |`hipdnnConvolutionDescriptor_t`| | | |
+|`cudnnConvolutionFwdAlgoPerfStruct`|8.2.0| | |`hipdnnConvolutionFwdAlgoPerf_t`| | | |
 |`cudnnConvolutionFwdAlgoPerf_t`|3.0.0| | |`hipdnnConvolutionFwdAlgoPerf_t`| | | |
 |`cudnnConvolutionFwdAlgo_t`|2.0.0| | |`hipdnnConvolutionFwdAlgo_t`| | | |
 |`cudnnConvolutionFwdPreference_t`|2.0.0|7.6.5|8.0.1|`hipdnnConvolutionFwdPreference_t`| | | |
 |`cudnnConvolutionMode_t`|1.0.0| | |`hipdnnConvolutionMode_t`| | | |
 |`cudnnConvolutionStruct`|1.0.0| | | | | | |
 |`cudnnDataType_t`|1.0.0| | |`hipdnnDataType_t`| | | |
+|`cudnnDebugStruct`|8.2.0| | | | | | |
 |`cudnnDebug_t`|7.1.3| | | | | | |
 |`cudnnDeterminism_t`|6.0.0| | | | | | |
 |`cudnnDirectionMode_t`|5.0.0| | |`hipdnnDirectionMode_t`| | | |
