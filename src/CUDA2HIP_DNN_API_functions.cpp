@@ -154,6 +154,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_FUNCTION_MAP {
   {"cudnnDestroyActivationDescriptor",                    {"hipdnnDestroyActivationDescriptor",                    "", CONV_LIB_FUNC, API_DNN, 2}},
   {"cudnnActivationForward",                              {"hipdnnActivationForward",                              "", CONV_LIB_FUNC, API_DNN, 2}},
   {"cudnnActivationBackward",                             {"hipdnnActivationBackward",                             "", CONV_LIB_FUNC, API_DNN, 2}},
+  {"cudnnSetActivationDescriptorSwishBeta",               {"hipdnnSetActivationDescriptorSwishBeta",               "", CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
+  {"cudnnGetActivationDescriptorSwishBeta",               {"hipdnnGetActivationDescriptorSwishBeta",               "", CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
 
   // cuDNN LRN functions
   {"cudnnCreateLRNDescriptor",                            {"hipdnnCreateLRNDescriptor",                            "", CONV_LIB_FUNC, API_DNN, 2}},
@@ -604,6 +606,8 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_FUNCTION_VER_MAP {
   {"cudnnGetRNNDescriptor",                               {CUDNN_705, CUDNN_765, CUDNN_801}},
   {"cudnnSetRNNDescriptor",                               {CUDNN_50,  CUDNN_765, CUDNN_801}},
   {"cudnnSetRNNDescriptor_v5",                            {CUDNN_705, CUDNN_765, CUDNN_801}},
+  {"cudnnSetActivationDescriptorSwishBeta",               {CUDNN_820, CUDA_0,    CUDA_0}},
+  {"cudnnGetActivationDescriptorSwishBeta",               {CUDNN_820, CUDA_0,    CUDA_0}},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_DNN_FUNCTION_VER_MAP {

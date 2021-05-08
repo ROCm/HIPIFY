@@ -761,6 +761,7 @@
 |`cudnnFindRNNForwardTrainingAlgorithmEx`|7.1.3|8.0.2| | | | | |
 |`cudnnFusedOpsExecute`|7.6.0| | | | | | |
 |`cudnnGetActivationDescriptor`|4.0.0| | |`hipdnnGetActivationDescriptor`| | | |
+|`cudnnGetActivationDescriptorSwishBeta`|8.2.0| | | | | | |
 |`cudnnGetAlgorithmDescriptor`|7.1.3|8.0.2| | | | | |
 |`cudnnGetAlgorithmPerformance`|7.1.3|8.0.2| | | | | |
 |`cudnnGetAlgorithmSpaceSize`|7.1.3|8.0.2| | | | | |
@@ -883,6 +884,7 @@
 |`cudnnSaveAlgorithm`|7.1.3|8.0.2| | | | | |
 |`cudnnScaleTensor`|2.0.0| | |`hipdnnScaleTensor`| | | |
 |`cudnnSetActivationDescriptor`|4.0.0| | |`hipdnnSetActivationDescriptor`| | | |
+|`cudnnSetActivationDescriptorSwishBeta`|8.2.0| | | | | | |
 |`cudnnSetAlgorithmDescriptor`|7.1.3|8.0.2| | | | | |
 |`cudnnSetAlgorithmPerformance`|7.1.3|8.0.2| | | | | |
 |`cudnnSetAttnDescriptor`|7.5.0| | | | | | |
