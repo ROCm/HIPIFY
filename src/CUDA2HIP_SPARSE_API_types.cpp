@@ -205,8 +205,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_TYPE_NAME_MAP {
   {"cusparseDenseToSparseAlg_t",                {"hipsparseDenseToSparseAlg_t",                "", CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED}},
   {"CUSPARSE_DENSETOSPARSE_ALG_DEFAULT",        {"HIPSPARSE_DENSETOSPARSE_ALG_DEFAULT",        "", CONV_NUMERIC_LITERAL, API_SPARSE, 4, HIP_UNSUPPORTED}},
 
-  {"cusparseSparseToDenseAlg_t",                {"hipsparseSparseToDenseAlg_t",                "", CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED}},
-  {"CUSPARSE_SPARSETODENSE_ALG_DEFAULT",        {"HIPSPARSE_SPARSETODENSE_ALG_DEFAULT",        "", CONV_NUMERIC_LITERAL, API_SPARSE, 4, HIP_UNSUPPORTED}},
+  {"cusparseSparseToDenseAlg_t",                {"hipsparseSparseToDenseAlg_t",                "", CONV_TYPE, API_SPARSE, 4}},
+  {"CUSPARSE_SPARSETODENSE_ALG_DEFAULT",        {"HIPSPARSE_SPARSETODENSE_ALG_DEFAULT",        "", CONV_NUMERIC_LITERAL, API_SPARSE, 4}},
 
   {"cusparseSpMatAttribute_t",                  {"hipsparseSpMatAttribute_t",                  "", CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED}},
   {"CUSPARSE_SPMAT_FILL_MODE",                  {"HIPSPARSE_SPMAT_FILL_MODE",                  "", CONV_NUMERIC_LITERAL, API_SPARSE, 4, HIP_UNSUPPORTED}},
@@ -412,4 +412,6 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_TYPE_NAME_VER_MAP {
   {"HIPSPARSE_SPMM_CSR_ALG1",                    {HIP_4020, HIP_0,    HIP_0   }},
   {"HIPSPARSE_SPMM_COO_ALG4",                    {HIP_4020, HIP_0,    HIP_0   }},
   {"HIPSPARSE_SPMM_CSR_ALG2",                    {HIP_4020, HIP_0,    HIP_0   }},
+  {"hipsparseSparseToDenseAlg_t",                {HIP_4020, HIP_0,    HIP_0   }},
+  {"HIPSPARSE_SPARSETODENSE_ALG_DEFAULT",        {HIP_4020, HIP_0,    HIP_0   }},
 };
