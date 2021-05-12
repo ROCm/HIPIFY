@@ -733,7 +733,7 @@
 |`CU_STREAM_WAIT_VALUE_EQ`|8.0| | |`hipStreamWaitValueEq`|4.2.0| | |
 |`CU_STREAM_WAIT_VALUE_FLUSH`|8.0| | | | | | |
 |`CU_STREAM_WAIT_VALUE_GEQ`|8.0| | |`hipStreamWaitValueGte`|4.2.0| | |
-|`CU_STREAM_WAIT_VALUE_NOR`| | | |`hipStreamWaitValueNor`|4.2.0| | |
+|`CU_STREAM_WAIT_VALUE_NOR`|9.0| | |`hipStreamWaitValueNor`|4.2.0| | |
 |`CU_STREAM_WRITE_VALUE_DEFAULT`|8.0| | | | | | |
 |`CU_STREAM_WRITE_VALUE_NO_MEMORY_BARRIER`|8.0| | | | | | |
 |`CU_SYNC_POLICY_AUTO`|11.0| | | | | | |
@@ -1138,7 +1138,7 @@
 |`cuArray3DGetDescriptor_v2`| | | | | | | |
 |`cuArrayCreate`| | | |`hipArrayCreate`|1.9.0| | |
 |`cuArrayCreate_v2`| | | |`hipArrayCreate`|1.9.0| | |
-|`cuArrayDestroy`| | | | | | | |
+|`cuArrayDestroy`| | | |`hipArrayDestroy`|4.2.0| | |
 |`cuArrayGetDescriptor`| | | | | | | |
 |`cuArrayGetDescriptor_v2`| | | | | | | |
 |`cuArrayGetPlane`|11.2| | | | | | |
@@ -1175,8 +1175,8 @@
 |`cuMemcpy2D`| | | |`hipMemcpyParam2D`|1.7.0| | |
 |`cuMemcpy2DAsync`| | | |`hipMemcpyParam2DAsync`|2.8.0| | |
 |`cuMemcpy2DAsync_v2`| | | |`hipMemcpyParam2DAsync`|2.8.0| | |
-|`cuMemcpy2DUnaligned`| | | | | | | |
-|`cuMemcpy2DUnaligned_v2`| | | | | | | |
+|`cuMemcpy2DUnaligned`| | | |`hipDrvMemcpy2DUnaligned`|4.2.0| | |
+|`cuMemcpy2DUnaligned_v2`| | | |`hipDrvMemcpy2DUnaligned`|4.2.0| | |
 |`cuMemcpy2D_v2`| | | |`hipMemcpyParam2D`|1.7.0| | |
 |`cuMemcpy3D`| | | |`hipDrvMemcpy3D`|3.5.0| | |
 |`cuMemcpy3DAsync`| | | |`hipDrvMemcpy3DAsync`|3.5.0| | |

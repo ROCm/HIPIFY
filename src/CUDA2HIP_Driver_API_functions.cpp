@@ -156,7 +156,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuArray3DGetDescriptor_v2",                            {"hipArray3DGetDescriptor",                                 "", CONV_MEMORY, API_DRIVER, 11, HIP_UNSUPPORTED}},
   {"cuArrayCreate",                                        {"hipArrayCreate",                                          "", CONV_MEMORY, API_DRIVER, 11}},
   {"cuArrayCreate_v2",                                     {"hipArrayCreate",                                          "", CONV_MEMORY, API_DRIVER, 11}},
-  {"cuArrayDestroy",                                       {"hipArrayDestroy",                                         "", CONV_MEMORY, API_DRIVER, 11, HIP_UNSUPPORTED}},
+  {"cuArrayDestroy",                                       {"hipArrayDestroy",                                         "", CONV_MEMORY, API_DRIVER, 11}},
   {"cuArrayGetDescriptor",                                 {"hipArrayGetDescriptor",                                   "", CONV_MEMORY, API_DRIVER, 11, HIP_UNSUPPORTED}},
   {"cuArrayGetDescriptor_v2",                              {"hipArrayGetDescriptor",                                   "", CONV_MEMORY, API_DRIVER, 11, HIP_UNSUPPORTED}},
   // cudaDeviceGetByPCIBusId
@@ -197,8 +197,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuMemcpy2DAsync",                                      {"hipMemcpyParam2DAsync",                                   "", CONV_MEMORY, API_DRIVER, 11}},
   {"cuMemcpy2DAsync_v2",                                   {"hipMemcpyParam2DAsync",                                   "", CONV_MEMORY, API_DRIVER, 11}},
   // no analogue
-  {"cuMemcpy2DUnaligned",                                  {"hipMemcpy2DUnaligned",                                    "", CONV_MEMORY, API_DRIVER, 11, HIP_UNSUPPORTED}},
-  {"cuMemcpy2DUnaligned_v2",                               {"hipMemcpy2DUnaligned",                                    "", CONV_MEMORY, API_DRIVER, 11, HIP_UNSUPPORTED}},
+  {"cuMemcpy2DUnaligned",                                  {"hipDrvMemcpy2DUnaligned",                                 "", CONV_MEMORY, API_DRIVER, 11}},
+  {"cuMemcpy2DUnaligned_v2",                               {"hipDrvMemcpy2DUnaligned",                                 "", CONV_MEMORY, API_DRIVER, 11}},
   // no analogue
   // NOTE: Not equal to cudaMemcpy3D due to different signatures
   {"cuMemcpy3D",                                           {"hipDrvMemcpy3D",                                          "", CONV_MEMORY, API_DRIVER, 11}},
@@ -1291,6 +1291,8 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_FUNCTION_VER_MAP {
   {"hipStreamWaitValue64",                                 {HIP_4020, HIP_0,    HIP_0   }},
   {"hipStreamWriteValue32",                                {HIP_4020, HIP_0,    HIP_0   }},
   {"hipStreamWriteValue64",                                {HIP_4020, HIP_0,    HIP_0   }},
+  {"hipArrayDestroy",                                      {HIP_4020, HIP_0,    HIP_0   }},
+  {"hipDrvMemcpy2DUnaligned",                              {HIP_4020, HIP_0,    HIP_0   }},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_DRIVER_API_SECTION_MAP {

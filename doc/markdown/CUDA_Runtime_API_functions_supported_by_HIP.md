@@ -868,7 +868,7 @@ Unsupported
 |`cudaErrorInvalidMemcpyDirection`| | | |`hipErrorInvalidMemcpyDirection`|1.6.0| | |
 |`cudaErrorInvalidNormSetting`| | | | | | | |
 |`cudaErrorInvalidPc`| | | | | | | |
-|`cudaErrorInvalidPitchValue`| | | | | | | |
+|`cudaErrorInvalidPitchValue`| | | |`hipErrorInvalidPitchValue`|4.2.0| | |
 |`cudaErrorInvalidPtx`| | | |`hipErrorInvalidKernelFile`|1.6.0| | |
 |`cudaErrorInvalidResourceHandle`| | | |`hipErrorInvalidHandle`|1.6.0| | |
 |`cudaErrorInvalidSource`|10.1| | |`hipErrorInvalidSource`|1.6.0| | |
