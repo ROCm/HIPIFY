@@ -855,6 +855,7 @@ sub simpleSubstitutions {
     $ft{'memory'} += s/\bcuArray3DCreate_v2\b/hipArray3DCreate/g;
     $ft{'memory'} += s/\bcuArrayCreate\b/hipArrayCreate/g;
     $ft{'memory'} += s/\bcuArrayCreate_v2\b/hipArrayCreate/g;
+    $ft{'memory'} += s/\bcuArrayDestroy\b/hipArrayDestroy/g;
     $ft{'memory'} += s/\bcuDeviceGetByPCIBusId\b/hipDeviceGetByPCIBusId/g;
     $ft{'memory'} += s/\bcuDeviceGetPCIBusId\b/hipDeviceGetPCIBusId/g;
     $ft{'memory'} += s/\bcuIpcCloseMemHandle\b/hipIpcCloseMemHandle/g;
@@ -886,6 +887,8 @@ sub simpleSubstitutions {
     $ft{'memory'} += s/\bcuMemcpy2D\b/hipMemcpyParam2D/g;
     $ft{'memory'} += s/\bcuMemcpy2DAsync\b/hipMemcpyParam2DAsync/g;
     $ft{'memory'} += s/\bcuMemcpy2DAsync_v2\b/hipMemcpyParam2DAsync/g;
+    $ft{'memory'} += s/\bcuMemcpy2DUnaligned\b/hipDrvMemcpy2DUnaligned/g;
+    $ft{'memory'} += s/\bcuMemcpy2DUnaligned_v2\b/hipDrvMemcpy2DUnaligned/g;
     $ft{'memory'} += s/\bcuMemcpy2D_v2\b/hipMemcpyParam2D/g;
     $ft{'memory'} += s/\bcuMemcpy3D\b/hipDrvMemcpy3D/g;
     $ft{'memory'} += s/\bcuMemcpy3DAsync\b/hipDrvMemcpy3DAsync/g;
@@ -3003,6 +3006,7 @@ sub simpleSubstitutions {
     $ft{'numeric_literal'} += s/\bcudaErrorInvalidGraphicsContext\b/hipErrorInvalidGraphicsContext/g;
     $ft{'numeric_literal'} += s/\bcudaErrorInvalidKernelImage\b/hipErrorInvalidImage/g;
     $ft{'numeric_literal'} += s/\bcudaErrorInvalidMemcpyDirection\b/hipErrorInvalidMemcpyDirection/g;
+    $ft{'numeric_literal'} += s/\bcudaErrorInvalidPitchValue\b/hipErrorInvalidPitchValue/g;
     $ft{'numeric_literal'} += s/\bcudaErrorInvalidPtx\b/hipErrorInvalidKernelFile/g;
     $ft{'numeric_literal'} += s/\bcudaErrorInvalidResourceHandle\b/hipErrorInvalidHandle/g;
     $ft{'numeric_literal'} += s/\bcudaErrorInvalidSource\b/hipErrorInvalidSource/g;
@@ -4875,7 +4879,6 @@ sub warnUnsupportedFunctions {
         "cudaErrorInvalidTextureBinding",
         "cudaErrorInvalidTexture",
         "cudaErrorInvalidSurface",
-        "cudaErrorInvalidPitchValue",
         "cudaErrorInvalidPc",
         "cudaErrorInvalidNormSetting",
         "cudaErrorInvalidHostPointer",
@@ -5274,8 +5277,6 @@ sub warnUnsupportedFunctions {
         "cuMemcpyAsync",
         "cuMemcpy3DPeerAsync",
         "cuMemcpy3DPeer",
-        "cuMemcpy2DUnaligned_v2",
-        "cuMemcpy2DUnaligned",
         "cuMemcpy",
         "cuMemUnmap",
         "cuMemSetAccess",
@@ -5487,7 +5488,6 @@ sub warnUnsupportedFunctions {
         "cuArrayGetPlane",
         "cuArrayGetDescriptor_v2",
         "cuArrayGetDescriptor",
-        "cuArrayDestroy",
         "cuArray3DGetDescriptor_v2",
         "cuArray3DGetDescriptor",
         "csrsv2Info",

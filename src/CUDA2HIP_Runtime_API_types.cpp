@@ -681,7 +681,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // no analogue
   {"cudaErrorInvalidConfiguration",                                    {"hipErrorInvalidConfiguration",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 9
   // no analogue
-  {"cudaErrorInvalidPitchValue",                                       {"hipErrorInvalidPitchValue",                                "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 12
+  {"cudaErrorInvalidPitchValue",                                       {"hipErrorInvalidPitchValue",                                "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 12
   // no analogue
   {"cudaErrorInvalidSymbol",                                           {"hipErrorInvalidSymbol",                                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 13
   // Deprecated since CUDA 10.1
@@ -2203,4 +2203,5 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {
   {"hipErrorMissingConfiguration",                                     {HIP_1060, HIP_0,    HIP_0   }},
   {"hipErrorPriorLaunchFailure",                                       {HIP_1060, HIP_0,    HIP_0   }},
   {"hipErrorInvalidDeviceFunction",                                    {HIP_1060, HIP_0,    HIP_0   }},
+  {"hipErrorInvalidPitchValue",                                        {HIP_4020, HIP_0,    HIP_0   }},
 };
