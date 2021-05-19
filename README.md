@@ -262,7 +262,7 @@ Run `Visual Studio 16 2019`, open the generated `LLVM.sln`, build all, build pro
          -DCMAKE_INSTALL_PREFIX=../dist \
          -DLLVM_SOURCE_DIR=../llvm-project \
          -DLLVM_TARGETS_TO_BUILD="X86;NVPTX" \
-         -DLLVM_ENABLE_PROJECTS="clang" \
+         -DLLVM_ENABLE_PROJECTS="clang;compiler-rt" \
          -DLLVM_TEMPORARILY_ALLOW_OLD_TOOLCHAIN=ON \
          -DCMAKE_BUILD_TYPE=Release \
          ../llvm-project/llvm
@@ -276,7 +276,7 @@ Run `Visual Studio 16 2019`, open the generated `LLVM.sln`, build all, build pro
          -DCMAKE_INSTALL_PREFIX=../dist \
          -DLLVM_SOURCE_DIR=../llvm-project \
          -DLLVM_TARGETS_TO_BUILD="NVPTX" \
-         -DLLVM_ENABLE_PROJECTS="clang" \
+         -DLLVM_ENABLE_PROJECTS="clang;compiler-rt" \
          -DLLVM_TEMPORARILY_ALLOW_OLD_TOOLCHAIN=ON \
          -DCMAKE_BUILD_TYPE=Release \
          -Thost=x64 \
