@@ -326,7 +326,7 @@ namespace doc {
           case csv: return sDRIVER_csv;
         }
       }
-      void setCommonHipVersionMap() {
+      void setCommonHipVersionMap() override {
         commonHipVersionMap.insert(HIP_DRIVER_FUNCTION_VER_MAP.begin(), HIP_DRIVER_FUNCTION_VER_MAP.end());
         commonHipVersionMap.insert(HIP_DRIVER_TYPE_NAME_VER_MAP.begin(), HIP_DRIVER_TYPE_NAME_VER_MAP.end());
         commonHipVersionMap.insert(HIP_RUNTIME_FUNCTION_VER_MAP.begin(), HIP_RUNTIME_FUNCTION_VER_MAP.end());
@@ -355,7 +355,7 @@ namespace doc {
           case csv: return sRUNTIME_csv;
         }
       }
-      void setCommonHipVersionMap() {
+      void setCommonHipVersionMap() override {
         commonHipVersionMap.insert(HIP_DRIVER_FUNCTION_VER_MAP.begin(), HIP_DRIVER_FUNCTION_VER_MAP.end());
         commonHipVersionMap.insert(HIP_DRIVER_TYPE_NAME_VER_MAP.begin(), HIP_DRIVER_TYPE_NAME_VER_MAP.end());
         commonHipVersionMap.insert(HIP_RUNTIME_FUNCTION_VER_MAP.begin(), HIP_RUNTIME_FUNCTION_VER_MAP.end());
