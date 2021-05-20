@@ -2,12 +2,12 @@ cmake_minimum_required(VERSION 3.6.3)
 
 project(hipify-clang)
 
-if (MSVC AND MSVC_VERSION VERSION_LESS "1900")
+if(MSVC AND MSVC_VERSION VERSION_LESS "1900")
     message(SEND_ERROR "hipify-clang could be built by Visual Studio 14 2015 or higher.")
     return()
 endif()
 
-if (NOT UNIX)
+if(NOT UNIX)
     find_package(LLVM REQUIRED CONFIG PATHS ${CMAKE_PREFIX_PATH})
 else()
     find_package(LLVM REQUIRED CONFIG PATHS ${CMAKE_PREFIX_PATH} /opt/rocm )
@@ -58,50 +58,39 @@ target_link_libraries(hipify-clang PRIVATE
     LLVMOption
     LLVMCore)
 
-if (LLVM_PACKAGE_VERSION VERSION_GREATER "6.0.1")
+if(LLVM_PACKAGE_VERSION VERSION_GREATER "6.0.1")
     target_link_libraries(hipify-clang PRIVATE clangToolingInclusions)
 endif()
 
-if (LLVM_PACKAGE_VERSION VERSION_GREATER "9.0.1")
+if(LLVM_PACKAGE_VERSION VERSION_GREATER "9.0.1")
     target_link_libraries(hipify-clang PRIVATE LLVMFrontendOpenMP)
 endif()
 
-if (MSVC)
+if(MSVC)
     target_link_libraries(hipify-clang PRIVATE version)
-    target_compile_options(hipify-clang PRIVATE /Od /GR- /EHs- /EHc-)
+    target_compile_options(hipify-clang PRIVATE /std:c++14 /Od /GR- /EHs- /EHc-)
     set(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} /SUBSYSTEM:WINDOWS")
-    set(StdCpp "/std:c++")
 else()
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread -fno-rtti -fvisibility-inlines-hidden")
-    set(StdCpp "-std=c++")
-endif()
-
-if (LLVM_PACKAGE_VERSION VERSION_GREATER "9.0")
-    string(APPEND StdCpp "14")
-# MSVC starting from 1900 (VS 2015) supports only the following c++ std values: c++14|c++17|c++latest
-elseif (MSVC)
-    set(StdCpp "")
-else()
-    string(APPEND StdCpp "11")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -pthread -fno-rtti -fvisibility-inlines-hidden")
 endif()
 
 # Address Sanitize Flag
-if (ADDRESS_SANITIZER)
+if(ADDRESS_SANITIZER)
     set(addr_var -fsanitize=address)
 else()
     set(addr_var )
 endif()
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${EXTRA_CFLAGS} ${addr_var}")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${EXTRA_CFLAGS} ${StdCpp} -DHIPIFY_CLANG_RES=\\\"${LLVM_LIBRARY_DIRS}/clang/${LLVM_VERSION_MAJOR}.${LLVM_VERSION_MINOR}.${LLVM_VERSION_PATCH}\\\" ${addr_var}")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${EXTRA_CFLAGS} -DHIPIFY_CLANG_RES=\\\"${LLVM_LIBRARY_DIRS}/clang/${LLVM_VERSION_MAJOR}.${LLVM_VERSION_MINOR}.${LLVM_VERSION_PATCH}\\\" ${addr_var}")
 
 set(INSTALL_PATH_DOC_STRING "hipify-clang Installation Path")
 set(HIPIFY_INSTALL_PATH ${CMAKE_INSTALL_PREFIX})
-if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
     if(CMAKE_BUILD_TYPE MATCHES Debug)
         set(HIPIFY_INSTALL_PATH "${CMAKE_CURRENT_SOURCE_DIR}/bin" CACHE PATH ${INSTALL_PATH_DOC_STRING} FORCE)
     elseif(CMAKE_BUILD_TYPE MATCHES Release)
-        if (BIN_INSTALL_DIR)
+        if(BIN_INSTALL_DIR)
             set(HIPIFY_INSTALL_PATH "${BIN_INSTALL_DIR}" CACHE PATH ${INSTALL_PATH_DOC_STRING} FORCE)
         else()
             set(HIPIFY_INSTALL_PATH "${PROJECT_BINARY_DIR}/bin" CACHE PATH ${INSTALL_PATH_DOC_STRING} FORCE)
@@ -116,19 +105,19 @@ endif()
 install(TARGETS hipify-clang DESTINATION ${HIPIFY_INSTALL_PATH})
 
 install(
-  DIRECTORY ${LLVM_DIR}/../../clang/${LLVM_VERSION_MAJOR}.${LLVM_VERSION_MINOR}.${LLVM_VERSION_PATCH}/
-  DESTINATION ${HIPIFY_INSTALL_PATH}
-  COMPONENT clang-resource-headers
-  FILES_MATCHING
-  PATTERN "*.h"
-  PATTERN "*.modulemap"
-  PATTERN "algorithm"
-  PATTERN "complex"
-  PATTERN "new"
-  PATTERN "ppc_wrappers" EXCLUDE
-  PATTERN "openmp_wrappers" EXCLUDE)
+    DIRECTORY ${LLVM_DIR}/../../clang/${LLVM_VERSION_MAJOR}.${LLVM_VERSION_MINOR}.${LLVM_VERSION_PATCH}/
+    DESTINATION ${HIPIFY_INSTALL_PATH}
+    COMPONENT clang-resource-headers
+    FILES_MATCHING
+    PATTERN "*.h"
+    PATTERN "*.modulemap"
+    PATTERN "algorithm"
+    PATTERN "complex"
+    PATTERN "new"
+    PATTERN "ppc_wrappers" EXCLUDE
+    PATTERN "openmp_wrappers" EXCLUDE)
 
-if (UNIX)
+if(UNIX)
     set(CPACK_PACKAGING_INSTALL_PREFIX "/opt/rocm/hip" CACHE PATH "HIP Package Installation Path")
     set(BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR}/packages/hipify-clang)
     configure_file(packaging/hipify-clang.txt ${BUILD_DIR}/CMakeLists.txt @ONLY)
@@ -143,12 +132,12 @@ if (UNIX)
         WORKING_DIRECTORY ${BUILD_DIR})
 endif()
 
-if (HIPIFY_CLANG_TESTS)
+if(HIPIFY_CLANG_TESTS)
     find_package(PythonInterp 2.7 REQUIRED)
 
     function (require_program PROGRAM_NAME)
         find_program(FOUND_${PROGRAM_NAME} ${PROGRAM_NAME})
-        if (FOUND_${PROGRAM_NAME})
+        if(FOUND_${PROGRAM_NAME})
             message(STATUS "Found ${PROGRAM_NAME}: ${FOUND_${PROGRAM_NAME}}")
         else()
             message(SEND_ERROR "Can't find ${PROGRAM_NAME}. Either set HIPIFY_CLANG_TESTS to OFF to disable HIPIFY tests, or install the missing program.")
@@ -159,29 +148,29 @@ if (HIPIFY_CLANG_TESTS)
     require_program(FileCheck)
 
     find_package(CUDA REQUIRED)
-    if ((CUDA_VERSION VERSION_LESS "7.0") OR (LLVM_PACKAGE_VERSION VERSION_LESS "3.8") OR
-        (CUDA_VERSION VERSION_GREATER "7.5" AND LLVM_PACKAGE_VERSION VERSION_LESS "4.0") OR
-        (CUDA_VERSION VERSION_GREATER "8.0" AND LLVM_PACKAGE_VERSION VERSION_LESS "6.0") OR
-        (CUDA_VERSION VERSION_GREATER "9.0" AND LLVM_PACKAGE_VERSION VERSION_LESS "7.0") OR
-        (CUDA_VERSION VERSION_GREATER "9.2" AND LLVM_PACKAGE_VERSION VERSION_LESS "8.0") OR
-        (CUDA_VERSION VERSION_GREATER "10.0" AND LLVM_PACKAGE_VERSION VERSION_LESS "9.0") OR
-        (CUDA_VERSION VERSION_GREATER "10.1" AND LLVM_PACKAGE_VERSION VERSION_LESS "10.0"))
+    if((CUDA_VERSION VERSION_LESS "7.0") OR (LLVM_PACKAGE_VERSION VERSION_LESS "3.8") OR
+       (CUDA_VERSION VERSION_GREATER "7.5" AND LLVM_PACKAGE_VERSION VERSION_LESS "4.0") OR
+       (CUDA_VERSION VERSION_GREATER "8.0" AND LLVM_PACKAGE_VERSION VERSION_LESS "6.0") OR
+       (CUDA_VERSION VERSION_GREATER "9.0" AND LLVM_PACKAGE_VERSION VERSION_LESS "7.0") OR
+       (CUDA_VERSION VERSION_GREATER "9.2" AND LLVM_PACKAGE_VERSION VERSION_LESS "8.0") OR
+       (CUDA_VERSION VERSION_GREATER "10.0" AND LLVM_PACKAGE_VERSION VERSION_LESS "9.0") OR
+       (CUDA_VERSION VERSION_GREATER "10.1" AND LLVM_PACKAGE_VERSION VERSION_LESS "10.0"))
         message(SEND_ERROR "CUDA ${CUDA_VERSION} is not supported by LLVM ${LLVM_PACKAGE_VERSION}.")
-        if (CUDA_VERSION_MAJOR VERSION_LESS "7")
+        if(CUDA_VERSION_MAJOR VERSION_LESS "7")
             message(STATUS "Please install CUDA 7.0 or higher.")
-        elseif (CUDA_VERSION_MAJOR VERSION_LESS "8")
+        elseif(CUDA_VERSION_MAJOR VERSION_LESS "8")
             message(STATUS "Please install LLVM + clang 3.8 or higher.")
-        elseif (CUDA_VERSION_MAJOR VERSION_LESS "9")
+        elseif(CUDA_VERSION_MAJOR VERSION_LESS "9")
             message(STATUS "Please install LLVM + clang 4.0 or higher.")
-        elseif (CUDA_VERSION VERSION_EQUAL "9.0")
+        elseif(CUDA_VERSION VERSION_EQUAL "9.0")
             message(STATUS "Please install LLVM + clang 6.0 or higher.")
-        elseif (CUDA_VERSION_MAJOR VERSION_LESS "10")
+        elseif(CUDA_VERSION_MAJOR VERSION_LESS "10")
             message(STATUS "Please install LLVM + clang 7.0 or higher.")
-        elseif (CUDA_VERSION VERSION_EQUAL "10.0")
+        elseif(CUDA_VERSION VERSION_EQUAL "10.0")
             message(STATUS "Please install LLVM + clang 8.0 or higher.")
-        elseif (CUDA_VERSION VERSION_EQUAL "10.1")
+        elseif(CUDA_VERSION VERSION_EQUAL "10.1")
             message(STATUS "Please install LLVM + clang 9.0 or higher.")
-        elseif (CUDA_VERSION VERSION_EQUAL "10.2" OR CUDA_VERSION VERSION_EQUAL "11.0")
+        elseif(CUDA_VERSION VERSION_EQUAL "10.2" OR CUDA_VERSION VERSION_EQUAL "11.0")
             message(STATUS "Please install LLVM + clang 10.0 or higher.")
         endif()
     endif()
