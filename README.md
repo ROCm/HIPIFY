@@ -350,7 +350,11 @@ Ubuntu 20: LLVM 9.0.0 - 12.0.0, CUDA 8.0 - 11.3, cuDNN 5.1.10 - 8.2.0
 
 Minimum build system requirements for the above configurations:
 
-Python 2.7, cmake 3.5.1, GNU C/C++ 5.4.0.
+Python 2.7, cmake 3.5.1, GNU C/C++ 6.1.
+
+Recommended build system requirements:
+
+Python 3.9.5, cmake 3.20.2, GNU C/C++ 11.1.
 
 Here is an example of building `hipify-clang` with testing support on `Ubuntu 20.04.1`:
 

@@ -136,12 +136,7 @@ void appendArgumentsAdjusters(ct::RefactoringTool &Tool, const std::string &sSou
   Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-Xclang", ct::ArgumentInsertPosition::BEGIN));
   Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-internal-isystem", ct::ArgumentInsertPosition::BEGIN));
   Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-Xclang", ct::ArgumentInsertPosition::BEGIN));
-  // Ensure at least c++11 is used.
-  std::string stdCpp = "-std=c++11";
-#if defined(_MSC_VER)
-  stdCpp = "-std=c++14";
-#endif
-  Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster(stdCpp.c_str(), ct::ArgumentInsertPosition::BEGIN));
+  Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-std=c++14", ct::ArgumentInsertPosition::BEGIN));
   std::string sInclude = "-I" + sys::path::parent_path(sSourceAbsPath).str();
 #if defined(HIPIFY_CLANG_RES)
   Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-resource-dir=" HIPIFY_CLANG_RES, ct::ArgumentInsertPosition::BEGIN));
