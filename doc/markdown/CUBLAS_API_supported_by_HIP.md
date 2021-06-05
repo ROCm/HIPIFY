@@ -151,6 +151,7 @@
 |`cublasGetPointerMode`| | | |`hipblasGetPointerMode`|1.8.2| | |
 |`cublasGetPointerMode_v2`| | | |`hipblasGetPointerMode`|1.8.2| | |
 |`cublasGetProperty`| | | | | | | |
+|`cublasGetSmCountTarget`|11.3| | | | | | |
 |`cublasGetStream`| | | |`hipblasGetStream`|1.8.2| | |
 |`cublasGetStream_v2`| | | |`hipblasGetStream`|1.8.2| | |
 |`cublasGetVector`| | | |`hipblasGetVector`|1.8.2| | |
@@ -169,6 +170,7 @@
 |`cublasSetMatrixAsync`| | | |`hipblasSetMatrixAsync`|3.7.0| | |
 |`cublasSetPointerMode`| | | |`hipblasSetPointerMode`|1.8.2| | |
 |`cublasSetPointerMode_v2`| | | |`hipblasSetPointerMode`|1.8.2| | |
+|`cublasSetSmCountTarget`|11.3| | | | | | |
 |`cublasSetStream`| | | |`hipblasSetStream`|1.8.2| | |
 |`cublasSetStream_v2`| | | |`hipblasSetStream`|1.8.2| | |
 |`cublasSetVector`| | | |`hipblasSetVector`|1.8.2| | |

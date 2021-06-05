@@ -38,6 +38,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
   {"cublasGetMathMode",              {"hipblasGetMathMode",              "",                                         CONV_LIB_FUNC, API_BLAS, 4, UNSUPPORTED}},
   {"cublasSetMathMode",              {"hipblasSetMathMode",              "",                                         CONV_LIB_FUNC, API_BLAS, 4, UNSUPPORTED}},
   {"cublasMigrateComputeType",       {"hipblasMigrateComputeType",       "",                                         CONV_LIB_FUNC, API_BLAS, 4, UNSUPPORTED}},
+  {"cublasGetSmCountTarget",         {"hipblasGetSmCountTarget",         "",                                         CONV_LIB_FUNC, API_BLAS, 4, UNSUPPORTED}},
+  {"cublasSetSmCountTarget",         {"hipblasSetSmCountTarget",         "",                                         CONV_LIB_FUNC, API_BLAS, 4, UNSUPPORTED}},
 
   // Blas logging
   {"cublasLogCallback",              {"hipblasLogCallback",              "",                                         CONV_LIB_FUNC, API_BLAS, 4, UNSUPPORTED}},
@@ -713,6 +715,8 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_FUNCTION_VER_MAP {
   {"cublasRotgEx",                               {CUDA_101, CUDA_0, CUDA_0}},
   {"cublasRotmEx",                               {CUDA_101, CUDA_0, CUDA_0}},
   {"cublasRotmgEx",                              {CUDA_101, CUDA_0, CUDA_0}},
+  {"cublasGetSmCountTarget",                     {CUDA_113, CUDA_0, CUDA_0}},
+  {"cublasSetSmCountTarget",                     {CUDA_113, CUDA_0, CUDA_0}},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_FUNCTION_VER_MAP {
