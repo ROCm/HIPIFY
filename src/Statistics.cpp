@@ -24,6 +24,7 @@ THE SOFTWARE.
 #include <assert.h>
 #include <sstream>
 #include <iomanip>
+#include <cmath>
 #include "ArgParse.h"
 
 const char *counterNames[NUM_CONV_TYPES] = {
