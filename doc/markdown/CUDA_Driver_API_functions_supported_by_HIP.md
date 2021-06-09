@@ -1464,25 +1464,25 @@
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|
 |`cuTexRefCreate`| |11.0| | | | | |
 |`cuTexRefDestroy`| |11.0| | | | | |
-|`cuTexRefGetAddress`| |11.0| |`hipTexRefGetAddress`|3.0.0| | |
-|`cuTexRefGetAddressMode`| |11.0| |`hipTexRefGetAddressMode`|3.0.0| | |
-|`cuTexRefGetAddress_v2`| |11.0| |`hipTexRefGetAddress`|3.0.0| | |
+|`cuTexRefGetAddress`| |11.0| |`hipTexRefGetAddress`|3.0.0|4.3.0| |
+|`cuTexRefGetAddressMode`| |11.0| |`hipTexRefGetAddressMode`|3.0.0|4.3.0| |
+|`cuTexRefGetAddress_v2`| |11.0| |`hipTexRefGetAddress`|3.0.0|4.3.0| |
 |`cuTexRefGetArray`| |11.0| |`hipTexRefGetArray`|3.0.0| | |
 |`cuTexRefGetBorderColor`|8.0|11.0| | | | | |
-|`cuTexRefGetFilterMode`| |11.0| |`hipTexRefGetFilterMode`|3.5.0| | |
-|`cuTexRefGetFlags`| |11.0| |`hipTexRefGetFlags`|3.5.0| | |
-|`cuTexRefGetFormat`| |11.0| |`hipTexRefGetFormat`|3.5.0| | |
-|`cuTexRefGetMaxAnisotropy`| |11.0| |`hipTexRefGetMaxAnisotropy`|3.5.0| | |
-|`cuTexRefGetMipmapFilterMode`| |11.0| |`hipTexRefGetMipmapFilterMode`|3.5.0| | |
-|`cuTexRefGetMipmapLevelBias`| |11.0| |`hipTexRefGetMipmapLevelBias`|3.5.0| | |
-|`cuTexRefGetMipmapLevelClamp`| |11.0| |`hipTexRefGetMipmapLevelClamp`|3.5.0| | |
-|`cuTexRefGetMipmappedArray`| |11.0| |`hipTexRefGetMipMappedArray`|3.5.0| | |
-|`cuTexRefSetAddress`| |11.0| |`hipTexRefSetAddress`|1.7.0| | |
-|`cuTexRefSetAddress2D`| |11.0| |`hipTexRefSetAddress2D`|1.7.0| | |
-|`cuTexRefSetAddress2D_v2`| | | |`hipTexRefSetAddress2D`|1.7.0| | |
-|`cuTexRefSetAddress2D_v3`| | | |`hipTexRefSetAddress2D`|1.7.0| | |
+|`cuTexRefGetFilterMode`| |11.0| |`hipTexRefGetFilterMode`|3.5.0|4.3.0| |
+|`cuTexRefGetFlags`| |11.0| |`hipTexRefGetFlags`|3.5.0|4.3.0| |
+|`cuTexRefGetFormat`| |11.0| |`hipTexRefGetFormat`|3.5.0|4.3.0| |
+|`cuTexRefGetMaxAnisotropy`| |11.0| |`hipTexRefGetMaxAnisotropy`|3.5.0|4.3.0| |
+|`cuTexRefGetMipmapFilterMode`| |11.0| |`hipTexRefGetMipmapFilterMode`|3.5.0|4.3.0| |
+|`cuTexRefGetMipmapLevelBias`| |11.0| |`hipTexRefGetMipmapLevelBias`|3.5.0|4.3.0| |
+|`cuTexRefGetMipmapLevelClamp`| |11.0| |`hipTexRefGetMipmapLevelClamp`|3.5.0|4.3.0| |
+|`cuTexRefGetMipmappedArray`| |11.0| |`hipTexRefGetMipMappedArray`|3.5.0|4.3.0| |
+|`cuTexRefSetAddress`| |11.0| |`hipTexRefSetAddress`|1.7.0|4.3.0| |
+|`cuTexRefSetAddress2D`| |11.0| |`hipTexRefSetAddress2D`|1.7.0|4.3.0| |
+|`cuTexRefSetAddress2D_v2`| | | |`hipTexRefSetAddress2D`|1.7.0|4.3.0| |
+|`cuTexRefSetAddress2D_v3`| | | |`hipTexRefSetAddress2D`|1.7.0|4.3.0| |
 |`cuTexRefSetAddressMode`| |11.0| |`hipTexRefSetAddressMode`|1.9.0| | |
-|`cuTexRefSetAddress_v2`| |11.0| |`hipTexRefSetAddress`|1.7.0| | |
+|`cuTexRefSetAddress_v2`| |11.0| |`hipTexRefSetAddress`|1.7.0|4.3.0| |
 |`cuTexRefSetArray`| |11.0| |`hipTexRefSetArray`|1.9.0| | |
 |`cuTexRefSetBorderColor`|8.0|11.0| |`hipTexRefSetBorderColor`|3.5.0| | |
 |`cuTexRefSetFilterMode`| |11.0| |`hipTexRefSetFilterMode`|1.9.0| | |
