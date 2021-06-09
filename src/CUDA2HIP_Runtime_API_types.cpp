@@ -44,20 +44,20 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaExtent",                                                       {"hipExtent",                                                "", CONV_TYPE, API_RUNTIME, 36}},
 
   // CUDA_EXTERNAL_MEMORY_BUFFER_DESC
-  {"cudaExternalMemoryBufferDesc",                                     {"HIP_EXTERNAL_MEMORY_BUFFER_DESC",                          "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+  {"cudaExternalMemoryBufferDesc",                                     {"hipExternalMemoryBufferDesc",                              "", CONV_TYPE, API_RUNTIME, 36}},
 
   // CUDA_EXTERNAL_MEMORY_HANDLE_DESC
-  {"cudaExternalMemoryHandleDesc",                                     {"HIP_EXTERNAL_MEMORY_HANDLE_DESC",                          "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+  {"cudaExternalMemoryHandleDesc",                                     {"hipExternalMemoryHandleDesc",                              "", CONV_TYPE, API_RUNTIME, 36}},
 
   // CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC
   {"cudaExternalMemoryMipmappedArrayDesc",                             {"HIP_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC",                 "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
 
   // CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC
-  {"cudaExternalSemaphoreHandleDesc",                                  {"HIP_EXTERNAL_SEMAPHORE_HANDLE_DESC",                       "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+  {"cudaExternalSemaphoreHandleDesc",                                  {"hipExternalSemaphoreHandleDesc",                           "", CONV_TYPE, API_RUNTIME, 36}},
 
   // CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS
-  {"cudaExternalSemaphoreSignalParams",                                {"HIP_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS",                     "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
-  {"cudaExternalSemaphoreSignalParams_v1",                             {"HIP_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS_v1",                  "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+  {"cudaExternalSemaphoreSignalParams",                                {"hipExternalSemaphoreSignalParams",                         "", CONV_TYPE, API_RUNTIME, 36}},
+  {"cudaExternalSemaphoreSignalParams_v1",                             {"hipExternalSemaphoreSignalParams",                         "", CONV_TYPE, API_RUNTIME, 36}},
 
   // CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS
   {"cudaExternalSemaphoreWaitParams",                                  {"HIP_EXTERNAL_SEMAPHORE_WAIT_PARAMS",                       "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
@@ -130,12 +130,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CUextMemory_st
   {"CUexternalMemory_st",                                              {"hipExtMemory_st",                                          "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
   // CUexternalMemory
-  {"cudaExternalMemory_t",                                             {"hipExternalMemory",                                        "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+  {"cudaExternalMemory_t",                                             {"hipExternalMemory_t",                                      "", CONV_TYPE, API_RUNTIME, 36}},
 
   // CUextSemaphore_st
   {"CUexternalSemaphore_st",                                           {"hipExtSemaphore_st",                                       "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
   // CUexternalSemaphore
-  {"cudaExternalSemaphore_t",                                          {"hipExternalSemaphore",                                     "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+  {"cudaExternalSemaphore_t",                                          {"hipExternalSemaphore_t",                                   "", CONV_TYPE, API_RUNTIME, 36}},
 
   // the same - CUgraph_st
   {"CUgraph_st",                                                       {"hipGraph_st",                                              "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
@@ -907,36 +907,36 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaErrorApiFailureBase",                                          {"hipErrorApiFailureBase",                                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED | CUDA_DEPRECATED}}, // 10000
 
   // CUexternalMemoryHandleType
-  {"cudaExternalMemoryHandleType",                                     {"hipExternalMemoryHandleType",                              "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+  {"cudaExternalMemoryHandleType",                                     {"hipExternalMemoryHandleType",                              "", CONV_TYPE, API_RUNTIME, 36}},
   // cudaExternalMemoryHandleType enum values
   // CU_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD
-  {"cudaExternalMemoryHandleTypeOpaqueFd",                             {"hipExternalMemoryHandleTypeOpaqueFD",                      "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 1
+  {"cudaExternalMemoryHandleTypeOpaqueFd",                             {"hipExternalMemoryHandleTypeOpaqueFd",                      "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 1
   // CU_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32
-  {"cudaExternalMemoryHandleTypeOpaqueWin32",                          {"hipExternalMemoryHandleTypeOpaqueWin32",                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 2
+  {"cudaExternalMemoryHandleTypeOpaqueWin32",                          {"hipExternalMemoryHandleTypeOpaqueWin32",                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 2
   // CU_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT
-  {"cudaExternalMemoryHandleTypeOpaqueWin32Kmt",                       {"hipExternalMemoryHandleTypeOpaqueWin32KMT",                "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 3
+  {"cudaExternalMemoryHandleTypeOpaqueWin32Kmt",                       {"hipExternalMemoryHandleTypeOpaqueWin32Kmt",                "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 3
   // CU_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP
-  {"cudaExternalMemoryHandleTypeD3D12Heap",                            {"hipExternalMemoryHandleTypeD3D12Heap",                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 4
+  {"cudaExternalMemoryHandleTypeD3D12Heap",                            {"hipExternalMemoryHandleTypeD3D12Heap",                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 4
   // CU_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE
-  {"cudaExternalMemoryHandleTypeD3D12Resource",                        {"hipExternalMemoryHandleTypeD3D12Resource",                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 5
+  {"cudaExternalMemoryHandleTypeD3D12Resource",                        {"hipExternalMemoryHandleTypeD3D12Resource",                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 5
   // CU_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_RESOURCE
-  {"cudaExternalMemoryHandleTypeD3D11Resource",                        {"hipExternalMemoryHandleTypeD3D11Resource",                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 6
+  {"cudaExternalMemoryHandleTypeD3D11Resource",                        {"hipExternalMemoryHandleTypeD3D11Resource",                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 6
   // CU_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_RESOURCE_KMT
-  {"cudaExternalMemoryHandleTypeD3D11ResourceKmt",                     {"hipExternalMemoryHandleTypeD3D11ResourceKmt",              "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 7
+  {"cudaExternalMemoryHandleTypeD3D11ResourceKmt",                     {"hipExternalMemoryHandleTypeD3D11ResourceKmt",              "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 7
   // CU_EXTERNAL_MEMORY_HANDLE_TYPE_NVSCIBUF
   {"cudaExternalMemoryHandleTypeNvSciBuf",                             {"hipExternalMemoryHandleTypeNvSciBuf",                      "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 8
 
   // CUexternalSemaphoreHandleType
-  {"cudaExternalSemaphoreHandleType",                                  {"hipExternalSemaphoreHandleType",                           "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+  {"cudaExternalSemaphoreHandleType",                                  {"hipExternalSemaphoreHandleType",                           "", CONV_TYPE, API_RUNTIME, 36}},
   // cudaExternalSemaphoreHandleType enum values
   // CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD
-  {"cudaExternalSemaphoreHandleTypeOpaqueFd",                          {"hipExternalSemaphoreHandleTypeOpaqueFD",                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 1
+  {"cudaExternalSemaphoreHandleTypeOpaqueFd",                          {"hipExternalSemaphoreHandleTypeOpaqueFd",                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 1
   // CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32
-  {"cudaExternalSemaphoreHandleTypeOpaqueWin32",                       {"hipExternalSemaphoreHandleTypeOpaqueWin32",                "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 2
+  {"cudaExternalSemaphoreHandleTypeOpaqueWin32",                       {"hipExternalSemaphoreHandleTypeOpaqueWin32",                "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 2
   // CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT
-  {"cudaExternalSemaphoreHandleTypeOpaqueWin32Kmt",                    {"hipExternalSemaphoreHandleTypeOpaqueWin32KMT",             "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 3
+  {"cudaExternalSemaphoreHandleTypeOpaqueWin32Kmt",                    {"hipExternalSemaphoreHandleTypeOpaqueWin32Kmt",             "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 3
   // CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE
-  {"cudaExternalSemaphoreHandleTypeD3D12Fence",                        {"hipExternalSemaphoreHandleTypeD3D12Fence",                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 4
+  {"cudaExternalSemaphoreHandleTypeD3D12Fence",                        {"hipExternalSemaphoreHandleTypeD3D12Fence",                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 4
   // CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D11_FENCE
   {"cudaExternalSemaphoreHandleTypeD3D11Fence",                        {"hipExternalSemaphoreHandleTypeD3D11Fence",                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 5
   // CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_NVSCISYNC
@@ -2204,4 +2204,9 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {
   {"hipErrorPriorLaunchFailure",                                       {HIP_1060, HIP_0,    HIP_0   }},
   {"hipErrorInvalidDeviceFunction",                                    {HIP_1060, HIP_0,    HIP_0   }},
   {"hipErrorInvalidPitchValue",                                        {HIP_4020, HIP_0,    HIP_0   }},
+  {"hipExternalMemoryHandleDesc",                                      {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipExternalMemoryBufferDesc",                                      {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipExternalSemaphoreHandleType",                                   {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipExternalSemaphoreHandleDesc",                                   {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipExternalSemaphoreSignalParams",                                 {HIP_4030, HIP_0,    HIP_0   }},
 };

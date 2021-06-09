@@ -105,22 +105,22 @@
 |`CUDA_ERROR_UNMAP_FAILED`| | | |`hipErrorUnmapFailed`|1.6.0| | |
 |`CUDA_ERROR_UNSUPPORTED_LIMIT`| | | |`hipErrorUnsupportedLimit`|1.6.0| | |
 |`CUDA_ERROR_UNSUPPORTED_PTX_VERSION`|11.1| | | | | | |
-|`CUDA_EXTERNAL_MEMORY_BUFFER_DESC`|10.0| | | | | | |
-|`CUDA_EXTERNAL_MEMORY_BUFFER_DESC_st`|10.0| | | | | | |
-|`CUDA_EXTERNAL_MEMORY_BUFFER_DESC_v1`|11.3| | | | | | |
+|`CUDA_EXTERNAL_MEMORY_BUFFER_DESC`|10.0| | |`hipExternalMemoryBufferDesc`|4.3.0| | |
+|`CUDA_EXTERNAL_MEMORY_BUFFER_DESC_st`|10.0| | |`hipExternalMemoryBufferDesc_st`|4.3.0| | |
+|`CUDA_EXTERNAL_MEMORY_BUFFER_DESC_v1`|11.3| | |`hipExternalMemoryBufferDesc`|4.3.0| | |
 |`CUDA_EXTERNAL_MEMORY_DEDICATED`|10.0| | | | | | |
-|`CUDA_EXTERNAL_MEMORY_HANDLE_DESC`|10.0| | | | | | |
-|`CUDA_EXTERNAL_MEMORY_HANDLE_DESC_st`|10.0| | | | | | |
-|`CUDA_EXTERNAL_MEMORY_HANDLE_DESC_v1`|11.3| | | | | | |
+|`CUDA_EXTERNAL_MEMORY_HANDLE_DESC`|10.0| | |`hipExternalMemoryHandleDesc`|4.3.0| | |
+|`CUDA_EXTERNAL_MEMORY_HANDLE_DESC_st`|10.0| | |`hipExternalMemoryHandleDesc_st`|4.3.0| | |
+|`CUDA_EXTERNAL_MEMORY_HANDLE_DESC_v1`|11.3| | |`hipExternalMemoryHandleDesc`|4.3.0| | |
 |`CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC`|10.0| | | | | | |
 |`CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC_st`|10.0| | | | | | |
 |`CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC_v1`|11.3| | | | | | |
-|`CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC`|10.0| | | | | | |
-|`CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC_st`|10.0| | | | | | |
-|`CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC_v1`|11.3| | | | | | |
-|`CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS`|10.0| | | | | | |
-|`CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS_st`|10.0| | | | | | |
-|`CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS_v1`|11.3| | | | | | |
+|`CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC`|10.0| | |`hipExternalSemaphoreHandleDesc`|4.3.0| | |
+|`CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC_st`|10.0| | |`hipExternalSemaphoreHandleDesc_st`|4.3.0| | |
+|`CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC_v1`|11.3| | |`hipExternalSemaphoreHandleDesc`|4.3.0| | |
+|`CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS`|10.0| | |`hipExternalSemaphoreSignalParams`|4.3.0| | |
+|`CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS_st`|10.0| | |`hipExternalSemaphoreSignalParams_st`|4.3.0| | |
+|`CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS_v1`|11.3| | |`hipExternalSemaphoreSignalParams`|4.3.0| | |
 |`CUDA_EXTERNAL_SEMAPHORE_SIGNAL_SKIP_NVSCIBUF_MEMSYNC`|10.2| | | | | | |
 |`CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS`|10.0| | | | | | |
 |`CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS_st`|10.0| | | | | | |
@@ -453,22 +453,22 @@
 |`CU_EVENT_RECORD_EXTERNAL`|11.1| | | | | | |
 |`CU_EVENT_WAIT_DEFAULT`|11.1| | | | | | |
 |`CU_EVENT_WAIT_EXTERNAL`|11.1| | | | | | |
-|`CU_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_RESOURCE`|10.2| | | | | | |
-|`CU_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_RESOURCE_KMT`|10.2| | | | | | |
-|`CU_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP`|10.0| | | | | | |
-|`CU_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE`|10.0| | | | | | |
+|`CU_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_RESOURCE`|10.2| | |`hipExternalMemoryHandleTypeD3D11Resource`|4.3.0| | |
+|`CU_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_RESOURCE_KMT`|10.2| | |`hipExternalMemoryHandleTypeD3D11ResourceKmt`|4.3.0| | |
+|`CU_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP`|10.0| | |`hipExternalMemoryHandleTypeD3D12Heap`|4.3.0| | |
+|`CU_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE`|10.0| | |`hipExternalMemoryHandleTypeD3D12Resource`|4.3.0| | |
 |`CU_EXTERNAL_MEMORY_HANDLE_TYPE_NVSCIBUF`|10.2| | | | | | |
-|`CU_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD`|10.0| | | | | | |
-|`CU_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32`|10.0| | | | | | |
-|`CU_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT`|10.0| | | | | | |
+|`CU_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD`|10.0| | |`hipExternalMemoryHandleTypeOpaqueFd`|4.3.0| | |
+|`CU_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32`|10.0| | |`hipExternalMemoryHandleTypeOpaqueWin32`|4.3.0| | |
+|`CU_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT`|10.0| | |`hipExternalMemoryHandleTypeOpaqueWin32Kmt`|4.3.0| | |
 |`CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D11_FENCE`|10.2| | | | | | |
 |`CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D11_KEYED_MUTEX`|10.2| | | | | | |
 |`CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D11_KEYED_MUTEX_KMT`|10.2| | | | | | |
-|`CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE`|10.0| | | | | | |
+|`CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE`|10.0| | |`hipExternalSemaphoreHandleTypeD3D12Fence`|4.3.0| | |
 |`CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_NVSCISYNC`|10.2| | | | | | |
-|`CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD`|10.0| | | | | | |
-|`CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32`|10.0| | | | | | |
-|`CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT`|10.0| | | | | | |
+|`CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD`|10.0| | |`hipExternalSemaphoreHandleTypeOpaqueFd`|4.3.0| | |
+|`CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32`|10.0| | |`hipExternalSemaphoreHandleTypeOpaqueWin32`|4.3.0| | |
+|`CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT`|10.0| | |`hipExternalSemaphoreHandleTypeOpaqueWin32Kmt`|4.3.0| | |
 |`CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_TIMELINE_SEMAPHORE_FD`|11.2| | | | | | |
 |`CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_TIMELINE_SEMAPHORE_WIN32`|11.2| | | | | | |
 |`CU_FLUSH_GPU_DIRECT_RDMA_WRITES_OPTION_HOST`|11.3| | | | | | |
@@ -843,12 +843,12 @@
 |`CUevent_wait_flags_enum`| | | | | | | |
 |`CUextMemory_st`|10.0| | | | | | |
 |`CUextSemaphore_st`|10.0| | | | | | |
-|`CUexternalMemory`|10.0| | | | | | |
-|`CUexternalMemoryHandleType`|10.0| | | | | | |
-|`CUexternalMemoryHandleType_enum`|10.0| | | | | | |
-|`CUexternalSemaphore`|10.0| | | | | | |
-|`CUexternalSemaphoreHandleType`|10.0| | | | | | |
-|`CUexternalSemaphoreHandleType_enum`|10.0| | | | | | |
+|`CUexternalMemory`|10.0| | |`hipExternalMemory_t`|4.3.0| | |
+|`CUexternalMemoryHandleType`|10.0| | |`hipExternalMemoryHandleType`|4.3.0| | |
+|`CUexternalMemoryHandleType_enum`|10.0| | |`hipExternalMemoryHandleType_enum`|4.3.0| | |
+|`CUexternalSemaphore`|10.0| | |`hipExternalSemaphore_t`|4.3.0| | |
+|`CUexternalSemaphoreHandleType`|10.0| | |`hipExternalSemaphoreHandleType`|4.3.0| | |
+|`CUexternalSemaphoreHandleType_enum`|10.0| | |`hipExternalSemaphoreHandleType_enum`|4.3.0| | |
 |`CUfilter_mode`| | | |`HIPfilter_mode`|3.5.0| | |
 |`CUfilter_mode_enum`| | | |`HIPfilter_mode_enum`|3.5.0| | |
 |`CUflushGPUDirectRDMAWritesOptions`|11.3| | | | | | |

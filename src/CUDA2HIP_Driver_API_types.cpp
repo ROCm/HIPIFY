@@ -38,14 +38,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUDA_ARRAY_DESCRIPTOR_v2",                                         {"HIP_ARRAY_DESCRIPTOR",                                     "", CONV_TYPE, API_DRIVER, 1}},
 
   // cudaExternalMemoryBufferDesc
-  {"CUDA_EXTERNAL_MEMORY_BUFFER_DESC_st",                              {"HIP_EXTERNAL_MEMORY_BUFFER_DESC",                          "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
-  {"CUDA_EXTERNAL_MEMORY_BUFFER_DESC",                                 {"HIP_EXTERNAL_MEMORY_BUFFER_DESC",                          "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
-  {"CUDA_EXTERNAL_MEMORY_BUFFER_DESC_v1",                              {"HIP_EXTERNAL_MEMORY_BUFFER_DESC",                          "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CUDA_EXTERNAL_MEMORY_BUFFER_DESC_st",                              {"hipExternalMemoryBufferDesc_st",                           "", CONV_TYPE, API_DRIVER, 1}},
+  {"CUDA_EXTERNAL_MEMORY_BUFFER_DESC",                                 {"hipExternalMemoryBufferDesc",                              "", CONV_TYPE, API_DRIVER, 1}},
+  {"CUDA_EXTERNAL_MEMORY_BUFFER_DESC_v1",                              {"hipExternalMemoryBufferDesc",                              "", CONV_TYPE, API_DRIVER, 1}},
 
   // cudaExternalMemoryHandleDesc
-  {"CUDA_EXTERNAL_MEMORY_HANDLE_DESC_st",                              {"HIP_EXTERNAL_MEMORY_HANDLE_DESC",                          "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
-  {"CUDA_EXTERNAL_MEMORY_HANDLE_DESC",                                 {"HIP_EXTERNAL_MEMORY_HANDLE_DESC",                          "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
-  {"CUDA_EXTERNAL_MEMORY_HANDLE_DESC_v1",                              {"HIP_EXTERNAL_MEMORY_HANDLE_DESC",                          "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CUDA_EXTERNAL_MEMORY_HANDLE_DESC_st",                              {"hipExternalMemoryHandleDesc_st",                           "", CONV_TYPE, API_DRIVER, 1}},
+  {"CUDA_EXTERNAL_MEMORY_HANDLE_DESC",                                 {"hipExternalMemoryHandleDesc",                              "", CONV_TYPE, API_DRIVER, 1}},
+  {"CUDA_EXTERNAL_MEMORY_HANDLE_DESC_v1",                              {"hipExternalMemoryHandleDesc",                              "", CONV_TYPE, API_DRIVER, 1}},
 
   // cudaExternalMemoryMipmappedArrayDesc
   {"CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC_st",                     {"HIP_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC",                 "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
@@ -53,14 +53,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC_v1",                     {"HIP_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC",                 "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
 
   // cudaExternalSemaphoreHandleDesc
-  {"CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC_st",                           {"HIP_EXTERNAL_SEMAPHORE_HANDLE_DESC",                       "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
-  {"CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC",                              {"HIP_EXTERNAL_SEMAPHORE_HANDLE_DESC",                       "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
-  {"CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC_v1",                           {"HIP_EXTERNAL_SEMAPHORE_HANDLE_DESC",                       "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC_st",                           {"hipExternalSemaphoreHandleDesc_st",                        "", CONV_TYPE, API_DRIVER, 1}},
+  {"CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC",                              {"hipExternalSemaphoreHandleDesc",                           "", CONV_TYPE, API_DRIVER, 1}},
+  {"CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC_v1",                           {"hipExternalSemaphoreHandleDesc",                           "", CONV_TYPE, API_DRIVER, 1}},
 
   // cudaExternalSemaphoreSignalParams
-  {"CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS_st",                         {"HIP_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS",                     "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
-  {"CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS",                            {"HIP_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS",                     "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
-  {"CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS_v1",                         {"HIP_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS",                     "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS_st",                         {"hipExternalSemaphoreSignalParams_st",                      "", CONV_TYPE, API_DRIVER, 1}},
+  {"CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS",                            {"hipExternalSemaphoreSignalParams",                         "", CONV_TYPE, API_DRIVER, 1}},
+  {"CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS_v1",                         {"hipExternalSemaphoreSignalParams",                         "", CONV_TYPE, API_DRIVER, 1}},
 
   // cudaExternalSemaphoreWaitParams
   {"CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS_st",                           {"HIP_EXTERNAL_SEMAPHORE_WAIT_PARAMS",                       "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
@@ -168,12 +168,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // CUexternalMemory_st
   {"CUextMemory_st",                                                   {"hipExtMemory_st",                                          "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
   // cudaExternalMemory_t
-  {"CUexternalMemory",                                                 {"hipExternalMemory",                                        "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CUexternalMemory",                                                 {"hipExternalMemory_t",                                      "", CONV_TYPE, API_DRIVER, 1}},
 
   // CUexternalSemaphore_st
   {"CUextSemaphore_st",                                                {"hipExtSemaphore_st",                                       "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
   // cudaExternalSemaphore_t
-  {"CUexternalSemaphore",                                              {"hipExternalSemaphore",                                     "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CUexternalSemaphore",                                              {"hipExternalSemaphore_t",                                   "", CONV_TYPE, API_DRIVER, 1}},
 
   // no analogue
   {"CUfunc_st",                                                        {"ihipModuleSymbol_t",                                       "", CONV_TYPE, API_DRIVER, 1}},
@@ -844,38 +844,38 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_EVENT_INTERPROCESS",                                            {"hipEventInterprocess",                                     "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x04
 
   // cudaExternalMemoryHandleType
-  {"CUexternalMemoryHandleType",                                       {"hipExternalMemoryHandleType",                              "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
-  {"CUexternalMemoryHandleType_enum",                                  {"hipExternalMemoryHandleType",                              "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CUexternalMemoryHandleType",                                       {"hipExternalMemoryHandleType",                              "", CONV_TYPE, API_DRIVER, 1}},
+  {"CUexternalMemoryHandleType_enum",                                  {"hipExternalMemoryHandleType_enum",                         "", CONV_TYPE, API_DRIVER, 1}},
   // CUexternalMemoryHandleType enum values
   // cudaExternalMemoryHandleTypeOpaqueFd
-  {"CU_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD",                         {"hipExternalMemoryHandleTypeOpaqueFD",                      "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 1
+  {"CU_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD",                         {"hipExternalMemoryHandleTypeOpaqueFd",                      "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 1
   // cudaExternalMemoryHandleTypeOpaqueWin32
-  {"CU_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32",                      {"hipExternalMemoryHandleTypeOpaqueWin32",                   "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 2
+  {"CU_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32",                      {"hipExternalMemoryHandleTypeOpaqueWin32",                   "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 2
   // cudaExternalMemoryHandleTypeOpaqueWin32Kmt
-  {"CU_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT",                  {"hipExternalMemoryHandleTypeOpaqueWin32KMT",                "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 3
+  {"CU_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT",                  {"hipExternalMemoryHandleTypeOpaqueWin32Kmt",                "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 3
   // cudaExternalMemoryHandleTypeD3D12Heap
-  {"CU_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP",                        {"hipExternalMemoryHandleTypeD3D12Heap",                     "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 4
+  {"CU_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP",                        {"hipExternalMemoryHandleTypeD3D12Heap",                     "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 4
   // cudaExternalMemoryHandleTypeD3D12Resource
-  {"CU_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE",                    {"hipExternalMemoryHandleTypeD3D12Resource",                 "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 5
+  {"CU_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE",                    {"hipExternalMemoryHandleTypeD3D12Resource",                 "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 5
   // cudaExternalMemoryHandleTypeD3D11Resource
-  {"CU_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_RESOURCE",                    {"hipExternalMemoryHandleTypeD3D11Resource",                 "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 6
+  {"CU_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_RESOURCE",                    {"hipExternalMemoryHandleTypeD3D11Resource",                 "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 6
   // cudaExternalMemoryHandleTypeD3D11ResourceKmt
-  {"CU_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_RESOURCE_KMT",                {"hipExternalMemoryHandleTypeD3D11ResourceKmt",              "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 7
+  {"CU_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_RESOURCE_KMT",                {"hipExternalMemoryHandleTypeD3D11ResourceKmt",              "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 7
   // cudaExternalMemoryHandleTypeNvSciBuf
   {"CU_EXTERNAL_MEMORY_HANDLE_TYPE_NVSCIBUF",                          {"hipExternalMemoryHandleTypeNvSciBuf",                      "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 8
 
   // cudaExternalSemaphoreHandleType
-  {"CUexternalSemaphoreHandleType",                                    {"hipExternalSemaphoreHandleType",                           "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
-  {"CUexternalSemaphoreHandleType_enum",                               {"hipExternalSemaphoreHandleType",                           "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CUexternalSemaphoreHandleType",                                    {"hipExternalSemaphoreHandleType",                           "", CONV_TYPE, API_DRIVER, 1}},
+  {"CUexternalSemaphoreHandleType_enum",                               {"hipExternalSemaphoreHandleType_enum",                      "", CONV_TYPE, API_DRIVER, 1}},
   // CUexternalSemaphoreHandleType enum values
   // cudaExternalSemaphoreHandleTypeOpaqueFd
-  {"CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD",                      {"hipExternalSemaphoreHandleTypeOpaqueFD",                   "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 1
+  {"CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD",                      {"hipExternalSemaphoreHandleTypeOpaqueFd",                   "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 1
   // cudaExternalSemaphoreHandleTypeOpaqueWin32
-  {"CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32",                   {"hipExternalSemaphoreHandleTypeOpaqueWin32",                "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 2
+  {"CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32",                   {"hipExternalSemaphoreHandleTypeOpaqueWin32",                "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 2
   // cudaExternalSemaphoreHandleTypeOpaqueWin32Kmt
-  {"CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT",               {"hipExternalSemaphoreHandleTypeOpaqueWin32KMT",             "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 3
+  {"CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT",               {"hipExternalSemaphoreHandleTypeOpaqueWin32Kmt",             "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 3
   // cudaExternalSemaphoreHandleTypeD3D12Fence
-  {"CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE",                    {"hipExternalSemaphoreHandleTypeD3D12Fence",                 "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 4
+  {"CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE",                    {"hipExternalSemaphoreHandleTypeD3D12Fence",                 "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 4
   // cudaExternalSemaphoreHandleTypeD3D11Fence
   {"CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D11_FENCE",                    {"hipExternalSemaphoreHandleTypeD3D11Fence",                 "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 5
   // cudaExternalSemaphoreHandleTypeNvSciSync
@@ -2842,4 +2842,24 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {
   {"hipStreamWaitValueEq",                                             {HIP_4020, HIP_0,    HIP_0   }},
   {"hipStreamWaitValueAnd",                                            {HIP_4020, HIP_0,    HIP_0   }},
   {"hipStreamWaitValueNor",                                            {HIP_4020, HIP_0,    HIP_0   }},
+  {"hipExternalMemoryHandleType",                                      {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipExternalMemoryHandleType_enum",                                 {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipExternalMemoryHandleTypeOpaqueFd",                              {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipExternalMemoryHandleTypeOpaqueWin32",                           {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipExternalMemoryHandleTypeOpaqueWin32Kmt",                        {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipExternalMemoryHandleTypeD3D12Heap",                             {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipExternalMemoryHandleTypeD3D12Resource",                         {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipExternalMemoryHandleTypeD3D11Resource",                         {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipExternalMemoryHandleTypeD3D11ResourceKmt",                      {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipExternalMemoryHandleDesc_st",                                   {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipExternalMemoryBufferDesc_st",                                   {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipExternalMemory_t",                                              {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipExternalSemaphoreHandleType_enum",                              {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipExternalSemaphoreHandleTypeOpaqueFd",                           {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipExternalSemaphoreHandleTypeOpaqueWin32",                        {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipExternalSemaphoreHandleTypeOpaqueWin32Kmt",                     {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipExternalSemaphoreHandleTypeD3D12Fence",                         {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipExternalSemaphoreHandleDesc_st",                                {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipExternalSemaphore_t",                                           {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipExternalSemaphoreSignalParams_st",                              {HIP_4030, HIP_0,    HIP_0   }},
 };
