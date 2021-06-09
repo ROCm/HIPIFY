@@ -950,41 +950,41 @@ Unsupported
 |`cudaEventWaitExternal`| | | | | | | |
 |`cudaEvent_t`| | | |`hipEvent_t`|1.6.0| | |
 |`cudaExtent`| | | |`hipExtent`|1.7.0| | |
-|`cudaExternalMemoryBufferDesc`|10.0| | | | | | |
+|`cudaExternalMemoryBufferDesc`|10.0| | |`hipExternalMemoryBufferDesc`|4.3.0| | |
 |`cudaExternalMemoryDedicated`|10.0| | | | | | |
-|`cudaExternalMemoryHandleDesc`|10.0| | | | | | |
-|`cudaExternalMemoryHandleType`|10.0| | | | | | |
-|`cudaExternalMemoryHandleTypeD3D11Resource`|10.0| | | | | | |
-|`cudaExternalMemoryHandleTypeD3D11ResourceKmt`|10.2| | | | | | |
-|`cudaExternalMemoryHandleTypeD3D12Heap`|10.0| | | | | | |
-|`cudaExternalMemoryHandleTypeD3D12Resource`|10.0| | | | | | |
+|`cudaExternalMemoryHandleDesc`|10.0| | |`hipExternalMemoryHandleDesc`|4.3.0| | |
+|`cudaExternalMemoryHandleType`|10.0| | |`hipExternalMemoryHandleType`|4.3.0| | |
+|`cudaExternalMemoryHandleTypeD3D11Resource`|10.0| | |`hipExternalMemoryHandleTypeD3D11Resource`|4.3.0| | |
+|`cudaExternalMemoryHandleTypeD3D11ResourceKmt`|10.2| | |`hipExternalMemoryHandleTypeD3D11ResourceKmt`|4.3.0| | |
+|`cudaExternalMemoryHandleTypeD3D12Heap`|10.0| | |`hipExternalMemoryHandleTypeD3D12Heap`|4.3.0| | |
+|`cudaExternalMemoryHandleTypeD3D12Resource`|10.0| | |`hipExternalMemoryHandleTypeD3D12Resource`|4.3.0| | |
 |`cudaExternalMemoryHandleTypeNvSciBuf`|10.2| | | | | | |
-|`cudaExternalMemoryHandleTypeOpaqueFd`|10.0| | | | | | |
-|`cudaExternalMemoryHandleTypeOpaqueWin32`|10.0| | | | | | |
-|`cudaExternalMemoryHandleTypeOpaqueWin32Kmt`|10.0| | | | | | |
+|`cudaExternalMemoryHandleTypeOpaqueFd`|10.0| | |`hipExternalMemoryHandleTypeOpaqueFd`|4.3.0| | |
+|`cudaExternalMemoryHandleTypeOpaqueWin32`|10.0| | |`hipExternalMemoryHandleTypeOpaqueWin32`|4.3.0| | |
+|`cudaExternalMemoryHandleTypeOpaqueWin32Kmt`|10.0| | |`hipExternalMemoryHandleTypeOpaqueWin32Kmt`|4.3.0| | |
 |`cudaExternalMemoryMipmappedArrayDesc`|10.0| | | | | | |
-|`cudaExternalMemory_t`|10.0| | | | | | |
-|`cudaExternalSemaphoreHandleDesc`|10.0| | | | | | |
-|`cudaExternalSemaphoreHandleType`|10.0| | | | | | |
+|`cudaExternalMemory_t`|10.0| | |`hipExternalMemory_t`|4.3.0| | |
+|`cudaExternalSemaphoreHandleDesc`|10.0| | |`hipExternalSemaphoreHandleDesc`|4.3.0| | |
+|`cudaExternalSemaphoreHandleType`|10.0| | |`hipExternalSemaphoreHandleType`|4.3.0| | |
 |`cudaExternalSemaphoreHandleTypeD3D11Fence`|10.2| | | | | | |
-|`cudaExternalSemaphoreHandleTypeD3D12Fence`|10.0| | | | | | |
+|`cudaExternalSemaphoreHandleTypeD3D12Fence`|10.0| | |`hipExternalSemaphoreHandleTypeD3D12Fence`|4.3.0| | |
 |`cudaExternalSemaphoreHandleTypeKeyedMutex`|10.2| | | | | | |
 |`cudaExternalSemaphoreHandleTypeKeyedMutexKmt`|10.2| | | | | | |
 |`cudaExternalSemaphoreHandleTypeNvSciSync`|10.2| | | | | | |
-|`cudaExternalSemaphoreHandleTypeOpaqueFd`|10.0| | | | | | |
-|`cudaExternalSemaphoreHandleTypeOpaqueWin32`|10.0| | | | | | |
-|`cudaExternalSemaphoreHandleTypeOpaqueWin32Kmt`|10.0| | | | | | |
+|`cudaExternalSemaphoreHandleTypeOpaqueFd`|10.0| | |`hipExternalSemaphoreHandleTypeOpaqueFd`|4.3.0| | |
+|`cudaExternalSemaphoreHandleTypeOpaqueWin32`|10.0| | |`hipExternalSemaphoreHandleTypeOpaqueWin32`|4.3.0| | |
+|`cudaExternalSemaphoreHandleTypeOpaqueWin32Kmt`|10.0| | |`hipExternalSemaphoreHandleTypeOpaqueWin32Kmt`|4.3.0| | |
 |`cudaExternalSemaphoreHandleTypeTimelineSemaphoreFd`|11.2| | | | | | |
 |`cudaExternalSemaphoreHandleTypeTimelineSemaphoreWin32`|11.2| | | | | | |
 |`cudaExternalSemaphoreSignalNodeParams`|11.2| | | | | | |
-|`cudaExternalSemaphoreSignalParams`|10.0| | | | | | |
-|`cudaExternalSemaphoreSignalParams_v1`|11.2| | | | | | |
+|`cudaExternalSemaphoreSignalParams`|10.0| | |`hipExternalSemaphoreSignalParams`|4.3.0| | |
+|`cudaExternalSemaphoreSignalParams_v1`|11.2| | |`hipExternalSemaphoreSignalParams`|4.3.0| | |
 |`cudaExternalSemaphoreSignalSkipNvSciBufMemSync`|10.2| | | | | | |
 |`cudaExternalSemaphoreWaitNodeParams`|11.2| | | | | | |
 |`cudaExternalSemaphoreWaitParams`|10.0| | | | | | |
 |`cudaExternalSemaphoreWaitParams_v1`|11.2| | | | | | |
 |`cudaExternalSemaphoreWaitSkipNvSciBufMemSync`|10.2| | | | | | |
-|`cudaExternalSemaphore_t`|10.0| | | | | | |
+|`cudaExternalSemaphore_t`|10.0| | |`hipExternalSemaphore_t`|4.3.0| | |
 |`cudaFilterModeLinear`| | | |`hipFilterModeLinear`|1.7.0| | |
 |`cudaFilterModePoint`| | | |`hipFilterModePoint`|1.6.0| | |
 |`cudaFlushGPUDirectRDMAWritesOptionHost`|11.3| | | | | | |
