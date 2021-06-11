@@ -103,6 +103,10 @@
 |`__fsub_rn`| | | |`__fsub_rn`|1.6.0| | |
 |`__fsub_ru`| | | |`__fsub_ru`|1.6.0| | |
 |`__fsub_rz`| | | |`__fsub_rz`|1.6.0| | |
+|`__funnelshift_l`| | | |`__funnelshift_l`|4.3.0| | |
+|`__funnelshift_lc`| | | |`__funnelshift_lc`|4.3.0| | |
+|`__funnelshift_r`| | | |`__funnelshift_r`|4.3.0| | |
+|`__funnelshift_rc`| | | |`__funnelshift_rc`|4.3.0| | |
 |`__h2div`| | | |`__h2div`|1.9.0| | |
 |`__habs`| | | |`__habs`|3.5.0| | |
 |`__habs2`| | | |`__habs2`|3.5.0| | |
