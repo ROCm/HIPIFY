@@ -968,6 +968,7 @@ sub simpleSubstitutions {
     $ft{'memory'} += s/\bcudaMemcpy2DFromArray\b/hipMemcpy2DFromArray/g;
     $ft{'memory'} += s/\bcudaMemcpy2DFromArrayAsync\b/hipMemcpy2DFromArrayAsync/g;
     $ft{'memory'} += s/\bcudaMemcpy2DToArray\b/hipMemcpy2DToArray/g;
+    $ft{'memory'} += s/\bcudaMemcpy2DToArrayAsync\b/hipMemcpy2DToArrayAsync/g;
     $ft{'memory'} += s/\bcudaMemcpy3D\b/hipMemcpy3D/g;
     $ft{'memory'} += s/\bcudaMemcpy3DAsync\b/hipMemcpy3DAsync/g;
     $ft{'memory'} += s/\bcudaMemcpyAsync\b/hipMemcpyAsync/g;
@@ -994,10 +995,13 @@ sub simpleSubstitutions {
     $ft{'addressing'} += s/\bcudaPointerGetAttributes\b/hipPointerGetAttributes/g;
     $ft{'stream'} += s/\bcuStreamAddCallback\b/hipStreamAddCallback/g;
     $ft{'stream'} += s/\bcuStreamAttachMemAsync\b/hipStreamAttachMemAsync/g;
+    $ft{'stream'} += s/\bcuStreamBeginCapture\b/hipStreamBeginCapture/g;
+    $ft{'stream'} += s/\bcuStreamBeginCapture_v2\b/hipStreamBeginCapture/g;
     $ft{'stream'} += s/\bcuStreamCreate\b/hipStreamCreateWithFlags/g;
     $ft{'stream'} += s/\bcuStreamCreateWithPriority\b/hipStreamCreateWithPriority/g;
     $ft{'stream'} += s/\bcuStreamDestroy\b/hipStreamDestroy/g;
     $ft{'stream'} += s/\bcuStreamDestroy_v2\b/hipStreamDestroy/g;
+    $ft{'stream'} += s/\bcuStreamEndCapture\b/hipStreamEndCapture/g;
     $ft{'stream'} += s/\bcuStreamGetFlags\b/hipStreamGetFlags/g;
     $ft{'stream'} += s/\bcuStreamGetPriority\b/hipStreamGetPriority/g;
     $ft{'stream'} += s/\bcuStreamQuery\b/hipStreamQuery/g;
@@ -1005,10 +1009,12 @@ sub simpleSubstitutions {
     $ft{'stream'} += s/\bcuStreamWaitEvent\b/hipStreamWaitEvent/g;
     $ft{'stream'} += s/\bcudaStreamAddCallback\b/hipStreamAddCallback/g;
     $ft{'stream'} += s/\bcudaStreamAttachMemAsync\b/hipStreamAttachMemAsync/g;
+    $ft{'stream'} += s/\bcudaStreamBeginCapture\b/hipStreamBeginCapture/g;
     $ft{'stream'} += s/\bcudaStreamCreate\b/hipStreamCreate/g;
     $ft{'stream'} += s/\bcudaStreamCreateWithFlags\b/hipStreamCreateWithFlags/g;
     $ft{'stream'} += s/\bcudaStreamCreateWithPriority\b/hipStreamCreateWithPriority/g;
     $ft{'stream'} += s/\bcudaStreamDestroy\b/hipStreamDestroy/g;
+    $ft{'stream'} += s/\bcudaStreamEndCapture\b/hipStreamEndCapture/g;
     $ft{'stream'} += s/\bcudaStreamGetFlags\b/hipStreamGetFlags/g;
     $ft{'stream'} += s/\bcudaStreamGetPriority\b/hipStreamGetPriority/g;
     $ft{'stream'} += s/\bcudaStreamQuery\b/hipStreamQuery/g;
@@ -1028,6 +1034,19 @@ sub simpleSubstitutions {
     $ft{'event'} += s/\bcudaEventQuery\b/hipEventQuery/g;
     $ft{'event'} += s/\bcudaEventRecord\b/hipEventRecord/g;
     $ft{'event'} += s/\bcudaEventSynchronize\b/hipEventSynchronize/g;
+    $ft{'external_resource_interop'} += s/\bcuDestroyExternalMemory\b/hipDestroyExternalMemory/g;
+    $ft{'external_resource_interop'} += s/\bcuExternalMemoryGetMappedBuffer\b/hipExternalMemoryGetMappedBuffer/g;
+    $ft{'external_resource_interop'} += s/\bcuImportExternalMemory\b/hipImportExternalMemory/g;
+    $ft{'external_resource_interop'} += s/\bcuImportExternalSemaphore\b/hipImportExternalSemaphore/g;
+    $ft{'external_resource_interop'} += s/\bcuSignalExternalSemaphoresAsync\b/hipSignalExternalSemaphoresAsync/g;
+    $ft{'external_resource_interop'} += s/\bcuWaitExternalSemaphoresAsync\b/hipWaitExternalSemaphoresAsync/g;
+    $ft{'external_resource_interop'} += s/\bcudaDestroyExternalMemory\b/hipDestroyExternalMemory/g;
+    $ft{'external_resource_interop'} += s/\bcudaDestroyExternalSemaphore\b/hipDestroyExternalSemaphore/g;
+    $ft{'external_resource_interop'} += s/\bcudaExternalMemoryGetMappedBuffer\b/hipExternalMemoryGetMappedBuffer/g;
+    $ft{'external_resource_interop'} += s/\bcudaImportExternalMemory\b/hipImportExternalMemory/g;
+    $ft{'external_resource_interop'} += s/\bcudaImportExternalSemaphore\b/hipImportExternalSemaphore/g;
+    $ft{'external_resource_interop'} += s/\bcudaSignalExternalSemaphoresAsync\b/hipSignalExternalSemaphoresAsync/g;
+    $ft{'external_resource_interop'} += s/\bcudaWaitExternalSemaphoresAsync\b/hipWaitExternalSemaphoresAsync/g;
     $ft{'stream_memory'} += s/\bcuStreamWaitValue32\b/hipStreamWaitValue32/g;
     $ft{'stream_memory'} += s/\bcuStreamWaitValue64\b/hipStreamWaitValue64/g;
     $ft{'stream_memory'} += s/\bcuStreamWriteValue32\b/hipStreamWriteValue32/g;
@@ -1043,6 +1062,23 @@ sub simpleSubstitutions {
     $ft{'execution'} += s/\bcudaLaunchCooperativeKernelMultiDevice\b/hipLaunchCooperativeKernelMultiDevice/g;
     $ft{'execution'} += s/\bcudaLaunchKernel\b/hipLaunchKernel/g;
     $ft{'execution'} += s/\bcudaSetupArgument\b/hipSetupArgument/g;
+    $ft{'graph'} += s/\bcuGraphAddKernelNode\b/hipGraphAddKernelNode/g;
+    $ft{'graph'} += s/\bcuGraphAddMemcpyNode\b/hipGraphAddMemcpyNode/g;
+    $ft{'graph'} += s/\bcuGraphAddMemsetNode\b/hipGraphAddMemsetNode/g;
+    $ft{'graph'} += s/\bcuGraphCreate\b/hipGraphCreate/g;
+    $ft{'graph'} += s/\bcuGraphDestroy\b/hipGraphDestroy/g;
+    $ft{'graph'} += s/\bcuGraphExecDestroy\b/hipGraphExecDestroy/g;
+    $ft{'graph'} += s/\bcuGraphInstantiate\b/hipGraphInstantiate/g;
+    $ft{'graph'} += s/\bcuGraphInstantiate_v2\b/hipGraphInstantiate/g;
+    $ft{'graph'} += s/\bcuGraphLaunch\b/hipGraphLaunch/g;
+    $ft{'graph'} += s/\bcudaGraphAddKernelNode\b/hipGraphAddKernelNode/g;
+    $ft{'graph'} += s/\bcudaGraphAddMemcpyNode\b/hipGraphAddMemcpyNode/g;
+    $ft{'graph'} += s/\bcudaGraphAddMemsetNode\b/hipGraphAddMemsetNode/g;
+    $ft{'graph'} += s/\bcudaGraphCreate\b/hipGraphCreate/g;
+    $ft{'graph'} += s/\bcudaGraphDestroy\b/hipGraphDestroy/g;
+    $ft{'graph'} += s/\bcudaGraphExecDestroy\b/hipGraphExecDestroy/g;
+    $ft{'graph'} += s/\bcudaGraphInstantiate\b/hipGraphInstantiate/g;
+    $ft{'graph'} += s/\bcudaGraphLaunch\b/hipGraphLaunch/g;
     $ft{'occupancy'} += s/\bcuOccupancyMaxActiveBlocksPerMultiprocessor\b/hipModuleOccupancyMaxActiveBlocksPerMultiprocessor/g;
     $ft{'occupancy'} += s/\bcuOccupancyMaxActiveBlocksPerMultiprocessorWithFlags\b/hipModuleOccupancyMaxActiveBlocksPerMultiprocessorWithFlags/g;
     $ft{'occupancy'} += s/\bcuOccupancyMaxPotentialBlockSize\b/hipModuleOccupancyMaxPotentialBlockSize/g;
@@ -4629,7 +4665,6 @@ sub warnUnsupportedFunctions {
         "cudnnAdvTrainVersionCheck",
         "cudnnAdvInferVersionCheck",
         "cudnnActivationStruct",
-        "cudaWaitExternalSemaphoresAsync",
         "cudaWGLGetDevice",
         "cudaVDPAUSetVDPAUDevice",
         "cudaVDPAUGetDevice",
@@ -4658,15 +4693,12 @@ sub warnUnsupportedFunctions {
         "cudaStreamIsCapturing",
         "cudaStreamGetCaptureInfo",
         "cudaStreamGetAttribute",
-        "cudaStreamEndCapture",
         "cudaStreamCopyAttributes",
-        "cudaStreamBeginCapture",
         "cudaStreamAttributeSynchronizationPolicy",
         "cudaStreamAttributeAccessPolicyWindow",
         "cudaStreamAttrValue",
         "cudaStreamAttrID",
         "cudaStreamAddCaptureDependencies",
-        "cudaSignalExternalSemaphoresAsync",
         "cudaSharedmemCarveoutMaxShared",
         "cudaSharedmemCarveoutMaxL1",
         "cudaSharedmemCarveoutDefault",
@@ -4694,7 +4726,6 @@ sub warnUnsupportedFunctions {
         "cudaMemcpy3DPeerParms",
         "cudaMemcpy3DPeerAsync",
         "cudaMemcpy3DPeer",
-        "cudaMemcpy2DToArrayAsync",
         "cudaMemcpy2DArrayToArray",
         "cudaMemPool_t",
         "cudaMemPoolTrimTo",
@@ -4752,8 +4783,6 @@ sub warnUnsupportedFunctions {
         "cudaKernelNodeAttributeAccessPolicyWindow",
         "cudaKernelNodeAttrValue",
         "cudaKernelNodeAttrID",
-        "cudaImportExternalSemaphore",
-        "cudaImportExternalMemory",
         "cudaHostRegisterReadOnly",
         "cudaHostNodeParams",
         "cudaGraphicsVDPAURegisterVideoSurface",
@@ -4808,13 +4837,11 @@ sub warnUnsupportedFunctions {
         "cudaGraphMemcpyNodeSetParams1D",
         "cudaGraphMemcpyNodeSetParams",
         "cudaGraphMemcpyNodeGetParams",
-        "cudaGraphLaunch",
         "cudaGraphKernelNodeSetParams",
         "cudaGraphKernelNodeSetAttribute",
         "cudaGraphKernelNodeGetParams",
         "cudaGraphKernelNodeGetAttribute",
         "cudaGraphKernelNodeCopyAttributes",
-        "cudaGraphInstantiate",
         "cudaGraphHostNodeSetParams",
         "cudaGraphHostNodeGetParams",
         "cudaGraphGetRootNodes",
@@ -4837,14 +4864,12 @@ sub warnUnsupportedFunctions {
         "cudaGraphExecExternalSemaphoresSignalNodeSetParams",
         "cudaGraphExecEventWaitNodeSetEvent",
         "cudaGraphExecEventRecordNodeSetEvent",
-        "cudaGraphExecDestroy",
         "cudaGraphExecChildGraphNodeSetParams",
         "cudaGraphEventWaitNodeSetEvent",
         "cudaGraphEventWaitNodeGetEvent",
         "cudaGraphEventRecordNodeSetEvent",
         "cudaGraphEventRecordNodeGetEvent",
         "cudaGraphDestroyNode",
-        "cudaGraphDestroy",
         "cudaGraphDebugDotPrint",
         "cudaGraphDebugDotFlagsVerbose",
         "cudaGraphDebugDotFlagsMemsetNodeParams",
@@ -4857,15 +4882,11 @@ sub warnUnsupportedFunctions {
         "cudaGraphDebugDotFlagsExtSemasSignalNodeParams",
         "cudaGraphDebugDotFlagsEventNodeParams",
         "cudaGraphDebugDotFlags",
-        "cudaGraphCreate",
         "cudaGraphClone",
         "cudaGraphChildGraphNodeGetGraph",
-        "cudaGraphAddMemsetNode",
         "cudaGraphAddMemcpyNodeToSymbol",
         "cudaGraphAddMemcpyNodeFromSymbol",
         "cudaGraphAddMemcpyNode1D",
-        "cudaGraphAddMemcpyNode",
-        "cudaGraphAddKernelNode",
         "cudaGraphAddHostNode",
         "cudaGraphAddExternalSemaphoresWaitNode",
         "cudaGraphAddExternalSemaphoresSignalNode",
@@ -4928,7 +4949,6 @@ sub warnUnsupportedFunctions {
         "cudaExternalMemoryMipmappedArrayDesc",
         "cudaExternalMemoryHandleTypeNvSciBuf",
         "cudaExternalMemoryGetMappedMipmappedArray",
-        "cudaExternalMemoryGetMappedBuffer",
         "cudaExternalMemoryDedicated",
         "cudaEventWaitExternal",
         "cudaEventWaitDefault",
@@ -5167,8 +5187,6 @@ sub warnUnsupportedFunctions {
         "cudaDevAttrCanUseHostPointerForRegisteredMem",
         "cudaDevAttrCanFlushRemoteWrites",
         "cudaDevAttrAsyncEngineCount",
-        "cudaDestroyExternalSemaphore",
-        "cudaDestroyExternalMemory",
         "cudaD3D9UnregisterResource",
         "cudaD3D9UnmapResources",
         "cudaD3D9SetDirect3DDevice",
@@ -5306,7 +5324,6 @@ sub warnUnsupportedFunctions {
         "cublasCgelsBatched",
         "cublasAsumEx",
         "cublasAlloc",
-        "cuWaitExternalSemaphoresAsync",
         "cuWGLGetDevice",
         "cuVDPAUGetDevice",
         "cuVDPAUCtxCreate",
@@ -5329,13 +5346,9 @@ sub warnUnsupportedFunctions {
         "cuStreamGetCaptureInfo_v2",
         "cuStreamGetCaptureInfo",
         "cuStreamGetAttribute",
-        "cuStreamEndCapture",
         "cuStreamCopyAttributes",
-        "cuStreamBeginCapture_v2",
         "cuStreamBeginCapture_ptsz",
-        "cuStreamBeginCapture",
         "cuStreamBatchMemOp",
-        "cuSignalExternalSemaphoresAsync",
         "cuProfilerInitialize",
         "cuPointerSetAttribute",
         "cuPointerGetAttributes",
@@ -5416,8 +5429,6 @@ sub warnUnsupportedFunctions {
         "cuLaunchCooperativeKernelMultiDevice",
         "cuLaunchCooperativeKernel",
         "cuLaunch",
-        "cuImportExternalSemaphore",
-        "cuImportExternalMemory",
         "cuGraphicsVDPAURegisterVideoSurface",
         "cuGraphicsVDPAURegisterOutputSurface",
         "cuGraphicsUnregisterResource",
@@ -5448,14 +5459,11 @@ sub warnUnsupportedFunctions {
         "cuGraphMemsetNodeGetParams",
         "cuGraphMemcpyNodeSetParams",
         "cuGraphMemcpyNodeGetParams",
-        "cuGraphLaunch",
         "cuGraphKernelNodeSetParams",
         "cuGraphKernelNodeSetAttribute",
         "cuGraphKernelNodeGetParams",
         "cuGraphKernelNodeGetAttribute",
         "cuGraphKernelNodeCopyAttributes",
-        "cuGraphInstantiate_v2",
-        "cuGraphInstantiate",
         "cuGraphHostNodeSetParams",
         "cuGraphHostNodeGetParams",
         "cuGraphGetRootNodes",
@@ -5474,21 +5482,15 @@ sub warnUnsupportedFunctions {
         "cuGraphExecExternalSemaphoresSignalNodeSetParams",
         "cuGraphExecEventWaitNodeSetEvent",
         "cuGraphExecEventRecordNodeSetEvent",
-        "cuGraphExecDestroy",
         "cuGraphExecChildGraphNodeSetParams",
         "cuGraphEventWaitNodeSetEvent",
         "cuGraphEventWaitNodeGetEvent",
         "cuGraphEventRecordNodeSetEvent",
         "cuGraphEventRecordNodeGetEvent",
         "cuGraphDestroyNode",
-        "cuGraphDestroy",
         "cuGraphDebugDotPrint",
-        "cuGraphCreate",
         "cuGraphClone",
         "cuGraphChildGraphNodeGetGraph",
-        "cuGraphAddMemsetNode",
-        "cuGraphAddMemcpyNode",
-        "cuGraphAddKernelNode",
         "cuGraphAddHostNode",
         "cuGraphAddExternalSemaphoresWaitNode",
         "cuGraphAddExternalSemaphoresSignalNode",
@@ -5518,7 +5520,6 @@ sub warnUnsupportedFunctions {
         "cuFuncGetModule",
         "cuFlushGPUDirectRDMAWrites",
         "cuExternalMemoryGetMappedMipmappedArray",
-        "cuExternalMemoryGetMappedBuffer",
         "cuEventRecordWithFlags",
         "cuEventCreateFromEGLSync",
         "cuEGLStreamProducerReturnFrame",
@@ -5539,7 +5540,6 @@ sub warnUnsupportedFunctions {
         "cuDeviceGetLuid",
         "cuDeviceGetDefaultMemPool",
         "cuDestroyExternalSemaphore",
-        "cuDestroyExternalMemory",
         "cuD3D9UnregisterResource",
         "cuD3D9UnmapResources",
         "cuD3D9ResourceSetMapFlags",

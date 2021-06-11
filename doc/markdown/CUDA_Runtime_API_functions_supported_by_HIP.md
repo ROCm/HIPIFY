@@ -64,13 +64,13 @@
 |`cudaCtxResetPersistingL2Cache`|11.0| | | | | | |
 |`cudaStreamAddCallback`| | | |`hipStreamAddCallback`|1.6.0| | |
 |`cudaStreamAttachMemAsync`| | | |`hipStreamAttachMemAsync`|3.7.0| | |
-|`cudaStreamBeginCapture`|10.0| | | | | | |
+|`cudaStreamBeginCapture`|10.0| | |`hipStreamBeginCapture`|4.3.0| | |
 |`cudaStreamCopyAttributes`|11.0| | | | | | |
 |`cudaStreamCreate`| | | |`hipStreamCreate`|1.6.0| | |
 |`cudaStreamCreateWithFlags`| | | |`hipStreamCreateWithFlags`|1.6.0| | |
 |`cudaStreamCreateWithPriority`| | | |`hipStreamCreateWithPriority`|2.0.0| | |
 |`cudaStreamDestroy`| | | |`hipStreamDestroy`|1.6.0| | |
-|`cudaStreamEndCapture`|10.0| | | | | | |
+|`cudaStreamEndCapture`|10.0| | |`hipStreamEndCapture`|4.3.0| | |
 |`cudaStreamGetAttribute`|11.0| | | | | | |
 |`cudaStreamGetCaptureInfo`|10.1| | | | | | |
 |`cudaStreamGetFlags`| | | |`hipStreamGetFlags`|1.6.0| | |
@@ -99,14 +99,14 @@
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|
-|`cudaDestroyExternalMemory`|10.0| | | | | | |
-|`cudaDestroyExternalSemaphore`|10.0| | | | | | |
-|`cudaExternalMemoryGetMappedBuffer`|10.0| | | | | | |
+|`cudaDestroyExternalMemory`|10.0| | |`hipDestroyExternalMemory`|4.3.0| | |
+|`cudaDestroyExternalSemaphore`|10.0| | |`hipDestroyExternalSemaphore`|4.3.0| | |
+|`cudaExternalMemoryGetMappedBuffer`|10.0| | |`hipExternalMemoryGetMappedBuffer`|4.3.0| | |
 |`cudaExternalMemoryGetMappedMipmappedArray`|10.0| | | | | | |
-|`cudaImportExternalMemory`|10.0| | | | | | |
-|`cudaImportExternalSemaphore`|10.0| | | | | | |
-|`cudaSignalExternalSemaphoresAsync`|10.0| | | | | | |
-|`cudaWaitExternalSemaphoresAsync`|10.0| | | | | | |
+|`cudaImportExternalMemory`|10.0| | |`hipImportExternalMemory`|4.3.0| | |
+|`cudaImportExternalSemaphore`|10.0| | |`hipImportExternalSemaphore`|4.3.0| | |
+|`cudaSignalExternalSemaphoresAsync`|10.0| | |`hipSignalExternalSemaphoresAsync`|4.3.0| | |
+|`cudaWaitExternalSemaphoresAsync`|10.0| | |`hipWaitExternalSemaphoresAsync`|4.3.0| | |
 
 ## **7. Execution Control**
 
@@ -176,7 +176,7 @@
 |`cudaMemcpy2DFromArray`| | | |`hipMemcpy2DFromArray`|3.0.0| | |
 |`cudaMemcpy2DFromArrayAsync`| | | |`hipMemcpy2DFromArrayAsync`|3.0.0| | |
 |`cudaMemcpy2DToArray`| | | |`hipMemcpy2DToArray`|1.6.0| | |
-|`cudaMemcpy2DToArrayAsync`| | | | | | | |
+|`cudaMemcpy2DToArrayAsync`| | | |`hipMemcpy2DToArrayAsync`|4.3.0| | |
 |`cudaMemcpy3D`| | | |`hipMemcpy3D`|1.6.0| | |
 |`cudaMemcpy3DAsync`| | | |`hipMemcpy3DAsync`|2.8.0| | |
 |`cudaMemcpy3DPeer`| | | | | | | |
@@ -424,24 +424,24 @@
 |`cudaGraphAddExternalSemaphoresSignalNode`|11.2| | | | | | |
 |`cudaGraphAddExternalSemaphoresWaitNode`|11.2| | | | | | |
 |`cudaGraphAddHostNode`|10.0| | | | | | |
-|`cudaGraphAddKernelNode`|10.0| | | | | | |
-|`cudaGraphAddMemcpyNode`|10.0| | | | | | |
+|`cudaGraphAddKernelNode`|10.0| | |`hipGraphAddKernelNode`|4.3.0| | |
+|`cudaGraphAddMemcpyNode`|10.0| | |`hipGraphAddMemcpyNode`|4.3.0| | |
 |`cudaGraphAddMemcpyNode1D`|11.1| | | | | | |
 |`cudaGraphAddMemcpyNodeFromSymbol`|11.1| | | | | | |
 |`cudaGraphAddMemcpyNodeToSymbol`|11.1| | | | | | |
-|`cudaGraphAddMemsetNode`|10.0| | | | | | |
+|`cudaGraphAddMemsetNode`|10.0| | |`hipGraphAddMemsetNode`|4.3.0| | |
 |`cudaGraphChildGraphNodeGetGraph`|10.0| | | | | | |
 |`cudaGraphClone`|10.0| | | | | | |
-|`cudaGraphCreate`|10.0| | | | | | |
+|`cudaGraphCreate`|10.0| | |`hipGraphCreate`|4.3.0| | |
 |`cudaGraphDebugDotPrint`|11.3| | | | | | |
-|`cudaGraphDestroy`|10.0| | | | | | |
+|`cudaGraphDestroy`|10.0| | |`hipGraphDestroy`|4.3.0| | |
 |`cudaGraphDestroyNode`|10.0| | | | | | |
 |`cudaGraphEventRecordNodeGetEvent`|11.1| | | | | | |
 |`cudaGraphEventRecordNodeSetEvent`|11.1| | | | | | |
 |`cudaGraphEventWaitNodeGetEvent`|11.1| | | | | | |
 |`cudaGraphEventWaitNodeSetEvent`|11.1| | | | | | |
 |`cudaGraphExecChildGraphNodeSetParams`|11.1| | | | | | |
-|`cudaGraphExecDestroy`|10.0| | | | | | |
+|`cudaGraphExecDestroy`|10.0| | |`hipGraphExecDestroy`|4.3.0| | |
 |`cudaGraphExecEventRecordNodeSetEvent`|11.1| | | | | | |
 |`cudaGraphExecEventWaitNodeSetEvent`|11.1| | | | | | |
 |`cudaGraphExecExternalSemaphoresSignalNodeSetParams`|11.2| | | | | | |
@@ -463,13 +463,13 @@
 |`cudaGraphGetRootNodes`|10.0| | | | | | |
 |`cudaGraphHostNodeGetParams`|10.0| | | | | | |
 |`cudaGraphHostNodeSetParams`|10.0| | | | | | |
-|`cudaGraphInstantiate`|10.0| | | | | | |
+|`cudaGraphInstantiate`|10.0| | |`hipGraphInstantiate`|4.3.0| | |
 |`cudaGraphKernelNodeCopyAttributes`|11.0| | | | | | |
 |`cudaGraphKernelNodeGetAttribute`|11.0| | | | | | |
 |`cudaGraphKernelNodeGetParams`|11.0| | | | | | |
 |`cudaGraphKernelNodeSetAttribute`|11.0| | | | | | |
 |`cudaGraphKernelNodeSetParams`|11.0| | | | | | |
-|`cudaGraphLaunch`|11.0| | | | | | |
+|`cudaGraphLaunch`|11.0| | |`hipGraphLaunch`|4.3.0| | |
 |`cudaGraphMemcpyNodeGetParams`|11.0| | | | | | |
 |`cudaGraphMemcpyNodeSetParams`|11.0| | | | | | |
 |`cudaGraphMemcpyNodeSetParams1D`|11.1| | | | | | |

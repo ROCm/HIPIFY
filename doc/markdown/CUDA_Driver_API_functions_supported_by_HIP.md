@@ -1291,15 +1291,15 @@
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|
 |`cuStreamAddCallback`| | | |`hipStreamAddCallback`|1.6.0| | |
 |`cuStreamAttachMemAsync`| | | |`hipStreamAttachMemAsync`|3.7.0| | |
-|`cuStreamBeginCapture`|10.0| | | | | | |
-|`cuStreamBeginCapture_ptsz`|10.1| | | | | | |
-|`cuStreamBeginCapture_v2`|10.1| | | | | | |
+|`cuStreamBeginCapture`|10.0| | |`hipStreamBeginCapture`|4.3.0| | |
+|`cuStreamBeginCapture_ptsz`|10.1| | | |4.3.0| | |
+|`cuStreamBeginCapture_v2`|10.1| | |`hipStreamBeginCapture`|4.3.0| | |
 |`cuStreamCopyAttributes`|11.0| | | | | | |
 |`cuStreamCreate`| | | |`hipStreamCreateWithFlags`|1.6.0| | |
 |`cuStreamCreateWithPriority`| | | |`hipStreamCreateWithPriority`|2.0.0| | |
 |`cuStreamDestroy`| | | |`hipStreamDestroy`|1.6.0| | |
 |`cuStreamDestroy_v2`| | | |`hipStreamDestroy`|1.6.0| | |
-|`cuStreamEndCapture`|10.0| | | | | | |
+|`cuStreamEndCapture`|10.0| | |`hipStreamEndCapture`|4.3.0| | |
 |`cuStreamGetAttribute`|11.0| | | | | | |
 |`cuStreamGetCaptureInfo`|10.1| | | | | | |
 |`cuStreamGetCaptureInfo_v2`|11.3| | | | | | |
@@ -1331,14 +1331,14 @@
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|
-|`cuDestroyExternalMemory`|10.0| | | | | | |
-|`cuDestroyExternalSemaphore`|10.0| | | | | | |
-|`cuExternalMemoryGetMappedBuffer`|10.0| | | | | | |
+|`cuDestroyExternalMemory`|10.0| | |`hipDestroyExternalMemory`|4.3.0| | |
+|`cuDestroyExternalSemaphore`|10.0| | | |4.3.0| | |
+|`cuExternalMemoryGetMappedBuffer`|10.0| | |`hipExternalMemoryGetMappedBuffer`|4.3.0| | |
 |`cuExternalMemoryGetMappedMipmappedArray`|10.0| | | | | | |
-|`cuImportExternalMemory`|10.0| | | | | | |
-|`cuImportExternalSemaphore`|10.0| | | | | | |
-|`cuSignalExternalSemaphoresAsync`|10.0| | | | | | |
-|`cuWaitExternalSemaphoresAsync`|10.0| | | | | | |
+|`cuImportExternalMemory`|10.0| | |`hipImportExternalMemory`|4.3.0| | |
+|`cuImportExternalSemaphore`|10.0| | |`hipImportExternalSemaphore`|4.3.0| | |
+|`cuSignalExternalSemaphoresAsync`|10.0| | |`hipSignalExternalSemaphoresAsync`|4.3.0| | |
+|`cuWaitExternalSemaphoresAsync`|10.0| | |`hipWaitExternalSemaphoresAsync`|4.3.0| | |
 
 ## **18. Stream Memory Operations**
 
@@ -1391,21 +1391,21 @@
 |`cuGraphAddExternalSemaphoresSignalNode`|11.2| | | | | | |
 |`cuGraphAddExternalSemaphoresWaitNode`|11.2| | | | | | |
 |`cuGraphAddHostNode`|10.0| | | | | | |
-|`cuGraphAddKernelNode`|10.0| | | | | | |
-|`cuGraphAddMemcpyNode`|10.0| | | | | | |
-|`cuGraphAddMemsetNode`|10.0| | | | | | |
+|`cuGraphAddKernelNode`|10.0| | |`hipGraphAddKernelNode`|4.3.0| | |
+|`cuGraphAddMemcpyNode`|10.0| | |`hipGraphAddMemcpyNode`|4.3.0| | |
+|`cuGraphAddMemsetNode`|10.0| | |`hipGraphAddMemsetNode`|4.3.0| | |
 |`cuGraphChildGraphNodeGetGraph`|10.0| | | | | | |
 |`cuGraphClone`|10.0| | | | | | |
-|`cuGraphCreate`|10.0| | | | | | |
+|`cuGraphCreate`|10.0| | |`hipGraphCreate`|4.3.0| | |
 |`cuGraphDebugDotPrint`|11.3| | | | | | |
-|`cuGraphDestroy`|10.0| | | | | | |
+|`cuGraphDestroy`|10.0| | |`hipGraphDestroy`|4.3.0| | |
 |`cuGraphDestroyNode`|10.0| | | | | | |
 |`cuGraphEventRecordNodeGetEvent`|11.1| | | | | | |
 |`cuGraphEventRecordNodeSetEvent`|11.1| | | | | | |
 |`cuGraphEventWaitNodeGetEvent`|11.1| | | | | | |
 |`cuGraphEventWaitNodeSetEvent`|11.1| | | | | | |
 |`cuGraphExecChildGraphNodeSetParams`|11.1| | | | | | |
-|`cuGraphExecDestroy`|10.0| | | | | | |
+|`cuGraphExecDestroy`|10.0| | |`hipGraphExecDestroy`|4.3.0| | |
 |`cuGraphExecEventRecordNodeSetEvent`|11.1| | | | | | |
 |`cuGraphExecEventWaitNodeSetEvent`|11.1| | | | | | |
 |`cuGraphExecExternalSemaphoresSignalNodeSetParams`|11.2| | | | | | |
@@ -1424,14 +1424,14 @@
 |`cuGraphGetRootNodes`|10.0| | | | | | |
 |`cuGraphHostNodeGetParams`|10.0| | | | | | |
 |`cuGraphHostNodeSetParams`|10.0| | | | | | |
-|`cuGraphInstantiate`|10.0| | | | | | |
-|`cuGraphInstantiate_v2`|11.0| | | | | | |
+|`cuGraphInstantiate`|10.0| | |`hipGraphInstantiate`|4.3.0| | |
+|`cuGraphInstantiate_v2`|11.0| | |`hipGraphInstantiate`|4.3.0| | |
 |`cuGraphKernelNodeCopyAttributes`|11.0| | | | | | |
 |`cuGraphKernelNodeGetAttribute`|11.0| | | | | | |
 |`cuGraphKernelNodeGetParams`|10.0| | | | | | |
 |`cuGraphKernelNodeSetAttribute`|11.0| | | | | | |
 |`cuGraphKernelNodeSetParams`|10.0| | | | | | |
-|`cuGraphLaunch`|10.0| | | | | | |
+|`cuGraphLaunch`|10.0| | |`hipGraphLaunch`|4.3.0| | |
 |`cuGraphMemcpyNodeGetParams`|10.0| | | | | | |
 |`cuGraphMemcpyNodeSetParams`|10.0| | | | | | |
 |`cuGraphMemsetNodeGetParams`|10.0| | | | | | |
