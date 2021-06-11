@@ -126,7 +126,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuStreamAttachMemAsync
   {"cudaStreamAttachMemAsync",                                {"hipStreamAttachMemAsync",                                "", CONV_STREAM, API_RUNTIME, 4}},
   // cuStreamBeginCapture
-  {"cudaStreamBeginCapture",                                  {"hipStreamBeginCapture",                                  "", CONV_STREAM, API_RUNTIME, 4, HIP_UNSUPPORTED}},
+  {"cudaStreamBeginCapture",                                  {"hipStreamBeginCapture",                                  "", CONV_STREAM, API_RUNTIME, 4}},
   // cuStreamCopyAttributes
   {"cudaStreamCopyAttributes",                                {"hipStreamCopyAttributes",                                "", CONV_STREAM, API_RUNTIME, 4, HIP_UNSUPPORTED}},
   // no analogue
@@ -139,7 +139,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuStreamDestroy
   {"cudaStreamDestroy",                                       {"hipStreamDestroy",                                       "", CONV_STREAM, API_RUNTIME, 4}},
   // cuStreamEndCapture
-  {"cudaStreamEndCapture",                                    {"hipStreamEndCapture",                                    "", CONV_STREAM, API_RUNTIME, 4, HIP_UNSUPPORTED}},
+  {"cudaStreamEndCapture",                                    {"hipStreamEndCapture",                                    "", CONV_STREAM, API_RUNTIME, 4}},
   // cuStreamGetAttribute
   {"cudaStreamGetAttribute",                                  {"hipStreamGetAttribute",                                  "", CONV_STREAM, API_RUNTIME, 4, HIP_UNSUPPORTED}},
   // cuStreamSetAttribute
@@ -182,21 +182,21 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
 
   // 6. External Resource Interoperability
   // cuDestroyExternalMemory
-  {"cudaDestroyExternalMemory",                               {"hipDestroyExternalMemory",                               "", CONV_EXT_RES, API_RUNTIME, 6, HIP_UNSUPPORTED}},
+  {"cudaDestroyExternalMemory",                               {"hipDestroyExternalMemory",                               "", CONV_EXT_RES, API_RUNTIME, 6}},
   // cuDestroyExternalSemaphore
-  {"cudaDestroyExternalSemaphore",                            {"hipDestroyExternalSemaphore",                            "", CONV_EXT_RES, API_RUNTIME, 6, HIP_UNSUPPORTED}},
+  {"cudaDestroyExternalSemaphore",                            {"hipDestroyExternalSemaphore",                            "", CONV_EXT_RES, API_RUNTIME, 6}},
   // cuExternalMemoryGetMappedBuffer
-  {"cudaExternalMemoryGetMappedBuffer",                       {"hipExternalMemoryGetMappedBuffer",                       "", CONV_EXT_RES, API_RUNTIME, 6, HIP_UNSUPPORTED}},
+  {"cudaExternalMemoryGetMappedBuffer",                       {"hipExternalMemoryGetMappedBuffer",                       "", CONV_EXT_RES, API_RUNTIME, 6}},
   // cuExternalMemoryGetMappedMipmappedArray
   {"cudaExternalMemoryGetMappedMipmappedArray",               {"hipExternalMemoryGetMappedMipmappedArray",               "", CONV_EXT_RES, API_RUNTIME, 6, HIP_UNSUPPORTED}},
   // cuImportExternalMemory
-  {"cudaImportExternalMemory",                                {"hipImportExternalMemory",                                "", CONV_EXT_RES, API_RUNTIME, 6, HIP_UNSUPPORTED}},
+  {"cudaImportExternalMemory",                                {"hipImportExternalMemory",                                "", CONV_EXT_RES, API_RUNTIME, 6}},
   // cuImportExternalSemaphore
-  {"cudaImportExternalSemaphore",                             {"hipImportExternalSemaphore",                             "", CONV_EXT_RES, API_RUNTIME, 6, HIP_UNSUPPORTED}},
+  {"cudaImportExternalSemaphore",                             {"hipImportExternalSemaphore",                             "", CONV_EXT_RES, API_RUNTIME, 6}},
   // cuSignalExternalSemaphoresAsync
-  {"cudaSignalExternalSemaphoresAsync",                       {"hipSignalExternalSemaphoresAsync",                       "", CONV_EXT_RES, API_RUNTIME, 6, HIP_UNSUPPORTED}},
+  {"cudaSignalExternalSemaphoresAsync",                       {"hipSignalExternalSemaphoresAsync",                       "", CONV_EXT_RES, API_RUNTIME, 6}},
   // cuWaitExternalSemaphoresAsync
-  {"cudaWaitExternalSemaphoresAsync",                         {"hipWaitExternalSemaphoresAsync",                         "", CONV_EXT_RES, API_RUNTIME, 6, HIP_UNSUPPORTED}},
+  {"cudaWaitExternalSemaphoresAsync",                         {"hipWaitExternalSemaphoresAsync",                         "", CONV_EXT_RES, API_RUNTIME, 6}},
 
   // 7. Execution Control
   // no analogue
@@ -313,7 +313,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // no analogue
   {"cudaMemcpy2DToArray",                                     {"hipMemcpy2DToArray",                                     "", CONV_MEMORY, API_RUNTIME, 9}},
   // no analogue
-  {"cudaMemcpy2DToArrayAsync",                                {"hipMemcpy2DToArrayAsync",                                "", CONV_MEMORY, API_RUNTIME, 9, HIP_UNSUPPORTED}},
+  {"cudaMemcpy2DToArrayAsync",                                {"hipMemcpy2DToArrayAsync",                                "", CONV_MEMORY, API_RUNTIME, 9}},
   // no analogue
   // NOTE: Not equal to cuMemcpy3D due to different signatures
   {"cudaMemcpy3D",                                            {"hipMemcpy3D",                                            "", CONV_MEMORY, API_RUNTIME, 9}},
@@ -668,25 +668,25 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuGraphAddHostNode
   {"cudaGraphAddHostNode",                                    {"hipGraphAddHostNode",                                    "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphAddKernelNode
-  {"cudaGraphAddKernelNode",                                  {"hipGraphAddKernelNode",                                  "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
+  {"cudaGraphAddKernelNode",                                  {"hipGraphAddKernelNode",                                  "", CONV_GRAPH, API_RUNTIME, 30}},
   // cuGraphAddMemcpyNode
-  {"cudaGraphAddMemcpyNode",                                  {"hipGraphAddMemcpyNode",                                  "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
+  {"cudaGraphAddMemcpyNode",                                  {"hipGraphAddMemcpyNode",                                  "", CONV_GRAPH, API_RUNTIME, 30}},
   // cuGraphAddMemsetNode
-  {"cudaGraphAddMemsetNode",                                  {"hipGraphAddMemsetNode",                                  "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
+  {"cudaGraphAddMemsetNode",                                  {"hipGraphAddMemsetNode",                                  "", CONV_GRAPH, API_RUNTIME, 30}},
   // cuGraphChildGraphNodeGetGraph
   {"cudaGraphChildGraphNodeGetGraph",                         {"hipGraphChildGraphNodeGetGraph",                         "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphClone
   {"cudaGraphClone",                                          {"hipGraphClone",                                          "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphCreate
-  {"cudaGraphCreate",                                         {"hipGraphCreate",                                         "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
+  {"cudaGraphCreate",                                         {"hipGraphCreate",                                         "", CONV_GRAPH, API_RUNTIME, 30}},
   // cuGraphDebugDotPrint
   {"cudaGraphDebugDotPrint",                                  {"hipGraphDebugDotPrint",                                  "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphDestroy
-  {"cudaGraphDestroy",                                        {"hipGraphDestroy",                                        "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
+  {"cudaGraphDestroy",                                        {"hipGraphDestroy",                                        "", CONV_GRAPH, API_RUNTIME, 30}},
   // cuGraphDestroyNode
   {"cudaGraphDestroyNode",                                    {"hipGraphDestroyNode",                                    "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphExecDestroy
-  {"cudaGraphExecDestroy",                                    {"hipGraphExecDestroy",                                    "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
+  {"cudaGraphExecDestroy",                                    {"hipGraphExecDestroy",                                    "", CONV_GRAPH, API_RUNTIME, 30}},
   // cuGraphGetEdges
   {"cudaGraphGetEdges",                                       {"hipGraphGetEdges",                                       "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphGetNodes
@@ -698,7 +698,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuGraphHostNodeSetParams
   {"cudaGraphHostNodeSetParams",                              {"hipGraphHostNodeSetParams",                              "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphInstantiate
-  {"cudaGraphInstantiate",                                    {"hipGraphInstantiate",                                    "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
+  {"cudaGraphInstantiate",                                    {"hipGraphInstantiate",                                    "", CONV_GRAPH, API_RUNTIME, 30}},
   // cuGraphKernelNodeCopyAttributes
   {"cudaGraphKernelNodeCopyAttributes",                       {"hipGraphKernelNodeCopyAttributes",                       "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphKernelNodeGetAttribute
@@ -720,7 +720,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuGraphKernelNodeSetParams
   {"cudaGraphKernelNodeSetParams",                            {"hipGraphKernelNodeSetParams",                            "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphLaunch
-  {"cudaGraphLaunch",                                         {"hipGraphLaunch",                                         "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
+  {"cudaGraphLaunch",                                         {"hipGraphLaunch",                                         "", CONV_GRAPH, API_RUNTIME, 30}},
   // cuGraphMemcpyNodeGetParams
   {"cudaGraphMemcpyNodeGetParams",                            {"hipGraphMemcpyNodeGetParams",                            "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphMemcpyNodeSetParams
@@ -1177,6 +1177,24 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP {
   {"hipConfigureCall",                                        {HIP_1090, HIP_0,    HIP_0   }},
   {"hipLaunchByPtr",                                          {HIP_1090, HIP_0,    HIP_0   }},
   {"hipSetupArgument",                                        {HIP_1090, HIP_0,    HIP_0   }},
+  {"hipImportExternalSemaphore",                              {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipSignalExternalSemaphoresAsync",                        {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipWaitExternalSemaphoresAsync",                          {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipDestroyExternalSemaphore",                             {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipImportExternalMemory",                                 {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipExternalMemoryGetMappedBuffer",                        {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipDestroyExternalMemory",                                {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipMemcpy2DToArrayAsync",                                 {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipStreamBeginCapture",                                   {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipStreamEndCapture",                                     {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipGraphCreate",                                          {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipGraphDestroy",                                         {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipGraphExecDestroy",                                     {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipGraphInstantiate",                                     {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipGraphLaunch",                                          {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipGraphAddKernelNode",                                   {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipGraphAddMemcpyNode",                                   {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipGraphAddMemsetNode",                                   {HIP_4030, HIP_0,    HIP_0   }},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_RUNTIME_API_SECTION_MAP {
