@@ -2178,6 +2178,12 @@ sub simpleSubstitutions {
     $ft{'type'} += s/\bCUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS\b/hipExternalSemaphoreSignalParams/g;
     $ft{'type'} += s/\bCUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS_st\b/hipExternalSemaphoreSignalParams_st/g;
     $ft{'type'} += s/\bCUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS_v1\b/hipExternalSemaphoreSignalParams/g;
+    $ft{'type'} += s/\bCUDA_HOST_NODE_PARAMS\b/hipHostNodeParams/g;
+    $ft{'type'} += s/\bCUDA_HOST_NODE_PARAMS_st\b/hipHostNodeParams/g;
+    $ft{'type'} += s/\bCUDA_HOST_NODE_PARAMS_v1\b/hipHostNodeParams/g;
+    $ft{'type'} += s/\bCUDA_KERNEL_NODE_PARAMS\b/hipKernelNodeParams/g;
+    $ft{'type'} += s/\bCUDA_KERNEL_NODE_PARAMS_st\b/hipKernelNodeParams/g;
+    $ft{'type'} += s/\bCUDA_KERNEL_NODE_PARAMS_v1\b/hipKernelNodeParams/g;
     $ft{'type'} += s/\bCUDA_LAUNCH_PARAMS\b/hipLaunchParams/g;
     $ft{'type'} += s/\bCUDA_LAUNCH_PARAMS_st\b/hipLaunchParams/g;
     $ft{'type'} += s/\bCUDA_LAUNCH_PARAMS_v1\b/hipLaunchParams/g;
@@ -2235,6 +2241,10 @@ sub simpleSubstitutions {
     $ft{'type'} += s/\bCUfunction\b/hipFunction_t/g;
     $ft{'type'} += s/\bCUfunction_attribute\b/hipFunction_attribute/g;
     $ft{'type'} += s/\bCUfunction_attribute_enum\b/hipFunction_attribute/g;
+    $ft{'type'} += s/\bCUgraphExecUpdateResult\b/hipGraphExecUpdateResult/g;
+    $ft{'type'} += s/\bCUgraphExecUpdateResult_enum\b/hipGraphExecUpdateResult/g;
+    $ft{'type'} += s/\bCUgraphNode\b/hipGraphNode_t/g;
+    $ft{'type'} += s/\bCUgraphNode_st\b/hipGraphNode/g;
     $ft{'type'} += s/\bCUipcEventHandle\b/hipIpcEventHandle_t/g;
     $ft{'type'} += s/\bCUipcEventHandle_st\b/hipIpcEventHandle_st/g;
     $ft{'type'} += s/\bCUipcEventHandle_v1\b/hipIpcEventHandle_t/g;
@@ -2264,6 +2274,10 @@ sub simpleSubstitutions {
     $ft{'type'} += s/\bCUsharedconfig_enum\b/hipSharedMemConfig/g;
     $ft{'type'} += s/\bCUstream\b/hipStream_t/g;
     $ft{'type'} += s/\bCUstreamCallback\b/hipStreamCallback_t/g;
+    $ft{'type'} += s/\bCUstreamCaptureMode\b/hipStreamCaptureMode/g;
+    $ft{'type'} += s/\bCUstreamCaptureMode_enum\b/hipStreamCaptureMode/g;
+    $ft{'type'} += s/\bCUstreamCaptureStatus\b/hipStreamCaptureStatus/g;
+    $ft{'type'} += s/\bCUstreamCaptureStatus_enum\b/hipStreamCaptureStatus/g;
     $ft{'type'} += s/\bCUstream_st\b/ihipStream_t/g;
     $ft{'type'} += s/\bCUtexObject\b/hipTextureObject_t/g;
     $ft{'type'} += s/\bCUtexObject_v1\b/hipTextureObject_t/g;
@@ -2320,6 +2334,10 @@ sub simpleSubstitutions {
     $ft{'type'} += s/\bcudaFuncAttributes\b/hipFuncAttributes/g;
     $ft{'type'} += s/\bcudaFuncCache\b/hipFuncCache_t/g;
     $ft{'type'} += s/\bcudaFunction_t\b/hipFunction_t/g;
+    $ft{'type'} += s/\bcudaGraphExecUpdateResult\b/hipGraphExecUpdateResult/g;
+    $ft{'type'} += s/\bcudaGraphNodeType\b/hipGraphNodeType/g;
+    $ft{'type'} += s/\bcudaGraphNode_t\b/hipGraphNode_t/g;
+    $ft{'type'} += s/\bcudaHostFn_t\b/hipHostFn_t/g;
     $ft{'type'} += s/\bcudaIpcEventHandle_st\b/hipIpcEventHandle_st/g;
     $ft{'type'} += s/\bcudaIpcEventHandle_t\b/hipIpcEventHandle_t/g;
     $ft{'type'} += s/\bcudaIpcMemHandle_st\b/hipIpcMemHandle_st/g;
@@ -2330,6 +2348,7 @@ sub simpleSubstitutions {
     $ft{'type'} += s/\bcudaMemcpy3DParms\b/hipMemcpy3DParms/g;
     $ft{'type'} += s/\bcudaMemcpyKind\b/hipMemcpyKind/g;
     $ft{'type'} += s/\bcudaMemoryAdvise\b/hipMemoryAdvise/g;
+    $ft{'type'} += s/\bcudaMemsetParams\b/hipMemsetParams/g;
     $ft{'type'} += s/\bcudaMipmappedArray\b/hipMipmappedArray/g;
     $ft{'type'} += s/\bcudaMipmappedArray_const_t\b/hipMipmappedArray_const_t/g;
     $ft{'type'} += s/\bcudaMipmappedArray_t\b/hipMipmappedArray_t/g;
@@ -2342,6 +2361,8 @@ sub simpleSubstitutions {
     $ft{'type'} += s/\bcudaResourceViewFormat\b/hipResourceViewFormat/g;
     $ft{'type'} += s/\bcudaSharedMemConfig\b/hipSharedMemConfig/g;
     $ft{'type'} += s/\bcudaStreamCallback_t\b/hipStreamCallback_t/g;
+    $ft{'type'} += s/\bcudaStreamCaptureMode\b/hipStreamCaptureMode/g;
+    $ft{'type'} += s/\bcudaStreamCaptureStatus\b/hipStreamCaptureStatus/g;
     $ft{'type'} += s/\bcudaStream_t\b/hipStream_t/g;
     $ft{'type'} += s/\bcudaSurfaceBoundaryMode\b/hipSurfaceBoundaryMode/g;
     $ft{'type'} += s/\bcudaSurfaceObject_t\b/hipSurfaceObject_t/g;
@@ -2881,6 +2902,23 @@ sub simpleSubstitutions {
     $ft{'numeric_literal'} += s/\bCU_FUNC_CACHE_PREFER_L1\b/hipFuncCachePreferL1/g;
     $ft{'numeric_literal'} += s/\bCU_FUNC_CACHE_PREFER_NONE\b/hipFuncCachePreferNone/g;
     $ft{'numeric_literal'} += s/\bCU_FUNC_CACHE_PREFER_SHARED\b/hipFuncCachePreferShared/g;
+    $ft{'numeric_literal'} += s/\bCU_GRAPH_EXEC_UPDATE_ERROR\b/hipGraphExecUpdateError/g;
+    $ft{'numeric_literal'} += s/\bCU_GRAPH_EXEC_UPDATE_ERROR_FUNCTION_CHANGED\b/hipGraphExecUpdateErrorFunctionChanged/g;
+    $ft{'numeric_literal'} += s/\bCU_GRAPH_EXEC_UPDATE_ERROR_NODE_TYPE_CHANGED\b/hipGraphExecUpdateErrorNodeTypeChanged/g;
+    $ft{'numeric_literal'} += s/\bCU_GRAPH_EXEC_UPDATE_ERROR_NOT_SUPPORTED\b/hipGraphExecUpdateErrorNotSupported/g;
+    $ft{'numeric_literal'} += s/\bCU_GRAPH_EXEC_UPDATE_ERROR_PARAMETERS_CHANGED\b/hipGraphExecUpdateErrorParametersChanged/g;
+    $ft{'numeric_literal'} += s/\bCU_GRAPH_EXEC_UPDATE_ERROR_TOPOLOGY_CHANGED\b/hipGraphExecUpdateErrorTopologyChanged/g;
+    $ft{'numeric_literal'} += s/\bCU_GRAPH_EXEC_UPDATE_ERROR_UNSUPPORTED_FUNCTION_CHANGE\b/hipGraphExecUpdateErrorUnsupportedFunctionChange/g;
+    $ft{'numeric_literal'} += s/\bCU_GRAPH_EXEC_UPDATE_SUCCESS\b/hipGraphExecUpdateSuccess/g;
+    $ft{'numeric_literal'} += s/\bCU_GRAPH_NODE_TYPE_COUNT\b/hipGraphNodeTypeCount/g;
+    $ft{'numeric_literal'} += s/\bCU_GRAPH_NODE_TYPE_EMPTY\b/hipGraphNodeTypeEmpty/g;
+    $ft{'numeric_literal'} += s/\bCU_GRAPH_NODE_TYPE_EVENT_RECORD\b/hipGraphNodeTypeEventRecord/g;
+    $ft{'numeric_literal'} += s/\bCU_GRAPH_NODE_TYPE_GRAPH\b/hipGraphNodeTypeGraph/g;
+    $ft{'numeric_literal'} += s/\bCU_GRAPH_NODE_TYPE_HOST\b/hipGraphNodeTypeHost/g;
+    $ft{'numeric_literal'} += s/\bCU_GRAPH_NODE_TYPE_KERNEL\b/hipGraphNodeTypeKernel/g;
+    $ft{'numeric_literal'} += s/\bCU_GRAPH_NODE_TYPE_MEMCPY\b/hipGraphNodeTypeMemcpy/g;
+    $ft{'numeric_literal'} += s/\bCU_GRAPH_NODE_TYPE_MEMSET\b/hipGraphNodeTypeMemset/g;
+    $ft{'numeric_literal'} += s/\bCU_GRAPH_NODE_TYPE_WAIT_EVENT\b/hipGraphNodeTypeWaitEvent/g;
     $ft{'numeric_literal'} += s/\bCU_IPC_MEM_LAZY_ENABLE_PEER_ACCESS\b/hipIpcMemLazyEnablePeerAccess/g;
     $ft{'numeric_literal'} += s/\bCU_JIT_CACHE_MODE\b/hipJitOptionCacheMode/g;
     $ft{'numeric_literal'} += s/\bCU_JIT_ERROR_LOG_BUFFER\b/hipJitOptionErrorLogBuffer/g;
@@ -2961,6 +2999,12 @@ sub simpleSubstitutions {
     $ft{'numeric_literal'} += s/\bCU_SHARED_MEM_CONFIG_DEFAULT_BANK_SIZE\b/hipSharedMemBankSizeDefault/g;
     $ft{'numeric_literal'} += s/\bCU_SHARED_MEM_CONFIG_EIGHT_BYTE_BANK_SIZE\b/hipSharedMemBankSizeEightByte/g;
     $ft{'numeric_literal'} += s/\bCU_SHARED_MEM_CONFIG_FOUR_BYTE_BANK_SIZE\b/hipSharedMemBankSizeFourByte/g;
+    $ft{'numeric_literal'} += s/\bCU_STREAM_CAPTURE_MODE_GLOBAL\b/hipStreamCaptureModeGlobal/g;
+    $ft{'numeric_literal'} += s/\bCU_STREAM_CAPTURE_MODE_RELAXED\b/hipStreamCaptureModeRelaxed/g;
+    $ft{'numeric_literal'} += s/\bCU_STREAM_CAPTURE_MODE_THREAD_LOCAL\b/hipStreamCaptureModeThreadLocal/g;
+    $ft{'numeric_literal'} += s/\bCU_STREAM_CAPTURE_STATUS_ACTIVE\b/hipStreamCaptureStatusActive/g;
+    $ft{'numeric_literal'} += s/\bCU_STREAM_CAPTURE_STATUS_INVALIDATED\b/hipStreamCaptureStatusInvalidated/g;
+    $ft{'numeric_literal'} += s/\bCU_STREAM_CAPTURE_STATUS_NONE\b/hipStreamCaptureStatusNone/g;
     $ft{'numeric_literal'} += s/\bCU_STREAM_DEFAULT\b/hipStreamDefault/g;
     $ft{'numeric_literal'} += s/\bCU_STREAM_NON_BLOCKING\b/hipStreamNonBlocking/g;
     $ft{'numeric_literal'} += s/\bCU_STREAM_WAIT_VALUE_AND\b/hipStreamWaitValueAnd/g;
@@ -3114,6 +3158,23 @@ sub simpleSubstitutions {
     $ft{'numeric_literal'} += s/\bcudaFuncCachePreferL1\b/hipFuncCachePreferL1/g;
     $ft{'numeric_literal'} += s/\bcudaFuncCachePreferNone\b/hipFuncCachePreferNone/g;
     $ft{'numeric_literal'} += s/\bcudaFuncCachePreferShared\b/hipFuncCachePreferShared/g;
+    $ft{'numeric_literal'} += s/\bcudaGraphExecUpdateError\b/hipGraphExecUpdateError/g;
+    $ft{'numeric_literal'} += s/\bcudaGraphExecUpdateErrorFunctionChanged\b/hipGraphExecUpdateErrorFunctionChanged/g;
+    $ft{'numeric_literal'} += s/\bcudaGraphExecUpdateErrorNodeTypeChanged\b/hipGraphExecUpdateErrorNodeTypeChanged/g;
+    $ft{'numeric_literal'} += s/\bcudaGraphExecUpdateErrorNotSupported\b/hipGraphExecUpdateErrorNotSupported/g;
+    $ft{'numeric_literal'} += s/\bcudaGraphExecUpdateErrorParametersChanged\b/hipGraphExecUpdateErrorParametersChanged/g;
+    $ft{'numeric_literal'} += s/\bcudaGraphExecUpdateErrorTopologyChanged\b/hipGraphExecUpdateErrorTopologyChanged/g;
+    $ft{'numeric_literal'} += s/\bcudaGraphExecUpdateErrorUnsupportedFunctionChange\b/hipGraphExecUpdateErrorUnsupportedFunctionChange/g;
+    $ft{'numeric_literal'} += s/\bcudaGraphExecUpdateSuccess\b/hipGraphExecUpdateSuccess/g;
+    $ft{'numeric_literal'} += s/\bcudaGraphNodeTypeCount\b/hipGraphNodeTypeCount/g;
+    $ft{'numeric_literal'} += s/\bcudaGraphNodeTypeEmpty\b/hipGraphNodeTypeEmpty/g;
+    $ft{'numeric_literal'} += s/\bcudaGraphNodeTypeEventRecord\b/hipGraphNodeTypeEventRecord/g;
+    $ft{'numeric_literal'} += s/\bcudaGraphNodeTypeGraph\b/hipGraphNodeTypeGraph/g;
+    $ft{'numeric_literal'} += s/\bcudaGraphNodeTypeHost\b/hipGraphNodeTypeHost/g;
+    $ft{'numeric_literal'} += s/\bcudaGraphNodeTypeKernel\b/hipGraphNodeTypeKernel/g;
+    $ft{'numeric_literal'} += s/\bcudaGraphNodeTypeMemcpy\b/hipGraphNodeTypeMemcpy/g;
+    $ft{'numeric_literal'} += s/\bcudaGraphNodeTypeMemset\b/hipGraphNodeTypeMemset/g;
+    $ft{'numeric_literal'} += s/\bcudaGraphNodeTypeWaitEvent\b/hipGraphNodeTypeWaitEvent/g;
     $ft{'numeric_literal'} += s/\bcudaLimitMallocHeapSize\b/hipLimitMallocHeapSize/g;
     $ft{'numeric_literal'} += s/\bcudaMemAdviseSetAccessedBy\b/hipMemAdviseSetAccessedBy/g;
     $ft{'numeric_literal'} += s/\bcudaMemAdviseSetPreferredLocation\b/hipMemAdviseSetPreferredLocation/g;
@@ -3174,6 +3235,12 @@ sub simpleSubstitutions {
     $ft{'numeric_literal'} += s/\bcudaSharedMemBankSizeDefault\b/hipSharedMemBankSizeDefault/g;
     $ft{'numeric_literal'} += s/\bcudaSharedMemBankSizeEightByte\b/hipSharedMemBankSizeEightByte/g;
     $ft{'numeric_literal'} += s/\bcudaSharedMemBankSizeFourByte\b/hipSharedMemBankSizeFourByte/g;
+    $ft{'numeric_literal'} += s/\bcudaStreamCaptureModeGlobal\b/hipStreamCaptureModeGlobal/g;
+    $ft{'numeric_literal'} += s/\bcudaStreamCaptureModeRelaxed\b/hipStreamCaptureModeRelaxed/g;
+    $ft{'numeric_literal'} += s/\bcudaStreamCaptureModeThreadLocal\b/hipStreamCaptureModeThreadLocal/g;
+    $ft{'numeric_literal'} += s/\bcudaStreamCaptureStatusActive\b/hipStreamCaptureStatusActive/g;
+    $ft{'numeric_literal'} += s/\bcudaStreamCaptureStatusInvalidated\b/hipStreamCaptureStatusInvalidated/g;
+    $ft{'numeric_literal'} += s/\bcudaStreamCaptureStatusNone\b/hipStreamCaptureStatusNone/g;
     $ft{'numeric_literal'} += s/\bcudaSuccess\b/hipSuccess/g;
     $ft{'define'} += s/\bCUDA_ARRAY3D_CUBEMAP\b/hipArrayCubemap/g;
     $ft{'define'} += s/\bCUDA_ARRAY3D_LAYERED\b/hipArrayLayered/g;
@@ -4593,14 +4660,6 @@ sub warnUnsupportedFunctions {
         "cudaStreamGetAttribute",
         "cudaStreamEndCapture",
         "cudaStreamCopyAttributes",
-        "cudaStreamCaptureStatusNone",
-        "cudaStreamCaptureStatusInvalidated",
-        "cudaStreamCaptureStatusActive",
-        "cudaStreamCaptureStatus",
-        "cudaStreamCaptureModeThreadLocal",
-        "cudaStreamCaptureModeRelaxed",
-        "cudaStreamCaptureModeGlobal",
-        "cudaStreamCaptureMode",
         "cudaStreamBeginCapture",
         "cudaStreamAttributeSynchronizationPolicy",
         "cudaStreamAttributeAccessPolicyWindow",
@@ -4624,7 +4683,6 @@ sub warnUnsupportedFunctions {
         "cudaOccupancyAvailableDynamicSMemPerBlock",
         "cudaNvSciSyncAttrWait",
         "cudaNvSciSyncAttrSignal",
-        "cudaMemsetParams",
         "cudaMemoryTypeUnregistered",
         "cudaMemoryTypeManaged",
         "cudaMemoryTypeHost",
@@ -4698,7 +4756,6 @@ sub warnUnsupportedFunctions {
         "cudaImportExternalMemory",
         "cudaHostRegisterReadOnly",
         "cudaHostNodeParams",
-        "cudaHostFn_t",
         "cudaGraphicsVDPAURegisterVideoSurface",
         "cudaGraphicsVDPAURegisterOutputSurface",
         "cudaGraphicsUnregisterResource",
@@ -4740,17 +4797,6 @@ sub warnUnsupportedFunctions {
         "cudaGraphRetainUserObject",
         "cudaGraphRemoveDependencies",
         "cudaGraphReleaseUserObject",
-        "cudaGraphNode_t",
-        "cudaGraphNodeTypeWaitEvent",
-        "cudaGraphNodeTypeMemset",
-        "cudaGraphNodeTypeMemcpy",
-        "cudaGraphNodeTypeKernel",
-        "cudaGraphNodeTypeHost",
-        "cudaGraphNodeTypeGraph",
-        "cudaGraphNodeTypeEventRecord",
-        "cudaGraphNodeTypeEmpty",
-        "cudaGraphNodeTypeCount",
-        "cudaGraphNodeType",
         "cudaGraphNodeGetType",
         "cudaGraphNodeGetDependentNodes",
         "cudaGraphNodeGetDependencies",
@@ -4779,15 +4825,6 @@ sub warnUnsupportedFunctions {
         "cudaGraphExternalSemaphoresSignalNodeSetParams",
         "cudaGraphExternalSemaphoresSignalNodeGetParams",
         "cudaGraphExec_t",
-        "cudaGraphExecUpdateSuccess",
-        "cudaGraphExecUpdateResult",
-        "cudaGraphExecUpdateErrorUnsupportedFunctionChange",
-        "cudaGraphExecUpdateErrorTopologyChanged",
-        "cudaGraphExecUpdateErrorParametersChanged",
-        "cudaGraphExecUpdateErrorNotSupported",
-        "cudaGraphExecUpdateErrorNodeTypeChanged",
-        "cudaGraphExecUpdateErrorFunctionChanged",
-        "cudaGraphExecUpdateError",
         "cudaGraphExecUpdate",
         "cudaGraphExecMemsetNodeSetParams",
         "cudaGraphExecMemcpyNodeSetParamsToSymbol",
@@ -5584,10 +5621,6 @@ sub warnUnsupportedFunctions {
         "CUstreamWaitValue_flags",
         "CUstreamUpdateCaptureDependencies_flags_enum",
         "CUstreamUpdateCaptureDependencies_flags",
-        "CUstreamCaptureStatus_enum",
-        "CUstreamCaptureStatus",
-        "CUstreamCaptureMode_enum",
-        "CUstreamCaptureMode",
         "CUstreamBatchMemOpType_enum",
         "CUstreamBatchMemOpType",
         "CUstreamBatchMemOpParams_v1",
@@ -5665,13 +5698,9 @@ sub warnUnsupportedFunctions {
         "CUgraphicsMapResourceFlags_enum",
         "CUgraphicsMapResourceFlags",
         "CUgraph_st",
-        "CUgraphNode_st",
         "CUgraphNodeType_enum",
         "CUgraphNodeType",
-        "CUgraphNode",
         "CUgraphExec_st",
-        "CUgraphExecUpdateResult_enum",
-        "CUgraphExecUpdateResult",
         "CUgraphExec",
         "CUgraphDebugDot_flags_enum",
         "CUgraphDebugDot_flags",
@@ -5771,12 +5800,6 @@ sub warnUnsupportedFunctions {
         "CU_STREAM_MEM_OP_WAIT_VALUE_32",
         "CU_STREAM_MEM_OP_FLUSH_REMOTE_WRITES",
         "CU_STREAM_LEGACY",
-        "CU_STREAM_CAPTURE_STATUS_NONE",
-        "CU_STREAM_CAPTURE_STATUS_INVALIDATED",
-        "CU_STREAM_CAPTURE_STATUS_ACTIVE",
-        "CU_STREAM_CAPTURE_MODE_THREAD_LOCAL",
-        "CU_STREAM_CAPTURE_MODE_RELAXED",
-        "CU_STREAM_CAPTURE_MODE_GLOBAL",
         "CU_STREAM_ATTRIBUTE_SYNCHRONIZATION_POLICY",
         "CU_STREAM_ATTRIBUTE_ACCESS_POLICY_WINDOW",
         "CU_STREAM_ADD_CAPTURE_DEPENDENCIES",
@@ -5859,25 +5882,8 @@ sub warnUnsupportedFunctions {
         "CU_JIT_CACHE_OPTION_CG",
         "CU_JIT_CACHE_OPTION_CA",
         "CU_GRAPH_USER_OBJECT_MOVE",
-        "CU_GRAPH_NODE_TYPE_WAIT_EVENT",
-        "CU_GRAPH_NODE_TYPE_MEMSET",
-        "CU_GRAPH_NODE_TYPE_MEMCPY",
-        "CU_GRAPH_NODE_TYPE_KERNEL",
-        "CU_GRAPH_NODE_TYPE_HOST",
-        "CU_GRAPH_NODE_TYPE_GRAPH",
         "CU_GRAPH_NODE_TYPE_EXT_SEMAS_WAIT",
         "CU_GRAPH_NODE_TYPE_EXT_SEMAS_SIGNAL",
-        "CU_GRAPH_NODE_TYPE_EVENT_RECORD",
-        "CU_GRAPH_NODE_TYPE_EMPTY",
-        "CU_GRAPH_NODE_TYPE_COUNT",
-        "CU_GRAPH_EXEC_UPDATE_SUCCESS",
-        "CU_GRAPH_EXEC_UPDATE_ERROR_UNSUPPORTED_FUNCTION_CHANGE",
-        "CU_GRAPH_EXEC_UPDATE_ERROR_TOPOLOGY_CHANGED",
-        "CU_GRAPH_EXEC_UPDATE_ERROR_PARAMETERS_CHANGED",
-        "CU_GRAPH_EXEC_UPDATE_ERROR_NOT_SUPPORTED",
-        "CU_GRAPH_EXEC_UPDATE_ERROR_NODE_TYPE_CHANGED",
-        "CU_GRAPH_EXEC_UPDATE_ERROR_FUNCTION_CHANGED",
-        "CU_GRAPH_EXEC_UPDATE_ERROR",
         "CU_GRAPH_DEBUG_DOT_FLAGS_VERBOSE",
         "CU_GRAPH_DEBUG_DOT_FLAGS_RUNTIME_TYPES",
         "CU_GRAPH_DEBUG_DOT_FLAGS_MEMSET_NODE_PARAMS",
@@ -6609,12 +6615,6 @@ sub warnUnsupportedFunctions {
         "CUDA_MEMCPY3D_PEER_v1",
         "CUDA_MEMCPY3D_PEER_st",
         "CUDA_MEMCPY3D_PEER",
-        "CUDA_KERNEL_NODE_PARAMS_v1",
-        "CUDA_KERNEL_NODE_PARAMS_st",
-        "CUDA_KERNEL_NODE_PARAMS",
-        "CUDA_HOST_NODE_PARAMS_v1",
-        "CUDA_HOST_NODE_PARAMS_st",
-        "CUDA_HOST_NODE_PARAMS",
         "CUDA_EXT_SEM_WAIT_NODE_PARAMS_v1",
         "CUDA_EXT_SEM_WAIT_NODE_PARAMS_st",
         "CUDA_EXT_SEM_WAIT_NODE_PARAMS",

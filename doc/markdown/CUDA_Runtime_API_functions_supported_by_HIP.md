@@ -529,7 +529,7 @@ Unsupported
 |`CUexternalMemory_st`|10.0| | | | | | |
 |`CUexternalSemaphore_st`|10.0| | | | | | |
 |`CUgraphExec_st`|10.0| | | | | | |
-|`CUgraphNode_st`|10.0| | | | | | |
+|`CUgraphNode_st`|10.0| | |`hipGraphNode`|4.3.0| | |
 |`CUgraph_st`|10.0| | | | | | |
 |`CUstream_st`| | | |`ihipStream_t`|1.5.0| | |
 |`CUuuid_st`| | | | | | | |
@@ -1031,27 +1031,27 @@ Unsupported
 |`cudaGraphDebugDotFlagsMemcpyNodeParams`|11.3| | | | | | |
 |`cudaGraphDebugDotFlagsMemsetNodeParams`|11.3| | | | | | |
 |`cudaGraphDebugDotFlagsVerbose`|11.3| | | | | | |
-|`cudaGraphExecUpdateError`|10.2| | | | | | |
-|`cudaGraphExecUpdateErrorFunctionChanged`|10.2| | | | | | |
-|`cudaGraphExecUpdateErrorNodeTypeChanged`|10.2| | | | | | |
-|`cudaGraphExecUpdateErrorNotSupported`|10.2| | | | | | |
-|`cudaGraphExecUpdateErrorParametersChanged`|10.2| | | | | | |
-|`cudaGraphExecUpdateErrorTopologyChanged`|10.2| | | | | | |
-|`cudaGraphExecUpdateErrorUnsupportedFunctionChange`|11.2| | | | | | |
-|`cudaGraphExecUpdateResult`|10.2| | | | | | |
-|`cudaGraphExecUpdateSuccess`|10.2| | | | | | |
+|`cudaGraphExecUpdateError`|10.2| | |`hipGraphExecUpdateError`|4.3.0| | |
+|`cudaGraphExecUpdateErrorFunctionChanged`|10.2| | |`hipGraphExecUpdateErrorFunctionChanged`|4.3.0| | |
+|`cudaGraphExecUpdateErrorNodeTypeChanged`|10.2| | |`hipGraphExecUpdateErrorNodeTypeChanged`|4.3.0| | |
+|`cudaGraphExecUpdateErrorNotSupported`|10.2| | |`hipGraphExecUpdateErrorNotSupported`|4.3.0| | |
+|`cudaGraphExecUpdateErrorParametersChanged`|10.2| | |`hipGraphExecUpdateErrorParametersChanged`|4.3.0| | |
+|`cudaGraphExecUpdateErrorTopologyChanged`|10.2| | |`hipGraphExecUpdateErrorTopologyChanged`|4.3.0| | |
+|`cudaGraphExecUpdateErrorUnsupportedFunctionChange`|11.2| | |`hipGraphExecUpdateErrorUnsupportedFunctionChange`|4.3.0| | |
+|`cudaGraphExecUpdateResult`|10.2| | |`hipGraphExecUpdateResult`|4.3.0| | |
+|`cudaGraphExecUpdateSuccess`|10.2| | |`hipGraphExecUpdateSuccess`|4.3.0| | |
 |`cudaGraphExec_t`|10.0| | | | | | |
-|`cudaGraphNodeType`|10.0| | | | | | |
-|`cudaGraphNodeTypeCount`|10.0| | | | | | |
-|`cudaGraphNodeTypeEmpty`|10.0| | | | | | |
-|`cudaGraphNodeTypeEventRecord`|11.1| | | | | | |
-|`cudaGraphNodeTypeGraph`|10.0| | | | | | |
-|`cudaGraphNodeTypeHost`|10.0| | | | | | |
-|`cudaGraphNodeTypeKernel`|10.0| | | | | | |
-|`cudaGraphNodeTypeMemcpy`|10.0| | | | | | |
-|`cudaGraphNodeTypeMemset`|10.0| | | | | | |
-|`cudaGraphNodeTypeWaitEvent`|11.1| | | | | | |
-|`cudaGraphNode_t`|10.0| | | | | | |
+|`cudaGraphNodeType`|10.0| | |`hipGraphNodeType`|4.3.0| | |
+|`cudaGraphNodeTypeCount`|10.0| | |`hipGraphNodeTypeCount`|4.3.0| | |
+|`cudaGraphNodeTypeEmpty`|10.0| | |`hipGraphNodeTypeEmpty`|4.3.0| | |
+|`cudaGraphNodeTypeEventRecord`|11.1| | |`hipGraphNodeTypeEventRecord`|4.3.0| | |
+|`cudaGraphNodeTypeGraph`|10.0| | |`hipGraphNodeTypeGraph`|4.3.0| | |
+|`cudaGraphNodeTypeHost`|10.0| | |`hipGraphNodeTypeHost`|4.3.0| | |
+|`cudaGraphNodeTypeKernel`|10.0| | |`hipGraphNodeTypeKernel`|4.3.0| | |
+|`cudaGraphNodeTypeMemcpy`|10.0| | |`hipGraphNodeTypeMemcpy`|4.3.0| | |
+|`cudaGraphNodeTypeMemset`|10.0| | |`hipGraphNodeTypeMemset`|4.3.0| | |
+|`cudaGraphNodeTypeWaitEvent`|11.1| | |`hipGraphNodeTypeWaitEvent`|4.3.0| | |
+|`cudaGraphNode_t`|10.0| | |`hipGraphNode_t`|4.3.0| | |
 |`cudaGraphUserObjectMove`|11.3| | | | | | |
 |`cudaGraph_t`|10.0| | | | | | |
 |`cudaGraphicsCubeFace`| | | | | | | |
@@ -1077,7 +1077,7 @@ Unsupported
 |`cudaHostAllocMapped`| | | |`hipHostMallocMapped`|1.6.0| | |
 |`cudaHostAllocPortable`| | | |`hipHostMallocPortable`|1.6.0| | |
 |`cudaHostAllocWriteCombined`| | | |`hipHostMallocWriteCombined`|1.6.0| | |
-|`cudaHostFn_t`|10.0| | | | | | |
+|`cudaHostFn_t`|10.0| | |`hipHostFn_t`|4.3.0| | |
 |`cudaHostNodeParams`|10.0| | | | | | |
 |`cudaHostRegisterDefault`| | | |`hipHostRegisterDefault`|1.6.0| | |
 |`cudaHostRegisterIoMemory`|7.5| | |`hipHostRegisterIoMemory`|1.6.0| | |
@@ -1094,7 +1094,7 @@ Unsupported
 |`cudaKernelNodeAttrValue`|11.0| | | | | | |
 |`cudaKernelNodeAttributeAccessPolicyWindow`|11.0| | | | | | |
 |`cudaKernelNodeAttributeCooperative`|11.0| | | | | | |
-|`cudaKernelNodeParams`|10.0| | | | | | |
+|`cudaKernelNodeParams`|10.0| | | |4.3.0| | |
 |`cudaKeyValuePair`| | | | | | | |
 |`cudaLaunchParams`|9.0| | |`hipLaunchParams`|2.6.0| | |
 |`cudaLimit`| | | |`hipLimit_t`|1.6.0| | |
@@ -1163,7 +1163,7 @@ Unsupported
 |`cudaMemoryTypeHost`| | | | | | | |
 |`cudaMemoryTypeManaged`|10.0| | | | | | |
 |`cudaMemoryTypeUnregistered`| | | | | | | |
-|`cudaMemsetParams`|10.0| | | | | | |
+|`cudaMemsetParams`|10.0| | |`hipMemsetParams`|4.3.0| | |
 |`cudaMipmappedArray`| | | |`hipMipmappedArray`|1.7.0| | |
 |`cudaMipmappedArray_const_t`| | | |`hipMipmappedArray_const_t`|1.6.0| | |
 |`cudaMipmappedArray_t`| | | |`hipMipmappedArray_t`|1.7.0| | |
@@ -1235,14 +1235,14 @@ Unsupported
 |`cudaStreamAttributeAccessPolicyWindow`|11.0| | | | | | |
 |`cudaStreamAttributeSynchronizationPolicy`|11.0| | | | | | |
 |`cudaStreamCallback_t`| | | |`hipStreamCallback_t`|1.6.0| | |
-|`cudaStreamCaptureMode`|10.1| | | | | | |
-|`cudaStreamCaptureModeGlobal`|10.1| | | | | | |
-|`cudaStreamCaptureModeRelaxed`|10.1| | | | | | |
-|`cudaStreamCaptureModeThreadLocal`|10.1| | | | | | |
-|`cudaStreamCaptureStatus`|10.0| | | | | | |
-|`cudaStreamCaptureStatusActive`|10.0| | | | | | |
-|`cudaStreamCaptureStatusInvalidated`|10.0| | | | | | |
-|`cudaStreamCaptureStatusNone`|10.0| | | | | | |
+|`cudaStreamCaptureMode`|10.1| | |`hipStreamCaptureMode`|4.3.0| | |
+|`cudaStreamCaptureModeGlobal`|10.1| | |`hipStreamCaptureModeGlobal`|4.3.0| | |
+|`cudaStreamCaptureModeRelaxed`|10.1| | |`hipStreamCaptureModeRelaxed`|4.3.0| | |
+|`cudaStreamCaptureModeThreadLocal`|10.1| | |`hipStreamCaptureModeThreadLocal`|4.3.0| | |
+|`cudaStreamCaptureStatus`|10.0| | |`hipStreamCaptureStatus`|4.3.0| | |
+|`cudaStreamCaptureStatusActive`|10.0| | |`hipStreamCaptureStatusActive`|4.3.0| | |
+|`cudaStreamCaptureStatusInvalidated`|10.0| | |`hipStreamCaptureStatusInvalidated`|4.3.0| | |
+|`cudaStreamCaptureStatusNone`|10.0| | |`hipStreamCaptureStatusNone`|4.3.0| | |
 |`cudaStreamDefault`| | | |`hipStreamDefault`|1.6.0| | |
 |`cudaStreamLegacy`| | | | | | | |
 |`cudaStreamNonBlocking`| | | |`hipStreamNonBlocking`|1.6.0| | |
