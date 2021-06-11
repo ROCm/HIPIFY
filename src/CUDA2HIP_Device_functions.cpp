@@ -642,6 +642,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DEVICE_FUNCTION_MAP {
   {"__shfl_down",         {"__shfl_down",          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, CUDA_DEPRECATED}},
   {"__shfl_xor_sync",     {"",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
   {"__shfl_xor",          {"__shfl_xor",           "", CONV_DEVICE_FUNC, API_RUNTIME, 1, CUDA_DEPRECATED}},
+  {"__funnelshift_l",     {"__funnelshift_l",      "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
+  {"__funnelshift_lc",    {"__funnelshift_lc",     "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
+  {"__funnelshift_r",     {"__funnelshift_r",      "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
+  {"__funnelshift_rc",    {"__funnelshift_rc",     "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
   // atomic functions
   {"atomicAdd",           {"atomicAdd",            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
   {"atomicAdd_system",    {"atomicAdd_system",     "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
@@ -1196,6 +1200,10 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DEVICE_FUNCTION_VER_MAP {
   {"atomicAnd_system",    {HIP_4030, HIP_0,    HIP_0   }},
   {"atomicOr_system",     {HIP_4030, HIP_0,    HIP_0   }},
   {"atomicXor_system",    {HIP_4030, HIP_0,    HIP_0   }},
+  {"__funnelshift_l",     {HIP_4030, HIP_0,    HIP_0   }},
+  {"__funnelshift_lc",    {HIP_4030, HIP_0,    HIP_0   }},
+  {"__funnelshift_r",     {HIP_4030, HIP_0,    HIP_0   }},
+  {"__funnelshift_rc",    {HIP_4030, HIP_0,    HIP_0   }},
 };
 
 const std::map<llvm::StringRef, hipCounter> CUDA_DEVICE_TYPE_NAME_MAP {
