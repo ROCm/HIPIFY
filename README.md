@@ -300,7 +300,7 @@ Run `Visual Studio 16 2019`, open the generated `LLVM.sln`, build all, build pro
 
         - ***Linux***: `-DCUDA_DNN_ROOT_DIR=/usr/include`
 
-        - ***Windows***: `-DCUDA_DNN_ROOT_DIR=d:/CUDNN/cudnn-11.3-windows-x64-v8.2.0`
+        - ***Windows***: `-DCUDA_DNN_ROOT_DIR=d:/CUDNN/cudnn-11.3-windows-x64-v8.2.1`
 
 5. Ensure [`CUB`](https://github.com/NVlabs/cub) of the version corresponding to CUDA's version is installed.
 
@@ -346,7 +346,7 @@ Ubuntu 14: LLVM 4.0.0 - 7.1.0, CUDA 7.0 - 9.0, cuDNN 5.0.5 - 7.6.5
 
 Ubuntu 16-18: LLVM 8.0.0 - 12.0.0, CUDA 8.0 - 10.2, cuDNN 5.1.10 - 8.0.5
 
-Ubuntu 20: LLVM 9.0.0 - 12.0.0, CUDA 8.0 - 11.3.1, cuDNN 5.1.10 - 8.2.0
+Ubuntu 20: LLVM 9.0.0 - 12.0.0, CUDA 8.0 - 11.3.1, cuDNN 5.1.10 - 8.2.1
 
 Minimum build system requirements for the above configurations:
 
@@ -506,8 +506,8 @@ Testing Time: 2.91s
 | 9.0.0 - 9.0.1   | 10.1         | 7.6.5          | 2017.15.9.20, 2019.16.4.5  | 3.16.4, 3.18.0 | 3.8.0, 3.8.5 |
 | 10.0.0 - 11.0.0 | 8.0 - 11.1   | 7.6.5  - 8.0.5 | 2017.15.9.30, 2019.16.8.3  | 3.19.2         | 3.9.1        |
 | 11.0.1 - 11.1.0 | 8.0 - 11.2.2 | 7.6.5  - 8.0.5 | 2017.15.9.31, 2019.16.8.4  | 3.19.3         | 3.9.2        |
-| 12.0.0          | 8.0 - 11.3.1 | 7.6.5  - 8.2.0 | 2017.15.9.36, 2019.16.10.0 | 3.20.3         | 3.9.5        |
-| 13.0.0git       | 8.0 - 11.3.1 | 7.6.5  - 8.2.0 | 2017.15.9.36, 2019.16.10.0 | 3.20.3         | 3.9.5        |
+| 12.0.0          | 8.0 - 11.3.1 | 7.6.5  - 8.2.1 | 2017.15.9.36, 2019.16.10.2 | 3.20.4         | 3.9.5        |
+| 13.0.0git       | 8.0 - 11.3.1 | 7.6.5  - 8.2.1 | 2017.15.9.36, 2019.16.10.2 | 3.20.4         | 3.9.5        |
 
 *Building with testing support by `Visual Studio 16 2019` on `Windows 10`:*
 
@@ -521,7 +521,7 @@ cmake
  -DCMAKE_PREFIX_PATH=d:/LLVM/12.0.0/dist \
  -DCUDA_TOOLKIT_ROOT_DIR="c:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.3" \
  -DCUDA_SDK_ROOT_DIR="c:/ProgramData/NVIDIA Corporation/CUDA Samples/v11.3" \
- -DCUDA_DNN_ROOT_DIR=d:/CUDNN/cudnn-11.3-windows-x64-v8.2.0 \
+ -DCUDA_DNN_ROOT_DIR=d:/CUDNN/cudnn-11.3-windows-x64-v8.2.1 \
  -DCUDA_CUB_ROOT_DIR=d:/GIT/cub \
  -DLLVM_EXTERNAL_LIT=d:/LLVM/12.0.0/build/Release/bin/llvm-lit.py \
  -Thost=x64
@@ -533,7 +533,7 @@ cmake
 --    - CMake module path: d:/LLVM/12.0.0/dist/lib/cmake/llvm
 --    - Include path     : d:/LLVM/12.0.0/dist/include
 --    - Binary path      : d:/LLVM/12.0.0/dist/bin
--- Found PythonInterp: c:/Program Files/Python39/python.exe (found suitable version "3.9.4", minimum required is "3.6")
+-- Found PythonInterp: c:/Program Files/Python39/python.exe (found suitable version "3.9.5", minimum required is "3.6")
 -- Found lit: c:/Program Files/Python39/Scripts/lit.exe
 -- Found FileCheck: d:/LLVM/12.0.0/dist/bin/FileCheck.exe
 -- Found CUDA: c:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.3 (found version "11.3")
