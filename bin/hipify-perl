@@ -2220,9 +2220,6 @@ sub simpleSubstitutions {
     $ft{'type'} += s/\bCUDA_KERNEL_NODE_PARAMS\b/hipKernelNodeParams/g;
     $ft{'type'} += s/\bCUDA_KERNEL_NODE_PARAMS_st\b/hipKernelNodeParams/g;
     $ft{'type'} += s/\bCUDA_KERNEL_NODE_PARAMS_v1\b/hipKernelNodeParams/g;
-    $ft{'type'} += s/\bCUDA_LAUNCH_PARAMS\b/hipLaunchParams/g;
-    $ft{'type'} += s/\bCUDA_LAUNCH_PARAMS_st\b/hipLaunchParams/g;
-    $ft{'type'} += s/\bCUDA_LAUNCH_PARAMS_v1\b/hipLaunchParams/g;
     $ft{'type'} += s/\bCUDA_MEMCPY2D\b/hip_Memcpy2D/g;
     $ft{'type'} += s/\bCUDA_MEMCPY2D_st\b/hip_Memcpy2D/g;
     $ft{'type'} += s/\bCUDA_MEMCPY2D_v1\b/hip_Memcpy2D/g;
@@ -2244,7 +2241,7 @@ sub simpleSubstitutions {
     $ft{'type'} += s/\bCUDA_TEXTURE_DESC_v1\b/HIP_TEXTURE_DESC/g;
     $ft{'type'} += s/\bCUaddress_mode\b/HIPaddress_mode/g;
     $ft{'type'} += s/\bCUaddress_mode_enum\b/HIPaddress_mode_enum/g;
-    $ft{'type'} += s/\bCUarray\b/hipArray */g;
+    $ft{'type'} += s/\bCUarray\b/hipArray*/g;
     $ft{'type'} += s/\bCUarray_format\b/hipArray_Format/g;
     $ft{'type'} += s/\bCUarray_format_enum\b/hipArray_Format/g;
     $ft{'type'} += s/\bCUarray_st\b/hipArray/g;
@@ -2317,6 +2314,7 @@ sub simpleSubstitutions {
     $ft{'type'} += s/\bCUstream_st\b/ihipStream_t/g;
     $ft{'type'} += s/\bCUtexObject\b/hipTextureObject_t/g;
     $ft{'type'} += s/\bCUtexObject_v1\b/hipTextureObject_t/g;
+    $ft{'type'} += s/\bCUtexref\b/hipTexRef/g;
     $ft{'type'} += s/\bCUtexref_st\b/textureReference/g;
     $ft{'type'} += s/\bbsric02Info_t\b/bsric02Info_t/g;
     $ft{'type'} += s/\bbsrilu02Info_t\b/bsrilu02Info_t/g;
@@ -5619,7 +5617,6 @@ sub warnUnsupportedFunctions {
         "CUuserObjectRetain_flags_enum",
         "CUuserObjectRetain_flags",
         "CUuserObject",
-        "CUtexref",
         "CUsynchronizationPolicy_enum",
         "CUsynchronizationPolicy",
         "CUsurfref_st",
@@ -6628,6 +6625,9 @@ sub warnUnsupportedFunctions {
         "CUDA_MEMCPY3D_PEER_v1",
         "CUDA_MEMCPY3D_PEER_st",
         "CUDA_MEMCPY3D_PEER",
+        "CUDA_LAUNCH_PARAMS_v1",
+        "CUDA_LAUNCH_PARAMS_st",
+        "CUDA_LAUNCH_PARAMS",
         "CUDA_EXT_SEM_WAIT_NODE_PARAMS_v1",
         "CUDA_EXT_SEM_WAIT_NODE_PARAMS_st",
         "CUDA_EXT_SEM_WAIT_NODE_PARAMS",
