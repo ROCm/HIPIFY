@@ -138,9 +138,9 @@
 |`CUDA_KERNEL_NODE_PARAMS`|10.0| | |`hipKernelNodeParams`|4.3.0| | |
 |`CUDA_KERNEL_NODE_PARAMS_st`|10.0| | |`hipKernelNodeParams`|4.3.0| | |
 |`CUDA_KERNEL_NODE_PARAMS_v1`|11.3| | |`hipKernelNodeParams`|4.3.0| | |
-|`CUDA_LAUNCH_PARAMS`|9.0| | |`hipLaunchParams`|2.6.0| | |
-|`CUDA_LAUNCH_PARAMS_st`|9.0| | |`hipLaunchParams`|2.6.0| | |
-|`CUDA_LAUNCH_PARAMS_v1`|11.3| | |`hipLaunchParams`|2.6.0| | |
+|`CUDA_LAUNCH_PARAMS`|9.0| | | | | | |
+|`CUDA_LAUNCH_PARAMS_st`|9.0| | | | | | |
+|`CUDA_LAUNCH_PARAMS_v1`|11.3| | | | | | |
 |`CUDA_MEMCPY2D`| | | |`hip_Memcpy2D`|1.7.0| | |
 |`CUDA_MEMCPY2D_st`| | | |`hip_Memcpy2D`|1.7.0| | |
 |`CUDA_MEMCPY2D_v1`| | | |`hip_Memcpy2D`|1.7.0| | |
@@ -780,7 +780,7 @@
 |`CUaccessProperty_enum`|11.0| | | | | | |
 |`CUaddress_mode`| | | |`HIPaddress_mode`|3.5.0| | |
 |`CUaddress_mode_enum`| | | |`HIPaddress_mode_enum`|3.5.0| | |
-|`CUarray`| | | |`hipArray *`| | | |
+|`CUarray`| | | |`hipArray*`| | | |
 |`CUarrayMapInfo`|11.1| | | | | | |
 |`CUarrayMapInfo_st`|11.1| | | | | | |
 |`CUarrayMapInfo_v1`|11.3| | | | | | |
@@ -1001,7 +1001,7 @@
 |`CUsynchronizationPolicy_enum`|11.0| | | | | | |
 |`CUtexObject`| | | |`hipTextureObject_t`|1.7.0| | |
 |`CUtexObject_v1`|11.3| | |`hipTextureObject_t`|1.7.0| | |
-|`CUtexref`| | | | | | | |
+|`CUtexref`| | | |`hipTexRef`|3.10.0| | |
 |`CUtexref_st`| | | |`textureReference`|1.6.0| | |
 |`CUuserObject`|11.3| | | | | | |
 |`CUuserObjectRetain_flags`|11.3| | | | | | |

@@ -79,9 +79,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
 
   // no analogue
   // NOTE: cudaLaunchParams struct differs
-  {"CUDA_LAUNCH_PARAMS_st",                                            {"hipLaunchParams",                                          "", CONV_TYPE, API_DRIVER, 1}},
-  {"CUDA_LAUNCH_PARAMS",                                               {"hipLaunchParams",                                          "", CONV_TYPE, API_DRIVER, 1}},
-  {"CUDA_LAUNCH_PARAMS_v1",                                            {"hipLaunchParams",                                          "", CONV_TYPE, API_DRIVER, 1}},
+  {"CUDA_LAUNCH_PARAMS_st",                                            {"HIP_LAUNCH_PARAMS",                                        "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CUDA_LAUNCH_PARAMS",                                               {"HIP_LAUNCH_PARAMS",                                        "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CUDA_LAUNCH_PARAMS_v1",                                            {"HIP_LAUNCH_PARAMS",                                        "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
 
   {"CUDA_MEMCPY2D_st",                                                 {"hip_Memcpy2D",                                             "", CONV_TYPE, API_DRIVER, 1}},
   {"CUDA_MEMCPY2D_v1_st",                                              {"hip_Memcpy2D",                                             "", CONV_TYPE, API_DRIVER, 1}},
@@ -149,7 +149,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaArray
   {"CUarray_st",                                                       {"hipArray",                                                 "", CONV_TYPE, API_DRIVER, 1}},
   // cudaArray_t
-  {"CUarray",                                                          {"hipArray *",                                               "", CONV_TYPE, API_DRIVER, 1}},
+  {"CUarray",                                                          {"hipArray*",                                                "", CONV_TYPE, API_DRIVER, 1}},
 
   // no analogue
   {"CUctx_st",                                                         {"ihipCtx_t",                                                "", CONV_TYPE, API_DRIVER, 1}},
@@ -220,7 +220,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
 
   // textureReference
   {"CUtexref_st",                                                      {"textureReference",                                         "", CONV_TYPE, API_DRIVER, 1}},
-  {"CUtexref",                                                         {"hipTextureReference_t",                                    "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CUtexref",                                                         {"hipTexRef",                                                "", CONV_TYPE, API_DRIVER, 1}},
 
   // CUuuid_st
   // NOTE: the same struct and its name
@@ -2864,4 +2864,5 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {
   {"hipExternalSemaphoreSignalParams_st",                              {HIP_4030, HIP_0,    HIP_0   }},
   {"hipHostNodeParams",                                                {HIP_4030, HIP_0,    HIP_0   }},
   {"hipKernelNodeParams",                                              {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipTexRef",                                                        {HIP_3100, HIP_0,    HIP_0   }},
 };
