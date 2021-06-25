@@ -1,13 +1,11 @@
 // RUN: %run_test hipify "%s" "%t" %hipify_args -D__CUDA_API_VERSION_INTERNAL %clang_args
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
 // CHECK: #include <hip/hip_runtime.h>
 #include <cuda.h>
 
 int main() {
-  printf("Cuda Driver Test 01\n");
+  printf("01. CUDA Driver API Structs synthetic test\n");
+
   // CHECK: HIP_ARRAY3D_DESCRIPTOR array3D_st;
   // CHECK-NEXT: HIP_ARRAY3D_DESCRIPTOR array3D;
   // CHECK-NEXT: HIP_ARRAY3D_DESCRIPTOR array3D_v2;
