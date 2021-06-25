@@ -606,7 +606,7 @@ Unsupported
 |`cudaD3D9RegisterFlags`| | | | | | | |
 |`cudaD3D9RegisterFlagsArray`| | | | | | | |
 |`cudaD3D9RegisterFlagsNone`| | | | | | | |
-|`cudaDevAttrAsyncEngineCount`| | | | | | | |
+|`cudaDevAttrAsyncEngineCount`| | | |`hipDeviceAttributeAsyncEngineCount`|4.3.0| | |
 |`cudaDevAttrCanFlushRemoteWrites`|9.2| | | | | | |
 |`cudaDevAttrCanMapHostMemory`| | | |`hipDeviceAttributeCanMapHostMemory`|2.10.0| | |
 |`cudaDevAttrCanUseHostPointerForRegisteredMem`|8.0| | | | | | |
@@ -626,7 +626,7 @@ Unsupported
 |`cudaDevAttrGPUDirectRDMAWritesOrdering`|11.3| | | | | | |
 |`cudaDevAttrGlobalL1CacheSupported`| | | | | | | |
 |`cudaDevAttrGlobalMemoryBusWidth`| | | |`hipDeviceAttributeMemoryBusWidth`|1.6.0| | |
-|`cudaDevAttrGpuOverlap`| | | | | | | |
+|`cudaDevAttrGpuOverlap`| | | |`hipDeviceAttributeAsyncEngineCount`|4.3.0| | |
 |`cudaDevAttrHostNativeAtomicSupported`|8.0| | | | | | |
 |`cudaDevAttrHostRegisterReadOnlySupported`|11.1| | | | | | |
 |`cudaDevAttrHostRegisterSupported`|9.2| | | | | | |
@@ -653,12 +653,12 @@ Unsupported
 |`cudaDevAttrMaxSharedMemoryPerMultiprocessor`| | | |`hipDeviceAttributeMaxSharedMemoryPerMultiprocessor`|1.6.0| | |
 |`cudaDevAttrMaxSurface1DLayeredLayers`| | | | | | | |
 |`cudaDevAttrMaxSurface1DLayeredWidth`| | | | | | | |
-|`cudaDevAttrMaxSurface1DWidth`| | | | | | | |
-|`cudaDevAttrMaxSurface2DHeight`| | | | | | | |
+|`cudaDevAttrMaxSurface1DWidth`| | | |`hipDeviceAttributeMaxSurface1D`|4.3.0| | |
+|`cudaDevAttrMaxSurface2DHeight`| | | |`hipDeviceAttributeMaxSurface2D`|4.3.0| | |
 |`cudaDevAttrMaxSurface2DLayeredHeight`| | | | | | | |
 |`cudaDevAttrMaxSurface2DLayeredLayers`| | | | | | | |
 |`cudaDevAttrMaxSurface2DLayeredWidth`| | | | | | | |
-|`cudaDevAttrMaxSurface2DWidth`| | | | | | | |
+|`cudaDevAttrMaxSurface2DWidth`| | | |`hipDeviceAttributeMaxSurface2D`|4.3.0| | |
 |`cudaDevAttrMaxSurface3DDepth`| | | | | | | |
 |`cudaDevAttrMaxSurface3DHeight`| | | | | | | |
 |`cudaDevAttrMaxSurface3DWidth`| | | | | | | |
@@ -666,16 +666,16 @@ Unsupported
 |`cudaDevAttrMaxSurfaceCubemapLayeredWidth`| | | | | | | |
 |`cudaDevAttrMaxSurfaceCubemapWidth`| | | | | | | |
 |`cudaDevAttrMaxTexture1DLayeredLayers`| | | | | | | |
-|`cudaDevAttrMaxTexture1DLayeredWidth`| | | | | | | |
+|`cudaDevAttrMaxTexture1DLayeredWidth`| | | |`hipDeviceAttributeMaxTexture1DLayered`|4.3.0| | |
 |`cudaDevAttrMaxTexture1DLinearWidth`| | | | | | | |
 |`cudaDevAttrMaxTexture1DMipmappedWidth`| | | | | | | |
 |`cudaDevAttrMaxTexture1DWidth`| | | |`hipDeviceAttributeMaxTexture1DWidth`|2.7.0| | |
-|`cudaDevAttrMaxTexture2DGatherHeight`| | | | | | | |
-|`cudaDevAttrMaxTexture2DGatherWidth`| | | | | | | |
+|`cudaDevAttrMaxTexture2DGatherHeight`| | | |`hipDeviceAttributeMaxTexture2DGather`|4.3.0| | |
+|`cudaDevAttrMaxTexture2DGatherWidth`| | | |`hipDeviceAttributeMaxTexture2DGather`|4.3.0| | |
 |`cudaDevAttrMaxTexture2DHeight`| | | |`hipDeviceAttributeMaxTexture2DHeight`|2.7.0| | |
-|`cudaDevAttrMaxTexture2DLayeredHeight`| | | | | | | |
+|`cudaDevAttrMaxTexture2DLayeredHeight`| | | |`hipDeviceAttributeMaxTexture2DLayered`|4.3.0| | |
 |`cudaDevAttrMaxTexture2DLayeredLayers`| | | | | | | |
-|`cudaDevAttrMaxTexture2DLayeredWidth`| | | | | | | |
+|`cudaDevAttrMaxTexture2DLayeredWidth`| | | |`hipDeviceAttributeMaxTexture2DLayered`|4.3.0| | |
 |`cudaDevAttrMaxTexture2DLinearHeight`| | | | | | | |
 |`cudaDevAttrMaxTexture2DLinearPitch`| | | | | | | |
 |`cudaDevAttrMaxTexture2DLinearWidth`| | | | | | | |
@@ -683,14 +683,14 @@ Unsupported
 |`cudaDevAttrMaxTexture2DMipmappedWidth`| | | | | | | |
 |`cudaDevAttrMaxTexture2DWidth`| | | |`hipDeviceAttributeMaxTexture2DWidth`|2.7.0| | |
 |`cudaDevAttrMaxTexture3DDepth`| | | |`hipDeviceAttributeMaxTexture3DDepth`|2.7.0| | |
-|`cudaDevAttrMaxTexture3DDepthAlt`| | | | | | | |
+|`cudaDevAttrMaxTexture3DDepthAlt`| | | |`hipDeviceAttributeMaxTexture3DAlt`|4.3.0| | |
 |`cudaDevAttrMaxTexture3DHeight`| | | |`hipDeviceAttributeMaxTexture3DHeight`|2.7.0| | |
-|`cudaDevAttrMaxTexture3DHeightAlt`| | | | | | | |
+|`cudaDevAttrMaxTexture3DHeightAlt`| | | |`hipDeviceAttributeMaxTexture3DAlt`|4.3.0| | |
 |`cudaDevAttrMaxTexture3DWidth`| | | |`hipDeviceAttributeMaxTexture3DWidth`|2.7.0| | |
-|`cudaDevAttrMaxTexture3DWidthAlt`| | | | | | | |
+|`cudaDevAttrMaxTexture3DWidthAlt`| | | |`hipDeviceAttributeMaxTexture3DAlt`|4.3.0| | |
 |`cudaDevAttrMaxTextureCubemapLayeredLayers`| | | | | | | |
-|`cudaDevAttrMaxTextureCubemapLayeredWidth`| | | | | | | |
-|`cudaDevAttrMaxTextureCubemapWidth`| | | | | | | |
+|`cudaDevAttrMaxTextureCubemapLayeredWidth`| | | | |4.3.0| | |
+|`cudaDevAttrMaxTextureCubemapWidth`| | | |`hipDeviceAttributeMaxTextureCubemap`|4.3.0| | |
 |`cudaDevAttrMaxThreadsPerBlock`| | | |`hipDeviceAttributeMaxThreadsPerBlock`|1.6.0| | |
 |`cudaDevAttrMaxThreadsPerMultiProcessor`| | | |`hipDeviceAttributeMaxThreadsPerMultiProcessor`|1.6.0| | |
 |`cudaDevAttrMaxTimelineSemaphoreInteropSupported`|11.2| | | | | | |
@@ -703,7 +703,7 @@ Unsupported
 |`cudaDevAttrPageableMemoryAccessUsesHostPageTables`|9.2| | |`hipDeviceAttributePageableMemoryAccessUsesHostPageTables`|3.10.0| | |
 |`cudaDevAttrPciBusId`| | | |`hipDeviceAttributePciBusId`|1.6.0| | |
 |`cudaDevAttrPciDeviceId`| | | |`hipDeviceAttributePciDeviceId`|1.6.0| | |
-|`cudaDevAttrPciDomainId`| | | | | | | |
+|`cudaDevAttrPciDomainId`| | | |`hipDeviceAttributePciDomainId`|4.3.0| | |
 |`cudaDevAttrReserved92`|9.0| | | | | | |
 |`cudaDevAttrReserved93`|9.0| | | | | | |
 |`cudaDevAttrReserved94`|9.0| | | | | | |
@@ -711,12 +711,12 @@ Unsupported
 |`cudaDevAttrSingleToDoublePrecisionPerfRatio`|8.0| | | | | | |
 |`cudaDevAttrSparseCudaArraySupported`|11.1| | | | | | |
 |`cudaDevAttrStreamPrioritiesSupported`| | | | | | | |
-|`cudaDevAttrSurfaceAlignment`| | | | | | | |
-|`cudaDevAttrTccDriver`| | | | | | | |
+|`cudaDevAttrSurfaceAlignment`| | | |`hipDeviceAttributeSurfaceAlignment`|4.3.0| | |
+|`cudaDevAttrTccDriver`| | | |`hipDeviceAttributeTccDriver`|4.3.0| | |
 |`cudaDevAttrTextureAlignment`| | | |`hipDeviceAttributeTextureAlignment`|2.10.0| | |
-|`cudaDevAttrTexturePitchAlignment`| | | | |3.2.0| | |
+|`cudaDevAttrTexturePitchAlignment`| | | |`hipDeviceAttributeTexturePitchAlignment`|3.2.0| | |
 |`cudaDevAttrTotalConstantMemory`| | | |`hipDeviceAttributeTotalConstantMemory`|1.6.0| | |
-|`cudaDevAttrUnifiedAddressing`| | | | | | | |
+|`cudaDevAttrUnifiedAddressing`| | | |`hipDeviceAttributeUnifiedAddressing`|4.3.0| | |
 |`cudaDevAttrWarpSize`| | | |`hipDeviceAttributeWarpSize`|1.6.0| | |
 |`cudaDevP2PAttrAccessSupported`|8.0| | |`hipDevP2PAttrAccessSupported`|3.8.0| | |
 |`cudaDevP2PAttrCudaArrayAccessSupported`|9.2| | |`hipDevP2PAttrHipArrayAccessSupported`|3.8.0| | |

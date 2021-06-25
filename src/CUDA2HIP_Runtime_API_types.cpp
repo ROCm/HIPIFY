@@ -279,7 +279,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaDevAttrTextureAlignment",                                      {"hipDeviceAttributeTextureAlignment",                       "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 14
   // CU_DEVICE_ATTRIBUTE_GPU_OVERLAP
   // NOTE: Is not deprecated as CUDA Driver's API analogue CU_DEVICE_ATTRIBUTE_GPU_OVERLAP
-  {"cudaDevAttrGpuOverlap",                                            {"hipDeviceAttributeGpuOverlap",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 15
+  {"cudaDevAttrGpuOverlap",                                            {"hipDeviceAttributeAsyncEngineCount",                       "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 15
   // CU_DEVICE_ATTRIBUTE_MULTIPROCESSOR_COUNT
   {"cudaDevAttrMultiProcessorCount",                                   {"hipDeviceAttributeMultiprocessorCount",                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 16
   // CU_DEVICE_ATTRIBUTE_KERNEL_EXEC_TIMEOUT
@@ -303,13 +303,16 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE3D_DEPTH
   {"cudaDevAttrMaxTexture3DDepth",                                     {"hipDeviceAttributeMaxTexture3DDepth",                      "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 26
   // CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LAYERED_WIDTH
-  {"cudaDevAttrMaxTexture2DLayeredWidth",                              {"hipDeviceAttributeMaxTexture2DLayeredWidth",               "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 27
+  // CUDA only
+  {"cudaDevAttrMaxTexture2DLayeredWidth",                              {"hipDeviceAttributeMaxTexture2DLayered",                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 27
   // CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LAYERED_HEIGHT
-  {"cudaDevAttrMaxTexture2DLayeredHeight",                             {"hipDeviceAttributeMaxTexture2DLayeredHeight",              "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 28
+  // CUDA only
+  {"cudaDevAttrMaxTexture2DLayeredHeight",                             {"hipDeviceAttributeMaxTexture2DLayered",                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 28
   // CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LAYERED_LAYERS
   {"cudaDevAttrMaxTexture2DLayeredLayers",                             {"hipDeviceAttributeMaxTexture2DLayeredLayers",              "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 29
   // CU_DEVICE_ATTRIBUTE_SURFACE_ALIGNMENT
-  {"cudaDevAttrSurfaceAlignment",                                      {"hipDeviceAttributeSurfaceAlignment",                       "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 30
+  // CUDA only
+  {"cudaDevAttrSurfaceAlignment",                                      {"hipDeviceAttributeSurfaceAlignment",                       "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 30
   // CU_DEVICE_ATTRIBUTE_CONCURRENT_KERNELS
   {"cudaDevAttrConcurrentKernels",                                     {"hipDeviceAttributeConcurrentKernels",                      "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 31
   // CU_DEVICE_ATTRIBUTE_ECC_ENABLED
@@ -319,7 +322,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CU_DEVICE_ATTRIBUTE_PCI_DEVICE_ID
   {"cudaDevAttrPciDeviceId",                                           {"hipDeviceAttributePciDeviceId",                            "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 34
   // CU_DEVICE_ATTRIBUTE_TCC_DRIVER
-  {"cudaDevAttrTccDriver",                                             {"hipDeviceAttributeTccDriver",                              "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 35
+  // CUDA only
+  {"cudaDevAttrTccDriver",                                             {"hipDeviceAttributeTccDriver",                              "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 35
   // CU_DEVICE_ATTRIBUTE_MEMORY_CLOCK_RATE
   {"cudaDevAttrMemoryClockRate",                                       {"hipDeviceAttributeMemoryClockRate",                        "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 36
   // CU_DEVICE_ATTRIBUTE_GLOBAL_MEMORY_BUS_WIDTH
@@ -329,40 +333,50 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CU_DEVICE_ATTRIBUTE_MAX_THREADS_PER_MULTIPROCESSOR
   {"cudaDevAttrMaxThreadsPerMultiProcessor",                           {"hipDeviceAttributeMaxThreadsPerMultiProcessor",            "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 39
   // CU_DEVICE_ATTRIBUTE_ASYNC_ENGINE_COUNT
-  {"cudaDevAttrAsyncEngineCount",                                      {"hipDeviceAttributeAsyncEngineCount",                       "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 40
+  // CUDA only
+  {"cudaDevAttrAsyncEngineCount",                                      {"hipDeviceAttributeAsyncEngineCount",                       "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 40
   // CU_DEVICE_ATTRIBUTE_UNIFIED_ADDRESSING
-  {"cudaDevAttrUnifiedAddressing",                                     {"hipDeviceAttributeUnifiedAddressing",                      "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 41
+  // CUDA only
+  {"cudaDevAttrUnifiedAddressing",                                     {"hipDeviceAttributeUnifiedAddressing",                      "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 41
   // CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE1D_LAYERED_WIDTH
-  {"cudaDevAttrMaxTexture1DLayeredWidth",                              {"hipDeviceAttributeMaxTexture1DLayeredWidth",               "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 42
+  // CUDA only
+  {"cudaDevAttrMaxTexture1DLayeredWidth",                              {"hipDeviceAttributeMaxTexture1DLayered",                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 42
   // CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE1D_LAYERED_LAYERS
   {"cudaDevAttrMaxTexture1DLayeredLayers",                             {"hipDeviceAttributeMaxTexture1DLayeredLayers",              "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 43
   // 44 - no
   // CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_GATHER_WIDTH
-  {"cudaDevAttrMaxTexture2DGatherWidth",                               {"hipDeviceAttributeMaxTexture2DGatherWidth",                "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 45
+  // CUDA only
+  {"cudaDevAttrMaxTexture2DGatherWidth",                               {"hipDeviceAttributeMaxTexture2DGather",                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 45
   // CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_GATHER_HEIGHT
-  {"cudaDevAttrMaxTexture2DGatherHeight",                              {"hipDeviceAttributeMaxTexture2DGatherHeight",               "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 46
+  // CUDA only
+  {"cudaDevAttrMaxTexture2DGatherHeight",                              {"hipDeviceAttributeMaxTexture2DGather",                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 46
   // CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE3D_WIDTH_ALTERNATE
-  {"cudaDevAttrMaxTexture3DWidthAlt",                                  {"hipDeviceAttributeMaxTexture3DWidthAlternate",             "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 47
+  // CUDA only
+  {"cudaDevAttrMaxTexture3DWidthAlt",                                  {"hipDeviceAttributeMaxTexture3DAlt",                        "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 47
   // CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE3D_HEIGHT_ALTERNATE
-  {"cudaDevAttrMaxTexture3DHeightAlt",                                 {"hipDeviceAttributeMaxTexture3DHeightAlternate",            "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 48
+  // CUDA only
+  {"cudaDevAttrMaxTexture3DHeightAlt",                                 {"hipDeviceAttributeMaxTexture3DAlt",                        "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 48
   // CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE3D_DEPTH_ALTERNATE
-  {"cudaDevAttrMaxTexture3DDepthAlt",                                  {"hipDeviceAttributeMaxTexture3DDepthAlternate",             "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 49
+  // CUDA only
+  {"cudaDevAttrMaxTexture3DDepthAlt",                                  {"hipDeviceAttributeMaxTexture3DAlt",                        "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 49
   // CU_DEVICE_ATTRIBUTE_PCI_DOMAIN_ID
-  {"cudaDevAttrPciDomainId",                                           {"hipDeviceAttributePciDomainId",                            "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 50
+  {"cudaDevAttrPciDomainId",                                           {"hipDeviceAttributePciDomainId",                            "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 50
   // CU_DEVICE_ATTRIBUTE_TEXTURE_PITCH_ALIGNMENT
-  {"cudaDevAttrTexturePitchAlignment",                                 {"hipDeviceAttributeTexturePitchAlignment",                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 51
+  {"cudaDevAttrTexturePitchAlignment",                                 {"hipDeviceAttributeTexturePitchAlignment",                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 51
   // CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURECUBEMAP_WIDTH
-  {"cudaDevAttrMaxTextureCubemapWidth",                                {"hipDeviceAttributeMaxTextureCubemapWidth",                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 52
+  // CUDA only
+  {"cudaDevAttrMaxTextureCubemapWidth",                                {"hipDeviceAttributeMaxTextureCubemap",                      "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 52
   // CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURECUBEMAP_LAYERED_WIDTH
-  {"cudaDevAttrMaxTextureCubemapLayeredWidth",                         {"hipDeviceAttributeMaxTextureCubemapLayeredWidth",          "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 53
+  // CUDA only
+  {"cudaDevAttrMaxTextureCubemapLayeredWidth",                         {"hipDeviceAttributeMaxTextureCubemapLayered",               "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 53
   // CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURECUBEMAP_LAYERED_LAYERS
   {"cudaDevAttrMaxTextureCubemapLayeredLayers",                        {"hipDeviceAttributeMaxTextureCubemapLayeredLayers",         "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 54
   // CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE1D_WIDTH
-  {"cudaDevAttrMaxSurface1DWidth",                                     {"hipDeviceAttributeMaxSurface1DWidth",                      "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 55
+  {"cudaDevAttrMaxSurface1DWidth",                                     {"hipDeviceAttributeMaxSurface1D",                           "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 55
   // CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE2D_WIDTH
-  {"cudaDevAttrMaxSurface2DWidth",                                     {"hipDeviceAttributeMaxSurface2DWidth",                      "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 56
+  {"cudaDevAttrMaxSurface2DWidth",                                     {"hipDeviceAttributeMaxSurface2D",                           "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 56
   // CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE2D_HEIGHT
-  {"cudaDevAttrMaxSurface2DHeight",                                    {"hipDeviceAttributeMaxSurface2DHeight",                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 57
+  {"cudaDevAttrMaxSurface2DHeight",                                    {"hipDeviceAttributeMaxSurface2D",                           "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 57
   // CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE3D_WIDTH
   {"cudaDevAttrMaxSurface3DWidth",                                     {"hipDeviceAttributeMaxSurface3DWidth",                      "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 58
   // CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE3D_HEIGHT
