@@ -2856,26 +2856,42 @@ sub simpleSubstitutions {
     $ft{'numeric_literal'} += s/\bCU_CTX_SCHED_YIELD\b/hipDeviceScheduleYield/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_ASYNC_ENGINE_COUNT\b/hipDeviceAttributeAsyncEngineCount/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_CAN_MAP_HOST_MEMORY\b/hipDeviceAttributeCanMapHostMemory/g;
+    $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_CAN_USE_HOST_POINTER_FOR_REGISTERED_MEM\b/hipDeviceAttributeCanUseHostPointerForRegisteredMem/g;
+    $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_CAN_USE_STREAM_WAIT_VALUE_NOR\b/hipDeviceAttributeCanUseStreamWaitValue/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_CLOCK_RATE\b/hipDeviceAttributeClockRate/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_COMPUTE_CAPABILITY_MAJOR\b/hipDeviceAttributeComputeCapabilityMajor/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_COMPUTE_CAPABILITY_MINOR\b/hipDeviceAttributeComputeCapabilityMinor/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_COMPUTE_MODE\b/hipDeviceAttributeComputeMode/g;
+    $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_COMPUTE_PREEMPTION_SUPPORTED\b/hipDeviceAttributeComputePreemptionSupported/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_CONCURRENT_KERNELS\b/hipDeviceAttributeConcurrentKernels/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_CONCURRENT_MANAGED_ACCESS\b/hipDeviceAttributeConcurrentManagedAccess/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_COOPERATIVE_LAUNCH\b/hipDeviceAttributeCooperativeLaunch/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_COOPERATIVE_MULTI_DEVICE_LAUNCH\b/hipDeviceAttributeCooperativeMultiDeviceLaunch/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_DIRECT_MANAGED_MEM_ACCESS_FROM_HOST\b/hipDeviceAttributeDirectManagedMemAccessFromHost/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_ECC_ENABLED\b/hipDeviceAttributeEccEnabled/g;
+    $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_GLOBAL_L1_CACHE_SUPPORTED\b/hipDeviceAttributeGlobalL1CacheSupported/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_GLOBAL_MEMORY_BUS_WIDTH\b/hipDeviceAttributeMemoryBusWidth/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_GPU_OVERLAP\b/hipDeviceAttributeAsyncEngineCount/g;
+    $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_HOST_NATIVE_ATOMIC_SUPPORTED\b/hipDeviceAttributeHostNativeAtomicSupported/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_INTEGRATED\b/hipDeviceAttributeIntegrated/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_KERNEL_EXEC_TIMEOUT\b/hipDeviceAttributeKernelExecTimeout/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_L2_CACHE_SIZE\b/hipDeviceAttributeL2CacheSize/g;
+    $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_LOCAL_L1_CACHE_SUPPORTED\b/hipDeviceAttributeLocalL1CacheSupported/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_MANAGED_MEMORY\b/hipDeviceAttributeManagedMemory/g;
+    $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE1D_LAYERED_WIDTH\b/hipDeviceAttributeMaxSurface1DLayered/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE1D_WIDTH\b/hipDeviceAttributeMaxSurface1D/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE2D_HEIGHT\b/hipDeviceAttributeMaxSurface2D/g;
+    $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE2D_LAYERED_HEIGHT\b/hipDeviceAttributeMaxSurface2DLayered/g;
+    $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE2D_LAYERED_WIDTH\b/hipDeviceAttributeMaxSurface2DLayered/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE2D_WIDTH\b/hipDeviceAttributeMaxSurface2D/g;
+    $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE3D_DEPTH\b/hipDeviceAttributeMaxSurface3D/g;
+    $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE3D_HEIGHT\b/hipDeviceAttributeMaxSurface3D/g;
+    $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE3D_WIDTH\b/hipDeviceAttributeMaxSurface3D/g;
+    $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACECUBEMAP_LAYERED_WIDTH\b/hipDeviceAttributeMaxSurfaceCubemapLayered/g;
+    $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACECUBEMAP_WIDTH\b/hipDeviceAttributeMaxSurfaceCubemap/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE1D_LAYERED_WIDTH\b/hipDeviceAttributeMaxTexture1DLayered/g;
+    $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE1D_LINEAR_WIDTH\b/hipDeviceAttributeMaxTexture1DLinear/g;
+    $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE1D_MIPMAPPED_WIDTH\b/hipDeviceAttributeMaxTexture1DMipmap/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE1D_WIDTH\b/hipDeviceAttributeMaxTexture1DWidth/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_ARRAY_HEIGHT\b/hipDeviceAttributeMaxTexture2DLayered/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_ARRAY_WIDTH\b/hipDeviceAttributeMaxTexture2DLayered/g;
@@ -2884,6 +2900,11 @@ sub simpleSubstitutions {
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_HEIGHT\b/hipDeviceAttributeMaxTexture2DHeight/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LAYERED_HEIGHT\b/hipDeviceAttributeMaxTexture2DLayered/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LAYERED_WIDTH\b/hipDeviceAttributeMaxTexture2DLayered/g;
+    $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LINEAR_HEIGHT\b/hipDeviceAttributeMaxTexture2DLinear/g;
+    $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LINEAR_PITCH\b/hipDeviceAttributeMaxTexture2DLinear/g;
+    $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LINEAR_WIDTH\b/hipDeviceAttributeMaxTexture2DLinear/g;
+    $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_MIPMAPPED_HEIGHT\b/hipDeviceAttributeMaxTexture2DMipmap/g;
+    $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_MIPMAPPED_WIDTH\b/hipDeviceAttributeMaxTexture2DMipmap/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_WIDTH\b/hipDeviceAttributeMaxTexture2DWidth/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE3D_DEPTH\b/hipDeviceAttributeMaxTexture3DDepth/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE3D_DEPTH_ALTERNATE\b/hipDeviceAttributeMaxTexture3DAlt/g;
@@ -2893,6 +2914,7 @@ sub simpleSubstitutions {
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE3D_WIDTH_ALTERNATE\b/hipDeviceAttributeMaxTexture3DAlt/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURECUBEMAP_LAYERED_WIDTH\b/hipDeviceAttributeMaxTextureCubemapLayered/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURECUBEMAP_WIDTH\b/hipDeviceAttributeMaxTextureCubemap/g;
+    $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_MAX_BLOCKS_PER_MULTIPROCESSOR\b/hipDeviceAttributeMaxBlocksPerMultiprocessor/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_MAX_BLOCK_DIM_X\b/hipDeviceAttributeMaxBlockDimX/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_MAX_BLOCK_DIM_Y\b/hipDeviceAttributeMaxBlockDimY/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_MAX_BLOCK_DIM_Z\b/hipDeviceAttributeMaxBlockDimZ/g;
@@ -2901,13 +2923,16 @@ sub simpleSubstitutions {
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_MAX_GRID_DIM_Z\b/hipDeviceAttributeMaxGridDimZ/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_MAX_PITCH\b/hipDeviceAttributeMaxPitch/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_MAX_REGISTERS_PER_BLOCK\b/hipDeviceAttributeMaxRegistersPerBlock/g;
+    $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_MAX_REGISTERS_PER_MULTIPROCESSOR\b/hipDeviceAttributeMaxRegistersPerMultiprocessor/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_MAX_SHARED_MEMORY_PER_BLOCK\b/hipDeviceAttributeMaxSharedMemoryPerBlock/g;
+    $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_MAX_SHARED_MEMORY_PER_BLOCK_OPTIN\b/hipDeviceAttributeSharedMemPerBlockOptin/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_MAX_SHARED_MEMORY_PER_MULTIPROCESSOR\b/hipDeviceAttributeMaxSharedMemoryPerMultiprocessor/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_MAX_THREADS_PER_BLOCK\b/hipDeviceAttributeMaxThreadsPerBlock/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_MAX_THREADS_PER_MULTIPROCESSOR\b/hipDeviceAttributeMaxThreadsPerMultiProcessor/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_MEMORY_CLOCK_RATE\b/hipDeviceAttributeMemoryClockRate/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_MULTIPROCESSOR_COUNT\b/hipDeviceAttributeMultiprocessorCount/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_MULTI_GPU_BOARD\b/hipDeviceAttributeIsMultiGpuBoard/g;
+    $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_MULTI_GPU_BOARD_GROUP_ID\b/hipDeviceAttributeMultiGpuBoardGroupId/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_PAGEABLE_MEMORY_ACCESS\b/hipDeviceAttributePageableMemoryAccess/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_PAGEABLE_MEMORY_ACCESS_USES_HOST_PAGE_TABLES\b/hipDeviceAttributePageableMemoryAccessUsesHostPageTables/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_PCI_BUS_ID\b/hipDeviceAttributePciBusId/g;
@@ -2915,6 +2940,8 @@ sub simpleSubstitutions {
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_PCI_DOMAIN_ID\b/hipDeviceAttributePciDomainId/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_REGISTERS_PER_BLOCK\b/hipDeviceAttributeMaxRegistersPerBlock/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_SHARED_MEMORY_PER_BLOCK\b/hipDeviceAttributeMaxSharedMemoryPerBlock/g;
+    $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_SINGLE_TO_DOUBLE_PRECISION_PERF_RATIO\b/hipDeviceAttributeSingleToDoublePrecisionPerfRatio/g;
+    $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_STREAM_PRIORITIES_SUPPORTED\b/hipDeviceAttributeStreamPrioritiesSupported/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_SURFACE_ALIGNMENT\b/hipDeviceAttributeSurfaceAlignment/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_TCC_DRIVER\b/hipDeviceAttributeTccDriver/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_TEXTURE_ALIGNMENT\b/hipDeviceAttributeTextureAlignment/g;
@@ -3090,43 +3117,66 @@ sub simpleSubstitutions {
     $ft{'numeric_literal'} += s/\bcudaComputeModeProhibited\b/hipComputeModeProhibited/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrAsyncEngineCount\b/hipDeviceAttributeAsyncEngineCount/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrCanMapHostMemory\b/hipDeviceAttributeCanMapHostMemory/g;
+    $ft{'numeric_literal'} += s/\bcudaDevAttrCanUseHostPointerForRegisteredMem\b/hipDeviceAttributeCanUseHostPointerForRegisteredMem/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrClockRate\b/hipDeviceAttributeClockRate/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrComputeCapabilityMajor\b/hipDeviceAttributeComputeCapabilityMajor/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrComputeCapabilityMinor\b/hipDeviceAttributeComputeCapabilityMinor/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrComputeMode\b/hipDeviceAttributeComputeMode/g;
+    $ft{'numeric_literal'} += s/\bcudaDevAttrComputePreemptionSupported\b/hipDeviceAttributeComputePreemptionSupported/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrConcurrentKernels\b/hipDeviceAttributeConcurrentKernels/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrConcurrentManagedAccess\b/hipDeviceAttributeConcurrentManagedAccess/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrCooperativeLaunch\b/hipDeviceAttributeCooperativeLaunch/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrCooperativeMultiDeviceLaunch\b/hipDeviceAttributeCooperativeMultiDeviceLaunch/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrDirectManagedMemAccessFromHost\b/hipDeviceAttributeDirectManagedMemAccessFromHost/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrEccEnabled\b/hipDeviceAttributeEccEnabled/g;
+    $ft{'numeric_literal'} += s/\bcudaDevAttrGlobalL1CacheSupported\b/hipDeviceAttributeGlobalL1CacheSupported/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrGlobalMemoryBusWidth\b/hipDeviceAttributeMemoryBusWidth/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrGpuOverlap\b/hipDeviceAttributeAsyncEngineCount/g;
+    $ft{'numeric_literal'} += s/\bcudaDevAttrHostNativeAtomicSupported\b/hipDeviceAttributeHostNativeAtomicSupported/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrIntegrated\b/hipDeviceAttributeIntegrated/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrIsMultiGpuBoard\b/hipDeviceAttributeIsMultiGpuBoard/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrKernelExecTimeout\b/hipDeviceAttributeKernelExecTimeout/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrL2CacheSize\b/hipDeviceAttributeL2CacheSize/g;
+    $ft{'numeric_literal'} += s/\bcudaDevAttrLocalL1CacheSupported\b/hipDeviceAttributeLocalL1CacheSupported/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrManagedMemory\b/hipDeviceAttributeManagedMemory/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrMaxBlockDimX\b/hipDeviceAttributeMaxBlockDimX/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrMaxBlockDimY\b/hipDeviceAttributeMaxBlockDimY/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrMaxBlockDimZ\b/hipDeviceAttributeMaxBlockDimZ/g;
+    $ft{'numeric_literal'} += s/\bcudaDevAttrMaxBlocksPerMultiprocessor\b/hipDeviceAttributeMaxBlocksPerMultiprocessor/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrMaxGridDimX\b/hipDeviceAttributeMaxGridDimX/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrMaxGridDimY\b/hipDeviceAttributeMaxGridDimY/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrMaxGridDimZ\b/hipDeviceAttributeMaxGridDimZ/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrMaxPitch\b/hipDeviceAttributeMaxPitch/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrMaxRegistersPerBlock\b/hipDeviceAttributeMaxRegistersPerBlock/g;
+    $ft{'numeric_literal'} += s/\bcudaDevAttrMaxRegistersPerMultiprocessor\b/hipDeviceAttributeMaxRegistersPerMultiprocessor/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrMaxSharedMemoryPerBlock\b/hipDeviceAttributeMaxSharedMemoryPerBlock/g;
+    $ft{'numeric_literal'} += s/\bcudaDevAttrMaxSharedMemoryPerBlockOptin\b/hipDeviceAttributeSharedMemPerBlockOptin/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrMaxSharedMemoryPerMultiprocessor\b/hipDeviceAttributeMaxSharedMemoryPerMultiprocessor/g;
+    $ft{'numeric_literal'} += s/\bcudaDevAttrMaxSurface1DLayeredWidth\b/hipDeviceAttributeMaxSurface1DLayered/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrMaxSurface1DWidth\b/hipDeviceAttributeMaxSurface1D/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrMaxSurface2DHeight\b/hipDeviceAttributeMaxSurface2D/g;
+    $ft{'numeric_literal'} += s/\bcudaDevAttrMaxSurface2DLayeredHeight\b/hipDeviceAttributeMaxSurface2DLayered/g;
+    $ft{'numeric_literal'} += s/\bcudaDevAttrMaxSurface2DLayeredWidth\b/hipDeviceAttributeMaxSurface2DLayered/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrMaxSurface2DWidth\b/hipDeviceAttributeMaxSurface2D/g;
+    $ft{'numeric_literal'} += s/\bcudaDevAttrMaxSurface3DDepth\b/hipDeviceAttributeMaxSurface3D/g;
+    $ft{'numeric_literal'} += s/\bcudaDevAttrMaxSurface3DHeight\b/hipDeviceAttributeMaxSurface3D/g;
+    $ft{'numeric_literal'} += s/\bcudaDevAttrMaxSurface3DWidth\b/hipDeviceAttributeMaxSurface3D/g;
+    $ft{'numeric_literal'} += s/\bcudaDevAttrMaxSurfaceCubemapLayeredWidth\b/hipDeviceAttributeMaxSurfaceCubemapLayered/g;
+    $ft{'numeric_literal'} += s/\bcudaDevAttrMaxSurfaceCubemapWidth\b/hipDeviceAttributeMaxSurfaceCubemap/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrMaxTexture1DLayeredWidth\b/hipDeviceAttributeMaxTexture1DLayered/g;
+    $ft{'numeric_literal'} += s/\bcudaDevAttrMaxTexture1DLinearWidth\b/hipDeviceAttributeMaxTexture1DLinear/g;
+    $ft{'numeric_literal'} += s/\bcudaDevAttrMaxTexture1DMipmappedWidth\b/hipDeviceAttributeMaxTexture1DMipmap/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrMaxTexture1DWidth\b/hipDeviceAttributeMaxTexture1DWidth/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrMaxTexture2DGatherHeight\b/hipDeviceAttributeMaxTexture2DGather/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrMaxTexture2DGatherWidth\b/hipDeviceAttributeMaxTexture2DGather/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrMaxTexture2DHeight\b/hipDeviceAttributeMaxTexture2DHeight/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrMaxTexture2DLayeredHeight\b/hipDeviceAttributeMaxTexture2DLayered/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrMaxTexture2DLayeredWidth\b/hipDeviceAttributeMaxTexture2DLayered/g;
+    $ft{'numeric_literal'} += s/\bcudaDevAttrMaxTexture2DLinearHeight\b/hipDeviceAttributeMaxTexture2DLinear/g;
+    $ft{'numeric_literal'} += s/\bcudaDevAttrMaxTexture2DLinearPitch\b/hipDeviceAttributeMaxTexture2DLinear/g;
+    $ft{'numeric_literal'} += s/\bcudaDevAttrMaxTexture2DLinearWidth\b/hipDeviceAttributeMaxTexture2DLinear/g;
+    $ft{'numeric_literal'} += s/\bcudaDevAttrMaxTexture2DMipmappedHeight\b/hipDeviceAttributeMaxTexture2DMip/g;
+    $ft{'numeric_literal'} += s/\bcudaDevAttrMaxTexture2DMipmappedWidth\b/hipDeviceAttributeMaxTexture2DMip/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrMaxTexture2DWidth\b/hipDeviceAttributeMaxTexture2DWidth/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrMaxTexture3DDepth\b/hipDeviceAttributeMaxTexture3DDepth/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrMaxTexture3DDepthAlt\b/hipDeviceAttributeMaxTexture3DAlt/g;
@@ -3138,12 +3188,16 @@ sub simpleSubstitutions {
     $ft{'numeric_literal'} += s/\bcudaDevAttrMaxThreadsPerBlock\b/hipDeviceAttributeMaxThreadsPerBlock/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrMaxThreadsPerMultiProcessor\b/hipDeviceAttributeMaxThreadsPerMultiProcessor/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrMemoryClockRate\b/hipDeviceAttributeMemoryClockRate/g;
+    $ft{'numeric_literal'} += s/\bcudaDevAttrMultiGpuBoardGroupID\b/hipDeviceAttributeMultiGpuBoardGroupID/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrMultiProcessorCount\b/hipDeviceAttributeMultiprocessorCount/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrPageableMemoryAccess\b/hipDeviceAttributePageableMemoryAccess/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrPageableMemoryAccessUsesHostPageTables\b/hipDeviceAttributePageableMemoryAccessUsesHostPageTables/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrPciBusId\b/hipDeviceAttributePciBusId/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrPciDeviceId\b/hipDeviceAttributePciDeviceId/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrPciDomainId\b/hipDeviceAttributePciDomainId/g;
+    $ft{'numeric_literal'} += s/\bcudaDevAttrReserved94\b/hipDeviceAttributeCanUseStreamWaitValue/g;
+    $ft{'numeric_literal'} += s/\bcudaDevAttrSingleToDoublePrecisionPerfRatio\b/hipDeviceAttributeSingleToDoublePrecisionPerfRatio/g;
+    $ft{'numeric_literal'} += s/\bcudaDevAttrStreamPrioritiesSupported\b/hipDeviceAttributeStreamPrioritiesSupported/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrSurfaceAlignment\b/hipDeviceAttributeSurfaceAlignment/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrTccDriver\b/hipDeviceAttributeTccDriver/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrTextureAlignment\b/hipDeviceAttributeTextureAlignment/g;
@@ -5171,54 +5225,27 @@ sub warnUnsupportedFunctions {
         "cudaDeviceGetMemPool",
         "cudaDeviceGetDefaultMemPool",
         "cudaDeviceFlushGPUDirectRDMAWrites",
-        "cudaDevAttrStreamPrioritiesSupported",
         "cudaDevAttrSparseCudaArraySupported",
-        "cudaDevAttrSingleToDoublePrecisionPerfRatio",
         "cudaDevAttrReservedSharedMemoryPerBlock",
-        "cudaDevAttrReserved94",
         "cudaDevAttrReserved93",
         "cudaDevAttrReserved92",
-        "cudaDevAttrMultiGpuBoardGroupID",
         "cudaDevAttrMemoryPoolsSupported",
         "cudaDevAttrMemoryPoolSupportedHandleTypes",
         "cudaDevAttrMaxTimelineSemaphoreInteropSupported",
         "cudaDevAttrMaxTextureCubemapLayeredWidth",
         "cudaDevAttrMaxTextureCubemapLayeredLayers",
-        "cudaDevAttrMaxTexture2DMipmappedWidth",
-        "cudaDevAttrMaxTexture2DMipmappedHeight",
-        "cudaDevAttrMaxTexture2DLinearWidth",
-        "cudaDevAttrMaxTexture2DLinearPitch",
-        "cudaDevAttrMaxTexture2DLinearHeight",
         "cudaDevAttrMaxTexture2DLayeredLayers",
-        "cudaDevAttrMaxTexture1DMipmappedWidth",
-        "cudaDevAttrMaxTexture1DLinearWidth",
         "cudaDevAttrMaxTexture1DLayeredLayers",
-        "cudaDevAttrMaxSurfaceCubemapWidth",
-        "cudaDevAttrMaxSurfaceCubemapLayeredWidth",
         "cudaDevAttrMaxSurfaceCubemapLayeredLayers",
-        "cudaDevAttrMaxSurface3DWidth",
-        "cudaDevAttrMaxSurface3DHeight",
-        "cudaDevAttrMaxSurface3DDepth",
-        "cudaDevAttrMaxSurface2DLayeredWidth",
         "cudaDevAttrMaxSurface2DLayeredLayers",
-        "cudaDevAttrMaxSurface2DLayeredHeight",
-        "cudaDevAttrMaxSurface1DLayeredWidth",
         "cudaDevAttrMaxSurface1DLayeredLayers",
-        "cudaDevAttrMaxSharedMemoryPerBlockOptin",
-        "cudaDevAttrMaxRegistersPerMultiprocessor",
         "cudaDevAttrMaxPersistingL2CacheSize",
-        "cudaDevAttrMaxBlocksPerMultiprocessor",
         "cudaDevAttrMaxAccessPolicyWindowSize",
-        "cudaDevAttrLocalL1CacheSupported",
         "cudaDevAttrHostRegisterSupported",
         "cudaDevAttrHostRegisterReadOnlySupported",
-        "cudaDevAttrHostNativeAtomicSupported",
-        "cudaDevAttrGlobalL1CacheSupported",
         "cudaDevAttrGPUDirectRDMAWritesOrdering",
         "cudaDevAttrGPUDirectRDMASupported",
         "cudaDevAttrGPUDirectRDMAFlushWritesOptions",
-        "cudaDevAttrComputePreemptionSupported",
-        "cudaDevAttrCanUseHostPointerForRegisteredMem",
         "cudaDevAttrCanFlushRemoteWrites",
         "cudaD3D9UnregisterResource",
         "cudaD3D9UnmapResources",
@@ -6043,45 +6070,22 @@ sub warnUnsupportedFunctions {
         "CU_DEVICE_ATTRIBUTE_VIRTUAL_MEMORY_MANAGEMENT_SUPPORTED",
         "CU_DEVICE_ATTRIBUTE_VIRTUAL_ADDRESS_MANAGEMENT_SUPPORTED",
         "CU_DEVICE_ATTRIBUTE_TIMELINE_SEMAPHORE_INTEROP_SUPPORTED",
-        "CU_DEVICE_ATTRIBUTE_STREAM_PRIORITIES_SUPPORTED",
         "CU_DEVICE_ATTRIBUTE_SPARSE_CUDA_ARRAY_SUPPORTED",
-        "CU_DEVICE_ATTRIBUTE_SINGLE_TO_DOUBLE_PRECISION_PERF_RATIO",
         "CU_DEVICE_ATTRIBUTE_RESERVED_SHARED_MEMORY_PER_BLOCK",
         "CU_DEVICE_ATTRIBUTE_READ_ONLY_HOST_REGISTER_SUPPORTED",
-        "CU_DEVICE_ATTRIBUTE_MULTI_GPU_BOARD_GROUP_ID",
         "CU_DEVICE_ATTRIBUTE_MEMPOOL_SUPPORTED_HANDLE_TYPES",
         "CU_DEVICE_ATTRIBUTE_MEMORY_POOLS_SUPPORTED",
-        "CU_DEVICE_ATTRIBUTE_MAX_SHARED_MEMORY_PER_BLOCK_OPTIN",
-        "CU_DEVICE_ATTRIBUTE_MAX_REGISTERS_PER_MULTIPROCESSOR",
         "CU_DEVICE_ATTRIBUTE_MAX_PERSISTING_L2_CACHE_SIZE",
-        "CU_DEVICE_ATTRIBUTE_MAX_BLOCKS_PER_MULTIPROCESSOR",
         "CU_DEVICE_ATTRIBUTE_MAX_ACCESS_POLICY_WINDOW_SIZE",
         "CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURECUBEMAP_LAYERED_LAYERS",
-        "CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_MIPMAPPED_WIDTH",
-        "CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_MIPMAPPED_HEIGHT",
-        "CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LINEAR_WIDTH",
-        "CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LINEAR_PITCH",
-        "CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LINEAR_HEIGHT",
         "CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LAYERED_LAYERS",
         "CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_ARRAY_NUMSLICES",
-        "CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE1D_MIPMAPPED_WIDTH",
-        "CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE1D_LINEAR_WIDTH",
         "CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE1D_LAYERED_LAYERS",
-        "CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACECUBEMAP_WIDTH",
-        "CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACECUBEMAP_LAYERED_WIDTH",
         "CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACECUBEMAP_LAYERED_LAYERS",
-        "CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE3D_WIDTH",
-        "CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE3D_HEIGHT",
-        "CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE3D_DEPTH",
-        "CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE2D_LAYERED_WIDTH",
         "CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE2D_LAYERED_LAYERS",
-        "CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE2D_LAYERED_HEIGHT",
-        "CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE1D_LAYERED_WIDTH",
         "CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE1D_LAYERED_LAYERS",
         "CU_DEVICE_ATTRIBUTE_MAX",
-        "CU_DEVICE_ATTRIBUTE_LOCAL_L1_CACHE_SUPPORTED",
         "CU_DEVICE_ATTRIBUTE_HOST_REGISTER_SUPPORTED",
-        "CU_DEVICE_ATTRIBUTE_HOST_NATIVE_ATOMIC_SUPPORTED",
         "CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_WIN32_KMT_HANDLE_SUPPORTED",
         "CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_WIN32_HANDLE_SUPPORTED",
         "CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_POSIX_FILE_DESCRIPTOR_SUPPORTED",
@@ -6089,12 +6093,8 @@ sub warnUnsupportedFunctions {
         "CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_WITH_CUDA_VMM_SUPPORTED",
         "CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_SUPPORTED",
         "CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_FLUSH_WRITES_OPTIONS",
-        "CU_DEVICE_ATTRIBUTE_GLOBAL_L1_CACHE_SUPPORTED",
         "CU_DEVICE_ATTRIBUTE_GENERIC_COMPRESSION_SUPPORTED",
-        "CU_DEVICE_ATTRIBUTE_COMPUTE_PREEMPTION_SUPPORTED",
-        "CU_DEVICE_ATTRIBUTE_CAN_USE_STREAM_WAIT_VALUE_NOR",
         "CU_DEVICE_ATTRIBUTE_CAN_USE_STREAM_MEM_OPS",
-        "CU_DEVICE_ATTRIBUTE_CAN_USE_HOST_POINTER_FOR_REGISTERED_MEM",
         "CU_DEVICE_ATTRIBUTE_CAN_USE_64_BIT_STREAM_MEM_OPS",
         "CU_DEVICE_ATTRIBUTE_CAN_TEX2D_GATHER",
         "CU_DEVICE_ATTRIBUTE_CAN_FLUSH_REMOTE_WRITES",

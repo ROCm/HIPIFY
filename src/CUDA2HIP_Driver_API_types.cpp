@@ -529,85 +529,104 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaDevAttrMaxSurface2DHeight
   {"CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE2D_HEIGHT",                     {"hipDeviceAttributeMaxSurface2D",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 57
   // cudaDevAttrMaxSurface3DWidth
-  {"CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE3D_WIDTH",                      {"hipDeviceAttributeMaxSurface3DWidth",                      "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 58
+  {"CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE3D_WIDTH",                      {"hipDeviceAttributeMaxSurface3D",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 58
   // cudaDevAttrMaxSurface3DHeight
-  {"CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE3D_HEIGHT",                     {"hipDeviceAttributeMaxSurface3DHeight",                     "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 59
+  {"CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE3D_HEIGHT",                     {"hipDeviceAttributeMaxSurface3D",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 59
   // cudaDevAttrMaxSurface3DDepth
-  {"CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE3D_DEPTH",                      {"hipDeviceAttributeMaxSurface3DDepth",                      "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 60
+  {"CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE3D_DEPTH",                      {"hipDeviceAttributeMaxSurface3D",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 60
   // cudaDevAttrMaxSurface1DLayeredWidth
-  {"CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE1D_LAYERED_WIDTH",              {"hipDeviceAttributeMaxSurface1DLayeredWidth",               "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 61
+  // CUDA only
+  {"CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE1D_LAYERED_WIDTH",              {"hipDeviceAttributeMaxSurface1DLayered",                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 61
   // cudaDevAttrMaxSurface1DLayeredLayers
   {"CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE1D_LAYERED_LAYERS",             {"hipDeviceAttributeMaxSurface1DLayeredLayers",              "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 62
   // cudaDevAttrMaxSurface2DLayeredWidth
-  {"CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE2D_LAYERED_WIDTH",              {"hipDeviceAttributeMaxSurface2DLayeredWidth",               "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 63
+  // CUDA only
+  {"CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE2D_LAYERED_WIDTH",              {"hipDeviceAttributeMaxSurface2DLayered",                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 63
   // cudaDevAttrMaxSurface2DLayeredHeight
-  {"CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE2D_LAYERED_HEIGHT",             {"hipDeviceAttributeMaxSurface2DLayeredHeight",              "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 64
+  // CUDA only
+  {"CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE2D_LAYERED_HEIGHT",             {"hipDeviceAttributeMaxSurface2DLayered",                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 64
   // cudaDevAttrMaxSurface2DLayeredLayers
   {"CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE2D_LAYERED_LAYERS",             {"hipDeviceAttributeMaxSurface2DLayeredLayers",              "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 65
   // cudaDevAttrMaxSurfaceCubemapWidth
-  {"CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACECUBEMAP_WIDTH",                 {"hipDeviceAttributeMaxSurfaceCubemapWidth",                 "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 66
+  // CUDA only
+  {"CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACECUBEMAP_WIDTH",                 {"hipDeviceAttributeMaxSurfaceCubemap",                      "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 66
   // cudaDevAttrMaxSurfaceCubemapLayeredWidth
-  {"CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACECUBEMAP_LAYERED_WIDTH",         {"hipDeviceAttributeMaxSurfaceCubemapLayeredWidth",          "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 67
+  // CUDA only
+  {"CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACECUBEMAP_LAYERED_WIDTH",         {"hipDeviceAttributeMaxSurfaceCubemapLayered",               "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 67
   // cudaDevAttrMaxSurfaceCubemapLayeredLayers
   {"CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACECUBEMAP_LAYERED_LAYERS",        {"hipDeviceAttributeMaxSurfaceCubemapLayeredLayers",         "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 68
   // cudaDevAttrMaxTexture1DLinearWidth
-  {"CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE1D_LINEAR_WIDTH",               {"hipDeviceAttributeMaxTexture1DLinearWidth",                "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED | CUDA_DEPRECATED}}, // 69
+  {"CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE1D_LINEAR_WIDTH",               {"hipDeviceAttributeMaxTexture1DLinear",                     "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, CUDA_DEPRECATED}}, // 69
   // cudaDevAttrMaxTexture2DLinearWidth
-  {"CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LINEAR_WIDTH",               {"hipDeviceAttributeMaxTexture2DLinearWidth",                "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 70
+  // CUDA only
+  {"CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LINEAR_WIDTH",               {"hipDeviceAttributeMaxTexture2DLinear",                     "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 70
   // cudaDevAttrMaxTexture2DLinearHeight
-  {"CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LINEAR_HEIGHT",              {"hipDeviceAttributeMaxTexture2DLinearHeight",               "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 71
+  // CUDA only
+  {"CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LINEAR_HEIGHT",              {"hipDeviceAttributeMaxTexture2DLinear",                     "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 71
+  // CUDA only
   // cudaDevAttrMaxTexture2DLinearPitch
-  {"CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LINEAR_PITCH",               {"hipDeviceAttributeMaxTexture2DLinearPitch",                "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 72
+  {"CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LINEAR_PITCH",               {"hipDeviceAttributeMaxTexture2DLinear",                     "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 72
   // cudaDevAttrMaxTexture2DMipmappedWidth
-  {"CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_MIPMAPPED_WIDTH",            {"hipDeviceAttributeMaxTexture2DMipmappedWidth",             "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 73
+  // CUDA only
+  {"CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_MIPMAPPED_WIDTH",            {"hipDeviceAttributeMaxTexture2DMipmap",                     "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 73
   // cudaDevAttrMaxTexture2DMipmappedHeight
-  {"CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_MIPMAPPED_HEIGHT",           {"hipDeviceAttributeMaxTexture2DMipmappedHeight",            "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 74
+  // CUDA only
+  {"CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_MIPMAPPED_HEIGHT",           {"hipDeviceAttributeMaxTexture2DMipmap",                     "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 74
   // cudaDevAttrComputeCapabilityMajor
   {"CU_DEVICE_ATTRIBUTE_COMPUTE_CAPABILITY_MAJOR",                     {"hipDeviceAttributeComputeCapabilityMajor",                 "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 75
   // cudaDevAttrComputeCapabilityMinor
   {"CU_DEVICE_ATTRIBUTE_COMPUTE_CAPABILITY_MINOR",                     {"hipDeviceAttributeComputeCapabilityMinor",                 "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 76
   // cudaDevAttrMaxTexture1DMipmappedWidth
-  {"CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE1D_MIPMAPPED_WIDTH",            {"hipDeviceAttributeMaxTexture1DMipmappedWidth",             "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 77
+  // CUDA only
+  {"CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE1D_MIPMAPPED_WIDTH",            {"hipDeviceAttributeMaxTexture1DMipmap",                     "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 77
   // cudaDevAttrStreamPrioritiesSupported
-  {"CU_DEVICE_ATTRIBUTE_STREAM_PRIORITIES_SUPPORTED",                  {"hipDeviceAttributeStreamPrioritiesSupported",              "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 78
+  // CUDA only
+  {"CU_DEVICE_ATTRIBUTE_STREAM_PRIORITIES_SUPPORTED",                  {"hipDeviceAttributeStreamPrioritiesSupported",              "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 78
   // cudaDevAttrGlobalL1CacheSupported
-  {"CU_DEVICE_ATTRIBUTE_GLOBAL_L1_CACHE_SUPPORTED",                    {"hipDeviceAttributeGlobalL1CacheSupported",                 "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 79
+  // CUDA only
+  {"CU_DEVICE_ATTRIBUTE_GLOBAL_L1_CACHE_SUPPORTED",                    {"hipDeviceAttributeGlobalL1CacheSupported",                 "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 79
   // cudaDevAttrLocalL1CacheSupported
-  {"CU_DEVICE_ATTRIBUTE_LOCAL_L1_CACHE_SUPPORTED",                     {"hipDeviceAttributeLocalL1CacheSupported",                  "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 80
+  {"CU_DEVICE_ATTRIBUTE_LOCAL_L1_CACHE_SUPPORTED",                     {"hipDeviceAttributeLocalL1CacheSupported",                  "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 80
   // cudaDevAttrMaxSharedMemoryPerMultiprocessor
   {"CU_DEVICE_ATTRIBUTE_MAX_SHARED_MEMORY_PER_MULTIPROCESSOR",         {"hipDeviceAttributeMaxSharedMemoryPerMultiprocessor",       "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 81
   // cudaDevAttrMaxRegistersPerMultiprocessor
-  {"CU_DEVICE_ATTRIBUTE_MAX_REGISTERS_PER_MULTIPROCESSOR",             {"hipDeviceAttributeMaxRegistersPerMultiprocessor",          "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 82
+  {"CU_DEVICE_ATTRIBUTE_MAX_REGISTERS_PER_MULTIPROCESSOR",             {"hipDeviceAttributeMaxRegistersPerMultiprocessor",          "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 82
   // cudaDevAttrManagedMemory
   {"CU_DEVICE_ATTRIBUTE_MANAGED_MEMORY",                               {"hipDeviceAttributeManagedMemory",                          "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 83
   // cudaDevAttrIsMultiGpuBoard
   {"CU_DEVICE_ATTRIBUTE_MULTI_GPU_BOARD",                              {"hipDeviceAttributeIsMultiGpuBoard",                        "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 84
   // cudaDevAttrMultiGpuBoardGroupID
-  {"CU_DEVICE_ATTRIBUTE_MULTI_GPU_BOARD_GROUP_ID",                     {"hipDeviceAttributeMultiGpuBoardGroupId",                   "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 85
+  // CUDA only
+  {"CU_DEVICE_ATTRIBUTE_MULTI_GPU_BOARD_GROUP_ID",                     {"hipDeviceAttributeMultiGpuBoardGroupId",                   "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 85
   // cudaDevAttrHostNativeAtomicSupported
-  {"CU_DEVICE_ATTRIBUTE_HOST_NATIVE_ATOMIC_SUPPORTED",                 {"hipDeviceAttributeHostNativeAtomicSupported",              "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 86
+  // CUDA only
+  {"CU_DEVICE_ATTRIBUTE_HOST_NATIVE_ATOMIC_SUPPORTED",                 {"hipDeviceAttributeHostNativeAtomicSupported",              "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 86
   // cudaDevAttrSingleToDoublePrecisionPerfRatio
-  {"CU_DEVICE_ATTRIBUTE_SINGLE_TO_DOUBLE_PRECISION_PERF_RATIO",        {"hipDeviceAttributeSingleToDoublePrecisionPerfRatio",       "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 87
+  // CUDA only
+  {"CU_DEVICE_ATTRIBUTE_SINGLE_TO_DOUBLE_PRECISION_PERF_RATIO",        {"hipDeviceAttributeSingleToDoublePrecisionPerfRatio",       "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 87
   // cudaDevAttrPageableMemoryAccess
   {"CU_DEVICE_ATTRIBUTE_PAGEABLE_MEMORY_ACCESS",                       {"hipDeviceAttributePageableMemoryAccess",                   "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 88
   // cudaDevAttrConcurrentManagedAccess
   {"CU_DEVICE_ATTRIBUTE_CONCURRENT_MANAGED_ACCESS",                    {"hipDeviceAttributeConcurrentManagedAccess",                "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 89
   // cudaDevAttrComputePreemptionSupported
-  {"CU_DEVICE_ATTRIBUTE_COMPUTE_PREEMPTION_SUPPORTED",                 {"hipDeviceAttributeComputePreemptionSupported",             "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 90
+  // CUDA only
+  {"CU_DEVICE_ATTRIBUTE_COMPUTE_PREEMPTION_SUPPORTED",                 {"hipDeviceAttributeComputePreemptionSupported",             "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 90
   // cudaDevAttrCanUseHostPointerForRegisteredMem
-  {"CU_DEVICE_ATTRIBUTE_CAN_USE_HOST_POINTER_FOR_REGISTERED_MEM",      {"hipDeviceAttributeCanUseHostPointerForRegisteredMem",      "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 91
+  // CUDA only
+  {"CU_DEVICE_ATTRIBUTE_CAN_USE_HOST_POINTER_FOR_REGISTERED_MEM",      {"hipDeviceAttributeCanUseHostPointerForRegisteredMem",      "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 91
   // no analogue: cudaDevAttrReserved92
   {"CU_DEVICE_ATTRIBUTE_CAN_USE_STREAM_MEM_OPS",                       {"hipDeviceAttributeCanUseStreamMemOps",                     "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 92
   // no analogue: cudaDevAttrReserved93
   {"CU_DEVICE_ATTRIBUTE_CAN_USE_64_BIT_STREAM_MEM_OPS",                {"hipDeviceAttributeCanUse64BitStreamMemOps",                "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 93
   // no analogue: cudaDevAttrReserved94
-  {"CU_DEVICE_ATTRIBUTE_CAN_USE_STREAM_WAIT_VALUE_NOR",                {"hipDeviceAttributeCanUseStreamWaitValueNor",               "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 94
+  {"CU_DEVICE_ATTRIBUTE_CAN_USE_STREAM_WAIT_VALUE_NOR",                {"hipDeviceAttributeCanUseStreamWaitValue",                  "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 94
   // cudaDevAttrCooperativeLaunch
   {"CU_DEVICE_ATTRIBUTE_COOPERATIVE_LAUNCH",                           {"hipDeviceAttributeCooperativeLaunch",                      "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 95
   // cudaDevAttrCooperativeMultiDeviceLaunch
   {"CU_DEVICE_ATTRIBUTE_COOPERATIVE_MULTI_DEVICE_LAUNCH",              {"hipDeviceAttributeCooperativeMultiDeviceLaunch",           "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 96
   // cudaDevAttrMaxSharedMemoryPerBlockOptin
-  {"CU_DEVICE_ATTRIBUTE_MAX_SHARED_MEMORY_PER_BLOCK_OPTIN",            {"hipDeviceAttributeMaxSharedMemoryPerBlockOptin",           "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 97
+  // CUDA only
+  {"CU_DEVICE_ATTRIBUTE_MAX_SHARED_MEMORY_PER_BLOCK_OPTIN",            {"hipDeviceAttributeSharedMemPerBlockOptin",                 "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 97
   // cudaDevAttrCanFlushRemoteWrites
   {"CU_DEVICE_ATTRIBUTE_CAN_FLUSH_REMOTE_WRITES",                      {"hipDeviceAttributeCanFlushRemoteWrites",                   "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 98
   // cudaDevAttrHostRegisterSupported
@@ -627,7 +646,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // no analogue
   {"CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_WIN32_KMT_HANDLE_SUPPORTED",       {"hipDeviceAttributeHandleTypeWin32KmtHandleSupported",      "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 105
   // cudaDevAttrMaxBlocksPerMultiprocessor
-  {"CU_DEVICE_ATTRIBUTE_MAX_BLOCKS_PER_MULTIPROCESSOR",                {"hipDeviceAttributeMaxBlocksPerMultiprocessor",             "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 106
+  // CUDA only
+  {"CU_DEVICE_ATTRIBUTE_MAX_BLOCKS_PER_MULTIPROCESSOR",                {"hipDeviceAttributeMaxBlocksPerMultiprocessor",             "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 106
   // no analogue
   {"CU_DEVICE_ATTRIBUTE_GENERIC_COMPRESSION_SUPPORTED",                {"hipDeviceAttributeGenericCompressionSupported",            "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 107
   // cudaDevAttrMaxPersistingL2CacheSize
@@ -2894,4 +2914,25 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {
   {"hipDeviceAttributeMaxTexture2DLayered",                            {HIP_4030, HIP_0,    HIP_0   }},
   {"hipDeviceAttributeMaxTexture2DGather",                             {HIP_4030, HIP_0,    HIP_0   }},
   {"hipDeviceAttributeMaxTexture3DAlt",                                {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipDeviceAttributeMaxSurface3D",                                   {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipDeviceAttributeMaxSurface1DLayered",                            {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipDeviceAttributeMaxSurface2DLayered",                            {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipDeviceAttributeMaxSurfaceCubemap",                              {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipDeviceAttributeMaxSurfaceCubemapLayered",                       {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipDeviceAttributeMaxTexture1DLinear",                             {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipDeviceAttributeMaxTexture2DLinear",                             {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipDeviceAttributeMaxTexture2DMipmap",                             {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipDeviceAttributeMaxTexture1DMipmap",                             {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipDeviceAttributeStreamPrioritiesSupported",                      {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipDeviceAttributeGlobalL1CacheSupported",                         {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipDeviceAttributeLocalL1CacheSupported",                          {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipDeviceAttributeMaxRegistersPerMultiprocessor",                  {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipDeviceAttributeMultiGpuBoardGroupId",                           {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipDeviceAttributeHostNativeAtomicSupported",                      {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipDeviceAttributeSingleToDoublePrecisionPerfRatio",               {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipDeviceAttributeComputePreemptionSupported",                     {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipDeviceAttributeCanUseHostPointerForRegisteredMem",              {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipDeviceAttributeCanUseStreamWaitValue",                          {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipDeviceAttributeSharedMemPerBlockOptin",                         {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipDeviceAttributeMaxBlocksPerMultiprocessor",                     {HIP_4030, HIP_0,    HIP_0   }},
 };
