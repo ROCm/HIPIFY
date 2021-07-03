@@ -183,9 +183,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   // cudaMalloc
   {"cuMemAlloc",                                           {"hipMalloc",                                               "", CONV_MEMORY, API_DRIVER, 11}},
   {"cuMemAlloc_v2",                                        {"hipMalloc",                                               "", CONV_MEMORY, API_DRIVER, 11}},
-  // cudaHostAlloc
-  {"cuMemAllocHost",                                       {"hipHostMalloc",                                           "", CONV_MEMORY, API_DRIVER, 11}},
-  {"cuMemAllocHost_v2",                                    {"hipHostMalloc",                                           "", CONV_MEMORY, API_DRIVER, 11}},
+  //
+  {"cuMemAllocHost",                                       {"hipHostAlloc",                                            "", CONV_MEMORY, API_DRIVER, 11}},
+  {"cuMemAllocHost_v2",                                    {"hipHostAlloc",                                            "", CONV_MEMORY, API_DRIVER, 11}},
   // cudaMallocManaged
   {"cuMemAllocManaged",                                    {"hipMallocManaged",                                        "", CONV_MEMORY, API_DRIVER, 11}},
   // no analogue
@@ -281,7 +281,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuMemGetInfo",                                         {"hipMemGetInfo",                                           "", CONV_MEMORY, API_DRIVER, 11}},
   {"cuMemGetInfo_v2",                                      {"hipMemGetInfo",                                           "", CONV_MEMORY, API_DRIVER, 11}},
   // cudaHostAlloc
-  {"cuMemHostAlloc",                                       {"hipHostMalloc",                                           "", CONV_MEMORY, API_DRIVER, 11}},
+  {"cuMemHostAlloc",                                       {"hipHostAlloc",                                            "", CONV_MEMORY, API_DRIVER, 11}},
   // cudaHostGetDevicePointer
   {"cuMemHostGetDevicePointer",                            {"hipHostGetDevicePointer",                                 "", CONV_MEMORY, API_DRIVER, 11}},
   {"cuMemHostGetDevicePointer_v2",                         {"hipHostGetDevicePointer",                                 "", CONV_MEMORY, API_DRIVER, 11}},
