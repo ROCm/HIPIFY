@@ -65,6 +65,11 @@
 |`CUDA_ERROR_LAUNCH_TIMEOUT`| | | |`hipErrorLaunchTimeOut`|1.6.0| | |
 |`CUDA_ERROR_MAP_FAILED`| | | |`hipErrorMapFailed`|1.6.0| | |
 |`CUDA_ERROR_MISALIGNED_ADDRESS`| | | | | | | |
+|`CUDA_ERROR_MPS_CONNECTION_FAILED`|11.4| | | | | | |
+|`CUDA_ERROR_MPS_MAX_CLIENTS_REACHED`|11.4| | | | | | |
+|`CUDA_ERROR_MPS_MAX_CONNECTIONS_REACHED`|11.4| | | | | | |
+|`CUDA_ERROR_MPS_RPC_FAILURE`|11.4| | | | | | |
+|`CUDA_ERROR_MPS_SERVER_NOT_READY`|11.4| | | | | | |
 |`CUDA_ERROR_NOT_FOUND`| | | |`hipErrorNotFound`|1.6.0| | |
 |`CUDA_ERROR_NOT_INITIALIZED`| | | |`hipErrorNotInitialized`|1.6.0| | |
 |`CUDA_ERROR_NOT_MAPPED`| | | |`hipErrorNotMapped`|1.6.0| | |
@@ -103,6 +108,7 @@
 |`CUDA_ERROR_TOO_MANY_PEERS`| | | | | | | |
 |`CUDA_ERROR_UNKNOWN`| | | |`hipErrorUnknown`|1.6.0| | |
 |`CUDA_ERROR_UNMAP_FAILED`| | | |`hipErrorUnmapFailed`|1.6.0| | |
+|`CUDA_ERROR_UNSUPPORTED_EXEC_AFFINITY`|11.4| | | | | | |
 |`CUDA_ERROR_UNSUPPORTED_LIMIT`| | | |`hipErrorUnsupportedLimit`|1.6.0| | |
 |`CUDA_ERROR_UNSUPPORTED_PTX_VERSION`|11.1| | | | | | |
 |`CUDA_EXTERNAL_MEMORY_BUFFER_DESC`|10.0| | |`hipExternalMemoryBufferDesc`|4.3.0| | |
@@ -132,6 +138,7 @@
 |`CUDA_EXT_SEM_WAIT_NODE_PARAMS`|11.2| | | | | | |
 |`CUDA_EXT_SEM_WAIT_NODE_PARAMS_st`|11.2| | | | | | |
 |`CUDA_EXT_SEM_WAIT_NODE_PARAMS_v1`|11.3| | | | | | |
+|`CUDA_GRAPH_INSTANTIATE_FLAG_AUTO_FREE_ON_LAUNCH`|11.4| | | | | | |
 |`CUDA_HOST_NODE_PARAMS`|10.0| | |`hipHostNodeParams`|4.3.0| | |
 |`CUDA_HOST_NODE_PARAMS_st`|10.0| | |`hipHostNodeParams`|4.3.0| | |
 |`CUDA_HOST_NODE_PARAMS_v1`|11.3| | |`hipHostNodeParams`|4.3.0| | |
@@ -157,6 +164,8 @@
 |`CUDA_MEMSET_NODE_PARAMS`|10.0| | | |4.3.0| | |
 |`CUDA_MEMSET_NODE_PARAMS_st`|10.0| | | |4.3.0| | |
 |`CUDA_MEMSET_NODE_PARAMS_v1`|11.3| | | |4.3.0| | |
+|`CUDA_MEM_ALLOC_NODE_PARAMS`|11.4| | | | | | |
+|`CUDA_MEM_ALLOC_NODE_PARAMS_st`|11.4| | | | | | |
 |`CUDA_NVSCISYNC_ATTR_SIGNAL`|10.2| | | | | | |
 |`CUDA_NVSCISYNC_ATTR_WAIT`|10.2| | | | | | |
 |`CUDA_POINTER_ATTRIBUTE_ACCESS_FLAGS`|11.1| | | | | | |
@@ -453,6 +462,8 @@
 |`CU_EVENT_RECORD_EXTERNAL`|11.1| | | | | | |
 |`CU_EVENT_WAIT_DEFAULT`|11.1| | | | | | |
 |`CU_EVENT_WAIT_EXTERNAL`|11.1| | | | | | |
+|`CU_EXEC_AFFINITY_TYPE_MAX`|11.4| | | | | | |
+|`CU_EXEC_AFFINITY_TYPE_SM_COUNT`|11.4| | | | | | |
 |`CU_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_RESOURCE`|10.2| | |`hipExternalMemoryHandleTypeD3D11Resource`|4.3.0| | |
 |`CU_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_RESOURCE_KMT`|10.2| | |`hipExternalMemoryHandleTypeD3D11ResourceKmt`|4.3.0| | |
 |`CU_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP`|10.0| | |`hipExternalMemoryHandleTypeD3D12Heap`|4.3.0| | |
@@ -520,6 +531,8 @@
 |`CU_GRAPH_DEBUG_DOT_FLAGS_KERNEL_NODE_PARAMS`|11.3| | | | | | |
 |`CU_GRAPH_DEBUG_DOT_FLAGS_MEMCPY_NODE_PARAMS`|11.3| | | | | | |
 |`CU_GRAPH_DEBUG_DOT_FLAGS_MEMSET_NODE_PARAMS`|11.3| | | | | | |
+|`CU_GRAPH_DEBUG_DOT_FLAGS_MEM_ALLOC_NODE_PARAMS`|11.4| | | | | | |
+|`CU_GRAPH_DEBUG_DOT_FLAGS_MEM_FREE_NODE_PARAMS`|11.4| | | | | | |
 |`CU_GRAPH_DEBUG_DOT_FLAGS_RUNTIME_TYPES`|11.3| | | | | | |
 |`CU_GRAPH_DEBUG_DOT_FLAGS_VERBOSE`|11.3| | | | | | |
 |`CU_GRAPH_EXEC_UPDATE_ERROR`|10.2| | |`hipGraphExecUpdateError`|4.3.0| | |
@@ -530,6 +543,10 @@
 |`CU_GRAPH_EXEC_UPDATE_ERROR_TOPOLOGY_CHANGED`|10.2| | |`hipGraphExecUpdateErrorTopologyChanged`|4.3.0| | |
 |`CU_GRAPH_EXEC_UPDATE_ERROR_UNSUPPORTED_FUNCTION_CHANGE`|11.2| | |`hipGraphExecUpdateErrorUnsupportedFunctionChange`|4.3.0| | |
 |`CU_GRAPH_EXEC_UPDATE_SUCCESS`|10.2| | |`hipGraphExecUpdateSuccess`|4.3.0| | |
+|`CU_GRAPH_MEM_ATTR_RESERVED_MEM_CURRENT`|11.4| | | | | | |
+|`CU_GRAPH_MEM_ATTR_RESERVED_MEM_HIGH`|11.4| | | | | | |
+|`CU_GRAPH_MEM_ATTR_USED_MEM_CURRENT`|11.4| | | | | | |
+|`CU_GRAPH_MEM_ATTR_USED_MEM_HIGH`|11.4| | | | | | |
 |`CU_GRAPH_NODE_TYPE_COUNT`|10.0| |11.0|`hipGraphNodeTypeCount`|4.3.0| | |
 |`CU_GRAPH_NODE_TYPE_EMPTY`|10.0| | |`hipGraphNodeTypeEmpty`|4.3.0| | |
 |`CU_GRAPH_NODE_TYPE_EVENT_RECORD`|11.1| | |`hipGraphNodeTypeEventRecord`|4.3.0| | |
@@ -540,6 +557,8 @@
 |`CU_GRAPH_NODE_TYPE_KERNEL`|10.0| | |`hipGraphNodeTypeKernel`|4.3.0| | |
 |`CU_GRAPH_NODE_TYPE_MEMCPY`|10.0| | |`hipGraphNodeTypeMemcpy`|4.3.0| | |
 |`CU_GRAPH_NODE_TYPE_MEMSET`|10.0| | |`hipGraphNodeTypeMemset`|4.3.0| | |
+|`CU_GRAPH_NODE_TYPE_MEM_ALLOC`|11.4| | | | | | |
+|`CU_GRAPH_NODE_TYPE_MEM_FREE`|11.4| | | | | | |
 |`CU_GRAPH_NODE_TYPE_WAIT_EVENT`|11.1| | |`hipGraphNodeTypeWaitEvent`|4.3.0| | |
 |`CU_GRAPH_USER_OBJECT_MOVE`|11.3| | | | | | |
 |`CU_IPC_HANDLE_SIZE`| | | |`HIP_IPC_HANDLE_SIZE`|1.6.0| | |
@@ -552,6 +571,8 @@
 |`CU_JIT_ERROR_LOG_BUFFER_SIZE_BYTES`| | | |`hipJitOptionErrorLogBufferSizeBytes`|1.6.0| | |
 |`CU_JIT_FALLBACK_STRATEGY`| | | |`hipJitOptionFallbackStrategy`|1.6.0| | |
 |`CU_JIT_FAST_COMPILE`| | | |`hipJitOptionFastCompile`|1.6.0| | |
+|`CU_JIT_FMA`|11.4| | | | | | |
+|`CU_JIT_FTZ`|11.4| | | | | | |
 |`CU_JIT_GENERATE_DEBUG_INFO`| | | |`hipJitOptionGenerateDebugInfo`|1.6.0| | |
 |`CU_JIT_GENERATE_LINE_INFO`| | | |`hipJitOptionGenerateLineInfo`|1.6.0| | |
 |`CU_JIT_GLOBAL_SYMBOL_ADDRESSES`| | | | | | | |
@@ -562,14 +583,18 @@
 |`CU_JIT_INPUT_CUBIN`| | | | | | | |
 |`CU_JIT_INPUT_FATBINARY`| | | | | | | |
 |`CU_JIT_INPUT_LIBRARY`| | | | | | | |
+|`CU_JIT_INPUT_NVVM`|11.4| | | | | | |
 |`CU_JIT_INPUT_OBJECT`| | | | | | | |
 |`CU_JIT_INPUT_PTX`| | | | | | | |
 |`CU_JIT_LOG_VERBOSE`| | | |`hipJitOptionLogVerbose`|1.6.0| | |
+|`CU_JIT_LTO`|11.4| | | | | | |
 |`CU_JIT_MAX_REGISTERS`| | | |`hipJitOptionMaxRegisters`|1.6.0| | |
 |`CU_JIT_NEW_SM3X_OPT`| | | |`hipJitOptionSm3xOpt`|1.6.0| | |
 |`CU_JIT_NUM_INPUT_TYPES`| | | | | | | |
 |`CU_JIT_NUM_OPTIONS`| | | |`hipJitOptionNumOptions`|1.6.0| | |
 |`CU_JIT_OPTIMIZATION_LEVEL`| | | |`hipJitOptionOptimizationLevel`|1.6.0| | |
+|`CU_JIT_PREC_DIV`|11.4| | | | | | |
+|`CU_JIT_PREC_SQRT`|11.4| | | | | | |
 |`CU_JIT_TARGET`| | | |`hipJitOptionTarget`|1.6.0| | |
 |`CU_JIT_TARGET_FROM_CUCONTEXT`| | | |`hipJitOptionTargetFromContext`|1.6.0| | |
 |`CU_JIT_THREADS_PER_BLOCK`| | | |`hipJitOptionThreadsPerBlock`|1.6.0| | |
@@ -841,6 +866,14 @@
 |`CUevent_st`| | | |`ihipEvent_t`|1.6.0| | |
 |`CUevent_wait_flags`|11.1| | | | | | |
 |`CUevent_wait_flags_enum`| | | | | | | |
+|`CUexecAffinityParam`|11.4| | | | | | |
+|`CUexecAffinityParam_st`|11.4| | | | | | |
+|`CUexecAffinityParam_v1`|11.4| | | | | | |
+|`CUexecAffinitySmCount`|11.4| | | | | | |
+|`CUexecAffinitySmCount_st`|11.4| | | | | | |
+|`CUexecAffinitySmCount_v1`|11.4| | | | | | |
+|`CUexecAffinityType`|11.4| | | | | | |
+|`CUexecAffinityType_enum`|11.4| | | | | | |
 |`CUextMemory_st`|10.0| | | | | | |
 |`CUextSemaphore_st`|10.0| | | | | | |
 |`CUexternalMemory`|10.0| | |`hipExternalMemory_t`|4.3.0| | |
@@ -870,6 +903,10 @@
 |`CUgraphExecUpdateResult`|10.2| | |`hipGraphExecUpdateResult`|4.3.0| | |
 |`CUgraphExecUpdateResult_enum`|10.2| | |`hipGraphExecUpdateResult`|4.3.0| | |
 |`CUgraphExec_st`|10.0| | | | | | |
+|`CUgraphInstantiate_flags`|11.4| | | | | | |
+|`CUgraphInstantiate_flags_enum`|11.4| | | | | | |
+|`CUgraphMem_attribute`|11.4| | | | | | |
+|`CUgraphMem_attribute_enum`|11.4| | | | | | |
 |`CUgraphNode`|10.0| | |`hipGraphNode_t`|4.3.0| | |
 |`CUgraphNodeType`|10.0| | | |4.3.0| | |
 |`CUgraphNodeType_enum`|10.0| | | |4.3.0| | |
@@ -1434,6 +1471,7 @@
 |`cuGraphHostNodeGetParams`|10.0| | | | | | |
 |`cuGraphHostNodeSetParams`|10.0| | | | | | |
 |`cuGraphInstantiate`|10.0| | |`hipGraphInstantiate`|4.3.0| | |
+|`cuGraphInstantiateWithFlags`|11.4| | | | | | |
 |`cuGraphInstantiate_v2`|11.0| | |`hipGraphInstantiate`|4.3.0| | |
 |`cuGraphKernelNodeCopyAttributes`|11.0| | | | | | |
 |`cuGraphKernelNodeGetAttribute`|11.0| | | | | | |
