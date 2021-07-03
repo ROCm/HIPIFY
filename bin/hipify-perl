@@ -832,6 +832,7 @@ sub simpleSubstitutions {
     $ft{'device'} += s/\bcudaSetDeviceFlags\b/hipSetDeviceFlags/g;
     $ft{'context'} += s/\bcuCtxCreate\b/hipCtxCreate/g;
     $ft{'context'} += s/\bcuCtxCreate_v2\b/hipCtxCreate/g;
+    $ft{'context'} += s/\bcuCtxCreate_v3\b/hipCtxCreate/g;
     $ft{'context'} += s/\bcuCtxDestroy\b/hipCtxDestroy/g;
     $ft{'context'} += s/\bcuCtxDestroy_v2\b/hipCtxDestroy/g;
     $ft{'context'} += s/\bcuCtxGetApiVersion\b/hipCtxGetApiVersion/g;
@@ -5519,6 +5520,8 @@ sub warnUnsupportedFunctions {
         "cuGraphMemsetNodeGetParams",
         "cuGraphMemcpyNodeSetParams",
         "cuGraphMemcpyNodeGetParams",
+        "cuGraphMemFreeNodeGetParams",
+        "cuGraphMemAllocNodeGetParams",
         "cuGraphKernelNodeSetParams",
         "cuGraphKernelNodeSetAttribute",
         "cuGraphKernelNodeGetParams",
@@ -5551,6 +5554,8 @@ sub warnUnsupportedFunctions {
         "cuGraphDebugDotPrint",
         "cuGraphClone",
         "cuGraphChildGraphNodeGetGraph",
+        "cuGraphAddMemFreeNode",
+        "cuGraphAddMemAllocNode",
         "cuGraphAddHostNode",
         "cuGraphAddExternalSemaphoresWaitNode",
         "cuGraphAddExternalSemaphoresSignalNode",
@@ -5592,12 +5597,17 @@ sub warnUnsupportedFunctions {
         "cuEGLStreamConsumerConnect",
         "cuEGLStreamConsumerAcquireFrame",
         "cuDeviceSetMemPool",
+        "cuDeviceSetGraphMemAttribute",
+        "cuDeviceGraphMemTrim",
+        "cuDeviceGetUuid_v2",
         "cuDeviceGetUuid",
         "cuDeviceGetTexture1DLinearMaxWidth",
         "cuDeviceGetProperties",
         "cuDeviceGetNvSciSyncAttributes",
         "cuDeviceGetMemPool",
         "cuDeviceGetLuid",
+        "cuDeviceGetGraphMemAttribute",
+        "cuDeviceGetExecAffinitySupport",
         "cuDeviceGetDefaultMemPool",
         "cuDestroyExternalSemaphore",
         "cuD3D9UnregisterResource",
@@ -5637,6 +5647,7 @@ sub warnUnsupportedFunctions {
         "cuD3D10CtxCreate",
         "cuCtxSetLimit",
         "cuCtxResetPersistingL2Cache",
+        "cuCtxGetExecAffinity",
         "cuCtxDetach",
         "cuCtxAttach",
         "cuArrayGetSparseProperties",

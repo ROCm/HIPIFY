@@ -1041,12 +1041,14 @@
 |`cuDeviceGetAttribute`| | | |`hipDeviceGetAttribute`|1.6.0| | |
 |`cuDeviceGetCount`| | | |`hipGetDeviceCount`|1.6.0| | |
 |`cuDeviceGetDefaultMemPool`|11.2| | | | | | |
+|`cuDeviceGetExecAffinitySupport`|11.4| | | | | | |
 |`cuDeviceGetLuid`|10.0| | | | | | |
 |`cuDeviceGetMemPool`|11.2| | | | | | |
 |`cuDeviceGetName`| | | |`hipDeviceGetName`|1.6.0| | |
 |`cuDeviceGetNvSciSyncAttributes`|10.2| | | | | | |
 |`cuDeviceGetTexture1DLinearMaxWidth`|11.1| | | | | | |
 |`cuDeviceGetUuid`|9.2| | | | | | |
+|`cuDeviceGetUuid_v2`|11.4| | | | | | |
 |`cuDeviceSetMemPool`|11.2| | | | | | |
 |`cuDeviceTotalMem`| | | |`hipDeviceTotalMem`|1.6.0| | |
 |`cuDeviceTotalMem_v2`| | | |`hipDeviceTotalMem`|1.6.0| | |
@@ -1077,12 +1079,14 @@
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|
 |`cuCtxCreate`| | | |`hipCtxCreate`|1.6.0|1.9.0| |
 |`cuCtxCreate_v2`| | | |`hipCtxCreate`|1.6.0|1.9.0| |
+|`cuCtxCreate_v3`|11.4| | |`hipCtxCreate`|1.6.0|1.9.0| |
 |`cuCtxDestroy`| | | |`hipCtxDestroy`|1.6.0|1.9.0| |
 |`cuCtxDestroy_v2`| | | |`hipCtxDestroy`|1.6.0|1.9.0| |
 |`cuCtxGetApiVersion`| | | |`hipCtxGetApiVersion`|1.9.0|1.9.0| |
 |`cuCtxGetCacheConfig`| | | |`hipCtxGetCacheConfig`|1.9.0|1.9.0| |
 |`cuCtxGetCurrent`| | | |`hipCtxGetCurrent`|1.6.0|1.9.0| |
 |`cuCtxGetDevice`| | | |`hipCtxGetDevice`|1.6.0|1.9.0| |
+|`cuCtxGetExecAffinity`|11.4| | | | | | |
 |`cuCtxGetFlags`| | | |`hipCtxGetFlags`|1.9.0|1.9.0| |
 |`cuCtxGetLimit`| | | |`hipDeviceGetLimit`|1.6.0| | |
 |`cuCtxGetSharedMemConfig`| | | |`hipCtxGetSharedMemConfig`|1.9.0|1.9.0| |
@@ -1383,6 +1387,9 @@
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|
+|`cuDeviceGetGraphMemAttribute`|11.4| | | | | | |
+|`cuDeviceGraphMemTrim`|11.4| | | | | | |
+|`cuDeviceSetGraphMemAttribute`|11.4| | | | | | |
 |`cuGraphAddChildGraphNode`|10.0| | | | | | |
 |`cuGraphAddDependencies`|10.0| | | | | | |
 |`cuGraphAddEmptyNode`|10.0| | | | | | |
@@ -1392,6 +1399,8 @@
 |`cuGraphAddExternalSemaphoresWaitNode`|11.2| | | | | | |
 |`cuGraphAddHostNode`|10.0| | | | | | |
 |`cuGraphAddKernelNode`|10.0| | |`hipGraphAddKernelNode`|4.3.0| | |
+|`cuGraphAddMemAllocNode`|11.4| | | | | | |
+|`cuGraphAddMemFreeNode`|11.4| | | | | | |
 |`cuGraphAddMemcpyNode`|10.0| | |`hipGraphAddMemcpyNode`|4.3.0| | |
 |`cuGraphAddMemsetNode`|10.0| | |`hipGraphAddMemsetNode`|4.3.0| | |
 |`cuGraphChildGraphNodeGetGraph`|10.0| | | | | | |
@@ -1432,6 +1441,8 @@
 |`cuGraphKernelNodeSetAttribute`|11.0| | | | | | |
 |`cuGraphKernelNodeSetParams`|10.0| | | | | | |
 |`cuGraphLaunch`|10.0| | |`hipGraphLaunch`|4.3.0| | |
+|`cuGraphMemAllocNodeGetParams`|11.4| | | | | | |
+|`cuGraphMemFreeNodeGetParams`|11.4| | | | | | |
 |`cuGraphMemcpyNodeGetParams`|10.0| | | | | | |
 |`cuGraphMemcpyNodeSetParams`|10.0| | | | | | |
 |`cuGraphMemsetNodeGetParams`|10.0| | | | | | |
