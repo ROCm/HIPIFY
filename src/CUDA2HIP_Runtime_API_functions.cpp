@@ -266,7 +266,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // no analogue
   {"cudaGetSymbolSize",                                       {"hipGetSymbolSize",                                       "", CONV_MEMORY, API_RUNTIME, 9}},
   // cuMemHostAlloc
-  {"cudaHostAlloc",                                           {"hipHostMalloc",                                          "", CONV_MEMORY, API_RUNTIME, 9}},
+  {"cudaHostAlloc",                                           {"hipHostAlloc",                                           "", CONV_MEMORY, API_RUNTIME, 9}},
   // cuMemHostGetDevicePointer
   {"cudaHostGetDevicePointer",                                {"hipHostGetDevicePointer",                                "", CONV_MEMORY, API_RUNTIME, 9}},
   // cuMemHostGetFlags
@@ -284,7 +284,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // no analogue
   {"cudaMallocArray",                                         {"hipMallocArray",                                         "", CONV_MEMORY, API_RUNTIME, 9}},
   // cuMemHostAlloc
-  {"cudaMallocHost",                                          {"hipHostMalloc",                                          "", CONV_MEMORY, API_RUNTIME, 9}},
+  {"cudaMallocHost",                                          {"hipMallocHost",                                          "", CONV_MEMORY, API_RUNTIME, 9}},
   // cuMemAllocManaged
   {"cudaMallocManaged",                                       {"hipMallocManaged",                                       "", CONV_MEMORY, API_RUNTIME, 9}},
   // no analogue

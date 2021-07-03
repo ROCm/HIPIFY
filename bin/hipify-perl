@@ -880,8 +880,8 @@ sub simpleSubstitutions {
     $ft{'memory'} += s/\bcuIpcOpenEventHandle\b/hipIpcOpenEventHandle/g;
     $ft{'memory'} += s/\bcuIpcOpenMemHandle\b/hipIpcOpenMemHandle/g;
     $ft{'memory'} += s/\bcuMemAlloc\b/hipMalloc/g;
-    $ft{'memory'} += s/\bcuMemAllocHost\b/hipHostMalloc/g;
-    $ft{'memory'} += s/\bcuMemAllocHost_v2\b/hipHostMalloc/g;
+    $ft{'memory'} += s/\bcuMemAllocHost\b/hipHostAlloc/g;
+    $ft{'memory'} += s/\bcuMemAllocHost_v2\b/hipHostAlloc/g;
     $ft{'memory'} += s/\bcuMemAllocManaged\b/hipMallocManaged/g;
     $ft{'memory'} += s/\bcuMemAllocPitch\b/hipMemAllocPitch/g;
     $ft{'memory'} += s/\bcuMemAllocPitch_v2\b/hipMemAllocPitch/g;
@@ -893,7 +893,7 @@ sub simpleSubstitutions {
     $ft{'memory'} += s/\bcuMemGetAddressRange_v2\b/hipMemGetAddressRange/g;
     $ft{'memory'} += s/\bcuMemGetInfo\b/hipMemGetInfo/g;
     $ft{'memory'} += s/\bcuMemGetInfo_v2\b/hipMemGetInfo/g;
-    $ft{'memory'} += s/\bcuMemHostAlloc\b/hipHostMalloc/g;
+    $ft{'memory'} += s/\bcuMemHostAlloc\b/hipHostAlloc/g;
     $ft{'memory'} += s/\bcuMemHostGetDevicePointer\b/hipHostGetDevicePointer/g;
     $ft{'memory'} += s/\bcuMemHostGetDevicePointer_v2\b/hipHostGetDevicePointer/g;
     $ft{'memory'} += s/\bcuMemHostGetFlags\b/hipHostGetFlags/g;
@@ -945,7 +945,7 @@ sub simpleSubstitutions {
     $ft{'memory'} += s/\bcudaGetMipmappedArrayLevel\b/hipGetMipmappedArrayLevel/g;
     $ft{'memory'} += s/\bcudaGetSymbolAddress\b/hipGetSymbolAddress/g;
     $ft{'memory'} += s/\bcudaGetSymbolSize\b/hipGetSymbolSize/g;
-    $ft{'memory'} += s/\bcudaHostAlloc\b/hipHostMalloc/g;
+    $ft{'memory'} += s/\bcudaHostAlloc\b/hipHostAlloc/g;
     $ft{'memory'} += s/\bcudaHostGetDevicePointer\b/hipHostGetDevicePointer/g;
     $ft{'memory'} += s/\bcudaHostGetFlags\b/hipHostGetFlags/g;
     $ft{'memory'} += s/\bcudaHostRegister\b/hipHostRegister/g;
@@ -954,7 +954,7 @@ sub simpleSubstitutions {
     $ft{'memory'} += s/\bcudaMalloc3D\b/hipMalloc3D/g;
     $ft{'memory'} += s/\bcudaMalloc3DArray\b/hipMalloc3DArray/g;
     $ft{'memory'} += s/\bcudaMallocArray\b/hipMallocArray/g;
-    $ft{'memory'} += s/\bcudaMallocHost\b/hipHostMalloc/g;
+    $ft{'memory'} += s/\bcudaMallocHost\b/hipMallocHost/g;
     $ft{'memory'} += s/\bcudaMallocManaged\b/hipMallocManaged/g;
     $ft{'memory'} += s/\bcudaMallocMipmappedArray\b/hipMallocMipmappedArray/g;
     $ft{'memory'} += s/\bcudaMallocPitch\b/hipMallocPitch/g;

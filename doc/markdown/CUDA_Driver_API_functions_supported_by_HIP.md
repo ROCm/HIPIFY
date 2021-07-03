@@ -1192,8 +1192,8 @@
 |`cuIpcOpenEventHandle`| | | |`hipIpcOpenEventHandle`|1.6.0| | |
 |`cuIpcOpenMemHandle`| | | |`hipIpcOpenMemHandle`|1.6.0| | |
 |`cuMemAlloc`| | | |`hipMalloc`|1.5.0| | |
-|`cuMemAllocHost`| | | |`hipHostMalloc`|1.6.0| | |
-|`cuMemAllocHost_v2`| | | |`hipHostMalloc`|1.6.0| | |
+|`cuMemAllocHost`| | | |`hipHostAlloc`| | | |
+|`cuMemAllocHost_v2`| | | |`hipHostAlloc`| | | |
 |`cuMemAllocManaged`| | | |`hipMallocManaged`|2.5.0| | |
 |`cuMemAllocPitch`| | | |`hipMemAllocPitch`|3.0.0| | |
 |`cuMemAllocPitch_v2`| | | |`hipMemAllocPitch`|3.0.0| | |
@@ -1205,7 +1205,7 @@
 |`cuMemGetAddressRange_v2`| | | |`hipMemGetAddressRange`|1.9.0| | |
 |`cuMemGetInfo`| | | |`hipMemGetInfo`|1.6.0| | |
 |`cuMemGetInfo_v2`| | | |`hipMemGetInfo`|1.6.0| | |
-|`cuMemHostAlloc`| | | |`hipHostMalloc`|1.6.0| | |
+|`cuMemHostAlloc`| | | |`hipHostAlloc`| | | |
 |`cuMemHostGetDevicePointer`| | | |`hipHostGetDevicePointer`|1.6.0| | |
 |`cuMemHostGetDevicePointer_v2`| | | |`hipHostGetDevicePointer`|1.6.0| | |
 |`cuMemHostGetFlags`| | | |`hipHostGetFlags`|1.6.0| | |

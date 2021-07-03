@@ -151,7 +151,7 @@
 |`cudaGetMipmappedArrayLevel`| | | |`hipGetMipmappedArrayLevel`|3.5.0| | |
 |`cudaGetSymbolAddress`| | | |`hipGetSymbolAddress`|2.0.0| | |
 |`cudaGetSymbolSize`| | | |`hipGetSymbolSize`|2.0.0| | |
-|`cudaHostAlloc`| | | |`hipHostMalloc`|1.6.0| | |
+|`cudaHostAlloc`| | | |`hipHostAlloc`| | | |
 |`cudaHostGetDevicePointer`| | | |`hipHostGetDevicePointer`|1.6.0| | |
 |`cudaHostGetFlags`| | | |`hipHostGetFlags`|1.6.0| | |
 |`cudaHostRegister`| | | |`hipHostRegister`|1.6.0| | |
@@ -160,7 +160,7 @@
 |`cudaMalloc3D`| | | |`hipMalloc3D`|1.9.0| | |
 |`cudaMalloc3DArray`| | | |`hipMalloc3DArray`|1.7.0| | |
 |`cudaMallocArray`| | | |`hipMallocArray`|1.6.0| | |
-|`cudaMallocHost`| | | |`hipHostMalloc`|1.6.0| | |
+|`cudaMallocHost`| | | |`hipMallocHost`| | | |
 |`cudaMallocManaged`| | | |`hipMallocManaged`|2.5.0| | |
 |`cudaMallocMipmappedArray`| | | |`hipMallocMipmappedArray`|3.5.0| | |
 |`cudaMallocPitch`| | | |`hipMallocPitch`|1.6.0| | |
