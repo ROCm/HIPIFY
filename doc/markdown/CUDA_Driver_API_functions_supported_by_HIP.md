@@ -908,8 +908,8 @@
 |`CUgraphMem_attribute`|11.4| | | | | | |
 |`CUgraphMem_attribute_enum`|11.4| | | | | | |
 |`CUgraphNode`|10.0| | |`hipGraphNode_t`|4.3.0| | |
-|`CUgraphNodeType`|10.0| | | |4.3.0| | |
-|`CUgraphNodeType_enum`|10.0| | | |4.3.0| | |
+|`CUgraphNodeType`|10.0| | |`hipGraphNodeType`|4.3.0| | |
+|`CUgraphNodeType_enum`|10.0| | |`hipGraphNodeType`|4.3.0| | |
 |`CUgraphNode_st`|10.0| | |`hipGraphNode`|4.3.0| | |
 |`CUgraph_st`|10.0| | | | | | |
 |`CUgraphicsMapResourceFlags`| | | | | | | |
