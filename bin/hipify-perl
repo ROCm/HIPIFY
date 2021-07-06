@@ -2278,6 +2278,8 @@ sub simpleSubstitutions {
     $ft{'type'} += s/\bCUgraphExecUpdateResult\b/hipGraphExecUpdateResult/g;
     $ft{'type'} += s/\bCUgraphExecUpdateResult_enum\b/hipGraphExecUpdateResult/g;
     $ft{'type'} += s/\bCUgraphNode\b/hipGraphNode_t/g;
+    $ft{'type'} += s/\bCUgraphNodeType\b/hipGraphNodeType/g;
+    $ft{'type'} += s/\bCUgraphNodeType_enum\b/hipGraphNodeType/g;
     $ft{'type'} += s/\bCUgraphNode_st\b/hipGraphNode/g;
     $ft{'type'} += s/\bCUipcEventHandle\b/hipIpcEventHandle_t/g;
     $ft{'type'} += s/\bCUipcEventHandle_st\b/hipIpcEventHandle_st/g;
@@ -5769,8 +5771,6 @@ sub warnUnsupportedFunctions {
         "CUgraphicsMapResourceFlags_enum",
         "CUgraphicsMapResourceFlags",
         "CUgraph_st",
-        "CUgraphNodeType_enum",
-        "CUgraphNodeType",
         "CUgraphMem_attribute_enum",
         "CUgraphMem_attribute",
         "CUgraphInstantiate_flags_enum",
