@@ -30,11 +30,11 @@
 |`CUDA_ERROR_ALREADY_MAPPED`| | | |`hipErrorAlreadyMapped`|1.6.0| | |
 |`CUDA_ERROR_ARRAY_IS_MAPPED`| | | |`hipErrorArrayIsMapped`|1.6.0| | |
 |`CUDA_ERROR_ASSERT`| | | |`hipErrorAssert`|1.9.0| | |
-|`CUDA_ERROR_CAPTURED_EVENT`|10.0| | | | | | |
+|`CUDA_ERROR_CAPTURED_EVENT`|10.0| | |`hipErrorCapturedEvent`|4.3.0| | |
 |`CUDA_ERROR_COMPAT_NOT_SUPPORTED_ON_DEVICE`|10.1| | | | | | |
 |`CUDA_ERROR_CONTEXT_ALREADY_CURRENT`| |3.2| |`hipErrorContextAlreadyCurrent`|1.6.0| | |
 |`CUDA_ERROR_CONTEXT_ALREADY_IN_USE`| | | |`hipErrorContextAlreadyInUse`|1.6.0| | |
-|`CUDA_ERROR_CONTEXT_IS_DESTROYED`| | | | | | | |
+|`CUDA_ERROR_CONTEXT_IS_DESTROYED`| | | |`hipErrorContextIsDestroyed`|4.3.0| | |
 |`CUDA_ERROR_COOPERATIVE_LAUNCH_TOO_LARGE`|9.0| | |`hipErrorCooperativeLaunchTooLarge`|3.2.0| | |
 |`CUDA_ERROR_DEINITIALIZED`| | | |`hipErrorDeinitialized`|1.6.0| | |
 |`CUDA_ERROR_DEVICE_NOT_LICENSED`|11.1| | | | | | |
@@ -93,14 +93,14 @@
 |`CUDA_ERROR_PROFILER_NOT_INITIALIZED`| |5.0| |`hipErrorProfilerNotInitialized`|1.6.0| | |
 |`CUDA_ERROR_SHARED_OBJECT_INIT_FAILED`| | | |`hipErrorSharedObjectInitFailed`|1.6.0| | |
 |`CUDA_ERROR_SHARED_OBJECT_SYMBOL_NOT_FOUND`| | | |`hipErrorSharedObjectSymbolNotFound`|1.6.0| | |
-|`CUDA_ERROR_STREAM_CAPTURE_IMPLICIT`|10.0| | | | | | |
-|`CUDA_ERROR_STREAM_CAPTURE_INVALIDATED`|10.0| | | | | | |
-|`CUDA_ERROR_STREAM_CAPTURE_ISOLATION`|10.0| | | | | | |
-|`CUDA_ERROR_STREAM_CAPTURE_MERGE`|10.0| | | | | | |
-|`CUDA_ERROR_STREAM_CAPTURE_UNJOINED`|10.0| | | | | | |
-|`CUDA_ERROR_STREAM_CAPTURE_UNMATCHED`|10.0| | | | | | |
-|`CUDA_ERROR_STREAM_CAPTURE_UNSUPPORTED`|10.0| | | | | | |
-|`CUDA_ERROR_STREAM_CAPTURE_WRONG_THREAD`|10.1| | | | | | |
+|`CUDA_ERROR_STREAM_CAPTURE_IMPLICIT`|10.0| | |`hipErrorStreamCaptureImplicit`|4.3.0| | |
+|`CUDA_ERROR_STREAM_CAPTURE_INVALIDATED`|10.0| | |`hipErrorStreamCaptureInvalidated`|4.3.0| | |
+|`CUDA_ERROR_STREAM_CAPTURE_ISOLATION`|10.0| | |`hipErrorStreamCaptureIsolation`|4.3.0| | |
+|`CUDA_ERROR_STREAM_CAPTURE_MERGE`|10.0| | |`hipErrorStreamCaptureMerge`|4.3.0| | |
+|`CUDA_ERROR_STREAM_CAPTURE_UNJOINED`|10.0| | |`hipErrorStreamCaptureUnjoined`|4.3.0| | |
+|`CUDA_ERROR_STREAM_CAPTURE_UNMATCHED`|10.0| | |`hipErrorStreamCaptureUnmatched`|4.3.0| | |
+|`CUDA_ERROR_STREAM_CAPTURE_UNSUPPORTED`|10.0| | |`hipErrorStreamCaptureUnsupported`|4.3.0| | |
+|`CUDA_ERROR_STREAM_CAPTURE_WRONG_THREAD`|10.1| | |`hipErrorStreamCaptureWrongThread`|4.3.0| | |
 |`CUDA_ERROR_STUB_LIBRARY`|11.1| | | | | | |
 |`CUDA_ERROR_SYSTEM_DRIVER_MISMATCH`|10.1| | | | | | |
 |`CUDA_ERROR_SYSTEM_NOT_READY`|10.0| | | | | | |

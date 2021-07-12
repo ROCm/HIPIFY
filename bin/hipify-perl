@@ -2550,8 +2550,10 @@ sub simpleSubstitutions {
     $ft{'numeric_literal'} += s/\bCUDA_ERROR_ALREADY_MAPPED\b/hipErrorAlreadyMapped/g;
     $ft{'numeric_literal'} += s/\bCUDA_ERROR_ARRAY_IS_MAPPED\b/hipErrorArrayIsMapped/g;
     $ft{'numeric_literal'} += s/\bCUDA_ERROR_ASSERT\b/hipErrorAssert/g;
+    $ft{'numeric_literal'} += s/\bCUDA_ERROR_CAPTURED_EVENT\b/hipErrorCapturedEvent/g;
     $ft{'numeric_literal'} += s/\bCUDA_ERROR_CONTEXT_ALREADY_CURRENT\b/hipErrorContextAlreadyCurrent/g;
     $ft{'numeric_literal'} += s/\bCUDA_ERROR_CONTEXT_ALREADY_IN_USE\b/hipErrorContextAlreadyInUse/g;
+    $ft{'numeric_literal'} += s/\bCUDA_ERROR_CONTEXT_IS_DESTROYED\b/hipErrorContextIsDestroyed/g;
     $ft{'numeric_literal'} += s/\bCUDA_ERROR_COOPERATIVE_LAUNCH_TOO_LARGE\b/hipErrorCooperativeLaunchTooLarge/g;
     $ft{'numeric_literal'} += s/\bCUDA_ERROR_DEINITIALIZED\b/hipErrorDeinitialized/g;
     $ft{'numeric_literal'} += s/\bCUDA_ERROR_ECC_UNCORRECTABLE\b/hipErrorECCNotCorrectable/g;
@@ -2592,6 +2594,14 @@ sub simpleSubstitutions {
     $ft{'numeric_literal'} += s/\bCUDA_ERROR_PROFILER_NOT_INITIALIZED\b/hipErrorProfilerNotInitialized/g;
     $ft{'numeric_literal'} += s/\bCUDA_ERROR_SHARED_OBJECT_INIT_FAILED\b/hipErrorSharedObjectInitFailed/g;
     $ft{'numeric_literal'} += s/\bCUDA_ERROR_SHARED_OBJECT_SYMBOL_NOT_FOUND\b/hipErrorSharedObjectSymbolNotFound/g;
+    $ft{'numeric_literal'} += s/\bCUDA_ERROR_STREAM_CAPTURE_IMPLICIT\b/hipErrorStreamCaptureImplicit/g;
+    $ft{'numeric_literal'} += s/\bCUDA_ERROR_STREAM_CAPTURE_INVALIDATED\b/hipErrorStreamCaptureInvalidated/g;
+    $ft{'numeric_literal'} += s/\bCUDA_ERROR_STREAM_CAPTURE_ISOLATION\b/hipErrorStreamCaptureIsolation/g;
+    $ft{'numeric_literal'} += s/\bCUDA_ERROR_STREAM_CAPTURE_MERGE\b/hipErrorStreamCaptureMerge/g;
+    $ft{'numeric_literal'} += s/\bCUDA_ERROR_STREAM_CAPTURE_UNJOINED\b/hipErrorStreamCaptureUnjoined/g;
+    $ft{'numeric_literal'} += s/\bCUDA_ERROR_STREAM_CAPTURE_UNMATCHED\b/hipErrorStreamCaptureUnmatched/g;
+    $ft{'numeric_literal'} += s/\bCUDA_ERROR_STREAM_CAPTURE_UNSUPPORTED\b/hipErrorStreamCaptureUnsupported/g;
+    $ft{'numeric_literal'} += s/\bCUDA_ERROR_STREAM_CAPTURE_WRONG_THREAD\b/hipErrorStreamCaptureWrongThread/g;
     $ft{'numeric_literal'} += s/\bCUDA_ERROR_UNKNOWN\b/hipErrorUnknown/g;
     $ft{'numeric_literal'} += s/\bCUDA_ERROR_UNMAP_FAILED\b/hipErrorUnmapFailed/g;
     $ft{'numeric_literal'} += s/\bCUDA_ERROR_UNSUPPORTED_LIMIT\b/hipErrorUnsupportedLimit/g;
@@ -3216,6 +3226,8 @@ sub simpleSubstitutions {
     $ft{'numeric_literal'} += s/\bcudaErrorAlreadyMapped\b/hipErrorAlreadyMapped/g;
     $ft{'numeric_literal'} += s/\bcudaErrorArrayIsMapped\b/hipErrorArrayIsMapped/g;
     $ft{'numeric_literal'} += s/\bcudaErrorAssert\b/hipErrorAssert/g;
+    $ft{'numeric_literal'} += s/\bcudaErrorCapturedEvent\b/hipErrorCapturedEvent/g;
+    $ft{'numeric_literal'} += s/\bcudaErrorContextIsDestroyed\b/hipErrorContextIsDestroyed/g;
     $ft{'numeric_literal'} += s/\bcudaErrorCooperativeLaunchTooLarge\b/hipErrorCooperativeLaunchTooLarge/g;
     $ft{'numeric_literal'} += s/\bcudaErrorCudartUnloading\b/hipErrorDeinitialized/g;
     $ft{'numeric_literal'} += s/\bcudaErrorDeviceAlreadyInUse\b/hipErrorContextAlreadyInUse/g;
@@ -3266,6 +3278,14 @@ sub simpleSubstitutions {
     $ft{'numeric_literal'} += s/\bcudaErrorSetOnActiveProcess\b/hipErrorSetOnActiveProcess/g;
     $ft{'numeric_literal'} += s/\bcudaErrorSharedObjectInitFailed\b/hipErrorSharedObjectInitFailed/g;
     $ft{'numeric_literal'} += s/\bcudaErrorSharedObjectSymbolNotFound\b/hipErrorSharedObjectSymbolNotFound/g;
+    $ft{'numeric_literal'} += s/\bcudaErrorStreamCaptureImplicit\b/hipErrorStreamCaptureImplicit/g;
+    $ft{'numeric_literal'} += s/\bcudaErrorStreamCaptureInvalidated\b/hipErrorStreamCaptureInvalidated/g;
+    $ft{'numeric_literal'} += s/\bcudaErrorStreamCaptureIsolation\b/hipErrorStreamCaptureIsolation/g;
+    $ft{'numeric_literal'} += s/\bcudaErrorStreamCaptureMerge\b/hipErrorStreamCaptureMerge/g;
+    $ft{'numeric_literal'} += s/\bcudaErrorStreamCaptureUnjoined\b/hipErrorStreamCaptureUnjoined/g;
+    $ft{'numeric_literal'} += s/\bcudaErrorStreamCaptureUnmatched\b/hipErrorStreamCaptureUnmatched/g;
+    $ft{'numeric_literal'} += s/\bcudaErrorStreamCaptureUnsupported\b/hipErrorStreamCaptureUnsupported/g;
+    $ft{'numeric_literal'} += s/\bcudaErrorStreamCaptureWrongThread\b/hipErrorStreamCaptureWrongThread/g;
     $ft{'numeric_literal'} += s/\bcudaErrorSymbolNotFound\b/hipErrorNotFound/g;
     $ft{'numeric_literal'} += s/\bcudaErrorUnknown\b/hipErrorUnknown/g;
     $ft{'numeric_literal'} += s/\bcudaErrorUnmapBufferObjectFailed\b/hipErrorUnmapFailed/g;
@@ -5075,14 +5095,6 @@ sub warnUnsupportedFunctions {
         "cudaErrorSynchronizationError",
         "cudaErrorSyncDepthExceeded",
         "cudaErrorStubLibrary",
-        "cudaErrorStreamCaptureWrongThread",
-        "cudaErrorStreamCaptureUnsupported",
-        "cudaErrorStreamCaptureUnmatched",
-        "cudaErrorStreamCaptureUnjoined",
-        "cudaErrorStreamCaptureMerge",
-        "cudaErrorStreamCaptureIsolation",
-        "cudaErrorStreamCaptureInvalidated",
-        "cudaErrorStreamCaptureImplicit",
         "cudaErrorStartupFailure",
         "cudaErrorSoftwareValidityNotEstablished",
         "cudaErrorNvlinkUncorrectable",
@@ -5117,9 +5129,7 @@ sub warnUnsupportedFunctions {
         "cudaErrorDuplicateSurfaceName",
         "cudaErrorDevicesUnavailable",
         "cudaErrorDeviceNotLicensed",
-        "cudaErrorContextIsDestroyed",
         "cudaErrorCompatNotSupportedOnDevice",
-        "cudaErrorCapturedEvent",
         "cudaErrorCallRequiresNewerDriver",
         "cudaErrorApiFailureBase",
         "cudaErrorAddressOfConstant",
@@ -6693,14 +6703,6 @@ sub warnUnsupportedFunctions {
         "CUDA_ERROR_SYSTEM_NOT_READY",
         "CUDA_ERROR_SYSTEM_DRIVER_MISMATCH",
         "CUDA_ERROR_STUB_LIBRARY",
-        "CUDA_ERROR_STREAM_CAPTURE_WRONG_THREAD",
-        "CUDA_ERROR_STREAM_CAPTURE_UNSUPPORTED",
-        "CUDA_ERROR_STREAM_CAPTURE_UNMATCHED",
-        "CUDA_ERROR_STREAM_CAPTURE_UNJOINED",
-        "CUDA_ERROR_STREAM_CAPTURE_MERGE",
-        "CUDA_ERROR_STREAM_CAPTURE_ISOLATION",
-        "CUDA_ERROR_STREAM_CAPTURE_INVALIDATED",
-        "CUDA_ERROR_STREAM_CAPTURE_IMPLICIT",
         "CUDA_ERROR_NVLINK_UNCORRECTABLE",
         "CUDA_ERROR_NOT_PERMITTED",
         "CUDA_ERROR_MPS_SERVER_NOT_READY",
@@ -6719,9 +6721,7 @@ sub warnUnsupportedFunctions {
         "CUDA_ERROR_HARDWARE_STACK_ERROR",
         "CUDA_ERROR_GRAPH_EXEC_UPDATE_FAILURE",
         "CUDA_ERROR_DEVICE_NOT_LICENSED",
-        "CUDA_ERROR_CONTEXT_IS_DESTROYED",
         "CUDA_ERROR_COMPAT_NOT_SUPPORTED_ON_DEVICE",
-        "CUDA_ERROR_CAPTURED_EVENT",
         "CUDA_EGL_MAX_PLANES",
         "CUDA_CB",
         "CUDA_ARRAY_SPARSE_PROPERTIES_v1",
