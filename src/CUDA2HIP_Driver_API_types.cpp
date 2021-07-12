@@ -1272,7 +1272,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_POINTER_ATTRIBUTE_ACCESS_FLAGS",                                {"hipPointerAttributeAccessFlags",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 16
   {"CU_POINTER_ATTRIBUTE_MEMPOOL_HANDLE",                              {"hipPointerAttributeMempoolHandle",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 17
 
-  // TODO: HIPresourcetype_enum and all its values should be hipResourceType as long as they are equal
+  // TODO [HIP]: HIPresourcetype_enum and all its values should be hipResourceType as long as they are equal
   // cudaResourceType
   {"CUresourcetype",                                                   {"HIPresourcetype",                                          "", CONV_TYPE, API_DRIVER, 1}},
   {"CUresourcetype_enum",                                              {"HIPresourcetype_enum",                                     "", CONV_TYPE, API_DRIVER, 1}},
@@ -1286,7 +1286,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaResourceTypePitch2D
   {"CU_RESOURCE_TYPE_PITCH2D",                                         {"HIP_RESOURCE_TYPE_PITCH2D",                                "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x03
 
-  // TODO: HIPresourceViewFormat_enum and all its values should be hipResourceViewFormat as long as they are equal
+  // TODO [HIP]: HIPresourceViewFormat_enum and all its values should be hipResourceViewFormat as long as they are equal
   // cudaResourceViewFormat
   {"CUresourceViewFormat",                                             {"HIPresourceViewFormat",                                    "", CONV_TYPE, API_DRIVER, 1}},
   {"CUresourceViewFormat_enum",                                        {"HIPresourceViewFormat_enum",                               "", CONV_TYPE, API_DRIVER, 1}},
@@ -1475,7 +1475,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaErrorSetOnActiveProcess
   {"CUDA_ERROR_PRIMARY_CONTEXT_ACTIVE",                                {"hipErrorSetOnActiveProcess",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 708
   // cudaErrorContextIsDestroyed
-  {"CUDA_ERROR_CONTEXT_IS_DESTROYED",                                  {"hipErrorContextIsDestroyed",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 709
+  {"CUDA_ERROR_CONTEXT_IS_DESTROYED",                                  {"hipErrorContextIsDestroyed",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 709
   // cudaErrorAssert
   {"CUDA_ERROR_ASSERT",                                                {"hipErrorAssert",                                           "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 710
   // cudaErrorTooManyPeers
@@ -1519,23 +1519,23 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   //
   {"CUDA_ERROR_MPS_MAX_CONNECTIONS_REACHED",                           {"hipErrorMpsMaxConnectionsReached",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 809
   // cudaErrorStreamCaptureUnsupported
-  {"CUDA_ERROR_STREAM_CAPTURE_UNSUPPORTED",                            {"hipErrorStreamCaptureUnsupported",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 900
+  {"CUDA_ERROR_STREAM_CAPTURE_UNSUPPORTED",                            {"hipErrorStreamCaptureUnsupported",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 900
   // cudaErrorStreamCaptureInvalidated
-  {"CUDA_ERROR_STREAM_CAPTURE_INVALIDATED",                            {"hipErrorStreamCaptureInvalidated",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 901
+  {"CUDA_ERROR_STREAM_CAPTURE_INVALIDATED",                            {"hipErrorStreamCaptureInvalidated",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 901
   // cudaErrorStreamCaptureMerge
-  {"CUDA_ERROR_STREAM_CAPTURE_MERGE",                                  {"hipErrorStreamCaptureMerge",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 902
+  {"CUDA_ERROR_STREAM_CAPTURE_MERGE",                                  {"hipErrorStreamCaptureMerge",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 902
   // cudaErrorStreamCaptureUnmatched
-  {"CUDA_ERROR_STREAM_CAPTURE_UNMATCHED",                              {"hipErrorStreamCaptureUnmatched",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 903
+  {"CUDA_ERROR_STREAM_CAPTURE_UNMATCHED",                              {"hipErrorStreamCaptureUnmatched",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 903
   // cudaErrorStreamCaptureUnjoined
-  {"CUDA_ERROR_STREAM_CAPTURE_UNJOINED",                               {"hipErrorStreamCaptureUnjoined",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 904
+  {"CUDA_ERROR_STREAM_CAPTURE_UNJOINED",                               {"hipErrorStreamCaptureUnjoined",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 904
   // cudaErrorStreamCaptureIsolation
-  {"CUDA_ERROR_STREAM_CAPTURE_ISOLATION",                              {"hipErrorStreamCaptureIsolation",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 905
+  {"CUDA_ERROR_STREAM_CAPTURE_ISOLATION",                              {"hipErrorStreamCaptureIsolation",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 905
   // cudaErrorStreamCaptureImplicit
-  {"CUDA_ERROR_STREAM_CAPTURE_IMPLICIT",                               {"hipErrorStreamCaptureImplicit",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 906
+  {"CUDA_ERROR_STREAM_CAPTURE_IMPLICIT",                               {"hipErrorStreamCaptureImplicit",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 906
   // cudaErrorCapturedEvent
-  {"CUDA_ERROR_CAPTURED_EVENT",                                        {"hipErrorCapturedEvent",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 907
+  {"CUDA_ERROR_CAPTURED_EVENT",                                        {"hipErrorCapturedEvent",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 907
   // cudaErrorStreamCaptureWrongThread
-  {"CUDA_ERROR_STREAM_CAPTURE_WRONG_THREAD",                           {"hipErrorStreamCaptureWrongThread",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 908
+  {"CUDA_ERROR_STREAM_CAPTURE_WRONG_THREAD",                           {"hipErrorStreamCaptureWrongThread",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 908
   // cudaErrorTimeout
   {"CUDA_ERROR_TIMEOUT",                                               {"hipErrorTimeout",                                          "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 909
   // cudaErrorGraphExecUpdateFailure
@@ -3040,4 +3040,14 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {
   {"hipDeviceAttributeCanUseStreamWaitValue",                          {HIP_4030, HIP_0,    HIP_0   }},
   {"hipDeviceAttributeSharedMemPerBlockOptin",                         {HIP_4030, HIP_0,    HIP_0   }},
   {"hipDeviceAttributeMaxBlocksPerMultiprocessor",                     {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipErrorContextIsDestroyed",                                       {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipErrorStreamCaptureUnsupported",                                 {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipErrorStreamCaptureInvalidated",                                 {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipErrorStreamCaptureMerge",                                       {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipErrorStreamCaptureUnmatched",                                   {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipErrorStreamCaptureUnjoined",                                    {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipErrorStreamCaptureIsolation",                                   {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipErrorStreamCaptureImplicit",                                    {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipErrorCapturedEvent",                                            {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipErrorStreamCaptureWrongThread",                                 {HIP_4030, HIP_0,    HIP_0   }},
 };

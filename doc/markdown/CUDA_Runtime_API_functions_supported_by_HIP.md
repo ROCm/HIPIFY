@@ -830,9 +830,9 @@ Unsupported
 |`cudaErrorArrayIsMapped`|10.1| | |`hipErrorArrayIsMapped`|1.6.0| | |
 |`cudaErrorAssert`| | | |`hipErrorAssert`|1.9.0| | |
 |`cudaErrorCallRequiresNewerDriver`|11.1| | | | | | |
-|`cudaErrorCapturedEvent`|10.0| | | | | | |
+|`cudaErrorCapturedEvent`|10.0| | |`hipErrorCapturedEvent`|4.3.0| | |
 |`cudaErrorCompatNotSupportedOnDevice`|10.1| | | | | | |
-|`cudaErrorContextIsDestroyed`|10.1| | | | | | |
+|`cudaErrorContextIsDestroyed`|10.1| | |`hipErrorContextIsDestroyed`|4.3.0| | |
 |`cudaErrorCooperativeLaunchTooLarge`|9.0| | |`hipErrorCooperativeLaunchTooLarge`|3.2.0| | |
 |`cudaErrorCudartUnloading`| | | |`hipErrorDeinitialized`|1.6.0| | |
 |`cudaErrorDeviceAlreadyInUse`| | | |`hipErrorContextAlreadyInUse`|1.6.0| | |
@@ -917,14 +917,14 @@ Unsupported
 |`cudaErrorSharedObjectSymbolNotFound`| | | |`hipErrorSharedObjectSymbolNotFound`|1.6.0| | |
 |`cudaErrorSoftwareValidityNotEstablished`|11.2| | | | | | |
 |`cudaErrorStartupFailure`| | | | | | | |
-|`cudaErrorStreamCaptureImplicit`|10.0| | | | | | |
-|`cudaErrorStreamCaptureInvalidated`|10.0| | | | | | |
-|`cudaErrorStreamCaptureIsolation`|10.0| | | | | | |
-|`cudaErrorStreamCaptureMerge`|10.0| | | | | | |
-|`cudaErrorStreamCaptureUnjoined`|10.0| | | | | | |
-|`cudaErrorStreamCaptureUnmatched`|10.0| | | | | | |
-|`cudaErrorStreamCaptureUnsupported`|10.0| | | | | | |
-|`cudaErrorStreamCaptureWrongThread`|10.1| | | | | | |
+|`cudaErrorStreamCaptureImplicit`|10.0| | |`hipErrorStreamCaptureImplicit`|4.3.0| | |
+|`cudaErrorStreamCaptureInvalidated`|10.0| | |`hipErrorStreamCaptureInvalidated`|4.3.0| | |
+|`cudaErrorStreamCaptureIsolation`|10.0| | |`hipErrorStreamCaptureIsolation`|4.3.0| | |
+|`cudaErrorStreamCaptureMerge`|10.0| | |`hipErrorStreamCaptureMerge`|4.3.0| | |
+|`cudaErrorStreamCaptureUnjoined`|10.0| | |`hipErrorStreamCaptureUnjoined`|4.3.0| | |
+|`cudaErrorStreamCaptureUnmatched`|10.0| | |`hipErrorStreamCaptureUnmatched`|4.3.0| | |
+|`cudaErrorStreamCaptureUnsupported`|10.0| | |`hipErrorStreamCaptureUnsupported`|4.3.0| | |
+|`cudaErrorStreamCaptureWrongThread`|10.1| | |`hipErrorStreamCaptureWrongThread`|4.3.0| | |
 |`cudaErrorStubLibrary`|11.1| | | | | | |
 |`cudaErrorSymbolNotFound`|10.1| | |`hipErrorNotFound`|1.6.0| | |
 |`cudaErrorSyncDepthExceeded`| | | | | | | |
