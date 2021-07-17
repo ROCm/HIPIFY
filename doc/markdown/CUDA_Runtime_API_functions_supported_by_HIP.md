@@ -528,9 +528,9 @@ Unsupported
 |`CUevent_st`| | | |`ihipEvent_t`|1.6.0| | |
 |`CUexternalMemory_st`|10.0| | | | | | |
 |`CUexternalSemaphore_st`|10.0| | | | | | |
-|`CUgraphExec_st`|10.0| | | | | | |
+|`CUgraphExec_st`|10.0| | |`hipGraphExec`|4.3.0| | |
 |`CUgraphNode_st`|10.0| | |`hipGraphNode`|4.3.0| | |
-|`CUgraph_st`|10.0| | | | | | |
+|`CUgraph_st`|10.0| | |`hipGraph`|4.3.0| | |
 |`CUstream_st`| | | |`ihipStream_t`|1.5.0| | |
 |`CUuuid_st`| | | | | | | |
 |`MAJOR_VERSION`|8.0| | | | | | |
@@ -1040,7 +1040,7 @@ Unsupported
 |`cudaGraphExecUpdateErrorUnsupportedFunctionChange`|11.2| | |`hipGraphExecUpdateErrorUnsupportedFunctionChange`|4.3.0| | |
 |`cudaGraphExecUpdateResult`|10.2| | |`hipGraphExecUpdateResult`|4.3.0| | |
 |`cudaGraphExecUpdateSuccess`|10.2| | |`hipGraphExecUpdateSuccess`|4.3.0| | |
-|`cudaGraphExec_t`|10.0| | | | | | |
+|`cudaGraphExec_t`|10.0| | |`hipGraphExec_t`|4.3.0| | |
 |`cudaGraphNodeType`|10.0| | |`hipGraphNodeType`|4.3.0| | |
 |`cudaGraphNodeTypeCount`|10.0| | |`hipGraphNodeTypeCount`|4.3.0| | |
 |`cudaGraphNodeTypeEmpty`|10.0| | |`hipGraphNodeTypeEmpty`|4.3.0| | |
@@ -1053,7 +1053,7 @@ Unsupported
 |`cudaGraphNodeTypeWaitEvent`|11.1| | |`hipGraphNodeTypeWaitEvent`|4.3.0| | |
 |`cudaGraphNode_t`|10.0| | |`hipGraphNode_t`|4.3.0| | |
 |`cudaGraphUserObjectMove`|11.3| | | | | | |
-|`cudaGraph_t`|10.0| | | | | | |
+|`cudaGraph_t`|10.0| | |`hipGraph_t`|4.3.0| | |
 |`cudaGraphicsCubeFace`| | | | | | | |
 |`cudaGraphicsCubeFaceNegativeX`| | | | | | | |
 |`cudaGraphicsCubeFaceNegativeY`| | | | | | | |
@@ -1078,7 +1078,7 @@ Unsupported
 |`cudaHostAllocPortable`| | | |`hipHostMallocPortable`|1.6.0| | |
 |`cudaHostAllocWriteCombined`| | | |`hipHostMallocWriteCombined`|1.6.0| | |
 |`cudaHostFn_t`|10.0| | |`hipHostFn_t`|4.3.0| | |
-|`cudaHostNodeParams`|10.0| | | | | | |
+|`cudaHostNodeParams`|10.0| | |`hipHostNodeParams`|4.3.0| | |
 |`cudaHostRegisterDefault`| | | |`hipHostRegisterDefault`|1.6.0| | |
 |`cudaHostRegisterIoMemory`|7.5| | |`hipHostRegisterIoMemory`|1.6.0| | |
 |`cudaHostRegisterMapped`| | | |`hipHostRegisterMapped`|1.6.0| | |
@@ -1094,7 +1094,7 @@ Unsupported
 |`cudaKernelNodeAttrValue`|11.0| | | | | | |
 |`cudaKernelNodeAttributeAccessPolicyWindow`|11.0| | | | | | |
 |`cudaKernelNodeAttributeCooperative`|11.0| | | | | | |
-|`cudaKernelNodeParams`|10.0| | | |4.3.0| | |
+|`cudaKernelNodeParams`|10.0| | |`hipKernelNodeParams`|4.3.0| | |
 |`cudaKeyValuePair`| | | | | | | |
 |`cudaLaunchParams`|9.0| | |`hipLaunchParams`|2.6.0| | |
 |`cudaLimit`| | | |`hipLimit_t`|1.6.0| | |

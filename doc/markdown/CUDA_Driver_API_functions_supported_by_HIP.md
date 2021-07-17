@@ -896,13 +896,13 @@
 |`CUfunction`| | | |`hipFunction_t`|1.6.0| | |
 |`CUfunction_attribute`| | | |`hipFunction_attribute`|2.8.0| | |
 |`CUfunction_attribute_enum`| | | |`hipFunction_attribute`|2.8.0| | |
-|`CUgraph`|10.0| | | | | | |
+|`CUgraph`|10.0| | |`hipGraph_t`|4.3.0| | |
 |`CUgraphDebugDot_flags`|11.3| | | | | | |
 |`CUgraphDebugDot_flags_enum`|11.3| | | | | | |
-|`CUgraphExec`|10.0| | | | | | |
+|`CUgraphExec`|10.0| | |`hipGraphExec_t`|4.3.0| | |
 |`CUgraphExecUpdateResult`|10.2| | |`hipGraphExecUpdateResult`|4.3.0| | |
 |`CUgraphExecUpdateResult_enum`|10.2| | |`hipGraphExecUpdateResult`|4.3.0| | |
-|`CUgraphExec_st`|10.0| | | | | | |
+|`CUgraphExec_st`|10.0| | |`hipGraphExec`|4.3.0| | |
 |`CUgraphInstantiate_flags`|11.4| | | | | | |
 |`CUgraphInstantiate_flags_enum`|11.4| | | | | | |
 |`CUgraphMem_attribute`|11.4| | | | | | |
@@ -911,7 +911,7 @@
 |`CUgraphNodeType`|10.0| | |`hipGraphNodeType`|4.3.0| | |
 |`CUgraphNodeType_enum`|10.0| | |`hipGraphNodeType`|4.3.0| | |
 |`CUgraphNode_st`|10.0| | |`hipGraphNode`|4.3.0| | |
-|`CUgraph_st`|10.0| | | | | | |
+|`CUgraph_st`|10.0| | |`hipGraph`|4.3.0| | |
 |`CUgraphicsMapResourceFlags`| | | | | | | |
 |`CUgraphicsMapResourceFlags_enum`| | | | | | | |
 |`CUgraphicsRegisterFlags`| | | | | | | |
