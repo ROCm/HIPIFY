@@ -2275,12 +2275,16 @@ sub simpleSubstitutions {
     $ft{'type'} += s/\bCUfunction\b/hipFunction_t/g;
     $ft{'type'} += s/\bCUfunction_attribute\b/hipFunction_attribute/g;
     $ft{'type'} += s/\bCUfunction_attribute_enum\b/hipFunction_attribute/g;
+    $ft{'type'} += s/\bCUgraph\b/hipGraph_t/g;
+    $ft{'type'} += s/\bCUgraphExec\b/hipGraphExec_t/g;
     $ft{'type'} += s/\bCUgraphExecUpdateResult\b/hipGraphExecUpdateResult/g;
     $ft{'type'} += s/\bCUgraphExecUpdateResult_enum\b/hipGraphExecUpdateResult/g;
+    $ft{'type'} += s/\bCUgraphExec_st\b/hipGraphExec/g;
     $ft{'type'} += s/\bCUgraphNode\b/hipGraphNode_t/g;
     $ft{'type'} += s/\bCUgraphNodeType\b/hipGraphNodeType/g;
     $ft{'type'} += s/\bCUgraphNodeType_enum\b/hipGraphNodeType/g;
     $ft{'type'} += s/\bCUgraphNode_st\b/hipGraphNode/g;
+    $ft{'type'} += s/\bCUgraph_st\b/hipGraph/g;
     $ft{'type'} += s/\bCUipcEventHandle\b/hipIpcEventHandle_t/g;
     $ft{'type'} += s/\bCUipcEventHandle_st\b/hipIpcEventHandle_st/g;
     $ft{'type'} += s/\bCUipcEventHandle_v1\b/hipIpcEventHandle_t/g;
@@ -2372,13 +2376,17 @@ sub simpleSubstitutions {
     $ft{'type'} += s/\bcudaFuncCache\b/hipFuncCache_t/g;
     $ft{'type'} += s/\bcudaFunction_t\b/hipFunction_t/g;
     $ft{'type'} += s/\bcudaGraphExecUpdateResult\b/hipGraphExecUpdateResult/g;
+    $ft{'type'} += s/\bcudaGraphExec_t\b/hipGraphExec_t/g;
     $ft{'type'} += s/\bcudaGraphNodeType\b/hipGraphNodeType/g;
     $ft{'type'} += s/\bcudaGraphNode_t\b/hipGraphNode_t/g;
+    $ft{'type'} += s/\bcudaGraph_t\b/hipGraph_t/g;
     $ft{'type'} += s/\bcudaHostFn_t\b/hipHostFn_t/g;
+    $ft{'type'} += s/\bcudaHostNodeParams\b/hipHostNodeParams/g;
     $ft{'type'} += s/\bcudaIpcEventHandle_st\b/hipIpcEventHandle_st/g;
     $ft{'type'} += s/\bcudaIpcEventHandle_t\b/hipIpcEventHandle_t/g;
     $ft{'type'} += s/\bcudaIpcMemHandle_st\b/hipIpcMemHandle_st/g;
     $ft{'type'} += s/\bcudaIpcMemHandle_t\b/hipIpcMemHandle_t/g;
+    $ft{'type'} += s/\bcudaKernelNodeParams\b/hipKernelNodeParams/g;
     $ft{'type'} += s/\bcudaLaunchParams\b/hipLaunchParams/g;
     $ft{'type'} += s/\bcudaLimit\b/hipLimit_t/g;
     $ft{'type'} += s/\bcudaMemRangeAttribute\b/hipMemRangeAttribute/g;
@@ -4907,13 +4915,11 @@ sub warnUnsupportedFunctions {
         "cudaLimitDevRuntimePendingLaunchCount",
         "cudaLaunchHostFunc",
         "cudaKeyValuePair",
-        "cudaKernelNodeParams",
         "cudaKernelNodeAttributeCooperative",
         "cudaKernelNodeAttributeAccessPolicyWindow",
         "cudaKernelNodeAttrValue",
         "cudaKernelNodeAttrID",
         "cudaHostRegisterReadOnly",
-        "cudaHostNodeParams",
         "cudaGraphicsVDPAURegisterVideoSurface",
         "cudaGraphicsVDPAURegisterOutputSurface",
         "cudaGraphicsUnregisterResource",
@@ -4949,7 +4955,6 @@ sub warnUnsupportedFunctions {
         "cudaGraphicsCubeFaceNegativeY",
         "cudaGraphicsCubeFaceNegativeX",
         "cudaGraphicsCubeFace",
-        "cudaGraph_t",
         "cudaGraphUserObjectMove",
         "cudaGraphUpload",
         "cudaGraphRetainUserObject",
@@ -4980,7 +4985,6 @@ sub warnUnsupportedFunctions {
         "cudaGraphExternalSemaphoresWaitNodeGetParams",
         "cudaGraphExternalSemaphoresSignalNodeSetParams",
         "cudaGraphExternalSemaphoresSignalNodeGetParams",
-        "cudaGraphExec_t",
         "cudaGraphExecUpdate",
         "cudaGraphExecMemsetNodeSetParams",
         "cudaGraphExecMemcpyNodeSetParamsToSymbol",
@@ -5780,16 +5784,12 @@ sub warnUnsupportedFunctions {
         "CUgraphicsRegisterFlags",
         "CUgraphicsMapResourceFlags_enum",
         "CUgraphicsMapResourceFlags",
-        "CUgraph_st",
         "CUgraphMem_attribute_enum",
         "CUgraphMem_attribute",
         "CUgraphInstantiate_flags_enum",
         "CUgraphInstantiate_flags",
-        "CUgraphExec_st",
-        "CUgraphExec",
         "CUgraphDebugDot_flags_enum",
         "CUgraphDebugDot_flags",
-        "CUgraph",
         "CUflushGPUDirectRDMAWritesTarget_enum",
         "CUflushGPUDirectRDMAWritesTarget",
         "CUflushGPUDirectRDMAWritesScope_enum",

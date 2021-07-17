@@ -181,14 +181,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUfunction",                                                       {"hipFunction_t",                                            "", CONV_TYPE, API_DRIVER, 1}},
 
   // the same - CUgraph_st
-  {"CUgraph_st",                                                       {"hipGraph_st",                                              "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CUgraph_st",                                                       {"hipGraph",                                                 "", CONV_TYPE, API_DRIVER, 1}},
   // cudaGraph_t
-  {"CUgraph",                                                          {"hipGraph",                                                 "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CUgraph",                                                          {"hipGraph_t",                                               "", CONV_TYPE, API_DRIVER, 1}},
 
   // the same -CUgraphExec_st
-  {"CUgraphExec_st",                                                   {"hipGraphExec_st",                                          "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CUgraphExec_st",                                                   {"hipGraphExec",                                             "", CONV_TYPE, API_DRIVER, 1}},
   // cudaGraphExec_t
-  {"CUgraphExec",                                                      {"hipGraphExec",                                             "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CUgraphExec",                                                      {"hipGraphExec_t",                                           "", CONV_TYPE, API_DRIVER, 1}},
 
   // cudaGraphicsResource
   {"CUgraphicsResource_st",                                            {"hipGraphicsResource_st",                                   "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},

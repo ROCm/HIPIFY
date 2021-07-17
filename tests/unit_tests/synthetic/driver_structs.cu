@@ -159,5 +159,15 @@ int main() {
   CUtexref_st* tex_ref_st_ptr;
   CUtexref tex_ref;
 
+  // CHECK: hipGraph* graph_st;
+  // CHECK-NEXT: hipGraph_t graph;
+  CUgraph_st* graph_st;
+  CUgraph graph;
+
+  // CHECK: hipGraphExec* graphExec_st;
+  // CHECK-NEXT: hipGraphExec_t graphExec;
+  CUgraphExec_st* graphExec_st;
+  CUgraphExec graphExec;
+
   return 0;
 }
