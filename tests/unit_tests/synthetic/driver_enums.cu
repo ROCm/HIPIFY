@@ -710,5 +710,52 @@ int main() {
   CUresult ERROR_STREAM_CAPTURE_WRONG_THREAD = CUDA_ERROR_STREAM_CAPTURE_WRONG_THREAD;
   CUresult ERROR_UNKNOWN = CUDA_ERROR_UNKNOWN;
 
+  // CHECK: hipSharedMemConfig sharedconfig;
+  // CHECK-NEXT: hipSharedMemConfig sharedconfig_enum;
+  // CHECK-NEXT: hipSharedMemConfig SHARED_MEM_CONFIG_DEFAULT_BANK_SIZE = hipSharedMemBankSizeDefault;
+  // CHECK-NEXT: hipSharedMemConfig SHARED_MEM_CONFIG_FOUR_BYTE_BANK_SIZE = hipSharedMemBankSizeFourByte;
+  // CHECK-NEXT: hipSharedMemConfig SHARED_MEM_CONFIG_EIGHT_BYTE_BANK_SIZE = hipSharedMemBankSizeEightByte;
+  CUsharedconfig sharedconfig;
+  CUsharedconfig_enum sharedconfig_enum;
+  CUsharedconfig SHARED_MEM_CONFIG_DEFAULT_BANK_SIZE = CU_SHARED_MEM_CONFIG_DEFAULT_BANK_SIZE;
+  CUsharedconfig SHARED_MEM_CONFIG_FOUR_BYTE_BANK_SIZE = CU_SHARED_MEM_CONFIG_FOUR_BYTE_BANK_SIZE;
+  CUsharedconfig SHARED_MEM_CONFIG_EIGHT_BYTE_BANK_SIZE = CU_SHARED_MEM_CONFIG_EIGHT_BYTE_BANK_SIZE;
+
+  // CHECK: int STREAM_DEFAULT = hipStreamDefault;
+  // CHECK-NEXT: int STREAM_NON_BLOCKING = hipStreamNonBlocking;
+  int STREAM_DEFAULT = CU_STREAM_DEFAULT;
+  int STREAM_NON_BLOCKING = CU_STREAM_NON_BLOCKING;
+
+  // CHECK: hipStreamCaptureStatus streamCaptureStatus;
+  // CHECK-NEXT: hipStreamCaptureStatus streamCaptureStatus_enum;
+  // CHECK-NEXT: hipStreamCaptureStatus STREAM_CAPTURE_STATUS_NONE = hipStreamCaptureStatusNone;
+  // CHECK-NEXT: hipStreamCaptureStatus STREAM_CAPTURE_STATUS_ACTIVE = hipStreamCaptureStatusActive;
+  // CHECK-NEXT: hipStreamCaptureStatus STREAM_CAPTURE_STATUS_INVALIDATED = hipStreamCaptureStatusInvalidated;
+  CUstreamCaptureStatus streamCaptureStatus;
+  CUstreamCaptureStatus_enum streamCaptureStatus_enum;
+  CUstreamCaptureStatus STREAM_CAPTURE_STATUS_NONE = CU_STREAM_CAPTURE_STATUS_NONE;
+  CUstreamCaptureStatus STREAM_CAPTURE_STATUS_ACTIVE = CU_STREAM_CAPTURE_STATUS_ACTIVE;
+  CUstreamCaptureStatus STREAM_CAPTURE_STATUS_INVALIDATED = CU_STREAM_CAPTURE_STATUS_INVALIDATED;
+
+  // CHECK: hipStreamCaptureMode streamCaptureMode;
+  // CHECK-NEXT: hipStreamCaptureMode streamCaptureMode_enum;
+  // CHECK-NEXT: hipStreamCaptureMode STREAM_CAPTURE_MODE_GLOBAL = hipStreamCaptureModeGlobal;
+  // CHECK-NEXT: hipStreamCaptureMode STREAM_CAPTURE_MODE_THREAD_LOCAL = hipStreamCaptureModeThreadLocal;
+  // CHECK-NEXT: hipStreamCaptureMode STREAM_CAPTURE_MODE_RELAXED = hipStreamCaptureModeRelaxed;
+  CUstreamCaptureMode streamCaptureMode;
+  CUstreamCaptureMode_enum streamCaptureMode_enum;
+  CUstreamCaptureMode STREAM_CAPTURE_MODE_GLOBAL = CU_STREAM_CAPTURE_MODE_GLOBAL;
+  CUstreamCaptureMode STREAM_CAPTURE_MODE_THREAD_LOCAL = CU_STREAM_CAPTURE_MODE_THREAD_LOCAL;
+  CUstreamCaptureMode STREAM_CAPTURE_MODE_RELAXED = CU_STREAM_CAPTURE_MODE_RELAXED;
+
+  // CHECK: int STREAM_WAIT_VALUE_GEQ = hipStreamWaitValueGte;
+  // CHECK-NEXT: int STREAM_WAIT_VALUE_EQ = hipStreamWaitValueEq;
+  // CHECK-NEXT: int STREAM_WAIT_VALUE_AND = hipStreamWaitValueAnd;
+  // CHECK-NEXT: int STREAM_WAIT_VALUE_NOR = hipStreamWaitValueNor;
+  int STREAM_WAIT_VALUE_GEQ = CU_STREAM_WAIT_VALUE_GEQ;
+  int STREAM_WAIT_VALUE_EQ = CU_STREAM_WAIT_VALUE_EQ;
+  int STREAM_WAIT_VALUE_AND = CU_STREAM_WAIT_VALUE_AND;
+  int STREAM_WAIT_VALUE_NOR = CU_STREAM_WAIT_VALUE_NOR;
+
   return 0;
 }
