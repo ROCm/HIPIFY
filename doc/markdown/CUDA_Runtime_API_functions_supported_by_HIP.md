@@ -636,6 +636,7 @@ Unsupported
 |`cudaDevAttrL2CacheSize`| | | |`hipDeviceAttributeL2CacheSize`|1.6.0| | |
 |`cudaDevAttrLocalL1CacheSupported`| | | |`hipDeviceAttributeLocalL1CacheSupported`|4.3.0| | |
 |`cudaDevAttrManagedMemory`| | | |`hipDeviceAttributeManagedMemory`|3.10.0| | |
+|`cudaDevAttrMax`|11.4| | | | | | |
 |`cudaDevAttrMaxAccessPolicyWindowSize`|11.3| | | | | | |
 |`cudaDevAttrMaxBlockDimX`| | | |`hipDeviceAttributeMaxBlockDimX`|1.6.0| | |
 |`cudaDevAttrMaxBlockDimY`| | | |`hipDeviceAttributeMaxBlockDimY`|1.6.0| | |
@@ -893,6 +894,11 @@ Unsupported
 |`cudaErrorMisalignedAddress`| | | | | | | |
 |`cudaErrorMissingConfiguration`| | | |`hipErrorMissingConfiguration`|1.6.0| | |
 |`cudaErrorMixedDeviceExecution`| |3.1| | | | | |
+|`cudaErrorMpsConnectionFailed`|11.4| | | | | | |
+|`cudaErrorMpsMaxClientsReached`|11.4| | | | | | |
+|`cudaErrorMpsMaxConnectionsReached`|11.4| | | | | | |
+|`cudaErrorMpsRpcFailure`|11.4| | | | | | |
+|`cudaErrorMpsServerNotReady`|11.4| | | | | | |
 |`cudaErrorNoDevice`| | | |`hipErrorNoDevice`|1.6.0| | |
 |`cudaErrorNoKernelImageForDevice`| | | |`hipErrorNoBinaryForGpu`|1.6.0| | |
 |`cudaErrorNotMapped`|10.1| | |`hipErrorNotMapped`|1.6.0| | |
@@ -937,6 +943,7 @@ Unsupported
 |`cudaErrorTooManyPeers`| | | | | | | |
 |`cudaErrorUnknown`| | | |`hipErrorUnknown`|1.6.0| | |
 |`cudaErrorUnmapBufferObjectFailed`| | | |`hipErrorUnmapFailed`|1.6.0| | |
+|`cudaErrorUnsupportedExecAffinity`|11.4| | | | | | |
 |`cudaErrorUnsupportedLimit`| | | |`hipErrorUnsupportedLimit`|1.6.0| | |
 |`cudaErrorUnsupportedPtxVersion`|11.1| | | | | | |
 |`cudaError_t`| | | |`hipError_t`|1.5.0| | |
@@ -1041,13 +1048,24 @@ Unsupported
 |`cudaGraphExecUpdateResult`|10.2| | |`hipGraphExecUpdateResult`|4.3.0| | |
 |`cudaGraphExecUpdateSuccess`|10.2| | |`hipGraphExecUpdateSuccess`|4.3.0| | |
 |`cudaGraphExec_t`|10.0| | |`hipGraphExec_t`|4.3.0| | |
+|`cudaGraphInstantiateFlagAutoFreeOnLaunch`|11.4| | | | | | |
+|`cudaGraphInstantiateFlags`|11.4| | | | | | |
+|`cudaGraphMemAttrReservedMemCurrent`|11.4| | | | | | |
+|`cudaGraphMemAttrReservedMemHigh`|11.4| | | | | | |
+|`cudaGraphMemAttrUsedMemCurrent`|11.4| | | | | | |
+|`cudaGraphMemAttrUsedMemHigh`|11.4| | | | | | |
+|`cudaGraphMemAttributeType`|11.4| | | | | | |
 |`cudaGraphNodeType`|10.0| | |`hipGraphNodeType`|4.3.0| | |
 |`cudaGraphNodeTypeCount`|10.0| | |`hipGraphNodeTypeCount`|4.3.0| | |
 |`cudaGraphNodeTypeEmpty`|10.0| | |`hipGraphNodeTypeEmpty`|4.3.0| | |
 |`cudaGraphNodeTypeEventRecord`|11.1| | |`hipGraphNodeTypeEventRecord`|4.3.0| | |
+|`cudaGraphNodeTypeExtSemaphoreSignal`|11.4| | |`hipGraphNodeTypeExtSemasSignal`| | | |
+|`cudaGraphNodeTypeExtSemaphoreWait`|11.4| | |`hipGraphNodeTypeExtSemasWait`| | | |
 |`cudaGraphNodeTypeGraph`|10.0| | |`hipGraphNodeTypeGraph`|4.3.0| | |
 |`cudaGraphNodeTypeHost`|10.0| | |`hipGraphNodeTypeHost`|4.3.0| | |
 |`cudaGraphNodeTypeKernel`|10.0| | |`hipGraphNodeTypeKernel`|4.3.0| | |
+|`cudaGraphNodeTypeMemAlloc`|11.4| | |`hipGraphNodeTypeMemAlloc`| | | |
+|`cudaGraphNodeTypeMemFree`|11.4| | |`hipGraphNodeTypeMemFree`| | | |
 |`cudaGraphNodeTypeMemcpy`|10.0| | |`hipGraphNodeTypeMemcpy`|4.3.0| | |
 |`cudaGraphNodeTypeMemset`|10.0| | |`hipGraphNodeTypeMemset`|4.3.0| | |
 |`cudaGraphNodeTypeWaitEvent`|11.1| | |`hipGraphNodeTypeWaitEvent`|4.3.0| | |
@@ -1116,6 +1134,7 @@ Unsupported
 |`cudaMemAdviseUnsetAccessedBy`|8.0| | |`hipMemAdviseUnsetAccessedBy`|3.7.0| | |
 |`cudaMemAdviseUnsetPreferredLocation`|8.0| | |`hipMemAdviseUnsetPreferredLocation`|3.7.0| | |
 |`cudaMemAdviseUnsetReadMostly`|8.0| | |`hipMemAdviseUnsetReadMostly`|3.7.0| | |
+|`cudaMemAllocNodeParams`|11.4| | | | | | |
 |`cudaMemAllocationHandleType`|11.2| | | | | | |
 |`cudaMemAllocationType`|11.2| | | | | | |
 |`cudaMemAllocationTypeInvalid`|11.2| | | | | | |

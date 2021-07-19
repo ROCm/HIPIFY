@@ -3329,9 +3329,13 @@ sub simpleSubstitutions {
     $ft{'numeric_literal'} += s/\bcudaGraphNodeTypeCount\b/hipGraphNodeTypeCount/g;
     $ft{'numeric_literal'} += s/\bcudaGraphNodeTypeEmpty\b/hipGraphNodeTypeEmpty/g;
     $ft{'numeric_literal'} += s/\bcudaGraphNodeTypeEventRecord\b/hipGraphNodeTypeEventRecord/g;
+    $ft{'numeric_literal'} += s/\bcudaGraphNodeTypeExtSemaphoreSignal\b/hipGraphNodeTypeExtSemasSignal/g;
+    $ft{'numeric_literal'} += s/\bcudaGraphNodeTypeExtSemaphoreWait\b/hipGraphNodeTypeExtSemasWait/g;
     $ft{'numeric_literal'} += s/\bcudaGraphNodeTypeGraph\b/hipGraphNodeTypeGraph/g;
     $ft{'numeric_literal'} += s/\bcudaGraphNodeTypeHost\b/hipGraphNodeTypeHost/g;
     $ft{'numeric_literal'} += s/\bcudaGraphNodeTypeKernel\b/hipGraphNodeTypeKernel/g;
+    $ft{'numeric_literal'} += s/\bcudaGraphNodeTypeMemAlloc\b/hipGraphNodeTypeMemAlloc/g;
+    $ft{'numeric_literal'} += s/\bcudaGraphNodeTypeMemFree\b/hipGraphNodeTypeMemFree/g;
     $ft{'numeric_literal'} += s/\bcudaGraphNodeTypeMemcpy\b/hipGraphNodeTypeMemcpy/g;
     $ft{'numeric_literal'} += s/\bcudaGraphNodeTypeMemset\b/hipGraphNodeTypeMemset/g;
     $ft{'numeric_literal'} += s/\bcudaGraphNodeTypeWaitEvent\b/hipGraphNodeTypeWaitEvent/g;
@@ -4900,6 +4904,7 @@ sub warnUnsupportedFunctions {
         "cudaMemAllocationTypeInvalid",
         "cudaMemAllocationType",
         "cudaMemAllocationHandleType",
+        "cudaMemAllocNodeParams",
         "cudaMemAccessFlagsProtReadWrite",
         "cudaMemAccessFlagsProtRead",
         "cudaMemAccessFlagsProtNone",
@@ -4971,11 +4976,18 @@ sub warnUnsupportedFunctions {
         "cudaGraphMemcpyNodeSetParams1D",
         "cudaGraphMemcpyNodeSetParams",
         "cudaGraphMemcpyNodeGetParams",
+        "cudaGraphMemAttributeType",
+        "cudaGraphMemAttrUsedMemHigh",
+        "cudaGraphMemAttrUsedMemCurrent",
+        "cudaGraphMemAttrReservedMemHigh",
+        "cudaGraphMemAttrReservedMemCurrent",
         "cudaGraphKernelNodeSetParams",
         "cudaGraphKernelNodeSetAttribute",
         "cudaGraphKernelNodeGetParams",
         "cudaGraphKernelNodeGetAttribute",
         "cudaGraphKernelNodeCopyAttributes",
+        "cudaGraphInstantiateFlags",
+        "cudaGraphInstantiateFlagAutoFreeOnLaunch",
         "cudaGraphHostNodeSetParams",
         "cudaGraphHostNodeGetParams",
         "cudaGraphGetRootNodes",
@@ -5090,6 +5102,7 @@ sub warnUnsupportedFunctions {
         "cudaEventRecordDefault",
         "cudaEventCreateFromEGLSync",
         "cudaErrorUnsupportedPtxVersion",
+        "cudaErrorUnsupportedExecAffinity",
         "cudaErrorTooManyPeers",
         "cudaErrorTimeout",
         "cudaErrorTextureNotBound",
@@ -5104,6 +5117,11 @@ sub warnUnsupportedFunctions {
         "cudaErrorNvlinkUncorrectable",
         "cudaErrorNotYetImplemented",
         "cudaErrorNotPermitted",
+        "cudaErrorMpsServerNotReady",
+        "cudaErrorMpsRpcFailure",
+        "cudaErrorMpsMaxConnectionsReached",
+        "cudaErrorMpsMaxClientsReached",
+        "cudaErrorMpsConnectionFailed",
         "cudaErrorMixedDeviceExecution",
         "cudaErrorMisalignedAddress",
         "cudaErrorMemoryValueTooLarge",
@@ -5258,6 +5276,7 @@ sub warnUnsupportedFunctions {
         "cudaDevAttrMaxSurface1DLayeredLayers",
         "cudaDevAttrMaxPersistingL2CacheSize",
         "cudaDevAttrMaxAccessPolicyWindowSize",
+        "cudaDevAttrMax",
         "cudaDevAttrHostRegisterSupported",
         "cudaDevAttrHostRegisterReadOnlySupported",
         "cudaDevAttrGPUDirectRDMAWritesOrdering",

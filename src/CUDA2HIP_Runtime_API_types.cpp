@@ -182,7 +182,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaStream_t",                                                     {"hipStream_t",                                              "", CONV_TYPE, API_RUNTIME, 36}},
 
   // CUfunction
-  {"cudaFunction_t",                                                   {"hipFunction_t",                                            "", CONV_TYPE, API_DRIVER}},
+  {"cudaFunction_t",                                                   {"hipFunction_t",                                            "", CONV_TYPE, API_RUNTIME}},
 
   // CUaccessPolicyWindow_st
   {"cudaAccessPolicyWindow",                                           {"hipAccessPolicyWindow",                                    "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
@@ -207,6 +207,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
 
   // CUDA_EXT_SEM_WAIT_NODE_PARAMS_st
   {"cudaExternalSemaphoreWaitNodeParams",                              {"hipExternalSemaphoreWaitNodeParams",                       "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+
+  // CUDA_MEM_ALLOC_NODE_PARAMS_st
+  {"cudaMemAllocNodeParams",                                           {"hipMemallocNodeParams",                                    "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
 
   // 2. Unions
 
@@ -509,6 +512,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaDevAttrGPUDirectRDMAWritesOrdering",                           {"hipDeviceAttributeGpuDirectRdmaWritesOrdering",            "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 118
   // CU_DEVICE_ATTRIBUTE_MEMPOOL_SUPPORTED_HANDLE_TYPES
   {"cudaDevAttrMemoryPoolSupportedHandleTypes",                        {"hipDeviceAttributeMempoolSupportedHandleTypes",            "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 119
+  // CU_DEVICE_ATTRIBUTE_MAX
+  {"cudaDevAttrMax",                                                   {"hipDeviceAttributeMax",                                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 120
 
   // CUdevice_P2PAttribute
   {"cudaDeviceP2PAttr",                                                {"hipDeviceP2PAttr",                                         "", CONV_TYPE, API_RUNTIME, 36}},
@@ -847,6 +852,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaErrorUnsupportedPtxVersion",                                   {"hipErrorUnsupportedPtxVersion",                            "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 222
   // CUDA_ERROR_JIT_COMPILATION_DISABLED
   {"cudaErrorJitCompilationDisabled",                                  {"hipErrorJitCompilationDisabled",                           "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 223
+  // CUDA_ERROR_UNSUPPORTED_EXEC_AFFINITY
+  {"cudaErrorUnsupportedExecAffinity",                                 {"hipErrorUnsupportedExecAffinity",                          "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 224
   // CUDA_ERROR_INVALID_SOURCE
   {"cudaErrorInvalidSource",                                           {"hipErrorInvalidSource",                                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 300
   // CUDA_ERROR_FILE_NOT_FOUND
@@ -913,6 +920,16 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaErrorSystemDriverMismatch",                                    {"hipErrorSystemDriverMismatch",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 803
   // CUDA_ERROR_COMPAT_NOT_SUPPORTED_ON_DEVICE
   {"cudaErrorCompatNotSupportedOnDevice",                              {"hipErrorCompatNotSupportedOnDevice",                       "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 804
+  // CUDA_ERROR_MPS_CONNECTION_FAILED
+  {"cudaErrorMpsConnectionFailed",                                     {"hipErrorMpsConnectionFailed",                              "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 805
+  // CUDA_ERROR_MPS_RPC_FAILURE
+  {"cudaErrorMpsRpcFailure",                                           {"hipErrorMpsRpcFailed",                                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 806
+  // CUDA_ERROR_MPS_SERVER_NOT_READY
+  {"cudaErrorMpsServerNotReady",                                       {"hipErrorMpsServerNotReady",                                "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 807
+  // CUDA_ERROR_MPS_MAX_CLIENTS_REACHED
+  {"cudaErrorMpsMaxClientsReached",                                    {"hipErrorMpsMaxClientsReached",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 808
+  // CUDA_ERROR_MPS_MAX_CONNECTIONS_REACHED
+  {"cudaErrorMpsMaxConnectionsReached",                                {"hipErrorMpsMaxConnectionsReached",                         "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 809
   // CUDA_ERROR_STREAM_CAPTURE_UNSUPPORTED
   {"cudaErrorStreamCaptureUnsupported",                                {"hipErrorStreamCaptureUnsupported",                         "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 900
   // CUDA_ERROR_STREAM_CAPTURE_INVALIDATED
@@ -1066,6 +1083,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaGraphNodeTypeWaitEvent",                                       {"hipGraphNodeTypeWaitEvent",                                "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 0x06
   // CU_GRAPH_NODE_TYPE_EVENT_RECORD = 7
   {"cudaGraphNodeTypeEventRecord",                                     {"hipGraphNodeTypeEventRecord",                              "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 0x07
+  // CU_GRAPH_NODE_TYPE_EXT_SEMAS_SIGNAL = 8
+  {"cudaGraphNodeTypeExtSemaphoreSignal",                              {"hipGraphNodeTypeExtSemasSignal",                           "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 0x08
+  // CU_GRAPH_NODE_TYPE_EXT_SEMAS_WAIT = 9
+  {"cudaGraphNodeTypeExtSemaphoreWait",                                {"hipGraphNodeTypeExtSemasWait",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 0x09
+  // CU_GRAPH_NODE_TYPE_MEM_ALLOC = 10
+  {"cudaGraphNodeTypeMemAlloc",                                        {"hipGraphNodeTypeMemAlloc",                                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 0x0a
+  // CU_GRAPH_NODE_TYPE_MEM_FREE = 11
+  {"cudaGraphNodeTypeMemFree",                                         {"hipGraphNodeTypeMemFree",                                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 0x0b
   // CU_GRAPH_NODE_TYPE_COUNT
   {"cudaGraphNodeTypeCount",                                           {"hipGraphNodeTypeCount",                                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}},
 
@@ -1597,6 +1622,24 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaGraphDebugDotFlagsKernelNodeAttributes",                       {"hipGraphDebugDotFlagsKernelNodeAttributes",                "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 1<<9
   // CU_GRAPH_DEBUG_DOT_FLAGS_HANDLES
   {"cudaGraphDebugDotFlagsHandles",                                    {"hipGraphDebugDotFlagsHandles",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 1<<10
+
+  // CUgraphMem_attribute
+  {"cudaGraphMemAttributeType",                                        {"hipGraphMemAttribute",                                     "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+  // cudaGraphMemAttributeType enum values
+  // CU_GRAPH_MEM_ATTR_USED_MEM_CURRENT
+  {"cudaGraphMemAttrUsedMemCurrent",                                   {"hipGraphMemAttrUsedMemCurrent",                            "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+  // CU_GRAPH_MEM_ATTR_USED_MEM_HIGH
+  {"cudaGraphMemAttrUsedMemHigh",                                      {"hipGraphMemAttrUsedMemHigh",                               "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+  // CU_GRAPH_MEM_ATTR_RESERVED_MEM_CURRENT
+  {"cudaGraphMemAttrReservedMemCurrent",                               {"hipGraphMemAttrReservedMemCurrent",                        "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+  // CU_GRAPH_MEM_ATTR_RESERVED_MEM_HIGH
+  {"cudaGraphMemAttrReservedMemHigh",                                  {"hipGraphMemAttrReservedMemHigh",                           "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+
+  // CUgraphInstantiate_flags
+  {"cudaGraphInstantiateFlags",                                        {"hipGraphInstantiateFlags",                                 "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+  // cudaGraphInstantiateFlags enum values
+  // CUDA_GRAPH_INSTANTIATE_FLAG_AUTO_FREE_ON_LAUNCH
+  {"cudaGraphInstantiateFlagAutoFreeOnLaunch",                         {"hipGraphInstantiateFlagAutoFreeOnLaunch",                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}},
 
   // 4. Typedefs
 
@@ -2131,6 +2174,25 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_TYPE_NAME_VER_MAP 
   {"cudaGraphDebugDotFlagsExtSemasWaitNodeParams",                     {CUDA_113, CUDA_0,   CUDA_0  }},
   {"cudaGraphDebugDotFlagsKernelNodeAttributes",                       {CUDA_113, CUDA_0,   CUDA_0  }},
   {"cudaGraphDebugDotFlagsHandles",                                    {CUDA_113, CUDA_0,   CUDA_0  }},
+  {"cudaErrorUnsupportedExecAffinity",                                 {CUDA_114, CUDA_0,   CUDA_0  }},
+  {"cudaErrorMpsConnectionFailed",                                     {CUDA_114, CUDA_0,   CUDA_0  }},
+  {"cudaErrorMpsRpcFailure",                                           {CUDA_114, CUDA_0,   CUDA_0  }},
+  {"cudaErrorMpsServerNotReady",                                       {CUDA_114, CUDA_0,   CUDA_0  }},
+  {"cudaErrorMpsMaxClientsReached",                                    {CUDA_114, CUDA_0,   CUDA_0  }},
+  {"cudaErrorMpsMaxConnectionsReached",                                {CUDA_114, CUDA_0,   CUDA_0  }},
+  {"cudaDevAttrMax",                                                   {CUDA_114, CUDA_0,   CUDA_0  }},
+  {"cudaMemAllocNodeParams",                                           {CUDA_114, CUDA_0,   CUDA_0  }},
+  {"cudaGraphMemAttributeType",                                        {CUDA_114, CUDA_0,   CUDA_0  }},
+  {"cudaGraphMemAttrUsedMemCurrent",                                   {CUDA_114, CUDA_0,   CUDA_0  }},
+  {"cudaGraphMemAttrUsedMemHigh",                                      {CUDA_114, CUDA_0,   CUDA_0  }},
+  {"cudaGraphMemAttrReservedMemCurrent",                               {CUDA_114, CUDA_0,   CUDA_0  }},
+  {"cudaGraphMemAttrReservedMemHigh",                                  {CUDA_114, CUDA_0,   CUDA_0  }},
+  {"cudaGraphNodeTypeExtSemaphoreSignal",                              {CUDA_114, CUDA_0,   CUDA_0  }},
+  {"cudaGraphNodeTypeExtSemaphoreWait",                                {CUDA_114, CUDA_0,   CUDA_0  }},
+  {"cudaGraphNodeTypeMemAlloc",                                        {CUDA_114, CUDA_0,   CUDA_0  }},
+  {"cudaGraphNodeTypeMemFree",                                         {CUDA_114, CUDA_0,   CUDA_0  }},
+  {"cudaGraphInstantiateFlags",                                        {CUDA_114, CUDA_0,   CUDA_0  }},
+  {"cudaGraphInstantiateFlagAutoFreeOnLaunch",                         {CUDA_114, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {
