@@ -918,7 +918,7 @@
 |`CUgraphicsRegisterFlags_enum`| | | | | | | |
 |`CUgraphicsResource`| | | | | | | |
 |`CUgraphicsResource_st`| | | | | | | |
-|`CUhostFn`|10.0| | | | | | |
+|`CUhostFn`|10.0| | |`hipHostFn_t`|4.3.0| | |
 |`CUipcEventHandle`| | | |`hipIpcEventHandle_t`|1.6.0| | |
 |`CUipcEventHandle_st`| | | |`hipIpcEventHandle_st`|3.5.0| | |
 |`CUipcEventHandle_v1`|11.3| | |`hipIpcEventHandle_t`|1.6.0| | |
@@ -1030,8 +1030,8 @@
 |`CUstream_flags`| | | | | | | |
 |`CUstream_flags_enum`| | | | | | | |
 |`CUstream_st`| | | |`ihipStream_t`|1.5.0| | |
-|`CUsurfObject`| | | | | | | |
-|`CUsurfObject_v1`|11.3| | | | | | |
+|`CUsurfObject`| | | |`hipSurfaceObject_t`|1.9.0| | |
+|`CUsurfObject_v1`|11.3| | |`hipSurfaceObject_t`|1.9.0| | |
 |`CUsurfref`| | | | | | | |
 |`CUsurfref_st`| | | | | | | |
 |`CUsynchronizationPolicy`|11.0| | | | | | |
