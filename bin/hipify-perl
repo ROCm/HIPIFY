@@ -2285,6 +2285,7 @@ sub simpleSubstitutions {
     $ft{'type'} += s/\bCUgraphNodeType_enum\b/hipGraphNodeType/g;
     $ft{'type'} += s/\bCUgraphNode_st\b/hipGraphNode/g;
     $ft{'type'} += s/\bCUgraph_st\b/hipGraph/g;
+    $ft{'type'} += s/\bCUhostFn\b/hipHostFn_t/g;
     $ft{'type'} += s/\bCUipcEventHandle\b/hipIpcEventHandle_t/g;
     $ft{'type'} += s/\bCUipcEventHandle_st\b/hipIpcEventHandle_st/g;
     $ft{'type'} += s/\bCUipcEventHandle_v1\b/hipIpcEventHandle_t/g;
@@ -2319,6 +2320,8 @@ sub simpleSubstitutions {
     $ft{'type'} += s/\bCUstreamCaptureStatus\b/hipStreamCaptureStatus/g;
     $ft{'type'} += s/\bCUstreamCaptureStatus_enum\b/hipStreamCaptureStatus/g;
     $ft{'type'} += s/\bCUstream_st\b/ihipStream_t/g;
+    $ft{'type'} += s/\bCUsurfObject\b/hipSurfaceObject_t/g;
+    $ft{'type'} += s/\bCUsurfObject_v1\b/hipSurfaceObject_t/g;
     $ft{'type'} += s/\bCUtexObject\b/hipTextureObject_t/g;
     $ft{'type'} += s/\bCUtexObject_v1\b/hipTextureObject_t/g;
     $ft{'type'} += s/\bCUtexref\b/hipTexRef/g;
@@ -5717,8 +5720,6 @@ sub warnUnsupportedFunctions {
         "CUsynchronizationPolicy",
         "CUsurfref_st",
         "CUsurfref",
-        "CUsurfObject_v1",
-        "CUsurfObject",
         "CUstream_flags_enum",
         "CUstream_flags",
         "CUstreamWriteValue_flags_enum",
@@ -5796,7 +5797,6 @@ sub warnUnsupportedFunctions {
         "CUjitInputType",
         "CUipcMem_flags_enum",
         "CUipcMem_flags",
-        "CUhostFn",
         "CUgraphicsResource_st",
         "CUgraphicsResource",
         "CUgraphicsRegisterFlags_enum",

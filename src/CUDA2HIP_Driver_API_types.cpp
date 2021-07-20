@@ -2011,7 +2011,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUdeviceptr_v2",                                                   {"hipDeviceptr_t",                                           "", CONV_TYPE, API_DRIVER, 1}},
 
   // cudaHostFn_t
-  {"CUhostFn",                                                         {"hipHostFn",                                                "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CUhostFn",                                                         {"hipHostFn_t",                                              "", CONV_TYPE, API_DRIVER, 1}},
 
   // no analogue
   {"CUoccupancyB2DSize",                                               {"hipOccupancyB2DSize",                                      "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
@@ -2020,8 +2020,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUstreamCallback",                                                 {"hipStreamCallback_t",                                      "", CONV_TYPE, API_DRIVER, 1}},
 
   // cudaSurfaceObject_t
-  {"CUsurfObject",                                                     {"hipSurfaceObject",                                         "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
-  {"CUsurfObject_v1",                                                  {"hipSurfaceObject",                                         "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CUsurfObject",                                                     {"hipSurfaceObject_t",                                       "", CONV_TYPE, API_DRIVER, 1}},
+  {"CUsurfObject_v1",                                                  {"hipSurfaceObject_t",                                       "", CONV_TYPE, API_DRIVER, 1}},
 
   // cudaTextureObject_t
   {"CUtexObject",                                                      {"hipTextureObject_t",                                       "", CONV_TYPE, API_DRIVER, 1}},
@@ -3051,4 +3051,6 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {
   {"hipErrorStreamCaptureImplicit",                                    {HIP_4030, HIP_0,    HIP_0   }},
   {"hipErrorCapturedEvent",                                            {HIP_4030, HIP_0,    HIP_0   }},
   {"hipErrorStreamCaptureWrongThread",                                 {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipHostFn_t",                                                      {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipSurfaceObject_t",                                               {HIP_1090, HIP_0,    HIP_0   }},
 };
