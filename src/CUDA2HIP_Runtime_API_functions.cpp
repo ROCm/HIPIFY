@@ -803,6 +803,22 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   {"cudaGraphRetainUserObject",                               {"hipGraphRetainUserObject",                               "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphReleaseUserObject
   {"cudaGraphReleaseUserObject",                              {"hipGraphReleaseUserObject",                              "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
+  // cuGraphAddMemAllocNode
+  {"cudaGraphAddMemAllocNode",                                {"hipGraphAddMemAllocNode",                                "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
+  // cuGraphMemAllocNodeGetParams
+  {"cudaGraphMemAllocNodeGetParams",                          {"hipGraphMemAllocNodeGetParams",                          "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
+  // cuGraphAddMemFreeNode
+  {"cudaGraphAddMemFreeNode",                                 {"hipGraphAddMemFreeNode",                                 "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
+  // cuGraphMemFreeNodeGetParams
+  {"cudaGraphMemFreeNodeGetParams",                           {"hipGraphMemFreeNodeGetParams",                           "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
+  // cuDeviceGraphMemTrim
+  {"cudaDeviceGraphMemTrim",                                  {"hipDeviceGraphMemTrim",                                  "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
+  // cuDeviceGetGraphMemAttribute
+  {"cudaDeviceGetGraphMemAttribute",                          {"hipDeviceGetGraphMemAttribute",                          "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
+  // cuDeviceSetGraphMemAttribute
+  {"cudaDeviceSetGraphMemAttribute",                          {"hipDeviceSetGraphMemAttribute",                          "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
+  // cuGraphInstantiateWithFlags
+  {"cudaGraphInstantiateWithFlags",                           {"hipGraphInstantiateWithFlags",                           "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
 
   // 31. Driver Entry Point Access
   // cuGetProcAddress
@@ -1038,6 +1054,14 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_FUNCTION_VER_MAP {
   {"cudaGraphRetainUserObject",                               {CUDA_113, CUDA_0,   CUDA_0  }},
   {"cudaGraphReleaseUserObject",                              {CUDA_113, CUDA_0,   CUDA_0  }},
   {"cudaGetDriverEntryPoint",                                 {CUDA_113, CUDA_0,   CUDA_0  }},
+  {"cudaGraphAddMemAllocNode",                                {CUDA_114, CUDA_0,   CUDA_0  }},
+  {"cudaGraphMemAllocNodeGetParams",                          {CUDA_114, CUDA_0,   CUDA_0  }},
+  {"cudaGraphAddMemFreeNode",                                 {CUDA_114, CUDA_0,   CUDA_0  }},
+  {"cudaGraphMemFreeNodeGetParams",                           {CUDA_114, CUDA_0,   CUDA_0  }},
+  {"cudaDeviceGraphMemTrim",                                  {CUDA_114, CUDA_0,   CUDA_0  }},
+  {"cudaDeviceGetGraphMemAttribute",                          {CUDA_114, CUDA_0,   CUDA_0  }},
+  {"cudaDeviceSetGraphMemAttribute",                          {CUDA_114, CUDA_0,   CUDA_0  }},
+  {"cudaGraphInstantiateWithFlags",                           {CUDA_114, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP {
