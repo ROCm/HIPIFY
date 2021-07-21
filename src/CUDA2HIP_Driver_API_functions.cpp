@@ -676,21 +676,21 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuGraphRetainUserObject",                              {"hipGraphRetainUserObject",                                "", CONV_GRAPH, API_DRIVER, 21, HIP_UNSUPPORTED}},
   // cudaGraphReleaseUserObject
   {"cuGraphReleaseUserObject",                             {"hipGraphReleaseUserObject",                               "", CONV_GRAPH, API_DRIVER, 21, HIP_UNSUPPORTED}},
-  //
+  // cudaGraphAddMemAllocNode
   {"cuGraphAddMemAllocNode",                               {"hipGraphAddMemAllocNode",                                 "", CONV_GRAPH, API_DRIVER, 21, HIP_UNSUPPORTED}},
-  //
+  // cudaGraphMemAllocNodeGetParams
   {"cuGraphMemAllocNodeGetParams",                         {"hipGraphMemAllocNodeGetParams",                           "", CONV_GRAPH, API_DRIVER, 21, HIP_UNSUPPORTED}},
-  //
+  // cudaGraphAddMemFreeNode
   {"cuGraphAddMemFreeNode",                                {"hipGraphAddMemFreeNode",                                  "", CONV_GRAPH, API_DRIVER, 21, HIP_UNSUPPORTED}},
-  //
+  // cudaGraphMemFreeNodeGetParams
   {"cuGraphMemFreeNodeGetParams",                          {"hipGraphMemFreeNodeGetParams",                            "", CONV_GRAPH, API_DRIVER, 21, HIP_UNSUPPORTED}},
-  //
+  // cudaDeviceGraphMemTrim
   {"cuDeviceGraphMemTrim",                                 {"hipDeviceGraphMemTrim",                                   "", CONV_GRAPH, API_DRIVER, 21, HIP_UNSUPPORTED}},
-  //
+  // cudaDeviceGetGraphMemAttribute
   {"cuDeviceGetGraphMemAttribute",                         {"hipDeviceGetGraphMemAttribute",                           "", CONV_GRAPH, API_DRIVER, 21, HIP_UNSUPPORTED}},
-  //
+  // cudaDeviceSetGraphMemAttribute
   {"cuDeviceSetGraphMemAttribute",                         {"hipDeviceSetGraphMemAttribute",                           "", CONV_GRAPH, API_DRIVER, 21, HIP_UNSUPPORTED}},
-  //
+  // cudaGraphInstantiateWithFlags
   {"cuGraphInstantiateWithFlags",                          {"hipGraphInstantiateWithFlags",                            "", CONV_GRAPH, API_DRIVER, 21, HIP_UNSUPPORTED}},
 
   // 22. Occupancy
