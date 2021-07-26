@@ -60,8 +60,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaExternalSemaphoreSignalParams_v1",                             {"hipExternalSemaphoreSignalParams",                         "", CONV_TYPE, API_RUNTIME, 36}},
 
   // CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS
-  {"cudaExternalSemaphoreWaitParams",                                  {"HIP_EXTERNAL_SEMAPHORE_WAIT_PARAMS",                       "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
-  {"cudaExternalSemaphoreWaitParams_v1",                               {"HIP_EXTERNAL_SEMAPHORE_WAIT_PARAMS_v1",                    "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+  {"cudaExternalSemaphoreWaitParams",                                  {"hipExternalSemaphoreWaitParams",                           "", CONV_TYPE, API_RUNTIME, 36}},
+  {"cudaExternalSemaphoreWaitParams_v1",                               {"hipExternalSemaphoreWaitParams",                           "", CONV_TYPE, API_RUNTIME, 36}},
 
   // no analogue
   {"cudaFuncAttributes",                                               {"hipFuncAttributes",                                        "", CONV_TYPE, API_RUNTIME, 36}},
@@ -148,9 +148,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaGraphExec_t",                                                  {"hipGraphExec_t",                                           "", CONV_TYPE, API_RUNTIME, 36}},
 
   // CUgraphicsResource_st
-  {"cudaGraphicsResource",                                             {"hipGraphicsResource_st",                                   "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+  {"cudaGraphicsResource",                                             {"hipGraphicsResource",                                      "", CONV_TYPE, API_RUNTIME, 36}},
   // CUgraphicsResource
-  {"cudaGraphicsResource_t",                                           {"hipGraphicsResource_t",                                    "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+  {"cudaGraphicsResource_t",                                           {"hipGraphicsResource_t",                                    "", CONV_TYPE, API_RUNTIME, 36}},
 
   // the same - CUgraphNode_st
   {"CUgraphNode_st",                                                   {"hipGraphNode",                                             "", CONV_TYPE, API_RUNTIME, 36}},
@@ -2340,4 +2340,6 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {
   {"hipGraph_t",                                                       {HIP_4030, HIP_0,    HIP_0   }},
   {"hipGraphExec",                                                     {HIP_4030, HIP_0,    HIP_0   }},
   {"hipGraphExec_t",                                                   {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipGraphicsResource",                                              {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipGraphicsResource_t",                                            {HIP_4030, HIP_0,    HIP_0   }},
 };

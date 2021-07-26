@@ -2215,6 +2215,9 @@ sub simpleSubstitutions {
     $ft{'type'} += s/\bCUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS\b/hipExternalSemaphoreSignalParams/g;
     $ft{'type'} += s/\bCUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS_st\b/hipExternalSemaphoreSignalParams_st/g;
     $ft{'type'} += s/\bCUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS_v1\b/hipExternalSemaphoreSignalParams/g;
+    $ft{'type'} += s/\bCUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS\b/hipExternalSemaphoreWaitParams/g;
+    $ft{'type'} += s/\bCUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS_st\b/hipExternalSemaphoreWaitParams_st/g;
+    $ft{'type'} += s/\bCUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS_v1\b/hipExternalSemaphoreWaitParams/g;
     $ft{'type'} += s/\bCUDA_HOST_NODE_PARAMS\b/hipHostNodeParams/g;
     $ft{'type'} += s/\bCUDA_HOST_NODE_PARAMS_st\b/hipHostNodeParams/g;
     $ft{'type'} += s/\bCUDA_HOST_NODE_PARAMS_v1\b/hipHostNodeParams/g;
@@ -2285,6 +2288,8 @@ sub simpleSubstitutions {
     $ft{'type'} += s/\bCUgraphNodeType_enum\b/hipGraphNodeType/g;
     $ft{'type'} += s/\bCUgraphNode_st\b/hipGraphNode/g;
     $ft{'type'} += s/\bCUgraph_st\b/hipGraph/g;
+    $ft{'type'} += s/\bCUgraphicsResource\b/hipGraphicsResource_t/g;
+    $ft{'type'} += s/\bCUgraphicsResource_st\b/hipGraphicsResource/g;
     $ft{'type'} += s/\bCUhostFn\b/hipHostFn_t/g;
     $ft{'type'} += s/\bCUipcEventHandle\b/hipIpcEventHandle_t/g;
     $ft{'type'} += s/\bCUipcEventHandle_st\b/hipIpcEventHandle_st/g;
@@ -2373,6 +2378,8 @@ sub simpleSubstitutions {
     $ft{'type'} += s/\bcudaExternalSemaphoreHandleType\b/hipExternalSemaphoreHandleType/g;
     $ft{'type'} += s/\bcudaExternalSemaphoreSignalParams\b/hipExternalSemaphoreSignalParams/g;
     $ft{'type'} += s/\bcudaExternalSemaphoreSignalParams_v1\b/hipExternalSemaphoreSignalParams/g;
+    $ft{'type'} += s/\bcudaExternalSemaphoreWaitParams\b/hipExternalSemaphoreWaitParams/g;
+    $ft{'type'} += s/\bcudaExternalSemaphoreWaitParams_v1\b/hipExternalSemaphoreWaitParams/g;
     $ft{'type'} += s/\bcudaExternalSemaphore_t\b/hipExternalSemaphore_t/g;
     $ft{'type'} += s/\bcudaFuncAttribute\b/hipFuncAttribute/g;
     $ft{'type'} += s/\bcudaFuncAttributes\b/hipFuncAttributes/g;
@@ -2383,6 +2390,8 @@ sub simpleSubstitutions {
     $ft{'type'} += s/\bcudaGraphNodeType\b/hipGraphNodeType/g;
     $ft{'type'} += s/\bcudaGraphNode_t\b/hipGraphNode_t/g;
     $ft{'type'} += s/\bcudaGraph_t\b/hipGraph_t/g;
+    $ft{'type'} += s/\bcudaGraphicsResource\b/hipGraphicsResource/g;
+    $ft{'type'} += s/\bcudaGraphicsResource_t\b/hipGraphicsResource_t/g;
     $ft{'type'} += s/\bcudaHostFn_t\b/hipHostFn_t/g;
     $ft{'type'} += s/\bcudaHostNodeParams\b/hipHostNodeParams/g;
     $ft{'type'} += s/\bcudaIpcEventHandle_st\b/hipIpcEventHandle_st/g;
@@ -4934,12 +4943,10 @@ sub warnUnsupportedFunctions {
         "cudaGraphicsUnregisterResource",
         "cudaGraphicsUnmapResources",
         "cudaGraphicsSubResourceGetMappedArray",
-        "cudaGraphicsResource_t",
         "cudaGraphicsResourceSetMapFlags",
         "cudaGraphicsResourceGetMappedPointer",
         "cudaGraphicsResourceGetMappedMipmappedArray",
         "cudaGraphicsResourceGetMappedEglFrame",
-        "cudaGraphicsResource",
         "cudaGraphicsRegisterFlagsWriteDiscard",
         "cudaGraphicsRegisterFlagsTextureGather",
         "cudaGraphicsRegisterFlagsSurfaceLoadStore",
@@ -5089,8 +5096,6 @@ sub warnUnsupportedFunctions {
         "cudaFlushGPUDirectRDMAWritesOptionMemOps",
         "cudaFlushGPUDirectRDMAWritesOptionHost",
         "cudaExternalSemaphoreWaitSkipNvSciBufMemSync",
-        "cudaExternalSemaphoreWaitParams_v1",
-        "cudaExternalSemaphoreWaitParams",
         "cudaExternalSemaphoreWaitNodeParams",
         "cudaExternalSemaphoreSignalSkipNvSciBufMemSync",
         "cudaExternalSemaphoreSignalNodeParams",
@@ -5806,8 +5811,6 @@ sub warnUnsupportedFunctions {
         "CUjitInputType",
         "CUipcMem_flags_enum",
         "CUipcMem_flags",
-        "CUgraphicsResource_st",
-        "CUgraphicsResource",
         "CUgraphicsRegisterFlags_enum",
         "CUgraphicsRegisterFlags",
         "CUgraphicsMapResourceFlags_enum",
@@ -6715,9 +6718,6 @@ sub warnUnsupportedFunctions {
         "CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_st",
         "CUDA_EXT_SEM_SIGNAL_NODE_PARAMS",
         "CUDA_EXTERNAL_SEMAPHORE_WAIT_SKIP_NVSCIBUF_MEMSYNC",
-        "CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS_v1",
-        "CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS_st",
-        "CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS",
         "CUDA_EXTERNAL_SEMAPHORE_SIGNAL_SKIP_NVSCIBUF_MEMSYNC",
         "CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC_v1",
         "CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC_st",

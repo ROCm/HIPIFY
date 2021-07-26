@@ -128,9 +128,9 @@
 |`CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS_st`|10.0| | |`hipExternalSemaphoreSignalParams_st`|4.3.0| | |
 |`CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS_v1`|11.3| | |`hipExternalSemaphoreSignalParams`|4.3.0| | |
 |`CUDA_EXTERNAL_SEMAPHORE_SIGNAL_SKIP_NVSCIBUF_MEMSYNC`|10.2| | | | | | |
-|`CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS`|10.0| | | | | | |
-|`CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS_st`|10.0| | | | | | |
-|`CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS_v1`|11.3| | | | | | |
+|`CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS`|10.0| | |`hipExternalSemaphoreWaitParams`|4.3.0| | |
+|`CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS_st`|10.0| | |`hipExternalSemaphoreWaitParams_st`|4.3.0| | |
+|`CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS_v1`|11.3| | |`hipExternalSemaphoreWaitParams`|4.3.0| | |
 |`CUDA_EXTERNAL_SEMAPHORE_WAIT_SKIP_NVSCIBUF_MEMSYNC`|10.2| | | | | | |
 |`CUDA_EXT_SEM_SIGNAL_NODE_PARAMS`|11.2| | | | | | |
 |`CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_st`|11.2| | | | | | |
@@ -916,8 +916,8 @@
 |`CUgraphicsMapResourceFlags_enum`| | | | | | | |
 |`CUgraphicsRegisterFlags`| | | | | | | |
 |`CUgraphicsRegisterFlags_enum`| | | | | | | |
-|`CUgraphicsResource`| | | | | | | |
-|`CUgraphicsResource_st`| | | | | | | |
+|`CUgraphicsResource`| | | |`hipGraphicsResource_t`|4.3.0| | |
+|`CUgraphicsResource_st`| | | |`hipGraphicsResource`|4.3.0| | |
 |`CUhostFn`|10.0| | |`hipHostFn_t`|4.3.0| | |
 |`CUipcEventHandle`| | | |`hipIpcEventHandle_t`|1.6.0| | |
 |`CUipcEventHandle_st`| | | |`hipIpcEventHandle_st`|3.5.0| | |

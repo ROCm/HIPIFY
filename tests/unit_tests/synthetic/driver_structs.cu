@@ -169,5 +169,10 @@ int main() {
   CUgraphExec_st* graphExec_st;
   CUgraphExec graphExec;
 
+  // CHECK: hipGraphicsResource* graphicsResource_st;
+  // CHECK-NEXT: hipGraphicsResource_t graphicsResource;
+  CUgraphicsResource_st* graphicsResource_st;
+  CUgraphicsResource graphicsResource;
+
   return 0;
 }

@@ -63,9 +63,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS_v1",                         {"hipExternalSemaphoreSignalParams",                         "", CONV_TYPE, API_DRIVER, 1}},
 
   // cudaExternalSemaphoreWaitParams
-  {"CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS_st",                           {"HIP_EXTERNAL_SEMAPHORE_WAIT_PARAMS",                       "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
-  {"CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS",                              {"HIP_EXTERNAL_SEMAPHORE_WAIT_PARAMS",                       "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
-  {"CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS_v1",                           {"HIP_EXTERNAL_SEMAPHORE_WAIT_PARAMS",                       "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS_st",                           {"hipExternalSemaphoreWaitParams_st",                        "", CONV_TYPE, API_DRIVER, 1}},
+  {"CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS",                              {"hipExternalSemaphoreWaitParams",                           "", CONV_TYPE, API_DRIVER, 1}},
+  {"CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS_v1",                           {"hipExternalSemaphoreWaitParams",                           "", CONV_TYPE, API_DRIVER, 1}},
 
   // cudaHostNodeParams
   {"CUDA_HOST_NODE_PARAMS_st",                                         {"hipHostNodeParams",                                        "", CONV_TYPE, API_DRIVER, 1}},
@@ -191,9 +191,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUgraphExec",                                                      {"hipGraphExec_t",                                           "", CONV_TYPE, API_DRIVER, 1}},
 
   // cudaGraphicsResource
-  {"CUgraphicsResource_st",                                            {"hipGraphicsResource_st",                                   "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CUgraphicsResource_st",                                            {"hipGraphicsResource",                                      "", CONV_TYPE, API_DRIVER, 1}},
   // cudaGraphicsResource_t
-  {"CUgraphicsResource",                                               {"hipGraphicsResource_t",                                    "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CUgraphicsResource",                                               {"hipGraphicsResource_t",                                    "", CONV_TYPE, API_DRIVER, 1}},
 
   // the same - CUgraphNode_st
   {"CUgraphNode_st",                                                   {"hipGraphNode",                                             "", CONV_TYPE, API_DRIVER, 1}},
@@ -3054,4 +3054,6 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {
   {"hipHostFn_t",                                                      {HIP_4030, HIP_0,    HIP_0   }},
   {"hipSurfaceObject_t",                                               {HIP_1090, HIP_0,    HIP_0   }},
   {"HIP_VERSION",                                                      {HIP_1050, HIP_0,    HIP_0   }},
+  {"hipExternalSemaphoreWaitParams_st",                                {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipExternalSemaphoreWaitParams",                                   {HIP_4030, HIP_0,    HIP_0   }},
 };
