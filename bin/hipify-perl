@@ -1063,23 +1063,46 @@ sub simpleSubstitutions {
     $ft{'execution'} += s/\bcudaLaunchCooperativeKernelMultiDevice\b/hipLaunchCooperativeKernelMultiDevice/g;
     $ft{'execution'} += s/\bcudaLaunchKernel\b/hipLaunchKernel/g;
     $ft{'execution'} += s/\bcudaSetupArgument\b/hipSetupArgument/g;
+    $ft{'graph'} += s/\bcuGraphAddDependencies\b/hipGraphAddDependencies/g;
+    $ft{'graph'} += s/\bcuGraphAddEmptyNode\b/hipGraphAddEmptyNode/g;
     $ft{'graph'} += s/\bcuGraphAddKernelNode\b/hipGraphAddKernelNode/g;
     $ft{'graph'} += s/\bcuGraphAddMemcpyNode\b/hipGraphAddMemcpyNode/g;
     $ft{'graph'} += s/\bcuGraphAddMemsetNode\b/hipGraphAddMemsetNode/g;
     $ft{'graph'} += s/\bcuGraphCreate\b/hipGraphCreate/g;
     $ft{'graph'} += s/\bcuGraphDestroy\b/hipGraphDestroy/g;
     $ft{'graph'} += s/\bcuGraphExecDestroy\b/hipGraphExecDestroy/g;
+    $ft{'graph'} += s/\bcuGraphExecKernelNodeSetParams\b/hipGraphExecKernelNodeSetParams/g;
+    $ft{'graph'} += s/\bcuGraphGetNodes\b/hipGraphGetNodes/g;
+    $ft{'graph'} += s/\bcuGraphGetRootNodes\b/hipGraphGetRootNodes/g;
     $ft{'graph'} += s/\bcuGraphInstantiate\b/hipGraphInstantiate/g;
     $ft{'graph'} += s/\bcuGraphInstantiate_v2\b/hipGraphInstantiate/g;
+    $ft{'graph'} += s/\bcuGraphKernelNodeGetParams\b/hipGraphKernelNodeGetParams/g;
+    $ft{'graph'} += s/\bcuGraphKernelNodeSetParams\b/hipGraphKernelNodeSetParams/g;
     $ft{'graph'} += s/\bcuGraphLaunch\b/hipGraphLaunch/g;
+    $ft{'graph'} += s/\bcuGraphMemcpyNodeGetParams\b/hipGraphMemcpyNodeGetParams/g;
+    $ft{'graph'} += s/\bcuGraphMemcpyNodeSetParams\b/hipGraphMemcpyNodeSetParams/g;
+    $ft{'graph'} += s/\bcuGraphMemsetNodeGetParams\b/hipGraphMemsetNodeGetParams/g;
+    $ft{'graph'} += s/\bcuGraphMemsetNodeSetParams\b/hipGraphMemsetNodeSetParams/g;
+    $ft{'graph'} += s/\bcudaGraphAddDependencies\b/hipGraphAddDependencies/g;
+    $ft{'graph'} += s/\bcudaGraphAddEmptyNode\b/hipGraphAddEmptyNode/g;
     $ft{'graph'} += s/\bcudaGraphAddKernelNode\b/hipGraphAddKernelNode/g;
     $ft{'graph'} += s/\bcudaGraphAddMemcpyNode\b/hipGraphAddMemcpyNode/g;
+    $ft{'graph'} += s/\bcudaGraphAddMemcpyNode1D\b/hipGraphAddMemcpyNode1D/g;
     $ft{'graph'} += s/\bcudaGraphAddMemsetNode\b/hipGraphAddMemsetNode/g;
     $ft{'graph'} += s/\bcudaGraphCreate\b/hipGraphCreate/g;
     $ft{'graph'} += s/\bcudaGraphDestroy\b/hipGraphDestroy/g;
     $ft{'graph'} += s/\bcudaGraphExecDestroy\b/hipGraphExecDestroy/g;
+    $ft{'graph'} += s/\bcudaGraphExecKernelNodeSetParams\b/hipGraphExecKernelNodeSetParams/g;
+    $ft{'graph'} += s/\bcudaGraphGetNodes\b/hipGraphGetNodes/g;
+    $ft{'graph'} += s/\bcudaGraphGetRootNodes\b/hipGraphGetRootNodes/g;
     $ft{'graph'} += s/\bcudaGraphInstantiate\b/hipGraphInstantiate/g;
+    $ft{'graph'} += s/\bcudaGraphKernelNodeGetParams\b/hipGraphKernelNodeGetParams/g;
+    $ft{'graph'} += s/\bcudaGraphKernelNodeSetParams\b/hipGraphKernelNodeSetParams/g;
     $ft{'graph'} += s/\bcudaGraphLaunch\b/hipGraphLaunch/g;
+    $ft{'graph'} += s/\bcudaGraphMemcpyNodeGetParams\b/hipGraphMemcpyNodeGetParams/g;
+    $ft{'graph'} += s/\bcudaGraphMemcpyNodeSetParams\b/hipGraphMemcpyNodeSetParams/g;
+    $ft{'graph'} += s/\bcudaGraphMemsetNodeGetParams\b/hipGraphMemsetNodeGetParams/g;
+    $ft{'graph'} += s/\bcudaGraphMemsetNodeSetParams\b/hipGraphMemsetNodeSetParams/g;
     $ft{'occupancy'} += s/\bcuOccupancyMaxActiveBlocksPerMultiprocessor\b/hipModuleOccupancyMaxActiveBlocksPerMultiprocessor/g;
     $ft{'occupancy'} += s/\bcuOccupancyMaxActiveBlocksPerMultiprocessorWithFlags\b/hipModuleOccupancyMaxActiveBlocksPerMultiprocessorWithFlags/g;
     $ft{'occupancy'} += s/\bcuOccupancyMaxPotentialBlockSize\b/hipModuleOccupancyMaxPotentialBlockSize/g;
@@ -2287,7 +2310,7 @@ sub simpleSubstitutions {
     $ft{'type'} += s/\bCUgraphNodeType\b/hipGraphNodeType/g;
     $ft{'type'} += s/\bCUgraphNodeType_enum\b/hipGraphNodeType/g;
     $ft{'type'} += s/\bCUgraphNode_st\b/hipGraphNode/g;
-    $ft{'type'} += s/\bCUgraph_st\b/hipGraph/g;
+    $ft{'type'} += s/\bCUgraph_st\b/ihipGraph/g;
     $ft{'type'} += s/\bCUgraphicsResource\b/hipGraphicsResource_t/g;
     $ft{'type'} += s/\bCUgraphicsResource_st\b/hipGraphicsResource/g;
     $ft{'type'} += s/\bCUhostFn\b/hipHostFn_t/g;
@@ -3055,6 +3078,7 @@ sub simpleSubstitutions {
     $ft{'numeric_literal'} += s/\bCU_JIT_THREADS_PER_BLOCK\b/hipJitOptionThreadsPerBlock/g;
     $ft{'numeric_literal'} += s/\bCU_JIT_WALL_TIME\b/hipJitOptionWallTime/g;
     $ft{'numeric_literal'} += s/\bCU_LIMIT_MALLOC_HEAP_SIZE\b/hipLimitMallocHeapSize/g;
+    $ft{'numeric_literal'} += s/\bCU_LIMIT_PRINTF_FIFO_SIZE\b/hipLimitPrintfFifoSize/g;
     $ft{'numeric_literal'} += s/\bCU_MEMORYTYPE_ARRAY\b/hipMemoryTypeArray/g;
     $ft{'numeric_literal'} += s/\bCU_MEMORYTYPE_DEVICE\b/hipMemoryTypeDevice/g;
     $ft{'numeric_literal'} += s/\bCU_MEMORYTYPE_HOST\b/hipMemoryTypeHost/g;
@@ -3352,6 +3376,7 @@ sub simpleSubstitutions {
     $ft{'numeric_literal'} += s/\bcudaGraphNodeTypeMemset\b/hipGraphNodeTypeMemset/g;
     $ft{'numeric_literal'} += s/\bcudaGraphNodeTypeWaitEvent\b/hipGraphNodeTypeWaitEvent/g;
     $ft{'numeric_literal'} += s/\bcudaLimitMallocHeapSize\b/hipLimitMallocHeapSize/g;
+    $ft{'numeric_literal'} += s/\bcudaLimitPrintfFifoSize\b/hipLimitPrintfFifoSize/g;
     $ft{'numeric_literal'} += s/\bcudaMemAdviseSetAccessedBy\b/hipMemAdviseSetAccessedBy/g;
     $ft{'numeric_literal'} += s/\bcudaMemAdviseSetPreferredLocation\b/hipMemAdviseSetPreferredLocation/g;
     $ft{'numeric_literal'} += s/\bcudaMemAdviseSetReadMostly\b/hipMemAdviseSetReadMostly/g;
@@ -3439,6 +3464,7 @@ sub simpleSubstitutions {
     $ft{'define'} += s/\bCU_MEMHOSTREGISTER_DEVICEMAP\b/hipHostRegisterMapped/g;
     $ft{'define'} += s/\bCU_MEMHOSTREGISTER_IOMEMORY\b/hipHostRegisterIoMemory/g;
     $ft{'define'} += s/\bCU_MEMHOSTREGISTER_PORTABLE\b/hipHostRegisterPortable/g;
+    $ft{'define'} += s/\bCU_STREAM_PER_THREAD\b/hipStreamPerThread/g;
     $ft{'define'} += s/\bCU_TRSA_OVERRIDE_FORMAT\b/HIP_TRSA_OVERRIDE_FORMAT/g;
     $ft{'define'} += s/\bCU_TRSF_NORMALIZED_COORDINATES\b/HIP_TRSF_NORMALIZED_COORDINATES/g;
     $ft{'define'} += s/\bCU_TRSF_READ_AS_INTEGER\b/HIP_TRSF_READ_AS_INTEGER/g;
@@ -3482,6 +3508,7 @@ sub simpleSubstitutions {
     $ft{'define'} += s/\bcudaOccupancyDefault\b/hipOccupancyDefault/g;
     $ft{'define'} += s/\bcudaStreamDefault\b/hipStreamDefault/g;
     $ft{'define'} += s/\bcudaStreamNonBlocking\b/hipStreamNonBlocking/g;
+    $ft{'define'} += s/\bcudaStreamPerThread\b/hipStreamPerThread/g;
     $ft{'define'} += s/\bcudaTextureType1D\b/hipTextureType1D/g;
     $ft{'define'} += s/\bcudaTextureType1DLayered\b/hipTextureType1DLayered/g;
     $ft{'define'} += s/\bcudaTextureType2D\b/hipTextureType2D/g;
@@ -4842,7 +4869,6 @@ sub warnUnsupportedFunctions {
         "cudaStreamUpdateCaptureDependenciesFlags",
         "cudaStreamSetCaptureDependencies",
         "cudaStreamSetAttribute",
-        "cudaStreamPerThread",
         "cudaStreamLegacy",
         "cudaStreamIsCapturing",
         "cudaStreamGetCaptureInfo",
@@ -4926,7 +4952,6 @@ sub warnUnsupportedFunctions {
         "cudaMallocFromPoolAsync",
         "cudaMallocAsync",
         "cudaLimitStackSize",
-        "cudaLimitPrintfFifoSize",
         "cudaLimitPersistingL2CacheSize",
         "cudaLimitMaxL2FetchGranularity",
         "cudaLimitDevRuntimeSyncDepth",
@@ -4980,13 +5005,9 @@ sub warnUnsupportedFunctions {
         "cudaGraphNodeGetDependentNodes",
         "cudaGraphNodeGetDependencies",
         "cudaGraphNodeFindInClone",
-        "cudaGraphMemsetNodeSetParams",
-        "cudaGraphMemsetNodeGetParams",
         "cudaGraphMemcpyNodeSetParamsToSymbol",
         "cudaGraphMemcpyNodeSetParamsFromSymbol",
         "cudaGraphMemcpyNodeSetParams1D",
-        "cudaGraphMemcpyNodeSetParams",
-        "cudaGraphMemcpyNodeGetParams",
         "cudaGraphMemFreeNodeGetParams",
         "cudaGraphMemAttributeType",
         "cudaGraphMemAttrUsedMemHigh",
@@ -4994,9 +5015,7 @@ sub warnUnsupportedFunctions {
         "cudaGraphMemAttrReservedMemHigh",
         "cudaGraphMemAttrReservedMemCurrent",
         "cudaGraphMemAllocNodeGetParams",
-        "cudaGraphKernelNodeSetParams",
         "cudaGraphKernelNodeSetAttribute",
-        "cudaGraphKernelNodeGetParams",
         "cudaGraphKernelNodeGetAttribute",
         "cudaGraphKernelNodeCopyAttributes",
         "cudaGraphInstantiateWithFlags",
@@ -5004,8 +5023,6 @@ sub warnUnsupportedFunctions {
         "cudaGraphInstantiateFlagAutoFreeOnLaunch",
         "cudaGraphHostNodeSetParams",
         "cudaGraphHostNodeGetParams",
-        "cudaGraphGetRootNodes",
-        "cudaGraphGetNodes",
         "cudaGraphGetEdges",
         "cudaGraphExternalSemaphoresWaitNodeSetParams",
         "cudaGraphExternalSemaphoresWaitNodeGetParams",
@@ -5017,7 +5034,6 @@ sub warnUnsupportedFunctions {
         "cudaGraphExecMemcpyNodeSetParamsFromSymbol",
         "cudaGraphExecMemcpyNodeSetParams1D",
         "cudaGraphExecMemcpyNodeSetParams",
-        "cudaGraphExecKernelNodeSetParams",
         "cudaGraphExecHostNodeSetParams",
         "cudaGraphExecExternalSemaphoresWaitNodeSetParams",
         "cudaGraphExecExternalSemaphoresSignalNodeSetParams",
@@ -5045,7 +5061,6 @@ sub warnUnsupportedFunctions {
         "cudaGraphChildGraphNodeGetGraph",
         "cudaGraphAddMemcpyNodeToSymbol",
         "cudaGraphAddMemcpyNodeFromSymbol",
-        "cudaGraphAddMemcpyNode1D",
         "cudaGraphAddMemFreeNode",
         "cudaGraphAddMemAllocNode",
         "cudaGraphAddHostNode",
@@ -5053,8 +5068,6 @@ sub warnUnsupportedFunctions {
         "cudaGraphAddExternalSemaphoresSignalNode",
         "cudaGraphAddEventWaitNode",
         "cudaGraphAddEventRecordNode",
-        "cudaGraphAddEmptyNode",
-        "cudaGraphAddDependencies",
         "cudaGraphAddChildGraphNode",
         "cudaGetSurfaceReference",
         "cudaGetSurfaceObjectResourceDesc",
@@ -5568,22 +5581,14 @@ sub warnUnsupportedFunctions {
         "cuGraphNodeGetDependentNodes",
         "cuGraphNodeGetDependencies",
         "cuGraphNodeFindInClone",
-        "cuGraphMemsetNodeSetParams",
-        "cuGraphMemsetNodeGetParams",
-        "cuGraphMemcpyNodeSetParams",
-        "cuGraphMemcpyNodeGetParams",
         "cuGraphMemFreeNodeGetParams",
         "cuGraphMemAllocNodeGetParams",
-        "cuGraphKernelNodeSetParams",
         "cuGraphKernelNodeSetAttribute",
-        "cuGraphKernelNodeGetParams",
         "cuGraphKernelNodeGetAttribute",
         "cuGraphKernelNodeCopyAttributes",
         "cuGraphInstantiateWithFlags",
         "cuGraphHostNodeSetParams",
         "cuGraphHostNodeGetParams",
-        "cuGraphGetRootNodes",
-        "cuGraphGetNodes",
         "cuGraphGetEdges",
         "cuGraphExternalSemaphoresWaitNodeSetParams",
         "cuGraphExternalSemaphoresWaitNodeGetParams",
@@ -5592,7 +5597,6 @@ sub warnUnsupportedFunctions {
         "cuGraphExecUpdate",
         "cuGraphExecMemsetNodeSetParams",
         "cuGraphExecMemcpyNodeSetParams",
-        "cuGraphExecKernelNodeSetParams",
         "cuGraphExecHostNodeSetParams",
         "cuGraphExecExternalSemaphoresWaitNodeSetParams",
         "cuGraphExecExternalSemaphoresSignalNodeSetParams",
@@ -5614,8 +5618,6 @@ sub warnUnsupportedFunctions {
         "cuGraphAddExternalSemaphoresSignalNode",
         "cuGraphAddEventWaitNode",
         "cuGraphAddEventRecordNode",
-        "cuGraphAddEmptyNode",
-        "cuGraphAddDependencies",
         "cuGraphAddChildGraphNode",
         "cuGetProcAddress",
         "cuGetErrorString",
@@ -5917,7 +5919,6 @@ sub warnUnsupportedFunctions {
         "CU_STREAM_WRITE_VALUE_DEFAULT",
         "CU_STREAM_WAIT_VALUE_FLUSH",
         "CU_STREAM_SET_CAPTURE_DEPENDENCIES",
-        "CU_STREAM_PER_THREAD",
         "CU_STREAM_MEM_OP_WRITE_VALUE_64",
         "CU_STREAM_MEM_OP_WRITE_VALUE_32",
         "CU_STREAM_MEM_OP_WAIT_VALUE_64",
@@ -5985,7 +5986,6 @@ sub warnUnsupportedFunctions {
         "CU_MEMPOOL_ATTR_RELEASE_THRESHOLD",
         "CU_MEMHOSTREGISTER_READ_ONLY",
         "CU_LIMIT_STACK_SIZE",
-        "CU_LIMIT_PRINTF_FIFO_SIZE",
         "CU_LIMIT_PERSISTING_L2_CACHE_SIZE",
         "CU_LIMIT_MAX_L2_FETCH_GRANULARITY",
         "CU_LIMIT_MAX",

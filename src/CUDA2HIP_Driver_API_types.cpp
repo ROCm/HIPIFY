@@ -181,7 +181,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUfunction",                                                       {"hipFunction_t",                                            "", CONV_TYPE, API_DRIVER, 1}},
 
   // the same - CUgraph_st
-  {"CUgraph_st",                                                       {"hipGraph",                                                 "", CONV_TYPE, API_DRIVER, 1}},
+  {"CUgraph_st",                                                       {"ihipGraph",                                                "", CONV_TYPE, API_DRIVER, 1}},
   // cudaGraph_t
   {"CUgraph",                                                          {"hipGraph_t",                                               "", CONV_TYPE, API_DRIVER, 1}},
 
@@ -1174,7 +1174,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaLimitStackSize
   {"CU_LIMIT_STACK_SIZE",                                              {"hipLimitStackSize",                                        "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0x00
   // cudaLimitPrintfFifoSize
-  {"CU_LIMIT_PRINTF_FIFO_SIZE",                                        {"hipLimitPrintfFifoSize",                                   "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0x01
+  {"CU_LIMIT_PRINTF_FIFO_SIZE",                                        {"hipLimitPrintfFifoSize",                                   "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x01
   // cudaLimitMallocHeapSize
   {"CU_LIMIT_MALLOC_HEAP_SIZE",                                        {"hipLimitMallocHeapSize",                                   "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x02
   // cudaLimitDevRuntimeSyncDepth
@@ -2063,7 +2063,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaStreamLegacy ((cudaStream_t)0x1)
   {"CU_STREAM_LEGACY",                                                 {"hipStreamLegacy",                                          "", CONV_DEFINE, API_DRIVER, 1, HIP_UNSUPPORTED}}, // ((CUstream)0x1)
   // cudaStreamPerThread ((cudaStream_t)0x2)
-  {"CU_STREAM_PER_THREAD",                                             {"hipStreamPerThread",                                       "", CONV_DEFINE, API_DRIVER, 1, HIP_UNSUPPORTED}}, // ((CUstream)0x2)
+  {"CU_STREAM_PER_THREAD",                                             {"hipStreamPerThread",                                       "", CONV_DEFINE, API_DRIVER, 1}}, // ((CUstream)0x2)
   {"CU_TRSA_OVERRIDE_FORMAT",                                          {"HIP_TRSA_OVERRIDE_FORMAT",                                 "", CONV_DEFINE, API_DRIVER, 1}}, // 0x01
   {"CU_TRSF_NORMALIZED_COORDINATES",                                   {"HIP_TRSF_NORMALIZED_COORDINATES",                          "", CONV_DEFINE, API_DRIVER, 1}}, // 0x02
   {"CU_TRSF_READ_AS_INTEGER",                                          {"HIP_TRSF_READ_AS_INTEGER",                                 "", CONV_DEFINE, API_DRIVER, 1}}, // 0x01
@@ -3056,4 +3056,5 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {
   {"HIP_VERSION",                                                      {HIP_1050, HIP_0,    HIP_0   }},
   {"hipExternalSemaphoreWaitParams_st",                                {HIP_4030, HIP_0,    HIP_0   }},
   {"hipExternalSemaphoreWaitParams",                                   {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipLimitPrintfFifoSize",                                           {HIP_4030, HIP_0,    HIP_0   }},
 };

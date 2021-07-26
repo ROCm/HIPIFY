@@ -610,7 +610,7 @@
 |`CU_LIMIT_MAX`| | | | | | | |
 |`CU_LIMIT_MAX_L2_FETCH_GRANULARITY`|10.0| | | | | | |
 |`CU_LIMIT_PERSISTING_L2_CACHE_SIZE`|11.0| | | | | | |
-|`CU_LIMIT_PRINTF_FIFO_SIZE`| | | | | | | |
+|`CU_LIMIT_PRINTF_FIFO_SIZE`| | | |`hipLimitPrintfFifoSize`|4.3.0| | |
 |`CU_LIMIT_STACK_SIZE`| | | | | | | |
 |`CU_MEMHOSTALLOC_DEVICEMAP`| | | |`hipHostMallocMapped`|1.6.0| | |
 |`CU_MEMHOSTALLOC_PORTABLE`| | | |`hipHostMallocPortable`|1.6.0| | |
@@ -752,7 +752,7 @@
 |`CU_STREAM_MEM_OP_WRITE_VALUE_32`|8.0| | | | | | |
 |`CU_STREAM_MEM_OP_WRITE_VALUE_64`|9.0| | | | | | |
 |`CU_STREAM_NON_BLOCKING`| | | |`hipStreamNonBlocking`|1.6.0| | |
-|`CU_STREAM_PER_THREAD`| | | | | | | |
+|`CU_STREAM_PER_THREAD`| | | |`hipStreamPerThread`|4.3.0| | |
 |`CU_STREAM_SET_CAPTURE_DEPENDENCIES`|11.3| | | | | | |
 |`CU_STREAM_WAIT_VALUE_AND`|8.0| | |`hipStreamWaitValueAnd`|4.2.0| | |
 |`CU_STREAM_WAIT_VALUE_EQ`|8.0| | |`hipStreamWaitValueEq`|4.2.0| | |
@@ -911,7 +911,7 @@
 |`CUgraphNodeType`|10.0| | |`hipGraphNodeType`|4.3.0| | |
 |`CUgraphNodeType_enum`|10.0| | |`hipGraphNodeType`|4.3.0| | |
 |`CUgraphNode_st`|10.0| | |`hipGraphNode`|4.3.0| | |
-|`CUgraph_st`|10.0| | |`hipGraph`|4.3.0| | |
+|`CUgraph_st`|10.0| | |`ihipGraph`|4.3.0| | |
 |`CUgraphicsMapResourceFlags`| | | | | | | |
 |`CUgraphicsMapResourceFlags_enum`| | | | | | | |
 |`CUgraphicsRegisterFlags`| | | | | | | |
@@ -1428,8 +1428,8 @@
 |`cuDeviceGraphMemTrim`|11.4| | | | | | |
 |`cuDeviceSetGraphMemAttribute`|11.4| | | | | | |
 |`cuGraphAddChildGraphNode`|10.0| | | | | | |
-|`cuGraphAddDependencies`|10.0| | | | | | |
-|`cuGraphAddEmptyNode`|10.0| | | | | | |
+|`cuGraphAddDependencies`|10.0| | |`hipGraphAddDependencies`|4.3.0| | |
+|`cuGraphAddEmptyNode`|10.0| | |`hipGraphAddEmptyNode`|4.3.0| | |
 |`cuGraphAddEventRecordNode`|11.1| | | | | | |
 |`cuGraphAddEventWaitNode`|11.1| | | | | | |
 |`cuGraphAddExternalSemaphoresSignalNode`|11.2| | | | | | |
@@ -1457,7 +1457,7 @@
 |`cuGraphExecExternalSemaphoresSignalNodeSetParams`|11.2| | | | | | |
 |`cuGraphExecExternalSemaphoresWaitNodeSetParams`|11.2| | | | | | |
 |`cuGraphExecHostNodeSetParams`|10.2| | | | | | |
-|`cuGraphExecKernelNodeSetParams`|10.1| | | | | | |
+|`cuGraphExecKernelNodeSetParams`|10.1| | |`hipGraphExecKernelNodeSetParams`|4.3.0| | |
 |`cuGraphExecMemcpyNodeSetParams`|10.2| | | | | | |
 |`cuGraphExecMemsetNodeSetParams`|10.2| | | | | | |
 |`cuGraphExecUpdate`|10.2| | | | | | |
@@ -1466,8 +1466,8 @@
 |`cuGraphExternalSemaphoresWaitNodeGetParams`|11.2| | | | | | |
 |`cuGraphExternalSemaphoresWaitNodeSetParams`|11.2| | | | | | |
 |`cuGraphGetEdges`|10.0| | | | | | |
-|`cuGraphGetNodes`|10.0| | | | | | |
-|`cuGraphGetRootNodes`|10.0| | | | | | |
+|`cuGraphGetNodes`|10.0| | |`hipGraphGetNodes`|4.3.0| | |
+|`cuGraphGetRootNodes`|10.0| | |`hipGraphGetRootNodes`|4.3.0| | |
 |`cuGraphHostNodeGetParams`|10.0| | | | | | |
 |`cuGraphHostNodeSetParams`|10.0| | | | | | |
 |`cuGraphInstantiate`|10.0| | |`hipGraphInstantiate`|4.3.0| | |
@@ -1475,16 +1475,16 @@
 |`cuGraphInstantiate_v2`|11.0| | |`hipGraphInstantiate`|4.3.0| | |
 |`cuGraphKernelNodeCopyAttributes`|11.0| | | | | | |
 |`cuGraphKernelNodeGetAttribute`|11.0| | | | | | |
-|`cuGraphKernelNodeGetParams`|10.0| | | | | | |
+|`cuGraphKernelNodeGetParams`|10.0| | |`hipGraphKernelNodeGetParams`|4.3.0| | |
 |`cuGraphKernelNodeSetAttribute`|11.0| | | | | | |
-|`cuGraphKernelNodeSetParams`|10.0| | | | | | |
+|`cuGraphKernelNodeSetParams`|10.0| | |`hipGraphKernelNodeSetParams`|4.3.0| | |
 |`cuGraphLaunch`|10.0| | |`hipGraphLaunch`|4.3.0| | |
 |`cuGraphMemAllocNodeGetParams`|11.4| | | | | | |
 |`cuGraphMemFreeNodeGetParams`|11.4| | | | | | |
-|`cuGraphMemcpyNodeGetParams`|10.0| | | | | | |
-|`cuGraphMemcpyNodeSetParams`|10.0| | | | | | |
-|`cuGraphMemsetNodeGetParams`|10.0| | | | | | |
-|`cuGraphMemsetNodeSetParams`|10.0| | | | | | |
+|`cuGraphMemcpyNodeGetParams`|10.0| | |`hipGraphMemcpyNodeGetParams`|4.3.0| | |
+|`cuGraphMemcpyNodeSetParams`|10.0| | |`hipGraphMemcpyNodeSetParams`|4.3.0| | |
+|`cuGraphMemsetNodeGetParams`|10.0| | |`hipGraphMemsetNodeGetParams`|4.3.0| | |
+|`cuGraphMemsetNodeSetParams`|10.0| | |`hipGraphMemsetNodeSetParams`|4.3.0| | |
 |`cuGraphNodeFindInClone`|10.0| | | | | | |
 |`cuGraphNodeGetDependencies`|10.0| | | | | | |
 |`cuGraphNodeGetDependentNodes`|10.0| | | | | | |
