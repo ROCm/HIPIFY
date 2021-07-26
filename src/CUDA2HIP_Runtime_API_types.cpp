@@ -138,7 +138,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaExternalSemaphore_t",                                          {"hipExternalSemaphore_t",                                   "", CONV_TYPE, API_RUNTIME, 36}},
 
   // the same - CUgraph_st
-  {"CUgraph_st",                                                       {"hipGraph",                                                 "", CONV_TYPE, API_RUNTIME, 36}},
+  {"CUgraph_st",                                                       {"ihipGraph",                                                "", CONV_TYPE, API_RUNTIME, 36}},
   // CUgraph
   {"cudaGraph_t",                                                      {"hipGraph_t",                                               "", CONV_TYPE, API_RUNTIME, 36}},
 
@@ -1120,7 +1120,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CU_LIMIT_STACK_SIZE
   {"cudaLimitStackSize",                                               {"hipLimitStackSize",                                        "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 0x00
   // CU_LIMIT_PRINTF_FIFO_SIZE
-  {"cudaLimitPrintfFifoSize",                                          {"hipLimitPrintfFifoSize",                                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 0x01
+  {"cudaLimitPrintfFifoSize",                                          {"hipLimitPrintfFifoSize",                                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 0x01
   // CU_LIMIT_MALLOC_HEAP_SIZE
   {"cudaLimitMallocHeapSize",                                          {"hipLimitMallocHeapSize",                                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 0x02
   // CU_LIMIT_DEV_RUNTIME_SYNC_DEPTH
@@ -1790,7 +1790,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CU_STREAM_LEGACY ((CUstream)0x1)
   {"cudaStreamLegacy",                                                 {"hipStreamLegacy",                                          "", CONV_DEFINE, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // ((cudaStream_t)0x1)
   // CU_STREAM_PER_THREAD ((CUstream)0x2)
-  {"cudaStreamPerThread",                                              {"hipStreamPerThread",                                       "", CONV_DEFINE, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // ((cudaStream_t)0x2)
+  {"cudaStreamPerThread",                                              {"hipStreamPerThread",                                       "", CONV_DEFINE, API_RUNTIME, 36}}, // ((cudaStream_t)0x2)
   // CU_ARRAY_SPARSE_PROPERTIES_SINGLE_MIPTAIL
   {"cudaArraySparsePropertiesSingleMipTail",                           {"hipArraySparsePropertiesSingleMipTail",                    "", CONV_DEFINE, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 0x1
 };
@@ -2336,10 +2336,11 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {
   {"hipStreamCaptureStatusNone",                                       {HIP_4030, HIP_0,    HIP_0   }},
   {"hipStreamCaptureStatusActive",                                     {HIP_4030, HIP_0,    HIP_0   }},
   {"hipStreamCaptureStatusInvalidated",                                {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipGraph",                                                         {HIP_4030, HIP_0,    HIP_0   }},
+  {"ihipGraph",                                                        {HIP_4030, HIP_0,    HIP_0   }},
   {"hipGraph_t",                                                       {HIP_4030, HIP_0,    HIP_0   }},
   {"hipGraphExec",                                                     {HIP_4030, HIP_0,    HIP_0   }},
   {"hipGraphExec_t",                                                   {HIP_4030, HIP_0,    HIP_0   }},
   {"hipGraphicsResource",                                              {HIP_4030, HIP_0,    HIP_0   }},
   {"hipGraphicsResource_t",                                            {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipStreamPerThread",                                               {HIP_4030, HIP_0,    HIP_0   }},
 };

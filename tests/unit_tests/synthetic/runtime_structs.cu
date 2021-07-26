@@ -94,7 +94,7 @@ int main() {
   // CHECK: hipExternalSemaphore_t ExternalSemaphore_t;
   cudaExternalSemaphore_t ExternalSemaphore_t;
 
-  // CHECK: hipGraph* graph_st;
+  // CHECK: ihipGraph* graph_st;
   // CHECK-NEXT: hipGraph_t Graph_t;
   CUgraph_st* graph_st;
   cudaGraph_t Graph_t;

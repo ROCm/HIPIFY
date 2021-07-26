@@ -109,7 +109,7 @@ void init(void) {
       printf("Failed to create kernel node\n");
   }
   for (i = 0; i < (NUM_NODES - 1 ); ++i)
-    // CHECK-NOT: hipGraphAddDependencies(graph,
+    // CHECK: hipGraphAddDependencies(graph,
     cudaGraphAddDependencies(graph,
                               &node[i],
                               &node[i+1],
