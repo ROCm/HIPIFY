@@ -996,8 +996,8 @@ Unsupported
 |`cudaExternalSemaphoreSignalParams_v1`|11.2| | |`hipExternalSemaphoreSignalParams`|4.3.0| | |
 |`cudaExternalSemaphoreSignalSkipNvSciBufMemSync`|10.2| | | | | | |
 |`cudaExternalSemaphoreWaitNodeParams`|11.2| | | | | | |
-|`cudaExternalSemaphoreWaitParams`|10.0| | | | | | |
-|`cudaExternalSemaphoreWaitParams_v1`|11.2| | | | | | |
+|`cudaExternalSemaphoreWaitParams`|10.0| | |`hipExternalSemaphoreWaitParams`|4.3.0| | |
+|`cudaExternalSemaphoreWaitParams_v1`|11.2| | |`hipExternalSemaphoreWaitParams`|4.3.0| | |
 |`cudaExternalSemaphoreWaitSkipNvSciBufMemSync`|10.2| | | | | | |
 |`cudaExternalSemaphore_t`|10.0| | |`hipExternalSemaphore_t`|4.3.0| | |
 |`cudaFilterModeLinear`| | | |`hipFilterModeLinear`|1.7.0| | |
@@ -1097,8 +1097,8 @@ Unsupported
 |`cudaGraphicsRegisterFlagsSurfaceLoadStore`| | | | | | | |
 |`cudaGraphicsRegisterFlagsTextureGather`| | | | | | | |
 |`cudaGraphicsRegisterFlagsWriteDiscard`| | | | | | | |
-|`cudaGraphicsResource`| | | | | | | |
-|`cudaGraphicsResource_t`| | | | | | | |
+|`cudaGraphicsResource`| | | |`hipGraphicsResource`|4.3.0| | |
+|`cudaGraphicsResource_t`| | | |`hipGraphicsResource_t`|4.3.0| | |
 |`cudaHostAllocDefault`| | | |`hipHostMallocDefault`|1.6.0| | |
 |`cudaHostAllocMapped`| | | |`hipHostMallocMapped`|1.6.0| | |
 |`cudaHostAllocPortable`| | | |`hipHostMallocPortable`|1.6.0| | |
