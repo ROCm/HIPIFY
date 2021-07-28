@@ -113,7 +113,7 @@ int main() {
   // CHECK-NEXT: hipDeviceAttribute_t DEVICE_ATTRIBUTE_ASYNC_ENGINE_COUNT = hipDeviceAttributeAsyncEngineCount;
   // CHECK-NEXT: hipDeviceAttribute_t DEVICE_ATTRIBUTE_UNIFIED_ADDRESSING = hipDeviceAttributeUnifiedAddressing;
   // CHECK-NEXT: hipDeviceAttribute_t DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE1D_LAYERED_WIDTH = hipDeviceAttributeMaxTexture1DLayered;
-  // CHECK-NEXT: hipDeviceAttribute_t DEVICE_ATTRIBUTE_PCI_DOMAIN_ID = hipDeviceAttributePciDomainId;
+  // CHECK-NEXT: hipDeviceAttribute_t DEVICE_ATTRIBUTE_PCI_DOMAIN_ID = hipDeviceAttributePciDomainID;
   // CHECK-NEXT: hipDeviceAttribute_t DEVICE_ATTRIBUTE_TEXTURE_PITCH_ALIGNMENT = hipDeviceAttributeTexturePitchAlignment;
   // CHECK-NEXT: hipDeviceAttribute_t DEVICE_ATTRIBUTE_MAXIMUM_TEXTURECUBEMAP_WIDTH = hipDeviceAttributeMaxTextureCubemap;
   // CHECK-NEXT: hipDeviceAttribute_t DEVICE_ATTRIBUTE_MAXIMUM_SURFACE1D_WIDTH = hipDeviceAttributeMaxSurface1D;

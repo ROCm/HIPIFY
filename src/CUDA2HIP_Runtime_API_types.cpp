@@ -302,7 +302,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE3D_WIDTH
   {"cudaDevAttrMaxTexture3DWidth",                                     {"hipDeviceAttributeMaxTexture3DWidth",                      "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 24
   // CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE3D_HEIGHT
-  {"cudaDevAttrMaxTexture3DHeight",                                     {"hipDeviceAttributeMaxTexture3DHeight",                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 25
+  {"cudaDevAttrMaxTexture3DHeight",                                    {"hipDeviceAttributeMaxTexture3DHeight",                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 25
   // CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE3D_DEPTH
   {"cudaDevAttrMaxTexture3DDepth",                                     {"hipDeviceAttributeMaxTexture3DDepth",                      "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 26
   // CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_LAYERED_WIDTH
@@ -363,7 +363,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CUDA only
   {"cudaDevAttrMaxTexture3DDepthAlt",                                  {"hipDeviceAttributeMaxTexture3DAlt",                        "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 49
   // CU_DEVICE_ATTRIBUTE_PCI_DOMAIN_ID
-  {"cudaDevAttrPciDomainId",                                           {"hipDeviceAttributePciDomainId",                            "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 50
+  {"cudaDevAttrPciDomainId",                                           {"hipDeviceAttributePciDomainID",                            "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 50
   // CU_DEVICE_ATTRIBUTE_TEXTURE_PITCH_ALIGNMENT
   {"cudaDevAttrTexturePitchAlignment",                                 {"hipDeviceAttributeTexturePitchAlignment",                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 51
   // CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURECUBEMAP_WIDTH
@@ -371,7 +371,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaDevAttrMaxTextureCubemapWidth",                                {"hipDeviceAttributeMaxTextureCubemap",                      "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 52
   // CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURECUBEMAP_LAYERED_WIDTH
   // CUDA only
-  {"cudaDevAttrMaxTextureCubemapLayeredWidth",                         {"hipDeviceAttributeMaxTextureCubemapLayered",               "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 53
+  {"cudaDevAttrMaxTextureCubemapLayeredWidth",                         {"hipDeviceAttributeMaxTextureCubemapLayered",               "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 53
   // CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURECUBEMAP_LAYERED_LAYERS
   {"cudaDevAttrMaxTextureCubemapLayeredLayers",                        {"hipDeviceAttributeMaxTextureCubemapLayeredLayers",         "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 54
   // CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE1D_WIDTH
@@ -420,10 +420,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaDevAttrMaxTexture2DLinearPitch",                               {"hipDeviceAttributeMaxTexture2DLinear",                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 72
   // CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_MIPMAPPED_WIDTH
   // CUDA only
-  {"cudaDevAttrMaxTexture2DMipmappedWidth",                            {"hipDeviceAttributeMaxTexture2DMip",                        "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 73
+  {"cudaDevAttrMaxTexture2DMipmappedWidth",                            {"hipDeviceAttributeMaxTexture2DMipmap",                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 73
   // CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE2D_MIPMAPPED_HEIGHT
   // CUDA only
-  {"cudaDevAttrMaxTexture2DMipmappedHeight",                           {"hipDeviceAttributeMaxTexture2DMip",                        "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 74
+  {"cudaDevAttrMaxTexture2DMipmappedHeight",                           {"hipDeviceAttributeMaxTexture2DMipmap",                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 74
   // CU_DEVICE_ATTRIBUTE_COMPUTE_CAPABILITY_MAJOR
   {"cudaDevAttrComputeCapabilityMajor",                                {"hipDeviceAttributeComputeCapabilityMajor",                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 75
   // CU_DEVICE_ATTRIBUTE_COMPUTE_CAPABILITY_MINOR
