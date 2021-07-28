@@ -351,7 +351,7 @@
 |`CU_DEVICE_ATTRIBUTE_PAGEABLE_MEMORY_ACCESS_USES_HOST_PAGE_TABLES`|9.2| | |`hipDeviceAttributePageableMemoryAccessUsesHostPageTables`|3.10.0| | |
 |`CU_DEVICE_ATTRIBUTE_PCI_BUS_ID`| | | |`hipDeviceAttributePciBusId`|1.6.0| | |
 |`CU_DEVICE_ATTRIBUTE_PCI_DEVICE_ID`| | | |`hipDeviceAttributePciDeviceId`|1.6.0| | |
-|`CU_DEVICE_ATTRIBUTE_PCI_DOMAIN_ID`| | | |`hipDeviceAttributePciDomainId`|4.3.0| | |
+|`CU_DEVICE_ATTRIBUTE_PCI_DOMAIN_ID`| | | |`hipDeviceAttributePciDomainID`|4.3.0| | |
 |`CU_DEVICE_ATTRIBUTE_READ_ONLY_HOST_REGISTER_SUPPORTED`|11.1| | | | | | |
 |`CU_DEVICE_ATTRIBUTE_REGISTERS_PER_BLOCK`| |5.0| |`hipDeviceAttributeMaxRegistersPerBlock`|1.6.0| | |
 |`CU_DEVICE_ATTRIBUTE_RESERVED_SHARED_MEMORY_PER_BLOCK`|11.0| | | | | | |

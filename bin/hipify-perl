@@ -2993,7 +2993,7 @@ sub simpleSubstitutions {
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_PAGEABLE_MEMORY_ACCESS_USES_HOST_PAGE_TABLES\b/hipDeviceAttributePageableMemoryAccessUsesHostPageTables/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_PCI_BUS_ID\b/hipDeviceAttributePciBusId/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_PCI_DEVICE_ID\b/hipDeviceAttributePciDeviceId/g;
-    $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_PCI_DOMAIN_ID\b/hipDeviceAttributePciDomainId/g;
+    $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_PCI_DOMAIN_ID\b/hipDeviceAttributePciDomainID/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_REGISTERS_PER_BLOCK\b/hipDeviceAttributeMaxRegistersPerBlock/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_SHARED_MEMORY_PER_BLOCK\b/hipDeviceAttributeMaxSharedMemoryPerBlock/g;
     $ft{'numeric_literal'} += s/\bCU_DEVICE_ATTRIBUTE_SINGLE_TO_DOUBLE_PRECISION_PERF_RATIO\b/hipDeviceAttributeSingleToDoublePrecisionPerfRatio/g;
@@ -3232,8 +3232,8 @@ sub simpleSubstitutions {
     $ft{'numeric_literal'} += s/\bcudaDevAttrMaxTexture2DLinearHeight\b/hipDeviceAttributeMaxTexture2DLinear/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrMaxTexture2DLinearPitch\b/hipDeviceAttributeMaxTexture2DLinear/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrMaxTexture2DLinearWidth\b/hipDeviceAttributeMaxTexture2DLinear/g;
-    $ft{'numeric_literal'} += s/\bcudaDevAttrMaxTexture2DMipmappedHeight\b/hipDeviceAttributeMaxTexture2DMip/g;
-    $ft{'numeric_literal'} += s/\bcudaDevAttrMaxTexture2DMipmappedWidth\b/hipDeviceAttributeMaxTexture2DMip/g;
+    $ft{'numeric_literal'} += s/\bcudaDevAttrMaxTexture2DMipmappedHeight\b/hipDeviceAttributeMaxTexture2DMipmap/g;
+    $ft{'numeric_literal'} += s/\bcudaDevAttrMaxTexture2DMipmappedWidth\b/hipDeviceAttributeMaxTexture2DMipmap/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrMaxTexture2DWidth\b/hipDeviceAttributeMaxTexture2DWidth/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrMaxTexture3DDepth\b/hipDeviceAttributeMaxTexture3DDepth/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrMaxTexture3DDepthAlt\b/hipDeviceAttributeMaxTexture3DAlt/g;
@@ -3241,6 +3241,7 @@ sub simpleSubstitutions {
     $ft{'numeric_literal'} += s/\bcudaDevAttrMaxTexture3DHeightAlt\b/hipDeviceAttributeMaxTexture3DAlt/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrMaxTexture3DWidth\b/hipDeviceAttributeMaxTexture3DWidth/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrMaxTexture3DWidthAlt\b/hipDeviceAttributeMaxTexture3DAlt/g;
+    $ft{'numeric_literal'} += s/\bcudaDevAttrMaxTextureCubemapLayeredWidth\b/hipDeviceAttributeMaxTextureCubemapLayered/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrMaxTextureCubemapWidth\b/hipDeviceAttributeMaxTextureCubemap/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrMaxThreadsPerBlock\b/hipDeviceAttributeMaxThreadsPerBlock/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrMaxThreadsPerMultiProcessor\b/hipDeviceAttributeMaxThreadsPerMultiProcessor/g;
@@ -3251,7 +3252,7 @@ sub simpleSubstitutions {
     $ft{'numeric_literal'} += s/\bcudaDevAttrPageableMemoryAccessUsesHostPageTables\b/hipDeviceAttributePageableMemoryAccessUsesHostPageTables/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrPciBusId\b/hipDeviceAttributePciBusId/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrPciDeviceId\b/hipDeviceAttributePciDeviceId/g;
-    $ft{'numeric_literal'} += s/\bcudaDevAttrPciDomainId\b/hipDeviceAttributePciDomainId/g;
+    $ft{'numeric_literal'} += s/\bcudaDevAttrPciDomainId\b/hipDeviceAttributePciDomainID/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrReserved94\b/hipDeviceAttributeCanUseStreamWaitValue/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrSingleToDoublePrecisionPerfRatio\b/hipDeviceAttributeSingleToDoublePrecisionPerfRatio/g;
     $ft{'numeric_literal'} += s/\bcudaDevAttrStreamPrioritiesSupported\b/hipDeviceAttributeStreamPrioritiesSupported/g;
@@ -5297,7 +5298,6 @@ sub warnUnsupportedFunctions {
         "cudaDevAttrMemoryPoolsSupported",
         "cudaDevAttrMemoryPoolSupportedHandleTypes",
         "cudaDevAttrMaxTimelineSemaphoreInteropSupported",
-        "cudaDevAttrMaxTextureCubemapLayeredWidth",
         "cudaDevAttrMaxTextureCubemapLayeredLayers",
         "cudaDevAttrMaxTexture2DLayeredLayers",
         "cudaDevAttrMaxTexture1DLayeredLayers",

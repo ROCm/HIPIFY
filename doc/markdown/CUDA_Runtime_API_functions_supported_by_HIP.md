@@ -688,8 +688,8 @@ Unsupported
 |`cudaDevAttrMaxTexture2DLinearHeight`| | | |`hipDeviceAttributeMaxTexture2DLinear`|4.3.0| | |
 |`cudaDevAttrMaxTexture2DLinearPitch`| | | |`hipDeviceAttributeMaxTexture2DLinear`|4.3.0| | |
 |`cudaDevAttrMaxTexture2DLinearWidth`| | | |`hipDeviceAttributeMaxTexture2DLinear`|4.3.0| | |
-|`cudaDevAttrMaxTexture2DMipmappedHeight`| | | |`hipDeviceAttributeMaxTexture2DMip`| | | |
-|`cudaDevAttrMaxTexture2DMipmappedWidth`| | | |`hipDeviceAttributeMaxTexture2DMip`| | | |
+|`cudaDevAttrMaxTexture2DMipmappedHeight`| | | |`hipDeviceAttributeMaxTexture2DMipmap`|4.3.0| | |
+|`cudaDevAttrMaxTexture2DMipmappedWidth`| | | |`hipDeviceAttributeMaxTexture2DMipmap`|4.3.0| | |
 |`cudaDevAttrMaxTexture2DWidth`| | | |`hipDeviceAttributeMaxTexture2DWidth`|2.7.0| | |
 |`cudaDevAttrMaxTexture3DDepth`| | | |`hipDeviceAttributeMaxTexture3DDepth`|2.7.0| | |
 |`cudaDevAttrMaxTexture3DDepthAlt`| | | |`hipDeviceAttributeMaxTexture3DAlt`|4.3.0| | |
@@ -698,7 +698,7 @@ Unsupported
 |`cudaDevAttrMaxTexture3DWidth`| | | |`hipDeviceAttributeMaxTexture3DWidth`|2.7.0| | |
 |`cudaDevAttrMaxTexture3DWidthAlt`| | | |`hipDeviceAttributeMaxTexture3DAlt`|4.3.0| | |
 |`cudaDevAttrMaxTextureCubemapLayeredLayers`| | | | | | | |
-|`cudaDevAttrMaxTextureCubemapLayeredWidth`| | | | |4.3.0| | |
+|`cudaDevAttrMaxTextureCubemapLayeredWidth`| | | |`hipDeviceAttributeMaxTextureCubemapLayered`|4.3.0| | |
 |`cudaDevAttrMaxTextureCubemapWidth`| | | |`hipDeviceAttributeMaxTextureCubemap`|4.3.0| | |
 |`cudaDevAttrMaxThreadsPerBlock`| | | |`hipDeviceAttributeMaxThreadsPerBlock`|1.6.0| | |
 |`cudaDevAttrMaxThreadsPerMultiProcessor`| | | |`hipDeviceAttributeMaxThreadsPerMultiProcessor`|1.6.0| | |
@@ -712,7 +712,7 @@ Unsupported
 |`cudaDevAttrPageableMemoryAccessUsesHostPageTables`|9.2| | |`hipDeviceAttributePageableMemoryAccessUsesHostPageTables`|3.10.0| | |
 |`cudaDevAttrPciBusId`| | | |`hipDeviceAttributePciBusId`|1.6.0| | |
 |`cudaDevAttrPciDeviceId`| | | |`hipDeviceAttributePciDeviceId`|1.6.0| | |
-|`cudaDevAttrPciDomainId`| | | |`hipDeviceAttributePciDomainId`|4.3.0| | |
+|`cudaDevAttrPciDomainId`| | | |`hipDeviceAttributePciDomainID`|4.3.0| | |
 |`cudaDevAttrReserved92`|9.0| | | | | | |
 |`cudaDevAttrReserved93`|9.0| | | | | | |
 |`cudaDevAttrReserved94`|9.0| | |`hipDeviceAttributeCanUseStreamWaitValue`|4.3.0| | |

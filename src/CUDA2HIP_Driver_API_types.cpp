@@ -525,7 +525,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // CUDA only
   {"CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURE3D_DEPTH_ALTERNATE",            {"hipDeviceAttributeMaxTexture3DAlt",                        "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 49
   // cudaDevAttrPciDomainId
-  {"CU_DEVICE_ATTRIBUTE_PCI_DOMAIN_ID",                                {"hipDeviceAttributePciDomainId",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 50
+  {"CU_DEVICE_ATTRIBUTE_PCI_DOMAIN_ID",                                {"hipDeviceAttributePciDomainID",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 50
   // cudaDevAttrTexturePitchAlignment
   {"CU_DEVICE_ATTRIBUTE_TEXTURE_PITCH_ALIGNMENT",                      {"hipDeviceAttributeTexturePitchAlignment",                  "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 51
   // cudaDevAttrMaxTextureCubemapWidth
@@ -3011,7 +3011,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {
   {"hipDeviceAttributeTccDriver",                                      {HIP_4030, HIP_0,    HIP_0   }},
   {"hipDeviceAttributeUnifiedAddressing",                              {HIP_4030, HIP_0,    HIP_0   }},
   {"hipDeviceAttributeMaxTexture1DLayered",                            {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipDeviceAttributePciDomainId",                                    {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipDeviceAttributePciDomainID",                                    {HIP_4030, HIP_0,    HIP_0   }},
   {"hipDeviceAttributeTexturePitchAlignment",                          {HIP_3020, HIP_0,    HIP_0   }},
   {"hipDeviceAttributeMaxSurface1D",                                   {HIP_4030, HIP_0,    HIP_0   }},
   {"hipDeviceAttributeMaxSurface2D",                                   {HIP_4030, HIP_0,    HIP_0   }},
