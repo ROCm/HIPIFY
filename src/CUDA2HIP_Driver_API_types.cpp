@@ -101,9 +101,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUDA_MEMCPY3D_PEER_v1",                                            {"hip_Memcpy3D_Peer",                                        "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
 
   // cudaMemsetParams
-  {"CUDA_MEMSET_NODE_PARAMS_st",                                       {"hipMemsetParams",                                          "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
-  {"CUDA_MEMSET_NODE_PARAMS",                                          {"hipMemsetParams",                                          "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
-  {"CUDA_MEMSET_NODE_PARAMS_v1",                                       {"hipMemsetParams",                                          "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CUDA_MEMSET_NODE_PARAMS_st",                                       {"hipMemsetParams",                                          "", CONV_TYPE, API_DRIVER, 1}},
+  {"CUDA_MEMSET_NODE_PARAMS",                                          {"hipMemsetParams",                                          "", CONV_TYPE, API_DRIVER, 1}},
+  {"CUDA_MEMSET_NODE_PARAMS_v1",                                       {"hipMemsetParams",                                          "", CONV_TYPE, API_DRIVER, 1}},
 
   {"CUDA_POINTER_ATTRIBUTE_P2P_TOKENS_st",                             {"HIP_POINTER_ATTRIBUTE_P2P_TOKENS",                         "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
   {"CUDA_POINTER_ATTRIBUTE_P2P_TOKENS",                                {"HIP_POINTER_ATTRIBUTE_P2P_TOKENS",                         "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
@@ -3051,7 +3051,6 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {
   {"hipErrorStreamCaptureImplicit",                                    {HIP_4030, HIP_0,    HIP_0   }},
   {"hipErrorCapturedEvent",                                            {HIP_4030, HIP_0,    HIP_0   }},
   {"hipErrorStreamCaptureWrongThread",                                 {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipHostFn_t",                                                      {HIP_4030, HIP_0,    HIP_0   }},
   {"hipSurfaceObject_t",                                               {HIP_1090, HIP_0,    HIP_0   }},
   {"hipExternalSemaphoreWaitParams_st",                                {HIP_4030, HIP_0,    HIP_0   }},
   {"hipExternalSemaphoreWaitParams",                                   {HIP_4030, HIP_0,    HIP_0   }},

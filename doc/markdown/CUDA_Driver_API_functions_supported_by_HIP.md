@@ -161,9 +161,9 @@
 |`CUDA_MEMCPY3D_v1`| | | |`HIP_MEMCPY3D`|3.2.0| | |
 |`CUDA_MEMCPY3D_v1_st`| | | |`HIP_MEMCPY3D`|3.2.0| | |
 |`CUDA_MEMCPY3D_v2`|11.3| | |`HIP_MEMCPY3D`|3.2.0| | |
-|`CUDA_MEMSET_NODE_PARAMS`|10.0| | | |4.3.0| | |
-|`CUDA_MEMSET_NODE_PARAMS_st`|10.0| | | |4.3.0| | |
-|`CUDA_MEMSET_NODE_PARAMS_v1`|11.3| | | |4.3.0| | |
+|`CUDA_MEMSET_NODE_PARAMS`|10.0| | |`hipMemsetParams`|4.3.0| | |
+|`CUDA_MEMSET_NODE_PARAMS_st`|10.0| | |`hipMemsetParams`|4.3.0| | |
+|`CUDA_MEMSET_NODE_PARAMS_v1`|11.3| | |`hipMemsetParams`|4.3.0| | |
 |`CUDA_MEM_ALLOC_NODE_PARAMS`|11.4| | | | | | |
 |`CUDA_MEM_ALLOC_NODE_PARAMS_st`|11.4| | | | | | |
 |`CUDA_NVSCISYNC_ATTR_SIGNAL`|10.2| | | | | | |
@@ -1333,7 +1333,7 @@
 |`cuStreamAddCallback`| | | |`hipStreamAddCallback`|1.6.0| | |
 |`cuStreamAttachMemAsync`| | | |`hipStreamAttachMemAsync`|3.7.0| | |
 |`cuStreamBeginCapture`|10.0| | |`hipStreamBeginCapture`|4.3.0| | |
-|`cuStreamBeginCapture_ptsz`|10.1| | | |4.3.0| | |
+|`cuStreamBeginCapture_ptsz`|10.1| | | | | | |
 |`cuStreamBeginCapture_v2`|10.1| | |`hipStreamBeginCapture`|4.3.0| | |
 |`cuStreamCopyAttributes`|11.0| | | | | | |
 |`cuStreamCreate`| | | |`hipStreamCreateWithFlags`|1.6.0| | |
@@ -1533,11 +1533,11 @@
 |`cuTexRefSetAddressMode`| |11.0| |`hipTexRefSetAddressMode`|1.9.0| | |
 |`cuTexRefSetAddress_v2`| |11.0| |`hipTexRefSetAddress`|1.7.0|4.3.0| |
 |`cuTexRefSetArray`| |11.0| |`hipTexRefSetArray`|1.9.0| | |
-|`cuTexRefSetBorderColor`|8.0|11.0| |`hipTexRefSetBorderColor`|3.5.0| | |
+|`cuTexRefSetBorderColor`|8.0|11.0| |`hipTexRefSetBorderColor`|3.5.0|4.3.0| |
 |`cuTexRefSetFilterMode`| |11.0| |`hipTexRefSetFilterMode`|1.9.0| | |
 |`cuTexRefSetFlags`| |11.0| |`hipTexRefSetFlags`|1.9.0| | |
 |`cuTexRefSetFormat`| |11.0| |`hipTexRefSetFormat`|1.9.0| | |
-|`cuTexRefSetMaxAnisotropy`| |11.0| |`hipTexRefSetMaxAnisotropy`|3.5.0| | |
+|`cuTexRefSetMaxAnisotropy`| |11.0| |`hipTexRefSetMaxAnisotropy`|3.5.0|4.3.0| |
 |`cuTexRefSetMipmapFilterMode`| |11.0| |`hipTexRefSetMipmapFilterMode`|3.5.0| | |
 |`cuTexRefSetMipmapLevelBias`| |11.0| |`hipTexRefSetMipmapLevelBias`|3.5.0| | |
 |`cuTexRefSetMipmapLevelClamp`| |11.0| |`hipTexRefSetMipmapLevelClamp`|3.5.0| | |
