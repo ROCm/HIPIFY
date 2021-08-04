@@ -38,7 +38,6 @@ const std::string sHIP = "HIP";
 const std::string sROC = "ROC";
 const std::string sCub = "cub";
 const std::string sHipcub = "hipcub";
-const std::string sHIP_DYNAMIC_SHARED = "HIP_DYNAMIC_SHARED";
 const std::string sHIP_KERNEL_NAME = "HIP_KERNEL_NAME";
 std::string sHIP_SYMBOL = "HIP_SYMBOL";
 std::string s_reinterpret_cast = "reinterpret_cast<const void*>";
@@ -65,7 +64,6 @@ const std::string sCuStreamWaitValue64 = "cuStreamWaitValue64";
 const std::string sCuStreamWriteValue32 = "cuStreamWriteValue32";
 const std::string sCuStreamWriteValue64 = "cuStreamWriteValue64";
 // Matchers' names
-const StringRef sCudaSharedIncompleteArrayVar = "cudaSharedIncompleteArrayVar";
 const StringRef sCudaLaunchKernel = "cudaLaunchKernel";
 const StringRef sCudaHostFuncCall = "cudaHostFuncCall";
 const StringRef sCudaDeviceFuncCall = "cudaDeviceFuncCall";
@@ -419,46 +417,6 @@ bool HipifyAction::cudaLaunchKernel(const mat::MatchFinder::MatchResult &Result)
   return false;
 }
 
-bool HipifyAction::cudaSharedIncompleteArrayVar(const mat::MatchFinder::MatchResult &Result) {
-  auto *sharedVar = Result.Nodes.getNodeAs<clang::VarDecl>(sCudaSharedIncompleteArrayVar);
-  if (!sharedVar) return false;
-  // Example: extern __shared__ uint sRadix1[];
-  if (!sharedVar->hasExternalFormalLinkage()) return false;
-  clang::QualType QT = sharedVar->getType();
-  std::string typeName;
-  if (QT->isIncompleteArrayType()) {
-    const clang::ArrayType *AT = QT.getTypePtr()->getAsArrayTypeUnsafe();
-    QT = AT->getElementType();
-    if (QT.getTypePtr()->isBuiltinType()) {
-      QT = QT.getCanonicalType();
-      auto *BT = clang::dyn_cast<clang::BuiltinType>(QT);
-      if (BT) {
-        clang::LangOptions LO;
-        LO.CUDA = true;
-        clang::PrintingPolicy policy(LO);
-        typeName = std::string(BT->getName(policy));
-      }
-    } else {
-      typeName = QT.getAsString();
-    }
-  }
-  if (!typeName.empty()) {
-    clang::SourceLocation slStart = sharedVar->getOuterLocStart();
-    clang::SourceLocation slEnd = llcompat::getEndLoc(sharedVar->getTypeSourceInfo()->getTypeLoc());
-    auto *SM = Result.SourceManager;
-    size_t repLength = SM->getCharacterData(slEnd) - SM->getCharacterData(slStart) + 1;
-    std::string varName = sharedVar->getNameAsString();
-    std::string repName = sHIP_DYNAMIC_SHARED + "(" + typeName + ", " + varName + ")";
-    ct::Replacement Rep(*SM, slStart, repLength, repName);
-    clang::FullSourceLoc fullSL(slStart, *SM);
-    insertReplacement(Rep, fullSL);
-    hipCounter counter = {sHIP_DYNAMIC_SHARED, "", ConvTypes::CONV_EXTERN_SHARED, ApiTypes::API_RUNTIME};
-    Statistics::current().incrementCounter(counter, sCudaSharedIncompleteArrayVar.str());
-    return true;
-  }
-  return false;
-}
-
 bool HipifyAction::cudaDeviceFuncCall(const mat::MatchFinder::MatchResult &Result) {
   if (const clang::CallExpr *call = Result.Nodes.getNodeAs<clang::CallExpr>(sCudaDeviceFuncCall)) {
     auto *funcDcl = call->getDirectCallee();
@@ -580,16 +538,6 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
   Finder.reset(new mat::MatchFinder);
   // Replace the <<<...>>> language extension with a hip kernel launch
   Finder->addMatcher(mat::cudaKernelCallExpr(mat::isExpansionInMainFile()).bind(sCudaLaunchKernel), this);
-  Finder->addMatcher(
-    mat::varDecl(
-      mat::isExpansionInMainFile(),
-      mat::allOf(
-        mat::hasAttr(clang::attr::CUDAShared),
-        mat::hasType(mat::incompleteArrayType())
-      )
-    ).bind(sCudaSharedIncompleteArrayVar),
-    this
-  );
   Finder->addMatcher(
     mat::callExpr(
       mat::isExpansionInMainFile(),
@@ -767,7 +715,6 @@ void HipifyAction::ExecuteAction() {
 
 void HipifyAction::run(const mat::MatchFinder::MatchResult &Result) {
   if (cudaLaunchKernel(Result)) return;
-  if (cudaSharedIncompleteArrayVar(Result)) return;
   if (cudaHostFuncCall(Result)) return;
   if (cudaDeviceFuncCall(Result)) return;
   if (cubNamespacePrefix(Result)) return;

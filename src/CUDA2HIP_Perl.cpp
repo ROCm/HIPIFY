@@ -98,7 +98,6 @@ namespace perl {
   const string sWarnDataLossFunctions = "warnDataLossFunctions";
   const string sWarnUnsupportedDeviceFunctions = "warnUnsupportedDeviceFunctions";
   const string sSimpleSubstitutions = "simpleSubstitutions";
-  const string sTransformExternShared = "transformExternShared";
   const string sTansformKernelLaunch = "transformKernelLaunch";
   const string sTransformCubNamespace = "transformCubNamespace";
   const string sCountSupportedDeviceFunctions = "countSupportedDeviceFunctions";
@@ -305,22 +304,12 @@ namespace perl {
     *streamPtr.get() << "}" << endl;
   }
 
-  void generateExternShared(unique_ptr<ostream> &streamPtr) {
-    *streamPtr.get() << endl << "# CUDA extern __shared__ syntax replace with HIP_DYNAMIC_SHARED() macro" << endl;
-    *streamPtr.get() << sub << sTransformExternShared << " {" << endl;
-    *streamPtr.get() << tab << no_warns << endl;
-    *streamPtr.get() << tab << my_k << endl;
-    *streamPtr.get() << tab << "$k += s/extern\\s+([\\w\\(\\)]+)?\\s*__shared__\\s+([\\w:<>\\s]+)\\s+(\\w+)\\s*\\[\\s*\\]\\s*;/HIP_DYNAMIC_SHARED($1 $2, $3)/g;" << endl;
-    *streamPtr.get() << tab << "$ft{'extern_shared'} += $k;" << endl << "}" << endl;
-  }
-
   void generateKernelLaunch(unique_ptr<ostream> &streamPtr) {
     *streamPtr.get() << endl << "# CUDA Kernel Launch Syntax" << endl << sub << sTansformKernelLaunch << " {" << endl;
     *streamPtr.get() << tab << no_warns << endl;
     *streamPtr.get() << tab << my_k << endl_2;
 
     string s_k = "$k += s/([:|\\w]+)\\s*";
-
 
     *streamPtr.get() << tab << "# kern<...><<<Dg, Db, Ns, S>>>() syntax" << endl;
     *streamPtr.get() << tab << s_k << "<(.+)>\\s*<<<\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*>>>\\s*\\(\\s*\\)/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), $3, $4, $5, $6)/g;" << endl;
@@ -571,7 +560,6 @@ namespace perl {
     *streamPtr.get() << "\"" << counterNames[NUM_CONV_TYPES - 1] << "\");" << endl;
     generateStatFunctions(streamPtr);
     generateSimpleSubstitutions(streamPtr);
-    generateExternShared(streamPtr);
     generateKernelLaunch(streamPtr);
     generateCubNamespace(streamPtr);
     generateHostFunctions(streamPtr);
@@ -654,7 +642,6 @@ namespace perl {
     *streamPtr.get() << tab_5 << warningsPlus << endl_tab_4 << "}" << endl;
     *streamPtr.get() << tab_4 << "$_ = $tmp;" << endl_tab_3 << "}" << endl;
     *streamPtr.get() << tab_3 << sSimpleSubstitutions << "();" << endl;
-    *streamPtr.get() << tab_3 << sTransformExternShared << "();" << endl;
     *streamPtr.get() << tab_3 << sTansformKernelLaunch << "();" << endl;
     *streamPtr.get() << tab_3 << sTransformCubNamespace << "();" << endl;
     *streamPtr.get() << tab_3 << "if ($print_stats) {" << endl;

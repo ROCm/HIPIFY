@@ -119,7 +119,6 @@ void disablePeer2Peer(int currentGpu, int peerGpu) {
 
 __global__ void matrixTranspose_static_shared(float* out, float* in,
                                               const int width) {
-    // CHECK-NOT: HIP_DYNAMIC_SHARED(float, sharedMem);
     // CHECK: __shared__ float sharedMem[WIDTH * WIDTH];
     __shared__ float sharedMem[WIDTH * WIDTH];
     int x = blockDim.x * blockIdx.x + threadIdx.x;
@@ -132,8 +131,7 @@ __global__ void matrixTranspose_static_shared(float* out, float* in,
 __global__ void matrixTranspose_dynamic_shared(float* out, float* in,
                                                const int width) {
     // declare dynamic shared memory
-    // CHECK-NOT: extern __shared__
-    // CHECK: HIP_DYNAMIC_SHARED(float, sharedMem)
+    // CHECK: extern __shared__ float sharedMem[];
     extern __shared__ float sharedMem[];
     int x = blockDim.x * blockIdx.x + threadIdx.x;
     int y = blockDim.y * blockIdx.y + threadIdx.y;
