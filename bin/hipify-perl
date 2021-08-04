@@ -3451,7 +3451,6 @@ sub simpleSubstitutions {
     $ft{'define'} += s/\bCUDA_COOPERATIVE_LAUNCH_MULTI_DEVICE_NO_POST_LAUNCH_SYNC\b/hipCooperativeLaunchMultiDeviceNoPostSync/g;
     $ft{'define'} += s/\bCUDA_COOPERATIVE_LAUNCH_MULTI_DEVICE_NO_PRE_LAUNCH_SYNC\b/hipCooperativeLaunchMultiDeviceNoPreSync/g;
     $ft{'define'} += s/\bCUDA_IPC_HANDLE_SIZE\b/HIP_IPC_HANDLE_SIZE/g;
-    $ft{'define'} += s/\bCUDA_VERSION\b/HIP_VERSION/g;
     $ft{'define'} += s/\bCURAND_VERSION\b/HIPRAND_VERSION/g;
     $ft{'define'} += s/\bCU_DEVICE_CPU\b/hipCpuDeviceId/g;
     $ft{'define'} += s/\bCU_DEVICE_INVALID\b/hipInvalidDeviceId/g;
@@ -6692,6 +6691,7 @@ sub warnUnsupportedFunctions {
         "CUDNN_ADV_INFER_PATCH",
         "CUDNN_ADV_INFER_MINOR",
         "CUDNN_ADV_INFER_MAJOR",
+        "CUDA_VERSION",
         "CUDA_POINTER_ATTRIBUTE_P2P_TOKENS_v1",
         "CUDA_POINTER_ATTRIBUTE_P2P_TOKENS_st",
         "CUDA_POINTER_ATTRIBUTE_P2P_TOKENS",

@@ -2099,7 +2099,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUDA_NVSCISYNC_ATTR_SIGNAL",                                       {"hipNvSciSyncAttrSignal",                                   "", CONV_DEFINE, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0x1
   // cudaNvSciSyncAttrWait
   {"CUDA_NVSCISYNC_ATTR_WAIT",                                         {"hipNvSciSyncAttrWait",                                     "", CONV_DEFINE, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0x1
-  {"CUDA_VERSION",                                                     {"HIP_VERSION",                                              "", CONV_DEFINE, API_DRIVER, 1}}, // 10000
+  {"CUDA_VERSION",                                                     {"HIP_VERSION",                                              "", CONV_DEFINE, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 10000
   {"CU_TRSF_DISABLE_TRILINEAR_OPTIMIZATION",                           {"HIP_TRSF_DISABLE_TRILINEAR_OPTIMIZATION",                  "", CONV_DEFINE, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0x20
   // cudaArraySparsePropertiesSingleMipTail
   {"CU_ARRAY_SPARSE_PROPERTIES_SINGLE_MIPTAIL",                        {"HIP_ARRAY_SPARSE_PROPERTIES_SINGLE_MIPTAIL",               "", CONV_DEFINE, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0x1
@@ -3053,7 +3053,6 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {
   {"hipErrorStreamCaptureWrongThread",                                 {HIP_4030, HIP_0,    HIP_0   }},
   {"hipHostFn_t",                                                      {HIP_4030, HIP_0,    HIP_0   }},
   {"hipSurfaceObject_t",                                               {HIP_1090, HIP_0,    HIP_0   }},
-  {"HIP_VERSION",                                                      {HIP_1050, HIP_0,    HIP_0   }},
   {"hipExternalSemaphoreWaitParams_st",                                {HIP_4030, HIP_0,    HIP_0   }},
   {"hipExternalSemaphoreWaitParams",                                   {HIP_4030, HIP_0,    HIP_0   }},
   {"hipLimitPrintfFifoSize",                                           {HIP_4030, HIP_0,    HIP_0   }},
