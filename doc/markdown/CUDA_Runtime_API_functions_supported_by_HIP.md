@@ -1067,13 +1067,13 @@ Unsupported
 |`cudaGraphNodeTypeCount`|10.0| | |`hipGraphNodeTypeCount`|4.3.0| | |
 |`cudaGraphNodeTypeEmpty`|10.0| | |`hipGraphNodeTypeEmpty`|4.3.0| | |
 |`cudaGraphNodeTypeEventRecord`|11.1| | |`hipGraphNodeTypeEventRecord`|4.3.0| | |
-|`cudaGraphNodeTypeExtSemaphoreSignal`|11.4| | |`hipGraphNodeTypeExtSemasSignal`| | | |
-|`cudaGraphNodeTypeExtSemaphoreWait`|11.4| | |`hipGraphNodeTypeExtSemasWait`| | | |
+|`cudaGraphNodeTypeExtSemaphoreSignal`|11.4| | | | | | |
+|`cudaGraphNodeTypeExtSemaphoreWait`|11.4| | | | | | |
 |`cudaGraphNodeTypeGraph`|10.0| | |`hipGraphNodeTypeGraph`|4.3.0| | |
 |`cudaGraphNodeTypeHost`|10.0| | |`hipGraphNodeTypeHost`|4.3.0| | |
 |`cudaGraphNodeTypeKernel`|10.0| | |`hipGraphNodeTypeKernel`|4.3.0| | |
-|`cudaGraphNodeTypeMemAlloc`|11.4| | |`hipGraphNodeTypeMemAlloc`| | | |
-|`cudaGraphNodeTypeMemFree`|11.4| | |`hipGraphNodeTypeMemFree`| | | |
+|`cudaGraphNodeTypeMemAlloc`|11.4| | | | | | |
+|`cudaGraphNodeTypeMemFree`|11.4| | | | | | |
 |`cudaGraphNodeTypeMemcpy`|10.0| | |`hipGraphNodeTypeMemcpy`|4.3.0| | |
 |`cudaGraphNodeTypeMemset`|10.0| | |`hipGraphNodeTypeMemset`|4.3.0| | |
 |`cudaGraphNodeTypeWaitEvent`|11.1| | |`hipGraphNodeTypeWaitEvent`|4.3.0| | |

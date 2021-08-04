@@ -1084,13 +1084,13 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CU_GRAPH_NODE_TYPE_EVENT_RECORD = 7
   {"cudaGraphNodeTypeEventRecord",                                     {"hipGraphNodeTypeEventRecord",                              "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 0x07
   // CU_GRAPH_NODE_TYPE_EXT_SEMAS_SIGNAL = 8
-  {"cudaGraphNodeTypeExtSemaphoreSignal",                              {"hipGraphNodeTypeExtSemasSignal",                           "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 0x08
+  {"cudaGraphNodeTypeExtSemaphoreSignal",                              {"hipGraphNodeTypeExtSemasSignal",                           "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 0x08
   // CU_GRAPH_NODE_TYPE_EXT_SEMAS_WAIT = 9
-  {"cudaGraphNodeTypeExtSemaphoreWait",                                {"hipGraphNodeTypeExtSemasWait",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 0x09
+  {"cudaGraphNodeTypeExtSemaphoreWait",                                {"hipGraphNodeTypeExtSemasWait",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 0x09
   // CU_GRAPH_NODE_TYPE_MEM_ALLOC = 10
-  {"cudaGraphNodeTypeMemAlloc",                                        {"hipGraphNodeTypeMemAlloc",                                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 0x0a
+  {"cudaGraphNodeTypeMemAlloc",                                        {"hipGraphNodeTypeMemAlloc",                                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 0x0a
   // CU_GRAPH_NODE_TYPE_MEM_FREE = 11
-  {"cudaGraphNodeTypeMemFree",                                         {"hipGraphNodeTypeMemFree",                                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 0x0b
+  {"cudaGraphNodeTypeMemFree",                                         {"hipGraphNodeTypeMemFree",                                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 0x0b
   // CU_GRAPH_NODE_TYPE_COUNT
   {"cudaGraphNodeTypeCount",                                           {"hipGraphNodeTypeCount",                                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}},
 

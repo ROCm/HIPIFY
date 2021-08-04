@@ -2257,6 +2257,9 @@ sub simpleSubstitutions {
     $ft{'type'} += s/\bCUDA_MEMCPY3D_v1\b/HIP_MEMCPY3D/g;
     $ft{'type'} += s/\bCUDA_MEMCPY3D_v1_st\b/HIP_MEMCPY3D/g;
     $ft{'type'} += s/\bCUDA_MEMCPY3D_v2\b/HIP_MEMCPY3D/g;
+    $ft{'type'} += s/\bCUDA_MEMSET_NODE_PARAMS\b/hipMemsetParams/g;
+    $ft{'type'} += s/\bCUDA_MEMSET_NODE_PARAMS_st\b/hipMemsetParams/g;
+    $ft{'type'} += s/\bCUDA_MEMSET_NODE_PARAMS_v1\b/hipMemsetParams/g;
     $ft{'type'} += s/\bCUDA_RESOURCE_DESC\b/HIP_RESOURCE_DESC/g;
     $ft{'type'} += s/\bCUDA_RESOURCE_DESC_st\b/HIP_RESOURCE_DESC_st/g;
     $ft{'type'} += s/\bCUDA_RESOURCE_DESC_v1\b/HIP_RESOURCE_DESC/g;
@@ -3366,13 +3369,9 @@ sub simpleSubstitutions {
     $ft{'numeric_literal'} += s/\bcudaGraphNodeTypeCount\b/hipGraphNodeTypeCount/g;
     $ft{'numeric_literal'} += s/\bcudaGraphNodeTypeEmpty\b/hipGraphNodeTypeEmpty/g;
     $ft{'numeric_literal'} += s/\bcudaGraphNodeTypeEventRecord\b/hipGraphNodeTypeEventRecord/g;
-    $ft{'numeric_literal'} += s/\bcudaGraphNodeTypeExtSemaphoreSignal\b/hipGraphNodeTypeExtSemasSignal/g;
-    $ft{'numeric_literal'} += s/\bcudaGraphNodeTypeExtSemaphoreWait\b/hipGraphNodeTypeExtSemasWait/g;
     $ft{'numeric_literal'} += s/\bcudaGraphNodeTypeGraph\b/hipGraphNodeTypeGraph/g;
     $ft{'numeric_literal'} += s/\bcudaGraphNodeTypeHost\b/hipGraphNodeTypeHost/g;
     $ft{'numeric_literal'} += s/\bcudaGraphNodeTypeKernel\b/hipGraphNodeTypeKernel/g;
-    $ft{'numeric_literal'} += s/\bcudaGraphNodeTypeMemAlloc\b/hipGraphNodeTypeMemAlloc/g;
-    $ft{'numeric_literal'} += s/\bcudaGraphNodeTypeMemFree\b/hipGraphNodeTypeMemFree/g;
     $ft{'numeric_literal'} += s/\bcudaGraphNodeTypeMemcpy\b/hipGraphNodeTypeMemcpy/g;
     $ft{'numeric_literal'} += s/\bcudaGraphNodeTypeMemset\b/hipGraphNodeTypeMemset/g;
     $ft{'numeric_literal'} += s/\bcudaGraphNodeTypeWaitEvent\b/hipGraphNodeTypeWaitEvent/g;
@@ -4993,6 +4992,10 @@ sub warnUnsupportedFunctions {
         "cudaGraphRetainUserObject",
         "cudaGraphRemoveDependencies",
         "cudaGraphReleaseUserObject",
+        "cudaGraphNodeTypeMemFree",
+        "cudaGraphNodeTypeMemAlloc",
+        "cudaGraphNodeTypeExtSemaphoreWait",
+        "cudaGraphNodeTypeExtSemaphoreSignal",
         "cudaGraphNodeGetType",
         "cudaGraphNodeGetDependentNodes",
         "cudaGraphNodeGetDependencies",
@@ -6693,9 +6696,6 @@ sub warnUnsupportedFunctions {
         "CUDA_NVSCISYNC_ATTR_SIGNAL",
         "CUDA_MEM_ALLOC_NODE_PARAMS_st",
         "CUDA_MEM_ALLOC_NODE_PARAMS",
-        "CUDA_MEMSET_NODE_PARAMS_v1",
-        "CUDA_MEMSET_NODE_PARAMS_st",
-        "CUDA_MEMSET_NODE_PARAMS",
         "CUDA_MEMCPY3D_PEER_v1",
         "CUDA_MEMCPY3D_PEER_st",
         "CUDA_MEMCPY3D_PEER",
