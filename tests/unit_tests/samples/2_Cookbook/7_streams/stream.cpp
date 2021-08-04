@@ -37,7 +37,6 @@ using namespace std;
 
 __global__ void matrixTranspose_static_shared(float* out, float* in,
                                               const int width) {
-    // CHECK-NOT: HIP_DYNAMIC_SHARED(float, sharedMem);
     // CHECK: __shared__ float sharedMem[WIDTH * WIDTH];
     __shared__ float sharedMem[WIDTH * WIDTH];
 
@@ -54,8 +53,7 @@ __global__ void matrixTranspose_static_shared(float* out, float* in,
 __global__ void matrixTranspose_dynamic_shared(float* out, float* in,
                                                const int width) {
     // declare dynamic shared memory
-    // CHECK-NOT: extern __shared__
-    // CHECK: HIP_DYNAMIC_SHARED(int, sharedMem)
+    // CHECK: __shared__ int sharedMem[];
     extern __shared__ int sharedMem[];
 
     int x = blockDim.x * blockIdx.x + threadIdx.x;

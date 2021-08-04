@@ -71,7 +71,6 @@ public:
     replacements(replacements) {}
   // MatchCallback listeners
   bool cudaLaunchKernel(const mat::MatchFinder::MatchResult &Result);
-  bool cudaSharedIncompleteArrayVar(const mat::MatchFinder::MatchResult &Result);
   bool cudaDeviceFuncCall(const mat::MatchFinder::MatchResult &Result);
   bool cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result);
   bool cubNamespacePrefix(const mat::MatchFinder::MatchResult &Result);
