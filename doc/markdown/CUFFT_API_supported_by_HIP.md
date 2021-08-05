@@ -7,10 +7,24 @@
 |`CUFFT_ALLOC_FAILED`| | | |`HIPFFT_ALLOC_FAILED`|1.7.0| | |
 |`CUFFT_C2C`| | | |`HIPFFT_C2C`|1.7.0| | |
 |`CUFFT_C2R`| | | |`HIPFFT_C2R`|1.7.0| | |
+|`CUFFT_CB_LD_COMPLEX`| | | |`HIPFFT_CB_LD_COMPLEX`|4.3.0| | |
+|`CUFFT_CB_LD_COMPLEX_DOUBLE`| | | |`HIPFFT_CB_LD_COMPLEX_DOUBLE`|4.3.0| | |
+|`CUFFT_CB_LD_REAL`| | | |`HIPFFT_CB_LD_REAL`|4.3.0| | |
+|`CUFFT_CB_LD_REAL_DOUBLE`| | | |`HIPFFT_CB_LD_REAL_DOUBLE`|4.3.0| | |
+|`CUFFT_CB_ST_COMPLEX`| | | |`HIPFFT_CB_ST_COMPLEX`|4.3.0| | |
+|`CUFFT_CB_ST_COMPLEX_DOUBLE`| | | |`HIPFFT_CB_ST_COMPLEX_DOUBLE`|4.3.0| | |
+|`CUFFT_CB_ST_REAL`| | | |`HIPFFT_CB_ST_REAL`|4.3.0| | |
+|`CUFFT_CB_ST_REAL_DOUBLE`| | | |`HIPFFT_CB_ST_REAL_DOUBLE`|4.3.0| | |
+|`CUFFT_CB_UNDEFINED`| | | |`HIPFFT_CB_UNDEFINED`|4.3.0| | |
 |`CUFFT_COMPATIBILITY_DEFAULT`| | | | | | | |
 |`CUFFT_COMPATIBILITY_FFTW_PADDING`| | | | | | | |
+|`CUFFT_COPY_DEVICE_TO_DEVICE`| | | | | | | |
+|`CUFFT_COPY_DEVICE_TO_HOST`| | | | | | | |
+|`CUFFT_COPY_HOST_TO_DEVICE`| | | | | | | |
+|`CUFFT_COPY_UNDEFINED`| | | | | | | |
 |`CUFFT_D2Z`| | | |`HIPFFT_D2Z`|1.7.0| | |
 |`CUFFT_EXEC_FAILED`| | | |`HIPFFT_EXEC_FAILED`|1.7.0| | |
+|`CUFFT_FORMAT_UNDEFINED`| | | | | | | |
 |`CUFFT_FORWARD`| | | |`HIPFFT_FORWARD`|1.7.0| | |
 |`CUFFT_INCOMPLETE_PARAMETER_LIST`| | | |`HIPFFT_INCOMPLETE_PARAMETER_LIST`|1.7.0| | |
 |`CUFFT_INTERNAL_ERROR`| | | |`HIPFFT_INTERNAL_ERROR`|1.7.0| | |
@@ -25,6 +39,8 @@
 |`CUFFT_NOT_SUPPORTED`|8.0| | |`HIPFFT_NOT_SUPPORTED`|1.7.0| | |
 |`CUFFT_NO_WORKSPACE`| | | |`HIPFFT_NO_WORKSPACE`|1.7.0| | |
 |`CUFFT_PARSE_ERROR`| | | |`HIPFFT_PARSE_ERROR`|1.7.0| | |
+|`CUFFT_QUERY_1D_FACTORS`| | | | | | | |
+|`CUFFT_QUERY_UNDEFINED`| | | | | | | |
 |`CUFFT_R2C`| | | |`HIPFFT_R2C`|1.7.0| | |
 |`CUFFT_SETUP_FAILED`| | | |`HIPFFT_SETUP_FAILED`|1.7.0| | |
 |`CUFFT_SUCCESS`| | | |`HIPFFT_SUCCESS`|1.7.0| | |
@@ -34,6 +50,14 @@
 |`CUFFT_VER_MAJOR`|10.2| | | | | | |
 |`CUFFT_VER_MINOR`|10.2| | | | | | |
 |`CUFFT_VER_PATCH`|10.2| | | | | | |
+|`CUFFT_WORKAREA_MINIMAL`|9.2| | | | | | |
+|`CUFFT_WORKAREA_PERFORMANCE`| | | | | | | |
+|`CUFFT_WORKAREA_USER`|9.2| | | | | | |
+|`CUFFT_XT_FORMAT_1D_INPUT_SHUFFLED`| | | | | | | |
+|`CUFFT_XT_FORMAT_INPLACE`| | | | | | | |
+|`CUFFT_XT_FORMAT_INPLACE_SHUFFLED`| | | | | | | |
+|`CUFFT_XT_FORMAT_INPUT`| | | | | | | |
+|`CUFFT_XT_FORMAT_OUTPUT`| | | | | | | |
 |`CUFFT_Z2D`| | | |`HIPFFT_Z2D`|1.7.0| | |
 |`CUFFT_Z2Z`| | | |`HIPFFT_Z2Z`|1.7.0| | |
 |`MAX_CUFFT_ERROR`| | | | | | | |
@@ -48,6 +72,18 @@
 |`cufftResult_t`| | | |`hipfftResult_t`|1.7.0| | |
 |`cufftType`| | | |`hipfftType`|1.7.0| | |
 |`cufftType_t`| | | |`hipfftType_t`|1.7.0| | |
+|`cufftXt1dFactors`| | | | | | | |
+|`cufftXt1dFactors_t`| | | | | | | |
+|`cufftXtCallbackType`| | | |`hipfftXtCallbackType`|4.3.0| | |
+|`cufftXtCallbackType_t`| | | |`hipfftXtCallbackType_t`|4.3.0| | |
+|`cufftXtCopyType`| | | | | | | |
+|`cufftXtCopyType_t`| | | | | | | |
+|`cufftXtQueryType`| | | | | | | |
+|`cufftXtQueryType_t`| | | | | | | |
+|`cufftXtSubFormat`| | | | | | | |
+|`cufftXtSubFormat_t`| | | | | | | |
+|`cufftXtWorkAreaPolicy`|9.2| | | | | | |
+|`cufftXtWorkAreaPolicy_t`|9.2| | | | | | |
 
 ## **2. CUFFT API functions**
 
