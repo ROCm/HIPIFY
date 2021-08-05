@@ -70,12 +70,53 @@ const std::map<llvm::StringRef, hipCounter> CUDA_FFT_TYPE_NAME_MAP {
   {"cufftCompatibility",               {"hipfftCompatibility",               "", CONV_TYPE, API_FFT, 1, HIP_UNSUPPORTED}},
   {"CUFFT_COMPATIBILITY_FFTW_PADDING", {"HIPFFT_COMPATIBILITY_FFTW_PADDING", "", CONV_NUMERIC_LITERAL, API_FFT, 1, HIP_UNSUPPORTED}},    //  0x01
 
+  {"cufftXtSubFormat_t",               {"hipfftXtSubFormat_t",               "", CONV_TYPE, API_FFT, 1, HIP_UNSUPPORTED}},
+  {"cufftXtSubFormat",                 {"hipfftXtSubFormat",                 "", CONV_TYPE, API_FFT, 1, HIP_UNSUPPORTED}},
+  {"CUFFT_XT_FORMAT_INPUT",            {"HIPFFT_XT_FORMAT_INPUT",            "", CONV_NUMERIC_LITERAL, API_FFT, 1, HIP_UNSUPPORTED}},    //  0x00
+  {"CUFFT_XT_FORMAT_OUTPUT",           {"HIPFFT_XT_FORMAT_OUTPUT",           "", CONV_NUMERIC_LITERAL, API_FFT, 1, HIP_UNSUPPORTED}},    //  0x01
+  {"CUFFT_XT_FORMAT_INPLACE",          {"HIPFFT_XT_FORMAT_INPLACE",          "", CONV_NUMERIC_LITERAL, API_FFT, 1, HIP_UNSUPPORTED}},    //  0x02
+  {"CUFFT_XT_FORMAT_INPLACE_SHUFFLED", {"HIPFFT_XT_FORMAT_INPLACE_SHUFFLED", "", CONV_NUMERIC_LITERAL, API_FFT, 1, HIP_UNSUPPORTED}},    //  0x03
+  {"CUFFT_XT_FORMAT_1D_INPUT_SHUFFLED",{"HIPFFT_XT_FORMAT_1D_INPUT_SHUFFLED","", CONV_NUMERIC_LITERAL, API_FFT, 1, HIP_UNSUPPORTED}},    //  0x04
+  {"CUFFT_FORMAT_UNDEFINED",           {"HIPFFT_FORMAT_UNDEFINED",           "", CONV_NUMERIC_LITERAL, API_FFT, 1, HIP_UNSUPPORTED}},    //  0x05
+
+  {"cufftXtCopyType_t",                {"hipfftXtCopyType_t",                "", CONV_TYPE, API_FFT, 1, HIP_UNSUPPORTED}},
+  {"cufftXtCopyType",                  {"hipfftXtCopyType",                  "", CONV_TYPE, API_FFT, 1, HIP_UNSUPPORTED}},
+  {"CUFFT_COPY_HOST_TO_DEVICE",        {"HIPFFT_COPY_HOST_TO_DEVICE",        "", CONV_NUMERIC_LITERAL, API_FFT, 1, HIP_UNSUPPORTED}},    //  0x00
+  {"CUFFT_COPY_DEVICE_TO_HOST",        {"HIPFFT_COPY_DEVICE_TO_HOST",        "", CONV_NUMERIC_LITERAL, API_FFT, 1, HIP_UNSUPPORTED}},    //  0x01
+  {"CUFFT_COPY_DEVICE_TO_DEVICE",      {"HIPFFT_COPY_DEVICE_TO_DEVICE",      "", CONV_NUMERIC_LITERAL, API_FFT, 1, HIP_UNSUPPORTED}},    //  0x02
+  {"CUFFT_COPY_UNDEFINED",             {"HIPFFT_COPY_UNDEFINED",             "", CONV_NUMERIC_LITERAL, API_FFT, 1, HIP_UNSUPPORTED}},    //  0x03
+
+  {"cufftXtQueryType_t",               {"hipfftXtQueryType_t",               "", CONV_TYPE, API_FFT, 1, HIP_UNSUPPORTED}},
+  {"cufftXtQueryType",                 {"hipfftXtQueryType",                 "", CONV_TYPE, API_FFT, 1, HIP_UNSUPPORTED}},
+  {"CUFFT_QUERY_1D_FACTORS",           {"HIPFFT_QUERY_1D_FACTORS",           "", CONV_NUMERIC_LITERAL, API_FFT, 1, HIP_UNSUPPORTED}},    //  0x00
+  {"CUFFT_QUERY_UNDEFINED",            {"HIPFFT_QUERY_UNDEFINED",            "", CONV_NUMERIC_LITERAL, API_FFT, 1, HIP_UNSUPPORTED}},    //  0x01
+
+  {"cufftXtWorkAreaPolicy_t",          {"hipfftXtWorkAreaPolicy_t",          "", CONV_TYPE, API_FFT, 1, HIP_UNSUPPORTED}},
+  {"cufftXtWorkAreaPolicy",            {"hipfftXtWorkAreaPolicy",            "", CONV_TYPE, API_FFT, 1, HIP_UNSUPPORTED}},
+  {"CUFFT_WORKAREA_MINIMAL",           {"HIPFFT_WORKAREA_MINIMAL",           "", CONV_NUMERIC_LITERAL, API_FFT, 1, HIP_UNSUPPORTED}},    //  0
+  {"CUFFT_WORKAREA_USER",              {"HIPFFT_WORKAREA_USER",              "", CONV_NUMERIC_LITERAL, API_FFT, 1, HIP_UNSUPPORTED}},    //  1
+  {"CUFFT_WORKAREA_PERFORMANCE",       {"HIPFFT_WORKAREA_PERFORMANCE",       "", CONV_NUMERIC_LITERAL, API_FFT, 1, HIP_UNSUPPORTED}},    //  2
+
+  {"cufftXtCallbackType_t",            {"hipfftXtCallbackType_t",            "", CONV_TYPE, API_FFT, 1}},
+  {"cufftXtCallbackType",              {"hipfftXtCallbackType",              "", CONV_TYPE, API_FFT, 1}},
+  {"CUFFT_CB_LD_COMPLEX",              {"HIPFFT_CB_LD_COMPLEX",              "", CONV_NUMERIC_LITERAL, API_FFT, 1}},    //  0x0
+  {"CUFFT_CB_LD_COMPLEX_DOUBLE",       {"HIPFFT_CB_LD_COMPLEX_DOUBLE",       "", CONV_NUMERIC_LITERAL, API_FFT, 1}},    //  0x1
+  {"CUFFT_CB_LD_REAL",                 {"HIPFFT_CB_LD_REAL",                 "", CONV_NUMERIC_LITERAL, API_FFT, 1}},    //  0x2
+  {"CUFFT_CB_LD_REAL_DOUBLE",          {"HIPFFT_CB_LD_REAL_DOUBLE",          "", CONV_NUMERIC_LITERAL, API_FFT, 1}},    //  0x3
+  {"CUFFT_CB_ST_COMPLEX",              {"HIPFFT_CB_ST_COMPLEX",              "", CONV_NUMERIC_LITERAL, API_FFT, 1}},    //  0x4
+  {"CUFFT_CB_ST_COMPLEX_DOUBLE",       {"HIPFFT_CB_ST_COMPLEX_DOUBLE",       "", CONV_NUMERIC_LITERAL, API_FFT, 1}},    //  0x5
+  {"CUFFT_CB_ST_REAL",                 {"HIPFFT_CB_ST_REAL",                 "", CONV_NUMERIC_LITERAL, API_FFT, 1}},    //  0x6
+  {"CUFFT_CB_ST_REAL_DOUBLE",          {"HIPFFT_CB_ST_REAL_DOUBLE",          "", CONV_NUMERIC_LITERAL, API_FFT, 1}},    //  0x7
+  {"CUFFT_CB_UNDEFINED",               {"HIPFFT_CB_UNDEFINED",               "", CONV_NUMERIC_LITERAL, API_FFT, 1}},    //  0x7
+
   // cuFFT types
   {"cufftReal",                        {"hipfftReal",                        "", CONV_TYPE, API_FFT, 1}},
   {"cufftDoubleReal",                  {"hipfftDoubleReal",                  "", CONV_TYPE, API_FFT, 1}},
   {"cufftComplex",                     {"hipfftComplex",                     "", CONV_TYPE, API_FFT, 1}},
   {"cufftDoubleComplex",               {"hipfftDoubleComplex",               "", CONV_TYPE, API_FFT, 1}},
   {"cufftHandle",                      {"hipfftHandle",                      "", CONV_TYPE, API_FFT, 1}},
+  {"cufftXt1dFactors_t",               {"hipfftXt1dFactors_t",               "", CONV_TYPE, API_FFT, 1, HIP_UNSUPPORTED}},
+  {"cufftXt1dFactors",                 {"hipfftXt1dFactors",                 "", CONV_TYPE, API_FFT, 1, HIP_UNSUPPORTED}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_FFT_TYPE_NAME_VER_MAP {
@@ -85,6 +126,10 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_FFT_TYPE_NAME_VER_MAP {
   {"CUFFT_VER_BUILD",                  {CUDA_102, CUDA_0, CUDA_0}},
   {"CUFFT_VERSION",                    {CUDA_102, CUDA_0, CUDA_0}},
   {"CUFFT_NOT_SUPPORTED",              {CUDA_80,  CUDA_0, CUDA_0}},
+  {"cufftXtWorkAreaPolicy_t",          {CUDA_92,  CUDA_0, CUDA_0}},
+  {"cufftXtWorkAreaPolicy",            {CUDA_92,  CUDA_0, CUDA_0}},
+  {"CUFFT_WORKAREA_MINIMAL",           {CUDA_92,  CUDA_0, CUDA_0}},
+  {"CUFFT_WORKAREA_USER",              {CUDA_92,  CUDA_0, CUDA_0}},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_FFT_TYPE_NAME_VER_MAP {
@@ -121,4 +166,15 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_FFT_TYPE_NAME_VER_MAP {
   {"hipfftComplex",                    {HIP_1070, HIP_0,    HIP_0   }},
   {"hipfftDoubleComplex",              {HIP_1070, HIP_0,    HIP_0   }},
   {"hipfftHandle",                     {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipfftXtCallbackType_t",           {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipfftXtCallbackType",             {HIP_4030, HIP_0,    HIP_0   }},
+  {"HIPFFT_CB_LD_COMPLEX",             {HIP_4030, HIP_0,    HIP_0   }},
+  {"HIPFFT_CB_LD_COMPLEX_DOUBLE",      {HIP_4030, HIP_0,    HIP_0   }},
+  {"HIPFFT_CB_LD_REAL",                {HIP_4030, HIP_0,    HIP_0   }},
+  {"HIPFFT_CB_LD_REAL_DOUBLE",         {HIP_4030, HIP_0,    HIP_0   }},
+  {"HIPFFT_CB_ST_COMPLEX",             {HIP_4030, HIP_0,    HIP_0   }},
+  {"HIPFFT_CB_ST_COMPLEX_DOUBLE",      {HIP_4030, HIP_0,    HIP_0   }},
+  {"HIPFFT_CB_ST_REAL",                {HIP_4030, HIP_0,    HIP_0   }},
+  {"HIPFFT_CB_ST_REAL_DOUBLE",         {HIP_4030, HIP_0,    HIP_0   }},
+  {"HIPFFT_CB_UNDEFINED",              {HIP_4030, HIP_0,    HIP_0   }},
 };

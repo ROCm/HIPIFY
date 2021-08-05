@@ -2186,6 +2186,7 @@ sub simpleSubstitutions {
     $ft{'include'} += s/\bcuda_profiler_api.h\b/hip\/hip_profile.h/g;
     $ft{'include'} += s/\bcuda_runtime_api.h\b/hip\/hip_runtime_api.h/g;
     $ft{'include'} += s/\bcuda_texture_types.h\b/hip\/hip_texture_types.h/g;
+    $ft{'include'} += s/\bcufftXt.h\b/hipfftXt.h/g;
     $ft{'include'} += s/\bcurand_discrete.h\b/hiprand_kernel.h/g;
     $ft{'include'} += s/\bcurand_discrete2.h\b/hiprand_kernel.h/g;
     $ft{'include'} += s/\bcurand_globals.h\b/hiprand_kernel.h/g;
@@ -2508,6 +2509,8 @@ sub simpleSubstitutions {
     $ft{'type'} += s/\bcufftResult_t\b/hipfftResult_t/g;
     $ft{'type'} += s/\bcufftType\b/hipfftType/g;
     $ft{'type'} += s/\bcufftType_t\b/hipfftType_t/g;
+    $ft{'type'} += s/\bcufftXtCallbackType\b/hipfftXtCallbackType/g;
+    $ft{'type'} += s/\bcufftXtCallbackType_t\b/hipfftXtCallbackType_t/g;
     $ft{'type'} += s/\bcurandDirectionVectors32_t\b/hiprandDirectionVectors32_t/g;
     $ft{'type'} += s/\bcurandDiscreteDistribution_st\b/hiprandDiscreteDistribution_st/g;
     $ft{'type'} += s/\bcurandDiscreteDistribution_t\b/hiprandDiscreteDistribution_t/g;
@@ -2780,6 +2783,15 @@ sub simpleSubstitutions {
     $ft{'numeric_literal'} += s/\bCUFFT_ALLOC_FAILED\b/HIPFFT_ALLOC_FAILED/g;
     $ft{'numeric_literal'} += s/\bCUFFT_C2C\b/HIPFFT_C2C/g;
     $ft{'numeric_literal'} += s/\bCUFFT_C2R\b/HIPFFT_C2R/g;
+    $ft{'numeric_literal'} += s/\bCUFFT_CB_LD_COMPLEX\b/HIPFFT_CB_LD_COMPLEX/g;
+    $ft{'numeric_literal'} += s/\bCUFFT_CB_LD_COMPLEX_DOUBLE\b/HIPFFT_CB_LD_COMPLEX_DOUBLE/g;
+    $ft{'numeric_literal'} += s/\bCUFFT_CB_LD_REAL\b/HIPFFT_CB_LD_REAL/g;
+    $ft{'numeric_literal'} += s/\bCUFFT_CB_LD_REAL_DOUBLE\b/HIPFFT_CB_LD_REAL_DOUBLE/g;
+    $ft{'numeric_literal'} += s/\bCUFFT_CB_ST_COMPLEX\b/HIPFFT_CB_ST_COMPLEX/g;
+    $ft{'numeric_literal'} += s/\bCUFFT_CB_ST_COMPLEX_DOUBLE\b/HIPFFT_CB_ST_COMPLEX_DOUBLE/g;
+    $ft{'numeric_literal'} += s/\bCUFFT_CB_ST_REAL\b/HIPFFT_CB_ST_REAL/g;
+    $ft{'numeric_literal'} += s/\bCUFFT_CB_ST_REAL_DOUBLE\b/HIPFFT_CB_ST_REAL_DOUBLE/g;
+    $ft{'numeric_literal'} += s/\bCUFFT_CB_UNDEFINED\b/HIPFFT_CB_UNDEFINED/g;
     $ft{'numeric_literal'} += s/\bCUFFT_D2Z\b/HIPFFT_D2Z/g;
     $ft{'numeric_literal'} += s/\bCUFFT_EXEC_FAILED\b/HIPFFT_EXEC_FAILED/g;
     $ft{'numeric_literal'} += s/\bCUFFT_FORWARD\b/HIPFFT_FORWARD/g;
@@ -4594,6 +4606,16 @@ sub warnUnsupportedFunctions {
         "curandDirectionVectors64_t",
         "curandDirectionVectorSet_t",
         "curandDirectionVectorSet",
+        "cufftXtWorkAreaPolicy_t",
+        "cufftXtWorkAreaPolicy",
+        "cufftXtSubFormat_t",
+        "cufftXtSubFormat",
+        "cufftXtQueryType_t",
+        "cufftXtQueryType",
+        "cufftXtCopyType_t",
+        "cufftXtCopyType",
+        "cufftXt1dFactors_t",
+        "cufftXt1dFactors",
         "cufftCompatibility_t",
         "cufftCompatibility",
         "cudnnWgradMode_t",
@@ -6262,12 +6284,27 @@ sub warnUnsupportedFunctions {
         "CUGLmap_flags",
         "CUGLDeviceList_enum",
         "CUGLDeviceList",
+        "CUFFT_XT_FORMAT_OUTPUT",
+        "CUFFT_XT_FORMAT_INPUT",
+        "CUFFT_XT_FORMAT_INPLACE_SHUFFLED",
+        "CUFFT_XT_FORMAT_INPLACE",
+        "CUFFT_XT_FORMAT_1D_INPUT_SHUFFLED",
+        "CUFFT_WORKAREA_USER",
+        "CUFFT_WORKAREA_PERFORMANCE",
+        "CUFFT_WORKAREA_MINIMAL",
         "CUFFT_VER_PATCH",
         "CUFFT_VER_MINOR",
         "CUFFT_VER_MAJOR",
         "CUFFT_VER_BUILD",
         "CUFFT_VERSION",
+        "CUFFT_QUERY_UNDEFINED",
+        "CUFFT_QUERY_1D_FACTORS",
         "CUFFT_LICENSE_ERROR",
+        "CUFFT_FORMAT_UNDEFINED",
+        "CUFFT_COPY_UNDEFINED",
+        "CUFFT_COPY_HOST_TO_DEVICE",
+        "CUFFT_COPY_DEVICE_TO_HOST",
+        "CUFFT_COPY_DEVICE_TO_DEVICE",
         "CUFFT_COMPATIBILITY_FFTW_PADDING",
         "CUFFT_COMPATIBILITY_DEFAULT",
         "CUDNN_WGRAD_MODE_SET",
