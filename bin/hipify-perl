@@ -1691,6 +1691,14 @@ sub simpleSubstitutions {
     $ft{'library'} += s/\bcudnnSetTensorNdDescriptor\b/hipdnnSetTensorNdDescriptor/g;
     $ft{'library'} += s/\bcudnnSoftmaxBackward\b/hipdnnSoftmaxBackward/g;
     $ft{'library'} += s/\bcudnnSoftmaxForward\b/hipdnnSoftmaxForward/g;
+    $ft{'library'} += s/\bcufftCallbackLoadC\b/hipfftCallbackLoadC/g;
+    $ft{'library'} += s/\bcufftCallbackLoadD\b/hipfftCallbackLoadD/g;
+    $ft{'library'} += s/\bcufftCallbackLoadR\b/hipfftCallbackLoadR/g;
+    $ft{'library'} += s/\bcufftCallbackLoadZ\b/hipfftCallbackLoadZ/g;
+    $ft{'library'} += s/\bcufftCallbackStoreC\b/hipfftCallbackStoreC/g;
+    $ft{'library'} += s/\bcufftCallbackStoreD\b/hipfftCallbackStoreD/g;
+    $ft{'library'} += s/\bcufftCallbackStoreR\b/hipfftCallbackStoreR/g;
+    $ft{'library'} += s/\bcufftCallbackStoreZ\b/hipfftCallbackStoreZ/g;
     $ft{'library'} += s/\bcufftCreate\b/hipfftCreate/g;
     $ft{'library'} += s/\bcufftDestroy\b/hipfftDestroy/g;
     $ft{'library'} += s/\bcufftEstimate1d\b/hipfftEstimate1d/g;
@@ -1723,6 +1731,9 @@ sub simpleSubstitutions {
     $ft{'library'} += s/\bcufftSetAutoAllocation\b/hipfftSetAutoAllocation/g;
     $ft{'library'} += s/\bcufftSetStream\b/hipfftSetStream/g;
     $ft{'library'} += s/\bcufftSetWorkArea\b/hipfftSetWorkArea/g;
+    $ft{'library'} += s/\bcufftXtClearCallback\b/hipfftXtClearCallback/g;
+    $ft{'library'} += s/\bcufftXtSetCallback\b/hipfftXtSetCallback/g;
+    $ft{'library'} += s/\bcufftXtSetCallbackSharedSize\b/hipfftXtSetCallbackSharedSize/g;
     $ft{'library'} += s/\bcurandCreateGenerator\b/hiprandCreateGenerator/g;
     $ft{'library'} += s/\bcurandCreateGeneratorHost\b/hiprandCreateGeneratorHost/g;
     $ft{'library'} += s/\bcurandCreatePoissonDistribution\b/hiprandCreatePoissonDistribution/g;
@@ -4610,8 +4621,25 @@ sub warnUnsupportedFunctions {
         "cufftXtWorkAreaPolicy",
         "cufftXtSubFormat_t",
         "cufftXtSubFormat",
+        "cufftXtSetWorkAreaPolicy",
+        "cufftXtSetWorkArea",
+        "cufftXtSetGPUs",
         "cufftXtQueryType_t",
         "cufftXtQueryType",
+        "cufftXtQueryPlan",
+        "cufftXtMemcpy",
+        "cufftXtMalloc",
+        "cufftXtMakePlanMany",
+        "cufftXtGetSizeMany",
+        "cufftXtFree",
+        "cufftXtExecDescriptorZ2Z",
+        "cufftXtExecDescriptorZ2D",
+        "cufftXtExecDescriptorR2C",
+        "cufftXtExecDescriptorD2Z",
+        "cufftXtExecDescriptorC2R",
+        "cufftXtExecDescriptorC2C",
+        "cufftXtExecDescriptor",
+        "cufftXtExec",
         "cufftXtCopyType_t",
         "cufftXtCopyType",
         "cufftXt1dFactors_t",

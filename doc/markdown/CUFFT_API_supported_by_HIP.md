@@ -89,6 +89,14 @@
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|
+|`cufftCallbackLoadC`| | | |`hipfftCallbackLoadC`|4.3.0| | |
+|`cufftCallbackLoadD`| | | |`hipfftCallbackLoadD`|4.3.0| | |
+|`cufftCallbackLoadR`| | | |`hipfftCallbackLoadR`|4.3.0| | |
+|`cufftCallbackLoadZ`| | | |`hipfftCallbackLoadZ`|4.3.0| | |
+|`cufftCallbackStoreC`| | | |`hipfftCallbackStoreC`|4.3.0| | |
+|`cufftCallbackStoreD`| | | |`hipfftCallbackStoreD`|4.3.0| | |
+|`cufftCallbackStoreR`| | | |`hipfftCallbackStoreR`|4.3.0| | |
+|`cufftCallbackStoreZ`| | | |`hipfftCallbackStoreZ`|4.3.0| | |
 |`cufftCreate`| | | |`hipfftCreate`|1.7.0| | |
 |`cufftDestroy`| | | |`hipfftDestroy`|1.7.0| | |
 |`cufftEstimate1d`| | | |`hipfftEstimate1d`|1.7.0| | |
@@ -121,6 +129,26 @@
 |`cufftSetAutoAllocation`| | | |`hipfftSetAutoAllocation`|1.7.0| | |
 |`cufftSetStream`| | | |`hipfftSetStream`|1.7.0| | |
 |`cufftSetWorkArea`| | | |`hipfftSetWorkArea`|1.7.0| | |
+|`cufftXtClearCallback`| | | |`hipfftXtClearCallback`|4.3.0| | |
+|`cufftXtExec`|8.0| | | | | | |
+|`cufftXtExecDescriptor`| | | | | | | |
+|`cufftXtExecDescriptorC2C`| | | | | | | |
+|`cufftXtExecDescriptorC2R`| | | | | | | |
+|`cufftXtExecDescriptorD2Z`| | | | | | | |
+|`cufftXtExecDescriptorR2C`| | | | | | | |
+|`cufftXtExecDescriptorZ2D`| | | | | | | |
+|`cufftXtExecDescriptorZ2Z`| | | | | | | |
+|`cufftXtFree`| | | | | | | |
+|`cufftXtGetSizeMany`|8.0| | | | | | |
+|`cufftXtMakePlanMany`|8.0| | | | | | |
+|`cufftXtMalloc`| | | | | | | |
+|`cufftXtMemcpy`| | | | | | | |
+|`cufftXtQueryPlan`| | | | | | | |
+|`cufftXtSetCallback`| | | |`hipfftXtSetCallback`|4.3.0| | |
+|`cufftXtSetCallbackSharedSize`| | | |`hipfftXtSetCallbackSharedSize`|4.3.0| | |
+|`cufftXtSetGPUs`| | | | | | | |
+|`cufftXtSetWorkArea`| | | | | | | |
+|`cufftXtSetWorkAreaPolicy`|9.2| | | | | | |
 
 
 \*A - Added; D - Deprecated; R - Removed
