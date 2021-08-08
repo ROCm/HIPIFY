@@ -223,6 +223,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_TYPE_NAME_MAP {
   {"cusparseSpSMAlg_t",                         {"hipsparseSpSMAlg_t",                         "", CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED}},
   {"CUSPARSE_SPSM_ALG_DEFAULT",                 {"HIPSPARSE_SPSM_ALG_DEFAULT",                 "", CONV_NUMERIC_LITERAL, API_SPARSE, 4, HIP_UNSUPPORTED}},
 
+  {"cusparseSDDMMAlg_t",                        {"hipsparseSDDMMAlg_t",                        "", CONV_TYPE, API_SPARSE, 4}},
+  {"CUSPARSE_SDDMM_ALG_DEFAULT",                {"HIPSPARSE_SDDMM_ALG_DEFAULT",                 "", CONV_NUMERIC_LITERAL, API_SPARSE, 4}},
+
   // 3. Defines
   {"CUSPARSE_VER_MAJOR",                        {"HIPSPARSE_VER_MAJOR",                        "", CONV_DEFINE, API_SPARSE, 4, HIP_UNSUPPORTED}},
   {"CUSPARSE_VER_MINOR",                        {"HIPSPARSE_VER_MINOR",                        "", CONV_DEFINE, API_SPARSE, 4, HIP_UNSUPPORTED}},
@@ -324,6 +327,8 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SPARSE_TYPE_NAME_VER_MAP {
   {"cusparseSpSMDescr_t",                       {CUDA_113, CUDA_0,   CUDA_0  }},
   {"CUSPARSE_SPGEMM_CSR_ALG_DETERMINITIC",      {CUDA_113, CUDA_0,   CUDA_0  }},
   {"CUSPARSE_SPGEMM_CSR_ALG_NONDETERMINITIC",   {CUDA_113, CUDA_0,   CUDA_0  }},
+  {"cusparseSDDMMAlg_t",                        {CUDA_112, CUDA_0,   CUDA_0  }},
+  {"CUSPARSE_SDDMM_ALG_DEFAULT",                {CUDA_112, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_TYPE_NAME_VER_MAP {
@@ -428,4 +433,6 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_TYPE_NAME_VER_MAP {
   {"HIPSPARSE_SPMM_CSR_ALG2",                    {HIP_4020, HIP_0,    HIP_0   }},
   {"hipsparseSparseToDenseAlg_t",                {HIP_4020, HIP_0,    HIP_0   }},
   {"HIPSPARSE_SPARSETODENSE_ALG_DEFAULT",        {HIP_4020, HIP_0,    HIP_0   }},
+  {"hipsparseSDDMMAlg_t",                        {HIP_4030, HIP_0,    HIP_0   }},
+  {"HIPSPARSE_SDDMM_ALG_DEFAULT",                {HIP_4030, HIP_0,    HIP_0   }},
 };
