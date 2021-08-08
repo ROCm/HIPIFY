@@ -26,6 +26,7 @@
 |`CUSPARSE_DIRECTION_ROW`| | | |`HIPSPARSE_DIRECTION_ROW`|3.2.0| | |
 |`CUSPARSE_FILL_MODE_LOWER`| | | |`HIPSPARSE_FILL_MODE_LOWER`|1.9.2| | |
 |`CUSPARSE_FILL_MODE_UPPER`| | | |`HIPSPARSE_FILL_MODE_UPPER`|1.9.2| | |
+|`CUSPARSE_FORMAT_BLOCKED_ELL`|11.2| | | | | | |
 |`CUSPARSE_FORMAT_COO`|10.1| | |`HIPSPARSE_FORMAT_COO`|4.1.0| | |
 |`CUSPARSE_FORMAT_COO_AOS`|10.2| | |`HIPSPARSE_FORMAT_COO_AOS`|4.1.0| | |
 |`CUSPARSE_FORMAT_CSC`|10.1| | |`HIPSPARSE_FORMAT_CSC`|4.1.0| | |
@@ -60,11 +61,11 @@
 |`CUSPARSE_SPGEMM_DEFAULT`|11.0| | |`HIPSPARSE_SPGEMM_DEFAULT`|4.1.0| | |
 |`CUSPARSE_SPMAT_DIAG_TYPE`|11.3| | | | | | |
 |`CUSPARSE_SPMAT_FILL_MODE`|11.3| | | | | | |
-|`CUSPARSE_SPMMA_ALG1`|11.1| | | | | | |
-|`CUSPARSE_SPMMA_ALG2`|11.1| | | | | | |
-|`CUSPARSE_SPMMA_ALG3`|11.1| | | | | | |
-|`CUSPARSE_SPMMA_ALG4`|11.1| | | | | | |
-|`CUSPARSE_SPMMA_PREPROCESS`|11.1| | | | | | |
+|`CUSPARSE_SPMMA_ALG1`|11.1| |11.2| | | | |
+|`CUSPARSE_SPMMA_ALG2`|11.1| |11.2| | | | |
+|`CUSPARSE_SPMMA_ALG3`|11.1| |11.2| | | | |
+|`CUSPARSE_SPMMA_ALG4`|11.1| |11.2| | | | |
+|`CUSPARSE_SPMMA_PREPROCESS`|11.1| |11.2| | | | |
 |`CUSPARSE_SPMM_ALG_DEFAULT`|11.0| | |`HIPSPARSE_SPMM_ALG_DEFAULT`|4.2.0| | |
 |`CUSPARSE_SPMM_COO_ALG1`|11.0| | |`HIPSPARSE_SPMM_COO_ALG1`|4.2.0| | |
 |`CUSPARSE_SPMM_COO_ALG2`|11.0| | |`HIPSPARSE_SPMM_COO_ALG2`|4.2.0| | |
@@ -267,8 +268,8 @@
 |`cusparseChybmv`| |10.2|11.0|`hipsparseChybmv`|3.1.0| | |
 |`cusparseChybsv_analysis`| |10.2|11.0| | | | |
 |`cusparseChybsv_solve`| |10.2|11.0| | | | |
-|`cusparseCsrmvEx`|8.0| | | | | | |
-|`cusparseCsrmvEx_bufferSize`|8.0| | | | | | |
+|`cusparseCsrmvEx`|8.0|11.2| | | | | |
+|`cusparseCsrmvEx_bufferSize`|8.0|11.2| | | | | |
 |`cusparseCsrsv_analysisEx`|8.0|10.2|11.0| | | | |
 |`cusparseCsrsv_solveEx`|8.0|10.2|11.0| | | | |
 |`cusparseDbsrmv`| | | |`hipsparseDbsrmv`|3.5.0| | |
@@ -755,14 +756,16 @@
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|
 |`cusparseAxpby`|11.0| | |`hipsparseAxpby`|4.1.0| | |
-|`cusparseConstrainedGeMM`|10.2| | | | | | |
-|`cusparseConstrainedGeMM_bufferSize`|10.2| | | | | | |
-|`cusparseCooAoSGet`|10.2| | |`hipsparseCooAoSGet`|4.1.0| | |
+|`cusparseBlockedEllGet`|11.2| | | | | | |
+|`cusparseConstrainedGeMM`|10.2|11.2| | | | | |
+|`cusparseConstrainedGeMM_bufferSize`|10.2|11.2| | | | | |
+|`cusparseCooAoSGet`|10.2|11.2| |`hipsparseCooAoSGet`|4.1.0| | |
 |`cusparseCooGet`|10.1| | |`hipsparseCooGet`|4.1.0| | |
 |`cusparseCooSetPointers`|11.1| | |`hipsparseCooSetPointers`|4.2.0| | |
 |`cusparseCooSetStridedBatch`|11.0| | | | | | |
+|`cusparseCreateBlockedEll`|11.2| | | | | | |
 |`cusparseCreateCoo`|10.1| | |`hipsparseCreateCoo`|4.1.0| | |
-|`cusparseCreateCooAoS`|10.2| | |`hipsparseCreateCooAoS`|4.1.0| | |
+|`cusparseCreateCooAoS`|10.2|11.2| |`hipsparseCreateCooAoS`|4.1.0| | |
 |`cusparseCreateCsc`|11.1| | |`hipsparseCreateCsc`|4.2.0| | |
 |`cusparseCreateCsr`|10.2| | |`hipsparseCreateCsr`|4.1.0| | |
 |`cusparseCreateDnMat`|10.1| | |`hipsparseCreateDnMat`|4.2.0| | |
@@ -804,6 +807,7 @@
 |`cusparseSpGEMMreuse_workEstimation`|11.3| | | | | | |
 |`cusparseSpMM`|10.1| | |`hipsparseSpMM`|4.2.0| | |
 |`cusparseSpMM_bufferSize`|10.1| | |`hipsparseSpMM_bufferSize`|4.2.0| | |
+|`cusparseSpMM_preprocess`|11.2| | |`hipsparseSpMM_preprocess`| | | |
 |`cusparseSpMV`|10.2| | |`hipsparseSpMV`|4.1.0| | |
 |`cusparseSpMV_bufferSize`|10.2| | |`hipsparseSpMV_bufferSize`|4.1.0| | |
 |`cusparseSpMatGetAttribute`|11.3| | | | | | |
