@@ -225,6 +225,8 @@ my %deprecated_funcs = (
     "cusparseDaxpyi" => "11.0",
     "cusparseCsrsv_solveEx" => "10.2",
     "cusparseCsrsv_analysisEx" => "10.2",
+    "cusparseCsrmvEx_bufferSize" => "11.2",
+    "cusparseCsrmvEx" => "11.2",
     "cusparseCsrilu0Ex" => "10.2",
     "cusparseCsr2cscEx" => "10.2",
     "cusparseCsctr" => "11.0",
@@ -233,6 +235,10 @@ my %deprecated_funcs = (
     "cusparseCreateCsrsv2Info" => "11.3",
     "cusparseCreateCsrsm2Info" => "11.3",
     "cusparseCreateCsrgemm2Info" => "11.0",
+    "cusparseCreateCooAoS" => "11.2",
+    "cusparseCooAoSGet" => "11.2",
+    "cusparseConstrainedGeMM_bufferSize" => "11.2",
+    "cusparseConstrainedGeMM" => "11.2",
     "cusparseChybsv_solve" => "10.2",
     "cusparseChybsv_analysis" => "10.2",
     "cusparseChybmv" => "10.2",
@@ -666,6 +672,11 @@ my %removed_funcs = (
     "CU_GRAPH_NODE_TYPE_COUNT" => "11.0",
     "CU_DEVICE_P2P_ATTRIBUTE_ARRAY_ACCESS_ACCESS_SUPPORTED" => "10.1",
     "CU_COMPUTEMODE_EXCLUSIVE" => "8.0",
+    "CUSPARSE_SPMMA_PREPROCESS" => "11.2",
+    "CUSPARSE_SPMMA_ALG4" => "11.2",
+    "CUSPARSE_SPMMA_ALG3" => "11.2",
+    "CUSPARSE_SPMMA_ALG2" => "11.2",
+    "CUSPARSE_SPMMA_ALG1" => "11.2",
     "CUSPARSE_HYB_PARTITION_USER" => "11.0",
     "CUSPARSE_HYB_PARTITION_MAX" => "11.0",
     "CUSPARSE_HYB_PARTITION_AUTO" => "11.0",
@@ -2067,6 +2078,7 @@ sub simpleSubstitutions {
     $ft{'library'} += s/\bcusparseSpGEMM_workEstimation\b/hipsparseSpGEMM_workEstimation/g;
     $ft{'library'} += s/\bcusparseSpMM\b/hipsparseSpMM/g;
     $ft{'library'} += s/\bcusparseSpMM_bufferSize\b/hipsparseSpMM_bufferSize/g;
+    $ft{'library'} += s/\bcusparseSpMM_preprocess\b/hipsparseSpMM_preprocess/g;
     $ft{'library'} += s/\bcusparseSpMV\b/hipsparseSpMV/g;
     $ft{'library'} += s/\bcusparseSpMV_bufferSize\b/hipsparseSpMV_bufferSize/g;
     $ft{'library'} += s/\bcusparseSpMatGetFormat\b/hipsparseSpMatGetFormat/g;
@@ -4546,6 +4558,7 @@ sub warnUnsupportedFunctions {
         "cusparseCsr2CscAlg_t",
         "cusparseCreateSolveAnalysisInfo",
         "cusparseCreateBsrsm2Info",
+        "cusparseCreateBlockedEll",
         "cusparseCooSetStridedBatch",
         "cusparseContext",
         "cusparseConstrainedGeMM_bufferSize",
@@ -4585,6 +4598,7 @@ sub warnUnsupportedFunctions {
         "cusparseCbsrsm2_analysis",
         "cusparseCbsrilu02_bufferSizeExt",
         "cusparseCbsric02_bufferSizeExt",
+        "cusparseBlockedEllGet",
         "cusparseAlgMode_t",
         "curand_mtgp32_specific",
         "curand_mtgp32_single_specific",
@@ -6277,6 +6291,7 @@ sub warnUnsupportedFunctions {
         "CUSPARSE_SPMAT_DIAG_TYPE",
         "CUSPARSE_SPGEMM_CSR_ALG_NONDETERMINITIC",
         "CUSPARSE_SPGEMM_CSR_ALG_DETERMINITIC",
+        "CUSPARSE_FORMAT_BLOCKED_ELL",
         "CUSPARSE_DENSETOSPARSE_ALG_DEFAULT",
         "CUSPARSE_CSR2CSC_ALG2",
         "CUSPARSE_CSR2CSC_ALG1",
