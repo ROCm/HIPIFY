@@ -157,6 +157,8 @@
 |`cusparseSpSMDescr`|11.3| | | | | | |
 |`cusparseSpSMDescr_t`|11.3| | | | | | |
 |`cusparseSpSVAlg_t`|11.3| | | | | | |
+|`cusparseSpSVDescr`|11.3| | | | | | |
+|`cusparseSpSVDescr_t`|11.3| | | | | | |
 |`cusparseSpVecDescr`|10.2| | | | | | |
 |`cusparseSpVecDescr_t`|10.2| | |`hipsparseSpVecDescr_t`|4.1.0| | |
 |`cusparseSparseToDenseAlg_t`|11.1| | |`hipsparseSparseToDenseAlg_t`|4.2.0| | |
