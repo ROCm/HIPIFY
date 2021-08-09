@@ -39,6 +39,7 @@
 |`CUDA_ERROR_DEINITIALIZED`| | | |`hipErrorDeinitialized`|1.6.0| | |
 |`CUDA_ERROR_DEVICE_NOT_LICENSED`|11.1| | | | | | |
 |`CUDA_ERROR_ECC_UNCORRECTABLE`| | | |`hipErrorECCNotCorrectable`|1.6.0| | |
+|`CUDA_ERROR_EXTERNAL_DEVICE`|11.4| | | | | | |
 |`CUDA_ERROR_FILE_NOT_FOUND`| | | |`hipErrorFileNotFound`|1.6.0| | |
 |`CUDA_ERROR_GRAPH_EXEC_UPDATE_FAILURE`|10.2| | | | | | |
 |`CUDA_ERROR_HARDWARE_STACK_ERROR`| | | | | | | |

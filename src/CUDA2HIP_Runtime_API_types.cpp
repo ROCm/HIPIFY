@@ -952,6 +952,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaErrorTimeout",                                                 {"hipErrorTimeout",                                          "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 909
   // CUDA_ERROR_GRAPH_EXEC_UPDATE_FAILURE
   {"cudaErrorGraphExecUpdateFailure",                                  {"hipErrorGraphExecUpdateFailure",                           "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 910
+  // CUDA_ERROR_EXTERNAL_DEVICE
+  {"cudaErrorExternalDevice",                                          {"hipErrorExternalDevice",                                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 911
   // CUDA_ERROR_UNKNOWN
   {"cudaErrorUnknown",                                                 {"hipErrorUnknown",                                          "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 999
   // Deprecated since CUDA 4.1
