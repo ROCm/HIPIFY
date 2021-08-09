@@ -1540,6 +1540,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUDA_ERROR_TIMEOUT",                                               {"hipErrorTimeout",                                          "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 909
   // cudaErrorGraphExecUpdateFailure
   {"CUDA_ERROR_GRAPH_EXEC_UPDATE_FAILURE",                             {"hipErrorGraphExecUpdateFailure",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 910
+  // cudaErrorExternalDevice
+  {"CUDA_ERROR_EXTERNAL_DEVICE",                                       {"hipErrorExternalDevice",                                   "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 911
   // cudaErrorUnknown
   {"CUDA_ERROR_UNKNOWN",                                               {"hipErrorUnknown",                                          "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 999
 
@@ -2669,6 +2671,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_TYPE_NAME_VER_MAP {
   {"CUgraphInstantiate_flags",                                         {CUDA_114, CUDA_0,   CUDA_0  }},
   {"CUgraphInstantiate_flags_enum",                                    {CUDA_114, CUDA_0,   CUDA_0  }},
   {"CUDA_GRAPH_INSTANTIATE_FLAG_AUTO_FREE_ON_LAUNCH",                  {CUDA_114, CUDA_0,   CUDA_0  }},
+  {"CUDA_ERROR_EXTERNAL_DEVICE",                                       {CUDA_114, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {

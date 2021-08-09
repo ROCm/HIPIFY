@@ -853,6 +853,7 @@ Unsupported
 |`cudaErrorDuplicateTextureName`| | | | | | | |
 |`cudaErrorDuplicateVariableName`| | | | | | | |
 |`cudaErrorECCUncorrectable`| | | |`hipErrorECCNotCorrectable`|1.6.0| | |
+|`cudaErrorExternalDevice`| | | | | | | |
 |`cudaErrorFileNotFound`|10.1| | |`hipErrorFileNotFound`|1.6.0| | |
 |`cudaErrorGraphExecUpdateFailure`|10.2| | | | | | |
 |`cudaErrorHardwareStackError`| | | | | | | |
