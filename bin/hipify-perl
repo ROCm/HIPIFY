@@ -4436,6 +4436,8 @@ sub warnUnsupportedFunctions {
         "cusparseSpSV_createDescr",
         "cusparseSpSV_bufferSize",
         "cusparseSpSV_analysis",
+        "cusparseSpSVDescr_t",
+        "cusparseSpSVDescr",
         "cusparseSpSVAlg_t",
         "cusparseSpSM_solve",
         "cusparseSpSM_destroyDescr",
