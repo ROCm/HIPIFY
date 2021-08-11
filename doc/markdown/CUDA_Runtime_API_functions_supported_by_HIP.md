@@ -847,7 +847,6 @@ Unsupported
 |`cudaErrorDeviceAlreadyInUse`| | | |`hipErrorContextAlreadyInUse`|1.6.0| | |
 |`cudaErrorDeviceNotLicensed`|11.1| | | | | | |
 |`cudaErrorDeviceUninitialized`|10.2| | |`hipErrorInvalidContext`|1.6.0| | |
-|`cudaErrorDeviceUninitilialized`|10.1| |10.2|`hipErrorInvalidContext`|1.6.0| | |
 |`cudaErrorDevicesUnavailable`| | | | | | | |
 |`cudaErrorDuplicateSurfaceName`| | | | | | | |
 |`cudaErrorDuplicateTextureName`| | | | | | | |
