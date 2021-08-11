@@ -811,9 +811,6 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaErrorInvalidKernelImage",                                      {"hipErrorInvalidImage",                                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 200
   // CUDA_ERROR_INVALID_CONTEXT
   {"cudaErrorDeviceUninitialized",                                     {"hipErrorInvalidContext",                                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 201
-  // Typo fixed in 10.2
-  // CUDA_ERROR_INVALID_CONTEXT
-  {"cudaErrorDeviceUninitilialized",                                   {"hipErrorInvalidContext",                                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 201
   // CUDA_ERROR_MAP_FAILED
   {"cudaErrorMapBufferObjectFailed",                                   {"hipErrorMapFailed",                                        "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 205
   // CUDA_ERROR_UNMAP_FAILED
@@ -1947,7 +1944,6 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_TYPE_NAME_VER_MAP 
   {"cudaErrorNotYetImplemented",                                       {CUDA_0,   CUDA_41,  CUDA_0  }},
   {"cudaErrorMemoryValueTooLarge",                                     {CUDA_0,   CUDA_31,  CUDA_0  }},
   {"cudaErrorPriorLaunchFailure",                                      {CUDA_0,   CUDA_31,  CUDA_0  }},
-  {"cudaErrorDeviceUninitilialized",                                   {CUDA_101, CUDA_0,   CUDA_102}},
   {"cudaErrorArrayIsMapped",                                           {CUDA_101, CUDA_0,   CUDA_0  }},
   {"cudaErrorAlreadyMapped",                                           {CUDA_101, CUDA_0,   CUDA_0  }},
   {"cudaErrorDeviceUninitialized",                                     {CUDA_102, CUDA_0,   CUDA_0  }},
