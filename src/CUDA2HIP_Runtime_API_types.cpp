@@ -213,10 +213,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
 
   // 2. Unions
 
-  //
+  // CUstreamAttrValue
   {"cudaStreamAttrValue",                                              {"hipStreamAttrValue",                                       "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
 
-  //
+  // CUkernelNodeAttrValue
   {"cudaKernelNodeAttrValue",                                          {"hipKernelNodeAttrValue",                                   "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
 
   // 3. Enums
@@ -1445,38 +1445,38 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // no analogue
   {"PATCH_LEVEL",                                                      {"hipLibraryPatchVersion",                                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}},
 
-  //
+  // CUaccessProperty
   {"cudaAccessProperty",                                               {"hipAccessProperty",                                        "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
-  //
+  // CU_ACCESS_PROPERTY_NORMAL
   {"cudaAccessPropertyNormal",                                         {"hipAccessPropertyNormal",                                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 0
-  //
+  // CU_ACCESS_PROPERTY_STREAMING
   {"cudaAccessPropertyStreaming",                                      {"hipAccessPropertyStreaming",                               "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 1
-  //
+  // CU_ACCESS_PROPERTY_PERSISTING
   {"cudaAccessPropertyPersisting",                                     {"hipAccessPropertyPersisting",                              "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 2
 
-  //
+  // CUsynchronizationPolicy
   {"cudaSynchronizationPolicy",                                        {"hipSynchronizationPolicy",                                 "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
-  //
+  // CU_SYNC_POLICY_AUTO
   {"cudaSyncPolicyAuto",                                               {"hipSyncPolicyAuto",                                        "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 1
-  //
+  // CU_SYNC_POLICY_SPIN
   {"cudaSyncPolicySpin",                                               {"hipSyncPolicySpin",                                        "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 2
-  //
+  // CU_SYNC_POLICY_YIELD
   {"cudaSyncPolicyYield",                                              {"hipSyncPolicyYield",                                       "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 3
-  //
+  // CU_SYNC_POLICY_BLOCKING_SYNC
   {"cudaSyncPolicyBlockingSync",                                       {"hipSyncPolicyBlockingSync",                                "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 4
 
-  //
+  // CUstreamAttrID
   {"cudaStreamAttrID",                                                 {"hipStreamAttrID",                                          "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
-  //
+  // CU_STREAM_ATTRIBUTE_ACCESS_POLICY_WINDOW
   {"cudaStreamAttributeAccessPolicyWindow",                            {"hipStreamAttributeAccessPolicyWindow",                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 1
-  //
+  // CU_STREAM_ATTRIBUTE_SYNCHRONIZATION_POLICY
   {"cudaStreamAttributeSynchronizationPolicy",                         {"hipStreamAttributeSynchronizationPolicy",                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 3
 
-  //
+  // CUkernelNodeAttrID
   {"cudaKernelNodeAttrID",                                             {"hipKernelNodeAttrID",                                      "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
-  //
+  // CU_KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW
   {"cudaKernelNodeAttributeAccessPolicyWindow",                        {"hipKernelNodeAttributeAccessPolicyWindow",                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 1
-  //
+  // CU_KERNEL_NODE_ATTRIBUTE_COOPERATIVE
   {"cudaKernelNodeAttributeCooperative",                               {"hipKernelNodeAttributeCooperative",                        "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 2
 
   // CUmemPool_attribute
@@ -1591,11 +1591,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CU_FLUSH_GPU_DIRECT_RDMA_WRITES_TARGET_CURRENT_CTX
   {"cudaFlushGPUDirectRDMAWritesTargetCurrentDevice",                  {"hipFlushGPUDirectRDMAWritesTargetCurrentDevice",           "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}},
 
-  // no analogue
+  // CUdriverProcAddress_flags
   {"cudaGetDriverEntryPointFlags",                                     {"hipGetDriverEntryPointFlags",                              "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
   // cudaGetDriverEntryPointFlags enum values
+  // CU_GET_PROC_ADDRESS_DEFAULT
   {"cudaEnableDefault",                                                {"hipEnableDefault",                                         "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 0x0
+  // CU_GET_PROC_ADDRESS_LEGACY_STREAM
   {"cudaEnableLegacyStream",                                           {"hipEnableLegacyStream",                                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 0x1
+  // CU_GET_PROC_ADDRESS_PER_THREAD_DEFAULT_STREAM
   {"cudaEnablePerThreadDefaultStream",                                 {"hipEnablePerThreadDefaultStream",                          "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 0x2
 
   // CUgraphDebugDot_flags
