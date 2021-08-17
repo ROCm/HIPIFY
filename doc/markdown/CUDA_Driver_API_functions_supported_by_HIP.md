@@ -476,11 +476,11 @@
 |`CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D11_FENCE`|10.2| | | | | | |
 |`CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D11_KEYED_MUTEX`|10.2| | | | | | |
 |`CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D11_KEYED_MUTEX_KMT`|10.2| | | | | | |
-|`CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE`|10.0| | |`hipExternalSemaphoreHandleTypeD3D12Fence`|4.3.0| | |
+|`CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE`|10.0| | | | | | |
 |`CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_NVSCISYNC`|10.2| | | | | | |
-|`CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD`|10.0| | |`hipExternalSemaphoreHandleTypeOpaqueFd`|4.3.0| | |
-|`CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32`|10.0| | |`hipExternalSemaphoreHandleTypeOpaqueWin32`|4.3.0| | |
-|`CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT`|10.0| | |`hipExternalSemaphoreHandleTypeOpaqueWin32Kmt`|4.3.0| | |
+|`CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD`|10.0| | | | | | |
+|`CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32`|10.0| | | | | | |
+|`CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT`|10.0| | | | | | |
 |`CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_TIMELINE_SEMAPHORE_FD`|11.2| | | | | | |
 |`CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_TIMELINE_SEMAPHORE_WIN32`|11.2| | | | | | |
 |`CU_FLUSH_GPU_DIRECT_RDMA_WRITES_OPTION_HOST`|11.3| | | | | | |
@@ -611,7 +611,7 @@
 |`CU_LIMIT_MAX`| | | | | | | |
 |`CU_LIMIT_MAX_L2_FETCH_GRANULARITY`|10.0| | | | | | |
 |`CU_LIMIT_PERSISTING_L2_CACHE_SIZE`|11.0| | | | | | |
-|`CU_LIMIT_PRINTF_FIFO_SIZE`| | | |`hipLimitPrintfFifoSize`|4.3.0| | |
+|`CU_LIMIT_PRINTF_FIFO_SIZE`| | | | | | | |
 |`CU_LIMIT_STACK_SIZE`| | | | | | | |
 |`CU_MEMHOSTALLOC_DEVICEMAP`| | | |`hipHostMallocMapped`|1.6.0| | |
 |`CU_MEMHOSTALLOC_PORTABLE`| | | |`hipHostMallocPortable`|1.6.0| | |
@@ -881,8 +881,8 @@
 |`CUexternalMemoryHandleType`|10.0| | |`hipExternalMemoryHandleType`|4.3.0| | |
 |`CUexternalMemoryHandleType_enum`|10.0| | |`hipExternalMemoryHandleType_enum`|4.3.0| | |
 |`CUexternalSemaphore`|10.0| | |`hipExternalSemaphore_t`|4.3.0| | |
-|`CUexternalSemaphoreHandleType`|10.0| | |`hipExternalSemaphoreHandleType`|4.3.0| | |
-|`CUexternalSemaphoreHandleType_enum`|10.0| | |`hipExternalSemaphoreHandleType_enum`|4.3.0| | |
+|`CUexternalSemaphoreHandleType`|10.0| | | | | | |
+|`CUexternalSemaphoreHandleType_enum`|10.0| | | | | | |
 |`CUfilter_mode`| | | |`HIPfilter_mode`|3.5.0| | |
 |`CUfilter_mode_enum`| | | |`HIPfilter_mode_enum`|3.5.0| | |
 |`CUflushGPUDirectRDMAWritesOptions`|11.3| | | | | | |

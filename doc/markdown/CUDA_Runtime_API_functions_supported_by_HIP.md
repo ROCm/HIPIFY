@@ -980,15 +980,15 @@ Unsupported
 |`cudaExternalMemoryMipmappedArrayDesc`|10.0| | | | | | |
 |`cudaExternalMemory_t`|10.0| | |`hipExternalMemory_t`|4.3.0| | |
 |`cudaExternalSemaphoreHandleDesc`|10.0| | |`hipExternalSemaphoreHandleDesc`|4.3.0| | |
-|`cudaExternalSemaphoreHandleType`|10.0| | |`hipExternalSemaphoreHandleType`|4.3.0| | |
+|`cudaExternalSemaphoreHandleType`|10.0| | | | | | |
 |`cudaExternalSemaphoreHandleTypeD3D11Fence`|10.2| | | | | | |
-|`cudaExternalSemaphoreHandleTypeD3D12Fence`|10.0| | |`hipExternalSemaphoreHandleTypeD3D12Fence`|4.3.0| | |
+|`cudaExternalSemaphoreHandleTypeD3D12Fence`|10.0| | | | | | |
 |`cudaExternalSemaphoreHandleTypeKeyedMutex`|10.2| | | | | | |
 |`cudaExternalSemaphoreHandleTypeKeyedMutexKmt`|10.2| | | | | | |
 |`cudaExternalSemaphoreHandleTypeNvSciSync`|10.2| | | | | | |
-|`cudaExternalSemaphoreHandleTypeOpaqueFd`|10.0| | |`hipExternalSemaphoreHandleTypeOpaqueFd`|4.3.0| | |
-|`cudaExternalSemaphoreHandleTypeOpaqueWin32`|10.0| | |`hipExternalSemaphoreHandleTypeOpaqueWin32`|4.3.0| | |
-|`cudaExternalSemaphoreHandleTypeOpaqueWin32Kmt`|10.0| | |`hipExternalSemaphoreHandleTypeOpaqueWin32Kmt`|4.3.0| | |
+|`cudaExternalSemaphoreHandleTypeOpaqueFd`|10.0| | | | | | |
+|`cudaExternalSemaphoreHandleTypeOpaqueWin32`|10.0| | | | | | |
+|`cudaExternalSemaphoreHandleTypeOpaqueWin32Kmt`|10.0| | | | | | |
 |`cudaExternalSemaphoreHandleTypeTimelineSemaphoreFd`|11.2| | | | | | |
 |`cudaExternalSemaphoreHandleTypeTimelineSemaphoreWin32`|11.2| | | | | | |
 |`cudaExternalSemaphoreSignalNodeParams`|11.2| | | | | | |
@@ -1129,7 +1129,7 @@ Unsupported
 |`cudaLimitMallocHeapSize`| | | |`hipLimitMallocHeapSize`|1.6.0| | |
 |`cudaLimitMaxL2FetchGranularity`|10.0| | | | | | |
 |`cudaLimitPersistingL2CacheSize`|11.0| | | | | | |
-|`cudaLimitPrintfFifoSize`| | | |`hipLimitPrintfFifoSize`|4.3.0| | |
+|`cudaLimitPrintfFifoSize`| | | | | | | |
 |`cudaLimitStackSize`| | | | | | | |
 |`cudaMemAccessDesc`|11.2| | | | | | |
 |`cudaMemAccessFlags`|11.2| | | | | | |
@@ -1185,9 +1185,9 @@ Unsupported
 |`cudaMemcpyHostToHost`| | | |`hipMemcpyHostToHost`|1.5.0| | |
 |`cudaMemcpyKind`| | | |`hipMemcpyKind`|1.5.0| | |
 |`cudaMemoryAdvise`|8.0| | |`hipMemoryAdvise`|3.7.0| | |
-|`cudaMemoryType`| | | | | | | |
-|`cudaMemoryTypeDevice`| | | | | | | |
-|`cudaMemoryTypeHost`| | | | | | | |
+|`cudaMemoryType`| | | |`hipMemoryType`|1.6.0| | |
+|`cudaMemoryTypeDevice`| | | |`hipMemoryTypeDevice`|1.6.0| | |
+|`cudaMemoryTypeHost`| | | |`hipMemoryTypeHost`|1.6.0| | |
 |`cudaMemoryTypeManaged`|10.0| | | | | | |
 |`cudaMemoryTypeUnregistered`| | | | | | | |
 |`cudaMemsetParams`|10.0| | |`hipMemsetParams`|4.3.0| | |

@@ -302,18 +302,20 @@ int main() {
   CUexternalMemoryHandleType EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_RESOURCE = CU_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_RESOURCE;
   CUexternalMemoryHandleType EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_RESOURCE_KMT = CU_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_RESOURCE_KMT;
 
-  // CHECK: hipExternalSemaphoreHandleType externalSemaphoreHandleType;
-  // CHECK-NEXT: hipExternalSemaphoreHandleType_enum externalSemaphoreHandleType_enum;
-  // CHECK-NEXT: hipExternalSemaphoreHandleType EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD = hipExternalSemaphoreHandleTypeOpaqueFd;
-  // CHECK-NEXT: hipExternalSemaphoreHandleType EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32 = hipExternalSemaphoreHandleTypeOpaqueWin32;
-  // CHECK-NEXT: hipExternalSemaphoreHandleType EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT = hipExternalSemaphoreHandleTypeOpaqueWin32Kmt;
-  // CHECK-NEXT: hipExternalSemaphoreHandleType EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE = hipExternalSemaphoreHandleTypeD3D12Fence;
+  // !CHECK: hipExternalSemaphoreHandleType externalSemaphoreHandleType;
+  // !CHECK-NEXT: hipExternalSemaphoreHandleType_enum externalSemaphoreHandleType_enum;
+  // !CHECK-NEXT: hipExternalSemaphoreHandleType EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD = hipExternalSemaphoreHandleTypeOpaqueFd;
+  // !CHECK-NEXT: hipExternalSemaphoreHandleType EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32 = hipExternalSemaphoreHandleTypeOpaqueWin32;
+  // !CHECK-NEXT: hipExternalSemaphoreHandleType EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT = hipExternalSemaphoreHandleTypeOpaqueWin32Kmt;
+  // !CHECK-NEXT: hipExternalSemaphoreHandleType EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE = hipExternalSemaphoreHandleTypeD3D12Fence;
+  /*
   CUexternalSemaphoreHandleType externalSemaphoreHandleType;
   CUexternalSemaphoreHandleType_enum externalSemaphoreHandleType_enum;
   CUexternalSemaphoreHandleType EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD = CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD;
   CUexternalSemaphoreHandleType EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32 = CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32;
   CUexternalSemaphoreHandleType EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT = CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT;
   CUexternalSemaphoreHandleType EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE = CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE;
+  */
 
   // CHECK: HIPfilter_mode filter_mode;
   // CHECK-NEXT: HIPfilter_mode_enum filter_mode_enum;
@@ -453,11 +455,9 @@ int main() {
   // CHECK: hipLimit_t limit;
   // CHECK-NEXT: hipLimit_t limit_enum;
   // CHECK-NEXT: hipLimit_t LIMIT_MALLOC_HEAP_SIZE = hipLimitMallocHeapSize;
-  // CHECK-NEXT: hipLimit_t LIMIT_PRINTF_FIFO_SIZE = hipLimitPrintfFifoSize;
   CUlimit limit;
   CUlimit_enum limit_enum;
   CUlimit LIMIT_MALLOC_HEAP_SIZE = CU_LIMIT_MALLOC_HEAP_SIZE;
-  CUlimit LIMIT_PRINTF_FIFO_SIZE = CU_LIMIT_PRINTF_FIFO_SIZE;
 
   // CHECK: hipMemoryAdvise mem_advise;
   // CHECK-NEXT: hipMemoryAdvise mem_advise_enum;
