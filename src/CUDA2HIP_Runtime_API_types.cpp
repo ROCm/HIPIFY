@@ -977,16 +977,16 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaExternalMemoryHandleTypeNvSciBuf",                             {"hipExternalMemoryHandleTypeNvSciBuf",                      "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 8
 
   // CUexternalSemaphoreHandleType
-  {"cudaExternalSemaphoreHandleType",                                  {"hipExternalSemaphoreHandleType",                           "", CONV_TYPE, API_RUNTIME, 36}},
+  {"cudaExternalSemaphoreHandleType",                                  {"hipExternalSemaphoreHandleType",                           "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
   // cudaExternalSemaphoreHandleType enum values
   // CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD
-  {"cudaExternalSemaphoreHandleTypeOpaqueFd",                          {"hipExternalSemaphoreHandleTypeOpaqueFd",                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 1
+  {"cudaExternalSemaphoreHandleTypeOpaqueFd",                          {"hipExternalSemaphoreHandleTypeOpaqueFd",                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 1
   // CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32
-  {"cudaExternalSemaphoreHandleTypeOpaqueWin32",                       {"hipExternalSemaphoreHandleTypeOpaqueWin32",                "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 2
+  {"cudaExternalSemaphoreHandleTypeOpaqueWin32",                       {"hipExternalSemaphoreHandleTypeOpaqueWin32",                "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 2
   // CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT
-  {"cudaExternalSemaphoreHandleTypeOpaqueWin32Kmt",                    {"hipExternalSemaphoreHandleTypeOpaqueWin32Kmt",             "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 3
+  {"cudaExternalSemaphoreHandleTypeOpaqueWin32Kmt",                    {"hipExternalSemaphoreHandleTypeOpaqueWin32Kmt",             "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 3
   // CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE
-  {"cudaExternalSemaphoreHandleTypeD3D12Fence",                        {"hipExternalSemaphoreHandleTypeD3D12Fence",                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 4
+  {"cudaExternalSemaphoreHandleTypeD3D12Fence",                        {"hipExternalSemaphoreHandleTypeD3D12Fence",                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 4
   // CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D11_FENCE
   {"cudaExternalSemaphoreHandleTypeD3D11Fence",                        {"hipExternalSemaphoreHandleTypeD3D11Fence",                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 5
   // CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_NVSCISYNC
@@ -1119,7 +1119,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CU_LIMIT_STACK_SIZE
   {"cudaLimitStackSize",                                               {"hipLimitStackSize",                                        "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 0x00
   // CU_LIMIT_PRINTF_FIFO_SIZE
-  {"cudaLimitPrintfFifoSize",                                          {"hipLimitPrintfFifoSize",                                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 0x01
+  {"cudaLimitPrintfFifoSize",                                          {"hipLimitPrintfFifoSize",                                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 0x01
   // CU_LIMIT_MALLOC_HEAP_SIZE
   {"cudaLimitMallocHeapSize",                                          {"hipLimitMallocHeapSize",                                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 0x02
   // CU_LIMIT_DEV_RUNTIME_SYNC_DEPTH
@@ -1158,12 +1158,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
 
   // no analogue
   // NOTE: CUmemorytype is partial analogue
-  {"cudaMemoryType",                                                   {"hipMemType_t",                                             "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+  {"cudaMemoryType",                                                   {"hipMemoryType",                                            "", CONV_TYPE, API_RUNTIME, 36}},
   // cudaMemoryType enum values
-  {"cudaMemoryTypeUnregistered",                                       {"hipMemTypeUnregistered",                                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 0
-  {"cudaMemoryTypeHost",                                               {"hipMemTypeHost",                                           "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 1
-  {"cudaMemoryTypeDevice",                                             {"hipMemTypeDevice",                                         "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 2
-  {"cudaMemoryTypeManaged",                                            {"hipMemTypeManaged",                                        "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 3
+  {"cudaMemoryTypeUnregistered",                                       {"hipMemoryTypeUnregistered",                                "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 0
+  {"cudaMemoryTypeHost",                                               {"hipMemoryTypeHost",                                        "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 1
+  {"cudaMemoryTypeDevice",                                             {"hipMemoryTypeDevice",                                      "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 2
+  {"cudaMemoryTypeManaged",                                            {"hipMemoryTypeManaged",                                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 3
 
   // CUmem_range_attribute
   {"cudaMemRangeAttribute",                                            {"hipMemRangeAttribute",                                     "", CONV_TYPE, API_RUNTIME, 36}},
@@ -2303,7 +2303,6 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {
   {"hipErrorInvalidPitchValue",                                        {HIP_4020, HIP_0,    HIP_0   }},
   {"hipExternalMemoryHandleDesc",                                      {HIP_4030, HIP_0,    HIP_0   }},
   {"hipExternalMemoryBufferDesc",                                      {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipExternalSemaphoreHandleType",                                   {HIP_4030, HIP_0,    HIP_0   }},
   {"hipExternalSemaphoreHandleDesc",                                   {HIP_4030, HIP_0,    HIP_0   }},
   {"hipExternalSemaphoreSignalParams",                                 {HIP_4030, HIP_0,    HIP_0   }},
   {"hipGraphNodeType",                                                 {HIP_4030, HIP_0,    HIP_0   }},

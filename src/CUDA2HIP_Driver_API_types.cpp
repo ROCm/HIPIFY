@@ -916,17 +916,17 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_EXTERNAL_MEMORY_HANDLE_TYPE_NVSCIBUF",                          {"hipExternalMemoryHandleTypeNvSciBuf",                      "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 8
 
   // cudaExternalSemaphoreHandleType
-  {"CUexternalSemaphoreHandleType",                                    {"hipExternalSemaphoreHandleType",                           "", CONV_TYPE, API_DRIVER, 1}},
-  {"CUexternalSemaphoreHandleType_enum",                               {"hipExternalSemaphoreHandleType_enum",                      "", CONV_TYPE, API_DRIVER, 1}},
+  {"CUexternalSemaphoreHandleType",                                    {"hipExternalSemaphoreHandleType",                           "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CUexternalSemaphoreHandleType_enum",                               {"hipExternalSemaphoreHandleType_enum",                      "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
   // CUexternalSemaphoreHandleType enum values
   // cudaExternalSemaphoreHandleTypeOpaqueFd
-  {"CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD",                      {"hipExternalSemaphoreHandleTypeOpaqueFd",                   "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 1
+  {"CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD",                      {"hipExternalSemaphoreHandleTypeOpaqueFd",                   "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 1
   // cudaExternalSemaphoreHandleTypeOpaqueWin32
-  {"CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32",                   {"hipExternalSemaphoreHandleTypeOpaqueWin32",                "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 2
+  {"CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32",                   {"hipExternalSemaphoreHandleTypeOpaqueWin32",                "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 2
   // cudaExternalSemaphoreHandleTypeOpaqueWin32Kmt
-  {"CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT",               {"hipExternalSemaphoreHandleTypeOpaqueWin32Kmt",             "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 3
+  {"CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT",               {"hipExternalSemaphoreHandleTypeOpaqueWin32Kmt",             "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 3
   // cudaExternalSemaphoreHandleTypeD3D12Fence
-  {"CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE",                    {"hipExternalSemaphoreHandleTypeD3D12Fence",                 "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 4
+  {"CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE",                    {"hipExternalSemaphoreHandleTypeD3D12Fence",                 "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 4
   // cudaExternalSemaphoreHandleTypeD3D11Fence
   {"CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D11_FENCE",                    {"hipExternalSemaphoreHandleTypeD3D11Fence",                 "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 5
   // cudaExternalSemaphoreHandleTypeNvSciSync
@@ -1176,7 +1176,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaLimitStackSize
   {"CU_LIMIT_STACK_SIZE",                                              {"hipLimitStackSize",                                        "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0x00
   // cudaLimitPrintfFifoSize
-  {"CU_LIMIT_PRINTF_FIFO_SIZE",                                        {"hipLimitPrintfFifoSize",                                   "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x01
+  {"CU_LIMIT_PRINTF_FIFO_SIZE",                                        {"hipLimitPrintfFifoSize",                                   "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0x01
   // cudaLimitMallocHeapSize
   {"CU_LIMIT_MALLOC_HEAP_SIZE",                                        {"hipLimitMallocHeapSize",                                   "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x02
   // cudaLimitDevRuntimeSyncDepth
@@ -3011,11 +3011,6 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {
   {"hipExternalMemoryHandleDesc_st",                                   {HIP_4030, HIP_0,    HIP_0   }},
   {"hipExternalMemoryBufferDesc_st",                                   {HIP_4030, HIP_0,    HIP_0   }},
   {"hipExternalMemory_t",                                              {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipExternalSemaphoreHandleType_enum",                              {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipExternalSemaphoreHandleTypeOpaqueFd",                           {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipExternalSemaphoreHandleTypeOpaqueWin32",                        {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipExternalSemaphoreHandleTypeOpaqueWin32Kmt",                     {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipExternalSemaphoreHandleTypeD3D12Fence",                         {HIP_4030, HIP_0,    HIP_0   }},
   {"hipExternalSemaphoreHandleDesc_st",                                {HIP_4030, HIP_0,    HIP_0   }},
   {"hipExternalSemaphore_t",                                           {HIP_4030, HIP_0,    HIP_0   }},
   {"hipExternalSemaphoreSignalParams_st",                              {HIP_4030, HIP_0,    HIP_0   }},
@@ -3070,5 +3065,4 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {
   {"hipSurfaceObject_t",                                               {HIP_1090, HIP_0,    HIP_0   }},
   {"hipExternalSemaphoreWaitParams_st",                                {HIP_4030, HIP_0,    HIP_0   }},
   {"hipExternalSemaphoreWaitParams",                                   {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipLimitPrintfFifoSize",                                           {HIP_4030, HIP_0,    HIP_0   }},
 };
