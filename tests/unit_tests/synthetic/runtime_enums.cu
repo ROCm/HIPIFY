@@ -577,5 +577,66 @@ int main() {
   cudaResourceViewFormat ResViewFormatSignedBlockCompressed6H = cudaResViewFormatSignedBlockCompressed6H;
   cudaResourceViewFormat ResViewFormatUnsignedBlockCompressed7 = cudaResViewFormatUnsignedBlockCompressed7;
 
+  // CHECK: hipSharedMemConfig SharedMemConfig;
+  // CHECK-NEXT: hipSharedMemConfig SharedMemBankSizeDefault = hipSharedMemBankSizeDefault;
+  // CHECK-NEXT: hipSharedMemConfig SharedMemBankSizeFourByte = hipSharedMemBankSizeFourByte;
+  // CHECK-NEXT: hipSharedMemConfig SharedMemBankSizeEightByte = hipSharedMemBankSizeEightByte;
+  cudaSharedMemConfig SharedMemConfig;
+  cudaSharedMemConfig SharedMemBankSizeDefault = cudaSharedMemBankSizeDefault;
+  cudaSharedMemConfig SharedMemBankSizeFourByte = cudaSharedMemBankSizeFourByte;
+  cudaSharedMemConfig SharedMemBankSizeEightByte = cudaSharedMemBankSizeEightByte;
+
+  // CHECK: hipStreamCaptureStatus StreamCaptureStatus;
+  // CHECK-NEXT: hipStreamCaptureStatus StreamCaptureStatusNone = hipStreamCaptureStatusNone;
+  // CHECK-NEXT: hipStreamCaptureStatus StreamCaptureStatusActive = hipStreamCaptureStatusActive;
+  // CHECK-NEXT: hipStreamCaptureStatus StreamCaptureStatusInvalidated = hipStreamCaptureStatusInvalidated;
+  cudaStreamCaptureStatus StreamCaptureStatus;
+  cudaStreamCaptureStatus StreamCaptureStatusNone = cudaStreamCaptureStatusNone;
+  cudaStreamCaptureStatus StreamCaptureStatusActive = cudaStreamCaptureStatusActive;
+  cudaStreamCaptureStatus StreamCaptureStatusInvalidated = cudaStreamCaptureStatusInvalidated;
+
+  // CHECK: hipStreamCaptureMode StreamCaptureMode;
+  // CHECK-NEXT: hipStreamCaptureMode StreamCaptureModeGlobal = hipStreamCaptureModeGlobal;
+  // CHECK-NEXT: hipStreamCaptureMode StreamCaptureModeThreadLocal = hipStreamCaptureModeThreadLocal;
+  // CHECK-NEXT: hipStreamCaptureMode StreamCaptureModeRelaxed = hipStreamCaptureModeRelaxed;
+  cudaStreamCaptureMode StreamCaptureMode;
+  cudaStreamCaptureMode StreamCaptureModeGlobal = cudaStreamCaptureModeGlobal;
+  cudaStreamCaptureMode StreamCaptureModeThreadLocal = cudaStreamCaptureModeThreadLocal;
+  cudaStreamCaptureMode StreamCaptureModeRelaxed = cudaStreamCaptureModeRelaxed;
+
+  // CHECK: hipSurfaceBoundaryMode SurfaceBoundaryMode;
+  // CHECK-NEXT: hipSurfaceBoundaryMode BoundaryModeZero = hipBoundaryModeZero;
+  // CHECK-NEXT: hipSurfaceBoundaryMode BoundaryModeClamp = hipBoundaryModeClamp;
+  // CHECK-NEXT: hipSurfaceBoundaryMode BoundaryModeTrap = hipBoundaryModeTrap;
+  cudaSurfaceBoundaryMode SurfaceBoundaryMode;
+  cudaSurfaceBoundaryMode BoundaryModeZero = cudaBoundaryModeZero;
+  cudaSurfaceBoundaryMode BoundaryModeClamp = cudaBoundaryModeClamp;
+  cudaSurfaceBoundaryMode BoundaryModeTrap = cudaBoundaryModeTrap;
+
+  // CHECK: hipTextureAddressMode TextureAddressMode;
+  // CHECK-NEXT: hipTextureAddressMode AddressModeWrap = hipAddressModeWrap;
+  // CHECK-NEXT: hipTextureAddressMode AddressModeClamp = hipAddressModeClamp;
+  // CHECK-NEXT: hipTextureAddressMode AddressModeMirror = hipAddressModeMirror;
+  // CHECK-NEXT: hipTextureAddressMode AddressModeBorder = hipAddressModeBorder;
+  cudaTextureAddressMode TextureAddressMode;
+  cudaTextureAddressMode AddressModeWrap = cudaAddressModeWrap;
+  cudaTextureAddressMode AddressModeClamp = cudaAddressModeClamp;
+  cudaTextureAddressMode AddressModeMirror = cudaAddressModeMirror;
+  cudaTextureAddressMode AddressModeBorder = cudaAddressModeBorder;
+
+  // CHECK: hipTextureFilterMode TextureFilterMode;
+  // CHECK-NEXT: hipTextureFilterMode FilterModePoint = hipFilterModePoint;
+  // CHECK-NEXT: hipTextureFilterMode FilterModeLinear = hipFilterModeLinear;
+  cudaTextureFilterMode TextureFilterMode;
+  cudaTextureFilterMode FilterModePoint = cudaFilterModePoint;
+  cudaTextureFilterMode FilterModeLinear = cudaFilterModeLinear;
+
+  // CHECK: hipTextureReadMode TextureReadMode;
+  // CHECK-NEXT: hipTextureReadMode ReadModeElementType = hipReadModeElementType;
+  // CHECK-NEXT: hipTextureReadMode ReadModeNormalizedFloat = hipReadModeNormalizedFloat;
+  cudaTextureReadMode TextureReadMode;
+  cudaTextureReadMode ReadModeElementType = cudaReadModeElementType;
+  cudaTextureReadMode ReadModeNormalizedFloat = cudaReadModeNormalizedFloat;
+
   return 0;
 }
