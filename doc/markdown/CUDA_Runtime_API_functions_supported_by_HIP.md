@@ -100,13 +100,13 @@
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|
 |`cudaDestroyExternalMemory`|10.0| | |`hipDestroyExternalMemory`|4.3.0| | |
-|`cudaDestroyExternalSemaphore`|10.0| | |`hipDestroyExternalSemaphore`|4.3.0| | |
+|`cudaDestroyExternalSemaphore`|10.0| | |`hipDestroyExternalSemaphore`|4.4.0| | |
 |`cudaExternalMemoryGetMappedBuffer`|10.0| | |`hipExternalMemoryGetMappedBuffer`|4.3.0| | |
 |`cudaExternalMemoryGetMappedMipmappedArray`|10.0| | | | | | |
 |`cudaImportExternalMemory`|10.0| | |`hipImportExternalMemory`|4.3.0| | |
-|`cudaImportExternalSemaphore`|10.0| | |`hipImportExternalSemaphore`|4.3.0| | |
-|`cudaSignalExternalSemaphoresAsync`|10.0| | |`hipSignalExternalSemaphoresAsync`|4.3.0| | |
-|`cudaWaitExternalSemaphoresAsync`|10.0| | |`hipWaitExternalSemaphoresAsync`|4.3.0| | |
+|`cudaImportExternalSemaphore`|10.0| | |`hipImportExternalSemaphore`|4.4.0| | |
+|`cudaSignalExternalSemaphoresAsync`|10.0| | |`hipSignalExternalSemaphoresAsync`|4.4.0| | |
+|`cudaWaitExternalSemaphoresAsync`|10.0| | |`hipWaitExternalSemaphoresAsync`|4.4.0| | |
 
 ## **7. Execution Control**
 
@@ -979,27 +979,27 @@ Unsupported
 |`cudaExternalMemoryHandleTypeOpaqueWin32Kmt`|10.0| | |`hipExternalMemoryHandleTypeOpaqueWin32Kmt`|4.3.0| | |
 |`cudaExternalMemoryMipmappedArrayDesc`|10.0| | | | | | |
 |`cudaExternalMemory_t`|10.0| | |`hipExternalMemory_t`|4.3.0| | |
-|`cudaExternalSemaphoreHandleDesc`|10.0| | |`hipExternalSemaphoreHandleDesc`|4.3.0| | |
-|`cudaExternalSemaphoreHandleType`|10.0| | | | | | |
+|`cudaExternalSemaphoreHandleDesc`|10.0| | |`hipExternalSemaphoreHandleDesc`|4.4.0| | |
+|`cudaExternalSemaphoreHandleType`|10.0| | |`hipExternalSemaphoreHandleType`|4.4.0| | |
 |`cudaExternalSemaphoreHandleTypeD3D11Fence`|10.2| | | | | | |
-|`cudaExternalSemaphoreHandleTypeD3D12Fence`|10.0| | | | | | |
+|`cudaExternalSemaphoreHandleTypeD3D12Fence`|10.0| | |`hipExternalSemaphoreHandleTypeD3D12Fence`|4.4.0| | |
 |`cudaExternalSemaphoreHandleTypeKeyedMutex`|10.2| | | | | | |
 |`cudaExternalSemaphoreHandleTypeKeyedMutexKmt`|10.2| | | | | | |
 |`cudaExternalSemaphoreHandleTypeNvSciSync`|10.2| | | | | | |
-|`cudaExternalSemaphoreHandleTypeOpaqueFd`|10.0| | | | | | |
-|`cudaExternalSemaphoreHandleTypeOpaqueWin32`|10.0| | | | | | |
-|`cudaExternalSemaphoreHandleTypeOpaqueWin32Kmt`|10.0| | | | | | |
+|`cudaExternalSemaphoreHandleTypeOpaqueFd`|10.0| | |`hipExternalSemaphoreHandleTypeOpaqueFd`|4.4.0| | |
+|`cudaExternalSemaphoreHandleTypeOpaqueWin32`|10.0| | |`hipExternalSemaphoreHandleTypeOpaqueWin32`|4.4.0| | |
+|`cudaExternalSemaphoreHandleTypeOpaqueWin32Kmt`|10.0| | |`hipExternalSemaphoreHandleTypeOpaqueWin32Kmt`|4.4.0| | |
 |`cudaExternalSemaphoreHandleTypeTimelineSemaphoreFd`|11.2| | | | | | |
 |`cudaExternalSemaphoreHandleTypeTimelineSemaphoreWin32`|11.2| | | | | | |
 |`cudaExternalSemaphoreSignalNodeParams`|11.2| | | | | | |
-|`cudaExternalSemaphoreSignalParams`|10.0| | |`hipExternalSemaphoreSignalParams`|4.3.0| | |
-|`cudaExternalSemaphoreSignalParams_v1`|11.2| | |`hipExternalSemaphoreSignalParams`|4.3.0| | |
+|`cudaExternalSemaphoreSignalParams`|10.0| | |`hipExternalSemaphoreSignalParams`|4.4.0| | |
+|`cudaExternalSemaphoreSignalParams_v1`|11.2| | |`hipExternalSemaphoreSignalParams`|4.4.0| | |
 |`cudaExternalSemaphoreSignalSkipNvSciBufMemSync`|10.2| | | | | | |
 |`cudaExternalSemaphoreWaitNodeParams`|11.2| | | | | | |
-|`cudaExternalSemaphoreWaitParams`|10.0| | |`hipExternalSemaphoreWaitParams`|4.3.0| | |
-|`cudaExternalSemaphoreWaitParams_v1`|11.2| | |`hipExternalSemaphoreWaitParams`|4.3.0| | |
+|`cudaExternalSemaphoreWaitParams`|10.0| | |`hipExternalSemaphoreWaitParams`|4.4.0| | |
+|`cudaExternalSemaphoreWaitParams_v1`|11.2| | |`hipExternalSemaphoreWaitParams`|4.4.0| | |
 |`cudaExternalSemaphoreWaitSkipNvSciBufMemSync`|10.2| | | | | | |
-|`cudaExternalSemaphore_t`|10.0| | |`hipExternalSemaphore_t`|4.3.0| | |
+|`cudaExternalSemaphore_t`|10.0| | |`hipExternalSemaphore_t`|4.4.0| | |
 |`cudaFilterModeLinear`| | | |`hipFilterModeLinear`|1.7.0| | |
 |`cudaFilterModePoint`| | | |`hipFilterModePoint`|1.6.0| | |
 |`cudaFlushGPUDirectRDMAWritesOptionHost`|11.3| | | | | | |
@@ -1022,10 +1022,10 @@ Unsupported
 |`cudaFuncCachePreferL1`| | | |`hipFuncCachePreferL1`|1.6.0| | |
 |`cudaFuncCachePreferNone`| | | |`hipFuncCachePreferNone`|1.6.0| | |
 |`cudaFuncCachePreferShared`| | | |`hipFuncCachePreferShared`|1.6.0| | |
-|`cudaGLDeviceList`| | | | | | | |
-|`cudaGLDeviceListAll`| | | | | | | |
-|`cudaGLDeviceListCurrentFrame`| | | | | | | |
-|`cudaGLDeviceListNextFrame`| | | | | | | |
+|`cudaGLDeviceList`| | | |`hipGLDeviceList`|4.4.0| | |
+|`cudaGLDeviceListAll`| | | |`hipGLDeviceListAll`|4.4.0| | |
+|`cudaGLDeviceListCurrentFrame`| | | |`hipGLDeviceListCurrentFrame`|4.4.0| | |
+|`cudaGLDeviceListNextFrame`| | | |`hipGLDeviceListNextFrame`|4.4.0| | |
 |`cudaGLMapFlags`| | | | | | | |
 |`cudaGLMapFlagsNone`| | | | | | | |
 |`cudaGLMapFlagsReadOnly`| | | | | | | |
@@ -1091,14 +1091,14 @@ Unsupported
 |`cudaGraphicsMapFlagsNone`| | | | | | | |
 |`cudaGraphicsMapFlagsReadOnly`| | | | | | | |
 |`cudaGraphicsMapFlagsWriteDiscard`| | | | | | | |
-|`cudaGraphicsRegisterFlags`| | | | | | | |
-|`cudaGraphicsRegisterFlagsNone`| | | | | | | |
-|`cudaGraphicsRegisterFlagsReadOnly`| | | | | | | |
-|`cudaGraphicsRegisterFlagsSurfaceLoadStore`| | | | | | | |
-|`cudaGraphicsRegisterFlagsTextureGather`| | | | | | | |
-|`cudaGraphicsRegisterFlagsWriteDiscard`| | | | | | | |
-|`cudaGraphicsResource`| | | |`hipGraphicsResource`|4.3.0| | |
-|`cudaGraphicsResource_t`| | | |`hipGraphicsResource_t`|4.3.0| | |
+|`cudaGraphicsRegisterFlags`| | | |`hipGraphicsRegisterFlags`|4.4.0| | |
+|`cudaGraphicsRegisterFlagsNone`| | | |`hipGraphicsRegisterFlagsNone`|4.4.0| | |
+|`cudaGraphicsRegisterFlagsReadOnly`| | | |`hipGraphicsRegisterFlagsReadOnly`|4.4.0| | |
+|`cudaGraphicsRegisterFlagsSurfaceLoadStore`| | | |`hipGraphicsRegisterFlagsSurfaceLoadStore`|4.4.0| | |
+|`cudaGraphicsRegisterFlagsTextureGather`| | | |`hipGraphicsRegisterFlagsTextureGather`|4.4.0| | |
+|`cudaGraphicsRegisterFlagsWriteDiscard`| | | |`hipGraphicsRegisterFlagsWriteDiscard`|4.4.0| | |
+|`cudaGraphicsResource`| | | |`hipGraphicsResource`|4.4.0| | |
+|`cudaGraphicsResource_t`| | | |`hipGraphicsResource_t`|4.4.0| | |
 |`cudaHostAllocDefault`| | | |`hipHostMallocDefault`|1.6.0| | |
 |`cudaHostAllocMapped`| | | |`hipHostMallocMapped`|1.6.0| | |
 |`cudaHostAllocPortable`| | | |`hipHostMallocPortable`|1.6.0| | |

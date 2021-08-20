@@ -2,6 +2,10 @@
 
 // CHECK: #include <hip/hip_runtime.h>
 #include <cuda.h>
+#if defined(_WIN32)
+#include "windows.h"
+#endif
+#include "cudaGL.h"
 
 int main() {
   printf("02. CUDA Driver API Enums synthetic test\n");
@@ -302,20 +306,18 @@ int main() {
   CUexternalMemoryHandleType EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_RESOURCE = CU_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_RESOURCE;
   CUexternalMemoryHandleType EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_RESOURCE_KMT = CU_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_RESOURCE_KMT;
 
-  // !CHECK: hipExternalSemaphoreHandleType externalSemaphoreHandleType;
-  // !CHECK-NEXT: hipExternalSemaphoreHandleType_enum externalSemaphoreHandleType_enum;
-  // !CHECK-NEXT: hipExternalSemaphoreHandleType EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD = hipExternalSemaphoreHandleTypeOpaqueFd;
-  // !CHECK-NEXT: hipExternalSemaphoreHandleType EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32 = hipExternalSemaphoreHandleTypeOpaqueWin32;
-  // !CHECK-NEXT: hipExternalSemaphoreHandleType EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT = hipExternalSemaphoreHandleTypeOpaqueWin32Kmt;
-  // !CHECK-NEXT: hipExternalSemaphoreHandleType EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE = hipExternalSemaphoreHandleTypeD3D12Fence;
-  /*
+  // CHECK: hipExternalSemaphoreHandleType externalSemaphoreHandleType;
+  // CHECK-NEXT: hipExternalSemaphoreHandleType_enum externalSemaphoreHandleType_enum;
+  // CHECK-NEXT: hipExternalSemaphoreHandleType EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD = hipExternalSemaphoreHandleTypeOpaqueFd;
+  // CHECK-NEXT: hipExternalSemaphoreHandleType EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32 = hipExternalSemaphoreHandleTypeOpaqueWin32;
+  // CHECK-NEXT: hipExternalSemaphoreHandleType EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT = hipExternalSemaphoreHandleTypeOpaqueWin32Kmt;
+  // CHECK-NEXT: hipExternalSemaphoreHandleType EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE = hipExternalSemaphoreHandleTypeD3D12Fence;
   CUexternalSemaphoreHandleType externalSemaphoreHandleType;
   CUexternalSemaphoreHandleType_enum externalSemaphoreHandleType_enum;
   CUexternalSemaphoreHandleType EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD = CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD;
   CUexternalSemaphoreHandleType EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32 = CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32;
   CUexternalSemaphoreHandleType EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT = CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT;
   CUexternalSemaphoreHandleType EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE = CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE;
-  */
 
   // CHECK: HIPfilter_mode filter_mode;
   // CHECK-NEXT: HIPfilter_mode_enum filter_mode_enum;
@@ -365,6 +367,21 @@ int main() {
   CUfunction_attribute FUNC_ATTRIBUTE_MAX_DYNAMIC_SHARED_SIZE_BYTES = CU_FUNC_ATTRIBUTE_MAX_DYNAMIC_SHARED_SIZE_BYTES;
   CUfunction_attribute FUNC_ATTRIBUTE_PREFERRED_SHARED_MEMORY_CARVEOUT = CU_FUNC_ATTRIBUTE_PREFERRED_SHARED_MEMORY_CARVEOUT;
   CUfunction_attribute FUNC_ATTRIBUTE_MAX = CU_FUNC_ATTRIBUTE_MAX;
+
+  // CHECK: hipGraphicsRegisterFlags graphicsRegisterFlags;
+  // CHECK-NEXT: hipGraphicsRegisterFlags graphicsRegisterFlags_enum;
+  // CHECK-NEXT: hipGraphicsRegisterFlags GRAPHICS_REGISTER_FLAGS_NONE = hipGraphicsRegisterFlagsNone;
+  // CHECK-NEXT: hipGraphicsRegisterFlags GRAPHICS_REGISTER_FLAGS_READ_ONLY = hipGraphicsRegisterFlagsReadOnly;
+  // CHECK-NEXT: hipGraphicsRegisterFlags GRAPHICS_REGISTER_FLAGS_WRITE_DISCARD = hipGraphicsRegisterFlagsWriteDiscard;
+  // CHECK-NEXT: hipGraphicsRegisterFlags GRAPHICS_REGISTER_FLAGS_SURFACE_LDST = hipGraphicsRegisterFlagsSurfaceLoadStore;
+  // CHECK-NEXT: hipGraphicsRegisterFlags GRAPHICS_REGISTER_FLAGS_TEXTURE_GATHER = hipGraphicsRegisterFlagsTextureGather;
+  CUgraphicsRegisterFlags graphicsRegisterFlags;
+  CUgraphicsRegisterFlags_enum graphicsRegisterFlags_enum;
+  CUgraphicsRegisterFlags GRAPHICS_REGISTER_FLAGS_NONE = CU_GRAPHICS_REGISTER_FLAGS_NONE;
+  CUgraphicsRegisterFlags GRAPHICS_REGISTER_FLAGS_READ_ONLY = CU_GRAPHICS_REGISTER_FLAGS_READ_ONLY;
+  CUgraphicsRegisterFlags GRAPHICS_REGISTER_FLAGS_WRITE_DISCARD = CU_GRAPHICS_REGISTER_FLAGS_WRITE_DISCARD;
+  CUgraphicsRegisterFlags GRAPHICS_REGISTER_FLAGS_SURFACE_LDST = CU_GRAPHICS_REGISTER_FLAGS_SURFACE_LDST;
+  CUgraphicsRegisterFlags GRAPHICS_REGISTER_FLAGS_TEXTURE_GATHER = CU_GRAPHICS_REGISTER_FLAGS_TEXTURE_GATHER;
 
   // CHECK: hipGraphNodeType graphNodeType;
   // CHECK-NEXT: hipGraphNodeType graphNodeType_enum;
@@ -619,13 +636,13 @@ int main() {
   // CHECK-NEXT: hipError_t ERROR_INVALID_PTX = hipErrorInvalidKernelFile;
   // CHECK-NEXT: hipError_t ERROR_INVALID_GRAPHICS_CONTEXT = hipErrorInvalidGraphicsContext;
   // CHECK-NEXT: hipError_t ERROR_INVALID_SOURCE = hipErrorInvalidSource;
-  // CHECK-NEXT: hipError_t ERROR_FILE_NOT_FOUND = hipErrorFileNotFound;
+  // CHECK-NEXT: hipError_t ERROR_FILE_NOT_FOUND_ = hipErrorFileNotFound;
   // CHECK-NEXT: hipError_t ERROR_SHARED_OBJECT_SYMBOL_NOT_FOUND = hipErrorSharedObjectSymbolNotFound;
   // CHECK-NEXT: hipError_t ERROR_SHARED_OBJECT_INIT_FAILED = hipErrorSharedObjectInitFailed;
   // CHECK-NEXT: hipError_t ERROR_OPERATING_SYSTEM = hipErrorOperatingSystem;
-  // CHECK-NEXT: hipError_t ERROR_INVALID_HANDLE = hipErrorInvalidHandle;
-  // CHECK-NEXT: hipError_t ERROR_NOT_FOUND = hipErrorNotFound;
-  // CHECK-NEXT: hipError_t ERROR_NOT_READY = hipErrorNotReady;
+  // CHECK-NEXT: hipError_t ERROR_INVALID_HANDLE_ = hipErrorInvalidHandle;
+  // CHECK-NEXT: hipError_t ERROR_NOT_FOUND_ = hipErrorNotFound;
+  // CHECK-NEXT: hipError_t ERROR_NOT_READY_ = hipErrorNotReady;
   // CHECK-NEXT: hipError_t ERROR_ILLEGAL_ADDRESS = hipErrorIllegalAddress;
   // CHECK-NEXT: hipError_t ERROR_LAUNCH_OUT_OF_RESOURCES = hipErrorLaunchOutOfResources;
   // CHECK-NEXT: hipError_t ERROR_LAUNCH_TIMEOUT = hipErrorLaunchTimeOut;
@@ -638,7 +655,7 @@ int main() {
   // CHECK-NEXT: hipError_t ERROR_HOST_MEMORY_NOT_REGISTERED = hipErrorHostMemoryNotRegistered;
   // CHECK-NEXT: hipError_t ERROR_LAUNCH_FAILED = hipErrorLaunchFailure;
   // CHECK-NEXT: hipError_t ERROR_COOPERATIVE_LAUNCH_TOO_LARGE = hipErrorCooperativeLaunchTooLarge;
-  // CHECK-NEXT: hipError_t ERROR_NOT_SUPPORTED = hipErrorNotSupported;
+  // CHECK-NEXT: hipError_t ERROR_NOT_SUPPORTED_ = hipErrorNotSupported;
   // CHECK-NEXT: hipError_t ERROR_STREAM_CAPTURE_UNSUPPORTED = hipErrorStreamCaptureUnsupported;
   // CHECK-NEXT: hipError_t ERROR_STREAM_CAPTURE_INVALIDATED = hipErrorStreamCaptureInvalidated;
   // CHECK-NEXT: hipError_t ERROR_STREAM_CAPTURE_MERGE = hipErrorStreamCaptureMerge;
@@ -681,13 +698,13 @@ int main() {
   CUresult ERROR_INVALID_PTX = CUDA_ERROR_INVALID_PTX;
   CUresult ERROR_INVALID_GRAPHICS_CONTEXT = CUDA_ERROR_INVALID_GRAPHICS_CONTEXT;
   CUresult ERROR_INVALID_SOURCE = CUDA_ERROR_INVALID_SOURCE;
-  CUresult ERROR_FILE_NOT_FOUND = CUDA_ERROR_FILE_NOT_FOUND;
+  CUresult ERROR_FILE_NOT_FOUND_ = CUDA_ERROR_FILE_NOT_FOUND;
   CUresult ERROR_SHARED_OBJECT_SYMBOL_NOT_FOUND = CUDA_ERROR_SHARED_OBJECT_SYMBOL_NOT_FOUND;
   CUresult ERROR_SHARED_OBJECT_INIT_FAILED = CUDA_ERROR_SHARED_OBJECT_INIT_FAILED;
   CUresult ERROR_OPERATING_SYSTEM = CUDA_ERROR_OPERATING_SYSTEM;
-  CUresult ERROR_INVALID_HANDLE = CUDA_ERROR_INVALID_HANDLE;
-  CUresult ERROR_NOT_FOUND = CUDA_ERROR_NOT_FOUND;
-  CUresult ERROR_NOT_READY = CUDA_ERROR_NOT_READY;
+  CUresult ERROR_INVALID_HANDLE_ = CUDA_ERROR_INVALID_HANDLE;
+  CUresult ERROR_NOT_FOUND_ = CUDA_ERROR_NOT_FOUND;
+  CUresult ERROR_NOT_READY_ = CUDA_ERROR_NOT_READY;
   CUresult ERROR_ILLEGAL_ADDRESS = CUDA_ERROR_ILLEGAL_ADDRESS;
   CUresult ERROR_LAUNCH_OUT_OF_RESOURCES = CUDA_ERROR_LAUNCH_OUT_OF_RESOURCES;
   CUresult ERROR_LAUNCH_TIMEOUT = CUDA_ERROR_LAUNCH_TIMEOUT;
@@ -700,7 +717,7 @@ int main() {
   CUresult ERROR_HOST_MEMORY_NOT_REGISTERED = CUDA_ERROR_HOST_MEMORY_NOT_REGISTERED;
   CUresult ERROR_LAUNCH_FAILED = CUDA_ERROR_LAUNCH_FAILED;
   CUresult ERROR_COOPERATIVE_LAUNCH_TOO_LARGE = CUDA_ERROR_COOPERATIVE_LAUNCH_TOO_LARGE;
-  CUresult ERROR_NOT_SUPPORTED = CUDA_ERROR_NOT_SUPPORTED;
+  CUresult ERROR_NOT_SUPPORTED_ = CUDA_ERROR_NOT_SUPPORTED;
   CUresult ERROR_STREAM_CAPTURE_UNSUPPORTED = CUDA_ERROR_STREAM_CAPTURE_UNSUPPORTED;
   CUresult ERROR_STREAM_CAPTURE_INVALIDATED = CUDA_ERROR_STREAM_CAPTURE_INVALIDATED;
   CUresult ERROR_STREAM_CAPTURE_MERGE = CUDA_ERROR_STREAM_CAPTURE_MERGE;
@@ -758,6 +775,17 @@ int main() {
   int STREAM_WAIT_VALUE_EQ = CU_STREAM_WAIT_VALUE_EQ;
   int STREAM_WAIT_VALUE_AND = CU_STREAM_WAIT_VALUE_AND;
   int STREAM_WAIT_VALUE_NOR = CU_STREAM_WAIT_VALUE_NOR;
+
+  // CHECK: hipGLDeviceList GLDeviceList;
+  // CHECK-NEXT: hipGLDeviceList GLDeviceList_enum;
+  // CHECK-NEXT: hipGLDeviceList GL_DEVICE_LIST_ALL = hipGLDeviceListAll;
+  // CHECK-NEXT: hipGLDeviceList GL_DEVICE_LIST_CURRENT_FRAME = hipGLDeviceListCurrentFrame;
+  // CHECK-NEXT: hipGLDeviceList GL_DEVICE_LIST_NEXT_FRAME = hipGLDeviceListNextFrame;
+  CUGLDeviceList GLDeviceList;
+  CUGLDeviceList_enum GLDeviceList_enum;
+  CUGLDeviceList GL_DEVICE_LIST_ALL = CU_GL_DEVICE_LIST_ALL;
+  CUGLDeviceList GL_DEVICE_LIST_CURRENT_FRAME = CU_GL_DEVICE_LIST_CURRENT_FRAME;
+  CUGLDeviceList GL_DEVICE_LIST_NEXT_FRAME = CU_GL_DEVICE_LIST_NEXT_FRAME;
 
   return 0;
 }
