@@ -977,16 +977,16 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaExternalMemoryHandleTypeNvSciBuf",                             {"hipExternalMemoryHandleTypeNvSciBuf",                      "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 8
 
   // CUexternalSemaphoreHandleType
-  {"cudaExternalSemaphoreHandleType",                                  {"hipExternalSemaphoreHandleType",                           "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+  {"cudaExternalSemaphoreHandleType",                                  {"hipExternalSemaphoreHandleType",                           "", CONV_TYPE, API_RUNTIME, 36}},
   // cudaExternalSemaphoreHandleType enum values
   // CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD
-  {"cudaExternalSemaphoreHandleTypeOpaqueFd",                          {"hipExternalSemaphoreHandleTypeOpaqueFd",                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 1
+  {"cudaExternalSemaphoreHandleTypeOpaqueFd",                          {"hipExternalSemaphoreHandleTypeOpaqueFd",                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 1
   // CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32
-  {"cudaExternalSemaphoreHandleTypeOpaqueWin32",                       {"hipExternalSemaphoreHandleTypeOpaqueWin32",                "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 2
+  {"cudaExternalSemaphoreHandleTypeOpaqueWin32",                       {"hipExternalSemaphoreHandleTypeOpaqueWin32",                "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 2
   // CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT
-  {"cudaExternalSemaphoreHandleTypeOpaqueWin32Kmt",                    {"hipExternalSemaphoreHandleTypeOpaqueWin32Kmt",             "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 3
+  {"cudaExternalSemaphoreHandleTypeOpaqueWin32Kmt",                    {"hipExternalSemaphoreHandleTypeOpaqueWin32Kmt",             "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 3
   // CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE
-  {"cudaExternalSemaphoreHandleTypeD3D12Fence",                        {"hipExternalSemaphoreHandleTypeD3D12Fence",                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 4
+  {"cudaExternalSemaphoreHandleTypeD3D12Fence",                        {"hipExternalSemaphoreHandleTypeD3D12Fence",                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 4
   // CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D11_FENCE
   {"cudaExternalSemaphoreHandleTypeD3D11Fence",                        {"hipExternalSemaphoreHandleTypeD3D11Fence",                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 5
   // CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_NVSCISYNC
@@ -1050,18 +1050,18 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaGraphicsMapFlagsWriteDiscard",                                 {"hipGraphicsMapFlagsWriteDiscard",                          "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 2
 
   // CUgraphicsRegisterFlags
-  {"cudaGraphicsRegisterFlags",                                        {"hipGraphicsRegisterFlags",                                 "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+  {"cudaGraphicsRegisterFlags",                                        {"hipGraphicsRegisterFlags",                                 "", CONV_TYPE, API_RUNTIME, 36}},
   // cudaGraphicsRegisterFlags enum values
   // CU_GRAPHICS_MAP_RESOURCE_FLAGS_NONE = 0x00
-  {"cudaGraphicsRegisterFlagsNone",                                    {"hipGraphicsRegisterFlagsNone",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 0
+  {"cudaGraphicsRegisterFlagsNone",                                    {"hipGraphicsRegisterFlagsNone",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 0
   // CU_GRAPHICS_MAP_RESOURCE_FLAGS_READ_ONLY = 0x01
-  {"cudaGraphicsRegisterFlagsReadOnly",                                {"hipGraphicsRegisterFlagsReadOnly",                         "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 1
+  {"cudaGraphicsRegisterFlagsReadOnly",                                {"hipGraphicsRegisterFlagsReadOnly",                         "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 1
   // CU_GRAPHICS_REGISTER_FLAGS_WRITE_DISCARD = 0x02
-  {"cudaGraphicsRegisterFlagsWriteDiscard",                            {"hipGraphicsRegisterFlagsWriteDiscard",                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 2
+  {"cudaGraphicsRegisterFlagsWriteDiscard",                            {"hipGraphicsRegisterFlagsWriteDiscard",                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 2
   // CU_GRAPHICS_REGISTER_FLAGS_SURFACE_LDST = 0x04
-  {"cudaGraphicsRegisterFlagsSurfaceLoadStore",                        {"hipGraphicsRegisterFlagsSurfaceLoadStore",                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 4
+  {"cudaGraphicsRegisterFlagsSurfaceLoadStore",                        {"hipGraphicsRegisterFlagsSurfaceLoadStore",                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 4
   // CU_GRAPHICS_REGISTER_FLAGS_TEXTURE_GATHER = 0x08
-  {"cudaGraphicsRegisterFlagsTextureGather",                           {"hipGraphicsRegisterFlagsTextureGather",                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 8
+  {"cudaGraphicsRegisterFlagsTextureGather",                           {"hipGraphicsRegisterFlagsTextureGather",                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 8
 
   // CUgraphNodeType
   {"cudaGraphNodeType",                                                {"hipGraphNodeType",                                         "", CONV_TYPE, API_RUNTIME, 36}},
@@ -1350,14 +1350,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaReadModeNormalizedFloat",                                      {"hipReadModeNormalizedFloat",                               "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 1
 
   // CUGLDeviceList
-  {"cudaGLDeviceList",                                                 {"hipGLDeviceList",                                          "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+  {"cudaGLDeviceList",                                                 {"hipGLDeviceList",                                          "", CONV_TYPE, API_RUNTIME, 36}},
   // cudaGLDeviceList enum values
   // CU_GL_DEVICE_LIST_ALL = 0x01
-  {"cudaGLDeviceListAll",                                              {"hipGLDeviceListAll",                                       "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 1
+  {"cudaGLDeviceListAll",                                              {"hipGLDeviceListAll",                                       "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 1
   // CU_GL_DEVICE_LIST_CURRENT_FRAME = 0x02
-  {"cudaGLDeviceListCurrentFrame",                                     {"hipGLDeviceListCurrentFrame",                              "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 2
+  {"cudaGLDeviceListCurrentFrame",                                     {"hipGLDeviceListCurrentFrame",                              "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 2
   // CU_GL_DEVICE_LIST_NEXT_FRAME = 0x03
-  {"cudaGLDeviceListNextFrame",                                        {"hipGLDeviceListNextFrame",                                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 3
+  {"cudaGLDeviceListNextFrame",                                        {"hipGLDeviceListNextFrame",                                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 3
 
   // CUGLmap_flags
   {"cudaGLMapFlags",                                                   {"hipGLMapFlags",                                            "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
@@ -2303,8 +2303,8 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {
   {"hipErrorInvalidPitchValue",                                        {HIP_4020, HIP_0,    HIP_0   }},
   {"hipExternalMemoryHandleDesc",                                      {HIP_4030, HIP_0,    HIP_0   }},
   {"hipExternalMemoryBufferDesc",                                      {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipExternalSemaphoreHandleDesc",                                   {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipExternalSemaphoreSignalParams",                                 {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipExternalSemaphoreHandleDesc",                                   {HIP_4040, HIP_0,    HIP_0   }},
+  {"hipExternalSemaphoreSignalParams",                                 {HIP_4040, HIP_0,    HIP_0   }},
   {"hipGraphNodeType",                                                 {HIP_4030, HIP_0,    HIP_0   }},
   {"hipGraphNodeTypeKernel",                                           {HIP_4030, HIP_0,    HIP_0   }},
   {"hipGraphNodeTypeMemcpy",                                           {HIP_4030, HIP_0,    HIP_0   }},
@@ -2340,7 +2340,17 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {
   {"hipGraph_t",                                                       {HIP_4030, HIP_0,    HIP_0   }},
   {"hipGraphExec",                                                     {HIP_4030, HIP_0,    HIP_0   }},
   {"hipGraphExec_t",                                                   {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipGraphicsResource",                                              {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipGraphicsResource_t",                                            {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipGraphicsResource",                                              {HIP_4040, HIP_0,    HIP_0   }},
+  {"hipGraphicsResource_t",                                            {HIP_4040, HIP_0,    HIP_0   }},
   {"hipStreamPerThread",                                               {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipGLDeviceList",                                                  {HIP_4040, HIP_0,    HIP_0   }},
+  {"hipGLDeviceListAll",                                               {HIP_4040, HIP_0,    HIP_0   }},
+  {"hipGLDeviceListCurrentFrame",                                      {HIP_4040, HIP_0,    HIP_0   }},
+  {"hipGLDeviceListNextFrame",                                         {HIP_4040, HIP_0,    HIP_0   }},
+  {"hipGraphicsRegisterFlags",                                         {HIP_4040, HIP_0,    HIP_0   }},
+  {"hipGraphicsRegisterFlagsNone",                                     {HIP_4040, HIP_0,    HIP_0   }},
+  {"hipGraphicsRegisterFlagsReadOnly",                                 {HIP_4040, HIP_0,    HIP_0   }},
+  {"hipGraphicsRegisterFlagsWriteDiscard",                             {HIP_4040, HIP_0,    HIP_0   }},
+  {"hipGraphicsRegisterFlagsSurfaceLoadStore",                         {HIP_4040, HIP_0,    HIP_0   }},
+  {"hipGraphicsRegisterFlagsTextureGather",                            {HIP_4040, HIP_0,    HIP_0   }},
 };

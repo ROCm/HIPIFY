@@ -2,6 +2,10 @@
 
 // CHECK: #include <hip/hip_runtime.h>
 #include <cuda_runtime_api.h>
+#if defined(_WIN32)
+#include "windows.h"
+#endif
+#include "cuda_gl_interop.h"
 
 int main() {
   printf("06. CUDA Runtime API Enums synthetic test\n");
@@ -382,6 +386,17 @@ int main() {
   cudaExternalMemoryHandleType ExternalMemoryHandleTypeD3D11Resource = cudaExternalMemoryHandleTypeD3D11Resource;
   cudaExternalMemoryHandleType ExternalMemoryHandleTypeD3D11ResourceKmt = cudaExternalMemoryHandleTypeD3D11ResourceKmt;
 
+  // CHECK: hipExternalSemaphoreHandleType ExternalSemaphoreHandleType;
+  // CHECK-NEXT: hipExternalSemaphoreHandleType ExternalSemaphoreHandleTypeOpaqueFd = hipExternalSemaphoreHandleTypeOpaqueFd;
+  // CHECK-NEXT: hipExternalSemaphoreHandleType ExternalSemaphoreHandleTypeOpaqueWin32 = hipExternalSemaphoreHandleTypeOpaqueWin32;
+  // CHECK-NEXT: hipExternalSemaphoreHandleType ExternalSemaphoreHandleTypeOpaqueWin32Kmt = hipExternalSemaphoreHandleTypeOpaqueWin32Kmt;
+  // CHECK-NEXT: hipExternalSemaphoreHandleType ExternalSemaphoreHandleTypeD3D12Fence = hipExternalSemaphoreHandleTypeD3D12Fence;
+  cudaExternalSemaphoreHandleType ExternalSemaphoreHandleType;
+  cudaExternalSemaphoreHandleType ExternalSemaphoreHandleTypeOpaqueFd = cudaExternalSemaphoreHandleTypeOpaqueFd;
+  cudaExternalSemaphoreHandleType ExternalSemaphoreHandleTypeOpaqueWin32 = cudaExternalSemaphoreHandleTypeOpaqueWin32;
+  cudaExternalSemaphoreHandleType ExternalSemaphoreHandleTypeOpaqueWin32Kmt = cudaExternalSemaphoreHandleTypeOpaqueWin32Kmt;
+  cudaExternalSemaphoreHandleType ExternalSemaphoreHandleTypeD3D12Fence = cudaExternalSemaphoreHandleTypeD3D12Fence;
+
   // CHECK: hipFuncAttribute FuncAttribute;
   // CHECK-NEXT: hipFuncAttribute FuncAttributeMaxDynamicSharedMemorySize = hipFuncAttributeMaxDynamicSharedMemorySize;
   // CHECK-NEXT: hipFuncAttribute FuncAttributePreferredSharedMemoryCarveout = hipFuncAttributePreferredSharedMemoryCarveout;
@@ -401,6 +416,19 @@ int main() {
   cudaFuncCache FuncCachePreferShared = cudaFuncCachePreferShared;
   cudaFuncCache FuncCachePreferL1 = cudaFuncCachePreferL1;
   cudaFuncCache FuncCachePreferEqual = cudaFuncCachePreferEqual;
+
+  // CHECK: hipGraphicsRegisterFlags GraphicsRegisterFlags;
+  // CHECK-NEXT: hipGraphicsRegisterFlags GraphicsRegisterFlagsNone = hipGraphicsRegisterFlagsNone;
+  // CHECK-NEXT: hipGraphicsRegisterFlags GraphicsRegisterFlagsReadOnly = hipGraphicsRegisterFlagsReadOnly;
+  // CHECK-NEXT: hipGraphicsRegisterFlags GraphicsRegisterFlagsWriteDiscard = hipGraphicsRegisterFlagsWriteDiscard;
+  // CHECK-NEXT: hipGraphicsRegisterFlags GraphicsRegisterFlagsSurfaceLoadStore = hipGraphicsRegisterFlagsSurfaceLoadStore;
+  // CHECK-NEXT: hipGraphicsRegisterFlags GraphicsRegisterFlagsTextureGather = hipGraphicsRegisterFlagsTextureGather;
+  cudaGraphicsRegisterFlags GraphicsRegisterFlags;
+  cudaGraphicsRegisterFlags GraphicsRegisterFlagsNone = cudaGraphicsRegisterFlagsNone;
+  cudaGraphicsRegisterFlags GraphicsRegisterFlagsReadOnly = cudaGraphicsRegisterFlagsReadOnly;
+  cudaGraphicsRegisterFlags GraphicsRegisterFlagsWriteDiscard = cudaGraphicsRegisterFlagsWriteDiscard;
+  cudaGraphicsRegisterFlags GraphicsRegisterFlagsSurfaceLoadStore = cudaGraphicsRegisterFlagsSurfaceLoadStore;
+  cudaGraphicsRegisterFlags GraphicsRegisterFlagsTextureGather = cudaGraphicsRegisterFlagsTextureGather;
 
   // CHECK: hipGraphNodeType GraphNodeType;
   // CHECK-NEXT: hipGraphNodeType GraphNodeTypeKernel = hipGraphNodeTypeKernel;
@@ -637,6 +665,15 @@ int main() {
   cudaTextureReadMode TextureReadMode;
   cudaTextureReadMode ReadModeElementType = cudaReadModeElementType;
   cudaTextureReadMode ReadModeNormalizedFloat = cudaReadModeNormalizedFloat;
+
+  // CHECK: hipGLDeviceList GLDeviceList;
+  // CHECK-NEXT: hipGLDeviceList GLDeviceListAll = hipGLDeviceListAll;
+  // CHECK-NEXT: hipGLDeviceList GLDeviceListCurrentFrame = hipGLDeviceListCurrentFrame;
+  // CHECK-NEXT: hipGLDeviceList GLDeviceListNextFrame = hipGLDeviceListNextFrame;
+  cudaGLDeviceList GLDeviceList;
+  cudaGLDeviceList GLDeviceListAll = cudaGLDeviceListAll;
+  cudaGLDeviceList GLDeviceListCurrentFrame = cudaGLDeviceListCurrentFrame;
+  cudaGLDeviceList GLDeviceListNextFrame = cudaGLDeviceListNextFrame;
 
   return 0;
 }

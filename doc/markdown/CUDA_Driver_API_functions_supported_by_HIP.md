@@ -122,16 +122,16 @@
 |`CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC`|10.0| | | | | | |
 |`CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC_st`|10.0| | | | | | |
 |`CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC_v1`|11.3| | | | | | |
-|`CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC`|10.0| | |`hipExternalSemaphoreHandleDesc`|4.3.0| | |
-|`CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC_st`|10.0| | |`hipExternalSemaphoreHandleDesc_st`|4.3.0| | |
-|`CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC_v1`|11.3| | |`hipExternalSemaphoreHandleDesc`|4.3.0| | |
-|`CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS`|10.0| | |`hipExternalSemaphoreSignalParams`|4.3.0| | |
-|`CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS_st`|10.0| | |`hipExternalSemaphoreSignalParams_st`|4.3.0| | |
-|`CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS_v1`|11.3| | |`hipExternalSemaphoreSignalParams`|4.3.0| | |
+|`CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC`|10.0| | |`hipExternalSemaphoreHandleDesc`|4.4.0| | |
+|`CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC_st`|10.0| | |`hipExternalSemaphoreHandleDesc_st`|4.4.0| | |
+|`CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC_v1`|11.3| | |`hipExternalSemaphoreHandleDesc`|4.4.0| | |
+|`CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS`|10.0| | |`hipExternalSemaphoreSignalParams`|4.4.0| | |
+|`CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS_st`|10.0| | |`hipExternalSemaphoreSignalParams_st`|4.4.0| | |
+|`CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS_v1`|11.3| | |`hipExternalSemaphoreSignalParams`|4.4.0| | |
 |`CUDA_EXTERNAL_SEMAPHORE_SIGNAL_SKIP_NVSCIBUF_MEMSYNC`|10.2| | | | | | |
-|`CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS`|10.0| | |`hipExternalSemaphoreWaitParams`|4.3.0| | |
-|`CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS_st`|10.0| | |`hipExternalSemaphoreWaitParams_st`|4.3.0| | |
-|`CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS_v1`|11.3| | |`hipExternalSemaphoreWaitParams`|4.3.0| | |
+|`CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS`|10.0| | |`hipExternalSemaphoreWaitParams`|4.4.0| | |
+|`CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS_st`|10.0| | |`hipExternalSemaphoreWaitParams_st`|4.4.0| | |
+|`CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS_v1`|11.3| | |`hipExternalSemaphoreWaitParams`|4.4.0| | |
 |`CUDA_EXTERNAL_SEMAPHORE_WAIT_SKIP_NVSCIBUF_MEMSYNC`|10.2| | | | | | |
 |`CUDA_EXT_SEM_SIGNAL_NODE_PARAMS`|11.2| | | | | | |
 |`CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_st`|11.2| | | | | | |
@@ -185,8 +185,8 @@
 |`CUDA_TEXTURE_DESC_st`| | | |`HIP_TEXTURE_DESC_st`|3.5.0| | |
 |`CUDA_TEXTURE_DESC_v1`|11.3| | |`HIP_TEXTURE_DESC`|3.5.0| | |
 |`CUDA_VERSION`| | | | | | | |
-|`CUGLDeviceList`| | | | | | | |
-|`CUGLDeviceList_enum`| | | | | | | |
+|`CUGLDeviceList`| | | |`hipGLDeviceList`|4.4.0| | |
+|`CUGLDeviceList_enum`| | | |`hipGLDeviceList`|4.4.0| | |
 |`CUGLmap_flags`| | | | | | | |
 |`CUGLmap_flags_enum`| | | | | | | |
 |`CUGPUDirectRDMAWritesOrdering`|11.3| | | | | | |
@@ -476,11 +476,11 @@
 |`CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D11_FENCE`|10.2| | | | | | |
 |`CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D11_KEYED_MUTEX`|10.2| | | | | | |
 |`CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D11_KEYED_MUTEX_KMT`|10.2| | | | | | |
-|`CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE`|10.0| | | | | | |
+|`CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE`|10.0| | |`hipExternalSemaphoreHandleTypeD3D12Fence`|4.4.0| | |
 |`CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_NVSCISYNC`|10.2| | | | | | |
-|`CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD`|10.0| | | | | | |
-|`CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32`|10.0| | | | | | |
-|`CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT`|10.0| | | | | | |
+|`CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD`|10.0| | |`hipExternalSemaphoreHandleTypeOpaqueFd`|4.4.0| | |
+|`CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32`|10.0| | |`hipExternalSemaphoreHandleTypeOpaqueWin32`|4.4.0| | |
+|`CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT`|10.0| | |`hipExternalSemaphoreHandleTypeOpaqueWin32Kmt`|4.4.0| | |
 |`CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_TIMELINE_SEMAPHORE_FD`|11.2| | | | | | |
 |`CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_TIMELINE_SEMAPHORE_WIN32`|11.2| | | | | | |
 |`CU_FLUSH_GPU_DIRECT_RDMA_WRITES_OPTION_HOST`|11.3| | | | | | |
@@ -506,9 +506,9 @@
 |`CU_GET_PROC_ADDRESS_DEFAULT`|11.3| | | | | | |
 |`CU_GET_PROC_ADDRESS_LEGACY_STREAM`|11.3| | | | | | |
 |`CU_GET_PROC_ADDRESS_PER_THREAD_DEFAULT_STREAM`|11.3| | | | | | |
-|`CU_GL_DEVICE_LIST_ALL`| | | | | | | |
-|`CU_GL_DEVICE_LIST_CURRENT_FRAME`| | | | | | | |
-|`CU_GL_DEVICE_LIST_NEXT_FRAME`| | | | | | | |
+|`CU_GL_DEVICE_LIST_ALL`| | | |`hipGLDeviceListAll`|4.4.0| | |
+|`CU_GL_DEVICE_LIST_CURRENT_FRAME`| | | |`hipGLDeviceListCurrentFrame`|4.4.0| | |
+|`CU_GL_DEVICE_LIST_NEXT_FRAME`| | | |`hipGLDeviceListNextFrame`|4.4.0| | |
 |`CU_GL_MAP_RESOURCE_FLAGS_NONE`| | | | | | | |
 |`CU_GL_MAP_RESOURCE_FLAGS_READ_ONLY`| | | | | | | |
 |`CU_GL_MAP_RESOURCE_FLAGS_WRITE_DISCARD`| | | | | | | |
@@ -518,11 +518,11 @@
 |`CU_GRAPHICS_MAP_RESOURCE_FLAGS_NONE`| | | | | | | |
 |`CU_GRAPHICS_MAP_RESOURCE_FLAGS_READ_ONLY`| | | | | | | |
 |`CU_GRAPHICS_MAP_RESOURCE_FLAGS_WRITE_DISCARD`| | | | | | | |
-|`CU_GRAPHICS_REGISTER_FLAGS_NONE`| | | | | | | |
-|`CU_GRAPHICS_REGISTER_FLAGS_READ_ONLY`| | | | | | | |
-|`CU_GRAPHICS_REGISTER_FLAGS_SURFACE_LDST`| | | | | | | |
-|`CU_GRAPHICS_REGISTER_FLAGS_TEXTURE_GATHER`| | | | | | | |
-|`CU_GRAPHICS_REGISTER_FLAGS_WRITE_DISCARD`| | | | | | | |
+|`CU_GRAPHICS_REGISTER_FLAGS_NONE`| | | |`hipGraphicsRegisterFlagsNone`|4.4.0| | |
+|`CU_GRAPHICS_REGISTER_FLAGS_READ_ONLY`| | | |`hipGraphicsRegisterFlagsReadOnly`|4.4.0| | |
+|`CU_GRAPHICS_REGISTER_FLAGS_SURFACE_LDST`| | | |`hipGraphicsRegisterFlagsSurfaceLoadStore`|4.4.0| | |
+|`CU_GRAPHICS_REGISTER_FLAGS_TEXTURE_GATHER`| | | |`hipGraphicsRegisterFlagsTextureGather`|4.4.0| | |
+|`CU_GRAPHICS_REGISTER_FLAGS_WRITE_DISCARD`| | | |`hipGraphicsRegisterFlagsWriteDiscard`|4.4.0| | |
 |`CU_GRAPH_DEBUG_DOT_FLAGS_EVENT_NODE_PARAMS`|11.3| | | | | | |
 |`CU_GRAPH_DEBUG_DOT_FLAGS_EXT_SEMAS_SIGNAL_NODE_PARAMS`|11.3| | | | | | |
 |`CU_GRAPH_DEBUG_DOT_FLAGS_EXT_SEMAS_WAIT_NODE_PARAMS`|11.3| | | | | | |
@@ -880,9 +880,9 @@
 |`CUexternalMemory`|10.0| | |`hipExternalMemory_t`|4.3.0| | |
 |`CUexternalMemoryHandleType`|10.0| | |`hipExternalMemoryHandleType`|4.3.0| | |
 |`CUexternalMemoryHandleType_enum`|10.0| | |`hipExternalMemoryHandleType_enum`|4.3.0| | |
-|`CUexternalSemaphore`|10.0| | |`hipExternalSemaphore_t`|4.3.0| | |
-|`CUexternalSemaphoreHandleType`|10.0| | | | | | |
-|`CUexternalSemaphoreHandleType_enum`|10.0| | | | | | |
+|`CUexternalSemaphore`|10.0| | |`hipExternalSemaphore_t`|4.4.0| | |
+|`CUexternalSemaphoreHandleType`|10.0| | |`hipExternalSemaphoreHandleType`|4.4.0| | |
+|`CUexternalSemaphoreHandleType_enum`|10.0| | |`hipExternalSemaphoreHandleType_enum`|4.4.0| | |
 |`CUfilter_mode`| | | |`HIPfilter_mode`|3.5.0| | |
 |`CUfilter_mode_enum`| | | |`HIPfilter_mode_enum`|3.5.0| | |
 |`CUflushGPUDirectRDMAWritesOptions`|11.3| | | | | | |
@@ -915,10 +915,10 @@
 |`CUgraph_st`|10.0| | |`ihipGraph`|4.3.0| | |
 |`CUgraphicsMapResourceFlags`| | | | | | | |
 |`CUgraphicsMapResourceFlags_enum`| | | | | | | |
-|`CUgraphicsRegisterFlags`| | | | | | | |
-|`CUgraphicsRegisterFlags_enum`| | | | | | | |
-|`CUgraphicsResource`| | | |`hipGraphicsResource_t`|4.3.0| | |
-|`CUgraphicsResource_st`| | | |`hipGraphicsResource`|4.3.0| | |
+|`CUgraphicsRegisterFlags`| | | |`hipGraphicsRegisterFlags`|4.4.0| | |
+|`CUgraphicsRegisterFlags_enum`| | | |`hipGraphicsRegisterFlags`|4.4.0| | |
+|`CUgraphicsResource`| | | |`hipGraphicsResource_t`|4.4.0| | |
+|`CUgraphicsResource_st`| | | |`hipGraphicsResource`|4.4.0| | |
 |`CUhostFn`|10.0| | |`hipHostFn_t`|4.3.0| | |
 |`CUipcEventHandle`| | | |`hipIpcEventHandle_t`|1.6.0| | |
 |`CUipcEventHandle_st`| | | |`hipIpcEventHandle_st`|3.5.0| | |
@@ -1374,13 +1374,13 @@
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|
 |`cuDestroyExternalMemory`|10.0| | |`hipDestroyExternalMemory`|4.3.0| | |
-|`cuDestroyExternalSemaphore`|10.0| | | |4.3.0| | |
+|`cuDestroyExternalSemaphore`|10.0| | | |4.4.0| | |
 |`cuExternalMemoryGetMappedBuffer`|10.0| | |`hipExternalMemoryGetMappedBuffer`|4.3.0| | |
 |`cuExternalMemoryGetMappedMipmappedArray`|10.0| | | | | | |
 |`cuImportExternalMemory`|10.0| | |`hipImportExternalMemory`|4.3.0| | |
-|`cuImportExternalSemaphore`|10.0| | |`hipImportExternalSemaphore`|4.3.0| | |
-|`cuSignalExternalSemaphoresAsync`|10.0| | |`hipSignalExternalSemaphoresAsync`|4.3.0| | |
-|`cuWaitExternalSemaphoresAsync`|10.0| | |`hipWaitExternalSemaphoresAsync`|4.3.0| | |
+|`cuImportExternalSemaphore`|10.0| | |`hipImportExternalSemaphore`|4.4.0| | |
+|`cuSignalExternalSemaphoresAsync`|10.0| | |`hipSignalExternalSemaphoresAsync`|4.4.0| | |
+|`cuWaitExternalSemaphoresAsync`|10.0| | |`hipWaitExternalSemaphoresAsync`|4.4.0| | |
 
 ## **18. Stream Memory Operations**
 
