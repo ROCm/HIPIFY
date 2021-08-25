@@ -1200,10 +1200,10 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DEVICE_FUNCTION_VER_MAP {
   {"atomicAnd_system",    {HIP_4030, HIP_0,    HIP_0   }},
   {"atomicOr_system",     {HIP_4030, HIP_0,    HIP_0   }},
   {"atomicXor_system",    {HIP_4030, HIP_0,    HIP_0   }},
-  {"__funnelshift_l",     {HIP_4030, HIP_0,    HIP_0   }},
-  {"__funnelshift_lc",    {HIP_4030, HIP_0,    HIP_0   }},
-  {"__funnelshift_r",     {HIP_4030, HIP_0,    HIP_0   }},
-  {"__funnelshift_rc",    {HIP_4030, HIP_0,    HIP_0   }},
+  {"__funnelshift_l",     {HIP_4040, HIP_0,    HIP_0   }},
+  {"__funnelshift_lc",    {HIP_4040, HIP_0,    HIP_0   }},
+  {"__funnelshift_r",     {HIP_4040, HIP_0,    HIP_0   }},
+  {"__funnelshift_rc",    {HIP_4040, HIP_0,    HIP_0   }},
 };
 
 const std::map<llvm::StringRef, hipCounter> CUDA_DEVICE_TYPE_NAME_MAP {
