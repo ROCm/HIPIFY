@@ -1698,6 +1698,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // NOTE: Deprecated since CUDA 4.0 and replaced with cudaDeviceScheduleBlockingSync
   {"cudaDeviceBlockingSync",                                           {"hipDeviceScheduleBlockingSync",                            "", CONV_DEFINE, API_RUNTIME, 36, CUDA_DEPRECATED}}, // 0x04
   // CU_CTX_LMEM_RESIZE_TO_MAX
+  // NOTE: hipDeviceLmemResizeToMax = 0x16
   {"cudaDeviceLmemResizeToMax",                                        {"hipDeviceLmemResizeToMax",                                 "", CONV_DEFINE, API_RUNTIME, 36}}, // 0x10
   // CU_CTX_MAP_HOST
   {"cudaDeviceMapHost",                                                {"hipDeviceMapHost",                                         "", CONV_DEFINE, API_RUNTIME, 36}}, // 0x08
