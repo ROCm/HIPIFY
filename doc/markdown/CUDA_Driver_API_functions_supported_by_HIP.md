@@ -753,7 +753,7 @@
 |`CU_STREAM_MEM_OP_WRITE_VALUE_32`|8.0| | | | | | |
 |`CU_STREAM_MEM_OP_WRITE_VALUE_64`|9.0| | | | | | |
 |`CU_STREAM_NON_BLOCKING`| | | |`hipStreamNonBlocking`|1.6.0| | |
-|`CU_STREAM_PER_THREAD`| | | |`hipStreamPerThread`|4.3.0| | |
+|`CU_STREAM_PER_THREAD`| | | | | | | |
 |`CU_STREAM_SET_CAPTURE_DEPENDENCIES`|11.3| | | | | | |
 |`CU_STREAM_WAIT_VALUE_AND`|8.0| | |`hipStreamWaitValueAnd`|4.2.0| | |
 |`CU_STREAM_WAIT_VALUE_EQ`|8.0| | |`hipStreamWaitValueEq`|4.2.0| | |

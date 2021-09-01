@@ -3549,7 +3549,6 @@ sub simpleSubstitutions {
     $ft{'define'} += s/\bCU_MEMHOSTREGISTER_DEVICEMAP\b/hipHostRegisterMapped/g;
     $ft{'define'} += s/\bCU_MEMHOSTREGISTER_IOMEMORY\b/hipHostRegisterIoMemory/g;
     $ft{'define'} += s/\bCU_MEMHOSTREGISTER_PORTABLE\b/hipHostRegisterPortable/g;
-    $ft{'define'} += s/\bCU_STREAM_PER_THREAD\b/hipStreamPerThread/g;
     $ft{'define'} += s/\bCU_TRSA_OVERRIDE_FORMAT\b/HIP_TRSA_OVERRIDE_FORMAT/g;
     $ft{'define'} += s/\bCU_TRSF_NORMALIZED_COORDINATES\b/HIP_TRSF_NORMALIZED_COORDINATES/g;
     $ft{'define'} += s/\bCU_TRSF_READ_AS_INTEGER\b/HIP_TRSF_READ_AS_INTEGER/g;
@@ -3593,7 +3592,6 @@ sub simpleSubstitutions {
     $ft{'define'} += s/\bcudaOccupancyDefault\b/hipOccupancyDefault/g;
     $ft{'define'} += s/\bcudaStreamDefault\b/hipStreamDefault/g;
     $ft{'define'} += s/\bcudaStreamNonBlocking\b/hipStreamNonBlocking/g;
-    $ft{'define'} += s/\bcudaStreamPerThread\b/hipStreamPerThread/g;
     $ft{'define'} += s/\bcudaTextureType1D\b/hipTextureType1D/g;
     $ft{'define'} += s/\bcudaTextureType1DLayered\b/hipTextureType1DLayered/g;
     $ft{'define'} += s/\bcudaTextureType2D\b/hipTextureType2D/g;
@@ -4953,6 +4951,7 @@ sub warnUnsupportedFunctions {
         "cudaStreamUpdateCaptureDependenciesFlags",
         "cudaStreamSetCaptureDependencies",
         "cudaStreamSetAttribute",
+        "cudaStreamPerThread",
         "cudaStreamLegacy",
         "cudaStreamIsCapturing",
         "cudaStreamGetCaptureInfo",
@@ -5993,6 +5992,7 @@ sub warnUnsupportedFunctions {
         "CU_STREAM_WRITE_VALUE_DEFAULT",
         "CU_STREAM_WAIT_VALUE_FLUSH",
         "CU_STREAM_SET_CAPTURE_DEPENDENCIES",
+        "CU_STREAM_PER_THREAD",
         "CU_STREAM_MEM_OP_WRITE_VALUE_64",
         "CU_STREAM_MEM_OP_WRITE_VALUE_32",
         "CU_STREAM_MEM_OP_WAIT_VALUE_64",

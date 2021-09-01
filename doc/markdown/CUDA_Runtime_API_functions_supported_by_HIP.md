@@ -1273,7 +1273,7 @@ Unsupported
 |`cudaStreamDefault`| | | |`hipStreamDefault`|1.6.0| | |
 |`cudaStreamLegacy`| | | | | | | |
 |`cudaStreamNonBlocking`| | | |`hipStreamNonBlocking`|1.6.0| | |
-|`cudaStreamPerThread`| | | |`hipStreamPerThread`|4.3.0| | |
+|`cudaStreamPerThread`| | | | | | | |
 |`cudaStreamSetCaptureDependencies`|11.3| | | | | | |
 |`cudaStreamUpdateCaptureDependenciesFlags`|11.3| | | | | | |
 |`cudaStream_t`| | | |`hipStream_t`|1.5.0| | |
