@@ -1793,7 +1793,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CU_STREAM_LEGACY ((CUstream)0x1)
   {"cudaStreamLegacy",                                                 {"hipStreamLegacy",                                          "", CONV_DEFINE, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // ((cudaStream_t)0x1)
   // CU_STREAM_PER_THREAD ((CUstream)0x2)
-  {"cudaStreamPerThread",                                              {"hipStreamPerThread",                                       "", CONV_DEFINE, API_RUNTIME, 36}}, // ((cudaStream_t)0x2)
+  {"cudaStreamPerThread",                                              {"hipStreamPerThread",                                       "", CONV_DEFINE, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // ((cudaStream_t)0x2)
   // CU_ARRAY_SPARSE_PROPERTIES_SINGLE_MIPTAIL
   {"cudaArraySparsePropertiesSingleMipTail",                           {"hipArraySparsePropertiesSingleMipTail",                    "", CONV_DEFINE, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 0x1
 };
@@ -2343,7 +2343,6 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {
   {"hipGraphExec_t",                                                   {HIP_4030, HIP_0,    HIP_0   }},
   {"hipGraphicsResource",                                              {HIP_4040, HIP_0,    HIP_0   }},
   {"hipGraphicsResource_t",                                            {HIP_4040, HIP_0,    HIP_0   }},
-  {"hipStreamPerThread",                                               {HIP_4030, HIP_0,    HIP_0   }},
   {"hipGLDeviceList",                                                  {HIP_4040, HIP_0,    HIP_0   }},
   {"hipGLDeviceListAll",                                               {HIP_4040, HIP_0,    HIP_0   }},
   {"hipGLDeviceListCurrentFrame",                                      {HIP_4040, HIP_0,    HIP_0   }},
