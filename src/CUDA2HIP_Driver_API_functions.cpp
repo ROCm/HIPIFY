@@ -93,7 +93,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   // no analogues, except a few
   {"cuCtxCreate",                                          {"hipCtxCreate",                                            "", CONV_CONTEXT, API_DRIVER, 8, HIP_DEPRECATED}},
   {"cuCtxCreate_v2",                                       {"hipCtxCreate",                                            "", CONV_CONTEXT, API_DRIVER, 8, HIP_DEPRECATED}},
-  {"cuCtxCreate_v3",                                       {"hipCtxCreate",                                            "", CONV_CONTEXT, API_DRIVER, 8, HIP_DEPRECATED}},
+  {"cuCtxCreate_v3",                                       {"hipCtxCreate_v3",                                         "", CONV_CONTEXT, API_DRIVER, 8, HIP_UNSUPPORTED}},
   {"cuCtxDestroy",                                         {"hipCtxDestroy",                                           "", CONV_CONTEXT, API_DRIVER, 8, HIP_DEPRECATED}},
   {"cuCtxDestroy_v2",                                      {"hipCtxDestroy",                                           "", CONV_CONTEXT, API_DRIVER, 8, HIP_DEPRECATED}},
   {"cuCtxGetApiVersion",                                   {"hipCtxGetApiVersion",                                     "", CONV_CONTEXT, API_DRIVER, 8, HIP_DEPRECATED}},
