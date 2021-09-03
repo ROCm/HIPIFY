@@ -1117,7 +1117,7 @@
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|
 |`cuCtxCreate`| | | |`hipCtxCreate`|1.6.0|1.9.0| |
 |`cuCtxCreate_v2`| | | |`hipCtxCreate`|1.6.0|1.9.0| |
-|`cuCtxCreate_v3`|11.4| | |`hipCtxCreate`|1.6.0|1.9.0| |
+|`cuCtxCreate_v3`|11.4| | | | | | |
 |`cuCtxDestroy`| | | |`hipCtxDestroy`|1.6.0|1.9.0| |
 |`cuCtxDestroy_v2`| | | |`hipCtxDestroy`|1.6.0|1.9.0| |
 |`cuCtxGetApiVersion`| | | |`hipCtxGetApiVersion`|1.9.0|1.9.0| |

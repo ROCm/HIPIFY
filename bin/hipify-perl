@@ -843,7 +843,6 @@ sub simpleSubstitutions {
     $ft{'device'} += s/\bcudaSetDeviceFlags\b/hipSetDeviceFlags/g;
     $ft{'context'} += s/\bcuCtxCreate\b/hipCtxCreate/g;
     $ft{'context'} += s/\bcuCtxCreate_v2\b/hipCtxCreate/g;
-    $ft{'context'} += s/\bcuCtxCreate_v3\b/hipCtxCreate/g;
     $ft{'context'} += s/\bcuCtxDestroy\b/hipCtxDestroy/g;
     $ft{'context'} += s/\bcuCtxDestroy_v2\b/hipCtxDestroy/g;
     $ft{'context'} += s/\bcuCtxGetApiVersion\b/hipCtxGetApiVersion/g;
@@ -5779,6 +5778,7 @@ sub warnUnsupportedFunctions {
         "cuCtxResetPersistingL2Cache",
         "cuCtxGetExecAffinity",
         "cuCtxDetach",
+        "cuCtxCreate_v3",
         "cuCtxAttach",
         "cuArrayGetSparseProperties",
         "cuArrayGetPlane",
