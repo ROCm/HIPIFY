@@ -2,17 +2,35 @@
 
 // CHECK: #include <hip/hip_runtime.h>
 #include <cuda.h>
+#include <string>
 
 int main() {
   printf("09. CUDA Driver API Functions synthetic test\n");
 
   unsigned int flags = 0;
+  size_t bytes = 0;
+  void* image = nullptr;
+  std::string name = "function";
   // CHECK: hipDevice_t device;
   // CHECK-NEXT: hipCtx_t context;
   // CHECK-NEXT: hipFuncCache_t func_cache;
+  // CHECK-NEXT: hipLimit_t limit;
+  // CHECK-NEXT: hipSharedMemConfig pconfig;
+  // CHECK-NEXT: hipFunction_t function;
+  // CHECK-NEXT: hipModule_t module_;
+  // CHECK-NEXT: hipDeviceptr_t deviceptr;
+  // CHECK-NEXT: hipTexRef texref;
+  // CHECK-NEXT: hipJitOption jit_option;
   CUdevice device;
   CUcontext context;
   CUfunc_cache func_cache;
+  CUlimit limit;
+  CUsharedconfig pconfig;
+  CUfunction function;
+  CUmodule module_;
+  CUdeviceptr deviceptr;
+  CUtexref texref;
+  CUjit_option jit_option;
 
   // CUDA: CUresult CUDAAPI cuInit(unsigned int Flags);
   // HIP: hipError_t hipInit(unsigned int flags);
@@ -45,7 +63,6 @@ int main() {
   // CHECK: result = hipGetDeviceCount(&count);
   result = cuDeviceGetCount(&count);
 
-  size_t bytes = 0;
   // CUDA: CUresult CUDAAPI cuDeviceTotalMem(size_t *bytes, CUdevice dev);
   // HIP: hipError_t hipDeviceTotalMem(size_t* bytes, hipDevice_t device);
   // CHECK: result = hipDeviceTotalMem(&bytes, device);
@@ -125,6 +142,101 @@ int main() {
   // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipCtxGetDevice(hipDevice_t* device);
   // CHECK: result = hipCtxGetDevice(&device);
   result = cuCtxGetDevice(&device);
+
+  // CUDA: CUresult CUDAAPI cuCtxGetFlags(unsigned int *flags);
+  // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipCtxGetFlags(unsigned int* flags);
+  // CHECK: result = hipCtxGetFlags(&flags);
+  result = cuCtxGetFlags(&flags);
+
+  size_t pvalue = 0;
+  // CUDA: CUresult CUDAAPI cuCtxGetLimit(size_t *pvalue, CUlimit limit);
+  // HIP: hipError_t hipDeviceGetLimit(size_t* pValue, enum hipLimit_t limit);
+  // CHECK: result = hipDeviceGetLimit(&pvalue, limit);
+  result = cuCtxGetLimit(&pvalue, limit);
+
+  // CUDA: CUresult CUDAAPI cuCtxGetSharedMemConfig(CUsharedconfig *pConfig);
+  // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipCtxGetSharedMemConfig(hipSharedMemConfig* pConfig);
+  // CHECK: result = hipCtxGetSharedMemConfig(&pconfig);
+  result = cuCtxGetSharedMemConfig(&pconfig);
+
+  int leastPriority = 0, greatestPriority = 0;
+  // CUDA: CUresult CUDAAPI cuCtxGetStreamPriorityRange(int *leastPriority, int *greatestPriority);
+  // HIP: hipError_t hipDeviceGetStreamPriorityRange(int* leastPriority, int* greatestPriority);
+  // CHECK: result = hipDeviceGetStreamPriorityRange(&leastPriority, &greatestPriority);
+  result = cuCtxGetStreamPriorityRange(&leastPriority, &greatestPriority);
+
+  // CUDA: CUresult CUDAAPI cuCtxPopCurrent(CUcontext *pctx);
+  // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipCtxPopCurrent(hipCtx_t* ctx);
+  // CHECK: result = hipCtxPopCurrent(&context);
+  // CHECK-NEXT: result = hipCtxPopCurrent(&context);
+  result = cuCtxPopCurrent(&context);
+  result = cuCtxPopCurrent_v2(&context);
+
+  // CUDA: CUresult CUDAAPI cuCtxPushCurrent(CUcontext ctx);
+  // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipCtxPushCurrent(hipCtx_t ctx);
+  // CHECK: result = hipCtxPushCurrent(context);
+  // CHECK-NEXT: result = hipCtxPushCurrent(context);
+  result = cuCtxPushCurrent(context);
+  result = cuCtxPushCurrent_v2(context);
+
+  // CUDA: CUresult CUDAAPI cuCtxSetCacheConfig(CUfunc_cache config);
+  // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipCtxSetCacheConfig(hipFuncCache_t cacheConfig);
+  // CHECK: result = hipCtxSetCacheConfig(func_cache);
+  result = cuCtxSetCacheConfig(func_cache);
+
+  // CUDA: CUresult CUDAAPI cuCtxSetCurrent(CUcontext ctx);
+  // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipCtxSetCurrent(hipCtx_t ctx);
+  // CHECK: result = hipCtxSetCurrent(context);
+  result = cuCtxSetCurrent(context);
+
+  // CUDA: CUresult CUDAAPI cuCtxSetSharedMemConfig(CUsharedconfig config);
+  // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipCtxSetSharedMemConfig(hipSharedMemConfig config);
+  // CHECK: result = hipCtxSetSharedMemConfig(pconfig);
+  result = cuCtxSetSharedMemConfig(pconfig);
+
+  // CUDA: CUresult CUDAAPI cuCtxSynchronize(void);
+  // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipCtxSynchronize(void);
+  // CHECK: result = hipCtxSynchronize();
+  result = cuCtxSynchronize();
+
+  // CUDA: CUresult CUDAAPI cuModuleGetFunction(CUfunction *hfunc, CUmodule hmod, const char *name);
+  // HIP: hipError_t hipModuleGetFunction(hipFunction_t* function, hipModule_t module, const char* kname);
+  // CHECK: result = hipModuleGetFunction(&function, module_, name.c_str());
+  result = cuModuleGetFunction(&function, module_, name.c_str());
+
+  // CUDA: CUresult CUDAAPI cuModuleGetGlobal(CUdeviceptr *dptr, size_t *bytes, CUmodule hmod, const char *name);
+  // HIP: hipError_t hipModuleGetGlobal(hipDeviceptr_t* dptr, size_t* bytes, hipModule_t hmod, const char* name);
+  // CHECK: result = hipModuleGetGlobal(&deviceptr, &bytes, module_, name.c_str());
+  // CHECK: result = hipModuleGetGlobal(&deviceptr, &bytes, module_, name.c_str());
+  result = cuModuleGetGlobal(&deviceptr, &bytes, module_, name.c_str());
+  result = cuModuleGetGlobal_v2(&deviceptr, &bytes, module_, name.c_str());
+
+  // CUDA: CUresult CUDAAPI cuModuleGetTexRef(CUtexref *pTexRef, CUmodule hmod, const char *name);
+  // HIP: hipError_t hipModuleGetTexRef(textureReference** texRef, hipModule_t hmod, const char* name);
+  // CHECK: result = hipModuleGetTexRef(&texref, module_, name.c_str());
+  result = cuModuleGetTexRef(&texref, module_, name.c_str());
+
+  // CUDA: CUresult CUDAAPI cuModuleLoad(CUmodule *module, const char *fname);
+  // HIP: hipError_t hipModuleLoad(hipModule_t* module, const char* fname);
+  // CHECK: result = hipModuleLoad(&module_, name.c_str());
+  result = cuModuleLoad(&module_, name.c_str());
+
+  // CUDA: CUresult CUDAAPI cuModuleLoadData(CUmodule *module, const void *image);
+  // HIP: hipError_t hipModuleLoadData(hipModule_t* module, const void* image);
+  // CHECK: result = hipModuleLoadData(&module_, image);
+  result = cuModuleLoadData(&module_, image);
+
+  unsigned int numOptions = 0;
+  void* optionValues = nullptr;
+  // CUDA: CUresult CUDAAPI cuModuleLoadDataEx(CUmodule *module, const void *image, unsigned int numOptions, CUjit_option *options, void **optionValues);
+  // HIP: hipError_t hipModuleLoadDataEx(hipModule_t* module, const void* image, unsigned int numOptions, hipJitOption* options, void** optionValues);
+  // CHECK: result = hipModuleLoadDataEx(&module_, image, numOptions, &jit_option, &optionValues);
+  result = cuModuleLoadDataEx(&module_, image, numOptions, &jit_option, &optionValues);
+
+  // CUDA: CUresult CUDAAPI cuModuleUnload(CUmodule hmod);
+  // HIP: hipError_t hipModuleUnload(hipModule_t module);
+  // CHECK: result = hipModuleUnload(module_);
+  result = cuModuleUnload(module_);
 
   return 0;
 }
