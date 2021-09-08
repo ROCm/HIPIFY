@@ -119,7 +119,7 @@ int main() {
   CUipcMemHandle_v1 ipc_mem_handle_v1;
 
   // CHECK: hipArray* array_st_ptr;
-  // CHECK-NEXT: hipArray* array_ptr;
+  // CHECK-NEXT: hipArray_t array_ptr;
   CUarray_st* array_st_ptr;
   CUarray array_ptr;
 

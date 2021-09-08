@@ -10,7 +10,7 @@ int main() {
   unsigned int flags = 0;
   size_t bytes = 0;
   void* image = nullptr;
-  std::string name = "function";
+  std::string name = "str";
   // CHECK: hipDevice_t device;
   // CHECK-NEXT: hipCtx_t context;
   // CHECK-NEXT: hipFuncCache_t func_cache;
@@ -21,6 +21,15 @@ int main() {
   // CHECK-NEXT: hipDeviceptr_t deviceptr;
   // CHECK-NEXT: hipTexRef texref;
   // CHECK-NEXT: hipJitOption jit_option;
+  // CHECK-NEXT: hipArray_t array_;
+  // CHECK-NEXT: HIP_ARRAY3D_DESCRIPTOR ARRAY3D_DESCRIPTOR;
+  // CHECK-NEXT: HIP_ARRAY_DESCRIPTOR ARRAY_DESCRIPTOR;
+  // CHECK-NEXT: hipIpcEventHandle_t ipcEventHandle;
+  // CHECK-NEXT: hipEvent_t event_;
+  // CHECK-NEXT: hipIpcMemHandle_t ipcMemHandle;
+  // CHECK-NEXT: hip_Memcpy2D MEMCPY2D;
+  // CHECK-NEXT: HIP_MEMCPY3D MEMCPY3D;
+  // CHECK-NEXT: hipStream_t stream;
   CUdevice device;
   CUcontext context;
   CUfunc_cache func_cache;
@@ -31,6 +40,15 @@ int main() {
   CUdeviceptr deviceptr;
   CUtexref texref;
   CUjit_option jit_option;
+  CUarray array_;
+  CUDA_ARRAY3D_DESCRIPTOR ARRAY3D_DESCRIPTOR;
+  CUDA_ARRAY_DESCRIPTOR ARRAY_DESCRIPTOR;
+  CUipcEventHandle ipcEventHandle;
+  CUevent event_;
+  CUipcMemHandle ipcMemHandle;
+  CUDA_MEMCPY2D MEMCPY2D;
+  CUDA_MEMCPY3D MEMCPY3D;
+  CUstream stream;
 
   // CUDA: CUresult CUDAAPI cuInit(unsigned int Flags);
   // HIP: hipError_t hipInit(unsigned int flags);
@@ -207,7 +225,7 @@ int main() {
   // CUDA: CUresult CUDAAPI cuModuleGetGlobal(CUdeviceptr *dptr, size_t *bytes, CUmodule hmod, const char *name);
   // HIP: hipError_t hipModuleGetGlobal(hipDeviceptr_t* dptr, size_t* bytes, hipModule_t hmod, const char* name);
   // CHECK: result = hipModuleGetGlobal(&deviceptr, &bytes, module_, name.c_str());
-  // CHECK: result = hipModuleGetGlobal(&deviceptr, &bytes, module_, name.c_str());
+  // CHECK-NEXT: result = hipModuleGetGlobal(&deviceptr, &bytes, module_, name.c_str());
   result = cuModuleGetGlobal(&deviceptr, &bytes, module_, name.c_str());
   result = cuModuleGetGlobal_v2(&deviceptr, &bytes, module_, name.c_str());
 
@@ -237,6 +255,188 @@ int main() {
   // HIP: hipError_t hipModuleUnload(hipModule_t module);
   // CHECK: result = hipModuleUnload(module_);
   result = cuModuleUnload(module_);
+
+  // CUDA: CUresult CUDAAPI cuArray3DCreate(CUarray *pHandle, const CUDA_ARRAY3D_DESCRIPTOR *pAllocateArray);
+  // HIP: hipError_t hipArray3DCreate(hipArray** array, const HIP_ARRAY3D_DESCRIPTOR* pAllocateArray);
+  // CHECK: result = hipArray3DCreate(&array_, &ARRAY3D_DESCRIPTOR);
+  // CHECK-NEXT: result = hipArray3DCreate(&array_, &ARRAY3D_DESCRIPTOR);
+  result = cuArray3DCreate(&array_, &ARRAY3D_DESCRIPTOR);
+  result = cuArray3DCreate_v2(&array_, &ARRAY3D_DESCRIPTOR);
+
+  // CUDA: CUresult CUDAAPI cuArrayCreate(CUarray *pHandle, const CUDA_ARRAY_DESCRIPTOR *pAllocateArray);
+  // HIP: hipError_t hipArrayCreate(hipArray** pHandle, const HIP_ARRAY_DESCRIPTOR* pAllocateArray);
+  // CHECK: result = hipArrayCreate(&array_, &ARRAY_DESCRIPTOR);
+  // CHECK: result = hipArrayCreate(&array_, &ARRAY_DESCRIPTOR);
+  result = cuArrayCreate(&array_, &ARRAY_DESCRIPTOR);
+  result = cuArrayCreate_v2(&array_, &ARRAY_DESCRIPTOR);
+
+  // CUDA: CUresult CUDAAPI cuArrayDestroy(CUarray hArray);
+  // HIP: hipError_t hipArrayDestroy(hipArray* array);
+  // CHECK: result = hipArrayDestroy(array_);
+  result = cuArrayDestroy(array_);
+
+  std::string pciBusId;
+  // CUDA: CUresult CUDAAPI cuDeviceGetByPCIBusId(CUdevice *dev, const char *pciBusId);
+  // HIP: hipError_t hipDeviceGetByPCIBusId(int* device, const char* pciBusId);
+  // CHECK: result = hipDeviceGetByPCIBusId(&device, pciBusId.c_str());
+  result = cuDeviceGetByPCIBusId(&device, pciBusId.c_str());
+
+  int len = 0;
+  char* pciBusId_ = const_cast<char*>(pciBusId.c_str());
+  // CUDA: CUresult CUDAAPI cuDeviceGetPCIBusId(char *pciBusId, int len, CUdevice dev);
+  // HIP: hipError_t hipDeviceGetPCIBusId(char* pciBusId, int len, int device);
+  // CHECK: result = hipDeviceGetPCIBusId(pciBusId_, len, device);
+  result = cuDeviceGetPCIBusId(pciBusId_, len, device);
+
+  // CUDA: CUresult CUDAAPI cuIpcCloseMemHandle(CUdeviceptr dptr);
+  // HIP: hipError_t hipIpcCloseMemHandle(void* devPtr);
+  // CHECK: result = hipIpcCloseMemHandle(deviceptr);
+  result = cuIpcCloseMemHandle(deviceptr);
+
+  // CUDA: CUresult CUDAAPI cuIpcGetEventHandle(CUipcEventHandle *pHandle, CUevent event);
+  // HIP: hipError_t hipIpcGetEventHandle(hipIpcEventHandle_t* handle, hipEvent_t event);
+  // CHECK: result = hipIpcGetEventHandle(&ipcEventHandle, event_);
+  result = cuIpcGetEventHandle(&ipcEventHandle, event_);
+
+  // CUDA: CUresult CUDAAPI cuIpcGetMemHandle(CUipcMemHandle *pHandle, CUdeviceptr dptr);
+  // HIP: hipError_t hipIpcGetMemHandle(hipIpcMemHandle_t* handle, void* devPtr);
+  // CHECK: result = hipIpcGetMemHandle(&ipcMemHandle, deviceptr);
+  result = cuIpcGetMemHandle(&ipcMemHandle, deviceptr);
+
+  // CUDA: CUresult CUDAAPI cuIpcOpenEventHandle(CUevent *phEvent, CUipcEventHandle handle);
+  // HIP: hipError_t hipIpcOpenEventHandle(hipEvent_t* event, hipIpcEventHandle_t handle);
+  // CHECK: result = hipIpcOpenEventHandle(&event_, ipcEventHandle);
+  result = cuIpcOpenEventHandle(&event_, ipcEventHandle);
+
+  // CUDA: CUresult CUDAAPI cuIpcOpenMemHandle(CUdeviceptr *pdptr, CUipcMemHandle handle, unsigned int Flags);
+  // HIP: hipError_t hipIpcOpenMemHandle(void** devPtr, hipIpcMemHandle_t handle, unsigned int flags);
+  // CHECK: result = hipIpcOpenMemHandle(&deviceptr, ipcMemHandle, flags);
+  result = cuIpcOpenMemHandle(&deviceptr, ipcMemHandle, flags);
+
+  // CUDA: CUresult CUDAAPI cuMemAlloc(CUdeviceptr *dptr, size_t bytesize);
+  // HIP: hipError_t hipMalloc(void** ptr, size_t size);
+  // CHECK: result = hipMalloc(&deviceptr, bytes);
+  // CHECK-NEXT: result = hipMalloc(&deviceptr, bytes);
+  result = cuMemAlloc(&deviceptr, bytes);
+  result = cuMemAlloc_v2(&deviceptr, bytes);
+
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  ///////////// TODO: Get rid of additional attribute 'unsigned int flags' used by HIP without a default value ///////
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  // CUDA: CUresult CUDAAPI cuMemAllocHost(void **pp, size_t bytesize);
+  // HIP: DEPRECATED("use hipHostMalloc instead") hipError_t hipHostAlloc(void** ptr, size_t size, unsigned int flags);
+  // TODO: should be hipHostAlloc(&image, bytes, 0);
+  // CHECK: result = hipHostAlloc(&image, bytes);
+  // CHECK-NEXT: result = hipHostAlloc(&image, bytes);
+  result = cuMemAllocHost(&image, bytes);
+  result = cuMemAllocHost_v2(&image, bytes);
+
+  // CUDA: CUresult CUDAAPI cuMemAllocManaged(CUdeviceptr *dptr, size_t bytesize, unsigned int flags);
+  // HIP: hipError_t hipMallocManaged(void** dev_ptr, size_t size, unsigned int flags __dparm(hipMemAttachGlobal));
+  // CHECK: result = hipMallocManaged(&deviceptr, bytes, flags);
+  result = cuMemAllocManaged(&deviceptr, bytes, flags);
+
+  size_t pitch = 0, width = 0, height = 0;
+  // CUDA: CUresult CUDAAPI cuMemAllocPitch(CUdeviceptr *dptr, size_t *pPitch, size_t WidthInBytes, size_t Height, unsigned int ElementSizeBytes);
+  // HIP: hipError_t hipMemAllocPitch(hipDeviceptr_t* dptr, size_t* pitch, size_t widthInBytes, size_t height, unsigned int elementSizeBytes);
+  // CHECK: result = hipMemAllocPitch(&deviceptr, &pitch, width, height, bytes);
+  // CHECK-NEXT: result = hipMemAllocPitch(&deviceptr, &pitch, width, height, bytes);
+  result = cuMemAllocPitch(&deviceptr, &pitch, width, height, bytes);
+  result = cuMemAllocPitch_v2(&deviceptr, &pitch, width, height, bytes);
+
+  // CUDA: CUresult CUDAAPI cuMemcpy2D(const CUDA_MEMCPY2D *pCopy);
+  // HIP: hipError_t hipMemcpyParam2D(const hip_Memcpy2D* pCopy);
+  // CHECK: result = hipMemcpyParam2D(&MEMCPY2D);
+  // CHECK-NEXT: result = hipMemcpyParam2D(&MEMCPY2D);
+  result = cuMemcpy2D(&MEMCPY2D);
+  result = cuMemcpy2D_v2(&MEMCPY2D);
+
+  // CUDA: CUresult CUDAAPI cuMemcpy2DAsync(const CUDA_MEMCPY2D *pCopy, CUstream hStream);
+  // HIP: hipError_t hipMemcpyParam2DAsync(const hip_Memcpy2D* pCopy, hipStream_t stream __dparm(0));
+  // CHECK: result = hipMemcpyParam2DAsync(&MEMCPY2D, stream);
+  // CHECK-NEXT: result = hipMemcpyParam2DAsync(&MEMCPY2D, stream);
+  result = cuMemcpy2DAsync(&MEMCPY2D, stream);
+  result = cuMemcpy2DAsync_v2(&MEMCPY2D, stream);
+
+  // CUDA: CUresult CUDAAPI cuMemcpy2DUnaligned(const CUDA_MEMCPY2D *pCopy);
+  // HIP: hipError_t hipDrvMemcpy2DUnaligned(const hip_Memcpy2D* pCopy);
+  // CHECK: result = hipDrvMemcpy2DUnaligned(&MEMCPY2D);
+  // CHECK-NEXT: result = hipDrvMemcpy2DUnaligned(&MEMCPY2D);
+  result = cuMemcpy2DUnaligned(&MEMCPY2D);
+  result = cuMemcpy2DUnaligned_v2(&MEMCPY2D);
+
+  // CUDA: CUresult CUDAAPI cuMemcpy3D(const CUDA_MEMCPY3D *pCopy);
+  // HIP: hipError_t hipDrvMemcpy3D(const HIP_MEMCPY3D* pCopy);
+  // CHECK: result = hipDrvMemcpy3D(&MEMCPY3D);
+  // CHECK-NEXT: result = hipDrvMemcpy3D(&MEMCPY3D);
+  result = cuMemcpy3D(&MEMCPY3D);
+  result = cuMemcpy3D_v2(&MEMCPY3D);
+
+  // CUDA: CUresult CUDAAPI cuMemcpy3DAsync(const CUDA_MEMCPY3D *pCopy, CUstream hStream);
+  // HIP: hipError_t hipDrvMemcpy3DAsync(const HIP_MEMCPY3D* pCopy, hipStream_t stream);
+  // CHECK: result = hipDrvMemcpy3DAsync(&MEMCPY3D, stream);
+  // CHECK-NEXT: result = hipDrvMemcpy3DAsync(&MEMCPY3D, stream);
+  result = cuMemcpy3DAsync(&MEMCPY3D, stream);
+  result = cuMemcpy3DAsync_v2(&MEMCPY3D, stream);
+
+  void* dsthost = nullptr;
+  size_t offset = 0;
+  // CUDA: CUresult CUDAAPI cuMemcpyAtoH(void *dstHost, CUarray srcArray, size_t srcOffset, size_t ByteCount);
+  // HIP: hipError_t hipMemcpyAtoH(void* dst, hipArray* srcArray, size_t srcOffset, size_t count);
+  // CHECK: result = hipMemcpyAtoH(dsthost, array_, offset, bytes);
+  // CHECK-NEXT: result = hipMemcpyAtoH(dsthost, array_, offset, bytes);
+  result = cuMemcpyAtoH(dsthost, array_, offset, bytes);
+  result = cuMemcpyAtoH_v2(dsthost, array_, offset, bytes);
+
+  // CUDA: CUresult CUDAAPI cuMemcpyDtoD(CUdeviceptr dstDevice, CUdeviceptr srcDevice, size_t ByteCount);
+  // HIP: hipError_t hipMemcpyDtoD(hipDeviceptr_t dst, hipDeviceptr_t src, size_t sizeBytes);
+  // CHECK: result = hipMemcpyDtoD(deviceptr, deviceptr, bytes);
+  // CHECK-NEXT: result = hipMemcpyDtoD(deviceptr, deviceptr, bytes);
+  result = cuMemcpyDtoD(deviceptr, deviceptr, bytes);
+  result = cuMemcpyDtoD_v2(deviceptr, deviceptr, bytes);
+
+  // CUDA: CUresult CUDAAPI cuMemcpyDtoDAsync(CUdeviceptr dstDevice, CUdeviceptr srcDevice, size_t ByteCount, CUstream hStream);
+  // HIP: hipError_t hipMemcpyDtoDAsync(hipDeviceptr_t dst, hipDeviceptr_t src, size_t sizeBytes, hipStream_t stream);
+  // CHECK: result = hipMemcpyDtoDAsync(deviceptr, deviceptr, bytes, stream);
+  // CHECK-NEXT: result = hipMemcpyDtoDAsync(deviceptr, deviceptr, bytes, stream);
+  result = cuMemcpyDtoDAsync(deviceptr, deviceptr, bytes, stream);
+  result = cuMemcpyDtoDAsync_v2(deviceptr, deviceptr, bytes, stream);
+
+  // CUDA: CUresult CUDAAPI cuMemcpyDtoH(void *dstHost, CUdeviceptr srcDevice, size_t ByteCount);
+  // HIP: hipError_t hipMemcpyDtoH(void* dst, hipDeviceptr_t src, size_t sizeBytes);
+  // CHECK: result = hipMemcpyDtoH(dsthost, deviceptr, bytes);
+  // CHECK-NEXT: result = hipMemcpyDtoH(dsthost, deviceptr, bytes);
+  result = cuMemcpyDtoH(dsthost, deviceptr, bytes);
+  result = cuMemcpyDtoH_v2(dsthost, deviceptr, bytes);
+
+  // CUDA: CUresult CUDAAPI cuMemcpyDtoHAsync(void *dstHost, CUdeviceptr srcDevice, size_t ByteCount, CUstream hStream);
+  // HIP: hipError_t hipMemcpyDtoHAsync(void* dst, hipDeviceptr_t src, size_t sizeBytes, hipStream_t stream);
+  // CHECK: result = hipMemcpyDtoHAsync(dsthost, deviceptr, bytes, stream);
+  // CHECK-NEXT: result = hipMemcpyDtoHAsync(dsthost, deviceptr, bytes, stream);
+  result = cuMemcpyDtoHAsync(dsthost, deviceptr, bytes, stream);
+  result = cuMemcpyDtoHAsync_v2(dsthost, deviceptr, bytes, stream);
+
+  // CUDA: CUresult CUDAAPI cuMemcpyHtoA(CUarray dstArray, size_t dstOffset, const void *srcHost, size_t ByteCount);
+  // HIP: hipError_t hipMemcpyHtoA(hipArray* dstArray, size_t dstOffset, const void* srcHost, size_t count);
+  // CHECK: result = hipMemcpyHtoA(array_, offset, dsthost, bytes);
+  // CHECK-NEXT: result = hipMemcpyHtoA(array_, offset, dsthost, bytes);
+  result = cuMemcpyHtoA(array_, offset, dsthost, bytes);
+  result = cuMemcpyHtoA_v2(array_, offset, dsthost, bytes);
+
+  // CUDA: CUresult CUDAAPI cuMemcpyHtoD(CUdeviceptr dstDevice, const void *srcHost, size_t ByteCount);
+  // HIP: hipError_t hipMemcpyHtoD(hipDeviceptr_t dst, void* src, size_t sizeBytes);
+  // CHECK: result = hipMemcpyHtoD(deviceptr, dsthost, bytes);
+  // CHECK-NEXT: result = hipMemcpyHtoD(deviceptr, dsthost, bytes);
+  result = cuMemcpyHtoD(deviceptr, dsthost, bytes);
+  result = cuMemcpyHtoD_v2(deviceptr, dsthost, bytes);
+
+  // CUDA: CUresult CUDAAPI cuMemcpyHtoDAsync(CUdeviceptr dstDevice, const void *srcHost, size_t ByteCount, CUstream hStream);
+  // HIP: hipError_t hipMemcpyHtoDAsync(hipDeviceptr_t dst, void* src, size_t sizeBytes, hipStream_t stream);
+  // CHECK: result = hipMemcpyHtoDAsync(deviceptr, dsthost, bytes, stream);
+  // CHECK-NEXT: result = hipMemcpyHtoDAsync(deviceptr, dsthost, bytes, stream);
+  result = cuMemcpyHtoDAsync(deviceptr, dsthost, bytes, stream);
+  result = cuMemcpyHtoDAsync_v2(deviceptr, dsthost, bytes, stream);
 
   return 0;
 }

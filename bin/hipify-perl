@@ -2323,7 +2323,7 @@ sub simpleSubstitutions {
     $ft{'type'} += s/\bCUGLDeviceList_enum\b/hipGLDeviceList/g;
     $ft{'type'} += s/\bCUaddress_mode\b/HIPaddress_mode/g;
     $ft{'type'} += s/\bCUaddress_mode_enum\b/HIPaddress_mode_enum/g;
-    $ft{'type'} += s/\bCUarray\b/hipArray*/g;
+    $ft{'type'} += s/\bCUarray\b/hipArray_t/g;
     $ft{'type'} += s/\bCUarray_format\b/hipArray_Format/g;
     $ft{'type'} += s/\bCUarray_format_enum\b/hipArray_Format/g;
     $ft{'type'} += s/\bCUarray_st\b/hipArray/g;

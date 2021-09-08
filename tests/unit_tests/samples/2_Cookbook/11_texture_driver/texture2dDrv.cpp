@@ -61,7 +61,7 @@ bool runTest(int argc, char** argv) {
     // CHECK: hipModuleLoad(&Module, fileName);
     cuModuleLoad(&Module, fileName);
 
-    // CHECK: hipArray* array;
+    // CHECK: hipArray_t array;
     CUarray array;
     // CHECK: HIP_ARRAY_DESCRIPTOR desc;
     CUDA_ARRAY_DESCRIPTOR desc;
