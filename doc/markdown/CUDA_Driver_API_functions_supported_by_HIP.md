@@ -806,7 +806,7 @@
 |`CUaccessProperty_enum`|11.0| | | | | | |
 |`CUaddress_mode`| | | |`HIPaddress_mode`|3.5.0| | |
 |`CUaddress_mode_enum`| | | |`HIPaddress_mode_enum`|3.5.0| | |
-|`CUarray`| | | |`hipArray*`| | | |
+|`CUarray`| | | |`hipArray_t`|1.7.0| | |
 |`CUarrayMapInfo`|11.1| | | | | | |
 |`CUarrayMapInfo_st`|11.1| | | | | | |
 |`CUarrayMapInfo_v1`|11.3| | | | | | |

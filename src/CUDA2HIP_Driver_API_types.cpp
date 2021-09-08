@@ -149,7 +149,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaArray
   {"CUarray_st",                                                       {"hipArray",                                                 "", CONV_TYPE, API_DRIVER, 1}},
   // cudaArray_t
-  {"CUarray",                                                          {"hipArray*",                                                "", CONV_TYPE, API_DRIVER, 1}},
+  {"CUarray",                                                          {"hipArray_t",                                               "", CONV_TYPE, API_DRIVER, 1}},
 
   // no analogue
   {"CUctx_st",                                                         {"ihipCtx_t",                                                "", CONV_TYPE, API_DRIVER, 1}},
