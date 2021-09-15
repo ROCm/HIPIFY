@@ -5495,6 +5495,8 @@ sub warnUnsupportedFunctions {
         "cublasIamaxEx",
         "cublasGetVersion_v2",
         "cublasGetVersion",
+        "cublasGetStatusString",
+        "cublasGetStatusName",
         "cublasGetSmCountTarget",
         "cublasGetProperty",
         "cublasGetMathMode",
