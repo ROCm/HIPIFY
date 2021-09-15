@@ -45,7 +45,7 @@ After applying all the matchers, the output HIP source is produced.
 
 1. [**LLVM+CLANG**](http://releases.llvm.org) of at least version [3.8.0](http://releases.llvm.org/download.html#3.8.0); the latest stable and recommended release: [**12.0.1**](https://github.com/llvm/llvm-project/releases/tag/llvmorg-12.0.1).
 
-2. [**CUDA**](https://developer.nvidia.com/cuda-downloads) of at least version [7.0](https://developer.nvidia.com/cuda-toolkit-70), the latest supported version is [**11.4.1**](https://developer.nvidia.com/cuda-downloads).
+2. [**CUDA**](https://developer.nvidia.com/cuda-downloads) of at least version [7.0](https://developer.nvidia.com/cuda-toolkit-70), the latest supported version is [**11.4.2**](https://developer.nvidia.com/cuda-downloads).
 
 <table align="center">
   <thead>
@@ -148,7 +148,7 @@ After applying all the matchers, the output HIP source is produced.
     <tr align="center">
       <td bgcolor="eefaeb"><a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-12.0.0">12.0.0</a>,
                            <b><a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-12.0.1">12.0.1</a></b>
-      <td bgcolor="eefaeb"><a href="https://developer.nvidia.com/cuda-downloads"><b>11.4.1</b></a></td>
+      <td bgcolor="eefaeb"><a href="https://developer.nvidia.com/cuda-downloads"><b>11.4.2</b></a></td>
       <td colspan=2 bgcolor="eefaeb"><font color="green"><b>LATEST STABLE CONFIG</b></font></td>
     </tr>
   </tbody>
@@ -347,7 +347,7 @@ Ubuntu 14: LLVM 4.0.0 - 7.1.0, CUDA 7.0 - 9.0, cuDNN 5.0.5 - 7.6.5
 
 Ubuntu 16-18: LLVM 8.0.0 - 12.0.1, CUDA 8.0 - 10.2, cuDNN 5.1.10 - 8.0.5
 
-Ubuntu 20: LLVM 9.0.0 - 12.0.1, CUDA 8.0 - 11.4.1, cuDNN 5.1.10 - 8.2.4
+Ubuntu 20: LLVM 9.0.0 - 12.0.1, CUDA 8.0 - 11.4.2, cuDNN 5.1.10 - 8.2.4
 
 Minimum build system requirements for the above configurations:
 
@@ -517,8 +517,8 @@ Testing Time: 5.73s
 | 9.0.0 - 9.0.1   | 10.1         | 7.6.5          | 2017.15.9.20, 2019.16.4.5  | 3.16.4, 3.18.0 | 3.8.0, 3.8.5 |
 | 10.0.0 - 11.0.0 | 8.0 - 11.1   | 7.6.5  - 8.0.5 | 2017.15.9.30, 2019.16.8.3  | 3.19.2         | 3.9.1        |
 | 11.0.1 - 11.1.0 | 8.0 - 11.2.2 | 7.6.5  - 8.0.5 | 2017.15.9.31, 2019.16.8.4  | 3.19.3         | 3.9.2        |
-| 12.0.0 - 12.0.1 | 8.0 - 11.4.1 | 7.6.5  - 8.2.4 | 2017.15.9.38, 2019.16.11.2 | 3.21.2         | 3.9.7        |
-| 13.0.0git       | 8.0 - 11.4.1 | 7.6.5  - 8.2.4 | 2017.15.9.38, 2019.16.11.2 | 3.21.2         | 3.9.7        |
+| 12.0.0 - 12.0.1 | 8.0 - 11.4.2 | 7.6.5  - 8.2.4 | 2017.15.9.39, 2019.16.11.3 | 3.21.2         | 3.9.7        |
+| 13.0.0git       | 8.0 - 11.4.2 | 7.6.5  - 8.2.4 | 2017.15.9.39, 2019.16.11.3 | 3.21.2         | 3.9.7        |
 
 *Building with testing support by `Visual Studio 16 2019` on `Windows 10`:*
 
