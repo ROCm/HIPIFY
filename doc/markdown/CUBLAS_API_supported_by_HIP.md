@@ -152,6 +152,8 @@
 |`cublasGetPointerMode_v2`| | | |`hipblasGetPointerMode`|1.8.2| | |
 |`cublasGetProperty`| | | | | | | |
 |`cublasGetSmCountTarget`|11.3| | | | | | |
+|`cublasGetStatusName`|11.4| | | | | | |
+|`cublasGetStatusString`|11.4| | | | | | |
 |`cublasGetStream`| | | |`hipblasGetStream`|1.8.2| | |
 |`cublasGetStream_v2`| | | |`hipblasGetStream`|1.8.2| | |
 |`cublasGetVector`| | | |`hipblasGetVector`|1.8.2| | |
