@@ -471,9 +471,11 @@ int main() {
 
   // CHECK: hipLimit_t limit;
   // CHECK-NEXT: hipLimit_t limit_enum;
+  // CHECK-NEXT: hipLimit_t LIMIT_PRINTF_FIFO_SIZE = hipLimitPrintfFifoSize;
   // CHECK-NEXT: hipLimit_t LIMIT_MALLOC_HEAP_SIZE = hipLimitMallocHeapSize;
   CUlimit limit;
   CUlimit_enum limit_enum;
+  CUlimit LIMIT_PRINTF_FIFO_SIZE = CU_LIMIT_PRINTF_FIFO_SIZE;
   CUlimit LIMIT_MALLOC_HEAP_SIZE = CU_LIMIT_MALLOC_HEAP_SIZE;
 
   // CHECK: hipMemoryAdvise mem_advise;
