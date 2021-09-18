@@ -1129,7 +1129,7 @@ Unsupported
 |`cudaLimitMallocHeapSize`| | | |`hipLimitMallocHeapSize`|1.6.0| | |
 |`cudaLimitMaxL2FetchGranularity`|10.0| | | | | | |
 |`cudaLimitPersistingL2CacheSize`|11.0| | | | | | |
-|`cudaLimitPrintfFifoSize`| | | | | | | |
+|`cudaLimitPrintfFifoSize`| | | |`hipLimitPrintfFifoSize`|4.5.0| | |
 |`cudaLimitStackSize`| | | | | | | |
 |`cudaMemAccessDesc`|11.2| | | | | | |
 |`cudaMemAccessFlags`|11.2| | | | | | |
@@ -1273,7 +1273,7 @@ Unsupported
 |`cudaStreamDefault`| | | |`hipStreamDefault`|1.6.0| | |
 |`cudaStreamLegacy`| | | | | | | |
 |`cudaStreamNonBlocking`| | | |`hipStreamNonBlocking`|1.6.0| | |
-|`cudaStreamPerThread`| | | | | | | |
+|`cudaStreamPerThread`| | | |`hipStreamPerThread`|4.5.0| | |
 |`cudaStreamSetCaptureDependencies`|11.3| | | | | | |
 |`cudaStreamUpdateCaptureDependenciesFlags`|11.3| | | | | | |
 |`cudaStream_t`| | | |`hipStream_t`|1.5.0| | |

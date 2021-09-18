@@ -1119,7 +1119,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CU_LIMIT_STACK_SIZE
   {"cudaLimitStackSize",                                               {"hipLimitStackSize",                                        "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 0x00
   // CU_LIMIT_PRINTF_FIFO_SIZE
-  {"cudaLimitPrintfFifoSize",                                          {"hipLimitPrintfFifoSize",                                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 0x01
+  {"cudaLimitPrintfFifoSize",                                          {"hipLimitPrintfFifoSize",                                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 0x01
   // CU_LIMIT_MALLOC_HEAP_SIZE
   {"cudaLimitMallocHeapSize",                                          {"hipLimitMallocHeapSize",                                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 0x02
   // CU_LIMIT_DEV_RUNTIME_SYNC_DEPTH
@@ -1793,7 +1793,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CU_STREAM_LEGACY ((CUstream)0x1)
   {"cudaStreamLegacy",                                                 {"hipStreamLegacy",                                          "", CONV_DEFINE, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // ((cudaStream_t)0x1)
   // CU_STREAM_PER_THREAD ((CUstream)0x2)
-  {"cudaStreamPerThread",                                              {"hipStreamPerThread",                                       "", CONV_DEFINE, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // ((cudaStream_t)0x2)
+  {"cudaStreamPerThread",                                              {"hipStreamPerThread",                                       "", CONV_DEFINE, API_RUNTIME, 36}}, // ((cudaStream_t)0x2)
   // CU_ARRAY_SPARSE_PROPERTIES_SINGLE_MIPTAIL
   {"cudaArraySparsePropertiesSingleMipTail",                           {"hipArraySparsePropertiesSingleMipTail",                    "", CONV_DEFINE, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 0x1
 };

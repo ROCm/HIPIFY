@@ -471,8 +471,10 @@ int main() {
   cudaGraphExecUpdateResult GraphExecUpdateErrorUnsupportedFunctionChange = cudaGraphExecUpdateErrorUnsupportedFunctionChange;
 
   // CHECK: hipLimit_t Limit;
+  // CHECK-NEXT: hipLimit_t LimitPrintfFifoSize = hipLimitPrintfFifoSize;
   // CHECK-NEXT: hipLimit_t LimitMallocHeapSize = hipLimitMallocHeapSize;
   cudaLimit Limit;
+  cudaLimit LimitPrintfFifoSize = cudaLimitPrintfFifoSize;
   cudaLimit LimitMallocHeapSize = cudaLimitMallocHeapSize;
 
   // CHECK: hipMemcpyKind MemcpyKind;

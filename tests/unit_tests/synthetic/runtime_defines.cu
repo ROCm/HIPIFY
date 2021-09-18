@@ -50,6 +50,7 @@ int main() {
   // CHECK-NEXT: int OccupancyDefault = hipOccupancyDefault;
   // CHECK-NEXT: int StreamDefault = hipStreamDefault;
   // CHECK-NEXT: int StreamNonBlocking = hipStreamNonBlocking;
+  // CHECK-NEXT: hipStream_t StreamPerThread = hipStreamPerThread;
   int IPC_HANDLE_SIZE = CUDA_IPC_HANDLE_SIZE;
   int ArrayDefault = cudaArrayDefault;
   int ArrayLayered = cudaArrayLayered;
@@ -94,6 +95,8 @@ int main() {
   int OccupancyDefault = cudaOccupancyDefault;
   int StreamDefault = cudaStreamDefault;
   int StreamNonBlocking = cudaStreamNonBlocking;
+  cudaStream_t StreamPerThread = cudaStreamPerThread;
+
 
   return 0;
 }
