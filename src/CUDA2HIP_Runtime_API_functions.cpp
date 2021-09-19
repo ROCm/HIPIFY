@@ -436,9 +436,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
 
   // 14. OpenGL Interoperability
   // cuGLGetDevices
-  {"cudaGLGetDevices",                                        {"hipGLGetDevices",                                        "", CONV_OPENGL, API_RUNTIME, 14, HIP_UNSUPPORTED}},
+  {"cudaGLGetDevices",                                        {"hipGLGetDevices",                                        "", CONV_OPENGL, API_RUNTIME, 14}},
   // cuGraphicsGLRegisterBuffer
-  {"cudaGraphicsGLRegisterBuffer",                            {"hipGraphicsGLRegisterBuffer",                            "", CONV_OPENGL, API_RUNTIME, 14, HIP_UNSUPPORTED}},
+  {"cudaGraphicsGLRegisterBuffer",                            {"hipGraphicsGLRegisterBuffer",                            "", CONV_OPENGL, API_RUNTIME, 14}},
   // cuGraphicsGLRegisterImage
   {"cudaGraphicsGLRegisterImage",                             {"hipGraphicsGLRegisterImage",                             "", CONV_OPENGL, API_RUNTIME, 14, HIP_UNSUPPORTED}},
   // cuWGLGetDevice
@@ -585,19 +585,19 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
 
   // 24. Graphics Interoperability
   // cuGraphicsMapResources
-  {"cudaGraphicsMapResources",                                {"hipGraphicsMapResources",                                "", CONV_GRAPHICS, API_RUNTIME, 24, HIP_UNSUPPORTED}},
+  {"cudaGraphicsMapResources",                                {"hipGraphicsMapResources",                                "", CONV_GRAPHICS, API_RUNTIME, 24}},
   // cuGraphicsResourceGetMappedMipmappedArray
   {"cudaGraphicsResourceGetMappedMipmappedArray",             {"hipGraphicsResourceGetMappedMipmappedArray",             "", CONV_GRAPHICS, API_RUNTIME, 24, HIP_UNSUPPORTED}},
   // cuGraphicsResourceGetMappedPointer
-  {"cudaGraphicsResourceGetMappedPointer",                    {"hipGraphicsResourceGetMappedPointer",                    "", CONV_GRAPHICS, API_RUNTIME, 24, HIP_UNSUPPORTED}},
+  {"cudaGraphicsResourceGetMappedPointer",                    {"hipGraphicsResourceGetMappedPointer",                    "", CONV_GRAPHICS, API_RUNTIME, 24}},
   // cuGraphicsResourceSetMapFlags
   {"cudaGraphicsResourceSetMapFlags",                         {"hipGraphicsResourceSetMapFlags",                         "", CONV_GRAPHICS, API_RUNTIME, 24, HIP_UNSUPPORTED}},
   // cuGraphicsSubResourceGetMappedArray
   {"cudaGraphicsSubResourceGetMappedArray",                   {"hipGraphicsSubResourceGetMappedArray",                   "", CONV_GRAPHICS, API_RUNTIME, 24, HIP_UNSUPPORTED}},
   // cuGraphicsUnmapResources
-  {"cudaGraphicsUnmapResources",                              {"hipGraphicsUnmapResources",                              "", CONV_GRAPHICS, API_RUNTIME, 24, HIP_UNSUPPORTED}},
+  {"cudaGraphicsUnmapResources",                              {"hipGraphicsUnmapResources",                              "", CONV_GRAPHICS, API_RUNTIME, 24}},
   // cuGraphicsUnregisterResource
-  {"cudaGraphicsUnregisterResource",                          {"hipGraphicsUnregisterResource",                          "", CONV_GRAPHICS, API_RUNTIME, 24, HIP_UNSUPPORTED}},
+  {"cudaGraphicsUnregisterResource",                          {"hipGraphicsUnregisterResource",                          "", CONV_GRAPHICS, API_RUNTIME, 24}},
 
   // 25. Texture Reference Management [DEPRECATED]
   // no analogue
@@ -1219,18 +1219,24 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP {
   {"hipGraphAddKernelNode",                                   {HIP_4030, HIP_0,    HIP_0   }},
   {"hipGraphAddMemcpyNode",                                   {HIP_4030, HIP_0,    HIP_0   }},
   {"hipGraphAddMemsetNode",                                   {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipGraphAddMemcpyNode1D",                                 {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipGraphGetNodes",                                        {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipGraphGetRootNodes",                                    {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipGraphKernelNodeGetParams",                             {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipGraphKernelNodeSetParams",                             {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipGraphMemcpyNodeGetParams",                             {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipGraphMemcpyNodeSetParams",                             {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipGraphMemsetNodeGetParams",                             {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipGraphMemsetNodeSetParams",                             {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipGraphExecKernelNodeSetParams",                         {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipGraphAddDependencies",                                 {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipGraphAddEmptyNode",                                    {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipGraphAddMemcpyNode1D",                                 {HIP_4050, HIP_0,    HIP_0   }},
+  {"hipGraphGetNodes",                                        {HIP_4050, HIP_0,    HIP_0   }},
+  {"hipGraphGetRootNodes",                                    {HIP_4050, HIP_0,    HIP_0   }},
+  {"hipGraphKernelNodeGetParams",                             {HIP_4050, HIP_0,    HIP_0   }},
+  {"hipGraphKernelNodeSetParams",                             {HIP_4050, HIP_0,    HIP_0   }},
+  {"hipGraphMemcpyNodeGetParams",                             {HIP_4050, HIP_0,    HIP_0   }},
+  {"hipGraphMemcpyNodeSetParams",                             {HIP_4050, HIP_0,    HIP_0   }},
+  {"hipGraphMemsetNodeGetParams",                             {HIP_4050, HIP_0,    HIP_0   }},
+  {"hipGraphMemsetNodeSetParams",                             {HIP_4050, HIP_0,    HIP_0   }},
+  {"hipGraphExecKernelNodeSetParams",                         {HIP_4050, HIP_0,    HIP_0   }},
+  {"hipGraphAddDependencies",                                 {HIP_4050, HIP_0,    HIP_0   }},
+  {"hipGraphAddEmptyNode",                                    {HIP_4050, HIP_0,    HIP_0   }},
+  {"hipGLGetDevices",                                         {HIP_4050, HIP_0,    HIP_0   }},
+  {"hipGraphicsGLRegisterBuffer",                             {HIP_4050, HIP_0,    HIP_0   }},
+  {"hipGraphicsMapResources",                                 {HIP_4050, HIP_0,    HIP_0   }},
+  {"hipGraphicsResourceGetMappedPointer",                     {HIP_4050, HIP_0,    HIP_0   }},
+  {"hipGraphicsUnmapResources",                               {HIP_4050, HIP_0,    HIP_0   }},
+  {"hipGraphicsUnregisterResource",                           {HIP_4050, HIP_0,    HIP_0   }},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_RUNTIME_API_SECTION_MAP {

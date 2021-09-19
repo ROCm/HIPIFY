@@ -1429,8 +1429,8 @@
 |`cuDeviceGraphMemTrim`|11.4| | | | | | |
 |`cuDeviceSetGraphMemAttribute`|11.4| | | | | | |
 |`cuGraphAddChildGraphNode`|10.0| | | | | | |
-|`cuGraphAddDependencies`|10.0| | |`hipGraphAddDependencies`|4.3.0| | |
-|`cuGraphAddEmptyNode`|10.0| | |`hipGraphAddEmptyNode`|4.3.0| | |
+|`cuGraphAddDependencies`|10.0| | |`hipGraphAddDependencies`|4.5.0| | |
+|`cuGraphAddEmptyNode`|10.0| | |`hipGraphAddEmptyNode`|4.5.0| | |
 |`cuGraphAddEventRecordNode`|11.1| | | | | | |
 |`cuGraphAddEventWaitNode`|11.1| | | | | | |
 |`cuGraphAddExternalSemaphoresSignalNode`|11.2| | | | | | |
@@ -1458,7 +1458,7 @@
 |`cuGraphExecExternalSemaphoresSignalNodeSetParams`|11.2| | | | | | |
 |`cuGraphExecExternalSemaphoresWaitNodeSetParams`|11.2| | | | | | |
 |`cuGraphExecHostNodeSetParams`|10.2| | | | | | |
-|`cuGraphExecKernelNodeSetParams`|10.1| | |`hipGraphExecKernelNodeSetParams`|4.3.0| | |
+|`cuGraphExecKernelNodeSetParams`|10.1| | |`hipGraphExecKernelNodeSetParams`|4.5.0| | |
 |`cuGraphExecMemcpyNodeSetParams`|10.2| | | | | | |
 |`cuGraphExecMemsetNodeSetParams`|10.2| | | | | | |
 |`cuGraphExecUpdate`|10.2| | | | | | |
@@ -1467,8 +1467,8 @@
 |`cuGraphExternalSemaphoresWaitNodeGetParams`|11.2| | | | | | |
 |`cuGraphExternalSemaphoresWaitNodeSetParams`|11.2| | | | | | |
 |`cuGraphGetEdges`|10.0| | | | | | |
-|`cuGraphGetNodes`|10.0| | |`hipGraphGetNodes`|4.3.0| | |
-|`cuGraphGetRootNodes`|10.0| | |`hipGraphGetRootNodes`|4.3.0| | |
+|`cuGraphGetNodes`|10.0| | |`hipGraphGetNodes`|4.5.0| | |
+|`cuGraphGetRootNodes`|10.0| | |`hipGraphGetRootNodes`|4.5.0| | |
 |`cuGraphHostNodeGetParams`|10.0| | | | | | |
 |`cuGraphHostNodeSetParams`|10.0| | | | | | |
 |`cuGraphInstantiate`|10.0| | |`hipGraphInstantiate`|4.3.0| | |
@@ -1476,16 +1476,16 @@
 |`cuGraphInstantiate_v2`|11.0| | |`hipGraphInstantiate`|4.3.0| | |
 |`cuGraphKernelNodeCopyAttributes`|11.0| | | | | | |
 |`cuGraphKernelNodeGetAttribute`|11.0| | | | | | |
-|`cuGraphKernelNodeGetParams`|10.0| | |`hipGraphKernelNodeGetParams`|4.3.0| | |
+|`cuGraphKernelNodeGetParams`|10.0| | |`hipGraphKernelNodeGetParams`|4.5.0| | |
 |`cuGraphKernelNodeSetAttribute`|11.0| | | | | | |
-|`cuGraphKernelNodeSetParams`|10.0| | |`hipGraphKernelNodeSetParams`|4.3.0| | |
+|`cuGraphKernelNodeSetParams`|10.0| | |`hipGraphKernelNodeSetParams`|4.5.0| | |
 |`cuGraphLaunch`|10.0| | |`hipGraphLaunch`|4.3.0| | |
 |`cuGraphMemAllocNodeGetParams`|11.4| | | | | | |
 |`cuGraphMemFreeNodeGetParams`|11.4| | | | | | |
-|`cuGraphMemcpyNodeGetParams`|10.0| | |`hipGraphMemcpyNodeGetParams`|4.3.0| | |
-|`cuGraphMemcpyNodeSetParams`|10.0| | |`hipGraphMemcpyNodeSetParams`|4.3.0| | |
-|`cuGraphMemsetNodeGetParams`|10.0| | |`hipGraphMemsetNodeGetParams`|4.3.0| | |
-|`cuGraphMemsetNodeSetParams`|10.0| | |`hipGraphMemsetNodeSetParams`|4.3.0| | |
+|`cuGraphMemcpyNodeGetParams`|10.0| | |`hipGraphMemcpyNodeGetParams`|4.5.0| | |
+|`cuGraphMemcpyNodeSetParams`|10.0| | |`hipGraphMemcpyNodeSetParams`|4.5.0| | |
+|`cuGraphMemsetNodeGetParams`|10.0| | |`hipGraphMemsetNodeGetParams`|4.5.0| | |
+|`cuGraphMemsetNodeSetParams`|10.0| | |`hipGraphMemsetNodeSetParams`|4.5.0| | |
 |`cuGraphNodeFindInClone`|10.0| | | | | | |
 |`cuGraphNodeGetDependencies`|10.0| | | | | | |
 |`cuGraphNodeGetDependentNodes`|10.0| | | | | | |
@@ -1582,15 +1582,15 @@
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|
-|`cuGraphicsMapResources`| | | | | | | |
+|`cuGraphicsMapResources`| | | |`hipGraphicsMapResources`|4.5.0| | |
 |`cuGraphicsResourceGetMappedMipmappedArray`| | | | | | | |
-|`cuGraphicsResourceGetMappedPointer`| | | | | | | |
-|`cuGraphicsResourceGetMappedPointer_v2`| | | | | | | |
+|`cuGraphicsResourceGetMappedPointer`| | | |`hipGraphicsResourceGetMappedPointer`|4.5.0| | |
+|`cuGraphicsResourceGetMappedPointer_v2`| | | |`hipGraphicsResourceGetMappedPointer`|4.5.0| | |
 |`cuGraphicsResourceSetMapFlags`| | | | | | | |
 |`cuGraphicsResourceSetMapFlags_v2`| | | | | | | |
 |`cuGraphicsSubResourceGetMappedArray`| | | | | | | |
-|`cuGraphicsUnmapResources`| | | | | | | |
-|`cuGraphicsUnregisterResource`| | | | | | | |
+|`cuGraphicsUnmapResources`| | | |`hipGraphicsUnmapResources`|4.5.0| | |
+|`cuGraphicsUnregisterResource`| | | |`hipGraphicsUnregisterResource`|4.5.0| | |
 
 ## **29. Driver Entry Point Access**
 
@@ -1617,7 +1617,7 @@
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|
 |`cuGLCtxCreate`| |9.2| | | | | |
-|`cuGLGetDevices`| | | | | | | |
+|`cuGLGetDevices`| | | |`hipGLGetDevices`|4.5.0| | |
 |`cuGLInit`| |9.2| | | | | |
 |`cuGLMapBufferObject`| |9.2| | | | | |
 |`cuGLMapBufferObjectAsync`| |9.2| | | | | |
@@ -1626,7 +1626,7 @@
 |`cuGLUnmapBufferObject`| |9.2| | | | | |
 |`cuGLUnmapBufferObjectAsync`| |9.2| | | | | |
 |`cuGLUnregisterBufferObject`| |9.2| | | | | |
-|`cuGraphicsGLRegisterBuffer`| | | | | | | |
+|`cuGraphicsGLRegisterBuffer`| | | |`hipGraphicsGLRegisterBuffer`|4.5.0| | |
 |`cuGraphicsGLRegisterImage`| | | | | | | |
 |`cuWGLGetDevice`| | | | | | | |
 
