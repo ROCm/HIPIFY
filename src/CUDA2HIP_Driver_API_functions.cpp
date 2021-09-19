@@ -784,13 +784,13 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
 
   // 28. Graphics Interoperability
   // cudaGraphicsMapResources
-  {"cuGraphicsMapResources",                               {"hipGraphicsMapResources",                                 "", CONV_GRAPHICS, API_DRIVER, 28, HIP_UNSUPPORTED}},
+  {"cuGraphicsMapResources",                               {"hipGraphicsMapResources",                                 "", CONV_GRAPHICS, API_DRIVER, 28}},
   // cudaGraphicsResourceGetMappedMipmappedArray
   {"cuGraphicsResourceGetMappedMipmappedArray",            {"hipGraphicsResourceGetMappedMipmappedArray",              "", CONV_GRAPHICS, API_DRIVER, 28, HIP_UNSUPPORTED}},
   // cudaGraphicsResourceGetMappedPointer
-  {"cuGraphicsResourceGetMappedPointer",                   {"hipGraphicsResourceGetMappedPointer",                     "", CONV_GRAPHICS, API_DRIVER, 28, HIP_UNSUPPORTED}},
+  {"cuGraphicsResourceGetMappedPointer",                   {"hipGraphicsResourceGetMappedPointer",                     "", CONV_GRAPHICS, API_DRIVER, 28}},
   // cudaGraphicsResourceGetMappedPointer
-  {"cuGraphicsResourceGetMappedPointer_v2",                {"hipGraphicsResourceGetMappedPointer",                     "", CONV_GRAPHICS, API_DRIVER, 28, HIP_UNSUPPORTED}},
+  {"cuGraphicsResourceGetMappedPointer_v2",                {"hipGraphicsResourceGetMappedPointer",                     "", CONV_GRAPHICS, API_DRIVER, 28}},
   // cudaGraphicsResourceSetMapFlags
   {"cuGraphicsResourceSetMapFlags",                        {"hipGraphicsResourceSetMapFlags",                          "", CONV_GRAPHICS, API_DRIVER, 28, HIP_UNSUPPORTED}},
   // cudaGraphicsResourceSetMapFlags
@@ -798,9 +798,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   // cudaGraphicsSubResourceGetMappedArray
   {"cuGraphicsSubResourceGetMappedArray",                  {"hipGraphicsSubResourceGetMappedArray",                    "", CONV_GRAPHICS, API_DRIVER, 28, HIP_UNSUPPORTED}},
   // cudaGraphicsUnmapResources
-  {"cuGraphicsUnmapResources",                             {"hipGraphicsUnmapResources",                               "", CONV_GRAPHICS, API_DRIVER, 28, HIP_UNSUPPORTED}},
+  {"cuGraphicsUnmapResources",                             {"hipGraphicsUnmapResources",                               "", CONV_GRAPHICS, API_DRIVER, 28}},
   // cudaGraphicsUnregisterResource
-  {"cuGraphicsUnregisterResource",                         {"hipGraphicsUnregisterResource",                           "", CONV_GRAPHICS, API_DRIVER, 28, HIP_UNSUPPORTED}},
+  {"cuGraphicsUnregisterResource",                         {"hipGraphicsUnregisterResource",                           "", CONV_GRAPHICS, API_DRIVER, 28}},
 
   // 29. Driver Entry Point Access
   // cudaGetDriverEntryPoint
@@ -820,9 +820,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
 
   // 32. OpenGL Interoperability
   // cudaGLGetDevices
-  {"cuGLGetDevices",                                       {"hipGLGetDevices",                                         "", CONV_OPENGL, API_DRIVER, 32, HIP_UNSUPPORTED}},
+  {"cuGLGetDevices",                                       {"hipGLGetDevices",                                         "", CONV_OPENGL, API_DRIVER, 32}},
   // cudaGraphicsGLRegisterBuffer
-  {"cuGraphicsGLRegisterBuffer",                           {"hipGraphicsGLRegisterBuffer",                             "", CONV_OPENGL, API_DRIVER, 32, HIP_UNSUPPORTED}},
+  {"cuGraphicsGLRegisterBuffer",                           {"hipGraphicsGLRegisterBuffer",                             "", CONV_OPENGL, API_DRIVER, 32}},
   // cudaGraphicsGLRegisterImage
   {"cuGraphicsGLRegisterImage",                            {"hipGraphicsGLRegisterImage",                              "", CONV_OPENGL, API_DRIVER, 32, HIP_UNSUPPORTED}},
   // cudaWGLGetDevice

@@ -1176,10 +1176,23 @@ sub simpleSubstitutions {
     $ft{'peer'} += s/\bcudaDeviceCanAccessPeer\b/hipDeviceCanAccessPeer/g;
     $ft{'peer'} += s/\bcudaDeviceDisablePeerAccess\b/hipDeviceDisablePeerAccess/g;
     $ft{'peer'} += s/\bcudaDeviceEnablePeerAccess\b/hipDeviceEnablePeerAccess/g;
+    $ft{'graphics'} += s/\bcuGraphicsMapResources\b/hipGraphicsMapResources/g;
+    $ft{'graphics'} += s/\bcuGraphicsResourceGetMappedPointer\b/hipGraphicsResourceGetMappedPointer/g;
+    $ft{'graphics'} += s/\bcuGraphicsResourceGetMappedPointer_v2\b/hipGraphicsResourceGetMappedPointer/g;
+    $ft{'graphics'} += s/\bcuGraphicsUnmapResources\b/hipGraphicsUnmapResources/g;
+    $ft{'graphics'} += s/\bcuGraphicsUnregisterResource\b/hipGraphicsUnregisterResource/g;
+    $ft{'graphics'} += s/\bcudaGraphicsMapResources\b/hipGraphicsMapResources/g;
+    $ft{'graphics'} += s/\bcudaGraphicsResourceGetMappedPointer\b/hipGraphicsResourceGetMappedPointer/g;
+    $ft{'graphics'} += s/\bcudaGraphicsUnmapResources\b/hipGraphicsUnmapResources/g;
+    $ft{'graphics'} += s/\bcudaGraphicsUnregisterResource\b/hipGraphicsUnregisterResource/g;
     $ft{'profiler'} += s/\bcuProfilerStart\b/hipProfilerStart/g;
     $ft{'profiler'} += s/\bcuProfilerStop\b/hipProfilerStop/g;
     $ft{'profiler'} += s/\bcudaProfilerStart\b/hipProfilerStart/g;
     $ft{'profiler'} += s/\bcudaProfilerStop\b/hipProfilerStop/g;
+    $ft{'openGL'} += s/\bcuGLGetDevices\b/hipGLGetDevices/g;
+    $ft{'openGL'} += s/\bcuGraphicsGLRegisterBuffer\b/hipGraphicsGLRegisterBuffer/g;
+    $ft{'openGL'} += s/\bcudaGLGetDevices\b/hipGLGetDevices/g;
+    $ft{'openGL'} += s/\bcudaGraphicsGLRegisterBuffer\b/hipGraphicsGLRegisterBuffer/g;
     $ft{'thread'} += s/\bcudaThreadExit\b/hipDeviceReset/g;
     $ft{'thread'} += s/\bcudaThreadGetCacheConfig\b/hipDeviceGetCacheConfig/g;
     $ft{'thread'} += s/\bcudaThreadSetCacheConfig\b/hipDeviceSetCacheConfig/g;
@@ -5047,20 +5060,15 @@ sub warnUnsupportedFunctions {
         "cudaHostRegisterReadOnly",
         "cudaGraphicsVDPAURegisterVideoSurface",
         "cudaGraphicsVDPAURegisterOutputSurface",
-        "cudaGraphicsUnregisterResource",
-        "cudaGraphicsUnmapResources",
         "cudaGraphicsSubResourceGetMappedArray",
         "cudaGraphicsResourceSetMapFlags",
-        "cudaGraphicsResourceGetMappedPointer",
         "cudaGraphicsResourceGetMappedMipmappedArray",
         "cudaGraphicsResourceGetMappedEglFrame",
-        "cudaGraphicsMapResources",
         "cudaGraphicsMapFlagsWriteDiscard",
         "cudaGraphicsMapFlagsReadOnly",
         "cudaGraphicsMapFlagsNone",
         "cudaGraphicsMapFlags",
         "cudaGraphicsGLRegisterImage",
-        "cudaGraphicsGLRegisterBuffer",
         "cudaGraphicsEGLRegisterImage",
         "cudaGraphicsD3D9RegisterResource",
         "cudaGraphicsD3D11RegisterResource",
@@ -5172,7 +5180,6 @@ sub warnUnsupportedFunctions {
         "cudaGLMapFlags",
         "cudaGLMapBufferObjectAsync",
         "cudaGLMapBufferObject",
-        "cudaGLGetDevices",
         "cudaFreeAsync",
         "cudaFormatModeForced",
         "cudaFormatModeAuto",
@@ -5635,18 +5642,12 @@ sub warnUnsupportedFunctions {
         "cuLaunch",
         "cuGraphicsVDPAURegisterVideoSurface",
         "cuGraphicsVDPAURegisterOutputSurface",
-        "cuGraphicsUnregisterResource",
-        "cuGraphicsUnmapResources",
         "cuGraphicsSubResourceGetMappedArray",
         "cuGraphicsResourceSetMapFlags_v2",
         "cuGraphicsResourceSetMapFlags",
-        "cuGraphicsResourceGetMappedPointer_v2",
-        "cuGraphicsResourceGetMappedPointer",
         "cuGraphicsResourceGetMappedMipmappedArray",
         "cuGraphicsResourceGetMappedEglFrame",
-        "cuGraphicsMapResources",
         "cuGraphicsGLRegisterImage",
-        "cuGraphicsGLRegisterBuffer",
         "cuGraphicsEGLRegisterImage",
         "cuGraphicsD3D9RegisterResource",
         "cuGraphicsD3D11RegisterResource",
@@ -5708,7 +5709,6 @@ sub warnUnsupportedFunctions {
         "cuGLMapBufferObjectAsync",
         "cuGLMapBufferObject",
         "cuGLInit",
-        "cuGLGetDevices",
         "cuGLCtxCreate",
         "cuFuncSetSharedSize",
         "cuFuncSetSharedMemConfig",
