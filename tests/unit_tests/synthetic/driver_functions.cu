@@ -9,6 +9,7 @@ int main() {
 
   unsigned int flags = 0;
   size_t bytes = 0;
+  size_t bytes_2 = 0;
   void* image = nullptr;
   std::string name = "str";
   // CHECK: hipDevice_t device;
@@ -19,6 +20,7 @@ int main() {
   // CHECK-NEXT: hipFunction_t function;
   // CHECK-NEXT: hipModule_t module_;
   // CHECK-NEXT: hipDeviceptr_t deviceptr;
+  // CHECK-NEXT: hipDeviceptr_t deviceptr_2;
   // CHECK-NEXT: hipTexRef texref;
   // CHECK-NEXT: hipJitOption jit_option;
   // CHECK-NEXT: hipArray_t array_;
@@ -30,6 +32,7 @@ int main() {
   // CHECK-NEXT: hip_Memcpy2D MEMCPY2D;
   // CHECK-NEXT: HIP_MEMCPY3D MEMCPY3D;
   // CHECK-NEXT: hipStream_t stream;
+  // CHECK-NEXT: hipMipmappedArray_t mipmappedArray;
   CUdevice device;
   CUcontext context;
   CUfunc_cache func_cache;
@@ -38,6 +41,7 @@ int main() {
   CUfunction function;
   CUmodule module_;
   CUdeviceptr deviceptr;
+  CUdeviceptr deviceptr_2;
   CUtexref texref;
   CUjit_option jit_option;
   CUarray array_;
@@ -49,6 +53,7 @@ int main() {
   CUDA_MEMCPY2D MEMCPY2D;
   CUDA_MEMCPY3D MEMCPY3D;
   CUstream stream;
+  CUmipmappedArray mipmappedArray;
 
   // CUDA: CUresult CUDAAPI cuInit(unsigned int Flags);
   // HIP: hipError_t hipInit(unsigned int flags);
@@ -437,6 +442,114 @@ int main() {
   // CHECK-NEXT: result = hipMemcpyHtoDAsync(deviceptr, dsthost, bytes, stream);
   result = cuMemcpyHtoDAsync(deviceptr, dsthost, bytes, stream);
   result = cuMemcpyHtoDAsync_v2(deviceptr, dsthost, bytes, stream);
+
+  // CUDA: CUresult CUDAAPI cuMemFree(CUdeviceptr dptr);
+  // HIP: hipError_t hipFree(void* ptr);
+  // CHECK: result = hipFree(deviceptr);
+  // CHECK-NEXT: result = hipFree(deviceptr);
+  result = cuMemFree(deviceptr);
+  result = cuMemFree_v2(deviceptr);
+
+  // CUDA: CUresult CUDAAPI cuMemFreeHost(void *p);
+  // HIP: hipError_t hipHostFree(void* ptr);
+  // CHECK: result = hipHostFree(image);
+  result = cuMemFreeHost(image);
+
+  // CUDA: CUresult CUDAAPI cuMemGetAddressRange(CUdeviceptr *pbase, size_t *psize, CUdeviceptr dptr);
+  // HIP: hipError_t hipMemGetAddressRange(hipDeviceptr_t* pbase, size_t* psize, hipDeviceptr_t dptr);
+  // CHECK: result = hipMemGetAddressRange(&deviceptr, &bytes, deviceptr_2);
+  // CHECK-NEXT: result = hipMemGetAddressRange(&deviceptr, &bytes, deviceptr_2);
+  result = cuMemGetAddressRange(&deviceptr, &bytes, deviceptr_2);
+  result = cuMemGetAddressRange_v2(&deviceptr, &bytes, deviceptr_2);
+
+  // CUDA: CUresult CUDAAPI cuMemGetInfo(size_t *free, size_t *total);
+  // HIP: hipError_t hipMemGetInfo(size_t* free, size_t* total);
+  // CHECK: result = hipMemGetInfo(&bytes, &bytes_2);
+  // CHECK-NEXT: result = hipMemGetInfo(&bytes, &bytes_2);
+  result = cuMemGetInfo(&bytes, &bytes_2);
+  result = cuMemGetInfo_v2(&bytes, &bytes_2);
+
+  // CUDA: CUresult CUDAAPI cuMemHostAlloc(void **pp, size_t bytesize, unsigned int Flags);
+  // HIP: DEPRECATED("use hipHostMalloc instead") hipError_t hipHostAlloc(void** ptr, size_t size, unsigned int flags);
+  // CHECK: result = hipHostAlloc(&image, bytes, flags);
+  result = cuMemHostAlloc(&image, bytes, flags);
+
+  // CUDA: CUresult CUDAAPI cuMemHostGetDevicePointer(CUdeviceptr *pdptr, void *p, unsigned int Flags);
+  // HIP: hipError_t hipHostGetDevicePointer(void** devPtr, void* hstPtr, unsigned int flags);
+  // CHECK: result = hipHostGetDevicePointer(&deviceptr, image, flags);
+  // CHECK-NEXT: result = hipHostGetDevicePointer(&deviceptr, image, flags);
+  result = cuMemHostGetDevicePointer(&deviceptr, image, flags);
+  result = cuMemHostGetDevicePointer_v2(&deviceptr, image, flags);
+
+  // CUDA: CUresult CUDAAPI cuMemHostGetFlags(unsigned int *pFlags, void *p);
+  // HIP: hipError_t hipHostGetFlags(&flags, image);
+  // CHECK: result = hipHostGetFlags(&flags, image);
+  result = cuMemHostGetFlags(&flags, image);
+
+  // CUDA: CUresult CUDAAPI cuMemHostRegister(void *p, size_t bytesize, unsigned int Flags);
+  // HIP: hipError_t hipHostRegister(void* hostPtr, size_t sizeBytes, unsigned int flags);
+  // CHECK: result = hipHostRegister(image, bytes, flags);
+  // CHECK-NEXT: result = hipHostRegister(image, bytes, flags);
+  result = cuMemHostRegister(image, bytes, flags);
+  result = cuMemHostRegister_v2(image, bytes, flags);
+
+  // CUDA: CUresult CUDAAPI cuMemHostUnregister(void *p);
+  // HIP: hipError_t hipHostUnregister(void* hostPtr);
+  // CHECK: result = hipHostUnregister(image);
+  result = cuMemHostUnregister(image);
+
+  unsigned short us = 0;
+  // CUDA: CUresult CUDAAPI cuMemsetD16(CUdeviceptr dstDevice, unsigned short us, size_t N);
+  // HIP: hipError_t hipMemsetD16(hipDeviceptr_t dest, unsigned short value, size_t count);
+  // CHECK: result = hipMemsetD16(deviceptr, us, bytes);
+  // CHECK-NEXT: result = hipMemsetD16(deviceptr, us, bytes);
+  result = cuMemsetD16(deviceptr, us, bytes);
+  result = cuMemsetD16_v2(deviceptr, us, bytes);
+
+  // CUDA: CUresult CUDAAPI cuMemsetD16Async(CUdeviceptr dstDevice, unsigned short us, size_t N, CUstream hStream);
+  // HIP: hipError_t hipMemsetD16Async(hipDeviceptr_t dest, unsigned short value, size_t count, hipStream_t stream __dparm(0));
+  // CHECK: result = hipMemsetD16Async(deviceptr, us, bytes, stream);
+  result = cuMemsetD16Async(deviceptr, us, bytes, stream);
+
+  // CUDA: CUresult CUDAAPI cuMemsetD32(CUdeviceptr dstDevice, unsigned int ui, size_t N)
+  // HIP: hipError_t hipMemsetD32(hipDeviceptr_t dest, int value, size_t count);
+  // CHECK: result = hipMemsetD32(deviceptr, flags, bytes);
+  // CHECK-NEXT: result = hipMemsetD32(deviceptr, flags, bytes);
+  result = cuMemsetD32(deviceptr, flags, bytes);
+  result = cuMemsetD32_v2(deviceptr, flags, bytes);
+
+  // CUDA: CUresult CUDAAPI cuMemsetD32Async(CUdeviceptr dstDevice, unsigned int ui, size_t N, CUstream hStream);
+  // HIP: hipError_t hipMemsetD32Async(hipDeviceptr_t dst, int value, size_t count, hipStream_t stream __dparm(0));
+  // CHECK: result = hipMemsetD32Async(deviceptr, flags, bytes, stream);
+  result = cuMemsetD32Async(deviceptr, flags, bytes, stream);
+
+  unsigned char uc = 0;
+  // CUDA: CUresult CUDAAPI cuMemsetD8(CUdeviceptr dstDevice, unsigned char uc, size_t N);
+  // HIP: hipError_t hipMemsetD8(hipDeviceptr_t dest, unsigned char value, size_t count);
+  // CHECK: result = hipMemsetD8(deviceptr, uc, bytes);
+  // CHECK-NEXT: result = hipMemsetD8(deviceptr, uc, bytes);
+  result = cuMemsetD8(deviceptr, uc, bytes);
+  result = cuMemsetD8_v2(deviceptr, uc, bytes);
+
+  // CUDA: CUresult CUDAAPI cuMemsetD8Async(CUdeviceptr dstDevice, unsigned char uc, size_t N, CUstream hStream);
+  // HIP: hipError_t hipMemsetD8Async(hipDeviceptr_t dest, unsigned char value, size_t count, hipStream_t stream __dparm(0));
+  // CHECK: result = hipMemsetD8Async(deviceptr, uc, bytes, stream);
+  result = cuMemsetD8Async(deviceptr, uc, bytes, stream);
+
+  // CUDA: CUresult CUDAAPI cuMipmappedArrayCreate(CUmipmappedArray *pHandle, const CUDA_ARRAY3D_DESCRIPTOR *pMipmappedArrayDesc, unsigned int numMipmapLevels);
+  // HIP: hipError_t hipMipmappedArrayCreate(hipMipmappedArray_t* pHandle, HIP_ARRAY3D_DESCRIPTOR* pMipmappedArrayDesc, unsigned int numMipmapLevels);
+  // CHECK: result = hipMipmappedArrayCreate(&mipmappedArray, &ARRAY3D_DESCRIPTOR, flags);
+  result = cuMipmappedArrayCreate(&mipmappedArray, &ARRAY3D_DESCRIPTOR, flags);
+
+  // CUDA: CUresult CUDAAPI cuMipmappedArrayDestroy(CUmipmappedArray hMipmappedArray);
+  // HIP: hipError_t hipMipmappedArrayDestroy(hipMipmappedArray_t hMipmappedArray);
+  // CHECK: result = hipMipmappedArrayDestroy(mipmappedArray);
+  result = cuMipmappedArrayDestroy(mipmappedArray);
+
+  // CUDA: CUresult CUDAAPI cuMipmappedArrayGetLevel(CUarray *pLevelArray, CUmipmappedArray hMipmappedArray, unsigned int level);
+  // HIP: hipError_t hipMipmappedArrayGetLevel(hipArray_t* pLevelArray, hipMipmappedArray_t hMipMappedArray, unsigned int level);
+  // CHECK: result = hipMipmappedArrayGetLevel(&array_, mipmappedArray, flags);
+  result = cuMipmappedArrayGetLevel(&array_, mipmappedArray, flags);
 
   return 0;
 }
