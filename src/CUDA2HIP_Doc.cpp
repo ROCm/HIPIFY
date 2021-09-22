@@ -107,6 +107,7 @@ namespace doc {
   enum docFormat {
     full = 0,
     strict = 1,
+    compact = 2,
   };
 
   class DOC {
@@ -176,29 +177,20 @@ namespace doc {
         for (auto doc : docs) {
           if (doc != (types & doc)) continue;
           *streams[doc].get() << (doc == md ? "# " : "") << getName() << " " << sAPI_supported << endl << endl;
+          unsigned int compact_only_cur_sec_num = 1;
           for (auto &s : getSections()) {
-            string sS = (doc == md) ? "**|**" : ",";
-            *streams[doc].get() << (doc == md ? "## **" : "") << s.first << ". " << string(s.second) << (doc == md ? "**" : "") << endl << endl;
-            stringstream section;
-            section << (doc == md ? "|**" : "") << sCUDA << sS << (format == full ? sA : "") << (format == full ? sS : "") <<
-              sD << sS << (format == full ? sR : "") << (format == full ? sS : "") << sHIP << sS << (format == full ? sA : "") << (format == full ? sS : "") <<
-              sD << (format == full ? sS : "") << (format == full ? sR : "") << (doc == md ? "**|" : "") << endl;
-            if (doc == md) {
-              section << "|:--|" << (format == full ? ":-:|" : "") << ":-:|" << (format == full ? ":-:|" : "") <<
-                ":--|" << (format == full ? ":-:|" : "") << ":-:|"<< (format == full ? ":-:|" : "") << endl;
-            }
             const functionMap &ftMap = isTypeSection(s.first, getSections()) ? getTypes() : getFunctions();
             const versionMap &vMap = isTypeSection(s.first, getSections()) ? getTypeVersions() : getFunctionVersions();
             const hipVersionMap &hMap = commonHipVersionMap.empty() ? (isTypeSection(s.first, getSections()) ? getHipTypeVersions() : getHipFunctionVersions()) : commonHipVersionMap;
             functionMap fMap;
             for (auto &f : ftMap) {
               if (f.second.apiSection == s.first) {
-                if (format == full || (format == strict && !Statistics::isUnsupported(f.second))) {
+                if (format == full || (format != full && !Statistics::isUnsupported(f.second))) {
                   fMap.insert(f);
                 }
               }
             }
-            sS = (doc == md) ? "|" : ",";
+            string sS = (doc == md) ? "|" : ",";
             stringstream rows;
             for (auto &f : fMap) {
               string a, d, r, ha, hd, hr;
@@ -225,6 +217,7 @@ namespace doc {
                 case csv:
                   switch (format) {
                     case strict:
+                    case compact:
                       rows << (d.empty() ? "" : "+") << sS << sHip << sS << (hd.empty() ? "" : "+") << endl;
                       break;
                     case full:
@@ -237,6 +230,7 @@ namespace doc {
                 default:
                   switch (format) {
                     case strict:
+                    case compact:
                       rows << (d.empty() ? " " : "+") << sS << sHip << sS << (hd.empty() ? " " : "+") << sS << endl;
                       break;
                     case full:
@@ -248,9 +242,33 @@ namespace doc {
                   break;
               }
             }
-            *streams[doc].get() << (fMap.empty() ? "Unsupported\n" : section.str());
-            *streams[doc].get() << rows.str();
-            *streams[doc].get() << endl;
+            sS = (doc == md) ? "**|**" : ",";
+            stringstream section, section_header;
+            section_header << (doc == md ? "## **" : "") << (format != compact ? s.first : compact_only_cur_sec_num) << ". " << string(s.second) << (doc == md ? "**" : "") << endl << endl;
+            section << (doc == md ? "|**" : "") << sCUDA << sS << (format == full ? sA : "") << (format == full ? sS : "") <<
+              sD << sS << (format == full ? sR : "") << (format == full ? sS : "") << sHIP << sS << (format == full ? sA : "") << (format == full ? sS : "") <<
+              sD << (format == full ? sS : "") << (format == full ? sR : "") << (doc == md ? "**|" : "") << endl;
+            if (doc == md) {
+              section << "|:--|" << (format == full ? ":-:|" : "") << ":-:|" << (format == full ? ":-:|" : "") <<
+                ":--|" << (format == full ? ":-:|" : "") << ":-:|" << (format == full ? ":-:|" : "") << endl;
+            }
+            switch (format) {
+              case full:
+              case strict:
+              default:
+                *streams[doc].get() << section_header.str();
+                *streams[doc].get() << (fMap.empty() ? "Unsupported\n\n" : section.str());
+                break;
+              case compact:
+                if (!rows.str().empty()) {
+                  *streams[doc].get() << section_header.str() << section.str();
+                  compact_only_cur_sec_num++;
+                }
+                break;
+            }
+            if (!rows.str().empty()) {
+              *streams[doc].get() << rows.str() << endl;
+            }
           }
           *streams[doc].get() << endl << (doc == md ? "\\" : "") << (format == full ? "*A - Added; D - Deprecated; R - Removed" : "*D - Deprecated");
         }
@@ -534,9 +552,10 @@ namespace doc {
     }
     unsigned int docFormat = full;
     if (!DocFormat.empty()) {
-      if (DocFormat == "strict") docFormat = strict;
+      if (DocFormat == "compact") docFormat = compact;
+      else if (DocFormat == "strict") docFormat = strict;
       else if (DocFormat != "full") {
-        llvm::errs() << "\n" << sHipify << sError << "Unsupported documentation format: '" << DocFormat << "'; supported formats: 'full', 'strict'\n";
+        llvm::errs() << "\n" << sHipify << sError << "Unsupported documentation format: '" << DocFormat << "'; supported formats: 'full', 'strict', 'compact'\n";
         return false;
       }
     }

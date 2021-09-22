@@ -55,7 +55,7 @@ void cleanupHipifyOptions(std::vector<const char*> &args) {
                                             "-no-backup", "-no-output", "-print-stats",
                                             "-print-stats-csv", "-examine", "-save-temps",
                                             "-skip-excluded-preprocessor-conditional-blocks",
-                                            "-md", "-csv"};
+                                            "-md", "-csv", "-doc-format"};
   for (const auto &a : hipifyOptions) {
     args.erase(std::remove(args.begin(), args.end(), a), args.end());
     args.erase(std::remove(args.begin(), args.end(), "-" + a), args.end());
