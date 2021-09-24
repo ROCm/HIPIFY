@@ -2,6 +2,7 @@
 
 // CHECK: #include <hip/hip_runtime.h>
 #include <cuda_runtime_api.h>
+#include <stdio.h>
 
 int main() {
   printf("05. CUDA Runtime API Structs synthetic test\n");
