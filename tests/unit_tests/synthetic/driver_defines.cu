@@ -2,6 +2,7 @@
 
 // CHECK: #include <hip/hip_runtime.h>
 #include <cuda.h>
+#include <stdio.h>
 
 int main() {
   printf("04. CUDA Driver API Defines synthetic test\n");

@@ -3,6 +3,7 @@
 // CHECK: #include <hip/hip_runtime.h>
 #include <cuda.h>
 #include <string>
+#include <stdio.h>
 
 int main() {
   printf("09. CUDA Driver API Functions synthetic test\n");

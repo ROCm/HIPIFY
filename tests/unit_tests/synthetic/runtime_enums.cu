@@ -2,6 +2,7 @@
 
 // CHECK: #include <hip/hip_runtime.h>
 #include <cuda_runtime_api.h>
+#include <stdio.h>
 #if defined(_WIN32)
 #include "windows.h"
 #endif
