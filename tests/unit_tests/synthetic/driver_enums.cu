@@ -392,8 +392,6 @@ int main() {
   // CHECK-NEXT: hipGraphNodeType GRAPH_NODE_TYPE_HOST = hipGraphNodeTypeHost;
   // CHECK-NEXT: hipGraphNodeType GRAPH_NODE_TYPE_GRAPH = hipGraphNodeTypeGraph;
   // CHECK-NEXT: hipGraphNodeType GRAPH_NODE_TYPE_EMPTY = hipGraphNodeTypeEmpty;
-  // CHECK-NEXT: hipGraphNodeType GRAPH_NODE_TYPE_WAIT_EVENT = hipGraphNodeTypeWaitEvent;
-  // CHECK-NEXT: hipGraphNodeType GRAPH_NODE_TYPE_EVENT_RECORD = hipGraphNodeTypeEventRecord;
   CUgraphNodeType graphNodeType;
   CUgraphNodeType_enum graphNodeType_enum;
   CUgraphNodeType GRAPH_NODE_TYPE_KERNEL = CU_GRAPH_NODE_TYPE_KERNEL;
@@ -402,8 +400,12 @@ int main() {
   CUgraphNodeType GRAPH_NODE_TYPE_HOST = CU_GRAPH_NODE_TYPE_HOST;
   CUgraphNodeType GRAPH_NODE_TYPE_GRAPH = CU_GRAPH_NODE_TYPE_GRAPH;
   CUgraphNodeType GRAPH_NODE_TYPE_EMPTY = CU_GRAPH_NODE_TYPE_EMPTY;
+#if CUDA_VERSION > 11010
+  // CHECK: hipGraphNodeType GRAPH_NODE_TYPE_WAIT_EVENT = hipGraphNodeTypeWaitEvent;
+  // CHECK-NEXT: hipGraphNodeType GRAPH_NODE_TYPE_EVENT_RECORD = hipGraphNodeTypeEventRecord;
   CUgraphNodeType GRAPH_NODE_TYPE_WAIT_EVENT = CU_GRAPH_NODE_TYPE_WAIT_EVENT;
   CUgraphNodeType GRAPH_NODE_TYPE_EVENT_RECORD = CU_GRAPH_NODE_TYPE_EVENT_RECORD;
+#endif
 
   // CHECK: hipGraphExecUpdateResult graphExecUpdateResult;
   // CHECK-NEXT: hipGraphExecUpdateResult graphExecUpdateResult_enum;
