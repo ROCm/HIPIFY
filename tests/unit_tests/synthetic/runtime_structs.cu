@@ -1,4 +1,4 @@
-// RUN: %run_test hipify "%s" "%t" %hipify_args -D__CUDA_API_VERSION_INTERNAL %clang_args
+// RUN: %run_test hipify "%s" "%t" --skip-excluded-preprocessor-conditional-blocks %hipify_args -D__CUDA_API_VERSION_INTERNAL %clang_args
 
 // CHECK: #include <hip/hip_runtime.h>
 #include <cuda_runtime_api.h>
@@ -26,14 +26,18 @@ int main() {
   cudaExternalSemaphoreHandleDesc ExternalSemaphoreHandleDesc;
 
   // CHECK: hipExternalSemaphoreSignalParams ExternalSemaphoreSignalParams;
-  // CHECK-NEXT: hipExternalSemaphoreSignalParams ExternalSemaphoreSignalParams_v1;
   cudaExternalSemaphoreSignalParams ExternalSemaphoreSignalParams;
+#if CUDA_VERSION > 11010
+  // CHECK: hipExternalSemaphoreSignalParams ExternalSemaphoreSignalParams_v1;
   cudaExternalSemaphoreSignalParams_v1 ExternalSemaphoreSignalParams_v1;
+#endif
 
   // CHECK: hipExternalSemaphoreWaitParams ExternalSemaphoreWaitParams;
-  // CHECK-NEXT: hipExternalSemaphoreWaitParams ExternalSemaphoreWaitParams_v1;
   cudaExternalSemaphoreWaitParams ExternalSemaphoreWaitParams;
+#if CUDA_VERSION > 11010
+  // CHECK: hipExternalSemaphoreWaitParams ExternalSemaphoreWaitParams_v1;
   cudaExternalSemaphoreWaitParams_v1 ExternalSemaphoreWaitParams_v1;
+#endif
 
   // CHECK: hipFuncAttributes FuncAttributes;
   cudaFuncAttributes FuncAttributes;
