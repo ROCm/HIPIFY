@@ -311,9 +311,9 @@ Run `Visual Studio 16 2019`, open the generated `LLVM.sln`, build all, build pro
 
         - ***Windows***: `-DCUDA_CUB_ROOT_DIR=d:/GIT/cub`
 
-5. Ensure [`python`](https://www.python.org/downloads) of minimum required version 2.7 is installed.
+6. Ensure [`python`](https://www.python.org/downloads) of minimum required version 2.7 is installed.
 
-6. Ensure `lit` and `FileCheck` are installed - these are distributed with `LLVM`.
+7. Ensure `lit` and `FileCheck` are installed - these are distributed with `LLVM`.
 
     * Install `lit` into `python`:
 
@@ -335,9 +335,15 @@ Run `Visual Studio 16 2019`, open the generated `LLVM.sln`, build all, build pro
 
         - Or specify the path to `FileCheck` in `CMAKE_INSTALL_PREFIX` option
 
-7. Set `HIPIFY_CLANG_TESTS` option turned on: `-DHIPIFY_CLANG_TESTS=1`.
+8. To run OpenGL tests successfully on:
 
-8. Build and run tests:
+        - ***Linux***: install at least essential GL headers (on Ubuntu by `sudo apt-get install mesa-common-dev`)
+
+        - ***Windows***: nothing to do: all the required headers are shipped with Windows SDK
+
+9. Set `HIPIFY_CLANG_TESTS` option turned on: `-DHIPIFY_CLANG_TESTS=1`.
+
+10. Build and run tests:
 
 ### <a name="Linux"></a > hipify-clang: Linux
 
