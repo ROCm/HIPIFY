@@ -438,9 +438,6 @@ int main() {
   // CHECK-NEXT: hipGraphNodeType GraphNodeTypeHost = hipGraphNodeTypeHost;
   // CHECK-NEXT: hipGraphNodeType GraphNodeTypeGraph = hipGraphNodeTypeGraph;
   // CHECK-NEXT: hipGraphNodeType GraphNodeTypeEmpty = hipGraphNodeTypeEmpty;
-  // CHECK-NEXT: hipGraphNodeType GraphNodeTypeWaitEvent = hipGraphNodeTypeWaitEvent;
-  // CHECK-NEXT: hipGraphNodeType GraphNodeTypeEventRecord = hipGraphNodeTypeEventRecord;
-  // CHECK-NEXT: hipGraphNodeType GraphNodeTypeCount = hipGraphNodeTypeCount;
   cudaGraphNodeType GraphNodeType;
   cudaGraphNodeType GraphNodeTypeKernel = cudaGraphNodeTypeKernel;
   cudaGraphNodeType GraphNodeTypeMemcpy = cudaGraphNodeTypeMemcpy;
@@ -448,8 +445,13 @@ int main() {
   cudaGraphNodeType GraphNodeTypeHost = cudaGraphNodeTypeHost;
   cudaGraphNodeType GraphNodeTypeGraph = cudaGraphNodeTypeGraph;
   cudaGraphNodeType GraphNodeTypeEmpty = cudaGraphNodeTypeEmpty;
+#if CUDA_VERSION > 11010
+  // CHECK: hipGraphNodeType GraphNodeTypeWaitEvent = hipGraphNodeTypeWaitEvent;
+  // CHECK-NEXT: hipGraphNodeType GraphNodeTypeEventRecord = hipGraphNodeTypeEventRecord;
   cudaGraphNodeType GraphNodeTypeWaitEvent = cudaGraphNodeTypeWaitEvent;
   cudaGraphNodeType GraphNodeTypeEventRecord = cudaGraphNodeTypeEventRecord;
+#endif
+  // CHECK: hipGraphNodeType GraphNodeTypeCount = hipGraphNodeTypeCount;
   cudaGraphNodeType GraphNodeTypeCount = cudaGraphNodeTypeCount;
 
   // CHECK: hipGraphExecUpdateResult GraphExecUpdateResult;
