@@ -49,12 +49,12 @@ int main() {
   // CHECK-NEXT: hipComputeMode computemode_enum;
   // CHECK-NEXT: hipComputeMode COMPUTEMODE_DEFAULT = hipComputeModeDefault;
   // hipComputeMode COMPUTEMODE_EXCLUSIVE = hipComputeModeExclusive; // CUDA_REMOVED since CUDA_80
-  // CHECK-NEXT: hipComputeMode COMPUTEMODE_PROHIBITED = hipComputeModeProhibited;
-  // CHECK-NEXT: hipComputeMode COMPUTEMODE_EXCLUSIVE_PROCESS = hipComputeModeExclusiveProcess;
   CUcomputemode computemode;
   CUcomputemode_enum computemode_enum;
   CUcomputemode COMPUTEMODE_DEFAULT = CU_COMPUTEMODE_DEFAULT;
   // CUcomputemode COMPUTEMODE_EXCLUSIVE = CU_COMPUTEMODE_EXCLUSIVE; // CUDA_REMOVED since CUDA_80
+  // CHECK: hipComputeMode COMPUTEMODE_PROHIBITED = hipComputeModeProhibited;
+  // CHECK-NEXT: hipComputeMode COMPUTEMODE_EXCLUSIVE_PROCESS = hipComputeModeExclusiveProcess;
   CUcomputemode COMPUTEMODE_PROHIBITED = CU_COMPUTEMODE_PROHIBITED;
   CUcomputemode COMPUTEMODE_EXCLUSIVE_PROCESS = CU_COMPUTEMODE_EXCLUSIVE_PROCESS;
 
@@ -414,7 +414,6 @@ int main() {
   // CHECK-NEXT: hipGraphExecUpdateResult GRAPH_EXEC_UPDATE_ERROR_FUNCTION_CHANGED = hipGraphExecUpdateErrorFunctionChanged;
   // CHECK-NEXT: hipGraphExecUpdateResult GRAPH_EXEC_UPDATE_ERROR_PARAMETERS_CHANGED = hipGraphExecUpdateErrorParametersChanged;
   // CHECK-NEXT: hipGraphExecUpdateResult GRAPH_EXEC_UPDATE_ERROR_NOT_SUPPORTED = hipGraphExecUpdateErrorNotSupported;
-  // CHECK-NEXT: hipGraphExecUpdateResult GRAPH_EXEC_UPDATE_ERROR_UNSUPPORTED_FUNCTION_CHANGE = hipGraphExecUpdateErrorUnsupportedFunctionChange;
   CUgraphExecUpdateResult graphExecUpdateResult;
   CUgraphExecUpdateResult_enum graphExecUpdateResult_enum;
   CUgraphExecUpdateResult GRAPH_EXEC_UPDATE_SUCCESS = CU_GRAPH_EXEC_UPDATE_SUCCESS;
@@ -424,7 +423,10 @@ int main() {
   CUgraphExecUpdateResult GRAPH_EXEC_UPDATE_ERROR_FUNCTION_CHANGED = CU_GRAPH_EXEC_UPDATE_ERROR_FUNCTION_CHANGED;
   CUgraphExecUpdateResult GRAPH_EXEC_UPDATE_ERROR_PARAMETERS_CHANGED = CU_GRAPH_EXEC_UPDATE_ERROR_PARAMETERS_CHANGED;
   CUgraphExecUpdateResult GRAPH_EXEC_UPDATE_ERROR_NOT_SUPPORTED = CU_GRAPH_EXEC_UPDATE_ERROR_NOT_SUPPORTED;
+#if CUDA_VERSION > 11010
+  // CHECK: hipGraphExecUpdateResult GRAPH_EXEC_UPDATE_ERROR_UNSUPPORTED_FUNCTION_CHANGE = hipGraphExecUpdateErrorUnsupportedFunctionChange;
   CUgraphExecUpdateResult GRAPH_EXEC_UPDATE_ERROR_UNSUPPORTED_FUNCTION_CHANGE = CU_GRAPH_EXEC_UPDATE_ERROR_UNSUPPORTED_FUNCTION_CHANGE;
+#endif
 
   // CHECK: int IPC_MEM_LAZY_ENABLE_PEER_ACCESS = hipIpcMemLazyEnablePeerAccess;
   int IPC_MEM_LAZY_ENABLE_PEER_ACCESS = CU_IPC_MEM_LAZY_ENABLE_PEER_ACCESS;
