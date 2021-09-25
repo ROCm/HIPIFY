@@ -460,7 +460,6 @@ int main() {
   // CHECK-NEXT: hipGraphExecUpdateResult GraphExecUpdateErrorFunctionChanged = hipGraphExecUpdateErrorFunctionChanged;
   // CHECK-NEXT: hipGraphExecUpdateResult GraphExecUpdateErrorParametersChanged = hipGraphExecUpdateErrorParametersChanged;
   // CHECK-NEXT: hipGraphExecUpdateResult GraphExecUpdateErrorNotSupported = hipGraphExecUpdateErrorNotSupported;
-  // CHECK-NEXT: hipGraphExecUpdateResult GraphExecUpdateErrorUnsupportedFunctionChange = hipGraphExecUpdateErrorUnsupportedFunctionChange;
   cudaGraphExecUpdateResult GraphExecUpdateResult;
   cudaGraphExecUpdateResult GraphExecUpdateSuccess = cudaGraphExecUpdateSuccess;
   cudaGraphExecUpdateResult GraphExecUpdateError = cudaGraphExecUpdateError;
@@ -469,7 +468,10 @@ int main() {
   cudaGraphExecUpdateResult GraphExecUpdateErrorFunctionChanged = cudaGraphExecUpdateErrorFunctionChanged;
   cudaGraphExecUpdateResult GraphExecUpdateErrorParametersChanged = cudaGraphExecUpdateErrorParametersChanged;
   cudaGraphExecUpdateResult GraphExecUpdateErrorNotSupported = cudaGraphExecUpdateErrorNotSupported;
+#if CUDA_VERSION > 11010
+  // CHECK: hipGraphExecUpdateResult GraphExecUpdateErrorUnsupportedFunctionChange = hipGraphExecUpdateErrorUnsupportedFunctionChange;
   cudaGraphExecUpdateResult GraphExecUpdateErrorUnsupportedFunctionChange = cudaGraphExecUpdateErrorUnsupportedFunctionChange;
+#endif
 
   // CHECK: hipLimit_t Limit;
   // CHECK-NEXT: hipLimit_t LimitPrintfFifoSize = hipLimitPrintfFifoSize;
