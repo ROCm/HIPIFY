@@ -139,9 +139,11 @@ int main() {
   cudaStream_t Stream_t;
 
   // CHECK: ihipModuleSymbol_t* func_st_ptr;
-  // CHECK-NEXT: hipFunction_t func;
   CUfunc_st* func_st_ptr;
+#if CUDA_VERSION > 10020
+  // CHECK: hipFunction_t func;
   cudaFunction_t func;
+#endif
 
   return 0;
 }
