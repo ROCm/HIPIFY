@@ -255,26 +255,17 @@ int main() {
   // CHECK-NEXT: hipError_t ErrorInvalidKernelImage = hipErrorInvalidImage;
   // CHECK-NEXT: hipError_t ErrorMapBufferObjectFailed = hipErrorMapFailed;
   // CHECK-NEXT: hipError_t ErrorUnmapBufferObjectFailed = hipErrorUnmapFailed;
-  // CHECK-NEXT: hipError_t ErrorArrayIsMapped = hipErrorArrayIsMapped;
-  // CHECK-NEXT: hipError_t ErrorAlreadyMapped = hipErrorAlreadyMapped;
   // CHECK-NEXT: hipError_t ErrorNoKernelImageForDevice = hipErrorNoBinaryForGpu;
-  // CHECK-NEXT: hipError_t ErrorAlreadyAcquired = hipErrorAlreadyAcquired;
-  // CHECK-NEXT: hipError_t ErrorNotMapped = hipErrorNotMapped;
-  // CHECK-NEXT: hipError_t ErrorNotMappedAsArray = hipErrorNotMappedAsArray;
-  // CHECK-NEXT: hipError_t ErrorNotMappedAsPointer = hipErrorNotMappedAsPointer;
   // CHECK-NEXT: hipError_t ErrorECCUncorrectable = hipErrorECCNotCorrectable;
   // CHECK-NEXT: hipError_t ErrorUnsupportedLimit = hipErrorUnsupportedLimit;
   // CHECK-NEXT: hipError_t ErrorDeviceAlreadyInUse = hipErrorContextAlreadyInUse;
   // CHECK-NEXT: hipError_t ErrorPeerAccessUnsupported = hipErrorPeerAccessUnsupported;
   // CHECK-NEXT: hipError_t ErrorInvalidPtx = hipErrorInvalidKernelFile;
   // CHECK-NEXT: hipError_t ErrorInvalidGraphicsContext = hipErrorInvalidGraphicsContext;
-  // CHECK-NEXT: hipError_t ErrorInvalidSource = hipErrorInvalidSource;
-  // CHECK-NEXT: hipError_t ErrorFileNotFound = hipErrorFileNotFound;
   // CHECK-NEXT: hipError_t ErrorSharedObjectSymbolNotFound = hipErrorSharedObjectSymbolNotFound;
   // CHECK-NEXT: hipError_t ErrorSharedObjectInitFailed = hipErrorSharedObjectInitFailed;
   // CHECK-NEXT: hipError_t ErrorOperatingSystem = hipErrorOperatingSystem;
   // CHECK-NEXT: hipError_t ErrorInvalidResourceHandle = hipErrorInvalidHandle;
-  // CHECK-NEXT: hipError_t ErrorSymbolNotFound = hipErrorNotFound;
   // CHECK-NEXT: hipError_t ErrorNotReady = hipErrorNotReady;
   // CHECK-NEXT: hipError_t ErrorIllegalAddress = hipErrorIllegalAddress;
   // CHECK-NEXT: hipError_t ErrorLaunchOutOfResources = hipErrorLaunchOutOfResources;
@@ -282,7 +273,6 @@ int main() {
   // CHECK-NEXT: hipError_t ErrorPeerAccessAlreadyEnabled = hipErrorPeerAccessAlreadyEnabled;
   // CHECK-NEXT: hipError_t ErrorPeerAccessNotEnabled = hipErrorPeerAccessNotEnabled;
   // CHECK-NEXT: hipError_t ErrorSetOnActiveProcess = hipErrorSetOnActiveProcess;
-  // CHECK-NEXT: hipError_t ErrorContextIsDestroyed = hipErrorContextIsDestroyed;
   // CHECK-NEXT: hipError_t ErrorAssert = hipErrorAssert;
   // CHECK-NEXT: hipError_t ErrorHostMemoryAlreadyRegistered = hipErrorHostMemoryAlreadyRegistered;
   // CHECK-NEXT: hipError_t ErrorHostMemoryNotRegistered = hipErrorHostMemoryNotRegistered;
@@ -297,7 +287,6 @@ int main() {
   // CHECK-NEXT: hipError_t ErrorStreamCaptureIsolation = hipErrorStreamCaptureIsolation;
   // CHECK-NEXT: hipError_t ErrorStreamCaptureImplicit = hipErrorStreamCaptureImplicit;
   // CHECK-NEXT: hipError_t ErrorCapturedEvent = hipErrorCapturedEvent;
-  // CHECK-NEXT: hipError_t ErrorStreamCaptureWrongThread = hipErrorStreamCaptureWrongThread;
   // CHECK-NEXT: hipError_t ErrorUnknown = hipErrorUnknown;
   cudaError Error;
   cudaError_t Error_t;
@@ -324,26 +313,17 @@ int main() {
   cudaError_t ErrorInvalidKernelImage = cudaErrorInvalidKernelImage;
   cudaError_t ErrorMapBufferObjectFailed = cudaErrorMapBufferObjectFailed;
   cudaError_t ErrorUnmapBufferObjectFailed = cudaErrorUnmapBufferObjectFailed;
-  cudaError_t ErrorArrayIsMapped = cudaErrorArrayIsMapped;
-  cudaError_t ErrorAlreadyMapped = cudaErrorAlreadyMapped;
   cudaError_t ErrorNoKernelImageForDevice = cudaErrorNoKernelImageForDevice;
-  cudaError_t ErrorAlreadyAcquired = cudaErrorAlreadyAcquired;
-  cudaError_t ErrorNotMapped = cudaErrorNotMapped;
-  cudaError_t ErrorNotMappedAsArray = cudaErrorNotMappedAsArray;
-  cudaError_t ErrorNotMappedAsPointer = cudaErrorNotMappedAsPointer;
   cudaError_t ErrorECCUncorrectable = cudaErrorECCUncorrectable;
   cudaError_t ErrorUnsupportedLimit = cudaErrorUnsupportedLimit;
   cudaError_t ErrorDeviceAlreadyInUse = cudaErrorDeviceAlreadyInUse;
   cudaError_t ErrorPeerAccessUnsupported = cudaErrorPeerAccessUnsupported;
   cudaError_t ErrorInvalidPtx = cudaErrorInvalidPtx;
   cudaError_t ErrorInvalidGraphicsContext = cudaErrorInvalidGraphicsContext;
-  cudaError_t ErrorInvalidSource = cudaErrorInvalidSource;
-  cudaError_t ErrorFileNotFound = cudaErrorFileNotFound;
   cudaError_t ErrorSharedObjectSymbolNotFound = cudaErrorSharedObjectSymbolNotFound;
   cudaError_t ErrorSharedObjectInitFailed = cudaErrorSharedObjectInitFailed;
   cudaError_t ErrorOperatingSystem = cudaErrorOperatingSystem;
   cudaError_t ErrorInvalidResourceHandle = cudaErrorInvalidResourceHandle;
-  cudaError_t ErrorSymbolNotFound = cudaErrorSymbolNotFound;
   cudaError_t ErrorNotReady = cudaErrorNotReady;
   cudaError_t ErrorIllegalAddress = cudaErrorIllegalAddress;
   cudaError_t ErrorLaunchOutOfResources = cudaErrorLaunchOutOfResources;
@@ -351,7 +331,6 @@ int main() {
   cudaError_t ErrorPeerAccessAlreadyEnabled = cudaErrorPeerAccessAlreadyEnabled;
   cudaError_t ErrorPeerAccessNotEnabled = cudaErrorPeerAccessNotEnabled;
   cudaError_t ErrorSetOnActiveProcess = cudaErrorSetOnActiveProcess;
-  cudaError_t ErrorContextIsDestroyed = cudaErrorContextIsDestroyed;
   cudaError_t ErrorAssert = cudaErrorAssert;
   cudaError_t ErrorHostMemoryAlreadyRegistered = cudaErrorHostMemoryAlreadyRegistered;
   cudaError_t ErrorHostMemoryNotRegistered = cudaErrorHostMemoryNotRegistered;
@@ -366,8 +345,31 @@ int main() {
   cudaError_t ErrorStreamCaptureIsolation = cudaErrorStreamCaptureIsolation;
   cudaError_t ErrorStreamCaptureImplicit = cudaErrorStreamCaptureImplicit;
   cudaError_t ErrorCapturedEvent = cudaErrorCapturedEvent;
-  cudaError_t ErrorStreamCaptureWrongThread = cudaErrorStreamCaptureWrongThread;
   cudaError_t ErrorUnknown = cudaErrorUnknown;
+#if CUDA_VERSION > 10000
+  // CHECK: hipError_t ErrorArrayIsMapped = hipErrorArrayIsMapped;
+  // CHECK-NEXT: hipError_t ErrorAlreadyMapped = hipErrorAlreadyMapped;
+  // CHECK-NEXT: hipError_t ErrorAlreadyAcquired = hipErrorAlreadyAcquired;
+  // CHECK-NEXT: hipError_t ErrorNotMapped = hipErrorNotMapped;
+  // CHECK-NEXT: hipError_t ErrorNotMappedAsArray = hipErrorNotMappedAsArray;
+  // CHECK-NEXT: hipError_t ErrorNotMappedAsPointer = hipErrorNotMappedAsPointer;
+  // CHECK-NEXT: hipError_t ErrorInvalidSource = hipErrorInvalidSource;
+  // CHECK-NEXT: hipError_t ErrorFileNotFound = hipErrorFileNotFound;
+  // CHECK-NEXT: hipError_t ErrorSymbolNotFound = hipErrorNotFound;
+  // CHECK-NEXT: hipError_t ErrorContextIsDestroyed = hipErrorContextIsDestroyed;
+  // CHECK-NEXT: hipError_t ErrorStreamCaptureWrongThread = hipErrorStreamCaptureWrongThread;
+  cudaError_t ErrorArrayIsMapped = cudaErrorArrayIsMapped;
+  cudaError_t ErrorAlreadyMapped = cudaErrorAlreadyMapped;
+  cudaError_t ErrorAlreadyAcquired = cudaErrorAlreadyAcquired;
+  cudaError_t ErrorNotMapped = cudaErrorNotMapped;
+  cudaError_t ErrorNotMappedAsArray = cudaErrorNotMappedAsArray;
+  cudaError_t ErrorNotMappedAsPointer = cudaErrorNotMappedAsPointer;
+  cudaError_t ErrorInvalidSource = cudaErrorInvalidSource;
+  cudaError_t ErrorFileNotFound = cudaErrorFileNotFound;
+  cudaError_t ErrorSymbolNotFound = cudaErrorSymbolNotFound;
+  cudaError_t ErrorContextIsDestroyed = cudaErrorContextIsDestroyed;
+  cudaError_t ErrorStreamCaptureWrongThread = cudaErrorStreamCaptureWrongThread;
+#endif
 #if CUDA_VERSION > 10010
   // CHECK: hipError_t ErrorDeviceUninitialized = hipErrorInvalidContext;
   cudaError_t ErrorDeviceUninitialized = cudaErrorDeviceUninitialized;
@@ -637,6 +639,7 @@ int main() {
   cudaStreamCaptureStatus StreamCaptureStatusActive = cudaStreamCaptureStatusActive;
   cudaStreamCaptureStatus StreamCaptureStatusInvalidated = cudaStreamCaptureStatusInvalidated;
 
+#if CUDA_VERSION > 10000
   // CHECK: hipStreamCaptureMode StreamCaptureMode;
   // CHECK-NEXT: hipStreamCaptureMode StreamCaptureModeGlobal = hipStreamCaptureModeGlobal;
   // CHECK-NEXT: hipStreamCaptureMode StreamCaptureModeThreadLocal = hipStreamCaptureModeThreadLocal;
@@ -645,6 +648,7 @@ int main() {
   cudaStreamCaptureMode StreamCaptureModeGlobal = cudaStreamCaptureModeGlobal;
   cudaStreamCaptureMode StreamCaptureModeThreadLocal = cudaStreamCaptureModeThreadLocal;
   cudaStreamCaptureMode StreamCaptureModeRelaxed = cudaStreamCaptureModeRelaxed;
+#endif
 
   // CHECK: hipSurfaceBoundaryMode SurfaceBoundaryMode;
   // CHECK-NEXT: hipSurfaceBoundaryMode BoundaryModeZero = hipBoundaryModeZero;
