@@ -124,7 +124,6 @@ int main() {
   // CHECK-NEXT: hipDeviceAttribute_t DevAttrMaxSharedMemoryPerBlockOptin = hipDeviceAttributeSharedMemPerBlockOptin;
   // CHECK-NEXT: hipDeviceAttribute_t DevAttrPageableMemoryAccessUsesHostPageTables = hipDeviceAttributePageableMemoryAccessUsesHostPageTables;
   // CHECK-NEXT: hipDeviceAttribute_t DevAttrDirectManagedMemAccessFromHost = hipDeviceAttributeDirectManagedMemAccessFromHost;
-  // CHECK-NEXT: hipDeviceAttribute_t DevAttrMaxBlocksPerMultiprocessor = hipDeviceAttributeMaxBlocksPerMultiprocessor;
   cudaDeviceAttr DeviceAttr;
   cudaDeviceAttr DevAttrMaxThreadsPerBlock = cudaDevAttrMaxThreadsPerBlock;
   cudaDeviceAttr DevAttrMaxBlockDimX = cudaDevAttrMaxBlockDimX;
@@ -216,8 +215,10 @@ int main() {
   cudaDeviceAttr DevAttrMaxSharedMemoryPerBlockOptin = cudaDevAttrMaxSharedMemoryPerBlockOptin;
   cudaDeviceAttr DevAttrPageableMemoryAccessUsesHostPageTables = cudaDevAttrPageableMemoryAccessUsesHostPageTables;
   cudaDeviceAttr DevAttrDirectManagedMemAccessFromHost = cudaDevAttrDirectManagedMemAccessFromHost;
+#if CUDA_VERSION > 10020
+  // CHECK: hipDeviceAttribute_t DevAttrMaxBlocksPerMultiprocessor = hipDeviceAttributeMaxBlocksPerMultiprocessor;
   cudaDeviceAttr DevAttrMaxBlocksPerMultiprocessor = cudaDevAttrMaxBlocksPerMultiprocessor;
-
+#endif
   // CHECK: hipDeviceP2PAttr DeviceP2PAttr;
   // CHECK-NEXT: hipDeviceP2PAttr DevP2PAttrPerformanceRank = hipDevP2PAttrPerformanceRank;
   // CHECK-NEXT: hipDeviceP2PAttr DevP2PAttrAccessSupported = hipDevP2PAttrAccessSupported;
@@ -445,7 +446,7 @@ int main() {
   cudaGraphNodeType GraphNodeTypeHost = cudaGraphNodeTypeHost;
   cudaGraphNodeType GraphNodeTypeGraph = cudaGraphNodeTypeGraph;
   cudaGraphNodeType GraphNodeTypeEmpty = cudaGraphNodeTypeEmpty;
-#if CUDA_VERSION > 11010
+#if CUDA_VERSION > 11000
   // CHECK: hipGraphNodeType GraphNodeTypeWaitEvent = hipGraphNodeTypeWaitEvent;
   // CHECK-NEXT: hipGraphNodeType GraphNodeTypeEventRecord = hipGraphNodeTypeEventRecord;
   cudaGraphNodeType GraphNodeTypeWaitEvent = cudaGraphNodeTypeWaitEvent;

@@ -1,4 +1,4 @@
-// RUN: %run_test hipify "%s" "%t" %hipify_args %clang_args
+// RUN: %run_test hipify "%s" "%t" --skip-excluded-preprocessor-conditional-blocks %hipify_args %clang_args
 
 // CHECK: #include <hip/hip_runtime.h>
 #include <cuda.h>
@@ -109,16 +109,20 @@ int main() {
   // CUDA: CUresult CUDAAPI cuDevicePrimaryCtxRelease(CUdevice dev);
   // HIP: hipError_t hipDevicePrimaryCtxRelease(hipDevice_t dev);
   // CHECK: result = hipDevicePrimaryCtxRelease(device);
-  // CHECK-NEXT: result = hipDevicePrimaryCtxRelease(device);
   result = cuDevicePrimaryCtxRelease(device);
+#if CUDA_VERSION > 10020
+  // CHECK: result = hipDevicePrimaryCtxRelease(device);
   result = cuDevicePrimaryCtxRelease_v2(device);
+#endif
 
   // CUDA: CUresult CUDAAPI cuDevicePrimaryCtxReset(CUdevice dev);
   // HIP: hipError_t hipDevicePrimaryCtxReset(hipDevice_t dev);
   // CHECK: result = hipDevicePrimaryCtxReset(device);
-  // CHECK-NEXT: result = hipDevicePrimaryCtxReset(device);
   result = cuDevicePrimaryCtxReset(device);
+#if CUDA_VERSION > 10020
+  // CHECK: result = hipDevicePrimaryCtxReset(device);
   result = cuDevicePrimaryCtxReset_v2(device);
+#endif
 
   // CUDA: CUresult CUDAAPI cuDevicePrimaryCtxRetain(CUcontext *pctx, CUdevice dev);
   // HIP: hipError_t hipDevicePrimaryCtxRetain(hipCtx_t* pctx, hipDevice_t dev);
@@ -128,9 +132,11 @@ int main() {
   // CUDA: CUresult CUDAAPI cuDevicePrimaryCtxSetFlags(CUdevice dev, unsigned int flags);
   // HIP: hipError_t hipDevicePrimaryCtxSetFlags(hipDevice_t dev, unsigned int flags);
   // CHECK: result = hipDevicePrimaryCtxSetFlags(device, flags);
-  // CHECK-NEXT: result = hipDevicePrimaryCtxSetFlags(device, flags);
   result = cuDevicePrimaryCtxSetFlags(device, flags);
+#if CUDA_VERSION > 10020
+  // CHECK: result = hipDevicePrimaryCtxSetFlags(device, flags);
   result = cuDevicePrimaryCtxSetFlags_v2(device, flags);
+#endif
 
   // CUDA: CUresult CUDAAPI cuCtxCreate(CUcontext *pctx, unsigned int flags, CUdevice dev);
   // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipCtxCreate(hipCtx_t *ctx, unsigned int flags, hipDevice_t device);

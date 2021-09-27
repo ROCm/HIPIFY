@@ -1,4 +1,4 @@
-// RUN: %run_test hipify "%s" "%t" %hipify_args %clang_args
+// RUN: %run_test hipify "%s" "%t" --skip-excluded-preprocessor-conditional-blocks %hipify_args %clang_args
 
 #include <iomanip>
 #include <iostream>
@@ -197,12 +197,14 @@ int main() {
   // algorithm
   // CHECK: hipdnnConvolutionFwdAlgo_t algo;
   cudnnConvolutionFwdAlgo_t algo;
+#if CUDNN_VERSION < 8001
   // CHECK: CUDNN_CALL(hipdnnGetConvolutionForwardAlgorithm(
   CUDNN_CALL(cudnnGetConvolutionForwardAlgorithm(
         cudnn,
         in_desc, filt_desc, conv_desc, out_desc,
         // CHECK: HIPDNN_CONVOLUTION_FWD_PREFER_FASTEST, 0, &algo));
         CUDNN_CONVOLUTION_FWD_PREFER_FASTEST, 0, &algo));
+#endif
 
   std::cout << "Convolution algorithm: " << algo << std::endl;
   std::cout << std::endl;
