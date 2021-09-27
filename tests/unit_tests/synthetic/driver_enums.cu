@@ -297,8 +297,6 @@ int main() {
   // CHECK-NEXT: hipExternalMemoryHandleType EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT = hipExternalMemoryHandleTypeOpaqueWin32Kmt;
   // CHECK-NEXT: hipExternalMemoryHandleType EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP = hipExternalMemoryHandleTypeD3D12Heap;
   // CHECK-NEXT: hipExternalMemoryHandleType EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE = hipExternalMemoryHandleTypeD3D12Resource;
-  // CHECK-NEXT: hipExternalMemoryHandleType EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_RESOURCE = hipExternalMemoryHandleTypeD3D11Resource;
-  // CHECK-NEXT: hipExternalMemoryHandleType EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_RESOURCE_KMT = hipExternalMemoryHandleTypeD3D11ResourceKmt;
   CUexternalMemoryHandleType externalMemoryHandleType;
   CUexternalMemoryHandleType_enum externalMemoryHandleType_enum;
   CUexternalMemoryHandleType EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD = CU_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD;
@@ -306,8 +304,12 @@ int main() {
   CUexternalMemoryHandleType EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT = CU_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT;
   CUexternalMemoryHandleType EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP = CU_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP;
   CUexternalMemoryHandleType EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE = CU_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE;
+#if CUDA_VERSION > 10010
+  // CHECK: hipExternalMemoryHandleType EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_RESOURCE = hipExternalMemoryHandleTypeD3D11Resource;
+  // CHECK: hipExternalMemoryHandleType EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_RESOURCE_KMT = hipExternalMemoryHandleTypeD3D11ResourceKmt;
   CUexternalMemoryHandleType EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_RESOURCE = CU_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_RESOURCE;
   CUexternalMemoryHandleType EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_RESOURCE_KMT = CU_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_RESOURCE_KMT;
+#endif
 
   // CHECK: hipExternalSemaphoreHandleType externalSemaphoreHandleType;
   // CHECK-NEXT: hipExternalSemaphoreHandleType_enum externalSemaphoreHandleType_enum;
@@ -409,6 +411,7 @@ int main() {
   CUgraphNodeType GRAPH_NODE_TYPE_EVENT_RECORD = CU_GRAPH_NODE_TYPE_EVENT_RECORD;
 #endif
 
+#if CUDA_VERSION > 10010
   // CHECK: hipGraphExecUpdateResult graphExecUpdateResult;
   // CHECK-NEXT: hipGraphExecUpdateResult graphExecUpdateResult_enum;
   // CHECK-NEXT: hipGraphExecUpdateResult GRAPH_EXEC_UPDATE_SUCCESS = hipGraphExecUpdateSuccess;
@@ -427,6 +430,7 @@ int main() {
   CUgraphExecUpdateResult GRAPH_EXEC_UPDATE_ERROR_FUNCTION_CHANGED = CU_GRAPH_EXEC_UPDATE_ERROR_FUNCTION_CHANGED;
   CUgraphExecUpdateResult GRAPH_EXEC_UPDATE_ERROR_PARAMETERS_CHANGED = CU_GRAPH_EXEC_UPDATE_ERROR_PARAMETERS_CHANGED;
   CUgraphExecUpdateResult GRAPH_EXEC_UPDATE_ERROR_NOT_SUPPORTED = CU_GRAPH_EXEC_UPDATE_ERROR_NOT_SUPPORTED;
+#endif
 #if CUDA_VERSION > 11010
   // CHECK: hipGraphExecUpdateResult GRAPH_EXEC_UPDATE_ERROR_UNSUPPORTED_FUNCTION_CHANGE = hipGraphExecUpdateErrorUnsupportedFunctionChange;
   CUgraphExecUpdateResult GRAPH_EXEC_UPDATE_ERROR_UNSUPPORTED_FUNCTION_CHANGE = CU_GRAPH_EXEC_UPDATE_ERROR_UNSUPPORTED_FUNCTION_CHANGE;

@@ -253,7 +253,6 @@ int main() {
   // CHECK-NEXT: hipError_t ErrorNoDevice = hipErrorNoDevice;
   // CHECK-NEXT: hipError_t ErrorInvalidDevice = hipErrorInvalidDevice;
   // CHECK-NEXT: hipError_t ErrorInvalidKernelImage = hipErrorInvalidImage;
-  // CHECK-NEXT: hipError_t ErrorDeviceUninitialized = hipErrorInvalidContext;
   // CHECK-NEXT: hipError_t ErrorMapBufferObjectFailed = hipErrorMapFailed;
   // CHECK-NEXT: hipError_t ErrorUnmapBufferObjectFailed = hipErrorUnmapFailed;
   // CHECK-NEXT: hipError_t ErrorArrayIsMapped = hipErrorArrayIsMapped;
@@ -323,7 +322,6 @@ int main() {
   cudaError_t ErrorNoDevice = cudaErrorNoDevice;
   cudaError_t ErrorInvalidDevice = cudaErrorInvalidDevice;
   cudaError_t ErrorInvalidKernelImage = cudaErrorInvalidKernelImage;
-  cudaError_t ErrorDeviceUninitialized = cudaErrorDeviceUninitialized;
   cudaError_t ErrorMapBufferObjectFailed = cudaErrorMapBufferObjectFailed;
   cudaError_t ErrorUnmapBufferObjectFailed = cudaErrorUnmapBufferObjectFailed;
   cudaError_t ErrorArrayIsMapped = cudaErrorArrayIsMapped;
@@ -370,6 +368,10 @@ int main() {
   cudaError_t ErrorCapturedEvent = cudaErrorCapturedEvent;
   cudaError_t ErrorStreamCaptureWrongThread = cudaErrorStreamCaptureWrongThread;
   cudaError_t ErrorUnknown = cudaErrorUnknown;
+#if CUDA_VERSION > 10010
+  // CHECK: hipError_t ErrorDeviceUninitialized = hipErrorInvalidContext;
+  cudaError_t ErrorDeviceUninitialized = cudaErrorDeviceUninitialized;
+#endif
 
   // CHECK: hipExternalMemoryHandleType ExternalMemoryHandleType;
   // CHECK-NEXT: hipExternalMemoryHandleType ExternalMemoryHandleTypeOpaqueFd = hipExternalMemoryHandleTypeOpaqueFd;
@@ -377,16 +379,18 @@ int main() {
   // CHECK-NEXT: hipExternalMemoryHandleType ExternalMemoryHandleTypeOpaqueWin32Kmt = hipExternalMemoryHandleTypeOpaqueWin32Kmt;
   // CHECK-NEXT: hipExternalMemoryHandleType ExternalMemoryHandleTypeD3D12Heap = hipExternalMemoryHandleTypeD3D12Heap;
   // CHECK-NEXT: hipExternalMemoryHandleType ExternalMemoryHandleTypeD3D12Resource = hipExternalMemoryHandleTypeD3D12Resource;
-  // CHECK-NEXT: hipExternalMemoryHandleType ExternalMemoryHandleTypeD3D11Resource = hipExternalMemoryHandleTypeD3D11Resource;
-  // CHECK-NEXT: hipExternalMemoryHandleType ExternalMemoryHandleTypeD3D11ResourceKmt = hipExternalMemoryHandleTypeD3D11ResourceKmt;
   cudaExternalMemoryHandleType ExternalMemoryHandleType;
   cudaExternalMemoryHandleType ExternalMemoryHandleTypeOpaqueFd = cudaExternalMemoryHandleTypeOpaqueFd;
   cudaExternalMemoryHandleType ExternalMemoryHandleTypeOpaqueWin32 = cudaExternalMemoryHandleTypeOpaqueWin32;
   cudaExternalMemoryHandleType ExternalMemoryHandleTypeOpaqueWin32Kmt = cudaExternalMemoryHandleTypeOpaqueWin32Kmt;
   cudaExternalMemoryHandleType ExternalMemoryHandleTypeD3D12Heap = cudaExternalMemoryHandleTypeD3D12Heap;
   cudaExternalMemoryHandleType ExternalMemoryHandleTypeD3D12Resource = cudaExternalMemoryHandleTypeD3D12Resource;
+#if CUDA_VERSION > 10010
+  // CHECK: hipExternalMemoryHandleType ExternalMemoryHandleTypeD3D11Resource = hipExternalMemoryHandleTypeD3D11Resource;
+  // CHECK-NEXT: hipExternalMemoryHandleType ExternalMemoryHandleTypeD3D11ResourceKmt = hipExternalMemoryHandleTypeD3D11ResourceKmt;
   cudaExternalMemoryHandleType ExternalMemoryHandleTypeD3D11Resource = cudaExternalMemoryHandleTypeD3D11Resource;
   cudaExternalMemoryHandleType ExternalMemoryHandleTypeD3D11ResourceKmt = cudaExternalMemoryHandleTypeD3D11ResourceKmt;
+#endif
 
   // CHECK: hipExternalSemaphoreHandleType ExternalSemaphoreHandleType;
   // CHECK-NEXT: hipExternalSemaphoreHandleType ExternalSemaphoreHandleTypeOpaqueFd = hipExternalSemaphoreHandleTypeOpaqueFd;
@@ -455,6 +459,7 @@ int main() {
   // CHECK: hipGraphNodeType GraphNodeTypeCount = hipGraphNodeTypeCount;
   cudaGraphNodeType GraphNodeTypeCount = cudaGraphNodeTypeCount;
 
+#if CUDA_VERSION > 10010
   // CHECK: hipGraphExecUpdateResult GraphExecUpdateResult;
   // CHECK-NEXT: hipGraphExecUpdateResult GraphExecUpdateSuccess = hipGraphExecUpdateSuccess;
   // CHECK-NEXT: hipGraphExecUpdateResult GraphExecUpdateError = hipGraphExecUpdateError;
@@ -471,6 +476,7 @@ int main() {
   cudaGraphExecUpdateResult GraphExecUpdateErrorFunctionChanged = cudaGraphExecUpdateErrorFunctionChanged;
   cudaGraphExecUpdateResult GraphExecUpdateErrorParametersChanged = cudaGraphExecUpdateErrorParametersChanged;
   cudaGraphExecUpdateResult GraphExecUpdateErrorNotSupported = cudaGraphExecUpdateErrorNotSupported;
+#endif
 #if CUDA_VERSION > 11010
   // CHECK: hipGraphExecUpdateResult GraphExecUpdateErrorUnsupportedFunctionChange = hipGraphExecUpdateErrorUnsupportedFunctionChange;
   cudaGraphExecUpdateResult GraphExecUpdateErrorUnsupportedFunctionChange = cudaGraphExecUpdateErrorUnsupportedFunctionChange;
