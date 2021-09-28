@@ -23,8 +23,10 @@ int main() {
   CUdeviceptr_v2 deviceptr_v2;
 #endif
 
+#if CUDA_VERSION > 9020
   // CHECK: hipHostFn_t hostFn;
   CUhostFn hostFn;
+#endif
 
   // CHECK: hipStreamCallback_t streamCallback;
   CUstreamCallback streamCallback;

@@ -16,6 +16,7 @@ int main() {
   // CHECK: hipExtent Extent;
   cudaExtent Extent;
 
+#if CUDA_VERSION > 9020
   // CHECK: hipExternalMemoryBufferDesc ExternalMemoryBufferDesc;
   cudaExternalMemoryBufferDesc ExternalMemoryBufferDesc;
 
@@ -27,13 +28,16 @@ int main() {
 
   // CHECK: hipExternalSemaphoreSignalParams ExternalSemaphoreSignalParams;
   cudaExternalSemaphoreSignalParams ExternalSemaphoreSignalParams;
+#endif
 #if CUDA_VERSION > 11010
   // CHECK: hipExternalSemaphoreSignalParams ExternalSemaphoreSignalParams_v1;
   cudaExternalSemaphoreSignalParams_v1 ExternalSemaphoreSignalParams_v1;
 #endif
 
+#if CUDA_VERSION > 9020
   // CHECK: hipExternalSemaphoreWaitParams ExternalSemaphoreWaitParams;
   cudaExternalSemaphoreWaitParams ExternalSemaphoreWaitParams;
+#endif
 #if CUDA_VERSION > 11010
   // CHECK: hipExternalSemaphoreWaitParams ExternalSemaphoreWaitParams_v1;
   cudaExternalSemaphoreWaitParams_v1 ExternalSemaphoreWaitParams_v1;
@@ -42,8 +46,10 @@ int main() {
   // CHECK: hipFuncAttributes FuncAttributes;
   cudaFuncAttributes FuncAttributes;
 
+#if CUDA_VERSION > 9020
   // CHECK: hipHostNodeParams HostNodeParams;
   cudaHostNodeParams HostNodeParams;
+#endif
 
   // CHECK: hipIpcEventHandle_st IpcEventHandle_st;
   // CHECK-NEXT: hipIpcEventHandle_t IpcEventHandle_t;
@@ -55,8 +61,10 @@ int main() {
   cudaIpcMemHandle_st IpcMemHandle_st;
   cudaIpcMemHandle_t IpcMemHandle_t;
 
+#if CUDA_VERSION > 9020
   // CHECK: hipKernelNodeParams KernelNodeParams;
   cudaKernelNodeParams KernelNodeParams;
+#endif
 
   // CHECK: hipLaunchParams LaunchParams;
   cudaLaunchParams LaunchParams;
@@ -64,8 +72,10 @@ int main() {
   // CHECK: hipMemcpy3DParms Memcpy3DParms;
   cudaMemcpy3DParms Memcpy3DParms;
 
+#if CUDA_VERSION > 9020
   // CHECK: hipMemsetParams MemsetParams;
   cudaMemsetParams MemsetParams;
+#endif
 
   // CHECK: hipPitchedPtr PitchedPtr;
   cudaPitchedPtr PitchedPtr;
@@ -93,6 +103,7 @@ int main() {
   CUevent_st* event_st;
   cudaEvent_t Event_t;
 
+#if CUDA_VERSION > 9020
   // CHECK: hipExternalMemory_t ExternalMemory_t;
   cudaExternalMemory_t ExternalMemory_t;
 
@@ -108,16 +119,19 @@ int main() {
   // CHECK-NEXT: hipGraphExec_t GraphExec_t;
   CUgraphExec_st* graphExec_st;
   cudaGraphExec_t GraphExec_t;
+#endif
 
   // CHECK: hipGraphicsResource* GraphicsResource;
   // CHECK-NEXT: hipGraphicsResource_t GraphicsResource_t;
   cudaGraphicsResource* GraphicsResource;
   cudaGraphicsResource_t GraphicsResource_t;
 
+#if CUDA_VERSION > 9020
   // CHECK: hipGraphNode* graphNode_st;
   // CHECK-NEXT: hipGraphNode_t GraphNode_t;
   CUgraphNode_st* graphNode_st;
   cudaGraphNode_t GraphNode_t;
+#endif
 
   // CHECK: hipArray* Array;
   // CHECK-NEXT: hipArray_t Array_t;
