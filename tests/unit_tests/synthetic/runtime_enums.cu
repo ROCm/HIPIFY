@@ -122,8 +122,6 @@ int main() {
   // CHECK-NEXT: hipDeviceAttribute_t DevAttrCooperativeLaunch = hipDeviceAttributeCooperativeLaunch;
   // CHECK-NEXT: hipDeviceAttribute_t DevAttrCooperativeMultiDeviceLaunch = hipDeviceAttributeCooperativeMultiDeviceLaunch;
   // CHECK-NEXT: hipDeviceAttribute_t DevAttrMaxSharedMemoryPerBlockOptin = hipDeviceAttributeSharedMemPerBlockOptin;
-  // CHECK-NEXT: hipDeviceAttribute_t DevAttrPageableMemoryAccessUsesHostPageTables = hipDeviceAttributePageableMemoryAccessUsesHostPageTables;
-  // CHECK-NEXT: hipDeviceAttribute_t DevAttrDirectManagedMemAccessFromHost = hipDeviceAttributeDirectManagedMemAccessFromHost;
   cudaDeviceAttr DeviceAttr;
   cudaDeviceAttr DevAttrMaxThreadsPerBlock = cudaDevAttrMaxThreadsPerBlock;
   cudaDeviceAttr DevAttrMaxBlockDimX = cudaDevAttrMaxBlockDimX;
@@ -213,8 +211,12 @@ int main() {
   cudaDeviceAttr DevAttrCooperativeLaunch = cudaDevAttrCooperativeLaunch;
   cudaDeviceAttr DevAttrCooperativeMultiDeviceLaunch = cudaDevAttrCooperativeMultiDeviceLaunch;
   cudaDeviceAttr DevAttrMaxSharedMemoryPerBlockOptin = cudaDevAttrMaxSharedMemoryPerBlockOptin;
+#if CUDA_VERSION > 9010
+  // CHECK: hipDeviceAttribute_t DevAttrPageableMemoryAccessUsesHostPageTables = hipDeviceAttributePageableMemoryAccessUsesHostPageTables;
+  // CHECK-NEXT: hipDeviceAttribute_t DevAttrDirectManagedMemAccessFromHost = hipDeviceAttributeDirectManagedMemAccessFromHost;
   cudaDeviceAttr DevAttrPageableMemoryAccessUsesHostPageTables = cudaDevAttrPageableMemoryAccessUsesHostPageTables;
   cudaDeviceAttr DevAttrDirectManagedMemAccessFromHost = cudaDevAttrDirectManagedMemAccessFromHost;
+#endif
 #if CUDA_VERSION > 10020
   // CHECK: hipDeviceAttribute_t DevAttrMaxBlocksPerMultiprocessor = hipDeviceAttributeMaxBlocksPerMultiprocessor;
   cudaDeviceAttr DevAttrMaxBlocksPerMultiprocessor = cudaDevAttrMaxBlocksPerMultiprocessor;
@@ -223,12 +225,14 @@ int main() {
   // CHECK-NEXT: hipDeviceP2PAttr DevP2PAttrPerformanceRank = hipDevP2PAttrPerformanceRank;
   // CHECK-NEXT: hipDeviceP2PAttr DevP2PAttrAccessSupported = hipDevP2PAttrAccessSupported;
   // CHECK-NEXT: hipDeviceP2PAttr DevP2PAttrNativeAtomicSupported = hipDevP2PAttrNativeAtomicSupported;
-  // CHECK-NEXT: hipDeviceP2PAttr DevP2PAttrCudaArrayAccessSupported = hipDevP2PAttrHipArrayAccessSupported;
   cudaDeviceP2PAttr DeviceP2PAttr;
   cudaDeviceP2PAttr DevP2PAttrPerformanceRank = cudaDevP2PAttrPerformanceRank;
   cudaDeviceP2PAttr DevP2PAttrAccessSupported = cudaDevP2PAttrAccessSupported;
   cudaDeviceP2PAttr DevP2PAttrNativeAtomicSupported = cudaDevP2PAttrNativeAtomicSupported;
+#if CUDA_VERSION > 9010
+  // CHECK: hipDeviceP2PAttr DevP2PAttrCudaArrayAccessSupported = hipDevP2PAttrHipArrayAccessSupported;
   cudaDeviceP2PAttr DevP2PAttrCudaArrayAccessSupported = cudaDevP2PAttrCudaArrayAccessSupported;
+#endif
 
   // CHECK: hipError_t Error;
   // CHECK-NEXT: hipError_t Error_t;
