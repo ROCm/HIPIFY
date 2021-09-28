@@ -31,55 +31,67 @@ int main() {
   CUDA_ARRAY_DESCRIPTOR_v2 array_descr_v2;
 #endif
 
+#if CUDA_VERSION > 9020
   // CHECK: hipExternalMemoryBufferDesc_st ext_mem_buff_st;
   // CHECK-NEXT: hipExternalMemoryBufferDesc ext_mem_buff;
   CUDA_EXTERNAL_MEMORY_BUFFER_DESC_st ext_mem_buff_st;
   CUDA_EXTERNAL_MEMORY_BUFFER_DESC ext_mem_buff;
+#endif
 #if CUDA_VERSION > 11020
   // CHECK: hipExternalMemoryBufferDesc ext_mem_buff_v1;
   CUDA_EXTERNAL_MEMORY_BUFFER_DESC_v1 ext_mem_buff_v1;
 #endif
 
+#if CUDA_VERSION > 9020
   // CHECK: hipExternalMemoryHandleDesc_st ext_mem_handle_st;
   // CHECK-NEXT: hipExternalMemoryHandleDesc ext_mem_handle;
   CUDA_EXTERNAL_MEMORY_HANDLE_DESC_st ext_mem_handle_st;
   CUDA_EXTERNAL_MEMORY_HANDLE_DESC ext_mem_handle;
+#endif
 #if CUDA_VERSION > 11020
   // CHECK: hipExternalMemoryHandleDesc ext_mem_handle_v1;
   CUDA_EXTERNAL_MEMORY_HANDLE_DESC_v1 ext_mem_handle_v1;
 #endif
 
+#if CUDA_VERSION > 9020
   // CHECK: hipExternalSemaphoreHandleDesc_st ext_sema_handle_st;
   // CHECK-NEXT: hipExternalSemaphoreHandleDesc ext_sema_handle;
   CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC_st ext_sema_handle_st;
   CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC ext_sema_handle;
+#endif
 #if CUDA_VERSION > 11020
   // CHECK: hipExternalSemaphoreHandleDesc ext_sema_handle_v1;
   CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC_v1 ext_sema_handle_v1;
 #endif
 
+#if CUDA_VERSION > 9020
   // CHECK: hipExternalSemaphoreSignalParams_st ext_sema_params_st;
   // CHECK-NEXT: hipExternalSemaphoreSignalParams ext_sema_params;
   CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS_st ext_sema_params_st;
   CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS ext_sema_params;
+#endif
 #if CUDA_VERSION > 11020
   // CHECK: hipExternalSemaphoreSignalParams ext_sema_params_v1;
   CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS_v1 ext_sema_params_v1;
 #endif
 
+#if CUDA_VERSION > 9020
   // CHECK: hipHostNodeParams host_node_params_st;
   // CHECK-NEXT: hipHostNodeParams host_node_params;
   CUDA_HOST_NODE_PARAMS_st host_node_params_st;
   CUDA_HOST_NODE_PARAMS host_node_params;
+#endif
 #if CUDA_VERSION > 11020
   // CHECK: hipHostNodeParams host_node_params_v1;
   CUDA_HOST_NODE_PARAMS_v1 host_node_params_v1;
 #endif
 
+#if CUDA_VERSION > 9020
   // CHECK: hipKernelNodeParams kern_node_params_st;
   // CHECK-NEXT: hipKernelNodeParams kern_node_params;
   CUDA_KERNEL_NODE_PARAMS_st kern_node_params_st;
   CUDA_KERNEL_NODE_PARAMS kern_node_params;
+#endif
 #if CUDA_VERSION > 11020
   // CHECK: hipKernelNodeParams kern_node_params_v1;
   CUDA_KERNEL_NODE_PARAMS_v1 kern_node_params_v1;
@@ -162,11 +174,15 @@ int main() {
   CUevent_st* evnt_st_ptr;
   CUevent evnt;
 
+#if CUDA_VERSION > 9020
   // CHECK: hipExternalMemory_t ext_mem;
   CUexternalMemory ext_mem;
+#endif
 
+#if CUDA_VERSION > 9020
   // CHECK: hipExternalSemaphore_t ext_sema;
   CUexternalSemaphore ext_sema;
+#endif
 
   // CHECK: ihipModuleSymbol_t* func_st_ptr;
   // CHECK-NEXT: hipFunction_t func;
@@ -188,15 +204,19 @@ int main() {
   CUtexref_st* tex_ref_st_ptr;
   CUtexref tex_ref;
 
+#if CUDA_VERSION > 9020
   // CHECK: ihipGraph* graph_st;
   // CHECK-NEXT: hipGraph_t graph;
   CUgraph_st* graph_st;
   CUgraph graph;
+#endif
 
+#if CUDA_VERSION > 9020
   // CHECK: hipGraphExec* graphExec_st;
   // CHECK-NEXT: hipGraphExec_t graphExec;
   CUgraphExec_st* graphExec_st;
   CUgraphExec graphExec;
+#endif
 
   // CHECK: hipGraphicsResource* graphicsResource_st;
   // CHECK-NEXT: hipGraphicsResource_t graphicsResource;

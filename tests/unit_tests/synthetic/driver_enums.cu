@@ -272,13 +272,15 @@ int main() {
   // CHECK-NEXT: hipDeviceP2PAttr DEVICE_P2P_ATTRIBUTE_PERFORMANCE_RANK = hipDevP2PAttrPerformanceRank;
   // CHECK-NEXT: hipDeviceP2PAttr DEVICE_P2P_ATTRIBUTE_ACCESS_SUPPORTED = hipDevP2PAttrAccessSupported;
   // CHECK-NEXT: hipDeviceP2PAttr DEVICE_P2P_ATTRIBUTE_NATIVE_ATOMIC_SUPPORTED = hipDevP2PAttrNativeAtomicSupported;
-  // CHECK-NEXT: hipDeviceP2PAttr DEVICE_P2P_ATTRIBUTE_CUDA_ARRAY_ACCESS_SUPPORTED = hipDevP2PAttrHipArrayAccessSupported;
   CUdevice_P2PAttribute deviceP2PAttribute;
   CUdevice_P2PAttribute_enum deviceP2PAttribute_enum;
   CUdevice_P2PAttribute DEVICE_P2P_ATTRIBUTE_PERFORMANCE_RANK = CU_DEVICE_P2P_ATTRIBUTE_PERFORMANCE_RANK;
   CUdevice_P2PAttribute DEVICE_P2P_ATTRIBUTE_ACCESS_SUPPORTED = CU_DEVICE_P2P_ATTRIBUTE_ACCESS_SUPPORTED;
   CUdevice_P2PAttribute DEVICE_P2P_ATTRIBUTE_NATIVE_ATOMIC_SUPPORTED = CU_DEVICE_P2P_ATTRIBUTE_NATIVE_ATOMIC_SUPPORTED;
+#if CUDA_VERSION > 9020
+  // CHECK: hipDeviceP2PAttr DEVICE_P2P_ATTRIBUTE_CUDA_ARRAY_ACCESS_SUPPORTED = hipDevP2PAttrHipArrayAccessSupported;
   CUdevice_P2PAttribute DEVICE_P2P_ATTRIBUTE_CUDA_ARRAY_ACCESS_SUPPORTED = CU_DEVICE_P2P_ATTRIBUTE_CUDA_ARRAY_ACCESS_SUPPORTED;
+#endif
 #if CUDA_VERSION == 10010
   // CHECK: hipDeviceP2PAttr DEVICE_P2P_ATTRIBUTE_ACCESS_ACCESS_SUPPORTED = hipDevP2PAttrHipArrayAccessSupported;
   CUdevice_P2PAttribute DEVICE_P2P_ATTRIBUTE_ACCESS_ACCESS_SUPPORTED = CU_DEVICE_P2P_ATTRIBUTE_ACCESS_ACCESS_SUPPORTED;
@@ -293,6 +295,7 @@ int main() {
   int EVENT_DISABLE_TIMING = CU_EVENT_DISABLE_TIMING;
   int EVENT_INTERPROCESS = CU_EVENT_INTERPROCESS;
 
+#if CUDA_VERSION > 9020
   // CHECK: hipExternalMemoryHandleType externalMemoryHandleType;
   // CHECK-NEXT: hipExternalMemoryHandleType_enum externalMemoryHandleType_enum;
   // CHECK-NEXT: hipExternalMemoryHandleType EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD = hipExternalMemoryHandleTypeOpaqueFd;
@@ -307,6 +310,7 @@ int main() {
   CUexternalMemoryHandleType EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT = CU_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT;
   CUexternalMemoryHandleType EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP = CU_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP;
   CUexternalMemoryHandleType EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE = CU_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE;
+#endif
 #if CUDA_VERSION > 10010
   // CHECK: hipExternalMemoryHandleType EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_RESOURCE = hipExternalMemoryHandleTypeD3D11Resource;
   // CHECK: hipExternalMemoryHandleType EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_RESOURCE_KMT = hipExternalMemoryHandleTypeD3D11ResourceKmt;
@@ -314,6 +318,7 @@ int main() {
   CUexternalMemoryHandleType EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_RESOURCE_KMT = CU_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_RESOURCE_KMT;
 #endif
 
+#if CUDA_VERSION > 9020
   // CHECK: hipExternalSemaphoreHandleType externalSemaphoreHandleType;
   // CHECK-NEXT: hipExternalSemaphoreHandleType_enum externalSemaphoreHandleType_enum;
   // CHECK-NEXT: hipExternalSemaphoreHandleType EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD = hipExternalSemaphoreHandleTypeOpaqueFd;
@@ -326,6 +331,7 @@ int main() {
   CUexternalSemaphoreHandleType EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32 = CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32;
   CUexternalSemaphoreHandleType EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT = CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT;
   CUexternalSemaphoreHandleType EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE = CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE;
+#endif
 
   // CHECK: HIPfilter_mode filter_mode;
   // CHECK-NEXT: HIPfilter_mode_enum filter_mode_enum;
@@ -391,6 +397,7 @@ int main() {
   CUgraphicsRegisterFlags GRAPHICS_REGISTER_FLAGS_SURFACE_LDST = CU_GRAPHICS_REGISTER_FLAGS_SURFACE_LDST;
   CUgraphicsRegisterFlags GRAPHICS_REGISTER_FLAGS_TEXTURE_GATHER = CU_GRAPHICS_REGISTER_FLAGS_TEXTURE_GATHER;
 
+#if CUDA_VERSION > 9020
   // CHECK: hipGraphNodeType graphNodeType;
   // CHECK-NEXT: hipGraphNodeType graphNodeType_enum;
   // CHECK-NEXT: hipGraphNodeType GRAPH_NODE_TYPE_KERNEL = hipGraphNodeTypeKernel;
@@ -407,6 +414,7 @@ int main() {
   CUgraphNodeType GRAPH_NODE_TYPE_HOST = CU_GRAPH_NODE_TYPE_HOST;
   CUgraphNodeType GRAPH_NODE_TYPE_GRAPH = CU_GRAPH_NODE_TYPE_GRAPH;
   CUgraphNodeType GRAPH_NODE_TYPE_EMPTY = CU_GRAPH_NODE_TYPE_EMPTY;
+#endif
 #if CUDA_VERSION > 11000
   // CHECK: hipGraphNodeType GRAPH_NODE_TYPE_WAIT_EVENT = hipGraphNodeTypeWaitEvent;
   // CHECK-NEXT: hipGraphNodeType GRAPH_NODE_TYPE_EVENT_RECORD = hipGraphNodeTypeEventRecord;
@@ -672,15 +680,6 @@ int main() {
   // CHECK-NEXT: hipError_t ERROR_LAUNCH_FAILED = hipErrorLaunchFailure;
   // CHECK-NEXT: hipError_t ERROR_COOPERATIVE_LAUNCH_TOO_LARGE = hipErrorCooperativeLaunchTooLarge;
   // CHECK-NEXT: hipError_t ERROR_NOT_SUPPORTED_ = hipErrorNotSupported;
-  // CHECK-NEXT: hipError_t ERROR_STREAM_CAPTURE_UNSUPPORTED = hipErrorStreamCaptureUnsupported;
-  // CHECK-NEXT: hipError_t ERROR_STREAM_CAPTURE_INVALIDATED = hipErrorStreamCaptureInvalidated;
-  // CHECK-NEXT: hipError_t ERROR_STREAM_CAPTURE_MERGE = hipErrorStreamCaptureMerge;
-  // CHECK-NEXT: hipError_t ERROR_STREAM_CAPTURE_UNMATCHED = hipErrorStreamCaptureUnmatched;
-  // CHECK-NEXT: hipError_t ERROR_STREAM_CAPTURE_UNJOINED = hipErrorStreamCaptureUnjoined;
-  // CHECK-NEXT: hipError_t ERROR_STREAM_CAPTURE_ISOLATION = hipErrorStreamCaptureIsolation;
-  // CHECK-NEXT: hipError_t ERROR_STREAM_CAPTURE_IMPLICIT = hipErrorStreamCaptureImplicit;
-  // CHECK-NEXT: hipError_t ERROR_CAPTURED_EVENT = hipErrorCapturedEvent;
-  // CHECK-NEXT: hipError_t ERROR_UNKNOWN = hipErrorUnknown;
   CUresult result;
   cudaError_enum Error_enum;
   CUresult SUCCESS = CUDA_SUCCESS;
@@ -733,6 +732,15 @@ int main() {
   CUresult ERROR_LAUNCH_FAILED = CUDA_ERROR_LAUNCH_FAILED;
   CUresult ERROR_COOPERATIVE_LAUNCH_TOO_LARGE = CUDA_ERROR_COOPERATIVE_LAUNCH_TOO_LARGE;
   CUresult ERROR_NOT_SUPPORTED_ = CUDA_ERROR_NOT_SUPPORTED;
+#if CUDA_VERSION > 9020
+  // CHECK: hipError_t ERROR_STREAM_CAPTURE_UNSUPPORTED = hipErrorStreamCaptureUnsupported;
+  // CHECK-NEXT: hipError_t ERROR_STREAM_CAPTURE_INVALIDATED = hipErrorStreamCaptureInvalidated;
+  // CHECK-NEXT: hipError_t ERROR_STREAM_CAPTURE_MERGE = hipErrorStreamCaptureMerge;
+  // CHECK-NEXT: hipError_t ERROR_STREAM_CAPTURE_UNMATCHED = hipErrorStreamCaptureUnmatched;
+  // CHECK-NEXT: hipError_t ERROR_STREAM_CAPTURE_UNJOINED = hipErrorStreamCaptureUnjoined;
+  // CHECK-NEXT: hipError_t ERROR_STREAM_CAPTURE_ISOLATION = hipErrorStreamCaptureIsolation;
+  // CHECK-NEXT: hipError_t ERROR_STREAM_CAPTURE_IMPLICIT = hipErrorStreamCaptureImplicit;
+  // CHECK-NEXT: hipError_t ERROR_CAPTURED_EVENT = hipErrorCapturedEvent;
   CUresult ERROR_STREAM_CAPTURE_UNSUPPORTED = CUDA_ERROR_STREAM_CAPTURE_UNSUPPORTED;
   CUresult ERROR_STREAM_CAPTURE_INVALIDATED = CUDA_ERROR_STREAM_CAPTURE_INVALIDATED;
   CUresult ERROR_STREAM_CAPTURE_MERGE = CUDA_ERROR_STREAM_CAPTURE_MERGE;
@@ -741,6 +749,8 @@ int main() {
   CUresult ERROR_STREAM_CAPTURE_ISOLATION = CUDA_ERROR_STREAM_CAPTURE_ISOLATION;
   CUresult ERROR_STREAM_CAPTURE_IMPLICIT = CUDA_ERROR_STREAM_CAPTURE_IMPLICIT;
   CUresult ERROR_CAPTURED_EVENT = CUDA_ERROR_CAPTURED_EVENT;
+#endif
+  // CHECK: hipError_t ERROR_UNKNOWN = hipErrorUnknown;
   CUresult ERROR_UNKNOWN = CUDA_ERROR_UNKNOWN;
 
 #if CUDA_VERSION > 10000
@@ -764,6 +774,7 @@ int main() {
   int STREAM_DEFAULT = CU_STREAM_DEFAULT;
   int STREAM_NON_BLOCKING = CU_STREAM_NON_BLOCKING;
 
+#if CUDA_VERSION > 9020
   // CHECK: hipStreamCaptureStatus streamCaptureStatus;
   // CHECK-NEXT: hipStreamCaptureStatus streamCaptureStatus_enum;
   // CHECK-NEXT: hipStreamCaptureStatus STREAM_CAPTURE_STATUS_NONE = hipStreamCaptureStatusNone;
@@ -774,6 +785,7 @@ int main() {
   CUstreamCaptureStatus STREAM_CAPTURE_STATUS_NONE = CU_STREAM_CAPTURE_STATUS_NONE;
   CUstreamCaptureStatus STREAM_CAPTURE_STATUS_ACTIVE = CU_STREAM_CAPTURE_STATUS_ACTIVE;
   CUstreamCaptureStatus STREAM_CAPTURE_STATUS_INVALIDATED = CU_STREAM_CAPTURE_STATUS_INVALIDATED;
+#endif
 
 #if CUDA_VERSION > 10000
   // CHECK: hipStreamCaptureMode streamCaptureMode;

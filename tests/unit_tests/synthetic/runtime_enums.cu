@@ -279,15 +279,6 @@ int main() {
   // CHECK-NEXT: hipError_t ErrorLaunchFailure = hipErrorLaunchFailure;
   // CHECK-NEXT: hipError_t ErrorCooperativeLaunchTooLarge = hipErrorCooperativeLaunchTooLarge;
   // CHECK-NEXT: hipError_t ErrorNotSupported = hipErrorNotSupported;
-  // CHECK-NEXT: hipError_t ErrorStreamCaptureUnsupported = hipErrorStreamCaptureUnsupported;
-  // CHECK-NEXT: hipError_t ErrorStreamCaptureInvalidated = hipErrorStreamCaptureInvalidated;
-  // CHECK-NEXT: hipError_t ErrorStreamCaptureMerge = hipErrorStreamCaptureMerge;
-  // CHECK-NEXT: hipError_t ErrorStreamCaptureUnmatched = hipErrorStreamCaptureUnmatched;
-  // CHECK-NEXT: hipError_t ErrorStreamCaptureUnjoined = hipErrorStreamCaptureUnjoined;
-  // CHECK-NEXT: hipError_t ErrorStreamCaptureIsolation = hipErrorStreamCaptureIsolation;
-  // CHECK-NEXT: hipError_t ErrorStreamCaptureImplicit = hipErrorStreamCaptureImplicit;
-  // CHECK-NEXT: hipError_t ErrorCapturedEvent = hipErrorCapturedEvent;
-  // CHECK-NEXT: hipError_t ErrorUnknown = hipErrorUnknown;
   cudaError Error;
   cudaError_t Error_t;
   cudaError_t Success = cudaSuccess;
@@ -337,6 +328,15 @@ int main() {
   cudaError_t ErrorLaunchFailure = cudaErrorLaunchFailure;
   cudaError_t ErrorCooperativeLaunchTooLarge = cudaErrorCooperativeLaunchTooLarge;
   cudaError_t ErrorNotSupported = cudaErrorNotSupported;
+#if CUDA_VERSION > 9020
+  // CHECK: hipError_t ErrorStreamCaptureUnsupported = hipErrorStreamCaptureUnsupported;
+  // CHECK-NEXT: hipError_t ErrorStreamCaptureInvalidated = hipErrorStreamCaptureInvalidated;
+  // CHECK-NEXT: hipError_t ErrorStreamCaptureMerge = hipErrorStreamCaptureMerge;
+  // CHECK-NEXT: hipError_t ErrorStreamCaptureUnmatched = hipErrorStreamCaptureUnmatched;
+  // CHECK-NEXT: hipError_t ErrorStreamCaptureUnjoined = hipErrorStreamCaptureUnjoined;
+  // CHECK-NEXT: hipError_t ErrorStreamCaptureIsolation = hipErrorStreamCaptureIsolation;
+  // CHECK-NEXT: hipError_t ErrorStreamCaptureImplicit = hipErrorStreamCaptureImplicit;
+  // CHECK-NEXT: hipError_t ErrorCapturedEvent = hipErrorCapturedEvent;
   cudaError_t ErrorStreamCaptureUnsupported = cudaErrorStreamCaptureUnsupported;
   cudaError_t ErrorStreamCaptureInvalidated = cudaErrorStreamCaptureInvalidated;
   cudaError_t ErrorStreamCaptureMerge = cudaErrorStreamCaptureMerge;
@@ -345,7 +345,7 @@ int main() {
   cudaError_t ErrorStreamCaptureIsolation = cudaErrorStreamCaptureIsolation;
   cudaError_t ErrorStreamCaptureImplicit = cudaErrorStreamCaptureImplicit;
   cudaError_t ErrorCapturedEvent = cudaErrorCapturedEvent;
-  cudaError_t ErrorUnknown = cudaErrorUnknown;
+#endif
 #if CUDA_VERSION > 10000
   // CHECK: hipError_t ErrorArrayIsMapped = hipErrorArrayIsMapped;
   // CHECK-NEXT: hipError_t ErrorAlreadyMapped = hipErrorAlreadyMapped;
@@ -374,7 +374,10 @@ int main() {
   // CHECK: hipError_t ErrorDeviceUninitialized = hipErrorInvalidContext;
   cudaError_t ErrorDeviceUninitialized = cudaErrorDeviceUninitialized;
 #endif
+  // CHECK: hipError_t ErrorUnknown = hipErrorUnknown;
+  cudaError_t ErrorUnknown = cudaErrorUnknown;
 
+#if CUDA_VERSION > 9020
   // CHECK: hipExternalMemoryHandleType ExternalMemoryHandleType;
   // CHECK-NEXT: hipExternalMemoryHandleType ExternalMemoryHandleTypeOpaqueFd = hipExternalMemoryHandleTypeOpaqueFd;
   // CHECK-NEXT: hipExternalMemoryHandleType ExternalMemoryHandleTypeOpaqueWin32 = hipExternalMemoryHandleTypeOpaqueWin32;
@@ -387,6 +390,7 @@ int main() {
   cudaExternalMemoryHandleType ExternalMemoryHandleTypeOpaqueWin32Kmt = cudaExternalMemoryHandleTypeOpaqueWin32Kmt;
   cudaExternalMemoryHandleType ExternalMemoryHandleTypeD3D12Heap = cudaExternalMemoryHandleTypeD3D12Heap;
   cudaExternalMemoryHandleType ExternalMemoryHandleTypeD3D12Resource = cudaExternalMemoryHandleTypeD3D12Resource;
+#endif
 #if CUDA_VERSION > 10010
   // CHECK: hipExternalMemoryHandleType ExternalMemoryHandleTypeD3D11Resource = hipExternalMemoryHandleTypeD3D11Resource;
   // CHECK-NEXT: hipExternalMemoryHandleType ExternalMemoryHandleTypeD3D11ResourceKmt = hipExternalMemoryHandleTypeD3D11ResourceKmt;
@@ -394,6 +398,7 @@ int main() {
   cudaExternalMemoryHandleType ExternalMemoryHandleTypeD3D11ResourceKmt = cudaExternalMemoryHandleTypeD3D11ResourceKmt;
 #endif
 
+#if CUDA_VERSION > 9020
   // CHECK: hipExternalSemaphoreHandleType ExternalSemaphoreHandleType;
   // CHECK-NEXT: hipExternalSemaphoreHandleType ExternalSemaphoreHandleTypeOpaqueFd = hipExternalSemaphoreHandleTypeOpaqueFd;
   // CHECK-NEXT: hipExternalSemaphoreHandleType ExternalSemaphoreHandleTypeOpaqueWin32 = hipExternalSemaphoreHandleTypeOpaqueWin32;
@@ -404,6 +409,7 @@ int main() {
   cudaExternalSemaphoreHandleType ExternalSemaphoreHandleTypeOpaqueWin32 = cudaExternalSemaphoreHandleTypeOpaqueWin32;
   cudaExternalSemaphoreHandleType ExternalSemaphoreHandleTypeOpaqueWin32Kmt = cudaExternalSemaphoreHandleTypeOpaqueWin32Kmt;
   cudaExternalSemaphoreHandleType ExternalSemaphoreHandleTypeD3D12Fence = cudaExternalSemaphoreHandleTypeD3D12Fence;
+#endif
 
   // CHECK: hipFuncAttribute FuncAttribute;
   // CHECK-NEXT: hipFuncAttribute FuncAttributeMaxDynamicSharedMemorySize = hipFuncAttributeMaxDynamicSharedMemorySize;
@@ -438,6 +444,7 @@ int main() {
   cudaGraphicsRegisterFlags GraphicsRegisterFlagsSurfaceLoadStore = cudaGraphicsRegisterFlagsSurfaceLoadStore;
   cudaGraphicsRegisterFlags GraphicsRegisterFlagsTextureGather = cudaGraphicsRegisterFlagsTextureGather;
 
+#if CUDA_VERSION > 9020
   // CHECK: hipGraphNodeType GraphNodeType;
   // CHECK-NEXT: hipGraphNodeType GraphNodeTypeKernel = hipGraphNodeTypeKernel;
   // CHECK-NEXT: hipGraphNodeType GraphNodeTypeMemcpy = hipGraphNodeTypeMemcpy;
@@ -452,14 +459,17 @@ int main() {
   cudaGraphNodeType GraphNodeTypeHost = cudaGraphNodeTypeHost;
   cudaGraphNodeType GraphNodeTypeGraph = cudaGraphNodeTypeGraph;
   cudaGraphNodeType GraphNodeTypeEmpty = cudaGraphNodeTypeEmpty;
+#endif
 #if CUDA_VERSION > 11000
   // CHECK: hipGraphNodeType GraphNodeTypeWaitEvent = hipGraphNodeTypeWaitEvent;
   // CHECK-NEXT: hipGraphNodeType GraphNodeTypeEventRecord = hipGraphNodeTypeEventRecord;
   cudaGraphNodeType GraphNodeTypeWaitEvent = cudaGraphNodeTypeWaitEvent;
   cudaGraphNodeType GraphNodeTypeEventRecord = cudaGraphNodeTypeEventRecord;
 #endif
+#if CUDA_VERSION > 9020
   // CHECK: hipGraphNodeType GraphNodeTypeCount = hipGraphNodeTypeCount;
   cudaGraphNodeType GraphNodeTypeCount = cudaGraphNodeTypeCount;
+#endif
 
 #if CUDA_VERSION > 10010
   // CHECK: hipGraphExecUpdateResult GraphExecUpdateResult;
@@ -630,6 +640,7 @@ int main() {
   cudaSharedMemConfig SharedMemBankSizeFourByte = cudaSharedMemBankSizeFourByte;
   cudaSharedMemConfig SharedMemBankSizeEightByte = cudaSharedMemBankSizeEightByte;
 
+#if CUDA_VERSION > 9020
   // CHECK: hipStreamCaptureStatus StreamCaptureStatus;
   // CHECK-NEXT: hipStreamCaptureStatus StreamCaptureStatusNone = hipStreamCaptureStatusNone;
   // CHECK-NEXT: hipStreamCaptureStatus StreamCaptureStatusActive = hipStreamCaptureStatusActive;
@@ -638,6 +649,7 @@ int main() {
   cudaStreamCaptureStatus StreamCaptureStatusNone = cudaStreamCaptureStatusNone;
   cudaStreamCaptureStatus StreamCaptureStatusActive = cudaStreamCaptureStatusActive;
   cudaStreamCaptureStatus StreamCaptureStatusInvalidated = cudaStreamCaptureStatusInvalidated;
+#endif
 
 #if CUDA_VERSION > 10000
   // CHECK: hipStreamCaptureMode StreamCaptureMode;
