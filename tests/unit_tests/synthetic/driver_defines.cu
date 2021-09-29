@@ -1,4 +1,4 @@
-// RUN: %run_test hipify "%s" "%t" %hipify_args -D__CUDA_API_VERSION_INTERNAL %clang_args
+// RUN: %run_test hipify "%s" "%t" --skip-excluded-preprocessor-conditional-blocks %hipify_args -D__CUDA_API_VERSION_INTERNAL %clang_args
 
 // CHECK: #include <hip/hip_runtime.h>
 #include <cuda.h>
@@ -55,10 +55,12 @@ int main() {
   int ARRAY3D_CUBEMAP = CUDA_ARRAY3D_CUBEMAP;
   int ARRAY3D_TEXTURE_GATHER = CUDA_ARRAY3D_TEXTURE_GATHER;
 
+#if CUDA_VERSION > 8000
   // CHECK: int COOPERATIVE_LAUNCH_MULTI_DEVICE_NO_PRE_LAUNCH_SYNC = hipCooperativeLaunchMultiDeviceNoPreSync;
   // CHECK-NEXT: int COOPERATIVE_LAUNCH_MULTI_DEVICE_NO_POST_LAUNCH_SYNC = hipCooperativeLaunchMultiDeviceNoPostSync;
   int COOPERATIVE_LAUNCH_MULTI_DEVICE_NO_PRE_LAUNCH_SYNC = CUDA_COOPERATIVE_LAUNCH_MULTI_DEVICE_NO_PRE_LAUNCH_SYNC;
   int COOPERATIVE_LAUNCH_MULTI_DEVICE_NO_POST_LAUNCH_SYNC = CUDA_COOPERATIVE_LAUNCH_MULTI_DEVICE_NO_POST_LAUNCH_SYNC;
+#endif
 
   // CHECK: hipStream_t STREAM_PER_THREAD = hipStreamPerThread;
   CUstream STREAM_PER_THREAD = CU_STREAM_PER_THREAD;

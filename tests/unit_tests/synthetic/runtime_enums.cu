@@ -118,10 +118,6 @@ int main() {
   // CHECK-NEXT: hipDeviceAttribute_t DevAttrConcurrentManagedAccess = hipDeviceAttributeConcurrentManagedAccess;
   // CHECK-NEXT: hipDeviceAttribute_t DevAttrComputePreemptionSupported = hipDeviceAttributeComputePreemptionSupported;
   // CHECK-NEXT: hipDeviceAttribute_t DevAttrCanUseHostPointerForRegisteredMem = hipDeviceAttributeCanUseHostPointerForRegisteredMem;
-  // CHECK-NEXT: hipDeviceAttribute_t DevAttrReserved94 = hipDeviceAttributeCanUseStreamWaitValue;
-  // CHECK-NEXT: hipDeviceAttribute_t DevAttrCooperativeLaunch = hipDeviceAttributeCooperativeLaunch;
-  // CHECK-NEXT: hipDeviceAttribute_t DevAttrCooperativeMultiDeviceLaunch = hipDeviceAttributeCooperativeMultiDeviceLaunch;
-  // CHECK-NEXT: hipDeviceAttribute_t DevAttrMaxSharedMemoryPerBlockOptin = hipDeviceAttributeSharedMemPerBlockOptin;
   cudaDeviceAttr DeviceAttr;
   cudaDeviceAttr DevAttrMaxThreadsPerBlock = cudaDevAttrMaxThreadsPerBlock;
   cudaDeviceAttr DevAttrMaxBlockDimX = cudaDevAttrMaxBlockDimX;
@@ -207,10 +203,16 @@ int main() {
   cudaDeviceAttr DevAttrConcurrentManagedAccess = cudaDevAttrConcurrentManagedAccess;
   cudaDeviceAttr DevAttrComputePreemptionSupported = cudaDevAttrComputePreemptionSupported;
   cudaDeviceAttr DevAttrCanUseHostPointerForRegisteredMem = cudaDevAttrCanUseHostPointerForRegisteredMem;
+#if CUDA_VERSION > 8000
+  // CHECK: hipDeviceAttribute_t DevAttrReserved94 = hipDeviceAttributeCanUseStreamWaitValue;
+  // CHECK-NEXT: hipDeviceAttribute_t DevAttrCooperativeLaunch = hipDeviceAttributeCooperativeLaunch;
+  // CHECK-NEXT: hipDeviceAttribute_t DevAttrCooperativeMultiDeviceLaunch = hipDeviceAttributeCooperativeMultiDeviceLaunch;
+  // CHECK-NEXT: hipDeviceAttribute_t DevAttrMaxSharedMemoryPerBlockOptin = hipDeviceAttributeSharedMemPerBlockOptin;
   cudaDeviceAttr DevAttrReserved94 = cudaDevAttrReserved94;
   cudaDeviceAttr DevAttrCooperativeLaunch = cudaDevAttrCooperativeLaunch;
   cudaDeviceAttr DevAttrCooperativeMultiDeviceLaunch = cudaDevAttrCooperativeMultiDeviceLaunch;
   cudaDeviceAttr DevAttrMaxSharedMemoryPerBlockOptin = cudaDevAttrMaxSharedMemoryPerBlockOptin;
+#endif
 #if CUDA_VERSION > 9010
   // CHECK: hipDeviceAttribute_t DevAttrPageableMemoryAccessUsesHostPageTables = hipDeviceAttributePageableMemoryAccessUsesHostPageTables;
   // CHECK-NEXT: hipDeviceAttribute_t DevAttrDirectManagedMemAccessFromHost = hipDeviceAttributeDirectManagedMemAccessFromHost;
@@ -281,7 +283,6 @@ int main() {
   // CHECK-NEXT: hipError_t ErrorHostMemoryAlreadyRegistered = hipErrorHostMemoryAlreadyRegistered;
   // CHECK-NEXT: hipError_t ErrorHostMemoryNotRegistered = hipErrorHostMemoryNotRegistered;
   // CHECK-NEXT: hipError_t ErrorLaunchFailure = hipErrorLaunchFailure;
-  // CHECK-NEXT: hipError_t ErrorCooperativeLaunchTooLarge = hipErrorCooperativeLaunchTooLarge;
   // CHECK-NEXT: hipError_t ErrorNotSupported = hipErrorNotSupported;
   cudaError Error;
   cudaError_t Error_t;
@@ -330,8 +331,11 @@ int main() {
   cudaError_t ErrorHostMemoryAlreadyRegistered = cudaErrorHostMemoryAlreadyRegistered;
   cudaError_t ErrorHostMemoryNotRegistered = cudaErrorHostMemoryNotRegistered;
   cudaError_t ErrorLaunchFailure = cudaErrorLaunchFailure;
-  cudaError_t ErrorCooperativeLaunchTooLarge = cudaErrorCooperativeLaunchTooLarge;
   cudaError_t ErrorNotSupported = cudaErrorNotSupported;
+#if CUDA_VERSION > 8000
+  // CHECK: hipError_t ErrorCooperativeLaunchTooLarge = hipErrorCooperativeLaunchTooLarge;
+  cudaError_t ErrorCooperativeLaunchTooLarge = cudaErrorCooperativeLaunchTooLarge;
+#endif
 #if CUDA_VERSION > 9020
   // CHECK: hipError_t ErrorStreamCaptureUnsupported = hipErrorStreamCaptureUnsupported;
   // CHECK-NEXT: hipError_t ErrorStreamCaptureInvalidated = hipErrorStreamCaptureInvalidated;
@@ -415,6 +419,7 @@ int main() {
   cudaExternalSemaphoreHandleType ExternalSemaphoreHandleTypeD3D12Fence = cudaExternalSemaphoreHandleTypeD3D12Fence;
 #endif
 
+#if CUDA_VERSION > 8000
   // CHECK: hipFuncAttribute FuncAttribute;
   // CHECK-NEXT: hipFuncAttribute FuncAttributeMaxDynamicSharedMemorySize = hipFuncAttributeMaxDynamicSharedMemorySize;
   // CHECK-NEXT: hipFuncAttribute FuncAttributePreferredSharedMemoryCarveout = hipFuncAttributePreferredSharedMemoryCarveout;
@@ -423,6 +428,7 @@ int main() {
   cudaFuncAttribute FuncAttributeMaxDynamicSharedMemorySize = cudaFuncAttributeMaxDynamicSharedMemorySize;
   cudaFuncAttribute FuncAttributePreferredSharedMemoryCarveout = cudaFuncAttributePreferredSharedMemoryCarveout;
   cudaFuncAttribute FuncAttributeMax = cudaFuncAttributeMax;
+#endif
 
   // CHECK: hipFuncCache_t FuncCache;
   // CHECK-NEXT: hipFuncCache_t FuncCachePreferNone = hipFuncCachePreferNone;
