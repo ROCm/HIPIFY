@@ -157,12 +157,6 @@ int main() {
   // CHECK-NEXT: hipDeviceAttribute_t DEVICE_ATTRIBUTE_MANAGED_MEMORY = hipDeviceAttributeManagedMemory;
   // CHECK-NEXT: hipDeviceAttribute_t DEVICE_ATTRIBUTE_MULTI_GPU_BOARD = hipDeviceAttributeIsMultiGpuBoard;
   // CHECK-NEXT: hipDeviceAttribute_t DEVICE_ATTRIBUTE_MULTI_GPU_BOARD_GROUP_ID = hipDeviceAttributeMultiGpuBoardGroupId;
-  // CHECK-NEXT: hipDeviceAttribute_t DEVICE_ATTRIBUTE_HOST_NATIVE_ATOMIC_SUPPORTED = hipDeviceAttributeHostNativeAtomicSupported;
-  // CHECK-NEXT: hipDeviceAttribute_t DEVICE_ATTRIBUTE_SINGLE_TO_DOUBLE_PRECISION_PERF_RATIO = hipDeviceAttributeSingleToDoublePrecisionPerfRatio;
-  // CHECK-NEXT: hipDeviceAttribute_t DEVICE_ATTRIBUTE_PAGEABLE_MEMORY_ACCESS = hipDeviceAttributePageableMemoryAccess;
-  // CHECK-NEXT: hipDeviceAttribute_t DEVICE_ATTRIBUTE_CONCURRENT_MANAGED_ACCESS = hipDeviceAttributeConcurrentManagedAccess;
-  // CHECK-NEXT: hipDeviceAttribute_t DEVICE_ATTRIBUTE_COMPUTE_PREEMPTION_SUPPORTED = hipDeviceAttributeComputePreemptionSupported;
-  // CHECK-NEXT: hipDeviceAttribute_t DEVICE_ATTRIBUTE_CAN_USE_HOST_POINTER_FOR_REGISTERED_MEM = hipDeviceAttributeCanUseHostPointerForRegisteredMem;
   CUdevice_attribute dev_attr;
   CUdevice_attribute_enum dev_attr_enum;
   CUdevice_attribute DEVICE_ATTRIBUTE_MAX_THREADS_PER_BLOCK = CU_DEVICE_ATTRIBUTE_MAX_THREADS_PER_BLOCK;
@@ -244,12 +238,20 @@ int main() {
   CUdevice_attribute DEVICE_ATTRIBUTE_MANAGED_MEMORY = CU_DEVICE_ATTRIBUTE_MANAGED_MEMORY;
   CUdevice_attribute DEVICE_ATTRIBUTE_MULTI_GPU_BOARD = CU_DEVICE_ATTRIBUTE_MULTI_GPU_BOARD;
   CUdevice_attribute DEVICE_ATTRIBUTE_MULTI_GPU_BOARD_GROUP_ID = CU_DEVICE_ATTRIBUTE_MULTI_GPU_BOARD_GROUP_ID;
+#if CUDA_VERSION > 7050
+  // CHECK: hipDeviceAttribute_t DEVICE_ATTRIBUTE_HOST_NATIVE_ATOMIC_SUPPORTED = hipDeviceAttributeHostNativeAtomicSupported;
+  // CHECK-NEXT: hipDeviceAttribute_t DEVICE_ATTRIBUTE_SINGLE_TO_DOUBLE_PRECISION_PERF_RATIO = hipDeviceAttributeSingleToDoublePrecisionPerfRatio;
+  // CHECK-NEXT: hipDeviceAttribute_t DEVICE_ATTRIBUTE_PAGEABLE_MEMORY_ACCESS = hipDeviceAttributePageableMemoryAccess;
+  // CHECK-NEXT: hipDeviceAttribute_t DEVICE_ATTRIBUTE_CONCURRENT_MANAGED_ACCESS = hipDeviceAttributeConcurrentManagedAccess;
+  // CHECK-NEXT: hipDeviceAttribute_t DEVICE_ATTRIBUTE_COMPUTE_PREEMPTION_SUPPORTED = hipDeviceAttributeComputePreemptionSupported;
+  // CHECK-NEXT: hipDeviceAttribute_t DEVICE_ATTRIBUTE_CAN_USE_HOST_POINTER_FOR_REGISTERED_MEM = hipDeviceAttributeCanUseHostPointerForRegisteredMem;
   CUdevice_attribute DEVICE_ATTRIBUTE_HOST_NATIVE_ATOMIC_SUPPORTED = CU_DEVICE_ATTRIBUTE_HOST_NATIVE_ATOMIC_SUPPORTED;
   CUdevice_attribute DEVICE_ATTRIBUTE_SINGLE_TO_DOUBLE_PRECISION_PERF_RATIO = CU_DEVICE_ATTRIBUTE_SINGLE_TO_DOUBLE_PRECISION_PERF_RATIO;
   CUdevice_attribute DEVICE_ATTRIBUTE_PAGEABLE_MEMORY_ACCESS = CU_DEVICE_ATTRIBUTE_PAGEABLE_MEMORY_ACCESS;
   CUdevice_attribute DEVICE_ATTRIBUTE_CONCURRENT_MANAGED_ACCESS = CU_DEVICE_ATTRIBUTE_CONCURRENT_MANAGED_ACCESS;
   CUdevice_attribute DEVICE_ATTRIBUTE_COMPUTE_PREEMPTION_SUPPORTED = CU_DEVICE_ATTRIBUTE_COMPUTE_PREEMPTION_SUPPORTED;
   CUdevice_attribute DEVICE_ATTRIBUTE_CAN_USE_HOST_POINTER_FOR_REGISTERED_MEM = CU_DEVICE_ATTRIBUTE_CAN_USE_HOST_POINTER_FOR_REGISTERED_MEM;
+#endif
 #if CUDA_VERSION > 8000
   // CHECK: hipDeviceAttribute_t DEVICE_ATTRIBUTE_CAN_USE_STREAM_WAIT_VALUE_NOR = hipDeviceAttributeCanUseStreamWaitValue;
   // CHECK-NEXT: hipDeviceAttribute_t DEVICE_ATTRIBUTE_COOPERATIVE_LAUNCH = hipDeviceAttributeCooperativeLaunch;
@@ -271,6 +273,7 @@ int main() {
   CUdevice_attribute DEVICE_ATTRIBUTE_MAX_BLOCKS_PER_MULTIPROCESSOR = CU_DEVICE_ATTRIBUTE_MAX_BLOCKS_PER_MULTIPROCESSOR;
 #endif
 
+#if CUDA_VERSION > 7050
   // CHECK: hipDeviceP2PAttr deviceP2PAttribute;
   // CHECK-NEXT: hipDeviceP2PAttr deviceP2PAttribute_enum;
   // CHECK-NEXT: hipDeviceP2PAttr DEVICE_P2P_ATTRIBUTE_PERFORMANCE_RANK = hipDevP2PAttrPerformanceRank;
@@ -281,6 +284,7 @@ int main() {
   CUdevice_P2PAttribute DEVICE_P2P_ATTRIBUTE_PERFORMANCE_RANK = CU_DEVICE_P2P_ATTRIBUTE_PERFORMANCE_RANK;
   CUdevice_P2PAttribute DEVICE_P2P_ATTRIBUTE_ACCESS_SUPPORTED = CU_DEVICE_P2P_ATTRIBUTE_ACCESS_SUPPORTED;
   CUdevice_P2PAttribute DEVICE_P2P_ATTRIBUTE_NATIVE_ATOMIC_SUPPORTED = CU_DEVICE_P2P_ATTRIBUTE_NATIVE_ATOMIC_SUPPORTED;
+#endif
 #if CUDA_VERSION > 9020
   // CHECK: hipDeviceP2PAttr DEVICE_P2P_ATTRIBUTE_CUDA_ARRAY_ACCESS_SUPPORTED = hipDevP2PAttrHipArrayAccessSupported;
   CUdevice_P2PAttribute DEVICE_P2P_ATTRIBUTE_CUDA_ARRAY_ACCESS_SUPPORTED = CU_DEVICE_P2P_ATTRIBUTE_CUDA_ARRAY_ACCESS_SUPPORTED;
@@ -473,9 +477,6 @@ int main() {
   // CHECK-NEXT: hipJitOption JIT_LOG_VERBOSE = hipJitOptionLogVerbose;
   // CHECK-NEXT: hipJitOption JIT_GENERATE_LINE_INFO = hipJitOptionGenerateLineInfo;
   // CHECK-NEXT: hipJitOption JIT_CACHE_MODE = hipJitOptionCacheMode;
-  // CHECK-NEXT: hipJitOption JIT_NEW_SM3X_OPT = hipJitOptionSm3xOpt;
-  // CHECK-NEXT: hipJitOption JIT_FAST_COMPILE = hipJitOptionFastCompile;
-  // CHECK-NEXT: hipJitOption JIT_NUM_OPTIONS = hipJitOptionNumOptions;
   CUjit_option jit_option;
   CUjit_option_enum jit_option_enum;
   CUjit_option JIT_MAX_REGISTERS = CU_JIT_MAX_REGISTERS;
@@ -493,8 +494,14 @@ int main() {
   CUjit_option JIT_LOG_VERBOSE = CU_JIT_LOG_VERBOSE;
   CUjit_option JIT_GENERATE_LINE_INFO = CU_JIT_GENERATE_LINE_INFO;
   CUjit_option JIT_CACHE_MODE = CU_JIT_CACHE_MODE;
+
+#if CUDA_VERSION > 7050
+  // CHECK: hipJitOption JIT_NEW_SM3X_OPT = hipJitOptionSm3xOpt;
+  // CHECK-NEXT: hipJitOption JIT_FAST_COMPILE = hipJitOptionFastCompile;
   CUjit_option JIT_NEW_SM3X_OPT = CU_JIT_NEW_SM3X_OPT;
   CUjit_option JIT_FAST_COMPILE = CU_JIT_FAST_COMPILE;
+#endif
+  // CHECK: hipJitOption JIT_NUM_OPTIONS = hipJitOptionNumOptions;
   CUjit_option JIT_NUM_OPTIONS = CU_JIT_NUM_OPTIONS;
 
   // CHECK: hipLimit_t limit;
@@ -506,6 +513,7 @@ int main() {
   CUlimit LIMIT_PRINTF_FIFO_SIZE = CU_LIMIT_PRINTF_FIFO_SIZE;
   CUlimit LIMIT_MALLOC_HEAP_SIZE = CU_LIMIT_MALLOC_HEAP_SIZE;
 
+#if CUDA_VERSION > 7050
   // CHECK: hipMemoryAdvise mem_advise;
   // CHECK-NEXT: hipMemoryAdvise mem_advise_enum;
   // CHECK-NEXT: hipMemoryAdvise MEM_ADVISE_SET_READ_MOSTLY = hipMemAdviseSetReadMostly;
@@ -522,6 +530,7 @@ int main() {
   CUmem_advise MEM_ADVISE_UNSET_PREFERRED_LOCATION = CU_MEM_ADVISE_UNSET_PREFERRED_LOCATION;
   CUmem_advise MEM_ADVISE_SET_ACCESSED_BY = CU_MEM_ADVISE_SET_ACCESSED_BY;
   CUmem_advise MEM_ADVISE_UNSET_ACCESSED_BY = CU_MEM_ADVISE_UNSET_ACCESSED_BY;
+#endif
 
   // CHECK: int MEM_ATTACH_GLOBAL = hipMemAttachGlobal;
   // CHECK-NEXT: int MEM_ATTACH_HOST = hipMemAttachHost;
@@ -530,6 +539,7 @@ int main() {
   int MEM_ATTACH_HOST = CU_MEM_ATTACH_HOST;
   int MEM_ATTACH_SINGLE = CU_MEM_ATTACH_SINGLE;
 
+#if CUDA_VERSION > 7050
   // CHECK: hipMemRangeAttribute mem_range_attribute;
   // CHECK-NEXT: hipMemRangeAttribute mem_range_attribute_enum;
   // CHECK-NEXT: hipMemRangeAttribute MEM_RANGE_ATTRIBUTE_READ_MOSTLY = hipMemRangeAttributeReadMostly;
@@ -542,6 +552,7 @@ int main() {
   CUmem_range_attribute MEM_RANGE_ATTRIBUTE_PREFERRED_LOCATION = CU_MEM_RANGE_ATTRIBUTE_PREFERRED_LOCATION;
   CUmem_range_attribute MEM_RANGE_ATTRIBUTE_ACCESSED_BY = CU_MEM_RANGE_ATTRIBUTE_ACCESSED_BY;
   CUmem_range_attribute MEM_RANGE_ATTRIBUTE_LAST_PREFETCH_LOCATION = CU_MEM_RANGE_ATTRIBUTE_LAST_PREFETCH_LOCATION;
+#endif
 
   // CHECK: int OCCUPANCY_DEFAULT = hipOccupancyDefault;
   int OCCUPANCY_DEFAULT = CU_OCCUPANCY_DEFAULT;
@@ -808,12 +819,14 @@ int main() {
   CUstreamCaptureMode STREAM_CAPTURE_MODE_RELAXED = CU_STREAM_CAPTURE_MODE_RELAXED;
 #endif
 
+#if CUDA_VERSION > 7050
   // CHECK: int STREAM_WAIT_VALUE_GEQ = hipStreamWaitValueGte;
   // CHECK-NEXT: int STREAM_WAIT_VALUE_EQ = hipStreamWaitValueEq;
   // CHECK-NEXT: int STREAM_WAIT_VALUE_AND = hipStreamWaitValueAnd;
   int STREAM_WAIT_VALUE_GEQ = CU_STREAM_WAIT_VALUE_GEQ;
   int STREAM_WAIT_VALUE_EQ = CU_STREAM_WAIT_VALUE_EQ;
   int STREAM_WAIT_VALUE_AND = CU_STREAM_WAIT_VALUE_AND;
+#endif
 #if CUDA_VERSION > 8000
   // CHECK: int STREAM_WAIT_VALUE_NOR = hipStreamWaitValueNor;
   int STREAM_WAIT_VALUE_NOR = CU_STREAM_WAIT_VALUE_NOR;
