@@ -3,6 +3,7 @@
 #include <iostream>
 // CHECK: #include <hiprand.h>
 #include <curand.h>
+#define THRUST_NS_QUALIFIER ::thrust
 // CHECK: #include <hipcub/hipcub.hpp>
 #include <cub/cub.cuh>
 
