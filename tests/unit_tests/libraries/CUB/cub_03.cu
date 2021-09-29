@@ -1,6 +1,7 @@
 // RUN: %run_test hipify "%s" "%t" %hipify_args %clang_args
 // CHECK: #include <hip/hip_runtime.h>
 #include <iostream>
+#define THRUST_NS_QUALIFIER ::thrust
 // CHECK: #include <hipcub/hipcub.hpp>
 #include <cub/cub.cuh>
 
