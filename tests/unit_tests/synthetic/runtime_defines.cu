@@ -32,7 +32,6 @@ int main() {
   // CHECK-NEXT: int HostRegisterDefault = hipHostRegisterDefault;
   // CHECK-NEXT: int HostRegisterPortable = hipHostRegisterPortable;
   // CHECK-NEXT: int HostRegisterMapped = hipHostRegisterMapped;
-  // CHECK-NEXT: int HostRegisterIoMemory = hipHostRegisterIoMemory;
   // CHECK-NEXT: int IpcMemLazyEnablePeerAccess = hipIpcMemLazyEnablePeerAccess;
   // CHECK-NEXT: int MemAttachGlobal = hipMemAttachGlobal;
   // CHECK-NEXT: int MemAttachHost = hipMemAttachHost;
@@ -73,7 +72,6 @@ int main() {
   int HostRegisterDefault = cudaHostRegisterDefault;
   int HostRegisterPortable = cudaHostRegisterPortable;
   int HostRegisterMapped = cudaHostRegisterMapped;
-  int HostRegisterIoMemory = cudaHostRegisterIoMemory;
   int IpcMemLazyEnablePeerAccess = cudaIpcMemLazyEnablePeerAccess;
   int MemAttachGlobal = cudaMemAttachGlobal;
   int MemAttachHost = cudaMemAttachHost;
@@ -89,6 +87,11 @@ int main() {
   int StreamDefault = cudaStreamDefault;
   int StreamNonBlocking = cudaStreamNonBlocking;
   cudaStream_t StreamPerThread = cudaStreamPerThread;
+
+#if CUDA_VERSION > 7000
+  // CHECK: int HostRegisterIoMemory = hipHostRegisterIoMemory;
+  int HostRegisterIoMemory = cudaHostRegisterIoMemory;
+#endif
 
 #if CUDA_VERSION > 7050
   // CHECK: int CpuDeviceId = hipCpuDeviceId;
