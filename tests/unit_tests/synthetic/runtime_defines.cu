@@ -13,8 +13,6 @@ int main() {
   // CHECK-NEXT: int ArraySurfaceLoadStore = hipArraySurfaceLoadStore;
   // CHECK-NEXT: int ArrayCubemap = hipArrayCubemap;
   // CHECK-NEXT: int ArrayTextureGather = hipArrayTextureGather;
-  // CHECK-NEXT: int CpuDeviceId = hipCpuDeviceId;
-  // CHECK-NEXT: int InvalidDeviceId = hipInvalidDeviceId;
   // CHECK-NEXT: int DeviceBlockingSync = hipDeviceScheduleBlockingSync;
   // CHECK-NEXT: int DeviceLmemResizeToMax = hipDeviceLmemResizeToMax;
   // CHECK-NEXT: int DeviceMapHost = hipDeviceMapHost;
@@ -56,8 +54,6 @@ int main() {
   int ArraySurfaceLoadStore = cudaArraySurfaceLoadStore;
   int ArrayCubemap = cudaArrayCubemap;
   int ArrayTextureGather = cudaArrayTextureGather;
-  int CpuDeviceId = cudaCpuDeviceId;
-  int InvalidDeviceId = cudaInvalidDeviceId;
   int DeviceBlockingSync = cudaDeviceBlockingSync;
   int DeviceLmemResizeToMax = cudaDeviceLmemResizeToMax;
   int DeviceMapHost = cudaDeviceMapHost;
@@ -93,6 +89,13 @@ int main() {
   int StreamDefault = cudaStreamDefault;
   int StreamNonBlocking = cudaStreamNonBlocking;
   cudaStream_t StreamPerThread = cudaStreamPerThread;
+
+#if CUDA_VERSION > 7050
+  // CHECK: int CpuDeviceId = hipCpuDeviceId;
+  // CHECK-NEXT: int InvalidDeviceId = hipInvalidDeviceId;
+  int CpuDeviceId = cudaCpuDeviceId;
+  int InvalidDeviceId = cudaInvalidDeviceId;
+#endif
 
 #if CUDA_VERSION > 8000
   // CHECK: int CooperativeLaunchMultiDeviceNoPreSync = hipCooperativeLaunchMultiDeviceNoPreSync;

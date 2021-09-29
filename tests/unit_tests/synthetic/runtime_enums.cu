@@ -112,12 +112,6 @@ int main() {
   // CHECK-NEXT: hipDeviceAttribute_t DevAttrManagedMemory = hipDeviceAttributeManagedMemory;
   // CHECK-NEXT: hipDeviceAttribute_t DevAttrIsMultiGpuBoard = hipDeviceAttributeIsMultiGpuBoard;
   // CHECK-NEXT: hipDeviceAttribute_t DevAttrMultiGpuBoardGroupID = hipDeviceAttributeMultiGpuBoardGroupID;
-  // CHECK-NEXT: hipDeviceAttribute_t DevAttrHostNativeAtomicSupported = hipDeviceAttributeHostNativeAtomicSupported;
-  // CHECK-NEXT: hipDeviceAttribute_t DevAttrSingleToDoublePrecisionPerfRatio = hipDeviceAttributeSingleToDoublePrecisionPerfRatio;
-  // CHECK-NEXT: hipDeviceAttribute_t DevAttrPageableMemoryAccess = hipDeviceAttributePageableMemoryAccess;
-  // CHECK-NEXT: hipDeviceAttribute_t DevAttrConcurrentManagedAccess = hipDeviceAttributeConcurrentManagedAccess;
-  // CHECK-NEXT: hipDeviceAttribute_t DevAttrComputePreemptionSupported = hipDeviceAttributeComputePreemptionSupported;
-  // CHECK-NEXT: hipDeviceAttribute_t DevAttrCanUseHostPointerForRegisteredMem = hipDeviceAttributeCanUseHostPointerForRegisteredMem;
   cudaDeviceAttr DeviceAttr;
   cudaDeviceAttr DevAttrMaxThreadsPerBlock = cudaDevAttrMaxThreadsPerBlock;
   cudaDeviceAttr DevAttrMaxBlockDimX = cudaDevAttrMaxBlockDimX;
@@ -197,12 +191,20 @@ int main() {
   cudaDeviceAttr DevAttrManagedMemory = cudaDevAttrManagedMemory;
   cudaDeviceAttr DevAttrIsMultiGpuBoard = cudaDevAttrIsMultiGpuBoard;
   cudaDeviceAttr DevAttrMultiGpuBoardGroupID = cudaDevAttrMultiGpuBoardGroupID;
+#if CUDA_VERSION > 7050
+  // CHECK: hipDeviceAttribute_t DevAttrHostNativeAtomicSupported = hipDeviceAttributeHostNativeAtomicSupported;
+  // CHECK-NEXT: hipDeviceAttribute_t DevAttrSingleToDoublePrecisionPerfRatio = hipDeviceAttributeSingleToDoublePrecisionPerfRatio;
+  // CHECK-NEXT: hipDeviceAttribute_t DevAttrPageableMemoryAccess = hipDeviceAttributePageableMemoryAccess;
+  // CHECK-NEXT: hipDeviceAttribute_t DevAttrConcurrentManagedAccess = hipDeviceAttributeConcurrentManagedAccess;
+  // CHECK-NEXT: hipDeviceAttribute_t DevAttrComputePreemptionSupported = hipDeviceAttributeComputePreemptionSupported;
+  // CHECK-NEXT: hipDeviceAttribute_t DevAttrCanUseHostPointerForRegisteredMem = hipDeviceAttributeCanUseHostPointerForRegisteredMem;
   cudaDeviceAttr DevAttrHostNativeAtomicSupported = cudaDevAttrHostNativeAtomicSupported;
   cudaDeviceAttr DevAttrSingleToDoublePrecisionPerfRatio = cudaDevAttrSingleToDoublePrecisionPerfRatio;
   cudaDeviceAttr DevAttrPageableMemoryAccess = cudaDevAttrPageableMemoryAccess;
   cudaDeviceAttr DevAttrConcurrentManagedAccess = cudaDevAttrConcurrentManagedAccess;
   cudaDeviceAttr DevAttrComputePreemptionSupported = cudaDevAttrComputePreemptionSupported;
   cudaDeviceAttr DevAttrCanUseHostPointerForRegisteredMem = cudaDevAttrCanUseHostPointerForRegisteredMem;
+#endif
 #if CUDA_VERSION > 8000
   // CHECK: hipDeviceAttribute_t DevAttrReserved94 = hipDeviceAttributeCanUseStreamWaitValue;
   // CHECK-NEXT: hipDeviceAttribute_t DevAttrCooperativeLaunch = hipDeviceAttributeCooperativeLaunch;
@@ -223,6 +225,8 @@ int main() {
   // CHECK: hipDeviceAttribute_t DevAttrMaxBlocksPerMultiprocessor = hipDeviceAttributeMaxBlocksPerMultiprocessor;
   cudaDeviceAttr DevAttrMaxBlocksPerMultiprocessor = cudaDevAttrMaxBlocksPerMultiprocessor;
 #endif
+
+#if CUDA_VERSION > 7050
   // CHECK: hipDeviceP2PAttr DeviceP2PAttr;
   // CHECK-NEXT: hipDeviceP2PAttr DevP2PAttrPerformanceRank = hipDevP2PAttrPerformanceRank;
   // CHECK-NEXT: hipDeviceP2PAttr DevP2PAttrAccessSupported = hipDevP2PAttrAccessSupported;
@@ -231,6 +235,7 @@ int main() {
   cudaDeviceP2PAttr DevP2PAttrPerformanceRank = cudaDevP2PAttrPerformanceRank;
   cudaDeviceP2PAttr DevP2PAttrAccessSupported = cudaDevP2PAttrAccessSupported;
   cudaDeviceP2PAttr DevP2PAttrNativeAtomicSupported = cudaDevP2PAttrNativeAtomicSupported;
+#endif
 #if CUDA_VERSION > 9010
   // CHECK: hipDeviceP2PAttr DevP2PAttrCudaArrayAccessSupported = hipDevP2PAttrHipArrayAccessSupported;
   cudaDeviceP2PAttr DevP2PAttrCudaArrayAccessSupported = cudaDevP2PAttrCudaArrayAccessSupported;
@@ -524,6 +529,7 @@ int main() {
   cudaMemcpyKind MemcpyDeviceToDevice = cudaMemcpyDeviceToDevice;
   cudaMemcpyKind MemcpyDefault = cudaMemcpyDefault;
 
+#if CUDA_VERSION > 7050
   // CHECK: hipMemoryAdvise MemoryAdvise;
   // CHECK-NEXT: hipMemoryAdvise MemAdviseSetReadMostly = hipMemAdviseSetReadMostly;
   // CHECK-NEXT: hipMemoryAdvise MemAdviseUnsetReadMostly = hipMemAdviseUnsetReadMostly;
@@ -538,6 +544,7 @@ int main() {
   cudaMemoryAdvise MemAdviseUnsetPreferredLocation = cudaMemAdviseUnsetPreferredLocation;
   cudaMemoryAdvise MemAdviseSetAccessedBy = cudaMemAdviseSetAccessedBy;
   cudaMemoryAdvise MemAdviseUnsetAccessedBy = cudaMemAdviseUnsetAccessedBy;
+#endif
 
   // CHECK: hipMemoryType MemoryType;
   // CHECK-NEXT: hipMemoryType MemoryTypeHost = hipMemoryTypeHost;
@@ -546,6 +553,7 @@ int main() {
   cudaMemoryType MemoryTypeHost = cudaMemoryTypeHost;
   cudaMemoryType MemoryTypeDevice = cudaMemoryTypeDevice;
 
+#if CUDA_VERSION > 7050
   // CHECK: hipMemRangeAttribute MemRangeAttribute;
   // CHECK-NEXT: hipMemRangeAttribute MemRangeAttributeReadMostly = hipMemRangeAttributeReadMostly;
   // CHECK-NEXT: hipMemRangeAttribute MemRangeAttributePreferredLocation = hipMemRangeAttributePreferredLocation;
@@ -556,6 +564,7 @@ int main() {
   cudaMemRangeAttribute MemRangeAttributePreferredLocation = cudaMemRangeAttributePreferredLocation;
   cudaMemRangeAttribute MemRangeAttributeAccessedBy = cudaMemRangeAttributeAccessedBy;
   cudaMemRangeAttribute MemRangeAttributeLastPrefetchLocation = cudaMemRangeAttributeLastPrefetchLocation;
+#endif
 
   // CHECK: hipResourceType ResourceType;
   // CHECK-NEXT: hipResourceType ResourceTypeArray = hipResourceTypeArray;

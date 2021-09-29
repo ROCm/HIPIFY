@@ -1,4 +1,4 @@
-// RUN: %run_test hipify "%s" "%t" %hipify_args %clang_args "-Xclang" "-fcuda-allow-variadic-functions"
+// RUN: %run_test hipify "%s" "%t" --skip-excluded-preprocessor-conditional-blocks %hipify_args %clang_args "-Xclang" "-fcuda-allow-variadic-functions"
 
 /*
 Copyright (c) 2015-present Advanced Micro Devices, Inc. All rights reserved.
