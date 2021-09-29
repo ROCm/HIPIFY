@@ -66,8 +66,10 @@ int main() {
   cudaKernelNodeParams KernelNodeParams;
 #endif
 
+#if CUDA_VERSION > 8000
   // CHECK: hipLaunchParams LaunchParams;
   cudaLaunchParams LaunchParams;
+#endif
 
   // CHECK: hipMemcpy3DParms Memcpy3DParms;
   cudaMemcpy3DParms Memcpy3DParms;

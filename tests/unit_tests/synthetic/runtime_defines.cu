@@ -1,4 +1,4 @@
-// RUN: %run_test hipify "%s" "%t" %hipify_args -D__CUDA_API_VERSION_INTERNAL %clang_args
+// RUN: %run_test hipify "%s" "%t" --skip-excluded-preprocessor-conditional-blocks %hipify_args -D__CUDA_API_VERSION_INTERNAL %clang_args
 
 // CHECK: #include <hip/hip_runtime.h>
 #include <cuda_runtime_api.h>
@@ -13,8 +13,6 @@ int main() {
   // CHECK-NEXT: int ArraySurfaceLoadStore = hipArraySurfaceLoadStore;
   // CHECK-NEXT: int ArrayCubemap = hipArrayCubemap;
   // CHECK-NEXT: int ArrayTextureGather = hipArrayTextureGather;
-  // CHECK-NEXT: int CooperativeLaunchMultiDeviceNoPreSync = hipCooperativeLaunchMultiDeviceNoPreSync;
-  // CHECK-NEXT: int CooperativeLaunchMultiDeviceNoPostSync = hipCooperativeLaunchMultiDeviceNoPostSync;
   // CHECK-NEXT: int CpuDeviceId = hipCpuDeviceId;
   // CHECK-NEXT: int InvalidDeviceId = hipInvalidDeviceId;
   // CHECK-NEXT: int DeviceBlockingSync = hipDeviceScheduleBlockingSync;
@@ -58,8 +56,6 @@ int main() {
   int ArraySurfaceLoadStore = cudaArraySurfaceLoadStore;
   int ArrayCubemap = cudaArrayCubemap;
   int ArrayTextureGather = cudaArrayTextureGather;
-  int CooperativeLaunchMultiDeviceNoPreSync = cudaCooperativeLaunchMultiDeviceNoPreSync;
-  int CooperativeLaunchMultiDeviceNoPostSync = cudaCooperativeLaunchMultiDeviceNoPostSync;
   int CpuDeviceId = cudaCpuDeviceId;
   int InvalidDeviceId = cudaInvalidDeviceId;
   int DeviceBlockingSync = cudaDeviceBlockingSync;
@@ -98,6 +94,12 @@ int main() {
   int StreamNonBlocking = cudaStreamNonBlocking;
   cudaStream_t StreamPerThread = cudaStreamPerThread;
 
+#if CUDA_VERSION > 8000
+  // CHECK: int CooperativeLaunchMultiDeviceNoPreSync = hipCooperativeLaunchMultiDeviceNoPreSync;
+  // CHECK-NEXT: int CooperativeLaunchMultiDeviceNoPostSync = hipCooperativeLaunchMultiDeviceNoPostSync;
+  int CooperativeLaunchMultiDeviceNoPreSync = cudaCooperativeLaunchMultiDeviceNoPreSync;
+  int CooperativeLaunchMultiDeviceNoPostSync = cudaCooperativeLaunchMultiDeviceNoPostSync;
+#endif
 
   return 0;
 }
