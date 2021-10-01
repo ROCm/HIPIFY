@@ -1,11 +1,6 @@
-cmake_minimum_required(VERSION 3.6.3)
+cmake_minimum_required(VERSION 3.8.0)
 
 project(hipify-clang)
-
-if(MSVC AND MSVC_VERSION VERSION_LESS "1900")
-    message(SEND_ERROR "hipify-clang could be built by Visual Studio 14 2015 or higher.")
-    return()
-endif()
 
 find_package(LLVM REQUIRED CONFIG PATHS ${CMAKE_PREFIX_PATH})
 
@@ -15,9 +10,17 @@ message(STATUS "   - Include path     : ${LLVM_INCLUDE_DIRS}")
 message(STATUS "   - Binary path      : ${LLVM_TOOLS_BINARY_DIR}")
 
 option(HIPIFY_CLANG_TESTS "Build HIPIFY tests, if lit is installed" OFF)
+option(HIPIFY_CLANG_TESTS_ONLY "Build HIPIFY tests only, if lit is installed and hipify-clang binary is already produced" OFF)
 
 list(APPEND CMAKE_MODULE_PATH ${LLVM_CMAKE_DIR})
 include(AddLLVM)
+
+if (NOT HIPIFY_CLANG_TESTS_ONLY)
+
+if(MSVC AND MSVC_VERSION VERSION_LESS "1900")
+    message(SEND_ERROR "hipify-clang could be built by Visual Studio 14 2015 or higher.")
+    return()
+endif()
 
 include_directories(${LLVM_INCLUDE_DIRS})
 link_directories(${LLVM_LIBRARY_DIRS})
@@ -129,7 +132,9 @@ if(UNIX)
         WORKING_DIRECTORY ${BUILD_DIR})
 endif()
 
-if(HIPIFY_CLANG_TESTS)
+endif()
+
+if(HIPIFY_CLANG_TESTS OR HIPIFY_CLANG_TESTS_ONLY)
     find_package(PythonInterp 2.7 REQUIRED)
 
     function (require_program PROGRAM_NAME)
@@ -137,7 +142,7 @@ if(HIPIFY_CLANG_TESTS)
         if(FOUND_${PROGRAM_NAME})
             message(STATUS "Found ${PROGRAM_NAME}: ${FOUND_${PROGRAM_NAME}}")
         else()
-            message(SEND_ERROR "Can't find ${PROGRAM_NAME}. Either set HIPIFY_CLANG_TESTS to OFF to disable HIPIFY tests, or install the missing program.")
+            message(SEND_ERROR "Can't find ${PROGRAM_NAME}. Either set HIPIFY_CLANG_TESTS(_ONLY) to OFF to disable HIPIFY tests, or install the missing program.")
         endif()
     endfunction()
 
@@ -177,11 +182,18 @@ if(HIPIFY_CLANG_TESTS)
         ${CMAKE_CURRENT_BINARY_DIR}/tests/lit.site.cfg
         @ONLY)
 
+if(HIPIFY_CLANG_TESTS_ONLY)
+    add_lit_testsuite(test-hipify "Running HIPIFY regression tests"
+        ${CMAKE_CURRENT_LIST_DIR}/tests
+        PARAMS site_config=${CMAKE_CURRENT_BINARY_DIR}/tests/lit.site.cfg
+        ARGS -v)
+else()
     add_lit_testsuite(test-hipify "Running HIPIFY regression tests"
         ${CMAKE_CURRENT_LIST_DIR}/tests
         PARAMS site_config=${CMAKE_CURRENT_BINARY_DIR}/tests/lit.site.cfg
         ARGS -v
         DEPENDS hipify-clang)
+endif()
 
     add_custom_target(test-hipify-clang)
     add_dependencies(test-hipify-clang test-hipify)
