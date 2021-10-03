@@ -1,6 +1,8 @@
 import sys
 import os
 
+config.hipify_install_path = "@CMAKE_INSTALL_PREFIX@"
+config.hipify_clang_tests_only = "@HIPIFY_CLANG_TESTS_ONLY@"
 config.pointer_size = @CMAKE_SIZEOF_VOID_P@
 config.llvm_version = "@LLVM_PACKAGE_VERSION@"
 config.llvm_version_major = int("@LLVM_VERSION_MAJOR@")
