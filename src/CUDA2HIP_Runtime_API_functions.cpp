@@ -662,43 +662,43 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuGraphAddChildGraphNode
   {"cudaGraphAddChildGraphNode",                              {"hipGraphAddChildGraphNode",                              "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphAddDependencies
-  {"cudaGraphAddDependencies",                                {"hipGraphAddDependencies",                                "", CONV_GRAPH, API_RUNTIME, 30}},
+  {"cudaGraphAddDependencies",                                {"hipGraphAddDependencies",                                "", CONV_GRAPH, API_RUNTIME, 30, HIP_EXPERIMENTAL}},
   // cuGraphAddEmptyNode
-  {"cudaGraphAddEmptyNode",                                   {"hipGraphAddEmptyNode",                                   "", CONV_GRAPH, API_RUNTIME, 30}},
+  {"cudaGraphAddEmptyNode",                                   {"hipGraphAddEmptyNode",                                   "", CONV_GRAPH, API_RUNTIME, 30, HIP_EXPERIMENTAL}},
   // cuGraphAddHostNode
   {"cudaGraphAddHostNode",                                    {"hipGraphAddHostNode",                                    "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphAddKernelNode
-  {"cudaGraphAddKernelNode",                                  {"hipGraphAddKernelNode",                                  "", CONV_GRAPH, API_RUNTIME, 30}},
+  {"cudaGraphAddKernelNode",                                  {"hipGraphAddKernelNode",                                  "", CONV_GRAPH, API_RUNTIME, 30, HIP_EXPERIMENTAL}},
   // cuGraphAddMemcpyNode
-  {"cudaGraphAddMemcpyNode",                                  {"hipGraphAddMemcpyNode",                                  "", CONV_GRAPH, API_RUNTIME, 30}},
+  {"cudaGraphAddMemcpyNode",                                  {"hipGraphAddMemcpyNode",                                  "", CONV_GRAPH, API_RUNTIME, 30, HIP_EXPERIMENTAL}},
   // cuGraphAddMemsetNode
-  {"cudaGraphAddMemsetNode",                                  {"hipGraphAddMemsetNode",                                  "", CONV_GRAPH, API_RUNTIME, 30}},
+  {"cudaGraphAddMemsetNode",                                  {"hipGraphAddMemsetNode",                                  "", CONV_GRAPH, API_RUNTIME, 30, HIP_EXPERIMENTAL}},
   // cuGraphChildGraphNodeGetGraph
   {"cudaGraphChildGraphNodeGetGraph",                         {"hipGraphChildGraphNodeGetGraph",                         "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphClone
   {"cudaGraphClone",                                          {"hipGraphClone",                                          "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphCreate
-  {"cudaGraphCreate",                                         {"hipGraphCreate",                                         "", CONV_GRAPH, API_RUNTIME, 30}},
+  {"cudaGraphCreate",                                         {"hipGraphCreate",                                         "", CONV_GRAPH, API_RUNTIME, 30, HIP_EXPERIMENTAL}},
   // cuGraphDebugDotPrint
   {"cudaGraphDebugDotPrint",                                  {"hipGraphDebugDotPrint",                                  "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphDestroy
-  {"cudaGraphDestroy",                                        {"hipGraphDestroy",                                        "", CONV_GRAPH, API_RUNTIME, 30}},
+  {"cudaGraphDestroy",                                        {"hipGraphDestroy",                                        "", CONV_GRAPH, API_RUNTIME, 30, HIP_EXPERIMENTAL}},
   // cuGraphDestroyNode
   {"cudaGraphDestroyNode",                                    {"hipGraphDestroyNode",                                    "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphExecDestroy
-  {"cudaGraphExecDestroy",                                    {"hipGraphExecDestroy",                                    "", CONV_GRAPH, API_RUNTIME, 30}},
+  {"cudaGraphExecDestroy",                                    {"hipGraphExecDestroy",                                    "", CONV_GRAPH, API_RUNTIME, 30, HIP_EXPERIMENTAL}},
   // cuGraphGetEdges
   {"cudaGraphGetEdges",                                       {"hipGraphGetEdges",                                       "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphGetNodes
-  {"cudaGraphGetNodes",                                       {"hipGraphGetNodes",                                       "", CONV_GRAPH, API_RUNTIME, 30}},
+  {"cudaGraphGetNodes",                                       {"hipGraphGetNodes",                                       "", CONV_GRAPH, API_RUNTIME, 30, HIP_EXPERIMENTAL}},
   // cuGraphGetRootNodes
-  {"cudaGraphGetRootNodes",                                   {"hipGraphGetRootNodes",                                   "", CONV_GRAPH, API_RUNTIME, 30}},
+  {"cudaGraphGetRootNodes",                                   {"hipGraphGetRootNodes",                                   "", CONV_GRAPH, API_RUNTIME, 30, HIP_EXPERIMENTAL}},
   // cuGraphHostNodeGetParams
   {"cudaGraphHostNodeGetParams",                              {"hipGraphHostNodeGetParams",                              "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphHostNodeSetParams
   {"cudaGraphHostNodeSetParams",                              {"hipGraphHostNodeSetParams",                              "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphInstantiate
-  {"cudaGraphInstantiate",                                    {"hipGraphInstantiate",                                    "", CONV_GRAPH, API_RUNTIME, 30}},
+  {"cudaGraphInstantiate",                                    {"hipGraphInstantiate",                                    "", CONV_GRAPH, API_RUNTIME, 30, HIP_EXPERIMENTAL}},
   // cuGraphKernelNodeCopyAttributes
   {"cudaGraphKernelNodeCopyAttributes",                       {"hipGraphKernelNodeCopyAttributes",                       "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphKernelNodeGetAttribute
@@ -706,7 +706,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuGraphKernelNodeSetAttribute
   {"cudaGraphKernelNodeSetAttribute",                         {"hipGraphKernelNodeSetAttribute",                         "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphExecKernelNodeSetParams
-  {"cudaGraphExecKernelNodeSetParams",                        {"hipGraphExecKernelNodeSetParams",                        "", CONV_GRAPH, API_RUNTIME, 30}},
+  {"cudaGraphExecKernelNodeSetParams",                        {"hipGraphExecKernelNodeSetParams",                        "", CONV_GRAPH, API_RUNTIME, 30, HIP_EXPERIMENTAL}},
   // cuGraphExecMemcpyNodeSetParams
   {"cudaGraphExecMemcpyNodeSetParams",                        {"hipGraphExecMemcpyNodeSetParams",                        "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphExecMemsetNodeSetParams
@@ -716,19 +716,19 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuGraphExecUpdate
   {"cudaGraphExecUpdate",                                     {"hipGraphExecUpdate",                                     "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphKernelNodeGetParams
-  {"cudaGraphKernelNodeGetParams",                            {"hipGraphKernelNodeGetParams",                            "", CONV_GRAPH, API_RUNTIME, 30}},
+  {"cudaGraphKernelNodeGetParams",                            {"hipGraphKernelNodeGetParams",                            "", CONV_GRAPH, API_RUNTIME, 30, HIP_EXPERIMENTAL}},
   // cuGraphKernelNodeSetParams
-  {"cudaGraphKernelNodeSetParams",                            {"hipGraphKernelNodeSetParams",                            "", CONV_GRAPH, API_RUNTIME, 30}},
+  {"cudaGraphKernelNodeSetParams",                            {"hipGraphKernelNodeSetParams",                            "", CONV_GRAPH, API_RUNTIME, 30, HIP_EXPERIMENTAL}},
   // cuGraphLaunch
-  {"cudaGraphLaunch",                                         {"hipGraphLaunch",                                         "", CONV_GRAPH, API_RUNTIME, 30}},
+  {"cudaGraphLaunch",                                         {"hipGraphLaunch",                                         "", CONV_GRAPH, API_RUNTIME, 30, HIP_EXPERIMENTAL}},
   // cuGraphMemcpyNodeGetParams
-  {"cudaGraphMemcpyNodeGetParams",                            {"hipGraphMemcpyNodeGetParams",                            "", CONV_GRAPH, API_RUNTIME, 30}},
+  {"cudaGraphMemcpyNodeGetParams",                            {"hipGraphMemcpyNodeGetParams",                            "", CONV_GRAPH, API_RUNTIME, 30, HIP_EXPERIMENTAL}},
   // cuGraphMemcpyNodeSetParams
-  {"cudaGraphMemcpyNodeSetParams",                            {"hipGraphMemcpyNodeSetParams",                            "", CONV_GRAPH, API_RUNTIME, 30}},
+  {"cudaGraphMemcpyNodeSetParams",                            {"hipGraphMemcpyNodeSetParams",                            "", CONV_GRAPH, API_RUNTIME, 30, HIP_EXPERIMENTAL}},
   // cuGraphMemsetNodeGetParams
-  {"cudaGraphMemsetNodeGetParams",                            {"hipGraphMemsetNodeGetParams",                            "", CONV_GRAPH, API_RUNTIME, 30}},
+  {"cudaGraphMemsetNodeGetParams",                            {"hipGraphMemsetNodeGetParams",                            "", CONV_GRAPH, API_RUNTIME, 30, HIP_EXPERIMENTAL}},
   // cuGraphMemsetNodeSetParams
-  {"cudaGraphMemsetNodeSetParams",                            {"hipGraphMemsetNodeSetParams",                            "", CONV_GRAPH, API_RUNTIME, 30}},
+  {"cudaGraphMemsetNodeSetParams",                            {"hipGraphMemsetNodeSetParams",                            "", CONV_GRAPH, API_RUNTIME, 30, HIP_EXPERIMENTAL}},
   // cuGraphNodeFindInClone
   {"cudaGraphNodeFindInClone",                                {"hipGraphNodeFindInClone",                                "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphNodeGetDependencies
@@ -744,7 +744,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // no analogue
   {"cudaGraphAddMemcpyNodeFromSymbol",                        {"hipGraphAddMemcpyNodeFromSymbol",                        "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // no analogue
-  {"cudaGraphAddMemcpyNode1D",                                {"hipGraphAddMemcpyNode1D",                                "", CONV_GRAPH, API_RUNTIME, 30}},
+  {"cudaGraphAddMemcpyNode1D",                                {"hipGraphAddMemcpyNode1D",                                "", CONV_GRAPH, API_RUNTIME, 30, HIP_EXPERIMENTAL}},
   // no analogue
   {"cudaGraphMemcpyNodeSetParamsToSymbol",                    {"hipGraphMemcpyNodeSetParamsToSymbol",                    "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // no analogue
@@ -1211,26 +1211,26 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP {
   {"hipMemcpy2DToArrayAsync",                                 {HIP_4030, HIP_0,    HIP_0   }},
   {"hipStreamBeginCapture",                                   {HIP_4030, HIP_0,    HIP_0   }},
   {"hipStreamEndCapture",                                     {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipGraphCreate",                                          {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipGraphDestroy",                                         {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipGraphExecDestroy",                                     {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipGraphInstantiate",                                     {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipGraphLaunch",                                          {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipGraphAddKernelNode",                                   {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipGraphAddMemcpyNode",                                   {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipGraphAddMemsetNode",                                   {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipGraphAddMemcpyNode1D",                                 {HIP_4050, HIP_0,    HIP_0   }},
-  {"hipGraphGetNodes",                                        {HIP_4050, HIP_0,    HIP_0   }},
-  {"hipGraphGetRootNodes",                                    {HIP_4050, HIP_0,    HIP_0   }},
-  {"hipGraphKernelNodeGetParams",                             {HIP_4050, HIP_0,    HIP_0   }},
-  {"hipGraphKernelNodeSetParams",                             {HIP_4050, HIP_0,    HIP_0   }},
-  {"hipGraphMemcpyNodeGetParams",                             {HIP_4050, HIP_0,    HIP_0   }},
-  {"hipGraphMemcpyNodeSetParams",                             {HIP_4050, HIP_0,    HIP_0   }},
-  {"hipGraphMemsetNodeGetParams",                             {HIP_4050, HIP_0,    HIP_0   }},
-  {"hipGraphMemsetNodeSetParams",                             {HIP_4050, HIP_0,    HIP_0   }},
-  {"hipGraphExecKernelNodeSetParams",                         {HIP_4050, HIP_0,    HIP_0   }},
-  {"hipGraphAddDependencies",                                 {HIP_4050, HIP_0,    HIP_0   }},
-  {"hipGraphAddEmptyNode",                                    {HIP_4050, HIP_0,    HIP_0   }},
+  {"hipGraphCreate",                                          {HIP_4030, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipGraphDestroy",                                         {HIP_4030, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipGraphExecDestroy",                                     {HIP_4030, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipGraphInstantiate",                                     {HIP_4030, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipGraphLaunch",                                          {HIP_4030, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipGraphAddKernelNode",                                   {HIP_4030, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipGraphAddMemcpyNode",                                   {HIP_4030, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipGraphAddMemsetNode",                                   {HIP_4030, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipGraphAddMemcpyNode1D",                                 {HIP_4050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipGraphGetNodes",                                        {HIP_4050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipGraphGetRootNodes",                                    {HIP_4050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipGraphKernelNodeGetParams",                             {HIP_4050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipGraphKernelNodeSetParams",                             {HIP_4050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipGraphMemcpyNodeGetParams",                             {HIP_4050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipGraphMemcpyNodeSetParams",                             {HIP_4050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipGraphMemsetNodeGetParams",                             {HIP_4050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipGraphMemsetNodeSetParams",                             {HIP_4050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipGraphExecKernelNodeSetParams",                         {HIP_4050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipGraphAddDependencies",                                 {HIP_4050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipGraphAddEmptyNode",                                    {HIP_4050, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipGLGetDevices",                                         {HIP_4050, HIP_0,    HIP_0   }},
   {"hipGraphicsGLRegisterBuffer",                             {HIP_4050, HIP_0,    HIP_0   }},
   {"hipGraphicsMapResources",                                 {HIP_4050, HIP_0,    HIP_0   }},
