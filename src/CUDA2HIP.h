@@ -71,6 +71,10 @@ extern const std::map<llvm::StringRef, hipCounter> CUDA_DEVICE_FUNCTION_MAP;
 extern const std::map<llvm::StringRef, hipCounter> CUDA_DEVICE_TYPE_NAME_MAP;
 // Maps the names of CUDA CUB API types to the corresponding HIP types
 extern const std::map<llvm::StringRef, hipCounter> CUDA_CUB_TYPE_NAME_MAP;
+// Maps the names of CUDA RTC API types to the corresponding HIP types
+extern const std::map<llvm::StringRef, hipCounter> CUDA_RTC_TYPE_NAME_MAP;
+// Maps the names of CUDA RTC API functions to the corresponding HIP functions
+extern const std::map<llvm::StringRef, hipCounter> CUDA_RTC_FUNCTION_MAP;
 
 /**
   * The union of all the above maps, except includes.
@@ -124,6 +128,10 @@ extern const std::map<llvm::StringRef, cudaAPIversions> CUDA_DEVICE_FUNCTION_VER
 extern const std::map<llvm::StringRef, hipAPIversions>  HIP_DEVICE_FUNCTION_VER_MAP;
 extern const std::map<llvm::StringRef, cudaAPIversions> CUDA_CUB_TYPE_NAME_VER_MAP;
 extern const std::map<llvm::StringRef, hipAPIversions>  HIP_CUB_TYPE_NAME_VER_MAP;
+extern const std::map<llvm::StringRef, cudaAPIversions> CUDA_RTC_TYPE_NAME_VER_MAP;
+extern const std::map<llvm::StringRef, hipAPIversions>  HIP_RTC_TYPE_NAME_VER_MAP;
+extern const std::map<llvm::StringRef, cudaAPIversions> CUDA_RTC_FUNCTION_VER_MAP;
+extern const std::map<llvm::StringRef, hipAPIversions>  HIP_RTC_FUNCTION_VER_MAP;
 
 /**
   * The union of all the above CUDA maps.

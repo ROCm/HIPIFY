@@ -126,7 +126,8 @@ const char *apiNames[NUM_API_TYPES] = {
   "cuFFT API",
   "cuSPARSE API",
   "CUB API",
-  "CAFFE2 API"
+  "CAFFE2 API",
+  "RTC API"
 };
 
 const char *apiTypes[NUM_API_TYPES] = {
@@ -139,7 +140,8 @@ const char *apiTypes[NUM_API_TYPES] = {
   "API_FFT",
   "API_CUB",
   "API_SPARSE",
-  "API_CAFFE2"
+  "API_CAFFE2",
+  "API_RTC"
 };
 
 namespace {
