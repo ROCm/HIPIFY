@@ -158,6 +158,7 @@ enum SupportDegree {
   CUDA_REMOVED = 0x40,
   HIP_REMOVED = 0x80,
   REMOVED = 0x100,
+  HIP_EXPERIMENTAL = 0x200
 };
 
 enum cudaVersions {
@@ -275,6 +276,7 @@ enum hipVersions {
   HIP_4030 = 4030,
   HIP_4040 = 4040,
   HIP_4050 = 4050,
+  HIP_LATEST = HIP_4050,
 };
 
 struct cudaAPIversions {
@@ -287,6 +289,7 @@ struct hipAPIversions {
   hipVersions appeared;
   hipVersions deprecated;
   hipVersions removed;
+  hipVersions experimental = HIP_0;
 };
 
 // The names of various fields in in the statistics reports.
@@ -377,6 +380,8 @@ public:
   static void setActive(const std::string &name);
   // Check the counter and option TranslateToRoc whether it should be translated to Roc or not.
   static bool isToRoc(const hipCounter &counter);
+  // Check whether the counter is HIP_EXPERIMENTAL or not.
+  static bool isHipExperimental(const hipCounter &counter);
   // Check whether the counter is HIP_UNSUPPORTED or not.
   static bool isHipUnsupported(const hipCounter &counter);
   // Check whether the counter is ROC_UNSUPPORTED or not.

@@ -97,6 +97,7 @@ namespace doc {
   const string sA = "A";
   const string sD = "D";
   const string sR = "R";
+  const string sE = "E";
 
   enum docType {
     none = 0,
@@ -193,7 +194,7 @@ namespace doc {
             string sS = (doc == md) ? "|" : ",";
             stringstream rows;
             for (auto &f : fMap) {
-              string a, d, r, ha, hd, hr;
+              string a, d, r, ha, hd, hr, he;
               for (auto &v : vMap) {
                 if (v.first == f.first) {
                   a = Statistics::getCudaVersion(v.second.appeared);
@@ -207,6 +208,7 @@ namespace doc {
                 ha = Statistics::getHipVersion(hv->second.appeared);
                 hd = Statistics::getHipVersion(hv->second.deprecated);
                 hr = Statistics::getHipVersion(hv->second.removed);
+                he = Statistics::getHipVersion(hv->second.experimental);
               }
               string sHip = Statistics::isUnsupported(f.second) ? "" : string(f.second.hipName);
               if (doc == md) {
@@ -218,11 +220,11 @@ namespace doc {
                   switch (format) {
                     case strict:
                     case compact:
-                      rows << (d.empty() ? "" : "+") << sS << sHip << sS << (hd.empty() ? "" : "+") << endl;
+                      rows << (d.empty() ? "" : "+") << sS << sHip << sS << (hd.empty() ? "" : "+") << sS << (he.empty() ? "" : "+") << endl;
                       break;
                     case full:
                     default:
-                      rows << a << sS << d << sS << r << sS << sHip << sS << ha << sS << hd << sS << hr << endl;
+                      rows << a << sS << d << sS << r << sS << sHip << sS << ha << sS << hd << sS << hr << sS << he << endl;
                       break;
                   }
                   break;
@@ -231,12 +233,12 @@ namespace doc {
                   switch (format) {
                     case strict:
                     case compact:
-                      rows << (d.empty() ? " " : "+") << sS << sHip << sS << (hd.empty() ? " " : "+") << sS << endl;
+                      rows << (d.empty() ? " " : "+") << sS << sHip << sS << (hd.empty() ? " " : "+") << sS << (he.empty() ? " " : "+") << sS << endl;
                       break;
                     case full:
                     default:
                       rows << (a.empty() ? " " : a) << sS << (d.empty() ? " " : d) << sS << (r.empty() ? " " : r) << sS << sHip << sS <<
-                        (ha.empty() ? " " : ha) << sS << (hd.empty() ? " " : hd) << sS << (hr.empty() ? " " : hr) << sS << endl;
+                        (ha.empty() ? " " : ha) << sS << (hd.empty() ? " " : hd) << sS << (hr.empty() ? " " : hr) << sS << (he.empty() ? " " : he) << sS << endl;
                       break;
                   }
                   break;
@@ -247,10 +249,10 @@ namespace doc {
             section_header << (doc == md ? "## **" : "") << (format != compact ? s.first : compact_only_cur_sec_num) << ". " << string(s.second) << (doc == md ? "**" : "") << endl << endl;
             section << (doc == md ? "|**" : "") << sCUDA << sS << (format == full ? sA : "") << (format == full ? sS : "") <<
               sD << sS << (format == full ? sR : "") << (format == full ? sS : "") << sHIP << sS << (format == full ? sA : "") << (format == full ? sS : "") <<
-              sD << (format == full ? sS : "") << (format == full ? sR : "") << (doc == md ? "**|" : "") << endl;
+              sD << (format == full ? sS : "") << (format == full ? sR : "") << sS << sE << (doc == md ? "**|" : "") << endl;
             if (doc == md) {
               section << "|:--|" << (format == full ? ":-:|" : "") << ":-:|" << (format == full ? ":-:|" : "") <<
-                ":--|" << (format == full ? ":-:|" : "") << ":-:|" << (format == full ? ":-:|" : "") << endl;
+                ":--|" << (format == full ? ":-:|" : "") << ":-:|" << (format == full ? ":-:|" : "") << ":-:|" << endl;
             }
             switch (format) {
               case full:
@@ -270,7 +272,7 @@ namespace doc {
               *streams[doc].get() << rows.str() << endl;
             }
           }
-          *streams[doc].get() << endl << (doc == md ? "\\" : "") << (format == full ? "*A - Added; D - Deprecated; R - Removed" : "*D - Deprecated");
+          *streams[doc].get() << endl << (doc == md ? "\\" : "") << (format == full ? "*A - Added; D - Deprecated; R - Removed; E - Experimental" : "*D - Deprecated; E - Experimental");
         }
         return true;
       }
