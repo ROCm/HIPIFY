@@ -81,6 +81,8 @@ const std::map <llvm::StringRef, hipCounter> CUDA_INCLUDE_MAP {
   {"caffe2/utils/math/reduce.cuh",                          {"caffe2/utils/math/hip/reduce.cuh",                      "", CONV_INCLUDE, API_CAFFE2, 0, UNSUPPORTED}},
   {"caffe2/operators/gather_op.cuh",                        {"caffe2/operators/math/gather_op.cuh",                   "", CONV_INCLUDE, API_CAFFE2, 0, UNSUPPORTED}},
   {"caffe2/core/common_cudnn.h",                            {"caffe2/core/hip/common_miopen.h",                       "", CONV_INCLUDE, API_CAFFE2, 0}},
+  // RTC includes
+  {"nvrtc.h",                                               {"hiprtc.h",                                              "", CONV_INCLUDE_CUDA_MAIN_H, API_RTC, 0}},
 };
 
 const std::map<llvm::StringRef, hipCounter> &CUDA_RENAMES_MAP() {
@@ -106,6 +108,8 @@ const std::map<llvm::StringRef, hipCounter> &CUDA_RENAMES_MAP() {
   ret.insert(CUDA_SPARSE_FUNCTION_MAP.begin(), CUDA_SPARSE_FUNCTION_MAP.end());
   ret.insert(CUDA_CAFFE2_TYPE_NAME_MAP.begin(), CUDA_CAFFE2_TYPE_NAME_MAP.end());
   ret.insert(CUDA_CAFFE2_FUNCTION_MAP.begin(), CUDA_CAFFE2_FUNCTION_MAP.end());
+  ret.insert(CUDA_RTC_TYPE_NAME_MAP.begin(), CUDA_RTC_TYPE_NAME_MAP.end());
+  ret.insert(CUDA_RTC_FUNCTION_MAP.begin(), CUDA_RTC_FUNCTION_MAP.end());
   return ret;
 };
 
@@ -136,5 +140,7 @@ const std::map<llvm::StringRef, cudaAPIversions> &CUDA_VERSIONS_MAP() {
   ret.insert(CUDA_DEVICE_TYPE_NAME_VER_MAP.begin(), CUDA_DEVICE_TYPE_NAME_VER_MAP.end());
   ret.insert(CUDA_DEVICE_FUNCTION_VER_MAP.begin(), CUDA_DEVICE_FUNCTION_VER_MAP.end());
   ret.insert(CUDA_CUB_TYPE_NAME_VER_MAP.begin(), CUDA_CUB_TYPE_NAME_VER_MAP.end());
+  ret.insert(CUDA_RTC_TYPE_NAME_VER_MAP.begin(), CUDA_RTC_TYPE_NAME_VER_MAP.end());
+  ret.insert(CUDA_RTC_FUNCTION_VER_MAP.begin(), CUDA_RTC_FUNCTION_VER_MAP.end());
   return ret;
 }
