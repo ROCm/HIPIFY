@@ -343,6 +343,10 @@ bool Statistics::isToRoc(const hipCounter &counter) {
   return TranslateToRoc && counter.apiType == API_BLAS;
 }
 
+bool Statistics::isHipExperimental(const hipCounter& counter) {
+  return HIP_EXPERIMENTAL == (counter.supportDegree & HIP_EXPERIMENTAL);
+}
+
 bool Statistics::isHipUnsupported(const hipCounter &counter) {
   return HIP_UNSUPPORTED == (counter.supportDegree & HIP_UNSUPPORTED);
 }
