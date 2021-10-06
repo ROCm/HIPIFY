@@ -37,6 +37,7 @@ my $USAGE =<<USAGE;
       -examine          - Combines -no-output and -print-stats options
       -exclude-dirs=s   - Exclude directories
       -exclude-files=s  - Exclude files
+      -experimental     - HIPIFY experimentally supported APIs
       -help             - Display available options
       -inplace          - Backup the input file in .prehip file, modify the input file inplace
       -no-output        - Don't write any translated output to stdout
@@ -63,6 +64,7 @@ GetOptions(
       "examine" => \$examine                  # Combines -no-output and -print-stats options
     , "exclude-dirs=s" => \$exclude_dirs      # Exclude directories
     , "exclude-files=s" => \$exclude_files    # Exclude files
+    , "experimental" => \$experimental        # HIPIFY experimentally supported APIs
     , "help" => \$help                        # Display available options
     , "inplace" => \$inplace                  # Backup the input file in .prehip file, modify the input file inplace
     , "no-output" => \$no_output              # Don't write any translated output to stdout
@@ -692,6 +694,98 @@ my %removed_funcs = (
     "CUDNN_CONVOLUTION_BWD_DATA_SPECIFY_WORKSPACE_LIMIT" => "8.0.1",
     "CUDNN_CONVOLUTION_BWD_DATA_PREFER_FASTEST" => "8.0.1",
     "CUDNN_CONVOLUTION_BWD_DATA_NO_WORKSPACE" => "8.0.1"
+);
+
+my %experimental_funcs = (
+    "cudaGraph_t" => "4.5.0",
+    "cudaGraphNode_t" => "4.5.0",
+    "cudaGraphNodeTypeWaitEvent" => "4.5.0",
+    "cudaGraphNodeTypeMemset" => "4.5.0",
+    "cudaGraphNodeTypeMemcpy" => "4.5.0",
+    "cudaGraphNodeTypeKernel" => "4.5.0",
+    "cudaGraphNodeTypeHost" => "4.5.0",
+    "cudaGraphNodeTypeGraph" => "4.5.0",
+    "cudaGraphNodeTypeEventRecord" => "4.5.0",
+    "cudaGraphNodeTypeEmpty" => "4.5.0",
+    "cudaGraphNodeTypeCount" => "4.5.0",
+    "cudaGraphNodeType" => "4.5.0",
+    "cudaGraphMemsetNodeSetParams" => "4.5.0",
+    "cudaGraphMemsetNodeGetParams" => "4.5.0",
+    "cudaGraphMemcpyNodeSetParams" => "4.5.0",
+    "cudaGraphMemcpyNodeGetParams" => "4.5.0",
+    "cudaGraphLaunch" => "4.5.0",
+    "cudaGraphKernelNodeSetParams" => "4.5.0",
+    "cudaGraphKernelNodeGetParams" => "4.5.0",
+    "cudaGraphInstantiate" => "4.5.0",
+    "cudaGraphGetRootNodes" => "4.5.0",
+    "cudaGraphGetNodes" => "4.5.0",
+    "cudaGraphExec_t" => "4.5.0",
+    "cudaGraphExecUpdateSuccess" => "4.5.0",
+    "cudaGraphExecUpdateResult" => "4.5.0",
+    "cudaGraphExecUpdateErrorUnsupportedFunctionChange" => "4.5.0",
+    "cudaGraphExecUpdateErrorTopologyChanged" => "4.5.0",
+    "cudaGraphExecUpdateErrorParametersChanged" => "4.5.0",
+    "cudaGraphExecUpdateErrorNotSupported" => "4.5.0",
+    "cudaGraphExecUpdateErrorNodeTypeChanged" => "4.5.0",
+    "cudaGraphExecUpdateErrorFunctionChanged" => "4.5.0",
+    "cudaGraphExecUpdateError" => "4.5.0",
+    "cudaGraphExecKernelNodeSetParams" => "4.5.0",
+    "cudaGraphExecDestroy" => "4.5.0",
+    "cudaGraphDestroy" => "4.5.0",
+    "cudaGraphCreate" => "4.5.0",
+    "cudaGraphAddMemsetNode" => "4.5.0",
+    "cudaGraphAddMemcpyNode1D" => "4.5.0",
+    "cudaGraphAddMemcpyNode" => "4.5.0",
+    "cudaGraphAddKernelNode" => "4.5.0",
+    "cudaGraphAddEmptyNode" => "4.5.0",
+    "cudaGraphAddDependencies" => "4.5.0",
+    "cuGraphMemsetNodeSetParams" => "4.5.0",
+    "cuGraphMemsetNodeGetParams" => "4.5.0",
+    "cuGraphMemcpyNodeSetParams" => "4.5.0",
+    "cuGraphMemcpyNodeGetParams" => "4.5.0",
+    "cuGraphLaunch" => "4.5.0",
+    "cuGraphKernelNodeSetParams" => "4.5.0",
+    "cuGraphKernelNodeGetParams" => "4.5.0",
+    "cuGraphInstantiate_v2" => "4.5.0",
+    "cuGraphInstantiate" => "4.5.0",
+    "cuGraphGetRootNodes" => "4.5.0",
+    "cuGraphGetNodes" => "4.5.0",
+    "cuGraphExecKernelNodeSetParams" => "4.5.0",
+    "cuGraphExecDestroy" => "4.5.0",
+    "cuGraphDestroy" => "4.5.0",
+    "cuGraphCreate" => "4.5.0",
+    "cuGraphAddMemsetNode" => "4.5.0",
+    "cuGraphAddMemcpyNode" => "4.5.0",
+    "cuGraphAddKernelNode" => "4.5.0",
+    "cuGraphAddEmptyNode" => "4.5.0",
+    "cuGraphAddDependencies" => "4.5.0",
+    "CUgraph_st" => "4.5.0",
+    "CUgraphNode_st" => "4.5.0",
+    "CUgraphNodeType_enum" => "4.5.0",
+    "CUgraphNodeType" => "4.5.0",
+    "CUgraphNode" => "4.5.0",
+    "CUgraphExec_st" => "4.5.0",
+    "CUgraphExecUpdateResult_enum" => "4.5.0",
+    "CUgraphExecUpdateResult" => "4.5.0",
+    "CUgraphExec" => "4.5.0",
+    "CUgraph" => "4.5.0",
+    "CU_GRAPH_NODE_TYPE_WAIT_EVENT" => "4.5.0",
+    "CU_GRAPH_NODE_TYPE_MEMSET" => "4.5.0",
+    "CU_GRAPH_NODE_TYPE_MEMCPY" => "4.5.0",
+    "CU_GRAPH_NODE_TYPE_KERNEL" => "4.5.0",
+    "CU_GRAPH_NODE_TYPE_HOST" => "4.5.0",
+    "CU_GRAPH_NODE_TYPE_GRAPH" => "4.5.0",
+    "CU_GRAPH_NODE_TYPE_EVENT_RECORD" => "4.5.0",
+    "CU_GRAPH_NODE_TYPE_EMPTY" => "4.5.0",
+    "CU_GRAPH_NODE_TYPE_COUNT" => "4.5.0",
+    "CU_GRAPH_EXEC_UPDATE_SUCCESS" => "4.5.0",
+    "CU_GRAPH_EXEC_UPDATE_ERROR_UNSUPPORTED_FUNCTION_CHANGE" => "4.5.0",
+    "CU_GRAPH_EXEC_UPDATE_ERROR_TOPOLOGY_CHANGED" => "4.5.0",
+    "CU_GRAPH_EXEC_UPDATE_ERROR_PARAMETERS_CHANGED" => "4.5.0",
+    "CU_GRAPH_EXEC_UPDATE_ERROR_NOT_SUPPORTED" => "4.5.0",
+    "CU_GRAPH_EXEC_UPDATE_ERROR_NODE_TYPE_CHANGED" => "4.5.0",
+    "CU_GRAPH_EXEC_UPDATE_ERROR_FUNCTION_CHANGED" => "4.5.0",
+    "CU_GRAPH_EXEC_UPDATE_ERROR" => "4.5.0"
 );
 
 $print_stats = 1 if $examine;
@@ -2280,6 +2374,7 @@ sub simpleSubstitutions {
     $ft{'include_cuda_main_header'} += s/\bcurand.h\b/hiprand.h/g;
     $ft{'include_cuda_main_header'} += s/\bcusparse.h\b/hipsparse.h/g;
     $ft{'include_cuda_main_header'} += s/\bcusparse_v2.h\b/hipsparse.h/g;
+    $ft{'include_cuda_main_header'} += s/\bnvrtc.h\b/hiprtc.h/g;
     $ft{'type'} += s/\bCUDAContext\b/HIPContext/g;
     $ft{'type'} += s/\bCUDA_ARRAY3D_DESCRIPTOR\b/HIP_ARRAY3D_DESCRIPTOR/g;
     $ft{'type'} += s/\bCUDA_ARRAY3D_DESCRIPTOR_st\b/HIP_ARRAY3D_DESCRIPTOR/g;
@@ -4381,6 +4476,20 @@ sub warnUnsupportedDeviceFunctions {
         if ($mt && !$mt_namespace) {
             $k += $mt;
             print STDERR "  warning: $fileName:$line_num: unsupported device function \"$func\": $_\n";
+        }
+    }
+    return $k;
+}
+
+sub warnExperimentalFunctions {
+    my $line_num = shift;
+    my $k = 0;
+    while (my($func, $val) = each %experimental_funcs)
+    {
+        my $mt = m/($func)/g;
+        if ($mt) {
+            $k += $mt;
+            print STDERR "  warning: $fileName:$line_num: experimental identifier \"$func\" in HIP $val\n";
         }
     }
     return $k;
@@ -7005,6 +7114,10 @@ while (@ARGV) {
                 my $line_num = 0;
                 foreach (@lines) {
                     $line_num++;
+                    if (!$experimental) {
+                        $s = warnExperimentalFunctions($line_num);
+                        $warnings += $s;
+                    }
                     $s = warnRemovedFunctions($line_num);
                     $warnings += $s;
                     $s = warnDeprecatedFunctions($line_num);
