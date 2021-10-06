@@ -1,4 +1,4 @@
-// RUN: %run_test hipify "%s" "%t" %hipify_args %clang_args
+// RUN: %run_test hipify "%s" "%t" %hipify_args 1 --experimental %clang_args
 
 // CHECK: #include <hip/hip_runtime.h>
 #include <stdio.h>
