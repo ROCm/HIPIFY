@@ -160,4 +160,9 @@ cl::opt<std::string> DocFormat("doc-format",
   cl::value_desc("value"),
   cl::cat(ToolTemplateCategory));
 
+cl::opt<bool> Experimental("experimental",
+  cl::desc("HIPIFY experimentally supported APIs"),
+  cl::value_desc("experimental"),
+  cl::cat(ToolTemplateCategory));
+
 cl::extrahelp CommonHelp(ct::CommonOptionsParser::HelpMessage);

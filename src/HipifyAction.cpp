@@ -169,6 +169,16 @@ void HipifyAction::FindAndReplace(StringRef name,
   if (Statistics::isDeprecated(found->second)) {
     DE.Report(sl, DE.getCustomDiagID(clang::DiagnosticsEngine::Warning, "CUDA identifier is deprecated."));
   }
+  // Warn the user about unsupported experimental identifier.
+  if (Statistics::isHipExperimental(found->second) &&!Experimental) {
+    std::string sWarn;
+    Statistics::isToRoc(found->second) ? sWarn = sROC : sWarn = sHIP;
+    sWarn = "" + sWarn;
+    const auto ID = DE.getCustomDiagID(clang::DiagnosticsEngine::Warning, "CUDA identifier is experimental in %0. To hipify it, use the '--experimental' option.");
+    DE.Report(sl, ID) << sWarn;
+    return;
+  }
+
   // Warn the user about unsupported identifier.
   if (Statistics::isUnsupported(found->second)) {
     std::string sWarn;
