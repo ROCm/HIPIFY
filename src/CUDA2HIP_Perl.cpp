@@ -92,6 +92,7 @@ namespace perl {
   const string hipify_perl = "hipify-perl";
   const string warning = "warning: $fileName:$line_num: ";
   const string warningsPlus = "$warnings += $s;";
+  const string sWarnExperimentalFunctions = "warnExperimentalFunctions";
   const string sWarnDeprecatedFunctions = "warnDeprecatedFunctions";
   const string sWarnRemovedFunctions = "warnRemovedFunctions";
   const string sWarnUnsupportedFunctions = "warnUnsupportedFunctions";
@@ -172,6 +173,7 @@ namespace perl {
     *streamPtr.get() << "      -examine          - Combines -no-output and -print-stats options" << endl;
     *streamPtr.get() << "      -exclude-dirs=s   - Exclude directories" << endl;
     *streamPtr.get() << "      -exclude-files=s  - Exclude files" << endl;
+    *streamPtr.get() << "      -experimental     - HIPIFY experimentally supported APIs" << endl;
     *streamPtr.get() << "      -help             - Display available options" << endl;
     *streamPtr.get() << "      -inplace          - Backup the input file in .prehip file, modify the input file inplace" << endl;
     *streamPtr.get() << "      -no-output        - Don't write any translated output to stdout" << endl;
@@ -197,6 +199,7 @@ namespace perl {
     *streamPtr.get() << tab << "  \"examine\" => \\$examine                  # Combines -no-output and -print-stats options" << endl;
     *streamPtr.get() << tab << ", \"exclude-dirs=s\" => \\$exclude_dirs      # Exclude directories" << endl;
     *streamPtr.get() << tab << ", \"exclude-files=s\" => \\$exclude_files    # Exclude files" << endl;
+    *streamPtr.get() << tab << ", \"experimental\" => \\$experimental        # HIPIFY experimentally supported APIs" << endl;
     *streamPtr.get() << tab << ", \"help\" => \\$help                        # Display available options" << endl;
     *streamPtr.get() << tab << ", \"inplace\" => \\$inplace                  # Backup the input file in .prehip file, modify the input file inplace" << endl;
     *streamPtr.get() << tab << ", \"no-output\" => \\$no_output              # Don't write any translated output to stdout" << endl;
@@ -206,14 +209,16 @@ namespace perl {
     *streamPtr.get() << tab << ", \"version\" => \\$version                  # The supported HIP version" << endl;
     *streamPtr.get() << tab << ", \"whitelist=s\" => \\$whitelist            # Whitelist of identifiers" << endl;
     *streamPtr.get() << ");" << endl_2;
-    stringstream deprecated, removed, common;
+    stringstream deprecated, removed, experimental, common;
     deprecated << my << "%deprecated_funcs = (" << endl;
     removed << my << "%removed_funcs = (" << endl;
-    unsigned int countDeprecated = 0, countRemoved = 0;
+    experimental << my << "%experimental_funcs = (" << endl;
+    unsigned int countDeprecated = 0, countRemoved = 0, countExperimental = 0;
     for (auto ma = CUDA_RENAMES_MAP().rbegin(); ma != CUDA_RENAMES_MAP().rend(); ++ma) {
-      bool bDeprecated = false, bRemoved = false;
+      bool bDeprecated = false, bRemoved = false, bExperimental = false;
       if (Statistics::isCudaDeprecated(ma->second)) bDeprecated = true;
       if (Statistics::isCudaRemoved(ma->second)) bRemoved = true;
+      if (Statistics::isHipExperimental(ma->second)) bExperimental = true;
       if (bDeprecated || bRemoved) {
         const auto found = CUDA_VERSIONS_MAP().find(ma->first);
         if (found != CUDA_VERSIONS_MAP().end()) {
@@ -227,12 +232,21 @@ namespace perl {
           }
         }
       }
+      if (bExperimental) {
+        const auto found = HIP_VERSIONS_MAP().find(ma->second.hipName);
+        if (found != HIP_VERSIONS_MAP().end()) {
+          experimental << (countExperimental ? ",\n" : "") << tab << "\"" << ma->first.str() << "\" => \"" << Statistics::getHipVersion(found->second.experimental) << "\"";
+          countExperimental++;
+        }
+      }
     }
     common << endl << ");" << endl << endl;
     deprecated << common.str();
     removed << common.str();
+    experimental << common.str();
     *streamPtr.get() << deprecated.str();
     *streamPtr.get() << removed.str();
+    *streamPtr.get() << experimental.str();
     *streamPtr.get() << "$print_stats = 1 if $examine;" << endl;
     *streamPtr.get() << "$no_output = 1 if $examine;" << endl_2;
     *streamPtr.get() << "# Whitelist of cuda[A-Z] identifiers, which are commonly used in CUDA sources but don't map to any CUDA API:" << endl;
@@ -429,10 +443,11 @@ namespace perl {
   }
 
   void generateDeprecatedAndUnsupportedFunctions(unique_ptr<ostream> &streamPtr) {
-    stringstream sDeprecated, sRemoved, sUnsupported, sDataLoss, sCommon, sCommon1;
+    stringstream sDeprecated, sRemoved, sUnsupported, sExperimental, sDataLoss, sCommon, sCommon1;
     sCommon << tab << my << "$line_num = shift;" << endl;
     sCommon << tab << my_k << endl;
     string sWhile = "while (my($func, $val) = each ";
+    sExperimental << endl << sub << sWarnExperimentalFunctions << " {" << endl << sCommon.str() << tab << sWhile << "%experimental_funcs)" << endl;
     sDeprecated << endl << sub << sWarnDeprecatedFunctions << " {" << endl << sCommon.str() << tab << sWhile << "%deprecated_funcs)" << endl;
     sRemoved << endl << sub << sWarnRemovedFunctions << " {" << endl << sCommon.str() << tab << sWhile << "%removed_funcs)" << endl;
     sUnsupported << endl << sub << sWarnUnsupportedFunctions << " {" << endl << sCommon.str() << tab << foreach_func;
@@ -473,16 +488,19 @@ namespace perl {
     sCommon1 << tab_3 << "if (index(lc($func),lc($cudnn)) == 0) {" << endl;
     sCommon1 << tab_4 << "$cuda = $cudnn;" << endl;
     sCommon1 << tab_3 << "}" << endl;
+    sExperimental << sCommon.str();
     sDeprecated << sCommon.str() << sCommon1.str();
     sRemoved << sCommon.str() << sCommon1.str();
     sUnsupported << sCommon.str();
     sDataLoss << sCommon.str();
     sCommon.str(std::string());
     sCommon << tab_2 << "}\n" << tab << "}\n" << tab << return_k << "}" << endl;
+    sExperimental << tab_3 << print << "\"  "  << warning << "experimental identifier \\\"$func\\\" in HIP $val\\n\";" << endl << sCommon.str();
     sDeprecated << tab_3 << print << "\"  "  << warning << "deprecated identifier \\\"$func\\\" since $cuda $val\\n\";" << endl << sCommon.str();
     sRemoved << tab_3 << print << "\"  "  << warning << "removed identifier \\\"$func\\\" since $cuda $val\\n\";" << endl << sCommon.str();
     sUnsupported << tab_3 << print << "\"  "  << warning << "unsupported identifier \\\"$func\\\"\\n\";" << endl << sCommon.str();
     sDataLoss << tab_3 << print << "\"  "  << warning << "possible data loss in " << argNum+1 << " argument of \\\"$func\\\": $_\\n\";" << endl << sCommon.str();
+    *streamPtr.get() << sExperimental.str();
     *streamPtr.get() << sDeprecated.str();
     *streamPtr.get() << sRemoved.str();
     *streamPtr.get() << sUnsupported.str();
@@ -630,6 +648,10 @@ namespace perl {
     *streamPtr.get() << tab_4 << my << "$line_num = 0;" << endl;
     *streamPtr.get() << tab_4 << foreach << "(@lines) {" << endl;
     *streamPtr.get() << tab_5 << "$line_num++;" << endl;
+    *streamPtr.get() << tab_5 << "if (!$experimental) {" << endl;
+    *streamPtr.get() << tab_6 << "$s = " << sWarnExperimentalFunctions << "($line_num);" << endl;
+    *streamPtr.get() << tab_6 << warningsPlus << endl;
+    *streamPtr.get() << tab_5 << "}" << endl;
     *streamPtr.get() << tab_5 << "$s = " << sWarnRemovedFunctions << "($line_num);" << endl;
     *streamPtr.get() << tab_5 << warningsPlus << endl;
     *streamPtr.get() << tab_5 << "$s = " << sWarnDeprecatedFunctions << "($line_num);" << endl;
