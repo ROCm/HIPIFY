@@ -99,6 +99,7 @@ namespace perl {
   const string sWarnDataLossFunctions = "warnDataLossFunctions";
   const string sWarnUnsupportedDeviceFunctions = "warnUnsupportedDeviceFunctions";
   const string sSimpleSubstitutions = "simpleSubstitutions";
+  const string sExperimentalSubstitutions = "experimentalSubstitutions";
   const string sTansformKernelLaunch = "transformKernelLaunch";
   const string sTransformCubNamespace = "transformCubNamespace";
   const string sCountSupportedDeviceFunctions = "countSupportedDeviceFunctions";
@@ -292,12 +293,12 @@ namespace perl {
     }
   }
 
-  void generateSimpleSubstitutions(unique_ptr<ostream> &streamPtr) {
-    *streamPtr.get() << endl << sub << sSimpleSubstitutions << " {" << endl;
+  void generateExperimentalSubstitutions(unique_ptr<ostream> &streamPtr) {
+    *streamPtr.get() << endl << sub << sExperimentalSubstitutions << " {" << endl;
     for (int i = 0; i < NUM_CONV_TYPES; ++i) {
       if (i == CONV_INCLUDE_CUDA_MAIN_H || i == CONV_INCLUDE) {
         for (auto &ma : CUDA_INCLUDE_MAP) {
-          if (Statistics::isUnsupported(ma.second)) continue;
+          if (!Statistics::isHipExperimental(ma.second)) continue;
           if (i == ma.second.type) {
             string sCUDA = ma.first.str();
             string sHIP = ma.second.hipName.str();
@@ -308,7 +309,33 @@ namespace perl {
         }
       } else {
         for (auto &ma : CUDA_RENAMES_MAP()) {
-          if (Statistics::isUnsupported(ma.second)) continue;
+          if (!Statistics::isHipExperimental(ma.second)) continue;
+          if (i == ma.second.type) {
+            *streamPtr.get() << tab << "$ft{'" << counterNames[ma.second.type] << "'} += s/\\b" << ma.first.str() << "\\b/" << ma.second.hipName.str() << "/g;" << endl;
+          }
+        }
+      }
+    }
+    *streamPtr.get() << "}" << endl;
+  }
+
+  void generateSimpleSubstitutions(unique_ptr<ostream> &streamPtr) {
+    *streamPtr.get() << endl << sub << sSimpleSubstitutions << " {" << endl;
+    for (int i = 0; i < NUM_CONV_TYPES; ++i) {
+      if (i == CONV_INCLUDE_CUDA_MAIN_H || i == CONV_INCLUDE) {
+        for (auto &ma : CUDA_INCLUDE_MAP) {
+          if (Statistics::isUnsupported(ma.second) || Statistics::isHipExperimental(ma.second)) continue;
+          if (i == ma.second.type) {
+            string sCUDA = ma.first.str();
+            string sHIP = ma.second.hipName.str();
+            sCUDA = regex_replace(sCUDA, regex("/"), "\\/");
+            sHIP = regex_replace(sHIP, regex("/"), "\\/");
+            *streamPtr.get() << tab << "$ft{'" << counterNames[ma.second.type] << "'} += s/\\b" << sCUDA << "\\b/" << sHIP << "/g;" << endl;
+          }
+        }
+      } else {
+        for (auto &ma : CUDA_RENAMES_MAP()) {
+          if (Statistics::isUnsupported(ma.second) || Statistics::isHipExperimental(ma.second)) continue;
           if (i == ma.second.type) {
             *streamPtr.get() << tab << "$ft{'" << counterNames[ma.second.type] << "'} += s/\\b" << ma.first.str() << "\\b/" << ma.second.hipName.str() << "/g;" << endl;
           }
@@ -577,6 +604,7 @@ namespace perl {
     if (sConv.back() == ' ') sConv = sConv.substr(0, sConv.size() - 3) + ";";
     *streamPtr.get() << "\"" << counterNames[NUM_CONV_TYPES - 1] << "\");" << endl;
     generateStatFunctions(streamPtr);
+    generateExperimentalSubstitutions(streamPtr);
     generateSimpleSubstitutions(streamPtr);
     generateKernelLaunch(streamPtr);
     generateCubNamespace(streamPtr);
@@ -663,6 +691,9 @@ namespace perl {
     *streamPtr.get() << tab_5 << "$s = " << sWarnDataLossFunctions << "($line_num);" << endl;
     *streamPtr.get() << tab_5 << warningsPlus << endl_tab_4 << "}" << endl;
     *streamPtr.get() << tab_4 << "$_ = $tmp;" << endl_tab_3 << "}" << endl;
+    *streamPtr.get() << tab_3 << "if ($experimental) {" << endl;
+    *streamPtr.get() << tab_4 << sExperimentalSubstitutions << "();" << endl;
+    *streamPtr.get() << tab_3 << "}" << endl;
     *streamPtr.get() << tab_3 << sSimpleSubstitutions << "();" << endl;
     *streamPtr.get() << tab_3 << sTansformKernelLaunch << "();" << endl;
     *streamPtr.get() << tab_3 << sTransformCubNamespace << "();" << endl;
