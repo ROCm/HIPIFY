@@ -1320,7 +1320,7 @@
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
 |`cuMemAdvise`|8.0| | |`hipMemAdvise`|3.7.0| | | |
-|`cuMemPrefetchAsync`|8.0| | | | | | | |
+|`cuMemPrefetchAsync`|8.0| | |`hipMemPrefetchAsync`|3.7.0| | | |
 |`cuMemRangeGetAttribute`|8.0| | |`hipMemRangeGetAttribute`|3.7.0| | | |
 |`cuMemRangeGetAttributes`|8.0| | |`hipMemRangeGetAttributes`|3.7.0| | | |
 |`cuPointerGetAttribute`| | | | | | | | |

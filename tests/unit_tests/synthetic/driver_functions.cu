@@ -1,4 +1,4 @@
-// RUN: %run_test hipify "%s" "%t" %hipify_args 1 --skip-excluded-preprocessor-conditional-blocks %clang_args
+// RUN: %run_test hipify "%s" "%t" %hipify_args 2 --skip-excluded-preprocessor-conditional-blocks --experimental %clang_args
 
 // CHECK: #include <hip/hip_runtime.h>
 #include <cuda.h>
@@ -34,6 +34,7 @@ int main() {
   // CHECK-NEXT: HIP_MEMCPY3D MEMCPY3D;
   // CHECK-NEXT: hipStream_t stream;
   // CHECK-NEXT: hipMipmappedArray_t mipmappedArray;
+  // CHECK-NEXT: hipStreamCallback_t streamCallback;
   CUdevice device;
   CUcontext context;
   CUfunc_cache func_cache;
@@ -55,6 +56,24 @@ int main() {
   CUDA_MEMCPY3D MEMCPY3D;
   CUstream stream;
   CUmipmappedArray mipmappedArray;
+  CUstreamCallback streamCallback;
+
+#if CUDA_VERSION > 7050
+  // CHECK: hipMemRangeAttribute MemoryRangeAttribute;
+  // CHECK-NEXT: hipMemoryAdvise MemoryAdvise;
+  CUmem_range_attribute MemoryRangeAttribute;
+  CUmem_advise MemoryAdvise;
+#endif
+
+#if CUDA_VERSION > 9020
+  // CHECK: hipGraph_t graph;
+  CUgraph graph;
+#endif
+
+#if CUDA_VERSION > 10000
+  // CHECK: hipStreamCaptureMode streamCaptureMode;
+  CUstreamCaptureMode streamCaptureMode;
+#endif
 
   // CUDA: CUresult CUDAAPI cuInit(unsigned int Flags);
   // HIP: hipError_t hipInit(unsigned int flags);
@@ -557,6 +576,96 @@ int main() {
   // HIP: hipError_t hipMipmappedArrayGetLevel(hipArray_t* pLevelArray, hipMipmappedArray_t hMipMappedArray, unsigned int level);
   // CHECK: result = hipMipmappedArrayGetLevel(&array_, mipmappedArray, flags);
   result = cuMipmappedArrayGetLevel(&array_, mipmappedArray, flags);
+
+#if CUDA_VERSION > 7050
+  // CUDA: CUresult CUDAAPI cuMemAdvise(CUdeviceptr devPtr, size_t count, CUmem_advise advice, CUdevice device);
+  // HIP: hipError_t hipMemAdvise(const void* dev_ptr, size_t count, hipMemoryAdvise advice, int device);
+  // CHECK: result = hipMemAdvise(deviceptr, bytes, MemoryAdvise, device);
+  result = cuMemAdvise(deviceptr, bytes, MemoryAdvise, device);
+
+  // CUDA: CUresult CUDAAPI cuMemPrefetchAsync(CUdeviceptr devPtr, size_t count, CUdevice dstDevice, CUstream hStream);
+  // HIP: hipError_t hipMemPrefetchAsync(const void* dev_ptr, size_t count, int device, hipStream_t stream __dparm(0));
+  // CHECK: result = hipMemPrefetchAsync(deviceptr, bytes, device, stream);
+  result = cuMemPrefetchAsync(deviceptr, bytes, device, stream);
+
+  // CUDA: CUresult CUDAAPI cuMemRangeGetAttribute(void *data, size_t dataSize, CUmem_range_attribute attribute, CUdeviceptr devPtr, size_t count);
+  // HIP: hipError_t hipMemRangeGetAttribute(void* data, size_t data_size, hipMemRangeAttribute attribute, const void* dev_ptr, size_t count);
+  // CHECK: result = hipMemRangeGetAttribute(image, bytes, MemoryRangeAttribute, deviceptr, bytes);
+  result = cuMemRangeGetAttribute(image, bytes, MemoryRangeAttribute, deviceptr, bytes);
+
+  // CUDA: CUresult CUDAAPI cuMemRangeGetAttributes(void **data, size_t *dataSizes, CUmem_range_attribute *attributes, size_t numAttributes, CUdeviceptr devPtr, size_t count);
+  // HIP: hipError_t hipMemRangeGetAttributes(void** data, size_t* data_sizes, hipMemRangeAttribute* attributes, size_t num_attributes, const void* dev_ptr, size_t count);
+  // CHECK: result = hipMemRangeGetAttributes(&image, &bytes, &MemoryRangeAttribute, bytes, deviceptr, bytes);
+  result = cuMemRangeGetAttributes(&image, &bytes, &MemoryRangeAttribute, bytes, deviceptr, bytes);
+#endif
+
+  // CUDA: CUresult CUDAAPI cuStreamAddCallback(CUstream hStream, CUstreamCallback callback, void *userData, unsigned int flags);
+  // HIP: hipError_t hipStreamAddCallback(hipStream_t stream, hipStreamCallback_t callback, void* userData, unsigned int flags);
+  // CHECK: result = hipStreamAddCallback(stream, streamCallback, image, flags);
+  result = cuStreamAddCallback(stream, streamCallback, image, flags);
+
+  // CUDA: CUresult CUDAAPI cuStreamAttachMemAsync(CUstream hStream, CUdeviceptr dptr, size_t length, unsigned int flags);
+  // HIP: hipError_t hipStreamAttachMemAsync(hipStream_t stream, void* dev_ptr, size_t length __dparm(0), unsigned int flags __dparm(hipMemAttachSingle));
+  // CHECK: result = hipStreamAttachMemAsync(stream, deviceptr, bytes, flags);
+  result = cuStreamAttachMemAsync(stream, deviceptr, bytes, flags);
+
+#if CUDA_VERSION > 10000
+  // CUDA: CUresult CUDAAPI cuStreamBeginCapture(CUstream hStream, CUstreamCaptureMode mode);
+  // HIP: hipError_t hipStreamBeginCapture(hipStream_t stream, hipStreamCaptureMode mode);
+  // CHECK: result = hipStreamBeginCapture(stream, streamCaptureMode);
+  // CHECK-NEXT: result = hipStreamBeginCapture(stream, streamCaptureMode);
+  result = cuStreamBeginCapture(stream, streamCaptureMode);
+  result = cuStreamBeginCapture_v2(stream, streamCaptureMode);
+#endif
+
+  // CUDA: CUresult CUDAAPI cuStreamCreate(CUstream *phStream, unsigned int Flags);
+  // HIP: hipError_t hipStreamCreateWithFlags(hipStream_t* stream, unsigned int flags);
+  // CHECK: result = hipStreamCreateWithFlags(&stream, flags);
+  result = cuStreamCreate(&stream, flags);
+
+  // CUDA: CUresult CUDAAPI cuStreamCreateWithPriority(CUstream *phStream, unsigned int flags, int priority);
+  // HIP: hipError_t hipStreamCreateWithPriority(hipStream_t* stream, unsigned int flags, int priority);
+  // CHECK: result = hipStreamCreateWithPriority(&stream, flags, leastPriority);
+  result = cuStreamCreateWithPriority(&stream, flags, leastPriority);
+
+  // CUDA: CUresult CUDAAPI cuStreamDestroy(CUstream hStream);
+  // HIP: hipError_t hipStreamDestroy(hipStream_t stream);
+  // CHECK: result = hipStreamDestroy(stream);
+  // CHECK-NEXT: result = hipStreamDestroy(stream);
+  result = cuStreamDestroy(stream);
+  result = cuStreamDestroy_v2(stream);
+
+#if CUDA_VERSION > 9020
+  // CUDA: CUresult CUDAAPI cuStreamEndCapture(CUstream hStream, CUgraph *phGraph);
+  // HIP: hipError_t hipStreamEndCapture(hipStream_t stream, hipGraph_t* pGraph);
+  // CHECK: result = hipStreamEndCapture(stream, &graph);
+  result = cuStreamEndCapture(stream, &graph);
+#endif
+
+  // CUDA: CUresult CUDAAPI cuStreamGetFlags(CUstream hStream, unsigned int *flags);
+  // HIP: hipError_t hipStreamGetFlags(hipStream_t stream, unsigned int* flags);
+  // CHECK: result = hipStreamGetFlags(stream, &flags);
+  result = cuStreamGetFlags(stream, &flags);
+
+  // CUDA: CUresult CUDAAPI cuStreamGetPriority(CUstream hStream, int *priority);
+  // HIP: hipError_t hipStreamGetPriority(hipStream_t stream, int* priority);
+  // CHECK: result = hipStreamGetPriority(stream, &leastPriority);
+  result = cuStreamGetPriority(stream, &leastPriority);
+
+  // CUDA: CUresult CUDAAPI cuStreamQuery(CUstream hStream);
+  // HIP: hipError_t hipStreamQuery(hipStream_t stream);
+  // CHECK: result = hipStreamQuery(stream);
+  result = cuStreamQuery(stream);
+
+  // CUDA: CUresult CUDAAPI cuStreamSynchronize(CUstream hStream);
+  // HIP: hipError_t hipStreamSynchronize(hipStream_t stream);
+  // CHECK: result = hipStreamSynchronize(stream);
+  result = cuStreamSynchronize(stream);
+
+  // CUDA: CUresult CUDAAPI cuStreamWaitEvent(CUstream hStream, CUevent hEvent, unsigned int Flags);
+  // HIP: hipError_t hipStreamWaitEvent(hipStream_t stream, hipEvent_t event, unsigned int flags);
+  // CHECK: result = hipStreamWaitEvent(stream, event_, flags);
+  result = cuStreamWaitEvent(stream, event_, flags);
 
   return 0;
 }

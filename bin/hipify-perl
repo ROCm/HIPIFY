@@ -1187,6 +1187,7 @@ sub simpleSubstitutions {
     $ft{'memory'} += s/\bmake_cudaPitchedPtr\b/make_hipPitchedPtr/g;
     $ft{'memory'} += s/\bmake_cudaPos\b/make_hipPos/g;
     $ft{'addressing'} += s/\bcuMemAdvise\b/hipMemAdvise/g;
+    $ft{'addressing'} += s/\bcuMemPrefetchAsync\b/hipMemPrefetchAsync/g;
     $ft{'addressing'} += s/\bcuMemRangeGetAttribute\b/hipMemRangeGetAttribute/g;
     $ft{'addressing'} += s/\bcuMemRangeGetAttributes\b/hipMemRangeGetAttributes/g;
     $ft{'addressing'} += s/\bcudaPointerGetAttributes\b/hipPointerGetAttributes/g;
@@ -5713,7 +5714,6 @@ sub warnUnsupportedFunctions {
         "cuMemSetAccess",
         "cuMemRetainAllocationHandle",
         "cuMemRelease",
-        "cuMemPrefetchAsync",
         "cuMemPoolTrimTo",
         "cuMemPoolSetAttribute",
         "cuMemPoolSetAccess",
