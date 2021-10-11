@@ -387,7 +387,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   // cudaMemAdvise
   {"cuMemAdvise",                                          {"hipMemAdvise",                                            "", CONV_ADDRESSING, API_DRIVER, 14}},
   // TODO: double check cudaMemPrefetchAsync
-  {"cuMemPrefetchAsync",                                   {"hipMemPrefetchAsync_",                                    "", CONV_ADDRESSING, API_DRIVER, 14, HIP_UNSUPPORTED}},
+  {"cuMemPrefetchAsync",                                   {"hipMemPrefetchAsync",                                     "", CONV_ADDRESSING, API_DRIVER, 14}},
   // cudaMemRangeGetAttribute
   {"cuMemRangeGetAttribute",                               {"hipMemRangeGetAttribute",                                 "", CONV_ADDRESSING, API_DRIVER, 14}},
   // cudaMemRangeGetAttributes
@@ -424,8 +424,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuStreamGetAttribute",                                 {"hipStreamGetAttribute",                                   "", CONV_STREAM, API_DRIVER, 15, HIP_UNSUPPORTED}},
   // cudaStreamGetCaptureInfo
   {"cuStreamGetCaptureInfo",                               {"hipStreamGetCaptureInfo",                                 "", CONV_STREAM, API_DRIVER, 15, HIP_UNSUPPORTED}},
-  //
-  {"cuStreamGetCaptureInfo_v2",                            {"hipStreamGetCaptureInfo_v2",                              "", CONV_STREAM, API_DRIVER, 15, HIP_UNSUPPORTED}},
+  {"cuStreamGetCaptureInfo_v2",                            {"hipStreamGetCaptureInfo",                                 "", CONV_STREAM, API_DRIVER, 15, HIP_UNSUPPORTED}},
   //
   {"cuStreamUpdateCaptureDependencies",                    {"hipStreamUpdateCaptureDependencies",                      "", CONV_STREAM, API_DRIVER, 15, HIP_UNSUPPORTED}},
   // no analogue
