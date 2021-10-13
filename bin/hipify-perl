@@ -2763,6 +2763,7 @@ sub simpleSubstitutions {
     $ft{'type'} += s/\bcusparseSpVecDescr_t\b/hipsparseSpVecDescr_t/g;
     $ft{'type'} += s/\bcusparseSparseToDenseAlg_t\b/hipsparseSparseToDenseAlg_t/g;
     $ft{'type'} += s/\bcusparseStatus_t\b/hipsparseStatus_t/g;
+    $ft{'type'} += s/\bnvrtcResult\b/hiprtcResult/g;
     $ft{'type'} += s/\bpruneInfo_t\b/pruneInfo_t/g;
     $ft{'type'} += s/\bsurfaceReference\b/surfaceReference/g;
     $ft{'numeric_literal'} += s/\bCUBLAS_ATOMICS_ALLOWED\b/HIPBLAS_ATOMICS_ALLOWED/g;
@@ -3367,6 +3368,18 @@ sub simpleSubstitutions {
     $ft{'numeric_literal'} += s/\bCU_TR_ADDRESS_MODE_WRAP\b/HIP_TR_ADDRESS_MODE_WRAP/g;
     $ft{'numeric_literal'} += s/\bCU_TR_FILTER_MODE_LINEAR\b/HIP_TR_FILTER_MODE_LINEAR/g;
     $ft{'numeric_literal'} += s/\bCU_TR_FILTER_MODE_POINT\b/HIP_TR_FILTER_MODE_POINT/g;
+    $ft{'numeric_literal'} += s/\bNVRTC_ERROR_BUILTIN_OPERATION_FAILURE\b/HIPRTC_ERROR_BUILTIN_OPERATION_FAILURE/g;
+    $ft{'numeric_literal'} += s/\bNVRTC_ERROR_COMPILATION\b/HIPRTC_ERROR_COMPILATION/g;
+    $ft{'numeric_literal'} += s/\bNVRTC_ERROR_INTERNAL_ERROR\b/HIPRTC_ERROR_INTERNAL_ERROR/g;
+    $ft{'numeric_literal'} += s/\bNVRTC_ERROR_INVALID_INPUT\b/HIPRTC_ERROR_INVALID_INPUT/g;
+    $ft{'numeric_literal'} += s/\bNVRTC_ERROR_INVALID_OPTION\b/HIPRTC_ERROR_INVALID_OPTION/g;
+    $ft{'numeric_literal'} += s/\bNVRTC_ERROR_INVALID_PROGRAM\b/HIPRTC_ERROR_INVALID_PROGRAM/g;
+    $ft{'numeric_literal'} += s/\bNVRTC_ERROR_NAME_EXPRESSION_NOT_VALID\b/HIPRTC_ERROR_NAME_EXPRESSION_NOT_VALID/g;
+    $ft{'numeric_literal'} += s/\bNVRTC_ERROR_NO_LOWERED_NAMES_BEFORE_COMPILATION\b/HIPRTC_ERROR_NO_LOWERED_NAMES_BEFORE_COMPILATION/g;
+    $ft{'numeric_literal'} += s/\bNVRTC_ERROR_NO_NAME_EXPRESSIONS_AFTER_COMPILATION\b/HIPRTC_ERROR_NO_NAME_EXPRESSIONS_AFTER_COMPILATION/g;
+    $ft{'numeric_literal'} += s/\bNVRTC_ERROR_OUT_OF_MEMORY\b/HIPRTC_ERROR_OUT_OF_MEMORY/g;
+    $ft{'numeric_literal'} += s/\bNVRTC_ERROR_PROGRAM_CREATION_FAILURE\b/HIPRTC_ERROR_PROGRAM_CREATION_FAILURE/g;
+    $ft{'numeric_literal'} += s/\bNVRTC_SUCCESS\b/HIPRTC_SUCCESS/g;
     $ft{'numeric_literal'} += s/\bcudaAddressModeBorder\b/hipAddressModeBorder/g;
     $ft{'numeric_literal'} += s/\bcudaAddressModeClamp\b/hipAddressModeClamp/g;
     $ft{'numeric_literal'} += s/\bcudaAddressModeMirror\b/hipAddressModeMirror/g;
