@@ -155,3 +155,4 @@ extern const std::map<unsigned int, llvm::StringRef> CUDA_DNN_API_SECTION_MAP;
 extern const std::map<unsigned int, llvm::StringRef> CUDA_FFT_API_SECTION_MAP;
 extern const std::map<unsigned int, llvm::StringRef> CUDA_SPARSE_API_SECTION_MAP;
 extern const std::map<unsigned int, llvm::StringRef> CUDA_DEVICE_FUNCTION_API_SECTION_MAP;
+extern const std::map<unsigned int, llvm::StringRef> CUDA_RTC_API_SECTION_MAP;
