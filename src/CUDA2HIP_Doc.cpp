@@ -91,6 +91,11 @@ namespace doc {
   const string sDEVICE_csv = sDEVICE + csv_ext;
   const string sCUDEVICE = "CUDA DEVICE";
 
+  const string sRTC = "CUDA_RTC_API_supported_by_HIP";
+  const string sRTC_md = sRTC + md_ext;
+  const string sRTC_csv = sRTC + csv_ext;
+  const string c = "CUDA RTC";
+
   const string sAPI_supported = "API supported by HIP";
   const string sCUDA = "CUDA";
   const string sHIP = "HIP";
@@ -544,6 +549,29 @@ namespace doc {
       }
   };
 
+   class RTC : public DOC {
+    public:
+      RTC(const string &outDir): DOC(outDir) {}
+      virtual ~RTC() {}
+    protected:
+      const sectionMap &getSections() const override { return CUDA_RTC_API_SECTION_MAP; }
+      const functionMap &getFunctions() const override { return CUDA_RTC_FUNCTION_MAP; }
+      const typeMap &getTypes() const override { return CUDA_RTC_TYPE_NAME_MAP; }
+      const versionMap &getFunctionVersions() const override { return CUDA_RTC_FUNCTION_VER_MAP; }
+      const hipVersionMap &getHipFunctionVersions() const override { return HIP_RTC_FUNCTION_VER_MAP; }
+      const versionMap &getTypeVersions() const override { return CUDA_RTC_TYPE_NAME_VER_MAP; }
+      const hipVersionMap &getHipTypeVersions() const override { return HIP_RTC_TYPE_NAME_VER_MAP; }
+      const string &getName() const override { return sRTC; }
+      const string &getFileName(docType format) const override {
+        switch (format) {
+          case none:
+          default: return sEmpty;
+          case md: return sRTC_md;
+          case csv: return sRTC_csv;
+        }
+      }
+  };
+
   bool generate(bool GenerateMD, bool GenerateCSV) {
     if (!GenerateMD && !GenerateCSV) return true;
     error_code EC;
@@ -583,6 +611,8 @@ namespace doc {
     docs.addDoc(&sparse);
     DEVICE device(sOut);
     docs.addDoc(&device);
+    RTC rtc(sOut);
+    docs.addDoc(&rtc);
     return docs.generate();
   }
 
