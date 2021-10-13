@@ -184,7 +184,6 @@
 |`CUDA_TEXTURE_DESC`| | | |`HIP_TEXTURE_DESC`|3.5.0| | | |
 |`CUDA_TEXTURE_DESC_st`| | | |`HIP_TEXTURE_DESC_st`|3.5.0| | | |
 |`CUDA_TEXTURE_DESC_v1`|11.3| | |`HIP_TEXTURE_DESC`|3.5.0| | | |
-|`CUDA_VERSION`| | | | | | | | |
 |`CUGLDeviceList`| | | |`hipGLDeviceList`|4.4.0| | | |
 |`CUGLDeviceList_enum`| | | |`hipGLDeviceList`|4.4.0| | | |
 |`CUGLmap_flags`| | | | | | | | |
