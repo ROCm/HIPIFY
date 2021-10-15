@@ -2364,6 +2364,17 @@ sub simpleSubstitutions {
     $ft{'library'} += s/\bcusparseZnnz\b/hipsparseZnnz/g;
     $ft{'library'} += s/\bcusparseZnnz_compress\b/hipsparseZnnz_compress/g;
     $ft{'library'} += s/\bcusparseZsctr\b/hipsparseZsctr/g;
+    $ft{'library'} += s/\bnvrtcAddNameExpression\b/hiprtcAddNameExpression/g;
+    $ft{'library'} += s/\bnvrtcCompileProgram\b/hiprtcCompileProgram/g;
+    $ft{'library'} += s/\bnvrtcCreateProgram\b/hiprtcCreateProgram/g;
+    $ft{'library'} += s/\bnvrtcDestroyProgram\b/hiprtcDestroyProgram/g;
+    $ft{'library'} += s/\bnvrtcGetErrorString\b/hiprtcGetErrorString/g;
+    $ft{'library'} += s/\bnvrtcGetLoweredName\b/hiprtcGetLoweredName/g;
+    $ft{'library'} += s/\bnvrtcGetPTX\b/hiprtcGetCode/g;
+    $ft{'library'} += s/\bnvrtcGetPTXSize\b/hiprtcGetCodeSize/g;
+    $ft{'library'} += s/\bnvrtcGetProgramLog\b/hiprtcGetProgramLog/g;
+    $ft{'library'} += s/\bnvrtcGetProgramLogSize\b/hiprtcGetProgramLogSize/g;
+    $ft{'library'} += s/\bnvrtcVersion\b/hiprtcVersion/g;
     $ft{'device_library'} += s/\bcurand\b/hiprand/g;
     $ft{'device_library'} += s/\bcurand_discrete\b/hiprand_discrete/g;
     $ft{'device_library'} += s/\bcurand_discrete4\b/hiprand_discrete4/g;
@@ -2763,6 +2774,7 @@ sub simpleSubstitutions {
     $ft{'type'} += s/\bcusparseSpVecDescr_t\b/hipsparseSpVecDescr_t/g;
     $ft{'type'} += s/\bcusparseSparseToDenseAlg_t\b/hipsparseSparseToDenseAlg_t/g;
     $ft{'type'} += s/\bcusparseStatus_t\b/hipsparseStatus_t/g;
+    $ft{'type'} += s/\bnvrtcProgram\b/hiprtcProgram/g;
     $ft{'type'} += s/\bnvrtcResult\b/hiprtcResult/g;
     $ft{'type'} += s/\bpruneInfo_t\b/pruneInfo_t/g;
     $ft{'type'} += s/\bsurfaceReference\b/surfaceReference/g;
@@ -4555,6 +4567,12 @@ sub warnUnsupportedFunctions {
     my $k = 0;
     foreach $func (
         "pruneInfo",
+        "nvrtcGetSupportedArchs",
+        "nvrtcGetNumSupportedArchs",
+        "nvrtcGetNVVMSize",
+        "nvrtcGetNVVM",
+        "nvrtcGetCUBINSize",
+        "nvrtcGetCUBIN",
         "libraryPropertyType_t",
         "libraryPropertyType",
         "cusparseZhybsv_solve",

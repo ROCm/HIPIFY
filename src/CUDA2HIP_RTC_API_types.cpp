@@ -37,6 +37,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RTC_TYPE_NAME_MAP {
   {"NVRTC_ERROR_NO_LOWERED_NAMES_BEFORE_COMPILATION",   {"HIPRTC_ERROR_NO_LOWERED_NAMES_BEFORE_COMPILATION",    "", CONV_NUMERIC_LITERAL, API_RTC, 1}}, // 9
   {"NVRTC_ERROR_NAME_EXPRESSION_NOT_VALID",             {"HIPRTC_ERROR_NAME_EXPRESSION_NOT_VALID",              "", CONV_NUMERIC_LITERAL, API_RTC, 1}}, // 10
   {"NVRTC_ERROR_INTERNAL_ERROR",                        {"HIPRTC_ERROR_INTERNAL_ERROR",                         "", CONV_NUMERIC_LITERAL, API_RTC, 1}}, // 11
+
+  {"nvrtcProgram",                                      {"hiprtcProgram",                                       "", CONV_TYPE, API_RTC, 1}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_RTC_TYPE_NAME_VER_MAP {
@@ -60,4 +62,5 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RTC_TYPE_NAME_VER_MAP {
   {"HIPRTC_ERROR_NO_LOWERED_NAMES_BEFORE_COMPILATION",           {HIP_2060, HIP_0,    HIP_0   }},
   {"HIPRTC_ERROR_NAME_EXPRESSION_NOT_VALID",                     {HIP_2060, HIP_0,    HIP_0   }},
   {"HIPRTC_ERROR_INTERNAL_ERROR",                                {HIP_2060, HIP_0,    HIP_0   }},
+  {"hiprtcProgram",                                              {HIP_2060, HIP_0,    HIP_0   }},
 };
