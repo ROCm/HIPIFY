@@ -16,11 +16,30 @@
 |`NVRTC_ERROR_OUT_OF_MEMORY`| | | |`HIPRTC_ERROR_OUT_OF_MEMORY`|2.6.0| | | |
 |`NVRTC_ERROR_PROGRAM_CREATION_FAILURE`| | | |`HIPRTC_ERROR_PROGRAM_CREATION_FAILURE`|2.6.0| | | |
 |`NVRTC_SUCCESS`| | | |`HIPRTC_SUCCESS`|2.6.0| | | |
+|`nvrtcProgram`| | | |`hiprtcProgram`|2.6.0| | | |
 |`nvrtcResult`| | | |`hiprtcResult`|2.6.0| | | |
 
 ## **2. RTC API functions**
 
-Unsupported
+|**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
+|:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
+|`nvrtcAddNameExpression`|8.0| | |`hiprtcAddNameExpression`|2.6.0| | | |
+|`nvrtcCompileProgram`| | | |`hiprtcCompileProgram`|2.6.0| | | |
+|`nvrtcCreateProgram`| | | |`hiprtcCreateProgram`|2.6.0| | | |
+|`nvrtcDestroyProgram`| | | |`hiprtcDestroyProgram`|2.6.0| | | |
+|`nvrtcGetCUBIN`|11.1| | | | | | | |
+|`nvrtcGetCUBINSize`|11.1| | | | | | | |
+|`nvrtcGetErrorString`| | | |`hiprtcGetErrorString`|2.6.0| | | |
+|`nvrtcGetLoweredName`|8.0| | |`hiprtcGetLoweredName`|2.6.0| | | |
+|`nvrtcGetNVVM`|11.4| | | | | | | |
+|`nvrtcGetNVVMSize`|11.4| | | | | | | |
+|`nvrtcGetNumSupportedArchs`|11.2| | | | | | | |
+|`nvrtcGetPTX`| | | |`hiprtcGetCode`|2.6.0| | | |
+|`nvrtcGetPTXSize`| | | |`hiprtcGetCodeSize`|2.6.0| | | |
+|`nvrtcGetProgramLog`| | | |`hiprtcGetProgramLog`|2.6.0| | | |
+|`nvrtcGetProgramLogSize`| | | |`hiprtcGetProgramLogSize`|2.6.0| | | |
+|`nvrtcGetSupportedArchs`|11.2| | | | | | | |
+|`nvrtcVersion`| | | |`hiprtcVersion`|2.6.0| | | |
 
 
 \*A - Added; D - Deprecated; R - Removed; E - Experimental

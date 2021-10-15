@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2015 - present Advanced Micro Devices, Inc. All rights reserved.
+Copyright (c) 2021 - present Advanced Micro Devices, Inc. All rights reserved.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -24,12 +24,48 @@ THE SOFTWARE.
 
 // Maps the names of CUDA RTC API functions to the corresponding HIP functions
 const std::map<llvm::StringRef, hipCounter> CUDA_RTC_FUNCTION_MAP {
+  {"nvrtcGetErrorString",                         {"hiprtcGetErrorString",                         "", CONV_LIB_FUNC, API_RTC, 2}},
+  {"nvrtcVersion",                                {"hiprtcVersion",                                "", CONV_LIB_FUNC, API_RTC, 2}},
+  {"nvrtcGetNumSupportedArchs",                   {"hiprtcGetNumSupportedArchs",                   "", CONV_LIB_FUNC, API_RTC, 2, HIP_UNSUPPORTED}},
+  {"nvrtcGetSupportedArchs",                      {"hiprtcGetSupportedArchs",                      "", CONV_LIB_FUNC, API_RTC, 2, HIP_UNSUPPORTED}},
+  {"nvrtcCreateProgram",                          {"hiprtcCreateProgram",                          "", CONV_LIB_FUNC, API_RTC, 2}},
+  {"nvrtcDestroyProgram",                         {"hiprtcDestroyProgram",                         "", CONV_LIB_FUNC, API_RTC, 2}},
+  {"nvrtcCompileProgram",                         {"hiprtcCompileProgram",                         "", CONV_LIB_FUNC, API_RTC, 2}},
+  {"nvrtcGetPTXSize",                             {"hiprtcGetCodeSize",                            "", CONV_LIB_FUNC, API_RTC, 2}},
+  {"nvrtcGetPTX",                                 {"hiprtcGetCode",                                "", CONV_LIB_FUNC, API_RTC, 2}},
+  {"nvrtcGetCUBINSize",                           {"hiprtcGetCUBINSize",                           "", CONV_LIB_FUNC, API_RTC, 2, HIP_UNSUPPORTED}},
+  {"nvrtcGetCUBIN",                               {"hiprtcGetCUBIN",                               "", CONV_LIB_FUNC, API_RTC, 2, HIP_UNSUPPORTED}},
+  {"nvrtcGetNVVMSize",                            {"hiprtcGetNVVMSize",                            "", CONV_LIB_FUNC, API_RTC, 2, HIP_UNSUPPORTED}},
+  {"nvrtcGetNVVM",                                {"hiprtcGetNVVM",                                "", CONV_LIB_FUNC, API_RTC, 2, HIP_UNSUPPORTED}},
+  {"nvrtcGetProgramLogSize",                      {"hiprtcGetProgramLogSize",                      "", CONV_LIB_FUNC, API_RTC, 2}},
+  {"nvrtcGetProgramLog",                          {"hiprtcGetProgramLog",                          "", CONV_LIB_FUNC, API_RTC, 2}},
+  {"nvrtcAddNameExpression",                      {"hiprtcAddNameExpression",                      "", CONV_LIB_FUNC, API_RTC, 2}},
+  {"nvrtcGetLoweredName",                         {"hiprtcGetLoweredName",                         "", CONV_LIB_FUNC, API_RTC, 2}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_RTC_FUNCTION_VER_MAP {
+  {"nvrtcGetNumSupportedArchs",                   {CUDA_112, CUDA_0,   CUDA_0  }},
+  {"nvrtcGetSupportedArchs",                      {CUDA_112, CUDA_0,   CUDA_0  }},
+  {"nvrtcGetCUBINSize",                           {CUDA_111, CUDA_0,   CUDA_0  }},
+  {"nvrtcGetCUBIN",                               {CUDA_111, CUDA_0,   CUDA_0  }},
+  {"nvrtcGetNVVMSize",                            {CUDA_114, CUDA_0,   CUDA_0  }},
+  {"nvrtcGetNVVM",                                {CUDA_114, CUDA_0,   CUDA_0  }},
+  {"nvrtcAddNameExpression",                      {CUDA_80,  CUDA_0,   CUDA_0  }},
+  {"nvrtcGetLoweredName",                         {CUDA_80,  CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_RTC_FUNCTION_VER_MAP {
+  {"hiprtcGetErrorString",                        {HIP_2060, HIP_0,    HIP_0   }},
+  {"hiprtcVersion",                               {HIP_2060, HIP_0,    HIP_0   }},
+  {"hiprtcCreateProgram",                         {HIP_2060, HIP_0,    HIP_0   }},
+  {"hiprtcDestroyProgram",                        {HIP_2060, HIP_0,    HIP_0   }},
+  {"hiprtcCompileProgram",                        {HIP_2060, HIP_0,    HIP_0   }},
+  {"hiprtcGetCodeSize",                           {HIP_2060, HIP_0,    HIP_0   }},
+  {"hiprtcGetCode",                               {HIP_2060, HIP_0,    HIP_0   }},
+  {"hiprtcGetProgramLogSize",                     {HIP_2060, HIP_0,    HIP_0   }},
+  {"hiprtcGetProgramLog",                         {HIP_2060, HIP_0,    HIP_0   }},
+  {"hiprtcAddNameExpression",                     {HIP_2060, HIP_0,    HIP_0   }},
+  {"hiprtcGetLoweredName",                        {HIP_2060, HIP_0,    HIP_0   }},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_RTC_API_SECTION_MAP {
