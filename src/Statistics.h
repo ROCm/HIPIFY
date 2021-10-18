@@ -336,7 +336,7 @@ class Statistics {
   unsigned touchedLines = 0;
   unsigned totalLines = 0;
   unsigned touchedBytes = 0;
-  int totalBytes = 0;
+  unsigned totalBytes = 0;
   chr::steady_clock::time_point startTime;
   chr::steady_clock::time_point completionTime;
 
@@ -345,8 +345,8 @@ public:
   void incrementCounter(const hipCounter &counter, const std::string &name);
   // Add the counters from `other` onto the counters of this object.
   void add(const Statistics &other);
-  void lineTouched(int lineNumber);
-  void bytesChanged(int bytes);
+  void lineTouched(unsigned int lineNumber);
+  void bytesChanged(unsigned int bytes);
   // Set the completion timestamp to now.
   void markCompletion();
 
