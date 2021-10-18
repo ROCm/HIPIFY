@@ -537,7 +537,7 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
 
 void HipifyAction::insertReplacement(const ct::Replacement &rep, const clang::FullSourceLoc &fullSL) {
   llcompat::insertReplacement(*replacements, rep);
-  if (PrintStats) {
+  if (PrintStats || PrintStatsCSV) {
     rep.getLength();
     Statistics::current().lineTouched(fullSL.getExpansionLineNumber());
     Statistics::current().bytesChanged(rep.getLength());

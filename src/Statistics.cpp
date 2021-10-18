@@ -226,7 +226,7 @@ Statistics::Statistics(const std::string &name): fileName(name) {
     src_file.clear();
     src_file.seekg(0);
     totalLines = (unsigned)std::count(std::istreambuf_iterator<char>(src_file), std::istreambuf_iterator<char>(), '\n');
-    totalBytes = (int)src_file.tellg();
+    totalBytes = (unsigned)src_file.tellg();
     if (totalBytes < 0) {
       totalBytes = 0;
     }
@@ -255,12 +255,12 @@ void Statistics::add(const Statistics &other) {
   if (startTime > other.startTime)   startTime = other.startTime;
 }
 
-void Statistics::lineTouched(int lineNumber) {
+void Statistics::lineTouched(unsigned int lineNumber) {
   touchedLinesSet.insert(lineNumber);
   touchedLines = unsigned(touchedLinesSet.size());
 }
 
-void Statistics::bytesChanged(int bytes) {
+void Statistics::bytesChanged(unsigned int bytes) {
   touchedBytes += bytes;
 }
 
@@ -275,26 +275,32 @@ void Statistics::print(std::ostream *csv, llvm::raw_ostream *printOut, bool skip
     std::string str = "file \'" + fileName + "\' statistics:\n";
     conditionalPrint(csv, printOut, "\n" + str, "\n[HIPIFY] info: " + str);
   }
-  if (hasErrors || totalBytes <= 0 || totalLines <= 0) {
+  if (hasErrors || totalBytes == 0 || totalLines == 0) {
     std::string str = "\n  ERROR: Statistics is invalid due to failed hipification.\n\n";
     conditionalPrint(csv, printOut, str, str);
   }
+  std::stringstream stream;
   // Total number of (un)supported refs that were converted.
   int supportedSum = supported.getConvSum();
   int unsupportedSum = unsupported.getConvSum();
   int allSum = supportedSum + unsupportedSum;
   printStat(csv, printOut, "CONVERTED refs count", supportedSum);
   printStat(csv, printOut, "UNCONVERTED refs count", unsupportedSum);
-  printStat(csv, printOut, "CONVERSION %", 100 - (0 == allSum ? 100 : std::lround(double(unsupportedSum * 100) / double(allSum))));
+  stream << std::fixed << std::setprecision(1) << 100 - (0 == allSum ? 100 : double(unsupportedSum) / double(allSum) * 100);
+  printStat(csv, printOut, "CONVERSION %", stream.str());
+  stream.str("");
   printStat(csv, printOut, "REPLACED bytes", touchedBytes);
   printStat(csv, printOut, "TOTAL bytes", totalBytes);
   printStat(csv, printOut, "CHANGED lines of code", touchedLines);
   printStat(csv, printOut, "TOTAL lines of code", totalLines);
-  printStat(csv, printOut, "CODE CHANGED (in bytes) %", 0 == totalBytes ? 0 : std::lround(double(touchedBytes * 100) / double(totalBytes)));
-  printStat(csv, printOut, "CODE CHANGED (in lines) %", 0 == totalLines ? 0 : std::lround(double(touchedLines * 100) / double(totalLines)));
+  stream << std::fixed << std::setprecision(1) << (0 == totalBytes ? 0 : double(touchedBytes) / double(totalBytes) * 100);
+  printStat(csv, printOut, "CODE CHANGED (in bytes) %", stream.str());
+  stream.str("");
+  stream << std::fixed << std::setprecision(1) << (0 == totalBytes ? 0 : double(touchedLines) / double(totalLines) * 100);
+  printStat(csv, printOut, "CODE CHANGED (in lines) %", stream.str());
+  stream.str("");
   typedef std::chrono::duration<double, std::milli> duration;
   duration elapsed = completionTime - startTime;
-  std::stringstream stream;
   stream << std::fixed << std::setprecision(2) << elapsed.count() / 1000;
   printStat(csv, printOut, "TIME ELAPSED s", stream.str());
   supported.print(csv, printOut, "CONVERTED");
