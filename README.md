@@ -612,6 +612,7 @@ To generate `hipify-perl`, run `hipify-clang --perl`. Output directory for the g
 - [Driver API](https://github.com/ROCm-Developer-Tools/HIPIFY/blob/master/doc/markdown/CUDA_Driver_API_functions_supported_by_HIP.md)
 - [cuComplex API](https://github.com/ROCm-Developer-Tools/HIPIFY/blob/master/doc/markdown/cuComplex_API_supported_by_HIP.md)
 - [Device API](https://github.com/ROCm-Developer-Tools/HIPIFY/blob/master/doc/markdown/CUDA_Device_API_supported_by_HIP.md)
+- [RTC API](https://github.com/ROCm-Developer-Tools/HIPIFY/blob/master/doc/markdown/CUDA_RTC_API_supported_by_HIP.md)
 - [cuBLAS](https://github.com/ROCm-Developer-Tools/HIPIFY/blob/master/doc/markdown/CUBLAS_API_supported_by_HIP.md)
 - [cuRAND](https://github.com/ROCm-Developer-Tools/HIPIFY/blob/master/doc/markdown/CURAND_API_supported_by_HIP.md)
 - [cuDNN](https://github.com/ROCm-Developer-Tools/HIPIFY/blob/master/doc/markdown/CUDNN_API_supported_by_HIP.md)
