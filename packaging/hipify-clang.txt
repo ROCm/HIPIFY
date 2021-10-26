@@ -3,6 +3,7 @@ project(hipify-clang)
 
 install(PROGRAMS @HIPIFY_INSTALL_PATH@/hipify-clang DESTINATION bin)
 install(DIRECTORY @HIPIFY_INSTALL_PATH@/include DESTINATION bin)
+install(PROGRAMS @HIPIFY_INSTALL_PATH@/hipify-perl DESTINATION bin)
 
 # hipify-clang.txt is processed to produce CMakeList.txt,
 # pass down value from parent
