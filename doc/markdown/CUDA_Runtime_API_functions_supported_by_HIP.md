@@ -579,7 +579,33 @@ Unsupported
 |`cudaChannelFormatKindNV12`|11.2| | | | | | | |
 |`cudaChannelFormatKindNone`| | | |`hipChannelFormatKindNone`|1.6.0| | | |
 |`cudaChannelFormatKindSigned`| | | |`hipChannelFormatKindSigned`|1.6.0| | | |
+|`cudaChannelFormatKindSignedBlockCompressed4`|11.5| | | | | | | |
+|`cudaChannelFormatKindSignedBlockCompressed5`|11.5| | | | | | | |
+|`cudaChannelFormatKindSignedBlockCompressed6H`|11.5| | | | | | | |
+|`cudaChannelFormatKindSignedNormalized16X1`|11.5| | | | | | | |
+|`cudaChannelFormatKindSignedNormalized16X2`|11.5| | | | | | | |
+|`cudaChannelFormatKindSignedNormalized16X4`|11.5| | | | | | | |
+|`cudaChannelFormatKindSignedNormalized8X1`|11.5| | | | | | | |
+|`cudaChannelFormatKindSignedNormalized8X2`|11.5| | | | | | | |
+|`cudaChannelFormatKindSignedNormalized8X4`|11.5| | | | | | | |
 |`cudaChannelFormatKindUnsigned`| | | |`hipChannelFormatKindUnsigned`|1.6.0| | | |
+|`cudaChannelFormatKindUnsignedBlockCompressed1`|11.5| | | | | | | |
+|`cudaChannelFormatKindUnsignedBlockCompressed1SRGB`|11.5| | | | | | | |
+|`cudaChannelFormatKindUnsignedBlockCompressed2`|11.5| | | | | | | |
+|`cudaChannelFormatKindUnsignedBlockCompressed2SRGB`|11.5| | | | | | | |
+|`cudaChannelFormatKindUnsignedBlockCompressed3`|11.5| | | | | | | |
+|`cudaChannelFormatKindUnsignedBlockCompressed3SRGB`|11.5| | | | | | | |
+|`cudaChannelFormatKindUnsignedBlockCompressed4`|11.5| | | | | | | |
+|`cudaChannelFormatKindUnsignedBlockCompressed5`|11.5| | | | | | | |
+|`cudaChannelFormatKindUnsignedBlockCompressed6H`|11.5| | | | | | | |
+|`cudaChannelFormatKindUnsignedBlockCompressed7`|11.5| | | | | | | |
+|`cudaChannelFormatKindUnsignedBlockCompressed7SRGB`|11.5| | | | | | | |
+|`cudaChannelFormatKindUnsignedNormalized16X1`|11.5| | | | | | | |
+|`cudaChannelFormatKindUnsignedNormalized16X2`|11.5| | | | | | | |
+|`cudaChannelFormatKindUnsignedNormalized16X4`|11.5| | | | | | | |
+|`cudaChannelFormatKindUnsignedNormalized8X1`|11.5| | | | | | | |
+|`cudaChannelFormatKindUnsignedNormalized8X2`|11.5| | | | | | | |
+|`cudaChannelFormatKindUnsignedNormalized8X4`|11.5| | | | | | | |
 |`cudaComputeMode`| | | |`hipComputeMode`|1.9.0| | | |
 |`cudaComputeModeDefault`| | | |`hipComputeModeDefault`|1.9.0| | | |
 |`cudaComputeModeExclusive`| | | |`hipComputeModeExclusive`|1.9.0| | | |
@@ -702,7 +728,7 @@ Unsupported
 |`cudaDevAttrMaxTextureCubemapWidth`| | | |`hipDeviceAttributeMaxTextureCubemap`|4.3.0| | | |
 |`cudaDevAttrMaxThreadsPerBlock`| | | |`hipDeviceAttributeMaxThreadsPerBlock`|1.6.0| | | |
 |`cudaDevAttrMaxThreadsPerMultiProcessor`| | | |`hipDeviceAttributeMaxThreadsPerMultiProcessor`|1.6.0| | | |
-|`cudaDevAttrMaxTimelineSemaphoreInteropSupported`|11.2| | | | | | | |
+|`cudaDevAttrMaxTimelineSemaphoreInteropSupported`|11.2|11.5| | | | | | |
 |`cudaDevAttrMemoryClockRate`| | | |`hipDeviceAttributeMemoryClockRate`|1.6.0| | | |
 |`cudaDevAttrMemoryPoolSupportedHandleTypes`|11.3| | | | | | | |
 |`cudaDevAttrMemoryPoolsSupported`|11.2| | | | | | | |
@@ -724,6 +750,7 @@ Unsupported
 |`cudaDevAttrTccDriver`| | | |`hipDeviceAttributeTccDriver`|4.3.0| | | |
 |`cudaDevAttrTextureAlignment`| | | |`hipDeviceAttributeTextureAlignment`|2.10.0| | | |
 |`cudaDevAttrTexturePitchAlignment`| | | |`hipDeviceAttributeTexturePitchAlignment`|3.2.0| | | |
+|`cudaDevAttrTimelineSemaphoreInteropSupported`|11.5| | | | | | | |
 |`cudaDevAttrTotalConstantMemory`| | | |`hipDeviceAttributeTotalConstantMemory`|1.6.0| | | |
 |`cudaDevAttrUnifiedAddressing`| | | |`hipDeviceAttributeUnifiedAddressing`|4.3.0| | | |
 |`cudaDevAttrWarpSize`| | | |`hipDeviceAttributeWarpSize`|1.6.0| | | |
