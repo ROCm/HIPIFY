@@ -236,6 +236,32 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaChannelFormatKindFloat",                                       {"hipChannelFormatKindFloat",                                "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 2
   {"cudaChannelFormatKindNone",                                        {"hipChannelFormatKindNone",                                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 3
   {"cudaChannelFormatKindNV12",                                        {"hipChannelFormatKindNV12",                                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 4
+  {"cudaChannelFormatKindUnsignedNormalized8X1",                       {"hipChannelFormatKindUnsignedNormalized8X1",                "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 5
+  {"cudaChannelFormatKindUnsignedNormalized8X2",                       {"hipChannelFormatKindUnsignedNormalized8X2",                "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 6
+  {"cudaChannelFormatKindUnsignedNormalized8X4",                       {"hipChannelFormatKindUnsignedNormalized8X4",                "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 7
+  {"cudaChannelFormatKindUnsignedNormalized16X1",                      {"hipChannelFormatKindUnsignedNormalized16X1",               "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 8
+  {"cudaChannelFormatKindUnsignedNormalized16X2",                      {"hipChannelFormatKindUnsignedNormalized16X2",               "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 9
+  {"cudaChannelFormatKindUnsignedNormalized16X4",                      {"hipChannelFormatKindUnsignedNormalized16X4",               "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 10
+  {"cudaChannelFormatKindSignedNormalized8X1",                         {"hipChannelFormatKindSignedNormalized8X1",                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 11
+  {"cudaChannelFormatKindSignedNormalized8X2",                         {"hipChannelFormatKindSignedNormalized8X2",                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 12
+  {"cudaChannelFormatKindSignedNormalized8X4",                         {"hipChannelFormatKindSignedNormalized8X4",                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 13
+  {"cudaChannelFormatKindSignedNormalized16X1",                        {"hipChannelFormatKindSignedNormalized16X1",                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 14
+  {"cudaChannelFormatKindSignedNormalized16X2",                        {"hipChannelFormatKindSignedNormalized16X2",                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 15
+  {"cudaChannelFormatKindSignedNormalized16X4",                        {"hipChannelFormatKindSignedNormalized16X4",                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 16
+  {"cudaChannelFormatKindUnsignedBlockCompressed1",                    {"hipChannelFormatKindUnsignedBlockCompressed1",             "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 17
+  {"cudaChannelFormatKindUnsignedBlockCompressed1SRGB",                {"hipChannelFormatKindUnsignedBlockCompressed1SRGB",         "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 18
+  {"cudaChannelFormatKindUnsignedBlockCompressed2",                    {"hipChannelFormatKindUnsignedBlockCompressed2",             "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 19
+  {"cudaChannelFormatKindUnsignedBlockCompressed2SRGB",                {"hipChannelFormatKindUnsignedBlockCompressed2SRGB",         "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 20
+  {"cudaChannelFormatKindUnsignedBlockCompressed3",                    {"hipChannelFormatKindUnsignedBlockCompressed3",             "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 21
+  {"cudaChannelFormatKindUnsignedBlockCompressed3SRGB",                {"hipChannelFormatKindUnsignedBlockCompressed3SRGB",         "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 22
+  {"cudaChannelFormatKindUnsignedBlockCompressed4",                    {"hipChannelFormatKindUnsignedBlockCompressed4",             "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 23
+  {"cudaChannelFormatKindSignedBlockCompressed4",                      {"hipChannelFormatKindSignedBlockCompressed4",               "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 24
+  {"cudaChannelFormatKindUnsignedBlockCompressed5",                    {"hipChannelFormatKindUnsignedBlockCompressed5",             "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 25
+  {"cudaChannelFormatKindSignedBlockCompressed5",                      {"hipChannelFormatKindSignedBlockCompressed5",               "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 26
+  {"cudaChannelFormatKindUnsignedBlockCompressed6H",                   {"hipChannelFormatKindUnsignedBlockCompressed6H",            "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 27
+  {"cudaChannelFormatKindSignedBlockCompressed6H",                     {"hipChannelFormatKindSignedBlockCompressed6H",              "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 28
+  {"cudaChannelFormatKindUnsignedBlockCompressed7",                    {"hipChannelFormatKindUnsignedBlockCompressed7",             "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 29
+  {"cudaChannelFormatKindUnsignedBlockCompressed7SRGB",                {"hipChannelFormatKindUnsignedBlockCompressed7SRGB",         "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 30
 
   // CUcomputemode
   {"cudaComputeMode",                                                  {"hipComputeMode",                                           "", CONV_TYPE, API_RUNTIME, 36}},
@@ -501,7 +527,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CU_DEVICE_ATTRIBUTE_READ_ONLY_HOST_REGISTER_SUPPORTED
   {"cudaDevAttrHostRegisterReadOnlySupported",                         {"hipDeviceAttributeReadOnlyHostRestigerSupported",          "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 113
   // CU_DEVICE_ATTRIBUTE_TIMELINE_SEMAPHORE_INTEROP_SUPPORTED
-  {"cudaDevAttrMaxTimelineSemaphoreInteropSupported",                  {"hipDeviceAttributeMaxTimelineSemaphoreInteropSupported",   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 114
+  {"cudaDevAttrMaxTimelineSemaphoreInteropSupported",                  {"hipDeviceAttributeMaxTimelineSemaphoreInteropSupported",   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED | CUDA_DEPRECATED}}, // 114
+  // CU_DEVICE_ATTRIBUTE_TIMELINE_SEMAPHORE_INTEROP_SUPPORTED
+  {"cudaDevAttrTimelineSemaphoreInteropSupported",                     {"hipDevAttrTimelineSemaphoreInteropSupported",              "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 114
   // CU_DEVICE_ATTRIBUTE_MEMORY_POOLS_SUPPORTED
   {"cudaDevAttrMemoryPoolsSupported",                                  {"hipDeviceAttributeMemoryPoolsSupported",                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 115
   // CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_SUPPORTED
@@ -2096,7 +2124,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_TYPE_NAME_VER_MAP 
   {"cudaErrorSoftwareValidityNotEstablished",                          {CUDA_112, CUDA_0,   CUDA_0  }},
   {"cudaErrorJitCompilationDisabled",                                  {CUDA_112, CUDA_0,   CUDA_0  }},
   {"cudaChannelFormatKindNV12",                                        {CUDA_112, CUDA_0,   CUDA_0  }},
-  {"cudaDevAttrMaxTimelineSemaphoreInteropSupported",                  {CUDA_112, CUDA_0,   CUDA_0  }},
+  {"cudaDevAttrMaxTimelineSemaphoreInteropSupported",                  {CUDA_112, CUDA_115, CUDA_0  }},
   {"cudaDevAttrMemoryPoolsSupported",                                  {CUDA_112, CUDA_0,   CUDA_0  }},
   {"cudaMemPoolAttr",                                                  {CUDA_112, CUDA_0,   CUDA_0  }},
   {"cudaMemPoolReuseFollowEventDependencies",                          {CUDA_112, CUDA_0,   CUDA_0  }},
@@ -2195,6 +2223,33 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_TYPE_NAME_VER_MAP 
   {"cudaGraphNodeTypeMemFree",                                         {CUDA_114, CUDA_0,   CUDA_0  }},
   {"cudaGraphInstantiateFlags",                                        {CUDA_114, CUDA_0,   CUDA_0  }},
   {"cudaGraphInstantiateFlagAutoFreeOnLaunch",                         {CUDA_114, CUDA_0,   CUDA_0  }},
+  {"cudaChannelFormatKindUnsignedNormalized8X1",                       {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"cudaChannelFormatKindUnsignedNormalized8X2",                       {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"cudaChannelFormatKindUnsignedNormalized8X4",                       {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"cudaChannelFormatKindUnsignedNormalized16X1",                      {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"cudaChannelFormatKindUnsignedNormalized16X2",                      {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"cudaChannelFormatKindUnsignedNormalized16X4",                      {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"cudaChannelFormatKindSignedNormalized8X1",                         {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"cudaChannelFormatKindSignedNormalized8X2",                         {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"cudaChannelFormatKindSignedNormalized8X4",                         {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"cudaChannelFormatKindSignedNormalized16X1",                        {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"cudaChannelFormatKindSignedNormalized16X2",                        {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"cudaChannelFormatKindSignedNormalized16X4",                        {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"cudaChannelFormatKindUnsignedBlockCompressed1",                    {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"cudaChannelFormatKindUnsignedBlockCompressed1SRGB",                {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"cudaChannelFormatKindUnsignedBlockCompressed2",                    {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"cudaChannelFormatKindUnsignedBlockCompressed2SRGB",                {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"cudaChannelFormatKindUnsignedBlockCompressed3",                    {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"cudaChannelFormatKindUnsignedBlockCompressed3SRGB",                {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"cudaChannelFormatKindUnsignedBlockCompressed4",                    {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"cudaChannelFormatKindSignedBlockCompressed4",                      {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"cudaChannelFormatKindUnsignedBlockCompressed5",                    {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"cudaChannelFormatKindSignedBlockCompressed5",                      {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"cudaChannelFormatKindUnsignedBlockCompressed6H",                   {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"cudaChannelFormatKindSignedBlockCompressed6H",                     {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"cudaChannelFormatKindUnsignedBlockCompressed7",                    {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"cudaChannelFormatKindUnsignedBlockCompressed7SRGB",                {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"cudaDevAttrTimelineSemaphoreInteropSupported",                     {CUDA_115, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {
