@@ -357,6 +357,32 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_AD_FORMAT_HALF",                                                {"HIP_AD_FORMAT_HALF",                                       "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x10
   {"CU_AD_FORMAT_FLOAT",                                               {"HIP_AD_FORMAT_FLOAT",                                      "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x20
   {"CU_AD_FORMAT_NV12",                                                {"HIP_AD_FORMAT_NV12",                                       "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0xb0
+  {"CU_AD_FORMAT_UNORM_INT8X1",                                        {"HIP_AD_FORMAT_UNORM_INT8X1",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0xc0
+  {"CU_AD_FORMAT_UNORM_INT8X2",                                        {"HIP_AD_FORMAT_UNORM_INT8X2",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0xc1
+  {"CU_AD_FORMAT_UNORM_INT8X4",                                        {"HIP_AD_FORMAT_UNORM_INT8X4",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0xc2
+  {"CU_AD_FORMAT_UNORM_INT16X1",                                       {"HIP_AD_FORMAT_UNORM_INT16X1",                              "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0xc3
+  {"CU_AD_FORMAT_UNORM_INT16X2",                                       {"HIP_AD_FORMAT_UNORM_INT16X2",                              "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0xc4
+  {"CU_AD_FORMAT_UNORM_INT16X4",                                       {"HIP_AD_FORMAT_UNORM_INT16X4",                              "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0xc5
+  {"CU_AD_FORMAT_SNORM_INT8X1",                                        {"HIP_AD_FORMAT_SNORM_INT8X1",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0xc6
+  {"CU_AD_FORMAT_SNORM_INT8X2",                                        {"HIP_AD_FORMAT_SNORM_INT8X2",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0xc7
+  {"CU_AD_FORMAT_SNORM_INT8X4",                                        {"HIP_AD_FORMAT_SNORM_INT8X4",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0xc8
+  {"CU_AD_FORMAT_SNORM_INT16X1",                                       {"HIP_AD_FORMAT_SNORM_INT16X1",                              "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0xc9
+  {"CU_AD_FORMAT_SNORM_INT16X2",                                       {"HIP_AD_FORMAT_SNORM_INT16X2",                              "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0xca
+  {"CU_AD_FORMAT_SNORM_INT16X4",                                       {"HIP_AD_FORMAT_SNORM_INT16X4",                              "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0xcb
+  {"CU_AD_FORMAT_BC1_UNORM",                                           {"HIP_AD_FORMAT_BC1_UNORM",                                  "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0x91
+  {"CU_AD_FORMAT_BC1_UNORM_SRGB",                                      {"HIP_AD_FORMAT_BC1_UNORM_SRGB",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0x92
+  {"CU_AD_FORMAT_BC2_UNORM",                                           {"HIP_AD_FORMAT_BC2_UNORM",                                  "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0x93
+  {"CU_AD_FORMAT_BC2_UNORM_SRGB",                                      {"HIP_AD_FORMAT_BC2_UNORM_SRGB",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0x94
+  {"CU_AD_FORMAT_BC3_UNORM",                                           {"HIP_AD_FORMAT_BC3_UNORM",                                  "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0x95
+  {"CU_AD_FORMAT_BC3_UNORM_SRGB",                                      {"HIP_AD_FORMAT_BC3_UNORM_SRGB",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0x96
+  {"CU_AD_FORMAT_BC4_UNORM",                                           {"HIP_AD_FORMAT_BC4_UNORM",                                  "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0x97
+  {"CU_AD_FORMAT_BC4_SNORM",                                           {"HIP_AD_FORMAT_BC4_SNORM",                                  "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0x98
+  {"CU_AD_FORMAT_BC5_UNORM",                                           {"HIP_AD_FORMAT_BC5_UNORM",                                  "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0x99
+  {"CU_AD_FORMAT_BC5_SNORM",                                           {"HIP_AD_FORMAT_BC5_SNORM",                                  "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0x9a
+  {"CU_AD_FORMAT_BC6H_UF16",                                           {"HIP_AD_FORMAT_BC6H_UF16",                                  "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0x9b
+  {"CU_AD_FORMAT_BC6H_SF16",                                           {"HIP_AD_FORMAT_BC6H_SF16",                                  "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0x9c
+  {"CU_AD_FORMAT_BC7_UNORM",                                           {"HIP_AD_FORMAT_BC7_UNORM",                                  "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0x9d
+  {"CU_AD_FORMAT_BC7_UNORM_SRGB",                                      {"HIP_AD_FORMAT_BC7_UNORM_SRGB",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0x9e
 
   // cudaComputeMode
   {"CUcomputemode",                                                    {"hipComputeMode",                                           "", CONV_TYPE, API_DRIVER, 1}},
@@ -2684,6 +2710,32 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_TYPE_NAME_VER_MAP {
   {"CUgraphInstantiate_flags_enum",                                    {CUDA_114, CUDA_0,   CUDA_0  }},
   {"CUDA_GRAPH_INSTANTIATE_FLAG_AUTO_FREE_ON_LAUNCH",                  {CUDA_114, CUDA_0,   CUDA_0  }},
   {"CUDA_ERROR_EXTERNAL_DEVICE",                                       {CUDA_114, CUDA_0,   CUDA_0  }},
+  {"CU_AD_FORMAT_UNORM_INT8X1",                                        {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"CU_AD_FORMAT_UNORM_INT8X2",                                        {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"CU_AD_FORMAT_UNORM_INT8X4",                                        {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"CU_AD_FORMAT_UNORM_INT16X1",                                       {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"CU_AD_FORMAT_UNORM_INT16X2",                                       {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"CU_AD_FORMAT_UNORM_INT16X4",                                       {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"CU_AD_FORMAT_SNORM_INT8X1",                                        {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"CU_AD_FORMAT_SNORM_INT8X2",                                        {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"CU_AD_FORMAT_SNORM_INT8X4",                                        {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"CU_AD_FORMAT_SNORM_INT16X1",                                       {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"CU_AD_FORMAT_SNORM_INT16X2",                                       {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"CU_AD_FORMAT_SNORM_INT16X4",                                       {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"CU_AD_FORMAT_BC1_UNORM",                                           {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"CU_AD_FORMAT_BC1_UNORM_SRGB",                                      {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"CU_AD_FORMAT_BC2_UNORM",                                           {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"CU_AD_FORMAT_BC2_UNORM_SRGB",                                      {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"CU_AD_FORMAT_BC3_UNORM",                                           {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"CU_AD_FORMAT_BC3_UNORM_SRGB",                                      {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"CU_AD_FORMAT_BC4_UNORM",                                           {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"CU_AD_FORMAT_BC4_SNORM",                                           {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"CU_AD_FORMAT_BC5_UNORM",                                           {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"CU_AD_FORMAT_BC5_SNORM",                                           {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"CU_AD_FORMAT_BC6H_UF16",                                           {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"CU_AD_FORMAT_BC6H_SF16",                                           {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"CU_AD_FORMAT_BC7_UNORM",                                           {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"CU_AD_FORMAT_BC7_UNORM_SRGB",                                      {CUDA_115, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {
