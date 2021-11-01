@@ -2576,6 +2576,8 @@ sub simpleSubstitutions {
     $ft{'type'} += s/\bCUtexref_st\b/textureReference/g;
     $ft{'type'} += s/\bbsric02Info_t\b/bsric02Info_t/g;
     $ft{'type'} += s/\bbsrilu02Info_t\b/bsrilu02Info_t/g;
+    $ft{'type'} += s/\bbsrsm2Info\b/bsrsm2Info/g;
+    $ft{'type'} += s/\bbsrsm2Info_t\b/bsrsm2Info_t/g;
     $ft{'type'} += s/\bbsrsv2Info_t\b/bsrsv2Info_t/g;
     $ft{'type'} += s/\bcsrgemm2Info_t\b/csrgemm2Info_t/g;
     $ft{'type'} += s/\bcsrilu02Info_t\b/csrilu02Info_t/g;
@@ -2747,6 +2749,7 @@ sub simpleSubstitutions {
     $ft{'type'} += s/\bcurandStatus\b/hiprandStatus_t/g;
     $ft{'type'} += s/\bcurandStatus_t\b/hiprandStatus_t/g;
     $ft{'type'} += s/\bcusparseAction_t\b/hipsparseAction_t/g;
+    $ft{'type'} += s/\bcusparseColorInfo_t\b/hipsparseColorInfo_t/g;
     $ft{'type'} += s/\bcusparseDiagType_t\b/hipsparseDiagType_t/g;
     $ft{'type'} += s/\bcusparseDirection_t\b/hipsparseDirection_t/g;
     $ft{'type'} += s/\bcusparseDnMatDescr\b/hipsparseDnMatDescr/g;
@@ -2771,7 +2774,14 @@ sub simpleSubstitutions {
     $ft{'type'} += s/\bcusparseSpGEMMDescr_t\b/hipsparseSpGEMMDescr_t/g;
     $ft{'type'} += s/\bcusparseSpMMAlg_t\b/hipsparseSpMMAlg_t/g;
     $ft{'type'} += s/\bcusparseSpMVAlg_t\b/hipsparseSpMVAlg_t/g;
+    $ft{'type'} += s/\bcusparseSpMatAttribute_t\b/hipsparseSpMatAttribute_t/g;
     $ft{'type'} += s/\bcusparseSpMatDescr_t\b/hipsparseSpMatDescr_t/g;
+    $ft{'type'} += s/\bcusparseSpSMAlg_t\b/hipsparseSpSMAlg_t/g;
+    $ft{'type'} += s/\bcusparseSpSMDescr\b/hipsparseSpSMDescr/g;
+    $ft{'type'} += s/\bcusparseSpSMDescr_t\b/hipsparseSpSMDescr_t/g;
+    $ft{'type'} += s/\bcusparseSpSVAlg_t\b/hipsparseSpSVAlg_t/g;
+    $ft{'type'} += s/\bcusparseSpSVDescr\b/hipsparseSpSVDescr/g;
+    $ft{'type'} += s/\bcusparseSpSVDescr_t\b/hipsparseSpSVDescr_t/g;
     $ft{'type'} += s/\bcusparseSpVecDescr_t\b/hipsparseSpVecDescr_t/g;
     $ft{'type'} += s/\bcusparseSparseToDenseAlg_t\b/hipsparseSparseToDenseAlg_t/g;
     $ft{'type'} += s/\bcusparseStatus_t\b/hipsparseStatus_t/g;
@@ -3070,6 +3080,7 @@ sub simpleSubstitutions {
     $ft{'numeric_literal'} += s/\bCUSPARSE_DIRECTION_ROW\b/HIPSPARSE_DIRECTION_ROW/g;
     $ft{'numeric_literal'} += s/\bCUSPARSE_FILL_MODE_LOWER\b/HIPSPARSE_FILL_MODE_LOWER/g;
     $ft{'numeric_literal'} += s/\bCUSPARSE_FILL_MODE_UPPER\b/HIPSPARSE_FILL_MODE_UPPER/g;
+    $ft{'numeric_literal'} += s/\bCUSPARSE_FORMAT_BLOCKED_ELL\b/HIPSPARSE_FORMAT_BLOCKED_ELL/g;
     $ft{'numeric_literal'} += s/\bCUSPARSE_FORMAT_COO\b/HIPSPARSE_FORMAT_COO/g;
     $ft{'numeric_literal'} += s/\bCUSPARSE_FORMAT_COO_AOS\b/HIPSPARSE_FORMAT_COO_AOS/g;
     $ft{'numeric_literal'} += s/\bCUSPARSE_FORMAT_CSC\b/HIPSPARSE_FORMAT_CSC/g;
@@ -3100,17 +3111,24 @@ sub simpleSubstitutions {
     $ft{'numeric_literal'} += s/\bCUSPARSE_SOLVE_POLICY_USE_LEVEL\b/HIPSPARSE_SOLVE_POLICY_USE_LEVEL/g;
     $ft{'numeric_literal'} += s/\bCUSPARSE_SPARSETODENSE_ALG_DEFAULT\b/HIPSPARSE_SPARSETODENSE_ALG_DEFAULT/g;
     $ft{'numeric_literal'} += s/\bCUSPARSE_SPGEMM_DEFAULT\b/HIPSPARSE_SPGEMM_DEFAULT/g;
+    $ft{'numeric_literal'} += s/\bCUSPARSE_SPMAT_DIAG_TYPE\b/HIPSPARSE_SPMAT_DIAG_TYPE/g;
+    $ft{'numeric_literal'} += s/\bCUSPARSE_SPMAT_FILL_MODE\b/HIPSPARSE_SPMAT_FILL_MODE/g;
     $ft{'numeric_literal'} += s/\bCUSPARSE_SPMM_ALG_DEFAULT\b/HIPSPARSE_SPMM_ALG_DEFAULT/g;
+    $ft{'numeric_literal'} += s/\bCUSPARSE_SPMM_BLOCKED_ELL_ALG1\b/HIPSPARSE_SPMM_BLOCKED_ELL_ALG1/g;
     $ft{'numeric_literal'} += s/\bCUSPARSE_SPMM_COO_ALG1\b/HIPSPARSE_SPMM_COO_ALG1/g;
     $ft{'numeric_literal'} += s/\bCUSPARSE_SPMM_COO_ALG2\b/HIPSPARSE_SPMM_COO_ALG2/g;
     $ft{'numeric_literal'} += s/\bCUSPARSE_SPMM_COO_ALG3\b/HIPSPARSE_SPMM_COO_ALG3/g;
     $ft{'numeric_literal'} += s/\bCUSPARSE_SPMM_COO_ALG4\b/HIPSPARSE_SPMM_COO_ALG4/g;
     $ft{'numeric_literal'} += s/\bCUSPARSE_SPMM_CSR_ALG1\b/HIPSPARSE_SPMM_CSR_ALG1/g;
     $ft{'numeric_literal'} += s/\bCUSPARSE_SPMM_CSR_ALG2\b/HIPSPARSE_SPMM_CSR_ALG2/g;
-    $ft{'numeric_literal'} += s/\bCUSPARSE_SPMV_ALG_DEFAULT\b/HIPSPARSE_MV_ALG_DEFAULT/g;
-    $ft{'numeric_literal'} += s/\bCUSPARSE_SPMV_COO_ALG1\b/HIPSPARSE_COOMV_ALG/g;
-    $ft{'numeric_literal'} += s/\bCUSPARSE_SPMV_CSR_ALG1\b/HIPSPARSE_CSRMV_ALG1/g;
-    $ft{'numeric_literal'} += s/\bCUSPARSE_SPMV_CSR_ALG2\b/HIPSPARSE_CSRMV_ALG2/g;
+    $ft{'numeric_literal'} += s/\bCUSPARSE_SPMM_CSR_ALG3\b/HIPSPARSE_SPMM_CSR_ALG3/g;
+    $ft{'numeric_literal'} += s/\bCUSPARSE_SPMV_ALG_DEFAULT\b/HIPSPARSE_SPMV_ALG_DEFAULT/g;
+    $ft{'numeric_literal'} += s/\bCUSPARSE_SPMV_COO_ALG1\b/HIPSPARSE_SPMV_COO_ALG1/g;
+    $ft{'numeric_literal'} += s/\bCUSPARSE_SPMV_COO_ALG2\b/HIPSPARSE_SPMV_COO_ALG2/g;
+    $ft{'numeric_literal'} += s/\bCUSPARSE_SPMV_CSR_ALG1\b/HIPSPARSE_SPMV_CSR_ALG1/g;
+    $ft{'numeric_literal'} += s/\bCUSPARSE_SPMV_CSR_ALG2\b/HIPSPARSE_SPMV_CSR_ALG2/g;
+    $ft{'numeric_literal'} += s/\bCUSPARSE_SPSM_ALG_DEFAULT\b/HIPSPARSE_SPSM_ALG_DEFAULT/g;
+    $ft{'numeric_literal'} += s/\bCUSPARSE_SPSV_ALG_DEFAULT\b/HIPSPARSE_SPSV_ALG_DEFAULT/g;
     $ft{'numeric_literal'} += s/\bCUSPARSE_STATUS_ALLOC_FAILED\b/HIPSPARSE_STATUS_ALLOC_FAILED/g;
     $ft{'numeric_literal'} += s/\bCUSPARSE_STATUS_ARCH_MISMATCH\b/HIPSPARSE_STATUS_ARCH_MISMATCH/g;
     $ft{'numeric_literal'} += s/\bCUSPARSE_STATUS_EXECUTION_FAILED\b/HIPSPARSE_STATUS_EXECUTION_FAILED/g;
@@ -4617,17 +4635,11 @@ sub warnUnsupportedFunctions {
         "cusparseSpSV_createDescr",
         "cusparseSpSV_bufferSize",
         "cusparseSpSV_analysis",
-        "cusparseSpSVDescr_t",
-        "cusparseSpSVDescr",
-        "cusparseSpSVAlg_t",
         "cusparseSpSM_solve",
         "cusparseSpSM_destroyDescr",
         "cusparseSpSM_createDescr",
         "cusparseSpSM_bufferSize",
         "cusparseSpSM_analysis",
-        "cusparseSpSMDescr_t",
-        "cusparseSpSMDescr",
-        "cusparseSpSMAlg_t",
         "cusparseSpMatSetStridedBatch",
         "cusparseSpMatSetNumBatches",
         "cusparseSpMatSetAttribute",
@@ -4635,7 +4647,6 @@ sub warnUnsupportedFunctions {
         "cusparseSpMatGetNumBatches",
         "cusparseSpMatGetAttribute",
         "cusparseSpMatDescr",
-        "cusparseSpMatAttribute_t",
         "cusparseSpGEMMreuse_workEstimation",
         "cusparseSpGEMMreuse_nnz",
         "cusparseSpGEMMreuse_copy",
@@ -4746,7 +4757,6 @@ sub warnUnsupportedFunctions {
         "cusparseContext",
         "cusparseConstrainedGeMM_bufferSize",
         "cusparseConstrainedGeMM",
-        "cusparseColorInfo_t",
         "cusparseColorInfo",
         "cusparseChybsv_solve",
         "cusparseChybsv_analysis",
@@ -5966,8 +5976,6 @@ sub warnUnsupportedFunctions {
         "csrilu02Info",
         "csrgemm2Info",
         "bsrsv2Info",
-        "bsrsm2Info_t",
-        "bsrsm2Info",
         "bsrilu02Info",
         "bsric02Info",
         "PATCH_LEVEL",
@@ -6483,18 +6491,13 @@ sub warnUnsupportedFunctions {
         "CUSPARSE_VER_MAJOR",
         "CUSPARSE_VER_BUILD",
         "CUSPARSE_VERSION",
-        "CUSPARSE_SPSV_ALG_DEFAULT",
-        "CUSPARSE_SPSM_ALG_DEFAULT",
         "CUSPARSE_SPMMA_PREPROCESS",
         "CUSPARSE_SPMMA_ALG4",
         "CUSPARSE_SPMMA_ALG3",
         "CUSPARSE_SPMMA_ALG2",
         "CUSPARSE_SPMMA_ALG1",
-        "CUSPARSE_SPMAT_FILL_MODE",
-        "CUSPARSE_SPMAT_DIAG_TYPE",
         "CUSPARSE_SPGEMM_CSR_ALG_NONDETERMINITIC",
         "CUSPARSE_SPGEMM_CSR_ALG_DETERMINITIC",
-        "CUSPARSE_FORMAT_BLOCKED_ELL",
         "CUSPARSE_DENSETOSPARSE_ALG_DEFAULT",
         "CUSPARSE_CSR2CSC_ALG2",
         "CUSPARSE_CSR2CSC_ALG1",

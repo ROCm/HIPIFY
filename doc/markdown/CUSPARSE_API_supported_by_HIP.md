@@ -26,7 +26,7 @@
 |`CUSPARSE_DIRECTION_ROW`| | | |`HIPSPARSE_DIRECTION_ROW`|3.2.0| | | |
 |`CUSPARSE_FILL_MODE_LOWER`| | | |`HIPSPARSE_FILL_MODE_LOWER`|1.9.2| | | |
 |`CUSPARSE_FILL_MODE_UPPER`| | | |`HIPSPARSE_FILL_MODE_UPPER`|1.9.2| | | |
-|`CUSPARSE_FORMAT_BLOCKED_ELL`|11.2| | | | | | | |
+|`CUSPARSE_FORMAT_BLOCKED_ELL`|11.2| | |`HIPSPARSE_FORMAT_BLOCKED_ELL`|4.5.0| | | |
 |`CUSPARSE_FORMAT_COO`|10.1| | |`HIPSPARSE_FORMAT_COO`|4.1.0| | | |
 |`CUSPARSE_FORMAT_COO_AOS`|10.2| | |`HIPSPARSE_FORMAT_COO_AOS`|4.1.0| | | |
 |`CUSPARSE_FORMAT_CSC`|10.1| | |`HIPSPARSE_FORMAT_CSC`|4.1.0| | | |
@@ -59,26 +59,29 @@
 |`CUSPARSE_SPGEMM_CSR_ALG_DETERMINITIC`|11.3| | | | | | | |
 |`CUSPARSE_SPGEMM_CSR_ALG_NONDETERMINITIC`|11.3| | | | | | | |
 |`CUSPARSE_SPGEMM_DEFAULT`|11.0| | |`HIPSPARSE_SPGEMM_DEFAULT`|4.1.0| | | |
-|`CUSPARSE_SPMAT_DIAG_TYPE`|11.3| | | | | | | |
-|`CUSPARSE_SPMAT_FILL_MODE`|11.3| | | | | | | |
+|`CUSPARSE_SPMAT_DIAG_TYPE`|11.3| | |`HIPSPARSE_SPMAT_DIAG_TYPE`|4.5.0| | | |
+|`CUSPARSE_SPMAT_FILL_MODE`|11.3| | |`HIPSPARSE_SPMAT_FILL_MODE`|4.5.0| | | |
 |`CUSPARSE_SPMMA_ALG1`|11.1| |11.2| | | | | |
 |`CUSPARSE_SPMMA_ALG2`|11.1| |11.2| | | | | |
 |`CUSPARSE_SPMMA_ALG3`|11.1| |11.2| | | | | |
 |`CUSPARSE_SPMMA_ALG4`|11.1| |11.2| | | | | |
 |`CUSPARSE_SPMMA_PREPROCESS`|11.1| |11.2| | | | | |
 |`CUSPARSE_SPMM_ALG_DEFAULT`|11.0| | |`HIPSPARSE_SPMM_ALG_DEFAULT`|4.2.0| | | |
+|`CUSPARSE_SPMM_BLOCKED_ELL_ALG1`|11.2| | |`HIPSPARSE_SPMM_BLOCKED_ELL_ALG1`|4.5.0| | | |
 |`CUSPARSE_SPMM_COO_ALG1`|11.0| | |`HIPSPARSE_SPMM_COO_ALG1`|4.2.0| | | |
 |`CUSPARSE_SPMM_COO_ALG2`|11.0| | |`HIPSPARSE_SPMM_COO_ALG2`|4.2.0| | | |
 |`CUSPARSE_SPMM_COO_ALG3`|11.0| | |`HIPSPARSE_SPMM_COO_ALG3`|4.2.0| | | |
 |`CUSPARSE_SPMM_COO_ALG4`|11.0| | |`HIPSPARSE_SPMM_COO_ALG4`|4.2.0| | | |
 |`CUSPARSE_SPMM_CSR_ALG1`|11.0| | |`HIPSPARSE_SPMM_CSR_ALG1`|4.2.0| | | |
 |`CUSPARSE_SPMM_CSR_ALG2`|11.0| | |`HIPSPARSE_SPMM_CSR_ALG2`|4.2.0| | | |
-|`CUSPARSE_SPMV_ALG_DEFAULT`| | | |`HIPSPARSE_MV_ALG_DEFAULT`|4.1.0| | | |
-|`CUSPARSE_SPMV_COO_ALG1`|11.2| | |`HIPSPARSE_COOMV_ALG`|4.1.0| | | |
-|`CUSPARSE_SPMV_CSR_ALG1`|11.2| | |`HIPSPARSE_CSRMV_ALG1`|4.1.0| | | |
-|`CUSPARSE_SPMV_CSR_ALG2`|11.2| | |`HIPSPARSE_CSRMV_ALG2`|4.1.0| | | |
-|`CUSPARSE_SPSM_ALG_DEFAULT`|11.3| | | | | | | |
-|`CUSPARSE_SPSV_ALG_DEFAULT`|11.3| | | | | | | |
+|`CUSPARSE_SPMM_CSR_ALG3`|11.2| | |`HIPSPARSE_SPMM_CSR_ALG3`|4.5.0| | | |
+|`CUSPARSE_SPMV_ALG_DEFAULT`| | | |`HIPSPARSE_SPMV_ALG_DEFAULT`|4.5.0| | | |
+|`CUSPARSE_SPMV_COO_ALG1`|11.2| | |`HIPSPARSE_SPMV_COO_ALG1`|4.5.0| | | |
+|`CUSPARSE_SPMV_COO_ALG2`|11.2| | |`HIPSPARSE_SPMV_COO_ALG2`|4.5.0| | | |
+|`CUSPARSE_SPMV_CSR_ALG1`|11.2| | |`HIPSPARSE_SPMV_CSR_ALG1`|4.5.0| | | |
+|`CUSPARSE_SPMV_CSR_ALG2`|11.2| | |`HIPSPARSE_SPMV_CSR_ALG2`|4.5.0| | | |
+|`CUSPARSE_SPSM_ALG_DEFAULT`|11.3| | |`HIPSPARSE_SPSM_ALG_DEFAULT`|4.5.0| | | |
+|`CUSPARSE_SPSV_ALG_DEFAULT`|11.3| | |`HIPSPARSE_SPSV_ALG_DEFAULT`|4.5.0| | | |
 |`CUSPARSE_STATUS_ALLOC_FAILED`| | | |`HIPSPARSE_STATUS_ALLOC_FAILED`|1.9.2| | | |
 |`CUSPARSE_STATUS_ARCH_MISMATCH`| | | |`HIPSPARSE_STATUS_ARCH_MISMATCH`|1.9.2| | | |
 |`CUSPARSE_STATUS_EXECUTION_FAILED`| | | |`HIPSPARSE_STATUS_EXECUTION_FAILED`|1.9.2| | | |
@@ -100,8 +103,8 @@
 |`bsric02Info_t`| | | |`bsric02Info_t`|3.8.0| | | |
 |`bsrilu02Info`| | | | | | | | |
 |`bsrilu02Info_t`| | | |`bsrilu02Info_t`|3.9.0| | | |
-|`bsrsm2Info`| | | | | | | | |
-|`bsrsm2Info_t`| | | | | | | | |
+|`bsrsm2Info`| | | |`bsrsm2Info`|4.5.0| | | |
+|`bsrsm2Info_t`| | | |`bsrsm2Info_t`|4.5.0| | | |
 |`bsrsv2Info`| | | | | | | | |
 |`bsrsv2Info_t`| | | |`bsrsv2Info_t`|3.6.0| | | |
 |`csrgemm2Info`| | | | | | | | |
@@ -117,7 +120,7 @@
 |`cusparseAction_t`| | | |`hipsparseAction_t`|1.9.2| | | |
 |`cusparseAlgMode_t`|8.0| | | | | | | |
 |`cusparseColorInfo`| | | | | | | | |
-|`cusparseColorInfo_t`| | | | | | | | |
+|`cusparseColorInfo_t`| | | |`hipsparseColorInfo_t`|4.5.0| | | |
 |`cusparseContext`| | | | | | | | |
 |`cusparseCsr2CscAlg_t`|10.1| | | | | | | |
 |`cusparseDenseToSparseAlg_t`|11.1| | | | | | | |
@@ -150,15 +153,15 @@
 |`cusparseSpGEMMDescr_t`|11.0| | |`hipsparseSpGEMMDescr_t`|4.1.0| | | |
 |`cusparseSpMMAlg_t`|10.1| | |`hipsparseSpMMAlg_t`|4.2.0| | | |
 |`cusparseSpMVAlg_t`|10.2| | |`hipsparseSpMVAlg_t`|4.1.0| | | |
-|`cusparseSpMatAttribute_t`|11.3| | | | | | | |
+|`cusparseSpMatAttribute_t`|11.3| | |`hipsparseSpMatAttribute_t`|4.5.0| | | |
 |`cusparseSpMatDescr`|10.1| | | | | | | |
 |`cusparseSpMatDescr_t`|10.1| | |`hipsparseSpMatDescr_t`|4.1.0| | | |
-|`cusparseSpSMAlg_t`|11.3| | | | | | | |
-|`cusparseSpSMDescr`|11.3| | | | | | | |
-|`cusparseSpSMDescr_t`|11.3| | | | | | | |
-|`cusparseSpSVAlg_t`|11.3| | | | | | | |
-|`cusparseSpSVDescr`|11.3| | | | | | | |
-|`cusparseSpSVDescr_t`|11.3| | | | | | | |
+|`cusparseSpSMAlg_t`|11.3| | |`hipsparseSpSMAlg_t`|4.5.0| | | |
+|`cusparseSpSMDescr`|11.3| | |`hipsparseSpSMDescr`|4.5.0| | | |
+|`cusparseSpSMDescr_t`|11.3| | |`hipsparseSpSMDescr_t`|4.5.0| | | |
+|`cusparseSpSVAlg_t`|11.3| | |`hipsparseSpSVAlg_t`|4.5.0| | | |
+|`cusparseSpSVDescr`|11.3| | |`hipsparseSpSVDescr`|4.5.0| | | |
+|`cusparseSpSVDescr_t`|11.3| | |`hipsparseSpSVDescr_t`|4.5.0| | | |
 |`cusparseSpVecDescr`|10.2| | | | | | | |
 |`cusparseSpVecDescr_t`|10.2| | |`hipsparseSpVecDescr_t`|4.1.0| | | |
 |`cusparseSparseToDenseAlg_t`|11.1| | |`hipsparseSparseToDenseAlg_t`|4.2.0| | | |
