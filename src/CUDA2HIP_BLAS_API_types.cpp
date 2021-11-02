@@ -44,14 +44,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP {
   {"cublasStatus_t",                 {"hipblasStatus_t",                 "rocblas_status",                        CONV_TYPE, API_BLAS, 2}},
   {"CUBLAS_STATUS_SUCCESS",          {"HIPBLAS_STATUS_SUCCESS",          "rocblas_status_success",                CONV_NUMERIC_LITERAL, API_BLAS, 2}},
   {"CUBLAS_STATUS_NOT_INITIALIZED",  {"HIPBLAS_STATUS_NOT_INITIALIZED",  "rocblas_status_invalid_handle",         CONV_NUMERIC_LITERAL, API_BLAS, 2}},
-  {"CUBLAS_STATUS_ALLOC_FAILED",     {"HIPBLAS_STATUS_ALLOC_FAILED",     "rocblas_status_memory_error",           CONV_NUMERIC_LITERAL, API_BLAS, 2}},
+  {"CUBLAS_STATUS_ALLOC_FAILED",     {"HIPBLAS_STATUS_ALLOC_FAILED",     "rocblas_status_not_implemented",        CONV_NUMERIC_LITERAL, API_BLAS, 2}},
   {"CUBLAS_STATUS_INVALID_VALUE",    {"HIPBLAS_STATUS_INVALID_VALUE",    "rocblas_status_invalid_pointer",        CONV_NUMERIC_LITERAL, API_BLAS, 2}},
-  {"CUBLAS_STATUS_MAPPING_ERROR",    {"HIPBLAS_STATUS_MAPPING_ERROR",    "rocblas_status_internal_error",         CONV_NUMERIC_LITERAL, API_BLAS, 2}},
-  {"CUBLAS_STATUS_EXECUTION_FAILED", {"HIPBLAS_STATUS_EXECUTION_FAILED", "rocblas_status_internal_error",         CONV_NUMERIC_LITERAL, API_BLAS, 2}},
+  {"CUBLAS_STATUS_MAPPING_ERROR",    {"HIPBLAS_STATUS_MAPPING_ERROR",    "rocblas_status_invalid_size",           CONV_NUMERIC_LITERAL, API_BLAS, 2}},
+  {"CUBLAS_STATUS_EXECUTION_FAILED", {"HIPBLAS_STATUS_EXECUTION_FAILED", "rocblas_status_memory_error",           CONV_NUMERIC_LITERAL, API_BLAS, 2}},
   {"CUBLAS_STATUS_INTERNAL_ERROR",   {"HIPBLAS_STATUS_INTERNAL_ERROR",   "rocblas_status_internal_error",         CONV_NUMERIC_LITERAL, API_BLAS, 2}},
-  {"CUBLAS_STATUS_NOT_SUPPORTED",    {"HIPBLAS_STATUS_NOT_SUPPORTED",    "rocblas_status_not_implemented",        CONV_NUMERIC_LITERAL, API_BLAS, 2}},
-  {"CUBLAS_STATUS_ARCH_MISMATCH",    {"HIPBLAS_STATUS_ARCH_MISMATCH",    "rocblas_status_not_implemented",        CONV_NUMERIC_LITERAL, API_BLAS, 2}},
-  {"CUBLAS_STATUS_LICENSE_ERROR",    {"HIPBLAS_STATUS_LICENSE_ERROR",    "rocblas_status_not_implemented",        CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}},
+  {"CUBLAS_STATUS_NOT_SUPPORTED",    {"HIPBLAS_STATUS_NOT_SUPPORTED",    "rocblas_status_perf_degraded",          CONV_NUMERIC_LITERAL, API_BLAS, 2}},
+  {"CUBLAS_STATUS_ARCH_MISMATCH",    {"HIPBLAS_STATUS_ARCH_MISMATCH",    "rocblas_status_size_query_mismatch",    CONV_NUMERIC_LITERAL, API_BLAS, 2}},
+  {"CUBLAS_STATUS_LICENSE_ERROR",    {"HIPBLAS_STATUS_UNKNOWN",          "rocblas_status_not_implemented",        CONV_NUMERIC_LITERAL, API_BLAS, 2, ROC_UNSUPPORTED}},
 
   // Blas Fill Modes
   {"cublasFillMode_t",               {"hipblasFillMode_t",               "rocblas_fill",                          CONV_TYPE, API_BLAS, 2}},
@@ -154,6 +154,20 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP {
   {"CUDA_C_32I",                     {"HIPBLAS_C_32I",                   "rocblas_datatype_i32_c",                CONV_NUMERIC_LITERAL, API_RUNTIME, 3}}, // 11 // 166
   {"CUDA_R_32U",                     {"HIPBLAS_R_32U",                   "rocblas_datatype_u32_r",                CONV_NUMERIC_LITERAL, API_RUNTIME, 3}}, // 12 // 163
   {"CUDA_C_32U",                     {"HIPBLAS_C_32U",                   "rocblas_datatype_u32_c",                CONV_NUMERIC_LITERAL, API_RUNTIME, 3}}, // 13 // 167
+  {"CUDA_R_16BF",                    {"HIPBLAS_R_16B",                   "rocblas_datatype_bf16_r",               CONV_NUMERIC_LITERAL, API_RUNTIME, 3}}, // 14 // 168
+  {"CUDA_C_16BF",                    {"HIPBLAS_C_16B",                   "rocblas_datatype_bf16_c",               CONV_NUMERIC_LITERAL, API_RUNTIME, 3}}, // 15 // 169
+  {"CUDA_R_4I",                      {"HIPBLAS_R_4I",                    "",                                      CONV_NUMERIC_LITERAL, API_RUNTIME, 3, UNSUPPORTED}}, // 16
+  {"CUDA_C_4I",                      {"HIPBLAS_C_4I",                    "",                                      CONV_NUMERIC_LITERAL, API_RUNTIME, 3, UNSUPPORTED}}, // 17
+  {"CUDA_R_4U",                      {"HIPBLAS_R_4U",                    "",                                      CONV_NUMERIC_LITERAL, API_RUNTIME, 3, UNSUPPORTED}}, // 18
+  {"CUDA_C_4U",                      {"HIPBLAS_C_4U",                    "",                                      CONV_NUMERIC_LITERAL, API_RUNTIME, 3, UNSUPPORTED}}, // 19
+  {"CUDA_R_16I",                     {"HIPBLAS_R_16I",                   "",                                      CONV_NUMERIC_LITERAL, API_RUNTIME, 3, UNSUPPORTED}}, // 20
+  {"CUDA_C_16I",                     {"HIPBLAS_C_16I",                   "",                                      CONV_NUMERIC_LITERAL, API_RUNTIME, 3, UNSUPPORTED}}, // 21
+  {"CUDA_R_16U",                     {"HIPBLAS_R_16U",                   "",                                      CONV_NUMERIC_LITERAL, API_RUNTIME, 3, UNSUPPORTED}}, // 22
+  {"CUDA_C_16U",                     {"HIPBLAS_C_16U",                   "",                                      CONV_NUMERIC_LITERAL, API_RUNTIME, 3, UNSUPPORTED}}, // 23
+  {"CUDA_R_64I",                     {"HIPBLAS_R_64I",                   "",                                      CONV_NUMERIC_LITERAL, API_RUNTIME, 3, UNSUPPORTED}}, // 24
+  {"CUDA_C_64I",                     {"HIPBLAS_C_64I",                   "",                                      CONV_NUMERIC_LITERAL, API_RUNTIME, 3, UNSUPPORTED}}, // 25
+  {"CUDA_R_64U",                     {"HIPBLAS_R_64U",                   "",                                      CONV_NUMERIC_LITERAL, API_RUNTIME, 3, UNSUPPORTED}}, // 26
+  {"CUDA_C_64U",                     {"HIPBLAS_C_64U",                   "",                                      CONV_NUMERIC_LITERAL, API_RUNTIME, 3, UNSUPPORTED}}, // 27
 
   {"cublasHandle_t",                 {"hipblasHandle_t",                 "rocblas_handle",                        CONV_TYPE, API_BLAS, 2}},
   // TODO: dereferencing: typedef struct cublasContext *cublasHandle_t;
@@ -262,6 +276,18 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_TYPE_NAME_VER_MAP {
   {"CUBLAS_COMPUTE_64F_PEDANTIC",                      {CUDA_110, CUDA_0, CUDA_0}},
   {"CUBLAS_COMPUTE_32I",                               {CUDA_110, CUDA_0, CUDA_0}},
   {"CUBLAS_COMPUTE_32I_PEDANTIC",                      {CUDA_110, CUDA_0, CUDA_0}},
+  {"CUDA_R_4I",                                        {CUDA_110, CUDA_0, CUDA_0}},
+  {"CUDA_C_4I",                                        {CUDA_110, CUDA_0, CUDA_0}},
+  {"CUDA_R_4U",                                        {CUDA_110, CUDA_0, CUDA_0}},
+  {"CUDA_C_4U",                                        {CUDA_110, CUDA_0, CUDA_0}},
+  {"CUDA_R_16I",                                       {CUDA_110, CUDA_0, CUDA_0}},
+  {"CUDA_C_16I",                                       {CUDA_110, CUDA_0, CUDA_0}},
+  {"CUDA_R_16U",                                       {CUDA_110, CUDA_0, CUDA_0}},
+  {"CUDA_C_16U",                                       {CUDA_110, CUDA_0, CUDA_0}},
+  {"CUDA_R_64I",                                       {CUDA_110, CUDA_0, CUDA_0}},
+  {"CUDA_C_64I",                                       {CUDA_110, CUDA_0, CUDA_0}},
+  {"CUDA_R_64U",                                       {CUDA_110, CUDA_0, CUDA_0}},
+  {"CUDA_C_64U",                                       {CUDA_110, CUDA_0, CUDA_0}},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_TYPE_NAME_VER_MAP {
@@ -312,5 +338,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_TYPE_NAME_VER_MAP {
   {"HIPBLAS_C_32I",                                    {HIP_3000, HIP_0,    HIP_0   }},
   {"HIPBLAS_R_32U",                                    {HIP_3000, HIP_0,    HIP_0   }},
   {"HIPBLAS_C_32U",                                    {HIP_3000, HIP_0,    HIP_0   }},
+  {"HIPBLAS_R_16B",                                    {HIP_3000, HIP_0,    HIP_0   }},
+  {"HIPBLAS_C_16B",                                    {HIP_3000, HIP_0,    HIP_0   }},
   {"hipblasHandle_t",                                  {HIP_3000, HIP_0,    HIP_0   }},
 };

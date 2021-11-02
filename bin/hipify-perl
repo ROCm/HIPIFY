@@ -2858,10 +2858,12 @@ sub simpleSubstitutions {
     $ft{'numeric_literal'} += s/\bCUBLAS_STATUS_EXECUTION_FAILED\b/HIPBLAS_STATUS_EXECUTION_FAILED/g;
     $ft{'numeric_literal'} += s/\bCUBLAS_STATUS_INTERNAL_ERROR\b/HIPBLAS_STATUS_INTERNAL_ERROR/g;
     $ft{'numeric_literal'} += s/\bCUBLAS_STATUS_INVALID_VALUE\b/HIPBLAS_STATUS_INVALID_VALUE/g;
+    $ft{'numeric_literal'} += s/\bCUBLAS_STATUS_LICENSE_ERROR\b/HIPBLAS_STATUS_UNKNOWN/g;
     $ft{'numeric_literal'} += s/\bCUBLAS_STATUS_MAPPING_ERROR\b/HIPBLAS_STATUS_MAPPING_ERROR/g;
     $ft{'numeric_literal'} += s/\bCUBLAS_STATUS_NOT_INITIALIZED\b/HIPBLAS_STATUS_NOT_INITIALIZED/g;
     $ft{'numeric_literal'} += s/\bCUBLAS_STATUS_NOT_SUPPORTED\b/HIPBLAS_STATUS_NOT_SUPPORTED/g;
     $ft{'numeric_literal'} += s/\bCUBLAS_STATUS_SUCCESS\b/HIPBLAS_STATUS_SUCCESS/g;
+    $ft{'numeric_literal'} += s/\bCUDA_C_16BF\b/HIPBLAS_C_16B/g;
     $ft{'numeric_literal'} += s/\bCUDA_C_16F\b/HIPBLAS_C_16F/g;
     $ft{'numeric_literal'} += s/\bCUDA_C_32F\b/HIPBLAS_C_32F/g;
     $ft{'numeric_literal'} += s/\bCUDA_C_32I\b/HIPBLAS_C_32I/g;
@@ -2928,6 +2930,7 @@ sub simpleSubstitutions {
     $ft{'numeric_literal'} += s/\bCUDA_ERROR_UNKNOWN\b/hipErrorUnknown/g;
     $ft{'numeric_literal'} += s/\bCUDA_ERROR_UNMAP_FAILED\b/hipErrorUnmapFailed/g;
     $ft{'numeric_literal'} += s/\bCUDA_ERROR_UNSUPPORTED_LIMIT\b/hipErrorUnsupportedLimit/g;
+    $ft{'numeric_literal'} += s/\bCUDA_R_16BF\b/HIPBLAS_R_16B/g;
     $ft{'numeric_literal'} += s/\bCUDA_R_16F\b/HIPBLAS_R_16F/g;
     $ft{'numeric_literal'} += s/\bCUDA_R_32F\b/HIPBLAS_R_32F/g;
     $ft{'numeric_literal'} += s/\bCUDA_R_32I\b/HIPBLAS_R_32I/g;
@@ -6977,6 +6980,12 @@ sub warnUnsupportedFunctions {
         "CUDNN_ADV_INFER_PATCH",
         "CUDNN_ADV_INFER_MINOR",
         "CUDNN_ADV_INFER_MAJOR",
+        "CUDA_R_64U",
+        "CUDA_R_64I",
+        "CUDA_R_4U",
+        "CUDA_R_4I",
+        "CUDA_R_16U",
+        "CUDA_R_16I",
         "CUDA_POINTER_ATTRIBUTE_P2P_TOKENS_v1",
         "CUDA_POINTER_ATTRIBUTE_P2P_TOKENS_st",
         "CUDA_POINTER_ATTRIBUTE_P2P_TOKENS",
@@ -7033,6 +7042,12 @@ sub warnUnsupportedFunctions {
         "CUDA_ERROR_DEVICE_NOT_LICENSED",
         "CUDA_ERROR_COMPAT_NOT_SUPPORTED_ON_DEVICE",
         "CUDA_EGL_MAX_PLANES",
+        "CUDA_C_64U",
+        "CUDA_C_64I",
+        "CUDA_C_4U",
+        "CUDA_C_4I",
+        "CUDA_C_16U",
+        "CUDA_C_16I",
         "CUDA_CB",
         "CUDA_ARRAY_SPARSE_PROPERTIES_v1",
         "CUDA_ARRAY_SPARSE_PROPERTIES_st",
@@ -7048,7 +7063,6 @@ sub warnUnsupportedFunctions {
         "CUBLAS_VERSION",
         "CUBLAS_TF32_TENSOR_OP_MATH",
         "CUBLAS_TENSOR_OP_MATH",
-        "CUBLAS_STATUS_LICENSE_ERROR",
         "CUBLAS_PEDANTIC_MATH",
         "CUBLAS_OP_CONJG",
         "CUBLAS_MATH_DISALLOW_REDUCED_PRECISION_REDUCTION",
