@@ -83,7 +83,7 @@
 |`CUBLAS_STATUS_EXECUTION_FAILED`| | | |`HIPBLAS_STATUS_EXECUTION_FAILED`|1.8.2| | | |
 |`CUBLAS_STATUS_INTERNAL_ERROR`| | | |`HIPBLAS_STATUS_INTERNAL_ERROR`|1.8.2| | | |
 |`CUBLAS_STATUS_INVALID_VALUE`| | | |`HIPBLAS_STATUS_INVALID_VALUE`|1.8.2| | | |
-|`CUBLAS_STATUS_LICENSE_ERROR`| | | | | | | | |
+|`CUBLAS_STATUS_LICENSE_ERROR`| | | |`HIPBLAS_STATUS_UNKNOWN`| | | | |
 |`CUBLAS_STATUS_MAPPING_ERROR`| | | |`HIPBLAS_STATUS_MAPPING_ERROR`|1.8.2| | | |
 |`CUBLAS_STATUS_NOT_INITIALIZED`| | | |`HIPBLAS_STATUS_NOT_INITIALIZED`|1.8.2| | | |
 |`CUBLAS_STATUS_NOT_SUPPORTED`| | | |`HIPBLAS_STATUS_NOT_SUPPORTED`|1.8.2| | | |
@@ -114,18 +114,32 @@
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
+|`CUDA_C_16BF`| | | |`HIPBLAS_C_16B`|3.0.0| | | |
 |`CUDA_C_16F`|8.0| | |`HIPBLAS_C_16F`|1.8.2| | | |
+|`CUDA_C_16I`|11.0| | | | | | | |
+|`CUDA_C_16U`|11.0| | | | | | | |
 |`CUDA_C_32F`|8.0| | |`HIPBLAS_C_32F`|1.8.2| | | |
 |`CUDA_C_32I`|8.0| | |`HIPBLAS_C_32I`|3.0.0| | | |
 |`CUDA_C_32U`|8.0| | |`HIPBLAS_C_32U`|3.0.0| | | |
+|`CUDA_C_4I`|11.0| | | | | | | |
+|`CUDA_C_4U`|11.0| | | | | | | |
 |`CUDA_C_64F`|8.0| | |`HIPBLAS_C_64F`|1.8.2| | | |
+|`CUDA_C_64I`|11.0| | | | | | | |
+|`CUDA_C_64U`|11.0| | | | | | | |
 |`CUDA_C_8I`|8.0| | |`HIPBLAS_C_8I`|3.0.0| | | |
 |`CUDA_C_8U`|8.0| | |`HIPBLAS_C_8U`|3.0.0| | | |
+|`CUDA_R_16BF`| | | |`HIPBLAS_R_16B`|3.0.0| | | |
 |`CUDA_R_16F`|8.0| | |`HIPBLAS_R_16F`|1.8.2| | | |
+|`CUDA_R_16I`|11.0| | | | | | | |
+|`CUDA_R_16U`|11.0| | | | | | | |
 |`CUDA_R_32F`|8.0| | |`HIPBLAS_R_32F`|1.8.2| | | |
 |`CUDA_R_32I`|8.0| | |`HIPBLAS_R_32I`|3.0.0| | | |
 |`CUDA_R_32U`|8.0| | |`HIPBLAS_R_32U`|3.0.0| | | |
+|`CUDA_R_4I`|11.0| | | | | | | |
+|`CUDA_R_4U`|11.0| | | | | | | |
 |`CUDA_R_64F`|8.0| | |`HIPBLAS_R_64F`|1.8.2| | | |
+|`CUDA_R_64I`|11.0| | | | | | | |
+|`CUDA_R_64U`|11.0| | | | | | | |
 |`CUDA_R_8I`|8.0| | |`HIPBLAS_R_8I`|3.0.0| | | |
 |`CUDA_R_8U`|8.0| | |`HIPBLAS_R_8U`|3.0.0| | | |
 |`cudaDataType`|8.0| | |`hipblasDatatype_t`|1.8.2| | | |
