@@ -13,6 +13,8 @@ int main() {
   size_t bytes_2 = 0;
   void* image = nullptr;
   std::string name = "str";
+  uint32_t u_value = 0;
+  float ms = 0;
   // CHECK: hipDevice_t device;
   // CHECK-NEXT: hipCtx_t context;
   // CHECK-NEXT: hipFuncCache_t func_cache;
@@ -29,6 +31,8 @@ int main() {
   // CHECK-NEXT: HIP_ARRAY_DESCRIPTOR ARRAY_DESCRIPTOR;
   // CHECK-NEXT: hipIpcEventHandle_t ipcEventHandle;
   // CHECK-NEXT: hipEvent_t event_;
+  // CHECK-NEXT: hipEvent_t event_start;
+  // CHECK-NEXT: hipEvent_t event_end;
   // CHECK-NEXT: hipIpcMemHandle_t ipcMemHandle;
   // CHECK-NEXT: hip_Memcpy2D MEMCPY2D;
   // CHECK-NEXT: HIP_MEMCPY3D MEMCPY3D;
@@ -51,6 +55,8 @@ int main() {
   CUDA_ARRAY_DESCRIPTOR ARRAY_DESCRIPTOR;
   CUipcEventHandle ipcEventHandle;
   CUevent event_;
+  CUevent event_start;
+  CUevent event_end;
   CUipcMemHandle ipcMemHandle;
   CUDA_MEMCPY2D MEMCPY2D;
   CUDA_MEMCPY3D MEMCPY3D;
@@ -67,7 +73,21 @@ int main() {
 
 #if CUDA_VERSION > 9020
   // CHECK: hipGraph_t graph;
+  // CHECK-NEXT: hipExternalMemory_t externalMemory;
+  // CHECK-NEXT: hipExternalSemaphore_t externalSemaphore;
+  // CHECK-NEXT: hipExternalMemoryBufferDesc EXTERNAL_MEMORY_BUFFER_DESC;
+  // CHECK-NEXT: hipExternalMemoryHandleDesc EXTERNAL_MEMORY_HANDLE_DESC;
+  // CHECK-NEXT: hipExternalSemaphoreHandleDesc EXTERNAL_SEMAPHORE_HANDLE_DESC;
+  // CHECK-NEXT: hipExternalSemaphoreSignalParams EXTERNAL_SEMAPHORE_SIGNAL_PARAMS;
+  // CHECK-NEXT: hipExternalSemaphoreWaitParams EXTERNAL_SEMAPHORE_WAIT_PARAMS;
   CUgraph graph;
+  CUexternalMemory externalMemory;
+  CUexternalSemaphore externalSemaphore;
+  CUDA_EXTERNAL_MEMORY_BUFFER_DESC EXTERNAL_MEMORY_BUFFER_DESC;
+  CUDA_EXTERNAL_MEMORY_HANDLE_DESC EXTERNAL_MEMORY_HANDLE_DESC;
+  CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC EXTERNAL_SEMAPHORE_HANDLE_DESC;
+  CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS EXTERNAL_SEMAPHORE_SIGNAL_PARAMS;
+  CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS EXTERNAL_SEMAPHORE_WAIT_PARAMS;
 #endif
 
 #if CUDA_VERSION > 10000
@@ -667,5 +687,92 @@ int main() {
   // CHECK: result = hipStreamWaitEvent(stream, event_, flags);
   result = cuStreamWaitEvent(stream, event_, flags);
 
+  // CUDA: CUresult CUDAAPI cuEventCreate(CUevent *phEvent, unsigned int Flags);
+  // HIP: hipError_t hipEventCreateWithFlags(hipEvent_t* event, unsigned flags);
+  // CHECK: result = hipEventCreateWithFlags(&event_, flags);
+  result = cuEventCreate(&event_, flags);
+
+  // CUDA: CUresult CUDAAPI cuEventDestroy(CUevent hEvent);
+  // HIP: hipError_t hipEventDestroy(hipEvent_t event);
+  // CHECK: result = hipEventDestroy(event_);
+  // CHECK-NEXT: result = hipEventDestroy(event_);
+  result = cuEventDestroy(event_);
+  result = cuEventDestroy_v2(event_);
+
+  // CUDA: CUresult CUDAAPI cuEventElapsedTime(float *pMilliseconds, CUevent hStart, CUevent hEnd);
+  // HIP: hipError_t hipEventElapsedTime(float* ms, hipEvent_t start, hipEvent_t stop);
+  // CHECK: result = hipEventElapsedTime(&ms, event_start, event_end);
+  result = cuEventElapsedTime(&ms, event_start, event_end);
+
+  // CUDA: CUresult CUDAAPI cuEventRecord(CUevent hEvent, CUstream hStream);
+  // HIP: hipError_t hipEventRecord(hipEvent_t event, hipStream_t stream);
+  // CHECK: result = hipEventRecord(event_, stream);
+  result = cuEventRecord(event_, stream);
+
+  // CUDA: CUresult CUDAAPI cuEventSynchronize(CUevent hEvent);
+  // HIP: hipError_t hipEventSynchronize(hipEvent_t event);
+  // CHECK: result = hipEventSynchronize(event_);
+  result = cuEventSynchronize(event_);
+
+#if CUDA_VERSION > 9020
+  // CUDA: CUresult CUDAAPI cuDestroyExternalMemory(CUexternalMemory extMem);
+  // HIP: hipError_t hipDestroyExternalMemory(hipExternalMemory_t extMem);
+  // CHECK: result = hipDestroyExternalMemory(externalMemory);
+  result = cuDestroyExternalMemory(externalMemory);
+
+  // CUDA: CUresult CUDAAPI cuDestroyExternalSemaphore(CUexternalSemaphore extSem);
+  // HIP: hipError_t hipDestroyExternalSemaphore(hipExternalSemaphore_t extSem);
+  // CHECK: result = hipDestroyExternalSemaphore(externalSemaphore);
+  result = cuDestroyExternalSemaphore(externalSemaphore);
+
+  // CUDA: CUresult CUDAAPI cuExternalMemoryGetMappedBuffer(CUdeviceptr *devPtr, CUexternalMemory extMem, const CUDA_EXTERNAL_MEMORY_BUFFER_DESC *bufferDesc);
+  // HIP: hipError_t hipExternalMemoryGetMappedBuffer(void **devPtr, hipExternalMemory_t extMem, const hipExternalMemoryBufferDesc *bufferDesc);
+  // CHECK: result = hipExternalMemoryGetMappedBuffer(&deviceptr, externalMemory, &EXTERNAL_MEMORY_BUFFER_DESC);
+  result = cuExternalMemoryGetMappedBuffer(&deviceptr, externalMemory, &EXTERNAL_MEMORY_BUFFER_DESC);
+
+  // CUDA: CUresult CUDAAPI cuImportExternalMemory(CUexternalMemory *extMem_out, const CUDA_EXTERNAL_MEMORY_HANDLE_DESC *memHandleDesc);
+  // HIP: hipError_t hipImportExternalMemory(hipExternalMemory_t* extMem_out, const hipExternalMemoryHandleDesc* memHandleDesc);
+  // CHECK: result = hipImportExternalMemory(&externalMemory, &EXTERNAL_MEMORY_HANDLE_DESC);
+  result = cuImportExternalMemory(&externalMemory, &EXTERNAL_MEMORY_HANDLE_DESC);
+
+  // CUDA: CUresult CUDAAPI cuImportExternalSemaphore(CUexternalSemaphore *extSem_out, const CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC *semHandleDesc);
+  // HIP: hipError_t hipImportExternalSemaphore(hipExternalSemaphore_t* extSem_out, const hipExternalSemaphoreHandleDesc* semHandleDesc);
+  // CHECK: result = hipImportExternalSemaphore(&externalSemaphore, &EXTERNAL_SEMAPHORE_HANDLE_DESC);
+  result = cuImportExternalSemaphore(&externalSemaphore, &EXTERNAL_SEMAPHORE_HANDLE_DESC);
+
+  // CUDA: CUresult CUDAAPI cuSignalExternalSemaphoresAsync(const CUexternalSemaphore *extSemArray, const CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS *paramsArray, unsigned int numExtSems, CUstream stream);
+  // HIP: hipError_t hipSignalExternalSemaphoresAsync(const hipExternalSemaphore_t* extSemArray, const hipExternalSemaphoreSignalParams* paramsArray, unsigned int numExtSems, hipStream_t stream);
+  // CHECK: result = hipSignalExternalSemaphoresAsync(&externalSemaphore, &EXTERNAL_SEMAPHORE_SIGNAL_PARAMS, flags, stream);
+  result = cuSignalExternalSemaphoresAsync(&externalSemaphore, &EXTERNAL_SEMAPHORE_SIGNAL_PARAMS, flags, stream);
+
+  // CUDA: CUresult CUDAAPI cuWaitExternalSemaphoresAsync(const CUexternalSemaphore *extSemArray, const CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS *paramsArray, unsigned int numExtSems, CUstream stream);
+  // HIP: hipError_t hipWaitExternalSemaphoresAsync(const hipExternalSemaphore_t* extSemArray, const hipExternalSemaphoreWaitParams* paramsArray, unsigned int numExtSems, hipStream_t stream);
+  // CHECK: result = hipWaitExternalSemaphoresAsync(&externalSemaphore, &EXTERNAL_SEMAPHORE_WAIT_PARAMS, flags, stream);
+  result = cuWaitExternalSemaphoresAsync(&externalSemaphore, &EXTERNAL_SEMAPHORE_WAIT_PARAMS, flags, stream);
+#endif
+
+#if CUDA_VERSION > 7050
+  // CUDA: CUresult CUDAAPI cuStreamWaitValue32(CUstream stream, CUdeviceptr addr, cuuint32_t value, unsigned int flags);
+  // HIP: hipError_t hipStreamWaitValue32(hipStream_t stream, void* ptr, uint32_t value, unsigned int flags, uint32_t mask __dparm(0xFFFFFFFF));
+  // CHECK: result = hipStreamWaitValue32(stream, deviceptr, int32_t(u_value), flags);
+  result = cuStreamWaitValue32(stream, deviceptr, u_value, flags);
+
+  // CUDA: CUresult CUDAAPI cuStreamWriteValue32(CUstream stream, CUdeviceptr addr, cuuint32_t value, unsigned int flags);
+  // HIP: hipError_t hipStreamWriteValue32(hipStream_t stream, void* ptr, uint32_t value, unsigned int flags, uint32_t mask __dparm(0xFFFFFFFF));
+  // CHECK: result = hipStreamWriteValue32(stream, deviceptr, int32_t(u_value), flags);
+  result = cuStreamWriteValue32(stream, deviceptr, u_value, flags);
+#endif
+
+#if CUDA_VERSION > 8000
+  // CUDA: CUresult CUDAAPI cuStreamWaitValue64(CUstream stream, CUdeviceptr addr, cuuint64_t value, unsigned int flags);
+  // HIP: hipError_t hipStreamWaitValue64(hipStream_t stream, void* ptr, uint64_t value, unsigned int flags, uint64_t mask __dparm(0xFFFFFFFFFFFFFFFF));
+  // CHECK: result = hipStreamWaitValue64(stream, deviceptr, int64_t(u_value), flags);
+  result = cuStreamWaitValue64(stream, deviceptr, u_value, flags);
+
+  // CUDA: CUresult CUDAAPI cuStreamWriteValue64(CUstream stream, CUdeviceptr addr, cuuint64_t value, unsigned int flags);
+  // HIP: hipError_t hipStreamWriteValue64(hipStream_t stream, void* ptr, uint64_t value, unsigned int flags, uint64_t mask __dparm(0xFFFFFFFFFFFFFFFF));
+  // CHECK: result = hipStreamWriteValue64(stream, deviceptr, int64_t(u_value), flags);
+  result = cuStreamWriteValue64(stream, deviceptr, u_value, flags);
+#endif
   return 0;
 }

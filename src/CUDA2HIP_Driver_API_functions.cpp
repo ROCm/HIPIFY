@@ -467,7 +467,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   // cudaDestroyExternalMemory
   {"cuDestroyExternalMemory",                              {"hipDestroyExternalMemory",                                "", CONV_EXT_RES, API_DRIVER, 17}},
   // cudaDestroyExternalSemaphore
-  {"cuDestroyExternalSemaphore",                           {"hipDestroyExternalSemaphore",                             "", CONV_EXT_RES, API_DRIVER, 17, HIP_UNSUPPORTED}},
+  {"cuDestroyExternalSemaphore",                           {"hipDestroyExternalSemaphore",                             "", CONV_EXT_RES, API_DRIVER, 17}},
   // cudaExternalMemoryGetMappedBuffer
   {"cuExternalMemoryGetMappedBuffer",                      {"hipExternalMemoryGetMappedBuffer",                        "", CONV_EXT_RES, API_DRIVER, 17}},
   // cudaExternalMemoryGetMappedMipmappedArray
