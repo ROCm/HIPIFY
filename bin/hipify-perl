@@ -1234,6 +1234,7 @@ sub simpleSubstitutions {
     $ft{'event'} += s/\bcudaEventRecord\b/hipEventRecord/g;
     $ft{'event'} += s/\bcudaEventSynchronize\b/hipEventSynchronize/g;
     $ft{'external_resource_interop'} += s/\bcuDestroyExternalMemory\b/hipDestroyExternalMemory/g;
+    $ft{'external_resource_interop'} += s/\bcuDestroyExternalSemaphore\b/hipDestroyExternalSemaphore/g;
     $ft{'external_resource_interop'} += s/\bcuExternalMemoryGetMappedBuffer\b/hipExternalMemoryGetMappedBuffer/g;
     $ft{'external_resource_interop'} += s/\bcuImportExternalMemory\b/hipImportExternalMemory/g;
     $ft{'external_resource_interop'} += s/\bcuImportExternalSemaphore\b/hipImportExternalSemaphore/g;
@@ -5928,7 +5929,6 @@ sub warnUnsupportedFunctions {
         "cuDeviceGetGraphMemAttribute",
         "cuDeviceGetExecAffinitySupport",
         "cuDeviceGetDefaultMemPool",
-        "cuDestroyExternalSemaphore",
         "cuD3D9UnregisterResource",
         "cuD3D9UnmapResources",
         "cuD3D9ResourceSetMapFlags",

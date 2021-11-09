@@ -1399,7 +1399,7 @@
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
 |`cuDestroyExternalMemory`|10.0| | |`hipDestroyExternalMemory`|4.3.0| | | |
-|`cuDestroyExternalSemaphore`|10.0| | | |4.4.0| | | |
+|`cuDestroyExternalSemaphore`|10.0| | |`hipDestroyExternalSemaphore`|4.4.0| | | |
 |`cuExternalMemoryGetMappedBuffer`|10.0| | |`hipExternalMemoryGetMappedBuffer`|4.3.0| | | |
 |`cuExternalMemoryGetMappedMipmappedArray`|10.0| | | | | | | |
 |`cuImportExternalMemory`|10.0| | |`hipImportExternalMemory`|4.3.0| | | |
