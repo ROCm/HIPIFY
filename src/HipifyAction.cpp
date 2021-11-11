@@ -58,11 +58,6 @@ const std::string sCudaMemcpyFromSymbol = "cudaMemcpyFromSymbol";
 const std::string sCudaMemcpyFromSymbolAsync = "cudaMemcpyFromSymbolAsync";
 const std::string sCudaFuncSetCacheConfig = "cudaFuncSetCacheConfig";
 const std::string sCudaFuncGetAttributes = "cudaFuncGetAttributes";
-// CUDA functions, which need typecasting of its arguments
-const std::string sCuStreamWaitValue32 = "cuStreamWaitValue32";
-const std::string sCuStreamWaitValue64 = "cuStreamWaitValue64";
-const std::string sCuStreamWriteValue32 = "cuStreamWriteValue32";
-const std::string sCuStreamWriteValue64 = "cuStreamWriteValue64";
 // Matchers' names
 const StringRef sCudaLaunchKernel = "cudaLaunchKernel";
 const StringRef sCudaHostFuncCall = "cudaHostFuncCall";
@@ -90,10 +85,6 @@ std::map<std::string, ArgCastMap> FuncArgCasts {
   {sCudaMemcpyFromSymbolAsync, {{1, {e_HIP_SYMBOL, cw_None}}}},
   {sCudaFuncSetCacheConfig, {{0, {e_reinterpret_cast, cw_None}}}},
   {sCudaFuncGetAttributes, {{1, {e_reinterpret_cast, cw_None}}}},
-  {sCuStreamWaitValue32, {{2, {e_int32_t, cw_DataLoss}}}},
-  {sCuStreamWaitValue64, {{2, {e_int64_t, cw_DataLoss}}}},
-  {sCuStreamWriteValue32, {{2, {e_int32_t, cw_DataLoss}}}},
-  {sCuStreamWriteValue64, {{2, {e_int64_t, cw_DataLoss}}}},
 };
 
 void HipifyAction::RewriteString(StringRef s, clang::SourceLocation start) {
@@ -561,11 +552,7 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
             sCudaMemcpyToSymbol,
             sCudaMemcpyToSymbolAsync,
             sCudaFuncSetCacheConfig,
-            sCudaFuncGetAttributes,
-            sCuStreamWaitValue32,
-            sCuStreamWaitValue64,
-            sCuStreamWriteValue32,
-            sCuStreamWriteValue64
+            sCudaFuncGetAttributes
           )
         )
       )
