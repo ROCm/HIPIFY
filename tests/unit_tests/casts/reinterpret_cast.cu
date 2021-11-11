@@ -27,8 +27,8 @@ THE SOFTWARE.
 #include <stdint.h>
 
 // Random predefiend 32 and 64 bit values
-constexpr int32_t value32 = 0x70F0F0FF;
-constexpr int64_t value64 = 0x7FFF0000FFFF0000;
+constexpr uint32_t value32 = 0x70F0F0FF;
+constexpr uint64_t value64 = 0x7FFF0000FFFF0000;
 constexpr unsigned int writeFlag = 0;
 
 __global__
@@ -58,9 +58,9 @@ void testWrite() {
   cudaHostRegister(host_ptr64, sizeof(int64_t), 0);
   // CHECK: hipHostRegister(host_ptr32, sizeof(int32_t), 0);
   cudaHostRegister(host_ptr32, sizeof(int32_t), 0);
-  // CHECK: hipStreamWriteValue64(stream, hipDeviceptr_t(host_ptr64), int64_t(value64), writeFlag);
+  // CHECK: hipStreamWriteValue64(stream, hipDeviceptr_t(host_ptr64), value64, writeFlag);
   cuStreamWriteValue64(stream, CUdeviceptr(host_ptr64), value64, writeFlag);
-  // CHECK: hipStreamWriteValue32(stream, hipDeviceptr_t(host_ptr32), int32_t(value32), writeFlag);
+  // CHECK: hipStreamWriteValue32(stream, hipDeviceptr_t(host_ptr32), value32, writeFlag);
   cuStreamWriteValue32(stream, CUdeviceptr(host_ptr32), value32, writeFlag);
   // CHECK: hipStreamSynchronize(stream);
   cudaStreamSynchronize(stream);
@@ -71,14 +71,14 @@ void testWrite() {
   // Reset values
   *host_ptr64 = 0x0;
   *host_ptr32 = 0x0;
-  // CHECK: hipStreamWriteValue64(stream, hipDeviceptr_t(device_ptr64), int64_t(value64), writeFlag);
+  // CHECK: hipStreamWriteValue64(stream, hipDeviceptr_t(device_ptr64), value64, writeFlag);
   cuStreamWriteValue64(stream, CUdeviceptr(device_ptr64), value64, writeFlag);
-  // CHECK: hipStreamWriteValue32(stream, hipDeviceptr_t(device_ptr32), int32_t(value32), writeFlag);
+  // CHECK: hipStreamWriteValue32(stream, hipDeviceptr_t(device_ptr32), value32, writeFlag);
   cuStreamWriteValue32(stream, CUdeviceptr(device_ptr32), value32, writeFlag);
   // CHECK: hipStreamSynchronize(stream);
   cudaStreamSynchronize(stream);
   // Test Writing to Signal Memory
-  // CHECK: hipStreamWriteValue64(stream, hipDeviceptr_t(signalPtr), int64_t(value64), writeFlag);
+  // CHECK: hipStreamWriteValue64(stream, hipDeviceptr_t(signalPtr), value64, writeFlag);
   cuStreamWriteValue64(stream, CUdeviceptr(signalPtr), value64, writeFlag);
   // CHECK: hipStreamSynchronize(stream);
   cudaStreamSynchronize(stream);
@@ -269,9 +269,9 @@ void testWait() {
     for (const auto & tc : testCases) {
       *signalPtr = isBlocking ? tc.signalValueFail : tc.signalValuePass;
       *dataPtr64 = DATA_INIT;
-      // CHECK: hipStreamWaitValue64(stream, hipDeviceptr_t(signalPtr), int64_t(tc.waitValue), tc.compareOp);
+      // CHECK: hipStreamWaitValue64(stream, hipDeviceptr_t(signalPtr), tc.waitValue, tc.compareOp);
       cuStreamWaitValue64(stream, CUdeviceptr(signalPtr), tc.waitValue, tc.compareOp);
-      // CHECK: hipStreamWriteValue64(stream, hipDeviceptr_t(dataPtr64), int64_t(DATA_UPDATE), writeFlag);
+      // CHECK: hipStreamWriteValue64(stream, hipDeviceptr_t(dataPtr64), DATA_UPDATE, writeFlag);
       cuStreamWriteValue64(stream, CUdeviceptr(dataPtr64), DATA_UPDATE, writeFlag);
       if (isBlocking) {
         // Trigger an implict flush and verify stream has pending work.
@@ -288,9 +288,9 @@ void testWait() {
       // 32-bit API
       *signalPtr = isBlocking ? tc.signalValueFail : tc.signalValuePass;
       *dataPtr32 = DATA_INIT;
-      // CHECK: hipStreamWaitValue32(stream, hipDeviceptr_t(signalPtr), int32_t(tc.waitValue), tc.compareOp);
+      // CHECK: hipStreamWaitValue32(stream, hipDeviceptr_t(signalPtr), tc.waitValue, tc.compareOp);
       cuStreamWaitValue32(stream, CUdeviceptr(signalPtr), tc.waitValue, tc.compareOp);
-      // CHECK: hipStreamWriteValue32(stream, hipDeviceptr_t(dataPtr32), int32_t(DATA_UPDATE), writeFlag);
+      // CHECK: hipStreamWriteValue32(stream, hipDeviceptr_t(dataPtr32), DATA_UPDATE, writeFlag);
       cuStreamWriteValue32(stream, CUdeviceptr(dataPtr32), DATA_UPDATE, writeFlag);
       if (isBlocking) {
         // Trigger an implict flush and verify stream has pending work.
@@ -311,9 +311,9 @@ void testWait() {
     for (const auto& tc : testCasesNoMask32) {
       *signalPtr = isBlocking ? tc.signalValueFail : tc.signalValuePass;
       *dataPtr32 = DATA_INIT;
-      // CHECK: hipStreamWaitValue32(stream, hipDeviceptr_t(signalPtr), int32_t(tc.waitValue), tc.compareOp);
+      // CHECK: hipStreamWaitValue32(stream, hipDeviceptr_t(signalPtr), tc.waitValue, tc.compareOp);
       cuStreamWaitValue32(stream, CUdeviceptr(signalPtr), tc.waitValue, tc.compareOp);
-      // CHECK: hipStreamWriteValue32(stream, hipDeviceptr_t(dataPtr32), int32_t(DATA_UPDATE), writeFlag);
+      // CHECK: hipStreamWriteValue32(stream, hipDeviceptr_t(dataPtr32), DATA_UPDATE, writeFlag);
       cuStreamWriteValue32(stream, CUdeviceptr(dataPtr32), DATA_UPDATE, writeFlag);
       if (isBlocking) {
         // Trigger an implict flush and verify stream has pending work.
@@ -334,9 +334,9 @@ void testWait() {
     for (const auto& tc : testCasesNoMask64) {
       *signalPtr = isBlocking ? tc.signalValueFail : tc.signalValuePass;
       *dataPtr64 = DATA_INIT;
-      // CHECK: hipStreamWaitValue64(stream, hipDeviceptr_t(signalPtr), int64_t(tc.waitValue), tc.compareOp);
+      // CHECK: hipStreamWaitValue64(stream, hipDeviceptr_t(signalPtr), tc.waitValue, tc.compareOp);
       cuStreamWaitValue64(stream, CUdeviceptr(signalPtr), tc.waitValue, tc.compareOp);
-      // CHECK: hipStreamWriteValue64(stream, hipDeviceptr_t(dataPtr64), int64_t(DATA_UPDATE), writeFlag);
+      // CHECK: hipStreamWriteValue64(stream, hipDeviceptr_t(dataPtr64), DATA_UPDATE, writeFlag);
       cuStreamWriteValue64(stream, CUdeviceptr(dataPtr64), DATA_UPDATE, writeFlag);
       if (isBlocking) {
         // Trigger an implict flush and verify stream has pending work.
