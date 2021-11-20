@@ -96,7 +96,6 @@ namespace perl {
   const string sWarnDeprecatedFunctions = "warnDeprecatedFunctions";
   const string sWarnRemovedFunctions = "warnRemovedFunctions";
   const string sWarnUnsupportedFunctions = "warnUnsupportedFunctions";
-  const string sWarnDataLossFunctions = "warnDataLossFunctions";
   const string sWarnUnsupportedDeviceFunctions = "warnUnsupportedDeviceFunctions";
   const string sSimpleSubstitutions = "simpleSubstitutions";
   const string sExperimentalSubstitutions = "experimentalSubstitutions";
@@ -400,8 +399,6 @@ namespace perl {
     set<string> DeviceSymbolFunctions1;
     set<string> ReinterpretFunctions0;
     set<string> ReinterpretFunctions1;
-    set<string> CastFunctions2_32;
-    set<string> CastFunctions2_64;
     for (auto f : FuncArgCasts) {
       auto casts = f.second;
       for (auto c : casts) {
@@ -420,26 +417,17 @@ namespace perl {
               default: break;
             }
             break;
-          case 2:
-            switch (c.second.castType) {
-              case e_int32_t: CastFunctions2_32.insert(f.first); break;
-              case e_int64_t: CastFunctions2_64.insert(f.first); break;
-              default: break;
-            }
-            break;
           default: break;
         }
       }
     }
     set<string>& funcSet = DeviceSymbolFunctions0;
-    for (int i = 0; i < 6; ++i) {
+    for (int i = 0; i < 4; ++i) {
       *streamPtr.get() << tab + foreach_func;
       switch (i) {
         case 1:  funcSet = DeviceSymbolFunctions1; break;
         case 2:  funcSet = ReinterpretFunctions0; break;
         case 3:  funcSet = ReinterpretFunctions1; break;
-        case 4:  funcSet = CastFunctions2_32; break;
-        case 5:  funcSet = CastFunctions2_64; break;
         default: funcSet = DeviceSymbolFunctions0;
       }
       unsigned int count = 0;
@@ -461,8 +449,6 @@ namespace perl {
         case 1:  *streamPtr.get() << s1 << getCastType(e_HIP_SYMBOL) << "\\($3\\)$4/g;" << endl; break;
         case 2:  *streamPtr.get() << s0 << getCastType(e_reinterpret_cast) << "\\($2\\),/g" << endl; break;
         case 3:  *streamPtr.get() << s1 << getCastType(e_reinterpret_cast) << "\\($3\\)$4/g;" << endl; break;
-        case 4:  *streamPtr.get() << s2 << getCastType(e_int32_t) << "\\($3\\)$4/g;" << endl; break;
-        case 5:  *streamPtr.get() << s2 << getCastType(e_int64_t) << "\\($3\\)$4/g;" << endl; break;
       }
       *streamPtr.get() << tab << "}" << endl;
     }
@@ -470,7 +456,7 @@ namespace perl {
   }
 
   void generateDeprecatedAndUnsupportedFunctions(unique_ptr<ostream> &streamPtr) {
-    stringstream sDeprecated, sRemoved, sUnsupported, sExperimental, sDataLoss, sCommon, sCommon1;
+    stringstream sDeprecated, sRemoved, sUnsupported, sExperimental, sCommon, sCommon1;
     sCommon << tab << my << "$line_num = shift;" << endl;
     sCommon << tab << my_k << endl;
     string sWhile = "while (my($func, $val) = each ";
@@ -478,7 +464,6 @@ namespace perl {
     sDeprecated << endl << sub << sWarnDeprecatedFunctions << " {" << endl << sCommon.str() << tab << sWhile << "%deprecated_funcs)" << endl;
     sRemoved << endl << sub << sWarnRemovedFunctions << " {" << endl << sCommon.str() << tab << sWhile << "%removed_funcs)" << endl;
     sUnsupported << endl << sub << sWarnUnsupportedFunctions << " {" << endl << sCommon.str() << tab << foreach_func;
-    sDataLoss << endl << sub << sWarnDataLossFunctions << " {" << endl << sCommon.str() << tab << foreach_func;
     unsigned int countUnsupported = 0;
     for (auto ma = CUDA_RENAMES_MAP().rbegin(); ma != CUDA_RENAMES_MAP().rend(); ++ma) {
         if (Statistics::isUnsupported(ma->second)) {
@@ -486,26 +471,8 @@ namespace perl {
             countUnsupported++;
         }
     }
-    unsigned int argNum = 0;
-    unsigned int countDataLoss = 0;
-    for (auto f : FuncArgCasts) {
-      auto casts = f.second;
-      for (auto c : casts) {
-        switch (c.second.castWarn) {
-          case cw_DataLoss: {
-            sDataLoss << (countDataLoss ? ",\n" : "") << tab_2 << "\"" << f.first << "\"";
-            argNum = c.first;
-            countDataLoss++;
-            break;
-          }
-          case cw_None:
-          default: break;
-        }
-      }
-    }
     sCommon.str(std::string());
     sUnsupported << endl_tab << ")" << endl;
-    sDataLoss << endl_tab << ")" << endl;
     sCommon << tab << "{" << endl;
     sCommon << tab_2 << my << "$mt = m/($func)/g;" << endl;
     sCommon << tab_2 << "if ($mt) {" << endl;
@@ -519,19 +486,16 @@ namespace perl {
     sDeprecated << sCommon.str() << sCommon1.str();
     sRemoved << sCommon.str() << sCommon1.str();
     sUnsupported << sCommon.str();
-    sDataLoss << sCommon.str();
     sCommon.str(std::string());
     sCommon << tab_2 << "}\n" << tab << "}\n" << tab << return_k << "}" << endl;
     sExperimental << tab_3 << print << "\"  "  << warning << "experimental identifier \\\"$func\\\" in HIP $val\\n\";" << endl << sCommon.str();
     sDeprecated << tab_3 << print << "\"  "  << warning << "deprecated identifier \\\"$func\\\" since $cuda $val\\n\";" << endl << sCommon.str();
     sRemoved << tab_3 << print << "\"  "  << warning << "removed identifier \\\"$func\\\" since $cuda $val\\n\";" << endl << sCommon.str();
     sUnsupported << tab_3 << print << "\"  "  << warning << "unsupported identifier \\\"$func\\\"\\n\";" << endl << sCommon.str();
-    sDataLoss << tab_3 << print << "\"  "  << warning << "possible data loss in " << argNum+1 << " argument of \\\"$func\\\": $_\\n\";" << endl << sCommon.str();
     *streamPtr.get() << sExperimental.str();
     *streamPtr.get() << sDeprecated.str();
     *streamPtr.get() << sRemoved.str();
     *streamPtr.get() << sUnsupported.str();
-    *streamPtr.get() << sDataLoss.str();
   }
 
   void generateDeviceFunctions(unique_ptr<ostream> &streamPtr) {
@@ -687,8 +651,6 @@ namespace perl {
     *streamPtr.get() << tab_5 << "$s = " << sWarnUnsupportedFunctions << "($line_num);" << endl;
     *streamPtr.get() << tab_5 << warningsPlus << endl;
     *streamPtr.get() << tab_5 << "$s = " << sWarnUnsupportedDeviceFunctions << "($line_num);" << endl;
-    *streamPtr.get() << tab_5 << warningsPlus << endl;
-    *streamPtr.get() << tab_5 << "$s = " << sWarnDataLossFunctions << "($line_num);" << endl;
     *streamPtr.get() << tab_5 << warningsPlus << endl_tab_4 << "}" << endl;
     *streamPtr.get() << tab_4 << "$_ = $tmp;" << endl_tab_3 << "}" << endl;
     *streamPtr.get() << tab_3 << "if ($experimental) {" << endl;
