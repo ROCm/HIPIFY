@@ -755,8 +755,6 @@ my %experimental_funcs = (
     "cuGraphExecDestroy" => "4.5.0",
     "cuGraphDestroy" => "4.5.0",
     "cuGraphCreate" => "4.5.0",
-    "cuGraphAddMemsetNode" => "4.5.0",
-    "cuGraphAddMemcpyNode" => "4.5.0",
     "cuGraphAddKernelNode" => "4.5.0",
     "cuGraphAddEmptyNode" => "4.5.0",
     "cuGraphAddDependencies" => "4.5.0",
@@ -899,8 +897,6 @@ sub experimentalSubstitutions {
     $ft{'graph'} += s/\bcuGraphAddDependencies\b/hipGraphAddDependencies/g;
     $ft{'graph'} += s/\bcuGraphAddEmptyNode\b/hipGraphAddEmptyNode/g;
     $ft{'graph'} += s/\bcuGraphAddKernelNode\b/hipGraphAddKernelNode/g;
-    $ft{'graph'} += s/\bcuGraphAddMemcpyNode\b/hipGraphAddMemcpyNode/g;
-    $ft{'graph'} += s/\bcuGraphAddMemsetNode\b/hipGraphAddMemsetNode/g;
     $ft{'graph'} += s/\bcuGraphCreate\b/hipGraphCreate/g;
     $ft{'graph'} += s/\bcuGraphDestroy\b/hipGraphDestroy/g;
     $ft{'graph'} += s/\bcuGraphExecDestroy\b/hipGraphExecDestroy/g;
@@ -5863,6 +5859,8 @@ sub warnUnsupportedFunctions {
         "cuGraphDebugDotPrint",
         "cuGraphClone",
         "cuGraphChildGraphNodeGetGraph",
+        "cuGraphAddMemsetNode",
+        "cuGraphAddMemcpyNode",
         "cuGraphAddMemFreeNode",
         "cuGraphAddMemAllocNode",
         "cuGraphAddHostNode",

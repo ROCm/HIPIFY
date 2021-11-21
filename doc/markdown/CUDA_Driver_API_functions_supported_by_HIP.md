@@ -1464,8 +1464,8 @@
 |`cuGraphAddKernelNode`|10.0| | |`hipGraphAddKernelNode`|4.3.0| | |4.5.0|
 |`cuGraphAddMemAllocNode`|11.4| | | | | | | |
 |`cuGraphAddMemFreeNode`|11.4| | | | | | | |
-|`cuGraphAddMemcpyNode`|10.0| | |`hipGraphAddMemcpyNode`|4.3.0| | |4.5.0|
-|`cuGraphAddMemsetNode`|10.0| | |`hipGraphAddMemsetNode`|4.3.0| | |4.5.0|
+|`cuGraphAddMemcpyNode`|10.0| | | |4.3.0| | |4.5.0|
+|`cuGraphAddMemsetNode`|10.0| | | |4.3.0| | |4.5.0|
 |`cuGraphChildGraphNodeGetGraph`|10.0| | | | | | | |
 |`cuGraphClone`|10.0| | | | | | | |
 |`cuGraphCreate`|10.0| | |`hipGraphCreate`|4.3.0| | |4.5.0|
