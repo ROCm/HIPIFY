@@ -209,7 +209,7 @@ namespace doc {
                 }
               }
               auto hv = hMap.find(f.second.hipName);
-              if (hv != hMap.end()) {
+              if (hv != hMap.end() && !Statistics::isUnsupported(f.second)) {
                 ha = Statistics::getHipVersion(hv->second.appeared);
                 hd = Statistics::getHipVersion(hv->second.deprecated);
                 hr = Statistics::getHipVersion(hv->second.removed);
