@@ -329,7 +329,7 @@ namespace perl {
             string sHIP = ma.second.hipName.str();
             sCUDA = regex_replace(sCUDA, regex("/"), "\\/");
             sHIP = regex_replace(sHIP, regex("/"), "\\/");
-            *streamPtr.get() << tab << "$ft{'" << counterNames[ma.second.type] << "'} += s/\\b" << sCUDA << "\\b/" << sHIP << "/g;" << endl;
+            *streamPtr.get() << tab << "$ft{'" << counterNames[ma.second.type] << "'} += s/(?<![\\!~`@#\\$%\\^&\\*\\-+=\\[\\]\\(\\)\\{\\}\\.\\,\\?'\\<\\>])\\b" << sCUDA << "\\b/" << sHIP << "/g;" << endl;
           }
         }
       } else {
