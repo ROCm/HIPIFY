@@ -204,7 +204,7 @@ mkdir build dist
 cd build
 
 cmake \
- -DCMAKE_INSTALL_PREFIX=../dist \
+ -DCMAKE_INSTALL_PREFIX=./dist \
  -DCMAKE_BUILD_TYPE=Release \
  ..
 
@@ -216,7 +216,7 @@ Please, see [hipify-clang: Windows](#windows) for the supported tools for buildi
 Debug build type `-DCMAKE_BUILD_TYPE=Debug` is also supported and tested; `LLVM+CLANG` should be built in `Debug` mode as well.
 64-bit build mode (`-Thost=x64` on Windows) is also supported; `LLVM+CLANG` should be built in 64-bit mode as well.
 
-The binary can then be found at `./dist/bin/hipify-clang`.
+The binary can then be found at `./dist/hipify-clang` or at the folder specified by `-DCMAKE_INSTALL_PREFIX`.
 
 ### <a name="testing"></a> hipify-clang: testing
 
