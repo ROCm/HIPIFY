@@ -264,7 +264,7 @@ Run `Visual Studio 16 2019`, open the generated `LLVM.sln`, build all, build pro
          -DCMAKE_INSTALL_PREFIX=../dist \
          -DLLVM_SOURCE_DIR=../llvm-project \
          -DLLVM_TARGETS_TO_BUILD="X86;NVPTX" \
-         -DLLVM_ENABLE_PROJECTS="clang;compiler-rt" \
+         -DLLVM_ENABLE_PROJECTS="clang" \
          -DLLVM_TEMPORARILY_ALLOW_OLD_TOOLCHAIN=ON \
          -DCMAKE_BUILD_TYPE=Release \
          ../llvm-project/llvm
@@ -278,7 +278,7 @@ Run `Visual Studio 16 2019`, open the generated `LLVM.sln`, build all, build pro
          -DCMAKE_INSTALL_PREFIX=../dist \
          -DLLVM_SOURCE_DIR=../llvm-project \
          -DLLVM_TARGETS_TO_BUILD="NVPTX" \
-         -DLLVM_ENABLE_PROJECTS="clang;compiler-rt" \
+         -DLLVM_ENABLE_PROJECTS="clang" \
          -DLLVM_TEMPORARILY_ALLOW_OLD_TOOLCHAIN=ON \
          -DCMAKE_BUILD_TYPE=Release \
          -Thost=x64 \
@@ -354,7 +354,7 @@ Ubuntu 14: LLVM 4.0.0 - 7.1.0, CUDA 7.0 - 9.0, cuDNN 5.0.5 - 7.6.5
 
 Ubuntu 16-18: LLVM 8.0.0 - 13.0.0, CUDA 8.0 - 10.2, cuDNN 5.1.10 - 8.0.5
 
-Ubuntu 20: LLVM 9.0.0 - 13.0.0, CUDA 8.0 - 11.5.0, cuDNN 5.1.10 - 8.2.4
+Ubuntu 20-21: LLVM 9.0.0 - 13.0.0, CUDA 8.0 - 11.5.0, cuDNN 5.1.10 - 8.3.0
 
 Minimum build system requirements for the above configurations:
 
@@ -362,9 +362,9 @@ Python 2.7, cmake 3.5.1, GNU C/C++ 6.1.
 
 Recommended build system requirements:
 
-Python 3.9.5, cmake 3.20.2, GNU C/C++ 11.1.
+Python 3.9.7, cmake 3.22.0, GNU C/C++ 11.2.
 
-Here is an example of building `hipify-clang` with testing support on `Ubuntu 20.04.1`:
+Here is an example of building `hipify-clang` with testing support on `Ubuntu 21.10.0`:
 
 ```bash
 cmake
@@ -372,16 +372,16 @@ cmake
  -DCMAKE_BUILD_TYPE=Release \
  -DCMAKE_INSTALL_PREFIX=../dist \
  -DCMAKE_PREFIX_PATH=/usr/llvm/13.0.0/dist \
- -DCUDA_TOOLKIT_ROOT_DIR=/usr/include \
- -DCUDA_DNN_ROOT_DIR=/usr/include \
+ -DCUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda \
+ -DCUDA_DNN_ROOT_DIR=/usr/local/cuda \
  -DCUDA_CUB_ROOT_DIR=/usr/CUB \
  -DLLVM_EXTERNAL_LIT=/usr/llvm/13.0.0/build/bin/llvm-lit \
  ..
 ```
 *A corresponding successful output:*
 ```shell
--- The C compiler identification is GNU 9.3.0
--- The CXX compiler identification is GNU 9.3.0
+-- The C compiler identification is GNU 11.2.0
+-- The CXX compiler identification is GNU 11.2.0
 -- Detecting C compiler ABI info
 -- Detecting C compiler ABI info - done
 -- Check for working C compiler: /usr/bin/cc - skipped
@@ -398,19 +398,15 @@ cmake
 --    - Include path     : /usr/llvm/13.0.0/dist/include
 --    - Binary path      : /usr/llvm/13.0.0/dist/bin
 -- Linker detection: GNU ld
--- Found PythonInterp: /usr/bin/python3.8 (found suitable version "3.8.5", minimum required is "2.7")
+-- Found PythonInterp: /usr/bin/python (found suitable version "3.9.7", minimum required is "2.7") 
 -- Found lit: /usr/local/bin/lit
 -- Found FileCheck: /usr/llvm/13.0.0/dist/bin/FileCheck
 -- Looking for pthread.h
 -- Looking for pthread.h - found
 -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
--- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
--- Looking for pthread_create in pthreads
--- Looking for pthread_create in pthreads - not found
--- Looking for pthread_create in pthread
--- Looking for pthread_create in pthread - found
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
 -- Found Threads: TRUE
--- Found CUDA: /usr/include (found version "11.5")
+-- Found CUDA: /usr/local/cuda (found version "11.5")
 -- Configuring done
 -- Generating done
 -- Build files have been written to: /usr/hipify/build
@@ -425,9 +421,9 @@ Running HIPify regression tests
 CUDA 11.5 - will be used for testing
 LLVM 13.0.0 - will be used for testing
 x86_64 - Platform architecture
-Linux 5.4.0-51-generic - Platform OS
+Linux 5.13.0-21-generic - Platform OS
 64 - hipify-clang binary bitness
-64 - python 3.8.5 binary bitness
+64 - python 3.9.7 binary bitness
 ========================================
 -- Testing: 77 tests, 12 threads --
 PASS: hipify :: unit_tests/casts/reinterpret_cast.cu (1 of 77)
