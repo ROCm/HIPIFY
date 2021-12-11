@@ -200,13 +200,14 @@ For a list of `hipify-clang` options, run `hipify-clang --help`.
 ### <a name="building"></a> hipify-clang: building
 
 ```bash
-mkdir build dist
+cd .. \
+mkdir build dist \
 cd build
 
 cmake \
- -DCMAKE_INSTALL_PREFIX=./dist \
+ -DCMAKE_INSTALL_PREFIX=../dist \
  -DCMAKE_BUILD_TYPE=Release \
- ..
+ ../hipify
 
 make -j install
 ```
@@ -224,10 +225,16 @@ The binary can then be found at `./dist/hipify-clang` or at the folder specified
 
 `LLVM+CLANG` should be built from sources, pre-built binaries are not exhaustive for testing. Before building ensure that the [software required for building](https://releases.llvm.org/11.0.0/docs/GettingStarted.html#software) is of an appropriate version.
 
-**LLVM 9.0.1 or older:**
+**LLVM <= 9.0.1:**
 
 1. download [`LLVM`](https://github.com/llvm/llvm-project/releases/download/llvmorg-9.0.1/llvm-9.0.1.src.tar.xz)+[`CLANG`](https://github.com/llvm/llvm-project/releases/download/llvmorg-9.0.1/clang-9.0.1.src.tar.xz) sources; 
 2. build [`LLVM+CLANG`](http://releases.llvm.org/9.0.0/docs/CMake.html):
+
+```bash
+     cd .. \
+     mkdir build dist \
+     cd build
+```
 
  **Linux**:
    ```bash
@@ -244,28 +251,32 @@ The binary can then be found at `./dist/hipify-clang` or at the folder specified
         cmake \
          -G "Visual Studio 16 2019" \
          -A x64 \
+         -Thost=x64 \
          -DCMAKE_INSTALL_PREFIX=../dist \
          -DLLVM_SOURCE_DIR=../llvm \
          -DLLVM_TARGETS_TO_BUILD="NVPTX" \
          -DCMAKE_BUILD_TYPE=Release \
-         -Thost=x64 \
          ../llvm
    ```
 Run `Visual Studio 16 2019`, open the generated `LLVM.sln`, build all, build project `INSTALL`.
 
-**LLVM 10.0.0 or newer:**
+**LLVM >= 10.0.0:**
 
 1. download [`LLVM project`](https://github.com/llvm/llvm-project/releases/tag/llvmorg-13.0.0) sources;
 2. build [`LLVM project`](http://llvm.org/docs/CMake.html):
+
+```bash
+      cd .. \
+      mkdir build dist \
+      cd build
+```
 
  **Linux**:
    ```bash
         cmake \
          -DCMAKE_INSTALL_PREFIX=../dist \
-         -DLLVM_SOURCE_DIR=../llvm-project \
          -DLLVM_TARGETS_TO_BUILD="X86;NVPTX" \
          -DLLVM_ENABLE_PROJECTS="clang" \
-         -DLLVM_TEMPORARILY_ALLOW_OLD_TOOLCHAIN=ON \
          -DCMAKE_BUILD_TYPE=Release \
          ../llvm-project/llvm
         make -j install
@@ -275,13 +286,11 @@ Run `Visual Studio 16 2019`, open the generated `LLVM.sln`, build all, build pro
         cmake \
          -G "Visual Studio 16 2019" \
          -A x64 \
+         -Thost=x64 \
          -DCMAKE_INSTALL_PREFIX=../dist \
-         -DLLVM_SOURCE_DIR=../llvm-project \
          -DLLVM_TARGETS_TO_BUILD="NVPTX" \
          -DLLVM_ENABLE_PROJECTS="clang" \
-         -DLLVM_TEMPORARILY_ALLOW_OLD_TOOLCHAIN=ON \
          -DCMAKE_BUILD_TYPE=Release \
-         -Thost=x64 \
          ../llvm-project/llvm
    ```
 Run `Visual Studio 16 2019`, open the generated `LLVM.sln`, build all, build project `INSTALL`.
@@ -376,7 +385,7 @@ cmake
  -DCUDA_DNN_ROOT_DIR=/usr/local/cuda \
  -DCUDA_CUB_ROOT_DIR=/usr/CUB \
  -DLLVM_EXTERNAL_LIT=/usr/llvm/13.0.0/build/bin/llvm-lit \
- ..
+ ../hipify
 ```
 *A corresponding successful output:*
 ```shell
@@ -529,6 +538,7 @@ Testing Time: 5.73s
 cmake
  -G "Visual Studio 16 2019" \
  -A x64 \
+ -Thost=x64 \
  -DHIPIFY_CLANG_TESTS=1 \
  -DCMAKE_BUILD_TYPE=Release \
  -DCMAKE_INSTALL_PREFIX=../dist \
@@ -538,8 +548,7 @@ cmake
  -DCUDA_DNN_ROOT_DIR=d:/CUDNN/cudnn-11.5-windows-x64-v8.2.4 \
  -DCUDA_CUB_ROOT_DIR=d:/GIT/cub \
  -DLLVM_EXTERNAL_LIT=d:/LLVM/13.0.0/build/Release/bin/llvm-lit.py \
- -Thost=x64
- ..
+ ../hipify
 ```
 *A corresponding successful output:*
 ```shell
