@@ -115,6 +115,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RAND_TYPE_NAME_MAP {
   {"CURAND_ORDERING_PSEUDO_DEFAULT",                {"HIPRAND_ORDERING_PSEUDO_DEFAULT",                "", CONV_NUMERIC_LITERAL, API_RAND, 1, HIP_UNSUPPORTED}},
   {"CURAND_ORDERING_PSEUDO_SEEDED",                 {"HIPRAND_ORDERING_PSEUDO_SEEDED",                 "", CONV_NUMERIC_LITERAL, API_RAND, 1, HIP_UNSUPPORTED}},
   {"CURAND_ORDERING_PSEUDO_LEGACY",                 {"HIPRAND_ORDERING_PSEUDO_LEGACY",                 "", CONV_NUMERIC_LITERAL, API_RAND, 1, HIP_UNSUPPORTED}},
+  {"CURAND_ORDERING_PSEUDO_DYNAMIC",                {"HIPRAND_ORDERING_PSEUDO_DYNAMIC",                "", CONV_NUMERIC_LITERAL, API_RAND, 1, HIP_UNSUPPORTED}},
   {"CURAND_ORDERING_QUASI_DEFAULT",                 {"HIPRAND_ORDERING_QUASI_DEFAULT",                 "", CONV_NUMERIC_LITERAL, API_RAND, 1, HIP_UNSUPPORTED}},
 
   // RAND choice of direction vector set (enum curandDirectionVectorSet)
@@ -147,6 +148,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RAND_TYPE_NAME_VER_MAP {
   {"CURAND_VER_BUILD",                              {CUDA_102, CUDA_0, CUDA_0}},
   {"CURAND_VERSION",                                {CUDA_102, CUDA_0, CUDA_0}},
   {"CURAND_ORDERING_PSEUDO_LEGACY",                 {CUDA_110, CUDA_0, CUDA_0}},
+  {"CURAND_ORDERING_PSEUDO_DYNAMIC",                {CUDA_115, CUDA_0, CUDA_0}},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_RAND_TYPE_NAME_VER_MAP {

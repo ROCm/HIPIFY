@@ -20,6 +20,7 @@
 |`CURAND_M2`| | | | | | | | |
 |`CURAND_ORDERING_PSEUDO_BEST`| | | | | | | | |
 |`CURAND_ORDERING_PSEUDO_DEFAULT`| | | | | | | | |
+|`CURAND_ORDERING_PSEUDO_DYNAMIC`|11.5| | | | | | | |
 |`CURAND_ORDERING_PSEUDO_LEGACY`|11.0| | | | | | | |
 |`CURAND_ORDERING_PSEUDO_SEEDED`| | | | | | | | |
 |`CURAND_ORDERING_QUASI_DEFAULT`| | | | | | | | |
@@ -141,6 +142,7 @@
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
+|`__curand_umul`|11.5| | | | | | | |
 |`curand`| | | |`hiprand`|1.5.0| | | |
 |`curand_Philox4x32_10`| | | | | | | | |
 |`curand_discrete`| | | |`hiprand_discrete`|1.5.0| | | |

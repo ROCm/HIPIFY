@@ -82,11 +82,13 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RAND_FUNCTION_MAP {
   {"curand_poisson",                                {"hiprand_poisson",                                "", CONV_LIB_DEVICE_FUNC, API_RAND, 3}},
   {"curand_poisson4",                               {"hiprand_poisson4",                               "", CONV_LIB_DEVICE_FUNC, API_RAND, 3}},
   {"curand_Philox4x32_10",                          {"hiprand_Philox4x32_10",                          "", CONV_LIB_DEVICE_FUNC, API_RAND, 3, HIP_UNSUPPORTED}},
+  {"__curand_umul",                                 {"__hiprand_umul",                                 "", CONV_LIB_DEVICE_FUNC, API_RAND, 3, HIP_UNSUPPORTED}},
   // unchanged function names: skipahead, skipahead_sequence, skipahead_subsequence
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_RAND_FUNCTION_VER_MAP {
   {"curandGetProperty",                             {CUDA_80,  CUDA_0, CUDA_0}},
+  {"__curand_umul",                                 {CUDA_115, CUDA_0, CUDA_0}},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_RAND_FUNCTION_VER_MAP {
