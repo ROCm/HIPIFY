@@ -53,6 +53,8 @@
 |`CUSPARSE_POINTER_MODE_DEVICE`| | | |`HIPSPARSE_POINTER_MODE_DEVICE`|1.9.2| | | |
 |`CUSPARSE_POINTER_MODE_HOST`| | | |`HIPSPARSE_POINTER_MODE_HOST`|1.9.2| | | |
 |`CUSPARSE_SDDMM_ALG_DEFAULT`|11.2| | |`HIPSPARSE_SDDMM_ALG_DEFAULT`|4.3.0| | | |
+|`CUSPARSE_SIDE_LEFT`| | |11.5| | | | | |
+|`CUSPARSE_SIDE_RIGHT`| | |11.5| | | | | |
 |`CUSPARSE_SOLVE_POLICY_NO_LEVEL`| | | |`HIPSPARSE_SOLVE_POLICY_NO_LEVEL`|1.9.2| | | |
 |`CUSPARSE_SOLVE_POLICY_USE_LEVEL`| | | |`HIPSPARSE_SOLVE_POLICY_USE_LEVEL`|1.9.2| | | |
 |`CUSPARSE_SPARSETODENSE_ALG_DEFAULT`|11.1| | |`HIPSPARSE_SPARSETODENSE_ALG_DEFAULT`|4.2.0| | | |
@@ -75,6 +77,7 @@
 |`CUSPARSE_SPMM_CSR_ALG1`|11.0| | |`HIPSPARSE_SPMM_CSR_ALG1`|4.2.0| | | |
 |`CUSPARSE_SPMM_CSR_ALG2`|11.0| | |`HIPSPARSE_SPMM_CSR_ALG2`|4.2.0| | | |
 |`CUSPARSE_SPMM_CSR_ALG3`|11.2| | |`HIPSPARSE_SPMM_CSR_ALG3`|4.5.0| | | |
+|`CUSPARSE_SPMM_OP_ALG_DEFAULT`|11.5| | | | | | | |
 |`CUSPARSE_SPMV_ALG_DEFAULT`| | | |`HIPSPARSE_SPMV_ALG_DEFAULT`|4.5.0| | | |
 |`CUSPARSE_SPMV_COO_ALG1`|11.2| | |`HIPSPARSE_SPMV_COO_ALG1`|4.5.0| | | |
 |`CUSPARSE_SPMV_COO_ALG2`|11.2| | |`HIPSPARSE_SPMV_COO_ALG2`|4.5.0| | | |
@@ -138,6 +141,7 @@
 |`cusparseHybPartition_t`| |10.2|11.0|`hipsparseHybPartition_t`|1.9.2| | | |
 |`cusparseIndexBase_t`| | | |`hipsparseIndexBase_t`|1.9.2| | | |
 |`cusparseIndexType_t`|10.1| | |`hipsparseIndexType_t`|4.1.0| | | |
+|`cusparseLoggerCallback_t`|11.5| | | | | | | |
 |`cusparseMatDescr`| | | | | | | | |
 |`cusparseMatDescr_t`| | | |`hipsparseMatDescr_t`|1.9.2| | | |
 |`cusparseMatrixType_t`| | | |`hipsparseMatrixType_t`|1.9.2| | | |
@@ -145,6 +149,7 @@
 |`cusparseOrder_t`|10.1| | |`hipsparseOrder_t`|4.2.0| | | |
 |`cusparsePointerMode_t`| | | |`hipsparsePointerMode_t`|1.9.2| | | |
 |`cusparseSDDMMAlg_t`|11.2| | |`hipsparseSDDMMAlg_t`|4.3.0| | | |
+|`cusparseSideMode_t`| | |11.5| | | | | |
 |`cusparseSolveAnalysisInfo`| |10.2|11.0| | | | | |
 |`cusparseSolveAnalysisInfo_t`| |10.2|11.0| | | | | |
 |`cusparseSolvePolicy_t`| | | |`hipsparseSolvePolicy_t`|1.9.2| | | |
@@ -152,6 +157,9 @@
 |`cusparseSpGEMMDescr`|11.0| | |`hipsparseSpGEMMDescr`|4.1.0| | | |
 |`cusparseSpGEMMDescr_t`|11.0| | |`hipsparseSpGEMMDescr_t`|4.1.0| | | |
 |`cusparseSpMMAlg_t`|10.1| | |`hipsparseSpMMAlg_t`|4.2.0| | | |
+|`cusparseSpMMOpAlg_t`|11.5| | | | | | | |
+|`cusparseSpMMOpPlan`|11.5| | | | | | | |
+|`cusparseSpMMOpPlan_t`|11.5| | | | | | | |
 |`cusparseSpMVAlg_t`|10.2| | |`hipsparseSpMVAlg_t`|4.1.0| | | |
 |`cusparseSpMatAttribute_t`|11.3| | |`hipsparseSpMatAttribute_t`|4.5.0| | | |
 |`cusparseSpMatDescr`|10.1| | | | | | | |
@@ -181,7 +189,18 @@
 |`cusparseSetPointerMode`| | | |`hipsparseSetPointerMode`|1.9.2| | | |
 |`cusparseSetStream`| | | |`hipsparseSetStream`|1.9.2| | | |
 
-## **6. CUSPARSE Helper Function Reference**
+## **6. CUSPARSE Logging**
+
+|**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
+|:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
+|`cusparseLoggerForceDisable`|11.5| | | | | | | |
+|`cusparseLoggerOpenFile`|11.5| | | | | | | |
+|`cusparseLoggerSetCallback`|11.5| | | | | | | |
+|`cusparseLoggerSetFile`|11.5| | | | | | | |
+|`cusparseLoggerSetLevel`|11.5| | | | | | | |
+|`cusparseLoggerSetMask`|11.5| | | | | | | |
+
+## **7. CUSPARSE Helper Function Reference**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -223,7 +242,7 @@
 |`cusparseSetMatIndexBase`| | | |`hipsparseSetMatIndexBase`|1.9.2| | | |
 |`cusparseSetMatType`| | | |`hipsparseSetMatType`|1.9.2| | | |
 
-## **7. CUSPARSE Level 1 Function Reference**
+## **8. CUSPARSE Level 1 Function Reference**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -252,7 +271,7 @@
 |`cusparseZgthrz`| |11.0| |`hipsparseZgthrz`|3.1.0| | | |
 |`cusparseZsctr`| |11.0| |`hipsparseZsctr`|3.1.0| | | |
 
-## **8. CUSPARSE Level 2 Function Reference**
+## **9. CUSPARSE Level 2 Function Reference**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -339,7 +358,7 @@
 |`cusparseZhybsv_analysis`| |10.2|11.0| | | | | |
 |`cusparseZhybsv_solve`| |10.2|11.0| | | | | |
 
-## **9. CUSPARSE Level 3 Function Reference**
+## **10. CUSPARSE Level 3 Function Reference**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -398,7 +417,7 @@
 |`cusparseZcsrsm_solve`| |10.2|11.0| | | | | |
 |`cusparseZgemmi`|8.0|11.0| |`hipsparseZgemmi`|3.7.0| | | |
 
-## **10. CUSPARSE Extra Function Reference**
+## **11. CUSPARSE Extra Function Reference**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -431,7 +450,7 @@
 |`cusparseZcsrgemm2`| |11.0| |`hipsparseZcsrgemm2`|3.1.0| | | |
 |`cusparseZcsrgemm2_bufferSizeExt`| |11.0| |`hipsparseZcsrgemm2_bufferSizeExt`|3.1.0| | | |
 
-## **11. CUSPARSE Preconditioners Reference**
+## **12. CUSPARSE Preconditioners Reference**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -573,7 +592,7 @@
 |`cusparseZgtsvStridedBatch`| |10.2|11.0| | | | | |
 |`cusparseZgtsv_nopivot`| |10.2|11.0| | | | | |
 
-## **12. CUSPARSE Reorderings Reference**
+## **13. CUSPARSE Reorderings Reference**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -582,7 +601,7 @@
 |`cusparseScsrcolor`| | | |`hipsparseScsrcolor`|4.5.0| | | |
 |`cusparseZcsrcolor`| | | |`hipsparseZcsrcolor`|4.5.0| | | |
 
-## **13. CUSPARSE Format Conversion Reference**
+## **14. CUSPARSE Format Conversion Reference**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -758,7 +777,7 @@
 |`cusparseZnnz`| | | |`hipsparseZnnz`|3.2.0| | | |
 |`cusparseZnnz_compress`|8.0| | |`hipsparseZnnz_compress`|3.5.0| | | |
 
-## **14. CUSPARSE Generic API Reference**
+## **15. CUSPARSE Generic API Reference**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -813,6 +832,9 @@
 |`cusparseSpGEMMreuse_nnz`|11.3| | | | | | | |
 |`cusparseSpGEMMreuse_workEstimation`|11.3| | | | | | | |
 |`cusparseSpMM`|10.1| | |`hipsparseSpMM`|4.2.0| | | |
+|`cusparseSpMMOp`|11.5| | | | | | | |
+|`cusparseSpMMOp_createPlan`|11.5| | | | | | | |
+|`cusparseSpMMOp_destroyPlan`|11.5| | | | | | | |
 |`cusparseSpMM_bufferSize`|10.1| | |`hipsparseSpMM_bufferSize`|4.2.0| | | |
 |`cusparseSpMM_preprocess`|11.2| | |`hipsparseSpMM_preprocess`|4.5.0| | | |
 |`cusparseSpMV`|10.2| | |`hipsparseSpMV`|4.1.0| | | |
