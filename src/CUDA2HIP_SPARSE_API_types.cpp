@@ -92,6 +92,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_TYPE_NAME_MAP {
   {"cusparseSpSVDescr",                         {"hipsparseSpSVDescr",                         "", CONV_TYPE, API_SPARSE, 4}},
   {"cusparseSpSVDescr_t",                       {"hipsparseSpSVDescr_t",                       "", CONV_TYPE, API_SPARSE, 4}},
 
+  {"cusparseSpMMOpPlan",                        {"hipsparseSpMMOpPlan",                        "", CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED}},
+  {"cusparseSpMMOpPlan_t",                      {"hipsparseSpMMOpPlan_t",                      "", CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED}},
+
   // 2. Enums
   {"cusparseAction_t",                          {"hipsparseAction_t",                          "", CONV_TYPE, API_SPARSE, 4}},
   {"CUSPARSE_ACTION_SYMBOLIC",                  {"HIPSPARSE_ACTION_SYMBOLIC",                  "", CONV_NUMERIC_LITERAL, API_SPARSE, 4}},
@@ -231,7 +234,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_TYPE_NAME_MAP {
   {"CUSPARSE_SPSM_ALG_DEFAULT",                 {"HIPSPARSE_SPSM_ALG_DEFAULT",                 "", CONV_NUMERIC_LITERAL, API_SPARSE, 4}},
 
   {"cusparseSDDMMAlg_t",                        {"hipsparseSDDMMAlg_t",                        "", CONV_TYPE, API_SPARSE, 4}},
-  {"CUSPARSE_SDDMM_ALG_DEFAULT",                {"HIPSPARSE_SDDMM_ALG_DEFAULT",                 "", CONV_NUMERIC_LITERAL, API_SPARSE, 4}},
+  {"CUSPARSE_SDDMM_ALG_DEFAULT",                {"HIPSPARSE_SDDMM_ALG_DEFAULT",                "", CONV_NUMERIC_LITERAL, API_SPARSE, 4}},
+
+  {"cusparseSideMode_t",                        {"hipsparseSideMode_t",                        "", CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED | CUDA_REMOVED}},
+  {"CUSPARSE_SIDE_LEFT",                        {"HIPSPARSE_SIDE_LEFT",                        "", CONV_NUMERIC_LITERAL, API_SPARSE, 4, HIP_UNSUPPORTED | CUDA_REMOVED}},
+  {"CUSPARSE_SIDE_RIGHT",                       {"HIPSPARSE_SIDE_RIGHT",                       "", CONV_NUMERIC_LITERAL, API_SPARSE, 4, HIP_UNSUPPORTED | CUDA_REMOVED}},
+
+  {"cusparseSpMMOpAlg_t",                       {"hipsparseSpMMOpAlg_t",                       "", CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED}},
+  {"CUSPARSE_SPMM_OP_ALG_DEFAULT",              {"HIPSPARSE_SPMM_OP_ALG_DEFAULT",              "", CONV_NUMERIC_LITERAL, API_SPARSE, 4, HIP_UNSUPPORTED}},
 
   // 3. Defines
   {"CUSPARSE_VER_MAJOR",                        {"HIPSPARSE_VER_MAJOR",                        "", CONV_DEFINE, API_SPARSE, 4, HIP_UNSUPPORTED}},
@@ -239,6 +249,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_TYPE_NAME_MAP {
   {"CUSPARSE_VER_PATCH",                        {"HIPSPARSE_VER_PATCH",                        "", CONV_DEFINE, API_SPARSE, 4, HIP_UNSUPPORTED}},
   {"CUSPARSE_VER_BUILD",                        {"HIPSPARSE_VER_BUILD",                        "", CONV_DEFINE, API_SPARSE, 4, HIP_UNSUPPORTED}},
   {"CUSPARSE_VERSION",                          {"HIPSPARSE_VERSION",                          "", CONV_DEFINE, API_SPARSE, 4, HIP_UNSUPPORTED}},
+
+  // 4. Typedefs
+  {"cusparseLoggerCallback_t",                  {"hipsparseLoggerCallback_t",                  "", CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_SPARSE_TYPE_NAME_VER_MAP {
@@ -342,6 +355,14 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SPARSE_TYPE_NAME_VER_MAP {
   {"CUSPARSE_FORMAT_BLOCKED_ELL",               {CUDA_112, CUDA_0,   CUDA_0  }},
   {"cusparseSpSVDescr",                         {CUDA_113, CUDA_0,   CUDA_0  }},
   {"cusparseSpSVDescr_t",                       {CUDA_113, CUDA_0,   CUDA_0  }},
+  {"cusparseSideMode_t",                        {CUDA_0,   CUDA_0,   CUDA_115}},
+  {"CUSPARSE_SIDE_LEFT",                        {CUDA_0,   CUDA_0,   CUDA_115}},
+  {"CUSPARSE_SIDE_RIGHT",                       {CUDA_0,   CUDA_0,   CUDA_115}},
+  {"cusparseLoggerCallback_t",                  {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"cusparseSpMMOpPlan",                        {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"cusparseSpMMOpPlan_t",                      {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"cusparseSpMMOpAlg_t",                       {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"CUSPARSE_SPMM_OP_ALG_DEFAULT",              {CUDA_115, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_TYPE_NAME_VER_MAP {
