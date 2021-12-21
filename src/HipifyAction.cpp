@@ -351,6 +351,7 @@ bool HipifyAction::cudaLaunchKernel(const mat::MatchFinder::MatchResult &Result)
   if (!caleeDecl) return false;
   auto *config = launchKernel->getConfig();
   if (!config) return false;
+  if (CudaKernelExecutionSyntax) return false;
   clang::SmallString<40> XStr;
   llvm::raw_svector_ostream OS(XStr);
   clang::LangOptions DefaultLangOptions;
