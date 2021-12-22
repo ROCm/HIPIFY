@@ -1277,28 +1277,28 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_OCCUPANCY_DISABLE_CACHING_OVERRIDE",                            {"hipOccupancyDisableCachingOverride",                       "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0x01
 
   // no analogue
-  // TODO: Analogous enum is needed in HIP. Couldn't map enum to struct hipPointerAttribute_t.
-  // TODO: Do the same for Pointer Attributes as for Device Attributes.
-  {"CUpointer_attribute",                                              {"hipPointerAttribute",                                      "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
-  {"CUpointer_attribute_enum",                                         {"hipPointerAttribute",                                      "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  // TODO: Analogous enum is needed in HIP. Couldn't map enum to struct hipPointerAttribute_t
+  // TODO: Do the same for Pointer Attributes as for Device Attributes
+  {"CUpointer_attribute",                                              {"hipPointer_attribute",                                     "", CONV_TYPE, API_DRIVER, 1}},
+  {"CUpointer_attribute_enum",                                         {"hipPointer_attribute",                                     "", CONV_TYPE, API_DRIVER, 1}},
   // CUpointer_attribute enum values
-  {"CU_POINTER_ATTRIBUTE_CONTEXT",                                     {"hipPointerAttributeContext",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 1
-  {"CU_POINTER_ATTRIBUTE_MEMORY_TYPE",                                 {"hipPointerAttributeMemoryType",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 2
-  {"CU_POINTER_ATTRIBUTE_DEVICE_POINTER",                              {"hipPointerAttributeDevicePointer",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 3
-  {"CU_POINTER_ATTRIBUTE_HOST_POINTER",                                {"hipPointerAttributeHostPointer",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 4
-  {"CU_POINTER_ATTRIBUTE_P2P_TOKENS",                                  {"hipPointerAttributeP2pTokens",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 5
-  {"CU_POINTER_ATTRIBUTE_SYNC_MEMOPS",                                 {"hipPointerAttributeSyncMemops",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 6
-  {"CU_POINTER_ATTRIBUTE_BUFFER_ID",                                   {"hipPointerAttributeBufferId",                              "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 7
-  {"CU_POINTER_ATTRIBUTE_IS_MANAGED",                                  {"hipPointerAttributeIsManaged",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 8
-  {"CU_POINTER_ATTRIBUTE_DEVICE_ORDINAL",                              {"hipPointerAttributeDeviceOrdinal",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 9
-  {"CU_POINTER_ATTRIBUTE_IS_LEGACY_CUDA_IPC_CAPABLE",                  {"hipPointerAttributeIsLegacyCudaIpcCapable",                "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 10
-  {"CU_POINTER_ATTRIBUTE_RANGE_START_ADDR",                            {"hipPointerAttributeRangeStartAddress",                     "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 11
-  {"CU_POINTER_ATTRIBUTE_RANGE_SIZE",                                  {"hipPointerAttributeRangeSize",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 12
-  {"CU_POINTER_ATTRIBUTE_MAPPED",                                      {"hipPointerAttributeMapped",                                "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 13
-  {"CU_POINTER_ATTRIBUTE_ALLOWED_HANDLE_TYPES",                        {"hipPointerAttributeAllowedHandleTypes",                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 14
-  {"CU_POINTER_ATTRIBUTE_IS_GPU_DIRECT_RDMA_CAPABLE",                  {"hipPointerAttributeIsGpuDirectRdmaCapable",                "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 15
-  {"CU_POINTER_ATTRIBUTE_ACCESS_FLAGS",                                {"hipPointerAttributeAccessFlags",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 16
-  {"CU_POINTER_ATTRIBUTE_MEMPOOL_HANDLE",                              {"hipPointerAttributeMempoolHandle",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 17
+  {"CU_POINTER_ATTRIBUTE_CONTEXT",                                     {"HIP_POINTER_ATTRIBUTE_CONTEXT",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 1
+  {"CU_POINTER_ATTRIBUTE_MEMORY_TYPE",                                 {"HIP_POINTER_ATTRIBUTE_MEMORY_TYPE",                        "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 2
+  {"CU_POINTER_ATTRIBUTE_DEVICE_POINTER",                              {"HIP_POINTER_ATTRIBUTE_DEVICE_POINTER",                     "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 3
+  {"CU_POINTER_ATTRIBUTE_HOST_POINTER",                                {"HIP_POINTER_ATTRIBUTE_HOST_POINTER",                       "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 4
+  {"CU_POINTER_ATTRIBUTE_P2P_TOKENS",                                  {"HIP_POINTER_ATTRIBUTE_P2P_TOKENS",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 5
+  {"CU_POINTER_ATTRIBUTE_SYNC_MEMOPS",                                 {"HIP_POINTER_ATTRIBUTE_SYNC_MEMOPS",                        "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 6
+  {"CU_POINTER_ATTRIBUTE_BUFFER_ID",                                   {"HIP_POINTER_ATTRIBUTE_BUFFER_ID",                          "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 7
+  {"CU_POINTER_ATTRIBUTE_IS_MANAGED",                                  {"HIP_POINTER_ATTRIBUTE_IS_MANAGED",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 8
+  {"CU_POINTER_ATTRIBUTE_DEVICE_ORDINAL",                              {"HIP_POINTER_ATTRIBUTE_DEVICE_ORDINAL",                     "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 9
+  {"CU_POINTER_ATTRIBUTE_IS_LEGACY_CUDA_IPC_CAPABLE",                  {"HIP_POINTER_ATTRIBUTE_IS_LEGACY_HIP_IPC_CAPABLE",          "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 10
+  {"CU_POINTER_ATTRIBUTE_RANGE_START_ADDR",                            {"HIP_POINTER_ATTRIBUTE_RANGE_START_ADDR",                   "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 11
+  {"CU_POINTER_ATTRIBUTE_RANGE_SIZE",                                  {"HIP_POINTER_ATTRIBUTE_RANGE_SIZE",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 12
+  {"CU_POINTER_ATTRIBUTE_MAPPED",                                      {"HIP_POINTER_ATTRIBUTE_MAPPED",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 13
+  {"CU_POINTER_ATTRIBUTE_ALLOWED_HANDLE_TYPES",                        {"HIP_POINTER_ATTRIBUTE_ALLOWED_HANDLE_TYPES",               "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 14
+  {"CU_POINTER_ATTRIBUTE_IS_GPU_DIRECT_RDMA_CAPABLE",                  {"HIP_POINTER_ATTRIBUTE_IS_GPU_DIRECT_RDMA_CAPABLE",         "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 15
+  {"CU_POINTER_ATTRIBUTE_ACCESS_FLAGS",                                {"HIP_POINTER_ATTRIBUTE_ACCESS_FLAGS",                       "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 16
+  {"CU_POINTER_ATTRIBUTE_MEMPOOL_HANDLE",                              {"HIP_POINTER_ATTRIBUTE_MEMPOOL_HANDLE",                     "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 17
 
   // TODO [HIP]: HIPresourcetype_enum and all its values should be hipResourceType as long as they are equal
   // cudaResourceType
@@ -1483,7 +1483,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaErrorInvalidResourceHandle
   {"CUDA_ERROR_INVALID_HANDLE",                                        {"hipErrorInvalidHandle",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 400
   // cudaErrorIllegalState
-  {"CUDA_ERROR_ILLEGAL_STATE",                                         {"hipErrorIllegalState",                                     "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 401
+  {"CUDA_ERROR_ILLEGAL_STATE",                                         {"hipErrorIllegalState",                                     "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 401
   // cudaErrorSymbolNotFound
   {"CUDA_ERROR_NOT_FOUND",                                             {"hipErrorNotFound",                                         "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 500
   // cudaErrorNotReady
@@ -1567,7 +1567,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaErrorTimeout
   {"CUDA_ERROR_TIMEOUT",                                               {"hipErrorTimeout",                                          "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 909
   // cudaErrorGraphExecUpdateFailure
-  {"CUDA_ERROR_GRAPH_EXEC_UPDATE_FAILURE",                             {"hipErrorGraphExecUpdateFailure",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 910
+  {"CUDA_ERROR_GRAPH_EXEC_UPDATE_FAILURE",                             {"hipErrorGraphExecUpdateFailure",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 910
   // cudaErrorExternalDevice
   {"CUDA_ERROR_EXTERNAL_DEVICE",                                       {"hipErrorExternalDevice",                                   "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 911
   // cudaErrorUnknown
@@ -3124,4 +3124,22 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {
   {"hipExternalSemaphoreHandleTypeD3D12Fence",                         {HIP_4040, HIP_0,    HIP_0   }},
   {"hipLimitPrintfFifoSize",                                           {HIP_4050, HIP_0,    HIP_0   }},
   {"hipStreamPerThread",                                               {HIP_4050, HIP_0,    HIP_0   }},
+  {"hipPointer_attribute",                                             {HIP_5000, HIP_0,    HIP_0   }},
+  {"HIP_POINTER_ATTRIBUTE_CONTEXT",                                    {HIP_5000, HIP_0,    HIP_0   }},
+  {"HIP_POINTER_ATTRIBUTE_MEMORY_TYPE",                                {HIP_5000, HIP_0,    HIP_0   }},
+  {"HIP_POINTER_ATTRIBUTE_DEVICE_POINTER",                             {HIP_5000, HIP_0,    HIP_0   }},
+  {"HIP_POINTER_ATTRIBUTE_HOST_POINTER",                               {HIP_5000, HIP_0,    HIP_0   }},
+  {"HIP_POINTER_ATTRIBUTE_P2P_TOKENS",                                 {HIP_5000, HIP_0,    HIP_0   }},
+  {"HIP_POINTER_ATTRIBUTE_SYNC_MEMOPS",                                {HIP_5000, HIP_0,    HIP_0   }},
+  {"HIP_POINTER_ATTRIBUTE_BUFFER_ID",                                  {HIP_5000, HIP_0,    HIP_0   }},
+  {"HIP_POINTER_ATTRIBUTE_IS_MANAGED",                                 {HIP_5000, HIP_0,    HIP_0   }},
+  {"HIP_POINTER_ATTRIBUTE_DEVICE_ORDINAL",                             {HIP_5000, HIP_0,    HIP_0   }},
+  {"HIP_POINTER_ATTRIBUTE_IS_LEGACY_HIP_IPC_CAPABLE",                  {HIP_5000, HIP_0,    HIP_0   }},
+  {"HIP_POINTER_ATTRIBUTE_RANGE_START_ADDR",                           {HIP_5000, HIP_0,    HIP_0   }},
+  {"HIP_POINTER_ATTRIBUTE_RANGE_SIZE",                                 {HIP_5000, HIP_0,    HIP_0   }},
+  {"HIP_POINTER_ATTRIBUTE_MAPPED",                                     {HIP_5000, HIP_0,    HIP_0   }},
+  {"HIP_POINTER_ATTRIBUTE_ALLOWED_HANDLE_TYPES",                       {HIP_5000, HIP_0,    HIP_0   }},
+  {"HIP_POINTER_ATTRIBUTE_IS_GPU_DIRECT_RDMA_CAPABLE",                 {HIP_5000, HIP_0,    HIP_0   }},
+  {"HIP_POINTER_ATTRIBUTE_ACCESS_FLAGS",                               {HIP_5000, HIP_0,    HIP_0   }},
+  {"HIP_POINTER_ATTRIBUTE_MEMPOOL_HANDLE",                             {HIP_5000, HIP_0,    HIP_0   }},
 };
