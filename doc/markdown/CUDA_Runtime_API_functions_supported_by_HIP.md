@@ -420,39 +420,39 @@
 |`cudaDeviceGraphMemTrim`|11.4| | | | | | | |
 |`cudaDeviceSetGraphMemAttribute`|11.4| | | | | | | |
 |`cudaGraphAddChildGraphNode`|10.0| | | | | | | |
-|`cudaGraphAddDependencies`|10.0| | |`hipGraphAddDependencies`|4.5.0| | |4.5.0|
-|`cudaGraphAddEmptyNode`|10.0| | |`hipGraphAddEmptyNode`|4.5.0| | |4.5.0|
+|`cudaGraphAddDependencies`|10.0| | |`hipGraphAddDependencies`|4.5.0| | |5.0.0|
+|`cudaGraphAddEmptyNode`|10.0| | |`hipGraphAddEmptyNode`|4.5.0| | |5.0.0|
 |`cudaGraphAddEventRecordNode`|11.1| | | | | | | |
 |`cudaGraphAddEventWaitNode`|11.1| | | | | | | |
 |`cudaGraphAddExternalSemaphoresSignalNode`|11.2| | | | | | | |
 |`cudaGraphAddExternalSemaphoresWaitNode`|11.2| | | | | | | |
 |`cudaGraphAddHostNode`|10.0| | | | | | | |
-|`cudaGraphAddKernelNode`|10.0| | |`hipGraphAddKernelNode`|4.3.0| | |4.5.0|
+|`cudaGraphAddKernelNode`|10.0| | |`hipGraphAddKernelNode`|4.3.0| | |5.0.0|
 |`cudaGraphAddMemAllocNode`|11.4| | | | | | | |
 |`cudaGraphAddMemFreeNode`|11.4| | | | | | | |
-|`cudaGraphAddMemcpyNode`|10.0| | |`hipGraphAddMemcpyNode`|4.3.0| | |4.5.0|
-|`cudaGraphAddMemcpyNode1D`|11.1| | |`hipGraphAddMemcpyNode1D`|4.5.0| | |4.5.0|
+|`cudaGraphAddMemcpyNode`|10.0| | |`hipGraphAddMemcpyNode`|4.3.0| | |5.0.0|
+|`cudaGraphAddMemcpyNode1D`|11.1| | |`hipGraphAddMemcpyNode1D`|4.5.0| | |5.0.0|
 |`cudaGraphAddMemcpyNodeFromSymbol`|11.1| | | | | | | |
 |`cudaGraphAddMemcpyNodeToSymbol`|11.1| | | | | | | |
-|`cudaGraphAddMemsetNode`|10.0| | |`hipGraphAddMemsetNode`|4.3.0| | |4.5.0|
+|`cudaGraphAddMemsetNode`|10.0| | |`hipGraphAddMemsetNode`|4.3.0| | |5.0.0|
 |`cudaGraphChildGraphNodeGetGraph`|10.0| | | | | | | |
 |`cudaGraphClone`|10.0| | | | | | | |
-|`cudaGraphCreate`|10.0| | |`hipGraphCreate`|4.3.0| | |4.5.0|
+|`cudaGraphCreate`|10.0| | |`hipGraphCreate`|4.3.0| | |5.0.0|
 |`cudaGraphDebugDotPrint`|11.3| | | | | | | |
-|`cudaGraphDestroy`|10.0| | |`hipGraphDestroy`|4.3.0| | |4.5.0|
+|`cudaGraphDestroy`|10.0| | |`hipGraphDestroy`|4.3.0| | |5.0.0|
 |`cudaGraphDestroyNode`|10.0| | | | | | | |
 |`cudaGraphEventRecordNodeGetEvent`|11.1| | | | | | | |
 |`cudaGraphEventRecordNodeSetEvent`|11.1| | | | | | | |
 |`cudaGraphEventWaitNodeGetEvent`|11.1| | | | | | | |
 |`cudaGraphEventWaitNodeSetEvent`|11.1| | | | | | | |
 |`cudaGraphExecChildGraphNodeSetParams`|11.1| | | | | | | |
-|`cudaGraphExecDestroy`|10.0| | |`hipGraphExecDestroy`|4.3.0| | |4.5.0|
+|`cudaGraphExecDestroy`|10.0| | |`hipGraphExecDestroy`|4.3.0| | |5.0.0|
 |`cudaGraphExecEventRecordNodeSetEvent`|11.1| | | | | | | |
 |`cudaGraphExecEventWaitNodeSetEvent`|11.1| | | | | | | |
 |`cudaGraphExecExternalSemaphoresSignalNodeSetParams`|11.2| | | | | | | |
 |`cudaGraphExecExternalSemaphoresWaitNodeSetParams`|11.2| | | | | | | |
 |`cudaGraphExecHostNodeSetParams`|11.0| | | | | | | |
-|`cudaGraphExecKernelNodeSetParams`|11.0| | |`hipGraphExecKernelNodeSetParams`|4.5.0| | |4.5.0|
+|`cudaGraphExecKernelNodeSetParams`|11.0| | |`hipGraphExecKernelNodeSetParams`|4.5.0| | |5.0.0|
 |`cudaGraphExecMemcpyNodeSetParams`|11.0| | | | | | | |
 |`cudaGraphExecMemcpyNodeSetParams1D`|11.1| | | | | | | |
 |`cudaGraphExecMemcpyNodeSetParamsFromSymbol`|11.1| | | | | | | |
@@ -464,27 +464,27 @@
 |`cudaGraphExternalSemaphoresWaitNodeGetParams`|11.2| | | | | | | |
 |`cudaGraphExternalSemaphoresWaitNodeSetParams`|11.2| | | | | | | |
 |`cudaGraphGetEdges`|10.0| | | | | | | |
-|`cudaGraphGetNodes`|10.0| | |`hipGraphGetNodes`|4.5.0| | |4.5.0|
-|`cudaGraphGetRootNodes`|10.0| | |`hipGraphGetRootNodes`|4.5.0| | |4.5.0|
+|`cudaGraphGetNodes`|10.0| | |`hipGraphGetNodes`|4.5.0| | |5.0.0|
+|`cudaGraphGetRootNodes`|10.0| | |`hipGraphGetRootNodes`|4.5.0| | |5.0.0|
 |`cudaGraphHostNodeGetParams`|10.0| | | | | | | |
 |`cudaGraphHostNodeSetParams`|10.0| | | | | | | |
-|`cudaGraphInstantiate`|10.0| | |`hipGraphInstantiate`|4.3.0| | |4.5.0|
+|`cudaGraphInstantiate`|10.0| | |`hipGraphInstantiate`|4.3.0| | |5.0.0|
 |`cudaGraphInstantiateWithFlags`|11.4| | | | | | | |
 |`cudaGraphKernelNodeCopyAttributes`|11.0| | | | | | | |
 |`cudaGraphKernelNodeGetAttribute`|11.0| | | | | | | |
-|`cudaGraphKernelNodeGetParams`|11.0| | |`hipGraphKernelNodeGetParams`|4.5.0| | |4.5.0|
+|`cudaGraphKernelNodeGetParams`|11.0| | |`hipGraphKernelNodeGetParams`|4.5.0| | |5.0.0|
 |`cudaGraphKernelNodeSetAttribute`|11.0| | | | | | | |
-|`cudaGraphKernelNodeSetParams`|11.0| | |`hipGraphKernelNodeSetParams`|4.5.0| | |4.5.0|
-|`cudaGraphLaunch`|11.0| | |`hipGraphLaunch`|4.3.0| | |4.5.0|
+|`cudaGraphKernelNodeSetParams`|11.0| | |`hipGraphKernelNodeSetParams`|4.5.0| | |5.0.0|
+|`cudaGraphLaunch`|11.0| | |`hipGraphLaunch`|4.3.0| | |5.0.0|
 |`cudaGraphMemAllocNodeGetParams`|11.4| | | | | | | |
 |`cudaGraphMemFreeNodeGetParams`|11.4| | | | | | | |
-|`cudaGraphMemcpyNodeGetParams`|11.0| | |`hipGraphMemcpyNodeGetParams`|4.5.0| | |4.5.0|
-|`cudaGraphMemcpyNodeSetParams`|11.0| | |`hipGraphMemcpyNodeSetParams`|4.5.0| | |4.5.0|
+|`cudaGraphMemcpyNodeGetParams`|11.0| | |`hipGraphMemcpyNodeGetParams`|4.5.0| | |5.0.0|
+|`cudaGraphMemcpyNodeSetParams`|11.0| | |`hipGraphMemcpyNodeSetParams`|4.5.0| | |5.0.0|
 |`cudaGraphMemcpyNodeSetParams1D`|11.1| | | | | | | |
 |`cudaGraphMemcpyNodeSetParamsFromSymbol`|11.1| | | | | | | |
 |`cudaGraphMemcpyNodeSetParamsToSymbol`|11.1| | | | | | | |
-|`cudaGraphMemsetNodeGetParams`|11.0| | |`hipGraphMemsetNodeGetParams`|4.5.0| | |4.5.0|
-|`cudaGraphMemsetNodeSetParams`|11.0| | |`hipGraphMemsetNodeSetParams`|4.5.0| | |4.5.0|
+|`cudaGraphMemsetNodeGetParams`|11.0| | |`hipGraphMemsetNodeGetParams`|4.5.0| | |5.0.0|
+|`cudaGraphMemsetNodeSetParams`|11.0| | |`hipGraphMemsetNodeSetParams`|4.5.0| | |5.0.0|
 |`cudaGraphNodeFindInClone`|11.0| | | | | | | |
 |`cudaGraphNodeGetDependencies`|11.0| | | | | | | |
 |`cudaGraphNodeGetDependentNodes`|11.0| | | | | | | |
@@ -536,9 +536,9 @@ Unsupported
 |`CUevent_st`| | | |`ihipEvent_t`|1.6.0| | | |
 |`CUexternalMemory_st`|10.0| | | | | | | |
 |`CUexternalSemaphore_st`|10.0| | | | | | | |
-|`CUgraphExec_st`|10.0| | |`hipGraphExec`|4.3.0| | |4.5.0|
-|`CUgraphNode_st`|10.0| | |`hipGraphNode`|4.3.0| | |4.5.0|
-|`CUgraph_st`|10.0| | |`ihipGraph`|4.3.0| | |4.5.0|
+|`CUgraphExec_st`|10.0| | |`hipGraphExec`|4.3.0| | |5.0.0|
+|`CUgraphNode_st`|10.0| | |`hipGraphNode`|4.3.0| | |5.0.0|
+|`CUgraph_st`|10.0| | |`ihipGraph`|4.3.0| | |5.0.0|
 |`CUstream_st`| | | |`ihipStream_t`|1.5.0| | | |
 |`CUuuid_st`| | | | | | | | |
 |`MAJOR_VERSION`|8.0| | | | | | | |
@@ -881,13 +881,13 @@ Unsupported
 |`cudaErrorECCUncorrectable`| | | |`hipErrorECCNotCorrectable`|1.6.0| | | |
 |`cudaErrorExternalDevice`| | | | | | | | |
 |`cudaErrorFileNotFound`|10.1| | |`hipErrorFileNotFound`|1.6.0| | | |
-|`cudaErrorGraphExecUpdateFailure`|10.2| | | | | | | |
+|`cudaErrorGraphExecUpdateFailure`|10.2| | |`hipErrorGraphExecUpdateFailure`|5.0.0| | | |
 |`cudaErrorHardwareStackError`| | | | | | | | |
 |`cudaErrorHostMemoryAlreadyRegistered`| | | |`hipErrorHostMemoryAlreadyRegistered`|1.6.0| | | |
 |`cudaErrorHostMemoryNotRegistered`| | | |`hipErrorHostMemoryNotRegistered`|1.6.0| | | |
 |`cudaErrorIllegalAddress`| | | |`hipErrorIllegalAddress`|1.6.0| | | |
 |`cudaErrorIllegalInstruction`| | | | | | | | |
-|`cudaErrorIllegalState`|10.0| | | | | | | |
+|`cudaErrorIllegalState`|10.0| | |`hipErrorIllegalState`|5.0.0| | | |
 |`cudaErrorIncompatibleDriverContext`| | | | | | | | |
 |`cudaErrorInitializationError`| | | |`hipErrorNotInitialized`|1.6.0| | | |
 |`cudaErrorInsufficientDriver`| | | |`hipErrorInsufficientDriver`|1.7.0| | | |
@@ -1073,16 +1073,16 @@ Unsupported
 |`cudaGraphDebugDotFlagsMemcpyNodeParams`|11.3| | | | | | | |
 |`cudaGraphDebugDotFlagsMemsetNodeParams`|11.3| | | | | | | |
 |`cudaGraphDebugDotFlagsVerbose`|11.3| | | | | | | |
-|`cudaGraphExecUpdateError`|10.2| | |`hipGraphExecUpdateError`|4.3.0| | |4.5.0|
-|`cudaGraphExecUpdateErrorFunctionChanged`|10.2| | |`hipGraphExecUpdateErrorFunctionChanged`|4.3.0| | |4.5.0|
-|`cudaGraphExecUpdateErrorNodeTypeChanged`|10.2| | |`hipGraphExecUpdateErrorNodeTypeChanged`|4.3.0| | |4.5.0|
-|`cudaGraphExecUpdateErrorNotSupported`|10.2| | |`hipGraphExecUpdateErrorNotSupported`|4.3.0| | |4.5.0|
-|`cudaGraphExecUpdateErrorParametersChanged`|10.2| | |`hipGraphExecUpdateErrorParametersChanged`|4.3.0| | |4.5.0|
-|`cudaGraphExecUpdateErrorTopologyChanged`|10.2| | |`hipGraphExecUpdateErrorTopologyChanged`|4.3.0| | |4.5.0|
-|`cudaGraphExecUpdateErrorUnsupportedFunctionChange`|11.2| | |`hipGraphExecUpdateErrorUnsupportedFunctionChange`|4.3.0| | |4.5.0|
-|`cudaGraphExecUpdateResult`|10.2| | |`hipGraphExecUpdateResult`|4.3.0| | |4.5.0|
-|`cudaGraphExecUpdateSuccess`|10.2| | |`hipGraphExecUpdateSuccess`|4.3.0| | |4.5.0|
-|`cudaGraphExec_t`|10.0| | |`hipGraphExec_t`|4.3.0| | |4.5.0|
+|`cudaGraphExecUpdateError`|10.2| | |`hipGraphExecUpdateError`|4.3.0| | |5.0.0|
+|`cudaGraphExecUpdateErrorFunctionChanged`|10.2| | |`hipGraphExecUpdateErrorFunctionChanged`|4.3.0| | |5.0.0|
+|`cudaGraphExecUpdateErrorNodeTypeChanged`|10.2| | |`hipGraphExecUpdateErrorNodeTypeChanged`|4.3.0| | |5.0.0|
+|`cudaGraphExecUpdateErrorNotSupported`|10.2| | |`hipGraphExecUpdateErrorNotSupported`|4.3.0| | |5.0.0|
+|`cudaGraphExecUpdateErrorParametersChanged`|10.2| | |`hipGraphExecUpdateErrorParametersChanged`|4.3.0| | |5.0.0|
+|`cudaGraphExecUpdateErrorTopologyChanged`|10.2| | |`hipGraphExecUpdateErrorTopologyChanged`|4.3.0| | |5.0.0|
+|`cudaGraphExecUpdateErrorUnsupportedFunctionChange`|11.2| | |`hipGraphExecUpdateErrorUnsupportedFunctionChange`|4.3.0| | |5.0.0|
+|`cudaGraphExecUpdateResult`|10.2| | |`hipGraphExecUpdateResult`|4.3.0| | |5.0.0|
+|`cudaGraphExecUpdateSuccess`|10.2| | |`hipGraphExecUpdateSuccess`|4.3.0| | |5.0.0|
+|`cudaGraphExec_t`|10.0| | |`hipGraphExec_t`|4.3.0| | |5.0.0|
 |`cudaGraphInstantiateFlagAutoFreeOnLaunch`|11.4| | | | | | | |
 |`cudaGraphInstantiateFlags`|11.4| | | | | | | |
 |`cudaGraphMemAttrReservedMemCurrent`|11.4| | | | | | | |
@@ -1090,23 +1090,23 @@ Unsupported
 |`cudaGraphMemAttrUsedMemCurrent`|11.4| | | | | | | |
 |`cudaGraphMemAttrUsedMemHigh`|11.4| | | | | | | |
 |`cudaGraphMemAttributeType`|11.4| | | | | | | |
-|`cudaGraphNodeType`|10.0| | |`hipGraphNodeType`|4.3.0| | |4.5.0|
-|`cudaGraphNodeTypeCount`|10.0| | |`hipGraphNodeTypeCount`|4.3.0| | |4.5.0|
-|`cudaGraphNodeTypeEmpty`|10.0| | |`hipGraphNodeTypeEmpty`|4.3.0| | |4.5.0|
-|`cudaGraphNodeTypeEventRecord`|11.1| | |`hipGraphNodeTypeEventRecord`|4.3.0| | |4.5.0|
+|`cudaGraphNodeType`|10.0| | |`hipGraphNodeType`|4.3.0| | |5.0.0|
+|`cudaGraphNodeTypeCount`|10.0| | |`hipGraphNodeTypeCount`|4.3.0| | |5.0.0|
+|`cudaGraphNodeTypeEmpty`|10.0| | |`hipGraphNodeTypeEmpty`|4.3.0| | |5.0.0|
+|`cudaGraphNodeTypeEventRecord`|11.1| | |`hipGraphNodeTypeEventRecord`|4.3.0| | |5.0.0|
 |`cudaGraphNodeTypeExtSemaphoreSignal`|11.4| | | | | | | |
 |`cudaGraphNodeTypeExtSemaphoreWait`|11.4| | | | | | | |
-|`cudaGraphNodeTypeGraph`|10.0| | |`hipGraphNodeTypeGraph`|4.3.0| | |4.5.0|
-|`cudaGraphNodeTypeHost`|10.0| | |`hipGraphNodeTypeHost`|4.3.0| | |4.5.0|
-|`cudaGraphNodeTypeKernel`|10.0| | |`hipGraphNodeTypeKernel`|4.3.0| | |4.5.0|
+|`cudaGraphNodeTypeGraph`|10.0| | |`hipGraphNodeTypeGraph`|4.3.0| | |5.0.0|
+|`cudaGraphNodeTypeHost`|10.0| | |`hipGraphNodeTypeHost`|4.3.0| | |5.0.0|
+|`cudaGraphNodeTypeKernel`|10.0| | |`hipGraphNodeTypeKernel`|4.3.0| | |5.0.0|
 |`cudaGraphNodeTypeMemAlloc`|11.4| | | | | | | |
 |`cudaGraphNodeTypeMemFree`|11.4| | | | | | | |
-|`cudaGraphNodeTypeMemcpy`|10.0| | |`hipGraphNodeTypeMemcpy`|4.3.0| | |4.5.0|
-|`cudaGraphNodeTypeMemset`|10.0| | |`hipGraphNodeTypeMemset`|4.3.0| | |4.5.0|
-|`cudaGraphNodeTypeWaitEvent`|11.1| | |`hipGraphNodeTypeWaitEvent`|4.3.0| | |4.5.0|
-|`cudaGraphNode_t`|10.0| | |`hipGraphNode_t`|4.3.0| | |4.5.0|
+|`cudaGraphNodeTypeMemcpy`|10.0| | |`hipGraphNodeTypeMemcpy`|4.3.0| | |5.0.0|
+|`cudaGraphNodeTypeMemset`|10.0| | |`hipGraphNodeTypeMemset`|4.3.0| | |5.0.0|
+|`cudaGraphNodeTypeWaitEvent`|11.1| | |`hipGraphNodeTypeWaitEvent`|4.3.0| | |5.0.0|
+|`cudaGraphNode_t`|10.0| | |`hipGraphNode_t`|4.3.0| | |5.0.0|
 |`cudaGraphUserObjectMove`|11.3| | | | | | | |
-|`cudaGraph_t`|10.0| | |`hipGraph_t`|4.3.0| | |4.5.0|
+|`cudaGraph_t`|10.0| | |`hipGraph_t`|4.3.0| | |5.0.0|
 |`cudaGraphicsCubeFace`| | | | | | | | |
 |`cudaGraphicsCubeFaceNegativeX`| | | | | | | | |
 |`cudaGraphicsCubeFaceNegativeY`| | | | | | | | |

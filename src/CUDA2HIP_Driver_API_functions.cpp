@@ -393,7 +393,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   // cudaMemRangeGetAttributes
   {"cuMemRangeGetAttributes",                              {"hipMemRangeGetAttributes",                                "", CONV_ADDRESSING, API_DRIVER, 14}},
   // no analogue
-  {"cuPointerGetAttribute",                                {"hipPointerGetAttribute",                                  "", CONV_ADDRESSING, API_DRIVER, 14, HIP_UNSUPPORTED}},
+  {"cuPointerGetAttribute",                                {"hipPointerGetAttribute",                                  "", CONV_ADDRESSING, API_DRIVER, 14}},
   // no analogue
   // NOTE: Not equal to cudaPointerGetAttributes due to different signatures
   {"cuPointerGetAttributes",                               {"hipPointerGetAttributes_",                                "", CONV_ADDRESSING, API_DRIVER, 14, HIP_UNSUPPORTED}},
@@ -1333,6 +1333,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_FUNCTION_VER_MAP {
   {"hipStreamWriteValue64",                                {HIP_4020, HIP_0,    HIP_0   }},
   {"hipArrayDestroy",                                      {HIP_4020, HIP_0,    HIP_0   }},
   {"hipDrvMemcpy2DUnaligned",                              {HIP_4020, HIP_0,    HIP_0   }},
+  {"hipPointerGetAttribute",                               {HIP_5000, HIP_0,    HIP_0   }},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_DRIVER_API_SECTION_MAP {

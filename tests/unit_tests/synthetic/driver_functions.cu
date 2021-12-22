@@ -41,6 +41,7 @@ int main() {
   // CHECK-NEXT: hipStream_t stream;
   // CHECK-NEXT: hipMipmappedArray_t mipmappedArray;
   // CHECK-NEXT: hipStreamCallback_t streamCallback;
+  // CHECK-NEXT: hipPointer_attribute pointer_attribute;
   CUdevice device;
   CUcontext context;
   CUfunc_cache func_cache;
@@ -66,6 +67,7 @@ int main() {
   CUstream stream;
   CUmipmappedArray mipmappedArray;
   CUstreamCallback streamCallback;
+  CUpointer_attribute pointer_attribute;
 
 #if CUDA_VERSION > 7050
   // CHECK: hipMemRangeAttribute MemoryRangeAttribute;
@@ -629,6 +631,11 @@ int main() {
   // CHECK: result = hipMemRangeGetAttributes(&image, &bytes, &MemoryRangeAttribute, bytes, deviceptr, bytes);
   result = cuMemRangeGetAttributes(&image, &bytes, &MemoryRangeAttribute, bytes, deviceptr, bytes);
 #endif
+
+  // CUDA: CUresult CUDAAPI cuPointerGetAttribute(void *data, CUpointer_attribute attribute, CUdeviceptr ptr);
+  // HIP: hipError_t hipPointerGetAttribute(void* data, hipPointer_attribute attribute, hipDeviceptr_t ptr);
+  // CHECK: result = hipPointerGetAttribute(image, pointer_attribute, deviceptr);
+  result = cuPointerGetAttribute(image, pointer_attribute, deviceptr);
 
   // CUDA: CUresult CUDAAPI cuStreamAddCallback(CUstream hStream, CUstreamCallback callback, void *userData, unsigned int flags);
   // HIP: hipError_t hipStreamAddCallback(hipStream_t stream, hipStreamCallback_t callback, void* userData, unsigned int flags);
