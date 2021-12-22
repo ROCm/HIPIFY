@@ -637,6 +637,11 @@ int main() {
   // CHECK: result = hipPointerGetAttribute(image, pointer_attribute, deviceptr);
   result = cuPointerGetAttribute(image, pointer_attribute, deviceptr);
 
+  // CUDA: CUresult CUDAAPI cuPointerGetAttributes(unsigned int numAttributes, CUpointer_attribute *attributes, void **data, CUdeviceptr ptr);
+  // HIP: hipError_t hipDrvPointerGetAttributes(unsigned int numAttributes, hipPointer_attribute* attributes, void** data, hipDeviceptr_t ptr);
+  // CHECK: result = hipDrvPointerGetAttributes(flags, &pointer_attribute, &image, deviceptr);
+  result = cuPointerGetAttributes(flags, &pointer_attribute, &image, deviceptr);
+
   // CUDA: CUresult CUDAAPI cuStreamAddCallback(CUstream hStream, CUstreamCallback callback, void *userData, unsigned int flags);
   // HIP: hipError_t hipStreamAddCallback(hipStream_t stream, hipStreamCallback_t callback, void* userData, unsigned int flags);
   // CHECK: result = hipStreamAddCallback(stream, streamCallback, image, flags);

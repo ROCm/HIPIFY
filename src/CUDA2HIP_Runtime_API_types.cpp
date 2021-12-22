@@ -138,14 +138,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaExternalSemaphore_t",                                          {"hipExternalSemaphore_t",                                   "", CONV_TYPE, API_RUNTIME, 36}},
 
   // the same - CUgraph_st
-  {"CUgraph_st",                                                       {"ihipGraph",                                                "", CONV_TYPE, API_RUNTIME, 36, HIP_EXPERIMENTAL}},
+  {"CUgraph_st",                                                       {"ihipGraph",                                                "", CONV_TYPE, API_RUNTIME, 36}},
   // CUgraph
-  {"cudaGraph_t",                                                      {"hipGraph_t",                                               "", CONV_TYPE, API_RUNTIME, 36, HIP_EXPERIMENTAL}},
+  {"cudaGraph_t",                                                      {"hipGraph_t",                                               "", CONV_TYPE, API_RUNTIME, 36}},
 
   // the same -CUgraphExec_st
-  {"CUgraphExec_st",                                                   {"hipGraphExec",                                             "", CONV_TYPE, API_RUNTIME, 36, HIP_EXPERIMENTAL}},
+  {"CUgraphExec_st",                                                   {"hipGraphExec",                                             "", CONV_TYPE, API_RUNTIME, 36}},
   // CUgraphExec
-  {"cudaGraphExec_t",                                                  {"hipGraphExec_t",                                           "", CONV_TYPE, API_RUNTIME, 36, HIP_EXPERIMENTAL}},
+  {"cudaGraphExec_t",                                                  {"hipGraphExec_t",                                           "", CONV_TYPE, API_RUNTIME, 36}},
 
   // CUgraphicsResource_st
   {"cudaGraphicsResource",                                             {"hipGraphicsResource",                                      "", CONV_TYPE, API_RUNTIME, 36}},
@@ -153,9 +153,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaGraphicsResource_t",                                           {"hipGraphicsResource_t",                                    "", CONV_TYPE, API_RUNTIME, 36}},
 
   // the same - CUgraphNode_st
-  {"CUgraphNode_st",                                                   {"hipGraphNode",                                             "", CONV_TYPE, API_RUNTIME, 36, HIP_EXPERIMENTAL}},
+  {"CUgraphNode_st",                                                   {"hipGraphNode",                                             "", CONV_TYPE, API_RUNTIME, 36}},
   // CUgraphNode
-  {"cudaGraphNode_t",                                                  {"hipGraphNode_t",                                           "", CONV_TYPE, API_RUNTIME, 36, HIP_EXPERIMENTAL}},
+  {"cudaGraphNode_t",                                                  {"hipGraphNode_t",                                           "", CONV_TYPE, API_RUNTIME, 36}},
 
   // CUeglStreamConnection_st
   {"CUeglStreamConnection_st",                                         {"hipEglStreamConnection",                                   "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
@@ -1092,24 +1092,24 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaGraphicsRegisterFlagsTextureGather",                           {"hipGraphicsRegisterFlagsTextureGather",                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 8
 
   // CUgraphNodeType
-  {"cudaGraphNodeType",                                                {"hipGraphNodeType",                                         "", CONV_TYPE, API_RUNTIME, 36, HIP_EXPERIMENTAL}},
+  {"cudaGraphNodeType",                                                {"hipGraphNodeType",                                         "", CONV_TYPE, API_RUNTIME, 36}},
   // cudaGraphNodeType enum values
   // CU_GRAPH_NODE_TYPE_KERNEL = 0
-  {"cudaGraphNodeTypeKernel",                                          {"hipGraphNodeTypeKernel",                                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 0x00
+  {"cudaGraphNodeTypeKernel",                                          {"hipGraphNodeTypeKernel",                                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 0x00
   // CU_GRAPH_NODE_TYPE_MEMCPY = 1
-  {"cudaGraphNodeTypeMemcpy",                                          {"hipGraphNodeTypeMemcpy",                                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 0x01
+  {"cudaGraphNodeTypeMemcpy",                                          {"hipGraphNodeTypeMemcpy",                                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 0x01
   // CU_GRAPH_NODE_TYPE_MEMSET = 2
-  {"cudaGraphNodeTypeMemset",                                          {"hipGraphNodeTypeMemset",                                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 0x02
+  {"cudaGraphNodeTypeMemset",                                          {"hipGraphNodeTypeMemset",                                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 0x02
   // CU_GRAPH_NODE_TYPE_HOST = 3
-  {"cudaGraphNodeTypeHost",                                            {"hipGraphNodeTypeHost",                                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 0x03
+  {"cudaGraphNodeTypeHost",                                            {"hipGraphNodeTypeHost",                                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 0x03
   // CU_GRAPH_NODE_TYPE_GRAPH = 4
-  {"cudaGraphNodeTypeGraph",                                           {"hipGraphNodeTypeGraph",                                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 0x04
+  {"cudaGraphNodeTypeGraph",                                           {"hipGraphNodeTypeGraph",                                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 0x04
   // CU_GRAPH_NODE_TYPE_EMPTY = 5
-  {"cudaGraphNodeTypeEmpty",                                           {"hipGraphNodeTypeEmpty",                                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 0x05
+  {"cudaGraphNodeTypeEmpty",                                           {"hipGraphNodeTypeEmpty",                                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 0x05
   // CU_GRAPH_NODE_TYPE_WAIT_EVENT = 6
-  {"cudaGraphNodeTypeWaitEvent",                                       {"hipGraphNodeTypeWaitEvent",                                "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 0x06
+  {"cudaGraphNodeTypeWaitEvent",                                       {"hipGraphNodeTypeWaitEvent",                                "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 0x06
   // CU_GRAPH_NODE_TYPE_EVENT_RECORD = 7
-  {"cudaGraphNodeTypeEventRecord",                                     {"hipGraphNodeTypeEventRecord",                              "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 0x07
+  {"cudaGraphNodeTypeEventRecord",                                     {"hipGraphNodeTypeEventRecord",                              "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 0x07
   // CU_GRAPH_NODE_TYPE_EXT_SEMAS_SIGNAL = 8
   {"cudaGraphNodeTypeExtSemaphoreSignal",                              {"hipGraphNodeTypeExtSemasSignal",                           "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 0x08
   // CU_GRAPH_NODE_TYPE_EXT_SEMAS_WAIT = 9
@@ -1119,27 +1119,27 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CU_GRAPH_NODE_TYPE_MEM_FREE = 11
   {"cudaGraphNodeTypeMemFree",                                         {"hipGraphNodeTypeMemFree",                                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 0x0b
   // CU_GRAPH_NODE_TYPE_COUNT
-  {"cudaGraphNodeTypeCount",                                           {"hipGraphNodeTypeCount",                                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}},
+  {"cudaGraphNodeTypeCount",                                           {"hipGraphNodeTypeCount",                                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}},
 
   // CUgraphExecUpdateResult
-  {"cudaGraphExecUpdateResult",                                        {"hipGraphExecUpdateResult",                                 "", CONV_TYPE, API_RUNTIME, 36, HIP_EXPERIMENTAL}},
+  {"cudaGraphExecUpdateResult",                                        {"hipGraphExecUpdateResult",                                 "", CONV_TYPE, API_RUNTIME, 36}},
   // cudaGraphExecUpdateResult enum values
   // CU_GRAPH_EXEC_UPDATE_SUCCESS
-  {"cudaGraphExecUpdateSuccess",                                       {"hipGraphExecUpdateSuccess",                                "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 0x0
+  {"cudaGraphExecUpdateSuccess",                                       {"hipGraphExecUpdateSuccess",                                "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 0x0
   // CU_GRAPH_EXEC_UPDATE_ERROR
-  {"cudaGraphExecUpdateError",                                         {"hipGraphExecUpdateError",                                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 0x1
+  {"cudaGraphExecUpdateError",                                         {"hipGraphExecUpdateError",                                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 0x1
   // CU_GRAPH_EXEC_UPDATE_ERROR_TOPOLOGY_CHANGED
-  {"cudaGraphExecUpdateErrorTopologyChanged",                          {"hipGraphExecUpdateErrorTopologyChanged",                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 0x2
+  {"cudaGraphExecUpdateErrorTopologyChanged",                          {"hipGraphExecUpdateErrorTopologyChanged",                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 0x2
   // CU_GRAPH_EXEC_UPDATE_ERROR_NODE_TYPE_CHANGED
-  {"cudaGraphExecUpdateErrorNodeTypeChanged",                          {"hipGraphExecUpdateErrorNodeTypeChanged",                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 0x3
+  {"cudaGraphExecUpdateErrorNodeTypeChanged",                          {"hipGraphExecUpdateErrorNodeTypeChanged",                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 0x3
   // CU_GRAPH_EXEC_UPDATE_ERROR_FUNCTION_CHANGED
-  {"cudaGraphExecUpdateErrorFunctionChanged",                          {"hipGraphExecUpdateErrorFunctionChanged",                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 0x4
+  {"cudaGraphExecUpdateErrorFunctionChanged",                          {"hipGraphExecUpdateErrorFunctionChanged",                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 0x4
   // CU_GRAPH_EXEC_UPDATE_ERROR_PARAMETERS_CHANGED
-  {"cudaGraphExecUpdateErrorParametersChanged",                        {"hipGraphExecUpdateErrorParametersChanged",                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 0x5
+  {"cudaGraphExecUpdateErrorParametersChanged",                        {"hipGraphExecUpdateErrorParametersChanged",                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 0x5
   // CU_GRAPH_EXEC_UPDATE_ERROR_NOT_SUPPORTED
-  {"cudaGraphExecUpdateErrorNotSupported",                             {"hipGraphExecUpdateErrorNotSupported",                      "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 0x6
+  {"cudaGraphExecUpdateErrorNotSupported",                             {"hipGraphExecUpdateErrorNotSupported",                      "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 0x6
   // CU_GRAPH_EXEC_UPDATE_ERROR_UNSUPPORTED_FUNCTION_CHANGE
-  {"cudaGraphExecUpdateErrorUnsupportedFunctionChange",                {"hipGraphExecUpdateErrorUnsupportedFunctionChange",         "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 0x7
+  {"cudaGraphExecUpdateErrorUnsupportedFunctionChange",                {"hipGraphExecUpdateErrorUnsupportedFunctionChange",         "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 0x7
 
   // CUlimit
   {"cudaLimit",                                                        {"hipLimit_t",                                               "", CONV_TYPE, API_RUNTIME, 36}},
@@ -2361,29 +2361,29 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {
   {"hipExternalMemoryBufferDesc",                                      {HIP_4030, HIP_0,    HIP_0   }},
   {"hipExternalSemaphoreHandleDesc",                                   {HIP_4040, HIP_0,    HIP_0   }},
   {"hipExternalSemaphoreSignalParams",                                 {HIP_4040, HIP_0,    HIP_0   }},
-  {"hipGraphNodeType",                                                 {HIP_4030, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipGraphNodeTypeKernel",                                           {HIP_4030, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipGraphNodeTypeMemcpy",                                           {HIP_4030, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipGraphNodeTypeMemset",                                           {HIP_4030, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipGraphNodeTypeHost",                                             {HIP_4030, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipGraphNodeTypeGraph",                                            {HIP_4030, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipGraphNodeTypeEmpty",                                            {HIP_4030, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipGraphNodeTypeWaitEvent",                                        {HIP_4030, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipGraphNodeTypeEventRecord",                                      {HIP_4030, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipGraphNodeTypeCount",                                            {HIP_4030, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipGraphNode",                                                     {HIP_4030, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipGraphNode_t",                                                   {HIP_4030, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipGraphNodeType",                                                 {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipGraphNodeTypeKernel",                                           {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipGraphNodeTypeMemcpy",                                           {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipGraphNodeTypeMemset",                                           {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipGraphNodeTypeHost",                                             {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipGraphNodeTypeGraph",                                            {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipGraphNodeTypeEmpty",                                            {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipGraphNodeTypeWaitEvent",                                        {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipGraphNodeTypeEventRecord",                                      {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipGraphNodeTypeCount",                                            {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipGraphNode",                                                     {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipGraphNode_t",                                                   {HIP_4030, HIP_0,    HIP_0   }},
   {"hipHostFn_t",                                                      {HIP_4030, HIP_0,    HIP_0   }},
   {"hipMemsetParams",                                                  {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipGraphExecUpdateResult",                                         {HIP_4030, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipGraphExecUpdateSuccess",                                        {HIP_4030, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipGraphExecUpdateError",                                          {HIP_4030, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipGraphExecUpdateErrorTopologyChanged",                           {HIP_4030, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipGraphExecUpdateErrorNodeTypeChanged",                           {HIP_4030, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipGraphExecUpdateErrorFunctionChanged",                           {HIP_4030, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipGraphExecUpdateErrorParametersChanged",                         {HIP_4030, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipGraphExecUpdateErrorNotSupported",                              {HIP_4030, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipGraphExecUpdateErrorUnsupportedFunctionChange",                 {HIP_4030, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipGraphExecUpdateResult",                                         {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipGraphExecUpdateSuccess",                                        {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipGraphExecUpdateError",                                          {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipGraphExecUpdateErrorTopologyChanged",                           {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipGraphExecUpdateErrorNodeTypeChanged",                           {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipGraphExecUpdateErrorFunctionChanged",                           {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipGraphExecUpdateErrorParametersChanged",                         {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipGraphExecUpdateErrorNotSupported",                              {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipGraphExecUpdateErrorUnsupportedFunctionChange",                 {HIP_4030, HIP_0,    HIP_0   }},
   {"hipStreamCaptureMode",                                             {HIP_4030, HIP_0,    HIP_0   }},
   {"hipStreamCaptureModeGlobal",                                       {HIP_4030, HIP_0,    HIP_0   }},
   {"hipStreamCaptureModeThreadLocal",                                  {HIP_4030, HIP_0,    HIP_0   }},
@@ -2392,10 +2392,10 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {
   {"hipStreamCaptureStatusNone",                                       {HIP_4030, HIP_0,    HIP_0   }},
   {"hipStreamCaptureStatusActive",                                     {HIP_4030, HIP_0,    HIP_0   }},
   {"hipStreamCaptureStatusInvalidated",                                {HIP_4030, HIP_0,    HIP_0   }},
-  {"ihipGraph",                                                        {HIP_4030, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipGraph_t",                                                       {HIP_4030, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipGraphExec",                                                     {HIP_4030, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipGraphExec_t",                                                   {HIP_4030, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"ihipGraph",                                                        {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipGraph_t",                                                       {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipGraphExec",                                                     {HIP_4030, HIP_0,    HIP_0   }},
+  {"hipGraphExec_t",                                                   {HIP_4030, HIP_0,    HIP_0   }},
   {"hipGraphicsResource",                                              {HIP_4040, HIP_0,    HIP_0   }},
   {"hipGraphicsResource_t",                                            {HIP_4040, HIP_0,    HIP_0   }},
   {"hipGLDeviceList",                                                  {HIP_4040, HIP_0,    HIP_0   }},
