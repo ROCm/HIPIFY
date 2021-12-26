@@ -72,10 +72,10 @@
 |`cudaStreamDestroy`| | | |`hipStreamDestroy`|1.6.0| | | |
 |`cudaStreamEndCapture`|10.0| | |`hipStreamEndCapture`|4.3.0| | | |
 |`cudaStreamGetAttribute`|11.0| | | | | | | |
-|`cudaStreamGetCaptureInfo`|10.1| | | | | | | |
+|`cudaStreamGetCaptureInfo`|10.1| | |`hipStreamGetCaptureInfo`|5.0.0| | |5.0.0|
 |`cudaStreamGetFlags`| | | |`hipStreamGetFlags`|1.6.0| | | |
 |`cudaStreamGetPriority`| | | |`hipStreamGetPriority`|2.0.0| | | |
-|`cudaStreamIsCapturing`|10.0| | | | | | | |
+|`cudaStreamIsCapturing`|10.0| | |`hipStreamIsCapturing`|5.0.0| | |5.0.0|
 |`cudaStreamQuery`| | | |`hipStreamQuery`|1.6.0| | | |
 |`cudaStreamSetAttribute`|11.0| | | | | | | |
 |`cudaStreamSynchronize`| | | |`hipStreamSynchronize`|1.6.0| | | |
@@ -463,7 +463,7 @@
 |`cudaGraphExternalSemaphoresSignalNodeSetParams`|11.2| | | | | | | |
 |`cudaGraphExternalSemaphoresWaitNodeGetParams`|11.2| | | | | | | |
 |`cudaGraphExternalSemaphoresWaitNodeSetParams`|11.2| | | | | | | |
-|`cudaGraphGetEdges`|10.0| | | | | | | |
+|`cudaGraphGetEdges`|10.0| | |`hipGraphGetEdges`|5.0.0| | |5.0.0|
 |`cudaGraphGetNodes`|10.0| | |`hipGraphGetNodes`|4.5.0| | | |
 |`cudaGraphGetRootNodes`|10.0| | |`hipGraphGetRootNodes`|4.5.0| | | |
 |`cudaGraphHostNodeGetParams`|10.0| | | | | | | |
@@ -486,11 +486,11 @@
 |`cudaGraphMemsetNodeGetParams`|11.0| | |`hipGraphMemsetNodeGetParams`|4.5.0| | | |
 |`cudaGraphMemsetNodeSetParams`|11.0| | |`hipGraphMemsetNodeSetParams`|4.5.0| | | |
 |`cudaGraphNodeFindInClone`|11.0| | | | | | | |
-|`cudaGraphNodeGetDependencies`|11.0| | | | | | | |
+|`cudaGraphNodeGetDependencies`|11.0| | |`hipGraphNodeGetDependencies`|5.0.0| | |5.0.0|
 |`cudaGraphNodeGetDependentNodes`|11.0| | | | | | | |
 |`cudaGraphNodeGetType`|11.0| | | | | | | |
 |`cudaGraphReleaseUserObject`|11.3| | | | | | | |
-|`cudaGraphRemoveDependencies`|11.0| | | | | | | |
+|`cudaGraphRemoveDependencies`|11.0| | |`hipGraphRemoveDependencies`|5.0.0| | |5.0.0|
 |`cudaGraphRetainUserObject`|11.3| | | | | | | |
 |`cudaGraphUpload`|11.1| | | | | | | |
 |`cudaUserObjectCreate`|11.3| | | | | | | |
@@ -881,13 +881,13 @@ Unsupported
 |`cudaErrorECCUncorrectable`| | | |`hipErrorECCNotCorrectable`|1.6.0| | | |
 |`cudaErrorExternalDevice`| | | | | | | | |
 |`cudaErrorFileNotFound`|10.1| | |`hipErrorFileNotFound`|1.6.0| | | |
-|`cudaErrorGraphExecUpdateFailure`|10.2| | |`hipErrorGraphExecUpdateFailure`|5.0.0| | | |
+|`cudaErrorGraphExecUpdateFailure`|10.2| | |`hipErrorGraphExecUpdateFailure`|5.0.0| | |5.0.0|
 |`cudaErrorHardwareStackError`| | | | | | | | |
 |`cudaErrorHostMemoryAlreadyRegistered`| | | |`hipErrorHostMemoryAlreadyRegistered`|1.6.0| | | |
 |`cudaErrorHostMemoryNotRegistered`| | | |`hipErrorHostMemoryNotRegistered`|1.6.0| | | |
 |`cudaErrorIllegalAddress`| | | |`hipErrorIllegalAddress`|1.6.0| | | |
 |`cudaErrorIllegalInstruction`| | | | | | | | |
-|`cudaErrorIllegalState`|10.0| | |`hipErrorIllegalState`|5.0.0| | | |
+|`cudaErrorIllegalState`|10.0| | |`hipErrorIllegalState`|5.0.0| | |5.0.0|
 |`cudaErrorIncompatibleDriverContext`| | | | | | | | |
 |`cudaErrorInitializationError`| | | |`hipErrorNotInitialized`|1.6.0| | | |
 |`cudaErrorInsufficientDriver`| | | |`hipErrorInsufficientDriver`|1.7.0| | | |
@@ -1283,7 +1283,7 @@ Unsupported
 |`cudaSharedmemCarveoutDefault`|9.0| | | | | | | |
 |`cudaSharedmemCarveoutMaxL1`|9.0| | | | | | | |
 |`cudaSharedmemCarveoutMaxShared`|9.0| | | | | | | |
-|`cudaStreamAddCaptureDependencies`|11.3| | | | | | | |
+|`cudaStreamAddCaptureDependencies`|11.3| | |`hipStreamAddCaptureDependencies`|5.0.0| | |5.0.0|
 |`cudaStreamAttrID`|11.0| | | | | | | |
 |`cudaStreamAttrValue`|11.0| | | | | | | |
 |`cudaStreamAttributeAccessPolicyWindow`|11.0| | | | | | | |
@@ -1301,8 +1301,8 @@ Unsupported
 |`cudaStreamLegacy`| | | | | | | | |
 |`cudaStreamNonBlocking`| | | |`hipStreamNonBlocking`|1.6.0| | | |
 |`cudaStreamPerThread`| | | |`hipStreamPerThread`|4.5.0| | | |
-|`cudaStreamSetCaptureDependencies`|11.3| | | | | | | |
-|`cudaStreamUpdateCaptureDependenciesFlags`|11.3| | | | | | | |
+|`cudaStreamSetCaptureDependencies`|11.3| | |`hipStreamSetCaptureDependencies`|5.0.0| | |5.0.0|
+|`cudaStreamUpdateCaptureDependenciesFlags`|11.3| | |`hipStreamUpdateCaptureDependenciesFlags`|5.0.0| | |5.0.0|
 |`cudaStream_t`| | | |`hipStream_t`|1.5.0| | | |
 |`cudaSuccess`| | | |`hipSuccess`|1.5.0| | | |
 |`cudaSurfaceBoundaryMode`| | | |`hipSurfaceBoundaryMode`|1.9.0| | | |
