@@ -350,6 +350,7 @@ int main() {
   // CHECK-NEXT: hipError_t ErrorStreamCaptureIsolation = hipErrorStreamCaptureIsolation;
   // CHECK-NEXT: hipError_t ErrorStreamCaptureImplicit = hipErrorStreamCaptureImplicit;
   // CHECK-NEXT: hipError_t ErrorCapturedEvent = hipErrorCapturedEvent;
+  // CHECK-NEXT: hipError_t ErrorIllegalState = hipErrorIllegalState;
   cudaError_t ErrorStreamCaptureUnsupported = cudaErrorStreamCaptureUnsupported;
   cudaError_t ErrorStreamCaptureInvalidated = cudaErrorStreamCaptureInvalidated;
   cudaError_t ErrorStreamCaptureMerge = cudaErrorStreamCaptureMerge;
@@ -358,6 +359,7 @@ int main() {
   cudaError_t ErrorStreamCaptureIsolation = cudaErrorStreamCaptureIsolation;
   cudaError_t ErrorStreamCaptureImplicit = cudaErrorStreamCaptureImplicit;
   cudaError_t ErrorCapturedEvent = cudaErrorCapturedEvent;
+  cudaError_t ErrorIllegalState = cudaErrorIllegalState;
 #endif
 #if CUDA_VERSION > 10000
   // CHECK: hipError_t ErrorArrayIsMapped = hipErrorArrayIsMapped;
@@ -385,7 +387,9 @@ int main() {
 #endif
 #if CUDA_VERSION > 10010
   // CHECK: hipError_t ErrorDeviceUninitialized = hipErrorInvalidContext;
+  // CHECK: hipError_t ErrorGraphExecUpdateFailure = hipErrorGraphExecUpdateFailure;
   cudaError_t ErrorDeviceUninitialized = cudaErrorDeviceUninitialized;
+  cudaError_t ErrorGraphExecUpdateFailure = cudaErrorGraphExecUpdateFailure;
 #endif
   // CHECK: hipError_t ErrorUnknown = hipErrorUnknown;
   cudaError_t ErrorUnknown = cudaErrorUnknown;
@@ -723,6 +727,15 @@ int main() {
   cudaGLDeviceList GLDeviceListAll = cudaGLDeviceListAll;
   cudaGLDeviceList GLDeviceListCurrentFrame = cudaGLDeviceListCurrentFrame;
   cudaGLDeviceList GLDeviceListNextFrame = cudaGLDeviceListNextFrame;
+
+#if CUDA_VERSION > 11020
+  // CHECK: hipStreamUpdateCaptureDependenciesFlags StreamUpdateCaptureDependenciesFlags;
+  // CHECK-NEXT: hipStreamUpdateCaptureDependenciesFlags StreamAddCaptureDependencies = hipStreamAddCaptureDependencies;
+  // CHECK-NEXT: hipStreamUpdateCaptureDependenciesFlags StreamSetCaptureDependencies = hipStreamSetCaptureDependencies;
+  cudaStreamUpdateCaptureDependenciesFlags StreamUpdateCaptureDependenciesFlags;
+  cudaStreamUpdateCaptureDependenciesFlags StreamAddCaptureDependencies = cudaStreamAddCaptureDependencies;
+  cudaStreamUpdateCaptureDependenciesFlags StreamSetCaptureDependencies = cudaStreamSetCaptureDependencies;
+#endif
 
   return 0;
 }

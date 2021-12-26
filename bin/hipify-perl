@@ -701,7 +701,50 @@ my %removed_funcs = (
 );
 
 my %experimental_funcs = (
-
+    "cudaStreamUpdateCaptureDependenciesFlags" => "5.0.0",
+    "cudaStreamSetCaptureDependencies" => "5.0.0",
+    "cudaStreamIsCapturing" => "5.0.0",
+    "cudaStreamGetCaptureInfo" => "5.0.0",
+    "cudaStreamAddCaptureDependencies" => "5.0.0",
+    "cudaGraphRemoveDependencies" => "5.0.0",
+    "cudaGraphNodeGetDependencies" => "5.0.0",
+    "cudaGraphGetEdges" => "5.0.0",
+    "cudaErrorIllegalState" => "5.0.0",
+    "cudaErrorGraphExecUpdateFailure" => "5.0.0",
+    "cuStreamUpdateCaptureDependencies" => "5.0.0",
+    "cuStreamIsCapturing" => "5.0.0",
+    "cuStreamGetCaptureInfo_v2" => "5.0.0",
+    "cuStreamGetCaptureInfo" => "5.0.0",
+    "cuPointerGetAttributes" => "5.0.0",
+    "cuPointerGetAttribute" => "5.0.0",
+    "cuGraphRemoveDependencies" => "5.0.0",
+    "cuGraphNodeGetDependencies" => "5.0.0",
+    "cuGraphGetEdges" => "5.0.0",
+    "CUstreamUpdateCaptureDependencies_flags_enum" => "5.0.0",
+    "CUstreamUpdateCaptureDependencies_flags" => "5.0.0",
+    "CUpointer_attribute_enum" => "5.0.0",
+    "CUpointer_attribute" => "5.0.0",
+    "CU_STREAM_SET_CAPTURE_DEPENDENCIES" => "5.0.0",
+    "CU_STREAM_ADD_CAPTURE_DEPENDENCIES" => "5.0.0",
+    "CU_POINTER_ATTRIBUTE_SYNC_MEMOPS" => "5.0.0",
+    "CU_POINTER_ATTRIBUTE_RANGE_START_ADDR" => "5.0.0",
+    "CU_POINTER_ATTRIBUTE_RANGE_SIZE" => "5.0.0",
+    "CU_POINTER_ATTRIBUTE_P2P_TOKENS" => "5.0.0",
+    "CU_POINTER_ATTRIBUTE_MEMPOOL_HANDLE" => "5.0.0",
+    "CU_POINTER_ATTRIBUTE_MEMORY_TYPE" => "5.0.0",
+    "CU_POINTER_ATTRIBUTE_MAPPED" => "5.0.0",
+    "CU_POINTER_ATTRIBUTE_IS_MANAGED" => "5.0.0",
+    "CU_POINTER_ATTRIBUTE_IS_LEGACY_CUDA_IPC_CAPABLE" => "5.0.0",
+    "CU_POINTER_ATTRIBUTE_IS_GPU_DIRECT_RDMA_CAPABLE" => "5.0.0",
+    "CU_POINTER_ATTRIBUTE_HOST_POINTER" => "5.0.0",
+    "CU_POINTER_ATTRIBUTE_DEVICE_POINTER" => "5.0.0",
+    "CU_POINTER_ATTRIBUTE_DEVICE_ORDINAL" => "5.0.0",
+    "CU_POINTER_ATTRIBUTE_CONTEXT" => "5.0.0",
+    "CU_POINTER_ATTRIBUTE_BUFFER_ID" => "5.0.0",
+    "CU_POINTER_ATTRIBUTE_ALLOWED_HANDLE_TYPES" => "5.0.0",
+    "CU_POINTER_ATTRIBUTE_ACCESS_FLAGS" => "5.0.0",
+    "CUDA_ERROR_ILLEGAL_STATE" => "5.0.0",
+    "CUDA_ERROR_GRAPH_EXEC_UPDATE_FAILURE" => "5.0.0"
 );
 
 $print_stats = 1 if $examine;
@@ -811,6 +854,50 @@ sub clearStats {
 }
 
 sub experimentalSubstitutions {
+    $ft{'addressing'} += s/\bcuPointerGetAttribute\b/hipPointerGetAttribute/g;
+    $ft{'addressing'} += s/\bcuPointerGetAttributes\b/hipDrvPointerGetAttributes/g;
+    $ft{'stream'} += s/\bcuStreamGetCaptureInfo\b/hipStreamGetCaptureInfo/g;
+    $ft{'stream'} += s/\bcuStreamGetCaptureInfo_v2\b/hipStreamGetCaptureInfo_v2/g;
+    $ft{'stream'} += s/\bcuStreamIsCapturing\b/hipStreamIsCapturing/g;
+    $ft{'stream'} += s/\bcuStreamUpdateCaptureDependencies\b/hipStreamUpdateCaptureDependencies/g;
+    $ft{'stream'} += s/\bcudaStreamGetCaptureInfo\b/hipStreamGetCaptureInfo/g;
+    $ft{'stream'} += s/\bcudaStreamIsCapturing\b/hipStreamIsCapturing/g;
+    $ft{'graph'} += s/\bcuGraphGetEdges\b/hipGraphGetEdges/g;
+    $ft{'graph'} += s/\bcuGraphNodeGetDependencies\b/hipGraphNodeGetDependencies/g;
+    $ft{'graph'} += s/\bcuGraphRemoveDependencies\b/hipGraphRemoveDependencies/g;
+    $ft{'graph'} += s/\bcudaGraphGetEdges\b/hipGraphGetEdges/g;
+    $ft{'graph'} += s/\bcudaGraphNodeGetDependencies\b/hipGraphNodeGetDependencies/g;
+    $ft{'graph'} += s/\bcudaGraphRemoveDependencies\b/hipGraphRemoveDependencies/g;
+    $ft{'type'} += s/\bCUpointer_attribute\b/hipPointer_attribute/g;
+    $ft{'type'} += s/\bCUpointer_attribute_enum\b/hipPointer_attribute/g;
+    $ft{'type'} += s/\bCUstreamUpdateCaptureDependencies_flags\b/hipStreamUpdateCaptureDependenciesFlags/g;
+    $ft{'type'} += s/\bCUstreamUpdateCaptureDependencies_flags_enum\b/hipStreamUpdateCaptureDependenciesFlags/g;
+    $ft{'type'} += s/\bcudaStreamUpdateCaptureDependenciesFlags\b/hipStreamUpdateCaptureDependenciesFlags/g;
+    $ft{'numeric_literal'} += s/\bCUDA_ERROR_GRAPH_EXEC_UPDATE_FAILURE\b/hipErrorGraphExecUpdateFailure/g;
+    $ft{'numeric_literal'} += s/\bCUDA_ERROR_ILLEGAL_STATE\b/hipErrorIllegalState/g;
+    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_ACCESS_FLAGS\b/HIP_POINTER_ATTRIBUTE_ACCESS_FLAGS/g;
+    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_ALLOWED_HANDLE_TYPES\b/HIP_POINTER_ATTRIBUTE_ALLOWED_HANDLE_TYPES/g;
+    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_BUFFER_ID\b/HIP_POINTER_ATTRIBUTE_BUFFER_ID/g;
+    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_CONTEXT\b/HIP_POINTER_ATTRIBUTE_CONTEXT/g;
+    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_DEVICE_ORDINAL\b/HIP_POINTER_ATTRIBUTE_DEVICE_ORDINAL/g;
+    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_DEVICE_POINTER\b/HIP_POINTER_ATTRIBUTE_DEVICE_POINTER/g;
+    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_HOST_POINTER\b/HIP_POINTER_ATTRIBUTE_HOST_POINTER/g;
+    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_IS_GPU_DIRECT_RDMA_CAPABLE\b/HIP_POINTER_ATTRIBUTE_IS_GPU_DIRECT_RDMA_CAPABLE/g;
+    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_IS_LEGACY_CUDA_IPC_CAPABLE\b/HIP_POINTER_ATTRIBUTE_IS_LEGACY_HIP_IPC_CAPABLE/g;
+    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_IS_MANAGED\b/HIP_POINTER_ATTRIBUTE_IS_MANAGED/g;
+    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_MAPPED\b/HIP_POINTER_ATTRIBUTE_MAPPED/g;
+    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_MEMORY_TYPE\b/HIP_POINTER_ATTRIBUTE_MEMORY_TYPE/g;
+    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_MEMPOOL_HANDLE\b/HIP_POINTER_ATTRIBUTE_MEMPOOL_HANDLE/g;
+    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_P2P_TOKENS\b/HIP_POINTER_ATTRIBUTE_P2P_TOKENS/g;
+    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_RANGE_SIZE\b/HIP_POINTER_ATTRIBUTE_RANGE_SIZE/g;
+    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_RANGE_START_ADDR\b/HIP_POINTER_ATTRIBUTE_RANGE_START_ADDR/g;
+    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_SYNC_MEMOPS\b/HIP_POINTER_ATTRIBUTE_SYNC_MEMOPS/g;
+    $ft{'numeric_literal'} += s/\bCU_STREAM_ADD_CAPTURE_DEPENDENCIES\b/hipStreamAddCaptureDependencies/g;
+    $ft{'numeric_literal'} += s/\bCU_STREAM_SET_CAPTURE_DEPENDENCIES\b/hipStreamSetCaptureDependencies/g;
+    $ft{'numeric_literal'} += s/\bcudaErrorGraphExecUpdateFailure\b/hipErrorGraphExecUpdateFailure/g;
+    $ft{'numeric_literal'} += s/\bcudaErrorIllegalState\b/hipErrorIllegalState/g;
+    $ft{'numeric_literal'} += s/\bcudaStreamAddCaptureDependencies\b/hipStreamAddCaptureDependencies/g;
+    $ft{'numeric_literal'} += s/\bcudaStreamSetCaptureDependencies\b/hipStreamSetCaptureDependencies/g;
 }
 
 sub simpleSubstitutions {
@@ -1017,8 +1104,6 @@ sub simpleSubstitutions {
     $ft{'addressing'} += s/\bcuMemPrefetchAsync\b/hipMemPrefetchAsync/g;
     $ft{'addressing'} += s/\bcuMemRangeGetAttribute\b/hipMemRangeGetAttribute/g;
     $ft{'addressing'} += s/\bcuMemRangeGetAttributes\b/hipMemRangeGetAttributes/g;
-    $ft{'addressing'} += s/\bcuPointerGetAttribute\b/hipPointerGetAttribute/g;
-    $ft{'addressing'} += s/\bcuPointerGetAttributes\b/hipDrvPointerGetAttributes/g;
     $ft{'addressing'} += s/\bcudaPointerGetAttributes\b/hipPointerGetAttributes/g;
     $ft{'stream'} += s/\bcuStreamAddCallback\b/hipStreamAddCallback/g;
     $ft{'stream'} += s/\bcuStreamAttachMemAsync\b/hipStreamAttachMemAsync/g;
@@ -2478,8 +2563,6 @@ sub simpleSubstitutions {
     $ft{'type'} += s/\bCUmipmappedArray_st\b/hipMipmappedArray/g;
     $ft{'type'} += s/\bCUmod_st\b/ihipModule_t/g;
     $ft{'type'} += s/\bCUmodule\b/hipModule_t/g;
-    $ft{'type'} += s/\bCUpointer_attribute\b/hipPointer_attribute/g;
-    $ft{'type'} += s/\bCUpointer_attribute_enum\b/hipPointer_attribute/g;
     $ft{'type'} += s/\bCUresourceViewFormat\b/HIPresourceViewFormat/g;
     $ft{'type'} += s/\bCUresourceViewFormat_enum\b/HIPresourceViewFormat_enum/g;
     $ft{'type'} += s/\bCUresourcetype\b/HIPresourcetype/g;
@@ -2767,11 +2850,9 @@ sub simpleSubstitutions {
     $ft{'numeric_literal'} += s/\bCUDA_ERROR_DEINITIALIZED\b/hipErrorDeinitialized/g;
     $ft{'numeric_literal'} += s/\bCUDA_ERROR_ECC_UNCORRECTABLE\b/hipErrorECCNotCorrectable/g;
     $ft{'numeric_literal'} += s/\bCUDA_ERROR_FILE_NOT_FOUND\b/hipErrorFileNotFound/g;
-    $ft{'numeric_literal'} += s/\bCUDA_ERROR_GRAPH_EXEC_UPDATE_FAILURE\b/hipErrorGraphExecUpdateFailure/g;
     $ft{'numeric_literal'} += s/\bCUDA_ERROR_HOST_MEMORY_ALREADY_REGISTERED\b/hipErrorHostMemoryAlreadyRegistered/g;
     $ft{'numeric_literal'} += s/\bCUDA_ERROR_HOST_MEMORY_NOT_REGISTERED\b/hipErrorHostMemoryNotRegistered/g;
     $ft{'numeric_literal'} += s/\bCUDA_ERROR_ILLEGAL_ADDRESS\b/hipErrorIllegalAddress/g;
-    $ft{'numeric_literal'} += s/\bCUDA_ERROR_ILLEGAL_STATE\b/hipErrorIllegalState/g;
     $ft{'numeric_literal'} += s/\bCUDA_ERROR_INVALID_CONTEXT\b/hipErrorInvalidContext/g;
     $ft{'numeric_literal'} += s/\bCUDA_ERROR_INVALID_DEVICE\b/hipErrorInvalidDevice/g;
     $ft{'numeric_literal'} += s/\bCUDA_ERROR_INVALID_GRAPHICS_CONTEXT\b/hipErrorInvalidGraphicsContext/g;
@@ -3292,23 +3373,6 @@ sub simpleSubstitutions {
     $ft{'numeric_literal'} += s/\bCU_MEM_RANGE_ATTRIBUTE_PREFERRED_LOCATION\b/hipMemRangeAttributePreferredLocation/g;
     $ft{'numeric_literal'} += s/\bCU_MEM_RANGE_ATTRIBUTE_READ_MOSTLY\b/hipMemRangeAttributeReadMostly/g;
     $ft{'numeric_literal'} += s/\bCU_OCCUPANCY_DEFAULT\b/hipOccupancyDefault/g;
-    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_ACCESS_FLAGS\b/HIP_POINTER_ATTRIBUTE_ACCESS_FLAGS/g;
-    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_ALLOWED_HANDLE_TYPES\b/HIP_POINTER_ATTRIBUTE_ALLOWED_HANDLE_TYPES/g;
-    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_BUFFER_ID\b/HIP_POINTER_ATTRIBUTE_BUFFER_ID/g;
-    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_CONTEXT\b/HIP_POINTER_ATTRIBUTE_CONTEXT/g;
-    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_DEVICE_ORDINAL\b/HIP_POINTER_ATTRIBUTE_DEVICE_ORDINAL/g;
-    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_DEVICE_POINTER\b/HIP_POINTER_ATTRIBUTE_DEVICE_POINTER/g;
-    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_HOST_POINTER\b/HIP_POINTER_ATTRIBUTE_HOST_POINTER/g;
-    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_IS_GPU_DIRECT_RDMA_CAPABLE\b/HIP_POINTER_ATTRIBUTE_IS_GPU_DIRECT_RDMA_CAPABLE/g;
-    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_IS_LEGACY_CUDA_IPC_CAPABLE\b/HIP_POINTER_ATTRIBUTE_IS_LEGACY_HIP_IPC_CAPABLE/g;
-    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_IS_MANAGED\b/HIP_POINTER_ATTRIBUTE_IS_MANAGED/g;
-    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_MAPPED\b/HIP_POINTER_ATTRIBUTE_MAPPED/g;
-    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_MEMORY_TYPE\b/HIP_POINTER_ATTRIBUTE_MEMORY_TYPE/g;
-    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_MEMPOOL_HANDLE\b/HIP_POINTER_ATTRIBUTE_MEMPOOL_HANDLE/g;
-    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_P2P_TOKENS\b/HIP_POINTER_ATTRIBUTE_P2P_TOKENS/g;
-    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_RANGE_SIZE\b/HIP_POINTER_ATTRIBUTE_RANGE_SIZE/g;
-    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_RANGE_START_ADDR\b/HIP_POINTER_ATTRIBUTE_RANGE_START_ADDR/g;
-    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_SYNC_MEMOPS\b/HIP_POINTER_ATTRIBUTE_SYNC_MEMOPS/g;
     $ft{'numeric_literal'} += s/\bCU_RESOURCE_TYPE_ARRAY\b/HIP_RESOURCE_TYPE_ARRAY/g;
     $ft{'numeric_literal'} += s/\bCU_RESOURCE_TYPE_LINEAR\b/HIP_RESOURCE_TYPE_LINEAR/g;
     $ft{'numeric_literal'} += s/\bCU_RESOURCE_TYPE_MIPMAPPED_ARRAY\b/HIP_RESOURCE_TYPE_MIPMAPPED_ARRAY/g;
@@ -3503,11 +3567,9 @@ sub simpleSubstitutions {
     $ft{'numeric_literal'} += s/\bcudaErrorDeviceUninitialized\b/hipErrorInvalidContext/g;
     $ft{'numeric_literal'} += s/\bcudaErrorECCUncorrectable\b/hipErrorECCNotCorrectable/g;
     $ft{'numeric_literal'} += s/\bcudaErrorFileNotFound\b/hipErrorFileNotFound/g;
-    $ft{'numeric_literal'} += s/\bcudaErrorGraphExecUpdateFailure\b/hipErrorGraphExecUpdateFailure/g;
     $ft{'numeric_literal'} += s/\bcudaErrorHostMemoryAlreadyRegistered\b/hipErrorHostMemoryAlreadyRegistered/g;
     $ft{'numeric_literal'} += s/\bcudaErrorHostMemoryNotRegistered\b/hipErrorHostMemoryNotRegistered/g;
     $ft{'numeric_literal'} += s/\bcudaErrorIllegalAddress\b/hipErrorIllegalAddress/g;
-    $ft{'numeric_literal'} += s/\bcudaErrorIllegalState\b/hipErrorIllegalState/g;
     $ft{'numeric_literal'} += s/\bcudaErrorInitializationError\b/hipErrorNotInitialized/g;
     $ft{'numeric_literal'} += s/\bcudaErrorInsufficientDriver\b/hipErrorInsufficientDriver/g;
     $ft{'numeric_literal'} += s/\bcudaErrorInvalidConfiguration\b/hipErrorInvalidConfiguration/g;
@@ -5063,19 +5125,14 @@ sub warnUnsupportedFunctions {
         "cudaSyncPolicyBlockingSync",
         "cudaSyncPolicyAuto",
         "cudaSurfaceFormatMode",
-        "cudaStreamUpdateCaptureDependenciesFlags",
-        "cudaStreamSetCaptureDependencies",
         "cudaStreamSetAttribute",
         "cudaStreamLegacy",
-        "cudaStreamIsCapturing",
-        "cudaStreamGetCaptureInfo",
         "cudaStreamGetAttribute",
         "cudaStreamCopyAttributes",
         "cudaStreamAttributeSynchronizationPolicy",
         "cudaStreamAttributeAccessPolicyWindow",
         "cudaStreamAttrValue",
         "cudaStreamAttrID",
-        "cudaStreamAddCaptureDependencies",
         "cudaSharedmemCarveoutMaxShared",
         "cudaSharedmemCarveoutMaxL1",
         "cudaSharedmemCarveoutDefault",
@@ -5182,7 +5239,6 @@ sub warnUnsupportedFunctions {
         "cudaGraphUserObjectMove",
         "cudaGraphUpload",
         "cudaGraphRetainUserObject",
-        "cudaGraphRemoveDependencies",
         "cudaGraphReleaseUserObject",
         "cudaGraphNodeTypeMemFree",
         "cudaGraphNodeTypeMemAlloc",
@@ -5190,7 +5246,6 @@ sub warnUnsupportedFunctions {
         "cudaGraphNodeTypeExtSemaphoreSignal",
         "cudaGraphNodeGetType",
         "cudaGraphNodeGetDependentNodes",
-        "cudaGraphNodeGetDependencies",
         "cudaGraphNodeFindInClone",
         "cudaGraphMemcpyNodeSetParamsToSymbol",
         "cudaGraphMemcpyNodeSetParamsFromSymbol",
@@ -5210,7 +5265,6 @@ sub warnUnsupportedFunctions {
         "cudaGraphInstantiateFlagAutoFreeOnLaunch",
         "cudaGraphHostNodeSetParams",
         "cudaGraphHostNodeGetParams",
-        "cudaGraphGetEdges",
         "cudaGraphExternalSemaphoresWaitNodeSetParams",
         "cudaGraphExternalSemaphoresWaitNodeGetParams",
         "cudaGraphExternalSemaphoresSignalNodeSetParams",
@@ -5674,12 +5728,8 @@ sub warnUnsupportedFunctions {
         "cuSurfObjectGetResourceDesc",
         "cuSurfObjectDestroy",
         "cuSurfObjectCreate",
-        "cuStreamUpdateCaptureDependencies",
         "cuStreamSetAttribute",
-        "cuStreamIsCapturing",
         "cuStreamGetCtx",
-        "cuStreamGetCaptureInfo_v2",
-        "cuStreamGetCaptureInfo",
         "cuStreamGetAttribute",
         "cuStreamCopyAttributes",
         "cuStreamBeginCapture_ptsz",
@@ -5775,11 +5825,9 @@ sub warnUnsupportedFunctions {
         "cuGraphicsD3D10RegisterResource",
         "cuGraphUpload",
         "cuGraphRetainUserObject",
-        "cuGraphRemoveDependencies",
         "cuGraphReleaseUserObject",
         "cuGraphNodeGetType",
         "cuGraphNodeGetDependentNodes",
-        "cuGraphNodeGetDependencies",
         "cuGraphNodeFindInClone",
         "cuGraphMemFreeNodeGetParams",
         "cuGraphMemAllocNodeGetParams",
@@ -5789,7 +5837,6 @@ sub warnUnsupportedFunctions {
         "cuGraphInstantiateWithFlags",
         "cuGraphHostNodeSetParams",
         "cuGraphHostNodeGetParams",
-        "cuGraphGetEdges",
         "cuGraphExternalSemaphoresWaitNodeSetParams",
         "cuGraphExternalSemaphoresWaitNodeGetParams",
         "cuGraphExternalSemaphoresSignalNodeSetParams",
@@ -5942,8 +5989,6 @@ sub warnUnsupportedFunctions {
         "CUstreamWriteValue_flags",
         "CUstreamWaitValue_flags_enum",
         "CUstreamWaitValue_flags",
-        "CUstreamUpdateCaptureDependencies_flags_enum",
-        "CUstreamUpdateCaptureDependencies_flags",
         "CUstreamBatchMemOpType_enum",
         "CUstreamBatchMemOpType",
         "CUstreamBatchMemOpParams_v1",
@@ -6114,7 +6159,6 @@ sub warnUnsupportedFunctions {
         "CU_STREAM_WRITE_VALUE_NO_MEMORY_BARRIER",
         "CU_STREAM_WRITE_VALUE_DEFAULT",
         "CU_STREAM_WAIT_VALUE_FLUSH",
-        "CU_STREAM_SET_CAPTURE_DEPENDENCIES",
         "CU_STREAM_MEM_OP_WRITE_VALUE_64",
         "CU_STREAM_MEM_OP_WRITE_VALUE_32",
         "CU_STREAM_MEM_OP_WAIT_VALUE_64",
@@ -6123,7 +6167,6 @@ sub warnUnsupportedFunctions {
         "CU_STREAM_LEGACY",
         "CU_STREAM_ATTRIBUTE_SYNCHRONIZATION_POLICY",
         "CU_STREAM_ATTRIBUTE_ACCESS_POLICY_WINDOW",
-        "CU_STREAM_ADD_CAPTURE_DEPENDENCIES",
         "CU_SHAREDMEM_CARVEOUT_MAX_SHARED",
         "CU_SHAREDMEM_CARVEOUT_MAX_L1",
         "CU_SHAREDMEM_CARVEOUT_DEFAULT",

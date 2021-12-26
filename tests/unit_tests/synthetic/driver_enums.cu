@@ -799,6 +799,7 @@ int main() {
   // CHECK-NEXT: hipError_t ERROR_STREAM_CAPTURE_ISOLATION = hipErrorStreamCaptureIsolation;
   // CHECK-NEXT: hipError_t ERROR_STREAM_CAPTURE_IMPLICIT = hipErrorStreamCaptureImplicit;
   // CHECK-NEXT: hipError_t ERROR_CAPTURED_EVENT = hipErrorCapturedEvent;
+  // CHECK-NEXT: hipError_t ERROR_ILLEGAL_STATE = hipErrorIllegalState;
   CUresult ERROR_STREAM_CAPTURE_UNSUPPORTED = CUDA_ERROR_STREAM_CAPTURE_UNSUPPORTED;
   CUresult ERROR_STREAM_CAPTURE_INVALIDATED = CUDA_ERROR_STREAM_CAPTURE_INVALIDATED;
   CUresult ERROR_STREAM_CAPTURE_MERGE = CUDA_ERROR_STREAM_CAPTURE_MERGE;
@@ -807,6 +808,7 @@ int main() {
   CUresult ERROR_STREAM_CAPTURE_ISOLATION = CUDA_ERROR_STREAM_CAPTURE_ISOLATION;
   CUresult ERROR_STREAM_CAPTURE_IMPLICIT = CUDA_ERROR_STREAM_CAPTURE_IMPLICIT;
   CUresult ERROR_CAPTURED_EVENT = CUDA_ERROR_CAPTURED_EVENT;
+  CUresult ERROR_ILLEGAL_STATE = CUDA_ERROR_ILLEGAL_STATE;
 #endif
   // CHECK: hipError_t ERROR_UNKNOWN = hipErrorUnknown;
   CUresult ERROR_UNKNOWN = CUDA_ERROR_UNKNOWN;
@@ -814,6 +816,11 @@ int main() {
 #if CUDA_VERSION > 10000
   // CHECK: hipError_t ERROR_STREAM_CAPTURE_WRONG_THREAD = hipErrorStreamCaptureWrongThread;
   CUresult ERROR_STREAM_CAPTURE_WRONG_THREAD = CUDA_ERROR_STREAM_CAPTURE_WRONG_THREAD;
+#endif
+
+#if CUDA_VERSION > 10010
+  // CHECK: hipError_t ERROR_GRAPH_EXEC_UPDATE_FAILURE = hipErrorGraphExecUpdateFailure;
+  CUresult ERROR_GRAPH_EXEC_UPDATE_FAILURE = CUDA_ERROR_GRAPH_EXEC_UPDATE_FAILURE;
 #endif
 
   // CHECK: hipSharedMemConfig sharedconfig;
@@ -881,6 +888,17 @@ int main() {
   CUGLDeviceList GL_DEVICE_LIST_ALL = CU_GL_DEVICE_LIST_ALL;
   CUGLDeviceList GL_DEVICE_LIST_CURRENT_FRAME = CU_GL_DEVICE_LIST_CURRENT_FRAME;
   CUGLDeviceList GL_DEVICE_LIST_NEXT_FRAME = CU_GL_DEVICE_LIST_NEXT_FRAME;
+
+#if CUDA_VERSION > 11020
+  // CHECK: hipStreamUpdateCaptureDependenciesFlags StreamUpdateCaptureDependencies_flags;
+  // CHECK-NEXT: hipStreamUpdateCaptureDependenciesFlags StreamUpdateCaptureDependencies_flags_enum;
+  // CHECK-NEXT: hipStreamUpdateCaptureDependenciesFlags STREAM_ADD_CAPTURE_DEPENDENCIES = hipStreamAddCaptureDependencies;
+  // CHECK-NEXT: hipStreamUpdateCaptureDependenciesFlags STREAM_SET_CAPTURE_DEPENDENCIES = hipStreamSetCaptureDependencies;
+  CUstreamUpdateCaptureDependencies_flags StreamUpdateCaptureDependencies_flags;
+  CUstreamUpdateCaptureDependencies_flags_enum StreamUpdateCaptureDependencies_flags_enum;
+  CUstreamUpdateCaptureDependencies_flags STREAM_ADD_CAPTURE_DEPENDENCIES = CU_STREAM_ADD_CAPTURE_DEPENDENCIES;
+  CUstreamUpdateCaptureDependencies_flags STREAM_SET_CAPTURE_DEPENDENCIES = CU_STREAM_SET_CAPTURE_DEPENDENCIES;
+#endif
 
   return 0;
 }

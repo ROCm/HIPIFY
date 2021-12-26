@@ -16,6 +16,7 @@ int main() {
   uint32_t u_value = 0;
   float ms = 0;
   int* value = 0;
+  unsigned long long ull =0;
   // CHECK: hipDevice_t device;
   // CHECK-NEXT: hipCtx_t context;
   // CHECK-NEXT: hipFuncCache_t func_cache;
@@ -79,6 +80,7 @@ int main() {
 #if CUDA_VERSION > 9020
   // CHECK: hipGraph_t graph;
   // CHECK-NEXT: hipGraphNode_t graphNode, graphNode2;
+  // CHECK-NEXT: const hipGraphNode_t *pGraphNode = nullptr;
   // CHECK-NEXT: hipKernelNodeParams KERNEL_NODE_PARAMS;
   // CHECK-NEXT: hipMemsetParams MEMSET_NODE_PARAMS;
   // CHECK-NEXT: hipGraphExec_t graphExec;
@@ -89,8 +91,10 @@ int main() {
   // CHECK-NEXT: hipExternalSemaphoreHandleDesc EXTERNAL_SEMAPHORE_HANDLE_DESC;
   // CHECK-NEXT: hipExternalSemaphoreSignalParams EXTERNAL_SEMAPHORE_SIGNAL_PARAMS;
   // CHECK-NEXT: hipExternalSemaphoreWaitParams EXTERNAL_SEMAPHORE_WAIT_PARAMS;
+  // CHECK-NEXT: hipStreamCaptureStatus streamCaptureStatus;
   CUgraph graph;
   CUgraphNode graphNode, graphNode2;
+  const CUgraphNode *pGraphNode = nullptr;
   CUDA_KERNEL_NODE_PARAMS KERNEL_NODE_PARAMS;
   CUDA_MEMSET_NODE_PARAMS MEMSET_NODE_PARAMS;
   CUgraphExec graphExec;
@@ -101,6 +105,7 @@ int main() {
   CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC EXTERNAL_SEMAPHORE_HANDLE_DESC;
   CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS EXTERNAL_SEMAPHORE_SIGNAL_PARAMS;
   CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS EXTERNAL_SEMAPHORE_WAIT_PARAMS;
+  CUstreamCaptureStatus streamCaptureStatus;
 #endif
 
 #if CUDA_VERSION > 10000
@@ -901,6 +906,45 @@ int main() {
   // HIP: hipError_t hipGraphMemsetNodeSetParams(hipGraphNode_t node, const hipMemsetParams* pNodeParams);
   // CHECK: result = hipGraphMemsetNodeSetParams(graphNode, &MEMSET_NODE_PARAMS);
   result = cuGraphMemsetNodeSetParams(graphNode, &MEMSET_NODE_PARAMS);
+
+  // CUDA: CUresult CUDAAPI cuGraphGetEdges(CUgraph hGraph, CUgraphNode *from, CUgraphNode *to, size_t *numEdges);
+  // HIP: hipError_t hipGraphGetEdges(hipGraph_t graph, hipGraphNode_t* from, hipGraphNode_t* to, size_t* numEdges);
+  // CHECK: result = hipGraphGetEdges(graph, &graphNode, &graphNode2, &bytes);
+  result = cuGraphGetEdges(graph, &graphNode, &graphNode2, &bytes);
+
+  // CUDA: CUresult CUDAAPI cuGraphNodeGetDependencies(CUgraphNode hNode, CUgraphNode *dependencies, size_t *numDependencies);
+  // HIP: hipError_t hipGraphNodeGetDependencies(hipGraphNode_t node, hipGraphNode_t* pDependencies, size_t* pNumDependencies);
+  // CHECK: result = hipGraphNodeGetDependencies(graphNode, &graphNode2, &bytes);
+  result = cuGraphNodeGetDependencies(graphNode, &graphNode2, &bytes);
+
+  // CUDA: CUresult CUDAAPI cuGraphRemoveDependencies(CUgraph hGraph, const CUgraphNode *from, const CUgraphNode *to, size_t numDependencies);
+  // HIP: hipError_t hipGraphRemoveDependencies(hipGraph_t graph, const hipGraphNode_t* from, const hipGraphNode_t* to, size_t numDependencies);
+  // CHECK: result = hipGraphRemoveDependencies(graph, &graphNode, &graphNode2, bytes);
+  result = cuGraphRemoveDependencies(graph, &graphNode, &graphNode2, bytes);
+
+  // CUDA: CUresult CUDAAPI cuStreamIsCapturing(CUstream hStream, CUstreamCaptureStatus *captureStatus);
+  // HIP: hipError_t hipStreamIsCapturing(hipStream_t stream, hipStreamCaptureStatus* pCaptureStatus);
+  // CHECK: result = hipStreamIsCapturing(stream, &streamCaptureStatus);
+  result = cuStreamIsCapturing(stream, &streamCaptureStatus);
+#endif
+
+#if CUDA_VERSION > 10000
+  // CUDA: CUresult CUDAAPI cuStreamGetCaptureInfo(CUstream hStream, CUstreamCaptureStatus *captureStatus_out, cuuint64_t *id_out);
+  // HIP: hipError_t hipStreamGetCaptureInfo(hipStream_t stream, hipStreamCaptureStatus* pCaptureStatus, unsigned long long* pId);
+  // CHECK: result = hipStreamGetCaptureInfo(stream, &streamCaptureStatus, &ull);
+  result = cuStreamGetCaptureInfo(stream, &streamCaptureStatus, &ull);
+#endif
+
+#if CUDA_VERSION > 11020
+  // CUDA: CUresult CUDAAPI cuStreamGetCaptureInfo_v2(CUstream hStream, CUstreamCaptureStatus *captureStatus_out, cuuint64_t *id_out, CUgraph *graph_out, const CUgraphNode **dependencies_out, size_t *numDependencies_out);
+  // HIP: hipError_t hipStreamGetCaptureInfo_v2(hipStream_t stream, hipStreamCaptureStatus* captureStatus_out, unsigned long long* id_out __dparm(0), hipGraph_t* graph_out __dparm(0), const hipGraphNode_t** dependencies_out __dparm(0), size_t* numDependencies_out __dparm(0));
+  // CHECK: result = hipStreamGetCaptureInfo_v2(stream, &streamCaptureStatus, &ull, &graph, &pGraphNode, &bytes);
+  result = cuStreamGetCaptureInfo_v2(stream, &streamCaptureStatus, &ull, &graph, &pGraphNode, &bytes);
+
+  // CUDA: CUresult CUDAAPI cuStreamUpdateCaptureDependencies(CUstream hStream, CUgraphNode *dependencies, size_t numDependencies, unsigned int flags);
+  // HIP: hipError_t hipStreamUpdateCaptureDependencies(hipStream_t stream, hipGraphNode_t* dependencies, size_t numDependencies, unsigned int flags __dparm(0));
+  // CHECK: result = hipStreamUpdateCaptureDependencies(stream, &graphNode, bytes, flags);
+  result = cuStreamUpdateCaptureDependencies(stream, &graphNode, bytes, flags);
 #endif
 
   return 0;
