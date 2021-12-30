@@ -707,8 +707,39 @@ my %experimental_funcs = (
     "cudaStreamGetCaptureInfo" => "5.0.0",
     "cudaStreamAddCaptureDependencies" => "5.0.0",
     "cudaGraphRemoveDependencies" => "5.0.0",
+    "cudaGraphNodeGetType" => "5.0.0",
+    "cudaGraphNodeGetDependentNodes" => "5.0.0",
     "cudaGraphNodeGetDependencies" => "5.0.0",
+    "cudaGraphNodeFindInClone" => "5.0.0",
+    "cudaGraphMemcpyNodeSetParamsToSymbol" => "5.0.0",
+    "cudaGraphMemcpyNodeSetParamsFromSymbol" => "5.0.0",
+    "cudaGraphMemcpyNodeSetParams1D" => "5.0.0",
+    "cudaGraphInstantiateWithFlags" => "5.0.0",
+    "cudaGraphHostNodeSetParams" => "5.0.0",
+    "cudaGraphHostNodeGetParams" => "5.0.0",
     "cudaGraphGetEdges" => "5.0.0",
+    "cudaGraphExecUpdate" => "5.0.0",
+    "cudaGraphExecMemsetNodeSetParams" => "5.0.0",
+    "cudaGraphExecMemcpyNodeSetParamsToSymbol" => "5.0.0",
+    "cudaGraphExecMemcpyNodeSetParamsFromSymbol" => "5.0.0",
+    "cudaGraphExecMemcpyNodeSetParams1D" => "5.0.0",
+    "cudaGraphExecMemcpyNodeSetParams" => "5.0.0",
+    "cudaGraphExecHostNodeSetParams" => "5.0.0",
+    "cudaGraphExecEventWaitNodeSetEvent" => "5.0.0",
+    "cudaGraphExecEventRecordNodeSetEvent" => "5.0.0",
+    "cudaGraphExecChildGraphNodeSetParams" => "5.0.0",
+    "cudaGraphEventWaitNodeSetEvent" => "5.0.0",
+    "cudaGraphEventWaitNodeGetEvent" => "5.0.0",
+    "cudaGraphEventRecordNodeSetEvent" => "5.0.0",
+    "cudaGraphEventRecordNodeGetEvent" => "5.0.0",
+    "cudaGraphDestroyNode" => "5.0.0",
+    "cudaGraphChildGraphNodeGetGraph" => "5.0.0",
+    "cudaGraphAddMemcpyNodeToSymbol" => "5.0.0",
+    "cudaGraphAddMemcpyNodeFromSymbol" => "5.0.0",
+    "cudaGraphAddHostNode" => "5.0.0",
+    "cudaGraphAddEventWaitNode" => "5.0.0",
+    "cudaGraphAddEventRecordNode" => "5.0.0",
+    "cudaGraphAddChildGraphNode" => "5.0.0",
     "cudaErrorIllegalState" => "5.0.0",
     "cudaErrorGraphExecUpdateFailure" => "5.0.0",
     "cuStreamUpdateCaptureDependencies" => "5.0.0",
@@ -718,8 +749,29 @@ my %experimental_funcs = (
     "cuPointerGetAttributes" => "5.0.0",
     "cuPointerGetAttribute" => "5.0.0",
     "cuGraphRemoveDependencies" => "5.0.0",
+    "cuGraphNodeGetType" => "5.0.0",
+    "cuGraphNodeGetDependentNodes" => "5.0.0",
     "cuGraphNodeGetDependencies" => "5.0.0",
+    "cuGraphNodeFindInClone" => "5.0.0",
+    "cuGraphInstantiateWithFlags" => "5.0.0",
+    "cuGraphHostNodeSetParams" => "5.0.0",
+    "cuGraphHostNodeGetParams" => "5.0.0",
     "cuGraphGetEdges" => "5.0.0",
+    "cuGraphExecUpdate" => "5.0.0",
+    "cuGraphExecHostNodeSetParams" => "5.0.0",
+    "cuGraphExecEventWaitNodeSetEvent" => "5.0.0",
+    "cuGraphExecEventRecordNodeSetEvent" => "5.0.0",
+    "cuGraphExecChildGraphNodeSetParams" => "5.0.0",
+    "cuGraphEventWaitNodeSetEvent" => "5.0.0",
+    "cuGraphEventWaitNodeGetEvent" => "5.0.0",
+    "cuGraphEventRecordNodeSetEvent" => "5.0.0",
+    "cuGraphEventRecordNodeGetEvent" => "5.0.0",
+    "cuGraphDestroyNode" => "5.0.0",
+    "cuGraphChildGraphNodeGetGraph" => "5.0.0",
+    "cuGraphAddHostNode" => "5.0.0",
+    "cuGraphAddEventWaitNode" => "5.0.0",
+    "cuGraphAddEventRecordNode" => "5.0.0",
+    "cuGraphAddChildGraphNode" => "5.0.0",
     "CUstreamUpdateCaptureDependencies_flags_enum" => "5.0.0",
     "CUstreamUpdateCaptureDependencies_flags" => "5.0.0",
     "CUpointer_attribute_enum" => "5.0.0",
@@ -862,11 +914,63 @@ sub experimentalSubstitutions {
     $ft{'stream'} += s/\bcuStreamUpdateCaptureDependencies\b/hipStreamUpdateCaptureDependencies/g;
     $ft{'stream'} += s/\bcudaStreamGetCaptureInfo\b/hipStreamGetCaptureInfo/g;
     $ft{'stream'} += s/\bcudaStreamIsCapturing\b/hipStreamIsCapturing/g;
+    $ft{'graph'} += s/\bcuGraphAddChildGraphNode\b/hipGraphAddChildGraphNode/g;
+    $ft{'graph'} += s/\bcuGraphAddEventRecordNode\b/hipGraphAddEventRecordNode/g;
+    $ft{'graph'} += s/\bcuGraphAddEventWaitNode\b/hipGraphAddEventWaitNode/g;
+    $ft{'graph'} += s/\bcuGraphAddHostNode\b/hipGraphAddHostNode/g;
+    $ft{'graph'} += s/\bcuGraphChildGraphNodeGetGraph\b/hipGraphChildGraphNodeGetGraph/g;
+    $ft{'graph'} += s/\bcuGraphDestroyNode\b/hipGraphDestroyNode/g;
+    $ft{'graph'} += s/\bcuGraphEventRecordNodeGetEvent\b/hipGraphEventRecordNodeGetEvent/g;
+    $ft{'graph'} += s/\bcuGraphEventRecordNodeSetEvent\b/hipGraphEventRecordNodeSetEvent/g;
+    $ft{'graph'} += s/\bcuGraphEventWaitNodeGetEvent\b/hipGraphEventWaitNodeGetEvent/g;
+    $ft{'graph'} += s/\bcuGraphEventWaitNodeSetEvent\b/hipGraphEventWaitNodeSetEvent/g;
+    $ft{'graph'} += s/\bcuGraphExecChildGraphNodeSetParams\b/hipGraphExecChildGraphNodeSetParams/g;
+    $ft{'graph'} += s/\bcuGraphExecEventRecordNodeSetEvent\b/hipGraphExecEventRecordNodeSetEvent/g;
+    $ft{'graph'} += s/\bcuGraphExecEventWaitNodeSetEvent\b/hipGraphExecEventWaitNodeSetEvent/g;
+    $ft{'graph'} += s/\bcuGraphExecHostNodeSetParams\b/hipGraphExecHostNodeSetParams/g;
+    $ft{'graph'} += s/\bcuGraphExecUpdate\b/hipGraphExecUpdate/g;
     $ft{'graph'} += s/\bcuGraphGetEdges\b/hipGraphGetEdges/g;
+    $ft{'graph'} += s/\bcuGraphHostNodeGetParams\b/hipGraphHostNodeGetParams/g;
+    $ft{'graph'} += s/\bcuGraphHostNodeSetParams\b/hipGraphHostNodeSetParams/g;
+    $ft{'graph'} += s/\bcuGraphInstantiateWithFlags\b/hipGraphInstantiateWithFlags/g;
+    $ft{'graph'} += s/\bcuGraphNodeFindInClone\b/hipGraphNodeFindInClone/g;
     $ft{'graph'} += s/\bcuGraphNodeGetDependencies\b/hipGraphNodeGetDependencies/g;
+    $ft{'graph'} += s/\bcuGraphNodeGetDependentNodes\b/hipGraphNodeGetDependentNodes/g;
+    $ft{'graph'} += s/\bcuGraphNodeGetType\b/hipGraphNodeGetType/g;
     $ft{'graph'} += s/\bcuGraphRemoveDependencies\b/hipGraphRemoveDependencies/g;
+    $ft{'graph'} += s/\bcudaGraphAddChildGraphNode\b/hipGraphAddChildGraphNode/g;
+    $ft{'graph'} += s/\bcudaGraphAddEventRecordNode\b/hipGraphAddEventRecordNode/g;
+    $ft{'graph'} += s/\bcudaGraphAddEventWaitNode\b/hipGraphAddEventWaitNode/g;
+    $ft{'graph'} += s/\bcudaGraphAddHostNode\b/hipGraphAddHostNode/g;
+    $ft{'graph'} += s/\bcudaGraphAddMemcpyNodeFromSymbol\b/hipGraphAddMemcpyNodeFromSymbol/g;
+    $ft{'graph'} += s/\bcudaGraphAddMemcpyNodeToSymbol\b/hipGraphAddMemcpyNodeToSymbol/g;
+    $ft{'graph'} += s/\bcudaGraphChildGraphNodeGetGraph\b/hipGraphChildGraphNodeGetGraph/g;
+    $ft{'graph'} += s/\bcudaGraphDestroyNode\b/hipGraphDestroyNode/g;
+    $ft{'graph'} += s/\bcudaGraphEventRecordNodeGetEvent\b/hipGraphEventRecordNodeGetEvent/g;
+    $ft{'graph'} += s/\bcudaGraphEventRecordNodeSetEvent\b/hipGraphEventRecordNodeSetEvent/g;
+    $ft{'graph'} += s/\bcudaGraphEventWaitNodeGetEvent\b/hipGraphEventWaitNodeGetEvent/g;
+    $ft{'graph'} += s/\bcudaGraphEventWaitNodeSetEvent\b/hipGraphEventWaitNodeSetEvent/g;
+    $ft{'graph'} += s/\bcudaGraphExecChildGraphNodeSetParams\b/hipGraphExecChildGraphNodeSetParams/g;
+    $ft{'graph'} += s/\bcudaGraphExecEventRecordNodeSetEvent\b/hipGraphExecEventRecordNodeSetEvent/g;
+    $ft{'graph'} += s/\bcudaGraphExecEventWaitNodeSetEvent\b/hipGraphExecEventWaitNodeSetEvent/g;
+    $ft{'graph'} += s/\bcudaGraphExecHostNodeSetParams\b/hipGraphExecHostNodeSetParams/g;
+    $ft{'graph'} += s/\bcudaGraphExecMemcpyNodeSetParams\b/hipGraphExecMemcpyNodeSetParams/g;
+    $ft{'graph'} += s/\bcudaGraphExecMemcpyNodeSetParams1D\b/hipGraphExecMemcpyNodeSetParams1D/g;
+    $ft{'graph'} += s/\bcudaGraphExecMemcpyNodeSetParamsFromSymbol\b/hipGraphExecMemcpyNodeSetParamsFromSymbol/g;
+    $ft{'graph'} += s/\bcudaGraphExecMemcpyNodeSetParamsToSymbol\b/hipGraphExecMemcpyNodeSetParamsToSymbol/g;
+    $ft{'graph'} += s/\bcudaGraphExecMemsetNodeSetParams\b/hipGraphExecMemsetNodeSetParams/g;
+    $ft{'graph'} += s/\bcudaGraphExecUpdate\b/hipGraphExecUpdate/g;
     $ft{'graph'} += s/\bcudaGraphGetEdges\b/hipGraphGetEdges/g;
+    $ft{'graph'} += s/\bcudaGraphHostNodeGetParams\b/hipGraphHostNodeGetParams/g;
+    $ft{'graph'} += s/\bcudaGraphHostNodeSetParams\b/hipGraphHostNodeSetParams/g;
+    $ft{'graph'} += s/\bcudaGraphInstantiateWithFlags\b/hipGraphInstantiateWithFlags/g;
+    $ft{'graph'} += s/\bcudaGraphMemcpyNodeSetParams1D\b/hipGraphMemcpyNodeSetParams1D/g;
+    $ft{'graph'} += s/\bcudaGraphMemcpyNodeSetParamsFromSymbol\b/hipGraphMemcpyNodeSetParamsFromSymbol/g;
+    $ft{'graph'} += s/\bcudaGraphMemcpyNodeSetParamsToSymbol\b/hipGraphMemcpyNodeSetParamsToSymbol/g;
+    $ft{'graph'} += s/\bcudaGraphNodeFindInClone\b/hipGraphNodeFindInClone/g;
     $ft{'graph'} += s/\bcudaGraphNodeGetDependencies\b/hipGraphNodeGetDependencies/g;
+    $ft{'graph'} += s/\bcudaGraphNodeGetDependentNodes\b/hipGraphNodeGetDependentNodes/g;
+    $ft{'graph'} += s/\bcudaGraphNodeGetType\b/hipGraphNodeGetType/g;
     $ft{'graph'} += s/\bcudaGraphRemoveDependencies\b/hipGraphRemoveDependencies/g;
     $ft{'type'} += s/\bCUpointer_attribute\b/hipPointer_attribute/g;
     $ft{'type'} += s/\bCUpointer_attribute_enum\b/hipPointer_attribute/g;
@@ -5244,12 +5348,6 @@ sub warnUnsupportedFunctions {
         "cudaGraphNodeTypeMemAlloc",
         "cudaGraphNodeTypeExtSemaphoreWait",
         "cudaGraphNodeTypeExtSemaphoreSignal",
-        "cudaGraphNodeGetType",
-        "cudaGraphNodeGetDependentNodes",
-        "cudaGraphNodeFindInClone",
-        "cudaGraphMemcpyNodeSetParamsToSymbol",
-        "cudaGraphMemcpyNodeSetParamsFromSymbol",
-        "cudaGraphMemcpyNodeSetParams1D",
         "cudaGraphMemFreeNodeGetParams",
         "cudaGraphMemAttributeType",
         "cudaGraphMemAttrUsedMemHigh",
@@ -5260,32 +5358,14 @@ sub warnUnsupportedFunctions {
         "cudaGraphKernelNodeSetAttribute",
         "cudaGraphKernelNodeGetAttribute",
         "cudaGraphKernelNodeCopyAttributes",
-        "cudaGraphInstantiateWithFlags",
         "cudaGraphInstantiateFlags",
         "cudaGraphInstantiateFlagAutoFreeOnLaunch",
-        "cudaGraphHostNodeSetParams",
-        "cudaGraphHostNodeGetParams",
         "cudaGraphExternalSemaphoresWaitNodeSetParams",
         "cudaGraphExternalSemaphoresWaitNodeGetParams",
         "cudaGraphExternalSemaphoresSignalNodeSetParams",
         "cudaGraphExternalSemaphoresSignalNodeGetParams",
-        "cudaGraphExecUpdate",
-        "cudaGraphExecMemsetNodeSetParams",
-        "cudaGraphExecMemcpyNodeSetParamsToSymbol",
-        "cudaGraphExecMemcpyNodeSetParamsFromSymbol",
-        "cudaGraphExecMemcpyNodeSetParams1D",
-        "cudaGraphExecMemcpyNodeSetParams",
-        "cudaGraphExecHostNodeSetParams",
         "cudaGraphExecExternalSemaphoresWaitNodeSetParams",
         "cudaGraphExecExternalSemaphoresSignalNodeSetParams",
-        "cudaGraphExecEventWaitNodeSetEvent",
-        "cudaGraphExecEventRecordNodeSetEvent",
-        "cudaGraphExecChildGraphNodeSetParams",
-        "cudaGraphEventWaitNodeSetEvent",
-        "cudaGraphEventWaitNodeGetEvent",
-        "cudaGraphEventRecordNodeSetEvent",
-        "cudaGraphEventRecordNodeGetEvent",
-        "cudaGraphDestroyNode",
         "cudaGraphDebugDotPrint",
         "cudaGraphDebugDotFlagsVerbose",
         "cudaGraphDebugDotFlagsMemsetNodeParams",
@@ -5299,17 +5379,10 @@ sub warnUnsupportedFunctions {
         "cudaGraphDebugDotFlagsEventNodeParams",
         "cudaGraphDebugDotFlags",
         "cudaGraphClone",
-        "cudaGraphChildGraphNodeGetGraph",
-        "cudaGraphAddMemcpyNodeToSymbol",
-        "cudaGraphAddMemcpyNodeFromSymbol",
         "cudaGraphAddMemFreeNode",
         "cudaGraphAddMemAllocNode",
-        "cudaGraphAddHostNode",
         "cudaGraphAddExternalSemaphoresWaitNode",
         "cudaGraphAddExternalSemaphoresSignalNode",
-        "cudaGraphAddEventWaitNode",
-        "cudaGraphAddEventRecordNode",
-        "cudaGraphAddChildGraphNode",
         "cudaGetSurfaceReference",
         "cudaGetSurfaceObjectResourceDesc",
         "cudaGetParameterBufferV2",
@@ -5826,48 +5899,27 @@ sub warnUnsupportedFunctions {
         "cuGraphUpload",
         "cuGraphRetainUserObject",
         "cuGraphReleaseUserObject",
-        "cuGraphNodeGetType",
-        "cuGraphNodeGetDependentNodes",
-        "cuGraphNodeFindInClone",
         "cuGraphMemFreeNodeGetParams",
         "cuGraphMemAllocNodeGetParams",
         "cuGraphKernelNodeSetAttribute",
         "cuGraphKernelNodeGetAttribute",
         "cuGraphKernelNodeCopyAttributes",
-        "cuGraphInstantiateWithFlags",
-        "cuGraphHostNodeSetParams",
-        "cuGraphHostNodeGetParams",
         "cuGraphExternalSemaphoresWaitNodeSetParams",
         "cuGraphExternalSemaphoresWaitNodeGetParams",
         "cuGraphExternalSemaphoresSignalNodeSetParams",
         "cuGraphExternalSemaphoresSignalNodeGetParams",
-        "cuGraphExecUpdate",
         "cuGraphExecMemsetNodeSetParams",
         "cuGraphExecMemcpyNodeSetParams",
-        "cuGraphExecHostNodeSetParams",
         "cuGraphExecExternalSemaphoresWaitNodeSetParams",
         "cuGraphExecExternalSemaphoresSignalNodeSetParams",
-        "cuGraphExecEventWaitNodeSetEvent",
-        "cuGraphExecEventRecordNodeSetEvent",
-        "cuGraphExecChildGraphNodeSetParams",
-        "cuGraphEventWaitNodeSetEvent",
-        "cuGraphEventWaitNodeGetEvent",
-        "cuGraphEventRecordNodeSetEvent",
-        "cuGraphEventRecordNodeGetEvent",
-        "cuGraphDestroyNode",
         "cuGraphDebugDotPrint",
         "cuGraphClone",
-        "cuGraphChildGraphNodeGetGraph",
         "cuGraphAddMemsetNode",
         "cuGraphAddMemcpyNode",
         "cuGraphAddMemFreeNode",
         "cuGraphAddMemAllocNode",
-        "cuGraphAddHostNode",
         "cuGraphAddExternalSemaphoresWaitNode",
         "cuGraphAddExternalSemaphoresSignalNode",
-        "cuGraphAddEventWaitNode",
-        "cuGraphAddEventRecordNode",
-        "cuGraphAddChildGraphNode",
         "cuGetProcAddress",
         "cuGetErrorString",
         "cuGetErrorName",
