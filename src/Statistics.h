@@ -277,7 +277,10 @@ enum hipVersions {
   HIP_4030 = 4030,
   HIP_4040 = 4040,
   HIP_4050 = 4050,
-  HIP_LATEST = HIP_4050,
+  HIP_4051 = 4051,
+  HIP_4052 = 4052,
+  HIP_5000 = 5000,
+  HIP_LATEST = HIP_5000,
 };
 
 struct cudaAPIversions {

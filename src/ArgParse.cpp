@@ -165,4 +165,9 @@ cl::opt<bool> Experimental("experimental",
   cl::value_desc("experimental"),
   cl::cat(ToolTemplateCategory));
 
+cl::opt<bool> CudaKernelExecutionSyntax("cuda-kernel-execution-syntax",
+  cl::desc("Do not transform CUDA kernel launches"),
+  cl::value_desc("cuda-kernel-execution-syntax"),
+  cl::cat(ToolTemplateCategory));
+
 cl::extrahelp CommonHelp(ct::CommonOptionsParser::HelpMessage);
