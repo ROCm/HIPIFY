@@ -17,6 +17,18 @@
 |`__clz`| | | |`__clz`|1.6.0| | | |
 |`__clzll`| | | |`__clzll`|1.6.0| | | |
 |`__cosf`| | | |`__cosf`|1.6.0| | | |
+|`__dadd_rd`| | | | | | | | |
+|`__dadd_rn`| | | |`__dadd_rn`|1.6.0| | | |
+|`__dadd_ru`| | | | | | | | |
+|`__dadd_rz`| | | | | | | | |
+|`__ddiv_rd`| | | | | | | | |
+|`__ddiv_rn`| | | |`__ddiv_rn`|1.6.0| | | |
+|`__ddiv_ru`| | | | | | | | |
+|`__ddiv_rz`| | | | | | | | |
+|`__dmul_rd`| | | | | | | | |
+|`__dmul_rn`| | | |`__dmul_rn`|1.6.0| | | |
+|`__dmul_ru`| | | | | | | | |
+|`__dmul_rz`| | | | | | | | |
 |`__double2float_rd`| | | |`__double2float_rd`|1.6.0| | | |
 |`__double2float_rn`| | | |`__double2float_rn`|1.6.0| | | |
 |`__double2float_ru`| | | |`__double2float_ru`|1.6.0| | | |
@@ -40,6 +52,18 @@
 |`__double2ull_ru`| | | |`__double2ull_ru`|1.6.0| | | |
 |`__double2ull_rz`| | | |`__double2ull_rz`|1.6.0| | | |
 |`__double_as_longlong`| | | |`__double_as_longlong`|1.6.0| | | |
+|`__drcp_rd`| | | | | | | | |
+|`__drcp_rn`| | | |`__drcp_rn`|1.6.0| | | |
+|`__drcp_ru`| | | | | | | | |
+|`__drcp_rz`| | | | | | | | |
+|`__dsqrt_rd`| | | | | | | | |
+|`__dsqrt_rn`| | | |`__dsqrt_rn`|1.6.0| | | |
+|`__dsqrt_ru`| | | | | | | | |
+|`__dsqrt_rz`| | | | | | | | |
+|`__dsub_rd`| | | | | | | | |
+|`__dsub_rn`| | | |`__dsub_rn`|1.6.0| | | |
+|`__dsub_ru`| | | | | | | | |
+|`__dsub_rz`| | | | | | | | |
 |`__exp10f`| | | |`__exp10f`|1.6.0| | | |
 |`__expf`| | | |`__expf`|1.6.0| | | |
 |`__fadd_rd`| | | | | | | | |
@@ -82,6 +106,10 @@
 |`__float_as_int`| | | |`__float_as_int`|1.6.0| | | |
 |`__float_as_uint`| | | |`__float_as_uint`|1.6.0| | | |
 |`__floats2half2_rn`| | | |`__floats2half2_rn`|1.6.0| | | |
+|`__fma_rd`| | | | | | | | |
+|`__fma_rn`| | | |`__fma_rn`|1.6.0| | | |
+|`__fma_ru`| | | | | | | | |
+|`__fma_rz`| | | | | | | | |
 |`__fmaf_rd`| | | | | | | | |
 |`__fmaf_rn`| | | |`__fmaf_rn`|1.6.0| | | |
 |`__fmaf_ru`| | | | | | | | |
