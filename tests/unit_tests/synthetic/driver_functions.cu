@@ -9,6 +9,7 @@ int main() {
   printf("09. CUDA Driver API Functions synthetic test\n");
 
   unsigned int flags = 0;
+  int iBlockSize = 0;
   size_t bytes = 0;
   size_t bytes_2 = 0;
   void* image = nullptr;
@@ -16,6 +17,7 @@ int main() {
   uint32_t u_value = 0;
   float ms = 0;
   int* value = 0;
+  int* value_2 = 0;
   unsigned long long ull =0;
   // CHECK: hipDevice_t device;
   // CHECK-NEXT: hipCtx_t context;
@@ -43,6 +45,7 @@ int main() {
   // CHECK-NEXT: hipMipmappedArray_t mipmappedArray;
   // CHECK-NEXT: hipStreamCallback_t streamCallback;
   // CHECK-NEXT: hipPointer_attribute pointer_attribute;
+  // CHECK-NEXT: void* occupancyB2DSize;
   CUdevice device;
   CUcontext context;
   CUfunc_cache func_cache;
@@ -69,7 +72,7 @@ int main() {
   CUmipmappedArray mipmappedArray;
   CUstreamCallback streamCallback;
   CUpointer_attribute pointer_attribute;
-
+  CUoccupancyB2DSize occupancyB2DSize;
 #if CUDA_VERSION > 7050
   // CHECK: hipMemRangeAttribute MemoryRangeAttribute;
   // CHECK-NEXT: hipMemoryAdvise MemoryAdvise;
@@ -1062,6 +1065,16 @@ int main() {
   // CHECK: result = hipGraphInstantiateWithFlags(&graphExec, graph, ull);
   result = cuGraphInstantiateWithFlags(&graphExec, graph, ull);
 #endif
+
+  // CUDA: CUresult CUDAAPI cuOccupancyMaxActiveBlocksPerMultiprocessor(int *numBlocks, CUfunction func, int blockSize, size_t dynamicSMemSize);
+  // HIP: hipError_t hipModuleOccupancyMaxActiveBlocksPerMultiprocessor(int* numBlocks, hipFunction_t f, int blockSize, size_t dynSharedMemPerBlk);
+  // CHECK: result = hipModuleOccupancyMaxActiveBlocksPerMultiprocessor(value, function, iBlockSize, bytes);
+  result = cuOccupancyMaxActiveBlocksPerMultiprocessor(value, function, iBlockSize, bytes);
+
+  // CUDA: CUresult CUDAAPI cuOccupancyMaxPotentialBlockSize(int *minGridSize, int *blockSize, CUfunction func, CUoccupancyB2DSize blockSizeToDynamicSMemSize, size_t dynamicSMemSize, int blockSizeLimit);
+  // HIP: hipError_t hipModuleOccupancyMaxPotentialBlockSize(int* gridSize, int* blockSize, hipFunction_t f, size_t dynSharedMemPerBlk, int blockSizeLimit);
+  // CHECK: result = hipModuleOccupancyMaxPotentialBlockSize(value, value_2, function, bytes, iBlockSize);
+  result = cuOccupancyMaxPotentialBlockSize(value, value_2, function, occupancyB2DSize, bytes, iBlockSize);
 
   return 0;
 }

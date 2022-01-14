@@ -2053,7 +2053,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUhostFn",                                                         {"hipHostFn_t",                                              "", CONV_TYPE, API_DRIVER, 1}},
 
   // no analogue
-  {"CUoccupancyB2DSize",                                               {"hipOccupancyB2DSize",                                      "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CUoccupancyB2DSize",                                               {"void*",                                                    "", CONV_TYPE, API_DRIVER, 1}},
 
   // cudaStreamCallback_t
   {"CUstreamCallback",                                                 {"hipStreamCallback_t",                                      "", CONV_TYPE, API_DRIVER, 1}},

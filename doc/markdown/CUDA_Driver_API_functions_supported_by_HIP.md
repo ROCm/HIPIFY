@@ -1017,7 +1017,7 @@
 |`CUmipmappedArray_st`| | | |`hipMipmappedArray`|1.7.0| | | |
 |`CUmod_st`| | | |`ihipModule_t`|1.6.0| | | |
 |`CUmodule`| | | |`hipModule_t`|1.6.0| | | |
-|`CUoccupancyB2DSize`| | | | | | | | |
+|`CUoccupancyB2DSize`| | | |`void*`| | | | |
 |`CUoccupancy_flags`| | | | | | | | |
 |`CUoccupancy_flags_enum`| | | | | | | | |
 |`CUpointer_attribute`| | | |`hipPointer_attribute`|5.0.0| | |5.0.0|

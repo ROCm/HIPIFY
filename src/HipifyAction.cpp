@@ -58,6 +58,7 @@ const std::string sCudaMemcpyFromSymbol = "cudaMemcpyFromSymbol";
 const std::string sCudaMemcpyFromSymbolAsync = "cudaMemcpyFromSymbolAsync";
 const std::string sCudaFuncSetCacheConfig = "cudaFuncSetCacheConfig";
 const std::string sCudaFuncGetAttributes = "cudaFuncGetAttributes";
+const std::string sCuOccupancyMaxPotentialBlockSize = "cuOccupancyMaxPotentialBlockSize";
 // Matchers' names
 const StringRef sCudaLaunchKernel = "cudaLaunchKernel";
 const StringRef sCudaHostFuncCall = "cudaHostFuncCall";
@@ -72,6 +73,7 @@ std::string getCastType(CastTypes c) {
     case e_reinterpret_cast: return s_reinterpret_cast;
     case e_int32_t: return s_int32_t;
     case e_int64_t: return s_int64_t;
+    case e_remove_argument: return "";
     default: return "";
   }
 }
@@ -85,6 +87,7 @@ std::map<std::string, ArgCastMap> FuncArgCasts {
   {sCudaMemcpyFromSymbolAsync, {{1, {e_HIP_SYMBOL, cw_None}}}},
   {sCudaFuncSetCacheConfig, {{0, {e_reinterpret_cast, cw_None}}}},
   {sCudaFuncGetAttributes, {{1, {e_reinterpret_cast, cw_None}}}},
+  {sCuOccupancyMaxPotentialBlockSize, {{3, {e_remove_argument, cw_DataLoss}}}},
 };
 
 void HipifyAction::RewriteString(StringRef s, clang::SourceLocation start) {
@@ -494,19 +497,31 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
     std::string sName = funcDcl->getDeclName().getAsString();
     auto it = FuncArgCasts.find(sName);
     if (it == FuncArgCasts.end()) return false;
+    clang::LangOptions DefaultLangOptions;
     auto casts = it->second;
     for (auto c : casts) {
       unsigned int argNum = c.first;
-      std::string sCast = getCastType(c.second.castType);
       clang::SmallString<40> XStr;
       llvm::raw_svector_ostream OS(XStr);
       clang::SourceRange sr = call->getArg(argNum)->getSourceRange();
       auto* SM = Result.SourceManager;
-      OS << sCast << "(" << readSourceText(*SM, sr) << ")";
       clang::SourceRange replacementRange = getWriteRange(*SM, { sr.getBegin(), sr.getEnd() });
       clang::SourceLocation s = replacementRange.getBegin();
       clang::SourceLocation e = replacementRange.getEnd();
-      clang::LangOptions DefaultLangOptions;
+      switch (c.second.castType) {
+        case e_remove_argument:
+        {
+          OS << "";
+          if (argNum >= call->getNumArgs() - 1) continue;
+          auto NextToken = clang::Lexer::findNextToken(e, *SM, DefaultLangOptions);
+          if (!NextToken) continue;
+          e = NextToken->getLocation();
+          break;
+        }
+        default:
+          OS << getCastType(c.second.castType) << "(" << readSourceText(*SM, sr) << ")";
+          break;
+      }
       size_t length = SM->getCharacterData(clang::Lexer::getLocForEndOfToken(e, 0, *SM, DefaultLangOptions)) - SM->getCharacterData(s);
       ct::Replacement Rep(*SM, s, length, OS.str());
       clang::FullSourceLoc fullSL(s, *SM);
@@ -553,7 +568,8 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
             sCudaMemcpyToSymbol,
             sCudaMemcpyToSymbolAsync,
             sCudaFuncSetCacheConfig,
-            sCudaFuncGetAttributes
+            sCudaFuncGetAttributes,
+            sCuOccupancyMaxPotentialBlockSize
           )
         )
       )
