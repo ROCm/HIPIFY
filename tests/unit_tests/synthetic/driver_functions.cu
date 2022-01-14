@@ -10,6 +10,7 @@ int main() {
 
   unsigned int flags = 0;
   int iBlockSize = 0;
+  int iBlockSize_2 = 0;
   size_t bytes = 0;
   size_t bytes_2 = 0;
   void* image = nullptr;
@@ -1075,6 +1076,11 @@ int main() {
   // HIP: hipError_t hipModuleOccupancyMaxPotentialBlockSize(int* gridSize, int* blockSize, hipFunction_t f, size_t dynSharedMemPerBlk, int blockSizeLimit);
   // CHECK: result = hipModuleOccupancyMaxPotentialBlockSize(value, value_2, function, bytes, iBlockSize);
   result = cuOccupancyMaxPotentialBlockSize(value, value_2, function, occupancyB2DSize, bytes, iBlockSize);
+
+  // CUDA: CUresult CUDAAPI cuOccupancyMaxPotentialBlockSizeWithFlags(int *minGridSize, int *blockSize, CUfunction func, CUoccupancyB2DSize blockSizeToDynamicSMemSize, size_t dynamicSMemSize, int blockSizeLimit, unsigned int flags);
+  // HIP: hipError_t hipModuleOccupancyMaxPotentialBlockSizeWithFlags(int* gridSize, int* blockSize, hipFunction_t f, size_t dynSharedMemPerBlk, int blockSizeLimit, unsigned int  flags);
+  // CHECK: result = hipModuleOccupancyMaxPotentialBlockSizeWithFlags(value, value_2, function, bytes, iBlockSize, iBlockSize_2);
+  result = cuOccupancyMaxPotentialBlockSizeWithFlags(value, value_2, function, occupancyB2DSize, bytes, iBlockSize, iBlockSize_2);
 
   return 0;
 }
