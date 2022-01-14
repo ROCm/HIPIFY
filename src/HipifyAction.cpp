@@ -59,6 +59,7 @@ const std::string sCudaMemcpyFromSymbolAsync = "cudaMemcpyFromSymbolAsync";
 const std::string sCudaFuncSetCacheConfig = "cudaFuncSetCacheConfig";
 const std::string sCudaFuncGetAttributes = "cudaFuncGetAttributes";
 const std::string sCuOccupancyMaxPotentialBlockSize = "cuOccupancyMaxPotentialBlockSize";
+const std::string sCuOccupancyMaxPotentialBlockSizeWithFlags = "cuOccupancyMaxPotentialBlockSizeWithFlags";
 // Matchers' names
 const StringRef sCudaLaunchKernel = "cudaLaunchKernel";
 const StringRef sCudaHostFuncCall = "cudaHostFuncCall";
@@ -88,6 +89,7 @@ std::map<std::string, ArgCastMap> FuncArgCasts {
   {sCudaFuncSetCacheConfig, {{0, {e_reinterpret_cast, cw_None}}}},
   {sCudaFuncGetAttributes, {{1, {e_reinterpret_cast, cw_None}}}},
   {sCuOccupancyMaxPotentialBlockSize, {{3, {e_remove_argument, cw_DataLoss}}}},
+  {sCuOccupancyMaxPotentialBlockSizeWithFlags, {{3, {e_remove_argument, cw_DataLoss}}}},
 };
 
 void HipifyAction::RewriteString(StringRef s, clang::SourceLocation start) {
@@ -569,7 +571,8 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
             sCudaMemcpyToSymbolAsync,
             sCudaFuncSetCacheConfig,
             sCudaFuncGetAttributes,
-            sCuOccupancyMaxPotentialBlockSize
+            sCuOccupancyMaxPotentialBlockSize,
+            sCuOccupancyMaxPotentialBlockSizeWithFlags
           )
         )
       )
