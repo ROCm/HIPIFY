@@ -2667,6 +2667,7 @@ sub simpleSubstitutions {
     $ft{'type'} += s/\bCUmipmappedArray_st\b/hipMipmappedArray/g;
     $ft{'type'} += s/\bCUmod_st\b/ihipModule_t/g;
     $ft{'type'} += s/\bCUmodule\b/hipModule_t/g;
+    $ft{'type'} += s/\bCUoccupancyB2DSize\b/void*/g;
     $ft{'type'} += s/\bCUresourceViewFormat\b/HIPresourceViewFormat/g;
     $ft{'type'} += s/\bCUresourceViewFormat_enum\b/HIPresourceViewFormat_enum/g;
     $ft{'type'} += s/\bCUresourcetype\b/HIPresourcetype/g;
@@ -6083,7 +6084,6 @@ sub warnUnsupportedFunctions {
         "CUshared_carveout",
         "CUoccupancy_flags_enum",
         "CUoccupancy_flags",
-        "CUoccupancyB2DSize",
         "CUmemoryPool",
         "CUmemPool_attribute_enum",
         "CUmemPool_attribute",

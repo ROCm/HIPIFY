@@ -27,6 +27,7 @@ enum CastTypes {
   e_reinterpret_cast,
   e_int32_t,
   e_int64_t,
+  e_remove_argument,
 };
 
 enum CastWarning {
