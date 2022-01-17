@@ -19,7 +19,11 @@ int main() {
   float ms = 0;
   int* value = 0;
   int* value_2 = 0;
-  unsigned long long ull =0;
+#if defined(_WIN32)
+  unsigned long long ull = 0;
+#else
+  unsigned long ull = 0;
+#endif
   // CHECK: hipDevice_t device;
   // CHECK-NEXT: hipCtx_t context;
   // CHECK-NEXT: hipFuncCache_t func_cache;
