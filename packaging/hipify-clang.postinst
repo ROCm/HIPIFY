@@ -1,0 +1,26 @@
+#!/bin/bash
+
+set -e
+
+ROCMDIR="/opt/rocm"
+HIPDIR=$ROCMDIR/hip
+
+# Soft-link to bin files
+HIPBINDIR=$HIPDIR/bin
+ROCMBINDIR=$ROCMDIR/bin
+
+case "$1" in
+  abort-deconfigure|abort-remove|abort-upgrade)
+    echo "$1"
+  ;;
+  configure)
+    mkdir -p $ROCMBINDIR
+    CURRENTDIR=`pwd`
+    cd $ROCMBINDIR
+        ln -r -s -f $HIPBINDIR/hipify-perl $ROCMBINDIR/hipify-perl
+    cd $CURRENTDIR
+  ;;
+  *)
+    exit 0
+  ;;
+esac

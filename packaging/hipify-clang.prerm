@@ -1,0 +1,22 @@
+#!/bin/bash
+
+set -e
+
+ROCMDIR="/opt/rocm"
+HIPDIR=$ROCMDIR/hip
+
+# Soft-link to bin files
+HIPBINDIR=$HIPDIR/bin
+ROCMBINDIR=$ROCMDIR/bin
+
+case "$1" in
+  purge)
+  ;;
+  remove)
+    rm -f $HIPBINDIR/hipify-perl
+    rmdir --ignore-fail-on-non-empty $ROCMBINDIR
+  ;;
+  *)
+    exit 0
+  ;;
+esac

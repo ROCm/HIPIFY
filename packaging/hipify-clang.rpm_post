@@ -1,0 +1,12 @@
+ROCMDIR="/opt/rocm"
+HIPDIR=$ROCMDIR/hip
+
+# Soft-link to bin files
+ROCMBINDIR=$ROCMDIR/bin
+HIPBINDIR=$HIPDIR/bin
+
+mkdir -p $ROCMBINDIR
+CURRENTDIR=`pwd`
+cd $ROCMBINDIR
+ln -r -s -f $HIPBINDIR/hipify-perl $ROCMBINDIR/hipify-perl
+cd $CURRENTDIR

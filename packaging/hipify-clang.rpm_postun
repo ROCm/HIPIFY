@@ -1,0 +1,8 @@
+ROCMDIR="/opt/rocm"
+HIPDIR=$ROCMDIR/hip
+HIPBINDIR=$HIPDIR/bin
+
+if [ $1 -eq 0 ]; then
+    rm -rf $HIPBINDIR/hipify-perl
+    rmdir --ignore-fail-on-non-empty $HIPBINDIR
+fi
