@@ -1,0 +1,14 @@
+HIPBINDIR="/opt/rocm/hip/bin"
+ROCMBINDIR="/opt/rocm/bin"
+
+if [ $1 -eq 0 ]; then
+  rm -f $ROCMBINDIR/hipify-perl
+  rm -f $ROCMBINDIR/hipify-clang
+  rm -f $ROCMBINDIR/hipconvertinplace-perl.sh
+  rm -f $ROCMBINDIR/hipconvertinplace.sh
+  rm -f $ROCMBINDIR/hipexamine-perl.sh
+  rm -f $ROCMBINDIR/hipexamine.sh
+  rm -f $ROCMBINDIR/findcode.sh
+  rm -f $ROCMBINDIR/finduncodep.sh
+  rmdir --ignore-fail-on-non-empty $ROCMBINDIR
+fi

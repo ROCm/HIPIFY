@@ -1,0 +1,26 @@
+#!/bin/bash
+
+set -e
+
+# Soft-link to bin files
+HIPBINDIR="/opt/rocm/hip/bin"
+ROCMBINDIR="/opt/rocm/bin"
+
+case "$1" in
+  purge)
+  ;;
+  remove)
+    rm -f $ROCMBINDIR/hipify-perl
+    rm -f $ROCMBINDIR/hipify-clang
+    rm -f $ROCMBINDIR/hipconvertinplace-perl.sh
+    rm -f $ROCMBINDIR/hipconvertinplace.sh
+    rm -f $ROCMBINDIR/hipexamine-perl.sh
+    rm -f $ROCMBINDIR/hipexamine.sh
+    rm -f $ROCMBINDIR/findcode.sh
+    rm -f $ROCMBINDIR/finduncodep.sh
+    rmdir --ignore-fail-on-non-empty $ROCMBINDIR
+  ;;
+  *)
+    exit 0
+  ;;
+esac
