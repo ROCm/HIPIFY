@@ -1215,6 +1215,7 @@
 |`cuArrayDestroy`| | | |`hipArrayDestroy`|4.2.0| | | |
 |`cuArrayGetDescriptor`| | | | | | | | |
 |`cuArrayGetDescriptor_v2`| | | | | | | | |
+|`cuArrayGetMemoryRequirements`|11.6| | | | | | | |
 |`cuArrayGetPlane`|11.2| | | | | | | |
 |`cuArrayGetSparseProperties`|11.1| | | | | | | |
 |`cuDeviceGetByPCIBusId`| | | |`hipDeviceGetByPCIBusId`|1.6.0| | | |
@@ -1308,6 +1309,7 @@
 |`cuMipmappedArrayCreate`| | | |`hipMipmappedArrayCreate`|3.5.0| | | |
 |`cuMipmappedArrayDestroy`| | | |`hipMipmappedArrayDestroy`|3.5.0| | | |
 |`cuMipmappedArrayGetLevel`| | | |`hipMipmappedArrayGetLevel`|3.5.0| | | |
+|`cuMipmappedArrayGetMemoryRequirements`|11.6| | | | | | | |
 
 ## **12. Virtual Memory Management**
 
@@ -1521,7 +1523,9 @@
 |`cuGraphNodeFindInClone`|10.0| | |`hipGraphNodeFindInClone`|5.0.0| | |5.0.0|
 |`cuGraphNodeGetDependencies`|10.0| | |`hipGraphNodeGetDependencies`|5.0.0| | |5.0.0|
 |`cuGraphNodeGetDependentNodes`|10.0| | |`hipGraphNodeGetDependentNodes`|5.0.0| | |5.0.0|
+|`cuGraphNodeGetEnabled`|11.6| | | | | | | |
 |`cuGraphNodeGetType`|10.0| | |`hipGraphNodeGetType`|5.0.0| | |5.0.0|
+|`cuGraphNodeSetEnabled`|11.6| | | | | | | |
 |`cuGraphReleaseUserObject`|11.3| | | | | | | |
 |`cuGraphRemoveDependencies`|10.0| | |`hipGraphRemoveDependencies`|5.0.0| | |5.0.0|
 |`cuGraphRetainUserObject`|11.3| | | | | | | |
