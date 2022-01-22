@@ -3,8 +3,8 @@
 set -e
 
 # Soft-link to bin files
-HIPBINDIR="/opt/rocm/hip/bin"
-ROCMBINDIR="/opt/rocm/bin"
+HIPBINDIR=@CPACK_PACKAGING_INSTALL_PREFIX@/bin
+ROCMBINDIR=@CPACK_PACKAGING_INSTALL_PREFIX@/../bin
 
 case "$1" in
   abort-deconfigure|abort-remove|abort-upgrade)
