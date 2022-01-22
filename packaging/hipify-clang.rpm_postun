@@ -1,5 +1,5 @@
-HIPBINDIR="/opt/rocm/hip/bin"
-ROCMBINDIR="/opt/rocm/bin"
+HIPBINDIR=@CPACK_PACKAGING_INSTALL_PREFIX@/bin
+ROCMBINDIR=@CPACK_PACKAGING_INSTALL_PREFIX@/../bin
 
 if [ $1 -eq 0 ]; then
   rm -f $ROCMBINDIR/hipify-perl

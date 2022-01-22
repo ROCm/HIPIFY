@@ -1,7 +1,7 @@
 # Soft-link to bin files
 
-HIPBINDIR="/opt/rocm/hip/bin"
-ROCMBINDIR="/opt/rocm/bin"
+HIPBINDIR=@CPACK_PACKAGING_INSTALL_PREFIX@/bin
+ROCMBINDIR=@CPACK_PACKAGING_INSTALL_PREFIX@/../bin
 
 mkdir -p $ROCMBINDIR
 CURRENTDIR=`pwd`
