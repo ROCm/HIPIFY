@@ -113,8 +113,15 @@ install(
 
 if(UNIX)
     set(CPACK_PACKAGING_INSTALL_PREFIX "/opt/rocm/hip" CACHE PATH "HIP Package Installation Path")
+    set(HIPBINDIR ${CPACK_PACKAGING_INSTALL_PREFIX}/bin)
+    set(ROCMBINDIR ${CPACK_PACKAGING_INSTALL_PREFIX}/../bin)
     set(BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR}/packages/hipify-clang)
     configure_file(packaging/hipify-clang.txt ${BUILD_DIR}/CMakeLists.txt @ONLY)
+    configure_file(${CMAKE_SOURCE_DIR}/LICENSE.txt ${BUILD_DIR}/LICENSE.txt @ONLY)
+    configure_file(packaging/hipify-clang.postinst ${BUILD_DIR}/postinst @ONLY)
+    configure_file(packaging/hipify-clang.prerm ${BUILD_DIR}/prerm @ONLY)
+    configure_file(packaging/hipify-clang.rpm_post ${BUILD_DIR}/rpm_post @ONLY)
+    configure_file(packaging/hipify-clang.rpm_postun ${BUILD_DIR}/rpm_postun @ONLY)
 
     add_custom_target(package_hipify-clang  COMMAND ${CMAKE_COMMAND} .
         WORKING_DIRECTORY ${PROJECT_BINARY_DIR}

@@ -1,0 +1,28 @@
+#!/bin/bash
+
+set -e
+
+# Soft-link to bin files
+
+case "$1" in
+  abort-deconfigure|abort-remove|abort-upgrade)
+    echo "$1"
+  ;;
+  configure)
+    mkdir -p @ROCMBINDIR@
+    CURRENTDIR=`pwd`
+    cd @ROCMBINDIR@
+        ln -r -s -f @HIPBINDIR@/hipify-perl @ROCMBINDIR@/hipify-perl
+        ln -r -s -f @HIPBINDIR@/hipify-clang @ROCMBINDIR@/hipify-clang
+        ln -r -s -f @HIPBINDIR@/hipconvertinplace-perl.sh @ROCMBINDIR@/hipconvertinplace-perl.sh
+        ln -r -s -f @HIPBINDIR@/hipconvertinplace.sh @ROCMBINDIR@/hipconvertinplace.sh
+        ln -r -s -f @HIPBINDIR@/hipexamine-perl.sh @ROCMBINDIR@/hipexamine-perl.sh
+        ln -r -s -f @HIPBINDIR@/hipexamine.sh @ROCMBINDIR@/hipexamine.sh
+        ln -r -s -f @HIPBINDIR@/findcode.sh @ROCMBINDIR@/findcode.sh
+        ln -r -s -f @HIPBINDIR@/finduncodep.sh @ROCMBINDIR@/finduncodep.sh
+    cd $CURRENTDIR
+  ;;
+  *)
+    exit 0
+  ;;
+esac
