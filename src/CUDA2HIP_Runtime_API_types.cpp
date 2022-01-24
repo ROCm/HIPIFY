@@ -211,6 +211,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CUDA_MEM_ALLOC_NODE_PARAMS_st
   {"cudaMemAllocNodeParams",                                           {"hipMemallocNodeParams",                                    "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
 
+  // CUDA_ARRAY_MEMORY_REQUIREMENTS_st
+  {"cudaArrayMemoryRequirements",                                      {"hipArrayMemoryRequirements",                               "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+
   // 2. Unions
 
   // CUstreamAttrValue
@@ -540,8 +543,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaDevAttrGPUDirectRDMAWritesOrdering",                           {"hipDeviceAttributeGpuDirectRdmaWritesOrdering",            "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 118
   // CU_DEVICE_ATTRIBUTE_MEMPOOL_SUPPORTED_HANDLE_TYPES
   {"cudaDevAttrMemoryPoolSupportedHandleTypes",                        {"hipDeviceAttributeMempoolSupportedHandleTypes",            "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 119
+  // CU_DEVICE_ATTRIBUTE_DEFERRED_MAPPING_CUDA_ARRAY_SUPPORTED
+  {"cudaDevAttrDeferredMappingCudaArraySupported",                     {"hipDeviceAttributeDeferredMappingCudaArraySupported",      "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 121
   // CU_DEVICE_ATTRIBUTE_MAX
-  {"cudaDevAttrMax",                                                   {"hipDeviceAttributeMax",                                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 120
+  {"cudaDevAttrMax",                                                   {"hipDeviceAttributeMax",                                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 122
 
   // CUdevice_P2PAttribute
   {"cudaDeviceP2PAttr",                                                {"hipDeviceP2PAttr",                                         "", CONV_TYPE, API_RUNTIME, 36}},
@@ -1140,6 +1145,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaGraphExecUpdateErrorNotSupported",                             {"hipGraphExecUpdateErrorNotSupported",                      "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 0x6
   // CU_GRAPH_EXEC_UPDATE_ERROR_UNSUPPORTED_FUNCTION_CHANGE
   {"cudaGraphExecUpdateErrorUnsupportedFunctionChange",                {"hipGraphExecUpdateErrorUnsupportedFunctionChange",         "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 0x7
+  // CU_GRAPH_EXEC_UPDATE_ERROR_ATTRIBUTES_CHANGED
+  {"cudaGraphExecUpdateErrorAttributesChanged",                        {"hipGraphExecUpdateErrorAttributesChanged",                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 0x8
 
   // CUlimit
   {"cudaLimit",                                                        {"hipLimit_t",                                               "", CONV_TYPE, API_RUNTIME, 36}},
@@ -1714,6 +1721,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaArrayColorAttachment",                                         {"hipArrayColorAttachment",                                  "", CONV_DEFINE, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 0x20
   // CUDA_ARRAY3D_SPARSE
   {"cudaArraySparse",                                                  {"hipArraySparse",                                           "", CONV_DEFINE, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 0x40
+  // CUDA_ARRAY3D_DEFERRED_MAPPING
+  {"cudaArrayDeferredMapping",                                         {"hipArrayDeferredMapping",                                  "", CONV_DEFINE, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 0x80
   // CUDA_COOPERATIVE_LAUNCH_MULTI_DEVICE_NO_PRE_LAUNCH_SYNC
   {"cudaCooperativeLaunchMultiDeviceNoPreSync",                        {"hipCooperativeLaunchMultiDeviceNoPreSync",                 "", CONV_DEFINE, API_RUNTIME, 36}}, // 0x01
   // CUDA_COOPERATIVE_LAUNCH_MULTI_DEVICE_NO_POST_LAUNCH_SYNC
@@ -2250,6 +2259,10 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_TYPE_NAME_VER_MAP 
   {"cudaChannelFormatKindUnsignedBlockCompressed7",                    {CUDA_115, CUDA_0,   CUDA_0  }},
   {"cudaChannelFormatKindUnsignedBlockCompressed7SRGB",                {CUDA_115, CUDA_0,   CUDA_0  }},
   {"cudaDevAttrTimelineSemaphoreInteropSupported",                     {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"cudaArrayDeferredMapping",                                         {CUDA_116, CUDA_0,   CUDA_0  }},
+  {"cudaArrayMemoryRequirements",                                      {CUDA_116, CUDA_0,   CUDA_0  }},
+  {"cudaDevAttrDeferredMappingCudaArraySupported",                     {CUDA_116, CUDA_0,   CUDA_0  }},
+  {"cudaGraphExecUpdateErrorAttributesChanged",                        {CUDA_116, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {

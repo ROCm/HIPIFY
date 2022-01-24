@@ -557,7 +557,9 @@ Unsupported
 |`cudaArrayColorAttachment`|10.0| | | | | | | |
 |`cudaArrayCubemap`| | | |`hipArrayCubemap`|1.7.0| | | |
 |`cudaArrayDefault`| | | |`hipArrayDefault`|1.7.0| | | |
+|`cudaArrayDeferredMapping`|11.6| | | | | | | |
 |`cudaArrayLayered`| | | |`hipArrayLayered`|1.7.0| | | |
+|`cudaArrayMemoryRequirements`|11.6| | | | | | | |
 |`cudaArraySparse`|11.1| | | | | | | |
 |`cudaArraySparseProperties`|11.1| | | | | | | |
 |`cudaArraySparsePropertiesSingleMipTail`|11.1| | | | | | | |
@@ -653,6 +655,7 @@ Unsupported
 |`cudaDevAttrConcurrentManagedAccess`|8.0| | |`hipDeviceAttributeConcurrentManagedAccess`|3.10.0| | | |
 |`cudaDevAttrCooperativeLaunch`|9.0| | |`hipDeviceAttributeCooperativeLaunch`|2.6.0| | | |
 |`cudaDevAttrCooperativeMultiDeviceLaunch`|9.0| | |`hipDeviceAttributeCooperativeMultiDeviceLaunch`|2.6.0| | | |
+|`cudaDevAttrDeferredMappingCudaArraySupported`|11.6| | | | | | | |
 |`cudaDevAttrDirectManagedMemAccessFromHost`|9.2| | |`hipDeviceAttributeDirectManagedMemAccessFromHost`|3.10.0| | | |
 |`cudaDevAttrEccEnabled`| | | |`hipDeviceAttributeEccEnabled`|2.10.0| | | |
 |`cudaDevAttrGPUDirectRDMAFlushWritesOptions`|11.3| | | | | | | |
@@ -1074,6 +1077,7 @@ Unsupported
 |`cudaGraphDebugDotFlagsMemsetNodeParams`|11.3| | | | | | | |
 |`cudaGraphDebugDotFlagsVerbose`|11.3| | | | | | | |
 |`cudaGraphExecUpdateError`|10.2| | |`hipGraphExecUpdateError`|4.3.0| | | |
+|`cudaGraphExecUpdateErrorAttributesChanged`|11.6| | | | | | | |
 |`cudaGraphExecUpdateErrorFunctionChanged`|10.2| | |`hipGraphExecUpdateErrorFunctionChanged`|4.3.0| | | |
 |`cudaGraphExecUpdateErrorNodeTypeChanged`|10.2| | |`hipGraphExecUpdateErrorNodeTypeChanged`|4.3.0| | | |
 |`cudaGraphExecUpdateErrorNotSupported`|10.2| | |`hipGraphExecUpdateErrorNotSupported`|4.3.0| | | |
