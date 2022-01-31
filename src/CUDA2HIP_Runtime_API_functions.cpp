@@ -373,6 +373,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   {"cudaArrayGetSparseProperties",                            {"hipArrayGetSparseProperties",                            "", CONV_MEMORY, API_RUNTIME, 9, HIP_UNSUPPORTED}},
   // cuArrayGetPlane
   {"cudaArrayGetPlane",                                       {"hipArrayGetPlane",                                       "", CONV_MEMORY, API_RUNTIME, 9, HIP_UNSUPPORTED}},
+  // cuArrayGetMemoryRequirements
+  {"cudaArrayGetMemoryRequirements",                          {"hipArrayGetMemoryRequirements",                          "", CONV_MEMORY, API_RUNTIME, 9, HIP_UNSUPPORTED}},
 
   // 10. Memory Management [DEPRECATED]
   // no analogue
@@ -831,6 +833,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   {"cudaDeviceSetGraphMemAttribute",                          {"hipDeviceSetGraphMemAttribute",                          "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphInstantiateWithFlags
   {"cudaGraphInstantiateWithFlags",                           {"hipGraphInstantiateWithFlags",                           "", CONV_GRAPH, API_RUNTIME, 30, HIP_EXPERIMENTAL}},
+  // cuGraphNodeSetEnabled
+  {"cudaGraphNodeSetEnabled",                                {"hipGraphNodeSetEnabled",                                  "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
 
   // 31. Driver Entry Point Access
   // cuGetProcAddress
@@ -1074,6 +1078,8 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_FUNCTION_VER_MAP {
   {"cudaDeviceGetGraphMemAttribute",                          {CUDA_114, CUDA_0,   CUDA_0  }},
   {"cudaDeviceSetGraphMemAttribute",                          {CUDA_114, CUDA_0,   CUDA_0  }},
   {"cudaGraphInstantiateWithFlags",                           {CUDA_114, CUDA_0,   CUDA_0  }},
+  {"cudaArrayGetMemoryRequirements",                          {CUDA_116, CUDA_0,   CUDA_0  }},
+  {"cudaGraphNodeSetEnabled",                                 {CUDA_116, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP {
