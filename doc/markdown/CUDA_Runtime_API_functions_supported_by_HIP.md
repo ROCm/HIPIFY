@@ -142,6 +142,7 @@
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
 |`cudaArrayGetInfo`| | | | | | | | |
+|`cudaArrayGetMemoryRequirements`|11.6| | | | | | | |
 |`cudaArrayGetPlane`|11.2| | | | | | | |
 |`cudaArrayGetSparseProperties`|11.1| | | | | | | |
 |`cudaFree`| | | |`hipFree`|1.5.0| | | |
@@ -489,6 +490,7 @@
 |`cudaGraphNodeGetDependencies`|11.0| | |`hipGraphNodeGetDependencies`|5.0.0| | |5.0.0|
 |`cudaGraphNodeGetDependentNodes`|11.0| | |`hipGraphNodeGetDependentNodes`|5.0.0| | |5.0.0|
 |`cudaGraphNodeGetType`|11.0| | |`hipGraphNodeGetType`|5.0.0| | |5.0.0|
+|`cudaGraphNodeSetEnabled`|11.6| | | | | | | |
 |`cudaGraphReleaseUserObject`|11.3| | | | | | | |
 |`cudaGraphRemoveDependencies`|11.0| | |`hipGraphRemoveDependencies`|5.0.0| | |5.0.0|
 |`cudaGraphRetainUserObject`|11.3| | | | | | | |
