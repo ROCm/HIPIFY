@@ -311,7 +311,7 @@ Run `Visual Studio 16 2019`, open the generated `LLVM.sln`, build all, build pro
 
         - ***Linux***: `-DCUDA_DNN_ROOT_DIR=/usr/include`
 
-        - ***Windows***: `-DCUDA_DNN_ROOT_DIR=d:/CUDNN/cudnn-11.5-windows-x64-v8.3.1`
+        - ***Windows***: `-DCUDA_DNN_ROOT_DIR=d:/CUDNN/cudnn-11.5-windows-x64-v8.3.2`
 
 5. Ensure [`CUB`](https://github.com/NVlabs/cub) of the version corresponding to CUDA's version is installed.
 
@@ -363,7 +363,7 @@ Ubuntu 14: LLVM 4.0.0 - 7.1.0, CUDA 7.0 - 9.0, cuDNN 5.0.5 - 7.6.5
 
 Ubuntu 16-18: LLVM 8.0.0 - 13.0.0, CUDA 8.0 - 10.2, cuDNN 5.1.10 - 8.0.5
 
-Ubuntu 20-21: LLVM 9.0.0 - 13.0.0, CUDA 8.0 - 11.5.1, cuDNN 5.1.10 - 8.3.1
+Ubuntu 20-21: LLVM 9.0.0 - 13.0.0, CUDA 8.0 - 11.5.1, cuDNN 5.1.10 - 8.3.2
 
 Minimum build system requirements for the above configurations:
 
@@ -529,8 +529,8 @@ Testing Time: 5.73s
 | 9.0.0 - 9.0.1   | 10.1         | 7.6.5          | 2017.15.9.20, 2019.16.4.5                | 3.16.4, 3.18.0 | 3.8.0, 3.8.5 |
 | 10.0.0 - 11.0.0 | 8.0 - 11.1   | 7.6.5  - 8.0.5 | 2017.15.9.30, 2019.16.8.3                | 3.19.2         | 3.9.1        |
 | 11.0.1 - 11.1.0 | 8.0 - 11.2.2 | 7.6.5  - 8.0.5 | 2017.15.9.31, 2019.16.8.4                | 3.19.3         | 3.9.2        |
-| 12.0.0 - 13.0.0 | 8.0 - 11.5.1 | 7.6.5  - 8.3.1 | 2017.15.9.42, 2019.16.11.8               | 3.22.1         | 3.10.1       |
-| 14.0.0git       | 8.0 - 11.5.1 | 7.6.5  - 8.3.1 | 2017.15.9.42, 2019.16.11.8, 2022.17.0.3  | 3.22.1         | 3.10.1       |
+| 12.0.0 - 13.0.0 | 8.0 - 11.5.1 | 7.6.5  - 8.3.2 | 2017.15.9.43, 2019.16.11.9               | 3.22.2         | 3.10.2       |
+| 14.0.0git       | 8.0 - 11.5.1 | 7.6.5  - 8.3.2 | 2017.15.9.43, 2019.16.11.9, 2022.17.0.5  | 3.22.2         | 3.10.2       |
 
 *Building with testing support by `Visual Studio 16 2019` on `Windows 10`:*
 
@@ -545,7 +545,7 @@ cmake
  -DCMAKE_PREFIX_PATH=d:/LLVM/13.0.0/dist \
  -DCUDA_TOOLKIT_ROOT_DIR="c:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.5" \
  -DCUDA_SDK_ROOT_DIR="c:/ProgramData/NVIDIA Corporation/CUDA Samples/v11.5" \
- -DCUDA_DNN_ROOT_DIR=d:/CUDNN/cudnn-11.5-windows-x64-v8.3.1 \
+ -DCUDA_DNN_ROOT_DIR=d:/CUDNN/cudnn-11.5-windows-x64-v8.3.2 \
  -DCUDA_CUB_ROOT_DIR=d:/GIT/cub \
  -DLLVM_EXTERNAL_LIT=d:/LLVM/13.0.0/build/Release/bin/llvm-lit.py \
  ../hipify
@@ -632,4 +632,4 @@ The information contained herein is for informational purposes only, and is subj
 
 AMD, the AMD Arrow logo, and combinations thereof are trademarks of Advanced Micro Devices, Inc. Other product names used in this publication are for identification purposes only and may be trademarks of their respective companies.
 
-Copyright (c) 2016-2021 Advanced Micro Devices, Inc. All rights reserved.
+Copyright (c) 2016-2022 Advanced Micro Devices, Inc. All rights reserved.
