@@ -3991,6 +3991,13 @@ sub transformHostFunctions {
     {
         $k += s/(?<!\/\/ CHECK: )($func)\s*\(\s*([^,]+)\s*,\s*([^,\)]+)\s*(,\s*|\))\s*/$func\($2, reinterpret_cast<const void*>\($3\)$4/g;
     }
+    foreach $func (
+        "hipModuleOccupancyMaxPotentialBlockSize",
+        "hipModuleOccupancyMaxPotentialBlockSizeWithFlags"
+    )
+    {
+        $k += s/(?<!\/\/ CHECK: )($func)\s*\((\s*[^,\)]+\s*),(\s*[^,\)]+\s*),(\s*[^,\)]+\s*),(\s*[^,\)]+\s*)\s*(,\s*|\))\s*/$func\($2,$3,$4$6/g;
+    }
     return $k;
 }
 

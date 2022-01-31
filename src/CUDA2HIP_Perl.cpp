@@ -394,11 +394,12 @@ namespace perl {
     const string s = "$k += s/(?<!\\/\\/ CHECK: )($func)\\s*";
     const string s0 = s + "\\(\\s*([^,]+)\\s*,/$func\\(";
     const string s1 = s + "\\(\\s*([^,]+)\\s*,\\s*([^,\\)]+)\\s*(,\\s*|\\))\\s*/$func\\($2, ";
-    const string s2 = s + "\\((\\s*[^,]+\\s*,\\s*[^,]+\\s*),\\s*([^,]+)\\s*(,\\s*|\\))\\s*/$func\\($2, ";
+    const string s3 = s + "\\((\\s*[^,\\)]+\\s*),(\\s*[^,\\)]+\\s*),(\\s*[^,\\)]+\\s*),(\\s*[^,\\)]+\\s*)\\s*(,\\s*|\\))\\s*/$func\\($2,$3,$4$6/g;";
     set<string> DeviceSymbolFunctions0;
     set<string> DeviceSymbolFunctions1;
     set<string> ReinterpretFunctions0;
     set<string> ReinterpretFunctions1;
+    set<string> RemoveArgFunctions3;
     for (auto f : FuncArgCasts) {
       auto casts = f.second;
       for (auto c : casts) {
@@ -417,17 +418,24 @@ namespace perl {
               default: break;
             }
             break;
+          case 3:
+            switch (c.second.castType) {
+              case e_remove_argument: RemoveArgFunctions3.insert(f.first); break;
+              default: break;
+            }
+            break;
           default: break;
         }
       }
     }
     set<string>& funcSet = DeviceSymbolFunctions0;
-    for (int i = 0; i < 4; ++i) {
+    for (int i = 0; i < 5; ++i) {
       *streamPtr.get() << tab + foreach_func;
       switch (i) {
         case 1:  funcSet = DeviceSymbolFunctions1; break;
         case 2:  funcSet = ReinterpretFunctions0; break;
         case 3:  funcSet = ReinterpretFunctions1; break;
+        case 4:  funcSet = RemoveArgFunctions3; break;
         default: funcSet = DeviceSymbolFunctions0;
       }
       unsigned int count = 0;
@@ -449,6 +457,7 @@ namespace perl {
         case 1:  *streamPtr.get() << s1 << getCastType(e_HIP_SYMBOL) << "\\($3\\)$4/g;" << endl; break;
         case 2:  *streamPtr.get() << s0 << getCastType(e_reinterpret_cast) << "\\($2\\),/g" << endl; break;
         case 3:  *streamPtr.get() << s1 << getCastType(e_reinterpret_cast) << "\\($3\\)$4/g;" << endl; break;
+        case 4:  *streamPtr.get() << s3 << endl; break;
       }
       *streamPtr.get() << tab << "}" << endl;
     }
