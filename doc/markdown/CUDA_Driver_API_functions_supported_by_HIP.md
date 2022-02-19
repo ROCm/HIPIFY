@@ -1226,8 +1226,8 @@
 |`cuIpcOpenEventHandle`| | | |`hipIpcOpenEventHandle`|1.6.0| | | |
 |`cuIpcOpenMemHandle`| | | |`hipIpcOpenMemHandle`|1.6.0| | | |
 |`cuMemAlloc`| | | |`hipMalloc`|1.5.0| | | |
-|`cuMemAllocHost`| | | |`hipHostAlloc`| | | | |
-|`cuMemAllocHost_v2`| | | |`hipHostAlloc`| | | | |
+|`cuMemAllocHost`| | | |`hipMemAllocHost`|3.0.0|3.0.0| | |
+|`cuMemAllocHost_v2`| | | |`hipMemAllocHost`|3.0.0|3.0.0| | |
 |`cuMemAllocManaged`| | | |`hipMallocManaged`|2.5.0| | | |
 |`cuMemAllocPitch`| | | |`hipMemAllocPitch`|3.0.0| | | |
 |`cuMemAllocPitch_v2`| | | |`hipMemAllocPitch`|3.0.0| | | |
