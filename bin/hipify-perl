@@ -1094,8 +1094,8 @@ sub simpleSubstitutions {
     $ft{'memory'} += s/\bcuIpcOpenEventHandle\b/hipIpcOpenEventHandle/g;
     $ft{'memory'} += s/\bcuIpcOpenMemHandle\b/hipIpcOpenMemHandle/g;
     $ft{'memory'} += s/\bcuMemAlloc\b/hipMalloc/g;
-    $ft{'memory'} += s/\bcuMemAllocHost\b/hipHostAlloc/g;
-    $ft{'memory'} += s/\bcuMemAllocHost_v2\b/hipHostAlloc/g;
+    $ft{'memory'} += s/\bcuMemAllocHost\b/hipMemAllocHost/g;
+    $ft{'memory'} += s/\bcuMemAllocHost_v2\b/hipMemAllocHost/g;
     $ft{'memory'} += s/\bcuMemAllocManaged\b/hipMallocManaged/g;
     $ft{'memory'} += s/\bcuMemAllocPitch\b/hipMemAllocPitch/g;
     $ft{'memory'} += s/\bcuMemAllocPitch_v2\b/hipMemAllocPitch/g;

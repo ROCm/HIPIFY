@@ -406,15 +406,10 @@ int main() {
   result = cuMemAlloc(&deviceptr, bytes);
   result = cuMemAlloc_v2(&deviceptr, bytes);
 
-  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  ///////////// TODO: Get rid of additional attribute 'unsigned int flags' used by HIP without a default value ///////
-  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
   // CUDA: CUresult CUDAAPI cuMemAllocHost(void **pp, size_t bytesize);
-  // HIP: DEPRECATED("use hipHostMalloc instead") hipError_t hipHostAlloc(void** ptr, size_t size, unsigned int flags);
-  // TODO: should be hipHostAlloc(&image, bytes, 0);
-  // CHECK: result = hipHostAlloc(&image, bytes);
-  // CHECK-NEXT: result = hipHostAlloc(&image, bytes);
+  // HIP: DEPRECATED("use hipHostMalloc instead") hipError_t hipMemAllocHost(void** ptr, size_t size);
+  // CHECK: result = hipMemAllocHost(&image, bytes);
+  // CHECK-NEXT: result = hipMemAllocHost(&image, bytes);
   result = cuMemAllocHost(&image, bytes);
   result = cuMemAllocHost_v2(&image, bytes);
 

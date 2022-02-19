@@ -188,8 +188,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuMemAlloc",                                           {"hipMalloc",                                               "", CONV_MEMORY, API_DRIVER, 11}},
   {"cuMemAlloc_v2",                                        {"hipMalloc",                                               "", CONV_MEMORY, API_DRIVER, 11}},
   //
-  {"cuMemAllocHost",                                       {"hipHostAlloc",                                            "", CONV_MEMORY, API_DRIVER, 11}},
-  {"cuMemAllocHost_v2",                                    {"hipHostAlloc",                                            "", CONV_MEMORY, API_DRIVER, 11}},
+  {"cuMemAllocHost",                                       {"hipMemAllocHost",                                         "", CONV_MEMORY, API_DRIVER, 11}},
+  {"cuMemAllocHost_v2",                                    {"hipMemAllocHost",                                         "", CONV_MEMORY, API_DRIVER, 11}},
   // cudaMallocManaged
   {"cuMemAllocManaged",                                    {"hipMallocManaged",                                        "", CONV_MEMORY, API_DRIVER, 11}},
   // no analogue
@@ -1286,6 +1286,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_FUNCTION_VER_MAP {
   {"hipArray3DCreate",                                     {HIP_1071, HIP_0,    HIP_0   }},
   {"hipArrayCreate",                                       {HIP_1090, HIP_0,    HIP_0   }},
   {"hipMemAllocPitch",                                     {HIP_3000, HIP_0,    HIP_0   }},
+  {"hipMemAllocHost",                                      {HIP_3000, HIP_3000, HIP_0   }},
   {"hipMemcpyParam2D",                                     {HIP_1070, HIP_0,    HIP_0   }},
   {"hipMemcpyParam2DAsync",                                {HIP_2080, HIP_0,    HIP_0   }},
   {"hipDrvMemcpy3D",                                       {HIP_3050, HIP_0,    HIP_0   }},
