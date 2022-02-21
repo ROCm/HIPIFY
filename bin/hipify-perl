@@ -1168,7 +1168,7 @@ sub simpleSubstitutions {
     $ft{'memory'} += s/\bcudaMalloc3D\b/hipMalloc3D/g;
     $ft{'memory'} += s/\bcudaMalloc3DArray\b/hipMalloc3DArray/g;
     $ft{'memory'} += s/\bcudaMallocArray\b/hipMallocArray/g;
-    $ft{'memory'} += s/\bcudaMallocHost\b/hipMallocHost/g;
+    $ft{'memory'} += s/\bcudaMallocHost\b/hipHostMalloc/g;
     $ft{'memory'} += s/\bcudaMallocManaged\b/hipMallocManaged/g;
     $ft{'memory'} += s/\bcudaMallocMipmappedArray\b/hipMallocMipmappedArray/g;
     $ft{'memory'} += s/\bcudaMallocPitch\b/hipMallocPitch/g;

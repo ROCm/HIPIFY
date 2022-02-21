@@ -284,7 +284,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // no analogue
   {"cudaMallocArray",                                         {"hipMallocArray",                                         "", CONV_MEMORY, API_RUNTIME, 9}},
   // cuMemHostAlloc
-  {"cudaMallocHost",                                          {"hipMallocHost",                                          "", CONV_MEMORY, API_RUNTIME, 9}},
+  {"cudaMallocHost",                                          {"hipHostMalloc",                                          "", CONV_MEMORY, API_RUNTIME, 9}},
   // cuMemAllocManaged
   {"cudaMallocManaged",                                       {"hipMallocManaged",                                       "", CONV_MEMORY, API_RUNTIME, 9}},
   // no analogue

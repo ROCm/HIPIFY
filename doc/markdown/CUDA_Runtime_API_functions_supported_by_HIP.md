@@ -161,7 +161,7 @@
 |`cudaMalloc3D`| | | |`hipMalloc3D`|1.9.0| | | |
 |`cudaMalloc3DArray`| | | |`hipMalloc3DArray`|1.7.0| | | |
 |`cudaMallocArray`| | | |`hipMallocArray`|1.6.0| | | |
-|`cudaMallocHost`| | | |`hipMallocHost`| | | | |
+|`cudaMallocHost`| | | |`hipHostMalloc`|1.6.0| | | |
 |`cudaMallocManaged`| | | |`hipMallocManaged`|2.5.0| | | |
 |`cudaMallocMipmappedArray`| | | |`hipMallocMipmappedArray`|3.5.0| | | |
 |`cudaMallocPitch`| | | |`hipMallocPitch`|1.6.0| | | |
