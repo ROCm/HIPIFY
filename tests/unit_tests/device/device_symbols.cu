@@ -57,9 +57,9 @@ int main() {
     }
     // CHECK: hipMalloc((void**)&Ad, SIZE);
     cudaMalloc((void**)&Ad, SIZE);
-    // CHECK: hipMallocHost((void**)&Am, SIZE);
+    // CHECK: hipHostMalloc((void**)&Am, SIZE);
     cudaMallocHost((void**)&Am, SIZE);
-    // CHECK: hipMallocHost((void**)&Cm, SIZE);
+    // CHECK: hipHostMalloc((void**)&Cm, SIZE);
     cudaMallocHost((void**)&Cm, SIZE);
     for (int i = 0; i < NUM; ++i) {
         Am[i] = -1 * i;
