@@ -98,6 +98,7 @@ namespace perl {
   const string sWarnUnsupportedFunctions = "warnUnsupportedFunctions";
   const string sWarnUnsupportedDeviceFunctions = "warnUnsupportedDeviceFunctions";
   const string sSimpleSubstitutions = "simpleSubstitutions";
+  const string sRocSubstitutions = "rocSubstitutions";
   const string sExperimentalSubstitutions = "experimentalSubstitutions";
   const string sTansformKernelLaunch = "transformKernelLaunch";
   const string sTransformCubNamespace = "transformCubNamespace";
@@ -180,6 +181,7 @@ namespace perl {
     *streamPtr.get() << "      -o=s              - Output filename" << endl;
     *streamPtr.get() << "      -print-stats      - Print translation statistics" << endl;
     *streamPtr.get() << "      -quiet-warnings   - Don't print warnings on unknown CUDA identifiers" << endl;
+    *streamPtr.get() << "      -roc              - Translate to roc instead of hip where it is possible" << endl;
     *streamPtr.get() << "      -version          - The supported HIP version" << endl;
     *streamPtr.get() << "      -whitelist=s      - Whitelist of identifiers" << endl;
     *streamPtr.get() << "USAGE" << endl;
@@ -206,6 +208,7 @@ namespace perl {
     *streamPtr.get() << tab << ", \"o=s\" => \\$hipFileName                  # Output filename" << endl;
     *streamPtr.get() << tab << ", \"print-stats\" => \\$print_stats          # Print translation statistics" << endl;
     *streamPtr.get() << tab << ", \"quiet-warnings\" => \\$quiet_warnings    # Don't print warnings on unknown CUDA identifiers" << endl;
+    *streamPtr.get() << tab << ", \"roc\" => \\$roc                          # Translate to roc instead of hip where it is possible" << endl;
     *streamPtr.get() << tab << ", \"version\" => \\$version                  # The supported HIP version" << endl;
     *streamPtr.get() << tab << ", \"whitelist=s\" => \\$whitelist            # Whitelist of identifiers" << endl;
     *streamPtr.get() << ");" << endl_2;
@@ -315,6 +318,35 @@ namespace perl {
         }
       }
     }
+    *streamPtr.get() << "}" << endl;
+  }
+
+  void generateRocSubstitutions(unique_ptr<ostream> &streamPtr) {
+    *streamPtr.get() << endl << sub << sRocSubstitutions << " {" << endl;
+    bool bTranslateToRoc = TranslateToRoc;
+    TranslateToRoc = true;
+    for (int i = 0; i < NUM_CONV_TYPES; ++i) {
+      if (i == CONV_INCLUDE_CUDA_MAIN_H) {
+        for (auto &ma : CUDA_INCLUDE_MAP) {
+          if (i == ma.second.type) {
+            string sCUDA = ma.first.str();
+            if (sCUDA != "cublas.h" && sCUDA != "cublas_v2.h") continue;
+            string sHIP = ma.second.rocName.str();
+            sCUDA = regex_replace(sCUDA, regex("/"), "\\/");
+            sHIP = regex_replace(sHIP, regex("/"), "\\/");
+            *streamPtr.get() << tab << "$ft{'" << counterNames[ma.second.type] << "'} += s/(?<![\\!~`@#\\$%\\^&\\*\\-+=\\[\\]\\(\\)\\{\\}\\.\\,\\?'\\>])\\b" << sCUDA << "\\b/" << sHIP << "/g;" << endl;
+          }
+        }
+      } else {
+        for (auto &ma : CUDA_RENAMES_MAP()) {
+          if (ma.second.apiType != API_BLAS || Statistics::isUnsupported(ma.second) || ma.second.rocName.empty()) continue;
+          if (i == ma.second.type) {
+            *streamPtr.get() << tab << "$ft{'" << counterNames[ma.second.type] << "'} += s/\\b" << ma.first.str() << "\\b/" << ma.second.rocName.str() << "/g;" << endl;
+          }
+        }
+      }
+    }
+    TranslateToRoc = bTranslateToRoc;
     *streamPtr.get() << "}" << endl;
   }
 
@@ -578,6 +610,7 @@ namespace perl {
     *streamPtr.get() << "\"" << counterNames[NUM_CONV_TYPES - 1] << "\");" << endl;
     generateStatFunctions(streamPtr);
     generateExperimentalSubstitutions(streamPtr);
+    generateRocSubstitutions(streamPtr);
     generateSimpleSubstitutions(streamPtr);
     generateKernelLaunch(streamPtr);
     generateCubNamespace(streamPtr);
@@ -662,6 +695,9 @@ namespace perl {
     *streamPtr.get() << tab_5 << "$s = " << sWarnUnsupportedDeviceFunctions << "($line_num);" << endl;
     *streamPtr.get() << tab_5 << warningsPlus << endl_tab_4 << "}" << endl;
     *streamPtr.get() << tab_4 << "$_ = $tmp;" << endl_tab_3 << "}" << endl;
+    *streamPtr.get() << tab_3 << "if ($roc) {" << endl;
+    *streamPtr.get() << tab_4 << sRocSubstitutions << "();" << endl;
+    *streamPtr.get() << tab_3 << "}" << endl;
     *streamPtr.get() << tab_3 << "if ($experimental) {" << endl;
     *streamPtr.get() << tab_4 << sExperimentalSubstitutions << "();" << endl;
     *streamPtr.get() << tab_3 << "}" << endl;
