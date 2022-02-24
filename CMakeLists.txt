@@ -55,6 +55,7 @@ target_link_libraries(hipify-clang PRIVATE
     LLVMMCParser
     LLVMMC
     LLVMBitReader
+    LLVMWindowsDriver
     LLVMOption
     LLVMCore)
 
