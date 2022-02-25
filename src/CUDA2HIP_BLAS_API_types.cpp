@@ -25,11 +25,11 @@ THE SOFTWARE.
 // Map of all functions
 const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP {
   // Blas defines
-  {"CUBLAS_VER_MAJOR",               {"HIPBLAS_VER_MAJOR",               "",                                      CONV_DEFINE, API_BLAS, 2, HIP_UNSUPPORTED}},
-  {"CUBLAS_VER_MINOR",               {"HIPBLAS_VER_MINOR",               "",                                      CONV_DEFINE, API_BLAS, 2, HIP_UNSUPPORTED}},
-  {"CUBLAS_VER_PATCH",               {"HIPBLAS_VER_PATCH",               "",                                      CONV_DEFINE, API_BLAS, 2, HIP_UNSUPPORTED}},
-  {"CUBLAS_VER_BUILD",               {"HIPBLAS_VER_BUILD",               "",                                      CONV_DEFINE, API_BLAS, 2, HIP_UNSUPPORTED}},
-  {"CUBLAS_VERSION",                 {"HIPBLAS_VERSION",                 "",                                      CONV_DEFINE, API_BLAS, 2, HIP_UNSUPPORTED}},
+  {"CUBLAS_VER_MAJOR",               {"HIPBLAS_VER_MAJOR",               "",                                      CONV_DEFINE, API_BLAS, 2, UNSUPPORTED}},
+  {"CUBLAS_VER_MINOR",               {"HIPBLAS_VER_MINOR",               "",                                      CONV_DEFINE, API_BLAS, 2, UNSUPPORTED}},
+  {"CUBLAS_VER_PATCH",               {"HIPBLAS_VER_PATCH",               "",                                      CONV_DEFINE, API_BLAS, 2, UNSUPPORTED}},
+  {"CUBLAS_VER_BUILD",               {"HIPBLAS_VER_BUILD",               "",                                      CONV_DEFINE, API_BLAS, 2, UNSUPPORTED}},
+  {"CUBLAS_VERSION",                 {"HIPBLAS_VERSION",                 "",                                      CONV_DEFINE, API_BLAS, 2, UNSUPPORTED}},
 
   // Blas operations
   {"cublasOperation_t",              {"hipblasOperation_t",              "rocblas_operation",                     CONV_TYPE, API_BLAS, 2}},
@@ -171,7 +171,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP {
 
   {"cublasHandle_t",                 {"hipblasHandle_t",                 "rocblas_handle",                        CONV_TYPE, API_BLAS, 2}},
   // TODO: dereferencing: typedef struct cublasContext *cublasHandle_t;
-  {"cublasContext",                  {"hipblasContext",                 "_rocblas_handle",                       CONV_TYPE, API_BLAS, 2, HIP_UNSUPPORTED}},
+  {"cublasContext",                  {"hipblasContext",                  "_rocblas_handle",                       CONV_TYPE, API_BLAS, 2, HIP_UNSUPPORTED}},
 
   {"cublasComputeType_t",            {"hipblasComputeType_t",            "",                                      CONV_TYPE, API_BLAS, 2, UNSUPPORTED}},
   {"CUBLAS_COMPUTE_16F",             {"HIPBLAS_COMPUTE_16F",             "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}}, // 64

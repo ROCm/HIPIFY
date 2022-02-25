@@ -96,6 +96,8 @@ namespace perl {
   const string sWarnDeprecatedFunctions = "warnDeprecatedFunctions";
   const string sWarnRemovedFunctions = "warnRemovedFunctions";
   const string sWarnUnsupportedFunctions = "warnUnsupportedFunctions";
+  const string sWarnRocOnlyUnsupportedFunctions = "warnRocOnlyUnsupportedFunctions";
+  const string sWarnHipOnlyUnsupportedFunctions = "warnHipOnlyUnsupportedFunctions";
   const string sWarnUnsupportedDeviceFunctions = "warnUnsupportedDeviceFunctions";
   const string sSimpleSubstitutions = "simpleSubstitutions";
   const string sRocSubstitutions = "rocSubstitutions";
@@ -497,7 +499,7 @@ namespace perl {
   }
 
   void generateDeprecatedAndUnsupportedFunctions(unique_ptr<ostream> &streamPtr) {
-    stringstream sDeprecated, sRemoved, sUnsupported, sExperimental, sCommon, sCommon1;
+    stringstream sDeprecated, sRemoved, sUnsupported, sRocUnsupported, sHipUnsupported, sExperimental, sCommon, sCommon1;
     sCommon << tab << my << "$line_num = shift;" << endl;
     sCommon << tab << my_k << endl;
     string sWhile = "while (my($func, $val) = each ";
@@ -505,15 +507,34 @@ namespace perl {
     sDeprecated << endl << sub << sWarnDeprecatedFunctions << " {" << endl << sCommon.str() << tab << sWhile << "%deprecated_funcs)" << endl;
     sRemoved << endl << sub << sWarnRemovedFunctions << " {" << endl << sCommon.str() << tab << sWhile << "%removed_funcs)" << endl;
     sUnsupported << endl << sub << sWarnUnsupportedFunctions << " {" << endl << sCommon.str() << tab << foreach_func;
-    unsigned int countUnsupported = 0;
+    sRocUnsupported << endl << sub << sWarnRocOnlyUnsupportedFunctions << " {" << endl << sCommon.str() << tab << foreach_func;
+    sHipUnsupported << endl << sub << sWarnHipOnlyUnsupportedFunctions << " {" << endl << sCommon.str() << tab << foreach_func;
+    unsigned int countUnsupported = 0, countRocOnlyUnsupported = 0, countHipOnlyUnsupported = 0;
+    bool bTranslateToRoc = TranslateToRoc;
     for (auto ma = CUDA_RENAMES_MAP().rbegin(); ma != CUDA_RENAMES_MAP().rend(); ++ma) {
-        if (Statistics::isUnsupported(ma->second)) {
-            sUnsupported << (countUnsupported ? ",\n" : "") << tab_2 << "\"" << ma->first.str() << "\"";
-            countUnsupported++;
+      TranslateToRoc = false;
+      if (Statistics::isUnsupported(ma->second)) {
+        if (ma->second.apiType == API_BLAS) {
+          sHipUnsupported << (countHipOnlyUnsupported ? ",\n" : "") << tab_2 << "\"" << ma->first.str() << "\"";
+          countHipOnlyUnsupported++;
+        } else {
+          sUnsupported << (countUnsupported ? ",\n" : "") << tab_2 << "\"" << ma->first.str() << "\"";
+          countUnsupported++;
         }
+      }
+      TranslateToRoc = true;
+      if (Statistics::isUnsupported(ma->second)) {
+        if (ma->second.apiType == API_BLAS) {
+          sRocUnsupported << (countRocOnlyUnsupported ? ",\n" : "") << tab_2 << "\"" << ma->first.str() << "\"";
+          countRocOnlyUnsupported++;
+        }
+      }
     }
+    TranslateToRoc = bTranslateToRoc;
     sCommon.str(std::string());
     sUnsupported << endl_tab << ")" << endl;
+    sHipUnsupported << endl_tab << ")" << endl;
+    sRocUnsupported << endl_tab << ")" << endl;
     sCommon << tab << "{" << endl;
     sCommon << tab_2 << my << "$mt = m/($func)/g;" << endl;
     sCommon << tab_2 << "if ($mt) {" << endl;
@@ -527,16 +548,22 @@ namespace perl {
     sDeprecated << sCommon.str() << sCommon1.str();
     sRemoved << sCommon.str() << sCommon1.str();
     sUnsupported << sCommon.str();
+    sHipUnsupported << sCommon.str();
+    sRocUnsupported << sCommon.str();
     sCommon.str(std::string());
     sCommon << tab_2 << "}\n" << tab << "}\n" << tab << return_k << "}" << endl;
     sExperimental << tab_3 << print << "\"  "  << warning << "experimental identifier \\\"$func\\\" in HIP $val\\n\";" << endl << sCommon.str();
     sDeprecated << tab_3 << print << "\"  "  << warning << "deprecated identifier \\\"$func\\\" since $cuda $val\\n\";" << endl << sCommon.str();
     sRemoved << tab_3 << print << "\"  "  << warning << "removed identifier \\\"$func\\\" since $cuda $val\\n\";" << endl << sCommon.str();
     sUnsupported << tab_3 << print << "\"  "  << warning << "unsupported identifier \\\"$func\\\"\\n\";" << endl << sCommon.str();
+    sHipUnsupported << tab_3 << print << "\"  "  << warning << "unsupported identifier \\\"$func\\\"\\n\";" << endl << sCommon.str();
+    sRocUnsupported << tab_3 << print << "\"  "  << warning << "unsupported by ROC identifier \\\"$func\\\"\\n\";" << endl << sCommon.str();
     *streamPtr.get() << sExperimental.str();
     *streamPtr.get() << sDeprecated.str();
     *streamPtr.get() << sRemoved.str();
     *streamPtr.get() << sUnsupported.str();
+    *streamPtr.get() << sHipUnsupported.str();
+    *streamPtr.get() << sRocUnsupported.str();
   }
 
   void generateDeviceFunctions(unique_ptr<ostream> &streamPtr) {
@@ -692,6 +719,13 @@ namespace perl {
     *streamPtr.get() << tab_5 << warningsPlus << endl;
     *streamPtr.get() << tab_5 << "$s = " << sWarnUnsupportedFunctions << "($line_num);" << endl;
     *streamPtr.get() << tab_5 << warningsPlus << endl;
+    *streamPtr.get() << tab_5 << "if ($roc) {" << endl;
+    *streamPtr.get() << tab_6 << "$s = " << sWarnRocOnlyUnsupportedFunctions << "($line_num);" << endl;
+    *streamPtr.get() << tab_6 << warningsPlus << endl;
+    *streamPtr.get() << tab_5 << "} else {" << endl;
+    *streamPtr.get() << tab_6 << "$s = " << sWarnHipOnlyUnsupportedFunctions << "($line_num);" << endl;
+    *streamPtr.get() << tab_6 << warningsPlus << endl;
+    *streamPtr.get() << tab_5 << "}" << endl;
     *streamPtr.get() << tab_5 << "$s = " << sWarnUnsupportedDeviceFunctions << "($line_num);" << endl;
     *streamPtr.get() << tab_5 << warningsPlus << endl_tab_4 << "}" << endl;
     *streamPtr.get() << tab_4 << "$_ = $tmp;" << endl_tab_3 << "}" << endl;
