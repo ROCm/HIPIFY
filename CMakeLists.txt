@@ -115,8 +115,18 @@ install(
     PATTERN "ppc_wrappers" EXCLUDE
     PATTERN "openmp_wrappers" EXCLUDE)
 
+option(FILE_REORG_BACKWARD_COMPATIBILITY "Enable File Reorg with backward compatibility" ON)
 if(UNIX)
-    set(CPACK_PACKAGING_INSTALL_PREFIX "/opt/rocm/hip" CACHE PATH "HIP Package Installation Path")
+    if(FILE_REORG_BACKWARD_COMPATIBILITY)
+        include(hipify-backward-compat.cmake)
+    endif()
+    set(CPACK_PACKAGING_INSTALL_PREFIX "/opt/rocm" CACHE PATH "HIP Package Installation Path")
+    #TODO: To be removed once protoype changes for file reorg is merged
+    if(FILE_REORG_BACKWARD_COMPATIBILITY)
+        if(CPACK_PACKAGING_INSTALL_PREFIX)
+            string(REPLACE "/hip" "" CPACK_PACKAGING_INSTALL_PREFIX ${CPACK_PACKAGING_INSTALL_PREFIX})
+        endif()
+    endif()
     set(HIPBINDIR ${CPACK_PACKAGING_INSTALL_PREFIX}/bin)
     set(ROCMBINDIR ${CPACK_PACKAGING_INSTALL_PREFIX}/../bin)
     set(BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR}/packages/hipify-clang)
