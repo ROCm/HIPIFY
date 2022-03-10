@@ -96,8 +96,11 @@ namespace perl {
   const string sWarnDeprecatedFunctions = "warnDeprecatedFunctions";
   const string sWarnRemovedFunctions = "warnRemovedFunctions";
   const string sWarnUnsupportedFunctions = "warnUnsupportedFunctions";
+  const string sWarnRocOnlyUnsupportedFunctions = "warnRocOnlyUnsupportedFunctions";
+  const string sWarnHipOnlyUnsupportedFunctions = "warnHipOnlyUnsupportedFunctions";
   const string sWarnUnsupportedDeviceFunctions = "warnUnsupportedDeviceFunctions";
   const string sSimpleSubstitutions = "simpleSubstitutions";
+  const string sRocSubstitutions = "rocSubstitutions";
   const string sExperimentalSubstitutions = "experimentalSubstitutions";
   const string sTansformKernelLaunch = "transformKernelLaunch";
   const string sTransformCubNamespace = "transformCubNamespace";
@@ -180,6 +183,7 @@ namespace perl {
     *streamPtr.get() << "      -o=s              - Output filename" << endl;
     *streamPtr.get() << "      -print-stats      - Print translation statistics" << endl;
     *streamPtr.get() << "      -quiet-warnings   - Don't print warnings on unknown CUDA identifiers" << endl;
+    *streamPtr.get() << "      -roc              - Translate to roc instead of hip where it is possible" << endl;
     *streamPtr.get() << "      -version          - The supported HIP version" << endl;
     *streamPtr.get() << "      -whitelist=s      - Whitelist of identifiers" << endl;
     *streamPtr.get() << "USAGE" << endl;
@@ -206,6 +210,7 @@ namespace perl {
     *streamPtr.get() << tab << ", \"o=s\" => \\$hipFileName                  # Output filename" << endl;
     *streamPtr.get() << tab << ", \"print-stats\" => \\$print_stats          # Print translation statistics" << endl;
     *streamPtr.get() << tab << ", \"quiet-warnings\" => \\$quiet_warnings    # Don't print warnings on unknown CUDA identifiers" << endl;
+    *streamPtr.get() << tab << ", \"roc\" => \\$roc                          # Translate to roc instead of hip where it is possible" << endl;
     *streamPtr.get() << tab << ", \"version\" => \\$version                  # The supported HIP version" << endl;
     *streamPtr.get() << tab << ", \"whitelist=s\" => \\$whitelist            # Whitelist of identifiers" << endl;
     *streamPtr.get() << ");" << endl_2;
@@ -315,6 +320,35 @@ namespace perl {
         }
       }
     }
+    *streamPtr.get() << "}" << endl;
+  }
+
+  void generateRocSubstitutions(unique_ptr<ostream> &streamPtr) {
+    *streamPtr.get() << endl << sub << sRocSubstitutions << " {" << endl;
+    bool bTranslateToRoc = TranslateToRoc;
+    TranslateToRoc = true;
+    for (int i = 0; i < NUM_CONV_TYPES; ++i) {
+      if (i == CONV_INCLUDE_CUDA_MAIN_H) {
+        for (auto &ma : CUDA_INCLUDE_MAP) {
+          if (i == ma.second.type) {
+            string sCUDA = ma.first.str();
+            if (sCUDA != "cublas.h" && sCUDA != "cublas_v2.h") continue;
+            string sHIP = ma.second.rocName.str();
+            sCUDA = regex_replace(sCUDA, regex("/"), "\\/");
+            sHIP = regex_replace(sHIP, regex("/"), "\\/");
+            *streamPtr.get() << tab << "$ft{'" << counterNames[ma.second.type] << "'} += s/(?<![\\!~`@#\\$%\\^&\\*\\-+=\\[\\]\\(\\)\\{\\}\\.\\,\\?'\\>])\\b" << sCUDA << "\\b/" << sHIP << "/g;" << endl;
+          }
+        }
+      } else {
+        for (auto &ma : CUDA_RENAMES_MAP()) {
+          if (ma.second.apiType != API_BLAS || Statistics::isUnsupported(ma.second) || ma.second.rocName.empty()) continue;
+          if (i == ma.second.type) {
+            *streamPtr.get() << tab << "$ft{'" << counterNames[ma.second.type] << "'} += s/\\b" << ma.first.str() << "\\b/" << ma.second.rocName.str() << "/g;" << endl;
+          }
+        }
+      }
+    }
+    TranslateToRoc = bTranslateToRoc;
     *streamPtr.get() << "}" << endl;
   }
 
@@ -465,7 +499,7 @@ namespace perl {
   }
 
   void generateDeprecatedAndUnsupportedFunctions(unique_ptr<ostream> &streamPtr) {
-    stringstream sDeprecated, sRemoved, sUnsupported, sExperimental, sCommon, sCommon1;
+    stringstream sDeprecated, sRemoved, sUnsupported, sRocUnsupported, sHipUnsupported, sExperimental, sCommon, sCommon1;
     sCommon << tab << my << "$line_num = shift;" << endl;
     sCommon << tab << my_k << endl;
     string sWhile = "while (my($func, $val) = each ";
@@ -473,15 +507,34 @@ namespace perl {
     sDeprecated << endl << sub << sWarnDeprecatedFunctions << " {" << endl << sCommon.str() << tab << sWhile << "%deprecated_funcs)" << endl;
     sRemoved << endl << sub << sWarnRemovedFunctions << " {" << endl << sCommon.str() << tab << sWhile << "%removed_funcs)" << endl;
     sUnsupported << endl << sub << sWarnUnsupportedFunctions << " {" << endl << sCommon.str() << tab << foreach_func;
-    unsigned int countUnsupported = 0;
+    sRocUnsupported << endl << sub << sWarnRocOnlyUnsupportedFunctions << " {" << endl << sCommon.str() << tab << foreach_func;
+    sHipUnsupported << endl << sub << sWarnHipOnlyUnsupportedFunctions << " {" << endl << sCommon.str() << tab << foreach_func;
+    unsigned int countUnsupported = 0, countRocOnlyUnsupported = 0, countHipOnlyUnsupported = 0;
+    bool bTranslateToRoc = TranslateToRoc;
     for (auto ma = CUDA_RENAMES_MAP().rbegin(); ma != CUDA_RENAMES_MAP().rend(); ++ma) {
-        if (Statistics::isUnsupported(ma->second)) {
-            sUnsupported << (countUnsupported ? ",\n" : "") << tab_2 << "\"" << ma->first.str() << "\"";
-            countUnsupported++;
+      TranslateToRoc = false;
+      if (Statistics::isUnsupported(ma->second)) {
+        if (ma->second.apiType == API_BLAS) {
+          sHipUnsupported << (countHipOnlyUnsupported ? ",\n" : "") << tab_2 << "\"" << ma->first.str() << "\"";
+          countHipOnlyUnsupported++;
+        } else {
+          sUnsupported << (countUnsupported ? ",\n" : "") << tab_2 << "\"" << ma->first.str() << "\"";
+          countUnsupported++;
         }
+      }
+      TranslateToRoc = true;
+      if (Statistics::isUnsupported(ma->second)) {
+        if (ma->second.apiType == API_BLAS) {
+          sRocUnsupported << (countRocOnlyUnsupported ? ",\n" : "") << tab_2 << "\"" << ma->first.str() << "\"";
+          countRocOnlyUnsupported++;
+        }
+      }
     }
+    TranslateToRoc = bTranslateToRoc;
     sCommon.str(std::string());
     sUnsupported << endl_tab << ")" << endl;
+    sHipUnsupported << endl_tab << ")" << endl;
+    sRocUnsupported << endl_tab << ")" << endl;
     sCommon << tab << "{" << endl;
     sCommon << tab_2 << my << "$mt = m/($func)/g;" << endl;
     sCommon << tab_2 << "if ($mt) {" << endl;
@@ -495,16 +548,22 @@ namespace perl {
     sDeprecated << sCommon.str() << sCommon1.str();
     sRemoved << sCommon.str() << sCommon1.str();
     sUnsupported << sCommon.str();
+    sHipUnsupported << sCommon.str();
+    sRocUnsupported << sCommon.str();
     sCommon.str(std::string());
     sCommon << tab_2 << "}\n" << tab << "}\n" << tab << return_k << "}" << endl;
     sExperimental << tab_3 << print << "\"  "  << warning << "experimental identifier \\\"$func\\\" in HIP $val\\n\";" << endl << sCommon.str();
     sDeprecated << tab_3 << print << "\"  "  << warning << "deprecated identifier \\\"$func\\\" since $cuda $val\\n\";" << endl << sCommon.str();
     sRemoved << tab_3 << print << "\"  "  << warning << "removed identifier \\\"$func\\\" since $cuda $val\\n\";" << endl << sCommon.str();
     sUnsupported << tab_3 << print << "\"  "  << warning << "unsupported identifier \\\"$func\\\"\\n\";" << endl << sCommon.str();
+    sHipUnsupported << tab_3 << print << "\"  "  << warning << "unsupported identifier \\\"$func\\\"\\n\";" << endl << sCommon.str();
+    sRocUnsupported << tab_3 << print << "\"  "  << warning << "unsupported by ROC identifier \\\"$func\\\"\\n\";" << endl << sCommon.str();
     *streamPtr.get() << sExperimental.str();
     *streamPtr.get() << sDeprecated.str();
     *streamPtr.get() << sRemoved.str();
     *streamPtr.get() << sUnsupported.str();
+    *streamPtr.get() << sHipUnsupported.str();
+    *streamPtr.get() << sRocUnsupported.str();
   }
 
   void generateDeviceFunctions(unique_ptr<ostream> &streamPtr) {
@@ -578,6 +637,7 @@ namespace perl {
     *streamPtr.get() << "\"" << counterNames[NUM_CONV_TYPES - 1] << "\");" << endl;
     generateStatFunctions(streamPtr);
     generateExperimentalSubstitutions(streamPtr);
+    generateRocSubstitutions(streamPtr);
     generateSimpleSubstitutions(streamPtr);
     generateKernelLaunch(streamPtr);
     generateCubNamespace(streamPtr);
@@ -659,9 +719,19 @@ namespace perl {
     *streamPtr.get() << tab_5 << warningsPlus << endl;
     *streamPtr.get() << tab_5 << "$s = " << sWarnUnsupportedFunctions << "($line_num);" << endl;
     *streamPtr.get() << tab_5 << warningsPlus << endl;
+    *streamPtr.get() << tab_5 << "if ($roc) {" << endl;
+    *streamPtr.get() << tab_6 << "$s = " << sWarnRocOnlyUnsupportedFunctions << "($line_num);" << endl;
+    *streamPtr.get() << tab_6 << warningsPlus << endl;
+    *streamPtr.get() << tab_5 << "} else {" << endl;
+    *streamPtr.get() << tab_6 << "$s = " << sWarnHipOnlyUnsupportedFunctions << "($line_num);" << endl;
+    *streamPtr.get() << tab_6 << warningsPlus << endl;
+    *streamPtr.get() << tab_5 << "}" << endl;
     *streamPtr.get() << tab_5 << "$s = " << sWarnUnsupportedDeviceFunctions << "($line_num);" << endl;
     *streamPtr.get() << tab_5 << warningsPlus << endl_tab_4 << "}" << endl;
     *streamPtr.get() << tab_4 << "$_ = $tmp;" << endl_tab_3 << "}" << endl;
+    *streamPtr.get() << tab_3 << "if ($roc) {" << endl;
+    *streamPtr.get() << tab_4 << sRocSubstitutions << "();" << endl;
+    *streamPtr.get() << tab_3 << "}" << endl;
     *streamPtr.get() << tab_3 << "if ($experimental) {" << endl;
     *streamPtr.get() << tab_4 << sExperimentalSubstitutions << "();" << endl;
     *streamPtr.get() << tab_3 << "}" << endl;

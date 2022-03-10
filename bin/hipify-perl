@@ -44,6 +44,7 @@ my $USAGE =<<USAGE;
       -o=s              - Output filename
       -print-stats      - Print translation statistics
       -quiet-warnings   - Don't print warnings on unknown CUDA identifiers
+      -roc              - Translate to roc instead of hip where it is possible
       -version          - The supported HIP version
       -whitelist=s      - Whitelist of identifiers
 USAGE
@@ -71,6 +72,7 @@ GetOptions(
     , "o=s" => \$hipFileName                  # Output filename
     , "print-stats" => \$print_stats          # Print translation statistics
     , "quiet-warnings" => \$quiet_warnings    # Don't print warnings on unknown CUDA identifiers
+    , "roc" => \$roc                          # Translate to roc instead of hip where it is possible
     , "version" => \$version                  # The supported HIP version
     , "whitelist=s" => \$whitelist            # Whitelist of identifiers
 );
@@ -1002,6 +1004,419 @@ sub experimentalSubstitutions {
     $ft{'numeric_literal'} += s/\bcudaErrorIllegalState\b/hipErrorIllegalState/g;
     $ft{'numeric_literal'} += s/\bcudaStreamAddCaptureDependencies\b/hipStreamAddCaptureDependencies/g;
     $ft{'numeric_literal'} += s/\bcudaStreamSetCaptureDependencies\b/hipStreamSetCaptureDependencies/g;
+}
+
+sub rocSubstitutions {
+    $ft{'library'} += s/\bcublasAxpyEx\b/rocblas_axpy_ex/g;
+    $ft{'library'} += s/\bcublasCaxpy\b/rocblas_caxpy/g;
+    $ft{'library'} += s/\bcublasCaxpy_v2\b/rocblas_caxpy/g;
+    $ft{'library'} += s/\bcublasCcopy\b/rocblas_ccopy/g;
+    $ft{'library'} += s/\bcublasCcopy_v2\b/rocblas_ccopy/g;
+    $ft{'library'} += s/\bcublasCdgmm\b/rocblas_cdgmm/g;
+    $ft{'library'} += s/\bcublasCdotc\b/rocblas_cdotc/g;
+    $ft{'library'} += s/\bcublasCdotc_v2\b/rocblas_cdotc/g;
+    $ft{'library'} += s/\bcublasCdotu\b/rocblas_cdotu/g;
+    $ft{'library'} += s/\bcublasCdotu_v2\b/rocblas_cdotu/g;
+    $ft{'library'} += s/\bcublasCgbmv\b/rocblas_cgbmv/g;
+    $ft{'library'} += s/\bcublasCgbmv_v2\b/rocblas_cgbmv/g;
+    $ft{'library'} += s/\bcublasCgeam\b/rocblas_cgeam/g;
+    $ft{'library'} += s/\bcublasCgemm\b/rocblas_cgemm/g;
+    $ft{'library'} += s/\bcublasCgemmBatched\b/rocblas_cgemm_batched/g;
+    $ft{'library'} += s/\bcublasCgemmStridedBatched\b/rocblas_cgemm_strided_batched/g;
+    $ft{'library'} += s/\bcublasCgemm_v2\b/rocblas_cgemm/g;
+    $ft{'library'} += s/\bcublasCgemv\b/rocblas_cgemv/g;
+    $ft{'library'} += s/\bcublasCgemv_v2\b/rocblas_cgemv/g;
+    $ft{'library'} += s/\bcublasCgerc\b/rocblas_cgerc/g;
+    $ft{'library'} += s/\bcublasCgerc_v2\b/rocblas_cgerc/g;
+    $ft{'library'} += s/\bcublasCgeru\b/rocblas_cgeru/g;
+    $ft{'library'} += s/\bcublasCgeru_v2\b/rocblas_cgeru/g;
+    $ft{'library'} += s/\bcublasChbmv\b/rocblas_chbmv/g;
+    $ft{'library'} += s/\bcublasChbmv_v2\b/rocblas_chbmv/g;
+    $ft{'library'} += s/\bcublasChemm\b/rocblas_chemm/g;
+    $ft{'library'} += s/\bcublasChemm_v2\b/rocblas_chemm/g;
+    $ft{'library'} += s/\bcublasChemv\b/rocblas_chemv/g;
+    $ft{'library'} += s/\bcublasChemv_v2\b/rocblas_chemv/g;
+    $ft{'library'} += s/\bcublasCher\b/rocblas_cher/g;
+    $ft{'library'} += s/\bcublasCher2\b/rocblas_cher2/g;
+    $ft{'library'} += s/\bcublasCher2_v2\b/rocblas_cher2/g;
+    $ft{'library'} += s/\bcublasCher2k\b/rocblas_cher2k/g;
+    $ft{'library'} += s/\bcublasCher2k_v2\b/rocblas_cher2k/g;
+    $ft{'library'} += s/\bcublasCher_v2\b/rocblas_cher/g;
+    $ft{'library'} += s/\bcublasCherk\b/rocblas_cherk/g;
+    $ft{'library'} += s/\bcublasCherk_v2\b/rocblas_cherkx/g;
+    $ft{'library'} += s/\bcublasCherkx\b/rocblas_cherkx/g;
+    $ft{'library'} += s/\bcublasChpmv\b/rocblas_chpmv/g;
+    $ft{'library'} += s/\bcublasChpmv_v2\b/rocblas_chpmv/g;
+    $ft{'library'} += s/\bcublasChpr\b/rocblas_chpr/g;
+    $ft{'library'} += s/\bcublasChpr2\b/rocblas_chpr2/g;
+    $ft{'library'} += s/\bcublasChpr2_v2\b/rocblas_chpr2/g;
+    $ft{'library'} += s/\bcublasChpr_v2\b/rocblas_chpr/g;
+    $ft{'library'} += s/\bcublasCreate\b/rocblas_create_handle/g;
+    $ft{'library'} += s/\bcublasCreate_v2\b/rocblas_create_handle/g;
+    $ft{'library'} += s/\bcublasCrot\b/rocblas_crot/g;
+    $ft{'library'} += s/\bcublasCrot_v2\b/rocblas_crot/g;
+    $ft{'library'} += s/\bcublasCrotg\b/rocblas_crotg/g;
+    $ft{'library'} += s/\bcublasCrotg_v2\b/rocblas_crotg/g;
+    $ft{'library'} += s/\bcublasCscal\b/rocblas_cscal/g;
+    $ft{'library'} += s/\bcublasCscal_v2\b/rocblas_cscal/g;
+    $ft{'library'} += s/\bcublasCsrot\b/rocblas_csrot/g;
+    $ft{'library'} += s/\bcublasCsrot_v2\b/rocblas_csrot/g;
+    $ft{'library'} += s/\bcublasCsscal\b/rocblas_csscal/g;
+    $ft{'library'} += s/\bcublasCsscal_v2\b/rocblas_csscal/g;
+    $ft{'library'} += s/\bcublasCswap\b/rocblas_cswap/g;
+    $ft{'library'} += s/\bcublasCswap_v2\b/rocblas_cswap/g;
+    $ft{'library'} += s/\bcublasCsymm\b/rocblas_csymm/g;
+    $ft{'library'} += s/\bcublasCsymm_v2\b/rocblas_csymm/g;
+    $ft{'library'} += s/\bcublasCsymv\b/rocblas_csymv/g;
+    $ft{'library'} += s/\bcublasCsymv_v2\b/rocblas_csymv/g;
+    $ft{'library'} += s/\bcublasCsyr\b/rocblas_csyr/g;
+    $ft{'library'} += s/\bcublasCsyr2\b/rocblas_csyr2/g;
+    $ft{'library'} += s/\bcublasCsyr2_v2\b/rocblas_csyr2/g;
+    $ft{'library'} += s/\bcublasCsyr2k\b/rocblas_csyr2k/g;
+    $ft{'library'} += s/\bcublasCsyr2k_v2\b/rocblas_csyr2k/g;
+    $ft{'library'} += s/\bcublasCsyr_v2\b/rocblas_csyr/g;
+    $ft{'library'} += s/\bcublasCsyrk\b/rocblas_csyrk/g;
+    $ft{'library'} += s/\bcublasCsyrk_v2\b/rocblas_csyrk/g;
+    $ft{'library'} += s/\bcublasCsyrkx\b/rocblas_csyrkx/g;
+    $ft{'library'} += s/\bcublasCtbmv\b/rocblas_ctbmv/g;
+    $ft{'library'} += s/\bcublasCtbmv_v2\b/rocblas_ctbmv/g;
+    $ft{'library'} += s/\bcublasCtbsv\b/rocblas_ctbsv/g;
+    $ft{'library'} += s/\bcublasCtbsv_v2\b/rocblas_ctbsv/g;
+    $ft{'library'} += s/\bcublasCtpmv\b/rocblas_ctpmv/g;
+    $ft{'library'} += s/\bcublasCtpmv_v2\b/rocblas_ctpmv/g;
+    $ft{'library'} += s/\bcublasCtpsv\b/rocblas_ctpsv/g;
+    $ft{'library'} += s/\bcublasCtpsv_v2\b/rocblas_ctpsv/g;
+    $ft{'library'} += s/\bcublasCtrmm\b/rocblas_ctrmm/g;
+    $ft{'library'} += s/\bcublasCtrmm_v2\b/rocblas_ctrmm/g;
+    $ft{'library'} += s/\bcublasCtrmv\b/rocblas_ctrmv/g;
+    $ft{'library'} += s/\bcublasCtrmv_v2\b/rocblas_ctrmv/g;
+    $ft{'library'} += s/\bcublasCtrsm\b/rocblas_ctrsm/g;
+    $ft{'library'} += s/\bcublasCtrsmBatched\b/rocblas_ctrsm_batched/g;
+    $ft{'library'} += s/\bcublasCtrsm_v2\b/rocblas_ctrsm/g;
+    $ft{'library'} += s/\bcublasCtrsv\b/rocblas_ctrsv/g;
+    $ft{'library'} += s/\bcublasCtrsv_v2\b/rocblas_ctrsv/g;
+    $ft{'library'} += s/\bcublasDasum\b/rocblas_dasum/g;
+    $ft{'library'} += s/\bcublasDasum_v2\b/rocblas_dasum/g;
+    $ft{'library'} += s/\bcublasDaxpy\b/rocblas_daxpy/g;
+    $ft{'library'} += s/\bcublasDaxpy_v2\b/rocblas_daxpy/g;
+    $ft{'library'} += s/\bcublasDcopy\b/rocblas_dcopy/g;
+    $ft{'library'} += s/\bcublasDcopy_v2\b/rocblas_dcopy/g;
+    $ft{'library'} += s/\bcublasDdgmm\b/rocblas_ddgmm/g;
+    $ft{'library'} += s/\bcublasDdot\b/rocblas_ddot/g;
+    $ft{'library'} += s/\bcublasDdot_v2\b/rocblas_ddot/g;
+    $ft{'library'} += s/\bcublasDestroy\b/rocblas_destroy_handle/g;
+    $ft{'library'} += s/\bcublasDestroy_v2\b/rocblas_destroy_handle/g;
+    $ft{'library'} += s/\bcublasDgbmv\b/rocblas_dgbmv/g;
+    $ft{'library'} += s/\bcublasDgbmv_v2\b/rocblas_dgbmv/g;
+    $ft{'library'} += s/\bcublasDgeam\b/rocblas_dgeam/g;
+    $ft{'library'} += s/\bcublasDgemm\b/rocblas_dgemm/g;
+    $ft{'library'} += s/\bcublasDgemmBatched\b/rocblas_dgemm_batched/g;
+    $ft{'library'} += s/\bcublasDgemmStridedBatched\b/rocblas_dgemm_strided_batched/g;
+    $ft{'library'} += s/\bcublasDgemm_v2\b/rocblas_dgemm/g;
+    $ft{'library'} += s/\bcublasDgemv\b/rocblas_dgemv/g;
+    $ft{'library'} += s/\bcublasDgemv_v2\b/rocblas_dgemv/g;
+    $ft{'library'} += s/\bcublasDger\b/rocblas_dger/g;
+    $ft{'library'} += s/\bcublasDger_v2\b/rocblas_dger/g;
+    $ft{'library'} += s/\bcublasDnrm2\b/rocblas_dnrm2/g;
+    $ft{'library'} += s/\bcublasDnrm2_v2\b/rocblas_dnrm2/g;
+    $ft{'library'} += s/\bcublasDotEx\b/rocblas_dot_ex/g;
+    $ft{'library'} += s/\bcublasDotcEx\b/rocblas_dotc_ex/g;
+    $ft{'library'} += s/\bcublasDrot\b/rocblas_drot/g;
+    $ft{'library'} += s/\bcublasDrot_v2\b/rocblas_drot/g;
+    $ft{'library'} += s/\bcublasDrotg\b/rocblas_drotg/g;
+    $ft{'library'} += s/\bcublasDrotg_v2\b/rocblas_drotg/g;
+    $ft{'library'} += s/\bcublasDrotm\b/rocblas_drotm/g;
+    $ft{'library'} += s/\bcublasDrotm_v2\b/rocblas_drotm/g;
+    $ft{'library'} += s/\bcublasDrotmg\b/rocblas_drotmg/g;
+    $ft{'library'} += s/\bcublasDrotmg_v2\b/rocblas_drotmg/g;
+    $ft{'library'} += s/\bcublasDsbmv\b/rocblas_dsbmv/g;
+    $ft{'library'} += s/\bcublasDsbmv_v2\b/rocblas_dsbmv/g;
+    $ft{'library'} += s/\bcublasDscal\b/rocblas_dscal/g;
+    $ft{'library'} += s/\bcublasDscal_v2\b/rocblas_dscal/g;
+    $ft{'library'} += s/\bcublasDspmv\b/rocblas_dspmv/g;
+    $ft{'library'} += s/\bcublasDspmv_v2\b/rocblas_dspmv/g;
+    $ft{'library'} += s/\bcublasDspr\b/rocblas_dspr/g;
+    $ft{'library'} += s/\bcublasDspr2\b/rocblas_dspr2/g;
+    $ft{'library'} += s/\bcublasDspr2_v2\b/rocblas_dspr2/g;
+    $ft{'library'} += s/\bcublasDspr_v2\b/rocblas_dspr/g;
+    $ft{'library'} += s/\bcublasDswap\b/rocblas_dswap/g;
+    $ft{'library'} += s/\bcublasDswap_v2\b/rocblas_dswap/g;
+    $ft{'library'} += s/\bcublasDsymm\b/rocblas_dsymm/g;
+    $ft{'library'} += s/\bcublasDsymm_v2\b/rocblas_dsymm/g;
+    $ft{'library'} += s/\bcublasDsymv\b/rocblas_dsymv/g;
+    $ft{'library'} += s/\bcublasDsymv_v2\b/rocblas_dsymv/g;
+    $ft{'library'} += s/\bcublasDsyr\b/rocblas_dsyr/g;
+    $ft{'library'} += s/\bcublasDsyr2\b/rocblas_dsyr2/g;
+    $ft{'library'} += s/\bcublasDsyr2_v2\b/rocblas_dsyr2/g;
+    $ft{'library'} += s/\bcublasDsyr2k\b/rocblas_dsyr2k/g;
+    $ft{'library'} += s/\bcublasDsyr2k_v2\b/rocblas_dsyr2k/g;
+    $ft{'library'} += s/\bcublasDsyr_v2\b/rocblas_dsyr/g;
+    $ft{'library'} += s/\bcublasDsyrk\b/rocblas_dsyrk/g;
+    $ft{'library'} += s/\bcublasDsyrk_v2\b/rocblas_dsyrk/g;
+    $ft{'library'} += s/\bcublasDsyrkx\b/rocblas_dsyrkx/g;
+    $ft{'library'} += s/\bcublasDtbmv\b/rocblas_dtbmv/g;
+    $ft{'library'} += s/\bcublasDtbmv_v2\b/rocblas_dtbmv/g;
+    $ft{'library'} += s/\bcublasDtbsv\b/rocblas_dtbsv/g;
+    $ft{'library'} += s/\bcublasDtbsv_v2\b/rocblas_dtbsv/g;
+    $ft{'library'} += s/\bcublasDtpmv\b/rocblas_dtpmv/g;
+    $ft{'library'} += s/\bcublasDtpmv_v2\b/rocblas_dtpmv/g;
+    $ft{'library'} += s/\bcublasDtpsv\b/rocblas_dtpsv/g;
+    $ft{'library'} += s/\bcublasDtpsv_v2\b/rocblas_dtpsv/g;
+    $ft{'library'} += s/\bcublasDtrmm\b/rocblas_dtrmm/g;
+    $ft{'library'} += s/\bcublasDtrmm_v2\b/rocblas_dtrmm/g;
+    $ft{'library'} += s/\bcublasDtrmv\b/rocblas_dtrmv/g;
+    $ft{'library'} += s/\bcublasDtrmv_v2\b/rocblas_dtrmv/g;
+    $ft{'library'} += s/\bcublasDtrsm\b/rocblas_dtrsm/g;
+    $ft{'library'} += s/\bcublasDtrsmBatched\b/rocblas_dtrsm_batched/g;
+    $ft{'library'} += s/\bcublasDtrsm_v2\b/rocblas_dtrsm/g;
+    $ft{'library'} += s/\bcublasDtrsv\b/rocblas_dtrsv/g;
+    $ft{'library'} += s/\bcublasDtrsv_v2\b/rocblas_dtrsv/g;
+    $ft{'library'} += s/\bcublasDzasum\b/rocblas_dzasum/g;
+    $ft{'library'} += s/\bcublasDzasum_v2\b/rocblas_dzasum/g;
+    $ft{'library'} += s/\bcublasDznrm2\b/rocblas_dznrm2/g;
+    $ft{'library'} += s/\bcublasDznrm2_v2\b/rocblas_dznrm2/g;
+    $ft{'library'} += s/\bcublasGemmBatchedEx\b/rocblas_gemm_batched_ex/g;
+    $ft{'library'} += s/\bcublasGemmEx\b/rocblas_gemm_ex/g;
+    $ft{'library'} += s/\bcublasGemmStridedBatchedEx\b/rocblas_gemm_strided_batched_ex/g;
+    $ft{'library'} += s/\bcublasGetMatrix\b/rocblas_get_matrix/g;
+    $ft{'library'} += s/\bcublasGetMatrixAsync\b/rocblas_get_matrix_async/g;
+    $ft{'library'} += s/\bcublasGetPointerMode\b/rocblas_get_pointer_mode/g;
+    $ft{'library'} += s/\bcublasGetPointerMode_v2\b/rocblas_set_pointer_mode/g;
+    $ft{'library'} += s/\bcublasGetStream\b/rocblas_get_stream/g;
+    $ft{'library'} += s/\bcublasGetStream_v2\b/rocblas_get_stream/g;
+    $ft{'library'} += s/\bcublasGetVector\b/rocblas_get_vector/g;
+    $ft{'library'} += s/\bcublasGetVectorAsync\b/rocblas_get_vector_async/g;
+    $ft{'library'} += s/\bcublasHgemm\b/rocblas_hgemm/g;
+    $ft{'library'} += s/\bcublasHgemmBatched\b/rocblas_hgemm_batched/g;
+    $ft{'library'} += s/\bcublasHgemmStridedBatched\b/rocblas_hgemm_strided_batched/g;
+    $ft{'library'} += s/\bcublasIcamax\b/rocblas_icamax/g;
+    $ft{'library'} += s/\bcublasIcamax_v2\b/rocblas_icamax/g;
+    $ft{'library'} += s/\bcublasIcamin\b/rocblas_icamin/g;
+    $ft{'library'} += s/\bcublasIcamin_v2\b/rocblas_icamin/g;
+    $ft{'library'} += s/\bcublasIdamax\b/rocblas_idamax/g;
+    $ft{'library'} += s/\bcublasIdamax_v2\b/rocblas_idamax/g;
+    $ft{'library'} += s/\bcublasIdamin\b/rocblas_idamin/g;
+    $ft{'library'} += s/\bcublasIdamin_v2\b/rocblas_idamin/g;
+    $ft{'library'} += s/\bcublasIsamax\b/rocblas_isamax/g;
+    $ft{'library'} += s/\bcublasIsamax_v2\b/rocblas_isamax/g;
+    $ft{'library'} += s/\bcublasIsamin\b/rocblas_isamin/g;
+    $ft{'library'} += s/\bcublasIsamin_v2\b/rocblas_isamin/g;
+    $ft{'library'} += s/\bcublasIzamax\b/rocblas_izamax/g;
+    $ft{'library'} += s/\bcublasIzamax_v2\b/rocblas_izamax/g;
+    $ft{'library'} += s/\bcublasIzamin\b/rocblas_izamin/g;
+    $ft{'library'} += s/\bcublasIzamin_v2\b/rocblas_izamin/g;
+    $ft{'library'} += s/\bcublasNrm2Ex\b/rocblas_nrm2_ex/g;
+    $ft{'library'} += s/\bcublasRotEx\b/rocblas_rot_ex/g;
+    $ft{'library'} += s/\bcublasSasum\b/rocblas_sasum/g;
+    $ft{'library'} += s/\bcublasSasum_v2\b/rocblas_sasum/g;
+    $ft{'library'} += s/\bcublasSaxpy\b/rocblas_saxpy/g;
+    $ft{'library'} += s/\bcublasSaxpy_v2\b/rocblas_saxpy/g;
+    $ft{'library'} += s/\bcublasScalEx\b/rocblas_scal_ex/g;
+    $ft{'library'} += s/\bcublasScasum\b/rocblas_scasum/g;
+    $ft{'library'} += s/\bcublasScasum_v2\b/rocblas_scasum/g;
+    $ft{'library'} += s/\bcublasScnrm2\b/rocblas_scnrm2/g;
+    $ft{'library'} += s/\bcublasScnrm2_v2\b/rocblas_scnrm2/g;
+    $ft{'library'} += s/\bcublasScopy\b/rocblas_scopy/g;
+    $ft{'library'} += s/\bcublasScopy_v2\b/rocblas_scopy/g;
+    $ft{'library'} += s/\bcublasSdgmm\b/rocblas_sdgmm/g;
+    $ft{'library'} += s/\bcublasSdot\b/rocblas_sdot/g;
+    $ft{'library'} += s/\bcublasSdot_v2\b/rocblas_sdot/g;
+    $ft{'library'} += s/\bcublasSetMatrix\b/rocblas_set_matrix/g;
+    $ft{'library'} += s/\bcublasSetMatrixAsync\b/rocblas_set_matrix_async/g;
+    $ft{'library'} += s/\bcublasSetPointerMode\b/rocblas_set_pointer_mode/g;
+    $ft{'library'} += s/\bcublasSetPointerMode_v2\b/rocblas_get_pointer_mode/g;
+    $ft{'library'} += s/\bcublasSetStream\b/rocblas_set_stream/g;
+    $ft{'library'} += s/\bcublasSetStream_v2\b/rocblas_set_stream/g;
+    $ft{'library'} += s/\bcublasSetVector\b/rocblas_set_vector/g;
+    $ft{'library'} += s/\bcublasSetVectorAsync\b/rocblas_set_vector_async/g;
+    $ft{'library'} += s/\bcublasSgbmv\b/rocblas_sgbmv/g;
+    $ft{'library'} += s/\bcublasSgbmv_v2\b/rocblas_sgbmv/g;
+    $ft{'library'} += s/\bcublasSgeam\b/rocblas_sgeam/g;
+    $ft{'library'} += s/\bcublasSgemm\b/rocblas_sgemm/g;
+    $ft{'library'} += s/\bcublasSgemmBatched\b/rocblas_sgemm_batched/g;
+    $ft{'library'} += s/\bcublasSgemmStridedBatched\b/rocblas_sgemm_strided_batched/g;
+    $ft{'library'} += s/\bcublasSgemm_v2\b/rocblas_sgemm/g;
+    $ft{'library'} += s/\bcublasSgemv\b/rocblas_sgemv/g;
+    $ft{'library'} += s/\bcublasSgemv_v2\b/rocblas_sgemv/g;
+    $ft{'library'} += s/\bcublasSger\b/rocblas_sger/g;
+    $ft{'library'} += s/\bcublasSger_v2\b/rocblas_sger/g;
+    $ft{'library'} += s/\bcublasSnrm2\b/rocblas_snrm2/g;
+    $ft{'library'} += s/\bcublasSnrm2_v2\b/rocblas_snrm2/g;
+    $ft{'library'} += s/\bcublasSrot\b/rocblas_srot/g;
+    $ft{'library'} += s/\bcublasSrot_v2\b/rocblas_srot/g;
+    $ft{'library'} += s/\bcublasSrotg\b/rocblas_srotg/g;
+    $ft{'library'} += s/\bcublasSrotg_v2\b/rocblas_srotg/g;
+    $ft{'library'} += s/\bcublasSrotm\b/rocblas_srotm/g;
+    $ft{'library'} += s/\bcublasSrotm_v2\b/rocblas_srotm/g;
+    $ft{'library'} += s/\bcublasSrotmg\b/rocblas_srotmg/g;
+    $ft{'library'} += s/\bcublasSrotmg_v2\b/rocblas_srotmg/g;
+    $ft{'library'} += s/\bcublasSsbmv\b/rocblas_ssbmv/g;
+    $ft{'library'} += s/\bcublasSsbmv_v2\b/rocblas_ssbmv/g;
+    $ft{'library'} += s/\bcublasSscal\b/rocblas_sscal/g;
+    $ft{'library'} += s/\bcublasSscal_v2\b/rocblas_sscal/g;
+    $ft{'library'} += s/\bcublasSspmv\b/rocblas_sspmv/g;
+    $ft{'library'} += s/\bcublasSspmv_v2\b/rocblas_sspmv/g;
+    $ft{'library'} += s/\bcublasSspr\b/rocblas_sspr/g;
+    $ft{'library'} += s/\bcublasSspr2\b/rocblas_sspr2/g;
+    $ft{'library'} += s/\bcublasSspr2_v2\b/rocblas_sspr2/g;
+    $ft{'library'} += s/\bcublasSspr_v2\b/rocblas_sspr/g;
+    $ft{'library'} += s/\bcublasSswap\b/rocblas_sswap/g;
+    $ft{'library'} += s/\bcublasSswap_v2\b/rocblas_sswap/g;
+    $ft{'library'} += s/\bcublasSsymm\b/rocblas_ssymm/g;
+    $ft{'library'} += s/\bcublasSsymm_v2\b/rocblas_ssymm/g;
+    $ft{'library'} += s/\bcublasSsymv\b/rocblas_ssymv/g;
+    $ft{'library'} += s/\bcublasSsymv_v2\b/rocblas_ssymv/g;
+    $ft{'library'} += s/\bcublasSsyr\b/rocblas_ssyr/g;
+    $ft{'library'} += s/\bcublasSsyr2\b/rocblas_ssyr2/g;
+    $ft{'library'} += s/\bcublasSsyr2_v2\b/rocblas_ssyr2/g;
+    $ft{'library'} += s/\bcublasSsyr2k\b/rocblas_ssyr2k/g;
+    $ft{'library'} += s/\bcublasSsyr2k_v2\b/rocblas_ssyr2k/g;
+    $ft{'library'} += s/\bcublasSsyr_v2\b/rocblas_ssyr/g;
+    $ft{'library'} += s/\bcublasSsyrk\b/rocblas_ssyrk/g;
+    $ft{'library'} += s/\bcublasSsyrk_v2\b/rocblas_ssyrk/g;
+    $ft{'library'} += s/\bcublasSsyrkx\b/rocblas_ssyrkx/g;
+    $ft{'library'} += s/\bcublasStbmv\b/rocblas_stbmv/g;
+    $ft{'library'} += s/\bcublasStbmv_v2\b/rocblas_stbmv/g;
+    $ft{'library'} += s/\bcublasStbsv\b/rocblas_stbsv/g;
+    $ft{'library'} += s/\bcublasStbsv_v2\b/rocblas_stbsv/g;
+    $ft{'library'} += s/\bcublasStpmv\b/rocblas_stpmv/g;
+    $ft{'library'} += s/\bcublasStpmv_v2\b/rocblas_stpmv/g;
+    $ft{'library'} += s/\bcublasStpsv\b/rocblas_stpsv/g;
+    $ft{'library'} += s/\bcublasStpsv_v2\b/rocblas_stpsv/g;
+    $ft{'library'} += s/\bcublasStrmm\b/rocblas_strmm/g;
+    $ft{'library'} += s/\bcublasStrmm_v2\b/rocblas_strmm/g;
+    $ft{'library'} += s/\bcublasStrmv\b/rocblas_strmv/g;
+    $ft{'library'} += s/\bcublasStrmv_v2\b/rocblas_strmv/g;
+    $ft{'library'} += s/\bcublasStrsm\b/rocblas_strsm/g;
+    $ft{'library'} += s/\bcublasStrsmBatched\b/rocblas_strsm_batched/g;
+    $ft{'library'} += s/\bcublasStrsm_v2\b/rocblas_strsm/g;
+    $ft{'library'} += s/\bcublasStrsv\b/rocblas_strsv/g;
+    $ft{'library'} += s/\bcublasStrsv_v2\b/rocblas_strsv/g;
+    $ft{'library'} += s/\bcublasZaxpy\b/rocblas_zaxpy/g;
+    $ft{'library'} += s/\bcublasZaxpy_v2\b/rocblas_zaxpy/g;
+    $ft{'library'} += s/\bcublasZcopy\b/rocblas_zcopy/g;
+    $ft{'library'} += s/\bcublasZcopy_v2\b/rocblas_zcopy/g;
+    $ft{'library'} += s/\bcublasZdgmm\b/rocblas_zdgmm/g;
+    $ft{'library'} += s/\bcublasZdotc\b/rocblas_zdotc/g;
+    $ft{'library'} += s/\bcublasZdotc_v2\b/rocblas_zdotc/g;
+    $ft{'library'} += s/\bcublasZdotu\b/rocblas_zdotu/g;
+    $ft{'library'} += s/\bcublasZdotu_v2\b/rocblas_zdotu/g;
+    $ft{'library'} += s/\bcublasZdrot\b/rocblas_zdrot/g;
+    $ft{'library'} += s/\bcublasZdrot_v2\b/rocblas_zdrot/g;
+    $ft{'library'} += s/\bcublasZdscal\b/rocblas_zdscal/g;
+    $ft{'library'} += s/\bcublasZdscal_v2\b/rocblas_zdscal/g;
+    $ft{'library'} += s/\bcublasZgbmv\b/rocblas_zgbmv/g;
+    $ft{'library'} += s/\bcublasZgbmv_v2\b/rocblas_zgbmv/g;
+    $ft{'library'} += s/\bcublasZgeam\b/rocblas_zgeam/g;
+    $ft{'library'} += s/\bcublasZgemm\b/rocblas_zgemm/g;
+    $ft{'library'} += s/\bcublasZgemmBatched\b/rocblas_zgemm_batched/g;
+    $ft{'library'} += s/\bcublasZgemmStridedBatched\b/rocblas_zgemm_strided_batched/g;
+    $ft{'library'} += s/\bcublasZgemm_v2\b/rocblas_zgemm/g;
+    $ft{'library'} += s/\bcublasZgemv\b/rocblas_zgemv/g;
+    $ft{'library'} += s/\bcublasZgemv_v2\b/rocblas_zgemv/g;
+    $ft{'library'} += s/\bcublasZgerc\b/rocblas_zgerc/g;
+    $ft{'library'} += s/\bcublasZgerc_v2\b/rocblas_zgerc/g;
+    $ft{'library'} += s/\bcublasZgeru\b/rocblas_zgeru/g;
+    $ft{'library'} += s/\bcublasZgeru_v2\b/rocblas_zgeru/g;
+    $ft{'library'} += s/\bcublasZhbmv\b/rocblas_zhbmv/g;
+    $ft{'library'} += s/\bcublasZhbmv_v2\b/rocblas_zhbmv/g;
+    $ft{'library'} += s/\bcublasZhemm\b/rocblas_zhemm/g;
+    $ft{'library'} += s/\bcublasZhemm_v2\b/rocblas_zhemm/g;
+    $ft{'library'} += s/\bcublasZhemv\b/rocblas_zhemv/g;
+    $ft{'library'} += s/\bcublasZhemv_v2\b/rocblas_zhemv/g;
+    $ft{'library'} += s/\bcublasZher\b/rocblas_zher/g;
+    $ft{'library'} += s/\bcublasZher2\b/rocblas_zher2/g;
+    $ft{'library'} += s/\bcublasZher2_v2\b/rocblas_zher2/g;
+    $ft{'library'} += s/\bcublasZher2k\b/rocblas_zher2k/g;
+    $ft{'library'} += s/\bcublasZher2k_v2\b/rocblas_zher2k/g;
+    $ft{'library'} += s/\bcublasZher_v2\b/rocblas_zher/g;
+    $ft{'library'} += s/\bcublasZherk\b/rocblas_zherk/g;
+    $ft{'library'} += s/\bcublasZherk_v2\b/rocblas_zherk/g;
+    $ft{'library'} += s/\bcublasZherkx\b/rocblas_zherkx/g;
+    $ft{'library'} += s/\bcublasZhpmv\b/rocblas_zhpmv/g;
+    $ft{'library'} += s/\bcublasZhpmv_v2\b/rocblas_zhpmv/g;
+    $ft{'library'} += s/\bcublasZhpr\b/rocblas_zhpr/g;
+    $ft{'library'} += s/\bcublasZhpr2\b/rocblas_zhpr2/g;
+    $ft{'library'} += s/\bcublasZhpr2_v2\b/rocblas_zhpr2/g;
+    $ft{'library'} += s/\bcublasZhpr_v2\b/rocblas_zhpr/g;
+    $ft{'library'} += s/\bcublasZrot\b/rocblas_zrot/g;
+    $ft{'library'} += s/\bcublasZrot_v2\b/rocblas_zrot/g;
+    $ft{'library'} += s/\bcublasZrotg\b/rocblas_zrotg/g;
+    $ft{'library'} += s/\bcublasZrotg_v2\b/rocblas_zrotg/g;
+    $ft{'library'} += s/\bcublasZscal\b/rocblas_zscal/g;
+    $ft{'library'} += s/\bcublasZscal_v2\b/rocblas_zscal/g;
+    $ft{'library'} += s/\bcublasZswap\b/rocblas_zswap/g;
+    $ft{'library'} += s/\bcublasZswap_v2\b/rocblas_zswap/g;
+    $ft{'library'} += s/\bcublasZsymm\b/rocblas_zsymm/g;
+    $ft{'library'} += s/\bcublasZsymm_v2\b/rocblas_zsymm/g;
+    $ft{'library'} += s/\bcublasZsymv\b/rocblas_zsymv/g;
+    $ft{'library'} += s/\bcublasZsymv_v2\b/rocblas_zsymv/g;
+    $ft{'library'} += s/\bcublasZsyr\b/rocblas_zsyr/g;
+    $ft{'library'} += s/\bcublasZsyr2\b/rocblas_zsyr2/g;
+    $ft{'library'} += s/\bcublasZsyr2_v2\b/rocblas_zsyr2/g;
+    $ft{'library'} += s/\bcublasZsyr2k\b/rocblas_zsyr2k/g;
+    $ft{'library'} += s/\bcublasZsyr2k_v2\b/rocblas_zsyr2k/g;
+    $ft{'library'} += s/\bcublasZsyr_v2\b/rocblas_zsyr/g;
+    $ft{'library'} += s/\bcublasZsyrk\b/rocblas_zsyrk/g;
+    $ft{'library'} += s/\bcublasZsyrk_v2\b/rocblas_zsyrk/g;
+    $ft{'library'} += s/\bcublasZsyrkx\b/rocblas_zsyrkx/g;
+    $ft{'library'} += s/\bcublasZtbmv\b/rocblas_ztbmv/g;
+    $ft{'library'} += s/\bcublasZtbmv_v2\b/rocblas_ztbmv/g;
+    $ft{'library'} += s/\bcublasZtbsv\b/rocblas_ztbsv/g;
+    $ft{'library'} += s/\bcublasZtbsv_v2\b/rocblas_ztbsv/g;
+    $ft{'library'} += s/\bcublasZtpmv\b/rocblas_ztpmv/g;
+    $ft{'library'} += s/\bcublasZtpmv_v2\b/rocblas_ztpmv/g;
+    $ft{'library'} += s/\bcublasZtpsv\b/rocblas_ztpsv/g;
+    $ft{'library'} += s/\bcublasZtpsv_v2\b/rocblas_ztpsv/g;
+    $ft{'library'} += s/\bcublasZtrmm\b/rocblas_ztrmm/g;
+    $ft{'library'} += s/\bcublasZtrmm_v2\b/rocblas_ztrmm/g;
+    $ft{'library'} += s/\bcublasZtrmv\b/rocblas_ztrmv/g;
+    $ft{'library'} += s/\bcublasZtrmv_v2\b/rocblas_ztrmv/g;
+    $ft{'library'} += s/\bcublasZtrsm\b/rocblas_ztrsm/g;
+    $ft{'library'} += s/\bcublasZtrsmBatched\b/rocblas_ztrsm_batched/g;
+    $ft{'library'} += s/\bcublasZtrsm_v2\b/rocblas_ztrsm/g;
+    $ft{'library'} += s/\bcublasZtrsv\b/rocblas_ztrsv/g;
+    $ft{'library'} += s/\bcublasZtrsv_v2\b/rocblas_ztrsv/g;
+    $ft{'include_cuda_main_header'} += s/(?<![\!~`@#\$%\^&\*\-+=\[\]\(\)\{\}\.\,\?'\>])\bcublas.h\b/rocblas.h/g;
+    $ft{'include_cuda_main_header'} += s/(?<![\!~`@#\$%\^&\*\-+=\[\]\(\)\{\}\.\,\?'\>])\bcublas_v2.h\b/rocblas.h/g;
+    $ft{'type'} += s/\bcublasAtomicsMode_t\b/rocblas_atomics_mode/g;
+    $ft{'type'} += s/\bcublasContext\b/_rocblas_handle/g;
+    $ft{'type'} += s/\bcublasDataType_t\b/rocblas_datatype/g;
+    $ft{'type'} += s/\bcublasDiagType_t\b/rocblas_diagonal/g;
+    $ft{'type'} += s/\bcublasFillMode_t\b/rocblas_fill/g;
+    $ft{'type'} += s/\bcublasGemmAlgo_t\b/rocblas_gemm_algo/g;
+    $ft{'type'} += s/\bcublasHandle_t\b/rocblas_handle/g;
+    $ft{'type'} += s/\bcublasOperation_t\b/rocblas_operation/g;
+    $ft{'type'} += s/\bcublasPointerMode_t\b/rocblas_pointer_mode/g;
+    $ft{'type'} += s/\bcublasSideMode_t\b/rocblas_side/g;
+    $ft{'type'} += s/\bcublasStatus\b/rocblas_status/g;
+    $ft{'type'} += s/\bcublasStatus_t\b/rocblas_status/g;
+    $ft{'numeric_literal'} += s/\bCUBLAS_ATOMICS_ALLOWED\b/rocblas_atomics_allowed/g;
+    $ft{'numeric_literal'} += s/\bCUBLAS_ATOMICS_NOT_ALLOWED\b/rocblas_atomics_not_allowed/g;
+    $ft{'numeric_literal'} += s/\bCUBLAS_DIAG_NON_UNIT\b/rocblas_diagonal_non_unit/g;
+    $ft{'numeric_literal'} += s/\bCUBLAS_DIAG_UNIT\b/rocblas_diagonal_unit/g;
+    $ft{'numeric_literal'} += s/\bCUBLAS_FILL_MODE_FULL\b/rocblas_fill_full/g;
+    $ft{'numeric_literal'} += s/\bCUBLAS_FILL_MODE_LOWER\b/rocblas_fill_lower/g;
+    $ft{'numeric_literal'} += s/\bCUBLAS_FILL_MODE_UPPER\b/rocblas_fill_upper/g;
+    $ft{'numeric_literal'} += s/\bCUBLAS_GEMM_DEFAULT\b/rocblas_gemm_algo_standard/g;
+    $ft{'numeric_literal'} += s/\bCUBLAS_GEMM_DFALT\b/rocblas_gemm_algo_standard/g;
+    $ft{'numeric_literal'} += s/\bCUBLAS_OP_C\b/rocblas_operation_conjugate_transpose/g;
+    $ft{'numeric_literal'} += s/\bCUBLAS_OP_HERMITAN\b/rocblas_operation_conjugate_transpose/g;
+    $ft{'numeric_literal'} += s/\bCUBLAS_OP_N\b/rocblas_operation_none/g;
+    $ft{'numeric_literal'} += s/\bCUBLAS_OP_T\b/rocblas_operation_transpose/g;
+    $ft{'numeric_literal'} += s/\bCUBLAS_POINTER_MODE_DEVICE\b/rocblas_pointer_mode_device/g;
+    $ft{'numeric_literal'} += s/\bCUBLAS_POINTER_MODE_HOST\b/rocblas_pointer_mode_host/g;
+    $ft{'numeric_literal'} += s/\bCUBLAS_SIDE_LEFT\b/rocblas_side_left/g;
+    $ft{'numeric_literal'} += s/\bCUBLAS_SIDE_RIGHT\b/rocblas_side_right/g;
+    $ft{'numeric_literal'} += s/\bCUBLAS_STATUS_ALLOC_FAILED\b/rocblas_status_not_implemented/g;
+    $ft{'numeric_literal'} += s/\bCUBLAS_STATUS_ARCH_MISMATCH\b/rocblas_status_size_query_mismatch/g;
+    $ft{'numeric_literal'} += s/\bCUBLAS_STATUS_EXECUTION_FAILED\b/rocblas_status_memory_error/g;
+    $ft{'numeric_literal'} += s/\bCUBLAS_STATUS_INTERNAL_ERROR\b/rocblas_status_internal_error/g;
+    $ft{'numeric_literal'} += s/\bCUBLAS_STATUS_INVALID_VALUE\b/rocblas_status_invalid_pointer/g;
+    $ft{'numeric_literal'} += s/\bCUBLAS_STATUS_MAPPING_ERROR\b/rocblas_status_invalid_size/g;
+    $ft{'numeric_literal'} += s/\bCUBLAS_STATUS_NOT_INITIALIZED\b/rocblas_status_invalid_handle/g;
+    $ft{'numeric_literal'} += s/\bCUBLAS_STATUS_NOT_SUPPORTED\b/rocblas_status_perf_degraded/g;
+    $ft{'numeric_literal'} += s/\bCUBLAS_STATUS_SUCCESS\b/rocblas_status_success/g;
 }
 
 sub simpleSubstitutions {
@@ -5767,67 +6182,6 @@ sub warnUnsupportedFunctions {
         "cudaAccessPropertyNormal",
         "cudaAccessProperty",
         "cudaAccessPolicyWindow",
-        "cublasZtrttp",
-        "cublasZtpttr",
-        "cublasZmatinvBatched",
-        "cublasZgemm3m",
-        "cublasZgelsBatched",
-        "cublasXerbla",
-        "cublasUint8gemmBias",
-        "cublasSwapEx",
-        "cublasStrttp",
-        "cublasStpttr",
-        "cublasSmatinvBatched",
-        "cublasShutdown",
-        "cublasSgemmEx",
-        "cublasSgelsBatched",
-        "cublasSetSmCountTarget",
-        "cublasSetMathMode",
-        "cublasSetLoggerCallback",
-        "cublasSetKernelStream",
-        "cublasRotmgEx",
-        "cublasRotmEx",
-        "cublasRotgEx",
-        "cublasMigrateComputeType",
-        "cublasMath_t",
-        "cublasLoggerConfigure",
-        "cublasLogCallback",
-        "cublasInit",
-        "cublasIaminEx",
-        "cublasIamaxEx",
-        "cublasGetVersion_v2",
-        "cublasGetVersion",
-        "cublasGetStatusString",
-        "cublasGetStatusName",
-        "cublasGetSmCountTarget",
-        "cublasGetProperty",
-        "cublasGetMathMode",
-        "cublasGetLoggerCallback",
-        "cublasGetError",
-        "cublasGetCudartVersion",
-        "cublasFree",
-        "cublasDtrttp",
-        "cublasDtpttr",
-        "cublasDmatinvBatched",
-        "cublasDgelsBatched",
-        "cublasCtrttp",
-        "cublasCtpttr",
-        "cublasCsyrkEx",
-        "cublasCsyrk3mEx",
-        "cublasCopyEx",
-        "cublasContext",
-        "cublasComputeType_t",
-        "cublasCmatinvBatched",
-        "cublasCherkEx",
-        "cublasCherk3mEx",
-        "cublasCgemmEx",
-        "cublasCgemm3mStridedBatched",
-        "cublasCgemm3mEx",
-        "cublasCgemm3mBatched",
-        "cublasCgemm3m",
-        "cublasCgelsBatched",
-        "cublasAsumEx",
-        "cublasAlloc",
         "cuWGLGetDevice",
         "cuVDPAUGetDevice",
         "cuVDPAUCtxCreate",
@@ -7122,7 +7476,83 @@ sub warnUnsupportedFunctions {
         "CUDA_ARRAY3D_DEPTH_TEXTURE",
         "CUDA_ARRAY3D_DEFERRED_MAPPING",
         "CUDA_ARRAY3D_COLOR_ATTACHMENT",
-        "CUDA_ARRAY3D_2DARRAY",
+        "CUDA_ARRAY3D_2DARRAY"
+    )
+    {
+        my $mt = m/($func)/g;
+        if ($mt) {
+            $k += $mt;
+            print STDERR "  warning: $fileName:$line_num: unsupported identifier \"$func\"\n";
+        }
+    }
+    return $k;
+}
+
+sub warnHipOnlyUnsupportedFunctions {
+    my $line_num = shift;
+    my $k = 0;
+    foreach $func (
+        "cublasZtrttp",
+        "cublasZtpttr",
+        "cublasZmatinvBatched",
+        "cublasZgemm3m",
+        "cublasZgelsBatched",
+        "cublasXerbla",
+        "cublasUint8gemmBias",
+        "cublasSwapEx",
+        "cublasStrttp",
+        "cublasStpttr",
+        "cublasSmatinvBatched",
+        "cublasShutdown",
+        "cublasSgemmEx",
+        "cublasSgelsBatched",
+        "cublasSetSmCountTarget",
+        "cublasSetMathMode",
+        "cublasSetLoggerCallback",
+        "cublasSetKernelStream",
+        "cublasRotmgEx",
+        "cublasRotmEx",
+        "cublasRotgEx",
+        "cublasMigrateComputeType",
+        "cublasMath_t",
+        "cublasLoggerConfigure",
+        "cublasLogCallback",
+        "cublasInit",
+        "cublasIaminEx",
+        "cublasIamaxEx",
+        "cublasGetVersion_v2",
+        "cublasGetVersion",
+        "cublasGetStatusString",
+        "cublasGetStatusName",
+        "cublasGetSmCountTarget",
+        "cublasGetProperty",
+        "cublasGetMathMode",
+        "cublasGetLoggerCallback",
+        "cublasGetError",
+        "cublasGetCudartVersion",
+        "cublasFree",
+        "cublasDtrttp",
+        "cublasDtpttr",
+        "cublasDmatinvBatched",
+        "cublasDgelsBatched",
+        "cublasCtrttp",
+        "cublasCtpttr",
+        "cublasCsyrkEx",
+        "cublasCsyrk3mEx",
+        "cublasCopyEx",
+        "cublasContext",
+        "cublasComputeType_t",
+        "cublasCmatinvBatched",
+        "cublasCherkEx",
+        "cublasCherk3mEx",
+        "cublasCgemmEx",
+        "cublasCgemm3mStridedBatched",
+        "cublasCgemm3mEx",
+        "cublasCgemm3mBatched",
+        "cublasCgemm3m",
+        "cublasCgelsBatched",
+        "cublasAsumEx",
+        "cublasAlloc",
         "CUBLAS_VER_PATCH",
         "CUBLAS_VER_MINOR",
         "CUBLAS_VER_MAJOR",
@@ -7193,6 +7623,164 @@ sub warnUnsupportedFunctions {
         if ($mt) {
             $k += $mt;
             print STDERR "  warning: $fileName:$line_num: unsupported identifier \"$func\"\n";
+        }
+    }
+    return $k;
+}
+
+sub warnRocOnlyUnsupportedFunctions {
+    my $line_num = shift;
+    my $k = 0;
+    foreach $func (
+        "cublasZtrttp",
+        "cublasZtpttr",
+        "cublasZmatinvBatched",
+        "cublasZgetrsBatched",
+        "cublasZgetriBatched",
+        "cublasZgetrfBatched",
+        "cublasZgeqrfBatched",
+        "cublasZgemm3m",
+        "cublasZgelsBatched",
+        "cublasXerbla",
+        "cublasUint8gemmBias",
+        "cublasSwapEx",
+        "cublasStrttp",
+        "cublasStpttr",
+        "cublasSmatinvBatched",
+        "cublasShutdown",
+        "cublasSgetrsBatched",
+        "cublasSgetriBatched",
+        "cublasSgetrfBatched",
+        "cublasSgeqrfBatched",
+        "cublasSgemmEx",
+        "cublasSgelsBatched",
+        "cublasSetSmCountTarget",
+        "cublasSetMathMode",
+        "cublasSetLoggerCallback",
+        "cublasSetKernelStream",
+        "cublasSetAtomicsMode",
+        "cublasRotmgEx",
+        "cublasRotmEx",
+        "cublasRotgEx",
+        "cublasMigrateComputeType",
+        "cublasMath_t",
+        "cublasLoggerConfigure",
+        "cublasLogCallback",
+        "cublasInit",
+        "cublasIaminEx",
+        "cublasIamaxEx",
+        "cublasGetVersion_v2",
+        "cublasGetVersion",
+        "cublasGetStatusString",
+        "cublasGetStatusName",
+        "cublasGetSmCountTarget",
+        "cublasGetProperty",
+        "cublasGetMathMode",
+        "cublasGetLoggerCallback",
+        "cublasGetError",
+        "cublasGetCudartVersion",
+        "cublasGetAtomicsMode",
+        "cublasFree",
+        "cublasDtrttp",
+        "cublasDtpttr",
+        "cublasDmatinvBatched",
+        "cublasDgetrsBatched",
+        "cublasDgetriBatched",
+        "cublasDgetrfBatched",
+        "cublasDgeqrfBatched",
+        "cublasDgelsBatched",
+        "cublasCtrttp",
+        "cublasCtpttr",
+        "cublasCsyrkEx",
+        "cublasCsyrk3mEx",
+        "cublasCopyEx",
+        "cublasComputeType_t",
+        "cublasCmatinvBatched",
+        "cublasCherkEx",
+        "cublasCherk3mEx",
+        "cublasCgetrsBatched",
+        "cublasCgetriBatched",
+        "cublasCgetrfBatched",
+        "cublasCgeqrfBatched",
+        "cublasCgemmEx",
+        "cublasCgemm3mStridedBatched",
+        "cublasCgemm3mEx",
+        "cublasCgemm3mBatched",
+        "cublasCgemm3m",
+        "cublasCgelsBatched",
+        "cublasAsumEx",
+        "cublasAlloc",
+        "CUBLAS_VER_PATCH",
+        "CUBLAS_VER_MINOR",
+        "CUBLAS_VER_MAJOR",
+        "CUBLAS_VER_BUILD",
+        "CUBLAS_VERSION",
+        "CUBLAS_TF32_TENSOR_OP_MATH",
+        "CUBLAS_TENSOR_OP_MATH",
+        "CUBLAS_STATUS_LICENSE_ERROR",
+        "CUBLAS_PEDANTIC_MATH",
+        "CUBLAS_OP_CONJG",
+        "CUBLAS_MATH_DISALLOW_REDUCED_PRECISION_REDUCTION",
+        "CUBLAS_GEMM_DFALT_TENSOR_OP",
+        "CUBLAS_GEMM_DEFAULT_TENSOR_OP",
+        "CUBLAS_GEMM_ALGO9_TENSOR_OP",
+        "CUBLAS_GEMM_ALGO9",
+        "CUBLAS_GEMM_ALGO8_TENSOR_OP",
+        "CUBLAS_GEMM_ALGO8",
+        "CUBLAS_GEMM_ALGO7_TENSOR_OP",
+        "CUBLAS_GEMM_ALGO7",
+        "CUBLAS_GEMM_ALGO6_TENSOR_OP",
+        "CUBLAS_GEMM_ALGO6",
+        "CUBLAS_GEMM_ALGO5_TENSOR_OP",
+        "CUBLAS_GEMM_ALGO5",
+        "CUBLAS_GEMM_ALGO4_TENSOR_OP",
+        "CUBLAS_GEMM_ALGO4",
+        "CUBLAS_GEMM_ALGO3_TENSOR_OP",
+        "CUBLAS_GEMM_ALGO3",
+        "CUBLAS_GEMM_ALGO2_TENSOR_OP",
+        "CUBLAS_GEMM_ALGO23",
+        "CUBLAS_GEMM_ALGO22",
+        "CUBLAS_GEMM_ALGO21",
+        "CUBLAS_GEMM_ALGO20",
+        "CUBLAS_GEMM_ALGO2",
+        "CUBLAS_GEMM_ALGO1_TENSOR_OP",
+        "CUBLAS_GEMM_ALGO19",
+        "CUBLAS_GEMM_ALGO18",
+        "CUBLAS_GEMM_ALGO17",
+        "CUBLAS_GEMM_ALGO16",
+        "CUBLAS_GEMM_ALGO15_TENSOR_OP",
+        "CUBLAS_GEMM_ALGO15",
+        "CUBLAS_GEMM_ALGO14_TENSOR_OP",
+        "CUBLAS_GEMM_ALGO14",
+        "CUBLAS_GEMM_ALGO13_TENSOR_OP",
+        "CUBLAS_GEMM_ALGO13",
+        "CUBLAS_GEMM_ALGO12_TENSOR_OP",
+        "CUBLAS_GEMM_ALGO12",
+        "CUBLAS_GEMM_ALGO11_TENSOR_OP",
+        "CUBLAS_GEMM_ALGO11",
+        "CUBLAS_GEMM_ALGO10_TENSOR_OP",
+        "CUBLAS_GEMM_ALGO10",
+        "CUBLAS_GEMM_ALGO1",
+        "CUBLAS_GEMM_ALGO0_TENSOR_OP",
+        "CUBLAS_GEMM_ALGO0",
+        "CUBLAS_DEFAULT_MATH",
+        "CUBLAS_COMPUTE_64F_PEDANTIC",
+        "CUBLAS_COMPUTE_64F",
+        "CUBLAS_COMPUTE_32I_PEDANTIC",
+        "CUBLAS_COMPUTE_32I",
+        "CUBLAS_COMPUTE_32F_PEDANTIC",
+        "CUBLAS_COMPUTE_32F_FAST_TF32",
+        "CUBLAS_COMPUTE_32F_FAST_16F",
+        "CUBLAS_COMPUTE_32F_FAST_16BF",
+        "CUBLAS_COMPUTE_32F",
+        "CUBLAS_COMPUTE_16F_PEDANTIC",
+        "CUBLAS_COMPUTE_16F"
+    )
+    {
+        my $mt = m/($func)/g;
+        if ($mt) {
+            $k += $mt;
+            print STDERR "  warning: $fileName:$line_num: unsupported by ROC identifier \"$func\"\n";
         }
     }
     return $k;
@@ -7278,10 +7866,20 @@ while (@ARGV) {
                     $warnings += $s;
                     $s = warnUnsupportedFunctions($line_num);
                     $warnings += $s;
+                    if ($roc) {
+                        $s = warnRocOnlyUnsupportedFunctions($line_num);
+                        $warnings += $s;
+                    } else {
+                        $s = warnHipOnlyUnsupportedFunctions($line_num);
+                        $warnings += $s;
+                    }
                     $s = warnUnsupportedDeviceFunctions($line_num);
                     $warnings += $s;
                 }
                 $_ = $tmp;
+            }
+            if ($roc) {
+                rocSubstitutions();
             }
             if ($experimental) {
                 experimentalSubstitutions();

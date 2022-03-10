@@ -66,6 +66,10 @@ if(LLVM_PACKAGE_VERSION VERSION_GREATER "9.0.1")
     target_link_libraries(hipify-clang PRIVATE LLVMFrontendOpenMP)
 endif()
 
+if(LLVM_PACKAGE_VERSION VERSION_EQUAL "15.0.0" OR LLVM_PACKAGE_VERSION VERSION_GREATER "15.0.0")
+    target_link_libraries(hipify-clang PRIVATE LLVMWindowsDriver)
+endif()
+
 if(MSVC)
     target_link_libraries(hipify-clang PRIVATE version)
     target_compile_options(hipify-clang PRIVATE /std:c++14 /Od /GR- /EHs- /EHc-)
