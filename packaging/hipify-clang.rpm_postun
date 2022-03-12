@@ -1,5 +1,4 @@
-HIPBINDIR=@CPACK_PACKAGING_INSTALL_PREFIX@/bin
-ROCMBINDIR=@CPACK_PACKAGING_INSTALL_PREFIX@/../bin
+HIPDIR=@CPACK_PACKAGING_INSTALL_PREFIX@
 
 if [ $1 -eq 0 ]; then
   rm -f @ROCMBINDIR@/hipify-perl
@@ -11,4 +10,6 @@ if [ $1 -eq 0 ]; then
   rm -f @ROCMBINDIR@/findcode.sh
   rm -f @ROCMBINDIR@/finduncodep.sh
   rmdir --ignore-fail-on-non-empty @ROCMBINDIR@
+  rmdir --ignore-fail-on-non-empty @HIPBINDIR@
+  rmdir --ignore-fail-on-non-empty ${HIPDIR}
 fi
