@@ -897,7 +897,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CUDA_ERROR_INVALID_HANDLE
   {"cudaErrorInvalidResourceHandle",                                   {"hipErrorInvalidHandle",                                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 400
   // CUDA_ERROR_ILLEGAL_STATE
-  {"cudaErrorIllegalState",                                            {"hipErrorIllegalState",                                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 401
+  {"cudaErrorIllegalState",                                            {"hipErrorIllegalState",                                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 401
   // CUDA_ERROR_NOT_FOUND
   {"cudaErrorSymbolNotFound",                                          {"hipErrorNotFound",                                         "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 500
   // CUDA_ERROR_NOT_READY
@@ -981,7 +981,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CUDA_ERROR_TIMEOUT
   {"cudaErrorTimeout",                                                 {"hipErrorTimeout",                                          "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 909
   // CUDA_ERROR_GRAPH_EXEC_UPDATE_FAILURE
-  {"cudaErrorGraphExecUpdateFailure",                                  {"hipErrorGraphExecUpdateFailure",                           "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 910
+  {"cudaErrorGraphExecUpdateFailure",                                  {"hipErrorGraphExecUpdateFailure",                           "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 910
   // CUDA_ERROR_EXTERNAL_DEVICE
   {"cudaErrorExternalDevice",                                          {"hipErrorExternalDevice",                                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 911
   // CUDA_ERROR_UNKNOWN
@@ -1575,12 +1575,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaMemHandleTypeWin32Kmt",                                        {"hipMemoryHandleTypeWin32Kmt",                              "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 4
 
   // CUstreamUpdateCaptureDependencies_flags
-  {"cudaStreamUpdateCaptureDependenciesFlags",                         {"hipStreamUpdateCaptureDependenciesFlags",                  "", CONV_TYPE, API_RUNTIME, 36, HIP_EXPERIMENTAL}},
+  {"cudaStreamUpdateCaptureDependenciesFlags",                         {"hipStreamUpdateCaptureDependenciesFlags",                  "", CONV_TYPE, API_RUNTIME, 36}},
   // cudaStreamUpdateCaptureDependenciesFlags enum values
   // CU_STREAM_ADD_CAPTURE_DEPENDENCIES
-  {"cudaStreamAddCaptureDependencies",                                 {"hipStreamAddCaptureDependencies",                          "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 0x0
+  {"cudaStreamAddCaptureDependencies",                                 {"hipStreamAddCaptureDependencies",                          "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 0x0
   // CU_STREAM_SET_CAPTURE_DEPENDENCIES
-  {"cudaStreamSetCaptureDependencies",                                 {"hipStreamSetCaptureDependencies",                          "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 0x1
+  {"cudaStreamSetCaptureDependencies",                                 {"hipStreamSetCaptureDependencies",                          "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 0x1
 
   // CUuserObject_flags
   {"cudaUserObjectFlags",                                              {"hipUserObjectFlags",                                       "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
@@ -2421,6 +2421,6 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {
   {"hipGraphicsRegisterFlagsWriteDiscard",                             {HIP_4040, HIP_0,    HIP_0   }},
   {"hipGraphicsRegisterFlagsSurfaceLoadStore",                         {HIP_4040, HIP_0,    HIP_0   }},
   {"hipGraphicsRegisterFlagsTextureGather",                            {HIP_4040, HIP_0,    HIP_0   }},
-  {"hipErrorIllegalState",                                             {HIP_5000, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipErrorGraphExecUpdateFailure",                                   {HIP_5000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipErrorIllegalState",                                             {HIP_5000, HIP_0,    HIP_0   }},
+  {"hipErrorGraphExecUpdateFailure",                                   {HIP_5000, HIP_0,    HIP_0   }},
 };
