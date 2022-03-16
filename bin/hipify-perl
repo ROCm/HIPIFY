@@ -703,102 +703,11 @@ my %removed_funcs = (
 );
 
 my %experimental_funcs = (
-    "cudaStreamUpdateCaptureDependenciesFlags" => "5.0.0",
-    "cudaStreamSetCaptureDependencies" => "5.0.0",
-    "cudaStreamIsCapturing" => "5.0.0",
-    "cudaStreamGetCaptureInfo" => "5.0.0",
-    "cudaStreamAddCaptureDependencies" => "5.0.0",
-    "cudaGraphRemoveDependencies" => "5.0.0",
-    "cudaGraphNodeGetType" => "5.0.0",
-    "cudaGraphNodeGetDependentNodes" => "5.0.0",
-    "cudaGraphNodeGetDependencies" => "5.0.0",
-    "cudaGraphNodeFindInClone" => "5.0.0",
-    "cudaGraphMemcpyNodeSetParamsToSymbol" => "5.0.0",
-    "cudaGraphMemcpyNodeSetParamsFromSymbol" => "5.0.0",
-    "cudaGraphMemcpyNodeSetParams1D" => "5.0.0",
-    "cudaGraphInstantiateWithFlags" => "5.0.0",
-    "cudaGraphHostNodeSetParams" => "5.0.0",
-    "cudaGraphHostNodeGetParams" => "5.0.0",
-    "cudaGraphGetEdges" => "5.0.0",
-    "cudaGraphExecUpdate" => "5.0.0",
-    "cudaGraphExecMemsetNodeSetParams" => "5.0.0",
-    "cudaGraphExecMemcpyNodeSetParamsToSymbol" => "5.0.0",
-    "cudaGraphExecMemcpyNodeSetParamsFromSymbol" => "5.0.0",
-    "cudaGraphExecMemcpyNodeSetParams1D" => "5.0.0",
-    "cudaGraphExecMemcpyNodeSetParams" => "5.0.0",
-    "cudaGraphExecHostNodeSetParams" => "5.0.0",
-    "cudaGraphExecEventWaitNodeSetEvent" => "5.0.0",
-    "cudaGraphExecEventRecordNodeSetEvent" => "5.0.0",
-    "cudaGraphExecChildGraphNodeSetParams" => "5.0.0",
-    "cudaGraphEventWaitNodeSetEvent" => "5.0.0",
-    "cudaGraphEventWaitNodeGetEvent" => "5.0.0",
-    "cudaGraphEventRecordNodeSetEvent" => "5.0.0",
-    "cudaGraphEventRecordNodeGetEvent" => "5.0.0",
-    "cudaGraphDestroyNode" => "5.0.0",
-    "cudaGraphChildGraphNodeGetGraph" => "5.0.0",
-    "cudaGraphAddMemcpyNodeToSymbol" => "5.0.0",
-    "cudaGraphAddMemcpyNodeFromSymbol" => "5.0.0",
-    "cudaGraphAddHostNode" => "5.0.0",
-    "cudaGraphAddEventWaitNode" => "5.0.0",
-    "cudaGraphAddEventRecordNode" => "5.0.0",
-    "cudaGraphAddChildGraphNode" => "5.0.0",
-    "cudaErrorIllegalState" => "5.0.0",
-    "cudaErrorGraphExecUpdateFailure" => "5.0.0",
-    "cuStreamUpdateCaptureDependencies" => "5.0.0",
-    "cuStreamIsCapturing" => "5.0.0",
-    "cuStreamGetCaptureInfo_v2" => "5.0.0",
-    "cuStreamGetCaptureInfo" => "5.0.0",
-    "cuPointerGetAttributes" => "5.0.0",
-    "cuPointerGetAttribute" => "5.0.0",
-    "cuGraphRemoveDependencies" => "5.0.0",
-    "cuGraphNodeGetType" => "5.0.0",
-    "cuGraphNodeGetDependentNodes" => "5.0.0",
-    "cuGraphNodeGetDependencies" => "5.0.0",
-    "cuGraphNodeFindInClone" => "5.0.0",
-    "cuGraphInstantiateWithFlags" => "5.0.0",
-    "cuGraphHostNodeSetParams" => "5.0.0",
-    "cuGraphHostNodeGetParams" => "5.0.0",
-    "cuGraphGetEdges" => "5.0.0",
-    "cuGraphExecUpdate" => "5.0.0",
-    "cuGraphExecHostNodeSetParams" => "5.0.0",
-    "cuGraphExecEventWaitNodeSetEvent" => "5.0.0",
-    "cuGraphExecEventRecordNodeSetEvent" => "5.0.0",
-    "cuGraphExecChildGraphNodeSetParams" => "5.0.0",
-    "cuGraphEventWaitNodeSetEvent" => "5.0.0",
-    "cuGraphEventWaitNodeGetEvent" => "5.0.0",
-    "cuGraphEventRecordNodeSetEvent" => "5.0.0",
-    "cuGraphEventRecordNodeGetEvent" => "5.0.0",
-    "cuGraphDestroyNode" => "5.0.0",
-    "cuGraphChildGraphNodeGetGraph" => "5.0.0",
-    "cuGraphAddHostNode" => "5.0.0",
-    "cuGraphAddEventWaitNode" => "5.0.0",
-    "cuGraphAddEventRecordNode" => "5.0.0",
-    "cuGraphAddChildGraphNode" => "5.0.0",
-    "CUstreamUpdateCaptureDependencies_flags_enum" => "5.0.0",
-    "CUstreamUpdateCaptureDependencies_flags" => "5.0.0",
-    "CUpointer_attribute_enum" => "5.0.0",
-    "CUpointer_attribute" => "5.0.0",
-    "CU_STREAM_SET_CAPTURE_DEPENDENCIES" => "5.0.0",
-    "CU_STREAM_ADD_CAPTURE_DEPENDENCIES" => "5.0.0",
-    "CU_POINTER_ATTRIBUTE_SYNC_MEMOPS" => "5.0.0",
-    "CU_POINTER_ATTRIBUTE_RANGE_START_ADDR" => "5.0.0",
-    "CU_POINTER_ATTRIBUTE_RANGE_SIZE" => "5.0.0",
-    "CU_POINTER_ATTRIBUTE_P2P_TOKENS" => "5.0.0",
-    "CU_POINTER_ATTRIBUTE_MEMPOOL_HANDLE" => "5.0.0",
-    "CU_POINTER_ATTRIBUTE_MEMORY_TYPE" => "5.0.0",
-    "CU_POINTER_ATTRIBUTE_MAPPED" => "5.0.0",
-    "CU_POINTER_ATTRIBUTE_IS_MANAGED" => "5.0.0",
-    "CU_POINTER_ATTRIBUTE_IS_LEGACY_CUDA_IPC_CAPABLE" => "5.0.0",
-    "CU_POINTER_ATTRIBUTE_IS_GPU_DIRECT_RDMA_CAPABLE" => "5.0.0",
-    "CU_POINTER_ATTRIBUTE_HOST_POINTER" => "5.0.0",
-    "CU_POINTER_ATTRIBUTE_DEVICE_POINTER" => "5.0.0",
-    "CU_POINTER_ATTRIBUTE_DEVICE_ORDINAL" => "5.0.0",
-    "CU_POINTER_ATTRIBUTE_CONTEXT" => "5.0.0",
-    "CU_POINTER_ATTRIBUTE_BUFFER_ID" => "5.0.0",
-    "CU_POINTER_ATTRIBUTE_ALLOWED_HANDLE_TYPES" => "5.0.0",
-    "CU_POINTER_ATTRIBUTE_ACCESS_FLAGS" => "5.0.0",
-    "CUDA_ERROR_ILLEGAL_STATE" => "5.0.0",
-    "CUDA_ERROR_GRAPH_EXEC_UPDATE_FAILURE" => "5.0.0"
+    "cudaGraphicsSubResourceGetMappedArray" => "5.1.0",
+    "cuGraphicsSubResourceGetMappedArray" => "5.1.0",
+    "cuGraphicsGLRegisterImage" => "5.1.0",
+    "GLuint" => "5.1.0",
+    "GLenum" => "5.1.0"
 );
 
 $print_stats = 1 if $examine;
@@ -908,102 +817,11 @@ sub clearStats {
 }
 
 sub experimentalSubstitutions {
-    $ft{'addressing'} += s/\bcuPointerGetAttribute\b/hipPointerGetAttribute/g;
-    $ft{'addressing'} += s/\bcuPointerGetAttributes\b/hipDrvPointerGetAttributes/g;
-    $ft{'stream'} += s/\bcuStreamGetCaptureInfo\b/hipStreamGetCaptureInfo/g;
-    $ft{'stream'} += s/\bcuStreamGetCaptureInfo_v2\b/hipStreamGetCaptureInfo_v2/g;
-    $ft{'stream'} += s/\bcuStreamIsCapturing\b/hipStreamIsCapturing/g;
-    $ft{'stream'} += s/\bcuStreamUpdateCaptureDependencies\b/hipStreamUpdateCaptureDependencies/g;
-    $ft{'stream'} += s/\bcudaStreamGetCaptureInfo\b/hipStreamGetCaptureInfo/g;
-    $ft{'stream'} += s/\bcudaStreamIsCapturing\b/hipStreamIsCapturing/g;
-    $ft{'graph'} += s/\bcuGraphAddChildGraphNode\b/hipGraphAddChildGraphNode/g;
-    $ft{'graph'} += s/\bcuGraphAddEventRecordNode\b/hipGraphAddEventRecordNode/g;
-    $ft{'graph'} += s/\bcuGraphAddEventWaitNode\b/hipGraphAddEventWaitNode/g;
-    $ft{'graph'} += s/\bcuGraphAddHostNode\b/hipGraphAddHostNode/g;
-    $ft{'graph'} += s/\bcuGraphChildGraphNodeGetGraph\b/hipGraphChildGraphNodeGetGraph/g;
-    $ft{'graph'} += s/\bcuGraphDestroyNode\b/hipGraphDestroyNode/g;
-    $ft{'graph'} += s/\bcuGraphEventRecordNodeGetEvent\b/hipGraphEventRecordNodeGetEvent/g;
-    $ft{'graph'} += s/\bcuGraphEventRecordNodeSetEvent\b/hipGraphEventRecordNodeSetEvent/g;
-    $ft{'graph'} += s/\bcuGraphEventWaitNodeGetEvent\b/hipGraphEventWaitNodeGetEvent/g;
-    $ft{'graph'} += s/\bcuGraphEventWaitNodeSetEvent\b/hipGraphEventWaitNodeSetEvent/g;
-    $ft{'graph'} += s/\bcuGraphExecChildGraphNodeSetParams\b/hipGraphExecChildGraphNodeSetParams/g;
-    $ft{'graph'} += s/\bcuGraphExecEventRecordNodeSetEvent\b/hipGraphExecEventRecordNodeSetEvent/g;
-    $ft{'graph'} += s/\bcuGraphExecEventWaitNodeSetEvent\b/hipGraphExecEventWaitNodeSetEvent/g;
-    $ft{'graph'} += s/\bcuGraphExecHostNodeSetParams\b/hipGraphExecHostNodeSetParams/g;
-    $ft{'graph'} += s/\bcuGraphExecUpdate\b/hipGraphExecUpdate/g;
-    $ft{'graph'} += s/\bcuGraphGetEdges\b/hipGraphGetEdges/g;
-    $ft{'graph'} += s/\bcuGraphHostNodeGetParams\b/hipGraphHostNodeGetParams/g;
-    $ft{'graph'} += s/\bcuGraphHostNodeSetParams\b/hipGraphHostNodeSetParams/g;
-    $ft{'graph'} += s/\bcuGraphInstantiateWithFlags\b/hipGraphInstantiateWithFlags/g;
-    $ft{'graph'} += s/\bcuGraphNodeFindInClone\b/hipGraphNodeFindInClone/g;
-    $ft{'graph'} += s/\bcuGraphNodeGetDependencies\b/hipGraphNodeGetDependencies/g;
-    $ft{'graph'} += s/\bcuGraphNodeGetDependentNodes\b/hipGraphNodeGetDependentNodes/g;
-    $ft{'graph'} += s/\bcuGraphNodeGetType\b/hipGraphNodeGetType/g;
-    $ft{'graph'} += s/\bcuGraphRemoveDependencies\b/hipGraphRemoveDependencies/g;
-    $ft{'graph'} += s/\bcudaGraphAddChildGraphNode\b/hipGraphAddChildGraphNode/g;
-    $ft{'graph'} += s/\bcudaGraphAddEventRecordNode\b/hipGraphAddEventRecordNode/g;
-    $ft{'graph'} += s/\bcudaGraphAddEventWaitNode\b/hipGraphAddEventWaitNode/g;
-    $ft{'graph'} += s/\bcudaGraphAddHostNode\b/hipGraphAddHostNode/g;
-    $ft{'graph'} += s/\bcudaGraphAddMemcpyNodeFromSymbol\b/hipGraphAddMemcpyNodeFromSymbol/g;
-    $ft{'graph'} += s/\bcudaGraphAddMemcpyNodeToSymbol\b/hipGraphAddMemcpyNodeToSymbol/g;
-    $ft{'graph'} += s/\bcudaGraphChildGraphNodeGetGraph\b/hipGraphChildGraphNodeGetGraph/g;
-    $ft{'graph'} += s/\bcudaGraphDestroyNode\b/hipGraphDestroyNode/g;
-    $ft{'graph'} += s/\bcudaGraphEventRecordNodeGetEvent\b/hipGraphEventRecordNodeGetEvent/g;
-    $ft{'graph'} += s/\bcudaGraphEventRecordNodeSetEvent\b/hipGraphEventRecordNodeSetEvent/g;
-    $ft{'graph'} += s/\bcudaGraphEventWaitNodeGetEvent\b/hipGraphEventWaitNodeGetEvent/g;
-    $ft{'graph'} += s/\bcudaGraphEventWaitNodeSetEvent\b/hipGraphEventWaitNodeSetEvent/g;
-    $ft{'graph'} += s/\bcudaGraphExecChildGraphNodeSetParams\b/hipGraphExecChildGraphNodeSetParams/g;
-    $ft{'graph'} += s/\bcudaGraphExecEventRecordNodeSetEvent\b/hipGraphExecEventRecordNodeSetEvent/g;
-    $ft{'graph'} += s/\bcudaGraphExecEventWaitNodeSetEvent\b/hipGraphExecEventWaitNodeSetEvent/g;
-    $ft{'graph'} += s/\bcudaGraphExecHostNodeSetParams\b/hipGraphExecHostNodeSetParams/g;
-    $ft{'graph'} += s/\bcudaGraphExecMemcpyNodeSetParams\b/hipGraphExecMemcpyNodeSetParams/g;
-    $ft{'graph'} += s/\bcudaGraphExecMemcpyNodeSetParams1D\b/hipGraphExecMemcpyNodeSetParams1D/g;
-    $ft{'graph'} += s/\bcudaGraphExecMemcpyNodeSetParamsFromSymbol\b/hipGraphExecMemcpyNodeSetParamsFromSymbol/g;
-    $ft{'graph'} += s/\bcudaGraphExecMemcpyNodeSetParamsToSymbol\b/hipGraphExecMemcpyNodeSetParamsToSymbol/g;
-    $ft{'graph'} += s/\bcudaGraphExecMemsetNodeSetParams\b/hipGraphExecMemsetNodeSetParams/g;
-    $ft{'graph'} += s/\bcudaGraphExecUpdate\b/hipGraphExecUpdate/g;
-    $ft{'graph'} += s/\bcudaGraphGetEdges\b/hipGraphGetEdges/g;
-    $ft{'graph'} += s/\bcudaGraphHostNodeGetParams\b/hipGraphHostNodeGetParams/g;
-    $ft{'graph'} += s/\bcudaGraphHostNodeSetParams\b/hipGraphHostNodeSetParams/g;
-    $ft{'graph'} += s/\bcudaGraphInstantiateWithFlags\b/hipGraphInstantiateWithFlags/g;
-    $ft{'graph'} += s/\bcudaGraphMemcpyNodeSetParams1D\b/hipGraphMemcpyNodeSetParams1D/g;
-    $ft{'graph'} += s/\bcudaGraphMemcpyNodeSetParamsFromSymbol\b/hipGraphMemcpyNodeSetParamsFromSymbol/g;
-    $ft{'graph'} += s/\bcudaGraphMemcpyNodeSetParamsToSymbol\b/hipGraphMemcpyNodeSetParamsToSymbol/g;
-    $ft{'graph'} += s/\bcudaGraphNodeFindInClone\b/hipGraphNodeFindInClone/g;
-    $ft{'graph'} += s/\bcudaGraphNodeGetDependencies\b/hipGraphNodeGetDependencies/g;
-    $ft{'graph'} += s/\bcudaGraphNodeGetDependentNodes\b/hipGraphNodeGetDependentNodes/g;
-    $ft{'graph'} += s/\bcudaGraphNodeGetType\b/hipGraphNodeGetType/g;
-    $ft{'graph'} += s/\bcudaGraphRemoveDependencies\b/hipGraphRemoveDependencies/g;
-    $ft{'type'} += s/\bCUpointer_attribute\b/hipPointer_attribute/g;
-    $ft{'type'} += s/\bCUpointer_attribute_enum\b/hipPointer_attribute/g;
-    $ft{'type'} += s/\bCUstreamUpdateCaptureDependencies_flags\b/hipStreamUpdateCaptureDependenciesFlags/g;
-    $ft{'type'} += s/\bCUstreamUpdateCaptureDependencies_flags_enum\b/hipStreamUpdateCaptureDependenciesFlags/g;
-    $ft{'type'} += s/\bcudaStreamUpdateCaptureDependenciesFlags\b/hipStreamUpdateCaptureDependenciesFlags/g;
-    $ft{'numeric_literal'} += s/\bCUDA_ERROR_GRAPH_EXEC_UPDATE_FAILURE\b/hipErrorGraphExecUpdateFailure/g;
-    $ft{'numeric_literal'} += s/\bCUDA_ERROR_ILLEGAL_STATE\b/hipErrorIllegalState/g;
-    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_ACCESS_FLAGS\b/HIP_POINTER_ATTRIBUTE_ACCESS_FLAGS/g;
-    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_ALLOWED_HANDLE_TYPES\b/HIP_POINTER_ATTRIBUTE_ALLOWED_HANDLE_TYPES/g;
-    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_BUFFER_ID\b/HIP_POINTER_ATTRIBUTE_BUFFER_ID/g;
-    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_CONTEXT\b/HIP_POINTER_ATTRIBUTE_CONTEXT/g;
-    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_DEVICE_ORDINAL\b/HIP_POINTER_ATTRIBUTE_DEVICE_ORDINAL/g;
-    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_DEVICE_POINTER\b/HIP_POINTER_ATTRIBUTE_DEVICE_POINTER/g;
-    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_HOST_POINTER\b/HIP_POINTER_ATTRIBUTE_HOST_POINTER/g;
-    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_IS_GPU_DIRECT_RDMA_CAPABLE\b/HIP_POINTER_ATTRIBUTE_IS_GPU_DIRECT_RDMA_CAPABLE/g;
-    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_IS_LEGACY_CUDA_IPC_CAPABLE\b/HIP_POINTER_ATTRIBUTE_IS_LEGACY_HIP_IPC_CAPABLE/g;
-    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_IS_MANAGED\b/HIP_POINTER_ATTRIBUTE_IS_MANAGED/g;
-    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_MAPPED\b/HIP_POINTER_ATTRIBUTE_MAPPED/g;
-    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_MEMORY_TYPE\b/HIP_POINTER_ATTRIBUTE_MEMORY_TYPE/g;
-    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_MEMPOOL_HANDLE\b/HIP_POINTER_ATTRIBUTE_MEMPOOL_HANDLE/g;
-    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_P2P_TOKENS\b/HIP_POINTER_ATTRIBUTE_P2P_TOKENS/g;
-    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_RANGE_SIZE\b/HIP_POINTER_ATTRIBUTE_RANGE_SIZE/g;
-    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_RANGE_START_ADDR\b/HIP_POINTER_ATTRIBUTE_RANGE_START_ADDR/g;
-    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_SYNC_MEMOPS\b/HIP_POINTER_ATTRIBUTE_SYNC_MEMOPS/g;
-    $ft{'numeric_literal'} += s/\bCU_STREAM_ADD_CAPTURE_DEPENDENCIES\b/hipStreamAddCaptureDependencies/g;
-    $ft{'numeric_literal'} += s/\bCU_STREAM_SET_CAPTURE_DEPENDENCIES\b/hipStreamSetCaptureDependencies/g;
-    $ft{'numeric_literal'} += s/\bcudaErrorGraphExecUpdateFailure\b/hipErrorGraphExecUpdateFailure/g;
-    $ft{'numeric_literal'} += s/\bcudaErrorIllegalState\b/hipErrorIllegalState/g;
-    $ft{'numeric_literal'} += s/\bcudaStreamAddCaptureDependencies\b/hipStreamAddCaptureDependencies/g;
-    $ft{'numeric_literal'} += s/\bcudaStreamSetCaptureDependencies\b/hipStreamSetCaptureDependencies/g;
+    $ft{'graphics'} += s/\bcuGraphicsSubResourceGetMappedArray\b/hipGraphicsSubResourceGetMappedArray/g;
+    $ft{'graphics'} += s/\bcudaGraphicsSubResourceGetMappedArray\b/hipGraphicsSubResourceGetMappedArray/g;
+    $ft{'openGL'} += s/\bcuGraphicsGLRegisterImage\b/hipGraphicsGLRegisterImage/g;
+    $ft{'type'} += s/\bGLenum\b/GLenum/g;
+    $ft{'type'} += s/\bGLuint\b/GLuint/g;
 }
 
 sub rocSubstitutions {
@@ -1623,6 +1441,8 @@ sub simpleSubstitutions {
     $ft{'addressing'} += s/\bcuMemPrefetchAsync\b/hipMemPrefetchAsync/g;
     $ft{'addressing'} += s/\bcuMemRangeGetAttribute\b/hipMemRangeGetAttribute/g;
     $ft{'addressing'} += s/\bcuMemRangeGetAttributes\b/hipMemRangeGetAttributes/g;
+    $ft{'addressing'} += s/\bcuPointerGetAttribute\b/hipPointerGetAttribute/g;
+    $ft{'addressing'} += s/\bcuPointerGetAttributes\b/hipDrvPointerGetAttributes/g;
     $ft{'addressing'} += s/\bcudaPointerGetAttributes\b/hipPointerGetAttributes/g;
     $ft{'stream'} += s/\bcuStreamAddCallback\b/hipStreamAddCallback/g;
     $ft{'stream'} += s/\bcuStreamAttachMemAsync\b/hipStreamAttachMemAsync/g;
@@ -1633,10 +1453,14 @@ sub simpleSubstitutions {
     $ft{'stream'} += s/\bcuStreamDestroy\b/hipStreamDestroy/g;
     $ft{'stream'} += s/\bcuStreamDestroy_v2\b/hipStreamDestroy/g;
     $ft{'stream'} += s/\bcuStreamEndCapture\b/hipStreamEndCapture/g;
+    $ft{'stream'} += s/\bcuStreamGetCaptureInfo\b/hipStreamGetCaptureInfo/g;
+    $ft{'stream'} += s/\bcuStreamGetCaptureInfo_v2\b/hipStreamGetCaptureInfo_v2/g;
     $ft{'stream'} += s/\bcuStreamGetFlags\b/hipStreamGetFlags/g;
     $ft{'stream'} += s/\bcuStreamGetPriority\b/hipStreamGetPriority/g;
+    $ft{'stream'} += s/\bcuStreamIsCapturing\b/hipStreamIsCapturing/g;
     $ft{'stream'} += s/\bcuStreamQuery\b/hipStreamQuery/g;
     $ft{'stream'} += s/\bcuStreamSynchronize\b/hipStreamSynchronize/g;
+    $ft{'stream'} += s/\bcuStreamUpdateCaptureDependencies\b/hipStreamUpdateCaptureDependencies/g;
     $ft{'stream'} += s/\bcuStreamWaitEvent\b/hipStreamWaitEvent/g;
     $ft{'stream'} += s/\bcudaStreamAddCallback\b/hipStreamAddCallback/g;
     $ft{'stream'} += s/\bcudaStreamAttachMemAsync\b/hipStreamAttachMemAsync/g;
@@ -1646,8 +1470,10 @@ sub simpleSubstitutions {
     $ft{'stream'} += s/\bcudaStreamCreateWithPriority\b/hipStreamCreateWithPriority/g;
     $ft{'stream'} += s/\bcudaStreamDestroy\b/hipStreamDestroy/g;
     $ft{'stream'} += s/\bcudaStreamEndCapture\b/hipStreamEndCapture/g;
+    $ft{'stream'} += s/\bcudaStreamGetCaptureInfo\b/hipStreamGetCaptureInfo/g;
     $ft{'stream'} += s/\bcudaStreamGetFlags\b/hipStreamGetFlags/g;
     $ft{'stream'} += s/\bcudaStreamGetPriority\b/hipStreamGetPriority/g;
+    $ft{'stream'} += s/\bcudaStreamIsCapturing\b/hipStreamIsCapturing/g;
     $ft{'stream'} += s/\bcudaStreamQuery\b/hipStreamQuery/g;
     $ft{'stream'} += s/\bcudaStreamSynchronize\b/hipStreamSynchronize/g;
     $ft{'stream'} += s/\bcudaStreamWaitEvent\b/hipStreamWaitEvent/g;
@@ -1694,16 +1520,35 @@ sub simpleSubstitutions {
     $ft{'execution'} += s/\bcudaLaunchCooperativeKernelMultiDevice\b/hipLaunchCooperativeKernelMultiDevice/g;
     $ft{'execution'} += s/\bcudaLaunchKernel\b/hipLaunchKernel/g;
     $ft{'execution'} += s/\bcudaSetupArgument\b/hipSetupArgument/g;
+    $ft{'graph'} += s/\bcuGraphAddChildGraphNode\b/hipGraphAddChildGraphNode/g;
     $ft{'graph'} += s/\bcuGraphAddDependencies\b/hipGraphAddDependencies/g;
     $ft{'graph'} += s/\bcuGraphAddEmptyNode\b/hipGraphAddEmptyNode/g;
+    $ft{'graph'} += s/\bcuGraphAddEventRecordNode\b/hipGraphAddEventRecordNode/g;
+    $ft{'graph'} += s/\bcuGraphAddEventWaitNode\b/hipGraphAddEventWaitNode/g;
+    $ft{'graph'} += s/\bcuGraphAddHostNode\b/hipGraphAddHostNode/g;
     $ft{'graph'} += s/\bcuGraphAddKernelNode\b/hipGraphAddKernelNode/g;
+    $ft{'graph'} += s/\bcuGraphChildGraphNodeGetGraph\b/hipGraphChildGraphNodeGetGraph/g;
     $ft{'graph'} += s/\bcuGraphCreate\b/hipGraphCreate/g;
     $ft{'graph'} += s/\bcuGraphDestroy\b/hipGraphDestroy/g;
+    $ft{'graph'} += s/\bcuGraphDestroyNode\b/hipGraphDestroyNode/g;
+    $ft{'graph'} += s/\bcuGraphEventRecordNodeGetEvent\b/hipGraphEventRecordNodeGetEvent/g;
+    $ft{'graph'} += s/\bcuGraphEventRecordNodeSetEvent\b/hipGraphEventRecordNodeSetEvent/g;
+    $ft{'graph'} += s/\bcuGraphEventWaitNodeGetEvent\b/hipGraphEventWaitNodeGetEvent/g;
+    $ft{'graph'} += s/\bcuGraphEventWaitNodeSetEvent\b/hipGraphEventWaitNodeSetEvent/g;
+    $ft{'graph'} += s/\bcuGraphExecChildGraphNodeSetParams\b/hipGraphExecChildGraphNodeSetParams/g;
     $ft{'graph'} += s/\bcuGraphExecDestroy\b/hipGraphExecDestroy/g;
+    $ft{'graph'} += s/\bcuGraphExecEventRecordNodeSetEvent\b/hipGraphExecEventRecordNodeSetEvent/g;
+    $ft{'graph'} += s/\bcuGraphExecEventWaitNodeSetEvent\b/hipGraphExecEventWaitNodeSetEvent/g;
+    $ft{'graph'} += s/\bcuGraphExecHostNodeSetParams\b/hipGraphExecHostNodeSetParams/g;
     $ft{'graph'} += s/\bcuGraphExecKernelNodeSetParams\b/hipGraphExecKernelNodeSetParams/g;
+    $ft{'graph'} += s/\bcuGraphExecUpdate\b/hipGraphExecUpdate/g;
+    $ft{'graph'} += s/\bcuGraphGetEdges\b/hipGraphGetEdges/g;
     $ft{'graph'} += s/\bcuGraphGetNodes\b/hipGraphGetNodes/g;
     $ft{'graph'} += s/\bcuGraphGetRootNodes\b/hipGraphGetRootNodes/g;
+    $ft{'graph'} += s/\bcuGraphHostNodeGetParams\b/hipGraphHostNodeGetParams/g;
+    $ft{'graph'} += s/\bcuGraphHostNodeSetParams\b/hipGraphHostNodeSetParams/g;
     $ft{'graph'} += s/\bcuGraphInstantiate\b/hipGraphInstantiate/g;
+    $ft{'graph'} += s/\bcuGraphInstantiateWithFlags\b/hipGraphInstantiateWithFlags/g;
     $ft{'graph'} += s/\bcuGraphInstantiate_v2\b/hipGraphInstantiate/g;
     $ft{'graph'} += s/\bcuGraphKernelNodeGetParams\b/hipGraphKernelNodeGetParams/g;
     $ft{'graph'} += s/\bcuGraphKernelNodeSetParams\b/hipGraphKernelNodeSetParams/g;
@@ -1712,26 +1557,65 @@ sub simpleSubstitutions {
     $ft{'graph'} += s/\bcuGraphMemcpyNodeSetParams\b/hipGraphMemcpyNodeSetParams/g;
     $ft{'graph'} += s/\bcuGraphMemsetNodeGetParams\b/hipGraphMemsetNodeGetParams/g;
     $ft{'graph'} += s/\bcuGraphMemsetNodeSetParams\b/hipGraphMemsetNodeSetParams/g;
+    $ft{'graph'} += s/\bcuGraphNodeFindInClone\b/hipGraphNodeFindInClone/g;
+    $ft{'graph'} += s/\bcuGraphNodeGetDependencies\b/hipGraphNodeGetDependencies/g;
+    $ft{'graph'} += s/\bcuGraphNodeGetDependentNodes\b/hipGraphNodeGetDependentNodes/g;
+    $ft{'graph'} += s/\bcuGraphNodeGetType\b/hipGraphNodeGetType/g;
+    $ft{'graph'} += s/\bcuGraphRemoveDependencies\b/hipGraphRemoveDependencies/g;
+    $ft{'graph'} += s/\bcudaGraphAddChildGraphNode\b/hipGraphAddChildGraphNode/g;
     $ft{'graph'} += s/\bcudaGraphAddDependencies\b/hipGraphAddDependencies/g;
     $ft{'graph'} += s/\bcudaGraphAddEmptyNode\b/hipGraphAddEmptyNode/g;
+    $ft{'graph'} += s/\bcudaGraphAddEventRecordNode\b/hipGraphAddEventRecordNode/g;
+    $ft{'graph'} += s/\bcudaGraphAddEventWaitNode\b/hipGraphAddEventWaitNode/g;
+    $ft{'graph'} += s/\bcudaGraphAddHostNode\b/hipGraphAddHostNode/g;
     $ft{'graph'} += s/\bcudaGraphAddKernelNode\b/hipGraphAddKernelNode/g;
     $ft{'graph'} += s/\bcudaGraphAddMemcpyNode\b/hipGraphAddMemcpyNode/g;
     $ft{'graph'} += s/\bcudaGraphAddMemcpyNode1D\b/hipGraphAddMemcpyNode1D/g;
+    $ft{'graph'} += s/\bcudaGraphAddMemcpyNodeFromSymbol\b/hipGraphAddMemcpyNodeFromSymbol/g;
+    $ft{'graph'} += s/\bcudaGraphAddMemcpyNodeToSymbol\b/hipGraphAddMemcpyNodeToSymbol/g;
     $ft{'graph'} += s/\bcudaGraphAddMemsetNode\b/hipGraphAddMemsetNode/g;
+    $ft{'graph'} += s/\bcudaGraphChildGraphNodeGetGraph\b/hipGraphChildGraphNodeGetGraph/g;
     $ft{'graph'} += s/\bcudaGraphCreate\b/hipGraphCreate/g;
     $ft{'graph'} += s/\bcudaGraphDestroy\b/hipGraphDestroy/g;
+    $ft{'graph'} += s/\bcudaGraphDestroyNode\b/hipGraphDestroyNode/g;
+    $ft{'graph'} += s/\bcudaGraphEventRecordNodeGetEvent\b/hipGraphEventRecordNodeGetEvent/g;
+    $ft{'graph'} += s/\bcudaGraphEventRecordNodeSetEvent\b/hipGraphEventRecordNodeSetEvent/g;
+    $ft{'graph'} += s/\bcudaGraphEventWaitNodeGetEvent\b/hipGraphEventWaitNodeGetEvent/g;
+    $ft{'graph'} += s/\bcudaGraphEventWaitNodeSetEvent\b/hipGraphEventWaitNodeSetEvent/g;
+    $ft{'graph'} += s/\bcudaGraphExecChildGraphNodeSetParams\b/hipGraphExecChildGraphNodeSetParams/g;
     $ft{'graph'} += s/\bcudaGraphExecDestroy\b/hipGraphExecDestroy/g;
+    $ft{'graph'} += s/\bcudaGraphExecEventRecordNodeSetEvent\b/hipGraphExecEventRecordNodeSetEvent/g;
+    $ft{'graph'} += s/\bcudaGraphExecEventWaitNodeSetEvent\b/hipGraphExecEventWaitNodeSetEvent/g;
+    $ft{'graph'} += s/\bcudaGraphExecHostNodeSetParams\b/hipGraphExecHostNodeSetParams/g;
     $ft{'graph'} += s/\bcudaGraphExecKernelNodeSetParams\b/hipGraphExecKernelNodeSetParams/g;
+    $ft{'graph'} += s/\bcudaGraphExecMemcpyNodeSetParams\b/hipGraphExecMemcpyNodeSetParams/g;
+    $ft{'graph'} += s/\bcudaGraphExecMemcpyNodeSetParams1D\b/hipGraphExecMemcpyNodeSetParams1D/g;
+    $ft{'graph'} += s/\bcudaGraphExecMemcpyNodeSetParamsFromSymbol\b/hipGraphExecMemcpyNodeSetParamsFromSymbol/g;
+    $ft{'graph'} += s/\bcudaGraphExecMemcpyNodeSetParamsToSymbol\b/hipGraphExecMemcpyNodeSetParamsToSymbol/g;
+    $ft{'graph'} += s/\bcudaGraphExecMemsetNodeSetParams\b/hipGraphExecMemsetNodeSetParams/g;
+    $ft{'graph'} += s/\bcudaGraphExecUpdate\b/hipGraphExecUpdate/g;
+    $ft{'graph'} += s/\bcudaGraphGetEdges\b/hipGraphGetEdges/g;
     $ft{'graph'} += s/\bcudaGraphGetNodes\b/hipGraphGetNodes/g;
     $ft{'graph'} += s/\bcudaGraphGetRootNodes\b/hipGraphGetRootNodes/g;
+    $ft{'graph'} += s/\bcudaGraphHostNodeGetParams\b/hipGraphHostNodeGetParams/g;
+    $ft{'graph'} += s/\bcudaGraphHostNodeSetParams\b/hipGraphHostNodeSetParams/g;
     $ft{'graph'} += s/\bcudaGraphInstantiate\b/hipGraphInstantiate/g;
+    $ft{'graph'} += s/\bcudaGraphInstantiateWithFlags\b/hipGraphInstantiateWithFlags/g;
     $ft{'graph'} += s/\bcudaGraphKernelNodeGetParams\b/hipGraphKernelNodeGetParams/g;
     $ft{'graph'} += s/\bcudaGraphKernelNodeSetParams\b/hipGraphKernelNodeSetParams/g;
     $ft{'graph'} += s/\bcudaGraphLaunch\b/hipGraphLaunch/g;
     $ft{'graph'} += s/\bcudaGraphMemcpyNodeGetParams\b/hipGraphMemcpyNodeGetParams/g;
     $ft{'graph'} += s/\bcudaGraphMemcpyNodeSetParams\b/hipGraphMemcpyNodeSetParams/g;
+    $ft{'graph'} += s/\bcudaGraphMemcpyNodeSetParams1D\b/hipGraphMemcpyNodeSetParams1D/g;
+    $ft{'graph'} += s/\bcudaGraphMemcpyNodeSetParamsFromSymbol\b/hipGraphMemcpyNodeSetParamsFromSymbol/g;
+    $ft{'graph'} += s/\bcudaGraphMemcpyNodeSetParamsToSymbol\b/hipGraphMemcpyNodeSetParamsToSymbol/g;
     $ft{'graph'} += s/\bcudaGraphMemsetNodeGetParams\b/hipGraphMemsetNodeGetParams/g;
     $ft{'graph'} += s/\bcudaGraphMemsetNodeSetParams\b/hipGraphMemsetNodeSetParams/g;
+    $ft{'graph'} += s/\bcudaGraphNodeFindInClone\b/hipGraphNodeFindInClone/g;
+    $ft{'graph'} += s/\bcudaGraphNodeGetDependencies\b/hipGraphNodeGetDependencies/g;
+    $ft{'graph'} += s/\bcudaGraphNodeGetDependentNodes\b/hipGraphNodeGetDependentNodes/g;
+    $ft{'graph'} += s/\bcudaGraphNodeGetType\b/hipGraphNodeGetType/g;
+    $ft{'graph'} += s/\bcudaGraphRemoveDependencies\b/hipGraphRemoveDependencies/g;
     $ft{'occupancy'} += s/\bcuOccupancyMaxActiveBlocksPerMultiprocessor\b/hipModuleOccupancyMaxActiveBlocksPerMultiprocessor/g;
     $ft{'occupancy'} += s/\bcuOccupancyMaxActiveBlocksPerMultiprocessorWithFlags\b/hipModuleOccupancyMaxActiveBlocksPerMultiprocessorWithFlags/g;
     $ft{'occupancy'} += s/\bcuOccupancyMaxPotentialBlockSize\b/hipModuleOccupancyMaxPotentialBlockSize/g;
@@ -1812,6 +1696,7 @@ sub simpleSubstitutions {
     $ft{'openGL'} += s/\bcuGraphicsGLRegisterBuffer\b/hipGraphicsGLRegisterBuffer/g;
     $ft{'openGL'} += s/\bcudaGLGetDevices\b/hipGLGetDevices/g;
     $ft{'openGL'} += s/\bcudaGraphicsGLRegisterBuffer\b/hipGraphicsGLRegisterBuffer/g;
+    $ft{'openGL'} += s/\bcudaGraphicsGLRegisterImage\b/hipGraphicsGLRegisterImage/g;
     $ft{'thread'} += s/\bcudaThreadExit\b/hipDeviceReset/g;
     $ft{'thread'} += s/\bcudaThreadGetCacheConfig\b/hipDeviceGetCacheConfig/g;
     $ft{'thread'} += s/\bcudaThreadSetCacheConfig\b/hipDeviceSetCacheConfig/g;
@@ -3083,6 +2968,8 @@ sub simpleSubstitutions {
     $ft{'type'} += s/\bCUmod_st\b/ihipModule_t/g;
     $ft{'type'} += s/\bCUmodule\b/hipModule_t/g;
     $ft{'type'} += s/\bCUoccupancyB2DSize\b/void*/g;
+    $ft{'type'} += s/\bCUpointer_attribute\b/hipPointer_attribute/g;
+    $ft{'type'} += s/\bCUpointer_attribute_enum\b/hipPointer_attribute/g;
     $ft{'type'} += s/\bCUresourceViewFormat\b/HIPresourceViewFormat/g;
     $ft{'type'} += s/\bCUresourceViewFormat_enum\b/HIPresourceViewFormat_enum/g;
     $ft{'type'} += s/\bCUresourcetype\b/HIPresourcetype/g;
@@ -3096,6 +2983,8 @@ sub simpleSubstitutions {
     $ft{'type'} += s/\bCUstreamCaptureMode_enum\b/hipStreamCaptureMode/g;
     $ft{'type'} += s/\bCUstreamCaptureStatus\b/hipStreamCaptureStatus/g;
     $ft{'type'} += s/\bCUstreamCaptureStatus_enum\b/hipStreamCaptureStatus/g;
+    $ft{'type'} += s/\bCUstreamUpdateCaptureDependencies_flags\b/hipStreamUpdateCaptureDependenciesFlags/g;
+    $ft{'type'} += s/\bCUstreamUpdateCaptureDependencies_flags_enum\b/hipStreamUpdateCaptureDependenciesFlags/g;
     $ft{'type'} += s/\bCUstream_st\b/ihipStream_t/g;
     $ft{'type'} += s/\bCUsurfObject\b/hipSurfaceObject_t/g;
     $ft{'type'} += s/\bCUsurfObject_v1\b/hipSurfaceObject_t/g;
@@ -3197,6 +3086,7 @@ sub simpleSubstitutions {
     $ft{'type'} += s/\bcudaStreamCallback_t\b/hipStreamCallback_t/g;
     $ft{'type'} += s/\bcudaStreamCaptureMode\b/hipStreamCaptureMode/g;
     $ft{'type'} += s/\bcudaStreamCaptureStatus\b/hipStreamCaptureStatus/g;
+    $ft{'type'} += s/\bcudaStreamUpdateCaptureDependenciesFlags\b/hipStreamUpdateCaptureDependenciesFlags/g;
     $ft{'type'} += s/\bcudaStream_t\b/hipStream_t/g;
     $ft{'type'} += s/\bcudaSurfaceBoundaryMode\b/hipSurfaceBoundaryMode/g;
     $ft{'type'} += s/\bcudaSurfaceObject_t\b/hipSurfaceObject_t/g;
@@ -3370,9 +3260,11 @@ sub simpleSubstitutions {
     $ft{'numeric_literal'} += s/\bCUDA_ERROR_DEINITIALIZED\b/hipErrorDeinitialized/g;
     $ft{'numeric_literal'} += s/\bCUDA_ERROR_ECC_UNCORRECTABLE\b/hipErrorECCNotCorrectable/g;
     $ft{'numeric_literal'} += s/\bCUDA_ERROR_FILE_NOT_FOUND\b/hipErrorFileNotFound/g;
+    $ft{'numeric_literal'} += s/\bCUDA_ERROR_GRAPH_EXEC_UPDATE_FAILURE\b/hipErrorGraphExecUpdateFailure/g;
     $ft{'numeric_literal'} += s/\bCUDA_ERROR_HOST_MEMORY_ALREADY_REGISTERED\b/hipErrorHostMemoryAlreadyRegistered/g;
     $ft{'numeric_literal'} += s/\bCUDA_ERROR_HOST_MEMORY_NOT_REGISTERED\b/hipErrorHostMemoryNotRegistered/g;
     $ft{'numeric_literal'} += s/\bCUDA_ERROR_ILLEGAL_ADDRESS\b/hipErrorIllegalAddress/g;
+    $ft{'numeric_literal'} += s/\bCUDA_ERROR_ILLEGAL_STATE\b/hipErrorIllegalState/g;
     $ft{'numeric_literal'} += s/\bCUDA_ERROR_INVALID_CONTEXT\b/hipErrorInvalidContext/g;
     $ft{'numeric_literal'} += s/\bCUDA_ERROR_INVALID_DEVICE\b/hipErrorInvalidDevice/g;
     $ft{'numeric_literal'} += s/\bCUDA_ERROR_INVALID_GRAPHICS_CONTEXT\b/hipErrorInvalidGraphicsContext/g;
@@ -3893,6 +3785,23 @@ sub simpleSubstitutions {
     $ft{'numeric_literal'} += s/\bCU_MEM_RANGE_ATTRIBUTE_PREFERRED_LOCATION\b/hipMemRangeAttributePreferredLocation/g;
     $ft{'numeric_literal'} += s/\bCU_MEM_RANGE_ATTRIBUTE_READ_MOSTLY\b/hipMemRangeAttributeReadMostly/g;
     $ft{'numeric_literal'} += s/\bCU_OCCUPANCY_DEFAULT\b/hipOccupancyDefault/g;
+    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_ACCESS_FLAGS\b/HIP_POINTER_ATTRIBUTE_ACCESS_FLAGS/g;
+    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_ALLOWED_HANDLE_TYPES\b/HIP_POINTER_ATTRIBUTE_ALLOWED_HANDLE_TYPES/g;
+    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_BUFFER_ID\b/HIP_POINTER_ATTRIBUTE_BUFFER_ID/g;
+    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_CONTEXT\b/HIP_POINTER_ATTRIBUTE_CONTEXT/g;
+    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_DEVICE_ORDINAL\b/HIP_POINTER_ATTRIBUTE_DEVICE_ORDINAL/g;
+    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_DEVICE_POINTER\b/HIP_POINTER_ATTRIBUTE_DEVICE_POINTER/g;
+    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_HOST_POINTER\b/HIP_POINTER_ATTRIBUTE_HOST_POINTER/g;
+    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_IS_GPU_DIRECT_RDMA_CAPABLE\b/HIP_POINTER_ATTRIBUTE_IS_GPU_DIRECT_RDMA_CAPABLE/g;
+    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_IS_LEGACY_CUDA_IPC_CAPABLE\b/HIP_POINTER_ATTRIBUTE_IS_LEGACY_HIP_IPC_CAPABLE/g;
+    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_IS_MANAGED\b/HIP_POINTER_ATTRIBUTE_IS_MANAGED/g;
+    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_MAPPED\b/HIP_POINTER_ATTRIBUTE_MAPPED/g;
+    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_MEMORY_TYPE\b/HIP_POINTER_ATTRIBUTE_MEMORY_TYPE/g;
+    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_MEMPOOL_HANDLE\b/HIP_POINTER_ATTRIBUTE_MEMPOOL_HANDLE/g;
+    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_P2P_TOKENS\b/HIP_POINTER_ATTRIBUTE_P2P_TOKENS/g;
+    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_RANGE_SIZE\b/HIP_POINTER_ATTRIBUTE_RANGE_SIZE/g;
+    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_RANGE_START_ADDR\b/HIP_POINTER_ATTRIBUTE_RANGE_START_ADDR/g;
+    $ft{'numeric_literal'} += s/\bCU_POINTER_ATTRIBUTE_SYNC_MEMOPS\b/HIP_POINTER_ATTRIBUTE_SYNC_MEMOPS/g;
     $ft{'numeric_literal'} += s/\bCU_RESOURCE_TYPE_ARRAY\b/HIP_RESOURCE_TYPE_ARRAY/g;
     $ft{'numeric_literal'} += s/\bCU_RESOURCE_TYPE_LINEAR\b/HIP_RESOURCE_TYPE_LINEAR/g;
     $ft{'numeric_literal'} += s/\bCU_RESOURCE_TYPE_MIPMAPPED_ARRAY\b/HIP_RESOURCE_TYPE_MIPMAPPED_ARRAY/g;
@@ -3935,6 +3844,7 @@ sub simpleSubstitutions {
     $ft{'numeric_literal'} += s/\bCU_SHARED_MEM_CONFIG_DEFAULT_BANK_SIZE\b/hipSharedMemBankSizeDefault/g;
     $ft{'numeric_literal'} += s/\bCU_SHARED_MEM_CONFIG_EIGHT_BYTE_BANK_SIZE\b/hipSharedMemBankSizeEightByte/g;
     $ft{'numeric_literal'} += s/\bCU_SHARED_MEM_CONFIG_FOUR_BYTE_BANK_SIZE\b/hipSharedMemBankSizeFourByte/g;
+    $ft{'numeric_literal'} += s/\bCU_STREAM_ADD_CAPTURE_DEPENDENCIES\b/hipStreamAddCaptureDependencies/g;
     $ft{'numeric_literal'} += s/\bCU_STREAM_CAPTURE_MODE_GLOBAL\b/hipStreamCaptureModeGlobal/g;
     $ft{'numeric_literal'} += s/\bCU_STREAM_CAPTURE_MODE_RELAXED\b/hipStreamCaptureModeRelaxed/g;
     $ft{'numeric_literal'} += s/\bCU_STREAM_CAPTURE_MODE_THREAD_LOCAL\b/hipStreamCaptureModeThreadLocal/g;
@@ -3943,6 +3853,7 @@ sub simpleSubstitutions {
     $ft{'numeric_literal'} += s/\bCU_STREAM_CAPTURE_STATUS_NONE\b/hipStreamCaptureStatusNone/g;
     $ft{'numeric_literal'} += s/\bCU_STREAM_DEFAULT\b/hipStreamDefault/g;
     $ft{'numeric_literal'} += s/\bCU_STREAM_NON_BLOCKING\b/hipStreamNonBlocking/g;
+    $ft{'numeric_literal'} += s/\bCU_STREAM_SET_CAPTURE_DEPENDENCIES\b/hipStreamSetCaptureDependencies/g;
     $ft{'numeric_literal'} += s/\bCU_STREAM_WAIT_VALUE_AND\b/hipStreamWaitValueAnd/g;
     $ft{'numeric_literal'} += s/\bCU_STREAM_WAIT_VALUE_EQ\b/hipStreamWaitValueEq/g;
     $ft{'numeric_literal'} += s/\bCU_STREAM_WAIT_VALUE_GEQ\b/hipStreamWaitValueGte/g;
@@ -4087,9 +3998,11 @@ sub simpleSubstitutions {
     $ft{'numeric_literal'} += s/\bcudaErrorDeviceUninitialized\b/hipErrorInvalidContext/g;
     $ft{'numeric_literal'} += s/\bcudaErrorECCUncorrectable\b/hipErrorECCNotCorrectable/g;
     $ft{'numeric_literal'} += s/\bcudaErrorFileNotFound\b/hipErrorFileNotFound/g;
+    $ft{'numeric_literal'} += s/\bcudaErrorGraphExecUpdateFailure\b/hipErrorGraphExecUpdateFailure/g;
     $ft{'numeric_literal'} += s/\bcudaErrorHostMemoryAlreadyRegistered\b/hipErrorHostMemoryAlreadyRegistered/g;
     $ft{'numeric_literal'} += s/\bcudaErrorHostMemoryNotRegistered\b/hipErrorHostMemoryNotRegistered/g;
     $ft{'numeric_literal'} += s/\bcudaErrorIllegalAddress\b/hipErrorIllegalAddress/g;
+    $ft{'numeric_literal'} += s/\bcudaErrorIllegalState\b/hipErrorIllegalState/g;
     $ft{'numeric_literal'} += s/\bcudaErrorInitializationError\b/hipErrorNotInitialized/g;
     $ft{'numeric_literal'} += s/\bcudaErrorInsufficientDriver\b/hipErrorInsufficientDriver/g;
     $ft{'numeric_literal'} += s/\bcudaErrorInvalidConfiguration\b/hipErrorInvalidConfiguration/g;
@@ -4250,12 +4163,14 @@ sub simpleSubstitutions {
     $ft{'numeric_literal'} += s/\bcudaSharedMemBankSizeDefault\b/hipSharedMemBankSizeDefault/g;
     $ft{'numeric_literal'} += s/\bcudaSharedMemBankSizeEightByte\b/hipSharedMemBankSizeEightByte/g;
     $ft{'numeric_literal'} += s/\bcudaSharedMemBankSizeFourByte\b/hipSharedMemBankSizeFourByte/g;
+    $ft{'numeric_literal'} += s/\bcudaStreamAddCaptureDependencies\b/hipStreamAddCaptureDependencies/g;
     $ft{'numeric_literal'} += s/\bcudaStreamCaptureModeGlobal\b/hipStreamCaptureModeGlobal/g;
     $ft{'numeric_literal'} += s/\bcudaStreamCaptureModeRelaxed\b/hipStreamCaptureModeRelaxed/g;
     $ft{'numeric_literal'} += s/\bcudaStreamCaptureModeThreadLocal\b/hipStreamCaptureModeThreadLocal/g;
     $ft{'numeric_literal'} += s/\bcudaStreamCaptureStatusActive\b/hipStreamCaptureStatusActive/g;
     $ft{'numeric_literal'} += s/\bcudaStreamCaptureStatusInvalidated\b/hipStreamCaptureStatusInvalidated/g;
     $ft{'numeric_literal'} += s/\bcudaStreamCaptureStatusNone\b/hipStreamCaptureStatusNone/g;
+    $ft{'numeric_literal'} += s/\bcudaStreamSetCaptureDependencies\b/hipStreamSetCaptureDependencies/g;
     $ft{'numeric_literal'} += s/\bcudaSuccess\b/hipSuccess/g;
     $ft{'define'} += s/\bCUDA_ARRAY3D_CUBEMAP\b/hipArrayCubemap/g;
     $ft{'define'} += s/\bCUDA_ARRAY3D_LAYERED\b/hipArrayLayered/g;
@@ -5771,7 +5686,6 @@ sub warnUnsupportedFunctions {
         "cudaHostRegisterReadOnly",
         "cudaGraphicsVDPAURegisterVideoSurface",
         "cudaGraphicsVDPAURegisterOutputSurface",
-        "cudaGraphicsSubResourceGetMappedArray",
         "cudaGraphicsResourceSetMapFlags",
         "cudaGraphicsResourceGetMappedMipmappedArray",
         "cudaGraphicsResourceGetMappedEglFrame",
@@ -5779,7 +5693,6 @@ sub warnUnsupportedFunctions {
         "cudaGraphicsMapFlagsReadOnly",
         "cudaGraphicsMapFlagsNone",
         "cudaGraphicsMapFlags",
-        "cudaGraphicsGLRegisterImage",
         "cudaGraphicsEGLRegisterImage",
         "cudaGraphicsD3D9RegisterResource",
         "cudaGraphicsD3D11RegisterResource",
@@ -6283,12 +6196,10 @@ sub warnUnsupportedFunctions {
         "cuLaunch",
         "cuGraphicsVDPAURegisterVideoSurface",
         "cuGraphicsVDPAURegisterOutputSurface",
-        "cuGraphicsSubResourceGetMappedArray",
         "cuGraphicsResourceSetMapFlags_v2",
         "cuGraphicsResourceSetMapFlags",
         "cuGraphicsResourceGetMappedMipmappedArray",
         "cuGraphicsResourceGetMappedEglFrame",
-        "cuGraphicsGLRegisterImage",
         "cuGraphicsEGLRegisterImage",
         "cuGraphicsD3D9RegisterResource",
         "cuGraphicsD3D11RegisterResource",

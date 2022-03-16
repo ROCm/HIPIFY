@@ -4,11 +4,17 @@
 #include <cuda.h>
 #include <string>
 #include <stdio.h>
+#if defined(_WIN32)
+  #include "windows.h"
+  #include <GL/glew.h>
+#endif
+#include "cudaGL.h"
 
 int main() {
   printf("09. CUDA Driver API Functions synthetic test\n");
 
   unsigned int flags = 0;
+  unsigned int flags_2 = 0;
   int iBlockSize = 0;
   int iBlockSize_2 = 0;
   size_t bytes = 0;
@@ -19,6 +25,8 @@ int main() {
   float ms = 0;
   int* value = 0;
   int* value_2 = 0;
+  GLuint gl_uint = 0;
+  GLenum gl_enum = 0;
 #if defined(_WIN32)
   unsigned long long ull = 0;
 #else
@@ -51,6 +59,7 @@ int main() {
   // CHECK-NEXT: hipStreamCallback_t streamCallback;
   // CHECK-NEXT: hipPointer_attribute pointer_attribute;
   // CHECK-NEXT: void* occupancyB2DSize;
+  // CHECK-NEXT: hipGraphicsResource_t graphicsResource;
   CUdevice device;
   CUcontext context;
   CUfunc_cache func_cache;
@@ -78,6 +87,7 @@ int main() {
   CUstreamCallback streamCallback;
   CUpointer_attribute pointer_attribute;
   CUoccupancyB2DSize occupancyB2DSize;
+  CUgraphicsResource graphicsResource;
 #if CUDA_VERSION > 7050
   // CHECK: hipMemRangeAttribute MemoryRangeAttribute;
   // CHECK-NEXT: hipMemoryAdvise MemoryAdvise;
@@ -1080,6 +1090,16 @@ int main() {
   // HIP: hipError_t hipModuleOccupancyMaxPotentialBlockSizeWithFlags(int* gridSize, int* blockSize, hipFunction_t f, size_t dynSharedMemPerBlk, int blockSizeLimit, unsigned int  flags);
   // CHECK: result = hipModuleOccupancyMaxPotentialBlockSizeWithFlags(value, value_2, function, bytes, iBlockSize, iBlockSize_2);
   result = cuOccupancyMaxPotentialBlockSizeWithFlags(value, value_2, function, occupancyB2DSize, bytes, iBlockSize, iBlockSize_2);
+
+  // CUDA: CUresult CUDAAPI cuGraphicsGLRegisterImage(CUgraphicsResource *pCudaResource, GLuint image, GLenum target, unsigned int Flags);
+  // HIP: hipError_t hipGraphicsGLRegisterImage(hipGraphicsResource** resource, GLuint image, GLenum target, unsigned int flags);
+  // CHECK: result = hipGraphicsGLRegisterImage(&graphicsResource, gl_uint, gl_enum, flags);
+  result = cuGraphicsGLRegisterImage(&graphicsResource, gl_uint, gl_enum, flags);
+
+  // CUDA: CUresult CUDAAPI cuGraphicsSubResourceGetMappedArray(CUarray *pArray, CUgraphicsResource resource, unsigned int arrayIndex, unsigned int mipLevel);
+  // HIP: hipError_t hipGraphicsSubResourceGetMappedArray(hipArray_t* array, hipGraphicsResource_t resource, unsigned int arrayIndex, unsigned int mipLevel);
+  // CHECK: result = hipGraphicsSubResourceGetMappedArray(&array_, graphicsResource, flags, flags_2);
+  result = cuGraphicsSubResourceGetMappedArray(&array_, graphicsResource, flags, flags_2);
 
   return 0;
 }
