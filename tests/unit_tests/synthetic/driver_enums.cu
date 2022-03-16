@@ -4,8 +4,8 @@
 #include <cuda.h>
 #include <stdio.h>
 #if defined(_WIN32)
-#include "windows.h"
-#include <GL/glew.h>
+  #include "windows.h"
+  #include <GL/glew.h>
 #endif
 #include "cudaGL.h"
 
@@ -899,6 +899,11 @@ int main() {
   CUstreamUpdateCaptureDependencies_flags STREAM_ADD_CAPTURE_DEPENDENCIES = CU_STREAM_ADD_CAPTURE_DEPENDENCIES;
   CUstreamUpdateCaptureDependencies_flags STREAM_SET_CAPTURE_DEPENDENCIES = CU_STREAM_SET_CAPTURE_DEPENDENCIES;
 #endif
+
+  // CHECK: typedef struct hipGraphicsResource *graphicsResource_st;
+  // CHECK-NEXT: hipGraphicsResource_t graphicsResource;
+  typedef struct CUgraphicsResource_st *graphicsResource_st;
+  CUgraphicsResource graphicsResource;
 
   return 0;
 }
