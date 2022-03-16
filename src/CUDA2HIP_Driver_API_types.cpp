@@ -2076,14 +2076,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUtexObject_v1",                                                   {"hipTextureObject_t",                                       "", CONV_TYPE, API_DRIVER, 1}},
 
   //
-  {"CUmemGenericAllocationHandle",                                     {"hipMemGenericAllocationHandle",                            "", CONV_DEFINE, API_DRIVER, 1, HIP_UNSUPPORTED}},
-  {"CUmemGenericAllocationHandle_v1",                                  {"hipMemGenericAllocationHandle",                            "", CONV_DEFINE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CUmemGenericAllocationHandle",                                     {"hipMemGenericAllocationHandle",                            "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CUmemGenericAllocationHandle_v1",                                  {"hipMemGenericAllocationHandle",                            "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
 
   // GLuint
-  {"GLuint",                                                           {"GLuint",                                                   "", CONV_TYPE, API_DRIVER, 36, HIP_EXPERIMENTAL}},
+  {"GLuint",                                                           {"GLuint",                                                   "", CONV_TYPE, API_DRIVER, 1, HIP_EXPERIMENTAL}},
 
   // GLenum
-  {"GLenum",                                                           {"GLenum",                                                   "", CONV_TYPE, API_DRIVER, 36, HIP_EXPERIMENTAL}},
+  {"GLenum",                                                           {"GLenum",                                                   "", CONV_TYPE, API_DRIVER, 1, HIP_EXPERIMENTAL}},
 
   // 5. Defines
 

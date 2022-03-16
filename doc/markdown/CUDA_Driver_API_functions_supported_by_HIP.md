@@ -1081,6 +1081,8 @@
 |`CUuserObject_st`|11.3| | | | | | | |
 |`CUuuid`| | | | | | | | |
 |`CUuuid_st`| | | | | | | | |
+|`GLenum`| | | |`GLenum`|5.1.0| | |5.1.0|
+|`GLuint`| | | |`GLuint`|5.1.0| | |5.1.0|
 |`__CUDACC__`| | | |`__HIPCC__`|1.6.0| | | |
 |`cudaError_enum`| | | |`hipError_t`|1.5.0| | | |
 
