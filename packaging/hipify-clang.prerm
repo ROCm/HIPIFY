@@ -9,7 +9,7 @@ ROCMBINDIR=@CPACK_PACKAGING_INSTALL_PREFIX@/../bin
 case "$1" in
   purge)
   ;;
-  remove)
+  remove | upgrade)
     rm -f @ROCMBINDIR@/hipify-perl
     rm -f @ROCMBINDIR@/hipify-clang
     rm -f @ROCMBINDIR@/hipconvertinplace-perl.sh
