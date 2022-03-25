@@ -45,7 +45,7 @@ After applying all the matchers, the output HIP source is produced.
 
 1. [**LLVM+CLANG**](http://releases.llvm.org) of at least version [3.8.0](http://releases.llvm.org/download.html#3.8.0); the latest stable and recommended release: [**14.0.0**](https://github.com/llvm/llvm-project/releases/tag/llvmorg-14.0.0).
 
-2. [**CUDA**](https://developer.nvidia.com/cuda-downloads) of at least version [7.0](https://developer.nvidia.com/cuda-toolkit-70), the latest supported version is [**11.5.1**](https://developer.nvidia.com/cuda-downloads).
+2. [**CUDA**](https://developer.nvidia.com/cuda-downloads) of at least version [7.0](https://developer.nvidia.com/cuda-toolkit-70), the latest supported version is [**11.6.1**](https://developer.nvidia.com/cuda-11-6-1-download-archive).
 
 <table align="center">
   <thead>
@@ -146,12 +146,17 @@ After applying all the matchers, the output HIP source is produced.
       <td>+</td>
     </tr>
     <tr align="center">
-      <td bgcolor="eefaeb"><a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-12.0.0">12.0.0</a>,
-                           <a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-12.0.1">12.0.1</a>,<br>
-                           <a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-13.0.0">13.0.0</a>,
-                           <a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-13.0.1">13.0.1</a>,
-                           <b><a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-14.0.0">14.0.0</a></b>
-      <td bgcolor="eefaeb"><a href="https://developer.nvidia.com/cuda-11-5-1-download-archive"><b>11.5.1</b></a></td>
+      <td><a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-12.0.0">12.0.0</a>,
+          <a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-12.0.1">12.0.1</a>,<br>
+          <a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-13.0.0">13.0.0</a>,
+          <a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-13.0.1">13.0.1</a>
+      <td><a href="https://developer.nvidia.com/cuda-11-5-1-download-archive">11.5.1</a></td>
+      <td>+</td>
+      <td>+</td>
+    </tr>
+    <tr align="center">
+      <td bgcolor="eefaeb"><b><a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-14.0.0">14.0.0</a></b>
+      <td bgcolor="eefaeb"><a href="https://developer.nvidia.com/cuda-11-6-1-download-archive"><b>11.6.1</b></a></td>
       <td colspan=2 bgcolor="eefaeb"><font color="green"><b>LATEST STABLE CONFIG</b></font></td>
     </tr>
   </tbody>
@@ -175,14 +180,14 @@ To process a file, `hipify-clang` needs access to the same headers that would be
 For example:
 
 ```shell
-./hipify-clang square.cu --cuda-path=/usr/local/cuda-11.5 -I /usr/local/cuda-11.5/samples/common/inc
+./hipify-clang square.cu --cuda-path=/usr/local/cuda-11.6 -I /usr/local/cuda-11.6/samples/common/inc
 ```
 
 `hipify-clang` arguments are given first, followed by a separator `'--'`, and then the arguments you'd pass to `clang` if you
 were compiling the input file. For example:
 
 ```bash
-./hipify-clang cpp17.cu --cuda-path=/usr/local/cuda-11.5 -- -std=c++17
+./hipify-clang cpp17.cu --cuda-path=/usr/local/cuda-11.6 -- -std=c++17
 ```
 
 The [Clang manual for compiling CUDA](https://llvm.org/docs/CompileCudaWithLLVM.html#compiling-cuda-code) may be useful.
@@ -303,9 +308,9 @@ Run `Visual Studio 16 2019`, open the generated `LLVM.sln`, build all, build pro
 
         - ***Linux***: `-DCUDA_TOOLKIT_ROOT_DIR=/usr/include`
 
-        - ***Windows***: `-DCUDA_TOOLKIT_ROOT_DIR="c:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.5"`
+        - ***Windows***: `-DCUDA_TOOLKIT_ROOT_DIR="c:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.6"`
 
-          `-DCUDA_SDK_ROOT_DIR="c:/ProgramData/NVIDIA Corporation/CUDA Samples/v11.5"`
+          `-DCUDA_SDK_ROOT_DIR="c:/ProgramData/NVIDIA Corporation/CUDA Samples/v11.6"`
 
 4. Ensure [`cuDNN`](https://developer.nvidia.com/rdp/cudnn-archive) of the version corresponding to CUDA's version is installed.
 
@@ -313,7 +318,7 @@ Run `Visual Studio 16 2019`, open the generated `LLVM.sln`, build all, build pro
 
         - ***Linux***: `-DCUDA_DNN_ROOT_DIR=/usr/include`
 
-        - ***Windows***: `-DCUDA_DNN_ROOT_DIR=d:/CUDNN/cudnn-11.5-windows-x64-v8.3.2`
+        - ***Windows***: `-DCUDA_DNN_ROOT_DIR=d:/CUDNN/cudnn-11.6-windows-x64-v8.3.3`
 
 5. Ensure [`CUB`](https://github.com/NVlabs/cub) of the version corresponding to CUDA's version is installed.
 
@@ -365,7 +370,7 @@ Ubuntu 14: LLVM 4.0.0 - 7.1.0, CUDA 7.0 - 9.0, cuDNN 5.0.5 - 7.6.5
 
 Ubuntu 16-18: LLVM 8.0.0 - 14.0.0, CUDA 8.0 - 10.2, cuDNN 5.1.10 - 8.0.5
 
-Ubuntu 20-21: LLVM 9.0.0 - 14.0.0, CUDA 8.0 - 11.5.1, cuDNN 5.1.10 - 8.3.2
+Ubuntu 20-21: LLVM 9.0.0 - 14.0.0, CUDA 8.0 - 11.6.1, cuDNN 5.1.10 - 8.3.3
 
 Minimum build system requirements for the above configurations:
 
@@ -409,7 +414,7 @@ cmake
 --    - Include path     : /usr/llvm/14.0.0/dist/include
 --    - Binary path      : /usr/llvm/14.0.0/dist/bin
 -- Linker detection: GNU ld
--- Found PythonInterp: /usr/bin/python (found suitable version "3.9.7", minimum required is "2.7") 
+-- Found PythonInterp: /usr/bin/python (found suitable version "3.9.7", minimum required is "2.7")
 -- Found lit: /usr/local/bin/lit
 -- Found FileCheck: /usr/llvm/14.0.0/dist/bin/FileCheck
 -- Looking for pthread.h
@@ -417,7 +422,7 @@ cmake
 -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
 -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
 -- Found Threads: TRUE
--- Found CUDA: /usr/local/cuda (found version "11.5")
+-- Found CUDA: /usr/local/cuda (found version "11.6")
 -- Configuring done
 -- Generating done
 -- Build files have been written to: /usr/hipify/build
@@ -429,7 +434,7 @@ make test-hipify
 ```shell
 Running HIPify regression tests
 ========================================
-CUDA 11.5 - will be used for testing
+CUDA 11.6 - will be used for testing
 LLVM 14.0.0 - will be used for testing
 x86_64 - Platform architecture
 Linux 5.13.0-21-generic - Platform OS
@@ -532,7 +537,8 @@ Testing Time: 5.73s
 | 10.0.0 - 11.0.0 | 8.0 - 11.1   | 7.6.5  - 8.0.5 | 2017.15.9.30, 2019.16.8.3                | 3.19.2         | 3.9.1        |
 | 11.0.1 - 11.1.0 | 8.0 - 11.2.2 | 7.6.5  - 8.0.5 | 2017.15.9.31, 2019.16.8.4                | 3.19.3         | 3.9.2        |
 | 12.0.0 - 13.0.1 | 8.0 - 11.5.1 | 7.6.5  - 8.3.2 | 2017.15.9.43, 2019.16.11.9               | 3.22.2         | 3.10.2       |
-| 14.0.0          | 8.0 - 11.5.1 | 7.6.5  - 8.3.2 | 2017.15.9.45, 2019.16.11.11, 2022.17.1.1 | 3.22.2         | 3.10.4       |
+| 14.0.0          | 8.0 - 11.5.1 | 8.0.5  - 8.3.3 | 2017.15.9.45, 2019.16.11.11, 2022.17.1.1 | 3.22.2         | 3.10.4       |
+| 15.0.0git       | 8.0 - 11.6.1 | 8.0.5  - 8.3.3 | 2017.15.9.45, 2019.16.11.11, 2022.17.1.1 | 3.22.2         | 3.10.4       |
 
 *Building with testing support by `Visual Studio 16 2019` on `Windows 10`:*
 
@@ -545,9 +551,9 @@ cmake
  -DCMAKE_BUILD_TYPE=Release \
  -DCMAKE_INSTALL_PREFIX=../dist \
  -DCMAKE_PREFIX_PATH=d:/LLVM/14.0.0/dist \
- -DCUDA_TOOLKIT_ROOT_DIR="c:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.5" \
- -DCUDA_SDK_ROOT_DIR="c:/ProgramData/NVIDIA Corporation/CUDA Samples/v11.5" \
- -DCUDA_DNN_ROOT_DIR=d:/CUDNN/cudnn-11.5-windows-x64-v8.3.2 \
+ -DCUDA_TOOLKIT_ROOT_DIR="c:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.6" \
+ -DCUDA_SDK_ROOT_DIR="c:/ProgramData/NVIDIA Corporation/CUDA Samples/v11.6" \
+ -DCUDA_DNN_ROOT_DIR=d:/CUDNN/cudnn-11.6-windows-x64-v8.3.3 \
  -DCUDA_CUB_ROOT_DIR=d:/GIT/cub \
  -DLLVM_EXTERNAL_LIT=d:/LLVM/14.0.0/build/Release/bin/llvm-lit.py \
  ../hipify
@@ -561,7 +567,7 @@ cmake
 -- Found PythonInterp: c:/Program Files/Python39/python.exe (found suitable version "3.9.5", minimum required is "3.6")
 -- Found lit: c:/Program Files/Python39/Scripts/lit.exe
 -- Found FileCheck: d:/LLVM/14.0.0/dist/bin/FileCheck.exe
--- Found CUDA: c:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.5 (found version "11.5")
+-- Found CUDA: c:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.6 (found version "11.6")
 -- Configuring done
 -- Generating done
 -- Build files have been written to: d:/hipify/build
