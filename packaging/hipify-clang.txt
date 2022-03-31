@@ -12,7 +12,6 @@ install(PROGRAMS @HIPIFY_INSTALL_PATH@/hipexamine-perl.sh DESTINATION bin)
 install(PROGRAMS @HIPIFY_INSTALL_PATH@/hipexamine.sh DESTINATION bin)
 set (FILE_REORG_BACKWARD_COMPATIBILITY "@FILE_REORG_BACKWARD_COMPATIBILITY@")
 if(FILE_REORG_BACKWARD_COMPATIBILITY)
-  install(DIRECTORY @PROJECT_BINARY_DIR@/wrapper_dir/include DESTINATION hip/bin)
   install(DIRECTORY @PROJECT_BINARY_DIR@/wrapper_dir/bin DESTINATION hip)
 endif()
 # hipify-clang.txt is processed to produce CMakeList.txt,
