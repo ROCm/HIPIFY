@@ -60,6 +60,8 @@ my $fileName = "";
 my $hipFileName = "";
 my %ft;
 my %Tkernels;
+my %convertedTags = ();
+my %convertedTagsTotal = ();
 
 GetOptions(
       "examine" => \$examine                  # Combines -no-output and -print-stats options
@@ -784,20 +786,29 @@ sub totalStats {
         $total += $count{$key};
     }
     return $total;
-};
+}
 
 sub printStats {
-    my $label     = shift();
-    my @statNames = @{shift()};
     my %counts    = %{shift()};
     my $warnings  = shift();
     my $loc       = shift();
+    my $fileName  = shift();
+    my $global    = shift();
     my $total     = totalStats(\%counts);
-    printf STDERR "%s %d CUDA->HIP refs ( ", $label, $total;
-    foreach $stat (@statNames) {
-        printf STDERR "%s:%d ", $stat, $counts{$stat};
+    printf STDERR "\n[HIPIFY] info: file '$fileName' statisitics:\n";
+    printf STDERR "  CONVERTED refs count: $total\n";
+    printf STDERR "  TOTAL lines of code: $loc\n";
+    printf STDERR "  WARNINGS: $warnings\n";
+    printf STDERR "[HIPIFY] info: CONVERTED refs by names:\n";
+    if ($global) {
+        foreach my $key (sort keys %convertedTagsTotal) {
+            printf STDERR "  %s %d\n", $key, $convertedTagsTotal{$key};
+        }
+    } else {
+        foreach my $key (sort keys %convertedTags) { 
+            printf STDERR "  %s %d\n", $key, $convertedTags{$key};
+        }
     }
-    printf STDERR ")\n  warning:%d LOC:%d", $warnings, $loc;
 }
 
 sub addStats {
@@ -7755,6 +7766,7 @@ while (@ARGV) {
         my $warnings = 0;
         my %warningTags;
         my $lineCount = 0;
+        %convertedTags = ();
         undef $/;
         # Read whole file at once, so we can match newlines
         while (<INFILE>) {
@@ -7799,8 +7811,9 @@ while (@ARGV) {
             transformKernelLaunch();
             transformCubNamespace();
             if ($print_stats) {
-                while (/(\b(hip|HIP|HIP_|hipblas|HIPBLAS_|hipcub|hipdnn|HIPDNN_|hipfft|HIPFFT_|hiprand|HIPRAND_|hiprtc|HIPRTC_|hipsparse|HIPSPARSE_)([A-Z]|_)\w+\b)/g) {
+                while (/(\b(hip|HIP|HIP_|hipblas|HIPBLAS_|hipcub|hipdnn|HIPDNN_|hipfft|HIPFFT_|hiprand|HIPRAND_|hiprtc|HIPRTC_|hipsparse|HIPSPARSE_)([A-Z])\w+\b)/g) {
                     $convertedTags{$1}++;
+                    $convertedTagsTotal{$1}++;
                 }
             }
             my $hasDeviceCode = $countKeywords + $ft{'device_function'};
@@ -7851,8 +7864,7 @@ while (@ARGV) {
         }
         my $totalConverted = totalStats(\%ft);
         if (($totalConverted+$warnings) and $print_stats) {
-            printStats("  info: converted", \@statNames, \%ft, $warnings, $lineCount);
-            print STDERR " in '$fileName'\n";
+            printStats(\%ft, $warnings, $lineCount, $fileName, 0);
         }
         # Update totals for all files
         addStats(\%tt, \%ft);
@@ -7861,25 +7873,10 @@ while (@ARGV) {
         foreach $key (keys %warningTags) {
             $TwarningTags{$key} += $warningTags{$key};
         }
-    }   # Unless filtered direcotry or file 
+    }   # Unless filtered directory or file
 }
-# Print total stats for all files processed:
+# Print total stats for all files processed
 if ($print_stats and ($fileCount > 1)) {
+    printStats(\%tt, $Twarnings, $TlineCount, "GLOBAL", 1);
     print STDERR "\n";
-    printStats("  info: TOTAL-converted", \@statNames, \%tt, $Twarnings, $TlineCount);
-    print STDERR "\n";
-    foreach my $key (sort { $TwarningTags{$b} <=> $TwarningTags{$a} } keys %TwarningTags) {
-        printf STDERR "  warning: unconverted %s : %d\n", $key, $TwarningTags{$key};
-    }
-    my $kernelCnt = keys %Tkernels;
-    printf STDERR "  kernels (%d total) : ", $kernelCnt;
-    foreach my $key (sort { $Tkernels{$b} <=> $Tkernels{$a} } keys %Tkernels) {
-        printf STDERR "  %s(%d)", $key, $Tkernels{$key};
-    }
-    print STDERR "\n\n";
-}
-if ($print_stats) {
-    foreach my $key (sort { $convertedTags{$b} <=> $convertedTags{$a} } keys %convertedTags) {
-        printf STDERR "  %s %d\n", $key, $convertedTags{$key};
-    }
 }
