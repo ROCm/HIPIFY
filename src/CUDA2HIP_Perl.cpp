@@ -739,7 +739,7 @@ namespace perl {
     *streamPtr.get() << tab_3 << sTansformKernelLaunch << "();" << endl;
     *streamPtr.get() << tab_3 << sTransformCubNamespace << "();" << endl;
     *streamPtr.get() << tab_3 << "if ($print_stats) {" << endl;
-    *streamPtr.get() << tab_4 << while_ << "(/(\\b(hip|HIP)([A-Z]|_)\\w+\\b)/g) {" << endl;
+    *streamPtr.get() << tab_4 << while_ << "(/(\\b(hip|HIP|HIP_|hipblas|HIPBLAS_|hipcub|hipdnn|HIPDNN_|hipfft|HIPFFT_|hiprand|HIPRAND_|hiprtc|HIPRTC_|hipsparse|HIPSPARSE_)([A-Z]|_)\\w+\\b)/g) {" << endl;
     *streamPtr.get() << tab_5 << "$convertedTags{$1}++;" << endl_tab_4 << "}" << endl_tab_3 << "}" << endl;
     *streamPtr.get() << tab_3 << my << "$hasDeviceCode = $countKeywords + $ft{'device_function'};" << endl;
     *streamPtr.get() << tab_3 << unless_ << "($quiet_warnings) {" << endl;
