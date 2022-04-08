@@ -7799,7 +7799,7 @@ while (@ARGV) {
             transformKernelLaunch();
             transformCubNamespace();
             if ($print_stats) {
-                while (/(\b(hip|HIP)([A-Z]|_)\w+\b)/g) {
+                while (/(\b(hip|HIP|HIP_|hipblas|HIPBLAS_|hipcub|hipdnn|HIPDNN_|hipfft|HIPFFT_|hiprand|HIPRAND_|hiprtc|HIPRTC_|hipsparse|HIPSPARSE_)([A-Z]|_)\w+\b)/g) {
                     $convertedTags{$1}++;
                 }
             }
