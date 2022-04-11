@@ -7,6 +7,7 @@
 # preserves the existing directory structure.
 
 SCRIPT_DIR=`dirname $0`
+PRIV_SCRIPT_DIR="$SCRIPT_DIR/../libexec/hipify"
 SEARCH_DIR=$1
 
 hipify_args=''
@@ -21,4 +22,4 @@ while (( "$#" )); do
 done
 clang_args="$@"
 
-$SCRIPT_DIR/hipify-clang -inplace -print-stats $hipify_args `$SCRIPT_DIR/findcode.sh $SEARCH_DIR` -- -x cuda $clang_args
+$SCRIPT_DIR/hipify-clang -inplace -print-stats $hipify_args `$PRIV_SCRIPT_DIR/findcode.sh $SEARCH_DIR` -- -x cuda $clang_args

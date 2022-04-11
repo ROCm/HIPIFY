@@ -32,7 +32,8 @@ set(HIPIFY_WRAPPER_BIN_DIR ${HIPIFY_WRAPPER_DIR}/bin)
 #function to create symlink to binaries
 function(create_binary_symlink)
   file(MAKE_DIRECTORY ${HIPIFY_WRAPPER_BIN_DIR})
-  file(GLOB binary_files ${CMAKE_SOURCE_DIR}/bin/*)
+  #create softlink for public scripts
+  file(GLOB binary_files ${CMAKE_SOURCE_DIR}/bin/hip*)
   foreach(binary_file ${binary_files})
     get_filename_component(file_name ${binary_file} NAME)
     add_custom_target(link_${file_name} ALL
@@ -40,6 +41,16 @@ function(create_binary_symlink)
                   COMMAND ${CMAKE_COMMAND} -E create_symlink
                   ../../bin/${file_name} ${HIPIFY_WRAPPER_BIN_DIR}/${file_name})
   endforeach()
+  #create softlink for private scripts
+  file(GLOB binary_files ${CMAKE_SOURCE_DIR}/bin/find*)
+  foreach(binary_file ${binary_files})
+    get_filename_component(file_name ${binary_file} NAME)
+    add_custom_target(link_${file_name} ALL
+                  WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+                  COMMAND ${CMAKE_COMMAND} -E create_symlink
+                  ../../libexec/hipify/${file_name} ${HIPIFY_WRAPPER_BIN_DIR}/${file_name})
+  endforeach()
+
   #symlink for hipify-clang
   set(file_name "hipify-clang")
   add_custom_target(link_${file_name} ALL
