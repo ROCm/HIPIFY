@@ -101,6 +101,7 @@ namespace perl {
   const string sWarnUnsupportedDeviceFunctions = "warnUnsupportedDeviceFunctions";
   const string sSimpleSubstitutions = "simpleSubstitutions";
   const string sRocSubstitutions = "rocSubstitutions";
+  const string sSubst = "subst";
   const string sExperimentalSubstitutions = "experimentalSubstitutions";
   const string sTansformKernelLaunch = "transformKernelLaunch";
   const string sTransformCubNamespace = "transformCubNamespace";
@@ -199,6 +200,10 @@ namespace perl {
     *streamPtr.get() << my << "$hipFileName = \"\";" << endl;
     *streamPtr.get() << my << "%ft;" << endl;
     *streamPtr.get() << my << "%Tkernels;" << endl;
+    *streamPtr.get() << my << "%tags = ();" << endl;
+    *streamPtr.get() << my << "%tagsTotal = ();" << endl;
+    *streamPtr.get() << my << "%tagsToConvertedTags = ();" << endl;
+    *streamPtr.get() << my << "%tagsToConvertedTagsTotal = ();" << endl;
     *streamPtr.get() << my << "%convertedTags = ();" << endl;
     *streamPtr.get() << my << "%convertedTagsTotal = ();" << endl_2;
     *streamPtr.get() << "GetOptions(" << endl;
@@ -268,8 +273,8 @@ namespace perl {
     *streamPtr.get() << "push(@exclude_dirlist, split(',', $exclude_dirs));" << endl;
     *streamPtr.get() << "push(@exclude_filelist, split(',', $exclude_files));" << endl_2;
     *streamPtr.get() << "# Turn exclude dirlist and exclude_filelist into hash maps" << endl;
-    *streamPtr.get() << "\%exclude_dirhash = map { $_ => 1 } @exclude_dirlist;" << endl;
-    *streamPtr.get() << "\%exclude_filehash = map { $_ => 1 } @exclude_filelist;" << endl_2;
+    *streamPtr.get() << "%exclude_dirhash = map { $_ => 1 } @exclude_dirlist;" << endl;
+    *streamPtr.get() << "%exclude_filehash = map { $_ => 1 } @exclude_filelist;" << endl_2;
   }
 
   void generateStatFunctions(unique_ptr<ostream> &streamPtr) {
@@ -292,12 +297,12 @@ namespace perl {
     *streamPtr.get() << tab << printf << "\"  WARNINGS: $warnings\\n\";" << endl;
     *streamPtr.get() << tab << printf << "\"[HIPIFY] info: CONVERTED refs by names:\\n\";" << endl;
     *streamPtr.get() << tab << "if ($global) {" << endl;
-    *streamPtr.get() << tab_2 << foreach << my << "$key (sort keys %convertedTagsTotal) {" << endl;
-    *streamPtr.get() << tab_3 << printf << "\"  %s %d\\n\", $key, $convertedTagsTotal{$key};" << endl;
+    *streamPtr.get() << tab_2 << foreach << my << "$key (sort keys %tagsToConvertedTagsTotal) {" << endl;
+    *streamPtr.get() << tab_3 << printf << "\"  %s => %s: %d\\n\", $key, $tagsToConvertedTagsTotal{$key}, $convertedTagsTotal{$tagsToConvertedTagsTotal{$key}};" << endl;
     *streamPtr.get() << tab_2 << "}" << endl;
     *streamPtr.get() << tab << "} else {" << endl;
-    *streamPtr.get() << tab_2 << foreach << my << "$key (sort keys %convertedTags) { " << endl;
-    *streamPtr.get() << tab_3 << printf << "\"  %s %d\\n\", $key, $convertedTags{$key};" << endl;
+    *streamPtr.get() << tab_2 << foreach << my << "$key (sort keys %tagsToConvertedTags) {" << endl;
+    *streamPtr.get() << tab_3 << printf << "\"  %s => %s: %d\\n\", $key, $tagsToConvertedTags{$key}, $convertedTags{$tagsToConvertedTags{$key}};" << endl;
     *streamPtr.get() << tab_2 << "}" << endl;
     *streamPtr.get() << tab << "}" << endl;
     *streamPtr.get() << "}" << endl;
@@ -308,6 +313,27 @@ namespace perl {
       *streamPtr.get() << tab << foreach << (i ? "$stat(@statNames)" : "$key (keys %adder)") << " {" << endl;
       *streamPtr.get() << tab_2 << "$dest_ref->" << (i ? "{$stat} = 0;" : "{$key} += $adder{$key};") << endl_tab << "}" << endl << "}" << endl;
     }
+  }
+
+  void generateSubstFunction(unique_ptr<ostream>& streamPtr) {
+    *streamPtr.get() << endl << sub << sSubst << " {" << endl;
+    *streamPtr.get() << tab << my << "$a = shift();" << endl;
+    *streamPtr.get() << tab << my << "$b = shift();" << endl;
+    *streamPtr.get() << tab << my << "$t = shift();" << endl;
+    *streamPtr.get() << tab << my << "$i = \"\";" << endl;
+    *streamPtr.get() << tab << "if ($t eq \"include\" or $t eq \"include_cuda_main_header\")" << " {" << endl;
+    *streamPtr.get() << tab_2 << "$i = \"(?<![\\\\!~`@#\\\\$%\\\\^&\\\\*\\\\-+=\\\\[\\\\]\\\\(\\\\)\\\\{\\\\}\\\\.\\\\,\\\\?'\\\\>])\";" << endl;
+    *streamPtr.get() << tab << "}" << endl;
+    *streamPtr.get() << tab << "if (my $c += s/$i\\b$a/$b/g) {" << endl;
+    *streamPtr.get() << tab_2 << "$ft{$t} += $c;" << endl;
+    *streamPtr.get() << tab_2 << "$tags{$a} +=$c;" << endl;
+    *streamPtr.get() << tab_2 << "$tagsTotal{$a} +=$c;" << endl;
+    *streamPtr.get() << tab_2 << "$convertedTags{$b} +=$c;" << endl;
+    *streamPtr.get() << tab_2 << "$convertedTagsTotal{$b} +=$c;" << endl;
+    *streamPtr.get() << tab_2 << "$tagsToConvertedTags{$a} = $b;" << endl;
+    *streamPtr.get() << tab_2 << "$tagsToConvertedTagsTotal{$a} = $b;" << endl;
+    *streamPtr.get() << tab << "}" << endl;
+    *streamPtr.get() << "}" << endl;
   }
 
   void generateExperimentalSubstitutions(unique_ptr<ostream> &streamPtr) {
@@ -321,14 +347,14 @@ namespace perl {
             string sHIP = ma.second.hipName.str();
             sCUDA = regex_replace(sCUDA, regex("/"), "\\/");
             sHIP = regex_replace(sHIP, regex("/"), "\\/");
-            *streamPtr.get() << tab << "$ft{'" << counterNames[ma.second.type] << "'} += s/\\b" << sCUDA << "\\b/" << sHIP << "/g;" << endl;
+            *streamPtr.get() << tab << "subst(\"" << sCUDA << "\", \"" << sHIP << "\", \"" << counterNames[ma.second.type] << "\");" << endl;
           }
         }
       } else {
         for (auto &ma : CUDA_RENAMES_MAP()) {
           if (!Statistics::isHipExperimental(ma.second)) continue;
           if (i == ma.second.type) {
-            *streamPtr.get() << tab << "$ft{'" << counterNames[ma.second.type] << "'} += s/\\b" << ma.first.str() << "\\b/" << ma.second.hipName.str() << "/g;" << endl;
+            *streamPtr.get() << tab << "subst(\"" << ma.first.str() << "\", \"" << ma.second.hipName.str() << "\", \"" << counterNames[ma.second.type] << "\");" << endl;
           }
         }
       }
@@ -349,14 +375,14 @@ namespace perl {
             string sHIP = ma.second.rocName.str();
             sCUDA = regex_replace(sCUDA, regex("/"), "\\/");
             sHIP = regex_replace(sHIP, regex("/"), "\\/");
-            *streamPtr.get() << tab << "$ft{'" << counterNames[ma.second.type] << "'} += s/(?<![\\!~`@#\\$%\\^&\\*\\-+=\\[\\]\\(\\)\\{\\}\\.\\,\\?'\\>])\\b" << sCUDA << "\\b/" << sHIP << "/g;" << endl;
+            *streamPtr.get() << tab << "subst(\"" << sCUDA << "\", \"" << sHIP << "\", \"" << counterNames[ma.second.type] << "\");" << endl;
           }
         }
       } else {
         for (auto &ma : CUDA_RENAMES_MAP()) {
           if (ma.second.apiType != API_BLAS || Statistics::isUnsupported(ma.second) || ma.second.rocName.empty()) continue;
           if (i == ma.second.type) {
-            *streamPtr.get() << tab << "$ft{'" << counterNames[ma.second.type] << "'} += s/\\b" << ma.first.str() << "\\b/" << ma.second.rocName.str() << "/g;" << endl;
+            *streamPtr.get() << tab << "subst(\"" << ma.first.str() << "\", \"" << ma.second.rocName.str() << "\", \"" << counterNames[ma.second.type] << "\");" << endl;
           }
         }
       }
@@ -376,14 +402,14 @@ namespace perl {
             string sHIP = ma.second.hipName.str();
             sCUDA = regex_replace(sCUDA, regex("/"), "\\/");
             sHIP = regex_replace(sHIP, regex("/"), "\\/");
-            *streamPtr.get() << tab << "$ft{'" << counterNames[ma.second.type] << "'} += s/(?<![\\!~`@#\\$%\\^&\\*\\-+=\\[\\]\\(\\)\\{\\}\\.\\,\\?'\\>])\\b" << sCUDA << "\\b/" << sHIP << "/g;" << endl;
+            *streamPtr.get() << tab << "subst(\"" << sCUDA << "\", \"" << sHIP << "\", \"" << counterNames[ma.second.type] << "\");" << endl;
           }
         }
       } else {
         for (auto &ma : CUDA_RENAMES_MAP()) {
           if (Statistics::isUnsupported(ma.second) || Statistics::isHipExperimental(ma.second)) continue;
           if (i == ma.second.type) {
-            *streamPtr.get() << tab << "$ft{'" << counterNames[ma.second.type] << "'} += s/\\b" << ma.first.str() << "\\b/" << ma.second.hipName.str() << "/g;" << endl;
+            *streamPtr.get() << tab << "subst(\"" << ma.first.str() << "\", \"" << ma.second.hipName.str() << "\", \"" << counterNames[ma.second.type] << "\");" << endl;
           }
         }
       }
@@ -649,6 +675,7 @@ namespace perl {
     if (sConv.back() == ' ') sConv = sConv.substr(0, sConv.size() - 3) + ";";
     *streamPtr.get() << "\"" << counterNames[NUM_CONV_TYPES - 1] << "\");" << endl;
     generateStatFunctions(streamPtr);
+    generateSubstFunction(streamPtr);
     generateExperimentalSubstitutions(streamPtr);
     generateRocSubstitutions(streamPtr);
     generateSimpleSubstitutions(streamPtr);
@@ -710,7 +737,9 @@ namespace perl {
     *streamPtr.get() << tab_2 << my << "$warnings = 0;" << endl;
     *streamPtr.get() << tab_2 << my << "%warningTags;" << endl;
     *streamPtr.get() << tab_2 << my << "$lineCount = 0;" << endl;
+    *streamPtr.get() << tab_2 << "%tags = ();" << endl;
     *streamPtr.get() << tab_2 << "%convertedTags = ();" << endl;
+    *streamPtr.get() << tab_2 << "%tagsToConvertedTags = ();" << endl;
     *streamPtr.get() << tab_2 << "undef $/;" << endl;
     *streamPtr.get() << tab_2 << "# Read whole file at once, so we can match newlines" << endl;
     *streamPtr.get() << tab_2 << while_ << "(<INFILE>) {" << endl;
@@ -752,10 +781,6 @@ namespace perl {
     *streamPtr.get() << tab_3 << sSimpleSubstitutions << "();" << endl;
     *streamPtr.get() << tab_3 << sTansformKernelLaunch << "();" << endl;
     *streamPtr.get() << tab_3 << sTransformCubNamespace << "();" << endl;
-    *streamPtr.get() << tab_3 << "if ($print_stats) {" << endl;
-    *streamPtr.get() << tab_4 << while_ << "(/(\\b(hip|HIP|HIP_|hipblas|HIPBLAS_|hipcub|hipdnn|HIPDNN_|hipfft|HIPFFT_|hiprand|HIPRAND_|hiprtc|HIPRTC_|hipsparse|HIPSPARSE_)([A-Z])\\w+\\b)/g) {" << endl;
-    *streamPtr.get() << tab_5 << "$convertedTags{$1}++;" << endl;
-    *streamPtr.get() << tab_5 << "$convertedTagsTotal{$1}++;" << endl_tab_4 << "}" << endl_tab_3 << "}" << endl;
     *streamPtr.get() << tab_3 << my << "$hasDeviceCode = $countKeywords + $ft{'device_function'};" << endl;
     *streamPtr.get() << tab_3 << unless_ << "($quiet_warnings) {" << endl;
     *streamPtr.get() << tab_4 << "# Copy into array of lines, process line-by-line to show warnings" << endl;
