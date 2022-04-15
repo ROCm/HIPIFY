@@ -122,20 +122,32 @@ void appendArgumentsAdjusters(ct::RefactoringTool &Tool, const std::string &sSou
       Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-D", ct::ArgumentInsertPosition::BEGIN));
     }
   }
-  // Includes for clang's CUDA wrappers for using by packaged hipify-clang
   static int Dummy;
   std::string hipify = llvm::sys::fs::getMainExecutable(hipify_exe, (void *)&Dummy);
-  std::string clang_inc_path = std::string(llvm::sys::path::parent_path(hipify));
-  clang_inc_path.append("/include");
-  Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster(clang_inc_path.c_str(), ct::ArgumentInsertPosition::BEGIN));
+  std::string hipify_parent_path = std::string(llvm::sys::path::parent_path(hipify));
+  // Includes for clang's CUDA wrappers for using by old packaged hipify-clang
+  std::string clang_inc_path_old = hipify_parent_path + "/include";
+  Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster(clang_inc_path_old.c_str(), ct::ArgumentInsertPosition::BEGIN));
   Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-Xclang", ct::ArgumentInsertPosition::BEGIN));
   Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-internal-isystem", ct::ArgumentInsertPosition::BEGIN));
   Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-Xclang", ct::ArgumentInsertPosition::BEGIN));
-  clang_inc_path.append("/cuda_wrappers");
-  Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster(clang_inc_path.c_str(), ct::ArgumentInsertPosition::BEGIN));
+  clang_inc_path_old.append("/cuda_wrappers");
+  Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster(clang_inc_path_old.c_str(), ct::ArgumentInsertPosition::BEGIN));
   Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-Xclang", ct::ArgumentInsertPosition::BEGIN));
   Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-internal-isystem", ct::ArgumentInsertPosition::BEGIN));
   Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-Xclang", ct::ArgumentInsertPosition::BEGIN));
+  // Includes for clang's CUDA wrappers for using by new packaged hipify-clang
+  std::string clang_inc_path_new = hipify_parent_path + "/../include/hipify";
+  Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster(clang_inc_path_new.c_str(), ct::ArgumentInsertPosition::BEGIN));
+  Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-Xclang", ct::ArgumentInsertPosition::BEGIN));
+  Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-internal-isystem", ct::ArgumentInsertPosition::BEGIN));
+  Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-Xclang", ct::ArgumentInsertPosition::BEGIN));
+  clang_inc_path_new.append("/cuda_wrappers");
+  Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster(clang_inc_path_new.c_str(), ct::ArgumentInsertPosition::BEGIN));
+  Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-Xclang", ct::ArgumentInsertPosition::BEGIN));
+  Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-internal-isystem", ct::ArgumentInsertPosition::BEGIN));
+  Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-Xclang", ct::ArgumentInsertPosition::BEGIN));
+  // Standard c++14 by default
   Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-std=c++14", ct::ArgumentInsertPosition::BEGIN));
   std::string sInclude = "-I" + sys::path::parent_path(sSourceAbsPath).str();
 #if defined(HIPIFY_CLANG_RES)
