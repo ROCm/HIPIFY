@@ -13,6 +13,7 @@
 
 
 SCRIPT_DIR=`dirname $0`
+PRIV_SCRIPT_DIR="$SCRIPT_DIR/../libexec/hipify"
 SEARCH_DIR=$1
 shift
-$SCRIPT_DIR/hipify-perl -inplace -print-stats "$@" `$SCRIPT_DIR/findcode.sh $SEARCH_DIR`
+$SCRIPT_DIR/hipify-perl -inplace -print-stats "$@" `$PRIV_SCRIPT_DIR/findcode.sh $SEARCH_DIR`
