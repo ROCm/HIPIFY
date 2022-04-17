@@ -684,13 +684,23 @@ public:
 
   void InclusionDirective(clang::SourceLocation hash_loc, const clang::Token &include_token,
                           StringRef file_name, bool is_angled, clang::CharSourceRange filename_range,
-                          const clang::FileEntry *file, StringRef search_path, StringRef relative_path,
+#if LLVM_VERSION_MAJOR < 15
+                          const clang::FileEntry *file,
+#else
+                          Optional<clang::FileEntryRef> file,
+#endif
+                          StringRef search_path, StringRef relative_path,
                           const clang::Module *imported
 #if LLVM_VERSION_MAJOR > 6
                         , clang::SrcMgr::CharacteristicKind FileType
 #endif
                          ) override {
-    hipifyAction.InclusionDirective(hash_loc, include_token, file_name, is_angled, filename_range, file, search_path, relative_path, imported);
+#if LLVM_VERSION_MAJOR < 15
+    auto f = file;
+#else
+    auto f = &file->getFileEntry();
+#endif
+    hipifyAction.InclusionDirective(hash_loc, include_token, file_name, is_angled, filename_range, f, search_path, relative_path, imported);
   }
 
   void PragmaDirective(clang::SourceLocation Loc, clang::PragmaIntroducerKind Introducer) override {
