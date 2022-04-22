@@ -839,7 +839,7 @@ sub subst {
     if ($t eq "include" or $t eq "include_cuda_main_header") {
         $i = "(?<![\\!~`@#\\$%\\^&\\*\\-+=\\[\\]\\(\\)\\{\\}\\.\\,\\?'\\>])";
     }
-    if (my $c += s/$i\b$a/$b/g) {
+    if (my $c += s/$i\b$a\b/$b/g) {
         $ft{$t} += $c;
         $tags{$a} +=$c;
         $tagsTotal{$a} +=$c;
