@@ -324,7 +324,7 @@ namespace perl {
     *streamPtr.get() << tab << "if ($t eq \"include\" or $t eq \"include_cuda_main_header\")" << " {" << endl;
     *streamPtr.get() << tab_2 << "$i = \"(?<![\\\\!~`@#\\\\$%\\\\^&\\\\*\\\\-+=\\\\[\\\\]\\\\(\\\\)\\\\{\\\\}\\\\.\\\\,\\\\?'\\\\>])\";" << endl;
     *streamPtr.get() << tab << "}" << endl;
-    *streamPtr.get() << tab << "if (my $c += s/$i\\b$a/$b/g) {" << endl;
+    *streamPtr.get() << tab << "if (my $c += s/$i\\b$a\\b/$b/g) {" << endl;
     *streamPtr.get() << tab_2 << "$ft{$t} += $c;" << endl;
     *streamPtr.get() << tab_2 << "$tags{$a} +=$c;" << endl;
     *streamPtr.get() << tab_2 << "$tagsTotal{$a} +=$c;" << endl;
