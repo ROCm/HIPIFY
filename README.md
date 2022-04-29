@@ -43,9 +43,9 @@ After applying all the matchers, the output HIP source is produced.
 
 `hipify-clang` requires:
 
-1. [**LLVM+CLANG**](http://releases.llvm.org) of at least version [3.8.0](http://releases.llvm.org/download.html#3.8.0); the latest stable and recommended release: [**14.0.0**](https://github.com/llvm/llvm-project/releases/tag/llvmorg-14.0.0).
+1. [**LLVM+CLANG**](http://releases.llvm.org) of at least version [4.0.0](http://releases.llvm.org/download.html#4.0.0); the latest stable and recommended release: [**14.0.3**](https://github.com/llvm/llvm-project/releases/tag/llvmorg-14.0.3).
 
-2. [**CUDA**](https://developer.nvidia.com/cuda-downloads) of at least version [7.0](https://developer.nvidia.com/cuda-toolkit-70), the latest supported version is [**11.6.1**](https://developer.nvidia.com/cuda-11-6-1-download-archive).
+2. [**CUDA**](https://developer.nvidia.com/cuda-downloads) of at least version [8.0](https://developer.nvidia.com/cuda-80-ga2-download-archive), the latest supported version is [**11.6.2**](https://developer.nvidia.com/cuda-11-6-2-download-archive).
 
 <table align="center">
   <thead>
@@ -155,8 +155,11 @@ After applying all the matchers, the output HIP source is produced.
       <td>+</td>
     </tr>
     <tr align="center">
-      <td bgcolor="eefaeb"><b><a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-14.0.0">14.0.0</a></b>
-      <td bgcolor="eefaeb"><a href="https://developer.nvidia.com/cuda-11-6-1-download-archive"><b>11.6.1</b></a></td>
+      <td><a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-14.0.0">14.0.0</a>,
+          <a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-14.0.1">14.0.1</a>,<br>
+          <a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-14.0.2">14.0.2</a>,
+          <a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-14.0.3"><b>14.0.3</b></a>
+      <td bgcolor="eefaeb"><a href="https://developer.nvidia.com/cuda-11-6-2-download-archive"><b>11.6.2</b></a></td>
       <td colspan=2 bgcolor="eefaeb"><font color="green"><b>LATEST STABLE CONFIG</b></font></td>
     </tr>
   </tbody>
@@ -171,7 +174,7 @@ After applying all the matchers, the output HIP source is produced.
 In most cases, you can get a suitable version of `LLVM+CLANG` with your package manager.
 
 Failing that or having multiple versions of `LLVM`, you can [download a release archive](http://releases.llvm.org/), build or install it, and set
-[CMAKE_PREFIX_PATH](https://cmake.org/cmake/help/v3.5/variable/CMAKE_PREFIX_PATH.html) so `cmake` can find it; for instance: `-DCMAKE_PREFIX_PATH=d:\LLVM\14.0.0\dist`
+[CMAKE_PREFIX_PATH](https://cmake.org/cmake/help/v3.5/variable/CMAKE_PREFIX_PATH.html) so `cmake` can find it; for instance: `-DCMAKE_PREFIX_PATH=d:\LLVM\14.0.3\dist`
 
 ### <a name="hipify-clang-usage"></a> hipify-clang: usage
 
@@ -269,7 +272,7 @@ Run `Visual Studio 16 2019`, open the generated `LLVM.sln`, build all, build pro
 
 **LLVM >= 10.0.0:**
 
-1. download [`LLVM project`](https://github.com/llvm/llvm-project/releases/tag/llvmorg-14.0.0) sources;
+1. download [`LLVM project`](https://github.com/llvm/llvm-project/releases/tag/llvmorg-14.0.3) sources;
 2. build [`LLVM project`](http://llvm.org/docs/CMake.html):
 
 ```bash
@@ -334,21 +337,21 @@ Run `Visual Studio 16 2019`, open the generated `LLVM.sln`, build all, build pro
 
     * Install `lit` into `python`:
 
-        - ***Linux***: `python /usr/llvm/14.0.0/llvm-project/llvm/utils/lit/setup.py install`
+        - ***Linux***: `python /usr/llvm/14.0.3/llvm-project/llvm/utils/lit/setup.py install`
 
-        - ***Windows***: `python d:/LLVM/14.0.0/llvm-project/llvm/utils/lit/setup.py install`
+        - ***Windows***: `python d:/LLVM/14.0.3/llvm-project/llvm/utils/lit/setup.py install`
 
     * Starting with LLVM 6.0.1 path to `llvm-lit` python script should be specified by the `LLVM_EXTERNAL_LIT` option:
 
-        - ***Linux***: `-DLLVM_EXTERNAL_LIT=/usr/llvm/14.0.0/build/bin/llvm-lit`
+        - ***Linux***: `-DLLVM_EXTERNAL_LIT=/usr/llvm/14.0.3/build/bin/llvm-lit`
 
-        - ***Windows***: `-DLLVM_EXTERNAL_LIT=d:/LLVM/14.0.0/build/Release/bin/llvm-lit.py`
+        - ***Windows***: `-DLLVM_EXTERNAL_LIT=d:/LLVM/14.0.3/build/Release/bin/llvm-lit.py`
 
     * `FileCheck`:
 
-        - ***Linux***: copy from `/usr/llvm/14.0.0/build/bin/` to `CMAKE_INSTALL_PREFIX/dist/bin`
+        - ***Linux***: copy from `/usr/llvm/14.0.3/build/bin/` to `CMAKE_INSTALL_PREFIX/dist/bin`
 
-        - ***Windows***: copy from `d:/LLVM/14.0.0/build/Release/bin` to `CMAKE_INSTALL_PREFIX/dist/bin`
+        - ***Windows***: copy from `d:/LLVM/14.0.3/build/Release/bin` to `CMAKE_INSTALL_PREFIX/dist/bin`
 
         - Or specify the path to `FileCheck` in `CMAKE_INSTALL_PREFIX` option
 
@@ -368,9 +371,9 @@ On Linux the following configurations are tested:
 
 Ubuntu 14: LLVM 4.0.0 - 7.1.0, CUDA 7.0 - 9.0, cuDNN 5.0.5 - 7.6.5
 
-Ubuntu 16-18: LLVM 8.0.0 - 14.0.0, CUDA 8.0 - 10.2, cuDNN 5.1.10 - 8.0.5
+Ubuntu 16-18: LLVM 8.0.0 - 14.0.3, CUDA 8.0 - 10.2, cuDNN 5.1.10 - 8.0.5
 
-Ubuntu 20-21: LLVM 9.0.0 - 14.0.0, CUDA 8.0 - 11.6.1, cuDNN 5.1.10 - 8.3.3
+Ubuntu 20-21: LLVM 9.0.0 - 14.0.3, CUDA 8.0 - 11.6.2, cuDNN 5.1.10 - 8.3.3
 
 Minimum build system requirements for the above configurations:
 
@@ -387,11 +390,11 @@ cmake
  -DHIPIFY_CLANG_TESTS=1 \
  -DCMAKE_BUILD_TYPE=Release \
  -DCMAKE_INSTALL_PREFIX=../dist \
- -DCMAKE_PREFIX_PATH=/usr/llvm/14.0.0/dist \
+ -DCMAKE_PREFIX_PATH=/usr/llvm/14.0.3/dist \
  -DCUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda \
  -DCUDA_DNN_ROOT_DIR=/usr/local/cuda \
  -DCUDA_CUB_ROOT_DIR=/usr/CUB \
- -DLLVM_EXTERNAL_LIT=/usr/llvm/14.0.0/build/bin/llvm-lit \
+ -DLLVM_EXTERNAL_LIT=/usr/llvm/14.0.3/build/bin/llvm-lit \
  ../hipify
 ```
 *A corresponding successful output:*
@@ -409,14 +412,14 @@ cmake
 -- Detecting CXX compile features
 -- Detecting CXX compile features - done
 -- Found ZLIB: /usr/lib/x86_64-linux-gnu/libz.so (found version "1.2.11")
--- Found LLVM 14.0.0:
---    - CMake module path: /usr/llvm/14.0.0/dist/lib/cmake/llvm
---    - Include path     : /usr/llvm/14.0.0/dist/include
---    - Binary path      : /usr/llvm/14.0.0/dist/bin
+-- Found LLVM 14.0.3:
+--    - CMake module path: /usr/llvm/14.0.3/dist/lib/cmake/llvm
+--    - Include path     : /usr/llvm/14.0.3/dist/include
+--    - Binary path      : /usr/llvm/14.0.3/dist/bin
 -- Linker detection: GNU ld
 -- Found PythonInterp: /usr/bin/python (found suitable version "3.9.7", minimum required is "2.7")
 -- Found lit: /usr/local/bin/lit
--- Found FileCheck: /usr/llvm/14.0.0/dist/bin/FileCheck
+-- Found FileCheck: /usr/llvm/14.0.3/dist/bin/FileCheck
 -- Looking for pthread.h
 -- Looking for pthread.h - found
 -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
@@ -435,7 +438,7 @@ make test-hipify
 Running HIPify regression tests
 ========================================
 CUDA 11.6 - will be used for testing
-LLVM 14.0.0 - will be used for testing
+LLVM 14.0.3 - will be used for testing
 x86_64 - Platform architecture
 Linux 5.13.0-21-generic - Platform OS
 64 - hipify-clang binary bitness
@@ -537,8 +540,8 @@ Testing Time: 5.73s
 | 10.0.0 - 11.0.0 | 8.0 - 11.1   | 7.6.5  - 8.0.5 | 2017.15.9.30, 2019.16.8.3                | 3.19.2         | 3.9.1        |
 | 11.0.1 - 11.1.0 | 8.0 - 11.2.2 | 7.6.5  - 8.0.5 | 2017.15.9.31, 2019.16.8.4                | 3.19.3         | 3.9.2        |
 | 12.0.0 - 13.0.1 | 8.0 - 11.5.1 | 7.6.5  - 8.3.2 | 2017.15.9.43, 2019.16.11.9               | 3.22.2         | 3.10.2       |
-| 14.0.0          | 8.0 - 11.5.1 | 8.0.5  - 8.3.3 | 2017.15.9.45, 2019.16.11.11, 2022.17.1.1 | 3.22.2         | 3.10.4       |
-| 15.0.0git       | 8.0 - 11.6.1 | 8.0.5  - 8.3.3 | 2017.15.9.45, 2019.16.11.11, 2022.17.1.1 | 3.22.2         | 3.10.4       |
+| 14.0.0 - 14.0.3 | 8.0 - 11.6.2 | 8.0.5  - 8.3.3 | 2017.15.9.45, 2019.16.11.11, 2022.17.1.1 | 3.23.1         | 3.10.4       |
+| 15.0.0git       | 8.0 - 11.6.2 | 8.0.5  - 8.3.3 | 2017.15.9.47, 2019.16.11.13, 2022.17.1.6 | 3.23.1         | 3.10.4       |
 
 *Building with testing support by `Visual Studio 16 2019` on `Windows 10`:*
 
@@ -550,23 +553,23 @@ cmake
  -DHIPIFY_CLANG_TESTS=1 \
  -DCMAKE_BUILD_TYPE=Release \
  -DCMAKE_INSTALL_PREFIX=../dist \
- -DCMAKE_PREFIX_PATH=d:/LLVM/14.0.0/dist \
+ -DCMAKE_PREFIX_PATH=d:/LLVM/14.0.3/dist \
  -DCUDA_TOOLKIT_ROOT_DIR="c:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.6" \
  -DCUDA_SDK_ROOT_DIR="c:/ProgramData/NVIDIA Corporation/CUDA Samples/v11.6" \
  -DCUDA_DNN_ROOT_DIR=d:/CUDNN/cudnn-11.6-windows-x64-v8.3.3 \
  -DCUDA_CUB_ROOT_DIR=d:/GIT/cub \
- -DLLVM_EXTERNAL_LIT=d:/LLVM/14.0.0/build/Release/bin/llvm-lit.py \
+ -DLLVM_EXTERNAL_LIT=d:/LLVM/14.0.3/build/Release/bin/llvm-lit.py \
  ../hipify
 ```
 *A corresponding successful output:*
 ```shell
--- Found LLVM 14.0.0:
---    - CMake module path: d:/LLVM/14.0.0/dist/lib/cmake/llvm
---    - Include path     : d:/LLVM/14.0.0/dist/include
---    - Binary path      : d:/LLVM/14.0.0/dist/bin
+-- Found LLVM 14.0.3:
+--    - CMake module path: d:/LLVM/14.0.3/dist/lib/cmake/llvm
+--    - Include path     : d:/LLVM/14.0.3/dist/include
+--    - Binary path      : d:/LLVM/14.0.3/dist/bin
 -- Found PythonInterp: c:/Program Files/Python39/python.exe (found suitable version "3.9.5", minimum required is "3.6")
 -- Found lit: c:/Program Files/Python39/Scripts/lit.exe
--- Found FileCheck: d:/LLVM/14.0.0/dist/bin/FileCheck.exe
+-- Found FileCheck: d:/LLVM/14.0.3/dist/bin/FileCheck.exe
 -- Found CUDA: c:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.6 (found version "11.6")
 -- Configuring done
 -- Generating done
