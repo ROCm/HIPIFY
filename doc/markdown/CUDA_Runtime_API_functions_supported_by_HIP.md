@@ -248,7 +248,7 @@
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
 |`cudaGLGetDevices`| | | |`hipGLGetDevices`|4.5.0| | | |
 |`cudaGraphicsGLRegisterBuffer`| | | |`hipGraphicsGLRegisterBuffer`|4.5.0| | | |
-|`cudaGraphicsGLRegisterImage`| | | |`hipGraphicsGLRegisterImage`|5.1.0| | |5.1.0|
+|`cudaGraphicsGLRegisterImage`| | | |`hipGraphicsGLRegisterImage`|5.1.0| | | |
 |`cudaWGLGetDevice`| | | | | | | | |
 
 ## **15. OpenGL Interoperability [DEPRECATED]**
@@ -363,7 +363,7 @@
 |`cudaGraphicsResourceGetMappedMipmappedArray`| | | | | | | | |
 |`cudaGraphicsResourceGetMappedPointer`| | | |`hipGraphicsResourceGetMappedPointer`|4.5.0| | | |
 |`cudaGraphicsResourceSetMapFlags`| | | | | | | | |
-|`cudaGraphicsSubResourceGetMappedArray`| | | |`hipGraphicsSubResourceGetMappedArray`|5.1.0| | |5.1.0|
+|`cudaGraphicsSubResourceGetMappedArray`| | | |`hipGraphicsSubResourceGetMappedArray`|5.1.0| | | |
 |`cudaGraphicsUnmapResources`| | | |`hipGraphicsUnmapResources`|4.5.0| | | |
 |`cudaGraphicsUnregisterResource`| | | |`hipGraphicsUnregisterResource`|4.5.0| | | |
 
@@ -542,15 +542,15 @@ Unsupported
 |`CUgraphNode_st`|10.0| | |`hipGraphNode`|4.3.0| | | |
 |`CUgraph_st`|10.0| | |`ihipGraph`|4.3.0| | | |
 |`CUstream_st`| | | |`ihipStream_t`|1.5.0| | | |
-|`CUuuid_st`| | | | | | | | |
+|`CUuuid_st`| | | |`hipUUID_t`|5.2.0| | |5.2.0|
 |`MAJOR_VERSION`|8.0| | | | | | | |
 |`MINOR_VERSION`|8.0| | | | | | | |
 |`PATCH_LEVEL`|8.0| | | | | | | |
 |`cudaAccessPolicyWindow`|11.0| | | | | | | |
-|`cudaAccessProperty`|11.0| | | | | | | |
-|`cudaAccessPropertyNormal`|11.0| | | | | | | |
-|`cudaAccessPropertyPersisting`|11.0| | | | | | | |
-|`cudaAccessPropertyStreaming`|11.0| | | | | | | |
+|`cudaAccessProperty`|11.0| | |`hipAccessProperty`|5.2.0| | |5.2.0|
+|`cudaAccessPropertyNormal`|11.0| | |`hipAccessPropertyNormal`|5.2.0| | |5.2.0|
+|`cudaAccessPropertyPersisting`|11.0| | |`hipAccessPropertyPersisting`|5.2.0| | |5.2.0|
+|`cudaAccessPropertyStreaming`|11.0| | |`hipAccessPropertyStreaming`|5.2.0| | |5.2.0|
 |`cudaAddressModeBorder`| | | |`hipAddressModeBorder`|1.7.0| | | |
 |`cudaAddressModeClamp`| | | |`hipAddressModeClamp`|1.7.0| | | |
 |`cudaAddressModeMirror`| | | |`hipAddressModeMirror`|1.7.0| | | |
@@ -1149,10 +1149,10 @@ Unsupported
 |`cudaIpcMemHandle_st`| | | |`hipIpcMemHandle_st`|1.6.0| | | |
 |`cudaIpcMemHandle_t`| | | |`hipIpcMemHandle_t`|1.6.0| | | |
 |`cudaIpcMemLazyEnablePeerAccess`| | | |`hipIpcMemLazyEnablePeerAccess`|1.6.0| | | |
-|`cudaKernelNodeAttrID`|11.0| | | | | | | |
+|`cudaKernelNodeAttrID`|11.0| | |`hipKernelNodeAttrID`|5.2.0| | |5.2.0|
 |`cudaKernelNodeAttrValue`|11.0| | | | | | | |
-|`cudaKernelNodeAttributeAccessPolicyWindow`|11.0| | | | | | | |
-|`cudaKernelNodeAttributeCooperative`|11.0| | | | | | | |
+|`cudaKernelNodeAttributeAccessPolicyWindow`|11.0| | |`hipKernelNodeAttributeAccessPolicyWindow`|5.2.0| | |5.2.0|
+|`cudaKernelNodeAttributeCooperative`|11.0| | |`hipKernelNodeAttributeCooperative`|5.2.0| | |5.2.0|
 |`cudaKernelNodeParams`|10.0| | |`hipKernelNodeParams`|4.3.0| | | |
 |`cudaKeyValuePair`| | | | | | | | |
 |`cudaLaunchParams`|9.0| | |`hipLaunchParams`|2.6.0| | | |
@@ -1331,7 +1331,7 @@ Unsupported
 |`cudaTextureType3D`| | | |`hipTextureType3D`|1.7.0| | | |
 |`cudaTextureTypeCubemap`| | | |`hipTextureTypeCubemap`|1.7.0| | | |
 |`cudaTextureTypeCubemapLayered`| | | |`hipTextureTypeCubemapLayered`|1.7.0| | | |
-|`cudaUUID_t`| | | | | | | | |
+|`cudaUUID_t`| | | |`hipUUID`|5.2.0| | |5.2.0|
 |`cudaUserObjectFlags`|11.3| | | | | | | |
 |`cudaUserObjectNoDestructorSync`|11.3| | | | | | | |
 |`cudaUserObjectRetainFlags`|11.3| | | | | | | |

@@ -595,7 +595,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuGraphicsResourceSetMapFlags
   {"cudaGraphicsResourceSetMapFlags",                         {"hipGraphicsResourceSetMapFlags",                         "", CONV_GRAPHICS, API_RUNTIME, 24, HIP_UNSUPPORTED}},
   // cuGraphicsSubResourceGetMappedArray
-  {"cudaGraphicsSubResourceGetMappedArray",                   {"hipGraphicsSubResourceGetMappedArray",                   "", CONV_GRAPHICS, API_RUNTIME, 24, HIP_EXPERIMENTAL}},
+  {"cudaGraphicsSubResourceGetMappedArray",                   {"hipGraphicsSubResourceGetMappedArray",                   "", CONV_GRAPHICS, API_RUNTIME, 24}},
   // cuGraphicsUnmapResources
   {"cudaGraphicsUnmapResources",                              {"hipGraphicsUnmapResources",                              "", CONV_GRAPHICS, API_RUNTIME, 24}},
   // cuGraphicsUnregisterResource

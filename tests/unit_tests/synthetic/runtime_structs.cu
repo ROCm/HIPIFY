@@ -161,5 +161,8 @@ int main() {
   cudaFunction_t func;
 #endif
 
+  // CHECK: hipUUID_t uuid_st;
+  CUuuid_st uuid_st;
+
   return 0;
 }

@@ -117,7 +117,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaTextureDesc",                                                  {"hipTextureDesc",                                           "", CONV_TYPE, API_RUNTIME, 36}},
 
   // NOTE: the same struct and its name
-  {"CUuuid_st",                                                        {"hipUUID",                                                  "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+  {"CUuuid_st",                                                        {"hipUUID_t",                                                "", CONV_TYPE, API_RUNTIME, 36, HIP_EXPERIMENTAL}},
 
   // NOTE: possibly CUsurfref is analogue
   {"surfaceReference",                                                 {"surfaceReference",                                         "", CONV_TYPE, API_RUNTIME, 36}},
@@ -1481,13 +1481,13 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"PATCH_LEVEL",                                                      {"hipLibraryPatchVersion",                                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}},
 
   // CUaccessProperty
-  {"cudaAccessProperty",                                               {"hipAccessProperty",                                        "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+  {"cudaAccessProperty",                                               {"hipAccessProperty",                                        "", CONV_TYPE, API_RUNTIME, 36, HIP_EXPERIMENTAL}},
   // CU_ACCESS_PROPERTY_NORMAL
-  {"cudaAccessPropertyNormal",                                         {"hipAccessPropertyNormal",                                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 0
+  {"cudaAccessPropertyNormal",                                         {"hipAccessPropertyNormal",                                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 0
   // CU_ACCESS_PROPERTY_STREAMING
-  {"cudaAccessPropertyStreaming",                                      {"hipAccessPropertyStreaming",                               "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 1
+  {"cudaAccessPropertyStreaming",                                      {"hipAccessPropertyStreaming",                               "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 1
   // CU_ACCESS_PROPERTY_PERSISTING
-  {"cudaAccessPropertyPersisting",                                     {"hipAccessPropertyPersisting",                              "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 2
+  {"cudaAccessPropertyPersisting",                                     {"hipAccessPropertyPersisting",                              "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 2
 
   // CUsynchronizationPolicy
   {"cudaSynchronizationPolicy",                                        {"hipSynchronizationPolicy",                                 "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
@@ -1508,11 +1508,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaStreamAttributeSynchronizationPolicy",                         {"hipStreamAttributeSynchronizationPolicy",                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 3
 
   // CUkernelNodeAttrID
-  {"cudaKernelNodeAttrID",                                             {"hipKernelNodeAttrID",                                      "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+  {"cudaKernelNodeAttrID",                                             {"hipKernelNodeAttrID",                                      "", CONV_TYPE, API_RUNTIME, 36, HIP_EXPERIMENTAL}},
   // CU_KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW
-  {"cudaKernelNodeAttributeAccessPolicyWindow",                        {"hipKernelNodeAttributeAccessPolicyWindow",                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 1
+  {"cudaKernelNodeAttributeAccessPolicyWindow",                        {"hipKernelNodeAttributeAccessPolicyWindow",                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 1
   // CU_KERNEL_NODE_ATTRIBUTE_COOPERATIVE
-  {"cudaKernelNodeAttributeCooperative",                               {"hipKernelNodeAttributeCooperative",                        "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 2
+  {"cudaKernelNodeAttributeCooperative",                               {"hipKernelNodeAttributeCooperative",                        "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 2
 
   // CUmemPool_attribute
   {"cudaMemPoolAttr",                                                  {"hipMemPoolAttr",                                           "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
@@ -1693,7 +1693,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaTextureObject_t",                                              {"hipTextureObject_t",                                       "", CONV_TYPE, API_RUNTIME, 36}},
 
   // CUuuid
-  {"cudaUUID_t",                                                       {"hipUUID_t",                                                "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+  {"cudaUUID_t",                                                       {"hipUUID",                                                  "", CONV_TYPE, API_RUNTIME, 36, HIP_EXPERIMENTAL}},
 
   // CUmemoryPool
   {"cudaMemPool_t",                                                    {"hipMemoryPool",                                            "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
@@ -2423,4 +2423,14 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {
   {"hipGraphicsRegisterFlagsTextureGather",                            {HIP_4040, HIP_0,    HIP_0   }},
   {"hipErrorIllegalState",                                             {HIP_5000, HIP_0,    HIP_0   }},
   {"hipErrorGraphExecUpdateFailure",                                   {HIP_5000, HIP_0,    HIP_0   }},
+  {"hipDeviceAttributeMultiGpuBoardGroupID",                           {HIP_5000, HIP_0,    HIP_0   }},
+  {"hipUUID",                                                          {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipUUID_t",                                                        {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipKernelNodeAttrID",                                              {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipKernelNodeAttributeAccessPolicyWindow",                         {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipKernelNodeAttributeCooperative",                                {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipAccessProperty",                                                {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipAccessPropertyNormal",                                          {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipAccessPropertyStreaming",                                       {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipAccessPropertyPersisting",                                      {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
 };

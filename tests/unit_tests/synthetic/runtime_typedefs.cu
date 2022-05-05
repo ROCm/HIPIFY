@@ -1,4 +1,4 @@
-// RUN: %run_test hipify "%s" "%t" %hipify_args 1 --skip-excluded-preprocessor-conditional-blocks %clang_args -D__CUDA_API_VERSION_INTERNAL
+// RUN: %run_test hipify "%s" "%t" %hipify_args 2 --skip-excluded-preprocessor-conditional-blocks --experimental %clang_args -D__CUDA_API_VERSION_INTERNAL
 
 // CHECK: #include <hip/hip_runtime.h>
 #include <cuda_runtime_api.h>
@@ -18,6 +18,9 @@ int main() {
   cudaStreamCallback_t StreamCallback_t;
   cudaSurfaceObject_t SurfaceObject_t;
   cudaTextureObject_t TextureObject_t;
+
+  // CHECK: hipUUID uuid;
+  cudaUUID_t uuid;
 
   return 0;
 }

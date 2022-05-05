@@ -905,5 +905,29 @@ int main() {
   typedef struct CUgraphicsResource_st *graphicsResource_st;
   CUgraphicsResource graphicsResource;
 
+#if CUDA_VERSION >= 11000
+  // CHECK: hipKernelNodeAttrID kernelNodeAttrID;
+  // CHECK-NEXT: hipKernelNodeAttrID kernelNodeAttrID_enum;
+  // CHECK-NEXT: hipKernelNodeAttrID KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW = hipKernelNodeAttributeAccessPolicyWindow;
+  // CHECK-NEXT: hipKernelNodeAttrID KERNEL_NODE_ATTRIBUTE_COOPERATIVE = hipKernelNodeAttributeCooperative;
+  CUkernelNodeAttrID kernelNodeAttrID;
+  CUkernelNodeAttrID_enum kernelNodeAttrID_enum;
+  CUkernelNodeAttrID KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW = CU_KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW;
+  CUkernelNodeAttrID KERNEL_NODE_ATTRIBUTE_COOPERATIVE = CU_KERNEL_NODE_ATTRIBUTE_COOPERATIVE;
+#endif
+
+#if CUDA_VERSION >= 11000
+  // CHECK: hipAccessProperty accessProperty;
+  // CHECK-NEXT: hipAccessProperty accessProperty_enum;
+  // CHECK-NEXT: hipAccessProperty ACCESS_PROPERTY_NORMAL = hipAccessPropertyNormal;
+  // CHECK-NEXT: hipAccessProperty ACCESS_PROPERTY_STREAMING = hipAccessPropertyStreaming;
+  // CHECK-NEXT: hipAccessProperty ACCESS_PROPERTY_PERSISTING = hipAccessPropertyPersisting;
+  CUaccessProperty accessProperty;
+  CUaccessProperty_enum accessProperty_enum;
+  CUaccessProperty ACCESS_PROPERTY_NORMAL = CU_ACCESS_PROPERTY_NORMAL;
+  CUaccessProperty ACCESS_PROPERTY_STREAMING = CU_ACCESS_PROPERTY_STREAMING;
+  CUaccessProperty ACCESS_PROPERTY_PERSISTING = CU_ACCESS_PROPERTY_PERSISTING;
+#endif
+
   return 0;
 }

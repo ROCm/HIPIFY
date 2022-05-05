@@ -223,5 +223,8 @@ int main() {
   CUgraphicsResource_st* graphicsResource_st;
   CUgraphicsResource graphicsResource;
 
+  // CHECK: hipUUID_t uuid_st;
+  CUuuid_st uuid_st;
+
   return 0;
 }
