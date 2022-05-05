@@ -194,9 +194,9 @@
 |`CUGLmap_flags_enum`| | | | | | | | |
 |`CUGPUDirectRDMAWritesOrdering`|11.3| | | | | | | |
 |`CUGPUDirectRDMAWritesOrdering_enum`|11.3| | | | | | | |
-|`CU_ACCESS_PROPERTY_NORMAL`|11.0| | | | | | | |
-|`CU_ACCESS_PROPERTY_PERSISTING`|11.0| | | | | | | |
-|`CU_ACCESS_PROPERTY_STREAMING`|11.0| | | | | | | |
+|`CU_ACCESS_PROPERTY_NORMAL`|11.0| | |`hipAccessPropertyNormal`|5.2.0| | |5.2.0|
+|`CU_ACCESS_PROPERTY_PERSISTING`|11.0| | |`hipAccessPropertyPersisting`|5.2.0| | |5.2.0|
+|`CU_ACCESS_PROPERTY_STREAMING`|11.0| | |`hipAccessPropertyStreaming`|5.2.0| | |5.2.0|
 |`CU_AD_FORMAT_BC1_UNORM`|11.5| | | | | | | |
 |`CU_AD_FORMAT_BC1_UNORM_SRGB`|11.5| | | | | | | |
 |`CU_AD_FORMAT_BC2_UNORM`|11.5| | | | | | | |
@@ -631,8 +631,8 @@
 |`CU_JIT_TARGET_FROM_CUCONTEXT`| | | |`hipJitOptionTargetFromContext`|1.6.0| | | |
 |`CU_JIT_THREADS_PER_BLOCK`| | | |`hipJitOptionThreadsPerBlock`|1.6.0| | | |
 |`CU_JIT_WALL_TIME`| | | |`hipJitOptionWallTime`|1.6.0| | | |
-|`CU_KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW`|11.0| | | | | | | |
-|`CU_KERNEL_NODE_ATTRIBUTE_COOPERATIVE`|11.0| | | | | | | |
+|`CU_KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW`|11.0| | |`hipKernelNodeAttributeAccessPolicyWindow`|5.2.0| | |5.2.0|
+|`CU_KERNEL_NODE_ATTRIBUTE_COOPERATIVE`|11.0| | |`hipKernelNodeAttributeCooperative`|5.2.0| | |5.2.0|
 |`CU_LAUNCH_PARAM_BUFFER_POINTER`| | | |`HIP_LAUNCH_PARAM_BUFFER_POINTER`|1.6.0| | | |
 |`CU_LAUNCH_PARAM_BUFFER_SIZE`| | | |`HIP_LAUNCH_PARAM_BUFFER_SIZE`|1.6.0| | | |
 |`CU_LAUNCH_PARAM_END`| | | |`HIP_LAUNCH_PARAM_END`|1.6.0| | | |
@@ -834,8 +834,8 @@
 |`CU_USER_OBJECT_NO_DESTRUCTOR_SYNC`|11.3| | | | | | | |
 |`CUaccessPolicyWindow`|11.0| | | | | | | |
 |`CUaccessPolicyWindow_st`|11.0| | | | | | | |
-|`CUaccessProperty`|11.0| | | | | | | |
-|`CUaccessProperty_enum`|11.0| | | | | | | |
+|`CUaccessProperty`|11.0| | |`hipAccessProperty`|5.2.0| | |5.2.0|
+|`CUaccessProperty_enum`|11.0| | |`hipAccessProperty`|5.2.0| | |5.2.0|
 |`CUaddress_mode`| | | |`HIPaddress_mode`|3.5.0| | | |
 |`CUaddress_mode_enum`| | | |`HIPaddress_mode_enum`|3.5.0| | | |
 |`CUarray`| | | |`hipArray_t`|1.7.0| | | |
@@ -970,8 +970,8 @@
 |`CUjit_option_enum`| | | |`hipJitOption`|1.6.0| | | |
 |`CUjit_target`| | | | | | | | |
 |`CUjit_target_enum`| | | | | | | | |
-|`CUkernelNodeAttrID`|11.0| | | | | | | |
-|`CUkernelNodeAttrID_enum`|11.0| | | | | | | |
+|`CUkernelNodeAttrID`|11.0| | |`hipKernelNodeAttrID`|5.2.0| | |5.2.0|
+|`CUkernelNodeAttrID_enum`|11.0| | |`hipKernelNodeAttrID`|5.2.0| | |5.2.0|
 |`CUkernelNodeAttrValue`|11.0| | | | | | | |
 |`CUkernelNodeAttrValue_union`|11.0| | | | | | | |
 |`CUkernelNodeAttrValue_v1`|11.3| | | | | | | |
@@ -1079,10 +1079,10 @@
 |`CUuserObject_flags`|11.3| | | | | | | |
 |`CUuserObject_flags_enum`|11.3| | | | | | | |
 |`CUuserObject_st`|11.3| | | | | | | |
-|`CUuuid`| | | | | | | | |
-|`CUuuid_st`| | | | | | | | |
-|`GLenum`| | | |`GLenum`|5.1.0| | |5.1.0|
-|`GLuint`| | | |`GLuint`|5.1.0| | |5.1.0|
+|`CUuuid`| | | |`hipUUID`|5.2.0| | |5.2.0|
+|`CUuuid_st`| | | |`hipUUID_t`|5.2.0| | |5.2.0|
+|`GLenum`| | | |`GLenum`|5.1.0| | | |
+|`GLuint`| | | |`GLuint`|5.1.0| | | |
 |`__CUDACC__`| | | |`__HIPCC__`|1.6.0| | | |
 |`cudaError_enum`| | | |`hipError_t`|1.5.0| | | |
 
@@ -1626,7 +1626,7 @@
 |`cuGraphicsResourceGetMappedPointer_v2`| | | |`hipGraphicsResourceGetMappedPointer`|4.5.0| | | |
 |`cuGraphicsResourceSetMapFlags`| | | | | | | | |
 |`cuGraphicsResourceSetMapFlags_v2`| | | | | | | | |
-|`cuGraphicsSubResourceGetMappedArray`| | | |`hipGraphicsSubResourceGetMappedArray`|5.1.0| | |5.1.0|
+|`cuGraphicsSubResourceGetMappedArray`| | | |`hipGraphicsSubResourceGetMappedArray`|5.1.0| | | |
 |`cuGraphicsUnmapResources`| | | |`hipGraphicsUnmapResources`|4.5.0| | | |
 |`cuGraphicsUnregisterResource`| | | |`hipGraphicsUnregisterResource`|4.5.0| | | |
 
@@ -1665,7 +1665,7 @@
 |`cuGLUnmapBufferObjectAsync`| |9.2| | | | | | |
 |`cuGLUnregisterBufferObject`| |9.2| | | | | | |
 |`cuGraphicsGLRegisterBuffer`| | | |`hipGraphicsGLRegisterBuffer`|4.5.0| | | |
-|`cuGraphicsGLRegisterImage`| | | |`hipGraphicsGLRegisterImage`|5.1.0| | |5.1.0|
+|`cuGraphicsGLRegisterImage`| | | |`hipGraphicsGLRegisterImage`|5.1.0| | | |
 |`cuWGLGetDevice`| | | | | | | | |
 
 ## **33. VDPAU Interoperability**

@@ -737,5 +737,25 @@ int main() {
   cudaStreamUpdateCaptureDependenciesFlags StreamSetCaptureDependencies = cudaStreamSetCaptureDependencies;
 #endif
 
+#if CUDA_VERSION >= 11000
+  // CHECK: hipKernelNodeAttrID kernelNodeAttrID;
+  // CHECK-NEXT: hipKernelNodeAttrID KernelNodeAttributeAccessPolicyWindow = hipKernelNodeAttributeAccessPolicyWindow;
+  // CHECK-NEXT: hipKernelNodeAttrID KernelNodeAttributeCooperative = hipKernelNodeAttributeCooperative;
+  cudaKernelNodeAttrID kernelNodeAttrID;
+  cudaKernelNodeAttrID KernelNodeAttributeAccessPolicyWindow = cudaKernelNodeAttributeAccessPolicyWindow;
+  cudaKernelNodeAttrID KernelNodeAttributeCooperative = cudaKernelNodeAttributeCooperative;
+#endif
+
+#if CUDA_VERSION >= 11000
+  // CHECK: hipAccessProperty accessProperty;
+  // CHECK-NEXT: hipAccessProperty AccessPropertyNormal = hipAccessPropertyNormal;
+  // CHECK-NEXT: hipAccessProperty AccessPropertyStreaming = hipAccessPropertyStreaming;
+  // CHECK-NEXT: hipAccessProperty AccessPropertyPersisting = hipAccessPropertyPersisting;
+  cudaAccessProperty accessProperty;
+  cudaAccessProperty AccessPropertyNormal = cudaAccessPropertyNormal;
+  cudaAccessProperty AccessPropertyStreaming = cudaAccessPropertyStreaming;
+  cudaAccessProperty AccessPropertyPersisting = cudaAccessPropertyPersisting;
+#endif
+
   return 0;
 }

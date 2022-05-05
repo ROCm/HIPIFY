@@ -815,7 +815,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   // cudaGraphicsResourceSetMapFlags
   {"cuGraphicsResourceSetMapFlags_v2",                     {"hipGraphicsResourceSetMapFlags",                          "", CONV_GRAPHICS, API_DRIVER, 28, HIP_UNSUPPORTED}},
   // cudaGraphicsSubResourceGetMappedArray
-  {"cuGraphicsSubResourceGetMappedArray",                  {"hipGraphicsSubResourceGetMappedArray",                    "", CONV_GRAPHICS, API_DRIVER, 28, HIP_EXPERIMENTAL}},
+  {"cuGraphicsSubResourceGetMappedArray",                  {"hipGraphicsSubResourceGetMappedArray",                    "", CONV_GRAPHICS, API_DRIVER, 28}},
   // cudaGraphicsUnmapResources
   {"cuGraphicsUnmapResources",                             {"hipGraphicsUnmapResources",                               "", CONV_GRAPHICS, API_DRIVER, 28}},
   // cudaGraphicsUnregisterResource
@@ -843,7 +843,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   // cudaGraphicsGLRegisterBuffer
   {"cuGraphicsGLRegisterBuffer",                           {"hipGraphicsGLRegisterBuffer",                             "", CONV_OPENGL, API_DRIVER, 32}},
   // cudaGraphicsGLRegisterImage
-  {"cuGraphicsGLRegisterImage",                            {"hipGraphicsGLRegisterImage",                              "", CONV_OPENGL, API_DRIVER, 32, HIP_EXPERIMENTAL}},
+  {"cuGraphicsGLRegisterImage",                            {"hipGraphicsGLRegisterImage",                              "", CONV_OPENGL, API_DRIVER, 32}},
   // cudaWGLGetDevice
   {"cuWGLGetDevice",                                       {"hipWGLGetDevice",                                         "", CONV_OPENGL, API_DRIVER, 32, HIP_UNSUPPORTED}},
 
@@ -1358,8 +1358,8 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_FUNCTION_VER_MAP {
   {"hipStreamGetCaptureInfo_v2",                           {HIP_5000, HIP_0,    HIP_0   }},
   {"hipStreamIsCapturing",                                 {HIP_5000, HIP_0,    HIP_0   }},
   {"hipStreamUpdateCaptureDependencies",                   {HIP_5000, HIP_0,    HIP_0   }},
-  {"hipGraphicsGLRegisterImage",                           {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipGraphicsSubResourceGetMappedArray",                 {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipGraphicsGLRegisterImage",                           {HIP_5010, HIP_0,    HIP_0   }},
+  {"hipGraphicsSubResourceGetMappedArray",                 {HIP_5010, HIP_0,    HIP_0   }},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_DRIVER_API_SECTION_MAP {

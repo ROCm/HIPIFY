@@ -709,11 +709,25 @@ my %removed_funcs = (
 );
 
 my %experimental_funcs = (
-    "cudaGraphicsSubResourceGetMappedArray" => "5.1.0",
-    "cuGraphicsSubResourceGetMappedArray" => "5.1.0",
-    "cuGraphicsGLRegisterImage" => "5.1.0",
-    "GLuint" => "5.1.0",
-    "GLenum" => "5.1.0"
+    "cudaUUID_t" => "5.2.0",
+    "cudaKernelNodeAttributeCooperative" => "5.2.0",
+    "cudaKernelNodeAttributeAccessPolicyWindow" => "5.2.0",
+    "cudaKernelNodeAttrID" => "5.2.0",
+    "cudaAccessPropertyStreaming" => "5.2.0",
+    "cudaAccessPropertyPersisting" => "5.2.0",
+    "cudaAccessPropertyNormal" => "5.2.0",
+    "cudaAccessProperty" => "5.2.0",
+    "CUuuid_st" => "5.2.0",
+    "CUuuid" => "5.2.0",
+    "CUkernelNodeAttrID_enum" => "5.2.0",
+    "CUkernelNodeAttrID" => "5.2.0",
+    "CUaccessProperty_enum" => "5.2.0",
+    "CUaccessProperty" => "5.2.0",
+    "CU_KERNEL_NODE_ATTRIBUTE_COOPERATIVE" => "5.2.0",
+    "CU_KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW" => "5.2.0",
+    "CU_ACCESS_PROPERTY_STREAMING" => "5.2.0",
+    "CU_ACCESS_PROPERTY_PERSISTING" => "5.2.0",
+    "CU_ACCESS_PROPERTY_NORMAL" => "5.2.0"
 );
 
 $print_stats = 1 if $examine;
@@ -851,11 +865,25 @@ sub subst {
 }
 
 sub experimentalSubstitutions {
-    subst("cuGraphicsSubResourceGetMappedArray", "hipGraphicsSubResourceGetMappedArray", "graphics");
-    subst("cudaGraphicsSubResourceGetMappedArray", "hipGraphicsSubResourceGetMappedArray", "graphics");
-    subst("cuGraphicsGLRegisterImage", "hipGraphicsGLRegisterImage", "openGL");
-    subst("GLenum", "GLenum", "type");
-    subst("GLuint", "GLuint", "type");
+    subst("CUaccessProperty", "hipAccessProperty", "type");
+    subst("CUaccessProperty_enum", "hipAccessProperty", "type");
+    subst("CUkernelNodeAttrID", "hipKernelNodeAttrID", "type");
+    subst("CUkernelNodeAttrID_enum", "hipKernelNodeAttrID", "type");
+    subst("CUuuid", "hipUUID", "type");
+    subst("CUuuid_st", "hipUUID_t", "type");
+    subst("cudaAccessProperty", "hipAccessProperty", "type");
+    subst("cudaKernelNodeAttrID", "hipKernelNodeAttrID", "type");
+    subst("cudaUUID_t", "hipUUID", "type");
+    subst("CU_ACCESS_PROPERTY_NORMAL", "hipAccessPropertyNormal", "numeric_literal");
+    subst("CU_ACCESS_PROPERTY_PERSISTING", "hipAccessPropertyPersisting", "numeric_literal");
+    subst("CU_ACCESS_PROPERTY_STREAMING", "hipAccessPropertyStreaming", "numeric_literal");
+    subst("CU_KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW", "hipKernelNodeAttributeAccessPolicyWindow", "numeric_literal");
+    subst("CU_KERNEL_NODE_ATTRIBUTE_COOPERATIVE", "hipKernelNodeAttributeCooperative", "numeric_literal");
+    subst("cudaAccessPropertyNormal", "hipAccessPropertyNormal", "numeric_literal");
+    subst("cudaAccessPropertyPersisting", "hipAccessPropertyPersisting", "numeric_literal");
+    subst("cudaAccessPropertyStreaming", "hipAccessPropertyStreaming", "numeric_literal");
+    subst("cudaKernelNodeAttributeAccessPolicyWindow", "hipKernelNodeAttributeAccessPolicyWindow", "numeric_literal");
+    subst("cudaKernelNodeAttributeCooperative", "hipKernelNodeAttributeCooperative", "numeric_literal");
 }
 
 sub rocSubstitutions {
@@ -1716,10 +1744,12 @@ sub simpleSubstitutions {
     subst("cuGraphicsMapResources", "hipGraphicsMapResources", "graphics");
     subst("cuGraphicsResourceGetMappedPointer", "hipGraphicsResourceGetMappedPointer", "graphics");
     subst("cuGraphicsResourceGetMappedPointer_v2", "hipGraphicsResourceGetMappedPointer", "graphics");
+    subst("cuGraphicsSubResourceGetMappedArray", "hipGraphicsSubResourceGetMappedArray", "graphics");
     subst("cuGraphicsUnmapResources", "hipGraphicsUnmapResources", "graphics");
     subst("cuGraphicsUnregisterResource", "hipGraphicsUnregisterResource", "graphics");
     subst("cudaGraphicsMapResources", "hipGraphicsMapResources", "graphics");
     subst("cudaGraphicsResourceGetMappedPointer", "hipGraphicsResourceGetMappedPointer", "graphics");
+    subst("cudaGraphicsSubResourceGetMappedArray", "hipGraphicsSubResourceGetMappedArray", "graphics");
     subst("cudaGraphicsUnmapResources", "hipGraphicsUnmapResources", "graphics");
     subst("cudaGraphicsUnregisterResource", "hipGraphicsUnregisterResource", "graphics");
     subst("cuProfilerStart", "hipProfilerStart", "profiler");
@@ -1728,6 +1758,7 @@ sub simpleSubstitutions {
     subst("cudaProfilerStop", "hipProfilerStop", "profiler");
     subst("cuGLGetDevices", "hipGLGetDevices", "openGL");
     subst("cuGraphicsGLRegisterBuffer", "hipGraphicsGLRegisterBuffer", "openGL");
+    subst("cuGraphicsGLRegisterImage", "hipGraphicsGLRegisterImage", "openGL");
     subst("cudaGLGetDevices", "hipGLGetDevices", "openGL");
     subst("cudaGraphicsGLRegisterBuffer", "hipGraphicsGLRegisterBuffer", "openGL");
     subst("cudaGraphicsGLRegisterImage", "hipGraphicsGLRegisterImage", "openGL");
@@ -3042,6 +3073,8 @@ sub simpleSubstitutions {
     subst("CUtexObject_v1", "hipTextureObject_t", "type");
     subst("CUtexref", "hipTexRef", "type");
     subst("CUtexref_st", "textureReference", "type");
+    subst("GLenum", "GLenum", "type");
+    subst("GLuint", "GLuint", "type");
     subst("bsric02Info_t", "bsric02Info_t", "type");
     subst("bsrilu02Info_t", "bsrilu02Info_t", "type");
     subst("bsrsm2Info", "bsrsm2Info", "type");
@@ -5619,7 +5652,6 @@ sub warnUnsupportedFunctions {
         "cudaUserObjectNoDestructorSync",
         "cudaUserObjectFlags",
         "cudaUserObjectCreate",
-        "cudaUUID_t",
         "cudaThreadSetLimit",
         "cudaThreadGetLimit",
         "cudaThreadExchangeStreamCaptureMode",
@@ -5713,10 +5745,7 @@ sub warnUnsupportedFunctions {
         "cudaLimitDevRuntimePendingLaunchCount",
         "cudaLaunchHostFunc",
         "cudaKeyValuePair",
-        "cudaKernelNodeAttributeCooperative",
-        "cudaKernelNodeAttributeAccessPolicyWindow",
         "cudaKernelNodeAttrValue",
-        "cudaKernelNodeAttrID",
         "cudaHostRegisterReadOnly",
         "cudaGraphicsVDPAURegisterVideoSurface",
         "cudaGraphicsVDPAURegisterOutputSurface",
@@ -6124,10 +6153,6 @@ sub warnUnsupportedFunctions {
         "cudaArrayGetInfo",
         "cudaArrayDeferredMapping",
         "cudaArrayColorAttachment",
-        "cudaAccessPropertyStreaming",
-        "cudaAccessPropertyPersisting",
-        "cudaAccessPropertyNormal",
-        "cudaAccessProperty",
         "cudaAccessPolicyWindow",
         "cuWGLGetDevice",
         "cuVDPAUGetDevice",
@@ -6368,8 +6393,6 @@ sub warnUnsupportedFunctions {
         "MINOR_VERSION",
         "MAX_CUFFT_ERROR",
         "MAJOR_VERSION",
-        "CUuuid_st",
-        "CUuuid",
         "CUuserObject_st",
         "CUuserObject_flags_enum",
         "CUuserObject_flags",
@@ -6440,8 +6463,6 @@ sub warnUnsupportedFunctions {
         "CUkernelNodeAttrValue_v1",
         "CUkernelNodeAttrValue_union",
         "CUkernelNodeAttrValue",
-        "CUkernelNodeAttrID_enum",
-        "CUkernelNodeAttrID",
         "CUjit_target_enum",
         "CUjit_target",
         "CUjit_fallback_enum",
@@ -6520,8 +6541,6 @@ sub warnUnsupportedFunctions {
         "CUarrayMapInfo_v1",
         "CUarrayMapInfo_st",
         "CUarrayMapInfo",
-        "CUaccessProperty_enum",
-        "CUaccessProperty",
         "CUaccessPolicyWindow_st",
         "CUaccessPolicyWindow",
         "CU_USER_OBJECT_NO_DESTRUCTOR_SYNC",
@@ -6610,8 +6629,6 @@ sub warnUnsupportedFunctions {
         "CU_LIMIT_MAX",
         "CU_LIMIT_DEV_RUNTIME_SYNC_DEPTH",
         "CU_LIMIT_DEV_RUNTIME_PENDING_LAUNCH_COUNT",
-        "CU_KERNEL_NODE_ATTRIBUTE_COOPERATIVE",
-        "CU_KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW",
         "CU_JIT_PREC_SQRT",
         "CU_JIT_PREC_DIV",
         "CU_JIT_NUM_INPUT_TYPES",
@@ -6848,9 +6865,6 @@ sub warnUnsupportedFunctions {
         "CU_AD_FORMAT_BC2_UNORM",
         "CU_AD_FORMAT_BC1_UNORM_SRGB",
         "CU_AD_FORMAT_BC1_UNORM",
-        "CU_ACCESS_PROPERTY_STREAMING",
-        "CU_ACCESS_PROPERTY_PERSISTING",
-        "CU_ACCESS_PROPERTY_NORMAL",
         "CUSPARSE_VER_PATCH",
         "CUSPARSE_VER_MINOR",
         "CUSPARSE_VER_MAJOR",
