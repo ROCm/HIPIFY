@@ -710,21 +710,33 @@ my %removed_funcs = (
 
 my %experimental_funcs = (
     "cudaUUID_t" => "5.2.0",
+    "cudaMemPool_t" => "5.2.0",
     "cudaKernelNodeAttributeCooperative" => "5.2.0",
     "cudaKernelNodeAttributeAccessPolicyWindow" => "5.2.0",
+    "cudaKernelNodeAttrValue" => "5.2.0",
     "cudaKernelNodeAttrID" => "5.2.0",
+    "cudaDevAttrMemoryPoolsSupported" => "5.2.0",
     "cudaAccessPropertyStreaming" => "5.2.0",
     "cudaAccessPropertyPersisting" => "5.2.0",
     "cudaAccessPropertyNormal" => "5.2.0",
     "cudaAccessProperty" => "5.2.0",
+    "cudaAccessPolicyWindow" => "5.2.0",
     "CUuuid_st" => "5.2.0",
     "CUuuid" => "5.2.0",
+    "CUmemoryPool" => "5.2.0",
+    "CUmemPoolHandle_st" => "5.2.0",
+    "CUkernelNodeAttrValue_v1" => "5.2.0",
+    "CUkernelNodeAttrValue_union" => "5.2.0",
+    "CUkernelNodeAttrValue" => "5.2.0",
     "CUkernelNodeAttrID_enum" => "5.2.0",
     "CUkernelNodeAttrID" => "5.2.0",
     "CUaccessProperty_enum" => "5.2.0",
     "CUaccessProperty" => "5.2.0",
+    "CUaccessPolicyWindow_st" => "5.2.0",
+    "CUaccessPolicyWindow" => "5.2.0",
     "CU_KERNEL_NODE_ATTRIBUTE_COOPERATIVE" => "5.2.0",
     "CU_KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW" => "5.2.0",
+    "CU_DEVICE_ATTRIBUTE_MEMORY_POOLS_SUPPORTED" => "5.2.0",
     "CU_ACCESS_PROPERTY_STREAMING" => "5.2.0",
     "CU_ACCESS_PROPERTY_PERSISTING" => "5.2.0",
     "CU_ACCESS_PROPERTY_NORMAL" => "5.2.0"
@@ -865,23 +877,35 @@ sub subst {
 }
 
 sub experimentalSubstitutions {
+    subst("CUaccessPolicyWindow", "hipAccessPolicyWindow", "type");
+    subst("CUaccessPolicyWindow_st", "hipAccessPolicyWindow", "type");
     subst("CUaccessProperty", "hipAccessProperty", "type");
     subst("CUaccessProperty_enum", "hipAccessProperty", "type");
     subst("CUkernelNodeAttrID", "hipKernelNodeAttrID", "type");
     subst("CUkernelNodeAttrID_enum", "hipKernelNodeAttrID", "type");
+    subst("CUkernelNodeAttrValue", "hipKernelNodeAttrValue", "type");
+    subst("CUkernelNodeAttrValue_union", "hipKernelNodeAttrValue", "type");
+    subst("CUkernelNodeAttrValue_v1", "hipKernelNodeAttrValue", "type");
+    subst("CUmemPoolHandle_st", "ihipMemPoolHandle_t", "type");
+    subst("CUmemoryPool", "hipMemPool_t", "type");
     subst("CUuuid", "hipUUID", "type");
     subst("CUuuid_st", "hipUUID_t", "type");
+    subst("cudaAccessPolicyWindow", "hipAccessPolicyWindow", "type");
     subst("cudaAccessProperty", "hipAccessProperty", "type");
     subst("cudaKernelNodeAttrID", "hipKernelNodeAttrID", "type");
+    subst("cudaKernelNodeAttrValue", "hipKernelNodeAttrValue", "type");
+    subst("cudaMemPool_t", "hipMemPool_t", "type");
     subst("cudaUUID_t", "hipUUID", "type");
     subst("CU_ACCESS_PROPERTY_NORMAL", "hipAccessPropertyNormal", "numeric_literal");
     subst("CU_ACCESS_PROPERTY_PERSISTING", "hipAccessPropertyPersisting", "numeric_literal");
     subst("CU_ACCESS_PROPERTY_STREAMING", "hipAccessPropertyStreaming", "numeric_literal");
+    subst("CU_DEVICE_ATTRIBUTE_MEMORY_POOLS_SUPPORTED", "hipDeviceAttributeMemoryPoolsSupported", "numeric_literal");
     subst("CU_KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW", "hipKernelNodeAttributeAccessPolicyWindow", "numeric_literal");
     subst("CU_KERNEL_NODE_ATTRIBUTE_COOPERATIVE", "hipKernelNodeAttributeCooperative", "numeric_literal");
     subst("cudaAccessPropertyNormal", "hipAccessPropertyNormal", "numeric_literal");
     subst("cudaAccessPropertyPersisting", "hipAccessPropertyPersisting", "numeric_literal");
     subst("cudaAccessPropertyStreaming", "hipAccessPropertyStreaming", "numeric_literal");
+    subst("cudaDevAttrMemoryPoolsSupported", "hipDeviceAttributeMemoryPoolsSupported", "numeric_literal");
     subst("cudaKernelNodeAttributeAccessPolicyWindow", "hipKernelNodeAttributeAccessPolicyWindow", "numeric_literal");
     subst("cudaKernelNodeAttributeCooperative", "hipKernelNodeAttributeCooperative", "numeric_literal");
 }
@@ -5694,7 +5718,6 @@ sub warnUnsupportedFunctions {
         "cudaMemcpy3DPeerAsync",
         "cudaMemcpy3DPeer",
         "cudaMemcpy2DArrayToArray",
-        "cudaMemPool_t",
         "cudaMemPoolTrimTo",
         "cudaMemPoolSetAttribute",
         "cudaMemPoolSetAccess",
@@ -5745,7 +5768,6 @@ sub warnUnsupportedFunctions {
         "cudaLimitDevRuntimePendingLaunchCount",
         "cudaLaunchHostFunc",
         "cudaKeyValuePair",
-        "cudaKernelNodeAttrValue",
         "cudaHostRegisterReadOnly",
         "cudaGraphicsVDPAURegisterVideoSurface",
         "cudaGraphicsVDPAURegisterOutputSurface",
@@ -6032,7 +6054,6 @@ sub warnUnsupportedFunctions {
         "cudaDevAttrReservedSharedMemoryPerBlock",
         "cudaDevAttrReserved93",
         "cudaDevAttrReserved92",
-        "cudaDevAttrMemoryPoolsSupported",
         "cudaDevAttrMemoryPoolSupportedHandleTypes",
         "cudaDevAttrMaxTimelineSemaphoreInteropSupported",
         "cudaDevAttrMaxTextureCubemapLayeredLayers",
@@ -6153,7 +6174,6 @@ sub warnUnsupportedFunctions {
         "cudaArrayGetInfo",
         "cudaArrayDeferredMapping",
         "cudaArrayColorAttachment",
-        "cudaAccessPolicyWindow",
         "cuWGLGetDevice",
         "cuVDPAUGetDevice",
         "cuVDPAUCtxCreate",
@@ -6423,7 +6443,6 @@ sub warnUnsupportedFunctions {
         "CUshared_carveout",
         "CUoccupancy_flags_enum",
         "CUoccupancy_flags",
-        "CUmemoryPool",
         "CUmemPool_attribute_enum",
         "CUmemPool_attribute",
         "CUmemPoolPtrExportData_v1",
@@ -6432,7 +6451,6 @@ sub warnUnsupportedFunctions {
         "CUmemPoolProps_v1",
         "CUmemPoolProps_st",
         "CUmemPoolProps",
-        "CUmemPoolHandle_st",
         "CUmemOperationType_enum",
         "CUmemOperationType",
         "CUmemLocation_v1",
@@ -6460,9 +6478,6 @@ sub warnUnsupportedFunctions {
         "CUmemAccessDesc_v1",
         "CUmemAccessDesc_st",
         "CUmemAccessDesc",
-        "CUkernelNodeAttrValue_v1",
-        "CUkernelNodeAttrValue_union",
-        "CUkernelNodeAttrValue",
         "CUjit_target_enum",
         "CUjit_target",
         "CUjit_fallback_enum",
@@ -6541,8 +6556,6 @@ sub warnUnsupportedFunctions {
         "CUarrayMapInfo_v1",
         "CUarrayMapInfo_st",
         "CUarrayMapInfo",
-        "CUaccessPolicyWindow_st",
-        "CUaccessPolicyWindow",
         "CU_USER_OBJECT_NO_DESTRUCTOR_SYNC",
         "CU_TRSF_SEAMLESS_CUBEMAP",
         "CU_TRSF_DISABLE_TRILINEAR_OPTIMIZATION",
@@ -6784,7 +6797,6 @@ sub warnUnsupportedFunctions {
         "CU_DEVICE_ATTRIBUTE_RESERVED_SHARED_MEMORY_PER_BLOCK",
         "CU_DEVICE_ATTRIBUTE_READ_ONLY_HOST_REGISTER_SUPPORTED",
         "CU_DEVICE_ATTRIBUTE_MEMPOOL_SUPPORTED_HANDLE_TYPES",
-        "CU_DEVICE_ATTRIBUTE_MEMORY_POOLS_SUPPORTED",
         "CU_DEVICE_ATTRIBUTE_MAX_PERSISTING_L2_CACHE_SIZE",
         "CU_DEVICE_ATTRIBUTE_MAX_ACCESS_POLICY_WINDOW_SIZE",
         "CU_DEVICE_ATTRIBUTE_MAXIMUM_TEXTURECUBEMAP_LAYERED_LAYERS",

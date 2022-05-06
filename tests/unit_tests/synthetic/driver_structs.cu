@@ -226,5 +226,19 @@ int main() {
   // CHECK: hipUUID_t uuid_st;
   CUuuid_st uuid_st;
 
+#if CUDA_VERSION >= 11000
+  // CHECK: hipAccessPolicyWindow accessPolicyWindow_st;
+  // CHECK-NEXT: hipAccessPolicyWindow accessPolicyWindow;
+  CUaccessPolicyWindow_st accessPolicyWindow_st;
+  CUaccessPolicyWindow accessPolicyWindow;
+#endif
+
+#if CUDA_VERSION >= 11020
+  // CHECK: ihipMemPoolHandle_t* memPoolHandle_st;
+  // CHECK-NEXT: hipMemPool_t memPool_t;
+  CUmemPoolHandle_st* memPoolHandle_st;
+  CUmemoryPool memPool_t;
+#endif
+
   return 0;
 }

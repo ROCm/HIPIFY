@@ -546,7 +546,7 @@ Unsupported
 |`MAJOR_VERSION`|8.0| | | | | | | |
 |`MINOR_VERSION`|8.0| | | | | | | |
 |`PATCH_LEVEL`|8.0| | | | | | | |
-|`cudaAccessPolicyWindow`|11.0| | | | | | | |
+|`cudaAccessPolicyWindow`|11.0| | |`hipAccessPolicyWindow`|5.2.0| | |5.2.0|
 |`cudaAccessProperty`|11.0| | |`hipAccessProperty`|5.2.0| | |5.2.0|
 |`cudaAccessPropertyNormal`|11.0| | |`hipAccessPropertyNormal`|5.2.0| | |5.2.0|
 |`cudaAccessPropertyPersisting`|11.0| | |`hipAccessPropertyPersisting`|5.2.0| | |5.2.0|
@@ -736,8 +736,8 @@ Unsupported
 |`cudaDevAttrMaxTimelineSemaphoreInteropSupported`|11.2|11.5| | | | | | |
 |`cudaDevAttrMemoryClockRate`| | | |`hipDeviceAttributeMemoryClockRate`|1.6.0| | | |
 |`cudaDevAttrMemoryPoolSupportedHandleTypes`|11.3| | | | | | | |
-|`cudaDevAttrMemoryPoolsSupported`|11.2| | | | | | | |
-|`cudaDevAttrMultiGpuBoardGroupID`| | | |`hipDeviceAttributeMultiGpuBoardGroupID`| | | | |
+|`cudaDevAttrMemoryPoolsSupported`|11.2| | |`hipDeviceAttributeMemoryPoolsSupported`|5.2.0| | |5.2.0|
+|`cudaDevAttrMultiGpuBoardGroupID`| | | |`hipDeviceAttributeMultiGpuBoardGroupID`|5.0.0| | | |
 |`cudaDevAttrMultiProcessorCount`| | | |`hipDeviceAttributeMultiprocessorCount`|1.6.0| | | |
 |`cudaDevAttrPageableMemoryAccess`|8.0| | |`hipDeviceAttributePageableMemoryAccess`|3.10.0| | | |
 |`cudaDevAttrPageableMemoryAccessUsesHostPageTables`|9.2| | |`hipDeviceAttributePageableMemoryAccessUsesHostPageTables`|3.10.0| | | |
@@ -1150,7 +1150,7 @@ Unsupported
 |`cudaIpcMemHandle_t`| | | |`hipIpcMemHandle_t`|1.6.0| | | |
 |`cudaIpcMemLazyEnablePeerAccess`| | | |`hipIpcMemLazyEnablePeerAccess`|1.6.0| | | |
 |`cudaKernelNodeAttrID`|11.0| | |`hipKernelNodeAttrID`|5.2.0| | |5.2.0|
-|`cudaKernelNodeAttrValue`|11.0| | | | | | | |
+|`cudaKernelNodeAttrValue`|11.0| | |`hipKernelNodeAttrValue`|5.2.0| | |5.2.0|
 |`cudaKernelNodeAttributeAccessPolicyWindow`|11.0| | |`hipKernelNodeAttributeAccessPolicyWindow`|5.2.0| | |5.2.0|
 |`cudaKernelNodeAttributeCooperative`|11.0| | |`hipKernelNodeAttributeCooperative`|5.2.0| | |5.2.0|
 |`cudaKernelNodeParams`|10.0| | |`hipKernelNodeParams`|4.3.0| | | |
@@ -1203,7 +1203,7 @@ Unsupported
 |`cudaMemPoolReuseAllowInternalDependencies`|11.2| | | | | | | |
 |`cudaMemPoolReuseAllowOpportunistic`|11.2| | | | | | | |
 |`cudaMemPoolReuseFollowEventDependencies`|11.2| | | | | | | |
-|`cudaMemPool_t`|11.2| | | | | | | |
+|`cudaMemPool_t`|11.2| | |`hipMemPool_t`|5.2.0| | |5.2.0|
 |`cudaMemRangeAttribute`|8.0| | |`hipMemRangeAttribute`|3.7.0| | | |
 |`cudaMemRangeAttributeAccessedBy`|8.0| | |`hipMemRangeAttributeAccessedBy`|3.7.0| | | |
 |`cudaMemRangeAttributeLastPrefetchLocation`|8.0| | |`hipMemRangeAttributeLastPrefetchLocation`|3.7.0| | | |
