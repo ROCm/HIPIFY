@@ -185,7 +185,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaFunction_t",                                                   {"hipFunction_t",                                            "", CONV_TYPE, API_RUNTIME}},
 
   // CUaccessPolicyWindow_st
-  {"cudaAccessPolicyWindow",                                           {"hipAccessPolicyWindow",                                    "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+  {"cudaAccessPolicyWindow",                                           {"hipAccessPolicyWindow",                                    "", CONV_TYPE, API_RUNTIME, 36, HIP_EXPERIMENTAL}},
 
   // CUDA_ARRAY_SPARSE_PROPERTIES_st
   {"cudaArraySparseProperties",                                        {"hipArraySparseProperties",                                 "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
@@ -220,7 +220,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaStreamAttrValue",                                              {"hipStreamAttrValue",                                       "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
 
   // CUkernelNodeAttrValue
-  {"cudaKernelNodeAttrValue",                                          {"hipKernelNodeAttrValue",                                   "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+  {"cudaKernelNodeAttrValue",                                          {"hipKernelNodeAttrValue",                                   "", CONV_TYPE, API_RUNTIME, 36, HIP_EXPERIMENTAL}},
 
   // 3. Enums
 
@@ -534,7 +534,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CU_DEVICE_ATTRIBUTE_TIMELINE_SEMAPHORE_INTEROP_SUPPORTED
   {"cudaDevAttrTimelineSemaphoreInteropSupported",                     {"hipDevAttrTimelineSemaphoreInteropSupported",              "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 114
   // CU_DEVICE_ATTRIBUTE_MEMORY_POOLS_SUPPORTED
-  {"cudaDevAttrMemoryPoolsSupported",                                  {"hipDeviceAttributeMemoryPoolsSupported",                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 115
+  {"cudaDevAttrMemoryPoolsSupported",                                  {"hipDeviceAttributeMemoryPoolsSupported",                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 115
   // CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_SUPPORTED
   {"cudaDevAttrGPUDirectRDMASupported",                                {"hipDeviceAttributeGPUDirectRDMASupported",                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 116
   // CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_FLUSH_WRITES_OPTIONS
@@ -1696,7 +1696,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaUUID_t",                                                       {"hipUUID",                                                  "", CONV_TYPE, API_RUNTIME, 36, HIP_EXPERIMENTAL}},
 
   // CUmemoryPool
-  {"cudaMemPool_t",                                                    {"hipMemoryPool",                                            "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+  {"cudaMemPool_t",                                                    {"hipMemPool_t",                                             "", CONV_TYPE, API_RUNTIME, 36, HIP_EXPERIMENTAL}},
 
   // CUuserObject
   {"cudaUserObject_t",                                                 {"hipUserObject_t",                                          "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
@@ -2433,4 +2433,8 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {
   {"hipAccessPropertyNormal",                                          {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipAccessPropertyStreaming",                                       {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipAccessPropertyPersisting",                                      {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipAccessPolicyWindow",                                            {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipKernelNodeAttrValue",                                           {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipDeviceAttributeMemoryPoolsSupported",                           {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemPool_t",                                                     {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
 };

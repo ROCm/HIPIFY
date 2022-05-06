@@ -164,5 +164,15 @@ int main() {
   // CHECK: hipUUID_t uuid_st;
   CUuuid_st uuid_st;
 
+#if CUDA_VERSION >= 11000
+  // CHECK: hipAccessPolicyWindow AccessPolicyWindow;
+  cudaAccessPolicyWindow AccessPolicyWindow;
+#endif
+
+#if CUDA_VERSION >= 11020
+  // CHECK: hipMemPool_t memPool_t;
+  cudaMemPool_t memPool_t;
+#endif
+
   return 0;
 }

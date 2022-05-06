@@ -373,7 +373,7 @@
 |`CU_DEVICE_ATTRIBUTE_MAX_THREADS_PER_BLOCK`| | | |`hipDeviceAttributeMaxThreadsPerBlock`|1.6.0| | | |
 |`CU_DEVICE_ATTRIBUTE_MAX_THREADS_PER_MULTIPROCESSOR`| | | |`hipDeviceAttributeMaxThreadsPerMultiProcessor`|1.6.0| | | |
 |`CU_DEVICE_ATTRIBUTE_MEMORY_CLOCK_RATE`| | | |`hipDeviceAttributeMemoryClockRate`|1.6.0| | | |
-|`CU_DEVICE_ATTRIBUTE_MEMORY_POOLS_SUPPORTED`|11.2| | | | | | | |
+|`CU_DEVICE_ATTRIBUTE_MEMORY_POOLS_SUPPORTED`|11.2| | |`hipDeviceAttributeMemoryPoolsSupported`|5.2.0| | |5.2.0|
 |`CU_DEVICE_ATTRIBUTE_MEMPOOL_SUPPORTED_HANDLE_TYPES`|11.3| | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_MULTIPROCESSOR_COUNT`| | | |`hipDeviceAttributeMultiprocessorCount`|1.6.0| | | |
 |`CU_DEVICE_ATTRIBUTE_MULTI_GPU_BOARD`| | | |`hipDeviceAttributeIsMultiGpuBoard`|1.6.0| | | |
@@ -832,8 +832,8 @@
 |`CU_TR_FILTER_MODE_LINEAR`| | | |`HIP_TR_FILTER_MODE_LINEAR`|3.5.0| | | |
 |`CU_TR_FILTER_MODE_POINT`| | | |`HIP_TR_FILTER_MODE_POINT`|3.5.0| | | |
 |`CU_USER_OBJECT_NO_DESTRUCTOR_SYNC`|11.3| | | | | | | |
-|`CUaccessPolicyWindow`|11.0| | | | | | | |
-|`CUaccessPolicyWindow_st`|11.0| | | | | | | |
+|`CUaccessPolicyWindow`|11.0| | |`hipAccessPolicyWindow`|5.2.0| | |5.2.0|
+|`CUaccessPolicyWindow_st`|11.0| | |`hipAccessPolicyWindow`|5.2.0| | |5.2.0|
 |`CUaccessProperty`|11.0| | |`hipAccessProperty`|5.2.0| | |5.2.0|
 |`CUaccessProperty_enum`|11.0| | |`hipAccessProperty`|5.2.0| | |5.2.0|
 |`CUaddress_mode`| | | |`HIPaddress_mode`|3.5.0| | | |
@@ -972,9 +972,9 @@
 |`CUjit_target_enum`| | | | | | | | |
 |`CUkernelNodeAttrID`|11.0| | |`hipKernelNodeAttrID`|5.2.0| | |5.2.0|
 |`CUkernelNodeAttrID_enum`|11.0| | |`hipKernelNodeAttrID`|5.2.0| | |5.2.0|
-|`CUkernelNodeAttrValue`|11.0| | | | | | | |
-|`CUkernelNodeAttrValue_union`|11.0| | | | | | | |
-|`CUkernelNodeAttrValue_v1`|11.3| | | | | | | |
+|`CUkernelNodeAttrValue`|11.0| | |`hipKernelNodeAttrValue`|5.2.0| | |5.2.0|
+|`CUkernelNodeAttrValue_union`|11.0| | |`hipKernelNodeAttrValue`|5.2.0| | |5.2.0|
+|`CUkernelNodeAttrValue_v1`|11.3| | |`hipKernelNodeAttrValue`|5.2.0| | |5.2.0|
 |`CUlimit`| | | |`hipLimit_t`|1.6.0| | | |
 |`CUlimit_enum`| | | |`hipLimit_t`|1.6.0| | | |
 |`CUmemAccessDesc`|10.2| | | | | | | |
@@ -1004,7 +1004,7 @@
 |`CUmemLocation_v1`|11.3| | | | | | | |
 |`CUmemOperationType`|11.1| | | | | | | |
 |`CUmemOperationType_enum`|11.1| | | | | | | |
-|`CUmemPoolHandle_st`|11.2| | | | | | | |
+|`CUmemPoolHandle_st`|11.2| | |`ihipMemPoolHandle_t`|5.2.0| | |5.2.0|
 |`CUmemPoolProps`|11.2| | | | | | | |
 |`CUmemPoolProps_st`|11.2| | | | | | | |
 |`CUmemPoolProps_v1`|11.3| | | | | | | |
@@ -1017,7 +1017,7 @@
 |`CUmem_advise_enum`|8.0| | |`hipMemoryAdvise`|3.7.0| | | |
 |`CUmem_range_attribute`|8.0| | |`hipMemRangeAttribute`|3.7.0| | | |
 |`CUmem_range_attribute_enum`|8.0| | |`hipMemRangeAttribute`|3.7.0| | | |
-|`CUmemoryPool`|11.2| | | | | | | |
+|`CUmemoryPool`|11.2| | |`hipMemPool_t`|5.2.0| | |5.2.0|
 |`CUmemorytype`| | | |`hipMemoryType`|1.6.0| | | |
 |`CUmemorytype_enum`| | | |`hipMemoryType`|1.6.0| | | |
 |`CUmipmappedArray`| | | |`hipMipmappedArray_t`|1.7.0| | | |

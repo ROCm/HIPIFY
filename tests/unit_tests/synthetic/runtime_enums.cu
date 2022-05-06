@@ -225,6 +225,10 @@ int main() {
   // CHECK: hipDeviceAttribute_t DevAttrMaxBlocksPerMultiprocessor = hipDeviceAttributeMaxBlocksPerMultiprocessor;
   cudaDeviceAttr DevAttrMaxBlocksPerMultiprocessor = cudaDevAttrMaxBlocksPerMultiprocessor;
 #endif
+#if CUDA_VERSION >= 11020
+  // CHECK: hipDeviceAttribute_t DevAttrMemoryPoolsSupported = hipDeviceAttributeMemoryPoolsSupported;
+  cudaDeviceAttr DevAttrMemoryPoolsSupported = cudaDevAttrMemoryPoolsSupported;
+#endif
 
 #if CUDA_VERSION > 7050
   // CHECK: hipDeviceP2PAttr DeviceP2PAttr;
