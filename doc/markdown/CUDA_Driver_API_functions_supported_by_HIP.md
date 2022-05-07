@@ -655,14 +655,14 @@
 |`CU_MEMORYTYPE_DEVICE`| | | |`hipMemoryTypeDevice`|1.6.0| | | |
 |`CU_MEMORYTYPE_HOST`| | | |`hipMemoryTypeHost`|1.6.0| | | |
 |`CU_MEMORYTYPE_UNIFIED`| | | |`hipMemoryTypeUnified`|1.6.0| | | |
-|`CU_MEMPOOL_ATTR_RELEASE_THRESHOLD`|11.2| | | | | | | |
-|`CU_MEMPOOL_ATTR_RESERVED_MEM_CURRENT`|11.3| | | | | | | |
-|`CU_MEMPOOL_ATTR_RESERVED_MEM_HIGH`|11.3| | | | | | | |
-|`CU_MEMPOOL_ATTR_REUSE_ALLOW_INTERNAL_DEPENDENCIES`|11.2| | | | | | | |
-|`CU_MEMPOOL_ATTR_REUSE_ALLOW_OPPORTUNISTIC`|11.2| | | | | | | |
-|`CU_MEMPOOL_ATTR_REUSE_FOLLOW_EVENT_DEPENDENCIES`|11.2| | | | | | | |
-|`CU_MEMPOOL_ATTR_USED_MEM_CURRENT`|11.3| | | | | | | |
-|`CU_MEMPOOL_ATTR_USED_MEM_HIGH`|11.3| | | | | | | |
+|`CU_MEMPOOL_ATTR_RELEASE_THRESHOLD`|11.2| | |`hipMemPoolAttrReleaseThreshold`|5.2.0| | |5.2.0|
+|`CU_MEMPOOL_ATTR_RESERVED_MEM_CURRENT`|11.3| | |`hipMemPoolAttrReservedMemCurrent`|5.2.0| | |5.2.0|
+|`CU_MEMPOOL_ATTR_RESERVED_MEM_HIGH`|11.3| | |`hipMemPoolAttrReservedMemHigh`|5.2.0| | |5.2.0|
+|`CU_MEMPOOL_ATTR_REUSE_ALLOW_INTERNAL_DEPENDENCIES`|11.2| | |`hipMemPoolReuseAllowInternalDependencies`|5.2.0| | |5.2.0|
+|`CU_MEMPOOL_ATTR_REUSE_ALLOW_OPPORTUNISTIC`|11.2| | |`hipMemPoolReuseAllowOpportunistic`|5.2.0| | |5.2.0|
+|`CU_MEMPOOL_ATTR_REUSE_FOLLOW_EVENT_DEPENDENCIES`|11.2| | |`hipMemPoolReuseFollowEventDependencies`|5.2.0| | |5.2.0|
+|`CU_MEMPOOL_ATTR_USED_MEM_CURRENT`|11.3| | |`hipMemPoolAttrUsedMemCurrent`|5.2.0| | |5.2.0|
+|`CU_MEMPOOL_ATTR_USED_MEM_HIGH`|11.3| | |`hipMemPoolAttrUsedMemHigh`|5.2.0| | |5.2.0|
 |`CU_MEM_ACCESS_FLAGS_PROT_MAX`|10.2| | | | | | | |
 |`CU_MEM_ACCESS_FLAGS_PROT_NONE`|10.2| | | | | | | |
 |`CU_MEM_ACCESS_FLAGS_PROT_READ`|10.2| | | | | | | |
@@ -688,8 +688,8 @@
 |`CU_MEM_HANDLE_TYPE_POSIX_FILE_DESCRIPTOR`|10.2| | | | | | | |
 |`CU_MEM_HANDLE_TYPE_WIN32`|10.2| | | | | | | |
 |`CU_MEM_HANDLE_TYPE_WIN32_KMT`|10.2| | | | | | | |
-|`CU_MEM_LOCATION_TYPE_DEVICE`|10.2| | | | | | | |
-|`CU_MEM_LOCATION_TYPE_INVALID`|10.2| | | | | | | |
+|`CU_MEM_LOCATION_TYPE_DEVICE`|10.2| | |`hipMemLocationTypeDevice`|5.2.0| | |5.2.0|
+|`CU_MEM_LOCATION_TYPE_INVALID`|10.2| | |`hipMemLocationTypeInvalid`|5.2.0| | |5.2.0|
 |`CU_MEM_LOCATION_TYPE_MAX`|10.2| | | | | | | |
 |`CU_MEM_OPERATION_TYPE_MAP`|11.1| | | | | | | |
 |`CU_MEM_OPERATION_TYPE_UNMAP`|11.1| | | | | | | |
@@ -998,8 +998,8 @@
 |`CUmemHandleType`|11.1| | | | | | | |
 |`CUmemHandleType_enum`|11.1| | | | | | | |
 |`CUmemLocation`|10.2| | | | | | | |
-|`CUmemLocationType`|10.2| | | | | | | |
-|`CUmemLocationType_enum`|10.2| | | | | | | |
+|`CUmemLocationType`|10.2| | |`hipMemLocationType`|5.2.0| | |5.2.0|
+|`CUmemLocationType_enum`|10.2| | |`hipMemLocationType`|5.2.0| | |5.2.0|
 |`CUmemLocation_st`|10.2| | | | | | | |
 |`CUmemLocation_v1`|11.3| | | | | | | |
 |`CUmemOperationType`|11.1| | | | | | | |
@@ -1011,8 +1011,8 @@
 |`CUmemPoolPtrExportData`|11.2| | | | | | | |
 |`CUmemPoolPtrExportData_st`|11.2| | | | | | | |
 |`CUmemPoolPtrExportData_v1`|11.3| | | | | | | |
-|`CUmemPool_attribute`|11.2| | | | | | | |
-|`CUmemPool_attribute_enum`|11.2| | | | | | | |
+|`CUmemPool_attribute`|11.2| | |`hipMemPoolAttr`|5.2.0| | |5.2.0|
+|`CUmemPool_attribute_enum`|11.2| | |`hipMemPoolAttr`|5.2.0| | |5.2.0|
 |`CUmem_advise`|8.0| | |`hipMemoryAdvise`|3.7.0| | | |
 |`CUmem_advise_enum`|8.0| | |`hipMemoryAdvise`|3.7.0| | | |
 |`CUmem_range_attribute`|8.0| | |`hipMemRangeAttribute`|3.7.0| | | |

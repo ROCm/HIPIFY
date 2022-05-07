@@ -761,5 +761,38 @@ int main() {
   cudaAccessProperty AccessPropertyPersisting = cudaAccessPropertyPersisting;
 #endif
 
+#if CUDA_VERSION >= 11020
+  // CHECK: hipMemPoolAttr MemPoolAttr;
+  // CHECK-NEXT: hipMemPoolAttr MemPoolReuseFollowEventDependencies = hipMemPoolReuseFollowEventDependencies;
+  // CHECK-NEXT: hipMemPoolAttr MemPoolReuseAllowOpportunistic = hipMemPoolReuseAllowOpportunistic;
+  // CHECK-NEXT: hipMemPoolAttr MemPoolReuseAllowInternalDependencies = hipMemPoolReuseAllowInternalDependencies;
+  // CHECK-NEXT: hipMemPoolAttr MemPoolAttrReleaseThreshold = hipMemPoolAttrReleaseThreshold;
+  cudaMemPoolAttr MemPoolAttr;
+  cudaMemPoolAttr MemPoolReuseFollowEventDependencies = cudaMemPoolReuseFollowEventDependencies;
+  cudaMemPoolAttr MemPoolReuseAllowOpportunistic = cudaMemPoolReuseAllowOpportunistic;
+  cudaMemPoolAttr MemPoolReuseAllowInternalDependencies = cudaMemPoolReuseAllowInternalDependencies;
+  cudaMemPoolAttr MemPoolAttrReleaseThreshold = cudaMemPoolAttrReleaseThreshold;
+#endif
+
+#if CUDA_VERSION >= 11030
+  // CHECK: hipMemPoolAttr MemPoolAttrReservedMemCurrent = hipMemPoolAttrReservedMemCurrent;
+  // CHECK-NEXT: hipMemPoolAttr MemPoolAttrReservedMemHigh = hipMemPoolAttrReservedMemHigh;
+  // CHECK-NEXT: hipMemPoolAttr MemPoolAttrUsedMemCurrent = hipMemPoolAttrUsedMemCurrent;
+  // CHECK-NEXT: hipMemPoolAttr MemPoolAttrUsedMemHigh = hipMemPoolAttrUsedMemHigh;
+  cudaMemPoolAttr MemPoolAttrReservedMemCurrent = cudaMemPoolAttrReservedMemCurrent;
+  cudaMemPoolAttr MemPoolAttrReservedMemHigh = cudaMemPoolAttrReservedMemHigh;
+  cudaMemPoolAttr MemPoolAttrUsedMemCurrent = cudaMemPoolAttrUsedMemCurrent;
+  cudaMemPoolAttr MemPoolAttrUsedMemHigh = cudaMemPoolAttrUsedMemHigh;
+#endif
+
+#if CUDA_VERSION >= 11020
+  // CHECK: hipMemLocationType memLocationType;
+  // CHECK-NEXT: hipMemLocationType MemLocationTypeInvalid = hipMemLocationTypeInvalid;
+  // CHECK-NEXT: hipMemLocationType MemLocationTypeDevice = hipMemLocationTypeDevice;
+  cudaMemLocationType memLocationType;
+  cudaMemLocationType MemLocationTypeInvalid = cudaMemLocationTypeInvalid;
+  cudaMemLocationType MemLocationTypeDevice = cudaMemLocationTypeDevice;
+#endif
+
   return 0;
 }

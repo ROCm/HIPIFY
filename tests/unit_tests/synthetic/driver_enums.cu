@@ -933,5 +933,42 @@ int main() {
   CUaccessProperty ACCESS_PROPERTY_PERSISTING = CU_ACCESS_PROPERTY_PERSISTING;
 #endif
 
+#if CUDA_VERSION >= 11020
+  // CHECK: hipMemPoolAttr memPool_attribute;
+  // CHECK-NEXT: hipMemPoolAttr memPool_attribute_enum;
+  // CHECK-NEXT: hipMemPoolAttr MEMPOOL_ATTR_REUSE_FOLLOW_EVENT_DEPENDENCIES = hipMemPoolReuseFollowEventDependencies;
+  // CHECK-NEXT: hipMemPoolAttr MEMPOOL_ATTR_REUSE_ALLOW_OPPORTUNISTIC = hipMemPoolReuseAllowOpportunistic;
+  // CHECK-NEXT: hipMemPoolAttr MEMPOOL_ATTR_REUSE_ALLOW_INTERNAL_DEPENDENCIES = hipMemPoolReuseAllowInternalDependencies;
+  // CHECK-NEXT: hipMemPoolAttr MEMPOOL_ATTR_RELEASE_THRESHOLD = hipMemPoolAttrReleaseThreshold;
+  CUmemPool_attribute memPool_attribute;
+  CUmemPool_attribute_enum memPool_attribute_enum;
+  CUmemPool_attribute MEMPOOL_ATTR_REUSE_FOLLOW_EVENT_DEPENDENCIES = CU_MEMPOOL_ATTR_REUSE_FOLLOW_EVENT_DEPENDENCIES;
+  CUmemPool_attribute MEMPOOL_ATTR_REUSE_ALLOW_OPPORTUNISTIC = CU_MEMPOOL_ATTR_REUSE_ALLOW_OPPORTUNISTIC;
+  CUmemPool_attribute MEMPOOL_ATTR_REUSE_ALLOW_INTERNAL_DEPENDENCIES = CU_MEMPOOL_ATTR_REUSE_ALLOW_INTERNAL_DEPENDENCIES;
+  CUmemPool_attribute MEMPOOL_ATTR_RELEASE_THRESHOLD = CU_MEMPOOL_ATTR_RELEASE_THRESHOLD;
+#endif
+
+#if CUDA_VERSION >= 11030
+  // CHECK: hipMemPoolAttr MEMPOOL_ATTR_RESERVED_MEM_CURRENT = hipMemPoolAttrReservedMemCurrent;
+  // CHECK-NEXT: hipMemPoolAttr MEMPOOL_ATTR_RESERVED_MEM_HIGH = hipMemPoolAttrReservedMemHigh;
+  // CHECK-NEXT: hipMemPoolAttr MEMPOOL_ATTR_USED_MEM_CURRENT = hipMemPoolAttrUsedMemCurrent;
+  // CHECK-NEXT: hipMemPoolAttr MEMPOOL_ATTR_USED_MEM_HIGH = hipMemPoolAttrUsedMemHigh;
+  CUmemPool_attribute MEMPOOL_ATTR_RESERVED_MEM_CURRENT = CU_MEMPOOL_ATTR_RESERVED_MEM_CURRENT;
+  CUmemPool_attribute MEMPOOL_ATTR_RESERVED_MEM_HIGH = CU_MEMPOOL_ATTR_RESERVED_MEM_HIGH;
+  CUmemPool_attribute MEMPOOL_ATTR_USED_MEM_CURRENT = CU_MEMPOOL_ATTR_USED_MEM_CURRENT;
+  CUmemPool_attribute MEMPOOL_ATTR_USED_MEM_HIGH = CU_MEMPOOL_ATTR_USED_MEM_HIGH;
+#endif
+
+#if CUDA_VERSION >= 10020
+  // CHECK: hipMemLocationType memLocationType;
+  // CHECK-NEXT: hipMemLocationType memLocationType_enum;
+  // CHECK-NEXT: hipMemLocationType MEM_LOCATION_TYPE_INVALID = hipMemLocationTypeInvalid;
+  // CHECK-NEXT: hipMemLocationType MEM_LOCATION_TYPE_DEVICE = hipMemLocationTypeDevice;
+  CUmemLocationType memLocationType;
+  CUmemLocationType_enum memLocationType_enum;
+  CUmemLocationType MEM_LOCATION_TYPE_INVALID = CU_MEM_LOCATION_TYPE_INVALID;
+  CUmemLocationType MEM_LOCATION_TYPE_DEVICE = CU_MEM_LOCATION_TYPE_DEVICE;
+#endif
+
   return 0;
 }
