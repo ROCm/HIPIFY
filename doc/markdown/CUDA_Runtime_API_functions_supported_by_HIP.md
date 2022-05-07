@@ -1189,20 +1189,20 @@ Unsupported
 |`cudaMemHandleTypeWin32`|11.2| | | | | | | |
 |`cudaMemHandleTypeWin32Kmt`|11.2| | | | | | | |
 |`cudaMemLocation`|11.2| | | | | | | |
-|`cudaMemLocationType`|11.2| | | | | | | |
-|`cudaMemLocationTypeDevice`|11.2| | | | | | | |
-|`cudaMemLocationTypeInvalid`|11.2| | | | | | | |
-|`cudaMemPoolAttr`|11.2| | | | | | | |
-|`cudaMemPoolAttrReleaseThreshold`|11.2| | | | | | | |
-|`cudaMemPoolAttrReservedMemCurrent`|11.3| | | | | | | |
-|`cudaMemPoolAttrReservedMemHigh`|11.3| | | | | | | |
-|`cudaMemPoolAttrUsedMemCurrent`|11.3| | | | | | | |
-|`cudaMemPoolAttrUsedMemHigh`|11.3| | | | | | | |
+|`cudaMemLocationType`|11.2| | |`hipMemLocationType`|5.2.0| | |5.2.0|
+|`cudaMemLocationTypeDevice`|11.2| | |`hipMemLocationTypeDevice`|5.2.0| | |5.2.0|
+|`cudaMemLocationTypeInvalid`|11.2| | |`hipMemLocationTypeInvalid`|5.2.0| | |5.2.0|
+|`cudaMemPoolAttr`|11.2| | |`hipMemPoolAttr`|5.2.0| | |5.2.0|
+|`cudaMemPoolAttrReleaseThreshold`|11.2| | |`hipMemPoolAttrReleaseThreshold`|5.2.0| | |5.2.0|
+|`cudaMemPoolAttrReservedMemCurrent`|11.3| | |`hipMemPoolAttrReservedMemCurrent`|5.2.0| | |5.2.0|
+|`cudaMemPoolAttrReservedMemHigh`|11.3| | |`hipMemPoolAttrReservedMemHigh`|5.2.0| | |5.2.0|
+|`cudaMemPoolAttrUsedMemCurrent`|11.3| | |`hipMemPoolAttrUsedMemCurrent`|5.2.0| | |5.2.0|
+|`cudaMemPoolAttrUsedMemHigh`|11.3| | |`hipMemPoolAttrUsedMemHigh`|5.2.0| | |5.2.0|
 |`cudaMemPoolProps`|11.2| | | | | | | |
 |`cudaMemPoolPtrExportData`|11.2| | | | | | | |
-|`cudaMemPoolReuseAllowInternalDependencies`|11.2| | | | | | | |
-|`cudaMemPoolReuseAllowOpportunistic`|11.2| | | | | | | |
-|`cudaMemPoolReuseFollowEventDependencies`|11.2| | | | | | | |
+|`cudaMemPoolReuseAllowInternalDependencies`|11.2| | |`hipMemPoolReuseAllowInternalDependencies`|5.2.0| | |5.2.0|
+|`cudaMemPoolReuseAllowOpportunistic`|11.2| | |`hipMemPoolReuseAllowOpportunistic`|5.2.0| | |5.2.0|
+|`cudaMemPoolReuseFollowEventDependencies`|11.2| | |`hipMemPoolReuseFollowEventDependencies`|5.2.0| | |5.2.0|
 |`cudaMemPool_t`|11.2| | |`hipMemPool_t`|5.2.0| | |5.2.0|
 |`cudaMemRangeAttribute`|8.0| | |`hipMemRangeAttribute`|3.7.0| | | |
 |`cudaMemRangeAttributeAccessedBy`|8.0| | |`hipMemRangeAttributeAccessedBy`|3.7.0| | | |
