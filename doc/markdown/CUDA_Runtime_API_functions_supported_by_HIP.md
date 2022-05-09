@@ -1164,11 +1164,11 @@ Unsupported
 |`cudaLimitPersistingL2CacheSize`|11.0| | | | | | | |
 |`cudaLimitPrintfFifoSize`| | | |`hipLimitPrintfFifoSize`|4.5.0| | | |
 |`cudaLimitStackSize`| | | | | | | | |
-|`cudaMemAccessDesc`|11.2| | | | | | | |
-|`cudaMemAccessFlags`|11.2| | | | | | | |
-|`cudaMemAccessFlagsProtNone`|11.2| | | | | | | |
-|`cudaMemAccessFlagsProtRead`|11.2| | | | | | | |
-|`cudaMemAccessFlagsProtReadWrite`|11.2| | | | | | | |
+|`cudaMemAccessDesc`|11.2| | |`hipMemAccessDesc`|5.2.0| | |5.2.0|
+|`cudaMemAccessFlags`|11.2| | |`hipMemAccessFlags`|5.2.0| | |5.2.0|
+|`cudaMemAccessFlagsProtNone`|11.2| | |`hipMemAccessFlagsProtNone`|5.2.0| | |5.2.0|
+|`cudaMemAccessFlagsProtRead`|11.2| | |`hipMemAccessFlagsProtRead`|5.2.0| | |5.2.0|
+|`cudaMemAccessFlagsProtReadWrite`|11.2| | |`hipMemAccessFlagsProtReadWrite`|5.2.0| | |5.2.0|
 |`cudaMemAdviseSetAccessedBy`|8.0| | |`hipMemAdviseSetAccessedBy`|3.7.0| | | |
 |`cudaMemAdviseSetPreferredLocation`|8.0| | |`hipMemAdviseSetPreferredLocation`|3.7.0| | | |
 |`cudaMemAdviseSetReadMostly`|8.0| | |`hipMemAdviseSetReadMostly`|3.7.0| | | |
@@ -1177,10 +1177,10 @@ Unsupported
 |`cudaMemAdviseUnsetReadMostly`|8.0| | |`hipMemAdviseUnsetReadMostly`|3.7.0| | | |
 |`cudaMemAllocNodeParams`|11.4| | | | | | | |
 |`cudaMemAllocationHandleType`|11.2| | | | | | | |
-|`cudaMemAllocationType`|11.2| | | | | | | |
-|`cudaMemAllocationTypeInvalid`|11.2| | | | | | | |
-|`cudaMemAllocationTypeMax`|11.2| | | | | | | |
-|`cudaMemAllocationTypePinned`|11.2| | | | | | | |
+|`cudaMemAllocationType`|11.2| | |`hipMemAllocationType`|5.2.0| | |5.2.0|
+|`cudaMemAllocationTypeInvalid`|11.2| | |`hipMemAllocationTypeInvalid`|5.2.0| | |5.2.0|
+|`cudaMemAllocationTypeMax`|11.2| | |`hipMemAllocationTypeMax`|5.2.0| | |5.2.0|
+|`cudaMemAllocationTypePinned`|11.2| | |`hipMemAllocationTypePinned`|5.2.0| | |5.2.0|
 |`cudaMemAttachGlobal`| | | |`hipMemAttachGlobal`|2.5.0| | | |
 |`cudaMemAttachHost`| | | |`hipMemAttachHost`|2.5.0| | | |
 |`cudaMemAttachSingle`| | | |`hipMemAttachSingle`|3.7.0| | | |
@@ -1188,7 +1188,7 @@ Unsupported
 |`cudaMemHandleTypePosixFileDescriptor`|11.2| | | | | | | |
 |`cudaMemHandleTypeWin32`|11.2| | | | | | | |
 |`cudaMemHandleTypeWin32Kmt`|11.2| | | | | | | |
-|`cudaMemLocation`|11.2| | | | | | | |
+|`cudaMemLocation`|11.2| | |`hipMemLocation`|5.2.0| | |5.2.0|
 |`cudaMemLocationType`|11.2| | |`hipMemLocationType`|5.2.0| | |5.2.0|
 |`cudaMemLocationTypeDevice`|11.2| | |`hipMemLocationTypeDevice`|5.2.0| | |5.2.0|
 |`cudaMemLocationTypeInvalid`|11.2| | |`hipMemLocationTypeInvalid`|5.2.0| | |5.2.0|

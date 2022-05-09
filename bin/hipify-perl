@@ -723,6 +723,16 @@ my %experimental_funcs = (
     "cudaMemLocationTypeInvalid" => "5.2.0",
     "cudaMemLocationTypeDevice" => "5.2.0",
     "cudaMemLocationType" => "5.2.0",
+    "cudaMemLocation" => "5.2.0",
+    "cudaMemAllocationTypePinned" => "5.2.0",
+    "cudaMemAllocationTypeMax" => "5.2.0",
+    "cudaMemAllocationTypeInvalid" => "5.2.0",
+    "cudaMemAllocationType" => "5.2.0",
+    "cudaMemAccessFlagsProtReadWrite" => "5.2.0",
+    "cudaMemAccessFlagsProtRead" => "5.2.0",
+    "cudaMemAccessFlagsProtNone" => "5.2.0",
+    "cudaMemAccessFlags" => "5.2.0",
+    "cudaMemAccessDesc" => "5.2.0",
     "cudaKernelNodeAttributeCooperative" => "5.2.0",
     "cudaKernelNodeAttributeAccessPolicyWindow" => "5.2.0",
     "cudaKernelNodeAttrValue" => "5.2.0",
@@ -739,8 +749,18 @@ my %experimental_funcs = (
     "CUmemPool_attribute_enum" => "5.2.0",
     "CUmemPool_attribute" => "5.2.0",
     "CUmemPoolHandle_st" => "5.2.0",
+    "CUmemLocation_v1" => "5.2.0",
+    "CUmemLocation_st" => "5.2.0",
     "CUmemLocationType_enum" => "5.2.0",
     "CUmemLocationType" => "5.2.0",
+    "CUmemLocation" => "5.2.0",
+    "CUmemAllocationType_enum" => "5.2.0",
+    "CUmemAllocationType" => "5.2.0",
+    "CUmemAccess_flags_enum" => "5.2.0",
+    "CUmemAccess_flags" => "5.2.0",
+    "CUmemAccessDesc_v1" => "5.2.0",
+    "CUmemAccessDesc_st" => "5.2.0",
+    "CUmemAccessDesc" => "5.2.0",
     "CUkernelNodeAttrValue_v1" => "5.2.0",
     "CUkernelNodeAttrValue_union" => "5.2.0",
     "CUkernelNodeAttrValue" => "5.2.0",
@@ -752,6 +772,12 @@ my %experimental_funcs = (
     "CUaccessPolicyWindow" => "5.2.0",
     "CU_MEM_LOCATION_TYPE_INVALID" => "5.2.0",
     "CU_MEM_LOCATION_TYPE_DEVICE" => "5.2.0",
+    "CU_MEM_ALLOCATION_TYPE_PINNED" => "5.2.0",
+    "CU_MEM_ALLOCATION_TYPE_MAX" => "5.2.0",
+    "CU_MEM_ALLOCATION_TYPE_INVALID" => "5.2.0",
+    "CU_MEM_ACCESS_FLAGS_PROT_READWRITE" => "5.2.0",
+    "CU_MEM_ACCESS_FLAGS_PROT_READ" => "5.2.0",
+    "CU_MEM_ACCESS_FLAGS_PROT_NONE" => "5.2.0",
     "CU_MEMPOOL_ATTR_USED_MEM_HIGH" => "5.2.0",
     "CU_MEMPOOL_ATTR_USED_MEM_CURRENT" => "5.2.0",
     "CU_MEMPOOL_ATTR_REUSE_FOLLOW_EVENT_DEPENDENCIES" => "5.2.0",
@@ -912,8 +938,18 @@ sub experimentalSubstitutions {
     subst("CUkernelNodeAttrValue", "hipKernelNodeAttrValue", "type");
     subst("CUkernelNodeAttrValue_union", "hipKernelNodeAttrValue", "type");
     subst("CUkernelNodeAttrValue_v1", "hipKernelNodeAttrValue", "type");
+    subst("CUmemAccessDesc", "hipMemAccessDesc", "type");
+    subst("CUmemAccessDesc_st", "hipMemAccessDesc", "type");
+    subst("CUmemAccessDesc_v1", "hipMemAccessDesc", "type");
+    subst("CUmemAccess_flags", "hipMemAccessFlags", "type");
+    subst("CUmemAccess_flags_enum", "hipMemAccessFlags", "type");
+    subst("CUmemAllocationType", "hipMemAllocationType", "type");
+    subst("CUmemAllocationType_enum", "hipMemAllocationType", "type");
+    subst("CUmemLocation", "hipMemLocation", "type");
     subst("CUmemLocationType", "hipMemLocationType", "type");
     subst("CUmemLocationType_enum", "hipMemLocationType", "type");
+    subst("CUmemLocation_st", "hipMemLocation", "type");
+    subst("CUmemLocation_v1", "hipMemLocation", "type");
     subst("CUmemPoolHandle_st", "ihipMemPoolHandle_t", "type");
     subst("CUmemPool_attribute", "hipMemPoolAttr", "type");
     subst("CUmemPool_attribute_enum", "hipMemPoolAttr", "type");
@@ -924,6 +960,10 @@ sub experimentalSubstitutions {
     subst("cudaAccessProperty", "hipAccessProperty", "type");
     subst("cudaKernelNodeAttrID", "hipKernelNodeAttrID", "type");
     subst("cudaKernelNodeAttrValue", "hipKernelNodeAttrValue", "type");
+    subst("cudaMemAccessDesc", "hipMemAccessDesc", "type");
+    subst("cudaMemAccessFlags", "hipMemAccessFlags", "type");
+    subst("cudaMemAllocationType", "hipMemAllocationType", "type");
+    subst("cudaMemLocation", "hipMemLocation", "type");
     subst("cudaMemLocationType", "hipMemLocationType", "type");
     subst("cudaMemPoolAttr", "hipMemPoolAttr", "type");
     subst("cudaMemPool_t", "hipMemPool_t", "type");
@@ -942,6 +982,12 @@ sub experimentalSubstitutions {
     subst("CU_MEMPOOL_ATTR_REUSE_FOLLOW_EVENT_DEPENDENCIES", "hipMemPoolReuseFollowEventDependencies", "numeric_literal");
     subst("CU_MEMPOOL_ATTR_USED_MEM_CURRENT", "hipMemPoolAttrUsedMemCurrent", "numeric_literal");
     subst("CU_MEMPOOL_ATTR_USED_MEM_HIGH", "hipMemPoolAttrUsedMemHigh", "numeric_literal");
+    subst("CU_MEM_ACCESS_FLAGS_PROT_NONE", "hipMemAccessFlagsProtNone", "numeric_literal");
+    subst("CU_MEM_ACCESS_FLAGS_PROT_READ", "hipMemAccessFlagsProtRead", "numeric_literal");
+    subst("CU_MEM_ACCESS_FLAGS_PROT_READWRITE", "hipMemAccessFlagsProtReadWrite", "numeric_literal");
+    subst("CU_MEM_ALLOCATION_TYPE_INVALID", "hipMemAllocationTypeInvalid", "numeric_literal");
+    subst("CU_MEM_ALLOCATION_TYPE_MAX", "hipMemAllocationTypeMax", "numeric_literal");
+    subst("CU_MEM_ALLOCATION_TYPE_PINNED", "hipMemAllocationTypePinned", "numeric_literal");
     subst("CU_MEM_LOCATION_TYPE_DEVICE", "hipMemLocationTypeDevice", "numeric_literal");
     subst("CU_MEM_LOCATION_TYPE_INVALID", "hipMemLocationTypeInvalid", "numeric_literal");
     subst("cudaAccessPropertyNormal", "hipAccessPropertyNormal", "numeric_literal");
@@ -950,6 +996,12 @@ sub experimentalSubstitutions {
     subst("cudaDevAttrMemoryPoolsSupported", "hipDeviceAttributeMemoryPoolsSupported", "numeric_literal");
     subst("cudaKernelNodeAttributeAccessPolicyWindow", "hipKernelNodeAttributeAccessPolicyWindow", "numeric_literal");
     subst("cudaKernelNodeAttributeCooperative", "hipKernelNodeAttributeCooperative", "numeric_literal");
+    subst("cudaMemAccessFlagsProtNone", "hipMemAccessFlagsProtNone", "numeric_literal");
+    subst("cudaMemAccessFlagsProtRead", "hipMemAccessFlagsProtRead", "numeric_literal");
+    subst("cudaMemAccessFlagsProtReadWrite", "hipMemAccessFlagsProtReadWrite", "numeric_literal");
+    subst("cudaMemAllocationTypeInvalid", "hipMemAllocationTypeInvalid", "numeric_literal");
+    subst("cudaMemAllocationTypeMax", "hipMemAllocationTypeMax", "numeric_literal");
+    subst("cudaMemAllocationTypePinned", "hipMemAllocationTypePinned", "numeric_literal");
     subst("cudaMemLocationTypeDevice", "hipMemLocationTypeDevice", "numeric_literal");
     subst("cudaMemLocationTypeInvalid", "hipMemLocationTypeInvalid", "numeric_literal");
     subst("cudaMemPoolAttrReleaseThreshold", "hipMemPoolAttrReleaseThreshold", "numeric_literal");
@@ -5783,22 +5835,12 @@ sub warnUnsupportedFunctions {
         "cudaMemPoolExportPointer",
         "cudaMemPoolDestroy",
         "cudaMemPoolCreate",
-        "cudaMemLocation",
         "cudaMemHandleTypeWin32Kmt",
         "cudaMemHandleTypeWin32",
         "cudaMemHandleTypePosixFileDescriptor",
         "cudaMemHandleTypeNone",
-        "cudaMemAllocationTypePinned",
-        "cudaMemAllocationTypeMax",
-        "cudaMemAllocationTypeInvalid",
-        "cudaMemAllocationType",
         "cudaMemAllocationHandleType",
         "cudaMemAllocNodeParams",
-        "cudaMemAccessFlagsProtReadWrite",
-        "cudaMemAccessFlagsProtRead",
-        "cudaMemAccessFlagsProtNone",
-        "cudaMemAccessFlags",
-        "cudaMemAccessDesc",
         "cudaMallocFromPoolAsync",
         "cudaMallocAsync",
         "cudaLimitStackSize",
@@ -6491,17 +6533,12 @@ sub warnUnsupportedFunctions {
         "CUmemPoolProps",
         "CUmemOperationType_enum",
         "CUmemOperationType",
-        "CUmemLocation_v1",
-        "CUmemLocation_st",
-        "CUmemLocation",
         "CUmemHandleType_enum",
         "CUmemHandleType",
         "CUmemGenericAllocationHandle_v1",
         "CUmemGenericAllocationHandle",
         "CUmemAttach_flags_enum",
         "CUmemAttach_flags",
-        "CUmemAllocationType_enum",
-        "CUmemAllocationType",
         "CUmemAllocationProp_v1",
         "CUmemAllocationProp_st",
         "CUmemAllocationProp",
@@ -6509,11 +6546,6 @@ sub warnUnsupportedFunctions {
         "CUmemAllocationHandleType",
         "CUmemAllocationGranularity_flags_enum",
         "CUmemAllocationGranularity_flags",
-        "CUmemAccess_flags_enum",
-        "CUmemAccess_flags",
-        "CUmemAccessDesc_v1",
-        "CUmemAccessDesc_st",
-        "CUmemAccessDesc",
         "CUjit_target_enum",
         "CUjit_target",
         "CUjit_fallback_enum",
@@ -6654,12 +6686,6 @@ sub warnUnsupportedFunctions {
         "CU_MEM_CREATE_USAGE_TILE_POOL",
         "CU_MEM_ALLOC_GRANULARITY_RECOMMENDED",
         "CU_MEM_ALLOC_GRANULARITY_MINIMUM",
-        "CU_MEM_ALLOCATION_TYPE_PINNED",
-        "CU_MEM_ALLOCATION_TYPE_MAX",
-        "CU_MEM_ALLOCATION_TYPE_INVALID",
-        "CU_MEM_ACCESS_FLAGS_PROT_READWRITE",
-        "CU_MEM_ACCESS_FLAGS_PROT_READ",
-        "CU_MEM_ACCESS_FLAGS_PROT_NONE",
         "CU_MEM_ACCESS_FLAGS_PROT_MAX",
         "CU_MEMHOSTREGISTER_READ_ONLY",
         "CU_LIMIT_STACK_SIZE",

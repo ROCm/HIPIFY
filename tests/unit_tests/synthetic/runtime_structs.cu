@@ -172,6 +172,12 @@ int main() {
 #if CUDA_VERSION >= 11020
   // CHECK: hipMemPool_t memPool_t;
   cudaMemPool_t memPool_t;
+
+  // CHECK: hipMemLocation memLocation;
+  cudaMemLocation memLocation;
+
+  // CHECK: hipMemAccessDesc MemAccessDesc;
+  cudaMemAccessDesc MemAccessDesc;
 #endif
 
   return 0;

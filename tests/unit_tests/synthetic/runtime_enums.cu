@@ -794,5 +794,27 @@ int main() {
   cudaMemLocationType MemLocationTypeDevice = cudaMemLocationTypeDevice;
 #endif
 
+#if CUDA_VERSION >= 11020
+  // CHECK: hipMemAccessFlags MemAccessFlags;
+  // CHECK-NEXT: hipMemAccessFlags MemAccessFlagsProtNone = hipMemAccessFlagsProtNone;
+  // CHECK-NEXT: hipMemAccessFlags MemAccessFlagsProtRead = hipMemAccessFlagsProtRead;
+  // CHECK-NEXT: hipMemAccessFlags MemAccessFlagsProtReadWrite = hipMemAccessFlagsProtReadWrite;
+  cudaMemAccessFlags MemAccessFlags;
+  cudaMemAccessFlags MemAccessFlagsProtNone = cudaMemAccessFlagsProtNone;
+  cudaMemAccessFlags MemAccessFlagsProtRead = cudaMemAccessFlagsProtRead;
+  cudaMemAccessFlags MemAccessFlagsProtReadWrite = cudaMemAccessFlagsProtReadWrite;
+#endif
+
+#if CUDA_VERSION >= 11020
+  // CHECK: hipMemAllocationType memAllocationType;
+  // CHECK-NEXT: hipMemAllocationType MemAllocationTypeInvalid = hipMemAllocationTypeInvalid;
+  // CHECK-NEXT: hipMemAllocationType MemAllocationTypePinned = hipMemAllocationTypePinned;
+  // CHECK-NEXT: hipMemAllocationType MemAllocationTypeMax = hipMemAllocationTypeMax;
+  cudaMemAllocationType memAllocationType;
+  cudaMemAllocationType MemAllocationTypeInvalid = cudaMemAllocationTypeInvalid;
+  cudaMemAllocationType MemAllocationTypePinned = cudaMemAllocationTypePinned;
+  cudaMemAllocationType MemAllocationTypeMax = cudaMemAllocationTypeMax;
+#endif
+
   return 0;
 }
