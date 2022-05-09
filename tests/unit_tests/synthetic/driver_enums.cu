@@ -970,5 +970,31 @@ int main() {
   CUmemLocationType MEM_LOCATION_TYPE_DEVICE = CU_MEM_LOCATION_TYPE_DEVICE;
 #endif
 
+#if CUDA_VERSION >= 10020
+  // CHECK: hipMemAccessFlags memAccess_flags;
+  // CHECK-NEXT: hipMemAccessFlags memAccess_flags_enum;
+  // CHECK-NEXT: hipMemAccessFlags MEM_ACCESS_FLAGS_PROT_NONE = hipMemAccessFlagsProtNone;
+  // CHECK-NEXT: hipMemAccessFlags MEM_ACCESS_FLAGS_PROT_READ = hipMemAccessFlagsProtRead;
+  // CHECK-NEXT: hipMemAccessFlags MEM_ACCESS_FLAGS_PROT_READWRITE = hipMemAccessFlagsProtReadWrite;
+  CUmemAccess_flags memAccess_flags;
+  CUmemAccess_flags_enum memAccess_flags_enum;
+  CUmemAccess_flags MEM_ACCESS_FLAGS_PROT_NONE = CU_MEM_ACCESS_FLAGS_PROT_NONE;
+  CUmemAccess_flags MEM_ACCESS_FLAGS_PROT_READ = CU_MEM_ACCESS_FLAGS_PROT_READ;
+  CUmemAccess_flags MEM_ACCESS_FLAGS_PROT_READWRITE = CU_MEM_ACCESS_FLAGS_PROT_READWRITE;
+#endif
+
+#if CUDA_VERSION >= 10020
+  // CHECK: hipMemAllocationType memAllocationType;
+  // CHECK-NEXT: hipMemAllocationType memAllocationType_enum;
+  // CHECK-NEXT: hipMemAllocationType MEM_ALLOCATION_TYPE_INVALID = hipMemAllocationTypeInvalid;
+  // CHECK-NEXT: hipMemAllocationType MEM_ALLOCATION_TYPE_PINNED = hipMemAllocationTypePinned;
+  // CHECK-NEXT: hipMemAllocationType MEM_ALLOCATION_TYPE_MAX = hipMemAllocationTypeMax;
+  CUmemAllocationType memAllocationType;
+  CUmemAllocationType_enum memAllocationType_enum;
+  CUmemAllocationType MEM_ALLOCATION_TYPE_INVALID = CU_MEM_ALLOCATION_TYPE_INVALID;
+  CUmemAllocationType MEM_ALLOCATION_TYPE_PINNED = CU_MEM_ALLOCATION_TYPE_PINNED;
+  CUmemAllocationType MEM_ALLOCATION_TYPE_MAX = CU_MEM_ALLOCATION_TYPE_MAX;
+#endif
+
   return 0;
 }

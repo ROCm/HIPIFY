@@ -240,5 +240,29 @@ int main() {
   CUmemoryPool memPool_t;
 #endif
 
+#if CUDA_VERSION >= 10020
+  // CHECK: hipMemLocation memLocation_st;
+  // CHECK-NEXT: hipMemLocation memLocation;
+  CUmemLocation_st memLocation_st;
+  CUmemLocation memLocation;
+#endif
+
+#if CUDA_VERSION >= 11030
+  // CHECK: hipMemLocation memLocation_v1;
+  CUmemLocation_v1 memLocation_v1;
+#endif
+
+#if CUDA_VERSION >= 10020
+  // CHECK: hipMemAccessDesc memAccessDesc_st;
+  // CHECK-NEXT: hipMemAccessDesc memAccessDesc;
+  CUmemAccessDesc_st memAccessDesc_st;
+  CUmemAccessDesc memAccessDesc;
+#endif
+
+#if CUDA_VERSION >= 11030
+  // CHECK: hipMemAccessDesc memAccessDesc_v1;
+  CUmemAccessDesc_v1 memAccessDesc_v1;
+#endif
+
   return 0;
 }

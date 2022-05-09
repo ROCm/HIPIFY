@@ -664,18 +664,18 @@
 |`CU_MEMPOOL_ATTR_USED_MEM_CURRENT`|11.3| | |`hipMemPoolAttrUsedMemCurrent`|5.2.0| | |5.2.0|
 |`CU_MEMPOOL_ATTR_USED_MEM_HIGH`|11.3| | |`hipMemPoolAttrUsedMemHigh`|5.2.0| | |5.2.0|
 |`CU_MEM_ACCESS_FLAGS_PROT_MAX`|10.2| | | | | | | |
-|`CU_MEM_ACCESS_FLAGS_PROT_NONE`|10.2| | | | | | | |
-|`CU_MEM_ACCESS_FLAGS_PROT_READ`|10.2| | | | | | | |
-|`CU_MEM_ACCESS_FLAGS_PROT_READWRITE`|10.2| | | | | | | |
+|`CU_MEM_ACCESS_FLAGS_PROT_NONE`|10.2| | |`hipMemAccessFlagsProtNone`|5.2.0| | |5.2.0|
+|`CU_MEM_ACCESS_FLAGS_PROT_READ`|10.2| | |`hipMemAccessFlagsProtRead`|5.2.0| | |5.2.0|
+|`CU_MEM_ACCESS_FLAGS_PROT_READWRITE`|10.2| | |`hipMemAccessFlagsProtReadWrite`|5.2.0| | |5.2.0|
 |`CU_MEM_ADVISE_SET_ACCESSED_BY`|8.0| | |`hipMemAdviseSetAccessedBy`|3.7.0| | | |
 |`CU_MEM_ADVISE_SET_PREFERRED_LOCATION`|8.0| | |`hipMemAdviseSetPreferredLocation`|3.7.0| | | |
 |`CU_MEM_ADVISE_SET_READ_MOSTLY`|8.0| | |`hipMemAdviseSetReadMostly`|3.7.0| | | |
 |`CU_MEM_ADVISE_UNSET_ACCESSED_BY`|8.0| | |`hipMemAdviseUnsetAccessedBy`|3.7.0| | | |
 |`CU_MEM_ADVISE_UNSET_PREFERRED_LOCATION`|8.0| | |`hipMemAdviseUnsetPreferredLocation`|3.7.0| | | |
 |`CU_MEM_ADVISE_UNSET_READ_MOSTLY`|8.0| | |`hipMemAdviseUnsetReadMostly`|3.7.0| | | |
-|`CU_MEM_ALLOCATION_TYPE_INVALID`|10.2| | | | | | | |
-|`CU_MEM_ALLOCATION_TYPE_MAX`|10.2| | | | | | | |
-|`CU_MEM_ALLOCATION_TYPE_PINNED`|10.2| | | | | | | |
+|`CU_MEM_ALLOCATION_TYPE_INVALID`|10.2| | |`hipMemAllocationTypeInvalid`|5.2.0| | |5.2.0|
+|`CU_MEM_ALLOCATION_TYPE_MAX`|10.2| | |`hipMemAllocationTypeMax`|5.2.0| | |5.2.0|
+|`CU_MEM_ALLOCATION_TYPE_PINNED`|10.2| | |`hipMemAllocationTypePinned`|5.2.0| | |5.2.0|
 |`CU_MEM_ALLOC_GRANULARITY_MINIMUM`|10.2| | | | | | | |
 |`CU_MEM_ALLOC_GRANULARITY_RECOMMENDED`|10.2| | | | | | | |
 |`CU_MEM_ATTACH_GLOBAL`| | | |`hipMemAttachGlobal`|2.5.0| | | |
@@ -977,11 +977,11 @@
 |`CUkernelNodeAttrValue_v1`|11.3| | |`hipKernelNodeAttrValue`|5.2.0| | |5.2.0|
 |`CUlimit`| | | |`hipLimit_t`|1.6.0| | | |
 |`CUlimit_enum`| | | |`hipLimit_t`|1.6.0| | | |
-|`CUmemAccessDesc`|10.2| | | | | | | |
-|`CUmemAccessDesc_st`|10.2| | | | | | | |
-|`CUmemAccessDesc_v1`|11.3| | | | | | | |
-|`CUmemAccess_flags`|10.2| | | | | | | |
-|`CUmemAccess_flags_enum`|10.2| | | | | | | |
+|`CUmemAccessDesc`|10.2| | |`hipMemAccessDesc`|5.2.0| | |5.2.0|
+|`CUmemAccessDesc_st`|10.2| | |`hipMemAccessDesc`|5.2.0| | |5.2.0|
+|`CUmemAccessDesc_v1`|11.3| | |`hipMemAccessDesc`|5.2.0| | |5.2.0|
+|`CUmemAccess_flags`|10.2| | |`hipMemAccessFlags`|5.2.0| | |5.2.0|
+|`CUmemAccess_flags_enum`|10.2| | |`hipMemAccessFlags`|5.2.0| | |5.2.0|
 |`CUmemAllocationGranularity_flags`|10.2| | | | | | | |
 |`CUmemAllocationGranularity_flags_enum`|10.2| | | | | | | |
 |`CUmemAllocationHandleType`|10.2| | | | | | | |
@@ -989,19 +989,19 @@
 |`CUmemAllocationProp`|10.2| | | | | | | |
 |`CUmemAllocationProp_st`|10.2| | | | | | | |
 |`CUmemAllocationProp_v1`|11.3| | | | | | | |
-|`CUmemAllocationType`|10.2| | | | | | | |
-|`CUmemAllocationType_enum`|10.2| | | | | | | |
+|`CUmemAllocationType`|10.2| | |`hipMemAllocationType`|5.2.0| | |5.2.0|
+|`CUmemAllocationType_enum`|10.2| | |`hipMemAllocationType`|5.2.0| | |5.2.0|
 |`CUmemAttach_flags`| | | | | | | | |
 |`CUmemAttach_flags_enum`| | | | | | | | |
 |`CUmemGenericAllocationHandle`|10.2| | | | | | | |
 |`CUmemGenericAllocationHandle_v1`|11.3| | | | | | | |
 |`CUmemHandleType`|11.1| | | | | | | |
 |`CUmemHandleType_enum`|11.1| | | | | | | |
-|`CUmemLocation`|10.2| | | | | | | |
+|`CUmemLocation`|10.2| | |`hipMemLocation`|5.2.0| | |5.2.0|
 |`CUmemLocationType`|10.2| | |`hipMemLocationType`|5.2.0| | |5.2.0|
 |`CUmemLocationType_enum`|10.2| | |`hipMemLocationType`|5.2.0| | |5.2.0|
-|`CUmemLocation_st`|10.2| | | | | | | |
-|`CUmemLocation_v1`|11.3| | | | | | | |
+|`CUmemLocation_st`|10.2| | |`hipMemLocation`|5.2.0| | |5.2.0|
+|`CUmemLocation_v1`|11.3| | |`hipMemLocation`|5.2.0| | |5.2.0|
 |`CUmemOperationType`|11.1| | | | | | | |
 |`CUmemOperationType_enum`|11.1| | | | | | | |
 |`CUmemPoolHandle_st`|11.2| | |`ihipMemPoolHandle_t`|5.2.0| | |5.2.0|
