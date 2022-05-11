@@ -180,5 +180,15 @@ int main() {
   cudaMemAccessDesc MemAccessDesc;
 #endif
 
+#if CUDA_VERSION >= 11020
+  // CHECK: hipMemPoolProps MemPoolProps;
+  cudaMemPoolProps MemPoolProps;
+#endif
+
+#if CUDA_VERSION >= 11030
+  // CHECK: hipMemPoolPtrExportData memPoolPtrExportData;
+  cudaMemPoolPtrExportData memPoolPtrExportData;
+#endif
+
   return 0;
 }

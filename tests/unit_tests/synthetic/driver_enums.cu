@@ -996,5 +996,32 @@ int main() {
   CUmemAllocationType MEM_ALLOCATION_TYPE_MAX = CU_MEM_ALLOCATION_TYPE_MAX;
 #endif
 
+#if CUDA_VERSION >= 10020
+  // CHECK: hipMemAllocationHandleType memAllocationHandleType;
+  // CHECK-NEXT: hipMemAllocationHandleType memAllocationHandleType_enum;
+  // CHECK-NEXT: hipMemAllocationHandleType MEM_HANDLE_TYPE_POSIX_FILE_DESCRIPTOR = hipMemHandleTypePosixFileDescriptor;
+  // CHECK-NEXT: hipMemAllocationHandleType MEM_HANDLE_TYPE_WIN32 = hipMemHandleTypeWin32;
+  // CHECK-NEXT: hipMemAllocationHandleType MEM_HANDLE_TYPE_WIN32_KMT = hipMemHandleTypeWin32Kmt;
+  CUmemAllocationHandleType memAllocationHandleType;
+  CUmemAllocationHandleType_enum memAllocationHandleType_enum;
+  CUmemAllocationHandleType MEM_HANDLE_TYPE_POSIX_FILE_DESCRIPTOR = CU_MEM_HANDLE_TYPE_POSIX_FILE_DESCRIPTOR;
+  CUmemAllocationHandleType MEM_HANDLE_TYPE_WIN32 = CU_MEM_HANDLE_TYPE_WIN32;
+  CUmemAllocationHandleType MEM_HANDLE_TYPE_WIN32_KMT = CU_MEM_HANDLE_TYPE_WIN32_KMT;
+#endif
+
+#if CUDA_VERSION >= 11020
+  // CHECK: hipMemAllocationHandleType MEM_HANDLE_TYPE_NONE = hipMemHandleTypeNone;
+  CUmemAllocationHandleType MEM_HANDLE_TYPE_NONE = CU_MEM_HANDLE_TYPE_NONE;
+#endif
+
+#if CUDA_VERSION >= 11040
+  // CHECK: hipGraphInstantiateFlags graphInstantiate_flags;
+  // CHECK-NEXT: hipGraphInstantiateFlags graphInstantiate_flags_enum;
+  // CHECK-NEXT: hipGraphInstantiateFlags GRAPH_INSTANTIATE_FLAG_AUTO_FREE_ON_LAUNCH = hipGraphInstantiateFlagAutoFreeOnLaunch;
+  CUgraphInstantiate_flags graphInstantiate_flags;
+  CUgraphInstantiate_flags_enum graphInstantiate_flags_enum;
+  CUgraphInstantiate_flags GRAPH_INSTANTIATE_FLAG_AUTO_FREE_ON_LAUNCH = CUDA_GRAPH_INSTANTIATE_FLAG_AUTO_FREE_ON_LAUNCH;
+#endif
+
   return 0;
 }

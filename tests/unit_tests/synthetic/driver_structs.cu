@@ -264,5 +264,29 @@ int main() {
   CUmemAccessDesc_v1 memAccessDesc_v1;
 #endif
 
+#if CUDA_VERSION >= 11020
+  // CHECK: hipMemPoolProps memPoolProps_st;
+  // CHECK-NEXT: hipMemPoolProps memPoolProps;
+  CUmemPoolProps_st memPoolProps_st;
+  CUmemPoolProps memPoolProps;
+#endif
+
+#if CUDA_VERSION >= 11030
+  // CHECK: hipMemPoolProps memPoolProps_v1;
+  CUmemPoolProps_v1 memPoolProps_v1;
+#endif
+
+#if CUDA_VERSION >= 11020
+  // CHECK: hipMemPoolPtrExportData memPoolPtrExportData_st;
+  // CHECK-NEXT: hipMemPoolPtrExportData memPoolPtrExportData;
+  CUmemPoolPtrExportData_st memPoolPtrExportData_st;
+  CUmemPoolPtrExportData memPoolPtrExportData;
+#endif
+
+#if CUDA_VERSION >= 11030
+  // CHECK: hipMemPoolPtrExportData memPoolPtrExportData_v1;
+  CUmemPoolPtrExportData_v1 memPoolPtrExportData_v1;
+#endif
+
   return 0;
 }

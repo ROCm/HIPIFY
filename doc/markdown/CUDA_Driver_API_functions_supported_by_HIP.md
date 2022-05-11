@@ -143,7 +143,7 @@
 |`CUDA_EXT_SEM_WAIT_NODE_PARAMS`|11.2| | | | | | | |
 |`CUDA_EXT_SEM_WAIT_NODE_PARAMS_st`|11.2| | | | | | | |
 |`CUDA_EXT_SEM_WAIT_NODE_PARAMS_v1`|11.3| | | | | | | |
-|`CUDA_GRAPH_INSTANTIATE_FLAG_AUTO_FREE_ON_LAUNCH`|11.4| | | | | | | |
+|`CUDA_GRAPH_INSTANTIATE_FLAG_AUTO_FREE_ON_LAUNCH`|11.4| | |`hipGraphInstantiateFlagAutoFreeOnLaunch`|5.2.0| | |5.2.0|
 |`CUDA_HOST_NODE_PARAMS`|10.0| | |`hipHostNodeParams`|4.3.0| | | |
 |`CUDA_HOST_NODE_PARAMS_st`|10.0| | |`hipHostNodeParams`|4.3.0| | | |
 |`CUDA_HOST_NODE_PARAMS_v1`|11.3| | |`hipHostNodeParams`|4.3.0| | | |
@@ -684,10 +684,10 @@
 |`CU_MEM_CREATE_USAGE_TILE_POOL`|11.1| | | | | | | |
 |`CU_MEM_HANDLE_TYPE_GENERIC`|11.1| | | | | | | |
 |`CU_MEM_HANDLE_TYPE_MAX`|10.2| | | | | | | |
-|`CU_MEM_HANDLE_TYPE_NONE`|11.2| | | | | | | |
-|`CU_MEM_HANDLE_TYPE_POSIX_FILE_DESCRIPTOR`|10.2| | | | | | | |
-|`CU_MEM_HANDLE_TYPE_WIN32`|10.2| | | | | | | |
-|`CU_MEM_HANDLE_TYPE_WIN32_KMT`|10.2| | | | | | | |
+|`CU_MEM_HANDLE_TYPE_NONE`|11.2| | |`hipMemHandleTypeNone`|5.2.0| | |5.2.0|
+|`CU_MEM_HANDLE_TYPE_POSIX_FILE_DESCRIPTOR`|10.2| | |`hipMemHandleTypePosixFileDescriptor`|5.2.0| | |5.2.0|
+|`CU_MEM_HANDLE_TYPE_WIN32`|10.2| | |`hipMemHandleTypeWin32`|5.2.0| | |5.2.0|
+|`CU_MEM_HANDLE_TYPE_WIN32_KMT`|10.2| | |`hipMemHandleTypeWin32Kmt`|5.2.0| | |5.2.0|
 |`CU_MEM_LOCATION_TYPE_DEVICE`|10.2| | |`hipMemLocationTypeDevice`|5.2.0| | |5.2.0|
 |`CU_MEM_LOCATION_TYPE_INVALID`|10.2| | |`hipMemLocationTypeInvalid`|5.2.0| | |5.2.0|
 |`CU_MEM_LOCATION_TYPE_MAX`|10.2| | | | | | | |
@@ -936,8 +936,8 @@
 |`CUgraphExecUpdateResult`|10.2| | |`hipGraphExecUpdateResult`|4.3.0| | | |
 |`CUgraphExecUpdateResult_enum`|10.2| | |`hipGraphExecUpdateResult`|4.3.0| | | |
 |`CUgraphExec_st`|10.0| | |`hipGraphExec`|4.3.0| | | |
-|`CUgraphInstantiate_flags`|11.4| | | | | | | |
-|`CUgraphInstantiate_flags_enum`|11.4| | | | | | | |
+|`CUgraphInstantiate_flags`|11.4| | |`hipGraphInstantiateFlags`|5.2.0| | |5.2.0|
+|`CUgraphInstantiate_flags_enum`|11.4| | |`hipGraphInstantiateFlags`|5.2.0| | |5.2.0|
 |`CUgraphMem_attribute`|11.4| | | | | | | |
 |`CUgraphMem_attribute_enum`|11.4| | | | | | | |
 |`CUgraphNode`|10.0| | |`hipGraphNode_t`|4.3.0| | | |
@@ -984,8 +984,8 @@
 |`CUmemAccess_flags_enum`|10.2| | |`hipMemAccessFlags`|5.2.0| | |5.2.0|
 |`CUmemAllocationGranularity_flags`|10.2| | | | | | | |
 |`CUmemAllocationGranularity_flags_enum`|10.2| | | | | | | |
-|`CUmemAllocationHandleType`|10.2| | | | | | | |
-|`CUmemAllocationHandleType_enum`|10.2| | | | | | | |
+|`CUmemAllocationHandleType`|10.2| | |`hipMemAllocationHandleType`|5.2.0| | |5.2.0|
+|`CUmemAllocationHandleType_enum`|10.2| | |`hipMemAllocationHandleType`|5.2.0| | |5.2.0|
 |`CUmemAllocationProp`|10.2| | | | | | | |
 |`CUmemAllocationProp_st`|10.2| | | | | | | |
 |`CUmemAllocationProp_v1`|11.3| | | | | | | |
@@ -1005,12 +1005,12 @@
 |`CUmemOperationType`|11.1| | | | | | | |
 |`CUmemOperationType_enum`|11.1| | | | | | | |
 |`CUmemPoolHandle_st`|11.2| | |`ihipMemPoolHandle_t`|5.2.0| | |5.2.0|
-|`CUmemPoolProps`|11.2| | | | | | | |
-|`CUmemPoolProps_st`|11.2| | | | | | | |
-|`CUmemPoolProps_v1`|11.3| | | | | | | |
-|`CUmemPoolPtrExportData`|11.2| | | | | | | |
-|`CUmemPoolPtrExportData_st`|11.2| | | | | | | |
-|`CUmemPoolPtrExportData_v1`|11.3| | | | | | | |
+|`CUmemPoolProps`|11.2| | |`hipMemPoolProps`|5.2.0| | |5.2.0|
+|`CUmemPoolProps_st`|11.2| | |`hipMemPoolProps`|5.2.0| | |5.2.0|
+|`CUmemPoolProps_v1`|11.3| | |`hipMemPoolProps`|5.2.0| | |5.2.0|
+|`CUmemPoolPtrExportData`|11.2| | |`hipMemPoolPtrExportData`|5.2.0| | |5.2.0|
+|`CUmemPoolPtrExportData_st`|11.2| | |`hipMemPoolPtrExportData`|5.2.0| | |5.2.0|
+|`CUmemPoolPtrExportData_v1`|11.3| | |`hipMemPoolPtrExportData`|5.2.0| | |5.2.0|
 |`CUmemPool_attribute`|11.2| | |`hipMemPoolAttr`|5.2.0| | |5.2.0|
 |`CUmemPool_attribute_enum`|11.2| | |`hipMemPoolAttr`|5.2.0| | |5.2.0|
 |`CUmem_advise`|8.0| | |`hipMemoryAdvise`|3.7.0| | | |
