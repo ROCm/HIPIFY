@@ -1089,8 +1089,8 @@ Unsupported
 |`cudaGraphExecUpdateResult`|10.2| | |`hipGraphExecUpdateResult`|4.3.0| | | |
 |`cudaGraphExecUpdateSuccess`|10.2| | |`hipGraphExecUpdateSuccess`|4.3.0| | | |
 |`cudaGraphExec_t`|10.0| | |`hipGraphExec_t`|4.3.0| | | |
-|`cudaGraphInstantiateFlagAutoFreeOnLaunch`|11.4| | | | | | | |
-|`cudaGraphInstantiateFlags`|11.4| | | | | | | |
+|`cudaGraphInstantiateFlagAutoFreeOnLaunch`|11.4| | |`hipGraphInstantiateFlagAutoFreeOnLaunch`|5.2.0| | |5.2.0|
+|`cudaGraphInstantiateFlags`|11.4| | |`hipGraphInstantiateFlags`|5.2.0| | |5.2.0|
 |`cudaGraphMemAttrReservedMemCurrent`|11.4| | | | | | | |
 |`cudaGraphMemAttrReservedMemHigh`|11.4| | | | | | | |
 |`cudaGraphMemAttrUsedMemCurrent`|11.4| | | | | | | |
@@ -1176,7 +1176,7 @@ Unsupported
 |`cudaMemAdviseUnsetPreferredLocation`|8.0| | |`hipMemAdviseUnsetPreferredLocation`|3.7.0| | | |
 |`cudaMemAdviseUnsetReadMostly`|8.0| | |`hipMemAdviseUnsetReadMostly`|3.7.0| | | |
 |`cudaMemAllocNodeParams`|11.4| | | | | | | |
-|`cudaMemAllocationHandleType`|11.2| | | | | | | |
+|`cudaMemAllocationHandleType`|11.2| | |`hipMemAllocationHandleType`|5.2.0| | |5.2.0|
 |`cudaMemAllocationType`|11.2| | |`hipMemAllocationType`|5.2.0| | |5.2.0|
 |`cudaMemAllocationTypeInvalid`|11.2| | |`hipMemAllocationTypeInvalid`|5.2.0| | |5.2.0|
 |`cudaMemAllocationTypeMax`|11.2| | |`hipMemAllocationTypeMax`|5.2.0| | |5.2.0|
@@ -1184,10 +1184,10 @@ Unsupported
 |`cudaMemAttachGlobal`| | | |`hipMemAttachGlobal`|2.5.0| | | |
 |`cudaMemAttachHost`| | | |`hipMemAttachHost`|2.5.0| | | |
 |`cudaMemAttachSingle`| | | |`hipMemAttachSingle`|3.7.0| | | |
-|`cudaMemHandleTypeNone`|11.2| | | | | | | |
-|`cudaMemHandleTypePosixFileDescriptor`|11.2| | | | | | | |
-|`cudaMemHandleTypeWin32`|11.2| | | | | | | |
-|`cudaMemHandleTypeWin32Kmt`|11.2| | | | | | | |
+|`cudaMemHandleTypeNone`|11.2| | |`hipMemHandleTypeNone`|5.2.0| | |5.2.0|
+|`cudaMemHandleTypePosixFileDescriptor`|11.2| | |`hipMemHandleTypePosixFileDescriptor`|5.2.0| | |5.2.0|
+|`cudaMemHandleTypeWin32`|11.2| | |`hipMemHandleTypeWin32`|5.2.0| | |5.2.0|
+|`cudaMemHandleTypeWin32Kmt`|11.2| | |`hipMemHandleTypeWin32Kmt`|5.2.0| | |5.2.0|
 |`cudaMemLocation`|11.2| | |`hipMemLocation`|5.2.0| | |5.2.0|
 |`cudaMemLocationType`|11.2| | |`hipMemLocationType`|5.2.0| | |5.2.0|
 |`cudaMemLocationTypeDevice`|11.2| | |`hipMemLocationTypeDevice`|5.2.0| | |5.2.0|
@@ -1198,8 +1198,8 @@ Unsupported
 |`cudaMemPoolAttrReservedMemHigh`|11.3| | |`hipMemPoolAttrReservedMemHigh`|5.2.0| | |5.2.0|
 |`cudaMemPoolAttrUsedMemCurrent`|11.3| | |`hipMemPoolAttrUsedMemCurrent`|5.2.0| | |5.2.0|
 |`cudaMemPoolAttrUsedMemHigh`|11.3| | |`hipMemPoolAttrUsedMemHigh`|5.2.0| | |5.2.0|
-|`cudaMemPoolProps`|11.2| | | | | | | |
-|`cudaMemPoolPtrExportData`|11.2| | | | | | | |
+|`cudaMemPoolProps`|11.2| | |`hipMemPoolProps`|5.2.0| | |5.2.0|
+|`cudaMemPoolPtrExportData`|11.2| | |`hipMemPoolPtrExportData`|5.2.0| | |5.2.0|
 |`cudaMemPoolReuseAllowInternalDependencies`|11.2| | |`hipMemPoolReuseAllowInternalDependencies`|5.2.0| | |5.2.0|
 |`cudaMemPoolReuseAllowOpportunistic`|11.2| | |`hipMemPoolReuseAllowOpportunistic`|5.2.0| | |5.2.0|
 |`cudaMemPoolReuseFollowEventDependencies`|11.2| | |`hipMemPoolReuseFollowEventDependencies`|5.2.0| | |5.2.0|

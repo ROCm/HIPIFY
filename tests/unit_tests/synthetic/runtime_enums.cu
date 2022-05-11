@@ -816,5 +816,25 @@ int main() {
   cudaMemAllocationType MemAllocationTypeMax = cudaMemAllocationTypeMax;
 #endif
 
+#if CUDA_VERSION >= 11020
+  // CHECK: hipMemAllocationHandleType memAllocationHandleType;
+  // CHECK-NEXT: hipMemAllocationHandleType MEM_HANDLE_TYPE_NONE = hipMemHandleTypeNone;
+  // CHECK-NEXT: hipMemAllocationHandleType MEM_HANDLE_TYPE_POSIX_FILE_DESCRIPTOR = hipMemHandleTypePosixFileDescriptor;
+  // CHECK-NEXT: hipMemAllocationHandleType MEM_HANDLE_TYPE_WIN32 = hipMemHandleTypeWin32;
+  // CHECK-NEXT: hipMemAllocationHandleType MEM_HANDLE_TYPE_WIN32_KMT = hipMemHandleTypeWin32Kmt;
+  cudaMemAllocationHandleType memAllocationHandleType;
+  cudaMemAllocationHandleType MEM_HANDLE_TYPE_NONE = cudaMemHandleTypeNone;
+  cudaMemAllocationHandleType MEM_HANDLE_TYPE_POSIX_FILE_DESCRIPTOR = cudaMemHandleTypePosixFileDescriptor;
+  cudaMemAllocationHandleType MEM_HANDLE_TYPE_WIN32 = cudaMemHandleTypeWin32;
+  cudaMemAllocationHandleType MEM_HANDLE_TYPE_WIN32_KMT = cudaMemHandleTypeWin32Kmt;
+#endif
+
+#if CUDA_VERSION >= 11040
+  // CHECK: hipGraphInstantiateFlags GraphInstantiateFlags;
+  // CHECK-NEXT: hipGraphInstantiateFlags GraphInstantiateFlagAutoFreeOnLaunch = hipGraphInstantiateFlagAutoFreeOnLaunch;
+  cudaGraphInstantiateFlags GraphInstantiateFlags;
+  cudaGraphInstantiateFlags GraphInstantiateFlagAutoFreeOnLaunch = cudaGraphInstantiateFlagAutoFreeOnLaunch;
+#endif
+
   return 0;
 }

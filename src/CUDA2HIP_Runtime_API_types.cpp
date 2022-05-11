@@ -197,10 +197,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaMemAccessDesc",                                                {"hipMemAccessDesc",                                         "", CONV_TYPE, API_RUNTIME, 36, HIP_EXPERIMENTAL}},
 
   // CUmemPoolProps_st
-  {"cudaMemPoolProps",                                                 {"hipMemPoolProps",                                          "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+  {"cudaMemPoolProps",                                                 {"hipMemPoolProps",                                          "", CONV_TYPE, API_RUNTIME, 36, HIP_EXPERIMENTAL}},
 
   // CUmemPoolPtrExportData_st
-  {"cudaMemPoolPtrExportData",                                         {"hipMemPoolPtrExportData",                                  "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+  {"cudaMemPoolPtrExportData",                                         {"hipMemPoolPtrExportData",                                  "", CONV_TYPE, API_RUNTIME, 36, HIP_EXPERIMENTAL}},
 
   // CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_st
   {"cudaExternalSemaphoreSignalNodeParams",                            {"hipExternalSemaphoreSignalNodeParams",                     "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
@@ -1553,26 +1553,26 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaMemAllocationTypeMax",                                         {"hipMemAllocationTypeMax",                                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 0x7FFFFFFF
 
   // CUmemAccess_flags
-  {"cudaMemAccessFlags",                                               {"hipMemAccessFlags",                                     "", CONV_TYPE, API_RUNTIME, 36, HIP_EXPERIMENTAL}},
+  {"cudaMemAccessFlags",                                               {"hipMemAccessFlags",                                        "", CONV_TYPE, API_RUNTIME, 36, HIP_EXPERIMENTAL}},
   // cudaMemAccessFlags enum values
   // CU_MEM_ACCESS_FLAGS_PROT_NONE
-  {"cudaMemAccessFlagsProtNone",                                       {"hipMemAccessFlagsProtNone",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 0
+  {"cudaMemAccessFlagsProtNone",                                       {"hipMemAccessFlagsProtNone",                                "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 0
   // CU_MEM_ACCESS_FLAGS_PROT_READ
-  {"cudaMemAccessFlagsProtRead",                                       {"hipMemAccessFlagsProtRead",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 1
+  {"cudaMemAccessFlagsProtRead",                                       {"hipMemAccessFlagsProtRead",                                "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 1
   // CU_MEM_ACCESS_FLAGS_PROT_READWRITE
-  {"cudaMemAccessFlagsProtReadWrite",                                  {"hipMemAccessFlagsProtReadWrite",                        "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 3
+  {"cudaMemAccessFlagsProtReadWrite",                                  {"hipMemAccessFlagsProtReadWrite",                           "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 3
 
   // CUmemAllocationHandleType
-  {"cudaMemAllocationHandleType",                                      {"hipMemoryAllocationHandleType",                            "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+  {"cudaMemAllocationHandleType",                                      {"hipMemAllocationHandleType",                               "", CONV_TYPE, API_RUNTIME, 36, HIP_EXPERIMENTAL}},
   // cudaMemAllocationHandleType enum values
   // CU_MEM_HANDLE_TYPE_NONE
-  {"cudaMemHandleTypeNone",                                            {"hipMemoryHandleTypeNone",                                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 0
+  {"cudaMemHandleTypeNone",                                            {"hipMemHandleTypeNone",                                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 0
   // CU_MEM_HANDLE_TYPE_POSIX_FILE_DESCRIPTOR
-  {"cudaMemHandleTypePosixFileDescriptor",                             {"hipMemoryHandleTypePosixFileDescriptor",                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 1
+  {"cudaMemHandleTypePosixFileDescriptor",                             {"hipMemHandleTypePosixFileDescriptor",                      "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 1
   // CU_MEM_HANDLE_TYPE_WIN32
-  {"cudaMemHandleTypeWin32",                                           {"hipMemoryHandleTypeWin32",                                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 2
+  {"cudaMemHandleTypeWin32",                                           {"hipMemHandleTypeWin32",                                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 2
   // CU_MEM_HANDLE_TYPE_WIN32_KMT
-  {"cudaMemHandleTypeWin32Kmt",                                        {"hipMemoryHandleTypeWin32Kmt",                              "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 4
+  {"cudaMemHandleTypeWin32Kmt",                                        {"hipMemHandleTypeWin32Kmt",                                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 4
 
   // CUstreamUpdateCaptureDependencies_flags
   {"cudaStreamUpdateCaptureDependenciesFlags",                         {"hipStreamUpdateCaptureDependenciesFlags",                  "", CONV_TYPE, API_RUNTIME, 36}},
@@ -1673,10 +1673,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaGraphMemAttrReservedMemHigh",                                  {"hipGraphMemAttrReservedMemHigh",                           "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}},
 
   // CUgraphInstantiate_flags
-  {"cudaGraphInstantiateFlags",                                        {"hipGraphInstantiateFlags",                                 "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+  {"cudaGraphInstantiateFlags",                                        {"hipGraphInstantiateFlags",                                 "", CONV_TYPE, API_RUNTIME, 36, HIP_EXPERIMENTAL}},
   // cudaGraphInstantiateFlags enum values
   // CUDA_GRAPH_INSTANTIATE_FLAG_AUTO_FREE_ON_LAUNCH
-  {"cudaGraphInstantiateFlagAutoFreeOnLaunch",                         {"hipGraphInstantiateFlagAutoFreeOnLaunch",                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+  {"cudaGraphInstantiateFlagAutoFreeOnLaunch",                         {"hipGraphInstantiateFlagAutoFreeOnLaunch",                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}},
 
   // 4. Typedefs
 
@@ -2459,4 +2459,13 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {
   {"hipMemAllocationTypeInvalid",                                      {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipMemAllocationTypePinned",                                       {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipMemAllocationTypeMax",                                          {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemAllocationHandleType",                                       {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemHandleTypeNone",                                             {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemHandleTypePosixFileDescriptor",                              {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemHandleTypeWin32",                                            {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemHandleTypeWin32Kmt",                                         {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemPoolProps",                                                  {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemPoolPtrExportData",                                          {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipGraphInstantiateFlags",                                         {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipGraphInstantiateFlagAutoFreeOnLaunch",                          {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
 };
