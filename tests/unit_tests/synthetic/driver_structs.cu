@@ -288,5 +288,29 @@ int main() {
   CUmemPoolPtrExportData_v1 memPoolPtrExportData_v1;
 #endif
 
+#if CUDA_VERSION >= 10020
+  // CHECK: hipMemAllocationProp memAllocationProp_st;
+  // CHECK-NEXT: hipMemAllocationProp memAllocationProp;
+  CUmemAllocationProp_st memAllocationProp_st;
+  CUmemAllocationProp memAllocationProp;
+#endif
+
+#if CUDA_VERSION >= 11030
+  // CHECK: hipMemAllocationProp memAllocationProp_v1;
+  CUmemAllocationProp_v1 memAllocationProp_v1;
+#endif
+
+#if CUDA_VERSION >= 11010
+  // CHECK: hipArrayMapInfo arrayMapInfo_st;
+  // CHECK-NEXT: hipArrayMapInfo arrayMapInfo;
+  CUarrayMapInfo_st arrayMapInfo_st;
+  CUarrayMapInfo arrayMapInfo;
+#endif
+
+#if CUDA_VERSION >= 11030
+  // CHECK: hipArrayMapInfo arrayMapInfo_v1;
+  CUarrayMapInfo_v1 arrayMapInfo_v1;
+#endif
+
   return 0;
 }

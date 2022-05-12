@@ -764,15 +764,26 @@ my %experimental_funcs = (
     "CUmemPoolProps_st" => "5.2.0",
     "CUmemPoolProps" => "5.2.0",
     "CUmemPoolHandle_st" => "5.2.0",
+    "CUmemOperationType_enum" => "5.2.0",
+    "CUmemOperationType" => "5.2.0",
     "CUmemLocation_v1" => "5.2.0",
     "CUmemLocation_st" => "5.2.0",
     "CUmemLocationType_enum" => "5.2.0",
     "CUmemLocationType" => "5.2.0",
     "CUmemLocation" => "5.2.0",
+    "CUmemHandleType_enum" => "5.2.0",
+    "CUmemHandleType" => "5.2.0",
+    "CUmemGenericAllocationHandle_v1" => "5.2.0",
+    "CUmemGenericAllocationHandle" => "5.2.0",
     "CUmemAllocationType_enum" => "5.2.0",
     "CUmemAllocationType" => "5.2.0",
+    "CUmemAllocationProp_v1" => "5.2.0",
+    "CUmemAllocationProp_st" => "5.2.0",
+    "CUmemAllocationProp" => "5.2.0",
     "CUmemAllocationHandleType_enum" => "5.2.0",
     "CUmemAllocationHandleType" => "5.2.0",
+    "CUmemAllocationGranularity_flags_enum" => "5.2.0",
+    "CUmemAllocationGranularity_flags" => "5.2.0",
     "CUmemAccess_flags_enum" => "5.2.0",
     "CUmemAccess_flags" => "5.2.0",
     "CUmemAccessDesc_v1" => "5.2.0",
@@ -785,16 +796,23 @@ my %experimental_funcs = (
     "CUkernelNodeAttrID" => "5.2.0",
     "CUgraphInstantiate_flags_enum" => "5.2.0",
     "CUgraphInstantiate_flags" => "5.2.0",
+    "CUarraySparseSubresourceType_enum" => "5.2.0",
+    "CUarraySparseSubresourceType" => "5.2.0",
     "CUaccessProperty_enum" => "5.2.0",
     "CUaccessProperty" => "5.2.0",
     "CUaccessPolicyWindow_st" => "5.2.0",
     "CUaccessPolicyWindow" => "5.2.0",
+    "CU_MEM_OPERATION_TYPE_UNMAP" => "5.2.0",
+    "CU_MEM_OPERATION_TYPE_MAP" => "5.2.0",
     "CU_MEM_LOCATION_TYPE_INVALID" => "5.2.0",
     "CU_MEM_LOCATION_TYPE_DEVICE" => "5.2.0",
     "CU_MEM_HANDLE_TYPE_WIN32_KMT" => "5.2.0",
     "CU_MEM_HANDLE_TYPE_WIN32" => "5.2.0",
     "CU_MEM_HANDLE_TYPE_POSIX_FILE_DESCRIPTOR" => "5.2.0",
     "CU_MEM_HANDLE_TYPE_NONE" => "5.2.0",
+    "CU_MEM_HANDLE_TYPE_GENERIC" => "5.2.0",
+    "CU_MEM_ALLOC_GRANULARITY_RECOMMENDED" => "5.2.0",
+    "CU_MEM_ALLOC_GRANULARITY_MINIMUM" => "5.2.0",
     "CU_MEM_ALLOCATION_TYPE_PINNED" => "5.2.0",
     "CU_MEM_ALLOCATION_TYPE_MAX" => "5.2.0",
     "CU_MEM_ALLOCATION_TYPE_INVALID" => "5.2.0",
@@ -812,6 +830,8 @@ my %experimental_funcs = (
     "CU_KERNEL_NODE_ATTRIBUTE_COOPERATIVE" => "5.2.0",
     "CU_KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW" => "5.2.0",
     "CU_DEVICE_ATTRIBUTE_MEMORY_POOLS_SUPPORTED" => "5.2.0",
+    "CU_ARRAY_SPARSE_SUBRESOURCE_TYPE_SPARSE_LEVEL" => "5.2.0",
+    "CU_ARRAY_SPARSE_SUBRESOURCE_TYPE_MIPTAIL" => "5.2.0",
     "CU_ACCESS_PROPERTY_STREAMING" => "5.2.0",
     "CU_ACCESS_PROPERTY_PERSISTING" => "5.2.0",
     "CU_ACCESS_PROPERTY_NORMAL" => "5.2.0",
@@ -957,6 +977,11 @@ sub experimentalSubstitutions {
     subst("CUaccessPolicyWindow_st", "hipAccessPolicyWindow", "type");
     subst("CUaccessProperty", "hipAccessProperty", "type");
     subst("CUaccessProperty_enum", "hipAccessProperty", "type");
+    subst("CUarrayMapInfo", "hipArrayMapInfo", "type");
+    subst("CUarrayMapInfo_st", "hipArrayMapInfo", "type");
+    subst("CUarrayMapInfo_v1", "hipArrayMapInfo", "type");
+    subst("CUarraySparseSubresourceType", "hipArraySparseSubresourceType", "type");
+    subst("CUarraySparseSubresourceType_enum", "hipArraySparseSubresourceType", "type");
     subst("CUgraphInstantiate_flags", "hipGraphInstantiateFlags", "type");
     subst("CUgraphInstantiate_flags_enum", "hipGraphInstantiateFlags", "type");
     subst("CUkernelNodeAttrID", "hipKernelNodeAttrID", "type");
@@ -969,15 +994,26 @@ sub experimentalSubstitutions {
     subst("CUmemAccessDesc_v1", "hipMemAccessDesc", "type");
     subst("CUmemAccess_flags", "hipMemAccessFlags", "type");
     subst("CUmemAccess_flags_enum", "hipMemAccessFlags", "type");
+    subst("CUmemAllocationGranularity_flags", "hipMemAllocationGranularity_flags", "type");
+    subst("CUmemAllocationGranularity_flags_enum", "hipMemAllocationGranularity_flags", "type");
     subst("CUmemAllocationHandleType", "hipMemAllocationHandleType", "type");
     subst("CUmemAllocationHandleType_enum", "hipMemAllocationHandleType", "type");
+    subst("CUmemAllocationProp", "hipMemAllocationProp", "type");
+    subst("CUmemAllocationProp_st", "hipMemAllocationProp", "type");
+    subst("CUmemAllocationProp_v1", "hipMemAllocationProp", "type");
     subst("CUmemAllocationType", "hipMemAllocationType", "type");
     subst("CUmemAllocationType_enum", "hipMemAllocationType", "type");
+    subst("CUmemGenericAllocationHandle", "hipMemGenericAllocationHandle", "type");
+    subst("CUmemGenericAllocationHandle_v1", "hipMemGenericAllocationHandle", "type");
+    subst("CUmemHandleType", "hipMemHandleType", "type");
+    subst("CUmemHandleType_enum", "hipMemHandleType", "type");
     subst("CUmemLocation", "hipMemLocation", "type");
     subst("CUmemLocationType", "hipMemLocationType", "type");
     subst("CUmemLocationType_enum", "hipMemLocationType", "type");
     subst("CUmemLocation_st", "hipMemLocation", "type");
     subst("CUmemLocation_v1", "hipMemLocation", "type");
+    subst("CUmemOperationType", "hipMemOperationType", "type");
+    subst("CUmemOperationType_enum", "hipMemOperationType", "type");
     subst("CUmemPoolHandle_st", "ihipMemPoolHandle_t", "type");
     subst("CUmemPoolProps", "hipMemPoolProps", "type");
     subst("CUmemPoolProps_st", "hipMemPoolProps", "type");
@@ -1010,6 +1046,8 @@ sub experimentalSubstitutions {
     subst("CU_ACCESS_PROPERTY_NORMAL", "hipAccessPropertyNormal", "numeric_literal");
     subst("CU_ACCESS_PROPERTY_PERSISTING", "hipAccessPropertyPersisting", "numeric_literal");
     subst("CU_ACCESS_PROPERTY_STREAMING", "hipAccessPropertyStreaming", "numeric_literal");
+    subst("CU_ARRAY_SPARSE_SUBRESOURCE_TYPE_MIPTAIL", "hipArraySparseSubresourceTypeMiptail", "numeric_literal");
+    subst("CU_ARRAY_SPARSE_SUBRESOURCE_TYPE_SPARSE_LEVEL", "hipArraySparseSubresourceTypeSparseLevel", "numeric_literal");
     subst("CU_DEVICE_ATTRIBUTE_MEMORY_POOLS_SUPPORTED", "hipDeviceAttributeMemoryPoolsSupported", "numeric_literal");
     subst("CU_KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW", "hipKernelNodeAttributeAccessPolicyWindow", "numeric_literal");
     subst("CU_KERNEL_NODE_ATTRIBUTE_COOPERATIVE", "hipKernelNodeAttributeCooperative", "numeric_literal");
@@ -1027,12 +1065,17 @@ sub experimentalSubstitutions {
     subst("CU_MEM_ALLOCATION_TYPE_INVALID", "hipMemAllocationTypeInvalid", "numeric_literal");
     subst("CU_MEM_ALLOCATION_TYPE_MAX", "hipMemAllocationTypeMax", "numeric_literal");
     subst("CU_MEM_ALLOCATION_TYPE_PINNED", "hipMemAllocationTypePinned", "numeric_literal");
+    subst("CU_MEM_ALLOC_GRANULARITY_MINIMUM", "hipMemAllocationGranularityMinimum", "numeric_literal");
+    subst("CU_MEM_ALLOC_GRANULARITY_RECOMMENDED", "hipMemAllocationGranularityRecommended", "numeric_literal");
+    subst("CU_MEM_HANDLE_TYPE_GENERIC", "hipMemHandleTypeGeneric", "numeric_literal");
     subst("CU_MEM_HANDLE_TYPE_NONE", "hipMemHandleTypeNone", "numeric_literal");
     subst("CU_MEM_HANDLE_TYPE_POSIX_FILE_DESCRIPTOR", "hipMemHandleTypePosixFileDescriptor", "numeric_literal");
     subst("CU_MEM_HANDLE_TYPE_WIN32", "hipMemHandleTypeWin32", "numeric_literal");
     subst("CU_MEM_HANDLE_TYPE_WIN32_KMT", "hipMemHandleTypeWin32Kmt", "numeric_literal");
     subst("CU_MEM_LOCATION_TYPE_DEVICE", "hipMemLocationTypeDevice", "numeric_literal");
     subst("CU_MEM_LOCATION_TYPE_INVALID", "hipMemLocationTypeInvalid", "numeric_literal");
+    subst("CU_MEM_OPERATION_TYPE_MAP", "hipMemOperationTypeMap", "numeric_literal");
+    subst("CU_MEM_OPERATION_TYPE_UNMAP", "hipMemOperationTypeUnmap", "numeric_literal");
     subst("cudaAccessPropertyNormal", "hipAccessPropertyNormal", "numeric_literal");
     subst("cudaAccessPropertyPersisting", "hipAccessPropertyPersisting", "numeric_literal");
     subst("cudaAccessPropertyStreaming", "hipAccessPropertyStreaming", "numeric_literal");
@@ -6564,19 +6607,8 @@ sub warnUnsupportedFunctions {
         "CUshared_carveout",
         "CUoccupancy_flags_enum",
         "CUoccupancy_flags",
-        "CUmemOperationType_enum",
-        "CUmemOperationType",
-        "CUmemHandleType_enum",
-        "CUmemHandleType",
-        "CUmemGenericAllocationHandle_v1",
-        "CUmemGenericAllocationHandle",
         "CUmemAttach_flags_enum",
         "CUmemAttach_flags",
-        "CUmemAllocationProp_v1",
-        "CUmemAllocationProp_st",
-        "CUmemAllocationProp",
-        "CUmemAllocationGranularity_flags_enum",
-        "CUmemAllocationGranularity_flags",
         "CUjit_target_enum",
         "CUjit_target",
         "CUjit_fallback_enum",
@@ -6648,11 +6680,6 @@ sub warnUnsupportedFunctions {
         "CUctx_flags",
         "CUarray_cubemap_face_enum",
         "CUarray_cubemap_face",
-        "CUarraySparseSubresourceType_enum",
-        "CUarraySparseSubresourceType",
-        "CUarrayMapInfo_v1",
-        "CUarrayMapInfo_st",
-        "CUarrayMapInfo",
         "CU_USER_OBJECT_NO_DESTRUCTOR_SYNC",
         "CU_TRSF_SEAMLESS_CUBEMAP",
         "CU_TRSF_DISABLE_TRILINEAR_OPTIMIZATION",
@@ -6703,14 +6730,9 @@ sub warnUnsupportedFunctions {
         "CU_POINTER_ATTRIBUTE_ACCESS_FLAG_NONE",
         "CU_PARAM_TR_DEFAULT",
         "CU_OCCUPANCY_DISABLE_CACHING_OVERRIDE",
-        "CU_MEM_OPERATION_TYPE_UNMAP",
-        "CU_MEM_OPERATION_TYPE_MAP",
         "CU_MEM_LOCATION_TYPE_MAX",
         "CU_MEM_HANDLE_TYPE_MAX",
-        "CU_MEM_HANDLE_TYPE_GENERIC",
         "CU_MEM_CREATE_USAGE_TILE_POOL",
-        "CU_MEM_ALLOC_GRANULARITY_RECOMMENDED",
-        "CU_MEM_ALLOC_GRANULARITY_MINIMUM",
         "CU_MEM_ACCESS_FLAGS_PROT_MAX",
         "CU_MEMHOSTREGISTER_READ_ONLY",
         "CU_LIMIT_STACK_SIZE",
@@ -6924,8 +6946,6 @@ sub warnUnsupportedFunctions {
         "CU_CUBEMAP_FACE_NEGATIVE_Y",
         "CU_CUBEMAP_FACE_NEGATIVE_X",
         "CU_CTX_FLAGS_MASK",
-        "CU_ARRAY_SPARSE_SUBRESOURCE_TYPE_SPARSE_LEVEL",
-        "CU_ARRAY_SPARSE_SUBRESOURCE_TYPE_MIPTAIL",
         "CU_ARRAY_SPARSE_PROPERTIES_SINGLE_MIPTAIL",
         "CU_AD_FORMAT_UNORM_INT8X4",
         "CU_AD_FORMAT_UNORM_INT8X2",

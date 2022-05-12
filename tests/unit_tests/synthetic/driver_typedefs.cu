@@ -48,5 +48,15 @@ int main() {
   // CHECK: hipUUID uuid;
   CUuuid uuid;
 
+#if CUDA_VERSION > 10020
+  // CHECK: hipMemGenericAllocationHandle memGenericAllocationHandle;
+  CUmemGenericAllocationHandle memGenericAllocationHandle;
+#endif
+
+#if CUDA_VERSION > 11030
+  // CHECK: hipMemGenericAllocationHandle memGenericAllocationHandle_v1;
+  CUmemGenericAllocationHandle_v1 memGenericAllocationHandle_v1;
+#endif
+
   return 0;
 }
