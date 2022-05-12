@@ -233,8 +233,8 @@
 |`CU_AD_FORMAT_UNSIGNED_INT32`| | | |`HIP_AD_FORMAT_UNSIGNED_INT32`|1.7.0| | | |
 |`CU_AD_FORMAT_UNSIGNED_INT8`| | | |`HIP_AD_FORMAT_UNSIGNED_INT8`|1.7.0| | | |
 |`CU_ARRAY_SPARSE_PROPERTIES_SINGLE_MIPTAIL`|11.1| | | | | | | |
-|`CU_ARRAY_SPARSE_SUBRESOURCE_TYPE_MIPTAIL`|11.1| | | | | | | |
-|`CU_ARRAY_SPARSE_SUBRESOURCE_TYPE_SPARSE_LEVEL`|11.1| | | | | | | |
+|`CU_ARRAY_SPARSE_SUBRESOURCE_TYPE_MIPTAIL`|11.1| | |`hipArraySparseSubresourceTypeMiptail`|5.2.0| | |5.2.0|
+|`CU_ARRAY_SPARSE_SUBRESOURCE_TYPE_SPARSE_LEVEL`|11.1| | |`hipArraySparseSubresourceTypeSparseLevel`|5.2.0| | |5.2.0|
 |`CU_COMPUTEMODE_DEFAULT`| | | |`hipComputeModeDefault`|1.9.0| | | |
 |`CU_COMPUTEMODE_EXCLUSIVE`| | |8.0|`hipComputeModeExclusive`|1.9.0| | | |
 |`CU_COMPUTEMODE_EXCLUSIVE_PROCESS`| | | |`hipComputeModeExclusiveProcess`|2.0.0| | | |
@@ -676,13 +676,13 @@
 |`CU_MEM_ALLOCATION_TYPE_INVALID`|10.2| | |`hipMemAllocationTypeInvalid`|5.2.0| | |5.2.0|
 |`CU_MEM_ALLOCATION_TYPE_MAX`|10.2| | |`hipMemAllocationTypeMax`|5.2.0| | |5.2.0|
 |`CU_MEM_ALLOCATION_TYPE_PINNED`|10.2| | |`hipMemAllocationTypePinned`|5.2.0| | |5.2.0|
-|`CU_MEM_ALLOC_GRANULARITY_MINIMUM`|10.2| | | | | | | |
-|`CU_MEM_ALLOC_GRANULARITY_RECOMMENDED`|10.2| | | | | | | |
+|`CU_MEM_ALLOC_GRANULARITY_MINIMUM`|10.2| | |`hipMemAllocationGranularityMinimum`|5.2.0| | |5.2.0|
+|`CU_MEM_ALLOC_GRANULARITY_RECOMMENDED`|10.2| | |`hipMemAllocationGranularityRecommended`|5.2.0| | |5.2.0|
 |`CU_MEM_ATTACH_GLOBAL`| | | |`hipMemAttachGlobal`|2.5.0| | | |
 |`CU_MEM_ATTACH_HOST`| | | |`hipMemAttachHost`|2.5.0| | | |
 |`CU_MEM_ATTACH_SINGLE`| | | |`hipMemAttachSingle`|3.7.0| | | |
 |`CU_MEM_CREATE_USAGE_TILE_POOL`|11.1| | | | | | | |
-|`CU_MEM_HANDLE_TYPE_GENERIC`|11.1| | | | | | | |
+|`CU_MEM_HANDLE_TYPE_GENERIC`|11.1| | |`hipMemHandleTypeGeneric`|5.2.0| | |5.2.0|
 |`CU_MEM_HANDLE_TYPE_MAX`|10.2| | | | | | | |
 |`CU_MEM_HANDLE_TYPE_NONE`|11.2| | |`hipMemHandleTypeNone`|5.2.0| | |5.2.0|
 |`CU_MEM_HANDLE_TYPE_POSIX_FILE_DESCRIPTOR`|10.2| | |`hipMemHandleTypePosixFileDescriptor`|5.2.0| | |5.2.0|
@@ -691,8 +691,8 @@
 |`CU_MEM_LOCATION_TYPE_DEVICE`|10.2| | |`hipMemLocationTypeDevice`|5.2.0| | |5.2.0|
 |`CU_MEM_LOCATION_TYPE_INVALID`|10.2| | |`hipMemLocationTypeInvalid`|5.2.0| | |5.2.0|
 |`CU_MEM_LOCATION_TYPE_MAX`|10.2| | | | | | | |
-|`CU_MEM_OPERATION_TYPE_MAP`|11.1| | | | | | | |
-|`CU_MEM_OPERATION_TYPE_UNMAP`|11.1| | | | | | | |
+|`CU_MEM_OPERATION_TYPE_MAP`|11.1| | |`hipMemOperationTypeMap`|5.2.0| | |5.2.0|
+|`CU_MEM_OPERATION_TYPE_UNMAP`|11.1| | |`hipMemOperationTypeUnmap`|5.2.0| | |5.2.0|
 |`CU_MEM_RANGE_ATTRIBUTE_ACCESSED_BY`|8.0| | |`hipMemRangeAttributeAccessedBy`|3.7.0| | | |
 |`CU_MEM_RANGE_ATTRIBUTE_LAST_PREFETCH_LOCATION`|8.0| | |`hipMemRangeAttributeLastPrefetchLocation`|3.7.0| | | |
 |`CU_MEM_RANGE_ATTRIBUTE_PREFERRED_LOCATION`|8.0| | |`hipMemRangeAttributePreferredLocation`|3.7.0| | | |
@@ -839,11 +839,11 @@
 |`CUaddress_mode`| | | |`HIPaddress_mode`|3.5.0| | | |
 |`CUaddress_mode_enum`| | | |`HIPaddress_mode_enum`|3.5.0| | | |
 |`CUarray`| | | |`hipArray_t`|1.7.0| | | |
-|`CUarrayMapInfo`|11.1| | | | | | | |
-|`CUarrayMapInfo_st`|11.1| | | | | | | |
-|`CUarrayMapInfo_v1`|11.3| | | | | | | |
-|`CUarraySparseSubresourceType`|11.1| | | | | | | |
-|`CUarraySparseSubresourceType_enum`|11.1| | | | | | | |
+|`CUarrayMapInfo`|11.1| | |`hipArrayMapInfo`| | | | |
+|`CUarrayMapInfo_st`|11.1| | |`hipArrayMapInfo`| | | | |
+|`CUarrayMapInfo_v1`|11.3| | |`hipArrayMapInfo`| | | | |
+|`CUarraySparseSubresourceType`|11.1| | |`hipArraySparseSubresourceType`|5.2.0| | |5.2.0|
+|`CUarraySparseSubresourceType_enum`|11.1| | |`hipArraySparseSubresourceType`|5.2.0| | |5.2.0|
 |`CUarray_cubemap_face`| | | | | | | | |
 |`CUarray_cubemap_face_enum`| | | | | | | | |
 |`CUarray_format`| | | |`hipArray_Format`|1.7.0| | | |
@@ -982,28 +982,28 @@
 |`CUmemAccessDesc_v1`|11.3| | |`hipMemAccessDesc`|5.2.0| | |5.2.0|
 |`CUmemAccess_flags`|10.2| | |`hipMemAccessFlags`|5.2.0| | |5.2.0|
 |`CUmemAccess_flags_enum`|10.2| | |`hipMemAccessFlags`|5.2.0| | |5.2.0|
-|`CUmemAllocationGranularity_flags`|10.2| | | | | | | |
-|`CUmemAllocationGranularity_flags_enum`|10.2| | | | | | | |
+|`CUmemAllocationGranularity_flags`|10.2| | |`hipMemAllocationGranularity_flags`|5.2.0| | |5.2.0|
+|`CUmemAllocationGranularity_flags_enum`|10.2| | |`hipMemAllocationGranularity_flags`|5.2.0| | |5.2.0|
 |`CUmemAllocationHandleType`|10.2| | |`hipMemAllocationHandleType`|5.2.0| | |5.2.0|
 |`CUmemAllocationHandleType_enum`|10.2| | |`hipMemAllocationHandleType`|5.2.0| | |5.2.0|
-|`CUmemAllocationProp`|10.2| | | | | | | |
-|`CUmemAllocationProp_st`|10.2| | | | | | | |
-|`CUmemAllocationProp_v1`|11.3| | | | | | | |
+|`CUmemAllocationProp`|10.2| | |`hipMemAllocationProp`|5.2.0| | |5.2.0|
+|`CUmemAllocationProp_st`|10.2| | |`hipMemAllocationProp`|5.2.0| | |5.2.0|
+|`CUmemAllocationProp_v1`|11.3| | |`hipMemAllocationProp`|5.2.0| | |5.2.0|
 |`CUmemAllocationType`|10.2| | |`hipMemAllocationType`|5.2.0| | |5.2.0|
 |`CUmemAllocationType_enum`|10.2| | |`hipMemAllocationType`|5.2.0| | |5.2.0|
 |`CUmemAttach_flags`| | | | | | | | |
 |`CUmemAttach_flags_enum`| | | | | | | | |
-|`CUmemGenericAllocationHandle`|10.2| | | | | | | |
-|`CUmemGenericAllocationHandle_v1`|11.3| | | | | | | |
-|`CUmemHandleType`|11.1| | | | | | | |
-|`CUmemHandleType_enum`|11.1| | | | | | | |
+|`CUmemGenericAllocationHandle`|10.2| | |`hipMemGenericAllocationHandle`|5.2.0| | |5.2.0|
+|`CUmemGenericAllocationHandle_v1`|11.3| | |`hipMemGenericAllocationHandle`|5.2.0| | |5.2.0|
+|`CUmemHandleType`|11.1| | |`hipMemHandleType`|5.2.0| | |5.2.0|
+|`CUmemHandleType_enum`|11.1| | |`hipMemHandleType`|5.2.0| | |5.2.0|
 |`CUmemLocation`|10.2| | |`hipMemLocation`|5.2.0| | |5.2.0|
 |`CUmemLocationType`|10.2| | |`hipMemLocationType`|5.2.0| | |5.2.0|
 |`CUmemLocationType_enum`|10.2| | |`hipMemLocationType`|5.2.0| | |5.2.0|
 |`CUmemLocation_st`|10.2| | |`hipMemLocation`|5.2.0| | |5.2.0|
 |`CUmemLocation_v1`|11.3| | |`hipMemLocation`|5.2.0| | |5.2.0|
-|`CUmemOperationType`|11.1| | | | | | | |
-|`CUmemOperationType_enum`|11.1| | | | | | | |
+|`CUmemOperationType`|11.1| | |`hipMemOperationType`|5.2.0| | |5.2.0|
+|`CUmemOperationType_enum`|11.1| | |`hipMemOperationType`|5.2.0| | |5.2.0|
 |`CUmemPoolHandle_st`|11.2| | |`ihipMemPoolHandle_t`|5.2.0| | |5.2.0|
 |`CUmemPoolProps`|11.2| | |`hipMemPoolProps`|5.2.0| | |5.2.0|
 |`CUmemPoolProps_st`|11.2| | |`hipMemPoolProps`|5.2.0| | |5.2.0|

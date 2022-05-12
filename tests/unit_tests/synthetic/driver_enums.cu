@@ -1023,5 +1023,47 @@ int main() {
   CUgraphInstantiate_flags GRAPH_INSTANTIATE_FLAG_AUTO_FREE_ON_LAUNCH = CUDA_GRAPH_INSTANTIATE_FLAG_AUTO_FREE_ON_LAUNCH;
 #endif
 
+#if CUDA_VERSION >= 10020
+  // CHECK: hipMemAllocationGranularity_flags memAllocationGranularity_flags;
+  // CHECK-NEXT: hipMemAllocationGranularity_flags memAllocationGranularity_flags_enum;
+  // CHECK-NEXT: hipMemAllocationGranularity_flags MEM_ALLOC_GRANULARITY_MINIMUM = hipMemAllocationGranularityMinimum;
+  // CHECK-NEXT: hipMemAllocationGranularity_flags MEM_ALLOC_GRANULARITY_RECOMMENDED = hipMemAllocationGranularityRecommended;
+  CUmemAllocationGranularity_flags memAllocationGranularity_flags;
+  CUmemAllocationGranularity_flags_enum memAllocationGranularity_flags_enum;
+  CUmemAllocationGranularity_flags MEM_ALLOC_GRANULARITY_MINIMUM = CU_MEM_ALLOC_GRANULARITY_MINIMUM;
+  CUmemAllocationGranularity_flags MEM_ALLOC_GRANULARITY_RECOMMENDED = CU_MEM_ALLOC_GRANULARITY_RECOMMENDED;
+#endif
+
+#if CUDA_VERSION >= 11010
+  // CHECK: hipMemHandleType memHandleType;
+  // CHECK-NEXT: hipMemHandleType memHandleType_enum;
+  // CHECK-NEXT: hipMemHandleType MEM_HANDLE_TYPE_GENERIC = hipMemHandleTypeGeneric;
+  CUmemHandleType memHandleType;
+  CUmemHandleType_enum memHandleType_enum;
+  CUmemHandleType MEM_HANDLE_TYPE_GENERIC = CU_MEM_HANDLE_TYPE_GENERIC;
+#endif
+
+#if CUDA_VERSION >= 11010
+  // CHECK: hipMemOperationType memOperationType;
+  // CHECK-NEXT: hipMemOperationType memOperationType_enum;
+  // CHECK-NEXT: hipMemOperationType MEM_OPERATION_TYPE_MAP = hipMemOperationTypeMap;
+  // CHECK-NEXT: hipMemOperationType MEM_OPERATION_TYPE_UNMAP = hipMemOperationTypeUnmap;
+  CUmemOperationType memOperationType;
+  CUmemOperationType_enum memOperationType_enum;
+  CUmemOperationType MEM_OPERATION_TYPE_MAP = CU_MEM_OPERATION_TYPE_MAP;
+  CUmemOperationType MEM_OPERATION_TYPE_UNMAP = CU_MEM_OPERATION_TYPE_UNMAP;
+#endif
+
+#if CUDA_VERSION >= 11010
+  // CHECK: hipArraySparseSubresourceType arraySparseSubresourceType;
+  // CHECK-NEXT: hipArraySparseSubresourceType arraySparseSubresourceType_enum;
+  // CHECK-NEXT: hipArraySparseSubresourceType ARRAY_SPARSE_SUBRESOURCE_TYPE_SPARSE_LEVEL = hipArraySparseSubresourceTypeSparseLevel;
+  // CHECK-NEXT: hipArraySparseSubresourceType ARRAY_SPARSE_SUBRESOURCE_TYPE_MIPTAIL = hipArraySparseSubresourceTypeMiptail;
+  CUarraySparseSubresourceType arraySparseSubresourceType;
+  CUarraySparseSubresourceType_enum arraySparseSubresourceType_enum;
+  CUarraySparseSubresourceType ARRAY_SPARSE_SUBRESOURCE_TYPE_SPARSE_LEVEL = CU_ARRAY_SPARSE_SUBRESOURCE_TYPE_SPARSE_LEVEL;
+  CUarraySparseSubresourceType ARRAY_SPARSE_SUBRESOURCE_TYPE_MIPTAIL = CU_ARRAY_SPARSE_SUBRESOURCE_TYPE_MIPTAIL;
+#endif
+
   return 0;
 }
