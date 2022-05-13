@@ -86,11 +86,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuDeviceGetTexture1DLinearMaxWidth
   {"cudaDeviceGetTexture1DLinearMaxWidth",                    {"hipDeviceGetTexture1DLinearMaxWidth",                    "", CONV_DEVICE, API_RUNTIME, 1, HIP_UNSUPPORTED}},
   // cuDeviceGetDefaultMemPool
-  {"cudaDeviceGetDefaultMemPool",                             {"hipDeviceGetDefaultMemPool",                             "", CONV_DEVICE, API_RUNTIME, 1, HIP_UNSUPPORTED}},
+  {"cudaDeviceGetDefaultMemPool",                             {"hipDeviceGetDefaultMemPool",                             "", CONV_DEVICE, API_RUNTIME, 1, HIP_EXPERIMENTAL}},
   // cuDeviceSetMemPool
-  {"cudaDeviceSetMemPool",                                    {"hipDeviceSetMemPool",                                    "", CONV_DEVICE, API_RUNTIME, 1, HIP_UNSUPPORTED}},
+  {"cudaDeviceSetMemPool",                                    {"hipDeviceSetMemPool",                                    "", CONV_DEVICE, API_RUNTIME, 1, HIP_EXPERIMENTAL}},
   // cuDeviceGetMemPool
-  {"cudaDeviceGetMemPool",                                    {"hipDeviceGetMemPool",                                    "", CONV_DEVICE, API_RUNTIME, 1, HIP_UNSUPPORTED}},
+  {"cudaDeviceGetMemPool",                                    {"hipDeviceGetMemPool",                                    "", CONV_DEVICE, API_RUNTIME, 1, HIP_EXPERIMENTAL}},
 
   // 2. Thread Management [DEPRECATED]
   // no analogue
@@ -391,11 +391,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
 
   // 11. Stream Ordered Memory Allocator
 
-  // no analogue
-  {"cudaMallocAsync",                                         {"hipMallocAsync",                                         "", CONV_MEMORY, API_RUNTIME, 11, HIP_UNSUPPORTED}},
-  // cuMemFreeAsync?
-  // TODO: double check cuMemFreeAsync
-  {"cudaFreeAsync",                                           {"hipFreeAsync",                                           "", CONV_MEMORY, API_RUNTIME, 11, HIP_UNSUPPORTED}},
+  // cuMemAllocAsync
+  {"cudaMallocAsync",                                         {"hipMallocAsync",                                         "", CONV_MEMORY, API_RUNTIME, 11, HIP_EXPERIMENTAL}},
+  // cuMemFreeAsync
+  {"cudaFreeAsync",                                           {"hipFreeAsync",                                           "", CONV_MEMORY, API_RUNTIME, 11, HIP_EXPERIMENTAL}},
   // no analogue
   {"cudaMallocFromPoolAsync",                                 {"hipMallocFromPoolAsync",                                 "", CONV_MEMORY, API_RUNTIME, 11, HIP_UNSUPPORTED}},
   // cuMemPoolTrimTo
@@ -1289,6 +1288,11 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP {
   {"hipGraphEventWaitNodeGetEvent",                           {HIP_5000, HIP_0,    HIP_0   }},
   {"hipGraphEventWaitNodeSetEvent",                           {HIP_5000, HIP_0,    HIP_0   }},
   {"hipGraphExecEventWaitNodeSetEvent",                       {HIP_5000, HIP_0,    HIP_0   }},
+  {"hipDeviceGetDefaultMemPool",                              {HIP_5020, HIP_0,    HIP_0   }},
+  {"hipDeviceSetMemPool",                                     {HIP_5020, HIP_0,    HIP_0   }},
+  {"hipDeviceGetMemPool",                                     {HIP_5020, HIP_0,    HIP_0   }},
+  {"hipMallocAsync",                                          {HIP_5020, HIP_0,    HIP_0   }},
+  {"hipFreeAsync",                                            {HIP_5020, HIP_0,    HIP_0   }},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_RUNTIME_API_SECTION_MAP {
