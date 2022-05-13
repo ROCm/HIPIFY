@@ -60,6 +60,7 @@ int main() {
   // CHECK-NEXT: hipPointer_attribute pointer_attribute;
   // CHECK-NEXT: void* occupancyB2DSize;
   // CHECK-NEXT: hipGraphicsResource_t graphicsResource;
+  // CHECK-NEXT: hipUUID uuid;
   CUdevice device;
   CUcontext context;
   CUfunc_cache func_cache;
@@ -88,6 +89,8 @@ int main() {
   CUpointer_attribute pointer_attribute;
   CUoccupancyB2DSize occupancyB2DSize;
   CUgraphicsResource graphicsResource;
+  CUuuid uuid;
+
 #if CUDA_VERSION > 7050
   // CHECK: hipMemRangeAttribute MemoryRangeAttribute;
   // CHECK-NEXT: hipMemoryAdvise MemoryAdvise;
@@ -138,6 +141,11 @@ int main() {
 #if CUDA_VERSION > 10010
   // CHECK: hipGraphExecUpdateResult graphExecUpdateResult;
   CUgraphExecUpdateResult graphExecUpdateResult;
+#endif
+
+#if CUDA_VERSION >= 11020
+  // CHECK: hipMemPool_t memPool_t;
+  CUmemoryPool memPool_t;
 #endif
 
   // CUDA: CUresult CUDAAPI cuInit(unsigned int Flags);
@@ -1100,6 +1108,40 @@ int main() {
   // HIP: hipError_t hipGraphicsSubResourceGetMappedArray(hipArray_t* array, hipGraphicsResource_t resource, unsigned int arrayIndex, unsigned int mipLevel);
   // CHECK: result = hipGraphicsSubResourceGetMappedArray(&array_, graphicsResource, flags, flags_2);
   result = cuGraphicsSubResourceGetMappedArray(&array_, graphicsResource, flags, flags_2);
+
+#if CUDA_VERSION >= 9020
+  // CUDA: CUresult CUDAAPI cuDeviceGetUuid(CUuuid *uuid, CUdevice dev);
+  // HIP: hipError_t hipDeviceGetUuid(hipUUID* uuid, hipDevice_t device);
+  // CHECK: result = hipDeviceGetUuid(&uuid, device);
+  result = cuDeviceGetUuid(&uuid, device);
+#endif
+
+#if CUDA_VERSION >= 11020
+  // CUDA: CUresult CUDAAPI cuDeviceGetDefaultMemPool(CUmemoryPool *pool_out, CUdevice dev);
+  // HIP: hipError_t hipDeviceGetDefaultMemPool(hipMemPool_t* mem_pool, int device);
+  // CHECK: result = hipDeviceGetDefaultMemPool(&memPool_t, device);
+  result = cuDeviceGetDefaultMemPool(&memPool_t, device);
+
+  // CUDA: CUresult CUDAAPI cuDeviceSetMemPool(CUdevice dev, CUmemoryPool pool);
+  // HIP: hipError_t hipDeviceSetMemPool(int device, hipMemPool_t mem_pool);
+  // CHECK: result = hipDeviceSetMemPool(device, memPool_t);
+  result = cuDeviceSetMemPool(device, memPool_t);
+
+  // CUDA: CUresult CUDAAPI cuDeviceGetMemPool(CUmemoryPool *pool, CUdevice dev);
+  // HIP: hipError_t hipDeviceGetMemPool(hipMemPool_t* mem_pool, int device);
+  // CHECK: result = hipDeviceGetMemPool(&memPool_t, device);
+  result = cuDeviceGetMemPool(&memPool_t, device);
+
+  // CUDA: CUresult CUDAAPI cuMemAllocAsync(CUdeviceptr *dptr, size_t bytesize, CUstream hStream);
+  // HIP: hipError_t hipMallocAsync(void** dev_ptr, size_t size, hipStream_t stream);
+  // CHECK: result = hipMallocAsync(&deviceptr, bytes, stream);
+  result = cuMemAllocAsync(&deviceptr, bytes, stream);
+
+  // CUDA: CUresult CUDAAPI cuMemFreeAsync(CUdeviceptr dptr, CUstream hStream);
+  // HIP: hipError_t hipFreeAsync(void* dev_ptr, hipStream_t stream);
+  // CHECK: result = hipFreeAsync(deviceptr, stream);
+  result = cuMemFreeAsync(deviceptr, stream);
+#endif
 
   return 0;
 }

@@ -55,20 +55,20 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   // cudaDeviceGetNvSciSyncAttributes
   {"cuDeviceGetNvSciSyncAttributes",                       {"hipDeviceGetNvSciSyncAttributes",                         "", CONV_DEVICE, API_DRIVER, 5, HIP_UNSUPPORTED}},
   // no analogue
-  {"cuDeviceGetUuid",                                      {"hipDeviceGetUuid",                                        "", CONV_DEVICE, API_DRIVER, 5, HIP_UNSUPPORTED}},
+  {"cuDeviceGetUuid",                                      {"hipDeviceGetUuid",                                        "", CONV_DEVICE, API_DRIVER, 5, HIP_EXPERIMENTAL}},
   // no analogue
-  {"cuDeviceGetUuid_v2",                                   {"hipDeviceGetUuid",                                        "", CONV_DEVICE, API_DRIVER, 5, HIP_UNSUPPORTED}},
+  {"cuDeviceGetUuid_v2",                                   {"hipDeviceGetUuid",                                        "", CONV_DEVICE, API_DRIVER, 5, HIP_EXPERIMENTAL}},
   // no analogue
   {"cuDeviceTotalMem",                                     {"hipDeviceTotalMem",                                       "", CONV_DEVICE, API_DRIVER, 5}},
   {"cuDeviceTotalMem_v2",                                  {"hipDeviceTotalMem",                                       "", CONV_DEVICE, API_DRIVER, 5}},
   // cudaDeviceGetTexture1DLinearMaxWidth
   {"cuDeviceGetTexture1DLinearMaxWidth",                   {"hipDeviceGetTexture1DLinearMaxWidth",                     "", CONV_DEVICE, API_DRIVER, 5, HIP_UNSUPPORTED}},
   // cudaDeviceSetMemPool
-  {"cuDeviceSetMemPool",                                   {"hipDeviceSetMemPool",                                     "", CONV_DEVICE, API_DRIVER, 5, HIP_UNSUPPORTED}},
+  {"cuDeviceSetMemPool",                                   {"hipDeviceSetMemPool",                                     "", CONV_DEVICE, API_DRIVER, 5, HIP_EXPERIMENTAL}},
   // cudaDeviceGetMemPool
-  {"cuDeviceGetMemPool",                                   {"hipDeviceGetMemPool",                                     "", CONV_DEVICE, API_DRIVER, 5, HIP_UNSUPPORTED}},
+  {"cuDeviceGetMemPool",                                   {"hipDeviceGetMemPool",                                     "", CONV_DEVICE, API_DRIVER, 5, HIP_EXPERIMENTAL}},
   // cudaDeviceGetDefaultMemPool
-  {"cuDeviceGetDefaultMemPool",                            {"hipDeviceGetDefaultMemPool",                              "", CONV_DEVICE, API_DRIVER, 5, HIP_UNSUPPORTED}},
+  {"cuDeviceGetDefaultMemPool",                            {"hipDeviceGetDefaultMemPool",                              "", CONV_DEVICE, API_DRIVER, 5, HIP_EXPERIMENTAL}},
   //
   {"cuDeviceGetExecAffinitySupport",                       {"hipDeviceGetExecAffinitySupport",                         "", CONV_DEVICE, API_DRIVER, 5, HIP_UNSUPPORTED}},
 
@@ -358,10 +358,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuMemMapArrayAsync",                                   {"hipMemMapArrayAsync",                                     "", CONV_VIRTUAL_MEMORY, API_DRIVER, 12, HIP_UNSUPPORTED}},
 
   // 13. Stream Ordered Memory Allocator
-  // no analogue
-  {"cuMemFreeAsync",                                       {"hipMemFreeAsync",                                         "", CONV_STREAM_ORDERED_MEMORY, API_DRIVER, 13, HIP_UNSUPPORTED}},
-  // no analogue
-  {"cuMemAllocAsync",                                      {"hipMemAllocAsync",                                        "", CONV_STREAM_ORDERED_MEMORY, API_DRIVER, 13, HIP_UNSUPPORTED}},
+  // cudaFreeAsync
+  {"cuMemFreeAsync",                                       {"hipFreeAsync",                                            "", CONV_STREAM_ORDERED_MEMORY, API_DRIVER, 13, HIP_EXPERIMENTAL}},
+  // cudaMallocAsync
+  {"cuMemAllocAsync",                                      {"hipMallocAsync",                                          "", CONV_STREAM_ORDERED_MEMORY, API_DRIVER, 13, HIP_EXPERIMENTAL}},
   // cudaMemPoolTrimTo
   {"cuMemPoolTrimTo",                                      {"hipMemPoolTrimTo",                                        "", CONV_STREAM_ORDERED_MEMORY, API_DRIVER, 13, HIP_UNSUPPORTED}},
   // cudaMemPoolSetAttribute
@@ -1360,6 +1360,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_FUNCTION_VER_MAP {
   {"hipStreamUpdateCaptureDependencies",                   {HIP_5000, HIP_0,    HIP_0   }},
   {"hipGraphicsGLRegisterImage",                           {HIP_5010, HIP_0,    HIP_0   }},
   {"hipGraphicsSubResourceGetMappedArray",                 {HIP_5010, HIP_0,    HIP_0   }},
+  {"hipDeviceGetUuid",                                     {HIP_5020, HIP_0,    HIP_0   }},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_DRIVER_API_SECTION_MAP {

@@ -740,18 +740,30 @@ my %experimental_funcs = (
     "cudaMemAccessFlagsProtNone" => "5.2.0",
     "cudaMemAccessFlags" => "5.2.0",
     "cudaMemAccessDesc" => "5.2.0",
+    "cudaMallocAsync" => "",
     "cudaKernelNodeAttributeCooperative" => "5.2.0",
     "cudaKernelNodeAttributeAccessPolicyWindow" => "5.2.0",
     "cudaKernelNodeAttrValue" => "5.2.0",
     "cudaKernelNodeAttrID" => "5.2.0",
     "cudaGraphInstantiateFlags" => "5.2.0",
     "cudaGraphInstantiateFlagAutoFreeOnLaunch" => "5.2.0",
+    "cudaFreeAsync" => "",
+    "cudaDeviceSetMemPool" => "",
+    "cudaDeviceGetMemPool" => "",
+    "cudaDeviceGetDefaultMemPool" => "",
     "cudaDevAttrMemoryPoolsSupported" => "5.2.0",
     "cudaAccessPropertyStreaming" => "5.2.0",
     "cudaAccessPropertyPersisting" => "5.2.0",
     "cudaAccessPropertyNormal" => "5.2.0",
     "cudaAccessProperty" => "5.2.0",
     "cudaAccessPolicyWindow" => "5.2.0",
+    "cuMemFreeAsync" => "",
+    "cuMemAllocAsync" => "",
+    "cuDeviceSetMemPool" => "",
+    "cuDeviceGetUuid_v2" => "",
+    "cuDeviceGetUuid" => "",
+    "cuDeviceGetMemPool" => "",
+    "cuDeviceGetDefaultMemPool" => "",
     "CUuuid_st" => "5.2.0",
     "CUuuid" => "5.2.0",
     "CUmemoryPool" => "5.2.0",
@@ -973,6 +985,18 @@ sub subst {
 }
 
 sub experimentalSubstitutions {
+    subst("cuDeviceGetDefaultMemPool", "hipDeviceGetDefaultMemPool", "device");
+    subst("cuDeviceGetMemPool", "hipDeviceGetMemPool", "device");
+    subst("cuDeviceGetUuid", "hipDeviceGetUuid", "device");
+    subst("cuDeviceGetUuid_v2", "hipDeviceGetUuid", "device");
+    subst("cuDeviceSetMemPool", "hipDeviceSetMemPool", "device");
+    subst("cudaDeviceGetDefaultMemPool", "hipDeviceGetDefaultMemPool", "device");
+    subst("cudaDeviceGetMemPool", "hipDeviceGetMemPool", "device");
+    subst("cudaDeviceSetMemPool", "hipDeviceSetMemPool", "device");
+    subst("cudaFreeAsync", "hipFreeAsync", "memory");
+    subst("cudaMallocAsync", "hipMallocAsync", "memory");
+    subst("cuMemAllocAsync", "hipMallocAsync", "stream_ordered_memory");
+    subst("cuMemFreeAsync", "hipFreeAsync", "stream_ordered_memory");
     subst("CUaccessPolicyWindow", "hipAccessPolicyWindow", "type");
     subst("CUaccessPolicyWindow_st", "hipAccessPolicyWindow", "type");
     subst("CUaccessProperty", "hipAccessProperty", "type");
@@ -5926,7 +5950,6 @@ sub warnUnsupportedFunctions {
         "cudaMemPoolCreate",
         "cudaMemAllocNodeParams",
         "cudaMallocFromPoolAsync",
-        "cudaMallocAsync",
         "cudaLimitStackSize",
         "cudaLimitPersistingL2CacheSize",
         "cudaLimitMaxL2FetchGranularity",
@@ -6021,7 +6044,6 @@ sub warnUnsupportedFunctions {
         "cudaGLMapFlags",
         "cudaGLMapBufferObjectAsync",
         "cudaGLMapBufferObject",
-        "cudaFreeAsync",
         "cudaFormatModeForced",
         "cudaFormatModeAuto",
         "cudaFlushGPUDirectRDMAWritesToOwner",
@@ -6201,7 +6223,6 @@ sub warnUnsupportedFunctions {
         "cudaEGLStreamConsumerConnectWithFlags",
         "cudaEGLStreamConsumerConnect",
         "cudaEGLStreamConsumerAcquireFrame",
-        "cudaDeviceSetMemPool",
         "cudaDeviceSetLimit",
         "cudaDeviceSetGraphMemAttribute",
         "cudaDevicePropDontCare",
@@ -6209,9 +6230,7 @@ sub warnUnsupportedFunctions {
         "cudaDeviceGraphMemTrim",
         "cudaDeviceGetTexture1DLinearMaxWidth",
         "cudaDeviceGetNvSciSyncAttributes",
-        "cudaDeviceGetMemPool",
         "cudaDeviceGetGraphMemAttribute",
-        "cudaDeviceGetDefaultMemPool",
         "cudaDeviceFlushGPUDirectRDMAWrites",
         "cudaDevAttrTimelineSemaphoreInteropSupported",
         "cudaDevAttrSparseCudaArraySupported",
@@ -6416,11 +6435,9 @@ sub warnUnsupportedFunctions {
         "cuMemGetAllocationPropertiesFromHandle",
         "cuMemGetAllocationGranularity",
         "cuMemGetAccess",
-        "cuMemFreeAsync",
         "cuMemExportToShareableHandle",
         "cuMemCreate",
         "cuMemAllocFromPoolAsync",
-        "cuMemAllocAsync",
         "cuMemAddressReserve",
         "cuMemAddressFree",
         "cuLinkDestroy",
@@ -6504,19 +6521,14 @@ sub warnUnsupportedFunctions {
         "cuEGLStreamConsumerConnectWithFlags",
         "cuEGLStreamConsumerConnect",
         "cuEGLStreamConsumerAcquireFrame",
-        "cuDeviceSetMemPool",
         "cuDeviceSetGraphMemAttribute",
         "cuDeviceGraphMemTrim",
-        "cuDeviceGetUuid_v2",
-        "cuDeviceGetUuid",
         "cuDeviceGetTexture1DLinearMaxWidth",
         "cuDeviceGetProperties",
         "cuDeviceGetNvSciSyncAttributes",
-        "cuDeviceGetMemPool",
         "cuDeviceGetLuid",
         "cuDeviceGetGraphMemAttribute",
         "cuDeviceGetExecAffinitySupport",
-        "cuDeviceGetDefaultMemPool",
         "cuD3D9UnregisterResource",
         "cuD3D9UnmapResources",
         "cuD3D9ResourceSetMapFlags",
