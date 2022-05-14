@@ -1112,16 +1112,16 @@
 |`cuDeviceGet`| | | |`hipDeviceGet`|1.6.0| | | |
 |`cuDeviceGetAttribute`| | | |`hipDeviceGetAttribute`|1.6.0| | | |
 |`cuDeviceGetCount`| | | |`hipGetDeviceCount`|1.6.0| | | |
-|`cuDeviceGetDefaultMemPool`|11.2| | |`hipDeviceGetDefaultMemPool`|5.2.0| | | |
+|`cuDeviceGetDefaultMemPool`|11.2| | |`hipDeviceGetDefaultMemPool`|5.2.0| | |5.2.0|
 |`cuDeviceGetExecAffinitySupport`|11.4| | | | | | | |
 |`cuDeviceGetLuid`|10.0| | | | | | | |
-|`cuDeviceGetMemPool`|11.2| | |`hipDeviceGetMemPool`|5.2.0| | | |
+|`cuDeviceGetMemPool`|11.2| | |`hipDeviceGetMemPool`|5.2.0| | |5.2.0|
 |`cuDeviceGetName`| | | |`hipDeviceGetName`|1.6.0| | | |
 |`cuDeviceGetNvSciSyncAttributes`|10.2| | | | | | | |
 |`cuDeviceGetTexture1DLinearMaxWidth`|11.1| | | | | | | |
-|`cuDeviceGetUuid`|9.2| | |`hipDeviceGetUuid`|5.2.0| | | |
-|`cuDeviceGetUuid_v2`|11.4| | |`hipDeviceGetUuid`|5.2.0| | | |
-|`cuDeviceSetMemPool`|11.2| | |`hipDeviceSetMemPool`|5.2.0| | | |
+|`cuDeviceGetUuid`|9.2| | |`hipDeviceGetUuid`|5.2.0| | |5.2.0|
+|`cuDeviceGetUuid_v2`|11.4| | |`hipDeviceGetUuid`|5.2.0| | |5.2.0|
+|`cuDeviceSetMemPool`|11.2| | |`hipDeviceSetMemPool`|5.2.0| | |5.2.0|
 |`cuDeviceTotalMem`| | | |`hipDeviceTotalMem`|1.6.0| | | |
 |`cuDeviceTotalMem_v2`| | | |`hipDeviceTotalMem`|1.6.0| | | |
 
@@ -1336,20 +1336,20 @@
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
-|`cuMemAllocAsync`|11.2| | |`hipMallocAsync`|5.2.0| | | |
+|`cuMemAllocAsync`|11.2| | |`hipMallocAsync`|5.2.0| | |5.2.0|
 |`cuMemAllocFromPoolAsync`|11.2| | | | | | | |
-|`cuMemFreeAsync`|11.2| | |`hipFreeAsync`|5.2.0| | | |
-|`cuMemPoolCreate`|11.2| | |`hipMemPoolCreate`|5.2.0| | | |
-|`cuMemPoolDestroy`|11.2| | |`hipMemPoolDestroy`|5.2.0| | | |
+|`cuMemFreeAsync`|11.2| | |`hipFreeAsync`|5.2.0| | |5.2.0|
+|`cuMemPoolCreate`|11.2| | |`hipMemPoolCreate`|5.2.0| | |5.2.0|
+|`cuMemPoolDestroy`|11.2| | |`hipMemPoolDestroy`|5.2.0| | |5.2.0|
 |`cuMemPoolExportPointer`|11.2| | | | | | | |
 |`cuMemPoolExportToShareableHandle`|11.2| | | | | | | |
-|`cuMemPoolGetAccess`|11.2| | |`hipMemPoolGetAccess`|5.2.0| | | |
-|`cuMemPoolGetAttribute`|11.2| | |`hipMemPoolGetAttribute`|5.2.0| | | |
+|`cuMemPoolGetAccess`|11.2| | |`hipMemPoolGetAccess`|5.2.0| | |5.2.0|
+|`cuMemPoolGetAttribute`|11.2| | |`hipMemPoolGetAttribute`|5.2.0| | |5.2.0|
 |`cuMemPoolImportFromShareableHandle`|11.2| | | | | | | |
 |`cuMemPoolImportPointer`|11.2| | | | | | | |
-|`cuMemPoolSetAccess`|11.2| | |`hipMemPoolSetAccess`|5.2.0| | | |
-|`cuMemPoolSetAttribute`|11.2| | |`hipMemPoolSetAttribute`|5.2.0| | | |
-|`cuMemPoolTrimTo`|11.2| | |`hipMemPoolTrimTo`|5.2.0| | | |
+|`cuMemPoolSetAccess`|11.2| | |`hipMemPoolSetAccess`|5.2.0| | |5.2.0|
+|`cuMemPoolSetAttribute`|11.2| | |`hipMemPoolSetAttribute`|5.2.0| | |5.2.0|
+|`cuMemPoolTrimTo`|11.2| | |`hipMemPoolTrimTo`|5.2.0| | |5.2.0|
 
 ## **14. Unified Addressing**
 

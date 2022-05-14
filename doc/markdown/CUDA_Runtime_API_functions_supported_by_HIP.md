@@ -9,9 +9,9 @@
 |`cudaDeviceGetAttribute`| | | |`hipDeviceGetAttribute`|1.6.0| | | |
 |`cudaDeviceGetByPCIBusId`| | | |`hipDeviceGetByPCIBusId`|1.6.0| | | |
 |`cudaDeviceGetCacheConfig`| | | |`hipDeviceGetCacheConfig`|1.6.0| | | |
-|`cudaDeviceGetDefaultMemPool`|11.2| | |`hipDeviceGetDefaultMemPool`|5.2.0| | | |
+|`cudaDeviceGetDefaultMemPool`|11.2| | |`hipDeviceGetDefaultMemPool`|5.2.0| | |5.2.0|
 |`cudaDeviceGetLimit`| | | |`hipDeviceGetLimit`|1.6.0| | | |
-|`cudaDeviceGetMemPool`|11.2| | |`hipDeviceGetMemPool`|5.2.0| | | |
+|`cudaDeviceGetMemPool`|11.2| | |`hipDeviceGetMemPool`|5.2.0| | |5.2.0|
 |`cudaDeviceGetNvSciSyncAttributes`|10.2| | | | | | | |
 |`cudaDeviceGetP2PAttribute`|8.0| | |`hipDeviceGetP2PAttribute`|3.8.0| | | |
 |`cudaDeviceGetPCIBusId`| | | |`hipDeviceGetPCIBusId`|1.6.0| | | |
@@ -21,7 +21,7 @@
 |`cudaDeviceReset`| | | |`hipDeviceReset`|1.6.0| | | |
 |`cudaDeviceSetCacheConfig`| | | |`hipDeviceSetCacheConfig`|1.6.0| | | |
 |`cudaDeviceSetLimit`| | | | | | | | |
-|`cudaDeviceSetMemPool`|11.2| | |`hipDeviceSetMemPool`|5.2.0| | | |
+|`cudaDeviceSetMemPool`|11.2| | |`hipDeviceSetMemPool`|5.2.0| | |5.2.0|
 |`cudaDeviceSetSharedMemConfig`| | | |`hipDeviceSetSharedMemConfig`|1.6.0| | | |
 |`cudaDeviceSynchronize`| | | |`hipDeviceSynchronize`|1.6.0| | | |
 |`cudaGetDevice`| | | |`hipGetDevice`|1.6.0| | | |
@@ -213,20 +213,20 @@
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
-|`cudaFreeAsync`|11.2| | |`hipFreeAsync`|5.2.0| | | |
-|`cudaMallocAsync`|11.2| | |`hipMallocAsync`|5.2.0| | | |
+|`cudaFreeAsync`|11.2| | |`hipFreeAsync`|5.2.0| | |5.2.0|
+|`cudaMallocAsync`|11.2| | |`hipMallocAsync`|5.2.0| | |5.2.0|
 |`cudaMallocFromPoolAsync`|11.2| | | | | | | |
-|`cudaMemPoolCreate`|11.2| | |`hipMemPoolCreate`|5.2.0| | | |
-|`cudaMemPoolDestroy`|11.2| | |`hipMemPoolDestroy`|5.2.0| | | |
+|`cudaMemPoolCreate`|11.2| | |`hipMemPoolCreate`|5.2.0| | |5.2.0|
+|`cudaMemPoolDestroy`|11.2| | |`hipMemPoolDestroy`|5.2.0| | |5.2.0|
 |`cudaMemPoolExportPointer`|11.2| | | | | | | |
 |`cudaMemPoolExportToShareableHandle`|11.2| | | | | | | |
-|`cudaMemPoolGetAccess`|11.2| | |`hipMemPoolGetAccess`|5.2.0| | | |
-|`cudaMemPoolGetAttribute`|11.2| | |`hipMemPoolGetAttribute`|5.2.0| | | |
+|`cudaMemPoolGetAccess`|11.2| | |`hipMemPoolGetAccess`|5.2.0| | |5.2.0|
+|`cudaMemPoolGetAttribute`|11.2| | |`hipMemPoolGetAttribute`|5.2.0| | |5.2.0|
 |`cudaMemPoolImportFromShareableHandle`|11.2| | | | | | | |
 |`cudaMemPoolImportPointer`|11.2| | | | | | | |
-|`cudaMemPoolSetAccess`|11.2| | |`hipMemPoolSetAccess`|5.2.0| | | |
-|`cudaMemPoolSetAttribute`|11.2| | |`hipMemPoolSetAttribute`|5.2.0| | | |
-|`cudaMemPoolTrimTo`|11.2| | |`hipMemPoolTrimTo`|5.2.0| | | |
+|`cudaMemPoolSetAccess`|11.2| | |`hipMemPoolSetAccess`|5.2.0| | |5.2.0|
+|`cudaMemPoolSetAttribute`|11.2| | |`hipMemPoolSetAttribute`|5.2.0| | |5.2.0|
+|`cudaMemPoolTrimTo`|11.2| | |`hipMemPoolTrimTo`|5.2.0| | |5.2.0|
 
 ## **12. Unified Addressing**
 

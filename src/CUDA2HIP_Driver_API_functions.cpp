@@ -1360,7 +1360,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_FUNCTION_VER_MAP {
   {"hipStreamUpdateCaptureDependencies",                   {HIP_5000, HIP_0,    HIP_0   }},
   {"hipGraphicsGLRegisterImage",                           {HIP_5010, HIP_0,    HIP_0   }},
   {"hipGraphicsSubResourceGetMappedArray",                 {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipDeviceGetUuid",                                     {HIP_5020, HIP_0,    HIP_0   }},
+  {"hipDeviceGetUuid",                                     {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_DRIVER_API_SECTION_MAP {
