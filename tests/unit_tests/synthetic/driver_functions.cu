@@ -143,9 +143,20 @@ int main() {
   CUgraphExecUpdateResult graphExecUpdateResult;
 #endif
 
+#if CUDA_VERSION >= 10020
+  // CHECK: hipMemLocation memLocation_st;
+  // CHECK-NEXT: hipMemLocation memLocation;
+  CUmemLocation_st memLocation_st;
+  CUmemLocation memLocation;
+#endif
+
 #if CUDA_VERSION >= 11020
   // CHECK: hipMemPool_t memPool_t;
+  // CHECK-NEXT: hipMemPoolProps memPoolProps_st;
+  // CHECK-NEXT: hipMemPoolProps memPoolProps;
   CUmemoryPool memPool_t;
+  CUmemPoolProps_st memPoolProps_st;
+  CUmemPoolProps memPoolProps;
 #endif
 
   // CUDA: CUresult CUDAAPI cuInit(unsigned int Flags);
@@ -1141,6 +1152,50 @@ int main() {
   // HIP: hipError_t hipFreeAsync(void* dev_ptr, hipStream_t stream);
   // CHECK: result = hipFreeAsync(deviceptr, stream);
   result = cuMemFreeAsync(deviceptr, stream);
+
+  // CUDA: CUresult CUDAAPI cuMemPoolTrimTo(CUmemoryPool pool, size_t minBytesToKeep);
+  // HIP: hipError_t hipMemPoolTrimTo(hipMemPool_t mem_pool, size_t min_bytes_to_hold);
+  // CHECK: result = hipMemPoolTrimTo(memPool_t, bytes);
+  result = cuMemPoolTrimTo(memPool_t, bytes);
+
+  // CHECK: hipMemPoolAttr memPoolAttr;
+  CUmemPool_attribute memPoolAttr;
+
+  // CUDA: CUresult CUDAAPI cuMemPoolSetAttribute(CUmemoryPool pool, CUmemPool_attribute attr, void *value);
+  // HIP: hipError_t hipMemPoolSetAttribute(hipMemPool_t mem_pool, hipMemPoolAttr attr, void* value);
+  // CHECK: result = hipMemPoolSetAttribute(memPool_t, memPoolAttr, image);
+  result = cuMemPoolSetAttribute(memPool_t, memPoolAttr, image);
+
+  // CUDA: CUresult CUDAAPI cuMemPoolGetAttribute(CUmemoryPool pool, CUmemPool_attribute attr, void *value);
+  // HIP: hipError_t hipMemPoolGetAttribute(hipMemPool_t mem_pool, hipMemPoolAttr attr, void* value);
+  // CHECK: result = hipMemPoolGetAttribute(memPool_t, memPoolAttr, image);
+  result = cuMemPoolGetAttribute(memPool_t, memPoolAttr, image);
+
+  // CHECK: hipMemAccessDesc memAccessDesc;
+  CUmemAccessDesc memAccessDesc;
+
+  // CUDA: CUresult CUDAAPI cuMemPoolSetAccess(CUmemoryPool pool, const CUmemAccessDesc *map, size_t count);
+  // HIP: hipError_t hipMemPoolSetAccess(hipMemPool_t mem_pool, const hipMemAccessDesc* desc_list, size_t count);
+  // CHECK: result = hipMemPoolSetAccess(memPool_t, &memAccessDesc, bytes);
+  result = cuMemPoolSetAccess(memPool_t, &memAccessDesc, bytes);
+
+  // CHECK: hipMemAccessFlags memAccessFlags;
+  CUmemAccess_flags memAccessFlags;
+
+  // CUDA: CUresult CUDAAPI cuMemPoolGetAccess(CUmemAccess_flags *flags, CUmemoryPool memPool, CUmemLocation *location);
+  // HIP: hipError_t hipMemPoolGetAccess(hipMemAccessFlags* flags, hipMemPool_t mem_pool, hipMemLocation* location);
+  // CHECK: result = hipMemPoolGetAccess(&memAccessFlags, memPool_t, &memLocation);
+  result = cuMemPoolGetAccess(&memAccessFlags, memPool_t, &memLocation);
+
+  // CUDA: CUresult CUDAAPI cuMemPoolCreate(CUmemoryPool *pool, const CUmemPoolProps *poolProps);
+  // HIP: hipError_t hipMemPoolCreate(hipMemPool_t* mem_pool, const hipMemPoolProps* pool_props);
+  // CHECK: result = hipMemPoolCreate(&memPool_t, &memPoolProps);
+  result = cuMemPoolCreate(&memPool_t, &memPoolProps);
+
+  // CUDA: CUresult CUDAAPI cuMemPoolDestroy(CUmemoryPool pool);
+  // HIP: hipError_t hipMemPoolDestroy(hipMemPool_t mem_pool);
+  // CHECK: result = hipMemPoolDestroy(memPool_t);
+  result = cuMemPoolDestroy(memPool_t);
 #endif
 
   return 0;

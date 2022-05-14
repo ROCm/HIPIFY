@@ -1339,17 +1339,17 @@
 |`cuMemAllocAsync`|11.2| | |`hipMallocAsync`|5.2.0| | | |
 |`cuMemAllocFromPoolAsync`|11.2| | | | | | | |
 |`cuMemFreeAsync`|11.2| | |`hipFreeAsync`|5.2.0| | | |
-|`cuMemPoolCreate`|11.2| | | | | | | |
-|`cuMemPoolDestroy`|11.2| | | | | | | |
+|`cuMemPoolCreate`|11.2| | |`hipMemPoolCreate`|5.2.0| | | |
+|`cuMemPoolDestroy`|11.2| | |`hipMemPoolDestroy`|5.2.0| | | |
 |`cuMemPoolExportPointer`|11.2| | | | | | | |
 |`cuMemPoolExportToShareableHandle`|11.2| | | | | | | |
-|`cuMemPoolGetAccess`|11.2| | | | | | | |
-|`cuMemPoolGetAttribute`|11.2| | | | | | | |
+|`cuMemPoolGetAccess`|11.2| | |`hipMemPoolGetAccess`|5.2.0| | | |
+|`cuMemPoolGetAttribute`|11.2| | |`hipMemPoolGetAttribute`|5.2.0| | | |
 |`cuMemPoolImportFromShareableHandle`|11.2| | | | | | | |
 |`cuMemPoolImportPointer`|11.2| | | | | | | |
-|`cuMemPoolSetAccess`|11.2| | | | | | | |
-|`cuMemPoolSetAttribute`|11.2| | | | | | | |
-|`cuMemPoolTrimTo`|11.2| | | | | | | |
+|`cuMemPoolSetAccess`|11.2| | |`hipMemPoolSetAccess`|5.2.0| | | |
+|`cuMemPoolSetAttribute`|11.2| | |`hipMemPoolSetAttribute`|5.2.0| | | |
+|`cuMemPoolTrimTo`|11.2| | |`hipMemPoolTrimTo`|5.2.0| | | |
 
 ## **14. Unified Addressing**
 

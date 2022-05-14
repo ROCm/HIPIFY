@@ -711,11 +711,18 @@ my %removed_funcs = (
 my %experimental_funcs = (
     "cudaUUID_t" => "5.2.0",
     "cudaMemPool_t" => "5.2.0",
+    "cudaMemPoolTrimTo" => "",
+    "cudaMemPoolSetAttribute" => "",
+    "cudaMemPoolSetAccess" => "",
     "cudaMemPoolReuseFollowEventDependencies" => "5.2.0",
     "cudaMemPoolReuseAllowOpportunistic" => "5.2.0",
     "cudaMemPoolReuseAllowInternalDependencies" => "5.2.0",
     "cudaMemPoolPtrExportData" => "5.2.0",
     "cudaMemPoolProps" => "5.2.0",
+    "cudaMemPoolGetAttribute" => "",
+    "cudaMemPoolGetAccess" => "",
+    "cudaMemPoolDestroy" => "",
+    "cudaMemPoolCreate" => "",
     "cudaMemPoolAttrUsedMemHigh" => "5.2.0",
     "cudaMemPoolAttrUsedMemCurrent" => "5.2.0",
     "cudaMemPoolAttrReservedMemHigh" => "5.2.0",
@@ -757,6 +764,13 @@ my %experimental_funcs = (
     "cudaAccessPropertyNormal" => "5.2.0",
     "cudaAccessProperty" => "5.2.0",
     "cudaAccessPolicyWindow" => "5.2.0",
+    "cuMemPoolTrimTo" => "",
+    "cuMemPoolSetAttribute" => "",
+    "cuMemPoolSetAccess" => "",
+    "cuMemPoolGetAttribute" => "",
+    "cuMemPoolGetAccess" => "",
+    "cuMemPoolDestroy" => "",
+    "cuMemPoolCreate" => "",
     "cuMemFreeAsync" => "",
     "cuMemAllocAsync" => "",
     "cuDeviceSetMemPool" => "",
@@ -995,8 +1009,22 @@ sub experimentalSubstitutions {
     subst("cudaDeviceSetMemPool", "hipDeviceSetMemPool", "device");
     subst("cudaFreeAsync", "hipFreeAsync", "memory");
     subst("cudaMallocAsync", "hipMallocAsync", "memory");
+    subst("cudaMemPoolCreate", "hipMemPoolCreate", "memory");
+    subst("cudaMemPoolDestroy", "hipMemPoolDestroy", "memory");
+    subst("cudaMemPoolGetAccess", "hipMemPoolGetAccess", "memory");
+    subst("cudaMemPoolGetAttribute", "hipMemPoolGetAttribute", "memory");
+    subst("cudaMemPoolSetAccess", "hipMemPoolSetAccess", "memory");
+    subst("cudaMemPoolSetAttribute", "hipMemPoolSetAttribute", "memory");
+    subst("cudaMemPoolTrimTo", "hipMemPoolTrimTo", "memory");
     subst("cuMemAllocAsync", "hipMallocAsync", "stream_ordered_memory");
     subst("cuMemFreeAsync", "hipFreeAsync", "stream_ordered_memory");
+    subst("cuMemPoolCreate", "hipMemPoolCreate", "stream_ordered_memory");
+    subst("cuMemPoolDestroy", "hipMemPoolDestroy", "stream_ordered_memory");
+    subst("cuMemPoolGetAccess", "hipMemPoolGetAccess", "stream_ordered_memory");
+    subst("cuMemPoolGetAttribute", "hipMemPoolGetAttribute", "stream_ordered_memory");
+    subst("cuMemPoolSetAccess", "hipMemPoolSetAccess", "stream_ordered_memory");
+    subst("cuMemPoolSetAttribute", "hipMemPoolSetAttribute", "stream_ordered_memory");
+    subst("cuMemPoolTrimTo", "hipMemPoolTrimTo", "stream_ordered_memory");
     subst("CUaccessPolicyWindow", "hipAccessPolicyWindow", "type");
     subst("CUaccessPolicyWindow_st", "hipAccessPolicyWindow", "type");
     subst("CUaccessProperty", "hipAccessProperty", "type");
@@ -5937,17 +5965,10 @@ sub warnUnsupportedFunctions {
         "cudaMemcpy3DPeerAsync",
         "cudaMemcpy3DPeer",
         "cudaMemcpy2DArrayToArray",
-        "cudaMemPoolTrimTo",
-        "cudaMemPoolSetAttribute",
-        "cudaMemPoolSetAccess",
         "cudaMemPoolImportPointer",
         "cudaMemPoolImportFromShareableHandle",
-        "cudaMemPoolGetAttribute",
-        "cudaMemPoolGetAccess",
         "cudaMemPoolExportToShareableHandle",
         "cudaMemPoolExportPointer",
-        "cudaMemPoolDestroy",
-        "cudaMemPoolCreate",
         "cudaMemAllocNodeParams",
         "cudaMallocFromPoolAsync",
         "cudaLimitStackSize",
@@ -6418,17 +6439,10 @@ sub warnUnsupportedFunctions {
         "cuMemSetAccess",
         "cuMemRetainAllocationHandle",
         "cuMemRelease",
-        "cuMemPoolTrimTo",
-        "cuMemPoolSetAttribute",
-        "cuMemPoolSetAccess",
         "cuMemPoolImportPointer",
         "cuMemPoolImportFromShareableHandle",
-        "cuMemPoolGetAttribute",
-        "cuMemPoolGetAccess",
         "cuMemPoolExportToShareableHandle",
         "cuMemPoolExportPointer",
-        "cuMemPoolDestroy",
-        "cuMemPoolCreate",
         "cuMemMapArrayAsync",
         "cuMemMap",
         "cuMemImportFromShareableHandle",

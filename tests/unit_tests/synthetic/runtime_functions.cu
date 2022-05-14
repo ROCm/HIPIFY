@@ -16,9 +16,10 @@ int main() {
   size_t bytes = 0;
   int device = 0;
   void* deviceptr = nullptr;
+  void* image = nullptr;
 
   // CHECK: hipError_t result = hipSuccess;
-  // CHECK: hipStream_t stream;
+  // CHECK-NEXT: hipStream_t stream;
   cudaError result = cudaSuccess;
   cudaStream_t stream;
 
@@ -53,6 +54,52 @@ int main() {
   // CHECK: result = hipFreeAsync(deviceptr, stream);
   result = cudaFreeAsync(deviceptr, stream);
 
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMemPoolTrimTo(cudaMemPool_t memPool, size_t minBytesToKeep);
+  // HIP: hipError_t hipMemPoolTrimTo(hipMemPool_t mem_pool, size_t min_bytes_to_hold);
+  // CHECK: result = hipMemPoolTrimTo(memPool_t, bytes);
+  result = cudaMemPoolTrimTo(memPool_t, bytes);
+
+  // CHECK: hipMemPoolAttr memPoolAttr;
+  cudaMemPoolAttr memPoolAttr;
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMemPoolSetAttribute(cudaMemPool_t memPool, enum cudaMemPoolAttr attr, void *value );
+  // HIP: hipError_t hipMemPoolSetAttribute(hipMemPool_t mem_pool, hipMemPoolAttr attr, void* value);
+  // CHECK: result = hipMemPoolSetAttribute(memPool_t, memPoolAttr, image);
+  result = cudaMemPoolSetAttribute(memPool_t, memPoolAttr, image);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMemPoolGetAttribute(cudaMemPool_t memPool, enum cudaMemPoolAttr attr, void *value );
+  // HIP: hipError_t hipMemPoolGetAttribute(hipMemPool_t mem_pool, hipMemPoolAttr attr, void* value);
+  // CHECK: result = hipMemPoolGetAttribute(memPool_t, memPoolAttr, image);
+  result = cudaMemPoolGetAttribute(memPool_t, memPoolAttr, image);
+
+  // CHECK: hipMemAccessDesc memAccessDesc;
+  cudaMemAccessDesc memAccessDesc;
+  // CHECK: hipMemAccessFlags memAccessFlags;
+  cudaMemAccessFlags memAccessFlags;
+  // CHECK: hipMemLocation memLocation;
+  cudaMemLocation memLocation;
+  // CHECK: hipMemPoolProps memPoolProps;
+  cudaMemPoolProps memPoolProps;
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMemPoolSetAccess(cudaMemPool_t memPool, const struct cudaMemAccessDesc *descList, size_t count);
+  // HIP: hipError_t hipMemPoolSetAccess(hipMemPool_t mem_pool, const hipMemAccessDesc* desc_list, size_t count);
+  // CHECK: result = hipMemPoolSetAccess(memPool_t, &memAccessDesc, bytes);
+  result = cudaMemPoolSetAccess(memPool_t, &memAccessDesc, bytes);
+
+  // CUDA: CUresult extern __host__ cudaError_t CUDARTAPI cudaMemPoolGetAccess(enum cudaMemAccessFlags *flags, cudaMemPool_t memPool, struct cudaMemLocation *location);
+  // HIP: hipError_t hipMemPoolGetAccess(hipMemAccessFlags* flags, hipMemPool_t mem_pool, hipMemLocation* location);
+  // CHECK: result = hipMemPoolGetAccess(&memAccessFlags, memPool_t, &memLocation);
+  result = cudaMemPoolGetAccess(&memAccessFlags, memPool_t, &memLocation);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMemPoolCreate(cudaMemPool_t *memPool, const struct cudaMemPoolProps *poolProps);
+  // HIP: hipError_t hipMemPoolCreate(hipMemPool_t* mem_pool, const hipMemPoolProps* pool_props);
+  // CHECK: result = hipMemPoolCreate(&memPool_t, &memPoolProps);
+  result = cudaMemPoolCreate(&memPool_t, &memPoolProps);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMemPoolDestroy(cudaMemPool_t memPool);
+  // HIP: hipError_t hipMemPoolDestroy(hipMemPool_t mem_pool);
+  // CHECK: result = hipMemPoolDestroy(memPool_t);
+  result = cudaMemPoolDestroy(memPool_t);
 #endif
 
   return 0;

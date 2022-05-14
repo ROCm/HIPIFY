@@ -363,19 +363,19 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   // cudaMallocAsync
   {"cuMemAllocAsync",                                      {"hipMallocAsync",                                          "", CONV_STREAM_ORDERED_MEMORY, API_DRIVER, 13, HIP_EXPERIMENTAL}},
   // cudaMemPoolTrimTo
-  {"cuMemPoolTrimTo",                                      {"hipMemPoolTrimTo",                                        "", CONV_STREAM_ORDERED_MEMORY, API_DRIVER, 13, HIP_UNSUPPORTED}},
+  {"cuMemPoolTrimTo",                                      {"hipMemPoolTrimTo",                                        "", CONV_STREAM_ORDERED_MEMORY, API_DRIVER, 13, HIP_EXPERIMENTAL}},
   // cudaMemPoolSetAttribute
-  {"cuMemPoolSetAttribute",                                {"hipMemPoolSetAttribute",                                  "", CONV_STREAM_ORDERED_MEMORY, API_DRIVER, 13, HIP_UNSUPPORTED}},
+  {"cuMemPoolSetAttribute",                                {"hipMemPoolSetAttribute",                                  "", CONV_STREAM_ORDERED_MEMORY, API_DRIVER, 13, HIP_EXPERIMENTAL}},
   // cudaMemPoolGetAttribute
-  {"cuMemPoolGetAttribute",                                {"hipMemPoolGetAttribute",                                  "", CONV_STREAM_ORDERED_MEMORY, API_DRIVER, 13, HIP_UNSUPPORTED}},
+  {"cuMemPoolGetAttribute",                                {"hipMemPoolGetAttribute",                                  "", CONV_STREAM_ORDERED_MEMORY, API_DRIVER, 13, HIP_EXPERIMENTAL}},
   // cudaMemPoolSetAccess
-  {"cuMemPoolSetAccess",                                   {"hipMemPoolSetAccess",                                     "", CONV_STREAM_ORDERED_MEMORY, API_DRIVER, 13, HIP_UNSUPPORTED}},
+  {"cuMemPoolSetAccess",                                   {"hipMemPoolSetAccess",                                     "", CONV_STREAM_ORDERED_MEMORY, API_DRIVER, 13, HIP_EXPERIMENTAL}},
   // cudaMemPoolGetAccess
-  {"cuMemPoolGetAccess",                                   {"hipMemPoolGetAccess",                                     "", CONV_STREAM_ORDERED_MEMORY, API_DRIVER, 13, HIP_UNSUPPORTED}},
+  {"cuMemPoolGetAccess",                                   {"hipMemPoolGetAccess",                                     "", CONV_STREAM_ORDERED_MEMORY, API_DRIVER, 13, HIP_EXPERIMENTAL}},
   // cudaMemPoolCreate
-  {"cuMemPoolCreate",                                      {"hipMemPoolCreate",                                        "", CONV_STREAM_ORDERED_MEMORY, API_DRIVER, 13, HIP_UNSUPPORTED}},
+  {"cuMemPoolCreate",                                      {"hipMemPoolCreate",                                        "", CONV_STREAM_ORDERED_MEMORY, API_DRIVER, 13, HIP_EXPERIMENTAL}},
   // cudaMemPoolDestroy
-  {"cuMemPoolDestroy",                                     {"hipMemPoolDestroy",                                       "", CONV_STREAM_ORDERED_MEMORY, API_DRIVER, 13, HIP_UNSUPPORTED}},
+  {"cuMemPoolDestroy",                                     {"hipMemPoolDestroy",                                       "", CONV_STREAM_ORDERED_MEMORY, API_DRIVER, 13, HIP_EXPERIMENTAL}},
   // no analogue
   {"cuMemAllocFromPoolAsync",                              {"hipMemAllocFromPoolAsync",                                "", CONV_STREAM_ORDERED_MEMORY, API_DRIVER, 13, HIP_UNSUPPORTED}},
   // cudaMemPoolExportToShareableHandle
