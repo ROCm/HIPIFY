@@ -398,19 +398,19 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // no analogue
   {"cudaMallocFromPoolAsync",                                 {"hipMallocFromPoolAsync",                                 "", CONV_MEMORY, API_RUNTIME, 11, HIP_UNSUPPORTED}},
   // cuMemPoolTrimTo
-  {"cudaMemPoolTrimTo",                                       {"hipMemPoolTrimTo",                                       "", CONV_MEMORY, API_RUNTIME, 11, HIP_UNSUPPORTED}},
+  {"cudaMemPoolTrimTo",                                       {"hipMemPoolTrimTo",                                       "", CONV_MEMORY, API_RUNTIME, 11, HIP_EXPERIMENTAL}},
   // cuMemPoolSetAttribute
-  {"cudaMemPoolSetAttribute",                                 {"hipMemPoolSetAttribute",                                 "", CONV_MEMORY, API_RUNTIME, 11, HIP_UNSUPPORTED}},
+  {"cudaMemPoolSetAttribute",                                 {"hipMemPoolSetAttribute",                                 "", CONV_MEMORY, API_RUNTIME, 11, HIP_EXPERIMENTAL}},
   // cuMemPoolGetAttribute
-  {"cudaMemPoolGetAttribute",                                 {"hipMemPoolGetAttribute",                                 "", CONV_MEMORY, API_RUNTIME, 11, HIP_UNSUPPORTED}},
+  {"cudaMemPoolGetAttribute",                                 {"hipMemPoolGetAttribute",                                 "", CONV_MEMORY, API_RUNTIME, 11, HIP_EXPERIMENTAL}},
   // cuMemPoolSetAccess
-  {"cudaMemPoolSetAccess",                                    {"hipMemPoolSetAccess",                                    "", CONV_MEMORY, API_RUNTIME, 11, HIP_UNSUPPORTED}},
+  {"cudaMemPoolSetAccess",                                    {"hipMemPoolSetAccess",                                    "", CONV_MEMORY, API_RUNTIME, 11, HIP_EXPERIMENTAL}},
   // cuMemPoolGetAccess
-  {"cudaMemPoolGetAccess",                                    {"hipMemPoolGetAccess",                                    "", CONV_MEMORY, API_RUNTIME, 11, HIP_UNSUPPORTED}},
+  {"cudaMemPoolGetAccess",                                    {"hipMemPoolGetAccess",                                    "", CONV_MEMORY, API_RUNTIME, 11, HIP_EXPERIMENTAL}},
   // cuMemPoolCreate
-  {"cudaMemPoolCreate",                                       {"hipMemPoolCreate",                                       "", CONV_MEMORY, API_RUNTIME, 11, HIP_UNSUPPORTED}},
+  {"cudaMemPoolCreate",                                       {"hipMemPoolCreate",                                       "", CONV_MEMORY, API_RUNTIME, 11, HIP_EXPERIMENTAL}},
   // cuMemPoolDestroy
-  {"cudaMemPoolDestroy",                                      {"hipMemPoolDestroy",                                      "", CONV_MEMORY, API_RUNTIME, 11, HIP_UNSUPPORTED}},
+  {"cudaMemPoolDestroy",                                      {"hipMemPoolDestroy",                                      "", CONV_MEMORY, API_RUNTIME, 11, HIP_EXPERIMENTAL}},
   // cuMemPoolExportToShareableHandle
   {"cudaMemPoolExportToShareableHandle",                      {"hipMemPoolExportToShareableHandle",                      "", CONV_MEMORY, API_RUNTIME, 11, HIP_UNSUPPORTED}},
   // cuMemPoolImportFromShareableHandle
@@ -1293,6 +1293,13 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP {
   {"hipDeviceGetMemPool",                                     {HIP_5020, HIP_0,    HIP_0   }},
   {"hipMallocAsync",                                          {HIP_5020, HIP_0,    HIP_0   }},
   {"hipFreeAsync",                                            {HIP_5020, HIP_0,    HIP_0   }},
+  {"hipMemPoolTrimTo",                                        {HIP_5020, HIP_0,    HIP_0   }},
+  {"hipMemPoolSetAttribute",                                  {HIP_5020, HIP_0,    HIP_0   }},
+  {"hipMemPoolGetAttribute",                                  {HIP_5020, HIP_0,    HIP_0   }},
+  {"hipMemPoolSetAccess",                                     {HIP_5020, HIP_0,    HIP_0   }},
+  {"hipMemPoolGetAccess",                                     {HIP_5020, HIP_0,    HIP_0   }},
+  {"hipMemPoolCreate",                                        {HIP_5020, HIP_0,    HIP_0   }},
+  {"hipMemPoolDestroy",                                       {HIP_5020, HIP_0,    HIP_0   }},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_RUNTIME_API_SECTION_MAP {

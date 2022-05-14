@@ -216,17 +216,17 @@
 |`cudaFreeAsync`|11.2| | |`hipFreeAsync`|5.2.0| | | |
 |`cudaMallocAsync`|11.2| | |`hipMallocAsync`|5.2.0| | | |
 |`cudaMallocFromPoolAsync`|11.2| | | | | | | |
-|`cudaMemPoolCreate`|11.2| | | | | | | |
-|`cudaMemPoolDestroy`|11.2| | | | | | | |
+|`cudaMemPoolCreate`|11.2| | |`hipMemPoolCreate`|5.2.0| | | |
+|`cudaMemPoolDestroy`|11.2| | |`hipMemPoolDestroy`|5.2.0| | | |
 |`cudaMemPoolExportPointer`|11.2| | | | | | | |
 |`cudaMemPoolExportToShareableHandle`|11.2| | | | | | | |
-|`cudaMemPoolGetAccess`|11.2| | | | | | | |
-|`cudaMemPoolGetAttribute`|11.2| | | | | | | |
+|`cudaMemPoolGetAccess`|11.2| | |`hipMemPoolGetAccess`|5.2.0| | | |
+|`cudaMemPoolGetAttribute`|11.2| | |`hipMemPoolGetAttribute`|5.2.0| | | |
 |`cudaMemPoolImportFromShareableHandle`|11.2| | | | | | | |
 |`cudaMemPoolImportPointer`|11.2| | | | | | | |
-|`cudaMemPoolSetAccess`|11.2| | | | | | | |
-|`cudaMemPoolSetAttribute`|11.2| | | | | | | |
-|`cudaMemPoolTrimTo`|11.2| | | | | | | |
+|`cudaMemPoolSetAccess`|11.2| | |`hipMemPoolSetAccess`|5.2.0| | | |
+|`cudaMemPoolSetAttribute`|11.2| | |`hipMemPoolSetAttribute`|5.2.0| | | |
+|`cudaMemPoolTrimTo`|11.2| | |`hipMemPoolTrimTo`|5.2.0| | | |
 
 ## **12. Unified Addressing**
 
