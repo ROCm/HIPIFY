@@ -1337,16 +1337,16 @@
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
 |`cuMemAllocAsync`|11.2| | |`hipMallocAsync`|5.2.0| | |5.2.0|
-|`cuMemAllocFromPoolAsync`|11.2| | | | | | | |
+|`cuMemAllocFromPoolAsync`|11.2| | |`hipMallocFromPoolAsync`|5.2.0| | |5.2.0|
 |`cuMemFreeAsync`|11.2| | |`hipFreeAsync`|5.2.0| | |5.2.0|
 |`cuMemPoolCreate`|11.2| | |`hipMemPoolCreate`|5.2.0| | |5.2.0|
 |`cuMemPoolDestroy`|11.2| | |`hipMemPoolDestroy`|5.2.0| | |5.2.0|
-|`cuMemPoolExportPointer`|11.2| | | | | | | |
-|`cuMemPoolExportToShareableHandle`|11.2| | | | | | | |
+|`cuMemPoolExportPointer`|11.2| | |`hipMemPoolExportPointer`|5.2.0| | |5.2.0|
+|`cuMemPoolExportToShareableHandle`|11.2| | |`hipMemPoolExportToShareableHandle`|5.2.0| | |5.2.0|
 |`cuMemPoolGetAccess`|11.2| | |`hipMemPoolGetAccess`|5.2.0| | |5.2.0|
 |`cuMemPoolGetAttribute`|11.2| | |`hipMemPoolGetAttribute`|5.2.0| | |5.2.0|
-|`cuMemPoolImportFromShareableHandle`|11.2| | | | | | | |
-|`cuMemPoolImportPointer`|11.2| | | | | | | |
+|`cuMemPoolImportFromShareableHandle`|11.2| | |`hipMemPoolImportFromShareableHandle`|5.2.0| | |5.2.0|
+|`cuMemPoolImportPointer`|11.2| | |`hipMemPoolImportPointer`|5.2.0| | |5.2.0|
 |`cuMemPoolSetAccess`|11.2| | |`hipMemPoolSetAccess`|5.2.0| | |5.2.0|
 |`cuMemPoolSetAttribute`|11.2| | |`hipMemPoolSetAttribute`|5.2.0| | |5.2.0|
 |`cuMemPoolTrimTo`|11.2| | |`hipMemPoolTrimTo`|5.2.0| | |5.2.0|
@@ -1390,7 +1390,7 @@
 |`cuStreamSynchronize`| | | |`hipStreamSynchronize`|1.6.0| | | |
 |`cuStreamUpdateCaptureDependencies`|11.3| | |`hipStreamUpdateCaptureDependencies`|5.0.0| | | |
 |`cuStreamWaitEvent`| | | |`hipStreamWaitEvent`|1.6.0| | | |
-|`cuThreadExchangeStreamCaptureMode`|10.1| | | | | | | |
+|`cuThreadExchangeStreamCaptureMode`|10.1| | |`hipThreadExchangeStreamCaptureMode`|5.2.0| | |5.2.0|
 
 ## **16. Event Management**
 
@@ -1439,7 +1439,7 @@
 |`cuFuncSetSharedMemConfig`| | | | | | | | |
 |`cuLaunchCooperativeKernel`|9.0| | | | | | | |
 |`cuLaunchCooperativeKernelMultiDevice`|9.0|11.3| | | | | | |
-|`cuLaunchHostFunc`|10.0| | | | | | | |
+|`cuLaunchHostFunc`|10.0| | |`hipLaunchHostFunc`|5.2.0| | |5.2.0|
 |`cuLaunchKernel`| | | |`hipModuleLaunchKernel`|1.6.0| | | |
 
 ## **20. Execution Control [DEPRECATED]**

@@ -159,7 +159,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuStreamWaitEvent
   {"cudaStreamWaitEvent",                                     {"hipStreamWaitEvent",                                     "", CONV_STREAM, API_RUNTIME, 4}},
   // cuThreadExchangeStreamCaptureMode
-  {"cudaThreadExchangeStreamCaptureMode",                     {"hipThreadExchangeStreamCaptureMode",                     "", CONV_STREAM, API_RUNTIME, 4, HIP_UNSUPPORTED}},
+  {"cudaThreadExchangeStreamCaptureMode",                     {"hipThreadExchangeStreamCaptureMode",                     "", CONV_STREAM, API_RUNTIME, 4, HIP_EXPERIMENTAL}},
 
   // 5. Event Management
   // no analogue
@@ -221,7 +221,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // NOTE: Not equal to cuLaunchCooperativeKernelMultiDevice due to different signatures
   {"cudaLaunchCooperativeKernelMultiDevice",                  {"hipLaunchCooperativeKernelMultiDevice",                  "", CONV_EXECUTION, API_RUNTIME, 7, CUDA_DEPRECATED}},
   // cuLaunchHostFunc
-  {"cudaLaunchHostFunc",                                      {"hipLaunchHostFunc",                                      "", CONV_EXECUTION, API_RUNTIME, 7, HIP_UNSUPPORTED}},
+  {"cudaLaunchHostFunc",                                      {"hipLaunchHostFunc",                                      "", CONV_EXECUTION, API_RUNTIME, 7, HIP_EXPERIMENTAL}},
   // no analogue
   // NOTE: Not equal to cuLaunchKernel due to different signatures
   {"cudaLaunchKernel",                                        {"hipLaunchKernel",                                        "", CONV_EXECUTION, API_RUNTIME, 7}},
@@ -395,8 +395,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   {"cudaMallocAsync",                                         {"hipMallocAsync",                                         "", CONV_MEMORY, API_RUNTIME, 11, HIP_EXPERIMENTAL}},
   // cuMemFreeAsync
   {"cudaFreeAsync",                                           {"hipFreeAsync",                                           "", CONV_MEMORY, API_RUNTIME, 11, HIP_EXPERIMENTAL}},
-  // no analogue
-  {"cudaMallocFromPoolAsync",                                 {"hipMallocFromPoolAsync",                                 "", CONV_MEMORY, API_RUNTIME, 11, HIP_UNSUPPORTED}},
+  // cuMemAllocFromPoolAsync
+  {"cudaMallocFromPoolAsync",                                 {"hipMallocFromPoolAsync",                                 "", CONV_MEMORY, API_RUNTIME, 11, HIP_EXPERIMENTAL}},
   // cuMemPoolTrimTo
   {"cudaMemPoolTrimTo",                                       {"hipMemPoolTrimTo",                                       "", CONV_MEMORY, API_RUNTIME, 11, HIP_EXPERIMENTAL}},
   // cuMemPoolSetAttribute
@@ -412,13 +412,13 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuMemPoolDestroy
   {"cudaMemPoolDestroy",                                      {"hipMemPoolDestroy",                                      "", CONV_MEMORY, API_RUNTIME, 11, HIP_EXPERIMENTAL}},
   // cuMemPoolExportToShareableHandle
-  {"cudaMemPoolExportToShareableHandle",                      {"hipMemPoolExportToShareableHandle",                      "", CONV_MEMORY, API_RUNTIME, 11, HIP_UNSUPPORTED}},
+  {"cudaMemPoolExportToShareableHandle",                      {"hipMemPoolExportToShareableHandle",                      "", CONV_MEMORY, API_RUNTIME, 11, HIP_EXPERIMENTAL}},
   // cuMemPoolImportFromShareableHandle
-  {"cudaMemPoolImportFromShareableHandle",                    {"hipMemPoolImportFromShareableHandle",                    "", CONV_MEMORY, API_RUNTIME, 11, HIP_UNSUPPORTED}},
+  {"cudaMemPoolImportFromShareableHandle",                    {"hipMemPoolImportFromShareableHandle",                    "", CONV_MEMORY, API_RUNTIME, 11, HIP_EXPERIMENTAL}},
   // cuMemPoolExportPointer
-  {"cudaMemPoolExportPointer",                                {"hipMemPoolExportPointer",                                "", CONV_MEMORY, API_RUNTIME, 11, HIP_UNSUPPORTED}},
+  {"cudaMemPoolExportPointer",                                {"hipMemPoolExportPointer",                                "", CONV_MEMORY, API_RUNTIME, 11, HIP_EXPERIMENTAL}},
   // cuMemPoolImportPointer
-  {"cudaMemPoolImportPointer",                                {"hipMemPoolImportPointer",                                "", CONV_MEMORY, API_RUNTIME, 11, HIP_UNSUPPORTED}},
+  {"cudaMemPoolImportPointer",                                {"hipMemPoolImportPointer",                                "", CONV_MEMORY, API_RUNTIME, 11, HIP_EXPERIMENTAL}},
 
   // 12. Unified Addressing
   // no analogue
@@ -1300,6 +1300,13 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP {
   {"hipMemPoolGetAccess",                                     {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipMemPoolCreate",                                        {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipMemPoolDestroy",                                       {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMallocFromPoolAsync",                                  {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemPoolExportToShareableHandle",                       {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemPoolImportFromShareableHandle",                     {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemPoolExportPointer",                                 {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemPoolImportPointer",                                 {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipLaunchHostFunc",                                       {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipThreadExchangeStreamCaptureMode",                      {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_RUNTIME_API_SECTION_MAP {
