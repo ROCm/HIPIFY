@@ -49,6 +49,25 @@ int main() {
   result = cudaThreadExchangeStreamCaptureMode(&streamCaptureMode);
 #endif
 
+#if CUDA_VERSION >= 11000
+  // CHECK: hipKernelNodeAttrID kernelNodeAttrID;
+  cudaKernelNodeAttrID kernelNodeAttrID;
+  // CHECK: hipKernelNodeAttrValue kernelNodeAttrValue;
+  cudaKernelNodeAttrValue kernelNodeAttrValue;
+  // CHECK: hipGraphNode_t graphNode;
+  cudaGraphNode_t graphNode;
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphKernelNodeSetAttribute(cudaGraphNode_t hNode, enum cudaKernelNodeAttrID attr, const union cudaKernelNodeAttrValue* value);
+  // HIP: hipError_t hipGraphKernelNodeSetAttribute(hipGraphNode_t hNode, hipKernelNodeAttrID attr, const hipKernelNodeAttrValue* value);
+  // CHECK: result = hipGraphKernelNodeSetAttribute(graphNode, kernelNodeAttrID, &kernelNodeAttrValue);
+  result = cudaGraphKernelNodeSetAttribute(graphNode, kernelNodeAttrID, &kernelNodeAttrValue);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphKernelNodeGetAttribute(cudaGraphNode_t hNode, enum cudaKernelNodeAttrID attr, union cudaKernelNodeAttrValue* value_out);
+  // HIP: hipError_t hipGraphKernelNodeGetAttribute(hipGraphNode_t hNode, hipKernelNodeAttrID attr, hipKernelNodeAttrValue* value);
+  // CHECK: result = hipGraphKernelNodeGetAttribute(graphNode, kernelNodeAttrID, &kernelNodeAttrValue);
+  result = cudaGraphKernelNodeGetAttribute(graphNode, kernelNodeAttrID, &kernelNodeAttrValue);
+#endif
+
 #if CUDA_VERSION >= 11020
   // CHECK: hipMemPoolAttr memPoolAttr;
   cudaMemPoolAttr memPoolAttr;

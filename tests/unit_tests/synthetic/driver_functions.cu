@@ -1146,6 +1146,110 @@ int main() {
   result = cuThreadExchangeStreamCaptureMode(&streamCaptureMode);
 #endif
 
+#if CUDA_VERSION >= 10020
+
+  // CHECK: hipMemAllocationProp memAllocationProp;
+  CUmemAllocationProp memAllocationProp;
+  // CHECK: hipMemGenericAllocationHandle_t memGenericAllocationHandle_t;
+  CUmemGenericAllocationHandle memGenericAllocationHandle_t;
+  // CHECK: hipMemAllocationGranularity_flags memAllocationGranularity_flags;
+  CUmemAllocationGranularity_flags memAllocationGranularity_flags;
+  // CHECK: hipMemAccessDesc memAccessDesc;
+  CUmemAccessDesc memAccessDesc;
+
+  // CUDA: CUresult CUDAAPI cuMemAddressFree(CUdeviceptr ptr, size_t size);
+  // HIP: hipError_t hipMemAddressFree(void* devPtr, size_t size);
+  // CHECK: result = hipMemAddressFree(deviceptr, bytes);
+  result = cuMemAddressFree(deviceptr, bytes);
+
+  // CUDA: CUresult CUDAAPI cuMemAddressReserve(CUdeviceptr *ptr, size_t size, size_t alignment, CUdeviceptr addr, unsigned long long flags);
+  // HIP: hipError_t hipMemAddressReserve(void** ptr, size_t size, size_t alignment, void* addr, unsigned long long flags);
+  // CHECK: result = hipMemAddressReserve(&deviceptr, bytes, bytes_2, deviceptr_2, ull);
+  result = cuMemAddressReserve(&deviceptr, bytes, bytes_2, deviceptr_2, ull);
+
+  // CUDA: CUresult CUDAAPI cuMemCreate(CUmemGenericAllocationHandle *handle, size_t size, const CUmemAllocationProp *prop, unsigned long long flags);
+  // HIP: hipError_t hipMemCreate(hipMemGenericAllocationHandle_t* handle, size_t size, const hipMemAllocationProp* prop, unsigned long long flags);
+  // CHECK: result = hipMemCreate(&memGenericAllocationHandle_t, bytes, &memAllocationProp, ull);
+  result = cuMemCreate(&memGenericAllocationHandle_t, bytes, &memAllocationProp, ull);
+
+  // CUDA: CUresult CUDAAPI cuMemExportToShareableHandle(void *shareableHandle, CUmemGenericAllocationHandle handle, CUmemAllocationHandleType handleType, unsigned long long flags);
+  // HIP: hipError_t hipMemExportToShareableHandle(void* shareableHandle, hipMemGenericAllocationHandle_t handle, hipMemAllocationHandleType handleType, unsigned long long flags);
+  // CHECK: result = hipMemExportToShareableHandle(image, memGenericAllocationHandle_t, memAllocationHandleType, ull);
+  result = cuMemExportToShareableHandle(image, memGenericAllocationHandle_t, memAllocationHandleType, ull);
+
+  // CUDA: CUresult CUDAAPI cuMemGetAccess(unsigned long long *flags, const CUmemLocation *location, CUdeviceptr ptr);
+  // HIP: hipError_t hipMemGetAccess(unsigned long long* flags, const hipMemLocation* location, void* ptr);
+  // CHECK: result = hipMemGetAccess(&ull, &memLocation, deviceptr);
+  result = cuMemGetAccess(&ull, &memLocation, deviceptr);
+
+  // CUDA: CUresult CUDAAPI cuMemGetAllocationGranularity(size_t *granularity, const CUmemAllocationProp *prop, CUmemAllocationGranularity_flags option);
+  // HIP: hipError_t hipMemGetAllocationGranularity(size_t* granularity, const hipMemAllocationProp* prop, hipMemAllocationGranularity_flags option);
+  // CHECK: result = hipMemGetAllocationGranularity(&bytes, &memAllocationProp, memAllocationGranularity_flags);
+  result = cuMemGetAllocationGranularity(&bytes, &memAllocationProp, memAllocationGranularity_flags);
+
+  // CUDA: CUresult CUDAAPI cuMemGetAllocationPropertiesFromHandle(CUmemAllocationProp *prop, CUmemGenericAllocationHandle handle);
+  // HIP: hipError_t hipMemGetAllocationPropertiesFromHandle(hipMemAllocationProp* prop, hipMemGenericAllocationHandle_t handle);
+  // CHECK: result = hipMemGetAllocationPropertiesFromHandle(&memAllocationProp, memGenericAllocationHandle_t);
+  result = cuMemGetAllocationPropertiesFromHandle(&memAllocationProp, memGenericAllocationHandle_t);
+
+  // CUDA: CUresult CUDAAPI cuMemImportFromShareableHandle(CUmemGenericAllocationHandle *handle, void *osHandle, CUmemAllocationHandleType shHandleType);
+  // HIP: hipError_t hipMemImportFromShareableHandle(hipMemGenericAllocationHandle_t* handle, void* osHandle, hipMemAllocationHandleType shHandleType);
+  // CHECK: result = hipMemImportFromShareableHandle(&memGenericAllocationHandle_t, image, memAllocationHandleType);
+  result = cuMemImportFromShareableHandle(&memGenericAllocationHandle_t, image, memAllocationHandleType);
+
+  // CUDA: CUresult CUDAAPI cuMemMap(CUdeviceptr ptr, size_t size, size_t offset, CUmemGenericAllocationHandle handle, unsigned long long flags);
+  // HIP: hipError_t hipMemMap(void* ptr, size_t size, size_t offset, hipMemGenericAllocationHandle_t handle, unsigned long long flags);
+  // CHECK: result = hipMemMap(deviceptr, bytes, bytes_2, memGenericAllocationHandle_t, ull);
+  result = cuMemMap(deviceptr, bytes, bytes_2, memGenericAllocationHandle_t, ull);
+
+  // CUDA: CUresult CUDAAPI cuMemRelease(CUmemGenericAllocationHandle handle);
+  // HIP: hipError_t hipMemRelease(hipMemGenericAllocationHandle_t handle);
+  // CHECK: result = hipMemRelease(memGenericAllocationHandle_t);
+  result = cuMemRelease(memGenericAllocationHandle_t);
+
+  // CUDA: CUresult CUDAAPI cuMemSetAccess(CUdeviceptr ptr, size_t size, const CUmemAccessDesc *desc, size_t count);
+  // HIP: hipError_t hipMemSetAccess(void* ptr, size_t size, const hipMemAccessDesc* desc, size_t count);
+  // CHECK: result = hipMemSetAccess(deviceptr, bytes, &memAccessDesc, bytes_2);
+  result = cuMemSetAccess(deviceptr, bytes, &memAccessDesc, bytes_2);
+
+  // CUDA: CUresult CUDAAPI cuMemUnmap(CUdeviceptr ptr, size_t size);
+  // HIP: hipError_t hipMemUnmap(void* ptr, size_t size);
+  // CHECK: result = hipMemUnmap(deviceptr, bytes);
+  result = cuMemUnmap(deviceptr, bytes);
+#endif
+
+#if CUDA_VERSION >= 11000
+  // CHECK: hipKernelNodeAttrID kernelNodeAttrID;
+  CUkernelNodeAttrID kernelNodeAttrID;
+  // CHECK: hipKernelNodeAttrValue kernelNodeAttrValue;
+  CUkernelNodeAttrValue kernelNodeAttrValue;
+
+  // CUDA: CUresult CUDAAPI cuGraphKernelNodeSetAttribute(CUgraphNode hNode, CUkernelNodeAttrID attr, const CUkernelNodeAttrValue* value);
+  // HIP: hipError_t hipGraphKernelNodeSetAttribute(hipGraphNode_t hNode, hipKernelNodeAttrID attr, const hipKernelNodeAttrValue* value);
+  // CHECK: result = hipGraphKernelNodeSetAttribute(graphNode, kernelNodeAttrID, &kernelNodeAttrValue);
+  result = cuGraphKernelNodeSetAttribute(graphNode, kernelNodeAttrID, &kernelNodeAttrValue);
+
+  // CUDA: CUresult CUDAAPI cuGraphKernelNodeGetAttribute(CUgraphNode hNode, CUkernelNodeAttrID attr, CUkernelNodeAttrValue* value_out);
+  // HIP: hipError_t hipGraphKernelNodeGetAttribute(hipGraphNode_t hNode, hipKernelNodeAttrID attr, hipKernelNodeAttrValue* value);
+  // CHECK: result = hipGraphKernelNodeGetAttribute(graphNode, kernelNodeAttrID, &kernelNodeAttrValue);
+  result = cuGraphKernelNodeGetAttribute(graphNode, kernelNodeAttrID, &kernelNodeAttrValue);
+
+  // CUDA: CUresult CUDAAPI cuMemRetainAllocationHandle(CUmemGenericAllocationHandle *handle, void *addr);
+  // HIP: hipError_t hipMemRetainAllocationHandle(hipMemGenericAllocationHandle_t* handle, void* addr);
+  // CHECK: result = hipMemRetainAllocationHandle(&memGenericAllocationHandle_t, image);
+  result = cuMemRetainAllocationHandle(&memGenericAllocationHandle_t, image);
+#endif
+
+#if CUDA_VERSION >= 11010
+  // CHECK: hipArrayMapInfo arrayMapInfo;
+  CUarrayMapInfo arrayMapInfo;
+
+  // CUDA: CUresult CUDAAPI cuMemMapArrayAsync(CUarrayMapInfo *mapInfoList, unsigned int count, CUstream hStream);
+  // HIP: hipError_t hipMemMapArrayAsync(hipArrayMapInfo* mapInfoList, unsigned int count, hipStream_t stream);
+  // CHECK: result = hipMemMapArrayAsync(&arrayMapInfo, flags, stream);
+  result = cuMemMapArrayAsync(&arrayMapInfo, flags, stream);
+#endif
+
 #if CUDA_VERSION >= 11020
   // CUDA: CUresult CUDAAPI cuDeviceGetDefaultMemPool(CUmemoryPool *pool_out, CUdevice dev);
   // HIP: hipError_t hipDeviceGetDefaultMemPool(hipMemPool_t* mem_pool, int device);
@@ -1189,9 +1293,6 @@ int main() {
   // HIP: hipError_t hipMemPoolGetAttribute(hipMemPool_t mem_pool, hipMemPoolAttr attr, void* value);
   // CHECK: result = hipMemPoolGetAttribute(memPool_t, memPoolAttr, image);
   result = cuMemPoolGetAttribute(memPool_t, memPoolAttr, image);
-
-  // CHECK: hipMemAccessDesc memAccessDesc;
-  CUmemAccessDesc memAccessDesc;
 
   // CUDA: CUresult CUDAAPI cuMemPoolSetAccess(CUmemoryPool pool, const CUmemAccessDesc *map, size_t count);
   // HIP: hipError_t hipMemPoolSetAccess(hipMemPool_t mem_pool, const hipMemAccessDesc* desc_list, size_t count);
