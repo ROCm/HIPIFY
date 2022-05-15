@@ -472,9 +472,9 @@
 |`cudaGraphInstantiate`|10.0| | |`hipGraphInstantiate`|4.3.0| | | |
 |`cudaGraphInstantiateWithFlags`|11.4| | |`hipGraphInstantiateWithFlags`|5.0.0| | | |
 |`cudaGraphKernelNodeCopyAttributes`|11.0| | | | | | | |
-|`cudaGraphKernelNodeGetAttribute`|11.0| | | | | | | |
+|`cudaGraphKernelNodeGetAttribute`|11.0| | |`hipGraphKernelNodeGetAttribute`|5.2.0| | |5.2.0|
 |`cudaGraphKernelNodeGetParams`|11.0| | |`hipGraphKernelNodeGetParams`|4.5.0| | | |
-|`cudaGraphKernelNodeSetAttribute`|11.0| | | | | | | |
+|`cudaGraphKernelNodeSetAttribute`|11.0| | |`hipGraphKernelNodeSetAttribute`|5.2.0| | |5.2.0|
 |`cudaGraphKernelNodeSetParams`|11.0| | |`hipGraphKernelNodeSetParams`|4.5.0| | | |
 |`cudaGraphLaunch`|11.0| | |`hipGraphLaunch`|4.3.0| | | |
 |`cudaGraphMemAllocNodeGetParams`|11.4| | | | | | | |

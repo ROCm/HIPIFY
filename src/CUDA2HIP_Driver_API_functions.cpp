@@ -342,20 +342,20 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
 
   // 12. Virtual Memory Management
   // no analogue
-  {"cuMemAddressFree",                                     {"hipMemAddressFree",                                       "", CONV_VIRTUAL_MEMORY, API_DRIVER, 12, HIP_UNSUPPORTED}},
-  {"cuMemAddressReserve",                                  {"hipMemAddressReserve",                                    "", CONV_VIRTUAL_MEMORY, API_DRIVER, 12, HIP_UNSUPPORTED}},
-  {"cuMemCreate",                                          {"hipMemCreate",                                            "", CONV_VIRTUAL_MEMORY, API_DRIVER, 12, HIP_UNSUPPORTED}},
-  {"cuMemExportToShareableHandle",                         {"hipMemExportToShareableHandle",                           "", CONV_VIRTUAL_MEMORY, API_DRIVER, 12, HIP_UNSUPPORTED}},
-  {"cuMemGetAccess",                                       {"hipMemGetAccess",                                         "", CONV_VIRTUAL_MEMORY, API_DRIVER, 12, HIP_UNSUPPORTED}},
-  {"cuMemGetAllocationGranularity",                        {"hipMemGetAllocationGranularity",                          "", CONV_VIRTUAL_MEMORY, API_DRIVER, 12, HIP_UNSUPPORTED}},
-  {"cuMemGetAllocationPropertiesFromHandle",               {"hipMemGetAllocationPropertiesFromHandle",                 "", CONV_VIRTUAL_MEMORY, API_DRIVER, 12, HIP_UNSUPPORTED}},
-  {"cuMemImportFromShareableHandle",                       {"hipMemImportFromShareableHandle",                         "", CONV_VIRTUAL_MEMORY, API_DRIVER, 12, HIP_UNSUPPORTED}},
-  {"cuMemMap",                                             {"hipMemMap",                                               "", CONV_VIRTUAL_MEMORY, API_DRIVER, 12, HIP_UNSUPPORTED}},
-  {"cuMemRelease",                                         {"hipMemRelease",                                           "", CONV_VIRTUAL_MEMORY, API_DRIVER, 12, HIP_UNSUPPORTED}},
-  {"cuMemRetainAllocationHandle",                          {"hipMemRetainAllocationHandle",                            "", CONV_VIRTUAL_MEMORY, API_DRIVER, 12, HIP_UNSUPPORTED}},
-  {"cuMemSetAccess",                                       {"hipMemSetAccess",                                         "", CONV_VIRTUAL_MEMORY, API_DRIVER, 12, HIP_UNSUPPORTED}},
-  {"cuMemUnmap",                                           {"hipMemUnmap",                                             "", CONV_VIRTUAL_MEMORY, API_DRIVER, 12, HIP_UNSUPPORTED}},
-  {"cuMemMapArrayAsync",                                   {"hipMemMapArrayAsync",                                     "", CONV_VIRTUAL_MEMORY, API_DRIVER, 12, HIP_UNSUPPORTED}},
+  {"cuMemAddressFree",                                     {"hipMemAddressFree",                                       "", CONV_VIRTUAL_MEMORY, API_DRIVER, 12, HIP_EXPERIMENTAL}},
+  {"cuMemAddressReserve",                                  {"hipMemAddressReserve",                                    "", CONV_VIRTUAL_MEMORY, API_DRIVER, 12, HIP_EXPERIMENTAL}},
+  {"cuMemCreate",                                          {"hipMemCreate",                                            "", CONV_VIRTUAL_MEMORY, API_DRIVER, 12, HIP_EXPERIMENTAL}},
+  {"cuMemExportToShareableHandle",                         {"hipMemExportToShareableHandle",                           "", CONV_VIRTUAL_MEMORY, API_DRIVER, 12, HIP_EXPERIMENTAL}},
+  {"cuMemGetAccess",                                       {"hipMemGetAccess",                                         "", CONV_VIRTUAL_MEMORY, API_DRIVER, 12, HIP_EXPERIMENTAL}},
+  {"cuMemGetAllocationGranularity",                        {"hipMemGetAllocationGranularity",                          "", CONV_VIRTUAL_MEMORY, API_DRIVER, 12, HIP_EXPERIMENTAL}},
+  {"cuMemGetAllocationPropertiesFromHandle",               {"hipMemGetAllocationPropertiesFromHandle",                 "", CONV_VIRTUAL_MEMORY, API_DRIVER, 12, HIP_EXPERIMENTAL}},
+  {"cuMemImportFromShareableHandle",                       {"hipMemImportFromShareableHandle",                         "", CONV_VIRTUAL_MEMORY, API_DRIVER, 12, HIP_EXPERIMENTAL}},
+  {"cuMemMap",                                             {"hipMemMap",                                               "", CONV_VIRTUAL_MEMORY, API_DRIVER, 12, HIP_EXPERIMENTAL}},
+  {"cuMemRelease",                                         {"hipMemRelease",                                           "", CONV_VIRTUAL_MEMORY, API_DRIVER, 12, HIP_EXPERIMENTAL}},
+  {"cuMemRetainAllocationHandle",                          {"hipMemRetainAllocationHandle",                            "", CONV_VIRTUAL_MEMORY, API_DRIVER, 12, HIP_EXPERIMENTAL}},
+  {"cuMemSetAccess",                                       {"hipMemSetAccess",                                         "", CONV_VIRTUAL_MEMORY, API_DRIVER, 12, HIP_EXPERIMENTAL}},
+  {"cuMemUnmap",                                           {"hipMemUnmap",                                             "", CONV_VIRTUAL_MEMORY, API_DRIVER, 12, HIP_EXPERIMENTAL}},
+  {"cuMemMapArrayAsync",                                   {"hipMemMapArrayAsync",                                     "", CONV_VIRTUAL_MEMORY, API_DRIVER, 12, HIP_EXPERIMENTAL}},
 
   // 13. Stream Ordered Memory Allocator
   // cudaFreeAsync
@@ -602,13 +602,13 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   // cudaGraphKernelNodeCopyAttributes
   {"cuGraphKernelNodeCopyAttributes",                      {"hipGraphKernelNodeCopyAttributes",                        "", CONV_GRAPH, API_DRIVER, 21, HIP_UNSUPPORTED}},
   // cudaGraphKernelNodeGetAttribute
-  {"cuGraphKernelNodeGetAttribute",                        {"hipGraphKernelNodeGetAttribute",                          "", CONV_GRAPH, API_DRIVER, 21, HIP_UNSUPPORTED}},
+  {"cuGraphKernelNodeGetAttribute",                        {"hipGraphKernelNodeGetAttribute",                          "", CONV_GRAPH, API_DRIVER, 21, HIP_EXPERIMENTAL}},
   // cudaGraphExecKernelNodeSetParams
   {"cuGraphExecKernelNodeSetParams",                       {"hipGraphExecKernelNodeSetParams",                         "", CONV_GRAPH, API_DRIVER, 21}},
   // cudaGraphKernelNodeGetParams
   {"cuGraphKernelNodeGetParams",                           {"hipGraphKernelNodeGetParams",                             "", CONV_GRAPH, API_DRIVER, 21}},
   // cudaGraphKernelNodeSetAttribute
-  {"cuGraphKernelNodeSetAttribute",                        {"hipGraphKernelNodeSetAttribute",                          "", CONV_GRAPH, API_DRIVER, 21, HIP_UNSUPPORTED}},
+  {"cuGraphKernelNodeSetAttribute",                        {"hipGraphKernelNodeSetAttribute",                          "", CONV_GRAPH, API_DRIVER, 21, HIP_EXPERIMENTAL}},
   // cudaGraphKernelNodeSetParams
   {"cuGraphKernelNodeSetParams",                           {"hipGraphKernelNodeSetParams",                             "", CONV_GRAPH, API_DRIVER, 21}},
   // cudaGraphLaunch
@@ -1361,6 +1361,20 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_FUNCTION_VER_MAP {
   {"hipGraphicsGLRegisterImage",                           {HIP_5010, HIP_0,    HIP_0   }},
   {"hipGraphicsSubResourceGetMappedArray",                 {HIP_5010, HIP_0,    HIP_0   }},
   {"hipDeviceGetUuid",                                     {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemAddressFree",                                    {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemAddressReserve",                                 {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemCreate",                                         {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemExportToShareableHandle",                        {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemGetAccess",                                      {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemGetAllocationGranularity",                       {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemGetAllocationPropertiesFromHandle",              {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemImportFromShareableHandle",                      {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemMap",                                            {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemMapArrayAsync",                                  {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemRelease",                                        {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemRetainAllocationHandle",                         {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemSetAccess",                                      {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemUnmap    ",                                      {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_DRIVER_API_SECTION_MAP {

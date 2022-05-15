@@ -759,6 +759,8 @@ my %experimental_funcs = (
     "cudaKernelNodeAttributeAccessPolicyWindow" => "5.2.0",
     "cudaKernelNodeAttrValue" => "5.2.0",
     "cudaKernelNodeAttrID" => "5.2.0",
+    "cudaGraphKernelNodeSetAttribute" => "5.2.0",
+    "cudaGraphKernelNodeGetAttribute" => "5.2.0",
     "cudaGraphInstantiateFlags" => "5.2.0",
     "cudaGraphInstantiateFlagAutoFreeOnLaunch" => "5.2.0",
     "cudaFreeAsync" => "5.2.0",
@@ -772,6 +774,9 @@ my %experimental_funcs = (
     "cudaAccessProperty" => "5.2.0",
     "cudaAccessPolicyWindow" => "5.2.0",
     "cuThreadExchangeStreamCaptureMode" => "5.2.0",
+    "cuMemSetAccess" => "5.2.0",
+    "cuMemRetainAllocationHandle" => "5.2.0",
+    "cuMemRelease" => "5.2.0",
     "cuMemPoolTrimTo" => "5.2.0",
     "cuMemPoolSetAttribute" => "5.2.0",
     "cuMemPoolSetAccess" => "5.2.0",
@@ -783,10 +788,22 @@ my %experimental_funcs = (
     "cuMemPoolExportPointer" => "5.2.0",
     "cuMemPoolDestroy" => "5.2.0",
     "cuMemPoolCreate" => "5.2.0",
+    "cuMemMapArrayAsync" => "5.2.0",
+    "cuMemMap" => "5.2.0",
+    "cuMemImportFromShareableHandle" => "5.2.0",
+    "cuMemGetAllocationPropertiesFromHandle" => "5.2.0",
+    "cuMemGetAllocationGranularity" => "5.2.0",
+    "cuMemGetAccess" => "5.2.0",
     "cuMemFreeAsync" => "5.2.0",
+    "cuMemExportToShareableHandle" => "5.2.0",
+    "cuMemCreate" => "5.2.0",
     "cuMemAllocFromPoolAsync" => "5.2.0",
     "cuMemAllocAsync" => "5.2.0",
+    "cuMemAddressReserve" => "5.2.0",
+    "cuMemAddressFree" => "5.2.0",
     "cuLaunchHostFunc" => "5.2.0",
+    "cuGraphKernelNodeSetAttribute" => "5.2.0",
+    "cuGraphKernelNodeGetAttribute" => "5.2.0",
     "cuDeviceSetMemPool" => "5.2.0",
     "cuDeviceGetUuid_v2" => "5.2.0",
     "cuDeviceGetUuid" => "5.2.0",
@@ -1035,6 +1052,20 @@ sub experimentalSubstitutions {
     subst("cudaMemPoolSetAccess", "hipMemPoolSetAccess", "memory");
     subst("cudaMemPoolSetAttribute", "hipMemPoolSetAttribute", "memory");
     subst("cudaMemPoolTrimTo", "hipMemPoolTrimTo", "memory");
+    subst("cuMemAddressFree", "hipMemAddressFree", "virtual_memory");
+    subst("cuMemAddressReserve", "hipMemAddressReserve", "virtual_memory");
+    subst("cuMemCreate", "hipMemCreate", "virtual_memory");
+    subst("cuMemExportToShareableHandle", "hipMemExportToShareableHandle", "virtual_memory");
+    subst("cuMemGetAccess", "hipMemGetAccess", "virtual_memory");
+    subst("cuMemGetAllocationGranularity", "hipMemGetAllocationGranularity", "virtual_memory");
+    subst("cuMemGetAllocationPropertiesFromHandle", "hipMemGetAllocationPropertiesFromHandle", "virtual_memory");
+    subst("cuMemImportFromShareableHandle", "hipMemImportFromShareableHandle", "virtual_memory");
+    subst("cuMemMap", "hipMemMap", "virtual_memory");
+    subst("cuMemMapArrayAsync", "hipMemMapArrayAsync", "virtual_memory");
+    subst("cuMemRelease", "hipMemRelease", "virtual_memory");
+    subst("cuMemRetainAllocationHandle", "hipMemRetainAllocationHandle", "virtual_memory");
+    subst("cuMemSetAccess", "hipMemSetAccess", "virtual_memory");
+    subst("cuMemUnmap", "hipMemUnmap", "virtual_memory");
     subst("cuMemAllocAsync", "hipMallocAsync", "stream_ordered_memory");
     subst("cuMemAllocFromPoolAsync", "hipMallocFromPoolAsync", "stream_ordered_memory");
     subst("cuMemFreeAsync", "hipFreeAsync", "stream_ordered_memory");
@@ -1053,6 +1084,10 @@ sub experimentalSubstitutions {
     subst("cudaThreadExchangeStreamCaptureMode", "hipThreadExchangeStreamCaptureMode", "stream");
     subst("cuLaunchHostFunc", "hipLaunchHostFunc", "execution");
     subst("cudaLaunchHostFunc", "hipLaunchHostFunc", "execution");
+    subst("cuGraphKernelNodeGetAttribute", "hipGraphKernelNodeGetAttribute", "graph");
+    subst("cuGraphKernelNodeSetAttribute", "hipGraphKernelNodeSetAttribute", "graph");
+    subst("cudaGraphKernelNodeGetAttribute", "hipGraphKernelNodeGetAttribute", "graph");
+    subst("cudaGraphKernelNodeSetAttribute", "hipGraphKernelNodeSetAttribute", "graph");
     subst("CUaccessPolicyWindow", "hipAccessPolicyWindow", "type");
     subst("CUaccessPolicyWindow_st", "hipAccessPolicyWindow", "type");
     subst("CUaccessProperty", "hipAccessProperty", "type");
@@ -1083,8 +1118,8 @@ sub experimentalSubstitutions {
     subst("CUmemAllocationProp_v1", "hipMemAllocationProp", "type");
     subst("CUmemAllocationType", "hipMemAllocationType", "type");
     subst("CUmemAllocationType_enum", "hipMemAllocationType", "type");
-    subst("CUmemGenericAllocationHandle", "hipMemGenericAllocationHandle", "type");
-    subst("CUmemGenericAllocationHandle_v1", "hipMemGenericAllocationHandle", "type");
+    subst("CUmemGenericAllocationHandle", "hipMemGenericAllocationHandle_t", "type");
+    subst("CUmemGenericAllocationHandle_v1", "hipMemGenericAllocationHandle_t", "type");
     subst("CUmemHandleType", "hipMemHandleType", "type");
     subst("CUmemHandleType_enum", "hipMemHandleType", "type");
     subst("CUmemLocation", "hipMemLocation", "type");
@@ -6036,8 +6071,6 @@ sub warnUnsupportedFunctions {
         "cudaGraphMemAttrReservedMemHigh",
         "cudaGraphMemAttrReservedMemCurrent",
         "cudaGraphMemAllocNodeGetParams",
-        "cudaGraphKernelNodeSetAttribute",
-        "cudaGraphKernelNodeGetAttribute",
         "cudaGraphKernelNodeCopyAttributes",
         "cudaGraphExternalSemaphoresWaitNodeSetParams",
         "cudaGraphExternalSemaphoresWaitNodeGetParams",
@@ -6455,20 +6488,6 @@ sub warnUnsupportedFunctions {
         "cuMemcpy3DPeerAsync",
         "cuMemcpy3DPeer",
         "cuMemcpy",
-        "cuMemUnmap",
-        "cuMemSetAccess",
-        "cuMemRetainAllocationHandle",
-        "cuMemRelease",
-        "cuMemMapArrayAsync",
-        "cuMemMap",
-        "cuMemImportFromShareableHandle",
-        "cuMemGetAllocationPropertiesFromHandle",
-        "cuMemGetAllocationGranularity",
-        "cuMemGetAccess",
-        "cuMemExportToShareableHandle",
-        "cuMemCreate",
-        "cuMemAddressReserve",
-        "cuMemAddressFree",
         "cuLinkDestroy",
         "cuLinkCreate_v2",
         "cuLinkCreate",
@@ -6499,8 +6518,6 @@ sub warnUnsupportedFunctions {
         "cuGraphNodeGetEnabled",
         "cuGraphMemFreeNodeGetParams",
         "cuGraphMemAllocNodeGetParams",
-        "cuGraphKernelNodeSetAttribute",
-        "cuGraphKernelNodeGetAttribute",
         "cuGraphKernelNodeCopyAttributes",
         "cuGraphExternalSemaphoresWaitNodeSetParams",
         "cuGraphExternalSemaphoresWaitNodeGetParams",

@@ -2077,8 +2077,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUtexObject_v1",                                                   {"hipTextureObject_t",                                       "", CONV_TYPE, API_DRIVER, 1}},
 
   // no analogue
-  {"CUmemGenericAllocationHandle",                                     {"hipMemGenericAllocationHandle",                            "", CONV_TYPE, API_DRIVER, 1, HIP_EXPERIMENTAL}},
-  {"CUmemGenericAllocationHandle_v1",                                  {"hipMemGenericAllocationHandle",                            "", CONV_TYPE, API_DRIVER, 1, HIP_EXPERIMENTAL}},
+  {"CUmemGenericAllocationHandle",                                     {"hipMemGenericAllocationHandle_t",                          "", CONV_TYPE, API_DRIVER, 1, HIP_EXPERIMENTAL}},
+  {"CUmemGenericAllocationHandle_v1",                                  {"hipMemGenericAllocationHandle_t",                          "", CONV_TYPE, API_DRIVER, 1, HIP_EXPERIMENTAL}},
 
   // GLuint
   {"GLuint",                                                           {"GLuint",                                                   "", CONV_TYPE, API_DRIVER, 1}},
@@ -3174,7 +3174,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {
   {"GLenum",                                                           {HIP_5010, HIP_0,    HIP_0   }},
   {"ihipMemPoolHandle_t",                                              {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipMemAllocationProp",                                             {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipMemGenericAllocationHandle",                                    {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemGenericAllocationHandle_t",                                  {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipMemAllocationGranularity_flags",                                {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipMemAllocationGranularityMinimum",                               {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipMemAllocationGranularityRecommended",                           {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},

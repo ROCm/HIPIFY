@@ -993,8 +993,8 @@
 |`CUmemAllocationType_enum`|10.2| | |`hipMemAllocationType`|5.2.0| | |5.2.0|
 |`CUmemAttach_flags`| | | | | | | | |
 |`CUmemAttach_flags_enum`| | | | | | | | |
-|`CUmemGenericAllocationHandle`|10.2| | |`hipMemGenericAllocationHandle`|5.2.0| | |5.2.0|
-|`CUmemGenericAllocationHandle_v1`|11.3| | |`hipMemGenericAllocationHandle`|5.2.0| | |5.2.0|
+|`CUmemGenericAllocationHandle`|10.2| | |`hipMemGenericAllocationHandle_t`|5.2.0| | |5.2.0|
+|`CUmemGenericAllocationHandle_v1`|11.3| | |`hipMemGenericAllocationHandle_t`|5.2.0| | |5.2.0|
 |`CUmemHandleType`|11.1| | |`hipMemHandleType`|5.2.0| | |5.2.0|
 |`CUmemHandleType_enum`|11.1| | |`hipMemHandleType`|5.2.0| | |5.2.0|
 |`CUmemLocation`|10.2| | |`hipMemLocation`|5.2.0| | |5.2.0|
@@ -1317,20 +1317,20 @@
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
-|`cuMemAddressFree`|10.2| | | | | | | |
-|`cuMemAddressReserve`|10.2| | | | | | | |
-|`cuMemCreate`|10.2| | | | | | | |
-|`cuMemExportToShareableHandle`|10.2| | | | | | | |
-|`cuMemGetAccess`|10.2| | | | | | | |
-|`cuMemGetAllocationGranularity`|10.2| | | | | | | |
-|`cuMemGetAllocationPropertiesFromHandle`|10.2| | | | | | | |
-|`cuMemImportFromShareableHandle`|10.2| | | | | | | |
-|`cuMemMap`|10.2| | | | | | | |
-|`cuMemMapArrayAsync`|11.1| | | | | | | |
-|`cuMemRelease`|10.2| | | | | | | |
-|`cuMemRetainAllocationHandle`|11.0| | | | | | | |
-|`cuMemSetAccess`|10.2| | | | | | | |
-|`cuMemUnmap`|10.2| | | | | | | |
+|`cuMemAddressFree`|10.2| | |`hipMemAddressFree`|5.2.0| | |5.2.0|
+|`cuMemAddressReserve`|10.2| | |`hipMemAddressReserve`|5.2.0| | |5.2.0|
+|`cuMemCreate`|10.2| | |`hipMemCreate`|5.2.0| | |5.2.0|
+|`cuMemExportToShareableHandle`|10.2| | |`hipMemExportToShareableHandle`|5.2.0| | |5.2.0|
+|`cuMemGetAccess`|10.2| | |`hipMemGetAccess`|5.2.0| | |5.2.0|
+|`cuMemGetAllocationGranularity`|10.2| | |`hipMemGetAllocationGranularity`|5.2.0| | |5.2.0|
+|`cuMemGetAllocationPropertiesFromHandle`|10.2| | |`hipMemGetAllocationPropertiesFromHandle`|5.2.0| | |5.2.0|
+|`cuMemImportFromShareableHandle`|10.2| | |`hipMemImportFromShareableHandle`|5.2.0| | |5.2.0|
+|`cuMemMap`|10.2| | |`hipMemMap`|5.2.0| | |5.2.0|
+|`cuMemMapArrayAsync`|11.1| | |`hipMemMapArrayAsync`|5.2.0| | |5.2.0|
+|`cuMemRelease`|10.2| | |`hipMemRelease`|5.2.0| | |5.2.0|
+|`cuMemRetainAllocationHandle`|11.0| | |`hipMemRetainAllocationHandle`|5.2.0| | |5.2.0|
+|`cuMemSetAccess`|10.2| | |`hipMemSetAccess`|5.2.0| | |5.2.0|
+|`cuMemUnmap`|10.2| | |`hipMemUnmap`| | | | |
 
 ## **13. Stream Ordered Memory Allocator**
 
@@ -1511,9 +1511,9 @@
 |`cuGraphInstantiateWithFlags`|11.4| | |`hipGraphInstantiateWithFlags`|5.0.0| | | |
 |`cuGraphInstantiate_v2`|11.0| | |`hipGraphInstantiate`|4.3.0| | | |
 |`cuGraphKernelNodeCopyAttributes`|11.0| | | | | | | |
-|`cuGraphKernelNodeGetAttribute`|11.0| | | | | | | |
+|`cuGraphKernelNodeGetAttribute`|11.0| | |`hipGraphKernelNodeGetAttribute`|5.2.0| | |5.2.0|
 |`cuGraphKernelNodeGetParams`|10.0| | |`hipGraphKernelNodeGetParams`|4.5.0| | | |
-|`cuGraphKernelNodeSetAttribute`|11.0| | | | | | | |
+|`cuGraphKernelNodeSetAttribute`|11.0| | |`hipGraphKernelNodeSetAttribute`|5.2.0| | |5.2.0|
 |`cuGraphKernelNodeSetParams`|10.0| | |`hipGraphKernelNodeSetParams`|4.5.0| | | |
 |`cuGraphLaunch`|10.0| | |`hipGraphLaunch`|4.3.0| | | |
 |`cuGraphMemAllocNodeGetParams`|11.4| | | | | | | |
