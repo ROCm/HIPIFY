@@ -80,7 +80,7 @@
 |`cudaStreamSetAttribute`|11.0| | | | | | | |
 |`cudaStreamSynchronize`| | | |`hipStreamSynchronize`|1.6.0| | | |
 |`cudaStreamWaitEvent`| | | |`hipStreamWaitEvent`|1.6.0| | | |
-|`cudaThreadExchangeStreamCaptureMode`|10.1| | | | | | | |
+|`cudaThreadExchangeStreamCaptureMode`|10.1| | |`hipThreadExchangeStreamCaptureMode`|5.2.0| | |5.2.0|
 
 ## **5. Event Management**
 
@@ -120,7 +120,7 @@
 |`cudaGetParameterBufferV2`| | | | | | | | |
 |`cudaLaunchCooperativeKernel`|9.0| | |`hipLaunchCooperativeKernel`|2.6.0| | | |
 |`cudaLaunchCooperativeKernelMultiDevice`|9.0|11.3| |`hipLaunchCooperativeKernelMultiDevice`|2.6.0| | | |
-|`cudaLaunchHostFunc`|10.0| | | | | | | |
+|`cudaLaunchHostFunc`|10.0| | |`hipLaunchHostFunc`|5.2.0| | |5.2.0|
 |`cudaLaunchKernel`| | | |`hipLaunchKernel`|1.6.0| | | |
 |`cudaSetDoubleForDevice`| |10.0| | | | | | |
 |`cudaSetDoubleForHost`| |10.0| | | | | | |
@@ -215,15 +215,15 @@
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
 |`cudaFreeAsync`|11.2| | |`hipFreeAsync`|5.2.0| | |5.2.0|
 |`cudaMallocAsync`|11.2| | |`hipMallocAsync`|5.2.0| | |5.2.0|
-|`cudaMallocFromPoolAsync`|11.2| | | | | | | |
+|`cudaMallocFromPoolAsync`|11.2| | |`hipMallocFromPoolAsync`|5.2.0| | |5.2.0|
 |`cudaMemPoolCreate`|11.2| | |`hipMemPoolCreate`|5.2.0| | |5.2.0|
 |`cudaMemPoolDestroy`|11.2| | |`hipMemPoolDestroy`|5.2.0| | |5.2.0|
-|`cudaMemPoolExportPointer`|11.2| | | | | | | |
-|`cudaMemPoolExportToShareableHandle`|11.2| | | | | | | |
+|`cudaMemPoolExportPointer`|11.2| | |`hipMemPoolExportPointer`|5.2.0| | |5.2.0|
+|`cudaMemPoolExportToShareableHandle`|11.2| | |`hipMemPoolExportToShareableHandle`|5.2.0| | |5.2.0|
 |`cudaMemPoolGetAccess`|11.2| | |`hipMemPoolGetAccess`|5.2.0| | |5.2.0|
 |`cudaMemPoolGetAttribute`|11.2| | |`hipMemPoolGetAttribute`|5.2.0| | |5.2.0|
-|`cudaMemPoolImportFromShareableHandle`|11.2| | | | | | | |
-|`cudaMemPoolImportPointer`|11.2| | | | | | | |
+|`cudaMemPoolImportFromShareableHandle`|11.2| | |`hipMemPoolImportFromShareableHandle`|5.2.0| | |5.2.0|
+|`cudaMemPoolImportPointer`|11.2| | |`hipMemPoolImportPointer`|5.2.0| | |5.2.0|
 |`cudaMemPoolSetAccess`|11.2| | |`hipMemPoolSetAccess`|5.2.0| | |5.2.0|
 |`cudaMemPoolSetAttribute`|11.2| | |`hipMemPoolSetAttribute`|5.2.0| | |5.2.0|
 |`cudaMemPoolTrimTo`|11.2| | |`hipMemPoolTrimTo`|5.2.0| | |5.2.0|

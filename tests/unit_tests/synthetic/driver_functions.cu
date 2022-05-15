@@ -146,8 +146,10 @@ int main() {
 #if CUDA_VERSION >= 10020
   // CHECK: hipMemLocation memLocation_st;
   // CHECK-NEXT: hipMemLocation memLocation;
+  // CHECK-NEXT: hipMemAllocationHandleType memAllocationHandleType;
   CUmemLocation_st memLocation_st;
   CUmemLocation memLocation;
+  CUmemAllocationHandleType memAllocationHandleType;
 #endif
 
 #if CUDA_VERSION >= 11020
@@ -1127,6 +1129,23 @@ int main() {
   result = cuDeviceGetUuid(&uuid, device);
 #endif
 
+#if CUDA_VERSION >= 10000
+  // CHECK: hipHostFn_t hostFn;
+  CUhostFn hostFn;
+
+  // CUDA: CUresult CUDAAPI cuLaunchHostFunc(CUstream hStream, CUhostFn fn, void *userData);
+  // HIP: hipError_t hipLaunchHostFunc(hipStream_t stream, hipHostFn_t fn, void* userData);
+  // CHECK: result = hipLaunchHostFunc(stream, hostFn, image);
+  result = cuLaunchHostFunc(stream, hostFn, image);
+#endif
+
+#if CUDA_VERSION >= 10010
+  // CUDA: CUresult CUDAAPI cuThreadExchangeStreamCaptureMode(CUstreamCaptureMode *mode);
+  // HIP: hipError_t hipThreadExchangeStreamCaptureMode(hipStreamCaptureMode* mode);
+  // CHECK: result = hipThreadExchangeStreamCaptureMode(&streamCaptureMode);
+  result = cuThreadExchangeStreamCaptureMode(&streamCaptureMode);
+#endif
+
 #if CUDA_VERSION >= 11020
   // CUDA: CUresult CUDAAPI cuDeviceGetDefaultMemPool(CUmemoryPool *pool_out, CUdevice dev);
   // HIP: hipError_t hipDeviceGetDefaultMemPool(hipMemPool_t* mem_pool, int device);
@@ -1196,6 +1215,29 @@ int main() {
   // HIP: hipError_t hipMemPoolDestroy(hipMemPool_t mem_pool);
   // CHECK: result = hipMemPoolDestroy(memPool_t);
   result = cuMemPoolDestroy(memPool_t);
+
+  // CUDA: CUresult CUDAAPI cuMemPoolExportToShareableHandle(void *handle_out, CUmemoryPool pool, CUmemAllocationHandleType handleType, unsigned long long flags);
+  // HIP: hipError_t hipMemPoolExportToShareableHandle(void* shared_handle, hipMemPool_t mem_pool, hipMemAllocationHandleType handle_type, unsigned int flags);
+  // CHECK: result = hipMemPoolExportToShareableHandle(image, memPool_t, memAllocationHandleType, ull);
+  result = cuMemPoolExportToShareableHandle(image, memPool_t, memAllocationHandleType, ull);
+
+  // CUDA: CUresult CUDAAPI cuMemPoolImportFromShareableHandle(CUmemoryPool* pool_out, void* handle, CUmemAllocationHandleType handleType, unsigned long long flags);
+  // HIP: hipError_t hipMemPoolImportFromShareableHandle(hipMemPool_t* mem_pool, void* shared_handle, hipMemAllocationHandleType handle_type, unsigned int flags);
+  // CHECK: result = hipMemPoolImportFromShareableHandle(&memPool_t, image, memAllocationHandleType, ull);
+  result = cuMemPoolImportFromShareableHandle(&memPool_t, image, memAllocationHandleType, ull);
+
+  // CHECK: hipMemPoolPtrExportData memPoolPtrExportData;
+  CUmemPoolPtrExportData memPoolPtrExportData;
+
+  // CUDA: CUresult CUDAAPI cuMemPoolExportPointer(CUmemPoolPtrExportData *shareData_out, CUdeviceptr ptr);
+  // HIP: hipError_t hipMemPoolExportPointer(hipMemPoolPtrExportData* export_data, void* dev_ptr);
+  // CHECK: result = hipMemPoolExportPointer(&memPoolPtrExportData, deviceptr);
+  result = cuMemPoolExportPointer(&memPoolPtrExportData, deviceptr);
+
+  // CUDA: CUresult CUDAAPI cuMemPoolImportPointer(CUdeviceptr *ptr_out, CUmemoryPool pool, CUmemPoolPtrExportData *shareData);
+  // HIP: hipError_t hipMemPoolImportPointer(void** dev_ptr, hipMemPool_t mem_pool, hipMemPoolPtrExportData* export_data);
+  // CHECK: result = hipMemPoolImportPointer(&deviceptr, memPool_t, &memPoolPtrExportData);
+  result = cuMemPoolImportPointer(&deviceptr, memPool_t, &memPoolPtrExportData);
 #endif
 
   return 0;

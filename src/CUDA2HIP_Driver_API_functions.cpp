@@ -376,16 +376,16 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuMemPoolCreate",                                      {"hipMemPoolCreate",                                        "", CONV_STREAM_ORDERED_MEMORY, API_DRIVER, 13, HIP_EXPERIMENTAL}},
   // cudaMemPoolDestroy
   {"cuMemPoolDestroy",                                     {"hipMemPoolDestroy",                                       "", CONV_STREAM_ORDERED_MEMORY, API_DRIVER, 13, HIP_EXPERIMENTAL}},
-  // no analogue
-  {"cuMemAllocFromPoolAsync",                              {"hipMemAllocFromPoolAsync",                                "", CONV_STREAM_ORDERED_MEMORY, API_DRIVER, 13, HIP_UNSUPPORTED}},
+  // cudaMallocFromPoolAsync
+  {"cuMemAllocFromPoolAsync",                              {"hipMallocFromPoolAsync",                                  "", CONV_STREAM_ORDERED_MEMORY, API_DRIVER, 13, HIP_EXPERIMENTAL}},
   // cudaMemPoolExportToShareableHandle
-  {"cuMemPoolExportToShareableHandle",                     {"hipMemPoolExportToShareableHandle",                       "", CONV_STREAM_ORDERED_MEMORY, API_DRIVER, 13, HIP_UNSUPPORTED}},
+  {"cuMemPoolExportToShareableHandle",                     {"hipMemPoolExportToShareableHandle",                       "", CONV_STREAM_ORDERED_MEMORY, API_DRIVER, 13, HIP_EXPERIMENTAL}},
   // cudaMemPoolImportFromShareableHandle
-  {"cuMemPoolImportFromShareableHandle",                   {"hipMemPoolImportFromShareableHandle",                     "", CONV_STREAM_ORDERED_MEMORY, API_DRIVER, 13, HIP_UNSUPPORTED}},
+  {"cuMemPoolImportFromShareableHandle",                   {"hipMemPoolImportFromShareableHandle",                     "", CONV_STREAM_ORDERED_MEMORY, API_DRIVER, 13, HIP_EXPERIMENTAL}},
   // cudaMemPoolExportPointer
-  {"cuMemPoolExportPointer",                               {"hipMemPoolExportPointer",                                 "", CONV_STREAM_ORDERED_MEMORY, API_DRIVER, 13, HIP_UNSUPPORTED}},
+  {"cuMemPoolExportPointer",                               {"hipMemPoolExportPointer",                                 "", CONV_STREAM_ORDERED_MEMORY, API_DRIVER, 13, HIP_EXPERIMENTAL}},
   // cudaMemPoolImportPointer
-  {"cuMemPoolImportPointer",                               {"hipMemPoolImportPointer",                                 "", CONV_STREAM_ORDERED_MEMORY, API_DRIVER, 13, HIP_UNSUPPORTED}},
+  {"cuMemPoolImportPointer",                               {"hipMemPoolImportPointer",                                 "", CONV_STREAM_ORDERED_MEMORY, API_DRIVER, 13, HIP_EXPERIMENTAL}},
 
   // 14. Unified Addressing
   // cudaMemAdvise
@@ -448,7 +448,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   // cudaStreamWaitEvent
   {"cuStreamWaitEvent",                                    {"hipStreamWaitEvent",                                      "", CONV_STREAM, API_DRIVER, 15}},
   // cudaThreadExchangeStreamCaptureMode
-  {"cuThreadExchangeStreamCaptureMode",                    {"hipThreadExchangeStreamCaptureMode",                      "", CONV_STREAM, API_DRIVER, 15, HIP_UNSUPPORTED}},
+  {"cuThreadExchangeStreamCaptureMode",                    {"hipThreadExchangeStreamCaptureMode",                      "", CONV_STREAM, API_DRIVER, 15, HIP_EXPERIMENTAL}},
 
   // 16. Event Management
   // cudaEventCreateWithFlags
@@ -523,7 +523,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   // NOTE: Not equal to cudaLaunchCooperativeKernelMultiDevice due to different signatures
   {"cuLaunchCooperativeKernelMultiDevice",                 {"hipLaunchCooperativeKernelMultiDevice_",                  "", CONV_EXECUTION, API_DRIVER, 19, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   // cudaLaunchHostFunc
-  {"cuLaunchHostFunc",                                     {"hipLaunchHostFunc",                                       "", CONV_EXECUTION, API_DRIVER, 19, HIP_UNSUPPORTED}},
+  {"cuLaunchHostFunc",                                     {"hipLaunchHostFunc",                                       "", CONV_EXECUTION, API_DRIVER, 19, HIP_EXPERIMENTAL}},
   // no analogue
   // NOTE: Not equal to cudaLaunchKernel due to different signatures
   {"cuLaunchKernel",                                       {"hipModuleLaunchKernel",                                   "", CONV_EXECUTION, API_DRIVER, 19}},

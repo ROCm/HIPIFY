@@ -710,6 +710,7 @@ my %removed_funcs = (
 
 my %experimental_funcs = (
     "cudaUUID_t" => "5.2.0",
+    "cudaThreadExchangeStreamCaptureMode" => "5.2.0",
     "cudaMemPool_t" => "5.2.0",
     "cudaMemPoolTrimTo" => "5.2.0",
     "cudaMemPoolSetAttribute" => "5.2.0",
@@ -719,8 +720,12 @@ my %experimental_funcs = (
     "cudaMemPoolReuseAllowInternalDependencies" => "5.2.0",
     "cudaMemPoolPtrExportData" => "5.2.0",
     "cudaMemPoolProps" => "5.2.0",
+    "cudaMemPoolImportPointer" => "5.2.0",
+    "cudaMemPoolImportFromShareableHandle" => "5.2.0",
     "cudaMemPoolGetAttribute" => "5.2.0",
     "cudaMemPoolGetAccess" => "5.2.0",
+    "cudaMemPoolExportToShareableHandle" => "5.2.0",
+    "cudaMemPoolExportPointer" => "5.2.0",
     "cudaMemPoolDestroy" => "5.2.0",
     "cudaMemPoolCreate" => "5.2.0",
     "cudaMemPoolAttrUsedMemHigh" => "5.2.0",
@@ -747,7 +752,9 @@ my %experimental_funcs = (
     "cudaMemAccessFlagsProtNone" => "5.2.0",
     "cudaMemAccessFlags" => "5.2.0",
     "cudaMemAccessDesc" => "5.2.0",
+    "cudaMallocFromPoolAsync" => "5.2.0",
     "cudaMallocAsync" => "5.2.0",
+    "cudaLaunchHostFunc" => "5.2.0",
     "cudaKernelNodeAttributeCooperative" => "5.2.0",
     "cudaKernelNodeAttributeAccessPolicyWindow" => "5.2.0",
     "cudaKernelNodeAttrValue" => "5.2.0",
@@ -764,15 +771,22 @@ my %experimental_funcs = (
     "cudaAccessPropertyNormal" => "5.2.0",
     "cudaAccessProperty" => "5.2.0",
     "cudaAccessPolicyWindow" => "5.2.0",
+    "cuThreadExchangeStreamCaptureMode" => "5.2.0",
     "cuMemPoolTrimTo" => "5.2.0",
     "cuMemPoolSetAttribute" => "5.2.0",
     "cuMemPoolSetAccess" => "5.2.0",
+    "cuMemPoolImportPointer" => "5.2.0",
+    "cuMemPoolImportFromShareableHandle" => "5.2.0",
     "cuMemPoolGetAttribute" => "5.2.0",
     "cuMemPoolGetAccess" => "5.2.0",
+    "cuMemPoolExportToShareableHandle" => "5.2.0",
+    "cuMemPoolExportPointer" => "5.2.0",
     "cuMemPoolDestroy" => "5.2.0",
     "cuMemPoolCreate" => "5.2.0",
     "cuMemFreeAsync" => "5.2.0",
+    "cuMemAllocFromPoolAsync" => "5.2.0",
     "cuMemAllocAsync" => "5.2.0",
+    "cuLaunchHostFunc" => "5.2.0",
     "cuDeviceSetMemPool" => "5.2.0",
     "cuDeviceGetUuid_v2" => "5.2.0",
     "cuDeviceGetUuid" => "5.2.0",
@@ -1009,22 +1023,36 @@ sub experimentalSubstitutions {
     subst("cudaDeviceSetMemPool", "hipDeviceSetMemPool", "device");
     subst("cudaFreeAsync", "hipFreeAsync", "memory");
     subst("cudaMallocAsync", "hipMallocAsync", "memory");
+    subst("cudaMallocFromPoolAsync", "hipMallocFromPoolAsync", "memory");
     subst("cudaMemPoolCreate", "hipMemPoolCreate", "memory");
     subst("cudaMemPoolDestroy", "hipMemPoolDestroy", "memory");
+    subst("cudaMemPoolExportPointer", "hipMemPoolExportPointer", "memory");
+    subst("cudaMemPoolExportToShareableHandle", "hipMemPoolExportToShareableHandle", "memory");
     subst("cudaMemPoolGetAccess", "hipMemPoolGetAccess", "memory");
     subst("cudaMemPoolGetAttribute", "hipMemPoolGetAttribute", "memory");
+    subst("cudaMemPoolImportFromShareableHandle", "hipMemPoolImportFromShareableHandle", "memory");
+    subst("cudaMemPoolImportPointer", "hipMemPoolImportPointer", "memory");
     subst("cudaMemPoolSetAccess", "hipMemPoolSetAccess", "memory");
     subst("cudaMemPoolSetAttribute", "hipMemPoolSetAttribute", "memory");
     subst("cudaMemPoolTrimTo", "hipMemPoolTrimTo", "memory");
     subst("cuMemAllocAsync", "hipMallocAsync", "stream_ordered_memory");
+    subst("cuMemAllocFromPoolAsync", "hipMallocFromPoolAsync", "stream_ordered_memory");
     subst("cuMemFreeAsync", "hipFreeAsync", "stream_ordered_memory");
     subst("cuMemPoolCreate", "hipMemPoolCreate", "stream_ordered_memory");
     subst("cuMemPoolDestroy", "hipMemPoolDestroy", "stream_ordered_memory");
+    subst("cuMemPoolExportPointer", "hipMemPoolExportPointer", "stream_ordered_memory");
+    subst("cuMemPoolExportToShareableHandle", "hipMemPoolExportToShareableHandle", "stream_ordered_memory");
     subst("cuMemPoolGetAccess", "hipMemPoolGetAccess", "stream_ordered_memory");
     subst("cuMemPoolGetAttribute", "hipMemPoolGetAttribute", "stream_ordered_memory");
+    subst("cuMemPoolImportFromShareableHandle", "hipMemPoolImportFromShareableHandle", "stream_ordered_memory");
+    subst("cuMemPoolImportPointer", "hipMemPoolImportPointer", "stream_ordered_memory");
     subst("cuMemPoolSetAccess", "hipMemPoolSetAccess", "stream_ordered_memory");
     subst("cuMemPoolSetAttribute", "hipMemPoolSetAttribute", "stream_ordered_memory");
     subst("cuMemPoolTrimTo", "hipMemPoolTrimTo", "stream_ordered_memory");
+    subst("cuThreadExchangeStreamCaptureMode", "hipThreadExchangeStreamCaptureMode", "stream");
+    subst("cudaThreadExchangeStreamCaptureMode", "hipThreadExchangeStreamCaptureMode", "stream");
+    subst("cuLaunchHostFunc", "hipLaunchHostFunc", "execution");
+    subst("cudaLaunchHostFunc", "hipLaunchHostFunc", "execution");
     subst("CUaccessPolicyWindow", "hipAccessPolicyWindow", "type");
     subst("CUaccessPolicyWindow_st", "hipAccessPolicyWindow", "type");
     subst("CUaccessProperty", "hipAccessProperty", "type");
@@ -5925,7 +5953,6 @@ sub warnUnsupportedFunctions {
         "cudaUserObjectCreate",
         "cudaThreadSetLimit",
         "cudaThreadGetLimit",
-        "cudaThreadExchangeStreamCaptureMode",
         "cudaSynchronizationPolicy",
         "cudaSyncPolicyYield",
         "cudaSyncPolicySpin",
@@ -5965,18 +5992,12 @@ sub warnUnsupportedFunctions {
         "cudaMemcpy3DPeerAsync",
         "cudaMemcpy3DPeer",
         "cudaMemcpy2DArrayToArray",
-        "cudaMemPoolImportPointer",
-        "cudaMemPoolImportFromShareableHandle",
-        "cudaMemPoolExportToShareableHandle",
-        "cudaMemPoolExportPointer",
         "cudaMemAllocNodeParams",
-        "cudaMallocFromPoolAsync",
         "cudaLimitStackSize",
         "cudaLimitPersistingL2CacheSize",
         "cudaLimitMaxL2FetchGranularity",
         "cudaLimitDevRuntimeSyncDepth",
         "cudaLimitDevRuntimePendingLaunchCount",
-        "cudaLaunchHostFunc",
         "cudaKeyValuePair",
         "cudaHostRegisterReadOnly",
         "cudaGraphicsVDPAURegisterVideoSurface",
@@ -6384,7 +6405,6 @@ sub warnUnsupportedFunctions {
         "cuUserObjectRetain",
         "cuUserObjectRelease",
         "cuUserObjectCreate",
-        "cuThreadExchangeStreamCaptureMode",
         "cuTexRefGetBorderColor",
         "cuTexRefDestroy",
         "cuTexRefCreate",
@@ -6439,10 +6459,6 @@ sub warnUnsupportedFunctions {
         "cuMemSetAccess",
         "cuMemRetainAllocationHandle",
         "cuMemRelease",
-        "cuMemPoolImportPointer",
-        "cuMemPoolImportFromShareableHandle",
-        "cuMemPoolExportToShareableHandle",
-        "cuMemPoolExportPointer",
         "cuMemMapArrayAsync",
         "cuMemMap",
         "cuMemImportFromShareableHandle",
@@ -6451,7 +6467,6 @@ sub warnUnsupportedFunctions {
         "cuMemGetAccess",
         "cuMemExportToShareableHandle",
         "cuMemCreate",
-        "cuMemAllocFromPoolAsync",
         "cuMemAddressReserve",
         "cuMemAddressFree",
         "cuLinkDestroy",
@@ -6462,7 +6477,6 @@ sub warnUnsupportedFunctions {
         "cuLinkAddFile",
         "cuLinkAddData_v2",
         "cuLinkAddData",
-        "cuLaunchHostFunc",
         "cuLaunchGridAsync",
         "cuLaunchGrid",
         "cuLaunchCooperativeKernelMultiDevice",
