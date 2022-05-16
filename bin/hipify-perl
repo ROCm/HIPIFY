@@ -7921,7 +7921,7 @@ if ($help) {
     print STDERR "$USAGE\n";
 }
 if ($version) {
-    print STDERR "HIP version 4.2.0\n";
+    print STDERR "HIP version 5.2.0\n";
 }
 while (@ARGV) {
     $fileName=shift (@ARGV);
