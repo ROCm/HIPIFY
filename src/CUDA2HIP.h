@@ -27,6 +27,8 @@ THE SOFTWARE.
 #include <map>
 #include "Statistics.h"
 
+const std::string sHIP_version = Statistics::getHipVersion(HIP_LATEST);
+
 // Maps CUDA header names to HIP header names
 extern const std::map<llvm::StringRef, hipCounter> CUDA_INCLUDE_MAP;
 // Maps the names of CUDA DRIVER API types to the corresponding HIP types

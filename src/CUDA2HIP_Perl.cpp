@@ -695,7 +695,7 @@ namespace perl {
     *streamPtr.get() << tab << "print STDERR \"$USAGE\\n\";" << endl;
     *streamPtr.get() << "}" << endl;
     *streamPtr.get() << "if ($version) {" << endl;
-    *streamPtr.get() << tab << "print STDERR \"HIP version 4.2.0\\n\";" << endl;
+    *streamPtr.get() << tab << "print STDERR \"HIP version " + sHIP_version + "\\n\";" << endl;
     *streamPtr.get() << "}" << endl;
     *streamPtr.get() << while_ << "(@ARGV) {" << endl;
     *streamPtr.get() << tab << "$fileName=shift (@ARGV);" << endl;
