@@ -34,6 +34,8 @@ THE SOFTWARE.
 #include "StringUtils.h"
 #include "ArgParse.h"
 
+using namespace hipify;
+
 const std::string sHIP = "HIP";
 const std::string sROC = "ROC";
 const std::string sCub = "cub";
@@ -68,7 +70,7 @@ const StringRef sCubNamespacePrefix = "cubNamespacePrefix";
 const StringRef sCubFunctionTemplateDecl = "cubFunctionTemplateDecl";
 const StringRef sCubUsingNamespaceDecl = "cubUsingNamespaceDecl";
 
-std::string getCastType(CastTypes c) {
+std::string getCastType(hipify::CastTypes c) {
   switch (c) {
     case e_HIP_SYMBOL: return sHIP_SYMBOL;
     case e_reinterpret_cast: return s_reinterpret_cast;

@@ -36,6 +36,7 @@ namespace perl {
 
   using namespace std;
   using namespace llvm;
+  using namespace hipify;
 
   const string sCopyright =
     "##\n"

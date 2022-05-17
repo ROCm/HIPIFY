@@ -22,28 +22,31 @@ THE SOFTWARE.
 
 #pragma once
 
-enum CastTypes {
-  e_HIP_SYMBOL,
-  e_reinterpret_cast,
-  e_int32_t,
-  e_int64_t,
-  e_remove_argument,
-};
+namespace hipify {
 
-enum CastWarning {
-  cw_None,
-  cw_DataLoss,
-};
+  enum CastTypes {
+    e_HIP_SYMBOL,
+    e_reinterpret_cast,
+    e_int32_t,
+    e_int64_t,
+    e_remove_argument,
+  };
 
-struct CastInfo {
-  CastTypes castType;
-  CastWarning castWarn;
-};
+  enum CastWarning {
+    cw_None,
+    cw_DataLoss,
+  };
 
-typedef std::map<unsigned, CastInfo> ArgCastMap;
+  struct CastInfo {
+    CastTypes castType;
+    CastWarning castWarn;
+  };
 
-extern std::string getCastType(CastTypes c);
-extern std::map<std::string, ArgCastMap> FuncArgCasts;
+  typedef std::map<unsigned, CastInfo> ArgCastMap;
+}
+
+extern std::string getCastType(hipify::CastTypes c);
+extern std::map<std::string, hipify::ArgCastMap> FuncArgCasts;
 
 namespace perl {
 
