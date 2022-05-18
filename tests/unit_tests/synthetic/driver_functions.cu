@@ -32,6 +32,7 @@ int main() {
 #else
   unsigned long ull = 0;
 #endif
+  unsigned long long ull_2 = 0;
   // CHECK: hipDevice_t device;
   // CHECK-NEXT: hipCtx_t context;
   // CHECK-NEXT: hipFuncCache_t func_cache;
@@ -1179,8 +1180,8 @@ int main() {
 
   // CUDA: CUresult CUDAAPI cuMemGetAccess(unsigned long long *flags, const CUmemLocation *location, CUdeviceptr ptr);
   // HIP: hipError_t hipMemGetAccess(unsigned long long* flags, const hipMemLocation* location, void* ptr);
-  // CHECK: result = hipMemGetAccess(&ull, &memLocation, deviceptr);
-  result = cuMemGetAccess(&ull, &memLocation, deviceptr);
+  // CHECK: result = hipMemGetAccess(&ull_2, &memLocation, deviceptr);
+  result = cuMemGetAccess(&ull_2, &memLocation, deviceptr);
 
   // CUDA: CUresult CUDAAPI cuMemGetAllocationGranularity(size_t *granularity, const CUmemAllocationProp *prop, CUmemAllocationGranularity_flags option);
   // HIP: hipError_t hipMemGetAllocationGranularity(size_t* granularity, const hipMemAllocationProp* prop, hipMemAllocationGranularity_flags option);
