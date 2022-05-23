@@ -1555,7 +1555,7 @@
 |`cuTexRefGetAddress`| |11.0| |`hipTexRefGetAddress`|3.0.0|4.3.0| | |
 |`cuTexRefGetAddressMode`| |11.0| |`hipTexRefGetAddressMode`|3.0.0|4.3.0| | |
 |`cuTexRefGetAddress_v2`| |11.0| |`hipTexRefGetAddress`|3.0.0|4.3.0| | |
-|`cuTexRefGetArray`| |11.0| |`hipTexRefGetArray`|3.0.0| | | |
+|`cuTexRefGetArray`| |11.0| |`hipTexRefGetArray`|3.0.0| |4.2.0| |
 |`cuTexRefGetBorderColor`|8.0|11.0| | | | | | |
 |`cuTexRefGetFilterMode`| |11.0| |`hipTexRefGetFilterMode`|3.5.0|4.3.0| | |
 |`cuTexRefGetFlags`| |11.0| |`hipTexRefGetFlags`|3.5.0|4.3.0| | |

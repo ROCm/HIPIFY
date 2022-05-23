@@ -23,6 +23,7 @@ int main() {
   std::string name = "str";
   uint32_t u_value = 0;
   float ms = 0;
+  float ms_2 = 0;
   int* value = 0;
   int* value_2 = 0;
   GLuint gl_uint = 0;
@@ -1341,6 +1342,86 @@ int main() {
   // CHECK: result = hipMemPoolImportPointer(&deviceptr, memPool_t, &memPoolPtrExportData);
   result = cuMemPoolImportPointer(&deviceptr, memPool_t, &memPoolPtrExportData);
 #endif
+
+  // CUDA: CUresult CUDAAPI cuOccupancyMaxActiveBlocksPerMultiprocessorWithFlags(int *numBlocks, CUfunction func, int blockSize, size_t dynamicSMemSize, unsigned int flags);
+  // HIP: hipError_t hipModuleOccupancyMaxActiveBlocksPerMultiprocessorWithFlags(int* numBlocks, hipFunction_t f, int blockSize, size_t dynSharedMemPerBlk, unsigned int flags);
+  // CHECK: result = hipModuleOccupancyMaxActiveBlocksPerMultiprocessorWithFlags(&iBlockSize, function, iBlockSize_2, bytes, flags);
+  result = cuOccupancyMaxActiveBlocksPerMultiprocessorWithFlags(&iBlockSize, function, iBlockSize_2, bytes, flags);
+
+  // CUDA: __CUDA_DEPRECATED CUresult CUDAAPI cuTexRefGetAddress(CUdeviceptr *pdptr, CUtexref hTexRef);
+  // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipTexRefGetAddress(hipDeviceptr_t* dev_ptr, const textureReference* texRef);
+  // CHECK: result = hipTexRefGetAddress(&deviceptr, texref);
+  // CHECK-NEXT: result = hipTexRefGetAddress(&deviceptr, texref);
+  result = cuTexRefGetAddress(&deviceptr, texref);
+  result = cuTexRefGetAddress_v2(&deviceptr, texref);
+
+  // CHECK: HIPaddress_mode address_mode;
+  CUaddress_mode address_mode;
+
+  // CUDA: __CUDA_DEPRECATED CUresult CUDAAPI cuTexRefGetAddressMode(CUaddress_mode *pam, CUtexref hTexRef, int dim);
+  // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipTexRefGetAddressMode(enum hipTextureAddressMode* pam, const textureReference* texRef, int dim);
+  // CHECK: result = hipTexRefGetAddressMode(&address_mode, texref, iBlockSize);
+  result = cuTexRefGetAddressMode(&address_mode, texref, iBlockSize);
+
+  // CHECK: HIPfilter_mode filter_mode;
+  CUfilter_mode filter_mode;
+
+  // CUDA: __CUDA_DEPRECATED CUresult CUDAAPI cuTexRefGetFilterMode(CUfilter_mode *pfm, CUtexref hTexRef);
+  // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipTexRefGetFilterMode(enum hipTextureFilterMode* pfm, const textureReference* texRef);
+  // CHECK: result = hipTexRefGetFilterMode(&filter_mode, texref);
+  result = cuTexRefGetFilterMode(&filter_mode, texref);
+
+  // CUDA: __CUDA_DEPRECATED CUresult CUDAAPI cuTexRefGetFlags(unsigned int *pFlags, CUtexref hTexRef);
+  // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipTexRefGetFlags(unsigned int* pFlags, const textureReference* texRef);
+  // CHECK: result = hipTexRefGetFlags(&flags, texref);
+  result = cuTexRefGetFlags(&flags, texref);
+
+  // CHECK: hipArray_Format array_format;
+  CUarray_format array_format;
+
+  // CUDA: __CUDA_DEPRECATED CUresult CUDAAPI cuTexRefGetFormat(CUarray_format *pFormat, int *pNumChannels, CUtexref hTexRef);
+  // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipTexRefGetFormat(hipArray_Format* pFormat, int* pNumChannels, const textureReference* texRef);
+  // CHECK: result = hipTexRefGetFormat(&array_format, &iBlockSize, texref);
+  result = cuTexRefGetFormat(&array_format, &iBlockSize, texref);
+
+  // CUDA: __CUDA_DEPRECATED CUresult CUDAAPI cuTexRefGetMaxAnisotropy(int *pmaxAniso, CUtexref hTexRef);
+  // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipTexRefGetMaxAnisotropy(int* pmaxAnsio, const textureReference* texRef);
+  // CHECK: result = hipTexRefGetMaxAnisotropy(&iBlockSize, texref);
+  result = cuTexRefGetMaxAnisotropy(&iBlockSize, texref);
+
+  // CUDA: __CUDA_DEPRECATED CUresult CUDAAPI cuTexRefGetMipmapFilterMode(CUfilter_mode *pfm, CUtexref hTexRef);
+  // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipTexRefGetMipmapFilterMode(enum hipTextureFilterMode* pfm, const textureReference* texRef);
+  // CHECK: result = hipTexRefGetMipmapFilterMode(&filter_mode, texref);
+  result = cuTexRefGetMipmapFilterMode(&filter_mode, texref);
+
+  // CUDA: __CUDA_DEPRECATED CUresult CUDAAPI cuTexRefGetMipmapLevelBias(float *pbias, CUtexref hTexRef);
+  // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipTexRefGetMipmapLevelBias(float* pbias, const textureReference* texRef);
+  // CHECK: result = hipTexRefGetMipmapLevelBias(&ms, texref);
+  result = cuTexRefGetMipmapLevelBias(&ms, texref);
+
+  // CUDA: __CUDA_DEPRECATED CUresult CUDAAPI cuTexRefGetMipmapLevelClamp(float *pminMipmapLevelClamp, float *pmaxMipmapLevelClamp, CUtexref hTexRef);
+  // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipTexRefGetMipmapLevelClamp(float* pminMipmapLevelClamp, float* pmaxMipmapLevelClamp, const textureReference* texRef);
+  // CHECK: result = hipTexRefGetMipmapLevelClamp(&ms, &ms_2, texref);
+  result = cuTexRefGetMipmapLevelClamp(&ms, &ms_2, texref);
+
+  // CUDA: __CUDA_DEPRECATED CUresult CUDAAPI cuTexRefGetMipmappedArray(CUmipmappedArray *phMipmappedArray, CUtexref hTexRef);
+  // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipTexRefGetMipMappedArray(hipMipmappedArray_t* pArray, const textureReference* texRef);
+  // CHECK: result = hipTexRefGetMipMappedArray(&mipmappedArray, texref);
+  result = cuTexRefGetMipmappedArray(&mipmappedArray, texref);
+
+  // CUDA: __CUDA_DEPRECATED CUresult CUDAAPI cuTexRefSetAddress(size_t *ByteOffset, CUtexref hTexRef, CUdeviceptr dptr, size_t bytes);
+  // HIP: hipError_t hipTexRefSetAddress(size_t* ByteOffset, textureReference* texRef, hipDeviceptr_t dptr, size_t bytes);
+  // CHECK: result = hipTexRefSetAddress(&bytes, texref, deviceptr, bytes_2);
+  // CHECK-NEXT: result = hipTexRefSetAddress(&bytes, texref, deviceptr, bytes_2);
+  result = cuTexRefSetAddress(&bytes, texref, deviceptr, bytes_2);
+  result = cuTexRefSetAddress_v2(&bytes, texref, deviceptr, bytes_2);
+
+  // CUDA: __CUDA_DEPRECATED CUresult CUDAAPI cuTexRefSetAddress2D(CUtexref hTexRef, const CUDA_ARRAY_DESCRIPTOR *desc, CUdeviceptr dptr, size_t Pitch);
+  // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipTexRefSetAddress2D(textureReference* texRef, const HIP_ARRAY_DESCRIPTOR* desc, hipDeviceptr_t dptr, size_t Pitch);
+  // CHECK: result = hipTexRefSetAddress2D(texref, &ARRAY_DESCRIPTOR, deviceptr, bytes);
+  // CHECK-NEXT: result = hipTexRefSetAddress2D(texref, &ARRAY_DESCRIPTOR, deviceptr, bytes);
+  result = cuTexRefSetAddress2D(texref, &ARRAY_DESCRIPTOR, deviceptr, bytes);
+  result = cuTexRefSetAddress2D_v3(texref, &ARRAY_DESCRIPTOR, deviceptr, bytes);
 
   return 0;
 }
