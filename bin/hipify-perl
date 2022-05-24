@@ -774,6 +774,7 @@ my %experimental_funcs = (
     "cudaAccessProperty" => "5.2.0",
     "cudaAccessPolicyWindow" => "5.2.0",
     "cuThreadExchangeStreamCaptureMode" => "5.2.0",
+    "cuMemUnmap" => "5.2.0",
     "cuMemSetAccess" => "5.2.0",
     "cuMemRetainAllocationHandle" => "5.2.0",
     "cuMemRelease" => "5.2.0",
@@ -1902,9 +1903,13 @@ sub simpleSubstitutions {
     subst("cudaSignalExternalSemaphoresAsync", "hipSignalExternalSemaphoresAsync", "external_resource_interop");
     subst("cudaWaitExternalSemaphoresAsync", "hipWaitExternalSemaphoresAsync", "external_resource_interop");
     subst("cuStreamWaitValue32", "hipStreamWaitValue32", "stream_memory");
+    subst("cuStreamWaitValue32_v2", "hipStreamWaitValue32", "stream_memory");
     subst("cuStreamWaitValue64", "hipStreamWaitValue64", "stream_memory");
+    subst("cuStreamWaitValue64_v2", "hipStreamWaitValue64", "stream_memory");
     subst("cuStreamWriteValue32", "hipStreamWriteValue32", "stream_memory");
+    subst("cuStreamWriteValue32_v2", "hipStreamWriteValue32", "stream_memory");
     subst("cuStreamWriteValue64", "hipStreamWriteValue64", "stream_memory");
+    subst("cuStreamWriteValue64_v2", "hipStreamWriteValue64", "stream_memory");
     subst("cuFuncGetAttribute", "hipFuncGetAttribute", "execution");
     subst("cuLaunchKernel", "hipModuleLaunchKernel", "execution");
     subst("cudaConfigureCall", "hipConfigureCall", "execution");
@@ -6452,6 +6457,7 @@ sub warnUnsupportedFunctions {
         "cuStreamGetAttribute",
         "cuStreamCopyAttributes",
         "cuStreamBeginCapture_ptsz",
+        "cuStreamBatchMemOp_v2",
         "cuStreamBatchMemOp",
         "cuProfilerInitialize",
         "cuPointerSetAttribute",
@@ -6463,6 +6469,7 @@ sub warnUnsupportedFunctions {
         "cuOccupancyAvailableDynamicSMemPerBlock",
         "cuModuleLoadFatBinary",
         "cuModuleGetSurfRef",
+        "cuModuleGetLoadingMode",
         "cuMipmappedArrayGetMemoryRequirements",
         "cuMemsetD2D8_v2",
         "cuMemsetD2D8Async",
@@ -6489,6 +6496,7 @@ sub warnUnsupportedFunctions {
         "cuMemcpy3DPeerAsync",
         "cuMemcpy3DPeer",
         "cuMemcpy",
+        "cuMemGetHandleForAddressRange",
         "cuLinkDestroy",
         "cuLinkCreate_v2",
         "cuLinkCreate",
@@ -6528,14 +6536,18 @@ sub warnUnsupportedFunctions {
         "cuGraphExecMemcpyNodeSetParams",
         "cuGraphExecExternalSemaphoresWaitNodeSetParams",
         "cuGraphExecExternalSemaphoresSignalNodeSetParams",
+        "cuGraphExecBatchMemOpNodeSetParams",
         "cuGraphDebugDotPrint",
         "cuGraphClone",
+        "cuGraphBatchMemOpNodeSetParams",
+        "cuGraphBatchMemOpNodeGetParams",
         "cuGraphAddMemsetNode",
         "cuGraphAddMemcpyNode",
         "cuGraphAddMemFreeNode",
         "cuGraphAddMemAllocNode",
         "cuGraphAddExternalSemaphoresWaitNode",
         "cuGraphAddExternalSemaphoresSignalNode",
+        "cuGraphAddBatchMemOpNode",
         "cuGetProcAddress",
         "cuGetErrorString",
         "cuGetErrorName",

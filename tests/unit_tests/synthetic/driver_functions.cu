@@ -836,6 +836,28 @@ int main() {
   result = cuStreamWriteValue32(stream, deviceptr, u_value, flags);
 #endif
 
+#if CUDA_VERSION >= 11070
+  // CUDA: CUresult CUDAAPI cuStreamWaitValue32_v2(CUstream stream, CUdeviceptr addr, cuuint32_t value, unsigned int flags);
+  // HIP: hipError_t hipStreamWaitValue32(hipStream_t stream, void* ptr, uint32_t value, unsigned int flags, uint32_t mask __dparm(0xFFFFFFFF));
+  // CHECK: result = hipStreamWaitValue32(stream, deviceptr, u_value, flags);
+  result = cuStreamWaitValue32_v2(stream, deviceptr, u_value, flags);
+
+  // CUDA: CUresult CUDAAPI cuStreamWaitValue64_v2(CUstream stream, CUdeviceptr addr, cuuint64_t value, unsigned int flags);
+  // HIP: hipError_t hipStreamWaitValue64(hipStream_t stream, void* ptr, uint64_t value, unsigned int flags, uint64_t mask __dparm(0xFFFFFFFFFFFFFFFF));
+  // CHECK: result = hipStreamWaitValue64(stream, deviceptr, u_value, flags);
+  result = cuStreamWaitValue64_v2(stream, deviceptr, u_value, flags);
+
+  // CUDA: CUresult CUDAAPI cuStreamWriteValue32_v2(CUstream stream, CUdeviceptr addr, cuuint32_t value, unsigned int flags);
+  // HIP: hipError_t hipStreamWriteValue32(hipStream_t stream, void* ptr, uint32_t value, unsigned int flags, uint32_t mask __dparm(0xFFFFFFFF));
+  // CHECK: result = hipStreamWriteValue32(stream, deviceptr, u_value, flags);
+  result = cuStreamWriteValue32_v2(stream, deviceptr, u_value, flags);
+
+  // CUDA: CUresult CUDAAPI cuStreamWriteValue64_v2(CUstream stream, CUdeviceptr addr, cuuint64_t value, unsigned int flags);
+  // HIP: hipError_t hipStreamWriteValue64(hipStream_t stream, void* ptr, uint64_t value, unsigned int flags, uint64_t mask __dparm(0xFFFFFFFFFFFFFFFF));
+  // CHECK: result = hipStreamWriteValue64(stream, deviceptr, u_value, flags);
+  result = cuStreamWriteValue64_v2(stream, deviceptr, u_value, flags);
+#endif
+
 #if CUDA_VERSION > 8000
   // CUDA: CUresult CUDAAPI cuStreamWaitValue64(CUstream stream, CUdeviceptr addr, cuuint64_t value, unsigned int flags);
   // HIP: hipError_t hipStreamWaitValue64(hipStream_t stream, void* ptr, uint64_t value, unsigned int flags, uint64_t mask __dparm(0xFFFFFFFFFFFFFFFF));
