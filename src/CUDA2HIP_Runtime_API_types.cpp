@@ -1513,6 +1513,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaKernelNodeAttributeAccessPolicyWindow",                        {"hipKernelNodeAttributeAccessPolicyWindow",                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 1
   // CU_KERNEL_NODE_ATTRIBUTE_COOPERATIVE
   {"cudaKernelNodeAttributeCooperative",                               {"hipKernelNodeAttributeCooperative",                        "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 2
+  // CU_KERNEL_NODE_ATTRIBUTE_PRIORITY
+  {"cudaKernelNodeAttributePriority",                               {"hipKernelNodeAttributePriority",                        "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 8
 
   // CUmemPool_attribute
   {"cudaMemPoolAttr",                                                  {"hipMemPoolAttr",                                           "", CONV_TYPE, API_RUNTIME, 36, HIP_EXPERIMENTAL}},
@@ -1677,6 +1679,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // cudaGraphInstantiateFlags enum values
   // CUDA_GRAPH_INSTANTIATE_FLAG_AUTO_FREE_ON_LAUNCH
   {"cudaGraphInstantiateFlagAutoFreeOnLaunch",                         {"hipGraphInstantiateFlagAutoFreeOnLaunch",                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}},
+  // CUDA_GRAPH_INSTANTIATE_FLAG_USE_NODE_PRIORITY
+  {"cudaGraphInstantiateFlagUseNodePriority",                          {"hipGraphInstantiateFlagUseNodePriority",                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}},
 
   // 4. Typedefs
 
@@ -2263,6 +2267,8 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_TYPE_NAME_VER_MAP 
   {"cudaArrayMemoryRequirements",                                      {CUDA_116, CUDA_0,   CUDA_0  }},
   {"cudaDevAttrDeferredMappingCudaArraySupported",                     {CUDA_116, CUDA_0,   CUDA_0  }},
   {"cudaGraphExecUpdateErrorAttributesChanged",                        {CUDA_116, CUDA_0,   CUDA_0  }},
+  {"cudaKernelNodeAttributePriority",                                  {CUDA_117, CUDA_0,   CUDA_0  }},
+  {"cudaGraphInstantiateFlagUseNodePriority",                          {CUDA_117, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {

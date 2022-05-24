@@ -726,6 +726,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   {"cusparseCsrGet",                                    {"hipsparseCsrGet",                                    "", CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseCsrSetPointers",                            {"hipsparseCsrSetPointers",                            "", CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseCscSetPointers",                            {"hipsparseCscSetPointers",                            "", CONV_LIB_FUNC, API_SPARSE, 15}},
+  {"cusparseCscGet",                                    {"hipsparseCscGet",                                    "", CONV_LIB_FUNC, API_SPARSE, 15, HIP_UNSUPPORTED}},
   {"cusparseCooSetPointers",                            {"hipsparseCooSetPointers",                            "", CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseCsrSetStridedBatch",                        {"hipsparseCsrSetStridedBatch",                        "", CONV_LIB_FUNC, API_SPARSE, 15, HIP_UNSUPPORTED}},
   {"cusparseSpMatGetFormat",                            {"hipsparseSpMatGetFormat",                            "", CONV_LIB_FUNC, API_SPARSE, 15}},
@@ -1229,6 +1230,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SPARSE_FUNCTION_VER_MAP {
   {"cusparseSpMMOp",                                    {CUDA_115, CUDA_0,   CUDA_0  }},
   {"cusparseSpMMOp_createPlan",                         {CUDA_115, CUDA_0,   CUDA_0  }},
   {"cusparseSpMMOp_destroyPlan",                        {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"cusparseCscGet",                                    {CUDA_117, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_FUNCTION_VER_MAP {

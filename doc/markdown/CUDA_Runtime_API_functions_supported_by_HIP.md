@@ -1090,6 +1090,7 @@ Unsupported
 |`cudaGraphExecUpdateSuccess`|10.2| | |`hipGraphExecUpdateSuccess`|4.3.0| | | |
 |`cudaGraphExec_t`|10.0| | |`hipGraphExec_t`|4.3.0| | | |
 |`cudaGraphInstantiateFlagAutoFreeOnLaunch`|11.4| | |`hipGraphInstantiateFlagAutoFreeOnLaunch`|5.2.0| | |5.2.0|
+|`cudaGraphInstantiateFlagUseNodePriority`|11.7| | | | | | | |
 |`cudaGraphInstantiateFlags`|11.4| | |`hipGraphInstantiateFlags`|5.2.0| | |5.2.0|
 |`cudaGraphMemAttrReservedMemCurrent`|11.4| | | | | | | |
 |`cudaGraphMemAttrReservedMemHigh`|11.4| | | | | | | |
@@ -1153,6 +1154,7 @@ Unsupported
 |`cudaKernelNodeAttrValue`|11.0| | |`hipKernelNodeAttrValue`|5.2.0| | |5.2.0|
 |`cudaKernelNodeAttributeAccessPolicyWindow`|11.0| | |`hipKernelNodeAttributeAccessPolicyWindow`|5.2.0| | |5.2.0|
 |`cudaKernelNodeAttributeCooperative`|11.0| | |`hipKernelNodeAttributeCooperative`|5.2.0| | |5.2.0|
+|`cudaKernelNodeAttributePriority`|11.7| | | | | | | |
 |`cudaKernelNodeParams`|10.0| | |`hipKernelNodeParams`|4.3.0| | | |
 |`cudaKeyValuePair`| | | | | | | | |
 |`cudaLaunchParams`|9.0| | |`hipLaunchParams`|2.6.0| | | |
