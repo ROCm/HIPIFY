@@ -1233,6 +1233,7 @@
 |`cuModuleGetFunction`| | | |`hipModuleGetFunction`|1.6.0| | | |
 |`cuModuleGetGlobal`| | | |`hipModuleGetGlobal`|1.6.0| | | |
 |`cuModuleGetGlobal_v2`| | | |`hipModuleGetGlobal`|1.6.0| | | |
+|`cuModuleGetLoadingMode`|11.7| | | | | | | |
 |`cuModuleGetSurfRef`| | | | | | | | |
 |`cuModuleGetTexRef`| | | |`hipModuleGetTexRef`|1.7.0| | | |
 |`cuModuleLoad`| | | |`hipModuleLoad`|1.6.0| | | |
@@ -1276,6 +1277,7 @@
 |`cuMemFree_v2`| | | |`hipFree`|1.5.0| | | |
 |`cuMemGetAddressRange`| | | |`hipMemGetAddressRange`|1.9.0| | | |
 |`cuMemGetAddressRange_v2`| | | |`hipMemGetAddressRange`|1.9.0| | | |
+|`cuMemGetHandleForAddressRange`|11.7| | | | | | | |
 |`cuMemGetInfo`| | | |`hipMemGetInfo`|1.6.0| | | |
 |`cuMemGetInfo_v2`| | | |`hipMemGetInfo`|1.6.0| | | |
 |`cuMemHostAlloc`| | | |`hipHostAlloc`| | | | |
@@ -1367,7 +1369,7 @@
 |`cuMemRelease`|10.2| | |`hipMemRelease`|5.2.0| | |5.2.0|
 |`cuMemRetainAllocationHandle`|11.0| | |`hipMemRetainAllocationHandle`|5.2.0| | |5.2.0|
 |`cuMemSetAccess`|10.2| | |`hipMemSetAccess`|5.2.0| | |5.2.0|
-|`cuMemUnmap`|10.2| | |`hipMemUnmap`| | | | |
+|`cuMemUnmap`|10.2| | |`hipMemUnmap`|5.2.0| | |5.2.0|
 
 ## **13. Stream Ordered Memory Allocator**
 
@@ -1460,10 +1462,15 @@
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
 |`cuStreamBatchMemOp`|8.0| | | | | | | |
+|`cuStreamBatchMemOp_v2`|11.7| | | | | | | |
 |`cuStreamWaitValue32`|8.0| | |`hipStreamWaitValue32`|4.2.0| | | |
+|`cuStreamWaitValue32_v2`|11.7| | |`hipStreamWaitValue32`|4.2.0| | | |
 |`cuStreamWaitValue64`|9.0| | |`hipStreamWaitValue64`|4.2.0| | | |
+|`cuStreamWaitValue64_v2`|11.7| | |`hipStreamWaitValue64`|4.2.0| | | |
 |`cuStreamWriteValue32`|8.0| | |`hipStreamWriteValue32`|4.2.0| | | |
+|`cuStreamWriteValue32_v2`|11.7| | |`hipStreamWriteValue32`|4.2.0| | | |
 |`cuStreamWriteValue64`|9.0| | |`hipStreamWriteValue64`|4.2.0| | | |
+|`cuStreamWriteValue64_v2`|11.7| | |`hipStreamWriteValue64`|4.2.0| | | |
 
 ## **19. Execution Control**
 
@@ -1501,6 +1508,7 @@
 |`cuDeviceGetGraphMemAttribute`|11.4| | | | | | | |
 |`cuDeviceGraphMemTrim`|11.4| | | | | | | |
 |`cuDeviceSetGraphMemAttribute`|11.4| | | | | | | |
+|`cuGraphAddBatchMemOpNode`|11.7| | | | | | | |
 |`cuGraphAddChildGraphNode`|10.0| | |`hipGraphAddChildGraphNode`|5.0.0| | | |
 |`cuGraphAddDependencies`|10.0| | |`hipGraphAddDependencies`|4.5.0| | | |
 |`cuGraphAddEmptyNode`|10.0| | |`hipGraphAddEmptyNode`|4.5.0| | | |
@@ -1514,6 +1522,8 @@
 |`cuGraphAddMemFreeNode`|11.4| | | | | | | |
 |`cuGraphAddMemcpyNode`|10.0| | | | | | | |
 |`cuGraphAddMemsetNode`|10.0| | | | | | | |
+|`cuGraphBatchMemOpNodeGetParams`|11.7| | | | | | | |
+|`cuGraphBatchMemOpNodeSetParams`|11.7| | | | | | | |
 |`cuGraphChildGraphNodeGetGraph`|10.0| | |`hipGraphChildGraphNodeGetGraph`|5.0.0| | | |
 |`cuGraphClone`|10.0| | | | | | | |
 |`cuGraphCreate`|10.0| | |`hipGraphCreate`|4.3.0| | | |
@@ -1524,6 +1534,7 @@
 |`cuGraphEventRecordNodeSetEvent`|11.1| | |`hipGraphEventRecordNodeSetEvent`|5.0.0| | | |
 |`cuGraphEventWaitNodeGetEvent`|11.1| | |`hipGraphEventWaitNodeGetEvent`|5.0.0| | | |
 |`cuGraphEventWaitNodeSetEvent`|11.1| | |`hipGraphEventWaitNodeSetEvent`|5.0.0| | | |
+|`cuGraphExecBatchMemOpNodeSetParams`|11.7| | | | | | | |
 |`cuGraphExecChildGraphNodeSetParams`|11.1| | |`hipGraphExecChildGraphNodeSetParams`|5.0.0| | | |
 |`cuGraphExecDestroy`|10.0| | |`hipGraphExecDestroy`|4.3.0| | | |
 |`cuGraphExecEventRecordNodeSetEvent`|11.1| | |`hipGraphExecEventRecordNodeSetEvent`|5.0.0| | | |
