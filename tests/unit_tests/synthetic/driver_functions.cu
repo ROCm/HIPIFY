@@ -9,12 +9,14 @@
   #include <GL/glew.h>
 #endif
 #include "cudaGL.h"
+#include "cudaProfiler.h"
 
 int main() {
   printf("09. CUDA Driver API Functions synthetic test\n");
 
   unsigned int flags = 0;
   unsigned int flags_2 = 0;
+  int dim = 0;
   int iBlockSize = 0;
   int iBlockSize_2 = 0;
   size_t bytes = 0;
@@ -1382,8 +1384,8 @@ int main() {
 
   // CUDA: __CUDA_DEPRECATED CUresult CUDAAPI cuTexRefGetAddressMode(CUaddress_mode *pam, CUtexref hTexRef, int dim);
   // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipTexRefGetAddressMode(enum hipTextureAddressMode* pam, const textureReference* texRef, int dim);
-  // CHECK: result = hipTexRefGetAddressMode(&address_mode, texref, iBlockSize);
-  result = cuTexRefGetAddressMode(&address_mode, texref, iBlockSize);
+  // CHECK: result = hipTexRefGetAddressMode(&address_mode, texref, dim);
+  result = cuTexRefGetAddressMode(&address_mode, texref, dim);
 
   // CHECK: HIPfilter_mode filter_mode;
   CUfilter_mode filter_mode;
@@ -1444,6 +1446,182 @@ int main() {
   // CHECK-NEXT: result = hipTexRefSetAddress2D(texref, &ARRAY_DESCRIPTOR, deviceptr, bytes);
   result = cuTexRefSetAddress2D(texref, &ARRAY_DESCRIPTOR, deviceptr, bytes);
   result = cuTexRefSetAddress2D_v3(texref, &ARRAY_DESCRIPTOR, deviceptr, bytes);
+
+  // CUDA: __CUDA_DEPRECATED CUresult CUDAAPI cuTexRefSetAddressMode(CUtexref hTexRef, int dim, CUaddress_mode am);
+  // HIP: hipError_t hipTexRefSetAddressMode(textureReference* texRef, int dim, enum hipTextureAddressMode am);
+  // CHECK: result = hipTexRefSetAddressMode(texref, dim, address_mode);
+  result = cuTexRefSetAddressMode(texref, dim, address_mode);
+
+  // CUDA: __CUDA_DEPRECATED CUresult CUDAAPI cuTexRefSetArray(CUtexref hTexRef, CUarray hArray, unsigned int Flags);
+  // HIP: hipError_t hipTexRefSetArray(textureReference* tex, hipArray_const_t array, unsigned int flags);
+  // CHECK: result = hipTexRefSetArray(texref, array_, flags);
+  result = cuTexRefSetArray(texref, array_, flags);
+
+#if CUDA_VERSION >= 8000
+  // CUDA: __CUDA_DEPRECATED CUresult CUDAAPI cuTexRefSetBorderColor(CUtexref hTexRef, float *pBorderColor);
+  // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipTexRefSetBorderColor(textureReference* texRef, float* pBorderColor);
+  // CHECK: result = hipTexRefSetBorderColor(texref, &ms);
+  result = cuTexRefSetBorderColor(texref, &ms);
+#endif
+
+  // CUDA: __CUDA_DEPRECATED CUresult CUDAAPI cuTexRefSetFilterMode(CUtexref hTexRef, CUfilter_mode fm);
+  // HIP: hipError_t hipError_t hipTexRefSetFilterMode(textureReference* texRef, enum hipTextureFilterMode fm);
+  // CHECK: result = hipTexRefSetFilterMode(texref, filter_mode);
+  result = cuTexRefSetFilterMode(texref, filter_mode);
+
+  // CUDA: __CUDA_DEPRECATED CUresult CUDAAPI cuTexRefSetFlags(CUtexref hTexRef, unsigned int Flags);
+  // HIP: hipError_t hipTexRefSetFlags(textureReference* texRef, unsigned int Flags);
+  // CHECK: result = hipTexRefSetFlags(texref, flags);
+  result = cuTexRefSetFlags(texref, flags);
+
+  // CUDA: __CUDA_DEPRECATED CUresult CUDAAPI cuTexRefSetFormat(CUtexref hTexRef, CUarray_format fmt, int NumPackedComponents);
+  // HIP: hipError_t hipTexRefSetFormat(textureReference* texRef, hipArray_Format fmt, int NumPackedComponents);
+  // CHECK: result = hipTexRefSetFormat(texref, array_format, iBlockSize);
+  result = cuTexRefSetFormat(texref, array_format, iBlockSize);
+
+  // CUDA: __CUDA_DEPRECATED CUresult CUDAAPI cuTexRefSetMaxAnisotropy(CUtexref hTexRef, unsigned int maxAniso);
+  // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipTexRefSetMaxAnisotropy(textureReference* texRef, unsigned int maxAniso);
+  // CHECK: result = hipTexRefSetMaxAnisotropy(texref, flags);
+  result = cuTexRefSetMaxAnisotropy(texref, flags);
+
+  // CUDA: __CUDA_DEPRECATED CUresult CUDAAPI cuTexRefSetMipmapFilterMode(CUtexref hTexRef, CUfilter_mode fm);
+  // HIP: hipError_t hipTexRefSetMipmapFilterMode(textureReference* texRef, enum hipTextureFilterMode fm);
+  // CHECK: result = hipTexRefSetMipmapFilterMode(texref, filter_mode);
+  result = cuTexRefSetMipmapFilterMode(texref, filter_mode);
+
+  // CUDA: __CUDA_DEPRECATED CUresult CUDAAPI cuTexRefSetMipmapLevelBias(CUtexref hTexRef, float bias);
+  // HIP: hipError_t hipTexRefSetMipmapLevelBias(textureReference* texRef, float bias);
+  // CHECK: result = hipTexRefSetMipmapLevelBias(texref, ms);
+  result = cuTexRefSetMipmapLevelBias(texref, ms);
+
+  // CUDA: __CUDA_DEPRECATED CUresult CUDAAPI cuTexRefSetMipmapLevelClamp(CUtexref hTexRef, float minMipmapLevelClamp, float maxMipmapLevelClamp);
+  // HIP: hipError_t hipTexRefSetMipmapLevelClamp(textureReference* texRef, float minMipMapLevelClamp, float maxMipMapLevelClamp);
+  // CHECK: result = hipTexRefSetMipmapLevelClamp(texref, ms, ms_2);
+  result = cuTexRefSetMipmapLevelClamp(texref, ms, ms_2);
+
+  // CUDA: __CUDA_DEPRECATED CUresult CUDAAPI cuTexRefSetMipmappedArray(CUtexref hTexRef, CUmipmappedArray hMipmappedArray, unsigned int Flags);
+  // HIP: hipError_t hipTexRefSetMipmappedArray(textureReference* texRef, struct hipMipmappedArray* mipmappedArray, unsigned int Flags);
+  // CHECK: result = hipTexRefSetMipmappedArray(texref, mipmappedArray, flags);
+  result = cuTexRefSetMipmappedArray(texref, mipmappedArray, flags);
+
+  // CHECK: hipTextureObject_t texObject;
+  CUtexObject texObject;
+
+  // CHECK: HIP_RESOURCE_DESC res_descr;
+  CUDA_RESOURCE_DESC res_descr;
+
+  // CHECK: HIP_TEXTURE_DESC tex_descr;
+  CUDA_TEXTURE_DESC tex_descr;
+
+  // CHECK: HIP_RESOURCE_VIEW_DESC res_view_descr;
+  CUDA_RESOURCE_VIEW_DESC res_view_descr;
+
+  // CUDA: CUresult CUDAAPI cuTexObjectCreate(CUtexObject *pTexObject, const CUDA_RESOURCE_DESC *pResDesc, const CUDA_TEXTURE_DESC *pTexDesc, const CUDA_RESOURCE_VIEW_DESC *pResViewDesc);
+  // HIP: hipError_t hipTexObjectCreate(hipTextureObject_t* pTexObject, const HIP_RESOURCE_DESC* pResDesc, const HIP_TEXTURE_DESC* pTexDesc, const HIP_RESOURCE_VIEW_DESC* pResViewDesc);
+  // CHECK: result = hipTexObjectCreate(&texObject, &res_descr, &tex_descr, &res_view_descr);
+  result = cuTexObjectCreate(&texObject, &res_descr, &tex_descr, &res_view_descr);
+
+  // CUDA: CUresult CUDAAPI cuTexObjectDestroy(CUtexObject texObject);
+  // HIP: hipError_t hipTexObjectDestroy(hipTextureObject_t texObject);
+  // CHECK: result = hipTexObjectDestroy(texObject);
+  result = cuTexObjectDestroy(texObject);
+
+  // CUDA: CUresult CUDAAPI cuTexObjectGetResourceDesc(CUDA_RESOURCE_DESC *pResDesc, CUtexObject texObject);
+  // HIP: hipError_t hipTexObjectGetResourceDesc(HIP_RESOURCE_DESC* pResDesc, hipTextureObject_t texObject);
+  // CHECK: result = hipTexObjectGetResourceDesc(&res_descr, texObject);
+  result = cuTexObjectGetResourceDesc(&res_descr, texObject);
+
+  // CUDA: CUresult CUDAAPI cuTexObjectGetResourceViewDesc(CUDA_RESOURCE_VIEW_DESC *pResViewDesc, CUtexObject texObject);
+  // HIP: hipError_t hipTexObjectGetResourceViewDesc(HIP_RESOURCE_VIEW_DESC* pResViewDesc, hipTextureObject_t texObject);
+  // CHECK: result = hipTexObjectGetResourceViewDesc(&res_view_descr, texObject);
+  result = cuTexObjectGetResourceViewDesc(&res_view_descr, texObject);
+
+#if CUDA_VERSION >= 9000
+  // CUDA: CUresult CUDAAPI cuTexObjectGetTextureDesc(CUDA_TEXTURE_DESC *pTexDesc, CUtexObject texObject);
+  // HIP: hipError_t hipTexObjectGetTextureDesc(HIP_TEXTURE_DESC* pTexDesc, hipTextureObject_t texObject);
+  // CHECK: result = hipTexObjectGetTextureDesc(&tex_descr, texObject);
+  result = cuTexObjectGetTextureDesc(&tex_descr, texObject);
+#endif
+
+  // CUDA: CUresult CUDAAPI cuCtxEnablePeerAccess(CUcontext peerContext, unsigned int Flags);
+  // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipCtxEnablePeerAccess(hipCtx_t peerCtx, unsigned int flags);
+  // CHECK: result = hipCtxEnablePeerAccess(context, flags);
+  result = cuCtxEnablePeerAccess(context, flags);
+
+  // CUDA: CUresult CUDAAPI cuCtxDisablePeerAccess(CUcontext peerContext);
+  // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipCtxDisablePeerAccess(hipCtx_t peerCtx);
+  // CHECK: result = hipCtxDisablePeerAccess(context);
+  result = cuCtxDisablePeerAccess(context);
+
+  // CUDA: CUresult CUDAAPI cuDeviceCanAccessPeer(int *canAccessPeer, CUdevice dev, CUdevice peerDev);
+  // HIP: hipError_t hipDeviceCanAccessPeer(int* canAccessPeer, int deviceId, int peerDeviceId);
+  // CHECK: result = hipDeviceCanAccessPeer(value, device, dim);
+  result = cuDeviceCanAccessPeer(value, device, dim);
+
+#if CUDA_VERSION >= 8000
+  // CHECK: hipDeviceP2PAttr deviceP2PAttribute;
+  CUdevice_P2PAttribute deviceP2PAttribute;
+
+  // CUDA: CUresult CUDAAPI cuDeviceGetP2PAttribute(int* value, CUdevice_P2PAttribute attrib, CUdevice srcDevice, CUdevice dstDevice);
+  // HIP: hipError_t hipDeviceGetP2PAttribute(int* value, hipDeviceP2PAttr attr, int srcDevice, int dstDevice);
+  // CHECK: result = hipDeviceGetP2PAttribute(value, deviceP2PAttribute, iBlockSize, iBlockSize_2);
+  result = cuDeviceGetP2PAttribute(value, deviceP2PAttribute, iBlockSize, iBlockSize_2);
+#endif
+
+  // CUDA: CUresult CUDAAPI cuGraphicsMapResources(unsigned int count, CUgraphicsResource *resources, CUstream hStream);
+  // HIP: hipError_t hipGraphicsMapResources(int count, hipGraphicsResource_t* resources, hipStream_t stream __dparm(0));
+  // CHECK: result = hipGraphicsMapResources(iBlockSize, &graphicsResource, stream);
+  result = cuGraphicsMapResources(iBlockSize, &graphicsResource, stream);
+
+  // CUDA: CUresult CUDAAPI cuGraphicsResourceGetMappedPointer(CUdeviceptr *pDevPtr, size_t *pSize, CUgraphicsResource resource);
+  // HIP: hipError_t hipGraphicsResourceGetMappedPointer(void** devPtr, size_t* size, hipGraphicsResource_t resource);
+  // CHECK: result = hipGraphicsResourceGetMappedPointer(&deviceptr, &bytes, graphicsResource);
+  // CHECK-NEXT: result = hipGraphicsResourceGetMappedPointer(&deviceptr, &bytes, graphicsResource);
+  result = cuGraphicsResourceGetMappedPointer(&deviceptr, &bytes, graphicsResource);
+  result = cuGraphicsResourceGetMappedPointer_v2(&deviceptr, &bytes, graphicsResource);
+
+  // CUDA: CUresult CUDAAPI cuGraphicsSubResourceGetMappedArray(CUarray *pArray, CUgraphicsResource resource, unsigned int arrayIndex, unsigned int mipLevel);
+  // HIP: hipError_t hipGraphicsSubResourceGetMappedArray(hipArray_t* array, hipGraphicsResource_t resource, unsigned int arrayIndex, unsigned int mipLevel);
+  // CHECK: result = hipGraphicsSubResourceGetMappedArray(&array_, graphicsResource, flags, flags_2);
+  result = cuGraphicsSubResourceGetMappedArray(&array_, graphicsResource, flags, flags_2);
+
+  // CUDA: CUresult CUDAAPI cuGraphicsUnmapResources(unsigned int count, CUgraphicsResource *resources, CUstream hStream);
+  // HIP: hipError_t hipGraphicsUnmapResources(int count, hipGraphicsResource_t* resources, hipStream_t stream  __dparm(0));
+  // CHECK: result = hipGraphicsUnmapResources(iBlockSize, &graphicsResource, stream);
+  result = cuGraphicsUnmapResources(iBlockSize, &graphicsResource, stream);
+
+  // CUDA: CUresult CUDAAPI cuGraphicsUnregisterResource(CUgraphicsResource resource);
+  // HIP: hipError_t hipGraphicsUnregisterResource(hipGraphicsResource_t resource);
+  // CHECK: result = hipGraphicsUnregisterResource(graphicsResource);
+  result = cuGraphicsUnregisterResource(graphicsResource);
+
+  // CUDA: CUresult CUDAAPI cuProfilerStart(void);
+  // HIP: DEPRECATED("use roctracer/rocTX instead") hipError_t hipProfilerStart();
+  // CHECK: result = hipProfilerStart();
+  result = cuProfilerStart();
+
+  // CUDA: CUresult CUDAAPI cuProfilerStop(void);
+  // HIP: DEPRECATED("use roctracer/rocTX instead") hipError_t hipProfilerStop();
+  // CHECK: result = hipProfilerStop();
+  result = cuProfilerStop();
+
+  // CHECK: hipGLDeviceList GLDeviceList;
+  CUGLDeviceList GLDeviceList;
+
+  // CUDA: CUresult CUDAAPI cuGLGetDevices(unsigned int *pCudaDeviceCount, CUdevice *pCudaDevices, unsigned int cudaDeviceCount, CUGLDeviceList deviceList);
+  // HIP: hipError_t hipGLGetDevices(unsigned int* pHipDeviceCount, int* pHipDevices, unsigned int hipDeviceCount, hipGLDeviceList deviceList);
+  // CHECK: result = hipGLGetDevices(&flags, &device, flags_2, GLDeviceList);
+  result = cuGLGetDevices(&flags, &device, flags_2, GLDeviceList);
+
+  // CUDA: CUresult CUDAAPI cuGraphicsGLRegisterBuffer(CUgraphicsResource *pCudaResource, GLuint buffer, unsigned int Flags);
+  // HIP: hipError_t hipGraphicsGLRegisterBuffer(hipGraphicsResource** resource, GLuint buffer, unsigned int flags);
+  // CHECK: result = hipGraphicsGLRegisterBuffer(&graphicsResource, gl_uint, flags);
+  result = cuGraphicsGLRegisterBuffer(&graphicsResource, gl_uint, flags);
+
+  // CUDA: CUresult CUDAAPI cuGraphicsGLRegisterImage(CUgraphicsResource *pCudaResource, GLuint image, GLenum target, unsigned int Flags);
+  // HIP: hipError_t hipGraphicsGLRegisterImage(hipGraphicsResource** resource, GLuint image, GLenum target, unsigned int flags);
+  // CHECK: result = hipGraphicsGLRegisterImage(&graphicsResource, gl_uint, gl_enum, flags);
+  result = cuGraphicsGLRegisterImage(&graphicsResource, gl_uint, gl_enum, flags);
 
   return 0;
 }
