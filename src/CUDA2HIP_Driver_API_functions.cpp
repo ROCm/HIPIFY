@@ -849,7 +849,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   // cudaGetDriverEntryPoint
   {"cuGetProcAddress",                                     {"hipGetProcAddress",                                       "", CONV_PROFILER, API_DRIVER, 29, HIP_UNSUPPORTED}},
   // cudaDeviceFlushGPUDirectRDMAWrites
-  {"cuFlushGPUDirectRDMAWrites",                           {"hipFlushGPUDirectRDMAWrites",                             "", CONV_PROFILER, API_DRIVER, 29, HIP_UNSUPPORTED}},
+  {"cuFlushGPUDirectRDMAWrites",                           {"hipDeviceFlushGPUDirectRDMAWrites",                       "", CONV_PROFILER, API_DRIVER, 29, HIP_UNSUPPORTED}},
 
   // 30. Profiler Control [DEPRECATED]
   // cudaProfilerInitialize
