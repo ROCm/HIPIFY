@@ -15,8 +15,12 @@ int main() {
 
   size_t bytes = 0;
   int device = 0;
+  int deviceId = 0;
+  int intVal = 0;
+  unsigned int flags = 0;
   void* deviceptr = nullptr;
   void* image = nullptr;
+  char* ch = nullptr;
 
 #if defined(_WIN32)
   unsigned long long ull = 0;
@@ -172,6 +176,106 @@ int main() {
   // CHECK: result = hipMemPoolImportPointer(&deviceptr, memPool_t, &memPoolPtrExportData);
   result = cudaMemPoolImportPointer(&deviceptr, memPool_t, &memPoolPtrExportData);
 #endif
+
+  // CHECK: hipDeviceProp_t DeviceProp;
+  cudaDeviceProp DeviceProp;
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaChooseDevice(int *device, const struct cudaDeviceProp *prop);
+  // HIP: hipError_t hipChooseDevice(int* device, const hipDeviceProp_t* prop);
+  // CHECK: result = hipChooseDevice(&device, &DeviceProp);
+  result = cudaChooseDevice(&device, &DeviceProp);
+
+  // CHECK: hipDeviceAttribute_t DeviceAttr;
+  cudaDeviceAttr DeviceAttr;
+
+  // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaDeviceGetAttribute(int *value, enum cudaDeviceAttr attr, int device);
+  // HIP: hipError_t hipDeviceGetAttribute(int* pi, hipDeviceAttribute_t attr, int deviceId);
+  // CHECK: result = hipDeviceGetAttribute(&device, DeviceAttr, deviceId);
+  result = cudaDeviceGetAttribute(&device, DeviceAttr, deviceId);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaDeviceGetByPCIBusId(int *device, const char *pciBusId);
+  // HIP: hipError_t hipDeviceGetByPCIBusId(int* device, const char* pciBusId);
+  // CHECK: result = hipDeviceGetByPCIBusId(&device, ch);
+  result = cudaDeviceGetByPCIBusId(&device, ch);
+
+  // CHECK: hipFuncCache_t FuncCache;
+  cudaFuncCache FuncCache;
+
+  // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaDeviceGetCacheConfig(enum cudaFuncCache *pCacheConfig);
+  // HIP: hipError_t hipDeviceGetCacheConfig(hipFuncCache_t* cacheConfig);
+  // CHECK: result = hipDeviceGetCacheConfig(&FuncCache);
+  result = cudaDeviceGetCacheConfig(&FuncCache);
+
+  // CHECK: hipLimit_t Limit;
+  cudaLimit Limit;
+
+  // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaDeviceGetLimit(size_t *pValue, enum cudaLimit limit);
+  // HIP: hipError_t hipDeviceGetLimit(size_t* pValue, enum hipLimit_t limit);
+  // CHECK: result = hipDeviceGetLimit(&bytes, Limit);
+  result = cudaDeviceGetLimit(&bytes, Limit);
+
+#if CUDA_VERSION >= 8000
+  // CHECK: hipDeviceP2PAttr DeviceP2PAttr;
+  cudaDeviceP2PAttr DeviceP2PAttr;
+
+  // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaDeviceGetP2PAttribute(int *value, enum cudaDeviceP2PAttr attr, int srcDevice, int dstDevice);
+  // HIP: hipError_t hipDeviceGetP2PAttribute(int* value, hipDeviceP2PAttr attr, int srcDevice, int dstDevice);
+  // CHECK: result = hipDeviceGetP2PAttribute(&intVal, DeviceP2PAttr, device, deviceId);
+  result = cudaDeviceGetP2PAttribute(&intVal, DeviceP2PAttr, device, deviceId);
+#endif
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaDeviceGetPCIBusId(char *pciBusId, int len, int device);
+  // HIP: hipError_t hipError_t hipDeviceGetPCIBusId(char* pciBusId, int len, int device);
+  // CHECK: result = hipDeviceGetPCIBusId(ch, intVal, device);
+  result = cudaDeviceGetPCIBusId(ch, intVal, device);
+
+  // CHECK: hipSharedMemConfig SharedMemConfig;
+  cudaSharedMemConfig SharedMemConfig;
+
+  // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaDeviceGetSharedMemConfig(enum cudaSharedMemConfig *pConfig);
+  // HIP: hipError_t hipDeviceGetSharedMemConfig(hipSharedMemConfig* pConfig);
+  // CHECK: result = hipDeviceGetSharedMemConfig(&SharedMemConfig);
+  result = cudaDeviceGetSharedMemConfig(&SharedMemConfig);
+
+  // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaDeviceGetStreamPriorityRange(int *leastPriority, int *greatestPriority);
+  // HIP: hipError_t hipDeviceGetStreamPriorityRange(int* leastPriority, int* greatestPriority);
+  // CHECK: result = hipDeviceGetStreamPriorityRange(&deviceId, &intVal);
+  result = cudaDeviceGetStreamPriorityRange(&deviceId, &intVal);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaDeviceReset(void);
+  // HIP: hipError_t hipError_t hipDeviceReset(void);
+  // CHECK: result = hipDeviceReset();
+  result = cudaDeviceReset();
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaDeviceSetCacheConfig(enum cudaFuncCache cacheConfig);
+  // HIP: hipError_t hipDeviceSetCacheConfig(hipFuncCache_t cacheConfig);
+  // CHECK: result = hipDeviceSetCacheConfig(FuncCache);
+  result = cudaDeviceSetCacheConfig(FuncCache);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaDeviceSetSharedMemConfig(enum cudaSharedMemConfig config);
+  // HIP: hipError_t hipDeviceSetSharedMemConfig(hipSharedMemConfig config);
+  // CHECK: result = hipDeviceSetSharedMemConfig(SharedMemConfig);
+  result = cudaDeviceSetSharedMemConfig(SharedMemConfig);
+
+  // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaDeviceSynchronize(void);
+  // HIP: hipError_t hipDeviceSynchronize(void);
+  // CHECK: result = hipDeviceSynchronize();
+  result = cudaDeviceSynchronize();
+
+  // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaGetDevice(int *device);
+  // HIP: hipError_t hipGetDevice(int* deviceId);
+  // CHECK: result = hipGetDevice(&deviceId);
+  result = cudaGetDevice(&deviceId);
+
+  // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaGetDeviceCount(int *count);
+  // HIP: hipError_t hipGetDeviceCount(int* count);
+  // CHECK: result = hipGetDeviceCount(&deviceId);
+  result = cudaGetDeviceCount(&deviceId);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGetDeviceFlags( unsigned int *flags );
+  // HIP: hipError_t hipGetDeviceFlags(unsigned int* flags);
+  // CHECK: result = hipGetDeviceFlags(&flags);
+  result = cudaGetDeviceFlags(&flags);
 
   return 0;
 }
