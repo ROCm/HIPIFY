@@ -21,6 +21,7 @@ int main() {
   void* deviceptr = nullptr;
   void* image = nullptr;
   char* ch = nullptr;
+  const char* const_ch = nullptr;
 
 #if defined(_WIN32)
   unsigned long long ull = 0;
@@ -29,8 +30,10 @@ int main() {
 #endif
 
   // CHECK: hipError_t result = hipSuccess;
+  // CHECK-NEXT: hipError_t Error_t;
   // CHECK-NEXT: hipStream_t stream;
   cudaError result = cudaSuccess;
+  cudaError_t Error_t;
   cudaStream_t stream;
 
 #if CUDA_VERSION >= 10000
@@ -276,6 +279,138 @@ int main() {
   // HIP: hipError_t hipGetDeviceFlags(unsigned int* flags);
   // CHECK: result = hipGetDeviceFlags(&flags);
   result = cudaGetDeviceFlags(&flags);
+
+  // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaGetDeviceProperties(struct cudaDeviceProp *prop, int device);
+  // HIP: hipError_t hipGetDeviceProperties(hipDeviceProp_t* prop, int deviceId);
+  // CHECK: result = hipGetDeviceProperties(&DeviceProp, deviceId);
+  result = cudaGetDeviceProperties(&DeviceProp, deviceId);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaIpcCloseMemHandle(void *devPtr);
+  // HIP: hipError_t hipError_t hipIpcCloseMemHandle(void* devPtr);
+  // CHECK: result = hipIpcCloseMemHandle(deviceptr);
+  result = cudaIpcCloseMemHandle(deviceptr);
+
+  // CHECK: hipIpcEventHandle_t IpcEventHandle_t;
+  cudaIpcEventHandle_t IpcEventHandle_t;
+
+  // CHECK: hipEvent_t Event_t;
+  cudaEvent_t Event_t;
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaIpcGetEventHandle(cudaIpcEventHandle_t *handle, cudaEvent_t event);
+  // HIP: hipError_t hipIpcGetEventHandle(hipIpcEventHandle_t* handle, hipEvent_t event);
+  // CHECK: result = hipIpcGetEventHandle(&IpcEventHandle_t, Event_t);
+  result = cudaIpcGetEventHandle(&IpcEventHandle_t, Event_t);
+
+  // CHECK: hipIpcMemHandle_t IpcMemHandle_t;
+  cudaIpcMemHandle_t IpcMemHandle_t;
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaIpcGetMemHandle(cudaIpcMemHandle_t *handle, void *devPtr);
+  // HIP: hipError_t hipIpcGetMemHandle(hipIpcMemHandle_t* handle, void* devPtr);
+  // CHECK: result = hipIpcGetMemHandle(&IpcMemHandle_t, deviceptr);
+  result = cudaIpcGetMemHandle(&IpcMemHandle_t, deviceptr);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaIpcOpenEventHandle(cudaEvent_t *event, cudaIpcEventHandle_t handle);
+  // HIP: hipError_t hipIpcOpenEventHandle(hipEvent_t* event, hipIpcEventHandle_t handle);
+  // CHECK: result = hipIpcOpenEventHandle(&Event_t, IpcEventHandle_t);
+  result = cudaIpcOpenEventHandle(&Event_t, IpcEventHandle_t);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaIpcOpenMemHandle(void **devPtr, cudaIpcMemHandle_t handle, unsigned int flags);
+  // HIP: hipError_t hipIpcOpenMemHandle(void** devPtr, hipIpcMemHandle_t handle, unsigned int flags);
+  // CHECK: result = hipIpcOpenMemHandle(&deviceptr, IpcMemHandle_t, flags);
+  result = cudaIpcOpenMemHandle(&deviceptr, IpcMemHandle_t, flags);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaSetDevice(int device);
+  // HIP: hipError_t hipSetDevice(int deviceId);
+  // CHECK: result = hipSetDevice(deviceId);
+  result = cudaSetDevice(deviceId);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaSetDeviceFlags( unsigned int flags );
+  // HIP: hipError_t hipSetDeviceFlags(unsigned flags);
+  // CHECK: result = hipSetDeviceFlags(flags);
+  result = cudaSetDeviceFlags(flags);
+
+  // CUDA: extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaThreadExit(void);
+  // HIP: hipError_t hipDeviceReset(void);
+  // CHECK: result = hipDeviceReset();
+  result = cudaThreadExit();
+
+  // CUDA: extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaThreadGetCacheConfig(enum cudaFuncCache *pCacheConfig);
+  // HIP: hipError_t hipDeviceGetCacheConfig(hipFuncCache_t* cacheConfig);
+  // CHECK: result = hipDeviceGetCacheConfig(&FuncCache);
+  result = cudaThreadGetCacheConfig(&FuncCache);
+
+  // CUDA: extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaThreadSetCacheConfig(enum cudaFuncCache cacheConfig);
+  // HIP: hipError_t hipError_t hipDeviceSetCacheConfig(hipFuncCache_t cacheConfig);
+  // CHECK: result = hipDeviceSetCacheConfig(FuncCache);
+  result = cudaThreadSetCacheConfig(FuncCache);
+
+  // CUDA: extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaThreadSynchronize(void);
+  // HIP: hipError_t hipError_t hipDeviceSynchronize(void);
+  // CHECK: result = hipDeviceSynchronize();
+  result = cudaThreadSynchronize();
+
+  // CUDA: extern __host__ __cudart_builtin__ const char* CUDARTAPI cudaGetErrorName(cudaError_t error);
+  // HIP: const char* hipGetErrorName(hipError_t hip_error);
+  // CHECK: const_ch = hipGetErrorName(Error_t);
+  const_ch = cudaGetErrorName(Error_t);
+
+  // CUDA: extern __host__ __cudart_builtin__ const char* CUDARTAPI cudaGetErrorString(cudaError_t error);
+  // HIP: const char* hipGetErrorString(hipError_t hipError);
+  // CHECK: const_ch = hipGetErrorString(Error_t);
+  const_ch = cudaGetErrorString(Error_t);
+
+  // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaGetLastError(void);
+  // HIP: hipError_t hipGetLastError(void);
+  // CHECK: result = hipGetLastError();
+  result = cudaGetLastError();
+
+  // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaPeekAtLastError(void);
+  // HIP: hipError_t hipPeekAtLastError(void);
+  // CHECK: result = hipPeekAtLastError();
+  result = cudaPeekAtLastError();
+
+  // CHECK: hipStreamCallback_t StreamCallback_t;
+  cudaStreamCallback_t StreamCallback_t;
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaStreamAddCallback(cudaStream_t stream, cudaStreamCallback_t callback, void* userData, unsigned int flags);
+  // HIP: hipError_t hipStreamAddCallback(hipStream_t stream, hipStreamCallback_t callback, void* userData, unsigned int flags);
+  // CHECK: result = hipStreamAddCallback(stream, StreamCallback_t, image, flags);
+  result = cudaStreamAddCallback(stream, StreamCallback_t, image, flags);
+
+  // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaStreamAttachMemAsync(cudaStream_t stream, void *devPtr, size_t length __dv(0), unsigned int flags = cudaMemAttachSingle);
+  // HIP: hipError_t hipStreamAttachMemAsync(hipStream_t stream, void* dev_ptr, size_t length __dparm(0), unsigned int flags __dparm(hipMemAttachSingle));
+  // CHECK: result = hipStreamAttachMemAsync(stream, deviceptr, bytes, flags);
+  result = cudaStreamAttachMemAsync(stream, deviceptr, bytes, flags);
+
+#if CUDA_VERSION >= 10000
+  // CHECK: hipStreamCaptureMode StreamCaptureMode;
+  cudaStreamCaptureMode StreamCaptureMode;
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaStreamBeginCapture(cudaStream_t stream, enum cudaStreamCaptureMode mode);
+  // HIP: hipError_t hipStreamBeginCapture(hipStream_t stream, hipStreamCaptureMode mode);
+  // CHECK: result = hipStreamBeginCapture(stream, StreamCaptureMode);
+  result = cudaStreamBeginCapture(stream, StreamCaptureMode);
+#endif
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaStreamCreate(cudaStream_t *pStream);
+  // HIP: hipError_t hipStreamCreate(hipStream_t* stream);
+  // CHECK: result = hipStreamCreate(&stream);
+  result = cudaStreamCreate(&stream);
+
+  // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaStreamCreateWithFlags(cudaStream_t *pStream, unsigned int flags);
+  // HIP: hipError_t hipStreamCreateWithFlags(hipStream_t* stream, unsigned int flags);
+  // CHECK: result = hipStreamCreateWithFlags(&stream, flags);
+  result = cudaStreamCreateWithFlags(&stream, flags);
+
+  // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaStreamCreateWithPriority(cudaStream_t *pStream, unsigned int flags, int priority);
+  // HIP: hipError_t hipStreamCreateWithPriority(hipStream_t* stream, unsigned int flags);
+  // CHECK: result = hipStreamCreateWithPriority(&stream, flags, intVal);
+  result = cudaStreamCreateWithPriority(&stream, flags, intVal);
+
+  // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaStreamDestroy(cudaStream_t stream);
+  // HIP: hipError_t hipStreamDestroy(hipStream_t stream);
+  // CHECK: result = hipStreamDestroy(stream);
+  result = cudaStreamDestroy(stream);
 
   return 0;
 }
