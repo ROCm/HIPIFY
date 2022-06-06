@@ -18,6 +18,7 @@ int main() {
   int deviceId = 0;
   int intVal = 0;
   unsigned int flags = 0;
+  float ms = 0;
   void* deviceptr = nullptr;
   void* image = nullptr;
   char* ch = nullptr;
@@ -28,6 +29,7 @@ int main() {
 #else
   unsigned long ull = 0;
 #endif
+  unsigned long long ull_2 = 0;
 
   // CHECK: hipError_t result = hipSuccess;
   // CHECK-NEXT: hipError_t Error_t;
@@ -35,6 +37,16 @@ int main() {
   cudaError result = cudaSuccess;
   cudaError_t Error_t;
   cudaStream_t stream;
+
+#if CUDA_VERSION >= 8000
+  // CHECK: hipDeviceP2PAttr DeviceP2PAttr;
+  cudaDeviceP2PAttr DeviceP2PAttr;
+
+  // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaDeviceGetP2PAttribute(int *value, enum cudaDeviceP2PAttr attr, int srcDevice, int dstDevice);
+  // HIP: hipError_t hipDeviceGetP2PAttribute(int* value, hipDeviceP2PAttr attr, int srcDevice, int dstDevice);
+  // CHECK: result = hipDeviceGetP2PAttribute(&intVal, DeviceP2PAttr, device, deviceId);
+  result = cudaDeviceGetP2PAttribute(&intVal, DeviceP2PAttr, device, deviceId);
+#endif
 
 #if CUDA_VERSION >= 10000
   // CHECK: hipHostFn_t hostFn;
@@ -44,11 +56,101 @@ int main() {
   // HIP: hipError_t hipLaunchHostFunc(hipStream_t stream, hipHostFn_t fn, void* userData);
   // CHECK: result = hipLaunchHostFunc(stream, hostFn, image);
   result = cudaLaunchHostFunc(stream, hostFn, image);
+
+  // CHECK: hipStreamCaptureMode StreamCaptureMode;
+  cudaStreamCaptureMode StreamCaptureMode;
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaStreamBeginCapture(cudaStream_t stream, enum cudaStreamCaptureMode mode);
+  // HIP: hipError_t hipStreamBeginCapture(hipStream_t stream, hipStreamCaptureMode mode);
+  // CHECK: result = hipStreamBeginCapture(stream, StreamCaptureMode);
+  result = cudaStreamBeginCapture(stream, StreamCaptureMode);
+
+  // CHECK: hipGraph_t Graph_t;
+  cudaGraph_t Graph_t;
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaStreamEndCapture(cudaStream_t stream, cudaGraph_t *pGraph);
+  // HIP: hipError_t hipStreamEndCapture(hipStream_t stream, hipGraph_t* pGraph);
+  // CHECK: result = hipStreamEndCapture(stream, &Graph_t);
+  result = cudaStreamEndCapture(stream, &Graph_t);
+
+  // CHECK: hipStreamCaptureStatus StreamCaptureStatus;
+  cudaStreamCaptureStatus StreamCaptureStatus;
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaStreamIsCapturing(cudaStream_t stream, enum cudaStreamCaptureStatus *pCaptureStatus);
+  // HIP: hipError_t hipStreamIsCapturing(hipStream_t stream, hipStreamCaptureStatus* pCaptureStatus);
+  // CHECK: result = hipStreamIsCapturing(stream, &StreamCaptureStatus);
+  result = cudaStreamIsCapturing(stream, &StreamCaptureStatus);
+
+  // CHECK: hipExternalMemory_t ExternalMemory_t;
+  cudaExternalMemory_t ExternalMemory_t;
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaDestroyExternalMemory(cudaExternalMemory_t extMem);
+  // HIP: hipError_t hipDestroyExternalMemory(hipExternalMemory_t extMem);
+  // CHECK: result = hipDestroyExternalMemory(ExternalMemory_t);
+  result = cudaDestroyExternalMemory(ExternalMemory_t);
+
+  // CHECK: hipExternalSemaphore_t ExternalSemaphore_t;
+  cudaExternalSemaphore_t ExternalSemaphore_t;
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaDestroyExternalSemaphore(cudaExternalSemaphore_t extSem);
+  // HIP: hipError_t hipDestroyExternalSemaphore(hipExternalSemaphore_t extSem);
+  // CHECK: result = hipDestroyExternalSemaphore(ExternalSemaphore_t);
+  result = cudaDestroyExternalSemaphore(ExternalSemaphore_t);
+
+  // CHECK: hipExternalMemoryBufferDesc ExternalMemoryBufferDesc;
+  cudaExternalMemoryBufferDesc ExternalMemoryBufferDesc;
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaExternalMemoryGetMappedBuffer(void **devPtr, cudaExternalMemory_t extMem, const struct cudaExternalMemoryBufferDesc *bufferDesc);
+  // HIP: hipError_t hipExternalMemoryGetMappedBuffer(void **devPtr, hipExternalMemory_t extMem, const hipExternalMemoryBufferDesc *bufferDesc);
+  // CHECK: result = hipExternalMemoryGetMappedBuffer(&deviceptr, ExternalMemory_t, &ExternalMemoryBufferDesc);
+  result = cudaExternalMemoryGetMappedBuffer(&deviceptr, ExternalMemory_t, &ExternalMemoryBufferDesc);
+
+  // CHECK: hipExternalMemoryHandleDesc ExternalMemoryHandleDesc;
+  cudaExternalMemoryHandleDesc ExternalMemoryHandleDesc;
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaImportExternalMemory(cudaExternalMemory_t *extMem_out, const struct cudaExternalMemoryHandleDesc *memHandleDesc);
+  // HIP: hipError_t hipImportExternalMemory(hipExternalMemory_t* extMem_out, const hipExternalMemoryHandleDesc* memHandleDesc);
+  // CHECK: result = hipImportExternalMemory(&ExternalMemory_t, &ExternalMemoryHandleDesc);
+  result = cudaImportExternalMemory(&ExternalMemory_t, &ExternalMemoryHandleDesc);
+
+  // CHECK: hipExternalSemaphoreHandleDesc ExternalSemaphoreHandleDesc;
+  cudaExternalSemaphoreHandleDesc ExternalSemaphoreHandleDesc;
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaImportExternalSemaphore(cudaExternalSemaphore_t *extSem_out, const struct cudaExternalSemaphoreHandleDesc *semHandleDesc);
+  // HIP: hipError_t hipImportExternalSemaphore(hipExternalSemaphore_t* extSem_out, const hipExternalSemaphoreHandleDesc* semHandleDesc);
+  // CHECK: result = hipImportExternalSemaphore(&ExternalSemaphore_t, &ExternalSemaphoreHandleDesc);
+  result = cudaImportExternalSemaphore(&ExternalSemaphore_t, &ExternalSemaphoreHandleDesc);
+
+  // CHECK: hipExternalSemaphoreSignalParams ExternalSemaphoreSignalParams;
+  cudaExternalSemaphoreSignalParams ExternalSemaphoreSignalParams;
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaSignalExternalSemaphoresAsync(const cudaExternalSemaphore_t *extSemArray, const struct cudaExternalSemaphoreSignalParams *paramsArray, unsigned int numExtSems, cudaStream_t stream __dv(0));
+  // HIP: hipError_t hipSignalExternalSemaphoresAsync(const hipExternalSemaphore_t* extSemArray, const hipExternalSemaphoreSignalParams* paramsArray, unsigned int numExtSems, hipStream_t stream);
+  // CHECK: result = hipSignalExternalSemaphoresAsync(&ExternalSemaphore_t, &ExternalSemaphoreSignalParams, flags, stream);
+  result = cudaSignalExternalSemaphoresAsync(&ExternalSemaphore_t, &ExternalSemaphoreSignalParams, flags, stream);
+
+  // CHECK: hipExternalSemaphoreWaitParams ExternalSemaphoreWaitParams;
+  cudaExternalSemaphoreWaitParams ExternalSemaphoreWaitParams;
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaWaitExternalSemaphoresAsync(const cudaExternalSemaphore_t *extSemArray, const struct cudaExternalSemaphoreWaitParams *paramsArray, unsigned int numExtSems, cudaStream_t stream __dv(0));
+  // HIP: hipError_t hipWaitExternalSemaphoresAsync(const hipExternalSemaphore_t* extSemArray, const hipExternalSemaphoreWaitParams* paramsArray, unsigned int numExtSems, hipStream_t stream);
+  // CHECK: result = hipWaitExternalSemaphoresAsync(&ExternalSemaphore_t, &ExternalSemaphoreWaitParams, flags, stream);
+  result = cudaWaitExternalSemaphoresAsync(&ExternalSemaphore_t, &ExternalSemaphoreWaitParams, flags, stream);
 #endif
 
 #if CUDA_VERSION >= 10010
   // CHECK: hipStreamCaptureMode streamCaptureMode;
   cudaStreamCaptureMode streamCaptureMode;
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaThreadExchangeStreamCaptureMode(enum cudaStreamCaptureMode *mode);
+  // HIP: hipError_t hipThreadExchangeStreamCaptureMode(hipStreamCaptureMode* mode);
+  // CHECK: result = hipThreadExchangeStreamCaptureMode(&streamCaptureMode);
+  result = cudaThreadExchangeStreamCaptureMode(&streamCaptureMode);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaStreamGetCaptureInfo(cudaStream_t stream, enum cudaStreamCaptureStatus *pCaptureStatus, unsigned long long *pId);
+  // HIP: hipError_t hipStreamGetCaptureInfo(hipStream_t stream, hipStreamCaptureStatus* pCaptureStatus, unsigned long long* pId);
+  // CHECK: result = hipStreamGetCaptureInfo(stream, &StreamCaptureStatus, &ull_2);
+  result = cudaStreamGetCaptureInfo(stream, &StreamCaptureStatus, &ull_2);
 
   // CUDA: extern __host__ cudaError_t CUDARTAPI cudaThreadExchangeStreamCaptureMode(enum cudaStreamCaptureMode *mode);
   // HIP: hipError_t hipThreadExchangeStreamCaptureMode(hipStreamCaptureMode* mode);
@@ -217,16 +319,6 @@ int main() {
   // CHECK: result = hipDeviceGetLimit(&bytes, Limit);
   result = cudaDeviceGetLimit(&bytes, Limit);
 
-#if CUDA_VERSION >= 8000
-  // CHECK: hipDeviceP2PAttr DeviceP2PAttr;
-  cudaDeviceP2PAttr DeviceP2PAttr;
-
-  // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaDeviceGetP2PAttribute(int *value, enum cudaDeviceP2PAttr attr, int srcDevice, int dstDevice);
-  // HIP: hipError_t hipDeviceGetP2PAttribute(int* value, hipDeviceP2PAttr attr, int srcDevice, int dstDevice);
-  // CHECK: result = hipDeviceGetP2PAttribute(&intVal, DeviceP2PAttr, device, deviceId);
-  result = cudaDeviceGetP2PAttribute(&intVal, DeviceP2PAttr, device, deviceId);
-#endif
-
   // CUDA: extern __host__ cudaError_t CUDARTAPI cudaDeviceGetPCIBusId(char *pciBusId, int len, int device);
   // HIP: hipError_t hipError_t hipDeviceGetPCIBusId(char* pciBusId, int len, int device);
   // CHECK: result = hipDeviceGetPCIBusId(ch, intVal, device);
@@ -294,7 +386,9 @@ int main() {
   cudaIpcEventHandle_t IpcEventHandle_t;
 
   // CHECK: hipEvent_t Event_t;
+  // CHECK-Next: hipEvent_t Event_2;
   cudaEvent_t Event_t;
+  cudaEvent_t Event_2;
 
   // CUDA: extern __host__ cudaError_t CUDARTAPI cudaIpcGetEventHandle(cudaIpcEventHandle_t *handle, cudaEvent_t event);
   // HIP: hipError_t hipIpcGetEventHandle(hipIpcEventHandle_t* handle, hipEvent_t event);
@@ -382,16 +476,6 @@ int main() {
   // CHECK: result = hipStreamAttachMemAsync(stream, deviceptr, bytes, flags);
   result = cudaStreamAttachMemAsync(stream, deviceptr, bytes, flags);
 
-#if CUDA_VERSION >= 10000
-  // CHECK: hipStreamCaptureMode StreamCaptureMode;
-  cudaStreamCaptureMode StreamCaptureMode;
-
-  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaStreamBeginCapture(cudaStream_t stream, enum cudaStreamCaptureMode mode);
-  // HIP: hipError_t hipStreamBeginCapture(hipStream_t stream, hipStreamCaptureMode mode);
-  // CHECK: result = hipStreamBeginCapture(stream, StreamCaptureMode);
-  result = cudaStreamBeginCapture(stream, StreamCaptureMode);
-#endif
-
   // CUDA: extern __host__ cudaError_t CUDARTAPI cudaStreamCreate(cudaStream_t *pStream);
   // HIP: hipError_t hipStreamCreate(hipStream_t* stream);
   // CHECK: result = hipStreamCreate(&stream);
@@ -411,6 +495,66 @@ int main() {
   // HIP: hipError_t hipStreamDestroy(hipStream_t stream);
   // CHECK: result = hipStreamDestroy(stream);
   result = cudaStreamDestroy(stream);
+
+  // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaStreamGetFlags(cudaStream_t hStream, unsigned int *flags);
+  // HIP: hipError_t hipStreamGetFlags(hipStream_t stream, unsigned int* flags);
+  // CHECK: result = hipStreamGetFlags(stream, &flags);
+  result = cudaStreamGetFlags(stream, &flags);
+
+  // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaStreamGetPriority(cudaStream_t hStream, int *priority);
+  // HIP: hipError_t hipStreamGetPriority(hipStream_t stream, int* priority);
+  // CHECK: result = hipStreamGetPriority(stream, &intVal);
+  result = cudaStreamGetPriority(stream, &intVal);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaStreamQuery(cudaStream_t stream);
+  // HIP: hipError_t hipStreamQuery(hipStream_t stream);
+  // CHECK: result = hipStreamQuery(stream);
+  result = cudaStreamQuery(stream);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaStreamSynchronize(cudaStream_t stream);
+  // HIP: hipError_t hipStreamSynchronize(hipStream_t stream);
+  // CHECK: result = hipStreamSynchronize(stream);
+  result = cudaStreamSynchronize(stream);
+
+  // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaStreamWaitEvent(cudaStream_t stream, cudaEvent_t event, unsigned int flags __dv(0));
+  // HIP: hipError_t hipStreamWaitEvent(hipStream_t stream, hipEvent_t event, unsigned int flags);
+  // CHECK: result = hipStreamWaitEvent(stream, Event_t, flags);
+  result = cudaStreamWaitEvent(stream, Event_t, flags);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaEventCreate(cudaEvent_t *event);
+  // HIP: hipError_t hipEventCreate(hipEvent_t* event);
+  // CHECK: result = hipEventCreate(&Event_t);
+  result = cudaEventCreate(&Event_t);
+
+  // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaEventCreateWithFlags(cudaEvent_t *event, unsigned int flags);
+  // HIP: hipError_t hipEventCreateWithFlags(hipEvent_t* event, unsigned flags);
+  // CHECK: result = hipEventCreateWithFlags(&Event_t, flags);
+  result = cudaEventCreateWithFlags(&Event_t, flags);
+
+  // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaEventDestroy(cudaEvent_t event);
+  // HIP: hipError_t hipEventDestroy(hipEvent_t event);
+  // CHECK: result = hipEventDestroy(Event_t);
+  result = cudaEventDestroy(Event_t);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaEventElapsedTime(float *ms, cudaEvent_t start, cudaEvent_t end);
+  // HIP: hipError_t hipEventElapsedTime(float* ms, hipEvent_t start, hipEvent_t stop);
+  // CHECK: result = hipEventElapsedTime(&ms, Event_t, Event_2);
+  result = cudaEventElapsedTime(&ms, Event_t, Event_2);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaEventQuery(cudaEvent_t event);
+  // HIP: hipError_t hipEventQuery(hipEvent_t event);
+  // CHECK: result = hipEventQuery(Event_t);
+  result = cudaEventQuery(Event_t);
+
+  // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaEventRecord(cudaEvent_t event, cudaStream_t stream __dv(0));
+  // HIP: hipError_t hipEventRecord(hipEvent_t event, hipStream_t stream);
+  // CHECK: result = hipEventRecord(Event_t, stream);
+  result = cudaEventRecord(Event_t, stream);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaEventSynchronize(cudaEvent_t event);
+  // HIP: hipError_t hipEventSynchronize(hipEvent_t event);
+  // CHECK: result = hipEventSynchronize(Event_t);
+  result = cudaEventSynchronize(Event_t);
 
   return 0;
 }
