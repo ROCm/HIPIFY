@@ -5265,7 +5265,7 @@ sub countSupportedDeviceFunctions {
         # match device function from the list, except those, which have a namespace prefix (aka somenamespace::umin(...));
         # function with only global namespace qualifier '::' (aka ::umin(...)) should be treated as a device function (and warned as well as without such qualifier);
         my $mt_namespace = m/(\w+)::($func)\s*\(\s*.*\s*\)/g;
-        my $mt = m/($func)\s*\(\s*.*\s*\)/g;
+        my $mt = m/\b($func)\b\s*\(\s*.*\s*\)/g;
         if ($mt && !$mt_namespace) {
             $k += $mt;
         }
@@ -5449,7 +5449,7 @@ sub warnUnsupportedDeviceFunctions {
         # match device function from the list, except those, which have a namespace prefix (aka somenamespace::umin(...));
         # function with only global namespace qualifier '::' (aka ::umin(...)) should be treated as a device function (and warned as well as without such qualifier);
         my $mt_namespace = m/(\w+)::($func)\s*\(\s*.*\s*\)/g;
-        my $mt = m/($func)\s*\(\s*.*\s*\)/g;
+        my $mt = m/\b($func)\b\s*\(\s*.*\s*\)/g;
         if ($mt && !$mt_namespace) {
             $k += $mt;
             print STDERR "  warning: $fileName:$line_num: unsupported device function \"$func\": $_\n";
