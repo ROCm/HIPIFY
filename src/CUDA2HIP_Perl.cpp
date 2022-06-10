@@ -630,7 +630,7 @@ namespace perl {
       subCommon << tab_2 << "# match device function from the list, except those, which have a namespace prefix (aka somenamespace::umin(...));" << endl;
       subCommon << tab_2 << "# function with only global namespace qualifier '::' (aka ::umin(...)) should be treated as a device function (and warned as well as without such qualifier);" << endl;
       subCommon << tab_2 << my << "$mt_namespace = m/(\\w+)::($func)\\s*\\(\\s*.*\\s*\\)/g;" << endl;
-      subCommon << tab_2 << my << "$mt = m/($func)\\s*\\(\\s*.*\\s*\\)/g;" << endl;
+      subCommon << tab_2 << my << "$mt = m/\\b($func)\\b\\s*\\(\\s*.*\\s*\\)/g;" << endl;
       subCommon << tab_2 << "if ($mt && !$mt_namespace) {" << endl;
       subCommon << tab_3 << "$k += $mt;" << endl;
     }
