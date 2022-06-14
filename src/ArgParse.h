@@ -58,3 +58,4 @@ extern cl::opt<bool> GenerateCSV;
 extern cl::opt<std::string> DocFormat;
 extern cl::opt<bool> Experimental;
 extern cl::opt<bool> CudaKernelExecutionSyntax;
+extern cl::opt<bool> HipKernelExecutionSyntax;
