@@ -34,19 +34,21 @@ my $USAGE =<<USAGE;
 
     OPTIONS:
 
-      -examine          - Combines -no-output and -print-stats options
-      -exclude-dirs=s   - Exclude directories
-      -exclude-files=s  - Exclude files
-      -experimental     - HIPIFY experimentally supported APIs
-      -help             - Display available options
-      -inplace          - Backup the input file in .prehip file, modify the input file inplace
-      -no-output        - Don't write any translated output to stdout
-      -o=s              - Output filename
-      -print-stats      - Print translation statistics
-      -quiet-warnings   - Don't print warnings on unknown CUDA identifiers
-      -roc              - Translate to roc instead of hip where it is possible
-      -version          - The supported HIP version
-      -whitelist=s      - Whitelist of identifiers
+      -cuda-kernel-execution-syntax - Keep CUDA kernel launch syntax
+      -examine                      - Combines -no-output and -print-stats options
+      -exclude-dirs=s               - Exclude directories
+      -exclude-files=s              - Exclude files
+      -experimental                 - HIPIFY experimentally supported APIs
+      -help                         - Display available options
+      -hip-kernel-execution-syntax  - Transform CUDA kernel launch syntax to a regular HIP function call
+      -inplace                      - Backup the input file in .prehip file, modify the input file inplace
+      -no-output                    - Don't write any translated output to stdout
+      -o=s                          - Output filename
+      -print-stats                  - Print translation statistics
+      -quiet-warnings               - Don't print warnings on unknown CUDA identifiers
+      -roc                          - Translate to roc instead of hip where it is possible
+      -version                      - The supported HIP version
+      -whitelist=s                  - Whitelist of identifiers
 USAGE
 #
 use warnings;
@@ -68,19 +70,21 @@ my %convertedTags = ();
 my %convertedTagsTotal = ();
 
 GetOptions(
-      "examine" => \$examine                  # Combines -no-output and -print-stats options
-    , "exclude-dirs=s" => \$exclude_dirs      # Exclude directories
-    , "exclude-files=s" => \$exclude_files    # Exclude files
-    , "experimental" => \$experimental        # HIPIFY experimentally supported APIs
-    , "help" => \$help                        # Display available options
-    , "inplace" => \$inplace                  # Backup the input file in .prehip file, modify the input file inplace
-    , "no-output" => \$no_output              # Don't write any translated output to stdout
-    , "o=s" => \$hipFileName                  # Output filename
-    , "print-stats" => \$print_stats          # Print translation statistics
-    , "quiet-warnings" => \$quiet_warnings    # Don't print warnings on unknown CUDA identifiers
-    , "roc" => \$roc                          # Translate to roc instead of hip where it is possible
-    , "version" => \$version                  # The supported HIP version
-    , "whitelist=s" => \$whitelist            # Whitelist of identifiers
+      "cuda-kernel-execution-syntax" => \$cuda_kernel_execution_syntax  # Keep CUDA kernel launch syntax
+    , "examine" => \$examine                                            # Combines -no-output and -print-stats options
+    , "exclude-dirs=s" => \$exclude_dirs                                # Exclude directories
+    , "exclude-files=s" => \$exclude_files                              # Exclude files
+    , "experimental" => \$experimental                                  # HIPIFY experimentally supported APIs
+    , "help" => \$help                                                  # Display available options
+    , "hip-kernel-execution-syntax" => \$hip_kernel_execution_syntax    # Transform CUDA kernel launch syntax to a regular HIP function call
+    , "inplace" => \$inplace                                            # Backup the input file in .prehip file, modify the input file inplace
+    , "no-output" => \$no_output                                        # Don't write any translated output to stdout
+    , "o=s" => \$hipFileName                                            # Output filename
+    , "print-stats" => \$print_stats                                    # Print translation statistics
+    , "quiet-warnings" => \$quiet_warnings                              # Don't print warnings on unknown CUDA identifiers
+    , "roc" => \$roc                                                    # Translate to roc instead of hip where it is possible
+    , "version" => \$version                                            # The supported HIP version
+    , "whitelist=s" => \$whitelist                                      # Whitelist of identifiers
 );
 
 my %deprecated_funcs = (
@@ -8064,7 +8068,9 @@ while (@ARGV) {
                 experimentalSubstitutions();
             }
             simpleSubstitutions();
-            transformKernelLaunch();
+            if (!$cuda_kernel_execution_syntax || $hip_kernel_execution_syntax) {
+                transformKernelLaunch();
+            }
             transformCubNamespace();
             my $hasDeviceCode = $countKeywords + $ft{'device_function'};
             unless ($quiet_warnings) {
