@@ -161,13 +161,18 @@ cl::opt<std::string> DocFormat("doc-format",
   cl::cat(ToolTemplateCategory));
 
 cl::opt<bool> Experimental("experimental",
-  cl::desc("HIPIFY experimentally supported APIs"),
+  cl::desc("HIP APIs that are experimentally supported"),
   cl::value_desc("experimental"),
   cl::cat(ToolTemplateCategory));
 
 cl::opt<bool> CudaKernelExecutionSyntax("cuda-kernel-execution-syntax",
-  cl::desc("Do not transform CUDA kernel launches"),
+  cl::desc("Keep CUDA kernel launch syntax"),
   cl::value_desc("cuda-kernel-execution-syntax"),
+  cl::cat(ToolTemplateCategory));
+
+cl::opt<bool> HipKernelExecutionSyntax("hip-kernel-execution-syntax",
+  cl::desc("Transform CUDA kernel launch syntax to a regular HIP function call"),
+  cl::value_desc("hip-kernel-execution-syntax"),
   cl::cat(ToolTemplateCategory));
 
 cl::extrahelp CommonHelp(ct::CommonOptionsParser::HelpMessage);
