@@ -176,3 +176,31 @@ cl::opt<bool> HipKernelExecutionSyntax("hip-kernel-execution-syntax",
   cl::cat(ToolTemplateCategory));
 
 cl::extrahelp CommonHelp(ct::CommonOptionsParser::HelpMessage);
+
+const std::vector<std::string> hipifyOptions {
+  std::string(PrintStatsCSV.ArgStr),
+  std::string(PrintStats.ArgStr),
+  std::string(SkipExcludedPPConditionalBlocks.ArgStr),
+  std::string(HipKernelExecutionSyntax.ArgStr),
+  std::string(CudaKernelExecutionSyntax.ArgStr),
+  std::string(GeneratePerl.ArgStr),
+  std::string(GeneratePython.ArgStr),
+  std::string(TranslateToRoc.ArgStr),
+  std::string(GenerateMarkdown.ArgStr),
+  std::string(GenerateCSV.ArgStr),
+  std::string(NoBackup.ArgStr),
+  std::string(NoOutput.ArgStr),
+  std::string(Inplace.ArgStr),
+  std::string(Examine.ArgStr),
+  std::string(SaveTemps.ArgStr),
+  std::string(DocFormat.ArgStr),
+  std::string(Experimental.ArgStr),
+};
+
+const std::vector<std::string> hipifyOptionsWithTwoArgs {
+  std::string(OutputDir.ArgStr),
+  std::string(OutputHipifyPerlDir.ArgStr),
+  std::string(OutputPythonMapDir.ArgStr),
+  std::string(OutputStatsFilename.ArgStr),
+  std::string(TemporaryDir.ArgStr),
+};

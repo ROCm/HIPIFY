@@ -59,3 +59,5 @@ extern cl::opt<std::string> DocFormat;
 extern cl::opt<bool> Experimental;
 extern cl::opt<bool> CudaKernelExecutionSyntax;
 extern cl::opt<bool> HipKernelExecutionSyntax;
+extern const std::vector<std::string> hipifyOptions;
+extern const std::vector<std::string> hipifyOptionsWithTwoArgs;

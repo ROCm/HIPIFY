@@ -51,31 +51,22 @@ constexpr auto DEBUG_TYPE = "cuda2hip";
 namespace ct = clang::tooling;
 
 void cleanupHipifyOptions(std::vector<const char*> &args) {
-  std::vector<std::string> hipifyOptions = {"-perl", "-python", "-roc", "-inplace",
-                                            "-no-backup", "-no-output", "-print-stats",
-                                            "-print-stats-csv", "-examine", "-save-temps",
-                                            "-skip-excluded-preprocessor-conditional-blocks",
-                                            "-md", "-csv", "-doc-format", "-experimental",
-                                            "-cuda-kernel-execution-syntax",
-                                            "-hip-kernel-execution-syntax"};
   for (const auto &a : hipifyOptions) {
+    args.erase(std::remove(args.begin(), args.end(), "--" + a), args.end());
     args.erase(std::remove(args.begin(), args.end(), "-" + a), args.end());
-    args.erase(std::remove(args.begin(), args.end(), a), args.end());
   }
-  std::vector<std::string> hipifyDirOptions = {"-o-dir", "-o-hipify-perl-dir", "-o-stats",
-                                               "-o-python-map-dir", "-temp-dir"};
-  for (const auto &a : hipifyDirOptions) {
+  for (const auto &a : hipifyOptionsWithTwoArgs) {
     // remove all "-option=value" and "--option=value"
     args.erase(
       std::remove_if(args.begin(), args.end(),
-        [a](const std::string &s) { return s.find("-" + a + "=") == 0 || s.find(a + "=") == 0; }
+        [a](const std::string &s) { return s.find("--" + a + "=") == 0 || s.find("-" + a + "=") == 0; }
       ),
       args.end()
     );
     // remove all pairs of arguments "--option value" and "-option value"
     auto it = args.erase(
       std::remove_if(args.begin(), args.end(),
-        [a](const std::string &s) { return s.find("-" + a) == 0 || s.find(a) == 0; }
+        [a](const std::string &s) { return s.find("--" + a) == 0 || s.find("-" + a) == 0; }
       ),
       args.end()
     );
