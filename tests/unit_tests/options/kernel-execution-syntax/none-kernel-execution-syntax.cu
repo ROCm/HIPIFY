@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
     int numBlocks = (numElements + blockSize - 1) / blockSize;
     dim3 dimGrid(numBlocks, 1, 1);
     dim3 dimBlock(blockSize, 1, 1);
-    // CHECK: hipLaunchKernelGGL(add, dim3(dimGrid), dim3(dimBlock), 0, 0, numElements, A, B);
+    // CHECK: add<<<dimGrid, dimBlock>>>(numElements, A, B);
     add<<<dimGrid, dimBlock>>>(numElements, A, B);
     // CHECK: hipDeviceSynchronize();
     cudaDeviceSynchronize();

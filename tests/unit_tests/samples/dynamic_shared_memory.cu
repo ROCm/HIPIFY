@@ -1,4 +1,4 @@
-// RUN: %run_test hipify "%s" "%t" %hipify_args %clang_args
+// RUN: %run_test hipify "%s" "%t" %hipify_args 1 --hip-kernel-execution-syntax %clang_args
 
 // Taken from Jonathan Hui blog https://jhui.github.io/2017/03/06/CUDA
 

@@ -1,4 +1,4 @@
-// RUN: %run_test hipify "%s" "%t" %hipify_args %clang_args
+// RUN: %run_test hipify "%s" "%t" %hipify_args 1 --hip-kernel-execution-syntax %clang_args
 // Synthetic test to warn only on device functions umin and umax as unsupported, but not on user defined ones.
 // ToDo: change lit testing in order to parse the output.
 
