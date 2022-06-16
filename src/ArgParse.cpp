@@ -166,12 +166,13 @@ cl::opt<bool> Experimental("experimental",
   cl::cat(ToolTemplateCategory));
 
 cl::opt<bool> CudaKernelExecutionSyntax("cuda-kernel-execution-syntax",
-  cl::desc("Keep CUDA kernel launch syntax"),
+  cl::desc("Keep CUDA kernel launch syntax (default)"),
   cl::value_desc("cuda-kernel-execution-syntax"),
+  cl::init(true),
   cl::cat(ToolTemplateCategory));
 
 cl::opt<bool> HipKernelExecutionSyntax("hip-kernel-execution-syntax",
-  cl::desc("Transform CUDA kernel launch syntax to a regular HIP function call"),
+  cl::desc("Transform CUDA kernel launch syntax to a regular HIP function call (overrides \"--cuda-kernel-execution-syntax\")"),
   cl::value_desc("hip-kernel-execution-syntax"),
   cl::cat(ToolTemplateCategory));
 

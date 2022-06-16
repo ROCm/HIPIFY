@@ -175,13 +175,13 @@ namespace perl {
     *streamPtr.get() << "    hipify-perl is a tool to translate CUDA source code into portable HIP C++" << endl_2;
     *streamPtr.get() << "    USAGE: hipify-perl [OPTIONS] INPUT_FILE" << endl_2;
     *streamPtr.get() << "    OPTIONS:" << endl_2;
-    *streamPtr.get() << "      -cuda-kernel-execution-syntax - Keep CUDA kernel launch syntax" << endl;
+    *streamPtr.get() << "      -cuda-kernel-execution-syntax - Keep CUDA kernel launch syntax (default)" << endl;
     *streamPtr.get() << "      -examine                      - Combines -no-output and -print-stats options" << endl;
     *streamPtr.get() << "      -exclude-dirs=s               - Exclude directories" << endl;
     *streamPtr.get() << "      -exclude-files=s              - Exclude files" << endl;
     *streamPtr.get() << "      -experimental                 - HIPIFY experimentally supported APIs" << endl;
     *streamPtr.get() << "      -help                         - Display available options" << endl;
-    *streamPtr.get() << "      -hip-kernel-execution-syntax  - Transform CUDA kernel launch syntax to a regular HIP function call" << endl;
+    *streamPtr.get() << "      -hip-kernel-execution-syntax  - Transform CUDA kernel launch syntax to a regular HIP function call (overrides \"--cuda-kernel-execution-syntax\")" << endl;
     *streamPtr.get() << "      -inplace                      - Backup the input file in .prehip file, modify the input file inplace" << endl;
     *streamPtr.get() << "      -no-output                    - Don't write any translated output to stdout" << endl;
     *streamPtr.get() << "      -o=s                          - Output filename" << endl;
@@ -210,13 +210,13 @@ namespace perl {
     *streamPtr.get() << my << "%convertedTags = ();" << endl;
     *streamPtr.get() << my << "%convertedTagsTotal = ();" << endl_2;
     *streamPtr.get() << "GetOptions(" << endl;
-    *streamPtr.get() << tab << "  \"cuda-kernel-execution-syntax\" => \\$cuda_kernel_execution_syntax  # Keep CUDA kernel launch syntax" << endl;
+    *streamPtr.get() << tab << "  \"cuda-kernel-execution-syntax\" => \\$cuda_kernel_execution_syntax  # Keep CUDA kernel launch syntax (default)" << endl;
     *streamPtr.get() << tab << ", \"examine\" => \\$examine                                            # Combines -no-output and -print-stats options" << endl;
     *streamPtr.get() << tab << ", \"exclude-dirs=s\" => \\$exclude_dirs                                # Exclude directories" << endl;
     *streamPtr.get() << tab << ", \"exclude-files=s\" => \\$exclude_files                              # Exclude files" << endl;
     *streamPtr.get() << tab << ", \"experimental\" => \\$experimental                                  # HIPIFY experimentally supported APIs" << endl;
     *streamPtr.get() << tab << ", \"help\" => \\$help                                                  # Display available options" << endl;
-    *streamPtr.get() << tab << ", \"hip-kernel-execution-syntax\" => \\$hip_kernel_execution_syntax    # Transform CUDA kernel launch syntax to a regular HIP function call" << endl;
+    *streamPtr.get() << tab << ", \"hip-kernel-execution-syntax\" => \\$hip_kernel_execution_syntax    # Transform CUDA kernel launch syntax to a regular HIP function call (overrides \"--cuda-kernel-execution-syntax\")" << endl;
     *streamPtr.get() << tab << ", \"inplace\" => \\$inplace                                            # Backup the input file in .prehip file, modify the input file inplace" << endl;
     *streamPtr.get() << tab << ", \"no-output\" => \\$no_output                                        # Don't write any translated output to stdout" << endl;
     *streamPtr.get() << tab << ", \"o=s\" => \\$hipFileName                                            # Output filename" << endl;
@@ -226,6 +226,7 @@ namespace perl {
     *streamPtr.get() << tab << ", \"version\" => \\$version                                            # The supported HIP version" << endl;
     *streamPtr.get() << tab << ", \"whitelist=s\" => \\$whitelist                                      # Whitelist of identifiers" << endl;
     *streamPtr.get() << ");" << endl_2;
+    *streamPtr.get() << "$cuda_kernel_execution_syntax = 1;" << endl_2;
     stringstream deprecated, removed, experimental, common;
     deprecated << my << "%deprecated_funcs = (" << endl;
     removed << my << "%removed_funcs = (" << endl;
@@ -802,7 +803,7 @@ namespace perl {
     *streamPtr.get() << tab_6 << foreach << "$w (@whitelist) {" << endl;
     *streamPtr.get() << tab_7 << "redo if s/\\b$w\\b/ZAP/" << endl_tab_6 << "}" << endl;
     *streamPtr.get() << tab_6 << my << "$tag;" << endl;
-    *streamPtr.get() << tab_6 << "if ((/(\\bcuda[A-Z]\\w+)/) or (/<<<.*>>>/)) {" << endl;
+    *streamPtr.get() << tab_6 << "if ((/(\\bcuda[A-Z]\\w+)/) or ((/<<<.*>>>/) and ($hip_kernel_execution_syntax))) {" << endl;
     *streamPtr.get() << tab_7 << "# Flag any remaining code that look like cuda API calls: may want to add these to hipify" << endl;
     *streamPtr.get() << tab_7 << "$tag = (defined $1) ? $1 : \"Launch\";" << endl_tab_6 << "}" << endl;
     *streamPtr.get() << tab_6 << "if (defined $tag) {" << endl;

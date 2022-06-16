@@ -1,4 +1,4 @@
-// RUN: %run_test hipify "%s" "%t" %hipify_args 1 --skip-excluded-preprocessor-conditional-blocks %clang_args
+// RUN: %run_test hipify "%s" "%t" %hipify_args 2 --skip-excluded-preprocessor-conditional-blocks --hip-kernel-execution-syntax %clang_args
 // CHECK: #include <hip/hip_runtime.h>
 
 #include <cuda.h>

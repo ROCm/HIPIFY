@@ -34,13 +34,13 @@ my $USAGE =<<USAGE;
 
     OPTIONS:
 
-      -cuda-kernel-execution-syntax - Keep CUDA kernel launch syntax
+      -cuda-kernel-execution-syntax - Keep CUDA kernel launch syntax (default)
       -examine                      - Combines -no-output and -print-stats options
       -exclude-dirs=s               - Exclude directories
       -exclude-files=s              - Exclude files
       -experimental                 - HIPIFY experimentally supported APIs
       -help                         - Display available options
-      -hip-kernel-execution-syntax  - Transform CUDA kernel launch syntax to a regular HIP function call
+      -hip-kernel-execution-syntax  - Transform CUDA kernel launch syntax to a regular HIP function call (overrides "--cuda-kernel-execution-syntax")
       -inplace                      - Backup the input file in .prehip file, modify the input file inplace
       -no-output                    - Don't write any translated output to stdout
       -o=s                          - Output filename
@@ -70,13 +70,13 @@ my %convertedTags = ();
 my %convertedTagsTotal = ();
 
 GetOptions(
-      "cuda-kernel-execution-syntax" => \$cuda_kernel_execution_syntax  # Keep CUDA kernel launch syntax
+      "cuda-kernel-execution-syntax" => \$cuda_kernel_execution_syntax  # Keep CUDA kernel launch syntax (default)
     , "examine" => \$examine                                            # Combines -no-output and -print-stats options
     , "exclude-dirs=s" => \$exclude_dirs                                # Exclude directories
     , "exclude-files=s" => \$exclude_files                              # Exclude files
     , "experimental" => \$experimental                                  # HIPIFY experimentally supported APIs
     , "help" => \$help                                                  # Display available options
-    , "hip-kernel-execution-syntax" => \$hip_kernel_execution_syntax    # Transform CUDA kernel launch syntax to a regular HIP function call
+    , "hip-kernel-execution-syntax" => \$hip_kernel_execution_syntax    # Transform CUDA kernel launch syntax to a regular HIP function call (overrides "--cuda-kernel-execution-syntax")
     , "inplace" => \$inplace                                            # Backup the input file in .prehip file, modify the input file inplace
     , "no-output" => \$no_output                                        # Don't write any translated output to stdout
     , "o=s" => \$hipFileName                                            # Output filename
@@ -86,6 +86,8 @@ GetOptions(
     , "version" => \$version                                            # The supported HIP version
     , "whitelist=s" => \$whitelist                                      # Whitelist of identifiers
 );
+
+$cuda_kernel_execution_syntax = 1;
 
 my %deprecated_funcs = (
     "cusparseZsctr" => "11.0",
@@ -8087,7 +8089,7 @@ while (@ARGV) {
                             redo if s/\b$w\b/ZAP/
                         }
                         my $tag;
-                        if ((/(\bcuda[A-Z]\w+)/) or (/<<<.*>>>/)) {
+                        if ((/(\bcuda[A-Z]\w+)/) or ((/<<<.*>>>/) and ($hip_kernel_execution_syntax))) {
                             # Flag any remaining code that look like cuda API calls: may want to add these to hipify
                             $tag = (defined $1) ? $1 : "Launch";
                         }
