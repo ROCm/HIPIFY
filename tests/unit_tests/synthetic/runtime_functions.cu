@@ -21,8 +21,11 @@ int main() {
   float ms = 0;
   void* deviceptr = nullptr;
   void* image = nullptr;
+  void* func = nullptr;
   char* ch = nullptr;
   const char* const_ch = nullptr;
+  dim3 gridDim;
+  dim3 blockDim;
 
 #if defined(_WIN32)
   unsigned long long ull = 0;
@@ -136,6 +139,11 @@ int main() {
   // HIP: hipError_t hipWaitExternalSemaphoresAsync(const hipExternalSemaphore_t* extSemArray, const hipExternalSemaphoreWaitParams* paramsArray, unsigned int numExtSems, hipStream_t stream);
   // CHECK: result = hipWaitExternalSemaphoresAsync(&ExternalSemaphore_t, &ExternalSemaphoreWaitParams, flags, stream);
   result = cudaWaitExternalSemaphoresAsync(&ExternalSemaphore_t, &ExternalSemaphoreWaitParams, flags, stream);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaLaunchHostFunc(cudaStream_t stream, cudaHostFn_t fn, void *userData);
+  // HIP: hipError_t hipLaunchHostFunc(hipStream_t stream, hipHostFn_t fn, void* userData);
+  // CHECK: result = hipLaunchHostFunc(stream, hostFn, image);
+  result = cudaLaunchHostFunc(stream, hostFn, image);
 #endif
 
 #if CUDA_VERSION >= 10010
@@ -555,6 +563,72 @@ int main() {
   // HIP: hipError_t hipEventSynchronize(hipEvent_t event);
   // CHECK: result = hipEventSynchronize(Event_t);
   result = cudaEventSynchronize(Event_t);
+
+  // CHECK: hipFuncAttributes FuncAttributes;
+  cudaFuncAttributes FuncAttributes;
+
+  // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaFuncGetAttributes(struct cudaFuncAttributes *attr, const void *func);
+  // HIP: hipError_t hipFuncGetAttributes(struct hipFuncAttributes* attr, const void* func);
+  // CHECK: result = hipFuncGetAttributes(&FuncAttributes, reinterpret_cast<const void*>(func));
+  result = cudaFuncGetAttributes(&FuncAttributes, func);
+
+#if CUDA_VERSION >= 9000
+  // CHECK: hipFuncAttribute FuncAttribute;
+  cudaFuncAttribute FuncAttribute;
+
+  // CHECK: hipLaunchParams LaunchParams;
+  cudaLaunchParams LaunchParams;
+
+  // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaFuncSetAttribute(const void *func, enum cudaFuncAttribute attr, int value);
+  // HIP: hipError_t hipFuncSetAttribute(const void* func, hipFuncAttribute attr, int value);
+  // CHECK: result = hipFuncSetAttribute(reinterpret_cast<const void*>(func), FuncAttribute, intVal);
+  result = cudaFuncSetAttribute(func, FuncAttribute, intVal);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaLaunchCooperativeKernel(const void *func, dim3 gridDim, dim3 blockDim, void **args, size_t sharedMem, cudaStream_t stream);
+  // HIP: hipError_t hipLaunchCooperativeKernel(const void* f, dim3 gridDim, dim3 blockDimX, void** kernelParams, unsigned int sharedMemBytes, hipStream_t stream);
+  // CHECK: result = hipLaunchCooperativeKernel(reinterpret_cast<const void*>(func), gridDim, blockDim, &image, flags, stream);
+  result = cudaLaunchCooperativeKernel(func, gridDim, blockDim, &image, flags, stream);
+
+  // CUDA: extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaLaunchCooperativeKernelMultiDevice(struct cudaLaunchParams *launchParamsList, unsigned int numDevices, unsigned int flags  __dv(0));
+  // HIP: hipError_t hipLaunchCooperativeKernelMultiDevice(hipLaunchParams* launchParamsList, int numDevices, unsigned int flags);
+  // CHECK: result = hipLaunchCooperativeKernelMultiDevice(&LaunchParams, intVal, flags);
+  result = cudaLaunchCooperativeKernelMultiDevice(&LaunchParams, intVal, flags);
+#endif
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaFuncSetCacheConfig(const void *func, enum cudaFuncCache cacheConfig);
+  // HIP: hipError_t hipFuncSetCacheConfig(const void* func, hipFuncCache_t config);
+  // CHECK: result = hipFuncSetCacheConfig(reinterpret_cast<const void*>(func), FuncCache);
+  result = cudaFuncSetCacheConfig(func, FuncCache);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaFuncSetSharedMemConfig(const void *func, enum cudaSharedMemConfig config);
+  // HIP: hipError_t hipFuncSetSharedMemConfig(const void* func, hipSharedMemConfig config);
+  // CHECK: result = hipFuncSetSharedMemConfig(reinterpret_cast<const void*>(func), SharedMemConfig);
+  result = cudaFuncSetSharedMemConfig(func, SharedMemConfig);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaLaunchKernel(const void *func, dim3 gridDim, dim3 blockDim, void **args, size_t sharedMem, cudaStream_t stream);
+  // HIP: hipError_t hipLaunchKernel(const void* function_address, dim3 numBlocks, dim3 dimBlocks, void** args, size_t sharedMemBytes __dparm(0), hipStream_t stream __dparm(0));
+  // CHECK: result = hipLaunchKernel(reinterpret_cast<const void*>(func), gridDim, blockDim, &image, bytes, stream);
+  result = cudaLaunchKernel(func, gridDim, blockDim, &image, bytes, stream);
+
+  // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaOccupancyMaxActiveBlocksPerMultiprocessor(int *numBlocks, const void *func, int blockSize, size_t dynamicSMemSize);
+  // HIP: hipError_t hipOccupancyMaxActiveBlocksPerMultiprocessor(int* numBlocks, const void* f, int blockSize, size_t dynSharedMemPerBlk);
+  // CHECK: result = hipOccupancyMaxActiveBlocksPerMultiprocessor(&intVal, func, device, bytes);
+  result = cudaOccupancyMaxActiveBlocksPerMultiprocessor(&intVal, func, device, bytes);
+
+  // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaOccupancyMaxActiveBlocksPerMultiprocessorWithFlags(int *numBlocks, const void *func, int blockSize, size_t dynamicSMemSize, unsigned int flags);
+  // HIP: hipError_t hipOccupancyMaxActiveBlocksPerMultiprocessorWithFlags(int* numBlocks, const void* f, int blockSize, size_t dynSharedMemPerBlk, unsigned int flags __dparm(hipOccupancyDefault));
+  // CHECK: result = hipOccupancyMaxActiveBlocksPerMultiprocessorWithFlags(&intVal, func, intVal, bytes, flags);
+  result = cudaOccupancyMaxActiveBlocksPerMultiprocessorWithFlags(&intVal, func, intVal, bytes, flags);
+
+  // CUDA: template<class T> static __inline__ __host__ CUDART_DEVICE cudaError_t cudaOccupancyMaxPotentialBlockSize(int* minGridSize, int* blockSize, T func, size_t dynamicSMemSize = 0, int blockSizeLimit = 0);
+  // HIP: template <typename T> static hipError_t __host__ inline hipOccupancyMaxPotentialBlockSize(int* gridSize, int* blockSize, T f, size_t dynSharedMemPerBlk = 0, int blockSizeLimit = 0);
+  // CHECK: result = hipOccupancyMaxPotentialBlockSize(&intVal, &device, func, bytes, deviceId);
+  result = cudaOccupancyMaxPotentialBlockSize(&intVal, &device, func, bytes, deviceId);
+
+  // CUDA: template<class T> static __inline__ __host__ CUDART_DEVICE cudaError_t cudaOccupancyMaxPotentialBlockSizeWithFlags(int* minGridSize, int* blockSize, T func, size_t dynamicSMemSize = 0, int blockSizeLimit = 0, unsigned int flags = 0);
+  // HIP: template <typename T> static hipError_t __host__ inline hipOccupancyMaxPotentialBlockSizeWithFlags(int* gridSize, int* blockSize, T f, size_t dynSharedMemPerBlk = 0, int blockSizeLimit = 0, unsigned int  flags = 0);
+  // CHECK: result = hipOccupancyMaxPotentialBlockSizeWithFlags(&intVal, &device, func, bytes, deviceId, flags);
+  result = cudaOccupancyMaxPotentialBlockSizeWithFlags(&intVal, &device, func, bytes, deviceId, flags);
 
   return 0;
 }
