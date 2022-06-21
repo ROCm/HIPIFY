@@ -4738,18 +4738,6 @@ sub transformHostFunctions {
         $k += s/(?<!\/\/ CHECK: )($func)\s*\(\s*([^,]+)\s*,\s*([^,\)]+)\s*(,\s*|\))\s*/$func\($2, HIP_SYMBOL\($3\)$4/g;
     }
     foreach $func (
-        "hipFuncSetCacheConfig"
-    )
-    {
-        $k += s/(?<!\/\/ CHECK: )($func)\s*\(\s*([^,]+)\s*,/$func\(reinterpret_cast<const void*>\($2\),/g
-    }
-    foreach $func (
-        "hipFuncGetAttributes"
-    )
-    {
-        $k += s/(?<!\/\/ CHECK: )($func)\s*\(\s*([^,]+)\s*,\s*([^,\)]+)\s*(,\s*|\))\s*/$func\($2, reinterpret_cast<const void*>\($3\)$4/g;
-    }
-    foreach $func (
         "hipModuleOccupancyMaxPotentialBlockSize",
         "hipModuleOccupancyMaxPotentialBlockSizeWithFlags"
     )

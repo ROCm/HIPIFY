@@ -509,7 +509,6 @@ namespace perl {
     }
     set<string>& funcSet = DeviceSymbolFunctions0;
     for (int i = 0; i < 5; ++i) {
-      *streamPtr.get() << tab + foreach_func;
       switch (i) {
         case 1:  funcSet = DeviceSymbolFunctions1; break;
         case 2:  funcSet = ReinterpretFunctions0; break;
@@ -517,6 +516,8 @@ namespace perl {
         case 4:  funcSet = RemoveArgFunctions3; break;
         default: funcSet = DeviceSymbolFunctions0;
       }
+      if (funcSet.empty()) continue;
+      *streamPtr.get() << tab + foreach_func;
       unsigned int count = 0;
       string sHIPName;
       for (auto &f : funcSet) {

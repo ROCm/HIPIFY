@@ -58,12 +58,6 @@ const std::string sCudaGetSymbolSize = "cudaGetSymbolSize";
 const std::string sCudaGetSymbolAddress = "cudaGetSymbolAddress";
 const std::string sCudaMemcpyFromSymbol = "cudaMemcpyFromSymbol";
 const std::string sCudaMemcpyFromSymbolAsync = "cudaMemcpyFromSymbolAsync";
-const std::string sCudaFuncSetCacheConfig = "cudaFuncSetCacheConfig";
-const std::string sCudaFuncSetSharedMemConfig = "cudaFuncSetSharedMemConfig";
-const std::string sCudaFuncGetAttributes = "cudaFuncGetAttributes";
-const std::string sCudaFuncSetAttribute = "cudaFuncSetAttribute";
-const std::string sCudaLaunchKernelStr = "cudaLaunchKernel";
-const std::string sCudaLaunchCooperativeKernel = "cudaLaunchCooperativeKernel";
 const std::string sCuOccupancyMaxPotentialBlockSize = "cuOccupancyMaxPotentialBlockSize";
 const std::string sCuOccupancyMaxPotentialBlockSizeWithFlags = "cuOccupancyMaxPotentialBlockSizeWithFlags";
 // Matchers' names
@@ -92,12 +86,6 @@ std::map<std::string, ArgCastMap> FuncArgCasts {
   {sCudaGetSymbolAddress, {{1, {e_HIP_SYMBOL, cw_None}}}},
   {sCudaMemcpyFromSymbol, {{1, {e_HIP_SYMBOL, cw_None}}}},
   {sCudaMemcpyFromSymbolAsync, {{1, {e_HIP_SYMBOL, cw_None}}}},
-  {sCudaFuncSetCacheConfig, {{0, {e_reinterpret_cast, cw_None}}}},
-  {sCudaFuncSetSharedMemConfig, {{0, {e_reinterpret_cast, cw_None}}}},
-  {sCudaFuncGetAttributes, {{1, {e_reinterpret_cast, cw_None}}}},
-  {sCudaFuncSetAttribute, {{0, {e_reinterpret_cast, cw_None}}}},
-  {sCudaLaunchKernelStr, {{0, {e_reinterpret_cast, cw_None}}}},
-  {sCudaLaunchCooperativeKernel, {{0, {e_reinterpret_cast, cw_None}}}},
   {sCuOccupancyMaxPotentialBlockSize, {{3, {e_remove_argument, cw_DataLoss}}}},
   {sCuOccupancyMaxPotentialBlockSizeWithFlags, {{3, {e_remove_argument, cw_DataLoss}}}},
 };
@@ -579,12 +567,6 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
             sCudaMemcpyFromSymbolAsync,
             sCudaMemcpyToSymbol,
             sCudaMemcpyToSymbolAsync,
-            sCudaFuncSetCacheConfig,
-            sCudaFuncSetSharedMemConfig,
-            sCudaFuncGetAttributes,
-            sCudaFuncSetAttribute,
-            sCudaLaunchKernelStr,
-            sCudaLaunchCooperativeKernel,
             sCuOccupancyMaxPotentialBlockSize,
             sCuOccupancyMaxPotentialBlockSizeWithFlags
           )
