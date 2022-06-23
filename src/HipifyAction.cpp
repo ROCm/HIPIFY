@@ -686,23 +686,13 @@ public:
   // [ToDo] Remove SWDEV_331863 related guards from CMakeLists.txt and HipifyAction.cpp when the blocker SWDEV_331863 is overcome
   void InclusionDirective(clang::SourceLocation hash_loc, const clang::Token &include_token,
                           StringRef file_name, bool is_angled, clang::CharSourceRange filename_range,
-#if (LLVM_VERSION_MAJOR < 15) || (LLVM_VERSION_MAJOR == 15 && SWDEV_331863)
-                          const clang::FileEntry *file,
-#else
-                          Optional<clang::FileEntryRef> file,
-#endif
-                          StringRef search_path, StringRef relative_path,
+                          const clang::FileEntry *file, StringRef search_path, StringRef relative_path,
                           const clang::Module *imported
 #if LLVM_VERSION_MAJOR > 6
                         , clang::SrcMgr::CharacteristicKind FileType
 #endif
                          ) override {
-#if (LLVM_VERSION_MAJOR < 15) || (LLVM_VERSION_MAJOR == 15 && SWDEV_331863)
-    auto f = file;
-#else
-    auto f = &file->getFileEntry();
-#endif
-    hipifyAction.InclusionDirective(hash_loc, include_token, file_name, is_angled, filename_range, f, search_path, relative_path, imported);
+    hipifyAction.InclusionDirective(hash_loc, include_token, file_name, is_angled, filename_range, file, search_path, relative_path, imported);
   }
 
   void PragmaDirective(clang::SourceLocation Loc, clang::PragmaIntroducerKind Introducer) override {
