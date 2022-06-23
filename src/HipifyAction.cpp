@@ -58,6 +58,12 @@ const std::string sCudaGetSymbolSize = "cudaGetSymbolSize";
 const std::string sCudaGetSymbolAddress = "cudaGetSymbolAddress";
 const std::string sCudaMemcpyFromSymbol = "cudaMemcpyFromSymbol";
 const std::string sCudaMemcpyFromSymbolAsync = "cudaMemcpyFromSymbolAsync";
+const std::string sCudaGraphAddMemcpyNodeToSymbol = "cudaGraphAddMemcpyNodeToSymbol";
+const std::string sCudaGraphAddMemcpyNodeFromSymbol = "cudaGraphAddMemcpyNodeFromSymbol";
+const std::string sCudaGraphMemcpyNodeSetParamsToSymbol = "cudaGraphMemcpyNodeSetParamsToSymbol";
+const std::string sCudaGraphMemcpyNodeSetParamsFromSymbol = "cudaGraphMemcpyNodeSetParamsFromSymbol";
+const std::string sCudaGraphExecMemcpyNodeSetParamsToSymbol = "cudaGraphExecMemcpyNodeSetParamsToSymbol";
+const std::string sCudaGraphExecMemcpyNodeSetParamsFromSymbol = "cudaGraphExecMemcpyNodeSetParamsFromSymbol";
 const std::string sCuOccupancyMaxPotentialBlockSize = "cuOccupancyMaxPotentialBlockSize";
 const std::string sCuOccupancyMaxPotentialBlockSizeWithFlags = "cuOccupancyMaxPotentialBlockSizeWithFlags";
 // Matchers' names
@@ -86,6 +92,12 @@ std::map<std::string, ArgCastMap> FuncArgCasts {
   {sCudaGetSymbolAddress, {{1, {e_HIP_SYMBOL, cw_None}}}},
   {sCudaMemcpyFromSymbol, {{1, {e_HIP_SYMBOL, cw_None}}}},
   {sCudaMemcpyFromSymbolAsync, {{1, {e_HIP_SYMBOL, cw_None}}}},
+  {sCudaGraphAddMemcpyNodeToSymbol, {{4, {e_HIP_SYMBOL, cw_None}}}},
+  {sCudaGraphAddMemcpyNodeFromSymbol, {{5, {e_HIP_SYMBOL, cw_None}}}},
+  {sCudaGraphMemcpyNodeSetParamsToSymbol, {{1, {e_HIP_SYMBOL, cw_None}}}},
+  {sCudaGraphMemcpyNodeSetParamsFromSymbol, {{2, {e_HIP_SYMBOL, cw_None}}}},
+  {sCudaGraphExecMemcpyNodeSetParamsToSymbol, {{2, {e_HIP_SYMBOL, cw_None}}}},
+  {sCudaGraphExecMemcpyNodeSetParamsFromSymbol, {{3, {e_HIP_SYMBOL, cw_None}}}},
   {sCuOccupancyMaxPotentialBlockSize, {{3, {e_remove_argument, cw_DataLoss}}}},
   {sCuOccupancyMaxPotentialBlockSizeWithFlags, {{3, {e_remove_argument, cw_DataLoss}}}},
 };
@@ -567,6 +579,12 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
             sCudaMemcpyFromSymbolAsync,
             sCudaMemcpyToSymbol,
             sCudaMemcpyToSymbolAsync,
+            sCudaGraphAddMemcpyNodeToSymbol,
+            sCudaGraphAddMemcpyNodeFromSymbol,
+            sCudaGraphMemcpyNodeSetParamsToSymbol,
+            sCudaGraphMemcpyNodeSetParamsFromSymbol,
+            sCudaGraphExecMemcpyNodeSetParamsToSymbol,
+            sCudaGraphExecMemcpyNodeSetParamsFromSymbol,
             sCuOccupancyMaxPotentialBlockSize,
             sCuOccupancyMaxPotentialBlockSizeWithFlags
           )
