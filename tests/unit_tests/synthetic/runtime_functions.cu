@@ -14,10 +14,13 @@ int main() {
   printf("12. CUDA Runtime API Functions synthetic test\n");
 
   size_t bytes = 0;
+  size_t width = 0;
+  size_t height = 0;
   int device = 0;
   int deviceId = 0;
   int intVal = 0;
   unsigned int flags = 0;
+  unsigned int levels = 0;
   float ms = 0;
   void* deviceptr = nullptr;
   void* image = nullptr;
@@ -45,10 +48,18 @@ int main() {
   // CHECK: hipDeviceP2PAttr DeviceP2PAttr;
   cudaDeviceP2PAttr DeviceP2PAttr;
 
+  // CHECK: hipMemoryAdvise MemoryAdvise;
+  cudaMemoryAdvise MemoryAdvise;
+
   // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaDeviceGetP2PAttribute(int *value, enum cudaDeviceP2PAttr attr, int srcDevice, int dstDevice);
   // HIP: hipError_t hipDeviceGetP2PAttribute(int* value, hipDeviceP2PAttr attr, int srcDevice, int dstDevice);
   // CHECK: result = hipDeviceGetP2PAttribute(&intVal, DeviceP2PAttr, device, deviceId);
   result = cudaDeviceGetP2PAttribute(&intVal, DeviceP2PAttr, device, deviceId);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMemAdvise(const void *devPtr, size_t count, enum cudaMemoryAdvise advice, int device);
+  // HIP: hipError_t hipMemAdvise(const void* dev_ptr, size_t count, hipMemoryAdvise advice, int device);
+  // CHECK: result = hipMemAdvise(deviceptr, bytes, MemoryAdvise, device);
+  result = cudaMemAdvise(deviceptr, bytes, MemoryAdvise, device);
 #endif
 
 #if CUDA_VERSION >= 10000
@@ -629,6 +640,129 @@ int main() {
   // HIP: template <typename T> static hipError_t __host__ inline hipOccupancyMaxPotentialBlockSizeWithFlags(int* gridSize, int* blockSize, T f, size_t dynSharedMemPerBlk = 0, int blockSizeLimit = 0, unsigned int  flags = 0);
   // CHECK: result = hipOccupancyMaxPotentialBlockSizeWithFlags(&intVal, &device, func, bytes, deviceId, flags);
   result = cudaOccupancyMaxPotentialBlockSizeWithFlags(&intVal, &device, func, bytes, deviceId, flags);
+
+  // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaFree(void *devPtr);
+  // HIP: hipError_t hipFree(void* ptr);
+  // CHECK: result = hipFree(deviceptr);
+  result = cudaFree(deviceptr);
+
+  // CHECK: hipArray* Array;
+  // CHECK-NEXT: hipArray_t Array_t;
+  // CHECK-NEXT: hipArray_const_t Array_const_t;
+  cudaArray* Array;
+  cudaArray_t Array_t;
+  cudaArray_const_t Array_const_t;
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaFreeArray(cudaArray_t array);
+  // HIP: hipError_t hipFreeArray(hipArray* array);
+  // CHECK: result = hipFreeArray(Array_t);
+  result = cudaFreeArray(Array_t);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaFreeHost(void *ptr);
+  // HIP: hipError_t hipHostFree(void* ptr);
+  // CHECK: result = hipHostFree(deviceptr);
+  result = cudaFreeHost(deviceptr);
+
+  // CHECK: hipMipmappedArray* MipmappedArray;
+  // CHECK-NEXT: hipMipmappedArray_t MipmappedArray_t;
+  // CHECK-NEXT: hipMipmappedArray_const_t MipmappedArray_const_t;
+  cudaMipmappedArray* MipmappedArray;
+  cudaMipmappedArray_t MipmappedArray_t;
+  cudaMipmappedArray_const_t MipmappedArray_const_t;
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaFreeMipmappedArray(cudaMipmappedArray_t mipmappedArray);
+  // HIP: hipError_t hipFreeMipmappedArray(hipMipmappedArray_t mipmappedArray);
+  // CHECK: result = hipFreeMipmappedArray(MipmappedArray_t);
+  result = cudaFreeMipmappedArray(MipmappedArray_t);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGetMipmappedArrayLevel(cudaArray_t *levelArray, cudaMipmappedArray_const_t mipmappedArray, unsigned int level);
+  // HIP: hipError_t hipGetMipmappedArrayLevel(hipArray_t* levelArray, hipMipmappedArray_const_t mipmappedArray, unsigned int level);
+  // CHECK: result = hipGetMipmappedArrayLevel(&Array_t, MipmappedArray_const_t, flags);
+  result = cudaGetMipmappedArrayLevel(&Array_t, MipmappedArray_const_t, flags);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGetSymbolAddress(void **devPtr, const void *symbol);
+  // HIP: hipError_t hipGetSymbolAddress(void** devPtr, const void* symbol);
+  // CHECK: result = hipGetSymbolAddress(&deviceptr, HIP_SYMBOL(image));
+  result = cudaGetSymbolAddress(&deviceptr, image);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGetSymbolSize(size_t *size, const void *symbol);
+  // HIP: hipError_t hipGetSymbolSize(size_t* size, const void* symbol);
+  // CHECK: result = hipGetSymbolSize(&bytes, HIP_SYMBOL(image));
+  result = cudaGetSymbolSize(&bytes, image);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaHostAlloc(void **pHost, size_t size, unsigned int flags);
+  // HIP: DEPRECATED("use hipHostMalloc instead") hipError_t hipHostAlloc(void** ptr, size_t size, unsigned int flags);
+  // CHECK: result = hipHostAlloc(&deviceptr, bytes, flags);
+  result = cudaHostAlloc(&deviceptr, bytes, flags);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaHostGetDevicePointer(void **pDevice, void *pHost, unsigned int flags);
+  // HIP: hipError_t hipHostGetDevicePointer(void** devPtr, void* hstPtr, unsigned int flags);
+  // CHECK: result = hipHostGetDevicePointer(&deviceptr, image, flags);
+  result = cudaHostGetDevicePointer(&deviceptr, image, flags);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaHostGetFlags(unsigned int *pFlags, void *pHost);
+  // HIP: hipError_t hipHostGetFlags(unsigned int* flagsPtr, void* hostPtr);
+  // CHECK: result = hipHostGetFlags(&flags, image);
+  result = cudaHostGetFlags(&flags, image);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaHostRegister(void *ptr, size_t size, unsigned int flags);
+  // HIP: hipError_t hipHostRegister(void* hostPtr, size_t sizeBytes, unsigned int flags);
+  // CHECK: result = hipHostRegister(image, bytes, flags);
+  result = cudaHostRegister(image, bytes, flags);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaHostUnregister(void *ptr);
+  // HIP: hipError_t hipHostUnregister(void* hostPtr);
+  // CHECK: result = hipHostUnregister(image);
+  result = cudaHostUnregister(image);
+
+  // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaMalloc(void **devPtr, size_t size);
+  // HIP: hipError_t hipMalloc(void** ptr, size_t size);
+  // CHECK: result = hipMalloc(&deviceptr, bytes);
+  result = cudaMalloc(&deviceptr, bytes);
+
+  // CHECK: hipPitchedPtr PitchedPtr;
+  cudaPitchedPtr PitchedPtr;
+
+  // CHECK: hipExtent Extent;
+  cudaExtent Extent;
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMalloc3D(struct cudaPitchedPtr* pitchedDevPtr, struct cudaExtent extent);
+  // HIP: hipError_t hipMalloc3D(hipPitchedPtr* pitchedDevPtr, hipExtent extent);
+  // CHECK: result = hipMalloc3D(&PitchedPtr, Extent);
+  result = cudaMalloc3D(&PitchedPtr, Extent);
+
+  // CHECK: hipChannelFormatDesc ChannelFormatDesc;
+  cudaChannelFormatDesc ChannelFormatDesc;
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMalloc3DArray(cudaArray_t *array, const struct cudaChannelFormatDesc* desc, struct cudaExtent extent, unsigned int flags __dv(0));
+  // HIP: hipError_t hipMalloc3DArray(hipArray** array, const struct hipChannelFormatDesc* desc, struct hipExtent extent, unsigned int flags);
+  // CHECK: result = hipMalloc3DArray(&Array_t, &ChannelFormatDesc, Extent, flags);
+  result = cudaMalloc3DArray(&Array_t, &ChannelFormatDesc, Extent, flags);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMallocArray(cudaArray_t *array, const struct cudaChannelFormatDesc *desc, size_t width, size_t height __dv(0), unsigned int flags __dv(0));
+  // HIP: hipError_t hipMallocArray(hipArray** array, const hipChannelFormatDesc* desc, size_t width, size_t height __dparm(0), unsigned int flags __dparm(hipArrayDefault));
+  // CHECK: result = hipMallocArray(&Array_t, &ChannelFormatDesc, width, height, flags);
+  result = cudaMallocArray(&Array_t, &ChannelFormatDesc, width, height, flags);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMallocHost(void **ptr, size_t size);
+  // HIP: hipError_t hipHostMalloc(void** ptr, size_t size, unsigned int flags);
+  // CHECK: result = hipHostMalloc(&deviceptr, bytes);
+  result = cudaMallocHost(&deviceptr, bytes);
+
+  // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaMallocManaged(void **devPtr, size_t size, unsigned int flags = cudaMemAttachGlobal);
+  // HIP: hipError_t hipMallocManaged(void** dev_ptr, size_t size, unsigned int flags __dparm(hipMemAttachGlobal));
+  // CHECK: result = hipMallocManaged(&deviceptr, bytes, flags);
+  result = cudaMallocManaged(&deviceptr, bytes, flags);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMallocMipmappedArray(cudaMipmappedArray_t *mipmappedArray, const struct cudaChannelFormatDesc* desc, struct cudaExtent extent, unsigned int numLevels, unsigned int flags __dv(0));
+  // HIP: hipError_t hipMallocMipmappedArray(hipMipmappedArray_t* mipmappedArray, const struct hipChannelFormatDesc* desc, struct hipExtent extent, unsigned int numLevels, unsigned int flags __dparm(0));
+  // CHECK: result = hipMallocMipmappedArray(&MipmappedArray_t, &ChannelFormatDesc, Extent, levels, flags);
+  result = cudaMallocMipmappedArray(&MipmappedArray_t, &ChannelFormatDesc, Extent, levels, flags);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMallocPitch(void **devPtr, size_t *pitch, size_t width, size_t height);
+  // HIP: hipError_t hipMallocPitch(void** ptr, size_t* pitch, size_t width, size_t height);
+  // CHECK: result = hipMallocPitch(&deviceptr, &bytes, width, height);
+  result = cudaMallocPitch(&deviceptr, &bytes, width, height);
 
   return 0;
 }
