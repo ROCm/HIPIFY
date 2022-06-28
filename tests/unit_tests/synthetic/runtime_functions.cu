@@ -16,6 +16,10 @@ int main() {
   size_t bytes = 0;
   size_t width = 0;
   size_t height = 0;
+  size_t wOffset = 0;
+  size_t hOffset = 0;
+  size_t pitch = 0;
+  size_t pitch_2 = 0;
   int device = 0;
   int deviceId = 0;
   int intVal = 0;
@@ -23,6 +27,7 @@ int main() {
   unsigned int levels = 0;
   float ms = 0;
   void* deviceptr = nullptr;
+  void* deviceptr_2 = nullptr;
   void* image = nullptr;
   void* func = nullptr;
   char* ch = nullptr;
@@ -60,6 +65,24 @@ int main() {
   // HIP: hipError_t hipMemAdvise(const void* dev_ptr, size_t count, hipMemoryAdvise advice, int device);
   // CHECK: result = hipMemAdvise(deviceptr, bytes, MemoryAdvise, device);
   result = cudaMemAdvise(deviceptr, bytes, MemoryAdvise, device);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMemPrefetchAsync(const void *devPtr, size_t count, int dstDevice, cudaStream_t stream __dv(0));
+  // HIP: hipError_t hipMemPrefetchAsync(const void* dev_ptr, size_t count, int device, hipStream_t stream __dparm(0));
+  // CHECK: result = hipMemPrefetchAsync(deviceptr, bytes, device, stream);
+  result = cudaMemPrefetchAsync(deviceptr, bytes, device, stream);
+
+  // CHECK: hipMemRangeAttribute MemRangeAttribute;
+  cudaMemRangeAttribute MemRangeAttribute;
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMemRangeGetAttribute(void *data, size_t dataSize, enum cudaMemRangeAttribute attribute, const void *devPtr, size_t count);
+  // HIP: hipError_t hipMemRangeGetAttribute(void* data, size_t data_size, hipMemRangeAttribute attribute, const void* dev_ptr, size_t count);
+  // CHECK: result = hipMemRangeGetAttribute(deviceptr, bytes, MemRangeAttribute, deviceptr_2, wOffset);
+  result = cudaMemRangeGetAttribute(deviceptr, bytes, MemRangeAttribute, deviceptr_2, wOffset);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMemRangeGetAttributes(void **data, size_t *dataSizes, enum cudaMemRangeAttribute *attributes, size_t numAttributes, const void *devPtr, size_t count);
+  // HIP: hipError_t hipMemRangeGetAttributes(void** data, size_t* data_sizes, hipMemRangeAttribute* attributes, size_t num_attributes, const void* dev_ptr, size_t count);
+  // CHECK: result = hipMemRangeGetAttributes(&deviceptr, &bytes, &MemRangeAttribute, wOffset, deviceptr_2, hOffset);
+  result = cudaMemRangeGetAttributes(&deviceptr, &bytes, &MemRangeAttribute, wOffset, deviceptr_2, hOffset);
 #endif
 
 #if CUDA_VERSION >= 10000
@@ -763,6 +786,145 @@ int main() {
   // HIP: hipError_t hipMallocPitch(void** ptr, size_t* pitch, size_t width, size_t height);
   // CHECK: result = hipMallocPitch(&deviceptr, &bytes, width, height);
   result = cudaMallocPitch(&deviceptr, &bytes, width, height);
+
+  // CHECK: hipMemcpyKind MemcpyKind;
+  cudaMemcpyKind MemcpyKind;
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMemcpy(void *dst, const void *src, size_t count, enum cudaMemcpyKind kind);
+  // HIP: hipError_t hipMemcpy(void* dst, const void* src, size_t sizeBytes, hipMemcpyKind kind);
+  // CHECK: result = hipMemcpy(deviceptr, deviceptr_2, bytes, MemcpyKind);
+  result = cudaMemcpy(deviceptr, deviceptr_2, bytes, MemcpyKind);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMemcpy2D(void *dst, size_t dpitch, const void *src, size_t spitch, size_t width, size_t height, enum cudaMemcpyKind kind);
+  // HIP: hipError_t hipMemcpy2D(void* dst, size_t dpitch, const void* src, size_t spitch, size_t width, size_t height, hipMemcpyKind kind);
+  // CHECK: result = hipMemcpy2D(deviceptr, pitch, deviceptr_2, pitch_2, width, height, MemcpyKind);
+  result = cudaMemcpy2D(deviceptr, pitch, deviceptr_2, pitch_2, width, height, MemcpyKind);
+
+  // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaMemcpy2DAsync(void *dst, size_t dpitch, const void *src, size_t spitch, size_t width, size_t height, enum cudaMemcpyKind kind, cudaStream_t stream __dv(0));
+  // HIP: hipError_t hipMemcpy2DAsync(void* dst, size_t dpitch, const void* src, size_t spitch, size_t width, size_t height, hipMemcpyKind kind, hipStream_t stream __dparm(0));
+  // CHECK: result = hipMemcpy2DAsync(deviceptr, pitch, deviceptr_2, pitch_2, width, height, MemcpyKind, stream);
+  result = cudaMemcpy2DAsync(deviceptr, pitch, deviceptr_2, pitch_2, width, height, MemcpyKind, stream);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMemcpy2DFromArray(void *dst, size_t dpitch, cudaArray_const_t src, size_t wOffset, size_t hOffset, size_t width, size_t height, enum cudaMemcpyKind kind);
+  // HIP: hipError_t hipMemcpy2DFromArray( void* dst, size_t dpitch, hipArray_const_t src, size_t wOffset, size_t hOffset, size_t width, size_t height, hipMemcpyKind kind);
+  // CHECK: result = hipMemcpy2DFromArray(deviceptr, pitch, Array_const_t, wOffset, hOffset, width, height, MemcpyKind);
+  result = cudaMemcpy2DFromArray(deviceptr, pitch, Array_const_t, wOffset, hOffset, width, height, MemcpyKind);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMemcpy2DFromArrayAsync(void *dst, size_t dpitch, cudaArray_const_t src, size_t wOffset, size_t hOffset, size_t width, size_t height, enum cudaMemcpyKind kind, cudaStream_t stream __dv(0));
+  // HIP: hipError_t hipMemcpy2DFromArrayAsync( void* dst, size_t dpitch, hipArray_const_t src, size_t wOffset, size_t hOffset, size_t width, size_t height, hipMemcpyKind kind, hipStream_t stream __dparm(0));
+  // CHECK: result = hipMemcpy2DFromArrayAsync(deviceptr, pitch, Array_const_t, wOffset, hOffset, width, height, MemcpyKind, stream);
+  result = cudaMemcpy2DFromArrayAsync(deviceptr, pitch, Array_const_t, wOffset, hOffset, width, height, MemcpyKind, stream);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMemcpy2DToArray(cudaArray_t dst, size_t wOffset, size_t hOffset, const void *src, size_t spitch, size_t width, size_t height, enum cudaMemcpyKind kind);
+  // HIP: hipError_t hipMemcpy2DToArray(hipArray* dst, size_t wOffset, size_t hOffset, const void* src, size_t spitch, size_t width, size_t height, hipMemcpyKind kind);
+  // CHECK: result = hipMemcpy2DToArray(Array_t, wOffset, hOffset, deviceptr_2, pitch, width, height, MemcpyKind);
+  result = cudaMemcpy2DToArray(Array_t, wOffset, hOffset, deviceptr_2, pitch, width, height, MemcpyKind);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMemcpy2DToArrayAsync(cudaArray_t dst, size_t wOffset, size_t hOffset, const void *src, size_t spitch, size_t width, size_t height, enum cudaMemcpyKind kind, cudaStream_t stream __dv(0));
+  // HIP: hipError_t hipMemcpy2DToArrayAsync(hipArray* dst, size_t wOffset, size_t hOffset, const void* src, size_t spitch, size_t width, size_t height, hipMemcpyKind kind, hipStream_t stream __dparm(0));
+  // CHECK: result = hipMemcpy2DToArrayAsync(Array_t, wOffset, hOffset, deviceptr_2, pitch, width, height, MemcpyKind, stream);
+  result = cudaMemcpy2DToArrayAsync(Array_t, wOffset, hOffset, deviceptr_2, pitch, width, height, MemcpyKind, stream);
+
+  // CHECK: hipMemcpy3DParms Memcpy3DParms;
+  cudaMemcpy3DParms Memcpy3DParms;
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMemcpy3D(const struct cudaMemcpy3DParms *p);
+  // HIP: hipError_t hipMemcpy3D(const struct hipMemcpy3DParms* p);
+  // CHECK: result = hipMemcpy3D(&Memcpy3DParms);
+  result = cudaMemcpy3D(&Memcpy3DParms);
+
+  // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaMemcpy3DAsync(const struct cudaMemcpy3DParms *p, cudaStream_t stream __dv(0));
+  // HIP: hipError_t hipMemcpy3DAsync(const struct hipMemcpy3DParms* p, hipStream_t stream __dparm(0));
+  // CHECK: result = hipMemcpy3DAsync(&Memcpy3DParms, stream);
+  result = cudaMemcpy3DAsync(&Memcpy3DParms, stream);
+
+  // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaMemcpyAsync(void *dst, const void *src, size_t count, enum cudaMemcpyKind kind, cudaStream_t stream __dv(0));
+  // HIP: hipError_t hipMemcpyAsync(void* dst, const void* src, size_t sizeBytes, hipMemcpyKind kind, hipStream_t stream __dparm(0));
+  // CHECK: result = hipMemcpyAsync(deviceptr, deviceptr_2, bytes, MemcpyKind, stream);
+  result = cudaMemcpyAsync(deviceptr, deviceptr_2, bytes, MemcpyKind, stream);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMemcpyFromSymbol(void *dst, const void *symbol, size_t count, size_t offset __dv(0), enum cudaMemcpyKind kind __dv(cudaMemcpyDeviceToHost));
+  // HIP: hipError_t hipMemcpyFromSymbol(void* dst, const void* symbol, size_t sizeBytes, size_t offset __dparm(0), hipMemcpyKind kind __dparm(hipMemcpyDeviceToHost));
+  // CHECK: result = hipMemcpyFromSymbol(deviceptr, HIP_SYMBOL(image), bytes, wOffset, MemcpyKind);
+  result = cudaMemcpyFromSymbol(deviceptr, image, bytes, wOffset, MemcpyKind);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMemcpyFromSymbolAsync(void *dst, const void *symbol, size_t count, size_t offset, enum cudaMemcpyKind kind, cudaStream_t stream __dv(0));
+  // HIP: hipError_t hipMemcpyFromSymbolAsync(void* dst, const void* symbol, size_t sizeBytes, size_t offset, hipMemcpyKind kind, hipStream_t stream __dparm(0));
+  // CHECK: result = hipMemcpyFromSymbolAsync(deviceptr, HIP_SYMBOL(image), bytes, wOffset, MemcpyKind, stream);
+  result = cudaMemcpyFromSymbolAsync(deviceptr, image, bytes, wOffset, MemcpyKind, stream);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMemcpyPeer(void *dst, int dstDevice, const void *src, int srcDevice, size_t count);
+  // HIP: hipError_t hipMemcpyPeer(void* dst, int dstDeviceId, const void* src, int srcDeviceId, size_t sizeBytes);
+  // CHECK: result = hipMemcpyPeer(deviceptr, deviceId, deviceptr_2, device, bytes);
+  result = cudaMemcpyPeer(deviceptr, deviceId, deviceptr_2, device, bytes);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMemcpyPeerAsync(void *dst, int dstDevice, const void *src, int srcDevice, size_t count, cudaStream_t stream __dv(0));
+  // HIP: hipError_t hipMemcpyPeerAsync(void* dst, int dstDeviceId, const void* src, int srcDevice, size_t sizeBytes, hipStream_t stream __dparm(0));
+  // CHECK: result = hipMemcpyPeerAsync(deviceptr, deviceId, deviceptr_2, device, bytes, stream);
+  result = cudaMemcpyPeerAsync(deviceptr, deviceId, deviceptr_2, device, bytes, stream);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMemcpyToSymbol(const void *symbol, const void *src, size_t count, size_t offset __dv(0), enum cudaMemcpyKind kind __dv(cudaMemcpyHostToDevice));
+  // HIP: hipError_t hipMemcpyToSymbol(const void* symbol, const void* src, size_t sizeBytes, size_t offset __dparm(0), hipMemcpyKind kind __dparm(hipMemcpyHostToDevice));
+  // CHECK: result = hipMemcpyToSymbol(HIP_SYMBOL(image), deviceptr, bytes, wOffset, MemcpyKind);
+  result = cudaMemcpyToSymbol(image, deviceptr, bytes, wOffset, MemcpyKind);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMemcpyToSymbolAsync(const void *symbol, const void *src, size_t count, size_t offset, enum cudaMemcpyKind kind, cudaStream_t stream __dv(0));
+  // HIP: hipError_t hipMemcpyToSymbolAsync(const void* symbol, const void* src, size_t sizeBytes, size_t offset, hipMemcpyKind kind, hipStream_t stream __dparm(0));
+  // CHECK: result = hipMemcpyToSymbolAsync(HIP_SYMBOL(image), deviceptr, bytes, wOffset, MemcpyKind, stream);
+  result = cudaMemcpyToSymbolAsync(image, deviceptr, bytes, wOffset, MemcpyKind, stream);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMemGetInfo(size_t *free, size_t *total);
+  // HIP: hipError_t hipMemGetInfo(size_t* free, size_t* total);
+  // CHECK: result = hipMemGetInfo(&bytes, &wOffset);
+  result = cudaMemGetInfo(&bytes, &wOffset);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMemset(void *devPtr, int value, size_t count);
+  // HIP: hipError_t hipMemset(void* dst, int value, size_t sizeBytes);
+  // CHECK: result = hipMemset(deviceptr, intVal, bytes);
+  result = cudaMemset(deviceptr, intVal, bytes);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMemset2D(void *devPtr, size_t pitch, int value, size_t width, size_t height);
+  // HIP: hipError_t hipMemset2D(void* dst, size_t pitch, int value, size_t width, size_t height);
+  // CHECK: result = hipMemset2D(deviceptr, pitch, intVal, width, height);
+  result = cudaMemset2D(deviceptr, pitch, intVal, width, height);
+
+  // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaMemset2DAsync(void *devPtr, size_t pitch, int value, size_t width, size_t height, cudaStream_t stream __dv(0));
+  // HIP: hipError_t hipMemset2DAsync(void* dst, size_t pitch, int value, size_t width, size_t height,hipStream_t stream __dparm(0));
+  // CHECK: result = hipMemset2DAsync(deviceptr, pitch, intVal, width, height, stream);
+  result = cudaMemset2DAsync(deviceptr, pitch, intVal, width, height, stream);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMemset3D(struct cudaPitchedPtr pitchedDevPtr, int value, struct cudaExtent extent);
+  // HIP: hipError_t hipMemset3D(hipPitchedPtr pitchedDevPtr, int  value, hipExtent extent );
+  // CHECK: result = hipMemset3D(PitchedPtr, intVal, Extent);
+  result = cudaMemset3D(PitchedPtr, intVal, Extent);
+
+  // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaMemset3DAsync(struct cudaPitchedPtr pitchedDevPtr, int value, struct cudaExtent extent, cudaStream_t stream __dv(0));
+  // HIP: hipError_t hipMemset3DAsync(hipPitchedPtr pitchedDevPtr, int  value, hipExtent extent ,hipStream_t stream __dparm(0));
+  // CHECK: result = hipMemset3DAsync(PitchedPtr, intVal, Extent, stream);
+  result = cudaMemset3DAsync(PitchedPtr, intVal, Extent, stream);
+
+  // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaMemsetAsync(void *devPtr, int value, size_t count, cudaStream_t stream __dv(0));
+  // HIP: hipError_t hipMemsetAsync(void* dst, int value, size_t sizeBytes, hipStream_t stream __dparm(0));
+  // CHECK: result = hipMemsetAsync(deviceptr, intVal, bytes, stream);
+  result = cudaMemsetAsync(deviceptr, intVal, bytes, stream);
+
+  // CUDA: static __inline__ __host__ struct cudaExtent make_cudaExtent(size_t w, size_t h, size_t d);
+  // HIP: static inline struct hipExtent make_hipExtent(size_t w, size_t h, size_t d);
+  // CHECK: Extent = make_hipExtent(width, height, bytes);
+  Extent = make_cudaExtent(width, height, bytes);
+
+  // CUDA: static __inline__ __host__ struct cudaPitchedPtr make_cudaPitchedPtr(void *d, size_t p, size_t xsz, size_t ysz);
+  // HIP: static inline struct hipPitchedPtr make_hipPitchedPtr(void* d, size_t p, size_t xsz, size_t ysz);
+  // CHECK: PitchedPtr = make_hipPitchedPtr(image, pitch, width, height);
+  PitchedPtr = make_cudaPitchedPtr(image, pitch, width, height);
+
+  // CHECK: hipPos Pos;
+  cudaPos Pos;
+
+  // CUDA: static __inline__ __host__ struct cudaPos make_cudaPos(size_t x, size_t y, size_t z);
+  // HIP: static inline struct hipPos make_hipPos(size_t x, size_t y, size_t z);
+  // CHECK: Pos = make_hipPos(width, height, bytes);
+  Pos = make_cudaPos(width, height, bytes);
 
   return 0;
 }
