@@ -2781,6 +2781,7 @@ sub simpleSubstitutions {
     subst("cusparseCooAoSGet", "hipsparseCooAoSGet", "library");
     subst("cusparseCooGet", "hipsparseCooGet", "library");
     subst("cusparseCooSetPointers", "hipsparseCooSetPointers", "library");
+    subst("cusparseCooSetStridedBatch", "hipsparseCooSetStridedBatch", "library");
     subst("cusparseCreate", "hipsparseCreate", "library");
     subst("cusparseCreateBlockedEll", "hipsparseCreateBlockedEll", "library");
     subst("cusparseCreateBsric02Info", "hipsparseCreateBsric02Info", "library");
@@ -2809,6 +2810,7 @@ sub simpleSubstitutions {
     subst("cusparseCsctr", "hipsparseCsctr", "library");
     subst("cusparseCsrGet", "hipsparseCsrGet", "library");
     subst("cusparseCsrSetPointers", "hipsparseCsrSetPointers", "library");
+    subst("cusparseCsrSetStridedBatch", "hipsparseCsrSetStridedBatch", "library");
     subst("cusparseDaxpyi", "hipsparseDaxpyi", "library");
     subst("cusparseDbsr2csr", "hipsparseDbsr2csr", "library");
     subst("cusparseDbsric02", "hipsparseDbsric02", "library");
@@ -2913,7 +2915,9 @@ sub simpleSubstitutions {
     subst("cusparseDhyb2csr", "hipsparseDhyb2csr", "library");
     subst("cusparseDhybmv", "hipsparseDhybmv", "library");
     subst("cusparseDnMatGet", "hipsparseDnMatGet", "library");
+    subst("cusparseDnMatGetStridedBatch", "hipsparseDnMatGetStridedBatch", "library");
     subst("cusparseDnMatGetValues", "hipsparseDnMatGetValues", "library");
+    subst("cusparseDnMatSetStridedBatch", "hipsparseDnMatSetStridedBatch", "library");
     subst("cusparseDnMatSetValues", "hipsparseDnMatSetValues", "library");
     subst("cusparseDnVecGet", "hipsparseDnVecGet", "library");
     subst("cusparseDnVecGetValues", "hipsparseDnVecGetValues", "library");
@@ -3050,8 +3054,10 @@ sub simpleSubstitutions {
     subst("cusparseSpMatGetFormat", "hipsparseSpMatGetFormat", "library");
     subst("cusparseSpMatGetIndexBase", "hipsparseSpMatGetIndexBase", "library");
     subst("cusparseSpMatGetSize", "hipsparseSpMatGetSize", "library");
+    subst("cusparseSpMatGetStridedBatch", "hipsparseSpMatGetStridedBatch", "library");
     subst("cusparseSpMatGetValues", "hipsparseSpMatGetValues", "library");
     subst("cusparseSpMatSetAttribute", "hipsparseSpMatSetAttribute", "library");
+    subst("cusparseSpMatSetStridedBatch", "hipsparseSpMatSetStridedBatch", "library");
     subst("cusparseSpMatSetValues", "hipsparseSpMatSetValues", "library");
     subst("cusparseSpSM_analysis", "hipsparseSpSM_analysis", "library");
     subst("cusparseSpSM_bufferSize", "hipsparseSpSM_bufferSize", "library");
@@ -5568,9 +5574,7 @@ sub warnUnsupportedFunctions {
         "cusparseZbsric02_bufferSizeExt",
         "cusparseXgebsr2csr",
         "cusparseSpVecDescr",
-        "cusparseSpMatSetStridedBatch",
         "cusparseSpMatSetNumBatches",
-        "cusparseSpMatGetStridedBatch",
         "cusparseSpMatGetNumBatches",
         "cusparseSpMatDescr",
         "cusparseSpMMOp_destroyPlan",
@@ -5631,8 +5635,6 @@ sub warnUnsupportedFunctions {
         "cusparseHpruneCsr2csr",
         "cusparseGetLevelInfo",
         "cusparseDnVecDescr",
-        "cusparseDnMatSetStridedBatch",
-        "cusparseDnMatGetStridedBatch",
         "cusparseDhybsv_solve",
         "cusparseDhybsv_analysis",
         "cusparseDhyb2dense",
@@ -5662,14 +5664,12 @@ sub warnUnsupportedFunctions {
         "cusparseCsrmvEx_bufferSize",
         "cusparseCsrmvEx",
         "cusparseCsrilu0Ex",
-        "cusparseCsrSetStridedBatch",
         "cusparseCsr2cscEx2_bufferSize",
         "cusparseCsr2cscEx2",
         "cusparseCsr2cscEx",
         "cusparseCsr2CscAlg_t",
         "cusparseCscGet",
         "cusparseCreateSolveAnalysisInfo",
-        "cusparseCooSetStridedBatch",
         "cusparseContext",
         "cusparseConstrainedGeMM_bufferSize",
         "cusparseConstrainedGeMM",
