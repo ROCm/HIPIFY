@@ -8,7 +8,7 @@
   #include "windows.h"
   #include <GL/glew.h>
 #endif
-#include "cudaGL.h"
+#include "cuda_gl_interop.h"
 
 int main() {
   printf("12. CUDA Runtime API Functions synthetic test\n");
@@ -23,8 +23,13 @@ int main() {
   int device = 0;
   int deviceId = 0;
   int intVal = 0;
+  int x = 0;
+  int y = 0;
+  int z = 0;
+  int w = 0;
   unsigned int flags = 0;
   unsigned int levels = 0;
+  unsigned int count = 0;
   float ms = 0;
   void* deviceptr = nullptr;
   void* deviceptr_2 = nullptr;
@@ -34,6 +39,9 @@ int main() {
   const char* const_ch = nullptr;
   dim3 gridDim;
   dim3 blockDim;
+  GLuint gl_uint = 0;
+  GLenum gl_enum = 0;
+  struct textureReference* texref = nullptr;
 
 #if defined(_WIN32)
   unsigned long long ull = 0;
@@ -83,6 +91,29 @@ int main() {
   // HIP: hipError_t hipMemRangeGetAttributes(void** data, size_t* data_sizes, hipMemRangeAttribute* attributes, size_t num_attributes, const void* dev_ptr, size_t count);
   // CHECK: result = hipMemRangeGetAttributes(&deviceptr, &bytes, &MemRangeAttribute, wOffset, deviceptr_2, hOffset);
   result = cudaMemRangeGetAttributes(&deviceptr, &bytes, &MemRangeAttribute, wOffset, deviceptr_2, hOffset);
+#endif
+
+#if CUDA_VERSION >= 9000
+  // CHECK: hipFuncAttribute FuncAttribute;
+  cudaFuncAttribute FuncAttribute;
+
+  // CHECK: hipLaunchParams LaunchParams;
+  cudaLaunchParams LaunchParams;
+
+  // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaFuncSetAttribute(const void *func, enum cudaFuncAttribute attr, int value);
+  // HIP: hipError_t hipFuncSetAttribute(const void* func, hipFuncAttribute attr, int value);
+  // CHECK: result = hipFuncSetAttribute(func, FuncAttribute, intVal);
+  result = cudaFuncSetAttribute(func, FuncAttribute, intVal);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaLaunchCooperativeKernel(const void *func, dim3 gridDim, dim3 blockDim, void **args, size_t sharedMem, cudaStream_t stream);
+  // HIP: hipError_t hipLaunchCooperativeKernel(const void* f, dim3 gridDim, dim3 blockDimX, void** kernelParams, unsigned int sharedMemBytes, hipStream_t stream);
+  // CHECK: result = hipLaunchCooperativeKernel(func, gridDim, blockDim, &image, flags, stream);
+  result = cudaLaunchCooperativeKernel(func, gridDim, blockDim, &image, flags, stream);
+
+  // CUDA: extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaLaunchCooperativeKernelMultiDevice(struct cudaLaunchParams *launchParamsList, unsigned int numDevices, unsigned int flags  __dv(0));
+  // HIP: hipError_t hipLaunchCooperativeKernelMultiDevice(hipLaunchParams* launchParamsList, int numDevices, unsigned int flags);
+  // CHECK: result = hipLaunchCooperativeKernelMultiDevice(&LaunchParams, intVal, flags);
+  result = cudaLaunchCooperativeKernelMultiDevice(&LaunchParams, intVal, flags);
 #endif
 
 #if CUDA_VERSION >= 10000
@@ -606,29 +637,6 @@ int main() {
   // CHECK: result = hipFuncGetAttributes(&FuncAttributes, func);
   result = cudaFuncGetAttributes(&FuncAttributes, func);
 
-#if CUDA_VERSION >= 9000
-  // CHECK: hipFuncAttribute FuncAttribute;
-  cudaFuncAttribute FuncAttribute;
-
-  // CHECK: hipLaunchParams LaunchParams;
-  cudaLaunchParams LaunchParams;
-
-  // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaFuncSetAttribute(const void *func, enum cudaFuncAttribute attr, int value);
-  // HIP: hipError_t hipFuncSetAttribute(const void* func, hipFuncAttribute attr, int value);
-  // CHECK: result = hipFuncSetAttribute(func, FuncAttribute, intVal);
-  result = cudaFuncSetAttribute(func, FuncAttribute, intVal);
-
-  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaLaunchCooperativeKernel(const void *func, dim3 gridDim, dim3 blockDim, void **args, size_t sharedMem, cudaStream_t stream);
-  // HIP: hipError_t hipLaunchCooperativeKernel(const void* f, dim3 gridDim, dim3 blockDimX, void** kernelParams, unsigned int sharedMemBytes, hipStream_t stream);
-  // CHECK: result = hipLaunchCooperativeKernel(func, gridDim, blockDim, &image, flags, stream);
-  result = cudaLaunchCooperativeKernel(func, gridDim, blockDim, &image, flags, stream);
-
-  // CUDA: extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaLaunchCooperativeKernelMultiDevice(struct cudaLaunchParams *launchParamsList, unsigned int numDevices, unsigned int flags  __dv(0));
-  // HIP: hipError_t hipLaunchCooperativeKernelMultiDevice(hipLaunchParams* launchParamsList, int numDevices, unsigned int flags);
-  // CHECK: result = hipLaunchCooperativeKernelMultiDevice(&LaunchParams, intVal, flags);
-  result = cudaLaunchCooperativeKernelMultiDevice(&LaunchParams, intVal, flags);
-#endif
-
   // CUDA: extern __host__ cudaError_t CUDARTAPI cudaFuncSetCacheConfig(const void *func, enum cudaFuncCache cacheConfig);
   // HIP: hipError_t hipFuncSetCacheConfig(const void* func, hipFuncCache_t config);
   // CHECK: result = hipFuncSetCacheConfig(func, FuncCache);
@@ -925,6 +933,131 @@ int main() {
   // HIP: static inline struct hipPos make_hipPos(size_t x, size_t y, size_t z);
   // CHECK: Pos = make_hipPos(width, height, bytes);
   Pos = make_cudaPos(width, height, bytes);
+
+  // CUDA: extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaMemcpyFromArray(void *dst, cudaArray_const_t src, size_t wOffset, size_t hOffset, size_t count, enum cudaMemcpyKind kind);
+  // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipMemcpyFromArray(void* dst, hipArray_const_t srcArray, size_t wOffset, size_t hOffset, size_t count, hipMemcpyKind kind);
+  // CHECK: result = hipMemcpyFromArray(deviceptr, Array_const_t, wOffset, hOffset, bytes, MemcpyKind);
+  result = cudaMemcpyFromArray(deviceptr, Array_const_t, wOffset, hOffset, bytes, MemcpyKind);
+
+  // CUDA: extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaMemcpyToArray(cudaArray_t dst, size_t wOffset, size_t hOffset, const void *src, size_t count, enum cudaMemcpyKind kind);
+  // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipMemcpyToArray(hipArray* dst, size_t wOffset, size_t hOffset, const void* src, size_t count, hipMemcpyKind kind);
+  // CHECK: result = hipMemcpyToArray(Array_t, wOffset, hOffset, deviceptr, bytes, MemcpyKind);
+  result = cudaMemcpyToArray(Array_t, wOffset, hOffset, deviceptr, bytes, MemcpyKind);
+
+  // CHECK: hipPointerAttribute_t PointerAttributes;
+  cudaPointerAttributes PointerAttributes;
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaPointerGetAttributes(struct cudaPointerAttributes *attributes, const void *ptr);
+  // HIP: hipError_t hipPointerGetAttributes(hipPointerAttribute_t* attributes, const void* ptr);
+  // CHECK: result = hipPointerGetAttributes(&PointerAttributes, deviceptr);
+  result = cudaPointerGetAttributes(&PointerAttributes, deviceptr);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaDeviceCanAccessPeer(int *canAccessPeer, int device, int peerDevice);
+  // HIP: hipError_t hipDeviceCanAccessPeer(int* canAccessPeer, int deviceId, int peerDeviceId);
+  // CHECK: result = hipDeviceCanAccessPeer(&intVal, device, deviceId);
+  result = cudaDeviceCanAccessPeer(&intVal, device, deviceId);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaDeviceDisablePeerAccess(int peerDevice);
+  // HIP: hipError_t hipDeviceDisablePeerAccess(int peerDeviceId);
+  // CHECK: result = hipDeviceDisablePeerAccess(device);
+  result = cudaDeviceDisablePeerAccess(device);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaDeviceEnablePeerAccess(int peerDevice, unsigned int flags);
+  // HIP: hipError_t hipDeviceEnablePeerAccess(int peerDeviceId, unsigned int flags);
+  // CHECK: result = hipDeviceEnablePeerAccess(device, flags);
+  result = cudaDeviceEnablePeerAccess(device, flags);
+
+  // CHECK: hipGLDeviceList GLDeviceList;
+  cudaGLDeviceList GLDeviceList;
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGLGetDevices(unsigned int *pCudaDeviceCount, int *pCudaDevices, unsigned int cudaDeviceCount, enum cudaGLDeviceList deviceList);
+  // HIP: hipError_t hipGLGetDevices(unsigned int* pHipDeviceCount, int* pHipDevices, unsigned int hipDeviceCount, hipGLDeviceList deviceList);
+  // CHECK: result = hipGLGetDevices(&flags, &intVal, count, GLDeviceList);
+  result = cudaGLGetDevices(&flags, &intVal, count, GLDeviceList);
+
+  // CHECK: hipGraphicsResource* GraphicsResource;
+  // CHECK-NEXT: hipGraphicsResource_t GraphicsResource_t;
+  cudaGraphicsResource* GraphicsResource;
+  cudaGraphicsResource_t GraphicsResource_t;
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphicsGLRegisterBuffer(struct cudaGraphicsResource **resource, GLuint buffer, unsigned int flags);
+  // HIP: hipError_t hipGraphicsGLRegisterBuffer(hipGraphicsResource** resource, GLuint buffer, unsigned int flags);
+  // CHECK: result = hipGraphicsGLRegisterBuffer(&GraphicsResource, gl_uint, flags);
+  result = cudaGraphicsGLRegisterBuffer(&GraphicsResource, gl_uint, flags);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphicsGLRegisterImage(struct cudaGraphicsResource **resource, GLuint image, GLenum target, unsigned int flags);
+  // HIP: hipError_t hipGraphicsGLRegisterImage(hipGraphicsResource** resource, GLuint image, GLenum target, unsigned int flags);
+  // CHECK: result = hipGraphicsGLRegisterImage(&GraphicsResource, gl_uint, gl_enum, flags);
+  result = cudaGraphicsGLRegisterImage(&GraphicsResource, gl_uint, gl_enum, flags);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphicsMapResources(int count, cudaGraphicsResource_t *resources, cudaStream_t stream __dv(0));
+  // HIP: hipError_t hipGraphicsMapResources(int count, hipGraphicsResource_t* resources, hipStream_t stream  __dparm(0));
+  // CHECK: result = hipGraphicsMapResources(intVal, &GraphicsResource, stream);
+  result = cudaGraphicsMapResources(intVal, &GraphicsResource, stream);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphicsResourceGetMappedPointer(void **devPtr, size_t *size, cudaGraphicsResource_t resource);
+  // HIP: hipError_t hipGraphicsResourceGetMappedPointer(void** devPtr, size_t* size, hipGraphicsResource_t resource);
+  // CHECK: result = hipGraphicsResourceGetMappedPointer(&deviceptr, &bytes, GraphicsResource);
+  result = cudaGraphicsResourceGetMappedPointer(&deviceptr, &bytes, GraphicsResource);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphicsUnmapResources(int count, cudaGraphicsResource_t *resources, cudaStream_t stream __dv(0));
+  // HIP: hipError_t hipGraphicsUnmapResources(int count, hipGraphicsResource_t* resources, hipStream_t stream  __dparm(0));
+  // CHECK: result = hipGraphicsUnmapResources(intVal, &GraphicsResource, stream);
+  result = cudaGraphicsUnmapResources(intVal, &GraphicsResource, stream);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphicsUnregisterResource(cudaGraphicsResource_t resource);
+  // HIP: hipError_t hipGraphicsUnregisterResource(hipGraphicsResource_t resource);
+  // CHECK: result = hipGraphicsUnregisterResource(GraphicsResource);
+  result = cudaGraphicsUnregisterResource(GraphicsResource);
+
+  // CUDA: extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaBindTexture(size_t *offset, const struct textureReference *texref, const void *devPtr, const struct cudaChannelFormatDesc *desc, size_t size __dv(UINT_MAX));
+  // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipBindTexture(size_t* offset, const textureReference* tex, const void* devPtr, const hipChannelFormatDesc* desc, size_t size __dparm(UINT_MAX));
+  // CHECK: result = hipBindTexture(&wOffset, texref, deviceptr, &ChannelFormatDesc, bytes);
+  result = cudaBindTexture(&wOffset, texref, deviceptr, &ChannelFormatDesc, bytes);
+
+  // CUDA: extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaBindTexture2D(size_t *offset, const struct textureReference *texref, const void *devPtr, const struct cudaChannelFormatDesc *desc, size_t width, size_t height, size_t pitch);
+  // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipBindTexture2D(size_t* offset, const textureReference* tex, const void* devPtr, const hipChannelFormatDesc* desc, size_t width, size_t height, size_t pitch);
+  // CHECK: result = hipBindTexture2D(&wOffset, texref, deviceptr, &ChannelFormatDesc, width, height, pitch);
+  result = cudaBindTexture2D(&wOffset, texref, deviceptr, &ChannelFormatDesc, width, height, pitch);
+
+  // CUDA: extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaBindTextureToArray(const struct textureReference *texref, cudaArray_const_t array, const struct cudaChannelFormatDesc *desc);
+  // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipBindTextureToArray(const textureReference* tex, hipArray_const_t array, const hipChannelFormatDesc* desc);
+  // CHECK: result = hipBindTextureToArray(texref, Array_const_t, &ChannelFormatDesc);
+  result = cudaBindTextureToArray(texref, Array_const_t, &ChannelFormatDesc);
+
+  // CUDA: extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaBindTextureToMipmappedArray(const struct textureReference *texref, cudaMipmappedArray_const_t mipmappedArray, const struct cudaChannelFormatDesc *desc);
+  // HIP: hipError_t hipBindTextureToMipmappedArray(const textureReference* tex, hipMipmappedArray_const_t mipmappedArray, const hipChannelFormatDesc* desc);
+  // CHECK: result = hipBindTextureToMipmappedArray(texref, MipmappedArray_const_t, &ChannelFormatDesc);
+  result = cudaBindTextureToMipmappedArray(texref, MipmappedArray_const_t, &ChannelFormatDesc);
+
+  // CHECK: hipChannelFormatKind ChannelFormatKind;
+  cudaChannelFormatKind ChannelFormatKind;
+
+  // CUDA: extern __host__ struct cudaChannelFormatDesc CUDARTAPI cudaCreateChannelDesc(int x, int y, int z, int w, enum cudaChannelFormatKind f);
+  // HIP: HIP_PUBLIC_API hipChannelFormatDesc hipCreateChannelDesc(int x, int y, int z, int w, hipChannelFormatKind f);
+  // CHECK: ChannelFormatDesc = hipCreateChannelDesc(x, y, z, w, ChannelFormatKind);
+  ChannelFormatDesc = cudaCreateChannelDesc(x, y, z, w, ChannelFormatKind);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGetChannelDesc(struct cudaChannelFormatDesc *desc, cudaArray_const_t array);
+  // HIP: hipError_t hipGetChannelDesc(hipChannelFormatDesc* desc, hipArray_const_t array);
+  // CHECK: result = hipGetChannelDesc(&ChannelFormatDesc, Array_const_t);
+  result = cudaGetChannelDesc(&ChannelFormatDesc, Array_const_t);
+
+  // CUDA: extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaGetTextureAlignmentOffset(size_t *offset, const struct textureReference *texref);
+  // HIP: hipError_t hipGetTextureAlignmentOffset(size_t* offset, const textureReference* texref);
+  // CHECK: result = hipGetTextureAlignmentOffset(&wOffset, texref);
+  result = cudaGetTextureAlignmentOffset(&wOffset, texref);
+
+  // TODO: Implement `const struct textureReference **texref` correct mapping to HIP
+  // CUDA: extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaGetTextureReference(const struct textureReference **texref, const void *symbol);
+  // HIP:  hipError_t hipGetTextureReference(const textureReference** texref, const void* symbol);
+  // result = hipGetTextureReference(&texref, HIP_SYMBOL(image));
+  // result = cudaGetTextureReference(&texref, image);
+
+  // CUDA: extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaUnbindTexture(const struct textureReference *texref);
+  // HIP:  DEPRECATED(DEPRECATED_MSG) hipError_t hipUnbindTexture(const textureReference* tex);
+  // CHECK: result = hipUnbindTexture(texref);
+  result = cudaUnbindTexture(texref);
 
   return 0;
 }

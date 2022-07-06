@@ -122,6 +122,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // NOTE: possibly CUsurfref is analogue
   {"surfaceReference",                                                 {"surfaceReference",                                         "", CONV_TYPE, API_RUNTIME, 36}},
 
+  // NOTE: possibly CUtexref_st is analogue
+  {"textureReference",                                                 {"textureReference",                                         "", CONV_TYPE, API_RUNTIME, 36}},
+
   // the same - CUevent_st
   {"CUevent_st",                                                       {"ihipEvent_t",                                              "", CONV_TYPE, API_RUNTIME, 36}},
   // CUevent
