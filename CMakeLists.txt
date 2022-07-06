@@ -128,19 +128,6 @@ if(UNIX)
         include(hipify-backward-compat.cmake)
     endif()
     set(CPACK_PACKAGING_INSTALL_PREFIX "/opt/rocm" CACHE PATH "HIP Package Installation Path")
-    #TODO: To be removed
-    #In jenkins and docker build , hipify need to be installed in /opt/rocm.
-    #Currently build script passes /opt/rocm/hip as install path
-    #Workaround for removing same, till prototype changes are merged
-    if(CPACK_PACKAGING_INSTALL_PREFIX)
-        string(FIND ${CPACK_PACKAGING_INSTALL_PREFIX} "/opt/rocm" ROCMDIR_FOUND)
-        if(NOT ${ROCMDIR_FOUND} MATCHES "-1")
-            get_filename_component(DEST_DIR ${CPACK_PACKAGING_INSTALL_PREFIX} NAME)
-            if(DEST_DIR STREQUAL "hip")
-                get_filename_component(CPACK_PACKAGING_INSTALL_PREFIX ${CPACK_PACKAGING_INSTALL_PREFIX} DIRECTORY)
-            endif()#end  of DEST_DIR check
-        endif()#end of rocm dir check
-    endif()
     set(BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR}/packages/hipify-clang)
     configure_file(packaging/hipify-clang.txt ${BUILD_DIR}/CMakeLists.txt @ONLY)
     configure_file(${CMAKE_SOURCE_DIR}/LICENSE.txt ${BUILD_DIR}/LICENSE.txt @ONLY)
