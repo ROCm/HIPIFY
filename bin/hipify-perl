@@ -3647,6 +3647,7 @@ sub simpleSubstitutions {
     subst("nvrtcResult", "hiprtcResult", "type");
     subst("pruneInfo_t", "pruneInfo_t", "type");
     subst("surfaceReference", "surfaceReference", "type");
+    subst("textureReference", "textureReference", "type");
     subst("CUBLAS_ATOMICS_ALLOWED", "HIPBLAS_ATOMICS_ALLOWED", "numeric_literal");
     subst("CUBLAS_ATOMICS_NOT_ALLOWED", "HIPBLAS_ATOMICS_NOT_ALLOWED", "numeric_literal");
     subst("CUBLAS_DIAG_NON_UNIT", "HIPBLAS_DIAG_NON_UNIT", "numeric_literal");

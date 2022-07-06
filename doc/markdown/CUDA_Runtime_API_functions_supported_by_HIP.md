@@ -1341,6 +1341,7 @@ Unsupported
 |`libraryPropertyType`|8.0| | | | | | | |
 |`libraryPropertyType_t`|8.0| | | | | | | |
 |`surfaceReference`| | | |`surfaceReference`|1.9.0| | | |
+|`textureReference`| | | |`textureReference`|1.6.0| | | |
 
 ## **37. Execution Control [REMOVED]**
 
