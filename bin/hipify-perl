@@ -4738,6 +4738,7 @@ sub transformHostFunctions {
     foreach $func (
         "hipGetSymbolAddress",
         "hipGetSymbolSize",
+        "hipGetTextureReference",
         "hipGraphMemcpyNodeSetParamsToSymbol",
         "hipMemcpyFromSymbol",
         "hipMemcpyFromSymbolAsync"

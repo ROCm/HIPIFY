@@ -66,6 +66,7 @@ const std::string sCudaGraphExecMemcpyNodeSetParamsToSymbol = "cudaGraphExecMemc
 const std::string sCudaGraphExecMemcpyNodeSetParamsFromSymbol = "cudaGraphExecMemcpyNodeSetParamsFromSymbol";
 const std::string sCuOccupancyMaxPotentialBlockSize = "cuOccupancyMaxPotentialBlockSize";
 const std::string sCuOccupancyMaxPotentialBlockSizeWithFlags = "cuOccupancyMaxPotentialBlockSizeWithFlags";
+const std::string sCudaGetTextureReference = "cudaGetTextureReference";
 // Matchers' names
 const StringRef sCudaLaunchKernel = "cudaLaunchKernel";
 const StringRef sCudaHostFuncCall = "cudaHostFuncCall";
@@ -98,6 +99,7 @@ std::map<std::string, ArgCastMap> FuncArgCasts {
   {sCudaGraphMemcpyNodeSetParamsFromSymbol, {{2, {e_HIP_SYMBOL, cw_None}}}},
   {sCudaGraphExecMemcpyNodeSetParamsToSymbol, {{2, {e_HIP_SYMBOL, cw_None}}}},
   {sCudaGraphExecMemcpyNodeSetParamsFromSymbol, {{3, {e_HIP_SYMBOL, cw_None}}}},
+  {sCudaGetTextureReference, {{1, {e_HIP_SYMBOL, cw_None}}}},
   {sCuOccupancyMaxPotentialBlockSize, {{3, {e_remove_argument, cw_DataLoss}}}},
   {sCuOccupancyMaxPotentialBlockSizeWithFlags, {{3, {e_remove_argument, cw_DataLoss}}}},
 };
@@ -586,7 +588,8 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
             sCudaGraphExecMemcpyNodeSetParamsToSymbol,
             sCudaGraphExecMemcpyNodeSetParamsFromSymbol,
             sCuOccupancyMaxPotentialBlockSize,
-            sCuOccupancyMaxPotentialBlockSizeWithFlags
+            sCuOccupancyMaxPotentialBlockSizeWithFlags,
+            sCudaGetTextureReference
           )
         )
       )
