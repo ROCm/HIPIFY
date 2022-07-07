@@ -1048,11 +1048,10 @@ int main() {
   // CHECK: result = hipGetTextureAlignmentOffset(&wOffset, texref);
   result = cudaGetTextureAlignmentOffset(&wOffset, texref);
 
-  // TODO: Implement `const struct textureReference **texref` correct mapping to HIP
   // CUDA: extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaGetTextureReference(const struct textureReference **texref, const void *symbol);
   // HIP:  hipError_t hipGetTextureReference(const textureReference** texref, const void* symbol);
-  // result = hipGetTextureReference(&texref, HIP_SYMBOL(image));
-  // result = cudaGetTextureReference(&texref, image);
+  // CHECK: result = hipGetTextureReference(const_cast<const textureReference**>(&texref), HIP_SYMBOL(image));
+  result = cudaGetTextureReference(const_cast<const textureReference**>(&texref), image);
 
   // CUDA: extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaUnbindTexture(const struct textureReference *texref);
   // HIP:  DEPRECATED(DEPRECATED_MSG) hipError_t hipUnbindTexture(const textureReference* tex);
