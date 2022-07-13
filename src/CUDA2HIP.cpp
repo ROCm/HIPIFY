@@ -108,6 +108,7 @@ const std::map<llvm::StringRef, hipCounter> &CUDA_RENAMES_MAP() {
   ret.insert(CUDA_SPARSE_FUNCTION_MAP.begin(), CUDA_SPARSE_FUNCTION_MAP.end());
   ret.insert(CUDA_CAFFE2_TYPE_NAME_MAP.begin(), CUDA_CAFFE2_TYPE_NAME_MAP.end());
   ret.insert(CUDA_CAFFE2_FUNCTION_MAP.begin(), CUDA_CAFFE2_FUNCTION_MAP.end());
+  ret.insert(CUDA_CUB_TYPE_NAME_MAP.begin(), CUDA_CUB_TYPE_NAME_MAP.end());
   ret.insert(CUDA_RTC_TYPE_NAME_MAP.begin(), CUDA_RTC_TYPE_NAME_MAP.end());
   ret.insert(CUDA_RTC_FUNCTION_MAP.begin(), CUDA_RTC_FUNCTION_MAP.end());
   return ret;
