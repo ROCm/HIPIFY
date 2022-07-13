@@ -380,8 +380,8 @@ bool HipifyAction::cudaLaunchKernel(const mat::MatchFinder::MatchResult &Result)
     OS << sHIP_KERNEL_NAME << "(";
     std::string cub = sCub + "::";
     std::string hipcub;
-    const auto found = CUDA_CUB_TYPE_NAME_MAP.find(sCub);
-    if (found != CUDA_CUB_TYPE_NAME_MAP.end()) {
+    const auto found = CUDA_CUB_NAMESPACE_MAP.find(sCub);
+    if (found != CUDA_CUB_NAMESPACE_MAP.end()) {
       hipcub = found->second.hipName.str() + "::";
     } else {
       hipcub = sHipcub + "::";
@@ -461,7 +461,7 @@ bool HipifyAction::cubNamespacePrefix(const mat::MatchFinder::MatchResult &Resul
     const clang::TypeLoc tloc = si->getTypeLoc();
     const clang::SourceRange sr = tloc.getSourceRange();
     std::string name = nsd->getDeclName().getAsString();
-    FindAndReplace(name, GetSubstrLocation(name, sr), CUDA_CUB_TYPE_NAME_MAP);
+    FindAndReplace(name, GetSubstrLocation(name, sr), CUDA_CUB_NAMESPACE_MAP);
     return true;
   }
   return false;
@@ -470,7 +470,7 @@ bool HipifyAction::cubNamespacePrefix(const mat::MatchFinder::MatchResult &Resul
 bool HipifyAction::cubUsingNamespaceDecl(const mat::MatchFinder::MatchResult &Result) {
   if (auto *decl = Result.Nodes.getNodeAs<clang::UsingDirectiveDecl>(sCubUsingNamespaceDecl)) {
     if (auto nsd = decl->getNominatedNamespace()) {
-      FindAndReplace(nsd->getDeclName().getAsString(), decl->getIdentLocation(), CUDA_CUB_TYPE_NAME_MAP);
+      FindAndReplace(nsd->getDeclName().getAsString(), decl->getIdentLocation(), CUDA_CUB_NAMESPACE_MAP);
       return true;
     }
   }
@@ -495,7 +495,7 @@ bool HipifyAction::cubFunctionTemplateDecl(const mat::MatchFinder::MatchResult &
       if (!nsd) continue;
       const clang::SourceRange sr = valueDecl->getSourceRange();
       std::string name = nsd->getDeclName().getAsString();
-      FindAndReplace(name, GetSubstrLocation(name, sr), CUDA_CUB_TYPE_NAME_MAP);
+      FindAndReplace(name, GetSubstrLocation(name, sr), CUDA_CUB_NAMESPACE_MAP);
       ret = true;
     }
     return ret;

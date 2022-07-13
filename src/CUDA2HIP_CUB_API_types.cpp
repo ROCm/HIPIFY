@@ -23,14 +23,25 @@ THE SOFTWARE.
 #include "CUDA2HIP.h"
 
 // Maps the names of CUDA CUB API types to the corresponding HIP types
+const std::map<llvm::StringRef, hipCounter> CUDA_CUB_NAMESPACE_MAP {
+  {"cub",                               {"hipcub",                             "", CONV_TYPE, API_CUB, 1}},
+};
+
+// Maps the names of CUDA CUB API types to the corresponding HIP types
 const std::map<llvm::StringRef, hipCounter> CUDA_CUB_TYPE_NAME_MAP {
-  {"cub",  {"hipcub",  "", CONV_TYPE, API_CUB, 1}},
+  // 5. Defines
+  {"CUB_STDERR",                        {"HIPCUB_STDERR",                      "", CONV_DEFINE, API_CUB, 1}},
+  {"CubDebug",                          {"HipcubDebug",                        "", CONV_DEFINE, API_CUB, 1}},
+  {"_CubLog",                           {"_HipcubLog",                         "", CONV_DEFINE, API_CUB, 1}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_CUB_TYPE_NAME_VER_MAP {
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_CUB_TYPE_NAME_VER_MAP {
+  {"HIPCUB_STDERR",                          {HIP_2050, HIP_0,    HIP_0   }},
+  {"HipcubDebug",                            {HIP_2050, HIP_0,    HIP_0   }},
+  {"_HipcubLog",                             {HIP_2050, HIP_0,    HIP_0   }},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_CUB_API_SECTION_MAP {
