@@ -161,13 +161,47 @@ cl::opt<std::string> DocFormat("doc-format",
   cl::cat(ToolTemplateCategory));
 
 cl::opt<bool> Experimental("experimental",
-  cl::desc("HIPIFY experimentally supported APIs"),
+  cl::desc("HIP APIs that are experimentally supported"),
   cl::value_desc("experimental"),
   cl::cat(ToolTemplateCategory));
 
 cl::opt<bool> CudaKernelExecutionSyntax("cuda-kernel-execution-syntax",
-  cl::desc("Do not transform CUDA kernel launches"),
+  cl::desc("Keep CUDA kernel launch syntax (default)"),
   cl::value_desc("cuda-kernel-execution-syntax"),
+  cl::init(true),
+  cl::cat(ToolTemplateCategory));
+
+cl::opt<bool> HipKernelExecutionSyntax("hip-kernel-execution-syntax",
+  cl::desc("Transform CUDA kernel launch syntax to a regular HIP function call (overrides \"--cuda-kernel-execution-syntax\")"),
+  cl::value_desc("hip-kernel-execution-syntax"),
   cl::cat(ToolTemplateCategory));
 
 cl::extrahelp CommonHelp(ct::CommonOptionsParser::HelpMessage);
+
+const std::vector<std::string> hipifyOptions {
+  std::string(PrintStatsCSV.ArgStr),
+  std::string(PrintStats.ArgStr),
+  std::string(SkipExcludedPPConditionalBlocks.ArgStr),
+  std::string(HipKernelExecutionSyntax.ArgStr),
+  std::string(CudaKernelExecutionSyntax.ArgStr),
+  std::string(GeneratePerl.ArgStr),
+  std::string(GeneratePython.ArgStr),
+  std::string(TranslateToRoc.ArgStr),
+  std::string(GenerateMarkdown.ArgStr),
+  std::string(GenerateCSV.ArgStr),
+  std::string(NoBackup.ArgStr),
+  std::string(NoOutput.ArgStr),
+  std::string(Inplace.ArgStr),
+  std::string(Examine.ArgStr),
+  std::string(SaveTemps.ArgStr),
+  std::string(DocFormat.ArgStr),
+  std::string(Experimental.ArgStr),
+};
+
+const std::vector<std::string> hipifyOptionsWithTwoArgs {
+  std::string(OutputDir.ArgStr),
+  std::string(OutputHipifyPerlDir.ArgStr),
+  std::string(OutputPythonMapDir.ArgStr),
+  std::string(OutputStatsFilename.ArgStr),
+  std::string(TemporaryDir.ArgStr),
+};

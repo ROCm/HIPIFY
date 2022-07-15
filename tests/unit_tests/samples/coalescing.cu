@@ -1,4 +1,4 @@
-// RUN: %run_test hipify "%s" "%t" %hipify_args %clang_args
+// RUN: %run_test hipify "%s" "%t" %hipify_args 1 --hip-kernel-execution-syntax %clang_args
 
 // To measure effects of memory coalescing. Coalescing.cu
 // B. Wilkinson Jan 30, 2011

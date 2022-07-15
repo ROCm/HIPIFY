@@ -39,7 +39,7 @@ if [ -e $json_in ]
 then
 cp $json_in $json_out
 sed -i -e "s|<test dir>|${test_dir}|g; s|<CUDA dir>|${CUDA_ROOT}|g" $json_out
-$HIPIFY -o=$TMP_FILE $IN_FILE $CUDA_ROOT -p=$test_dir && cat $TMP_FILE | sed -Ee 's|//.+|// |g' | FileCheck $IN_FILE
+$HIPIFY -o=$TMP_FILE $IN_FILE $CUDA_ROOT -p=$test_dir $HIPIFY_OPTS && cat $TMP_FILE | sed -Ee 's|//.+|// |g' | FileCheck $IN_FILE
 else
 $HIPIFY -o=$TMP_FILE $IN_FILE $CUDA_ROOT $HIPIFY_OPTS -- $@ && cat $TMP_FILE | sed -Ee 's|//.+|// |g' | FileCheck $IN_FILE
 fi

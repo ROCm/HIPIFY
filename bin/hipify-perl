@@ -34,19 +34,21 @@ my $USAGE =<<USAGE;
 
     OPTIONS:
 
-      -examine          - Combines -no-output and -print-stats options
-      -exclude-dirs=s   - Exclude directories
-      -exclude-files=s  - Exclude files
-      -experimental     - HIPIFY experimentally supported APIs
-      -help             - Display available options
-      -inplace          - Backup the input file in .prehip file, modify the input file inplace
-      -no-output        - Don't write any translated output to stdout
-      -o=s              - Output filename
-      -print-stats      - Print translation statistics
-      -quiet-warnings   - Don't print warnings on unknown CUDA identifiers
-      -roc              - Translate to roc instead of hip where it is possible
-      -version          - The supported HIP version
-      -whitelist=s      - Whitelist of identifiers
+      -cuda-kernel-execution-syntax - Keep CUDA kernel launch syntax (default)
+      -examine                      - Combines -no-output and -print-stats options
+      -exclude-dirs=s               - Exclude directories
+      -exclude-files=s              - Exclude files
+      -experimental                 - HIPIFY experimentally supported APIs
+      -help                         - Display available options
+      -hip-kernel-execution-syntax  - Transform CUDA kernel launch syntax to a regular HIP function call (overrides "--cuda-kernel-execution-syntax")
+      -inplace                      - Backup the input file in .prehip file, modify the input file inplace
+      -no-output                    - Don't write any translated output to stdout
+      -o=s                          - Output filename
+      -print-stats                  - Print translation statistics
+      -quiet-warnings               - Don't print warnings on unknown CUDA identifiers
+      -roc                          - Translate to roc instead of hip where it is possible
+      -version                      - The supported HIP version
+      -whitelist=s                  - Whitelist of identifiers
 USAGE
 #
 use warnings;
@@ -68,20 +70,24 @@ my %convertedTags = ();
 my %convertedTagsTotal = ();
 
 GetOptions(
-      "examine" => \$examine                  # Combines -no-output and -print-stats options
-    , "exclude-dirs=s" => \$exclude_dirs      # Exclude directories
-    , "exclude-files=s" => \$exclude_files    # Exclude files
-    , "experimental" => \$experimental        # HIPIFY experimentally supported APIs
-    , "help" => \$help                        # Display available options
-    , "inplace" => \$inplace                  # Backup the input file in .prehip file, modify the input file inplace
-    , "no-output" => \$no_output              # Don't write any translated output to stdout
-    , "o=s" => \$hipFileName                  # Output filename
-    , "print-stats" => \$print_stats          # Print translation statistics
-    , "quiet-warnings" => \$quiet_warnings    # Don't print warnings on unknown CUDA identifiers
-    , "roc" => \$roc                          # Translate to roc instead of hip where it is possible
-    , "version" => \$version                  # The supported HIP version
-    , "whitelist=s" => \$whitelist            # Whitelist of identifiers
+      "cuda-kernel-execution-syntax" => \$cuda_kernel_execution_syntax  # Keep CUDA kernel launch syntax (default)
+    , "examine" => \$examine                                            # Combines -no-output and -print-stats options
+    , "exclude-dirs=s" => \$exclude_dirs                                # Exclude directories
+    , "exclude-files=s" => \$exclude_files                              # Exclude files
+    , "experimental" => \$experimental                                  # HIPIFY experimentally supported APIs
+    , "help" => \$help                                                  # Display available options
+    , "hip-kernel-execution-syntax" => \$hip_kernel_execution_syntax    # Transform CUDA kernel launch syntax to a regular HIP function call (overrides "--cuda-kernel-execution-syntax")
+    , "inplace" => \$inplace                                            # Backup the input file in .prehip file, modify the input file inplace
+    , "no-output" => \$no_output                                        # Don't write any translated output to stdout
+    , "o=s" => \$hipFileName                                            # Output filename
+    , "print-stats" => \$print_stats                                    # Print translation statistics
+    , "quiet-warnings" => \$quiet_warnings                              # Don't print warnings on unknown CUDA identifiers
+    , "roc" => \$roc                                                    # Translate to roc instead of hip where it is possible
+    , "version" => \$version                                            # The supported HIP version
+    , "whitelist=s" => \$whitelist                                      # Whitelist of identifiers
 );
+
+$cuda_kernel_execution_syntax = 1;
 
 my %deprecated_funcs = (
     "cusparseZsctr" => "11.0",
@@ -2775,6 +2781,7 @@ sub simpleSubstitutions {
     subst("cusparseCooAoSGet", "hipsparseCooAoSGet", "library");
     subst("cusparseCooGet", "hipsparseCooGet", "library");
     subst("cusparseCooSetPointers", "hipsparseCooSetPointers", "library");
+    subst("cusparseCooSetStridedBatch", "hipsparseCooSetStridedBatch", "library");
     subst("cusparseCreate", "hipsparseCreate", "library");
     subst("cusparseCreateBlockedEll", "hipsparseCreateBlockedEll", "library");
     subst("cusparseCreateBsric02Info", "hipsparseCreateBsric02Info", "library");
@@ -2803,6 +2810,7 @@ sub simpleSubstitutions {
     subst("cusparseCsctr", "hipsparseCsctr", "library");
     subst("cusparseCsrGet", "hipsparseCsrGet", "library");
     subst("cusparseCsrSetPointers", "hipsparseCsrSetPointers", "library");
+    subst("cusparseCsrSetStridedBatch", "hipsparseCsrSetStridedBatch", "library");
     subst("cusparseDaxpyi", "hipsparseDaxpyi", "library");
     subst("cusparseDbsr2csr", "hipsparseDbsr2csr", "library");
     subst("cusparseDbsric02", "hipsparseDbsric02", "library");
@@ -2907,7 +2915,9 @@ sub simpleSubstitutions {
     subst("cusparseDhyb2csr", "hipsparseDhyb2csr", "library");
     subst("cusparseDhybmv", "hipsparseDhybmv", "library");
     subst("cusparseDnMatGet", "hipsparseDnMatGet", "library");
+    subst("cusparseDnMatGetStridedBatch", "hipsparseDnMatGetStridedBatch", "library");
     subst("cusparseDnMatGetValues", "hipsparseDnMatGetValues", "library");
+    subst("cusparseDnMatSetStridedBatch", "hipsparseDnMatSetStridedBatch", "library");
     subst("cusparseDnMatSetValues", "hipsparseDnMatSetValues", "library");
     subst("cusparseDnVecGet", "hipsparseDnVecGet", "library");
     subst("cusparseDnVecGetValues", "hipsparseDnVecGetValues", "library");
@@ -3044,8 +3054,10 @@ sub simpleSubstitutions {
     subst("cusparseSpMatGetFormat", "hipsparseSpMatGetFormat", "library");
     subst("cusparseSpMatGetIndexBase", "hipsparseSpMatGetIndexBase", "library");
     subst("cusparseSpMatGetSize", "hipsparseSpMatGetSize", "library");
+    subst("cusparseSpMatGetStridedBatch", "hipsparseSpMatGetStridedBatch", "library");
     subst("cusparseSpMatGetValues", "hipsparseSpMatGetValues", "library");
     subst("cusparseSpMatSetAttribute", "hipsparseSpMatSetAttribute", "library");
+    subst("cusparseSpMatSetStridedBatch", "hipsparseSpMatSetStridedBatch", "library");
     subst("cusparseSpMatSetValues", "hipsparseSpMatSetValues", "library");
     subst("cusparseSpSM_analysis", "hipsparseSpSM_analysis", "library");
     subst("cusparseSpSM_bufferSize", "hipsparseSpSM_bufferSize", "library");
@@ -3635,6 +3647,7 @@ sub simpleSubstitutions {
     subst("nvrtcResult", "hiprtcResult", "type");
     subst("pruneInfo_t", "pruneInfo_t", "type");
     subst("surfaceReference", "surfaceReference", "type");
+    subst("textureReference", "textureReference", "type");
     subst("CUBLAS_ATOMICS_ALLOWED", "HIPBLAS_ATOMICS_ALLOWED", "numeric_literal");
     subst("CUBLAS_ATOMICS_NOT_ALLOWED", "HIPBLAS_ATOMICS_NOT_ALLOWED", "numeric_literal");
     subst("CUBLAS_DIAG_NON_UNIT", "HIPBLAS_DIAG_NON_UNIT", "numeric_literal");
@@ -4594,6 +4607,14 @@ sub simpleSubstitutions {
     subst("cudaStreamCaptureStatusNone", "hipStreamCaptureStatusNone", "numeric_literal");
     subst("cudaStreamSetCaptureDependencies", "hipStreamSetCaptureDependencies", "numeric_literal");
     subst("cudaSuccess", "hipSuccess", "numeric_literal");
+    subst("CUB_MAX", "CUB_MAX", "define");
+    subst("CUB_MIN", "CUB_MIN", "define");
+    subst("CUB_NAMESPACE_BEGIN", "BEGIN_HIPCUB_NAMESPACE", "define");
+    subst("CUB_NAMESPACE_END", "END_HIPCUB_NAMESPACE", "define");
+    subst("CUB_PTX_ARCH", "HIPCUB_ARCH", "define");
+    subst("CUB_PTX_WARP_THREADS", "HIPCUB_WARP_THREADS", "define");
+    subst("CUB_RUNTIME_FUNCTION", "HIPCUB_RUNTIME_FUNCTION", "define");
+    subst("CUB_STDERR", "HIPCUB_STDERR", "define");
     subst("CUDA_ARRAY3D_CUBEMAP", "hipArrayCubemap", "define");
     subst("CUDA_ARRAY3D_LAYERED", "hipArrayLayered", "define");
     subst("CUDA_ARRAY3D_SURFACE_LDST", "hipArraySurfaceLoadStore", "define");
@@ -4619,8 +4640,10 @@ sub simpleSubstitutions {
     subst("CU_TRSF_NORMALIZED_COORDINATES", "HIP_TRSF_NORMALIZED_COORDINATES", "define");
     subst("CU_TRSF_READ_AS_INTEGER", "HIP_TRSF_READ_AS_INTEGER", "define");
     subst("CU_TRSF_SRGB", "HIP_TRSF_SRGB", "define");
+    subst("CubDebug", "HipcubDebug", "define");
     subst("REGISTER_CUDA_OPERATOR", "REGISTER_HIP_OPERATOR", "define");
     subst("REGISTER_CUDA_OPERATOR_CREATOR", "REGISTER_HIP_OPERATOR_CREATOR", "define");
+    subst("_CubLog", "_HipcubLog", "define");
     subst("__CUDACC__", "__HIPCC__", "define");
     subst("cudaArrayCubemap", "hipArrayCubemap", "define");
     subst("cudaArrayDefault", "hipArrayDefault", "define");
@@ -4720,35 +4743,50 @@ sub transformHostFunctions {
         "hipMemcpyToSymbolAsync"
     )
     {
-        $k += s/(?<!\/\/ CHECK: )($func)\s*\(\s*([^,]+)\s*,/$func\(HIP_SYMBOL\($2\),/g
+        $k += s/(?<!\/\/ CHECK: )($func)\s*\(([^,\)]+),/$func\(HIP_SYMBOL\($2\),/g;
     }
     foreach $func (
         "hipGetSymbolAddress",
         "hipGetSymbolSize",
+        "hipGetTextureReference",
+        "hipGraphMemcpyNodeSetParamsToSymbol",
         "hipMemcpyFromSymbol",
         "hipMemcpyFromSymbolAsync"
     )
     {
-        $k += s/(?<!\/\/ CHECK: )($func)\s*\(\s*([^,]+)\s*,\s*([^,\)]+)\s*(,\s*|\))\s*/$func\($2, HIP_SYMBOL\($3\)$4/g;
+        $k += s/(?<!\/\/ CHECK: )($func)\s*\(([^,\)]+),([\s]*)([^,\)]+)(,\s*|\))/$func\($2,$3HIP_SYMBOL\($4\)$5/g;
     }
     foreach $func (
-        "hipFuncSetCacheConfig"
+        "hipGraphExecMemcpyNodeSetParamsToSymbol",
+        "hipGraphMemcpyNodeSetParamsFromSymbol"
     )
     {
-        $k += s/(?<!\/\/ CHECK: )($func)\s*\(\s*([^,]+)\s*,/$func\(reinterpret_cast<const void*>\($2\),/g
-    }
-    foreach $func (
-        "hipFuncGetAttributes"
-    )
-    {
-        $k += s/(?<!\/\/ CHECK: )($func)\s*\(\s*([^,]+)\s*,\s*([^,\)]+)\s*(,\s*|\))\s*/$func\($2, reinterpret_cast<const void*>\($3\)$4/g;
+        $k += s/(?<!\/\/ CHECK: )($func)\s*\(([^,\)]+),([^,\)]+),([\s]*)([^,\)]+)(,\s*|\))/$func\($2,$3,$4HIP_SYMBOL\($5\)$6/g;
     }
     foreach $func (
         "hipModuleOccupancyMaxPotentialBlockSize",
         "hipModuleOccupancyMaxPotentialBlockSizeWithFlags"
     )
     {
-        $k += s/(?<!\/\/ CHECK: )($func)\s*\((\s*[^,\)]+\s*),(\s*[^,\)]+\s*),(\s*[^,\)]+\s*),(\s*[^,\)]+\s*)\s*(,\s*|\))\s*/$func\($2,$3,$4$6/g;
+        $k += s/(?<!\/\/ CHECK: )($func)\s*\(([^,\)]+),([^,\)]+),([^,\)]+),([\s]*)([^,\)]+)(,\s*|\))/$func\($2,$3,$4$7/g;
+    }
+    foreach $func (
+        "hipGraphExecMemcpyNodeSetParamsFromSymbol"
+    )
+    {
+        $k += s/(?<!\/\/ CHECK: )($func)\s*\(([^,\)]+),([^,\)]+),([^,\)]+),([\s]*)([^,\)]+)(,\s*|\))/$func\($2,$3,$4,$5HIP_SYMBOL\($6\)$7/g;
+    }
+    foreach $func (
+        "hipGraphAddMemcpyNodeToSymbol"
+    )
+    {
+        $k += s/(?<!\/\/ CHECK: )($func)\s*\(([^,\)]+),([^,\)]+),([^,\)]+),([^,\)]+),([\s]*)([^,\)]+)(,\s*|\))/$func\($2,$3,$4,$5,$6HIP_SYMBOL\($7\)$8/g;
+    }
+    foreach $func (
+        "hipGraphAddMemcpyNodeFromSymbol"
+    )
+    {
+        $k += s/(?<!\/\/ CHECK: )($func)\s*\(([^,\)]+),([^,\)]+),([^,\)]+),([^,\)]+),([^,\)]+),([\s]*)([^,\)]+)(,\s*|\))/$func\($2,$3,$4,$5,$6,$7HIP_SYMBOL\($8\)$9/g;
     }
     return $k;
 }
@@ -5265,7 +5303,7 @@ sub countSupportedDeviceFunctions {
         # match device function from the list, except those, which have a namespace prefix (aka somenamespace::umin(...));
         # function with only global namespace qualifier '::' (aka ::umin(...)) should be treated as a device function (and warned as well as without such qualifier);
         my $mt_namespace = m/(\w+)::($func)\s*\(\s*.*\s*\)/g;
-        my $mt = m/($func)\s*\(\s*.*\s*\)/g;
+        my $mt = m/\b($func)\b\s*\(\s*.*\s*\)/g;
         if ($mt && !$mt_namespace) {
             $k += $mt;
         }
@@ -5449,7 +5487,7 @@ sub warnUnsupportedDeviceFunctions {
         # match device function from the list, except those, which have a namespace prefix (aka somenamespace::umin(...));
         # function with only global namespace qualifier '::' (aka ::umin(...)) should be treated as a device function (and warned as well as without such qualifier);
         my $mt_namespace = m/(\w+)::($func)\s*\(\s*.*\s*\)/g;
-        my $mt = m/($func)\s*\(\s*.*\s*\)/g;
+        my $mt = m/\b($func)\b\s*\(\s*.*\s*\)/g;
         if ($mt && !$mt_namespace) {
             $k += $mt;
             print STDERR "  warning: $fileName:$line_num: unsupported device function \"$func\": $_\n";
@@ -5548,9 +5586,7 @@ sub warnUnsupportedFunctions {
         "cusparseZbsric02_bufferSizeExt",
         "cusparseXgebsr2csr",
         "cusparseSpVecDescr",
-        "cusparseSpMatSetStridedBatch",
         "cusparseSpMatSetNumBatches",
-        "cusparseSpMatGetStridedBatch",
         "cusparseSpMatGetNumBatches",
         "cusparseSpMatDescr",
         "cusparseSpMMOp_destroyPlan",
@@ -5611,8 +5647,6 @@ sub warnUnsupportedFunctions {
         "cusparseHpruneCsr2csr",
         "cusparseGetLevelInfo",
         "cusparseDnVecDescr",
-        "cusparseDnMatSetStridedBatch",
-        "cusparseDnMatGetStridedBatch",
         "cusparseDhybsv_solve",
         "cusparseDhybsv_analysis",
         "cusparseDhyb2dense",
@@ -5642,14 +5676,12 @@ sub warnUnsupportedFunctions {
         "cusparseCsrmvEx_bufferSize",
         "cusparseCsrmvEx",
         "cusparseCsrilu0Ex",
-        "cusparseCsrSetStridedBatch",
         "cusparseCsr2cscEx2_bufferSize",
         "cusparseCsr2cscEx2",
         "cusparseCsr2cscEx",
         "cusparseCsr2CscAlg_t",
         "cusparseCscGet",
         "cusparseCreateSolveAnalysisInfo",
-        "cusparseCooSetStridedBatch",
         "cusparseContext",
         "cusparseConstrainedGeMM_bufferSize",
         "cusparseConstrainedGeMM",
@@ -6650,6 +6682,7 @@ sub warnUnsupportedFunctions {
         "MINOR_VERSION",
         "MAX_CUFFT_ERROR",
         "MAJOR_VERSION",
+        "CubDebugExit",
         "CUuserObject_st",
         "CUuserObject_flags_enum",
         "CUuserObject_flags",
@@ -7652,7 +7685,25 @@ sub warnUnsupportedFunctions {
         "CUDA_ARRAY3D_DEPTH_TEXTURE",
         "CUDA_ARRAY3D_DEFERRED_MAPPING",
         "CUDA_ARRAY3D_COLOR_ATTACHMENT",
-        "CUDA_ARRAY3D_2DARRAY"
+        "CUDA_ARRAY3D_2DARRAY",
+        "CUB_USE_COOPERATIVE_GROUPS",
+        "CUB_SUBSCRIPTION_FACTOR",
+        "CUB_SMEM_BANKS",
+        "CUB_RUNTIME_ENABLED",
+        "CUB_PTX_SUBSCRIPTION_FACTOR",
+        "CUB_PTX_SMEM_BANKS",
+        "CUB_PTX_PREFER_CONFLICT_OVER_PADDING",
+        "CUB_PTX_LOG_WARP_THREADS",
+        "CUB_PTX_LOG_SMEM_BANKS",
+        "CUB_PREFER_CONFLICT_OVER_PADDING",
+        "CUB_MAX_DEVICES",
+        "CUB_LOG_WARP_THREADS",
+        "CUB_LOG_SMEM_BANKS",
+        "CUB_IS_HOST_CODE",
+        "CUB_IS_DEVICE_CODE",
+        "CUB_INCLUDE_HOST_CODE",
+        "CUB_INCLUDE_DEVICE_CODE",
+        "CUB_CPP_DIALECT"
     )
     {
         my $mt = m/($func)/g;
@@ -8064,7 +8115,9 @@ while (@ARGV) {
                 experimentalSubstitutions();
             }
             simpleSubstitutions();
-            transformKernelLaunch();
+            if (!$cuda_kernel_execution_syntax || $hip_kernel_execution_syntax) {
+                transformKernelLaunch();
+            }
             transformCubNamespace();
             my $hasDeviceCode = $countKeywords + $ft{'device_function'};
             unless ($quiet_warnings) {
@@ -8081,7 +8134,7 @@ while (@ARGV) {
                             redo if s/\b$w\b/ZAP/
                         }
                         my $tag;
-                        if ((/(\bcuda[A-Z]\w+)/) or (/<<<.*>>>/)) {
+                        if ((/(\bcuda[A-Z]\w+)/) or ((/<<<.*>>>/) and ($hip_kernel_execution_syntax))) {
                             # Flag any remaining code that look like cuda API calls: may want to add these to hipify
                             $tag = (defined $1) ? $1 : "Launch";
                         }

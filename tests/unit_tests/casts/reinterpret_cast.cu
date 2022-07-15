@@ -367,11 +367,11 @@ int main() {
   // CHECK: hipFuncCache_t cacheConfig;
   cudaFuncCache cacheConfig;
   void* func;
-  // CHECK: hipFuncSetCacheConfig(reinterpret_cast<const void*>(func), cacheConfig);
+  // CHECK: hipFuncSetCacheConfig(func, cacheConfig);
   cudaFuncSetCacheConfig(func, cacheConfig);
   // CHECK: hipFuncAttributes attr{};
   cudaFuncAttributes attr{};
-  // CHECK: auto r = hipFuncGetAttributes(&attr, reinterpret_cast<const void*>(&fn));
+  // CHECK: auto r = hipFuncGetAttributes(&attr, &fn);
   auto r = cudaFuncGetAttributes(&attr, &fn);
   // CHECK: if (r != hipSuccess || attr.maxThreadsPerBlock == 0) {
   if (r != cudaSuccess || attr.maxThreadsPerBlock == 0) {
