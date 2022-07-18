@@ -1525,7 +1525,7 @@
 |`cuGraphBatchMemOpNodeGetParams`|11.7| | | | | | | |
 |`cuGraphBatchMemOpNodeSetParams`|11.7| | | | | | | |
 |`cuGraphChildGraphNodeGetGraph`|10.0| | |`hipGraphChildGraphNodeGetGraph`|5.0.0| | | |
-|`cuGraphClone`|10.0| | | | | | | |
+|`cuGraphClone`|10.0| | |`hipGraphClone`|5.0.0| | | |
 |`cuGraphCreate`|10.0| | |`hipGraphCreate`|4.3.0| | | |
 |`cuGraphDebugDotPrint`|11.3| | | | | | | |
 |`cuGraphDestroy`|10.0| | |`hipGraphDestroy`|4.3.0| | | |

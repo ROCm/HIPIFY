@@ -1935,6 +1935,7 @@ sub simpleSubstitutions {
     subst("cuGraphAddHostNode", "hipGraphAddHostNode", "graph");
     subst("cuGraphAddKernelNode", "hipGraphAddKernelNode", "graph");
     subst("cuGraphChildGraphNodeGetGraph", "hipGraphChildGraphNodeGetGraph", "graph");
+    subst("cuGraphClone", "hipGraphClone", "graph");
     subst("cuGraphCreate", "hipGraphCreate", "graph");
     subst("cuGraphDestroy", "hipGraphDestroy", "graph");
     subst("cuGraphDestroyNode", "hipGraphDestroyNode", "graph");
@@ -1982,6 +1983,7 @@ sub simpleSubstitutions {
     subst("cudaGraphAddMemcpyNodeToSymbol", "hipGraphAddMemcpyNodeToSymbol", "graph");
     subst("cudaGraphAddMemsetNode", "hipGraphAddMemsetNode", "graph");
     subst("cudaGraphChildGraphNodeGetGraph", "hipGraphChildGraphNodeGetGraph", "graph");
+    subst("cudaGraphClone", "hipGraphClone", "graph");
     subst("cudaGraphCreate", "hipGraphCreate", "graph");
     subst("cudaGraphDestroy", "hipGraphDestroy", "graph");
     subst("cudaGraphDestroyNode", "hipGraphDestroyNode", "graph");
@@ -2075,6 +2077,7 @@ sub simpleSubstitutions {
     subst("cudaGetTextureAlignmentOffset", "hipGetTextureAlignmentOffset", "texture");
     subst("cudaGetTextureObjectResourceDesc", "hipGetTextureObjectResourceDesc", "texture");
     subst("cudaGetTextureObjectResourceViewDesc", "hipGetTextureObjectResourceViewDesc", "texture");
+    subst("cudaGetTextureObjectTextureDesc", "hipGetTextureObjectTextureDesc", "texture");
     subst("cudaGetTextureReference", "hipGetTextureReference", "texture");
     subst("cudaUnbindTexture", "hipUnbindTexture", "texture");
     subst("cudaCreateSurfaceObject", "hipCreateSurfaceObject", "surface");
@@ -6132,7 +6135,6 @@ sub warnUnsupportedFunctions {
         "cudaGraphDebugDotFlagsExtSemasSignalNodeParams",
         "cudaGraphDebugDotFlagsEventNodeParams",
         "cudaGraphDebugDotFlags",
-        "cudaGraphClone",
         "cudaGraphAddMemFreeNode",
         "cudaGraphAddMemAllocNode",
         "cudaGraphAddExternalSemaphoresWaitNode",
@@ -6573,7 +6575,6 @@ sub warnUnsupportedFunctions {
         "cuGraphExecExternalSemaphoresSignalNodeSetParams",
         "cuGraphExecBatchMemOpNodeSetParams",
         "cuGraphDebugDotPrint",
-        "cuGraphClone",
         "cuGraphBatchMemOpNodeSetParams",
         "cuGraphBatchMemOpNodeGetParams",
         "cuGraphAddMemsetNode",

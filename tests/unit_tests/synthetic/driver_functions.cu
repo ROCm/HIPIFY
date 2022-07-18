@@ -1031,6 +1031,11 @@ int main() {
   // HIP: hipError_t hipGraphChildGraphNodeGetGraph(hipGraphNode_t node, hipGraph_t* pGraph);
   // CHECK: result = hipGraphChildGraphNodeGetGraph(graphNode, &graph);
   result = cuGraphChildGraphNodeGetGraph(graphNode, &graph);
+
+  // CUDA: CUresult CUDAAPI cuGraphClone(CUgraph *phGraphClone, CUgraph originalGraph);
+  // HIP: hipError_t hipGraphClone(hipGraph_t* pGraphClone, hipGraph_t originalGraph);
+  // CHECK: result = hipGraphClone(&graph, graph2);
+  result = cuGraphClone(&graph, graph2);
 #endif
 
 #if CUDA_VERSION > 10000
@@ -1536,12 +1541,10 @@ int main() {
   // CHECK: result = hipTexObjectGetResourceViewDesc(&res_view_descr, texObject);
   result = cuTexObjectGetResourceViewDesc(&res_view_descr, texObject);
 
-#if CUDA_VERSION >= 9000
   // CUDA: CUresult CUDAAPI cuTexObjectGetTextureDesc(CUDA_TEXTURE_DESC *pTexDesc, CUtexObject texObject);
   // HIP: hipError_t hipTexObjectGetTextureDesc(HIP_TEXTURE_DESC* pTexDesc, hipTextureObject_t texObject);
   // CHECK: result = hipTexObjectGetTextureDesc(&tex_descr, texObject);
   result = cuTexObjectGetTextureDesc(&tex_descr, texObject);
-#endif
 
   // CUDA: CUresult CUDAAPI cuCtxEnablePeerAccess(CUcontext peerContext, unsigned int Flags);
   // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipCtxEnablePeerAccess(hipCtx_t peerCtx, unsigned int flags);
