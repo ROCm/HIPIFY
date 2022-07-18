@@ -392,26 +392,26 @@
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
-|`cuTexObjectGetTextureDesc`|9.0| | |`hipGetTextureObjectTextureDesc`|1.7.0| | | |
 |`cudaCreateTextureObject`| | | |`hipCreateTextureObject`|1.7.0| | | |
 |`cudaDestroyTextureObject`| | | |`hipDestroyTextureObject`|1.7.0| | | |
 |`cudaGetTextureObjectResourceDesc`| | | |`hipGetTextureObjectResourceDesc`|1.7.0| | | |
 |`cudaGetTextureObjectResourceViewDesc`| | | |`hipGetTextureObjectResourceViewDesc`|1.7.0| | | |
+|`cudaGetTextureObjectTextureDesc`| | | |`hipGetTextureObjectTextureDesc`|1.7.0| | | |
 
 ## **28. Surface Object Management**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
-|`cudaCreateSurfaceObject`|9.0| | |`hipCreateSurfaceObject`|1.9.0| | | |
-|`cudaDestroySurfaceObject`|9.0| | |`hipDestroySurfaceObject`|1.9.0| | | |
-|`cudaGetSurfaceObjectResourceDesc`|9.0| | | | | | | |
+|`cudaCreateSurfaceObject`| | | |`hipCreateSurfaceObject`|1.9.0| | | |
+|`cudaDestroySurfaceObject`| | | |`hipDestroySurfaceObject`|1.9.0| | | |
+|`cudaGetSurfaceObjectResourceDesc`| | | | | | | | |
 
 ## **29. Version Management**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
-|`cudaDriverGetVersion`|9.0| | |`hipDriverGetVersion`|1.6.0| | | |
-|`cudaRuntimeGetVersion`|9.0| | |`hipRuntimeGetVersion`|1.6.0| | | |
+|`cudaDriverGetVersion`| | | |`hipDriverGetVersion`|1.6.0| | | |
+|`cudaRuntimeGetVersion`| | | |`hipRuntimeGetVersion`|1.6.0| | | |
 
 ## **30. Graph Management**
 
@@ -437,7 +437,7 @@
 |`cudaGraphAddMemcpyNodeToSymbol`|11.1| | |`hipGraphAddMemcpyNodeToSymbol`|5.0.0| | | |
 |`cudaGraphAddMemsetNode`|10.0| | |`hipGraphAddMemsetNode`|4.3.0| | | |
 |`cudaGraphChildGraphNodeGetGraph`|10.0| | |`hipGraphChildGraphNodeGetGraph`|5.0.0| | | |
-|`cudaGraphClone`|10.0| | | | | | | |
+|`cudaGraphClone`|10.0| | |`hipGraphClone`|5.0.0| | | |
 |`cudaGraphCreate`|10.0| | |`hipGraphCreate`|4.3.0| | | |
 |`cudaGraphDebugDotPrint`|11.3| | | | | | | |
 |`cudaGraphDestroy`|10.0| | |`hipGraphDestroy`|4.3.0| | | |
