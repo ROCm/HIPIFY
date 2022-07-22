@@ -42,6 +42,7 @@ int main() {
   GLuint gl_uint = 0;
   GLenum gl_enum = 0;
   struct textureReference* texref = nullptr;
+  std::string name = "str";
 
 #if defined(_WIN32)
   unsigned long long ull = 0;
@@ -279,6 +280,54 @@ int main() {
   // HIP: hipError_t hipGraphDestroy(hipGraph_t graph);
   // CHECK: result = hipGraphDestroy(Graph_t);
   result = cudaGraphDestroy(Graph_t);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphDestroyNode(cudaGraphNode_t node);
+  // HIP: hipError_t hipGraphDestroyNode(hipGraphNode_t node);
+  // CHECK: result = hipGraphDestroyNode(graphNode);
+  result = cudaGraphDestroyNode(graphNode);
+
+  // CHECK: hipGraphExec_t GraphExec_t;
+  cudaGraphExec_t GraphExec_t;
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphExecDestroy(cudaGraphExec_t graphExec);
+  // HIP: hipError_t hipGraphExecDestroy(hipGraphExec_t graphExec);
+  // CHECK: result = hipGraphExecDestroy(GraphExec_t);
+  result = cudaGraphExecDestroy(GraphExec_t);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphGetEdges(cudaGraph_t graph, cudaGraphNode_t *from, cudaGraphNode_t *to, size_t *numEdges);
+  // HIP: hipError_t hipGraphGetEdges(hipGraph_t graph, hipGraphNode_t* from, hipGraphNode_t* to, size_t* numEdges);
+  // CHECK: result = hipGraphGetEdges(Graph_t, &graphNode, &graphNode_2, &bytes);
+  result = cudaGraphGetEdges(Graph_t, &graphNode, &graphNode_2, &bytes);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphGetNodes(cudaGraph_t graph, cudaGraphNode_t *nodes, size_t *numNodes);
+  // HIP: hipError_t hipGraphGetNodes(hipGraph_t graph, hipGraphNode_t* nodes, size_t* numNodes);
+  // CHECK: result = hipGraphGetNodes(Graph_t, &graphNode, &bytes);
+  result = cudaGraphGetNodes(Graph_t, &graphNode, &bytes);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphGetRootNodes(cudaGraph_t graph, cudaGraphNode_t *pRootNodes, size_t *pNumRootNodes);
+  // HIP: hipError_t hipGraphGetRootNodes(hipGraph_t graph, hipGraphNode_t* pRootNodes, size_t* pNumRootNodes);
+  // CHECK: result = hipGraphGetRootNodes(Graph_t, &graphNode, &bytes);
+  result = cudaGraphGetRootNodes(Graph_t, &graphNode, &bytes);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphHostNodeGetParams(cudaGraphNode_t node, struct cudaHostNodeParams *pNodeParams);
+  // HIP: hipError_t hipGraphHostNodeGetParams(hipGraphNode_t node, hipHostNodeParams* pNodeParams);
+  // CHECK: result = hipGraphHostNodeGetParams(graphNode, &HostNodeParams);
+  result = cudaGraphHostNodeGetParams(graphNode, &HostNodeParams);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphHostNodeSetParams(cudaGraphNode_t node, const struct cudaHostNodeParams *pNodeParams);
+  // HIP: hipError_t hipGraphHostNodeSetParams(hipGraphNode_t node, const hipHostNodeParams* pNodeParams);
+  // CHECK: result = hipGraphHostNodeSetParams(graphNode, &HostNodeParams);
+  result = cudaGraphHostNodeSetParams(graphNode, &HostNodeParams);
+
+  char* name_ = const_cast<char*>(name.c_str());
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphInstantiate(cudaGraphExec_t *pGraphExec, cudaGraph_t graph, cudaGraphNode_t *pErrorNode, char *pLogBuffer, size_t bufferSize);
+  // HIP: hipError_t hipGraphInstantiate(hipGraphExec_t* pGraphExec, hipGraph_t graph, hipGraphNode_t* pErrorNode, char* pLogBuffer, size_t bufferSize);
+  // CHECK: result = hipGraphInstantiate(&GraphExec_t, Graph_t, &graphNode, name_, bytes);
+  result = cudaGraphInstantiate(&GraphExec_t, Graph_t, &graphNode, name_, bytes);
+
+  // CHECK: hipGraphNodeType GraphNodeType;
+  cudaGraphNodeType GraphNodeType;
 #endif
 
 #if CUDA_VERSION >= 10010
@@ -301,6 +350,11 @@ int main() {
   result = cudaThreadExchangeStreamCaptureMode(&streamCaptureMode);
 #endif
 
+#if CUDA_VERSION >= 10020
+  // CHECK: hipGraphExecUpdateResult GraphExecUpdateResult;
+  cudaGraphExecUpdateResult GraphExecUpdateResult;
+#endif
+
 #if CUDA_VERSION >= 11000
   // CHECK: hipKernelNodeAttrID kernelNodeAttrID;
   cudaKernelNodeAttrID kernelNodeAttrID;
@@ -316,6 +370,91 @@ int main() {
   // HIP: hipError_t hipGraphKernelNodeGetAttribute(hipGraphNode_t hNode, hipKernelNodeAttrID attr, hipKernelNodeAttrValue* value);
   // CHECK: result = hipGraphKernelNodeGetAttribute(graphNode, kernelNodeAttrID, &kernelNodeAttrValue);
   result = cudaGraphKernelNodeGetAttribute(graphNode, kernelNodeAttrID, &kernelNodeAttrValue);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphExecKernelNodeSetParams(cudaGraphExec_t hGraphExec, cudaGraphNode_t node, const struct cudaKernelNodeParams *pNodeParams);
+  // HIP: hipError_t hipGraphExecKernelNodeSetParams(hipGraphExec_t hGraphExec, hipGraphNode_t node, const hipKernelNodeParams* pNodeParams);
+  // CHECK: result = hipGraphExecKernelNodeSetParams(GraphExec_t, graphNode, &KernelNodeParams);
+  result = cudaGraphExecKernelNodeSetParams(GraphExec_t, graphNode, &KernelNodeParams);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphExecMemcpyNodeSetParams(cudaGraphExec_t hGraphExec, cudaGraphNode_t node, const struct cudaMemcpy3DParms *pNodeParams);
+  // HIP: hipError_t hipGraphExecMemcpyNodeSetParams(hipGraphExec_t hGraphExec, hipGraphNode_t node, hipMemcpy3DParms* pNodeParams);
+  // CHECK: result = hipGraphExecMemcpyNodeSetParams(GraphExec_t, graphNode, &Memcpy3DParms);
+  result = cudaGraphExecMemcpyNodeSetParams(GraphExec_t, graphNode, &Memcpy3DParms);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphExecMemsetNodeSetParams(cudaGraphExec_t hGraphExec, cudaGraphNode_t node, const struct cudaMemsetParams *pNodeParams);
+  // HIP: hipError_t hipGraphExecMemsetNodeSetParams(hipGraphExec_t hGraphExec, hipGraphNode_t node, const hipMemsetParams* pNodeParams);
+  // CHECK: result = hipGraphExecMemsetNodeSetParams(GraphExec_t, graphNode, &MemsetParams);
+  result = cudaGraphExecMemsetNodeSetParams(GraphExec_t, graphNode, &MemsetParams);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphExecHostNodeSetParams(cudaGraphExec_t hGraphExec, cudaGraphNode_t node, const struct cudaHostNodeParams *pNodeParams);
+  // HIP: hipError_t hipError_t hipGraphExecHostNodeSetParams(hipGraphExec_t hGraphExec, hipGraphNode_t node, const hipHostNodeParams* pNodeParams);
+  // CHECK: result = hipGraphExecHostNodeSetParams(GraphExec_t, graphNode, &HostNodeParams);
+  result = cudaGraphExecHostNodeSetParams(GraphExec_t, graphNode, &HostNodeParams);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphExecUpdate(cudaGraphExec_t hGraphExec, cudaGraph_t hGraph, cudaGraphNode_t *hErrorNode_out, enum cudaGraphExecUpdateResult *updateResult_out);
+  // HIP: hipError_t hipGraphExecUpdate(hipGraphExec_t hGraphExec, hipGraph_t hGraph, hipGraphNode_t* hErrorNode_out, hipGraphExecUpdateResult* updateResult_out);
+  // CHECK: result = hipGraphExecUpdate(GraphExec_t, Graph_t, &graphNode, &GraphExecUpdateResult);
+  result = cudaGraphExecUpdate(GraphExec_t, Graph_t, &graphNode, &GraphExecUpdateResult);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphKernelNodeGetParams(cudaGraphNode_t node, struct cudaKernelNodeParams *pNodeParams);
+  // HIP: hipError_t hipGraphKernelNodeGetParams(hipGraphNode_t node, hipKernelNodeParams* pNodeParams);
+  // CHECK: result = hipGraphKernelNodeGetParams(graphNode, &KernelNodeParams);
+  result = cudaGraphKernelNodeGetParams(graphNode, &KernelNodeParams);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphKernelNodeSetParams(cudaGraphNode_t node, const struct cudaKernelNodeParams *pNodeParams);
+  // HIP: hipError_t hipGraphKernelNodeSetParams(hipGraphNode_t node, const hipKernelNodeParams* pNodeParams);
+  // CHECK: result = hipGraphKernelNodeSetParams(graphNode, &KernelNodeParams);
+  result = cudaGraphKernelNodeSetParams(graphNode, &KernelNodeParams);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphLaunch(cudaGraphExec_t graphExec, cudaStream_t stream);
+  // HIP: hipError_t hipGraphLaunch(hipGraphExec_t graphExec, hipStream_t stream);
+  // CHECK: result = hipGraphLaunch(GraphExec_t, stream);
+  result = cudaGraphLaunch(GraphExec_t, stream);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphMemcpyNodeGetParams(cudaGraphNode_t node, struct cudaMemcpy3DParms *pNodeParams);
+  // HIP: hipError_t hipGraphMemcpyNodeGetParams(hipGraphNode_t node, hipMemcpy3DParms* pNodeParams);
+  // CHECK: result = hipGraphMemcpyNodeGetParams(graphNode, &Memcpy3DParms);
+  result = cudaGraphMemcpyNodeGetParams(graphNode, &Memcpy3DParms);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphMemcpyNodeSetParams(cudaGraphNode_t node, const struct cudaMemcpy3DParms *pNodeParams);
+  // HIP: hipError_t hipGraphMemcpyNodeSetParams(hipGraphNode_t node, const hipMemcpy3DParms* pNodeParams);
+  // CHECK: result = hipGraphMemcpyNodeSetParams(graphNode, &Memcpy3DParms);
+  result = cudaGraphMemcpyNodeSetParams(graphNode, &Memcpy3DParms);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphMemsetNodeGetParams(cudaGraphNode_t node, struct cudaMemsetParams *pNodeParams);
+  // HIP: hipError_t hipGraphMemsetNodeGetParams(hipGraphNode_t node, hipMemsetParams* pNodeParams);
+  // CHECK: result = hipGraphMemsetNodeGetParams(graphNode, &MemsetParams);
+  result = cudaGraphMemsetNodeGetParams(graphNode, &MemsetParams);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphMemsetNodeSetParams(cudaGraphNode_t node, const struct cudaMemsetParams *pNodeParams);
+  // HIP: hipError_t hipGraphMemsetNodeSetParams(hipGraphNode_t node, const hipMemsetParams* pNodeParams);
+  // CHECK: result = hipGraphMemsetNodeSetParams(graphNode, &MemsetParams);
+  result = cudaGraphMemsetNodeSetParams(graphNode, &MemsetParams);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphNodeFindInClone(cudaGraphNode_t *pNode, cudaGraphNode_t originalNode, cudaGraph_t clonedGraph);
+  // HIP: hipError_t hipError_t hipGraphNodeFindInClone(hipGraphNode_t* pNode, hipGraphNode_t originalNode, hipGraph_t clonedGraph);
+  // CHECK: result = hipGraphNodeFindInClone(&graphNode, graphNode_2, Graph_t);
+  result = cudaGraphNodeFindInClone(&graphNode, graphNode_2, Graph_t);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphNodeGetDependencies(cudaGraphNode_t node, cudaGraphNode_t *pDependencies, size_t *pNumDependencies);
+  // HIP: hipError_t hipGraphNodeGetDependencies(hipGraphNode_t node, hipGraphNode_t* pDependencies, size_t* pNumDependencies);
+  // CHECK: result = hipGraphNodeGetDependencies(graphNode, &graphNode_2, &bytes);
+  result = cudaGraphNodeGetDependencies(graphNode, &graphNode_2, &bytes);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphNodeGetDependentNodes(cudaGraphNode_t node, cudaGraphNode_t *pDependentNodes, size_t *pNumDependentNodes);
+  // HIP: hipError_t hipGraphNodeGetDependentNodes(hipGraphNode_t node, hipGraphNode_t* pDependentNodes, size_t* pNumDependentNodes);
+  // CHECK: result = hipGraphNodeGetDependentNodes(graphNode, &graphNode_2, &bytes);
+  result = cudaGraphNodeGetDependentNodes(graphNode, &graphNode_2, &bytes);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphNodeGetType(cudaGraphNode_t node, enum cudaGraphNodeType *pType);
+  // HIP: hipError_t hipGraphNodeGetType(hipGraphNode_t node, hipGraphNodeType* pType);
+  // CHECK: result = hipGraphNodeGetType(graphNode, &GraphNodeType);
+  result = cudaGraphNodeGetType(graphNode, &GraphNodeType);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphRemoveDependencies(cudaGraph_t graph, const cudaGraphNode_t *from, const cudaGraphNode_t *to, size_t numDependencies);
+  // HIP: hipError_t hipGraphRemoveDependencies(hipGraph_t graph, const hipGraphNode_t* from, const hipGraphNode_t* to, size_t numDependencies);
+  // CHECK: result = hipGraphRemoveDependencies(Graph_t, &graphNode, &graphNode, bytes);
+  result = cudaGraphRemoveDependencies(Graph_t, &graphNode, &graphNode, bytes);
 #endif
 
 #if CUDA_VERSION >= 11020
