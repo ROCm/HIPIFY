@@ -3242,7 +3242,7 @@ sub simpleSubstitutions {
     subst("channel_descriptor.h", "hip\/channel_descriptor.h", "include");
     subst("cooperative_groups.h", "hip\/hip_cooperative_groups.h", "include");
     subst("cuda_fp16.h", "hip\/hip_fp16.h", "include");
-    subst("cuda_profiler_api.h", "hip\/hip_profile.h", "include");
+    subst("cuda_profiler_api.h", "hip\/hip_runtime_api.h", "include");
     subst("cuda_runtime_api.h", "hip\/hip_runtime_api.h", "include");
     subst("cuda_texture_types.h", "hip\/hip_texture_types.h", "include");
     subst("cufftXt.h", "hipfftXt.h", "include");

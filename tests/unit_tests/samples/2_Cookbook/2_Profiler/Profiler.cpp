@@ -30,7 +30,7 @@ THE SOFTWARE.
 
 // CHECK: #include <hip/hip_runtime.h>
 #include <cuda.h>
-// CHECK: #include <hip/hip_profile.h>
+// CHECK: #include <hip/hip_runtime_api.h>
 #include <cuda_profiler_api.h>
 
 #define WIDTH 1024

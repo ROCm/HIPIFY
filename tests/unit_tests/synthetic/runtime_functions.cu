@@ -8,7 +8,10 @@
   #include "windows.h"
   #include <GL/glew.h>
 #endif
+
 #include "cuda_gl_interop.h"
+// CHECK: #include "hip/hip_runtime_api.h"
+#include "cuda_profiler_api.h"
 
 int main() {
   printf("12. CUDA Runtime API Functions synthetic test\n");
@@ -35,6 +38,8 @@ int main() {
   void* deviceptr_2 = nullptr;
   void* image = nullptr;
   void* func = nullptr;
+  void* src = nullptr;
+  void* dst = nullptr;
   char* ch = nullptr;
   const char* const_ch = nullptr;
   dim3 gridDim;
@@ -58,8 +63,16 @@ int main() {
   cudaError_t Error_t;
   cudaStream_t stream;
 
+  // CHECK: hipEvent_t Event_t;
+  // CHECK-Next: hipEvent_t Event_2;
+  cudaEvent_t Event_t;
+  cudaEvent_t Event_2;
+
   // CHECK: hipMemcpy3DParms Memcpy3DParms;
   cudaMemcpy3DParms Memcpy3DParms;
+
+  // CHECK: hipMemcpyKind MemcpyKind;
+  cudaMemcpyKind MemcpyKind;
 
 #if CUDA_VERSION >= 8000
   // CHECK: hipDeviceP2PAttr DeviceP2PAttr;
@@ -457,6 +470,98 @@ int main() {
   result = cudaGraphRemoveDependencies(Graph_t, &graphNode, &graphNode, bytes);
 #endif
 
+#if CUDA_VERSION >= 11010
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphAddMemcpyNodeToSymbol(cudaGraphNode_t* pGraphNode, cudaGraph_t graph, const cudaGraphNode_t* pDependencies, size_t numDependencies, const void* symbol, const void* src, size_t count, size_t offset, enum cudaMemcpyKind kind);
+  // HIP: hipError_t hipGraphAddMemcpyNodeToSymbol(hipGraphNode_t* pGraphNode, hipGraph_t graph, const hipGraphNode_t* pDependencies, size_t numDependencies, const void* symbol, const void* src, size_t count, size_t offset, hipMemcpyKind kind);
+  // CHECK: result = hipGraphAddMemcpyNodeToSymbol(&graphNode, Graph_t, &graphNode_2, width, HIP_SYMBOL(image), src, bytes, wOffset, MemcpyKind);
+  result = cudaGraphAddMemcpyNodeToSymbol(&graphNode, Graph_t, &graphNode_2, width, image, src, bytes, wOffset, MemcpyKind);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphAddMemcpyNodeFromSymbol(cudaGraphNode_t* pGraphNode, cudaGraph_t graph, const cudaGraphNode_t* pDependencies, size_t numDependencies, void* dst, const void* symbol, size_t count, size_t offset, enum cudaMemcpyKind kind);
+  // HIP: hipError_t hipGraphAddMemcpyNodeFromSymbol(hipGraphNode_t* pGraphNode, hipGraph_t graph, const hipGraphNode_t* pDependencies, size_t numDependencies, void* dst, const void* symbol, size_t count, size_t offset, hipMemcpyKind kind);
+  // CHECK: result = hipGraphAddMemcpyNodeFromSymbol(&graphNode, Graph_t, &graphNode_2, width, dst, HIP_SYMBOL(image), bytes, wOffset, MemcpyKind);
+  result = cudaGraphAddMemcpyNodeFromSymbol(&graphNode, Graph_t, &graphNode_2, width, dst, image, bytes, wOffset, MemcpyKind);
+
+  // CUDA:  extern __host__ cudaError_t CUDARTAPI cudaGraphAddMemcpyNode1D(cudaGraphNode_t* pGraphNode, cudaGraph_t graph, const cudaGraphNode_t* pDependencies, size_t numDependencies, void* dst, const void* src, size_t count, enum cudaMemcpyKind kind);
+  // HIP: hipError_t hipGraphAddMemcpyNode1D(hipGraphNode_t* pGraphNode, hipGraph_t graph, const hipGraphNode_t* pDependencies, size_t numDependencies, void* dst, const void* src, size_t count, hipMemcpyKind kind);
+  // CHECK: result = hipGraphAddMemcpyNode1D(&graphNode, Graph_t, &graphNode_2, width, dst, src, bytes, MemcpyKind);
+  result = cudaGraphAddMemcpyNode1D(&graphNode, Graph_t, &graphNode_2, width, dst, src, bytes, MemcpyKind);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphMemcpyNodeSetParamsToSymbol(cudaGraphNode_t node, const void* symbol, const void* src, size_t count, size_t offset, enum cudaMemcpyKind kind);
+  // HIP: hipError_t hipGraphMemcpyNodeSetParamsToSymbol(hipGraphNode_t node, const void* symbol, const void* src, size_t count, size_t offset, hipMemcpyKind kind);
+  // CHECK: result = hipGraphMemcpyNodeSetParamsToSymbol(graphNode, HIP_SYMBOL(image), src, bytes, wOffset, MemcpyKind);
+  result = cudaGraphMemcpyNodeSetParamsToSymbol(graphNode, image, src, bytes, wOffset, MemcpyKind);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphMemcpyNodeSetParamsFromSymbol(cudaGraphNode_t node, void* dst, const void* symbol, size_t count, size_t offset, enum cudaMemcpyKind kind);
+  // HIP: hipError_t hipGraphMemcpyNodeSetParamsFromSymbol(hipGraphNode_t node, void* dst, const void* symbol, size_t count, size_t offset, hipMemcpyKind kind);
+  // CHECK: result = hipGraphMemcpyNodeSetParamsFromSymbol(graphNode, dst, HIP_SYMBOL(image), bytes, wOffset, MemcpyKind);
+  result = cudaGraphMemcpyNodeSetParamsFromSymbol(graphNode, dst, image, bytes, wOffset, MemcpyKind);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphMemcpyNodeSetParams1D(cudaGraphNode_t node, void* dst, const void* src, size_t count, enum cudaMemcpyKind kind);
+  // HIP: hipError_t hipGraphMemcpyNodeSetParams1D(hipGraphNode_t node, void* dst, const void* src, size_t count, hipMemcpyKind kind);
+  // CHECK: result = hipGraphMemcpyNodeSetParams1D(graphNode, dst, src, bytes, MemcpyKind);
+  result = cudaGraphMemcpyNodeSetParams1D(graphNode, dst, src, bytes, MemcpyKind);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphAddEventRecordNode(cudaGraphNode_t *pGraphNode, cudaGraph_t graph, const cudaGraphNode_t *pDependencies, size_t numDependencies, cudaEvent_t event);
+  // HIP: hipError_t hipGraphAddEventRecordNode(hipGraphNode_t* pGraphNode, hipGraph_t graph, const hipGraphNode_t* pDependencies, size_t numDependencies, hipEvent_t event);
+  // CHECK: result = hipGraphAddEventRecordNode(&graphNode, Graph_t, &graphNode_2, bytes, Event_t);
+  result = cudaGraphAddEventRecordNode(&graphNode, Graph_t, &graphNode_2, bytes, Event_t);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphEventRecordNodeGetEvent(cudaGraphNode_t node, cudaEvent_t *event_out);
+  // HIP: hipError_t hipGraphEventRecordNodeGetEvent(hipGraphNode_t node, hipEvent_t* event_out);
+  // CHECK: result = hipGraphEventRecordNodeGetEvent(graphNode, &Event_t);
+  result = cudaGraphEventRecordNodeGetEvent(graphNode, &Event_t);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphEventRecordNodeSetEvent(cudaGraphNode_t node, cudaEvent_t event);
+  // HIP: hipError_t hipGraphEventRecordNodeSetEvent(hipGraphNode_t node, hipEvent_t event);
+  // CHECK: result = hipGraphEventRecordNodeSetEvent(graphNode, Event_t);
+  result = cudaGraphEventRecordNodeSetEvent(graphNode, Event_t);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphAddEventWaitNode(cudaGraphNode_t *pGraphNode, cudaGraph_t graph, const cudaGraphNode_t *pDependencies, size_t numDependencies, cudaEvent_t event);
+  // HIP: hipError_t hipGraphAddEventWaitNode(hipGraphNode_t* pGraphNode, hipGraph_t graph, const hipGraphNode_t* pDependencies, size_t numDependencies, hipEvent_t event);
+  // CHECK: result = hipGraphAddEventWaitNode(&graphNode, Graph_t, &graphNode_2, bytes, Event_t);
+  result = cudaGraphAddEventWaitNode(&graphNode, Graph_t, &graphNode_2, bytes, Event_t);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphEventWaitNodeGetEvent(cudaGraphNode_t node, cudaEvent_t *event_out);
+  // HIP: hipError_t hipGraphEventWaitNodeGetEvent(hipGraphNode_t node, hipEvent_t* event_out);
+  // CHECK: result = hipGraphEventWaitNodeGetEvent(graphNode, &Event_t);
+  result = cudaGraphEventWaitNodeGetEvent(graphNode, &Event_t);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphEventWaitNodeSetEvent(cudaGraphNode_t node, cudaEvent_t event);
+  // HIP: hipError_t hipGraphEventWaitNodeSetEvent(hipGraphNode_t node, hipEvent_t event);
+  // CHECK: result = hipGraphEventWaitNodeSetEvent(graphNode, Event_t);
+  result = cudaGraphEventWaitNodeSetEvent(graphNode, Event_t);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphExecMemcpyNodeSetParamsToSymbol(cudaGraphExec_t hGraphExec, cudaGraphNode_t node, const void* symbol, const void* src, size_t count, size_t offset, enum cudaMemcpyKind kind);
+  // HIP: hipError_t hipGraphExecMemcpyNodeSetParamsToSymbol(hipGraphExec_t hGraphExec, hipGraphNode_t node, const void* symbol, const void* src, size_t count, size_t offset, hipMemcpyKind kind);
+  // CHECK: result = hipGraphExecMemcpyNodeSetParamsToSymbol(GraphExec_t, graphNode, HIP_SYMBOL(image), src, bytes, wOffset, MemcpyKind);
+  result = cudaGraphExecMemcpyNodeSetParamsToSymbol(GraphExec_t, graphNode, image, src, bytes, wOffset, MemcpyKind);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphExecMemcpyNodeSetParamsFromSymbol(cudaGraphExec_t hGraphExec, cudaGraphNode_t node, void* dst, const void* symbol, size_t count, size_t offset, enum cudaMemcpyKind kind);
+  // HIP: hipError_t hipGraphExecMemcpyNodeSetParamsFromSymbol(hipGraphExec_t hGraphExec, hipGraphNode_t node, void* dst, const void* symbol, size_t count, size_t offset, hipMemcpyKind kind);
+  // CHECK: result = hipGraphExecMemcpyNodeSetParamsFromSymbol(GraphExec_t, graphNode, dst, HIP_SYMBOL(image), bytes, wOffset, MemcpyKind);
+  result = cudaGraphExecMemcpyNodeSetParamsFromSymbol(GraphExec_t, graphNode, dst, image, bytes, wOffset, MemcpyKind);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphExecMemcpyNodeSetParams1D(cudaGraphExec_t hGraphExec, cudaGraphNode_t node, void* dst, const void* src, size_t count, enum cudaMemcpyKind kind);
+  // HIP: hipError_t hipGraphExecMemcpyNodeSetParams1D(hipGraphExec_t hGraphExec, hipGraphNode_t node, void* dst, const void* src, size_t count, hipMemcpyKind kind);
+  // CHECK: result = hipGraphExecMemcpyNodeSetParams1D(GraphExec_t, graphNode, dst, src, bytes, MemcpyKind);
+  result = cudaGraphExecMemcpyNodeSetParams1D(GraphExec_t, graphNode, dst, src, bytes, MemcpyKind);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphExecChildGraphNodeSetParams(cudaGraphExec_t hGraphExec, cudaGraphNode_t node, cudaGraph_t childGraph);
+  // HIP: hipError_t hipGraphExecChildGraphNodeSetParams(hipGraphExec_t hGraphExec, hipGraphNode_t node, hipGraph_t childGraph);
+  // CHECK: result = hipGraphExecChildGraphNodeSetParams(GraphExec_t, graphNode, Graph_t);
+  result = cudaGraphExecChildGraphNodeSetParams(GraphExec_t, graphNode, Graph_t);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphExecEventRecordNodeSetEvent(cudaGraphExec_t hGraphExec, cudaGraphNode_t hNode, cudaEvent_t event);
+  // HIP: hipError_t hipGraphExecEventRecordNodeSetEvent(hipGraphExec_t hGraphExec, hipGraphNode_t hNode, hipEvent_t event);
+  // CHECK: result = hipGraphExecEventRecordNodeSetEvent(GraphExec_t, graphNode, Event_t);
+  result = cudaGraphExecEventRecordNodeSetEvent(GraphExec_t, graphNode, Event_t);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphExecEventWaitNodeSetEvent(cudaGraphExec_t hGraphExec, cudaGraphNode_t hNode, cudaEvent_t event);
+  // HIP: hipError_t hipGraphExecEventWaitNodeSetEvent(hipGraphExec_t hGraphExec, hipGraphNode_t hNode, hipEvent_t event);
+  // CHECK: result = hipGraphExecEventWaitNodeSetEvent(GraphExec_t, graphNode, Event_t);
+  result = cudaGraphExecEventWaitNodeSetEvent(GraphExec_t, graphNode, Event_t);
+#endif
+
 #if CUDA_VERSION >= 11020
   // CHECK: hipMemPoolAttr memPoolAttr;
   cudaMemPoolAttr memPoolAttr;
@@ -562,6 +667,13 @@ int main() {
   result = cudaMemPoolImportPointer(&deviceptr, memPool_t, &memPoolPtrExportData);
 #endif
 
+#if CUDA_VERSION >= 11040
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphInstantiateWithFlags(cudaGraphExec_t *pGraphExec, cudaGraph_t graph, unsigned long long flags);
+  // HIP: hipError_t hipGraphInstantiateWithFlags(hipGraphExec_t* pGraphExec, hipGraph_t graph, unsigned long long flags);
+  // CHECK: result = hipGraphInstantiateWithFlags(&GraphExec_t, Graph_t, ull);
+  result = cudaGraphInstantiateWithFlags(&GraphExec_t, Graph_t, ull);
+#endif
+
   // CHECK: hipDeviceProp_t DeviceProp;
   cudaDeviceProp DeviceProp;
 
@@ -664,11 +776,6 @@ int main() {
 
   // CHECK: hipIpcEventHandle_t IpcEventHandle_t;
   cudaIpcEventHandle_t IpcEventHandle_t;
-
-  // CHECK: hipEvent_t Event_t;
-  // CHECK-Next: hipEvent_t Event_2;
-  cudaEvent_t Event_t;
-  cudaEvent_t Event_2;
 
   // CUDA: extern __host__ cudaError_t CUDARTAPI cudaIpcGetEventHandle(cudaIpcEventHandle_t *handle, cudaEvent_t event);
   // HIP: hipError_t hipIpcGetEventHandle(hipIpcEventHandle_t* handle, hipEvent_t event);
@@ -1002,9 +1109,6 @@ int main() {
   // CHECK: result = hipMallocPitch(&deviceptr, &bytes, width, height);
   result = cudaMallocPitch(&deviceptr, &bytes, width, height);
 
-  // CHECK: hipMemcpyKind MemcpyKind;
-  cudaMemcpyKind MemcpyKind;
-
   // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMemcpy(void *dst, const void *src, size_t count, enum cudaMemcpyKind kind);
   // HIP: hipError_t hipMemcpy(void* dst, const void* src, size_t sizeBytes, hipMemcpyKind kind);
   // CHECK: result = hipMemcpy(deviceptr, deviceptr_2, bytes, MemcpyKind);
@@ -1321,6 +1425,33 @@ int main() {
   // HIP:  hipError_t hipRuntimeGetVersion(int* runtimeVersion);
   // CHECK: result = hipRuntimeGetVersion(&intVal);
   result = cudaRuntimeGetVersion(&intVal);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaProfilerStart(void);
+  // HIP:  hipError_t hipProfilerStart();
+  // CHECK: result = hipProfilerStart();
+  result = cudaProfilerStart();
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaProfilerStop(void);
+  // HIP:  hipError_t hipProfilerStop();
+  // CHECK: result = hipProfilerStop();
+  result = cudaProfilerStop();
+
+#if CUDA_VERSION <= 10000
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaConfigureCall(dim3 gridDim, dim3 blockDim, size_t sharedMem __dv(0), cudaStream_t stream __dv(0));
+  // HIP:  hipError_t hipConfigureCall(dim3 gridDim, dim3 blockDim, size_t sharedMem __dparm(0), hipStream_t stream __dparm(0));
+  // CHECK: result = hipConfigureCall(gridDim, blockDim, bytes, stream);
+  result = cudaConfigureCall(gridDim, blockDim, bytes, stream);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaLaunch(const void *func);
+  // HIP:  hipError_t hipLaunchByPtr(const void* func);
+  // CHECK: result = hipLaunchByPtr(deviceptr);
+  result = cudaLaunch(deviceptr);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaSetupArgument(const void *arg, size_t size, size_t offset);
+  // HIP:  hipError_t hipSetupArgument(const void* arg, size_t size, size_t offset);
+  // CHECK: result = hipSetupArgument(deviceptr, bytes, wOffset);
+  result = cudaSetupArgument(deviceptr, bytes, wOffset);
+#endif
 
   return 0;
 }
