@@ -833,7 +833,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuGraphInstantiateWithFlags
   {"cudaGraphInstantiateWithFlags",                           {"hipGraphInstantiateWithFlags",                           "", CONV_GRAPH, API_RUNTIME, 30}},
   // cuGraphNodeSetEnabled
-  {"cudaGraphNodeSetEnabled",                                {"hipGraphNodeSetEnabled",                                  "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
+  {"cudaGraphNodeSetEnabled",                                 {"hipGraphNodeSetEnabled",                                 "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
 
   // 31. Driver Entry Point Access
   // cuGetProcAddress
