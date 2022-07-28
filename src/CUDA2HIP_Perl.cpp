@@ -175,19 +175,21 @@ namespace perl {
     *streamPtr.get() << "    hipify-perl is a tool to translate CUDA source code into portable HIP C++" << endl_2;
     *streamPtr.get() << "    USAGE: hipify-perl [OPTIONS] INPUT_FILE" << endl_2;
     *streamPtr.get() << "    OPTIONS:" << endl_2;
-    *streamPtr.get() << "      -examine          - Combines -no-output and -print-stats options" << endl;
-    *streamPtr.get() << "      -exclude-dirs=s   - Exclude directories" << endl;
-    *streamPtr.get() << "      -exclude-files=s  - Exclude files" << endl;
-    *streamPtr.get() << "      -experimental     - HIPIFY experimentally supported APIs" << endl;
-    *streamPtr.get() << "      -help             - Display available options" << endl;
-    *streamPtr.get() << "      -inplace          - Backup the input file in .prehip file, modify the input file inplace" << endl;
-    *streamPtr.get() << "      -no-output        - Don't write any translated output to stdout" << endl;
-    *streamPtr.get() << "      -o=s              - Output filename" << endl;
-    *streamPtr.get() << "      -print-stats      - Print translation statistics" << endl;
-    *streamPtr.get() << "      -quiet-warnings   - Don't print warnings on unknown CUDA identifiers" << endl;
-    *streamPtr.get() << "      -roc              - Translate to roc instead of hip where it is possible" << endl;
-    *streamPtr.get() << "      -version          - The supported HIP version" << endl;
-    *streamPtr.get() << "      -whitelist=s      - Whitelist of identifiers" << endl;
+    *streamPtr.get() << "      -cuda-kernel-execution-syntax - Keep CUDA kernel launch syntax (default)" << endl;
+    *streamPtr.get() << "      -examine                      - Combines -no-output and -print-stats options" << endl;
+    *streamPtr.get() << "      -exclude-dirs=s               - Exclude directories" << endl;
+    *streamPtr.get() << "      -exclude-files=s              - Exclude files" << endl;
+    *streamPtr.get() << "      -experimental                 - HIPIFY experimentally supported APIs" << endl;
+    *streamPtr.get() << "      -help                         - Display available options" << endl;
+    *streamPtr.get() << "      -hip-kernel-execution-syntax  - Transform CUDA kernel launch syntax to a regular HIP function call (overrides \"--cuda-kernel-execution-syntax\")" << endl;
+    *streamPtr.get() << "      -inplace                      - Backup the input file in .prehip file, modify the input file inplace" << endl;
+    *streamPtr.get() << "      -no-output                    - Don't write any translated output to stdout" << endl;
+    *streamPtr.get() << "      -o=s                          - Output filename" << endl;
+    *streamPtr.get() << "      -print-stats                  - Print translation statistics" << endl;
+    *streamPtr.get() << "      -quiet-warnings               - Don't print warnings on unknown CUDA identifiers" << endl;
+    *streamPtr.get() << "      -roc                          - Translate to roc instead of hip where it is possible" << endl;
+    *streamPtr.get() << "      -version                      - The supported HIP version" << endl;
+    *streamPtr.get() << "      -whitelist=s                  - Whitelist of identifiers" << endl;
     *streamPtr.get() << "USAGE" << endl;
     *streamPtr.get() << "#" << endl;
     *streamPtr.get() << "use warnings;" << endl;
@@ -208,20 +210,23 @@ namespace perl {
     *streamPtr.get() << my << "%convertedTags = ();" << endl;
     *streamPtr.get() << my << "%convertedTagsTotal = ();" << endl_2;
     *streamPtr.get() << "GetOptions(" << endl;
-    *streamPtr.get() << tab << "  \"examine\" => \\$examine                  # Combines -no-output and -print-stats options" << endl;
-    *streamPtr.get() << tab << ", \"exclude-dirs=s\" => \\$exclude_dirs      # Exclude directories" << endl;
-    *streamPtr.get() << tab << ", \"exclude-files=s\" => \\$exclude_files    # Exclude files" << endl;
-    *streamPtr.get() << tab << ", \"experimental\" => \\$experimental        # HIPIFY experimentally supported APIs" << endl;
-    *streamPtr.get() << tab << ", \"help\" => \\$help                        # Display available options" << endl;
-    *streamPtr.get() << tab << ", \"inplace\" => \\$inplace                  # Backup the input file in .prehip file, modify the input file inplace" << endl;
-    *streamPtr.get() << tab << ", \"no-output\" => \\$no_output              # Don't write any translated output to stdout" << endl;
-    *streamPtr.get() << tab << ", \"o=s\" => \\$hipFileName                  # Output filename" << endl;
-    *streamPtr.get() << tab << ", \"print-stats\" => \\$print_stats          # Print translation statistics" << endl;
-    *streamPtr.get() << tab << ", \"quiet-warnings\" => \\$quiet_warnings    # Don't print warnings on unknown CUDA identifiers" << endl;
-    *streamPtr.get() << tab << ", \"roc\" => \\$roc                          # Translate to roc instead of hip where it is possible" << endl;
-    *streamPtr.get() << tab << ", \"version\" => \\$version                  # The supported HIP version" << endl;
-    *streamPtr.get() << tab << ", \"whitelist=s\" => \\$whitelist            # Whitelist of identifiers" << endl;
+    *streamPtr.get() << tab << "  \"cuda-kernel-execution-syntax\" => \\$cuda_kernel_execution_syntax  # Keep CUDA kernel launch syntax (default)" << endl;
+    *streamPtr.get() << tab << ", \"examine\" => \\$examine                                            # Combines -no-output and -print-stats options" << endl;
+    *streamPtr.get() << tab << ", \"exclude-dirs=s\" => \\$exclude_dirs                                # Exclude directories" << endl;
+    *streamPtr.get() << tab << ", \"exclude-files=s\" => \\$exclude_files                              # Exclude files" << endl;
+    *streamPtr.get() << tab << ", \"experimental\" => \\$experimental                                  # HIPIFY experimentally supported APIs" << endl;
+    *streamPtr.get() << tab << ", \"help\" => \\$help                                                  # Display available options" << endl;
+    *streamPtr.get() << tab << ", \"hip-kernel-execution-syntax\" => \\$hip_kernel_execution_syntax    # Transform CUDA kernel launch syntax to a regular HIP function call (overrides \"--cuda-kernel-execution-syntax\")" << endl;
+    *streamPtr.get() << tab << ", \"inplace\" => \\$inplace                                            # Backup the input file in .prehip file, modify the input file inplace" << endl;
+    *streamPtr.get() << tab << ", \"no-output\" => \\$no_output                                        # Don't write any translated output to stdout" << endl;
+    *streamPtr.get() << tab << ", \"o=s\" => \\$hipFileName                                            # Output filename" << endl;
+    *streamPtr.get() << tab << ", \"print-stats\" => \\$print_stats                                    # Print translation statistics" << endl;
+    *streamPtr.get() << tab << ", \"quiet-warnings\" => \\$quiet_warnings                              # Don't print warnings on unknown CUDA identifiers" << endl;
+    *streamPtr.get() << tab << ", \"roc\" => \\$roc                                                    # Translate to roc instead of hip where it is possible" << endl;
+    *streamPtr.get() << tab << ", \"version\" => \\$version                                            # The supported HIP version" << endl;
+    *streamPtr.get() << tab << ", \"whitelist=s\" => \\$whitelist                                      # Whitelist of identifiers" << endl;
     *streamPtr.get() << ");" << endl_2;
+    *streamPtr.get() << "$cuda_kernel_execution_syntax = 1;" << endl_2;
     stringstream deprecated, removed, experimental, common;
     deprecated << my << "%deprecated_funcs = (" << endl;
     removed << my << "%removed_funcs = (" << endl;
@@ -466,11 +471,18 @@ namespace perl {
   void generateHostFunctions(unique_ptr<ostream> &streamPtr) {
     *streamPtr.get() << endl << sub << "transformHostFunctions" << " {" << endl_tab << my_k << endl;
     const string s = "$k += s/(?<!\\/\\/ CHECK: )($func)\\s*";
-    const string s0 = s + "\\(\\s*([^,]+)\\s*,/$func\\(";
-    const string s1 = s + "\\(\\s*([^,]+)\\s*,\\s*([^,\\)]+)\\s*(,\\s*|\\))\\s*/$func\\($2, ";
-    const string s3 = s + "\\((\\s*[^,\\)]+\\s*),(\\s*[^,\\)]+\\s*),(\\s*[^,\\)]+\\s*),(\\s*[^,\\)]+\\s*)\\s*(,\\s*|\\))\\s*/$func\\($2,$3,$4$6/g;";
+    const string s0 = s + "\\(([^,\\)]+),/$func\\(";
+    const string s1 = s + "\\(([^,\\)]+),([\\s]*)([^,\\)]+)(,\\s*|\\))/$func\\($2,$3";
+    const string s2 = s + "\\(([^,\\)]+),([^,\\)]+),([\\s]*)([^,\\)]+)(,\\s*|\\))/$func\\($2,$3,$4";
+    const string s3 = s + "\\(([^,\\)]+),([^,\\)]+),([^,\\)]+),([\\s]*)([^,\\)]+)(,\\s*|\\))/$func\\($2,$3,$4";
+    const string s4 = s + "\\(([^,\\)]+),([^,\\)]+),([^,\\)]+),([^,\\)]+),([\\s]*)([^,\\)]+)(,\\s*|\\))/$func\\($2,$3,$4,$5,$6";
+    const string s5 = s + "\\(([^,\\)]+),([^,\\)]+),([^,\\)]+),([^,\\)]+),([^,\\)]+),([\\s]*)([^,\\)]+)(,\\s*|\\))/$func\\($2,$3,$4,$5,$6,$7";
     set<string> DeviceSymbolFunctions0;
     set<string> DeviceSymbolFunctions1;
+    set<string> DeviceSymbolFunctions2;
+    set<string> DeviceSymbolFunctions3;
+    set<string> DeviceSymbolFunctions4;
+    set<string> DeviceSymbolFunctions5;
     set<string> ReinterpretFunctions0;
     set<string> ReinterpretFunctions1;
     set<string> RemoveArgFunctions3;
@@ -492,10 +504,29 @@ namespace perl {
               default: break;
             }
             break;
+          case 2:
+            switch (c.second.castType) {
+              case e_HIP_SYMBOL: DeviceSymbolFunctions2.insert(f.first); break;
+              default: break;
+            }
+            break;
           case 3:
             switch (c.second.castType) {
+              case e_HIP_SYMBOL: DeviceSymbolFunctions3.insert(f.first); break;
               case e_remove_argument: RemoveArgFunctions3.insert(f.first); break;
               default: break;
+            }
+            break;
+          case 4:
+            switch (c.second.castType) {
+            case e_HIP_SYMBOL: DeviceSymbolFunctions4.insert(f.first); break;
+            default: break;
+            }
+            break;
+          case 5:
+            switch (c.second.castType) {
+            case e_HIP_SYMBOL: DeviceSymbolFunctions5.insert(f.first); break;
+            default: break;
             }
             break;
           default: break;
@@ -503,15 +534,20 @@ namespace perl {
       }
     }
     set<string>& funcSet = DeviceSymbolFunctions0;
-    for (int i = 0; i < 5; ++i) {
-      *streamPtr.get() << tab + foreach_func;
+    for (int i = 0; i < 9; ++i) {
       switch (i) {
+        default: funcSet = DeviceSymbolFunctions0; break;
         case 1:  funcSet = DeviceSymbolFunctions1; break;
         case 2:  funcSet = ReinterpretFunctions0; break;
         case 3:  funcSet = ReinterpretFunctions1; break;
-        case 4:  funcSet = RemoveArgFunctions3; break;
-        default: funcSet = DeviceSymbolFunctions0;
+        case 4:  funcSet = DeviceSymbolFunctions2; break;
+        case 5:  funcSet = RemoveArgFunctions3; break;
+        case 6:  funcSet = DeviceSymbolFunctions3; break;
+        case 7:  funcSet = DeviceSymbolFunctions4; break;
+        case 8:  funcSet = DeviceSymbolFunctions5; break;
       }
+      if (funcSet.empty()) continue;
+      *streamPtr.get() << tab + foreach_func;
       unsigned int count = 0;
       string sHIPName;
       for (auto &f : funcSet) {
@@ -527,11 +563,15 @@ namespace perl {
       *streamPtr.get() << endl_tab << ")" << endl_tab << "{" << endl_tab_2;
       switch (i) {
         case 0:
-        default: *streamPtr.get() << s0 << getCastType(e_HIP_SYMBOL) << "\\($2\\),/g" << endl; break;
-        case 1:  *streamPtr.get() << s1 << getCastType(e_HIP_SYMBOL) << "\\($3\\)$4/g;" << endl; break;
-        case 2:  *streamPtr.get() << s0 << getCastType(e_reinterpret_cast) << "\\($2\\),/g" << endl; break;
-        case 3:  *streamPtr.get() << s1 << getCastType(e_reinterpret_cast) << "\\($3\\)$4/g;" << endl; break;
-        case 4:  *streamPtr.get() << s3 << endl; break;
+        default: *streamPtr.get() << s0 << getCastType(e_HIP_SYMBOL) << "\\($2\\),/g;" << endl; break;
+        case 1:  *streamPtr.get() << s1 << getCastType(e_HIP_SYMBOL) << "\\($4\\)$5/g;" << endl; break;
+        case 2:  *streamPtr.get() << s0 << getCastType(e_reinterpret_cast) << "\\($2\\),/g;" << endl; break;
+        case 3:  *streamPtr.get() << s1 << getCastType(e_reinterpret_cast) << "\\($4\\)$5/g;" << endl; break;
+        case 4:  *streamPtr.get() << s2 << getCastType(e_HIP_SYMBOL) << "\\($5\\)$6/g;" << endl; break;
+        case 5:  *streamPtr.get() << s3 << "$7/g;" << endl; break;
+        case 6:  *streamPtr.get() << s3 << ",$5" << getCastType(e_HIP_SYMBOL) << "\\($6\\)$7/g;" << endl; break;
+        case 7:  *streamPtr.get() << s4 << getCastType(e_HIP_SYMBOL) << "\\($7\\)$8/g;" << endl; break;
+        case 8:  *streamPtr.get() << s5 << getCastType(e_HIP_SYMBOL) << "\\($8\\)$9/g;" << endl; break;
       }
       *streamPtr.get() << tab << "}" << endl;
     }
@@ -630,7 +670,7 @@ namespace perl {
       subCommon << tab_2 << "# match device function from the list, except those, which have a namespace prefix (aka somenamespace::umin(...));" << endl;
       subCommon << tab_2 << "# function with only global namespace qualifier '::' (aka ::umin(...)) should be treated as a device function (and warned as well as without such qualifier);" << endl;
       subCommon << tab_2 << my << "$mt_namespace = m/(\\w+)::($func)\\s*\\(\\s*.*\\s*\\)/g;" << endl;
-      subCommon << tab_2 << my << "$mt = m/($func)\\s*\\(\\s*.*\\s*\\)/g;" << endl;
+      subCommon << tab_2 << my << "$mt = m/\\b($func)\\b\\s*\\(\\s*.*\\s*\\)/g;" << endl;
       subCommon << tab_2 << "if ($mt && !$mt_namespace) {" << endl;
       subCommon << tab_3 << "$k += $mt;" << endl;
     }
@@ -780,7 +820,9 @@ namespace perl {
     *streamPtr.get() << tab_4 << sExperimentalSubstitutions << "();" << endl;
     *streamPtr.get() << tab_3 << "}" << endl;
     *streamPtr.get() << tab_3 << sSimpleSubstitutions << "();" << endl;
-    *streamPtr.get() << tab_3 << sTansformKernelLaunch << "();" << endl;
+    *streamPtr.get() << tab_3 << "if (!$cuda_kernel_execution_syntax || $hip_kernel_execution_syntax) {" << endl;
+    *streamPtr.get() << tab_4 << sTansformKernelLaunch << "();" << endl;
+    *streamPtr.get() << tab_3 << "}" << endl;
     *streamPtr.get() << tab_3 << sTransformCubNamespace << "();" << endl;
     *streamPtr.get() << tab_3 << my << "$hasDeviceCode = $countKeywords + $ft{'device_function'};" << endl;
     *streamPtr.get() << tab_3 << unless_ << "($quiet_warnings) {" << endl;
@@ -796,7 +838,7 @@ namespace perl {
     *streamPtr.get() << tab_6 << foreach << "$w (@whitelist) {" << endl;
     *streamPtr.get() << tab_7 << "redo if s/\\b$w\\b/ZAP/" << endl_tab_6 << "}" << endl;
     *streamPtr.get() << tab_6 << my << "$tag;" << endl;
-    *streamPtr.get() << tab_6 << "if ((/(\\bcuda[A-Z]\\w+)/) or (/<<<.*>>>/)) {" << endl;
+    *streamPtr.get() << tab_6 << "if ((/(\\bcuda[A-Z]\\w+)/) or ((/<<<.*>>>/) and ($hip_kernel_execution_syntax))) {" << endl;
     *streamPtr.get() << tab_7 << "# Flag any remaining code that look like cuda API calls: may want to add these to hipify" << endl;
     *streamPtr.get() << tab_7 << "$tag = (defined $1) ? $1 : \"Launch\";" << endl_tab_6 << "}" << endl;
     *streamPtr.get() << tab_6 << "if (defined $tag) {" << endl;

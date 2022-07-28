@@ -58,10 +58,15 @@ const std::string sCudaGetSymbolSize = "cudaGetSymbolSize";
 const std::string sCudaGetSymbolAddress = "cudaGetSymbolAddress";
 const std::string sCudaMemcpyFromSymbol = "cudaMemcpyFromSymbol";
 const std::string sCudaMemcpyFromSymbolAsync = "cudaMemcpyFromSymbolAsync";
-const std::string sCudaFuncSetCacheConfig = "cudaFuncSetCacheConfig";
-const std::string sCudaFuncGetAttributes = "cudaFuncGetAttributes";
+const std::string sCudaGraphAddMemcpyNodeToSymbol = "cudaGraphAddMemcpyNodeToSymbol";
+const std::string sCudaGraphAddMemcpyNodeFromSymbol = "cudaGraphAddMemcpyNodeFromSymbol";
+const std::string sCudaGraphMemcpyNodeSetParamsToSymbol = "cudaGraphMemcpyNodeSetParamsToSymbol";
+const std::string sCudaGraphMemcpyNodeSetParamsFromSymbol = "cudaGraphMemcpyNodeSetParamsFromSymbol";
+const std::string sCudaGraphExecMemcpyNodeSetParamsToSymbol = "cudaGraphExecMemcpyNodeSetParamsToSymbol";
+const std::string sCudaGraphExecMemcpyNodeSetParamsFromSymbol = "cudaGraphExecMemcpyNodeSetParamsFromSymbol";
 const std::string sCuOccupancyMaxPotentialBlockSize = "cuOccupancyMaxPotentialBlockSize";
 const std::string sCuOccupancyMaxPotentialBlockSizeWithFlags = "cuOccupancyMaxPotentialBlockSizeWithFlags";
+const std::string sCudaGetTextureReference = "cudaGetTextureReference";
 // Matchers' names
 const StringRef sCudaLaunchKernel = "cudaLaunchKernel";
 const StringRef sCudaHostFuncCall = "cudaHostFuncCall";
@@ -88,8 +93,13 @@ std::map<std::string, ArgCastMap> FuncArgCasts {
   {sCudaGetSymbolAddress, {{1, {e_HIP_SYMBOL, cw_None}}}},
   {sCudaMemcpyFromSymbol, {{1, {e_HIP_SYMBOL, cw_None}}}},
   {sCudaMemcpyFromSymbolAsync, {{1, {e_HIP_SYMBOL, cw_None}}}},
-  {sCudaFuncSetCacheConfig, {{0, {e_reinterpret_cast, cw_None}}}},
-  {sCudaFuncGetAttributes, {{1, {e_reinterpret_cast, cw_None}}}},
+  {sCudaGraphAddMemcpyNodeToSymbol, {{4, {e_HIP_SYMBOL, cw_None}}}},
+  {sCudaGraphAddMemcpyNodeFromSymbol, {{5, {e_HIP_SYMBOL, cw_None}}}},
+  {sCudaGraphMemcpyNodeSetParamsToSymbol, {{1, {e_HIP_SYMBOL, cw_None}}}},
+  {sCudaGraphMemcpyNodeSetParamsFromSymbol, {{2, {e_HIP_SYMBOL, cw_None}}}},
+  {sCudaGraphExecMemcpyNodeSetParamsToSymbol, {{2, {e_HIP_SYMBOL, cw_None}}}},
+  {sCudaGraphExecMemcpyNodeSetParamsFromSymbol, {{3, {e_HIP_SYMBOL, cw_None}}}},
+  {sCudaGetTextureReference, {{1, {e_HIP_SYMBOL, cw_None}}}},
   {sCuOccupancyMaxPotentialBlockSize, {{3, {e_remove_argument, cw_DataLoss}}}},
   {sCuOccupancyMaxPotentialBlockSizeWithFlags, {{3, {e_remove_argument, cw_DataLoss}}}},
 };
@@ -358,7 +368,7 @@ bool HipifyAction::cudaLaunchKernel(const mat::MatchFinder::MatchResult &Result)
   if (!caleeDecl) return false;
   auto *config = launchKernel->getConfig();
   if (!config) return false;
-  if (CudaKernelExecutionSyntax) return false;
+  if (CudaKernelExecutionSyntax && !HipKernelExecutionSyntax) return false;
   clang::SmallString<40> XStr;
   llvm::raw_svector_ostream OS(XStr);
   clang::LangOptions DefaultLangOptions;
@@ -370,8 +380,8 @@ bool HipifyAction::cudaLaunchKernel(const mat::MatchFinder::MatchResult &Result)
     OS << sHIP_KERNEL_NAME << "(";
     std::string cub = sCub + "::";
     std::string hipcub;
-    const auto found = CUDA_CUB_TYPE_NAME_MAP.find(sCub);
-    if (found != CUDA_CUB_TYPE_NAME_MAP.end()) {
+    const auto found = CUDA_CUB_NAMESPACE_MAP.find(sCub);
+    if (found != CUDA_CUB_NAMESPACE_MAP.end()) {
       hipcub = found->second.hipName.str() + "::";
     } else {
       hipcub = sHipcub + "::";
@@ -451,7 +461,7 @@ bool HipifyAction::cubNamespacePrefix(const mat::MatchFinder::MatchResult &Resul
     const clang::TypeLoc tloc = si->getTypeLoc();
     const clang::SourceRange sr = tloc.getSourceRange();
     std::string name = nsd->getDeclName().getAsString();
-    FindAndReplace(name, GetSubstrLocation(name, sr), CUDA_CUB_TYPE_NAME_MAP);
+    FindAndReplace(name, GetSubstrLocation(name, sr), CUDA_CUB_NAMESPACE_MAP);
     return true;
   }
   return false;
@@ -460,7 +470,7 @@ bool HipifyAction::cubNamespacePrefix(const mat::MatchFinder::MatchResult &Resul
 bool HipifyAction::cubUsingNamespaceDecl(const mat::MatchFinder::MatchResult &Result) {
   if (auto *decl = Result.Nodes.getNodeAs<clang::UsingDirectiveDecl>(sCubUsingNamespaceDecl)) {
     if (auto nsd = decl->getNominatedNamespace()) {
-      FindAndReplace(nsd->getDeclName().getAsString(), decl->getIdentLocation(), CUDA_CUB_TYPE_NAME_MAP);
+      FindAndReplace(nsd->getDeclName().getAsString(), decl->getIdentLocation(), CUDA_CUB_NAMESPACE_MAP);
       return true;
     }
   }
@@ -485,7 +495,7 @@ bool HipifyAction::cubFunctionTemplateDecl(const mat::MatchFinder::MatchResult &
       if (!nsd) continue;
       const clang::SourceRange sr = valueDecl->getSourceRange();
       std::string name = nsd->getDeclName().getAsString();
-      FindAndReplace(name, GetSubstrLocation(name, sr), CUDA_CUB_TYPE_NAME_MAP);
+      FindAndReplace(name, GetSubstrLocation(name, sr), CUDA_CUB_NAMESPACE_MAP);
       ret = true;
     }
     return ret;
@@ -571,10 +581,15 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
             sCudaMemcpyFromSymbolAsync,
             sCudaMemcpyToSymbol,
             sCudaMemcpyToSymbolAsync,
-            sCudaFuncSetCacheConfig,
-            sCudaFuncGetAttributes,
+            sCudaGraphAddMemcpyNodeToSymbol,
+            sCudaGraphAddMemcpyNodeFromSymbol,
+            sCudaGraphMemcpyNodeSetParamsToSymbol,
+            sCudaGraphMemcpyNodeSetParamsFromSymbol,
+            sCudaGraphExecMemcpyNodeSetParamsToSymbol,
+            sCudaGraphExecMemcpyNodeSetParamsFromSymbol,
             sCuOccupancyMaxPotentialBlockSize,
-            sCuOccupancyMaxPotentialBlockSizeWithFlags
+            sCuOccupancyMaxPotentialBlockSizeWithFlags,
+            sCudaGetTextureReference
           )
         )
       )
@@ -686,13 +701,23 @@ public:
   // [ToDo] Remove SWDEV_331863 related guards from CMakeLists.txt and HipifyAction.cpp when the blocker SWDEV_331863 is overcome
   void InclusionDirective(clang::SourceLocation hash_loc, const clang::Token &include_token,
                           StringRef file_name, bool is_angled, clang::CharSourceRange filename_range,
-                          const clang::FileEntry *file, StringRef search_path, StringRef relative_path,
+#if (LLVM_VERSION_MAJOR < 15) || (LLVM_VERSION_MAJOR == 15 && SWDEV_331863)
+                          const clang::FileEntry *file,
+#else
+                          Optional<clang::FileEntryRef> file,
+#endif
+                          StringRef search_path, StringRef relative_path,
                           const clang::Module *imported
 #if LLVM_VERSION_MAJOR > 6
                         , clang::SrcMgr::CharacteristicKind FileType
 #endif
                          ) override {
-    hipifyAction.InclusionDirective(hash_loc, include_token, file_name, is_angled, filename_range, file, search_path, relative_path, imported);
+#if (LLVM_VERSION_MAJOR < 15) || (LLVM_VERSION_MAJOR == 15 && SWDEV_331863)
+    auto f = file;
+#else
+    auto f = &file->getFileEntry();
+#endif
+    hipifyAction.InclusionDirective(hash_loc, include_token, file_name, is_angled, filename_range, f, search_path, relative_path, imported);
   }
 
   void PragmaDirective(clang::SourceLocation Loc, clang::PragmaIntroducerKind Introducer) override {

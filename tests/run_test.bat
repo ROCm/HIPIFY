@@ -36,7 +36,7 @@ set json_out=%test_dir%%compile_commands%
 
 if exist %json_in% (
   powershell -Command "(gc %json_in%) -replace '<test dir>', '%test_dir%' -replace '<CUDA dir>', '%CUDA_ROOT%' | Out-File -encoding ASCII %json_out%"
-  %HIPIFY% -o=%TMP_FILE% %IN_FILE% %CUDA_ROOT% -p=%test_dir% -D_ALLOW_COMPILER_AND_STL_VERSION_MISMATCH=1
+  %HIPIFY% -o=%TMP_FILE% %IN_FILE% %CUDA_ROOT% -p=%test_dir% %HIPIFY_OPTS% -D_ALLOW_COMPILER_AND_STL_VERSION_MISMATCH=1
 ) else (
   %HIPIFY% -o=%TMP_FILE% %IN_FILE% %CUDA_ROOT% %HIPIFY_OPTS% -D_ALLOW_COMPILER_AND_STL_VERSION_MISMATCH=1 -- %clang_args%
 )
