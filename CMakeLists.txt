@@ -68,7 +68,7 @@ if(LLVM_PACKAGE_VERSION VERSION_GREATER "9.0.1")
 endif()
 
 if(LLVM_PACKAGE_VERSION VERSION_EQUAL "15.0.0" OR LLVM_PACKAGE_VERSION VERSION_GREATER "15.0.0")
-    target_link_libraries(hipify-clang PRIVATE LLVMWindowsDriver)
+    target_link_libraries(hipify-clang PRIVATE LLVMWindowsDriver clangSupport)
 endif()
 
 if(MSVC)
