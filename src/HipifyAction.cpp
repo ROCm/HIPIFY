@@ -698,10 +698,10 @@ class PPCallbackProxy : public clang::PPCallbacks {
 
 public:
   explicit PPCallbackProxy(HipifyAction &action): hipifyAction(action) {}
-  // [ToDo] Remove SWDEV_331863 related guards from CMakeLists.txt and HipifyAction.cpp when the blocker SWDEV_331863 is overcome
+
   void InclusionDirective(clang::SourceLocation hash_loc, const clang::Token &include_token,
                           StringRef file_name, bool is_angled, clang::CharSourceRange filename_range,
-#if (LLVM_VERSION_MAJOR < 15) || (LLVM_VERSION_MAJOR == 15 && SWDEV_331863)
+#if LLVM_VERSION_MAJOR < 15
                           const clang::FileEntry *file,
 #else
                           Optional<clang::FileEntryRef> file,
@@ -712,7 +712,7 @@ public:
                         , clang::SrcMgr::CharacteristicKind FileType
 #endif
                          ) override {
-#if (LLVM_VERSION_MAJOR < 15) || (LLVM_VERSION_MAJOR == 15 && SWDEV_331863)
+#if LLVM_VERSION_MAJOR < 15
     auto f = file;
 #else
     auto f = &file->getFileEntry();

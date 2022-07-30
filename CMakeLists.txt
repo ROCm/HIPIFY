@@ -86,12 +86,6 @@ else()
     set(addr_var )
 endif()
 
-# [ToDo] Remove SWDEV_331863 related guards from CMakeLists.txt and HipifyAction.cpp when the blocker SWDEV_331863 is overcome
-option (SWDEV_331863 "Enables SWDEV-331863 blocker workaround" OFF)
-if(SWDEV_331863)
-    add_definitions(-DSWDEV_331863)
-endif()
-
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${EXTRA_CFLAGS} ${addr_var}")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${EXTRA_CFLAGS} -DHIPIFY_CLANG_RES=\\\"${LLVM_LIBRARY_DIRS}/clang/${LLVM_VERSION_MAJOR}.${LLVM_VERSION_MINOR}.${LLVM_VERSION_PATCH}\\\" ${addr_var}")
 
