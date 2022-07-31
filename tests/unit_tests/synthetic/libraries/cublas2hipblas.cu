@@ -3,7 +3,10 @@
 // CHECK: #include <hip/hip_runtime.h>
 #include <cuda_runtime.h>
 // CHECK: #include "hipblas.h"
+// CHECK-NOT: #include "cublas_v2.h"
 #include "cublas.h"
+#include "cublas_v2.h"
+// CHECK-NOT: #include "hipblas.h"
 
 int main() {
   printf("14. cuBLAS API to hipBLAS API synthetic test\n");
@@ -143,6 +146,129 @@ int main() {
 
   // CHECK: hipblasHandle_t blasHandle;
   cublasHandle_t blasHandle;
+
+// Functions
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasGetAtomicsMode(cublasHandle_t handle, cublasAtomicsMode_t* mode);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasGetAtomicsMode(hipblasHandle_t handle, hipblasAtomicsMode_t* atomics_mode);
+  // CHECK: blasStatus = hipblasGetAtomicsMode(blasHandle, &blasAtomicsMode);
+  blasStatus = cublasGetAtomicsMode(blasHandle, &blasAtomicsMode);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasSetAtomicsMode(cublasHandle_t handle, cublasAtomicsMode_t mode);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasSetAtomicsMode(hipblasHandle_t handle, hipblasAtomicsMode_t atomics_mode);
+  // CHECK: blasStatus = hipblasSetAtomicsMode(blasHandle, blasAtomicsMode);
+  blasStatus = cublasSetAtomicsMode(blasHandle, blasAtomicsMode);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasCreate_v2(cublasHandle_t* handle);
+  // CUDA: #define cublasCreate cublasCreate_v2
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasCreate(hipblasHandle_t* handle);
+  // CHECK: blasStatus = hipblasCreate(&blasHandle);
+  // CHECK-NEXT: blasStatus = hipblasCreate(&blasHandle);
+  blasStatus = cublasCreate(&blasHandle);
+  blasStatus = cublasCreate_v2(&blasHandle);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasDestroy_v2(cublasHandle_t handle);
+  // CUDA: #define cublasDestroy cublasDestroy_v2
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasDestroy(hipblasHandle_t handle);
+  // CHECK: blasStatus = hipblasDestroy(blasHandle);
+  // CHECK-NEXT: blasStatus = hipblasDestroy(blasHandle);
+  blasStatus = cublasDestroy(blasHandle);
+  blasStatus = cublasDestroy_v2(blasHandle);
+
+  // CHECK: hipStream_t stream;
+  cudaStream_t stream;
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasSetStream_v2(cublasHandle_t handle, cudaStream_t streamId);
+  // CUDA: #define cublasSetStream cublasSetStream_v2
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasSetStream(hipblasHandle_t handle, hipStream_t streamId);
+  // CHECK: blasStatus = hipblasSetStream(blasHandle, stream);
+  // CHECK-NEXT: blasStatus = hipblasSetStream(blasHandle, stream);
+  blasStatus = cublasSetStream(blasHandle, stream);
+  blasStatus = cublasSetStream_v2(blasHandle, stream);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasGetStream_v2(cublasHandle_t handle, cudaStream_t* streamId);
+  // CUDA: #define cublasGetStream cublasGetStream_v2
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasGetStream(hipblasHandle_t handle, hipStream_t* streamId);
+  // CHECK: blasStatus = hipblasGetStream(blasHandle, &stream);
+  // CHECK-NEXT: blasStatus = hipblasGetStream(blasHandle, &stream);
+  blasStatus = cublasGetStream(blasHandle, &stream);
+  blasStatus = cublasGetStream_v2(blasHandle, &stream);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasSetPointerMode_v2(cublasHandle_t handle, cublasPointerMode_t mode);
+  // CUDA: #define cublasSetPointerMode cublasSetPointerMode_v2
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasSetPointerMode(hipblasHandle_t handle, hipblasPointerMode_t mode);
+  // CHECK: blasStatus = hipblasSetPointerMode(blasHandle, blasPointerMode);
+  // CHECK-NEXT: blasStatus = hipblasSetPointerMode(blasHandle, blasPointerMode);
+  blasStatus = cublasSetPointerMode(blasHandle, blasPointerMode);
+  blasStatus = cublasSetPointerMode_v2(blasHandle, blasPointerMode);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasGetPointerMode_v2(cublasHandle_t handle, cublasPointerMode_t* mode);
+  // CUDA: #define cublasGetPointerMode cublasGetPointerMode_v2
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasGetPointerMode(hipblasHandle_t handle, hipblasPointerMode_t* mode);
+  // CHECK: blasStatus = hipblasGetPointerMode(blasHandle, &blasPointerMode);
+  // CHECK-NEXT: blasStatus = hipblasGetPointerMode(blasHandle, &blasPointerMode);
+  blasStatus = cublasGetPointerMode(blasHandle, &blasPointerMode);
+  blasStatus = cublasGetPointerMode_v2(blasHandle, &blasPointerMode);
+
+  int n = 0;
+  int num = 0;
+  int incx = 0;
+  int incy = 0;
+  void* image = nullptr;
+  void* image_2 = nullptr;
+  void* deviceptr = nullptr;
+
+  // CUDA: cublasStatus_t CUBLASWINAPI cublasSetVector(int n, int elemSize, const void* x, int incx, void* devicePtr, int incy);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasSetVector(int n, int elemSize, const void* x, int incx, void* y, int incy);
+  // CHECK: blasStatus = hipblasSetVector(n, num, image, incx, image_2, incy);
+  blasStatus = cublasSetVector(n, num, image, incx, image_2, incy);
+
+  // CUDA: cublasStatus_t CUBLASWINAPI cublasGetVector(int n, int elemSize, const void* x, int incx, void* y, int incy);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasGetVector(int n, int elemSize, const void* x, int incx, void* y, int incy);
+  // CHECK: blasStatus = hipblasGetVector(n, num, image, incx, image_2, incy);
+  blasStatus = cublasGetVector(n, num, image, incx, image_2, incy);
+
+  // CUDA: cublasStatus_t CUBLASWINAPI cublasSetVectorAsync(int n, int elemSize, const void* hostPtr, int incx, void* devicePtr, int incy, cudaStream_t stream);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasSetVectorAsync(int n, int elemSize, const void* x, int incx, void* y, int incy, hipStream_t stream);
+  // CHECK: blasStatus = hipblasSetVectorAsync(n, num, image, incx, image_2, incy, stream);
+  blasStatus = cublasSetVectorAsync(n, num, image, incx, image_2, incy, stream);
+
+  // CUDA: cublasStatus_t CUBLASWINAPI cublasGetVectorAsync(int n, int elemSize, const void* devicePtr, int incx, void* hostPtr, int incy, cudaStream_t stream);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasGetVectorAsync(int n, int elemSize, const void* x, int incx, void* y, int incy, hipStream_t stream);
+  // CHECK: blasStatus = hipblasGetVectorAsync(n, num, image, incx, image_2, incy, stream);
+  blasStatus = cublasGetVectorAsync(n, num, image, incx, image_2, incy, stream);
+
+  int rows = 0;
+  int cols = 0;
+
+  // CUDA: cublasStatus_t CUBLASWINAPI cublasSetMatrix(int rows, int cols, int elemSize, const void* A, int lda, void* B, int ldb);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasSetMatrix(int rows, int cols, int elemSize, const void* AP, int lda, void* BP, int ldb);
+  // CHECK: blasStatus = hipblasSetMatrix(rows, cols, num, image, incx, image_2, incy);
+  blasStatus = cublasSetMatrix(rows, cols, num, image, incx, image_2, incy);
+
+  // CUDA: cublasStatus_t CUBLASWINAPI cublasGetMatrix(int rows, int cols, int elemSize, const void* A, int lda, void* B, int ldb);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasGetMatrix(int rows, int cols, int elemSize, const void* AP, int lda, void* BP, int ldb);
+  // CHECK: blasStatus = hipblasGetMatrix(rows, cols, num, image, incx, image_2, incy);
+  blasStatus = cublasGetMatrix(rows, cols, num, image, incx, image_2, incy);
+
+  // CUDA: cublasStatus_t CUBLASWINAPI cublasSetMatrixAsync(int rows, int cols, int elemSize, const void* A, int lda, void* B, int ldb, cudaStream_t stream);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasSetMatrixAsync(int rows, int cols, int elemSize, const void* AP, int lda, void* BP, int ldb, hipStream_t stream);
+  // CHECK: blasStatus = hipblasSetMatrixAsync(rows, cols, num, image, incx, image_2, incy, stream);
+  blasStatus = cublasSetMatrixAsync(rows, cols, num, image, incx, image_2, incy, stream);
+
+  // CUDA: cublasStatus_t CUBLASWINAPI cublasGetMatrixAsync(int rows, int cols, int elemSize, const void* A, int lda, void* B, int ldb, cudaStream_t stream);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasGetMatrixAsync(int rows, int cols, int elemSize, const void* AP, int lda, void* BP, int ldb, hipStream_t stream);
+  // CHECK: blasStatus = hipblasGetMatrixAsync(rows, cols, num, image, incx, image_2, incy, stream);
+  blasStatus = cublasGetMatrixAsync(rows, cols, num, image, incx, image_2, incy, stream);
+
+  cudaDataType DataType_2, DataType_3;
+
+#if CUDA_VERSION >= 8000
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasNrm2Ex(cublasHandle_t handle, int n, const void* x, cudaDataType xType, int incx, void* result, cudaDataType resultType, cudaDataType executionType);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasNrm2Ex(hipblasHandle_t handle, int n, const void* x, hipblasDatatype_t xType, int incx, void* result, hipblasDatatype_t resultType, hipblasDatatype_t executionType);
+  // CHECK: blasStatus = hipblasNrm2Ex(blasHandle, n, image, DataType, incx, image_2, DataType_2, DataType_3);
+  blasStatus = cublasNrm2Ex(blasHandle, n, image, DataType, incx, image_2, DataType_2, DataType_3);
+#endif
 
   return 0;
 }

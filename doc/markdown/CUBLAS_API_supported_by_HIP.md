@@ -226,7 +226,7 @@
 |`cublasDcopy_v2`| | | |`hipblasDcopy`|1.8.2| | | |
 |`cublasDdot`| | | |`hipblasDdot`|3.0.0| | | |
 |`cublasDdot_v2`| | | |`hipblasDdot`|3.0.0| | | |
-|`cublasDnrm2`| | | |`hipblasDnrm2`|1.8.2| | | |
+|`cublasDnrm2`| | | | | | | | |
 |`cublasDnrm2_v2`| | | |`hipblasDnrm2`|1.8.2| | | |
 |`cublasDrot`| | | |`hipblasDrot`|3.0.0| | | |
 |`cublasDrot_v2`| | | |`hipblasDrot`|3.0.0| | | |
@@ -242,7 +242,7 @@
 |`cublasDswap_v2`| | | |`hipblasDswap`|3.0.0| | | |
 |`cublasDzasum`| | | |`hipblasDzasum`|3.0.0| | | |
 |`cublasDzasum_v2`| | | |`hipblasDzasum`|3.0.0| | | |
-|`cublasDznrm2`| | | |`hipblasDznrm2`|3.0.0| | | |
+|`cublasDznrm2`| | | | | | | | |
 |`cublasDznrm2_v2`| | | |`hipblasDznrm2`|3.0.0| | | |
 |`cublasIcamax`| | | |`hipblasIcamax`|3.0.0| | | |
 |`cublasIcamax_v2`| | | |`hipblasIcamax`|3.0.0| | | |
@@ -267,13 +267,13 @@
 |`cublasSaxpy_v2`| | | |`hipblasSaxpy`|1.8.2| | | |
 |`cublasScasum`| | | |`hipblasScasum`|3.0.0| | | |
 |`cublasScasum_v2`| | | |`hipblasScasum`|3.0.0| | | |
-|`cublasScnrm2`| | | |`hipblasScnrm2`|3.0.0| | | |
+|`cublasScnrm2`| | | | | | | | |
 |`cublasScnrm2_v2`| | | |`hipblasScnrm2`|3.0.0| | | |
 |`cublasScopy`| | | |`hipblasScopy`|1.8.2| | | |
 |`cublasScopy_v2`| | | |`hipblasScopy`|1.8.2| | | |
 |`cublasSdot`| | | |`hipblasSdot`|3.0.0| | | |
 |`cublasSdot_v2`| | | |`hipblasSdot`|3.0.0| | | |
-|`cublasSnrm2`| | | |`hipblasSnrm2`|1.8.2| | | |
+|`cublasSnrm2`| | | | | | | | |
 |`cublasSnrm2_v2`| | | |`hipblasSnrm2`|1.8.2| | | |
 |`cublasSrot`| | | |`hipblasSrot`|3.0.0| | | |
 |`cublasSrot_v2`| | | |`hipblasSrot`|3.0.0| | | |

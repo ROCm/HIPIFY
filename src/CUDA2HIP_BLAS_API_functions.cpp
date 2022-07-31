@@ -78,10 +78,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
   {"cublasGetCudartVersion",         {"hipblasGetCudartVersion",         "",                                         CONV_LIB_FUNC, API_BLAS, 4, UNSUPPORTED}},
 
   // NRM2
-  {"cublasSnrm2",                    {"hipblasSnrm2",                    "rocblas_snrm2",                            CONV_LIB_FUNC, API_BLAS, 5}},
-  {"cublasDnrm2",                    {"hipblasDnrm2",                    "rocblas_dnrm2",                            CONV_LIB_FUNC, API_BLAS, 5}},
-  {"cublasScnrm2",                   {"hipblasScnrm2",                   "rocblas_scnrm2",                           CONV_LIB_FUNC, API_BLAS, 5}},
-  {"cublasDznrm2",                   {"hipblasDznrm2",                   "rocblas_dznrm2",                           CONV_LIB_FUNC, API_BLAS, 5}},
+  // cublasSnrm2 signature differs from cublasSnrm2_v2 signature, hipblasSnrm2 and rocblas_snrm2 have mapping to cublasSnrm2_v2 only
+  {"cublasSnrm2",                    {"hipblasSnrm2_v1",                 "rocblas_snrm2_v1",                         CONV_LIB_FUNC, API_BLAS, 5, UNSUPPORTED}},
+  // cublasDnrm2 signature differs from cublasDnrm2_v2 signature, hipblasDnrm2 and rocblas_dnrm2 have mapping to cublasDnrm2_v2 only
+  {"cublasDnrm2",                    {"hipblasDnrm2_v1",                 "rocblas_dnrm2_v1",                         CONV_LIB_FUNC, API_BLAS, 5, UNSUPPORTED}},
+  // cublasScnrm2 signature differs from cublasScnrm2_v2 signature, hipblasScnrm2 and rocblas_scnrm2 have mapping to cublasScnrm2_v2 only
+  {"cublasScnrm2",                   {"hipblasScnrm2_v1",                "rocblas_scnrm2_v1",                        CONV_LIB_FUNC, API_BLAS, 5, UNSUPPORTED}},
+  // cublasDznrm2 signature differs from cublasDznrm2_v2 signature, hipblasDznrm2 and rocblas_dznrm2 have mapping to cublasDznrm2_v2 only
+  {"cublasDznrm2",                   {"hipblasDznrm2_v1",                "rocblas_dznrm2_v1",                        CONV_LIB_FUNC, API_BLAS, 5, UNSUPPORTED}},
   {"cublasNrm2Ex",                   {"hipblasNrm2Ex",                   "rocblas_nrm2_ex",                          CONV_LIB_FUNC, API_BLAS, 5}},
 
   // DOT
