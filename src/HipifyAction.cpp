@@ -737,6 +737,10 @@ bool HipifyAction::BeginInvocation(clang::CompilerInstance &CI) {
 
 void HipifyAction::ExecuteAction() {
   clang::Preprocessor &PP = getCompilerInstance().getPreprocessor();
+  // Register yourself as the preprocessor callback, by proxy.
+  PP.addPPCallbacks(std::unique_ptr<PPCallbackProxy>(new PPCallbackProxy(*this)));
+  // Now we're done futzing with the lexer, have the subclass proceeed with Sema and AST matching.
+  clang::ASTFrontendAction::ExecuteAction();
   auto &SM = getCompilerInstance().getSourceManager();
   // Start lexing the specified input file.
   llcompat::Memory_Buffer FromFile = llcompat::getMemoryBuffer(SM);
@@ -751,10 +755,6 @@ void HipifyAction::ExecuteAction() {
     RewriteToken(RawTok);
     RawLex.LexFromRawLexer(RawTok);
   }
-  // Register yourself as the preprocessor callback, by proxy.
-  PP.addPPCallbacks(std::unique_ptr<PPCallbackProxy>(new PPCallbackProxy(*this)));
-  // Now we're done futzing with the lexer, have the subclass proceeed with Sema and AST matching.
-  clang::ASTFrontendAction::ExecuteAction();
 }
 
 void HipifyAction::run(const mat::MatchFinder::MatchResult &Result) {
