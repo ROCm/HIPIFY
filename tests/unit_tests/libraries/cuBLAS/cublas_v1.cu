@@ -5,25 +5,18 @@
 #include <stdlib.h>
 #include <math.h>
 // CHECK: #include "hipblas.h"
-// CHECK-NOT: #include "cublas_v2.h"
 #include "cublas.h"
-#include "cublas_v2.h"
-// CHECK-NOT: #include "hipblas.h"
 #define M 6
 #define N 5
 #define IDX2C(i,j,ld) (((j)*(ld))+(i))
-static __inline__ void modify(float *m, int ldm, int n, int p, int q, float
+static __inline__ void modify(float* m, int ldm, int n, int p, int q, float
   alpha, float beta) {
-  // CHECK: hipblasHandle_t blasHandle;
-  cublasHandle_t blasHandle;
-  // CHECK: hipblasStatus_t blasStatus = hipblasCreate(&blasHandle);
-  cublasStatus blasStatus = cublasCreate(&blasHandle);
-  // CHECK: hipblasSscal(blasHandle, n - p, &alpha, &m[IDX2C(p, q, ldm)], ldm);
-  cublasSscal(blasHandle, n - p, &alpha, &m[IDX2C(p, q, ldm)], ldm);
-  // CHECK: hipblasSscal(blasHandle, ldm - p, &beta, &m[IDX2C(p, q, ldm)], 1);
-  cublasSscal(blasHandle, ldm - p, &beta, &m[IDX2C(p, q, ldm)], 1);
-  // CHECK: hipblasDestroy(blasHandle);
-  cublasDestroy(blasHandle);
+  // CHECK-NOT: hipblasSscal(n - p, alpha, &m[IDX2C(p, q, ldm)], ldm);
+  // CHECK-NOT: hipblasSscal(ldm - p, beta, &m[IDX2C(p, q, ldm)], 1);
+  // CHECK: cublasSscal(n - p, alpha, &m[IDX2C(p, q, ldm)], ldm);
+  // CHECK: cublasSscal(ldm - p, beta, &m[IDX2C(p, q, ldm)], 1);
+  cublasSscal(n - p, alpha, &m[IDX2C(p, q, ldm)], ldm);
+  cublasSscal(ldm - p, beta, &m[IDX2C(p, q, ldm)], 1);
 }
 int main(void) {
   int i, j;
@@ -31,7 +24,7 @@ int main(void) {
   cublasStatus stat;
   float* devPtrA;
   float* a = 0;
-  a = (float *)malloc(M * N * sizeof(*a));
+  a = (float*)malloc(M * N * sizeof(*a));
   if (!a) {
     printf("host memory allocation failed");
     return EXIT_FAILURE;
@@ -44,7 +37,7 @@ int main(void) {
   // cublasInit is not supported yet
   cublasInit();
   // cublasAlloc is not supported yet
-  stat = cublasAlloc(M*N, sizeof(*a), (void**)&devPtrA);
+  stat = cublasAlloc(M * N, sizeof(*a), (void**)&devPtrA);
   // CHECK: if (stat != HIPBLAS_STATUS_SUCCESS) {
   if (stat != CUBLAS_STATUS_SUCCESS) {
     printf("device memory allocation failed");

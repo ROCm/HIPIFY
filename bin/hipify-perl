@@ -967,7 +967,7 @@ push(@exclude_filelist, split(',', $exclude_files));
 %exclude_dirhash = map { $_ => 1 } @exclude_dirlist;
 %exclude_filehash = map { $_ => 1 } @exclude_filelist;
 
-@statNames = ("error", "init", "version", "device", "context", "module", "memory", "virtual_memory", "stream_ordered_memory", "addressing", "stream", "event", "external_resource_interop", "stream_memory", "execution", "graph", "occupancy", "texture", "surface", "peer", "graphics", "interactions", "profiler", "openGL", "D3D9", "D3D10", "D3D11", "VDPAU", "EGL", "thread", "complex", "library", "device_library", "device_function", "include", "include_cuda_main_header", "type", "literal", "numeric_literal", "define", "extern_shared", "kernel_launch");
+@statNames = ("error", "init", "version", "device", "context", "module", "memory", "virtual_memory", "stream_ordered_memory", "addressing", "stream", "event", "external_resource_interop", "stream_memory", "execution", "graph", "occupancy", "texture", "surface", "peer", "graphics", "interactions", "profiler", "openGL", "D3D9", "D3D10", "D3D11", "VDPAU", "EGL", "thread", "complex", "library", "device_library", "device_function", "include", "include_cuda_main_header", "include_cuda_main_header_v2", "type", "literal", "numeric_literal", "define", "extern_shared", "kernel_launch");
 
 sub totalStats {
     my %count = %{shift()};
@@ -1338,6 +1338,7 @@ sub rocSubstitutions {
     subst("cublasDgemv_v2", "rocblas_dgemv", "library");
     subst("cublasDger", "rocblas_dger", "library");
     subst("cublasDger_v2", "rocblas_dger", "library");
+    subst("cublasDnrm2", "rocblas_dnrm2", "library");
     subst("cublasDnrm2_v2", "rocblas_dnrm2", "library");
     subst("cublasDotEx", "rocblas_dot_ex", "library");
     subst("cublasDotcEx", "rocblas_dotc_ex", "library");
@@ -1393,6 +1394,7 @@ sub rocSubstitutions {
     subst("cublasDtrsv_v2", "rocblas_dtrsv", "library");
     subst("cublasDzasum", "rocblas_dzasum", "library");
     subst("cublasDzasum_v2", "rocblas_dzasum", "library");
+    subst("cublasDznrm2", "rocblas_dznrm2", "library");
     subst("cublasDznrm2_v2", "rocblas_dznrm2", "library");
     subst("cublasGemmBatchedEx", "rocblas_gemm_batched_ex", "library");
     subst("cublasGemmEx", "rocblas_gemm_ex", "library");
@@ -1433,6 +1435,7 @@ sub rocSubstitutions {
     subst("cublasScalEx", "rocblas_scal_ex", "library");
     subst("cublasScasum", "rocblas_scasum", "library");
     subst("cublasScasum_v2", "rocblas_scasum", "library");
+    subst("cublasScnrm2", "rocblas_scnrm2", "library");
     subst("cublasScnrm2_v2", "rocblas_scnrm2", "library");
     subst("cublasScopy", "rocblas_scopy", "library");
     subst("cublasScopy_v2", "rocblas_scopy", "library");
@@ -1458,6 +1461,7 @@ sub rocSubstitutions {
     subst("cublasSgemv_v2", "rocblas_sgemv", "library");
     subst("cublasSger", "rocblas_sger", "library");
     subst("cublasSger_v2", "rocblas_sger", "library");
+    subst("cublasSnrm2", "rocblas_snrm2", "library");
     subst("cublasSnrm2_v2", "rocblas_snrm2", "library");
     subst("cublasSrot", "rocblas_srot", "library");
     subst("cublasSrot_v2", "rocblas_srot", "library");
@@ -1595,7 +1599,6 @@ sub rocSubstitutions {
     subst("cublasZtrsv", "rocblas_ztrsv", "library");
     subst("cublasZtrsv_v2", "rocblas_ztrsv", "library");
     subst("cublas.h", "rocblas.h", "include_cuda_main_header");
-    subst("cublas_v2.h", "rocblas.h", "include_cuda_main_header");
     subst("cublasAtomicsMode_t", "rocblas_atomics_mode", "type");
     subst("cublasContext", "_rocblas_handle", "type");
     subst("cublasDataType_t", "rocblas_datatype", "type");
@@ -2251,6 +2254,7 @@ sub simpleSubstitutions {
     subst("cublasDgetrfBatched", "hipblasDgetrfBatched", "library");
     subst("cublasDgetriBatched", "hipblasDgetriBatched", "library");
     subst("cublasDgetrsBatched", "hipblasDgetrsBatched", "library");
+    subst("cublasDnrm2", "hipblasDnrm2", "library");
     subst("cublasDnrm2_v2", "hipblasDnrm2", "library");
     subst("cublasDotEx", "hipblasDotEx", "library");
     subst("cublasDotcEx", "hipblasDotcEx", "library");
@@ -2306,6 +2310,7 @@ sub simpleSubstitutions {
     subst("cublasDtrsv_v2", "hipblasDtrsv", "library");
     subst("cublasDzasum", "hipblasDzasum", "library");
     subst("cublasDzasum_v2", "hipblasDzasum", "library");
+    subst("cublasDznrm2", "hipblasDznrm2", "library");
     subst("cublasDznrm2_v2", "hipblasDznrm2", "library");
     subst("cublasGemmBatchedEx", "hipblasGemmBatchedEx", "library");
     subst("cublasGemmEx", "hipblasGemmEx", "library");
@@ -2347,6 +2352,7 @@ sub simpleSubstitutions {
     subst("cublasScalEx", "hipblasScalEx", "library");
     subst("cublasScasum", "hipblasScasum", "library");
     subst("cublasScasum_v2", "hipblasScasum", "library");
+    subst("cublasScnrm2", "hipblasScnrm2", "library");
     subst("cublasScnrm2_v2", "hipblasScnrm2", "library");
     subst("cublasScopy", "hipblasScopy", "library");
     subst("cublasScopy_v2", "hipblasScopy", "library");
@@ -2377,6 +2383,7 @@ sub simpleSubstitutions {
     subst("cublasSgetrfBatched", "hipblasSgetrfBatched", "library");
     subst("cublasSgetriBatched", "hipblasSgetriBatched", "library");
     subst("cublasSgetrsBatched", "hipblasSgetrsBatched", "library");
+    subst("cublasSnrm2", "hipblasSnrm2", "library");
     subst("cublasSnrm2_v2", "hipblasSnrm2", "library");
     subst("cublasSrot", "hipblasSrot", "library");
     subst("cublasSrot_v2", "hipblasSrot", "library");
@@ -3233,6 +3240,7 @@ sub simpleSubstitutions {
     subst("caffe2\/operators\/spatial_batch_norm_op.h", "caffe2\/operators\/hip\/spatial_batch_norm_op_miopen.hip", "include");
     subst("channel_descriptor.h", "hip\/channel_descriptor.h", "include");
     subst("cooperative_groups.h", "hip\/hip_cooperative_groups.h", "include");
+    subst("cublas_api.h", "hipblas.h", "include");
     subst("cuda_fp16.h", "hip\/hip_fp16.h", "include");
     subst("cuda_profiler_api.h", "hip\/hip_runtime_api.h", "include");
     subst("cuda_runtime_api.h", "hip\/hip_runtime_api.h", "include");
@@ -3261,7 +3269,6 @@ sub simpleSubstitutions {
     subst("cuComplex.h", "hip\/hip_complex.h", "include_cuda_main_header");
     subst("cub\/cub.cuh", "hipcub\/hipcub.hpp", "include_cuda_main_header");
     subst("cublas.h", "hipblas.h", "include_cuda_main_header");
-    subst("cublas_v2.h", "hipblas.h", "include_cuda_main_header");
     subst("cuda.h", "hip\/hip_runtime.h", "include_cuda_main_header");
     subst("cuda_runtime.h", "hip\/hip_runtime.h", "include_cuda_main_header");
     subst("cudnn.h", "hipDNN.h", "include_cuda_main_header");
@@ -7763,7 +7770,6 @@ sub warnHipOnlyUnsupportedFunctions {
         "cublasSwapEx",
         "cublasStrttp",
         "cublasStpttr",
-        "cublasSnrm2",
         "cublasSmatinvBatched",
         "cublasShutdown",
         "cublasSgemmEx",
@@ -7772,7 +7778,6 @@ sub warnHipOnlyUnsupportedFunctions {
         "cublasSetMathMode",
         "cublasSetLoggerCallback",
         "cublasSetKernelStream",
-        "cublasScnrm2",
         "cublasRotmgEx",
         "cublasRotmEx",
         "cublasRotgEx",
@@ -7794,10 +7799,8 @@ sub warnHipOnlyUnsupportedFunctions {
         "cublasGetError",
         "cublasGetCudartVersion",
         "cublasFree",
-        "cublasDznrm2",
         "cublasDtrttp",
         "cublasDtpttr",
-        "cublasDnrm2",
         "cublasDmatinvBatched",
         "cublasDgelsBatched",
         "cublasCtrttp",
@@ -7911,7 +7914,6 @@ sub warnRocOnlyUnsupportedFunctions {
         "cublasSwapEx",
         "cublasStrttp",
         "cublasStpttr",
-        "cublasSnrm2",
         "cublasSmatinvBatched",
         "cublasShutdown",
         "cublasSgetrsBatched",
@@ -7925,7 +7927,6 @@ sub warnRocOnlyUnsupportedFunctions {
         "cublasSetLoggerCallback",
         "cublasSetKernelStream",
         "cublasSetAtomicsMode",
-        "cublasScnrm2",
         "cublasRotmgEx",
         "cublasRotmEx",
         "cublasRotgEx",
@@ -7948,10 +7949,8 @@ sub warnRocOnlyUnsupportedFunctions {
         "cublasGetCudartVersion",
         "cublasGetAtomicsMode",
         "cublasFree",
-        "cublasDznrm2",
         "cublasDtrttp",
         "cublasDtpttr",
-        "cublasDnrm2",
         "cublasDmatinvBatched",
         "cublasDgetrsBatched",
         "cublasDgetriBatched",
@@ -8195,7 +8194,7 @@ while (@ARGV) {
             transformHostFunctions();
             # TODO: would like to move this code outside loop but it uses $_ which contains the whole file
             unless ($no_output) {
-                my $apiCalls   = $ft{'error'} + $ft{'init'} + $ft{'version'} + $ft{'device'} + $ft{'context'} + $ft{'module'} + $ft{'memory'} + $ft{'virtual_memory'} + $ft{'stream_ordered_memory'} + $ft{'addressing'} + $ft{'stream'} + $ft{'event'} + $ft{'external_resource_interop'} + $ft{'stream_memory'} + $ft{'execution'} + $ft{'graph'} + $ft{'occupancy'} + $ft{'texture'} + $ft{'surface'} + $ft{'peer'} + $ft{'graphics'} + $ft{'interactions'} + $ft{'profiler'} + $ft{'openGL'} + $ft{'D3D9'} + $ft{'D3D10'} + $ft{'D3D11'} + $ft{'VDPAU'} + $ft{'EGL'} + $ft{'thread'} + $ft{'complex'} + $ft{'library'} + $ft{'device_library'} + $ft{'include'} + $ft{'include_cuda_main_header'} + $ft{'type'} + $ft{'literal'} + $ft{'numeric_literal'} + $ft{'define'};
+                my $apiCalls   = $ft{'error'} + $ft{'init'} + $ft{'version'} + $ft{'device'} + $ft{'context'} + $ft{'module'} + $ft{'memory'} + $ft{'virtual_memory'} + $ft{'stream_ordered_memory'} + $ft{'addressing'} + $ft{'stream'} + $ft{'event'} + $ft{'external_resource_interop'} + $ft{'stream_memory'} + $ft{'execution'} + $ft{'graph'} + $ft{'occupancy'} + $ft{'texture'} + $ft{'surface'} + $ft{'peer'} + $ft{'graphics'} + $ft{'interactions'} + $ft{'profiler'} + $ft{'openGL'} + $ft{'D3D9'} + $ft{'D3D10'} + $ft{'D3D11'} + $ft{'VDPAU'} + $ft{'EGL'} + $ft{'thread'} + $ft{'complex'} + $ft{'library'} + $ft{'device_library'} + $ft{'include'} + $ft{'include_cuda_main_header'} + $ft{'include_cuda_main_header_v2'} + $ft{'type'} + $ft{'literal'} + $ft{'numeric_literal'} + $ft{'define'};
                 my $kernStuff  = $hasDeviceCode + $ft{'kernel_launch'} + $ft{'device_function'};
                 my $totalCalls = $apiCalls + $kernStuff;
                 $is_dos = m/\r\n$/;
