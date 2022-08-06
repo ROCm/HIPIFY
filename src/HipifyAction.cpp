@@ -173,17 +173,18 @@ void HipifyAction::FindAndReplace(StringRef name,
   }
   Statistics::current().incrementCounter(found->second, name.str());
   clang::DiagnosticsEngine &DE = getCompilerInstance().getDiagnostics();
-  // Warn the user about deprecated idenrifier.
+  // Warn about the deprecated identifier in CUDA but hipify it.
   if (Statistics::isDeprecated(found->second)) {
-    DE.Report(sl, DE.getCustomDiagID(clang::DiagnosticsEngine::Warning, "CUDA identifier is deprecated."));
+    const auto ID = DE.getCustomDiagID(clang::DiagnosticsEngine::Warning, "'%0' is deprecated in CUDA.");
+    DE.Report(sl, ID) << found->first;
   }
-  // Warn the user about unsupported experimental identifier.
+  // Warn about the unsupported experimental identifier.
   if (Statistics::isHipExperimental(found->second) &&!Experimental) {
     std::string sWarn;
     Statistics::isToRoc(found->second) ? sWarn = sROC : sWarn = sHIP;
     sWarn = "" + sWarn;
-    const auto ID = DE.getCustomDiagID(clang::DiagnosticsEngine::Warning, "CUDA identifier is experimental in %0. To hipify it, use the '--experimental' option.");
-    DE.Report(sl, ID) << sWarn;
+    const auto ID = DE.getCustomDiagID(clang::DiagnosticsEngine::Warning, "'%0' is experimental in '%1'; to hipify it, use the '--experimental' option.");
+    DE.Report(sl, ID) << found->first << sWarn;
     return;
   }
   // Warn about the identifier which is supported only for _v2 version of it
@@ -193,17 +194,17 @@ void HipifyAction::FindAndReplace(StringRef name,
     std::string sWarn;
     Statistics::isToRoc(found->second) ? sWarn = sROC : sWarn = sHIP;
     sWarn = "" + sWarn;
-    const auto ID = DE.getCustomDiagID(clang::DiagnosticsEngine::Warning, "Only _v2 version of identifier is supported in %0. To hipify it, include cublas_v2.h in the source code.");
-    DE.Report(sl, ID) << sWarn;
+    const auto ID = DE.getCustomDiagID(clang::DiagnosticsEngine::Warning, "Only '%0_v2' version of '%0' is supported in '%1'; to hipify it, include 'cublas_v2.h' in the source.");
+    DE.Report(sl, ID) << found->first << sWarn;
     return;
   }
-  // Warn about unsupported identifier.
+  // Warn about the unsupported identifier.
   if (Statistics::isUnsupported(found->second)) {
     std::string sWarn;
     Statistics::isToRoc(found->second) ? sWarn = sROC : sWarn = sHIP;
     sWarn = "" + sWarn;
-    const auto ID = DE.getCustomDiagID(clang::DiagnosticsEngine::Warning, "CUDA identifier is unsupported in %0.");
-    DE.Report(sl, ID) << sWarn;
+    const auto ID = DE.getCustomDiagID(clang::DiagnosticsEngine::Warning, "'%0' is unsupported in '%1'.");
+    DE.Report(sl, ID) << found->first << sWarn;
     return;
   }
   if (!bReplace) {
@@ -348,7 +349,10 @@ void HipifyAction::InclusionDirective(clang::SourceLocation hash_loc,
   clang::SourceLocation sl = filename_range.getBegin();
   if (Statistics::isUnsupported(found->second)) {
     clang::DiagnosticsEngine &DE = getCompilerInstance().getDiagnostics();
-    DE.Report(sl, DE.getCustomDiagID(clang::DiagnosticsEngine::Warning, "Unsupported CUDA header."));
+    std::string sWarn;
+    Statistics::isToRoc(found->second) ? sWarn = sROC : sWarn = sHIP;
+    const auto ID = DE.getCustomDiagID(clang::DiagnosticsEngine::Warning, "'%0' is unsupported header in '%1'.");
+    DE.Report(sl, ID) << found->first << sWarn;
     return;
   }
   clang::StringRef newInclude;
@@ -566,8 +570,8 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
       switch (c.second.castWarn) {
         case cw_DataLoss: {
           clang::DiagnosticsEngine& DE = getCompilerInstance().getDiagnostics();
-          const auto ID = DE.getCustomDiagID(clang::DiagnosticsEngine::Warning, "Possible data loss in %0 argument.");
-          DE.Report(fullSL, ID) << argNum+1;
+          const auto ID = DE.getCustomDiagID(clang::DiagnosticsEngine::Warning, "Possible data loss in %0 argument of '%1'.");
+          DE.Report(fullSL, ID) << argNum+1 << sName;
           break;
         }
         case cw_None:
