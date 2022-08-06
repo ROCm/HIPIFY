@@ -186,8 +186,18 @@ void HipifyAction::FindAndReplace(StringRef name,
     DE.Report(sl, ID) << sWarn;
     return;
   }
-
-  // Warn the user about unsupported identifier.
+  // Warn about the identifier which is supported only for _v2 version of it
+  // [NOTE]: Currently, only cuBlas is tracked for versioning and only for _v2;
+  // cublas_v2.h has to be included in the source cuda file for hipification.
+  if (Statistics::isHipSupportedV2Only(found->second) && found->second.apiType == API_BLAS && !insertedBLASHeader_V2) {
+    std::string sWarn;
+    Statistics::isToRoc(found->second) ? sWarn = sROC : sWarn = sHIP;
+    sWarn = "" + sWarn;
+    const auto ID = DE.getCustomDiagID(clang::DiagnosticsEngine::Warning, "Only _v2 version of identifier is supported in %0. To hipify it, include cublas_v2.h in the source code.");
+    DE.Report(sl, ID) << sWarn;
+    return;
+  }
+  // Warn about unsupported identifier.
   if (Statistics::isUnsupported(found->second)) {
     std::string sWarn;
     Statistics::isToRoc(found->second) ? sWarn = sROC : sWarn = sHIP;
@@ -288,6 +298,18 @@ bool HipifyAction::Exclude(const hipCounter &hipToken) {
         default:
           return false;
       }
+      return false;
+    case CONV_INCLUDE_CUDA_MAIN_V2_H:
+      switch (hipToken.apiType) {
+        case API_BLAS:
+          if (insertedBLASHeader_V2) return true;
+          insertedBLASHeader_V2 = true;
+          if (insertedBLASHeader) return true;
+          return false;
+        default:
+          return false;
+      }
+      return false;
     case CONV_INCLUDE:
       if (hipToken.hipName.empty()) return true;
       switch (hipToken.apiType) {
@@ -300,6 +322,7 @@ bool HipifyAction::Exclude(const hipCounter &hipToken) {
         default:
           return false;
       }
+      return false;
     default:
       return false;
   }

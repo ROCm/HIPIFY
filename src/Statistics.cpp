@@ -64,6 +64,7 @@ const char *counterNames[NUM_CONV_TYPES] = {
   "device_function", // CONV_DEVICE_FUNC
   "include", // CONV_INCLUDE
   "include_cuda_main_header", // CONV_INCLUDE_CUDA_MAIN_H
+  "include_cuda_main_header_v2", // CONV_INCLUDE_CUDA_MAIN_V2_H
   "type", // CONV_TYPE
   "literal", // CONV_LITERAL
   "numeric_literal", // CONV_NUMERIC_LITERAL
@@ -108,6 +109,7 @@ const char *counterTypes[NUM_CONV_TYPES] = {
   "CONV_LIB_DEVICE_FUNC",
   "CONV_INCLUDE",
   "CONV_INCLUDE_CUDA_MAIN_H",
+  "CONV_INCLUDE_CUDA_MAIN_V2_H",
   "CONV_TYPE",
   "CONV_LITERAL",
   "CONV_NUMERIC_LITERAL",
@@ -397,6 +399,10 @@ bool Statistics::isRemoved(const hipCounter &counter) {
   return REMOVED == (counter.supportDegree & REMOVED) || (
          CUDA_REMOVED == (counter.supportDegree & CUDA_REMOVED) &&
          HIP_REMOVED == (counter.supportDegree & HIP_REMOVED));
+}
+
+bool Statistics::isHipSupportedV2Only(const hipCounter& counter) {
+  return HIP_SUPPORTED_V2_ONLY == (counter.supportDegree & HIP_SUPPORTED_V2_ONLY);
 }
 
 std::string Statistics::getCudaVersion(const cudaVersions& ver) {
