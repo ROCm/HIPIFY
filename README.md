@@ -45,7 +45,7 @@ After applying all the matchers, the output HIP source is produced.
 
 1. [**LLVM+CLANG**](http://releases.llvm.org) of at least version [4.0.0](http://releases.llvm.org/download.html#4.0.0); the latest stable and recommended release: [**14.0.6**](https://github.com/llvm/llvm-project/releases/tag/llvmorg-14.0.6).
 
-2. [**CUDA**](https://developer.nvidia.com/cuda-downloads) of at least version [8.0](https://developer.nvidia.com/cuda-80-ga2-download-archive), the latest supported version is [**11.7.0**](https://developer.nvidia.com/cuda-downloads).
+2. [**CUDA**](https://developer.nvidia.com/cuda-downloads) of at least version [8.0](https://developer.nvidia.com/cuda-80-ga2-download-archive), the latest supported version is [**11.7.1**](https://developer.nvidia.com/cuda-downloads).
 
 <table align="center">
   <thead>
@@ -160,7 +160,7 @@ After applying all the matchers, the output HIP source is produced.
           <a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-14.0.2">14.0.2</a>,
           <a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-14.0.3">14.0.3</a>,
           <a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-14.0.4">14.0.4</a>
-      <td bgcolor="eefaeb"><a href="https://developer.nvidia.com/cuda-downloads">11.7.0</a></td>
+      <td bgcolor="eefaeb"><a href="https://developer.nvidia.com/cuda-downloads">11.7.1</a></td>
       <td>works only with the patch <br> due to the clang's bug <a href="https://github.com/llvm/llvm-project/issues/54609">54609</a><br>
           <a href="patches/patch_for_clang_14.0.0_bug_54609.zip">patch for 14.0.0</a>**<br>
           <a href="patches/patch_for_clang_14.0.1_bug_54609.zip">patch for 14.0.1</a>**<br>
@@ -171,7 +171,7 @@ After applying all the matchers, the output HIP source is produced.
     <tr align="center">
       <td><a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-14.0.5">14.0.5</a>,
           <a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-14.0.6"><b>14.0.6</b></a></td>
-      <td bgcolor="eefaeb"><a href="https://developer.nvidia.com/cuda-downloads"><b>11.7.0</b></a></td>
+      <td bgcolor="eefaeb"><a href="https://developer.nvidia.com/cuda-downloads"><b>11.7.1</b></a></td>
       <td colspan=2 bgcolor="eefaeb"><font color="green"><b>LATEST STABLE CONFIG</b></font></td>
     </tr>
   </tbody>
@@ -385,7 +385,7 @@ Ubuntu 14: LLVM 4.0.0 - 7.1.0, CUDA 7.0 - 9.0, cuDNN 5.0.5 - 7.6.5
 
 Ubuntu 16-18: LLVM 8.0.0 - 14.0.6, CUDA 8.0 - 10.2, cuDNN 5.1.10 - 8.0.5
 
-Ubuntu 20-21: LLVM 9.0.0 - 14.0.6, CUDA 8.0 - 11.7.0, cuDNN 5.1.10 - 8.4.1
+Ubuntu 20-21: LLVM 9.0.0 - 14.0.6, CUDA 8.0 - 11.7.1, cuDNN 5.1.10 - 8.4.1
 
 Minimum build system requirements for the above configurations:
 
@@ -560,8 +560,8 @@ Testing Time: 6.03s
 | 10.0.0 - 11.0.0 | 8.0 - 11.1   | 7.6.5  - 8.0.5 | 2017.15.9.30, 2019.16.8.3                | 3.19.2         | 3.9.1        |
 | 11.0.1 - 11.1.0 | 8.0 - 11.2.2 | 7.6.5  - 8.0.5 | 2017.15.9.31, 2019.16.8.4                | 3.19.3         | 3.9.2        |
 | 12.0.0 - 13.0.1 | 8.0 - 11.5.1 | 7.6.5  - 8.3.2 | 2017.15.9.43, 2019.16.11.9               | 3.22.2         | 3.10.2       |
-| 14.0.0 - 14.0.6 | 8.0 - 11.7.0 | 8.0.5  - 8.4.1 | 2017.15.9.49, 2019.16.11.17, 2022.17.2.6 | 3.23.2         | 3.10.5       |
-| 15.0.0git       | 8.0 - 11.7.0 | 8.0.5  - 8.4.1 | 2017.15.9.49, 2019.16.11.17, 2022.17.2.6 | 3.23.2         | 3.10.5       |
+| 14.0.0 - 14.0.6 | 8.0 - 11.7.1 | 8.0.5  - 8.4.1 | 2017.15.9.49, 2019.16.11.17, 2022.17.2.6 | 3.24.0         | 3.10.6       |
+| 15.0.0git       | 8.0 - 11.7.1 | 8.0.5  - 8.4.1 | 2017.15.9.49, 2019.16.11.17, 2022.17.2.6 | 3.24.0         | 3.10.6       |
 
 *Building with testing support by `Visual Studio 17 2022` on `Windows 10`:*
 
