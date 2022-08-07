@@ -19,6 +19,7 @@
 
 // CHECK: #include "hipblas.h"
 // CHECK-NOT: #include "cublas.h"
+// CHECK-NOT: #include "cublas_v2.h"
 
 // CHECK: #include <stdio.h>
 
@@ -51,10 +52,12 @@
 // CHECK: #include "hipsparse.h"
 
 #include <cuda.h>
+// CHECK-NOT: #include <hip/hip_runtime.h>
 
 #include <memory>
 
 #include <cuda_runtime.h>
+// CHECK-NOT: #include <hip/hip_runtime.h>
 
 #include "cuda_runtime_api.h"
 #include "channel_descriptor.h"
@@ -67,8 +70,9 @@
 
 #include <iostream>
 
-#include "cublas_v2.h"
 #include "cublas.h"
+#include "cublas_v2.h"
+// CHECK-NOT: #include "hipblas.h"
 
 #include <stdio.h>
 
