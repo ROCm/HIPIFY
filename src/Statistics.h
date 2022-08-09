@@ -121,6 +121,7 @@ enum ConvTypes {
   CONV_DEVICE_FUNC,
   CONV_INCLUDE,
   CONV_INCLUDE_CUDA_MAIN_H,
+  CONV_INCLUDE_CUDA_MAIN_V2_H,
   CONV_TYPE,
   CONV_LITERAL,
   CONV_NUMERIC_LITERAL,
@@ -158,7 +159,8 @@ enum SupportDegree {
   CUDA_REMOVED = 0x40,
   HIP_REMOVED = 0x80,
   REMOVED = 0x100,
-  HIP_EXPERIMENTAL = 0x200
+  HIP_EXPERIMENTAL = 0x200,
+  HIP_SUPPORTED_V2_ONLY = 0x400
 };
 
 enum cudaVersions {
@@ -411,6 +413,8 @@ public:
   static bool isHipRemoved(const hipCounter& counter);
   // Check whether the counter is REMOVED or not.
   static bool isRemoved(const hipCounter& counter);
+  // Check whether the counter is HIP_SUPPORTED_V2_ONLY or not.
+  static bool isHipSupportedV2Only(const hipCounter& counter);
   // Get string CUDA version.
   static std::string getCudaVersion(const cudaVersions &ver);
   // Get string HIP version.

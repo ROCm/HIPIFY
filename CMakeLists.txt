@@ -68,7 +68,7 @@ if(LLVM_PACKAGE_VERSION VERSION_GREATER "9.0.1")
 endif()
 
 if(LLVM_PACKAGE_VERSION VERSION_EQUAL "15.0.0" OR LLVM_PACKAGE_VERSION VERSION_GREATER "15.0.0")
-    target_link_libraries(hipify-clang PRIVATE LLVMWindowsDriver)
+    target_link_libraries(hipify-clang PRIVATE LLVMWindowsDriver clangSupport)
 endif()
 
 if(MSVC)
@@ -84,12 +84,6 @@ if(ADDRESS_SANITIZER)
     set(addr_var -fsanitize=address)
 else()
     set(addr_var )
-endif()
-
-# [ToDo] Remove SWDEV_331863 related guards from CMakeLists.txt and HipifyAction.cpp when the blocker SWDEV_331863 is overcome
-option (SWDEV_331863 "Enables SWDEV-331863 blocker workaround" OFF)
-if(SWDEV_331863)
-    add_definitions(-DSWDEV_331863)
 endif()
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${EXTRA_CFLAGS} ${addr_var}")

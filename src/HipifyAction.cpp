@@ -173,27 +173,38 @@ void HipifyAction::FindAndReplace(StringRef name,
   }
   Statistics::current().incrementCounter(found->second, name.str());
   clang::DiagnosticsEngine &DE = getCompilerInstance().getDiagnostics();
-  // Warn the user about deprecated idenrifier.
+  // Warn about the deprecated identifier in CUDA but hipify it.
   if (Statistics::isDeprecated(found->second)) {
-    DE.Report(sl, DE.getCustomDiagID(clang::DiagnosticsEngine::Warning, "CUDA identifier is deprecated."));
+    const auto ID = DE.getCustomDiagID(clang::DiagnosticsEngine::Warning, "'%0' is deprecated in CUDA.");
+    DE.Report(sl, ID) << found->first;
   }
-  // Warn the user about unsupported experimental identifier.
+  // Warn about the unsupported experimental identifier.
   if (Statistics::isHipExperimental(found->second) &&!Experimental) {
     std::string sWarn;
     Statistics::isToRoc(found->second) ? sWarn = sROC : sWarn = sHIP;
     sWarn = "" + sWarn;
-    const auto ID = DE.getCustomDiagID(clang::DiagnosticsEngine::Warning, "CUDA identifier is experimental in %0. To hipify it, use the '--experimental' option.");
-    DE.Report(sl, ID) << sWarn;
+    const auto ID = DE.getCustomDiagID(clang::DiagnosticsEngine::Warning, "'%0' is experimental in '%1'; to hipify it, use the '--experimental' option.");
+    DE.Report(sl, ID) << found->first << sWarn;
     return;
   }
-
-  // Warn the user about unsupported identifier.
+  // Warn about the identifier which is supported only for _v2 version of it
+  // [NOTE]: Currently, only cuBlas is tracked for versioning and only for _v2;
+  // cublas_v2.h has to be included in the source cuda file for hipification.
+  if (Statistics::isHipSupportedV2Only(found->second) && found->second.apiType == API_BLAS && !insertedBLASHeader_V2) {
+    std::string sWarn;
+    Statistics::isToRoc(found->second) ? sWarn = sROC : sWarn = sHIP;
+    sWarn = "" + sWarn;
+    const auto ID = DE.getCustomDiagID(clang::DiagnosticsEngine::Warning, "Only '%0_v2' version of '%0' is supported in '%1'; to hipify it, include 'cublas_v2.h' in the source.");
+    DE.Report(sl, ID) << found->first << sWarn;
+    return;
+  }
+  // Warn about the unsupported identifier.
   if (Statistics::isUnsupported(found->second)) {
     std::string sWarn;
     Statistics::isToRoc(found->second) ? sWarn = sROC : sWarn = sHIP;
     sWarn = "" + sWarn;
-    const auto ID = DE.getCustomDiagID(clang::DiagnosticsEngine::Warning, "CUDA identifier is unsupported in %0.");
-    DE.Report(sl, ID) << sWarn;
+    const auto ID = DE.getCustomDiagID(clang::DiagnosticsEngine::Warning, "'%0' is unsupported in '%1'.");
+    DE.Report(sl, ID) << found->first << sWarn;
     return;
   }
   if (!bReplace) {
@@ -288,6 +299,18 @@ bool HipifyAction::Exclude(const hipCounter &hipToken) {
         default:
           return false;
       }
+      return false;
+    case CONV_INCLUDE_CUDA_MAIN_V2_H:
+      switch (hipToken.apiType) {
+        case API_BLAS:
+          if (insertedBLASHeader_V2) return true;
+          insertedBLASHeader_V2 = true;
+          if (insertedBLASHeader) return true;
+          return false;
+        default:
+          return false;
+      }
+      return false;
     case CONV_INCLUDE:
       if (hipToken.hipName.empty()) return true;
       switch (hipToken.apiType) {
@@ -300,6 +323,7 @@ bool HipifyAction::Exclude(const hipCounter &hipToken) {
         default:
           return false;
       }
+      return false;
     default:
       return false;
   }
@@ -325,7 +349,10 @@ void HipifyAction::InclusionDirective(clang::SourceLocation hash_loc,
   clang::SourceLocation sl = filename_range.getBegin();
   if (Statistics::isUnsupported(found->second)) {
     clang::DiagnosticsEngine &DE = getCompilerInstance().getDiagnostics();
-    DE.Report(sl, DE.getCustomDiagID(clang::DiagnosticsEngine::Warning, "Unsupported CUDA header."));
+    std::string sWarn;
+    Statistics::isToRoc(found->second) ? sWarn = sROC : sWarn = sHIP;
+    const auto ID = DE.getCustomDiagID(clang::DiagnosticsEngine::Warning, "'%0' is unsupported header in '%1'.");
+    DE.Report(sl, ID) << found->first << sWarn;
     return;
   }
   clang::StringRef newInclude;
@@ -543,8 +570,8 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
       switch (c.second.castWarn) {
         case cw_DataLoss: {
           clang::DiagnosticsEngine& DE = getCompilerInstance().getDiagnostics();
-          const auto ID = DE.getCustomDiagID(clang::DiagnosticsEngine::Warning, "Possible data loss in %0 argument.");
-          DE.Report(fullSL, ID) << argNum+1;
+          const auto ID = DE.getCustomDiagID(clang::DiagnosticsEngine::Warning, "Possible data loss in %0 argument of '%1'.");
+          DE.Report(fullSL, ID) << argNum+1 << sName;
           break;
         }
         case cw_None:
@@ -698,10 +725,10 @@ class PPCallbackProxy : public clang::PPCallbacks {
 
 public:
   explicit PPCallbackProxy(HipifyAction &action): hipifyAction(action) {}
-  // [ToDo] Remove SWDEV_331863 related guards from CMakeLists.txt and HipifyAction.cpp when the blocker SWDEV_331863 is overcome
+
   void InclusionDirective(clang::SourceLocation hash_loc, const clang::Token &include_token,
                           StringRef file_name, bool is_angled, clang::CharSourceRange filename_range,
-#if (LLVM_VERSION_MAJOR < 15) || (LLVM_VERSION_MAJOR == 15 && SWDEV_331863)
+#if LLVM_VERSION_MAJOR < 15
                           const clang::FileEntry *file,
 #else
                           Optional<clang::FileEntryRef> file,
@@ -712,7 +739,7 @@ public:
                         , clang::SrcMgr::CharacteristicKind FileType
 #endif
                          ) override {
-#if (LLVM_VERSION_MAJOR < 15) || (LLVM_VERSION_MAJOR == 15 && SWDEV_331863)
+#if LLVM_VERSION_MAJOR < 15
     auto f = file;
 #else
     auto f = &file->getFileEntry();
@@ -737,6 +764,10 @@ bool HipifyAction::BeginInvocation(clang::CompilerInstance &CI) {
 
 void HipifyAction::ExecuteAction() {
   clang::Preprocessor &PP = getCompilerInstance().getPreprocessor();
+  // Register yourself as the preprocessor callback, by proxy.
+  PP.addPPCallbacks(std::unique_ptr<PPCallbackProxy>(new PPCallbackProxy(*this)));
+  // Now we're done futzing with the lexer, have the subclass proceeed with Sema and AST matching.
+  clang::ASTFrontendAction::ExecuteAction();
   auto &SM = getCompilerInstance().getSourceManager();
   // Start lexing the specified input file.
   llcompat::Memory_Buffer FromFile = llcompat::getMemoryBuffer(SM);
@@ -751,10 +782,6 @@ void HipifyAction::ExecuteAction() {
     RewriteToken(RawTok);
     RawLex.LexFromRawLexer(RawTok);
   }
-  // Register yourself as the preprocessor callback, by proxy.
-  PP.addPPCallbacks(std::unique_ptr<PPCallbackProxy>(new PPCallbackProxy(*this)));
-  // Now we're done futzing with the lexer, have the subclass proceeed with Sema and AST matching.
-  clang::ASTFrontendAction::ExecuteAction();
 }
 
 void HipifyAction::run(const mat::MatchFinder::MatchResult &Result) {

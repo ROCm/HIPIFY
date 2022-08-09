@@ -37,7 +37,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP {
   {"CUBLAS_OP_T",                    {"HIPBLAS_OP_T",                    "rocblas_operation_transpose",           CONV_NUMERIC_LITERAL, API_BLAS, 2}},
   {"CUBLAS_OP_C",                    {"HIPBLAS_OP_C",                    "rocblas_operation_conjugate_transpose", CONV_NUMERIC_LITERAL, API_BLAS, 2}},
   {"CUBLAS_OP_HERMITAN",             {"HIPBLAS_OP_C",                    "rocblas_operation_conjugate_transpose", CONV_NUMERIC_LITERAL, API_BLAS, 2}},
-  {"CUBLAS_OP_CONJG",                {"HIPBLAS_OP_CONJG",                "rocblas_operation_conjugate",           CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}},
+  {"CUBLAS_OP_CONJG",                {"HIPBLAS_OP_CONJG",                "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}},
 
   // Blas statuses
   {"cublasStatus",                   {"hipblasStatus_t",                 "rocblas_status",                        CONV_TYPE, API_BLAS, 2}},
@@ -205,7 +205,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_TYPE_NAME_VER_MAP {
   {"CUBLAS_MATH_DISALLOW_REDUCED_PRECISION_REDUCTION", {CUDA_110, CUDA_0, CUDA_0}},
   {"cublasGemmAlgo_t",                                 {CUDA_80,  CUDA_0, CUDA_0}},
   {"CUBLAS_GEMM_DFALT",                                {CUDA_80,  CUDA_0, CUDA_0}},
-  {"CUBLAS_GEMM_DEFAULT",                              {CUDA_80,  CUDA_0, CUDA_0}},
+  {"CUBLAS_GEMM_DEFAULT",                              {CUDA_90,  CUDA_0, CUDA_0}},
   {"CUBLAS_GEMM_ALGO0",                                {CUDA_80,  CUDA_0, CUDA_0}},
   {"CUBLAS_GEMM_ALGO1",                                {CUDA_80,  CUDA_0, CUDA_0}},
   {"CUBLAS_GEMM_ALGO2",                                {CUDA_80,  CUDA_0, CUDA_0}},

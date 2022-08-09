@@ -49,6 +49,7 @@ private:
   // This approach means we do the best it's possible to do w.r.t preserving the user's include order.
   bool insertedRuntimeHeader = false;
   bool insertedBLASHeader = false;
+  bool insertedBLASHeader_V2 = false;
   bool insertedRANDHeader = false;
   bool insertedRAND_kernelHeader = false;
   bool insertedDNNHeader = false;

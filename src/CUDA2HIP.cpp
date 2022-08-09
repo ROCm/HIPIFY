@@ -35,13 +35,14 @@ const std::map <llvm::StringRef, hipCounter> CUDA_INCLUDE_MAP {
   {"cuda_texture_types.h",      {"hip/hip_texture_types.h",      "", CONV_INCLUDE,             API_RUNTIME, 0}},
   {"texture_fetch_functions.h", {"",                             "", CONV_INCLUDE,             API_RUNTIME, 0}},
   {"vector_types.h",            {"hip/hip_vector_types.h",       "", CONV_INCLUDE,             API_RUNTIME, 0}},
-  {"cuda_profiler_api.h",       {"hip/hip_profile.h",            "", CONV_INCLUDE,             API_RUNTIME, 0}},
+  {"cuda_profiler_api.h",       {"hip/hip_runtime_api.h",        "", CONV_INCLUDE,             API_RUNTIME, 0}},
   {"cooperative_groups.h",      {"hip/hip_cooperative_groups.h", "", CONV_INCLUDE,             API_RUNTIME, 0}},
   // cuComplex includes
   {"cuComplex.h",               {"hip/hip_complex.h",            "", CONV_INCLUDE_CUDA_MAIN_H, API_COMPLEX, 0}},
   // cuBLAS includes
   {"cublas.h",                  {"hipblas.h",                    "rocblas.h", CONV_INCLUDE_CUDA_MAIN_H, API_BLAS, 0}},
-  {"cublas_v2.h",               {"hipblas.h",                    "rocblas.h", CONV_INCLUDE_CUDA_MAIN_H, API_BLAS, 0}},
+  {"cublas_v2.h",               {"hipblas.h",                    "rocblas.h", CONV_INCLUDE_CUDA_MAIN_V2_H, API_BLAS, 0}},
+  {"cublas_api.h",              {"hipblas.h",                    "rocblas.h", CONV_INCLUDE, API_BLAS, 0}},
   // cuRAND includes
   {"curand.h",                  {"hiprand.h",                    "", CONV_INCLUDE_CUDA_MAIN_H, API_RAND, 0}},
   {"curand_kernel.h",           {"hiprand_kernel.h",             "", CONV_INCLUDE,             API_RAND, 0}},

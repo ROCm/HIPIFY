@@ -5,16 +5,25 @@
 #include <stdlib.h>
 #include <math.h>
 // CHECK: #include "rocblas.h"
+// CHECK-NOT: #include "cublas_v2.h"
 #include "cublas.h"
+#include "cublas_v2.h"
+// CHECK-NOT: #include "rocblas.h"
 #define M 6
 #define N 5
 #define IDX2C(i,j,ld) (((j)*(ld))+(i))
 static __inline__ void modify(float *m, int ldm, int n, int p, int q, float
   alpha, float beta) {
-  // CHECK: rocblas_sscal(n - p, alpha, &m[IDX2C(p, q, ldm)], ldm);
-  // CHECK: rocblas_sscal(ldm - p, beta, &m[IDX2C(p, q, ldm)], 1);
-  cublasSscal(n - p, alpha, &m[IDX2C(p, q, ldm)], ldm);
-  cublasSscal(ldm - p, beta, &m[IDX2C(p, q, ldm)], 1);
+  // CHECK: rocblas_handle blasHandle;
+  cublasHandle_t blasHandle;
+  // CHECK: rocblas_status blasStatus = rocblas_create_handle(&blasHandle);
+  cublasStatus blasStatus = cublasCreate(&blasHandle);
+  // CHECK: rocblas_sscal(blasHandle, n - p, &alpha, &m[IDX2C(p, q, ldm)], ldm);
+  // CHECK: rocblas_sscal(blasHandle, ldm - p, &beta, &m[IDX2C(p, q, ldm)], 1);
+  cublasSscal(blasHandle, n - p, &alpha, &m[IDX2C(p, q, ldm)], ldm);
+  cublasSscal(blasHandle, ldm - p, &beta, &m[IDX2C(p, q, ldm)], 1);
+  // CHECK: rocblas_destroy_handle(blasHandle);
+  cublasDestroy(blasHandle);
 }
 int main(void) {
   int i, j;
