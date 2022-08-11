@@ -146,7 +146,7 @@
 |`CUDA_EXT_SEM_WAIT_NODE_PARAMS`|11.2| | | | | | | |
 |`CUDA_EXT_SEM_WAIT_NODE_PARAMS_st`|11.2| | | | | | | |
 |`CUDA_EXT_SEM_WAIT_NODE_PARAMS_v1`|11.3| | | | | | | |
-|`CUDA_GRAPH_INSTANTIATE_FLAG_AUTO_FREE_ON_LAUNCH`|11.4| | |`hipGraphInstantiateFlagAutoFreeOnLaunch`|5.2.0| | |5.2.0|
+|`CUDA_GRAPH_INSTANTIATE_FLAG_AUTO_FREE_ON_LAUNCH`|11.4| | |`hipGraphInstantiateFlagAutoFreeOnLaunch`|5.2.0| | | |
 |`CUDA_GRAPH_INSTANTIATE_FLAG_USE_NODE_PRIORITY`|11.7| | | | | | | |
 |`CUDA_HOST_NODE_PARAMS`|10.0| | |`hipHostNodeParams`|4.3.0| | | |
 |`CUDA_HOST_NODE_PARAMS_st`|10.0| | |`hipHostNodeParams`|4.3.0| | | |
@@ -198,9 +198,9 @@
 |`CUGLmap_flags_enum`| | | | | | | | |
 |`CUGPUDirectRDMAWritesOrdering`|11.3| | | | | | | |
 |`CUGPUDirectRDMAWritesOrdering_enum`|11.3| | | | | | | |
-|`CU_ACCESS_PROPERTY_NORMAL`|11.0| | |`hipAccessPropertyNormal`|5.2.0| | |5.2.0|
-|`CU_ACCESS_PROPERTY_PERSISTING`|11.0| | |`hipAccessPropertyPersisting`|5.2.0| | |5.2.0|
-|`CU_ACCESS_PROPERTY_STREAMING`|11.0| | |`hipAccessPropertyStreaming`|5.2.0| | |5.2.0|
+|`CU_ACCESS_PROPERTY_NORMAL`|11.0| | |`hipAccessPropertyNormal`|5.2.0| | | |
+|`CU_ACCESS_PROPERTY_PERSISTING`|11.0| | |`hipAccessPropertyPersisting`|5.2.0| | | |
+|`CU_ACCESS_PROPERTY_STREAMING`|11.0| | |`hipAccessPropertyStreaming`|5.2.0| | | |
 |`CU_AD_FORMAT_BC1_UNORM`|11.5| | | | | | | |
 |`CU_AD_FORMAT_BC1_UNORM_SRGB`|11.5| | | | | | | |
 |`CU_AD_FORMAT_BC2_UNORM`|11.5| | | | | | | |
@@ -237,8 +237,8 @@
 |`CU_AD_FORMAT_UNSIGNED_INT32`| | | |`HIP_AD_FORMAT_UNSIGNED_INT32`|1.7.0| | | |
 |`CU_AD_FORMAT_UNSIGNED_INT8`| | | |`HIP_AD_FORMAT_UNSIGNED_INT8`|1.7.0| | | |
 |`CU_ARRAY_SPARSE_PROPERTIES_SINGLE_MIPTAIL`|11.1| | | | | | | |
-|`CU_ARRAY_SPARSE_SUBRESOURCE_TYPE_MIPTAIL`|11.1| | |`hipArraySparseSubresourceTypeMiptail`|5.2.0| | |5.2.0|
-|`CU_ARRAY_SPARSE_SUBRESOURCE_TYPE_SPARSE_LEVEL`|11.1| | |`hipArraySparseSubresourceTypeSparseLevel`|5.2.0| | |5.2.0|
+|`CU_ARRAY_SPARSE_SUBRESOURCE_TYPE_MIPTAIL`|11.1| | |`hipArraySparseSubresourceTypeMiptail`|5.2.0| | | |
+|`CU_ARRAY_SPARSE_SUBRESOURCE_TYPE_SPARSE_LEVEL`|11.1| | |`hipArraySparseSubresourceTypeSparseLevel`|5.2.0| | | |
 |`CU_COMPUTEMODE_DEFAULT`| | | |`hipComputeModeDefault`|1.9.0| | | |
 |`CU_COMPUTEMODE_EXCLUSIVE`| | |8.0|`hipComputeModeExclusive`|1.9.0| | | |
 |`CU_COMPUTEMODE_EXCLUSIVE_PROCESS`| | | |`hipComputeModeExclusiveProcess`|2.0.0| | | |
@@ -380,7 +380,7 @@
 |`CU_DEVICE_ATTRIBUTE_MAX_THREADS_PER_BLOCK`| | | |`hipDeviceAttributeMaxThreadsPerBlock`|1.6.0| | | |
 |`CU_DEVICE_ATTRIBUTE_MAX_THREADS_PER_MULTIPROCESSOR`| | | |`hipDeviceAttributeMaxThreadsPerMultiProcessor`|1.6.0| | | |
 |`CU_DEVICE_ATTRIBUTE_MEMORY_CLOCK_RATE`| | | |`hipDeviceAttributeMemoryClockRate`|1.6.0| | | |
-|`CU_DEVICE_ATTRIBUTE_MEMORY_POOLS_SUPPORTED`|11.2| | |`hipDeviceAttributeMemoryPoolsSupported`|5.2.0| | |5.2.0|
+|`CU_DEVICE_ATTRIBUTE_MEMORY_POOLS_SUPPORTED`|11.2| | |`hipDeviceAttributeMemoryPoolsSupported`|5.2.0| | | |
 |`CU_DEVICE_ATTRIBUTE_MEMPOOL_SUPPORTED_HANDLE_TYPES`|11.3| | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_MULTIPROCESSOR_COUNT`| | | |`hipDeviceAttributeMultiprocessorCount`|1.6.0| | | |
 |`CU_DEVICE_ATTRIBUTE_MULTI_GPU_BOARD`| | | |`hipDeviceAttributeIsMultiGpuBoard`|1.6.0| | | |
@@ -645,8 +645,8 @@
 |`CU_JIT_TARGET_FROM_CUCONTEXT`| | | |`hipJitOptionTargetFromContext`|1.6.0| | | |
 |`CU_JIT_THREADS_PER_BLOCK`| | | |`hipJitOptionThreadsPerBlock`|1.6.0| | | |
 |`CU_JIT_WALL_TIME`| | | |`hipJitOptionWallTime`|1.6.0| | | |
-|`CU_KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW`|11.0| | |`hipKernelNodeAttributeAccessPolicyWindow`|5.2.0| | |5.2.0|
-|`CU_KERNEL_NODE_ATTRIBUTE_COOPERATIVE`|11.0| | |`hipKernelNodeAttributeCooperative`|5.2.0| | |5.2.0|
+|`CU_KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW`|11.0| | |`hipKernelNodeAttributeAccessPolicyWindow`|5.2.0| | | |
+|`CU_KERNEL_NODE_ATTRIBUTE_COOPERATIVE`|11.0| | |`hipKernelNodeAttributeCooperative`|5.2.0| | | |
 |`CU_KERNEL_NODE_ATTRIBUTE_PRIORITY`|11.7| | | | | | | |
 |`CU_LAUNCH_PARAM_BUFFER_POINTER`| | | |`HIP_LAUNCH_PARAM_BUFFER_POINTER`|1.6.0| | | |
 |`CU_LAUNCH_PARAM_BUFFER_POINTER_AS_INT`|11.7| | | | | | | |
@@ -673,44 +673,44 @@
 |`CU_MEMORYTYPE_DEVICE`| | | |`hipMemoryTypeDevice`|1.6.0| | | |
 |`CU_MEMORYTYPE_HOST`| | | |`hipMemoryTypeHost`|1.6.0| | | |
 |`CU_MEMORYTYPE_UNIFIED`| | | |`hipMemoryTypeUnified`|1.6.0| | | |
-|`CU_MEMPOOL_ATTR_RELEASE_THRESHOLD`|11.2| | |`hipMemPoolAttrReleaseThreshold`|5.2.0| | |5.2.0|
-|`CU_MEMPOOL_ATTR_RESERVED_MEM_CURRENT`|11.3| | |`hipMemPoolAttrReservedMemCurrent`|5.2.0| | |5.2.0|
-|`CU_MEMPOOL_ATTR_RESERVED_MEM_HIGH`|11.3| | |`hipMemPoolAttrReservedMemHigh`|5.2.0| | |5.2.0|
-|`CU_MEMPOOL_ATTR_REUSE_ALLOW_INTERNAL_DEPENDENCIES`|11.2| | |`hipMemPoolReuseAllowInternalDependencies`|5.2.0| | |5.2.0|
-|`CU_MEMPOOL_ATTR_REUSE_ALLOW_OPPORTUNISTIC`|11.2| | |`hipMemPoolReuseAllowOpportunistic`|5.2.0| | |5.2.0|
-|`CU_MEMPOOL_ATTR_REUSE_FOLLOW_EVENT_DEPENDENCIES`|11.2| | |`hipMemPoolReuseFollowEventDependencies`|5.2.0| | |5.2.0|
-|`CU_MEMPOOL_ATTR_USED_MEM_CURRENT`|11.3| | |`hipMemPoolAttrUsedMemCurrent`|5.2.0| | |5.2.0|
-|`CU_MEMPOOL_ATTR_USED_MEM_HIGH`|11.3| | |`hipMemPoolAttrUsedMemHigh`|5.2.0| | |5.2.0|
+|`CU_MEMPOOL_ATTR_RELEASE_THRESHOLD`|11.2| | |`hipMemPoolAttrReleaseThreshold`|5.2.0| | | |
+|`CU_MEMPOOL_ATTR_RESERVED_MEM_CURRENT`|11.3| | |`hipMemPoolAttrReservedMemCurrent`|5.2.0| | | |
+|`CU_MEMPOOL_ATTR_RESERVED_MEM_HIGH`|11.3| | |`hipMemPoolAttrReservedMemHigh`|5.2.0| | | |
+|`CU_MEMPOOL_ATTR_REUSE_ALLOW_INTERNAL_DEPENDENCIES`|11.2| | |`hipMemPoolReuseAllowInternalDependencies`|5.2.0| | | |
+|`CU_MEMPOOL_ATTR_REUSE_ALLOW_OPPORTUNISTIC`|11.2| | |`hipMemPoolReuseAllowOpportunistic`|5.2.0| | | |
+|`CU_MEMPOOL_ATTR_REUSE_FOLLOW_EVENT_DEPENDENCIES`|11.2| | |`hipMemPoolReuseFollowEventDependencies`|5.2.0| | | |
+|`CU_MEMPOOL_ATTR_USED_MEM_CURRENT`|11.3| | |`hipMemPoolAttrUsedMemCurrent`|5.2.0| | | |
+|`CU_MEMPOOL_ATTR_USED_MEM_HIGH`|11.3| | |`hipMemPoolAttrUsedMemHigh`|5.2.0| | | |
 |`CU_MEM_ACCESS_FLAGS_PROT_MAX`|10.2| | | | | | | |
-|`CU_MEM_ACCESS_FLAGS_PROT_NONE`|10.2| | |`hipMemAccessFlagsProtNone`|5.2.0| | |5.2.0|
-|`CU_MEM_ACCESS_FLAGS_PROT_READ`|10.2| | |`hipMemAccessFlagsProtRead`|5.2.0| | |5.2.0|
-|`CU_MEM_ACCESS_FLAGS_PROT_READWRITE`|10.2| | |`hipMemAccessFlagsProtReadWrite`|5.2.0| | |5.2.0|
+|`CU_MEM_ACCESS_FLAGS_PROT_NONE`|10.2| | |`hipMemAccessFlagsProtNone`|5.2.0| | | |
+|`CU_MEM_ACCESS_FLAGS_PROT_READ`|10.2| | |`hipMemAccessFlagsProtRead`|5.2.0| | | |
+|`CU_MEM_ACCESS_FLAGS_PROT_READWRITE`|10.2| | |`hipMemAccessFlagsProtReadWrite`|5.2.0| | | |
 |`CU_MEM_ADVISE_SET_ACCESSED_BY`|8.0| | |`hipMemAdviseSetAccessedBy`|3.7.0| | | |
 |`CU_MEM_ADVISE_SET_PREFERRED_LOCATION`|8.0| | |`hipMemAdviseSetPreferredLocation`|3.7.0| | | |
 |`CU_MEM_ADVISE_SET_READ_MOSTLY`|8.0| | |`hipMemAdviseSetReadMostly`|3.7.0| | | |
 |`CU_MEM_ADVISE_UNSET_ACCESSED_BY`|8.0| | |`hipMemAdviseUnsetAccessedBy`|3.7.0| | | |
 |`CU_MEM_ADVISE_UNSET_PREFERRED_LOCATION`|8.0| | |`hipMemAdviseUnsetPreferredLocation`|3.7.0| | | |
 |`CU_MEM_ADVISE_UNSET_READ_MOSTLY`|8.0| | |`hipMemAdviseUnsetReadMostly`|3.7.0| | | |
-|`CU_MEM_ALLOCATION_TYPE_INVALID`|10.2| | |`hipMemAllocationTypeInvalid`|5.2.0| | |5.2.0|
-|`CU_MEM_ALLOCATION_TYPE_MAX`|10.2| | |`hipMemAllocationTypeMax`|5.2.0| | |5.2.0|
-|`CU_MEM_ALLOCATION_TYPE_PINNED`|10.2| | |`hipMemAllocationTypePinned`|5.2.0| | |5.2.0|
-|`CU_MEM_ALLOC_GRANULARITY_MINIMUM`|10.2| | |`hipMemAllocationGranularityMinimum`|5.2.0| | |5.2.0|
-|`CU_MEM_ALLOC_GRANULARITY_RECOMMENDED`|10.2| | |`hipMemAllocationGranularityRecommended`|5.2.0| | |5.2.0|
+|`CU_MEM_ALLOCATION_TYPE_INVALID`|10.2| | |`hipMemAllocationTypeInvalid`|5.2.0| | | |
+|`CU_MEM_ALLOCATION_TYPE_MAX`|10.2| | |`hipMemAllocationTypeMax`|5.2.0| | | |
+|`CU_MEM_ALLOCATION_TYPE_PINNED`|10.2| | |`hipMemAllocationTypePinned`|5.2.0| | | |
+|`CU_MEM_ALLOC_GRANULARITY_MINIMUM`|10.2| | |`hipMemAllocationGranularityMinimum`|5.2.0| | | |
+|`CU_MEM_ALLOC_GRANULARITY_RECOMMENDED`|10.2| | |`hipMemAllocationGranularityRecommended`|5.2.0| | | |
 |`CU_MEM_ATTACH_GLOBAL`| | | |`hipMemAttachGlobal`|2.5.0| | | |
 |`CU_MEM_ATTACH_HOST`| | | |`hipMemAttachHost`|2.5.0| | | |
 |`CU_MEM_ATTACH_SINGLE`| | | |`hipMemAttachSingle`|3.7.0| | | |
 |`CU_MEM_CREATE_USAGE_TILE_POOL`|11.1| | | | | | | |
-|`CU_MEM_HANDLE_TYPE_GENERIC`|11.1| | |`hipMemHandleTypeGeneric`|5.2.0| | |5.2.0|
+|`CU_MEM_HANDLE_TYPE_GENERIC`|11.1| | |`hipMemHandleTypeGeneric`|5.2.0| | | |
 |`CU_MEM_HANDLE_TYPE_MAX`|10.2| | | | | | | |
-|`CU_MEM_HANDLE_TYPE_NONE`|11.2| | |`hipMemHandleTypeNone`|5.2.0| | |5.2.0|
-|`CU_MEM_HANDLE_TYPE_POSIX_FILE_DESCRIPTOR`|10.2| | |`hipMemHandleTypePosixFileDescriptor`|5.2.0| | |5.2.0|
-|`CU_MEM_HANDLE_TYPE_WIN32`|10.2| | |`hipMemHandleTypeWin32`|5.2.0| | |5.2.0|
-|`CU_MEM_HANDLE_TYPE_WIN32_KMT`|10.2| | |`hipMemHandleTypeWin32Kmt`|5.2.0| | |5.2.0|
-|`CU_MEM_LOCATION_TYPE_DEVICE`|10.2| | |`hipMemLocationTypeDevice`|5.2.0| | |5.2.0|
-|`CU_MEM_LOCATION_TYPE_INVALID`|10.2| | |`hipMemLocationTypeInvalid`|5.2.0| | |5.2.0|
+|`CU_MEM_HANDLE_TYPE_NONE`|11.2| | |`hipMemHandleTypeNone`|5.2.0| | | |
+|`CU_MEM_HANDLE_TYPE_POSIX_FILE_DESCRIPTOR`|10.2| | |`hipMemHandleTypePosixFileDescriptor`|5.2.0| | | |
+|`CU_MEM_HANDLE_TYPE_WIN32`|10.2| | |`hipMemHandleTypeWin32`|5.2.0| | | |
+|`CU_MEM_HANDLE_TYPE_WIN32_KMT`|10.2| | |`hipMemHandleTypeWin32Kmt`|5.2.0| | | |
+|`CU_MEM_LOCATION_TYPE_DEVICE`|10.2| | |`hipMemLocationTypeDevice`|5.2.0| | | |
+|`CU_MEM_LOCATION_TYPE_INVALID`|10.2| | |`hipMemLocationTypeInvalid`|5.2.0| | | |
 |`CU_MEM_LOCATION_TYPE_MAX`|10.2| | | | | | | |
-|`CU_MEM_OPERATION_TYPE_MAP`|11.1| | |`hipMemOperationTypeMap`|5.2.0| | |5.2.0|
-|`CU_MEM_OPERATION_TYPE_UNMAP`|11.1| | |`hipMemOperationTypeUnmap`|5.2.0| | |5.2.0|
+|`CU_MEM_OPERATION_TYPE_MAP`|11.1| | |`hipMemOperationTypeMap`|5.2.0| | | |
+|`CU_MEM_OPERATION_TYPE_UNMAP`|11.1| | |`hipMemOperationTypeUnmap`|5.2.0| | | |
 |`CU_MEM_RANGE_ATTRIBUTE_ACCESSED_BY`|8.0| | |`hipMemRangeAttributeAccessedBy`|3.7.0| | | |
 |`CU_MEM_RANGE_ATTRIBUTE_LAST_PREFETCH_LOCATION`|8.0| | |`hipMemRangeAttributeLastPrefetchLocation`|3.7.0| | | |
 |`CU_MEM_RANGE_ATTRIBUTE_PREFERRED_LOCATION`|8.0| | |`hipMemRangeAttributePreferredLocation`|3.7.0| | | |
@@ -861,18 +861,18 @@
 |`CU_TR_FILTER_MODE_LINEAR`| | | |`HIP_TR_FILTER_MODE_LINEAR`|3.5.0| | | |
 |`CU_TR_FILTER_MODE_POINT`| | | |`HIP_TR_FILTER_MODE_POINT`|3.5.0| | | |
 |`CU_USER_OBJECT_NO_DESTRUCTOR_SYNC`|11.3| | | | | | | |
-|`CUaccessPolicyWindow`|11.0| | |`hipAccessPolicyWindow`|5.2.0| | |5.2.0|
-|`CUaccessPolicyWindow_st`|11.0| | |`hipAccessPolicyWindow`|5.2.0| | |5.2.0|
-|`CUaccessProperty`|11.0| | |`hipAccessProperty`|5.2.0| | |5.2.0|
-|`CUaccessProperty_enum`|11.0| | |`hipAccessProperty`|5.2.0| | |5.2.0|
+|`CUaccessPolicyWindow`|11.0| | |`hipAccessPolicyWindow`|5.2.0| | | |
+|`CUaccessPolicyWindow_st`|11.0| | |`hipAccessPolicyWindow`|5.2.0| | | |
+|`CUaccessProperty`|11.0| | |`hipAccessProperty`|5.2.0| | | |
+|`CUaccessProperty_enum`|11.0| | |`hipAccessProperty`|5.2.0| | | |
 |`CUaddress_mode`| | | |`HIPaddress_mode`|3.5.0| | | |
 |`CUaddress_mode_enum`| | | |`HIPaddress_mode_enum`|3.5.0| | | |
 |`CUarray`| | | |`hipArray_t`|1.7.0| | | |
 |`CUarrayMapInfo`|11.1| | |`hipArrayMapInfo`| | | | |
 |`CUarrayMapInfo_st`|11.1| | |`hipArrayMapInfo`| | | | |
 |`CUarrayMapInfo_v1`|11.3| | |`hipArrayMapInfo`| | | | |
-|`CUarraySparseSubresourceType`|11.1| | |`hipArraySparseSubresourceType`|5.2.0| | |5.2.0|
-|`CUarraySparseSubresourceType_enum`|11.1| | |`hipArraySparseSubresourceType`|5.2.0| | |5.2.0|
+|`CUarraySparseSubresourceType`|11.1| | |`hipArraySparseSubresourceType`|5.2.0| | | |
+|`CUarraySparseSubresourceType_enum`|11.1| | |`hipArraySparseSubresourceType`|5.2.0| | | |
 |`CUarray_cubemap_face`| | | | | | | | |
 |`CUarray_cubemap_face_enum`| | | | | | | | |
 |`CUarray_format`| | | |`hipArray_Format`|1.7.0| | | |
@@ -965,8 +965,8 @@
 |`CUgraphExecUpdateResult`|10.2| | |`hipGraphExecUpdateResult`|4.3.0| | | |
 |`CUgraphExecUpdateResult_enum`|10.2| | |`hipGraphExecUpdateResult`|4.3.0| | | |
 |`CUgraphExec_st`|10.0| | |`hipGraphExec`|4.3.0| | | |
-|`CUgraphInstantiate_flags`|11.4| | |`hipGraphInstantiateFlags`|5.2.0| | |5.2.0|
-|`CUgraphInstantiate_flags_enum`|11.4| | |`hipGraphInstantiateFlags`|5.2.0| | |5.2.0|
+|`CUgraphInstantiate_flags`|11.4| | |`hipGraphInstantiateFlags`|5.2.0| | | |
+|`CUgraphInstantiate_flags_enum`|11.4| | |`hipGraphInstantiateFlags`|5.2.0| | | |
 |`CUgraphMem_attribute`|11.4| | | | | | | |
 |`CUgraphMem_attribute_enum`|11.4| | | | | | | |
 |`CUgraphNode`|10.0| | |`hipGraphNode_t`|4.3.0| | | |
@@ -999,56 +999,56 @@
 |`CUjit_option_enum`| | | |`hipJitOption`|1.6.0| | | |
 |`CUjit_target`| | | | | | | | |
 |`CUjit_target_enum`| | | | | | | | |
-|`CUkernelNodeAttrID`|11.0| | |`hipKernelNodeAttrID`|5.2.0| | |5.2.0|
-|`CUkernelNodeAttrID_enum`|11.0| | |`hipKernelNodeAttrID`|5.2.0| | |5.2.0|
-|`CUkernelNodeAttrValue`|11.0| | |`hipKernelNodeAttrValue`|5.2.0| | |5.2.0|
-|`CUkernelNodeAttrValue_union`|11.0| | |`hipKernelNodeAttrValue`|5.2.0| | |5.2.0|
-|`CUkernelNodeAttrValue_v1`|11.3| | |`hipKernelNodeAttrValue`|5.2.0| | |5.2.0|
+|`CUkernelNodeAttrID`|11.0| | |`hipKernelNodeAttrID`|5.2.0| | | |
+|`CUkernelNodeAttrID_enum`|11.0| | |`hipKernelNodeAttrID`|5.2.0| | | |
+|`CUkernelNodeAttrValue`|11.0| | |`hipKernelNodeAttrValue`|5.2.0| | | |
+|`CUkernelNodeAttrValue_union`|11.0| | |`hipKernelNodeAttrValue`|5.2.0| | | |
+|`CUkernelNodeAttrValue_v1`|11.3| | |`hipKernelNodeAttrValue`|5.2.0| | | |
 |`CUlimit`| | | |`hipLimit_t`|1.6.0| | | |
 |`CUlimit_enum`| | | |`hipLimit_t`|1.6.0| | | |
-|`CUmemAccessDesc`|10.2| | |`hipMemAccessDesc`|5.2.0| | |5.2.0|
-|`CUmemAccessDesc_st`|10.2| | |`hipMemAccessDesc`|5.2.0| | |5.2.0|
-|`CUmemAccessDesc_v1`|11.3| | |`hipMemAccessDesc`|5.2.0| | |5.2.0|
-|`CUmemAccess_flags`|10.2| | |`hipMemAccessFlags`|5.2.0| | |5.2.0|
-|`CUmemAccess_flags_enum`|10.2| | |`hipMemAccessFlags`|5.2.0| | |5.2.0|
-|`CUmemAllocationGranularity_flags`|10.2| | |`hipMemAllocationGranularity_flags`|5.2.0| | |5.2.0|
-|`CUmemAllocationGranularity_flags_enum`|10.2| | |`hipMemAllocationGranularity_flags`|5.2.0| | |5.2.0|
-|`CUmemAllocationHandleType`|10.2| | |`hipMemAllocationHandleType`|5.2.0| | |5.2.0|
-|`CUmemAllocationHandleType_enum`|10.2| | |`hipMemAllocationHandleType`|5.2.0| | |5.2.0|
-|`CUmemAllocationProp`|10.2| | |`hipMemAllocationProp`|5.2.0| | |5.2.0|
-|`CUmemAllocationProp_st`|10.2| | |`hipMemAllocationProp`|5.2.0| | |5.2.0|
-|`CUmemAllocationProp_v1`|11.3| | |`hipMemAllocationProp`|5.2.0| | |5.2.0|
-|`CUmemAllocationType`|10.2| | |`hipMemAllocationType`|5.2.0| | |5.2.0|
-|`CUmemAllocationType_enum`|10.2| | |`hipMemAllocationType`|5.2.0| | |5.2.0|
+|`CUmemAccessDesc`|10.2| | |`hipMemAccessDesc`|5.2.0| | | |
+|`CUmemAccessDesc_st`|10.2| | |`hipMemAccessDesc`|5.2.0| | | |
+|`CUmemAccessDesc_v1`|11.3| | |`hipMemAccessDesc`|5.2.0| | | |
+|`CUmemAccess_flags`|10.2| | |`hipMemAccessFlags`|5.2.0| | | |
+|`CUmemAccess_flags_enum`|10.2| | |`hipMemAccessFlags`|5.2.0| | | |
+|`CUmemAllocationGranularity_flags`|10.2| | |`hipMemAllocationGranularity_flags`|5.2.0| | | |
+|`CUmemAllocationGranularity_flags_enum`|10.2| | |`hipMemAllocationGranularity_flags`|5.2.0| | | |
+|`CUmemAllocationHandleType`|10.2| | |`hipMemAllocationHandleType`|5.2.0| | | |
+|`CUmemAllocationHandleType_enum`|10.2| | |`hipMemAllocationHandleType`|5.2.0| | | |
+|`CUmemAllocationProp`|10.2| | |`hipMemAllocationProp`|5.2.0| | | |
+|`CUmemAllocationProp_st`|10.2| | |`hipMemAllocationProp`|5.2.0| | | |
+|`CUmemAllocationProp_v1`|11.3| | |`hipMemAllocationProp`|5.2.0| | | |
+|`CUmemAllocationType`|10.2| | |`hipMemAllocationType`|5.2.0| | | |
+|`CUmemAllocationType_enum`|10.2| | |`hipMemAllocationType`|5.2.0| | | |
 |`CUmemAttach_flags`| | | | | | | | |
 |`CUmemAttach_flags_enum`| | | | | | | | |
-|`CUmemGenericAllocationHandle`|10.2| | |`hipMemGenericAllocationHandle_t`|5.2.0| | |5.2.0|
-|`CUmemGenericAllocationHandle_v1`|11.3| | |`hipMemGenericAllocationHandle_t`|5.2.0| | |5.2.0|
-|`CUmemHandleType`|11.1| | |`hipMemHandleType`|5.2.0| | |5.2.0|
-|`CUmemHandleType_enum`|11.1| | |`hipMemHandleType`|5.2.0| | |5.2.0|
-|`CUmemLocation`|10.2| | |`hipMemLocation`|5.2.0| | |5.2.0|
-|`CUmemLocationType`|10.2| | |`hipMemLocationType`|5.2.0| | |5.2.0|
-|`CUmemLocationType_enum`|10.2| | |`hipMemLocationType`|5.2.0| | |5.2.0|
-|`CUmemLocation_st`|10.2| | |`hipMemLocation`|5.2.0| | |5.2.0|
-|`CUmemLocation_v1`|11.3| | |`hipMemLocation`|5.2.0| | |5.2.0|
-|`CUmemOperationType`|11.1| | |`hipMemOperationType`|5.2.0| | |5.2.0|
-|`CUmemOperationType_enum`|11.1| | |`hipMemOperationType`|5.2.0| | |5.2.0|
-|`CUmemPoolHandle_st`|11.2| | |`ihipMemPoolHandle_t`|5.2.0| | |5.2.0|
-|`CUmemPoolProps`|11.2| | |`hipMemPoolProps`|5.2.0| | |5.2.0|
-|`CUmemPoolProps_st`|11.2| | |`hipMemPoolProps`|5.2.0| | |5.2.0|
-|`CUmemPoolProps_v1`|11.3| | |`hipMemPoolProps`|5.2.0| | |5.2.0|
-|`CUmemPoolPtrExportData`|11.2| | |`hipMemPoolPtrExportData`|5.2.0| | |5.2.0|
-|`CUmemPoolPtrExportData_st`|11.2| | |`hipMemPoolPtrExportData`|5.2.0| | |5.2.0|
-|`CUmemPoolPtrExportData_v1`|11.3| | |`hipMemPoolPtrExportData`|5.2.0| | |5.2.0|
-|`CUmemPool_attribute`|11.2| | |`hipMemPoolAttr`|5.2.0| | |5.2.0|
-|`CUmemPool_attribute_enum`|11.2| | |`hipMemPoolAttr`|5.2.0| | |5.2.0|
+|`CUmemGenericAllocationHandle`|10.2| | |`hipMemGenericAllocationHandle_t`|5.2.0| | | |
+|`CUmemGenericAllocationHandle_v1`|11.3| | |`hipMemGenericAllocationHandle_t`|5.2.0| | | |
+|`CUmemHandleType`|11.1| | |`hipMemHandleType`|5.2.0| | | |
+|`CUmemHandleType_enum`|11.1| | |`hipMemHandleType`|5.2.0| | | |
+|`CUmemLocation`|10.2| | |`hipMemLocation`|5.2.0| | | |
+|`CUmemLocationType`|10.2| | |`hipMemLocationType`|5.2.0| | | |
+|`CUmemLocationType_enum`|10.2| | |`hipMemLocationType`|5.2.0| | | |
+|`CUmemLocation_st`|10.2| | |`hipMemLocation`|5.2.0| | | |
+|`CUmemLocation_v1`|11.3| | |`hipMemLocation`|5.2.0| | | |
+|`CUmemOperationType`|11.1| | |`hipMemOperationType`|5.2.0| | | |
+|`CUmemOperationType_enum`|11.1| | |`hipMemOperationType`|5.2.0| | | |
+|`CUmemPoolHandle_st`|11.2| | |`ihipMemPoolHandle_t`|5.2.0| | | |
+|`CUmemPoolProps`|11.2| | |`hipMemPoolProps`|5.2.0| | | |
+|`CUmemPoolProps_st`|11.2| | |`hipMemPoolProps`|5.2.0| | | |
+|`CUmemPoolProps_v1`|11.3| | |`hipMemPoolProps`|5.2.0| | | |
+|`CUmemPoolPtrExportData`|11.2| | |`hipMemPoolPtrExportData`|5.2.0| | | |
+|`CUmemPoolPtrExportData_st`|11.2| | |`hipMemPoolPtrExportData`|5.2.0| | | |
+|`CUmemPoolPtrExportData_v1`|11.3| | |`hipMemPoolPtrExportData`|5.2.0| | | |
+|`CUmemPool_attribute`|11.2| | |`hipMemPoolAttr`|5.2.0| | | |
+|`CUmemPool_attribute_enum`|11.2| | |`hipMemPoolAttr`|5.2.0| | | |
 |`CUmemRangeHandleType`|11.7| | | | | | | |
 |`CUmemRangeHandleType_enum`|11.7| | | | | | | |
 |`CUmem_advise`|8.0| | |`hipMemoryAdvise`|3.7.0| | | |
 |`CUmem_advise_enum`|8.0| | |`hipMemoryAdvise`|3.7.0| | | |
 |`CUmem_range_attribute`|8.0| | |`hipMemRangeAttribute`|3.7.0| | | |
 |`CUmem_range_attribute_enum`|8.0| | |`hipMemRangeAttribute`|3.7.0| | | |
-|`CUmemoryPool`|11.2| | |`hipMemPool_t`|5.2.0| | |5.2.0|
+|`CUmemoryPool`|11.2| | |`hipMemPool_t`|5.2.0| | | |
 |`CUmemorytype`| | | |`hipMemoryType`|1.6.0| | | |
 |`CUmemorytype_enum`| | | |`hipMemoryType`|1.6.0| | | |
 |`CUmipmappedArray`| | | |`hipMipmappedArray_t`|1.7.0| | | |
@@ -1115,8 +1115,8 @@
 |`CUuserObject_flags`|11.3| | | | | | | |
 |`CUuserObject_flags_enum`|11.3| | | | | | | |
 |`CUuserObject_st`|11.3| | | | | | | |
-|`CUuuid`| | | |`hipUUID`|5.2.0| | |5.2.0|
-|`CUuuid_st`| | | |`hipUUID_t`|5.2.0| | |5.2.0|
+|`CUuuid`| | | |`hipUUID`|5.2.0| | | |
+|`CUuuid_st`| | | |`hipUUID_t`|5.2.0| | | |
 |`GLenum`| | | |`GLenum`|5.1.0| | | |
 |`GLuint`| | | |`GLuint`|5.1.0| | | |
 |`__CUDACC__`| | | |`__HIPCC__`|1.6.0| | | |
@@ -1149,16 +1149,16 @@
 |`cuDeviceGet`| | | |`hipDeviceGet`|1.6.0| | | |
 |`cuDeviceGetAttribute`| | | |`hipDeviceGetAttribute`|1.6.0| | | |
 |`cuDeviceGetCount`| | | |`hipGetDeviceCount`|1.6.0| | | |
-|`cuDeviceGetDefaultMemPool`|11.2| | |`hipDeviceGetDefaultMemPool`|5.2.0| | |5.2.0|
+|`cuDeviceGetDefaultMemPool`|11.2| | |`hipDeviceGetDefaultMemPool`|5.2.0| | | |
 |`cuDeviceGetExecAffinitySupport`|11.4| | | | | | | |
 |`cuDeviceGetLuid`|10.0| | | | | | | |
-|`cuDeviceGetMemPool`|11.2| | |`hipDeviceGetMemPool`|5.2.0| | |5.2.0|
+|`cuDeviceGetMemPool`|11.2| | |`hipDeviceGetMemPool`|5.2.0| | | |
 |`cuDeviceGetName`| | | |`hipDeviceGetName`|1.6.0| | | |
 |`cuDeviceGetNvSciSyncAttributes`|10.2| | | | | | | |
 |`cuDeviceGetTexture1DLinearMaxWidth`|11.1| | | | | | | |
-|`cuDeviceGetUuid`|9.2| | |`hipDeviceGetUuid`|5.2.0| | |5.2.0|
-|`cuDeviceGetUuid_v2`|11.4| | |`hipDeviceGetUuid`|5.2.0| | |5.2.0|
-|`cuDeviceSetMemPool`|11.2| | |`hipDeviceSetMemPool`|5.2.0| | |5.2.0|
+|`cuDeviceGetUuid`|9.2| | |`hipDeviceGetUuid`|5.2.0| | | |
+|`cuDeviceGetUuid_v2`|11.4| | |`hipDeviceGetUuid`|5.2.0| | | |
+|`cuDeviceSetMemPool`|11.2| | |`hipDeviceSetMemPool`|5.2.0| | | |
 |`cuDeviceTotalMem`| | | |`hipDeviceTotalMem`|1.6.0| | | |
 |`cuDeviceTotalMem_v2`| | | |`hipDeviceTotalMem`|1.6.0| | | |
 
@@ -1356,39 +1356,39 @@
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
-|`cuMemAddressFree`|10.2| | |`hipMemAddressFree`|5.2.0| | |5.2.0|
-|`cuMemAddressReserve`|10.2| | |`hipMemAddressReserve`|5.2.0| | |5.2.0|
-|`cuMemCreate`|10.2| | |`hipMemCreate`|5.2.0| | |5.2.0|
-|`cuMemExportToShareableHandle`|10.2| | |`hipMemExportToShareableHandle`|5.2.0| | |5.2.0|
-|`cuMemGetAccess`|10.2| | |`hipMemGetAccess`|5.2.0| | |5.2.0|
-|`cuMemGetAllocationGranularity`|10.2| | |`hipMemGetAllocationGranularity`|5.2.0| | |5.2.0|
-|`cuMemGetAllocationPropertiesFromHandle`|10.2| | |`hipMemGetAllocationPropertiesFromHandle`|5.2.0| | |5.2.0|
-|`cuMemImportFromShareableHandle`|10.2| | |`hipMemImportFromShareableHandle`|5.2.0| | |5.2.0|
-|`cuMemMap`|10.2| | |`hipMemMap`|5.2.0| | |5.2.0|
-|`cuMemMapArrayAsync`|11.1| | |`hipMemMapArrayAsync`|5.2.0| | |5.2.0|
-|`cuMemRelease`|10.2| | |`hipMemRelease`|5.2.0| | |5.2.0|
-|`cuMemRetainAllocationHandle`|11.0| | |`hipMemRetainAllocationHandle`|5.2.0| | |5.2.0|
-|`cuMemSetAccess`|10.2| | |`hipMemSetAccess`|5.2.0| | |5.2.0|
-|`cuMemUnmap`|10.2| | |`hipMemUnmap`|5.2.0| | |5.2.0|
+|`cuMemAddressFree`|10.2| | |`hipMemAddressFree`|5.2.0| | | |
+|`cuMemAddressReserve`|10.2| | |`hipMemAddressReserve`|5.2.0| | | |
+|`cuMemCreate`|10.2| | |`hipMemCreate`|5.2.0| | | |
+|`cuMemExportToShareableHandle`|10.2| | |`hipMemExportToShareableHandle`|5.2.0| | | |
+|`cuMemGetAccess`|10.2| | |`hipMemGetAccess`|5.2.0| | | |
+|`cuMemGetAllocationGranularity`|10.2| | |`hipMemGetAllocationGranularity`|5.2.0| | | |
+|`cuMemGetAllocationPropertiesFromHandle`|10.2| | |`hipMemGetAllocationPropertiesFromHandle`|5.2.0| | | |
+|`cuMemImportFromShareableHandle`|10.2| | |`hipMemImportFromShareableHandle`|5.2.0| | | |
+|`cuMemMap`|10.2| | |`hipMemMap`|5.2.0| | | |
+|`cuMemMapArrayAsync`|11.1| | |`hipMemMapArrayAsync`|5.2.0| | | |
+|`cuMemRelease`|10.2| | |`hipMemRelease`|5.2.0| | | |
+|`cuMemRetainAllocationHandle`|11.0| | |`hipMemRetainAllocationHandle`|5.2.0| | | |
+|`cuMemSetAccess`|10.2| | |`hipMemSetAccess`|5.2.0| | | |
+|`cuMemUnmap`|10.2| | |`hipMemUnmap`|5.2.0| | | |
 
 ## **13. Stream Ordered Memory Allocator**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
-|`cuMemAllocAsync`|11.2| | |`hipMallocAsync`|5.2.0| | |5.2.0|
-|`cuMemAllocFromPoolAsync`|11.2| | |`hipMallocFromPoolAsync`|5.2.0| | |5.2.0|
-|`cuMemFreeAsync`|11.2| | |`hipFreeAsync`|5.2.0| | |5.2.0|
-|`cuMemPoolCreate`|11.2| | |`hipMemPoolCreate`|5.2.0| | |5.2.0|
-|`cuMemPoolDestroy`|11.2| | |`hipMemPoolDestroy`|5.2.0| | |5.2.0|
-|`cuMemPoolExportPointer`|11.2| | |`hipMemPoolExportPointer`|5.2.0| | |5.2.0|
-|`cuMemPoolExportToShareableHandle`|11.2| | |`hipMemPoolExportToShareableHandle`|5.2.0| | |5.2.0|
-|`cuMemPoolGetAccess`|11.2| | |`hipMemPoolGetAccess`|5.2.0| | |5.2.0|
-|`cuMemPoolGetAttribute`|11.2| | |`hipMemPoolGetAttribute`|5.2.0| | |5.2.0|
-|`cuMemPoolImportFromShareableHandle`|11.2| | |`hipMemPoolImportFromShareableHandle`|5.2.0| | |5.2.0|
-|`cuMemPoolImportPointer`|11.2| | |`hipMemPoolImportPointer`|5.2.0| | |5.2.0|
-|`cuMemPoolSetAccess`|11.2| | |`hipMemPoolSetAccess`|5.2.0| | |5.2.0|
-|`cuMemPoolSetAttribute`|11.2| | |`hipMemPoolSetAttribute`|5.2.0| | |5.2.0|
-|`cuMemPoolTrimTo`|11.2| | |`hipMemPoolTrimTo`|5.2.0| | |5.2.0|
+|`cuMemAllocAsync`|11.2| | |`hipMallocAsync`|5.2.0| | | |
+|`cuMemAllocFromPoolAsync`|11.2| | |`hipMallocFromPoolAsync`|5.2.0| | | |
+|`cuMemFreeAsync`|11.2| | |`hipFreeAsync`|5.2.0| | | |
+|`cuMemPoolCreate`|11.2| | |`hipMemPoolCreate`|5.2.0| | | |
+|`cuMemPoolDestroy`|11.2| | |`hipMemPoolDestroy`|5.2.0| | | |
+|`cuMemPoolExportPointer`|11.2| | |`hipMemPoolExportPointer`|5.2.0| | | |
+|`cuMemPoolExportToShareableHandle`|11.2| | |`hipMemPoolExportToShareableHandle`|5.2.0| | | |
+|`cuMemPoolGetAccess`|11.2| | |`hipMemPoolGetAccess`|5.2.0| | | |
+|`cuMemPoolGetAttribute`|11.2| | |`hipMemPoolGetAttribute`|5.2.0| | | |
+|`cuMemPoolImportFromShareableHandle`|11.2| | |`hipMemPoolImportFromShareableHandle`|5.2.0| | | |
+|`cuMemPoolImportPointer`|11.2| | |`hipMemPoolImportPointer`|5.2.0| | | |
+|`cuMemPoolSetAccess`|11.2| | |`hipMemPoolSetAccess`|5.2.0| | | |
+|`cuMemPoolSetAttribute`|11.2| | |`hipMemPoolSetAttribute`|5.2.0| | | |
+|`cuMemPoolTrimTo`|11.2| | |`hipMemPoolTrimTo`|5.2.0| | | |
 
 ## **14. Unified Addressing**
 
@@ -1429,7 +1429,7 @@
 |`cuStreamSynchronize`| | | |`hipStreamSynchronize`|1.6.0| | | |
 |`cuStreamUpdateCaptureDependencies`|11.3| | |`hipStreamUpdateCaptureDependencies`|5.0.0| | | |
 |`cuStreamWaitEvent`| | | |`hipStreamWaitEvent`|1.6.0| | | |
-|`cuThreadExchangeStreamCaptureMode`|10.1| | |`hipThreadExchangeStreamCaptureMode`|5.2.0| | |5.2.0|
+|`cuThreadExchangeStreamCaptureMode`|10.1| | |`hipThreadExchangeStreamCaptureMode`|5.2.0| | | |
 
 ## **16. Event Management**
 
@@ -1483,7 +1483,7 @@
 |`cuFuncSetSharedMemConfig`| | | | | | | | |
 |`cuLaunchCooperativeKernel`|9.0| | | | | | | |
 |`cuLaunchCooperativeKernelMultiDevice`|9.0|11.3| | | | | | |
-|`cuLaunchHostFunc`|10.0| | |`hipLaunchHostFunc`|5.2.0| | |5.2.0|
+|`cuLaunchHostFunc`|10.0| | |`hipLaunchHostFunc`|5.2.0| | | |
 |`cuLaunchKernel`| | | |`hipModuleLaunchKernel`|1.6.0| | | |
 
 ## **20. Execution Control [DEPRECATED]**
@@ -1559,9 +1559,9 @@
 |`cuGraphInstantiateWithFlags`|11.4| | |`hipGraphInstantiateWithFlags`|5.0.0| | | |
 |`cuGraphInstantiate_v2`|11.0| | |`hipGraphInstantiate`|4.3.0| | | |
 |`cuGraphKernelNodeCopyAttributes`|11.0| | | | | | | |
-|`cuGraphKernelNodeGetAttribute`|11.0| | |`hipGraphKernelNodeGetAttribute`|5.2.0| | |5.2.0|
+|`cuGraphKernelNodeGetAttribute`|11.0| | |`hipGraphKernelNodeGetAttribute`|5.2.0| | | |
 |`cuGraphKernelNodeGetParams`|10.0| | |`hipGraphKernelNodeGetParams`|4.5.0| | | |
-|`cuGraphKernelNodeSetAttribute`|11.0| | |`hipGraphKernelNodeSetAttribute`|5.2.0| | |5.2.0|
+|`cuGraphKernelNodeSetAttribute`|11.0| | |`hipGraphKernelNodeSetAttribute`|5.2.0| | | |
 |`cuGraphKernelNodeSetParams`|10.0| | |`hipGraphKernelNodeSetParams`|4.5.0| | | |
 |`cuGraphLaunch`|10.0| | |`hipGraphLaunch`|4.3.0| | | |
 |`cuGraphMemAllocNodeGetParams`|11.4| | | | | | | |
