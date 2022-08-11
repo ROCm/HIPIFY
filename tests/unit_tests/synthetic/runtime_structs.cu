@@ -188,6 +188,9 @@ int main() {
 #if CUDA_VERSION >= 11030
   // CHECK: hipMemPoolPtrExportData memPoolPtrExportData;
   cudaMemPoolPtrExportData memPoolPtrExportData;
+
+  // CHECK: hipUserObject_t userObject;
+  cudaUserObject_t userObject;
 #endif
 
   return 0;

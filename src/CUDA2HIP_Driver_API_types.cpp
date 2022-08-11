@@ -281,9 +281,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUmemPoolPtrExportData_v1",                                        {"hipMemPoolPtrExportData",                                  "", CONV_TYPE, API_DRIVER, 1}},
 
   //
-  {"CUuserObject_st",                                                  {"hipUserObject",                                            "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CUuserObject_st",                                                  {"hipUserObject",                                            "", CONV_TYPE, API_DRIVER, 1, HIP_EXPERIMENTAL}},
   // cudaUserObject_t
-  {"CUuserObject",                                                     {"hipUserObject_t",                                          "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CUuserObject",                                                     {"hipUserObject_t",                                          "", CONV_TYPE, API_DRIVER, 1, HIP_EXPERIMENTAL}},
 
   //
   {"CUexecAffinitySmCount_st",                                         {"hipExecAffinitySmCount",                                   "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
@@ -691,9 +691,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaDevAttrDirectManagedMemAccessFromHost
   {"CU_DEVICE_ATTRIBUTE_DIRECT_MANAGED_MEM_ACCESS_FROM_HOST",          {"hipDeviceAttributeDirectManagedMemAccessFromHost",         "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 101
   // no analogue
-  {"CU_DEVICE_ATTRIBUTE_VIRTUAL_ADDRESS_MANAGEMENT_SUPPORTED",         {"hipDeviceAttributeVirtualMemoryManagementSupported",       "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED | CUDA_DEPRECATED}}, // 102
+  {"CU_DEVICE_ATTRIBUTE_VIRTUAL_ADDRESS_MANAGEMENT_SUPPORTED",         {"hipDeviceAttributeVirtualAddressManagementSupported",      "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED | CUDA_DEPRECATED}}, // 102
   // no analogue
-  {"CU_DEVICE_ATTRIBUTE_VIRTUAL_MEMORY_MANAGEMENT_SUPPORTED",          {"hipDeviceAttributeVirtualMemoryManagementSupported",       "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 102
+  {"CU_DEVICE_ATTRIBUTE_VIRTUAL_MEMORY_MANAGEMENT_SUPPORTED",          {"hipDeviceAttributeVirtualMemoryManagementSupported",       "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_EXPERIMENTAL}}, // 102
   // no analogue
   {"CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_POSIX_FILE_DESCRIPTOR_SUPPORTED",  {"hipDeviceAttributeHandleTypePosixFileDescriptorSupported", "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 103
   // no analogue
@@ -1084,9 +1084,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaGraphNodeTypeEventRecord = 0x07
   {"CU_GRAPH_NODE_TYPE_EVENT_RECORD",                                  {"hipGraphNodeTypeEventRecord",                              "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 7
   // cudaGraphNodeTypeExtSemaphoreSignal
-  {"CU_GRAPH_NODE_TYPE_EXT_SEMAS_SIGNAL",                              {"hipGraphNodeTypeExtSemasSignal",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 8
+  {"CU_GRAPH_NODE_TYPE_EXT_SEMAS_SIGNAL",                              {"hipGraphNodeTypeExtSemaphoreSignal",                       "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_EXPERIMENTAL}}, // 8
   // cudaGraphNodeTypeExtSemaphoreWait
-  {"CU_GRAPH_NODE_TYPE_EXT_SEMAS_WAIT",                                {"hipGraphNodeTypeExtSemasWait",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 9
+  {"CU_GRAPH_NODE_TYPE_EXT_SEMAS_WAIT",                                {"hipGraphNodeTypeExtSemaphoreWait",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_EXPERIMENTAL}}, // 9
   // cudaGraphNodeTypeMemAlloc
   {"CU_GRAPH_NODE_TYPE_MEM_ALLOC",                                     {"hipGraphNodeTypeMemAlloc",                                 "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 10
   // cudaGraphNodeTypeMemFree
@@ -1231,7 +1231,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUlimit_enum",                                                     {"hipLimit_t",                                               "", CONV_TYPE, API_DRIVER, 1}},
   // CUlimit enum values
   // cudaLimitStackSize
-  {"CU_LIMIT_STACK_SIZE",                                              {"hipLimitStackSize",                                        "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0x00
+  {"CU_LIMIT_STACK_SIZE",                                              {"hipLimitStackSize",                                        "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_EXPERIMENTAL}}, // 0x00
   // cudaLimitPrintfFifoSize
   {"CU_LIMIT_PRINTF_FIFO_SIZE",                                        {"hipLimitPrintfFifoSize",                                   "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x01
   // cudaLimitMallocHeapSize
@@ -2042,18 +2042,18 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_GRAPH_DEBUG_DOT_FLAGS_BATCH_MEM_OP_NODE_PARAMS",                {"hipGraphDebugDotFlagsBatchMemOpNodeParams",                "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 1<<13
 
   // cudaUserObjectFlags
-  {"CUuserObject_flags",                                               {"hipUserObjectFlags",                                       "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
-  {"CUuserObject_flags_enum",                                          {"hipUserObjectFlags",                                       "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CUuserObject_flags",                                               {"hipUserObjectFlags",                                       "", CONV_TYPE, API_DRIVER, 1, HIP_EXPERIMENTAL}},
+  {"CUuserObject_flags_enum",                                          {"hipUserObjectFlags",                                       "", CONV_TYPE, API_DRIVER, 1, HIP_EXPERIMENTAL}},
   // CUuserObject_flags enum values
   // cudaUserObjectNoDestructorSync
-  {"CU_USER_OBJECT_NO_DESTRUCTOR_SYNC",                                {"hipUserObjectNoDestructorSync",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 1
+  {"CU_USER_OBJECT_NO_DESTRUCTOR_SYNC",                                {"hipUserObjectNoDestructorSync",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_EXPERIMENTAL}}, // 1
 
   // cudaUserObjectRetainFlags
-  {"CUuserObjectRetain_flags",                                         {"hipUserObjectRetainFlags",                                 "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
-  {"CUuserObjectRetain_flags_enum",                                    {"hipUserObjectRetainFlags",                                 "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CUuserObjectRetain_flags",                                         {"hipUserObjectRetainFlags",                                 "", CONV_TYPE, API_DRIVER, 1, HIP_EXPERIMENTAL}},
+  {"CUuserObjectRetain_flags_enum",                                    {"hipUserObjectRetainFlags",                                 "", CONV_TYPE, API_DRIVER, 1, HIP_EXPERIMENTAL}},
   // CUuserObjectRetain_flags enum values
   // cudaGraphUserObjectMove
-  {"CU_GRAPH_USER_OBJECT_MOVE",                                        {"hipGraphUserObjectMove",                                   "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 1
+  {"CU_GRAPH_USER_OBJECT_MOVE",                                        {"hipGraphUserObjectMove",                                   "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_EXPERIMENTAL}}, // 1
 
   // no analogue
   {"CUexecAffinityType",                                               {"hipExecAffinityType",                                      "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
@@ -2063,17 +2063,17 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_EXEC_AFFINITY_TYPE_MAX",                                        {"hipExecAffinityTypeMax",                                   "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, //
 
   // cudaGraphMemAttributeType
-  {"CUgraphMem_attribute",                                             {"hipGraphMemAttribute",                                     "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
-  {"CUgraphMem_attribute_enum",                                        {"hipGraphMemAttribute",                                     "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CUgraphMem_attribute",                                             {"hipGraphMemAttributeType",                                 "", CONV_TYPE, API_DRIVER, 1, HIP_EXPERIMENTAL}},
+  {"CUgraphMem_attribute_enum",                                        {"hipGraphMemAttributeType",                                 "", CONV_TYPE, API_DRIVER, 1, HIP_EXPERIMENTAL}},
   // CUgraphMem_attribute enum values
   // cudaGraphMemAttrUsedMemCurrent
-  {"CU_GRAPH_MEM_ATTR_USED_MEM_CURRENT",                               {"hipGraphMemAttrUsedMemCurrent",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CU_GRAPH_MEM_ATTR_USED_MEM_CURRENT",                               {"hipGraphMemAttrUsedMemCurrent",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_EXPERIMENTAL}},
   // cudaGraphMemAttrUsedMemHigh
-  {"CU_GRAPH_MEM_ATTR_USED_MEM_HIGH",                                  {"hipGraphMemAttrUsedMemHigh",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CU_GRAPH_MEM_ATTR_USED_MEM_HIGH",                                  {"hipGraphMemAttrUsedMemHigh",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_EXPERIMENTAL}},
   // cudaGraphMemAttrReservedMemCurrent
-  {"CU_GRAPH_MEM_ATTR_RESERVED_MEM_CURRENT",                           {"hipGraphMemAttrReservedMemCurrent",                        "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CU_GRAPH_MEM_ATTR_RESERVED_MEM_CURRENT",                           {"hipGraphMemAttrReservedMemCurrent",                        "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_EXPERIMENTAL}},
   // cudaGraphMemAttrReservedMemHigh
-  {"CU_GRAPH_MEM_ATTR_RESERVED_MEM_HIGH",                              {"hipGraphMemAttrReservedMemHigh",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CU_GRAPH_MEM_ATTR_RESERVED_MEM_HIGH",                              {"hipGraphMemAttrReservedMemHigh",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_EXPERIMENTAL}},
 
   // cudaGraphInstantiateFlags
   {"CUgraphInstantiate_flags",                                         {"hipGraphInstantiateFlags",                                 "", CONV_TYPE, API_DRIVER, 1}},
@@ -3284,4 +3284,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {
   {"hipArraySparseSubresourceType",                                    {HIP_5020, HIP_0,    HIP_0   }},
   {"hipArraySparseSubresourceTypeSparseLevel",                         {HIP_5020, HIP_0,    HIP_0   }},
   {"hipArraySparseSubresourceTypeMiptail",                             {HIP_5020, HIP_0,    HIP_0   }},
+  {"hipDeviceAttributeVirtualMemoryManagementSupported",               {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipUserObject",                                                    {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipUserObject_t",                                                  {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
 };

@@ -274,7 +274,9 @@ int main() {
 #endif
 #if CUDA_VERSION >= 11020
   // CHECK: hipDeviceAttribute_t DEVICE_ATTRIBUTE_MEMORY_POOLS_SUPPORTED = hipDeviceAttributeMemoryPoolsSupported;
+  // CHECK-NEXT: hipDeviceAttribute_t DEVICE_ATTRIBUTE_VIRTUAL_MEMORY_MANAGEMENT_SUPPORTED = hipDeviceAttributeVirtualMemoryManagementSupported;
   CUdevice_attribute DEVICE_ATTRIBUTE_MEMORY_POOLS_SUPPORTED = CU_DEVICE_ATTRIBUTE_MEMORY_POOLS_SUPPORTED;
+  CUdevice_attribute DEVICE_ATTRIBUTE_VIRTUAL_MEMORY_MANAGEMENT_SUPPORTED = CU_DEVICE_ATTRIBUTE_VIRTUAL_MEMORY_MANAGEMENT_SUPPORTED;
 #endif
 
 #if CUDA_VERSION > 7050
@@ -435,6 +437,12 @@ int main() {
   CUgraphNodeType GRAPH_NODE_TYPE_WAIT_EVENT = CU_GRAPH_NODE_TYPE_WAIT_EVENT;
   CUgraphNodeType GRAPH_NODE_TYPE_EVENT_RECORD = CU_GRAPH_NODE_TYPE_EVENT_RECORD;
 #endif
+#if CUDA_VERSION >= 11020
+  // CHECK: hipGraphNodeType GRAPH_NODE_TYPE_EXT_SEMAS_SIGNAL = hipGraphNodeTypeExtSemaphoreSignal;
+  // CHECK-NEXT: hipGraphNodeType GRAPH_NODE_TYPE_EXT_SEMAS_WAIT = hipGraphNodeTypeExtSemaphoreWait;
+  CUgraphNodeType GRAPH_NODE_TYPE_EXT_SEMAS_SIGNAL = CU_GRAPH_NODE_TYPE_EXT_SEMAS_SIGNAL;
+  CUgraphNodeType GRAPH_NODE_TYPE_EXT_SEMAS_WAIT = CU_GRAPH_NODE_TYPE_EXT_SEMAS_WAIT;
+#endif
 
 #if CUDA_VERSION > 10010
   // CHECK: hipGraphExecUpdateResult graphExecUpdateResult;
@@ -510,10 +518,12 @@ int main() {
 
   // CHECK: hipLimit_t limit;
   // CHECK-NEXT: hipLimit_t limit_enum;
+  // CHECK-NEXT: hipLimit_t LIMIT_STACK_SIZE = hipLimitStackSize;
   // CHECK-NEXT: hipLimit_t LIMIT_PRINTF_FIFO_SIZE = hipLimitPrintfFifoSize;
   // CHECK-NEXT: hipLimit_t LIMIT_MALLOC_HEAP_SIZE = hipLimitMallocHeapSize;
   CUlimit limit;
   CUlimit_enum limit_enum;
+  CUlimit LIMIT_STACK_SIZE = CU_LIMIT_STACK_SIZE;
   CUlimit LIMIT_PRINTF_FIFO_SIZE = CU_LIMIT_PRINTF_FIFO_SIZE;
   CUlimit LIMIT_MALLOC_HEAP_SIZE = CU_LIMIT_MALLOC_HEAP_SIZE;
 
@@ -957,6 +967,20 @@ int main() {
   CUmemPool_attribute MEMPOOL_ATTR_RESERVED_MEM_HIGH = CU_MEMPOOL_ATTR_RESERVED_MEM_HIGH;
   CUmemPool_attribute MEMPOOL_ATTR_USED_MEM_CURRENT = CU_MEMPOOL_ATTR_USED_MEM_CURRENT;
   CUmemPool_attribute MEMPOOL_ATTR_USED_MEM_HIGH = CU_MEMPOOL_ATTR_USED_MEM_HIGH;
+
+  // CHECK: hipUserObjectFlags userObject_flags;
+  // CHECK-NEXT: hipUserObjectFlags userObject_flags_enum;
+  // CHECK-NEXT: hipUserObjectFlags USER_OBJECT_NO_DESTRUCTOR_SYNC = hipUserObjectNoDestructorSync;
+  CUuserObject_flags userObject_flags;
+  CUuserObject_flags_enum userObject_flags_enum;
+  CUuserObject_flags USER_OBJECT_NO_DESTRUCTOR_SYNC = CU_USER_OBJECT_NO_DESTRUCTOR_SYNC;
+
+  // CHECK: hipUserObjectRetainFlags userObjectRetain_flags;
+  // CHECK-NEXT: hipUserObjectRetainFlags userObjectRetain_flags_enum;
+  // CHECK-NEXT: hipUserObjectRetainFlags GRAPH_USER_OBJECT_MOVE = hipGraphUserObjectMove;
+  CUuserObjectRetain_flags userObjectRetain_flags;
+  CUuserObjectRetain_flags_enum userObjectRetain_flags_enum;
+  CUuserObjectRetain_flags GRAPH_USER_OBJECT_MOVE = CU_GRAPH_USER_OBJECT_MOVE;
 #endif
 
 #if CUDA_VERSION >= 10020
@@ -1021,6 +1045,19 @@ int main() {
   CUgraphInstantiate_flags graphInstantiate_flags;
   CUgraphInstantiate_flags_enum graphInstantiate_flags_enum;
   CUgraphInstantiate_flags GRAPH_INSTANTIATE_FLAG_AUTO_FREE_ON_LAUNCH = CUDA_GRAPH_INSTANTIATE_FLAG_AUTO_FREE_ON_LAUNCH;
+
+  // CHECK: hipGraphMemAttributeType graphMem_attribute;
+  // CHECK-NEXT: hipGraphMemAttributeType graphMem_attribute_enum;
+  // CHECK-NEXT: hipGraphMemAttributeType GRAPH_MEM_ATTR_USED_MEM_CURRENT = hipGraphMemAttrUsedMemCurrent;
+  // CHECK-NEXT: hipGraphMemAttributeType GRAPH_MEM_ATTR_USED_MEM_HIGH = hipGraphMemAttrUsedMemHigh;
+  // CHECK-NEXT: hipGraphMemAttributeType GRAPH_MEM_ATTR_RESERVED_MEM_CURRENT = hipGraphMemAttrReservedMemCurrent;
+  // CHECK-NEXT: hipGraphMemAttributeType GRAPH_MEM_ATTR_RESERVED_MEM_HIGH = hipGraphMemAttrReservedMemHigh;
+  CUgraphMem_attribute graphMem_attribute;
+  CUgraphMem_attribute_enum graphMem_attribute_enum;
+  CUgraphMem_attribute GRAPH_MEM_ATTR_USED_MEM_CURRENT = CU_GRAPH_MEM_ATTR_USED_MEM_CURRENT;
+  CUgraphMem_attribute GRAPH_MEM_ATTR_USED_MEM_HIGH = CU_GRAPH_MEM_ATTR_USED_MEM_HIGH;
+  CUgraphMem_attribute GRAPH_MEM_ATTR_RESERVED_MEM_CURRENT = CU_GRAPH_MEM_ATTR_RESERVED_MEM_CURRENT;
+  CUgraphMem_attribute GRAPH_MEM_ATTR_RESERVED_MEM_HIGH = CU_GRAPH_MEM_ATTR_RESERVED_MEM_HIGH;
 #endif
 
 #if CUDA_VERSION >= 10020
