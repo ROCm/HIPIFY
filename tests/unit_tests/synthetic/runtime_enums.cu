@@ -489,6 +489,13 @@ int main() {
   cudaGraphNodeType GraphNodeTypeWaitEvent = cudaGraphNodeTypeWaitEvent;
   cudaGraphNodeType GraphNodeTypeEventRecord = cudaGraphNodeTypeEventRecord;
 #endif
+#if CUDA_VERSION >= 11040
+  // CHECK: hipGraphNodeType GraphNodeTypeExtSemaphoreSignal = hipGraphNodeTypeExtSemaphoreSignal;
+  // CHECK-NEXT: hipGraphNodeType GraphNodeTypeExtSemaphoreWait = hipGraphNodeTypeExtSemaphoreWait;
+  cudaGraphNodeType GraphNodeTypeExtSemaphoreSignal = cudaGraphNodeTypeExtSemaphoreSignal;
+  cudaGraphNodeType GraphNodeTypeExtSemaphoreWait = cudaGraphNodeTypeExtSemaphoreWait;
+#endif
+
 #if CUDA_VERSION > 9020
   // CHECK: hipGraphNodeType GraphNodeTypeCount = hipGraphNodeTypeCount;
   cudaGraphNodeType GraphNodeTypeCount = cudaGraphNodeTypeCount;
@@ -518,9 +525,11 @@ int main() {
 #endif
 
   // CHECK: hipLimit_t Limit;
+  // CHECK-NEXT: hipLimit_t LimitStackSize = hipLimitStackSize;
   // CHECK-NEXT: hipLimit_t LimitPrintfFifoSize = hipLimitPrintfFifoSize;
   // CHECK-NEXT: hipLimit_t LimitMallocHeapSize = hipLimitMallocHeapSize;
   cudaLimit Limit;
+  cudaLimit LimitStackSize = cudaLimitStackSize;
   cudaLimit LimitPrintfFifoSize = cudaLimitPrintfFifoSize;
   cudaLimit LimitMallocHeapSize = cudaLimitMallocHeapSize;
 
@@ -560,6 +569,11 @@ int main() {
   cudaMemoryType MemoryType;
   cudaMemoryType MemoryTypeHost = cudaMemoryTypeHost;
   cudaMemoryType MemoryTypeDevice = cudaMemoryTypeDevice;
+
+#if CUDA_VERSION >= 10000
+  // CHECK: hipMemoryType MemoryTypeManaged = hipMemoryTypeManaged;
+  cudaMemoryType MemoryTypeManaged = cudaMemoryTypeManaged;
+#endif
 
 #if CUDA_VERSION > 7050
   // CHECK: hipMemRangeAttribute MemRangeAttribute;
@@ -783,6 +797,16 @@ int main() {
   cudaMemPoolAttr MemPoolAttrReservedMemHigh = cudaMemPoolAttrReservedMemHigh;
   cudaMemPoolAttr MemPoolAttrUsedMemCurrent = cudaMemPoolAttrUsedMemCurrent;
   cudaMemPoolAttr MemPoolAttrUsedMemHigh = cudaMemPoolAttrUsedMemHigh;
+
+  // CHECK: hipUserObjectFlags UserObjectFlags;
+  // CHECK-NEXT: hipUserObjectFlags UserObjectNoDestructorSync = hipUserObjectNoDestructorSync;
+  cudaUserObjectFlags UserObjectFlags;
+  cudaUserObjectFlags UserObjectNoDestructorSync = cudaUserObjectNoDestructorSync;
+
+  // CHECK: hipUserObjectRetainFlags UserObjectRetainFlags;
+  // CHECK-NEXT: hipUserObjectRetainFlags GraphUserObjectMove = hipGraphUserObjectMove;
+  cudaUserObjectRetainFlags UserObjectRetainFlags;
+  cudaUserObjectRetainFlags GraphUserObjectMove = cudaGraphUserObjectMove;
 #endif
 
 #if CUDA_VERSION >= 11020
@@ -834,6 +858,17 @@ int main() {
   // CHECK-NEXT: hipGraphInstantiateFlags GraphInstantiateFlagAutoFreeOnLaunch = hipGraphInstantiateFlagAutoFreeOnLaunch;
   cudaGraphInstantiateFlags GraphInstantiateFlags;
   cudaGraphInstantiateFlags GraphInstantiateFlagAutoFreeOnLaunch = cudaGraphInstantiateFlagAutoFreeOnLaunch;
+
+  // CHECK: hipGraphMemAttributeType GraphMemAttributeType;
+  // CHECK-NEXT: hipGraphMemAttributeType GraphMemAttrUsedMemCurrent = hipGraphMemAttrUsedMemCurrent;
+  // CHECK-NEXT: hipGraphMemAttributeType GraphMemAttrUsedMemHigh = hipGraphMemAttrUsedMemHigh;
+  // CHECK-NEXT: hipGraphMemAttributeType GraphMemAttrReservedMemCurrent = hipGraphMemAttrReservedMemCurrent;
+  // CHECK-NEXT: hipGraphMemAttributeType GraphMemAttrReservedMemHigh = hipGraphMemAttrReservedMemHigh;
+  cudaGraphMemAttributeType GraphMemAttributeType;
+  cudaGraphMemAttributeType GraphMemAttrUsedMemCurrent = cudaGraphMemAttrUsedMemCurrent;
+  cudaGraphMemAttributeType GraphMemAttrUsedMemHigh = cudaGraphMemAttrUsedMemHigh;
+  cudaGraphMemAttributeType GraphMemAttrReservedMemCurrent = cudaGraphMemAttrReservedMemCurrent;
+  cudaGraphMemAttributeType GraphMemAttrReservedMemHigh = cudaGraphMemAttrReservedMemHigh;
 #endif
 
   return 0;

@@ -715,7 +715,38 @@ my %removed_funcs = (
 );
 
 my %experimental_funcs = (
-
+    "cudaUserObject_t" => "5.3.0",
+    "cudaUserObjectRetainFlags" => "5.3.0",
+    "cudaUserObjectNoDestructorSync" => "5.3.0",
+    "cudaUserObjectFlags" => "5.3.0",
+    "cudaMemoryTypeManaged" => "5.3.0",
+    "cudaLimitStackSize" => "5.3.0",
+    "cudaGraphUserObjectMove" => "5.3.0",
+    "cudaGraphNodeTypeExtSemaphoreWait" => "5.3.0",
+    "cudaGraphNodeTypeExtSemaphoreSignal" => "5.3.0",
+    "cudaGraphMemAttributeType" => "5.3.0",
+    "cudaGraphMemAttrUsedMemHigh" => "5.3.0",
+    "cudaGraphMemAttrUsedMemCurrent" => "5.3.0",
+    "cudaGraphMemAttrReservedMemHigh" => "5.3.0",
+    "cudaGraphMemAttrReservedMemCurrent" => "5.3.0",
+    "CUuserObject_st" => "5.3.0",
+    "CUuserObject_flags_enum" => "5.3.0",
+    "CUuserObject_flags" => "5.3.0",
+    "CUuserObjectRetain_flags_enum" => "5.3.0",
+    "CUuserObjectRetain_flags" => "5.3.0",
+    "CUuserObject" => "5.3.0",
+    "CUgraphMem_attribute_enum" => "5.3.0",
+    "CUgraphMem_attribute" => "5.3.0",
+    "CU_USER_OBJECT_NO_DESTRUCTOR_SYNC" => "5.3.0",
+    "CU_LIMIT_STACK_SIZE" => "5.3.0",
+    "CU_GRAPH_USER_OBJECT_MOVE" => "5.3.0",
+    "CU_GRAPH_NODE_TYPE_EXT_SEMAS_WAIT" => "5.3.0",
+    "CU_GRAPH_NODE_TYPE_EXT_SEMAS_SIGNAL" => "5.3.0",
+    "CU_GRAPH_MEM_ATTR_USED_MEM_HIGH" => "5.3.0",
+    "CU_GRAPH_MEM_ATTR_USED_MEM_CURRENT" => "5.3.0",
+    "CU_GRAPH_MEM_ATTR_RESERVED_MEM_HIGH" => "5.3.0",
+    "CU_GRAPH_MEM_ATTR_RESERVED_MEM_CURRENT" => "5.3.0",
+    "CU_DEVICE_ATTRIBUTE_VIRTUAL_MEMORY_MANAGEMENT_SUPPORTED" => "5.3.0"
 );
 
 $print_stats = 1 if $examine;
@@ -853,6 +884,38 @@ sub subst {
 }
 
 sub experimentalSubstitutions {
+    subst("CUgraphMem_attribute", "hipGraphMemAttributeType", "type");
+    subst("CUgraphMem_attribute_enum", "hipGraphMemAttributeType", "type");
+    subst("CUuserObject", "hipUserObject_t", "type");
+    subst("CUuserObjectRetain_flags", "hipUserObjectRetainFlags", "type");
+    subst("CUuserObjectRetain_flags_enum", "hipUserObjectRetainFlags", "type");
+    subst("CUuserObject_flags", "hipUserObjectFlags", "type");
+    subst("CUuserObject_flags_enum", "hipUserObjectFlags", "type");
+    subst("CUuserObject_st", "hipUserObject", "type");
+    subst("cudaGraphMemAttributeType", "hipGraphMemAttributeType", "type");
+    subst("cudaUserObjectFlags", "hipUserObjectFlags", "type");
+    subst("cudaUserObjectRetainFlags", "hipUserObjectRetainFlags", "type");
+    subst("cudaUserObject_t", "hipUserObject_t", "type");
+    subst("CU_DEVICE_ATTRIBUTE_VIRTUAL_MEMORY_MANAGEMENT_SUPPORTED", "hipDeviceAttributeVirtualMemoryManagementSupported", "numeric_literal");
+    subst("CU_GRAPH_MEM_ATTR_RESERVED_MEM_CURRENT", "hipGraphMemAttrReservedMemCurrent", "numeric_literal");
+    subst("CU_GRAPH_MEM_ATTR_RESERVED_MEM_HIGH", "hipGraphMemAttrReservedMemHigh", "numeric_literal");
+    subst("CU_GRAPH_MEM_ATTR_USED_MEM_CURRENT", "hipGraphMemAttrUsedMemCurrent", "numeric_literal");
+    subst("CU_GRAPH_MEM_ATTR_USED_MEM_HIGH", "hipGraphMemAttrUsedMemHigh", "numeric_literal");
+    subst("CU_GRAPH_NODE_TYPE_EXT_SEMAS_SIGNAL", "hipGraphNodeTypeExtSemaphoreSignal", "numeric_literal");
+    subst("CU_GRAPH_NODE_TYPE_EXT_SEMAS_WAIT", "hipGraphNodeTypeExtSemaphoreWait", "numeric_literal");
+    subst("CU_GRAPH_USER_OBJECT_MOVE", "hipGraphUserObjectMove", "numeric_literal");
+    subst("CU_LIMIT_STACK_SIZE", "hipLimitStackSize", "numeric_literal");
+    subst("CU_USER_OBJECT_NO_DESTRUCTOR_SYNC", "hipUserObjectNoDestructorSync", "numeric_literal");
+    subst("cudaGraphMemAttrReservedMemCurrent", "hipGraphMemAttrReservedMemCurrent", "numeric_literal");
+    subst("cudaGraphMemAttrReservedMemHigh", "hipGraphMemAttrReservedMemHigh", "numeric_literal");
+    subst("cudaGraphMemAttrUsedMemCurrent", "hipGraphMemAttrUsedMemCurrent", "numeric_literal");
+    subst("cudaGraphMemAttrUsedMemHigh", "hipGraphMemAttrUsedMemHigh", "numeric_literal");
+    subst("cudaGraphNodeTypeExtSemaphoreSignal", "hipGraphNodeTypeExtSemaphoreSignal", "numeric_literal");
+    subst("cudaGraphNodeTypeExtSemaphoreWait", "hipGraphNodeTypeExtSemaphoreWait", "numeric_literal");
+    subst("cudaGraphUserObjectMove", "hipGraphUserObjectMove", "numeric_literal");
+    subst("cudaLimitStackSize", "hipLimitStackSize", "numeric_literal");
+    subst("cudaMemoryTypeManaged", "hipMemoryTypeManaged", "numeric_literal");
+    subst("cudaUserObjectNoDestructorSync", "hipUserObjectNoDestructorSync", "numeric_literal");
 }
 
 sub rocSubstitutions {
@@ -5837,12 +5900,8 @@ sub warnUnsupportedFunctions {
         "cudaWGLGetDevice",
         "cudaVDPAUSetVDPAUDevice",
         "cudaVDPAUGetDevice",
-        "cudaUserObject_t",
-        "cudaUserObjectRetainFlags",
         "cudaUserObjectRetain",
         "cudaUserObjectRelease",
-        "cudaUserObjectNoDestructorSync",
-        "cudaUserObjectFlags",
         "cudaUserObjectCreate",
         "cudaThreadSetLimit",
         "cudaThreadGetLimit",
@@ -5877,7 +5936,6 @@ sub warnUnsupportedFunctions {
         "cudaNvSciSyncAttrWait",
         "cudaNvSciSyncAttrSignal",
         "cudaMemoryTypeUnregistered",
-        "cudaMemoryTypeManaged",
         "cudaMemcpyToArrayAsync",
         "cudaMemcpyFromArrayAsync",
         "cudaMemcpyArrayToArray",
@@ -5886,7 +5944,6 @@ sub warnUnsupportedFunctions {
         "cudaMemcpy3DPeer",
         "cudaMemcpy2DArrayToArray",
         "cudaMemAllocNodeParams",
-        "cudaLimitStackSize",
         "cudaLimitPersistingL2CacheSize",
         "cudaLimitMaxL2FetchGranularity",
         "cudaLimitDevRuntimeSyncDepth",
@@ -5914,21 +5971,13 @@ sub warnUnsupportedFunctions {
         "cudaGraphicsCubeFaceNegativeY",
         "cudaGraphicsCubeFaceNegativeX",
         "cudaGraphicsCubeFace",
-        "cudaGraphUserObjectMove",
         "cudaGraphUpload",
         "cudaGraphRetainUserObject",
         "cudaGraphReleaseUserObject",
         "cudaGraphNodeTypeMemFree",
         "cudaGraphNodeTypeMemAlloc",
-        "cudaGraphNodeTypeExtSemaphoreWait",
-        "cudaGraphNodeTypeExtSemaphoreSignal",
         "cudaGraphNodeSetEnabled",
         "cudaGraphMemFreeNodeGetParams",
-        "cudaGraphMemAttributeType",
-        "cudaGraphMemAttrUsedMemHigh",
-        "cudaGraphMemAttrUsedMemCurrent",
-        "cudaGraphMemAttrReservedMemHigh",
-        "cudaGraphMemAttrReservedMemCurrent",
         "cudaGraphMemAllocNodeGetParams",
         "cudaGraphKernelNodeCopyAttributes",
         "cudaGraphInstantiateFlagUseNodePriority",
@@ -6504,12 +6553,6 @@ sub warnUnsupportedFunctions {
         "MAJOR_VERSION",
         "CubVector",
         "CubDebugExit",
-        "CUuserObject_st",
-        "CUuserObject_flags_enum",
-        "CUuserObject_flags",
-        "CUuserObjectRetain_flags_enum",
-        "CUuserObjectRetain_flags",
-        "CUuserObject",
         "CUsynchronizationPolicy_enum",
         "CUsynchronizationPolicy",
         "CUsurfref_st",
@@ -6555,8 +6598,6 @@ sub warnUnsupportedFunctions {
         "CUipcMem_flags",
         "CUgraphicsMapResourceFlags_enum",
         "CUgraphicsMapResourceFlags",
-        "CUgraphMem_attribute_enum",
-        "CUgraphMem_attribute",
         "CUgraphDebugDot_flags_enum",
         "CUgraphDebugDot_flags",
         "CUflushGPUDirectRDMAWritesTarget_enum",
@@ -6614,7 +6655,6 @@ sub warnUnsupportedFunctions {
         "CUctx_flags",
         "CUarray_cubemap_face_enum",
         "CUarray_cubemap_face",
-        "CU_USER_OBJECT_NO_DESTRUCTOR_SYNC",
         "CU_TRSF_SEAMLESS_CUBEMAP",
         "CU_TRSF_DISABLE_TRILINEAR_OPTIMIZATION",
         "CU_TARGET_COMPUTE_87",
@@ -6680,7 +6720,6 @@ sub warnUnsupportedFunctions {
         "CU_MEM_CREATE_USAGE_TILE_POOL",
         "CU_MEM_ACCESS_FLAGS_PROT_MAX",
         "CU_MEMHOSTREGISTER_READ_ONLY",
-        "CU_LIMIT_STACK_SIZE",
         "CU_LIMIT_PERSISTING_L2_CACHE_SIZE",
         "CU_LIMIT_MAX_L2_FETCH_GRANULARITY",
         "CU_LIMIT_MAX",
@@ -6713,16 +6752,9 @@ sub warnUnsupportedFunctions {
         "CU_JIT_CACHE_OPTION_NONE",
         "CU_JIT_CACHE_OPTION_CG",
         "CU_JIT_CACHE_OPTION_CA",
-        "CU_GRAPH_USER_OBJECT_MOVE",
         "CU_GRAPH_NODE_TYPE_MEM_FREE",
         "CU_GRAPH_NODE_TYPE_MEM_ALLOC",
-        "CU_GRAPH_NODE_TYPE_EXT_SEMAS_WAIT",
-        "CU_GRAPH_NODE_TYPE_EXT_SEMAS_SIGNAL",
         "CU_GRAPH_NODE_TYPE_BATCH_MEM_OP",
-        "CU_GRAPH_MEM_ATTR_USED_MEM_HIGH",
-        "CU_GRAPH_MEM_ATTR_USED_MEM_CURRENT",
-        "CU_GRAPH_MEM_ATTR_RESERVED_MEM_HIGH",
-        "CU_GRAPH_MEM_ATTR_RESERVED_MEM_CURRENT",
         "CU_GRAPH_EXEC_UPDATE_ERROR_ATTRIBUTES_CHANGED",
         "CU_GRAPH_DEBUG_DOT_FLAGS_VERBOSE",
         "CU_GRAPH_DEBUG_DOT_FLAGS_RUNTIME_TYPES",
@@ -6845,7 +6877,6 @@ sub warnUnsupportedFunctions {
         "CU_EGL_COLOR_FORMAT_ARGB",
         "CU_EGL_COLOR_FORMAT_ABGR",
         "CU_EGL_COLOR_FORMAT_A",
-        "CU_DEVICE_ATTRIBUTE_VIRTUAL_MEMORY_MANAGEMENT_SUPPORTED",
         "CU_DEVICE_ATTRIBUTE_VIRTUAL_ADDRESS_MANAGEMENT_SUPPORTED",
         "CU_DEVICE_ATTRIBUTE_TIMELINE_SEMAPHORE_INTEROP_SUPPORTED",
         "CU_DEVICE_ATTRIBUTE_SPARSE_CUDA_ARRAY_SUPPORTED",

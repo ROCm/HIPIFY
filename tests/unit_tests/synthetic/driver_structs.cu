@@ -250,6 +250,11 @@ int main() {
 #if CUDA_VERSION >= 11030
   // CHECK: hipMemLocation memLocation_v1;
   CUmemLocation_v1 memLocation_v1;
+
+  // CHECK: hipUserObject* userObject_st_ptr;
+  // CHECK-NEXT: hipUserObject_t userObject;
+  CUuserObject_st* userObject_st_ptr;
+  CUuserObject userObject;
 #endif
 
 #if CUDA_VERSION >= 10020
