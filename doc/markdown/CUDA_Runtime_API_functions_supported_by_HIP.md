@@ -20,7 +20,7 @@
 |`cudaDeviceGetTexture1DLinearMaxWidth`|11.1| | | | | | | |
 |`cudaDeviceReset`| | | |`hipDeviceReset`|1.6.0| | | |
 |`cudaDeviceSetCacheConfig`| | | |`hipDeviceSetCacheConfig`|1.6.0| | | |
-|`cudaDeviceSetLimit`| | | | | | | | |
+|`cudaDeviceSetLimit`| | | |`hipDeviceSetLimit`|5.3.0| | |5.3.0|
 |`cudaDeviceSetMemPool`|11.2| | |`hipDeviceSetMemPool`|5.2.0| | | |
 |`cudaDeviceSetSharedMemConfig`| | | |`hipDeviceSetSharedMemConfig`|1.6.0| | | |
 |`cudaDeviceSynchronize`| | | |`hipDeviceSynchronize`|1.6.0| | | |
@@ -378,7 +378,7 @@
 |`cudaCreateChannelDesc`| | | |`hipCreateChannelDesc`|1.6.0| | | |
 |`cudaGetChannelDesc`| | | |`hipGetChannelDesc`|1.7.0| | | |
 |`cudaGetTextureAlignmentOffset`| |11.0| |`hipGetTextureAlignmentOffset`|1.9.0|3.8.0| | |
-|`cudaGetTextureReference`| |11.0| |`hipGetTextureReference`|1.7.0| | | |
+|`cudaGetTextureReference`| |11.0| |`hipGetTextureReference`|1.7.0|5.3.0| | |
 |`cudaUnbindTexture`| |11.0| |`hipUnbindTexture`|1.6.0|3.8.0| | |
 
 ## **26. Surface Reference Management [DEPRECATED]**
@@ -417,9 +417,9 @@
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
-|`cudaDeviceGetGraphMemAttribute`|11.4| | | | | | | |
-|`cudaDeviceGraphMemTrim`|11.4| | | | | | | |
-|`cudaDeviceSetGraphMemAttribute`|11.4| | | | | | | |
+|`cudaDeviceGetGraphMemAttribute`|11.4| | |`hipDeviceGetGraphMemAttribute`|5.3.0| | |5.3.0|
+|`cudaDeviceGraphMemTrim`|11.4| | |`hipDeviceGraphMemTrim`|5.3.0| | |5.3.0|
+|`cudaDeviceSetGraphMemAttribute`|11.4| | |`hipDeviceSetGraphMemAttribute`|5.3.0| | |5.3.0|
 |`cudaGraphAddChildGraphNode`|10.0| | |`hipGraphAddChildGraphNode`|5.0.0| | | |
 |`cudaGraphAddDependencies`|10.0| | |`hipGraphAddDependencies`|4.5.0| | | |
 |`cudaGraphAddEmptyNode`|10.0| | |`hipGraphAddEmptyNode`|4.5.0| | | |
@@ -491,13 +491,13 @@
 |`cudaGraphNodeGetDependentNodes`|11.0| | |`hipGraphNodeGetDependentNodes`|5.0.0| | | |
 |`cudaGraphNodeGetType`|11.0| | |`hipGraphNodeGetType`|5.0.0| | | |
 |`cudaGraphNodeSetEnabled`|11.6| | | | | | | |
-|`cudaGraphReleaseUserObject`|11.3| | | | | | | |
+|`cudaGraphReleaseUserObject`|11.3| | |`hipGraphReleaseUserObject`|5.3.0| | |5.3.0|
 |`cudaGraphRemoveDependencies`|11.0| | |`hipGraphRemoveDependencies`|5.0.0| | | |
-|`cudaGraphRetainUserObject`|11.3| | | | | | | |
-|`cudaGraphUpload`|11.1| | | | | | | |
-|`cudaUserObjectCreate`|11.3| | | | | | | |
-|`cudaUserObjectRelease`|11.3| | | | | | | |
-|`cudaUserObjectRetain`|11.3| | | | | | | |
+|`cudaGraphRetainUserObject`|11.3| | |`hipGraphRetainUserObject`|5.3.0| | |5.3.0|
+|`cudaGraphUpload`|11.1| | |`hipGraphUpload`|5.3.0| | |5.3.0|
+|`cudaUserObjectCreate`|11.3| | |`hipUserObjectCreate`|5.3.0| | |5.3.0|
+|`cudaUserObjectRelease`|11.3| | |`hipUserObjectRelease`|5.3.0| | |5.3.0|
+|`cudaUserObjectRetain`|11.3| | |`hipUserObjectRetain`|5.3.0| | |5.3.0|
 
 ## **31. Driver Entry Point Access**
 

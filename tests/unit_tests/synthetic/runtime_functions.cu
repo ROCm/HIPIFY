@@ -560,6 +560,11 @@ int main() {
   // HIP: hipError_t hipGraphExecEventWaitNodeSetEvent(hipGraphExec_t hGraphExec, hipGraphNode_t hNode, hipEvent_t event);
   // CHECK: result = hipGraphExecEventWaitNodeSetEvent(GraphExec_t, graphNode, Event_t);
   result = cudaGraphExecEventWaitNodeSetEvent(GraphExec_t, graphNode, Event_t);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphUpload(cudaGraphExec_t graphExec, cudaStream_t stream);
+  // HIP: hipError_t hipGraphUpload(hipGraphExec_t graphExec, hipStream_t stream);
+  // CHECK: result = hipGraphUpload(GraphExec_t, stream);
+  result = cudaGraphUpload(GraphExec_t, stream);
 #endif
 
 #if CUDA_VERSION >= 11020
@@ -667,11 +672,59 @@ int main() {
   result = cudaMemPoolImportPointer(&deviceptr, memPool_t, &memPoolPtrExportData);
 #endif
 
+#if CUDA_VERSION >= 11030
+  // CHECK: hipUserObject_t userObject;
+  cudaUserObject_t userObject;
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaUserObjectCreate(cudaUserObject_t *object_out, void *ptr, cudaHostFn_t destroy, unsigned int initialRefcount, unsigned int flags);
+  // HIP: hipError_t hipUserObjectCreate(hipUserObject_t* object_out, void* ptr, hipHostFn_t destroy, unsigned int initialRefcount, unsigned int flags);
+  // CHECK: result = hipUserObjectCreate(&userObject, image, hostFn, count, flags);
+  result = cudaUserObjectCreate(&userObject, image, hostFn, count, flags);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaUserObjectRelease(cudaUserObject_t object, unsigned int count __dv(1));
+  // HIP: hipError_t hipUserObjectRelease(hipUserObject_t object, unsigned int count);
+  // CHECK: result = hipUserObjectRelease(userObject, count);
+  result = cudaUserObjectRelease(userObject, count);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaUserObjectRetain(cudaUserObject_t object, unsigned int count __dv(1));
+  // HIP: hipError_t hipUserObjectRetain(hipUserObject_t object, unsigned int count);
+  // CHECK: result = hipUserObjectRetain(userObject, count);
+  result = cudaUserObjectRetain(userObject, count);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphRetainUserObject(cudaGraph_t graph, cudaUserObject_t object, unsigned int count __dv(1), unsigned int flags __dv(0));
+  // HIP: hipError_t hipGraphRetainUserObject(hipGraph_t graph, hipUserObject_t object, unsigned int count, unsigned int flags);
+  // CHECK: result = hipGraphRetainUserObject(Graph_t, userObject, count, flags);
+  result = cudaGraphRetainUserObject(Graph_t, userObject, count, flags);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphReleaseUserObject(cudaGraph_t graph, cudaUserObject_t object, unsigned int count __dv(1));
+  // HIP: hipError_t hipGraphReleaseUserObject(hipGraph_t graph, hipUserObject_t object, unsigned int count);
+  // CHECK: result = hipGraphReleaseUserObject(Graph_t, userObject, count);
+  result = cudaGraphReleaseUserObject(Graph_t, userObject, count);
+#endif
+
 #if CUDA_VERSION >= 11040
   // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphInstantiateWithFlags(cudaGraphExec_t *pGraphExec, cudaGraph_t graph, unsigned long long flags);
   // HIP: hipError_t hipGraphInstantiateWithFlags(hipGraphExec_t* pGraphExec, hipGraph_t graph, unsigned long long flags);
   // CHECK: result = hipGraphInstantiateWithFlags(&GraphExec_t, Graph_t, ull);
   result = cudaGraphInstantiateWithFlags(&GraphExec_t, Graph_t, ull);
+
+  // CHECK: hipGraphMemAttributeType GraphMemAttributeType;
+  cudaGraphMemAttributeType GraphMemAttributeType;
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaDeviceGetGraphMemAttribute(int device, enum cudaGraphMemAttributeType attr, void* value);
+  // HIP: hipError_t hipDeviceGetGraphMemAttribute(int device, hipGraphMemAttributeType attr, void* value);
+  // CHECK: result = hipDeviceGetGraphMemAttribute(device, GraphMemAttributeType, image);
+  result = cudaDeviceGetGraphMemAttribute(device, GraphMemAttributeType, image);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaDeviceSetGraphMemAttribute(int device, enum cudaGraphMemAttributeType attr, void* value);
+  // HIP: hipError_t hipDeviceSetGraphMemAttribute(int device, hipGraphMemAttributeType attr, void* value);
+  // CHECK: result = hipDeviceSetGraphMemAttribute(device, GraphMemAttributeType, image);
+  result = cudaDeviceSetGraphMemAttribute(device, GraphMemAttributeType, image);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaDeviceGraphMemTrim(int device);
+  // HIP: hipError_t hipDeviceGraphMemTrim(int device);
+  // CHECK: result = hipDeviceGraphMemTrim(device);
+  result = cudaDeviceGraphMemTrim(device);
 #endif
 
   // CHECK: hipDeviceProp_t DeviceProp;
@@ -1452,6 +1505,11 @@ int main() {
   // CHECK: result = hipSetupArgument(deviceptr, bytes, wOffset);
   result = cudaSetupArgument(deviceptr, bytes, wOffset);
 #endif
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaDeviceSetLimit(enum cudaLimit limit, size_t value);
+  // HIP:  hipError_t hipDeviceSetLimit(enum hipLimit_t limit, size_t value);
+  // CHECK: result = hipDeviceSetLimit(Limit, bytes);
+  result = cudaDeviceSetLimit(Limit, bytes);
 
   return 0;
 }
