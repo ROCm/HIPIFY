@@ -1334,6 +1334,7 @@ sub rocSubstitutions {
     subst("cublasZtrsv", "rocblas_ztrsv", "library");
     subst("cublasZtrsv_v2", "rocblas_ztrsv", "library");
     subst("cublas.h", "rocblas.h", "include_cuda_main_header");
+    subst("cublas_v2.h", "rocblas.h", "include_cuda_main_header_v2");
     subst("cublasAtomicsMode_t", "rocblas_atomics_mode", "type");
     subst("cublasContext", "_rocblas_handle", "type");
     subst("cublasDataType_t", "rocblas_datatype", "type");
@@ -3070,6 +3071,7 @@ sub simpleSubstitutions {
     subst("cusparse.h", "hipsparse.h", "include_cuda_main_header");
     subst("cusparse_v2.h", "hipsparse.h", "include_cuda_main_header");
     subst("nvrtc.h", "hiprtc.h", "include_cuda_main_header");
+    subst("cublas_v2.h", "hipblas.h", "include_cuda_main_header_v2");
     subst("CUDAContext", "HIPContext", "type");
     subst("CUDA_ARRAY3D_DESCRIPTOR", "HIP_ARRAY3D_DESCRIPTOR", "type");
     subst("CUDA_ARRAY3D_DESCRIPTOR_st", "HIP_ARRAY3D_DESCRIPTOR", "type");
