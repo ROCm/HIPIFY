@@ -1127,8 +1127,8 @@
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
-|`cuGetErrorName`| | | | | | | | |
-|`cuGetErrorString`| | | | | | | | |
+|`cuGetErrorName`| | | |`hipDrvGetErrorName`|5.3.0| | |5.3.0|
+|`cuGetErrorString`| | | |`hipDrvGetErrorString`|5.3.0| | |5.3.0|
 
 ## **3. Initialization**
 
@@ -1207,7 +1207,7 @@
 |`cuCtxResetPersistingL2Cache`|11.0| | | | | | | |
 |`cuCtxSetCacheConfig`| | | |`hipCtxSetCacheConfig`|1.9.0|1.9.0| | |
 |`cuCtxSetCurrent`| | | |`hipCtxSetCurrent`|1.6.0|1.9.0| | |
-|`cuCtxSetLimit`| | | | | | | | |
+|`cuCtxSetLimit`| | | |`hipDeviceSetLimit`|5.3.0| | |5.3.0|
 |`cuCtxSetSharedMemConfig`| | | |`hipCtxSetSharedMemConfig`|1.9.0|1.9.0| | |
 |`cuCtxSynchronize`| | | |`hipCtxSynchronize`|1.9.0|1.9.0| | |
 
@@ -1505,9 +1505,9 @@
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
-|`cuDeviceGetGraphMemAttribute`|11.4| | | | | | | |
-|`cuDeviceGraphMemTrim`|11.4| | | | | | | |
-|`cuDeviceSetGraphMemAttribute`|11.4| | | | | | | |
+|`cuDeviceGetGraphMemAttribute`|11.4| | |`hipDeviceGetGraphMemAttribute`|5.3.0| | |5.3.0|
+|`cuDeviceGraphMemTrim`|11.4| | |`hipDeviceGraphMemTrim`|5.3.0| | |5.3.0|
+|`cuDeviceSetGraphMemAttribute`|11.4| | |`hipDeviceSetGraphMemAttribute`|5.3.0| | |5.3.0|
 |`cuGraphAddBatchMemOpNode`|11.7| | | | | | | |
 |`cuGraphAddChildGraphNode`|10.0| | |`hipGraphAddChildGraphNode`|5.0.0| | | |
 |`cuGraphAddDependencies`|10.0| | |`hipGraphAddDependencies`|4.5.0| | | |
@@ -1576,13 +1576,13 @@
 |`cuGraphNodeGetEnabled`|11.6| | | | | | | |
 |`cuGraphNodeGetType`|10.0| | |`hipGraphNodeGetType`|5.0.0| | | |
 |`cuGraphNodeSetEnabled`|11.6| | | | | | | |
-|`cuGraphReleaseUserObject`|11.3| | | | | | | |
+|`cuGraphReleaseUserObject`|11.3| | |`hipGraphReleaseUserObject`|5.3.0| | |5.3.0|
 |`cuGraphRemoveDependencies`|10.0| | |`hipGraphRemoveDependencies`|5.0.0| | | |
-|`cuGraphRetainUserObject`|11.3| | | | | | | |
-|`cuGraphUpload`|11.1| | | | | | | |
-|`cuUserObjectCreate`|11.3| | | | | | | |
-|`cuUserObjectRelease`|11.3| | | | | | | |
-|`cuUserObjectRetain`|11.3| | | | | | | |
+|`cuGraphRetainUserObject`|11.3| | |`hipGraphRetainUserObject`|5.3.0| | |5.3.0|
+|`cuGraphUpload`|11.1| | |`hipGraphUpload`|5.3.0| | |5.3.0|
+|`cuUserObjectCreate`|11.3| | |`hipUserObjectCreate`|5.3.0| | |5.3.0|
+|`cuUserObjectRelease`|11.3| | |`hipUserObjectRelease`|5.3.0| | |5.3.0|
+|`cuUserObjectRetain`|11.3| | |`hipUserObjectRetain`|5.3.0| | |5.3.0|
 
 ## **22. Occupancy**
 
@@ -1617,18 +1617,18 @@
 |`cuTexRefSetAddress2D`| |11.0| |`hipTexRefSetAddress2D`|1.7.0|4.3.0| | |
 |`cuTexRefSetAddress2D_v2`| | | |`hipTexRefSetAddress2D`|1.7.0|4.3.0| | |
 |`cuTexRefSetAddress2D_v3`| | | |`hipTexRefSetAddress2D`|1.7.0|4.3.0| | |
-|`cuTexRefSetAddressMode`| |11.0| |`hipTexRefSetAddressMode`|1.9.0| | | |
+|`cuTexRefSetAddressMode`| |11.0| |`hipTexRefSetAddressMode`|1.9.0|5.3.0| | |
 |`cuTexRefSetAddress_v2`| |11.0| |`hipTexRefSetAddress`|1.7.0|4.3.0| | |
-|`cuTexRefSetArray`| |11.0| |`hipTexRefSetArray`|1.9.0| | | |
+|`cuTexRefSetArray`| |11.0| |`hipTexRefSetArray`|1.9.0|5.3.0| | |
 |`cuTexRefSetBorderColor`|8.0|11.0| |`hipTexRefSetBorderColor`|3.5.0|4.3.0| | |
-|`cuTexRefSetFilterMode`| |11.0| |`hipTexRefSetFilterMode`|1.9.0| | | |
-|`cuTexRefSetFlags`| |11.0| |`hipTexRefSetFlags`|1.9.0| | | |
-|`cuTexRefSetFormat`| |11.0| |`hipTexRefSetFormat`|1.9.0| | | |
+|`cuTexRefSetFilterMode`| |11.0| |`hipTexRefSetFilterMode`|1.9.0|5.3.0| | |
+|`cuTexRefSetFlags`| |11.0| |`hipTexRefSetFlags`|1.9.0|5.3.0| | |
+|`cuTexRefSetFormat`| |11.0| |`hipTexRefSetFormat`|1.9.0|5.3.0| | |
 |`cuTexRefSetMaxAnisotropy`| |11.0| |`hipTexRefSetMaxAnisotropy`|3.5.0|4.3.0| | |
-|`cuTexRefSetMipmapFilterMode`| |11.0| |`hipTexRefSetMipmapFilterMode`|3.5.0| | | |
-|`cuTexRefSetMipmapLevelBias`| |11.0| |`hipTexRefSetMipmapLevelBias`|3.5.0| | | |
-|`cuTexRefSetMipmapLevelClamp`| |11.0| |`hipTexRefSetMipmapLevelClamp`|3.5.0| | | |
-|`cuTexRefSetMipmappedArray`| |11.0| |`hipTexRefSetMipmappedArray`|3.5.0| | | |
+|`cuTexRefSetMipmapFilterMode`| |11.0| |`hipTexRefSetMipmapFilterMode`|3.5.0|5.3.0| | |
+|`cuTexRefSetMipmapLevelBias`| |11.0| |`hipTexRefSetMipmapLevelBias`|3.5.0|5.3.0| | |
+|`cuTexRefSetMipmapLevelClamp`| |11.0| |`hipTexRefSetMipmapLevelClamp`|3.5.0|5.3.0| | |
+|`cuTexRefSetMipmappedArray`| |11.0| |`hipTexRefSetMipmappedArray`|3.5.0|5.3.0| | |
 
 ## **24. Surface Reference Management [DEPRECATED]**
 

@@ -717,11 +717,17 @@ my %removed_funcs = (
 my %experimental_funcs = (
     "cudaUserObject_t" => "5.3.0",
     "cudaUserObjectRetainFlags" => "5.3.0",
+    "cudaUserObjectRetain" => "5.3.0",
+    "cudaUserObjectRelease" => "5.3.0",
     "cudaUserObjectNoDestructorSync" => "5.3.0",
     "cudaUserObjectFlags" => "5.3.0",
+    "cudaUserObjectCreate" => "5.3.0",
     "cudaMemoryTypeManaged" => "5.3.0",
     "cudaLimitStackSize" => "5.3.0",
     "cudaGraphUserObjectMove" => "5.3.0",
+    "cudaGraphUpload" => "5.3.0",
+    "cudaGraphRetainUserObject" => "5.3.0",
+    "cudaGraphReleaseUserObject" => "5.3.0",
     "cudaGraphNodeTypeExtSemaphoreWait" => "5.3.0",
     "cudaGraphNodeTypeExtSemaphoreSignal" => "5.3.0",
     "cudaGraphMemAttributeType" => "5.3.0",
@@ -729,6 +735,22 @@ my %experimental_funcs = (
     "cudaGraphMemAttrUsedMemCurrent" => "5.3.0",
     "cudaGraphMemAttrReservedMemHigh" => "5.3.0",
     "cudaGraphMemAttrReservedMemCurrent" => "5.3.0",
+    "cudaDeviceSetLimit" => "5.3.0",
+    "cudaDeviceSetGraphMemAttribute" => "5.3.0",
+    "cudaDeviceGraphMemTrim" => "5.3.0",
+    "cudaDeviceGetGraphMemAttribute" => "5.3.0",
+    "cuUserObjectRetain" => "5.3.0",
+    "cuUserObjectRelease" => "5.3.0",
+    "cuUserObjectCreate" => "5.3.0",
+    "cuGraphUpload" => "5.3.0",
+    "cuGraphRetainUserObject" => "5.3.0",
+    "cuGraphReleaseUserObject" => "5.3.0",
+    "cuGetErrorString" => "5.3.0",
+    "cuGetErrorName" => "5.3.0",
+    "cuDeviceSetGraphMemAttribute" => "5.3.0",
+    "cuDeviceGraphMemTrim" => "5.3.0",
+    "cuDeviceGetGraphMemAttribute" => "5.3.0",
+    "cuCtxSetLimit" => "5.3.0",
     "CUuserObject_st" => "5.3.0",
     "CUuserObject_flags_enum" => "5.3.0",
     "CUuserObject_flags" => "5.3.0",
@@ -884,6 +906,28 @@ sub subst {
 }
 
 sub experimentalSubstitutions {
+    subst("cuGetErrorName", "hipDrvGetErrorName", "error");
+    subst("cuGetErrorString", "hipDrvGetErrorString", "error");
+    subst("cudaDeviceSetLimit", "hipDeviceSetLimit", "device");
+    subst("cuCtxSetLimit", "hipDeviceSetLimit", "context");
+    subst("cuDeviceGetGraphMemAttribute", "hipDeviceGetGraphMemAttribute", "graph");
+    subst("cuDeviceGraphMemTrim", "hipDeviceGraphMemTrim", "graph");
+    subst("cuDeviceSetGraphMemAttribute", "hipDeviceSetGraphMemAttribute", "graph");
+    subst("cuGraphReleaseUserObject", "hipGraphReleaseUserObject", "graph");
+    subst("cuGraphRetainUserObject", "hipGraphRetainUserObject", "graph");
+    subst("cuGraphUpload", "hipGraphUpload", "graph");
+    subst("cuUserObjectCreate", "hipUserObjectCreate", "graph");
+    subst("cuUserObjectRelease", "hipUserObjectRelease", "graph");
+    subst("cuUserObjectRetain", "hipUserObjectRetain", "graph");
+    subst("cudaDeviceGetGraphMemAttribute", "hipDeviceGetGraphMemAttribute", "graph");
+    subst("cudaDeviceGraphMemTrim", "hipDeviceGraphMemTrim", "graph");
+    subst("cudaDeviceSetGraphMemAttribute", "hipDeviceSetGraphMemAttribute", "graph");
+    subst("cudaGraphReleaseUserObject", "hipGraphReleaseUserObject", "graph");
+    subst("cudaGraphRetainUserObject", "hipGraphRetainUserObject", "graph");
+    subst("cudaGraphUpload", "hipGraphUpload", "graph");
+    subst("cudaUserObjectCreate", "hipUserObjectCreate", "graph");
+    subst("cudaUserObjectRelease", "hipUserObjectRelease", "graph");
+    subst("cudaUserObjectRetain", "hipUserObjectRetain", "graph");
     subst("CUgraphMem_attribute", "hipGraphMemAttributeType", "type");
     subst("CUgraphMem_attribute_enum", "hipGraphMemAttributeType", "type");
     subst("CUuserObject", "hipUserObject_t", "type");
@@ -5900,9 +5944,6 @@ sub warnUnsupportedFunctions {
         "cudaWGLGetDevice",
         "cudaVDPAUSetVDPAUDevice",
         "cudaVDPAUGetDevice",
-        "cudaUserObjectRetain",
-        "cudaUserObjectRelease",
-        "cudaUserObjectCreate",
         "cudaThreadSetLimit",
         "cudaThreadGetLimit",
         "cudaSynchronizationPolicy",
@@ -5971,9 +6012,6 @@ sub warnUnsupportedFunctions {
         "cudaGraphicsCubeFaceNegativeY",
         "cudaGraphicsCubeFaceNegativeX",
         "cudaGraphicsCubeFace",
-        "cudaGraphUpload",
-        "cudaGraphRetainUserObject",
-        "cudaGraphReleaseUserObject",
         "cudaGraphNodeTypeMemFree",
         "cudaGraphNodeTypeMemAlloc",
         "cudaGraphNodeSetEnabled",
@@ -6206,14 +6244,10 @@ sub warnUnsupportedFunctions {
         "cudaEGLStreamConsumerConnectWithFlags",
         "cudaEGLStreamConsumerConnect",
         "cudaEGLStreamConsumerAcquireFrame",
-        "cudaDeviceSetLimit",
-        "cudaDeviceSetGraphMemAttribute",
         "cudaDevicePropDontCare",
         "cudaDeviceMask",
-        "cudaDeviceGraphMemTrim",
         "cudaDeviceGetTexture1DLinearMaxWidth",
         "cudaDeviceGetNvSciSyncAttributes",
-        "cudaDeviceGetGraphMemAttribute",
         "cudaDeviceFlushGPUDirectRDMAWrites",
         "cudaDevAttrTimelineSemaphoreInteropSupported",
         "cudaDevAttrSparseCudaArraySupported",
@@ -6343,9 +6377,6 @@ sub warnUnsupportedFunctions {
         "cuWGLGetDevice",
         "cuVDPAUGetDevice",
         "cuVDPAUCtxCreate",
-        "cuUserObjectRetain",
-        "cuUserObjectRelease",
-        "cuUserObjectCreate",
         "cuTexRefGetBorderColor",
         "cuTexRefDestroy",
         "cuTexRefCreate",
@@ -6422,9 +6453,6 @@ sub warnUnsupportedFunctions {
         "cuGraphicsD3D9RegisterResource",
         "cuGraphicsD3D11RegisterResource",
         "cuGraphicsD3D10RegisterResource",
-        "cuGraphUpload",
-        "cuGraphRetainUserObject",
-        "cuGraphReleaseUserObject",
         "cuGraphNodeSetEnabled",
         "cuGraphNodeGetEnabled",
         "cuGraphMemFreeNodeGetParams",
@@ -6450,8 +6478,6 @@ sub warnUnsupportedFunctions {
         "cuGraphAddExternalSemaphoresSignalNode",
         "cuGraphAddBatchMemOpNode",
         "cuGetProcAddress",
-        "cuGetErrorString",
-        "cuGetErrorName",
         "cuGLUnregisterBufferObject",
         "cuGLUnmapBufferObjectAsync",
         "cuGLUnmapBufferObject",
@@ -6480,13 +6506,10 @@ sub warnUnsupportedFunctions {
         "cuEGLStreamConsumerConnectWithFlags",
         "cuEGLStreamConsumerConnect",
         "cuEGLStreamConsumerAcquireFrame",
-        "cuDeviceSetGraphMemAttribute",
-        "cuDeviceGraphMemTrim",
         "cuDeviceGetTexture1DLinearMaxWidth",
         "cuDeviceGetProperties",
         "cuDeviceGetNvSciSyncAttributes",
         "cuDeviceGetLuid",
-        "cuDeviceGetGraphMemAttribute",
         "cuDeviceGetExecAffinitySupport",
         "cuD3D9UnregisterResource",
         "cuD3D9UnmapResources",
@@ -6523,7 +6546,6 @@ sub warnUnsupportedFunctions {
         "cuD3D10GetDevice",
         "cuD3D10CtxCreateOnDevice",
         "cuD3D10CtxCreate",
-        "cuCtxSetLimit",
         "cuCtxResetPersistingL2Cache",
         "cuCtxGetExecAffinity",
         "cuCtxDetach",
