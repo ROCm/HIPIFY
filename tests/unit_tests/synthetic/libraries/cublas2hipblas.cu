@@ -2,6 +2,7 @@
 
 // CHECK: #include <hip/hip_runtime.h>
 #include <cuda_runtime.h>
+#include <stdio.h>
 // CHECK: #include "hipblas.h"
 // CHECK-NOT: #include "cublas_v2.h"
 #include "cublas.h"
@@ -123,6 +124,9 @@ int main() {
   cublasDataType_t C_32I = CUDA_C_32I;
   cublasDataType_t R_32U = CUDA_R_32U;
   cublasDataType_t C_32U = CUDA_C_32U;
+
+  // CHECK: hipblasDatatype_t DataType_2, DataType_3;
+  cudaDataType DataType_2, DataType_3;
 #endif
 
 #if CUDA_VERSION >= 11000
@@ -260,8 +264,6 @@ int main() {
   // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasGetMatrixAsync(int rows, int cols, int elemSize, const void* AP, int lda, void* BP, int ldb, hipStream_t stream);
   // CHECK: blasStatus = hipblasGetMatrixAsync(rows, cols, num, image, incx, image_2, incy, stream);
   blasStatus = cublasGetMatrixAsync(rows, cols, num, image, incx, image_2, incy, stream);
-
-  cudaDataType DataType_2, DataType_3;
 
   float fx = 0;
   float fy = 0;

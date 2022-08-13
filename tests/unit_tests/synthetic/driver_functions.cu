@@ -143,9 +143,6 @@ int main() {
   // HIP: hipError_t hipDeviceGetUuid(hipUUID* uuid, hipDevice_t device);
   // CHECK: result = hipDeviceGetUuid(&uuid, device);
   result = cuDeviceGetUuid(&uuid, device);
-
-  // CHECK: hipStreamCaptureMode streamCaptureMode;
-  CUstreamCaptureMode streamCaptureMode;
 #endif
 
 #if CUDA_VERSION >= 10000
@@ -720,6 +717,16 @@ int main() {
   // CHECK: result = hipStreamAttachMemAsync(stream, deviceptr, bytes, flags);
   result = cuStreamAttachMemAsync(stream, deviceptr, bytes, flags);
 
+#if CUDA_VERSION >= 10010
+  // CHECK: hipStreamCaptureMode streamCaptureMode;
+  CUstreamCaptureMode streamCaptureMode;
+
+  // CUDA: CUresult CUDAAPI cuThreadExchangeStreamCaptureMode(CUstreamCaptureMode *mode);
+  // HIP: hipError_t hipThreadExchangeStreamCaptureMode(hipStreamCaptureMode* mode);
+  // CHECK: result = hipThreadExchangeStreamCaptureMode(&streamCaptureMode);
+  result = cuThreadExchangeStreamCaptureMode(&streamCaptureMode);
+#endif
+
 #if CUDA_VERSION > 10000
   // CUDA: CUresult CUDAAPI cuStreamBeginCapture(CUstream hStream, CUstreamCaptureMode mode);
   // HIP: hipError_t hipStreamBeginCapture(hipStream_t stream, hipStreamCaptureMode mode);
@@ -944,9 +951,7 @@ int main() {
   // CUDA: CUresult CUDAAPI cuGraphInstantiate(CUgraphExec *phGraphExec, CUgraph hGraph, CUgraphNode *phErrorNode, char *logBuffer, size_t bufferSize);
   // HIP: hipError_t hipGraphInstantiate(hipGraphExec_t* pGraphExec, hipGraph_t graph, hipGraphNode_t* pErrorNode, char* pLogBuffer, size_t bufferSize);
   // CHECK: result = hipGraphInstantiate(&graphExec, graph, &graphNode, nullptr, bytes);
-  // CHECK-NEXT: result = hipGraphInstantiate(&graphExec, graph, &graphNode, nullptr, bytes);
   result = cuGraphInstantiate(&graphExec, graph, &graphNode, nullptr, bytes);
-  result = cuGraphInstantiate_v2(&graphExec, graph, &graphNode, nullptr, bytes);
 
   // CUDA: CUresult CUDAAPI cuGraphKernelNodeGetParams(CUgraphNode hNode, CUDA_KERNEL_NODE_PARAMS *nodeParams);
   // HIP: hipError_t hipGraphKernelNodeGetParams(hipGraphNode_t node, hipKernelNodeParams* pNodeParams);
@@ -1199,13 +1204,6 @@ int main() {
   // CHECK: result = hipGraphicsSubResourceGetMappedArray(&array_, graphicsResource, flags, flags_2);
   result = cuGraphicsSubResourceGetMappedArray(&array_, graphicsResource, flags, flags_2);
 
-#if CUDA_VERSION >= 10010
-  // CUDA: CUresult CUDAAPI cuThreadExchangeStreamCaptureMode(CUstreamCaptureMode *mode);
-  // HIP: hipError_t hipThreadExchangeStreamCaptureMode(hipStreamCaptureMode* mode);
-  // CHECK: result = hipThreadExchangeStreamCaptureMode(&streamCaptureMode);
-  result = cuThreadExchangeStreamCaptureMode(&streamCaptureMode);
-#endif
-
 #if CUDA_VERSION >= 10020
   // CHECK: hipMemAllocationProp memAllocationProp;
   CUmemAllocationProp memAllocationProp;
@@ -1297,6 +1295,9 @@ int main() {
   // HIP: hipError_t hipMemRetainAllocationHandle(hipMemGenericAllocationHandle_t* handle, void* addr);
   // CHECK: result = hipMemRetainAllocationHandle(&memGenericAllocationHandle_t, image);
   result = cuMemRetainAllocationHandle(&memGenericAllocationHandle_t, image);
+
+  // CHECK: result = hipGraphInstantiate(&graphExec, graph, &graphNode, nullptr, bytes);
+  result = cuGraphInstantiate_v2(&graphExec, graph, &graphNode, nullptr, bytes);
 #endif
 
 #if CUDA_VERSION >= 11010
