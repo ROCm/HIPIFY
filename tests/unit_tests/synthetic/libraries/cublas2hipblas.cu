@@ -21,11 +21,6 @@ int main() {
   cublasOperation_t BLAS_OP_T = CUBLAS_OP_T;
   cublasOperation_t BLAS_OP_C = CUBLAS_OP_C;
 
-#if CUDA_VERSION >= 10010
-  // CHECK: hipblasOperation_t BLAS_OP_HERMITAN = HIPBLAS_OP_C;
-  cublasOperation_t BLAS_OP_HERMITAN = CUBLAS_OP_HERMITAN;
-#endif
-
   // CHECK: hipblasStatus_t blasStatus;
   // CHECK-NEXT: hipblasStatus_t blasStatus_t;
   // CHECK-NEXT: hipblasStatus_t BLAS_STATUS_SUCCESS = HIPBLAS_STATUS_SUCCESS;
@@ -56,11 +51,6 @@ int main() {
   cublasFillMode_t BLAS_FILL_MODE_LOWER = CUBLAS_FILL_MODE_LOWER;
   cublasFillMode_t BLAS_FILL_MODE_UPPER = CUBLAS_FILL_MODE_UPPER;
 
-#if CUDA_VERSION >= 10010
-  // CHECK: hipblasFillMode_t BLAS_FILL_MODE_FULL = HIPBLAS_FILL_MODE_FULL;
-  cublasFillMode_t BLAS_FILL_MODE_FULL = CUBLAS_FILL_MODE_FULL;
-#endif
-
   // CHECK: hipblasDiagType_t blasDiagType;
   // CHECK-NEXT: hipblasDiagType_t BLAS_DIAG_NON_UNIT = HIPBLAS_DIAG_NON_UNIT;
   // CHECK-NEXT: hipblasDiagType_t BLAS_DIAG_UNIT = HIPBLAS_DIAG_UNIT;
@@ -89,69 +79,8 @@ int main() {
   cublasAtomicsMode_t BLAS_ATOMICS_NOT_ALLOWED = CUBLAS_ATOMICS_NOT_ALLOWED;
   cublasAtomicsMode_t BLAS_ATOMICS_ALLOWED = CUBLAS_ATOMICS_ALLOWED;
 
-#if CUDA_VERSION >= 8000
-  // CHECK: hipblasDatatype_t DataType;
-  // CHECK-NEXT: hipblasDatatype_t DataType_t;
-  // CHECK-NEXT: hipblasDatatype_t blasDataType;
-  // CHECK-NEXT: hipblasDatatype_t R_16F = HIPBLAS_R_16F;
-  // CHECK-NEXT: hipblasDatatype_t C_16F = HIPBLAS_C_16F;
-  // CHECK-NEXT: hipblasDatatype_t R_32F = HIPBLAS_R_32F;
-  // CHECK-NEXT: hipblasDatatype_t C_32F = HIPBLAS_C_32F;
-  // CHECK-NEXT: hipblasDatatype_t R_64F = HIPBLAS_R_64F;
-  // CHECK-NEXT: hipblasDatatype_t C_64F = HIPBLAS_C_64F;
-  // CHECK-NEXT: hipblasDatatype_t R_8I = HIPBLAS_R_8I;
-  // CHECK-NEXT: hipblasDatatype_t C_8I = HIPBLAS_C_8I;
-  // CHECK-NEXT: hipblasDatatype_t R_8U = HIPBLAS_R_8U;
-  // CHECK-NEXT: hipblasDatatype_t C_8U = HIPBLAS_C_8U;
-  // CHECK-NEXT: hipblasDatatype_t R_32I = HIPBLAS_R_32I;
-  // CHECK-NEXT: hipblasDatatype_t C_32I = HIPBLAS_C_32I;
-  // CHECK-NEXT: hipblasDatatype_t R_32U = HIPBLAS_R_32U;
-  // CHECK-NEXT: hipblasDatatype_t C_32U = HIPBLAS_C_32U;
-  cudaDataType DataType;
-  cudaDataType_t DataType_t;
-  cublasDataType_t blasDataType;
-  cublasDataType_t R_16F = CUDA_R_16F;
-  cublasDataType_t C_16F = CUDA_C_16F;
-  cublasDataType_t R_32F = CUDA_R_32F;
-  cublasDataType_t C_32F = CUDA_C_32F;
-  cublasDataType_t R_64F = CUDA_R_64F;
-  cublasDataType_t C_64F = CUDA_C_64F;
-  cublasDataType_t R_8I = CUDA_R_8I;
-  cublasDataType_t C_8I = CUDA_C_8I;
-  cublasDataType_t R_8U = CUDA_R_8U;
-  cublasDataType_t C_8U = CUDA_C_8U;
-  cublasDataType_t R_32I = CUDA_R_32I;
-  cublasDataType_t C_32I = CUDA_C_32I;
-  cublasDataType_t R_32U = CUDA_R_32U;
-  cublasDataType_t C_32U = CUDA_C_32U;
-
-  // CHECK: hipblasDatatype_t DataType_2, DataType_3;
-  cudaDataType DataType_2, DataType_3;
-#endif
-
-#if CUDA_VERSION >= 11000
-  // CHECK: hipblasDatatype_t R_16BF = HIPBLAS_R_16B;
-  // CHECK-NEXT: hipblasDatatype_t C_16BF = HIPBLAS_C_16B;
-  cublasDataType_t R_16BF = CUDA_R_16BF;
-  cublasDataType_t C_16BF = CUDA_C_16BF;
-#endif
-
-#if CUDA_VERSION >= 8000
-  // CHECK: hipblasGemmAlgo_t blasGemmAlgo;
-  // CHECK-NEXT: hipblasGemmAlgo_t BLAS_GEMM_DFALT = HIPBLAS_GEMM_DEFAULT;
-  cublasGemmAlgo_t blasGemmAlgo;
-  cublasGemmAlgo_t BLAS_GEMM_DFALT = CUBLAS_GEMM_DFALT;
-#endif
-
-#if CUDA_VERSION >= 9000
-  // CHECK: hipblasGemmAlgo_t BLAS_GEMM_DEFAULT = HIPBLAS_GEMM_DEFAULT;
-  cublasGemmAlgo_t BLAS_GEMM_DEFAULT = CUBLAS_GEMM_DEFAULT;
-#endif
-
   // CHECK: hipblasHandle_t blasHandle;
   cublasHandle_t blasHandle;
-
-// Functions
 
   // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasGetAtomicsMode(cublasHandle_t handle, cublasAtomicsMode_t* mode);
   // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasGetAtomicsMode(hipblasHandle_t handle, hipblasAtomicsMode_t* atomics_mode);
@@ -306,13 +235,6 @@ int main() {
   blasStatus = cublasDznrm2(blasHandle, n, &dcomplex, incx, &dresult);
   blasStatus = cublasDznrm2_v2(blasHandle, n, &dcomplex, incx, &dresult);
 
-#if CUDA_VERSION >= 8000
-  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasNrm2Ex(cublasHandle_t handle, int n, const void* x, cudaDataType xType, int incx, void* result, cudaDataType resultType, cudaDataType executionType);
-  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasNrm2Ex(hipblasHandle_t handle, int n, const void* x, hipblasDatatype_t xType, int incx, void* result, hipblasDatatype_t resultType, hipblasDatatype_t executionType);
-  // CHECK: blasStatus = hipblasNrm2Ex(blasHandle, n, image, DataType, incx, image_2, DataType_2, DataType_3);
-  blasStatus = cublasNrm2Ex(blasHandle, n, image, DataType, incx, image_2, DataType_2, DataType_3);
-#endif
-
   // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasSdot_v2(cublasHandle_t handle, int n, const float* x, int incx, const float* y, int incy, float* result);
   // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasSdot(hipblasHandle_t handle, int n, const float* x, int incx, const float* y, int incy, float* result);
   // CHECK: blasStatus = hipblasSdot(blasHandle, n, &fx, incx, &fy, incy, &fresult);
@@ -396,6 +318,76 @@ int main() {
   // CHECK-NEXT: blasStatus = hipblasZdscal(blasHandle, n, &dx, &dcomplex, incx);
   blasStatus = cublasZdscal(blasHandle, n, &dx, &dcomplex, incx);
   blasStatus = cublasZdscal_v2(blasHandle, n, &dx, &dcomplex, incx);
+
+#if CUDA_VERSION >= 8000
+  // CHECK: hipblasDatatype_t DataType;
+  // CHECK-NEXT: hipblasDatatype_t DataType_t;
+  // CHECK-NEXT: hipblasDatatype_t blasDataType;
+  // CHECK-NEXT: hipblasDatatype_t R_16F = HIPBLAS_R_16F;
+  // CHECK-NEXT: hipblasDatatype_t C_16F = HIPBLAS_C_16F;
+  // CHECK-NEXT: hipblasDatatype_t R_32F = HIPBLAS_R_32F;
+  // CHECK-NEXT: hipblasDatatype_t C_32F = HIPBLAS_C_32F;
+  // CHECK-NEXT: hipblasDatatype_t R_64F = HIPBLAS_R_64F;
+  // CHECK-NEXT: hipblasDatatype_t C_64F = HIPBLAS_C_64F;
+  // CHECK-NEXT: hipblasDatatype_t R_8I = HIPBLAS_R_8I;
+  // CHECK-NEXT: hipblasDatatype_t C_8I = HIPBLAS_C_8I;
+  // CHECK-NEXT: hipblasDatatype_t R_8U = HIPBLAS_R_8U;
+  // CHECK-NEXT: hipblasDatatype_t C_8U = HIPBLAS_C_8U;
+  // CHECK-NEXT: hipblasDatatype_t R_32I = HIPBLAS_R_32I;
+  // CHECK-NEXT: hipblasDatatype_t C_32I = HIPBLAS_C_32I;
+  // CHECK-NEXT: hipblasDatatype_t R_32U = HIPBLAS_R_32U;
+  // CHECK-NEXT: hipblasDatatype_t C_32U = HIPBLAS_C_32U;
+  cudaDataType DataType;
+  cudaDataType_t DataType_t;
+  cublasDataType_t blasDataType;
+  cublasDataType_t R_16F = CUDA_R_16F;
+  cublasDataType_t C_16F = CUDA_C_16F;
+  cublasDataType_t R_32F = CUDA_R_32F;
+  cublasDataType_t C_32F = CUDA_C_32F;
+  cublasDataType_t R_64F = CUDA_R_64F;
+  cublasDataType_t C_64F = CUDA_C_64F;
+  cublasDataType_t R_8I = CUDA_R_8I;
+  cublasDataType_t C_8I = CUDA_C_8I;
+  cublasDataType_t R_8U = CUDA_R_8U;
+  cublasDataType_t C_8U = CUDA_C_8U;
+  cublasDataType_t R_32I = CUDA_R_32I;
+  cublasDataType_t C_32I = CUDA_C_32I;
+  cublasDataType_t R_32U = CUDA_R_32U;
+  cublasDataType_t C_32U = CUDA_C_32U;
+
+  // CHECK: hipblasDatatype_t DataType_2, DataType_3;
+  cudaDataType DataType_2, DataType_3;
+
+  // CHECK: hipblasGemmAlgo_t blasGemmAlgo;
+  // CHECK-NEXT: hipblasGemmAlgo_t BLAS_GEMM_DFALT = HIPBLAS_GEMM_DEFAULT;
+  cublasGemmAlgo_t blasGemmAlgo;
+  cublasGemmAlgo_t BLAS_GEMM_DFALT = CUBLAS_GEMM_DFALT;
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasNrm2Ex(cublasHandle_t handle, int n, const void* x, cudaDataType xType, int incx, void* result, cudaDataType resultType, cudaDataType executionType);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasNrm2Ex(hipblasHandle_t handle, int n, const void* x, hipblasDatatype_t xType, int incx, void* result, hipblasDatatype_t resultType, hipblasDatatype_t executionType);
+  // CHECK: blasStatus = hipblasNrm2Ex(blasHandle, n, image, DataType, incx, image_2, DataType_2, DataType_3);
+  blasStatus = cublasNrm2Ex(blasHandle, n, image, DataType, incx, image_2, DataType_2, DataType_3);
+#endif
+
+#if CUDA_VERSION >= 9000
+  // CHECK: hipblasGemmAlgo_t BLAS_GEMM_DEFAULT = HIPBLAS_GEMM_DEFAULT;
+  cublasGemmAlgo_t BLAS_GEMM_DEFAULT = CUBLAS_GEMM_DEFAULT;
+#endif
+
+#if CUDA_VERSION >= 10010
+  // CHECK: hipblasOperation_t BLAS_OP_HERMITAN = HIPBLAS_OP_C;
+  cublasOperation_t BLAS_OP_HERMITAN = CUBLAS_OP_HERMITAN;
+
+  // CHECK: hipblasFillMode_t BLAS_FILL_MODE_FULL = HIPBLAS_FILL_MODE_FULL;
+  cublasFillMode_t BLAS_FILL_MODE_FULL = CUBLAS_FILL_MODE_FULL;
+#endif
+
+#if CUDA_VERSION >= 11000
+  // CHECK: hipblasDatatype_t R_16BF = HIPBLAS_R_16B;
+  // CHECK-NEXT: hipblasDatatype_t C_16BF = HIPBLAS_C_16B;
+  cublasDataType_t R_16BF = CUDA_R_16BF;
+  cublasDataType_t C_16BF = CUDA_C_16BF;
+#endif
 
   return 0;
 }

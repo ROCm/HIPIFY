@@ -133,6 +133,23 @@ int main() {
   result = cudaLaunchCooperativeKernelMultiDevice(&LaunchParams, intVal, flags);
 #endif
 
+#if CUDA_VERSION <= 10000
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaConfigureCall(dim3 gridDim, dim3 blockDim, size_t sharedMem __dv(0), cudaStream_t stream __dv(0));
+  // HIP:  hipError_t hipConfigureCall(dim3 gridDim, dim3 blockDim, size_t sharedMem __dparm(0), hipStream_t stream __dparm(0));
+  // CHECK: result = hipConfigureCall(gridDim, blockDim, bytes, stream);
+  result = cudaConfigureCall(gridDim, blockDim, bytes, stream);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaLaunch(const void *func);
+  // HIP:  hipError_t hipLaunchByPtr(const void* func);
+  // CHECK: result = hipLaunchByPtr(deviceptr);
+  result = cudaLaunch(deviceptr);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaSetupArgument(const void *arg, size_t size, size_t offset);
+  // HIP:  hipError_t hipSetupArgument(const void* arg, size_t size, size_t offset);
+  // CHECK: result = hipSetupArgument(deviceptr, bytes, wOffset);
+  result = cudaSetupArgument(deviceptr, bytes, wOffset);
+#endif
+
 #if CUDA_VERSION >= 10000
   // CHECK: hipHostFn_t hostFn;
   cudaHostFn_t hostFn;
@@ -1455,23 +1472,6 @@ int main() {
   // HIP:  hipError_t hipProfilerStop();
   // CHECK: result = hipProfilerStop();
   result = cudaProfilerStop();
-
-#if CUDA_VERSION <= 10000
-  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaConfigureCall(dim3 gridDim, dim3 blockDim, size_t sharedMem __dv(0), cudaStream_t stream __dv(0));
-  // HIP:  hipError_t hipConfigureCall(dim3 gridDim, dim3 blockDim, size_t sharedMem __dparm(0), hipStream_t stream __dparm(0));
-  // CHECK: result = hipConfigureCall(gridDim, blockDim, bytes, stream);
-  result = cudaConfigureCall(gridDim, blockDim, bytes, stream);
-
-  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaLaunch(const void *func);
-  // HIP:  hipError_t hipLaunchByPtr(const void* func);
-  // CHECK: result = hipLaunchByPtr(deviceptr);
-  result = cudaLaunch(deviceptr);
-
-  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaSetupArgument(const void *arg, size_t size, size_t offset);
-  // HIP:  hipError_t hipSetupArgument(const void* arg, size_t size, size_t offset);
-  // CHECK: result = hipSetupArgument(deviceptr, bytes, wOffset);
-  result = cudaSetupArgument(deviceptr, bytes, wOffset);
-#endif
 
   // CUDA: extern __host__ cudaError_t CUDARTAPI cudaDeviceSetLimit(enum cudaLimit limit, size_t value);
   // HIP:  hipError_t hipDeviceSetLimit(enum hipLimit_t limit, size_t value);
