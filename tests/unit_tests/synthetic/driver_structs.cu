@@ -11,10 +11,6 @@ int main() {
   // CHECK-NEXT: HIP_ARRAY3D_DESCRIPTOR array3D;
   CUDA_ARRAY3D_DESCRIPTOR_st array3D_st;
   CUDA_ARRAY3D_DESCRIPTOR array3D;
-#if CUDA_VERSION > 11020
-  // CHECK: HIP_ARRAY3D_DESCRIPTOR array3D_v2;
-  CUDA_ARRAY3D_DESCRIPTOR_v2 array3D_v2;
-#endif
 
   // CHECK: HIP_ARRAY_DESCRIPTOR array_descr_st;
   // CHECK-NEXT: HIP_ARRAY_DESCRIPTOR array_descr;
@@ -26,76 +22,6 @@ int main() {
   CUDA_ARRAY_DESCRIPTOR_v1_st array_descr_v1_st;
   CUDA_ARRAY_DESCRIPTOR_v1 array_descr_v1;
 #undef __CUDA_API_VERSION_INTERNAL
-#if CUDA_VERSION > 11020
-  // CHECK: HIP_ARRAY_DESCRIPTOR array_descr_v2;
-  CUDA_ARRAY_DESCRIPTOR_v2 array_descr_v2;
-#endif
-
-#if CUDA_VERSION > 9020
-  // CHECK: hipExternalMemoryBufferDesc_st ext_mem_buff_st;
-  // CHECK-NEXT: hipExternalMemoryBufferDesc ext_mem_buff;
-  CUDA_EXTERNAL_MEMORY_BUFFER_DESC_st ext_mem_buff_st;
-  CUDA_EXTERNAL_MEMORY_BUFFER_DESC ext_mem_buff;
-#endif
-#if CUDA_VERSION > 11020
-  // CHECK: hipExternalMemoryBufferDesc ext_mem_buff_v1;
-  CUDA_EXTERNAL_MEMORY_BUFFER_DESC_v1 ext_mem_buff_v1;
-#endif
-
-#if CUDA_VERSION > 9020
-  // CHECK: hipExternalMemoryHandleDesc_st ext_mem_handle_st;
-  // CHECK-NEXT: hipExternalMemoryHandleDesc ext_mem_handle;
-  CUDA_EXTERNAL_MEMORY_HANDLE_DESC_st ext_mem_handle_st;
-  CUDA_EXTERNAL_MEMORY_HANDLE_DESC ext_mem_handle;
-#endif
-#if CUDA_VERSION > 11020
-  // CHECK: hipExternalMemoryHandleDesc ext_mem_handle_v1;
-  CUDA_EXTERNAL_MEMORY_HANDLE_DESC_v1 ext_mem_handle_v1;
-#endif
-
-#if CUDA_VERSION > 9020
-  // CHECK: hipExternalSemaphoreHandleDesc_st ext_sema_handle_st;
-  // CHECK-NEXT: hipExternalSemaphoreHandleDesc ext_sema_handle;
-  CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC_st ext_sema_handle_st;
-  CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC ext_sema_handle;
-#endif
-#if CUDA_VERSION > 11020
-  // CHECK: hipExternalSemaphoreHandleDesc ext_sema_handle_v1;
-  CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC_v1 ext_sema_handle_v1;
-#endif
-
-#if CUDA_VERSION > 9020
-  // CHECK: hipExternalSemaphoreSignalParams_st ext_sema_params_st;
-  // CHECK-NEXT: hipExternalSemaphoreSignalParams ext_sema_params;
-  CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS_st ext_sema_params_st;
-  CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS ext_sema_params;
-#endif
-#if CUDA_VERSION > 11020
-  // CHECK: hipExternalSemaphoreSignalParams ext_sema_params_v1;
-  CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS_v1 ext_sema_params_v1;
-#endif
-
-#if CUDA_VERSION > 9020
-  // CHECK: hipHostNodeParams host_node_params_st;
-  // CHECK-NEXT: hipHostNodeParams host_node_params;
-  CUDA_HOST_NODE_PARAMS_st host_node_params_st;
-  CUDA_HOST_NODE_PARAMS host_node_params;
-#endif
-#if CUDA_VERSION > 11020
-  // CHECK: hipHostNodeParams host_node_params_v1;
-  CUDA_HOST_NODE_PARAMS_v1 host_node_params_v1;
-#endif
-
-#if CUDA_VERSION > 9020
-  // CHECK: hipKernelNodeParams kern_node_params_st;
-  // CHECK-NEXT: hipKernelNodeParams kern_node_params;
-  CUDA_KERNEL_NODE_PARAMS_st kern_node_params_st;
-  CUDA_KERNEL_NODE_PARAMS kern_node_params;
-#endif
-#if CUDA_VERSION > 11020
-  // CHECK: hipKernelNodeParams kern_node_params_v1;
-  CUDA_KERNEL_NODE_PARAMS_v1 kern_node_params_v1;
-#endif
 
   // CHECK: hip_Memcpy2D memcpy2D_st;
   // CHECK-NEXT: hip_Memcpy2D memcpy2D_v1_st;
@@ -105,10 +31,6 @@ int main() {
   CUDA_MEMCPY2D_v1_st memcpy2D_v1_st;
   CUDA_MEMCPY2D memcpy2D;
   CUDA_MEMCPY2D_v1 memcpy2D_v1;
-#if CUDA_VERSION > 11020
-  // CHECK: hip_Memcpy2D memcpy2D_v2;
-  CUDA_MEMCPY2D_v2 memcpy2D_v2;
-#endif
 
   // CHECK: HIP_MEMCPY3D memcpy3D_st;
   // CHECK-NEXT: HIP_MEMCPY3D memcpy3D_v1_st;
@@ -118,46 +40,26 @@ int main() {
   CUDA_MEMCPY3D_v1_st memcpy3D_v1_st;
   CUDA_MEMCPY3D memcpy3D;
   CUDA_MEMCPY3D_v1 memcpy3D_v1;
-#if CUDA_VERSION > 11020
-  // CHECK: HIP_MEMCPY3D memcpy3D_v2;
-  CUDA_MEMCPY3D_v2 memcpy3D_v2;
-#endif
 
   // CHECK: HIP_RESOURCE_DESC_st res_descr_st;
   // CHECK-NEXT: HIP_RESOURCE_DESC res_descr;
   CUDA_RESOURCE_DESC_st res_descr_st;
   CUDA_RESOURCE_DESC res_descr;
-#if CUDA_VERSION > 11020
-  // CHECK: HIP_RESOURCE_DESC res_descr_v1;
-  CUDA_RESOURCE_DESC_v1 res_descr_v1;
-#endif
 
   // CHECK: HIP_RESOURCE_VIEW_DESC_st res_view_descr_st;
   // CHECK-NEXT: HIP_RESOURCE_VIEW_DESC res_view_descr;
   CUDA_RESOURCE_VIEW_DESC_st res_view_descr_st;
   CUDA_RESOURCE_VIEW_DESC res_view_descr;
-#if CUDA_VERSION > 11020
-  // CHECK: HIP_RESOURCE_VIEW_DESC res_view_descr_v1;
-  CUDA_RESOURCE_VIEW_DESC_v1 res_view_descr_v1;
-#endif
 
   // CHECK: HIP_TEXTURE_DESC_st tex_descr_st;
   // CHECK-NEXT: HIP_TEXTURE_DESC tex_descr;
   CUDA_TEXTURE_DESC_st tex_descr_st;
   CUDA_TEXTURE_DESC tex_descr;
-#if CUDA_VERSION > 11020
-  // CHECK: HIP_TEXTURE_DESC tex_descr_v1;
-  CUDA_TEXTURE_DESC_v1 tex_descr_v1;
-#endif
 
   // CHECK: hipIpcMemHandle_st ipc_mem_handle_st;
   // CHECK-NEXT: hipIpcMemHandle_t ipc_mem_handle;
   CUipcMemHandle_st ipc_mem_handle_st;
   CUipcMemHandle ipc_mem_handle;
-#if CUDA_VERSION > 11020
-  // CHECK: hipIpcMemHandle_t ipc_mem_handle_v1;
-  CUipcMemHandle_v1 ipc_mem_handle_v1;
-#endif
 
   // CHECK: hipArray* array_st_ptr;
   // CHECK-NEXT: hipArray_t array_ptr;
@@ -173,16 +75,6 @@ int main() {
   // CHECK-NEXT: hipEvent_t evnt;
   CUevent_st* evnt_st_ptr;
   CUevent evnt;
-
-#if CUDA_VERSION > 9020
-  // CHECK: hipExternalMemory_t ext_mem;
-  CUexternalMemory ext_mem;
-#endif
-
-#if CUDA_VERSION > 9020
-  // CHECK: hipExternalSemaphore_t ext_sema;
-  CUexternalSemaphore ext_sema;
-#endif
 
   // CHECK: ihipModuleSymbol_t* func_st_ptr;
   // CHECK-NEXT: hipFunction_t func;
@@ -204,20 +96,6 @@ int main() {
   CUtexref_st* tex_ref_st_ptr;
   CUtexref tex_ref;
 
-#if CUDA_VERSION > 9020
-  // CHECK: ihipGraph* graph_st;
-  // CHECK-NEXT: hipGraph_t graph;
-  CUgraph_st* graph_st;
-  CUgraph graph;
-#endif
-
-#if CUDA_VERSION > 9020
-  // CHECK: hipGraphExec* graphExec_st;
-  // CHECK-NEXT: hipGraphExec_t graphExec;
-  CUgraphExec_st* graphExec_st;
-  CUgraphExec graphExec;
-#endif
-
   // CHECK: hipGraphicsResource* graphicsResource_st;
   // CHECK-NEXT: hipGraphicsResource_t graphicsResource;
   CUgraphicsResource_st* graphicsResource_st;
@@ -226,35 +104,52 @@ int main() {
   // CHECK: hipUUID_t uuid_st;
   CUuuid_st uuid_st;
 
-#if CUDA_VERSION >= 11000
-  // CHECK: hipAccessPolicyWindow accessPolicyWindow_st;
-  // CHECK-NEXT: hipAccessPolicyWindow accessPolicyWindow;
-  CUaccessPolicyWindow_st accessPolicyWindow_st;
-  CUaccessPolicyWindow accessPolicyWindow;
-#endif
+#if CUDA_VERSION >= 10000
+  // CHECK: hipExternalMemoryBufferDesc_st ext_mem_buff_st;
+  // CHECK-NEXT: hipExternalMemoryBufferDesc ext_mem_buff;
+  CUDA_EXTERNAL_MEMORY_BUFFER_DESC_st ext_mem_buff_st;
+  CUDA_EXTERNAL_MEMORY_BUFFER_DESC ext_mem_buff;
 
-#if CUDA_VERSION >= 11020
-  // CHECK: ihipMemPoolHandle_t* memPoolHandle_st;
-  // CHECK-NEXT: hipMemPool_t memPool_t;
-  CUmemPoolHandle_st* memPoolHandle_st;
-  CUmemoryPool memPool_t;
-#endif
+  // CHECK: hipExternalMemoryHandleDesc_st ext_mem_handle_st;
+  // CHECK-NEXT: hipExternalMemoryHandleDesc ext_mem_handle;
+  CUDA_EXTERNAL_MEMORY_HANDLE_DESC_st ext_mem_handle_st;
+  CUDA_EXTERNAL_MEMORY_HANDLE_DESC ext_mem_handle;
 
-#if CUDA_VERSION >= 10020
-  // CHECK: hipMemLocation memLocation_st;
-  // CHECK-NEXT: hipMemLocation memLocation;
-  CUmemLocation_st memLocation_st;
-  CUmemLocation memLocation;
-#endif
+  // CHECK: hipExternalSemaphoreHandleDesc_st ext_sema_handle_st;
+  // CHECK-NEXT: hipExternalSemaphoreHandleDesc ext_sema_handle;
+  CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC_st ext_sema_handle_st;
+  CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC ext_sema_handle;
 
-#if CUDA_VERSION >= 11030
-  // CHECK: hipMemLocation memLocation_v1;
-  CUmemLocation_v1 memLocation_v1;
+  // CHECK: hipExternalSemaphoreSignalParams_st ext_sema_params_st;
+  // CHECK-NEXT: hipExternalSemaphoreSignalParams ext_sema_params;
+  CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS_st ext_sema_params_st;
+  CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS ext_sema_params;
 
-  // CHECK: hipUserObject* userObject_st_ptr;
-  // CHECK-NEXT: hipUserObject_t userObject;
-  CUuserObject_st* userObject_st_ptr;
-  CUuserObject userObject;
+  // CHECK: hipHostNodeParams host_node_params_st;
+  // CHECK-NEXT: hipHostNodeParams host_node_params;
+  CUDA_HOST_NODE_PARAMS_st host_node_params_st;
+  CUDA_HOST_NODE_PARAMS host_node_params;
+
+  // CHECK: hipKernelNodeParams kern_node_params_st;
+  // CHECK-NEXT: hipKernelNodeParams kern_node_params;
+  CUDA_KERNEL_NODE_PARAMS_st kern_node_params_st;
+  CUDA_KERNEL_NODE_PARAMS kern_node_params;
+
+  // CHECK: hipExternalMemory_t ext_mem;
+  CUexternalMemory ext_mem;
+
+  // CHECK: hipExternalSemaphore_t ext_sema;
+  CUexternalSemaphore ext_sema;
+
+  // CHECK: ihipGraph* graph_st;
+  // CHECK-NEXT: hipGraph_t graph;
+  CUgraph_st* graph_st;
+  CUgraph graph;
+
+  // CHECK: hipGraphExec* graphExec_st;
+  // CHECK-NEXT: hipGraphExec_t graphExec;
+  CUgraphExec_st* graphExec_st;
+  CUgraphExec graphExec;
 #endif
 
 #if CUDA_VERSION >= 10020
@@ -262,47 +157,18 @@ int main() {
   // CHECK-NEXT: hipMemAccessDesc memAccessDesc;
   CUmemAccessDesc_st memAccessDesc_st;
   CUmemAccessDesc memAccessDesc;
-#endif
 
-#if CUDA_VERSION >= 11030
-  // CHECK: hipMemAccessDesc memAccessDesc_v1;
-  CUmemAccessDesc_v1 memAccessDesc_v1;
-#endif
-
-#if CUDA_VERSION >= 11020
-  // CHECK: hipMemPoolProps memPoolProps_st;
-  // CHECK-NEXT: hipMemPoolProps memPoolProps;
-  CUmemPoolProps_st memPoolProps_st;
-  CUmemPoolProps memPoolProps;
-#endif
-
-#if CUDA_VERSION >= 11030
-  // CHECK: hipMemPoolProps memPoolProps_v1;
-  CUmemPoolProps_v1 memPoolProps_v1;
-#endif
-
-#if CUDA_VERSION >= 11020
-  // CHECK: hipMemPoolPtrExportData memPoolPtrExportData_st;
-  // CHECK-NEXT: hipMemPoolPtrExportData memPoolPtrExportData;
-  CUmemPoolPtrExportData_st memPoolPtrExportData_st;
-  CUmemPoolPtrExportData memPoolPtrExportData;
-#endif
-
-#if CUDA_VERSION >= 11030
-  // CHECK: hipMemPoolPtrExportData memPoolPtrExportData_v1;
-  CUmemPoolPtrExportData_v1 memPoolPtrExportData_v1;
-#endif
-
-#if CUDA_VERSION >= 10020
   // CHECK: hipMemAllocationProp memAllocationProp_st;
   // CHECK-NEXT: hipMemAllocationProp memAllocationProp;
   CUmemAllocationProp_st memAllocationProp_st;
   CUmemAllocationProp memAllocationProp;
 #endif
 
-#if CUDA_VERSION >= 11030
-  // CHECK: hipMemAllocationProp memAllocationProp_v1;
-  CUmemAllocationProp_v1 memAllocationProp_v1;
+#if CUDA_VERSION >= 11000
+  // CHECK: hipAccessPolicyWindow accessPolicyWindow_st;
+  // CHECK-NEXT: hipAccessPolicyWindow accessPolicyWindow;
+  CUaccessPolicyWindow_st accessPolicyWindow_st;
+  CUaccessPolicyWindow accessPolicyWindow;
 #endif
 
 #if CUDA_VERSION >= 11010
@@ -312,7 +178,91 @@ int main() {
   CUarrayMapInfo arrayMapInfo;
 #endif
 
+#if CUDA_VERSION >= 11020
+  // CHECK: ihipMemPoolHandle_t* memPoolHandle_st;
+  // CHECK-NEXT: hipMemPool_t memPool_t;
+  CUmemPoolHandle_st* memPoolHandle_st;
+  CUmemoryPool memPool_t;
+
+  // CHECK: hipMemLocation memLocation_st;
+  // CHECK-NEXT: hipMemLocation memLocation;
+  CUmemLocation_st memLocation_st;
+  CUmemLocation memLocation;
+
+  // CHECK: hipMemPoolProps memPoolProps_st;
+  // CHECK-NEXT: hipMemPoolProps memPoolProps;
+  CUmemPoolProps_st memPoolProps_st;
+  CUmemPoolProps memPoolProps;
+
+  // CHECK: hipMemPoolPtrExportData memPoolPtrExportData_st;
+  // CHECK-NEXT: hipMemPoolPtrExportData memPoolPtrExportData;
+  CUmemPoolPtrExportData_st memPoolPtrExportData_st;
+  CUmemPoolPtrExportData memPoolPtrExportData;
+#endif
+
 #if CUDA_VERSION >= 11030
+  // CHECK: HIP_ARRAY3D_DESCRIPTOR array3D_v2;
+  CUDA_ARRAY3D_DESCRIPTOR_v2 array3D_v2;
+
+  // CHECK: HIP_ARRAY_DESCRIPTOR array_descr_v2;
+  CUDA_ARRAY_DESCRIPTOR_v2 array_descr_v2;
+
+  // CHECK: hipExternalMemoryBufferDesc ext_mem_buff_v1;
+  CUDA_EXTERNAL_MEMORY_BUFFER_DESC_v1 ext_mem_buff_v1;
+
+  // CHECK: hipExternalMemoryHandleDesc ext_mem_handle_v1;
+  CUDA_EXTERNAL_MEMORY_HANDLE_DESC_v1 ext_mem_handle_v1;
+
+  // CHECK: hipExternalSemaphoreHandleDesc ext_sema_handle_v1;
+  CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC_v1 ext_sema_handle_v1;
+
+  // CHECK: hipExternalSemaphoreSignalParams ext_sema_params_v1;
+  CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS_v1 ext_sema_params_v1;
+
+  // CHECK: hipHostNodeParams host_node_params_v1;
+  CUDA_HOST_NODE_PARAMS_v1 host_node_params_v1;
+
+  // CHECK: hipKernelNodeParams kern_node_params_v1;
+  CUDA_KERNEL_NODE_PARAMS_v1 kern_node_params_v1;
+
+  // CHECK: hip_Memcpy2D memcpy2D_v2;
+  CUDA_MEMCPY2D_v2 memcpy2D_v2;
+
+  // CHECK: HIP_MEMCPY3D memcpy3D_v2;
+  CUDA_MEMCPY3D_v2 memcpy3D_v2;
+
+  // CHECK: HIP_RESOURCE_DESC res_descr_v1;
+  CUDA_RESOURCE_DESC_v1 res_descr_v1;
+
+  // CHECK: HIP_RESOURCE_VIEW_DESC res_view_descr_v1;
+  CUDA_RESOURCE_VIEW_DESC_v1 res_view_descr_v1;
+
+  // CHECK: HIP_TEXTURE_DESC tex_descr_v1;
+  CUDA_TEXTURE_DESC_v1 tex_descr_v1;
+
+  // CHECK: hipIpcMemHandle_t ipc_mem_handle_v1;
+  CUipcMemHandle_v1 ipc_mem_handle_v1;
+
+  // CHECK: hipMemLocation memLocation_v1;
+  CUmemLocation_v1 memLocation_v1;
+
+  // CHECK: hipUserObject* userObject_st_ptr;
+  // CHECK-NEXT: hipUserObject_t userObject;
+  CUuserObject_st* userObject_st_ptr;
+  CUuserObject userObject;
+
+  // CHECK: hipMemAccessDesc memAccessDesc_v1;
+  CUmemAccessDesc_v1 memAccessDesc_v1;
+
+  // CHECK: hipMemPoolProps memPoolProps_v1;
+  CUmemPoolProps_v1 memPoolProps_v1;
+
+  // CHECK: hipMemPoolPtrExportData memPoolPtrExportData_v1;
+  CUmemPoolPtrExportData_v1 memPoolPtrExportData_v1;
+
+  // CHECK: hipMemAllocationProp memAllocationProp_v1;
+  CUmemAllocationProp_v1 memAllocationProp_v1;
+
   // CHECK: hipArrayMapInfo arrayMapInfo_v1;
   CUarrayMapInfo_v1 arrayMapInfo_v1;
 #endif

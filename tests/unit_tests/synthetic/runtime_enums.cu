@@ -191,59 +191,6 @@ int main() {
   cudaDeviceAttr DevAttrManagedMemory = cudaDevAttrManagedMemory;
   cudaDeviceAttr DevAttrIsMultiGpuBoard = cudaDevAttrIsMultiGpuBoard;
   cudaDeviceAttr DevAttrMultiGpuBoardGroupID = cudaDevAttrMultiGpuBoardGroupID;
-#if CUDA_VERSION > 7050
-  // CHECK: hipDeviceAttribute_t DevAttrHostNativeAtomicSupported = hipDeviceAttributeHostNativeAtomicSupported;
-  // CHECK-NEXT: hipDeviceAttribute_t DevAttrSingleToDoublePrecisionPerfRatio = hipDeviceAttributeSingleToDoublePrecisionPerfRatio;
-  // CHECK-NEXT: hipDeviceAttribute_t DevAttrPageableMemoryAccess = hipDeviceAttributePageableMemoryAccess;
-  // CHECK-NEXT: hipDeviceAttribute_t DevAttrConcurrentManagedAccess = hipDeviceAttributeConcurrentManagedAccess;
-  // CHECK-NEXT: hipDeviceAttribute_t DevAttrComputePreemptionSupported = hipDeviceAttributeComputePreemptionSupported;
-  // CHECK-NEXT: hipDeviceAttribute_t DevAttrCanUseHostPointerForRegisteredMem = hipDeviceAttributeCanUseHostPointerForRegisteredMem;
-  cudaDeviceAttr DevAttrHostNativeAtomicSupported = cudaDevAttrHostNativeAtomicSupported;
-  cudaDeviceAttr DevAttrSingleToDoublePrecisionPerfRatio = cudaDevAttrSingleToDoublePrecisionPerfRatio;
-  cudaDeviceAttr DevAttrPageableMemoryAccess = cudaDevAttrPageableMemoryAccess;
-  cudaDeviceAttr DevAttrConcurrentManagedAccess = cudaDevAttrConcurrentManagedAccess;
-  cudaDeviceAttr DevAttrComputePreemptionSupported = cudaDevAttrComputePreemptionSupported;
-  cudaDeviceAttr DevAttrCanUseHostPointerForRegisteredMem = cudaDevAttrCanUseHostPointerForRegisteredMem;
-#endif
-#if CUDA_VERSION > 8000
-  // CHECK: hipDeviceAttribute_t DevAttrReserved94 = hipDeviceAttributeCanUseStreamWaitValue;
-  // CHECK-NEXT: hipDeviceAttribute_t DevAttrCooperativeLaunch = hipDeviceAttributeCooperativeLaunch;
-  // CHECK-NEXT: hipDeviceAttribute_t DevAttrCooperativeMultiDeviceLaunch = hipDeviceAttributeCooperativeMultiDeviceLaunch;
-  // CHECK-NEXT: hipDeviceAttribute_t DevAttrMaxSharedMemoryPerBlockOptin = hipDeviceAttributeSharedMemPerBlockOptin;
-  cudaDeviceAttr DevAttrReserved94 = cudaDevAttrReserved94;
-  cudaDeviceAttr DevAttrCooperativeLaunch = cudaDevAttrCooperativeLaunch;
-  cudaDeviceAttr DevAttrCooperativeMultiDeviceLaunch = cudaDevAttrCooperativeMultiDeviceLaunch;
-  cudaDeviceAttr DevAttrMaxSharedMemoryPerBlockOptin = cudaDevAttrMaxSharedMemoryPerBlockOptin;
-#endif
-#if CUDA_VERSION > 9010
-  // CHECK: hipDeviceAttribute_t DevAttrPageableMemoryAccessUsesHostPageTables = hipDeviceAttributePageableMemoryAccessUsesHostPageTables;
-  // CHECK-NEXT: hipDeviceAttribute_t DevAttrDirectManagedMemAccessFromHost = hipDeviceAttributeDirectManagedMemAccessFromHost;
-  cudaDeviceAttr DevAttrPageableMemoryAccessUsesHostPageTables = cudaDevAttrPageableMemoryAccessUsesHostPageTables;
-  cudaDeviceAttr DevAttrDirectManagedMemAccessFromHost = cudaDevAttrDirectManagedMemAccessFromHost;
-#endif
-#if CUDA_VERSION > 10020
-  // CHECK: hipDeviceAttribute_t DevAttrMaxBlocksPerMultiprocessor = hipDeviceAttributeMaxBlocksPerMultiprocessor;
-  cudaDeviceAttr DevAttrMaxBlocksPerMultiprocessor = cudaDevAttrMaxBlocksPerMultiprocessor;
-#endif
-#if CUDA_VERSION >= 11020
-  // CHECK: hipDeviceAttribute_t DevAttrMemoryPoolsSupported = hipDeviceAttributeMemoryPoolsSupported;
-  cudaDeviceAttr DevAttrMemoryPoolsSupported = cudaDevAttrMemoryPoolsSupported;
-#endif
-
-#if CUDA_VERSION > 7050
-  // CHECK: hipDeviceP2PAttr DeviceP2PAttr;
-  // CHECK-NEXT: hipDeviceP2PAttr DevP2PAttrPerformanceRank = hipDevP2PAttrPerformanceRank;
-  // CHECK-NEXT: hipDeviceP2PAttr DevP2PAttrAccessSupported = hipDevP2PAttrAccessSupported;
-  // CHECK-NEXT: hipDeviceP2PAttr DevP2PAttrNativeAtomicSupported = hipDevP2PAttrNativeAtomicSupported;
-  cudaDeviceP2PAttr DeviceP2PAttr;
-  cudaDeviceP2PAttr DevP2PAttrPerformanceRank = cudaDevP2PAttrPerformanceRank;
-  cudaDeviceP2PAttr DevP2PAttrAccessSupported = cudaDevP2PAttrAccessSupported;
-  cudaDeviceP2PAttr DevP2PAttrNativeAtomicSupported = cudaDevP2PAttrNativeAtomicSupported;
-#endif
-#if CUDA_VERSION > 9010
-  // CHECK: hipDeviceP2PAttr DevP2PAttrCudaArrayAccessSupported = hipDevP2PAttrHipArrayAccessSupported;
-  cudaDeviceP2PAttr DevP2PAttrCudaArrayAccessSupported = cudaDevP2PAttrCudaArrayAccessSupported;
-#endif
 
   // CHECK: hipError_t Error;
   // CHECK-NEXT: hipError_t Error_t;
@@ -341,107 +288,9 @@ int main() {
   cudaError_t ErrorHostMemoryNotRegistered = cudaErrorHostMemoryNotRegistered;
   cudaError_t ErrorLaunchFailure = cudaErrorLaunchFailure;
   cudaError_t ErrorNotSupported = cudaErrorNotSupported;
-#if CUDA_VERSION > 8000
-  // CHECK: hipError_t ErrorCooperativeLaunchTooLarge = hipErrorCooperativeLaunchTooLarge;
-  cudaError_t ErrorCooperativeLaunchTooLarge = cudaErrorCooperativeLaunchTooLarge;
-#endif
-#if CUDA_VERSION > 9020
-  // CHECK: hipError_t ErrorStreamCaptureUnsupported = hipErrorStreamCaptureUnsupported;
-  // CHECK-NEXT: hipError_t ErrorStreamCaptureInvalidated = hipErrorStreamCaptureInvalidated;
-  // CHECK-NEXT: hipError_t ErrorStreamCaptureMerge = hipErrorStreamCaptureMerge;
-  // CHECK-NEXT: hipError_t ErrorStreamCaptureUnmatched = hipErrorStreamCaptureUnmatched;
-  // CHECK-NEXT: hipError_t ErrorStreamCaptureUnjoined = hipErrorStreamCaptureUnjoined;
-  // CHECK-NEXT: hipError_t ErrorStreamCaptureIsolation = hipErrorStreamCaptureIsolation;
-  // CHECK-NEXT: hipError_t ErrorStreamCaptureImplicit = hipErrorStreamCaptureImplicit;
-  // CHECK-NEXT: hipError_t ErrorCapturedEvent = hipErrorCapturedEvent;
-  // CHECK-NEXT: hipError_t ErrorIllegalState = hipErrorIllegalState;
-  cudaError_t ErrorStreamCaptureUnsupported = cudaErrorStreamCaptureUnsupported;
-  cudaError_t ErrorStreamCaptureInvalidated = cudaErrorStreamCaptureInvalidated;
-  cudaError_t ErrorStreamCaptureMerge = cudaErrorStreamCaptureMerge;
-  cudaError_t ErrorStreamCaptureUnmatched = cudaErrorStreamCaptureUnmatched;
-  cudaError_t ErrorStreamCaptureUnjoined = cudaErrorStreamCaptureUnjoined;
-  cudaError_t ErrorStreamCaptureIsolation = cudaErrorStreamCaptureIsolation;
-  cudaError_t ErrorStreamCaptureImplicit = cudaErrorStreamCaptureImplicit;
-  cudaError_t ErrorCapturedEvent = cudaErrorCapturedEvent;
-  cudaError_t ErrorIllegalState = cudaErrorIllegalState;
-#endif
-#if CUDA_VERSION > 10000
-  // CHECK: hipError_t ErrorArrayIsMapped = hipErrorArrayIsMapped;
-  // CHECK-NEXT: hipError_t ErrorAlreadyMapped = hipErrorAlreadyMapped;
-  // CHECK-NEXT: hipError_t ErrorAlreadyAcquired = hipErrorAlreadyAcquired;
-  // CHECK-NEXT: hipError_t ErrorNotMapped = hipErrorNotMapped;
-  // CHECK-NEXT: hipError_t ErrorNotMappedAsArray = hipErrorNotMappedAsArray;
-  // CHECK-NEXT: hipError_t ErrorNotMappedAsPointer = hipErrorNotMappedAsPointer;
-  // CHECK-NEXT: hipError_t ErrorInvalidSource = hipErrorInvalidSource;
-  // CHECK-NEXT: hipError_t ErrorFileNotFound = hipErrorFileNotFound;
-  // CHECK-NEXT: hipError_t ErrorSymbolNotFound = hipErrorNotFound;
-  // CHECK-NEXT: hipError_t ErrorContextIsDestroyed = hipErrorContextIsDestroyed;
-  // CHECK-NEXT: hipError_t ErrorStreamCaptureWrongThread = hipErrorStreamCaptureWrongThread;
-  cudaError_t ErrorArrayIsMapped = cudaErrorArrayIsMapped;
-  cudaError_t ErrorAlreadyMapped = cudaErrorAlreadyMapped;
-  cudaError_t ErrorAlreadyAcquired = cudaErrorAlreadyAcquired;
-  cudaError_t ErrorNotMapped = cudaErrorNotMapped;
-  cudaError_t ErrorNotMappedAsArray = cudaErrorNotMappedAsArray;
-  cudaError_t ErrorNotMappedAsPointer = cudaErrorNotMappedAsPointer;
-  cudaError_t ErrorInvalidSource = cudaErrorInvalidSource;
-  cudaError_t ErrorFileNotFound = cudaErrorFileNotFound;
-  cudaError_t ErrorSymbolNotFound = cudaErrorSymbolNotFound;
-  cudaError_t ErrorContextIsDestroyed = cudaErrorContextIsDestroyed;
-  cudaError_t ErrorStreamCaptureWrongThread = cudaErrorStreamCaptureWrongThread;
-#endif
-#if CUDA_VERSION > 10010
-  // CHECK: hipError_t ErrorDeviceUninitialized = hipErrorInvalidContext;
-  // CHECK: hipError_t ErrorGraphExecUpdateFailure = hipErrorGraphExecUpdateFailure;
-  cudaError_t ErrorDeviceUninitialized = cudaErrorDeviceUninitialized;
-  cudaError_t ErrorGraphExecUpdateFailure = cudaErrorGraphExecUpdateFailure;
-#endif
+
   // CHECK: hipError_t ErrorUnknown = hipErrorUnknown;
   cudaError_t ErrorUnknown = cudaErrorUnknown;
-
-#if CUDA_VERSION > 9020
-  // CHECK: hipExternalMemoryHandleType ExternalMemoryHandleType;
-  // CHECK-NEXT: hipExternalMemoryHandleType ExternalMemoryHandleTypeOpaqueFd = hipExternalMemoryHandleTypeOpaqueFd;
-  // CHECK-NEXT: hipExternalMemoryHandleType ExternalMemoryHandleTypeOpaqueWin32 = hipExternalMemoryHandleTypeOpaqueWin32;
-  // CHECK-NEXT: hipExternalMemoryHandleType ExternalMemoryHandleTypeOpaqueWin32Kmt = hipExternalMemoryHandleTypeOpaqueWin32Kmt;
-  // CHECK-NEXT: hipExternalMemoryHandleType ExternalMemoryHandleTypeD3D12Heap = hipExternalMemoryHandleTypeD3D12Heap;
-  // CHECK-NEXT: hipExternalMemoryHandleType ExternalMemoryHandleTypeD3D12Resource = hipExternalMemoryHandleTypeD3D12Resource;
-  cudaExternalMemoryHandleType ExternalMemoryHandleType;
-  cudaExternalMemoryHandleType ExternalMemoryHandleTypeOpaqueFd = cudaExternalMemoryHandleTypeOpaqueFd;
-  cudaExternalMemoryHandleType ExternalMemoryHandleTypeOpaqueWin32 = cudaExternalMemoryHandleTypeOpaqueWin32;
-  cudaExternalMemoryHandleType ExternalMemoryHandleTypeOpaqueWin32Kmt = cudaExternalMemoryHandleTypeOpaqueWin32Kmt;
-  cudaExternalMemoryHandleType ExternalMemoryHandleTypeD3D12Heap = cudaExternalMemoryHandleTypeD3D12Heap;
-  cudaExternalMemoryHandleType ExternalMemoryHandleTypeD3D12Resource = cudaExternalMemoryHandleTypeD3D12Resource;
-#endif
-#if CUDA_VERSION > 10010
-  // CHECK: hipExternalMemoryHandleType ExternalMemoryHandleTypeD3D11Resource = hipExternalMemoryHandleTypeD3D11Resource;
-  // CHECK-NEXT: hipExternalMemoryHandleType ExternalMemoryHandleTypeD3D11ResourceKmt = hipExternalMemoryHandleTypeD3D11ResourceKmt;
-  cudaExternalMemoryHandleType ExternalMemoryHandleTypeD3D11Resource = cudaExternalMemoryHandleTypeD3D11Resource;
-  cudaExternalMemoryHandleType ExternalMemoryHandleTypeD3D11ResourceKmt = cudaExternalMemoryHandleTypeD3D11ResourceKmt;
-#endif
-
-#if CUDA_VERSION > 9020
-  // CHECK: hipExternalSemaphoreHandleType ExternalSemaphoreHandleType;
-  // CHECK-NEXT: hipExternalSemaphoreHandleType ExternalSemaphoreHandleTypeOpaqueFd = hipExternalSemaphoreHandleTypeOpaqueFd;
-  // CHECK-NEXT: hipExternalSemaphoreHandleType ExternalSemaphoreHandleTypeOpaqueWin32 = hipExternalSemaphoreHandleTypeOpaqueWin32;
-  // CHECK-NEXT: hipExternalSemaphoreHandleType ExternalSemaphoreHandleTypeOpaqueWin32Kmt = hipExternalSemaphoreHandleTypeOpaqueWin32Kmt;
-  // CHECK-NEXT: hipExternalSemaphoreHandleType ExternalSemaphoreHandleTypeD3D12Fence = hipExternalSemaphoreHandleTypeD3D12Fence;
-  cudaExternalSemaphoreHandleType ExternalSemaphoreHandleType;
-  cudaExternalSemaphoreHandleType ExternalSemaphoreHandleTypeOpaqueFd = cudaExternalSemaphoreHandleTypeOpaqueFd;
-  cudaExternalSemaphoreHandleType ExternalSemaphoreHandleTypeOpaqueWin32 = cudaExternalSemaphoreHandleTypeOpaqueWin32;
-  cudaExternalSemaphoreHandleType ExternalSemaphoreHandleTypeOpaqueWin32Kmt = cudaExternalSemaphoreHandleTypeOpaqueWin32Kmt;
-  cudaExternalSemaphoreHandleType ExternalSemaphoreHandleTypeD3D12Fence = cudaExternalSemaphoreHandleTypeD3D12Fence;
-#endif
-
-#if CUDA_VERSION > 8000
-  // CHECK: hipFuncAttribute FuncAttribute;
-  // CHECK-NEXT: hipFuncAttribute FuncAttributeMaxDynamicSharedMemorySize = hipFuncAttributeMaxDynamicSharedMemorySize;
-  // CHECK-NEXT: hipFuncAttribute FuncAttributePreferredSharedMemoryCarveout = hipFuncAttributePreferredSharedMemoryCarveout;
-  // CHECK-NEXT: hipFuncAttribute FuncAttributeMax = hipFuncAttributeMax;
-  cudaFuncAttribute FuncAttribute;
-  cudaFuncAttribute FuncAttributeMaxDynamicSharedMemorySize = cudaFuncAttributeMaxDynamicSharedMemorySize;
-  cudaFuncAttribute FuncAttributePreferredSharedMemoryCarveout = cudaFuncAttributePreferredSharedMemoryCarveout;
-  cudaFuncAttribute FuncAttributeMax = cudaFuncAttributeMax;
-#endif
 
   // CHECK: hipFuncCache_t FuncCache;
   // CHECK-NEXT: hipFuncCache_t FuncCachePreferNone = hipFuncCachePreferNone;
@@ -467,63 +316,6 @@ int main() {
   cudaGraphicsRegisterFlags GraphicsRegisterFlagsSurfaceLoadStore = cudaGraphicsRegisterFlagsSurfaceLoadStore;
   cudaGraphicsRegisterFlags GraphicsRegisterFlagsTextureGather = cudaGraphicsRegisterFlagsTextureGather;
 
-#if CUDA_VERSION > 9020
-  // CHECK: hipGraphNodeType GraphNodeType;
-  // CHECK-NEXT: hipGraphNodeType GraphNodeTypeKernel = hipGraphNodeTypeKernel;
-  // CHECK-NEXT: hipGraphNodeType GraphNodeTypeMemcpy = hipGraphNodeTypeMemcpy;
-  // CHECK-NEXT: hipGraphNodeType GraphNodeTypeMemset = hipGraphNodeTypeMemset;
-  // CHECK-NEXT: hipGraphNodeType GraphNodeTypeHost = hipGraphNodeTypeHost;
-  // CHECK-NEXT: hipGraphNodeType GraphNodeTypeGraph = hipGraphNodeTypeGraph;
-  // CHECK-NEXT: hipGraphNodeType GraphNodeTypeEmpty = hipGraphNodeTypeEmpty;
-  cudaGraphNodeType GraphNodeType;
-  cudaGraphNodeType GraphNodeTypeKernel = cudaGraphNodeTypeKernel;
-  cudaGraphNodeType GraphNodeTypeMemcpy = cudaGraphNodeTypeMemcpy;
-  cudaGraphNodeType GraphNodeTypeMemset = cudaGraphNodeTypeMemset;
-  cudaGraphNodeType GraphNodeTypeHost = cudaGraphNodeTypeHost;
-  cudaGraphNodeType GraphNodeTypeGraph = cudaGraphNodeTypeGraph;
-  cudaGraphNodeType GraphNodeTypeEmpty = cudaGraphNodeTypeEmpty;
-#endif
-#if CUDA_VERSION > 11000
-  // CHECK: hipGraphNodeType GraphNodeTypeWaitEvent = hipGraphNodeTypeWaitEvent;
-  // CHECK-NEXT: hipGraphNodeType GraphNodeTypeEventRecord = hipGraphNodeTypeEventRecord;
-  cudaGraphNodeType GraphNodeTypeWaitEvent = cudaGraphNodeTypeWaitEvent;
-  cudaGraphNodeType GraphNodeTypeEventRecord = cudaGraphNodeTypeEventRecord;
-#endif
-#if CUDA_VERSION >= 11040
-  // CHECK: hipGraphNodeType GraphNodeTypeExtSemaphoreSignal = hipGraphNodeTypeExtSemaphoreSignal;
-  // CHECK-NEXT: hipGraphNodeType GraphNodeTypeExtSemaphoreWait = hipGraphNodeTypeExtSemaphoreWait;
-  cudaGraphNodeType GraphNodeTypeExtSemaphoreSignal = cudaGraphNodeTypeExtSemaphoreSignal;
-  cudaGraphNodeType GraphNodeTypeExtSemaphoreWait = cudaGraphNodeTypeExtSemaphoreWait;
-#endif
-
-#if CUDA_VERSION > 9020
-  // CHECK: hipGraphNodeType GraphNodeTypeCount = hipGraphNodeTypeCount;
-  cudaGraphNodeType GraphNodeTypeCount = cudaGraphNodeTypeCount;
-#endif
-
-#if CUDA_VERSION > 10010
-  // CHECK: hipGraphExecUpdateResult GraphExecUpdateResult;
-  // CHECK-NEXT: hipGraphExecUpdateResult GraphExecUpdateSuccess = hipGraphExecUpdateSuccess;
-  // CHECK-NEXT: hipGraphExecUpdateResult GraphExecUpdateError = hipGraphExecUpdateError;
-  // CHECK-NEXT: hipGraphExecUpdateResult GraphExecUpdateErrorTopologyChanged = hipGraphExecUpdateErrorTopologyChanged;
-  // CHECK-NEXT: hipGraphExecUpdateResult GraphExecUpdateErrorNodeTypeChanged = hipGraphExecUpdateErrorNodeTypeChanged;
-  // CHECK-NEXT: hipGraphExecUpdateResult GraphExecUpdateErrorFunctionChanged = hipGraphExecUpdateErrorFunctionChanged;
-  // CHECK-NEXT: hipGraphExecUpdateResult GraphExecUpdateErrorParametersChanged = hipGraphExecUpdateErrorParametersChanged;
-  // CHECK-NEXT: hipGraphExecUpdateResult GraphExecUpdateErrorNotSupported = hipGraphExecUpdateErrorNotSupported;
-  cudaGraphExecUpdateResult GraphExecUpdateResult;
-  cudaGraphExecUpdateResult GraphExecUpdateSuccess = cudaGraphExecUpdateSuccess;
-  cudaGraphExecUpdateResult GraphExecUpdateError = cudaGraphExecUpdateError;
-  cudaGraphExecUpdateResult GraphExecUpdateErrorTopologyChanged = cudaGraphExecUpdateErrorTopologyChanged;
-  cudaGraphExecUpdateResult GraphExecUpdateErrorNodeTypeChanged = cudaGraphExecUpdateErrorNodeTypeChanged;
-  cudaGraphExecUpdateResult GraphExecUpdateErrorFunctionChanged = cudaGraphExecUpdateErrorFunctionChanged;
-  cudaGraphExecUpdateResult GraphExecUpdateErrorParametersChanged = cudaGraphExecUpdateErrorParametersChanged;
-  cudaGraphExecUpdateResult GraphExecUpdateErrorNotSupported = cudaGraphExecUpdateErrorNotSupported;
-#endif
-#if CUDA_VERSION > 11010
-  // CHECK: hipGraphExecUpdateResult GraphExecUpdateErrorUnsupportedFunctionChange = hipGraphExecUpdateErrorUnsupportedFunctionChange;
-  cudaGraphExecUpdateResult GraphExecUpdateErrorUnsupportedFunctionChange = cudaGraphExecUpdateErrorUnsupportedFunctionChange;
-#endif
-
   // CHECK: hipLimit_t Limit;
   // CHECK-NEXT: hipLimit_t LimitStackSize = hipLimitStackSize;
   // CHECK-NEXT: hipLimit_t LimitPrintfFifoSize = hipLimitPrintfFifoSize;
@@ -546,47 +338,12 @@ int main() {
   cudaMemcpyKind MemcpyDeviceToDevice = cudaMemcpyDeviceToDevice;
   cudaMemcpyKind MemcpyDefault = cudaMemcpyDefault;
 
-#if CUDA_VERSION > 7050
-  // CHECK: hipMemoryAdvise MemoryAdvise;
-  // CHECK-NEXT: hipMemoryAdvise MemAdviseSetReadMostly = hipMemAdviseSetReadMostly;
-  // CHECK-NEXT: hipMemoryAdvise MemAdviseUnsetReadMostly = hipMemAdviseUnsetReadMostly;
-  // CHECK-NEXT: hipMemoryAdvise MemAdviseSetPreferredLocation = hipMemAdviseSetPreferredLocation;
-  // CHECK-NEXT: hipMemoryAdvise MemAdviseUnsetPreferredLocation = hipMemAdviseUnsetPreferredLocation;
-  // CHECK-NEXT: hipMemoryAdvise MemAdviseSetAccessedBy = hipMemAdviseSetAccessedBy;
-  // CHECK-NEXT: hipMemoryAdvise MemAdviseUnsetAccessedBy = hipMemAdviseUnsetAccessedBy;
-  cudaMemoryAdvise MemoryAdvise;
-  cudaMemoryAdvise MemAdviseSetReadMostly = cudaMemAdviseSetReadMostly;
-  cudaMemoryAdvise MemAdviseUnsetReadMostly = cudaMemAdviseUnsetReadMostly;
-  cudaMemoryAdvise MemAdviseSetPreferredLocation = cudaMemAdviseSetPreferredLocation;
-  cudaMemoryAdvise MemAdviseUnsetPreferredLocation = cudaMemAdviseUnsetPreferredLocation;
-  cudaMemoryAdvise MemAdviseSetAccessedBy = cudaMemAdviseSetAccessedBy;
-  cudaMemoryAdvise MemAdviseUnsetAccessedBy = cudaMemAdviseUnsetAccessedBy;
-#endif
-
   // CHECK: hipMemoryType MemoryType;
   // CHECK-NEXT: hipMemoryType MemoryTypeHost = hipMemoryTypeHost;
   // CHECK-NEXT: hipMemoryType MemoryTypeDevice = hipMemoryTypeDevice;
   cudaMemoryType MemoryType;
   cudaMemoryType MemoryTypeHost = cudaMemoryTypeHost;
   cudaMemoryType MemoryTypeDevice = cudaMemoryTypeDevice;
-
-#if CUDA_VERSION >= 10000
-  // CHECK: hipMemoryType MemoryTypeManaged = hipMemoryTypeManaged;
-  cudaMemoryType MemoryTypeManaged = cudaMemoryTypeManaged;
-#endif
-
-#if CUDA_VERSION > 7050
-  // CHECK: hipMemRangeAttribute MemRangeAttribute;
-  // CHECK-NEXT: hipMemRangeAttribute MemRangeAttributeReadMostly = hipMemRangeAttributeReadMostly;
-  // CHECK-NEXT: hipMemRangeAttribute MemRangeAttributePreferredLocation = hipMemRangeAttributePreferredLocation;
-  // CHECK-NEXT: hipMemRangeAttribute MemRangeAttributeAccessedBy = hipMemRangeAttributeAccessedBy;
-  // CHECK-NEXT: hipMemRangeAttribute MemRangeAttributeLastPrefetchLocation = hipMemRangeAttributeLastPrefetchLocation;
-  cudaMemRangeAttribute MemRangeAttribute;
-  cudaMemRangeAttribute MemRangeAttributeReadMostly = cudaMemRangeAttributeReadMostly;
-  cudaMemRangeAttribute MemRangeAttributePreferredLocation = cudaMemRangeAttributePreferredLocation;
-  cudaMemRangeAttribute MemRangeAttributeAccessedBy = cudaMemRangeAttributeAccessedBy;
-  cudaMemRangeAttribute MemRangeAttributeLastPrefetchLocation = cudaMemRangeAttributeLastPrefetchLocation;
-#endif
 
   // CHECK: hipResourceType ResourceType;
   // CHECK-NEXT: hipResourceType ResourceTypeArray = hipResourceTypeArray;
@@ -681,28 +438,6 @@ int main() {
   cudaSharedMemConfig SharedMemBankSizeFourByte = cudaSharedMemBankSizeFourByte;
   cudaSharedMemConfig SharedMemBankSizeEightByte = cudaSharedMemBankSizeEightByte;
 
-#if CUDA_VERSION > 9020
-  // CHECK: hipStreamCaptureStatus StreamCaptureStatus;
-  // CHECK-NEXT: hipStreamCaptureStatus StreamCaptureStatusNone = hipStreamCaptureStatusNone;
-  // CHECK-NEXT: hipStreamCaptureStatus StreamCaptureStatusActive = hipStreamCaptureStatusActive;
-  // CHECK-NEXT: hipStreamCaptureStatus StreamCaptureStatusInvalidated = hipStreamCaptureStatusInvalidated;
-  cudaStreamCaptureStatus StreamCaptureStatus;
-  cudaStreamCaptureStatus StreamCaptureStatusNone = cudaStreamCaptureStatusNone;
-  cudaStreamCaptureStatus StreamCaptureStatusActive = cudaStreamCaptureStatusActive;
-  cudaStreamCaptureStatus StreamCaptureStatusInvalidated = cudaStreamCaptureStatusInvalidated;
-#endif
-
-#if CUDA_VERSION > 10000
-  // CHECK: hipStreamCaptureMode StreamCaptureMode;
-  // CHECK-NEXT: hipStreamCaptureMode StreamCaptureModeGlobal = hipStreamCaptureModeGlobal;
-  // CHECK-NEXT: hipStreamCaptureMode StreamCaptureModeThreadLocal = hipStreamCaptureModeThreadLocal;
-  // CHECK-NEXT: hipStreamCaptureMode StreamCaptureModeRelaxed = hipStreamCaptureModeRelaxed;
-  cudaStreamCaptureMode StreamCaptureMode;
-  cudaStreamCaptureMode StreamCaptureModeGlobal = cudaStreamCaptureModeGlobal;
-  cudaStreamCaptureMode StreamCaptureModeThreadLocal = cudaStreamCaptureModeThreadLocal;
-  cudaStreamCaptureMode StreamCaptureModeRelaxed = cudaStreamCaptureModeRelaxed;
-#endif
-
   // CHECK: hipSurfaceBoundaryMode SurfaceBoundaryMode;
   // CHECK-NEXT: hipSurfaceBoundaryMode BoundaryModeZero = hipBoundaryModeZero;
   // CHECK-NEXT: hipSurfaceBoundaryMode BoundaryModeClamp = hipBoundaryModeClamp;
@@ -746,25 +481,238 @@ int main() {
   cudaGLDeviceList GLDeviceListCurrentFrame = cudaGLDeviceListCurrentFrame;
   cudaGLDeviceList GLDeviceListNextFrame = cudaGLDeviceListNextFrame;
 
-#if CUDA_VERSION > 11020
-  // CHECK: hipStreamUpdateCaptureDependenciesFlags StreamUpdateCaptureDependenciesFlags;
-  // CHECK-NEXT: hipStreamUpdateCaptureDependenciesFlags StreamAddCaptureDependencies = hipStreamAddCaptureDependencies;
-  // CHECK-NEXT: hipStreamUpdateCaptureDependenciesFlags StreamSetCaptureDependencies = hipStreamSetCaptureDependencies;
-  cudaStreamUpdateCaptureDependenciesFlags StreamUpdateCaptureDependenciesFlags;
-  cudaStreamUpdateCaptureDependenciesFlags StreamAddCaptureDependencies = cudaStreamAddCaptureDependencies;
-  cudaStreamUpdateCaptureDependenciesFlags StreamSetCaptureDependencies = cudaStreamSetCaptureDependencies;
+#if CUDA_VERSION >= 8000
+  // CHECK: hipDeviceAttribute_t DevAttrHostNativeAtomicSupported = hipDeviceAttributeHostNativeAtomicSupported;
+  // CHECK-NEXT: hipDeviceAttribute_t DevAttrSingleToDoublePrecisionPerfRatio = hipDeviceAttributeSingleToDoublePrecisionPerfRatio;
+  // CHECK-NEXT: hipDeviceAttribute_t DevAttrPageableMemoryAccess = hipDeviceAttributePageableMemoryAccess;
+  // CHECK-NEXT: hipDeviceAttribute_t DevAttrConcurrentManagedAccess = hipDeviceAttributeConcurrentManagedAccess;
+  // CHECK-NEXT: hipDeviceAttribute_t DevAttrComputePreemptionSupported = hipDeviceAttributeComputePreemptionSupported;
+  // CHECK-NEXT: hipDeviceAttribute_t DevAttrCanUseHostPointerForRegisteredMem = hipDeviceAttributeCanUseHostPointerForRegisteredMem;
+  cudaDeviceAttr DevAttrHostNativeAtomicSupported = cudaDevAttrHostNativeAtomicSupported;
+  cudaDeviceAttr DevAttrSingleToDoublePrecisionPerfRatio = cudaDevAttrSingleToDoublePrecisionPerfRatio;
+  cudaDeviceAttr DevAttrPageableMemoryAccess = cudaDevAttrPageableMemoryAccess;
+  cudaDeviceAttr DevAttrConcurrentManagedAccess = cudaDevAttrConcurrentManagedAccess;
+  cudaDeviceAttr DevAttrComputePreemptionSupported = cudaDevAttrComputePreemptionSupported;
+  cudaDeviceAttr DevAttrCanUseHostPointerForRegisteredMem = cudaDevAttrCanUseHostPointerForRegisteredMem;
+
+  // CHECK: hipDeviceP2PAttr DeviceP2PAttr;
+  // CHECK-NEXT: hipDeviceP2PAttr DevP2PAttrPerformanceRank = hipDevP2PAttrPerformanceRank;
+  // CHECK-NEXT: hipDeviceP2PAttr DevP2PAttrAccessSupported = hipDevP2PAttrAccessSupported;
+  // CHECK-NEXT: hipDeviceP2PAttr DevP2PAttrNativeAtomicSupported = hipDevP2PAttrNativeAtomicSupported;
+  cudaDeviceP2PAttr DeviceP2PAttr;
+  cudaDeviceP2PAttr DevP2PAttrPerformanceRank = cudaDevP2PAttrPerformanceRank;
+  cudaDeviceP2PAttr DevP2PAttrAccessSupported = cudaDevP2PAttrAccessSupported;
+  cudaDeviceP2PAttr DevP2PAttrNativeAtomicSupported = cudaDevP2PAttrNativeAtomicSupported;
+
+  // CHECK: hipMemoryAdvise MemoryAdvise;
+  // CHECK-NEXT: hipMemoryAdvise MemAdviseSetReadMostly = hipMemAdviseSetReadMostly;
+  // CHECK-NEXT: hipMemoryAdvise MemAdviseUnsetReadMostly = hipMemAdviseUnsetReadMostly;
+  // CHECK-NEXT: hipMemoryAdvise MemAdviseSetPreferredLocation = hipMemAdviseSetPreferredLocation;
+  // CHECK-NEXT: hipMemoryAdvise MemAdviseUnsetPreferredLocation = hipMemAdviseUnsetPreferredLocation;
+  // CHECK-NEXT: hipMemoryAdvise MemAdviseSetAccessedBy = hipMemAdviseSetAccessedBy;
+  // CHECK-NEXT: hipMemoryAdvise MemAdviseUnsetAccessedBy = hipMemAdviseUnsetAccessedBy;
+  cudaMemoryAdvise MemoryAdvise;
+  cudaMemoryAdvise MemAdviseSetReadMostly = cudaMemAdviseSetReadMostly;
+  cudaMemoryAdvise MemAdviseUnsetReadMostly = cudaMemAdviseUnsetReadMostly;
+  cudaMemoryAdvise MemAdviseSetPreferredLocation = cudaMemAdviseSetPreferredLocation;
+  cudaMemoryAdvise MemAdviseUnsetPreferredLocation = cudaMemAdviseUnsetPreferredLocation;
+  cudaMemoryAdvise MemAdviseSetAccessedBy = cudaMemAdviseSetAccessedBy;
+  cudaMemoryAdvise MemAdviseUnsetAccessedBy = cudaMemAdviseUnsetAccessedBy;
+
+  // CHECK: hipMemRangeAttribute MemRangeAttribute;
+  // CHECK-NEXT: hipMemRangeAttribute MemRangeAttributeReadMostly = hipMemRangeAttributeReadMostly;
+  // CHECK-NEXT: hipMemRangeAttribute MemRangeAttributePreferredLocation = hipMemRangeAttributePreferredLocation;
+  // CHECK-NEXT: hipMemRangeAttribute MemRangeAttributeAccessedBy = hipMemRangeAttributeAccessedBy;
+  // CHECK-NEXT: hipMemRangeAttribute MemRangeAttributeLastPrefetchLocation = hipMemRangeAttributeLastPrefetchLocation;
+  cudaMemRangeAttribute MemRangeAttribute;
+  cudaMemRangeAttribute MemRangeAttributeReadMostly = cudaMemRangeAttributeReadMostly;
+  cudaMemRangeAttribute MemRangeAttributePreferredLocation = cudaMemRangeAttributePreferredLocation;
+  cudaMemRangeAttribute MemRangeAttributeAccessedBy = cudaMemRangeAttributeAccessedBy;
+  cudaMemRangeAttribute MemRangeAttributeLastPrefetchLocation = cudaMemRangeAttributeLastPrefetchLocation;
+#endif
+
+#if CUDA_VERSION >= 9000
+  // CHECK: hipDeviceAttribute_t DevAttrReserved94 = hipDeviceAttributeCanUseStreamWaitValue;
+  // CHECK-NEXT: hipDeviceAttribute_t DevAttrCooperativeLaunch = hipDeviceAttributeCooperativeLaunch;
+  // CHECK-NEXT: hipDeviceAttribute_t DevAttrCooperativeMultiDeviceLaunch = hipDeviceAttributeCooperativeMultiDeviceLaunch;
+  // CHECK-NEXT: hipDeviceAttribute_t DevAttrMaxSharedMemoryPerBlockOptin = hipDeviceAttributeSharedMemPerBlockOptin;
+  cudaDeviceAttr DevAttrReserved94 = cudaDevAttrReserved94;
+  cudaDeviceAttr DevAttrCooperativeLaunch = cudaDevAttrCooperativeLaunch;
+  cudaDeviceAttr DevAttrCooperativeMultiDeviceLaunch = cudaDevAttrCooperativeMultiDeviceLaunch;
+  cudaDeviceAttr DevAttrMaxSharedMemoryPerBlockOptin = cudaDevAttrMaxSharedMemoryPerBlockOptin;
+
+  // CHECK: hipError_t ErrorCooperativeLaunchTooLarge = hipErrorCooperativeLaunchTooLarge;
+  cudaError_t ErrorCooperativeLaunchTooLarge = cudaErrorCooperativeLaunchTooLarge;
+
+  // CHECK: hipFuncAttribute FuncAttribute;
+  // CHECK-NEXT: hipFuncAttribute FuncAttributeMaxDynamicSharedMemorySize = hipFuncAttributeMaxDynamicSharedMemorySize;
+  // CHECK-NEXT: hipFuncAttribute FuncAttributePreferredSharedMemoryCarveout = hipFuncAttributePreferredSharedMemoryCarveout;
+  // CHECK-NEXT: hipFuncAttribute FuncAttributeMax = hipFuncAttributeMax;
+  cudaFuncAttribute FuncAttribute;
+  cudaFuncAttribute FuncAttributeMaxDynamicSharedMemorySize = cudaFuncAttributeMaxDynamicSharedMemorySize;
+  cudaFuncAttribute FuncAttributePreferredSharedMemoryCarveout = cudaFuncAttributePreferredSharedMemoryCarveout;
+  cudaFuncAttribute FuncAttributeMax = cudaFuncAttributeMax;
+#endif
+
+#if CUDA_VERSION >= 9020
+  // CHECK: hipDeviceAttribute_t DevAttrPageableMemoryAccessUsesHostPageTables = hipDeviceAttributePageableMemoryAccessUsesHostPageTables;
+  // CHECK-NEXT: hipDeviceAttribute_t DevAttrDirectManagedMemAccessFromHost = hipDeviceAttributeDirectManagedMemAccessFromHost;
+  cudaDeviceAttr DevAttrPageableMemoryAccessUsesHostPageTables = cudaDevAttrPageableMemoryAccessUsesHostPageTables;
+  cudaDeviceAttr DevAttrDirectManagedMemAccessFromHost = cudaDevAttrDirectManagedMemAccessFromHost;
+
+  // CHECK: hipDeviceP2PAttr DevP2PAttrCudaArrayAccessSupported = hipDevP2PAttrHipArrayAccessSupported;
+  cudaDeviceP2PAttr DevP2PAttrCudaArrayAccessSupported = cudaDevP2PAttrCudaArrayAccessSupported;
+#endif
+
+#if CUDA_VERSION >= 10000
+  // CHECK: hipError_t ErrorStreamCaptureUnsupported = hipErrorStreamCaptureUnsupported;
+  // CHECK-NEXT: hipError_t ErrorStreamCaptureInvalidated = hipErrorStreamCaptureInvalidated;
+  // CHECK-NEXT: hipError_t ErrorStreamCaptureMerge = hipErrorStreamCaptureMerge;
+  // CHECK-NEXT: hipError_t ErrorStreamCaptureUnmatched = hipErrorStreamCaptureUnmatched;
+  // CHECK-NEXT: hipError_t ErrorStreamCaptureUnjoined = hipErrorStreamCaptureUnjoined;
+  // CHECK-NEXT: hipError_t ErrorStreamCaptureIsolation = hipErrorStreamCaptureIsolation;
+  // CHECK-NEXT: hipError_t ErrorStreamCaptureImplicit = hipErrorStreamCaptureImplicit;
+  // CHECK-NEXT: hipError_t ErrorCapturedEvent = hipErrorCapturedEvent;
+  // CHECK-NEXT: hipError_t ErrorIllegalState = hipErrorIllegalState;
+  cudaError_t ErrorStreamCaptureUnsupported = cudaErrorStreamCaptureUnsupported;
+  cudaError_t ErrorStreamCaptureInvalidated = cudaErrorStreamCaptureInvalidated;
+  cudaError_t ErrorStreamCaptureMerge = cudaErrorStreamCaptureMerge;
+  cudaError_t ErrorStreamCaptureUnmatched = cudaErrorStreamCaptureUnmatched;
+  cudaError_t ErrorStreamCaptureUnjoined = cudaErrorStreamCaptureUnjoined;
+  cudaError_t ErrorStreamCaptureIsolation = cudaErrorStreamCaptureIsolation;
+  cudaError_t ErrorStreamCaptureImplicit = cudaErrorStreamCaptureImplicit;
+  cudaError_t ErrorCapturedEvent = cudaErrorCapturedEvent;
+  cudaError_t ErrorIllegalState = cudaErrorIllegalState;
+
+  // CHECK: hipExternalMemoryHandleType ExternalMemoryHandleType;
+  // CHECK-NEXT: hipExternalMemoryHandleType ExternalMemoryHandleTypeOpaqueFd = hipExternalMemoryHandleTypeOpaqueFd;
+  // CHECK-NEXT: hipExternalMemoryHandleType ExternalMemoryHandleTypeOpaqueWin32 = hipExternalMemoryHandleTypeOpaqueWin32;
+  // CHECK-NEXT: hipExternalMemoryHandleType ExternalMemoryHandleTypeOpaqueWin32Kmt = hipExternalMemoryHandleTypeOpaqueWin32Kmt;
+  // CHECK-NEXT: hipExternalMemoryHandleType ExternalMemoryHandleTypeD3D12Heap = hipExternalMemoryHandleTypeD3D12Heap;
+  // CHECK-NEXT: hipExternalMemoryHandleType ExternalMemoryHandleTypeD3D12Resource = hipExternalMemoryHandleTypeD3D12Resource;
+  cudaExternalMemoryHandleType ExternalMemoryHandleType;
+  cudaExternalMemoryHandleType ExternalMemoryHandleTypeOpaqueFd = cudaExternalMemoryHandleTypeOpaqueFd;
+  cudaExternalMemoryHandleType ExternalMemoryHandleTypeOpaqueWin32 = cudaExternalMemoryHandleTypeOpaqueWin32;
+  cudaExternalMemoryHandleType ExternalMemoryHandleTypeOpaqueWin32Kmt = cudaExternalMemoryHandleTypeOpaqueWin32Kmt;
+  cudaExternalMemoryHandleType ExternalMemoryHandleTypeD3D12Heap = cudaExternalMemoryHandleTypeD3D12Heap;
+  cudaExternalMemoryHandleType ExternalMemoryHandleTypeD3D12Resource = cudaExternalMemoryHandleTypeD3D12Resource;
+
+  // CHECK: hipExternalSemaphoreHandleType ExternalSemaphoreHandleType;
+  // CHECK-NEXT: hipExternalSemaphoreHandleType ExternalSemaphoreHandleTypeOpaqueFd = hipExternalSemaphoreHandleTypeOpaqueFd;
+  // CHECK-NEXT: hipExternalSemaphoreHandleType ExternalSemaphoreHandleTypeOpaqueWin32 = hipExternalSemaphoreHandleTypeOpaqueWin32;
+  // CHECK-NEXT: hipExternalSemaphoreHandleType ExternalSemaphoreHandleTypeOpaqueWin32Kmt = hipExternalSemaphoreHandleTypeOpaqueWin32Kmt;
+  // CHECK-NEXT: hipExternalSemaphoreHandleType ExternalSemaphoreHandleTypeD3D12Fence = hipExternalSemaphoreHandleTypeD3D12Fence;
+  cudaExternalSemaphoreHandleType ExternalSemaphoreHandleType;
+  cudaExternalSemaphoreHandleType ExternalSemaphoreHandleTypeOpaqueFd = cudaExternalSemaphoreHandleTypeOpaqueFd;
+  cudaExternalSemaphoreHandleType ExternalSemaphoreHandleTypeOpaqueWin32 = cudaExternalSemaphoreHandleTypeOpaqueWin32;
+  cudaExternalSemaphoreHandleType ExternalSemaphoreHandleTypeOpaqueWin32Kmt = cudaExternalSemaphoreHandleTypeOpaqueWin32Kmt;
+  cudaExternalSemaphoreHandleType ExternalSemaphoreHandleTypeD3D12Fence = cudaExternalSemaphoreHandleTypeD3D12Fence;
+
+  // CHECK: hipGraphNodeType GraphNodeType;
+  // CHECK-NEXT: hipGraphNodeType GraphNodeTypeKernel = hipGraphNodeTypeKernel;
+  // CHECK-NEXT: hipGraphNodeType GraphNodeTypeMemcpy = hipGraphNodeTypeMemcpy;
+  // CHECK-NEXT: hipGraphNodeType GraphNodeTypeMemset = hipGraphNodeTypeMemset;
+  // CHECK-NEXT: hipGraphNodeType GraphNodeTypeHost = hipGraphNodeTypeHost;
+  // CHECK-NEXT: hipGraphNodeType GraphNodeTypeGraph = hipGraphNodeTypeGraph;
+  // CHECK-NEXT: hipGraphNodeType GraphNodeTypeEmpty = hipGraphNodeTypeEmpty;
+  cudaGraphNodeType GraphNodeType;
+  cudaGraphNodeType GraphNodeTypeKernel = cudaGraphNodeTypeKernel;
+  cudaGraphNodeType GraphNodeTypeMemcpy = cudaGraphNodeTypeMemcpy;
+  cudaGraphNodeType GraphNodeTypeMemset = cudaGraphNodeTypeMemset;
+  cudaGraphNodeType GraphNodeTypeHost = cudaGraphNodeTypeHost;
+  cudaGraphNodeType GraphNodeTypeGraph = cudaGraphNodeTypeGraph;
+  cudaGraphNodeType GraphNodeTypeEmpty = cudaGraphNodeTypeEmpty;
+
+  // CHECK: hipGraphNodeType GraphNodeTypeCount = hipGraphNodeTypeCount;
+  cudaGraphNodeType GraphNodeTypeCount = cudaGraphNodeTypeCount;
+
+  // CHECK: hipMemoryType MemoryTypeManaged = hipMemoryTypeManaged;
+  cudaMemoryType MemoryTypeManaged = cudaMemoryTypeManaged;
+
+  // CHECK: hipStreamCaptureStatus StreamCaptureStatus;
+  // CHECK-NEXT: hipStreamCaptureStatus StreamCaptureStatusNone = hipStreamCaptureStatusNone;
+  // CHECK-NEXT: hipStreamCaptureStatus StreamCaptureStatusActive = hipStreamCaptureStatusActive;
+  // CHECK-NEXT: hipStreamCaptureStatus StreamCaptureStatusInvalidated = hipStreamCaptureStatusInvalidated;
+  cudaStreamCaptureStatus StreamCaptureStatus;
+  cudaStreamCaptureStatus StreamCaptureStatusNone = cudaStreamCaptureStatusNone;
+  cudaStreamCaptureStatus StreamCaptureStatusActive = cudaStreamCaptureStatusActive;
+  cudaStreamCaptureStatus StreamCaptureStatusInvalidated = cudaStreamCaptureStatusInvalidated;
+#endif
+
+#if CUDA_VERSION >= 10010
+  // CHECK: hipError_t ErrorArrayIsMapped = hipErrorArrayIsMapped;
+  // CHECK-NEXT: hipError_t ErrorAlreadyMapped = hipErrorAlreadyMapped;
+  // CHECK-NEXT: hipError_t ErrorAlreadyAcquired = hipErrorAlreadyAcquired;
+  // CHECK-NEXT: hipError_t ErrorNotMapped = hipErrorNotMapped;
+  // CHECK-NEXT: hipError_t ErrorNotMappedAsArray = hipErrorNotMappedAsArray;
+  // CHECK-NEXT: hipError_t ErrorNotMappedAsPointer = hipErrorNotMappedAsPointer;
+  // CHECK-NEXT: hipError_t ErrorInvalidSource = hipErrorInvalidSource;
+  // CHECK-NEXT: hipError_t ErrorFileNotFound = hipErrorFileNotFound;
+  // CHECK-NEXT: hipError_t ErrorSymbolNotFound = hipErrorNotFound;
+  // CHECK-NEXT: hipError_t ErrorContextIsDestroyed = hipErrorContextIsDestroyed;
+  // CHECK-NEXT: hipError_t ErrorStreamCaptureWrongThread = hipErrorStreamCaptureWrongThread;
+  cudaError_t ErrorArrayIsMapped = cudaErrorArrayIsMapped;
+  cudaError_t ErrorAlreadyMapped = cudaErrorAlreadyMapped;
+  cudaError_t ErrorAlreadyAcquired = cudaErrorAlreadyAcquired;
+  cudaError_t ErrorNotMapped = cudaErrorNotMapped;
+  cudaError_t ErrorNotMappedAsArray = cudaErrorNotMappedAsArray;
+  cudaError_t ErrorNotMappedAsPointer = cudaErrorNotMappedAsPointer;
+  cudaError_t ErrorInvalidSource = cudaErrorInvalidSource;
+  cudaError_t ErrorFileNotFound = cudaErrorFileNotFound;
+  cudaError_t ErrorSymbolNotFound = cudaErrorSymbolNotFound;
+  cudaError_t ErrorContextIsDestroyed = cudaErrorContextIsDestroyed;
+  cudaError_t ErrorStreamCaptureWrongThread = cudaErrorStreamCaptureWrongThread;
+
+  // CHECK: hipStreamCaptureMode StreamCaptureMode;
+  // CHECK-NEXT: hipStreamCaptureMode StreamCaptureModeGlobal = hipStreamCaptureModeGlobal;
+  // CHECK-NEXT: hipStreamCaptureMode StreamCaptureModeThreadLocal = hipStreamCaptureModeThreadLocal;
+  // CHECK-NEXT: hipStreamCaptureMode StreamCaptureModeRelaxed = hipStreamCaptureModeRelaxed;
+  cudaStreamCaptureMode StreamCaptureMode;
+  cudaStreamCaptureMode StreamCaptureModeGlobal = cudaStreamCaptureModeGlobal;
+  cudaStreamCaptureMode StreamCaptureModeThreadLocal = cudaStreamCaptureModeThreadLocal;
+  cudaStreamCaptureMode StreamCaptureModeRelaxed = cudaStreamCaptureModeRelaxed;
+#endif
+
+#if CUDA_VERSION >= 10020
+  // CHECK: hipError_t ErrorDeviceUninitialized = hipErrorInvalidContext;
+  // CHECK: hipError_t ErrorGraphExecUpdateFailure = hipErrorGraphExecUpdateFailure;
+  cudaError_t ErrorDeviceUninitialized = cudaErrorDeviceUninitialized;
+  cudaError_t ErrorGraphExecUpdateFailure = cudaErrorGraphExecUpdateFailure;
+
+  // CHECK: hipExternalMemoryHandleType ExternalMemoryHandleTypeD3D11Resource = hipExternalMemoryHandleTypeD3D11Resource;
+  // CHECK-NEXT: hipExternalMemoryHandleType ExternalMemoryHandleTypeD3D11ResourceKmt = hipExternalMemoryHandleTypeD3D11ResourceKmt;
+  cudaExternalMemoryHandleType ExternalMemoryHandleTypeD3D11Resource = cudaExternalMemoryHandleTypeD3D11Resource;
+  cudaExternalMemoryHandleType ExternalMemoryHandleTypeD3D11ResourceKmt = cudaExternalMemoryHandleTypeD3D11ResourceKmt;
+
+  // CHECK: hipGraphExecUpdateResult GraphExecUpdateResult;
+  // CHECK-NEXT: hipGraphExecUpdateResult GraphExecUpdateSuccess = hipGraphExecUpdateSuccess;
+  // CHECK-NEXT: hipGraphExecUpdateResult GraphExecUpdateError = hipGraphExecUpdateError;
+  // CHECK-NEXT: hipGraphExecUpdateResult GraphExecUpdateErrorTopologyChanged = hipGraphExecUpdateErrorTopologyChanged;
+  // CHECK-NEXT: hipGraphExecUpdateResult GraphExecUpdateErrorNodeTypeChanged = hipGraphExecUpdateErrorNodeTypeChanged;
+  // CHECK-NEXT: hipGraphExecUpdateResult GraphExecUpdateErrorFunctionChanged = hipGraphExecUpdateErrorFunctionChanged;
+  // CHECK-NEXT: hipGraphExecUpdateResult GraphExecUpdateErrorParametersChanged = hipGraphExecUpdateErrorParametersChanged;
+  // CHECK-NEXT: hipGraphExecUpdateResult GraphExecUpdateErrorNotSupported = hipGraphExecUpdateErrorNotSupported;
+  cudaGraphExecUpdateResult GraphExecUpdateResult;
+  cudaGraphExecUpdateResult GraphExecUpdateSuccess = cudaGraphExecUpdateSuccess;
+  cudaGraphExecUpdateResult GraphExecUpdateError = cudaGraphExecUpdateError;
+  cudaGraphExecUpdateResult GraphExecUpdateErrorTopologyChanged = cudaGraphExecUpdateErrorTopologyChanged;
+  cudaGraphExecUpdateResult GraphExecUpdateErrorNodeTypeChanged = cudaGraphExecUpdateErrorNodeTypeChanged;
+  cudaGraphExecUpdateResult GraphExecUpdateErrorFunctionChanged = cudaGraphExecUpdateErrorFunctionChanged;
+  cudaGraphExecUpdateResult GraphExecUpdateErrorParametersChanged = cudaGraphExecUpdateErrorParametersChanged;
+  cudaGraphExecUpdateResult GraphExecUpdateErrorNotSupported = cudaGraphExecUpdateErrorNotSupported;
 #endif
 
 #if CUDA_VERSION >= 11000
+  // CHECK: hipDeviceAttribute_t DevAttrMaxBlocksPerMultiprocessor = hipDeviceAttributeMaxBlocksPerMultiprocessor;
+  cudaDeviceAttr DevAttrMaxBlocksPerMultiprocessor = cudaDevAttrMaxBlocksPerMultiprocessor;
+
   // CHECK: hipKernelNodeAttrID kernelNodeAttrID;
   // CHECK-NEXT: hipKernelNodeAttrID KernelNodeAttributeAccessPolicyWindow = hipKernelNodeAttributeAccessPolicyWindow;
   // CHECK-NEXT: hipKernelNodeAttrID KernelNodeAttributeCooperative = hipKernelNodeAttributeCooperative;
   cudaKernelNodeAttrID kernelNodeAttrID;
   cudaKernelNodeAttrID KernelNodeAttributeAccessPolicyWindow = cudaKernelNodeAttributeAccessPolicyWindow;
   cudaKernelNodeAttrID KernelNodeAttributeCooperative = cudaKernelNodeAttributeCooperative;
-#endif
 
-#if CUDA_VERSION >= 11000
   // CHECK: hipAccessProperty accessProperty;
   // CHECK-NEXT: hipAccessProperty AccessPropertyNormal = hipAccessPropertyNormal;
   // CHECK-NEXT: hipAccessProperty AccessPropertyStreaming = hipAccessPropertyStreaming;
@@ -775,7 +723,20 @@ int main() {
   cudaAccessProperty AccessPropertyPersisting = cudaAccessPropertyPersisting;
 #endif
 
+#if CUDA_VERSION >= 11010
+  // CHECK: hipGraphNodeType GraphNodeTypeWaitEvent = hipGraphNodeTypeWaitEvent;
+  // CHECK-NEXT: hipGraphNodeType GraphNodeTypeEventRecord = hipGraphNodeTypeEventRecord;
+  cudaGraphNodeType GraphNodeTypeWaitEvent = cudaGraphNodeTypeWaitEvent;
+  cudaGraphNodeType GraphNodeTypeEventRecord = cudaGraphNodeTypeEventRecord;
+#endif
+
 #if CUDA_VERSION >= 11020
+  // CHECK: hipDeviceAttribute_t DevAttrMemoryPoolsSupported = hipDeviceAttributeMemoryPoolsSupported;
+  cudaDeviceAttr DevAttrMemoryPoolsSupported = cudaDevAttrMemoryPoolsSupported;
+
+  // CHECK: hipGraphExecUpdateResult GraphExecUpdateErrorUnsupportedFunctionChange = hipGraphExecUpdateErrorUnsupportedFunctionChange;
+  cudaGraphExecUpdateResult GraphExecUpdateErrorUnsupportedFunctionChange = cudaGraphExecUpdateErrorUnsupportedFunctionChange;
+
   // CHECK: hipMemPoolAttr MemPoolAttr;
   // CHECK-NEXT: hipMemPoolAttr MemPoolReuseFollowEventDependencies = hipMemPoolReuseFollowEventDependencies;
   // CHECK-NEXT: hipMemPoolAttr MemPoolReuseAllowOpportunistic = hipMemPoolReuseAllowOpportunistic;
@@ -786,9 +747,52 @@ int main() {
   cudaMemPoolAttr MemPoolReuseAllowOpportunistic = cudaMemPoolReuseAllowOpportunistic;
   cudaMemPoolAttr MemPoolReuseAllowInternalDependencies = cudaMemPoolReuseAllowInternalDependencies;
   cudaMemPoolAttr MemPoolAttrReleaseThreshold = cudaMemPoolAttrReleaseThreshold;
+
+  // CHECK: hipMemLocationType memLocationType;
+  // CHECK-NEXT: hipMemLocationType MemLocationTypeInvalid = hipMemLocationTypeInvalid;
+  // CHECK-NEXT: hipMemLocationType MemLocationTypeDevice = hipMemLocationTypeDevice;
+  cudaMemLocationType memLocationType;
+  cudaMemLocationType MemLocationTypeInvalid = cudaMemLocationTypeInvalid;
+  cudaMemLocationType MemLocationTypeDevice = cudaMemLocationTypeDevice;
+
+  // CHECK: hipMemAccessFlags MemAccessFlags;
+  // CHECK-NEXT: hipMemAccessFlags MemAccessFlagsProtNone = hipMemAccessFlagsProtNone;
+  // CHECK-NEXT: hipMemAccessFlags MemAccessFlagsProtRead = hipMemAccessFlagsProtRead;
+  // CHECK-NEXT: hipMemAccessFlags MemAccessFlagsProtReadWrite = hipMemAccessFlagsProtReadWrite;
+  cudaMemAccessFlags MemAccessFlags;
+  cudaMemAccessFlags MemAccessFlagsProtNone = cudaMemAccessFlagsProtNone;
+  cudaMemAccessFlags MemAccessFlagsProtRead = cudaMemAccessFlagsProtRead;
+  cudaMemAccessFlags MemAccessFlagsProtReadWrite = cudaMemAccessFlagsProtReadWrite;
+
+  // CHECK: hipMemAllocationType memAllocationType;
+  // CHECK-NEXT: hipMemAllocationType MemAllocationTypeInvalid = hipMemAllocationTypeInvalid;
+  // CHECK-NEXT: hipMemAllocationType MemAllocationTypePinned = hipMemAllocationTypePinned;
+  // CHECK-NEXT: hipMemAllocationType MemAllocationTypeMax = hipMemAllocationTypeMax;
+  cudaMemAllocationType memAllocationType;
+  cudaMemAllocationType MemAllocationTypeInvalid = cudaMemAllocationTypeInvalid;
+  cudaMemAllocationType MemAllocationTypePinned = cudaMemAllocationTypePinned;
+  cudaMemAllocationType MemAllocationTypeMax = cudaMemAllocationTypeMax;
+
+  // CHECK: hipMemAllocationHandleType memAllocationHandleType;
+  // CHECK-NEXT: hipMemAllocationHandleType MEM_HANDLE_TYPE_NONE = hipMemHandleTypeNone;
+  // CHECK-NEXT: hipMemAllocationHandleType MEM_HANDLE_TYPE_POSIX_FILE_DESCRIPTOR = hipMemHandleTypePosixFileDescriptor;
+  // CHECK-NEXT: hipMemAllocationHandleType MEM_HANDLE_TYPE_WIN32 = hipMemHandleTypeWin32;
+  // CHECK-NEXT: hipMemAllocationHandleType MEM_HANDLE_TYPE_WIN32_KMT = hipMemHandleTypeWin32Kmt;
+  cudaMemAllocationHandleType memAllocationHandleType;
+  cudaMemAllocationHandleType MEM_HANDLE_TYPE_NONE = cudaMemHandleTypeNone;
+  cudaMemAllocationHandleType MEM_HANDLE_TYPE_POSIX_FILE_DESCRIPTOR = cudaMemHandleTypePosixFileDescriptor;
+  cudaMemAllocationHandleType MEM_HANDLE_TYPE_WIN32 = cudaMemHandleTypeWin32;
+  cudaMemAllocationHandleType MEM_HANDLE_TYPE_WIN32_KMT = cudaMemHandleTypeWin32Kmt;
 #endif
 
 #if CUDA_VERSION >= 11030
+  // CHECK: hipStreamUpdateCaptureDependenciesFlags StreamUpdateCaptureDependenciesFlags;
+  // CHECK-NEXT: hipStreamUpdateCaptureDependenciesFlags StreamAddCaptureDependencies = hipStreamAddCaptureDependencies;
+  // CHECK-NEXT: hipStreamUpdateCaptureDependenciesFlags StreamSetCaptureDependencies = hipStreamSetCaptureDependencies;
+  cudaStreamUpdateCaptureDependenciesFlags StreamUpdateCaptureDependenciesFlags;
+  cudaStreamUpdateCaptureDependenciesFlags StreamAddCaptureDependencies = cudaStreamAddCaptureDependencies;
+  cudaStreamUpdateCaptureDependenciesFlags StreamSetCaptureDependencies = cudaStreamSetCaptureDependencies;
+
   // CHECK: hipMemPoolAttr MemPoolAttrReservedMemCurrent = hipMemPoolAttrReservedMemCurrent;
   // CHECK-NEXT: hipMemPoolAttr MemPoolAttrReservedMemHigh = hipMemPoolAttrReservedMemHigh;
   // CHECK-NEXT: hipMemPoolAttr MemPoolAttrUsedMemCurrent = hipMemPoolAttrUsedMemCurrent;
@@ -809,50 +813,6 @@ int main() {
   cudaUserObjectRetainFlags GraphUserObjectMove = cudaGraphUserObjectMove;
 #endif
 
-#if CUDA_VERSION >= 11020
-  // CHECK: hipMemLocationType memLocationType;
-  // CHECK-NEXT: hipMemLocationType MemLocationTypeInvalid = hipMemLocationTypeInvalid;
-  // CHECK-NEXT: hipMemLocationType MemLocationTypeDevice = hipMemLocationTypeDevice;
-  cudaMemLocationType memLocationType;
-  cudaMemLocationType MemLocationTypeInvalid = cudaMemLocationTypeInvalid;
-  cudaMemLocationType MemLocationTypeDevice = cudaMemLocationTypeDevice;
-#endif
-
-#if CUDA_VERSION >= 11020
-  // CHECK: hipMemAccessFlags MemAccessFlags;
-  // CHECK-NEXT: hipMemAccessFlags MemAccessFlagsProtNone = hipMemAccessFlagsProtNone;
-  // CHECK-NEXT: hipMemAccessFlags MemAccessFlagsProtRead = hipMemAccessFlagsProtRead;
-  // CHECK-NEXT: hipMemAccessFlags MemAccessFlagsProtReadWrite = hipMemAccessFlagsProtReadWrite;
-  cudaMemAccessFlags MemAccessFlags;
-  cudaMemAccessFlags MemAccessFlagsProtNone = cudaMemAccessFlagsProtNone;
-  cudaMemAccessFlags MemAccessFlagsProtRead = cudaMemAccessFlagsProtRead;
-  cudaMemAccessFlags MemAccessFlagsProtReadWrite = cudaMemAccessFlagsProtReadWrite;
-#endif
-
-#if CUDA_VERSION >= 11020
-  // CHECK: hipMemAllocationType memAllocationType;
-  // CHECK-NEXT: hipMemAllocationType MemAllocationTypeInvalid = hipMemAllocationTypeInvalid;
-  // CHECK-NEXT: hipMemAllocationType MemAllocationTypePinned = hipMemAllocationTypePinned;
-  // CHECK-NEXT: hipMemAllocationType MemAllocationTypeMax = hipMemAllocationTypeMax;
-  cudaMemAllocationType memAllocationType;
-  cudaMemAllocationType MemAllocationTypeInvalid = cudaMemAllocationTypeInvalid;
-  cudaMemAllocationType MemAllocationTypePinned = cudaMemAllocationTypePinned;
-  cudaMemAllocationType MemAllocationTypeMax = cudaMemAllocationTypeMax;
-#endif
-
-#if CUDA_VERSION >= 11020
-  // CHECK: hipMemAllocationHandleType memAllocationHandleType;
-  // CHECK-NEXT: hipMemAllocationHandleType MEM_HANDLE_TYPE_NONE = hipMemHandleTypeNone;
-  // CHECK-NEXT: hipMemAllocationHandleType MEM_HANDLE_TYPE_POSIX_FILE_DESCRIPTOR = hipMemHandleTypePosixFileDescriptor;
-  // CHECK-NEXT: hipMemAllocationHandleType MEM_HANDLE_TYPE_WIN32 = hipMemHandleTypeWin32;
-  // CHECK-NEXT: hipMemAllocationHandleType MEM_HANDLE_TYPE_WIN32_KMT = hipMemHandleTypeWin32Kmt;
-  cudaMemAllocationHandleType memAllocationHandleType;
-  cudaMemAllocationHandleType MEM_HANDLE_TYPE_NONE = cudaMemHandleTypeNone;
-  cudaMemAllocationHandleType MEM_HANDLE_TYPE_POSIX_FILE_DESCRIPTOR = cudaMemHandleTypePosixFileDescriptor;
-  cudaMemAllocationHandleType MEM_HANDLE_TYPE_WIN32 = cudaMemHandleTypeWin32;
-  cudaMemAllocationHandleType MEM_HANDLE_TYPE_WIN32_KMT = cudaMemHandleTypeWin32Kmt;
-#endif
-
 #if CUDA_VERSION >= 11040
   // CHECK: hipGraphInstantiateFlags GraphInstantiateFlags;
   // CHECK-NEXT: hipGraphInstantiateFlags GraphInstantiateFlagAutoFreeOnLaunch = hipGraphInstantiateFlagAutoFreeOnLaunch;
@@ -869,6 +829,11 @@ int main() {
   cudaGraphMemAttributeType GraphMemAttrUsedMemHigh = cudaGraphMemAttrUsedMemHigh;
   cudaGraphMemAttributeType GraphMemAttrReservedMemCurrent = cudaGraphMemAttrReservedMemCurrent;
   cudaGraphMemAttributeType GraphMemAttrReservedMemHigh = cudaGraphMemAttrReservedMemHigh;
+
+  // CHECK: hipGraphNodeType GraphNodeTypeExtSemaphoreSignal = hipGraphNodeTypeExtSemaphoreSignal;
+  // CHECK-NEXT: hipGraphNodeType GraphNodeTypeExtSemaphoreWait = hipGraphNodeTypeExtSemaphoreWait;
+  cudaGraphNodeType GraphNodeTypeExtSemaphoreSignal = cudaGraphNodeTypeExtSemaphoreSignal;
+  cudaGraphNodeType GraphNodeTypeExtSemaphoreWait = cudaGraphNodeTypeExtSemaphoreWait;
 #endif
 
   return 0;
