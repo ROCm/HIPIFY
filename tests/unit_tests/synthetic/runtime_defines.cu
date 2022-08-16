@@ -88,19 +88,19 @@ int main() {
   int StreamNonBlocking = cudaStreamNonBlocking;
   cudaStream_t StreamPerThread = cudaStreamPerThread;
 
-#if CUDA_VERSION > 7000
+#if CUDA_VERSION >= 7050
   // CHECK: int HostRegisterIoMemory = hipHostRegisterIoMemory;
   int HostRegisterIoMemory = cudaHostRegisterIoMemory;
 #endif
 
-#if CUDA_VERSION > 7050
+#if CUDA_VERSION >= 8000
   // CHECK: int CpuDeviceId = hipCpuDeviceId;
   // CHECK-NEXT: int InvalidDeviceId = hipInvalidDeviceId;
   int CpuDeviceId = cudaCpuDeviceId;
   int InvalidDeviceId = cudaInvalidDeviceId;
 #endif
 
-#if CUDA_VERSION > 8000
+#if CUDA_VERSION >= 9000
   // CHECK: int CooperativeLaunchMultiDeviceNoPreSync = hipCooperativeLaunchMultiDeviceNoPreSync;
   // CHECK-NEXT: int CooperativeLaunchMultiDeviceNoPostSync = hipCooperativeLaunchMultiDeviceNoPostSync;
   int CooperativeLaunchMultiDeviceNoPreSync = cudaCooperativeLaunchMultiDeviceNoPreSync;

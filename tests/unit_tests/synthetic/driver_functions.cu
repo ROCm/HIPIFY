@@ -17,6 +17,7 @@ int main() {
   unsigned int flags = 0;
   unsigned int flags_2 = 0;
   int dim = 0;
+  int count = 0;
   int iBlockSize = 0;
   int iBlockSize_2 = 0;
   size_t bytes = 0;
@@ -95,14 +96,72 @@ int main() {
   CUgraphicsResource graphicsResource;
   CUuuid uuid;
 
-#if CUDA_VERSION > 7050
+  // CHECK: hipError_t result;
+  CUresult result;
+
+#if CUDA_VERSION >= 8000
   // CHECK: hipMemRangeAttribute MemoryRangeAttribute;
   // CHECK-NEXT: hipMemoryAdvise MemoryAdvise;
   CUmem_range_attribute MemoryRangeAttribute;
   CUmem_advise MemoryAdvise;
+
+  // CUDA: CUresult CUDAAPI cuMemAdvise(CUdeviceptr devPtr, size_t count, CUmem_advise advice, CUdevice device);
+  // HIP: hipError_t hipMemAdvise(const void* dev_ptr, size_t count, hipMemoryAdvise advice, int device);
+  // CHECK: result = hipMemAdvise(deviceptr, bytes, MemoryAdvise, device);
+  result = cuMemAdvise(deviceptr, bytes, MemoryAdvise, device);
+
+  // CUDA: CUresult CUDAAPI cuMemPrefetchAsync(CUdeviceptr devPtr, size_t count, CUdevice dstDevice, CUstream hStream);
+  // HIP: hipError_t hipMemPrefetchAsync(const void* dev_ptr, size_t count, int device, hipStream_t stream __dparm(0));
+  // CHECK: result = hipMemPrefetchAsync(deviceptr, bytes, device, stream);
+  result = cuMemPrefetchAsync(deviceptr, bytes, device, stream);
+
+  // CUDA: CUresult CUDAAPI cuMemRangeGetAttribute(void *data, size_t dataSize, CUmem_range_attribute attribute, CUdeviceptr devPtr, size_t count);
+  // HIP: hipError_t hipMemRangeGetAttribute(void* data, size_t data_size, hipMemRangeAttribute attribute, const void* dev_ptr, size_t count);
+  // CHECK: result = hipMemRangeGetAttribute(image, bytes, MemoryRangeAttribute, deviceptr, bytes);
+  result = cuMemRangeGetAttribute(image, bytes, MemoryRangeAttribute, deviceptr, bytes);
+
+  // CUDA: CUresult CUDAAPI cuMemRangeGetAttributes(void **data, size_t *dataSizes, CUmem_range_attribute *attributes, size_t numAttributes, CUdeviceptr devPtr, size_t count);
+  // HIP: hipError_t hipMemRangeGetAttributes(void** data, size_t* data_sizes, hipMemRangeAttribute* attributes, size_t num_attributes, const void* dev_ptr, size_t count);
+  // CHECK: result = hipMemRangeGetAttributes(&image, &bytes, &MemoryRangeAttribute, bytes, deviceptr, bytes);
+  result = cuMemRangeGetAttributes(&image, &bytes, &MemoryRangeAttribute, bytes, deviceptr, bytes);
+
+  // CUDA: CUresult CUDAAPI cuStreamWaitValue32(CUstream stream, CUdeviceptr addr, cuuint32_t value, unsigned int flags);
+  // HIP: hipError_t hipStreamWaitValue32(hipStream_t stream, void* ptr, uint32_t value, unsigned int flags, uint32_t mask __dparm(0xFFFFFFFF));
+  // CHECK: result = hipStreamWaitValue32(stream, deviceptr, u_value, flags);
+  result = cuStreamWaitValue32(stream, deviceptr, u_value, flags);
+
+  // CUDA: CUresult CUDAAPI cuStreamWriteValue32(CUstream stream, CUdeviceptr addr, cuuint32_t value, unsigned int flags);
+  // HIP: hipError_t hipStreamWriteValue32(hipStream_t stream, void* ptr, uint32_t value, unsigned int flags, uint32_t mask __dparm(0xFFFFFFFF));
+  // CHECK: result = hipStreamWriteValue32(stream, deviceptr, u_value, flags);
+  result = cuStreamWriteValue32(stream, deviceptr, u_value, flags);
+
+  // CUDA: __CUDA_DEPRECATED CUresult CUDAAPI cuTexRefSetBorderColor(CUtexref hTexRef, float *pBorderColor);
+  // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipTexRefSetBorderColor(textureReference* texRef, float* pBorderColor);
+  // CHECK: result = hipTexRefSetBorderColor(texref, &ms);
+  result = cuTexRefSetBorderColor(texref, &ms);
+
+  // CHECK: hipDeviceP2PAttr deviceP2PAttribute;
+  CUdevice_P2PAttribute deviceP2PAttribute;
+
+  // CUDA: CUresult CUDAAPI cuDeviceGetP2PAttribute(int* value, CUdevice_P2PAttribute attrib, CUdevice srcDevice, CUdevice dstDevice);
+  // HIP: hipError_t hipDeviceGetP2PAttribute(int* value, hipDeviceP2PAttr attr, int srcDevice, int dstDevice);
+  // CHECK: result = hipDeviceGetP2PAttribute(value, deviceP2PAttribute, iBlockSize, iBlockSize_2);
+  result = cuDeviceGetP2PAttribute(value, deviceP2PAttribute, iBlockSize, iBlockSize_2);
 #endif
 
-#if CUDA_VERSION > 9020
+#if CUDA_VERSION >= 9000
+  // CUDA: CUresult CUDAAPI cuStreamWaitValue64(CUstream stream, CUdeviceptr addr, cuuint64_t value, unsigned int flags);
+  // HIP: hipError_t hipStreamWaitValue64(hipStream_t stream, void* ptr, uint64_t value, unsigned int flags, uint64_t mask __dparm(0xFFFFFFFFFFFFFFFF));
+  // CHECK: result = hipStreamWaitValue64(stream, deviceptr, u_value, flags);
+  result = cuStreamWaitValue64(stream, deviceptr, u_value, flags);
+
+  // CUDA: CUresult CUDAAPI cuStreamWriteValue64(CUstream stream, CUdeviceptr addr, cuuint64_t value, unsigned int flags);
+  // HIP: hipError_t hipStreamWriteValue64(hipStream_t stream, void* ptr, uint64_t value, unsigned int flags, uint64_t mask __dparm(0xFFFFFFFFFFFFFFFF));
+  // CHECK: result = hipStreamWriteValue64(stream, deviceptr, u_value, flags);
+  result = cuStreamWriteValue64(stream, deviceptr, u_value, flags);
+#endif
+
+#if CUDA_VERSION >= 10000
   // CHECK: hipGraph_t graph, graph2;
   // CHECK-NEXT: hipGraphNode_t graphNode, graphNode2;
   // CHECK-NEXT: const hipGraphNode_t *pGraphNode = nullptr;
@@ -135,25 +194,421 @@ int main() {
   CUstreamCaptureStatus streamCaptureStatus;
   CUgraphNodeType graphNodeType;
   CUDA_HOST_NODE_PARAMS host_node_params;
+
+  // CUDA: CUresult CUDAAPI cuDeviceGetUuid(CUuuid *uuid, CUdevice dev);
+  // HIP: hipError_t hipDeviceGetUuid(hipUUID* uuid, hipDevice_t device);
+  // CHECK: result = hipDeviceGetUuid(&uuid, device);
+  result = cuDeviceGetUuid(&uuid, device);
+
+  // CHECK: hipHostFn_t hostFn;
+  CUhostFn hostFn;
+
+  // CUDA: CUresult CUDAAPI cuLaunchHostFunc(CUstream hStream, CUhostFn fn, void *userData);
+  // HIP: hipError_t hipLaunchHostFunc(hipStream_t stream, hipHostFn_t fn, void* userData);
+  // CHECK: result = hipLaunchHostFunc(stream, hostFn, image);
+  result = cuLaunchHostFunc(stream, hostFn, image);
+
+  // CUDA: CUresult CUDAAPI cuStreamEndCapture(CUstream hStream, CUgraph *phGraph);
+  // HIP: hipError_t hipStreamEndCapture(hipStream_t stream, hipGraph_t* pGraph);
+  // CHECK: result = hipStreamEndCapture(stream, &graph);
+  result = cuStreamEndCapture(stream, &graph);
+
+  // CUDA: CUresult CUDAAPI cuDestroyExternalMemory(CUexternalMemory extMem);
+  // HIP: hipError_t hipDestroyExternalMemory(hipExternalMemory_t extMem);
+  // CHECK: result = hipDestroyExternalMemory(externalMemory);
+  result = cuDestroyExternalMemory(externalMemory);
+
+  // CUDA: CUresult CUDAAPI cuDestroyExternalSemaphore(CUexternalSemaphore extSem);
+  // HIP: hipError_t hipDestroyExternalSemaphore(hipExternalSemaphore_t extSem);
+  // CHECK: result = hipDestroyExternalSemaphore(externalSemaphore);
+  result = cuDestroyExternalSemaphore(externalSemaphore);
+
+  // CUDA: CUresult CUDAAPI cuExternalMemoryGetMappedBuffer(CUdeviceptr *devPtr, CUexternalMemory extMem, const CUDA_EXTERNAL_MEMORY_BUFFER_DESC *bufferDesc);
+  // HIP: hipError_t hipExternalMemoryGetMappedBuffer(void **devPtr, hipExternalMemory_t extMem, const hipExternalMemoryBufferDesc *bufferDesc);
+  // CHECK: result = hipExternalMemoryGetMappedBuffer(&deviceptr, externalMemory, &EXTERNAL_MEMORY_BUFFER_DESC);
+  result = cuExternalMemoryGetMappedBuffer(&deviceptr, externalMemory, &EXTERNAL_MEMORY_BUFFER_DESC);
+
+  // CUDA: CUresult CUDAAPI cuImportExternalMemory(CUexternalMemory *extMem_out, const CUDA_EXTERNAL_MEMORY_HANDLE_DESC *memHandleDesc);
+  // HIP: hipError_t hipImportExternalMemory(hipExternalMemory_t* extMem_out, const hipExternalMemoryHandleDesc* memHandleDesc);
+  // CHECK: result = hipImportExternalMemory(&externalMemory, &EXTERNAL_MEMORY_HANDLE_DESC);
+  result = cuImportExternalMemory(&externalMemory, &EXTERNAL_MEMORY_HANDLE_DESC);
+
+  // CUDA: CUresult CUDAAPI cuImportExternalSemaphore(CUexternalSemaphore *extSem_out, const CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC *semHandleDesc);
+  // HIP: hipError_t hipImportExternalSemaphore(hipExternalSemaphore_t* extSem_out, const hipExternalSemaphoreHandleDesc* semHandleDesc);
+  // CHECK: result = hipImportExternalSemaphore(&externalSemaphore, &EXTERNAL_SEMAPHORE_HANDLE_DESC);
+  result = cuImportExternalSemaphore(&externalSemaphore, &EXTERNAL_SEMAPHORE_HANDLE_DESC);
+
+  // CUDA: CUresult CUDAAPI cuSignalExternalSemaphoresAsync(const CUexternalSemaphore *extSemArray, const CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS *paramsArray, unsigned int numExtSems, CUstream stream);
+  // HIP: hipError_t hipSignalExternalSemaphoresAsync(const hipExternalSemaphore_t* extSemArray, const hipExternalSemaphoreSignalParams* paramsArray, unsigned int numExtSems, hipStream_t stream);
+  // CHECK: result = hipSignalExternalSemaphoresAsync(&externalSemaphore, &EXTERNAL_SEMAPHORE_SIGNAL_PARAMS, flags, stream);
+  result = cuSignalExternalSemaphoresAsync(&externalSemaphore, &EXTERNAL_SEMAPHORE_SIGNAL_PARAMS, flags, stream);
+
+  // CUDA: CUresult CUDAAPI cuWaitExternalSemaphoresAsync(const CUexternalSemaphore *extSemArray, const CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS *paramsArray, unsigned int numExtSems, CUstream stream);
+  // HIP: hipError_t hipWaitExternalSemaphoresAsync(const hipExternalSemaphore_t* extSemArray, const hipExternalSemaphoreWaitParams* paramsArray, unsigned int numExtSems, hipStream_t stream);
+  // CHECK: result = hipWaitExternalSemaphoresAsync(&externalSemaphore, &EXTERNAL_SEMAPHORE_WAIT_PARAMS, flags, stream);
+  result = cuWaitExternalSemaphoresAsync(&externalSemaphore, &EXTERNAL_SEMAPHORE_WAIT_PARAMS, flags, stream);
+
+  // CUDA: CUresult CUDAAPI cuGraphAddDependencies(CUgraph hGraph, const CUgraphNode *from, const CUgraphNode *to, size_t numDependencies);
+  // HIP: hipError_t hipGraphAddDependencies(hipGraph_t graph, const hipGraphNode_t* from, const hipGraphNode_t* to, size_t numDependencies);
+  // CHECK: result = hipGraphAddDependencies(graph, &graphNode, &graphNode2, bytes);
+  result = cuGraphAddDependencies(graph, &graphNode, &graphNode2, bytes);
+
+  // CUDA: CUresult CUDAAPI cuGraphAddEmptyNode(CUgraphNode *phGraphNode, CUgraph hGraph, const CUgraphNode *dependencies, size_t numDependencies);
+  // HIP: hipError_t hipGraphAddEmptyNode(hipGraphNode_t* pGraphNode, hipGraph_t graph, const hipGraphNode_t* pDependencies, size_t numDependencies);
+  // CHECK: result = hipGraphAddEmptyNode(&graphNode, graph, &graphNode2, bytes);
+  result = cuGraphAddEmptyNode(&graphNode, graph, &graphNode2, bytes);
+
+  // CUDA: CUresult CUDAAPI cuGraphAddKernelNode(CUgraphNode *phGraphNode, CUgraph hGraph, const CUgraphNode *dependencies, size_t numDependencies, const CUDA_KERNEL_NODE_PARAMS *nodeParams);
+  // HIP: hipError_t hipGraphAddKernelNode(hipGraphNode_t* pGraphNode, hipGraph_t graph, const hipGraphNode_t* pDependencies, size_t numDependencies, const hipKernelNodeParams* pNodeParams);
+  // CHECK: result = hipGraphAddKernelNode(&graphNode, graph, &graphNode2, bytes, &KERNEL_NODE_PARAMS);
+  result = cuGraphAddKernelNode(&graphNode, graph, &graphNode2, bytes, &KERNEL_NODE_PARAMS);
+
+  // CUDA: CUresult CUDAAPI cuGraphCreate(CUgraph *phGraph, unsigned int flags);
+  // HIP: hipError_t hipGraphCreate(hipGraph_t* pGraph, unsigned int flags);
+  // CHECK: result = hipGraphCreate(&graph, flags);
+  result = cuGraphCreate(&graph, flags);
+
+  // CUDA: CUresult CUDAAPI cuGraphDestroy(CUgraph hGraph);
+  // HIP: hipError_t hipGraphDestroy(hipGraph_t graph);
+  // CHECK: result = hipGraphDestroy(graph);
+  result = cuGraphDestroy(graph);
+
+  // CUDA: CUresult CUDAAPI cuGraphExecDestroy(CUgraphExec hGraphExec);
+  // HIP: hipError_t hipGraphExecDestroy(hipGraphExec_t pGraphExec);
+  // CHECK: result = hipGraphExecDestroy(graphExec);
+  result = cuGraphExecDestroy(graphExec);
+
+  // CUDA: CUresult CUDAAPI cuGraphGetNodes(CUgraph hGraph, CUgraphNode *nodes, size_t *numNodes);
+  // HIP: hipError_t hipGraphGetNodes(hipGraph_t graph, hipGraphNode_t* nodes, size_t* numNodes);
+  // CHECK: result = hipGraphGetNodes(graph, &graphNode, &bytes);
+  result = cuGraphGetNodes(graph, &graphNode, &bytes);
+
+  // CUDA: CUresult CUDAAPI cuGraphGetRootNodes(CUgraph hGraph, CUgraphNode *rootNodes, size_t *numRootNodes);
+  // HIP: hipError_t hipGraphGetRootNodes(hipGraph_t graph, hipGraphNode_t* pRootNodes, size_t* pNumRootNodes);
+  // CHECK: result = hipGraphGetRootNodes(graph, &graphNode, &bytes);
+  result = cuGraphGetRootNodes(graph, &graphNode, &bytes);
+
+  // CUDA: CUresult CUDAAPI cuGraphInstantiate(CUgraphExec *phGraphExec, CUgraph hGraph, CUgraphNode *phErrorNode, char *logBuffer, size_t bufferSize);
+  // HIP: hipError_t hipGraphInstantiate(hipGraphExec_t* pGraphExec, hipGraph_t graph, hipGraphNode_t* pErrorNode, char* pLogBuffer, size_t bufferSize);
+  // CHECK: result = hipGraphInstantiate(&graphExec, graph, &graphNode, nullptr, bytes);
+  result = cuGraphInstantiate(&graphExec, graph, &graphNode, nullptr, bytes);
+
+  // CUDA: CUresult CUDAAPI cuGraphKernelNodeGetParams(CUgraphNode hNode, CUDA_KERNEL_NODE_PARAMS *nodeParams);
+  // HIP: hipError_t hipGraphKernelNodeGetParams(hipGraphNode_t node, hipKernelNodeParams* pNodeParams);
+  // CHECK: result = hipGraphKernelNodeGetParams(graphNode, &KERNEL_NODE_PARAMS);
+  result = cuGraphKernelNodeGetParams(graphNode, &KERNEL_NODE_PARAMS);
+
+  // CUDA: CUresult CUDAAPI cuGraphKernelNodeSetParams(CUgraphNode hNode, const CUDA_KERNEL_NODE_PARAMS *nodeParams);
+  // HIP: hipError_t hipGraphKernelNodeSetParams(hipGraphNode_t node, const hipKernelNodeParams* pNodeParams);
+  // CHECK: result = hipGraphKernelNodeSetParams(graphNode, &KERNEL_NODE_PARAMS);
+  result = cuGraphKernelNodeSetParams(graphNode, &KERNEL_NODE_PARAMS);
+
+  // CUDA: CUresult CUDAAPI cuGraphLaunch(CUgraphExec hGraphExec, CUstream hStream);
+  // HIP: hipError_t hipGraphLaunch(hipGraphExec_t graphExec, hipStream_t stream);
+  // CHECK: result = hipGraphLaunch(graphExec, stream);
+  result = cuGraphLaunch(graphExec, stream);
+
+  // CUDA: CUresult CUDAAPI cuGraphMemcpyNodeGetParams(CUgraphNode hNode, CUDA_MEMCPY3D *nodeParams);
+  // HIP: hipError_t hipGraphMemcpyNodeGetParams(hipGraphNode_t node, hipMemcpy3DParms* pNodeParams);
+  // CHECK: result = hipGraphMemcpyNodeGetParams(graphNode, &MEMCPY3D);
+  result = cuGraphMemcpyNodeGetParams(graphNode, &MEMCPY3D);
+
+  // CUDA: CUresult CUDAAPI cuGraphMemcpyNodeSetParams(CUgraphNode hNode, const CUDA_MEMCPY3D *nodeParams);
+  // HIP: hipError_t hipGraphMemcpyNodeSetParams(hipGraphNode_t node, const hipMemcpy3DParms* pNodeParams);
+  // CHECK: result = hipGraphMemcpyNodeSetParams(graphNode, &MEMCPY3D);
+  result = cuGraphMemcpyNodeSetParams(graphNode, &MEMCPY3D);
+
+  // CUDA: CUresult CUDAAPI cuGraphMemsetNodeGetParams(CUgraphNode hNode, CUDA_MEMSET_NODE_PARAMS *nodeParams);
+  // HIP: hipError_t hipGraphMemsetNodeGetParams(hipGraphNode_t node, hipMemsetParams* pNodeParams);
+  // CHECK: result = hipGraphMemsetNodeGetParams(graphNode, &MEMSET_NODE_PARAMS);
+  result = cuGraphMemsetNodeGetParams(graphNode, &MEMSET_NODE_PARAMS);
+
+  // CUDA: CUresult CUDAAPI cuGraphMemsetNodeSetParams(CUgraphNode hNode, const CUDA_MEMSET_NODE_PARAMS *nodeParams);
+  // HIP: hipError_t hipGraphMemsetNodeSetParams(hipGraphNode_t node, const hipMemsetParams* pNodeParams);
+  // CHECK: result = hipGraphMemsetNodeSetParams(graphNode, &MEMSET_NODE_PARAMS);
+  result = cuGraphMemsetNodeSetParams(graphNode, &MEMSET_NODE_PARAMS);
+
+  // CUDA: CUresult CUDAAPI cuGraphGetEdges(CUgraph hGraph, CUgraphNode *from, CUgraphNode *to, size_t *numEdges);
+  // HIP: hipError_t hipGraphGetEdges(hipGraph_t graph, hipGraphNode_t* from, hipGraphNode_t* to, size_t* numEdges);
+  // CHECK: result = hipGraphGetEdges(graph, &graphNode, &graphNode2, &bytes);
+  result = cuGraphGetEdges(graph, &graphNode, &graphNode2, &bytes);
+
+  // CUDA: CUresult CUDAAPI cuGraphNodeGetDependencies(CUgraphNode hNode, CUgraphNode *dependencies, size_t *numDependencies);
+  // HIP: hipError_t hipGraphNodeGetDependencies(hipGraphNode_t node, hipGraphNode_t* pDependencies, size_t* pNumDependencies);
+  // CHECK: result = hipGraphNodeGetDependencies(graphNode, &graphNode2, &bytes);
+  result = cuGraphNodeGetDependencies(graphNode, &graphNode2, &bytes);
+
+  // CUDA: CUresult CUDAAPI cuGraphRemoveDependencies(CUgraph hGraph, const CUgraphNode *from, const CUgraphNode *to, size_t numDependencies);
+  // HIP: hipError_t hipGraphRemoveDependencies(hipGraph_t graph, const hipGraphNode_t* from, const hipGraphNode_t* to, size_t numDependencies);
+  // CHECK: result = hipGraphRemoveDependencies(graph, &graphNode, &graphNode2, bytes);
+  result = cuGraphRemoveDependencies(graph, &graphNode, &graphNode2, bytes);
+
+  // CUDA: CUresult CUDAAPI cuGraphNodeGetDependentNodes(CUgraphNode hNode, CUgraphNode *dependentNodes, size_t *numDependentNodes);
+  // HIP: hipError_t hipGraphNodeGetDependentNodes(hipGraphNode_t node, hipGraphNode_t* pDependentNodes, size_t* pNumDependentNodes);
+  // CHECK: result = hipGraphNodeGetDependentNodes(graphNode, &graphNode2, &bytes);
+  result = cuGraphNodeGetDependentNodes(graphNode, &graphNode2, &bytes);
+
+  // CUDA: CUresult CUDAAPI cuGraphNodeGetType(CUgraphNode hNode, CUgraphNodeType *type);
+  // HIP: hipError_t hipGraphNodeGetType(hipGraphNode_t node, hipGraphNodeType* pType);
+  // CHECK: result = hipGraphNodeGetType(graphNode, &graphNodeType);
+  result = cuGraphNodeGetType(graphNode, &graphNodeType);
+
+  // CUDA: CUresult CUDAAPI cuGraphDestroyNode(CUgraphNode hNode);
+  // HIP: hipError_t hipGraphDestroyNode(hipGraphNode_t node);
+  // CHECK: result = hipGraphDestroyNode(graphNode);
+  result = cuGraphDestroyNode(graphNode);
+
+  // CUDA: CUresult CUDAAPI cuGraphAddHostNode(CUgraphNode *phGraphNode, CUgraph hGraph, const CUgraphNode *dependencies, size_t numDependencies, const CUDA_HOST_NODE_PARAMS *nodeParams);
+  // HIP: hipError_t hipGraphAddHostNode(hipGraphNode_t* pGraphNode, hipGraph_t graph, const hipGraphNode_t* pDependencies, size_t numDependencies, const hipHostNodeParams* pNodeParams);
+  // CHECK: result = hipGraphAddHostNode(&graphNode, graph, &graphNode2, bytes, &host_node_params);
+  result = cuGraphAddHostNode(&graphNode, graph, &graphNode2, bytes, &host_node_params);
+
+  // CUDA: CUresult CUDAAPI cuGraphNodeFindInClone(CUgraphNode *phNode, CUgraphNode hOriginalNode, CUgraph hClonedGraph);
+  // HIP: hipError_t hipGraphNodeFindInClone(hipGraphNode_t* pNode, hipGraphNode_t originalNode, hipGraph_t clonedGraph);
+  // CHECK: result = hipGraphNodeFindInClone(&graphNode2, graphNode, graph);
+  result = cuGraphNodeFindInClone(&graphNode2, graphNode, graph);
+
+  // CUDA: CUresult CUDAAPI cuStreamIsCapturing(CUstream hStream, CUstreamCaptureStatus *captureStatus);
+  // HIP: hipError_t hipStreamIsCapturing(hipStream_t stream, hipStreamCaptureStatus* pCaptureStatus);
+  // CHECK: result = hipStreamIsCapturing(stream, &streamCaptureStatus);
+  result = cuStreamIsCapturing(stream, &streamCaptureStatus);
+
+  // CUDA: CUresult CUDAAPI cuGraphHostNodeGetParams(CUgraphNode hNode, CUDA_HOST_NODE_PARAMS *nodeParams);
+  // HIP: hipError_t hipGraphHostNodeGetParams(hipGraphNode_t node, hipHostNodeParams* pNodeParams);
+  // CHECK: result = hipGraphHostNodeGetParams(graphNode, &host_node_params);
+  result = cuGraphHostNodeGetParams(graphNode, &host_node_params);
+
+  // CUDA: CUresult CUDAAPI cuGraphHostNodeSetParams(CUgraphNode hNode, const CUDA_HOST_NODE_PARAMS *nodeParams);
+  // HIP: hipError_t hipGraphHostNodeSetParams(hipGraphNode_t node, const hipHostNodeParams* pNodeParams);
+  // CHECK: result = hipGraphHostNodeSetParams(graphNode, &host_node_params);
+  result = cuGraphHostNodeSetParams(graphNode, &host_node_params);
+
+  // CUDA: CUresult CUDAAPI cuGraphAddChildGraphNode(CUgraphNode *phGraphNode, CUgraph hGraph, const CUgraphNode *dependencies, size_t numDependencies, CUgraph childGraph);
+  // HIP: hipError_t hipGraphAddChildGraphNode(hipGraphNode_t* pGraphNode, hipGraph_t graph, const hipGraphNode_t* pDependencies, size_t numDependencies, hipGraph_t childGraph);
+  // CHECK: result = hipGraphAddChildGraphNode(&graphNode, graph, &graphNode2, bytes, graph2);
+  result = cuGraphAddChildGraphNode(&graphNode, graph, &graphNode2, bytes, graph2);
+
+  // CUDA: CUresult CUDAAPI cuGraphChildGraphNodeGetGraph(CUgraphNode hNode, CUgraph *phGraph);
+  // HIP: hipError_t hipGraphChildGraphNodeGetGraph(hipGraphNode_t node, hipGraph_t* pGraph);
+  // CHECK: result = hipGraphChildGraphNodeGetGraph(graphNode, &graph);
+  result = cuGraphChildGraphNodeGetGraph(graphNode, &graph);
+
+  // CUDA: CUresult CUDAAPI cuGraphClone(CUgraph *phGraphClone, CUgraph originalGraph);
+  // HIP: hipError_t hipGraphClone(hipGraph_t* pGraphClone, hipGraph_t originalGraph);
+  // CHECK: result = hipGraphClone(&graph, graph2);
+  result = cuGraphClone(&graph, graph2);
 #endif
 
-#if CUDA_VERSION > 10000
+#if CUDA_VERSION >= 10010
   // CHECK: hipStreamCaptureMode streamCaptureMode;
   CUstreamCaptureMode streamCaptureMode;
-#endif
 
-#if CUDA_VERSION > 10010
-  // CHECK: hipGraphExecUpdateResult graphExecUpdateResult;
-  CUgraphExecUpdateResult graphExecUpdateResult;
+  // CUDA: CUresult CUDAAPI cuThreadExchangeStreamCaptureMode(CUstreamCaptureMode *mode);
+  // HIP: hipError_t hipThreadExchangeStreamCaptureMode(hipStreamCaptureMode* mode);
+  // CHECK: result = hipThreadExchangeStreamCaptureMode(&streamCaptureMode);
+  result = cuThreadExchangeStreamCaptureMode(&streamCaptureMode);
+
+  // CUDA: CUresult CUDAAPI cuStreamBeginCapture(CUstream hStream, CUstreamCaptureMode mode);
+  // HIP: hipError_t hipStreamBeginCapture(hipStream_t stream, hipStreamCaptureMode mode);
+  // CHECK: result = hipStreamBeginCapture(stream, streamCaptureMode);
+  // CHECK-NEXT: result = hipStreamBeginCapture(stream, streamCaptureMode);
+  result = cuStreamBeginCapture(stream, streamCaptureMode);
+  result = cuStreamBeginCapture_v2(stream, streamCaptureMode);
+
+  // CUDA: CUresult CUDAAPI cuStreamGetCaptureInfo(CUstream hStream, CUstreamCaptureStatus *captureStatus_out, cuuint64_t *id_out);
+  // HIP: hipError_t hipStreamGetCaptureInfo(hipStream_t stream, hipStreamCaptureStatus* pCaptureStatus, unsigned long long* pId);
+  // CHECK: result = hipStreamGetCaptureInfo(stream, &streamCaptureStatus, &ull);
+  result = cuStreamGetCaptureInfo(stream, &streamCaptureStatus, &ull);
+
+  // CUDA: CUresult CUDAAPI cuGraphExecKernelNodeSetParams(CUgraphExec hGraphExec, CUgraphNode hNode, const CUDA_KERNEL_NODE_PARAMS *nodeParams);
+  // HIP: hipError_t hipGraphExecKernelNodeSetParams(hipGraphExec_t hGraphExec, hipGraphNode_t node, const hipKernelNodeParams* pNodeParams);
+  // CHECK: result = hipGraphExecKernelNodeSetParams(graphExec, graphNode, &KERNEL_NODE_PARAMS);
+  result = cuGraphExecKernelNodeSetParams(graphExec, graphNode, &KERNEL_NODE_PARAMS);
 #endif
 
 #if CUDA_VERSION >= 10020
+  // CHECK: hipGraphExecUpdateResult graphExecUpdateResult;
+  CUgraphExecUpdateResult graphExecUpdateResult;
+
   // CHECK: hipMemLocation memLocation_st;
   // CHECK-NEXT: hipMemLocation memLocation;
   // CHECK-NEXT: hipMemAllocationHandleType memAllocationHandleType;
   CUmemLocation_st memLocation_st;
   CUmemLocation memLocation;
   CUmemAllocationHandleType memAllocationHandleType;
+
+  // CUDA: CUresult CUDAAPI cuGraphExecUpdate(CUgraphExec hGraphExec, CUgraph hGraph, CUgraphNode *hErrorNode_out, CUgraphExecUpdateResult *updateResult_out);
+  // HIP: hipError_t hipGraphExecUpdate(hipGraphExec_t hGraphExec, hipGraph_t hGraph, hipGraphNode_t* hErrorNode_out, hipGraphExecUpdateResult* updateResult_out);
+  // CHECK: result = hipGraphExecUpdate(graphExec, graph, &graphNode, &graphExecUpdateResult);
+  result = cuGraphExecUpdate(graphExec, graph, &graphNode, &graphExecUpdateResult);
+
+  // CUDA: CUresult CUDAAPI cuGraphExecHostNodeSetParams(CUgraphExec hGraphExec, CUgraphNode hNode, const CUDA_HOST_NODE_PARAMS *nodeParams);
+  // HIP: hipError_t hipError_t hipGraphExecHostNodeSetParams(hipGraphExec_t hGraphExec, hipGraphNode_t node, const hipHostNodeParams* pNodeParams);
+  // CHECK: result = hipGraphExecHostNodeSetParams(graphExec, graphNode, &host_node_params);
+  result = cuGraphExecHostNodeSetParams(graphExec, graphNode, &host_node_params);
+
+  // CHECK: hipMemAllocationProp memAllocationProp;
+  CUmemAllocationProp memAllocationProp;
+  // CHECK: hipMemGenericAllocationHandle_t memGenericAllocationHandle_t;
+  CUmemGenericAllocationHandle memGenericAllocationHandle_t;
+  // CHECK: hipMemAllocationGranularity_flags memAllocationGranularity_flags;
+  CUmemAllocationGranularity_flags memAllocationGranularity_flags;
+  // CHECK: hipMemAccessDesc memAccessDesc;
+  CUmemAccessDesc memAccessDesc;
+
+  // CUDA: CUresult CUDAAPI cuMemAddressFree(CUdeviceptr ptr, size_t size);
+  // HIP: hipError_t hipMemAddressFree(void* devPtr, size_t size);
+  // CHECK: result = hipMemAddressFree(deviceptr, bytes);
+  result = cuMemAddressFree(deviceptr, bytes);
+
+  // CUDA: CUresult CUDAAPI cuMemAddressReserve(CUdeviceptr *ptr, size_t size, size_t alignment, CUdeviceptr addr, unsigned long long flags);
+  // HIP: hipError_t hipMemAddressReserve(void** ptr, size_t size, size_t alignment, void* addr, unsigned long long flags);
+  // CHECK: result = hipMemAddressReserve(&deviceptr, bytes, bytes_2, deviceptr_2, ull);
+  result = cuMemAddressReserve(&deviceptr, bytes, bytes_2, deviceptr_2, ull);
+
+  // CUDA: CUresult CUDAAPI cuMemCreate(CUmemGenericAllocationHandle *handle, size_t size, const CUmemAllocationProp *prop, unsigned long long flags);
+  // HIP: hipError_t hipMemCreate(hipMemGenericAllocationHandle_t* handle, size_t size, const hipMemAllocationProp* prop, unsigned long long flags);
+  // CHECK: result = hipMemCreate(&memGenericAllocationHandle_t, bytes, &memAllocationProp, ull);
+  result = cuMemCreate(&memGenericAllocationHandle_t, bytes, &memAllocationProp, ull);
+
+  // CUDA: CUresult CUDAAPI cuMemExportToShareableHandle(void *shareableHandle, CUmemGenericAllocationHandle handle, CUmemAllocationHandleType handleType, unsigned long long flags);
+  // HIP: hipError_t hipMemExportToShareableHandle(void* shareableHandle, hipMemGenericAllocationHandle_t handle, hipMemAllocationHandleType handleType, unsigned long long flags);
+  // CHECK: result = hipMemExportToShareableHandle(image, memGenericAllocationHandle_t, memAllocationHandleType, ull);
+  result = cuMemExportToShareableHandle(image, memGenericAllocationHandle_t, memAllocationHandleType, ull);
+
+  // CUDA: CUresult CUDAAPI cuMemGetAccess(unsigned long long *flags, const CUmemLocation *location, CUdeviceptr ptr);
+  // HIP: hipError_t hipMemGetAccess(unsigned long long* flags, const hipMemLocation* location, void* ptr);
+  // CHECK: result = hipMemGetAccess(&ull_2, &memLocation, deviceptr);
+  result = cuMemGetAccess(&ull_2, &memLocation, deviceptr);
+
+  // CUDA: CUresult CUDAAPI cuMemGetAllocationGranularity(size_t *granularity, const CUmemAllocationProp *prop, CUmemAllocationGranularity_flags option);
+  // HIP: hipError_t hipMemGetAllocationGranularity(size_t* granularity, const hipMemAllocationProp* prop, hipMemAllocationGranularity_flags option);
+  // CHECK: result = hipMemGetAllocationGranularity(&bytes, &memAllocationProp, memAllocationGranularity_flags);
+  result = cuMemGetAllocationGranularity(&bytes, &memAllocationProp, memAllocationGranularity_flags);
+
+  // CUDA: CUresult CUDAAPI cuMemGetAllocationPropertiesFromHandle(CUmemAllocationProp *prop, CUmemGenericAllocationHandle handle);
+  // HIP: hipError_t hipMemGetAllocationPropertiesFromHandle(hipMemAllocationProp* prop, hipMemGenericAllocationHandle_t handle);
+  // CHECK: result = hipMemGetAllocationPropertiesFromHandle(&memAllocationProp, memGenericAllocationHandle_t);
+  result = cuMemGetAllocationPropertiesFromHandle(&memAllocationProp, memGenericAllocationHandle_t);
+
+  // CUDA: CUresult CUDAAPI cuMemImportFromShareableHandle(CUmemGenericAllocationHandle *handle, void *osHandle, CUmemAllocationHandleType shHandleType);
+  // HIP: hipError_t hipMemImportFromShareableHandle(hipMemGenericAllocationHandle_t* handle, void* osHandle, hipMemAllocationHandleType shHandleType);
+  // CHECK: result = hipMemImportFromShareableHandle(&memGenericAllocationHandle_t, image, memAllocationHandleType);
+  result = cuMemImportFromShareableHandle(&memGenericAllocationHandle_t, image, memAllocationHandleType);
+
+  // CUDA: CUresult CUDAAPI cuMemMap(CUdeviceptr ptr, size_t size, size_t offset, CUmemGenericAllocationHandle handle, unsigned long long flags);
+  // HIP: hipError_t hipMemMap(void* ptr, size_t size, size_t offset, hipMemGenericAllocationHandle_t handle, unsigned long long flags);
+  // CHECK: result = hipMemMap(deviceptr, bytes, bytes_2, memGenericAllocationHandle_t, ull);
+  result = cuMemMap(deviceptr, bytes, bytes_2, memGenericAllocationHandle_t, ull);
+
+  // CUDA: CUresult CUDAAPI cuMemRelease(CUmemGenericAllocationHandle handle);
+  // HIP: hipError_t hipMemRelease(hipMemGenericAllocationHandle_t handle);
+  // CHECK: result = hipMemRelease(memGenericAllocationHandle_t);
+  result = cuMemRelease(memGenericAllocationHandle_t);
+
+  // CUDA: CUresult CUDAAPI cuMemSetAccess(CUdeviceptr ptr, size_t size, const CUmemAccessDesc *desc, size_t count);
+  // HIP: hipError_t hipMemSetAccess(void* ptr, size_t size, const hipMemAccessDesc* desc, size_t count);
+  // CHECK: result = hipMemSetAccess(deviceptr, bytes, &memAccessDesc, bytes_2);
+  result = cuMemSetAccess(deviceptr, bytes, &memAccessDesc, bytes_2);
+
+  // CUDA: CUresult CUDAAPI cuMemUnmap(CUdeviceptr ptr, size_t size);
+  // HIP: hipError_t hipMemUnmap(void* ptr, size_t size);
+  // CHECK: result = hipMemUnmap(deviceptr, bytes);
+  result = cuMemUnmap(deviceptr, bytes);
+#endif
+
+#if CUDA_VERSION >= 11000
+  // CHECK: result = hipDevicePrimaryCtxRelease(device);
+  result = cuDevicePrimaryCtxRelease_v2(device);
+
+  // CHECK: result = hipDevicePrimaryCtxReset(device);
+  result = cuDevicePrimaryCtxReset_v2(device);
+
+  // CHECK: result = hipDevicePrimaryCtxSetFlags(device, flags);
+  result = cuDevicePrimaryCtxSetFlags_v2(device, flags);
+
+  // CHECK: hipKernelNodeAttrID kernelNodeAttrID;
+  CUkernelNodeAttrID kernelNodeAttrID;
+  // CHECK: hipKernelNodeAttrValue kernelNodeAttrValue;
+  CUkernelNodeAttrValue kernelNodeAttrValue;
+
+  // CUDA: CUresult CUDAAPI cuGraphKernelNodeSetAttribute(CUgraphNode hNode, CUkernelNodeAttrID attr, const CUkernelNodeAttrValue* value);
+  // HIP: hipError_t hipGraphKernelNodeSetAttribute(hipGraphNode_t hNode, hipKernelNodeAttrID attr, const hipKernelNodeAttrValue* value);
+  // CHECK: result = hipGraphKernelNodeSetAttribute(graphNode, kernelNodeAttrID, &kernelNodeAttrValue);
+  result = cuGraphKernelNodeSetAttribute(graphNode, kernelNodeAttrID, &kernelNodeAttrValue);
+
+  // CUDA: CUresult CUDAAPI cuGraphKernelNodeGetAttribute(CUgraphNode hNode, CUkernelNodeAttrID attr, CUkernelNodeAttrValue* value_out);
+  // HIP: hipError_t hipGraphKernelNodeGetAttribute(hipGraphNode_t hNode, hipKernelNodeAttrID attr, hipKernelNodeAttrValue* value);
+  // CHECK: result = hipGraphKernelNodeGetAttribute(graphNode, kernelNodeAttrID, &kernelNodeAttrValue);
+  result = cuGraphKernelNodeGetAttribute(graphNode, kernelNodeAttrID, &kernelNodeAttrValue);
+
+  // CUDA: CUresult CUDAAPI cuMemRetainAllocationHandle(CUmemGenericAllocationHandle *handle, void *addr);
+  // HIP: hipError_t hipMemRetainAllocationHandle(hipMemGenericAllocationHandle_t* handle, void* addr);
+  // CHECK: result = hipMemRetainAllocationHandle(&memGenericAllocationHandle_t, image);
+  result = cuMemRetainAllocationHandle(&memGenericAllocationHandle_t, image);
+
+  // CHECK: result = hipGraphInstantiate(&graphExec, graph, &graphNode, nullptr, bytes);
+  result = cuGraphInstantiate_v2(&graphExec, graph, &graphNode, nullptr, bytes);
+#endif
+
+#if CUDA_VERSION >= 11010
+  // CUDA: CUresult CUDAAPI cuGraphExecChildGraphNodeSetParams(CUgraphExec hGraphExec, CUgraphNode hNode, CUgraph childGraph);
+  // HIP: hipError_t hipGraphExecChildGraphNodeSetParams(hipGraphExec_t hGraphExec, hipGraphNode_t node, hipGraph_t childGraph);
+  // CHECK: result = hipGraphExecChildGraphNodeSetParams(graphExec, graphNode, graph);
+  result = cuGraphExecChildGraphNodeSetParams(graphExec, graphNode, graph);
+
+  // CUDA: CUresult CUDAAPI cuGraphAddEventRecordNode(CUgraphNode *phGraphNode, CUgraph hGraph, const CUgraphNode *dependencies, size_t numDependencies, CUevent event);
+  // HIP: hipError_t hipGraphAddEventRecordNode(hipGraphNode_t* pGraphNode, hipGraph_t graph, const hipGraphNode_t* pDependencies, size_t numDependencies, hipEvent_t event);
+  // CHECK: result = hipGraphAddEventRecordNode(&graphNode, graph, &graphNode2, bytes, event_);
+  result = cuGraphAddEventRecordNode(&graphNode, graph, &graphNode2, bytes, event_);
+
+  // CUDA: CUresult CUDAAPI cuGraphEventRecordNodeGetEvent(CUgraphNode hNode, CUevent *event_out);
+  // HIP: hipError_t hipGraphEventRecordNodeGetEvent(hipGraphNode_t node, hipEvent_t* event_out);
+  // CHECK: result = hipGraphEventRecordNodeGetEvent(graphNode, &event_);
+  result = cuGraphEventRecordNodeGetEvent(graphNode, &event_);
+
+  // CUDA: CUresult CUDAAPI cuGraphEventRecordNodeSetEvent(CUgraphNode hNode, CUevent event);
+  // HIP: hipError_t hipGraphEventRecordNodeSetEvent(hipGraphNode_t node, hipEvent_t event);
+  // CHECK: result = hipGraphEventRecordNodeSetEvent(graphNode, event_);
+  result = cuGraphEventRecordNodeSetEvent(graphNode, event_);
+
+  // CUDA: CUresult CUDAAPI cuGraphExecEventRecordNodeSetEvent(CUgraphExec hGraphExec, CUgraphNode hNode, CUevent event);
+  // HIP: hipError_t hipGraphExecEventRecordNodeSetEvent(hipGraphExec_t hGraphExec, hipGraphNode_t hNode, hipEvent_t event);
+  // CHECK: result = hipGraphExecEventRecordNodeSetEvent(graphExec, graphNode, event_);
+  result = cuGraphExecEventRecordNodeSetEvent(graphExec, graphNode, event_);
+
+  // CUDA: CUresult CUDAAPI cuGraphAddEventWaitNode(CUgraphNode *phGraphNode, CUgraph hGraph, const CUgraphNode *dependencies, size_t numDependencies, CUevent event);
+  // HIP: hipError_t hipGraphAddEventWaitNode(hipGraphNode_t* pGraphNode, hipGraph_t graph, const hipGraphNode_t* pDependencies, size_t numDependencies, hipEvent_t event);
+  // CHECK: result = hipGraphAddEventWaitNode(&graphNode, graph, &graphNode2, bytes, event_);
+  result = cuGraphAddEventWaitNode(&graphNode, graph, &graphNode2, bytes, event_);
+
+  // CUDA: CUresult CUDAAPI cuGraphEventWaitNodeGetEvent(CUgraphNode hNode, CUevent *event_out);
+  // HIP: hipError_t hipGraphEventWaitNodeGetEvent(hipGraphNode_t node, hipEvent_t* event_out);
+  // CHECK: result = hipGraphEventWaitNodeGetEvent(graphNode, &event_);
+  result = cuGraphEventWaitNodeGetEvent(graphNode, &event_);
+
+  // CUDA: CUresult CUDAAPI cuGraphEventWaitNodeSetEvent(CUgraphNode hNode, CUevent event);
+  // HIP: hipError_t hipGraphEventWaitNodeSetEvent(hipGraphNode_t node, hipEvent_t event);
+  // CHECK: result = hipGraphEventWaitNodeSetEvent(graphNode, event_);
+  result = cuGraphEventWaitNodeSetEvent(graphNode, event_);
+
+  // CUDA: CUresult CUDAAPI cuGraphExecEventWaitNodeSetEvent(CUgraphExec hGraphExec, CUgraphNode hNode, CUevent event);
+  // HIP: hipError_t hipGraphExecEventWaitNodeSetEvent(hipGraphExec_t hGraphExec, hipGraphNode_t hNode, hipEvent_t event);
+  // CHECK: result = hipGraphExecEventWaitNodeSetEvent(graphExec, graphNode, event_);
+  result = cuGraphExecEventWaitNodeSetEvent(graphExec, graphNode, event_);
+
+  // CHECK: hipArrayMapInfo arrayMapInfo;
+  CUarrayMapInfo arrayMapInfo;
+
+  // CUDA: CUresult CUDAAPI cuMemMapArrayAsync(CUarrayMapInfo *mapInfoList, unsigned int count, CUstream hStream);
+  // HIP: hipError_t hipMemMapArrayAsync(hipArrayMapInfo* mapInfoList, unsigned int count, hipStream_t stream);
+  // CHECK: result = hipMemMapArrayAsync(&arrayMapInfo, flags, stream);
+  result = cuMemMapArrayAsync(&arrayMapInfo, flags, stream);
+
+  // CUDA: CUresult CUDAAPI cuGraphUpload(CUgraphExec hGraphExec, CUstream hStream);
+  // HIP: hipError_t hipGraphUpload(hipGraphExec_t graphExec, hipStream_t stream);
+  // CHECK: result = hipGraphUpload(graphExec, stream);
+  result = cuGraphUpload(graphExec, stream);
 #endif
 
 #if CUDA_VERSION >= 11020
@@ -163,12 +618,188 @@ int main() {
   CUmemoryPool memPool_t;
   CUmemPoolProps_st memPoolProps_st;
   CUmemPoolProps memPoolProps;
+
+  // CUDA: CUresult CUDAAPI cuDeviceGetDefaultMemPool(CUmemoryPool *pool_out, CUdevice dev);
+  // HIP: hipError_t hipDeviceGetDefaultMemPool(hipMemPool_t* mem_pool, int device);
+  // CHECK: result = hipDeviceGetDefaultMemPool(&memPool_t, device);
+  result = cuDeviceGetDefaultMemPool(&memPool_t, device);
+
+  // CUDA: CUresult CUDAAPI cuDeviceSetMemPool(CUdevice dev, CUmemoryPool pool);
+  // HIP: hipError_t hipDeviceSetMemPool(int device, hipMemPool_t mem_pool);
+  // CHECK: result = hipDeviceSetMemPool(device, memPool_t);
+  result = cuDeviceSetMemPool(device, memPool_t);
+
+  // CUDA: CUresult CUDAAPI cuDeviceGetMemPool(CUmemoryPool *pool, CUdevice dev);
+  // HIP: hipError_t hipDeviceGetMemPool(hipMemPool_t* mem_pool, int device);
+  // CHECK: result = hipDeviceGetMemPool(&memPool_t, device);
+  result = cuDeviceGetMemPool(&memPool_t, device);
+
+  // CUDA: CUresult CUDAAPI cuMemAllocAsync(CUdeviceptr *dptr, size_t bytesize, CUstream hStream);
+  // HIP: hipError_t hipMallocAsync(void** dev_ptr, size_t size, hipStream_t stream);
+  // CHECK: result = hipMallocAsync(&deviceptr, bytes, stream);
+  result = cuMemAllocAsync(&deviceptr, bytes, stream);
+
+  // CUDA: CUresult CUDAAPI cuMemFreeAsync(CUdeviceptr dptr, CUstream hStream);
+  // HIP: hipError_t hipFreeAsync(void* dev_ptr, hipStream_t stream);
+  // CHECK: result = hipFreeAsync(deviceptr, stream);
+  result = cuMemFreeAsync(deviceptr, stream);
+
+  // CUDA: CUresult CUDAAPI cuMemPoolTrimTo(CUmemoryPool pool, size_t minBytesToKeep);
+  // HIP: hipError_t hipMemPoolTrimTo(hipMemPool_t mem_pool, size_t min_bytes_to_hold);
+  // CHECK: result = hipMemPoolTrimTo(memPool_t, bytes);
+  result = cuMemPoolTrimTo(memPool_t, bytes);
+
+  // CHECK: hipMemPoolAttr memPoolAttr;
+  CUmemPool_attribute memPoolAttr;
+
+  // CUDA: CUresult CUDAAPI cuMemPoolSetAttribute(CUmemoryPool pool, CUmemPool_attribute attr, void *value);
+  // HIP: hipError_t hipMemPoolSetAttribute(hipMemPool_t mem_pool, hipMemPoolAttr attr, void* value);
+  // CHECK: result = hipMemPoolSetAttribute(memPool_t, memPoolAttr, image);
+  result = cuMemPoolSetAttribute(memPool_t, memPoolAttr, image);
+
+  // CUDA: CUresult CUDAAPI cuMemPoolGetAttribute(CUmemoryPool pool, CUmemPool_attribute attr, void *value);
+  // HIP: hipError_t hipMemPoolGetAttribute(hipMemPool_t mem_pool, hipMemPoolAttr attr, void* value);
+  // CHECK: result = hipMemPoolGetAttribute(memPool_t, memPoolAttr, image);
+  result = cuMemPoolGetAttribute(memPool_t, memPoolAttr, image);
+
+  // CUDA: CUresult CUDAAPI cuMemPoolSetAccess(CUmemoryPool pool, const CUmemAccessDesc *map, size_t count);
+  // HIP: hipError_t hipMemPoolSetAccess(hipMemPool_t mem_pool, const hipMemAccessDesc* desc_list, size_t count);
+  // CHECK: result = hipMemPoolSetAccess(memPool_t, &memAccessDesc, bytes);
+  result = cuMemPoolSetAccess(memPool_t, &memAccessDesc, bytes);
+
+  // CHECK: hipMemAccessFlags memAccessFlags;
+  CUmemAccess_flags memAccessFlags;
+
+  // CUDA: CUresult CUDAAPI cuMemPoolGetAccess(CUmemAccess_flags *flags, CUmemoryPool memPool, CUmemLocation *location);
+  // HIP: hipError_t hipMemPoolGetAccess(hipMemAccessFlags* flags, hipMemPool_t mem_pool, hipMemLocation* location);
+  // CHECK: result = hipMemPoolGetAccess(&memAccessFlags, memPool_t, &memLocation);
+  result = cuMemPoolGetAccess(&memAccessFlags, memPool_t, &memLocation);
+
+  // CUDA: CUresult CUDAAPI cuMemPoolCreate(CUmemoryPool *pool, const CUmemPoolProps *poolProps);
+  // HIP: hipError_t hipMemPoolCreate(hipMemPool_t* mem_pool, const hipMemPoolProps* pool_props);
+  // CHECK: result = hipMemPoolCreate(&memPool_t, &memPoolProps);
+  result = cuMemPoolCreate(&memPool_t, &memPoolProps);
+
+  // CUDA: CUresult CUDAAPI cuMemPoolDestroy(CUmemoryPool pool);
+  // HIP: hipError_t hipMemPoolDestroy(hipMemPool_t mem_pool);
+  // CHECK: result = hipMemPoolDestroy(memPool_t);
+  result = cuMemPoolDestroy(memPool_t);
+
+  // CUDA: CUresult CUDAAPI cuMemPoolExportToShareableHandle(void *handle_out, CUmemoryPool pool, CUmemAllocationHandleType handleType, unsigned long long flags);
+  // HIP: hipError_t hipMemPoolExportToShareableHandle(void* shared_handle, hipMemPool_t mem_pool, hipMemAllocationHandleType handle_type, unsigned int flags);
+  // CHECK: result = hipMemPoolExportToShareableHandle(image, memPool_t, memAllocationHandleType, ull);
+  result = cuMemPoolExportToShareableHandle(image, memPool_t, memAllocationHandleType, ull);
+
+  // CUDA: CUresult CUDAAPI cuMemPoolImportFromShareableHandle(CUmemoryPool* pool_out, void* handle, CUmemAllocationHandleType handleType, unsigned long long flags);
+  // HIP: hipError_t hipMemPoolImportFromShareableHandle(hipMemPool_t* mem_pool, void* shared_handle, hipMemAllocationHandleType handle_type, unsigned int flags);
+  // CHECK: result = hipMemPoolImportFromShareableHandle(&memPool_t, image, memAllocationHandleType, ull);
+  result = cuMemPoolImportFromShareableHandle(&memPool_t, image, memAllocationHandleType, ull);
+
+  // CHECK: hipMemPoolPtrExportData memPoolPtrExportData;
+  CUmemPoolPtrExportData memPoolPtrExportData;
+
+  // CUDA: CUresult CUDAAPI cuMemPoolExportPointer(CUmemPoolPtrExportData *shareData_out, CUdeviceptr ptr);
+  // HIP: hipError_t hipMemPoolExportPointer(hipMemPoolPtrExportData* export_data, void* dev_ptr);
+  // CHECK: result = hipMemPoolExportPointer(&memPoolPtrExportData, deviceptr);
+  result = cuMemPoolExportPointer(&memPoolPtrExportData, deviceptr);
+
+  // CUDA: CUresult CUDAAPI cuMemPoolImportPointer(CUdeviceptr *ptr_out, CUmemoryPool pool, CUmemPoolPtrExportData *shareData);
+  // HIP: hipError_t hipMemPoolImportPointer(void** dev_ptr, hipMemPool_t mem_pool, hipMemPoolPtrExportData* export_data);
+  // CHECK: result = hipMemPoolImportPointer(&deviceptr, memPool_t, &memPoolPtrExportData);
+  result = cuMemPoolImportPointer(&deviceptr, memPool_t, &memPoolPtrExportData);
+#endif
+
+#if CUDA_VERSION >= 11030
+  // CUDA: CUresult CUDAAPI cuStreamGetCaptureInfo_v2(CUstream hStream, CUstreamCaptureStatus *captureStatus_out, cuuint64_t *id_out, CUgraph *graph_out, const CUgraphNode **dependencies_out, size_t *numDependencies_out);
+  // HIP: hipError_t hipStreamGetCaptureInfo_v2(hipStream_t stream, hipStreamCaptureStatus* captureStatus_out, unsigned long long* id_out __dparm(0), hipGraph_t* graph_out __dparm(0), const hipGraphNode_t** dependencies_out __dparm(0), size_t* numDependencies_out __dparm(0));
+  // CHECK: result = hipStreamGetCaptureInfo_v2(stream, &streamCaptureStatus, &ull, &graph, &pGraphNode, &bytes);
+  result = cuStreamGetCaptureInfo_v2(stream, &streamCaptureStatus, &ull, &graph, &pGraphNode, &bytes);
+
+  // CUDA: CUresult CUDAAPI cuStreamUpdateCaptureDependencies(CUstream hStream, CUgraphNode *dependencies, size_t numDependencies, unsigned int flags);
+  // HIP: hipError_t hipStreamUpdateCaptureDependencies(hipStream_t stream, hipGraphNode_t* dependencies, size_t numDependencies, unsigned int flags __dparm(0));
+  // CHECK: result = hipStreamUpdateCaptureDependencies(stream, &graphNode, bytes, flags);
+  result = cuStreamUpdateCaptureDependencies(stream, &graphNode, bytes, flags);
+
+  // CHECK: hipUserObject_t userObject;
+  CUuserObject userObject;
+
+  // CUDA: CUresult CUDAAPI cuUserObjectCreate(CUuserObject *object_out, void *ptr, CUhostFn destroy, unsigned int initialRefcount, unsigned int flags);
+  // HIP: hipError_t hipUserObjectCreate(hipUserObject_t* object_out, void* ptr, hipHostFn_t destroy, unsigned int initialRefcount, unsigned int flags);
+  // CHECK: result = hipUserObjectCreate(&userObject, image, hostFn, count, flags);
+  result = cuUserObjectCreate(&userObject, image, hostFn, count, flags);
+
+  // CUDA: CUresult CUDAAPI cuUserObjectRelease(CUuserObject object, unsigned int count);
+  // HIP: hipError_t hipUserObjectRelease(hipUserObject_t object, unsigned int count);
+  // CHECK: result = hipUserObjectRelease(userObject, count);
+  result = cuUserObjectRelease(userObject, count);
+
+  // CUDA: CUresult CUDAAPI cuUserObjectRetain(CUuserObject object, unsigned int count);
+  // HIP: hipError_t hipUserObjectRetain(hipUserObject_t object, unsigned int count);
+  // CHECK: result = hipUserObjectRetain(userObject, count);
+  result = cuUserObjectRetain(userObject, count);
+
+  // CUDA: CUresult CUDAAPI cuGraphRetainUserObject(CUgraph graph, CUuserObject object, unsigned int count, unsigned int flags);
+  // HIP: hipError_t hipGraphRetainUserObject(hipGraph_t graph, hipUserObject_t object, unsigned int count, unsigned int flags);
+  // CHECK: result = hipGraphRetainUserObject(graph, userObject, count, flags);
+  result = cuGraphRetainUserObject(graph, userObject, count, flags);
+
+  // CUDA: CUresult CUDAAPI cuGraphReleaseUserObject(CUgraph graph, CUuserObject object, unsigned int count);
+  // HIP: hipError_t hipGraphReleaseUserObject(hipGraph_t graph, hipUserObject_t object, unsigned int count);
+  // CHECK: result = hipGraphReleaseUserObject(graph, userObject, count);
+  result = cuGraphReleaseUserObject(graph, userObject, count);
+#endif
+
+#if CUDA_VERSION >= 11040
+  // CUDA: CUresult CUDAAPI cuGraphInstantiateWithFlags(CUgraphExec *phGraphExec, CUgraph hGraph, unsigned long long flags);
+  // HIP: hipError_t hipGraphInstantiateWithFlags(hipGraphExec_t* pGraphExec, hipGraph_t graph, unsigned long long flags);
+  // CHECK: result = hipGraphInstantiateWithFlags(&graphExec, graph, ull);
+  result = cuGraphInstantiateWithFlags(&graphExec, graph, ull);
+
+  // CHECK: hipGraphMemAttributeType graphMem_attribute;
+  CUgraphMem_attribute graphMem_attribute;
+
+  // CUDA: CUresult CUDAAPI cuDeviceGetGraphMemAttribute(CUdevice device, CUgraphMem_attribute attr, void* value);
+  // HIP: hipError_t hipDeviceGetGraphMemAttribute(int device, hipGraphMemAttributeType attr, void* value);
+  // CHECK: result = hipDeviceGetGraphMemAttribute(device, graphMem_attribute, image);
+  result = cuDeviceGetGraphMemAttribute(device, graphMem_attribute, image);
+
+  // CUDA: CUresult CUDAAPI cuDeviceSetGraphMemAttribute(CUdevice device, CUgraphMem_attribute attr, void* value);
+  // HIP: hipError_t hipDeviceSetGraphMemAttribute(int device, hipGraphMemAttributeType attr, void* value);
+  // CHECK: result = hipDeviceSetGraphMemAttribute(device, graphMem_attribute, image);
+  result = cuDeviceSetGraphMemAttribute(device, graphMem_attribute, image);
+
+  // CUDA: CUresult CUDAAPI cuDeviceGraphMemTrim(CUdevice device);
+  // HIP: hipError_t hipDeviceGraphMemTrim(int device);
+  // CHECK: result = hipDeviceGraphMemTrim(device);
+  result = cuDeviceGraphMemTrim(device);
+#endif
+
+#if CUDA_VERSION >= 11070
+  // CUDA: CUresult CUDAAPI cuStreamWaitValue32_v2(CUstream stream, CUdeviceptr addr, cuuint32_t value, unsigned int flags);
+  // HIP: hipError_t hipStreamWaitValue32(hipStream_t stream, void* ptr, uint32_t value, unsigned int flags, uint32_t mask __dparm(0xFFFFFFFF));
+  // CHECK: result = hipStreamWaitValue32(stream, deviceptr, u_value, flags);
+  result = cuStreamWaitValue32_v2(stream, deviceptr, u_value, flags);
+
+  // CUDA: CUresult CUDAAPI cuStreamWaitValue64_v2(CUstream stream, CUdeviceptr addr, cuuint64_t value, unsigned int flags);
+  // HIP: hipError_t hipStreamWaitValue64(hipStream_t stream, void* ptr, uint64_t value, unsigned int flags, uint64_t mask __dparm(0xFFFFFFFFFFFFFFFF));
+  // CHECK: result = hipStreamWaitValue64(stream, deviceptr, u_value, flags);
+  result = cuStreamWaitValue64_v2(stream, deviceptr, u_value, flags);
+
+  // CUDA: CUresult CUDAAPI cuStreamWriteValue32_v2(CUstream stream, CUdeviceptr addr, cuuint32_t value, unsigned int flags);
+  // HIP: hipError_t hipStreamWriteValue32(hipStream_t stream, void* ptr, uint32_t value, unsigned int flags, uint32_t mask __dparm(0xFFFFFFFF));
+  // CHECK: result = hipStreamWriteValue32(stream, deviceptr, u_value, flags);
+  result = cuStreamWriteValue32_v2(stream, deviceptr, u_value, flags);
+
+  // CUDA: CUresult CUDAAPI cuStreamWriteValue64_v2(CUstream stream, CUdeviceptr addr, cuuint64_t value, unsigned int flags);
+  // HIP: hipError_t hipStreamWriteValue64(hipStream_t stream, void* ptr, uint64_t value, unsigned int flags, uint64_t mask __dparm(0xFFFFFFFFFFFFFFFF));
+  // CHECK: result = hipStreamWriteValue64(stream, deviceptr, u_value, flags);
+  result = cuStreamWriteValue64_v2(stream, deviceptr, u_value, flags);
 #endif
 
   // CUDA: CUresult CUDAAPI cuInit(unsigned int Flags);
   // HIP: hipError_t hipInit(unsigned int flags);
-  // CHECK: hipError_t result = hipInit(flags);
-  CUresult result = cuInit(flags);
+  // CHECK: result = hipInit(flags);
+  result = cuInit(flags);
 
   int driverVersion = 0;
   // CUDA: CUresult CUDAAPI cuDriverGetVersion(int *driverVersion);
@@ -190,7 +821,6 @@ int main() {
   // CHECK: result = hipDeviceGetAttribute(&pi, device_attribute, device);
   result = cuDeviceGetAttribute(&pi, device_attribute, device);
 
-  int count = 0;
   // CUDA: CUresult CUDAAPI cuDeviceGetCount(int *count);
   // HIP: hipError_t hipGetDeviceCount(int* count);
   // CHECK: result = hipGetDeviceCount(&count);
@@ -219,19 +849,11 @@ int main() {
   // HIP: hipError_t hipDevicePrimaryCtxRelease(hipDevice_t dev);
   // CHECK: result = hipDevicePrimaryCtxRelease(device);
   result = cuDevicePrimaryCtxRelease(device);
-#if CUDA_VERSION > 10020
-  // CHECK: result = hipDevicePrimaryCtxRelease(device);
-  result = cuDevicePrimaryCtxRelease_v2(device);
-#endif
 
   // CUDA: CUresult CUDAAPI cuDevicePrimaryCtxReset(CUdevice dev);
   // HIP: hipError_t hipDevicePrimaryCtxReset(hipDevice_t dev);
   // CHECK: result = hipDevicePrimaryCtxReset(device);
   result = cuDevicePrimaryCtxReset(device);
-#if CUDA_VERSION > 10020
-  // CHECK: result = hipDevicePrimaryCtxReset(device);
-  result = cuDevicePrimaryCtxReset_v2(device);
-#endif
 
   // CUDA: CUresult CUDAAPI cuDevicePrimaryCtxRetain(CUcontext *pctx, CUdevice dev);
   // HIP: hipError_t hipDevicePrimaryCtxRetain(hipCtx_t* pctx, hipDevice_t dev);
@@ -242,10 +864,6 @@ int main() {
   // HIP: hipError_t hipDevicePrimaryCtxSetFlags(hipDevice_t dev, unsigned int flags);
   // CHECK: result = hipDevicePrimaryCtxSetFlags(device, flags);
   result = cuDevicePrimaryCtxSetFlags(device, flags);
-#if CUDA_VERSION > 10020
-  // CHECK: result = hipDevicePrimaryCtxSetFlags(device, flags);
-  result = cuDevicePrimaryCtxSetFlags_v2(device, flags);
-#endif
 
   // CUDA: CUresult CUDAAPI cuCtxCreate(CUcontext *pctx, unsigned int flags, CUdevice dev);
   // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipCtxCreate(hipCtx_t *ctx, unsigned int flags, hipDevice_t device);
@@ -662,28 +1280,6 @@ int main() {
   // CHECK: result = hipMipmappedArrayGetLevel(&array_, mipmappedArray, flags);
   result = cuMipmappedArrayGetLevel(&array_, mipmappedArray, flags);
 
-#if CUDA_VERSION > 7050
-  // CUDA: CUresult CUDAAPI cuMemAdvise(CUdeviceptr devPtr, size_t count, CUmem_advise advice, CUdevice device);
-  // HIP: hipError_t hipMemAdvise(const void* dev_ptr, size_t count, hipMemoryAdvise advice, int device);
-  // CHECK: result = hipMemAdvise(deviceptr, bytes, MemoryAdvise, device);
-  result = cuMemAdvise(deviceptr, bytes, MemoryAdvise, device);
-
-  // CUDA: CUresult CUDAAPI cuMemPrefetchAsync(CUdeviceptr devPtr, size_t count, CUdevice dstDevice, CUstream hStream);
-  // HIP: hipError_t hipMemPrefetchAsync(const void* dev_ptr, size_t count, int device, hipStream_t stream __dparm(0));
-  // CHECK: result = hipMemPrefetchAsync(deviceptr, bytes, device, stream);
-  result = cuMemPrefetchAsync(deviceptr, bytes, device, stream);
-
-  // CUDA: CUresult CUDAAPI cuMemRangeGetAttribute(void *data, size_t dataSize, CUmem_range_attribute attribute, CUdeviceptr devPtr, size_t count);
-  // HIP: hipError_t hipMemRangeGetAttribute(void* data, size_t data_size, hipMemRangeAttribute attribute, const void* dev_ptr, size_t count);
-  // CHECK: result = hipMemRangeGetAttribute(image, bytes, MemoryRangeAttribute, deviceptr, bytes);
-  result = cuMemRangeGetAttribute(image, bytes, MemoryRangeAttribute, deviceptr, bytes);
-
-  // CUDA: CUresult CUDAAPI cuMemRangeGetAttributes(void **data, size_t *dataSizes, CUmem_range_attribute *attributes, size_t numAttributes, CUdeviceptr devPtr, size_t count);
-  // HIP: hipError_t hipMemRangeGetAttributes(void** data, size_t* data_sizes, hipMemRangeAttribute* attributes, size_t num_attributes, const void* dev_ptr, size_t count);
-  // CHECK: result = hipMemRangeGetAttributes(&image, &bytes, &MemoryRangeAttribute, bytes, deviceptr, bytes);
-  result = cuMemRangeGetAttributes(&image, &bytes, &MemoryRangeAttribute, bytes, deviceptr, bytes);
-#endif
-
   // CUDA: CUresult CUDAAPI cuPointerGetAttribute(void *data, CUpointer_attribute attribute, CUdeviceptr ptr);
   // HIP: hipError_t hipPointerGetAttribute(void* data, hipPointer_attribute attribute, hipDeviceptr_t ptr);
   // CHECK: result = hipPointerGetAttribute(image, pointer_attribute, deviceptr);
@@ -704,15 +1300,6 @@ int main() {
   // CHECK: result = hipStreamAttachMemAsync(stream, deviceptr, bytes, flags);
   result = cuStreamAttachMemAsync(stream, deviceptr, bytes, flags);
 
-#if CUDA_VERSION > 10000
-  // CUDA: CUresult CUDAAPI cuStreamBeginCapture(CUstream hStream, CUstreamCaptureMode mode);
-  // HIP: hipError_t hipStreamBeginCapture(hipStream_t stream, hipStreamCaptureMode mode);
-  // CHECK: result = hipStreamBeginCapture(stream, streamCaptureMode);
-  // CHECK-NEXT: result = hipStreamBeginCapture(stream, streamCaptureMode);
-  result = cuStreamBeginCapture(stream, streamCaptureMode);
-  result = cuStreamBeginCapture_v2(stream, streamCaptureMode);
-#endif
-
   // CUDA: CUresult CUDAAPI cuStreamCreate(CUstream *phStream, unsigned int Flags);
   // HIP: hipError_t hipStreamCreateWithFlags(hipStream_t* stream, unsigned int flags);
   // CHECK: result = hipStreamCreateWithFlags(&stream, flags);
@@ -729,13 +1316,6 @@ int main() {
   // CHECK-NEXT: result = hipStreamDestroy(stream);
   result = cuStreamDestroy(stream);
   result = cuStreamDestroy_v2(stream);
-
-#if CUDA_VERSION > 9020
-  // CUDA: CUresult CUDAAPI cuStreamEndCapture(CUstream hStream, CUgraph *phGraph);
-  // HIP: hipError_t hipStreamEndCapture(hipStream_t stream, hipGraph_t* pGraph);
-  // CHECK: result = hipStreamEndCapture(stream, &graph);
-  result = cuStreamEndCapture(stream, &graph);
-#endif
 
   // CUDA: CUresult CUDAAPI cuStreamGetFlags(CUstream hStream, unsigned int *flags);
   // HIP: hipError_t hipStreamGetFlags(hipStream_t stream, unsigned int* flags);
@@ -789,344 +1369,17 @@ int main() {
   // CHECK: result = hipEventSynchronize(event_);
   result = cuEventSynchronize(event_);
 
-#if CUDA_VERSION > 9020
-  // CUDA: CUresult CUDAAPI cuDestroyExternalMemory(CUexternalMemory extMem);
-  // HIP: hipError_t hipDestroyExternalMemory(hipExternalMemory_t extMem);
-  // CHECK: result = hipDestroyExternalMemory(externalMemory);
-  result = cuDestroyExternalMemory(externalMemory);
-
-  // CUDA: CUresult CUDAAPI cuDestroyExternalSemaphore(CUexternalSemaphore extSem);
-  // HIP: hipError_t hipDestroyExternalSemaphore(hipExternalSemaphore_t extSem);
-  // CHECK: result = hipDestroyExternalSemaphore(externalSemaphore);
-  result = cuDestroyExternalSemaphore(externalSemaphore);
-
-  // CUDA: CUresult CUDAAPI cuExternalMemoryGetMappedBuffer(CUdeviceptr *devPtr, CUexternalMemory extMem, const CUDA_EXTERNAL_MEMORY_BUFFER_DESC *bufferDesc);
-  // HIP: hipError_t hipExternalMemoryGetMappedBuffer(void **devPtr, hipExternalMemory_t extMem, const hipExternalMemoryBufferDesc *bufferDesc);
-  // CHECK: result = hipExternalMemoryGetMappedBuffer(&deviceptr, externalMemory, &EXTERNAL_MEMORY_BUFFER_DESC);
-  result = cuExternalMemoryGetMappedBuffer(&deviceptr, externalMemory, &EXTERNAL_MEMORY_BUFFER_DESC);
-
-  // CUDA: CUresult CUDAAPI cuImportExternalMemory(CUexternalMemory *extMem_out, const CUDA_EXTERNAL_MEMORY_HANDLE_DESC *memHandleDesc);
-  // HIP: hipError_t hipImportExternalMemory(hipExternalMemory_t* extMem_out, const hipExternalMemoryHandleDesc* memHandleDesc);
-  // CHECK: result = hipImportExternalMemory(&externalMemory, &EXTERNAL_MEMORY_HANDLE_DESC);
-  result = cuImportExternalMemory(&externalMemory, &EXTERNAL_MEMORY_HANDLE_DESC);
-
-  // CUDA: CUresult CUDAAPI cuImportExternalSemaphore(CUexternalSemaphore *extSem_out, const CUDA_EXTERNAL_SEMAPHORE_HANDLE_DESC *semHandleDesc);
-  // HIP: hipError_t hipImportExternalSemaphore(hipExternalSemaphore_t* extSem_out, const hipExternalSemaphoreHandleDesc* semHandleDesc);
-  // CHECK: result = hipImportExternalSemaphore(&externalSemaphore, &EXTERNAL_SEMAPHORE_HANDLE_DESC);
-  result = cuImportExternalSemaphore(&externalSemaphore, &EXTERNAL_SEMAPHORE_HANDLE_DESC);
-
-  // CUDA: CUresult CUDAAPI cuSignalExternalSemaphoresAsync(const CUexternalSemaphore *extSemArray, const CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS *paramsArray, unsigned int numExtSems, CUstream stream);
-  // HIP: hipError_t hipSignalExternalSemaphoresAsync(const hipExternalSemaphore_t* extSemArray, const hipExternalSemaphoreSignalParams* paramsArray, unsigned int numExtSems, hipStream_t stream);
-  // CHECK: result = hipSignalExternalSemaphoresAsync(&externalSemaphore, &EXTERNAL_SEMAPHORE_SIGNAL_PARAMS, flags, stream);
-  result = cuSignalExternalSemaphoresAsync(&externalSemaphore, &EXTERNAL_SEMAPHORE_SIGNAL_PARAMS, flags, stream);
-
-  // CUDA: CUresult CUDAAPI cuWaitExternalSemaphoresAsync(const CUexternalSemaphore *extSemArray, const CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS *paramsArray, unsigned int numExtSems, CUstream stream);
-  // HIP: hipError_t hipWaitExternalSemaphoresAsync(const hipExternalSemaphore_t* extSemArray, const hipExternalSemaphoreWaitParams* paramsArray, unsigned int numExtSems, hipStream_t stream);
-  // CHECK: result = hipWaitExternalSemaphoresAsync(&externalSemaphore, &EXTERNAL_SEMAPHORE_WAIT_PARAMS, flags, stream);
-  result = cuWaitExternalSemaphoresAsync(&externalSemaphore, &EXTERNAL_SEMAPHORE_WAIT_PARAMS, flags, stream);
-#endif
-
-#if CUDA_VERSION > 7050
-  // CUDA: CUresult CUDAAPI cuStreamWaitValue32(CUstream stream, CUdeviceptr addr, cuuint32_t value, unsigned int flags);
-  // HIP: hipError_t hipStreamWaitValue32(hipStream_t stream, void* ptr, uint32_t value, unsigned int flags, uint32_t mask __dparm(0xFFFFFFFF));
-  // CHECK: result = hipStreamWaitValue32(stream, deviceptr, u_value, flags);
-  result = cuStreamWaitValue32(stream, deviceptr, u_value, flags);
-
-  // CUDA: CUresult CUDAAPI cuStreamWriteValue32(CUstream stream, CUdeviceptr addr, cuuint32_t value, unsigned int flags);
-  // HIP: hipError_t hipStreamWriteValue32(hipStream_t stream, void* ptr, uint32_t value, unsigned int flags, uint32_t mask __dparm(0xFFFFFFFF));
-  // CHECK: result = hipStreamWriteValue32(stream, deviceptr, u_value, flags);
-  result = cuStreamWriteValue32(stream, deviceptr, u_value, flags);
-#endif
-
-#if CUDA_VERSION >= 11070
-  // CUDA: CUresult CUDAAPI cuStreamWaitValue32_v2(CUstream stream, CUdeviceptr addr, cuuint32_t value, unsigned int flags);
-  // HIP: hipError_t hipStreamWaitValue32(hipStream_t stream, void* ptr, uint32_t value, unsigned int flags, uint32_t mask __dparm(0xFFFFFFFF));
-  // CHECK: result = hipStreamWaitValue32(stream, deviceptr, u_value, flags);
-  result = cuStreamWaitValue32_v2(stream, deviceptr, u_value, flags);
-
-  // CUDA: CUresult CUDAAPI cuStreamWaitValue64_v2(CUstream stream, CUdeviceptr addr, cuuint64_t value, unsigned int flags);
-  // HIP: hipError_t hipStreamWaitValue64(hipStream_t stream, void* ptr, uint64_t value, unsigned int flags, uint64_t mask __dparm(0xFFFFFFFFFFFFFFFF));
-  // CHECK: result = hipStreamWaitValue64(stream, deviceptr, u_value, flags);
-  result = cuStreamWaitValue64_v2(stream, deviceptr, u_value, flags);
-
-  // CUDA: CUresult CUDAAPI cuStreamWriteValue32_v2(CUstream stream, CUdeviceptr addr, cuuint32_t value, unsigned int flags);
-  // HIP: hipError_t hipStreamWriteValue32(hipStream_t stream, void* ptr, uint32_t value, unsigned int flags, uint32_t mask __dparm(0xFFFFFFFF));
-  // CHECK: result = hipStreamWriteValue32(stream, deviceptr, u_value, flags);
-  result = cuStreamWriteValue32_v2(stream, deviceptr, u_value, flags);
-
-  // CUDA: CUresult CUDAAPI cuStreamWriteValue64_v2(CUstream stream, CUdeviceptr addr, cuuint64_t value, unsigned int flags);
-  // HIP: hipError_t hipStreamWriteValue64(hipStream_t stream, void* ptr, uint64_t value, unsigned int flags, uint64_t mask __dparm(0xFFFFFFFFFFFFFFFF));
-  // CHECK: result = hipStreamWriteValue64(stream, deviceptr, u_value, flags);
-  result = cuStreamWriteValue64_v2(stream, deviceptr, u_value, flags);
-#endif
-
-#if CUDA_VERSION > 8000
-  // CUDA: CUresult CUDAAPI cuStreamWaitValue64(CUstream stream, CUdeviceptr addr, cuuint64_t value, unsigned int flags);
-  // HIP: hipError_t hipStreamWaitValue64(hipStream_t stream, void* ptr, uint64_t value, unsigned int flags, uint64_t mask __dparm(0xFFFFFFFFFFFFFFFF));
-  // CHECK: result = hipStreamWaitValue64(stream, deviceptr, u_value, flags);
-  result = cuStreamWaitValue64(stream, deviceptr, u_value, flags);
-
-  // CUDA: CUresult CUDAAPI cuStreamWriteValue64(CUstream stream, CUdeviceptr addr, cuuint64_t value, unsigned int flags);
-  // HIP: hipError_t hipStreamWriteValue64(hipStream_t stream, void* ptr, uint64_t value, unsigned int flags, uint64_t mask __dparm(0xFFFFFFFFFFFFFFFF));
-  // CHECK: result = hipStreamWriteValue64(stream, deviceptr, u_value, flags);
-  result = cuStreamWriteValue64(stream, deviceptr, u_value, flags);
-#endif
-
   // CUDA: CUresult CUDAAPI cuFuncGetAttribute(int *pi, CUfunction_attribute attrib, CUfunction hfunc);
   // HIP: hipError_t hipFuncGetAttribute(int* value, hipFunction_attribute attrib, hipFunction_t hfunc);
   // CHECK: result = hipFuncGetAttribute(value, function_attribute, function);
   result = cuFuncGetAttribute(value, function_attribute, function);
 
   unsigned int gridDimX = 0, gridDimY = 0, gridDimZ = 0, blockDimX = 0, blockDimY = 0, blockDimZ = 0, sharedMemBytes = 0;
-  void* kernelParams = nullptr, *extra = nullptr;
+  void* kernelParams = nullptr, * extra = nullptr;
   // CUDA: CUresult CUDAAPI cuLaunchKernel(CUfunction f, unsigned int gridDimX, unsigned int gridDimY, unsigned int gridDimZ, unsigned int blockDimX, unsigned int blockDimY, unsigned int blockDimZ, unsigned int sharedMemBytes, CUstream hStream, void **kernelParams, void **extra);
   // HIP: hipError_t hipModuleLaunchKernel(hipFunction_t f, unsigned int gridDimX, unsigned int gridDimY, unsigned int gridDimZ, unsigned int blockDimX, unsigned int blockDimY, unsigned int blockDimZ, unsigned int sharedMemBytes, hipStream_t stream, void** kernelParams, void** extra);
   // CHECK: result = hipModuleLaunchKernel(function, gridDimX, gridDimY, gridDimZ, blockDimX, blockDimY, blockDimZ, sharedMemBytes, stream, &kernelParams, &extra);
   result = cuLaunchKernel(function, gridDimX, gridDimY, gridDimZ, blockDimX, blockDimY, blockDimZ, sharedMemBytes, stream, &kernelParams, &extra);
-
-#if CUDA_VERSION > 9020
-  // CUDA: CUresult CUDAAPI cuGraphAddDependencies(CUgraph hGraph, const CUgraphNode *from, const CUgraphNode *to, size_t numDependencies);
-  // HIP: hipError_t hipGraphAddDependencies(hipGraph_t graph, const hipGraphNode_t* from, const hipGraphNode_t* to, size_t numDependencies);
-  // CHECK: result = hipGraphAddDependencies(graph, &graphNode, &graphNode2, bytes);
-  result = cuGraphAddDependencies(graph, &graphNode, &graphNode2, bytes);
-
-  // CUDA: CUresult CUDAAPI cuGraphAddEmptyNode(CUgraphNode *phGraphNode, CUgraph hGraph, const CUgraphNode *dependencies, size_t numDependencies);
-  // HIP: hipError_t hipGraphAddEmptyNode(hipGraphNode_t* pGraphNode, hipGraph_t graph, const hipGraphNode_t* pDependencies, size_t numDependencies);
-  // CHECK: result = hipGraphAddEmptyNode(&graphNode, graph, &graphNode2, bytes);
-  result = cuGraphAddEmptyNode(&graphNode, graph, &graphNode2, bytes);
-
-  // CUDA: CUresult CUDAAPI cuGraphAddKernelNode(CUgraphNode *phGraphNode, CUgraph hGraph, const CUgraphNode *dependencies, size_t numDependencies, const CUDA_KERNEL_NODE_PARAMS *nodeParams);
-  // HIP: hipError_t hipGraphAddKernelNode(hipGraphNode_t* pGraphNode, hipGraph_t graph, const hipGraphNode_t* pDependencies, size_t numDependencies, const hipKernelNodeParams* pNodeParams);
-  // CHECK: result = hipGraphAddKernelNode(&graphNode, graph, &graphNode2, bytes, &KERNEL_NODE_PARAMS);
-  result = cuGraphAddKernelNode(&graphNode, graph, &graphNode2, bytes, &KERNEL_NODE_PARAMS);
-
-  // CUDA: CUresult CUDAAPI cuGraphCreate(CUgraph *phGraph, unsigned int flags);
-  // HIP: hipError_t hipGraphCreate(hipGraph_t* pGraph, unsigned int flags);
-  // CHECK: result = hipGraphCreate(&graph, flags);
-  result = cuGraphCreate(&graph, flags);
-
-  // CUDA: CUresult CUDAAPI cuGraphDestroy(CUgraph hGraph);
-  // HIP: hipError_t hipGraphDestroy(hipGraph_t graph);
-  // CHECK: result = hipGraphDestroy(graph);
-  result = cuGraphDestroy(graph);
-
-  // CUDA: CUresult CUDAAPI cuGraphExecDestroy(CUgraphExec hGraphExec);
-  // HIP: hipError_t hipGraphExecDestroy(hipGraphExec_t pGraphExec);
-  // CHECK: result = hipGraphExecDestroy(graphExec);
-  result = cuGraphExecDestroy(graphExec);
-
-  // CUDA: CUresult CUDAAPI cuGraphGetNodes(CUgraph hGraph, CUgraphNode *nodes, size_t *numNodes);
-  // HIP: hipError_t hipGraphGetNodes(hipGraph_t graph, hipGraphNode_t* nodes, size_t* numNodes);
-  // CHECK: result = hipGraphGetNodes(graph, &graphNode, &bytes);
-  result = cuGraphGetNodes(graph, &graphNode, &bytes);
-
-  // CUDA: CUresult CUDAAPI cuGraphGetRootNodes(CUgraph hGraph, CUgraphNode *rootNodes, size_t *numRootNodes);
-  // HIP: hipError_t hipGraphGetRootNodes(hipGraph_t graph, hipGraphNode_t* pRootNodes, size_t* pNumRootNodes);
-  // CHECK: result = hipGraphGetRootNodes(graph, &graphNode, &bytes);
-  result = cuGraphGetRootNodes(graph, &graphNode, &bytes);
-
-  // CUDA: CUresult CUDAAPI cuGraphInstantiate(CUgraphExec *phGraphExec, CUgraph hGraph, CUgraphNode *phErrorNode, char *logBuffer, size_t bufferSize);
-  // HIP: hipError_t hipGraphInstantiate(hipGraphExec_t* pGraphExec, hipGraph_t graph, hipGraphNode_t* pErrorNode, char* pLogBuffer, size_t bufferSize);
-  // CHECK: result = hipGraphInstantiate(&graphExec, graph, &graphNode, nullptr, bytes);
-  // CHECK-NEXT: result = hipGraphInstantiate(&graphExec, graph, &graphNode, nullptr, bytes);
-  result = cuGraphInstantiate(&graphExec, graph, &graphNode, nullptr, bytes);
-  result = cuGraphInstantiate_v2(&graphExec, graph, &graphNode, nullptr, bytes);
-
-  // CUDA: CUresult CUDAAPI cuGraphKernelNodeGetParams(CUgraphNode hNode, CUDA_KERNEL_NODE_PARAMS *nodeParams);
-  // HIP: hipError_t hipGraphKernelNodeGetParams(hipGraphNode_t node, hipKernelNodeParams* pNodeParams);
-  // CHECK: result = hipGraphKernelNodeGetParams(graphNode, &KERNEL_NODE_PARAMS);
-  result = cuGraphKernelNodeGetParams(graphNode, &KERNEL_NODE_PARAMS);
-
-  // CUDA: CUresult CUDAAPI cuGraphKernelNodeSetParams(CUgraphNode hNode, const CUDA_KERNEL_NODE_PARAMS *nodeParams);
-  // HIP: hipError_t hipGraphKernelNodeSetParams(hipGraphNode_t node, const hipKernelNodeParams* pNodeParams);
-  // CHECK: result = hipGraphKernelNodeSetParams(graphNode, &KERNEL_NODE_PARAMS);
-  result = cuGraphKernelNodeSetParams(graphNode, &KERNEL_NODE_PARAMS);
-
-  // CUDA: CUresult CUDAAPI cuGraphLaunch(CUgraphExec hGraphExec, CUstream hStream);
-  // HIP: hipError_t hipGraphLaunch(hipGraphExec_t graphExec, hipStream_t stream);
-  // CHECK: result = hipGraphLaunch(graphExec, stream);
-  result = cuGraphLaunch(graphExec, stream);
-
-  // CUDA: CUresult CUDAAPI cuGraphMemcpyNodeGetParams(CUgraphNode hNode, CUDA_MEMCPY3D *nodeParams);
-  // HIP: hipError_t hipGraphMemcpyNodeGetParams(hipGraphNode_t node, hipMemcpy3DParms* pNodeParams);
-  // CHECK: result = hipGraphMemcpyNodeGetParams(graphNode, &MEMCPY3D);
-  result = cuGraphMemcpyNodeGetParams(graphNode, &MEMCPY3D);
-
-  // CUDA: CUresult CUDAAPI cuGraphMemcpyNodeSetParams(CUgraphNode hNode, const CUDA_MEMCPY3D *nodeParams);
-  // HIP: hipError_t hipGraphMemcpyNodeSetParams(hipGraphNode_t node, const hipMemcpy3DParms* pNodeParams);
-  // CHECK: result = hipGraphMemcpyNodeSetParams(graphNode, &MEMCPY3D);
-  result = cuGraphMemcpyNodeSetParams(graphNode, &MEMCPY3D);
-
-  // CUDA: CUresult CUDAAPI cuGraphMemsetNodeGetParams(CUgraphNode hNode, CUDA_MEMSET_NODE_PARAMS *nodeParams);
-  // HIP: hipError_t hipGraphMemsetNodeGetParams(hipGraphNode_t node, hipMemsetParams* pNodeParams);
-  // CHECK: result = hipGraphMemsetNodeGetParams(graphNode, &MEMSET_NODE_PARAMS);
-  result = cuGraphMemsetNodeGetParams(graphNode, &MEMSET_NODE_PARAMS);
-
-  // CUDA: CUresult CUDAAPI cuGraphMemsetNodeSetParams(CUgraphNode hNode, const CUDA_MEMSET_NODE_PARAMS *nodeParams);
-  // HIP: hipError_t hipGraphMemsetNodeSetParams(hipGraphNode_t node, const hipMemsetParams* pNodeParams);
-  // CHECK: result = hipGraphMemsetNodeSetParams(graphNode, &MEMSET_NODE_PARAMS);
-  result = cuGraphMemsetNodeSetParams(graphNode, &MEMSET_NODE_PARAMS);
-
-  // CUDA: CUresult CUDAAPI cuGraphGetEdges(CUgraph hGraph, CUgraphNode *from, CUgraphNode *to, size_t *numEdges);
-  // HIP: hipError_t hipGraphGetEdges(hipGraph_t graph, hipGraphNode_t* from, hipGraphNode_t* to, size_t* numEdges);
-  // CHECK: result = hipGraphGetEdges(graph, &graphNode, &graphNode2, &bytes);
-  result = cuGraphGetEdges(graph, &graphNode, &graphNode2, &bytes);
-
-  // CUDA: CUresult CUDAAPI cuGraphNodeGetDependencies(CUgraphNode hNode, CUgraphNode *dependencies, size_t *numDependencies);
-  // HIP: hipError_t hipGraphNodeGetDependencies(hipGraphNode_t node, hipGraphNode_t* pDependencies, size_t* pNumDependencies);
-  // CHECK: result = hipGraphNodeGetDependencies(graphNode, &graphNode2, &bytes);
-  result = cuGraphNodeGetDependencies(graphNode, &graphNode2, &bytes);
-
-  // CUDA: CUresult CUDAAPI cuGraphRemoveDependencies(CUgraph hGraph, const CUgraphNode *from, const CUgraphNode *to, size_t numDependencies);
-  // HIP: hipError_t hipGraphRemoveDependencies(hipGraph_t graph, const hipGraphNode_t* from, const hipGraphNode_t* to, size_t numDependencies);
-  // CHECK: result = hipGraphRemoveDependencies(graph, &graphNode, &graphNode2, bytes);
-  result = cuGraphRemoveDependencies(graph, &graphNode, &graphNode2, bytes);
-
-  // CUDA: CUresult CUDAAPI cuGraphNodeGetDependentNodes(CUgraphNode hNode, CUgraphNode *dependentNodes, size_t *numDependentNodes);
-  // HIP: hipError_t hipGraphNodeGetDependentNodes(hipGraphNode_t node, hipGraphNode_t* pDependentNodes, size_t* pNumDependentNodes);
-  // CHECK: result = hipGraphNodeGetDependentNodes(graphNode, &graphNode2, &bytes);
-  result = cuGraphNodeGetDependentNodes(graphNode, &graphNode2, &bytes);
-
-  // CUDA: CUresult CUDAAPI cuGraphNodeGetType(CUgraphNode hNode, CUgraphNodeType *type);
-  // HIP: hipError_t hipGraphNodeGetType(hipGraphNode_t node, hipGraphNodeType* pType);
-  // CHECK: result = hipGraphNodeGetType(graphNode, &graphNodeType);
-  result = cuGraphNodeGetType(graphNode, &graphNodeType);
-
-  // CUDA: CUresult CUDAAPI cuGraphDestroyNode(CUgraphNode hNode);
-  // HIP: hipError_t hipGraphDestroyNode(hipGraphNode_t node);
-  // CHECK: result = hipGraphDestroyNode(graphNode);
-  result = cuGraphDestroyNode(graphNode);
-
-  // CUDA: CUresult CUDAAPI cuGraphAddHostNode(CUgraphNode *phGraphNode, CUgraph hGraph, const CUgraphNode *dependencies, size_t numDependencies, const CUDA_HOST_NODE_PARAMS *nodeParams);
-  // HIP: hipError_t hipGraphAddHostNode(hipGraphNode_t* pGraphNode, hipGraph_t graph, const hipGraphNode_t* pDependencies, size_t numDependencies, const hipHostNodeParams* pNodeParams);
-  // CHECK: result = hipGraphAddHostNode(&graphNode, graph, &graphNode2, bytes, &host_node_params);
-  result = cuGraphAddHostNode(&graphNode, graph, &graphNode2, bytes, &host_node_params);
-
-  // CUDA: CUresult CUDAAPI cuGraphNodeFindInClone(CUgraphNode *phNode, CUgraphNode hOriginalNode, CUgraph hClonedGraph);
-  // HIP: hipError_t hipGraphNodeFindInClone(hipGraphNode_t* pNode, hipGraphNode_t originalNode, hipGraph_t clonedGraph);
-  // CHECK: result = hipGraphNodeFindInClone(&graphNode2, graphNode, graph);
-  result = cuGraphNodeFindInClone(&graphNode2, graphNode, graph);
-
-  // CUDA: CUresult CUDAAPI cuStreamIsCapturing(CUstream hStream, CUstreamCaptureStatus *captureStatus);
-  // HIP: hipError_t hipStreamIsCapturing(hipStream_t stream, hipStreamCaptureStatus* pCaptureStatus);
-  // CHECK: result = hipStreamIsCapturing(stream, &streamCaptureStatus);
-  result = cuStreamIsCapturing(stream, &streamCaptureStatus);
-
-  // CUDA: CUresult CUDAAPI cuGraphHostNodeGetParams(CUgraphNode hNode, CUDA_HOST_NODE_PARAMS *nodeParams);
-  // HIP: hipError_t hipGraphHostNodeGetParams(hipGraphNode_t node, hipHostNodeParams* pNodeParams);
-  // CHECK: result = hipGraphHostNodeGetParams(graphNode, &host_node_params);
-  result = cuGraphHostNodeGetParams(graphNode, &host_node_params);
-
-  // CUDA: CUresult CUDAAPI cuGraphHostNodeSetParams(CUgraphNode hNode, const CUDA_HOST_NODE_PARAMS *nodeParams);
-  // HIP: hipError_t hipGraphHostNodeSetParams(hipGraphNode_t node, const hipHostNodeParams* pNodeParams);
-  // CHECK: result = hipGraphHostNodeSetParams(graphNode, &host_node_params);
-  result = cuGraphHostNodeSetParams(graphNode, &host_node_params);
-
-  // CUDA: CUresult CUDAAPI cuGraphAddChildGraphNode(CUgraphNode *phGraphNode, CUgraph hGraph, const CUgraphNode *dependencies, size_t numDependencies, CUgraph childGraph);
-  // HIP: hipError_t hipGraphAddChildGraphNode(hipGraphNode_t* pGraphNode, hipGraph_t graph, const hipGraphNode_t* pDependencies, size_t numDependencies, hipGraph_t childGraph);
-  // CHECK: result = hipGraphAddChildGraphNode(&graphNode, graph, &graphNode2, bytes, graph2);
-  result = cuGraphAddChildGraphNode(&graphNode, graph, &graphNode2, bytes, graph2);
-
-  // CUDA: CUresult CUDAAPI cuGraphChildGraphNodeGetGraph(CUgraphNode hNode, CUgraph *phGraph);
-  // HIP: hipError_t hipGraphChildGraphNodeGetGraph(hipGraphNode_t node, hipGraph_t* pGraph);
-  // CHECK: result = hipGraphChildGraphNodeGetGraph(graphNode, &graph);
-  result = cuGraphChildGraphNodeGetGraph(graphNode, &graph);
-
-  // CUDA: CUresult CUDAAPI cuGraphClone(CUgraph *phGraphClone, CUgraph originalGraph);
-  // HIP: hipError_t hipGraphClone(hipGraph_t* pGraphClone, hipGraph_t originalGraph);
-  // CHECK: result = hipGraphClone(&graph, graph2);
-  result = cuGraphClone(&graph, graph2);
-#endif
-
-#if CUDA_VERSION > 10000
-  // CUDA: CUresult CUDAAPI cuStreamGetCaptureInfo(CUstream hStream, CUstreamCaptureStatus *captureStatus_out, cuuint64_t *id_out);
-  // HIP: hipError_t hipStreamGetCaptureInfo(hipStream_t stream, hipStreamCaptureStatus* pCaptureStatus, unsigned long long* pId);
-  // CHECK: result = hipStreamGetCaptureInfo(stream, &streamCaptureStatus, &ull);
-  result = cuStreamGetCaptureInfo(stream, &streamCaptureStatus, &ull);
-
-  // CUDA: CUresult CUDAAPI cuGraphExecKernelNodeSetParams(CUgraphExec hGraphExec, CUgraphNode hNode, const CUDA_KERNEL_NODE_PARAMS *nodeParams);
-  // HIP: hipError_t hipGraphExecKernelNodeSetParams(hipGraphExec_t hGraphExec, hipGraphNode_t node, const hipKernelNodeParams* pNodeParams);
-  // CHECK: result = hipGraphExecKernelNodeSetParams(graphExec, graphNode, &KERNEL_NODE_PARAMS);
-  result = cuGraphExecKernelNodeSetParams(graphExec, graphNode, &KERNEL_NODE_PARAMS);
-#endif
-
-#if CUDA_VERSION > 10010
-  // CUDA: CUresult CUDAAPI cuGraphExecUpdate(CUgraphExec hGraphExec, CUgraph hGraph, CUgraphNode *hErrorNode_out, CUgraphExecUpdateResult *updateResult_out);
-  // HIP: hipError_t hipGraphExecUpdate(hipGraphExec_t hGraphExec, hipGraph_t hGraph, hipGraphNode_t* hErrorNode_out, hipGraphExecUpdateResult* updateResult_out);
-  // CHECK: result = hipGraphExecUpdate(graphExec, graph, &graphNode, &graphExecUpdateResult);
-  result = cuGraphExecUpdate(graphExec, graph, &graphNode, &graphExecUpdateResult);
-
-  // CUDA: CUresult CUDAAPI cuGraphExecHostNodeSetParams(CUgraphExec hGraphExec, CUgraphNode hNode, const CUDA_HOST_NODE_PARAMS *nodeParams);
-  // HIP: hipError_t hipError_t hipGraphExecHostNodeSetParams(hipGraphExec_t hGraphExec, hipGraphNode_t node, const hipHostNodeParams* pNodeParams);
-  // CHECK: result = hipGraphExecHostNodeSetParams(graphExec, graphNode, &host_node_params);
-  result = cuGraphExecHostNodeSetParams(graphExec, graphNode, &host_node_params);
-#endif
-
-#if CUDA_VERSION > 11000
-  // CUDA: CUresult CUDAAPI cuGraphExecChildGraphNodeSetParams(CUgraphExec hGraphExec, CUgraphNode hNode, CUgraph childGraph);
-  // HIP: hipError_t hipGraphExecChildGraphNodeSetParams(hipGraphExec_t hGraphExec, hipGraphNode_t node, hipGraph_t childGraph);
-  // CHECK: result = hipGraphExecChildGraphNodeSetParams(graphExec, graphNode, graph);
-  result = cuGraphExecChildGraphNodeSetParams(graphExec, graphNode, graph);
-
-  // CUDA: CUresult CUDAAPI cuGraphAddEventRecordNode(CUgraphNode *phGraphNode, CUgraph hGraph, const CUgraphNode *dependencies, size_t numDependencies, CUevent event);
-  // HIP: hipError_t hipGraphAddEventRecordNode(hipGraphNode_t* pGraphNode, hipGraph_t graph, const hipGraphNode_t* pDependencies, size_t numDependencies, hipEvent_t event);
-  // CHECK: result = hipGraphAddEventRecordNode(&graphNode, graph, &graphNode2, bytes, event_);
-  result = cuGraphAddEventRecordNode(&graphNode, graph, &graphNode2, bytes, event_);
-
-  // CUDA: CUresult CUDAAPI cuGraphEventRecordNodeGetEvent(CUgraphNode hNode, CUevent *event_out);
-  // HIP: hipError_t hipGraphEventRecordNodeGetEvent(hipGraphNode_t node, hipEvent_t* event_out);
-  // CHECK: result = hipGraphEventRecordNodeGetEvent(graphNode, &event_);
-  result = cuGraphEventRecordNodeGetEvent(graphNode, &event_);
-
-  // CUDA: CUresult CUDAAPI cuGraphEventRecordNodeSetEvent(CUgraphNode hNode, CUevent event);
-  // HIP: hipError_t hipGraphEventRecordNodeSetEvent(hipGraphNode_t node, hipEvent_t event);
-  // CHECK: result = hipGraphEventRecordNodeSetEvent(graphNode, event_);
-  result = cuGraphEventRecordNodeSetEvent(graphNode, event_);
-
-  // CUDA: CUresult CUDAAPI cuGraphExecEventRecordNodeSetEvent(CUgraphExec hGraphExec, CUgraphNode hNode, CUevent event);
-  // HIP: hipError_t hipGraphExecEventRecordNodeSetEvent(hipGraphExec_t hGraphExec, hipGraphNode_t hNode, hipEvent_t event);
-  // CHECK: result = hipGraphExecEventRecordNodeSetEvent(graphExec, graphNode, event_);
-  result = cuGraphExecEventRecordNodeSetEvent(graphExec, graphNode, event_);
-
-  // CUDA: CUresult CUDAAPI cuGraphAddEventWaitNode(CUgraphNode *phGraphNode, CUgraph hGraph, const CUgraphNode *dependencies, size_t numDependencies, CUevent event);
-  // HIP: hipError_t hipGraphAddEventWaitNode(hipGraphNode_t* pGraphNode, hipGraph_t graph, const hipGraphNode_t* pDependencies, size_t numDependencies, hipEvent_t event);
-  // CHECK: result = hipGraphAddEventWaitNode(&graphNode, graph, &graphNode2, bytes, event_);
-  result = cuGraphAddEventWaitNode(&graphNode, graph, &graphNode2, bytes, event_);
-
-  // CUDA: CUresult CUDAAPI cuGraphEventWaitNodeGetEvent(CUgraphNode hNode, CUevent *event_out);
-  // HIP: hipError_t hipGraphEventWaitNodeGetEvent(hipGraphNode_t node, hipEvent_t* event_out);
-  // CHECK: result = hipGraphEventWaitNodeGetEvent(graphNode, &event_);
-  result = cuGraphEventWaitNodeGetEvent(graphNode, &event_);
-
-  // CUDA: CUresult CUDAAPI cuGraphEventWaitNodeSetEvent(CUgraphNode hNode, CUevent event);
-  // HIP: hipError_t hipGraphEventWaitNodeSetEvent(hipGraphNode_t node, hipEvent_t event);
-  // CHECK: result = hipGraphEventWaitNodeSetEvent(graphNode, event_);
-  result = cuGraphEventWaitNodeSetEvent(graphNode, event_);
-
-  // CUDA: CUresult CUDAAPI cuGraphExecEventWaitNodeSetEvent(CUgraphExec hGraphExec, CUgraphNode hNode, CUevent event);
-  // HIP: hipError_t hipGraphExecEventWaitNodeSetEvent(hipGraphExec_t hGraphExec, hipGraphNode_t hNode, hipEvent_t event);
-  // CHECK: result = hipGraphExecEventWaitNodeSetEvent(graphExec, graphNode, event_);
-  result = cuGraphExecEventWaitNodeSetEvent(graphExec, graphNode, event_);
-#endif
-
-#if CUDA_VERSION > 11020
-  // CUDA: CUresult CUDAAPI cuStreamGetCaptureInfo_v2(CUstream hStream, CUstreamCaptureStatus *captureStatus_out, cuuint64_t *id_out, CUgraph *graph_out, const CUgraphNode **dependencies_out, size_t *numDependencies_out);
-  // HIP: hipError_t hipStreamGetCaptureInfo_v2(hipStream_t stream, hipStreamCaptureStatus* captureStatus_out, unsigned long long* id_out __dparm(0), hipGraph_t* graph_out __dparm(0), const hipGraphNode_t** dependencies_out __dparm(0), size_t* numDependencies_out __dparm(0));
-  // CHECK: result = hipStreamGetCaptureInfo_v2(stream, &streamCaptureStatus, &ull, &graph, &pGraphNode, &bytes);
-  result = cuStreamGetCaptureInfo_v2(stream, &streamCaptureStatus, &ull, &graph, &pGraphNode, &bytes);
-
-  // CUDA: CUresult CUDAAPI cuStreamUpdateCaptureDependencies(CUstream hStream, CUgraphNode *dependencies, size_t numDependencies, unsigned int flags);
-  // HIP: hipError_t hipStreamUpdateCaptureDependencies(hipStream_t stream, hipGraphNode_t* dependencies, size_t numDependencies, unsigned int flags __dparm(0));
-  // CHECK: result = hipStreamUpdateCaptureDependencies(stream, &graphNode, bytes, flags);
-  result = cuStreamUpdateCaptureDependencies(stream, &graphNode, bytes, flags);
-#endif
-
-#if CUDA_VERSION > 11030
-  // CUDA: CUresult CUDAAPI cuGraphInstantiateWithFlags(CUgraphExec *phGraphExec, CUgraph hGraph, unsigned long long flags);
-  // HIP: hipError_t hipGraphInstantiateWithFlags(hipGraphExec_t* pGraphExec, hipGraph_t graph, unsigned long long flags);
-  // CHECK: result = hipGraphInstantiateWithFlags(&graphExec, graph, ull);
-  result = cuGraphInstantiateWithFlags(&graphExec, graph, ull);
-#endif
 
   // CUDA: CUresult CUDAAPI cuOccupancyMaxActiveBlocksPerMultiprocessor(int *numBlocks, CUfunction func, int blockSize, size_t dynamicSMemSize);
   // HIP: hipError_t hipModuleOccupancyMaxActiveBlocksPerMultiprocessor(int* numBlocks, hipFunction_t f, int blockSize, size_t dynSharedMemPerBlk);
@@ -1152,225 +1405,6 @@ int main() {
   // HIP: hipError_t hipGraphicsSubResourceGetMappedArray(hipArray_t* array, hipGraphicsResource_t resource, unsigned int arrayIndex, unsigned int mipLevel);
   // CHECK: result = hipGraphicsSubResourceGetMappedArray(&array_, graphicsResource, flags, flags_2);
   result = cuGraphicsSubResourceGetMappedArray(&array_, graphicsResource, flags, flags_2);
-
-#if CUDA_VERSION >= 9020
-  // CUDA: CUresult CUDAAPI cuDeviceGetUuid(CUuuid *uuid, CUdevice dev);
-  // HIP: hipError_t hipDeviceGetUuid(hipUUID* uuid, hipDevice_t device);
-  // CHECK: result = hipDeviceGetUuid(&uuid, device);
-  result = cuDeviceGetUuid(&uuid, device);
-#endif
-
-#if CUDA_VERSION >= 10000
-  // CHECK: hipHostFn_t hostFn;
-  CUhostFn hostFn;
-
-  // CUDA: CUresult CUDAAPI cuLaunchHostFunc(CUstream hStream, CUhostFn fn, void *userData);
-  // HIP: hipError_t hipLaunchHostFunc(hipStream_t stream, hipHostFn_t fn, void* userData);
-  // CHECK: result = hipLaunchHostFunc(stream, hostFn, image);
-  result = cuLaunchHostFunc(stream, hostFn, image);
-#endif
-
-#if CUDA_VERSION >= 10010
-  // CUDA: CUresult CUDAAPI cuThreadExchangeStreamCaptureMode(CUstreamCaptureMode *mode);
-  // HIP: hipError_t hipThreadExchangeStreamCaptureMode(hipStreamCaptureMode* mode);
-  // CHECK: result = hipThreadExchangeStreamCaptureMode(&streamCaptureMode);
-  result = cuThreadExchangeStreamCaptureMode(&streamCaptureMode);
-#endif
-
-#if CUDA_VERSION >= 10020
-
-  // CHECK: hipMemAllocationProp memAllocationProp;
-  CUmemAllocationProp memAllocationProp;
-  // CHECK: hipMemGenericAllocationHandle_t memGenericAllocationHandle_t;
-  CUmemGenericAllocationHandle memGenericAllocationHandle_t;
-  // CHECK: hipMemAllocationGranularity_flags memAllocationGranularity_flags;
-  CUmemAllocationGranularity_flags memAllocationGranularity_flags;
-  // CHECK: hipMemAccessDesc memAccessDesc;
-  CUmemAccessDesc memAccessDesc;
-
-  // CUDA: CUresult CUDAAPI cuMemAddressFree(CUdeviceptr ptr, size_t size);
-  // HIP: hipError_t hipMemAddressFree(void* devPtr, size_t size);
-  // CHECK: result = hipMemAddressFree(deviceptr, bytes);
-  result = cuMemAddressFree(deviceptr, bytes);
-
-  // CUDA: CUresult CUDAAPI cuMemAddressReserve(CUdeviceptr *ptr, size_t size, size_t alignment, CUdeviceptr addr, unsigned long long flags);
-  // HIP: hipError_t hipMemAddressReserve(void** ptr, size_t size, size_t alignment, void* addr, unsigned long long flags);
-  // CHECK: result = hipMemAddressReserve(&deviceptr, bytes, bytes_2, deviceptr_2, ull);
-  result = cuMemAddressReserve(&deviceptr, bytes, bytes_2, deviceptr_2, ull);
-
-  // CUDA: CUresult CUDAAPI cuMemCreate(CUmemGenericAllocationHandle *handle, size_t size, const CUmemAllocationProp *prop, unsigned long long flags);
-  // HIP: hipError_t hipMemCreate(hipMemGenericAllocationHandle_t* handle, size_t size, const hipMemAllocationProp* prop, unsigned long long flags);
-  // CHECK: result = hipMemCreate(&memGenericAllocationHandle_t, bytes, &memAllocationProp, ull);
-  result = cuMemCreate(&memGenericAllocationHandle_t, bytes, &memAllocationProp, ull);
-
-  // CUDA: CUresult CUDAAPI cuMemExportToShareableHandle(void *shareableHandle, CUmemGenericAllocationHandle handle, CUmemAllocationHandleType handleType, unsigned long long flags);
-  // HIP: hipError_t hipMemExportToShareableHandle(void* shareableHandle, hipMemGenericAllocationHandle_t handle, hipMemAllocationHandleType handleType, unsigned long long flags);
-  // CHECK: result = hipMemExportToShareableHandle(image, memGenericAllocationHandle_t, memAllocationHandleType, ull);
-  result = cuMemExportToShareableHandle(image, memGenericAllocationHandle_t, memAllocationHandleType, ull);
-
-  // CUDA: CUresult CUDAAPI cuMemGetAccess(unsigned long long *flags, const CUmemLocation *location, CUdeviceptr ptr);
-  // HIP: hipError_t hipMemGetAccess(unsigned long long* flags, const hipMemLocation* location, void* ptr);
-  // CHECK: result = hipMemGetAccess(&ull_2, &memLocation, deviceptr);
-  result = cuMemGetAccess(&ull_2, &memLocation, deviceptr);
-
-  // CUDA: CUresult CUDAAPI cuMemGetAllocationGranularity(size_t *granularity, const CUmemAllocationProp *prop, CUmemAllocationGranularity_flags option);
-  // HIP: hipError_t hipMemGetAllocationGranularity(size_t* granularity, const hipMemAllocationProp* prop, hipMemAllocationGranularity_flags option);
-  // CHECK: result = hipMemGetAllocationGranularity(&bytes, &memAllocationProp, memAllocationGranularity_flags);
-  result = cuMemGetAllocationGranularity(&bytes, &memAllocationProp, memAllocationGranularity_flags);
-
-  // CUDA: CUresult CUDAAPI cuMemGetAllocationPropertiesFromHandle(CUmemAllocationProp *prop, CUmemGenericAllocationHandle handle);
-  // HIP: hipError_t hipMemGetAllocationPropertiesFromHandle(hipMemAllocationProp* prop, hipMemGenericAllocationHandle_t handle);
-  // CHECK: result = hipMemGetAllocationPropertiesFromHandle(&memAllocationProp, memGenericAllocationHandle_t);
-  result = cuMemGetAllocationPropertiesFromHandle(&memAllocationProp, memGenericAllocationHandle_t);
-
-  // CUDA: CUresult CUDAAPI cuMemImportFromShareableHandle(CUmemGenericAllocationHandle *handle, void *osHandle, CUmemAllocationHandleType shHandleType);
-  // HIP: hipError_t hipMemImportFromShareableHandle(hipMemGenericAllocationHandle_t* handle, void* osHandle, hipMemAllocationHandleType shHandleType);
-  // CHECK: result = hipMemImportFromShareableHandle(&memGenericAllocationHandle_t, image, memAllocationHandleType);
-  result = cuMemImportFromShareableHandle(&memGenericAllocationHandle_t, image, memAllocationHandleType);
-
-  // CUDA: CUresult CUDAAPI cuMemMap(CUdeviceptr ptr, size_t size, size_t offset, CUmemGenericAllocationHandle handle, unsigned long long flags);
-  // HIP: hipError_t hipMemMap(void* ptr, size_t size, size_t offset, hipMemGenericAllocationHandle_t handle, unsigned long long flags);
-  // CHECK: result = hipMemMap(deviceptr, bytes, bytes_2, memGenericAllocationHandle_t, ull);
-  result = cuMemMap(deviceptr, bytes, bytes_2, memGenericAllocationHandle_t, ull);
-
-  // CUDA: CUresult CUDAAPI cuMemRelease(CUmemGenericAllocationHandle handle);
-  // HIP: hipError_t hipMemRelease(hipMemGenericAllocationHandle_t handle);
-  // CHECK: result = hipMemRelease(memGenericAllocationHandle_t);
-  result = cuMemRelease(memGenericAllocationHandle_t);
-
-  // CUDA: CUresult CUDAAPI cuMemSetAccess(CUdeviceptr ptr, size_t size, const CUmemAccessDesc *desc, size_t count);
-  // HIP: hipError_t hipMemSetAccess(void* ptr, size_t size, const hipMemAccessDesc* desc, size_t count);
-  // CHECK: result = hipMemSetAccess(deviceptr, bytes, &memAccessDesc, bytes_2);
-  result = cuMemSetAccess(deviceptr, bytes, &memAccessDesc, bytes_2);
-
-  // CUDA: CUresult CUDAAPI cuMemUnmap(CUdeviceptr ptr, size_t size);
-  // HIP: hipError_t hipMemUnmap(void* ptr, size_t size);
-  // CHECK: result = hipMemUnmap(deviceptr, bytes);
-  result = cuMemUnmap(deviceptr, bytes);
-#endif
-
-#if CUDA_VERSION >= 11000
-  // CHECK: hipKernelNodeAttrID kernelNodeAttrID;
-  CUkernelNodeAttrID kernelNodeAttrID;
-  // CHECK: hipKernelNodeAttrValue kernelNodeAttrValue;
-  CUkernelNodeAttrValue kernelNodeAttrValue;
-
-  // CUDA: CUresult CUDAAPI cuGraphKernelNodeSetAttribute(CUgraphNode hNode, CUkernelNodeAttrID attr, const CUkernelNodeAttrValue* value);
-  // HIP: hipError_t hipGraphKernelNodeSetAttribute(hipGraphNode_t hNode, hipKernelNodeAttrID attr, const hipKernelNodeAttrValue* value);
-  // CHECK: result = hipGraphKernelNodeSetAttribute(graphNode, kernelNodeAttrID, &kernelNodeAttrValue);
-  result = cuGraphKernelNodeSetAttribute(graphNode, kernelNodeAttrID, &kernelNodeAttrValue);
-
-  // CUDA: CUresult CUDAAPI cuGraphKernelNodeGetAttribute(CUgraphNode hNode, CUkernelNodeAttrID attr, CUkernelNodeAttrValue* value_out);
-  // HIP: hipError_t hipGraphKernelNodeGetAttribute(hipGraphNode_t hNode, hipKernelNodeAttrID attr, hipKernelNodeAttrValue* value);
-  // CHECK: result = hipGraphKernelNodeGetAttribute(graphNode, kernelNodeAttrID, &kernelNodeAttrValue);
-  result = cuGraphKernelNodeGetAttribute(graphNode, kernelNodeAttrID, &kernelNodeAttrValue);
-
-  // CUDA: CUresult CUDAAPI cuMemRetainAllocationHandle(CUmemGenericAllocationHandle *handle, void *addr);
-  // HIP: hipError_t hipMemRetainAllocationHandle(hipMemGenericAllocationHandle_t* handle, void* addr);
-  // CHECK: result = hipMemRetainAllocationHandle(&memGenericAllocationHandle_t, image);
-  result = cuMemRetainAllocationHandle(&memGenericAllocationHandle_t, image);
-#endif
-
-#if CUDA_VERSION >= 11010
-  // CHECK: hipArrayMapInfo arrayMapInfo;
-  CUarrayMapInfo arrayMapInfo;
-
-  // CUDA: CUresult CUDAAPI cuMemMapArrayAsync(CUarrayMapInfo *mapInfoList, unsigned int count, CUstream hStream);
-  // HIP: hipError_t hipMemMapArrayAsync(hipArrayMapInfo* mapInfoList, unsigned int count, hipStream_t stream);
-  // CHECK: result = hipMemMapArrayAsync(&arrayMapInfo, flags, stream);
-  result = cuMemMapArrayAsync(&arrayMapInfo, flags, stream);
-#endif
-
-#if CUDA_VERSION >= 11020
-  // CUDA: CUresult CUDAAPI cuDeviceGetDefaultMemPool(CUmemoryPool *pool_out, CUdevice dev);
-  // HIP: hipError_t hipDeviceGetDefaultMemPool(hipMemPool_t* mem_pool, int device);
-  // CHECK: result = hipDeviceGetDefaultMemPool(&memPool_t, device);
-  result = cuDeviceGetDefaultMemPool(&memPool_t, device);
-
-  // CUDA: CUresult CUDAAPI cuDeviceSetMemPool(CUdevice dev, CUmemoryPool pool);
-  // HIP: hipError_t hipDeviceSetMemPool(int device, hipMemPool_t mem_pool);
-  // CHECK: result = hipDeviceSetMemPool(device, memPool_t);
-  result = cuDeviceSetMemPool(device, memPool_t);
-
-  // CUDA: CUresult CUDAAPI cuDeviceGetMemPool(CUmemoryPool *pool, CUdevice dev);
-  // HIP: hipError_t hipDeviceGetMemPool(hipMemPool_t* mem_pool, int device);
-  // CHECK: result = hipDeviceGetMemPool(&memPool_t, device);
-  result = cuDeviceGetMemPool(&memPool_t, device);
-
-  // CUDA: CUresult CUDAAPI cuMemAllocAsync(CUdeviceptr *dptr, size_t bytesize, CUstream hStream);
-  // HIP: hipError_t hipMallocAsync(void** dev_ptr, size_t size, hipStream_t stream);
-  // CHECK: result = hipMallocAsync(&deviceptr, bytes, stream);
-  result = cuMemAllocAsync(&deviceptr, bytes, stream);
-
-  // CUDA: CUresult CUDAAPI cuMemFreeAsync(CUdeviceptr dptr, CUstream hStream);
-  // HIP: hipError_t hipFreeAsync(void* dev_ptr, hipStream_t stream);
-  // CHECK: result = hipFreeAsync(deviceptr, stream);
-  result = cuMemFreeAsync(deviceptr, stream);
-
-  // CUDA: CUresult CUDAAPI cuMemPoolTrimTo(CUmemoryPool pool, size_t minBytesToKeep);
-  // HIP: hipError_t hipMemPoolTrimTo(hipMemPool_t mem_pool, size_t min_bytes_to_hold);
-  // CHECK: result = hipMemPoolTrimTo(memPool_t, bytes);
-  result = cuMemPoolTrimTo(memPool_t, bytes);
-
-  // CHECK: hipMemPoolAttr memPoolAttr;
-  CUmemPool_attribute memPoolAttr;
-
-  // CUDA: CUresult CUDAAPI cuMemPoolSetAttribute(CUmemoryPool pool, CUmemPool_attribute attr, void *value);
-  // HIP: hipError_t hipMemPoolSetAttribute(hipMemPool_t mem_pool, hipMemPoolAttr attr, void* value);
-  // CHECK: result = hipMemPoolSetAttribute(memPool_t, memPoolAttr, image);
-  result = cuMemPoolSetAttribute(memPool_t, memPoolAttr, image);
-
-  // CUDA: CUresult CUDAAPI cuMemPoolGetAttribute(CUmemoryPool pool, CUmemPool_attribute attr, void *value);
-  // HIP: hipError_t hipMemPoolGetAttribute(hipMemPool_t mem_pool, hipMemPoolAttr attr, void* value);
-  // CHECK: result = hipMemPoolGetAttribute(memPool_t, memPoolAttr, image);
-  result = cuMemPoolGetAttribute(memPool_t, memPoolAttr, image);
-
-  // CUDA: CUresult CUDAAPI cuMemPoolSetAccess(CUmemoryPool pool, const CUmemAccessDesc *map, size_t count);
-  // HIP: hipError_t hipMemPoolSetAccess(hipMemPool_t mem_pool, const hipMemAccessDesc* desc_list, size_t count);
-  // CHECK: result = hipMemPoolSetAccess(memPool_t, &memAccessDesc, bytes);
-  result = cuMemPoolSetAccess(memPool_t, &memAccessDesc, bytes);
-
-  // CHECK: hipMemAccessFlags memAccessFlags;
-  CUmemAccess_flags memAccessFlags;
-
-  // CUDA: CUresult CUDAAPI cuMemPoolGetAccess(CUmemAccess_flags *flags, CUmemoryPool memPool, CUmemLocation *location);
-  // HIP: hipError_t hipMemPoolGetAccess(hipMemAccessFlags* flags, hipMemPool_t mem_pool, hipMemLocation* location);
-  // CHECK: result = hipMemPoolGetAccess(&memAccessFlags, memPool_t, &memLocation);
-  result = cuMemPoolGetAccess(&memAccessFlags, memPool_t, &memLocation);
-
-  // CUDA: CUresult CUDAAPI cuMemPoolCreate(CUmemoryPool *pool, const CUmemPoolProps *poolProps);
-  // HIP: hipError_t hipMemPoolCreate(hipMemPool_t* mem_pool, const hipMemPoolProps* pool_props);
-  // CHECK: result = hipMemPoolCreate(&memPool_t, &memPoolProps);
-  result = cuMemPoolCreate(&memPool_t, &memPoolProps);
-
-  // CUDA: CUresult CUDAAPI cuMemPoolDestroy(CUmemoryPool pool);
-  // HIP: hipError_t hipMemPoolDestroy(hipMemPool_t mem_pool);
-  // CHECK: result = hipMemPoolDestroy(memPool_t);
-  result = cuMemPoolDestroy(memPool_t);
-
-  // CUDA: CUresult CUDAAPI cuMemPoolExportToShareableHandle(void *handle_out, CUmemoryPool pool, CUmemAllocationHandleType handleType, unsigned long long flags);
-  // HIP: hipError_t hipMemPoolExportToShareableHandle(void* shared_handle, hipMemPool_t mem_pool, hipMemAllocationHandleType handle_type, unsigned int flags);
-  // CHECK: result = hipMemPoolExportToShareableHandle(image, memPool_t, memAllocationHandleType, ull);
-  result = cuMemPoolExportToShareableHandle(image, memPool_t, memAllocationHandleType, ull);
-
-  // CUDA: CUresult CUDAAPI cuMemPoolImportFromShareableHandle(CUmemoryPool* pool_out, void* handle, CUmemAllocationHandleType handleType, unsigned long long flags);
-  // HIP: hipError_t hipMemPoolImportFromShareableHandle(hipMemPool_t* mem_pool, void* shared_handle, hipMemAllocationHandleType handle_type, unsigned int flags);
-  // CHECK: result = hipMemPoolImportFromShareableHandle(&memPool_t, image, memAllocationHandleType, ull);
-  result = cuMemPoolImportFromShareableHandle(&memPool_t, image, memAllocationHandleType, ull);
-
-  // CHECK: hipMemPoolPtrExportData memPoolPtrExportData;
-  CUmemPoolPtrExportData memPoolPtrExportData;
-
-  // CUDA: CUresult CUDAAPI cuMemPoolExportPointer(CUmemPoolPtrExportData *shareData_out, CUdeviceptr ptr);
-  // HIP: hipError_t hipMemPoolExportPointer(hipMemPoolPtrExportData* export_data, void* dev_ptr);
-  // CHECK: result = hipMemPoolExportPointer(&memPoolPtrExportData, deviceptr);
-  result = cuMemPoolExportPointer(&memPoolPtrExportData, deviceptr);
-
-  // CUDA: CUresult CUDAAPI cuMemPoolImportPointer(CUdeviceptr *ptr_out, CUmemoryPool pool, CUmemPoolPtrExportData *shareData);
-  // HIP: hipError_t hipMemPoolImportPointer(void** dev_ptr, hipMemPool_t mem_pool, hipMemPoolPtrExportData* export_data);
-  // CHECK: result = hipMemPoolImportPointer(&deviceptr, memPool_t, &memPoolPtrExportData);
-  result = cuMemPoolImportPointer(&deviceptr, memPool_t, &memPoolPtrExportData);
-#endif
 
   // CUDA: CUresult CUDAAPI cuOccupancyMaxActiveBlocksPerMultiprocessorWithFlags(int *numBlocks, CUfunction func, int blockSize, size_t dynamicSMemSize, unsigned int flags);
   // HIP: hipError_t hipModuleOccupancyMaxActiveBlocksPerMultiprocessorWithFlags(int* numBlocks, hipFunction_t f, int blockSize, size_t dynSharedMemPerBlk, unsigned int flags);
@@ -1461,13 +1495,6 @@ int main() {
   // HIP: hipError_t hipTexRefSetArray(textureReference* tex, hipArray_const_t array, unsigned int flags);
   // CHECK: result = hipTexRefSetArray(texref, array_, flags);
   result = cuTexRefSetArray(texref, array_, flags);
-
-#if CUDA_VERSION >= 8000
-  // CUDA: __CUDA_DEPRECATED CUresult CUDAAPI cuTexRefSetBorderColor(CUtexref hTexRef, float *pBorderColor);
-  // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipTexRefSetBorderColor(textureReference* texRef, float* pBorderColor);
-  // CHECK: result = hipTexRefSetBorderColor(texref, &ms);
-  result = cuTexRefSetBorderColor(texref, &ms);
-#endif
 
   // CUDA: __CUDA_DEPRECATED CUresult CUDAAPI cuTexRefSetFilterMode(CUtexref hTexRef, CUfilter_mode fm);
   // HIP: hipError_t hipError_t hipTexRefSetFilterMode(textureReference* texRef, enum hipTextureFilterMode fm);
@@ -1561,16 +1588,6 @@ int main() {
   // CHECK: result = hipDeviceCanAccessPeer(value, device, dim);
   result = cuDeviceCanAccessPeer(value, device, dim);
 
-#if CUDA_VERSION >= 8000
-  // CHECK: hipDeviceP2PAttr deviceP2PAttribute;
-  CUdevice_P2PAttribute deviceP2PAttribute;
-
-  // CUDA: CUresult CUDAAPI cuDeviceGetP2PAttribute(int* value, CUdevice_P2PAttribute attrib, CUdevice srcDevice, CUdevice dstDevice);
-  // HIP: hipError_t hipDeviceGetP2PAttribute(int* value, hipDeviceP2PAttr attr, int srcDevice, int dstDevice);
-  // CHECK: result = hipDeviceGetP2PAttribute(value, deviceP2PAttribute, iBlockSize, iBlockSize_2);
-  result = cuDeviceGetP2PAttribute(value, deviceP2PAttribute, iBlockSize, iBlockSize_2);
-#endif
-
   // CUDA: CUresult CUDAAPI cuGraphicsMapResources(unsigned int count, CUgraphicsResource *resources, CUstream hStream);
   // HIP: hipError_t hipGraphicsMapResources(int count, hipGraphicsResource_t* resources, hipStream_t stream __dparm(0));
   // CHECK: result = hipGraphicsMapResources(iBlockSize, &graphicsResource, stream);
@@ -1625,6 +1642,25 @@ int main() {
   // HIP: hipError_t hipGraphicsGLRegisterImage(hipGraphicsResource** resource, GLuint image, GLenum target, unsigned int flags);
   // CHECK: result = hipGraphicsGLRegisterImage(&graphicsResource, gl_uint, gl_enum, flags);
   result = cuGraphicsGLRegisterImage(&graphicsResource, gl_uint, gl_enum, flags);
+
+  // CUDA: CUresult CUDAAPI cuCtxSetLimit(CUlimit limit, size_t value);
+  // HIP:  hipError_t hipDeviceSetLimit(enum hipLimit_t limit, size_t value);
+  // CHECK: result = hipDeviceSetLimit(limit, bytes);
+  result = cuCtxSetLimit(limit, bytes);
+
+  // CHECK: hipError_t result_2;
+  CUresult result_2;
+  const char* ret = NULL;
+
+  // CUDA: CUresult CUDAAPI cuGetErrorName(CUresult error, const char **pStr);
+  // HIP:  hipError_t hipDrvGetErrorName(hipError_t hipError, const char** errorString);
+  // CHECK: result = hipDrvGetErrorName(result_2, &ret);
+  result = cuGetErrorName(result_2, &ret);
+
+  // CUDA: CUresult CUDAAPI cuGetErrorString(CUresult error, const char **pStr);
+  // HIP:  hipError_t hipDrvGetErrorString(hipError_t hipError, const char** errorString);
+  // CHECK: result = hipDrvGetErrorString(result_2, &ret);
+  result = cuGetErrorString(result_2, &ret);
 
   return 0;
 }
