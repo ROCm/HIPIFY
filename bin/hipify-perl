@@ -757,10 +757,19 @@ my %experimental_funcs = (
     "CUuserObjectRetain_flags_enum" => "5.3.0",
     "CUuserObjectRetain_flags" => "5.3.0",
     "CUuserObject" => "5.3.0",
+    "CUjitInputType_enum" => "5.3.0",
+    "CUjitInputType" => "5.3.0",
     "CUgraphMem_attribute_enum" => "5.3.0",
     "CUgraphMem_attribute" => "5.3.0",
     "CU_USER_OBJECT_NO_DESTRUCTOR_SYNC" => "5.3.0",
     "CU_LIMIT_STACK_SIZE" => "5.3.0",
+    "CU_JIT_NUM_INPUT_TYPES" => "5.3.0",
+    "CU_JIT_INPUT_PTX" => "5.3.0",
+    "CU_JIT_INPUT_OBJECT" => "5.3.0",
+    "CU_JIT_INPUT_NVVM" => "5.3.0",
+    "CU_JIT_INPUT_LIBRARY" => "5.3.0",
+    "CU_JIT_INPUT_FATBINARY" => "5.3.0",
+    "CU_JIT_INPUT_CUBIN" => "5.3.0",
     "CU_GRAPH_USER_OBJECT_MOVE" => "5.3.0",
     "CU_GRAPH_NODE_TYPE_EXT_SEMAS_WAIT" => "5.3.0",
     "CU_GRAPH_NODE_TYPE_EXT_SEMAS_SIGNAL" => "5.3.0",
@@ -930,6 +939,8 @@ sub experimentalSubstitutions {
     subst("cudaUserObjectRetain", "hipUserObjectRetain", "graph");
     subst("CUgraphMem_attribute", "hipGraphMemAttributeType", "type");
     subst("CUgraphMem_attribute_enum", "hipGraphMemAttributeType", "type");
+    subst("CUjitInputType", "hiprtcJITInputType", "type");
+    subst("CUjitInputType_enum", "hiprtcJITInputType", "type");
     subst("CUuserObject", "hipUserObject_t", "type");
     subst("CUuserObjectRetain_flags", "hipUserObjectRetainFlags", "type");
     subst("CUuserObjectRetain_flags_enum", "hipUserObjectRetainFlags", "type");
@@ -948,6 +959,13 @@ sub experimentalSubstitutions {
     subst("CU_GRAPH_NODE_TYPE_EXT_SEMAS_SIGNAL", "hipGraphNodeTypeExtSemaphoreSignal", "numeric_literal");
     subst("CU_GRAPH_NODE_TYPE_EXT_SEMAS_WAIT", "hipGraphNodeTypeExtSemaphoreWait", "numeric_literal");
     subst("CU_GRAPH_USER_OBJECT_MOVE", "hipGraphUserObjectMove", "numeric_literal");
+    subst("CU_JIT_INPUT_CUBIN", "HIPRTC_JIT_INPUT_CUBIN", "numeric_literal");
+    subst("CU_JIT_INPUT_FATBINARY", "HIPRTC_JIT_INPUT_FATBINARY", "numeric_literal");
+    subst("CU_JIT_INPUT_LIBRARY", "HIPRTC_JIT_INPUT_LIBRARY", "numeric_literal");
+    subst("CU_JIT_INPUT_NVVM", "HIPRTC_JIT_INPUT_NVVM", "numeric_literal");
+    subst("CU_JIT_INPUT_OBJECT", "HIPRTC_JIT_INPUT_OBJECT", "numeric_literal");
+    subst("CU_JIT_INPUT_PTX", "HIPRTC_JIT_INPUT_PTX", "numeric_literal");
+    subst("CU_JIT_NUM_INPUT_TYPES", "HIPRTC_JIT_NUM_LEGACY_INPUT_TYPES", "numeric_literal");
     subst("CU_LIMIT_STACK_SIZE", "hipLimitStackSize", "numeric_literal");
     subst("CU_USER_OBJECT_NO_DESTRUCTOR_SYNC", "hipUserObjectNoDestructorSync", "numeric_literal");
     subst("cudaGraphMemAttrReservedMemCurrent", "hipGraphMemAttrReservedMemCurrent", "numeric_literal");
@@ -6616,8 +6634,6 @@ sub warnUnsupportedFunctions {
         "CUjit_fallback",
         "CUjit_cacheMode_enum",
         "CUjit_cacheMode",
-        "CUjitInputType_enum",
-        "CUjitInputType",
         "CUipcMem_flags_enum",
         "CUipcMem_flags",
         "CUgraphicsMapResourceFlags_enum",
@@ -6760,14 +6776,7 @@ sub warnUnsupportedFunctions {
         "CU_JIT_PREC_SQRT",
         "CU_JIT_PREC_DIV",
         "CU_JIT_OPTIMIZE_UNUSED_DEVICE_VARIABLES",
-        "CU_JIT_NUM_INPUT_TYPES",
         "CU_JIT_LTO",
-        "CU_JIT_INPUT_PTX",
-        "CU_JIT_INPUT_OBJECT",
-        "CU_JIT_INPUT_NVVM",
-        "CU_JIT_INPUT_LIBRARY",
-        "CU_JIT_INPUT_FATBINARY",
-        "CU_JIT_INPUT_CUBIN",
         "CU_JIT_GLOBAL_SYMBOL_NAMES",
         "CU_JIT_GLOBAL_SYMBOL_COUNT",
         "CU_JIT_GLOBAL_SYMBOL_ADDRESSES",
