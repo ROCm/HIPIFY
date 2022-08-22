@@ -1,4 +1,4 @@
-# CUDA_RTC_API_supported_by_HIP API supported by HIP
+# CUDA RTC API supported by HIP
 
 ## **1. RTC Data types**
 

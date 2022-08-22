@@ -7,7 +7,7 @@
 int main() {
   printf("07. CUDA Runtime API Typedefs synthetic test\n");
 
-#if CUDA_VERSION > 9020
+#if CUDA_VERSION >= 10000
   // CHECK: hipHostFn_t HostFn_t;
   cudaHostFn_t HostFn_t;
 #endif

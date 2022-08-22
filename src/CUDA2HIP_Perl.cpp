@@ -345,7 +345,7 @@ namespace perl {
   void generateExperimentalSubstitutions(unique_ptr<ostream> &streamPtr) {
     *streamPtr.get() << endl << sub << sExperimentalSubstitutions << " {" << endl;
     for (int i = 0; i < NUM_CONV_TYPES; ++i) {
-      if (i == CONV_INCLUDE_CUDA_MAIN_H || i == CONV_INCLUDE) {
+      if (i == CONV_INCLUDE_CUDA_MAIN_H || i == CONV_INCLUDE_CUDA_MAIN_V2_H || i == CONV_INCLUDE) {
         for (auto &ma : CUDA_INCLUDE_MAP) {
           if (!Statistics::isHipExperimental(ma.second)) continue;
           if (i == ma.second.type) {
@@ -373,7 +373,7 @@ namespace perl {
     bool bTranslateToRoc = TranslateToRoc;
     TranslateToRoc = true;
     for (int i = 0; i < NUM_CONV_TYPES; ++i) {
-      if (i == CONV_INCLUDE_CUDA_MAIN_H) {
+      if (i == CONV_INCLUDE_CUDA_MAIN_H || i == CONV_INCLUDE_CUDA_MAIN_V2_H) {
         for (auto &ma : CUDA_INCLUDE_MAP) {
           if (i == ma.second.type) {
             string sCUDA = ma.first.str();
@@ -400,7 +400,7 @@ namespace perl {
   void generateSimpleSubstitutions(unique_ptr<ostream> &streamPtr) {
     *streamPtr.get() << endl << sub << sSimpleSubstitutions << " {" << endl;
     for (int i = 0; i < NUM_CONV_TYPES; ++i) {
-      if (i == CONV_INCLUDE_CUDA_MAIN_H || i == CONV_INCLUDE) {
+      if (i == CONV_INCLUDE_CUDA_MAIN_H || i == CONV_INCLUDE_CUDA_MAIN_V2_H || i == CONV_INCLUDE) {
         for (auto &ma : CUDA_INCLUDE_MAP) {
           if (Statistics::isUnsupported(ma.second) || Statistics::isHipExperimental(ma.second)) continue;
           if (i == ma.second.type) {

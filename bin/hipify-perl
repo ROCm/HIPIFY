@@ -715,191 +715,60 @@ my %removed_funcs = (
 );
 
 my %experimental_funcs = (
-    "cudaUUID_t" => "5.2.0",
-    "cudaThreadExchangeStreamCaptureMode" => "5.2.0",
-    "cudaMemPool_t" => "5.2.0",
-    "cudaMemPoolTrimTo" => "5.2.0",
-    "cudaMemPoolSetAttribute" => "5.2.0",
-    "cudaMemPoolSetAccess" => "5.2.0",
-    "cudaMemPoolReuseFollowEventDependencies" => "5.2.0",
-    "cudaMemPoolReuseAllowOpportunistic" => "5.2.0",
-    "cudaMemPoolReuseAllowInternalDependencies" => "5.2.0",
-    "cudaMemPoolPtrExportData" => "5.2.0",
-    "cudaMemPoolProps" => "5.2.0",
-    "cudaMemPoolImportPointer" => "5.2.0",
-    "cudaMemPoolImportFromShareableHandle" => "5.2.0",
-    "cudaMemPoolGetAttribute" => "5.2.0",
-    "cudaMemPoolGetAccess" => "5.2.0",
-    "cudaMemPoolExportToShareableHandle" => "5.2.0",
-    "cudaMemPoolExportPointer" => "5.2.0",
-    "cudaMemPoolDestroy" => "5.2.0",
-    "cudaMemPoolCreate" => "5.2.0",
-    "cudaMemPoolAttrUsedMemHigh" => "5.2.0",
-    "cudaMemPoolAttrUsedMemCurrent" => "5.2.0",
-    "cudaMemPoolAttrReservedMemHigh" => "5.2.0",
-    "cudaMemPoolAttrReservedMemCurrent" => "5.2.0",
-    "cudaMemPoolAttrReleaseThreshold" => "5.2.0",
-    "cudaMemPoolAttr" => "5.2.0",
-    "cudaMemLocationTypeInvalid" => "5.2.0",
-    "cudaMemLocationTypeDevice" => "5.2.0",
-    "cudaMemLocationType" => "5.2.0",
-    "cudaMemLocation" => "5.2.0",
-    "cudaMemHandleTypeWin32Kmt" => "5.2.0",
-    "cudaMemHandleTypeWin32" => "5.2.0",
-    "cudaMemHandleTypePosixFileDescriptor" => "5.2.0",
-    "cudaMemHandleTypeNone" => "5.2.0",
-    "cudaMemAllocationTypePinned" => "5.2.0",
-    "cudaMemAllocationTypeMax" => "5.2.0",
-    "cudaMemAllocationTypeInvalid" => "5.2.0",
-    "cudaMemAllocationType" => "5.2.0",
-    "cudaMemAllocationHandleType" => "5.2.0",
-    "cudaMemAccessFlagsProtReadWrite" => "5.2.0",
-    "cudaMemAccessFlagsProtRead" => "5.2.0",
-    "cudaMemAccessFlagsProtNone" => "5.2.0",
-    "cudaMemAccessFlags" => "5.2.0",
-    "cudaMemAccessDesc" => "5.2.0",
-    "cudaMallocFromPoolAsync" => "5.2.0",
-    "cudaMallocAsync" => "5.2.0",
-    "cudaLaunchHostFunc" => "5.2.0",
-    "cudaKernelNodeAttributeCooperative" => "5.2.0",
-    "cudaKernelNodeAttributeAccessPolicyWindow" => "5.2.0",
-    "cudaKernelNodeAttrValue" => "5.2.0",
-    "cudaKernelNodeAttrID" => "5.2.0",
-    "cudaGraphKernelNodeSetAttribute" => "5.2.0",
-    "cudaGraphKernelNodeGetAttribute" => "5.2.0",
-    "cudaGraphInstantiateFlags" => "5.2.0",
-    "cudaGraphInstantiateFlagAutoFreeOnLaunch" => "5.2.0",
-    "cudaFreeAsync" => "5.2.0",
-    "cudaDeviceSetMemPool" => "5.2.0",
-    "cudaDeviceGetMemPool" => "5.2.0",
-    "cudaDeviceGetDefaultMemPool" => "5.2.0",
-    "cudaDevAttrMemoryPoolsSupported" => "5.2.0",
-    "cudaAccessPropertyStreaming" => "5.2.0",
-    "cudaAccessPropertyPersisting" => "5.2.0",
-    "cudaAccessPropertyNormal" => "5.2.0",
-    "cudaAccessProperty" => "5.2.0",
-    "cudaAccessPolicyWindow" => "5.2.0",
-    "cuThreadExchangeStreamCaptureMode" => "5.2.0",
-    "cuMemUnmap" => "5.2.0",
-    "cuMemSetAccess" => "5.2.0",
-    "cuMemRetainAllocationHandle" => "5.2.0",
-    "cuMemRelease" => "5.2.0",
-    "cuMemPoolTrimTo" => "5.2.0",
-    "cuMemPoolSetAttribute" => "5.2.0",
-    "cuMemPoolSetAccess" => "5.2.0",
-    "cuMemPoolImportPointer" => "5.2.0",
-    "cuMemPoolImportFromShareableHandle" => "5.2.0",
-    "cuMemPoolGetAttribute" => "5.2.0",
-    "cuMemPoolGetAccess" => "5.2.0",
-    "cuMemPoolExportToShareableHandle" => "5.2.0",
-    "cuMemPoolExportPointer" => "5.2.0",
-    "cuMemPoolDestroy" => "5.2.0",
-    "cuMemPoolCreate" => "5.2.0",
-    "cuMemMapArrayAsync" => "5.2.0",
-    "cuMemMap" => "5.2.0",
-    "cuMemImportFromShareableHandle" => "5.2.0",
-    "cuMemGetAllocationPropertiesFromHandle" => "5.2.0",
-    "cuMemGetAllocationGranularity" => "5.2.0",
-    "cuMemGetAccess" => "5.2.0",
-    "cuMemFreeAsync" => "5.2.0",
-    "cuMemExportToShareableHandle" => "5.2.0",
-    "cuMemCreate" => "5.2.0",
-    "cuMemAllocFromPoolAsync" => "5.2.0",
-    "cuMemAllocAsync" => "5.2.0",
-    "cuMemAddressReserve" => "5.2.0",
-    "cuMemAddressFree" => "5.2.0",
-    "cuLaunchHostFunc" => "5.2.0",
-    "cuGraphKernelNodeSetAttribute" => "5.2.0",
-    "cuGraphKernelNodeGetAttribute" => "5.2.0",
-    "cuDeviceSetMemPool" => "5.2.0",
-    "cuDeviceGetUuid_v2" => "5.2.0",
-    "cuDeviceGetUuid" => "5.2.0",
-    "cuDeviceGetMemPool" => "5.2.0",
-    "cuDeviceGetDefaultMemPool" => "5.2.0",
-    "CUuuid_st" => "5.2.0",
-    "CUuuid" => "5.2.0",
-    "CUmemoryPool" => "5.2.0",
-    "CUmemPool_attribute_enum" => "5.2.0",
-    "CUmemPool_attribute" => "5.2.0",
-    "CUmemPoolPtrExportData_v1" => "5.2.0",
-    "CUmemPoolPtrExportData_st" => "5.2.0",
-    "CUmemPoolPtrExportData" => "5.2.0",
-    "CUmemPoolProps_v1" => "5.2.0",
-    "CUmemPoolProps_st" => "5.2.0",
-    "CUmemPoolProps" => "5.2.0",
-    "CUmemPoolHandle_st" => "5.2.0",
-    "CUmemOperationType_enum" => "5.2.0",
-    "CUmemOperationType" => "5.2.0",
-    "CUmemLocation_v1" => "5.2.0",
-    "CUmemLocation_st" => "5.2.0",
-    "CUmemLocationType_enum" => "5.2.0",
-    "CUmemLocationType" => "5.2.0",
-    "CUmemLocation" => "5.2.0",
-    "CUmemHandleType_enum" => "5.2.0",
-    "CUmemHandleType" => "5.2.0",
-    "CUmemGenericAllocationHandle_v1" => "5.2.0",
-    "CUmemGenericAllocationHandle" => "5.2.0",
-    "CUmemAllocationType_enum" => "5.2.0",
-    "CUmemAllocationType" => "5.2.0",
-    "CUmemAllocationProp_v1" => "5.2.0",
-    "CUmemAllocationProp_st" => "5.2.0",
-    "CUmemAllocationProp" => "5.2.0",
-    "CUmemAllocationHandleType_enum" => "5.2.0",
-    "CUmemAllocationHandleType" => "5.2.0",
-    "CUmemAllocationGranularity_flags_enum" => "5.2.0",
-    "CUmemAllocationGranularity_flags" => "5.2.0",
-    "CUmemAccess_flags_enum" => "5.2.0",
-    "CUmemAccess_flags" => "5.2.0",
-    "CUmemAccessDesc_v1" => "5.2.0",
-    "CUmemAccessDesc_st" => "5.2.0",
-    "CUmemAccessDesc" => "5.2.0",
-    "CUkernelNodeAttrValue_v1" => "5.2.0",
-    "CUkernelNodeAttrValue_union" => "5.2.0",
-    "CUkernelNodeAttrValue" => "5.2.0",
-    "CUkernelNodeAttrID_enum" => "5.2.0",
-    "CUkernelNodeAttrID" => "5.2.0",
-    "CUgraphInstantiate_flags_enum" => "5.2.0",
-    "CUgraphInstantiate_flags" => "5.2.0",
-    "CUarraySparseSubresourceType_enum" => "5.2.0",
-    "CUarraySparseSubresourceType" => "5.2.0",
-    "CUaccessProperty_enum" => "5.2.0",
-    "CUaccessProperty" => "5.2.0",
-    "CUaccessPolicyWindow_st" => "5.2.0",
-    "CUaccessPolicyWindow" => "5.2.0",
-    "CU_MEM_OPERATION_TYPE_UNMAP" => "5.2.0",
-    "CU_MEM_OPERATION_TYPE_MAP" => "5.2.0",
-    "CU_MEM_LOCATION_TYPE_INVALID" => "5.2.0",
-    "CU_MEM_LOCATION_TYPE_DEVICE" => "5.2.0",
-    "CU_MEM_HANDLE_TYPE_WIN32_KMT" => "5.2.0",
-    "CU_MEM_HANDLE_TYPE_WIN32" => "5.2.0",
-    "CU_MEM_HANDLE_TYPE_POSIX_FILE_DESCRIPTOR" => "5.2.0",
-    "CU_MEM_HANDLE_TYPE_NONE" => "5.2.0",
-    "CU_MEM_HANDLE_TYPE_GENERIC" => "5.2.0",
-    "CU_MEM_ALLOC_GRANULARITY_RECOMMENDED" => "5.2.0",
-    "CU_MEM_ALLOC_GRANULARITY_MINIMUM" => "5.2.0",
-    "CU_MEM_ALLOCATION_TYPE_PINNED" => "5.2.0",
-    "CU_MEM_ALLOCATION_TYPE_MAX" => "5.2.0",
-    "CU_MEM_ALLOCATION_TYPE_INVALID" => "5.2.0",
-    "CU_MEM_ACCESS_FLAGS_PROT_READWRITE" => "5.2.0",
-    "CU_MEM_ACCESS_FLAGS_PROT_READ" => "5.2.0",
-    "CU_MEM_ACCESS_FLAGS_PROT_NONE" => "5.2.0",
-    "CU_MEMPOOL_ATTR_USED_MEM_HIGH" => "5.2.0",
-    "CU_MEMPOOL_ATTR_USED_MEM_CURRENT" => "5.2.0",
-    "CU_MEMPOOL_ATTR_REUSE_FOLLOW_EVENT_DEPENDENCIES" => "5.2.0",
-    "CU_MEMPOOL_ATTR_REUSE_ALLOW_OPPORTUNISTIC" => "5.2.0",
-    "CU_MEMPOOL_ATTR_REUSE_ALLOW_INTERNAL_DEPENDENCIES" => "5.2.0",
-    "CU_MEMPOOL_ATTR_RESERVED_MEM_HIGH" => "5.2.0",
-    "CU_MEMPOOL_ATTR_RESERVED_MEM_CURRENT" => "5.2.0",
-    "CU_MEMPOOL_ATTR_RELEASE_THRESHOLD" => "5.2.0",
-    "CU_KERNEL_NODE_ATTRIBUTE_COOPERATIVE" => "5.2.0",
-    "CU_KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW" => "5.2.0",
-    "CU_DEVICE_ATTRIBUTE_MEMORY_POOLS_SUPPORTED" => "5.2.0",
-    "CU_ARRAY_SPARSE_SUBRESOURCE_TYPE_SPARSE_LEVEL" => "5.2.0",
-    "CU_ARRAY_SPARSE_SUBRESOURCE_TYPE_MIPTAIL" => "5.2.0",
-    "CU_ACCESS_PROPERTY_STREAMING" => "5.2.0",
-    "CU_ACCESS_PROPERTY_PERSISTING" => "5.2.0",
-    "CU_ACCESS_PROPERTY_NORMAL" => "5.2.0",
-    "CUDA_GRAPH_INSTANTIATE_FLAG_AUTO_FREE_ON_LAUNCH" => "5.2.0"
+    "cudaUserObject_t" => "5.3.0",
+    "cudaUserObjectRetainFlags" => "5.3.0",
+    "cudaUserObjectRetain" => "5.3.0",
+    "cudaUserObjectRelease" => "5.3.0",
+    "cudaUserObjectNoDestructorSync" => "5.3.0",
+    "cudaUserObjectFlags" => "5.3.0",
+    "cudaUserObjectCreate" => "5.3.0",
+    "cudaMemoryTypeManaged" => "5.3.0",
+    "cudaLimitStackSize" => "5.3.0",
+    "cudaGraphUserObjectMove" => "5.3.0",
+    "cudaGraphUpload" => "5.3.0",
+    "cudaGraphRetainUserObject" => "5.3.0",
+    "cudaGraphReleaseUserObject" => "5.3.0",
+    "cudaGraphNodeTypeExtSemaphoreWait" => "5.3.0",
+    "cudaGraphNodeTypeExtSemaphoreSignal" => "5.3.0",
+    "cudaGraphMemAttributeType" => "5.3.0",
+    "cudaGraphMemAttrUsedMemHigh" => "5.3.0",
+    "cudaGraphMemAttrUsedMemCurrent" => "5.3.0",
+    "cudaGraphMemAttrReservedMemHigh" => "5.3.0",
+    "cudaGraphMemAttrReservedMemCurrent" => "5.3.0",
+    "cudaDeviceSetLimit" => "5.3.0",
+    "cudaDeviceSetGraphMemAttribute" => "5.3.0",
+    "cudaDeviceGraphMemTrim" => "5.3.0",
+    "cudaDeviceGetGraphMemAttribute" => "5.3.0",
+    "cuUserObjectRetain" => "5.3.0",
+    "cuUserObjectRelease" => "5.3.0",
+    "cuUserObjectCreate" => "5.3.0",
+    "cuGraphUpload" => "5.3.0",
+    "cuGraphRetainUserObject" => "5.3.0",
+    "cuGraphReleaseUserObject" => "5.3.0",
+    "cuGetErrorString" => "5.3.0",
+    "cuGetErrorName" => "5.3.0",
+    "cuDeviceSetGraphMemAttribute" => "5.3.0",
+    "cuDeviceGraphMemTrim" => "5.3.0",
+    "cuDeviceGetGraphMemAttribute" => "5.3.0",
+    "cuCtxSetLimit" => "5.3.0",
+    "CUuserObject_st" => "5.3.0",
+    "CUuserObject_flags_enum" => "5.3.0",
+    "CUuserObject_flags" => "5.3.0",
+    "CUuserObjectRetain_flags_enum" => "5.3.0",
+    "CUuserObjectRetain_flags" => "5.3.0",
+    "CUuserObject" => "5.3.0",
+    "CUgraphMem_attribute_enum" => "5.3.0",
+    "CUgraphMem_attribute" => "5.3.0",
+    "CU_USER_OBJECT_NO_DESTRUCTOR_SYNC" => "5.3.0",
+    "CU_LIMIT_STACK_SIZE" => "5.3.0",
+    "CU_GRAPH_USER_OBJECT_MOVE" => "5.3.0",
+    "CU_GRAPH_NODE_TYPE_EXT_SEMAS_WAIT" => "5.3.0",
+    "CU_GRAPH_NODE_TYPE_EXT_SEMAS_SIGNAL" => "5.3.0",
+    "CU_GRAPH_MEM_ATTR_USED_MEM_HIGH" => "5.3.0",
+    "CU_GRAPH_MEM_ATTR_USED_MEM_CURRENT" => "5.3.0",
+    "CU_GRAPH_MEM_ATTR_RESERVED_MEM_HIGH" => "5.3.0",
+    "CU_GRAPH_MEM_ATTR_RESERVED_MEM_CURRENT" => "5.3.0",
+    "CU_DEVICE_ATTRIBUTE_VIRTUAL_MEMORY_MANAGEMENT_SUPPORTED" => "5.3.0"
 );
 
 $print_stats = 1 if $examine;
@@ -1037,194 +906,60 @@ sub subst {
 }
 
 sub experimentalSubstitutions {
-    subst("cuDeviceGetDefaultMemPool", "hipDeviceGetDefaultMemPool", "device");
-    subst("cuDeviceGetMemPool", "hipDeviceGetMemPool", "device");
-    subst("cuDeviceGetUuid", "hipDeviceGetUuid", "device");
-    subst("cuDeviceGetUuid_v2", "hipDeviceGetUuid", "device");
-    subst("cuDeviceSetMemPool", "hipDeviceSetMemPool", "device");
-    subst("cudaDeviceGetDefaultMemPool", "hipDeviceGetDefaultMemPool", "device");
-    subst("cudaDeviceGetMemPool", "hipDeviceGetMemPool", "device");
-    subst("cudaDeviceSetMemPool", "hipDeviceSetMemPool", "device");
-    subst("cudaFreeAsync", "hipFreeAsync", "memory");
-    subst("cudaMallocAsync", "hipMallocAsync", "memory");
-    subst("cudaMallocFromPoolAsync", "hipMallocFromPoolAsync", "memory");
-    subst("cudaMemPoolCreate", "hipMemPoolCreate", "memory");
-    subst("cudaMemPoolDestroy", "hipMemPoolDestroy", "memory");
-    subst("cudaMemPoolExportPointer", "hipMemPoolExportPointer", "memory");
-    subst("cudaMemPoolExportToShareableHandle", "hipMemPoolExportToShareableHandle", "memory");
-    subst("cudaMemPoolGetAccess", "hipMemPoolGetAccess", "memory");
-    subst("cudaMemPoolGetAttribute", "hipMemPoolGetAttribute", "memory");
-    subst("cudaMemPoolImportFromShareableHandle", "hipMemPoolImportFromShareableHandle", "memory");
-    subst("cudaMemPoolImportPointer", "hipMemPoolImportPointer", "memory");
-    subst("cudaMemPoolSetAccess", "hipMemPoolSetAccess", "memory");
-    subst("cudaMemPoolSetAttribute", "hipMemPoolSetAttribute", "memory");
-    subst("cudaMemPoolTrimTo", "hipMemPoolTrimTo", "memory");
-    subst("cuMemAddressFree", "hipMemAddressFree", "virtual_memory");
-    subst("cuMemAddressReserve", "hipMemAddressReserve", "virtual_memory");
-    subst("cuMemCreate", "hipMemCreate", "virtual_memory");
-    subst("cuMemExportToShareableHandle", "hipMemExportToShareableHandle", "virtual_memory");
-    subst("cuMemGetAccess", "hipMemGetAccess", "virtual_memory");
-    subst("cuMemGetAllocationGranularity", "hipMemGetAllocationGranularity", "virtual_memory");
-    subst("cuMemGetAllocationPropertiesFromHandle", "hipMemGetAllocationPropertiesFromHandle", "virtual_memory");
-    subst("cuMemImportFromShareableHandle", "hipMemImportFromShareableHandle", "virtual_memory");
-    subst("cuMemMap", "hipMemMap", "virtual_memory");
-    subst("cuMemMapArrayAsync", "hipMemMapArrayAsync", "virtual_memory");
-    subst("cuMemRelease", "hipMemRelease", "virtual_memory");
-    subst("cuMemRetainAllocationHandle", "hipMemRetainAllocationHandle", "virtual_memory");
-    subst("cuMemSetAccess", "hipMemSetAccess", "virtual_memory");
-    subst("cuMemUnmap", "hipMemUnmap", "virtual_memory");
-    subst("cuMemAllocAsync", "hipMallocAsync", "stream_ordered_memory");
-    subst("cuMemAllocFromPoolAsync", "hipMallocFromPoolAsync", "stream_ordered_memory");
-    subst("cuMemFreeAsync", "hipFreeAsync", "stream_ordered_memory");
-    subst("cuMemPoolCreate", "hipMemPoolCreate", "stream_ordered_memory");
-    subst("cuMemPoolDestroy", "hipMemPoolDestroy", "stream_ordered_memory");
-    subst("cuMemPoolExportPointer", "hipMemPoolExportPointer", "stream_ordered_memory");
-    subst("cuMemPoolExportToShareableHandle", "hipMemPoolExportToShareableHandle", "stream_ordered_memory");
-    subst("cuMemPoolGetAccess", "hipMemPoolGetAccess", "stream_ordered_memory");
-    subst("cuMemPoolGetAttribute", "hipMemPoolGetAttribute", "stream_ordered_memory");
-    subst("cuMemPoolImportFromShareableHandle", "hipMemPoolImportFromShareableHandle", "stream_ordered_memory");
-    subst("cuMemPoolImportPointer", "hipMemPoolImportPointer", "stream_ordered_memory");
-    subst("cuMemPoolSetAccess", "hipMemPoolSetAccess", "stream_ordered_memory");
-    subst("cuMemPoolSetAttribute", "hipMemPoolSetAttribute", "stream_ordered_memory");
-    subst("cuMemPoolTrimTo", "hipMemPoolTrimTo", "stream_ordered_memory");
-    subst("cuThreadExchangeStreamCaptureMode", "hipThreadExchangeStreamCaptureMode", "stream");
-    subst("cudaThreadExchangeStreamCaptureMode", "hipThreadExchangeStreamCaptureMode", "stream");
-    subst("cuLaunchHostFunc", "hipLaunchHostFunc", "execution");
-    subst("cudaLaunchHostFunc", "hipLaunchHostFunc", "execution");
-    subst("cuGraphKernelNodeGetAttribute", "hipGraphKernelNodeGetAttribute", "graph");
-    subst("cuGraphKernelNodeSetAttribute", "hipGraphKernelNodeSetAttribute", "graph");
-    subst("cudaGraphKernelNodeGetAttribute", "hipGraphKernelNodeGetAttribute", "graph");
-    subst("cudaGraphKernelNodeSetAttribute", "hipGraphKernelNodeSetAttribute", "graph");
-    subst("CUaccessPolicyWindow", "hipAccessPolicyWindow", "type");
-    subst("CUaccessPolicyWindow_st", "hipAccessPolicyWindow", "type");
-    subst("CUaccessProperty", "hipAccessProperty", "type");
-    subst("CUaccessProperty_enum", "hipAccessProperty", "type");
-    subst("CUarrayMapInfo", "hipArrayMapInfo", "type");
-    subst("CUarrayMapInfo_st", "hipArrayMapInfo", "type");
-    subst("CUarrayMapInfo_v1", "hipArrayMapInfo", "type");
-    subst("CUarraySparseSubresourceType", "hipArraySparseSubresourceType", "type");
-    subst("CUarraySparseSubresourceType_enum", "hipArraySparseSubresourceType", "type");
-    subst("CUgraphInstantiate_flags", "hipGraphInstantiateFlags", "type");
-    subst("CUgraphInstantiate_flags_enum", "hipGraphInstantiateFlags", "type");
-    subst("CUkernelNodeAttrID", "hipKernelNodeAttrID", "type");
-    subst("CUkernelNodeAttrID_enum", "hipKernelNodeAttrID", "type");
-    subst("CUkernelNodeAttrValue", "hipKernelNodeAttrValue", "type");
-    subst("CUkernelNodeAttrValue_union", "hipKernelNodeAttrValue", "type");
-    subst("CUkernelNodeAttrValue_v1", "hipKernelNodeAttrValue", "type");
-    subst("CUmemAccessDesc", "hipMemAccessDesc", "type");
-    subst("CUmemAccessDesc_st", "hipMemAccessDesc", "type");
-    subst("CUmemAccessDesc_v1", "hipMemAccessDesc", "type");
-    subst("CUmemAccess_flags", "hipMemAccessFlags", "type");
-    subst("CUmemAccess_flags_enum", "hipMemAccessFlags", "type");
-    subst("CUmemAllocationGranularity_flags", "hipMemAllocationGranularity_flags", "type");
-    subst("CUmemAllocationGranularity_flags_enum", "hipMemAllocationGranularity_flags", "type");
-    subst("CUmemAllocationHandleType", "hipMemAllocationHandleType", "type");
-    subst("CUmemAllocationHandleType_enum", "hipMemAllocationHandleType", "type");
-    subst("CUmemAllocationProp", "hipMemAllocationProp", "type");
-    subst("CUmemAllocationProp_st", "hipMemAllocationProp", "type");
-    subst("CUmemAllocationProp_v1", "hipMemAllocationProp", "type");
-    subst("CUmemAllocationType", "hipMemAllocationType", "type");
-    subst("CUmemAllocationType_enum", "hipMemAllocationType", "type");
-    subst("CUmemGenericAllocationHandle", "hipMemGenericAllocationHandle_t", "type");
-    subst("CUmemGenericAllocationHandle_v1", "hipMemGenericAllocationHandle_t", "type");
-    subst("CUmemHandleType", "hipMemHandleType", "type");
-    subst("CUmemHandleType_enum", "hipMemHandleType", "type");
-    subst("CUmemLocation", "hipMemLocation", "type");
-    subst("CUmemLocationType", "hipMemLocationType", "type");
-    subst("CUmemLocationType_enum", "hipMemLocationType", "type");
-    subst("CUmemLocation_st", "hipMemLocation", "type");
-    subst("CUmemLocation_v1", "hipMemLocation", "type");
-    subst("CUmemOperationType", "hipMemOperationType", "type");
-    subst("CUmemOperationType_enum", "hipMemOperationType", "type");
-    subst("CUmemPoolHandle_st", "ihipMemPoolHandle_t", "type");
-    subst("CUmemPoolProps", "hipMemPoolProps", "type");
-    subst("CUmemPoolProps_st", "hipMemPoolProps", "type");
-    subst("CUmemPoolProps_v1", "hipMemPoolProps", "type");
-    subst("CUmemPoolPtrExportData", "hipMemPoolPtrExportData", "type");
-    subst("CUmemPoolPtrExportData_st", "hipMemPoolPtrExportData", "type");
-    subst("CUmemPoolPtrExportData_v1", "hipMemPoolPtrExportData", "type");
-    subst("CUmemPool_attribute", "hipMemPoolAttr", "type");
-    subst("CUmemPool_attribute_enum", "hipMemPoolAttr", "type");
-    subst("CUmemoryPool", "hipMemPool_t", "type");
-    subst("CUuuid", "hipUUID", "type");
-    subst("CUuuid_st", "hipUUID_t", "type");
-    subst("cudaAccessPolicyWindow", "hipAccessPolicyWindow", "type");
-    subst("cudaAccessProperty", "hipAccessProperty", "type");
-    subst("cudaGraphInstantiateFlags", "hipGraphInstantiateFlags", "type");
-    subst("cudaKernelNodeAttrID", "hipKernelNodeAttrID", "type");
-    subst("cudaKernelNodeAttrValue", "hipKernelNodeAttrValue", "type");
-    subst("cudaMemAccessDesc", "hipMemAccessDesc", "type");
-    subst("cudaMemAccessFlags", "hipMemAccessFlags", "type");
-    subst("cudaMemAllocationHandleType", "hipMemAllocationHandleType", "type");
-    subst("cudaMemAllocationType", "hipMemAllocationType", "type");
-    subst("cudaMemLocation", "hipMemLocation", "type");
-    subst("cudaMemLocationType", "hipMemLocationType", "type");
-    subst("cudaMemPoolAttr", "hipMemPoolAttr", "type");
-    subst("cudaMemPoolProps", "hipMemPoolProps", "type");
-    subst("cudaMemPoolPtrExportData", "hipMemPoolPtrExportData", "type");
-    subst("cudaMemPool_t", "hipMemPool_t", "type");
-    subst("cudaUUID_t", "hipUUID", "type");
-    subst("CUDA_GRAPH_INSTANTIATE_FLAG_AUTO_FREE_ON_LAUNCH", "hipGraphInstantiateFlagAutoFreeOnLaunch", "numeric_literal");
-    subst("CU_ACCESS_PROPERTY_NORMAL", "hipAccessPropertyNormal", "numeric_literal");
-    subst("CU_ACCESS_PROPERTY_PERSISTING", "hipAccessPropertyPersisting", "numeric_literal");
-    subst("CU_ACCESS_PROPERTY_STREAMING", "hipAccessPropertyStreaming", "numeric_literal");
-    subst("CU_ARRAY_SPARSE_SUBRESOURCE_TYPE_MIPTAIL", "hipArraySparseSubresourceTypeMiptail", "numeric_literal");
-    subst("CU_ARRAY_SPARSE_SUBRESOURCE_TYPE_SPARSE_LEVEL", "hipArraySparseSubresourceTypeSparseLevel", "numeric_literal");
-    subst("CU_DEVICE_ATTRIBUTE_MEMORY_POOLS_SUPPORTED", "hipDeviceAttributeMemoryPoolsSupported", "numeric_literal");
-    subst("CU_KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW", "hipKernelNodeAttributeAccessPolicyWindow", "numeric_literal");
-    subst("CU_KERNEL_NODE_ATTRIBUTE_COOPERATIVE", "hipKernelNodeAttributeCooperative", "numeric_literal");
-    subst("CU_MEMPOOL_ATTR_RELEASE_THRESHOLD", "hipMemPoolAttrReleaseThreshold", "numeric_literal");
-    subst("CU_MEMPOOL_ATTR_RESERVED_MEM_CURRENT", "hipMemPoolAttrReservedMemCurrent", "numeric_literal");
-    subst("CU_MEMPOOL_ATTR_RESERVED_MEM_HIGH", "hipMemPoolAttrReservedMemHigh", "numeric_literal");
-    subst("CU_MEMPOOL_ATTR_REUSE_ALLOW_INTERNAL_DEPENDENCIES", "hipMemPoolReuseAllowInternalDependencies", "numeric_literal");
-    subst("CU_MEMPOOL_ATTR_REUSE_ALLOW_OPPORTUNISTIC", "hipMemPoolReuseAllowOpportunistic", "numeric_literal");
-    subst("CU_MEMPOOL_ATTR_REUSE_FOLLOW_EVENT_DEPENDENCIES", "hipMemPoolReuseFollowEventDependencies", "numeric_literal");
-    subst("CU_MEMPOOL_ATTR_USED_MEM_CURRENT", "hipMemPoolAttrUsedMemCurrent", "numeric_literal");
-    subst("CU_MEMPOOL_ATTR_USED_MEM_HIGH", "hipMemPoolAttrUsedMemHigh", "numeric_literal");
-    subst("CU_MEM_ACCESS_FLAGS_PROT_NONE", "hipMemAccessFlagsProtNone", "numeric_literal");
-    subst("CU_MEM_ACCESS_FLAGS_PROT_READ", "hipMemAccessFlagsProtRead", "numeric_literal");
-    subst("CU_MEM_ACCESS_FLAGS_PROT_READWRITE", "hipMemAccessFlagsProtReadWrite", "numeric_literal");
-    subst("CU_MEM_ALLOCATION_TYPE_INVALID", "hipMemAllocationTypeInvalid", "numeric_literal");
-    subst("CU_MEM_ALLOCATION_TYPE_MAX", "hipMemAllocationTypeMax", "numeric_literal");
-    subst("CU_MEM_ALLOCATION_TYPE_PINNED", "hipMemAllocationTypePinned", "numeric_literal");
-    subst("CU_MEM_ALLOC_GRANULARITY_MINIMUM", "hipMemAllocationGranularityMinimum", "numeric_literal");
-    subst("CU_MEM_ALLOC_GRANULARITY_RECOMMENDED", "hipMemAllocationGranularityRecommended", "numeric_literal");
-    subst("CU_MEM_HANDLE_TYPE_GENERIC", "hipMemHandleTypeGeneric", "numeric_literal");
-    subst("CU_MEM_HANDLE_TYPE_NONE", "hipMemHandleTypeNone", "numeric_literal");
-    subst("CU_MEM_HANDLE_TYPE_POSIX_FILE_DESCRIPTOR", "hipMemHandleTypePosixFileDescriptor", "numeric_literal");
-    subst("CU_MEM_HANDLE_TYPE_WIN32", "hipMemHandleTypeWin32", "numeric_literal");
-    subst("CU_MEM_HANDLE_TYPE_WIN32_KMT", "hipMemHandleTypeWin32Kmt", "numeric_literal");
-    subst("CU_MEM_LOCATION_TYPE_DEVICE", "hipMemLocationTypeDevice", "numeric_literal");
-    subst("CU_MEM_LOCATION_TYPE_INVALID", "hipMemLocationTypeInvalid", "numeric_literal");
-    subst("CU_MEM_OPERATION_TYPE_MAP", "hipMemOperationTypeMap", "numeric_literal");
-    subst("CU_MEM_OPERATION_TYPE_UNMAP", "hipMemOperationTypeUnmap", "numeric_literal");
-    subst("cudaAccessPropertyNormal", "hipAccessPropertyNormal", "numeric_literal");
-    subst("cudaAccessPropertyPersisting", "hipAccessPropertyPersisting", "numeric_literal");
-    subst("cudaAccessPropertyStreaming", "hipAccessPropertyStreaming", "numeric_literal");
-    subst("cudaDevAttrMemoryPoolsSupported", "hipDeviceAttributeMemoryPoolsSupported", "numeric_literal");
-    subst("cudaGraphInstantiateFlagAutoFreeOnLaunch", "hipGraphInstantiateFlagAutoFreeOnLaunch", "numeric_literal");
-    subst("cudaKernelNodeAttributeAccessPolicyWindow", "hipKernelNodeAttributeAccessPolicyWindow", "numeric_literal");
-    subst("cudaKernelNodeAttributeCooperative", "hipKernelNodeAttributeCooperative", "numeric_literal");
-    subst("cudaMemAccessFlagsProtNone", "hipMemAccessFlagsProtNone", "numeric_literal");
-    subst("cudaMemAccessFlagsProtRead", "hipMemAccessFlagsProtRead", "numeric_literal");
-    subst("cudaMemAccessFlagsProtReadWrite", "hipMemAccessFlagsProtReadWrite", "numeric_literal");
-    subst("cudaMemAllocationTypeInvalid", "hipMemAllocationTypeInvalid", "numeric_literal");
-    subst("cudaMemAllocationTypeMax", "hipMemAllocationTypeMax", "numeric_literal");
-    subst("cudaMemAllocationTypePinned", "hipMemAllocationTypePinned", "numeric_literal");
-    subst("cudaMemHandleTypeNone", "hipMemHandleTypeNone", "numeric_literal");
-    subst("cudaMemHandleTypePosixFileDescriptor", "hipMemHandleTypePosixFileDescriptor", "numeric_literal");
-    subst("cudaMemHandleTypeWin32", "hipMemHandleTypeWin32", "numeric_literal");
-    subst("cudaMemHandleTypeWin32Kmt", "hipMemHandleTypeWin32Kmt", "numeric_literal");
-    subst("cudaMemLocationTypeDevice", "hipMemLocationTypeDevice", "numeric_literal");
-    subst("cudaMemLocationTypeInvalid", "hipMemLocationTypeInvalid", "numeric_literal");
-    subst("cudaMemPoolAttrReleaseThreshold", "hipMemPoolAttrReleaseThreshold", "numeric_literal");
-    subst("cudaMemPoolAttrReservedMemCurrent", "hipMemPoolAttrReservedMemCurrent", "numeric_literal");
-    subst("cudaMemPoolAttrReservedMemHigh", "hipMemPoolAttrReservedMemHigh", "numeric_literal");
-    subst("cudaMemPoolAttrUsedMemCurrent", "hipMemPoolAttrUsedMemCurrent", "numeric_literal");
-    subst("cudaMemPoolAttrUsedMemHigh", "hipMemPoolAttrUsedMemHigh", "numeric_literal");
-    subst("cudaMemPoolReuseAllowInternalDependencies", "hipMemPoolReuseAllowInternalDependencies", "numeric_literal");
-    subst("cudaMemPoolReuseAllowOpportunistic", "hipMemPoolReuseAllowOpportunistic", "numeric_literal");
-    subst("cudaMemPoolReuseFollowEventDependencies", "hipMemPoolReuseFollowEventDependencies", "numeric_literal");
+    subst("cuGetErrorName", "hipDrvGetErrorName", "error");
+    subst("cuGetErrorString", "hipDrvGetErrorString", "error");
+    subst("cudaDeviceSetLimit", "hipDeviceSetLimit", "device");
+    subst("cuCtxSetLimit", "hipDeviceSetLimit", "context");
+    subst("cuDeviceGetGraphMemAttribute", "hipDeviceGetGraphMemAttribute", "graph");
+    subst("cuDeviceGraphMemTrim", "hipDeviceGraphMemTrim", "graph");
+    subst("cuDeviceSetGraphMemAttribute", "hipDeviceSetGraphMemAttribute", "graph");
+    subst("cuGraphReleaseUserObject", "hipGraphReleaseUserObject", "graph");
+    subst("cuGraphRetainUserObject", "hipGraphRetainUserObject", "graph");
+    subst("cuGraphUpload", "hipGraphUpload", "graph");
+    subst("cuUserObjectCreate", "hipUserObjectCreate", "graph");
+    subst("cuUserObjectRelease", "hipUserObjectRelease", "graph");
+    subst("cuUserObjectRetain", "hipUserObjectRetain", "graph");
+    subst("cudaDeviceGetGraphMemAttribute", "hipDeviceGetGraphMemAttribute", "graph");
+    subst("cudaDeviceGraphMemTrim", "hipDeviceGraphMemTrim", "graph");
+    subst("cudaDeviceSetGraphMemAttribute", "hipDeviceSetGraphMemAttribute", "graph");
+    subst("cudaGraphReleaseUserObject", "hipGraphReleaseUserObject", "graph");
+    subst("cudaGraphRetainUserObject", "hipGraphRetainUserObject", "graph");
+    subst("cudaGraphUpload", "hipGraphUpload", "graph");
+    subst("cudaUserObjectCreate", "hipUserObjectCreate", "graph");
+    subst("cudaUserObjectRelease", "hipUserObjectRelease", "graph");
+    subst("cudaUserObjectRetain", "hipUserObjectRetain", "graph");
+    subst("CUgraphMem_attribute", "hipGraphMemAttributeType", "type");
+    subst("CUgraphMem_attribute_enum", "hipGraphMemAttributeType", "type");
+    subst("CUuserObject", "hipUserObject_t", "type");
+    subst("CUuserObjectRetain_flags", "hipUserObjectRetainFlags", "type");
+    subst("CUuserObjectRetain_flags_enum", "hipUserObjectRetainFlags", "type");
+    subst("CUuserObject_flags", "hipUserObjectFlags", "type");
+    subst("CUuserObject_flags_enum", "hipUserObjectFlags", "type");
+    subst("CUuserObject_st", "hipUserObject", "type");
+    subst("cudaGraphMemAttributeType", "hipGraphMemAttributeType", "type");
+    subst("cudaUserObjectFlags", "hipUserObjectFlags", "type");
+    subst("cudaUserObjectRetainFlags", "hipUserObjectRetainFlags", "type");
+    subst("cudaUserObject_t", "hipUserObject_t", "type");
+    subst("CU_DEVICE_ATTRIBUTE_VIRTUAL_MEMORY_MANAGEMENT_SUPPORTED", "hipDeviceAttributeVirtualMemoryManagementSupported", "numeric_literal");
+    subst("CU_GRAPH_MEM_ATTR_RESERVED_MEM_CURRENT", "hipGraphMemAttrReservedMemCurrent", "numeric_literal");
+    subst("CU_GRAPH_MEM_ATTR_RESERVED_MEM_HIGH", "hipGraphMemAttrReservedMemHigh", "numeric_literal");
+    subst("CU_GRAPH_MEM_ATTR_USED_MEM_CURRENT", "hipGraphMemAttrUsedMemCurrent", "numeric_literal");
+    subst("CU_GRAPH_MEM_ATTR_USED_MEM_HIGH", "hipGraphMemAttrUsedMemHigh", "numeric_literal");
+    subst("CU_GRAPH_NODE_TYPE_EXT_SEMAS_SIGNAL", "hipGraphNodeTypeExtSemaphoreSignal", "numeric_literal");
+    subst("CU_GRAPH_NODE_TYPE_EXT_SEMAS_WAIT", "hipGraphNodeTypeExtSemaphoreWait", "numeric_literal");
+    subst("CU_GRAPH_USER_OBJECT_MOVE", "hipGraphUserObjectMove", "numeric_literal");
+    subst("CU_LIMIT_STACK_SIZE", "hipLimitStackSize", "numeric_literal");
+    subst("CU_USER_OBJECT_NO_DESTRUCTOR_SYNC", "hipUserObjectNoDestructorSync", "numeric_literal");
+    subst("cudaGraphMemAttrReservedMemCurrent", "hipGraphMemAttrReservedMemCurrent", "numeric_literal");
+    subst("cudaGraphMemAttrReservedMemHigh", "hipGraphMemAttrReservedMemHigh", "numeric_literal");
+    subst("cudaGraphMemAttrUsedMemCurrent", "hipGraphMemAttrUsedMemCurrent", "numeric_literal");
+    subst("cudaGraphMemAttrUsedMemHigh", "hipGraphMemAttrUsedMemHigh", "numeric_literal");
+    subst("cudaGraphNodeTypeExtSemaphoreSignal", "hipGraphNodeTypeExtSemaphoreSignal", "numeric_literal");
+    subst("cudaGraphNodeTypeExtSemaphoreWait", "hipGraphNodeTypeExtSemaphoreWait", "numeric_literal");
+    subst("cudaGraphUserObjectMove", "hipGraphUserObjectMove", "numeric_literal");
+    subst("cudaLimitStackSize", "hipLimitStackSize", "numeric_literal");
+    subst("cudaMemoryTypeManaged", "hipMemoryTypeManaged", "numeric_literal");
+    subst("cudaUserObjectNoDestructorSync", "hipUserObjectNoDestructorSync", "numeric_literal");
 }
 
 sub rocSubstitutions {
@@ -1599,6 +1334,7 @@ sub rocSubstitutions {
     subst("cublasZtrsv", "rocblas_ztrsv", "library");
     subst("cublasZtrsv_v2", "rocblas_ztrsv", "library");
     subst("cublas.h", "rocblas.h", "include_cuda_main_header");
+    subst("cublas_v2.h", "rocblas.h", "include_cuda_main_header_v2");
     subst("cublasAtomicsMode_t", "rocblas_atomics_mode", "type");
     subst("cublasContext", "_rocblas_handle", "type");
     subst("cublasDataType_t", "rocblas_datatype", "type");
@@ -1652,20 +1388,28 @@ sub simpleSubstitutions {
     subst("cuDeviceGet", "hipDeviceGet", "device");
     subst("cuDeviceGetAttribute", "hipDeviceGetAttribute", "device");
     subst("cuDeviceGetCount", "hipGetDeviceCount", "device");
+    subst("cuDeviceGetDefaultMemPool", "hipDeviceGetDefaultMemPool", "device");
+    subst("cuDeviceGetMemPool", "hipDeviceGetMemPool", "device");
     subst("cuDeviceGetName", "hipDeviceGetName", "device");
+    subst("cuDeviceGetUuid", "hipDeviceGetUuid", "device");
+    subst("cuDeviceGetUuid_v2", "hipDeviceGetUuid", "device");
+    subst("cuDeviceSetMemPool", "hipDeviceSetMemPool", "device");
     subst("cuDeviceTotalMem", "hipDeviceTotalMem", "device");
     subst("cuDeviceTotalMem_v2", "hipDeviceTotalMem", "device");
     subst("cudaChooseDevice", "hipChooseDevice", "device");
     subst("cudaDeviceGetAttribute", "hipDeviceGetAttribute", "device");
     subst("cudaDeviceGetByPCIBusId", "hipDeviceGetByPCIBusId", "device");
     subst("cudaDeviceGetCacheConfig", "hipDeviceGetCacheConfig", "device");
+    subst("cudaDeviceGetDefaultMemPool", "hipDeviceGetDefaultMemPool", "device");
     subst("cudaDeviceGetLimit", "hipDeviceGetLimit", "device");
+    subst("cudaDeviceGetMemPool", "hipDeviceGetMemPool", "device");
     subst("cudaDeviceGetP2PAttribute", "hipDeviceGetP2PAttribute", "device");
     subst("cudaDeviceGetPCIBusId", "hipDeviceGetPCIBusId", "device");
     subst("cudaDeviceGetSharedMemConfig", "hipDeviceGetSharedMemConfig", "device");
     subst("cudaDeviceGetStreamPriorityRange", "hipDeviceGetStreamPriorityRange", "device");
     subst("cudaDeviceReset", "hipDeviceReset", "device");
     subst("cudaDeviceSetCacheConfig", "hipDeviceSetCacheConfig", "device");
+    subst("cudaDeviceSetMemPool", "hipDeviceSetMemPool", "device");
     subst("cudaDeviceSetSharedMemConfig", "hipDeviceSetSharedMemConfig", "device");
     subst("cudaDeviceSynchronize", "hipDeviceSynchronize", "device");
     subst("cudaFuncSetCacheConfig", "hipFuncSetCacheConfig", "device");
@@ -1789,6 +1533,7 @@ sub simpleSubstitutions {
     subst("cuMipmappedArrayGetLevel", "hipMipmappedArrayGetLevel", "memory");
     subst("cudaFree", "hipFree", "memory");
     subst("cudaFreeArray", "hipFreeArray", "memory");
+    subst("cudaFreeAsync", "hipFreeAsync", "memory");
     subst("cudaFreeHost", "hipHostFree", "memory");
     subst("cudaFreeMipmappedArray", "hipFreeMipmappedArray", "memory");
     subst("cudaGetMipmappedArrayLevel", "hipGetMipmappedArrayLevel", "memory");
@@ -1803,12 +1548,25 @@ sub simpleSubstitutions {
     subst("cudaMalloc3D", "hipMalloc3D", "memory");
     subst("cudaMalloc3DArray", "hipMalloc3DArray", "memory");
     subst("cudaMallocArray", "hipMallocArray", "memory");
+    subst("cudaMallocAsync", "hipMallocAsync", "memory");
+    subst("cudaMallocFromPoolAsync", "hipMallocFromPoolAsync", "memory");
     subst("cudaMallocHost", "hipHostMalloc", "memory");
     subst("cudaMallocManaged", "hipMallocManaged", "memory");
     subst("cudaMallocMipmappedArray", "hipMallocMipmappedArray", "memory");
     subst("cudaMallocPitch", "hipMallocPitch", "memory");
     subst("cudaMemAdvise", "hipMemAdvise", "memory");
     subst("cudaMemGetInfo", "hipMemGetInfo", "memory");
+    subst("cudaMemPoolCreate", "hipMemPoolCreate", "memory");
+    subst("cudaMemPoolDestroy", "hipMemPoolDestroy", "memory");
+    subst("cudaMemPoolExportPointer", "hipMemPoolExportPointer", "memory");
+    subst("cudaMemPoolExportToShareableHandle", "hipMemPoolExportToShareableHandle", "memory");
+    subst("cudaMemPoolGetAccess", "hipMemPoolGetAccess", "memory");
+    subst("cudaMemPoolGetAttribute", "hipMemPoolGetAttribute", "memory");
+    subst("cudaMemPoolImportFromShareableHandle", "hipMemPoolImportFromShareableHandle", "memory");
+    subst("cudaMemPoolImportPointer", "hipMemPoolImportPointer", "memory");
+    subst("cudaMemPoolSetAccess", "hipMemPoolSetAccess", "memory");
+    subst("cudaMemPoolSetAttribute", "hipMemPoolSetAttribute", "memory");
+    subst("cudaMemPoolTrimTo", "hipMemPoolTrimTo", "memory");
     subst("cudaMemPrefetchAsync", "hipMemPrefetchAsync", "memory");
     subst("cudaMemRangeGetAttribute", "hipMemRangeGetAttribute", "memory");
     subst("cudaMemRangeGetAttributes", "hipMemRangeGetAttributes", "memory");
@@ -1839,6 +1597,34 @@ sub simpleSubstitutions {
     subst("make_cudaExtent", "make_hipExtent", "memory");
     subst("make_cudaPitchedPtr", "make_hipPitchedPtr", "memory");
     subst("make_cudaPos", "make_hipPos", "memory");
+    subst("cuMemAddressFree", "hipMemAddressFree", "virtual_memory");
+    subst("cuMemAddressReserve", "hipMemAddressReserve", "virtual_memory");
+    subst("cuMemCreate", "hipMemCreate", "virtual_memory");
+    subst("cuMemExportToShareableHandle", "hipMemExportToShareableHandle", "virtual_memory");
+    subst("cuMemGetAccess", "hipMemGetAccess", "virtual_memory");
+    subst("cuMemGetAllocationGranularity", "hipMemGetAllocationGranularity", "virtual_memory");
+    subst("cuMemGetAllocationPropertiesFromHandle", "hipMemGetAllocationPropertiesFromHandle", "virtual_memory");
+    subst("cuMemImportFromShareableHandle", "hipMemImportFromShareableHandle", "virtual_memory");
+    subst("cuMemMap", "hipMemMap", "virtual_memory");
+    subst("cuMemMapArrayAsync", "hipMemMapArrayAsync", "virtual_memory");
+    subst("cuMemRelease", "hipMemRelease", "virtual_memory");
+    subst("cuMemRetainAllocationHandle", "hipMemRetainAllocationHandle", "virtual_memory");
+    subst("cuMemSetAccess", "hipMemSetAccess", "virtual_memory");
+    subst("cuMemUnmap", "hipMemUnmap", "virtual_memory");
+    subst("cuMemAllocAsync", "hipMallocAsync", "stream_ordered_memory");
+    subst("cuMemAllocFromPoolAsync", "hipMallocFromPoolAsync", "stream_ordered_memory");
+    subst("cuMemFreeAsync", "hipFreeAsync", "stream_ordered_memory");
+    subst("cuMemPoolCreate", "hipMemPoolCreate", "stream_ordered_memory");
+    subst("cuMemPoolDestroy", "hipMemPoolDestroy", "stream_ordered_memory");
+    subst("cuMemPoolExportPointer", "hipMemPoolExportPointer", "stream_ordered_memory");
+    subst("cuMemPoolExportToShareableHandle", "hipMemPoolExportToShareableHandle", "stream_ordered_memory");
+    subst("cuMemPoolGetAccess", "hipMemPoolGetAccess", "stream_ordered_memory");
+    subst("cuMemPoolGetAttribute", "hipMemPoolGetAttribute", "stream_ordered_memory");
+    subst("cuMemPoolImportFromShareableHandle", "hipMemPoolImportFromShareableHandle", "stream_ordered_memory");
+    subst("cuMemPoolImportPointer", "hipMemPoolImportPointer", "stream_ordered_memory");
+    subst("cuMemPoolSetAccess", "hipMemPoolSetAccess", "stream_ordered_memory");
+    subst("cuMemPoolSetAttribute", "hipMemPoolSetAttribute", "stream_ordered_memory");
+    subst("cuMemPoolTrimTo", "hipMemPoolTrimTo", "stream_ordered_memory");
     subst("cuMemAdvise", "hipMemAdvise", "addressing");
     subst("cuMemPrefetchAsync", "hipMemPrefetchAsync", "addressing");
     subst("cuMemRangeGetAttribute", "hipMemRangeGetAttribute", "addressing");
@@ -1864,6 +1650,7 @@ sub simpleSubstitutions {
     subst("cuStreamSynchronize", "hipStreamSynchronize", "stream");
     subst("cuStreamUpdateCaptureDependencies", "hipStreamUpdateCaptureDependencies", "stream");
     subst("cuStreamWaitEvent", "hipStreamWaitEvent", "stream");
+    subst("cuThreadExchangeStreamCaptureMode", "hipThreadExchangeStreamCaptureMode", "stream");
     subst("cudaStreamAddCallback", "hipStreamAddCallback", "stream");
     subst("cudaStreamAttachMemAsync", "hipStreamAttachMemAsync", "stream");
     subst("cudaStreamBeginCapture", "hipStreamBeginCapture", "stream");
@@ -1879,6 +1666,7 @@ sub simpleSubstitutions {
     subst("cudaStreamQuery", "hipStreamQuery", "stream");
     subst("cudaStreamSynchronize", "hipStreamSynchronize", "stream");
     subst("cudaStreamWaitEvent", "hipStreamWaitEvent", "stream");
+    subst("cudaThreadExchangeStreamCaptureMode", "hipThreadExchangeStreamCaptureMode", "stream");
     subst("cuEventCreate", "hipEventCreateWithFlags", "event");
     subst("cuEventDestroy", "hipEventDestroy", "event");
     subst("cuEventDestroy_v2", "hipEventDestroy", "event");
@@ -1916,6 +1704,7 @@ sub simpleSubstitutions {
     subst("cuStreamWriteValue64", "hipStreamWriteValue64", "stream_memory");
     subst("cuStreamWriteValue64_v2", "hipStreamWriteValue64", "stream_memory");
     subst("cuFuncGetAttribute", "hipFuncGetAttribute", "execution");
+    subst("cuLaunchHostFunc", "hipLaunchHostFunc", "execution");
     subst("cuLaunchKernel", "hipModuleLaunchKernel", "execution");
     subst("cudaConfigureCall", "hipConfigureCall", "execution");
     subst("cudaFuncGetAttributes", "hipFuncGetAttributes", "execution");
@@ -1924,6 +1713,7 @@ sub simpleSubstitutions {
     subst("cudaLaunch", "hipLaunchByPtr", "execution");
     subst("cudaLaunchCooperativeKernel", "hipLaunchCooperativeKernel", "execution");
     subst("cudaLaunchCooperativeKernelMultiDevice", "hipLaunchCooperativeKernelMultiDevice", "execution");
+    subst("cudaLaunchHostFunc", "hipLaunchHostFunc", "execution");
     subst("cudaLaunchKernel", "hipLaunchKernel", "execution");
     subst("cudaSetupArgument", "hipSetupArgument", "execution");
     subst("cuGraphAddChildGraphNode", "hipGraphAddChildGraphNode", "graph");
@@ -1957,7 +1747,9 @@ sub simpleSubstitutions {
     subst("cuGraphInstantiate", "hipGraphInstantiate", "graph");
     subst("cuGraphInstantiateWithFlags", "hipGraphInstantiateWithFlags", "graph");
     subst("cuGraphInstantiate_v2", "hipGraphInstantiate", "graph");
+    subst("cuGraphKernelNodeGetAttribute", "hipGraphKernelNodeGetAttribute", "graph");
     subst("cuGraphKernelNodeGetParams", "hipGraphKernelNodeGetParams", "graph");
+    subst("cuGraphKernelNodeSetAttribute", "hipGraphKernelNodeSetAttribute", "graph");
     subst("cuGraphKernelNodeSetParams", "hipGraphKernelNodeSetParams", "graph");
     subst("cuGraphLaunch", "hipGraphLaunch", "graph");
     subst("cuGraphMemcpyNodeGetParams", "hipGraphMemcpyNodeGetParams", "graph");
@@ -2009,7 +1801,9 @@ sub simpleSubstitutions {
     subst("cudaGraphHostNodeSetParams", "hipGraphHostNodeSetParams", "graph");
     subst("cudaGraphInstantiate", "hipGraphInstantiate", "graph");
     subst("cudaGraphInstantiateWithFlags", "hipGraphInstantiateWithFlags", "graph");
+    subst("cudaGraphKernelNodeGetAttribute", "hipGraphKernelNodeGetAttribute", "graph");
     subst("cudaGraphKernelNodeGetParams", "hipGraphKernelNodeGetParams", "graph");
+    subst("cudaGraphKernelNodeSetAttribute", "hipGraphKernelNodeSetAttribute", "graph");
     subst("cudaGraphKernelNodeSetParams", "hipGraphKernelNodeSetParams", "graph");
     subst("cudaGraphLaunch", "hipGraphLaunch", "graph");
     subst("cudaGraphMemcpyNodeGetParams", "hipGraphMemcpyNodeGetParams", "graph");
@@ -3277,6 +3071,7 @@ sub simpleSubstitutions {
     subst("cusparse.h", "hipsparse.h", "include_cuda_main_header");
     subst("cusparse_v2.h", "hipsparse.h", "include_cuda_main_header");
     subst("nvrtc.h", "hiprtc.h", "include_cuda_main_header");
+    subst("cublas_v2.h", "hipblas.h", "include_cuda_main_header_v2");
     subst("CUDAContext", "HIPContext", "type");
     subst("CUDA_ARRAY3D_DESCRIPTOR", "HIP_ARRAY3D_DESCRIPTOR", "type");
     subst("CUDA_ARRAY3D_DESCRIPTOR_st", "HIP_ARRAY3D_DESCRIPTOR", "type");
@@ -3331,9 +3126,18 @@ sub simpleSubstitutions {
     subst("CUDA_TEXTURE_DESC_v1", "HIP_TEXTURE_DESC", "type");
     subst("CUGLDeviceList", "hipGLDeviceList", "type");
     subst("CUGLDeviceList_enum", "hipGLDeviceList", "type");
+    subst("CUaccessPolicyWindow", "hipAccessPolicyWindow", "type");
+    subst("CUaccessPolicyWindow_st", "hipAccessPolicyWindow", "type");
+    subst("CUaccessProperty", "hipAccessProperty", "type");
+    subst("CUaccessProperty_enum", "hipAccessProperty", "type");
     subst("CUaddress_mode", "HIPaddress_mode", "type");
     subst("CUaddress_mode_enum", "HIPaddress_mode_enum", "type");
     subst("CUarray", "hipArray_t", "type");
+    subst("CUarrayMapInfo", "hipArrayMapInfo", "type");
+    subst("CUarrayMapInfo_st", "hipArrayMapInfo", "type");
+    subst("CUarrayMapInfo_v1", "hipArrayMapInfo", "type");
+    subst("CUarraySparseSubresourceType", "hipArraySparseSubresourceType", "type");
+    subst("CUarraySparseSubresourceType_enum", "hipArraySparseSubresourceType", "type");
     subst("CUarray_format", "hipArray_Format", "type");
     subst("CUarray_format_enum", "hipArray_Format", "type");
     subst("CUarray_st", "hipArray", "type");
@@ -3371,6 +3175,8 @@ sub simpleSubstitutions {
     subst("CUgraphExecUpdateResult", "hipGraphExecUpdateResult", "type");
     subst("CUgraphExecUpdateResult_enum", "hipGraphExecUpdateResult", "type");
     subst("CUgraphExec_st", "hipGraphExec", "type");
+    subst("CUgraphInstantiate_flags", "hipGraphInstantiateFlags", "type");
+    subst("CUgraphInstantiate_flags_enum", "hipGraphInstantiateFlags", "type");
     subst("CUgraphNode", "hipGraphNode_t", "type");
     subst("CUgraphNodeType", "hipGraphNodeType", "type");
     subst("CUgraphNodeType_enum", "hipGraphNodeType", "type");
@@ -3389,12 +3195,52 @@ sub simpleSubstitutions {
     subst("CUipcMemHandle_v1", "hipIpcMemHandle_t", "type");
     subst("CUjit_option", "hipJitOption", "type");
     subst("CUjit_option_enum", "hipJitOption", "type");
+    subst("CUkernelNodeAttrID", "hipKernelNodeAttrID", "type");
+    subst("CUkernelNodeAttrID_enum", "hipKernelNodeAttrID", "type");
+    subst("CUkernelNodeAttrValue", "hipKernelNodeAttrValue", "type");
+    subst("CUkernelNodeAttrValue_union", "hipKernelNodeAttrValue", "type");
+    subst("CUkernelNodeAttrValue_v1", "hipKernelNodeAttrValue", "type");
     subst("CUlimit", "hipLimit_t", "type");
     subst("CUlimit_enum", "hipLimit_t", "type");
+    subst("CUmemAccessDesc", "hipMemAccessDesc", "type");
+    subst("CUmemAccessDesc_st", "hipMemAccessDesc", "type");
+    subst("CUmemAccessDesc_v1", "hipMemAccessDesc", "type");
+    subst("CUmemAccess_flags", "hipMemAccessFlags", "type");
+    subst("CUmemAccess_flags_enum", "hipMemAccessFlags", "type");
+    subst("CUmemAllocationGranularity_flags", "hipMemAllocationGranularity_flags", "type");
+    subst("CUmemAllocationGranularity_flags_enum", "hipMemAllocationGranularity_flags", "type");
+    subst("CUmemAllocationHandleType", "hipMemAllocationHandleType", "type");
+    subst("CUmemAllocationHandleType_enum", "hipMemAllocationHandleType", "type");
+    subst("CUmemAllocationProp", "hipMemAllocationProp", "type");
+    subst("CUmemAllocationProp_st", "hipMemAllocationProp", "type");
+    subst("CUmemAllocationProp_v1", "hipMemAllocationProp", "type");
+    subst("CUmemAllocationType", "hipMemAllocationType", "type");
+    subst("CUmemAllocationType_enum", "hipMemAllocationType", "type");
+    subst("CUmemGenericAllocationHandle", "hipMemGenericAllocationHandle_t", "type");
+    subst("CUmemGenericAllocationHandle_v1", "hipMemGenericAllocationHandle_t", "type");
+    subst("CUmemHandleType", "hipMemHandleType", "type");
+    subst("CUmemHandleType_enum", "hipMemHandleType", "type");
+    subst("CUmemLocation", "hipMemLocation", "type");
+    subst("CUmemLocationType", "hipMemLocationType", "type");
+    subst("CUmemLocationType_enum", "hipMemLocationType", "type");
+    subst("CUmemLocation_st", "hipMemLocation", "type");
+    subst("CUmemLocation_v1", "hipMemLocation", "type");
+    subst("CUmemOperationType", "hipMemOperationType", "type");
+    subst("CUmemOperationType_enum", "hipMemOperationType", "type");
+    subst("CUmemPoolHandle_st", "ihipMemPoolHandle_t", "type");
+    subst("CUmemPoolProps", "hipMemPoolProps", "type");
+    subst("CUmemPoolProps_st", "hipMemPoolProps", "type");
+    subst("CUmemPoolProps_v1", "hipMemPoolProps", "type");
+    subst("CUmemPoolPtrExportData", "hipMemPoolPtrExportData", "type");
+    subst("CUmemPoolPtrExportData_st", "hipMemPoolPtrExportData", "type");
+    subst("CUmemPoolPtrExportData_v1", "hipMemPoolPtrExportData", "type");
+    subst("CUmemPool_attribute", "hipMemPoolAttr", "type");
+    subst("CUmemPool_attribute_enum", "hipMemPoolAttr", "type");
     subst("CUmem_advise", "hipMemoryAdvise", "type");
     subst("CUmem_advise_enum", "hipMemoryAdvise", "type");
     subst("CUmem_range_attribute", "hipMemRangeAttribute", "type");
     subst("CUmem_range_attribute_enum", "hipMemRangeAttribute", "type");
+    subst("CUmemoryPool", "hipMemPool_t", "type");
     subst("CUmemorytype", "hipMemoryType", "type");
     subst("CUmemorytype_enum", "hipMemoryType", "type");
     subst("CUmipmappedArray", "hipMipmappedArray_t", "type");
@@ -3426,6 +3272,8 @@ sub simpleSubstitutions {
     subst("CUtexObject_v1", "hipTextureObject_t", "type");
     subst("CUtexref", "hipTexRef", "type");
     subst("CUtexref_st", "textureReference", "type");
+    subst("CUuuid", "hipUUID", "type");
+    subst("CUuuid_st", "hipUUID_t", "type");
     subst("GLenum", "GLenum", "type");
     subst("GLuint", "GLuint", "type");
     subst("bsric02Info_t", "bsric02Info_t", "type");
@@ -3453,6 +3301,8 @@ sub simpleSubstitutions {
     subst("cublasSideMode_t", "hipblasSideMode_t", "type");
     subst("cublasStatus", "hipblasStatus_t", "type");
     subst("cublasStatus_t", "hipblasStatus_t", "type");
+    subst("cudaAccessPolicyWindow", "hipAccessPolicyWindow", "type");
+    subst("cudaAccessProperty", "hipAccessProperty", "type");
     subst("cudaArray", "hipArray", "type");
     subst("cudaArray_const_t", "hipArray_const_t", "type");
     subst("cudaArray_t", "hipArray_t", "type");
@@ -3487,6 +3337,7 @@ sub simpleSubstitutions {
     subst("cudaGLDeviceList", "hipGLDeviceList", "type");
     subst("cudaGraphExecUpdateResult", "hipGraphExecUpdateResult", "type");
     subst("cudaGraphExec_t", "hipGraphExec_t", "type");
+    subst("cudaGraphInstantiateFlags", "hipGraphInstantiateFlags", "type");
     subst("cudaGraphNodeType", "hipGraphNodeType", "type");
     subst("cudaGraphNode_t", "hipGraphNode_t", "type");
     subst("cudaGraph_t", "hipGraph_t", "type");
@@ -3499,9 +3350,21 @@ sub simpleSubstitutions {
     subst("cudaIpcEventHandle_t", "hipIpcEventHandle_t", "type");
     subst("cudaIpcMemHandle_st", "hipIpcMemHandle_st", "type");
     subst("cudaIpcMemHandle_t", "hipIpcMemHandle_t", "type");
+    subst("cudaKernelNodeAttrID", "hipKernelNodeAttrID", "type");
+    subst("cudaKernelNodeAttrValue", "hipKernelNodeAttrValue", "type");
     subst("cudaKernelNodeParams", "hipKernelNodeParams", "type");
     subst("cudaLaunchParams", "hipLaunchParams", "type");
     subst("cudaLimit", "hipLimit_t", "type");
+    subst("cudaMemAccessDesc", "hipMemAccessDesc", "type");
+    subst("cudaMemAccessFlags", "hipMemAccessFlags", "type");
+    subst("cudaMemAllocationHandleType", "hipMemAllocationHandleType", "type");
+    subst("cudaMemAllocationType", "hipMemAllocationType", "type");
+    subst("cudaMemLocation", "hipMemLocation", "type");
+    subst("cudaMemLocationType", "hipMemLocationType", "type");
+    subst("cudaMemPoolAttr", "hipMemPoolAttr", "type");
+    subst("cudaMemPoolProps", "hipMemPoolProps", "type");
+    subst("cudaMemPoolPtrExportData", "hipMemPoolPtrExportData", "type");
+    subst("cudaMemPool_t", "hipMemPool_t", "type");
     subst("cudaMemRangeAttribute", "hipMemRangeAttribute", "type");
     subst("cudaMemcpy3DParms", "hipMemcpy3DParms", "type");
     subst("cudaMemcpyKind", "hipMemcpyKind", "type");
@@ -3531,6 +3394,7 @@ sub simpleSubstitutions {
     subst("cudaTextureFilterMode", "hipTextureFilterMode", "type");
     subst("cudaTextureObject_t", "hipTextureObject_t", "type");
     subst("cudaTextureReadMode", "hipTextureReadMode", "type");
+    subst("cudaUUID_t", "hipUUID", "type");
     subst("cudnnActivationDescriptor_t", "hipdnnActivationDescriptor_t", "type");
     subst("cudnnActivationMode_t", "hipdnnActivationMode_t", "type");
     subst("cudnnBatchNormMode_t", "hipdnnBatchNormMode_t", "type");
@@ -3746,6 +3610,7 @@ sub simpleSubstitutions {
     subst("CUDA_ERROR_UNKNOWN", "hipErrorUnknown", "numeric_literal");
     subst("CUDA_ERROR_UNMAP_FAILED", "hipErrorUnmapFailed", "numeric_literal");
     subst("CUDA_ERROR_UNSUPPORTED_LIMIT", "hipErrorUnsupportedLimit", "numeric_literal");
+    subst("CUDA_GRAPH_INSTANTIATE_FLAG_AUTO_FREE_ON_LAUNCH", "hipGraphInstantiateFlagAutoFreeOnLaunch", "numeric_literal");
     subst("CUDA_R_16BF", "HIPBLAS_R_16B", "numeric_literal");
     subst("CUDA_R_16F", "HIPBLAS_R_16F", "numeric_literal");
     subst("CUDA_R_32F", "HIPBLAS_R_32F", "numeric_literal");
@@ -4007,6 +3872,9 @@ sub simpleSubstitutions {
     subst("CUSPARSE_STATUS_NOT_SUPPORTED", "HIPSPARSE_STATUS_NOT_SUPPORTED", "numeric_literal");
     subst("CUSPARSE_STATUS_SUCCESS", "HIPSPARSE_STATUS_SUCCESS", "numeric_literal");
     subst("CUSPARSE_STATUS_ZERO_PIVOT", "HIPSPARSE_STATUS_ZERO_PIVOT", "numeric_literal");
+    subst("CU_ACCESS_PROPERTY_NORMAL", "hipAccessPropertyNormal", "numeric_literal");
+    subst("CU_ACCESS_PROPERTY_PERSISTING", "hipAccessPropertyPersisting", "numeric_literal");
+    subst("CU_ACCESS_PROPERTY_STREAMING", "hipAccessPropertyStreaming", "numeric_literal");
     subst("CU_AD_FORMAT_FLOAT", "HIP_AD_FORMAT_FLOAT", "numeric_literal");
     subst("CU_AD_FORMAT_HALF", "HIP_AD_FORMAT_HALF", "numeric_literal");
     subst("CU_AD_FORMAT_SIGNED_INT16", "HIP_AD_FORMAT_SIGNED_INT16", "numeric_literal");
@@ -4015,6 +3883,8 @@ sub simpleSubstitutions {
     subst("CU_AD_FORMAT_UNSIGNED_INT16", "HIP_AD_FORMAT_UNSIGNED_INT16", "numeric_literal");
     subst("CU_AD_FORMAT_UNSIGNED_INT32", "HIP_AD_FORMAT_UNSIGNED_INT32", "numeric_literal");
     subst("CU_AD_FORMAT_UNSIGNED_INT8", "HIP_AD_FORMAT_UNSIGNED_INT8", "numeric_literal");
+    subst("CU_ARRAY_SPARSE_SUBRESOURCE_TYPE_MIPTAIL", "hipArraySparseSubresourceTypeMiptail", "numeric_literal");
+    subst("CU_ARRAY_SPARSE_SUBRESOURCE_TYPE_SPARSE_LEVEL", "hipArraySparseSubresourceTypeSparseLevel", "numeric_literal");
     subst("CU_COMPUTEMODE_DEFAULT", "hipComputeModeDefault", "numeric_literal");
     subst("CU_COMPUTEMODE_EXCLUSIVE", "hipComputeModeExclusive", "numeric_literal");
     subst("CU_COMPUTEMODE_EXCLUSIVE_PROCESS", "hipComputeModeExclusiveProcess", "numeric_literal");
@@ -4103,6 +3973,7 @@ sub simpleSubstitutions {
     subst("CU_DEVICE_ATTRIBUTE_MAX_THREADS_PER_BLOCK", "hipDeviceAttributeMaxThreadsPerBlock", "numeric_literal");
     subst("CU_DEVICE_ATTRIBUTE_MAX_THREADS_PER_MULTIPROCESSOR", "hipDeviceAttributeMaxThreadsPerMultiProcessor", "numeric_literal");
     subst("CU_DEVICE_ATTRIBUTE_MEMORY_CLOCK_RATE", "hipDeviceAttributeMemoryClockRate", "numeric_literal");
+    subst("CU_DEVICE_ATTRIBUTE_MEMORY_POOLS_SUPPORTED", "hipDeviceAttributeMemoryPoolsSupported", "numeric_literal");
     subst("CU_DEVICE_ATTRIBUTE_MULTIPROCESSOR_COUNT", "hipDeviceAttributeMultiprocessorCount", "numeric_literal");
     subst("CU_DEVICE_ATTRIBUTE_MULTI_GPU_BOARD", "hipDeviceAttributeIsMultiGpuBoard", "numeric_literal");
     subst("CU_DEVICE_ATTRIBUTE_MULTI_GPU_BOARD_GROUP_ID", "hipDeviceAttributeMultiGpuBoardGroupId", "numeric_literal");
@@ -4202,21 +4073,48 @@ sub simpleSubstitutions {
     subst("CU_JIT_TARGET_FROM_CUCONTEXT", "hipJitOptionTargetFromContext", "numeric_literal");
     subst("CU_JIT_THREADS_PER_BLOCK", "hipJitOptionThreadsPerBlock", "numeric_literal");
     subst("CU_JIT_WALL_TIME", "hipJitOptionWallTime", "numeric_literal");
+    subst("CU_KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW", "hipKernelNodeAttributeAccessPolicyWindow", "numeric_literal");
+    subst("CU_KERNEL_NODE_ATTRIBUTE_COOPERATIVE", "hipKernelNodeAttributeCooperative", "numeric_literal");
     subst("CU_LIMIT_MALLOC_HEAP_SIZE", "hipLimitMallocHeapSize", "numeric_literal");
     subst("CU_LIMIT_PRINTF_FIFO_SIZE", "hipLimitPrintfFifoSize", "numeric_literal");
     subst("CU_MEMORYTYPE_ARRAY", "hipMemoryTypeArray", "numeric_literal");
     subst("CU_MEMORYTYPE_DEVICE", "hipMemoryTypeDevice", "numeric_literal");
     subst("CU_MEMORYTYPE_HOST", "hipMemoryTypeHost", "numeric_literal");
     subst("CU_MEMORYTYPE_UNIFIED", "hipMemoryTypeUnified", "numeric_literal");
+    subst("CU_MEMPOOL_ATTR_RELEASE_THRESHOLD", "hipMemPoolAttrReleaseThreshold", "numeric_literal");
+    subst("CU_MEMPOOL_ATTR_RESERVED_MEM_CURRENT", "hipMemPoolAttrReservedMemCurrent", "numeric_literal");
+    subst("CU_MEMPOOL_ATTR_RESERVED_MEM_HIGH", "hipMemPoolAttrReservedMemHigh", "numeric_literal");
+    subst("CU_MEMPOOL_ATTR_REUSE_ALLOW_INTERNAL_DEPENDENCIES", "hipMemPoolReuseAllowInternalDependencies", "numeric_literal");
+    subst("CU_MEMPOOL_ATTR_REUSE_ALLOW_OPPORTUNISTIC", "hipMemPoolReuseAllowOpportunistic", "numeric_literal");
+    subst("CU_MEMPOOL_ATTR_REUSE_FOLLOW_EVENT_DEPENDENCIES", "hipMemPoolReuseFollowEventDependencies", "numeric_literal");
+    subst("CU_MEMPOOL_ATTR_USED_MEM_CURRENT", "hipMemPoolAttrUsedMemCurrent", "numeric_literal");
+    subst("CU_MEMPOOL_ATTR_USED_MEM_HIGH", "hipMemPoolAttrUsedMemHigh", "numeric_literal");
+    subst("CU_MEM_ACCESS_FLAGS_PROT_NONE", "hipMemAccessFlagsProtNone", "numeric_literal");
+    subst("CU_MEM_ACCESS_FLAGS_PROT_READ", "hipMemAccessFlagsProtRead", "numeric_literal");
+    subst("CU_MEM_ACCESS_FLAGS_PROT_READWRITE", "hipMemAccessFlagsProtReadWrite", "numeric_literal");
     subst("CU_MEM_ADVISE_SET_ACCESSED_BY", "hipMemAdviseSetAccessedBy", "numeric_literal");
     subst("CU_MEM_ADVISE_SET_PREFERRED_LOCATION", "hipMemAdviseSetPreferredLocation", "numeric_literal");
     subst("CU_MEM_ADVISE_SET_READ_MOSTLY", "hipMemAdviseSetReadMostly", "numeric_literal");
     subst("CU_MEM_ADVISE_UNSET_ACCESSED_BY", "hipMemAdviseUnsetAccessedBy", "numeric_literal");
     subst("CU_MEM_ADVISE_UNSET_PREFERRED_LOCATION", "hipMemAdviseUnsetPreferredLocation", "numeric_literal");
     subst("CU_MEM_ADVISE_UNSET_READ_MOSTLY", "hipMemAdviseUnsetReadMostly", "numeric_literal");
+    subst("CU_MEM_ALLOCATION_TYPE_INVALID", "hipMemAllocationTypeInvalid", "numeric_literal");
+    subst("CU_MEM_ALLOCATION_TYPE_MAX", "hipMemAllocationTypeMax", "numeric_literal");
+    subst("CU_MEM_ALLOCATION_TYPE_PINNED", "hipMemAllocationTypePinned", "numeric_literal");
+    subst("CU_MEM_ALLOC_GRANULARITY_MINIMUM", "hipMemAllocationGranularityMinimum", "numeric_literal");
+    subst("CU_MEM_ALLOC_GRANULARITY_RECOMMENDED", "hipMemAllocationGranularityRecommended", "numeric_literal");
     subst("CU_MEM_ATTACH_GLOBAL", "hipMemAttachGlobal", "numeric_literal");
     subst("CU_MEM_ATTACH_HOST", "hipMemAttachHost", "numeric_literal");
     subst("CU_MEM_ATTACH_SINGLE", "hipMemAttachSingle", "numeric_literal");
+    subst("CU_MEM_HANDLE_TYPE_GENERIC", "hipMemHandleTypeGeneric", "numeric_literal");
+    subst("CU_MEM_HANDLE_TYPE_NONE", "hipMemHandleTypeNone", "numeric_literal");
+    subst("CU_MEM_HANDLE_TYPE_POSIX_FILE_DESCRIPTOR", "hipMemHandleTypePosixFileDescriptor", "numeric_literal");
+    subst("CU_MEM_HANDLE_TYPE_WIN32", "hipMemHandleTypeWin32", "numeric_literal");
+    subst("CU_MEM_HANDLE_TYPE_WIN32_KMT", "hipMemHandleTypeWin32Kmt", "numeric_literal");
+    subst("CU_MEM_LOCATION_TYPE_DEVICE", "hipMemLocationTypeDevice", "numeric_literal");
+    subst("CU_MEM_LOCATION_TYPE_INVALID", "hipMemLocationTypeInvalid", "numeric_literal");
+    subst("CU_MEM_OPERATION_TYPE_MAP", "hipMemOperationTypeMap", "numeric_literal");
+    subst("CU_MEM_OPERATION_TYPE_UNMAP", "hipMemOperationTypeUnmap", "numeric_literal");
     subst("CU_MEM_RANGE_ATTRIBUTE_ACCESSED_BY", "hipMemRangeAttributeAccessedBy", "numeric_literal");
     subst("CU_MEM_RANGE_ATTRIBUTE_LAST_PREFETCH_LOCATION", "hipMemRangeAttributeLastPrefetchLocation", "numeric_literal");
     subst("CU_MEM_RANGE_ATTRIBUTE_PREFERRED_LOCATION", "hipMemRangeAttributePreferredLocation", "numeric_literal");
@@ -4313,6 +4211,9 @@ sub simpleSubstitutions {
     subst("NVRTC_ERROR_OUT_OF_MEMORY", "HIPRTC_ERROR_OUT_OF_MEMORY", "numeric_literal");
     subst("NVRTC_ERROR_PROGRAM_CREATION_FAILURE", "HIPRTC_ERROR_PROGRAM_CREATION_FAILURE", "numeric_literal");
     subst("NVRTC_SUCCESS", "HIPRTC_SUCCESS", "numeric_literal");
+    subst("cudaAccessPropertyNormal", "hipAccessPropertyNormal", "numeric_literal");
+    subst("cudaAccessPropertyPersisting", "hipAccessPropertyPersisting", "numeric_literal");
+    subst("cudaAccessPropertyStreaming", "hipAccessPropertyStreaming", "numeric_literal");
     subst("cudaAddressModeBorder", "hipAddressModeBorder", "numeric_literal");
     subst("cudaAddressModeClamp", "hipAddressModeClamp", "numeric_literal");
     subst("cudaAddressModeMirror", "hipAddressModeMirror", "numeric_literal");
@@ -4402,6 +4303,7 @@ sub simpleSubstitutions {
     subst("cudaDevAttrMaxThreadsPerBlock", "hipDeviceAttributeMaxThreadsPerBlock", "numeric_literal");
     subst("cudaDevAttrMaxThreadsPerMultiProcessor", "hipDeviceAttributeMaxThreadsPerMultiProcessor", "numeric_literal");
     subst("cudaDevAttrMemoryClockRate", "hipDeviceAttributeMemoryClockRate", "numeric_literal");
+    subst("cudaDevAttrMemoryPoolsSupported", "hipDeviceAttributeMemoryPoolsSupported", "numeric_literal");
     subst("cudaDevAttrMultiGpuBoardGroupID", "hipDeviceAttributeMultiGpuBoardGroupID", "numeric_literal");
     subst("cudaDevAttrMultiProcessorCount", "hipDeviceAttributeMultiprocessorCount", "numeric_literal");
     subst("cudaDevAttrPageableMemoryAccess", "hipDeviceAttributePageableMemoryAccess", "numeric_literal");
@@ -4523,6 +4425,7 @@ sub simpleSubstitutions {
     subst("cudaGraphExecUpdateErrorTopologyChanged", "hipGraphExecUpdateErrorTopologyChanged", "numeric_literal");
     subst("cudaGraphExecUpdateErrorUnsupportedFunctionChange", "hipGraphExecUpdateErrorUnsupportedFunctionChange", "numeric_literal");
     subst("cudaGraphExecUpdateSuccess", "hipGraphExecUpdateSuccess", "numeric_literal");
+    subst("cudaGraphInstantiateFlagAutoFreeOnLaunch", "hipGraphInstantiateFlagAutoFreeOnLaunch", "numeric_literal");
     subst("cudaGraphNodeTypeCount", "hipGraphNodeTypeCount", "numeric_literal");
     subst("cudaGraphNodeTypeEmpty", "hipGraphNodeTypeEmpty", "numeric_literal");
     subst("cudaGraphNodeTypeEventRecord", "hipGraphNodeTypeEventRecord", "numeric_literal");
@@ -4537,14 +4440,36 @@ sub simpleSubstitutions {
     subst("cudaGraphicsRegisterFlagsSurfaceLoadStore", "hipGraphicsRegisterFlagsSurfaceLoadStore", "numeric_literal");
     subst("cudaGraphicsRegisterFlagsTextureGather", "hipGraphicsRegisterFlagsTextureGather", "numeric_literal");
     subst("cudaGraphicsRegisterFlagsWriteDiscard", "hipGraphicsRegisterFlagsWriteDiscard", "numeric_literal");
+    subst("cudaKernelNodeAttributeAccessPolicyWindow", "hipKernelNodeAttributeAccessPolicyWindow", "numeric_literal");
+    subst("cudaKernelNodeAttributeCooperative", "hipKernelNodeAttributeCooperative", "numeric_literal");
     subst("cudaLimitMallocHeapSize", "hipLimitMallocHeapSize", "numeric_literal");
     subst("cudaLimitPrintfFifoSize", "hipLimitPrintfFifoSize", "numeric_literal");
+    subst("cudaMemAccessFlagsProtNone", "hipMemAccessFlagsProtNone", "numeric_literal");
+    subst("cudaMemAccessFlagsProtRead", "hipMemAccessFlagsProtRead", "numeric_literal");
+    subst("cudaMemAccessFlagsProtReadWrite", "hipMemAccessFlagsProtReadWrite", "numeric_literal");
     subst("cudaMemAdviseSetAccessedBy", "hipMemAdviseSetAccessedBy", "numeric_literal");
     subst("cudaMemAdviseSetPreferredLocation", "hipMemAdviseSetPreferredLocation", "numeric_literal");
     subst("cudaMemAdviseSetReadMostly", "hipMemAdviseSetReadMostly", "numeric_literal");
     subst("cudaMemAdviseUnsetAccessedBy", "hipMemAdviseUnsetAccessedBy", "numeric_literal");
     subst("cudaMemAdviseUnsetPreferredLocation", "hipMemAdviseUnsetPreferredLocation", "numeric_literal");
     subst("cudaMemAdviseUnsetReadMostly", "hipMemAdviseUnsetReadMostly", "numeric_literal");
+    subst("cudaMemAllocationTypeInvalid", "hipMemAllocationTypeInvalid", "numeric_literal");
+    subst("cudaMemAllocationTypeMax", "hipMemAllocationTypeMax", "numeric_literal");
+    subst("cudaMemAllocationTypePinned", "hipMemAllocationTypePinned", "numeric_literal");
+    subst("cudaMemHandleTypeNone", "hipMemHandleTypeNone", "numeric_literal");
+    subst("cudaMemHandleTypePosixFileDescriptor", "hipMemHandleTypePosixFileDescriptor", "numeric_literal");
+    subst("cudaMemHandleTypeWin32", "hipMemHandleTypeWin32", "numeric_literal");
+    subst("cudaMemHandleTypeWin32Kmt", "hipMemHandleTypeWin32Kmt", "numeric_literal");
+    subst("cudaMemLocationTypeDevice", "hipMemLocationTypeDevice", "numeric_literal");
+    subst("cudaMemLocationTypeInvalid", "hipMemLocationTypeInvalid", "numeric_literal");
+    subst("cudaMemPoolAttrReleaseThreshold", "hipMemPoolAttrReleaseThreshold", "numeric_literal");
+    subst("cudaMemPoolAttrReservedMemCurrent", "hipMemPoolAttrReservedMemCurrent", "numeric_literal");
+    subst("cudaMemPoolAttrReservedMemHigh", "hipMemPoolAttrReservedMemHigh", "numeric_literal");
+    subst("cudaMemPoolAttrUsedMemCurrent", "hipMemPoolAttrUsedMemCurrent", "numeric_literal");
+    subst("cudaMemPoolAttrUsedMemHigh", "hipMemPoolAttrUsedMemHigh", "numeric_literal");
+    subst("cudaMemPoolReuseAllowInternalDependencies", "hipMemPoolReuseAllowInternalDependencies", "numeric_literal");
+    subst("cudaMemPoolReuseAllowOpportunistic", "hipMemPoolReuseAllowOpportunistic", "numeric_literal");
+    subst("cudaMemPoolReuseFollowEventDependencies", "hipMemPoolReuseFollowEventDependencies", "numeric_literal");
     subst("cudaMemRangeAttributeAccessedBy", "hipMemRangeAttributeAccessedBy", "numeric_literal");
     subst("cudaMemRangeAttributeLastPrefetchLocation", "hipMemRangeAttributeLastPrefetchLocation", "numeric_literal");
     subst("cudaMemRangeAttributePreferredLocation", "hipMemRangeAttributePreferredLocation", "numeric_literal");
@@ -6021,13 +5946,6 @@ sub warnUnsupportedFunctions {
         "cudaWGLGetDevice",
         "cudaVDPAUSetVDPAUDevice",
         "cudaVDPAUGetDevice",
-        "cudaUserObject_t",
-        "cudaUserObjectRetainFlags",
-        "cudaUserObjectRetain",
-        "cudaUserObjectRelease",
-        "cudaUserObjectNoDestructorSync",
-        "cudaUserObjectFlags",
-        "cudaUserObjectCreate",
         "cudaThreadSetLimit",
         "cudaThreadGetLimit",
         "cudaSynchronizationPolicy",
@@ -6061,7 +5979,6 @@ sub warnUnsupportedFunctions {
         "cudaNvSciSyncAttrWait",
         "cudaNvSciSyncAttrSignal",
         "cudaMemoryTypeUnregistered",
-        "cudaMemoryTypeManaged",
         "cudaMemcpyToArrayAsync",
         "cudaMemcpyFromArrayAsync",
         "cudaMemcpyArrayToArray",
@@ -6070,7 +5987,6 @@ sub warnUnsupportedFunctions {
         "cudaMemcpy3DPeer",
         "cudaMemcpy2DArrayToArray",
         "cudaMemAllocNodeParams",
-        "cudaLimitStackSize",
         "cudaLimitPersistingL2CacheSize",
         "cudaLimitMaxL2FetchGranularity",
         "cudaLimitDevRuntimeSyncDepth",
@@ -6098,21 +6014,10 @@ sub warnUnsupportedFunctions {
         "cudaGraphicsCubeFaceNegativeY",
         "cudaGraphicsCubeFaceNegativeX",
         "cudaGraphicsCubeFace",
-        "cudaGraphUserObjectMove",
-        "cudaGraphUpload",
-        "cudaGraphRetainUserObject",
-        "cudaGraphReleaseUserObject",
         "cudaGraphNodeTypeMemFree",
         "cudaGraphNodeTypeMemAlloc",
-        "cudaGraphNodeTypeExtSemaphoreWait",
-        "cudaGraphNodeTypeExtSemaphoreSignal",
         "cudaGraphNodeSetEnabled",
         "cudaGraphMemFreeNodeGetParams",
-        "cudaGraphMemAttributeType",
-        "cudaGraphMemAttrUsedMemHigh",
-        "cudaGraphMemAttrUsedMemCurrent",
-        "cudaGraphMemAttrReservedMemHigh",
-        "cudaGraphMemAttrReservedMemCurrent",
         "cudaGraphMemAllocNodeGetParams",
         "cudaGraphKernelNodeCopyAttributes",
         "cudaGraphInstantiateFlagUseNodePriority",
@@ -6341,14 +6246,10 @@ sub warnUnsupportedFunctions {
         "cudaEGLStreamConsumerConnectWithFlags",
         "cudaEGLStreamConsumerConnect",
         "cudaEGLStreamConsumerAcquireFrame",
-        "cudaDeviceSetLimit",
-        "cudaDeviceSetGraphMemAttribute",
         "cudaDevicePropDontCare",
         "cudaDeviceMask",
-        "cudaDeviceGraphMemTrim",
         "cudaDeviceGetTexture1DLinearMaxWidth",
         "cudaDeviceGetNvSciSyncAttributes",
-        "cudaDeviceGetGraphMemAttribute",
         "cudaDeviceFlushGPUDirectRDMAWrites",
         "cudaDevAttrTimelineSemaphoreInteropSupported",
         "cudaDevAttrSparseCudaArraySupported",
@@ -6478,9 +6379,6 @@ sub warnUnsupportedFunctions {
         "cuWGLGetDevice",
         "cuVDPAUGetDevice",
         "cuVDPAUCtxCreate",
-        "cuUserObjectRetain",
-        "cuUserObjectRelease",
-        "cuUserObjectCreate",
         "cuTexRefGetBorderColor",
         "cuTexRefDestroy",
         "cuTexRefCreate",
@@ -6557,9 +6455,6 @@ sub warnUnsupportedFunctions {
         "cuGraphicsD3D9RegisterResource",
         "cuGraphicsD3D11RegisterResource",
         "cuGraphicsD3D10RegisterResource",
-        "cuGraphUpload",
-        "cuGraphRetainUserObject",
-        "cuGraphReleaseUserObject",
         "cuGraphNodeSetEnabled",
         "cuGraphNodeGetEnabled",
         "cuGraphMemFreeNodeGetParams",
@@ -6585,8 +6480,6 @@ sub warnUnsupportedFunctions {
         "cuGraphAddExternalSemaphoresSignalNode",
         "cuGraphAddBatchMemOpNode",
         "cuGetProcAddress",
-        "cuGetErrorString",
-        "cuGetErrorName",
         "cuGLUnregisterBufferObject",
         "cuGLUnmapBufferObjectAsync",
         "cuGLUnmapBufferObject",
@@ -6615,13 +6508,10 @@ sub warnUnsupportedFunctions {
         "cuEGLStreamConsumerConnectWithFlags",
         "cuEGLStreamConsumerConnect",
         "cuEGLStreamConsumerAcquireFrame",
-        "cuDeviceSetGraphMemAttribute",
-        "cuDeviceGraphMemTrim",
         "cuDeviceGetTexture1DLinearMaxWidth",
         "cuDeviceGetProperties",
         "cuDeviceGetNvSciSyncAttributes",
         "cuDeviceGetLuid",
-        "cuDeviceGetGraphMemAttribute",
         "cuDeviceGetExecAffinitySupport",
         "cuD3D9UnregisterResource",
         "cuD3D9UnmapResources",
@@ -6658,7 +6548,6 @@ sub warnUnsupportedFunctions {
         "cuD3D10GetDevice",
         "cuD3D10CtxCreateOnDevice",
         "cuD3D10CtxCreate",
-        "cuCtxSetLimit",
         "cuCtxResetPersistingL2Cache",
         "cuCtxGetExecAffinity",
         "cuCtxDetach",
@@ -6688,12 +6577,6 @@ sub warnUnsupportedFunctions {
         "MAJOR_VERSION",
         "CubVector",
         "CubDebugExit",
-        "CUuserObject_st",
-        "CUuserObject_flags_enum",
-        "CUuserObject_flags",
-        "CUuserObjectRetain_flags_enum",
-        "CUuserObjectRetain_flags",
-        "CUuserObject",
         "CUsynchronizationPolicy_enum",
         "CUsynchronizationPolicy",
         "CUsurfref_st",
@@ -6739,8 +6622,6 @@ sub warnUnsupportedFunctions {
         "CUipcMem_flags",
         "CUgraphicsMapResourceFlags_enum",
         "CUgraphicsMapResourceFlags",
-        "CUgraphMem_attribute_enum",
-        "CUgraphMem_attribute",
         "CUgraphDebugDot_flags_enum",
         "CUgraphDebugDot_flags",
         "CUflushGPUDirectRDMAWritesTarget_enum",
@@ -6798,7 +6679,6 @@ sub warnUnsupportedFunctions {
         "CUctx_flags",
         "CUarray_cubemap_face_enum",
         "CUarray_cubemap_face",
-        "CU_USER_OBJECT_NO_DESTRUCTOR_SYNC",
         "CU_TRSF_SEAMLESS_CUBEMAP",
         "CU_TRSF_DISABLE_TRILINEAR_OPTIMIZATION",
         "CU_TARGET_COMPUTE_87",
@@ -6864,7 +6744,6 @@ sub warnUnsupportedFunctions {
         "CU_MEM_CREATE_USAGE_TILE_POOL",
         "CU_MEM_ACCESS_FLAGS_PROT_MAX",
         "CU_MEMHOSTREGISTER_READ_ONLY",
-        "CU_LIMIT_STACK_SIZE",
         "CU_LIMIT_PERSISTING_L2_CACHE_SIZE",
         "CU_LIMIT_MAX_L2_FETCH_GRANULARITY",
         "CU_LIMIT_MAX",
@@ -6897,16 +6776,9 @@ sub warnUnsupportedFunctions {
         "CU_JIT_CACHE_OPTION_NONE",
         "CU_JIT_CACHE_OPTION_CG",
         "CU_JIT_CACHE_OPTION_CA",
-        "CU_GRAPH_USER_OBJECT_MOVE",
         "CU_GRAPH_NODE_TYPE_MEM_FREE",
         "CU_GRAPH_NODE_TYPE_MEM_ALLOC",
-        "CU_GRAPH_NODE_TYPE_EXT_SEMAS_WAIT",
-        "CU_GRAPH_NODE_TYPE_EXT_SEMAS_SIGNAL",
         "CU_GRAPH_NODE_TYPE_BATCH_MEM_OP",
-        "CU_GRAPH_MEM_ATTR_USED_MEM_HIGH",
-        "CU_GRAPH_MEM_ATTR_USED_MEM_CURRENT",
-        "CU_GRAPH_MEM_ATTR_RESERVED_MEM_HIGH",
-        "CU_GRAPH_MEM_ATTR_RESERVED_MEM_CURRENT",
         "CU_GRAPH_EXEC_UPDATE_ERROR_ATTRIBUTES_CHANGED",
         "CU_GRAPH_DEBUG_DOT_FLAGS_VERBOSE",
         "CU_GRAPH_DEBUG_DOT_FLAGS_RUNTIME_TYPES",
@@ -7029,7 +6901,6 @@ sub warnUnsupportedFunctions {
         "CU_EGL_COLOR_FORMAT_ARGB",
         "CU_EGL_COLOR_FORMAT_ABGR",
         "CU_EGL_COLOR_FORMAT_A",
-        "CU_DEVICE_ATTRIBUTE_VIRTUAL_MEMORY_MANAGEMENT_SUPPORTED",
         "CU_DEVICE_ATTRIBUTE_VIRTUAL_ADDRESS_MANAGEMENT_SUPPORTED",
         "CU_DEVICE_ATTRIBUTE_TIMELINE_SEMAPHORE_INTEROP_SUPPORTED",
         "CU_DEVICE_ATTRIBUTE_SPARSE_CUDA_ARRAY_SUPPORTED",
@@ -8065,7 +7936,7 @@ if ($help) {
     print STDERR "$USAGE\n";
 }
 if ($version) {
-    print STDERR "HIP version 5.2.0\n";
+    print STDERR "HIP version 5.3.0\n";
 }
 while (@ARGV) {
     $fileName=shift (@ARGV);
