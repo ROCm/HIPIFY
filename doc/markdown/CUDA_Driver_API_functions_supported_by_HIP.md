@@ -1006,6 +1006,8 @@
 |`CUkernelNodeAttrValue_v1`|11.3| | |`hipKernelNodeAttrValue`|5.2.0| | | |
 |`CUlimit`| | | |`hipLimit_t`|1.6.0| | | |
 |`CUlimit_enum`| | | |`hipLimit_t`|1.6.0| | | |
+|`CUlinkState`| | | |`hiprtcLinkState`|5.3.0| | |5.3.0|
+|`CUlinkState_st`| | | |`ihiprtcLinkState`|5.3.0| | |5.3.0|
 |`CUmemAccessDesc`|10.2| | |`hipMemAccessDesc`|5.2.0| | | |
 |`CUmemAccessDesc_st`|10.2| | |`hipMemAccessDesc`|5.2.0| | | |
 |`CUmemAccessDesc_v1`|11.3| | |`hipMemAccessDesc`|5.2.0| | | |
@@ -1222,14 +1224,14 @@
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
-|`cuLinkAddData`| | | | | | | | |
-|`cuLinkAddData_v2`| | | | | | | | |
-|`cuLinkAddFile`| | | | | | | | |
-|`cuLinkAddFile_v2`| | | | | | | | |
-|`cuLinkComplete`| | | | | | | | |
-|`cuLinkCreate`| | | | | | | | |
-|`cuLinkCreate_v2`| | | | | | | | |
-|`cuLinkDestroy`| | | | | | | | |
+|`cuLinkAddData`| | | |`hiprtcLinkAddData`|5.3.0| | |5.3.0|
+|`cuLinkAddData_v2`| | | |`hiprtcLinkAddData`|5.3.0| | |5.3.0|
+|`cuLinkAddFile`| | | |`hiprtcLinkAddFile`|5.3.0| | |5.3.0|
+|`cuLinkAddFile_v2`| | | |`hiprtcLinkAddFile`|5.3.0| | |5.3.0|
+|`cuLinkComplete`| | | |`hiprtcLinkComplete`|5.3.0| | |5.3.0|
+|`cuLinkCreate`| | | |`hiprtcLinkCreate`|5.3.0| | |5.3.0|
+|`cuLinkCreate_v2`| | | |`hiprtcLinkCreate`|5.3.0| | |5.3.0|
+|`cuLinkDestroy`| | | |`hiprtcLinkDestroy`|5.3.0| | |5.3.0|
 |`cuModuleGetFunction`| | | |`hipModuleGetFunction`|1.6.0| | | |
 |`cuModuleGetGlobal`| | | |`hipModuleGetGlobal`|1.6.0| | | |
 |`cuModuleGetGlobal_v2`| | | |`hipModuleGetGlobal`|1.6.0| | | |

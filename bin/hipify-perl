@@ -715,6 +715,8 @@ my %removed_funcs = (
 );
 
 my %experimental_funcs = (
+    "nvrtcGetCUBINSize" => "5.3.0",
+    "nvrtcGetCUBIN" => "5.3.0",
     "cudaUserObject_t" => "5.3.0",
     "cudaUserObjectRetainFlags" => "5.3.0",
     "cudaUserObjectRetain" => "5.3.0",
@@ -742,6 +744,14 @@ my %experimental_funcs = (
     "cuUserObjectRetain" => "5.3.0",
     "cuUserObjectRelease" => "5.3.0",
     "cuUserObjectCreate" => "5.3.0",
+    "cuLinkDestroy" => "5.3.0",
+    "cuLinkCreate_v2" => "5.3.0",
+    "cuLinkCreate" => "5.3.0",
+    "cuLinkComplete" => "5.3.0",
+    "cuLinkAddFile_v2" => "5.3.0",
+    "cuLinkAddFile" => "5.3.0",
+    "cuLinkAddData_v2" => "5.3.0",
+    "cuLinkAddData" => "5.3.0",
     "cuGraphUpload" => "5.3.0",
     "cuGraphRetainUserObject" => "5.3.0",
     "cuGraphReleaseUserObject" => "5.3.0",
@@ -919,6 +929,14 @@ sub experimentalSubstitutions {
     subst("cuGetErrorString", "hipDrvGetErrorString", "error");
     subst("cudaDeviceSetLimit", "hipDeviceSetLimit", "device");
     subst("cuCtxSetLimit", "hipDeviceSetLimit", "context");
+    subst("cuLinkAddData", "hiprtcLinkAddData", "module");
+    subst("cuLinkAddData_v2", "hiprtcLinkAddData", "module");
+    subst("cuLinkAddFile", "hiprtcLinkAddFile", "module");
+    subst("cuLinkAddFile_v2", "hiprtcLinkAddFile", "module");
+    subst("cuLinkComplete", "hiprtcLinkComplete", "module");
+    subst("cuLinkCreate", "hiprtcLinkCreate", "module");
+    subst("cuLinkCreate_v2", "hiprtcLinkCreate", "module");
+    subst("cuLinkDestroy", "hiprtcLinkDestroy", "module");
     subst("cuDeviceGetGraphMemAttribute", "hipDeviceGetGraphMemAttribute", "graph");
     subst("cuDeviceGraphMemTrim", "hipDeviceGraphMemTrim", "graph");
     subst("cuDeviceSetGraphMemAttribute", "hipDeviceSetGraphMemAttribute", "graph");
@@ -937,6 +955,8 @@ sub experimentalSubstitutions {
     subst("cudaUserObjectCreate", "hipUserObjectCreate", "graph");
     subst("cudaUserObjectRelease", "hipUserObjectRelease", "graph");
     subst("cudaUserObjectRetain", "hipUserObjectRetain", "graph");
+    subst("nvrtcGetCUBIN", "hiprtcGetBitcode", "library");
+    subst("nvrtcGetCUBINSize", "hiprtcGetBitcodeSize", "library");
     subst("CUgraphMem_attribute", "hipGraphMemAttributeType", "type");
     subst("CUgraphMem_attribute_enum", "hipGraphMemAttributeType", "type");
     subst("CUjitInputType", "hiprtcJITInputType", "type");
@@ -3220,6 +3240,8 @@ sub simpleSubstitutions {
     subst("CUkernelNodeAttrValue_v1", "hipKernelNodeAttrValue", "type");
     subst("CUlimit", "hipLimit_t", "type");
     subst("CUlimit_enum", "hipLimit_t", "type");
+    subst("CUlinkState", "hiprtcLinkState", "type");
+    subst("CUlinkState_st", "ihiprtcLinkState", "type");
     subst("CUmemAccessDesc", "hipMemAccessDesc", "type");
     subst("CUmemAccessDesc_st", "hipMemAccessDesc", "type");
     subst("CUmemAccessDesc_v1", "hipMemAccessDesc", "type");
@@ -5503,8 +5525,6 @@ sub warnUnsupportedFunctions {
         "nvrtcGetNumSupportedArchs",
         "nvrtcGetNVVMSize",
         "nvrtcGetNVVM",
-        "nvrtcGetCUBINSize",
-        "nvrtcGetCUBIN",
         "memoryBarrier",
         "libraryPropertyType_t",
         "libraryPropertyType",
@@ -6450,14 +6470,6 @@ sub warnUnsupportedFunctions {
         "cuMemcpy3DPeer",
         "cuMemcpy",
         "cuMemGetHandleForAddressRange",
-        "cuLinkDestroy",
-        "cuLinkCreate_v2",
-        "cuLinkCreate",
-        "cuLinkComplete",
-        "cuLinkAddFile_v2",
-        "cuLinkAddFile",
-        "cuLinkAddData_v2",
-        "cuLinkAddData",
         "cuLaunchGridAsync",
         "cuLaunchGrid",
         "cuLaunchCooperativeKernelMultiDevice",
