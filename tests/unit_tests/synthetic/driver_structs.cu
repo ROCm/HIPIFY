@@ -104,6 +104,11 @@ int main() {
   // CHECK: hipUUID_t uuid_st;
   CUuuid_st uuid_st;
 
+  // CHECK: ihiprtcLinkState* linkState_ptr;
+  // CHECK-NEXT: hiprtcLinkState linkState;
+  CUlinkState_st* linkState_ptr;
+  CUlinkState linkState;
+
 #if CUDA_VERSION >= 10000
   // CHECK: hipExternalMemoryBufferDesc_st ext_mem_buff_st;
   // CHECK-NEXT: hipExternalMemoryBufferDesc ext_mem_buff;

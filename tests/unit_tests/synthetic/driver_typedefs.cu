@@ -49,9 +49,7 @@ int main() {
 
   // CHECK: hipTextureObject_t texObject_v1;
   CUtexObject_v1 texObject_v1;
-#endif
 
-#if CUDA_VERSION >= 11040
   // CHECK: hipMemGenericAllocationHandle_t memGenericAllocationHandle_v1;
   CUmemGenericAllocationHandle_v1 memGenericAllocationHandle_v1;
 #endif

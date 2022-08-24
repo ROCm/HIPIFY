@@ -328,6 +328,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUstreamAttrValue_v1",                                             {"hipStreamAttrValue",                                       "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
   {"CUstreamAttrValue_union",                                          {"hipStreamAttrValue",                                       "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
 
+    // no analogue
+  {"CUlinkState_st",                                                   {"ihiprtcLinkState",                                         "", CONV_TYPE, API_DRIVER, 1}},
+  {"CUlinkState",                                                      {"hiprtcLinkState",                                          "", CONV_TYPE, API_DRIVER, 1}},
+
   // 3. Enums
   // TODO: HIPaddress_mode_enum and all its values should be hipTextureAddressMode as long as they are equal.
   {"CUaddress_mode",                                                   {"HIPaddress_mode",                                          "", CONV_TYPE, API_DRIVER, 1}},
@@ -3295,4 +3299,6 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {
   {"HIPRTC_JIT_INPUT_LIBRARY",                                         {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
   {"HIPRTC_JIT_INPUT_NVVM",                                            {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
   {"HIPRTC_JIT_NUM_LEGACY_INPUT_TYPES",                                {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"ihiprtcLinkState",                                                 {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hiprtcLinkState",                                                  {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
 };

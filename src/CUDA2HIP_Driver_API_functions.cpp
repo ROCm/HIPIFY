@@ -136,14 +136,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
 
   // 10. Module Management
   // no analogues
-  {"cuLinkAddData",                                        {"hipLinkAddData",                                          "", CONV_MODULE, API_DRIVER, 10, HIP_UNSUPPORTED}},
-  {"cuLinkAddData_v2",                                     {"hipLinkAddData",                                          "", CONV_MODULE, API_DRIVER, 10, HIP_UNSUPPORTED}},
-  {"cuLinkAddFile",                                        {"hipLinkAddFile",                                          "", CONV_MODULE, API_DRIVER, 10, HIP_UNSUPPORTED}},
-  {"cuLinkAddFile_v2",                                     {"hipLinkAddFile",                                          "", CONV_MODULE, API_DRIVER, 10, HIP_UNSUPPORTED}},
-  {"cuLinkComplete",                                       {"hipLinkComplete",                                         "", CONV_MODULE, API_DRIVER, 10, HIP_UNSUPPORTED}},
-  {"cuLinkCreate",                                         {"hipLinkCreate",                                           "", CONV_MODULE, API_DRIVER, 10, HIP_UNSUPPORTED}},
-  {"cuLinkCreate_v2",                                      {"hipLinkCreate",                                           "", CONV_MODULE, API_DRIVER, 10, HIP_UNSUPPORTED}},
-  {"cuLinkDestroy",                                        {"hipLinkDestroy",                                          "", CONV_MODULE, API_DRIVER, 10, HIP_UNSUPPORTED}},
+  {"cuLinkAddData",                                        {"hiprtcLinkAddData",                                       "", CONV_MODULE, API_DRIVER, 10, HIP_EXPERIMENTAL}},
+  {"cuLinkAddData_v2",                                     {"hiprtcLinkAddData",                                       "", CONV_MODULE, API_DRIVER, 10, HIP_EXPERIMENTAL}},
+  {"cuLinkAddFile",                                        {"hiprtcLinkAddFile",                                       "", CONV_MODULE, API_DRIVER, 10, HIP_EXPERIMENTAL}},
+  {"cuLinkAddFile_v2",                                     {"hiprtcLinkAddFile",                                       "", CONV_MODULE, API_DRIVER, 10, HIP_EXPERIMENTAL}},
+  {"cuLinkComplete",                                       {"hiprtcLinkComplete",                                      "", CONV_MODULE, API_DRIVER, 10, HIP_EXPERIMENTAL}},
+  {"cuLinkCreate",                                         {"hiprtcLinkCreate",                                        "", CONV_MODULE, API_DRIVER, 10, HIP_EXPERIMENTAL}},
+  {"cuLinkCreate_v2",                                      {"hiprtcLinkCreate",                                        "", CONV_MODULE, API_DRIVER, 10, HIP_EXPERIMENTAL}},
+  {"cuLinkDestroy",                                        {"hiprtcLinkDestroy",                                       "", CONV_MODULE, API_DRIVER, 10, HIP_EXPERIMENTAL}},
   {"cuModuleGetFunction",                                  {"hipModuleGetFunction",                                    "", CONV_MODULE, API_DRIVER, 10}},
   {"cuModuleGetGlobal",                                    {"hipModuleGetGlobal",                                      "", CONV_MODULE, API_DRIVER, 10}},
   {"cuModuleGetGlobal_v2",                                 {"hipModuleGetGlobal",                                      "", CONV_MODULE, API_DRIVER, 10}},
@@ -1412,6 +1412,11 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_FUNCTION_VER_MAP {
   {"hipMemUnmap",                                          {HIP_5020, HIP_0,    HIP_0   }},
   {"hipDrvGetErrorName",                                   {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipDrvGetErrorString",                                 {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hiprtcLinkCreate",                                     {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hiprtcLinkAddFile",                                    {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hiprtcLinkAddData",                                    {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hiprtcLinkComplete",                                   {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hiprtcLinkDestroy",                                    {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_DRIVER_API_SECTION_MAP {
