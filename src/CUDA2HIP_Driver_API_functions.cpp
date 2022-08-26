@@ -27,10 +27,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   // 2. Error Handling
   // no analogue
   // NOTE: cudaGetErrorName and cuGetErrorName have different signatures
-  {"cuGetErrorName",                                       {"hipDrvGetErrorName",                                      "", CONV_ERROR, API_DRIVER, 2, HIP_EXPERIMENTAL}},
+  {"cuGetErrorName",                                       {"hipDrvGetErrorName",                                      "", CONV_ERROR, API_DRIVER, 2, HIP_UNSUPPORTED}},
   // no analogue
   // NOTE: cudaGetErrorString and cuGetErrorString have different signatures
-  {"cuGetErrorString",                                     {"hipDrvGetErrorString",                                    "", CONV_ERROR, API_DRIVER, 2, HIP_EXPERIMENTAL}},
+  {"cuGetErrorString",                                     {"hipDrvGetErrorString",                                    "", CONV_ERROR, API_DRIVER, 2, HIP_UNSUPPORTED}},
 
   // 3. Initialization
   // no analogue
@@ -1410,8 +1410,6 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_FUNCTION_VER_MAP {
   {"hipMemRetainAllocationHandle",                         {HIP_5020, HIP_0,    HIP_0   }},
   {"hipMemSetAccess",                                      {HIP_5020, HIP_0,    HIP_0   }},
   {"hipMemUnmap",                                          {HIP_5020, HIP_0,    HIP_0   }},
-  {"hipDrvGetErrorName",                                   {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipDrvGetErrorString",                                 {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hiprtcLinkCreate",                                     {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hiprtcLinkAddFile",                                    {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hiprtcLinkAddData",                                    {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
