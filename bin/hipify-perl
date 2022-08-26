@@ -755,8 +755,6 @@ my %experimental_funcs = (
     "cuGraphUpload" => "5.3.0",
     "cuGraphRetainUserObject" => "5.3.0",
     "cuGraphReleaseUserObject" => "5.3.0",
-    "cuGetErrorString" => "5.3.0",
-    "cuGetErrorName" => "5.3.0",
     "cuDeviceSetGraphMemAttribute" => "5.3.0",
     "cuDeviceGraphMemTrim" => "5.3.0",
     "cuDeviceGetGraphMemAttribute" => "5.3.0",
@@ -925,8 +923,6 @@ sub subst {
 }
 
 sub experimentalSubstitutions {
-    subst("cuGetErrorName", "hipDrvGetErrorName", "error");
-    subst("cuGetErrorString", "hipDrvGetErrorString", "error");
     subst("cudaDeviceSetLimit", "hipDeviceSetLimit", "device");
     subst("cuCtxSetLimit", "hipDeviceSetLimit", "context");
     subst("cuLinkAddData", "hiprtcLinkAddData", "module");
@@ -6510,6 +6506,8 @@ sub warnUnsupportedFunctions {
         "cuGraphAddExternalSemaphoresSignalNode",
         "cuGraphAddBatchMemOpNode",
         "cuGetProcAddress",
+        "cuGetErrorString",
+        "cuGetErrorName",
         "cuGLUnregisterBufferObject",
         "cuGLUnmapBufferObjectAsync",
         "cuGLUnmapBufferObject",

@@ -1652,15 +1652,5 @@ int main() {
   CUresult result_2;
   const char* ret = NULL;
 
-  // CUDA: CUresult CUDAAPI cuGetErrorName(CUresult error, const char **pStr);
-  // HIP:  hipError_t hipDrvGetErrorName(hipError_t hipError, const char** errorString);
-  // CHECK: result = hipDrvGetErrorName(result_2, &ret);
-  result = cuGetErrorName(result_2, &ret);
-
-  // CUDA: CUresult CUDAAPI cuGetErrorString(CUresult error, const char **pStr);
-  // HIP:  hipError_t hipDrvGetErrorString(hipError_t hipError, const char** errorString);
-  // CHECK: result = hipDrvGetErrorString(result_2, &ret);
-  result = cuGetErrorString(result_2, &ret);
-
   return 0;
 }
