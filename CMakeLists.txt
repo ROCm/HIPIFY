@@ -71,12 +71,26 @@ if(LLVM_PACKAGE_VERSION VERSION_EQUAL "15.0.0" OR LLVM_PACKAGE_VERSION VERSION_G
     target_link_libraries(hipify-clang PRIVATE LLVMWindowsDriver clangSupport)
 endif()
 
+if(LLVM_PACKAGE_VERSION VERSION_EQUAL "16.0.0" OR LLVM_PACKAGE_VERSION VERSION_GREATER "16.0.0")
+    if(MSVC)
+        set(STD "/std:c++17")
+    else()
+        set(STD "-std=c++17")
+    endif()
+else()
+    if(MSVC)
+        set(STD "/std:c++14")
+    else()
+        set(STD "-std=c++14")
+    endif()
+endif()
+
 if(MSVC)
     target_link_libraries(hipify-clang PRIVATE version)
-    target_compile_options(hipify-clang PRIVATE /std:c++14 /Od /GR- /EHs- /EHc-)
+    target_compile_options(hipify-clang PRIVATE ${STD} /Od /GR- /EHs- /EHc-)
     set(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} /SUBSYSTEM:WINDOWS")
 else()
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -pthread -fno-rtti -fvisibility-inlines-hidden")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${STD} -pthread -fno-rtti -fvisibility-inlines-hidden")
 endif()
 
 # Address Sanitize Flag
