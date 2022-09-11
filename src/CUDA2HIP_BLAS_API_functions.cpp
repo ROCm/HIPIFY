@@ -252,25 +252,25 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
   {"cublasZhpr",                     {"hipblasZhpr",                     "rocblas_zhpr",                             CONV_LIB_FUNC, API_BLAS, 6, HIP_SUPPORTED_V2_ONLY}},
 
   // SYR2/HER2
-  {"cublasSsyr2",                    {"hipblasSsyr2",                    "rocblas_ssyr2",                            CONV_LIB_FUNC, API_BLAS, 6}},
-  {"cublasDsyr2",                    {"hipblasDsyr2",                    "rocblas_dsyr2",                            CONV_LIB_FUNC, API_BLAS, 6}},
-  {"cublasCsyr2",                    {"hipblasCsyr2",                    "rocblas_csyr2",                            CONV_LIB_FUNC, API_BLAS, 6}},
-  {"cublasZsyr2",                    {"hipblasZsyr2",                    "rocblas_zsyr2",                            CONV_LIB_FUNC, API_BLAS, 6}},
-  {"cublasCher2",                    {"hipblasCher2",                    "rocblas_cher2",                            CONV_LIB_FUNC, API_BLAS, 6}},
-  {"cublasZher2",                    {"hipblasZher2",                    "rocblas_zher2",                            CONV_LIB_FUNC, API_BLAS, 6}},
+  {"cublasSsyr2",                    {"hipblasSsyr2",                    "rocblas_ssyr2",                            CONV_LIB_FUNC, API_BLAS, 6, HIP_SUPPORTED_V2_ONLY}},
+  {"cublasDsyr2",                    {"hipblasDsyr2",                    "rocblas_dsyr2",                            CONV_LIB_FUNC, API_BLAS, 6, HIP_SUPPORTED_V2_ONLY}},
+  {"cublasCsyr2",                    {"hipblasCsyr2",                    "rocblas_csyr2",                            CONV_LIB_FUNC, API_BLAS, 6, HIP_SUPPORTED_V2_ONLY}},
+  {"cublasZsyr2",                    {"hipblasZsyr2",                    "rocblas_zsyr2",                            CONV_LIB_FUNC, API_BLAS, 6, HIP_SUPPORTED_V2_ONLY}},
+  {"cublasCher2",                    {"hipblasCher2",                    "rocblas_cher2",                            CONV_LIB_FUNC, API_BLAS, 6, HIP_SUPPORTED_V2_ONLY}},
+  {"cublasZher2",                    {"hipblasZher2",                    "rocblas_zher2",                            CONV_LIB_FUNC, API_BLAS, 6, HIP_SUPPORTED_V2_ONLY}},
 
   // SPR2/HPR2
-  {"cublasSspr2",                    {"hipblasSspr2",                    "rocblas_sspr2",                            CONV_LIB_FUNC, API_BLAS, 6}},
-  {"cublasDspr2",                    {"hipblasDspr2",                    "rocblas_dspr2",                            CONV_LIB_FUNC, API_BLAS, 6}},
-  {"cublasChpr2",                    {"hipblasChpr2",                    "rocblas_chpr2",                            CONV_LIB_FUNC, API_BLAS, 6}},
-  {"cublasZhpr2",                    {"hipblasZhpr2",                    "rocblas_zhpr2",                            CONV_LIB_FUNC, API_BLAS, 6}},
+  {"cublasSspr2",                    {"hipblasSspr2",                    "rocblas_sspr2",                            CONV_LIB_FUNC, API_BLAS, 6, HIP_SUPPORTED_V2_ONLY}},
+  {"cublasDspr2",                    {"hipblasDspr2",                    "rocblas_dspr2",                            CONV_LIB_FUNC, API_BLAS, 6, HIP_SUPPORTED_V2_ONLY}},
+  {"cublasChpr2",                    {"hipblasChpr2",                    "rocblas_chpr2",                            CONV_LIB_FUNC, API_BLAS, 6, HIP_SUPPORTED_V2_ONLY}},
+  {"cublasZhpr2",                    {"hipblasZhpr2",                    "rocblas_zhpr2",                            CONV_LIB_FUNC, API_BLAS, 6, HIP_SUPPORTED_V2_ONLY}},
 
   // Blas3 (v1) Routines
   // GEMM
-  {"cublasSgemm",                    {"hipblasSgemm",                    "rocblas_sgemm",                            CONV_LIB_FUNC, API_BLAS, 7}},
-  {"cublasDgemm",                    {"hipblasDgemm",                    "rocblas_dgemm",                            CONV_LIB_FUNC, API_BLAS, 7}},
-  {"cublasCgemm",                    {"hipblasCgemm",                    "rocblas_cgemm",                            CONV_LIB_FUNC, API_BLAS, 7}},
-  {"cublasZgemm",                    {"hipblasZgemm",                    "rocblas_zgemm",                            CONV_LIB_FUNC, API_BLAS, 7}},
+  {"cublasSgemm",                    {"hipblasSgemm",                    "rocblas_sgemm",                            CONV_LIB_FUNC, API_BLAS, 7, HIP_SUPPORTED_V2_ONLY}},
+  {"cublasDgemm",                    {"hipblasDgemm",                    "rocblas_dgemm",                            CONV_LIB_FUNC, API_BLAS, 7, HIP_SUPPORTED_V2_ONLY}},
+  {"cublasCgemm",                    {"hipblasCgemm",                    "rocblas_cgemm",                            CONV_LIB_FUNC, API_BLAS, 7, HIP_SUPPORTED_V2_ONLY}},
+  {"cublasZgemm",                    {"hipblasZgemm",                    "rocblas_zgemm",                            CONV_LIB_FUNC, API_BLAS, 7, HIP_SUPPORTED_V2_ONLY}},
   {"cublasHgemm",                    {"hipblasHgemm",                    "rocblas_hgemm",                            CONV_LIB_FUNC, API_BLAS, 7}},
 
   // BATCH GEMM
