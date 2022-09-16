@@ -621,17 +621,17 @@
 |`CU_JIT_GLOBAL_SYMBOL_NAMES`| | | | | | | | |
 |`CU_JIT_INFO_LOG_BUFFER`| | | |`hipJitOptionInfoLogBuffer`|1.6.0| | | |
 |`CU_JIT_INFO_LOG_BUFFER_SIZE_BYTES`| | | |`hipJitOptionInfoLogBufferSizeBytes`|1.6.0| | | |
-|`CU_JIT_INPUT_CUBIN`| | | | | | | | |
-|`CU_JIT_INPUT_FATBINARY`| | | | | | | | |
-|`CU_JIT_INPUT_LIBRARY`| | | | | | | | |
-|`CU_JIT_INPUT_NVVM`|11.4| | | | | | | |
-|`CU_JIT_INPUT_OBJECT`| | | | | | | | |
-|`CU_JIT_INPUT_PTX`| | | | | | | | |
+|`CU_JIT_INPUT_CUBIN`| | | |`HIPRTC_JIT_INPUT_CUBIN`|5.3.0| | |5.3.0|
+|`CU_JIT_INPUT_FATBINARY`| | | |`HIPRTC_JIT_INPUT_FATBINARY`|5.3.0| | |5.3.0|
+|`CU_JIT_INPUT_LIBRARY`| | | |`HIPRTC_JIT_INPUT_LIBRARY`|5.3.0| | |5.3.0|
+|`CU_JIT_INPUT_NVVM`|11.4| | |`HIPRTC_JIT_INPUT_NVVM`|5.3.0| | |5.3.0|
+|`CU_JIT_INPUT_OBJECT`| | | |`HIPRTC_JIT_INPUT_OBJECT`|5.3.0| | |5.3.0|
+|`CU_JIT_INPUT_PTX`| | | |`HIPRTC_JIT_INPUT_PTX`|5.3.0| | |5.3.0|
 |`CU_JIT_LOG_VERBOSE`| | | |`hipJitOptionLogVerbose`|1.6.0| | | |
 |`CU_JIT_LTO`|11.4| | | | | | | |
 |`CU_JIT_MAX_REGISTERS`| | | |`hipJitOptionMaxRegisters`|1.6.0| | | |
 |`CU_JIT_NEW_SM3X_OPT`| | | |`hipJitOptionSm3xOpt`|1.6.0| | | |
-|`CU_JIT_NUM_INPUT_TYPES`| | | | | | | | |
+|`CU_JIT_NUM_INPUT_TYPES`| | | |`HIPRTC_JIT_NUM_LEGACY_INPUT_TYPES`|5.3.0| | |5.3.0|
 |`CU_JIT_NUM_OPTIONS`| | | |`hipJitOptionNumOptions`|1.6.0| | | |
 |`CU_JIT_OPTIMIZATION_LEVEL`| | | |`hipJitOptionOptimizationLevel`|1.6.0| | | |
 |`CU_JIT_OPTIMIZE_UNUSED_DEVICE_VARIABLES`|11.7| | | | | | | |
@@ -989,8 +989,8 @@
 |`CUipcMemHandle_v1`|11.3| | |`hipIpcMemHandle_t`|1.6.0| | | |
 |`CUipcMem_flags`| | | | | | | | |
 |`CUipcMem_flags_enum`| | | | | | | | |
-|`CUjitInputType`| | | | | | | | |
-|`CUjitInputType_enum`| | | | | | | | |
+|`CUjitInputType`| | | |`hiprtcJITInputType`|5.3.0| | |5.3.0|
+|`CUjitInputType_enum`| | | |`hiprtcJITInputType`|5.3.0| | |5.3.0|
 |`CUjit_cacheMode`| | | | | | | | |
 |`CUjit_cacheMode_enum`| | | | | | | | |
 |`CUjit_fallback`| | | | | | | | |
@@ -1006,6 +1006,8 @@
 |`CUkernelNodeAttrValue_v1`|11.3| | |`hipKernelNodeAttrValue`|5.2.0| | | |
 |`CUlimit`| | | |`hipLimit_t`|1.6.0| | | |
 |`CUlimit_enum`| | | |`hipLimit_t`|1.6.0| | | |
+|`CUlinkState`| | | |`hiprtcLinkState`|5.3.0| | |5.3.0|
+|`CUlinkState_st`| | | |`ihiprtcLinkState`|5.3.0| | |5.3.0|
 |`CUmemAccessDesc`|10.2| | |`hipMemAccessDesc`|5.2.0| | | |
 |`CUmemAccessDesc_st`|10.2| | |`hipMemAccessDesc`|5.2.0| | | |
 |`CUmemAccessDesc_v1`|11.3| | |`hipMemAccessDesc`|5.2.0| | | |
@@ -1127,8 +1129,8 @@
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
-|`cuGetErrorName`| | | |`hipDrvGetErrorName`|5.3.0| | |5.3.0|
-|`cuGetErrorString`| | | |`hipDrvGetErrorString`|5.3.0| | |5.3.0|
+|`cuGetErrorName`| | | | | | | | |
+|`cuGetErrorString`| | | | | | | | |
 
 ## **3. Initialization**
 
@@ -1222,14 +1224,14 @@
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
-|`cuLinkAddData`| | | | | | | | |
-|`cuLinkAddData_v2`| | | | | | | | |
-|`cuLinkAddFile`| | | | | | | | |
-|`cuLinkAddFile_v2`| | | | | | | | |
-|`cuLinkComplete`| | | | | | | | |
-|`cuLinkCreate`| | | | | | | | |
-|`cuLinkCreate_v2`| | | | | | | | |
-|`cuLinkDestroy`| | | | | | | | |
+|`cuLinkAddData`| | | |`hiprtcLinkAddData`|5.3.0| | |5.3.0|
+|`cuLinkAddData_v2`| | | |`hiprtcLinkAddData`|5.3.0| | |5.3.0|
+|`cuLinkAddFile`| | | |`hiprtcLinkAddFile`|5.3.0| | |5.3.0|
+|`cuLinkAddFile_v2`| | | |`hiprtcLinkAddFile`|5.3.0| | |5.3.0|
+|`cuLinkComplete`| | | |`hiprtcLinkComplete`|5.3.0| | |5.3.0|
+|`cuLinkCreate`| | | |`hiprtcLinkCreate`|5.3.0| | |5.3.0|
+|`cuLinkCreate_v2`| | | |`hiprtcLinkCreate`|5.3.0| | |5.3.0|
+|`cuLinkDestroy`| | | |`hiprtcLinkDestroy`|5.3.0| | |5.3.0|
 |`cuModuleGetFunction`| | | |`hipModuleGetFunction`|1.6.0| | | |
 |`cuModuleGetGlobal`| | | |`hipModuleGetGlobal`|1.6.0| | | |
 |`cuModuleGetGlobal_v2`| | | |`hipModuleGetGlobal`|1.6.0| | | |

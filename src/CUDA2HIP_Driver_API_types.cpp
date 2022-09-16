@@ -328,6 +328,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUstreamAttrValue_v1",                                             {"hipStreamAttrValue",                                       "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
   {"CUstreamAttrValue_union",                                          {"hipStreamAttrValue",                                       "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
 
+    // no analogue
+  {"CUlinkState_st",                                                   {"ihiprtcLinkState",                                         "", CONV_TYPE, API_DRIVER, 1}},
+  {"CUlinkState",                                                      {"hiprtcLinkState",                                          "", CONV_TYPE, API_DRIVER, 1}},
+
   // 3. Enums
   // TODO: HIPaddress_mode_enum and all its values should be hipTextureAddressMode as long as they are equal.
   {"CUaddress_mode",                                                   {"HIPaddress_mode",                                          "", CONV_TYPE, API_DRIVER, 1}},
@@ -1215,16 +1219,16 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_TARGET_COMPUTE_87",                                             {"hipJitTargetCompute87",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 87
 
   // no analogue
-  {"CUjitInputType",                                                   {"hipJitInputType",                                          "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
-  {"CUjitInputType_enum",                                              {"hipJitInputType",                                          "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CUjitInputType",                                                   {"hiprtcJITInputType",                                       "", CONV_TYPE, API_DRIVER, 1, HIP_EXPERIMENTAL}},
+  {"CUjitInputType_enum",                                              {"hiprtcJITInputType",                                       "", CONV_TYPE, API_DRIVER, 1, HIP_EXPERIMENTAL}},
   // CUjitInputType enum values
-  {"CU_JIT_INPUT_CUBIN",                                               {"hipJitInputTypeBin",                                       "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0
-  {"CU_JIT_INPUT_PTX",                                                 {"hipJitInputTypePtx",                                       "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
-  {"CU_JIT_INPUT_FATBINARY",                                           {"hipJitInputTypeFatBinary",                                 "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
-  {"CU_JIT_INPUT_OBJECT",                                              {"hipJitInputTypeObject",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
-  {"CU_JIT_INPUT_LIBRARY",                                             {"hipJitInputTypeLibrary",                                   "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
-  {"CU_JIT_INPUT_NVVM",                                                {"hipJitInputTypeNvvm",                                      "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
-  {"CU_JIT_NUM_INPUT_TYPES",                                           {"hipJitInputTypeNumInputTypes",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CU_JIT_INPUT_CUBIN",                                               {"HIPRTC_JIT_INPUT_CUBIN",                                   "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_EXPERIMENTAL}}, // 0
+  {"CU_JIT_INPUT_PTX",                                                 {"HIPRTC_JIT_INPUT_PTX",                                     "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_EXPERIMENTAL}},
+  {"CU_JIT_INPUT_FATBINARY",                                           {"HIPRTC_JIT_INPUT_FATBINARY",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_EXPERIMENTAL}},
+  {"CU_JIT_INPUT_OBJECT",                                              {"HIPRTC_JIT_INPUT_OBJECT",                                  "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_EXPERIMENTAL}},
+  {"CU_JIT_INPUT_LIBRARY",                                             {"HIPRTC_JIT_INPUT_LIBRARY",                                 "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_EXPERIMENTAL}},
+  {"CU_JIT_INPUT_NVVM",                                                {"HIPRTC_JIT_INPUT_NVVM",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_EXPERIMENTAL}},
+  {"CU_JIT_NUM_INPUT_TYPES",                                           {"HIPRTC_JIT_NUM_LEGACY_INPUT_TYPES",                        "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_EXPERIMENTAL}},
 
   // cudaLimit
   {"CUlimit",                                                          {"hipLimit_t",                                               "", CONV_TYPE, API_DRIVER, 1}},
@@ -3287,4 +3291,14 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {
   {"hipDeviceAttributeVirtualMemoryManagementSupported",               {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipUserObject",                                                    {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipUserObject_t",                                                  {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hiprtcJITInputType",                                               {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"HIPRTC_JIT_INPUT_CUBIN",                                           {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"HIPRTC_JIT_INPUT_PTX",                                             {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"HIPRTC_JIT_INPUT_FATBINARY",                                       {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"HIPRTC_JIT_INPUT_OBJECT",                                          {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"HIPRTC_JIT_INPUT_LIBRARY",                                         {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"HIPRTC_JIT_INPUT_NVVM",                                            {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"HIPRTC_JIT_NUM_LEGACY_INPUT_TYPES",                                {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"ihiprtcLinkState",                                                 {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hiprtcLinkState",                                                  {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
 };
