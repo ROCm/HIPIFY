@@ -288,20 +288,20 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
   {"cublasHgemmStridedBatched",      {"hipblasHgemmStridedBatched",      "rocblas_hgemm_strided_batched",            CONV_LIB_FUNC, API_BLAS, 7}},
 
   // SYRK
-  {"cublasSsyrk",                    {"hipblasSsyrk",                    "rocblas_ssyrk",                            CONV_LIB_FUNC, API_BLAS, 7}},
-  {"cublasDsyrk",                    {"hipblasDsyrk",                    "rocblas_dsyrk",                            CONV_LIB_FUNC, API_BLAS, 7}},
-  {"cublasCsyrk",                    {"hipblasCsyrk",                    "rocblas_csyrk",                            CONV_LIB_FUNC, API_BLAS, 7}},
-  {"cublasZsyrk",                    {"hipblasZsyrk",                    "rocblas_zsyrk",                            CONV_LIB_FUNC, API_BLAS, 7}},
+  {"cublasSsyrk",                    {"hipblasSsyrk",                    "rocblas_ssyrk",                            CONV_LIB_FUNC, API_BLAS, 7, HIP_SUPPORTED_V2_ONLY}},
+  {"cublasDsyrk",                    {"hipblasDsyrk",                    "rocblas_dsyrk",                            CONV_LIB_FUNC, API_BLAS, 7, HIP_SUPPORTED_V2_ONLY}},
+  {"cublasCsyrk",                    {"hipblasCsyrk",                    "rocblas_csyrk",                            CONV_LIB_FUNC, API_BLAS, 7, HIP_SUPPORTED_V2_ONLY}},
+  {"cublasZsyrk",                    {"hipblasZsyrk",                    "rocblas_zsyrk",                            CONV_LIB_FUNC, API_BLAS, 7, HIP_SUPPORTED_V2_ONLY}},
 
   // HERK
-  {"cublasCherk",                    {"hipblasCherk",                    "rocblas_cherk",                            CONV_LIB_FUNC, API_BLAS, 7}},
-  {"cublasZherk",                    {"hipblasZherk",                    "rocblas_zherk",                            CONV_LIB_FUNC, API_BLAS, 7}},
+  {"cublasCherk",                    {"hipblasCherk",                    "rocblas_cherk",                            CONV_LIB_FUNC, API_BLAS, 7, HIP_SUPPORTED_V2_ONLY}},
+  {"cublasZherk",                    {"hipblasZherk",                    "rocblas_zherk",                            CONV_LIB_FUNC, API_BLAS, 7, HIP_SUPPORTED_V2_ONLY}},
 
   // SYR2K
-  {"cublasSsyr2k",                   {"hipblasSsyr2k",                   "rocblas_ssyr2k",                           CONV_LIB_FUNC, API_BLAS, 7}},
-  {"cublasDsyr2k",                   {"hipblasDsyr2k",                   "rocblas_dsyr2k",                           CONV_LIB_FUNC, API_BLAS, 7}},
-  {"cublasCsyr2k",                   {"hipblasCsyr2k",                   "rocblas_csyr2k",                           CONV_LIB_FUNC, API_BLAS, 7}},
-  {"cublasZsyr2k",                   {"hipblasZsyr2k",                   "rocblas_zsyr2k",                           CONV_LIB_FUNC, API_BLAS, 7}},
+  {"cublasSsyr2k",                   {"hipblasSsyr2k",                   "rocblas_ssyr2k",                           CONV_LIB_FUNC, API_BLAS, 7, HIP_SUPPORTED_V2_ONLY}},
+  {"cublasDsyr2k",                   {"hipblasDsyr2k",                   "rocblas_dsyr2k",                           CONV_LIB_FUNC, API_BLAS, 7, HIP_SUPPORTED_V2_ONLY}},
+  {"cublasCsyr2k",                   {"hipblasCsyr2k",                   "rocblas_csyr2k",                           CONV_LIB_FUNC, API_BLAS, 7, HIP_SUPPORTED_V2_ONLY}},
+  {"cublasZsyr2k",                   {"hipblasZsyr2k",                   "rocblas_zsyr2k",                           CONV_LIB_FUNC, API_BLAS, 7, HIP_SUPPORTED_V2_ONLY}},
 
   // SYRKX - eXtended SYRK
   {"cublasSsyrkx",                   {"hipblasSsyrkx",                   "rocblas_ssyrkx",                           CONV_LIB_FUNC, API_BLAS, 7}},
@@ -310,8 +310,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
   {"cublasZsyrkx",                   {"hipblasZsyrkx",                   "rocblas_zsyrkx",                           CONV_LIB_FUNC, API_BLAS, 7}},
 
   // HER2K
-  {"cublasCher2k",                   {"hipblasCher2k",                   "rocblas_cher2k",                           CONV_LIB_FUNC, API_BLAS, 7}},
-  {"cublasZher2k",                   {"hipblasZher2k",                   "rocblas_zher2k",                           CONV_LIB_FUNC, API_BLAS, 7}},
+  {"cublasCher2k",                   {"hipblasCher2k",                   "rocblas_cher2k",                           CONV_LIB_FUNC, API_BLAS, 7, HIP_SUPPORTED_V2_ONLY}},
+  {"cublasZher2k",                   {"hipblasZher2k",                   "rocblas_zher2k",                           CONV_LIB_FUNC, API_BLAS, 7, HIP_SUPPORTED_V2_ONLY}},
 
   // HERKX - eXtended HERK
   {"cublasCherkx",                   {"hipblasCherkx",                   "rocblas_cherkx",                           CONV_LIB_FUNC, API_BLAS, 7}},
