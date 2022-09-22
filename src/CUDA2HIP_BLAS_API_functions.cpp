@@ -334,10 +334,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
   {"cublasZtrsm",                    {"hipblasZtrsm",                    "rocblas_ztrsm",                            CONV_LIB_FUNC, API_BLAS, 7, HIP_SUPPORTED_V2_ONLY}},
 
   // TRMM
-  {"cublasStrmm",                    {"hipblasStrmm",                    "rocblas_strmm",                            CONV_LIB_FUNC, API_BLAS, 7}},
-  {"cublasDtrmm",                    {"hipblasDtrmm",                    "rocblas_dtrmm",                            CONV_LIB_FUNC, API_BLAS, 7}},
-  {"cublasCtrmm",                    {"hipblasCtrmm",                    "rocblas_ctrmm",                            CONV_LIB_FUNC, API_BLAS, 7}},
-  {"cublasZtrmm",                    {"hipblasZtrmm",                    "rocblas_ztrmm",                            CONV_LIB_FUNC, API_BLAS, 7}},
+  {"cublasStrmm",                    {"hipblasStrmm",                    "rocblas_strmm_outofplace",                 CONV_LIB_FUNC, API_BLAS, 7, HIP_SUPPORTED_V2_ONLY | HIP_UNSUPPORTED}},
+  {"cublasDtrmm",                    {"hipblasDtrmm",                    "rocblas_dtrmm_outofplace",                 CONV_LIB_FUNC, API_BLAS, 7, HIP_SUPPORTED_V2_ONLY | HIP_UNSUPPORTED}},
+  {"cublasCtrmm",                    {"hipblasCtrmm",                    "rocblas_ctrmm_outofplace",                 CONV_LIB_FUNC, API_BLAS, 7, HIP_SUPPORTED_V2_ONLY | HIP_UNSUPPORTED}},
+  {"cublasZtrmm",                    {"hipblasZtrmm",                    "rocblas_ztrmm_outofplace",                 CONV_LIB_FUNC, API_BLAS, 7, HIP_SUPPORTED_V2_ONLY | HIP_UNSUPPORTED}},
 
   // ------------------------ CUBLAS BLAS - like extension (cublas_api.h)
   // GEAM
@@ -575,10 +575,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
   {"cublasZtrsm_v2",                 {"hipblasZtrsm",                    "rocblas_ztrsm",                            CONV_LIB_FUNC, API_BLAS, 7}},
 
   // TRMM
-  {"cublasStrmm_v2",                 {"hipblasStrmm",                    "rocblas_strmm",                            CONV_LIB_FUNC, API_BLAS, 7}},
-  {"cublasDtrmm_v2",                 {"hipblasDtrmm",                    "rocblas_dtrmm",                            CONV_LIB_FUNC, API_BLAS, 7}},
-  {"cublasCtrmm_v2",                 {"hipblasCtrmm",                    "rocblas_ctrmm",                            CONV_LIB_FUNC, API_BLAS, 7}},
-  {"cublasZtrmm_v2",                 {"hipblasZtrmm",                    "rocblas_ztrmm",                            CONV_LIB_FUNC, API_BLAS, 7}},
+  {"cublasStrmm_v2",                 {"hipblasStrmm",                    "rocblas_strmm_outofplace",                 CONV_LIB_FUNC, API_BLAS, 7, HIP_SUPPORTED_V2_ONLY | HIP_UNSUPPORTED}},
+  {"cublasDtrmm_v2",                 {"hipblasDtrmm",                    "rocblas_dtrmm_outofplace",                 CONV_LIB_FUNC, API_BLAS, 7, HIP_SUPPORTED_V2_ONLY | HIP_UNSUPPORTED}},
+  {"cublasCtrmm_v2",                 {"hipblasCtrmm",                    "rocblas_ctrmm_outofplace",                 CONV_LIB_FUNC, API_BLAS, 7, HIP_SUPPORTED_V2_ONLY | HIP_UNSUPPORTED}},
+  {"cublasZtrmm_v2",                 {"hipblasZtrmm",                    "rocblas_ztrmm_outofplace",                 CONV_LIB_FUNC, API_BLAS, 7, HIP_SUPPORTED_V2_ONLY | HIP_UNSUPPORTED}},
 
   // NRM2
   {"cublasSnrm2_v2",                 {"hipblasSnrm2",                    "rocblas_snrm2",                            CONV_LIB_FUNC, API_BLAS, 5}},
