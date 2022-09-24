@@ -3319,6 +3319,7 @@ sub simpleSubstitutions {
     subst("cuDoubleComplex", "hipDoubleComplex", "type");
     subst("cuFloatComplex", "hipFloatComplex", "type");
     subst("cublasAtomicsMode_t", "hipblasAtomicsMode_t", "type");
+    subst("cublasComputeType_t", "hipblasDatatype_t", "type");
     subst("cublasDataType_t", "hipblasDatatype_t", "type");
     subst("cublasDiagType_t", "hipblasDiagType_t", "type");
     subst("cublasFillMode_t", "hipblasFillMode_t", "type");
@@ -7699,7 +7700,6 @@ sub warnHipOnlyUnsupportedFunctions {
         "cublasCsyrk3mEx",
         "cublasCopyEx",
         "cublasContext",
-        "cublasComputeType_t",
         "cublasCmatinvBatched",
         "cublasCherkEx",
         "cublasCherk3mEx",
@@ -7852,7 +7852,6 @@ sub warnRocOnlyUnsupportedFunctions {
         "cublasCsyrkEx",
         "cublasCsyrk3mEx",
         "cublasCopyEx",
-        "cublasComputeType_t",
         "cublasCmatinvBatched",
         "cublasCherkEx",
         "cublasCherk3mEx",

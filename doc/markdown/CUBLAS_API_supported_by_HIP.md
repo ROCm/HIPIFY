@@ -96,7 +96,7 @@
 |`CUBLAS_VER_MINOR`|10.1| | | | | | | |
 |`CUBLAS_VER_PATCH`|10.1| | | | | | | |
 |`cublasAtomicsMode_t`| | | |`hipblasAtomicsMode_t`|3.10.0| | | |
-|`cublasComputeType_t`|11.0| | | | | | | |
+|`cublasComputeType_t`|11.0| | |`hipblasDatatype_t`|1.8.2| | | |
 |`cublasContext`| | | | | | | | |
 |`cublasDataType_t`|7.5| | |`hipblasDatatype_t`|1.8.2| | | |
 |`cublasDiagType_t`| | | |`hipblasDiagType_t`|1.8.2| | | |
