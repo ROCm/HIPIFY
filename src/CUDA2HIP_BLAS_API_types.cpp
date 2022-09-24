@@ -173,7 +173,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP {
   // TODO: dereferencing: typedef struct cublasContext *cublasHandle_t;
   {"cublasContext",                  {"hipblasContext",                  "_rocblas_handle",                       CONV_TYPE, API_BLAS, 2, HIP_UNSUPPORTED}},
 
-  {"cublasComputeType_t",            {"hipblasComputeType_t",            "",                                      CONV_TYPE, API_BLAS, 2, UNSUPPORTED}},
+  // NOTE: renamed UNSUPPORTED hipblasComputeType_t to the HIP supported hipblasDatatype_t (workaround)
+  // TODO: change the type to the correct one after fixing https://github.com/ROCmSoftwarePlatform/hipBLAS/issues/529
+  {"cublasComputeType_t",            {"hipblasDatatype_t",               "",                                      CONV_TYPE, API_BLAS, 2}},
   {"CUBLAS_COMPUTE_16F",             {"HIPBLAS_COMPUTE_16F",             "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}}, // 64
   {"CUBLAS_COMPUTE_16F_PEDANTIC",    {"HIPBLAS_COMPUTE_16F_PEDANTIC",    "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}}, // 65
   {"CUBLAS_COMPUTE_32F",             {"HIPBLAS_COMPUTE_32F",             "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}}, // 68
