@@ -1606,14 +1606,36 @@ int main() {
   void* Aptr = nullptr;
   void* bptr = nullptr;
   void* Bptr = nullptr;
+  void* cptr = nullptr;
   void* Cptr = nullptr;
+  void* xptr = nullptr;
+  void* yptr = nullptr;
+  void* sptr = nullptr;
 
   // CHECK: hipblasDatatype_t Atype;
   // CHECK-NEXT: hipblasDatatype_t Btype;
   // CHECK-NEXT: hipblasDatatype_t Ctype;
+  // CHECK-NEXT: hipblasDatatype_t Xtype;
+  // CHECK-NEXT: hipblasDatatype_t Ytype;
+  // CHECK-NEXT: hipblasDatatype_t CStype;
+  // CHECK-NEXT: hipblasDatatype_t Executiontype;
   cudaDataType Atype;
   cudaDataType Btype;
   cudaDataType Ctype;
+  cudaDataType Xtype;
+  cudaDataType Ytype;
+  cudaDataType CStype;
+  cudaDataType Executiontype;
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasScalEx(cublasHandle_t handle, int n, const void* alpha, cudaDataType alphaType, void* x, cudaDataType xType, int incx, cudaDataType executionType);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasScalEx(hipblasHandle_t handle, int n, const void* alpha, hipblasDatatype_t alphaType, void* x, hipblasDatatype_t xType, int incx, hipblasDatatype_t executionType);
+  // CHECK: blasStatus = hipblasScalEx(blasHandle, n, aptr, Atype, xptr, Xtype, incx, Executiontype);
+  blasStatus = cublasScalEx(blasHandle, n, aptr, Atype, xptr, Xtype, incx, Executiontype);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasAxpyEx(cublasHandle_t handle, int n, const void* alpha, cudaDataType alphaType, const void* x, cudaDataType xType, int incx, void* y, cudaDataType yType, int incy, cudaDataType executiontype);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasAxpyEx(hipblasHandle_t handle, int n, const void* alpha, hipblasDatatype_t alphaType, const void* x, hipblasDatatype_t xType, int incx, void* y, hipblasDatatype_t yType, int incy, hipblasDatatype_t executionType);
+  // CHECK: blasStatus = hipblasAxpyEx(blasHandle, n, aptr, Atype, xptr, Xtype, incx, yptr, Ytype, incy, Executiontype);
+  blasStatus = cublasAxpyEx(blasHandle, n, aptr, Atype, xptr, Xtype, incx, yptr, Ytype, incy, Executiontype);
 #endif
 
 #if CUDA_VERSION >= 8000 && CUDA_VERSION < 11000
@@ -1649,6 +1671,11 @@ int main() {
 
   // CHECK: hipblasFillMode_t BLAS_FILL_MODE_FULL = HIPBLAS_FILL_MODE_FULL;
   cublasFillMode_t BLAS_FILL_MODE_FULL = CUBLAS_FILL_MODE_FULL;
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasRotEx(cublasHandle_t handle, int n, void* x, cudaDataType xType, int incx, void* y, cudaDataType yType, int incy, const void* c, const void* s, cudaDataType csType, cudaDataType executiontype);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasRotEx(hipblasHandle_t handle, int n, void* x, hipblasDatatype_t xType, int incx, void* y, hipblasDatatype_t yType, int incy, const void* c, const void* s, hipblasDatatype_t csType, hipblasDatatype_t executionType);
+  // CHECK: blasStatus = hipblasRotEx(blasHandle, n, xptr, Xtype, incx, yptr, Ytype, incy, cptr, sptr, CStype, Executiontype);
+  blasStatus = cublasRotEx(blasHandle, n, xptr, Xtype, incx, yptr, Ytype, incy, cptr, sptr, CStype, Executiontype);
 #endif
 
 #if CUDA_VERSION >= 11000
