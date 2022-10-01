@@ -98,6 +98,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"CUDNN_DATA_INT8x32",                                             {"HIPDNN_DATA_INT8x32",                                             "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},  // 8
   {"CUDNN_DATA_BFLOAT16",                                            {"HIPDNN_DATA_BFLOAT16",                                            "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},  // 9
   {"CUDNN_DATA_INT64",                                               {"HIPDNN_DATA_INT64",                                               "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},  // 10
+  {"CUDNN_DATA_BOOLEAN",                                             {"HIPDNN_DATA_BOOLEAN",                                             "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},  // 11
   {"cudnnErrQueryMode_t",                                            {"hipdnnErrQueryMode_t",                                            "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
   {"CUDNN_ERRQUERY_RAWCODE",                                         {"HIPDNN_ERRQUERY_RAWCODE",                                         "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 0
   {"CUDNN_ERRQUERY_NONBLOCKING",                                     {"HIPDNN_ERRQUERY_NONBLOCKING",                                     "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 1
@@ -370,6 +371,23 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"CUDNN_POINTWISE_MIN",                                            {"HIPDNN_POINTWISE_MIN",                                            "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 2
   {"CUDNN_POINTWISE_MAX",                                            {"HIPDNN_POINTWISE_MAX",                                            "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 3
   {"CUDNN_POINTWISE_SQRT",                                           {"HIPDNN_POINTWISE_SQRT",                                           "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 4
+  {"CUDNN_POINTWISE_ADD_SQUARE",                                     {"HIPDNN_POINTWISE_ADD_SQUARE",                                     "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 5
+  {"CUDNN_POINTWISE_DIV",                                            {"HIPDNN_POINTWISE_DIV",                                            "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 6
+  {"CUDNN_POINTWISE_MOD",                                            {"HIPDNN_POINTWISE_MOD",                                            "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 7
+  {"CUDNN_POINTWISE_POW",                                            {"HIPDNN_POINTWISE_POW",                                            "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 8
+  {"CUDNN_POINTWISE_SUB",                                            {"HIPDNN_POINTWISE_SUB",                                            "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 9
+  {"CUDNN_POINTWISE_ABS",                                            {"HIPDNN_POINTWISE_ABS",                                            "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 10
+  {"CUDNN_POINTWISE_CEIL",                                           {"HIPDNN_POINTWISE_CEIL",                                           "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 11
+  {"CUDNN_POINTWISE_COS",                                            {"HIPDNN_POINTWISE_COS",                                            "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 12
+  {"CUDNN_POINTWISE_EXP",                                            {"HIPDNN_POINTWISE_EXP",                                            "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 13
+  {"CUDNN_POINTWISE_FLOOR",                                          {"HIPDNN_POINTWISE_FLOOR",                                          "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 14
+  {"CUDNN_POINTWISE_LOG",                                            {"HIPDNN_POINTWISE_LOG",                                            "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 15
+  {"CUDNN_POINTWISE_NEG",                                            {"HIPDNN_POINTWISE_NEG",                                            "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 16
+  {"CUDNN_POINTWISE_RSQRT",                                          {"HIPDNN_POINTWISE_RSQRT",                                          "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 17
+  {"CUDNN_POINTWISE_SIN",                                            {"HIPDNN_POINTWISE_SIN",                                            "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 18
+  {"CUDNN_POINTWISE_TAN",                                            {"HIPDNN_POINTWISE_TAN",                                            "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 19
+  {"CUDNN_POINTWISE_ERF",                                            {"HIPDNN_POINTWISE_ERF",                                            "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 20
+  {"CUDNN_POINTWISE_IDENTITY",                                       {"HIPDNN_POINTWISE_IDENTITY",                                       "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 21
   {"CUDNN_POINTWISE_RELU_FWD",                                       {"HIPDNN_POINTWISE_RELU_FWD",                                       "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 100
   {"CUDNN_POINTWISE_TANH_FWD",                                       {"HIPDNN_POINTWISE_TANH_FWD",                                       "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 101
   {"CUDNN_POINTWISE_SIGMOID_FWD",                                    {"HIPDNN_POINTWISE_SIGMOID_FWD",                                    "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 102
@@ -377,6 +395,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"CUDNN_POINTWISE_GELU_FWD",                                       {"HIPDNN_POINTWISE_GELU_FWD",                                       "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 104
   {"CUDNN_POINTWISE_SOFTPLUS_FWD",                                   {"HIPDNN_POINTWISE_SOFTPLUS_FWD",                                   "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 105
   {"CUDNN_POINTWISE_SWISH_FWD",                                      {"HIPDNN_POINTWISE_SWISH_FWD",                                      "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 106
+  {"CUDNN_POINTWISE_GELU_APPROX_TANH_FWD",                           {"HIPDNN_POINTWISE_GELU_APPROX_TANH_FWD",                           "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 107
   {"CUDNN_POINTWISE_RELU_BWD",                                       {"HIPDNN_POINTWISE_RELU_BWD",                                       "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 200
   {"CUDNN_POINTWISE_TANH_BWD",                                       {"HIPDNN_POINTWISE_TANH_BWD",                                       "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 201
   {"CUDNN_POINTWISE_SIGMOID_BWD",                                    {"HIPDNN_POINTWISE_SIGMOID_BWD",                                    "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 202
@@ -384,6 +403,18 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"CUDNN_POINTWISE_GELU_BWD",                                       {"HIPDNN_POINTWISE_GELU_BWD",                                       "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 204
   {"CUDNN_POINTWISE_SOFTPLUS_BWD",                                   {"HIPDNN_POINTWISE_SOFTPLUS_BWD",                                   "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 205
   {"CUDNN_POINTWISE_SWISH_BWD",                                      {"HIPDNN_POINTWISE_SWISH_BWD",                                      "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 206
+  {"CUDNN_POINTWISE_GELU_APPROX_TANH_BWD",                           {"HIPDNN_POINTWISE_GELU_APPROX_TANH_BWD",                           "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 207
+  {"CUDNN_POINTWISE_CMP_EQ",                                         {"HIPDNN_POINTWISE_CMP_EQ",                                         "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 300
+  {"CUDNN_POINTWISE_CMP_NEQ",                                        {"HIPDNN_POINTWISE_CMP_NEQ",                                        "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 301
+  {"CUDNN_POINTWISE_CMP_GT",                                         {"HIPDNN_POINTWISE_CMP_GT",                                         "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 302
+  {"CUDNN_POINTWISE_CMP_GE",                                         {"HIPDNN_POINTWISE_CMP_GE",                                         "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 303
+  {"CUDNN_POINTWISE_CMP_LT",                                         {"HIPDNN_POINTWISE_CMP_LT",                                         "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 304
+  {"CUDNN_POINTWISE_CMP_LE",                                         {"HIPDNN_POINTWISE_CMP_LE",                                         "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 305
+  {"CUDNN_POINTWISE_LOGICAL_AND",                                    {"HIPDNN_POINTWISE_LOGICAL_AND",                                    "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 400
+  {"CUDNN_POINTWISE_LOGICAL_OR",                                     {"HIPDNN_POINTWISE_LOGICAL_OR",                                     "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 401
+  {"CUDNN_POINTWISE_LOGICAL_NOT",                                    {"HIPDNN_POINTWISE_LOGICAL_NOT",                                    "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 402
+  {"CUDNN_POINTWISE_GEN_INDEX",                                      {"HIPDNN_POINTWISE_GEN_INDEX",                                      "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 501
+  {"CUDNN_POINTWISE_BINARY_SELECT",                                  {"HIPDNN_POINTWISE_BINARY_SELECT",                                  "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 601
   {"cudnnGenStatsMode_t",                                            {"hipdnnGenStatsMode_t",                                            "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
   {"CUDNN_GENSTATS_SUM_SQSUM",                                       {"HIPDNN_GENSTATS_SUM_SQSUM",                                       "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 0
   {"cudnnBackendAttributeName_t",                                    {"hipdnnBackendAttributeName_t",                                    "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
@@ -1350,6 +1381,37 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_TYPE_NAME_VER_MAP {
   {"cudnnBackendBehaviorNote_t",                                     {CUDNN_820, CUDA_0,   CUDA_0  }},
   {"CUDNN_BEHAVIOR_NOTE_RUNTIME_COMPILATION",                        {CUDNN_820, CUDA_0,   CUDA_0  }},
   {"CUDNN_BEHAVIOR_NOTE_TYPE_COUNT",                                 {CUDNN_820, CUDA_0,   CUDA_0  }},
+  {"CUDNN_DATA_BOOLEAN",                                             {CUDNN_850, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_ADD_SQUARE",                                     {CUDNN_850, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_DIV",                                            {CUDNN_850, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_MOD",                                            {CUDNN_850, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_POW",                                            {CUDNN_850, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_SUB",                                            {CUDNN_850, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_ABS",                                            {CUDNN_850, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_CEIL",                                           {CUDNN_850, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_COS",                                            {CUDNN_850, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_EXP",                                            {CUDNN_850, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_FLOOR",                                          {CUDNN_850, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_LOG",                                            {CUDNN_850, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_NEG",                                            {CUDNN_850, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_RSQRT",                                          {CUDNN_850, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_SIN",                                            {CUDNN_850, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_TAN",                                            {CUDNN_850, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_ERF",                                            {CUDNN_850, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_IDENTITY",                                       {CUDNN_850, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_GELU_APPROX_TANH_FWD",                           {CUDNN_850, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_GELU_APPROX_TANH_BWD",                           {CUDNN_850, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_CMP_EQ",                                         {CUDNN_850, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_CMP_NEQ",                                        {CUDNN_850, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_CMP_GT",                                         {CUDNN_850, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_CMP_GE",                                         {CUDNN_850, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_CMP_LT",                                         {CUDNN_850, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_CMP_LE",                                         {CUDNN_850, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_LOGICAL_AND",                                    {CUDNN_850, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_LOGICAL_OR",                                     {CUDNN_850, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_LOGICAL_NOT",                                    {CUDNN_850, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_GEN_INDEX",                                      {CUDNN_850, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_BINARY_SELECT",                                  {CUDNN_850, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_DNN_TYPE_NAME_VER_MAP {

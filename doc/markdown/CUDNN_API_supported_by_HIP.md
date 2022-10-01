@@ -237,6 +237,7 @@
 |`CUDNN_CTC_LOSS_ALGO_DETERMINISTIC`|7.0.5| | | | | | | |
 |`CUDNN_CTC_LOSS_ALGO_NON_DETERMINISTIC`|7.0.5| | | | | | | |
 |`CUDNN_DATA_BFLOAT16`|8.1.0| | | | | | | |
+|`CUDNN_DATA_BOOLEAN`|8.5.0| | | | | | | |
 |`CUDNN_DATA_DOUBLE`|1.0.0| | |`HIPDNN_DATA_DOUBLE`| | | | |
 |`CUDNN_DATA_FLOAT`|1.0.0| | |`HIPDNN_DATA_FLOAT`| | | | |
 |`CUDNN_DATA_HALF`|3.0.0| | |`HIPDNN_DATA_HALF`| | | | |
@@ -389,23 +390,53 @@
 |`CUDNN_PARAM_ZDATA_PLACEHOLDER`|7.6.0| | | | | | | |
 |`CUDNN_PARAM_ZDESC`|7.6.0| | | | | | | |
 |`CUDNN_PATCHLEVEL`|3.0.0| | | | | | | |
+|`CUDNN_POINTWISE_ABS`|8.5.0| | | | | | | |
 |`CUDNN_POINTWISE_ADD`|8.0.1| | | | | | | |
+|`CUDNN_POINTWISE_ADD_SQUARE`|8.5.0| | | | | | | |
+|`CUDNN_POINTWISE_BINARY_SELECT`|8.5.0| | | | | | | |
+|`CUDNN_POINTWISE_CEIL`|8.5.0| | | | | | | |
+|`CUDNN_POINTWISE_CMP_EQ`|8.5.0| | | | | | | |
+|`CUDNN_POINTWISE_CMP_GE`|8.5.0| | | | | | | |
+|`CUDNN_POINTWISE_CMP_GT`|8.5.0| | | | | | | |
+|`CUDNN_POINTWISE_CMP_LE`|8.5.0| | | | | | | |
+|`CUDNN_POINTWISE_CMP_LT`|8.5.0| | | | | | | |
+|`CUDNN_POINTWISE_CMP_NEQ`|8.5.0| | | | | | | |
+|`CUDNN_POINTWISE_COS`|8.5.0| | | | | | | |
+|`CUDNN_POINTWISE_DIV`|8.5.0| | | | | | | |
 |`CUDNN_POINTWISE_ELU_BWD`|8.1.0| | | | | | | |
 |`CUDNN_POINTWISE_ELU_FWD`|8.0.1| | | | | | | |
+|`CUDNN_POINTWISE_ERF`|8.5.0| | | | | | | |
+|`CUDNN_POINTWISE_EXP`|8.5.0| | | | | | | |
+|`CUDNN_POINTWISE_FLOOR`|8.5.0| | | | | | | |
+|`CUDNN_POINTWISE_GELU_APPROX_TANH_BWD`|8.5.0| | | | | | | |
+|`CUDNN_POINTWISE_GELU_APPROX_TANH_FWD`|8.5.0| | | | | | | |
 |`CUDNN_POINTWISE_GELU_BWD`|8.1.0| | | | | | | |
 |`CUDNN_POINTWISE_GELU_FWD`|8.1.0| | | | | | | |
+|`CUDNN_POINTWISE_GEN_INDEX`|8.5.0| | | | | | | |
+|`CUDNN_POINTWISE_IDENTITY`|8.5.0| | | | | | | |
+|`CUDNN_POINTWISE_LOG`|8.5.0| | | | | | | |
+|`CUDNN_POINTWISE_LOGICAL_AND`|8.5.0| | | | | | | |
+|`CUDNN_POINTWISE_LOGICAL_NOT`|8.5.0| | | | | | | |
+|`CUDNN_POINTWISE_LOGICAL_OR`|8.5.0| | | | | | | |
 |`CUDNN_POINTWISE_MAX`|8.0.1| | | | | | | |
 |`CUDNN_POINTWISE_MIN`|8.0.1| | | | | | | |
+|`CUDNN_POINTWISE_MOD`|8.5.0| | | | | | | |
 |`CUDNN_POINTWISE_MUL`|8.0.1| | | | | | | |
+|`CUDNN_POINTWISE_NEG`|8.5.0| | | | | | | |
+|`CUDNN_POINTWISE_POW`|8.5.0| | | | | | | |
 |`CUDNN_POINTWISE_RELU_BWD`|8.1.0| | | | | | | |
 |`CUDNN_POINTWISE_RELU_FWD`|8.0.1| | | | | | | |
+|`CUDNN_POINTWISE_RSQRT`|8.5.0| | | | | | | |
 |`CUDNN_POINTWISE_SIGMOID_BWD`|8.1.0| | | | | | | |
 |`CUDNN_POINTWISE_SIGMOID_FWD`|8.0.1| | | | | | | |
+|`CUDNN_POINTWISE_SIN`|8.5.0| | | | | | | |
 |`CUDNN_POINTWISE_SOFTPLUS_BWD`|8.1.0| | | | | | | |
 |`CUDNN_POINTWISE_SOFTPLUS_FWD`|8.1.0| | | | | | | |
 |`CUDNN_POINTWISE_SQRT`|8.0.1| | | | | | | |
+|`CUDNN_POINTWISE_SUB`|8.5.0| | | | | | | |
 |`CUDNN_POINTWISE_SWISH_BWD`|8.1.0| | | | | | | |
 |`CUDNN_POINTWISE_SWISH_FWD`|8.1.0| | | | | | | |
+|`CUDNN_POINTWISE_TAN`|8.5.0| | | | | | | |
 |`CUDNN_POINTWISE_TANH_BWD`|8.1.0| | | | | | | |
 |`CUDNN_POINTWISE_TANH_FWD`|8.0.1| | | | | | | |
 |`CUDNN_POOLING_AVERAGE_COUNT_EXCLUDE_PADDING`|2.0.0| | |`HIPDNN_POOLING_AVERAGE_COUNT_EXCLUDE_PADDING`| | | | |
