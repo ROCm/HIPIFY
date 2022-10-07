@@ -48,6 +48,7 @@
 |`CUDNN_ATTR_EXECUTION_PLAN_COMPUTED_INTERMEDIATE_UIDS`|8.0.2| | | | | | | |
 |`CUDNN_ATTR_EXECUTION_PLAN_ENGINE_CONFIG`|8.0.1| | | | | | | |
 |`CUDNN_ATTR_EXECUTION_PLAN_HANDLE`|8.0.1| | | | | | | |
+|`CUDNN_ATTR_EXECUTION_PLAN_JSON_REPRESENTATION`|8.4.0| | | | | | | |
 |`CUDNN_ATTR_EXECUTION_PLAN_RUN_ONLY_INTERMEDIATE_UIDS`|8.0.2| | | | | | | |
 |`CUDNN_ATTR_EXECUTION_PLAN_WORKSPACE_SIZE`|8.0.1| | | | | | | |
 |`CUDNN_ATTR_INTERMEDIATE_INFO_DEPENDENT_ATTRIBUTES`|8.0.2| | | | | | | |
@@ -128,11 +129,13 @@
 |`CUDNN_ATTR_OPERATION_POINTWISE_DXDESC`|8.1.0| | | | | | | |
 |`CUDNN_ATTR_OPERATION_POINTWISE_DYDESC`|8.1.0| | | | | | | |
 |`CUDNN_ATTR_OPERATION_POINTWISE_PW_DESCRIPTOR`|8.0.1| | | | | | | |
+|`CUDNN_ATTR_OPERATION_POINTWISE_TDESC`|8.3.0| | | | | | | |
 |`CUDNN_ATTR_OPERATION_POINTWISE_XDESC`|8.0.1| | | | | | | |
 |`CUDNN_ATTR_OPERATION_POINTWISE_YDESC`|8.0.1| | | | | | | |
 |`CUDNN_ATTR_OPERATION_REDUCTION_DESC`|8.1.0| | | | | | | |
 |`CUDNN_ATTR_OPERATION_REDUCTION_XDESC`|8.1.0| | | | | | | |
 |`CUDNN_ATTR_OPERATION_REDUCTION_YDESC`|8.1.0| | | | | | | |
+|`CUDNN_ATTR_POINTWISE_AXIS`|8.4.0| | | | | | | |
 |`CUDNN_ATTR_POINTWISE_ELU_ALPHA`|8.1.0| | | | | | | |
 |`CUDNN_ATTR_POINTWISE_MATH_PREC`|8.0.1| | | | | | | |
 |`CUDNN_ATTR_POINTWISE_MODE`|8.0.1| | | | | | | |
@@ -149,6 +152,7 @@
 |`CUDNN_ATTR_TENSOR_DIMENSIONS`|8.0.1| | | | | | | |
 |`CUDNN_ATTR_TENSOR_IS_BY_VALUE`|8.1.0| | | | | | | |
 |`CUDNN_ATTR_TENSOR_IS_VIRTUAL`|8.0.1| | | | | | | |
+|`CUDNN_ATTR_TENSOR_REORDERING_MODE`|8.3.0| | | | | | | |
 |`CUDNN_ATTR_TENSOR_STRIDES`|8.0.1| | | | | | | |
 |`CUDNN_ATTR_TENSOR_UNIQUE_ID`|8.0.1| | | | | | | |
 |`CUDNN_ATTR_TENSOR_VECTORIZED_DIMENSION`|8.0.1| | | | | | | |
@@ -237,7 +241,7 @@
 |`CUDNN_CTC_LOSS_ALGO_DETERMINISTIC`|7.0.5| | | | | | | |
 |`CUDNN_CTC_LOSS_ALGO_NON_DETERMINISTIC`|7.0.5| | | | | | | |
 |`CUDNN_DATA_BFLOAT16`|8.1.0| | | | | | | |
-|`CUDNN_DATA_BOOLEAN`|8.5.0| | | | | | | |
+|`CUDNN_DATA_BOOLEAN`|8.3.0| | | | | | | |
 |`CUDNN_DATA_DOUBLE`|1.0.0| | |`HIPDNN_DATA_DOUBLE`| | | | |
 |`CUDNN_DATA_FLOAT`|1.0.0| | |`HIPDNN_DATA_FLOAT`| | | | |
 |`CUDNN_DATA_HALF`|3.0.0| | |`HIPDNN_DATA_HALF`| | | | |
@@ -390,53 +394,53 @@
 |`CUDNN_PARAM_ZDATA_PLACEHOLDER`|7.6.0| | | | | | | |
 |`CUDNN_PARAM_ZDESC`|7.6.0| | | | | | | |
 |`CUDNN_PATCHLEVEL`|3.0.0| | | | | | | |
-|`CUDNN_POINTWISE_ABS`|8.5.0| | | | | | | |
+|`CUDNN_POINTWISE_ABS`|8.3.0| | | | | | | |
 |`CUDNN_POINTWISE_ADD`|8.0.1| | | | | | | |
-|`CUDNN_POINTWISE_ADD_SQUARE`|8.5.0| | | | | | | |
-|`CUDNN_POINTWISE_BINARY_SELECT`|8.5.0| | | | | | | |
-|`CUDNN_POINTWISE_CEIL`|8.5.0| | | | | | | |
-|`CUDNN_POINTWISE_CMP_EQ`|8.5.0| | | | | | | |
-|`CUDNN_POINTWISE_CMP_GE`|8.5.0| | | | | | | |
-|`CUDNN_POINTWISE_CMP_GT`|8.5.0| | | | | | | |
-|`CUDNN_POINTWISE_CMP_LE`|8.5.0| | | | | | | |
-|`CUDNN_POINTWISE_CMP_LT`|8.5.0| | | | | | | |
-|`CUDNN_POINTWISE_CMP_NEQ`|8.5.0| | | | | | | |
-|`CUDNN_POINTWISE_COS`|8.5.0| | | | | | | |
-|`CUDNN_POINTWISE_DIV`|8.5.0| | | | | | | |
+|`CUDNN_POINTWISE_ADD_SQUARE`|8.3.0| | | | | | | |
+|`CUDNN_POINTWISE_BINARY_SELECT`|8.4.0| | | | | | | |
+|`CUDNN_POINTWISE_CEIL`|8.3.0| | | | | | | |
+|`CUDNN_POINTWISE_CMP_EQ`|8.3.0| | | | | | | |
+|`CUDNN_POINTWISE_CMP_GE`|8.3.0| | | | | | | |
+|`CUDNN_POINTWISE_CMP_GT`|8.3.0| | | | | | | |
+|`CUDNN_POINTWISE_CMP_LE`|8.3.0| | | | | | | |
+|`CUDNN_POINTWISE_CMP_LT`|8.3.0| | | | | | | |
+|`CUDNN_POINTWISE_CMP_NEQ`|8.3.0| | | | | | | |
+|`CUDNN_POINTWISE_COS`|8.3.0| | | | | | | |
+|`CUDNN_POINTWISE_DIV`|8.3.0| | | | | | | |
 |`CUDNN_POINTWISE_ELU_BWD`|8.1.0| | | | | | | |
 |`CUDNN_POINTWISE_ELU_FWD`|8.0.1| | | | | | | |
 |`CUDNN_POINTWISE_ERF`|8.5.0| | | | | | | |
-|`CUDNN_POINTWISE_EXP`|8.5.0| | | | | | | |
-|`CUDNN_POINTWISE_FLOOR`|8.5.0| | | | | | | |
+|`CUDNN_POINTWISE_EXP`|8.3.0| | | | | | | |
+|`CUDNN_POINTWISE_FLOOR`|8.3.0| | | | | | | |
 |`CUDNN_POINTWISE_GELU_APPROX_TANH_BWD`|8.5.0| | | | | | | |
 |`CUDNN_POINTWISE_GELU_APPROX_TANH_FWD`|8.5.0| | | | | | | |
 |`CUDNN_POINTWISE_GELU_BWD`|8.1.0| | | | | | | |
 |`CUDNN_POINTWISE_GELU_FWD`|8.1.0| | | | | | | |
-|`CUDNN_POINTWISE_GEN_INDEX`|8.5.0| | | | | | | |
+|`CUDNN_POINTWISE_GEN_INDEX`|8.4.0| | | | | | | |
 |`CUDNN_POINTWISE_IDENTITY`|8.5.0| | | | | | | |
-|`CUDNN_POINTWISE_LOG`|8.5.0| | | | | | | |
-|`CUDNN_POINTWISE_LOGICAL_AND`|8.5.0| | | | | | | |
-|`CUDNN_POINTWISE_LOGICAL_NOT`|8.5.0| | | | | | | |
-|`CUDNN_POINTWISE_LOGICAL_OR`|8.5.0| | | | | | | |
+|`CUDNN_POINTWISE_LOG`|8.3.0| | | | | | | |
+|`CUDNN_POINTWISE_LOGICAL_AND`|8.3.0| | | | | | | |
+|`CUDNN_POINTWISE_LOGICAL_NOT`|8.3.0| | | | | | | |
+|`CUDNN_POINTWISE_LOGICAL_OR`|8.3.0| | | | | | | |
 |`CUDNN_POINTWISE_MAX`|8.0.1| | | | | | | |
 |`CUDNN_POINTWISE_MIN`|8.0.1| | | | | | | |
-|`CUDNN_POINTWISE_MOD`|8.5.0| | | | | | | |
+|`CUDNN_POINTWISE_MOD`|8.3.0| | | | | | | |
 |`CUDNN_POINTWISE_MUL`|8.0.1| | | | | | | |
-|`CUDNN_POINTWISE_NEG`|8.5.0| | | | | | | |
-|`CUDNN_POINTWISE_POW`|8.5.0| | | | | | | |
+|`CUDNN_POINTWISE_NEG`|8.3.0| | | | | | | |
+|`CUDNN_POINTWISE_POW`|8.3.0| | | | | | | |
 |`CUDNN_POINTWISE_RELU_BWD`|8.1.0| | | | | | | |
 |`CUDNN_POINTWISE_RELU_FWD`|8.0.1| | | | | | | |
-|`CUDNN_POINTWISE_RSQRT`|8.5.0| | | | | | | |
+|`CUDNN_POINTWISE_RSQRT`|8.3.0| | | | | | | |
 |`CUDNN_POINTWISE_SIGMOID_BWD`|8.1.0| | | | | | | |
 |`CUDNN_POINTWISE_SIGMOID_FWD`|8.0.1| | | | | | | |
-|`CUDNN_POINTWISE_SIN`|8.5.0| | | | | | | |
+|`CUDNN_POINTWISE_SIN`|8.3.0| | | | | | | |
 |`CUDNN_POINTWISE_SOFTPLUS_BWD`|8.1.0| | | | | | | |
 |`CUDNN_POINTWISE_SOFTPLUS_FWD`|8.1.0| | | | | | | |
 |`CUDNN_POINTWISE_SQRT`|8.0.1| | | | | | | |
-|`CUDNN_POINTWISE_SUB`|8.5.0| | | | | | | |
+|`CUDNN_POINTWISE_SUB`|8.3.0| | | | | | | |
 |`CUDNN_POINTWISE_SWISH_BWD`|8.1.0| | | | | | | |
 |`CUDNN_POINTWISE_SWISH_FWD`|8.1.0| | | | | | | |
-|`CUDNN_POINTWISE_TAN`|8.5.0| | | | | | | |
+|`CUDNN_POINTWISE_TAN`|8.3.0| | | | | | | |
 |`CUDNN_POINTWISE_TANH_BWD`|8.1.0| | | | | | | |
 |`CUDNN_POINTWISE_TANH_FWD`|8.0.1| | | | | | | |
 |`CUDNN_POOLING_AVERAGE_COUNT_EXCLUDE_PADDING`|2.0.0| | |`HIPDNN_POOLING_AVERAGE_COUNT_EXCLUDE_PADDING`| | | | |
@@ -482,6 +486,10 @@
 |`CUDNN_REDUCE_TENSOR_NORM1`|6.0.0| | |`HIPDNN_REDUCE_TENSOR_NORM1`| | | | |
 |`CUDNN_REDUCE_TENSOR_NORM2`|6.0.0| | |`HIPDNN_REDUCE_TENSOR_NORM2`| | | | |
 |`CUDNN_REDUCE_TENSOR_NO_INDICES`|6.0.0| | |`HIPDNN_REDUCE_TENSOR_NO_INDICES`| | | | |
+|`CUDNN_RESAMPLE_AVGPOOL`|8.3.0| | | | | | | |
+|`CUDNN_RESAMPLE_BILINEAR`|8.3.0| | | | | | | |
+|`CUDNN_RESAMPLE_MAXPOOL`|8.3.0| | | | | | | |
+|`CUDNN_RESAMPLE_NEAREST`|8.3.0| | | | | | | |
 |`CUDNN_RNN_ALGO_COUNT`|7.1.3| | | | | | | |
 |`CUDNN_RNN_ALGO_PERSIST_DYNAMIC`|6.0.0| | |`HIPDNN_RNN_ALGO_PERSIST_DYNAMIC`| | | | |
 |`CUDNN_RNN_ALGO_PERSIST_STATIC`|6.0.0| | |`HIPDNN_RNN_ALGO_PERSIST_STATIC`| | | | |
@@ -517,6 +525,8 @@
 |`CUDNN_SEV_INFO_EN`|7.1.3| | | | | | | |
 |`CUDNN_SEV_WARNING`|7.1.3| | | | | | | |
 |`CUDNN_SEV_WARNING_EN`|7.1.3| | | | | | | |
+|`CUDNN_SIGNAL_SET`|8.5.0| | | | | | | |
+|`CUDNN_SIGNAL_WAIT`|8.5.0| | | | | | | |
 |`CUDNN_SKIP_INPUT`|5.0.0| | |`HIPDNN_SKIP_INPUT`| | | | |
 |`CUDNN_SOFTMAX_ACCURATE`|1.0.0| | |`HIPDNN_SOFTMAX_ACCURATE`| | | | |
 |`CUDNN_SOFTMAX_FAST`|1.0.0| | |`HIPDNN_SOFTMAX_FAST`| | | | |
@@ -626,6 +636,8 @@
 |`cudnnFilterStruct`|1.0.0| | | | | | | |
 |`cudnnFoldingDirection_t`|7.5.0| | | | | | | |
 |`cudnnForwardMode_t`|8.0.1| | | | | | | |
+|`cudnnFractionStruct`|8.5.0| | | | | | | |
+|`cudnnFraction_t`|8.5.0| | | | | | | |
 |`cudnnFusedOpsConstParamLabel_t`|7.6.0| | | | | | | |
 |`cudnnFusedOpsConstParamPack_t`|7.6.0| | | | | | | |
 |`cudnnFusedOpsConstParamStruct`|7.6.0| | | | | | | |
@@ -674,12 +686,14 @@
 |`cudnnReduceTensorOp_t`|6.0.0| | |`hipdnnReduceTensorOp_t`| | | | |
 |`cudnnReduceTensorStruct`|6.0.0| | | | | | | |
 |`cudnnReorderType_t`|7.6.0| | | | | | | |
+|`cudnnResampleMode_t`|8.3.0| | | | | | | |
 |`cudnnRuntimeTag_t`|7.0.5| | | | | | | |
 |`cudnnSamplerType_t`|5.0.0| | | | | | | |
 |`cudnnSeqDataAxis_t`|7.5.0| | | | | | | |
 |`cudnnSeqDataDescriptor_t`|7.5.0| | | | | | | |
 |`cudnnSeqDataStruct`|7.5.0| | | | | | | |
 |`cudnnSeverity_t`|7.1.3| | | | | | | |
+|`cudnnSignalMode_t`|8.5.0| | | | | | | |
 |`cudnnSoftmaxAlgorithm_t`|1.0.0| | |`hipdnnSoftmaxAlgorithm_t`| | | | |
 |`cudnnSoftmaxMode_t`|1.0.0| | |`hipdnnSoftmaxMode_t`| | | | |
 |`cudnnSpatialTransformerDescriptor_t`|5.0.0| | | | | | | |

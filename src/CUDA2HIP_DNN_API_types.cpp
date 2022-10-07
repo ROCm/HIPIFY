@@ -427,6 +427,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"CUDNN_ATTR_POINTWISE_ELU_ALPHA",                                 {"HIPDNN_ATTR_POINTWISE_ELU_ALPHA",                                 "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 6
   {"CUDNN_ATTR_POINTWISE_SOFTPLUS_BETA",                             {"HIPDNN_ATTR_POINTWISE_SOFTPLUS_BETA",                             "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 7
   {"CUDNN_ATTR_POINTWISE_SWISH_BETA",                                {"HIPDNN_ATTR_POINTWISE_SWISH_BETA",                                "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 8
+  {"CUDNN_ATTR_POINTWISE_AXIS",                                      {"HIPDNN_ATTR_POINTWISE_AXIS",                                      "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 9
   {"CUDNN_ATTR_CONVOLUTION_COMP_TYPE",                               {"HIPDNN_ATTR_CONVOLUTION_COMP_TYPE",                               "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 100
   {"CUDNN_ATTR_CONVOLUTION_CONV_MODE",                               {"HIPDNN_ATTR_CONVOLUTION_CONV_MODE",                               "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 101
   {"CUDNN_ATTR_CONVOLUTION_DILATIONS",                               {"HIPDNN_ATTR_CONVOLUTION_DILATIONS",                               "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 102
@@ -445,6 +446,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"CUDNN_ATTR_EXECUTION_PLAN_WORKSPACE_SIZE",                       {"HIPDNN_ATTR_EXECUTION_PLAN_WORKSPACE_SIZE",                       "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 402
   {"CUDNN_ATTR_EXECUTION_PLAN_COMPUTED_INTERMEDIATE_UIDS",           {"HIPDNN_ATTR_EXECUTION_PLAN_COMPUTED_INTERMEDIATE_UIDS",           "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 403
   {"CUDNN_ATTR_EXECUTION_PLAN_RUN_ONLY_INTERMEDIATE_UIDS",           {"HIPDNN_ATTR_EXECUTION_PLAN_RUN_ONLY_INTERMEDIATE_UIDS",           "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 404
+  {"CUDNN_ATTR_EXECUTION_PLAN_JSON_REPRESENTATION",                  {"HIPDNN_ATTR_EXECUTION_PLAN_JSON_REPRESENTATION",                  "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 405
   {"CUDNN_ATTR_INTERMEDIATE_INFO_UNIQUE_ID",                         {"HIPDNN_ATTR_INTERMEDIATE_INFO_UNIQUE_ID",                         "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 500
   {"CUDNN_ATTR_INTERMEDIATE_INFO_SIZE",                              {"HIPDNN_ATTR_INTERMEDIATE_INFO_SIZE",                              "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 501
   {"CUDNN_ATTR_INTERMEDIATE_INFO_DEPENDENT_DATA_UIDS",               {"HIPDNN_ATTR_INTERMEDIATE_INFO_DEPENDENT_DATA_UIDS",               "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 502
@@ -477,6 +479,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"CUDNN_ATTR_OPERATION_POINTWISE_ALPHA2",                          {"HIPDNN_ATTR_OPERATION_POINTWISE_ALPHA2",                          "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 755
   {"CUDNN_ATTR_OPERATION_POINTWISE_DXDESC",                          {"HIPDNN_ATTR_OPERATION_POINTWISE_DXDESC",                          "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 756
   {"CUDNN_ATTR_OPERATION_POINTWISE_DYDESC",                          {"HIPDNN_ATTR_OPERATION_POINTWISE_DYDESC",                          "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 757
+  {"CUDNN_ATTR_OPERATION_POINTWISE_TDESC",                           {"HIPDNN_ATTR_OPERATION_POINTWISE_TDESC",                           "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 758
   {"CUDNN_ATTR_OPERATION_GENSTATS_MODE",                             {"HIPDNN_ATTR_OPERATION_GENSTATS_MODE",                             "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 770
   {"CUDNN_ATTR_OPERATION_GENSTATS_MATH_PREC",                        {"HIPDNN_ATTR_OPERATION_GENSTATS_MATH_PREC",                        "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 771
   {"CUDNN_ATTR_OPERATION_GENSTATS_XDESC",                            {"HIPDNN_ATTR_OPERATION_GENSTATS_XDESC",                            "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 772
@@ -511,6 +514,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"CUDNN_ATTR_TENSOR_UNIQUE_ID",                                    {"HIPDNN_ATTR_TENSOR_UNIQUE_ID",                                    "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 906
   {"CUDNN_ATTR_TENSOR_IS_VIRTUAL",                                   {"HIPDNN_ATTR_TENSOR_IS_VIRTUAL",                                   "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 907
   {"CUDNN_ATTR_TENSOR_IS_BY_VALUE",                                  {"HIPDNN_ATTR_TENSOR_IS_BY_VALUE",                                  "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 908
+  {"CUDNN_ATTR_TENSOR_REORDERING_MODE",                              {"HIPDNN_ATTR_TENSOR_REORDERING_MODE",                              "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 909
   {"CUDNN_ATTR_VARIANT_PACK_UNIQUE_IDS",                             {"HIPDNN_ATTR_VARIANT_PACK_UNIQUE_IDS",                             "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 1000
   {"CUDNN_ATTR_VARIANT_PACK_DATA_POINTERS",                          {"HIPDNN_ATTR_VARIANT_PACK_DATA_POINTERS",                          "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 1001
   {"CUDNN_ATTR_VARIANT_PACK_INTERMEDIATES",                          {"HIPDNN_ATTR_VARIANT_PACK_INTERMEDIATES",                          "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 1002
@@ -656,6 +660,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"cudnnBackendBehaviorNote_t",                                     {"hipdnnBackendBehaviorNote_t",                                     "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
   {"CUDNN_BEHAVIOR_NOTE_RUNTIME_COMPILATION",                        {"HIPDNN_BEHAVIOR_NOTE_RUNTIME_COMPILATION",                        "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},  // 0
   {"CUDNN_BEHAVIOR_NOTE_TYPE_COUNT",                                 {"HIPDNN_BEHAVIOR_NOTE_TYPE_COUNT",                                 "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},
+  {"cudnnResampleMode_t",                                            {"hipdnnResampleMode_t",                                            "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
+  {"CUDNN_RESAMPLE_NEAREST",                                         {"HIPDNN_RESAMPLE_NEAREST",                                         "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},
+  {"CUDNN_RESAMPLE_BILINEAR",                                        {"HIPDNN_RESAMPLE_BILINEAR",                                        "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},
+  {"CUDNN_RESAMPLE_AVGPOOL",                                         {"HIPDNN_RESAMPLE_AVGPOOL",                                         "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},
+  {"CUDNN_RESAMPLE_MAXPOOL",                                         {"HIPDNN_RESAMPLE_MAXPOOL",                                         "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},
+  {"cudnnSignalMode_t",                                              {"hipdnnSignalMode_t",                                              "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
+  {"CUDNN_SIGNAL_SET",                                               {"HIPDNN_SIGNAL_SET",                                               "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},
+  {"CUDNN_SIGNAL_WAIT",                                              {"HIPDNN_SIGNAL_WAIT",                                              "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},
 
   // cuDNN types
   {"cudnnContext",                                                   {"hipdnnContext",                                                   "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
@@ -718,6 +730,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"cudnnBackendDescriptor_t",                                       {"hipdnnBackendDescriptor_t",                                       "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
   {"libraryPropertyType",                                            {"hipdnnLibraryPropertyType",                                       "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
   {"libraryPropertyType_t",                                          {"hipdnnLibraryPropertyType_t",                                     "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
+  {"cudnnFractionStruct",                                            {"hipdnnFractionStruct",                                            "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
+  {"cudnnFraction_t",                                                {"hipdnnFraction_t",                                                "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_TYPE_NAME_VER_MAP {
@@ -1381,37 +1395,51 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_TYPE_NAME_VER_MAP {
   {"cudnnBackendBehaviorNote_t",                                     {CUDNN_820, CUDA_0,   CUDA_0  }},
   {"CUDNN_BEHAVIOR_NOTE_RUNTIME_COMPILATION",                        {CUDNN_820, CUDA_0,   CUDA_0  }},
   {"CUDNN_BEHAVIOR_NOTE_TYPE_COUNT",                                 {CUDNN_820, CUDA_0,   CUDA_0  }},
-  {"CUDNN_DATA_BOOLEAN",                                             {CUDNN_850, CUDA_0,   CUDA_0  }},
-  {"CUDNN_POINTWISE_ADD_SQUARE",                                     {CUDNN_850, CUDA_0,   CUDA_0  }},
-  {"CUDNN_POINTWISE_DIV",                                            {CUDNN_850, CUDA_0,   CUDA_0  }},
-  {"CUDNN_POINTWISE_MOD",                                            {CUDNN_850, CUDA_0,   CUDA_0  }},
-  {"CUDNN_POINTWISE_POW",                                            {CUDNN_850, CUDA_0,   CUDA_0  }},
-  {"CUDNN_POINTWISE_SUB",                                            {CUDNN_850, CUDA_0,   CUDA_0  }},
-  {"CUDNN_POINTWISE_ABS",                                            {CUDNN_850, CUDA_0,   CUDA_0  }},
-  {"CUDNN_POINTWISE_CEIL",                                           {CUDNN_850, CUDA_0,   CUDA_0  }},
-  {"CUDNN_POINTWISE_COS",                                            {CUDNN_850, CUDA_0,   CUDA_0  }},
-  {"CUDNN_POINTWISE_EXP",                                            {CUDNN_850, CUDA_0,   CUDA_0  }},
-  {"CUDNN_POINTWISE_FLOOR",                                          {CUDNN_850, CUDA_0,   CUDA_0  }},
-  {"CUDNN_POINTWISE_LOG",                                            {CUDNN_850, CUDA_0,   CUDA_0  }},
-  {"CUDNN_POINTWISE_NEG",                                            {CUDNN_850, CUDA_0,   CUDA_0  }},
-  {"CUDNN_POINTWISE_RSQRT",                                          {CUDNN_850, CUDA_0,   CUDA_0  }},
-  {"CUDNN_POINTWISE_SIN",                                            {CUDNN_850, CUDA_0,   CUDA_0  }},
-  {"CUDNN_POINTWISE_TAN",                                            {CUDNN_850, CUDA_0,   CUDA_0  }},
+  {"CUDNN_DATA_BOOLEAN",                                             {CUDNN_830, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_ADD_SQUARE",                                     {CUDNN_830, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_DIV",                                            {CUDNN_830, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_MOD",                                            {CUDNN_830, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_POW",                                            {CUDNN_830, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_SUB",                                            {CUDNN_830, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_ABS",                                            {CUDNN_830, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_CEIL",                                           {CUDNN_830, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_COS",                                            {CUDNN_830, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_EXP",                                            {CUDNN_830, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_FLOOR",                                          {CUDNN_830, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_LOG",                                            {CUDNN_830, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_NEG",                                            {CUDNN_830, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_RSQRT",                                          {CUDNN_830, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_SIN",                                            {CUDNN_830, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_TAN",                                            {CUDNN_830, CUDA_0,   CUDA_0  }},
   {"CUDNN_POINTWISE_ERF",                                            {CUDNN_850, CUDA_0,   CUDA_0  }},
   {"CUDNN_POINTWISE_IDENTITY",                                       {CUDNN_850, CUDA_0,   CUDA_0  }},
   {"CUDNN_POINTWISE_GELU_APPROX_TANH_FWD",                           {CUDNN_850, CUDA_0,   CUDA_0  }},
   {"CUDNN_POINTWISE_GELU_APPROX_TANH_BWD",                           {CUDNN_850, CUDA_0,   CUDA_0  }},
-  {"CUDNN_POINTWISE_CMP_EQ",                                         {CUDNN_850, CUDA_0,   CUDA_0  }},
-  {"CUDNN_POINTWISE_CMP_NEQ",                                        {CUDNN_850, CUDA_0,   CUDA_0  }},
-  {"CUDNN_POINTWISE_CMP_GT",                                         {CUDNN_850, CUDA_0,   CUDA_0  }},
-  {"CUDNN_POINTWISE_CMP_GE",                                         {CUDNN_850, CUDA_0,   CUDA_0  }},
-  {"CUDNN_POINTWISE_CMP_LT",                                         {CUDNN_850, CUDA_0,   CUDA_0  }},
-  {"CUDNN_POINTWISE_CMP_LE",                                         {CUDNN_850, CUDA_0,   CUDA_0  }},
-  {"CUDNN_POINTWISE_LOGICAL_AND",                                    {CUDNN_850, CUDA_0,   CUDA_0  }},
-  {"CUDNN_POINTWISE_LOGICAL_OR",                                     {CUDNN_850, CUDA_0,   CUDA_0  }},
-  {"CUDNN_POINTWISE_LOGICAL_NOT",                                    {CUDNN_850, CUDA_0,   CUDA_0  }},
-  {"CUDNN_POINTWISE_GEN_INDEX",                                      {CUDNN_850, CUDA_0,   CUDA_0  }},
-  {"CUDNN_POINTWISE_BINARY_SELECT",                                  {CUDNN_850, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_CMP_EQ",                                         {CUDNN_830, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_CMP_NEQ",                                        {CUDNN_830, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_CMP_GT",                                         {CUDNN_830, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_CMP_GE",                                         {CUDNN_830, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_CMP_LT",                                         {CUDNN_830, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_CMP_LE",                                         {CUDNN_830, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_LOGICAL_AND",                                    {CUDNN_830, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_LOGICAL_OR",                                     {CUDNN_830, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_LOGICAL_NOT",                                    {CUDNN_830, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_GEN_INDEX",                                      {CUDNN_840, CUDA_0,   CUDA_0  }},
+  {"CUDNN_POINTWISE_BINARY_SELECT",                                  {CUDNN_840, CUDA_0,   CUDA_0  }},
+  {"cudnnFractionStruct",                                            {CUDNN_850, CUDA_0,   CUDA_0  }},
+  {"cudnnFraction_t",                                                {CUDNN_850, CUDA_0,   CUDA_0  }},
+  {"cudnnResampleMode_t",                                            {CUDNN_830, CUDA_0,   CUDA_0  }},
+  {"CUDNN_RESAMPLE_NEAREST",                                         {CUDNN_830, CUDA_0,   CUDA_0  }},
+  {"CUDNN_RESAMPLE_BILINEAR",                                        {CUDNN_830, CUDA_0,   CUDA_0  }},
+  {"CUDNN_RESAMPLE_AVGPOOL",                                         {CUDNN_830, CUDA_0,   CUDA_0  }},
+  {"CUDNN_RESAMPLE_MAXPOOL",                                         {CUDNN_830, CUDA_0,   CUDA_0  }},
+  {"cudnnSignalMode_t",                                              {CUDNN_850, CUDA_0,   CUDA_0  }},
+  {"CUDNN_SIGNAL_SET",                                               {CUDNN_850, CUDA_0,   CUDA_0  }},
+  {"CUDNN_SIGNAL_WAIT",                                              {CUDNN_850, CUDA_0,   CUDA_0  }},
+  {"CUDNN_ATTR_POINTWISE_AXIS",                                      {CUDNN_840, CUDA_0,   CUDA_0  }},
+  {"CUDNN_ATTR_EXECUTION_PLAN_JSON_REPRESENTATION",                  {CUDNN_840, CUDA_0,   CUDA_0  }},
+  {"CUDNN_ATTR_OPERATION_POINTWISE_TDESC",                           {CUDNN_830, CUDA_0,   CUDA_0  }},
+  {"CUDNN_ATTR_TENSOR_REORDERING_MODE",                              {CUDNN_830, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_DNN_TYPE_NAME_VER_MAP {
