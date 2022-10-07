@@ -231,6 +231,8 @@ enum cudaVersions {
   CUDNN_810 = 810,
   CUDNN_811 = 811,
   CUDNN_820 = 820,
+  CUDNN_830 = 830,
+  CUDNN_840 = 840,
   CUDNN_850 = 850,
 };
 
