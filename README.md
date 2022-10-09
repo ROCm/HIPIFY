@@ -336,7 +336,7 @@ Run `Visual Studio 17 2022`, open the generated `LLVM.sln`, build all, build pro
 
         - ***Linux***: `-DCUDA_DNN_ROOT_DIR=/usr/include`
 
-        - ***Windows***: `-DCUDA_DNN_ROOT_DIR=d:/CUDNN/cudnn-11.7-windows-x64-v8.4.1`
+        - ***Windows***: `-DCUDA_DNN_ROOT_DIR=d:/CUDNN/cudnn-11.7-windows-x64-v8.5.0`
 
 5. Ensure [`CUB`](https://github.com/NVlabs/cub) of the version corresponding to CUDA's version is installed.
 
@@ -388,7 +388,7 @@ Ubuntu 14: LLVM 4.0.0 - 7.1.0, CUDA 7.0 - 9.0, cuDNN 5.0.5 - 7.6.5
 
 Ubuntu 16-18: LLVM 8.0.0 - 14.0.6, CUDA 8.0 - 10.2, cuDNN 5.1.10 - 8.0.5
 
-Ubuntu 20-21: LLVM 9.0.0 - 15.0.2, CUDA 8.0 - 11.7.1, cuDNN 5.1.10 - 8.4.1
+Ubuntu 20-21: LLVM 9.0.0 - 15.0.2, CUDA 8.0 - 11.7.1, cuDNN 5.1.10 - 8.5.0
 
 Minimum build system requirements for the above configurations:
 
@@ -567,8 +567,8 @@ Testing Time: 6.22s
 | 11.0.1 - 11.1.0 | 7.0 - 11.2.2 | 7.6.5  - 8.0.5 | 2017.15.9.31, 2019.16.8.4                | 3.19.3         | 3.9.2        |
 | 12.0.0 - 13.0.1 | 7.0 - 11.5.1 | 7.6.5  - 8.3.2 | 2017.15.9.43, 2019.16.11.9               | 3.22.2         | 3.10.2       |
 | 14.0.0 - 14.0.6 | 7.0 - 11.7.1 | 8.0.5  - 8.4.1 | 2017.15.9.49, 2019.16.11.17, 2022.17.2.6 | 3.24.0         | 3.10.6       |
-| 15.0.0 - 15.0.2 | 7.0 - 11.7.1 | 8.0.5  - 8.4.1 | 2017.15.9.50, 2019.16.11.18, 2022.17.3.3 | 3.24.1         | 3.10.6       |
-| 16.0.0git       | 7.0 - 11.7.1 | 8.0.5  - 8.4.1 | 2017.15.9.50, 2019.16.11.18, 2022.17.3.3 | 3.24.1         | 3.10.6       |
+| 15.0.0 - 15.0.2 | 7.0 - 11.7.1 | 8.0.5  - 8.5.0 | 2017.15.9.50, 2019.16.11.18, 2022.17.3.3 | 3.24.1         | 3.10.6       |
+| 16.0.0git       | 7.0 - 11.7.1 | 8.0.5  - 8.5.0 | 2017.15.9.50, 2019.16.11.18, 2022.17.3.3 | 3.24.1         | 3.10.6       |
 
 *Building with testing support by `Visual Studio 17 2022` on `Windows 10`:*
 
@@ -583,7 +583,7 @@ cmake
  -DCMAKE_PREFIX_PATH=d:/LLVM/15.0.2/dist \
  -DCUDA_TOOLKIT_ROOT_DIR="c:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.7" \
  -DCUDA_SDK_ROOT_DIR="c:/ProgramData/NVIDIA Corporation/CUDA Samples/v11.7" \
- -DCUDA_DNN_ROOT_DIR=d:/CUDNN/cudnn-11.7-windows-x64-v8.4.1 \
+ -DCUDA_DNN_ROOT_DIR=d:/CUDNN/cudnn-11.7-windows-x64-v8.5.0 \
  -DCUDA_CUB_ROOT_DIR=d:/GIT/cub \
  -DLLVM_EXTERNAL_LIT=d:/LLVM/15.0.2/build/Release/bin/llvm-lit.py \
  ../hipify
