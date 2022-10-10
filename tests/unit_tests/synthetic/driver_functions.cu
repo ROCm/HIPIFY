@@ -536,7 +536,7 @@ int main() {
   result = cuGraphInstantiate_v2(&graphExec, graph, &graphNode, nullptr, bytes);
 #endif
 
-#if CUDA_VERSION >= 11000 && CUDA_VERSION < 11080
+#if CUDA_VERSION >= 11000
   // CHECK: hipKernelNodeAttrID kernelNodeAttrID;
   CUkernelNodeAttrID kernelNodeAttrID;
   // CHECK: hipKernelNodeAttrValue kernelNodeAttrValue;
@@ -551,9 +551,7 @@ int main() {
   // HIP: hipError_t hipGraphKernelNodeGetAttribute(hipGraphNode_t hNode, hipKernelNodeAttrID attr, hipKernelNodeAttrValue* value);
   // CHECK: result = hipGraphKernelNodeGetAttribute(graphNode, kernelNodeAttrID, &kernelNodeAttrValue);
   result = cuGraphKernelNodeGetAttribute(graphNode, kernelNodeAttrID, &kernelNodeAttrValue);
-#endif
 
-#if CUDA_VERSION >= 11010
   // CUDA: CUresult CUDAAPI cuGraphExecChildGraphNodeSetParams(CUgraphExec hGraphExec, CUgraphNode hNode, CUgraph childGraph);
   // HIP: hipError_t hipGraphExecChildGraphNodeSetParams(hipGraphExec_t hGraphExec, hipGraphNode_t node, hipGraph_t childGraph);
   // CHECK: result = hipGraphExecChildGraphNodeSetParams(graphExec, graphNode, graph);
