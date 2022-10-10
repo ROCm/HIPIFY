@@ -56,6 +56,7 @@
 |`CUDA_ERROR_ILLEGAL_INSTRUCTION`| | | | | | | | |
 |`CUDA_ERROR_ILLEGAL_STATE`|10.0| | |`hipErrorIllegalState`|5.0.0| | | |
 |`CUDA_ERROR_INVALID_ADDRESS_SPACE`| | | | | | | | |
+|`CUDA_ERROR_INVALID_CLUSTER_SIZE`|11.8| | | | | | | |
 |`CUDA_ERROR_INVALID_CONTEXT`| | | |`hipErrorInvalidContext`|1.6.0| | | |
 |`CUDA_ERROR_INVALID_DEVICE`| | | |`hipErrorInvalidDevice`|1.6.0| | | |
 |`CUDA_ERROR_INVALID_GRAPHICS_CONTEXT`| | | |`hipErrorInvalidGraphicsContext`|1.6.0| | | |
@@ -73,6 +74,7 @@
 |`CUDA_ERROR_LAUNCH_TIMEOUT`| | | |`hipErrorLaunchTimeOut`|1.6.0| | | |
 |`CUDA_ERROR_MAP_FAILED`| | | |`hipErrorMapFailed`|1.6.0| | | |
 |`CUDA_ERROR_MISALIGNED_ADDRESS`| | | | | | | | |
+|`CUDA_ERROR_MPS_CLIENT_TERMINATED`|11.8| | | | | | | |
 |`CUDA_ERROR_MPS_CONNECTION_FAILED`|11.4| | | | | | | |
 |`CUDA_ERROR_MPS_MAX_CLIENTS_REACHED`|11.4| | | | | | | |
 |`CUDA_ERROR_MPS_MAX_CONNECTIONS_REACHED`|11.4| | | | | | | |
@@ -239,6 +241,9 @@
 |`CU_ARRAY_SPARSE_PROPERTIES_SINGLE_MIPTAIL`|11.1| | | | | | | |
 |`CU_ARRAY_SPARSE_SUBRESOURCE_TYPE_MIPTAIL`|11.1| | |`hipArraySparseSubresourceTypeMiptail`|5.2.0| | | |
 |`CU_ARRAY_SPARSE_SUBRESOURCE_TYPE_SPARSE_LEVEL`|11.1| | |`hipArraySparseSubresourceTypeSparseLevel`|5.2.0| | | |
+|`CU_CLUSTER_SCHEDULING_POLICY_DEFAULT`|11.8| | | | | | | |
+|`CU_CLUSTER_SCHEDULING_POLICY_LOAD_BALANCING`|11.8| | | | | | | |
+|`CU_CLUSTER_SCHEDULING_POLICY_SPREAD`|11.8| | | | | | | |
 |`CU_COMPUTEMODE_DEFAULT`| | | |`hipComputeModeDefault`|1.9.0| | | |
 |`CU_COMPUTEMODE_EXCLUSIVE`| | |8.0|`hipComputeModeExclusive`|1.9.0| | | |
 |`CU_COMPUTEMODE_EXCLUSIVE_PROCESS`| | | |`hipComputeModeExclusiveProcess`|2.0.0| | | |
@@ -656,9 +661,20 @@
 |`CU_JIT_TARGET_FROM_CUCONTEXT`| | | |`hipJitOptionTargetFromContext`|1.6.0| | | |
 |`CU_JIT_THREADS_PER_BLOCK`| | | |`hipJitOptionThreadsPerBlock`|1.6.0| | | |
 |`CU_JIT_WALL_TIME`| | | |`hipJitOptionWallTime`|1.6.0| | | |
-|`CU_KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW`|11.0| |11.8|`hipKernelNodeAttributeAccessPolicyWindow`|5.2.0| | | |
-|`CU_KERNEL_NODE_ATTRIBUTE_COOPERATIVE`|11.0| |11.8|`hipKernelNodeAttributeCooperative`|5.2.0| | | |
+|`CU_KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW`|11.0| | |`hipKernelNodeAttributeAccessPolicyWindow`|5.2.0| | | |
+|`CU_KERNEL_NODE_ATTRIBUTE_CLUSTER_DIMENSION`|11.8| | | | | | | |
+|`CU_KERNEL_NODE_ATTRIBUTE_CLUSTER_SCHEDULING_POLICY_PREFERENCE`|11.8| | | | | | | |
+|`CU_KERNEL_NODE_ATTRIBUTE_COOPERATIVE`|11.0| | |`hipKernelNodeAttributeCooperative`|5.2.0| | | |
 |`CU_KERNEL_NODE_ATTRIBUTE_PRIORITY`|11.7| | | | | | | |
+|`CU_LAUNCH_ATTRIBUTE_ACCESS_POLICY_WINDOW`|11.8| | | | | | | |
+|`CU_LAUNCH_ATTRIBUTE_CLUSTER_DIMENSION`|11.8| | | | | | | |
+|`CU_LAUNCH_ATTRIBUTE_CLUSTER_SCHEDULING_POLICY_PREFERENCE`|11.8| | | | | | | |
+|`CU_LAUNCH_ATTRIBUTE_COOPERATIVE`|11.8| | | | | | | |
+|`CU_LAUNCH_ATTRIBUTE_IGNORE`|11.8| | | | | | | |
+|`CU_LAUNCH_ATTRIBUTE_PRIORITY`|11.8| | | | | | | |
+|`CU_LAUNCH_ATTRIBUTE_PROGRAMMATIC_EVENT`|11.8| | | | | | | |
+|`CU_LAUNCH_ATTRIBUTE_PROGRAMMATIC_STREAM_SERIALIZATION`|11.8| | | | | | | |
+|`CU_LAUNCH_ATTRIBUTE_SYNCHRONIZATION_POLICY`|11.8| | | | | | | |
 |`CU_LAUNCH_PARAM_BUFFER_POINTER`| | | |`HIP_LAUNCH_PARAM_BUFFER_POINTER`|1.6.0| | | |
 |`CU_LAUNCH_PARAM_BUFFER_POINTER_AS_INT`|11.7| | | | | | | |
 |`CU_LAUNCH_PARAM_BUFFER_SIZE`| | | |`HIP_LAUNCH_PARAM_BUFFER_SIZE`|1.6.0| | | |
@@ -891,6 +907,8 @@
 |`CUarray_format`| | | |`hipArray_Format`|1.7.0| | | |
 |`CUarray_format_enum`| | | |`hipArray_Format`|1.7.0| | | |
 |`CUarray_st`| | | |`hipArray`|1.7.0| | | |
+|`CUclusterSchedulingPolicy`|11.8| | | | | | | |
+|`CUclusterSchedulingPolicy_enum`|11.8| | | | | | | |
 |`CUcomputemode`| | | |`hipComputeMode`|1.9.0| | | |
 |`CUcomputemode_enum`| | | |`hipComputeMode`|1.9.0| | | |
 |`CUcontext`| | | |`hipCtx_t`|1.6.0| | | |
@@ -1014,11 +1032,19 @@
 |`CUjit_option_enum`| | | |`hipJitOption`|1.6.0| | | |
 |`CUjit_target`| | | | | | | | |
 |`CUjit_target_enum`| | | | | | | | |
-|`CUkernelNodeAttrID`|11.0| |11.8|`hipKernelNodeAttrID`|5.2.0| | | |
+|`CUkernelNodeAttrID`|11.0| | |`hipKernelNodeAttrID`|5.2.0| | | |
 |`CUkernelNodeAttrID_enum`|11.0| |11.8|`hipKernelNodeAttrID`|5.2.0| | | |
-|`CUkernelNodeAttrValue`|11.0| |11.8|`hipKernelNodeAttrValue`|5.2.0| | | |
+|`CUkernelNodeAttrValue`|11.0| | |`hipKernelNodeAttrValue`|5.2.0| | | |
 |`CUkernelNodeAttrValue_union`|11.0| |11.8|`hipKernelNodeAttrValue`|5.2.0| | | |
-|`CUkernelNodeAttrValue_v1`|11.3| |11.8|`hipKernelNodeAttrValue`|5.2.0| | | |
+|`CUkernelNodeAttrValue_v1`|11.3| | |`hipKernelNodeAttrValue`|5.2.0| | | |
+|`CUlaunchAttribute`|11.8| | | | | | | |
+|`CUlaunchAttributeID`|11.8| | | | | | | |
+|`CUlaunchAttributeID_enum`|11.8| | | | | | | |
+|`CUlaunchAttributeValue`|11.8| | | | | | | |
+|`CUlaunchAttributeValue_union`|11.8| | | | | | | |
+|`CUlaunchAttribute_st`|11.8| | | | | | | |
+|`CUlaunchConfig`|11.8| | | | | | | |
+|`CUlaunchConfig_st`|11.8| | | | | | | |
 |`CUlimit`| | | |`hipLimit_t`|1.6.0| | | |
 |`CUlimit_enum`| | | |`hipLimit_t`|1.6.0| | | |
 |`CUlinkState`| | | |`hiprtcLinkState`|5.3.0| | |5.3.0|

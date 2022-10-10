@@ -929,17 +929,18 @@ int main() {
 #endif
 
 #if CUDA_VERSION >= 11000 && CUDA_VERSION < 11080
-  // CHECK: hipKernelNodeAttrID kernelNodeAttrID;
-  // CHECK-NEXT: hipKernelNodeAttrID kernelNodeAttrID_enum;
-  // CHECK-NEXT: hipKernelNodeAttrID KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW = hipKernelNodeAttributeAccessPolicyWindow;
-  // CHECK-NEXT: hipKernelNodeAttrID KERNEL_NODE_ATTRIBUTE_COOPERATIVE = hipKernelNodeAttributeCooperative;
-  CUkernelNodeAttrID kernelNodeAttrID;
+  // CHECK: hipKernelNodeAttrID kernelNodeAttrID_enum;
   CUkernelNodeAttrID_enum kernelNodeAttrID_enum;
-  CUkernelNodeAttrID KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW = CU_KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW;
-  CUkernelNodeAttrID KERNEL_NODE_ATTRIBUTE_COOPERATIVE = CU_KERNEL_NODE_ATTRIBUTE_COOPERATIVE;
 #endif
 
 #if CUDA_VERSION >= 11010
+  // CHECK: hipKernelNodeAttrID kernelNodeAttrID;
+  // CHECK-NEXT: hipKernelNodeAttrID KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW = hipKernelNodeAttributeAccessPolicyWindow;
+  // CHECK-NEXT: hipKernelNodeAttrID KERNEL_NODE_ATTRIBUTE_COOPERATIVE = hipKernelNodeAttributeCooperative;
+  CUkernelNodeAttrID kernelNodeAttrID;
+  CUkernelNodeAttrID KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW = CU_KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW;
+  CUkernelNodeAttrID KERNEL_NODE_ATTRIBUTE_COOPERATIVE = CU_KERNEL_NODE_ATTRIBUTE_COOPERATIVE;
+
   // CHECK: hipGraphNodeType GRAPH_NODE_TYPE_WAIT_EVENT = hipGraphNodeTypeWaitEvent;
   // CHECK-NEXT: hipGraphNodeType GRAPH_NODE_TYPE_EVENT_RECORD = hipGraphNodeTypeEventRecord;
   CUgraphNodeType GRAPH_NODE_TYPE_WAIT_EVENT = CU_GRAPH_NODE_TYPE_WAIT_EVENT;
