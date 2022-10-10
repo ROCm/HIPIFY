@@ -913,15 +913,6 @@ int main() {
   // CHECK: hipDeviceAttribute_t DEVICE_ATTRIBUTE_MAX_BLOCKS_PER_MULTIPROCESSOR = hipDeviceAttributeMaxBlocksPerMultiprocessor;
   CUdevice_attribute DEVICE_ATTRIBUTE_MAX_BLOCKS_PER_MULTIPROCESSOR = CU_DEVICE_ATTRIBUTE_MAX_BLOCKS_PER_MULTIPROCESSOR;
 
-  // CHECK: hipKernelNodeAttrID kernelNodeAttrID;
-  // CHECK-NEXT: hipKernelNodeAttrID kernelNodeAttrID_enum;
-  // CHECK-NEXT: hipKernelNodeAttrID KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW = hipKernelNodeAttributeAccessPolicyWindow;
-  // CHECK-NEXT: hipKernelNodeAttrID KERNEL_NODE_ATTRIBUTE_COOPERATIVE = hipKernelNodeAttributeCooperative;
-  CUkernelNodeAttrID kernelNodeAttrID;
-  CUkernelNodeAttrID_enum kernelNodeAttrID_enum;
-  CUkernelNodeAttrID KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW = CU_KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW;
-  CUkernelNodeAttrID KERNEL_NODE_ATTRIBUTE_COOPERATIVE = CU_KERNEL_NODE_ATTRIBUTE_COOPERATIVE;
-
   // CHECK: hipAccessProperty accessProperty;
   // CHECK-NEXT: hipAccessProperty accessProperty_enum;
   // CHECK-NEXT: hipAccessProperty ACCESS_PROPERTY_NORMAL = hipAccessPropertyNormal;
@@ -935,6 +926,17 @@ int main() {
 
   // CHECK: hipPointer_attribute POINTER_ATTRIBUTE_IS_GPU_DIRECT_RDMA_CAPABLE = HIP_POINTER_ATTRIBUTE_IS_GPU_DIRECT_RDMA_CAPABLE;
   CUpointer_attribute POINTER_ATTRIBUTE_IS_GPU_DIRECT_RDMA_CAPABLE = CU_POINTER_ATTRIBUTE_IS_GPU_DIRECT_RDMA_CAPABLE;
+#endif
+
+#if CUDA_VERSION >= 11000 && CUDA_VERSION < 11080
+  // CHECK: hipKernelNodeAttrID kernelNodeAttrID;
+  // CHECK-NEXT: hipKernelNodeAttrID kernelNodeAttrID_enum;
+  // CHECK-NEXT: hipKernelNodeAttrID KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW = hipKernelNodeAttributeAccessPolicyWindow;
+  // CHECK-NEXT: hipKernelNodeAttrID KERNEL_NODE_ATTRIBUTE_COOPERATIVE = hipKernelNodeAttributeCooperative;
+  CUkernelNodeAttrID kernelNodeAttrID;
+  CUkernelNodeAttrID_enum kernelNodeAttrID_enum;
+  CUkernelNodeAttrID KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW = CU_KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW;
+  CUkernelNodeAttrID KERNEL_NODE_ATTRIBUTE_COOPERATIVE = CU_KERNEL_NODE_ATTRIBUTE_COOPERATIVE;
 #endif
 
 #if CUDA_VERSION >= 11010
