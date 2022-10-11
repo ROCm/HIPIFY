@@ -229,6 +229,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   {"cudaSetDoubleForDevice",                                  {"hipSetDoubleForDevice",                                  "", CONV_EXECUTION, API_RUNTIME, 7, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   // no analogue
   {"cudaSetDoubleForHost",                                    {"hipSetDoubleForHost",                                    "", CONV_EXECUTION, API_RUNTIME, 7, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
+  // no analogue
+  // NOTE: Not equal to cuLaunchKernelEx due to different signatures
+  {"cudaLaunchKernelExC",                                     {"hipLaunchKernelExC",                                     "", CONV_EXECUTION, API_RUNTIME, 7, HIP_UNSUPPORTED}},
 
   // 8. Occupancy
   // cuOccupancyAvailableDynamicSMemPerBlock
@@ -245,6 +248,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   {"cudaOccupancyMaxPotentialBlockSizeVariableSMem",          {"hipOccupancyMaxPotentialBlockSizeVariableSMem",          "", CONV_OCCUPANCY, API_RUNTIME, 8, HIP_UNSUPPORTED}},
   // no analogue
   {"cudaOccupancyMaxPotentialBlockSizeVariableSMemWithFlags", {"hipOccupancyMaxPotentialBlockSizeVariableSMemWithFlags", "", CONV_OCCUPANCY, API_RUNTIME, 8, HIP_UNSUPPORTED}},
+  // cuOccupancyMaxPotentialClusterSize
+  {"cudaOccupancyMaxPotentialClusterSize",                    {"hipOccupancyMaxPotentialClusterSize",                    "", CONV_OCCUPANCY, API_RUNTIME, 8, HIP_UNSUPPORTED}},
+  // cuOccupancyMaxActiveClusters
+  {"cudaOccupancyMaxActiveClusters",                          {"hipOccupancyMaxActiveClusters",                          "", CONV_OCCUPANCY, API_RUNTIME, 8, HIP_UNSUPPORTED}},
 
   // 9. Memory Management
   // no analogue
@@ -642,6 +649,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // no analogue
   // NOTE: Not equal to cuTexObjectGetTextureDesc due to different signatures
   {"cudaGetTextureObjectTextureDesc",                         {"hipGetTextureObjectTextureDesc",                         "", CONV_TEXTURE, API_RUNTIME, 27}},
+  //
+  {"cudaCreateTextureObject_v2",                              {"hipCreateTextureObject_v2",                              "", CONV_TEXTURE, API_RUNTIME, 27, HIP_UNSUPPORTED}},
+  //
+  {"cudaGetTextureObjectTextureDesc_v2",                      {"hipGetTextureObjectTextureDesc_v2",                      "", CONV_TEXTURE, API_RUNTIME, 27, HIP_UNSUPPORTED}},
 
   // 28. Surface Object Management
   // no analogue
@@ -1073,6 +1084,11 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_FUNCTION_VER_MAP {
   {"cudaGraphInstantiateWithFlags",                           {CUDA_114, CUDA_0,   CUDA_0  }},
   {"cudaArrayGetMemoryRequirements",                          {CUDA_116, CUDA_0,   CUDA_0  }},
   {"cudaGraphNodeSetEnabled",                                 {CUDA_116, CUDA_0,   CUDA_0  }},
+  {"cudaLaunchKernelExC",                                     {CUDA_118, CUDA_0,   CUDA_0  }},
+  {"cudaOccupancyMaxPotentialClusterSize",                    {CUDA_118, CUDA_0,   CUDA_0  }},
+  {"cudaOccupancyMaxActiveClusters",                          {CUDA_118, CUDA_0,   CUDA_0  }},
+  {"cudaCreateTextureObject_v2",                              {CUDA_118, CUDA_0,   CUDA_0  }},
+  {"cudaGetTextureObjectTextureDesc_v2",                      {CUDA_118, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP {

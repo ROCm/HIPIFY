@@ -1540,6 +1540,7 @@
 |`cuLaunchCooperativeKernelMultiDevice`|9.0|11.3| | | | | | |
 |`cuLaunchHostFunc`|10.0| | |`hipLaunchHostFunc`|5.2.0| | | |
 |`cuLaunchKernel`| | | |`hipModuleLaunchKernel`|1.6.0| | | |
+|`cuLaunchKernelEx`|11.8| | | | | | | |
 
 ## **20. Execution Control [DEPRECATED]**
 
@@ -1646,8 +1647,10 @@
 |`cuOccupancyAvailableDynamicSMemPerBlock`|11.0| | | | | | | |
 |`cuOccupancyMaxActiveBlocksPerMultiprocessor`| | | |`hipModuleOccupancyMaxActiveBlocksPerMultiprocessor`|3.5.0| | | |
 |`cuOccupancyMaxActiveBlocksPerMultiprocessorWithFlags`| | | |`hipModuleOccupancyMaxActiveBlocksPerMultiprocessorWithFlags`|3.5.0| | | |
+|`cuOccupancyMaxActiveClusters`|11.8| | | | | | | |
 |`cuOccupancyMaxPotentialBlockSize`| | | |`hipModuleOccupancyMaxPotentialBlockSize`|3.5.0| | | |
 |`cuOccupancyMaxPotentialBlockSizeWithFlags`| | | |`hipModuleOccupancyMaxPotentialBlockSizeWithFlags`|3.5.0| | | |
+|`cuOccupancyMaxPotentialClusterSize`|11.8| | | | | | | |
 
 ## **23. Texture Reference Management [DEPRECATED]**
 
