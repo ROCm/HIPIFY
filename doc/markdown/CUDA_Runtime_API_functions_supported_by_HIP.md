@@ -615,6 +615,10 @@ Unsupported
 |`cudaChannelFormatKindUnsignedNormalized8X1`|11.5| | | | | | | |
 |`cudaChannelFormatKindUnsignedNormalized8X2`|11.5| | | | | | | |
 |`cudaChannelFormatKindUnsignedNormalized8X4`|11.5| | | | | | | |
+|`cudaClusterSchedulingPolicy`|11.8| | | | | | | |
+|`cudaClusterSchedulingPolicyDefault`|11.8| | | | | | | |
+|`cudaClusterSchedulingPolicyLoadBalancing`|11.8| | | | | | | |
+|`cudaClusterSchedulingPolicySpread`|11.8| | | | | | | |
 |`cudaComputeMode`| | | |`hipComputeMode`|1.9.0| | | |
 |`cudaComputeModeDefault`| | | |`hipComputeModeDefault`|1.9.0| | | |
 |`cudaComputeModeExclusive`| | | |`hipComputeModeExclusive`|1.9.0| | | |
@@ -654,6 +658,7 @@ Unsupported
 |`cudaDevAttrCanMapHostMemory`| | | |`hipDeviceAttributeCanMapHostMemory`|2.10.0| | | |
 |`cudaDevAttrCanUseHostPointerForRegisteredMem`|8.0| | |`hipDeviceAttributeCanUseHostPointerForRegisteredMem`|4.3.0| | | |
 |`cudaDevAttrClockRate`| | | |`hipDeviceAttributeClockRate`|1.6.0| | | |
+|`cudaDevAttrClusterLaunch`|11.8| | | | | | | |
 |`cudaDevAttrComputeCapabilityMajor`| | | |`hipDeviceAttributeComputeCapabilityMajor`|1.6.0| | | |
 |`cudaDevAttrComputeCapabilityMinor`| | | |`hipDeviceAttributeComputeCapabilityMinor`|1.6.0| | | |
 |`cudaDevAttrComputeMode`| | | |`hipDeviceAttributeComputeMode`|1.6.0| | | |
@@ -903,6 +908,7 @@ Unsupported
 |`cudaErrorInsufficientDriver`| | | |`hipErrorInsufficientDriver`|1.7.0| | | |
 |`cudaErrorInvalidAddressSpace`| | | | | | | | |
 |`cudaErrorInvalidChannelDescriptor`| | | | | | | | |
+|`cudaErrorInvalidClusterSize`|11.8| | | | | | | |
 |`cudaErrorInvalidConfiguration`| | | |`hipErrorInvalidConfiguration`|1.6.0| | | |
 |`cudaErrorInvalidDevice`| | | |`hipErrorInvalidDevice`|1.6.0| | | |
 |`cudaErrorInvalidDeviceFunction`| | | |`hipErrorInvalidDeviceFunction`|1.6.0| | | |
@@ -939,6 +945,7 @@ Unsupported
 |`cudaErrorMisalignedAddress`| | | | | | | | |
 |`cudaErrorMissingConfiguration`| | | |`hipErrorMissingConfiguration`|1.6.0| | | |
 |`cudaErrorMixedDeviceExecution`| |3.1| | | | | | |
+|`cudaErrorMpsClientTerminated`|11.8| | | | | | | |
 |`cudaErrorMpsConnectionFailed`|11.4| | | | | | | |
 |`cudaErrorMpsMaxClientsReached`|11.4| | | | | | | |
 |`cudaErrorMpsMaxConnectionsReached`|11.4| | | | | | | |
@@ -1050,9 +1057,15 @@ Unsupported
 |`cudaFormatModeAuto`| | | | | | | | |
 |`cudaFormatModeForced`| | | | | | | | |
 |`cudaFuncAttribute`|9.0| | |`hipFuncAttribute`|3.9.0| | | |
+|`cudaFuncAttributeClusterDimMustBeSet`|11.8| | | | | | | |
+|`cudaFuncAttributeClusterSchedulingPolicyPreference`|11.8| | | | | | | |
 |`cudaFuncAttributeMax`|9.0| | |`hipFuncAttributeMax`|3.9.0| | | |
 |`cudaFuncAttributeMaxDynamicSharedMemorySize`|9.0| | |`hipFuncAttributeMaxDynamicSharedMemorySize`|3.9.0| | | |
+|`cudaFuncAttributeNonPortableClusterSizeAllowed`|11.8| | | | | | | |
 |`cudaFuncAttributePreferredSharedMemoryCarveout`|9.0| | |`hipFuncAttributePreferredSharedMemoryCarveout`|3.9.0| | | |
+|`cudaFuncAttributeRequiredClusterDepth`|11.8| | | | | | | |
+|`cudaFuncAttributeRequiredClusterHeight`|11.8| | | | | | | |
+|`cudaFuncAttributeRequiredClusterWidth`|11.8| | | | | | | |
 |`cudaFuncAttributes`| | | |`hipFuncAttributes`|1.9.0| | | |
 |`cudaFuncCache`| | | |`hipFuncCache_t`|1.6.0| | | |
 |`cudaFuncCachePreferEqual`| | | |`hipFuncCachePreferEqual`|1.6.0| | | |
@@ -1158,10 +1171,27 @@ Unsupported
 |`cudaKernelNodeAttrID`|11.0| | |`hipKernelNodeAttrID`|5.2.0| | | |
 |`cudaKernelNodeAttrValue`|11.0| | |`hipKernelNodeAttrValue`|5.2.0| | | |
 |`cudaKernelNodeAttributeAccessPolicyWindow`|11.0| | |`hipKernelNodeAttributeAccessPolicyWindow`|5.2.0| | | |
+|`cudaKernelNodeAttributeClusterDimension`|11.8| | | | | | | |
+|`cudaKernelNodeAttributeClusterSchedulingPolicyPreference`|11.8| | | | | | | |
 |`cudaKernelNodeAttributeCooperative`|11.0| | |`hipKernelNodeAttributeCooperative`|5.2.0| | | |
 |`cudaKernelNodeAttributePriority`|11.7| | | | | | | |
 |`cudaKernelNodeParams`|10.0| | |`hipKernelNodeParams`|4.3.0| | | |
 |`cudaKeyValuePair`| | | | | | | | |
+|`cudaLaunchAttribute`|11.8| | | | | | | |
+|`cudaLaunchAttributeAccessPolicyWindow`|11.8| | | | | | | |
+|`cudaLaunchAttributeClusterDimension`|11.8| | | | | | | |
+|`cudaLaunchAttributeClusterSchedulingPolicyPreference`|11.8| | | | | | | |
+|`cudaLaunchAttributeCooperative`|11.8| | | | | | | |
+|`cudaLaunchAttributeID`|11.8| | | | | | | |
+|`cudaLaunchAttributeIgnore`|11.8| | | | | | | |
+|`cudaLaunchAttributePriority`|11.8| | | | | | | |
+|`cudaLaunchAttributeProgrammaticEvent`|11.8| | | | | | | |
+|`cudaLaunchAttributeProgrammaticStreamSerialization`|11.8| | | | | | | |
+|`cudaLaunchAttributeSynchronizationPolicy`|11.8| | | | | | | |
+|`cudaLaunchAttributeValue`|11.8| | | | | | | |
+|`cudaLaunchAttribute_st`|11.8| | | | | | | |
+|`cudaLaunchConfig_st`|11.8| | | | | | | |
+|`cudaLaunchConfig_t`|11.8| | | | | | | |
 |`cudaLaunchParams`|9.0| | |`hipLaunchParams`|2.6.0| | | |
 |`cudaLimit`| | | |`hipLimit_t`|1.6.0| | | |
 |`cudaLimitDevRuntimePendingLaunchCount`| | | | | | | | |
