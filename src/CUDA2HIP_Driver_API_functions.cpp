@@ -543,6 +543,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   // no analogue
   // NOTE: Not equal to cudaLaunchKernel due to different signatures
   {"cuLaunchKernel",                                       {"hipModuleLaunchKernel",                                   "", CONV_EXECUTION, API_DRIVER, 19}},
+  // no analogue
+  // NOTE: Not equal to cudaLaunchKernelExC due to different signatures
+  {"cuLaunchKernelEx",                                     {"hipLaunchKernelEx",                                       "", CONV_EXECUTION, API_DRIVER, 19, HIP_UNSUPPORTED}},
 
   // 20. Execution Control [DEPRECATED]
   // no analogue
@@ -747,6 +750,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuOccupancyMaxPotentialBlockSize",                     {"hipModuleOccupancyMaxPotentialBlockSize",                 "", CONV_OCCUPANCY, API_DRIVER, 22}},
   // cudaOccupancyMaxPotentialBlockSizeWithFlags
   {"cuOccupancyMaxPotentialBlockSizeWithFlags",            {"hipModuleOccupancyMaxPotentialBlockSizeWithFlags",        "", CONV_OCCUPANCY, API_DRIVER, 22}},
+  // cudaOccupancyMaxPotentialClusterSize
+  {"cuOccupancyMaxPotentialClusterSize",                   {"hipOccupancyMaxPotentialClusterSize",                     "", CONV_OCCUPANCY, API_DRIVER, 22, HIP_UNSUPPORTED}},
+  // cudaOccupancyMaxActiveClusters
+  {"cuOccupancyMaxActiveClusters",                         {"hipOccupancyMaxActiveClusters",                           "", CONV_OCCUPANCY, API_DRIVER, 22, HIP_UNSUPPORTED}},
 
   // 23. Texture Reference Management [DEPRECATED]
   // no analogues
@@ -1282,6 +1289,9 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_FUNCTION_VER_MAP {
   {"cuGraphBatchMemOpNodeGetParams",                       {CUDA_117, CUDA_0,   CUDA_0  }},
   {"cuGraphBatchMemOpNodeSetParams",                       {CUDA_117, CUDA_0,   CUDA_0  }},
   {"cuGraphExecBatchMemOpNodeSetParams",                   {CUDA_117, CUDA_0,   CUDA_0  }},
+  {"cuLaunchKernelEx",                                     {CUDA_118, CUDA_0,   CUDA_0  }},
+  {"cuOccupancyMaxPotentialClusterSize",                   {CUDA_118, CUDA_0,   CUDA_0  }},
+  {"cuOccupancyMaxActiveClusters",                         {CUDA_118, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_FUNCTION_VER_MAP {

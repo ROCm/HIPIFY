@@ -122,6 +122,7 @@
 |`cudaLaunchCooperativeKernelMultiDevice`|9.0|11.3| |`hipLaunchCooperativeKernelMultiDevice`|2.6.0| | | |
 |`cudaLaunchHostFunc`|10.0| | |`hipLaunchHostFunc`|5.2.0| | | |
 |`cudaLaunchKernel`| | | |`hipLaunchKernel`|1.6.0| | | |
+|`cudaLaunchKernelExC`|11.8| | | | | | | |
 |`cudaSetDoubleForDevice`| |10.0| | | | | | |
 |`cudaSetDoubleForHost`| |10.0| | | | | | |
 
@@ -132,10 +133,12 @@
 |`cudaOccupancyAvailableDynamicSMemPerBlock`|11.0| | | | | | | |
 |`cudaOccupancyMaxActiveBlocksPerMultiprocessor`| | | |`hipOccupancyMaxActiveBlocksPerMultiprocessor`|1.6.0| | | |
 |`cudaOccupancyMaxActiveBlocksPerMultiprocessorWithFlags`| | | |`hipOccupancyMaxActiveBlocksPerMultiprocessorWithFlags`|2.6.0| | | |
+|`cudaOccupancyMaxActiveClusters`|11.8| | | | | | | |
 |`cudaOccupancyMaxPotentialBlockSize`| | | |`hipOccupancyMaxPotentialBlockSize`|1.6.0| | | |
 |`cudaOccupancyMaxPotentialBlockSizeVariableSMem`| | | | | | | | |
 |`cudaOccupancyMaxPotentialBlockSizeVariableSMemWithFlags`| | | | | | | | |
 |`cudaOccupancyMaxPotentialBlockSizeWithFlags`| | | |`hipOccupancyMaxPotentialBlockSizeWithFlags`|3.5.0| | | |
+|`cudaOccupancyMaxPotentialClusterSize`|11.8| | | | | | | |
 
 ## **9. Memory Management**
 
@@ -393,10 +396,12 @@
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
 |`cudaCreateTextureObject`| | | |`hipCreateTextureObject`|1.7.0| | | |
+|`cudaCreateTextureObject_v2`|11.8| | | | | | | |
 |`cudaDestroyTextureObject`| | | |`hipDestroyTextureObject`|1.7.0| | | |
 |`cudaGetTextureObjectResourceDesc`| | | |`hipGetTextureObjectResourceDesc`|1.7.0| | | |
 |`cudaGetTextureObjectResourceViewDesc`| | | |`hipGetTextureObjectResourceViewDesc`|1.7.0| | | |
 |`cudaGetTextureObjectTextureDesc`| | | |`hipGetTextureObjectTextureDesc`|1.7.0| | | |
+|`cudaGetTextureObjectTextureDesc_v2`|11.8| | | | | | | |
 
 ## **28. Surface Object Management**
 
