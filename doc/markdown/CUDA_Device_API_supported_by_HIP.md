@@ -275,6 +275,16 @@
 |`__mul24`| | | |`__mul24`|1.6.0| | | |
 |`__mul64hi`| | | |`__mul64hi`|1.6.0| | | |
 |`__mulhi`| | | |`__mulhi`|1.6.0| | | |
+|`__nv_cvt_bfloat16raw2_to_fp8x2`|11.8| | | | | | | |
+|`__nv_cvt_bfloat16raw_to_fp8`|11.8| | | | | | | |
+|`__nv_cvt_double2_to_fp8x2`|11.8| | | | | | | |
+|`__nv_cvt_double_to_fp8`|11.8| | | | | | | |
+|`__nv_cvt_float2_to_fp8x2`|11.8| | | | | | | |
+|`__nv_cvt_float_to_fp8`|11.8| | | | | | | |
+|`__nv_cvt_fp8_to_halfraw`|11.8| | | | | | | |
+|`__nv_cvt_fp8x2_to_halfraw2`|11.8| | | | | | | |
+|`__nv_cvt_halfraw2_to_fp8x2`|11.8| | | | | | | |
+|`__nv_cvt_halfraw_to_fp8`|11.8| | | | | | | |
 |`__pm0`| | | | | | | | |
 |`__pm1`| | | | | | | | |
 |`__pm2`| | | | | | | | |
