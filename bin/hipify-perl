@@ -1383,6 +1383,8 @@ sub rocSubstitutions {
     subst("cublasSideMode_t", "rocblas_side", "type");
     subst("cublasStatus", "rocblas_status", "type");
     subst("cublasStatus_t", "rocblas_status", "type");
+    subst("cudaDataType", "rocblas_datatype", "type");
+    subst("cudaDataType_t", "rocblas_datatype_", "type");
     subst("CUBLAS_ATOMICS_ALLOWED", "rocblas_atomics_allowed", "numeric_literal");
     subst("CUBLAS_ATOMICS_NOT_ALLOWED", "rocblas_atomics_not_allowed", "numeric_literal");
     subst("CUBLAS_DIAG_NON_UNIT", "rocblas_diagonal_non_unit", "numeric_literal");
@@ -1409,6 +1411,22 @@ sub rocSubstitutions {
     subst("CUBLAS_STATUS_NOT_INITIALIZED", "rocblas_status_invalid_handle", "numeric_literal");
     subst("CUBLAS_STATUS_NOT_SUPPORTED", "rocblas_status_perf_degraded", "numeric_literal");
     subst("CUBLAS_STATUS_SUCCESS", "rocblas_status_success", "numeric_literal");
+    subst("CUDA_C_16BF", "rocblas_datatype_bf16_c", "numeric_literal");
+    subst("CUDA_C_16F", "rocblas_datatype_f16_c", "numeric_literal");
+    subst("CUDA_C_32F", "rocblas_datatype_f32_c", "numeric_literal");
+    subst("CUDA_C_32I", "rocblas_datatype_i32_c", "numeric_literal");
+    subst("CUDA_C_32U", "rocblas_datatype_u32_c", "numeric_literal");
+    subst("CUDA_C_64F", "rocblas_datatype_f64_c", "numeric_literal");
+    subst("CUDA_C_8I", "rocblas_datatype_i8_c", "numeric_literal");
+    subst("CUDA_C_8U", "rocblas_datatype_u8_c", "numeric_literal");
+    subst("CUDA_R_16BF", "rocblas_datatype_bf16_r", "numeric_literal");
+    subst("CUDA_R_16F", "rocblas_datatype_f16_r", "numeric_literal");
+    subst("CUDA_R_32F", "rocblas_datatype_f32_r", "numeric_literal");
+    subst("CUDA_R_32I", "rocblas_datatype_i32_r", "numeric_literal");
+    subst("CUDA_R_32U", "rocblas_datatype_u32_r", "numeric_literal");
+    subst("CUDA_R_64F", "rocblas_datatype_f64_r", "numeric_literal");
+    subst("CUDA_R_8I", "rocblas_datatype_i8_r", "numeric_literal");
+    subst("CUDA_R_8U", "rocblas_datatype_u8_r", "numeric_literal");
 }
 
 sub simpleSubstitutions {
@@ -5388,6 +5406,16 @@ sub warnUnsupportedDeviceFunctions {
         "__pm2",
         "__pm1",
         "__pm0",
+        "__nv_cvt_halfraw_to_fp8",
+        "__nv_cvt_halfraw2_to_fp8x2",
+        "__nv_cvt_fp8x2_to_halfraw2",
+        "__nv_cvt_fp8_to_halfraw",
+        "__nv_cvt_float_to_fp8",
+        "__nv_cvt_float2_to_fp8x2",
+        "__nv_cvt_double_to_fp8",
+        "__nv_cvt_double2_to_fp8x2",
+        "__nv_cvt_bfloat16raw_to_fp8",
+        "__nv_cvt_bfloat16raw2_to_fp8x2",
         "__isnanl",
         "__isnanf",
         "__isnan",
@@ -7724,12 +7752,6 @@ sub warnUnsupportedFunctions {
         "CUDNN_ADV_INFER_PATCH",
         "CUDNN_ADV_INFER_MINOR",
         "CUDNN_ADV_INFER_MAJOR",
-        "CUDA_R_64U",
-        "CUDA_R_64I",
-        "CUDA_R_4U",
-        "CUDA_R_4I",
-        "CUDA_R_16U",
-        "CUDA_R_16I",
         "CUDA_POINTER_ATTRIBUTE_P2P_TOKENS_v1",
         "CUDA_POINTER_ATTRIBUTE_P2P_TOKENS_st",
         "CUDA_POINTER_ATTRIBUTE_P2P_TOKENS",
@@ -7787,12 +7809,6 @@ sub warnUnsupportedFunctions {
         "CUDA_ERROR_DEVICE_NOT_LICENSED",
         "CUDA_ERROR_COMPAT_NOT_SUPPORTED_ON_DEVICE",
         "CUDA_EGL_MAX_PLANES",
-        "CUDA_C_64U",
-        "CUDA_C_64I",
-        "CUDA_C_4U",
-        "CUDA_C_4I",
-        "CUDA_C_16U",
-        "CUDA_C_16I",
         "CUDA_CB",
         "CUDA_BATCH_MEM_OP_NODE_PARAMS_st",
         "CUDA_BATCH_MEM_OP_NODE_PARAMS",
@@ -7944,6 +7960,20 @@ sub warnHipOnlyUnsupportedFunctions {
         "cublasCgelsBatched",
         "cublasAsumEx",
         "cublasAlloc",
+        "CUDA_R_8F_E5M2",
+        "CUDA_R_8F_E4M3",
+        "CUDA_R_64U",
+        "CUDA_R_64I",
+        "CUDA_R_4U",
+        "CUDA_R_4I",
+        "CUDA_R_16U",
+        "CUDA_R_16I",
+        "CUDA_C_64U",
+        "CUDA_C_64I",
+        "CUDA_C_4U",
+        "CUDA_C_4I",
+        "CUDA_C_16U",
+        "CUDA_C_16I",
         "CUBLAS_VER_PATCH",
         "CUBLAS_VER_MINOR",
         "CUBLAS_VER_MAJOR",
@@ -8100,6 +8130,20 @@ sub warnRocOnlyUnsupportedFunctions {
         "cublasCgelsBatched",
         "cublasAsumEx",
         "cublasAlloc",
+        "CUDA_R_8F_E5M2",
+        "CUDA_R_8F_E4M3",
+        "CUDA_R_64U",
+        "CUDA_R_64I",
+        "CUDA_R_4U",
+        "CUDA_R_4I",
+        "CUDA_R_16U",
+        "CUDA_R_16I",
+        "CUDA_C_64U",
+        "CUDA_C_64I",
+        "CUDA_C_4U",
+        "CUDA_C_4I",
+        "CUDA_C_16U",
+        "CUDA_C_16I",
         "CUBLAS_VER_PATCH",
         "CUBLAS_VER_MINOR",
         "CUBLAS_VER_MAJOR",

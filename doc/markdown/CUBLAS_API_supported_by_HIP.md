@@ -140,6 +140,8 @@
 |`CUDA_R_64F`|8.0| | |`HIPBLAS_R_64F`|1.8.2| | | |
 |`CUDA_R_64I`|11.0| | | | | | | |
 |`CUDA_R_64U`|11.0| | | | | | | |
+|`CUDA_R_8F_E4M3`|11.8| | | | | | | |
+|`CUDA_R_8F_E5M2`|11.8| | | | | | | |
 |`CUDA_R_8I`|8.0| | |`HIPBLAS_R_8I`|3.0.0| | | |
 |`CUDA_R_8U`|8.0| | |`HIPBLAS_R_8U`|3.0.0| | | |
 |`cudaDataType`|8.0| | |`hipblasDatatype_t`|1.8.2| | | |
