@@ -1241,15 +1241,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DEVICE_FUNCTION_VER_MAP {
   {"__funnelshift_rc",                  {HIP_4040, HIP_0,    HIP_0   }},
 };
 
-const std::map<llvm::StringRef, hipCounter> CUDA_DEVICE_TYPE_NAME_MAP {
-};
-
-const std::map<llvm::StringRef, cudaAPIversions> CUDA_DEVICE_TYPE_NAME_VER_MAP {
-};
-
-const std::map<llvm::StringRef, hipAPIversions> HIP_DEVICE_TYPE_NAME_VER_MAP {
-};
-
 const std::map<unsigned int, llvm::StringRef> CUDA_DEVICE_FUNCTION_API_SECTION_MAP {
   {1, "Device Functions"},
+  {2, "Device Types"},
 };
