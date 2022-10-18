@@ -686,5 +686,9 @@
 |`yn`| | | |`yn`|1.6.0| | | |
 |`ynf`| | | |`ynf`|1.6.0| | | |
 
+## **2. Device Types**
+
+Unsupported
+
 
 \*A - Added; D - Deprecated; R - Removed; E - Experimental
