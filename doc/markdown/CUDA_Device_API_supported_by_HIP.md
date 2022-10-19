@@ -33,6 +33,7 @@
 |`__double2float_rn`| | | |`__double2float_rn`|1.6.0| | | |
 |`__double2float_ru`| | | |`__double2float_ru`|1.6.0| | | |
 |`__double2float_rz`| | | |`__double2float_rz`|1.6.0| | | |
+|`__double2half`|11.0| | | | | | | |
 |`__double2hiint`| | | |`__double2hiint`|1.6.0| | | |
 |`__double2int_rd`| | | |`__double2int_rd`|1.6.0| | | |
 |`__double2int_rn`| | | |`__double2int_rn`|1.6.0| | | |
@@ -140,7 +141,9 @@
 |`__habs2`| | | |`__habs2`|3.5.0| | | |
 |`__hadd`| | | |`__hadd`|1.6.0| | | |
 |`__hadd2`| | | |`__hadd2`|1.6.0| | | |
+|`__hadd2_rn`|11.6| | | | | | | |
 |`__hadd2_sat`| | | |`__hadd2_sat`|1.6.0| | | |
+|`__hadd_rn`|11.6| | | | | | | |
 |`__hadd_sat`| | | |`__hadd_sat`|1.6.0| | | |
 |`__half22float2`| | | |`__half22float2`|1.6.0| | | |
 |`__half2float`| | | |`__half2float`|1.6.0| | | |
@@ -184,6 +187,7 @@
 |`__hbltu2`| | | |`__hbltu2`|1.9.0| | | |
 |`__hbne2`| | | |`__hbne2`|1.6.0| | | |
 |`__hbneu2`| | | |`__hbneu2`|1.9.0| | | |
+|`__hcmadd`|11.1| | | | | | | |
 |`__hdiv`| | | |`__hdiv`|1.9.0| | | |
 |`__heq`| | | |`__heq`|1.6.0| | | |
 |`__heq2`| | | |`__heq2`|1.6.0| | | |
@@ -191,7 +195,9 @@
 |`__hequ2`| | | |`__hequ2`|1.9.0| | | |
 |`__hfma`| | | |`__hfma`|1.6.0| | | |
 |`__hfma2`| | | |`__hfma2`|1.6.0| | | |
+|`__hfma2_relu`|11.0| | | | | | | |
 |`__hfma2_sat`| | | |`__hfma2_sat`|1.6.0| | | |
+|`__hfma_relu`|11.0| | | | | | | |
 |`__hfma_sat`| | | |`__hfma_sat`|1.6.0| | | |
 |`__hge`| | | |`__hge`|1.6.0| | | |
 |`__hge2`| | | |`__hge2`|1.6.0| | | |
@@ -217,9 +223,19 @@
 |`__hlt2`| | | |`__hlt2`|1.6.0| | | |
 |`__hltu`| | | |`__hltu`|1.9.0| | | |
 |`__hltu2`| | | |`__hltu2`|1.9.0| | | |
+|`__hmax`|11.0| | | | | | | |
+|`__hmax2`|11.0| | | | | | | |
+|`__hmax2_nan`|11.0| | | | | | | |
+|`__hmax_nan`|11.0| | | | | | | |
+|`__hmin`|11.0| | | | | | | |
+|`__hmin2`|11.0| | | | | | | |
+|`__hmin2_nan`|11.0| | | | | | | |
+|`__hmin_nan`|11.0| | | | | | | |
 |`__hmul`| | | |`__hmul`|1.6.0| | | |
 |`__hmul2`| | | |`__hmul2`|1.6.0| | | |
+|`__hmul2_rn`|11.6| | | | | | | |
 |`__hmul2_sat`| | | |`__hmul2_sat`|1.6.0| | | |
+|`__hmul_rn`|11.6| | | | | | | |
 |`__hmul_sat`| | | |`__hmul_sat`|1.6.0| | | |
 |`__hne`| | | |`__hne`|1.6.0| | | |
 |`__hne2`| | | |`__hne2`|1.6.0| | | |
@@ -229,7 +245,9 @@
 |`__hneu2`| | | |`__hneu2`|1.9.0| | | |
 |`__hsub`| | | |`__hsub`|1.6.0| | | |
 |`__hsub2`| | | |`__hsub2`|1.6.0| | | |
+|`__hsub2_rn`|11.6| | | | | | | |
 |`__hsub2_sat`| | | |`__hsub2_sat`|1.6.0| | | |
+|`__hsub_rn`|11.6| | | | | | | |
 |`__hsub_sat`| | | |`__hsub_sat`|1.6.0| | | |
 |`__int2double_rn`| | | |`__int2double_rn`|1.6.0| | | |
 |`__int2float_rd`| | | |`__int2float_rd`|1.6.0| | | |
@@ -250,7 +268,9 @@
 |`__ldca`| | | |`__ldca`|1.9.0| | | |
 |`__ldcg`| | | |`__ldcg`|1.9.0| | | |
 |`__ldcs`| | | |`__ldcs`|1.9.0| | | |
+|`__ldcv`|11.0| | | | | | | |
 |`__ldg`| | | |`__ldg`|1.6.0| | | |
+|`__ldlu`|11.0| | | | | | | |
 |`__ll2double_rd`| | | |`__ll2double_rd`|1.6.0| | | |
 |`__ll2double_rn`| | | |`__ll2double_rn`|1.6.0| | | |
 |`__ll2double_ru`| | | |`__ll2double_ru`|1.6.0| | | |
@@ -314,6 +334,10 @@
 |`__signbitl`| | | | | | | | |
 |`__sincosf`| | | |`__sincosf`|1.6.0| | | |
 |`__sinf`| | | |`__sinf`|1.6.0| | | |
+|`__stcg`|11.0| | | | | | | |
+|`__stcs`|11.0| | | | | | | |
+|`__stwb`|11.0| | | | | | | |
+|`__stwt`|11.0| | | | | | | |
 |`__syncthreads`| | | |`__syncthreads`|1.6.0| | | |
 |`__syncthreads_and`| | | |`__syncthreads_and`|3.7.0| | | |
 |`__syncthreads_count`| | | |`__syncthreads_count`|3.7.0| | | |
