@@ -24,10 +24,53 @@ THE SOFTWARE.
 
 // Maps the names of CUDA Device/Host types to the corresponding HIP types
 const std::map<llvm::StringRef, hipCounter> CUDA_DEVICE_TYPE_NAME_MAP {
+  // float16 Precision Device types
+  {"__half",                               {"__half",                                "", CONV_DEVICE_TYPE, API_RUNTIME, 2}},
+  {"__half_raw",                           {"__half_raw",                            "", CONV_DEVICE_TYPE, API_RUNTIME, 2}},
+  {"__half2",                              {"__half2",                               "", CONV_DEVICE_TYPE, API_RUNTIME, 2}},
+  {"__half2_raw",                          {"__half2_raw",                           "", CONV_DEVICE_TYPE, API_RUNTIME, 2}},
+  // Bfloat16 Precision Device types
+  {"__nv_bfloat16",                        {"__hip_bfloat16",                        "", CONV_DEVICE_TYPE, API_RUNTIME, 2, UNSUPPORTED}},
+  {"__nv_bfloat162",                       {"__hip_bfloat162",                       "", CONV_DEVICE_TYPE, API_RUNTIME, 2, UNSUPPORTED}},
+  // float8 Precision Device types
+  {"__nv_fp8_storage_t",                   {"__hip_fp8_storage_t",                   "", CONV_DEVICE_TYPE, API_RUNTIME, 2, UNSUPPORTED}},
+  {"__nv_fp8x2_storage_t",                 {"__hip_fp8x2_storage_t",                 "", CONV_DEVICE_TYPE, API_RUNTIME, 2, UNSUPPORTED}},
+  {"__nv_fp8x4_storage_t",                 {"__hip_fp8x4_storage_t",                 "", CONV_DEVICE_TYPE, API_RUNTIME, 2, UNSUPPORTED}},
+  {"__nv_fp8_e5m2",                        {"__hip_fp8_e5m2",                        "", CONV_DEVICE_TYPE, API_RUNTIME, 2, UNSUPPORTED}},
+  {"__nv_fp8x2_e5m2",                      {"__hip_fp8x2_e5m2",                      "", CONV_DEVICE_TYPE, API_RUNTIME, 2, UNSUPPORTED}},
+  {"__nv_fp8_e4m3",                        {"__hip_fp8_e4m3",                        "", CONV_DEVICE_TYPE, API_RUNTIME, 2, UNSUPPORTED}},
+  {"__nv_fp8x2_e4m3",                      {"__hip_fp8x2_e4m3",                      "", CONV_DEVICE_TYPE, API_RUNTIME, 2, UNSUPPORTED}},
+  {"__nv_fp8x4_e4m3",                      {"__hip_fp8x4_e4m3",                      "", CONV_DEVICE_TYPE, API_RUNTIME, 2, UNSUPPORTED}},
+  {"__nv_saturation_t",                    {"__hip_saturation_t",                    "", CONV_DEVICE_TYPE, API_RUNTIME, 2, UNSUPPORTED}},
+  {"__NV_NOSAT",                           {"__HIP_NOSAT",                           "", CONV_NUMERIC_LITERAL, API_RUNTIME, 2, UNSUPPORTED}},
+  {"__NV_SATFINITE",                       {"__HIP_SATFINITE",                       "", CONV_NUMERIC_LITERAL, API_RUNTIME, 2, UNSUPPORTED}},
+  {"__nv_fp8_interpretation_t",            {"__hip_fp8_interpretation_t",            "", CONV_DEVICE_TYPE, API_RUNTIME, 2, UNSUPPORTED}},
+  {"__NV_E4M3",                            {"__HIP_E4M3",                            "", CONV_NUMERIC_LITERAL, API_RUNTIME, 2, UNSUPPORTED}},
+  {"__NV_E5M2",                            {"__HIP_E5M2",                            "", CONV_NUMERIC_LITERAL, API_RUNTIME, 2, UNSUPPORTED}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_DEVICE_TYPE_NAME_VER_MAP {
+  {"__nv_bfloat16",                        {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"__nv_bfloat162",                       {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"__nv_fp8_storage_t",                   {CUDA_118, CUDA_0,   CUDA_0  }},
+  {"__nv_fp8x2_storage_t",                 {CUDA_118, CUDA_0,   CUDA_0  }},
+  {"__nv_fp8x4_storage_t",                 {CUDA_118, CUDA_0,   CUDA_0  }},
+  {"__nv_fp8_e5m2",                        {CUDA_118, CUDA_0,   CUDA_0  }},
+  {"__nv_fp8x2_e5m2",                      {CUDA_118, CUDA_0,   CUDA_0  }},
+  {"__nv_fp8_e4m3",                        {CUDA_118, CUDA_0,   CUDA_0  }},
+  {"__nv_fp8x2_e4m3",                      {CUDA_118, CUDA_0,   CUDA_0  }},
+  {"__nv_fp8x4_e4m3",                      {CUDA_118, CUDA_0,   CUDA_0  }},
+  {"__nv_saturation_t",                    {CUDA_118, CUDA_0,   CUDA_0  }},
+  {"__NV_NOSAT",                           {CUDA_118, CUDA_0,   CUDA_0  }},
+  {"__NV_SATFINITE",                       {CUDA_118, CUDA_0,   CUDA_0  }},
+  {"__nv_fp8_interpretation_t",            {CUDA_118, CUDA_0,   CUDA_0  }},
+  {"__NV_E4M3",                            {CUDA_118, CUDA_0,   CUDA_0  }},
+  {"__NV_E5M2",                            {CUDA_118, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_DEVICE_TYPE_NAME_VER_MAP {
+  {"__half",                               {HIP_1060, HIP_0,    HIP_0   }},
+  {"__half2",                              {HIP_1060, HIP_0,    HIP_0   }},
+  {"__half_raw",                           {HIP_1090, HIP_0,    HIP_0   }},
+  {"__half2_raw",                          {HIP_1090, HIP_0,    HIP_0   }},
 };

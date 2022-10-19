@@ -855,7 +855,7 @@ push(@exclude_filelist, split(',', $exclude_files));
 %exclude_dirhash = map { $_ => 1 } @exclude_dirlist;
 %exclude_filehash = map { $_ => 1 } @exclude_filelist;
 
-@statNames = ("error", "init", "version", "device", "context", "module", "memory", "virtual_memory", "stream_ordered_memory", "addressing", "stream", "event", "external_resource_interop", "stream_memory", "execution", "graph", "occupancy", "texture", "surface", "peer", "graphics", "interactions", "profiler", "openGL", "D3D9", "D3D10", "D3D11", "VDPAU", "EGL", "thread", "complex", "library", "device_library", "device_function", "include", "include_cuda_main_header", "include_cuda_main_header_v2", "type", "literal", "numeric_literal", "define", "extern_shared", "kernel_launch");
+@statNames = ("error", "init", "version", "device", "context", "module", "memory", "virtual_memory", "stream_ordered_memory", "addressing", "stream", "event", "external_resource_interop", "stream_memory", "execution", "graph", "occupancy", "texture", "surface", "peer", "graphics", "interactions", "profiler", "openGL", "D3D9", "D3D10", "D3D11", "VDPAU", "EGL", "thread", "complex", "library", "device_library", "device_function", "device_type", "include", "include_cuda_main_header", "include_cuda_main_header_v2", "type", "literal", "numeric_literal", "define", "extern_shared", "kernel_launch");
 
 sub totalStats {
     my %count = %{shift()};
@@ -3076,6 +3076,10 @@ sub simpleSubstitutions {
     subst("curand_uniform4", "hiprand_uniform4", "device_library");
     subst("curand_uniform4_double", "hiprand_uniform4_double", "device_library");
     subst("curand_uniform_double", "hiprand_uniform_double", "device_library");
+    subst("__half", "__half", "device_type");
+    subst("__half2", "__half2", "device_type");
+    subst("__half2_raw", "__half2_raw", "device_type");
+    subst("__half_raw", "__half_raw", "device_type");
     subst("caffe2\/core\/common_cudnn.h", "caffe2\/core\/hip\/common_miopen.h", "include");
     subst("caffe2\/operators\/spatial_batch_norm_op.h", "caffe2\/operators\/hip\/spatial_batch_norm_op_miopen.hip", "include");
     subst("channel_descriptor.h", "hip\/channel_descriptor.h", "include");
@@ -6692,7 +6696,23 @@ sub warnUnsupportedFunctions {
         "bsrsv2Info",
         "bsrilu02Info",
         "bsric02Info",
+        "__nv_saturation_t",
+        "__nv_fp8x4_storage_t",
+        "__nv_fp8x4_e4m3",
+        "__nv_fp8x2_storage_t",
+        "__nv_fp8x2_e5m2",
+        "__nv_fp8x2_e4m3",
+        "__nv_fp8_storage_t",
+        "__nv_fp8_interpretation_t",
+        "__nv_fp8_e5m2",
+        "__nv_fp8_e4m3",
+        "__nv_bfloat162",
+        "__nv_bfloat16",
         "__curand_umul",
+        "__NV_SATFINITE",
+        "__NV_NOSAT",
+        "__NV_E5M2",
+        "__NV_E4M3",
         "__CUB_LP64__",
         "_CUB_ASM_PTR_SIZE_",
         "_CUB_ASM_PTR_",
@@ -8384,7 +8404,7 @@ while (@ARGV) {
             transformHostFunctions();
             # TODO: would like to move this code outside loop but it uses $_ which contains the whole file
             unless ($no_output) {
-                my $apiCalls   = $ft{'error'} + $ft{'init'} + $ft{'version'} + $ft{'device'} + $ft{'context'} + $ft{'module'} + $ft{'memory'} + $ft{'virtual_memory'} + $ft{'stream_ordered_memory'} + $ft{'addressing'} + $ft{'stream'} + $ft{'event'} + $ft{'external_resource_interop'} + $ft{'stream_memory'} + $ft{'execution'} + $ft{'graph'} + $ft{'occupancy'} + $ft{'texture'} + $ft{'surface'} + $ft{'peer'} + $ft{'graphics'} + $ft{'interactions'} + $ft{'profiler'} + $ft{'openGL'} + $ft{'D3D9'} + $ft{'D3D10'} + $ft{'D3D11'} + $ft{'VDPAU'} + $ft{'EGL'} + $ft{'thread'} + $ft{'complex'} + $ft{'library'} + $ft{'device_library'} + $ft{'include'} + $ft{'include_cuda_main_header'} + $ft{'include_cuda_main_header_v2'} + $ft{'type'} + $ft{'literal'} + $ft{'numeric_literal'} + $ft{'define'};
+                my $apiCalls   = $ft{'error'} + $ft{'init'} + $ft{'version'} + $ft{'device'} + $ft{'context'} + $ft{'module'} + $ft{'memory'} + $ft{'virtual_memory'} + $ft{'stream_ordered_memory'} + $ft{'addressing'} + $ft{'stream'} + $ft{'event'} + $ft{'external_resource_interop'} + $ft{'stream_memory'} + $ft{'execution'} + $ft{'graph'} + $ft{'occupancy'} + $ft{'texture'} + $ft{'surface'} + $ft{'peer'} + $ft{'graphics'} + $ft{'interactions'} + $ft{'profiler'} + $ft{'openGL'} + $ft{'D3D9'} + $ft{'D3D10'} + $ft{'D3D11'} + $ft{'VDPAU'} + $ft{'EGL'} + $ft{'thread'} + $ft{'complex'} + $ft{'library'} + $ft{'device_library'} + $ft{'device_type'} + $ft{'include'} + $ft{'include_cuda_main_header'} + $ft{'include_cuda_main_header_v2'} + $ft{'type'} + $ft{'literal'} + $ft{'numeric_literal'} + $ft{'define'};
                 my $kernStuff  = $hasDeviceCode + $ft{'kernel_launch'} + $ft{'device_function'};
                 my $totalCalls = $apiCalls + $kernStuff;
                 $is_dos = m/\r\n$/;
