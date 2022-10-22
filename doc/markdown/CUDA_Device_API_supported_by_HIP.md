@@ -11,11 +11,16 @@
 |`__assertfail`| | | |`__assertfail`|1.9.0| | | |
 |`__ballot`| | | |`__ballot`|1.6.0| | | |
 |`__bfloat1622float2`|11.0| | | | | | | |
+|`__bfloat162bfloat162`|11.0| | | | | | | |
 |`__bfloat162float`|11.0| | | | | | | |
 |`__bfloat162int_rd`|11.0| | | | | | | |
 |`__bfloat162int_rn`|11.0| | | | | | | |
 |`__bfloat162int_ru`|11.0| | | | | | | |
 |`__bfloat162int_rz`|11.0| | | | | | | |
+|`__bfloat162ll_rd`|11.0| | | | | | | |
+|`__bfloat162ll_rn`|11.0| | | | | | | |
+|`__bfloat162ll_ru`|11.0| | | | | | | |
+|`__bfloat162ll_rz`|11.0| | | | | | | |
 |`__bfloat162short_rd`|11.0| | | | | | | |
 |`__bfloat162short_rn`|11.0| | | | | | | |
 |`__bfloat162short_ru`|11.0| | | | | | | |
@@ -24,10 +29,16 @@
 |`__bfloat162uint_rn`|11.0| | | | | | | |
 |`__bfloat162uint_ru`|11.0| | | | | | | |
 |`__bfloat162uint_rz`|11.0| | | | | | | |
+|`__bfloat162ull_rd`|11.0| | | | | | | |
+|`__bfloat162ull_rn`|11.0| | | | | | | |
+|`__bfloat162ull_ru`|11.0| | | | | | | |
+|`__bfloat162ull_rz`|11.0| | | | | | | |
 |`__bfloat162ushort_rd`|11.0| | | | | | | |
 |`__bfloat162ushort_rn`|11.0| | | | | | | |
 |`__bfloat162ushort_ru`|11.0| | | | | | | |
 |`__bfloat162ushort_rz`|11.0| | | | | | | |
+|`__bfloat16_as_short`|11.0| | | | | | | |
+|`__bfloat16_as_ushort`|11.0| | | | | | | |
 |`__brev`| | | |`__brev`|1.6.0| | | |
 |`__brevll`| | | |`__brevll`|1.6.0| | | |
 |`__brkpt`| | | | | | | | |
@@ -200,6 +211,7 @@
 |`__half2ushort_rz`| | | |`__half2ushort_rz`|1.6.0| | | |
 |`__half_as_short`| | | |`__half_as_short`|1.6.0| | | |
 |`__half_as_ushort`| | | |`__half_as_ushort`|1.6.0| | | |
+|`__halves2bfloat162`|11.0| | | | | | | |
 |`__halves2half2`| | | |`__halves2half2`|1.6.0| | | |
 |`__hbeq2`| | | |`__hbeq2`|1.6.0| | | |
 |`__hbequ2`| | | |`__hbequ2`|1.9.0| | | |
@@ -233,9 +245,12 @@
 |`__hgt2`| | | |`__hgt2`|1.6.0| | | |
 |`__hgtu`| | | |`__hgtu`|1.9.0| | | |
 |`__hgtu2`| | | |`__hgtu2`|1.9.0| | | |
+|`__high2bfloat16`|11.0| | | | | | | |
+|`__high2bfloat162`|11.0| | | | | | | |
 |`__high2float`| | | |`__high2float`|1.6.0| | | |
 |`__high2half`| | | |`__high2half`|1.6.0| | | |
 |`__high2half2`| | | |`__high2half2`|1.6.0| | | |
+|`__highs2bfloat162`|11.0| | | | | | | |
 |`__highs2half2`| | | |`__highs2half2`|1.6.0| | | |
 |`__hiloint2double`| | | |`__hiloint2double`|1.6.0| | | |
 |`__hisinf`| | | |`__hisinf`|1.6.0| | | |
@@ -301,6 +316,10 @@
 |`__ldcv`|11.0| | | | | | | |
 |`__ldg`| | | |`__ldg`|1.6.0| | | |
 |`__ldlu`|11.0| | | | | | | |
+|`__ll2bfloat16_rd`|11.0| | | | | | | |
+|`__ll2bfloat16_rn`|11.0| | | | | | | |
+|`__ll2bfloat16_ru`|11.0| | | | | | | |
+|`__ll2bfloat16_rz`|11.0| | | | | | | |
 |`__ll2double_rd`| | | |`__ll2double_rd`|1.6.0| | | |
 |`__ll2double_rn`| | | |`__ll2double_rn`|1.6.0| | | |
 |`__ll2double_ru`| | | |`__ll2double_ru`|1.6.0| | | |
@@ -317,10 +336,13 @@
 |`__log2f`| | | |`__log2f`|1.6.0| | | |
 |`__logf`| | | |`__logf`|1.6.0| | | |
 |`__longlong_as_double`| | | |`__longlong_as_double`|1.6.0| | | |
+|`__low2bfloat16`|11.0| | | | | | | |
+|`__low2bfloat162`|11.0| | | | | | | |
 |`__low2float`| | | |`__low2float`|1.6.0| | | |
 |`__low2half`| | | |`__low2half`|1.6.0| | | |
 |`__low2half2`| | | |`__low2half2`|1.6.0| | | |
 |`__lowhigh2highlow`| | | |`__lowhigh2highlow`|1.6.0| | | |
+|`__lows2bfloat162`|11.0| | | | | | | |
 |`__lows2half2`| | | |`__lows2half2`|1.6.0| | | |
 |`__mul24`| | | |`__mul24`|1.6.0| | | |
 |`__mul64hi`| | | |`__mul64hi`|1.6.0| | | |
@@ -362,6 +384,7 @@
 |`__short2half_rn`| | | |`__short2half_rn`|1.6.0| | | |
 |`__short2half_ru`| | | |`__short2half_ru`|1.6.0| | | |
 |`__short2half_rz`| | | |`__short2half_rz`|1.6.0| | | |
+|`__short_as_bfloat16`|11.0| | | | | | | |
 |`__short_as_half`| | | |`__short_as_half`|1.9.0| | | |
 |`__signbit`| | | | | | | | |
 |`__signbitf`| | | | | | | | |
@@ -396,6 +419,10 @@
 |`__uint2half_ru`| | | |`__uint2half_ru`|1.6.0| | | |
 |`__uint2half_rz`| | | |`__uint2half_rz`|1.6.0| | | |
 |`__uint_as_float`| | | |`__uint_as_float`|1.6.0| | | |
+|`__ull2bfloat16_rd`|11.0| | | | | | | |
+|`__ull2bfloat16_rn`|11.0| | | | | | | |
+|`__ull2bfloat16_ru`|11.0| | | | | | | |
+|`__ull2bfloat16_rz`|11.0| | | | | | | |
 |`__ull2double_rd`| | | |`__ull2double_rd`|1.6.0| | | |
 |`__ull2double_rn`| | | |`__ull2double_rn`|1.6.0| | | |
 |`__ull2double_ru`| | | |`__ull2double_ru`|1.6.0| | | |
@@ -421,6 +448,7 @@
 |`__ushort2half_rn`| | | |`__ushort2half_rn`|1.6.0| | | |
 |`__ushort2half_ru`| | | |`__ushort2half_ru`|1.6.0| | | |
 |`__ushort2half_rz`| | | |`__ushort2half_rz`|1.6.0| | | |
+|`__ushort_as_bfloat16`|11.0| | | | | | | |
 |`__ushort_as_half`| | | |`__ushort_as_half`|1.6.0| | | |
 |`__vabs2`| | | | | | | | |
 |`__vabs4`| | | | | | | | |
