@@ -84,6 +84,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_FFT_FUNCTION_MAP {
   {"cufftXtExec",                                         {"hipfftXtExec",                                         "", CONV_LIB_FUNC, API_FFT, 2, HIP_UNSUPPORTED}},
   {"cufftXtExecDescriptor",                               {"hipfftXtExecDescriptor",                               "", CONV_LIB_FUNC, API_FFT, 2, HIP_UNSUPPORTED}},
   {"cufftXtSetWorkAreaPolicy",                            {"hipfftXtSetWorkAreaPolicy",                            "", CONV_LIB_FUNC, API_FFT, 2, HIP_UNSUPPORTED}},
+  {"cufftXtSetDistribution",                              {"hipfftXtSetDistribution",                              "", CONV_LIB_FUNC, API_FFT, 2, HIP_UNSUPPORTED}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_FFT_FUNCTION_VER_MAP {
@@ -93,7 +94,9 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_FFT_FUNCTION_VER_MAP {
   {"cufftXtMakePlanMany",                                 {CUDA_80,  CUDA_0, CUDA_0}},
   {"cufftXtGetSizeMany",                                  {CUDA_80,  CUDA_0, CUDA_0}},
   {"cufftXtExec",                                         {CUDA_80,  CUDA_0, CUDA_0}},
+  {"cufftXtExecDescriptor",                               {CUDA_80,  CUDA_0, CUDA_0}},
   {"cufftXtSetWorkAreaPolicy",                            {CUDA_92,  CUDA_0, CUDA_0}},
+  {"cufftXtSetDistribution",                              {CUDA_118, CUDA_0, CUDA_0}},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_FFT_FUNCTION_VER_MAP {

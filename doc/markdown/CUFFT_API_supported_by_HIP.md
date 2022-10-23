@@ -54,6 +54,8 @@
 |`CUFFT_WORKAREA_PERFORMANCE`| | | | | | | | |
 |`CUFFT_WORKAREA_USER`|9.2| | | | | | | |
 |`CUFFT_XT_FORMAT_1D_INPUT_SHUFFLED`| | | | | | | | |
+|`CUFFT_XT_FORMAT_DISTRIBUTED_INPUT`|11.8| | | | | | | |
+|`CUFFT_XT_FORMAT_DISTRIBUTED_OUTPUT`|11.8| | | | | | | |
 |`CUFFT_XT_FORMAT_INPLACE`| | | | | | | | |
 |`CUFFT_XT_FORMAT_INPLACE_SHUFFLED`| | | | | | | | |
 |`CUFFT_XT_FORMAT_INPUT`| | | | | | | | |
@@ -61,6 +63,8 @@
 |`CUFFT_Z2D`| | | |`HIPFFT_Z2D`|1.7.0| | | |
 |`CUFFT_Z2Z`| | | |`HIPFFT_Z2Z`|1.7.0| | | |
 |`MAX_CUFFT_ERROR`| | | | | | | | |
+|`cufftBox3d`|11.8| | | | | | | |
+|`cufftBox3d_t`|11.8| | | | | | | |
 |`cufftCompatibility`| | | | | | | | |
 |`cufftCompatibility_t`| | | | | | | | |
 |`cufftComplex`| | | |`hipfftComplex`|1.7.0| | | |
@@ -131,7 +135,7 @@
 |`cufftSetWorkArea`| | | |`hipfftSetWorkArea`|1.7.0| | | |
 |`cufftXtClearCallback`| | | |`hipfftXtClearCallback`|4.3.0| | | |
 |`cufftXtExec`|8.0| | | | | | | |
-|`cufftXtExecDescriptor`| | | | | | | | |
+|`cufftXtExecDescriptor`|8.0| | | | | | | |
 |`cufftXtExecDescriptorC2C`| | | | | | | | |
 |`cufftXtExecDescriptorC2R`| | | | | | | | |
 |`cufftXtExecDescriptorD2Z`| | | | | | | | |
@@ -146,6 +150,7 @@
 |`cufftXtQueryPlan`| | | | | | | | |
 |`cufftXtSetCallback`| | | |`hipfftXtSetCallback`|4.3.0| | | |
 |`cufftXtSetCallbackSharedSize`| | | |`hipfftXtSetCallbackSharedSize`|4.3.0| | | |
+|`cufftXtSetDistribution`|11.8| | | | | | | |
 |`cufftXtSetGPUs`| | | | | | | | |
 |`cufftXtSetWorkArea`| | | | | | | | |
 |`cufftXtSetWorkAreaPolicy`|9.2| | | | | | | |
