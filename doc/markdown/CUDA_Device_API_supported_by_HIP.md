@@ -794,6 +794,8 @@
 |`__half_raw`| | | |`__half_raw`|1.9.0| | | |
 |`__nv_bfloat16`|11.0| | | | | | | |
 |`__nv_bfloat162`|11.0| | | | | | | |
+|`__nv_bfloat162_raw`|11.0| | | | | | | |
+|`__nv_bfloat16_raw`|11.0| | | | | | | |
 |`__nv_fp8_e4m3`|11.8| | | | | | | |
 |`__nv_fp8_e5m2`|11.8| | | | | | | |
 |`__nv_fp8_interpretation_t`|11.8| | | | | | | |
@@ -802,8 +804,11 @@
 |`__nv_fp8x2_e5m2`|11.8| | | | | | | |
 |`__nv_fp8x2_storage_t`|11.8| | | | | | | |
 |`__nv_fp8x4_e4m3`|11.8| | | | | | | |
+|`__nv_fp8x4_e5m2`|11.8| | | | | | | |
 |`__nv_fp8x4_storage_t`|11.8| | | | | | | |
 |`__nv_saturation_t`|11.8| | | | | | | |
+|`nv_bfloat16`|11.0| | | | | | | |
+|`nv_bfloat162`|11.0| | | | | | | |
 
 
 \*A - Added; D - Deprecated; R - Removed; E - Experimental
