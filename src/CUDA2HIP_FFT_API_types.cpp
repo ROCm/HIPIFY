@@ -77,7 +77,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_FFT_TYPE_NAME_MAP {
   {"CUFFT_XT_FORMAT_INPLACE",          {"HIPFFT_XT_FORMAT_INPLACE",          "", CONV_NUMERIC_LITERAL, API_FFT, 1, HIP_UNSUPPORTED}},    //  0x02
   {"CUFFT_XT_FORMAT_INPLACE_SHUFFLED", {"HIPFFT_XT_FORMAT_INPLACE_SHUFFLED", "", CONV_NUMERIC_LITERAL, API_FFT, 1, HIP_UNSUPPORTED}},    //  0x03
   {"CUFFT_XT_FORMAT_1D_INPUT_SHUFFLED",{"HIPFFT_XT_FORMAT_1D_INPUT_SHUFFLED","", CONV_NUMERIC_LITERAL, API_FFT, 1, HIP_UNSUPPORTED}},    //  0x04
-  {"CUFFT_FORMAT_UNDEFINED",           {"HIPFFT_FORMAT_UNDEFINED",           "", CONV_NUMERIC_LITERAL, API_FFT, 1, HIP_UNSUPPORTED}},    //  0x05
+  {"CUFFT_XT_FORMAT_DISTRIBUTED_INPUT",{"HIPFFT_XT_FORMAT_DISTRIBUTED_INPUT","", CONV_NUMERIC_LITERAL, API_FFT, 1, HIP_UNSUPPORTED}},    //  0x05
+  {"CUFFT_XT_FORMAT_DISTRIBUTED_OUTPUT",{"HIPFFT_XT_FORMAT_DISTRIBUTED_OUTPUT","", CONV_NUMERIC_LITERAL, API_FFT, 1, HIP_UNSUPPORTED}},    //  0x06
+  {"CUFFT_FORMAT_UNDEFINED",           {"HIPFFT_FORMAT_UNDEFINED",           "", CONV_NUMERIC_LITERAL, API_FFT, 1, HIP_UNSUPPORTED}},    //  0x07
 
   {"cufftXtCopyType_t",                {"hipfftXtCopyType_t",                "", CONV_TYPE, API_FFT, 1, HIP_UNSUPPORTED}},
   {"cufftXtCopyType",                  {"hipfftXtCopyType",                  "", CONV_TYPE, API_FFT, 1, HIP_UNSUPPORTED}},
@@ -117,6 +119,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_FFT_TYPE_NAME_MAP {
   {"cufftHandle",                      {"hipfftHandle",                      "", CONV_TYPE, API_FFT, 1}},
   {"cufftXt1dFactors_t",               {"hipfftXt1dFactors_t",               "", CONV_TYPE, API_FFT, 1, HIP_UNSUPPORTED}},
   {"cufftXt1dFactors",                 {"hipfftXt1dFactors",                 "", CONV_TYPE, API_FFT, 1, HIP_UNSUPPORTED}},
+  {"cufftBox3d_t",                     {"hipfftBox3d_t",                     "", CONV_TYPE, API_FFT, 1, HIP_UNSUPPORTED}},
+  {"cufftBox3d",                       {"hipfftBox3d",                       "", CONV_TYPE, API_FFT, 1, HIP_UNSUPPORTED}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_FFT_TYPE_NAME_VER_MAP {
@@ -130,6 +134,10 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_FFT_TYPE_NAME_VER_MAP {
   {"cufftXtWorkAreaPolicy",            {CUDA_92,  CUDA_0, CUDA_0}},
   {"CUFFT_WORKAREA_MINIMAL",           {CUDA_92,  CUDA_0, CUDA_0}},
   {"CUFFT_WORKAREA_USER",              {CUDA_92,  CUDA_0, CUDA_0}},
+  {"CUFFT_XT_FORMAT_DISTRIBUTED_INPUT",{CUDA_118, CUDA_0, CUDA_0}},
+  {"CUFFT_XT_FORMAT_DISTRIBUTED_OUTPUT",{CUDA_118, CUDA_0, CUDA_0}},
+  {"cufftBox3d_t",                     {CUDA_118, CUDA_0, CUDA_0}},
+  {"cufftBox3d",                       {CUDA_118, CUDA_0, CUDA_0}},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_FFT_TYPE_NAME_VER_MAP {
