@@ -310,6 +310,8 @@
 |`CUDNN_DATA_BOOLEAN`|8.3.0| | | | | | | |
 |`CUDNN_DATA_DOUBLE`|1.0.0| | |`HIPDNN_DATA_DOUBLE`| | | | |
 |`CUDNN_DATA_FLOAT`|1.0.0| | |`HIPDNN_DATA_FLOAT`| | | | |
+|`CUDNN_DATA_FP8_E4M3`|8.6.0| | | | | | | |
+|`CUDNN_DATA_FP8_E5M2`|8.6.0| | | | | | | |
 |`CUDNN_DATA_HALF`|3.0.0| | |`HIPDNN_DATA_HALF`| | | | |
 |`CUDNN_DATA_INT32`|6.0.0| | |`HIPDNN_DATA_INT32`| | | | |
 |`CUDNN_DATA_INT64`|8.1.0| | | | | | | |
@@ -369,6 +371,9 @@
 |`CUDNN_KNOB_TYPE_STAGES`|8.0.1| | | | | | | |
 |`CUDNN_KNOB_TYPE_SWIZZLE`|8.0.1| | | | | | | |
 |`CUDNN_KNOB_TYPE_TILEK`|8.0.1| | | | | | | |
+|`CUDNN_KNOB_TYPE_TILE_CGA`|8.6.0| | | | | | | |
+|`CUDNN_KNOB_TYPE_TILE_CGA_M`|8.6.0| | | | | | | |
+|`CUDNN_KNOB_TYPE_TILE_CGA_N`|8.6.0| | | | | | | |
 |`CUDNN_KNOB_TYPE_TILE_SIZE`|8.0.1| | | | | | | |
 |`CUDNN_KNOB_TYPE_USE_TEX`|8.0.1| | | | | | | |
 |`CUDNN_KNOB_TYPE_WINO_TILE`|8.0.1| | | | | | | |
@@ -566,6 +571,8 @@
 |`CUDNN_REDUCE_TENSOR_NORM2`|6.0.0| | |`HIPDNN_REDUCE_TENSOR_NORM2`| | | | |
 |`CUDNN_REDUCE_TENSOR_NO_INDICES`|6.0.0| | |`HIPDNN_REDUCE_TENSOR_NO_INDICES`| | | | |
 |`CUDNN_RESAMPLE_AVGPOOL`|8.3.0| | | | | | | |
+|`CUDNN_RESAMPLE_AVGPOOL_EXCLUDE_PADDING`|8.6.0| | | | | | | |
+|`CUDNN_RESAMPLE_AVGPOOL_INCLUDE_PADDING`|8.6.0| | | | | | | |
 |`CUDNN_RESAMPLE_BILINEAR`|8.3.0| | | | | | | |
 |`CUDNN_RESAMPLE_MAXPOOL`|8.3.0| | | | | | | |
 |`CUDNN_RESAMPLE_NEAREST`|8.3.0| | | | | | | |
@@ -944,6 +951,7 @@
 |`cudnnGetFusedOpsConstParamPackAttribute`|7.6.0| | | | | | | |
 |`cudnnGetFusedOpsVariantParamPackAttribute`|7.6.0| | | | | | | |
 |`cudnnGetLRNDescriptor`|3.0.0| | |`hipdnnGetLRNDescriptor`| | | | |
+|`cudnnGetMaxDeviceVersion`|8.6.0| | | | | | | |
 |`cudnnGetMultiHeadAttnBuffers`|7.5.0| | | | | | | |
 |`cudnnGetMultiHeadAttnWeights`|7.5.0| | | | | | | |
 |`cudnnGetNormalizationBackwardWorkspaceSize`|8.0.1| | | | | | | |
