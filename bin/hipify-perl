@@ -717,7 +717,8 @@ my %removed_funcs = (
 );
 
 my %experimental_funcs = (
-
+    "cuGetErrorString" => "5.4.0",
+    "cuGetErrorName" => "5.4.0"
 );
 
 $print_stats = 1 if $examine;
@@ -855,6 +856,8 @@ sub subst {
 }
 
 sub experimentalSubstitutions {
+    subst("cuGetErrorName", "hipDrvGetErrorName", "error");
+    subst("cuGetErrorString", "hipDrvGetErrorString", "error");
 }
 
 sub rocSubstitutions {
@@ -4019,31 +4022,31 @@ sub simpleSubstitutions {
     subst("CU_GRAPH_NODE_TYPE_WAIT_EVENT", "hipGraphNodeTypeWaitEvent", "numeric_literal");
     subst("CU_GRAPH_USER_OBJECT_MOVE", "hipGraphUserObjectMove", "numeric_literal");
     subst("CU_IPC_MEM_LAZY_ENABLE_PEER_ACCESS", "hipIpcMemLazyEnablePeerAccess", "numeric_literal");
-    subst("CU_JIT_CACHE_MODE", "hipJitOptionCacheMode", "numeric_literal");
-    subst("CU_JIT_ERROR_LOG_BUFFER", "hipJitOptionErrorLogBuffer", "numeric_literal");
-    subst("CU_JIT_ERROR_LOG_BUFFER_SIZE_BYTES", "hipJitOptionErrorLogBufferSizeBytes", "numeric_literal");
-    subst("CU_JIT_FALLBACK_STRATEGY", "hipJitOptionFallbackStrategy", "numeric_literal");
-    subst("CU_JIT_FAST_COMPILE", "hipJitOptionFastCompile", "numeric_literal");
-    subst("CU_JIT_GENERATE_DEBUG_INFO", "hipJitOptionGenerateDebugInfo", "numeric_literal");
-    subst("CU_JIT_GENERATE_LINE_INFO", "hipJitOptionGenerateLineInfo", "numeric_literal");
-    subst("CU_JIT_INFO_LOG_BUFFER", "hipJitOptionInfoLogBuffer", "numeric_literal");
-    subst("CU_JIT_INFO_LOG_BUFFER_SIZE_BYTES", "hipJitOptionInfoLogBufferSizeBytes", "numeric_literal");
+    subst("CU_JIT_CACHE_MODE", "HIPRTC_JIT_CACHE_MODE", "numeric_literal");
+    subst("CU_JIT_ERROR_LOG_BUFFER", "HIPRTC_JIT_ERROR_LOG_BUFFER", "numeric_literal");
+    subst("CU_JIT_ERROR_LOG_BUFFER_SIZE_BYTES", "HIPRTC_JIT_ERROR_LOG_BUFFER_SIZE_BYTES", "numeric_literal");
+    subst("CU_JIT_FALLBACK_STRATEGY", "HIPRTC_JIT_FALLBACK_STRATEGY", "numeric_literal");
+    subst("CU_JIT_FAST_COMPILE", "HIPRTC_JIT_FAST_COMPILE", "numeric_literal");
+    subst("CU_JIT_GENERATE_DEBUG_INFO", "HIPRTC_JIT_GENERATE_DEBUG_INFO", "numeric_literal");
+    subst("CU_JIT_GENERATE_LINE_INFO", "HIPRTC_JIT_GENERATE_LINE_INFO", "numeric_literal");
+    subst("CU_JIT_INFO_LOG_BUFFER", "HIPRTC_JIT_INFO_LOG_BUFFER", "numeric_literal");
+    subst("CU_JIT_INFO_LOG_BUFFER_SIZE_BYTES", "HIPRTC_JIT_INFO_LOG_BUFFER_SIZE_BYTES", "numeric_literal");
     subst("CU_JIT_INPUT_CUBIN", "HIPRTC_JIT_INPUT_CUBIN", "numeric_literal");
     subst("CU_JIT_INPUT_FATBINARY", "HIPRTC_JIT_INPUT_FATBINARY", "numeric_literal");
     subst("CU_JIT_INPUT_LIBRARY", "HIPRTC_JIT_INPUT_LIBRARY", "numeric_literal");
     subst("CU_JIT_INPUT_NVVM", "HIPRTC_JIT_INPUT_NVVM", "numeric_literal");
     subst("CU_JIT_INPUT_OBJECT", "HIPRTC_JIT_INPUT_OBJECT", "numeric_literal");
     subst("CU_JIT_INPUT_PTX", "HIPRTC_JIT_INPUT_PTX", "numeric_literal");
-    subst("CU_JIT_LOG_VERBOSE", "hipJitOptionLogVerbose", "numeric_literal");
-    subst("CU_JIT_MAX_REGISTERS", "hipJitOptionMaxRegisters", "numeric_literal");
-    subst("CU_JIT_NEW_SM3X_OPT", "hipJitOptionSm3xOpt", "numeric_literal");
+    subst("CU_JIT_LOG_VERBOSE", "HIPRTC_JIT_LOG_VERBOSE", "numeric_literal");
+    subst("CU_JIT_MAX_REGISTERS", "HIPRTC_JIT_MAX_REGISTERS", "numeric_literal");
+    subst("CU_JIT_NEW_SM3X_OPT", "HIPRTC_JIT_NEW_SM3X_OPT", "numeric_literal");
     subst("CU_JIT_NUM_INPUT_TYPES", "HIPRTC_JIT_NUM_LEGACY_INPUT_TYPES", "numeric_literal");
-    subst("CU_JIT_NUM_OPTIONS", "hipJitOptionNumOptions", "numeric_literal");
-    subst("CU_JIT_OPTIMIZATION_LEVEL", "hipJitOptionOptimizationLevel", "numeric_literal");
-    subst("CU_JIT_TARGET", "hipJitOptionTarget", "numeric_literal");
-    subst("CU_JIT_TARGET_FROM_CUCONTEXT", "hipJitOptionTargetFromContext", "numeric_literal");
-    subst("CU_JIT_THREADS_PER_BLOCK", "hipJitOptionThreadsPerBlock", "numeric_literal");
-    subst("CU_JIT_WALL_TIME", "hipJitOptionWallTime", "numeric_literal");
+    subst("CU_JIT_NUM_OPTIONS", "HIPRTC_JIT_NUM_OPTIONS", "numeric_literal");
+    subst("CU_JIT_OPTIMIZATION_LEVEL", "HIPRTC_JIT_OPTIMIZATION_LEVEL", "numeric_literal");
+    subst("CU_JIT_TARGET", "HIPRTC_JIT_TARGET", "numeric_literal");
+    subst("CU_JIT_TARGET_FROM_CUCONTEXT", "HIPRTC_JIT_TARGET_FROM_HIPCONTEXT", "numeric_literal");
+    subst("CU_JIT_THREADS_PER_BLOCK", "HIPRTC_JIT_THREADS_PER_BLOCK", "numeric_literal");
+    subst("CU_JIT_WALL_TIME", "HIPRTC_JIT_WALL_TIME", "numeric_literal");
     subst("CU_KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW", "hipKernelNodeAttributeAccessPolicyWindow", "numeric_literal");
     subst("CU_KERNEL_NODE_ATTRIBUTE_COOPERATIVE", "hipKernelNodeAttributeCooperative", "numeric_literal");
     subst("CU_LIMIT_MALLOC_HEAP_SIZE", "hipLimitMallocHeapSize", "numeric_literal");
@@ -6609,8 +6612,6 @@ sub warnUnsupportedFunctions {
         "cuGraphAddExternalSemaphoresSignalNode",
         "cuGraphAddBatchMemOpNode",
         "cuGetProcAddress",
-        "cuGetErrorString",
-        "cuGetErrorName",
         "cuGLUnregisterBufferObject",
         "cuGLUnmapBufferObjectAsync",
         "cuGLUnmapBufferObject",

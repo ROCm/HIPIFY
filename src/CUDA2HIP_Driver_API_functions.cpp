@@ -27,10 +27,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   // 2. Error Handling
   // no analogue
   // NOTE: cudaGetErrorName and cuGetErrorName have different signatures
-  {"cuGetErrorName",                                       {"hipDrvGetErrorName",                                      "", CONV_ERROR, API_DRIVER, 2, HIP_UNSUPPORTED}},
+  {"cuGetErrorName",                                       {"hipDrvGetErrorName",                                      "", CONV_ERROR, API_DRIVER, 2, HIP_EXPERIMENTAL}},
   // no analogue
   // NOTE: cudaGetErrorString and cuGetErrorString have different signatures
-  {"cuGetErrorString",                                     {"hipDrvGetErrorString",                                    "", CONV_ERROR, API_DRIVER, 2, HIP_UNSUPPORTED}},
+  {"cuGetErrorString",                                     {"hipDrvGetErrorString",                                    "", CONV_ERROR, API_DRIVER, 2, HIP_EXPERIMENTAL}},
 
   // 3. Initialization
   // no analogue
@@ -1425,6 +1425,8 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_FUNCTION_VER_MAP {
   {"hiprtcLinkAddData",                                    {HIP_5030, HIP_0,    HIP_0   }},
   {"hiprtcLinkComplete",                                   {HIP_5030, HIP_0,    HIP_0   }},
   {"hiprtcLinkDestroy",                                    {HIP_5030, HIP_0,    HIP_0   }},
+  {"hipDrvGetErrorName",                                   {HIP_5040, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipDrvGetErrorString",                                 {HIP_5040, HIP_0,    HIP_0,  HIP_LATEST}},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_DRIVER_API_SECTION_MAP {
