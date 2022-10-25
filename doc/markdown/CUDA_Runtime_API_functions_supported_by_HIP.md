@@ -20,7 +20,7 @@
 |`cudaDeviceGetTexture1DLinearMaxWidth`|11.1| | | | | | | |
 |`cudaDeviceReset`| | | |`hipDeviceReset`|1.6.0| | | |
 |`cudaDeviceSetCacheConfig`| | | |`hipDeviceSetCacheConfig`|1.6.0| | | |
-|`cudaDeviceSetLimit`| | | |`hipDeviceSetLimit`|5.3.0| | |5.3.0|
+|`cudaDeviceSetLimit`| | | |`hipDeviceSetLimit`|5.3.0| | | |
 |`cudaDeviceSetMemPool`|11.2| | |`hipDeviceSetMemPool`|5.2.0| | | |
 |`cudaDeviceSetSharedMemConfig`| | | |`hipDeviceSetSharedMemConfig`|1.6.0| | | |
 |`cudaDeviceSynchronize`| | | |`hipDeviceSynchronize`|1.6.0| | | |
@@ -422,9 +422,9 @@
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
-|`cudaDeviceGetGraphMemAttribute`|11.4| | |`hipDeviceGetGraphMemAttribute`|5.3.0| | |5.3.0|
-|`cudaDeviceGraphMemTrim`|11.4| | |`hipDeviceGraphMemTrim`|5.3.0| | |5.3.0|
-|`cudaDeviceSetGraphMemAttribute`|11.4| | |`hipDeviceSetGraphMemAttribute`|5.3.0| | |5.3.0|
+|`cudaDeviceGetGraphMemAttribute`|11.4| | |`hipDeviceGetGraphMemAttribute`|5.3.0| | | |
+|`cudaDeviceGraphMemTrim`|11.4| | |`hipDeviceGraphMemTrim`|5.3.0| | | |
+|`cudaDeviceSetGraphMemAttribute`|11.4| | |`hipDeviceSetGraphMemAttribute`|5.3.0| | | |
 |`cudaGraphAddChildGraphNode`|10.0| | |`hipGraphAddChildGraphNode`|5.0.0| | | |
 |`cudaGraphAddDependencies`|10.0| | |`hipGraphAddDependencies`|4.5.0| | | |
 |`cudaGraphAddEmptyNode`|10.0| | |`hipGraphAddEmptyNode`|4.5.0| | | |
@@ -496,13 +496,13 @@
 |`cudaGraphNodeGetDependentNodes`|11.0| | |`hipGraphNodeGetDependentNodes`|5.0.0| | | |
 |`cudaGraphNodeGetType`|11.0| | |`hipGraphNodeGetType`|5.0.0| | | |
 |`cudaGraphNodeSetEnabled`|11.6| | | | | | | |
-|`cudaGraphReleaseUserObject`|11.3| | |`hipGraphReleaseUserObject`|5.3.0| | |5.3.0|
+|`cudaGraphReleaseUserObject`|11.3| | |`hipGraphReleaseUserObject`|5.3.0| | | |
 |`cudaGraphRemoveDependencies`|11.0| | |`hipGraphRemoveDependencies`|5.0.0| | | |
-|`cudaGraphRetainUserObject`|11.3| | |`hipGraphRetainUserObject`|5.3.0| | |5.3.0|
-|`cudaGraphUpload`|11.1| | |`hipGraphUpload`|5.3.0| | |5.3.0|
-|`cudaUserObjectCreate`|11.3| | |`hipUserObjectCreate`|5.3.0| | |5.3.0|
-|`cudaUserObjectRelease`|11.3| | |`hipUserObjectRelease`|5.3.0| | |5.3.0|
-|`cudaUserObjectRetain`|11.3| | |`hipUserObjectRetain`|5.3.0| | |5.3.0|
+|`cudaGraphRetainUserObject`|11.3| | |`hipGraphRetainUserObject`|5.3.0| | | |
+|`cudaGraphUpload`|11.1| | |`hipGraphUpload`|5.3.0| | | |
+|`cudaUserObjectCreate`|11.3| | |`hipUserObjectCreate`|5.3.0| | | |
+|`cudaUserObjectRelease`|11.3| | |`hipUserObjectRelease`|5.3.0| | | |
+|`cudaUserObjectRetain`|11.3| | |`hipUserObjectRetain`|5.3.0| | | |
 
 ## **31. Driver Entry Point Access**
 
@@ -1110,17 +1110,17 @@ Unsupported
 |`cudaGraphInstantiateFlagAutoFreeOnLaunch`|11.4| | |`hipGraphInstantiateFlagAutoFreeOnLaunch`|5.2.0| | | |
 |`cudaGraphInstantiateFlagUseNodePriority`|11.7| | | | | | | |
 |`cudaGraphInstantiateFlags`|11.4| | |`hipGraphInstantiateFlags`|5.2.0| | | |
-|`cudaGraphMemAttrReservedMemCurrent`|11.4| | |`hipGraphMemAttrReservedMemCurrent`|5.3.0| | |5.3.0|
-|`cudaGraphMemAttrReservedMemHigh`|11.4| | |`hipGraphMemAttrReservedMemHigh`|5.3.0| | |5.3.0|
-|`cudaGraphMemAttrUsedMemCurrent`|11.4| | |`hipGraphMemAttrUsedMemCurrent`|5.3.0| | |5.3.0|
-|`cudaGraphMemAttrUsedMemHigh`|11.4| | |`hipGraphMemAttrUsedMemHigh`|5.3.0| | |5.3.0|
-|`cudaGraphMemAttributeType`|11.4| | |`hipGraphMemAttributeType`|5.3.0| | |5.3.0|
+|`cudaGraphMemAttrReservedMemCurrent`|11.4| | |`hipGraphMemAttrReservedMemCurrent`|5.3.0| | | |
+|`cudaGraphMemAttrReservedMemHigh`|11.4| | |`hipGraphMemAttrReservedMemHigh`|5.3.0| | | |
+|`cudaGraphMemAttrUsedMemCurrent`|11.4| | |`hipGraphMemAttrUsedMemCurrent`|5.3.0| | | |
+|`cudaGraphMemAttrUsedMemHigh`|11.4| | |`hipGraphMemAttrUsedMemHigh`|5.3.0| | | |
+|`cudaGraphMemAttributeType`|11.4| | |`hipGraphMemAttributeType`|5.3.0| | | |
 |`cudaGraphNodeType`|10.0| | |`hipGraphNodeType`|4.3.0| | | |
 |`cudaGraphNodeTypeCount`|10.0| | |`hipGraphNodeTypeCount`|4.3.0| | | |
 |`cudaGraphNodeTypeEmpty`|10.0| | |`hipGraphNodeTypeEmpty`|4.3.0| | | |
 |`cudaGraphNodeTypeEventRecord`|11.1| | |`hipGraphNodeTypeEventRecord`|4.3.0| | | |
-|`cudaGraphNodeTypeExtSemaphoreSignal`|11.4| | |`hipGraphNodeTypeExtSemaphoreSignal`|5.3.0| | |5.3.0|
-|`cudaGraphNodeTypeExtSemaphoreWait`|11.4| | |`hipGraphNodeTypeExtSemaphoreWait`|5.3.0| | |5.3.0|
+|`cudaGraphNodeTypeExtSemaphoreSignal`|11.4| | |`hipGraphNodeTypeExtSemaphoreSignal`|5.3.0| | | |
+|`cudaGraphNodeTypeExtSemaphoreWait`|11.4| | |`hipGraphNodeTypeExtSemaphoreWait`|5.3.0| | | |
 |`cudaGraphNodeTypeGraph`|10.0| | |`hipGraphNodeTypeGraph`|4.3.0| | | |
 |`cudaGraphNodeTypeHost`|10.0| | |`hipGraphNodeTypeHost`|4.3.0| | | |
 |`cudaGraphNodeTypeKernel`|10.0| | |`hipGraphNodeTypeKernel`|4.3.0| | | |
@@ -1130,7 +1130,7 @@ Unsupported
 |`cudaGraphNodeTypeMemset`|10.0| | |`hipGraphNodeTypeMemset`|4.3.0| | | |
 |`cudaGraphNodeTypeWaitEvent`|11.1| | |`hipGraphNodeTypeWaitEvent`|4.3.0| | | |
 |`cudaGraphNode_t`|10.0| | |`hipGraphNode_t`|4.3.0| | | |
-|`cudaGraphUserObjectMove`|11.3| | |`hipGraphUserObjectMove`|5.3.0| | |5.3.0|
+|`cudaGraphUserObjectMove`|11.3| | |`hipGraphUserObjectMove`|5.3.0| | | |
 |`cudaGraph_t`|10.0| | |`hipGraph_t`|4.3.0| | | |
 |`cudaGraphicsCubeFace`| | | | | | | | |
 |`cudaGraphicsCubeFaceNegativeX`| | | | | | | | |
@@ -1200,7 +1200,7 @@ Unsupported
 |`cudaLimitMaxL2FetchGranularity`|10.0| | | | | | | |
 |`cudaLimitPersistingL2CacheSize`|11.0| | | | | | | |
 |`cudaLimitPrintfFifoSize`| | | |`hipLimitPrintfFifoSize`|4.5.0| | | |
-|`cudaLimitStackSize`| | | |`hipLimitStackSize`|5.3.0| | |5.3.0|
+|`cudaLimitStackSize`| | | |`hipLimitStackSize`|5.3.0| | | |
 |`cudaMemAccessDesc`|11.2| | |`hipMemAccessDesc`|5.2.0| | | |
 |`cudaMemAccessFlags`|11.2| | |`hipMemAccessFlags`|5.2.0| | | |
 |`cudaMemAccessFlagsProtNone`|11.2| | |`hipMemAccessFlagsProtNone`|5.2.0| | | |
@@ -1258,7 +1258,7 @@ Unsupported
 |`cudaMemoryType`| | | |`hipMemoryType`|1.6.0| | | |
 |`cudaMemoryTypeDevice`| | | |`hipMemoryTypeDevice`|1.6.0| | | |
 |`cudaMemoryTypeHost`| | | |`hipMemoryTypeHost`|1.6.0| | | |
-|`cudaMemoryTypeManaged`|10.0| | |`hipMemoryTypeManaged`|5.3.0| | |5.3.0|
+|`cudaMemoryTypeManaged`|10.0| | |`hipMemoryTypeManaged`|5.3.0| | | |
 |`cudaMemoryTypeUnregistered`| | | | | | | | |
 |`cudaMemsetParams`|10.0| | |`hipMemsetParams`|4.3.0| | | |
 |`cudaMipmappedArray`| | | |`hipMipmappedArray`|1.7.0| | | |
@@ -1369,10 +1369,10 @@ Unsupported
 |`cudaTextureTypeCubemap`| | | |`hipTextureTypeCubemap`|1.7.0| | | |
 |`cudaTextureTypeCubemapLayered`| | | |`hipTextureTypeCubemapLayered`|1.7.0| | | |
 |`cudaUUID_t`| | | |`hipUUID`|5.2.0| | | |
-|`cudaUserObjectFlags`|11.3| | |`hipUserObjectFlags`|5.3.0| | |5.3.0|
-|`cudaUserObjectNoDestructorSync`|11.3| | |`hipUserObjectNoDestructorSync`|5.3.0| | |5.3.0|
-|`cudaUserObjectRetainFlags`|11.3| | |`hipUserObjectRetainFlags`|5.3.0| | |5.3.0|
-|`cudaUserObject_t`|11.3| | |`hipUserObject_t`|5.3.0| | |5.3.0|
+|`cudaUserObjectFlags`|11.3| | |`hipUserObjectFlags`|5.3.0| | | |
+|`cudaUserObjectNoDestructorSync`|11.3| | |`hipUserObjectNoDestructorSync`|5.3.0| | | |
+|`cudaUserObjectRetainFlags`|11.3| | |`hipUserObjectRetainFlags`|5.3.0| | | |
+|`cudaUserObject_t`|11.3| | |`hipUserObject_t`|5.3.0| | | |
 |`libraryPropertyType`|8.0| | | | | | | |
 |`libraryPropertyType_t`|8.0| | | | | | | |
 |`surfaceReference`| | | |`surfaceReference`|1.9.0| | | |

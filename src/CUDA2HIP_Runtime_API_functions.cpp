@@ -52,7 +52,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // no analogue
   {"cudaDeviceSetCacheConfig",                                {"hipDeviceSetCacheConfig",                                "", CONV_DEVICE, API_RUNTIME, 1}},
   // cuCtxSetLimit
-  {"cudaDeviceSetLimit",                                      {"hipDeviceSetLimit",                                      "", CONV_DEVICE, API_RUNTIME, 1, HIP_EXPERIMENTAL}},
+  {"cudaDeviceSetLimit",                                      {"hipDeviceSetLimit",                                      "", CONV_DEVICE, API_RUNTIME, 1}},
   // cuCtxSetSharedMemConfig
   {"cudaDeviceSetSharedMemConfig",                            {"hipDeviceSetSharedMemConfig",                            "", CONV_DEVICE, API_RUNTIME, 1}},
   // cuCtxSynchronize
@@ -800,7 +800,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuGraphExecEventWaitNodeSetEvent
   {"cudaGraphExecEventWaitNodeSetEvent",                      {"hipGraphExecEventWaitNodeSetEvent",                      "", CONV_GRAPH, API_RUNTIME, 30}},
   // cuGraphUpload
-  {"cudaGraphUpload",                                         {"hipGraphUpload",                                         "", CONV_GRAPH, API_RUNTIME, 30, HIP_EXPERIMENTAL}},
+  {"cudaGraphUpload",                                         {"hipGraphUpload",                                         "", CONV_GRAPH, API_RUNTIME, 30}},
   // cuGraphAddExternalSemaphoresSignalNode
   {"cudaGraphAddExternalSemaphoresSignalNode",                {"hipGraphAddExternalSemaphoresSignalNode",                "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphExternalSemaphoresSignalNodeGetParams
@@ -818,15 +818,15 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuGraphExecExternalSemaphoresWaitNodeSetParams
   {"cudaGraphExecExternalSemaphoresWaitNodeSetParams",        {"hipGraphExecExternalSemaphoresWaitNodeSetParams",        "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuUserObjectCreate
-  {"cudaUserObjectCreate",                                    {"hipUserObjectCreate",                                    "", CONV_GRAPH, API_RUNTIME, 30, HIP_EXPERIMENTAL}},
+  {"cudaUserObjectCreate",                                    {"hipUserObjectCreate",                                    "", CONV_GRAPH, API_RUNTIME, 30}},
   // cuUserObjectRetain
-  {"cudaUserObjectRetain",                                    {"hipUserObjectRetain",                                    "", CONV_GRAPH, API_RUNTIME, 30, HIP_EXPERIMENTAL}},
+  {"cudaUserObjectRetain",                                    {"hipUserObjectRetain",                                    "", CONV_GRAPH, API_RUNTIME, 30}},
   // cuUserObjectRelease
-  {"cudaUserObjectRelease",                                   {"hipUserObjectRelease",                                   "", CONV_GRAPH, API_RUNTIME, 30, HIP_EXPERIMENTAL}},
+  {"cudaUserObjectRelease",                                   {"hipUserObjectRelease",                                   "", CONV_GRAPH, API_RUNTIME, 30}},
   // cuGraphRetainUserObject
-  {"cudaGraphRetainUserObject",                               {"hipGraphRetainUserObject",                               "", CONV_GRAPH, API_RUNTIME, 30, HIP_EXPERIMENTAL}},
+  {"cudaGraphRetainUserObject",                               {"hipGraphRetainUserObject",                               "", CONV_GRAPH, API_RUNTIME, 30}},
   // cuGraphReleaseUserObject
-  {"cudaGraphReleaseUserObject",                              {"hipGraphReleaseUserObject",                              "", CONV_GRAPH, API_RUNTIME, 30, HIP_EXPERIMENTAL}},
+  {"cudaGraphReleaseUserObject",                              {"hipGraphReleaseUserObject",                              "", CONV_GRAPH, API_RUNTIME, 30}},
   // cuGraphAddMemAllocNode
   {"cudaGraphAddMemAllocNode",                                {"hipGraphAddMemAllocNode",                                "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphMemAllocNodeGetParams
@@ -836,11 +836,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuGraphMemFreeNodeGetParams
   {"cudaGraphMemFreeNodeGetParams",                           {"hipGraphMemFreeNodeGetParams",                           "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuDeviceGraphMemTrim
-  {"cudaDeviceGraphMemTrim",                                  {"hipDeviceGraphMemTrim",                                  "", CONV_GRAPH, API_RUNTIME, 30, HIP_EXPERIMENTAL}},
+  {"cudaDeviceGraphMemTrim",                                  {"hipDeviceGraphMemTrim",                                  "", CONV_GRAPH, API_RUNTIME, 30}},
   // cuDeviceGetGraphMemAttribute
-  {"cudaDeviceGetGraphMemAttribute",                          {"hipDeviceGetGraphMemAttribute",                          "", CONV_GRAPH, API_RUNTIME, 30, HIP_EXPERIMENTAL}},
+  {"cudaDeviceGetGraphMemAttribute",                          {"hipDeviceGetGraphMemAttribute",                          "", CONV_GRAPH, API_RUNTIME, 30}},
   // cuDeviceSetGraphMemAttribute
-  {"cudaDeviceSetGraphMemAttribute",                          {"hipDeviceSetGraphMemAttribute",                          "", CONV_GRAPH, API_RUNTIME, 30, HIP_EXPERIMENTAL}},
+  {"cudaDeviceSetGraphMemAttribute",                          {"hipDeviceSetGraphMemAttribute",                          "", CONV_GRAPH, API_RUNTIME, 30}},
   // cuGraphInstantiateWithFlags
   {"cudaGraphInstantiateWithFlags",                           {"hipGraphInstantiateWithFlags",                           "", CONV_GRAPH, API_RUNTIME, 30}},
   // cuGraphNodeSetEnabled
@@ -1320,16 +1320,16 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP {
   {"hipThreadExchangeStreamCaptureMode",                      {HIP_5020, HIP_0,    HIP_0   }},
   {"hipGraphKernelNodeSetAttribute",                          {HIP_5020, HIP_0,    HIP_0   }},
   {"hipGraphKernelNodeGetAttribute",                          {HIP_5020, HIP_0,    HIP_0   }},
-  {"hipDeviceSetLimit",                                       {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipGraphUpload",                                          {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipDeviceGetGraphMemAttribute",                           {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipDeviceSetGraphMemAttribute",                           {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipDeviceGraphMemTrim",                                   {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipUserObjectCreate",                                     {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipUserObjectRelease",                                    {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipUserObjectRetain",                                     {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipGraphRetainUserObject",                                {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipGraphReleaseUserObject",                               {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipDeviceSetLimit",                                       {HIP_5030, HIP_0,    HIP_0   }},
+  {"hipGraphUpload",                                          {HIP_5030, HIP_0,    HIP_0   }},
+  {"hipDeviceGetGraphMemAttribute",                           {HIP_5030, HIP_0,    HIP_0   }},
+  {"hipDeviceSetGraphMemAttribute",                           {HIP_5030, HIP_0,    HIP_0   }},
+  {"hipDeviceGraphMemTrim",                                   {HIP_5030, HIP_0,    HIP_0   }},
+  {"hipUserObjectCreate",                                     {HIP_5030, HIP_0,    HIP_0   }},
+  {"hipUserObjectRelease",                                    {HIP_5030, HIP_0,    HIP_0   }},
+  {"hipUserObjectRetain",                                     {HIP_5030, HIP_0,    HIP_0   }},
+  {"hipGraphRetainUserObject",                                {HIP_5030, HIP_0,    HIP_0   }},
+  {"hipGraphReleaseUserObject",                               {HIP_5030, HIP_0,    HIP_0   }},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_RUNTIME_API_SECTION_MAP {
