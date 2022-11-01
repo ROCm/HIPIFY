@@ -62,7 +62,7 @@ const std::map <llvm::StringRef, hipCounter> CUDA_INCLUDE_MAP {
   {"curand_precalc.h",                                      {"hiprand_kernel.h",                                      "", CONV_INCLUDE,                API_RAND, 0}},
   {"curand_uniform.h",                                      {"hiprand_kernel.h",                                      "", CONV_INCLUDE,                API_RAND, 0}},
   // cuDNN includes
-  {"cudnn.h",                                               {"hipDNN.h",                                              "", CONV_INCLUDE_CUDA_MAIN_H,    API_DNN, 0}},
+  {"cudnn.h",                                               {"hipDNN.h",                               "miopen/miopen.h", CONV_INCLUDE_CUDA_MAIN_H,    API_DNN, 0}},
   // cuFFT includes
   {"cufft.h",                                               {"hipfft.h",                                              "", CONV_INCLUDE_CUDA_MAIN_H,    API_FFT, 0}},
   {"cufftXt.h",                                             {"hipfftXt.h",                                            "", CONV_INCLUDE,                API_FFT, 0}},
