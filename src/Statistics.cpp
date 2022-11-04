@@ -494,6 +494,7 @@ std::string Statistics::getHipVersion(const hipVersions& ver) {
     case HIP_1052: return "1.5.2";
     case HIP_1060: return "1.6.0";
     case HIP_1061: return "1.6.1";
+    case HIP_1064: return "1.6.4";
     case HIP_1070: return "1.7.0";
     case HIP_1071: return "1.7.1";
     case HIP_1080: return "1.8.0";
