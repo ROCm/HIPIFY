@@ -1036,6 +1036,7 @@ sub rocSubstitutions {
     subst("cublasGetMatrixAsync", "rocblas_get_matrix_async", "library");
     subst("cublasGetPointerMode", "rocblas_get_pointer_mode", "library");
     subst("cublasGetPointerMode_v2", "rocblas_set_pointer_mode", "library");
+    subst("cublasGetStatusString", "rocblas_status_to_string", "library");
     subst("cublasGetStream", "rocblas_get_stream", "library");
     subst("cublasGetStream_v2", "rocblas_get_stream", "library");
     subst("cublasGetVector", "rocblas_get_vector", "library");
@@ -8155,7 +8156,6 @@ sub warnRocOnlyUnsupportedFunctions {
         "cublasIamaxEx",
         "cublasGetVersion_v2",
         "cublasGetVersion",
-        "cublasGetStatusString",
         "cublasGetStatusName",
         "cublasGetSmCountTarget",
         "cublasGetProperty",
