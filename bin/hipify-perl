@@ -897,7 +897,7 @@ sub rocSubstitutions {
     subst("cublasCher2k_v2", "rocblas_cher2k", "library");
     subst("cublasCher_v2", "rocblas_cher", "library");
     subst("cublasCherk", "rocblas_cherk", "library");
-    subst("cublasCherk_v2", "rocblas_cherkx", "library");
+    subst("cublasCherk_v2", "rocblas_cherk", "library");
     subst("cublasCherkx", "rocblas_cherkx", "library");
     subst("cublasChpmv", "rocblas_chpmv", "library");
     subst("cublasChpmv_v2", "rocblas_chpmv", "library");
