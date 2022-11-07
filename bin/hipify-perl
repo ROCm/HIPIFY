@@ -1032,6 +1032,7 @@ sub rocSubstitutions {
     subst("cublasGemmBatchedEx", "rocblas_gemm_batched_ex", "library");
     subst("cublasGemmEx", "rocblas_gemm_ex", "library");
     subst("cublasGemmStridedBatchedEx", "rocblas_gemm_strided_batched_ex", "library");
+    subst("cublasGetAtomicsMode", "rocblas_get_atomics_mode", "library");
     subst("cublasGetMatrix", "rocblas_get_matrix", "library");
     subst("cublasGetMatrixAsync", "rocblas_get_matrix_async", "library");
     subst("cublasGetPointerMode", "rocblas_get_pointer_mode", "library");
@@ -1041,7 +1042,6 @@ sub rocSubstitutions {
     subst("cublasGetStream_v2", "rocblas_get_stream", "library");
     subst("cublasGetVector", "rocblas_get_vector", "library");
     subst("cublasGetVectorAsync", "rocblas_get_vector_async", "library");
-    subst("cublasGetVersion", "rocblas_get_version_string", "library");
     subst("cublasHgemm", "rocblas_hgemm", "library");
     subst("cublasHgemmBatched", "rocblas_hgemm_batched", "library");
     subst("cublasHgemmStridedBatched", "rocblas_hgemm_strided_batched", "library");
@@ -1078,6 +1078,7 @@ sub rocSubstitutions {
     subst("cublasSdgmm", "rocblas_sdgmm", "library");
     subst("cublasSdot", "rocblas_sdot", "library");
     subst("cublasSdot_v2", "rocblas_sdot", "library");
+    subst("cublasSetAtomicsMode", "rocblas_set_atomics_mode", "library");
     subst("cublasSetMatrix", "rocblas_set_matrix", "library");
     subst("cublasSetMatrixAsync", "rocblas_set_matrix_async", "library");
     subst("cublasSetPointerMode", "rocblas_set_pointer_mode", "library");
@@ -8145,7 +8146,6 @@ sub warnRocOnlyUnsupportedFunctions {
         "cublasSetMathMode",
         "cublasSetLoggerCallback",
         "cublasSetKernelStream",
-        "cublasSetAtomicsMode",
         "cublasRotmgEx",
         "cublasRotmEx",
         "cublasRotgEx",
@@ -8156,6 +8156,7 @@ sub warnRocOnlyUnsupportedFunctions {
         "cublasIaminEx",
         "cublasIamaxEx",
         "cublasGetVersion_v2",
+        "cublasGetVersion",
         "cublasGetStatusName",
         "cublasGetSmCountTarget",
         "cublasGetProperty",
@@ -8163,7 +8164,6 @@ sub warnRocOnlyUnsupportedFunctions {
         "cublasGetLoggerCallback",
         "cublasGetError",
         "cublasGetCudartVersion",
-        "cublasGetAtomicsMode",
         "cublasFree",
         "cublasDtrttp",
         "cublasDtpttr",
