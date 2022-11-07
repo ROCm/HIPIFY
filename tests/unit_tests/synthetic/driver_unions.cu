@@ -9,8 +9,11 @@ int main() {
 
 #if CUDA_VERSION >= 11000
   // CHECK: hipKernelNodeAttrValue kernelNodeAttrValue;
-  // CHECK-NEXT: hipKernelNodeAttrValue kernelNodeAttrValue_union;
   CUkernelNodeAttrValue kernelNodeAttrValue;
+#endif
+
+#if CUDA_VERSION >= 11000 && CUDA_VERSION < 11080
+  // CHECK: hipKernelNodeAttrValue kernelNodeAttrValue_union;
   CUkernelNodeAttrValue_union kernelNodeAttrValue_union;
 #endif
 

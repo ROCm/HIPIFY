@@ -33,8 +33,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RTC_FUNCTION_MAP {
   {"nvrtcCompileProgram",                         {"hiprtcCompileProgram",                         "", CONV_LIB_FUNC, API_RTC, 2}},
   {"nvrtcGetPTXSize",                             {"hiprtcGetCodeSize",                            "", CONV_LIB_FUNC, API_RTC, 2}},
   {"nvrtcGetPTX",                                 {"hiprtcGetCode",                                "", CONV_LIB_FUNC, API_RTC, 2}},
-  {"nvrtcGetCUBINSize",                           {"hiprtcGetBitcodeSize",                         "", CONV_LIB_FUNC, API_RTC, 2, HIP_EXPERIMENTAL}},
-  {"nvrtcGetCUBIN",                               {"hiprtcGetBitcode",                             "", CONV_LIB_FUNC, API_RTC, 2, HIP_EXPERIMENTAL}},
+  {"nvrtcGetCUBINSize",                           {"hiprtcGetBitcodeSize",                         "", CONV_LIB_FUNC, API_RTC, 2}},
+  {"nvrtcGetCUBIN",                               {"hiprtcGetBitcode",                             "", CONV_LIB_FUNC, API_RTC, 2}},
   {"nvrtcGetNVVMSize",                            {"hiprtcGetNVVMSize",                            "", CONV_LIB_FUNC, API_RTC, 2, HIP_UNSUPPORTED}},
   {"nvrtcGetNVVM",                                {"hiprtcGetNVVM",                                "", CONV_LIB_FUNC, API_RTC, 2, HIP_UNSUPPORTED}},
   {"nvrtcGetProgramLogSize",                      {"hiprtcGetProgramLogSize",                      "", CONV_LIB_FUNC, API_RTC, 2}},
@@ -66,8 +66,8 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RTC_FUNCTION_VER_MAP {
   {"hiprtcGetProgramLog",                         {HIP_2060, HIP_0,    HIP_0   }},
   {"hiprtcAddNameExpression",                     {HIP_2060, HIP_0,    HIP_0   }},
   {"hiprtcGetLoweredName",                        {HIP_2060, HIP_0,    HIP_0   }},
-  {"hiprtcGetBitcode",                            {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hiprtcGetBitcodeSize",                        {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hiprtcGetBitcode",                            {HIP_5030, HIP_0,    HIP_0   }},
+  {"hiprtcGetBitcodeSize",                        {HIP_5030, HIP_0,    HIP_0   }},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_RTC_API_SECTION_MAP {

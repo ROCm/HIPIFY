@@ -52,7 +52,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // no analogue
   {"cudaDeviceSetCacheConfig",                                {"hipDeviceSetCacheConfig",                                "", CONV_DEVICE, API_RUNTIME, 1}},
   // cuCtxSetLimit
-  {"cudaDeviceSetLimit",                                      {"hipDeviceSetLimit",                                      "", CONV_DEVICE, API_RUNTIME, 1, HIP_EXPERIMENTAL}},
+  {"cudaDeviceSetLimit",                                      {"hipDeviceSetLimit",                                      "", CONV_DEVICE, API_RUNTIME, 1}},
   // cuCtxSetSharedMemConfig
   {"cudaDeviceSetSharedMemConfig",                            {"hipDeviceSetSharedMemConfig",                            "", CONV_DEVICE, API_RUNTIME, 1}},
   // cuCtxSynchronize
@@ -229,6 +229,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   {"cudaSetDoubleForDevice",                                  {"hipSetDoubleForDevice",                                  "", CONV_EXECUTION, API_RUNTIME, 7, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   // no analogue
   {"cudaSetDoubleForHost",                                    {"hipSetDoubleForHost",                                    "", CONV_EXECUTION, API_RUNTIME, 7, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
+  // no analogue
+  // NOTE: Not equal to cuLaunchKernelEx due to different signatures
+  {"cudaLaunchKernelExC",                                     {"hipLaunchKernelExC",                                     "", CONV_EXECUTION, API_RUNTIME, 7, HIP_UNSUPPORTED}},
 
   // 8. Occupancy
   // cuOccupancyAvailableDynamicSMemPerBlock
@@ -245,6 +248,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   {"cudaOccupancyMaxPotentialBlockSizeVariableSMem",          {"hipOccupancyMaxPotentialBlockSizeVariableSMem",          "", CONV_OCCUPANCY, API_RUNTIME, 8, HIP_UNSUPPORTED}},
   // no analogue
   {"cudaOccupancyMaxPotentialBlockSizeVariableSMemWithFlags", {"hipOccupancyMaxPotentialBlockSizeVariableSMemWithFlags", "", CONV_OCCUPANCY, API_RUNTIME, 8, HIP_UNSUPPORTED}},
+  // cuOccupancyMaxPotentialClusterSize
+  {"cudaOccupancyMaxPotentialClusterSize",                    {"hipOccupancyMaxPotentialClusterSize",                    "", CONV_OCCUPANCY, API_RUNTIME, 8, HIP_UNSUPPORTED}},
+  // cuOccupancyMaxActiveClusters
+  {"cudaOccupancyMaxActiveClusters",                          {"hipOccupancyMaxActiveClusters",                          "", CONV_OCCUPANCY, API_RUNTIME, 8, HIP_UNSUPPORTED}},
 
   // 9. Memory Management
   // no analogue
@@ -642,6 +649,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // no analogue
   // NOTE: Not equal to cuTexObjectGetTextureDesc due to different signatures
   {"cudaGetTextureObjectTextureDesc",                         {"hipGetTextureObjectTextureDesc",                         "", CONV_TEXTURE, API_RUNTIME, 27}},
+  //
+  {"cudaCreateTextureObject_v2",                              {"hipCreateTextureObject_v2",                              "", CONV_TEXTURE, API_RUNTIME, 27, HIP_UNSUPPORTED}},
+  //
+  {"cudaGetTextureObjectTextureDesc_v2",                      {"hipGetTextureObjectTextureDesc_v2",                      "", CONV_TEXTURE, API_RUNTIME, 27, HIP_UNSUPPORTED}},
 
   // 28. Surface Object Management
   // no analogue
@@ -789,7 +800,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuGraphExecEventWaitNodeSetEvent
   {"cudaGraphExecEventWaitNodeSetEvent",                      {"hipGraphExecEventWaitNodeSetEvent",                      "", CONV_GRAPH, API_RUNTIME, 30}},
   // cuGraphUpload
-  {"cudaGraphUpload",                                         {"hipGraphUpload",                                         "", CONV_GRAPH, API_RUNTIME, 30, HIP_EXPERIMENTAL}},
+  {"cudaGraphUpload",                                         {"hipGraphUpload",                                         "", CONV_GRAPH, API_RUNTIME, 30}},
   // cuGraphAddExternalSemaphoresSignalNode
   {"cudaGraphAddExternalSemaphoresSignalNode",                {"hipGraphAddExternalSemaphoresSignalNode",                "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphExternalSemaphoresSignalNodeGetParams
@@ -807,15 +818,15 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuGraphExecExternalSemaphoresWaitNodeSetParams
   {"cudaGraphExecExternalSemaphoresWaitNodeSetParams",        {"hipGraphExecExternalSemaphoresWaitNodeSetParams",        "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuUserObjectCreate
-  {"cudaUserObjectCreate",                                    {"hipUserObjectCreate",                                    "", CONV_GRAPH, API_RUNTIME, 30, HIP_EXPERIMENTAL}},
+  {"cudaUserObjectCreate",                                    {"hipUserObjectCreate",                                    "", CONV_GRAPH, API_RUNTIME, 30}},
   // cuUserObjectRetain
-  {"cudaUserObjectRetain",                                    {"hipUserObjectRetain",                                    "", CONV_GRAPH, API_RUNTIME, 30, HIP_EXPERIMENTAL}},
+  {"cudaUserObjectRetain",                                    {"hipUserObjectRetain",                                    "", CONV_GRAPH, API_RUNTIME, 30}},
   // cuUserObjectRelease
-  {"cudaUserObjectRelease",                                   {"hipUserObjectRelease",                                   "", CONV_GRAPH, API_RUNTIME, 30, HIP_EXPERIMENTAL}},
+  {"cudaUserObjectRelease",                                   {"hipUserObjectRelease",                                   "", CONV_GRAPH, API_RUNTIME, 30}},
   // cuGraphRetainUserObject
-  {"cudaGraphRetainUserObject",                               {"hipGraphRetainUserObject",                               "", CONV_GRAPH, API_RUNTIME, 30, HIP_EXPERIMENTAL}},
+  {"cudaGraphRetainUserObject",                               {"hipGraphRetainUserObject",                               "", CONV_GRAPH, API_RUNTIME, 30}},
   // cuGraphReleaseUserObject
-  {"cudaGraphReleaseUserObject",                              {"hipGraphReleaseUserObject",                              "", CONV_GRAPH, API_RUNTIME, 30, HIP_EXPERIMENTAL}},
+  {"cudaGraphReleaseUserObject",                              {"hipGraphReleaseUserObject",                              "", CONV_GRAPH, API_RUNTIME, 30}},
   // cuGraphAddMemAllocNode
   {"cudaGraphAddMemAllocNode",                                {"hipGraphAddMemAllocNode",                                "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuGraphMemAllocNodeGetParams
@@ -825,11 +836,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuGraphMemFreeNodeGetParams
   {"cudaGraphMemFreeNodeGetParams",                           {"hipGraphMemFreeNodeGetParams",                           "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
   // cuDeviceGraphMemTrim
-  {"cudaDeviceGraphMemTrim",                                  {"hipDeviceGraphMemTrim",                                  "", CONV_GRAPH, API_RUNTIME, 30, HIP_EXPERIMENTAL}},
+  {"cudaDeviceGraphMemTrim",                                  {"hipDeviceGraphMemTrim",                                  "", CONV_GRAPH, API_RUNTIME, 30}},
   // cuDeviceGetGraphMemAttribute
-  {"cudaDeviceGetGraphMemAttribute",                          {"hipDeviceGetGraphMemAttribute",                          "", CONV_GRAPH, API_RUNTIME, 30, HIP_EXPERIMENTAL}},
+  {"cudaDeviceGetGraphMemAttribute",                          {"hipDeviceGetGraphMemAttribute",                          "", CONV_GRAPH, API_RUNTIME, 30}},
   // cuDeviceSetGraphMemAttribute
-  {"cudaDeviceSetGraphMemAttribute",                          {"hipDeviceSetGraphMemAttribute",                          "", CONV_GRAPH, API_RUNTIME, 30, HIP_EXPERIMENTAL}},
+  {"cudaDeviceSetGraphMemAttribute",                          {"hipDeviceSetGraphMemAttribute",                          "", CONV_GRAPH, API_RUNTIME, 30}},
   // cuGraphInstantiateWithFlags
   {"cudaGraphInstantiateWithFlags",                           {"hipGraphInstantiateWithFlags",                           "", CONV_GRAPH, API_RUNTIME, 30}},
   // cuGraphNodeSetEnabled
@@ -1073,6 +1084,11 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_FUNCTION_VER_MAP {
   {"cudaGraphInstantiateWithFlags",                           {CUDA_114, CUDA_0,   CUDA_0  }},
   {"cudaArrayGetMemoryRequirements",                          {CUDA_116, CUDA_0,   CUDA_0  }},
   {"cudaGraphNodeSetEnabled",                                 {CUDA_116, CUDA_0,   CUDA_0  }},
+  {"cudaLaunchKernelExC",                                     {CUDA_118, CUDA_0,   CUDA_0  }},
+  {"cudaOccupancyMaxPotentialClusterSize",                    {CUDA_118, CUDA_0,   CUDA_0  }},
+  {"cudaOccupancyMaxActiveClusters",                          {CUDA_118, CUDA_0,   CUDA_0  }},
+  {"cudaCreateTextureObject_v2",                              {CUDA_118, CUDA_0,   CUDA_0  }},
+  {"cudaGetTextureObjectTextureDesc_v2",                      {CUDA_118, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP {
@@ -1304,16 +1320,16 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP {
   {"hipThreadExchangeStreamCaptureMode",                      {HIP_5020, HIP_0,    HIP_0   }},
   {"hipGraphKernelNodeSetAttribute",                          {HIP_5020, HIP_0,    HIP_0   }},
   {"hipGraphKernelNodeGetAttribute",                          {HIP_5020, HIP_0,    HIP_0   }},
-  {"hipDeviceSetLimit",                                       {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipGraphUpload",                                          {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipDeviceGetGraphMemAttribute",                           {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipDeviceSetGraphMemAttribute",                           {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipDeviceGraphMemTrim",                                   {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipUserObjectCreate",                                     {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipUserObjectRelease",                                    {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipUserObjectRetain",                                     {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipGraphRetainUserObject",                                {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipGraphReleaseUserObject",                               {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipDeviceSetLimit",                                       {HIP_5030, HIP_0,    HIP_0   }},
+  {"hipGraphUpload",                                          {HIP_5030, HIP_0,    HIP_0   }},
+  {"hipDeviceGetGraphMemAttribute",                           {HIP_5030, HIP_0,    HIP_0   }},
+  {"hipDeviceSetGraphMemAttribute",                           {HIP_5030, HIP_0,    HIP_0   }},
+  {"hipDeviceGraphMemTrim",                                   {HIP_5030, HIP_0,    HIP_0   }},
+  {"hipUserObjectCreate",                                     {HIP_5030, HIP_0,    HIP_0   }},
+  {"hipUserObjectRelease",                                    {HIP_5030, HIP_0,    HIP_0   }},
+  {"hipUserObjectRetain",                                     {HIP_5030, HIP_0,    HIP_0   }},
+  {"hipGraphRetainUserObject",                                {HIP_5030, HIP_0,    HIP_0   }},
+  {"hipGraphReleaseUserObject",                               {HIP_5030, HIP_0,    HIP_0   }},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_RUNTIME_API_SECTION_MAP {

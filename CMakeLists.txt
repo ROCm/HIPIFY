@@ -24,12 +24,12 @@ if(MSVC AND MSVC_VERSION VERSION_LESS "1900")
 endif()
 
 include_directories(${LLVM_INCLUDE_DIRS})
-link_directories(${LLVM_LIBRARY_DIRS})
 add_definitions(${LLVM_DEFINITIONS})
 
 file(GLOB_RECURSE HIPIFY_SOURCES src/*.cpp)
 file(GLOB_RECURSE HIPIFY_HEADERS src/*.h)
 add_llvm_executable(hipify-clang ${HIPIFY_SOURCES} ${HIPIFY_HEADERS})
+target_link_directories(hipify-clang PRIVATE ${LLVM_LIBRARY_DIRS})
 
 set(CMAKE_CXX_COMPILER ${LLVM_TOOLS_BINARY_DIR}/clang++)
 set(CMAKE_C_COMPILER ${LLVM_TOOLS_BINARY_DIR}/clang)
@@ -131,7 +131,14 @@ install(
     PATTERN "openmp_wrappers" EXCLUDE)
 
 option(FILE_REORG_BACKWARD_COMPATIBILITY "Enable File Reorg with backward compatibility" ON)
+
 if(UNIX)
+
+    #get rid of any RPATH definations already
+    set_target_properties(hipify-clang PROPERTIES INSTALL_RPATH "")
+    #set RPATH for the binary
+    set_target_properties(hipify-clang PROPERTIES LINK_FLAGS "-Wl,--disable-new-dtags -Wl,--rpath,$ORIGIN/../lib" )
+
     if(FILE_REORG_BACKWARD_COMPATIBILITY)
         include(hipify-backward-compat.cmake)
     endif()

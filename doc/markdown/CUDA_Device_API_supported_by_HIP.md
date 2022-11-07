@@ -10,6 +10,35 @@
 |`__assert_fail`| | | |`__assert_fail`|1.9.0| | | |
 |`__assertfail`| | | |`__assertfail`|1.9.0| | | |
 |`__ballot`| | | |`__ballot`|1.6.0| | | |
+|`__bfloat1622float2`|11.0| | | | | | | |
+|`__bfloat162bfloat162`|11.0| | | | | | | |
+|`__bfloat162float`|11.0| | | | | | | |
+|`__bfloat162int_rd`|11.0| | | | | | | |
+|`__bfloat162int_rn`|11.0| | | | | | | |
+|`__bfloat162int_ru`|11.0| | | | | | | |
+|`__bfloat162int_rz`|11.0| | | | | | | |
+|`__bfloat162ll_rd`|11.0| | | | | | | |
+|`__bfloat162ll_rn`|11.0| | | | | | | |
+|`__bfloat162ll_ru`|11.0| | | | | | | |
+|`__bfloat162ll_rz`|11.0| | | | | | | |
+|`__bfloat162short_rd`|11.0| | | | | | | |
+|`__bfloat162short_rn`|11.0| | | | | | | |
+|`__bfloat162short_ru`|11.0| | | | | | | |
+|`__bfloat162short_rz`|11.0| | | | | | | |
+|`__bfloat162uint_rd`|11.0| | | | | | | |
+|`__bfloat162uint_rn`|11.0| | | | | | | |
+|`__bfloat162uint_ru`|11.0| | | | | | | |
+|`__bfloat162uint_rz`|11.0| | | | | | | |
+|`__bfloat162ull_rd`|11.0| | | | | | | |
+|`__bfloat162ull_rn`|11.0| | | | | | | |
+|`__bfloat162ull_ru`|11.0| | | | | | | |
+|`__bfloat162ull_rz`|11.0| | | | | | | |
+|`__bfloat162ushort_rd`|11.0| | | | | | | |
+|`__bfloat162ushort_rn`|11.0| | | | | | | |
+|`__bfloat162ushort_ru`|11.0| | | | | | | |
+|`__bfloat162ushort_rz`|11.0| | | | | | | |
+|`__bfloat16_as_short`|11.0| | | | | | | |
+|`__bfloat16_as_ushort`|11.0| | | | | | | |
 |`__brev`| | | |`__brev`|1.6.0| | | |
 |`__brevll`| | | |`__brevll`|1.6.0| | | |
 |`__brkpt`| | | | | | | | |
@@ -29,10 +58,12 @@
 |`__dmul_rn`| | | |`__dmul_rn`|1.6.0| | | |
 |`__dmul_ru`| | | | | | | | |
 |`__dmul_rz`| | | | | | | | |
+|`__double2bfloat16`|11.0| | | | | | | |
 |`__double2float_rd`| | | |`__double2float_rd`|1.6.0| | | |
 |`__double2float_rn`| | | |`__double2float_rn`|1.6.0| | | |
 |`__double2float_ru`| | | |`__double2float_ru`|1.6.0| | | |
 |`__double2float_rz`| | | |`__double2float_rz`|1.6.0| | | |
+|`__double2half`|11.0| | | | | | | |
 |`__double2hiint`| | | |`__double2hiint`|1.6.0| | | |
 |`__double2int_rd`| | | |`__double2int_rd`|1.6.0| | | |
 |`__double2int_rn`| | | |`__double2int_rn`|1.6.0| | | |
@@ -81,6 +112,12 @@
 |`__finitef`| | | | | | | | |
 |`__finitel`| | | | | | | | |
 |`__float22half2_rn`| | | |`__float22half2_rn`|1.6.0| | | |
+|`__float2bfloat16`|11.0| | | | | | | |
+|`__float2bfloat162_rn`|11.0| | | | | | | |
+|`__float2bfloat16_rd`|11.0| | | | | | | |
+|`__float2bfloat16_rn`|11.0| | | | | | | |
+|`__float2bfloat16_ru`|11.0| | | | | | | |
+|`__float2bfloat16_rz`|11.0| | | | | | | |
 |`__float2half`| | | |`__float2half`|1.6.0| | | |
 |`__float2half2_rn`| | | |`__float2half2_rn`|1.6.0| | | |
 |`__float2half_rd`| | | |`__float2half_rd`|1.6.0| | | |
@@ -105,6 +142,7 @@
 |`__float2ull_rz`| | | |`__float2ull_rz`|1.6.0| | | |
 |`__float_as_int`| | | |`__float_as_int`|1.6.0| | | |
 |`__float_as_uint`| | | |`__float_as_uint`|1.6.0| | | |
+|`__floats2bfloat162_rn`|11.0| | | | | | | |
 |`__floats2half2_rn`| | | |`__floats2half2_rn`|1.6.0| | | |
 |`__fma_rd`| | | | | | | | |
 |`__fma_rn`| | | |`__fma_rn`|1.6.0| | | |
@@ -140,7 +178,9 @@
 |`__habs2`| | | |`__habs2`|3.5.0| | | |
 |`__hadd`| | | |`__hadd`|1.6.0| | | |
 |`__hadd2`| | | |`__hadd2`|1.6.0| | | |
+|`__hadd2_rn`|11.6| | | | | | | |
 |`__hadd2_sat`| | | |`__hadd2_sat`|1.6.0| | | |
+|`__hadd_rn`|11.6| | | | | | | |
 |`__hadd_sat`| | | |`__hadd_sat`|1.6.0| | | |
 |`__half22float2`| | | |`__half22float2`|1.6.0| | | |
 |`__half2float`| | | |`__half2float`|1.6.0| | | |
@@ -171,6 +211,7 @@
 |`__half2ushort_rz`| | | |`__half2ushort_rz`|1.6.0| | | |
 |`__half_as_short`| | | |`__half_as_short`|1.6.0| | | |
 |`__half_as_ushort`| | | |`__half_as_ushort`|1.6.0| | | |
+|`__halves2bfloat162`|11.0| | | | | | | |
 |`__halves2half2`| | | |`__halves2half2`|1.6.0| | | |
 |`__hbeq2`| | | |`__hbeq2`|1.6.0| | | |
 |`__hbequ2`| | | |`__hbequ2`|1.9.0| | | |
@@ -184,6 +225,7 @@
 |`__hbltu2`| | | |`__hbltu2`|1.9.0| | | |
 |`__hbne2`| | | |`__hbne2`|1.6.0| | | |
 |`__hbneu2`| | | |`__hbneu2`|1.9.0| | | |
+|`__hcmadd`|11.1| | | | | | | |
 |`__hdiv`| | | |`__hdiv`|1.9.0| | | |
 |`__heq`| | | |`__heq`|1.6.0| | | |
 |`__heq2`| | | |`__heq2`|1.6.0| | | |
@@ -191,7 +233,9 @@
 |`__hequ2`| | | |`__hequ2`|1.9.0| | | |
 |`__hfma`| | | |`__hfma`|1.6.0| | | |
 |`__hfma2`| | | |`__hfma2`|1.6.0| | | |
+|`__hfma2_relu`|11.0| | | | | | | |
 |`__hfma2_sat`| | | |`__hfma2_sat`|1.6.0| | | |
+|`__hfma_relu`|11.0| | | | | | | |
 |`__hfma_sat`| | | |`__hfma_sat`|1.6.0| | | |
 |`__hge`| | | |`__hge`|1.6.0| | | |
 |`__hge2`| | | |`__hge2`|1.6.0| | | |
@@ -201,9 +245,12 @@
 |`__hgt2`| | | |`__hgt2`|1.6.0| | | |
 |`__hgtu`| | | |`__hgtu`|1.9.0| | | |
 |`__hgtu2`| | | |`__hgtu2`|1.9.0| | | |
+|`__high2bfloat16`|11.0| | | | | | | |
+|`__high2bfloat162`|11.0| | | | | | | |
 |`__high2float`| | | |`__high2float`|1.6.0| | | |
 |`__high2half`| | | |`__high2half`|1.6.0| | | |
 |`__high2half2`| | | |`__high2half2`|1.6.0| | | |
+|`__highs2bfloat162`|11.0| | | | | | | |
 |`__highs2half2`| | | |`__highs2half2`|1.6.0| | | |
 |`__hiloint2double`| | | |`__hiloint2double`|1.6.0| | | |
 |`__hisinf`| | | |`__hisinf`|1.6.0| | | |
@@ -217,9 +264,19 @@
 |`__hlt2`| | | |`__hlt2`|1.6.0| | | |
 |`__hltu`| | | |`__hltu`|1.9.0| | | |
 |`__hltu2`| | | |`__hltu2`|1.9.0| | | |
+|`__hmax`|11.0| | | | | | | |
+|`__hmax2`|11.0| | | | | | | |
+|`__hmax2_nan`|11.0| | | | | | | |
+|`__hmax_nan`|11.0| | | | | | | |
+|`__hmin`|11.0| | | | | | | |
+|`__hmin2`|11.0| | | | | | | |
+|`__hmin2_nan`|11.0| | | | | | | |
+|`__hmin_nan`|11.0| | | | | | | |
 |`__hmul`| | | |`__hmul`|1.6.0| | | |
 |`__hmul2`| | | |`__hmul2`|1.6.0| | | |
+|`__hmul2_rn`|11.6| | | | | | | |
 |`__hmul2_sat`| | | |`__hmul2_sat`|1.6.0| | | |
+|`__hmul_rn`|11.6| | | | | | | |
 |`__hmul_sat`| | | |`__hmul_sat`|1.6.0| | | |
 |`__hne`| | | |`__hne`|1.6.0| | | |
 |`__hne2`| | | |`__hne2`|1.6.0| | | |
@@ -229,8 +286,14 @@
 |`__hneu2`| | | |`__hneu2`|1.9.0| | | |
 |`__hsub`| | | |`__hsub`|1.6.0| | | |
 |`__hsub2`| | | |`__hsub2`|1.6.0| | | |
+|`__hsub2_rn`|11.6| | | | | | | |
 |`__hsub2_sat`| | | |`__hsub2_sat`|1.6.0| | | |
+|`__hsub_rn`|11.6| | | | | | | |
 |`__hsub_sat`| | | |`__hsub_sat`|1.6.0| | | |
+|`__int2bfloat16_rd`|11.0| | | | | | | |
+|`__int2bfloat16_rn`|11.0| | | | | | | |
+|`__int2bfloat16_ru`|11.0| | | | | | | |
+|`__int2bfloat16_rz`|11.0| | | | | | | |
 |`__int2double_rn`| | | |`__int2double_rn`|1.6.0| | | |
 |`__int2float_rd`| | | |`__int2float_rd`|1.6.0| | | |
 |`__int2float_rn`| | | |`__int2float_rn`|1.6.0| | | |
@@ -250,7 +313,13 @@
 |`__ldca`| | | |`__ldca`|1.9.0| | | |
 |`__ldcg`| | | |`__ldcg`|1.9.0| | | |
 |`__ldcs`| | | |`__ldcs`|1.9.0| | | |
+|`__ldcv`|11.0| | | | | | | |
 |`__ldg`| | | |`__ldg`|1.6.0| | | |
+|`__ldlu`|11.0| | | | | | | |
+|`__ll2bfloat16_rd`|11.0| | | | | | | |
+|`__ll2bfloat16_rn`|11.0| | | | | | | |
+|`__ll2bfloat16_ru`|11.0| | | | | | | |
+|`__ll2bfloat16_rz`|11.0| | | | | | | |
 |`__ll2double_rd`| | | |`__ll2double_rd`|1.6.0| | | |
 |`__ll2double_rn`| | | |`__ll2double_rn`|1.6.0| | | |
 |`__ll2double_ru`| | | |`__ll2double_ru`|1.6.0| | | |
@@ -267,14 +336,27 @@
 |`__log2f`| | | |`__log2f`|1.6.0| | | |
 |`__logf`| | | |`__logf`|1.6.0| | | |
 |`__longlong_as_double`| | | |`__longlong_as_double`|1.6.0| | | |
+|`__low2bfloat16`|11.0| | | | | | | |
+|`__low2bfloat162`|11.0| | | | | | | |
 |`__low2float`| | | |`__low2float`|1.6.0| | | |
 |`__low2half`| | | |`__low2half`|1.6.0| | | |
 |`__low2half2`| | | |`__low2half2`|1.6.0| | | |
 |`__lowhigh2highlow`| | | |`__lowhigh2highlow`|1.6.0| | | |
+|`__lows2bfloat162`|11.0| | | | | | | |
 |`__lows2half2`| | | |`__lows2half2`|1.6.0| | | |
 |`__mul24`| | | |`__mul24`|1.6.0| | | |
 |`__mul64hi`| | | |`__mul64hi`|1.6.0| | | |
 |`__mulhi`| | | |`__mulhi`|1.6.0| | | |
+|`__nv_cvt_bfloat16raw2_to_fp8x2`|11.8| | | | | | | |
+|`__nv_cvt_bfloat16raw_to_fp8`|11.8| | | | | | | |
+|`__nv_cvt_double2_to_fp8x2`|11.8| | | | | | | |
+|`__nv_cvt_double_to_fp8`|11.8| | | | | | | |
+|`__nv_cvt_float2_to_fp8x2`|11.8| | | | | | | |
+|`__nv_cvt_float_to_fp8`|11.8| | | | | | | |
+|`__nv_cvt_fp8_to_halfraw`|11.8| | | | | | | |
+|`__nv_cvt_fp8x2_to_halfraw2`|11.8| | | | | | | |
+|`__nv_cvt_halfraw2_to_fp8x2`|11.8| | | | | | | |
+|`__nv_cvt_halfraw_to_fp8`|11.8| | | | | | | |
 |`__pm0`| | | | | | | | |
 |`__pm1`| | | | | | | | |
 |`__pm2`| | | | | | | | |
@@ -294,16 +376,25 @@
 |`__shfl_up_sync`| | | | | | | | |
 |`__shfl_xor`|7.5|9.0| |`__shfl_xor`|1.6.0| | | |
 |`__shfl_xor_sync`| | | | | | | | |
+|`__short2bfloat16_rd`|11.0| | | | | | | |
+|`__short2bfloat16_rn`|11.0| | | | | | | |
+|`__short2bfloat16_ru`|11.0| | | | | | | |
+|`__short2bfloat16_rz`|11.0| | | | | | | |
 |`__short2half_rd`| | | |`__short2half_rd`|1.6.0| | | |
 |`__short2half_rn`| | | |`__short2half_rn`|1.6.0| | | |
 |`__short2half_ru`| | | |`__short2half_ru`|1.6.0| | | |
 |`__short2half_rz`| | | |`__short2half_rz`|1.6.0| | | |
+|`__short_as_bfloat16`|11.0| | | | | | | |
 |`__short_as_half`| | | |`__short_as_half`|1.9.0| | | |
 |`__signbit`| | | | | | | | |
 |`__signbitf`| | | | | | | | |
 |`__signbitl`| | | | | | | | |
 |`__sincosf`| | | |`__sincosf`|1.6.0| | | |
 |`__sinf`| | | |`__sinf`|1.6.0| | | |
+|`__stcg`|11.0| | | | | | | |
+|`__stcs`|11.0| | | | | | | |
+|`__stwb`|11.0| | | | | | | |
+|`__stwt`|11.0| | | | | | | |
 |`__syncthreads`| | | |`__syncthreads`|1.6.0| | | |
 |`__syncthreads_and`| | | |`__syncthreads_and`|3.7.0| | | |
 |`__syncthreads_count`| | | |`__syncthreads_count`|3.7.0| | | |
@@ -314,6 +405,10 @@
 |`__threadfence_system`| | | |`__threadfence_system`|1.6.0| | | |
 |`__trap`| | | | | | | | |
 |`__uhadd`| | | |`__uhadd`|1.6.0| | | |
+|`__uint2bfloat16_rd`|11.0| | | | | | | |
+|`__uint2bfloat16_rn`|11.0| | | | | | | |
+|`__uint2bfloat16_ru`|11.0| | | | | | | |
+|`__uint2bfloat16_rz`|11.0| | | | | | | |
 |`__uint2double_rn`| | | |`__uint2double_rn`|1.6.0| | | |
 |`__uint2float_rd`| | | |`__uint2float_rd`|1.6.0| | | |
 |`__uint2float_rn`| | | |`__uint2float_rn`|1.6.0| | | |
@@ -324,6 +419,10 @@
 |`__uint2half_ru`| | | |`__uint2half_ru`|1.6.0| | | |
 |`__uint2half_rz`| | | |`__uint2half_rz`|1.6.0| | | |
 |`__uint_as_float`| | | |`__uint_as_float`|1.6.0| | | |
+|`__ull2bfloat16_rd`|11.0| | | | | | | |
+|`__ull2bfloat16_rn`|11.0| | | | | | | |
+|`__ull2bfloat16_ru`|11.0| | | | | | | |
+|`__ull2bfloat16_rz`|11.0| | | | | | | |
 |`__ull2double_rd`| | | |`__ull2double_rd`|1.6.0| | | |
 |`__ull2double_rn`| | | |`__ull2double_rn`|1.6.0| | | |
 |`__ull2double_ru`| | | |`__ull2double_ru`|1.6.0| | | |
@@ -341,10 +440,15 @@
 |`__umulhi`| | | |`__umulhi`|1.6.0| | | |
 |`__urhadd`| | | |`__urhadd`|1.6.0| | | |
 |`__usad`| | | |`__usad`|1.6.0| | | |
+|`__ushort2bfloat16_rd`|11.0| | | | | | | |
+|`__ushort2bfloat16_rn`|11.0| | | | | | | |
+|`__ushort2bfloat16_ru`|11.0| | | | | | | |
+|`__ushort2bfloat16_rz`|11.0| | | | | | | |
 |`__ushort2half_rd`| | | |`__ushort2half_rd`|1.6.0| | | |
 |`__ushort2half_rn`| | | |`__ushort2half_rn`|1.6.0| | | |
 |`__ushort2half_ru`| | | |`__ushort2half_ru`|1.6.0| | | |
 |`__ushort2half_rz`| | | |`__ushort2half_rz`|1.6.0| | | |
+|`__ushort_as_bfloat16`|11.0| | | | | | | |
 |`__ushort_as_half`| | | |`__ushort_as_half`|1.6.0| | | |
 |`__vabs2`| | | | | | | | |
 |`__vabs4`| | | | | | | | |
@@ -675,6 +779,36 @@
 |`y1f`| | | |`y1f`|1.6.0| | | |
 |`yn`| | | |`yn`|1.6.0| | | |
 |`ynf`| | | |`ynf`|1.6.0| | | |
+
+## **2. Device Types**
+
+|**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
+|:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
+|`__NV_E4M3`|11.8| | | | | | | |
+|`__NV_E5M2`|11.8| | | | | | | |
+|`__NV_NOSAT`|11.8| | | | | | | |
+|`__NV_SATFINITE`|11.8| | | | | | | |
+|`__half`| | | |`__half`|1.6.0| | | |
+|`__half2`| | | |`__half2`|1.6.0| | | |
+|`__half2_raw`| | | |`__half2_raw`|1.9.0| | | |
+|`__half_raw`| | | |`__half_raw`|1.9.0| | | |
+|`__nv_bfloat16`|11.0| | | | | | | |
+|`__nv_bfloat162`|11.0| | | | | | | |
+|`__nv_bfloat162_raw`|11.0| | | | | | | |
+|`__nv_bfloat16_raw`|11.0| | | | | | | |
+|`__nv_fp8_e4m3`|11.8| | | | | | | |
+|`__nv_fp8_e5m2`|11.8| | | | | | | |
+|`__nv_fp8_interpretation_t`|11.8| | | | | | | |
+|`__nv_fp8_storage_t`|11.8| | | | | | | |
+|`__nv_fp8x2_e4m3`|11.8| | | | | | | |
+|`__nv_fp8x2_e5m2`|11.8| | | | | | | |
+|`__nv_fp8x2_storage_t`|11.8| | | | | | | |
+|`__nv_fp8x4_e4m3`|11.8| | | | | | | |
+|`__nv_fp8x4_e5m2`|11.8| | | | | | | |
+|`__nv_fp8x4_storage_t`|11.8| | | | | | | |
+|`__nv_saturation_t`|11.8| | | | | | | |
+|`nv_bfloat16`|11.0| | | | | | | |
+|`nv_bfloat162`|11.0| | | | | | | |
 
 
 \*A - Added; D - Deprecated; R - Removed; E - Experimental

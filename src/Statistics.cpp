@@ -62,6 +62,7 @@ const char *counterNames[NUM_CONV_TYPES] = {
   "library", // CONV_LIB_FUNC
   "device_library", // CONV_LIB_DEVICE_FUNC
   "device_function", // CONV_DEVICE_FUNC
+  "device_type", // CONV_DEVICE_TYPE
   "include", // CONV_INCLUDE
   "include_cuda_main_header", // CONV_INCLUDE_CUDA_MAIN_H
   "include_cuda_main_header_v2", // CONV_INCLUDE_CUDA_MAIN_V2_H
@@ -348,7 +349,7 @@ void Statistics::setActive(const std::string &name) {
 }
 
 bool Statistics::isToRoc(const hipCounter &counter) {
-  return TranslateToRoc && counter.apiType == API_BLAS;
+  return TranslateToRoc && (counter.apiType == API_BLAS || counter.apiType == API_DNN);
 }
 
 bool Statistics::isHipExperimental(const hipCounter& counter) {
@@ -442,6 +443,7 @@ std::string Statistics::getCudaVersion(const cudaVersions& ver) {
     case CUDA_115: return "11.5";
     case CUDA_116: return "11.6";
     case CUDA_117: return "11.7";
+    case CUDA_118: return "11.8";
     case CUDNN_10: return "1.0.0";
     case CUDNN_20: return "2.0.0";
     case CUDNN_30: return "3.0.0";
@@ -475,6 +477,10 @@ std::string Statistics::getCudaVersion(const cudaVersions& ver) {
     case CUDNN_810: return "8.1.0";
     case CUDNN_811: return "8.1.1";
     case CUDNN_820: return "8.2.0";
+    case CUDNN_830: return "8.3.0";
+    case CUDNN_840: return "8.4.0";
+    case CUDNN_850: return "8.5.0";
+    case CUDNN_860: return "8.6.0";
   }
   return "";
 }
@@ -488,6 +494,7 @@ std::string Statistics::getHipVersion(const hipVersions& ver) {
     case HIP_1052: return "1.5.2";
     case HIP_1060: return "1.6.0";
     case HIP_1061: return "1.6.1";
+    case HIP_1064: return "1.6.4";
     case HIP_1070: return "1.7.0";
     case HIP_1071: return "1.7.1";
     case HIP_1080: return "1.8.0";
@@ -538,6 +545,7 @@ std::string Statistics::getHipVersion(const hipVersions& ver) {
     case HIP_5011: return "5.1.1";
     case HIP_5020: return "5.2.0";
     case HIP_5030: return "5.3.0";
+    case HIP_5040: return "5.4.0";
   }
   return "";
 }

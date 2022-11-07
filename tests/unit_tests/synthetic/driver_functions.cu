@@ -527,6 +527,16 @@ int main() {
   // CHECK: result = hipDevicePrimaryCtxSetFlags(device, flags);
   result = cuDevicePrimaryCtxSetFlags_v2(device, flags);
 
+  // CUDA: CUresult CUDAAPI cuMemRetainAllocationHandle(CUmemGenericAllocationHandle *handle, void *addr);
+  // HIP: hipError_t hipMemRetainAllocationHandle(hipMemGenericAllocationHandle_t* handle, void* addr);
+  // CHECK: result = hipMemRetainAllocationHandle(&memGenericAllocationHandle_t, image);
+  result = cuMemRetainAllocationHandle(&memGenericAllocationHandle_t, image);
+
+  // CHECK: result = hipGraphInstantiate(&graphExec, graph, &graphNode, nullptr, bytes);
+  result = cuGraphInstantiate_v2(&graphExec, graph, &graphNode, nullptr, bytes);
+#endif
+
+#if CUDA_VERSION >= 11000
   // CHECK: hipKernelNodeAttrID kernelNodeAttrID;
   CUkernelNodeAttrID kernelNodeAttrID;
   // CHECK: hipKernelNodeAttrValue kernelNodeAttrValue;
@@ -542,16 +552,6 @@ int main() {
   // CHECK: result = hipGraphKernelNodeGetAttribute(graphNode, kernelNodeAttrID, &kernelNodeAttrValue);
   result = cuGraphKernelNodeGetAttribute(graphNode, kernelNodeAttrID, &kernelNodeAttrValue);
 
-  // CUDA: CUresult CUDAAPI cuMemRetainAllocationHandle(CUmemGenericAllocationHandle *handle, void *addr);
-  // HIP: hipError_t hipMemRetainAllocationHandle(hipMemGenericAllocationHandle_t* handle, void* addr);
-  // CHECK: result = hipMemRetainAllocationHandle(&memGenericAllocationHandle_t, image);
-  result = cuMemRetainAllocationHandle(&memGenericAllocationHandle_t, image);
-
-  // CHECK: result = hipGraphInstantiate(&graphExec, graph, &graphNode, nullptr, bytes);
-  result = cuGraphInstantiate_v2(&graphExec, graph, &graphNode, nullptr, bytes);
-#endif
-
-#if CUDA_VERSION >= 11010
   // CUDA: CUresult CUDAAPI cuGraphExecChildGraphNodeSetParams(CUgraphExec hGraphExec, CUgraphNode hNode, CUgraph childGraph);
   // HIP: hipError_t hipGraphExecChildGraphNodeSetParams(hipGraphExec_t hGraphExec, hipGraphNode_t node, hipGraph_t childGraph);
   // CHECK: result = hipGraphExecChildGraphNodeSetParams(graphExec, graphNode, graph);
