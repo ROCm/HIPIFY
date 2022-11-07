@@ -1041,6 +1041,7 @@ sub rocSubstitutions {
     subst("cublasGetStream_v2", "rocblas_get_stream", "library");
     subst("cublasGetVector", "rocblas_get_vector", "library");
     subst("cublasGetVectorAsync", "rocblas_get_vector_async", "library");
+    subst("cublasGetVersion", "rocblas_get_version_string", "library");
     subst("cublasHgemm", "rocblas_hgemm", "library");
     subst("cublasHgemmBatched", "rocblas_hgemm_batched", "library");
     subst("cublasHgemmStridedBatched", "rocblas_hgemm_strided_batched", "library");
@@ -1052,6 +1053,7 @@ sub rocSubstitutions {
     subst("cublasIdamax_v2", "rocblas_idamax", "library");
     subst("cublasIdamin", "rocblas_idamin", "library");
     subst("cublasIdamin_v2", "rocblas_idamin", "library");
+    subst("cublasInit", "rocblas_initialize", "library");
     subst("cublasIsamax", "rocblas_isamax", "library");
     subst("cublasIsamax_v2", "rocblas_isamax", "library");
     subst("cublasIsamin", "rocblas_isamin", "library");
@@ -8151,11 +8153,9 @@ sub warnRocOnlyUnsupportedFunctions {
         "cublasMath_t",
         "cublasLoggerConfigure",
         "cublasLogCallback",
-        "cublasInit",
         "cublasIaminEx",
         "cublasIamaxEx",
         "cublasGetVersion_v2",
-        "cublasGetVersion",
         "cublasGetStatusName",
         "cublasGetSmCountTarget",
         "cublasGetProperty",
