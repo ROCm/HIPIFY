@@ -682,6 +682,8 @@ my %removed_funcs = (
     "cudaSetupArgument" => "10.1",
     "cudaLaunch" => "10.1",
     "cudaConfigureCall" => "10.1",
+    "CUkernelNodeAttrValue_union" => "11.8",
+    "CUkernelNodeAttrID_enum" => "11.8",
     "CU_TARGET_COMPUTE_73" => "10.0",
     "CU_TARGET_COMPUTE_13" => "9.0",
     "CU_TARGET_COMPUTE_12" => "9.0",
@@ -715,77 +717,8 @@ my %removed_funcs = (
 );
 
 my %experimental_funcs = (
-    "nvrtcGetCUBINSize" => "5.3.0",
-    "nvrtcGetCUBIN" => "5.3.0",
-    "cudaUserObject_t" => "5.3.0",
-    "cudaUserObjectRetainFlags" => "5.3.0",
-    "cudaUserObjectRetain" => "5.3.0",
-    "cudaUserObjectRelease" => "5.3.0",
-    "cudaUserObjectNoDestructorSync" => "5.3.0",
-    "cudaUserObjectFlags" => "5.3.0",
-    "cudaUserObjectCreate" => "5.3.0",
-    "cudaMemoryTypeManaged" => "5.3.0",
-    "cudaLimitStackSize" => "5.3.0",
-    "cudaGraphUserObjectMove" => "5.3.0",
-    "cudaGraphUpload" => "5.3.0",
-    "cudaGraphRetainUserObject" => "5.3.0",
-    "cudaGraphReleaseUserObject" => "5.3.0",
-    "cudaGraphNodeTypeExtSemaphoreWait" => "5.3.0",
-    "cudaGraphNodeTypeExtSemaphoreSignal" => "5.3.0",
-    "cudaGraphMemAttributeType" => "5.3.0",
-    "cudaGraphMemAttrUsedMemHigh" => "5.3.0",
-    "cudaGraphMemAttrUsedMemCurrent" => "5.3.0",
-    "cudaGraphMemAttrReservedMemHigh" => "5.3.0",
-    "cudaGraphMemAttrReservedMemCurrent" => "5.3.0",
-    "cudaDeviceSetLimit" => "5.3.0",
-    "cudaDeviceSetGraphMemAttribute" => "5.3.0",
-    "cudaDeviceGraphMemTrim" => "5.3.0",
-    "cudaDeviceGetGraphMemAttribute" => "5.3.0",
-    "cuUserObjectRetain" => "5.3.0",
-    "cuUserObjectRelease" => "5.3.0",
-    "cuUserObjectCreate" => "5.3.0",
-    "cuLinkDestroy" => "5.3.0",
-    "cuLinkCreate_v2" => "5.3.0",
-    "cuLinkCreate" => "5.3.0",
-    "cuLinkComplete" => "5.3.0",
-    "cuLinkAddFile_v2" => "5.3.0",
-    "cuLinkAddFile" => "5.3.0",
-    "cuLinkAddData_v2" => "5.3.0",
-    "cuLinkAddData" => "5.3.0",
-    "cuGraphUpload" => "5.3.0",
-    "cuGraphRetainUserObject" => "5.3.0",
-    "cuGraphReleaseUserObject" => "5.3.0",
-    "cuDeviceSetGraphMemAttribute" => "5.3.0",
-    "cuDeviceGraphMemTrim" => "5.3.0",
-    "cuDeviceGetGraphMemAttribute" => "5.3.0",
-    "cuCtxSetLimit" => "5.3.0",
-    "CUuserObject_st" => "5.3.0",
-    "CUuserObject_flags_enum" => "5.3.0",
-    "CUuserObject_flags" => "5.3.0",
-    "CUuserObjectRetain_flags_enum" => "5.3.0",
-    "CUuserObjectRetain_flags" => "5.3.0",
-    "CUuserObject" => "5.3.0",
-    "CUjitInputType_enum" => "5.3.0",
-    "CUjitInputType" => "5.3.0",
-    "CUgraphMem_attribute_enum" => "5.3.0",
-    "CUgraphMem_attribute" => "5.3.0",
-    "CU_USER_OBJECT_NO_DESTRUCTOR_SYNC" => "5.3.0",
-    "CU_LIMIT_STACK_SIZE" => "5.3.0",
-    "CU_JIT_NUM_INPUT_TYPES" => "5.3.0",
-    "CU_JIT_INPUT_PTX" => "5.3.0",
-    "CU_JIT_INPUT_OBJECT" => "5.3.0",
-    "CU_JIT_INPUT_NVVM" => "5.3.0",
-    "CU_JIT_INPUT_LIBRARY" => "5.3.0",
-    "CU_JIT_INPUT_FATBINARY" => "5.3.0",
-    "CU_JIT_INPUT_CUBIN" => "5.3.0",
-    "CU_GRAPH_USER_OBJECT_MOVE" => "5.3.0",
-    "CU_GRAPH_NODE_TYPE_EXT_SEMAS_WAIT" => "5.3.0",
-    "CU_GRAPH_NODE_TYPE_EXT_SEMAS_SIGNAL" => "5.3.0",
-    "CU_GRAPH_MEM_ATTR_USED_MEM_HIGH" => "5.3.0",
-    "CU_GRAPH_MEM_ATTR_USED_MEM_CURRENT" => "5.3.0",
-    "CU_GRAPH_MEM_ATTR_RESERVED_MEM_HIGH" => "5.3.0",
-    "CU_GRAPH_MEM_ATTR_RESERVED_MEM_CURRENT" => "5.3.0",
-    "CU_DEVICE_ATTRIBUTE_VIRTUAL_MEMORY_MANAGEMENT_SUPPORTED" => "5.3.0"
+    "cuGetErrorString" => "5.4.0",
+    "cuGetErrorName" => "5.4.0"
 );
 
 $print_stats = 1 if $examine;
@@ -853,7 +786,7 @@ push(@exclude_filelist, split(',', $exclude_files));
 %exclude_dirhash = map { $_ => 1 } @exclude_dirlist;
 %exclude_filehash = map { $_ => 1 } @exclude_filelist;
 
-@statNames = ("error", "init", "version", "device", "context", "module", "memory", "virtual_memory", "stream_ordered_memory", "addressing", "stream", "event", "external_resource_interop", "stream_memory", "execution", "graph", "occupancy", "texture", "surface", "peer", "graphics", "interactions", "profiler", "openGL", "D3D9", "D3D10", "D3D11", "VDPAU", "EGL", "thread", "complex", "library", "device_library", "device_function", "include", "include_cuda_main_header", "include_cuda_main_header_v2", "type", "literal", "numeric_literal", "define", "extern_shared", "kernel_launch");
+@statNames = ("error", "init", "version", "device", "context", "module", "memory", "virtual_memory", "stream_ordered_memory", "addressing", "stream", "event", "external_resource_interop", "stream_memory", "execution", "graph", "occupancy", "texture", "surface", "peer", "graphics", "interactions", "profiler", "openGL", "D3D9", "D3D10", "D3D11", "VDPAU", "EGL", "thread", "complex", "library", "device_library", "device_function", "device_type", "include", "include_cuda_main_header", "include_cuda_main_header_v2", "type", "literal", "numeric_literal", "define", "extern_shared", "kernel_launch");
 
 sub totalStats {
     my %count = %{shift()};
@@ -923,77 +856,8 @@ sub subst {
 }
 
 sub experimentalSubstitutions {
-    subst("cudaDeviceSetLimit", "hipDeviceSetLimit", "device");
-    subst("cuCtxSetLimit", "hipDeviceSetLimit", "context");
-    subst("cuLinkAddData", "hiprtcLinkAddData", "module");
-    subst("cuLinkAddData_v2", "hiprtcLinkAddData", "module");
-    subst("cuLinkAddFile", "hiprtcLinkAddFile", "module");
-    subst("cuLinkAddFile_v2", "hiprtcLinkAddFile", "module");
-    subst("cuLinkComplete", "hiprtcLinkComplete", "module");
-    subst("cuLinkCreate", "hiprtcLinkCreate", "module");
-    subst("cuLinkCreate_v2", "hiprtcLinkCreate", "module");
-    subst("cuLinkDestroy", "hiprtcLinkDestroy", "module");
-    subst("cuDeviceGetGraphMemAttribute", "hipDeviceGetGraphMemAttribute", "graph");
-    subst("cuDeviceGraphMemTrim", "hipDeviceGraphMemTrim", "graph");
-    subst("cuDeviceSetGraphMemAttribute", "hipDeviceSetGraphMemAttribute", "graph");
-    subst("cuGraphReleaseUserObject", "hipGraphReleaseUserObject", "graph");
-    subst("cuGraphRetainUserObject", "hipGraphRetainUserObject", "graph");
-    subst("cuGraphUpload", "hipGraphUpload", "graph");
-    subst("cuUserObjectCreate", "hipUserObjectCreate", "graph");
-    subst("cuUserObjectRelease", "hipUserObjectRelease", "graph");
-    subst("cuUserObjectRetain", "hipUserObjectRetain", "graph");
-    subst("cudaDeviceGetGraphMemAttribute", "hipDeviceGetGraphMemAttribute", "graph");
-    subst("cudaDeviceGraphMemTrim", "hipDeviceGraphMemTrim", "graph");
-    subst("cudaDeviceSetGraphMemAttribute", "hipDeviceSetGraphMemAttribute", "graph");
-    subst("cudaGraphReleaseUserObject", "hipGraphReleaseUserObject", "graph");
-    subst("cudaGraphRetainUserObject", "hipGraphRetainUserObject", "graph");
-    subst("cudaGraphUpload", "hipGraphUpload", "graph");
-    subst("cudaUserObjectCreate", "hipUserObjectCreate", "graph");
-    subst("cudaUserObjectRelease", "hipUserObjectRelease", "graph");
-    subst("cudaUserObjectRetain", "hipUserObjectRetain", "graph");
-    subst("nvrtcGetCUBIN", "hiprtcGetBitcode", "library");
-    subst("nvrtcGetCUBINSize", "hiprtcGetBitcodeSize", "library");
-    subst("CUgraphMem_attribute", "hipGraphMemAttributeType", "type");
-    subst("CUgraphMem_attribute_enum", "hipGraphMemAttributeType", "type");
-    subst("CUjitInputType", "hiprtcJITInputType", "type");
-    subst("CUjitInputType_enum", "hiprtcJITInputType", "type");
-    subst("CUuserObject", "hipUserObject_t", "type");
-    subst("CUuserObjectRetain_flags", "hipUserObjectRetainFlags", "type");
-    subst("CUuserObjectRetain_flags_enum", "hipUserObjectRetainFlags", "type");
-    subst("CUuserObject_flags", "hipUserObjectFlags", "type");
-    subst("CUuserObject_flags_enum", "hipUserObjectFlags", "type");
-    subst("CUuserObject_st", "hipUserObject", "type");
-    subst("cudaGraphMemAttributeType", "hipGraphMemAttributeType", "type");
-    subst("cudaUserObjectFlags", "hipUserObjectFlags", "type");
-    subst("cudaUserObjectRetainFlags", "hipUserObjectRetainFlags", "type");
-    subst("cudaUserObject_t", "hipUserObject_t", "type");
-    subst("CU_DEVICE_ATTRIBUTE_VIRTUAL_MEMORY_MANAGEMENT_SUPPORTED", "hipDeviceAttributeVirtualMemoryManagementSupported", "numeric_literal");
-    subst("CU_GRAPH_MEM_ATTR_RESERVED_MEM_CURRENT", "hipGraphMemAttrReservedMemCurrent", "numeric_literal");
-    subst("CU_GRAPH_MEM_ATTR_RESERVED_MEM_HIGH", "hipGraphMemAttrReservedMemHigh", "numeric_literal");
-    subst("CU_GRAPH_MEM_ATTR_USED_MEM_CURRENT", "hipGraphMemAttrUsedMemCurrent", "numeric_literal");
-    subst("CU_GRAPH_MEM_ATTR_USED_MEM_HIGH", "hipGraphMemAttrUsedMemHigh", "numeric_literal");
-    subst("CU_GRAPH_NODE_TYPE_EXT_SEMAS_SIGNAL", "hipGraphNodeTypeExtSemaphoreSignal", "numeric_literal");
-    subst("CU_GRAPH_NODE_TYPE_EXT_SEMAS_WAIT", "hipGraphNodeTypeExtSemaphoreWait", "numeric_literal");
-    subst("CU_GRAPH_USER_OBJECT_MOVE", "hipGraphUserObjectMove", "numeric_literal");
-    subst("CU_JIT_INPUT_CUBIN", "HIPRTC_JIT_INPUT_CUBIN", "numeric_literal");
-    subst("CU_JIT_INPUT_FATBINARY", "HIPRTC_JIT_INPUT_FATBINARY", "numeric_literal");
-    subst("CU_JIT_INPUT_LIBRARY", "HIPRTC_JIT_INPUT_LIBRARY", "numeric_literal");
-    subst("CU_JIT_INPUT_NVVM", "HIPRTC_JIT_INPUT_NVVM", "numeric_literal");
-    subst("CU_JIT_INPUT_OBJECT", "HIPRTC_JIT_INPUT_OBJECT", "numeric_literal");
-    subst("CU_JIT_INPUT_PTX", "HIPRTC_JIT_INPUT_PTX", "numeric_literal");
-    subst("CU_JIT_NUM_INPUT_TYPES", "HIPRTC_JIT_NUM_LEGACY_INPUT_TYPES", "numeric_literal");
-    subst("CU_LIMIT_STACK_SIZE", "hipLimitStackSize", "numeric_literal");
-    subst("CU_USER_OBJECT_NO_DESTRUCTOR_SYNC", "hipUserObjectNoDestructorSync", "numeric_literal");
-    subst("cudaGraphMemAttrReservedMemCurrent", "hipGraphMemAttrReservedMemCurrent", "numeric_literal");
-    subst("cudaGraphMemAttrReservedMemHigh", "hipGraphMemAttrReservedMemHigh", "numeric_literal");
-    subst("cudaGraphMemAttrUsedMemCurrent", "hipGraphMemAttrUsedMemCurrent", "numeric_literal");
-    subst("cudaGraphMemAttrUsedMemHigh", "hipGraphMemAttrUsedMemHigh", "numeric_literal");
-    subst("cudaGraphNodeTypeExtSemaphoreSignal", "hipGraphNodeTypeExtSemaphoreSignal", "numeric_literal");
-    subst("cudaGraphNodeTypeExtSemaphoreWait", "hipGraphNodeTypeExtSemaphoreWait", "numeric_literal");
-    subst("cudaGraphUserObjectMove", "hipGraphUserObjectMove", "numeric_literal");
-    subst("cudaLimitStackSize", "hipLimitStackSize", "numeric_literal");
-    subst("cudaMemoryTypeManaged", "hipMemoryTypeManaged", "numeric_literal");
-    subst("cudaUserObjectNoDestructorSync", "hipUserObjectNoDestructorSync", "numeric_literal");
+    subst("cuGetErrorName", "hipDrvGetErrorName", "error");
+    subst("cuGetErrorString", "hipDrvGetErrorString", "error");
 }
 
 sub rocSubstitutions {
@@ -1033,7 +897,7 @@ sub rocSubstitutions {
     subst("cublasCher2k_v2", "rocblas_cher2k", "library");
     subst("cublasCher_v2", "rocblas_cher", "library");
     subst("cublasCherk", "rocblas_cherk", "library");
-    subst("cublasCherk_v2", "rocblas_cherkx", "library");
+    subst("cublasCherk_v2", "rocblas_cherk", "library");
     subst("cublasCherkx", "rocblas_cherkx", "library");
     subst("cublasChpmv", "rocblas_chpmv", "library");
     subst("cublasChpmv_v2", "rocblas_chpmv", "library");
@@ -1076,8 +940,8 @@ sub rocSubstitutions {
     subst("cublasCtpmv_v2", "rocblas_ctpmv", "library");
     subst("cublasCtpsv", "rocblas_ctpsv", "library");
     subst("cublasCtpsv_v2", "rocblas_ctpsv", "library");
-    subst("cublasCtrmm", "rocblas_ctrmm", "library");
-    subst("cublasCtrmm_v2", "rocblas_ctrmm", "library");
+    subst("cublasCtrmm", "rocblas_ctrmm_outofplace", "library");
+    subst("cublasCtrmm_v2", "rocblas_ctrmm_outofplace", "library");
     subst("cublasCtrmv", "rocblas_ctrmv", "library");
     subst("cublasCtrmv_v2", "rocblas_ctrmv", "library");
     subst("cublasCtrsm", "rocblas_ctrsm", "library");
@@ -1152,8 +1016,8 @@ sub rocSubstitutions {
     subst("cublasDtpmv_v2", "rocblas_dtpmv", "library");
     subst("cublasDtpsv", "rocblas_dtpsv", "library");
     subst("cublasDtpsv_v2", "rocblas_dtpsv", "library");
-    subst("cublasDtrmm", "rocblas_dtrmm", "library");
-    subst("cublasDtrmm_v2", "rocblas_dtrmm", "library");
+    subst("cublasDtrmm", "rocblas_dtrmm_outofplace", "library");
+    subst("cublasDtrmm_v2", "rocblas_dtrmm_outofplace", "library");
     subst("cublasDtrmv", "rocblas_dtrmv", "library");
     subst("cublasDtrmv_v2", "rocblas_dtrmv", "library");
     subst("cublasDtrsm", "rocblas_dtrsm", "library");
@@ -1168,10 +1032,12 @@ sub rocSubstitutions {
     subst("cublasGemmBatchedEx", "rocblas_gemm_batched_ex", "library");
     subst("cublasGemmEx", "rocblas_gemm_ex", "library");
     subst("cublasGemmStridedBatchedEx", "rocblas_gemm_strided_batched_ex", "library");
+    subst("cublasGetAtomicsMode", "rocblas_get_atomics_mode", "library");
     subst("cublasGetMatrix", "rocblas_get_matrix", "library");
     subst("cublasGetMatrixAsync", "rocblas_get_matrix_async", "library");
     subst("cublasGetPointerMode", "rocblas_get_pointer_mode", "library");
     subst("cublasGetPointerMode_v2", "rocblas_set_pointer_mode", "library");
+    subst("cublasGetStatusString", "rocblas_status_to_string", "library");
     subst("cublasGetStream", "rocblas_get_stream", "library");
     subst("cublasGetStream_v2", "rocblas_get_stream", "library");
     subst("cublasGetVector", "rocblas_get_vector", "library");
@@ -1187,6 +1053,7 @@ sub rocSubstitutions {
     subst("cublasIdamax_v2", "rocblas_idamax", "library");
     subst("cublasIdamin", "rocblas_idamin", "library");
     subst("cublasIdamin_v2", "rocblas_idamin", "library");
+    subst("cublasInit", "rocblas_initialize", "library");
     subst("cublasIsamax", "rocblas_isamax", "library");
     subst("cublasIsamax_v2", "rocblas_isamax", "library");
     subst("cublasIsamin", "rocblas_isamin", "library");
@@ -1211,6 +1078,7 @@ sub rocSubstitutions {
     subst("cublasSdgmm", "rocblas_sdgmm", "library");
     subst("cublasSdot", "rocblas_sdot", "library");
     subst("cublasSdot_v2", "rocblas_sdot", "library");
+    subst("cublasSetAtomicsMode", "rocblas_set_atomics_mode", "library");
     subst("cublasSetMatrix", "rocblas_set_matrix", "library");
     subst("cublasSetMatrixAsync", "rocblas_set_matrix_async", "library");
     subst("cublasSetPointerMode", "rocblas_set_pointer_mode", "library");
@@ -1273,8 +1141,8 @@ sub rocSubstitutions {
     subst("cublasStpmv_v2", "rocblas_stpmv", "library");
     subst("cublasStpsv", "rocblas_stpsv", "library");
     subst("cublasStpsv_v2", "rocblas_stpsv", "library");
-    subst("cublasStrmm", "rocblas_strmm", "library");
-    subst("cublasStrmm_v2", "rocblas_strmm", "library");
+    subst("cublasStrmm", "rocblas_strmm_outofplace", "library");
+    subst("cublasStrmm_v2", "rocblas_strmm_outofplace", "library");
     subst("cublasStrmv", "rocblas_strmv", "library");
     subst("cublasStrmv_v2", "rocblas_strmv", "library");
     subst("cublasStrsm", "rocblas_strsm", "library");
@@ -1358,8 +1226,8 @@ sub rocSubstitutions {
     subst("cublasZtpmv_v2", "rocblas_ztpmv", "library");
     subst("cublasZtpsv", "rocblas_ztpsv", "library");
     subst("cublasZtpsv_v2", "rocblas_ztpsv", "library");
-    subst("cublasZtrmm", "rocblas_ztrmm", "library");
-    subst("cublasZtrmm_v2", "rocblas_ztrmm", "library");
+    subst("cublasZtrmm", "rocblas_ztrmm_outofplace", "library");
+    subst("cublasZtrmm_v2", "rocblas_ztrmm_outofplace", "library");
     subst("cublasZtrmv", "rocblas_ztrmv", "library");
     subst("cublasZtrmv_v2", "rocblas_ztrmv", "library");
     subst("cublasZtrsm", "rocblas_ztrsm", "library");
@@ -1381,6 +1249,8 @@ sub rocSubstitutions {
     subst("cublasSideMode_t", "rocblas_side", "type");
     subst("cublasStatus", "rocblas_status", "type");
     subst("cublasStatus_t", "rocblas_status", "type");
+    subst("cudaDataType", "rocblas_datatype", "type");
+    subst("cudaDataType_t", "rocblas_datatype_", "type");
     subst("CUBLAS_ATOMICS_ALLOWED", "rocblas_atomics_allowed", "numeric_literal");
     subst("CUBLAS_ATOMICS_NOT_ALLOWED", "rocblas_atomics_not_allowed", "numeric_literal");
     subst("CUBLAS_DIAG_NON_UNIT", "rocblas_diagonal_non_unit", "numeric_literal");
@@ -1407,6 +1277,22 @@ sub rocSubstitutions {
     subst("CUBLAS_STATUS_NOT_INITIALIZED", "rocblas_status_invalid_handle", "numeric_literal");
     subst("CUBLAS_STATUS_NOT_SUPPORTED", "rocblas_status_perf_degraded", "numeric_literal");
     subst("CUBLAS_STATUS_SUCCESS", "rocblas_status_success", "numeric_literal");
+    subst("CUDA_C_16BF", "rocblas_datatype_bf16_c", "numeric_literal");
+    subst("CUDA_C_16F", "rocblas_datatype_f16_c", "numeric_literal");
+    subst("CUDA_C_32F", "rocblas_datatype_f32_c", "numeric_literal");
+    subst("CUDA_C_32I", "rocblas_datatype_i32_c", "numeric_literal");
+    subst("CUDA_C_32U", "rocblas_datatype_u32_c", "numeric_literal");
+    subst("CUDA_C_64F", "rocblas_datatype_f64_c", "numeric_literal");
+    subst("CUDA_C_8I", "rocblas_datatype_i8_c", "numeric_literal");
+    subst("CUDA_C_8U", "rocblas_datatype_u8_c", "numeric_literal");
+    subst("CUDA_R_16BF", "rocblas_datatype_bf16_r", "numeric_literal");
+    subst("CUDA_R_16F", "rocblas_datatype_f16_r", "numeric_literal");
+    subst("CUDA_R_32F", "rocblas_datatype_f32_r", "numeric_literal");
+    subst("CUDA_R_32I", "rocblas_datatype_i32_r", "numeric_literal");
+    subst("CUDA_R_32U", "rocblas_datatype_u32_r", "numeric_literal");
+    subst("CUDA_R_64F", "rocblas_datatype_f64_r", "numeric_literal");
+    subst("CUDA_R_8I", "rocblas_datatype_i8_r", "numeric_literal");
+    subst("CUDA_R_8U", "rocblas_datatype_u8_r", "numeric_literal");
 }
 
 sub simpleSubstitutions {
@@ -1443,6 +1329,7 @@ sub simpleSubstitutions {
     subst("cudaDeviceGetStreamPriorityRange", "hipDeviceGetStreamPriorityRange", "device");
     subst("cudaDeviceReset", "hipDeviceReset", "device");
     subst("cudaDeviceSetCacheConfig", "hipDeviceSetCacheConfig", "device");
+    subst("cudaDeviceSetLimit", "hipDeviceSetLimit", "device");
     subst("cudaDeviceSetMemPool", "hipDeviceSetMemPool", "device");
     subst("cudaDeviceSetSharedMemConfig", "hipDeviceSetSharedMemConfig", "device");
     subst("cudaDeviceSynchronize", "hipDeviceSynchronize", "device");
@@ -1476,6 +1363,7 @@ sub simpleSubstitutions {
     subst("cuCtxPushCurrent_v2", "hipCtxPushCurrent", "context");
     subst("cuCtxSetCacheConfig", "hipCtxSetCacheConfig", "context");
     subst("cuCtxSetCurrent", "hipCtxSetCurrent", "context");
+    subst("cuCtxSetLimit", "hipDeviceSetLimit", "context");
     subst("cuCtxSetSharedMemConfig", "hipCtxSetSharedMemConfig", "context");
     subst("cuCtxSynchronize", "hipCtxSynchronize", "context");
     subst("cuDevicePrimaryCtxGetState", "hipDevicePrimaryCtxGetState", "context");
@@ -1486,6 +1374,14 @@ sub simpleSubstitutions {
     subst("cuDevicePrimaryCtxRetain", "hipDevicePrimaryCtxRetain", "context");
     subst("cuDevicePrimaryCtxSetFlags", "hipDevicePrimaryCtxSetFlags", "context");
     subst("cuDevicePrimaryCtxSetFlags_v2", "hipDevicePrimaryCtxSetFlags", "context");
+    subst("cuLinkAddData", "hiprtcLinkAddData", "module");
+    subst("cuLinkAddData_v2", "hiprtcLinkAddData", "module");
+    subst("cuLinkAddFile", "hiprtcLinkAddFile", "module");
+    subst("cuLinkAddFile_v2", "hiprtcLinkAddFile", "module");
+    subst("cuLinkComplete", "hiprtcLinkComplete", "module");
+    subst("cuLinkCreate", "hiprtcLinkCreate", "module");
+    subst("cuLinkCreate_v2", "hiprtcLinkCreate", "module");
+    subst("cuLinkDestroy", "hiprtcLinkDestroy", "module");
     subst("cuModuleGetFunction", "hipModuleGetFunction", "module");
     subst("cuModuleGetGlobal", "hipModuleGetGlobal", "module");
     subst("cuModuleGetGlobal_v2", "hipModuleGetGlobal", "module");
@@ -1750,6 +1646,9 @@ sub simpleSubstitutions {
     subst("cudaLaunchHostFunc", "hipLaunchHostFunc", "execution");
     subst("cudaLaunchKernel", "hipLaunchKernel", "execution");
     subst("cudaSetupArgument", "hipSetupArgument", "execution");
+    subst("cuDeviceGetGraphMemAttribute", "hipDeviceGetGraphMemAttribute", "graph");
+    subst("cuDeviceGraphMemTrim", "hipDeviceGraphMemTrim", "graph");
+    subst("cuDeviceSetGraphMemAttribute", "hipDeviceSetGraphMemAttribute", "graph");
     subst("cuGraphAddChildGraphNode", "hipGraphAddChildGraphNode", "graph");
     subst("cuGraphAddDependencies", "hipGraphAddDependencies", "graph");
     subst("cuGraphAddEmptyNode", "hipGraphAddEmptyNode", "graph");
@@ -1794,7 +1693,16 @@ sub simpleSubstitutions {
     subst("cuGraphNodeGetDependencies", "hipGraphNodeGetDependencies", "graph");
     subst("cuGraphNodeGetDependentNodes", "hipGraphNodeGetDependentNodes", "graph");
     subst("cuGraphNodeGetType", "hipGraphNodeGetType", "graph");
+    subst("cuGraphReleaseUserObject", "hipGraphReleaseUserObject", "graph");
     subst("cuGraphRemoveDependencies", "hipGraphRemoveDependencies", "graph");
+    subst("cuGraphRetainUserObject", "hipGraphRetainUserObject", "graph");
+    subst("cuGraphUpload", "hipGraphUpload", "graph");
+    subst("cuUserObjectCreate", "hipUserObjectCreate", "graph");
+    subst("cuUserObjectRelease", "hipUserObjectRelease", "graph");
+    subst("cuUserObjectRetain", "hipUserObjectRetain", "graph");
+    subst("cudaDeviceGetGraphMemAttribute", "hipDeviceGetGraphMemAttribute", "graph");
+    subst("cudaDeviceGraphMemTrim", "hipDeviceGraphMemTrim", "graph");
+    subst("cudaDeviceSetGraphMemAttribute", "hipDeviceSetGraphMemAttribute", "graph");
     subst("cudaGraphAddChildGraphNode", "hipGraphAddChildGraphNode", "graph");
     subst("cudaGraphAddDependencies", "hipGraphAddDependencies", "graph");
     subst("cudaGraphAddEmptyNode", "hipGraphAddEmptyNode", "graph");
@@ -1851,7 +1759,13 @@ sub simpleSubstitutions {
     subst("cudaGraphNodeGetDependencies", "hipGraphNodeGetDependencies", "graph");
     subst("cudaGraphNodeGetDependentNodes", "hipGraphNodeGetDependentNodes", "graph");
     subst("cudaGraphNodeGetType", "hipGraphNodeGetType", "graph");
+    subst("cudaGraphReleaseUserObject", "hipGraphReleaseUserObject", "graph");
     subst("cudaGraphRemoveDependencies", "hipGraphRemoveDependencies", "graph");
+    subst("cudaGraphRetainUserObject", "hipGraphRetainUserObject", "graph");
+    subst("cudaGraphUpload", "hipGraphUpload", "graph");
+    subst("cudaUserObjectCreate", "hipUserObjectCreate", "graph");
+    subst("cudaUserObjectRelease", "hipUserObjectRelease", "graph");
+    subst("cudaUserObjectRetain", "hipUserObjectRetain", "graph");
     subst("cuOccupancyMaxActiveBlocksPerMultiprocessor", "hipModuleOccupancyMaxActiveBlocksPerMultiprocessor", "occupancy");
     subst("cuOccupancyMaxActiveBlocksPerMultiprocessorWithFlags", "hipModuleOccupancyMaxActiveBlocksPerMultiprocessorWithFlags", "occupancy");
     subst("cuOccupancyMaxPotentialBlockSize", "hipModuleOccupancyMaxPotentialBlockSize", "occupancy");
@@ -2047,8 +1961,6 @@ sub simpleSubstitutions {
     subst("cublasCtpmv_v2", "hipblasCtpmv", "library");
     subst("cublasCtpsv", "hipblasCtpsv", "library");
     subst("cublasCtpsv_v2", "hipblasCtpsv", "library");
-    subst("cublasCtrmm", "hipblasCtrmm", "library");
-    subst("cublasCtrmm_v2", "hipblasCtrmm", "library");
     subst("cublasCtrmv", "hipblasCtrmv", "library");
     subst("cublasCtrmv_v2", "hipblasCtrmv", "library");
     subst("cublasCtrsm", "hipblasCtrsm", "library");
@@ -2127,8 +2039,6 @@ sub simpleSubstitutions {
     subst("cublasDtpmv_v2", "hipblasDtpmv", "library");
     subst("cublasDtpsv", "hipblasDtpsv", "library");
     subst("cublasDtpsv_v2", "hipblasDtpsv", "library");
-    subst("cublasDtrmm", "hipblasDtrmm", "library");
-    subst("cublasDtrmm_v2", "hipblasDtrmm", "library");
     subst("cublasDtrmv", "hipblasDtrmv", "library");
     subst("cublasDtrmv_v2", "hipblasDtrmv", "library");
     subst("cublasDtrsm", "hipblasDtrsm", "library");
@@ -2254,8 +2164,6 @@ sub simpleSubstitutions {
     subst("cublasStpmv_v2", "hipblasStpmv", "library");
     subst("cublasStpsv", "hipblasStpsv", "library");
     subst("cublasStpsv_v2", "hipblasStpsv", "library");
-    subst("cublasStrmm", "hipblasStrmm", "library");
-    subst("cublasStrmm_v2", "hipblasStrmm", "library");
     subst("cublasStrmv", "hipblasStrmv", "library");
     subst("cublasStrmv_v2", "hipblasStrmv", "library");
     subst("cublasStrsm", "hipblasStrsm", "library");
@@ -2343,8 +2251,6 @@ sub simpleSubstitutions {
     subst("cublasZtpmv_v2", "hipblasZtpmv", "library");
     subst("cublasZtpsv", "hipblasZtpsv", "library");
     subst("cublasZtpsv_v2", "hipblasZtpsv", "library");
-    subst("cublasZtrmm", "hipblasZtrmm", "library");
-    subst("cublasZtrmm_v2", "hipblasZtrmm", "library");
     subst("cublasZtrmv", "hipblasZtrmv", "library");
     subst("cublasZtrmv_v2", "hipblasZtrmv", "library");
     subst("cublasZtrsm", "hipblasZtrsm", "library");
@@ -3034,6 +2940,8 @@ sub simpleSubstitutions {
     subst("nvrtcCompileProgram", "hiprtcCompileProgram", "library");
     subst("nvrtcCreateProgram", "hiprtcCreateProgram", "library");
     subst("nvrtcDestroyProgram", "hiprtcDestroyProgram", "library");
+    subst("nvrtcGetCUBIN", "hiprtcGetBitcode", "library");
+    subst("nvrtcGetCUBINSize", "hiprtcGetBitcodeSize", "library");
     subst("nvrtcGetErrorString", "hiprtcGetErrorString", "library");
     subst("nvrtcGetLoweredName", "hiprtcGetLoweredName", "library");
     subst("nvrtcGetPTX", "hiprtcGetCode", "library");
@@ -3064,6 +2972,10 @@ sub simpleSubstitutions {
     subst("curand_uniform4", "hiprand_uniform4", "device_library");
     subst("curand_uniform4_double", "hiprand_uniform4_double", "device_library");
     subst("curand_uniform_double", "hiprand_uniform_double", "device_library");
+    subst("__half", "__half", "device_type");
+    subst("__half2", "__half2", "device_type");
+    subst("__half2_raw", "__half2_raw", "device_type");
+    subst("__half_raw", "__half_raw", "device_type");
     subst("caffe2\/core\/common_cudnn.h", "caffe2\/core\/hip\/common_miopen.h", "include");
     subst("caffe2\/operators\/spatial_batch_norm_op.h", "caffe2\/operators\/hip\/spatial_batch_norm_op_miopen.hip", "include");
     subst("channel_descriptor.h", "hip\/channel_descriptor.h", "include");
@@ -3211,6 +3123,8 @@ sub simpleSubstitutions {
     subst("CUgraphExec_st", "hipGraphExec", "type");
     subst("CUgraphInstantiate_flags", "hipGraphInstantiateFlags", "type");
     subst("CUgraphInstantiate_flags_enum", "hipGraphInstantiateFlags", "type");
+    subst("CUgraphMem_attribute", "hipGraphMemAttributeType", "type");
+    subst("CUgraphMem_attribute_enum", "hipGraphMemAttributeType", "type");
     subst("CUgraphNode", "hipGraphNode_t", "type");
     subst("CUgraphNodeType", "hipGraphNodeType", "type");
     subst("CUgraphNodeType_enum", "hipGraphNodeType", "type");
@@ -3227,6 +3141,8 @@ sub simpleSubstitutions {
     subst("CUipcMemHandle", "hipIpcMemHandle_t", "type");
     subst("CUipcMemHandle_st", "hipIpcMemHandle_st", "type");
     subst("CUipcMemHandle_v1", "hipIpcMemHandle_t", "type");
+    subst("CUjitInputType", "hiprtcJITInputType", "type");
+    subst("CUjitInputType_enum", "hiprtcJITInputType", "type");
     subst("CUjit_option", "hipJitOption", "type");
     subst("CUjit_option_enum", "hipJitOption", "type");
     subst("CUkernelNodeAttrID", "hipKernelNodeAttrID", "type");
@@ -3308,6 +3224,12 @@ sub simpleSubstitutions {
     subst("CUtexObject_v1", "hipTextureObject_t", "type");
     subst("CUtexref", "hipTexRef", "type");
     subst("CUtexref_st", "textureReference", "type");
+    subst("CUuserObject", "hipUserObject_t", "type");
+    subst("CUuserObjectRetain_flags", "hipUserObjectRetainFlags", "type");
+    subst("CUuserObjectRetain_flags_enum", "hipUserObjectRetainFlags", "type");
+    subst("CUuserObject_flags", "hipUserObjectFlags", "type");
+    subst("CUuserObject_flags_enum", "hipUserObjectFlags", "type");
+    subst("CUuserObject_st", "hipUserObject", "type");
     subst("CUuuid", "hipUUID", "type");
     subst("CUuuid_st", "hipUUID_t", "type");
     subst("GLenum", "GLenum", "type");
@@ -3327,6 +3249,7 @@ sub simpleSubstitutions {
     subst("cuDoubleComplex", "hipDoubleComplex", "type");
     subst("cuFloatComplex", "hipFloatComplex", "type");
     subst("cublasAtomicsMode_t", "hipblasAtomicsMode_t", "type");
+    subst("cublasComputeType_t", "hipblasDatatype_t", "type");
     subst("cublasDataType_t", "hipblasDatatype_t", "type");
     subst("cublasDiagType_t", "hipblasDiagType_t", "type");
     subst("cublasFillMode_t", "hipblasFillMode_t", "type");
@@ -3374,6 +3297,7 @@ sub simpleSubstitutions {
     subst("cudaGraphExecUpdateResult", "hipGraphExecUpdateResult", "type");
     subst("cudaGraphExec_t", "hipGraphExec_t", "type");
     subst("cudaGraphInstantiateFlags", "hipGraphInstantiateFlags", "type");
+    subst("cudaGraphMemAttributeType", "hipGraphMemAttributeType", "type");
     subst("cudaGraphNodeType", "hipGraphNodeType", "type");
     subst("cudaGraphNode_t", "hipGraphNode_t", "type");
     subst("cudaGraph_t", "hipGraph_t", "type");
@@ -3431,6 +3355,9 @@ sub simpleSubstitutions {
     subst("cudaTextureObject_t", "hipTextureObject_t", "type");
     subst("cudaTextureReadMode", "hipTextureReadMode", "type");
     subst("cudaUUID_t", "hipUUID", "type");
+    subst("cudaUserObjectFlags", "hipUserObjectFlags", "type");
+    subst("cudaUserObjectRetainFlags", "hipUserObjectRetainFlags", "type");
+    subst("cudaUserObject_t", "hipUserObject_t", "type");
     subst("cudnnActivationDescriptor_t", "hipdnnActivationDescriptor_t", "type");
     subst("cudnnActivationMode_t", "hipdnnActivationMode_t", "type");
     subst("cudnnBatchNormMode_t", "hipdnnBatchNormMode_t", "type");
@@ -4028,6 +3955,7 @@ sub simpleSubstitutions {
     subst("CU_DEVICE_ATTRIBUTE_TEXTURE_PITCH_ALIGNMENT", "hipDeviceAttributeTexturePitchAlignment", "numeric_literal");
     subst("CU_DEVICE_ATTRIBUTE_TOTAL_CONSTANT_MEMORY", "hipDeviceAttributeTotalConstantMemory", "numeric_literal");
     subst("CU_DEVICE_ATTRIBUTE_UNIFIED_ADDRESSING", "hipDeviceAttributeUnifiedAddressing", "numeric_literal");
+    subst("CU_DEVICE_ATTRIBUTE_VIRTUAL_MEMORY_MANAGEMENT_SUPPORTED", "hipDeviceAttributeVirtualMemoryManagementSupported", "numeric_literal");
     subst("CU_DEVICE_ATTRIBUTE_WARP_SIZE", "hipDeviceAttributeWarpSize", "numeric_literal");
     subst("CU_DEVICE_P2P_ATTRIBUTE_ACCESS_ACCESS_SUPPORTED", "hipDevP2PAttrHipArrayAccessSupported", "numeric_literal");
     subst("CU_DEVICE_P2P_ATTRIBUTE_ACCESS_SUPPORTED", "hipDevP2PAttrAccessSupported", "numeric_literal");
@@ -4081,38 +4009,53 @@ sub simpleSubstitutions {
     subst("CU_GRAPH_EXEC_UPDATE_ERROR_TOPOLOGY_CHANGED", "hipGraphExecUpdateErrorTopologyChanged", "numeric_literal");
     subst("CU_GRAPH_EXEC_UPDATE_ERROR_UNSUPPORTED_FUNCTION_CHANGE", "hipGraphExecUpdateErrorUnsupportedFunctionChange", "numeric_literal");
     subst("CU_GRAPH_EXEC_UPDATE_SUCCESS", "hipGraphExecUpdateSuccess", "numeric_literal");
+    subst("CU_GRAPH_MEM_ATTR_RESERVED_MEM_CURRENT", "hipGraphMemAttrReservedMemCurrent", "numeric_literal");
+    subst("CU_GRAPH_MEM_ATTR_RESERVED_MEM_HIGH", "hipGraphMemAttrReservedMemHigh", "numeric_literal");
+    subst("CU_GRAPH_MEM_ATTR_USED_MEM_CURRENT", "hipGraphMemAttrUsedMemCurrent", "numeric_literal");
+    subst("CU_GRAPH_MEM_ATTR_USED_MEM_HIGH", "hipGraphMemAttrUsedMemHigh", "numeric_literal");
     subst("CU_GRAPH_NODE_TYPE_COUNT", "hipGraphNodeTypeCount", "numeric_literal");
     subst("CU_GRAPH_NODE_TYPE_EMPTY", "hipGraphNodeTypeEmpty", "numeric_literal");
     subst("CU_GRAPH_NODE_TYPE_EVENT_RECORD", "hipGraphNodeTypeEventRecord", "numeric_literal");
+    subst("CU_GRAPH_NODE_TYPE_EXT_SEMAS_SIGNAL", "hipGraphNodeTypeExtSemaphoreSignal", "numeric_literal");
+    subst("CU_GRAPH_NODE_TYPE_EXT_SEMAS_WAIT", "hipGraphNodeTypeExtSemaphoreWait", "numeric_literal");
     subst("CU_GRAPH_NODE_TYPE_GRAPH", "hipGraphNodeTypeGraph", "numeric_literal");
     subst("CU_GRAPH_NODE_TYPE_HOST", "hipGraphNodeTypeHost", "numeric_literal");
     subst("CU_GRAPH_NODE_TYPE_KERNEL", "hipGraphNodeTypeKernel", "numeric_literal");
     subst("CU_GRAPH_NODE_TYPE_MEMCPY", "hipGraphNodeTypeMemcpy", "numeric_literal");
     subst("CU_GRAPH_NODE_TYPE_MEMSET", "hipGraphNodeTypeMemset", "numeric_literal");
     subst("CU_GRAPH_NODE_TYPE_WAIT_EVENT", "hipGraphNodeTypeWaitEvent", "numeric_literal");
+    subst("CU_GRAPH_USER_OBJECT_MOVE", "hipGraphUserObjectMove", "numeric_literal");
     subst("CU_IPC_MEM_LAZY_ENABLE_PEER_ACCESS", "hipIpcMemLazyEnablePeerAccess", "numeric_literal");
-    subst("CU_JIT_CACHE_MODE", "hipJitOptionCacheMode", "numeric_literal");
-    subst("CU_JIT_ERROR_LOG_BUFFER", "hipJitOptionErrorLogBuffer", "numeric_literal");
-    subst("CU_JIT_ERROR_LOG_BUFFER_SIZE_BYTES", "hipJitOptionErrorLogBufferSizeBytes", "numeric_literal");
-    subst("CU_JIT_FALLBACK_STRATEGY", "hipJitOptionFallbackStrategy", "numeric_literal");
-    subst("CU_JIT_FAST_COMPILE", "hipJitOptionFastCompile", "numeric_literal");
-    subst("CU_JIT_GENERATE_DEBUG_INFO", "hipJitOptionGenerateDebugInfo", "numeric_literal");
-    subst("CU_JIT_GENERATE_LINE_INFO", "hipJitOptionGenerateLineInfo", "numeric_literal");
-    subst("CU_JIT_INFO_LOG_BUFFER", "hipJitOptionInfoLogBuffer", "numeric_literal");
-    subst("CU_JIT_INFO_LOG_BUFFER_SIZE_BYTES", "hipJitOptionInfoLogBufferSizeBytes", "numeric_literal");
-    subst("CU_JIT_LOG_VERBOSE", "hipJitOptionLogVerbose", "numeric_literal");
-    subst("CU_JIT_MAX_REGISTERS", "hipJitOptionMaxRegisters", "numeric_literal");
-    subst("CU_JIT_NEW_SM3X_OPT", "hipJitOptionSm3xOpt", "numeric_literal");
-    subst("CU_JIT_NUM_OPTIONS", "hipJitOptionNumOptions", "numeric_literal");
-    subst("CU_JIT_OPTIMIZATION_LEVEL", "hipJitOptionOptimizationLevel", "numeric_literal");
-    subst("CU_JIT_TARGET", "hipJitOptionTarget", "numeric_literal");
-    subst("CU_JIT_TARGET_FROM_CUCONTEXT", "hipJitOptionTargetFromContext", "numeric_literal");
-    subst("CU_JIT_THREADS_PER_BLOCK", "hipJitOptionThreadsPerBlock", "numeric_literal");
-    subst("CU_JIT_WALL_TIME", "hipJitOptionWallTime", "numeric_literal");
+    subst("CU_JIT_CACHE_MODE", "HIPRTC_JIT_CACHE_MODE", "numeric_literal");
+    subst("CU_JIT_ERROR_LOG_BUFFER", "HIPRTC_JIT_ERROR_LOG_BUFFER", "numeric_literal");
+    subst("CU_JIT_ERROR_LOG_BUFFER_SIZE_BYTES", "HIPRTC_JIT_ERROR_LOG_BUFFER_SIZE_BYTES", "numeric_literal");
+    subst("CU_JIT_FALLBACK_STRATEGY", "HIPRTC_JIT_FALLBACK_STRATEGY", "numeric_literal");
+    subst("CU_JIT_FAST_COMPILE", "HIPRTC_JIT_FAST_COMPILE", "numeric_literal");
+    subst("CU_JIT_GENERATE_DEBUG_INFO", "HIPRTC_JIT_GENERATE_DEBUG_INFO", "numeric_literal");
+    subst("CU_JIT_GENERATE_LINE_INFO", "HIPRTC_JIT_GENERATE_LINE_INFO", "numeric_literal");
+    subst("CU_JIT_INFO_LOG_BUFFER", "HIPRTC_JIT_INFO_LOG_BUFFER", "numeric_literal");
+    subst("CU_JIT_INFO_LOG_BUFFER_SIZE_BYTES", "HIPRTC_JIT_INFO_LOG_BUFFER_SIZE_BYTES", "numeric_literal");
+    subst("CU_JIT_INPUT_CUBIN", "HIPRTC_JIT_INPUT_CUBIN", "numeric_literal");
+    subst("CU_JIT_INPUT_FATBINARY", "HIPRTC_JIT_INPUT_FATBINARY", "numeric_literal");
+    subst("CU_JIT_INPUT_LIBRARY", "HIPRTC_JIT_INPUT_LIBRARY", "numeric_literal");
+    subst("CU_JIT_INPUT_NVVM", "HIPRTC_JIT_INPUT_NVVM", "numeric_literal");
+    subst("CU_JIT_INPUT_OBJECT", "HIPRTC_JIT_INPUT_OBJECT", "numeric_literal");
+    subst("CU_JIT_INPUT_PTX", "HIPRTC_JIT_INPUT_PTX", "numeric_literal");
+    subst("CU_JIT_LOG_VERBOSE", "HIPRTC_JIT_LOG_VERBOSE", "numeric_literal");
+    subst("CU_JIT_MAX_REGISTERS", "HIPRTC_JIT_MAX_REGISTERS", "numeric_literal");
+    subst("CU_JIT_NEW_SM3X_OPT", "HIPRTC_JIT_NEW_SM3X_OPT", "numeric_literal");
+    subst("CU_JIT_NUM_INPUT_TYPES", "HIPRTC_JIT_NUM_LEGACY_INPUT_TYPES", "numeric_literal");
+    subst("CU_JIT_NUM_OPTIONS", "HIPRTC_JIT_NUM_OPTIONS", "numeric_literal");
+    subst("CU_JIT_OPTIMIZATION_LEVEL", "HIPRTC_JIT_OPTIMIZATION_LEVEL", "numeric_literal");
+    subst("CU_JIT_TARGET", "HIPRTC_JIT_TARGET", "numeric_literal");
+    subst("CU_JIT_TARGET_FROM_CUCONTEXT", "HIPRTC_JIT_TARGET_FROM_HIPCONTEXT", "numeric_literal");
+    subst("CU_JIT_THREADS_PER_BLOCK", "HIPRTC_JIT_THREADS_PER_BLOCK", "numeric_literal");
+    subst("CU_JIT_WALL_TIME", "HIPRTC_JIT_WALL_TIME", "numeric_literal");
     subst("CU_KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW", "hipKernelNodeAttributeAccessPolicyWindow", "numeric_literal");
     subst("CU_KERNEL_NODE_ATTRIBUTE_COOPERATIVE", "hipKernelNodeAttributeCooperative", "numeric_literal");
     subst("CU_LIMIT_MALLOC_HEAP_SIZE", "hipLimitMallocHeapSize", "numeric_literal");
     subst("CU_LIMIT_PRINTF_FIFO_SIZE", "hipLimitPrintfFifoSize", "numeric_literal");
+    subst("CU_LIMIT_STACK_SIZE", "hipLimitStackSize", "numeric_literal");
     subst("CU_MEMORYTYPE_ARRAY", "hipMemoryTypeArray", "numeric_literal");
     subst("CU_MEMORYTYPE_DEVICE", "hipMemoryTypeDevice", "numeric_literal");
     subst("CU_MEMORYTYPE_HOST", "hipMemoryTypeHost", "numeric_literal");
@@ -4235,6 +4178,7 @@ sub simpleSubstitutions {
     subst("CU_TR_ADDRESS_MODE_WRAP", "HIP_TR_ADDRESS_MODE_WRAP", "numeric_literal");
     subst("CU_TR_FILTER_MODE_LINEAR", "HIP_TR_FILTER_MODE_LINEAR", "numeric_literal");
     subst("CU_TR_FILTER_MODE_POINT", "HIP_TR_FILTER_MODE_POINT", "numeric_literal");
+    subst("CU_USER_OBJECT_NO_DESTRUCTOR_SYNC", "hipUserObjectNoDestructorSync", "numeric_literal");
     subst("NVRTC_ERROR_BUILTIN_OPERATION_FAILURE", "HIPRTC_ERROR_BUILTIN_OPERATION_FAILURE", "numeric_literal");
     subst("NVRTC_ERROR_COMPILATION", "HIPRTC_ERROR_COMPILATION", "numeric_literal");
     subst("NVRTC_ERROR_INTERNAL_ERROR", "HIPRTC_ERROR_INTERNAL_ERROR", "numeric_literal");
@@ -4462,15 +4406,22 @@ sub simpleSubstitutions {
     subst("cudaGraphExecUpdateErrorUnsupportedFunctionChange", "hipGraphExecUpdateErrorUnsupportedFunctionChange", "numeric_literal");
     subst("cudaGraphExecUpdateSuccess", "hipGraphExecUpdateSuccess", "numeric_literal");
     subst("cudaGraphInstantiateFlagAutoFreeOnLaunch", "hipGraphInstantiateFlagAutoFreeOnLaunch", "numeric_literal");
+    subst("cudaGraphMemAttrReservedMemCurrent", "hipGraphMemAttrReservedMemCurrent", "numeric_literal");
+    subst("cudaGraphMemAttrReservedMemHigh", "hipGraphMemAttrReservedMemHigh", "numeric_literal");
+    subst("cudaGraphMemAttrUsedMemCurrent", "hipGraphMemAttrUsedMemCurrent", "numeric_literal");
+    subst("cudaGraphMemAttrUsedMemHigh", "hipGraphMemAttrUsedMemHigh", "numeric_literal");
     subst("cudaGraphNodeTypeCount", "hipGraphNodeTypeCount", "numeric_literal");
     subst("cudaGraphNodeTypeEmpty", "hipGraphNodeTypeEmpty", "numeric_literal");
     subst("cudaGraphNodeTypeEventRecord", "hipGraphNodeTypeEventRecord", "numeric_literal");
+    subst("cudaGraphNodeTypeExtSemaphoreSignal", "hipGraphNodeTypeExtSemaphoreSignal", "numeric_literal");
+    subst("cudaGraphNodeTypeExtSemaphoreWait", "hipGraphNodeTypeExtSemaphoreWait", "numeric_literal");
     subst("cudaGraphNodeTypeGraph", "hipGraphNodeTypeGraph", "numeric_literal");
     subst("cudaGraphNodeTypeHost", "hipGraphNodeTypeHost", "numeric_literal");
     subst("cudaGraphNodeTypeKernel", "hipGraphNodeTypeKernel", "numeric_literal");
     subst("cudaGraphNodeTypeMemcpy", "hipGraphNodeTypeMemcpy", "numeric_literal");
     subst("cudaGraphNodeTypeMemset", "hipGraphNodeTypeMemset", "numeric_literal");
     subst("cudaGraphNodeTypeWaitEvent", "hipGraphNodeTypeWaitEvent", "numeric_literal");
+    subst("cudaGraphUserObjectMove", "hipGraphUserObjectMove", "numeric_literal");
     subst("cudaGraphicsRegisterFlagsNone", "hipGraphicsRegisterFlagsNone", "numeric_literal");
     subst("cudaGraphicsRegisterFlagsReadOnly", "hipGraphicsRegisterFlagsReadOnly", "numeric_literal");
     subst("cudaGraphicsRegisterFlagsSurfaceLoadStore", "hipGraphicsRegisterFlagsSurfaceLoadStore", "numeric_literal");
@@ -4480,6 +4431,7 @@ sub simpleSubstitutions {
     subst("cudaKernelNodeAttributeCooperative", "hipKernelNodeAttributeCooperative", "numeric_literal");
     subst("cudaLimitMallocHeapSize", "hipLimitMallocHeapSize", "numeric_literal");
     subst("cudaLimitPrintfFifoSize", "hipLimitPrintfFifoSize", "numeric_literal");
+    subst("cudaLimitStackSize", "hipLimitStackSize", "numeric_literal");
     subst("cudaMemAccessFlagsProtNone", "hipMemAccessFlagsProtNone", "numeric_literal");
     subst("cudaMemAccessFlagsProtRead", "hipMemAccessFlagsProtRead", "numeric_literal");
     subst("cudaMemAccessFlagsProtReadWrite", "hipMemAccessFlagsProtReadWrite", "numeric_literal");
@@ -4517,6 +4469,7 @@ sub simpleSubstitutions {
     subst("cudaMemcpyHostToHost", "hipMemcpyHostToHost", "numeric_literal");
     subst("cudaMemoryTypeDevice", "hipMemoryTypeDevice", "numeric_literal");
     subst("cudaMemoryTypeHost", "hipMemoryTypeHost", "numeric_literal");
+    subst("cudaMemoryTypeManaged", "hipMemoryTypeManaged", "numeric_literal");
     subst("cudaReadModeElementType", "hipReadModeElementType", "numeric_literal");
     subst("cudaReadModeNormalizedFloat", "hipReadModeNormalizedFloat", "numeric_literal");
     subst("cudaResViewFormatFloat1", "hipResViewFormatFloat1", "numeric_literal");
@@ -4570,6 +4523,7 @@ sub simpleSubstitutions {
     subst("cudaStreamCaptureStatusNone", "hipStreamCaptureStatusNone", "numeric_literal");
     subst("cudaStreamSetCaptureDependencies", "hipStreamSetCaptureDependencies", "numeric_literal");
     subst("cudaSuccess", "hipSuccess", "numeric_literal");
+    subst("cudaUserObjectNoDestructorSync", "hipUserObjectNoDestructorSync", "numeric_literal");
     subst("CUB_MAX", "CUB_MAX", "define");
     subst("CUB_MIN", "CUB_MIN", "define");
     subst("CUB_NAMESPACE_BEGIN", "BEGIN_HIPCUB_NAMESPACE", "define");
@@ -5380,10 +5334,32 @@ sub warnUnsupportedDeviceFunctions {
         "__vabsdiffs2",
         "__vabs4",
         "__vabs2",
+        "__ushort_as_bfloat16",
+        "__ushort2bfloat16_rz",
+        "__ushort2bfloat16_ru",
+        "__ushort2bfloat16_rn",
+        "__ushort2bfloat16_rd",
+        "__ull2bfloat16_rz",
+        "__ull2bfloat16_ru",
+        "__ull2bfloat16_rn",
+        "__ull2bfloat16_rd",
+        "__uint2bfloat16_rz",
+        "__uint2bfloat16_ru",
+        "__uint2bfloat16_rn",
+        "__uint2bfloat16_rd",
         "__trap",
+        "__stwt",
+        "__stwb",
+        "__stcs",
+        "__stcg",
         "__signbitl",
         "__signbitf",
         "__signbit",
+        "__short_as_bfloat16",
+        "__short2bfloat16_rz",
+        "__short2bfloat16_ru",
+        "__short2bfloat16_rn",
+        "__short2bfloat16_rd",
         "__shfl_xor_sync",
         "__shfl_up_sync",
         "__shfl_sync",
@@ -5393,12 +5369,56 @@ sub warnUnsupportedDeviceFunctions {
         "__pm2",
         "__pm1",
         "__pm0",
+        "__nv_cvt_halfraw_to_fp8",
+        "__nv_cvt_halfraw2_to_fp8x2",
+        "__nv_cvt_fp8x2_to_halfraw2",
+        "__nv_cvt_fp8_to_halfraw",
+        "__nv_cvt_float_to_fp8",
+        "__nv_cvt_float2_to_fp8x2",
+        "__nv_cvt_double_to_fp8",
+        "__nv_cvt_double2_to_fp8x2",
+        "__nv_cvt_bfloat16raw_to_fp8",
+        "__nv_cvt_bfloat16raw2_to_fp8x2",
+        "__lows2bfloat162",
+        "__low2bfloat162",
+        "__low2bfloat16",
+        "__ll2bfloat16_rz",
+        "__ll2bfloat16_ru",
+        "__ll2bfloat16_rn",
+        "__ll2bfloat16_rd",
+        "__ldlu",
+        "__ldcv",
         "__isnanl",
         "__isnanf",
         "__isnan",
         "__isinfl",
         "__isinff",
         "__isinf",
+        "__int2bfloat16_rz",
+        "__int2bfloat16_ru",
+        "__int2bfloat16_rn",
+        "__int2bfloat16_rd",
+        "__hsub_rn",
+        "__hsub2_rn",
+        "__hmul_rn",
+        "__hmul2_rn",
+        "__hmin_nan",
+        "__hmin2_nan",
+        "__hmin2",
+        "__hmin",
+        "__hmax_nan",
+        "__hmax2_nan",
+        "__hmax2",
+        "__hmax",
+        "__highs2bfloat162",
+        "__high2bfloat162",
+        "__high2bfloat16",
+        "__hfma_relu",
+        "__hfma2_relu",
+        "__hcmadd",
+        "__halves2bfloat162",
+        "__hadd_rn",
+        "__hadd2_rn",
         "__fsub_rz",
         "__fsub_ru",
         "__fsub_rd",
@@ -5417,6 +5437,13 @@ sub warnUnsupportedDeviceFunctions {
         "__fma_rz",
         "__fma_ru",
         "__fma_rd",
+        "__floats2bfloat162_rn",
+        "__float2bfloat16_rz",
+        "__float2bfloat16_ru",
+        "__float2bfloat16_rn",
+        "__float2bfloat16_rd",
+        "__float2bfloat162_rn",
+        "__float2bfloat16",
         "__finitel",
         "__finitef",
         "__finite",
@@ -5435,6 +5462,8 @@ sub warnUnsupportedDeviceFunctions {
         "__drcp_rz",
         "__drcp_ru",
         "__drcp_rd",
+        "__double2half",
+        "__double2bfloat16",
         "__dmul_rz",
         "__dmul_ru",
         "__dmul_rd",
@@ -5445,6 +5474,35 @@ sub warnUnsupportedDeviceFunctions {
         "__dadd_ru",
         "__dadd_rd",
         "__brkpt",
+        "__bfloat16_as_ushort",
+        "__bfloat16_as_short",
+        "__bfloat162ushort_rz",
+        "__bfloat162ushort_ru",
+        "__bfloat162ushort_rn",
+        "__bfloat162ushort_rd",
+        "__bfloat162ull_rz",
+        "__bfloat162ull_ru",
+        "__bfloat162ull_rn",
+        "__bfloat162ull_rd",
+        "__bfloat162uint_rz",
+        "__bfloat162uint_ru",
+        "__bfloat162uint_rn",
+        "__bfloat162uint_rd",
+        "__bfloat162short_rz",
+        "__bfloat162short_ru",
+        "__bfloat162short_rn",
+        "__bfloat162short_rd",
+        "__bfloat162ll_rz",
+        "__bfloat162ll_ru",
+        "__bfloat162ll_rn",
+        "__bfloat162ll_rd",
+        "__bfloat162int_rz",
+        "__bfloat162int_ru",
+        "__bfloat162int_rn",
+        "__bfloat162int_rd",
+        "__bfloat162float",
+        "__bfloat162bfloat162",
+        "__bfloat1622float2",
         "_Pow_int"
     )
     {
@@ -5521,6 +5579,8 @@ sub warnUnsupportedFunctions {
         "nvrtcGetNumSupportedArchs",
         "nvrtcGetNVVMSize",
         "nvrtcGetNVVM",
+        "nv_bfloat162",
+        "nv_bfloat16",
         "memoryBarrier",
         "libraryPropertyType_t",
         "libraryPropertyType",
@@ -5714,6 +5774,7 @@ sub warnUnsupportedFunctions {
         "cufftXtSetWorkAreaPolicy",
         "cufftXtSetWorkArea",
         "cufftXtSetGPUs",
+        "cufftXtSetDistribution",
         "cufftXtQueryType_t",
         "cufftXtQueryType",
         "cufftXtQueryPlan",
@@ -5736,6 +5797,8 @@ sub warnUnsupportedFunctions {
         "cufftXt1dFactors",
         "cufftCompatibility_t",
         "cufftCompatibility",
+        "cufftBox3d_t",
+        "cufftBox3d",
         "cudnnWgradMode_t",
         "cudnnTransformTensorEx",
         "cudnnTransformTensor",
@@ -5749,6 +5812,7 @@ sub warnUnsupportedFunctions {
         "cudnnSpatialTfSamplerBackward",
         "cudnnSpatialTfGridGeneratorForward",
         "cudnnSpatialTfGridGeneratorBackward",
+        "cudnnSignalMode_t",
         "cudnnSeverity_t",
         "cudnnSetTensorTransformDescriptor",
         "cudnnSetTensorNdDescriptorEx",
@@ -5780,6 +5844,7 @@ sub warnUnsupportedFunctions {
         "cudnnRuntimeTag_t",
         "cudnnRestoreDropoutDescriptor",
         "cudnnRestoreAlgorithm",
+        "cudnnResampleMode_t",
         "cudnnReorderType_t",
         "cudnnReorderFilterAndBias",
         "cudnnReduceTensorStruct",
@@ -5804,6 +5869,7 @@ sub warnUnsupportedFunctions {
         "cudnnPoolingStruct",
         "cudnnPointwiseMode_t",
         "cudnnPersistentRNNPlan",
+        "cudnnPaddingMode_t",
         "cudnnOpsTrainVersionCheck",
         "cudnnOpsInferVersionCheck",
         "cudnnOpTensorStruct",
@@ -5848,6 +5914,7 @@ sub warnUnsupportedFunctions {
         "cudnnGetNormalizationBackwardWorkspaceSize",
         "cudnnGetMultiHeadAttnWeights",
         "cudnnGetMultiHeadAttnBuffers",
+        "cudnnGetMaxDeviceVersion",
         "cudnnGetFusedOpsVariantParamPackAttribute",
         "cudnnGetFusedOpsConstParamPackAttribute",
         "cudnnGetFoldedConvBackwardDataDescriptors",
@@ -5891,6 +5958,8 @@ sub warnUnsupportedFunctions {
         "cudnnFusedOpsConstParamStruct",
         "cudnnFusedOpsConstParamPack_t",
         "cudnnFusedOpsConstParamLabel_t",
+        "cudnnFraction_t",
+        "cudnnFractionStruct",
         "cudnnForwardMode_t",
         "cudnnFoldingDirection_t",
         "cudnnFindRNNForwardTrainingAlgorithmEx",
@@ -5949,8 +6018,11 @@ sub warnUnsupportedFunctions {
         "cudnnBatchNormalizationForwardTrainingEx",
         "cudnnBatchNormalizationBackwardEx",
         "cudnnBatchNormOps_t",
+        "cudnnBackendTensorReordering_t",
         "cudnnBackendSetAttribute",
         "cudnnBackendNumericalNote_t",
+        "cudnnBackendNormMode_t",
+        "cudnnBackendNormFwdPhase_t",
         "cudnnBackendLayoutType_t",
         "cudnnBackendKnobType_t",
         "cudnnBackendInitialize",
@@ -6006,8 +6078,10 @@ sub warnUnsupportedFunctions {
         "cudaProfilerInitialize",
         "cudaOutputMode_t",
         "cudaOutputMode",
+        "cudaOccupancyMaxPotentialClusterSize",
         "cudaOccupancyMaxPotentialBlockSizeVariableSMemWithFlags",
         "cudaOccupancyMaxPotentialBlockSizeVariableSMem",
+        "cudaOccupancyMaxActiveClusters",
         "cudaOccupancyDisableCachingOverride",
         "cudaOccupancyAvailableDynamicSMemPerBlock",
         "cudaNvSciSyncAttrWait",
@@ -6025,8 +6099,26 @@ sub warnUnsupportedFunctions {
         "cudaLimitMaxL2FetchGranularity",
         "cudaLimitDevRuntimeSyncDepth",
         "cudaLimitDevRuntimePendingLaunchCount",
+        "cudaLaunchKernelExC",
+        "cudaLaunchConfig_t",
+        "cudaLaunchConfig_st",
+        "cudaLaunchAttribute_st",
+        "cudaLaunchAttributeValue",
+        "cudaLaunchAttributeSynchronizationPolicy",
+        "cudaLaunchAttributeProgrammaticStreamSerialization",
+        "cudaLaunchAttributeProgrammaticEvent",
+        "cudaLaunchAttributePriority",
+        "cudaLaunchAttributeIgnore",
+        "cudaLaunchAttributeID",
+        "cudaLaunchAttributeCooperative",
+        "cudaLaunchAttributeClusterSchedulingPolicyPreference",
+        "cudaLaunchAttributeClusterDimension",
+        "cudaLaunchAttributeAccessPolicyWindow",
+        "cudaLaunchAttribute",
         "cudaKeyValuePair",
         "cudaKernelNodeAttributePriority",
+        "cudaKernelNodeAttributeClusterSchedulingPolicyPreference",
+        "cudaKernelNodeAttributeClusterDimension",
         "cudaHostRegisterReadOnly",
         "cudaGraphicsVDPAURegisterVideoSurface",
         "cudaGraphicsVDPAURegisterOutputSurface",
@@ -6078,6 +6170,7 @@ sub warnUnsupportedFunctions {
         "cudaGraphAddMemAllocNode",
         "cudaGraphAddExternalSemaphoresWaitNode",
         "cudaGraphAddExternalSemaphoresSignalNode",
+        "cudaGetTextureObjectTextureDesc_v2",
         "cudaGetSurfaceReference",
         "cudaGetSurfaceObjectResourceDesc",
         "cudaGetParameterBufferV2",
@@ -6101,6 +6194,12 @@ sub warnUnsupportedFunctions {
         "cudaGLMapFlags",
         "cudaGLMapBufferObjectAsync",
         "cudaGLMapBufferObject",
+        "cudaFuncAttributeRequiredClusterWidth",
+        "cudaFuncAttributeRequiredClusterHeight",
+        "cudaFuncAttributeRequiredClusterDepth",
+        "cudaFuncAttributeNonPortableClusterSizeAllowed",
+        "cudaFuncAttributeClusterSchedulingPolicyPreference",
+        "cudaFuncAttributeClusterDimMustBeSet",
         "cudaFormatModeForced",
         "cudaFormatModeAuto",
         "cudaFlushGPUDirectRDMAWritesToOwner",
@@ -6152,6 +6251,7 @@ sub warnUnsupportedFunctions {
         "cudaErrorMpsMaxConnectionsReached",
         "cudaErrorMpsMaxClientsReached",
         "cudaErrorMpsConnectionFailed",
+        "cudaErrorMpsClientTerminated",
         "cudaErrorMixedDeviceExecution",
         "cudaErrorMisalignedAddress",
         "cudaErrorMemoryValueTooLarge",
@@ -6169,6 +6269,7 @@ sub warnUnsupportedFunctions {
         "cudaErrorInvalidNormSetting",
         "cudaErrorInvalidHostPointer",
         "cudaErrorInvalidFilterSetting",
+        "cudaErrorInvalidClusterSize",
         "cudaErrorInvalidChannelDescriptor",
         "cudaErrorInvalidAddressSpace",
         "cudaErrorIncompatibleDriverContext",
@@ -6307,6 +6408,7 @@ sub warnUnsupportedFunctions {
         "cudaDevAttrGPUDirectRDMASupported",
         "cudaDevAttrGPUDirectRDMAFlushWritesOptions",
         "cudaDevAttrDeferredMappingCudaArraySupported",
+        "cudaDevAttrClusterLaunch",
         "cudaDevAttrCanFlushRemoteWrites",
         "cudaD3D9UnregisterResource",
         "cudaD3D9UnmapResources",
@@ -6367,6 +6469,11 @@ sub warnUnsupportedFunctions {
         "cudaD3D10DeviceListAll",
         "cudaD3D10DeviceList",
         "cudaCtxResetPersistingL2Cache",
+        "cudaCreateTextureObject_v2",
+        "cudaClusterSchedulingPolicySpread",
+        "cudaClusterSchedulingPolicyLoadBalancing",
+        "cudaClusterSchedulingPolicyDefault",
+        "cudaClusterSchedulingPolicy",
         "cudaChannelFormatKindUnsignedNormalized8X4",
         "cudaChannelFormatKindUnsignedNormalized8X2",
         "cudaChannelFormatKindUnsignedNormalized8X1",
@@ -6435,6 +6542,8 @@ sub warnUnsupportedFunctions {
         "cuParamSetf",
         "cuParamSetTexRef",
         "cuParamSetSize",
+        "cuOccupancyMaxPotentialClusterSize",
+        "cuOccupancyMaxActiveClusters",
         "cuOccupancyAvailableDynamicSMemPerBlock",
         "cuModuleLoadFatBinary",
         "cuModuleGetSurfRef",
@@ -6466,6 +6575,7 @@ sub warnUnsupportedFunctions {
         "cuMemcpy3DPeer",
         "cuMemcpy",
         "cuMemGetHandleForAddressRange",
+        "cuLaunchKernelEx",
         "cuLaunchGridAsync",
         "cuLaunchGrid",
         "cuLaunchCooperativeKernelMultiDevice",
@@ -6506,8 +6616,6 @@ sub warnUnsupportedFunctions {
         "cuGraphAddExternalSemaphoresSignalNode",
         "cuGraphAddBatchMemOpNode",
         "cuGetProcAddress",
-        "cuGetErrorString",
-        "cuGetErrorName",
         "cuGLUnregisterBufferObject",
         "cuGLUnmapBufferObjectAsync",
         "cuGLUnmapBufferObject",
@@ -6592,14 +6700,45 @@ sub warnUnsupportedFunctions {
         "csrsm2Info",
         "csrilu02Info",
         "csrgemm2Info",
+        "cl_event_flags_enum",
+        "cl_event_flags",
+        "cl_context_flags_enum",
+        "cl_context_flags",
         "bsrsv2Info",
         "bsrilu02Info",
         "bsric02Info",
+        "__nv_saturation_t",
+        "__nv_fp8x4_storage_t",
+        "__nv_fp8x4_e5m2",
+        "__nv_fp8x4_e4m3",
+        "__nv_fp8x2_storage_t",
+        "__nv_fp8x2_e5m2",
+        "__nv_fp8x2_e4m3",
+        "__nv_fp8_storage_t",
+        "__nv_fp8_interpretation_t",
+        "__nv_fp8_e5m2",
+        "__nv_fp8_e4m3",
+        "__nv_bfloat16_raw",
+        "__nv_bfloat162_raw",
+        "__nv_bfloat162",
+        "__nv_bfloat16",
         "__curand_umul",
+        "__NV_SATFINITE",
+        "__NV_NOSAT",
+        "__NV_E5M2",
+        "__NV_E4M3",
         "__CUB_LP64__",
         "_CUB_ASM_PTR_SIZE_",
         "_CUB_ASM_PTR_",
         "PATCH_LEVEL",
+        "NVCL_EVENT_SCHED_YIELD",
+        "NVCL_EVENT_SCHED_SPIN",
+        "NVCL_EVENT_SCHED_BLOCKING_SYNC",
+        "NVCL_EVENT_SCHED_AUTO",
+        "NVCL_CTX_SCHED_YIELD",
+        "NVCL_CTX_SCHED_SPIN",
+        "NVCL_CTX_SCHED_BLOCKING_SYNC",
+        "NVCL_CTX_SCHED_AUTO",
         "MINOR_VERSION",
         "MAX_CUFFT_ERROR",
         "MAJOR_VERSION",
@@ -6638,6 +6777,14 @@ sub warnUnsupportedFunctions {
         "CUmemRangeHandleType",
         "CUmemAttach_flags_enum",
         "CUmemAttach_flags",
+        "CUlaunchConfig_st",
+        "CUlaunchConfig",
+        "CUlaunchAttribute_st",
+        "CUlaunchAttributeValue_union",
+        "CUlaunchAttributeValue",
+        "CUlaunchAttributeID_enum",
+        "CUlaunchAttributeID",
+        "CUlaunchAttribute",
         "CUjit_target_enum",
         "CUjit_target",
         "CUjit_fallback_enum",
@@ -6670,6 +6817,8 @@ sub warnUnsupportedFunctions {
         "CUexecAffinityParam",
         "CUevent_wait_flags_enum",
         "CUevent_wait_flags",
+        "CUevent_sched_flags_enum",
+        "CUevent_sched_flags",
         "CUevent_record_flags_enum",
         "CUevent_record_flags",
         "CUevent_flags_enum",
@@ -6703,10 +6852,14 @@ sub warnUnsupportedFunctions {
         "CUd3d10DeviceList",
         "CUctx_flags_enum",
         "CUctx_flags",
+        "CUclusterSchedulingPolicy_enum",
+        "CUclusterSchedulingPolicy",
         "CUarray_cubemap_face_enum",
         "CUarray_cubemap_face",
         "CU_TRSF_SEAMLESS_CUBEMAP",
         "CU_TRSF_DISABLE_TRILINEAR_OPTIMIZATION",
+        "CU_TARGET_COMPUTE_90",
+        "CU_TARGET_COMPUTE_89",
         "CU_TARGET_COMPUTE_87",
         "CU_TARGET_COMPUTE_86",
         "CU_TARGET_COMPUTE_80",
@@ -6778,7 +6931,18 @@ sub warnUnsupportedFunctions {
         "CU_LAUNCH_PARAM_END_AS_INT",
         "CU_LAUNCH_PARAM_BUFFER_SIZE_AS_INT",
         "CU_LAUNCH_PARAM_BUFFER_POINTER_AS_INT",
+        "CU_LAUNCH_ATTRIBUTE_SYNCHRONIZATION_POLICY",
+        "CU_LAUNCH_ATTRIBUTE_PROGRAMMATIC_STREAM_SERIALIZATION",
+        "CU_LAUNCH_ATTRIBUTE_PROGRAMMATIC_EVENT",
+        "CU_LAUNCH_ATTRIBUTE_PRIORITY",
+        "CU_LAUNCH_ATTRIBUTE_IGNORE",
+        "CU_LAUNCH_ATTRIBUTE_COOPERATIVE",
+        "CU_LAUNCH_ATTRIBUTE_CLUSTER_SCHEDULING_POLICY_PREFERENCE",
+        "CU_LAUNCH_ATTRIBUTE_CLUSTER_DIMENSION",
+        "CU_LAUNCH_ATTRIBUTE_ACCESS_POLICY_WINDOW",
         "CU_KERNEL_NODE_ATTRIBUTE_PRIORITY",
+        "CU_KERNEL_NODE_ATTRIBUTE_CLUSTER_SCHEDULING_POLICY_PREFERENCE",
+        "CU_KERNEL_NODE_ATTRIBUTE_CLUSTER_DIMENSION",
         "CU_JIT_REFERENCED_VARIABLE_NAMES",
         "CU_JIT_REFERENCED_VARIABLE_COUNT",
         "CU_JIT_REFERENCED_KERNEL_NAMES",
@@ -6825,6 +6989,12 @@ sub warnUnsupportedFunctions {
         "CU_GET_PROC_ADDRESS_PER_THREAD_DEFAULT_STREAM",
         "CU_GET_PROC_ADDRESS_LEGACY_STREAM",
         "CU_GET_PROC_ADDRESS_DEFAULT",
+        "CU_FUNC_ATTRIBUTE_REQUIRED_CLUSTER_WIDTH",
+        "CU_FUNC_ATTRIBUTE_REQUIRED_CLUSTER_HEIGHT",
+        "CU_FUNC_ATTRIBUTE_REQUIRED_CLUSTER_DEPTH",
+        "CU_FUNC_ATTRIBUTE_NON_PORTABLE_CLUSTER_SIZE_ALLOWED",
+        "CU_FUNC_ATTRIBUTE_CLUSTER_SIZE_MUST_BE_SET",
+        "CU_FUNC_ATTRIBUTE_CLUSTER_SCHEDULING_POLICY_PREFERENCE",
         "CU_FLUSH_GPU_DIRECT_RDMA_WRITES_TO_OWNER",
         "CU_FLUSH_GPU_DIRECT_RDMA_WRITES_TO_ALL_DEVICES",
         "CU_FLUSH_GPU_DIRECT_RDMA_WRITES_TARGET_CURRENT_CTX",
@@ -6841,6 +7011,10 @@ sub warnUnsupportedFunctions {
         "CU_EXEC_AFFINITY_TYPE_MAX",
         "CU_EVENT_WAIT_EXTERNAL",
         "CU_EVENT_WAIT_DEFAULT",
+        "CU_EVENT_SCHED_YIELD",
+        "CU_EVENT_SCHED_SPIN",
+        "CU_EVENT_SCHED_BLOCKING_SYNC",
+        "CU_EVENT_SCHED_AUTO",
         "CU_EVENT_RECORD_EXTERNAL",
         "CU_EVENT_RECORD_DEFAULT",
         "CU_EGL_RESOURCE_LOCATION_VIDMEM",
@@ -6947,6 +7121,7 @@ sub warnUnsupportedFunctions {
         "CU_DEVICE_ATTRIBUTE_GENERIC_COMPRESSION_SUPPORTED",
         "CU_DEVICE_ATTRIBUTE_DMA_BUF_SUPPORTED",
         "CU_DEVICE_ATTRIBUTE_DEFERRED_MAPPING_CUDA_ARRAY_SUPPORTED",
+        "CU_DEVICE_ATTRIBUTE_CLUSTER_LAUNCH",
         "CU_DEVICE_ATTRIBUTE_CAN_USE_STREAM_WAIT_VALUE_NOR_V2",
         "CU_DEVICE_ATTRIBUTE_CAN_USE_STREAM_MEM_OPS",
         "CU_DEVICE_ATTRIBUTE_CAN_USE_64_BIT_STREAM_MEM_OPS_V2",
@@ -6979,6 +7154,9 @@ sub warnUnsupportedFunctions {
         "CU_CUBEMAP_FACE_NEGATIVE_Y",
         "CU_CUBEMAP_FACE_NEGATIVE_X",
         "CU_CTX_FLAGS_MASK",
+        "CU_CLUSTER_SCHEDULING_POLICY_SPREAD",
+        "CU_CLUSTER_SCHEDULING_POLICY_LOAD_BALANCING",
+        "CU_CLUSTER_SCHEDULING_POLICY_DEFAULT",
         "CU_ARRAY_SPARSE_PROPERTIES_SINGLE_MIPTAIL",
         "CU_AD_FORMAT_UNORM_INT8X4",
         "CU_AD_FORMAT_UNORM_INT8X2",
@@ -7065,6 +7243,8 @@ sub warnUnsupportedFunctions {
         "CUFFT_XT_FORMAT_INPUT",
         "CUFFT_XT_FORMAT_INPLACE_SHUFFLED",
         "CUFFT_XT_FORMAT_INPLACE",
+        "CUFFT_XT_FORMAT_DISTRIBUTED_OUTPUT",
+        "CUFFT_XT_FORMAT_DISTRIBUTED_INPUT",
         "CUFFT_XT_FORMAT_1D_INPUT_SHUFFLED",
         "CUFFT_WORKAREA_USER",
         "CUFFT_WORKAREA_PERFORMANCE",
@@ -7084,23 +7264,33 @@ sub warnUnsupportedFunctions {
         "CUFFT_COPY_DEVICE_TO_DEVICE",
         "CUFFT_COMPATIBILITY_FFTW_PADDING",
         "CUFFT_COMPATIBILITY_DEFAULT",
+        "CUDNN_ZERO_PAD",
         "CUDNN_WGRAD_MODE_SET",
         "CUDNN_WGRAD_MODE_ADD",
         "CUDNN_TYPE_VOID_PTR",
+        "CUDNN_TYPE_TENSOR_REORDERING_MODE",
+        "CUDNN_TYPE_SIGNAL_MODE",
+        "CUDNN_TYPE_RESAMPLE_MODE",
         "CUDNN_TYPE_REDUCTION_OPERATOR_TYPE",
         "CUDNN_TYPE_POINTWISE_MODE",
+        "CUDNN_TYPE_PADDING_MODE",
         "CUDNN_TYPE_NUMERICAL_NOTE",
+        "CUDNN_TYPE_NORM_MODE",
+        "CUDNN_TYPE_NORM_FWD_PHASE",
         "CUDNN_TYPE_NAN_PROPOGATION",
         "CUDNN_TYPE_LAYOUT_TYPE",
         "CUDNN_TYPE_KNOB_TYPE",
         "CUDNN_TYPE_INT64",
+        "CUDNN_TYPE_INT32",
         "CUDNN_TYPE_HEUR_MODE",
         "CUDNN_TYPE_HANDLE",
         "CUDNN_TYPE_GENSTATS_MODE",
+        "CUDNN_TYPE_FRACTION",
         "CUDNN_TYPE_FLOAT",
         "CUDNN_TYPE_DOUBLE",
         "CUDNN_TYPE_DATA_TYPE",
         "CUDNN_TYPE_CONVOLUTION_MODE",
+        "CUDNN_TYPE_CHAR",
         "CUDNN_TYPE_BOOLEAN",
         "CUDNN_TYPE_BN_FINALIZE_STATS_MODE",
         "CUDNN_TYPE_BEHAVIOR_NOTE",
@@ -7108,10 +7298,14 @@ sub warnUnsupportedFunctions {
         "CUDNN_TYPE_ATTRIB_NAME",
         "CUDNN_TRANSFORM_UNFOLD",
         "CUDNN_TRANSFORM_FOLD",
+        "CUDNN_TENSOR_REORDERING_NONE",
+        "CUDNN_TENSOR_REORDERING_INT8x32",
         "CUDNN_TENSOR_OP_MATH_ALLOW_CONVERSION",
         "CUDNN_STATUS_VERSION_MISMATCH",
         "CUDNN_STATUS_RUNTIME_IN_PROGRESS",
         "CUDNN_STATUS_RUNTIME_FP_OVERFLOW",
+        "CUDNN_SIGNAL_WAIT",
+        "CUDNN_SIGNAL_SET",
         "CUDNN_SEV_WARNING_EN",
         "CUDNN_SEV_WARNING",
         "CUDNN_SEV_INFO_EN",
@@ -7137,6 +7331,12 @@ sub warnUnsupportedFunctions {
         "CUDNN_RNN_CLIP_NONE",
         "CUDNN_RNN_CLIP_MINMAX",
         "CUDNN_RNN_ALGO_COUNT",
+        "CUDNN_RESAMPLE_NEAREST",
+        "CUDNN_RESAMPLE_MAXPOOL",
+        "CUDNN_RESAMPLE_BILINEAR",
+        "CUDNN_RESAMPLE_AVGPOOL_INCLUDE_PADDING",
+        "CUDNN_RESAMPLE_AVGPOOL_EXCLUDE_PADDING",
+        "CUDNN_RESAMPLE_AVGPOOL",
         "CUDNN_PTR_ZDATA",
         "CUDNN_PTR_YSUM",
         "CUDNN_PTR_YSQSUM",
@@ -7166,23 +7366,53 @@ sub warnUnsupportedFunctions {
         "CUDNN_PTR_16B_ALIGNED",
         "CUDNN_POINTWISE_TANH_FWD",
         "CUDNN_POINTWISE_TANH_BWD",
+        "CUDNN_POINTWISE_TAN",
         "CUDNN_POINTWISE_SWISH_FWD",
         "CUDNN_POINTWISE_SWISH_BWD",
+        "CUDNN_POINTWISE_SUB",
         "CUDNN_POINTWISE_SQRT",
         "CUDNN_POINTWISE_SOFTPLUS_FWD",
         "CUDNN_POINTWISE_SOFTPLUS_BWD",
+        "CUDNN_POINTWISE_SIN",
         "CUDNN_POINTWISE_SIGMOID_FWD",
         "CUDNN_POINTWISE_SIGMOID_BWD",
+        "CUDNN_POINTWISE_RSQRT",
         "CUDNN_POINTWISE_RELU_FWD",
         "CUDNN_POINTWISE_RELU_BWD",
+        "CUDNN_POINTWISE_POW",
+        "CUDNN_POINTWISE_NEG",
         "CUDNN_POINTWISE_MUL",
+        "CUDNN_POINTWISE_MOD",
         "CUDNN_POINTWISE_MIN",
         "CUDNN_POINTWISE_MAX",
+        "CUDNN_POINTWISE_LOGICAL_OR",
+        "CUDNN_POINTWISE_LOGICAL_NOT",
+        "CUDNN_POINTWISE_LOGICAL_AND",
+        "CUDNN_POINTWISE_LOG",
+        "CUDNN_POINTWISE_IDENTITY",
+        "CUDNN_POINTWISE_GEN_INDEX",
         "CUDNN_POINTWISE_GELU_FWD",
         "CUDNN_POINTWISE_GELU_BWD",
+        "CUDNN_POINTWISE_GELU_APPROX_TANH_FWD",
+        "CUDNN_POINTWISE_GELU_APPROX_TANH_BWD",
+        "CUDNN_POINTWISE_FLOOR",
+        "CUDNN_POINTWISE_EXP",
+        "CUDNN_POINTWISE_ERF",
         "CUDNN_POINTWISE_ELU_FWD",
         "CUDNN_POINTWISE_ELU_BWD",
+        "CUDNN_POINTWISE_DIV",
+        "CUDNN_POINTWISE_COS",
+        "CUDNN_POINTWISE_CMP_NEQ",
+        "CUDNN_POINTWISE_CMP_LT",
+        "CUDNN_POINTWISE_CMP_LE",
+        "CUDNN_POINTWISE_CMP_GT",
+        "CUDNN_POINTWISE_CMP_GE",
+        "CUDNN_POINTWISE_CMP_EQ",
+        "CUDNN_POINTWISE_CEIL",
+        "CUDNN_POINTWISE_BINARY_SELECT",
+        "CUDNN_POINTWISE_ADD_SQUARE",
         "CUDNN_POINTWISE_ADD",
+        "CUDNN_POINTWISE_ABS",
         "CUDNN_PATCHLEVEL",
         "CUDNN_PARAM_ZDESC",
         "CUDNN_PARAM_ZDATA_PLACEHOLDER",
@@ -7230,6 +7460,9 @@ sub warnUnsupportedFunctions {
         "CUDNN_OPS_INFER_PATCH",
         "CUDNN_OPS_INFER_MINOR",
         "CUDNN_OPS_INFER_MAJOR",
+        "CUDNN_NUMERICAL_NOTE_WINOGRAD_TILE_6x6",
+        "CUDNN_NUMERICAL_NOTE_WINOGRAD_TILE_4x4",
+        "CUDNN_NUMERICAL_NOTE_WINOGRAD_TILE_13x13",
         "CUDNN_NUMERICAL_NOTE_WINOGRAD",
         "CUDNN_NUMERICAL_NOTE_TYPE_COUNT",
         "CUDNN_NUMERICAL_NOTE_TENSOR_CORE",
@@ -7243,9 +7476,12 @@ sub warnUnsupportedFunctions {
         "CUDNN_NORM_OPS_NORM_ADD_ACTIVATION",
         "CUDNN_NORM_OPS_NORM_ACTIVATION",
         "CUDNN_NORM_OPS_NORM",
+        "CUDNN_NORM_FWD_TRAINING",
+        "CUDNN_NORM_FWD_INFERENCE",
         "CUDNN_NORM_ALGO_STANDARD",
         "CUDNN_NORM_ALGO_PERSIST",
         "CUDNN_NON_DETERMINISTIC",
+        "CUDNN_NEG_INF_PAD",
         "CUDNN_MINOR",
         "CUDNN_MH_ATTN_V_WEIGHTS",
         "CUDNN_MH_ATTN_V_BIASES",
@@ -7267,9 +7503,14 @@ sub warnUnsupportedFunctions {
         "CUDNN_LAYOUT_TYPE_PREFERRED_NHWC",
         "CUDNN_LAYOUT_TYPE_PREFERRED_NCHW",
         "CUDNN_LAYOUT_TYPE_COUNT",
+        "CUDNN_LAYER_NORM",
+        "CUDNN_KNOB_TYPE_WORKSPACE",
         "CUDNN_KNOB_TYPE_WINO_TILE",
         "CUDNN_KNOB_TYPE_USE_TEX",
         "CUDNN_KNOB_TYPE_TILE_SIZE",
+        "CUDNN_KNOB_TYPE_TILE_CGA_N",
+        "CUDNN_KNOB_TYPE_TILE_CGA_M",
+        "CUDNN_KNOB_TYPE_TILE_CGA",
         "CUDNN_KNOB_TYPE_TILEK",
         "CUDNN_KNOB_TYPE_SWIZZLE",
         "CUDNN_KNOB_TYPE_STAGES",
@@ -7293,9 +7534,13 @@ sub warnUnsupportedFunctions {
         "CUDNN_KNOB_TYPE_CTA_SPLIT_K_MODE",
         "CUDNN_KNOB_TYPE_COUNTS",
         "CUDNN_KNOB_TYPE_CHUNK_K",
+        "CUDNN_INSTANCE_NORM",
         "CUDNN_HEUR_MODE_INSTANT",
+        "CUDNN_HEUR_MODE_FALLBACK",
         "CUDNN_HEUR_MODE_B",
+        "CUDNN_HEUR_MODE_A",
         "CUDNN_HEUR_MODES_COUNT",
+        "CUDNN_GROUP_NORM",
         "CUDNN_GENSTATS_SUM_SQSUM",
         "CUDNN_FWD_MODE_TRAINING",
         "CUDNN_FWD_MODE_INFERENCE",
@@ -7310,6 +7555,7 @@ sub warnUnsupportedFunctions {
         "CUDNN_ERRQUERY_RAWCODE",
         "CUDNN_ERRQUERY_NONBLOCKING",
         "CUDNN_ERRQUERY_BLOCKING",
+        "CUDNN_EDGE_VAL_PAD",
         "CUDNN_DIVNORM_PRECOMPUTED_MEANS",
         "CUDNN_DIM_MAX",
         "CUDNN_DETERMINISTIC",
@@ -7318,6 +7564,9 @@ sub warnUnsupportedFunctions {
         "CUDNN_DATA_UINT8",
         "CUDNN_DATA_INT8x32",
         "CUDNN_DATA_INT64",
+        "CUDNN_DATA_FP8_E5M2",
+        "CUDNN_DATA_FP8_E4M3",
+        "CUDNN_DATA_BOOLEAN",
         "CUDNN_DATA_BFLOAT16",
         "CUDNN_CTC_LOSS_ALGO_NON_DETERMINISTIC",
         "CUDNN_CTC_LOSS_ALGO_DETERMINISTIC",
@@ -7331,20 +7580,30 @@ sub warnUnsupportedFunctions {
         "CUDNN_BN_FINALIZE_STATISTICS_INFERENCE",
         "CUDNN_BEHAVIOR_NOTE_TYPE_COUNT",
         "CUDNN_BEHAVIOR_NOTE_RUNTIME_COMPILATION",
+        "CUDNN_BEHAVIOR_NOTE_REQUIRES_FILTER_INT8x32_REORDER",
+        "CUDNN_BEHAVIOR_NOTE_REQUIRES_BIAS_INT8x32_REORDER",
+        "CUDNN_BATCH_NORM",
         "CUDNN_BATCHNORM_OPS_BN_ADD_ACTIVATION",
         "CUDNN_BATCHNORM_OPS_BN_ACTIVATION",
         "CUDNN_BATCHNORM_OPS_BN",
         "CUDNN_BACKEND_VARIANT_PACK_DESCRIPTOR",
         "CUDNN_BACKEND_TENSOR_DESCRIPTOR",
+        "CUDNN_BACKEND_RESAMPLE_DESCRIPTOR",
         "CUDNN_BACKEND_REDUCTION_DESCRIPTOR",
         "CUDNN_BACKEND_POINTWISE_DESCRIPTOR",
+        "CUDNN_BACKEND_OPERATION_SIGNAL_DESCRIPTOR",
+        "CUDNN_BACKEND_OPERATION_RESAMPLE_FWD_DESCRIPTOR",
+        "CUDNN_BACKEND_OPERATION_RESAMPLE_BWD_DESCRIPTOR",
         "CUDNN_BACKEND_OPERATION_REDUCTION_DESCRIPTOR",
         "CUDNN_BACKEND_OPERATION_POINTWISE_DESCRIPTOR",
+        "CUDNN_BACKEND_OPERATION_NORM_FORWARD_DESCRIPTOR",
+        "CUDNN_BACKEND_OPERATION_NORM_BACKWARD_DESCRIPTOR",
         "CUDNN_BACKEND_OPERATION_MATMUL_DESCRIPTOR",
         "CUDNN_BACKEND_OPERATION_GEN_STATS_DESCRIPTOR",
         "CUDNN_BACKEND_OPERATION_CONVOLUTION_FORWARD_DESCRIPTOR",
         "CUDNN_BACKEND_OPERATION_CONVOLUTION_BACKWARD_FILTER_DESCRIPTOR",
         "CUDNN_BACKEND_OPERATION_CONVOLUTION_BACKWARD_DATA_DESCRIPTOR",
+        "CUDNN_BACKEND_OPERATION_CONCAT_DESCRIPTOR",
         "CUDNN_BACKEND_OPERATION_BN_FINALIZE_STATISTICS_DESCRIPTOR",
         "CUDNN_BACKEND_OPERATION_BN_BWD_WEIGHTS_DESCRIPTOR",
         "CUDNN_BACKEND_OPERATIONGRAPH_DESCRIPTOR",
@@ -7366,11 +7625,21 @@ sub warnUnsupportedFunctions {
         "CUDNN_ATTR_TENSOR_VECTORIZED_DIMENSION",
         "CUDNN_ATTR_TENSOR_UNIQUE_ID",
         "CUDNN_ATTR_TENSOR_STRIDES",
+        "CUDNN_ATTR_TENSOR_REORDERING_MODE",
         "CUDNN_ATTR_TENSOR_IS_VIRTUAL",
         "CUDNN_ATTR_TENSOR_IS_BY_VALUE",
         "CUDNN_ATTR_TENSOR_DIMENSIONS",
         "CUDNN_ATTR_TENSOR_DATA_TYPE",
         "CUDNN_ATTR_TENSOR_BYTE_ALIGNMENT",
+        "CUDNN_ATTR_RESAMPLE_WINDOW_DIMS",
+        "CUDNN_ATTR_RESAMPLE_STRIDES",
+        "CUDNN_ATTR_RESAMPLE_SPATIAL_DIMS",
+        "CUDNN_ATTR_RESAMPLE_PRE_PADDINGS",
+        "CUDNN_ATTR_RESAMPLE_POST_PADDINGS",
+        "CUDNN_ATTR_RESAMPLE_PADDING_MODE",
+        "CUDNN_ATTR_RESAMPLE_NAN_PROPAGATION",
+        "CUDNN_ATTR_RESAMPLE_MODE",
+        "CUDNN_ATTR_RESAMPLE_COMP_TYPE",
         "CUDNN_ATTR_REDUCTION_OPERATOR",
         "CUDNN_ATTR_REDUCTION_COMP_TYPE",
         "CUDNN_ATTR_POINTWISE_SWISH_BETA",
@@ -7382,17 +7651,62 @@ sub warnUnsupportedFunctions {
         "CUDNN_ATTR_POINTWISE_MODE",
         "CUDNN_ATTR_POINTWISE_MATH_PREC",
         "CUDNN_ATTR_POINTWISE_ELU_ALPHA",
+        "CUDNN_ATTR_POINTWISE_AXIS",
+        "CUDNN_ATTR_OPERATION_SIGNAL_YDESC",
+        "CUDNN_ATTR_OPERATION_SIGNAL_XDESC",
+        "CUDNN_ATTR_OPERATION_SIGNAL_VALUE",
+        "CUDNN_ATTR_OPERATION_SIGNAL_MODE",
+        "CUDNN_ATTR_OPERATION_SIGNAL_FLAGDESC",
+        "CUDNN_ATTR_OPERATION_RESAMPLE_FWD_YDESC",
+        "CUDNN_ATTR_OPERATION_RESAMPLE_FWD_XDESC",
+        "CUDNN_ATTR_OPERATION_RESAMPLE_FWD_IDXDESC",
+        "CUDNN_ATTR_OPERATION_RESAMPLE_FWD_DESC",
+        "CUDNN_ATTR_OPERATION_RESAMPLE_FWD_BETA",
+        "CUDNN_ATTR_OPERATION_RESAMPLE_FWD_ALPHA",
+        "CUDNN_ATTR_OPERATION_RESAMPLE_BWD_IDXDESC",
+        "CUDNN_ATTR_OPERATION_RESAMPLE_BWD_DYDESC",
+        "CUDNN_ATTR_OPERATION_RESAMPLE_BWD_DXDESC",
+        "CUDNN_ATTR_OPERATION_RESAMPLE_BWD_DESC",
+        "CUDNN_ATTR_OPERATION_RESAMPLE_BWD_BETA",
+        "CUDNN_ATTR_OPERATION_RESAMPLE_BWD_ALPHA",
         "CUDNN_ATTR_OPERATION_REDUCTION_YDESC",
         "CUDNN_ATTR_OPERATION_REDUCTION_XDESC",
         "CUDNN_ATTR_OPERATION_REDUCTION_DESC",
         "CUDNN_ATTR_OPERATION_POINTWISE_YDESC",
         "CUDNN_ATTR_OPERATION_POINTWISE_XDESC",
+        "CUDNN_ATTR_OPERATION_POINTWISE_TDESC",
         "CUDNN_ATTR_OPERATION_POINTWISE_PW_DESCRIPTOR",
         "CUDNN_ATTR_OPERATION_POINTWISE_DYDESC",
         "CUDNN_ATTR_OPERATION_POINTWISE_DXDESC",
         "CUDNN_ATTR_OPERATION_POINTWISE_BDESC",
         "CUDNN_ATTR_OPERATION_POINTWISE_ALPHA2",
         "CUDNN_ATTR_OPERATION_POINTWISE_ALPHA1",
+        "CUDNN_ATTR_OPERATION_NORM_FWD_YDESC",
+        "CUDNN_ATTR_OPERATION_NORM_FWD_XDESC",
+        "CUDNN_ATTR_OPERATION_NORM_FWD_SCALE_DESC",
+        "CUDNN_ATTR_OPERATION_NORM_FWD_PHASE",
+        "CUDNN_ATTR_OPERATION_NORM_FWD_PEER_STAT_DESCS",
+        "CUDNN_ATTR_OPERATION_NORM_FWD_OUTPUT_RUNNING_VAR_DESC",
+        "CUDNN_ATTR_OPERATION_NORM_FWD_OUTPUT_RUNNING_MEAN_DESC",
+        "CUDNN_ATTR_OPERATION_NORM_FWD_MODE",
+        "CUDNN_ATTR_OPERATION_NORM_FWD_MEAN_DESC",
+        "CUDNN_ATTR_OPERATION_NORM_FWD_INV_VARIANCE_DESC",
+        "CUDNN_ATTR_OPERATION_NORM_FWD_INPUT_RUNNING_VAR_DESC",
+        "CUDNN_ATTR_OPERATION_NORM_FWD_INPUT_RUNNING_MEAN_DESC",
+        "CUDNN_ATTR_OPERATION_NORM_FWD_EXP_AVG_FACTOR_DESC",
+        "CUDNN_ATTR_OPERATION_NORM_FWD_EPSILON_DESC",
+        "CUDNN_ATTR_OPERATION_NORM_FWD_BIAS_DESC",
+        "CUDNN_ATTR_OPERATION_NORM_BWD_XDESC",
+        "CUDNN_ATTR_OPERATION_NORM_BWD_SCALE_DESC",
+        "CUDNN_ATTR_OPERATION_NORM_BWD_PEER_STAT_DESCS",
+        "CUDNN_ATTR_OPERATION_NORM_BWD_MODE",
+        "CUDNN_ATTR_OPERATION_NORM_BWD_MEAN_DESC",
+        "CUDNN_ATTR_OPERATION_NORM_BWD_INV_VARIANCE_DESC",
+        "CUDNN_ATTR_OPERATION_NORM_BWD_EPSILON_DESC",
+        "CUDNN_ATTR_OPERATION_NORM_BWD_DYDESC",
+        "CUDNN_ATTR_OPERATION_NORM_BWD_DXDESC",
+        "CUDNN_ATTR_OPERATION_NORM_BWD_DSCALE_DESC",
+        "CUDNN_ATTR_OPERATION_NORM_BWD_DBIAS_DESC",
         "CUDNN_ATTR_OPERATION_MATMUL_IRREGULARLY_STRIDED_BATCH_COUNT",
         "CUDNN_ATTR_OPERATION_MATMUL_DESC",
         "CUDNN_ATTR_OPERATION_MATMUL_CDESC",
@@ -7421,6 +7735,10 @@ sub warnUnsupportedFunctions {
         "CUDNN_ATTR_OPERATION_CONVOLUTION_BWD_DATA_CONV_DESC",
         "CUDNN_ATTR_OPERATION_CONVOLUTION_BWD_DATA_BETA",
         "CUDNN_ATTR_OPERATION_CONVOLUTION_BWD_DATA_ALPHA",
+        "CUDNN_ATTR_OPERATION_CONCAT_OUTPUT_DESC",
+        "CUDNN_ATTR_OPERATION_CONCAT_INPUT_DESCS",
+        "CUDNN_ATTR_OPERATION_CONCAT_INPLACE_INDEX",
+        "CUDNN_ATTR_OPERATION_CONCAT_AXIS",
         "CUDNN_ATTR_OPERATION_BN_FINALIZE_Y_SUM_DESC",
         "CUDNN_ATTR_OPERATION_BN_FINALIZE_Y_SQ_SUM_DESC",
         "CUDNN_ATTR_OPERATION_BN_FINALIZE_UPDATED_RUNNING_VAR_DESC",
@@ -7467,6 +7785,7 @@ sub warnUnsupportedFunctions {
         "CUDNN_ATTR_INTERMEDIATE_INFO_DEPENDENT_ATTRIBUTES",
         "CUDNN_ATTR_EXECUTION_PLAN_WORKSPACE_SIZE",
         "CUDNN_ATTR_EXECUTION_PLAN_RUN_ONLY_INTERMEDIATE_UIDS",
+        "CUDNN_ATTR_EXECUTION_PLAN_JSON_REPRESENTATION",
         "CUDNN_ATTR_EXECUTION_PLAN_HANDLE",
         "CUDNN_ATTR_EXECUTION_PLAN_ENGINE_CONFIG",
         "CUDNN_ATTR_EXECUTION_PLAN_COMPUTED_INTERMEDIATE_UIDS",
@@ -7500,12 +7819,6 @@ sub warnUnsupportedFunctions {
         "CUDNN_ADV_INFER_PATCH",
         "CUDNN_ADV_INFER_MINOR",
         "CUDNN_ADV_INFER_MAJOR",
-        "CUDA_R_64U",
-        "CUDA_R_64I",
-        "CUDA_R_4U",
-        "CUDA_R_4I",
-        "CUDA_R_16U",
-        "CUDA_R_16I",
         "CUDA_POINTER_ATTRIBUTE_P2P_TOKENS_v1",
         "CUDA_POINTER_ATTRIBUTE_P2P_TOKENS_st",
         "CUDA_POINTER_ATTRIBUTE_P2P_TOKENS",
@@ -7548,11 +7861,13 @@ sub warnUnsupportedFunctions {
         "CUDA_ERROR_MPS_MAX_CONNECTIONS_REACHED",
         "CUDA_ERROR_MPS_MAX_CLIENTS_REACHED",
         "CUDA_ERROR_MPS_CONNECTION_FAILED",
+        "CUDA_ERROR_MPS_CLIENT_TERMINATED",
         "CUDA_ERROR_MISALIGNED_ADDRESS",
         "CUDA_ERROR_LAUNCH_INCOMPATIBLE_TEXTURING",
         "CUDA_ERROR_JIT_COMPILER_NOT_FOUND",
         "CUDA_ERROR_JIT_COMPILATION_DISABLED",
         "CUDA_ERROR_INVALID_PC",
+        "CUDA_ERROR_INVALID_CLUSTER_SIZE",
         "CUDA_ERROR_INVALID_ADDRESS_SPACE",
         "CUDA_ERROR_ILLEGAL_INSTRUCTION",
         "CUDA_ERROR_HARDWARE_STACK_ERROR",
@@ -7561,12 +7876,6 @@ sub warnUnsupportedFunctions {
         "CUDA_ERROR_DEVICE_NOT_LICENSED",
         "CUDA_ERROR_COMPAT_NOT_SUPPORTED_ON_DEVICE",
         "CUDA_EGL_MAX_PLANES",
-        "CUDA_C_64U",
-        "CUDA_C_64I",
-        "CUDA_C_4U",
-        "CUDA_C_4I",
-        "CUDA_C_16U",
-        "CUDA_C_16I",
         "CUDA_CB",
         "CUDA_BATCH_MEM_OP_NODE_PARAMS_st",
         "CUDA_BATCH_MEM_OP_NODE_PARAMS",
@@ -7651,6 +7960,8 @@ sub warnHipOnlyUnsupportedFunctions {
     my $k = 0;
     foreach $func (
         "cublasZtrttp",
+        "cublasZtrmm_v2",
+        "cublasZtrmm",
         "cublasZtpttr",
         "cublasZmatinvBatched",
         "cublasZgemm3m",
@@ -7659,6 +7970,8 @@ sub warnHipOnlyUnsupportedFunctions {
         "cublasUint8gemmBias",
         "cublasSwapEx",
         "cublasStrttp",
+        "cublasStrmm_v2",
+        "cublasStrmm",
         "cublasStpttr",
         "cublasSmatinvBatched",
         "cublasShutdown",
@@ -7690,16 +8003,19 @@ sub warnHipOnlyUnsupportedFunctions {
         "cublasGetCudartVersion",
         "cublasFree",
         "cublasDtrttp",
+        "cublasDtrmm_v2",
+        "cublasDtrmm",
         "cublasDtpttr",
         "cublasDmatinvBatched",
         "cublasDgelsBatched",
         "cublasCtrttp",
+        "cublasCtrmm_v2",
+        "cublasCtrmm",
         "cublasCtpttr",
         "cublasCsyrkEx",
         "cublasCsyrk3mEx",
         "cublasCopyEx",
         "cublasContext",
-        "cublasComputeType_t",
         "cublasCmatinvBatched",
         "cublasCherkEx",
         "cublasCherk3mEx",
@@ -7711,6 +8027,20 @@ sub warnHipOnlyUnsupportedFunctions {
         "cublasCgelsBatched",
         "cublasAsumEx",
         "cublasAlloc",
+        "CUDA_R_8F_E5M2",
+        "CUDA_R_8F_E4M3",
+        "CUDA_R_64U",
+        "CUDA_R_64I",
+        "CUDA_R_4U",
+        "CUDA_R_4I",
+        "CUDA_R_16U",
+        "CUDA_R_16I",
+        "CUDA_C_64U",
+        "CUDA_C_64I",
+        "CUDA_C_4U",
+        "CUDA_C_4I",
+        "CUDA_C_16U",
+        "CUDA_C_16I",
         "CUBLAS_VER_PATCH",
         "CUBLAS_VER_MINOR",
         "CUBLAS_VER_MAJOR",
@@ -7816,7 +8146,6 @@ sub warnRocOnlyUnsupportedFunctions {
         "cublasSetMathMode",
         "cublasSetLoggerCallback",
         "cublasSetKernelStream",
-        "cublasSetAtomicsMode",
         "cublasRotmgEx",
         "cublasRotmEx",
         "cublasRotgEx",
@@ -7824,12 +8153,10 @@ sub warnRocOnlyUnsupportedFunctions {
         "cublasMath_t",
         "cublasLoggerConfigure",
         "cublasLogCallback",
-        "cublasInit",
         "cublasIaminEx",
         "cublasIamaxEx",
         "cublasGetVersion_v2",
         "cublasGetVersion",
-        "cublasGetStatusString",
         "cublasGetStatusName",
         "cublasGetSmCountTarget",
         "cublasGetProperty",
@@ -7837,7 +8164,6 @@ sub warnRocOnlyUnsupportedFunctions {
         "cublasGetLoggerCallback",
         "cublasGetError",
         "cublasGetCudartVersion",
-        "cublasGetAtomicsMode",
         "cublasFree",
         "cublasDtrttp",
         "cublasDtpttr",
@@ -7852,7 +8178,6 @@ sub warnRocOnlyUnsupportedFunctions {
         "cublasCsyrkEx",
         "cublasCsyrk3mEx",
         "cublasCopyEx",
-        "cublasComputeType_t",
         "cublasCmatinvBatched",
         "cublasCherkEx",
         "cublasCherk3mEx",
@@ -7868,6 +8193,20 @@ sub warnRocOnlyUnsupportedFunctions {
         "cublasCgelsBatched",
         "cublasAsumEx",
         "cublasAlloc",
+        "CUDA_R_8F_E5M2",
+        "CUDA_R_8F_E4M3",
+        "CUDA_R_64U",
+        "CUDA_R_64I",
+        "CUDA_R_4U",
+        "CUDA_R_4I",
+        "CUDA_R_16U",
+        "CUDA_R_16I",
+        "CUDA_C_64U",
+        "CUDA_C_64I",
+        "CUDA_C_4U",
+        "CUDA_C_4I",
+        "CUDA_C_16U",
+        "CUDA_C_16I",
         "CUBLAS_VER_PATCH",
         "CUBLAS_VER_MINOR",
         "CUBLAS_VER_MAJOR",
@@ -7955,7 +8294,7 @@ if ($help) {
     print STDERR "$USAGE\n";
 }
 if ($version) {
-    print STDERR "HIP version 5.3.0\n";
+    print STDERR "HIP version 5.4.0\n";
 }
 while (@ARGV) {
     $fileName=shift (@ARGV);
@@ -8084,7 +8423,7 @@ while (@ARGV) {
             transformHostFunctions();
             # TODO: would like to move this code outside loop but it uses $_ which contains the whole file
             unless ($no_output) {
-                my $apiCalls   = $ft{'error'} + $ft{'init'} + $ft{'version'} + $ft{'device'} + $ft{'context'} + $ft{'module'} + $ft{'memory'} + $ft{'virtual_memory'} + $ft{'stream_ordered_memory'} + $ft{'addressing'} + $ft{'stream'} + $ft{'event'} + $ft{'external_resource_interop'} + $ft{'stream_memory'} + $ft{'execution'} + $ft{'graph'} + $ft{'occupancy'} + $ft{'texture'} + $ft{'surface'} + $ft{'peer'} + $ft{'graphics'} + $ft{'interactions'} + $ft{'profiler'} + $ft{'openGL'} + $ft{'D3D9'} + $ft{'D3D10'} + $ft{'D3D11'} + $ft{'VDPAU'} + $ft{'EGL'} + $ft{'thread'} + $ft{'complex'} + $ft{'library'} + $ft{'device_library'} + $ft{'include'} + $ft{'include_cuda_main_header'} + $ft{'include_cuda_main_header_v2'} + $ft{'type'} + $ft{'literal'} + $ft{'numeric_literal'} + $ft{'define'};
+                my $apiCalls   = $ft{'error'} + $ft{'init'} + $ft{'version'} + $ft{'device'} + $ft{'context'} + $ft{'module'} + $ft{'memory'} + $ft{'virtual_memory'} + $ft{'stream_ordered_memory'} + $ft{'addressing'} + $ft{'stream'} + $ft{'event'} + $ft{'external_resource_interop'} + $ft{'stream_memory'} + $ft{'execution'} + $ft{'graph'} + $ft{'occupancy'} + $ft{'texture'} + $ft{'surface'} + $ft{'peer'} + $ft{'graphics'} + $ft{'interactions'} + $ft{'profiler'} + $ft{'openGL'} + $ft{'D3D9'} + $ft{'D3D10'} + $ft{'D3D11'} + $ft{'VDPAU'} + $ft{'EGL'} + $ft{'thread'} + $ft{'complex'} + $ft{'library'} + $ft{'device_library'} + $ft{'device_type'} + $ft{'include'} + $ft{'include_cuda_main_header'} + $ft{'include_cuda_main_header_v2'} + $ft{'type'} + $ft{'literal'} + $ft{'numeric_literal'} + $ft{'define'};
                 my $kernStuff  = $hasDeviceCode + $ft{'kernel_launch'} + $ft{'device_function'};
                 my $totalCalls = $apiCalls + $kernStuff;
                 $is_dos = m/\r\n$/;

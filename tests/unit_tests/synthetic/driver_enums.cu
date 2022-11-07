@@ -313,21 +313,21 @@ int main() {
 
   // CHECK: hipJitOption jit_option;
   // CHECK-NEXT: hipJitOption jit_option_enum;
-  // CHECK-NEXT: hipJitOption JIT_MAX_REGISTERS = hipJitOptionMaxRegisters;
-  // CHECK-NEXT: hipJitOption JIT_THREADS_PER_BLOCK = hipJitOptionThreadsPerBlock;
-  // CHECK-NEXT: hipJitOption JIT_WALL_TIME = hipJitOptionWallTime;
-  // CHECK-NEXT: hipJitOption JIT_INFO_LOG_BUFFER = hipJitOptionInfoLogBuffer;
-  // CHECK-NEXT: hipJitOption JIT_INFO_LOG_BUFFER_SIZE_BYTES = hipJitOptionInfoLogBufferSizeBytes;
-  // CHECK-NEXT: hipJitOption JIT_ERROR_LOG_BUFFER = hipJitOptionErrorLogBuffer;
-  // CHECK-NEXT: hipJitOption JIT_ERROR_LOG_BUFFER_SIZE_BYTES = hipJitOptionErrorLogBufferSizeBytes;
-  // CHECK-NEXT: hipJitOption JIT_OPTIMIZATION_LEVEL = hipJitOptionOptimizationLevel;
-  // CHECK-NEXT: hipJitOption JIT_TARGET_FROM_CUCONTEXT = hipJitOptionTargetFromContext;
-  // CHECK-NEXT: hipJitOption JIT_TARGET = hipJitOptionTarget;
-  // CHECK-NEXT: hipJitOption JIT_FALLBACK_STRATEGY = hipJitOptionFallbackStrategy;
-  // CHECK-NEXT: hipJitOption JIT_GENERATE_DEBUG_INFO = hipJitOptionGenerateDebugInfo;
-  // CHECK-NEXT: hipJitOption JIT_LOG_VERBOSE = hipJitOptionLogVerbose;
-  // CHECK-NEXT: hipJitOption JIT_GENERATE_LINE_INFO = hipJitOptionGenerateLineInfo;
-  // CHECK-NEXT: hipJitOption JIT_CACHE_MODE = hipJitOptionCacheMode;
+  // CHECK-NEXT: hipJitOption JIT_MAX_REGISTERS = HIPRTC_JIT_MAX_REGISTERS;
+  // CHECK-NEXT: hipJitOption JIT_THREADS_PER_BLOCK = HIPRTC_JIT_THREADS_PER_BLOCK;
+  // CHECK-NEXT: hipJitOption JIT_WALL_TIME = HIPRTC_JIT_WALL_TIME;
+  // CHECK-NEXT: hipJitOption JIT_INFO_LOG_BUFFER = HIPRTC_JIT_INFO_LOG_BUFFER;
+  // CHECK-NEXT: hipJitOption JIT_INFO_LOG_BUFFER_SIZE_BYTES = HIPRTC_JIT_INFO_LOG_BUFFER_SIZE_BYTES;
+  // CHECK-NEXT: hipJitOption JIT_ERROR_LOG_BUFFER = HIPRTC_JIT_ERROR_LOG_BUFFER;
+  // CHECK-NEXT: hipJitOption JIT_ERROR_LOG_BUFFER_SIZE_BYTES = HIPRTC_JIT_ERROR_LOG_BUFFER_SIZE_BYTES;
+  // CHECK-NEXT: hipJitOption JIT_OPTIMIZATION_LEVEL = HIPRTC_JIT_OPTIMIZATION_LEVEL;
+  // CHECK-NEXT: hipJitOption JIT_TARGET_FROM_CUCONTEXT = HIPRTC_JIT_TARGET_FROM_HIPCONTEXT;
+  // CHECK-NEXT: hipJitOption JIT_TARGET = HIPRTC_JIT_TARGET;
+  // CHECK-NEXT: hipJitOption JIT_FALLBACK_STRATEGY = HIPRTC_JIT_FALLBACK_STRATEGY;
+  // CHECK-NEXT: hipJitOption JIT_GENERATE_DEBUG_INFO = HIPRTC_JIT_GENERATE_DEBUG_INFO;
+  // CHECK-NEXT: hipJitOption JIT_LOG_VERBOSE = HIPRTC_JIT_LOG_VERBOSE;
+  // CHECK-NEXT: hipJitOption JIT_GENERATE_LINE_INFO = HIPRTC_JIT_GENERATE_LINE_INFO;
+  // CHECK-NEXT: hipJitOption JIT_CACHE_MODE = HIPRTC_JIT_CACHE_MODE;
   CUjit_option jit_option;
   CUjit_option_enum jit_option_enum;
   CUjit_option JIT_MAX_REGISTERS = CU_JIT_MAX_REGISTERS;
@@ -346,7 +346,7 @@ int main() {
   CUjit_option JIT_GENERATE_LINE_INFO = CU_JIT_GENERATE_LINE_INFO;
   CUjit_option JIT_CACHE_MODE = CU_JIT_CACHE_MODE;
 
-  // CHECK: hipJitOption JIT_NUM_OPTIONS = hipJitOptionNumOptions;
+  // CHECK: hipJitOption JIT_NUM_OPTIONS = HIPRTC_JIT_NUM_OPTIONS;
   CUjit_option JIT_NUM_OPTIONS = CU_JIT_NUM_OPTIONS;
 
   // CHECK: hipLimit_t limit;
@@ -642,8 +642,8 @@ int main() {
   CUdevice_P2PAttribute DEVICE_P2P_ATTRIBUTE_ACCESS_SUPPORTED = CU_DEVICE_P2P_ATTRIBUTE_ACCESS_SUPPORTED;
   CUdevice_P2PAttribute DEVICE_P2P_ATTRIBUTE_NATIVE_ATOMIC_SUPPORTED = CU_DEVICE_P2P_ATTRIBUTE_NATIVE_ATOMIC_SUPPORTED;
 
-  // CHECK: hipJitOption JIT_NEW_SM3X_OPT = hipJitOptionSm3xOpt;
-  // CHECK-NEXT: hipJitOption JIT_FAST_COMPILE = hipJitOptionFastCompile;
+  // CHECK: hipJitOption JIT_NEW_SM3X_OPT = HIPRTC_JIT_NEW_SM3X_OPT;
+  // CHECK-NEXT: hipJitOption JIT_FAST_COMPILE = HIPRTC_JIT_FAST_COMPILE;
   CUjit_option JIT_NEW_SM3X_OPT = CU_JIT_NEW_SM3X_OPT;
   CUjit_option JIT_FAST_COMPILE = CU_JIT_FAST_COMPILE;
 
@@ -913,15 +913,6 @@ int main() {
   // CHECK: hipDeviceAttribute_t DEVICE_ATTRIBUTE_MAX_BLOCKS_PER_MULTIPROCESSOR = hipDeviceAttributeMaxBlocksPerMultiprocessor;
   CUdevice_attribute DEVICE_ATTRIBUTE_MAX_BLOCKS_PER_MULTIPROCESSOR = CU_DEVICE_ATTRIBUTE_MAX_BLOCKS_PER_MULTIPROCESSOR;
 
-  // CHECK: hipKernelNodeAttrID kernelNodeAttrID;
-  // CHECK-NEXT: hipKernelNodeAttrID kernelNodeAttrID_enum;
-  // CHECK-NEXT: hipKernelNodeAttrID KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW = hipKernelNodeAttributeAccessPolicyWindow;
-  // CHECK-NEXT: hipKernelNodeAttrID KERNEL_NODE_ATTRIBUTE_COOPERATIVE = hipKernelNodeAttributeCooperative;
-  CUkernelNodeAttrID kernelNodeAttrID;
-  CUkernelNodeAttrID_enum kernelNodeAttrID_enum;
-  CUkernelNodeAttrID KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW = CU_KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW;
-  CUkernelNodeAttrID KERNEL_NODE_ATTRIBUTE_COOPERATIVE = CU_KERNEL_NODE_ATTRIBUTE_COOPERATIVE;
-
   // CHECK: hipAccessProperty accessProperty;
   // CHECK-NEXT: hipAccessProperty accessProperty_enum;
   // CHECK-NEXT: hipAccessProperty ACCESS_PROPERTY_NORMAL = hipAccessPropertyNormal;
@@ -937,7 +928,19 @@ int main() {
   CUpointer_attribute POINTER_ATTRIBUTE_IS_GPU_DIRECT_RDMA_CAPABLE = CU_POINTER_ATTRIBUTE_IS_GPU_DIRECT_RDMA_CAPABLE;
 #endif
 
+#if CUDA_VERSION >= 11000 && CUDA_VERSION < 11080
+  // CHECK: hipKernelNodeAttrID kernelNodeAttrID_enum;
+  CUkernelNodeAttrID_enum kernelNodeAttrID_enum;
+#endif
+
 #if CUDA_VERSION >= 11010
+  // CHECK: hipKernelNodeAttrID kernelNodeAttrID;
+  // CHECK-NEXT: hipKernelNodeAttrID KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW = hipKernelNodeAttributeAccessPolicyWindow;
+  // CHECK-NEXT: hipKernelNodeAttrID KERNEL_NODE_ATTRIBUTE_COOPERATIVE = hipKernelNodeAttributeCooperative;
+  CUkernelNodeAttrID kernelNodeAttrID;
+  CUkernelNodeAttrID KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW = CU_KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW;
+  CUkernelNodeAttrID KERNEL_NODE_ATTRIBUTE_COOPERATIVE = CU_KERNEL_NODE_ATTRIBUTE_COOPERATIVE;
+
   // CHECK: hipGraphNodeType GRAPH_NODE_TYPE_WAIT_EVENT = hipGraphNodeTypeWaitEvent;
   // CHECK-NEXT: hipGraphNodeType GRAPH_NODE_TYPE_EVENT_RECORD = hipGraphNodeTypeEventRecord;
   CUgraphNodeType GRAPH_NODE_TYPE_WAIT_EVENT = CU_GRAPH_NODE_TYPE_WAIT_EVENT;

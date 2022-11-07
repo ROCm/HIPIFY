@@ -119,6 +119,7 @@ enum ConvTypes {
   CONV_LIB_FUNC,
   CONV_LIB_DEVICE_FUNC,
   CONV_DEVICE_FUNC,
+  CONV_DEVICE_TYPE,
   CONV_INCLUDE,
   CONV_INCLUDE_CUDA_MAIN_H,
   CONV_INCLUDE_CUDA_MAIN_V2_H,
@@ -198,6 +199,7 @@ enum cudaVersions {
   CUDA_115 = 11050,
   CUDA_116 = 11060,
   CUDA_117 = 11070,
+  CUDA_118 = 11080,
   CUDNN_10 = 100,
   CUDNN_20 = 200,
   CUDNN_30 = 300,
@@ -231,6 +233,10 @@ enum cudaVersions {
   CUDNN_810 = 810,
   CUDNN_811 = 811,
   CUDNN_820 = 820,
+  CUDNN_830 = 830,
+  CUDNN_840 = 840,
+  CUDNN_850 = 850,
+  CUDNN_860 = 860,
 };
 
 enum hipVersions {
@@ -240,6 +246,7 @@ enum hipVersions {
   HIP_1052 = 1052,
   HIP_1060 = 1060,
   HIP_1061 = 1061,
+  HIP_1064 = 1064,
   HIP_1070 = 1070,
   HIP_1071 = 1071,
   HIP_1080 = 1080,
@@ -290,7 +297,8 @@ enum hipVersions {
   HIP_5011 = 5011,
   HIP_5020 = 5020,
   HIP_5030 = 5030,
-  HIP_LATEST = HIP_5030,
+  HIP_5040 = 5040,
+  HIP_LATEST = HIP_5040,
 };
 
 struct cudaAPIversions {
