@@ -297,7 +297,7 @@ namespace perl {
     *streamPtr.get() << tab << my << "$fileName  = shift();" << endl;
     *streamPtr.get() << tab << my << "$global    = shift();" << endl;
     *streamPtr.get() << tab << my << "$total     = totalStats(\\%counts);" << endl;
-    *streamPtr.get() << tab << printf << "\"\\n[HIPIFY] info: file '$fileName' statisitics:\\n\";" << endl;
+    *streamPtr.get() << tab << printf << "\"\\n[HIPIFY] info: file '$fileName' statistics:\\n\";" << endl;
     *streamPtr.get() << tab << printf << "\"  CONVERTED refs count: $total\\n\";" << endl;
     *streamPtr.get() << tab << printf << "\"  TOTAL lines of code: $loc\\n\";" << endl;
     *streamPtr.get() << tab << printf << "\"  WARNINGS: $warnings\\n\";" << endl;
