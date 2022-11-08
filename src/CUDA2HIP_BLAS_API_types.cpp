@@ -79,9 +79,6 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP {
   {"CUBLAS_ATOMICS_NOT_ALLOWED",     {"HIPBLAS_ATOMICS_NOT_ALLOWED",     "rocblas_atomics_not_allowed",           CONV_NUMERIC_LITERAL, API_BLAS, 2}},
   {"CUBLAS_ATOMICS_ALLOWED",         {"HIPBLAS_ATOMICS_ALLOWED",         "rocblas_atomics_allowed",               CONV_NUMERIC_LITERAL, API_BLAS, 2}},
 
-  // Blas Data Type
-  {"cublasDataType_t",               {"hipblasDatatype_t",               "rocblas_datatype",                      CONV_TYPE, API_BLAS, 2}},
-
   // Blas Math mode/tensor operation
   {"cublasMath_t",                                     {"hipblasMath_t",                                     "",  CONV_TYPE, API_BLAS, 2, UNSUPPORTED}},
   {"CUBLAS_DEFAULT_MATH",                              {"HIPBLAS_DEFAULT_MATH",                              "",  CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}}, // 0
@@ -137,7 +134,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP {
   {"CUBLAS_GEMM_ALGO14_TENSOR_OP",   {"HIPBLAS_GEMM_ALGO14_TENSOR_OP",   "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}},  // 114
   {"CUBLAS_GEMM_ALGO15_TENSOR_OP",   {"HIPBLAS_GEMM_ALGO15_TENSOR_OP",   "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}},  // 115
 
-  // TODO: rename hipblasDatatype_t to hipDataType_t and move from hipBLAS to HIP
+  // Blas Data Type
+  {"cublasDataType_t",               {"hipblasDatatype_t",               "rocblas_datatype",                      CONV_TYPE, API_BLAS, 2}},
+
+  // TODO: rename hipblasDatatype_t to hipDataType_t and move from hipBLAS to HIP: https://github.com/ROCmSoftwarePlatform/hipBLAS/issues/366
   {"cudaDataType_t",                 {"hipblasDatatype_t",               "rocblas_datatype_",                     CONV_TYPE, API_BLAS, 3}},
   {"cudaDataType",                   {"hipblasDatatype_t",               "rocblas_datatype",                      CONV_TYPE, API_BLAS, 3}},
   {"CUDA_R_16F",                     {"HIPBLAS_R_16F",                   "rocblas_datatype_f16_r",                CONV_NUMERIC_LITERAL, API_BLAS, 3}}, //  2 // 150
@@ -347,4 +347,48 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_TYPE_NAME_VER_MAP {
   {"HIPBLAS_R_16B",                                    {HIP_3000, HIP_0,    HIP_0   }},
   {"HIPBLAS_C_16B",                                    {HIP_3000, HIP_0,    HIP_0   }},
   {"hipblasHandle_t",                                  {HIP_3000, HIP_0,    HIP_0   }},
+  {"rocblas_handle",                                   {HIP_1050, HIP_0,    HIP_0   }},
+  {"_rocblas_handle",                                  {HIP_1050, HIP_0,    HIP_0   }},
+  {"rocblas_operation",                                {HIP_1050, HIP_0,    HIP_0   }},
+  {"rocblas_operation_none",                           {HIP_1050, HIP_0,    HIP_0   }},
+  {"rocblas_operation_transpose",                      {HIP_1050, HIP_0,    HIP_0   }},
+  {"rocblas_operation_conjugate_transpose",            {HIP_1050, HIP_0,    HIP_0   }},
+  {"rocblas_fill",                                     {HIP_1050, HIP_0,    HIP_0   }},
+  {"rocblas_fill_upper",                               {HIP_1050, HIP_0,    HIP_0   }},
+  {"rocblas_fill_lower",                               {HIP_1050, HIP_0,    HIP_0   }},
+  {"rocblas_fill_full",                                {HIP_1050, HIP_0,    HIP_0   }},
+  {"rocblas_diagonal",                                 {HIP_1050, HIP_0,    HIP_0   }},
+  {"rocblas_diagonal_non_unit",                        {HIP_1050, HIP_0,    HIP_0   }},
+  {"rocblas_diagonal_unit",                            {HIP_1050, HIP_0,    HIP_0   }},
+  {"rocblas_side",                                     {HIP_1050, HIP_0,    HIP_0   }},
+  {"rocblas_side_left",                                {HIP_1050, HIP_0,    HIP_0   }},
+  {"rocblas_side_right",                               {HIP_1050, HIP_0,    HIP_0   }},
+  {"rocblas_status",                                   {HIP_1050, HIP_0,    HIP_0   }},
+  {"rocblas_status_success",                           {HIP_1050, HIP_0,    HIP_0   }},
+  {"rocblas_status_invalid_handle",                    {HIP_1050, HIP_0,    HIP_0   }},
+  {"rocblas_status_not_implemented",                   {HIP_1050, HIP_0,    HIP_0   }},
+  {"rocblas_status_invalid_pointer",                   {HIP_1050, HIP_0,    HIP_0   }},
+  {"rocblas_status_invalid_size",                      {HIP_1050, HIP_0,    HIP_0   }},
+  {"rocblas_status_memory_error",                      {HIP_1050, HIP_0,    HIP_0   }},
+  {"rocblas_status_internal_error",                    {HIP_1050, HIP_0,    HIP_0   }},
+  {"rocblas_status_perf_degraded",                     {HIP_3050, HIP_0,    HIP_0   }},
+  {"rocblas_status_size_query_mismatch",               {HIP_3050, HIP_0,    HIP_0   }},
+  {"rocblas_datatype",                                 {HIP_1082, HIP_0,    HIP_0   }},
+  {"rocblas_datatype_",                                {HIP_1082, HIP_0,    HIP_0   }},
+  {"rocblas_datatype_f16_r",                           {HIP_1082, HIP_0,    HIP_0   }},
+  {"rocblas_datatype_f32_r",                           {HIP_1082, HIP_0,    HIP_0   }},
+  {"rocblas_datatype_f64_r",                           {HIP_1082, HIP_0,    HIP_0   }},
+  {"rocblas_datatype_f16_c",                           {HIP_1082, HIP_0,    HIP_0   }},
+  {"rocblas_datatype_f32_c",                           {HIP_1082, HIP_0,    HIP_0   }},
+  {"rocblas_datatype_f64_c",                           {HIP_1082, HIP_0,    HIP_0   }},
+  {"rocblas_datatype_i8_r",                            {HIP_2000, HIP_0,    HIP_0   }},
+  {"rocblas_datatype_u8_r",                            {HIP_2000, HIP_0,    HIP_0   }},
+  {"rocblas_datatype_i32_r",                           {HIP_2000, HIP_0,    HIP_0   }},
+  {"rocblas_datatype_u32_r",                           {HIP_2000, HIP_0,    HIP_0   }},
+  {"rocblas_datatype_i8_c",                            {HIP_2000, HIP_0,    HIP_0   }},
+  {"rocblas_datatype_u8_c",                            {HIP_2000, HIP_0,    HIP_0   }},
+  {"rocblas_datatype_i32_c",                           {HIP_2000, HIP_0,    HIP_0   }},
+  {"rocblas_datatype_u32_c",                           {HIP_2000, HIP_0,    HIP_0   }},
+  {"rocblas_datatype_bf16_r",                          {HIP_3050, HIP_0,    HIP_0   }},
+  {"rocblas_datatype_bf16_c",                          {HIP_3050, HIP_0,    HIP_0   }},
 };
