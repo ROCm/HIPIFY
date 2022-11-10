@@ -773,7 +773,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
 
   // cuDNN types
   {"cudnnContext",                                                   {"hipdnnContext",                                                   "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
-  {"cudnnHandle_t",                                                  {"hipdnnHandle_t",                                                  "", CONV_TYPE, API_DNN, 1}},
+  {"cudnnHandle_t",                                                  {"hipdnnHandle_t",                                                  "miopenHandle_t",                                                  CONV_TYPE, API_DNN, 1}},
   {"cudnnTensorStruct",                                              {"hipdnnTensorStruct",                                              "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
   {"cudnnTensorDescriptor_t",                                        {"hipdnnTensorDescriptor_t",                                        "", CONV_TYPE, API_DNN, 1}},
   {"cudnnConvolutionStruct",                                         {"hipdnnConvolutionStruct",                                         "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},

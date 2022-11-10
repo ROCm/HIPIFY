@@ -210,7 +210,7 @@ void HipifyAction::FindAndReplace(StringRef name,
   if (!bReplace) {
     return;
   }
-  StringRef repName = Statistics::isToRoc(found->second) ? found->second.rocName : found->second.hipName;
+  StringRef repName = Statistics::isToRoc(found->second) ? (found->second.rocName.empty() ? found->second.hipName : found->second.rocName) : found->second.hipName;
   auto &SM = getCompilerInstance().getSourceManager();
   ct::Replacement Rep(SM, sl, name.size(), repName.str());
   clang::FullSourceLoc fullSL(sl, SM);
@@ -359,7 +359,7 @@ void HipifyAction::InclusionDirective(clang::SourceLocation hash_loc,
   // Keep the same include type that the user gave.
   if (!exclude) {
     clang::SmallString<128> includeBuffer;
-    llvm::StringRef name = Statistics::isToRoc(found->second) ? found->second.rocName : found->second.hipName;
+    llvm::StringRef name = Statistics::isToRoc(found->second) ? (found->second.rocName.empty() ? found->second.hipName : found->second.rocName) : found->second.hipName;
     if (is_angled) newInclude = llvm::Twine("<" + name+ ">").toStringRef(includeBuffer);
     else           newInclude = llvm::Twine("\"" + name + "\"").toStringRef(includeBuffer);
   } else {
