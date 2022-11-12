@@ -391,4 +391,12 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_TYPE_NAME_VER_MAP {
   {"rocblas_datatype_u32_c",                           {HIP_2000, HIP_0,    HIP_0   }},
   {"rocblas_datatype_bf16_r",                          {HIP_3050, HIP_0,    HIP_0   }},
   {"rocblas_datatype_bf16_c",                          {HIP_3050, HIP_0,    HIP_0   }},
+  {"rocblas_pointer_mode",                             {HIP_1060, HIP_0,    HIP_0   }},
+  {"rocblas_pointer_mode_host",                        {HIP_1060, HIP_0,    HIP_0   }},
+  {"rocblas_pointer_mode_device",                      {HIP_1060, HIP_0,    HIP_0   }},
+  {"rocblas_atomics_mode",                             {HIP_3080, HIP_0,    HIP_0   }},
+  {"rocblas_atomics_not_allowed",                      {HIP_3080, HIP_0,    HIP_0   }},
+  {"rocblas_atomics_allowed",                          {HIP_3080, HIP_0,    HIP_0   }},
+  {"rocblas_gemm_algo",                                {HIP_1082, HIP_0,    HIP_0   }},
+  {"rocblas_gemm_algo_standard",                       {HIP_1082, HIP_0,    HIP_0   }},
 };
