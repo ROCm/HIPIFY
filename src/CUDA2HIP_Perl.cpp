@@ -104,7 +104,7 @@ namespace perl {
   const string sRocSubstitutions = "rocSubstitutions";
   const string sSubst = "subst";
   const string sExperimentalSubstitutions = "experimentalSubstitutions";
-  const string sTansformKernelLaunch = "transformKernelLaunch";
+  const string sTransformKernelLaunch = "transformKernelLaunch";
   const string sTransformCubNamespace = "transformCubNamespace";
   const string sCountSupportedDeviceFunctions = "countSupportedDeviceFunctions";
 
@@ -297,7 +297,7 @@ namespace perl {
     *streamPtr.get() << tab << my << "$fileName  = shift();" << endl;
     *streamPtr.get() << tab << my << "$global    = shift();" << endl;
     *streamPtr.get() << tab << my << "$total     = totalStats(\\%counts);" << endl;
-    *streamPtr.get() << tab << printf << "\"\\n[HIPIFY] info: file '$fileName' statisitics:\\n\";" << endl;
+    *streamPtr.get() << tab << printf << "\"\\n[HIPIFY] info: file '$fileName' statistics:\\n\";" << endl;
     *streamPtr.get() << tab << printf << "\"  CONVERTED refs count: $total\\n\";" << endl;
     *streamPtr.get() << tab << printf << "\"  TOTAL lines of code: $loc\\n\";" << endl;
     *streamPtr.get() << tab << printf << "\"  WARNINGS: $warnings\\n\";" << endl;
@@ -424,7 +424,7 @@ namespace perl {
   }
 
   void generateKernelLaunch(unique_ptr<ostream> &streamPtr) {
-    *streamPtr.get() << endl << "# CUDA Kernel Launch Syntax" << endl << sub << sTansformKernelLaunch << " {" << endl;
+    *streamPtr.get() << endl << "# CUDA Kernel Launch Syntax" << endl << sub << sTransformKernelLaunch << " {" << endl;
     *streamPtr.get() << tab << no_warns << endl;
     *streamPtr.get() << tab << my_k << endl_2;
 
@@ -821,7 +821,7 @@ namespace perl {
     *streamPtr.get() << tab_3 << "}" << endl;
     *streamPtr.get() << tab_3 << sSimpleSubstitutions << "();" << endl;
     *streamPtr.get() << tab_3 << "if (!$cuda_kernel_execution_syntax || $hip_kernel_execution_syntax) {" << endl;
-    *streamPtr.get() << tab_4 << sTansformKernelLaunch << "();" << endl;
+    *streamPtr.get() << tab_4 << sTransformKernelLaunch << "();" << endl;
     *streamPtr.get() << tab_3 << "}" << endl;
     *streamPtr.get() << tab_3 << sTransformCubNamespace << "();" << endl;
     *streamPtr.get() << tab_3 << my << "$hasDeviceCode = $countKeywords + $ft{'device_function'};" << endl;

@@ -804,7 +804,7 @@ sub printStats {
     my $fileName  = shift();
     my $global    = shift();
     my $total     = totalStats(\%counts);
-    printf STDERR "\n[HIPIFY] info: file '$fileName' statisitics:\n";
+    printf STDERR "\n[HIPIFY] info: file '$fileName' statistics:\n";
     printf STDERR "  CONVERTED refs count: $total\n";
     printf STDERR "  TOTAL lines of code: $loc\n";
     printf STDERR "  WARNINGS: $warnings\n";

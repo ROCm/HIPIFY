@@ -25,17 +25,18 @@ THE SOFTWARE.
 // Map of all functions
 const std::map<llvm::StringRef, hipCounter> CUDA_DNN_FUNCTION_MAP {
 
-  {"cudnnGetVersion",                                     {"hipdnnGetVersion",                                     "", CONV_LIB_FUNC, API_DNN, 2}},
+  // NOTE: MIOPEN_EXPORT miopenStatus_t miopenGetVersion(size_t* major, size_t* minor, size_t* patch) and size_t CUDNNWINAPI cudnnGetVersion(void) have different signatures
+  {"cudnnGetVersion",                                     {"hipdnnGetVersion",                                     "", CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED}},
   {"cudnnGetCudartVersion",                               {"hipdnnGetCudartVersion",                               "", CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
   {"cudnnGetMaxDeviceVersion",                            {"hipdnnGetMaxDeviceVersion",                            "", CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
   {"cudnnQueryRuntimeError",                              {"hipdnnQueryRuntimeError",                              "", CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
   {"cudnnGetProperty",                                    {"hipdnnGetProperty",                                    "", CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
-  {"cudnnGetErrorString",                                 {"hipdnnGetErrorString",                                 "", CONV_LIB_FUNC, API_DNN, 2}},
+  {"cudnnGetErrorString",                                 {"hipdnnGetErrorString",                                 "miopenGetErrorString",                                 CONV_LIB_FUNC, API_DNN, 2}},
   {"cudnnIm2Col",                                         {"hipdnnIm2Col",                                         "", CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
-  {"cudnnCreate",                                         {"hipdnnCreate",                                         "", CONV_LIB_FUNC, API_DNN, 2}},
-  {"cudnnDestroy",                                        {"hipdnnDestroy",                                        "", CONV_LIB_FUNC, API_DNN, 2}},
-  {"cudnnSetStream",                                      {"hipdnnSetStream",                                      "", CONV_LIB_FUNC, API_DNN, 2}},
-  {"cudnnGetStream",                                      {"hipdnnGetStream",                                      "", CONV_LIB_FUNC, API_DNN, 2}},
+  {"cudnnCreate",                                         {"hipdnnCreate",                                         "miopenCreate",                                         CONV_LIB_FUNC, API_DNN, 2}},
+  {"cudnnDestroy",                                        {"hipdnnDestroy",                                        "miopenDestroy",                                        CONV_LIB_FUNC, API_DNN, 2}},
+  {"cudnnSetStream",                                      {"hipdnnSetStream",                                      "miopenSetStream",                                      CONV_LIB_FUNC, API_DNN, 2}},
+  {"cudnnGetStream",                                      {"hipdnnGetStream",                                      "miopenGetStream",                                      CONV_LIB_FUNC, API_DNN, 2}},
   {"cudnnSetCallback",                                    {"hipdnnSetCallback",                                    "", CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
   {"cudnnGetCallback",                                    {"hipdnnGetCallback",                                    "", CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
   {"cudnnAdvInferVersionCheck",                           {"hipdnnAdvInferVersionCheck",                           "", CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},

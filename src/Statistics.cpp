@@ -349,7 +349,7 @@ void Statistics::setActive(const std::string &name) {
 }
 
 bool Statistics::isToRoc(const hipCounter &counter) {
-  return TranslateToRoc && (counter.apiType == API_BLAS || counter.apiType == API_DNN);
+  return TranslateToRoc && (counter.apiType == API_BLAS || counter.apiType == API_DNN || counter.apiType == API_RUNTIME || counter.apiType == API_COMPLEX);
 }
 
 bool Statistics::isHipExperimental(const hipCounter& counter) {

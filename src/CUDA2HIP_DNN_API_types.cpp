@@ -86,21 +86,21 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"cudnnFoldingDirection_t",                                        {"hipdnnFoldingDirection_t",                                        "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
   {"CUDNN_TRANSFORM_FOLD",                                           {"HIPDNN_TRANSFORM_FOLD",                                           "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 0U
   {"CUDNN_TRANSFORM_UNFOLD",                                         {"HIPDNN_TRANSFORM_UNFOLD",                                         "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 1U
-  {"cudnnDataType_t",                                                {"hipdnnDataType_t",                                                "", CONV_TYPE, API_DNN, 1}},
-  {"CUDNN_DATA_FLOAT",                                               {"HIPDNN_DATA_FLOAT",                                               "", CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 0
-  {"CUDNN_DATA_DOUBLE",                                              {"HIPDNN_DATA_DOUBLE",                                              "", CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 1
-  {"CUDNN_DATA_HALF",                                                {"HIPDNN_DATA_HALF",                                                "", CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 2
-  {"CUDNN_DATA_INT8",                                                {"HIPDNN_DATA_INT8",                                                "", CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 3
-  {"CUDNN_DATA_INT32",                                               {"HIPDNN_DATA_INT32",                                               "", CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 4
-  {"CUDNN_DATA_INT8x4",                                              {"HIPDNN_DATA_INT8x4",                                              "", CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 5
-  {"CUDNN_DATA_UINT8",                                               {"HIPDNN_DATA_UINT8",                                               "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},  // 6
-  {"CUDNN_DATA_UINT8x4",                                             {"HIPDNN_DATA_UINT8x4",                                             "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},  // 7
-  {"CUDNN_DATA_INT8x32",                                             {"HIPDNN_DATA_INT8x32",                                             "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},  // 8
-  {"CUDNN_DATA_BFLOAT16",                                            {"HIPDNN_DATA_BFLOAT16",                                            "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},  // 9
-  {"CUDNN_DATA_INT64",                                               {"HIPDNN_DATA_INT64",                                               "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},  // 10
-  {"CUDNN_DATA_BOOLEAN",                                             {"HIPDNN_DATA_BOOLEAN",                                             "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},  // 11
-  {"CUDNN_DATA_FP8_E4M3",                                            {"HIPDNN_DATA_FP8_E4M3",                                            "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},  // 11
-  {"CUDNN_DATA_FP8_E5M2",                                            {"HIPDNN_DATA_FP8_E5M2",                                            "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},  // 11
+  {"cudnnDataType_t",                                                {"hipdnnDataType_t",                                                "miopenDataType_t",                                                CONV_TYPE, API_DNN, 1}},
+  {"CUDNN_DATA_FLOAT",                                               {"HIPDNN_DATA_FLOAT",                                               "miopenFloat",                                                     CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 0
+  {"CUDNN_DATA_DOUBLE",                                              {"HIPDNN_DATA_DOUBLE",                                              "miopenDouble",                                                    CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 1
+  {"CUDNN_DATA_HALF",                                                {"HIPDNN_DATA_HALF",                                                "miopenHalf",                                                      CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 2
+  {"CUDNN_DATA_INT8",                                                {"HIPDNN_DATA_INT8",                                                "miopenInt8",                                                      CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 3
+  {"CUDNN_DATA_INT32",                                               {"HIPDNN_DATA_INT32",                                               "miopenInt32",                                                     CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 4
+  {"CUDNN_DATA_INT8x4",                                              {"HIPDNN_DATA_INT8x4",                                              "miopenInt8x4",                                                    CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 5
+  {"CUDNN_DATA_UINT8",                                               {"HIPDNN_DATA_UINT8",                                               "", CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},  // 6
+  {"CUDNN_DATA_UINT8x4",                                             {"HIPDNN_DATA_UINT8x4",                                             "", CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},  // 7
+  {"CUDNN_DATA_INT8x32",                                             {"HIPDNN_DATA_INT8x32",                                             "", CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},  // 8
+  {"CUDNN_DATA_BFLOAT16",                                            {"HIPDNN_DATA_BFLOAT16",                                            "miopenBFloat16",                                                  CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},  // 9
+  {"CUDNN_DATA_INT64",                                               {"HIPDNN_DATA_INT64",                                               "", CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},  // 10
+  {"CUDNN_DATA_BOOLEAN",                                             {"HIPDNN_DATA_BOOLEAN",                                             "", CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},  // 11
+  {"CUDNN_DATA_FP8_E4M3",                                            {"HIPDNN_DATA_FP8_E4M3",                                            "", CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},  // 12
+  {"CUDNN_DATA_FP8_E5M2",                                            {"HIPDNN_DATA_FP8_E5M2",                                            "", CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},  // 13
   {"cudnnErrQueryMode_t",                                            {"hipdnnErrQueryMode_t",                                            "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
   {"CUDNN_ERRQUERY_RAWCODE",                                         {"HIPDNN_ERRQUERY_RAWCODE",                                         "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 0
   {"CUDNN_ERRQUERY_NONBLOCKING",                                     {"HIPDNN_ERRQUERY_NONBLOCKING",                                     "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 1
@@ -773,27 +773,27 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
 
   // cuDNN types
   {"cudnnContext",                                                   {"hipdnnContext",                                                   "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
-  {"cudnnHandle_t",                                                  {"hipdnnHandle_t",                                                  "", CONV_TYPE, API_DNN, 1}},
+  {"cudnnHandle_t",                                                  {"hipdnnHandle_t",                                                  "miopenHandle_t",                                                  CONV_TYPE, API_DNN, 1}},
   {"cudnnTensorStruct",                                              {"hipdnnTensorStruct",                                              "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
-  {"cudnnTensorDescriptor_t",                                        {"hipdnnTensorDescriptor_t",                                        "", CONV_TYPE, API_DNN, 1}},
+  {"cudnnTensorDescriptor_t",                                        {"hipdnnTensorDescriptor_t",                                        "miopenTensorDescriptor_t",                                        CONV_TYPE, API_DNN, 1}},
   {"cudnnConvolutionStruct",                                         {"hipdnnConvolutionStruct",                                         "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
-  {"cudnnConvolutionDescriptor_t",                                   {"hipdnnConvolutionDescriptor_t",                                   "", CONV_TYPE, API_DNN, 1}},
+  {"cudnnConvolutionDescriptor_t",                                   {"hipdnnConvolutionDescriptor_t",                                   "miopenConvolutionDescriptor_t",                                   CONV_TYPE, API_DNN, 1}},
   {"cudnnPoolingStruct",                                             {"hipdnnPoolingStruct",                                             "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
-  {"cudnnPoolingDescriptor_t",                                       {"hipdnnPoolingDescriptor_t",                                       "", CONV_TYPE, API_DNN, 1}},
+  {"cudnnPoolingDescriptor_t",                                       {"hipdnnPoolingDescriptor_t",                                       "miopenPoolingDescriptor_t",                                       CONV_TYPE, API_DNN, 1}},
   {"cudnnFilterStruct",                                              {"hipdnnFilterStruct",                                              "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
   {"cudnnFilterDescriptor_t",                                        {"hipdnnFilterDescriptor_t",                                        "", CONV_TYPE, API_DNN, 1}},
   {"cudnnLRNStruct",                                                 {"hipdnnLRNStruct",                                                 "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
-  {"cudnnLRNDescriptor_t",                                           {"hipdnnLRNDescriptor_t",                                           "", CONV_TYPE, API_DNN, 1}},
+  {"cudnnLRNDescriptor_t",                                           {"hipdnnLRNDescriptor_t",                                           "miopenLRNDescriptor_t",                                           CONV_TYPE, API_DNN, 1}},
   {"cudnnActivationStruct",                                          {"hipdnnActivationStruct",                                          "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
-  {"cudnnActivationDescriptor_t",                                    {"hipdnnActivationDescriptor_t",                                    "", CONV_TYPE, API_DNN, 1}},
+  {"cudnnActivationDescriptor_t",                                    {"hipdnnActivationDescriptor_t",                                    "miopenActivationDescriptor_t",                                    CONV_TYPE, API_DNN, 1}},
   {"cudnnSpatialTransformerStruct",                                  {"hipdnnSpatialTransformerStruct",                                  "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
   {"cudnnSpatialTransformerDescriptor_t",                            {"hipdnnSpatialTransformerDescriptor_t",                            "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
   {"cudnnOpTensorStruct",                                            {"hipdnnOpTensorStruct",                                            "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
   {"cudnnOpTensorDescriptor_t",                                      {"hipdnnOpTensorDescriptor_t",                                      "", CONV_TYPE, API_DNN, 1}},
   {"cudnnReduceTensorStruct",                                        {"hipdnnReduceTensorStruct",                                        "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
-  {"cudnnReduceTensorDescriptor_t",                                  {"hipdnnReduceTensorDescriptor_t",                                  "", CONV_TYPE, API_DNN, 1}},
+  {"cudnnReduceTensorDescriptor_t",                                  {"hipdnnReduceTensorDescriptor_t",                                  "miopenReduceTensorDescriptor_t",                                  CONV_TYPE, API_DNN, 1}},
   {"cudnnCTCLossStruct",                                             {"hipdnnCTCLossStruct",                                             "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
-  {"cudnnCTCLossDescriptor_t",                                       {"hipdnnCTCLossDescriptor_t",                                       "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
+  {"cudnnCTCLossDescriptor_t",                                       {"hipdnnCTCLossDescriptor_t",                                       "miopenCTCLossDescriptor_t",                                       CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
   {"cudnnTensorTransformStruct",                                     {"hipdnnTensorTransformStruct",                                     "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
   {"cudnnTensorTransformDescriptor_t",                               {"hipdnnTensorTransformDescriptor_t",                               "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
   {"cudnnConvolutionFwdAlgoPerf_t",                                  {"hipdnnConvolutionFwdAlgoPerf_t",                                  "", CONV_TYPE, API_DNN, 1}},
@@ -803,13 +803,13 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"cudnnConvolutionBwdDataAlgoPerf_t",                              {"hipdnnConvolutionBwdDataAlgoPerf_t",                              "", CONV_TYPE, API_DNN, 1}},
   {"cudnnConvolutionBwdDataAlgoPerfStruct",                          {"hipdnnConvolutionBwdDataAlgoPerf_t",                              "", CONV_TYPE, API_DNN, 1}},
   {"cudnnDropoutStruct",                                             {"hipdnnDropoutStruct",                                             "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
-  {"cudnnDropoutDescriptor_t",                                       {"hipdnnDropoutDescriptor_t",                                       "", CONV_TYPE, API_DNN, 1}},
+  {"cudnnDropoutDescriptor_t",                                       {"hipdnnDropoutDescriptor_t",                                       "miopenDropoutDescriptor_t",                                       CONV_TYPE, API_DNN, 1}},
   {"cudnnAlgorithmStruct",                                           {"hipdnnAlgorithmStruct",                                           "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
   {"cudnnAlgorithmDescriptor_t",                                     {"hipdnnAlgorithmDescriptor_t",                                     "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
   {"cudnnAlgorithmPerformanceStruct",                                {"hipdnnAlgorithmPerformanceStruct",                                "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
   {"cudnnAlgorithmPerformance_t",                                    {"hipdnnAlgorithmPerformance_t",                                    "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
   {"cudnnRNNStruct",                                                 {"hipdnnRNNStruct",                                                 "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
-  {"cudnnRNNDescriptor_t",                                           {"hipdnnRNNDescriptor_t",                                           "", CONV_TYPE, API_DNN, 1}},
+  {"cudnnRNNDescriptor_t",                                           {"hipdnnRNNDescriptor_t",                                           "miopenRNNDescriptor_t",                                           CONV_TYPE, API_DNN, 1}},
   {"cudnnPersistentRNNPlan",                                         {"hipdnnPersistentRNNPlan",                                         "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
   {"cudnnPersistentRNNPlan_t",                                       {"hipdnnPersistentRNNPlan_t",                                       "", CONV_TYPE, API_DNN, 1}},
   {"cudnnAlgorithm_t",                                               {"hipdnnAlgorithm_t",                                               "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
