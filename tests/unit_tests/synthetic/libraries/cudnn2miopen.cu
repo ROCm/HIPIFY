@@ -63,7 +63,9 @@ int main() {
   status = cudnnGetStream(handle, &streamId);
 
   // CHECK: miopenTensorDescriptor_t tensorDescriptor;
+  // CHECK-NEXT: miopenTensorDescriptor_t filterDescriptor;
   cudnnTensorDescriptor_t tensorDescriptor;
+  cudnnFilterDescriptor_t filterDescriptor;
 
   // CHECK: miopenConvolutionDescriptor_t convolutionDescriptor;
   cudnnConvolutionDescriptor_t convolutionDescriptor;
@@ -178,6 +180,19 @@ int main() {
   cudnnReduceTensorOp_t REDUCE_TENSOR_NORM1 = CUDNN_REDUCE_TENSOR_NORM1;
   cudnnReduceTensorOp_t REDUCE_TENSOR_NORM2 = CUDNN_REDUCE_TENSOR_NORM2;
 
+  // CHECK: miopenConvFwdAlgorithm_t convolutionFwdAlgo;
+  // CHECK-NEXT: miopenConvFwdAlgorithm_t CONVOLUTION_FWD_ALGO_IMPLICIT_GEMM = miopenConvolutionFwdAlgoImplicitGEMM;
+  // CHECK-NEXT: miopenConvFwdAlgorithm_t CONVOLUTION_FWD_ALGO_GEMM = miopenConvolutionFwdAlgoGEMM;
+  // CHECK-NEXT: miopenConvFwdAlgorithm_t CONVOLUTION_FWD_ALGO_DIRECT = miopenConvolutionFwdAlgoDirect;
+  // CHECK-NEXT: miopenConvFwdAlgorithm_t CONVOLUTION_FWD_ALGO_FFT = miopenConvolutionFwdAlgoFFT;
+  // CHECK-NEXT: miopenConvFwdAlgorithm_t CONVOLUTION_FWD_ALGO_WINOGRAD = miopenConvolutionFwdAlgoWinograd;
+  cudnnConvolutionFwdAlgo_t convolutionFwdAlgo;
+  cudnnConvolutionFwdAlgo_t CONVOLUTION_FWD_ALGO_IMPLICIT_GEMM = CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_GEMM;
+  cudnnConvolutionFwdAlgo_t CONVOLUTION_FWD_ALGO_GEMM = CUDNN_CONVOLUTION_FWD_ALGO_GEMM;
+  cudnnConvolutionFwdAlgo_t CONVOLUTION_FWD_ALGO_DIRECT = CUDNN_CONVOLUTION_FWD_ALGO_DIRECT;
+  cudnnConvolutionFwdAlgo_t CONVOLUTION_FWD_ALGO_FFT = CUDNN_CONVOLUTION_FWD_ALGO_FFT;
+  cudnnConvolutionFwdAlgo_t CONVOLUTION_FWD_ALGO_WINOGRAD = CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD;
+
   // CHECK: miopenNanPropagation_t nanPropagation_t;
   // CHECK-NEXT: miopenNanPropagation_t NOT_PROPAGATE_NAN = MIOPEN_NOT_PROPAGATE_NAN;
   // CHECK-NEXT: miopenNanPropagation_t PROPAGATE_NAN = MIOPEN_PROPAGATE_NAN;
@@ -235,6 +250,62 @@ int main() {
   // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenDestroyTensorDescriptor(miopenTensorDescriptor_t tensorDesc);
   // CHECK: status = miopenDestroyTensorDescriptor(tensorDescriptor);
   status = cudnnDestroyTensorDescriptor(tensorDescriptor);
+
+  cudnnTensorDescriptor_t aD;
+  cudnnTensorDescriptor_t bD;
+  cudnnTensorDescriptor_t cD;
+  cudnnTensorDescriptor_t xD;
+  cudnnTensorDescriptor_t yD;
+  cudnnTensorDescriptor_t inputD;
+  void* A = nullptr;
+  void* B = nullptr;
+  void* C = nullptr;
+  void* alpha = nullptr;
+  void* alpha1 = nullptr;
+  void* alpha2 = nullptr;
+  void* beta = nullptr;
+  void* x = nullptr;
+  void* y = nullptr;
+  int groupCount = 0;
+
+  // TODO: cudnnOpTensor -> miopenOpTensor: different signatures: cudnnOpTensorDescriptor_t != miopenTensorOp_t
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnOpTensor(cudnnHandle_t handle, const cudnnOpTensorDescriptor_t opTensorDesc, const void* alpha1, const cudnnTensorDescriptor_t aDesc, const void* A, const void* alpha2, const cudnnTensorDescriptor_t bDesc, const void* B, const void* beta, const cudnnTensorDescriptor_t cDesc, void* C);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenOpTensor(miopenHandle_t handle, miopenTensorOp_t tensorOp, const void* alpha1, const miopenTensorDescriptor_t aDesc, const void* A, const void* alpha2, const miopenTensorDescriptor_t bDesc, const void* B, const void* beta, const miopenTensorDescriptor_t cDesc, void* C);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnSetTensor(cudnnHandle_t handle, const cudnnTensorDescriptor_t yDesc, void* y, const void* valuePtr);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenSetTensor(miopenHandle_t handle, const miopenTensorDescriptor_t yDesc, void* y, const void* alpha);
+  // CHECK: status = miopenSetTensor(handle, tensorDescriptor, y, alpha);
+  status = cudnnSetTensor(handle, tensorDescriptor, y, alpha);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnScaleTensor(cudnnHandle_t handle, const cudnnTensorDescriptor_t yDesc, void* y, const void* alpha);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenScaleTensor(miopenHandle_t handle, const miopenTensorDescriptor_t yDesc, void* y, const void* alpha);
+  // CHECK: status = miopenScaleTensor(handle, tensorDescriptor, y, alpha);
+  status = cudnnScaleTensor(handle, tensorDescriptor, y, alpha);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnTransformTensor(cudnnHandle_t handle, const void* alpha, const cudnnTensorDescriptor_t xDesc, const void* x, const void* beta, const cudnnTensorDescriptor_t yDesc, void* y);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenTransformTensor(miopenHandle_t handle, const void* alpha, const miopenTensorDescriptor_t xDesc, const void* x, const void* beta, const miopenTensorDescriptor_t yDesc, void* y);
+  // CHECK: status = miopenTransformTensor(handle, alpha, xD, x, beta, yD, y);
+  status = cudnnTransformTensor(handle, alpha, xD, x, beta, yD, y);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnCreateConvolutionDescriptor(cudnnConvolutionDescriptor_t* convDesc);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenCreateConvolutionDescriptor(miopenConvolutionDescriptor_t* convDesc);
+  // CHECK: status = miopenCreateConvolutionDescriptor(&convolutionDescriptor);
+  status = cudnnCreateConvolutionDescriptor(&convolutionDescriptor);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnSetConvolutionGroupCount(cudnnConvolutionDescriptor_t convDesc, int groupCount);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenSetConvolutionGroupCount(miopenConvolutionDescriptor_t convDesc, int groupCount);
+  // CHECK: status = miopenSetConvolutionGroupCount(convolutionDescriptor, groupCount);
+  status = cudnnSetConvolutionGroupCount(convolutionDescriptor, groupCount);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnGetConvolution2dForwardOutputDim(const cudnnConvolutionDescriptor_t convDesc, const cudnnTensorDescriptor_t inputTensorDesc, const cudnnFilterDescriptor_t filterDesc, int* n, int* c, int* h, int* w);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenGetConvolutionForwardOutputDim(miopenConvolutionDescriptor_t convDesc, const miopenTensorDescriptor_t inputTensorDesc, const miopenTensorDescriptor_t filterDesc, int* n, int* c, int* h, int* w);
+  // CHECK: status = miopenGetConvolutionForwardOutputDim(convolutionDescriptor, inputD, filterDescriptor, &n, &c, &h, &w);
+  status = cudnnGetConvolution2dForwardOutputDim(convolutionDescriptor, inputD, filterDescriptor, &n, &c, &h, &w);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnDestroyConvolutionDescriptor(cudnnConvolutionDescriptor_t convDesc);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenDestroyConvolutionDescriptor(miopenConvolutionDescriptor_t convDesc);
+  // CHECK: status = miopenDestroyConvolutionDescriptor(convolutionDescriptor);
+  status = cudnnDestroyConvolutionDescriptor(convolutionDescriptor);
 
   return 0;
 }
