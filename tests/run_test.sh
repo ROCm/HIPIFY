@@ -25,6 +25,10 @@ elif [ $NUM -eq 3 ]
 then
 HIPIFY_OPTS="$6 $7 $8"
 shift 8
+elif [ $NUM -eq 4 ]
+then
+HIPIFY_OPTS="$6 $7 $8 $9"
+shift 9
 fi
 
 test_dir=${IN_FILE%/*}
