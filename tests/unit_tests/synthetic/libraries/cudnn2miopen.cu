@@ -63,7 +63,9 @@ int main() {
   status = cudnnGetStream(handle, &streamId);
 
   // CHECK: miopenTensorDescriptor_t tensorDescriptor;
+  // CHECK-NEXT: miopenTensorDescriptor_t filterDescriptor;
   cudnnTensorDescriptor_t tensorDescriptor;
+  cudnnFilterDescriptor_t filterDescriptor;
 
   // CHECK: miopenConvolutionDescriptor_t convolutionDescriptor;
   cudnnConvolutionDescriptor_t convolutionDescriptor;
@@ -105,6 +107,205 @@ int main() {
   cudnnDataType_t DATA_INT32 = CUDNN_DATA_INT32;
   cudnnDataType_t DATA_INT8x4 = CUDNN_DATA_INT8x4;
   cudnnDataType_t DATA_BFLOAT16 = CUDNN_DATA_BFLOAT16;
+
+  // CHECK: miopenTensorOp_t tensorOp;
+  // CHECK-NEXT: miopenTensorOp_t OP_TENSOR_ADD = miopenTensorOpAdd;
+  // CHECK-NEXT: miopenTensorOp_t OP_TENSOR_MUL = miopenTensorOpMul;
+  // CHECK-NEXT: miopenTensorOp_t OP_TENSOR_MIN = miopenTensorOpMin;
+  // CHECK-NEXT: miopenTensorOp_t OP_TENSOR_MAX = miopenTensorOpMax;
+  cudnnOpTensorOp_t tensorOp;
+  cudnnOpTensorOp_t OP_TENSOR_ADD = CUDNN_OP_TENSOR_ADD;
+  cudnnOpTensorOp_t OP_TENSOR_MUL = CUDNN_OP_TENSOR_MUL;
+  cudnnOpTensorOp_t OP_TENSOR_MIN = CUDNN_OP_TENSOR_MIN;
+  cudnnOpTensorOp_t OP_TENSOR_MAX = CUDNN_OP_TENSOR_MAX;
+
+  // CHECK: miopenConvolutionMode_t convolutionMode;
+  cudnnConvolutionMode_t convolutionMode;
+
+  // CHECK: miopenPoolingMode_t poolingMode;
+  // CHECK-NEXT: miopenPoolingMode_t POOLING_MAX = miopenPoolingMax;
+  cudnnPoolingMode_t poolingMode;
+  cudnnPoolingMode_t POOLING_MAX = CUDNN_POOLING_MAX;
+
+  // CHECK: miopenLRNMode_t LRNMode;
+  // CHECK-NEXT: miopenLRNMode_t LRN_CROSS_CHANNEL_DIM1 = miopenLRNCrossChannel;
+  cudnnLRNMode_t LRNMode;
+  cudnnLRNMode_t LRN_CROSS_CHANNEL_DIM1 = CUDNN_LRN_CROSS_CHANNEL_DIM1;
+
+  // CHECK: miopenBatchNormMode_t batchNormMode;
+  // CHECK-NEXT: miopenBatchNormMode_t BATCHNORM_PER_ACTIVATION = miopenBNPerActivation;
+  // CHECK-NEXT: miopenBatchNormMode_t BATCHNORM_SPATIAL = miopenBNSpatial;
+  cudnnBatchNormMode_t batchNormMode;
+  cudnnBatchNormMode_t BATCHNORM_PER_ACTIVATION = CUDNN_BATCHNORM_PER_ACTIVATION;
+  cudnnBatchNormMode_t BATCHNORM_SPATIAL = CUDNN_BATCHNORM_SPATIAL;
+
+  // CHECK: miopenActivationMode_t activationMode;
+  // CHECK-NEXT: miopenActivationMode_t ACTIVATION_RELU = miopenActivationRELU;
+  // CHECK-NEXT: miopenActivationMode_t ACTIVATION_TANH = miopenActivationTANH;
+  // CHECK-NEXT: miopenActivationMode_t ACTIVATION_CLIPPED_RELU = miopenActivationCLIPPEDRELU;
+  // CHECK-NEXT: miopenActivationMode_t ACTIVATION_ELU = miopenActivationELU;
+  // CHECK-NEXT: miopenActivationMode_t ACTIVATION_IDENTITY = miopenActivationPASTHRU;
+  cudnnActivationMode_t activationMode;
+  cudnnActivationMode_t ACTIVATION_RELU = CUDNN_ACTIVATION_RELU;
+  cudnnActivationMode_t ACTIVATION_TANH = CUDNN_ACTIVATION_TANH;
+  cudnnActivationMode_t ACTIVATION_CLIPPED_RELU = CUDNN_ACTIVATION_CLIPPED_RELU;
+  cudnnActivationMode_t ACTIVATION_ELU = CUDNN_ACTIVATION_ELU;
+  cudnnActivationMode_t ACTIVATION_IDENTITY = CUDNN_ACTIVATION_IDENTITY;
+
+  // CHECK: miopenSoftmaxAlgorithm_t softmaxAlgorithm;
+  // CHECK-NEXT: miopenSoftmaxAlgorithm_t SOFTMAX_FAST = MIOPEN_SOFTMAX_FAST;
+  // CHECK-NEXT: miopenSoftmaxAlgorithm_t SOFTMAX_ACCURATE = MIOPEN_SOFTMAX_ACCURATE;
+  // CHECK-NEXT: miopenSoftmaxAlgorithm_t SOFTMAX_LOG = MIOPEN_SOFTMAX_LOG;
+  cudnnSoftmaxAlgorithm_t softmaxAlgorithm;
+  cudnnSoftmaxAlgorithm_t SOFTMAX_FAST = CUDNN_SOFTMAX_FAST;
+  cudnnSoftmaxAlgorithm_t SOFTMAX_ACCURATE = CUDNN_SOFTMAX_ACCURATE;
+  cudnnSoftmaxAlgorithm_t SOFTMAX_LOG = CUDNN_SOFTMAX_LOG;
+
+  // CHECK: miopenReduceTensorOp_t reduceTensorOp;
+  // CHECK-NEXT: miopenReduceTensorOp_t REDUCE_TENSOR_ADD = MIOPEN_REDUCE_TENSOR_ADD;
+  // CHECK-NEXT: miopenReduceTensorOp_t REDUCE_TENSOR_MUL = MIOPEN_REDUCE_TENSOR_MUL;
+  // CHECK-NEXT: miopenReduceTensorOp_t REDUCE_TENSOR_MIN = MIOPEN_REDUCE_TENSOR_MIN;
+  // CHECK-NEXT: miopenReduceTensorOp_t REDUCE_TENSOR_MAX = MIOPEN_REDUCE_TENSOR_MAX;
+  // CHECK-NEXT: miopenReduceTensorOp_t REDUCE_TENSOR_AMAX = MIOPEN_REDUCE_TENSOR_AMAX;
+  // CHECK-NEXT: miopenReduceTensorOp_t REDUCE_TENSOR_AVG = MIOPEN_REDUCE_TENSOR_AVG;
+  // CHECK-NEXT: miopenReduceTensorOp_t REDUCE_TENSOR_NORM1 = MIOPEN_REDUCE_TENSOR_NORM1;
+  // CHECK-NEXT: miopenReduceTensorOp_t REDUCE_TENSOR_NORM2 = MIOPEN_REDUCE_TENSOR_NORM2;
+  cudnnReduceTensorOp_t reduceTensorOp;
+  cudnnReduceTensorOp_t REDUCE_TENSOR_ADD = CUDNN_REDUCE_TENSOR_ADD;
+  cudnnReduceTensorOp_t REDUCE_TENSOR_MUL = CUDNN_REDUCE_TENSOR_MUL;
+  cudnnReduceTensorOp_t REDUCE_TENSOR_MIN = CUDNN_REDUCE_TENSOR_MIN;
+  cudnnReduceTensorOp_t REDUCE_TENSOR_MAX = CUDNN_REDUCE_TENSOR_MAX;
+  cudnnReduceTensorOp_t REDUCE_TENSOR_AMAX = CUDNN_REDUCE_TENSOR_AMAX;
+  cudnnReduceTensorOp_t REDUCE_TENSOR_AVG = CUDNN_REDUCE_TENSOR_AVG;
+  cudnnReduceTensorOp_t REDUCE_TENSOR_NORM1 = CUDNN_REDUCE_TENSOR_NORM1;
+  cudnnReduceTensorOp_t REDUCE_TENSOR_NORM2 = CUDNN_REDUCE_TENSOR_NORM2;
+
+  // CHECK: miopenConvFwdAlgorithm_t convolutionFwdAlgo;
+  // CHECK-NEXT: miopenConvFwdAlgorithm_t CONVOLUTION_FWD_ALGO_IMPLICIT_GEMM = miopenConvolutionFwdAlgoImplicitGEMM;
+  // CHECK-NEXT: miopenConvFwdAlgorithm_t CONVOLUTION_FWD_ALGO_GEMM = miopenConvolutionFwdAlgoGEMM;
+  // CHECK-NEXT: miopenConvFwdAlgorithm_t CONVOLUTION_FWD_ALGO_DIRECT = miopenConvolutionFwdAlgoDirect;
+  // CHECK-NEXT: miopenConvFwdAlgorithm_t CONVOLUTION_FWD_ALGO_FFT = miopenConvolutionFwdAlgoFFT;
+  // CHECK-NEXT: miopenConvFwdAlgorithm_t CONVOLUTION_FWD_ALGO_WINOGRAD = miopenConvolutionFwdAlgoWinograd;
+  cudnnConvolutionFwdAlgo_t convolutionFwdAlgo;
+  cudnnConvolutionFwdAlgo_t CONVOLUTION_FWD_ALGO_IMPLICIT_GEMM = CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_GEMM;
+  cudnnConvolutionFwdAlgo_t CONVOLUTION_FWD_ALGO_GEMM = CUDNN_CONVOLUTION_FWD_ALGO_GEMM;
+  cudnnConvolutionFwdAlgo_t CONVOLUTION_FWD_ALGO_DIRECT = CUDNN_CONVOLUTION_FWD_ALGO_DIRECT;
+  cudnnConvolutionFwdAlgo_t CONVOLUTION_FWD_ALGO_FFT = CUDNN_CONVOLUTION_FWD_ALGO_FFT;
+  cudnnConvolutionFwdAlgo_t CONVOLUTION_FWD_ALGO_WINOGRAD = CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD;
+
+  // CHECK: miopenNanPropagation_t nanPropagation_t;
+  // CHECK-NEXT: miopenNanPropagation_t NOT_PROPAGATE_NAN = MIOPEN_NOT_PROPAGATE_NAN;
+  // CHECK-NEXT: miopenNanPropagation_t PROPAGATE_NAN = MIOPEN_PROPAGATE_NAN;
+  cudnnNanPropagation_t nanPropagation_t;
+  cudnnNanPropagation_t NOT_PROPAGATE_NAN = CUDNN_NOT_PROPAGATE_NAN;
+  cudnnNanPropagation_t PROPAGATE_NAN = CUDNN_PROPAGATE_NAN;
+
+  // CHECK: miopenReduceTensorIndices_t reduceTensorIndices;
+  // CHECK-NEXT: miopenReduceTensorIndices_t REDUCE_TENSOR_NO_INDICES = MIOPEN_REDUCE_TENSOR_NO_INDICES;
+  // CHECK-NEXT: miopenReduceTensorIndices_t REDUCE_TENSOR_FLATTENED_INDICES = MIOPEN_REDUCE_TENSOR_FLATTENED_INDICES;
+  cudnnReduceTensorIndices_t reduceTensorIndices;
+  cudnnReduceTensorIndices_t REDUCE_TENSOR_NO_INDICES = CUDNN_REDUCE_TENSOR_NO_INDICES;
+  cudnnReduceTensorIndices_t REDUCE_TENSOR_FLATTENED_INDICES = CUDNN_REDUCE_TENSOR_FLATTENED_INDICES;
+
+  // CHECK: miopenIndicesType_t indicesType;
+  // CHECK-NEXT: miopenIndicesType_t _32BIT_INDICES = MIOPEN_32BIT_INDICES;
+  // CHECK-NEXT: miopenIndicesType_t _64BIT_INDICES = MIOPEN_64BIT_INDICES;
+  // CHECK-NEXT: miopenIndicesType_t _16BIT_INDICES = MIOPEN_16BIT_INDICES;
+  // CHECK-NEXT: miopenIndicesType_t _8BIT_INDICES = MIOPEN_8BIT_INDICES;
+  cudnnIndicesType_t indicesType;
+  cudnnIndicesType_t _32BIT_INDICES = CUDNN_32BIT_INDICES;
+  cudnnIndicesType_t _64BIT_INDICES = CUDNN_64BIT_INDICES;
+  cudnnIndicesType_t _16BIT_INDICES = CUDNN_16BIT_INDICES;
+  cudnnIndicesType_t _8BIT_INDICES = CUDNN_8BIT_INDICES;
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnCreateTensorDescriptor(cudnnTensorDescriptor_t* tensorDesc);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenCreateTensorDescriptor(miopenTensorDescriptor_t* tensorDesc);
+  // CHECK: status = miopenCreateTensorDescriptor(&tensorDescriptor);
+  status = cudnnCreateTensorDescriptor(&tensorDescriptor);
+
+  // TODO: cudnnSetTensor4dDescriptor -> miopenSet4dTensorDescriptor: different signatures
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnSetTensor4dDescriptor(cudnnTensorDescriptor_t tensorDesc, cudnnTensorFormat_t format, cudnnDataType_t dataType, int n, int c, int h, int w);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenSet4dTensorDescriptor(miopenTensorDescriptor_t tensorDesc, miopenDataType_t dataType, int n, int c, int h, int w);
+
+  int n = 0;
+  int c = 0;
+  int h = 0;
+  int w = 0;
+  int nStride = 0;
+  int cStride = 0;
+  int hStride = 0;
+  int wStride = 0;
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnSetTensor4dDescriptorEx(cudnnTensorDescriptor_t tensorDesc, cudnnDataType_t dataType, int n, int c, int h, int w, int nStride, int cStride, int hStride, int wStride);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenSet4dTensorDescriptorEx(miopenTensorDescriptor_t tensorDesc, miopenDataType_t dataType, int n, int c, int h, int w, int nStride, int cStride, int hStride, int wStride);
+  // CHECK: status = miopenSet4dTensorDescriptorEx(tensorDescriptor, dataType, n, c, h, w, nStride, cStride, hStride, wStride);
+  status = cudnnSetTensor4dDescriptorEx(tensorDescriptor, dataType, n, c, h, w, nStride, cStride, hStride, wStride);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnGetTensor4dDescriptor(const cudnnTensorDescriptor_t tensorDesc, cudnnDataType_t* dataType, int* n, int* c, int* h, int* w, int* nStride, int* cStride, int* hStride, int* wStride);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenGet4dTensorDescriptor(miopenTensorDescriptor_t tensorDesc, miopenDataType_t* dataType, int* n, int* c, int* h, int* w, int* nStride, int* cStride, int* hStride, int* wStride);
+  // CHECK: status = miopenGet4dTensorDescriptor(tensorDescriptor, &dataType, &n, &c, &h, &w, &nStride, &cStride, &hStride, &wStride);
+  status = cudnnGetTensor4dDescriptor(tensorDescriptor, &dataType, &n, &c, &h, &w, &nStride, &cStride, &hStride, &wStride);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnDestroyTensorDescriptor(cudnnTensorDescriptor_t tensorDesc);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenDestroyTensorDescriptor(miopenTensorDescriptor_t tensorDesc);
+  // CHECK: status = miopenDestroyTensorDescriptor(tensorDescriptor);
+  status = cudnnDestroyTensorDescriptor(tensorDescriptor);
+
+  cudnnTensorDescriptor_t aD;
+  cudnnTensorDescriptor_t bD;
+  cudnnTensorDescriptor_t cD;
+  cudnnTensorDescriptor_t xD;
+  cudnnTensorDescriptor_t yD;
+  cudnnTensorDescriptor_t inputD;
+  void* A = nullptr;
+  void* B = nullptr;
+  void* C = nullptr;
+  void* alpha = nullptr;
+  void* alpha1 = nullptr;
+  void* alpha2 = nullptr;
+  void* beta = nullptr;
+  void* x = nullptr;
+  void* y = nullptr;
+  int groupCount = 0;
+
+  // TODO: cudnnOpTensor -> miopenOpTensor: different signatures: cudnnOpTensorDescriptor_t != miopenTensorOp_t
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnOpTensor(cudnnHandle_t handle, const cudnnOpTensorDescriptor_t opTensorDesc, const void* alpha1, const cudnnTensorDescriptor_t aDesc, const void* A, const void* alpha2, const cudnnTensorDescriptor_t bDesc, const void* B, const void* beta, const cudnnTensorDescriptor_t cDesc, void* C);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenOpTensor(miopenHandle_t handle, miopenTensorOp_t tensorOp, const void* alpha1, const miopenTensorDescriptor_t aDesc, const void* A, const void* alpha2, const miopenTensorDescriptor_t bDesc, const void* B, const void* beta, const miopenTensorDescriptor_t cDesc, void* C);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnSetTensor(cudnnHandle_t handle, const cudnnTensorDescriptor_t yDesc, void* y, const void* valuePtr);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenSetTensor(miopenHandle_t handle, const miopenTensorDescriptor_t yDesc, void* y, const void* alpha);
+  // CHECK: status = miopenSetTensor(handle, tensorDescriptor, y, alpha);
+  status = cudnnSetTensor(handle, tensorDescriptor, y, alpha);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnScaleTensor(cudnnHandle_t handle, const cudnnTensorDescriptor_t yDesc, void* y, const void* alpha);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenScaleTensor(miopenHandle_t handle, const miopenTensorDescriptor_t yDesc, void* y, const void* alpha);
+  // CHECK: status = miopenScaleTensor(handle, tensorDescriptor, y, alpha);
+  status = cudnnScaleTensor(handle, tensorDescriptor, y, alpha);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnTransformTensor(cudnnHandle_t handle, const void* alpha, const cudnnTensorDescriptor_t xDesc, const void* x, const void* beta, const cudnnTensorDescriptor_t yDesc, void* y);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenTransformTensor(miopenHandle_t handle, const void* alpha, const miopenTensorDescriptor_t xDesc, const void* x, const void* beta, const miopenTensorDescriptor_t yDesc, void* y);
+  // CHECK: status = miopenTransformTensor(handle, alpha, xD, x, beta, yD, y);
+  status = cudnnTransformTensor(handle, alpha, xD, x, beta, yD, y);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnCreateConvolutionDescriptor(cudnnConvolutionDescriptor_t* convDesc);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenCreateConvolutionDescriptor(miopenConvolutionDescriptor_t* convDesc);
+  // CHECK: status = miopenCreateConvolutionDescriptor(&convolutionDescriptor);
+  status = cudnnCreateConvolutionDescriptor(&convolutionDescriptor);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnSetConvolutionGroupCount(cudnnConvolutionDescriptor_t convDesc, int groupCount);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenSetConvolutionGroupCount(miopenConvolutionDescriptor_t convDesc, int groupCount);
+  // CHECK: status = miopenSetConvolutionGroupCount(convolutionDescriptor, groupCount);
+  status = cudnnSetConvolutionGroupCount(convolutionDescriptor, groupCount);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnGetConvolution2dForwardOutputDim(const cudnnConvolutionDescriptor_t convDesc, const cudnnTensorDescriptor_t inputTensorDesc, const cudnnFilterDescriptor_t filterDesc, int* n, int* c, int* h, int* w);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenGetConvolutionForwardOutputDim(miopenConvolutionDescriptor_t convDesc, const miopenTensorDescriptor_t inputTensorDesc, const miopenTensorDescriptor_t filterDesc, int* n, int* c, int* h, int* w);
+  // CHECK: status = miopenGetConvolutionForwardOutputDim(convolutionDescriptor, inputD, filterDescriptor, &n, &c, &h, &w);
+  status = cudnnGetConvolution2dForwardOutputDim(convolutionDescriptor, inputD, filterDescriptor, &n, &c, &h, &w);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnDestroyConvolutionDescriptor(cudnnConvolutionDescriptor_t convDesc);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenDestroyConvolutionDescriptor(miopenConvolutionDescriptor_t convDesc);
+  // CHECK: status = miopenDestroyConvolutionDescriptor(convolutionDescriptor);
+  status = cudnnDestroyConvolutionDescriptor(convolutionDescriptor);
 
   return 0;
 }
