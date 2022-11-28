@@ -1,4 +1,4 @@
-// RUN: %run_test hipify "%s" "%t" %hipify_args 3 --skip-excluded-preprocessor-conditional-blocks --experimental -roc %clang_args -D__CUDA_API_VERSION_INTERNAL
+// RUN: %run_test hipify "%s" "%t" %hipify_args 4 --skip-excluded-preprocessor-conditional-blocks --experimental --roc --miopen %clang_args -D__CUDA_API_VERSION_INTERNAL
 
 // CHECK: #include <hip/hip_runtime.h>
 #include <cuda_runtime.h>

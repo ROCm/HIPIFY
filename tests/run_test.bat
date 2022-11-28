@@ -23,6 +23,10 @@ if %NUM% EQU 3 (
   set HIPIFY_OPTS=%6 %7 %8
   set NUM=%9
 )
+if %NUM% EQU 4 (
+  set HIPIFY_OPTS=%6 %7 %8 %9
+  set NUM=%10
+)
 
 call set clang_args=%%all_args:*%NUM%=%%
 set clang_args=%NUM%%clang_args%
