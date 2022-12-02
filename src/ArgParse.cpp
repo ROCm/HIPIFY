@@ -79,6 +79,12 @@ cl::opt<bool> TranslateToRoc("roc",
   cl::value_desc("roc"),
   cl::cat(ToolTemplateCategory));
 
+cl::opt<bool> TranslateToMIOpen("miopen",
+  cl::desc("Translate to miopen instead of hip where it is possible"),
+  cl::value_desc("miopen"),
+  cl::init(false),
+  cl::cat(ToolTemplateCategory));
+
 cl::opt<bool> Inplace("inplace",
   cl::desc("Modify input file inplace, replacing input with hipified output, save backup in .prehip file"),
   cl::value_desc("inplace"),
@@ -187,6 +193,7 @@ const std::vector<std::string> hipifyOptions {
   std::string(GeneratePerl.ArgStr),
   std::string(GeneratePython.ArgStr),
   std::string(TranslateToRoc.ArgStr),
+  std::string(TranslateToMIOpen.ArgStr),
   std::string(GenerateMarkdown.ArgStr),
   std::string(GenerateCSV.ArgStr),
   std::string(NoBackup.ArgStr),

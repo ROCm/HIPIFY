@@ -13,18 +13,22 @@ CUDA_ROOT=$4
 NUM=$5
 HIPIFY_OPTS=""
 
-if [ $NUM -eq 1 ]
+if [ $NUM = "1" ]
 then
 HIPIFY_OPTS=$6
 shift 6
-elif [ $NUM -eq 2 ]
+elif [ $NUM = "2" ]
 then
 HIPIFY_OPTS="$6 $7"
 shift 7
-elif [ $NUM -eq 3 ]
+elif [ $NUM = "3" ]
 then
 HIPIFY_OPTS="$6 $7 $8"
 shift 8
+elif [ $NUM = "4" ]
+then
+HIPIFY_OPTS="$6 $7 $8 $9"
+shift 9
 fi
 
 test_dir=${IN_FILE%/*}

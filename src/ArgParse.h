@@ -50,6 +50,7 @@ extern cl::opt<std::string> OutputStatsFilename;
 extern cl::opt<bool> Examine;
 extern cl::extrahelp CommonHelp;
 extern cl::opt<bool> TranslateToRoc;
+extern cl::opt<bool> TranslateToMIOpen;
 extern cl::opt<bool> DashDash;
 extern cl::opt<bool> SkipExcludedPPConditionalBlocks;
 extern cl::opt<std::string> CudaGpuArch;
