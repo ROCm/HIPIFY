@@ -160,9 +160,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_TYPE_NAME_MAP {
   {"CUSPARSE_STATUS_NOT_SUPPORTED",             {"HIPSPARSE_STATUS_NOT_SUPPORTED",             "", CONV_NUMERIC_LITERAL, API_SPARSE, 4}},
   {"CUSPARSE_STATUS_INSUFFICIENT_RESOURCES",    {"HIPSPARSE_STATUS_INSUFFICIENT_RESOURCES",    "", CONV_NUMERIC_LITERAL, API_SPARSE, 4}},
 
-  {"cusparseCsr2CscAlg_t",                      {"hipsparseCsr2CscAlg_t",                      "", CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED}},
-  {"CUSPARSE_CSR2CSC_ALG1",                     {"HIPSPARSE_CSR2CSC_ALG1",                     "", CONV_NUMERIC_LITERAL, API_SPARSE, 4, HIP_UNSUPPORTED}},
-  {"CUSPARSE_CSR2CSC_ALG2",                     {"HIPSPARSE_CSR2CSC_ALG2",                     "", CONV_NUMERIC_LITERAL, API_SPARSE, 4, HIP_UNSUPPORTED}},
+  {"cusparseCsr2CscAlg_t",                      {"hipsparseCsr2CscAlg_t",                      "", CONV_TYPE, API_SPARSE, 4}},
+  {"CUSPARSE_CSR2CSC_ALG1",                     {"HIPSPARSE_CSR2CSC_ALG1",                     "", CONV_NUMERIC_LITERAL, API_SPARSE, 4}},
+  {"CUSPARSE_CSR2CSC_ALG2",                     {"HIPSPARSE_CSR2CSC_ALG2",                     "", CONV_NUMERIC_LITERAL, API_SPARSE, 4}},
 
   {"cusparseFormat_t",                          {"hipsparseFormat_t",                          "", CONV_TYPE, API_SPARSE, 4}},
   {"CUSPARSE_FORMAT_CSR",                       {"HIPSPARSE_FORMAT_CSR",                       "", CONV_NUMERIC_LITERAL, API_SPARSE, 4}},
@@ -450,7 +450,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_TYPE_NAME_VER_MAP {
   {"hipsparseDnMatDescr",                        {HIP_4020, HIP_0,    HIP_0   }},
   {"hipsparseDnMatDescr_t",                      {HIP_4020, HIP_0,    HIP_0   }},
   {"hipsparseOrder_t",                           {HIP_4020, HIP_0,    HIP_0   }},
-  {"HIPSPARSE_ORDER_COL",                        {HIP_4020, HIP_0,    HIP_0   }},
+  {"HIPSPARSE_ORDER_COL",                        {HIP_5040, HIP_0,    HIP_0   }},
   {"HIPSPARSE_ORDER_ROW",                        {HIP_4020, HIP_0,    HIP_0   }},
   {"hipsparseSpMMAlg_t",                         {HIP_4020, HIP_0,    HIP_0   }},
   {"HIPSPARSE_MM_ALG_DEFAULT",                   {HIP_4020, HIP_0,    HIP_0   }},
@@ -491,4 +491,8 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_TYPE_NAME_VER_MAP {
   {"hipsparseSpMatAttribute_t",                  {HIP_4050, HIP_0,    HIP_0   }},
   {"HIPSPARSE_SPMAT_FILL_MODE",                  {HIP_4050, HIP_0,    HIP_0   }},
   {"HIPSPARSE_SPMAT_DIAG_TYPE",                  {HIP_4050, HIP_0,    HIP_0   }},
+  {"hipsparseCsr2CscAlg_t",                      {HIP_5040, HIP_0,    HIP_0   }},
+  {"HIPSPARSE_CSR2CSC_ALG1",                     {HIP_5040, HIP_0,    HIP_0   }},
+  {"HIPSPARSE_CSR2CSC_ALG2",                     {HIP_5040, HIP_0,    HIP_0   }},
+  {"HIPSPARSE_ORDER_COLUMN",                     {HIP_4020, HIP_5040, HIP_0   }},
 };

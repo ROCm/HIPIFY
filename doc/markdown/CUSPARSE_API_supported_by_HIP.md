@@ -14,8 +14,8 @@
 |`CUSPARSE_COOMM_ALG2`|10.1|11.0| |`HIPSPARSE_COOMM_ALG2`|4.2.0| | | |
 |`CUSPARSE_COOMM_ALG3`|10.1|11.0| |`HIPSPARSE_COOMM_ALG3`|4.2.0| | | |
 |`CUSPARSE_COOMV_ALG`|10.2|11.2| |`HIPSPARSE_COOMV_ALG`|4.1.0| | | |
-|`CUSPARSE_CSR2CSC_ALG1`|10.1| | | | | | | |
-|`CUSPARSE_CSR2CSC_ALG2`|10.1| | | | | | | |
+|`CUSPARSE_CSR2CSC_ALG1`|10.1| | |`HIPSPARSE_CSR2CSC_ALG1`|5.4.0| | | |
+|`CUSPARSE_CSR2CSC_ALG2`|10.1| | |`HIPSPARSE_CSR2CSC_ALG2`|5.4.0| | | |
 |`CUSPARSE_CSRMM_ALG1`|10.2|11.0| |`HIPSPARSE_CSRMM_ALG1`|4.2.0| | | |
 |`CUSPARSE_CSRMV_ALG1`|10.2|11.2| |`HIPSPARSE_CSRMV_ALG1`|4.1.0| | | |
 |`CUSPARSE_CSRMV_ALG2`|10.2|11.2| |`HIPSPARSE_CSRMV_ALG2`|4.1.0| | | |
@@ -48,7 +48,7 @@
 |`CUSPARSE_OPERATION_CONJUGATE_TRANSPOSE`| | | |`HIPSPARSE_OPERATION_CONJUGATE_TRANSPOSE`|1.9.2| | | |
 |`CUSPARSE_OPERATION_NON_TRANSPOSE`| | | |`HIPSPARSE_OPERATION_NON_TRANSPOSE`|1.9.2| | | |
 |`CUSPARSE_OPERATION_TRANSPOSE`| | | |`HIPSPARSE_OPERATION_TRANSPOSE`|1.9.2| | | |
-|`CUSPARSE_ORDER_COL`|10.1| | |`HIPSPARSE_ORDER_COL`|4.2.0| | | |
+|`CUSPARSE_ORDER_COL`|10.1| | |`HIPSPARSE_ORDER_COL`|5.4.0| | | |
 |`CUSPARSE_ORDER_ROW`|10.1| | |`HIPSPARSE_ORDER_ROW`|4.2.0| | | |
 |`CUSPARSE_POINTER_MODE_DEVICE`| | | |`HIPSPARSE_POINTER_MODE_DEVICE`|1.9.2| | | |
 |`CUSPARSE_POINTER_MODE_HOST`| | | |`HIPSPARSE_POINTER_MODE_HOST`|1.9.2| | | |
@@ -125,7 +125,7 @@
 |`cusparseColorInfo`| | | | | | | | |
 |`cusparseColorInfo_t`| | | |`hipsparseColorInfo_t`|4.5.0| | | |
 |`cusparseContext`| | | | | | | | |
-|`cusparseCsr2CscAlg_t`|10.1| | | | | | | |
+|`cusparseCsr2CscAlg_t`|10.1| | |`hipsparseCsr2CscAlg_t`|5.4.0| | | |
 |`cusparseDenseToSparseAlg_t`|11.1| | | | | | | |
 |`cusparseDiagType_t`| | | |`hipsparseDiagType_t`|1.9.2| | | |
 |`cusparseDirection_t`| | | |`hipsparseDirection_t`|3.2.0| | | |
@@ -637,8 +637,8 @@
 |`cusparseCreateCsru2csrInfo`| | | |`hipsparseCreateCsru2csrInfo`|4.2.0| | | |
 |`cusparseCreateIdentityPermutation`| | | |`hipsparseCreateIdentityPermutation`|1.9.2| | | |
 |`cusparseCsr2cscEx`|8.0|10.2|11.0| | | | | |
-|`cusparseCsr2cscEx2`|10.1| | | | | | | |
-|`cusparseCsr2cscEx2_bufferSize`|10.1| | | | | | | |
+|`cusparseCsr2cscEx2`|10.1| | |`hipsparseCsr2cscEx2`|5.4.0| | | |
+|`cusparseCsr2cscEx2_bufferSize`|10.1| | |`hipsparseCsr2cscEx2_bufferSize`|5.4.0| | | |
 |`cusparseDbsr2csr`| | | |`hipsparseDbsr2csr`|3.5.0| | | |
 |`cusparseDcsc2dense`| |11.1| |`hipsparseDcsc2dense`|3.5.0| | | |
 |`cusparseDcsc2hyb`| |10.2|11.0| | | | | |
