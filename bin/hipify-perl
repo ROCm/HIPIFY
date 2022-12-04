@@ -1891,6 +1891,7 @@ sub simpleSubstitutions {
     subst("cublasCgbmv", "hipblasCgbmv", "library");
     subst("cublasCgbmv_v2", "hipblasCgbmv", "library");
     subst("cublasCgeam", "hipblasCgeam", "library");
+    subst("cublasCgelsBatched", "hipblasCgelsBatched", "library");
     subst("cublasCgemm", "hipblasCgemm", "library");
     subst("cublasCgemmBatched", "hipblasCgemmBatched", "library");
     subst("cublasCgemmStridedBatched", "hipblasCgemmStridedBatched", "library");
@@ -1982,6 +1983,7 @@ sub simpleSubstitutions {
     subst("cublasDgbmv", "hipblasDgbmv", "library");
     subst("cublasDgbmv_v2", "hipblasDgbmv", "library");
     subst("cublasDgeam", "hipblasDgeam", "library");
+    subst("cublasDgelsBatched", "hipblasDgelsBatched", "library");
     subst("cublasDgemm", "hipblasDgemm", "library");
     subst("cublasDgemmBatched", "hipblasDgemmBatched", "library");
     subst("cublasDgemmStridedBatched", "hipblasDgemmStridedBatched", "library");
@@ -2109,6 +2111,7 @@ sub simpleSubstitutions {
     subst("cublasSgbmv", "hipblasSgbmv", "library");
     subst("cublasSgbmv_v2", "hipblasSgbmv", "library");
     subst("cublasSgeam", "hipblasSgeam", "library");
+    subst("cublasSgelsBatched", "hipblasSgelsBatched", "library");
     subst("cublasSgemm", "hipblasSgemm", "library");
     subst("cublasSgemmBatched", "hipblasSgemmBatched", "library");
     subst("cublasSgemmStridedBatched", "hipblasSgemmStridedBatched", "library");
@@ -2187,6 +2190,7 @@ sub simpleSubstitutions {
     subst("cublasZgbmv", "hipblasZgbmv", "library");
     subst("cublasZgbmv_v2", "hipblasZgbmv", "library");
     subst("cublasZgeam", "hipblasZgeam", "library");
+    subst("cublasZgelsBatched", "hipblasZgelsBatched", "library");
     subst("cublasZgemm", "hipblasZgemm", "library");
     subst("cublasZgemmBatched", "hipblasZgemmBatched", "library");
     subst("cublasZgemmStridedBatched", "hipblasZgemmStridedBatched", "library");
@@ -7965,7 +7969,6 @@ sub warnHipOnlyUnsupportedFunctions {
         "cublasZtpttr",
         "cublasZmatinvBatched",
         "cublasZgemm3m",
-        "cublasZgelsBatched",
         "cublasXerbla",
         "cublasUint8gemmBias",
         "cublasSwapEx",
@@ -7976,7 +7979,6 @@ sub warnHipOnlyUnsupportedFunctions {
         "cublasSmatinvBatched",
         "cublasShutdown",
         "cublasSgemmEx",
-        "cublasSgelsBatched",
         "cublasSetSmCountTarget",
         "cublasSetMathMode",
         "cublasSetLoggerCallback",
@@ -8007,7 +8009,6 @@ sub warnHipOnlyUnsupportedFunctions {
         "cublasDtrmm",
         "cublasDtpttr",
         "cublasDmatinvBatched",
-        "cublasDgelsBatched",
         "cublasCtrttp",
         "cublasCtrmm_v2",
         "cublasCtrmm",
@@ -8024,7 +8025,6 @@ sub warnHipOnlyUnsupportedFunctions {
         "cublasCgemm3mEx",
         "cublasCgemm3mBatched",
         "cublasCgemm3m",
-        "cublasCgelsBatched",
         "cublasAsumEx",
         "cublasAlloc",
         "CUDA_R_8F_E5M2",
