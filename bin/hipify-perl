@@ -1036,7 +1036,7 @@ sub rocSubstitutions {
     subst("cublasGetMatrix", "rocblas_get_matrix", "library");
     subst("cublasGetMatrixAsync", "rocblas_get_matrix_async", "library");
     subst("cublasGetPointerMode", "rocblas_get_pointer_mode", "library");
-    subst("cublasGetPointerMode_v2", "rocblas_set_pointer_mode", "library");
+    subst("cublasGetPointerMode_v2", "rocblas_get_pointer_mode", "library");
     subst("cublasGetStatusString", "rocblas_status_to_string", "library");
     subst("cublasGetStream", "rocblas_get_stream", "library");
     subst("cublasGetStream_v2", "rocblas_get_stream", "library");
@@ -1082,7 +1082,7 @@ sub rocSubstitutions {
     subst("cublasSetMatrix", "rocblas_set_matrix", "library");
     subst("cublasSetMatrixAsync", "rocblas_set_matrix_async", "library");
     subst("cublasSetPointerMode", "rocblas_set_pointer_mode", "library");
-    subst("cublasSetPointerMode_v2", "rocblas_get_pointer_mode", "library");
+    subst("cublasSetPointerMode_v2", "rocblas_set_pointer_mode", "library");
     subst("cublasSetStream", "rocblas_set_stream", "library");
     subst("cublasSetStream_v2", "rocblas_set_stream", "library");
     subst("cublasSetVector", "rocblas_set_vector", "library");

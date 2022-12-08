@@ -133,11 +133,195 @@ int main() {
 
   // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasGetStream_v2(cublasHandle_t handle, cudaStream_t* streamId);
   // CUDA: #define cublasGetStream cublasGetStream_v2
-  // HIP: ROCBLAS_EXPORT rocblas_status rocblas_get_stream(rocblas_handle handle, hipStream_t* stream);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_get_stream(rocblas_handle handle, hipStream_t* stream);
   // CHECK: blasStatus = rocblas_get_stream(blasHandle, &stream);
   // CHECK-NEXT: blasStatus = rocblas_get_stream(blasHandle, &stream);
   blasStatus = cublasGetStream(blasHandle, &stream);
   blasStatus = cublasGetStream_v2(blasHandle, &stream);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasSetPointerMode_v2(cublasHandle_t handle, cublasPointerMode_t mode);
+  // CUDA: #define cublasSetPointerMode cublasSetPointerMode_v2
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_set_pointer_mode(rocblas_handle handle, rocblas_pointer_mode pointer_mode);
+  // CHECK: blasStatus = rocblas_set_pointer_mode(blasHandle, blasPointerMode);
+  // CHECK-NEXT: blasStatus = rocblas_set_pointer_mode(blasHandle, blasPointerMode);
+  blasStatus = cublasSetPointerMode(blasHandle, blasPointerMode);
+  blasStatus = cublasSetPointerMode_v2(blasHandle, blasPointerMode);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasGetPointerMode_v2(cublasHandle_t handle, cublasPointerMode_t* mode);
+  // CUDA: #define cublasGetPointerMode cublasGetPointerMode_v2
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_get_pointer_mode(rocblas_handle handle, rocblas_pointer_mode* pointer_mode);
+  // CHECK: blasStatus = rocblas_get_pointer_mode(blasHandle, &blasPointerMode);
+  // CHECK-NEXT: blasStatus = rocblas_get_pointer_mode(blasHandle, &blasPointerMode);
+  blasStatus = cublasGetPointerMode(blasHandle, &blasPointerMode);
+  blasStatus = cublasGetPointerMode_v2(blasHandle, &blasPointerMode);
+
+  int n = 0;
+  int num = 0;
+  int incx = 0;
+  int incy = 0;
+  void* image = nullptr;
+  void* image_2 = nullptr;
+
+  // https://github.com/ROCmSoftwarePlatform/rocBLAS/issues/1281
+  // TODO: Apply the chosen typecasting of int to rocblas_int arguments
+
+  /*
+  #if defined(rocblas_ILP64)
+    typedef int64_t rocblas_int;
+  #else
+    typedef int32_t rocblas_int;
+  #endif
+  */
+
+  // TODO: #1281
+  // CUDA: cublasStatus_t CUBLASWINAPI cublasSetVector(int n, int elemSize, const void* x, int incx, void* devicePtr, int incy);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_set_vector(rocblas_int n, rocblas_int elem_size, const void* x, rocblas_int incx, void* y, rocblas_int incy);
+  // CHECK: blasStatus = rocblas_set_vector(n, num, image, incx, image_2, incy);
+  blasStatus = cublasSetVector(n, num, image, incx, image_2, incy);
+
+  // TODO: #1281
+  // CUDA: cublasStatus_t CUBLASWINAPI cublasGetVector(int n, int elemSize, const void* x, int incx, void* y, int incy);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_get_vector(rocblas_int n, rocblas_int elem_size, const void* x, rocblas_int incx, void* y, rocblas_int incy);
+  // CHECK: blasStatus = rocblas_get_vector(n, num, image, incx, image_2, incy);
+  blasStatus = cublasGetVector(n, num, image, incx, image_2, incy);
+
+  // TODO: #1281
+  // CUDA: cublasStatus_t CUBLASWINAPI cublasSetVectorAsync(int n, int elemSize, const void* hostPtr, int incx, void* devicePtr, int incy, cudaStream_t stream);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_set_vector_async(rocblas_int n, rocblas_int elem_size, const void* x, rocblas_int incx, void* y, rocblas_int incy, hipStream_t stream);
+  // CHECK: blasStatus = rocblas_set_vector_async(n, num, image, incx, image_2, incy, stream);
+  blasStatus = cublasSetVectorAsync(n, num, image, incx, image_2, incy, stream);
+
+  // TODO: #1281
+  // CUDA: cublasStatus_t CUBLASWINAPI cublasGetVectorAsync(int n, int elemSize, const void* devicePtr, int incx, void* hostPtr, int incy, cudaStream_t stream);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_get_vector_async(rocblas_int n, rocblas_int elem_size, const void* x, rocblas_int incx, void* y, rocblas_int incy, hipStream_t stream);
+  // CHECK: blasStatus = rocblas_get_vector_async(n, num, image, incx, image_2, incy, stream);
+  blasStatus = cublasGetVectorAsync(n, num, image, incx, image_2, incy, stream);
+
+  int rows = 0;
+  int cols = 0;
+
+  // TODO: #1281
+  // CUDA: cublasStatus_t CUBLASWINAPI cublasSetMatrix(int rows, int cols, int elemSize, const void* A, int lda, void* B, int ldb);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_set_matrix(rocblas_int rows, rocblas_int cols, rocblas_int elem_size, const void* a, rocblas_int lda, void* b, rocblas_int ldb);
+  // CHECK: blasStatus = rocblas_set_matrix(rows, cols, num, image, incx, image_2, incy);
+  blasStatus = cublasSetMatrix(rows, cols, num, image, incx, image_2, incy);
+
+  // TODO: #1281
+  // CUDA: cublasStatus_t CUBLASWINAPI cublasGetMatrix(int rows, int cols, int elemSize, const void* A, int lda, void* B, int ldb);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_get_matrix(rocblas_int rows, rocblas_int cols, rocblas_int elem_size, const void* a, rocblas_int lda, void* b, rocblas_int ldb);
+  // CHECK: blasStatus = rocblas_get_matrix(rows, cols, num, image, incx, image_2, incy);
+  blasStatus = cublasGetMatrix(rows, cols, num, image, incx, image_2, incy);
+
+  // TODO: #1281
+  // CUDA: cublasStatus_t CUBLASWINAPI cublasSetMatrixAsync(int rows, int cols, int elemSize, const void* A, int lda, void* B, int ldb, cudaStream_t stream);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_set_matrix_async(rocblas_int rows, rocblas_int cols, rocblas_int elem_size, const void* a, rocblas_int lda, void* b, rocblas_int ldb, hipStream_t stream);
+  // CHECK: blasStatus = rocblas_set_matrix_async(rows, cols, num, image, incx, image_2, incy, stream);
+  blasStatus = cublasSetMatrixAsync(rows, cols, num, image, incx, image_2, incy, stream);
+
+  // TODO: #1281
+  // CUDA: cublasStatus_t CUBLASWINAPI cublasGetMatrixAsync(int rows, int cols, int elemSize, const void* A, int lda, void* B, int ldb, cudaStream_t stream);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_get_matrix_async(rocblas_int rows, rocblas_int cols, rocblas_int elem_size, const void* a, rocblas_int lda, void* b, rocblas_int ldb, hipStream_t stream);
+  // CHECK: blasStatus = rocblas_get_matrix_async(rows, cols, num, image, incx, image_2, incy, stream);
+  blasStatus = cublasGetMatrixAsync(rows, cols, num, image, incx, image_2, incy, stream);
+
+  float fa = 0;
+  float fA = 0;
+  float fb = 0;
+  float fB = 0;
+  float fx = 0;
+  float fx1 = 0;
+  float fy = 0;
+  float fy1 = 0;
+  float fc = 0;
+  float fC = 0;
+  float fs = 0;
+  float fd1 = 0;
+  float fd2 = 0;
+  float fresult = 0;
+
+  float** fAarray = 0;
+  float** fBarray = 0;
+  float** fCarray = 0;
+  float** fTauarray = 0;
+
+  double da = 0;
+  double dA = 0;
+  double db = 0;
+  double dB = 0;
+  double dx = 0;
+  double dx1 = 0;
+  double dy = 0;
+  double dy1 = 0;
+  double dc = 0;
+  double dC = 0;
+  double ds = 0;
+  double dd1 = 0;
+  double dd2 = 0;
+  double dresult = 0;
+
+  double** dAarray = 0;
+  double** dBarray = 0;
+  double** dCarray = 0;
+  double** dTauarray = 0;
+
+  void** voidAarray = nullptr;
+  void** voidBarray = nullptr;
+  void** voidCarray = nullptr;
+
+  // TODO: #1281
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasSnrm2_v2(cublasHandle_t handle, int n, const float* x, int incx, float* result);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_snrm2(rocblas_handle handle, rocblas_int n, const float* x, rocblas_int incx, float* result);
+  // CHECK: blasStatus = rocblas_snrm2(blasHandle, n, &fx, incx, &fresult);
+  // CHECK-NEXT: blasStatus = rocblas_snrm2(blasHandle, n, &fx, incx, &fresult);
+  blasStatus = cublasSnrm2(blasHandle, n, &fx, incx, &fresult);
+  blasStatus = cublasSnrm2_v2(blasHandle, n, &fx, incx, &fresult);
+
+  // TODO: #1281
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasDnrm2_v2(cublasHandle_t handle, int n, const double* x, int incx, double* result);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_dnrm2(rocblas_handle handle, rocblas_int n, const double* x, rocblas_int incx, double* result);
+  // CHECK: blasStatus = rocblas_dnrm2(blasHandle, n, &dx, incx, &dresult);
+  // CHECK-NEXT: blasStatus = rocblas_dnrm2(blasHandle, n, &dx, incx, &dresult);
+  blasStatus = cublasDnrm2(blasHandle, n, &dx, incx, &dresult);
+  blasStatus = cublasDnrm2_v2(blasHandle, n, &dx, incx, &dresult);
+
+  // CHECK: rocblas_float_complex complex, complexa, complexA, complexB, complexC, complexx, complexy, complexs, complexb;
+  cuComplex complex, complexa, complexA, complexB, complexC, complexx, complexy, complexs, complexb;
+  // CHECK: rocblas_double_complex dcomplex, dcomplexa, dcomplexA, dcomplexB, dcomplexC, dcomplexx, dcomplexy, dcomplexs, dcomplexb;
+  cuDoubleComplex dcomplex, dcomplexa, dcomplexA, dcomplexB, dcomplexC, dcomplexx, dcomplexy, dcomplexs, dcomplexb;
+
+  // CHECK: rocblas_float_complex** complexAarray = 0;
+  // CHECK-NEXT: rocblas_float_complex** complexBarray = 0;
+  // CHECK-NEXT: rocblas_float_complex** complexCarray = 0;
+  // CHECK-NEXT: rocblas_float_complex** complexTauarray = 0;
+  cuComplex** complexAarray = 0;
+  cuComplex** complexBarray = 0;
+  cuComplex** complexCarray = 0;
+  cuComplex** complexTauarray = 0;
+
+  // CHECK: rocblas_double_complex** dcomplexAarray = 0;
+  // CHECK-NEXT: rocblas_double_complex** dcomplexBarray = 0;
+  // CHECK-NEXT: rocblas_double_complex** dcomplexCarray = 0;
+  // CHECK-NEXT: rocblas_double_complex** dcomplexTauarray = 0;
+  cuDoubleComplex** dcomplexAarray = 0;
+  cuDoubleComplex** dcomplexBarray = 0;
+  cuDoubleComplex** dcomplexCarray = 0;
+  cuDoubleComplex** dcomplexTauarray = 0;
+
+  // TODO: #1281
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasScnrm2_v2(cublasHandle_t handle, int n, const cuComplex* x, int incx, float* result);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_scnrm2(rocblas_handle handle, rocblas_int n, const rocblas_float_complex* x, rocblas_int incx, float* result);
+  // CHECK: blasStatus = rocblas_scnrm2(blasHandle, n, &complex, incx, &fresult);
+  // CHECK-NEXT: blasStatus = rocblas_scnrm2(blasHandle, n, &complex, incx, &fresult);
+  blasStatus = cublasScnrm2(blasHandle, n, &complex, incx, &fresult);
+  blasStatus = cublasScnrm2_v2(blasHandle, n, &complex, incx, &fresult);
+
+  // TODO: #1281
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasDznrm2_v2(cublasHandle_t handle, int n, const cuDoubleComplex* x, int incx, double* result);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_dznrm2(rocblas_handle handle, rocblas_int n, const rocblas_double_complex* x, rocblas_int incx, double* result);
+  // CHECK: blasStatus = rocblas_dznrm2(blasHandle, n, &dcomplex, incx, &dresult);
+  // CHECK-NEXT: blasStatus = rocblas_dznrm2(blasHandle, n, &dcomplex, incx, &dresult);
+  blasStatus = cublasDznrm2(blasHandle, n, &dcomplex, incx, &dresult);
+  blasStatus = cublasDznrm2_v2(blasHandle, n, &dcomplex, incx, &dresult);
 
 #if CUDA_VERSION >= 8000
   // CHECK: rocblas_datatype DataType;
