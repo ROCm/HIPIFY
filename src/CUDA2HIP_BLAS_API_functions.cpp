@@ -73,8 +73,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
   {"cublasGetProperty",              {"hipblasGetProperty",              "",                                         CONV_LIB_FUNC, API_BLAS, 4, UNSUPPORTED}},
   {"cublasSetStream_v2",             {"hipblasSetStream",                "rocblas_set_stream",                       CONV_LIB_FUNC, API_BLAS, 4}},
   {"cublasGetStream_v2",             {"hipblasGetStream",                "rocblas_get_stream",                       CONV_LIB_FUNC, API_BLAS, 4}},
-  {"cublasGetPointerMode_v2",        {"hipblasGetPointerMode",           "rocblas_set_pointer_mode",                 CONV_LIB_FUNC, API_BLAS, 4}},
-  {"cublasSetPointerMode_v2",        {"hipblasSetPointerMode",           "rocblas_get_pointer_mode",                 CONV_LIB_FUNC, API_BLAS, 4}},
+  {"cublasSetPointerMode_v2",        {"hipblasSetPointerMode",           "rocblas_set_pointer_mode",                 CONV_LIB_FUNC, API_BLAS, 4}},
+  {"cublasGetPointerMode_v2",        {"hipblasGetPointerMode",           "rocblas_get_pointer_mode",                 CONV_LIB_FUNC, API_BLAS, 4}},
   {"cublasGetCudartVersion",         {"hipblasGetCudartVersion",         "",                                         CONV_LIB_FUNC, API_BLAS, 4, UNSUPPORTED}},
 
   // NRM2
@@ -383,10 +383,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
   {"cublasZgeqrfBatched",            {"hipblasZgeqrfBatched",            "",                                         CONV_LIB_FUNC, API_BLAS, 8, ROC_UNSUPPORTED}},
 
   // Least Square Min only m >= n and Non-transpose supported
-  {"cublasSgelsBatched",             {"hipblasSgelsBatched",             "",                                         CONV_LIB_FUNC, API_BLAS, 8, UNSUPPORTED}},
-  {"cublasDgelsBatched",             {"hipblasDgelsBatched",             "",                                         CONV_LIB_FUNC, API_BLAS, 8, UNSUPPORTED}},
-  {"cublasCgelsBatched",             {"hipblasCgelsBatched",             "",                                         CONV_LIB_FUNC, API_BLAS, 8, UNSUPPORTED}},
-  {"cublasZgelsBatched",             {"hipblasZgelsBatched",             "",                                         CONV_LIB_FUNC, API_BLAS, 8, UNSUPPORTED}},
+  {"cublasSgelsBatched",             {"hipblasSgelsBatched",             "",                                         CONV_LIB_FUNC, API_BLAS, 8, ROC_UNSUPPORTED}},
+  {"cublasDgelsBatched",             {"hipblasDgelsBatched",             "",                                         CONV_LIB_FUNC, API_BLAS, 8, ROC_UNSUPPORTED}},
+  {"cublasCgelsBatched",             {"hipblasCgelsBatched",             "",                                         CONV_LIB_FUNC, API_BLAS, 8, ROC_UNSUPPORTED}},
+  {"cublasZgelsBatched",             {"hipblasZgelsBatched",             "",                                         CONV_LIB_FUNC, API_BLAS, 8, ROC_UNSUPPORTED}},
 
   // DGMM
   {"cublasSdgmm",                    {"hipblasSdgmm",                    "rocblas_sdgmm",                            CONV_LIB_FUNC, API_BLAS, 8}},
@@ -1166,6 +1166,10 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_FUNCTION_VER_MAP {
   {"rocblas_get_vector_async",                   {HIP_3050, HIP_0,    HIP_0   }},
   {"rocblas_set_matrix_async",                   {HIP_3050, HIP_0,    HIP_0   }},
   {"rocblas_get_matrix_async",                   {HIP_3050, HIP_0,    HIP_0   }},
+  {"hipblasSgelsBatched",                        {HIP_5040, HIP_0,    HIP_0   }},
+  {"hipblasDgelsBatched",                        {HIP_5040, HIP_0,    HIP_0   }},
+  {"hipblasCgelsBatched",                        {HIP_5040, HIP_0,    HIP_0   }},
+  {"hipblasZgelsBatched",                        {HIP_5040, HIP_0,    HIP_0   }},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_BLAS_API_SECTION_MAP {

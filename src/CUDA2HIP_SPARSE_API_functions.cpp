@@ -576,8 +576,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   {"cusparseZcsr2csc",                                  {"hipsparseZcsr2csc",                                  "", CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | CUDA_REMOVED}},
 
   {"cusparseCsr2cscEx",                                 {"hipsparseCsr2cscEx",                                 "", CONV_LIB_FUNC, API_SPARSE, 14, HIP_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseCsr2cscEx2",                                {"hipsparseCsr2cscEx2",                                "", CONV_LIB_FUNC, API_SPARSE, 14, HIP_UNSUPPORTED}},
-  {"cusparseCsr2cscEx2_bufferSize",                     {"hipsparseCsr2cscEx2_bufferSize",                     "", CONV_LIB_FUNC, API_SPARSE, 14, HIP_UNSUPPORTED}},
+  {"cusparseCsr2cscEx2",                                {"hipsparseCsr2cscEx2",                                "", CONV_LIB_FUNC, API_SPARSE, 14}},
+  {"cusparseCsr2cscEx2_bufferSize",                     {"hipsparseCsr2cscEx2_bufferSize",                     "", CONV_LIB_FUNC, API_SPARSE, 14}},
 
   {"cusparseScsr2dense",                                {"hipsparseScsr2dense",                                "", CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED}},
   {"cusparseDcsr2dense",                                {"hipsparseDcsr2dense",                                "", CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED}},
@@ -1741,6 +1741,8 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_FUNCTION_VER_MAP {
   {"hipsparseCsrSetStridedBatch",                        {HIP_5020, HIP_0,    HIP_0   }},
   {"hipsparseDnMatGetStridedBatch",                      {HIP_5020, HIP_0,    HIP_0   }},
   {"hipsparseDnMatSetStridedBatch",                      {HIP_5020, HIP_0,    HIP_0   }},
+  {"hipsparseCsr2cscEx2_bufferSize",                     {HIP_5040, HIP_0,    HIP_0   }},
+  {"hipsparseCsr2cscEx2",                                {HIP_5040, HIP_0,    HIP_0   }},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_SPARSE_API_SECTION_MAP {
