@@ -419,6 +419,102 @@ int main() {
   blasStatus = cublasZdscal(blasHandle, n, &dx, &dcomplexx, incx);
   blasStatus = cublasZdscal_v2(blasHandle, n, &dx, &dcomplexx, incx);
 
+  // TODO: #1281
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasSaxpy_v2(cublasHandle_t handle, int n, const float* alpha, const float* x, int incx, float* y, int incy);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_saxpy(rocblas_handle handle, rocblas_int n, const float* alpha, const float* x, rocblas_int incx, float* y, rocblas_int incy);
+  // CHECK: blasStatus = rocblas_saxpy(blasHandle, n, &fa, &fx, incx, &fy, incy);
+  // CHECK-NEXT: blasStatus = rocblas_saxpy(blasHandle, n, &fa, &fx, incx, &fy, incy);
+  blasStatus = cublasSaxpy(blasHandle, n, &fa, &fx, incx, &fy, incy);
+  blasStatus = cublasSaxpy_v2(blasHandle, n, &fa, &fx, incx, &fy, incy);
+
+  // TODO: #1281
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasDaxpy_v2(cublasHandle_t handle, int n, const double* alpha, const double* x, int incx, double* y, int incy);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_daxpy(rocblas_handle handle, rocblas_int n, const double* alpha, const double* x, rocblas_int incx, double* y, rocblas_int incy);
+  // CHECK: blasStatus = rocblas_daxpy(blasHandle, n, &da, &dx, incx, &dy, incy);
+  // CHECK-NEXT: blasStatus = rocblas_daxpy(blasHandle, n, &da, &dx, incx, &dy, incy);
+  blasStatus = cublasDaxpy(blasHandle, n, &da, &dx, incx, &dy, incy);
+  blasStatus = cublasDaxpy_v2(blasHandle, n, &da, &dx, incx, &dy, incy);
+
+  // TODO: #1281
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasCaxpy_v2(cublasHandle_t handle, int n, const cuComplex* alpha, const cuComplex* x, int incx, cuComplex* y, int incy);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_caxpy(rocblas_handle handle, rocblas_int n, const rocblas_float_complex* alpha, const rocblas_float_complex* x, rocblas_int incx, rocblas_float_complex* y, rocblas_int incy);
+  // CHECK: blasStatus = rocblas_caxpy(blasHandle, n, &complexa, &complexx, incx, &complexy, incy);
+  // CHECK-NEXT: blasStatus = rocblas_caxpy(blasHandle, n, &complexa, &complexx, incx, &complexy, incy);
+  blasStatus = cublasCaxpy(blasHandle, n, &complexa, &complexx, incx, &complexy, incy);
+  blasStatus = cublasCaxpy_v2(blasHandle, n, &complexa, &complexx, incx, &complexy, incy);
+
+  // TODO: #1281
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasZaxpy_v2(cublasHandle_t handle, int n, const cuDoubleComplex* alpha, const cuDoubleComplex* x, int incx, cuDoubleComplex* y, int incy);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_zaxpy(rocblas_handle handle, rocblas_int n, const rocblas_double_complex* alpha, const rocblas_double_complex* x, rocblas_int incx, rocblas_double_complex* y, rocblas_int incy);
+  // CHECK: blasStatus = rocblas_zaxpy(blasHandle, n, &dcomplexa, &dcomplexx, incx, &dcomplexy, incy);
+  // CHECK-NEXT: blasStatus = rocblas_zaxpy(blasHandle, n, &dcomplexa, &dcomplexx, incx, &dcomplexy, incy);
+  blasStatus = cublasZaxpy(blasHandle, n, &dcomplexa, &dcomplexx, incx, &dcomplexy, incy);
+  blasStatus = cublasZaxpy_v2(blasHandle, n, &dcomplexa, &dcomplexx, incx, &dcomplexy, incy);
+
+  // TODO: #1281
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasScopy_v2(cublasHandle_t handle, int n, const float* x, int incx, float* y, int incy);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_scopy(rocblas_handle handle, rocblas_int n, const float* x, rocblas_int incx, float* y, rocblas_int incy);
+  // CHECK: blasStatus = rocblas_scopy(blasHandle, n, &fx, incx, &fy, incy);
+  // CHECK-NEXT: blasStatus = rocblas_scopy(blasHandle, n, &fx, incx, &fy, incy);
+  blasStatus = cublasScopy(blasHandle, n, &fx, incx, &fy, incy);
+  blasStatus = cublasScopy_v2(blasHandle, n, &fx, incx, &fy, incy);
+
+  // TODO: #1281
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasDcopy_v2(cublasHandle_t handle, int n, const double* x, int incx, double* y, int incy);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_dcopy(rocblas_handle handle, rocblas_int n, const double* x, rocblas_int incx, double* y, rocblas_int incy);
+  // CHECK: blasStatus = rocblas_dcopy(blasHandle, n, &dx, incx, &dy, incy);
+  // CHECK-NEXT: blasStatus = rocblas_dcopy(blasHandle, n, &dx, incx, &dy, incy);
+  blasStatus = cublasDcopy(blasHandle, n, &dx, incx, &dy, incy);
+  blasStatus = cublasDcopy_v2(blasHandle, n, &dx, incx, &dy, incy);
+
+  // TODO: #1281
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasCcopy_v2(cublasHandle_t handle, int n, const cuComplex* x, int incx, cuComplex* y, int incy);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_ccopy(rocblas_handle handle, rocblas_int n, const rocblas_float_complex* x, rocblas_int incx, rocblas_float_complex* y, rocblas_int incy);
+  // CHECK: blasStatus = rocblas_ccopy(blasHandle, n, &complexx, incx, &complexy, incy);
+  // CHECK-NEXT: blasStatus = rocblas_ccopy(blasHandle, n, &complexx, incx, &complexy, incy);
+  blasStatus = cublasCcopy(blasHandle, n, &complexx, incx, &complexy, incy);
+  blasStatus = cublasCcopy_v2(blasHandle, n, &complexx, incx, &complexy, incy);
+
+  // TODO: #1281
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasZcopy_v2(cublasHandle_t handle, int n, const cuDoubleComplex* x, int incx, cuDoubleComplex* y, int incy);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_zcopy(rocblas_handle handle, rocblas_int n, const rocblas_double_complex* x, rocblas_int incx, rocblas_double_complex* y, rocblas_int incy);
+  // CHECK: blasStatus = rocblas_zcopy(blasHandle, n, &dcomplexx, incx, &dcomplexy, incy);
+  // CHECK-NEXT: blasStatus = rocblas_zcopy(blasHandle, n, &dcomplexx, incx, &dcomplexy, incy);
+  blasStatus = cublasZcopy(blasHandle, n, &dcomplexx, incx, &dcomplexy, incy);
+  blasStatus = cublasZcopy_v2(blasHandle, n, &dcomplexx, incx, &dcomplexy, incy);
+
+  // TODO: #1281
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasSswap_v2(cublasHandle_t handle, int n, float* x, int incx, float* y, int incy);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_sswap(rocblas_handle handle, rocblas_int n, float* x, rocblas_int incx, float* y, rocblas_int incy);
+  // CHECK: blasStatus = rocblas_sswap(blasHandle, n, &fx, incx, &fy, incy);
+  // CHECK-NEXT: blasStatus = rocblas_sswap(blasHandle, n, &fx, incx, &fy, incy);
+  blasStatus = cublasSswap(blasHandle, n, &fx, incx, &fy, incy);
+  blasStatus = cublasSswap_v2(blasHandle, n, &fx, incx, &fy, incy);
+
+  // TODO: #1281
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasDswap_v2(cublasHandle_t handle, int n, double* x, int incx, double* y, int incy);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_dswap(rocblas_handle handle, rocblas_int n, double* x, rocblas_int incx, double* y, rocblas_int incy);
+  // CHECK: blasStatus = rocblas_dswap(blasHandle, n, &dx, incx, &dy, incy);
+  // CHECK-NEXT: blasStatus = rocblas_dswap(blasHandle, n, &dx, incx, &dy, incy);
+  blasStatus = cublasDswap(blasHandle, n, &dx, incx, &dy, incy);
+  blasStatus = cublasDswap_v2(blasHandle, n, &dx, incx, &dy, incy);
+
+  // TODO: #1281
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasCswap_v2(cublasHandle_t handle, int n, cuComplex* x, int incx, cuComplex* y, int incy);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_cswap(rocblas_handle handle, rocblas_int n, rocblas_float_complex* x, rocblas_int incx, rocblas_float_complex* y, rocblas_int incy);
+  // CHECK: blasStatus = rocblas_cswap(blasHandle, n, &complexx, incx, &complexy, incy);
+  // CHECK-NEXT: blasStatus = rocblas_cswap(blasHandle, n, &complexx, incx, &complexy, incy);
+  blasStatus = cublasCswap(blasHandle, n, &complexx, incx, &complexy, incy);
+  blasStatus = cublasCswap_v2(blasHandle, n, &complexx, incx, &complexy, incy);
+
+  // TODO: #1281
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasZswap_v2(cublasHandle_t handle, int n, cuDoubleComplex* x, int incx, cuDoubleComplex* y, int incy);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_zswap(rocblas_handle handle, rocblas_int n, rocblas_double_complex* x, rocblas_int incx, rocblas_double_complex* y, rocblas_int incy);
+  // CHECK: blasStatus = rocblas_zswap(blasHandle, n, &dcomplexx, incx, &dcomplexy, incy);
+  // CHECK-NEXT: blasStatus = rocblas_zswap(blasHandle, n, &dcomplexx, incx, &dcomplexy, incy);
+  blasStatus = cublasZswap(blasHandle, n, &dcomplexx, incx, &dcomplexy, incy);
+  blasStatus = cublasZswap_v2(blasHandle, n, &dcomplexx, incx, &dcomplexy, incy);
+
 #if CUDA_VERSION >= 8000
   // CHECK: rocblas_datatype DataType;
   // CHECK-NEXT: rocblas_datatype_ DataType_t;
