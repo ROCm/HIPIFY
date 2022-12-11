@@ -99,9 +99,14 @@ if(ADDRESS_SANITIZER)
 else()
     set(addr_var )
 endif()
-
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${EXTRA_CFLAGS} ${addr_var}")
-if(LLVM_PACKAGE_VERSION VERSION_EQUAL "16.0.0" OR LLVM_PACKAGE_VERSION VERSION_GREATER "16.0.0")
+
+# [ToDo] Remove D125860 related guards from CMakeLists.txt with the LLVM 16.0.0 official release
+option (D125860 "Enables treating clang's resource dir as lib/clang/X.Y.Z, as it was before clang's change D125860, merged as e1b88c8a09be25b86b13f98755a9bd744b4dbf14" OFF)
+if(D125860)
+    add_definitions(-D125860)
+endif()
+if((LLVM_PACKAGE_VERSION VERSION_EQUAL "16.0.0" OR LLVM_PACKAGE_VERSION VERSION_GREATER "16.0.0") AND (NOT D125860))
     set(LIB_CLANG_RES ${LLVM_VERSION_MAJOR})
 else()
     set(LIB_CLANG_RES ${LLVM_VERSION_MAJOR}.${LLVM_VERSION_MINOR}.${LLVM_VERSION_PATCH})
