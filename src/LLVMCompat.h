@@ -99,4 +99,6 @@ clang::SourceLocation getEndOfExpansionRangeForLoc(const clang::SourceManager &S
 
 Memory_Buffer getMemoryBuffer(const clang::SourceManager &SM);
 
+void addTargetIfNeeded(ct::RefactoringTool& Tool);
+
 } // namespace llcompat

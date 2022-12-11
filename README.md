@@ -574,9 +574,7 @@ Testing Time: 6.94s
 | 12.0.0 - 13.0.1 | 7.0 - 11.5.1 | 7.6.5  - 8.3.2 | 2017.15.9.43, 2019.16.11.9               | 3.22.2         | 3.10.2       |
 | 14.0.0 - 14.0.6 | 7.0 - 11.7.1 | 8.0.5  - 8.4.1 | 2017.15.9.49, 2019.16.11.17, 2022.17.2.6 | 3.24.0         | 3.10.6       |
 | 15.0.0 - 15.0.6 | 7.0 - 11.8.0 | 8.0.5  - 8.6.0 | 2017.15.9.51, 2019.16.11.21, 2022.17.4.2 | 3.25.1         | 3.11.1       |
-| 16.0.0git*      | 7.0 - 11.8.0 | 8.0.5  - 8.6.0 | 2017.15.9.51, 2019.16.11.21, 2022.17.4.2 | 3.25.1         | 3.11.1       |
-
-`*` There is an issue with the trunk LLVM ([#693](https://github.com/ROCm-Developer-Tools/HIPIFY/issues/693)) which is under investigation, so it is strongly recommended to use the latest stable LLVM release 15.0.6.
+| 16.0.0git       | 7.0 - 11.8.0 | 8.0.5  - 8.6.0 | 2017.15.9.51, 2019.16.11.21, 2022.17.4.2 | 3.25.1         | 3.11.1       |
 
 *Building with testing support by `Visual Studio 17 2022` on `Windows 10`:*
 
