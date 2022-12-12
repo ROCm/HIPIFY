@@ -157,6 +157,7 @@ int main() {
 
   int n = 0;
   int num = 0;
+  int res = 0;
   int incx = 0;
   int incy = 0;
   void* image = nullptr;
@@ -514,6 +515,102 @@ int main() {
   // CHECK-NEXT: blasStatus = rocblas_zswap(blasHandle, n, &dcomplexx, incx, &dcomplexy, incy);
   blasStatus = cublasZswap(blasHandle, n, &dcomplexx, incx, &dcomplexy, incy);
   blasStatus = cublasZswap_v2(blasHandle, n, &dcomplexx, incx, &dcomplexy, incy);
+
+  // TODO: #1281
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasIsamax_v2(cublasHandle_t handle, int n, const float* x, int incx, int* result);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_isamax(rocblas_handle handle, rocblas_int n, const float* x, rocblas_int incx, rocblas_int* result);
+  // CHECK: blasStatus = rocblas_isamax(blasHandle, n, &fx, incx, &res);
+  // CHECK-NEXT: blasStatus = rocblas_isamax(blasHandle, n, &fx, incx, &res);
+  blasStatus = cublasIsamax(blasHandle, n, &fx, incx, &res);
+  blasStatus = cublasIsamax_v2(blasHandle, n, &fx, incx, &res);
+
+  // TODO: #1281
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasIdamax_v2(cublasHandle_t handle, int n, const double* x, int incx, int* result);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_idamax(rocblas_handle handle, rocblas_int n, const double* x, rocblas_int incx, rocblas_int* result);
+  // CHECK: blasStatus = rocblas_idamax(blasHandle, n, &dx, incx, &res);
+  // CHECK-NEXT: blasStatus = rocblas_idamax(blasHandle, n, &dx, incx, &res);
+  blasStatus = cublasIdamax(blasHandle, n, &dx, incx, &res);
+  blasStatus = cublasIdamax_v2(blasHandle, n, &dx, incx, &res);
+
+  // TODO: #1281
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasIcamax_v2(cublasHandle_t handle, int n, const cuComplex* x, int incx, int* result);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_icamax(rocblas_handle handle, rocblas_int n, const rocblas_float_complex* x, rocblas_int incx, rocblas_int* result);
+  // CHECK: blasStatus = rocblas_icamax(blasHandle, n, &complexx, incx, &res);
+  // CHECK-NEXT: blasStatus = rocblas_icamax(blasHandle, n, &complexx, incx, &res);
+  blasStatus = cublasIcamax(blasHandle, n, &complexx, incx, &res);
+  blasStatus = cublasIcamax_v2(blasHandle, n, &complexx, incx, &res);
+
+  // TODO: #1281
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasIzamax_v2(cublasHandle_t handle, int n, const cuDoubleComplex* x, int incx, int* result);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_izamax(rocblas_handle handle, rocblas_int n, const rocblas_double_complex* x, rocblas_int incx, rocblas_int* result);
+  // CHECK: blasStatus = rocblas_izamax(blasHandle, n, &dcomplexx, incx, &res);
+  // CHECK-NEXT: blasStatus = rocblas_izamax(blasHandle, n, &dcomplexx, incx, &res);
+  blasStatus = cublasIzamax(blasHandle, n, &dcomplexx, incx, &res);
+  blasStatus = cublasIzamax_v2(blasHandle, n, &dcomplexx, incx, &res);
+
+  // TODO: #1281
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasIsamin_v2(cublasHandle_t handle, int n, const float* x, int incx, int* result);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_isamin(rocblas_handle handle, rocblas_int n, const float* x, rocblas_int incx, rocblas_int* result);
+  // CHECK: blasStatus = rocblas_isamin(blasHandle, n, &fx, incx, &res);
+  // CHECK-NEXT: blasStatus = rocblas_isamin(blasHandle, n, &fx, incx, &res);
+  blasStatus = cublasIsamin(blasHandle, n, &fx, incx, &res);
+  blasStatus = cublasIsamin_v2(blasHandle, n, &fx, incx, &res);
+
+  // TODO: #1281
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasIdamin_v2(cublasHandle_t handle, int n, const double* x, int incx, int* result);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_idamin(rocblas_handle handle, rocblas_int n, const double* x, rocblas_int incx, rocblas_int* result);
+  // CHECK: blasStatus = rocblas_idamin(blasHandle, n, &dx, incx, &res);
+  // CHECK-NEXT: blasStatus = rocblas_idamin(blasHandle, n, &dx, incx, &res);
+  blasStatus = cublasIdamin(blasHandle, n, &dx, incx, &res);
+  blasStatus = cublasIdamin_v2(blasHandle, n, &dx, incx, &res);
+
+  // TODO: #1281
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasIcamin_v2(cublasHandle_t handle, int n, const cuComplex* x, int incx, int* result);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_icamin(rocblas_handle handle, rocblas_int n, const rocblas_float_complex* x, rocblas_int incx, rocblas_int* result);
+  // CHECK: blasStatus = rocblas_icamin(blasHandle, n, &complexx, incx, &res);
+  // CHECK-NEXT: blasStatus = rocblas_icamin(blasHandle, n, &complexx, incx, &res);
+  blasStatus = cublasIcamin(blasHandle, n, &complexx, incx, &res);
+  blasStatus = cublasIcamin_v2(blasHandle, n, &complexx, incx, &res);
+
+  // TODO: #1281
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasIzamin_v2(cublasHandle_t handle, int n, const cuDoubleComplex* x, int incx, int* result);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_izamin(rocblas_handle handle, rocblas_int n, const rocblas_double_complex* x, rocblas_int incx, rocblas_int* result);
+  // CHECK: blasStatus = rocblas_izamin(blasHandle, n, &dcomplexx, incx, &res);
+  // CHECK-NEXT: blasStatus = rocblas_izamin(blasHandle, n, &dcomplexx, incx, &res);
+  blasStatus = cublasIzamin(blasHandle, n, &dcomplexx, incx, &res);
+  blasStatus = cublasIzamin_v2(blasHandle, n, &dcomplexx, incx, &res);
+
+  // TODO: #1281
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasSasum_v2(cublasHandle_t handle, int n, const float* x, int incx, float* result);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_sasum(rocblas_handle handle, rocblas_int n, const float* x, rocblas_int incx, float* result);
+  // CHECK: blasStatus = rocblas_sasum(blasHandle, n, &fx, incx, &fresult);
+  // CHECK-NEXT: blasStatus = rocblas_sasum(blasHandle, n, &fx, incx, &fresult);
+  blasStatus = cublasSasum(blasHandle, n, &fx, incx, &fresult);
+  blasStatus = cublasSasum_v2(blasHandle, n, &fx, incx, &fresult);
+
+  // TODO: #1281
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasDasum_v2(cublasHandle_t handle, int n, const double* x, int incx, double* result);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_dasum(rocblas_handle handle, rocblas_int n, const double* x, rocblas_int incx, double* result);
+  // CHECK: blasStatus = rocblas_dasum(blasHandle, n, &dx, incx, &dresult);
+  // CHECK-NEXT: blasStatus = rocblas_dasum(blasHandle, n, &dx, incx, &dresult);
+  blasStatus = cublasDasum(blasHandle, n, &dx, incx, &dresult);
+  blasStatus = cublasDasum_v2(blasHandle, n, &dx, incx, &dresult);
+
+  // TODO: #1281
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasScasum_v2(cublasHandle_t handle, int n, const cuComplex* x, int incx, float* result);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_scasum(rocblas_handle handle, rocblas_int n, const rocblas_float_complex* x, rocblas_int incx, float* result);
+  // CHECK: blasStatus = rocblas_scasum(blasHandle, n, &complexx, incx, &fresult);
+  // CHECK-NEXT: blasStatus = rocblas_scasum(blasHandle, n, &complexx, incx, &fresult);
+  blasStatus = cublasScasum(blasHandle, n, &complexx, incx, &fresult);
+  blasStatus = cublasScasum_v2(blasHandle, n, &complexx, incx, &fresult);
+
+  // TODO: #1281
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasDzasum_v2(cublasHandle_t handle, int n, const cuDoubleComplex* x, int incx, double* result);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_dzasum(rocblas_handle handle, rocblas_int n, const rocblas_double_complex* x, rocblas_int incx, double* result);
+  // CHECK: blasStatus = rocblas_dzasum(blasHandle, n, &dcomplexx, incx, &dresult);
+  // CHECK-NEXT: blasStatus = rocblas_dzasum(blasHandle, n, &dcomplexx, incx, &dresult);
+  blasStatus = cublasDzasum(blasHandle, n, &dcomplexx, incx, &dresult);
+  blasStatus = cublasDzasum_v2(blasHandle, n, &dcomplexx, incx, &dresult);
 
 #if CUDA_VERSION >= 8000
   // CHECK: rocblas_datatype DataType;
