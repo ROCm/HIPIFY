@@ -101,6 +101,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"CUDNN_DATA_BOOLEAN",                                             {"HIPDNN_DATA_BOOLEAN",                                             "", CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},  // 11
   {"CUDNN_DATA_FP8_E4M3",                                            {"HIPDNN_DATA_FP8_E4M3",                                            "", CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},  // 12
   {"CUDNN_DATA_FP8_E5M2",                                            {"HIPDNN_DATA_FP8_E5M2",                                            "", CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},  // 13
+  {"CUDNN_DATA_FAST_FLOAT_FOR_FP8",                                  {"HIPDNN_DATA_FAST_FLOAT_FOR_FP8",                                  "", CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},  // 14
   {"cudnnErrQueryMode_t",                                            {"hipdnnErrQueryMode_t",                                            "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
   {"CUDNN_ERRQUERY_RAWCODE",                                         {"HIPDNN_ERRQUERY_RAWCODE",                                         "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 0
   {"CUDNN_ERRQUERY_NONBLOCKING",                                     {"HIPDNN_ERRQUERY_NONBLOCKING",                                     "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 1
@@ -539,6 +540,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"CUDNN_ATTR_OPERATION_MATMUL_CDESC",                              {"HIPDNN_ATTR_OPERATION_MATMUL_CDESC",                              "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 1522
   {"CUDNN_ATTR_OPERATION_MATMUL_DESC",                               {"HIPDNN_ATTR_OPERATION_MATMUL_DESC",                               "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 1523
   {"CUDNN_ATTR_OPERATION_MATMUL_IRREGULARLY_STRIDED_BATCH_COUNT",    {"HIPDNN_ATTR_OPERATION_MATMUL_IRREGULARLY_STRIDED_BATCH_COUNT",    "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 1524
+  {"CUDNN_ATTR_OPERATION_MATMUL_GEMM_M_OVERRIDE_DESC",               {"HIPDNN_ATTR_OPERATION_MATMUL_GEMM_M_OVERRIDE_DESC",               "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 1525
+  {"CUDNN_ATTR_OPERATION_MATMUL_GEMM_N_OVERRIDE_DESC",               {"HIPDNN_ATTR_OPERATION_MATMUL_GEMM_N_OVERRIDE_DESC",               "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 1526
+  {"CUDNN_ATTR_OPERATION_MATMUL_GEMM_K_OVERRIDE_DESC",               {"HIPDNN_ATTR_OPERATION_MATMUL_GEMM_K_OVERRIDE_DESC",               "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 1527
   {"CUDNN_ATTR_REDUCTION_OPERATOR",                                  {"HIPDNN_ATTR_REDUCTION_OPERATOR",                                  "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 1600
   {"CUDNN_ATTR_REDUCTION_COMP_TYPE",                                 {"HIPDNN_ATTR_REDUCTION_COMP_TYPE",                                 "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 1601
   {"CUDNN_ATTR_OPERATION_REDUCTION_XDESC",                           {"HIPDNN_ATTR_OPERATION_REDUCTION_XDESC",                           "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 1610
@@ -576,6 +580,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"CUDNN_ATTR_OPERATION_RESAMPLE_BWD_ALPHA",                        {"HIPDNN_ATTR_OPERATION_RESAMPLE_BWD_ALPHA",                        "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 1723
   {"CUDNN_ATTR_OPERATION_RESAMPLE_BWD_BETA",                         {"HIPDNN_ATTR_OPERATION_RESAMPLE_BWD_BETA",                         "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 1724
   {"CUDNN_ATTR_OPERATION_RESAMPLE_BWD_DESC",                         {"HIPDNN_ATTR_OPERATION_RESAMPLE_BWD_DESC",                         "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 1725
+  {"CUDNN_ATTR_OPERATION_RESAMPLE_BWD_XDESC",                        {"HIPDNN_ATTR_OPERATION_RESAMPLE_BWD_XDESC",                        "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 1726
+  {"CUDNN_ATTR_OPERATION_RESAMPLE_BWD_YDESC",                        {"HIPDNN_ATTR_OPERATION_RESAMPLE_BWD_YDESC",                        "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 1727
   {"CUDNN_ATTR_OPERATION_CONCAT_AXIS",                               {"HIPDNN_ATTR_OPERATION_CONCAT_AXIS",                               "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 1800
   {"CUDNN_ATTR_OPERATION_CONCAT_INPUT_DESCS",                        {"HIPDNN_ATTR_OPERATION_CONCAT_INPUT_DESCS",                        "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 1801
   {"CUDNN_ATTR_OPERATION_CONCAT_INPLACE_INDEX",                      {"HIPDNN_ATTR_OPERATION_CONCAT_INPLACE_INDEX",                      "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 1802
@@ -611,6 +617,17 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"CUDNN_ATTR_OPERATION_NORM_BWD_DBIAS_DESC",                       {"HIPDNN_ATTR_OPERATION_NORM_BWD_DBIAS_DESC",                       "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 2108
   {"CUDNN_ATTR_OPERATION_NORM_BWD_DXDESC",                           {"HIPDNN_ATTR_OPERATION_NORM_BWD_DXDESC",                           "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 2109
   {"CUDNN_ATTR_OPERATION_NORM_BWD_PEER_STAT_DESCS",                  {"HIPDNN_ATTR_OPERATION_NORM_BWD_PEER_STAT_DESCS",                  "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 2110
+  {"CUDNN_ATTR_OPERATION_RESHAPE_XDESC",                             {"HIPDNN_ATTR_OPERATION_RESHAPE_XDESC",                             "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 2200
+  {"CUDNN_ATTR_OPERATION_RESHAPE_YDESC",                             {"HIPDNN_ATTR_OPERATION_RESHAPE_YDESC",                             "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 2201
+  {"CUDNN_ATTR_RNG_DISTRIBUTION",                                    {"HIPDNN_ATTR_RNG_DISTRIBUTION",                                    "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 2300
+  {"CUDNN_ATTR_RNG_NORMAL_DIST_MEAN",                                {"HIPDNN_ATTR_RNG_NORMAL_DIST_MEAN",                                "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 2301
+  {"CUDNN_ATTR_RNG_NORMAL_DIST_STANDARD_DEVIATION",                  {"HIPDNN_ATTR_RNG_NORMAL_DIST_STANDARD_DEVIATION",                  "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 2302
+  {"CUDNN_ATTR_RNG_UNIFORM_DIST_MAXIMUM",                            {"HIPDNN_ATTR_RNG_UNIFORM_DIST_MAXIMUM",                            "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 2303
+  {"CUDNN_ATTR_RNG_UNIFORM_DIST_MINIMUM",                            {"HIPDNN_ATTR_RNG_UNIFORM_DIST_MINIMUM",                            "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 2304
+  {"CUDNN_ATTR_RNG_BERNOULLI_DIST_PROBABILITY",                      {"HIPDNN_ATTR_RNG_BERNOULLI_DIST_PROBABILITY",                      "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 2305
+  {"CUDNN_ATTR_OPERATION_RNG_YDESC",                                 {"HIPDNN_ATTR_OPERATION_RNG_YDESC",                                 "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 2310
+  {"CUDNN_ATTR_OPERATION_RNG_SEED",                                  {"HIPDNN_ATTR_OPERATION_RNG_SEED",                                  "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 2311
+  {"CUDNN_ATTR_OPERATION_RNG_DESC",                                  {"HIPDNN_ATTR_OPERATION_RNG_DESC",                                  "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 2312
   {"cudnnBackendAttributeType_t",                                    {"hipdnnBackendAttributeType_t",                                    "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
   {"CUDNN_TYPE_HANDLE",                                              {"HIPDNN_TYPE_HANDLE",                                              "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},
   {"CUDNN_TYPE_DATA_TYPE",                                           {"HIPDNN_TYPE_DATA_TYPE",                                           "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},
@@ -641,6 +658,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"CUDNN_TYPE_FRACTION",                                            {"HIPDNN_TYPE_FRACTION",                                            "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},
   {"CUDNN_TYPE_NORM_MODE",                                           {"HIPDNN_TYPE_NORM_MODE",                                           "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},
   {"CUDNN_TYPE_NORM_FWD_PHASE",                                      {"HIPDNN_TYPE_NORM_FWD_PHASE",                                      "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},
+  {"CUDNN_TYPE_RNG_DISTRIBUTION",                                    {"HIPDNN_TYPE_RNG_DISTRIBUTION",                                    "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},
   {"cudnnBackendDescriptorType_t",                                   {"hipdnnBackendDescriptorType_t",                                   "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
   {"CUDNN_BACKEND_POINTWISE_DESCRIPTOR",                             {"HIPDNN_BACKEND_POINTWISE_DESCRIPTOR",                             "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},
   {"CUDNN_BACKEND_CONVOLUTION_DESCRIPTOR",                           {"HIPDNN_BACKEND_CONVOLUTION_DESCRIPTOR",                           "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},
@@ -673,6 +691,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"CUDNN_BACKEND_OPERATION_SIGNAL_DESCRIPTOR",                      {"HIPDNN_BACKEND_OPERATION_SIGNAL_DESCRIPTOR",                      "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},
   {"CUDNN_BACKEND_OPERATION_NORM_FORWARD_DESCRIPTOR",                {"HIPDNN_BACKEND_OPERATION_NORM_FORWARD_DESCRIPTOR",                "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},
   {"CUDNN_BACKEND_OPERATION_NORM_BACKWARD_DESCRIPTOR",               {"HIPDNN_BACKEND_OPERATION_NORM_BACKWARD_DESCRIPTOR",               "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},
+  {"CUDNN_BACKEND_OPERATION_RESHAPE_DESCRIPTOR",                     {"HIPDNN_BACKEND_OPERATION_RESHAPE_DESCRIPTOR",                     "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},
+  {"CUDNN_BACKEND_RNG_DESCRIPTOR",                                   {"HIPDNN_BACKEND_RNG_DESCRIPTOR",                                   "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},
+  {"CUDNN_BACKEND_OPERATION_RNG_DESCRIPTOR",                         {"HIPDNN_BACKEND_OPERATION_RNG_DESCRIPTOR",                         "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},
   {"cudnnBackendNumericalNote_t",                                    {"hipdnnBackendNumericalNote_t",                                    "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
   {"CUDNN_NUMERICAL_NOTE_TENSOR_CORE",                               {"HIPDNN_NUMERICAL_NOTE_TENSOR_CORE",                               "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},
   {"CUDNN_NUMERICAL_NOTE_DOWN_CONVERT_INPUTS",                       {"HIPDNN_NUMERICAL_NOTE_DOWN_CONVERT_INPUTS",                       "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},
@@ -770,6 +791,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"cudnnBackendNormFwdPhase_t",                                     {"hipdnnBackendNormFwdPhase_t",                                     "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
   {"CUDNN_NORM_FWD_INFERENCE",                                       {"HIPDNN_NORM_FWD_INFERENCE",                                       "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},
   {"CUDNN_NORM_FWD_TRAINING",                                        {"HIPDNN_NORM_FWD_TRAINING",                                        "", CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},
+  {"cudnnRngDistribution_t",                                         {"hipdnnRngDistribution_t",                                         "", CONV_TYPE, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_RNG_DISTRIBUTION_BERNOULLI",                               {"HIPDNN_RNG_DISTRIBUTION_BERNOULLI",                               "", CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_RNG_DISTRIBUTION_UNIFORM",                                 {"HIPDNN_RNG_DISTRIBUTION_UNIFORM",                                 "", CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_RNG_DISTRIBUTION_NORMAL",                                  {"HIPDNN_RNG_DISTRIBUTION_NORMAL",                                  "", CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
 
   // cuDNN types
   {"cudnnContext",                                                   {"hipdnnContext",                                                   "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
@@ -1645,6 +1670,31 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_TYPE_NAME_VER_MAP {
   {"CUDNN_KNOB_TYPE_TILE_CGA_N",                                     {CUDNN_860, CUDA_0,   CUDA_0  }},
   {"CUDNN_DATA_FP8_E4M3",                                            {CUDNN_860, CUDA_0,   CUDA_0  }},
   {"CUDNN_DATA_FP8_E5M2",                                            {CUDNN_860, CUDA_0,   CUDA_0  }},
+  {"CUDNN_DATA_FAST_FLOAT_FOR_FP8",                                  {CUDNN_870, CUDA_0,   CUDA_0  }},
+  {"cudnnRngDistribution_t",                                         {CUDNN_870, CUDA_0,   CUDA_0  }},
+  {"CUDNN_RNG_DISTRIBUTION_BERNOULLI",                               {CUDNN_870, CUDA_0,   CUDA_0  }},
+  {"CUDNN_RNG_DISTRIBUTION_UNIFORM",                                 {CUDNN_870, CUDA_0,   CUDA_0  }},
+  {"CUDNN_RNG_DISTRIBUTION_NORMAL",                                  {CUDNN_870, CUDA_0,   CUDA_0  }},
+  {"CUDNN_ATTR_OPERATION_MATMUL_GEMM_M_OVERRIDE_DESC",               {CUDNN_870, CUDA_0,   CUDA_0  }},
+  {"CUDNN_ATTR_OPERATION_MATMUL_GEMM_N_OVERRIDE_DESC",               {CUDNN_870, CUDA_0,   CUDA_0  }},
+  {"CUDNN_ATTR_OPERATION_MATMUL_GEMM_K_OVERRIDE_DESC",               {CUDNN_870, CUDA_0,   CUDA_0  }},
+  {"CUDNN_ATTR_OPERATION_RESAMPLE_BWD_XDESC",                        {CUDNN_870, CUDA_0,   CUDA_0  }},
+  {"CUDNN_ATTR_OPERATION_RESAMPLE_BWD_YDESC",                        {CUDNN_870, CUDA_0,   CUDA_0  }},
+  {"CUDNN_ATTR_OPERATION_RESHAPE_XDESC",                             {CUDNN_870, CUDA_0,   CUDA_0  }},
+  {"CUDNN_ATTR_OPERATION_RESHAPE_YDESC",                             {CUDNN_870, CUDA_0,   CUDA_0  }},
+  {"CUDNN_ATTR_RNG_DISTRIBUTION",                                    {CUDNN_870, CUDA_0,   CUDA_0  }},
+  {"CUDNN_ATTR_RNG_NORMAL_DIST_MEAN",                                {CUDNN_870, CUDA_0,   CUDA_0  }},
+  {"CUDNN_ATTR_RNG_NORMAL_DIST_STANDARD_DEVIATION",                  {CUDNN_870, CUDA_0,   CUDA_0  }},
+  {"CUDNN_ATTR_RNG_UNIFORM_DIST_MAXIMUM",                            {CUDNN_870, CUDA_0,   CUDA_0  }},
+  {"CUDNN_ATTR_RNG_UNIFORM_DIST_MINIMUM",                            {CUDNN_870, CUDA_0,   CUDA_0  }},
+  {"CUDNN_ATTR_RNG_BERNOULLI_DIST_PROBABILITY",                      {CUDNN_870, CUDA_0,   CUDA_0  }},
+  {"CUDNN_ATTR_OPERATION_RNG_YDESC",                                 {CUDNN_870, CUDA_0,   CUDA_0  }},
+  {"CUDNN_ATTR_OPERATION_RNG_SEED",                                  {CUDNN_870, CUDA_0,   CUDA_0  }},
+  {"CUDNN_ATTR_OPERATION_RNG_DESC",                                  {CUDNN_870, CUDA_0,   CUDA_0  }},
+  {"CUDNN_TYPE_RNG_DISTRIBUTION",                                    {CUDNN_870, CUDA_0,   CUDA_0  }},
+  {"CUDNN_BACKEND_OPERATION_RESHAPE_DESCRIPTOR",                     {CUDNN_870, CUDA_0,   CUDA_0  }},
+  {"CUDNN_BACKEND_RNG_DESCRIPTOR",                                   {CUDNN_870, CUDA_0,   CUDA_0  }},
+  {"CUDNN_BACKEND_OPERATION_RNG_DESCRIPTOR",                         {CUDNN_870, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_DNN_TYPE_NAME_VER_MAP {
