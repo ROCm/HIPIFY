@@ -201,6 +201,7 @@ enum cudaVersions {
   CUDA_116 = 11060,
   CUDA_117 = 11070,
   CUDA_118 = 11080,
+  CUDA_120 = 12000,
   CUDNN_10 = 100,
   CUDNN_20 = 200,
   CUDNN_30 = 300,
@@ -238,6 +239,7 @@ enum cudaVersions {
   CUDNN_840 = 840,
   CUDNN_850 = 850,
   CUDNN_860 = 860,
+  CUDNN_870 = 870,
 };
 
 enum hipVersions {

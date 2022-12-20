@@ -160,6 +160,7 @@ void appendArgumentsAdjusters(ct::RefactoringTool &Tool, const std::string &sSou
     std::string sCudaPath = "--cuda-path=" + CudaPath;
     Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster(sCudaPath.c_str(), ct::ArgumentInsertPosition::BEGIN));
   }
+  llcompat::addTargetIfNeeded(Tool);
   Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("cuda", ct::ArgumentInsertPosition::BEGIN));
   Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-x", ct::ArgumentInsertPosition::BEGIN));
   if (Verbose) {

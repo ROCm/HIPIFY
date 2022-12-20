@@ -248,6 +248,7 @@
 |`CU_COMPUTEMODE_EXCLUSIVE`| | |8.0|`hipComputeModeExclusive`|1.9.0| | | |
 |`CU_COMPUTEMODE_EXCLUSIVE_PROCESS`| | | |`hipComputeModeExclusiveProcess`|2.0.0| | | |
 |`CU_COMPUTEMODE_PROHIBITED`| | | |`hipComputeModeProhibited`|1.9.0| | | |
+|`CU_COMPUTE_ACCELERATED_TARGET_BASE`|12.0| | | | | | | |
 |`CU_CTX_BLOCKING_SYNC`| |4.0| |`hipDeviceScheduleBlockingSync`|1.6.0| | | |
 |`CU_CTX_FLAGS_MASK`| | | | | | | | |
 |`CU_CTX_LMEM_RESIZE_TO_MAX`| | | |`hipDeviceLmemResizeToMax`|1.6.0| | | |
@@ -287,11 +288,14 @@
 |`CU_DEVICE_ATTRIBUTE_CAN_MAP_HOST_MEMORY`| | | |`hipDeviceAttributeCanMapHostMemory`|2.10.0| | | |
 |`CU_DEVICE_ATTRIBUTE_CAN_TEX2D_GATHER`| |5.0| | | | | | |
 |`CU_DEVICE_ATTRIBUTE_CAN_USE_64_BIT_STREAM_MEM_OPS`|9.0| | | | | | | |
-|`CU_DEVICE_ATTRIBUTE_CAN_USE_64_BIT_STREAM_MEM_OPS_V2`|11.7| | | | | | | |
+|`CU_DEVICE_ATTRIBUTE_CAN_USE_64_BIT_STREAM_MEM_OPS_V1`|12.0|12.0| | | | | | |
+|`CU_DEVICE_ATTRIBUTE_CAN_USE_64_BIT_STREAM_MEM_OPS_V2`|11.7| |12.0| | | | | |
 |`CU_DEVICE_ATTRIBUTE_CAN_USE_HOST_POINTER_FOR_REGISTERED_MEM`|9.0| | |`hipDeviceAttributeCanUseHostPointerForRegisteredMem`|4.3.0| | | |
-|`CU_DEVICE_ATTRIBUTE_CAN_USE_STREAM_MEM_OPS`|9.0| | | | | | | |
+|`CU_DEVICE_ATTRIBUTE_CAN_USE_STREAM_MEM_OPS`|9.0| |12.0| | | | | |
+|`CU_DEVICE_ATTRIBUTE_CAN_USE_STREAM_MEM_OPS_V1`|12.0|12.0| | | | | | |
 |`CU_DEVICE_ATTRIBUTE_CAN_USE_STREAM_WAIT_VALUE_NOR`|9.0| | |`hipDeviceAttributeCanUseStreamWaitValue`|4.3.0| | | |
-|`CU_DEVICE_ATTRIBUTE_CAN_USE_STREAM_WAIT_VALUE_NOR_V2`|11.7| | | | | | | |
+|`CU_DEVICE_ATTRIBUTE_CAN_USE_STREAM_WAIT_VALUE_NOR_V1`|12.0|12.0| |`hipDeviceAttributeCanUseStreamWaitValue`|4.3.0| | | |
+|`CU_DEVICE_ATTRIBUTE_CAN_USE_STREAM_WAIT_VALUE_NOR_V2`|11.7| |12.0| | | | | |
 |`CU_DEVICE_ATTRIBUTE_CLOCK_RATE`| | | |`hipDeviceAttributeClockRate`|1.6.0| | | |
 |`CU_DEVICE_ATTRIBUTE_CLUSTER_LAUNCH`|11.8| | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_COMPUTE_CAPABILITY_MAJOR`| | | |`hipDeviceAttributeComputeCapabilityMajor`|1.6.0| | | |
@@ -320,6 +324,7 @@
 |`CU_DEVICE_ATTRIBUTE_HOST_NATIVE_ATOMIC_SUPPORTED`|8.0| | |`hipDeviceAttributeHostNativeAtomicSupported`|4.3.0| | | |
 |`CU_DEVICE_ATTRIBUTE_HOST_REGISTER_SUPPORTED`|9.2| | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_INTEGRATED`| | | |`hipDeviceAttributeIntegrated`|1.9.0| | | |
+|`CU_DEVICE_ATTRIBUTE_IPC_EVENT_SUPPORTED`|12.0|12.0| | | | | | |
 |`CU_DEVICE_ATTRIBUTE_KERNEL_EXEC_TIMEOUT`| | | |`hipDeviceAttributeKernelExecTimeout`|2.10.0| | | |
 |`CU_DEVICE_ATTRIBUTE_L2_CACHE_SIZE`| | | |`hipDeviceAttributeL2CacheSize`|1.6.0| | | |
 |`CU_DEVICE_ATTRIBUTE_LOCAL_L1_CACHE_SUPPORTED`| | | |`hipDeviceAttributeLocalL1CacheSupported`|4.3.0| | | |
@@ -388,6 +393,7 @@
 |`CU_DEVICE_ATTRIBUTE_MEMORY_CLOCK_RATE`| | | |`hipDeviceAttributeMemoryClockRate`|1.6.0| | | |
 |`CU_DEVICE_ATTRIBUTE_MEMORY_POOLS_SUPPORTED`|11.2| | |`hipDeviceAttributeMemoryPoolsSupported`|5.2.0| | | |
 |`CU_DEVICE_ATTRIBUTE_MEMPOOL_SUPPORTED_HANDLE_TYPES`|11.3| | | | | | | |
+|`CU_DEVICE_ATTRIBUTE_MEM_SYNC_DOMAIN_COUNT`|12.0|12.0| | | | | | |
 |`CU_DEVICE_ATTRIBUTE_MULTIPROCESSOR_COUNT`| | | |`hipDeviceAttributeMultiprocessorCount`|1.6.0| | | |
 |`CU_DEVICE_ATTRIBUTE_MULTI_GPU_BOARD`| | | |`hipDeviceAttributeIsMultiGpuBoard`|1.6.0| | | |
 |`CU_DEVICE_ATTRIBUTE_MULTI_GPU_BOARD_GROUP_ID`| | | |`hipDeviceAttributeMultiGpuBoardGroupId`|4.3.0| | | |
@@ -405,11 +411,13 @@
 |`CU_DEVICE_ATTRIBUTE_STREAM_PRIORITIES_SUPPORTED`| | | |`hipDeviceAttributeStreamPrioritiesSupported`|4.3.0| | | |
 |`CU_DEVICE_ATTRIBUTE_SURFACE_ALIGNMENT`| | | |`hipDeviceAttributeSurfaceAlignment`|4.3.0| | | |
 |`CU_DEVICE_ATTRIBUTE_TCC_DRIVER`| | | |`hipDeviceAttributeTccDriver`|4.3.0| | | |
+|`CU_DEVICE_ATTRIBUTE_TENSOR_MAP_ACCESS_SUPPORTED`|12.0|12.0| | | | | | |
 |`CU_DEVICE_ATTRIBUTE_TEXTURE_ALIGNMENT`| | | |`hipDeviceAttributeTextureAlignment`|2.10.0| | | |
 |`CU_DEVICE_ATTRIBUTE_TEXTURE_PITCH_ALIGNMENT`| | | |`hipDeviceAttributeTexturePitchAlignment`|3.2.0| | | |
 |`CU_DEVICE_ATTRIBUTE_TIMELINE_SEMAPHORE_INTEROP_SUPPORTED`|11.2| | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_TOTAL_CONSTANT_MEMORY`| | | |`hipDeviceAttributeTotalConstantMemory`|1.6.0| | | |
 |`CU_DEVICE_ATTRIBUTE_UNIFIED_ADDRESSING`| | | |`hipDeviceAttributeUnifiedAddressing`|4.3.0| | | |
+|`CU_DEVICE_ATTRIBUTE_UNIFIED_FUNCTION_POINTERS`|12.0|12.0| | | | | | |
 |`CU_DEVICE_ATTRIBUTE_VIRTUAL_ADDRESS_MANAGEMENT_SUPPORTED`|10.2|11.2| | | | | | |
 |`CU_DEVICE_ATTRIBUTE_VIRTUAL_MEMORY_MANAGEMENT_SUPPORTED`|11.2| | |`hipDeviceAttributeVirtualMemoryManagementSupported`|5.3.0| | | |
 |`CU_DEVICE_ATTRIBUTE_WARP_SIZE`| | | |`hipDeviceAttributeWarpSize`|1.6.0| | | |
@@ -628,8 +636,8 @@
 |`CU_JIT_ERROR_LOG_BUFFER_SIZE_BYTES`| | | |`HIPRTC_JIT_ERROR_LOG_BUFFER_SIZE_BYTES`|1.6.0| | | |
 |`CU_JIT_FALLBACK_STRATEGY`| | | |`HIPRTC_JIT_FALLBACK_STRATEGY`|1.6.0| | | |
 |`CU_JIT_FAST_COMPILE`| | | |`HIPRTC_JIT_FAST_COMPILE`|1.6.0| | | |
-|`CU_JIT_FMA`|11.4| | | | | | | |
-|`CU_JIT_FTZ`|11.4| | | | | | | |
+|`CU_JIT_FMA`|11.4|12.0| | | | | | |
+|`CU_JIT_FTZ`|11.4|12.0| | | | | | |
 |`CU_JIT_GENERATE_DEBUG_INFO`| | | |`HIPRTC_JIT_GENERATE_DEBUG_INFO`|1.6.0| | | |
 |`CU_JIT_GENERATE_LINE_INFO`| | | |`HIPRTC_JIT_GENERATE_LINE_INFO`|1.6.0| | | |
 |`CU_JIT_GLOBAL_SYMBOL_ADDRESSES`| | | | | | | | |
@@ -640,23 +648,24 @@
 |`CU_JIT_INPUT_CUBIN`| | | |`HIPRTC_JIT_INPUT_CUBIN`|5.3.0| | | |
 |`CU_JIT_INPUT_FATBINARY`| | | |`HIPRTC_JIT_INPUT_FATBINARY`|5.3.0| | | |
 |`CU_JIT_INPUT_LIBRARY`| | | |`HIPRTC_JIT_INPUT_LIBRARY`|5.3.0| | | |
-|`CU_JIT_INPUT_NVVM`|11.4| | |`HIPRTC_JIT_INPUT_NVVM`|5.3.0| | | |
+|`CU_JIT_INPUT_NVVM`|11.4|12.0| |`HIPRTC_JIT_INPUT_NVVM`|5.3.0| | | |
 |`CU_JIT_INPUT_OBJECT`| | | |`HIPRTC_JIT_INPUT_OBJECT`|5.3.0| | | |
 |`CU_JIT_INPUT_PTX`| | | |`HIPRTC_JIT_INPUT_PTX`|5.3.0| | | |
 |`CU_JIT_LOG_VERBOSE`| | | |`HIPRTC_JIT_LOG_VERBOSE`|1.6.0| | | |
-|`CU_JIT_LTO`|11.4| | | | | | | |
+|`CU_JIT_LTO`|11.4|12.0| | | | | | |
 |`CU_JIT_MAX_REGISTERS`| | | |`HIPRTC_JIT_MAX_REGISTERS`|1.6.0| | | |
 |`CU_JIT_NEW_SM3X_OPT`| | | |`HIPRTC_JIT_NEW_SM3X_OPT`|1.6.0| | | |
 |`CU_JIT_NUM_INPUT_TYPES`| | | |`HIPRTC_JIT_NUM_LEGACY_INPUT_TYPES`|5.3.0| | | |
 |`CU_JIT_NUM_OPTIONS`| | | |`HIPRTC_JIT_NUM_OPTIONS`|1.6.0| | | |
 |`CU_JIT_OPTIMIZATION_LEVEL`| | | |`HIPRTC_JIT_OPTIMIZATION_LEVEL`|1.6.0| | | |
-|`CU_JIT_OPTIMIZE_UNUSED_DEVICE_VARIABLES`|11.7| | | | | | | |
-|`CU_JIT_PREC_DIV`|11.4| | | | | | | |
-|`CU_JIT_PREC_SQRT`|11.4| | | | | | | |
-|`CU_JIT_REFERENCED_KERNEL_COUNT`|11.7| | | | | | | |
-|`CU_JIT_REFERENCED_KERNEL_NAMES`|11.7| | | | | | | |
-|`CU_JIT_REFERENCED_VARIABLE_COUNT`|11.7| | | | | | | |
-|`CU_JIT_REFERENCED_VARIABLE_NAMES`|11.7| | | | | | | |
+|`CU_JIT_OPTIMIZE_UNUSED_DEVICE_VARIABLES`|11.7|12.0| | | | | | |
+|`CU_JIT_POSITION_INDEPENDENT_CODE`|12.0|12.0| | | | | | |
+|`CU_JIT_PREC_DIV`|11.4|12.0| | | | | | |
+|`CU_JIT_PREC_SQRT`|11.4|12.0| | | | | | |
+|`CU_JIT_REFERENCED_KERNEL_COUNT`|11.7|12.0| | | | | | |
+|`CU_JIT_REFERENCED_KERNEL_NAMES`|11.7|12.0| | | | | | |
+|`CU_JIT_REFERENCED_VARIABLE_COUNT`|11.7|12.0| | | | | | |
+|`CU_JIT_REFERENCED_VARIABLE_NAMES`|11.7|12.0| | | | | | |
 |`CU_JIT_TARGET`| | | |`HIPRTC_JIT_TARGET`|1.6.0| | | |
 |`CU_JIT_TARGET_FROM_CUCONTEXT`| | | |`HIPRTC_JIT_TARGET_FROM_HIPCONTEXT`|1.6.0| | | |
 |`CU_JIT_THREADS_PER_BLOCK`| | | |`HIPRTC_JIT_THREADS_PER_BLOCK`|1.6.0| | | |
@@ -856,8 +865,8 @@
 |`CU_TARGET_COMPUTE_11`| | |9.0| | | | | |
 |`CU_TARGET_COMPUTE_12`| | |9.0| | | | | |
 |`CU_TARGET_COMPUTE_13`| | |9.0| | | | | |
-|`CU_TARGET_COMPUTE_20`| | | | | | | | |
-|`CU_TARGET_COMPUTE_21`| | | | | | | | |
+|`CU_TARGET_COMPUTE_20`| | |12.0| | | | | |
+|`CU_TARGET_COMPUTE_21`| | |12.0| | | | | |
 |`CU_TARGET_COMPUTE_30`| | | | | | | | |
 |`CU_TARGET_COMPUTE_32`| | | | | | | | |
 |`CU_TARGET_COMPUTE_35`| | | | | | | | |
@@ -877,6 +886,7 @@
 |`CU_TARGET_COMPUTE_87`|11.7| | | | | | | |
 |`CU_TARGET_COMPUTE_89`|11.8| | | | | | | |
 |`CU_TARGET_COMPUTE_90`|11.8| | | | | | | |
+|`CU_TARGET_COMPUTE_90A`|12.0| | | | | | | |
 |`CU_TRSA_OVERRIDE_FORMAT`| | | |`HIP_TRSA_OVERRIDE_FORMAT`|1.7.0| | | |
 |`CU_TRSF_DISABLE_TRILINEAR_OPTIMIZATION`|11.0| | | | | | | |
 |`CU_TRSF_NORMALIZED_COORDINATES`| | | |`HIP_TRSF_NORMALIZED_COORDINATES`|1.7.0| | | |
@@ -1032,6 +1042,8 @@
 |`CUjit_option_enum`| | | |`hipJitOption`|1.6.0| | | |
 |`CUjit_target`| | | | | | | | |
 |`CUjit_target_enum`| | | | | | | | |
+|`CUkern_st`|12.0| | | | | | | |
+|`CUkernel`|12.0| | | | | | | |
 |`CUkernelNodeAttrID`|11.0| | |`hipKernelNodeAttrID`|5.2.0| | | |
 |`CUkernelNodeAttrID_enum`|11.0| |11.8|`hipKernelNodeAttrID`|5.2.0| | | |
 |`CUkernelNodeAttrValue`|11.0| | |`hipKernelNodeAttrValue`|5.2.0| | | |
@@ -1045,6 +1057,8 @@
 |`CUlaunchAttribute_st`|11.8| | | | | | | |
 |`CUlaunchConfig`|11.8| | | | | | | |
 |`CUlaunchConfig_st`|11.8| | | | | | | |
+|`CUlib_st`|12.0| | | | | | | |
+|`CUlibrary`|12.0| | | | | | | |
 |`CUlimit`| | | |`hipLimit_t`|1.6.0| | | |
 |`CUlimit_enum`| | | |`hipLimit_t`|1.6.0| | | |
 |`CUlinkState`| | | |`hiprtcLinkState`|5.3.0| | | |

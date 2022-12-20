@@ -159,4 +159,11 @@ Memory_Buffer getMemoryBuffer(const clang::SourceManager &SM) {
 #endif
 }
 
+void addTargetIfNeeded(ct::RefactoringTool& Tool) {
+#if defined(_WIN32) && LLVM_VERSION_MAJOR >= 16
+  std::string sTarget = "--target=x86_64-pc-windows-msvc";
+  Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster(sTarget.c_str(), ct::ArgumentInsertPosition::BEGIN));
+#endif
+}
+
 } // namespace llcompat
