@@ -612,6 +612,112 @@ int main() {
   blasStatus = cublasDzasum(blasHandle, n, &dcomplexx, incx, &dresult);
   blasStatus = cublasDzasum_v2(blasHandle, n, &dcomplexx, incx, &dresult);
 
+  // TODO: #1281
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasSrot_v2(cublasHandle_t handle, int n, float* x, int incx, float* y, int incy, const float* c, const float* s);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_srot(rocblas_handle handle, rocblas_int n, float* x, rocblas_int incx, float* y, rocblas_int incy, const float* c, const float* s);
+  // CHECK: blasStatus = rocblas_srot(blasHandle, n, &fx, incx, &fy, incy, &fc, &fs);
+  // CHECK-NEXT: blasStatus = rocblas_srot(blasHandle, n, &fx, incx, &fy, incy, &fc, &fs);
+  blasStatus = cublasSrot(blasHandle, n, &fx, incx, &fy, incy, &fc, &fs);
+  blasStatus = cublasSrot_v2(blasHandle, n, &fx, incx, &fy, incy, &fc, &fs);
+
+  // TODO: #1281
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasDrot_v2(cublasHandle_t handle, int n, double* x, int incx, double* y, int incy, const double* c, const double* s);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_drot(rocblas_handle handle, rocblas_int n, double* x, rocblas_int incx, double* y, rocblas_int incy, const double* c, const double* s);
+  // CHECK: blasStatus = rocblas_drot(blasHandle, n, &dx, incx, &dy, incy, &dc, &ds);
+  // CHECK-NEXT: blasStatus = rocblas_drot(blasHandle, n, &dx, incx, &dy, incy, &dc, &ds);
+  blasStatus = cublasDrot(blasHandle, n, &dx, incx, &dy, incy, &dc, &ds);
+  blasStatus = cublasDrot_v2(blasHandle, n, &dx, incx, &dy, incy, &dc, &ds);
+
+  // TODO: #1281
+  // CUDA: CUBLASAPI CUBLASAPI cublasStatus_t CUBLASWINAPI cublasCrot_v2(cublasHandle_t handle, int n, cuComplex* x, int incx, cuComplex* y, int incy, const float* c, const cuComplex* s);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_crot(rocblas_handle handle, rocblas_int n, rocblas_float_complex* x, rocblas_int incx, rocblas_float_complex* y, rocblas_int incy, const float* c, const rocblas_float_complex* s);
+  // CHECK: blasStatus = rocblas_crot(blasHandle, n, &complexx, incx, &complexy, incy, &fc, &complexs);
+  // CHECK-NEXT: blasStatus = rocblas_crot(blasHandle, n, &complexx, incx, &complexy, incy, &fc, &complexs);
+  blasStatus = cublasCrot(blasHandle, n, &complexx, incx, &complexy, incy, &fc, &complexs);
+  blasStatus = cublasCrot_v2(blasHandle, n, &complexx, incx, &complexy, incy, &fc, &complexs);
+
+  // TODO: #1281
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasCsrot_v2(cublasHandle_t handle, int n, cuComplex* x, int incx, cuComplex* y, int incy, const float* c, const float* s);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_csrot(rocblas_handle handle, rocblas_int n, rocblas_float_complex* x, rocblas_int incx, rocblas_float_complex* y, rocblas_int incy, const float* c, const float* s);
+  // CHECK: blasStatus = rocblas_csrot(blasHandle, n, &complexx, incx, &complexy, incy, &fc, &fs);
+  // CHECK-NEXT: blasStatus = rocblas_csrot(blasHandle, n, &complexx, incx, &complexy, incy, &fc, &fs);
+  blasStatus = cublasCsrot(blasHandle, n, &complexx, incx, &complexy, incy, &fc, &fs);
+  blasStatus = cublasCsrot_v2(blasHandle, n, &complexx, incx, &complexy, incy, &fc, &fs);
+
+  // TODO: #1281
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasZrot_v2(cublasHandle_t handle, int n, cuDoubleComplex* x, int incx, cuDoubleComplex* y, int incy, const double* c, const cuDoubleComplex* s);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_zrot(rocblas_handle handle, rocblas_int n, rocblas_double_complex* x, rocblas_int incx, rocblas_double_complex* y, rocblas_int incy, const double* c, const rocblas_double_complex* s);
+  // CHECK: blasStatus = rocblas_zrot(blasHandle, n, &dcomplexx, incx, &dcomplexy, incy, &dc, &dcomplexs);
+  // CHECK-NEXT: blasStatus = rocblas_zrot(blasHandle, n, &dcomplexx, incx, &dcomplexy, incy, &dc, &dcomplexs);
+  blasStatus = cublasZrot(blasHandle, n, &dcomplexx, incx, &dcomplexy, incy, &dc, &dcomplexs);
+  blasStatus = cublasZrot_v2(blasHandle, n, &dcomplexx, incx, &dcomplexy, incy, &dc, &dcomplexs);
+
+  // TODO: #1281
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasZdrot_v2(cublasHandle_t handle, int n, cuDoubleComplex* x, int incx, cuDoubleComplex* y, int incy, const double* c, const double* s);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_zdrot(rocblas_handle handle, rocblas_int n, rocblas_double_complex* x, rocblas_int incx, rocblas_double_complex* y, rocblas_int incy, const double* c, const double* s);
+  // CHECK: blasStatus = rocblas_zdrot(blasHandle, n, &dcomplexx, incx, &dcomplexy, incy, &dc, &ds);
+  // CHECK-NEXT: blasStatus = rocblas_zdrot(blasHandle, n, &dcomplexx, incx, &dcomplexy, incy, &dc, &ds);
+  blasStatus = cublasZdrot(blasHandle, n, &dcomplexx, incx, &dcomplexy, incy, &dc, &ds);
+  blasStatus = cublasZdrot_v2(blasHandle, n, &dcomplexx, incx, &dcomplexy, incy, &dc, &ds);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasSrotg_v2(cublasHandle_t handle, float* a, float* b, float* c, float* s);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_srotg(rocblas_handle handle, float* a, float* b, float* c, float* s);
+  // CHECK: blasStatus = rocblas_srotg(blasHandle, &fa, &fb, &fc, &fs);
+  // CHECK-NEXT: blasStatus = rocblas_srotg(blasHandle, &fa, &fb, &fc, &fs);
+  blasStatus = cublasSrotg(blasHandle, &fa, &fb, &fc, &fs);
+  blasStatus = cublasSrotg_v2(blasHandle, &fa, &fb, &fc, &fs);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasDrotg_v2(cublasHandle_t handle, double* a, double* b, double* c, double* s);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_drotg(rocblas_handle handle, double* a, double* b, double* c, double* s);
+  // CHECK: blasStatus = rocblas_drotg(blasHandle, &da, &db, &dc, &ds);
+  // CHECK-NEXT: blasStatus = rocblas_drotg(blasHandle, &da, &db, &dc, &ds);
+  blasStatus = cublasDrotg(blasHandle, &da, &db, &dc, &ds);
+  blasStatus = cublasDrotg_v2(blasHandle, &da, &db, &dc, &ds);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasCrotg_v2(cublasHandle_t handle, cuComplex* a, cuComplex* b, float* c, cuComplex* s);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_crotg(rocblas_handle handle, rocblas_float_complex* a, rocblas_float_complex* b, float* c, rocblas_float_complex* s);
+  // CHECK: blasStatus = rocblas_crotg(blasHandle, &complexa, &complexb, &fc, &complexs);
+  // CHECK-NEXT: blasStatus = rocblas_crotg(blasHandle, &complexa, &complexb, &fc, &complexs);
+  blasStatus = cublasCrotg(blasHandle, &complexa, &complexb, &fc, &complexs);
+  blasStatus = cublasCrotg_v2(blasHandle, &complexa, &complexb, &fc, &complexs);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasZrotg_v2(cublasHandle_t handle, cuDoubleComplex* a, cuDoubleComplex* b, double* c, cuDoubleComplex* s);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_zrotg(rocblas_handle handle, rocblas_double_complex* a, rocblas_double_complex* b, double* c, rocblas_double_complex* s);
+  // CHECK: blasStatus = rocblas_zrotg(blasHandle, &dcomplexa, &dcomplexb, &dc, &dcomplexs);
+  // CHECK-NEXT: blasStatus = rocblas_zrotg(blasHandle, &dcomplexa, &dcomplexb, &dc, &dcomplexs);
+  blasStatus = cublasZrotg(blasHandle, &dcomplexa, &dcomplexb, &dc, &dcomplexs);
+  blasStatus = cublasZrotg_v2(blasHandle, &dcomplexa, &dcomplexb, &dc, &dcomplexs);
+
+  // TODO: #1281
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasSrotm_v2(cublasHandle_t handle, int n, float* x, int incx, float* y, int incy, const float* param);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_srotm(rocblas_handle handle, rocblas_int n, float* x, rocblas_int incx, float* y, rocblas_int incy, const float* param);
+  // CHECK: blasStatus = rocblas_srotm(blasHandle, n, &fx, incx, &fy, incy, &fresult);
+  // CHECK-NEXT: blasStatus = rocblas_srotm(blasHandle, n, &fx, incx, &fy, incy, &fresult);
+  blasStatus = cublasSrotm(blasHandle, n, &fx, incx, &fy, incy, &fresult);
+  blasStatus = cublasSrotm_v2(blasHandle, n, &fx, incx, &fy, incy, &fresult);
+
+  // TODO: #1281
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasDrotm_v2(cublasHandle_t handle, int n, double* x, int incx, double* y, int incy, const double* param);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_drotm(rocblas_handle handle, rocblas_int n, double* x, rocblas_int incx, double* y, rocblas_int incy, const double* param);
+  // CHECK: blasStatus = rocblas_drotm(blasHandle, n, &dx, incx, &dy, incy, &dresult);
+  // CHECK-NEXT: blasStatus = rocblas_drotm(blasHandle, n, &dx, incx, &dy, incy, &dresult);
+  blasStatus = cublasDrotm(blasHandle, n, &dx, incx, &dy, incy, &dresult);
+  blasStatus = cublasDrotm_v2(blasHandle, n, &dx, incx, &dy, incy, &dresult);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasSrotmg_v2(cublasHandle_t handle, float* d1, float* d2, float* x1, const float* y1, float* param);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_srotmg(rocblas_handle handle, float* d1, float* d2, float* x1, const float* y1, float* param);
+  // CHECK: blasStatus = rocblas_srotmg(blasHandle, &fd1, &fd2, &fx1, &fy1, &fresult);
+  // CHECK-NEXT: blasStatus = rocblas_srotmg(blasHandle, &fd1, &fd2, &fx1, &fy1, &fresult);
+  blasStatus = cublasSrotmg(blasHandle, &fd1, &fd2, &fx1, &fy1, &fresult);
+  blasStatus = cublasSrotmg_v2(blasHandle, &fd1, &fd2, &fx1, &fy1, &fresult);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasDrotmg_v2(cublasHandle_t handle, double* d1, double* d2, double* x1, const double* y1, double* param);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_drotmg(rocblas_handle handle, double* d1, double* d2, double* x1, const double* y1, double* param);
+  // CHECK: blasStatus = rocblas_drotmg(blasHandle, &dd1, &dd2, &dx1, &dy1, &dresult);
+  // CHECK-NEXT: blasStatus = rocblas_drotmg(blasHandle, &dd1, &dd2, &dx1, &dy1, &dresult);
+  blasStatus = cublasDrotmg(blasHandle, &dd1, &dd2, &dx1, &dy1, &dresult);
+  blasStatus = cublasDrotmg_v2(blasHandle, &dd1, &dd2, &dx1, &dy1, &dresult);
+
 #if CUDA_VERSION >= 8000
   // CHECK: rocblas_datatype DataType;
   // CHECK-NEXT: rocblas_datatype_ DataType_t;
