@@ -148,14 +148,23 @@
 |`CUDA_EXT_SEM_WAIT_NODE_PARAMS`|11.2| | | | | | | |
 |`CUDA_EXT_SEM_WAIT_NODE_PARAMS_st`|11.2| | | | | | | |
 |`CUDA_EXT_SEM_WAIT_NODE_PARAMS_v1`|11.3| | | | | | | |
+|`CUDA_GRAPH_INSTANTIATE_ERROR`|12.0| | | | | | | |
 |`CUDA_GRAPH_INSTANTIATE_FLAG_AUTO_FREE_ON_LAUNCH`|11.4| | |`hipGraphInstantiateFlagAutoFreeOnLaunch`|5.2.0| | | |
 |`CUDA_GRAPH_INSTANTIATE_FLAG_USE_NODE_PRIORITY`|11.7| | | | | | | |
+|`CUDA_GRAPH_INSTANTIATE_INVALID_STRUCTURE`|12.0| | | | | | | |
+|`CUDA_GRAPH_INSTANTIATE_MULTIPLE_CTXS_NOT_SUPPORTED`|12.0| | | | | | | |
+|`CUDA_GRAPH_INSTANTIATE_NODE_OPERATION_NOT_SUPPORTED`|12.0| | | | | | | |
+|`CUDA_GRAPH_INSTANTIATE_PARAMS`|12.0| | | | | | | |
+|`CUDA_GRAPH_INSTANTIATE_PARAMS_st`|12.0| | | | | | | |
+|`CUDA_GRAPH_INSTANTIATE_SUCCESS`|12.0| | | | | | | |
 |`CUDA_HOST_NODE_PARAMS`|10.0| | |`hipHostNodeParams`|4.3.0| | | |
 |`CUDA_HOST_NODE_PARAMS_st`|10.0| | |`hipHostNodeParams`|4.3.0| | | |
 |`CUDA_HOST_NODE_PARAMS_v1`|11.3| | |`hipHostNodeParams`|4.3.0| | | |
 |`CUDA_KERNEL_NODE_PARAMS`|10.0| | |`hipKernelNodeParams`|4.3.0| | | |
 |`CUDA_KERNEL_NODE_PARAMS_st`|10.0| | |`hipKernelNodeParams`|4.3.0| | | |
 |`CUDA_KERNEL_NODE_PARAMS_v1`|11.3| | |`hipKernelNodeParams`|4.3.0| | | |
+|`CUDA_KERNEL_NODE_PARAMS_v2`|12.0| | | | | | | |
+|`CUDA_KERNEL_NODE_PARAMS_v2_st`|12.0| | | | | | | |
 |`CUDA_LAUNCH_PARAMS`|9.0| | | | | | | |
 |`CUDA_LAUNCH_PARAMS_st`|9.0| | | | | | | |
 |`CUDA_LAUNCH_PARAMS_v1`|11.3| | | | | | | |
@@ -567,6 +576,9 @@
 |`CU_GET_PROC_ADDRESS_DEFAULT`|11.3| | | | | | | |
 |`CU_GET_PROC_ADDRESS_LEGACY_STREAM`|11.3| | | | | | | |
 |`CU_GET_PROC_ADDRESS_PER_THREAD_DEFAULT_STREAM`|11.3| | | | | | | |
+|`CU_GET_PROC_ADDRESS_SUCCESS`|12.0| | | | | | | |
+|`CU_GET_PROC_ADDRESS_SYMBOL_NOT_FOUND`|12.0| | | | | | | |
+|`CU_GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT`|12.0| | | | | | | |
 |`CU_GL_DEVICE_LIST_ALL`| | | |`hipGLDeviceListAll`|4.4.0| | | |
 |`CU_GL_DEVICE_LIST_CURRENT_FRAME`| | | |`hipGLDeviceListCurrentFrame`|4.4.0| | | |
 |`CU_GL_DEVICE_LIST_NEXT_FRAME`| | | |`hipGLDeviceListNextFrame`|4.4.0| | | |
@@ -674,16 +686,22 @@
 |`CU_KERNEL_NODE_ATTRIBUTE_CLUSTER_DIMENSION`|11.8| | | | | | | |
 |`CU_KERNEL_NODE_ATTRIBUTE_CLUSTER_SCHEDULING_POLICY_PREFERENCE`|11.8| | | | | | | |
 |`CU_KERNEL_NODE_ATTRIBUTE_COOPERATIVE`|11.0| | |`hipKernelNodeAttributeCooperative`|5.2.0| | | |
+|`CU_KERNEL_NODE_ATTRIBUTE_MEM_SYNC_DOMAIN`|12.0| | | | | | | |
+|`CU_KERNEL_NODE_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP`|12.0| | | | | | | |
 |`CU_KERNEL_NODE_ATTRIBUTE_PRIORITY`|11.7| | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_ACCESS_POLICY_WINDOW`|11.8| | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_CLUSTER_DIMENSION`|11.8| | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_CLUSTER_SCHEDULING_POLICY_PREFERENCE`|11.8| | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_COOPERATIVE`|11.8| | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_IGNORE`|11.8| | | | | | | |
+|`CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN`|12.0| | | | | | | |
+|`CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP`|12.0| | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_PRIORITY`|11.8| | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_PROGRAMMATIC_EVENT`|11.8| | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_PROGRAMMATIC_STREAM_SERIALIZATION`|11.8| | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_SYNCHRONIZATION_POLICY`|11.8| | | | | | | |
+|`CU_LAUNCH_MEM_SYNC_DOMAIN_DEFAULT`|12.0| | | | | | | |
+|`CU_LAUNCH_MEM_SYNC_DOMAIN_REMOTE`|12.0| | | | | | | |
 |`CU_LAUNCH_PARAM_BUFFER_POINTER`| | | |`HIP_LAUNCH_PARAM_BUFFER_POINTER`|1.6.0| | | |
 |`CU_LAUNCH_PARAM_BUFFER_POINTER_AS_INT`|11.7| | | | | | | |
 |`CU_LAUNCH_PARAM_BUFFER_SIZE`| | | |`HIP_LAUNCH_PARAM_BUFFER_SIZE`|1.6.0| | | |
@@ -830,6 +848,9 @@
 |`CU_SHARED_MEM_CONFIG_FOUR_BYTE_BANK_SIZE`| | | |`hipSharedMemBankSizeFourByte`|1.6.0| | | |
 |`CU_STREAM_ADD_CAPTURE_DEPENDENCIES`|11.3| | |`hipStreamAddCaptureDependencies`|5.0.0| | | |
 |`CU_STREAM_ATTRIBUTE_ACCESS_POLICY_WINDOW`|11.0| | | | | | | |
+|`CU_STREAM_ATTRIBUTE_MEM_SYNC_DOMAIN`|12.0| | | | | | | |
+|`CU_STREAM_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP`|12.0| | | | | | | |
+|`CU_STREAM_ATTRIBUTE_PRIORITY`|12.0| | | | | | | |
 |`CU_STREAM_ATTRIBUTE_SYNCHRONIZATION_POLICY`|11.0| | | | | | | |
 |`CU_STREAM_CAPTURE_MODE_GLOBAL`|10.1| | |`hipStreamCaptureModeGlobal`|4.3.0| | | |
 |`CU_STREAM_CAPTURE_MODE_RELAXED`|10.1| | |`hipStreamCaptureModeRelaxed`|4.3.0| | | |
@@ -951,6 +972,8 @@
 |`CUdevprop`| | | | | | | | |
 |`CUdevprop_st`| | | | | | | | |
 |`CUdevprop_v1`|11.3| | | | | | | |
+|`CUdriverProcAddressQueryResult`|12.0| | | | | | | |
+|`CUdriverProcAddressQueryResult_enum`|12.0| | | | | | | |
 |`CUdriverProcAddress_flags`|11.3| | | | | | | |
 |`CUdriverProcAddress_flags_enum`|11.3| | | | | | | |
 |`CUeglColorFormat`|9.0| | | | | | | |
@@ -1008,6 +1031,8 @@
 |`CUgraphExecUpdateResult`|10.2| | |`hipGraphExecUpdateResult`|4.3.0| | | |
 |`CUgraphExecUpdateResult_enum`|10.2| | |`hipGraphExecUpdateResult`|4.3.0| | | |
 |`CUgraphExec_st`|10.0| | |`hipGraphExec`|4.3.0| | | |
+|`CUgraphInstantiateResult`|12.0| | | | | | | |
+|`CUgraphInstantiateResult_enum`|12.0| | | | | | | |
 |`CUgraphInstantiate_flags`|11.4| | |`hipGraphInstantiateFlags`|5.2.0| | | |
 |`CUgraphInstantiate_flags_enum`|11.4| | |`hipGraphInstantiateFlags`|5.2.0| | | |
 |`CUgraphMem_attribute`|11.4| | |`hipGraphMemAttributeType`|5.3.0| | | |
@@ -1057,6 +1082,10 @@
 |`CUlaunchAttribute_st`|11.8| | | | | | | |
 |`CUlaunchConfig`|11.8| | | | | | | |
 |`CUlaunchConfig_st`|11.8| | | | | | | |
+|`CUlaunchMemSyncDomain`|12.0| | | | | | | |
+|`CUlaunchMemSyncDomainMap`|12.0| | | | | | | |
+|`CUlaunchMemSyncDomainMap_st`|12.0| | | | | | | |
+|`CUlaunchMemSyncDomain_enum`|12.0| | | | | | | |
 |`CUlib_st`|12.0| | | | | | | |
 |`CUlibrary`|12.0| | | | | | | |
 |`CUlimit`| | | |`hipLimit_t`|1.6.0| | | |
@@ -1130,7 +1159,7 @@
 |`CUsharedconfig_enum`| | | |`hipSharedMemConfig`|1.6.0| | | |
 |`CUstream`| | | |`hipStream_t`|1.5.0| | | |
 |`CUstreamAttrID`|11.0| | | | | | | |
-|`CUstreamAttrID_enum`|11.0| | | | | | | |
+|`CUstreamAttrID_enum`|11.0| |11.8| | | | | |
 |`CUstreamAttrValue`|11.0| | | | | | | |
 |`CUstreamAttrValue_union`|11.0| | | | | | | |
 |`CUstreamAttrValue_v1`|11.3| | | | | | | |
