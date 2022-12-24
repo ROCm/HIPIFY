@@ -37,6 +37,8 @@
 |`CUDA_ERROR_ARRAY_IS_MAPPED`| | | |`hipErrorArrayIsMapped`|1.6.0| | | |
 |`CUDA_ERROR_ASSERT`| | | |`hipErrorAssert`|1.9.0| | | |
 |`CUDA_ERROR_CAPTURED_EVENT`|10.0| | |`hipErrorCapturedEvent`|4.3.0| | | |
+|`CUDA_ERROR_CDP_NOT_SUPPORTED`|12.0| | | | | | | |
+|`CUDA_ERROR_CDP_VERSION_MISMATCH`|12.0| | | | | | | |
 |`CUDA_ERROR_COMPAT_NOT_SUPPORTED_ON_DEVICE`|10.1| | | | | | | |
 |`CUDA_ERROR_CONTEXT_ALREADY_CURRENT`| |3.2| |`hipErrorContextAlreadyCurrent`|1.6.0| | | |
 |`CUDA_ERROR_CONTEXT_ALREADY_IN_USE`| | | |`hipErrorContextAlreadyInUse`|1.6.0| | | |
@@ -708,6 +710,9 @@
 |`CU_LAUNCH_PARAM_BUFFER_SIZE_AS_INT`|11.7| | | | | | | |
 |`CU_LAUNCH_PARAM_END`| | | |`HIP_LAUNCH_PARAM_END`|1.6.0| | | |
 |`CU_LAUNCH_PARAM_END_AS_INT`|11.7| | | | | | | |
+|`CU_LIBRARY_BINARY_IS_PRESERVED`|12.0| | | | | | | |
+|`CU_LIBRARY_HOST_UNIVERSAL_FUNCTION_AND_DATA_TABLE`|12.0| | | | | | | |
+|`CU_LIBRARY_NUM_OPTIONS`|12.0| | | | | | | |
 |`CU_LIMIT_DEV_RUNTIME_PENDING_LAUNCH_COUNT`| | | | | | | | |
 |`CU_LIMIT_DEV_RUNTIME_SYNC_DEPTH`| | | | | | | | |
 |`CU_LIMIT_MALLOC_HEAP_SIZE`| | | |`hipLimitMallocHeapSize`|1.6.0| | | |
@@ -908,6 +913,20 @@
 |`CU_TARGET_COMPUTE_89`|11.8| | | | | | | |
 |`CU_TARGET_COMPUTE_90`|11.8| | | | | | | |
 |`CU_TARGET_COMPUTE_90A`|12.0| | | | | | | |
+|`CU_TENSOR_MAP_DATA_TYPE_BFLOAT16`|12.0| | | | | | | |
+|`CU_TENSOR_MAP_DATA_TYPE_FLOAT16`|12.0| | | | | | | |
+|`CU_TENSOR_MAP_DATA_TYPE_FLOAT32`|12.0| | | | | | | |
+|`CU_TENSOR_MAP_DATA_TYPE_FLOAT32_FTZ`|12.0| | | | | | | |
+|`CU_TENSOR_MAP_DATA_TYPE_FLOAT64`|12.0| | | | | | | |
+|`CU_TENSOR_MAP_DATA_TYPE_INT32`|12.0| | | | | | | |
+|`CU_TENSOR_MAP_DATA_TYPE_INT64`|12.0| | | | | | | |
+|`CU_TENSOR_MAP_DATA_TYPE_TFLOAT32`|12.0| | | | | | | |
+|`CU_TENSOR_MAP_DATA_TYPE_TFLOAT32_FTZ`|12.0| | | | | | | |
+|`CU_TENSOR_MAP_DATA_TYPE_UINT16`|12.0| | | | | | | |
+|`CU_TENSOR_MAP_DATA_TYPE_UINT32`|12.0| | | | | | | |
+|`CU_TENSOR_MAP_DATA_TYPE_UINT64`|12.0| | | | | | | |
+|`CU_TENSOR_MAP_DATA_TYPE_UINT8`|12.0| | | | | | | |
+|`CU_TENSOR_MAP_NUM_QWORDS`|12.0| | | | | | | |
 |`CU_TRSA_OVERRIDE_FORMAT`| | | |`HIP_TRSA_OVERRIDE_FORMAT`|1.7.0| | | |
 |`CU_TRSF_DISABLE_TRILINEAR_OPTIMIZATION`|11.0| | | | | | | |
 |`CU_TRSF_NORMALIZED_COORDINATES`| | | |`HIP_TRSF_NORMALIZED_COORDINATES`|1.7.0| | | |
@@ -1088,6 +1107,10 @@
 |`CUlaunchMemSyncDomain_enum`|12.0| | | | | | | |
 |`CUlib_st`|12.0| | | | | | | |
 |`CUlibrary`|12.0| | | | | | | |
+|`CUlibraryHostUniversalFunctionAndDataTable`|12.0| | | | | | | |
+|`CUlibraryHostUniversalFunctionAndDataTable_st`|12.0| | | | | | | |
+|`CUlibraryOption`|12.0| | | | | | | |
+|`CUlibraryOption_enum`|12.0| | | | | | | |
 |`CUlimit`| | | |`hipLimit_t`|1.6.0| | | |
 |`CUlimit_enum`| | | |`hipLimit_t`|1.6.0| | | |
 |`CUlinkState`| | | |`hiprtcLinkState`|5.3.0| | | |
@@ -1191,6 +1214,10 @@
 |`CUsurfref_st`| | | | | | | | |
 |`CUsynchronizationPolicy`|11.0| | | | | | | |
 |`CUsynchronizationPolicy_enum`|11.0| | | | | | | |
+|`CUtensorMap`|12.0| | | | | | | |
+|`CUtensorMapDataType`|12.0| | | | | | | |
+|`CUtensorMapDataType_enum`|12.0| | | | | | | |
+|`CUtensorMap_st`|12.0| | | | | | | |
 |`CUtexObject`| | | |`hipTextureObject_t`|1.7.0| | | |
 |`CUtexObject_v1`|11.3| | |`hipTextureObject_t`|1.7.0| | | |
 |`CUtexref`| | | |`hipTexRef`|3.10.0| | | |
