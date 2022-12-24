@@ -730,8 +730,10 @@ public:
                           StringRef file_name, bool is_angled, clang::CharSourceRange filename_range,
 #if LLVM_VERSION_MAJOR < 15
                           const clang::FileEntry *file,
-#else
+#elif LLVM_VERSION_MAJOR == 15
                           Optional<clang::FileEntryRef> file,
+#else
+                          clang::OptionalFileEntryRef file,
 #endif
                           StringRef search_path, StringRef relative_path,
                           const clang::Module *imported
