@@ -344,6 +344,16 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   //
   {"CUlaunchMemSyncDomainMap",                                         {"hipLaunchMemSyncDomainMap",                                "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
 
+  //
+  {"CUlibraryHostUniversalFunctionAndDataTable_st",                    {"hipLibraryHostUniversalFunctionAndDataTable",              "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  //
+  {"CUlibraryHostUniversalFunctionAndDataTable",                       {"hipLibraryHostUniversalFunctionAndDataTable",              "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+
+  //
+  {"CUtensorMap_st",                                                   {"hipTensorMap",                                             "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  //
+  {"CUtensorMap",                                                      {"hipTensorMap",                                             "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+
   // 2. Unions
 
   {"CUstreamBatchMemOpParams",                                         {"hipStreamBatchMemOpParams",                                "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
@@ -1657,6 +1667,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUDA_ERROR_MPS_MAX_CONNECTIONS_REACHED",                           {"hipErrorMpsMaxConnectionsReached",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 809
   // cudaErrorMpsClientTerminated
   {"CUDA_ERROR_MPS_CLIENT_TERMINATED",                                 {"hipErrorMpsClientTerminated",                              "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 810
+  //
+  {"CUDA_ERROR_CDP_NOT_SUPPORTED",                                     {"hipErrorCdpNotUnsupported",                                "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 811
+  //
+  {"CUDA_ERROR_CDP_VERSION_MISMATCH",                                  {"hipErrorCdpVersionMismatch",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 812
   // cudaErrorStreamCaptureUnsupported
   {"CUDA_ERROR_STREAM_CAPTURE_UNSUPPORTED",                            {"hipErrorStreamCaptureUnsupported",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 900
   // cudaErrorStreamCaptureInvalidated
@@ -2306,6 +2320,48 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   //
   {"CU_GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT",                       {"HIP_GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT",              "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
 
+  //
+  {"CUlibraryOption",                                                  {"hipLibraryOption",                                         "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CUlibraryOption_enum",                                             {"hipLibraryOption",                                         "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  // CUlibraryOption enum values
+  //
+  {"CU_LIBRARY_HOST_UNIVERSAL_FUNCTION_AND_DATA_TABLE",                {"HIP_LIBRARY_HOST_UNIVERSAL_FUNCTION_AND_DATA_TABLE",       "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  //
+  {"CU_LIBRARY_BINARY_IS_PRESERVED",                                   {"HIP_LIBRARY_BINARY_IS_PRESERVED",                          "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  //
+  {"CU_LIBRARY_NUM_OPTIONS",                                           {"HIP_LIBRARY_NUM_OPTIONS",                                  "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
+
+  //
+  {"CUtensorMapDataType",                                              {"hipTensorMapDataType",                                     "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CUtensorMapDataType_enum",                                         {"hipTensorMapDataType",                                     "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  // CUtensorMapDataType enum values
+  //
+  {"CU_TENSOR_MAP_DATA_TYPE_UINT8",                                    {"HIP_TENSOR_MAP_DATA_TYPE_UINT8",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  //
+  {"CU_TENSOR_MAP_DATA_TYPE_UINT16",                                   {"HIP_TENSOR_MAP_DATA_TYPE_UINT16",                          "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  //
+  {"CU_TENSOR_MAP_DATA_TYPE_UINT32",                                   {"HIP_TENSOR_MAP_DATA_TYPE_UINT32",                          "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  //
+  {"CU_TENSOR_MAP_DATA_TYPE_INT32",                                    {"HIP_TENSOR_MAP_DATA_TYPE_INT32",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  //
+  {"CU_TENSOR_MAP_DATA_TYPE_UINT64",                                   {"HIP_TENSOR_MAP_DATA_TYPE_UINT64",                          "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  //
+  {"CU_TENSOR_MAP_DATA_TYPE_INT64",                                    {"HIP_TENSOR_MAP_DATA_TYPE_INT64",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  //
+  {"CU_TENSOR_MAP_DATA_TYPE_FLOAT16",                                  {"HIP_TENSOR_MAP_DATA_TYPE_FLOAT16",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  //
+  {"CU_TENSOR_MAP_DATA_TYPE_FLOAT32",                                  {"HIP_TENSOR_MAP_DATA_TYPE_FLOAT32",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  //
+  {"CU_TENSOR_MAP_DATA_TYPE_FLOAT64",                                  {"HIP_TENSOR_MAP_DATA_TYPE_FLOAT64",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  //
+  {"CU_TENSOR_MAP_DATA_TYPE_BFLOAT16",                                 {"HIP_TENSOR_MAP_DATA_TYPE_BFLOAT16",                        "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  //
+  {"CU_TENSOR_MAP_DATA_TYPE_FLOAT32_FTZ",                              {"HIP_TENSOR_MAP_DATA_TYPE_FLOAT32_FTZ",                     "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  //
+  {"CU_TENSOR_MAP_DATA_TYPE_TFLOAT32",                                 {"HIP_TENSOR_MAP_DATA_TYPE_TFLOAT32",                        "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  //
+  {"CU_TENSOR_MAP_DATA_TYPE_TFLOAT32_FTZ",                             {"HIP_TENSOR_MAP_DATA_TYPE_TFLOAT32_FTZ",                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
+
   // 4. Typedefs
 
   // no analogue
@@ -2430,6 +2486,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_KERNEL_NODE_ATTRIBUTE_CLUSTER_SCHEDULING_POLICY_PREFERENCE",    {"hipKernelNodeAttributeClusterSchedulingPolicyPreference",  "", CONV_DEFINE, API_DRIVER, 1, HIP_UNSUPPORTED}}, // CU_LAUNCH_ATTRIBUTE_CLUSTER_SCHEDULING_POLICY_PREFERENCE
   //
   {"CU_COMPUTE_ACCELERATED_TARGET_BASE",                               {"HIP_COMPUTE_ACCELERATED_TARGET_BASE",                      "", CONV_DEFINE, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0x10000
+  //
+  {"CU_TENSOR_MAP_NUM_QWORDS",                                         {"HIP_TENSOR_MAP_NUM_QWORDS",                                "", CONV_DEFINE, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 16
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_TYPE_NAME_VER_MAP {
@@ -3164,6 +3222,33 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_TYPE_NAME_VER_MAP {
   {"CU_GET_PROC_ADDRESS_SUCCESS",                                      {CUDA_120, CUDA_0,   CUDA_0  }},
   {"CU_GET_PROC_ADDRESS_SYMBOL_NOT_FOUND",                             {CUDA_120, CUDA_0,   CUDA_0  }},
   {"CU_GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT",                       {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CUlibraryOption",                                                  {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CUlibraryOption_enum",                                             {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CU_LIBRARY_HOST_UNIVERSAL_FUNCTION_AND_DATA_TABLE",                {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CU_LIBRARY_BINARY_IS_PRESERVED",                                   {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CU_LIBRARY_NUM_OPTIONS",                                           {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CUlibraryHostUniversalFunctionAndDataTable_st",                    {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CUlibraryHostUniversalFunctionAndDataTable",                       {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CUDA_ERROR_CDP_NOT_SUPPORTED",                                     {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CUDA_ERROR_CDP_VERSION_MISMATCH",                                  {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CU_TENSOR_MAP_NUM_QWORDS",                                         {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CUtensorMap_st",                                                   {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CUtensorMap",                                                      {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CUtensorMapDataType",                                              {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CUtensorMapDataType_enum",                                         {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CU_TENSOR_MAP_DATA_TYPE_UINT8",                                    {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CU_TENSOR_MAP_DATA_TYPE_UINT16",                                   {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CU_TENSOR_MAP_DATA_TYPE_UINT32",                                   {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CU_TENSOR_MAP_DATA_TYPE_INT32",                                    {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CU_TENSOR_MAP_DATA_TYPE_UINT64",                                   {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CU_TENSOR_MAP_DATA_TYPE_INT64",                                    {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CU_TENSOR_MAP_DATA_TYPE_FLOAT16",                                  {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CU_TENSOR_MAP_DATA_TYPE_FLOAT32",                                  {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CU_TENSOR_MAP_DATA_TYPE_FLOAT64",                                  {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CU_TENSOR_MAP_DATA_TYPE_BFLOAT16",                                 {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CU_TENSOR_MAP_DATA_TYPE_FLOAT32_FTZ",                              {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CU_TENSOR_MAP_DATA_TYPE_TFLOAT32",                                 {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CU_TENSOR_MAP_DATA_TYPE_TFLOAT32_FTZ",                             {CUDA_120, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {
