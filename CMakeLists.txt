@@ -85,6 +85,12 @@ else()
     endif()
 endif()
 
+# [ToDo] Remove SWDEV_375013 related guards from CMakeLists.txt and HipifyAction.cpp along with the LLVM 16.0.0 official release
+option (SWDEV_375013 "Enables SWDEV-375013 blocker workaround for the clang's change https://reviews.llvm.org/D140332" OFF)
+if(SWDEV_375013)
+    add_definitions(-DSWDEV_375013)
+endif()
+
 if(MSVC)
     target_link_libraries(hipify-clang PRIVATE version)
     target_compile_options(hipify-clang PRIVATE ${STD} /Od /GR- /EHs- /EHc-)
