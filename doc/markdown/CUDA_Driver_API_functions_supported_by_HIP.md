@@ -152,6 +152,8 @@
 |`CUDA_EXT_SEM_WAIT_NODE_PARAMS_v1`|11.3| | | | | | | |
 |`CUDA_GRAPH_INSTANTIATE_ERROR`|12.0| | | | | | | |
 |`CUDA_GRAPH_INSTANTIATE_FLAG_AUTO_FREE_ON_LAUNCH`|11.4| | |`hipGraphInstantiateFlagAutoFreeOnLaunch`|5.2.0| | | |
+|`CUDA_GRAPH_INSTANTIATE_FLAG_DEVICE_LAUNCH`|12.0| | | | | | | |
+|`CUDA_GRAPH_INSTANTIATE_FLAG_UPLOAD`|12.0| | | | | | | |
 |`CUDA_GRAPH_INSTANTIATE_FLAG_USE_NODE_PRIORITY`|11.7| | | | | | | |
 |`CUDA_GRAPH_INSTANTIATE_INVALID_STRUCTURE`|12.0| | | | | | | |
 |`CUDA_GRAPH_INSTANTIATE_MULTIPLE_CTXS_NOT_SUPPORTED`|12.0| | | | | | | |
@@ -600,6 +602,7 @@
 |`CU_GRAPHICS_REGISTER_FLAGS_WRITE_DISCARD`| | | |`hipGraphicsRegisterFlagsWriteDiscard`|4.4.0| | | |
 |`CU_GRAPH_DEBUG_DOT_FLAGS_BATCH_MEM_OP_NODE_PARAMS`|11.7| | | | | | | |
 |`CU_GRAPH_DEBUG_DOT_FLAGS_EVENT_NODE_PARAMS`|11.3| | | | | | | |
+|`CU_GRAPH_DEBUG_DOT_FLAGS_EXTRA_TOPO_INFO`|12.0| | | | | | | |
 |`CU_GRAPH_DEBUG_DOT_FLAGS_EXT_SEMAS_SIGNAL_NODE_PARAMS`|11.3| | | | | | | |
 |`CU_GRAPH_DEBUG_DOT_FLAGS_EXT_SEMAS_WAIT_NODE_PARAMS`|11.3| | | | | | | |
 |`CU_GRAPH_DEBUG_DOT_FLAGS_HANDLES`|11.3| | | | | | | |
@@ -926,7 +929,20 @@
 |`CU_TENSOR_MAP_DATA_TYPE_UINT32`|12.0| | | | | | | |
 |`CU_TENSOR_MAP_DATA_TYPE_UINT64`|12.0| | | | | | | |
 |`CU_TENSOR_MAP_DATA_TYPE_UINT8`|12.0| | | | | | | |
+|`CU_TENSOR_MAP_FLOAT_OOB_FILL_NAN_REQUEST_ZERO_FMA`|12.0| | | | | | | |
+|`CU_TENSOR_MAP_FLOAT_OOB_FILL_NONE`|12.0| | | | | | | |
+|`CU_TENSOR_MAP_INTERLEAVE_16B`|12.0| | | | | | | |
+|`CU_TENSOR_MAP_INTERLEAVE_32B`|12.0| | | | | | | |
+|`CU_TENSOR_MAP_INTERLEAVE_NONE`|12.0| | | | | | | |
+|`CU_TENSOR_MAP_L2_PROMOTION_L2_128B`|12.0| | | | | | | |
+|`CU_TENSOR_MAP_L2_PROMOTION_L2_256B`|12.0| | | | | | | |
+|`CU_TENSOR_MAP_L2_PROMOTION_L2_64B`|12.0| | | | | | | |
+|`CU_TENSOR_MAP_L2_PROMOTION_NONE`|12.0| | | | | | | |
 |`CU_TENSOR_MAP_NUM_QWORDS`|12.0| | | | | | | |
+|`CU_TENSOR_MAP_SWIZZLE_128B`|12.0| | | | | | | |
+|`CU_TENSOR_MAP_SWIZZLE_32B`|12.0| | | | | | | |
+|`CU_TENSOR_MAP_SWIZZLE_64B`|12.0| | | | | | | |
+|`CU_TENSOR_MAP_SWIZZLE_NONE`|12.0| | | | | | | |
 |`CU_TRSA_OVERRIDE_FORMAT`| | | |`HIP_TRSA_OVERRIDE_FORMAT`|1.7.0| | | |
 |`CU_TRSF_DISABLE_TRILINEAR_OPTIMIZATION`|11.0| | | | | | | |
 |`CU_TRSF_NORMALIZED_COORDINATES`| | | |`HIP_TRSF_NORMALIZED_COORDINATES`|1.7.0| | | |
@@ -1048,6 +1064,9 @@
 |`CUgraphDebugDot_flags_enum`|11.3| | | | | | | |
 |`CUgraphExec`|10.0| | |`hipGraphExec_t`|4.3.0| | | |
 |`CUgraphExecUpdateResult`|10.2| | |`hipGraphExecUpdateResult`|4.3.0| | | |
+|`CUgraphExecUpdateResultInfo`|12.0| | | | | | | |
+|`CUgraphExecUpdateResultInfo_st`|12.0| | | | | | | |
+|`CUgraphExecUpdateResultInfo_v1`|12.0| | | | | | | |
 |`CUgraphExecUpdateResult_enum`|10.2| | |`hipGraphExecUpdateResult`|4.3.0| | | |
 |`CUgraphExec_st`|10.0| | |`hipGraphExec`|4.3.0| | | |
 |`CUgraphInstantiateResult`|12.0| | | | | | | |
@@ -1217,6 +1236,14 @@
 |`CUtensorMap`|12.0| | | | | | | |
 |`CUtensorMapDataType`|12.0| | | | | | | |
 |`CUtensorMapDataType_enum`|12.0| | | | | | | |
+|`CUtensorMapFloatOOBfill`|12.0| | | | | | | |
+|`CUtensorMapFloatOOBfill_enum`|12.0| | | | | | | |
+|`CUtensorMapInterleave`|12.0| | | | | | | |
+|`CUtensorMapInterleave_enum`|12.0| | | | | | | |
+|`CUtensorMapL2promotion`|12.0| | | | | | | |
+|`CUtensorMapL2promotion_enum`|12.0| | | | | | | |
+|`CUtensorMapSwizzle`|12.0| | | | | | | |
+|`CUtensorMapSwizzle_enum`|12.0| | | | | | | |
 |`CUtensorMap_st`|12.0| | | | | | | |
 |`CUtexObject`| | | |`hipTextureObject_t`|1.7.0| | | |
 |`CUtexObject_v1`|11.3| | |`hipTextureObject_t`|1.7.0| | | |
