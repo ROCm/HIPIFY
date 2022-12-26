@@ -354,6 +354,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   //
   {"CUtensorMap",                                                      {"hipTensorMap",                                             "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
 
+  //
+  {"CUgraphExecUpdateResultInfo_st",                                   {"hipGraphExecUpdateResultInfo",                             "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CUgraphExecUpdateResultInfo_v1",                                   {"hipGraphExecUpdateResultInfo",                             "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CUgraphExecUpdateResultInfo",                                      {"hipGraphExecUpdateResultInfo",                             "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+
   // 2. Unions
 
   {"CUstreamBatchMemOpParams",                                         {"hipStreamBatchMemOpParams",                                "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
@@ -2143,6 +2148,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_GRAPH_DEBUG_DOT_FLAGS_MEM_FREE_NODE_PARAMS",                    {"hipGraphDebugDotFlagsMemFreeNodeParams",                   "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 1<<12
   //
   {"CU_GRAPH_DEBUG_DOT_FLAGS_BATCH_MEM_OP_NODE_PARAMS",                {"hipGraphDebugDotFlagsBatchMemOpNodeParams",                "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 1<<13
+  //
+  {"CU_GRAPH_DEBUG_DOT_FLAGS_EXTRA_TOPO_INFO",                         {"hipGraphDebugDotFlagsExtraTopoInfo",                       "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 1<<13
 
   // cudaUserObjectFlags
   {"CUuserObject_flags",                                               {"hipUserObjectFlags",                                       "", CONV_TYPE, API_DRIVER, 1}},
@@ -2184,6 +2191,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // CUgraphInstantiate_flags enum values
   // cudaGraphInstantiateFlagAutoFreeOnLaunch
   {"CUDA_GRAPH_INSTANTIATE_FLAG_AUTO_FREE_ON_LAUNCH",                  {"hipGraphInstantiateFlagAutoFreeOnLaunch",                  "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}},
+  //
+  {"CUDA_GRAPH_INSTANTIATE_FLAG_UPLOAD",                               {"hipGraphInstantiateFlagUpload",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  //
+  {"CUDA_GRAPH_INSTANTIATE_FLAG_DEVICE_LAUNCH",                        {"hipGraphInstantiateFlagDeviceLaunch",                      "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
   // cudaGraphInstantiateFlagUseNodePriority
   {"CUDA_GRAPH_INSTANTIATE_FLAG_USE_NODE_PRIORITY",                    {"hipGraphInstantiateFlagUseNodePriority",                   "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
 
@@ -2361,6 +2372,52 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_TENSOR_MAP_DATA_TYPE_TFLOAT32",                                 {"HIP_TENSOR_MAP_DATA_TYPE_TFLOAT32",                        "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
   //
   {"CU_TENSOR_MAP_DATA_TYPE_TFLOAT32_FTZ",                             {"HIP_TENSOR_MAP_DATA_TYPE_TFLOAT32_FTZ",                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
+
+  //
+  {"CUtensorMapInterleave",                                            {"hipTensorMapInterleave",                                   "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CUtensorMapInterleave_enum",                                       {"hipTensorMapDataType",                                     "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  // CUtensorMapInterleave enum values
+  //
+  {"CU_TENSOR_MAP_INTERLEAVE_NONE",                                    {"HIP_TENSOR_MAP_INTERLEAVE_NONE",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  //
+  {"CU_TENSOR_MAP_INTERLEAVE_16B",                                     {"HIP_TENSOR_MAP_INTERLEAVE_16B",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  //
+  {"CU_TENSOR_MAP_INTERLEAVE_32B",                                     {"HIP_TENSOR_MAP_INTERLEAVE_32B",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
+
+  //
+  {"CUtensorMapSwizzle",                                               {"hipTensorMapSwizzle",                                      "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CUtensorMapSwizzle_enum",                                          {"hipTensorMapSwizzle",                                      "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  // CUtensorMapSwizzle enum values
+  //
+  {"CU_TENSOR_MAP_SWIZZLE_NONE",                                       {"HIP_TENSOR_MAP_SWIZZLE_NONE",                              "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  //
+  {"CU_TENSOR_MAP_SWIZZLE_32B",                                        {"HIP_TENSOR_MAP_SWIZZLE_32B",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  //
+  {"CU_TENSOR_MAP_SWIZZLE_64B",                                        {"HIP_TENSOR_MAP_SWIZZLE_64B",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  //
+  {"CU_TENSOR_MAP_SWIZZLE_128B",                                       {"HIP_TENSOR_MAP_SWIZZLE_128B",                              "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
+
+  //
+  {"CUtensorMapL2promotion",                                           {"hipTensorMapL2promotion",                                  "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CUtensorMapL2promotion_enum",                                      {"hipTensorMapL2promotion",                                  "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  // CUtensorMapL2promotion enum values
+  //
+  {"CU_TENSOR_MAP_L2_PROMOTION_NONE",                                  {"HIP_TENSOR_MAP_L2_PROMOTION_NONE",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  //
+  {"CU_TENSOR_MAP_L2_PROMOTION_L2_64B",                                {"HIP_TENSOR_MAP_L2_PROMOTION_L2_64B",                       "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  //
+  {"CU_TENSOR_MAP_L2_PROMOTION_L2_128B",                               {"HIP_TENSOR_MAP_L2_PROMOTION_L2_128B",                      "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  //
+  {"CU_TENSOR_MAP_L2_PROMOTION_L2_256B",                               {"HIP_TENSOR_MAP_L2_PROMOTION_L2_256B",                      "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
+
+  //
+  {"CUtensorMapFloatOOBfill",                                           {"hipTensorMapFloatOOBfill",                                "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CUtensorMapFloatOOBfill_enum",                                      {"hipTensorMapFloatOOBfill",                                "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  // CUtensorMapFloatOOBfill enum values
+ 
+  {"CU_TENSOR_MAP_FLOAT_OOB_FILL_NONE",                                 {"HIP_TENSOR_MAP_FLOAT_OOB_FILL_NONE",                      "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  //
+  {"CU_TENSOR_MAP_FLOAT_OOB_FILL_NAN_REQUEST_ZERO_FMA",                 {"HIP_TENSOR_MAP_FLOAT_OOB_FILL_NAN_REQUEST_ZERO_FMA",      "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
 
   // 4. Typedefs
 
@@ -3249,6 +3306,33 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_TYPE_NAME_VER_MAP {
   {"CU_TENSOR_MAP_DATA_TYPE_FLOAT32_FTZ",                              {CUDA_120, CUDA_0,   CUDA_0  }},
   {"CU_TENSOR_MAP_DATA_TYPE_TFLOAT32",                                 {CUDA_120, CUDA_0,   CUDA_0  }},
   {"CU_TENSOR_MAP_DATA_TYPE_TFLOAT32_FTZ",                             {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CUtensorMapInterleave",                                            {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CUtensorMapInterleave_enum",                                       {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CU_TENSOR_MAP_INTERLEAVE_NONE",                                    {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CU_TENSOR_MAP_INTERLEAVE_16B",                                     {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CU_TENSOR_MAP_INTERLEAVE_32B",                                     {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CUtensorMapSwizzle",                                               {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CUtensorMapSwizzle_enum",                                          {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CU_TENSOR_MAP_SWIZZLE_NONE",                                       {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CU_TENSOR_MAP_SWIZZLE_32B",                                        {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CU_TENSOR_MAP_SWIZZLE_64B",                                        {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CU_TENSOR_MAP_SWIZZLE_128B",                                       {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CUtensorMapL2promotion",                                           {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CUtensorMapL2promotion_enum",                                      {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CU_TENSOR_MAP_L2_PROMOTION_NONE",                                  {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CU_TENSOR_MAP_L2_PROMOTION_L2_64B",                                {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CU_TENSOR_MAP_L2_PROMOTION_L2_128B",                               {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CU_TENSOR_MAP_L2_PROMOTION_L2_256B",                               {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CUtensorMapFloatOOBfill",                                          {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CUtensorMapFloatOOBfill_enum",                                     {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CU_TENSOR_MAP_FLOAT_OOB_FILL_NONE",                                {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CU_TENSOR_MAP_FLOAT_OOB_FILL_NAN_REQUEST_ZERO_FMA",                {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CUgraphExecUpdateResultInfo_st",                                   {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CUgraphExecUpdateResultInfo_v1",                                   {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CUgraphExecUpdateResultInfo",                                      {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CU_GRAPH_DEBUG_DOT_FLAGS_EXTRA_TOPO_INFO",                         {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CUDA_GRAPH_INSTANTIATE_FLAG_UPLOAD",                               {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"CUDA_GRAPH_INSTANTIATE_FLAG_DEVICE_LAUNCH",                        {CUDA_120, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {
