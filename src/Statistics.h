@@ -33,87 +33,121 @@ THE SOFTWARE.
 namespace chr = std::chrono;
 
 enum ConvTypes {
-  // Driver API:  5.2. Error Handling
-  // Runtime API: 5.3. Error Handling
+  // Driver API : 6.2.  Error Handling
+  // Runtime API: 5.3.  Error Handling
   CONV_ERROR = 0,
-  // Driver API : 5.3. Initialization
+  // Driver API : 6.3.  Initialization
+  // Runtime API: -
   CONV_INIT,
-  // Driver API : 5.4. Version Management
+  // Driver API : 6.4.  Version Management
   // Runtime API: 5.28. Version Management
   CONV_VERSION,
-  // Driver API : 5.5. Device Management, 5.6. Device Management [DEPRECATED]
-  // Runtime API: 5.1. Device Management
+  // Driver API : 6.5.  Device Management,
+  //              6.6.  Device Management [DEPRECATED]
+  // Runtime API: 5.1.  Device Management
   CONV_DEVICE,
-  // Driver API : 5.7. Primary Context Management, 5.8.Context Management, 5.9. Context Management [DEPRECATED]
+  // Driver API : 6.7.  Primary Context Management,
+  //              6.8.  Context Management,
+  //              6.9.  Context Management [DEPRECATED]
+  // Runtime API: -
   CONV_CONTEXT,
-  // Driver API : 5.10. Module Management
+  // Driver API : 6.10. Module Management,
+  //              6.11. Module Management [DEPRECATED]
+  // Runtime API: -
   CONV_MODULE,
-  // Driver API : 5.11. Memory Management
-  // Runtime API: 5.9. Memory Management, 5.10. Memory Management [DEPRECATED]
+  // Driver API : 6.12. Library Management
+  // Runtime API:
+  CONV_LIBRARY,
+  // Driver API : 6.13. Memory Management
+  // Runtime API: 5.9.  Memory Management,
+  //              5.10. Memory Management [DEPRECATED]
   CONV_MEMORY,
-  // Driver API : 5.12. Virtual Memory Management
+  // Driver API : 6.14. Virtual Memory Management
+  // Runtime API: -
   CONV_VIRTUAL_MEMORY,
-  // Driver API : 5.13. Stream Ordered Memory Allocator
+  // Driver API : 6.15. Stream Ordered Memory Allocator
+  // Runtime API: -
   CONV_STREAM_ORDERED_MEMORY,
-  // Driver API : 5.14. Unified Addressing
+  // Driver API : 6.16. Unified Addressing
   // Runtime API: 5.12. Unified Addressing
   CONV_ADDRESSING,
-  // Driver API : 5.15. Stream Management
-  // Runtime API: 5.4. Stream Management
+  // Driver API : 6.17. Stream Management
+  // Runtime API: 5.4.  Stream Management
   CONV_STREAM,
-  // Driver API : 5.16. Event Management
-  // Runtime API: 5.5. Event Management
+  // Driver API : 6.18. Event Management
+  // Runtime API: 5.5.  Event Management
   CONV_EVENT,
-  // Driver API : 5.17. External Resource Interoperability
-  // Runtime API: 5.6.External Resource Interoperability
+  // Driver API : 6.19. External Resource Interoperability
+  // Runtime API: 5.6.  External Resource Interoperability
   CONV_EXT_RES,
-  // Driver API : 5.18. Stream memory operations
+  // Driver API : 6.20. Stream memory operations
+  // Runtime API: -
   CONV_STREAM_MEMORY,
-  // Driver API : 5.19. Execution Control, 5.20. Execution Control [DEPRECATED]
-  // Runtime API: 5.7.Execution Control, Former 5.9. Execution Control [DEPRECATED]
+  // Driver API : 6.21. Execution Control,
+  //              6.22. Execution Control [DEPRECATED]
+  // Runtime API: 5.7.  Execution Control,
+  //              5.7.  Execution Control [DEPRECATED]
   CONV_EXECUTION,
-  // Driver API : 5.21. Graph Management
+  // Driver API : 6.23. Graph Management
   // Runtime API: 5.30. Graph Management
   CONV_GRAPH,
-  // Driver API : 5.22. Occupancy
-  // Runtime API: 5.8. Occupancy
+  // Driver API : 6.24. Occupancy
+  // Runtime API: 5.8.  Occupancy
   CONV_OCCUPANCY,
-  // Driver API : 5.23. Texture Reference Management [DEPRECATED], 5.24. Texture Object Management
-  // Runtime API: 5.25. Texture Reference Management [DEPRECATED], 5.27. Texture Object Management
+  // Driver API : 6.25. Texture Reference Management [DEPRECATED],
+  //              6.27. Texture Object Management
+  // Runtime API: 5.25. Texture Reference Management [DEPRECATED],
+  //              5.27. Texture Object Management
   CONV_TEXTURE,
-  // Driver API : 5.25. Surface Reference Management [DEPRECATED], 5.26. Surface Object Management
-  // Runtime API: 5.26. Surface Reference Management [DEPRECATED], 5.28. Surface Object Management
+  // Driver API : 6.26. Surface Reference Management [DEPRECATED],
+  //              6.28. Surface Object Management
+  // Runtime API: 5.26. Surface Reference Management [DEPRECATED],
+  //              5.28. Surface Object Management
   CONV_SURFACE,
-  // Driver API : 5.27. Peer Context Memory Access
+  // Driver API : 6.29. Tensor Core Management
+  // Runtime API:
+  CONV_TENSOR,
+  // Driver API : 6.30. Peer Context Memory Access
   // Runtime API: 5.13. Peer Device Memory Access
   CONV_PEER,
-  // Driver API : 5.28. Graphics Interoperability
+  // Driver API : 6.31. Graphics Interoperability
   // Runtime API: 5.24. Graphics Interoperability
   CONV_GRAPHICS,
+  // Driver API : -
   // Runtime API: 5.32. Interactions with the CUDA Driver API
   CONV_INTERACTION,
-  // Driver API : 5.29. Profiler Control [DEPRECATED], 5.30. Profiler Control
+  // Driver API : 6.33. Profiler Control [DEPRECATED],
+  //              6.34. Profiler Control
   // Runtime API: 5.33. Profiler Control
   CONV_PROFILER,
-  // Driver API : 5.31. OpenGL Interoperability
-  // Runtime API: 5.14. OpenGL Interoperability, 5.15. OpenGL Interoperability [DEPRECATED]
+  // Driver API : 6.35. OpenGL Interoperability,
+  //              6.35. OpenGL Interoperability [DEPRECATED]
+  // Runtime API: 5.14. OpenGL Interoperability,
+  //              5.15. OpenGL Interoperability [DEPRECATED]
   CONV_OPENGL,
-  // Driver API : 5.34. Direct3D 9 Interoperability
-  // Runtime API: 5.16. Direct3D 9 Interoperability, 5.17. Direct3D 9 Interoperability [DEPRECATED]
+  // Driver API : 6.36. Direct3D 9 Interoperability,
+  //              6.36. Direct3D 9 Interoperability [DEPRECATED]
+  // Runtime API: 5.16. Direct3D 9 Interoperability,
+  //              5.17. Direct3D 9 Interoperability [DEPRECATED]
   CONV_D3D9,
-  // Driver API : 5.35. Direct3D 10 Interoperability
-  // Runtime API: 5.18. Direct3D 10 Interoperability, 5.19. Direct3D 10 Interoperability [DEPRECATED]
+  // Driver API : 6.37. Direct3D 10 Interoperability,
+  //              6.37. Direct3D 10 Interoperability [DEPRECATED]
+  // Runtime API: 5.18. Direct3D 10 Interoperability,
+  //              5.19. Direct3D 10 Interoperability [DEPRECATED]
   CONV_D3D10,
-  // Driver API : 5.36. Direct3D 11 Interoperability
-  // Runtime API: 5.20. Direct3D 11 Interoperability, 5.21. Direct3D 11 Interoperability [DEPRECATED]
+  // Driver API : 6.38. Direct3D 11 Interoperability,
+  //              6.38. Direct3D 11 Interoperability [DEPRECATED]
+  // Runtime API: 5.20. Direct3D 11 Interoperability,
+  //              5.21. Direct3D 11 Interoperability [DEPRECATED]
   CONV_D3D11,
-  // Driver API : 5.32. VDPAU Interoperability
+  // Driver API : 6.39. VDPAU Interoperability
   // Runtime API: 5.22. VDPAU Interoperability
   CONV_VDPAU,
-  // Driver API : 5.33. EGL Interoperability
+  // Driver API : 6.40. EGL Interoperability
   // Runtime API: 5.23. EGL Interoperability
   CONV_EGL,
-  // Runtime API: 5.2. Thread Management [DEPRECATED]
+  // Driver API : -
+  // Runtime API: 5.2.  Thread Management [DEPRECATED]
   CONV_THREAD,
   CONV_COMPLEX,
   CONV_LIB_FUNC,

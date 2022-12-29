@@ -34,6 +34,7 @@ const char *counterNames[NUM_CONV_TYPES] = {
   "device", // CONV_DEVICE
   "context", // CONV_CONTEXT
   "module", // CONV_MODULE
+  "library_management", // CONV_LIBRARY
   "memory", // CONV_MEMORY
   "virtual_memory", // CONV_VIRTUAL_MEMORY
   "stream_ordered_memory", // CONV_STREAM_ORDERED_MEMORY
@@ -47,6 +48,7 @@ const char *counterNames[NUM_CONV_TYPES] = {
   "occupancy", // CONV_OCCUPANCY
   "texture", // CONV_TEXTURE
   "surface", // CONV_SURFACE
+  "tensor", // CONV_TENSOR
   "peer", // CONV_PEER
   "graphics", // CONV_GRAPHICS
   "interactions", // CONV_INTERACTION
