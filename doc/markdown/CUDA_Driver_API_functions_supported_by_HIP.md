@@ -1404,6 +1404,15 @@
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
+|`cuKernelGetAttribute`|12.0| | | | | | | |
+|`cuKernelGetFunction`|12.0| | | | | | | |
+|`cuKernelSetAttribute`|12.0| | | | | | | |
+|`cuKernelSetCacheConfig`|12.0| | | | | | | |
+|`cuLibraryGetGlobal`|12.0| | | | | | | |
+|`cuLibraryGetKernel`|12.0| | | | | | | |
+|`cuLibraryGetManaged`|12.0| | | | | | | |
+|`cuLibraryGetModule`|12.0| | | | | | | |
+|`cuLibraryGetUnifiedFunction`|12.0| | | | | | | |
 |`cuLibraryLoadData`|12.0| | | | | | | |
 |`cuLibraryLoadFromFile`|12.0| | | | | | | |
 |`cuLibraryUnload`|12.0| | | | | | | |
@@ -1588,6 +1597,7 @@
 |`cuStreamGetCaptureInfo_v2`|11.3| | |`hipStreamGetCaptureInfo_v2`|5.0.0| | | |
 |`cuStreamGetCtx`|9.2| | | | | | | |
 |`cuStreamGetFlags`| | | |`hipStreamGetFlags`|1.6.0| | | |
+|`cuStreamGetId`|12.0| | | | | | | |
 |`cuStreamGetPriority`| | | |`hipStreamGetPriority`|2.0.0| | | |
 |`cuStreamIsCapturing`|10.0| | |`hipStreamIsCapturing`|5.0.0| | | |
 |`cuStreamQuery`| | | |`hipStreamQuery`|1.6.0| | | |
@@ -1708,6 +1718,7 @@
 |`cuGraphExecEventWaitNodeSetEvent`|11.1| | |`hipGraphExecEventWaitNodeSetEvent`|5.0.0| | | |
 |`cuGraphExecExternalSemaphoresSignalNodeSetParams`|11.2| | | | | | | |
 |`cuGraphExecExternalSemaphoresWaitNodeSetParams`|11.2| | | | | | | |
+|`cuGraphExecGetFlags`|12.0| | | | | | | |
 |`cuGraphExecHostNodeSetParams`|10.2| | |`hipGraphExecHostNodeSetParams`|5.0.0| | | |
 |`cuGraphExecKernelNodeSetParams`|10.1| | |`hipGraphExecKernelNodeSetParams`|4.5.0| | | |
 |`cuGraphExecMemcpyNodeSetParams`|10.2| | | | | | | |
@@ -1724,6 +1735,7 @@
 |`cuGraphHostNodeSetParams`|10.0| | |`hipGraphHostNodeSetParams`|5.0.0| | | |
 |`cuGraphInstantiate`|10.0| | |`hipGraphInstantiate`|4.3.0| | | |
 |`cuGraphInstantiateWithFlags`|11.4| | |`hipGraphInstantiateWithFlags`|5.0.0| | | |
+|`cuGraphInstantiateWithParams`|12.0| | | | | | | |
 |`cuGraphInstantiate_v2`|11.0| | |`hipGraphInstantiate`|4.3.0| | | |
 |`cuGraphKernelNodeCopyAttributes`|11.0| | | | | | | |
 |`cuGraphKernelNodeGetAttribute`|11.0| | |`hipGraphKernelNodeGetAttribute`|5.2.0| | | |
@@ -1826,7 +1838,11 @@
 
 ## **29. Tensor Core Management**
 
-Unsupported
+|**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
+|:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
+|`cuTensorMapEncodeIm2col`|12.0| | | | | | | |
+|`cuTensorMapEncodeTiled`|12.0| | | | | | | |
+|`cuTensorMapReplaceAddress`|12.0| | | | | | | |
 
 ## **30. Peer Context Memory Access**
 
