@@ -803,9 +803,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_DEVICE_ATTRIBUTE_CAN_USE_STREAM_WAIT_VALUE_NOR_V2",             {"hipDeviceAttributeCanUseStreamWaitValueNorV2",             "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED | CUDA_REMOVED}}, // 123
   //
   {"CU_DEVICE_ATTRIBUTE_DMA_BUF_SUPPORTED",                            {"hipDeviceAttributeDmaBufSupported",                        "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 124
-  //
+  // cudaDevAttrIpcEventSupport
   {"CU_DEVICE_ATTRIBUTE_IPC_EVENT_SUPPORTED",                          {"hipDeviceAttributeIpcEventSupported",                      "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 125
-  //
+  // cudaDevAttrMemSyncDomainCount
   {"CU_DEVICE_ATTRIBUTE_MEM_SYNC_DOMAIN_COUNT",                        {"hipDeviceAttributeMemSyncDomainCount",                     "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 126
   //
   {"CU_DEVICE_ATTRIBUTE_TENSOR_MAP_ACCESS_SUPPORTED",                  {"hipDeviceAttributeTensorMapAccessSupported",               "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 127
@@ -1672,9 +1672,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUDA_ERROR_MPS_MAX_CONNECTIONS_REACHED",                           {"hipErrorMpsMaxConnectionsReached",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 809
   // cudaErrorMpsClientTerminated
   {"CUDA_ERROR_MPS_CLIENT_TERMINATED",                                 {"hipErrorMpsClientTerminated",                              "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 810
-  //
+  // cudaErrorCdpNotSupported
   {"CUDA_ERROR_CDP_NOT_SUPPORTED",                                     {"hipErrorCdpNotUnsupported",                                "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 811
-  //
+  // cudaErrorCdpVersionMismatch
   {"CUDA_ERROR_CDP_VERSION_MISMATCH",                                  {"hipErrorCdpVersionMismatch",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 812
   // cudaErrorStreamCaptureUnsupported
   {"CUDA_ERROR_STREAM_CAPTURE_UNSUPPORTED",                            {"hipErrorStreamCaptureUnsupported",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 900
@@ -2296,20 +2296,20 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   //
   {"CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN",                              {"hipLaunchAttributeMemSyncDomain",                          "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
 
-  //
+  // cudaGraphInstantiateResult
   {"CUgraphInstantiateResult",                                         {"hipGraphInstantiateResult",                                "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
   {"CUgraphInstantiateResult_enum",                                    {"hipGraphInstantiateResult",                                "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
   // CUgraphInstantiateResult enum values
-  //
-  {"CUDA_GRAPH_INSTANTIATE_SUCCESS",                                   {"HIP_GRAPH_INSTANTIATE_SUCCESS",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
-  //
-  {"CUDA_GRAPH_INSTANTIATE_ERROR",                                     {"HIP_GRAPH_INSTANTIATE_ERROR",                              "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
-  //
-  {"CUDA_GRAPH_INSTANTIATE_INVALID_STRUCTURE",                         {"HIP_GRAPH_INSTANTIATE_INVALID_STRUCTURE",                  "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
-  //
-  {"CUDA_GRAPH_INSTANTIATE_NODE_OPERATION_NOT_SUPPORTED",              {"HIP_GRAPH_INSTANTIATE_NODE_OPERATION_NOT_SUPPORTED",       "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
-  //
-  {"CUDA_GRAPH_INSTANTIATE_MULTIPLE_CTXS_NOT_SUPPORTED",               {"HIP_GRAPH_INSTANTIATE_MULTIPLE_CTXS_NOT_SUPPORTED",        "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  // cudaGraphInstantiateSuccess
+  {"CUDA_GRAPH_INSTANTIATE_SUCCESS",                                   {"hipGraphInstantiateSuccess",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  // cudaGraphInstantiateError
+  {"CUDA_GRAPH_INSTANTIATE_ERROR",                                     {"hipGraphInstantiateError",                                 "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  // cudaGraphInstantiateInvalidStructure
+  {"CUDA_GRAPH_INSTANTIATE_INVALID_STRUCTURE",                         {"hipGraphInstantiateInvalidStructure",                      "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  // cudaGraphInstantiateNodeOperationNotSupported
+  {"CUDA_GRAPH_INSTANTIATE_NODE_OPERATION_NOT_SUPPORTED",              {"hipGraphInstantiateNodeOperationNotSupported",             "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  // cudaGraphInstantiateMultipleDevicesNotSupported
+  {"CUDA_GRAPH_INSTANTIATE_MULTIPLE_CTXS_NOT_SUPPORTED",               {"hipGraphInstantiateMultipleDevicesNotSupported",           "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
 
   //
   {"CUlaunchMemSyncDomain",                                            {"hipLaunchMemSyncDomain",                                   "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},

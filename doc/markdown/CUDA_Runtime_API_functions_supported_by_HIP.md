@@ -581,7 +581,7 @@ Unsupported
 |`cudaCGScopeGrid`|9.0| | | | | | | |
 |`cudaCGScopeInvalid`|9.0| | | | | | | |
 |`cudaCGScopeMultiGrid`|9.0| | | | | | | |
-|`cudaCSV`| | | | | | | | |
+|`cudaCSV`| | |12.0| | | | | |
 |`cudaChannelFormatDesc`| | | |`hipChannelFormatDesc`|1.6.0| | | |
 |`cudaChannelFormatKind`| | | |`hipChannelFormatKind`|1.6.0| | | |
 |`cudaChannelFormatKindFloat`| | | |`hipChannelFormatKindFloat`|1.6.0| | | |
@@ -680,6 +680,7 @@ Unsupported
 |`cudaDevAttrHostRegisterReadOnlySupported`|11.1| | | | | | | |
 |`cudaDevAttrHostRegisterSupported`|9.2| | | | | | | |
 |`cudaDevAttrIntegrated`| | | |`hipDeviceAttributeIntegrated`|1.9.0| | | |
+|`cudaDevAttrIpcEventSupport`|12.0| | | | | | | |
 |`cudaDevAttrIsMultiGpuBoard`| | | |`hipDeviceAttributeIsMultiGpuBoard`|1.6.0| | | |
 |`cudaDevAttrKernelExecTimeout`| | | |`hipDeviceAttributeKernelExecTimeout`|2.10.0| | | |
 |`cudaDevAttrL2CacheSize`| | | |`hipDeviceAttributeL2CacheSize`|1.6.0| | | |
@@ -744,6 +745,7 @@ Unsupported
 |`cudaDevAttrMaxThreadsPerBlock`| | | |`hipDeviceAttributeMaxThreadsPerBlock`|1.6.0| | | |
 |`cudaDevAttrMaxThreadsPerMultiProcessor`| | | |`hipDeviceAttributeMaxThreadsPerMultiProcessor`|1.6.0| | | |
 |`cudaDevAttrMaxTimelineSemaphoreInteropSupported`|11.2|11.5| | | | | | |
+|`cudaDevAttrMemSyncDomainCount`|12.0| | | | | | | |
 |`cudaDevAttrMemoryClockRate`| | | |`hipDeviceAttributeMemoryClockRate`|1.6.0| | | |
 |`cudaDevAttrMemoryPoolSupportedHandleTypes`|11.3| | | | | | | |
 |`cudaDevAttrMemoryPoolsSupported`|11.2| | |`hipDeviceAttributeMemoryPoolsSupported`|5.2.0| | | |
@@ -754,6 +756,9 @@ Unsupported
 |`cudaDevAttrPciBusId`| | | |`hipDeviceAttributePciBusId`|1.6.0| | | |
 |`cudaDevAttrPciDeviceId`| | | |`hipDeviceAttributePciDeviceId`|1.6.0| | | |
 |`cudaDevAttrPciDomainId`| | | |`hipDeviceAttributePciDomainID`|4.3.0| | | |
+|`cudaDevAttrReserved122`|12.0| | | | | | | |
+|`cudaDevAttrReserved123`|12.0| | | | | | | |
+|`cudaDevAttrReserved124`|12.0| | | | | | | |
 |`cudaDevAttrReserved92`|9.0| | | | | | | |
 |`cudaDevAttrReserved93`|9.0| | | | | | | |
 |`cudaDevAttrReserved94`|9.0| | |`hipDeviceAttributeCanUseStreamWaitValue`|4.3.0| | | |
@@ -780,7 +785,7 @@ Unsupported
 |`cudaDeviceMask`| | | | | | | | |
 |`cudaDeviceP2PAttr`|8.0| | |`hipDeviceP2PAttr`|3.8.0| | | |
 |`cudaDeviceProp`| | | |`hipDeviceProp_t`|1.6.0| | | |
-|`cudaDevicePropDontCare`| | | | | | | | |
+|`cudaDevicePropDontCare`| | |12.0| | | | | |
 |`cudaDeviceScheduleAuto`| | | |`hipDeviceScheduleAuto`|1.6.0| | | |
 |`cudaDeviceScheduleBlockingSync`| | | |`hipDeviceScheduleBlockingSync`|1.6.0| | | |
 |`cudaDeviceScheduleMask`| | | |`hipDeviceScheduleMask`|1.6.0| | | |
@@ -882,6 +887,8 @@ Unsupported
 |`cudaErrorAssert`| | | |`hipErrorAssert`|1.9.0| | | |
 |`cudaErrorCallRequiresNewerDriver`|11.1| | | | | | | |
 |`cudaErrorCapturedEvent`|10.0| | |`hipErrorCapturedEvent`|4.3.0| | | |
+|`cudaErrorCdpNotSupported`|12.0| | | | | | | |
+|`cudaErrorCdpVersionMismatch`|12.0| | | | | | | |
 |`cudaErrorCompatNotSupportedOnDevice`|10.1| | | | | | | |
 |`cudaErrorContextIsDestroyed`|10.1| | |`hipErrorContextIsDestroyed`|4.3.0| | | |
 |`cudaErrorCooperativeLaunchTooLarge`|9.0| | |`hipErrorCooperativeLaunchTooLarge`|3.2.0| | | |
@@ -1107,9 +1114,15 @@ Unsupported
 |`cudaGraphExecUpdateResult`|10.2| | |`hipGraphExecUpdateResult`|4.3.0| | | |
 |`cudaGraphExecUpdateSuccess`|10.2| | |`hipGraphExecUpdateSuccess`|4.3.0| | | |
 |`cudaGraphExec_t`|10.0| | |`hipGraphExec_t`|4.3.0| | | |
+|`cudaGraphInstantiateError`|12.0| | | | | | | |
 |`cudaGraphInstantiateFlagAutoFreeOnLaunch`|11.4| | |`hipGraphInstantiateFlagAutoFreeOnLaunch`|5.2.0| | | |
 |`cudaGraphInstantiateFlagUseNodePriority`|11.7| | | | | | | |
 |`cudaGraphInstantiateFlags`|11.4| | |`hipGraphInstantiateFlags`|5.2.0| | | |
+|`cudaGraphInstantiateInvalidStructure`|12.0| | | | | | | |
+|`cudaGraphInstantiateMultipleDevicesNotSupported`|12.0| | | | | | | |
+|`cudaGraphInstantiateNodeOperationNotSupported`|12.0| | | | | | | |
+|`cudaGraphInstantiateResult`|12.0| | | | | | | |
+|`cudaGraphInstantiateSuccess`|12.0| | | | | | | |
 |`cudaGraphMemAttrReservedMemCurrent`|11.4| | |`hipGraphMemAttrReservedMemCurrent`|5.3.0| | | |
 |`cudaGraphMemAttrReservedMemHigh`|11.4| | |`hipGraphMemAttrReservedMemHigh`|5.3.0| | | |
 |`cudaGraphMemAttrUsedMemCurrent`|11.4| | |`hipGraphMemAttrUsedMemCurrent`|5.3.0| | | |
@@ -1162,6 +1175,7 @@ Unsupported
 |`cudaHostRegisterMapped`| | | |`hipHostRegisterMapped`|1.6.0| | | |
 |`cudaHostRegisterPortable`| | | |`hipHostRegisterPortable`|1.6.0| | | |
 |`cudaHostRegisterReadOnly`|11.1| | | | | | | |
+|`cudaInitDeviceFlagsAreValid`|12.0| | | | | | | |
 |`cudaInvalidDeviceId`|8.0| | |`hipInvalidDeviceId`|3.7.0| | | |
 |`cudaIpcEventHandle_st`| | | |`hipIpcEventHandle_st`|3.5.0| | | |
 |`cudaIpcEventHandle_t`| | | |`hipIpcEventHandle_t`|1.6.0| | | |
@@ -1176,7 +1190,7 @@ Unsupported
 |`cudaKernelNodeAttributeCooperative`|11.0| | |`hipKernelNodeAttributeCooperative`|5.2.0| | | |
 |`cudaKernelNodeAttributePriority`|11.7| | | | | | | |
 |`cudaKernelNodeParams`|10.0| | |`hipKernelNodeParams`|4.3.0| | | |
-|`cudaKeyValuePair`| | | | | | | | |
+|`cudaKeyValuePair`| | |12.0| | | | | |
 |`cudaLaunchAttribute`|11.8| | | | | | | |
 |`cudaLaunchAttributeAccessPolicyWindow`|11.8| | | | | | | |
 |`cudaLaunchAttributeClusterDimension`|11.8| | | | | | | |
@@ -1268,8 +1282,8 @@ Unsupported
 |`cudaNvSciSyncAttrWait`|10.2| | | | | | | |
 |`cudaOccupancyDefault`| | | |`hipOccupancyDefault`|3.2.0| | | |
 |`cudaOccupancyDisableCachingOverride`| | | | | | | | |
-|`cudaOutputMode`| | | | | | | | |
-|`cudaOutputMode_t`| | | | | | | | |
+|`cudaOutputMode`| | |12.0| | | | | |
+|`cudaOutputMode_t`| | |12.0| | | | | |
 |`cudaPitchedPtr`| | | |`hipPitchedPtr`|1.7.0| | | |
 |`cudaPointerAttributes`| | | |`hipPointerAttribute_t`|1.6.0| | | |
 |`cudaPos`| | | |`hipPos`|1.7.0| | | |
