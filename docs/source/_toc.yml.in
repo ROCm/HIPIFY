@@ -7,8 +7,8 @@ subtrees:
   entries:
     - title: Release Notes
       url: https://
-  - file: hipify-clang
-  - file: hipify-perl      
+- file: hipify-clang
+- file: hipify-perl
 root: index
 subtrees:
 - caption: Supported CUDA APIs 
