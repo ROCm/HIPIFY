@@ -18,7 +18,7 @@ from format_toc import format_toc
 
 # -- Project information -----------------------------------------------------
 
-project = "ROCm Documentation"
+project = "HIPIFY Documentation"
 copyright = "2022, Advanced Micro Devices Ltd. "
 author = "Advanced Micro Devices <a href=\"https://\">Disclaimer and Licensing Info</a> "
 
