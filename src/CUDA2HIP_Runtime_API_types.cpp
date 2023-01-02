@@ -217,6 +217,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CUDA_ARRAY_MEMORY_REQUIREMENTS_st
   {"cudaArrayMemoryRequirements",                                      {"hipArrayMemoryRequirements",                               "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
 
+  // CUlaunchMemSyncDomainMap_st
+  {"cudaLaunchMemSyncDomainMap_st",                                    {"hipLaunchMemSyncDomainMap",                                "", CONV_TYPE, API_RUNTIME, 36}},
+  // CUlaunchMemSyncDomainMap
+  {"cudaLaunchMemSyncDomainMap",                                       {"hipLaunchMemSyncDomainMap",                                "", CONV_TYPE, API_RUNTIME, 36}},
+
   // 2. Unions
 
   // CUstreamAttrValue
@@ -236,7 +241,17 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CUlaunchConfig_st
   {"cudaLaunchConfig_st",                                              {"hipLaunchConfig",                                          "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
   // CUlaunchConfig
-  {"cudaLaunchConfig_t",                                              {"hipLaunchConfig",                                       "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+  {"cudaLaunchConfig_t",                                               {"hipLaunchConfig",                                          "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+
+  // CUDA_GRAPH_INSTANTIATE_PARAMS_st
+  {"cudaGraphInstantiateParams_st",                                    {"hipGraphInstantiateParams",                                "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+  // CUDA_GRAPH_INSTANTIATE_PARAMS
+  {"cudaGraphInstantiateParams",                                       {"hipGraphInstantiateParams",                                "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+
+  // CUgraphExecUpdateResultInfo_st
+  {"cudaGraphExecUpdateResultInfo_st",                                 {"hipGraphExecUpdateResultInfo",                             "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+  // CUgraphExecUpdateResultInfo
+  {"cudaGraphExecUpdateResultInfo",                                    {"hipGraphExecUpdateResultInfo",                             "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
 
   // 3. Enums
 
@@ -1727,6 +1742,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // cudaGraphInstantiateFlags enum values
   // CUDA_GRAPH_INSTANTIATE_FLAG_AUTO_FREE_ON_LAUNCH
   {"cudaGraphInstantiateFlagAutoFreeOnLaunch",                         {"hipGraphInstantiateFlagAutoFreeOnLaunch",                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}},
+  // CUDA_GRAPH_INSTANTIATE_FLAG_UPLOAD
+  {"cudaGraphInstantiateFlagUpload",                                   {"hipGraphInstantiateFlagUpload",                            "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+  // CUDA_GRAPH_INSTANTIATE_FLAG_DEVICE_LAUNCH
+  {"cudaGraphInstantiateFlagDeviceLaunch",                             {"hipGraphInstantiateFlagDeviceLaunch",                      "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}},
   // CUDA_GRAPH_INSTANTIATE_FLAG_USE_NODE_PRIORITY
   {"cudaGraphInstantiateFlagUseNodePriority",                          {"hipGraphInstantiateFlagUseNodePriority",                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}},
 
@@ -1761,6 +1780,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaLaunchAttributeProgrammaticEvent",                             {"hipLaunchAttributeProgrammaticEvent",                      "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}},
   // CU_LAUNCH_ATTRIBUTE_PRIORITY
   {"cudaLaunchAttributePriority",                                      {"hipLaunchAttributePriority",                               "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+  // CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP
+  {"cudaLaunchAttributeMemSyncDomainMap",                              {"hipLaunchAttributeMemSyncDomainMap",                       "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+  // CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN
+  {"cudaLaunchAttributeMemSyncDomain",                                 {"hipLaunchAttributeMemSyncDomain",                          "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}},
 
   // CUgraphInstantiateResult
   {"cudaGraphInstantiateResult",                                       {"hipGraphInstantiateResult",                                "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
@@ -1776,6 +1799,20 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CUDA_GRAPH_INSTANTIATE_MULTIPLE_CTXS_NOT_SUPPORTED
   {"cudaGraphInstantiateMultipleDevicesNotSupported",                  {"hipGraphInstantiateMultipleDevicesNotSupported",           "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}},
 
+  // no analogues
+  {"cudaDriverEntryPointQueryResult",                                  {"hipDriverEntryPointQueryResult",                           "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+  // cudaDriverEntryPointQueryResult enum values
+  {"cudaDriverEntryPointSuccess",                                      {"cudaDriverEntryPointSuccess",                              "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+  {"cudaDriverEntryPointSymbolNotFound",                               {"hipDriverEntryPointSymbolNotFound",                        "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+  {"cudaDriverEntryPointVersionNotSufficent",                          {"hipDriverEntryPointVersionNotSufficent",                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+
+  // CUlaunchMemSyncDomain
+  {"cudaLaunchMemSyncDomain",                                          {"hipLaunchMemSyncDomain",                                   "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+  // cudaLaunchMemSyncDomain enum values
+  // CU_LAUNCH_MEM_SYNC_DOMAIN_DEFAULT
+  {"cudaLaunchMemSyncDomainDefault",                                   {"hipLaunchMemSyncDomainDefault",                            "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+  // CU_LAUNCH_MEM_SYNC_DOMAIN_REMOTE
+  {"cudaLaunchMemSyncDomainRemote",                                    {"hipLaunchMemSyncDomainRemote",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}},
 
   // 4. Typedefs
 
@@ -2419,6 +2456,23 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_TYPE_NAME_VER_MAP 
   {"cudaGraphInstantiateInvalidStructure",                             {CUDA_120, CUDA_0,   CUDA_0  }},
   {"cudaGraphInstantiateNodeOperationNotSupported",                    {CUDA_120, CUDA_0,   CUDA_0  }},
   {"cudaGraphInstantiateMultipleDevicesNotSupported",                  {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"cudaGraphInstantiateParams_st",                                    {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"cudaGraphInstantiateParams",                                       {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"cudaGraphExecUpdateResultInfo_st",                                 {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"cudaGraphExecUpdateResultInfo",                                    {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"cudaDriverEntryPointQueryResult",                                  {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"cudaDriverEntryPointSuccess",                                      {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"cudaDriverEntryPointSymbolNotFound",                               {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"cudaDriverEntryPointVersionNotSufficent",                          {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"cudaGraphInstantiateFlagUpload",                                   {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"cudaGraphInstantiateFlagDeviceLaunch",                             {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"cudaLaunchMemSyncDomain",                                          {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"cudaLaunchMemSyncDomainDefault",                                   {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"cudaLaunchMemSyncDomainRemote",                                    {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"cudaLaunchMemSyncDomainMap_st",                                    {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"cudaLaunchMemSyncDomainMap",                                       {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"cudaLaunchAttributeMemSyncDomainMap",                              {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"cudaLaunchAttributeMemSyncDomain",                                 {CUDA_120, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {
