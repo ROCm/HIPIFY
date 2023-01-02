@@ -1,24 +1,29 @@
 # HIPIFY
+HIPIFY is a set of tools to translate CUDA source code into portable [HIP][2]  C++ automatically.
 
-### Tools to translate CUDA source code into portable HIP C++ automatically
-## Table of Contents
+# rocBLAS
+rocBLAS is the AMD library for Basic Linear Algebra Subprograms (BLAS) on the [ROCm platform][1]. It is
+implemented in the [HIP programming language][2] and optimized for AMD GPUs.
 
-<!-- toc -->
+## Documentation
+Information about HIPIFY and other user topics can be found in the
+[HIPIFY documentation][3].
 
-- [hipify-clang](#clang)
-     * [Dependencies](#dependencies)
-     * [Usage](#hipify-clang-usage)
-     * [Building](#building)
-     * [Testing](#testing)
-     * [Linux](#linux)
-     * [Windows](#windows)
-- [hipify-perl](#perl)
-     * [Usage](#hipify-perl-usage)
-     * [Building](#hipify-perl-building)
-- [Supported CUDA APIs](#cuda-apis)
-- [Disclaimer](#disclaimer)
+## Prerequisites
+The [AMD ROCm install guide][4] describes how to set up the ROCm repositories
+and install the required platform dependencies.
 
-<!-- tocstop -->
+## Installing pre-built packages
+With the AMD ROCm package repositories installed, the `hipify` package can be
+retrieved from the system package manager. For example, on Ubuntu:
+
+    sudo apt-get update
+    sudo apt-get install hipify
+
+[1]: https://docs.amd.com
+[2]: https://github.com/ROCm-Developer-Tools/HIP
+[3]: https://rocmdocs.amd.com/HIPIFY/en/latest/
+[4]: https://rocmdocs.amd.com/en/latest/Installation_Guide/Installation-Guide.html
 
 ## <a name="clang"></a> hipify-clang
 
@@ -184,7 +189,7 @@ After applying all the matchers, the output HIP source is produced.
   </tbody>
 </table>
 
-`*`   `LLVM 3.x` is not supported anymore but might still work.
+`*`   `LLVM 3.x` is no longer maintained.
 
 `**`  Download the patch and unpack it into your `LLVM distributive directory`: a few header files will be overwritten; rebuilding of `LLVM` is not needed.
 

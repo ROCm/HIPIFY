@@ -1,0 +1,10 @@
+version: 2
+
+sphinx:
+  builder: html
+  fail_on_warning: false
+  
+# Optionally declare the Python requirements required to build your docs
+python:
+   install:
+   - requirements: docs/requirements.txt

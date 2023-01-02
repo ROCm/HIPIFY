@@ -1,0 +1,91 @@
+# Anywhere {branch} is used, the branch name will be substituted.
+# These comments will also be removed.
+subtrees:
+- caption: AMD ROCm
+  entries:
+    - title: Release Notes
+      url: https://
+root: index
+
+subtrees:
+- caption: Release Info
+  entries:
+    - title: Release Notes
+      url: https://
+# Example comment to have content replaced: {branch}
+
+- caption: Deploy ROCm
+  entries:
+
+    - file: quick_start
+
+
+- caption: APIs and Reference
+  entries:
+
+    - file: reference/all
+      title: All
+      subtrees:
+        - caption: HIP Runtime
+          entries:
+            - title: HIP API
+              url: https://github.com/
+            - title: HIPify
+              url: https://github.com/
+    - file: reference/framework_compatiblity/framework_compatiblity
+    - file: reference/kernel_userspace_compatibility/kernel_userspace_comp
+    - file: reference/math
+      title: Math Libraries
+      subtrees:
+        - entries:
+          - file: reference/blas
+            title: BLAS
+            subtrees:
+            - entries: 
+              - title: rocBLAS
+                url: https://rocmdocs.amd.com/projects/rocBLAS/en/{branch}/
+              - title: hipBLAS
+                url: https://rocmdocs.amd.com/projects/hipBLAS/en/{branch}/
+          - file: reference/solver
+            title: SOLVER
+            subtrees:
+            - entries: 
+              - title: rocSOLVER
+                url: https://rocmdocs.amd.com/projects/rocSOLVER/en/{branch}/
+              - title: hipSOLVER
+                url: https://rocmdocs.amd.com/projects/hipSOLVER/en/{branch}/
+    - file: reference/compilers
+      title: ROCm Compilers
+      subtrees:
+        - entries:
+          - file: reference/rocmcc/rocmcc
+            title: ROCmCC
+          - file: reference/openmp/openmp
+            title: OpenMP
+- caption: Understand ROCm
+  entries:
+    - title: Compiler Disambiguation
+      file: understand/compiler_disabiguation
+    - file: isv_deployment_win
+    - file: understand/deep_learning/deep_learning
+
+
+- caption: How to Guides
+  entries:
+    - title: How to Isolate GPUs in Docker
+      url: https://github.com/
+    - file: how_to/magma_install/magma_install
+    - file: how_to/pytorch_install/pytorch_install
+    - file: how_to/tensorflow_install/tensorflow_install
+
+
+- caption: Examples
+  entries:
+    - title: rocm-examples
+      url: https://github.com/
+    - file: examples/ai_ml_inferencing
+      title: AI/ML/Inferencing
+      subtrees:
+        - entries:
+            - file: examples/inception_casestudy/inception_casestudy
+            - file: examples/inception_casestudy_migraphx/inception_casestudy_migraphx
