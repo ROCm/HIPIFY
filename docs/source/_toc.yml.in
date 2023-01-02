@@ -4,19 +4,22 @@ defaults:
   numbered: True
 root: index
 subtrees:
-- file: hipify-clang
-- file: hipify-perl
-- file: supported_apis
+  - entries:
+    - file: hipify-clang
+    - file: hipify-perl
+    - file: supported_apis
+#    subtrees:
+#      - entries:
 #  entries:
-#    - file: tables/CUDA_Runtime_API_functions_supported_by_HIP
-#    - file: tables/CUDA_Driver_API_functions_supported_by_HIP
-#    - file: tables/cuComplex_API_supported_by_HIP
-#    - file: tables/CUDA_Device_API_supported_by_HIP
-#    - file: tables/CUDA_RTC_API_supported_by_HIP
-#    - file: tables/CUBLAS_API_supported_by_HIP
-#    - file: tables/CURAND_API_supported_by_HIP
-#    - file: tables/CUDNN_API_supported_by_HIP
-#    - file: tables/CUFFT_API_supported_by_HIP
-#    - file: tables/CUSPARSE_API_supported_by_HIP
-#    - file: tables/CUB_API_supported_by_HIP
+#      - file: tables/CUDA_Runtime_API_functions_supported_by_HIP
+#      - file: tables/CUDA_Driver_API_functions_supported_by_HIP
+#      - file: tables/cuComplex_API_supported_by_HIP
+#      - file: tables/CUDA_Device_API_supported_by_HIP
+#      - file: tables/CUDA_RTC_API_supported_by_HIP
+#      - file: tables/CUBLAS_API_supported_by_HIP
+#      - file: tables/CURAND_API_supported_by_HIP
+#      - file: tables/CUDNN_API_supported_by_HIP
+#      - file: tables/CUFFT_API_supported_by_HIP
+#      - file: tables/CUSPARSE_API_supported_by_HIP
+#      - file: tables/CUB_API_supported_by_HIP
 
