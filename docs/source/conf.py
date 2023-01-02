@@ -71,6 +71,8 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 #
 html_theme = "sphinx_book_theme"
 html_title = project
+html_static_path = ["_static"]
+html_css_files = ["custom.css"]
 html_theme_options = {
     "home_page_in_toc": True,
     "use_edit_page_button": True,
@@ -83,6 +85,8 @@ html_theme_options = {
     "body_max_width " : "none",
     "show_toc_level": "0"
 }
+
+
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
