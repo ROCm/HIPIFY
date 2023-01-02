@@ -1,6 +1,6 @@
 # CUDA DEVICE API supported by HIP
 
-## **1. Device Functions**
+## **Device Functions**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -780,7 +780,7 @@
 |`yn`| | | |`yn`|1.6.0| | | |
 |`ynf`| | | |`ynf`|1.6.0| | | |
 
-## **2. Device Types**
+## **Device Types**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
