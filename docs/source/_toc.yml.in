@@ -9,8 +9,9 @@ subtrees:
       url: https://
 root: index
 
+  - file: hipify-clang
+  - file: hipify-perl
 subtrees:
-
 - caption: Supported CUDA APIs 
   entries:
     - file: tables/CUDA_Runtime_API_functions_supported_by_HIP
