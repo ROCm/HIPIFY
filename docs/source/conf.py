@@ -80,6 +80,7 @@ html_theme_options = {
     "path_to_docs": "docs",
 
     "show_navbar_depth" : "2",
+    "body_max_width " : "none",
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,
