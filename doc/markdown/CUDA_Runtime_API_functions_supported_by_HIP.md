@@ -791,6 +791,10 @@ Unsupported
 |`cudaDeviceScheduleMask`| | | |`hipDeviceScheduleMask`|1.6.0| | | |
 |`cudaDeviceScheduleSpin`| | | |`hipDeviceScheduleSpin`|1.6.0| | | |
 |`cudaDeviceScheduleYield`| | | |`hipDeviceScheduleYield`|1.6.0| | | |
+|`cudaDriverEntryPointQueryResult`|12.0| | | | | | | |
+|`cudaDriverEntryPointSuccess`|12.0| | | | | | | |
+|`cudaDriverEntryPointSymbolNotFound`|12.0| | | | | | | |
+|`cudaDriverEntryPointVersionNotSufficent`|12.0| | | | | | | |
 |`cudaEglColorFormat`|9.1| | | | | | | |
 |`cudaEglColorFormatA`|9.1| | | | | | | |
 |`cudaEglColorFormatABGR`|9.1| | | | | | | |
@@ -1112,15 +1116,21 @@ Unsupported
 |`cudaGraphExecUpdateErrorTopologyChanged`|10.2| | |`hipGraphExecUpdateErrorTopologyChanged`|4.3.0| | | |
 |`cudaGraphExecUpdateErrorUnsupportedFunctionChange`|11.2| | |`hipGraphExecUpdateErrorUnsupportedFunctionChange`|4.3.0| | | |
 |`cudaGraphExecUpdateResult`|10.2| | |`hipGraphExecUpdateResult`|4.3.0| | | |
+|`cudaGraphExecUpdateResultInfo`|12.0| | | | | | | |
+|`cudaGraphExecUpdateResultInfo_st`|12.0| | | | | | | |
 |`cudaGraphExecUpdateSuccess`|10.2| | |`hipGraphExecUpdateSuccess`|4.3.0| | | |
 |`cudaGraphExec_t`|10.0| | |`hipGraphExec_t`|4.3.0| | | |
 |`cudaGraphInstantiateError`|12.0| | | | | | | |
 |`cudaGraphInstantiateFlagAutoFreeOnLaunch`|11.4| | |`hipGraphInstantiateFlagAutoFreeOnLaunch`|5.2.0| | | |
+|`cudaGraphInstantiateFlagDeviceLaunch`|12.0| | | | | | | |
+|`cudaGraphInstantiateFlagUpload`|12.0| | | | | | | |
 |`cudaGraphInstantiateFlagUseNodePriority`|11.7| | | | | | | |
 |`cudaGraphInstantiateFlags`|11.4| | |`hipGraphInstantiateFlags`|5.2.0| | | |
 |`cudaGraphInstantiateInvalidStructure`|12.0| | | | | | | |
 |`cudaGraphInstantiateMultipleDevicesNotSupported`|12.0| | | | | | | |
 |`cudaGraphInstantiateNodeOperationNotSupported`|12.0| | | | | | | |
+|`cudaGraphInstantiateParams`|12.0| | | | | | | |
+|`cudaGraphInstantiateParams_st`|12.0| | | | | | | |
 |`cudaGraphInstantiateResult`|12.0| | | | | | | |
 |`cudaGraphInstantiateSuccess`|12.0| | | | | | | |
 |`cudaGraphMemAttrReservedMemCurrent`|11.4| | |`hipGraphMemAttrReservedMemCurrent`|5.3.0| | | |
@@ -1198,6 +1208,8 @@ Unsupported
 |`cudaLaunchAttributeCooperative`|11.8| | | | | | | |
 |`cudaLaunchAttributeID`|11.8| | | | | | | |
 |`cudaLaunchAttributeIgnore`|11.8| | | | | | | |
+|`cudaLaunchAttributeMemSyncDomain`|12.0| | | | | | | |
+|`cudaLaunchAttributeMemSyncDomainMap`|12.0| | | | | | | |
 |`cudaLaunchAttributePriority`|11.8| | | | | | | |
 |`cudaLaunchAttributeProgrammaticEvent`|11.8| | | | | | | |
 |`cudaLaunchAttributeProgrammaticStreamSerialization`|11.8| | | | | | | |
@@ -1206,6 +1218,11 @@ Unsupported
 |`cudaLaunchAttribute_st`|11.8| | | | | | | |
 |`cudaLaunchConfig_st`|11.8| | | | | | | |
 |`cudaLaunchConfig_t`|11.8| | | | | | | |
+|`cudaLaunchMemSyncDomain`|12.0| | | | | | | |
+|`cudaLaunchMemSyncDomainDefault`|12.0| | | | | | | |
+|`cudaLaunchMemSyncDomainMap`|12.0| | |`hipLaunchMemSyncDomainMap`| | | | |
+|`cudaLaunchMemSyncDomainMap_st`|12.0| | |`hipLaunchMemSyncDomainMap`| | | | |
+|`cudaLaunchMemSyncDomainRemote`|12.0| | | | | | | |
 |`cudaLaunchParams`|9.0| | |`hipLaunchParams`|2.6.0| | | |
 |`cudaLimit`| | | |`hipLimit_t`|1.6.0| | | |
 |`cudaLimitDevRuntimePendingLaunchCount`| | | | | | | | |

@@ -3343,6 +3343,8 @@ sub simpleSubstitutions {
     subst("cudaKernelNodeAttrID", "hipKernelNodeAttrID", "type");
     subst("cudaKernelNodeAttrValue", "hipKernelNodeAttrValue", "type");
     subst("cudaKernelNodeParams", "hipKernelNodeParams", "type");
+    subst("cudaLaunchMemSyncDomainMap", "hipLaunchMemSyncDomainMap", "type");
+    subst("cudaLaunchMemSyncDomainMap_st", "hipLaunchMemSyncDomainMap", "type");
     subst("cudaLaunchParams", "hipLaunchParams", "type");
     subst("cudaLimit", "hipLimit_t", "type");
     subst("cudaMemAccessDesc", "hipMemAccessDesc", "type");
@@ -6131,6 +6133,9 @@ sub warnUnsupportedFunctions {
         "cudaLimitMaxL2FetchGranularity",
         "cudaLimitDevRuntimeSyncDepth",
         "cudaLimitDevRuntimePendingLaunchCount",
+        "cudaLaunchMemSyncDomainRemote",
+        "cudaLaunchMemSyncDomainDefault",
+        "cudaLaunchMemSyncDomain",
         "cudaLaunchKernelExC",
         "cudaLaunchConfig_t",
         "cudaLaunchConfig_st",
@@ -6140,6 +6145,8 @@ sub warnUnsupportedFunctions {
         "cudaLaunchAttributeProgrammaticStreamSerialization",
         "cudaLaunchAttributeProgrammaticEvent",
         "cudaLaunchAttributePriority",
+        "cudaLaunchAttributeMemSyncDomainMap",
+        "cudaLaunchAttributeMemSyncDomain",
         "cudaLaunchAttributeIgnore",
         "cudaLaunchAttributeID",
         "cudaLaunchAttributeCooperative",
@@ -6181,15 +6188,21 @@ sub warnUnsupportedFunctions {
         "cudaGraphKernelNodeCopyAttributes",
         "cudaGraphInstantiateSuccess",
         "cudaGraphInstantiateResult",
+        "cudaGraphInstantiateParams_st",
+        "cudaGraphInstantiateParams",
         "cudaGraphInstantiateNodeOperationNotSupported",
         "cudaGraphInstantiateMultipleDevicesNotSupported",
         "cudaGraphInstantiateInvalidStructure",
         "cudaGraphInstantiateFlagUseNodePriority",
+        "cudaGraphInstantiateFlagUpload",
+        "cudaGraphInstantiateFlagDeviceLaunch",
         "cudaGraphInstantiateError",
         "cudaGraphExternalSemaphoresWaitNodeSetParams",
         "cudaGraphExternalSemaphoresWaitNodeGetParams",
         "cudaGraphExternalSemaphoresSignalNodeSetParams",
         "cudaGraphExternalSemaphoresSignalNodeGetParams",
+        "cudaGraphExecUpdateResultInfo_st",
+        "cudaGraphExecUpdateResultInfo",
         "cudaGraphExecUpdateErrorAttributesChanged",
         "cudaGraphExecExternalSemaphoresWaitNodeSetParams",
         "cudaGraphExecExternalSemaphoresSignalNodeSetParams",
@@ -6422,6 +6435,10 @@ sub warnUnsupportedFunctions {
         "cudaEGLStreamConsumerConnectWithFlags",
         "cudaEGLStreamConsumerConnect",
         "cudaEGLStreamConsumerAcquireFrame",
+        "cudaDriverEntryPointVersionNotSufficent",
+        "cudaDriverEntryPointSymbolNotFound",
+        "cudaDriverEntryPointSuccess",
+        "cudaDriverEntryPointQueryResult",
         "cudaDevicePropDontCare",
         "cudaDeviceMask",
         "cudaDeviceGetTexture1DLinearMaxWidth",
