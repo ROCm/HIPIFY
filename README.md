@@ -1,10 +1,6 @@
 # HIPIFY
 HIPIFY is a set of tools to translate CUDA source code into portable [HIP][2]  C++ automatically.
 
-# rocBLAS
-rocBLAS is the AMD library for Basic Linear Algebra Subprograms (BLAS) on the [ROCm platform][1]. It is
-implemented in the [HIP programming language][2] and optimized for AMD GPUs.
-
 ## Documentation
 Information about HIPIFY and other user topics can be found in the
 [HIPIFY documentation][3].

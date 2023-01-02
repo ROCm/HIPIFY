@@ -47,6 +47,10 @@ executing==1.2.0
     # via stack-data
 fastjsonschema==2.16.2
     # via nbformat
+gitdb==4.0.10
+    # via gitpython
+gitpython==3.1.29
+    # via -r /home/saadrahi/HIPIFY/docs/source/requirements.in
 greenlet==2.0.1
     # via sqlalchemy
 idna==3.4
@@ -171,6 +175,8 @@ six==1.16.0
     # via
     #   asttokens
     #   python-dateutil
+smmap==5.0.0
+    # via gitdb
 snowballstemmer==2.2.0
     # via sphinx
 soupsieve==2.3.2.post1
