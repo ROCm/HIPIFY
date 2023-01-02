@@ -1,7 +1,7 @@
 # Anywhere {branch} is used, the branch name will be substituted.
 # These comments will also be removed.
 subtrees:
-- caption: AMD ROCm
+- caption: HIPIFY
   entries:
     - title: Release Notes
       url: https://
