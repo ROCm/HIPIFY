@@ -17,7 +17,7 @@ After applying all the matchers, the output HIP source is produced.
 2. CUDA should be installed and provided in case of multiple installations by `--cuda-path` option.
 3. All the includes and defines should be provided to transform code successfully.
 
-## <a name="dependencies"></a> hipify-clang: dependencies
+## Dependencies
 
 `hipify-clang` requires:
 
@@ -204,7 +204,7 @@ The compilation database should be provided in the `compile_commands.json` file 
 
 For a list of `hipify-clang` options, run `hipify-clang --help`.
 
-## <a name="building"></a> hipify-clang: building
+## Building
 
 ```bash
 cd .. \
@@ -226,7 +226,7 @@ Debug build type `-DCMAKE_BUILD_TYPE=Debug` is also supported and tested; `LLVM+
 
 The binary can then be found at `./dist/hipify-clang` or at the folder specified by the `-DCMAKE_INSTALL_PREFIX` option.
 
-## <a name="testing"></a> hipify-clang: testing
+## Testing
 
 `hipify-clang` has unit tests using `LLVM` [`lit`](https://llvm.org/docs/CommandGuide/lit.html)/[`FileCheck`](https://llvm.org/docs/CommandGuide/FileCheck.html).
 
@@ -362,7 +362,7 @@ Run `Visual Studio 17 2022`, open the generated `LLVM.sln`, build all, build pro
 
 10. Build and run tests:
 
-## <a name="Linux"></a> hipify-clang: Linux
+## Linux
 
 On Linux the following configurations are tested:
 
@@ -536,7 +536,7 @@ Testing Time: 6.94s
   Expected Passes    : 90
 [100%] Built target test-hipify
 ```
-## <a name="windows"></a> hipify-clang: Windows
+## Windows
 
 *Tested configurations:*
 
