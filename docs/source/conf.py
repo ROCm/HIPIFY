@@ -81,6 +81,7 @@ html_theme_options = {
 
     "show_navbar_depth" : "2",
     "body_max_width " : "none",
+    "show_toc_level": "0"
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,
