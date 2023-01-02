@@ -2,15 +2,10 @@
 # These comments will also be removed.
 defaults:
   numbered: True
-subtrees:
-- caption: HIPIFY
-  entries:
-    - title: Release Notes
-      url: https://
-- file: hipify-clang
-- file: hipify-perl
 root: index
 subtrees:
+- file: hipify-clang
+- file: hipify-perl
 - caption: Supported CUDA APIs 
   entries:
     - file: tables/CUDA_Runtime_API_functions_supported_by_HIP
