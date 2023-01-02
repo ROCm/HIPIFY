@@ -8,7 +8,7 @@ def format_toc(repo_path: Union[str, os.PathLike, None] = None):
     if repo_path is None:
         repo_path = pwd.parent
     at_start = True
-    repo = Repo(repo_path)
+    repo = Repo(repo_path, search_parent_directories=True)
     assert not repo.bare
     try:
         branch = repo.active_branch.name
