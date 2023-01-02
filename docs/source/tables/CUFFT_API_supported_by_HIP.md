@@ -1,6 +1,6 @@
 # CUFFT API supported by HIP
 
-## **1. CUFFT Data types**
+## **CUFFT Data types**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -89,7 +89,7 @@
 |`cufftXtWorkAreaPolicy`|9.2| | | | | | | |
 |`cufftXtWorkAreaPolicy_t`|9.2| | | | | | | |
 
-## **2. CUFFT API functions**
+## **CUFFT API functions**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|

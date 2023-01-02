@@ -1,6 +1,6 @@
 # CUDA RTC API supported by HIP
 
-## **1. RTC Data types**
+## **RTC Data types**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -19,7 +19,7 @@
 |`nvrtcProgram`| | | |`hiprtcProgram`|2.6.0| | | |
 |`nvrtcResult`| | | |`hiprtcResult`|2.6.0| | | |
 
-## **2. RTC API functions**
+## **RTC API functions**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|

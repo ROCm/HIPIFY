@@ -1,6 +1,6 @@
 # CUSPARSE API supported by HIP
 
-## **4. CUSPARSE Types References**
+## **CUSPARSE Types References**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -177,7 +177,7 @@
 |`pruneInfo`|9.0| | | | | | | |
 |`pruneInfo_t`|9.0| | |`pruneInfo_t`|3.9.0| | | |
 
-## **5. CUSPARSE Management Function Reference**
+## **CUSPARSE Management Function Reference**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -189,7 +189,7 @@
 |`cusparseSetPointerMode`| | | |`hipsparseSetPointerMode`|1.9.2| | | |
 |`cusparseSetStream`| | | |`hipsparseSetStream`|1.9.2| | | |
 
-## **6. CUSPARSE Logging**
+## **CUSPARSE Logging**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -200,7 +200,7 @@
 |`cusparseLoggerSetLevel`|11.5| | | | | | | |
 |`cusparseLoggerSetMask`|11.5| | | | | | | |
 
-## **7. CUSPARSE Helper Function Reference**
+## **CUSPARSE Helper Function Reference**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -242,7 +242,7 @@
 |`cusparseSetMatIndexBase`| | | |`hipsparseSetMatIndexBase`|1.9.2| | | |
 |`cusparseSetMatType`| | | |`hipsparseSetMatType`|1.9.2| | | |
 
-## **8. CUSPARSE Level 1 Function Reference**
+## **CUSPARSE Level 1 Function Reference**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -271,7 +271,7 @@
 |`cusparseZgthrz`| |11.0| |`hipsparseZgthrz`|3.1.0| | | |
 |`cusparseZsctr`| |11.0| |`hipsparseZsctr`|3.1.0| | | |
 
-## **9. CUSPARSE Level 2 Function Reference**
+## **CUSPARSE Level 2 Function Reference**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -358,7 +358,7 @@
 |`cusparseZhybsv_analysis`| |10.2|11.0| | | | | |
 |`cusparseZhybsv_solve`| |10.2|11.0| | | | | |
 
-## **10. CUSPARSE Level 3 Function Reference**
+## **CUSPARSE Level 3 Function Reference**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -417,7 +417,7 @@
 |`cusparseZcsrsm_solve`| |10.2|11.0| | | | | |
 |`cusparseZgemmi`|8.0|11.0| |`hipsparseZgemmi`|3.7.0| | | |
 
-## **11. CUSPARSE Extra Function Reference**
+## **CUSPARSE Extra Function Reference**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -450,7 +450,7 @@
 |`cusparseZcsrgemm2`| |11.0| |`hipsparseZcsrgemm2`|3.1.0| | | |
 |`cusparseZcsrgemm2_bufferSizeExt`| |11.0| |`hipsparseZcsrgemm2_bufferSizeExt`|3.1.0| | | |
 
-## **12. CUSPARSE Preconditioners Reference**
+## **CUSPARSE Preconditioners Reference**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -592,7 +592,7 @@
 |`cusparseZgtsvStridedBatch`| |10.2|11.0| | | | | |
 |`cusparseZgtsv_nopivot`| |10.2|11.0| | | | | |
 
-## **13. CUSPARSE Reorderings Reference**
+## **CUSPARSE Reorderings Reference**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -601,7 +601,7 @@
 |`cusparseScsrcolor`| | | |`hipsparseScsrcolor`|4.5.0| | | |
 |`cusparseZcsrcolor`| | | |`hipsparseZcsrcolor`|4.5.0| | | |
 
-## **14. CUSPARSE Format Conversion Reference**
+## **CUSPARSE Format Conversion Reference**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -777,7 +777,7 @@
 |`cusparseZnnz`| | | |`hipsparseZnnz`|3.2.0| | | |
 |`cusparseZnnz_compress`|8.0| | |`hipsparseZnnz_compress`|3.5.0| | | |
 
-## **15. CUSPARSE Generic API Reference**
+## **CUSPARSE Generic API Reference**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|

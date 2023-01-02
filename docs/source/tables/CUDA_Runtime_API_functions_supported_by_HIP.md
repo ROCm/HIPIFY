@@ -1,6 +1,6 @@
 # CUDA Runtime API supported by HIP
 
-## **1. Device Management**
+## **Device Management**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -37,7 +37,7 @@
 |`cudaSetDeviceFlags`| | | |`hipSetDeviceFlags`|1.6.0| | | |
 |`cudaSetValidDevices`| | | | | | | | |
 
-## **2. Thread Management [DEPRECATED]**
+## **Thread Management [DEPRECATED]**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -48,7 +48,7 @@
 |`cudaThreadSetLimit`| |10.0| | | | | | |
 |`cudaThreadSynchronize`| |10.0| |`hipDeviceSynchronize`|1.6.0| | | |
 
-## **3. Error Handling**
+## **Error Handling**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -57,7 +57,7 @@
 |`cudaGetLastError`| | | |`hipGetLastError`|1.6.0| | | |
 |`cudaPeekAtLastError`| | | |`hipPeekAtLastError`|1.6.0| | | |
 
-## **4. Stream Management**
+## **Stream Management**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -82,7 +82,7 @@
 |`cudaStreamWaitEvent`| | | |`hipStreamWaitEvent`|1.6.0| | | |
 |`cudaThreadExchangeStreamCaptureMode`|10.1| | |`hipThreadExchangeStreamCaptureMode`|5.2.0| | | |
 
-## **5. Event Management**
+## **Event Management**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -95,7 +95,7 @@
 |`cudaEventRecordWithFlags`|11.1| | | | | | | |
 |`cudaEventSynchronize`| | | |`hipEventSynchronize`|1.6.0| | | |
 
-## **6. External Resource Interoperability**
+## **External Resource Interoperability**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -108,7 +108,7 @@
 |`cudaSignalExternalSemaphoresAsync`|10.0| | |`hipSignalExternalSemaphoresAsync`|4.4.0| | | |
 |`cudaWaitExternalSemaphoresAsync`|10.0| | |`hipWaitExternalSemaphoresAsync`|4.4.0| | | |
 
-## **7. Execution Control**
+## **Execution Control**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -126,7 +126,7 @@
 |`cudaSetDoubleForDevice`| |10.0| | | | | | |
 |`cudaSetDoubleForHost`| |10.0| | | | | | |
 
-## **8. Occupancy**
+## **Occupancy**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -140,7 +140,7 @@
 |`cudaOccupancyMaxPotentialBlockSizeWithFlags`| | | |`hipOccupancyMaxPotentialBlockSizeWithFlags`|3.5.0| | | |
 |`cudaOccupancyMaxPotentialClusterSize`|11.8| | | | | | | |
 
-## **9. Memory Management**
+## **Memory Management**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -202,7 +202,7 @@
 |`make_cudaPitchedPtr`| | | |`make_hipPitchedPtr`|1.7.0| | | |
 |`make_cudaPos`| | | |`make_hipPos`|1.7.0| | | |
 
-## **10. Memory Management [DEPRECATED]**
+## **Memory Management [DEPRECATED]**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -212,7 +212,7 @@
 |`cudaMemcpyToArray`| |10.1| |`hipMemcpyToArray`|1.6.0|3.8.0| | |
 |`cudaMemcpyToArrayAsync`| |10.1| | | | | | |
 
-## **11. Stream Ordered Memory Allocator**
+## **Stream Ordered Memory Allocator**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -231,13 +231,13 @@
 |`cudaMemPoolSetAttribute`|11.2| | |`hipMemPoolSetAttribute`|5.2.0| | | |
 |`cudaMemPoolTrimTo`|11.2| | |`hipMemPoolTrimTo`|5.2.0| | | |
 
-## **12. Unified Addressing**
+## **Unified Addressing**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
 |`cudaPointerGetAttributes`| | | |`hipPointerGetAttributes`|1.6.0| | | |
 
-## **13. Peer Device Memory Access**
+## **Peer Device Memory Access**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -245,7 +245,7 @@
 |`cudaDeviceDisablePeerAccess`| | | |`hipDeviceDisablePeerAccess`|1.9.0| | | |
 |`cudaDeviceEnablePeerAccess`| | | |`hipDeviceEnablePeerAccess`|1.9.0| | | |
 
-## **14. OpenGL Interoperability**
+## **OpenGL Interoperability**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -254,7 +254,7 @@
 |`cudaGraphicsGLRegisterImage`| | | |`hipGraphicsGLRegisterImage`|5.1.0| | | |
 |`cudaWGLGetDevice`| | | | | | | | |
 
-## **15. OpenGL Interoperability [DEPRECATED]**
+## **OpenGL Interoperability [DEPRECATED]**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -267,7 +267,7 @@
 |`cudaGLUnmapBufferObjectAsync`| |10.0| | | | | | |
 |`cudaGLUnregisterBufferObject`| |10.0| | | | | | |
 
-## **16. Direct3D 9 Interoperability**
+## **Direct3D 9 Interoperability**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -277,7 +277,7 @@
 |`cudaD3D9SetDirect3DDevice`| | | | | | | | |
 |`cudaGraphicsD3D9RegisterResource`| | | | | | | | |
 
-## **17. Direct3D 9 Interoperability [DEPRECATED]**
+## **Direct3D 9 Interoperability [DEPRECATED]**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -292,7 +292,7 @@
 |`cudaD3D9UnmapResources`| |10.0| | | | | | |
 |`cudaD3D9UnregisterResource`| |10.0| | | | | | |
 
-## **18. Direct3D 10 Interoperability**
+## **Direct3D 10 Interoperability**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -300,7 +300,7 @@
 |`cudaD3D10GetDevices`| | | | | | | | |
 |`cudaGraphicsD3D10RegisterResource`| | | | | | | | |
 
-## **19. Direct3D 10 Interoperability [DEPRECATED]**
+## **Direct3D 10 Interoperability [DEPRECATED]**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -317,7 +317,7 @@
 |`cudaD3D10UnmapResources`| |10.0| | | | | | |
 |`cudaD3D10UnregisterResource`| |10.0| | | | | | |
 
-## **20. Direct3D 11 Interoperability**
+## **Direct3D 11 Interoperability**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -325,14 +325,14 @@
 |`cudaD3D11GetDevices`| | | | | | | | |
 |`cudaGraphicsD3D11RegisterResource`| | | | | | | | |
 
-## **21. Direct3D 11 Interoperability [DEPRECATED]**
+## **Direct3D 11 Interoperability [DEPRECATED]**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
 |`cudaD3D11GetDirect3DDevice`| |10.0| | | | | | |
 |`cudaD3D11SetDirect3DDevice`| |10.0| | | | | | |
 
-## **22. VDPAU Interoperability**
+## **VDPAU Interoperability**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -341,7 +341,7 @@
 |`cudaVDPAUGetDevice`| | | | | | | | |
 |`cudaVDPAUSetVDPAUDevice`| | | | | | | | |
 
-## **23. EGL Interoperability**
+## **EGL Interoperability**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -358,7 +358,7 @@
 |`cudaGraphicsEGLRegisterImage`|9.1| | | | | | | |
 |`cudaGraphicsResourceGetMappedEglFrame`|9.1| | | | | | | |
 
-## **24. Graphics Interoperability**
+## **Graphics Interoperability**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -370,7 +370,7 @@
 |`cudaGraphicsUnmapResources`| | | |`hipGraphicsUnmapResources`|4.5.0| | | |
 |`cudaGraphicsUnregisterResource`| | | |`hipGraphicsUnregisterResource`|4.5.0| | | |
 
-## **25. Texture Reference Management [DEPRECATED]**
+## **Texture Reference Management [DEPRECATED]**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -384,14 +384,14 @@
 |`cudaGetTextureReference`| |11.0| |`hipGetTextureReference`|1.7.0|5.3.0| | |
 |`cudaUnbindTexture`| |11.0| |`hipUnbindTexture`|1.6.0|3.8.0| | |
 
-## **26. Surface Reference Management [DEPRECATED]**
+## **Surface Reference Management [DEPRECATED]**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
 |`cudaBindSurfaceToArray`| |11.0| | | | | | |
 |`cudaGetSurfaceReference`| |11.0| | | | | | |
 
-## **27. Texture Object Management**
+## **Texture Object Management**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -403,7 +403,7 @@
 |`cudaGetTextureObjectTextureDesc`| | | |`hipGetTextureObjectTextureDesc`|1.7.0| | | |
 |`cudaGetTextureObjectTextureDesc_v2`|11.8| | | | | | | |
 
-## **28. Surface Object Management**
+## **Surface Object Management**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -411,14 +411,14 @@
 |`cudaDestroySurfaceObject`| | | |`hipDestroySurfaceObject`|1.9.0| | | |
 |`cudaGetSurfaceObjectResourceDesc`| | | | | | | | |
 
-## **29. Version Management**
+## **Version Management**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
 |`cudaDriverGetVersion`| | | |`hipDriverGetVersion`|1.6.0| | | |
 |`cudaRuntimeGetVersion`| | | |`hipRuntimeGetVersion`|1.6.0| | | |
 
-## **30. Graph Management**
+## **Graph Management**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -504,36 +504,36 @@
 |`cudaUserObjectRelease`|11.3| | |`hipUserObjectRelease`|5.3.0| | | |
 |`cudaUserObjectRetain`|11.3| | |`hipUserObjectRetain`|5.3.0| | | |
 
-## **31. Driver Entry Point Access**
+## **Driver Entry Point Access**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
 |`cudaGetDriverEntryPoint`|11.3| | | | | | | |
 
-## **32. C++ API Routines**
+## **C++ API Routines**
 
 Unsupported
 
-## **33. Interactions with the CUDA Driver API**
+## **Interactions with the CUDA Driver API**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
 |`cudaGetFuncBySymbol`|11.0| | | | | | | |
 
-## **34. Profiler Control [DEPRECATED]**
+## **Profiler Control [DEPRECATED]**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
 |`cudaProfilerInitialize`| |11.0| | | | | | |
 
-## **35. Profiler Control**
+## **Profiler Control**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
 |`cudaProfilerStart`| | | |`hipProfilerStart`|1.6.0|3.0.0| | |
 |`cudaProfilerStop`| | | |`hipProfilerStop`|1.6.0|3.0.0| | |
 
-## **36. Data types used by CUDA Runtime**
+## **Data types used by CUDA Runtime**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -1409,7 +1409,7 @@ Unsupported
 |`surfaceReference`| | | |`surfaceReference`|1.9.0| | | |
 |`textureReference`| | | |`textureReference`|1.6.0| | | |
 
-## **37. Execution Control [REMOVED]**
+## **Execution Control [REMOVED]**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
