@@ -1,6 +1,6 @@
 # HIPIFY Documentation
 
-Tools to translate CUDA source code into portable HIP C++ automatically.
+hipify-clang and hipify-pearl are tools to translate CUDA source code into portable HIP C++ automatically.
 
  * [hipify-clang](hipify-clang.md)
  * [hipify-perl](hipify-perl.md)
