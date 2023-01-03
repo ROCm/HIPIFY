@@ -173,7 +173,7 @@ In most cases, you can get a suitable version of `LLVM+CLANG` with your package 
 Failing that or having multiple versions of `LLVM`, you can [download a release archive](http://releases.llvm.org/), build or install it, and set
 [CMAKE_PREFIX_PATH](https://cmake.org/cmake/help/v3.5/variable/CMAKE_PREFIX_PATH.html) so `cmake` can find it; for instance: `-DCMAKE_PREFIX_PATH=d:\LLVM\15.0.6\dist`
 
-## <a name="hipify-clang-usage"></a> hipify-clang: usage
+## Usage
 
 To process a file, `hipify-clang` needs access to the same headers that would be required to compile it with clang.
 
