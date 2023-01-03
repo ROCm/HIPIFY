@@ -1,6 +1,6 @@
 # CUBLAS API supported by HIP
 
-## **CUBLAS Data types**
+## CUBLAS Data types
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -110,7 +110,7 @@
 |`cublasStatus`| | | |`hipblasStatus_t`|1.8.2| | | |
 |`cublasStatus_t`| | | |`hipblasStatus_t`|1.8.2| | | |
 
-## ** CUDA Datatypes Reference**
+## CUDA Datatypes Reference
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -147,7 +147,7 @@
 |`cudaDataType`|8.0| | |`hipblasDatatype_t`|1.8.2| | | |
 |`cudaDataType_t`|8.0| | |`hipblasDatatype_t`|1.8.2| | | |
 
-## ** CUBLAS Helper Function Reference**
+## CUBLAS Helper Function Reference
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -196,7 +196,7 @@
 |`cublasShutdown`| | | | | | | | |
 |`cublasXerbla`| | | | | | | | |
 
-## ** CUBLAS Level-1 Function Reference**
+## CUBLAS Level-1 Function Reference
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -310,7 +310,7 @@
 |`cublasZswap`| | | |`hipblasZswap`|3.0.0| | | |
 |`cublasZswap_v2`| | | |`hipblasZswap`|3.0.0| | | |
 
-## ** CUBLAS Level-2 Function Reference**
+## CUBLAS Level-2 Function Reference
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -459,7 +459,7 @@
 |`cublasZtrsv`| | | |`hipblasZtrsv`|3.5.0| | | |
 |`cublasZtrsv_v2`| | | |`hipblasZtrsv`|3.5.0| | | |
 
-## ** CUBLAS Level-3 Function Reference**
+## CUBLAS Level-3 Function Reference
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -546,7 +546,7 @@
 |`cublasZtrsm`| | | |`hipblasZtrsm`|3.5.0| | | |
 |`cublasZtrsm_v2`| | | |`hipblasZtrsm`|3.5.0| | | |
 
-## ** BLAS-like Extension**
+## BLAS-like Extension
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
