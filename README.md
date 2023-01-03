@@ -2,7 +2,7 @@
 HIPIFY is a set of tools to translate CUDA source code into portable [HIP](https://github.com/ROCm-Developer-Tools/HIP) C++ automatically.
 
 ## Documentation
-Information about HIPIFY and other user topics can be found in the [HIPIFY documentation](https://rocmdocs.amd.com/projects/HIPIFY/en/latest/).
+Information about HIPIFY and other user topics is found in the [HIPIFY documentation](https://rocmdocs.amd.com/projects/HIPIFY/en/latest/).
 The documentation source is browseable [here](docs/source/index.md).
 
 ## Prerequisites
