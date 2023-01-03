@@ -73,6 +73,7 @@ html_theme = "sphinx_book_theme"
 html_title = project
 html_static_path = ["_static"]
 html_css_files = ["custom.css"]
+html_js_files = ["code_word_breaks.js"]
 html_theme_options = {
     "home_page_in_toc": True,
     "use_edit_page_button": True,
