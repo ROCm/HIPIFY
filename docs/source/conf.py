@@ -88,7 +88,8 @@ html_theme_options = {
     "show_toc_level": "0"
 }
 
-
+html_show_sphinx = False
+html_favicon = "https://www.amd.com/themes/custom/amd/favicon.ico"
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
