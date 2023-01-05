@@ -1,2 +1,6 @@
 *.json
 *.hip
+**/__pycache__/*
+**/_build/*
+_toc.yml
+.python-version
