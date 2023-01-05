@@ -74,6 +74,7 @@ html_title = project
 html_static_path = ["_static"]
 html_css_files = ["custom.css", "rocm_header.css"]
 html_js_files = ["code_word_breaks.js"]
+html_extra_path = ["_images"]
 html_theme_options = {
     "home_page_in_toc": True,
     "use_edit_page_button": True,

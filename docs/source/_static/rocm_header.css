@@ -26,6 +26,11 @@
     margin: 1.5em;
 }
 
+.rocm-header img#rocm-logo{
+    margin: 0;
+    max-height: 100%;
+}
+
 .rocm-header-buttons {
     display: inline-block;
     height: fit-content;
@@ -44,6 +49,14 @@
     height: fit-content;
     text-align: center;
     vertical-align: middle;
+}
+
+.rocm-header-link.rocm-header-last {
+    position: absolute;
+    right: 4em;
+    top: 50%;
+    transform: translate(0, -50%);
+    height: 100%;
 }
 
 .rocm-header-link .rocm-link-box, .rocm-header-link p {
