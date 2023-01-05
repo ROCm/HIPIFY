@@ -8,6 +8,7 @@
     overflow: hidden;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 16px;
+    text-align: left;
 }
 
 .rocm-header a {
@@ -22,7 +23,7 @@
 
 .rocm-header img#amd-logo{
     filter: invert(100%);
-    margin: 0.75em;
+    margin: 1.5em;
 }
 
 .rocm-header-buttons {
@@ -31,6 +32,10 @@
     max-width: 100%;
     width: fit-content;
     vertical-align: middle;
+}
+
+.rocm-header-link:first-child {
+    margin-left: 4em;
 }
 
 .rocm-header-link {
@@ -44,13 +49,20 @@
 .rocm-header-link .rocm-link-box, .rocm-header-link p {
     vertical-align: middle;
     color: white;
+}
+
+.rocm-header-link .rocm-link box {
     font-size: x-large;
+}
+
+.rocm-header-link p {
+    font-size: medium;
 }
 
 .rocm-header-link img, .rocm-header-link .rocm-link-box {
     max-height: 50px;
-    margin-left: 1em;
-    margin-right: 1em;
+    margin-left: 2em;
+    margin-right: 2em;
 }
 
 .rocm-header-link .glow-wrap{
