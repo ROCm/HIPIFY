@@ -6,7 +6,7 @@
     max-width: 100%;
     min-height: 50px;
     overflow: hidden;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: 'Noto Sans', sans-serif;
     font-size: 16px;
     text-align: left;
 }
@@ -22,8 +22,8 @@
 }
 
 .rocm-header img#amd-logo{
-    filter: invert(100%);
     margin: 1.5em;
+    width: 8.25rem;
 }
 
 .rocm-header img#rocm-logo{
@@ -69,7 +69,7 @@
 }
 
 .rocm-header-link p {
-    font-size: medium;
+    font-size: 16px;
 }
 
 .rocm-header-link img, .rocm-header-link .rocm-link-box {

@@ -1,0 +1,14 @@
+<div class="rocm-footer">
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main">
+        {% set navbar_class, navbar_align = navbar_align_class() %}
+        <div id="navbar-start"></div>
+        <div class="{{ navbar_class }} navbar-header-items">
+            <div id="navbar-center" class="{{ navbar_align }}"></div>
+            <div id="navbar-end">
+                <div class="navbar-end-item">
+                    {%- include "components/social-links.html" with context -%}
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>

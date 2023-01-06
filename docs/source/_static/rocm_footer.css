@@ -1,0 +1,21 @@
+.rocm-footer {
+    background-color: black;
+}
+
+.rocm-footer .navbar {
+    position: static;
+}
+
+.rocm-footer .navbar-header-items {
+    position: absolute;
+    right: 0;
+    width: fit-content;
+}
+
+.rocm-footer #navbar-icon-links i.fa:before, .rocm-footer #navbar-icon-links i.fab:before {
+    color: white;
+}
+
+#navbar-icon-links .nav-item {
+    margin-left: 1rem;
+}

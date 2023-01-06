@@ -72,7 +72,7 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 html_theme = "sphinx_book_theme"
 html_title = project
 html_static_path = ["_static"]
-html_css_files = ["custom.css", "rocm_header.css"]
+html_css_files = ["custom.css", "rocm_header.css", "rocm_footer.css"]
 html_js_files = ["code_word_breaks.js"]
 html_extra_path = ["_images"]
 html_theme_options = {
@@ -83,9 +83,10 @@ html_theme_options = {
     "repository_branch": "amd-staging",
     "path_to_docs": "docs",
 
-    "show_navbar_depth" : "2",
-    "body_max_width " : "none",
-    "show_toc_level": "0"
+    "show_navbar_depth": "2",
+    "body_max_width ": "none",
+    "show_toc_level": "0",
+
 }
 
 html_show_sphinx = False
