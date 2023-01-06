@@ -19,7 +19,7 @@ from format_toc import format_toc
 # -- Project information -----------------------------------------------------
 
 project = "HIPIFY Documentation"
-copyright = "2022, Advanced Micro Devices Ltd. "
+copyright = "2022-2023, Advanced Micro Devices Ltd. "
 author = "Advanced Micro Devices <a href=\"https://\">Disclaimer and Licensing Info</a> "
 
 
@@ -78,9 +78,9 @@ html_extra_path = ["_images"]
 html_theme_options = {
     "home_page_in_toc": True,
     "use_edit_page_button": True,
-    "repository_url": "https://github.com/RadeonOpenCompute/ROCm_Documentation_Overview/",
+    "repository_url": "https://github.com/ROCm-Developer-Tools/HIPIFY/",
 #TODO: import branch based on current git checkout
-    "repository_branch": "main",
+    "repository_branch": "amd-staging",
     "path_to_docs": "docs",
 
     "show_navbar_depth" : "2",
