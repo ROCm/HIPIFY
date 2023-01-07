@@ -1198,6 +1198,8 @@ Unsupported
 |`cudaKernelNodeAttributeClusterDimension`|11.8| | | | | | | |
 |`cudaKernelNodeAttributeClusterSchedulingPolicyPreference`|11.8| | | | | | | |
 |`cudaKernelNodeAttributeCooperative`|11.0| | |`hipKernelNodeAttributeCooperative`|5.2.0| | | |
+|`cudaKernelNodeAttributeMemSyncDomain`|12.0| | | | | | | |
+|`cudaKernelNodeAttributeMemSyncDomainMap`|12.0| | | | | | | |
 |`cudaKernelNodeAttributePriority`|11.7| | | | | | | |
 |`cudaKernelNodeParams`|10.0| | |`hipKernelNodeParams`|4.3.0| | | |
 |`cudaKeyValuePair`| | |12.0| | | | | |
@@ -1361,6 +1363,9 @@ Unsupported
 |`cudaStreamAttrID`|11.0| | | | | | | |
 |`cudaStreamAttrValue`|11.0| | | | | | | |
 |`cudaStreamAttributeAccessPolicyWindow`|11.0| | | | | | | |
+|`cudaStreamAttributeMemSyncDomain`|12.0| | | | | | | |
+|`cudaStreamAttributeMemSyncDomainMap`|12.0| | | | | | | |
+|`cudaStreamAttributePriority`|12.0| | | | | | | |
 |`cudaStreamAttributeSynchronizationPolicy`|11.0| | | | | | | |
 |`cudaStreamCallback_t`| | | |`hipStreamCallback_t`|1.6.0| | | |
 |`cudaStreamCaptureMode`|10.1| | |`hipStreamCaptureMode`|4.3.0| | | |
