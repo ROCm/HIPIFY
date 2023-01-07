@@ -1563,13 +1563,6 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CU_SYNC_POLICY_BLOCKING_SYNC
   {"cudaSyncPolicyBlockingSync",                                       {"hipSyncPolicyBlockingSync",                                "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 4
 
-  // CUstreamAttrID
-  {"cudaStreamAttrID",                                                 {"hipStreamAttrID",                                          "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
-  // CU_STREAM_ATTRIBUTE_ACCESS_POLICY_WINDOW
-  {"cudaStreamAttributeAccessPolicyWindow",                            {"hipStreamAttributeAccessPolicyWindow",                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 1
-  // CU_STREAM_ATTRIBUTE_SYNCHRONIZATION_POLICY
-  {"cudaStreamAttributeSynchronizationPolicy",                         {"hipStreamAttributeSynchronizationPolicy",                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 3
-
   // CUkernelNodeAttrID
   {"cudaKernelNodeAttrID",                                             {"hipKernelNodeAttrID",                                      "", CONV_TYPE, API_RUNTIME, 36}},
   // CU_KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW
@@ -1970,11 +1963,27 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CU_ARRAY_SPARSE_PROPERTIES_SINGLE_MIPTAIL
   {"cudaArraySparsePropertiesSingleMipTail",                           {"hipArraySparsePropertiesSingleMipTail",                    "", CONV_DEFINE, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 0x1
   // CU_KERNEL_NODE_ATTRIBUTE_CLUSTER_DIMENSION
-  {"cudaKernelNodeAttributeClusterDimension",                          {"hipKernelNodeAttributeClusterDimension",                    "", CONV_DEFINE, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // cudaLaunchAttributeClusterDimension
+  {"cudaKernelNodeAttributeClusterDimension",                          {"hipKernelNodeAttributeClusterDimension",                   "", CONV_DEFINE, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // cudaLaunchAttributeClusterDimension
   // CU_KERNEL_NODE_ATTRIBUTE_CLUSTER_SCHEDULING_POLICY_PREFERENCE
-  {"cudaKernelNodeAttributeClusterSchedulingPolicyPreference",         {"hipKernelNodeAttributeClusterSchedulingPolicyPreference",   "", CONV_DEFINE, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // cudaLaunchAttributeClusterSchedulingPolicyPreference
+  {"cudaKernelNodeAttributeClusterSchedulingPolicyPreference",         {"hipKernelNodeAttributeClusterSchedulingPolicyPreference",  "", CONV_DEFINE, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // cudaLaunchAttributeClusterSchedulingPolicyPreference
+  // CU_KERNEL_NODE_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP
+  {"cudaKernelNodeAttributeMemSyncDomainMap",                          {"hipKernelNodeAttributeMemSyncDomainMap",                   "", CONV_DEFINE, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // cudaLaunchAttributeMemSyncDomainMap
+  // CU_KERNEL_NODE_ATTRIBUTE_MEM_SYNC_DOMAIN
+  {"cudaKernelNodeAttributeMemSyncDomain",                             {"hipKernelNodeAttributeMemSyncDomain",                      "", CONV_DEFINE, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // cudaLaunchAttributeMemSyncDomain
   //
-  {"cudaInitDeviceFlagsAreValid",                                      {"hipInitDeviceFlagsAreValid",                                "", CONV_DEFINE, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 0x01
+  {"cudaInitDeviceFlagsAreValid",                                      {"hipInitDeviceFlagsAreValid",                               "", CONV_DEFINE, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 0x01
+  // CUstreamAttrID
+  {"cudaStreamAttrID",                                                 {"hipStreamAttrID",                                          "", CONV_DEFINE, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // cudaLaunchAttributeID
+  // CU_STREAM_ATTRIBUTE_ACCESS_POLICY_WINDOW
+  {"cudaStreamAttributeAccessPolicyWindow",                            {"hipStreamAttributeAccessPolicyWindow",                     "", CONV_DEFINE, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // cudaLaunchAttributeAccessPolicyWindow
+  // CU_STREAM_ATTRIBUTE_SYNCHRONIZATION_POLICY
+  {"cudaStreamAttributeSynchronizationPolicy",                         {"hipStreamAttributeSynchronizationPolicy",                  "", CONV_DEFINE, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // cudaLaunchAttributeSynchronizationPolicy
+  // CU_STREAM_ATTRIBUTE_PRIORITY
+  {"cudaStreamAttributePriority",                                      {"hipStreamAttributePriority",                               "", CONV_DEFINE, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // cudaLaunchAttributePriority
+  // CU_STREAM_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP
+  {"cudaStreamAttributeMemSyncDomainMap",                              {"hipStreamAttributeMemSyncDomainMap",                       "", CONV_DEFINE, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // cudaLaunchAttributeMemSyncDomainMap
+  // CU_STREAM_ATTRIBUTE_MEM_SYNC_DOMAIN
+  {"cudaStreamAttributeMemSyncDomain",                                 {"hipStreamAttributeMemSyncDomain",                          "", CONV_DEFINE, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // cudaLaunchAttributeMemSyncDomain
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_TYPE_NAME_VER_MAP {
@@ -2473,6 +2482,11 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_TYPE_NAME_VER_MAP 
   {"cudaLaunchMemSyncDomainMap",                                       {CUDA_120, CUDA_0,   CUDA_0  }},
   {"cudaLaunchAttributeMemSyncDomainMap",                              {CUDA_120, CUDA_0,   CUDA_0  }},
   {"cudaLaunchAttributeMemSyncDomain",                                 {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"cudaStreamAttributePriority",                                      {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"cudaStreamAttributeMemSyncDomainMap",                              {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"cudaStreamAttributeMemSyncDomain",                                 {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"cudaKernelNodeAttributeMemSyncDomainMap",                          {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"cudaKernelNodeAttributeMemSyncDomain",                             {CUDA_120, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {
