@@ -28,6 +28,7 @@
 |`cudaGetDeviceCount`| | | |`hipGetDeviceCount`|1.6.0| | | |
 |`cudaGetDeviceFlags`| | | |`hipGetDeviceFlags`|3.6.0| | | |
 |`cudaGetDeviceProperties`| | | |`hipGetDeviceProperties`|1.6.0| | | |
+|`cudaInitDevice`|12.0| | | | | | | |
 |`cudaIpcCloseMemHandle`| | | |`hipIpcCloseMemHandle`|1.6.0| | | |
 |`cudaIpcGetEventHandle`| | | |`hipIpcGetEventHandle`|1.6.0| | | |
 |`cudaIpcGetMemHandle`| | | |`hipIpcGetMemHandle`|1.6.0| | | |
@@ -74,6 +75,7 @@
 |`cudaStreamGetAttribute`|11.0| | | | | | | |
 |`cudaStreamGetCaptureInfo`|10.1| | |`hipStreamGetCaptureInfo`|5.0.0| | | |
 |`cudaStreamGetFlags`| | | |`hipStreamGetFlags`|1.6.0| | | |
+|`cudaStreamGetId`|12.0| | | | | | | |
 |`cudaStreamGetPriority`| | | |`hipStreamGetPriority`|2.0.0| | | |
 |`cudaStreamIsCapturing`|10.0| | |`hipStreamIsCapturing`|5.0.0| | | |
 |`cudaStreamQuery`| | | |`hipStreamQuery`|1.6.0| | | |
@@ -374,34 +376,34 @@
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
-|`cudaBindTexture`| |11.0| |`hipBindTexture`|1.6.0|3.8.0| | |
-|`cudaBindTexture2D`| |11.0| |`hipBindTexture2D`|1.7.0|3.8.0| | |
-|`cudaBindTextureToArray`| |11.0| |`hipBindTextureToArray`|1.6.0|3.8.0| | |
-|`cudaBindTextureToMipmappedArray`| |11.0| |`hipBindTextureToMipmappedArray`|1.7.0| | | |
+|`cudaBindTexture`| |11.0|12.0|`hipBindTexture`|1.6.0|3.8.0| | |
+|`cudaBindTexture2D`| |11.0|12.0|`hipBindTexture2D`|1.7.0|3.8.0| | |
+|`cudaBindTextureToArray`| |11.0|12.0|`hipBindTextureToArray`|1.6.0|3.8.0| | |
+|`cudaBindTextureToMipmappedArray`| |11.0|12.0|`hipBindTextureToMipmappedArray`|1.7.0| | | |
 |`cudaCreateChannelDesc`| | | |`hipCreateChannelDesc`|1.6.0| | | |
 |`cudaGetChannelDesc`| | | |`hipGetChannelDesc`|1.7.0| | | |
-|`cudaGetTextureAlignmentOffset`| |11.0| |`hipGetTextureAlignmentOffset`|1.9.0|3.8.0| | |
-|`cudaGetTextureReference`| |11.0| |`hipGetTextureReference`|1.7.0|5.3.0| | |
-|`cudaUnbindTexture`| |11.0| |`hipUnbindTexture`|1.6.0|3.8.0| | |
+|`cudaGetTextureAlignmentOffset`| |11.0|12.0|`hipGetTextureAlignmentOffset`|1.9.0|3.8.0| | |
+|`cudaGetTextureReference`| |11.0|12.0|`hipGetTextureReference`|1.7.0|5.3.0| | |
+|`cudaUnbindTexture`| |11.0|12.0|`hipUnbindTexture`|1.6.0|3.8.0| | |
 
 ## **26. Surface Reference Management [DEPRECATED]**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
-|`cudaBindSurfaceToArray`| |11.0| | | | | | |
-|`cudaGetSurfaceReference`| |11.0| | | | | | |
+|`cudaBindSurfaceToArray`| |11.0|12.0| | | | | |
+|`cudaGetSurfaceReference`| |11.0|12.0| | | | | |
 
 ## **27. Texture Object Management**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
 |`cudaCreateTextureObject`| | | |`hipCreateTextureObject`|1.7.0| | | |
-|`cudaCreateTextureObject_v2`|11.8| | | | | | | |
+|`cudaCreateTextureObject_v2`|11.8| |12.0| | | | | |
 |`cudaDestroyTextureObject`| | | |`hipDestroyTextureObject`|1.7.0| | | |
 |`cudaGetTextureObjectResourceDesc`| | | |`hipGetTextureObjectResourceDesc`|1.7.0| | | |
 |`cudaGetTextureObjectResourceViewDesc`| | | |`hipGetTextureObjectResourceViewDesc`|1.7.0| | | |
 |`cudaGetTextureObjectTextureDesc`| | | |`hipGetTextureObjectTextureDesc`|1.7.0| | | |
-|`cudaGetTextureObjectTextureDesc_v2`|11.8| | | | | | | |
+|`cudaGetTextureObjectTextureDesc_v2`|11.8| |12.0| | | | | |
 
 ## **28. Surface Object Management**
 
@@ -457,6 +459,7 @@
 |`cudaGraphExecEventWaitNodeSetEvent`|11.1| | |`hipGraphExecEventWaitNodeSetEvent`|5.0.0| | | |
 |`cudaGraphExecExternalSemaphoresSignalNodeSetParams`|11.2| | | | | | | |
 |`cudaGraphExecExternalSemaphoresWaitNodeSetParams`|11.2| | | | | | | |
+|`cudaGraphExecGetFlags`|12.0| | | | | | | |
 |`cudaGraphExecHostNodeSetParams`|11.0| | |`hipGraphExecHostNodeSetParams`|5.0.0| | | |
 |`cudaGraphExecKernelNodeSetParams`|11.0| | |`hipGraphExecKernelNodeSetParams`|4.5.0| | | |
 |`cudaGraphExecMemcpyNodeSetParams`|11.0| | |`hipGraphExecMemcpyNodeSetParams`|5.0.0| | | |
@@ -476,6 +479,7 @@
 |`cudaGraphHostNodeSetParams`|10.0| | |`hipGraphHostNodeSetParams`|5.0.0| | | |
 |`cudaGraphInstantiate`|10.0| | |`hipGraphInstantiate`|4.3.0| | | |
 |`cudaGraphInstantiateWithFlags`|11.4| | |`hipGraphInstantiateWithFlags`|5.0.0| | | |
+|`cudaGraphInstantiateWithParams`|12.0| | | | | | | |
 |`cudaGraphKernelNodeCopyAttributes`|11.0| | | | | | | |
 |`cudaGraphKernelNodeGetAttribute`|11.0| | |`hipGraphKernelNodeGetAttribute`|5.2.0| | | |
 |`cudaGraphKernelNodeGetParams`|11.0| | |`hipGraphKernelNodeGetParams`|4.5.0| | | |
