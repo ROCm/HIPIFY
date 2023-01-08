@@ -470,7 +470,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuStreamWaitEvent",                                    {"hipStreamWaitEvent",                                      "", CONV_STREAM, API_DRIVER, 17}},
   // cudaThreadExchangeStreamCaptureMode
   {"cuThreadExchangeStreamCaptureMode",                    {"hipThreadExchangeStreamCaptureMode",                      "", CONV_STREAM, API_DRIVER, 17}},
-  //
+  // cudaStreamGetId
   {"cuStreamGetId",                                        {"hipStreamGetId",                                          "", CONV_STREAM, API_DRIVER, 17, HIP_UNSUPPORTED}},
 
   // 18. Event Management
@@ -759,9 +759,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuGraphBatchMemOpNodeSetParams",                       {"hipGraphBatchMemOpNodeSetParams",                         "", CONV_GRAPH, API_DRIVER, 23, HIP_UNSUPPORTED}},
   //
   {"cuGraphExecBatchMemOpNodeSetParams",                   {"hipGraphExecBatchMemOpNodeSetParams",                     "", CONV_GRAPH, API_DRIVER, 23, HIP_UNSUPPORTED}},
-  //
+  // cudaGraphInstantiateWithParams
   {"cuGraphInstantiateWithParams",                         {"hipGraphInstantiateWithParams",                           "", CONV_GRAPH, API_DRIVER, 23, HIP_UNSUPPORTED}},
-  //
+  // cudaGraphExecGetFlags
   {"cuGraphExecGetFlags",                                  {"hipGraphExecGetFlags",                                    "", CONV_GRAPH, API_DRIVER, 23, HIP_UNSUPPORTED}},
 
   // 24. Occupancy
