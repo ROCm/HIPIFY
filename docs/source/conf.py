@@ -84,9 +84,8 @@ html_theme_options = {
     "path_to_docs": "docs",
 
     "show_navbar_depth": "2",
-    "body_max_width ": "none",
-    "show_toc_level": "0",
-
+    "body_max_width": "none",
+    "show_toc_level": "0"
 }
 
 html_show_sphinx = False
