@@ -6,5 +6,5 @@
 
 div#site-navigation {
     height: fit-content;
-    min-height: calc(100vh - 170px);
+    min-height: calc(100vh - 190px);
 }
