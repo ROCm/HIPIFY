@@ -1762,6 +1762,55 @@ int main() {
   // TODO: __half -> rocblas_half
   // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasHgemmStridedBatched(cublasHandle_t handle, cublasOperation_t transa, cublasOperation_t transb, int m, int n, int k, const __half* alpha, const __half* A, int lda, long long int strideA, const __half* B, int ldb, long long int strideB, const __half* beta, __half* C, int ldc, long long int strideC, int batchCount);
   // ROC: ROCBLAS_EXPORT rocblas_status rocblas_hgemm_strided_batched(rocblas_handle handle, rocblas_operation transA, rocblas_operation transB, rocblas_int m, rocblas_int n, rocblas_int k, const rocblas_half* alpha, const rocblas_half* A, rocblas_int lda, rocblas_stride stride_a, const rocblas_half* B, rocblas_int ldb, rocblas_stride stride_b, const rocblas_half* beta, rocblas_half* C, rocblas_int ldc, rocblas_stride stride_c, rocblas_int batch_count);
+
+  void* aptr = nullptr;
+  void* Aptr = nullptr;
+  void* bptr = nullptr;
+  void* Bptr = nullptr;
+  void* cptr = nullptr;
+  void* Cptr = nullptr;
+  void* xptr = nullptr;
+  void* yptr = nullptr;
+  void* sptr = nullptr;
+
+  // CHECK: rocblas_datatype Atype;
+  // CHECK-NEXT: rocblas_datatype Btype;
+  // CHECK-NEXT: rocblas_datatype Ctype;
+  // CHECK-NEXT: rocblas_datatype Xtype;
+  // CHECK-NEXT: rocblas_datatype Ytype;
+  // CHECK-NEXT: rocblas_datatype CStype;
+  // CHECK-NEXT: rocblas_datatype Executiontype;
+  cudaDataType Atype;
+  cudaDataType Btype;
+  cudaDataType Ctype;
+  cudaDataType Xtype;
+  cudaDataType Ytype;
+  cudaDataType CStype;
+  cudaDataType Executiontype;
+
+  // TODO: #1281
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasScalEx(cublasHandle_t handle, int n, const void* alpha, cudaDataType alphaType, void* x, cudaDataType xType, int incx, cudaDataType executionType);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_scal_ex(rocblas_handle handle, rocblas_int n, const void* alpha, rocblas_datatype alpha_type, void* x, rocblas_datatype x_type, rocblas_int incx, rocblas_datatype execution_type);
+  // CHECK: blasStatus = rocblas_scal_ex(blasHandle, n, aptr, Atype, xptr, Xtype, incx, Executiontype);
+  blasStatus = cublasScalEx(blasHandle, n, aptr, Atype, xptr, Xtype, incx, Executiontype);
+
+  // TODO: #1281
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasAxpyEx(cublasHandle_t handle, int n, const void* alpha, cudaDataType alphaType, const void* x, cudaDataType xType, int incx, void* y, cudaDataType yType, int incy, cudaDataType executiontype);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_axpy_ex(rocblas_handle handle, rocblas_int n, const void* alpha, rocblas_datatype alpha_type, const void* x, rocblas_datatype x_type, rocblas_int incx, void* y, rocblas_datatype y_type, rocblas_int incy, rocblas_datatype execution_type);
+  // CHECK: blasStatus = rocblas_axpy_ex(blasHandle, n, aptr, Atype, xptr, Xtype, incx, yptr, Ytype, incy, Executiontype);
+  blasStatus = cublasAxpyEx(blasHandle, n, aptr, Atype, xptr, Xtype, incx, yptr, Ytype, incy, Executiontype);
+
+  // TODO: #1281
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasDotEx(cublasHandle_t handle, int n, const void* x, cudaDataType xType, int incx, const void* y, cudaDataType yType, int incy, void* result, cudaDataType resultType, cudaDataType executionType);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_dot_ex(rocblas_handle handle, rocblas_int n, const void* x, rocblas_datatype x_type, rocblas_int incx, const void* y, rocblas_datatype y_type, rocblas_int incy, void* result, rocblas_datatype result_type, rocblas_datatype execution_type);
+  // CHECK: blasStatus = rocblas_dot_ex(blasHandle, n, xptr, Xtype, incx, yptr, Ytype, incy, image, DataType, Executiontype);
+  blasStatus = cublasDotEx(blasHandle, n, xptr, Xtype, incx, yptr, Ytype, incy, image, DataType, Executiontype);
+
+  // TODO: #1281
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasDotcEx(cublasHandle_t handle, int n, const void* x, cudaDataType xType, int incx, const void* y, cudaDataType yType, int incy, void* result, cudaDataType resultType, cudaDataType executionType);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_dotc_ex(rocblas_handle handle, rocblas_int n, const void* x, rocblas_datatype x_type, rocblas_int incx, const void* y, rocblas_datatype y_type, rocblas_int incy, void* result, rocblas_datatype result_type, rocblas_datatype execution_type);
+  // CHECK: blasStatus = rocblas_dotc_ex(blasHandle, n, xptr, Xtype, incx, yptr, Ytype, incy, image, DataType, Executiontype);
+  blasStatus = cublasDotcEx(blasHandle, n, xptr, Xtype, incx, yptr, Ytype, incy, image, DataType, Executiontype);
 #endif
 
 #if CUDA_VERSION >= 8000 && CUDA_VERSION < 11000
@@ -1800,6 +1849,12 @@ int main() {
 
   // CHECK: rocblas_fill BLAS_FILL_MODE_FULL = rocblas_fill_full;
   cublasFillMode_t BLAS_FILL_MODE_FULL = CUBLAS_FILL_MODE_FULL;
+
+  // TODO: #1281
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasRotEx(cublasHandle_t handle, int n, void* x, cudaDataType xType, int incx, void* y, cudaDataType yType, int incy, const void* c, const void* s, cudaDataType csType, cudaDataType executiontype);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_rot_ex(rocblas_handle handle, rocblas_int n, void* x, rocblas_datatype x_type, rocblas_int incx, void* y, rocblas_datatype y_type, rocblas_int incy, const void* c, const void* s, rocblas_datatype cs_type, rocblas_datatype execution_type);
+  // CHECK: blasStatus = rocblas_rot_ex(blasHandle, n, xptr, Xtype, incx, yptr, Ytype, incy, cptr, sptr, CStype, Executiontype);
+  blasStatus = cublasRotEx(blasHandle, n, xptr, Xtype, incx, yptr, Ytype, incy, cptr, sptr, CStype, Executiontype);
 #endif
 
 #if CUDA_VERSION >= 11000
