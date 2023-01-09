@@ -85,7 +85,8 @@ html_theme_options = {
 
     "show_navbar_depth": "2",
     "body_max_width": "none",
-    "show_toc_level": "0"
+    "show_toc_level": "0",
+    "extra_navbar": ""
 }
 
 html_show_sphinx = False

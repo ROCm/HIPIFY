@@ -3,3 +3,8 @@
 :root {
     --pst-font-size-base: 11px;
 }
+
+div#site-navigation {
+    min-height: fit-content;
+    height: calc(100vh - 170px);
+}
