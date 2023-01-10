@@ -743,8 +743,7 @@ my %removed_funcs = (
 );
 
 my %experimental_funcs = (
-    "cuGetErrorString" => "5.4.0",
-    "cuGetErrorName" => "5.4.0"
+
 );
 
 $print_stats = 1 if $examine;
@@ -882,8 +881,6 @@ sub subst {
 }
 
 sub experimentalSubstitutions {
-    subst("cuGetErrorName", "hipDrvGetErrorName", "error");
-    subst("cuGetErrorString", "hipDrvGetErrorString", "error");
 }
 
 sub rocSubstitutions {
@@ -1322,6 +1319,8 @@ sub rocSubstitutions {
 }
 
 sub simpleSubstitutions {
+    subst("cuGetErrorName", "hipDrvGetErrorName", "error");
+    subst("cuGetErrorString", "hipDrvGetErrorString", "error");
     subst("cudaGetErrorName", "hipGetErrorName", "error");
     subst("cudaGetErrorString", "hipGetErrorString", "error");
     subst("cudaGetLastError", "hipGetLastError", "error");
@@ -8501,7 +8500,7 @@ if ($help) {
     print STDERR "$USAGE\n";
 }
 if ($version) {
-    print STDERR "HIP version 5.4.0\n";
+    print STDERR "HIP version 5.5.0\n";
 }
 while (@ARGV) {
     $fileName=shift (@ARGV);

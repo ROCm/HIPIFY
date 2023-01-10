@@ -1279,8 +1279,8 @@
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
-|`cuGetErrorName`| | | |`hipDrvGetErrorName`|5.4.0| | |5.4.0|
-|`cuGetErrorString`| | | |`hipDrvGetErrorString`|5.4.0| | |5.4.0|
+|`cuGetErrorName`| | | |`hipDrvGetErrorName`|5.4.0| | | |
+|`cuGetErrorString`| | | |`hipDrvGetErrorString`|5.4.0| | | |
 
 ## **3. Initialization**
 
