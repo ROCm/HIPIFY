@@ -1304,7 +1304,7 @@ Unsupported
 |`cudaNvSciSyncAttrSignal`|10.2| | | | | | | |
 |`cudaNvSciSyncAttrWait`|10.2| | | | | | | |
 |`cudaOccupancyDefault`| | | |`hipOccupancyDefault`|3.2.0| | | |
-|`cudaOccupancyDisableCachingOverride`| | | | | | | | |
+|`cudaOccupancyDisableCachingOverride`| | | |`hipOccupancyDisableCachingOverride`|5.5.0| | |5.5.0|
 |`cudaOutputMode`| | |12.0| | | | | |
 |`cudaOutputMode_t`| | |12.0| | | | | |
 |`cudaPitchedPtr`| | | |`hipPitchedPtr`|1.7.0| | | |

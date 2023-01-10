@@ -1397,7 +1397,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaOccupancyDefault
   {"CU_OCCUPANCY_DEFAULT",                                             {"hipOccupancyDefault",                                      "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x00
   // cudaOccupancyDisableCachingOverride
-  {"CU_OCCUPANCY_DISABLE_CACHING_OVERRIDE",                            {"hipOccupancyDisableCachingOverride",                       "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0x01
+  {"CU_OCCUPANCY_DISABLE_CACHING_OVERRIDE",                            {"hipOccupancyDisableCachingOverride",                       "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_EXPERIMENTAL}}, // 0x01
 
   // no analogue
   {"CUpointer_attribute",                                              {"hipPointer_attribute",                                     "", CONV_TYPE, API_DRIVER, 1}},
