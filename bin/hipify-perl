@@ -743,7 +743,8 @@ my %removed_funcs = (
 );
 
 my %experimental_funcs = (
-
+    "cudaOccupancyDisableCachingOverride" => "5.5.0",
+    "CU_OCCUPANCY_DISABLE_CACHING_OVERRIDE" => "5.5.0"
 );
 
 $print_stats = 1 if $examine;
@@ -881,6 +882,8 @@ sub subst {
 }
 
 sub experimentalSubstitutions {
+    subst("CU_OCCUPANCY_DISABLE_CACHING_OVERRIDE", "hipOccupancyDisableCachingOverride", "numeric_literal");
+    subst("cudaOccupancyDisableCachingOverride", "hipOccupancyDisableCachingOverride", "define");
 }
 
 sub rocSubstitutions {
@@ -6121,7 +6124,6 @@ sub warnUnsupportedFunctions {
         "cudaOccupancyMaxPotentialBlockSizeVariableSMemWithFlags",
         "cudaOccupancyMaxPotentialBlockSizeVariableSMem",
         "cudaOccupancyMaxActiveClusters",
-        "cudaOccupancyDisableCachingOverride",
         "cudaOccupancyAvailableDynamicSMemPerBlock",
         "cudaNvSciSyncAttrWait",
         "cudaNvSciSyncAttrSignal",
@@ -7067,7 +7069,6 @@ sub warnUnsupportedFunctions {
         "CU_POINTER_ATTRIBUTE_ACCESS_FLAG_READ",
         "CU_POINTER_ATTRIBUTE_ACCESS_FLAG_NONE",
         "CU_PARAM_TR_DEFAULT",
-        "CU_OCCUPANCY_DISABLE_CACHING_OVERRIDE",
         "CU_MODULE_LAZY_LOADING",
         "CU_MODULE_EAGER_LOADING",
         "CU_MEM_RANGE_HANDLE_TYPE_MAX",

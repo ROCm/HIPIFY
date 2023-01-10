@@ -389,7 +389,9 @@ int main() {
   CUpointer_attribute POINTER_ATTRIBUTE_IS_MANAGED = CU_POINTER_ATTRIBUTE_IS_MANAGED;
 
   // CHECK: int OCCUPANCY_DEFAULT = hipOccupancyDefault;
+  // CHECK-NEXT: int OCCUPANCY_DISABLE_CACHING_OVERRIDE = hipOccupancyDisableCachingOverride;
   int OCCUPANCY_DEFAULT = CU_OCCUPANCY_DEFAULT;
+  int OCCUPANCY_DISABLE_CACHING_OVERRIDE = CU_OCCUPANCY_DISABLE_CACHING_OVERRIDE;
 
   // CHECK: HIPresourcetype resourcetype;
   // CHECK-NEXT: HIPresourcetype_enum resourcetype_enum;

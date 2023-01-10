@@ -1951,7 +1951,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CU_OCCUPANCY_DEFAULT
   {"cudaOccupancyDefault",                                             {"hipOccupancyDefault",                                      "", CONV_DEFINE, API_RUNTIME, 36}}, // 0x00
   // CU_OCCUPANCY_DISABLE_CACHING_OVERRIDE
-  {"cudaOccupancyDisableCachingOverride",                              {"hipOccupancyDisableCachingOverride",                       "", CONV_DEFINE, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 0x01
+  {"cudaOccupancyDisableCachingOverride",                              {"hipOccupancyDisableCachingOverride",                       "", CONV_DEFINE, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 0x01
   // CU_STREAM_DEFAULT
   {"cudaStreamDefault",                                                {"hipStreamDefault",                                         "", CONV_DEFINE, API_RUNTIME, 36}}, // 0x00
   // CU_STREAM_NON_BLOCKING
@@ -2705,4 +2705,5 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {
   {"hipUserObjectNoDestructorSync",                                    {HIP_5030, HIP_0,    HIP_0   }},
   {"hipUserObjectRetainFlags",                                         {HIP_5030, HIP_0,    HIP_0   }},
   {"hipGraphUserObjectMove",                                           {HIP_5030, HIP_0,    HIP_0   }},
+  {"hipOccupancyDisableCachingOverride",                               {HIP_5050, HIP_0,    HIP_0,  HIP_LATEST}},
 };

@@ -782,7 +782,7 @@
 |`CU_MODULE_EAGER_LOADING`|11.7| | | | | | | |
 |`CU_MODULE_LAZY_LOADING`|11.7| | | | | | | |
 |`CU_OCCUPANCY_DEFAULT`| | | |`hipOccupancyDefault`|3.2.0| | | |
-|`CU_OCCUPANCY_DISABLE_CACHING_OVERRIDE`| | | | | | | | |
+|`CU_OCCUPANCY_DISABLE_CACHING_OVERRIDE`| | | |`hipOccupancyDisableCachingOverride`|5.5.0| | |5.5.0|
 |`CU_PARAM_TR_DEFAULT`| | | | | | | | |
 |`CU_POINTER_ATTRIBUTE_ACCESS_FLAGS`|11.1| | |`HIP_POINTER_ATTRIBUTE_ACCESS_FLAGS`|5.0.0| | | |
 |`CU_POINTER_ATTRIBUTE_ACCESS_FLAG_NONE`|11.1| | | | | | | |
