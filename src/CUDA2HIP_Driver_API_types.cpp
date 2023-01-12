@@ -1397,7 +1397,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaOccupancyDefault
   {"CU_OCCUPANCY_DEFAULT",                                             {"hipOccupancyDefault",                                      "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 0x00
   // cudaOccupancyDisableCachingOverride
-  {"CU_OCCUPANCY_DISABLE_CACHING_OVERRIDE",                            {"hipOccupancyDisableCachingOverride",                       "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0x01
+  {"CU_OCCUPANCY_DISABLE_CACHING_OVERRIDE",                            {"hipOccupancyDisableCachingOverride",                       "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_EXPERIMENTAL}}, // 0x01
 
   // no analogue
   {"CUpointer_attribute",                                              {"hipPointer_attribute",                                     "", CONV_TYPE, API_DRIVER, 1}},
@@ -1975,9 +1975,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_KERNEL_NODE_ATTRIBUTE_COOPERATIVE",                             {"hipKernelNodeAttributeCooperative",                        "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}},
   // cudaKernelNodeAttributePriority
   {"CU_KERNEL_NODE_ATTRIBUTE_PRIORITY",                                {"hipKernelNodeAttributePriority",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
-  //
+  // cudaKernelNodeAttributeMemSyncDomainMap
   {"CU_KERNEL_NODE_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP",                     {"hipKernelNodeAttributeMemSyncDomainMap",                   "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
-  //
+  // cudaKernelNodeAttributeMemSyncDomain
   {"CU_KERNEL_NODE_ATTRIBUTE_MEM_SYNC_DOMAIN",                         {"hipKernelNodeAttributeMemSyncDomain",                      "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
 
   // cudaStreamAttrID
@@ -1988,11 +1988,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_STREAM_ATTRIBUTE_ACCESS_POLICY_WINDOW",                         {"hipStreamAttributeAccessPolicyWindow",                     "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
   // cudaStreamAttributeSynchronizationPolicy
   {"CU_STREAM_ATTRIBUTE_SYNCHRONIZATION_POLICY",                       {"hipStreamAttributeSynchronizationPolicy",                  "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
-  //
+  // cudaStreamAttributePriority
   {"CU_STREAM_ATTRIBUTE_PRIORITY",                                     {"hipStreamAttributePriority",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
-  //
+  // cudaStreamAttributeMemSyncDomainMap
   {"CU_STREAM_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP",                          {"hipStreamAttributeMemSyncDomainMap",                       "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
-  //
+  // cudaStreamAttributeMemSyncDomain
   {"CU_STREAM_ATTRIBUTE_MEM_SYNC_DOMAIN",                              {"hipStreamAttributeMemSyncDomain",                          "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
 
   // no analogue

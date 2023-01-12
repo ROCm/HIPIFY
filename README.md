@@ -45,7 +45,7 @@ After applying all the matchers, the output HIP source is produced.
 
 1. [**LLVM+CLANG**](http://releases.llvm.org) of at least version [4.0.0](http://releases.llvm.org/download.html#4.0.0); the latest stable and recommended release: [**15.0.6**](https://github.com/llvm/llvm-project/releases/tag/llvmorg-15.0.6).
 
-2. [**CUDA**](https://developer.nvidia.com/cuda-downloads) of at least version [8.0](https://developer.nvidia.com/cuda-80-ga2-download-archive), the latest supported version is [**11.8.0**](https://developer.nvidia.com/cuda-downloads).
+2. [**CUDA**](https://developer.nvidia.com/cuda-downloads) of at least version [8.0](https://developer.nvidia.com/cuda-80-ga2-download-archive), the latest supported version is [**11.8.0**](https://developer.nvidia.com/cuda-11-8-0-download-archive).
 
 <table align="center">
   <thead>
@@ -178,7 +178,7 @@ After applying all the matchers, the output HIP source is produced.
           <a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-15.0.4">15.0.4</a>,
           <a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-15.0.5">15.0.5</a>,</br>
           <a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-15.0.6"><b>15.0.6</b></a></td>
-      <td bgcolor="eefaeb"><a href="https://developer.nvidia.com/cuda-downloads"><b>11.8.0</b></a></td>
+      <td bgcolor="eefaeb"><a href="https://developer.nvidia.com/cuda-11-8-0-download-archive"><b>11.8.0</b></a></td>
       <td colspan=2 bgcolor="eefaeb"><font color="green"><b>LATEST STABLE CONFIG</b></font></td>
     </tr>
   </tbody>
@@ -340,7 +340,7 @@ Run `Visual Studio 17 2022`, open the generated `LLVM.sln`, build all, build pro
 
         - ***Linux***: `-DCUDA_DNN_ROOT_DIR=/usr/include`
 
-        - ***Windows***: `-DCUDA_DNN_ROOT_DIR=d:/CUDNN/cudnn-11.8-windows-x64-v8.6.0`
+        - ***Windows***: `-DCUDA_DNN_ROOT_DIR=d:/CUDNN/cudnn-11.8-windows-x64-v8.7.0`
 
 5. Ensure [`CUB`](https://github.com/NVlabs/cub) of the version corresponding to CUDA's version is installed.
 
@@ -392,7 +392,7 @@ Ubuntu 14: LLVM 4.0.0 - 7.1.0, CUDA 7.0 - 9.0, cuDNN 5.0.5 - 7.6.5
 
 Ubuntu 16-18: LLVM 8.0.0 - 14.0.6, CUDA 8.0 - 10.2, cuDNN 5.1.10 - 8.0.5
 
-Ubuntu 20-21: LLVM 9.0.0 - 15.0.6, CUDA 8.0 - 11.8.0, cuDNN 5.1.10 - 8.6.0
+Ubuntu 20-21: LLVM 9.0.0 - 15.0.6, CUDA 8.0 - 11.8.0, cuDNN 5.1.10 - 8.7.0
 
 Minimum build system requirements for the above configurations:
 
@@ -573,8 +573,8 @@ Testing Time: 6.94s
 | 11.0.1 - 11.1.0 | 7.0 - 11.2.2 | 7.6.5  - 8.0.5 | 2017.15.9.31, 2019.16.8.4                | 3.19.3         | 3.9.2        |
 | 12.0.0 - 13.0.1 | 7.0 - 11.5.1 | 7.6.5  - 8.3.2 | 2017.15.9.43, 2019.16.11.9               | 3.22.2         | 3.10.2       |
 | 14.0.0 - 14.0.6 | 7.0 - 11.7.1 | 8.0.5  - 8.4.1 | 2017.15.9.49, 2019.16.11.17, 2022.17.2.6 | 3.24.0         | 3.10.6       |
-| 15.0.0 - 15.0.6 | 7.0 - 11.8.0 | 8.0.5  - 8.6.0 | 2017.15.9.51, 2019.16.11.21, 2022.17.4.2 | 3.25.1         | 3.11.1       |
-| 16.0.0git       | 7.0 - 11.8.0 | 8.0.5  - 8.6.0 | 2017.15.9.51, 2019.16.11.21, 2022.17.4.2 | 3.25.1         | 3.11.1       |
+| 15.0.0 - 15.0.6 | 7.0 - 11.8.0 | 8.0.5  - 8.7.0 | 2017.15.9.51, 2019.16.11.23, 2022.17.4.4 | 3.25.1         | 3.11.1       |
+| 16.0.0git       | 7.0 - 11.8.0 | 8.0.5  - 8.7.0 | 2017.15.9.51, 2019.16.11.23, 2022.17.4.4 | 3.25.1         | 3.11.1       |
 
 *Building with testing support by `Visual Studio 17 2022` on `Windows 10`:*
 
@@ -589,7 +589,7 @@ cmake
  -DCMAKE_PREFIX_PATH=d:/LLVM/15.0.6/dist \
  -DCUDA_TOOLKIT_ROOT_DIR="c:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8" \
  -DCUDA_SDK_ROOT_DIR="c:/ProgramData/NVIDIA Corporation/CUDA Samples/v11.8" \
- -DCUDA_DNN_ROOT_DIR=d:/CUDNN/cudnn-11.8-windows-x64-v8.6.0 \
+ -DCUDA_DNN_ROOT_DIR=d:/CUDNN/cudnn-11.8-windows-x64-v8.7.0 \
  -DCUDA_CUB_ROOT_DIR=d:/GIT/cub \
  -DLLVM_EXTERNAL_LIT=d:/LLVM/15.0.6/build/Release/bin/llvm-lit.py \
  ../hipify
@@ -677,4 +677,4 @@ The information contained herein is for informational purposes only, and is subj
 
 AMD, the AMD Arrow logo, and combinations thereof are trademarks of Advanced Micro Devices, Inc. Other product names used in this publication are for identification purposes only and may be trademarks of their respective companies.
 
-Copyright &copy; 2016-2022 Advanced Micro Devices, Inc. All rights reserved.
+Copyright &copy; 2016-2023 Advanced Micro Devices, Inc. All rights reserved.

@@ -357,7 +357,6 @@ my %deprecated_funcs = (
     "cudnnConvolutionFwdPreference_t" => "7.6.5",
     "cudnnConvolutionBwdFilterPreference_t" => "7.6.5",
     "cudnnConvolutionBwdDataPreference_t" => "7.6.5",
-    "cudaUnbindTexture" => "11.0",
     "cudaThreadSynchronize" => "10.0",
     "cudaThreadSetLimit" => "10.0",
     "cudaThreadSetCacheConfig" => "10.0",
@@ -372,9 +371,6 @@ my %deprecated_funcs = (
     "cudaMemcpyFromArray" => "10.1",
     "cudaMemcpyArrayToArray" => "10.1",
     "cudaLaunchCooperativeKernelMultiDevice" => "11.3",
-    "cudaGetTextureReference" => "11.0",
-    "cudaGetTextureAlignmentOffset" => "11.0",
-    "cudaGetSurfaceReference" => "11.0",
     "cudaGLUnregisterBufferObject" => "10.0",
     "cudaGLUnmapBufferObjectAsync" => "10.0",
     "cudaGLUnmapBufferObject" => "10.0",
@@ -421,11 +417,6 @@ my %deprecated_funcs = (
     "cudaD3D10RegisterResource" => "10.0",
     "cudaD3D10MapResources" => "10.0",
     "cudaD3D10GetDirect3DDevice" => "10.0",
-    "cudaBindTextureToMipmappedArray" => "11.0",
-    "cudaBindTextureToArray" => "11.0",
-    "cudaBindTexture2D" => "11.0",
-    "cudaBindTexture" => "11.0",
-    "cudaBindSurfaceToArray" => "11.0",
     "cuTexRefSetMipmappedArray" => "11.0",
     "cuTexRefSetMipmapLevelClamp" => "11.0",
     "cuTexRefSetMipmapLevelBias" => "11.0",
@@ -692,14 +683,25 @@ my %removed_funcs = (
     "cudnnConvolutionFwdPreference_t" => "8.0.1",
     "cudnnConvolutionBwdFilterPreference_t" => "8.0.1",
     "cudnnConvolutionBwdDataPreference_t" => "8.0.1",
+    "cudaUnbindTexture" => "12.0",
     "cudaSetupArgument" => "10.1",
     "cudaOutputMode_t" => "12.0",
     "cudaOutputMode" => "12.0",
     "cudaLaunch" => "10.1",
     "cudaKeyValuePair" => "12.0",
+    "cudaGetTextureReference" => "12.0",
+    "cudaGetTextureObjectTextureDesc_v2" => "12.0",
+    "cudaGetTextureAlignmentOffset" => "12.0",
+    "cudaGetSurfaceReference" => "12.0",
     "cudaDevicePropDontCare" => "12.0",
+    "cudaCreateTextureObject_v2" => "12.0",
     "cudaConfigureCall" => "10.1",
     "cudaCSV" => "12.0",
+    "cudaBindTextureToMipmappedArray" => "12.0",
+    "cudaBindTextureToArray" => "12.0",
+    "cudaBindTexture2D" => "12.0",
+    "cudaBindTexture" => "12.0",
+    "cudaBindSurfaceToArray" => "12.0",
     "CUstreamAttrID_enum" => "11.8",
     "CUkernelNodeAttrValue_union" => "11.8",
     "CUkernelNodeAttrID_enum" => "11.8",
@@ -741,8 +743,8 @@ my %removed_funcs = (
 );
 
 my %experimental_funcs = (
-    "cuGetErrorString" => "5.4.0",
-    "cuGetErrorName" => "5.4.0"
+    "cudaOccupancyDisableCachingOverride" => "5.5.0",
+    "CU_OCCUPANCY_DISABLE_CACHING_OVERRIDE" => "5.5.0"
 );
 
 $print_stats = 1 if $examine;
@@ -880,8 +882,8 @@ sub subst {
 }
 
 sub experimentalSubstitutions {
-    subst("cuGetErrorName", "hipDrvGetErrorName", "error");
-    subst("cuGetErrorString", "hipDrvGetErrorString", "error");
+    subst("CU_OCCUPANCY_DISABLE_CACHING_OVERRIDE", "hipOccupancyDisableCachingOverride", "numeric_literal");
+    subst("cudaOccupancyDisableCachingOverride", "hipOccupancyDisableCachingOverride", "define");
 }
 
 sub rocSubstitutions {
@@ -1320,6 +1322,8 @@ sub rocSubstitutions {
 }
 
 sub simpleSubstitutions {
+    subst("cuGetErrorName", "hipDrvGetErrorName", "error");
+    subst("cuGetErrorString", "hipDrvGetErrorString", "error");
     subst("cudaGetErrorName", "hipGetErrorName", "error");
     subst("cudaGetErrorString", "hipGetErrorString", "error");
     subst("cudaGetLastError", "hipGetLastError", "error");
@@ -6096,9 +6100,13 @@ sub warnUnsupportedFunctions {
         "cudaSurfaceFormatMode",
         "cudaStreamSetAttribute",
         "cudaStreamLegacy",
+        "cudaStreamGetId",
         "cudaStreamGetAttribute",
         "cudaStreamCopyAttributes",
         "cudaStreamAttributeSynchronizationPolicy",
+        "cudaStreamAttributePriority",
+        "cudaStreamAttributeMemSyncDomainMap",
+        "cudaStreamAttributeMemSyncDomain",
         "cudaStreamAttributeAccessPolicyWindow",
         "cudaStreamAttrValue",
         "cudaStreamAttrID",
@@ -6116,7 +6124,6 @@ sub warnUnsupportedFunctions {
         "cudaOccupancyMaxPotentialBlockSizeVariableSMemWithFlags",
         "cudaOccupancyMaxPotentialBlockSizeVariableSMem",
         "cudaOccupancyMaxActiveClusters",
-        "cudaOccupancyDisableCachingOverride",
         "cudaOccupancyAvailableDynamicSMemPerBlock",
         "cudaNvSciSyncAttrWait",
         "cudaNvSciSyncAttrSignal",
@@ -6156,9 +6163,12 @@ sub warnUnsupportedFunctions {
         "cudaLaunchAttribute",
         "cudaKeyValuePair",
         "cudaKernelNodeAttributePriority",
+        "cudaKernelNodeAttributeMemSyncDomainMap",
+        "cudaKernelNodeAttributeMemSyncDomain",
         "cudaKernelNodeAttributeClusterSchedulingPolicyPreference",
         "cudaKernelNodeAttributeClusterDimension",
         "cudaInitDeviceFlagsAreValid",
+        "cudaInitDevice",
         "cudaHostRegisterReadOnly",
         "cudaGraphicsVDPAURegisterVideoSurface",
         "cudaGraphicsVDPAURegisterOutputSurface",
@@ -6186,6 +6196,7 @@ sub warnUnsupportedFunctions {
         "cudaGraphMemFreeNodeGetParams",
         "cudaGraphMemAllocNodeGetParams",
         "cudaGraphKernelNodeCopyAttributes",
+        "cudaGraphInstantiateWithParams",
         "cudaGraphInstantiateSuccess",
         "cudaGraphInstantiateResult",
         "cudaGraphInstantiateParams_st",
@@ -6204,6 +6215,7 @@ sub warnUnsupportedFunctions {
         "cudaGraphExecUpdateResultInfo_st",
         "cudaGraphExecUpdateResultInfo",
         "cudaGraphExecUpdateErrorAttributesChanged",
+        "cudaGraphExecGetFlags",
         "cudaGraphExecExternalSemaphoresWaitNodeSetParams",
         "cudaGraphExecExternalSemaphoresSignalNodeSetParams",
         "cudaGraphDebugDotPrint",
@@ -7057,7 +7069,6 @@ sub warnUnsupportedFunctions {
         "CU_POINTER_ATTRIBUTE_ACCESS_FLAG_READ",
         "CU_POINTER_ATTRIBUTE_ACCESS_FLAG_NONE",
         "CU_PARAM_TR_DEFAULT",
-        "CU_OCCUPANCY_DISABLE_CACHING_OVERRIDE",
         "CU_MODULE_LAZY_LOADING",
         "CU_MODULE_EAGER_LOADING",
         "CU_MEM_RANGE_HANDLE_TYPE_MAX",
@@ -8490,7 +8501,7 @@ if ($help) {
     print STDERR "$USAGE\n";
 }
 if ($version) {
-    print STDERR "HIP version 5.4.0\n";
+    print STDERR "HIP version 5.5.0\n";
 }
 while (@ARGV) {
     $fileName=shift (@ARGV);
