@@ -8,3 +8,4 @@ sphinx-book-theme==0.3.3
 myst_nb==0.17.1
 myst-parser[linkify]==0.18.1
 gitpython
+git+https://github.com/lawruble13/rocm-docs.git
