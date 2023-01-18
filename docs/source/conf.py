@@ -10,89 +10,118 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-import os
-import sys
-sys.path.insert(0, os.path.abspath('.'))
-from format_toc import format_toc
+
+from rocm_docs import setup_rocm_docs
+
+(
+    copyright,
+    author,
+    project,
+    extensions,
+    myst_enable_extensions,
+    myst_heading_anchors,
+    external_toc_path,
+    external_toc_exclude_missing,
+    intersphinx_mapping,
+    intersphinx_disabled_domains,
+    templates_path,
+    epub_show_urls,
+    exclude_patterns,
+    html_theme,
+    html_title,
+    html_static_path,
+    html_css_files,
+    html_js_files,
+    html_extra_path,
+    html_theme_options,
+    html_show_sphinx,
+    html_favicon,
+) = setup_rocm_docs("HIPIFY Documentation")
+
+print(project)
+# import os
+# import sys
+# sys.path.insert(0, os.path.abspath('.'))
+# from format_toc import format_toc
 
 
-# -- Project information -----------------------------------------------------
+# # -- Project information -----------------------------------------------------
 
-project = "HIPIFY Documentation"
-copyright = "2022-2023, Advanced Micro Devices Ltd. "
-author = "Advanced Micro Devices <a href=\"https://\">Disclaimer and Licensing Info</a> "
-
-
-# -- General configuration ---------------------------------------------------
-# -- General configuration
-
-extensions = [
-        "sphinx.ext.duration",
-        "sphinx.ext.doctest",
-        "sphinx.ext.autodoc",
-        "sphinx.ext.autosummary",
-        "sphinx.ext.intersphinx",
-        "sphinx_external_toc",
-        "sphinx_design",
-        "sphinx_copybutton",
-        "myst_nb",
-    ]
-
-# MyST Configuration
-myst_enable_extensions = ["colon_fence", "linkify"]
-myst_heading_anchors = 3
-
-format_toc()
-external_toc_path = "_toc.yml"
-external_toc_exclude_missing = False
+# project = "HIPIFY Documentation"
+# copyright = "2022-2023, Advanced Micro Devices Ltd. "
+# author = "Advanced Micro Devices <a href=\"https://\">Disclaimer and Licensing Info</a> "
 
 
-intersphinx_mapping = {
-        "rtd": ("https://docs.readthedocs.io/en/stable/", None),
-        "python": ("https://docs.python.org/3/", None),
-        "sphinx": ("https://www.sphinx-doc.org/en/master/", None),
-    }
-intersphinx_disabled_domains = ["std"]
+# # -- General configuration ---------------------------------------------------
+# # -- General configuration
 
-templates_path = ["_templates"]
+# extensions = [
+#         "sphinx.ext.duration",
+#         "sphinx.ext.doctest",
+#         "sphinx.ext.autodoc",
+#         "sphinx.ext.autosummary",
+#         "sphinx.ext.intersphinx",
+#         "sphinx_external_toc",
+#         "sphinx_design",
+#         "sphinx_copybutton",
+#         "myst_nb",
+#     ]
 
-# -- Options for EPUB output
-epub_show_urls = "footnote"
+# # MyST Configuration
+# myst_enable_extensions = ["colon_fence", "linkify"]
+# myst_heading_anchors = 3
 
-# List of patterns, relative to source directory, that match files and
-# directories to ignore when looking for source files.
-# This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
+# format_toc()
+# external_toc_path = "_toc.yml"
+# external_toc_exclude_missing = False
 
-# -- Options for HTML output -------------------------------------------------
 
-# The theme to use for HTML and HTML Help pages.  See the documentation for
-# a list of builtin themes.
-#
-html_theme = "sphinx_book_theme"
-html_title = project
-html_static_path = ["_static"]
-html_css_files = ["custom.css", "rocm_header.css", "rocm_footer.css"]
-html_js_files = ["code_word_breaks.js"]
-html_extra_path = ["_images"]
-html_theme_options = {
-    "home_page_in_toc": True,
-    "use_edit_page_button": True,
-    "repository_url": "https://github.com/ROCm-Developer-Tools/HIPIFY/",
-#TODO: import branch based on current git checkout
-    "repository_branch": "amd-staging",
-    "path_to_docs": "docs",
+# intersphinx_mapping = {
+#         "rtd": ("https://docs.readthedocs.io/en/stable/", None),
+#         "python": ("https://docs.python.org/3/", None),
+#         "sphinx": ("https://www.sphinx-doc.org/en/master/", None),
+#     }
+# intersphinx_disabled_domains = ["std"]
 
-    "show_navbar_depth": "2",
-    "body_max_width": "none",
-    "show_toc_level": "0",
-    "extra_navbar": ""
-}
+# templates_path = ["_templates"]
 
-html_show_sphinx = False
-html_favicon = "https://www.amd.com/themes/custom/amd/favicon.ico"
+# # -- Options for EPUB output
+# epub_show_urls = "footnote"
 
-# Add any paths that contain custom static files (such as style sheets) here,
-# relative to this directory. They are copied after the builtin static files,
-# so a file named "default.css" will overwrite the builtin "default.css".
-#html_static_path = ["_static"]
+# # List of patterns, relative to source directory, that match files and
+# # directories to ignore when looking for source files.
+# # This pattern also affects html_static_path and html_extra_path.
+# exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
+
+# # -- Options for HTML output -------------------------------------------------
+
+# # The theme to use for HTML and HTML Help pages.  See the documentation for
+# # a list of builtin themes.
+# #
+# html_theme = "sphinx_book_theme"
+# html_title = project
+# html_static_path = ["_static"]
+# html_css_files = ["custom.css", "rocm_header.css", "rocm_footer.css"]
+# html_js_files = ["code_word_breaks.js"]
+# html_extra_path = ["_images"]
+# html_theme_options = {
+#     "home_page_in_toc": True,
+#     "use_edit_page_button": True,
+#     "repository_url": "https://github.com/ROCm-Developer-Tools/HIPIFY/",
+# #TODO: import branch based on current git checkout
+#     "repository_branch": "amd-staging",
+#     "path_to_docs": "docs",
+
+#     "show_navbar_depth": "2",
+#     "body_max_width": "none",
+#     "show_toc_level": "0",
+#     "extra_navbar": ""
+# }
+
+# html_show_sphinx = False
+# html_favicon = "https://www.amd.com/themes/custom/amd/favicon.ico"
+
+# # Add any paths that contain custom static files (such as style sheets) here,
+# # relative to this directory. They are copied after the builtin static files,
+# # so a file named "default.css" will overwrite the builtin "default.css".
+# #html_static_path = ["_static"]
