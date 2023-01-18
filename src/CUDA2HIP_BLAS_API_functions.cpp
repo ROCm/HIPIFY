@@ -270,21 +270,33 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
 
   // TRSV
   {"cublasStrsv",                    {"hipblasStrsv",                    "rocblas_strsv",                            CONV_LIB_FUNC, API_BLAS, 6, HIP_SUPPORTED_V2_ONLY}},
+  {"cublasStrsv_64",                 {"hipblasStrsv_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 6, UNSUPPORTED}},
   {"cublasDtrsv",                    {"hipblasDtrsv",                    "rocblas_dtrsv",                            CONV_LIB_FUNC, API_BLAS, 6, HIP_SUPPORTED_V2_ONLY}},
+  {"cublasDtrsv_64",                 {"hipblasDtrsv_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 6, UNSUPPORTED}},
   {"cublasCtrsv",                    {"hipblasCtrsv",                    "rocblas_ctrsv",                            CONV_LIB_FUNC, API_BLAS, 6, HIP_SUPPORTED_V2_ONLY}},
+  {"cublasCtrsv_64",                 {"hipblasCtrsv_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 6, UNSUPPORTED}},
   {"cublasZtrsv",                    {"hipblasZtrsv",                    "rocblas_ztrsv",                            CONV_LIB_FUNC, API_BLAS, 6, HIP_SUPPORTED_V2_ONLY}},
+  {"cublasZtrsv_64",                 {"hipblasZtrsv_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 6, UNSUPPORTED}},
 
   // TPSV
   {"cublasStpsv",                    {"hipblasStpsv",                    "rocblas_stpsv",                            CONV_LIB_FUNC, API_BLAS, 6, HIP_SUPPORTED_V2_ONLY}},
+  {"cublasStpsv_64",                 {"hipblasStpsv_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 6, UNSUPPORTED}},
   {"cublasDtpsv",                    {"hipblasDtpsv",                    "rocblas_dtpsv",                            CONV_LIB_FUNC, API_BLAS, 6, HIP_SUPPORTED_V2_ONLY}},
+  {"cublasDtpsv_64",                 {"hipblasDtpsv_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 6, UNSUPPORTED}},
   {"cublasCtpsv",                    {"hipblasCtpsv",                    "rocblas_ctpsv",                            CONV_LIB_FUNC, API_BLAS, 6, HIP_SUPPORTED_V2_ONLY}},
+  {"cublasCtpsv_64",                 {"hipblasCtpsv_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 6, UNSUPPORTED}},
   {"cublasZtpsv",                    {"hipblasZtpsv",                    "rocblas_ztpsv",                            CONV_LIB_FUNC, API_BLAS, 6, HIP_SUPPORTED_V2_ONLY}},
+  {"cublasZtpsv_64",                 {"hipblasZtpsv_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 6, UNSUPPORTED}},
 
   // TBSV
   {"cublasStbsv",                    {"hipblasStbsv",                    "rocblas_stbsv",                            CONV_LIB_FUNC, API_BLAS, 6, HIP_SUPPORTED_V2_ONLY}},
+  {"cublasStbsv_64",                 {"hipblasStbsv_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 6, UNSUPPORTED}},
   {"cublasDtbsv",                    {"hipblasDtbsv",                    "rocblas_dtbsv",                            CONV_LIB_FUNC, API_BLAS, 6, HIP_SUPPORTED_V2_ONLY}},
+  {"cublasDtbsv_64",                 {"hipblasDtbsv_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 6, UNSUPPORTED}},
   {"cublasCtbsv",                    {"hipblasCtbsv",                    "rocblas_ctbsv",                            CONV_LIB_FUNC, API_BLAS, 6, HIP_SUPPORTED_V2_ONLY}},
+  {"cublasCtbsv_64",                 {"hipblasCtbsv_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 6, UNSUPPORTED}},
   {"cublasZtbsv",                    {"hipblasZtbsv",                    "rocblas_ztbsv",                            CONV_LIB_FUNC, API_BLAS, 6, HIP_SUPPORTED_V2_ONLY}},
+  {"cublasZtbsv_64",                 {"hipblasZtbsv_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 6, UNSUPPORTED}},
 
   // SYMV/HEMV
   {"cublasSsymv",                    {"hipblasSsymv",                    "rocblas_ssymv",                            CONV_LIB_FUNC, API_BLAS, 6, HIP_SUPPORTED_V2_ONLY}},
@@ -535,21 +547,33 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
 
   // TRSV
   {"cublasStrsv_v2",                 {"hipblasStrsv",                    "rocblas_strsv",                            CONV_LIB_FUNC, API_BLAS, 6}},
+  {"cublasStrsv_v2_64",              {"hipblasStrsv_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 6, UNSUPPORTED}},
   {"cublasDtrsv_v2",                 {"hipblasDtrsv",                    "rocblas_dtrsv",                            CONV_LIB_FUNC, API_BLAS, 6}},
+  {"cublasDtrsv_v2_64",              {"hipblasDtrsv_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 6, UNSUPPORTED}},
   {"cublasCtrsv_v2",                 {"hipblasCtrsv",                    "rocblas_ctrsv",                            CONV_LIB_FUNC, API_BLAS, 6}},
+  {"cublasCtrsv_v2_64",              {"hipblasCtrsv_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 6, UNSUPPORTED}},
   {"cublasZtrsv_v2",                 {"hipblasZtrsv",                    "rocblas_ztrsv",                            CONV_LIB_FUNC, API_BLAS, 6}},
+  {"cublasZtrsv_v2_64",              {"hipblasZtrsv_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 6, UNSUPPORTED}},
 
   // TPSV
   {"cublasStpsv_v2",                 {"hipblasStpsv",                    "rocblas_stpsv",                            CONV_LIB_FUNC, API_BLAS, 6}},
+  {"cublasStpsv_v2_64",              {"hipblasStpsv_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 6, UNSUPPORTED}},
   {"cublasDtpsv_v2",                 {"hipblasDtpsv",                    "rocblas_dtpsv",                            CONV_LIB_FUNC, API_BLAS, 6}},
+  {"cublasDtpsv_v2_64",              {"hipblasDtpsv_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 6, UNSUPPORTED}},
   {"cublasCtpsv_v2",                 {"hipblasCtpsv",                    "rocblas_ctpsv",                            CONV_LIB_FUNC, API_BLAS, 6}},
+  {"cublasCtpsv_v2_64",              {"hipblasCtpsv_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 6, UNSUPPORTED}},
   {"cublasZtpsv_v2",                 {"hipblasZtpsv",                    "rocblas_ztpsv",                            CONV_LIB_FUNC, API_BLAS, 6}},
+  {"cublasZtpsv_v2_64",              {"hipblasZtpsv_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 6, UNSUPPORTED}},
 
   // TBSV
   {"cublasStbsv_v2",                 {"hipblasStbsv",                    "rocblas_stbsv",                            CONV_LIB_FUNC, API_BLAS, 6}},
+  {"cublasStbsv_v2_64",              {"hipblasStbsv_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 6, UNSUPPORTED}},
   {"cublasDtbsv_v2",                 {"hipblasDtbsv",                    "rocblas_dtbsv",                            CONV_LIB_FUNC, API_BLAS, 6}},
+  {"cublasDtbsv_v2_64",              {"hipblasDtbsv_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 6, UNSUPPORTED}},
   {"cublasCtbsv_v2",                 {"hipblasCtbsv",                    "rocblas_ctbsv",                            CONV_LIB_FUNC, API_BLAS, 6}},
+  {"cublasCtbsv_v2_64",              {"hipblasCtbsv_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 6, UNSUPPORTED}},
   {"cublasZtbsv_v2",                 {"hipblasZtbsv",                    "rocblas_ztbsv",                            CONV_LIB_FUNC, API_BLAS, 6}},
+  {"cublasZtbsv_v2_64",              {"hipblasZtbsv_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 6, UNSUPPORTED}},
 
   // SYMV/HEMV
   {"cublasSsymv_v2",                 {"hipblasSsymv",                    "rocblas_ssymv",                            CONV_LIB_FUNC, API_BLAS, 6}},
@@ -1036,6 +1060,30 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_FUNCTION_VER_MAP {
   {"cublasCtpmv_v2_64",                          {CUDA_120, CUDA_0, CUDA_0}},
   {"cublasZtpmv_64",                             {CUDA_120, CUDA_0, CUDA_0}},
   {"cublasZtpmv_v2_64",                          {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasStrsv_64",                             {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasStrsv_v2_64",                          {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasDtrsv_64",                             {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasDtrsv_v2_64",                          {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasCtrsv_64",                             {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasCtrsv_v2_64",                          {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasZtrsv_64",                             {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasZtrsv_v2_64",                          {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasStpsv_64",                             {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasStpsv_v2_64",                          {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasDtpsv_64",                             {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasDtpsv_v2_64",                          {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasCtpsv_64",                             {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasCtpsv_v2_64",                          {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasZtpsv_64",                             {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasZtpsv_v2_64",                          {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasStbsv_64",                             {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasStbsv_v2_64",                          {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasDtbsv_64",                             {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasDtbsv_v2_64",                          {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasCtbsv_64",                             {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasCtbsv_v2_64",                          {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasZtbsv_64",                             {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasZtbsv_v2_64",                          {CUDA_120, CUDA_0, CUDA_0}},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_FUNCTION_VER_MAP {
