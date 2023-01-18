@@ -1,0 +1,43 @@
+<!-- Copied from pydata-sphinx-theme -->
+
+{%- macro icon_link_nav_item(url, icon, name, type, attributes='') -%}
+  {%- if url | length > 2 %}
+        <li class="nav-item">
+          {%- set attributesDefault = { "href": url, "title": name, "class": "nav-link", "rel": "noopener", "target": "_blank", "data-bs-toggle": "tooltip", "data-bs-placement": "bottom"} %}
+          {%- if attributes %}{% for key, val in attributes.items() %}
+            {% set _ = attributesDefault.update(attributes) %}
+          {% endfor %}{% endif -%}
+          {% set attributeString = [] %}
+          {% for key, val in attributesDefault.items() %}
+            {%- set _ = attributeString.append('%s="%s"' % (key, val)) %}
+          {% endfor %}
+          {% set attributeString = attributeString | join(" ") -%}
+          <a {{ attributeString }}>
+            {%- if type == "fontawesome" -%}
+            <span><i class="{{ icon }}"></i></span>
+            <label class="sr-only">{{ _(name) }}</label>
+            {%- elif type == "local" -%}
+            <img src="{{ pathto(icon, 1) }}" class="icon-link-image" alt="{{ _(name) }}"/>
+            {%- elif type == "url" -%}
+            <img src="{{ icon }}" class="icon-link-image" alt="{{ _(name) }}"/>
+            {%- else %}
+            <span>Incorrectly configured icon link. Type must be `fontawesome`, `url` or `local`.</span>
+            {%- endif -%}
+          </a>
+        </li>
+  {%- endif -%}
+{%- endmacro -%}
+<ul id="navbar-icon-links"
+    class="navbar-nav"
+    aria-label="{{ _(theme_icon_links_label) }}">
+  {%- block icon_link_shortcuts -%}
+    {{ icon_link_nav_item("http://www.github.com/AMD", "fab fa-github", "GitHub", "fontawesome") -}}
+    {{ icon_link_nav_item("http://www.facebook.com/amd", "fab fa-facebook-f", "Facebook", "fontawesome") -}}
+    {{ icon_link_nav_item("http://www.twitter.com/amd", "fab fa-twitter", "Twitter", "fontawesome") -}}
+    {{ icon_link_nav_item("http://www.instagram.com/amd", "fab fa-instagram", "Instagram", "fontawesome") -}}
+    {{ icon_link_nav_item("http://www.linkedin.com/company/amd", "fab fa-linkedin", "LinkedIn", "fontawesome") -}}
+    {{ icon_link_nav_item("https://www.amd.com/en/corporate/subscriptions", "fa fa-envelope", "Mail", "fontawesome") -}}
+    {{ icon_link_nav_item("https://www.youtube.com/user/amd?sub_confirmation=1", "fab fa-youtube", "Youtube", "fontawesome") -}}
+    {{ icon_link_nav_item("https://www.twitch.tv/amd", "fab fa-twitch", "Twitch", "fontawesome") -}}
+  {% endblock icon_link_shortcuts -%}
+</ul>

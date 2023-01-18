@@ -1,0 +1,58 @@
+.rocm-footer {
+    background-color: black;
+    color: white;
+    display: flex;
+    flex-wrap: wrap;
+    border-top: 1px solid hsla(216,3%,63%,.5);
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    padding-top: 5px;
+    line-height: 20px;
+    height: 120px;
+}
+
+.rocm-footer a, .rocm-footer p {
+    color: white;
+}
+
+.rocm-footer>ul {
+    border-bottom: 1px solid hsla(216,3%,63%,.5);
+    justify-content: flex-end;
+    margin-top:15px;
+}
+
+.rocm-footer ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    font-size: 12px;
+    padding: 0;
+    padding-bottom: 12px;
+    width:98vw;
+    list-style: none inside none;
+    margin: 0;
+}
+
+.rocm-footer div {
+    width: 98vw;
+}
+
+.rocm-footer div {
+    text-align: start;
+}
+
+.rocm-footer a:hover {
+    color: #e9ecef;
+    text-decoration: none;
+}
+
+.rocm-footer ul li {
+    margin-right: 5px;
+}
+
+.rocm-footer ul li+li {
+    margin-left: 10px;
+    padding-left: 8px;
+}
