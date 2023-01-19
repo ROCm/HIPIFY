@@ -187,7 +187,7 @@ requests==2.28.1
     # via
     #   pygithub
     #   sphinx
-rocm-docs @ git+https://${USERNAME}:${PASSWORD}@github.com/lawruble13/rocm-docs.git
+rocm-docs @ git+https://${TOKEN}@github.com/RadeonOpenCompute/rocm-docs.git
     # via -r requirements.in
 six==1.16.0
     # via
