@@ -7,4 +7,4 @@ sphinx_external_toc==0.3.1
 sphinx-book-theme==0.3.3
 myst_nb==0.17.1
 myst-parser[linkify]==0.18.1
-git+https://${TOKEN}@github.com/RadeonOpenCompute/rocm-docs.git
+git+git@github.com:RadeonOpenCompute/rocm-docs-core.git
