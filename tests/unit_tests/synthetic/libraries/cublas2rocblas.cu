@@ -1864,7 +1864,7 @@ int main() {
   cublasDataType_t C_16BF = CUDA_C_16BF;
 #endif
 
-#if CUDA_VERSION >= 11040
+#if CUDA_VERSION >= 11040 && CUBLAS_VERSION >= 11600
   // CUDA: CUBLASAPI const char* CUBLASWINAPI cublasGetStatusString(cublasStatus_t status);
   // ROC: ROCBLAS_EXPORT const char* rocblas_status_to_string(rocblas_status status);
   // CHECK: const_ch = rocblas_status_to_string(blasStatus);
