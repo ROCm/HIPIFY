@@ -403,7 +403,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
   {"cublasCgemm",                    {"hipblasCgemm",                    "rocblas_cgemm",                            CONV_LIB_FUNC, API_BLAS, 7, HIP_SUPPORTED_V2_ONLY}},
   {"cublasCgemm_64",                 {"hipblasCgemm_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
   {"cublasZgemm",                    {"hipblasZgemm",                    "rocblas_zgemm",                            CONV_LIB_FUNC, API_BLAS, 7, HIP_SUPPORTED_V2_ONLY}},
+  {"cublasZgemm_64",                 {"hipblasZgemm_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
   {"cublasHgemm",                    {"hipblasHgemm",                    "rocblas_hgemm",                            CONV_LIB_FUNC, API_BLAS, 7}},
+  {"cublasHgemm_64",                 {"hipblasHgemm_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
 
   // BATCH GEMM
   {"cublasSgemmBatched",             {"hipblasSgemmBatched",             "rocblas_sgemm_batched",                    CONV_LIB_FUNC, API_BLAS, 7}},
@@ -455,19 +457,29 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
 
   // SYRK
   {"cublasSsyrk",                    {"hipblasSsyrk",                    "rocblas_ssyrk",                            CONV_LIB_FUNC, API_BLAS, 7, HIP_SUPPORTED_V2_ONLY}},
+  {"cublasSsyrk_64",                 {"hipblasSsyrk_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
   {"cublasDsyrk",                    {"hipblasDsyrk",                    "rocblas_dsyrk",                            CONV_LIB_FUNC, API_BLAS, 7, HIP_SUPPORTED_V2_ONLY}},
+  {"cublasDsyrk_64",                 {"hipblasDsyrk_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
   {"cublasCsyrk",                    {"hipblasCsyrk",                    "rocblas_csyrk",                            CONV_LIB_FUNC, API_BLAS, 7, HIP_SUPPORTED_V2_ONLY}},
+  {"cublasCsyrk_64",                 {"hipblasCsyrk_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
   {"cublasZsyrk",                    {"hipblasZsyrk",                    "rocblas_zsyrk",                            CONV_LIB_FUNC, API_BLAS, 7, HIP_SUPPORTED_V2_ONLY}},
+  {"cublasZsyrk_64",                 {"hipblasZsyrk_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
 
   // HERK
   {"cublasCherk",                    {"hipblasCherk",                    "rocblas_cherk",                            CONV_LIB_FUNC, API_BLAS, 7, HIP_SUPPORTED_V2_ONLY}},
+  {"cublasCherk_64",                 {"hipblasCherk_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
   {"cublasZherk",                    {"hipblasZherk",                    "rocblas_zherk",                            CONV_LIB_FUNC, API_BLAS, 7, HIP_SUPPORTED_V2_ONLY}},
+  {"cublasZherk_64",                 {"hipblasZherk_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
 
   // SYR2K
   {"cublasSsyr2k",                   {"hipblasSsyr2k",                   "rocblas_ssyr2k",                           CONV_LIB_FUNC, API_BLAS, 7, HIP_SUPPORTED_V2_ONLY}},
+  {"cublasSsyr2k_64",                {"hipblasSsyr2k_64",                "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
   {"cublasDsyr2k",                   {"hipblasDsyr2k",                   "rocblas_dsyr2k",                           CONV_LIB_FUNC, API_BLAS, 7, HIP_SUPPORTED_V2_ONLY}},
+  {"cublasDsyr2k_64",                {"hipblasDsyr2k_64",                "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
   {"cublasCsyr2k",                   {"hipblasCsyr2k",                   "rocblas_csyr2k",                           CONV_LIB_FUNC, API_BLAS, 7, HIP_SUPPORTED_V2_ONLY}},
+  {"cublasCsyr2k_64",                {"hipblasCsyr2k_64",                "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
   {"cublasZsyr2k",                   {"hipblasZsyr2k",                   "rocblas_zsyr2k",                           CONV_LIB_FUNC, API_BLAS, 7, HIP_SUPPORTED_V2_ONLY}},
+  {"cublasZsyr2k_64",                {"hipblasZsyr2k_64",                "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
 
   // SYRKX - eXtended SYRK
   {"cublasSsyrkx",                   {"hipblasSsyrkx",                   "rocblas_ssyrkx",                           CONV_LIB_FUNC, API_BLAS, 7}},
@@ -757,43 +769,64 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
   {"cublasCgemm_v2",                 {"hipblasCgemm",                    "rocblas_cgemm",                            CONV_LIB_FUNC, API_BLAS, 7}},
   {"cublasCgemm_v2_64",              {"hipblasCgemm_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
   {"cublasCgemm3m",                  {"hipblasCgemm3m",                  "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
+  {"cublasCgemm3m_64",               {"hipblasCgemm3m_64",               "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
   {"cublasCgemm3mEx",                {"hipblasCgemm3mEx",                "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
+  {"cublasCgemm3mEx_64",             {"hipblasCgemm3mEx_64",             "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
   {"cublasZgemm_v2",                 {"hipblasZgemm",                    "rocblas_zgemm",                            CONV_LIB_FUNC, API_BLAS, 7}},
+  {"cublasZgemm_v2_64",              {"hipblasZgemm_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
   {"cublasZgemm3m",                  {"hipblasZgemm3m",                  "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
+  {"cublasZgemm3m_64",               {"hipblasZgemm3m_64",               "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
 
   //IO in FP16 / FP32, computation in float
   {"cublasSgemmEx",                  {"hipblasSgemmEx",                  "",                                         CONV_LIB_FUNC, API_BLAS, 8, UNSUPPORTED}},
+  {"cublasSgemmEx_64",               {"hipblasSgemmEx_64",               "",                                         CONV_LIB_FUNC, API_BLAS, 8, UNSUPPORTED}},
   {"cublasGemmEx",                   {"hipblasGemmEx",                   "rocblas_gemm_ex",                          CONV_LIB_FUNC, API_BLAS, 8}},
+  {"cublasGemmEx_64",                {"hipblasGemmEx_64",                "",                                         CONV_LIB_FUNC, API_BLAS, 8, UNSUPPORTED}},
   {"cublasGemmBatchedEx",            {"hipblasGemmBatchedEx",            "rocblas_gemm_batched_ex",                  CONV_LIB_FUNC, API_BLAS, 8}},
   {"cublasGemmStridedBatchedEx",     {"hipblasGemmStridedBatchedEx",     "rocblas_gemm_strided_batched_ex",          CONV_LIB_FUNC, API_BLAS, 8}},
   // IO in Int8 complex/cuComplex, computation in cuComplex
   {"cublasCgemmEx",                  {"hipblasCgemmEx",                  "",                                         CONV_LIB_FUNC, API_BLAS, 8, UNSUPPORTED}},
+  {"cublasCgemmEx_64",               {"hipblasCgemmEx_64",               "",                                         CONV_LIB_FUNC, API_BLAS, 8, UNSUPPORTED}},
   {"cublasUint8gemmBias",            {"hipblasUint8gemmBias",            "",                                         CONV_LIB_FUNC, API_BLAS, 8, UNSUPPORTED}},
 
   // SYRK
   {"cublasSsyrk_v2",                 {"hipblasSsyrk",                    "rocblas_ssyrk",                            CONV_LIB_FUNC, API_BLAS, 7}},
+  {"cublasSsyrk_v2_64",              {"hipblasSsyrk_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
   {"cublasDsyrk_v2",                 {"hipblasDsyrk",                    "rocblas_dsyrk",                            CONV_LIB_FUNC, API_BLAS, 7}},
+  {"cublasDsyrk_v2_64",              {"hipblasDsyrk_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
   {"cublasCsyrk_v2",                 {"hipblasCsyrk",                    "rocblas_csyrk",                            CONV_LIB_FUNC, API_BLAS, 7}},
+  {"cublasCsyrk_v2_64",              {"hipblasCsyrk_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
   {"cublasZsyrk_v2",                 {"hipblasZsyrk",                    "rocblas_zsyrk",                            CONV_LIB_FUNC, API_BLAS, 7}},
+  {"cublasZsyrk_v2_64",              {"hipblasZsyrk_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
 
   // IO in Int8 complex/cuComplex, computation in cuComplex
   {"cublasCsyrkEx",                  {"hipblasCsyrkEx",                  "",                                         CONV_LIB_FUNC, API_BLAS, 8, UNSUPPORTED}},
+  {"cublasCsyrkEx_64",               {"hipblasCsyrkEx_64",               "",                                         CONV_LIB_FUNC, API_BLAS, 8, UNSUPPORTED}},
   // IO in Int8 complex/cuComplex, computation in cuComplex, Gaussian math
   {"cublasCsyrk3mEx",                {"hipblasCsyrk3mEx",                "",                                         CONV_LIB_FUNC, API_BLAS, 8, UNSUPPORTED}},
+  {"cublasCsyrk3mEx_64",             {"hipblasCsyrk3mEx_64",             "",                                         CONV_LIB_FUNC, API_BLAS, 8, UNSUPPORTED}},
 
   // HERK
   {"cublasCherk_v2",                 {"hipblasCherk",                    "rocblas_cherk",                            CONV_LIB_FUNC, API_BLAS, 7}},
+  {"cublasCherk_v2_64",              {"hipblasCherk_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
   // IO in Int8 complex/cuComplex, computation in cuComplex
   {"cublasCherkEx",                  {"hipblasCherkEx",                  "",                                         CONV_LIB_FUNC, API_BLAS, 8, UNSUPPORTED}},
+  {"cublasCherkEx_64",               {"hipblasCherkEx_64",               "",                                         CONV_LIB_FUNC, API_BLAS, 8, UNSUPPORTED}},
   // IO in Int8 complex/cuComplex, computation in cuComplex, Gaussian math
   {"cublasCherk3mEx",                {"hipblasCherk3mEx",                "",                                         CONV_LIB_FUNC, API_BLAS, 8, UNSUPPORTED}},
+  {"cublasCherk3mEx_64",             {"hipblasCherk3mEx_64",             "",                                         CONV_LIB_FUNC, API_BLAS, 8, UNSUPPORTED}},
   {"cublasZherk_v2",                 {"hipblasZherk",                    "rocblas_zherk",                            CONV_LIB_FUNC, API_BLAS, 7}},
+  {"cublasZherk_v2_64",              {"hipblasZherk_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
 
   // SYR2K
   {"cublasSsyr2k_v2",                {"hipblasSsyr2k",                   "rocblas_ssyr2k",                           CONV_LIB_FUNC, API_BLAS, 7}},
+  {"cublasSsyr2k_v2_64",             {"hipblasSsyr2k_64",                "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
   {"cublasDsyr2k_v2",                {"hipblasDsyr2k",                   "rocblas_dsyr2k",                           CONV_LIB_FUNC, API_BLAS, 7}},
+  {"cublasDsyr2k_v2_64",             {"hipblasDsyr2k_64",                "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
   {"cublasCsyr2k_v2",                {"hipblasCsyr2k",                   "rocblas_csyr2k",                           CONV_LIB_FUNC, API_BLAS, 7}},
+  {"cublasCsyr2k_v2_64",             {"hipblasCsyr2k_64",                "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
   {"cublasZsyr2k_v2",                {"hipblasZsyr2k",                   "rocblas_zsyr2k",                           CONV_LIB_FUNC, API_BLAS, 7}},
+  {"cublasZsyr2k_v2_64",             {"hipblasZsyr2k_64",                "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
 
   // HER2K
   {"cublasCher2k_v2",                {"hipblasCher2k",                   "rocblas_cher2k",                           CONV_LIB_FUNC, API_BLAS, 7}},
@@ -1322,6 +1355,39 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_FUNCTION_VER_MAP {
   {"cublasDgemm_v2_64",                          {CUDA_120, CUDA_0, CUDA_0}},
   {"cublasCgemm_64",                             {CUDA_120, CUDA_0, CUDA_0}},
   {"cublasCgemm_v2_64",                          {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasCgemm3m_64",                           {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasCgemm3mEx_64",                         {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasZgemm_64",                             {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasZgemm_v2_64",                          {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasZgemm3m_64",                           {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasHgemm_64",                             {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasSgemmEx_64",                           {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasGemmEx_64",                            {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasCgemmEx_64",                           {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasSsyrk_64",                             {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasSsyrk_v2_64",                          {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasDsyrk_64",                             {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasDsyrk_v2_64",                          {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasCsyrk_64",                             {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasCsyrk_v2_64",                          {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasZsyrk_64",                             {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasZsyrk_v2_64",                          {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasCsyrkEx_64",                           {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasCsyrk3mEx_64",                         {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasCherk_64",                             {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasCherk_v2_64",                          {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasZherk_64",                             {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasZherk_v2_64",                          {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasCherkEx_64",                           {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasCherk3mEx_64",                         {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasSsyr2k_64",                            {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasSsyr2k_v2_64",                         {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasDsyr2k_64",                            {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasDsyr2k_v2_64",                         {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasCsyr2k_64",                            {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasCsyr2k_v2_64",                         {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasZsyr2k_64",                            {CUDA_120, CUDA_0, CUDA_0}},
+  {"cublasZsyr2k_v2_64",                         {CUDA_120, CUDA_0, CUDA_0}},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_FUNCTION_VER_MAP {
