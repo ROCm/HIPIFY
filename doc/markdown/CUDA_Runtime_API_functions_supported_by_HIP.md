@@ -1025,7 +1025,7 @@ Unsupported
 |`cudaEvent_t`| | | |`hipEvent_t`|1.6.0| | | |
 |`cudaExtent`| | | |`hipExtent`|1.7.0| | | |
 |`cudaExternalMemoryBufferDesc`|10.0| | |`hipExternalMemoryBufferDesc`|4.3.0| | | |
-|`cudaExternalMemoryDedicated`|10.0| | | | | | | |
+|`cudaExternalMemoryDedicated`|10.0| | |`hipExternalMemoryDedicated`|5.5.0| | |5.5.0|
 |`cudaExternalMemoryHandleDesc`|10.0| | |`hipExternalMemoryHandleDesc`|4.3.0| | | |
 |`cudaExternalMemoryHandleType`|10.0| | |`hipExternalMemoryHandleType`|4.3.0| | | |
 |`cudaExternalMemoryHandleTypeD3D11Resource`|10.0| | |`hipExternalMemoryHandleTypeD3D11Resource`|4.3.0| | | |
@@ -1100,17 +1100,17 @@ Unsupported
 |`cudaGPUDirectRDMAWritesOrderingNone`|11.3| | | | | | | |
 |`cudaGPUDirectRDMAWritesOrderingOwner`|11.3| | | | | | | |
 |`cudaGetDriverEntryPointFlags`|11.3| | | | | | | |
-|`cudaGraphDebugDotFlags`|11.3| | | | | | | |
-|`cudaGraphDebugDotFlagsEventNodeParams`|11.3| | | | | | | |
-|`cudaGraphDebugDotFlagsExtSemasSignalNodeParams`|11.3| | | | | | | |
-|`cudaGraphDebugDotFlagsExtSemasWaitNodeParams`|11.3| | | | | | | |
-|`cudaGraphDebugDotFlagsHandles`|11.3| | | | | | | |
-|`cudaGraphDebugDotFlagsHostNodeParams`|11.3| | | | | | | |
-|`cudaGraphDebugDotFlagsKernelNodeAttributes`|11.3| | | | | | | |
-|`cudaGraphDebugDotFlagsKernelNodeParams`|11.3| | | | | | | |
-|`cudaGraphDebugDotFlagsMemcpyNodeParams`|11.3| | | | | | | |
-|`cudaGraphDebugDotFlagsMemsetNodeParams`|11.3| | | | | | | |
-|`cudaGraphDebugDotFlagsVerbose`|11.3| | | | | | | |
+|`cudaGraphDebugDotFlags`|11.3| | |`hipGraphDebugDotFlags`|5.5.0| | |5.5.0|
+|`cudaGraphDebugDotFlagsEventNodeParams`|11.3| | |`hipGraphDebugDotFlagsEventNodeParams`|5.5.0| | |5.5.0|
+|`cudaGraphDebugDotFlagsExtSemasSignalNodeParams`|11.3| | |`hipGraphDebugDotFlagsExtSemasSignalNodeParams`|5.5.0| | |5.5.0|
+|`cudaGraphDebugDotFlagsExtSemasWaitNodeParams`|11.3| | |`hipGraphDebugDotFlagsExtSemasWaitNodeParams`|5.5.0| | |5.5.0|
+|`cudaGraphDebugDotFlagsHandles`|11.3| | |`hipGraphDebugDotFlagsHandles`|5.5.0| | |5.5.0|
+|`cudaGraphDebugDotFlagsHostNodeParams`|11.3| | |`hipGraphDebugDotFlagsHostNodeParams`|5.5.0| | |5.5.0|
+|`cudaGraphDebugDotFlagsKernelNodeAttributes`|11.3| | |`hipGraphDebugDotFlagsKernelNodeAttributes`|5.5.0| | |5.5.0|
+|`cudaGraphDebugDotFlagsKernelNodeParams`|11.3| | |`hipGraphDebugDotFlagsKernelNodeParams`|5.5.0| | |5.5.0|
+|`cudaGraphDebugDotFlagsMemcpyNodeParams`|11.3| | |`hipGraphDebugDotFlagsMemcpyNodeParams`|5.5.0| | |5.5.0|
+|`cudaGraphDebugDotFlagsMemsetNodeParams`|11.3| | |`hipGraphDebugDotFlagsMemsetNodeParams`|5.5.0| | |5.5.0|
+|`cudaGraphDebugDotFlagsVerbose`|11.3| | |`hipGraphDebugDotFlagsVerbose`|5.5.0| | |5.5.0|
 |`cudaGraphExecUpdateError`|10.2| | |`hipGraphExecUpdateError`|4.3.0| | | |
 |`cudaGraphExecUpdateErrorAttributesChanged`|11.6| | | | | | | |
 |`cudaGraphExecUpdateErrorFunctionChanged`|10.2| | |`hipGraphExecUpdateErrorFunctionChanged`|4.3.0| | | |
@@ -1151,8 +1151,8 @@ Unsupported
 |`cudaGraphNodeTypeGraph`|10.0| | |`hipGraphNodeTypeGraph`|4.3.0| | | |
 |`cudaGraphNodeTypeHost`|10.0| | |`hipGraphNodeTypeHost`|4.3.0| | | |
 |`cudaGraphNodeTypeKernel`|10.0| | |`hipGraphNodeTypeKernel`|4.3.0| | | |
-|`cudaGraphNodeTypeMemAlloc`|11.4| | | | | | | |
-|`cudaGraphNodeTypeMemFree`|11.4| | | | | | | |
+|`cudaGraphNodeTypeMemAlloc`|11.4| | |`hipGraphNodeTypeMemAlloc`|5.5.0| | |5.5.0|
+|`cudaGraphNodeTypeMemFree`|11.4| | |`hipGraphNodeTypeMemFree`|5.5.0| | |5.5.0|
 |`cudaGraphNodeTypeMemcpy`|10.0| | |`hipGraphNodeTypeMemcpy`|4.3.0| | | |
 |`cudaGraphNodeTypeMemset`|10.0| | |`hipGraphNodeTypeMemset`|4.3.0| | | |
 |`cudaGraphNodeTypeWaitEvent`|11.1| | |`hipGraphNodeTypeWaitEvent`|4.3.0| | | |
@@ -1249,7 +1249,7 @@ Unsupported
 |`cudaMemAdviseUnsetAccessedBy`|8.0| | |`hipMemAdviseUnsetAccessedBy`|3.7.0| | | |
 |`cudaMemAdviseUnsetPreferredLocation`|8.0| | |`hipMemAdviseUnsetPreferredLocation`|3.7.0| | | |
 |`cudaMemAdviseUnsetReadMostly`|8.0| | |`hipMemAdviseUnsetReadMostly`|3.7.0| | | |
-|`cudaMemAllocNodeParams`|11.4| | | | | | | |
+|`cudaMemAllocNodeParams`|11.4| | |`hipMemallocNodeParams`| | | | |
 |`cudaMemAllocationHandleType`|11.2| | |`hipMemAllocationHandleType`|5.2.0| | | |
 |`cudaMemAllocationType`|11.2| | |`hipMemAllocationType`|5.2.0| | | |
 |`cudaMemAllocationTypeInvalid`|11.2| | |`hipMemAllocationTypeInvalid`|5.2.0| | | |
