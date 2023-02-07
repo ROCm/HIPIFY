@@ -853,7 +853,36 @@ my %removed_funcs = (
 
 my %experimental_funcs = (
     "cudaOccupancyDisableCachingOverride" => "5.5.0",
-    "CU_OCCUPANCY_DISABLE_CACHING_OVERRIDE" => "5.5.0"
+    "cudaGraphNodeTypeMemFree" => "5.5.0",
+    "cudaGraphNodeTypeMemAlloc" => "5.5.0",
+    "cudaGraphDebugDotFlagsVerbose" => "5.5.0",
+    "cudaGraphDebugDotFlagsMemsetNodeParams" => "5.5.0",
+    "cudaGraphDebugDotFlagsMemcpyNodeParams" => "5.5.0",
+    "cudaGraphDebugDotFlagsKernelNodeParams" => "5.5.0",
+    "cudaGraphDebugDotFlagsKernelNodeAttributes" => "5.5.0",
+    "cudaGraphDebugDotFlagsHostNodeParams" => "5.5.0",
+    "cudaGraphDebugDotFlagsHandles" => "5.5.0",
+    "cudaGraphDebugDotFlagsExtSemasWaitNodeParams" => "5.5.0",
+    "cudaGraphDebugDotFlagsExtSemasSignalNodeParams" => "5.5.0",
+    "cudaGraphDebugDotFlagsEventNodeParams" => "5.5.0",
+    "cudaGraphDebugDotFlags" => "5.5.0",
+    "cudaExternalMemoryDedicated" => "5.5.0",
+    "CUgraphDebugDot_flags_enum" => "5.5.0",
+    "CUgraphDebugDot_flags" => "5.5.0",
+    "CU_OCCUPANCY_DISABLE_CACHING_OVERRIDE" => "5.5.0",
+    "CU_GRAPH_NODE_TYPE_MEM_FREE" => "5.5.0",
+    "CU_GRAPH_NODE_TYPE_MEM_ALLOC" => "5.5.0",
+    "CU_GRAPH_DEBUG_DOT_FLAGS_VERBOSE" => "5.5.0",
+    "CU_GRAPH_DEBUG_DOT_FLAGS_MEMSET_NODE_PARAMS" => "5.5.0",
+    "CU_GRAPH_DEBUG_DOT_FLAGS_MEMCPY_NODE_PARAMS" => "5.5.0",
+    "CU_GRAPH_DEBUG_DOT_FLAGS_KERNEL_NODE_PARAMS" => "5.5.0",
+    "CU_GRAPH_DEBUG_DOT_FLAGS_KERNEL_NODE_ATTRIBUTES" => "5.5.0",
+    "CU_GRAPH_DEBUG_DOT_FLAGS_HOST_NODE_PARAMS" => "5.5.0",
+    "CU_GRAPH_DEBUG_DOT_FLAGS_HANDLES" => "5.5.0",
+    "CU_GRAPH_DEBUG_DOT_FLAGS_EXT_SEMAS_WAIT_NODE_PARAMS" => "5.5.0",
+    "CU_GRAPH_DEBUG_DOT_FLAGS_EXT_SEMAS_SIGNAL_NODE_PARAMS" => "5.5.0",
+    "CU_GRAPH_DEBUG_DOT_FLAGS_EVENT_NODE_PARAMS" => "5.5.0",
+    "CUDA_EXTERNAL_MEMORY_DEDICATED" => "5.5.0"
 );
 
 $print_stats = 1 if $examine;
@@ -991,7 +1020,40 @@ sub subst {
 }
 
 sub experimentalSubstitutions {
+    subst("CUDA_MEM_ALLOC_NODE_PARAMS", "hipMemallocNodeParams", "type");
+    subst("CUDA_MEM_ALLOC_NODE_PARAMS_st", "hipMemallocNodeParams", "type");
+    subst("CUgraphDebugDot_flags", "hipGraphDebugDotFlags", "type");
+    subst("CUgraphDebugDot_flags_enum", "hipGraphDebugDotFlags", "type");
+    subst("cudaGraphDebugDotFlags", "hipGraphDebugDotFlags", "type");
+    subst("cudaMemAllocNodeParams", "hipMemallocNodeParams", "type");
+    subst("CU_GRAPH_DEBUG_DOT_FLAGS_EVENT_NODE_PARAMS", "hipGraphDebugDotFlagsEventNodeParams", "numeric_literal");
+    subst("CU_GRAPH_DEBUG_DOT_FLAGS_EXT_SEMAS_SIGNAL_NODE_PARAMS", "hipGraphDebugDotFlagsExtSemasSignalNodeParams", "numeric_literal");
+    subst("CU_GRAPH_DEBUG_DOT_FLAGS_EXT_SEMAS_WAIT_NODE_PARAMS", "hipGraphDebugDotFlagsExtSemasWaitNodeParams", "numeric_literal");
+    subst("CU_GRAPH_DEBUG_DOT_FLAGS_HANDLES", "hipGraphDebugDotFlagsHandles", "numeric_literal");
+    subst("CU_GRAPH_DEBUG_DOT_FLAGS_HOST_NODE_PARAMS", "hipGraphDebugDotFlagsHostNodeParams", "numeric_literal");
+    subst("CU_GRAPH_DEBUG_DOT_FLAGS_KERNEL_NODE_ATTRIBUTES", "hipGraphDebugDotFlagsKernelNodeAttributes", "numeric_literal");
+    subst("CU_GRAPH_DEBUG_DOT_FLAGS_KERNEL_NODE_PARAMS", "hipGraphDebugDotFlagsKernelNodeParams", "numeric_literal");
+    subst("CU_GRAPH_DEBUG_DOT_FLAGS_MEMCPY_NODE_PARAMS", "hipGraphDebugDotFlagsMemcpyNodeParams", "numeric_literal");
+    subst("CU_GRAPH_DEBUG_DOT_FLAGS_MEMSET_NODE_PARAMS", "hipGraphDebugDotFlagsMemsetNodeParams", "numeric_literal");
+    subst("CU_GRAPH_DEBUG_DOT_FLAGS_RUNTIME_TYPES", "hipGraphDebugDotFlagsRuntimeTypes", "numeric_literal");
+    subst("CU_GRAPH_DEBUG_DOT_FLAGS_VERBOSE", "hipGraphDebugDotFlagsVerbose", "numeric_literal");
+    subst("CU_GRAPH_NODE_TYPE_MEM_ALLOC", "hipGraphNodeTypeMemAlloc", "numeric_literal");
+    subst("CU_GRAPH_NODE_TYPE_MEM_FREE", "hipGraphNodeTypeMemFree", "numeric_literal");
     subst("CU_OCCUPANCY_DISABLE_CACHING_OVERRIDE", "hipOccupancyDisableCachingOverride", "numeric_literal");
+    subst("cudaGraphDebugDotFlagsEventNodeParams", "hipGraphDebugDotFlagsEventNodeParams", "numeric_literal");
+    subst("cudaGraphDebugDotFlagsExtSemasSignalNodeParams", "hipGraphDebugDotFlagsExtSemasSignalNodeParams", "numeric_literal");
+    subst("cudaGraphDebugDotFlagsExtSemasWaitNodeParams", "hipGraphDebugDotFlagsExtSemasWaitNodeParams", "numeric_literal");
+    subst("cudaGraphDebugDotFlagsHandles", "hipGraphDebugDotFlagsHandles", "numeric_literal");
+    subst("cudaGraphDebugDotFlagsHostNodeParams", "hipGraphDebugDotFlagsHostNodeParams", "numeric_literal");
+    subst("cudaGraphDebugDotFlagsKernelNodeAttributes", "hipGraphDebugDotFlagsKernelNodeAttributes", "numeric_literal");
+    subst("cudaGraphDebugDotFlagsKernelNodeParams", "hipGraphDebugDotFlagsKernelNodeParams", "numeric_literal");
+    subst("cudaGraphDebugDotFlagsMemcpyNodeParams", "hipGraphDebugDotFlagsMemcpyNodeParams", "numeric_literal");
+    subst("cudaGraphDebugDotFlagsMemsetNodeParams", "hipGraphDebugDotFlagsMemsetNodeParams", "numeric_literal");
+    subst("cudaGraphDebugDotFlagsVerbose", "hipGraphDebugDotFlagsVerbose", "numeric_literal");
+    subst("cudaGraphNodeTypeMemAlloc", "hipGraphNodeTypeMemAlloc", "numeric_literal");
+    subst("cudaGraphNodeTypeMemFree", "hipGraphNodeTypeMemFree", "numeric_literal");
+    subst("CUDA_EXTERNAL_MEMORY_DEDICATED", "hipExternalMemoryDedicated", "define");
+    subst("cudaExternalMemoryDedicated", "hipExternalMemoryDedicated", "define");
     subst("cudaOccupancyDisableCachingOverride", "hipOccupancyDisableCachingOverride", "define");
 }
 
@@ -6281,7 +6343,6 @@ sub warnUnsupportedFunctions {
         "cudaMemcpy3DPeerAsync",
         "cudaMemcpy3DPeer",
         "cudaMemcpy2DArrayToArray",
-        "cudaMemAllocNodeParams",
         "cudaLimitPersistingL2CacheSize",
         "cudaLimitMaxL2FetchGranularity",
         "cudaLimitDevRuntimeSyncDepth",
@@ -6336,8 +6397,6 @@ sub warnUnsupportedFunctions {
         "cudaGraphicsCubeFaceNegativeY",
         "cudaGraphicsCubeFaceNegativeX",
         "cudaGraphicsCubeFace",
-        "cudaGraphNodeTypeMemFree",
-        "cudaGraphNodeTypeMemAlloc",
         "cudaGraphNodeSetEnabled",
         "cudaGraphMemFreeNodeGetParams",
         "cudaGraphMemAllocNodeGetParams",
@@ -6365,17 +6424,6 @@ sub warnUnsupportedFunctions {
         "cudaGraphExecExternalSemaphoresWaitNodeSetParams",
         "cudaGraphExecExternalSemaphoresSignalNodeSetParams",
         "cudaGraphDebugDotPrint",
-        "cudaGraphDebugDotFlagsVerbose",
-        "cudaGraphDebugDotFlagsMemsetNodeParams",
-        "cudaGraphDebugDotFlagsMemcpyNodeParams",
-        "cudaGraphDebugDotFlagsKernelNodeParams",
-        "cudaGraphDebugDotFlagsKernelNodeAttributes",
-        "cudaGraphDebugDotFlagsHostNodeParams",
-        "cudaGraphDebugDotFlagsHandles",
-        "cudaGraphDebugDotFlagsExtSemasWaitNodeParams",
-        "cudaGraphDebugDotFlagsExtSemasSignalNodeParams",
-        "cudaGraphDebugDotFlagsEventNodeParams",
-        "cudaGraphDebugDotFlags",
         "cudaGraphAddMemFreeNode",
         "cudaGraphAddMemAllocNode",
         "cudaGraphAddExternalSemaphoresWaitNode",
@@ -6433,7 +6481,6 @@ sub warnUnsupportedFunctions {
         "cudaExternalMemoryMipmappedArrayDesc",
         "cudaExternalMemoryHandleTypeNvSciBuf",
         "cudaExternalMemoryGetMappedMipmappedArray",
-        "cudaExternalMemoryDedicated",
         "cudaEventWaitExternal",
         "cudaEventWaitDefault",
         "cudaEventRecordWithFlags",
@@ -7064,8 +7111,6 @@ sub warnUnsupportedFunctions {
         "CUgraphExecUpdateResultInfo_v1",
         "CUgraphExecUpdateResultInfo_st",
         "CUgraphExecUpdateResultInfo",
-        "CUgraphDebugDot_flags_enum",
-        "CUgraphDebugDot_flags",
         "CUflushGPUDirectRDMAWritesTarget_enum",
         "CUflushGPUDirectRDMAWritesTarget",
         "CUflushGPUDirectRDMAWritesScope_enum",
@@ -7270,24 +7315,11 @@ sub warnUnsupportedFunctions {
         "CU_JIT_CACHE_OPTION_NONE",
         "CU_JIT_CACHE_OPTION_CG",
         "CU_JIT_CACHE_OPTION_CA",
-        "CU_GRAPH_NODE_TYPE_MEM_FREE",
-        "CU_GRAPH_NODE_TYPE_MEM_ALLOC",
         "CU_GRAPH_NODE_TYPE_BATCH_MEM_OP",
         "CU_GRAPH_EXEC_UPDATE_ERROR_ATTRIBUTES_CHANGED",
-        "CU_GRAPH_DEBUG_DOT_FLAGS_VERBOSE",
-        "CU_GRAPH_DEBUG_DOT_FLAGS_RUNTIME_TYPES",
         "CU_GRAPH_DEBUG_DOT_FLAGS_MEM_FREE_NODE_PARAMS",
         "CU_GRAPH_DEBUG_DOT_FLAGS_MEM_ALLOC_NODE_PARAMS",
-        "CU_GRAPH_DEBUG_DOT_FLAGS_MEMSET_NODE_PARAMS",
-        "CU_GRAPH_DEBUG_DOT_FLAGS_MEMCPY_NODE_PARAMS",
-        "CU_GRAPH_DEBUG_DOT_FLAGS_KERNEL_NODE_PARAMS",
-        "CU_GRAPH_DEBUG_DOT_FLAGS_KERNEL_NODE_ATTRIBUTES",
-        "CU_GRAPH_DEBUG_DOT_FLAGS_HOST_NODE_PARAMS",
-        "CU_GRAPH_DEBUG_DOT_FLAGS_HANDLES",
-        "CU_GRAPH_DEBUG_DOT_FLAGS_EXT_SEMAS_WAIT_NODE_PARAMS",
-        "CU_GRAPH_DEBUG_DOT_FLAGS_EXT_SEMAS_SIGNAL_NODE_PARAMS",
         "CU_GRAPH_DEBUG_DOT_FLAGS_EXTRA_TOPO_INFO",
-        "CU_GRAPH_DEBUG_DOT_FLAGS_EVENT_NODE_PARAMS",
         "CU_GRAPH_DEBUG_DOT_FLAGS_BATCH_MEM_OP_NODE_PARAMS",
         "CU_GRAPHICS_MAP_RESOURCE_FLAGS_WRITE_DISCARD",
         "CU_GRAPHICS_MAP_RESOURCE_FLAGS_READ_ONLY",
@@ -8173,8 +8205,6 @@ sub warnUnsupportedFunctions {
         "CUDA_POINTER_ATTRIBUTE_ACCESS_FLAGS",
         "CUDA_NVSCISYNC_ATTR_WAIT",
         "CUDA_NVSCISYNC_ATTR_SIGNAL",
-        "CUDA_MEM_ALLOC_NODE_PARAMS_st",
-        "CUDA_MEM_ALLOC_NODE_PARAMS",
         "CUDA_MEMCPY3D_PEER_v1",
         "CUDA_MEMCPY3D_PEER_st",
         "CUDA_MEMCPY3D_PEER",
@@ -8204,7 +8234,6 @@ sub warnUnsupportedFunctions {
         "CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC_v1",
         "CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC_st",
         "CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC",
-        "CUDA_EXTERNAL_MEMORY_DEDICATED",
         "CUDA_ERROR_UNSUPPORTED_PTX_VERSION",
         "CUDA_ERROR_UNSUPPORTED_EXEC_AFFINITY",
         "CUDA_ERROR_TOO_MANY_PEERS",

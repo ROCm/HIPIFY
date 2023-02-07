@@ -126,7 +126,7 @@
 |`CUDA_EXTERNAL_MEMORY_BUFFER_DESC`|10.0| | |`hipExternalMemoryBufferDesc`|4.3.0| | | |
 |`CUDA_EXTERNAL_MEMORY_BUFFER_DESC_st`|10.0| | |`hipExternalMemoryBufferDesc_st`|4.3.0| | | |
 |`CUDA_EXTERNAL_MEMORY_BUFFER_DESC_v1`|11.3| | |`hipExternalMemoryBufferDesc`|4.3.0| | | |
-|`CUDA_EXTERNAL_MEMORY_DEDICATED`|10.0| | | | | | | |
+|`CUDA_EXTERNAL_MEMORY_DEDICATED`|10.0| | |`hipExternalMemoryDedicated`|5.5.0| | |5.5.0|
 |`CUDA_EXTERNAL_MEMORY_HANDLE_DESC`|10.0| | |`hipExternalMemoryHandleDesc`|4.3.0| | | |
 |`CUDA_EXTERNAL_MEMORY_HANDLE_DESC_st`|10.0| | |`hipExternalMemoryHandleDesc_st`|4.3.0| | | |
 |`CUDA_EXTERNAL_MEMORY_HANDLE_DESC_v1`|11.3| | |`hipExternalMemoryHandleDesc`|4.3.0| | | |
@@ -188,8 +188,8 @@
 |`CUDA_MEMSET_NODE_PARAMS`|10.0| | |`hipMemsetParams`|4.3.0| | | |
 |`CUDA_MEMSET_NODE_PARAMS_st`|10.0| | |`hipMemsetParams`|4.3.0| | | |
 |`CUDA_MEMSET_NODE_PARAMS_v1`|11.3| | |`hipMemsetParams`|4.3.0| | | |
-|`CUDA_MEM_ALLOC_NODE_PARAMS`|11.4| | | | | | | |
-|`CUDA_MEM_ALLOC_NODE_PARAMS_st`|11.4| | | | | | | |
+|`CUDA_MEM_ALLOC_NODE_PARAMS`|11.4| | |`hipMemallocNodeParams`| | | | |
+|`CUDA_MEM_ALLOC_NODE_PARAMS_st`|11.4| | |`hipMemallocNodeParams`| | | | |
 |`CUDA_NVSCISYNC_ATTR_SIGNAL`|10.2| | | | | | | |
 |`CUDA_NVSCISYNC_ATTR_WAIT`|10.2| | | | | | | |
 |`CUDA_POINTER_ATTRIBUTE_ACCESS_FLAGS`|11.1| | | | | | | |
@@ -601,20 +601,20 @@
 |`CU_GRAPHICS_REGISTER_FLAGS_TEXTURE_GATHER`| | | |`hipGraphicsRegisterFlagsTextureGather`|4.4.0| | | |
 |`CU_GRAPHICS_REGISTER_FLAGS_WRITE_DISCARD`| | | |`hipGraphicsRegisterFlagsWriteDiscard`|4.4.0| | | |
 |`CU_GRAPH_DEBUG_DOT_FLAGS_BATCH_MEM_OP_NODE_PARAMS`|11.7| | | | | | | |
-|`CU_GRAPH_DEBUG_DOT_FLAGS_EVENT_NODE_PARAMS`|11.3| | | | | | | |
+|`CU_GRAPH_DEBUG_DOT_FLAGS_EVENT_NODE_PARAMS`|11.3| | |`hipGraphDebugDotFlagsEventNodeParams`|5.5.0| | |5.5.0|
 |`CU_GRAPH_DEBUG_DOT_FLAGS_EXTRA_TOPO_INFO`|12.0| | | | | | | |
-|`CU_GRAPH_DEBUG_DOT_FLAGS_EXT_SEMAS_SIGNAL_NODE_PARAMS`|11.3| | | | | | | |
-|`CU_GRAPH_DEBUG_DOT_FLAGS_EXT_SEMAS_WAIT_NODE_PARAMS`|11.3| | | | | | | |
-|`CU_GRAPH_DEBUG_DOT_FLAGS_HANDLES`|11.3| | | | | | | |
-|`CU_GRAPH_DEBUG_DOT_FLAGS_HOST_NODE_PARAMS`|11.3| | | | | | | |
-|`CU_GRAPH_DEBUG_DOT_FLAGS_KERNEL_NODE_ATTRIBUTES`|11.3| | | | | | | |
-|`CU_GRAPH_DEBUG_DOT_FLAGS_KERNEL_NODE_PARAMS`|11.3| | | | | | | |
-|`CU_GRAPH_DEBUG_DOT_FLAGS_MEMCPY_NODE_PARAMS`|11.3| | | | | | | |
-|`CU_GRAPH_DEBUG_DOT_FLAGS_MEMSET_NODE_PARAMS`|11.3| | | | | | | |
+|`CU_GRAPH_DEBUG_DOT_FLAGS_EXT_SEMAS_SIGNAL_NODE_PARAMS`|11.3| | |`hipGraphDebugDotFlagsExtSemasSignalNodeParams`|5.5.0| | |5.5.0|
+|`CU_GRAPH_DEBUG_DOT_FLAGS_EXT_SEMAS_WAIT_NODE_PARAMS`|11.3| | |`hipGraphDebugDotFlagsExtSemasWaitNodeParams`|5.5.0| | |5.5.0|
+|`CU_GRAPH_DEBUG_DOT_FLAGS_HANDLES`|11.3| | |`hipGraphDebugDotFlagsHandles`|5.5.0| | |5.5.0|
+|`CU_GRAPH_DEBUG_DOT_FLAGS_HOST_NODE_PARAMS`|11.3| | |`hipGraphDebugDotFlagsHostNodeParams`|5.5.0| | |5.5.0|
+|`CU_GRAPH_DEBUG_DOT_FLAGS_KERNEL_NODE_ATTRIBUTES`|11.3| | |`hipGraphDebugDotFlagsKernelNodeAttributes`|5.5.0| | |5.5.0|
+|`CU_GRAPH_DEBUG_DOT_FLAGS_KERNEL_NODE_PARAMS`|11.3| | |`hipGraphDebugDotFlagsKernelNodeParams`|5.5.0| | |5.5.0|
+|`CU_GRAPH_DEBUG_DOT_FLAGS_MEMCPY_NODE_PARAMS`|11.3| | |`hipGraphDebugDotFlagsMemcpyNodeParams`|5.5.0| | |5.5.0|
+|`CU_GRAPH_DEBUG_DOT_FLAGS_MEMSET_NODE_PARAMS`|11.3| | |`hipGraphDebugDotFlagsMemsetNodeParams`|5.5.0| | |5.5.0|
 |`CU_GRAPH_DEBUG_DOT_FLAGS_MEM_ALLOC_NODE_PARAMS`|11.4| | | | | | | |
 |`CU_GRAPH_DEBUG_DOT_FLAGS_MEM_FREE_NODE_PARAMS`|11.4| | | | | | | |
-|`CU_GRAPH_DEBUG_DOT_FLAGS_RUNTIME_TYPES`|11.3| | | | | | | |
-|`CU_GRAPH_DEBUG_DOT_FLAGS_VERBOSE`|11.3| | | | | | | |
+|`CU_GRAPH_DEBUG_DOT_FLAGS_RUNTIME_TYPES`|11.3| | |`hipGraphDebugDotFlagsRuntimeTypes`| | | | |
+|`CU_GRAPH_DEBUG_DOT_FLAGS_VERBOSE`|11.3| | |`hipGraphDebugDotFlagsVerbose`|5.5.0| | |5.5.0|
 |`CU_GRAPH_EXEC_UPDATE_ERROR`|10.2| | |`hipGraphExecUpdateError`|4.3.0| | | |
 |`CU_GRAPH_EXEC_UPDATE_ERROR_ATTRIBUTES_CHANGED`|11.6| | | | | | | |
 |`CU_GRAPH_EXEC_UPDATE_ERROR_FUNCTION_CHANGED`|10.2| | |`hipGraphExecUpdateErrorFunctionChanged`|4.3.0| | | |
@@ -639,8 +639,8 @@
 |`CU_GRAPH_NODE_TYPE_KERNEL`|10.0| | |`hipGraphNodeTypeKernel`|4.3.0| | | |
 |`CU_GRAPH_NODE_TYPE_MEMCPY`|10.0| | |`hipGraphNodeTypeMemcpy`|4.3.0| | | |
 |`CU_GRAPH_NODE_TYPE_MEMSET`|10.0| | |`hipGraphNodeTypeMemset`|4.3.0| | | |
-|`CU_GRAPH_NODE_TYPE_MEM_ALLOC`|11.4| | | | | | | |
-|`CU_GRAPH_NODE_TYPE_MEM_FREE`|11.4| | | | | | | |
+|`CU_GRAPH_NODE_TYPE_MEM_ALLOC`|11.4| | |`hipGraphNodeTypeMemAlloc`|5.5.0| | |5.5.0|
+|`CU_GRAPH_NODE_TYPE_MEM_FREE`|11.4| | |`hipGraphNodeTypeMemFree`|5.5.0| | |5.5.0|
 |`CU_GRAPH_NODE_TYPE_WAIT_EVENT`|11.1| | |`hipGraphNodeTypeWaitEvent`|4.3.0| | | |
 |`CU_GRAPH_USER_OBJECT_MOVE`|11.3| | |`hipGraphUserObjectMove`|5.3.0| | | |
 |`CU_IPC_HANDLE_SIZE`| | | |`HIP_IPC_HANDLE_SIZE`|1.6.0| | | |
@@ -1060,8 +1060,8 @@
 |`CUfunction_attribute`| | | |`hipFunction_attribute`|2.8.0| | | |
 |`CUfunction_attribute_enum`| | | |`hipFunction_attribute`|2.8.0| | | |
 |`CUgraph`|10.0| | |`hipGraph_t`|4.3.0| | | |
-|`CUgraphDebugDot_flags`|11.3| | | | | | | |
-|`CUgraphDebugDot_flags_enum`|11.3| | | | | | | |
+|`CUgraphDebugDot_flags`|11.3| | |`hipGraphDebugDotFlags`|5.5.0| | |5.5.0|
+|`CUgraphDebugDot_flags_enum`|11.3| | |`hipGraphDebugDotFlags`|5.5.0| | |5.5.0|
 |`CUgraphExec`|10.0| | |`hipGraphExec_t`|4.3.0| | | |
 |`CUgraphExecUpdateResult`|10.2| | |`hipGraphExecUpdateResult`|4.3.0| | | |
 |`CUgraphExecUpdateResultInfo`|12.0| | | | | | | |
