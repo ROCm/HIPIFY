@@ -423,7 +423,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   // NOTE: Not equal to cudaPointerGetAttributes due to different signatures
   {"cuPointerGetAttributes",                               {"hipDrvPointerGetAttributes",                              "", CONV_ADDRESSING, API_DRIVER, 16}},
   // no analogue
-  {"cuPointerSetAttribute",                                {"hipPointerSetAttribute",                                  "", CONV_ADDRESSING, API_DRIVER, 16, HIP_UNSUPPORTED}},
+  {"cuPointerSetAttribute",                                {"hipPointerSetAttribute",                                  "", CONV_ADDRESSING, API_DRIVER, 16, HIP_EXPERIMENTAL}},
 
   // 17. Stream Management
   // cudaStreamAddCallback
@@ -554,7 +554,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuFuncSetSharedMemConfig",                             {"hipFuncSetSharedMemConfig_",                              "", CONV_EXECUTION, API_DRIVER, 21, HIP_UNSUPPORTED}},
   // no analogue
   // NOTE: Not equal to cudaLaunchCooperativeKernel due to different signatures
-  {"cuLaunchCooperativeKernel",                            {"hipLaunchCooperativeKernel_",                             "", CONV_EXECUTION, API_DRIVER, 21, HIP_UNSUPPORTED}},
+  {"cuLaunchCooperativeKernel",                            {"hipModuleLaunchCooperativeKernel",                        "", CONV_EXECUTION, API_DRIVER, 21, HIP_EXPERIMENTAL}},
   // no analogue
   // NOTE: Not equal to cudaLaunchCooperativeKernelMultiDevice due to different signatures
   {"cuLaunchCooperativeKernelMultiDevice",                 {"hipLaunchCooperativeKernelMultiDevice_",                  "", CONV_EXECUTION, API_DRIVER, 21, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
@@ -1481,6 +1481,8 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_FUNCTION_VER_MAP {
   {"hiprtcLinkDestroy",                                    {HIP_5030, HIP_0,    HIP_0   }},
   {"hipDrvGetErrorName",                                   {HIP_5040, HIP_0,    HIP_0   }},
   {"hipDrvGetErrorString",                                 {HIP_5040, HIP_0,    HIP_0   }},
+  {"hipPointerSetAttribute",                               {HIP_5050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipModuleLaunchCooperativeKernel",                     {HIP_5050, HIP_0,    HIP_0,  HIP_LATEST}},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_DRIVER_API_SECTION_MAP {

@@ -867,6 +867,8 @@ my %experimental_funcs = (
     "cudaGraphDebugDotFlagsEventNodeParams" => "5.5.0",
     "cudaGraphDebugDotFlags" => "5.5.0",
     "cudaExternalMemoryDedicated" => "5.5.0",
+    "cuPointerSetAttribute" => "5.5.0",
+    "cuLaunchCooperativeKernel" => "5.5.0",
     "CUgraphDebugDot_flags_enum" => "5.5.0",
     "CUgraphDebugDot_flags" => "5.5.0",
     "CU_OCCUPANCY_DISABLE_CACHING_OVERRIDE" => "5.5.0",
@@ -1020,6 +1022,8 @@ sub subst {
 }
 
 sub experimentalSubstitutions {
+    subst("cuPointerSetAttribute", "hipPointerSetAttribute", "addressing");
+    subst("cuLaunchCooperativeKernel", "hipModuleLaunchCooperativeKernel", "execution");
     subst("CUDA_MEM_ALLOC_NODE_PARAMS", "hipMemallocNodeParams", "type");
     subst("CUDA_MEM_ALLOC_NODE_PARAMS_st", "hipMemallocNodeParams", "type");
     subst("CUgraphDebugDot_flags", "hipGraphDebugDotFlags", "type");
@@ -6808,7 +6812,6 @@ sub warnUnsupportedFunctions {
         "cuStreamBatchMemOp_v2",
         "cuStreamBatchMemOp",
         "cuProfilerInitialize",
-        "cuPointerSetAttribute",
         "cuParamSetv",
         "cuParamSeti",
         "cuParamSetf",
@@ -6859,7 +6862,6 @@ sub warnUnsupportedFunctions {
         "cuLaunchGridAsync",
         "cuLaunchGrid",
         "cuLaunchCooperativeKernelMultiDevice",
-        "cuLaunchCooperativeKernel",
         "cuLaunch",
         "cuKernelSetCacheConfig",
         "cuKernelSetAttribute",

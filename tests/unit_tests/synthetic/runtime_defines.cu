@@ -109,5 +109,10 @@ int main() {
   int CooperativeLaunchMultiDeviceNoPostSync = cudaCooperativeLaunchMultiDeviceNoPostSync;
 #endif
 
+#if CUDA_VERSION >= 10000
+  // CHECK: int EXTERNAL_MEMORY_DEDICATED = hipExternalMemoryDedicated;
+  int EXTERNAL_MEMORY_DEDICATED = cudaExternalMemoryDedicated;
+#endif
+
   return 0;
 }

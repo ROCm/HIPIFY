@@ -1575,7 +1575,7 @@
 |`cuMemRangeGetAttributes`|8.0| | |`hipMemRangeGetAttributes`|3.7.0| | | |
 |`cuPointerGetAttribute`| | | |`hipPointerGetAttribute`|5.0.0| | | |
 |`cuPointerGetAttributes`| | | |`hipDrvPointerGetAttributes`|5.0.0| | | |
-|`cuPointerSetAttribute`| | | | | | | | |
+|`cuPointerSetAttribute`| | | |`hipPointerSetAttribute`|5.5.0| | |5.5.0|
 
 ## **17. Stream Management**
 
@@ -1657,7 +1657,7 @@
 |`cuFuncSetAttribute`|9.0| | | | | | | |
 |`cuFuncSetCacheConfig`| | | | | | | | |
 |`cuFuncSetSharedMemConfig`| | | | | | | | |
-|`cuLaunchCooperativeKernel`|9.0| | | | | | | |
+|`cuLaunchCooperativeKernel`|9.0| | |`hipModuleLaunchCooperativeKernel`|5.5.0| | |5.5.0|
 |`cuLaunchCooperativeKernelMultiDevice`|9.0|11.3| | | | | | |
 |`cuLaunchHostFunc`|10.0| | |`hipLaunchHostFunc`|5.2.0| | | |
 |`cuLaunchKernel`| | | |`hipModuleLaunchKernel`|1.6.0| | | |
