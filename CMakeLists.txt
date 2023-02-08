@@ -152,6 +152,8 @@ if(UNIX)
 
     #get rid of any RPATH definations already
     set_target_properties(hipify-clang PROPERTIES INSTALL_RPATH "")
+    #set RPATH for the binary
+    set_target_properties(hipify-clang PROPERTIES LINK_FLAGS "-Wl,--disable-new-dtags -Wl,--rpath,$ORIGIN/../lib" )
 
     if(FILE_REORG_BACKWARD_COMPATIBILITY)
         include(hipify-backward-compat.cmake)
