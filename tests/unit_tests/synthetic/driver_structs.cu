@@ -272,5 +272,12 @@ int main() {
   CUarrayMapInfo_v1 arrayMapInfo_v1;
 #endif
 
+#if CUDA_VERSION >= 11040
+  // CHECK: hipMemallocNodeParams MEM_ALLOC_NODE_PARAMS_st;
+  // CHECK-NEXT: hipMemallocNodeParams MEM_ALLOC_NODE_PARAMS;
+  CUDA_MEM_ALLOC_NODE_PARAMS_st MEM_ALLOC_NODE_PARAMS_st;
+  CUDA_MEM_ALLOC_NODE_PARAMS MEM_ALLOC_NODE_PARAMS;
+#endif
+
   return 0;
 }
