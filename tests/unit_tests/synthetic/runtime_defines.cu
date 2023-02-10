@@ -1,4 +1,4 @@
-// RUN: %run_test hipify "%s" "%t" %hipify_args 1 --skip-excluded-preprocessor-conditional-blocks %clang_args -D__CUDA_API_VERSION_INTERNAL
+// RUN: %run_test hipify "%s" "%t" %hipify_args 2 --skip-excluded-preprocessor-conditional-blocks --experimental %clang_args -D__CUDA_API_VERSION_INTERNAL
 
 // CHECK: #include <hip/hip_runtime.h>
 #include <cuda_runtime_api.h>
@@ -44,6 +44,7 @@ int main() {
   // CHECK-NEXT: int TextureType2DLayered = hipTextureType2DLayered;
   // CHECK-NEXT: int TextureTypeCubemapLayered = hipTextureTypeCubemapLayered;
   // CHECK-NEXT: int OccupancyDefault = hipOccupancyDefault;
+  // CHECK-NEXT: int OccupancyDisableCachingOverride = hipOccupancyDisableCachingOverride;
   // CHECK-NEXT: int StreamDefault = hipStreamDefault;
   // CHECK-NEXT: int StreamNonBlocking = hipStreamNonBlocking;
   // CHECK-NEXT: hipStream_t StreamPerThread = hipStreamPerThread;
@@ -84,6 +85,7 @@ int main() {
   int TextureType2DLayered = cudaTextureType2DLayered;
   int TextureTypeCubemapLayered = cudaTextureTypeCubemapLayered;
   int OccupancyDefault = cudaOccupancyDefault;
+  int OccupancyDisableCachingOverride = cudaOccupancyDisableCachingOverride;
   int StreamDefault = cudaStreamDefault;
   int StreamNonBlocking = cudaStreamNonBlocking;
   cudaStream_t StreamPerThread = cudaStreamPerThread;
@@ -105,6 +107,11 @@ int main() {
   // CHECK-NEXT: int CooperativeLaunchMultiDeviceNoPostSync = hipCooperativeLaunchMultiDeviceNoPostSync;
   int CooperativeLaunchMultiDeviceNoPreSync = cudaCooperativeLaunchMultiDeviceNoPreSync;
   int CooperativeLaunchMultiDeviceNoPostSync = cudaCooperativeLaunchMultiDeviceNoPostSync;
+#endif
+
+#if CUDA_VERSION >= 10000
+  // CHECK: int EXTERNAL_MEMORY_DEDICATED = hipExternalMemoryDedicated;
+  int EXTERNAL_MEMORY_DEDICATED = cudaExternalMemoryDedicated;
 #endif
 
   return 0;

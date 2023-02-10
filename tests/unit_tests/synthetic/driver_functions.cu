@@ -99,6 +99,9 @@ int main() {
   // CHECK: hipError_t result;
   CUresult result;
 
+  unsigned int gridDimX = 0, gridDimY = 0, gridDimZ = 0, blockDimX = 0, blockDimY = 0, blockDimZ = 0, sharedMemBytes = 0;
+  void* kernelParams = nullptr, * extra = nullptr;
+
 #if CUDA_VERSION >= 8000
   // CHECK: hipMemRangeAttribute MemoryRangeAttribute;
   // CHECK-NEXT: hipMemoryAdvise MemoryAdvise;
@@ -159,6 +162,11 @@ int main() {
   // HIP: hipError_t hipStreamWriteValue64(hipStream_t stream, void* ptr, uint64_t value, unsigned int flags, uint64_t mask __dparm(0xFFFFFFFFFFFFFFFF));
   // CHECK: result = hipStreamWriteValue64(stream, deviceptr, u_value, flags);
   result = cuStreamWriteValue64(stream, deviceptr, u_value, flags);
+
+  // CUDA: CUresult CUDAAPI cuLaunchCooperativeKernel(CUfunction f, unsigned int gridDimX, unsigned int gridDimY, unsigned int gridDimZ, unsigned int blockDimX, unsigned int blockDimY, unsigned int blockDimZ, unsigned int sharedMemBytes, CUstream hStream, void** kernelParams);
+  // HIP: hipError_t hipModuleLaunchCooperativeKernel(hipFunction_t f, unsigned int gridDimX, unsigned int gridDimY, unsigned int gridDimZ, unsigned int blockDimX, unsigned int blockDimY, unsigned int blockDimZ, unsigned int sharedMemBytes, hipStream_t stream, void** kernelParams);
+  // CHECK: result = hipModuleLaunchCooperativeKernel(function, gridDimX, gridDimY, gridDimZ, blockDimX, blockDimY, blockDimZ, sharedMemBytes, stream, &kernelParams);
+  result = cuLaunchCooperativeKernel(function, gridDimX, gridDimY, gridDimZ, blockDimX, blockDimY, blockDimZ, sharedMemBytes, stream, &kernelParams);
 #endif
 
 #if CUDA_VERSION >= 10000
@@ -1374,8 +1382,6 @@ int main() {
   // CHECK: result = hipFuncGetAttribute(value, function_attribute, function);
   result = cuFuncGetAttribute(value, function_attribute, function);
 
-  unsigned int gridDimX = 0, gridDimY = 0, gridDimZ = 0, blockDimX = 0, blockDimY = 0, blockDimZ = 0, sharedMemBytes = 0;
-  void* kernelParams = nullptr, * extra = nullptr;
   // CUDA: CUresult CUDAAPI cuLaunchKernel(CUfunction f, unsigned int gridDimX, unsigned int gridDimY, unsigned int gridDimZ, unsigned int blockDimX, unsigned int blockDimY, unsigned int blockDimZ, unsigned int sharedMemBytes, CUstream hStream, void **kernelParams, void **extra);
   // HIP: hipError_t hipModuleLaunchKernel(hipFunction_t f, unsigned int gridDimX, unsigned int gridDimY, unsigned int gridDimZ, unsigned int blockDimX, unsigned int blockDimY, unsigned int blockDimZ, unsigned int sharedMemBytes, hipStream_t stream, void** kernelParams, void** extra);
   // CHECK: result = hipModuleLaunchKernel(function, gridDimX, gridDimY, gridDimZ, blockDimX, blockDimY, blockDimZ, sharedMemBytes, stream, &kernelParams, &extra);
@@ -1661,6 +1667,11 @@ int main() {
   // HIP:  hipError_t hipDrvGetErrorString(hipError_t hipError, const char** errorString);
   // CHECK: result = hipDrvGetErrorString(result_2, &ret);
   result = cuGetErrorString(result_2, &ret);
+
+  // CUDA: CUresult CUDAAPI cuPointerSetAttribute(const void *value, CUpointer_attribute attribute, CUdeviceptr ptr);
+  // HIP:  hipError_t hipPointerSetAttribute(const void* value, hipPointer_attribute attribute, hipDeviceptr_t ptr);
+  // CHECK: result = hipPointerSetAttribute(image, pointer_attribute, deviceptr);
+  result = cuPointerSetAttribute(image, pointer_attribute, deviceptr);
 
   return 0;
 }

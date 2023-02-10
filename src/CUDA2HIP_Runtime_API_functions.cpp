@@ -91,6 +91,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   {"cudaDeviceSetMemPool",                                    {"hipDeviceSetMemPool",                                    "", CONV_DEVICE, API_RUNTIME, 1}},
   // cuDeviceGetMemPool
   {"cudaDeviceGetMemPool",                                    {"hipDeviceGetMemPool",                                    "", CONV_DEVICE, API_RUNTIME, 1}},
+  //
+  {"cudaInitDevice",                                          {"hipInitDevice",                                          "", CONV_DEVICE, API_RUNTIME, 1, HIP_UNSUPPORTED}},
 
   // 2. Thread Management [DEPRECATED]
   // no analogue
@@ -160,6 +162,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   {"cudaStreamWaitEvent",                                     {"hipStreamWaitEvent",                                     "", CONV_STREAM, API_RUNTIME, 4}},
   // cuThreadExchangeStreamCaptureMode
   {"cudaThreadExchangeStreamCaptureMode",                     {"hipThreadExchangeStreamCaptureMode",                     "", CONV_STREAM, API_RUNTIME, 4}},
+  // cuStreamGetId
+  {"cudaStreamGetId",                                         {"hipStreamGetId",                                         "", CONV_STREAM, API_RUNTIME, 4, HIP_UNSUPPORTED}},
 
   // 5. Event Management
   // no analogue
@@ -609,31 +613,29 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
 
   // 25. Texture Reference Management [DEPRECATED]
   // no analogue
-  {"cudaBindTexture",                                         {"hipBindTexture",                                         "", CONV_TEXTURE, API_RUNTIME, 25, DEPRECATED}},
+  {"cudaBindTexture",                                         {"hipBindTexture",                                         "", CONV_TEXTURE, API_RUNTIME, 25, HIP_DEPRECATED | CUDA_REMOVED}},
   // no analogue
-  {"cudaBindTexture2D",                                       {"hipBindTexture2D",                                       "", CONV_TEXTURE, API_RUNTIME, 25, DEPRECATED}},
+  {"cudaBindTexture2D",                                       {"hipBindTexture2D",                                       "", CONV_TEXTURE, API_RUNTIME, 25, HIP_DEPRECATED | CUDA_REMOVED}},
   // no analogue
-  {"cudaBindTextureToArray",                                  {"hipBindTextureToArray",                                  "", CONV_TEXTURE, API_RUNTIME, 25, DEPRECATED}},
+  {"cudaBindTextureToArray",                                  {"hipBindTextureToArray",                                  "", CONV_TEXTURE, API_RUNTIME, 25, HIP_DEPRECATED | CUDA_REMOVED}},
   // no analogue
-  // NOTE: Unsupported yet on NVCC path
-  {"cudaBindTextureToMipmappedArray",                         {"hipBindTextureToMipmappedArray",                         "", CONV_TEXTURE, API_RUNTIME, 25, CUDA_DEPRECATED}},
+  {"cudaBindTextureToMipmappedArray",                         {"hipBindTextureToMipmappedArray",                         "", CONV_TEXTURE, API_RUNTIME, 25, CUDA_REMOVED}},
   // no analogue
   {"cudaCreateChannelDesc",                                   {"hipCreateChannelDesc",                                   "", CONV_TEXTURE, API_RUNTIME, 25}},
   // no analogue
   {"cudaGetChannelDesc",                                      {"hipGetChannelDesc",                                      "", CONV_TEXTURE, API_RUNTIME, 25}},
   // no analogue
-  {"cudaGetTextureAlignmentOffset",                           {"hipGetTextureAlignmentOffset",                           "", CONV_TEXTURE, API_RUNTIME, 25, DEPRECATED}},
-  // TODO: double check cuModuleGetTexRef
-  // NOTE: Unsupported yet on NVCC path
-  {"cudaGetTextureReference",                                 {"hipGetTextureReference",                                 "", CONV_TEXTURE, API_RUNTIME, 25, DEPRECATED}},
+  {"cudaGetTextureAlignmentOffset",                           {"hipGetTextureAlignmentOffset",                           "", CONV_TEXTURE, API_RUNTIME, 25, HIP_DEPRECATED | CUDA_REMOVED}},
   // no analogue
-  {"cudaUnbindTexture",                                       {"hipUnbindTexture",                                       "", CONV_TEXTURE, API_RUNTIME, 25, DEPRECATED}},
+  {"cudaGetTextureReference",                                 {"hipGetTextureReference",                                 "", CONV_TEXTURE, API_RUNTIME, 25, HIP_DEPRECATED | CUDA_REMOVED}},
+  // no analogue
+  {"cudaUnbindTexture",                                       {"hipUnbindTexture",                                       "", CONV_TEXTURE, API_RUNTIME, 25, HIP_DEPRECATED | CUDA_REMOVED}},
 
   // 26. Surface Reference Management [DEPRECATED]
   // no analogue
-  {"cudaBindSurfaceToArray",                                  {"hipBindSurfaceToArray",                                  "", CONV_SURFACE, API_RUNTIME, 26, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
-  // TODO: double check cuModuleGetSurfRef
-  {"cudaGetSurfaceReference",                                 {"hipGetSurfaceReference",                                 "", CONV_SURFACE, API_RUNTIME, 26, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cudaBindSurfaceToArray",                                  {"hipBindSurfaceToArray",                                  "", CONV_SURFACE, API_RUNTIME, 26, HIP_UNSUPPORTED | CUDA_REMOVED}},
+  // no analogue
+  {"cudaGetSurfaceReference",                                 {"hipGetSurfaceReference",                                 "", CONV_SURFACE, API_RUNTIME, 26, HIP_UNSUPPORTED | CUDA_REMOVED}},
 
   // 27. Texture Object Management
   // no analogue
@@ -650,9 +652,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // NOTE: Not equal to cuTexObjectGetTextureDesc due to different signatures
   {"cudaGetTextureObjectTextureDesc",                         {"hipGetTextureObjectTextureDesc",                         "", CONV_TEXTURE, API_RUNTIME, 27}},
   //
-  {"cudaCreateTextureObject_v2",                              {"hipCreateTextureObject_v2",                              "", CONV_TEXTURE, API_RUNTIME, 27, HIP_UNSUPPORTED}},
+  {"cudaCreateTextureObject_v2",                              {"hipCreateTextureObject_v2",                              "", CONV_TEXTURE, API_RUNTIME, 27, HIP_UNSUPPORTED | CUDA_REMOVED}},
   //
-  {"cudaGetTextureObjectTextureDesc_v2",                      {"hipGetTextureObjectTextureDesc_v2",                      "", CONV_TEXTURE, API_RUNTIME, 27, HIP_UNSUPPORTED}},
+  {"cudaGetTextureObjectTextureDesc_v2",                      {"hipGetTextureObjectTextureDesc_v2",                      "", CONV_TEXTURE, API_RUNTIME, 27, HIP_UNSUPPORTED | CUDA_REMOVED}},
 
   // 28. Surface Object Management
   // no analogue
@@ -716,6 +718,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuGraphHostNodeSetParams
   {"cudaGraphHostNodeSetParams",                              {"hipGraphHostNodeSetParams",                              "", CONV_GRAPH, API_RUNTIME, 30}},
   // cuGraphInstantiate
+  // NOTE: CUDA signature changed since 12.0
   {"cudaGraphInstantiate",                                    {"hipGraphInstantiate",                                    "", CONV_GRAPH, API_RUNTIME, 30}},
   // cuGraphKernelNodeCopyAttributes
   {"cudaGraphKernelNodeCopyAttributes",                       {"hipGraphKernelNodeCopyAttributes",                       "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
@@ -738,6 +741,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuGraphExecHostNodeSetParams
   {"cudaGraphExecHostNodeSetParams",                          {"hipGraphExecHostNodeSetParams",                          "", CONV_GRAPH, API_RUNTIME, 30}},
   // cuGraphExecUpdate
+  // NOTE: CUDA signature changed since 12.0
   {"cudaGraphExecUpdate",                                     {"hipGraphExecUpdate",                                     "", CONV_GRAPH, API_RUNTIME, 30}},
   // cuGraphKernelNodeGetParams
   {"cudaGraphKernelNodeGetParams",                            {"hipGraphKernelNodeGetParams",                            "", CONV_GRAPH, API_RUNTIME, 30}},
@@ -842,9 +846,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuDeviceSetGraphMemAttribute
   {"cudaDeviceSetGraphMemAttribute",                          {"hipDeviceSetGraphMemAttribute",                          "", CONV_GRAPH, API_RUNTIME, 30}},
   // cuGraphInstantiateWithFlags
+  // NOTE: CUDA signature changed since 12.0
   {"cudaGraphInstantiateWithFlags",                           {"hipGraphInstantiateWithFlags",                           "", CONV_GRAPH, API_RUNTIME, 30}},
   // cuGraphNodeSetEnabled
   {"cudaGraphNodeSetEnabled",                                 {"hipGraphNodeSetEnabled",                                 "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
+  // cuGraphInstantiateWithParams
+  {"cudaGraphInstantiateWithParams",                          {"hipGraphInstantiateWithParams",                          "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
+  // cuGraphExecGetFlags
+  {"cudaGraphExecGetFlags",                                   {"hipGraphExecGetFlags",                                   "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
 
   // 31. Driver Entry Point Access
   // cuGetProcAddress
@@ -965,15 +974,15 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_FUNCTION_VER_MAP {
   {"cudaEventCreateFromEGLSync",                              {CUDA_91,  CUDA_0,   CUDA_0  }},
   {"cudaGraphicsEGLRegisterImage",                            {CUDA_91,  CUDA_0,   CUDA_0  }},
   {"cudaGraphicsResourceGetMappedEglFrame",                   {CUDA_91,  CUDA_0,   CUDA_0  }},
-  {"cudaBindTexture",                                         {CUDA_0,   CUDA_110, CUDA_0  }},
-  {"cudaBindTexture2D",                                       {CUDA_0,   CUDA_110, CUDA_0  }},
-  {"cudaBindTextureToArray",                                  {CUDA_0,   CUDA_110, CUDA_0  }},
-  {"cudaBindTextureToMipmappedArray",                         {CUDA_0,   CUDA_110, CUDA_0  }},
-  {"cudaGetTextureAlignmentOffset",                           {CUDA_0,   CUDA_110, CUDA_0  }},
-  {"cudaGetTextureReference",                                 {CUDA_0,   CUDA_110, CUDA_0  }},
-  {"cudaUnbindTexture",                                       {CUDA_0,   CUDA_110, CUDA_0  }},
-  {"cudaBindSurfaceToArray",                                  {CUDA_0,   CUDA_110, CUDA_0  }},
-  {"cudaGetSurfaceReference",                                 {CUDA_0,   CUDA_110, CUDA_0  }},
+  {"cudaBindTexture",                                         {CUDA_0,   CUDA_110, CUDA_120}},
+  {"cudaBindTexture2D",                                       {CUDA_0,   CUDA_110, CUDA_120}},
+  {"cudaBindTextureToArray",                                  {CUDA_0,   CUDA_110, CUDA_120}},
+  {"cudaBindTextureToMipmappedArray",                         {CUDA_0,   CUDA_110, CUDA_120}},
+  {"cudaGetTextureAlignmentOffset",                           {CUDA_0,   CUDA_110, CUDA_120}},
+  {"cudaGetTextureReference",                                 {CUDA_0,   CUDA_110, CUDA_120}},
+  {"cudaUnbindTexture",                                       {CUDA_0,   CUDA_110, CUDA_120}},
+  {"cudaBindSurfaceToArray",                                  {CUDA_0,   CUDA_110, CUDA_120}},
+  {"cudaGetSurfaceReference",                                 {CUDA_0,   CUDA_110, CUDA_120}},
   {"cudaGraphAddChildGraphNode",                              {CUDA_100, CUDA_0,   CUDA_0  }},
   {"cudaGraphAddDependencies",                                {CUDA_100, CUDA_0,   CUDA_0  }},
   {"cudaGraphAddEmptyNode",                                   {CUDA_100, CUDA_0,   CUDA_0  }},
@@ -1087,8 +1096,12 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_FUNCTION_VER_MAP {
   {"cudaLaunchKernelExC",                                     {CUDA_118, CUDA_0,   CUDA_0  }},
   {"cudaOccupancyMaxPotentialClusterSize",                    {CUDA_118, CUDA_0,   CUDA_0  }},
   {"cudaOccupancyMaxActiveClusters",                          {CUDA_118, CUDA_0,   CUDA_0  }},
-  {"cudaCreateTextureObject_v2",                              {CUDA_118, CUDA_0,   CUDA_0  }},
-  {"cudaGetTextureObjectTextureDesc_v2",                      {CUDA_118, CUDA_0,   CUDA_0  }},
+  {"cudaCreateTextureObject_v2",                              {CUDA_118, CUDA_0,   CUDA_120}},
+  {"cudaGetTextureObjectTextureDesc_v2",                      {CUDA_118, CUDA_0,   CUDA_120}},
+  {"cudaInitDevice",                                          {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"cudaStreamGetId",                                         {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"cudaGraphInstantiateWithParams",                          {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"cudaGraphExecGetFlags",                                   {CUDA_120, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP {

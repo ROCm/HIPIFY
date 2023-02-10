@@ -212,7 +212,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaExternalSemaphoreWaitNodeParams",                              {"hipExternalSemaphoreWaitNodeParams",                       "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
 
   // CUDA_MEM_ALLOC_NODE_PARAMS_st
-  {"cudaMemAllocNodeParams",                                           {"hipMemallocNodeParams",                                    "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+  {"cudaMemAllocNodeParams",                                           {"hipMemallocNodeParams",                                    "", CONV_TYPE, API_RUNTIME, 36, HIP_EXPERIMENTAL}},
 
   // CUDA_ARRAY_MEMORY_REQUIREMENTS_st
   {"cudaArrayMemoryRequirements",                                      {"hipArrayMemoryRequirements",                               "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
@@ -1183,9 +1183,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CU_GRAPH_NODE_TYPE_EXT_SEMAS_WAIT = 9
   {"cudaGraphNodeTypeExtSemaphoreWait",                                {"hipGraphNodeTypeExtSemaphoreWait",                         "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}}, // 0x09
   // CU_GRAPH_NODE_TYPE_MEM_ALLOC = 10
-  {"cudaGraphNodeTypeMemAlloc",                                        {"hipGraphNodeTypeMemAlloc",                                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 0x0a
+  {"cudaGraphNodeTypeMemAlloc",                                        {"hipGraphNodeTypeMemAlloc",                                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 0x0a
   // CU_GRAPH_NODE_TYPE_MEM_FREE = 11
-  {"cudaGraphNodeTypeMemFree",                                         {"hipGraphNodeTypeMemFree",                                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 0x0b
+  {"cudaGraphNodeTypeMemFree",                                         {"hipGraphNodeTypeMemFree",                                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 0x0b
   // CU_GRAPH_NODE_TYPE_COUNT
   {"cudaGraphNodeTypeCount",                                           {"hipGraphNodeTypeCount",                                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36}},
 
@@ -1563,13 +1563,6 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CU_SYNC_POLICY_BLOCKING_SYNC
   {"cudaSyncPolicyBlockingSync",                                       {"hipSyncPolicyBlockingSync",                                "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 4
 
-  // CUstreamAttrID
-  {"cudaStreamAttrID",                                                 {"hipStreamAttrID",                                          "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
-  // CU_STREAM_ATTRIBUTE_ACCESS_POLICY_WINDOW
-  {"cudaStreamAttributeAccessPolicyWindow",                            {"hipStreamAttributeAccessPolicyWindow",                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 1
-  // CU_STREAM_ATTRIBUTE_SYNCHRONIZATION_POLICY
-  {"cudaStreamAttributeSynchronizationPolicy",                         {"hipStreamAttributeSynchronizationPolicy",                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 3
-
   // CUkernelNodeAttrID
   {"cudaKernelNodeAttrID",                                             {"hipKernelNodeAttrID",                                      "", CONV_TYPE, API_RUNTIME, 36}},
   // CU_KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW
@@ -1702,28 +1695,28 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaEnablePerThreadDefaultStream",                                 {"hipEnablePerThreadDefaultStream",                          "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 0x2
 
   // CUgraphDebugDot_flags
-  {"cudaGraphDebugDotFlags",                                           {"hipGraphDebugDotFlags",                                    "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
+  {"cudaGraphDebugDotFlags",                                           {"hipGraphDebugDotFlags",                                    "", CONV_TYPE, API_RUNTIME, 36, HIP_EXPERIMENTAL}},
   // cudaGraphDebugDotFlags enum values
   // CU_GRAPH_DEBUG_DOT_FLAGS_VERBOSE
-  {"cudaGraphDebugDotFlagsVerbose",                                    {"hipGraphDebugDotFlagsVerbose",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 1<<0
+  {"cudaGraphDebugDotFlagsVerbose",                                    {"hipGraphDebugDotFlagsVerbose",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 1<<0
   // CU_GRAPH_DEBUG_DOT_FLAGS_KERNEL_NODE_PARAMS
-  {"cudaGraphDebugDotFlagsKernelNodeParams",                           {"hipGraphDebugDotFlagsKernelNodeParams",                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 1<<2
+  {"cudaGraphDebugDotFlagsKernelNodeParams",                           {"hipGraphDebugDotFlagsKernelNodeParams",                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 1<<2
   // CU_GRAPH_DEBUG_DOT_FLAGS_MEMCPY_NODE_PARAMS
-  {"cudaGraphDebugDotFlagsMemcpyNodeParams",                           {"hipGraphDebugDotFlagsMemcpyNodeParams",                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 1<<3
+  {"cudaGraphDebugDotFlagsMemcpyNodeParams",                           {"hipGraphDebugDotFlagsMemcpyNodeParams",                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 1<<3
   // CU_GRAPH_DEBUG_DOT_FLAGS_MEMSET_NODE_PARAMS
-  {"cudaGraphDebugDotFlagsMemsetNodeParams",                           {"hipGraphDebugDotFlagsMemsetNodeParams",                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 1<<4
+  {"cudaGraphDebugDotFlagsMemsetNodeParams",                           {"hipGraphDebugDotFlagsMemsetNodeParams",                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 1<<4
   // CU_GRAPH_DEBUG_DOT_FLAGS_HOST_NODE_PARAMS
-  {"cudaGraphDebugDotFlagsHostNodeParams",                             {"hipGraphDebugDotFlagsHostNodeParams",                      "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 1<<5
+  {"cudaGraphDebugDotFlagsHostNodeParams",                             {"hipGraphDebugDotFlagsHostNodeParams",                      "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 1<<5
   // CU_GRAPH_DEBUG_DOT_FLAGS_EVENT_NODE_PARAMS
-  {"cudaGraphDebugDotFlagsEventNodeParams",                            {"hipGraphDebugDotFlagsEventNodeParams",                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 1<<6
+  {"cudaGraphDebugDotFlagsEventNodeParams",                            {"hipGraphDebugDotFlagsEventNodeParams",                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 1<<6
   // CU_GRAPH_DEBUG_DOT_FLAGS_EXT_SEMAS_SIGNAL_NODE_PARAMS
-  {"cudaGraphDebugDotFlagsExtSemasSignalNodeParams",                   {"hipGraphDebugDotFlagsExtSemasSignalNodeParams",            "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 1<<7
+  {"cudaGraphDebugDotFlagsExtSemasSignalNodeParams",                   {"hipGraphDebugDotFlagsExtSemasSignalNodeParams",            "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 1<<7
   // CU_GRAPH_DEBUG_DOT_FLAGS_EXT_SEMAS_WAIT_NODE_PARAMS
-  {"cudaGraphDebugDotFlagsExtSemasWaitNodeParams",                     {"hipGraphDebugDotFlagsExtSemasWaitNodeParams",              "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 1<<8
+  {"cudaGraphDebugDotFlagsExtSemasWaitNodeParams",                     {"hipGraphDebugDotFlagsExtSemasWaitNodeParams",              "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 1<<8
   // CU_GRAPH_DEBUG_DOT_FLAGS_KERNEL_NODE_ATTRIBUTES
-  {"cudaGraphDebugDotFlagsKernelNodeAttributes",                       {"hipGraphDebugDotFlagsKernelNodeAttributes",                "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 1<<9
+  {"cudaGraphDebugDotFlagsKernelNodeAttributes",                       {"hipGraphDebugDotFlagsKernelNodeAttributes",                "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 1<<9
   // CU_GRAPH_DEBUG_DOT_FLAGS_HANDLES
-  {"cudaGraphDebugDotFlagsHandles",                                    {"hipGraphDebugDotFlagsHandles",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 1<<10
+  {"cudaGraphDebugDotFlagsHandles",                                    {"hipGraphDebugDotFlagsHandles",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 1<<10
 
   // CUgraphMem_attribute
   {"cudaGraphMemAttributeType",                                        {"hipGraphMemAttributeType",                                 "", CONV_TYPE, API_RUNTIME, 36}},
@@ -1906,7 +1899,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CU_EVENT_WAIT_EXTERNAL
   {"cudaEventWaitExternal",                                            {"hipEventWaitExternal",                                     "", CONV_DEFINE, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 0x01
   // CUDA_EXTERNAL_MEMORY_DEDICATED
-  {"cudaExternalMemoryDedicated",                                      {"hipExternalMemoryDedicated",                               "", CONV_DEFINE, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 0x1
+  {"cudaExternalMemoryDedicated",                                      {"hipExternalMemoryDedicated",                               "", CONV_DEFINE, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 0x1
   // CUDA_EXTERNAL_SEMAPHORE_SIGNAL_SKIP_NVSCIBUF_MEMSYNC
   {"cudaExternalSemaphoreSignalSkipNvSciBufMemSync",                   {"hipExternalSemaphoreSignalSkipNvSciBufMemSync",            "", CONV_DEFINE, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 0x01
   // CUDA_EXTERNAL_SEMAPHORE_WAIT_SKIP_NVSCIBUF_MEMSYNC
@@ -1958,7 +1951,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CU_OCCUPANCY_DEFAULT
   {"cudaOccupancyDefault",                                             {"hipOccupancyDefault",                                      "", CONV_DEFINE, API_RUNTIME, 36}}, // 0x00
   // CU_OCCUPANCY_DISABLE_CACHING_OVERRIDE
-  {"cudaOccupancyDisableCachingOverride",                              {"hipOccupancyDisableCachingOverride",                       "", CONV_DEFINE, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 0x01
+  {"cudaOccupancyDisableCachingOverride",                              {"hipOccupancyDisableCachingOverride",                       "", CONV_DEFINE, API_RUNTIME, 36, HIP_EXPERIMENTAL}}, // 0x01
   // CU_STREAM_DEFAULT
   {"cudaStreamDefault",                                                {"hipStreamDefault",                                         "", CONV_DEFINE, API_RUNTIME, 36}}, // 0x00
   // CU_STREAM_NON_BLOCKING
@@ -1970,11 +1963,27 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CU_ARRAY_SPARSE_PROPERTIES_SINGLE_MIPTAIL
   {"cudaArraySparsePropertiesSingleMipTail",                           {"hipArraySparsePropertiesSingleMipTail",                    "", CONV_DEFINE, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 0x1
   // CU_KERNEL_NODE_ATTRIBUTE_CLUSTER_DIMENSION
-  {"cudaKernelNodeAttributeClusterDimension",                          {"hipKernelNodeAttributeClusterDimension",                    "", CONV_DEFINE, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // cudaLaunchAttributeClusterDimension
+  {"cudaKernelNodeAttributeClusterDimension",                          {"hipKernelNodeAttributeClusterDimension",                   "", CONV_DEFINE, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // cudaLaunchAttributeClusterDimension
   // CU_KERNEL_NODE_ATTRIBUTE_CLUSTER_SCHEDULING_POLICY_PREFERENCE
-  {"cudaKernelNodeAttributeClusterSchedulingPolicyPreference",         {"hipKernelNodeAttributeClusterSchedulingPolicyPreference",   "", CONV_DEFINE, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // cudaLaunchAttributeClusterSchedulingPolicyPreference
+  {"cudaKernelNodeAttributeClusterSchedulingPolicyPreference",         {"hipKernelNodeAttributeClusterSchedulingPolicyPreference",  "", CONV_DEFINE, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // cudaLaunchAttributeClusterSchedulingPolicyPreference
+  // CU_KERNEL_NODE_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP
+  {"cudaKernelNodeAttributeMemSyncDomainMap",                          {"hipKernelNodeAttributeMemSyncDomainMap",                   "", CONV_DEFINE, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // cudaLaunchAttributeMemSyncDomainMap
+  // CU_KERNEL_NODE_ATTRIBUTE_MEM_SYNC_DOMAIN
+  {"cudaKernelNodeAttributeMemSyncDomain",                             {"hipKernelNodeAttributeMemSyncDomain",                      "", CONV_DEFINE, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // cudaLaunchAttributeMemSyncDomain
   //
-  {"cudaInitDeviceFlagsAreValid",                                      {"hipInitDeviceFlagsAreValid",                                "", CONV_DEFINE, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 0x01
+  {"cudaInitDeviceFlagsAreValid",                                      {"hipInitDeviceFlagsAreValid",                               "", CONV_DEFINE, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // 0x01
+  // CUstreamAttrID
+  {"cudaStreamAttrID",                                                 {"hipStreamAttrID",                                          "", CONV_DEFINE, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // cudaLaunchAttributeID
+  // CU_STREAM_ATTRIBUTE_ACCESS_POLICY_WINDOW
+  {"cudaStreamAttributeAccessPolicyWindow",                            {"hipStreamAttributeAccessPolicyWindow",                     "", CONV_DEFINE, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // cudaLaunchAttributeAccessPolicyWindow
+  // CU_STREAM_ATTRIBUTE_SYNCHRONIZATION_POLICY
+  {"cudaStreamAttributeSynchronizationPolicy",                         {"hipStreamAttributeSynchronizationPolicy",                  "", CONV_DEFINE, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // cudaLaunchAttributeSynchronizationPolicy
+  // CU_STREAM_ATTRIBUTE_PRIORITY
+  {"cudaStreamAttributePriority",                                      {"hipStreamAttributePriority",                               "", CONV_DEFINE, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // cudaLaunchAttributePriority
+  // CU_STREAM_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP
+  {"cudaStreamAttributeMemSyncDomainMap",                              {"hipStreamAttributeMemSyncDomainMap",                       "", CONV_DEFINE, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // cudaLaunchAttributeMemSyncDomainMap
+  // CU_STREAM_ATTRIBUTE_MEM_SYNC_DOMAIN
+  {"cudaStreamAttributeMemSyncDomain",                                 {"hipStreamAttributeMemSyncDomain",                          "", CONV_DEFINE, API_RUNTIME, 36, HIP_UNSUPPORTED}}, // cudaLaunchAttributeMemSyncDomain
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_TYPE_NAME_VER_MAP {
@@ -2473,6 +2482,11 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_TYPE_NAME_VER_MAP 
   {"cudaLaunchMemSyncDomainMap",                                       {CUDA_120, CUDA_0,   CUDA_0  }},
   {"cudaLaunchAttributeMemSyncDomainMap",                              {CUDA_120, CUDA_0,   CUDA_0  }},
   {"cudaLaunchAttributeMemSyncDomain",                                 {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"cudaStreamAttributePriority",                                      {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"cudaStreamAttributeMemSyncDomainMap",                              {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"cudaStreamAttributeMemSyncDomain",                                 {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"cudaKernelNodeAttributeMemSyncDomainMap",                          {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"cudaKernelNodeAttributeMemSyncDomain",                             {CUDA_120, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {
@@ -2691,4 +2705,20 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {
   {"hipUserObjectNoDestructorSync",                                    {HIP_5030, HIP_0,    HIP_0   }},
   {"hipUserObjectRetainFlags",                                         {HIP_5030, HIP_0,    HIP_0   }},
   {"hipGraphUserObjectMove",                                           {HIP_5030, HIP_0,    HIP_0   }},
+  {"hipOccupancyDisableCachingOverride",                               {HIP_5050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipExternalMemoryDedicated",                                       {HIP_5050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipGraphNodeTypeMemAlloc",                                         {HIP_5050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipGraphNodeTypeMemFree",                                          {HIP_5050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemAllocNodeParams",                                            {HIP_5050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipGraphDebugDotFlags",                                            {HIP_5050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipGraphDebugDotFlagsVerbose",                                     {HIP_5050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipGraphDebugDotFlagsKernelNodeParams",                            {HIP_5050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipGraphDebugDotFlagsMemcpyNodeParams",                            {HIP_5050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipGraphDebugDotFlagsMemsetNodeParams",                            {HIP_5050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipGraphDebugDotFlagsHostNodeParams",                              {HIP_5050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipGraphDebugDotFlagsEventNodeParams",                             {HIP_5050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipGraphDebugDotFlagsExtSemasSignalNodeParams",                    {HIP_5050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipGraphDebugDotFlagsExtSemasWaitNodeParams",                      {HIP_5050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipGraphDebugDotFlagsKernelNodeAttributes",                        {HIP_5050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipGraphDebugDotFlagsHandles",                                     {HIP_5050, HIP_0,    HIP_0,  HIP_LATEST}},
 };
