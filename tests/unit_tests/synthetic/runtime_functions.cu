@@ -709,6 +709,29 @@ int main() {
   // HIP: hipError_t hipDeviceGraphMemTrim(int device);
   // CHECK: result = hipDeviceGraphMemTrim(device);
   result = cudaDeviceGraphMemTrim(device);
+
+  // CHECK: hipMemallocNodeParams MemAllocNodeParams;
+  cudaMemAllocNodeParams MemAllocNodeParams;
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphAddMemAllocNode(cudaGraphNode_t *pGraphNode, cudaGraph_t graph, const cudaGraphNode_t *pDependencies, size_t numDependencies, struct cudaMemAllocNodeParams *nodeParams);
+  // HIP: hipError_t hipGraphAddMemAllocNode(hipGraphNode_t* pGraphNode, hipGraph_t graph, const hipGraphNode_t* pDependencies, size_t numDependencies, hipMemAllocNodeParams* pNodeParams);
+  // CHECK: result = hipGraphAddMemAllocNode(&graphNode, Graph_t, &graphNode_2, bytes, &MemAllocNodeParams);
+  result = cudaGraphAddMemAllocNode(&graphNode, Graph_t, &graphNode_2, bytes, &MemAllocNodeParams);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphMemAllocNodeGetParams(cudaGraphNode_t node, struct cudaMemAllocNodeParams *params_out);
+  // HIP: hipError_t hipGraphMemAllocNodeGetParams(hipGraphNode_t node, hipMemAllocNodeParams* pNodeParams);
+  // CHECK: result = hipGraphMemAllocNodeGetParams(graphNode, &MemAllocNodeParams);
+  result = cudaGraphMemAllocNodeGetParams(graphNode, &MemAllocNodeParams);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphAddMemFreeNode(cudaGraphNode_t *pGraphNode, cudaGraph_t graph, const cudaGraphNode_t *pDependencies, size_t numDependencies, void *dptr);
+  // HIP: hipError_t hipGraphAddMemFreeNode(hipGraphNode_t* pGraphNode, hipGraph_t graph, const hipGraphNode_t* pDependencies, size_t numDependencies, void* dev_ptr);
+  // CHECK: result = hipGraphAddMemFreeNode(&graphNode, Graph_t, &graphNode_2, bytes, deviceptr);
+  result = cudaGraphAddMemFreeNode(&graphNode, Graph_t, &graphNode_2, bytes, deviceptr);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphMemFreeNodeGetParams(cudaGraphNode_t node, void *dptr_out);
+  // HIP: hipError_t hipGraphMemFreeNodeGetParams(hipGraphNode_t node, void* dev_ptr);
+  // CHECK: result = hipGraphMemFreeNodeGetParams(graphNode, &deviceptr);
+  result = cudaGraphMemFreeNodeGetParams(graphNode, &deviceptr);
 #endif
 
   // CHECK: hipDeviceProp_t DeviceProp;

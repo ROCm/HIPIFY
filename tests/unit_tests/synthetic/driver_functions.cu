@@ -167,6 +167,16 @@ int main() {
   // HIP: hipError_t hipModuleLaunchCooperativeKernel(hipFunction_t f, unsigned int gridDimX, unsigned int gridDimY, unsigned int gridDimZ, unsigned int blockDimX, unsigned int blockDimY, unsigned int blockDimZ, unsigned int sharedMemBytes, hipStream_t stream, void** kernelParams);
   // CHECK: result = hipModuleLaunchCooperativeKernel(function, gridDimX, gridDimY, gridDimZ, blockDimX, blockDimY, blockDimZ, sharedMemBytes, stream, &kernelParams);
   result = cuLaunchCooperativeKernel(function, gridDimX, gridDimY, gridDimZ, blockDimX, blockDimY, blockDimZ, sharedMemBytes, stream, &kernelParams);
+
+  // CHECK: hipFunctionLaunchParams_t LAUNCH_PARAMS_st;
+  // CHECK-NEXT: hipFunctionLaunchParams LAUNCH_PARAMS;
+  CUDA_LAUNCH_PARAMS_st LAUNCH_PARAMS_st;
+  CUDA_LAUNCH_PARAMS LAUNCH_PARAMS;
+
+  // CUDA: __CUDA_DEPRECATED CUresult CUDAAPI cuLaunchCooperativeKernelMultiDevice(CUDA_LAUNCH_PARAMS *launchParamsList, unsigned int numDevices, unsigned int flags);
+  // HIP: hipError_t hipModuleLaunchCooperativeKernelMultiDevice(hipFunctionLaunchParams* launchParamsList, unsigned int numDevices, unsigned int flags);
+  // CHECK: result = hipModuleLaunchCooperativeKernelMultiDevice(&LAUNCH_PARAMS, flags_2, flags);
+  result = cuLaunchCooperativeKernelMultiDevice(&LAUNCH_PARAMS, flags_2, flags);
 #endif
 
 #if CUDA_VERSION >= 10000
@@ -780,6 +790,31 @@ int main() {
   // HIP: hipError_t hipDeviceGraphMemTrim(int device);
   // CHECK: result = hipDeviceGraphMemTrim(device);
   result = cuDeviceGraphMemTrim(device);
+
+  // CHECK: hipMemallocNodeParams MEM_ALLOC_NODE_PARAMS_st;
+  // CHECK-NEXT: hipMemallocNodeParams MEM_ALLOC_NODE_PARAMS;
+  CUDA_MEM_ALLOC_NODE_PARAMS_st MEM_ALLOC_NODE_PARAMS_st;
+  CUDA_MEM_ALLOC_NODE_PARAMS MEM_ALLOC_NODE_PARAMS;
+
+  // CUDA: CUresult CUDAAPI cuGraphAddMemAllocNode(CUgraphNode *phGraphNode, CUgraph hGraph, const CUgraphNode *dependencies, size_t numDependencies, CUDA_MEM_ALLOC_NODE_PARAMS *nodeParams);
+  // HIP: hipError_t hipGraphAddMemAllocNode(hipGraphNode_t* pGraphNode, hipGraph_t graph, const hipGraphNode_t* pDependencies, size_t numDependencies, hipMemAllocNodeParams* pNodeParams);
+  // CHECK: result = hipGraphAddMemAllocNode(&graphNode, graph, &graphNode2, bytes, &MEM_ALLOC_NODE_PARAMS);
+  result = cuGraphAddMemAllocNode(&graphNode, graph, &graphNode2, bytes, &MEM_ALLOC_NODE_PARAMS);
+
+  // CUDA: CUresult CUDAAPI cuGraphMemAllocNodeGetParams(CUgraphNode hNode, CUDA_MEM_ALLOC_NODE_PARAMS *params_out);
+  // HIP: hipError_t hipGraphMemAllocNodeGetParams(hipGraphNode_t node, hipMemAllocNodeParams* pNodeParams);
+  // CHECK: result = hipGraphMemAllocNodeGetParams(graphNode, &MEM_ALLOC_NODE_PARAMS);
+  result = cuGraphMemAllocNodeGetParams(graphNode, &MEM_ALLOC_NODE_PARAMS);
+
+  // CUDA: CUresult CUDAAPI cuGraphAddMemFreeNode(CUgraphNode *phGraphNode, CUgraph hGraph, const CUgraphNode *dependencies, size_t numDependencies, CUdeviceptr dptr);
+  // HIP: hipError_t hipGraphAddMemFreeNode(hipGraphNode_t* pGraphNode, hipGraph_t graph, const hipGraphNode_t* pDependencies, size_t numDependencies, void* dev_ptr);
+  // CHECK: result = hipGraphAddMemFreeNode(&graphNode, graph, &graphNode2, bytes, deviceptr);
+  result = cuGraphAddMemFreeNode(&graphNode, graph, &graphNode2, bytes, deviceptr);
+
+  // CUDA: CUresult CUDAAPI cuGraphMemFreeNodeGetParams(CUgraphNode hNode, CUdeviceptr *dptr_out);
+  // HIP: hipError_t hipGraphMemFreeNodeGetParams(hipGraphNode_t node, void* dev_ptr);
+  // CHECK: result = hipGraphMemFreeNodeGetParams(graphNode, &deviceptr);
+  result = cuGraphMemFreeNodeGetParams(graphNode, &deviceptr);
 #endif
 
 #if CUDA_VERSION >= 11070

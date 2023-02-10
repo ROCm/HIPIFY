@@ -832,13 +832,13 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuGraphReleaseUserObject
   {"cudaGraphReleaseUserObject",                              {"hipGraphReleaseUserObject",                              "", CONV_GRAPH, API_RUNTIME, 30}},
   // cuGraphAddMemAllocNode
-  {"cudaGraphAddMemAllocNode",                                {"hipGraphAddMemAllocNode",                                "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
+  {"cudaGraphAddMemAllocNode",                                {"hipGraphAddMemAllocNode",                                "", CONV_GRAPH, API_RUNTIME, 30, HIP_EXPERIMENTAL}},
   // cuGraphMemAllocNodeGetParams
-  {"cudaGraphMemAllocNodeGetParams",                          {"hipGraphMemAllocNodeGetParams",                          "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
+  {"cudaGraphMemAllocNodeGetParams",                          {"hipGraphMemAllocNodeGetParams",                          "", CONV_GRAPH, API_RUNTIME, 30, HIP_EXPERIMENTAL}},
   // cuGraphAddMemFreeNode
-  {"cudaGraphAddMemFreeNode",                                 {"hipGraphAddMemFreeNode",                                 "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
+  {"cudaGraphAddMemFreeNode",                                 {"hipGraphAddMemFreeNode",                                 "", CONV_GRAPH, API_RUNTIME, 30, HIP_EXPERIMENTAL}},
   // cuGraphMemFreeNodeGetParams
-  {"cudaGraphMemFreeNodeGetParams",                           {"hipGraphMemFreeNodeGetParams",                           "", CONV_GRAPH, API_RUNTIME, 30, HIP_UNSUPPORTED}},
+  {"cudaGraphMemFreeNodeGetParams",                           {"hipGraphMemFreeNodeGetParams",                           "", CONV_GRAPH, API_RUNTIME, 30, HIP_EXPERIMENTAL}},
   // cuDeviceGraphMemTrim
   {"cudaDeviceGraphMemTrim",                                  {"hipDeviceGraphMemTrim",                                  "", CONV_GRAPH, API_RUNTIME, 30}},
   // cuDeviceGetGraphMemAttribute

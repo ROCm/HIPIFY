@@ -81,9 +81,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
 
   // no analogue
   // NOTE: cudaLaunchParams struct differs
-  {"CUDA_LAUNCH_PARAMS_st",                                            {"HIP_LAUNCH_PARAMS",                                        "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
-  {"CUDA_LAUNCH_PARAMS",                                               {"HIP_LAUNCH_PARAMS",                                        "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
-  {"CUDA_LAUNCH_PARAMS_v1",                                            {"HIP_LAUNCH_PARAMS",                                        "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CUDA_LAUNCH_PARAMS_st",                                            {"hipFunctionLaunchParams_t",                                "", CONV_TYPE, API_DRIVER, 1, HIP_EXPERIMENTAL}},
+  {"CUDA_LAUNCH_PARAMS",                                               {"hipFunctionLaunchParams",                                  "", CONV_TYPE, API_DRIVER, 1, HIP_EXPERIMENTAL}},
+  {"CUDA_LAUNCH_PARAMS_v1",                                            {"hipFunctionLaunchParams",                                  "", CONV_TYPE, API_DRIVER, 1, HIP_EXPERIMENTAL}},
 
   {"CUDA_MEMCPY2D_st",                                                 {"hip_Memcpy2D",                                             "", CONV_TYPE, API_DRIVER, 1}},
   {"CUDA_MEMCPY2D_v1_st",                                              {"hip_Memcpy2D",                                             "", CONV_TYPE, API_DRIVER, 1}},
@@ -3773,4 +3773,6 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {
   {"HIPRTC_JIT_NUM_LEGACY_INPUT_TYPES",                                {HIP_5030, HIP_0,    HIP_0   }},
   {"ihiprtcLinkState",                                                 {HIP_5030, HIP_0,    HIP_0   }},
   {"hiprtcLinkState",                                                  {HIP_5030, HIP_0,    HIP_0   }},
+  {"hipFunctionLaunchParams_t",                                        {HIP_5050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipFunctionLaunchParams",                                          {HIP_5050, HIP_0,    HIP_0,  HIP_LATEST}},
 };

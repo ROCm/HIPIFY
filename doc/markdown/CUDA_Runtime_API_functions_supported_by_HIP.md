@@ -436,8 +436,8 @@
 |`cudaGraphAddExternalSemaphoresWaitNode`|11.2| | | | | | | |
 |`cudaGraphAddHostNode`|10.0| | |`hipGraphAddHostNode`|5.0.0| | | |
 |`cudaGraphAddKernelNode`|10.0| | |`hipGraphAddKernelNode`|4.3.0| | | |
-|`cudaGraphAddMemAllocNode`|11.4| | | | | | | |
-|`cudaGraphAddMemFreeNode`|11.4| | | | | | | |
+|`cudaGraphAddMemAllocNode`|11.4| | |`hipGraphAddMemAllocNode`|5.5.0| | |5.5.0|
+|`cudaGraphAddMemFreeNode`|11.4| | |`hipGraphAddMemFreeNode`|5.5.0| | |5.5.0|
 |`cudaGraphAddMemcpyNode`|10.0| | |`hipGraphAddMemcpyNode`|4.3.0| | | |
 |`cudaGraphAddMemcpyNode1D`|11.1| | |`hipGraphAddMemcpyNode1D`|4.5.0| | | |
 |`cudaGraphAddMemcpyNodeFromSymbol`|11.1| | |`hipGraphAddMemcpyNodeFromSymbol`|5.0.0| | | |
@@ -486,8 +486,8 @@
 |`cudaGraphKernelNodeSetAttribute`|11.0| | |`hipGraphKernelNodeSetAttribute`|5.2.0| | | |
 |`cudaGraphKernelNodeSetParams`|11.0| | |`hipGraphKernelNodeSetParams`|4.5.0| | | |
 |`cudaGraphLaunch`|11.0| | |`hipGraphLaunch`|4.3.0| | | |
-|`cudaGraphMemAllocNodeGetParams`|11.4| | | | | | | |
-|`cudaGraphMemFreeNodeGetParams`|11.4| | | | | | | |
+|`cudaGraphMemAllocNodeGetParams`|11.4| | |`hipGraphMemAllocNodeGetParams`|5.5.0| | |5.5.0|
+|`cudaGraphMemFreeNodeGetParams`|11.4| | |`hipGraphMemFreeNodeGetParams`|5.5.0| | |5.5.0|
 |`cudaGraphMemcpyNodeGetParams`|11.0| | |`hipGraphMemcpyNodeGetParams`|4.5.0| | | |
 |`cudaGraphMemcpyNodeSetParams`|11.0| | |`hipGraphMemcpyNodeSetParams`|4.5.0| | | |
 |`cudaGraphMemcpyNodeSetParams1D`|11.1| | |`hipGraphMemcpyNodeSetParams1D`|5.0.0| | | |
