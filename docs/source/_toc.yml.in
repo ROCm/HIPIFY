@@ -1,7 +1,7 @@
 # Anywhere {branch} is used, the branch name will be substituted.
 # These comments will also be removed.
 defaults:
-  numbered: True
+  numbered: False
 root: index
 subtrees:
   - entries:
