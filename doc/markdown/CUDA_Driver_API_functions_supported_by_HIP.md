@@ -169,9 +169,9 @@
 |`CUDA_KERNEL_NODE_PARAMS_v1`|11.3| | |`hipKernelNodeParams`|4.3.0| | | |
 |`CUDA_KERNEL_NODE_PARAMS_v2`|12.0| | | | | | | |
 |`CUDA_KERNEL_NODE_PARAMS_v2_st`|12.0| | | | | | | |
-|`CUDA_LAUNCH_PARAMS`|9.0| | | | | | | |
-|`CUDA_LAUNCH_PARAMS_st`|9.0| | | | | | | |
-|`CUDA_LAUNCH_PARAMS_v1`|11.3| | | | | | | |
+|`CUDA_LAUNCH_PARAMS`|9.0| | |`hipFunctionLaunchParams`|5.5.0| | |5.5.0|
+|`CUDA_LAUNCH_PARAMS_st`|9.0| | |`hipFunctionLaunchParams_t`|5.5.0| | |5.5.0|
+|`CUDA_LAUNCH_PARAMS_v1`|11.3| | |`hipFunctionLaunchParams`|5.5.0| | |5.5.0|
 |`CUDA_MEMCPY2D`| | | |`hip_Memcpy2D`|1.7.0| | | |
 |`CUDA_MEMCPY2D_st`| | | |`hip_Memcpy2D`|1.7.0| | | |
 |`CUDA_MEMCPY2D_v1`| | | |`hip_Memcpy2D`|1.7.0| | | |
@@ -1658,7 +1658,7 @@
 |`cuFuncSetCacheConfig`| | | | | | | | |
 |`cuFuncSetSharedMemConfig`| | | | | | | | |
 |`cuLaunchCooperativeKernel`|9.0| | |`hipModuleLaunchCooperativeKernel`|5.5.0| | |5.5.0|
-|`cuLaunchCooperativeKernelMultiDevice`|9.0|11.3| | | | | | |
+|`cuLaunchCooperativeKernelMultiDevice`|9.0|11.3| |`hipModuleLaunchCooperativeKernelMultiDevice`|5.5.0| | |5.5.0|
 |`cuLaunchHostFunc`|10.0| | |`hipLaunchHostFunc`|5.2.0| | | |
 |`cuLaunchKernel`| | | |`hipModuleLaunchKernel`|1.6.0| | | |
 |`cuLaunchKernelEx`|11.8| | | | | | | |
@@ -1695,8 +1695,8 @@
 |`cuGraphAddExternalSemaphoresWaitNode`|11.2| | | | | | | |
 |`cuGraphAddHostNode`|10.0| | |`hipGraphAddHostNode`|5.0.0| | | |
 |`cuGraphAddKernelNode`|10.0| | |`hipGraphAddKernelNode`|4.3.0| | | |
-|`cuGraphAddMemAllocNode`|11.4| | | | | | | |
-|`cuGraphAddMemFreeNode`|11.4| | | | | | | |
+|`cuGraphAddMemAllocNode`|11.4| | |`hipGraphAddMemAllocNode`|5.5.0| | |5.5.0|
+|`cuGraphAddMemFreeNode`|11.4| | |`hipGraphAddMemFreeNode`|5.5.0| | |5.5.0|
 |`cuGraphAddMemcpyNode`|10.0| | | | | | | |
 |`cuGraphAddMemsetNode`|10.0| | | | | | | |
 |`cuGraphBatchMemOpNodeGetParams`|11.7| | | | | | | |
@@ -1743,8 +1743,8 @@
 |`cuGraphKernelNodeSetAttribute`|11.0| | |`hipGraphKernelNodeSetAttribute`|5.2.0| | | |
 |`cuGraphKernelNodeSetParams`|10.0| | |`hipGraphKernelNodeSetParams`|4.5.0| | | |
 |`cuGraphLaunch`|10.0| | |`hipGraphLaunch`|4.3.0| | | |
-|`cuGraphMemAllocNodeGetParams`|11.4| | | | | | | |
-|`cuGraphMemFreeNodeGetParams`|11.4| | | | | | | |
+|`cuGraphMemAllocNodeGetParams`|11.4| | |`hipGraphMemAllocNodeGetParams`|5.5.0| | |5.5.0|
+|`cuGraphMemFreeNodeGetParams`|11.4| | |`hipGraphMemFreeNodeGetParams`|5.5.0| | |5.5.0|
 |`cuGraphMemcpyNodeGetParams`|10.0| | |`hipGraphMemcpyNodeGetParams`|4.5.0| | | |
 |`cuGraphMemcpyNodeSetParams`|10.0| | |`hipGraphMemcpyNodeSetParams`|4.5.0| | | |
 |`cuGraphMemsetNodeGetParams`|10.0| | |`hipGraphMemsetNodeGetParams`|4.5.0| | | |
