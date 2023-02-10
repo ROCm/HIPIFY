@@ -1,6 +1,6 @@
 # CUCOMPLEX API supported by HIP
 
-## **cuComplex Data types**
+## **1. cuComplex Data types**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -8,7 +8,7 @@
 |`cuDoubleComplex`| | | |`hipDoubleComplex`|1.6.0| | | |
 |`cuFloatComplex`| | | |`hipFloatComplex`|1.6.0| | | |
 
-## **cuComplex API functions**
+## **2. cuComplex API functions**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|

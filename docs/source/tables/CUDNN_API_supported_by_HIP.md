@@ -1,6 +1,6 @@
 # CUDNN API supported by HIP
 
-## **CUDNN Data types**
+## **1. CUDNN Data types**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -835,7 +835,7 @@
 |`libraryPropertyType`|6.0.0| | | | | | | |
 |`libraryPropertyType_t`|6.0.0| | | | | | | |
 
-## **CUDNN Functions**
+## **2. CUDNN Functions**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|

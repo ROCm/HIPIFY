@@ -1,6 +1,6 @@
 # CUB API supported by HIP
 
-## **CUB Data types**
+## **1. CUB Data types**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|

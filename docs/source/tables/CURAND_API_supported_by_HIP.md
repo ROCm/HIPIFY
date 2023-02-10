@@ -1,6 +1,6 @@
 # CURAND API supported by HIP
 
-## **CURAND Data types**
+## **1. CURAND Data types**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -105,7 +105,7 @@
 |`curandStatus`| | | |`hiprandStatus_t`|1.5.0| | | |
 |`curandStatus_t`| | | |`hiprandStatus_t`|1.5.0| | | |
 
-## **Host API Functions**
+## **2. Host API Functions**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -138,7 +138,7 @@
 |`curandSetQuasiRandomGeneratorDimensions`| | | |`hiprandSetQuasiRandomGeneratorDimensions`|1.5.0| | | |
 |`curandSetStream`| | | |`hiprandSetStream`|1.5.0| | | |
 
-## **Device API Functions**
+## **3. Device API Functions**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
