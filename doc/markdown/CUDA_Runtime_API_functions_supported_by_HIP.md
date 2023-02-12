@@ -137,8 +137,8 @@
 |`cudaOccupancyMaxActiveBlocksPerMultiprocessorWithFlags`| | | |`hipOccupancyMaxActiveBlocksPerMultiprocessorWithFlags`|2.6.0| | | |
 |`cudaOccupancyMaxActiveClusters`|11.8| | | | | | | |
 |`cudaOccupancyMaxPotentialBlockSize`| | | |`hipOccupancyMaxPotentialBlockSize`|1.6.0| | | |
-|`cudaOccupancyMaxPotentialBlockSizeVariableSMem`| | | | | | | | |
-|`cudaOccupancyMaxPotentialBlockSizeVariableSMemWithFlags`| | | | | | | | |
+|`cudaOccupancyMaxPotentialBlockSizeVariableSMem`| | | |`hipOccupancyMaxPotentialBlockSizeVariableSMem`|5.5.0| | |5.5.0|
+|`cudaOccupancyMaxPotentialBlockSizeVariableSMemWithFlags`| | | |`hipOccupancyMaxPotentialBlockSizeVariableSMemWithFlags`|5.5.0| | |5.5.0|
 |`cudaOccupancyMaxPotentialBlockSizeWithFlags`| | | |`hipOccupancyMaxPotentialBlockSizeWithFlags`|3.5.0| | | |
 |`cudaOccupancyMaxPotentialClusterSize`|11.8| | | | | | | |
 
@@ -357,6 +357,7 @@
 |`cudaEGLStreamProducerPresentFrame`|9.1| | | | | | | |
 |`cudaEGLStreamProducerReturnFrame`|9.1| | | | | | | |
 |`cudaEventCreateFromEGLSync`|9.1| | | | | | | |
+|`cudaGraphNodeGetEnabled`|11.6| | |`hipGraphNodeGetEnabled`|5.5.0| | |5.5.0|
 |`cudaGraphicsEGLRegisterImage`|9.1| | | | | | | |
 |`cudaGraphicsResourceGetMappedEglFrame`|9.1| | | | | | | |
 
@@ -446,7 +447,7 @@
 |`cudaGraphChildGraphNodeGetGraph`|10.0| | |`hipGraphChildGraphNodeGetGraph`|5.0.0| | | |
 |`cudaGraphClone`|10.0| | |`hipGraphClone`|5.0.0| | | |
 |`cudaGraphCreate`|10.0| | |`hipGraphCreate`|4.3.0| | | |
-|`cudaGraphDebugDotPrint`|11.3| | | | | | | |
+|`cudaGraphDebugDotPrint`|11.3| | |`hipGraphDebugDotPrint`|5.5.0| | |5.5.0|
 |`cudaGraphDestroy`|10.0| | |`hipGraphDestroy`|4.3.0| | | |
 |`cudaGraphDestroyNode`|10.0| | |`hipGraphDestroyNode`|5.0.0| | | |
 |`cudaGraphEventRecordNodeGetEvent`|11.1| | |`hipGraphEventRecordNodeGetEvent`|5.0.0| | | |
@@ -480,7 +481,7 @@
 |`cudaGraphInstantiate`|10.0| | |`hipGraphInstantiate`|4.3.0| | | |
 |`cudaGraphInstantiateWithFlags`|11.4| | |`hipGraphInstantiateWithFlags`|5.0.0| | | |
 |`cudaGraphInstantiateWithParams`|12.0| | | | | | | |
-|`cudaGraphKernelNodeCopyAttributes`|11.0| | | | | | | |
+|`cudaGraphKernelNodeCopyAttributes`|11.0| | |`hipGraphKernelNodeCopyAttributes`|5.5.0| | |5.5.0|
 |`cudaGraphKernelNodeGetAttribute`|11.0| | |`hipGraphKernelNodeGetAttribute`|5.2.0| | | |
 |`cudaGraphKernelNodeGetParams`|11.0| | |`hipGraphKernelNodeGetParams`|4.5.0| | | |
 |`cudaGraphKernelNodeSetAttribute`|11.0| | |`hipGraphKernelNodeSetAttribute`|5.2.0| | | |
@@ -499,7 +500,7 @@
 |`cudaGraphNodeGetDependencies`|11.0| | |`hipGraphNodeGetDependencies`|5.0.0| | | |
 |`cudaGraphNodeGetDependentNodes`|11.0| | |`hipGraphNodeGetDependentNodes`|5.0.0| | | |
 |`cudaGraphNodeGetType`|11.0| | |`hipGraphNodeGetType`|5.0.0| | | |
-|`cudaGraphNodeSetEnabled`|11.6| | | | | | | |
+|`cudaGraphNodeSetEnabled`|11.6| | |`hipGraphNodeSetEnabled`|5.5.0| | |5.5.0|
 |`cudaGraphReleaseUserObject`|11.3| | |`hipGraphReleaseUserObject`|5.3.0| | | |
 |`cudaGraphRemoveDependencies`|11.0| | |`hipGraphRemoveDependencies`|5.0.0| | | |
 |`cudaGraphRetainUserObject`|11.3| | |`hipGraphRetainUserObject`|5.3.0| | | |

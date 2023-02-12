@@ -482,6 +482,11 @@ int main() {
   // HIP: hipError_t hipGraphRemoveDependencies(hipGraph_t graph, const hipGraphNode_t* from, const hipGraphNode_t* to, size_t numDependencies);
   // CHECK: result = hipGraphRemoveDependencies(Graph_t, &graphNode, &graphNode, bytes);
   result = cudaGraphRemoveDependencies(Graph_t, &graphNode, &graphNode, bytes);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphKernelNodeCopyAttributes(cudaGraphNode_t hSrc, cudaGraphNode_t hDst);
+  // HIP: hipError_t hipGraphKernelNodeCopyAttributes(hipGraphNode_t hSrc, hipGraphNode_t hDst);
+  // CHECK: result = hipGraphKernelNodeCopyAttributes(graphNode, graphNode_2);
+  result = cudaGraphKernelNodeCopyAttributes(graphNode, graphNode_2);
 #endif
 
 #if CUDA_VERSION >= 11010
@@ -684,6 +689,11 @@ int main() {
   // HIP: hipError_t hipGraphReleaseUserObject(hipGraph_t graph, hipUserObject_t object, unsigned int count);
   // CHECK: result = hipGraphReleaseUserObject(Graph_t, userObject, count);
   result = cudaGraphReleaseUserObject(Graph_t, userObject, count);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphDebugDotPrint(cudaGraph_t graph, const char *path, unsigned int flags);
+  // HIP: hipError_t hipGraphDebugDotPrint(hipGraph_t graph, const char* path, unsigned int flags);
+  // CHECK: result = hipGraphDebugDotPrint(Graph_t, name.c_str(), flags);
+  result = cudaGraphDebugDotPrint(Graph_t, name.c_str(), flags);
 #endif
 
 #if CUDA_VERSION >= 11040
@@ -732,6 +742,18 @@ int main() {
   // HIP: hipError_t hipGraphMemFreeNodeGetParams(hipGraphNode_t node, void* dev_ptr);
   // CHECK: result = hipGraphMemFreeNodeGetParams(graphNode, &deviceptr);
   result = cudaGraphMemFreeNodeGetParams(graphNode, &deviceptr);
+#endif
+
+#if CUDA_VERSION >= 11060
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphNodeSetEnabled(cudaGraphExec_t hGraphExec, cudaGraphNode_t hNode, unsigned int isEnabled);
+  // HIP: hipError_t hipGraphNodeSetEnabled(hipGraphExec_t hGraphExec, hipGraphNode_t hNode, unsigned int isEnabled);
+  // CHECK: result = hipGraphNodeSetEnabled(GraphExec_t, graphNode, flags);
+  result = cudaGraphNodeSetEnabled(GraphExec_t, graphNode, flags);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphNodeGetEnabled(cudaGraphExec_t hGraphExec, cudaGraphNode_t hNode, unsigned int *isEnabled);
+  // HIP: hipError_t hipGraphNodeGetEnabled(hipGraphExec_t hGraphExec, hipGraphNode_t hNode, unsigned int* isEnabled);
+  // CHECK: result = hipGraphNodeGetEnabled(GraphExec_t, graphNode, &flags);
+  result = cudaGraphNodeGetEnabled(GraphExec_t, graphNode, &flags);
 #endif
 
   // CHECK: hipDeviceProp_t DeviceProp;
@@ -1500,6 +1522,14 @@ int main() {
   // HIP:  hipError_t hipDeviceSetLimit(enum hipLimit_t limit, size_t value);
   // CHECK: result = hipDeviceSetLimit(Limit, bytes);
   result = cudaDeviceSetLimit(Limit, bytes);
+
+  // TODO
+  // CUDA: template<typename UnaryFunction, class T> static __inline__ __host__ CUDART_DEVICE cudaError_t cudaOccupancyMaxPotentialBlockSizeVariableSMem(int* minGridSize, int* blockSize, T func, UnaryFunction  blockSizeToDynamicSMemSize, int blockSizeLimit = 0);
+  // HIP:  template<typename UnaryFunction, class T> static hipError_t __host__ inline hipOccupancyMaxPotentialBlockSizeVariableSMem(int* min_grid_size, int* block_size, T func, UnaryFunction block_size_to_dynamic_smem_size, int block_size_limit = 0);
+
+  // TODO
+  // CUDA: template<typename UnaryFunction, class T> static __inline__ __host__ CUDART_DEVICE cudaError_t cudaOccupancyMaxPotentialBlockSizeVariableSMemWithFlags(int* minGridSize, int* blockSize, T func, UnaryFunction  blockSizeToDynamicSMemSize, int blockSizeLimit = 0, unsigned int flags = 0);
+  // HIP:  template<typename UnaryFunction, class T> static hipError_t __host__ inline hipOccupancyMaxPotentialBlockSizeVariableSMemWithFlags(int* min_grid_size, int* block_size, T func, UnaryFunction block_size_to_dynamic_smem_size, int block_size_limit = 0, unsigned int  flags = 0);
 
   return 0;
 }

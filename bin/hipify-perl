@@ -852,11 +852,17 @@ my %removed_funcs = (
 );
 
 my %experimental_funcs = (
+    "cudaOccupancyMaxPotentialBlockSizeVariableSMemWithFlags" => "5.5.0",
+    "cudaOccupancyMaxPotentialBlockSizeVariableSMem" => "5.5.0",
     "cudaOccupancyDisableCachingOverride" => "5.5.0",
     "cudaGraphNodeTypeMemFree" => "5.5.0",
     "cudaGraphNodeTypeMemAlloc" => "5.5.0",
+    "cudaGraphNodeSetEnabled" => "5.5.0",
+    "cudaGraphNodeGetEnabled" => "5.5.0",
     "cudaGraphMemFreeNodeGetParams" => "5.5.0",
     "cudaGraphMemAllocNodeGetParams" => "5.5.0",
+    "cudaGraphKernelNodeCopyAttributes" => "5.5.0",
+    "cudaGraphDebugDotPrint" => "5.5.0",
     "cudaGraphDebugDotFlagsVerbose" => "5.5.0",
     "cudaGraphDebugDotFlagsMemsetNodeParams" => "5.5.0",
     "cudaGraphDebugDotFlagsMemcpyNodeParams" => "5.5.0",
@@ -874,8 +880,12 @@ my %experimental_funcs = (
     "cuPointerSetAttribute" => "5.5.0",
     "cuLaunchCooperativeKernelMultiDevice" => "5.5.0",
     "cuLaunchCooperativeKernel" => "5.5.0",
+    "cuGraphNodeSetEnabled" => "5.5.0",
+    "cuGraphNodeGetEnabled" => "5.5.0",
     "cuGraphMemFreeNodeGetParams" => "5.5.0",
     "cuGraphMemAllocNodeGetParams" => "5.5.0",
+    "cuGraphKernelNodeCopyAttributes" => "5.5.0",
+    "cuGraphDebugDotPrint" => "5.5.0",
     "cuGraphAddMemFreeNode" => "5.5.0",
     "cuGraphAddMemAllocNode" => "5.5.0",
     "CUgraphDebugDot_flags_enum" => "5.5.0",
@@ -1039,12 +1049,22 @@ sub experimentalSubstitutions {
     subst("cuLaunchCooperativeKernelMultiDevice", "hipModuleLaunchCooperativeKernelMultiDevice", "execution");
     subst("cuGraphAddMemAllocNode", "hipGraphAddMemAllocNode", "graph");
     subst("cuGraphAddMemFreeNode", "hipGraphAddMemFreeNode", "graph");
+    subst("cuGraphDebugDotPrint", "hipGraphDebugDotPrint", "graph");
+    subst("cuGraphKernelNodeCopyAttributes", "hipGraphKernelNodeCopyAttributes", "graph");
     subst("cuGraphMemAllocNodeGetParams", "hipGraphMemAllocNodeGetParams", "graph");
     subst("cuGraphMemFreeNodeGetParams", "hipGraphMemFreeNodeGetParams", "graph");
+    subst("cuGraphNodeGetEnabled", "hipGraphNodeGetEnabled", "graph");
+    subst("cuGraphNodeSetEnabled", "hipGraphNodeSetEnabled", "graph");
     subst("cudaGraphAddMemAllocNode", "hipGraphAddMemAllocNode", "graph");
     subst("cudaGraphAddMemFreeNode", "hipGraphAddMemFreeNode", "graph");
+    subst("cudaGraphDebugDotPrint", "hipGraphDebugDotPrint", "graph");
+    subst("cudaGraphKernelNodeCopyAttributes", "hipGraphKernelNodeCopyAttributes", "graph");
     subst("cudaGraphMemAllocNodeGetParams", "hipGraphMemAllocNodeGetParams", "graph");
     subst("cudaGraphMemFreeNodeGetParams", "hipGraphMemFreeNodeGetParams", "graph");
+    subst("cudaGraphNodeGetEnabled", "hipGraphNodeGetEnabled", "graph");
+    subst("cudaGraphNodeSetEnabled", "hipGraphNodeSetEnabled", "graph");
+    subst("cudaOccupancyMaxPotentialBlockSizeVariableSMem", "hipOccupancyMaxPotentialBlockSizeVariableSMem", "occupancy");
+    subst("cudaOccupancyMaxPotentialBlockSizeVariableSMemWithFlags", "hipOccupancyMaxPotentialBlockSizeVariableSMemWithFlags", "occupancy");
     subst("CUDA_LAUNCH_PARAMS", "hipFunctionLaunchParams", "type");
     subst("CUDA_LAUNCH_PARAMS_st", "hipFunctionLaunchParams_t", "type");
     subst("CUDA_LAUNCH_PARAMS_v1", "hipFunctionLaunchParams", "type");
@@ -6357,8 +6377,6 @@ sub warnUnsupportedFunctions {
         "cudaOutputMode_t",
         "cudaOutputMode",
         "cudaOccupancyMaxPotentialClusterSize",
-        "cudaOccupancyMaxPotentialBlockSizeVariableSMemWithFlags",
-        "cudaOccupancyMaxPotentialBlockSizeVariableSMem",
         "cudaOccupancyMaxActiveClusters",
         "cudaOccupancyAvailableDynamicSMemPerBlock",
         "cudaNvSciSyncAttrWait",
@@ -6425,8 +6443,6 @@ sub warnUnsupportedFunctions {
         "cudaGraphicsCubeFaceNegativeY",
         "cudaGraphicsCubeFaceNegativeX",
         "cudaGraphicsCubeFace",
-        "cudaGraphNodeSetEnabled",
-        "cudaGraphKernelNodeCopyAttributes",
         "cudaGraphInstantiateWithParams",
         "cudaGraphInstantiateSuccess",
         "cudaGraphInstantiateResult",
@@ -6449,7 +6465,6 @@ sub warnUnsupportedFunctions {
         "cudaGraphExecGetFlags",
         "cudaGraphExecExternalSemaphoresWaitNodeSetParams",
         "cudaGraphExecExternalSemaphoresSignalNodeSetParams",
-        "cudaGraphDebugDotPrint",
         "cudaGraphAddExternalSemaphoresWaitNode",
         "cudaGraphAddExternalSemaphoresSignalNode",
         "cudaGetTextureObjectTextureDesc_v2",
@@ -6896,9 +6911,6 @@ sub warnUnsupportedFunctions {
         "cuGraphicsD3D9RegisterResource",
         "cuGraphicsD3D11RegisterResource",
         "cuGraphicsD3D10RegisterResource",
-        "cuGraphNodeSetEnabled",
-        "cuGraphNodeGetEnabled",
-        "cuGraphKernelNodeCopyAttributes",
         "cuGraphInstantiateWithParams",
         "cuGraphExternalSemaphoresWaitNodeSetParams",
         "cuGraphExternalSemaphoresWaitNodeGetParams",
@@ -6910,7 +6922,6 @@ sub warnUnsupportedFunctions {
         "cuGraphExecExternalSemaphoresWaitNodeSetParams",
         "cuGraphExecExternalSemaphoresSignalNodeSetParams",
         "cuGraphExecBatchMemOpNodeSetParams",
-        "cuGraphDebugDotPrint",
         "cuGraphBatchMemOpNodeSetParams",
         "cuGraphBatchMemOpNodeGetParams",
         "cuGraphAddMemsetNode",

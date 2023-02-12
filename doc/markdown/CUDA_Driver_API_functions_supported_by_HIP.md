@@ -1704,7 +1704,7 @@
 |`cuGraphChildGraphNodeGetGraph`|10.0| | |`hipGraphChildGraphNodeGetGraph`|5.0.0| | | |
 |`cuGraphClone`|10.0| | |`hipGraphClone`|5.0.0| | | |
 |`cuGraphCreate`|10.0| | |`hipGraphCreate`|4.3.0| | | |
-|`cuGraphDebugDotPrint`|11.3| | | | | | | |
+|`cuGraphDebugDotPrint`|11.3| | |`hipGraphDebugDotPrint`|5.5.0| | |5.5.0|
 |`cuGraphDestroy`|10.0| | |`hipGraphDestroy`|4.3.0| | | |
 |`cuGraphDestroyNode`|10.0| | |`hipGraphDestroyNode`|5.0.0| | | |
 |`cuGraphEventRecordNodeGetEvent`|11.1| | |`hipGraphEventRecordNodeGetEvent`|5.0.0| | | |
@@ -1737,7 +1737,7 @@
 |`cuGraphInstantiateWithFlags`|11.4| | |`hipGraphInstantiateWithFlags`|5.0.0| | | |
 |`cuGraphInstantiateWithParams`|12.0| | | | | | | |
 |`cuGraphInstantiate_v2`|11.0| | |`hipGraphInstantiate`|4.3.0| | | |
-|`cuGraphKernelNodeCopyAttributes`|11.0| | | | | | | |
+|`cuGraphKernelNodeCopyAttributes`|11.0| | |`hipGraphKernelNodeCopyAttributes`|5.5.0| | |5.5.0|
 |`cuGraphKernelNodeGetAttribute`|11.0| | |`hipGraphKernelNodeGetAttribute`|5.2.0| | | |
 |`cuGraphKernelNodeGetParams`|10.0| | |`hipGraphKernelNodeGetParams`|4.5.0| | | |
 |`cuGraphKernelNodeSetAttribute`|11.0| | |`hipGraphKernelNodeSetAttribute`|5.2.0| | | |
@@ -1752,9 +1752,9 @@
 |`cuGraphNodeFindInClone`|10.0| | |`hipGraphNodeFindInClone`|5.0.0| | | |
 |`cuGraphNodeGetDependencies`|10.0| | |`hipGraphNodeGetDependencies`|5.0.0| | | |
 |`cuGraphNodeGetDependentNodes`|10.0| | |`hipGraphNodeGetDependentNodes`|5.0.0| | | |
-|`cuGraphNodeGetEnabled`|11.6| | | | | | | |
+|`cuGraphNodeGetEnabled`|11.6| | |`hipGraphNodeGetEnabled`|5.5.0| | |5.5.0|
 |`cuGraphNodeGetType`|10.0| | |`hipGraphNodeGetType`|5.0.0| | | |
-|`cuGraphNodeSetEnabled`|11.6| | | | | | | |
+|`cuGraphNodeSetEnabled`|11.6| | |`hipGraphNodeSetEnabled`|5.5.0| | |5.5.0|
 |`cuGraphReleaseUserObject`|11.3| | |`hipGraphReleaseUserObject`|5.3.0| | | |
 |`cuGraphRemoveDependencies`|10.0| | |`hipGraphRemoveDependencies`|5.0.0| | | |
 |`cuGraphRetainUserObject`|11.3| | |`hipGraphRetainUserObject`|5.3.0| | | |
