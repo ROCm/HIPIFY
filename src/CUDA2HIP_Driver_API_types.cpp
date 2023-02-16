@@ -81,9 +81,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
 
   // no analogue
   // NOTE: cudaLaunchParams struct differs
-  {"CUDA_LAUNCH_PARAMS_st",                                            {"HIP_LAUNCH_PARAMS",                                        "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
-  {"CUDA_LAUNCH_PARAMS",                                               {"HIP_LAUNCH_PARAMS",                                        "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
-  {"CUDA_LAUNCH_PARAMS_v1",                                            {"HIP_LAUNCH_PARAMS",                                        "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CUDA_LAUNCH_PARAMS_st",                                            {"hipFunctionLaunchParams_t",                                "", CONV_TYPE, API_DRIVER, 1, HIP_EXPERIMENTAL}},
+  {"CUDA_LAUNCH_PARAMS",                                               {"hipFunctionLaunchParams",                                  "", CONV_TYPE, API_DRIVER, 1, HIP_EXPERIMENTAL}},
+  {"CUDA_LAUNCH_PARAMS_v1",                                            {"hipFunctionLaunchParams",                                  "", CONV_TYPE, API_DRIVER, 1, HIP_EXPERIMENTAL}},
 
   {"CUDA_MEMCPY2D_st",                                                 {"hip_Memcpy2D",                                             "", CONV_TYPE, API_DRIVER, 1}},
   {"CUDA_MEMCPY2D_v1_st",                                              {"hip_Memcpy2D",                                             "", CONV_TYPE, API_DRIVER, 1}},
@@ -298,8 +298,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUexecAffinityParam_v1",                                           {"hipExecAffinityParam",                                     "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
 
   // cudaMemAllocNodeParams
-  {"CUDA_MEM_ALLOC_NODE_PARAMS_st",                                    {"hipMemallocNodeParams",                                    "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
-  {"CUDA_MEM_ALLOC_NODE_PARAMS",                                       {"hipMemallocNodeParams",                                    "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CUDA_MEM_ALLOC_NODE_PARAMS_st",                                    {"hipMemallocNodeParams",                                    "", CONV_TYPE, API_DRIVER, 1, HIP_EXPERIMENTAL}},
+  {"CUDA_MEM_ALLOC_NODE_PARAMS",                                       {"hipMemallocNodeParams",                                    "", CONV_TYPE, API_DRIVER, 1, HIP_EXPERIMENTAL}},
 
   // cudaArrayMemoryRequirements
   {"CUDA_ARRAY_MEMORY_REQUIREMENTS_st",                                {"hipArrayMemoryRequirements",                               "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
@@ -1176,9 +1176,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaGraphNodeTypeExtSemaphoreWait
   {"CU_GRAPH_NODE_TYPE_EXT_SEMAS_WAIT",                                {"hipGraphNodeTypeExtSemaphoreWait",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, 1}}, // 9
   // cudaGraphNodeTypeMemAlloc
-  {"CU_GRAPH_NODE_TYPE_MEM_ALLOC",                                     {"hipGraphNodeTypeMemAlloc",                                 "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 10
+  {"CU_GRAPH_NODE_TYPE_MEM_ALLOC",                                     {"hipGraphNodeTypeMemAlloc",                                 "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_EXPERIMENTAL}}, // 10
   // cudaGraphNodeTypeMemFree
-  {"CU_GRAPH_NODE_TYPE_MEM_FREE",                                      {"hipGraphNodeTypeMemFree",                                  "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 11
+  {"CU_GRAPH_NODE_TYPE_MEM_FREE",                                      {"hipGraphNodeTypeMemFree",                                  "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_EXPERIMENTAL}}, // 11
   //
   {"CU_GRAPH_NODE_TYPE_BATCH_MEM_OP",                                  {"hipGraphNodeTypeBatchMemOp",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 12
   // cudaGraphNodeTypeCount
@@ -2119,31 +2119,31 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_FLUSH_GPU_DIRECT_RDMA_WRITES_TARGET_CURRENT_CTX",               {"hipFlushGPUDirectRDMAWritesTargetCurrentDevice",           "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}},
 
   // cudaGraphDebugDotFlags
-  {"CUgraphDebugDot_flags",                                            {"hipGraphDebugDotFlags",                                    "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
-  {"CUgraphDebugDot_flags_enum",                                       {"hipGraphDebugDotFlags",                                    "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
+  {"CUgraphDebugDot_flags",                                            {"hipGraphDebugDotFlags",                                    "", CONV_TYPE, API_DRIVER, 1, HIP_EXPERIMENTAL}},
+  {"CUgraphDebugDot_flags_enum",                                       {"hipGraphDebugDotFlags",                                    "", CONV_TYPE, API_DRIVER, 1, HIP_EXPERIMENTAL}},
   // CUgraphDebugDot_flags enum values
   // cudaGraphDebugDotFlagsVerbose
-  {"CU_GRAPH_DEBUG_DOT_FLAGS_VERBOSE",                                 {"hipGraphDebugDotFlagsVerbose",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 1<<0
+  {"CU_GRAPH_DEBUG_DOT_FLAGS_VERBOSE",                                 {"hipGraphDebugDotFlagsVerbose",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_EXPERIMENTAL}}, // 1<<0
   // no analogue
-  {"CU_GRAPH_DEBUG_DOT_FLAGS_RUNTIME_TYPES",                           {"hipGraphDebugDotFlagsRuntimeTypes",                        "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 1<<1
+  {"CU_GRAPH_DEBUG_DOT_FLAGS_RUNTIME_TYPES",                           {"hipGraphDebugDotFlagsRuntimeTypes",                        "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_EXPERIMENTAL}}, // 1<<1
   // cudaGraphDebugDotFlagsKernelNodeParams
-  {"CU_GRAPH_DEBUG_DOT_FLAGS_KERNEL_NODE_PARAMS",                      {"hipGraphDebugDotFlagsKernelNodeParams",                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 1<<2
+  {"CU_GRAPH_DEBUG_DOT_FLAGS_KERNEL_NODE_PARAMS",                      {"hipGraphDebugDotFlagsKernelNodeParams",                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_EXPERIMENTAL}}, // 1<<2
   // cudaGraphDebugDotFlagsMemcpyNodeParams
-  {"CU_GRAPH_DEBUG_DOT_FLAGS_MEMCPY_NODE_PARAMS",                      {"hipGraphDebugDotFlagsMemcpyNodeParams",                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 1<<3
+  {"CU_GRAPH_DEBUG_DOT_FLAGS_MEMCPY_NODE_PARAMS",                      {"hipGraphDebugDotFlagsMemcpyNodeParams",                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_EXPERIMENTAL}}, // 1<<3
   // cudaGraphDebugDotFlagsMemsetNodeParams
-  {"CU_GRAPH_DEBUG_DOT_FLAGS_MEMSET_NODE_PARAMS",                      {"hipGraphDebugDotFlagsMemsetNodeParams",                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 1<<4
+  {"CU_GRAPH_DEBUG_DOT_FLAGS_MEMSET_NODE_PARAMS",                      {"hipGraphDebugDotFlagsMemsetNodeParams",                    "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_EXPERIMENTAL}}, // 1<<4
   // cudaGraphDebugDotFlagsHostNodeParams
-  {"CU_GRAPH_DEBUG_DOT_FLAGS_HOST_NODE_PARAMS",                        {"hipGraphDebugDotFlagsHostNodeParams",                      "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 1<<5
+  {"CU_GRAPH_DEBUG_DOT_FLAGS_HOST_NODE_PARAMS",                        {"hipGraphDebugDotFlagsHostNodeParams",                      "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_EXPERIMENTAL}}, // 1<<5
   // cudaGraphDebugDotFlagsEventNodeParams
-  {"CU_GRAPH_DEBUG_DOT_FLAGS_EVENT_NODE_PARAMS",                       {"hipGraphDebugDotFlagsEventNodeParams",                     "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 1<<6
+  {"CU_GRAPH_DEBUG_DOT_FLAGS_EVENT_NODE_PARAMS",                       {"hipGraphDebugDotFlagsEventNodeParams",                     "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_EXPERIMENTAL}}, // 1<<6
   // cudaGraphDebugDotFlagsExtSemasSignalNodeParams
-  {"CU_GRAPH_DEBUG_DOT_FLAGS_EXT_SEMAS_SIGNAL_NODE_PARAMS",            {"hipGraphDebugDotFlagsExtSemasSignalNodeParams",            "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 1<<7
+  {"CU_GRAPH_DEBUG_DOT_FLAGS_EXT_SEMAS_SIGNAL_NODE_PARAMS",            {"hipGraphDebugDotFlagsExtSemasSignalNodeParams",            "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_EXPERIMENTAL}}, // 1<<7
   // cudaGraphDebugDotFlagsExtSemasWaitNodeParams
-  {"CU_GRAPH_DEBUG_DOT_FLAGS_EXT_SEMAS_WAIT_NODE_PARAMS",              {"hipGraphDebugDotFlagsExtSemasWaitNodeParams",              "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 1<<8
+  {"CU_GRAPH_DEBUG_DOT_FLAGS_EXT_SEMAS_WAIT_NODE_PARAMS",              {"hipGraphDebugDotFlagsExtSemasWaitNodeParams",              "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_EXPERIMENTAL}}, // 1<<8
   // cudaGraphDebugDotFlagsKernelNodeAttributes
-  {"CU_GRAPH_DEBUG_DOT_FLAGS_KERNEL_NODE_ATTRIBUTES",                  {"hipGraphDebugDotFlagsKernelNodeAttributes",                "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 1<<9
+  {"CU_GRAPH_DEBUG_DOT_FLAGS_KERNEL_NODE_ATTRIBUTES",                  {"hipGraphDebugDotFlagsKernelNodeAttributes",                "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_EXPERIMENTAL}}, // 1<<9
   // cudaGraphDebugDotFlagsHandles
-  {"CU_GRAPH_DEBUG_DOT_FLAGS_HANDLES",                                 {"hipGraphDebugDotFlagsHandles",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 1<<10
+  {"CU_GRAPH_DEBUG_DOT_FLAGS_HANDLES",                                 {"hipGraphDebugDotFlagsHandles",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_EXPERIMENTAL}}, // 1<<10
   //
   {"CU_GRAPH_DEBUG_DOT_FLAGS_MEM_ALLOC_NODE_PARAMS",                   {"hipGraphDebugDotFlagsMemAllocNodeParams",                  "", CONV_NUMERIC_LITERAL, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 1<<11
   //
@@ -2516,7 +2516,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaCooperativeLaunchMultiDeviceNoPostSync
   {"CUDA_COOPERATIVE_LAUNCH_MULTI_DEVICE_NO_POST_LAUNCH_SYNC",         {"hipCooperativeLaunchMultiDeviceNoPostSync",                "", CONV_DEFINE, API_DRIVER, 1}}, // 0x02
   // cudaExternalMemoryDedicated
-  {"CUDA_EXTERNAL_MEMORY_DEDICATED",                                   {"hipExternalMemoryDedicated",                               "", CONV_DEFINE, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0x1
+  {"CUDA_EXTERNAL_MEMORY_DEDICATED",                                   {"hipExternalMemoryDedicated",                               "", CONV_DEFINE, API_DRIVER, 1, HIP_EXPERIMENTAL}}, // 0x1
   // cudaExternalSemaphoreSignalSkipNvSciBufMemSync
   {"CUDA_EXTERNAL_SEMAPHORE_SIGNAL_SKIP_NVSCIBUF_MEMSYNC",             {"hipExternalSemaphoreSignalSkipNvSciBufMemSync",            "", CONV_DEFINE, API_DRIVER, 1, HIP_UNSUPPORTED}}, // 0x01
   // cudaExternalSemaphoreWaitSkipNvSciBufMemSync
@@ -3773,4 +3773,6 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {
   {"HIPRTC_JIT_NUM_LEGACY_INPUT_TYPES",                                {HIP_5030, HIP_0,    HIP_0   }},
   {"ihiprtcLinkState",                                                 {HIP_5030, HIP_0,    HIP_0   }},
   {"hiprtcLinkState",                                                  {HIP_5030, HIP_0,    HIP_0   }},
+  {"hipFunctionLaunchParams_t",                                        {HIP_5050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipFunctionLaunchParams",                                          {HIP_5050, HIP_0,    HIP_0,  HIP_LATEST}},
 };

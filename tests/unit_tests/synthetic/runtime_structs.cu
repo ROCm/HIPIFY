@@ -176,5 +176,10 @@ int main() {
   cudaUserObject_t userObject;
 #endif
 
+#if CUDA_VERSION >= 11040
+  // CHECK: hipMemallocNodeParams MemAllocNodeParams;
+  cudaMemAllocNodeParams MemAllocNodeParams;
+#endif
+
   return 0;
 }

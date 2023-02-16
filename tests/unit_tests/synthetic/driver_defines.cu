@@ -1,4 +1,4 @@
-// RUN: %run_test hipify "%s" "%t" %hipify_args 1 --skip-excluded-preprocessor-conditional-blocks %clang_args -D__CUDA_API_VERSION_INTERNAL
+// RUN: %run_test hipify "%s" "%t" %hipify_args 2 --skip-excluded-preprocessor-conditional-blocks --experimental %clang_args -D__CUDA_API_VERSION_INTERNAL
 
 // CHECK: #include <hip/hip_runtime.h>
 #include <cuda.h>
@@ -69,6 +69,11 @@ int main() {
   // CHECK-NEXT: int COOPERATIVE_LAUNCH_MULTI_DEVICE_NO_POST_LAUNCH_SYNC = hipCooperativeLaunchMultiDeviceNoPostSync;
   int COOPERATIVE_LAUNCH_MULTI_DEVICE_NO_PRE_LAUNCH_SYNC = CUDA_COOPERATIVE_LAUNCH_MULTI_DEVICE_NO_PRE_LAUNCH_SYNC;
   int COOPERATIVE_LAUNCH_MULTI_DEVICE_NO_POST_LAUNCH_SYNC = CUDA_COOPERATIVE_LAUNCH_MULTI_DEVICE_NO_POST_LAUNCH_SYNC;
+#endif
+
+#if CUDA_VERSION >= 10000
+  // CHECK: int EXTERNAL_MEMORY_DEDICATED = hipExternalMemoryDedicated;
+  int EXTERNAL_MEMORY_DEDICATED = CUDA_EXTERNAL_MEMORY_DEDICATED;
 #endif
 
   return 0;
