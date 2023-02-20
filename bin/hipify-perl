@@ -90,6 +90,8 @@ GetOptions(
 $cuda_kernel_execution_syntax = 1;
 
 my %deprecated_funcs = (
+    "nvrtcGetNVVMSize" => "12.0",
+    "nvrtcGetNVVM" => "12.0",
     "cusparseZsctr" => "11.0",
     "cusparseZhybsv_solve" => "10.2",
     "cusparseZhybsv_analysis" => "10.2",
@@ -5847,9 +5849,13 @@ sub warnUnsupportedFunctions {
     foreach $func (
         "pruneInfo",
         "nvrtcGetSupportedArchs",
+        "nvrtcGetOptiXIRSize",
+        "nvrtcGetOptiXIR",
         "nvrtcGetNumSupportedArchs",
         "nvrtcGetNVVMSize",
         "nvrtcGetNVVM",
+        "nvrtcGetLTOIRSize",
+        "nvrtcGetLTOIR",
         "nv_bfloat162",
         "nv_bfloat16",
         "memoryBarrier",

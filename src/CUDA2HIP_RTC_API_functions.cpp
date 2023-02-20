@@ -35,12 +35,16 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RTC_FUNCTION_MAP {
   {"nvrtcGetPTX",                                 {"hiprtcGetCode",                                "", CONV_LIB_FUNC, API_RTC, 2}},
   {"nvrtcGetCUBINSize",                           {"hiprtcGetBitcodeSize",                         "", CONV_LIB_FUNC, API_RTC, 2}},
   {"nvrtcGetCUBIN",                               {"hiprtcGetBitcode",                             "", CONV_LIB_FUNC, API_RTC, 2}},
-  {"nvrtcGetNVVMSize",                            {"hiprtcGetNVVMSize",                            "", CONV_LIB_FUNC, API_RTC, 2, HIP_UNSUPPORTED}},
-  {"nvrtcGetNVVM",                                {"hiprtcGetNVVM",                                "", CONV_LIB_FUNC, API_RTC, 2, HIP_UNSUPPORTED}},
+  {"nvrtcGetNVVMSize",                            {"hiprtcGetNVVMSize",                            "", CONV_LIB_FUNC, API_RTC, 2, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"nvrtcGetNVVM",                                {"hiprtcGetNVVM",                                "", CONV_LIB_FUNC, API_RTC, 2, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   {"nvrtcGetProgramLogSize",                      {"hiprtcGetProgramLogSize",                      "", CONV_LIB_FUNC, API_RTC, 2}},
   {"nvrtcGetProgramLog",                          {"hiprtcGetProgramLog",                          "", CONV_LIB_FUNC, API_RTC, 2}},
   {"nvrtcAddNameExpression",                      {"hiprtcAddNameExpression",                      "", CONV_LIB_FUNC, API_RTC, 2}},
   {"nvrtcGetLoweredName",                         {"hiprtcGetLoweredName",                         "", CONV_LIB_FUNC, API_RTC, 2}},
+  {"nvrtcGetLTOIRSize",                           {"hiprtcGetLTOIRSize",                           "", CONV_LIB_FUNC, API_RTC, 2, HIP_UNSUPPORTED}},
+  {"nvrtcGetLTOIR",                               {"hiprtcGetLTOIR",                               "", CONV_LIB_FUNC, API_RTC, 2, HIP_UNSUPPORTED}},
+  {"nvrtcGetOptiXIRSize",                         {"hiprtcGetOptiXIRSize",                         "", CONV_LIB_FUNC, API_RTC, 2, HIP_UNSUPPORTED}},
+  {"nvrtcGetOptiXIR",                             {"hiprtcGetOptiXIR",                             "", CONV_LIB_FUNC, API_RTC, 2, HIP_UNSUPPORTED}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_RTC_FUNCTION_VER_MAP {
@@ -48,10 +52,14 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RTC_FUNCTION_VER_MAP {
   {"nvrtcGetSupportedArchs",                      {CUDA_112, CUDA_0,   CUDA_0  }},
   {"nvrtcGetCUBINSize",                           {CUDA_111, CUDA_0,   CUDA_0  }},
   {"nvrtcGetCUBIN",                               {CUDA_111, CUDA_0,   CUDA_0  }},
-  {"nvrtcGetNVVMSize",                            {CUDA_114, CUDA_0,   CUDA_0  }},
-  {"nvrtcGetNVVM",                                {CUDA_114, CUDA_0,   CUDA_0  }},
+  {"nvrtcGetNVVMSize",                            {CUDA_114, CUDA_120, CUDA_0  }},
+  {"nvrtcGetNVVM",                                {CUDA_114, CUDA_120, CUDA_0  }},
   {"nvrtcAddNameExpression",                      {CUDA_80,  CUDA_0,   CUDA_0  }},
   {"nvrtcGetLoweredName",                         {CUDA_80,  CUDA_0,   CUDA_0  }},
+  {"nvrtcGetLTOIRSize",                           {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"nvrtcGetLTOIR",                               {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"nvrtcGetOptiXIRSize",                         {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"nvrtcGetOptiXIR",                             {CUDA_120, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_RTC_FUNCTION_VER_MAP {
