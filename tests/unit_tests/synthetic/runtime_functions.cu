@@ -74,6 +74,23 @@ int main() {
   // CHECK: hipMemcpyKind MemcpyKind;
   cudaMemcpyKind MemcpyKind;
 
+  // CHECK: hipChannelFormatDesc ChannelFormatDesc;
+  cudaChannelFormatDesc ChannelFormatDesc;
+
+  // CHECK: hipMipmappedArray* MipmappedArray;
+  // CHECK-NEXT: hipMipmappedArray_t MipmappedArray_t;
+  // CHECK-NEXT: hipMipmappedArray_const_t MipmappedArray_const_t;
+  cudaMipmappedArray* MipmappedArray;
+  cudaMipmappedArray_t MipmappedArray_t;
+  cudaMipmappedArray_const_t MipmappedArray_const_t;
+
+  // CHECK: hipArray* Array;
+  // CHECK-NEXT: hipArray_t Array_t;
+  // CHECK-NEXT: hipArray_const_t Array_const_t;
+  cudaArray* Array;
+  cudaArray_t Array_t;
+  cudaArray_const_t Array_const_t;
+
 #if CUDA_VERSION >= 8000
   // CHECK: hipDeviceP2PAttr DeviceP2PAttr;
   cudaDeviceP2PAttr DeviceP2PAttr;
@@ -756,6 +773,43 @@ int main() {
   result = cudaGraphNodeGetEnabled(GraphExec_t, graphNode, &flags);
 #endif
 
+#if CUDA_VERSION < 12000
+  // CUDA: extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaBindTexture(size_t *offset, const struct textureReference *texref, const void *devPtr, const struct cudaChannelFormatDesc *desc, size_t size __dv(UINT_MAX));
+  // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipBindTexture(size_t* offset, const textureReference* tex, const void* devPtr, const hipChannelFormatDesc* desc, size_t size __dparm(UINT_MAX));
+  // CHECK: result = hipBindTexture(&wOffset, texref, deviceptr, &ChannelFormatDesc, bytes);
+  result = cudaBindTexture(&wOffset, texref, deviceptr, &ChannelFormatDesc, bytes);
+
+  // CUDA: extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaBindTexture2D(size_t *offset, const struct textureReference *texref, const void *devPtr, const struct cudaChannelFormatDesc *desc, size_t width, size_t height, size_t pitch);
+  // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipBindTexture2D(size_t* offset, const textureReference* tex, const void* devPtr, const hipChannelFormatDesc* desc, size_t width, size_t height, size_t pitch);
+  // CHECK: result = hipBindTexture2D(&wOffset, texref, deviceptr, &ChannelFormatDesc, width, height, pitch);
+  result = cudaBindTexture2D(&wOffset, texref, deviceptr, &ChannelFormatDesc, width, height, pitch);
+
+  // CUDA: extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaBindTextureToArray(const struct textureReference *texref, cudaArray_const_t array, const struct cudaChannelFormatDesc *desc);
+  // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipBindTextureToArray(const textureReference* tex, hipArray_const_t array, const hipChannelFormatDesc* desc);
+  // CHECK: result = hipBindTextureToArray(texref, Array_const_t, &ChannelFormatDesc);
+  result = cudaBindTextureToArray(texref, Array_const_t, &ChannelFormatDesc);
+
+  // CUDA: extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaBindTextureToMipmappedArray(const struct textureReference *texref, cudaMipmappedArray_const_t mipmappedArray, const struct cudaChannelFormatDesc *desc);
+  // HIP: hipError_t hipBindTextureToMipmappedArray(const textureReference* tex, hipMipmappedArray_const_t mipmappedArray, const hipChannelFormatDesc* desc);
+  // CHECK: result = hipBindTextureToMipmappedArray(texref, MipmappedArray_const_t, &ChannelFormatDesc);
+  result = cudaBindTextureToMipmappedArray(texref, MipmappedArray_const_t, &ChannelFormatDesc);
+
+  // CUDA: extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaGetTextureAlignmentOffset(size_t *offset, const struct textureReference *texref);
+  // HIP: hipError_t hipGetTextureAlignmentOffset(size_t* offset, const textureReference* texref);
+  // CHECK: result = hipGetTextureAlignmentOffset(&wOffset, texref);
+  result = cudaGetTextureAlignmentOffset(&wOffset, texref);
+
+  // CUDA: extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaGetTextureReference(const struct textureReference **texref, const void *symbol);
+  // HIP:  hipError_t hipGetTextureReference(const textureReference** texref, const void* symbol);
+  // CHECK: result = hipGetTextureReference(const_cast<const textureReference**>(&texref), {{(HIP_SYMBOL\()?}}image{{(\))?}});
+  result = cudaGetTextureReference(const_cast<const textureReference**>(&texref), image);
+
+  // CUDA: extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaUnbindTexture(const struct textureReference *texref);
+  // HIP:  DEPRECATED(DEPRECATED_MSG) hipError_t hipUnbindTexture(const textureReference* tex);
+  // CHECK: result = hipUnbindTexture(texref);
+  result = cudaUnbindTexture(texref);
+#endif
+
   // CHECK: hipDeviceProp_t DeviceProp;
   cudaDeviceProp DeviceProp;
 
@@ -1073,13 +1127,6 @@ int main() {
   // CHECK: result = hipFree(deviceptr);
   result = cudaFree(deviceptr);
 
-  // CHECK: hipArray* Array;
-  // CHECK-NEXT: hipArray_t Array_t;
-  // CHECK-NEXT: hipArray_const_t Array_const_t;
-  cudaArray* Array;
-  cudaArray_t Array_t;
-  cudaArray_const_t Array_const_t;
-
   // CUDA: extern __host__ cudaError_t CUDARTAPI cudaFreeArray(cudaArray_t array);
   // HIP: hipError_t hipFreeArray(hipArray* array);
   // CHECK: result = hipFreeArray(Array_t);
@@ -1089,13 +1136,6 @@ int main() {
   // HIP: hipError_t hipHostFree(void* ptr);
   // CHECK: result = hipHostFree(deviceptr);
   result = cudaFreeHost(deviceptr);
-
-  // CHECK: hipMipmappedArray* MipmappedArray;
-  // CHECK-NEXT: hipMipmappedArray_t MipmappedArray_t;
-  // CHECK-NEXT: hipMipmappedArray_const_t MipmappedArray_const_t;
-  cudaMipmappedArray* MipmappedArray;
-  cudaMipmappedArray_t MipmappedArray_t;
-  cudaMipmappedArray_const_t MipmappedArray_const_t;
 
   // CUDA: extern __host__ cudaError_t CUDARTAPI cudaFreeMipmappedArray(cudaMipmappedArray_t mipmappedArray);
   // HIP: hipError_t hipFreeMipmappedArray(hipMipmappedArray_t mipmappedArray);
@@ -1157,9 +1197,6 @@ int main() {
   // HIP: hipError_t hipMalloc3D(hipPitchedPtr* pitchedDevPtr, hipExtent extent);
   // CHECK: result = hipMalloc3D(&PitchedPtr, Extent);
   result = cudaMalloc3D(&PitchedPtr, Extent);
-
-  // CHECK: hipChannelFormatDesc ChannelFormatDesc;
-  cudaChannelFormatDesc ChannelFormatDesc;
 
   // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMalloc3DArray(cudaArray_t *array, const struct cudaChannelFormatDesc* desc, struct cudaExtent extent, unsigned int flags __dv(0));
   // HIP: hipError_t hipMalloc3DArray(hipArray** array, const struct hipChannelFormatDesc* desc, struct hipExtent extent, unsigned int flags);
@@ -1400,26 +1437,6 @@ int main() {
   // CHECK: result = hipGraphicsUnregisterResource(GraphicsResource);
   result = cudaGraphicsUnregisterResource(GraphicsResource);
 
-  // CUDA: extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaBindTexture(size_t *offset, const struct textureReference *texref, const void *devPtr, const struct cudaChannelFormatDesc *desc, size_t size __dv(UINT_MAX));
-  // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipBindTexture(size_t* offset, const textureReference* tex, const void* devPtr, const hipChannelFormatDesc* desc, size_t size __dparm(UINT_MAX));
-  // CHECK: result = hipBindTexture(&wOffset, texref, deviceptr, &ChannelFormatDesc, bytes);
-  result = cudaBindTexture(&wOffset, texref, deviceptr, &ChannelFormatDesc, bytes);
-
-  // CUDA: extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaBindTexture2D(size_t *offset, const struct textureReference *texref, const void *devPtr, const struct cudaChannelFormatDesc *desc, size_t width, size_t height, size_t pitch);
-  // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipBindTexture2D(size_t* offset, const textureReference* tex, const void* devPtr, const hipChannelFormatDesc* desc, size_t width, size_t height, size_t pitch);
-  // CHECK: result = hipBindTexture2D(&wOffset, texref, deviceptr, &ChannelFormatDesc, width, height, pitch);
-  result = cudaBindTexture2D(&wOffset, texref, deviceptr, &ChannelFormatDesc, width, height, pitch);
-
-  // CUDA: extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaBindTextureToArray(const struct textureReference *texref, cudaArray_const_t array, const struct cudaChannelFormatDesc *desc);
-  // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipBindTextureToArray(const textureReference* tex, hipArray_const_t array, const hipChannelFormatDesc* desc);
-  // CHECK: result = hipBindTextureToArray(texref, Array_const_t, &ChannelFormatDesc);
-  result = cudaBindTextureToArray(texref, Array_const_t, &ChannelFormatDesc);
-
-  // CUDA: extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaBindTextureToMipmappedArray(const struct textureReference *texref, cudaMipmappedArray_const_t mipmappedArray, const struct cudaChannelFormatDesc *desc);
-  // HIP: hipError_t hipBindTextureToMipmappedArray(const textureReference* tex, hipMipmappedArray_const_t mipmappedArray, const hipChannelFormatDesc* desc);
-  // CHECK: result = hipBindTextureToMipmappedArray(texref, MipmappedArray_const_t, &ChannelFormatDesc);
-  result = cudaBindTextureToMipmappedArray(texref, MipmappedArray_const_t, &ChannelFormatDesc);
-
   // CHECK: hipChannelFormatKind ChannelFormatKind;
   cudaChannelFormatKind ChannelFormatKind;
 
@@ -1432,21 +1449,6 @@ int main() {
   // HIP: hipError_t hipGetChannelDesc(hipChannelFormatDesc* desc, hipArray_const_t array);
   // CHECK: result = hipGetChannelDesc(&ChannelFormatDesc, Array_const_t);
   result = cudaGetChannelDesc(&ChannelFormatDesc, Array_const_t);
-
-  // CUDA: extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaGetTextureAlignmentOffset(size_t *offset, const struct textureReference *texref);
-  // HIP: hipError_t hipGetTextureAlignmentOffset(size_t* offset, const textureReference* texref);
-  // CHECK: result = hipGetTextureAlignmentOffset(&wOffset, texref);
-  result = cudaGetTextureAlignmentOffset(&wOffset, texref);
-
-  // CUDA: extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaGetTextureReference(const struct textureReference **texref, const void *symbol);
-  // HIP:  hipError_t hipGetTextureReference(const textureReference** texref, const void* symbol);
-  // CHECK: result = hipGetTextureReference(const_cast<const textureReference**>(&texref), HIP_SYMBOL(image));
-  result = cudaGetTextureReference(const_cast<const textureReference**>(&texref), image);
-
-  // CUDA: extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaUnbindTexture(const struct textureReference *texref);
-  // HIP:  DEPRECATED(DEPRECATED_MSG) hipError_t hipUnbindTexture(const textureReference* tex);
-  // CHECK: result = hipUnbindTexture(texref);
-  result = cudaUnbindTexture(texref);
 
   // CHECK: hipTextureObject_t TextureObject_t;
   cudaTextureObject_t TextureObject_t;

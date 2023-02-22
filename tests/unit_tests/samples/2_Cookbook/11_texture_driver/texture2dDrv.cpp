@@ -1,4 +1,4 @@
-// RUN: %run_test hipify "%s" "%t" %hipify_args %clang_args
+// RUN: %run_test hipify "%s" "%t" %hipify_args 1 --skip-excluded-preprocessor-conditional-blocks %clang_args
 /*
 Copyright (c) 2015-present Advanced Micro Devices, Inc. All rights reserved.
 
@@ -28,8 +28,10 @@ THE SOFTWARE.
 #include <vector>
 
 #define fileName "tex2dKernel.code"
+#if CUDA_VERSION < 12000
 // CHECK: texture<float, 2, hipReadModeElementType> tex;
 texture<float, 2, cudaReadModeElementType> tex;
+#endif
 bool testResult = false;
 
 // CHECK: hipError_t status = cmd;

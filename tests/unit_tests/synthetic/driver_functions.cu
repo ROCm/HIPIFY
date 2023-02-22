@@ -306,11 +306,6 @@ int main() {
   // CHECK: result = hipGraphGetRootNodes(graph, &graphNode, &bytes);
   result = cuGraphGetRootNodes(graph, &graphNode, &bytes);
 
-  // CUDA: CUresult CUDAAPI cuGraphInstantiate(CUgraphExec *phGraphExec, CUgraph hGraph, CUgraphNode *phErrorNode, char *logBuffer, size_t bufferSize);
-  // HIP: hipError_t hipGraphInstantiate(hipGraphExec_t* pGraphExec, hipGraph_t graph, hipGraphNode_t* pErrorNode, char* pLogBuffer, size_t bufferSize);
-  // CHECK: result = hipGraphInstantiate(&graphExec, graph, &graphNode, nullptr, bytes);
-  result = cuGraphInstantiate(&graphExec, graph, &graphNode, nullptr, bytes);
-
   // CUDA: CUresult CUDAAPI cuGraphKernelNodeGetParams(CUgraphNode hNode, CUDA_KERNEL_NODE_PARAMS *nodeParams);
   // HIP: hipError_t hipGraphKernelNodeGetParams(hipGraphNode_t node, hipKernelNodeParams* pNodeParams);
   // CHECK: result = hipGraphKernelNodeGetParams(graphNode, &KERNEL_NODE_PARAMS);
@@ -415,6 +410,13 @@ int main() {
   // HIP: hipError_t hipGraphClone(hipGraph_t* pGraphClone, hipGraph_t originalGraph);
   // CHECK: result = hipGraphClone(&graph, graph2);
   result = cuGraphClone(&graph, graph2);
+#endif
+
+#if CUDA_VERSION >= 10000 && CUDA_VERSION < 12000
+  // CUDA: CUresult CUDAAPI cuGraphInstantiate(CUgraphExec *phGraphExec, CUgraph hGraph, CUgraphNode *phErrorNode, char *logBuffer, size_t bufferSize);
+  // HIP: hipError_t hipGraphInstantiate(hipGraphExec_t* pGraphExec, hipGraph_t graph, hipGraphNode_t* pErrorNode, char* pLogBuffer, size_t bufferSize);
+  // CHECK: result = hipGraphInstantiate(&graphExec, graph, &graphNode, nullptr, bytes);
+  result = cuGraphInstantiate(&graphExec, graph, &graphNode, nullptr, bytes);
 #endif
 
 #if CUDA_VERSION >= 10010
