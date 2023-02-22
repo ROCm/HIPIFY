@@ -120,10 +120,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"CUuuid_st",                                                        {"hipUUID_t",                                                "", CONV_TYPE, API_RUNTIME, 36}},
 
   // NOTE: possibly CUsurfref is analogue
-  {"surfaceReference",                                                 {"surfaceReference",                                         "", CONV_TYPE, API_RUNTIME, 36}},
+  {"surfaceReference",                                                 {"surfaceReference",                                         "", CONV_TYPE, API_RUNTIME, 36, CUDA_REMOVED}},
 
   // NOTE: possibly CUtexref_st is analogue
   {"textureReference",                                                 {"textureReference",                                         "", CONV_TYPE, API_RUNTIME, 36}},
+  {"texture",                                                          {"texture",                                                  "", CONV_TYPE, API_RUNTIME, 36, CUDA_REMOVED}},
 
   // the same - CUevent_st
   {"CUevent_st",                                                       {"ihipEvent_t",                                              "", CONV_TYPE, API_RUNTIME, 36}},
@@ -2487,6 +2488,8 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_TYPE_NAME_VER_MAP 
   {"cudaStreamAttributeMemSyncDomain",                                 {CUDA_120, CUDA_0,   CUDA_0  }},
   {"cudaKernelNodeAttributeMemSyncDomainMap",                          {CUDA_120, CUDA_0,   CUDA_0  }},
   {"cudaKernelNodeAttributeMemSyncDomain",                             {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"texture",                                                          {CUDA_0,   CUDA_0,   CUDA_120}},
+  {"surfaceReference",                                                 {CUDA_0,   CUDA_0,   CUDA_120}},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {

@@ -1416,7 +1416,8 @@ Unsupported
 |`cudaUserObject_t`|11.3| | |`hipUserObject_t`|5.3.0| | | |
 |`libraryPropertyType`|8.0| | | | | | | |
 |`libraryPropertyType_t`|8.0| | | | | | | |
-|`surfaceReference`| | | |`surfaceReference`|1.9.0| | | |
+|`surfaceReference`| | |12.0|`surfaceReference`|1.9.0| | | |
+|`texture`| | |12.0|`texture`| | | | |
 |`textureReference`| | | |`textureReference`|1.6.0| | | |
 
 ## **37. Execution Control [REMOVED]**
