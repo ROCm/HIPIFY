@@ -159,6 +159,7 @@ int main(int argc, char*argv[])
   assert(CUSPARSE_STATUS_SUCCESS == status);
 
   /* step 5: gather sorted cooVals */
+#if CUDA_VERSION < 12000
   // CHECK: status = hipsparseDgthr(
   // CHECK: HIPSPARSE_INDEX_BASE_ZERO
   status = cusparseDgthr(
@@ -169,6 +170,8 @@ int main(int argc, char*argv[])
     d_P,
     CUSPARSE_INDEX_BASE_ZERO
   );
+#endif
+
   // CHECK: assert(HIPSPARSE_STATUS_SUCCESS == status);
   assert(CUSPARSE_STATUS_SUCCESS == status);
   /* wait until the computation is done */
