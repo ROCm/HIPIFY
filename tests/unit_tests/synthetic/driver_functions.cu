@@ -435,15 +435,17 @@ int main() {
   result = cuStreamBeginCapture(stream, streamCaptureMode);
   result = cuStreamBeginCapture_v2(stream, streamCaptureMode);
 
-  // CUDA: CUresult CUDAAPI cuStreamGetCaptureInfo(CUstream hStream, CUstreamCaptureStatus *captureStatus_out, cuuint64_t *id_out);
-  // HIP: hipError_t hipStreamGetCaptureInfo(hipStream_t stream, hipStreamCaptureStatus* pCaptureStatus, unsigned long long* pId);
-  // CHECK: result = hipStreamGetCaptureInfo(stream, &streamCaptureStatus, &ull);
-  result = cuStreamGetCaptureInfo(stream, &streamCaptureStatus, &ull);
-
   // CUDA: CUresult CUDAAPI cuGraphExecKernelNodeSetParams(CUgraphExec hGraphExec, CUgraphNode hNode, const CUDA_KERNEL_NODE_PARAMS *nodeParams);
   // HIP: hipError_t hipGraphExecKernelNodeSetParams(hipGraphExec_t hGraphExec, hipGraphNode_t node, const hipKernelNodeParams* pNodeParams);
   // CHECK: result = hipGraphExecKernelNodeSetParams(graphExec, graphNode, &KERNEL_NODE_PARAMS);
   result = cuGraphExecKernelNodeSetParams(graphExec, graphNode, &KERNEL_NODE_PARAMS);
+#endif
+
+#if CUDA_VERSION >= 10010 && CUDA_VERSION < 12000
+  // CUDA: CUresult CUDAAPI cuStreamGetCaptureInfo(CUstream hStream, CUstreamCaptureStatus *captureStatus_out, cuuint64_t *id_out);
+  // HIP: hipError_t hipStreamGetCaptureInfo(hipStream_t stream, hipStreamCaptureStatus* pCaptureStatus, unsigned long long* pId);
+  // CHECK: result = hipStreamGetCaptureInfo(stream, &streamCaptureStatus, &ull);
+  result = cuStreamGetCaptureInfo(stream, &streamCaptureStatus, &ull);
 #endif
 
 #if CUDA_VERSION >= 10020
@@ -456,11 +458,6 @@ int main() {
   CUmemLocation_st memLocation_st;
   CUmemLocation memLocation;
   CUmemAllocationHandleType memAllocationHandleType;
-
-  // CUDA: CUresult CUDAAPI cuGraphExecUpdate(CUgraphExec hGraphExec, CUgraph hGraph, CUgraphNode *hErrorNode_out, CUgraphExecUpdateResult *updateResult_out);
-  // HIP: hipError_t hipGraphExecUpdate(hipGraphExec_t hGraphExec, hipGraph_t hGraph, hipGraphNode_t* hErrorNode_out, hipGraphExecUpdateResult* updateResult_out);
-  // CHECK: result = hipGraphExecUpdate(graphExec, graph, &graphNode, &graphExecUpdateResult);
-  result = cuGraphExecUpdate(graphExec, graph, &graphNode, &graphExecUpdateResult);
 
   // CUDA: CUresult CUDAAPI cuGraphExecHostNodeSetParams(CUgraphExec hGraphExec, CUgraphNode hNode, const CUDA_HOST_NODE_PARAMS *nodeParams);
   // HIP: hipError_t hipError_t hipGraphExecHostNodeSetParams(hipGraphExec_t hGraphExec, hipGraphNode_t node, const hipHostNodeParams* pNodeParams);
@@ -537,6 +534,13 @@ int main() {
   result = cuMemUnmap(deviceptr, bytes);
 #endif
 
+#if CUDA_VERSION >= 10020 && CUDA_VERSION < 12000
+  // CUDA: CUresult CUDAAPI cuGraphExecUpdate(CUgraphExec hGraphExec, CUgraph hGraph, CUgraphNode *hErrorNode_out, CUgraphExecUpdateResult *updateResult_out);
+  // HIP: hipError_t hipGraphExecUpdate(hipGraphExec_t hGraphExec, hipGraph_t hGraph, hipGraphNode_t* hErrorNode_out, hipGraphExecUpdateResult* updateResult_out);
+  // CHECK: result = hipGraphExecUpdate(graphExec, graph, &graphNode, &graphExecUpdateResult);
+  result = cuGraphExecUpdate(graphExec, graph, &graphNode, &graphExecUpdateResult);
+#endif
+
 #if CUDA_VERSION >= 11000
   // CHECK: result = hipDevicePrimaryCtxRelease(device);
   result = cuDevicePrimaryCtxRelease_v2(device);
@@ -551,9 +555,6 @@ int main() {
   // HIP: hipError_t hipMemRetainAllocationHandle(hipMemGenericAllocationHandle_t* handle, void* addr);
   // CHECK: result = hipMemRetainAllocationHandle(&memGenericAllocationHandle_t, image);
   result = cuMemRetainAllocationHandle(&memGenericAllocationHandle_t, image);
-
-  // CHECK: result = hipGraphInstantiate(&graphExec, graph, &graphNode, nullptr, bytes);
-  result = cuGraphInstantiate_v2(&graphExec, graph, &graphNode, nullptr, bytes);
 
   // CHECK: hipKernelNodeAttrID kernelNodeAttrID;
   CUkernelNodeAttrID kernelNodeAttrID;
@@ -574,6 +575,11 @@ int main() {
   // HIP: hipError_t hipGraphKernelNodeCopyAttributes(hipGraphNode_t hSrc, hipGraphNode_t hDst);
   // CHECK: result = hipGraphKernelNodeCopyAttributes(graphNode, graphNode2);
   result = cuGraphKernelNodeCopyAttributes(graphNode, graphNode2);
+#endif
+
+#if CUDA_VERSION >= 11000 && CUDA_VERSION < 12000
+  // CHECK: result = hipGraphInstantiate(&graphExec, graph, &graphNode, nullptr, bytes);
+  result = cuGraphInstantiate_v2(&graphExec, graph, &graphNode, nullptr, bytes);
 #endif
 
 #if CUDA_VERSION >= 11010
@@ -735,7 +741,8 @@ int main() {
 #endif
 
 #if CUDA_VERSION >= 11030
-  // CUDA: CUresult CUDAAPI cuStreamGetCaptureInfo_v2(CUstream hStream, CUstreamCaptureStatus *captureStatus_out, cuuint64_t *id_out, CUgraph *graph_out, const CUgraphNode **dependencies_out, size_t *numDependencies_out);
+  // CUDA < 12000: CUresult CUDAAPI cuStreamGetCaptureInfo(CUstream hStream, CUstreamCaptureStatus *captureStatus_out, cuuint64_t *id_out);
+  // CUDA:         CUresult CUDAAPI cuStreamGetCaptureInfo_v2(CUstream hStream, CUstreamCaptureStatus *captureStatus_out, cuuint64_t *id_out, CUgraph *graph_out, const CUgraphNode **dependencies_out, size_t *numDependencies_out);
   // HIP: hipError_t hipStreamGetCaptureInfo_v2(hipStream_t stream, hipStreamCaptureStatus* captureStatus_out, unsigned long long* id_out __dparm(0), hipGraph_t* graph_out __dparm(0), const hipGraphNode_t** dependencies_out __dparm(0), size_t* numDependencies_out __dparm(0));
   // CHECK: result = hipStreamGetCaptureInfo_v2(stream, &streamCaptureStatus, &ull, &graph, &pGraphNode, &bytes);
   result = cuStreamGetCaptureInfo_v2(stream, &streamCaptureStatus, &ull, &graph, &pGraphNode, &bytes);
@@ -861,6 +868,28 @@ int main() {
   // HIP: hipError_t hipStreamWriteValue64(hipStream_t stream, void* ptr, uint64_t value, unsigned int flags, uint64_t mask __dparm(0xFFFFFFFFFFFFFFFF));
   // CHECK: result = hipStreamWriteValue64(stream, deviceptr, u_value, flags);
   result = cuStreamWriteValue64_v2(stream, deviceptr, u_value, flags);
+#endif
+
+#if CUDA_VERSION >= 12000
+  // TODO: https://github.com/ROCm-Developer-Tools/HIPIFY/issues/782 - Introduce 1-to-N conditional matcher
+  //       Implement "conditional" matching in hipify-clang, based on CUDA_VERSION first;
+  //       below the transformation cuStreamGetCaptureInfo -> hipStreamGetCaptureInfo_v2 should be applied for CUDA_VERSION >= 12000,
+  //       otherwise, cuStreamGetCaptureInfo -> hipStreamGetCaptureInfo should be applied
+  // CUDA < 12000: CUresult CUDAAPI cuStreamGetCaptureInfo(CUstream hStream, CUstreamCaptureStatus *captureStatus_out, cuuint64_t *id_out);
+  // CUDA:         CUresult CUDAAPI cuStreamGetCaptureInfo(CUstream hStream, CUstreamCaptureStatus *captureStatus_out, cuuint64_t *id_out, CUgraph *graph_out, const CUgraphNode **dependencies_out, size_t *numDependencies_out);
+  // HIP: hipError_t hipStreamGetCaptureInfo_v2(hipStream_t stream, hipStreamCaptureStatus* captureStatus_out, unsigned long long* id_out __dparm(0), hipGraph_t* graph_out __dparm(0), const hipGraphNode_t** dependencies_out __dparm(0), size_t* numDependencies_out __dparm(0));
+  //
+  result = cuStreamGetCaptureInfo(stream, &streamCaptureStatus, &ull, &graph, &pGraphNode, &bytes);
+
+  // NOTE: not implemented yet in HIP
+  // CUDA < 12000: CUresult CUDAAPI cuGraphExecUpdate(CUgraphExec hGraphExec, CUgraph hGraph, CUgraphNode *hErrorNode_out, CUgraphExecUpdateResult *updateResult_out);
+  // CUDA:         CUresult CUDAAPI cuGraphExecUpdate(CUgraphExec hGraphExec, CUgraph hGraph, CUgraphExecUpdateResultInfo *resultInfo);
+  // HIP:
+
+  // NOTE: not implemented yet in HIP
+  // CUDA < 12000: CUresult CUDAAPI cuGraphInstantiate(CUgraphExec *phGraphExec, CUgraph hGraph, CUgraphNode *phErrorNode, char *logBuffer, size_t bufferSize);
+  // CUDA:         CUresult CUDAAPI cuGraphInstantiate(CUgraphExec *phGraphExec, CUgraph hGraph, unsigned long long flags);
+  // HIP:
 #endif
 
   // CUDA: CUresult CUDAAPI cuInit(unsigned int Flags);
