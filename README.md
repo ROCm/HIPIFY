@@ -182,14 +182,22 @@ After applying all the matchers, the output HIP source is produced.
       <td bgcolor="eefaeb"><a href="https://developer.nvidia.com/cuda-11-8-0-download-archive"><b>11.8.0</b></a></td>
       <td colspan=2 bgcolor="eefaeb"><font color="green"><b>LATEST STABLE CONFIG</b></font></td>
     </tr>
+    <tr align="center">
+      <td><a href="https://github.com/llvm/llvm-project">17.0.0git</a></td>
+      <td><a href="https://developer.nvidia.com/cuda-12-0-0-download-archive">12.0.0</a>****</td>
+      <td>+</td>
+      <td>+</td>
+    </tr>
   </tbody>
 </table>
 
 `*`   `LLVM 3.x` is not supported anymore but might still work.
 
-`**`  Download the patch and unpack it into your `LLVM distributive directory`: a few header files will be overwritten; rebuilding of `LLVM` is not needed.
+`**`   Download the patch and unpack it into your `LLVM distributive directory`: a few header files will be overwritten; rebuilding of `LLVM` is not needed.
 
-`***` Download the patch and unpack it into your `LLVM source directory`: the file `Cuda.cpp` will be overwritten; needs further rebuilding of `LLVM`.
+`***`  Download the patch and unpack it into your `LLVM source directory`: the file `Cuda.cpp` will be overwritten; needs further rebuilding of `LLVM`.
+
+`****` [CUDA 12.0](https://developer.nvidia.com/cuda-12-0-0-download-archive) is supported experimentally by `hipify-clang` built against the latest [LLVM 17.0.0git](https://github.com/llvm/llvm-project) sources.
 
 In most cases, you can get a suitable version of `LLVM+CLANG` with your package manager.
 
