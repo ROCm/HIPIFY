@@ -109,6 +109,13 @@ int main() {
   CUlinkState_st* linkState_ptr;
   CUlinkState linkState;
 
+#if CUDA_VERSION >= 9000
+  // CHECK: hipFunctionLaunchParams_t LAUNCH_PARAMS_st;
+  // CHECK-NEXT: hipFunctionLaunchParams LAUNCH_PARAMS;
+  CUDA_LAUNCH_PARAMS_st LAUNCH_PARAMS_st;
+  CUDA_LAUNCH_PARAMS LAUNCH_PARAMS;
+#endif
+
 #if CUDA_VERSION >= 10000
   // CHECK: hipExternalMemoryBufferDesc_st ext_mem_buff_st;
   // CHECK-NEXT: hipExternalMemoryBufferDesc ext_mem_buff;
@@ -270,6 +277,16 @@ int main() {
 
   // CHECK: hipArrayMapInfo arrayMapInfo_v1;
   CUarrayMapInfo_v1 arrayMapInfo_v1;
+
+  // CHECK: hipFunctionLaunchParams LAUNCH_PARAMS_v1;
+  CUDA_LAUNCH_PARAMS_v1 LAUNCH_PARAMS_v1;
+#endif
+
+#if CUDA_VERSION >= 11040
+  // CHECK: hipMemAllocNodeParams MEM_ALLOC_NODE_PARAMS_st;
+  // CHECK-NEXT: hipMemAllocNodeParams MEM_ALLOC_NODE_PARAMS;
+  CUDA_MEM_ALLOC_NODE_PARAMS_st MEM_ALLOC_NODE_PARAMS_st;
+  CUDA_MEM_ALLOC_NODE_PARAMS MEM_ALLOC_NODE_PARAMS;
 #endif
 
   return 0;

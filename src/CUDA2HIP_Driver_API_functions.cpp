@@ -423,7 +423,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   // NOTE: Not equal to cudaPointerGetAttributes due to different signatures
   {"cuPointerGetAttributes",                               {"hipDrvPointerGetAttributes",                              "", CONV_ADDRESSING, API_DRIVER, 16}},
   // no analogue
-  {"cuPointerSetAttribute",                                {"hipPointerSetAttribute",                                  "", CONV_ADDRESSING, API_DRIVER, 16, HIP_UNSUPPORTED}},
+  {"cuPointerSetAttribute",                                {"hipPointerSetAttribute",                                  "", CONV_ADDRESSING, API_DRIVER, 16, HIP_EXPERIMENTAL}},
 
   // 17. Stream Management
   // cudaStreamAddCallback
@@ -554,10 +554,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuFuncSetSharedMemConfig",                             {"hipFuncSetSharedMemConfig_",                              "", CONV_EXECUTION, API_DRIVER, 21, HIP_UNSUPPORTED}},
   // no analogue
   // NOTE: Not equal to cudaLaunchCooperativeKernel due to different signatures
-  {"cuLaunchCooperativeKernel",                            {"hipLaunchCooperativeKernel_",                             "", CONV_EXECUTION, API_DRIVER, 21, HIP_UNSUPPORTED}},
+  {"cuLaunchCooperativeKernel",                            {"hipModuleLaunchCooperativeKernel",                        "", CONV_EXECUTION, API_DRIVER, 21, HIP_EXPERIMENTAL}},
   // no analogue
   // NOTE: Not equal to cudaLaunchCooperativeKernelMultiDevice due to different signatures
-  {"cuLaunchCooperativeKernelMultiDevice",                 {"hipLaunchCooperativeKernelMultiDevice_",                  "", CONV_EXECUTION, API_DRIVER, 21, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cuLaunchCooperativeKernelMultiDevice",                 {"hipModuleLaunchCooperativeKernelMultiDevice",             "", CONV_EXECUTION, API_DRIVER, 21, HIP_EXPERIMENTAL | CUDA_DEPRECATED}},
   // cudaLaunchHostFunc
   {"cuLaunchHostFunc",                                     {"hipLaunchHostFunc",                                       "", CONV_EXECUTION, API_DRIVER, 21}},
   // no analogue
@@ -618,7 +618,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   // cudaGraphCreate
   {"cuGraphCreate",                                        {"hipGraphCreate",                                          "", CONV_GRAPH, API_DRIVER, 23}},
   // cudaGraphDebugDotPrint
-  {"cuGraphDebugDotPrint",                                 {"hipGraphDebugDotPrint",                                   "", CONV_GRAPH, API_DRIVER, 23, HIP_UNSUPPORTED}},
+  {"cuGraphDebugDotPrint",                                 {"hipGraphDebugDotPrint",                                   "", CONV_GRAPH, API_DRIVER, 23, HIP_EXPERIMENTAL}},
   // cudaGraphDestroy
   {"cuGraphDestroy",                                       {"hipGraphDestroy",                                         "", CONV_GRAPH, API_DRIVER, 23}},
   // cudaGraphDestroyNode
@@ -639,7 +639,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuGraphInstantiate",                                   {"hipGraphInstantiate",                                     "", CONV_GRAPH, API_DRIVER, 23}},
   {"cuGraphInstantiate_v2",                                {"hipGraphInstantiate",                                     "", CONV_GRAPH, API_DRIVER, 23}},
   // cudaGraphKernelNodeCopyAttributes
-  {"cuGraphKernelNodeCopyAttributes",                      {"hipGraphKernelNodeCopyAttributes",                        "", CONV_GRAPH, API_DRIVER, 23, HIP_UNSUPPORTED}},
+  {"cuGraphKernelNodeCopyAttributes",                      {"hipGraphKernelNodeCopyAttributes",                        "", CONV_GRAPH, API_DRIVER, 23, HIP_EXPERIMENTAL}},
   // cudaGraphKernelNodeGetAttribute
   {"cuGraphKernelNodeGetAttribute",                        {"hipGraphKernelNodeGetAttribute",                          "", CONV_GRAPH, API_DRIVER, 23}},
   // cudaGraphExecKernelNodeSetParams
@@ -666,12 +666,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuGraphNodeGetDependencies",                           {"hipGraphNodeGetDependencies",                             "", CONV_GRAPH, API_DRIVER, 23}},
   // cudaGraphNodeGetDependentNodes
   {"cuGraphNodeGetDependentNodes",                         {"hipGraphNodeGetDependentNodes",                           "", CONV_GRAPH, API_DRIVER, 23}},
-  //
-  {"cuGraphNodeGetEnabled",                                {"hipGraphNodeGetEnabled",                                  "", CONV_GRAPH, API_DRIVER, 23, HIP_UNSUPPORTED}},
+  // cudaGraphNodeGetEnabled
+  {"cuGraphNodeGetEnabled",                                {"hipGraphNodeGetEnabled",                                  "", CONV_GRAPH, API_DRIVER, 23, HIP_EXPERIMENTAL}},
   // cudaGraphNodeGetType
   {"cuGraphNodeGetType",                                   {"hipGraphNodeGetType",                                     "", CONV_GRAPH, API_DRIVER, 23}},
   // cudaGraphNodeSetEnabled
-  {"cuGraphNodeSetEnabled",                                {"hipGraphNodeSetEnabled",                                  "", CONV_GRAPH, API_DRIVER, 23, HIP_UNSUPPORTED}},
+  {"cuGraphNodeSetEnabled",                                {"hipGraphNodeSetEnabled",                                  "", CONV_GRAPH, API_DRIVER, 23, HIP_EXPERIMENTAL}},
   // cudaGraphRemoveDependencies
   {"cuGraphRemoveDependencies",                            {"hipGraphRemoveDependencies",                              "", CONV_GRAPH, API_DRIVER, 23}},
   // no analogue
@@ -736,13 +736,13 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   // cudaGraphReleaseUserObject
   {"cuGraphReleaseUserObject",                             {"hipGraphReleaseUserObject",                               "", CONV_GRAPH, API_DRIVER, 23}},
   // cudaGraphAddMemAllocNode
-  {"cuGraphAddMemAllocNode",                               {"hipGraphAddMemAllocNode",                                 "", CONV_GRAPH, API_DRIVER, 23, HIP_UNSUPPORTED}},
+  {"cuGraphAddMemAllocNode",                               {"hipGraphAddMemAllocNode",                                 "", CONV_GRAPH, API_DRIVER, 23, HIP_EXPERIMENTAL}},
   // cudaGraphMemAllocNodeGetParams
-  {"cuGraphMemAllocNodeGetParams",                         {"hipGraphMemAllocNodeGetParams",                           "", CONV_GRAPH, API_DRIVER, 23, HIP_UNSUPPORTED}},
+  {"cuGraphMemAllocNodeGetParams",                         {"hipGraphMemAllocNodeGetParams",                           "", CONV_GRAPH, API_DRIVER, 23, HIP_EXPERIMENTAL}},
   // cudaGraphAddMemFreeNode
-  {"cuGraphAddMemFreeNode",                                {"hipGraphAddMemFreeNode",                                  "", CONV_GRAPH, API_DRIVER, 23, HIP_UNSUPPORTED}},
+  {"cuGraphAddMemFreeNode",                                {"hipGraphAddMemFreeNode",                                  "", CONV_GRAPH, API_DRIVER, 23, HIP_EXPERIMENTAL}},
   // cudaGraphMemFreeNodeGetParams
-  {"cuGraphMemFreeNodeGetParams",                          {"hipGraphMemFreeNodeGetParams",                            "", CONV_GRAPH, API_DRIVER, 23, HIP_UNSUPPORTED}},
+  {"cuGraphMemFreeNodeGetParams",                          {"hipGraphMemFreeNodeGetParams",                            "", CONV_GRAPH, API_DRIVER, 23, HIP_EXPERIMENTAL}},
   // cudaDeviceGraphMemTrim
   {"cuDeviceGraphMemTrim",                                 {"hipDeviceGraphMemTrim",                                   "", CONV_GRAPH, API_DRIVER, 23}},
   // cudaDeviceGetGraphMemAttribute
@@ -1481,6 +1481,17 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_FUNCTION_VER_MAP {
   {"hiprtcLinkDestroy",                                    {HIP_5030, HIP_0,    HIP_0   }},
   {"hipDrvGetErrorName",                                   {HIP_5040, HIP_0,    HIP_0   }},
   {"hipDrvGetErrorString",                                 {HIP_5040, HIP_0,    HIP_0   }},
+  {"hipPointerSetAttribute",                               {HIP_5050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipModuleLaunchCooperativeKernel",                     {HIP_5050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipModuleLaunchCooperativeKernelMultiDevice",          {HIP_5050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipGraphAddMemAllocNode",                              {HIP_5050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipGraphMemAllocNodeGetParams",                        {HIP_5050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipGraphAddMemFreeNode",                               {HIP_5050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipGraphMemFreeNodeGetParams",                         {HIP_5050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipGraphDebugDotPrint",                                {HIP_5050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipGraphKernelNodeCopyAttributes",                     {HIP_5050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipGraphNodeSetEnabled",                               {HIP_5050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipGraphNodeGetEnabled",                               {HIP_5050, HIP_0,    HIP_0,  HIP_LATEST}},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_DRIVER_API_SECTION_MAP {

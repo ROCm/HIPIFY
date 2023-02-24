@@ -931,6 +931,13 @@ int main() {
 
   // CHECK: hipPointer_attribute POINTER_ATTRIBUTE_IS_GPU_DIRECT_RDMA_CAPABLE = HIP_POINTER_ATTRIBUTE_IS_GPU_DIRECT_RDMA_CAPABLE;
   CUpointer_attribute POINTER_ATTRIBUTE_IS_GPU_DIRECT_RDMA_CAPABLE = CU_POINTER_ATTRIBUTE_IS_GPU_DIRECT_RDMA_CAPABLE;
+
+  // CHECK: hipKernelNodeAttrID kernelNodeAttrID;
+  // CHECK-NEXT: hipKernelNodeAttrID KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW = hipKernelNodeAttributeAccessPolicyWindow;
+  // CHECK-NEXT: hipKernelNodeAttrID KERNEL_NODE_ATTRIBUTE_COOPERATIVE = hipKernelNodeAttributeCooperative;
+  CUkernelNodeAttrID kernelNodeAttrID;
+  CUkernelNodeAttrID KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW = CU_KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW;
+  CUkernelNodeAttrID KERNEL_NODE_ATTRIBUTE_COOPERATIVE = CU_KERNEL_NODE_ATTRIBUTE_COOPERATIVE;
 #endif
 
 #if CUDA_VERSION >= 11000 && CUDA_VERSION < 11080
@@ -939,13 +946,6 @@ int main() {
 #endif
 
 #if CUDA_VERSION >= 11010
-  // CHECK: hipKernelNodeAttrID kernelNodeAttrID;
-  // CHECK-NEXT: hipKernelNodeAttrID KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW = hipKernelNodeAttributeAccessPolicyWindow;
-  // CHECK-NEXT: hipKernelNodeAttrID KERNEL_NODE_ATTRIBUTE_COOPERATIVE = hipKernelNodeAttributeCooperative;
-  CUkernelNodeAttrID kernelNodeAttrID;
-  CUkernelNodeAttrID KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW = CU_KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW;
-  CUkernelNodeAttrID KERNEL_NODE_ATTRIBUTE_COOPERATIVE = CU_KERNEL_NODE_ATTRIBUTE_COOPERATIVE;
-
   // CHECK: hipGraphNodeType GRAPH_NODE_TYPE_WAIT_EVENT = hipGraphNodeTypeWaitEvent;
   // CHECK-NEXT: hipGraphNodeType GRAPH_NODE_TYPE_EVENT_RECORD = hipGraphNodeTypeEventRecord;
   CUgraphNodeType GRAPH_NODE_TYPE_WAIT_EVENT = CU_GRAPH_NODE_TYPE_WAIT_EVENT;
@@ -1046,6 +1046,29 @@ int main() {
 
   // CHECK: hipPointer_attribute POINTER_ATTRIBUTE_MEMPOOL_HANDLE = HIP_POINTER_ATTRIBUTE_MEMPOOL_HANDLE;
   CUpointer_attribute POINTER_ATTRIBUTE_MEMPOOL_HANDLE = CU_POINTER_ATTRIBUTE_MEMPOOL_HANDLE;
+
+  // CHECK: hipGraphDebugDotFlags graphDebugDot_flags;
+  // CHECK-NEXT: hipGraphDebugDotFlags GRAPH_DEBUG_DOT_FLAGS_VERBOSE = hipGraphDebugDotFlagsVerbose;
+  // CHECK-NEXT: hipGraphDebugDotFlags GRAPH_DEBUG_DOT_FLAGS_KERNEL_NODE_PARAMS = hipGraphDebugDotFlagsKernelNodeParams;
+  // CHECK-NEXT: hipGraphDebugDotFlags GRAPH_DEBUG_DOT_FLAGS_MEMCPY_NODE_PARAMS = hipGraphDebugDotFlagsMemcpyNodeParams;
+  // CHECK-NEXT: hipGraphDebugDotFlags GRAPH_DEBUG_DOT_FLAGS_MEMSET_NODE_PARAMS = hipGraphDebugDotFlagsMemsetNodeParams;
+  // CHECK-NEXT: hipGraphDebugDotFlags GRAPH_DEBUG_DOT_FLAGS_HOST_NODE_PARAMS = hipGraphDebugDotFlagsHostNodeParams;
+  // CHECK-NEXT: hipGraphDebugDotFlags GRAPH_DEBUG_DOT_FLAGS_EVENT_NODE_PARAMS = hipGraphDebugDotFlagsEventNodeParams;
+  // CHECK-NEXT: hipGraphDebugDotFlags GRAPH_DEBUG_DOT_FLAGS_EXT_SEMAS_SIGNAL_NODE_PARAMS = hipGraphDebugDotFlagsExtSemasSignalNodeParams;
+  // CHECK-NEXT: hipGraphDebugDotFlags GRAPH_DEBUG_DOT_FLAGS_EXT_SEMAS_WAIT_NODE_PARAMS = hipGraphDebugDotFlagsExtSemasWaitNodeParams;
+  // CHECK-NEXT: hipGraphDebugDotFlags GRAPH_DEBUG_DOT_FLAGS_KERNEL_NODE_ATTRIBUTES = hipGraphDebugDotFlagsKernelNodeAttributes;
+  // CHECK-NEXT: hipGraphDebugDotFlags GRAPH_DEBUG_DOT_FLAGS_HANDLES = hipGraphDebugDotFlagsHandles;
+  cudaGraphDebugDotFlags graphDebugDot_flags;
+  cudaGraphDebugDotFlags GRAPH_DEBUG_DOT_FLAGS_VERBOSE = cudaGraphDebugDotFlagsVerbose;
+  cudaGraphDebugDotFlags GRAPH_DEBUG_DOT_FLAGS_KERNEL_NODE_PARAMS = cudaGraphDebugDotFlagsKernelNodeParams;
+  cudaGraphDebugDotFlags GRAPH_DEBUG_DOT_FLAGS_MEMCPY_NODE_PARAMS = cudaGraphDebugDotFlagsMemcpyNodeParams;
+  cudaGraphDebugDotFlags GRAPH_DEBUG_DOT_FLAGS_MEMSET_NODE_PARAMS = cudaGraphDebugDotFlagsMemsetNodeParams;
+  cudaGraphDebugDotFlags GRAPH_DEBUG_DOT_FLAGS_HOST_NODE_PARAMS = cudaGraphDebugDotFlagsHostNodeParams;
+  cudaGraphDebugDotFlags GRAPH_DEBUG_DOT_FLAGS_EVENT_NODE_PARAMS = cudaGraphDebugDotFlagsEventNodeParams;
+  cudaGraphDebugDotFlags GRAPH_DEBUG_DOT_FLAGS_EXT_SEMAS_SIGNAL_NODE_PARAMS = cudaGraphDebugDotFlagsExtSemasSignalNodeParams;
+  cudaGraphDebugDotFlags GRAPH_DEBUG_DOT_FLAGS_EXT_SEMAS_WAIT_NODE_PARAMS = cudaGraphDebugDotFlagsExtSemasWaitNodeParams;
+  cudaGraphDebugDotFlags GRAPH_DEBUG_DOT_FLAGS_KERNEL_NODE_ATTRIBUTES = cudaGraphDebugDotFlagsKernelNodeAttributes;
+  cudaGraphDebugDotFlags GRAPH_DEBUG_DOT_FLAGS_HANDLES = cudaGraphDebugDotFlagsHandles;
 #endif
 
 #if CUDA_VERSION >= 11040
@@ -1068,6 +1091,11 @@ int main() {
   CUgraphMem_attribute GRAPH_MEM_ATTR_USED_MEM_HIGH = CU_GRAPH_MEM_ATTR_USED_MEM_HIGH;
   CUgraphMem_attribute GRAPH_MEM_ATTR_RESERVED_MEM_CURRENT = CU_GRAPH_MEM_ATTR_RESERVED_MEM_CURRENT;
   CUgraphMem_attribute GRAPH_MEM_ATTR_RESERVED_MEM_HIGH = CU_GRAPH_MEM_ATTR_RESERVED_MEM_HIGH;
+
+  // CHECK: hipGraphNodeType GRAPH_NODE_TYPE_MEM_ALLOC = hipGraphNodeTypeMemAlloc;
+  // CHECK-NEXT: hipGraphNodeType GRAPH_NODE_TYPE_MEM_FREE = hipGraphNodeTypeMemFree;
+  CUgraphNodeType GRAPH_NODE_TYPE_MEM_ALLOC = CU_GRAPH_NODE_TYPE_MEM_ALLOC;
+  CUgraphNodeType GRAPH_NODE_TYPE_MEM_FREE = CU_GRAPH_NODE_TYPE_MEM_FREE;
 #endif
 
 #if CUDA_VERSION >= 12000
