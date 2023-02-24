@@ -467,7 +467,7 @@
 |`cusparseCbsric02_bufferSize`| | | |`hipsparseCbsric02_bufferSize`|3.8.0| | | |
 |`cusparseCbsric02_bufferSizeExt`| | | | | | | | |
 |`cusparseCbsrilu02`| | | |`hipsparseCbsrilu02`|3.9.0| | | |
-|`cusparseCbsrilu02_analysis`| | | |`hipsparseCbsrilu02_analysis`| | | | |
+|`cusparseCbsrilu02_analysis`| | | |`hipsparseCbsrilu02_analysis`|3.9.0| | | |
 |`cusparseCbsrilu02_bufferSize`| | | |`hipsparseCbsrilu02_bufferSize`|3.9.0| | | |
 |`cusparseCbsrilu02_bufferSizeExt`| | | | | | | | |
 |`cusparseCbsrilu02_numericBoost`| | | |`hipsparseCbsrilu02_numericBoost`|3.9.0| | | |

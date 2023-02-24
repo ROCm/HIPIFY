@@ -298,8 +298,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUexecAffinityParam_v1",                                           {"hipExecAffinityParam",                                     "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
 
   // cudaMemAllocNodeParams
-  {"CUDA_MEM_ALLOC_NODE_PARAMS_st",                                    {"hipMemallocNodeParams",                                    "", CONV_TYPE, API_DRIVER, 1, HIP_EXPERIMENTAL}},
-  {"CUDA_MEM_ALLOC_NODE_PARAMS",                                       {"hipMemallocNodeParams",                                    "", CONV_TYPE, API_DRIVER, 1, HIP_EXPERIMENTAL}},
+  {"CUDA_MEM_ALLOC_NODE_PARAMS_st",                                    {"hipMemAllocNodeParams",                                    "", CONV_TYPE, API_DRIVER, 1, HIP_EXPERIMENTAL}},
+  {"CUDA_MEM_ALLOC_NODE_PARAMS",                                       {"hipMemAllocNodeParams",                                    "", CONV_TYPE, API_DRIVER, 1, HIP_EXPERIMENTAL}},
 
   // cudaArrayMemoryRequirements
   {"CUDA_ARRAY_MEMORY_REQUIREMENTS_st",                                {"hipArrayMemoryRequirements",                               "", CONV_TYPE, API_DRIVER, 1, HIP_UNSUPPORTED}},
@@ -3760,6 +3760,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {
   {"hipArraySparseSubresourceType",                                    {HIP_5020, HIP_0,    HIP_0   }},
   {"hipArraySparseSubresourceTypeSparseLevel",                         {HIP_5020, HIP_0,    HIP_0   }},
   {"hipArraySparseSubresourceTypeMiptail",                             {HIP_5020, HIP_0,    HIP_0   }},
+  {"hipArrayMapInfo",                                                  {HIP_5020, HIP_0,    HIP_0   }},
   {"hipDeviceAttributeVirtualMemoryManagementSupported",               {HIP_5030, HIP_0,    HIP_0   }},
   {"hipUserObject",                                                    {HIP_5030, HIP_0,    HIP_0   }},
   {"hipUserObject_t",                                                  {HIP_5030, HIP_0,    HIP_0   }},

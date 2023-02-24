@@ -737,7 +737,7 @@ int main() {
   // CHECK: result = hipDeviceGraphMemTrim(device);
   result = cudaDeviceGraphMemTrim(device);
 
-  // CHECK: hipMemallocNodeParams MemAllocNodeParams;
+  // CHECK: hipMemAllocNodeParams MemAllocNodeParams;
   cudaMemAllocNodeParams MemAllocNodeParams;
 
   // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphAddMemAllocNode(cudaGraphNode_t *pGraphNode, cudaGraph_t graph, const cudaGraphNode_t *pDependencies, size_t numDependencies, struct cudaMemAllocNodeParams *nodeParams);

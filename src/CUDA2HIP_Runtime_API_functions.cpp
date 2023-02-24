@@ -764,7 +764,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuGraphNodeGetDependentNodes
   {"cudaGraphNodeGetDependentNodes",                          {"hipGraphNodeGetDependentNodes",                          "", CONV_GRAPH, API_RUNTIME, 30}},
   // cuGraphNodeGetEnabled
-  {"cudaGraphNodeGetEnabled",                                 {"hipGraphNodeGetEnabled",                                 "", CONV_GRAPH, API_DRIVER, 23, HIP_EXPERIMENTAL}},
+  {"cudaGraphNodeGetEnabled",                                 {"hipGraphNodeGetEnabled",                                 "", CONV_GRAPH, API_RUNTIME, 30, HIP_EXPERIMENTAL}},
   // cuGraphNodeGetType
   {"cudaGraphNodeGetType",                                    {"hipGraphNodeGetType",                                    "", CONV_GRAPH, API_RUNTIME, 30}},
   // cuGraphRemoveDependencies
@@ -1108,6 +1108,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_FUNCTION_VER_MAP {
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP {
+  {"hipHostAlloc",                                            {HIP_1060, HIP_0,    HIP_0   }},
   {"hipChooseDevice",                                         {HIP_1060, HIP_0,    HIP_0   }},
   {"hipDeviceGetAttribute",                                   {HIP_1060, HIP_0,    HIP_0   }},
   {"hipDeviceGetByPCIBusId",                                  {HIP_1060, HIP_0,    HIP_0   }},
