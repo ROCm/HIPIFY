@@ -90,6 +90,8 @@ GetOptions(
 $cuda_kernel_execution_syntax = 1;
 
 my %deprecated_funcs = (
+    "nvrtcGetNVVMSize" => "12.0",
+    "nvrtcGetNVVM" => "12.0",
     "cusparseZsctr" => "11.0",
     "cusparseZhybsv_solve" => "10.2",
     "cusparseZhybsv_analysis" => "10.2",
@@ -552,6 +554,8 @@ my %deprecated_funcs = (
 );
 
 my %removed_funcs = (
+    "texture" => "12.0",
+    "surfaceReference" => "12.0",
     "cusparseZsctr" => "12.0",
     "cusparseZhybsv_solve" => "11.0",
     "cusparseZhybsv_analysis" => "11.0",
@@ -3732,6 +3736,7 @@ sub simpleSubstitutions {
     subst("nvrtcResult", "hiprtcResult", "type");
     subst("pruneInfo_t", "pruneInfo_t", "type");
     subst("surfaceReference", "surfaceReference", "type");
+    subst("texture", "texture", "type");
     subst("textureReference", "textureReference", "type");
     subst("CUBLAS_ATOMICS_ALLOWED", "HIPBLAS_ATOMICS_ALLOWED", "numeric_literal");
     subst("CUBLAS_ATOMICS_NOT_ALLOWED", "HIPBLAS_ATOMICS_NOT_ALLOWED", "numeric_literal");
@@ -5309,6 +5314,10 @@ sub countSupportedDeviceFunctions {
         "__hmul2_sat",
         "__hmul2",
         "__hmul",
+        "__hmin_nan",
+        "__hmin",
+        "__hmax_nan",
+        "__hmax",
         "__hltu2",
         "__hltu",
         "__hlt2",
@@ -5663,14 +5672,10 @@ sub warnUnsupportedDeviceFunctions {
         "__hne2_mask",
         "__hmul_rn",
         "__hmul2_rn",
-        "__hmin_nan",
         "__hmin2_nan",
         "__hmin2",
-        "__hmin",
-        "__hmax_nan",
         "__hmax2_nan",
         "__hmax2",
-        "__hmax",
         "__hltu2_mask",
         "__hlt2_mask",
         "__hleu2_mask",
@@ -5847,9 +5852,13 @@ sub warnUnsupportedFunctions {
     foreach $func (
         "pruneInfo",
         "nvrtcGetSupportedArchs",
+        "nvrtcGetOptiXIRSize",
+        "nvrtcGetOptiXIR",
         "nvrtcGetNumSupportedArchs",
         "nvrtcGetNVVMSize",
         "nvrtcGetNVVM",
+        "nvrtcGetLTOIRSize",
+        "nvrtcGetLTOIR",
         "nv_bfloat162",
         "nv_bfloat16",
         "memoryBarrier",
