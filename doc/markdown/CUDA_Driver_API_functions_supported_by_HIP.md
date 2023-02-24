@@ -188,8 +188,8 @@
 |`CUDA_MEMSET_NODE_PARAMS`|10.0| | |`hipMemsetParams`|4.3.0| | | |
 |`CUDA_MEMSET_NODE_PARAMS_st`|10.0| | |`hipMemsetParams`|4.3.0| | | |
 |`CUDA_MEMSET_NODE_PARAMS_v1`|11.3| | |`hipMemsetParams`|4.3.0| | | |
-|`CUDA_MEM_ALLOC_NODE_PARAMS`|11.4| | |`hipMemallocNodeParams`| | | | |
-|`CUDA_MEM_ALLOC_NODE_PARAMS_st`|11.4| | |`hipMemallocNodeParams`| | | | |
+|`CUDA_MEM_ALLOC_NODE_PARAMS`|11.4| | |`hipMemAllocNodeParams`|5.5.0| | |5.5.0|
+|`CUDA_MEM_ALLOC_NODE_PARAMS_st`|11.4| | |`hipMemAllocNodeParams`|5.5.0| | |5.5.0|
 |`CUDA_NVSCISYNC_ATTR_SIGNAL`|10.2| | | | | | | |
 |`CUDA_NVSCISYNC_ATTR_WAIT`|10.2| | | | | | | |
 |`CUDA_POINTER_ATTRIBUTE_ACCESS_FLAGS`|11.1| | | | | | | |
@@ -963,9 +963,9 @@
 |`CUaddress_mode`| | | |`HIPaddress_mode`|3.5.0| | | |
 |`CUaddress_mode_enum`| | | |`HIPaddress_mode_enum`|3.5.0| | | |
 |`CUarray`| | | |`hipArray_t`|1.7.0| | | |
-|`CUarrayMapInfo`|11.1| | |`hipArrayMapInfo`| | | | |
-|`CUarrayMapInfo_st`|11.1| | |`hipArrayMapInfo`| | | | |
-|`CUarrayMapInfo_v1`|11.3| | |`hipArrayMapInfo`| | | | |
+|`CUarrayMapInfo`|11.1| | |`hipArrayMapInfo`|5.2.0| | | |
+|`CUarrayMapInfo_st`|11.1| | |`hipArrayMapInfo`|5.2.0| | | |
+|`CUarrayMapInfo_v1`|11.3| | |`hipArrayMapInfo`|5.2.0| | | |
 |`CUarraySparseSubresourceType`|11.1| | |`hipArraySparseSubresourceType`|5.2.0| | | |
 |`CUarraySparseSubresourceType_enum`|11.1| | |`hipArraySparseSubresourceType`|5.2.0| | | |
 |`CUarray_cubemap_face`| | | | | | | | |
@@ -1455,7 +1455,7 @@
 |`cuMemGetHandleForAddressRange`|11.7| | | | | | | |
 |`cuMemGetInfo`| | | |`hipMemGetInfo`|1.6.0| | | |
 |`cuMemGetInfo_v2`| | | |`hipMemGetInfo`|1.6.0| | | |
-|`cuMemHostAlloc`| | | |`hipHostAlloc`| | | | |
+|`cuMemHostAlloc`| | | |`hipHostAlloc`|1.6.0| | | |
 |`cuMemHostGetDevicePointer`| | | |`hipHostGetDevicePointer`|1.6.0| | | |
 |`cuMemHostGetDevicePointer_v2`| | | |`hipHostGetDevicePointer`|1.6.0| | | |
 |`cuMemHostGetFlags`| | | |`hipHostGetFlags`|1.6.0| | | |

@@ -186,7 +186,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaStream_t",                                                     {"hipStream_t",                                              "miopenAcceleratorQueue_t", CONV_TYPE, API_RUNTIME, 36, ROC_MIOPEN_ONLY}},
 
   // CUfunction
-  {"cudaFunction_t",                                                   {"hipFunction_t",                                            "", CONV_TYPE, API_RUNTIME}},
+  {"cudaFunction_t",                                                   {"hipFunction_t",                                            "", CONV_TYPE, API_RUNTIME, 36}},
 
   // CUaccessPolicyWindow_st
   {"cudaAccessPolicyWindow",                                           {"hipAccessPolicyWindow",                                    "", CONV_TYPE, API_RUNTIME, 36}},
@@ -213,15 +213,15 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaExternalSemaphoreWaitNodeParams",                              {"hipExternalSemaphoreWaitNodeParams",                       "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
 
   // CUDA_MEM_ALLOC_NODE_PARAMS_st
-  {"cudaMemAllocNodeParams",                                           {"hipMemallocNodeParams",                                    "", CONV_TYPE, API_RUNTIME, 36, HIP_EXPERIMENTAL}},
+  {"cudaMemAllocNodeParams",                                           {"hipMemAllocNodeParams",                                    "", CONV_TYPE, API_RUNTIME, 36, HIP_EXPERIMENTAL}},
 
   // CUDA_ARRAY_MEMORY_REQUIREMENTS_st
   {"cudaArrayMemoryRequirements",                                      {"hipArrayMemoryRequirements",                               "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
 
   // CUlaunchMemSyncDomainMap_st
-  {"cudaLaunchMemSyncDomainMap_st",                                    {"hipLaunchMemSyncDomainMap",                                "", CONV_TYPE, API_RUNTIME, 36}},
+  {"cudaLaunchMemSyncDomainMap_st",                                    {"hipLaunchMemSyncDomainMap",                                "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
   // CUlaunchMemSyncDomainMap
-  {"cudaLaunchMemSyncDomainMap",                                       {"hipLaunchMemSyncDomainMap",                                "", CONV_TYPE, API_RUNTIME, 36}},
+  {"cudaLaunchMemSyncDomainMap",                                       {"hipLaunchMemSyncDomainMap",                                "", CONV_TYPE, API_RUNTIME, 36, HIP_UNSUPPORTED}},
 
   // 2. Unions
 

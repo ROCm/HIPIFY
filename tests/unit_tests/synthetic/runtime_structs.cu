@@ -174,7 +174,7 @@ int main() {
 #endif
 
 #if CUDA_VERSION >= 11040
-  // CHECK: hipMemallocNodeParams MemAllocNodeParams;
+  // CHECK: hipMemAllocNodeParams MemAllocNodeParams;
   cudaMemAllocNodeParams MemAllocNodeParams;
 #endif
 

@@ -859,6 +859,7 @@ my %experimental_funcs = (
     "cudaOccupancyMaxPotentialBlockSizeVariableSMemWithFlags" => "5.5.0",
     "cudaOccupancyMaxPotentialBlockSizeVariableSMem" => "5.5.0",
     "cudaOccupancyDisableCachingOverride" => "5.5.0",
+    "cudaMemAllocNodeParams" => "5.5.0",
     "cudaGraphNodeTypeMemFree" => "5.5.0",
     "cudaGraphNodeTypeMemAlloc" => "5.5.0",
     "cudaGraphNodeSetEnabled" => "5.5.0",
@@ -907,6 +908,8 @@ my %experimental_funcs = (
     "CU_GRAPH_DEBUG_DOT_FLAGS_EXT_SEMAS_WAIT_NODE_PARAMS" => "5.5.0",
     "CU_GRAPH_DEBUG_DOT_FLAGS_EXT_SEMAS_SIGNAL_NODE_PARAMS" => "5.5.0",
     "CU_GRAPH_DEBUG_DOT_FLAGS_EVENT_NODE_PARAMS" => "5.5.0",
+    "CUDA_MEM_ALLOC_NODE_PARAMS_st" => "5.5.0",
+    "CUDA_MEM_ALLOC_NODE_PARAMS" => "5.5.0",
     "CUDA_LAUNCH_PARAMS_v1" => "5.5.0",
     "CUDA_LAUNCH_PARAMS_st" => "5.5.0",
     "CUDA_LAUNCH_PARAMS" => "5.5.0",
@@ -1072,12 +1075,12 @@ sub experimentalSubstitutions {
     subst("CUDA_LAUNCH_PARAMS", "hipFunctionLaunchParams", "type");
     subst("CUDA_LAUNCH_PARAMS_st", "hipFunctionLaunchParams_t", "type");
     subst("CUDA_LAUNCH_PARAMS_v1", "hipFunctionLaunchParams", "type");
-    subst("CUDA_MEM_ALLOC_NODE_PARAMS", "hipMemallocNodeParams", "type");
-    subst("CUDA_MEM_ALLOC_NODE_PARAMS_st", "hipMemallocNodeParams", "type");
+    subst("CUDA_MEM_ALLOC_NODE_PARAMS", "hipMemAllocNodeParams", "type");
+    subst("CUDA_MEM_ALLOC_NODE_PARAMS_st", "hipMemAllocNodeParams", "type");
     subst("CUgraphDebugDot_flags", "hipGraphDebugDotFlags", "type");
     subst("CUgraphDebugDot_flags_enum", "hipGraphDebugDotFlags", "type");
     subst("cudaGraphDebugDotFlags", "hipGraphDebugDotFlags", "type");
-    subst("cudaMemAllocNodeParams", "hipMemallocNodeParams", "type");
+    subst("cudaMemAllocNodeParams", "hipMemAllocNodeParams", "type");
     subst("CU_GRAPH_DEBUG_DOT_FLAGS_EVENT_NODE_PARAMS", "hipGraphDebugDotFlagsEventNodeParams", "numeric_literal");
     subst("CU_GRAPH_DEBUG_DOT_FLAGS_EXT_SEMAS_SIGNAL_NODE_PARAMS", "hipGraphDebugDotFlagsExtSemasSignalNodeParams", "numeric_literal");
     subst("CU_GRAPH_DEBUG_DOT_FLAGS_EXT_SEMAS_WAIT_NODE_PARAMS", "hipGraphDebugDotFlagsExtSemasWaitNodeParams", "numeric_literal");
@@ -3570,8 +3573,6 @@ sub simpleSubstitutions {
     subst("cudaKernelNodeAttrID", "hipKernelNodeAttrID", "type");
     subst("cudaKernelNodeAttrValue", "hipKernelNodeAttrValue", "type");
     subst("cudaKernelNodeParams", "hipKernelNodeParams", "type");
-    subst("cudaLaunchMemSyncDomainMap", "hipLaunchMemSyncDomainMap", "type");
-    subst("cudaLaunchMemSyncDomainMap_st", "hipLaunchMemSyncDomainMap", "type");
     subst("cudaLaunchParams", "hipLaunchParams", "type");
     subst("cudaLimit", "hipLimit_t", "type");
     subst("cudaMemAccessDesc", "hipMemAccessDesc", "type");
@@ -6403,6 +6404,8 @@ sub warnUnsupportedFunctions {
         "cudaLimitDevRuntimeSyncDepth",
         "cudaLimitDevRuntimePendingLaunchCount",
         "cudaLaunchMemSyncDomainRemote",
+        "cudaLaunchMemSyncDomainMap_st",
+        "cudaLaunchMemSyncDomainMap",
         "cudaLaunchMemSyncDomainDefault",
         "cudaLaunchMemSyncDomain",
         "cudaLaunchKernelExC",

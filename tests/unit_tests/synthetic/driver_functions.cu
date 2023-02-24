@@ -810,8 +810,8 @@ int main() {
   // CHECK: result = hipDeviceGraphMemTrim(device);
   result = cuDeviceGraphMemTrim(device);
 
-  // CHECK: hipMemallocNodeParams MEM_ALLOC_NODE_PARAMS_st;
-  // CHECK-NEXT: hipMemallocNodeParams MEM_ALLOC_NODE_PARAMS;
+  // CHECK: hipMemAllocNodeParams MEM_ALLOC_NODE_PARAMS_st;
+  // CHECK-NEXT: hipMemAllocNodeParams MEM_ALLOC_NODE_PARAMS;
   CUDA_MEM_ALLOC_NODE_PARAMS_st MEM_ALLOC_NODE_PARAMS_st;
   CUDA_MEM_ALLOC_NODE_PARAMS MEM_ALLOC_NODE_PARAMS;
 
