@@ -157,7 +157,7 @@
 |`cudaGetMipmappedArrayLevel`| | | |`hipGetMipmappedArrayLevel`|3.5.0| | | |
 |`cudaGetSymbolAddress`| | | |`hipGetSymbolAddress`|2.0.0| | | |
 |`cudaGetSymbolSize`| | | |`hipGetSymbolSize`|2.0.0| | | |
-|`cudaHostAlloc`| | | |`hipHostAlloc`| | | | |
+|`cudaHostAlloc`| | | |`hipHostAlloc`|1.6.0| | | |
 |`cudaHostGetDevicePointer`| | | |`hipHostGetDevicePointer`|1.6.0| | | |
 |`cudaHostGetFlags`| | | |`hipHostGetFlags`|1.6.0| | | |
 |`cudaHostRegister`| | | |`hipHostRegister`|1.6.0| | | |
@@ -357,7 +357,6 @@
 |`cudaEGLStreamProducerPresentFrame`|9.1| | | | | | | |
 |`cudaEGLStreamProducerReturnFrame`|9.1| | | | | | | |
 |`cudaEventCreateFromEGLSync`|9.1| | | | | | | |
-|`cudaGraphNodeGetEnabled`|11.6| | |`hipGraphNodeGetEnabled`|5.5.0| | |5.5.0|
 |`cudaGraphicsEGLRegisterImage`|9.1| | | | | | | |
 |`cudaGraphicsResourceGetMappedEglFrame`|9.1| | | | | | | |
 
@@ -499,6 +498,7 @@
 |`cudaGraphNodeFindInClone`|11.0| | |`hipGraphNodeFindInClone`|5.0.0| | | |
 |`cudaGraphNodeGetDependencies`|11.0| | |`hipGraphNodeGetDependencies`|5.0.0| | | |
 |`cudaGraphNodeGetDependentNodes`|11.0| | |`hipGraphNodeGetDependentNodes`|5.0.0| | | |
+|`cudaGraphNodeGetEnabled`|11.6| | |`hipGraphNodeGetEnabled`|5.5.0| | |5.5.0|
 |`cudaGraphNodeGetType`|11.0| | |`hipGraphNodeGetType`|5.0.0| | | |
 |`cudaGraphNodeSetEnabled`|11.6| | |`hipGraphNodeSetEnabled`|5.5.0| | |5.5.0|
 |`cudaGraphReleaseUserObject`|11.3| | |`hipGraphReleaseUserObject`|5.3.0| | | |
@@ -1088,6 +1088,7 @@ Unsupported
 |`cudaFuncCachePreferL1`| | | |`hipFuncCachePreferL1`|1.6.0| | | |
 |`cudaFuncCachePreferNone`| | | |`hipFuncCachePreferNone`|1.6.0| | | |
 |`cudaFuncCachePreferShared`| | | |`hipFuncCachePreferShared`|1.6.0| | | |
+|`cudaFunction_t`|11.0| | |`hipFunction_t`|1.6.0| | | |
 |`cudaGLDeviceList`| | | |`hipGLDeviceList`|4.4.0| | | |
 |`cudaGLDeviceListAll`| | | |`hipGLDeviceListAll`|4.4.0| | | |
 |`cudaGLDeviceListCurrentFrame`| | | |`hipGLDeviceListCurrentFrame`|4.4.0| | | |
@@ -1227,8 +1228,8 @@ Unsupported
 |`cudaLaunchConfig_t`|11.8| | | | | | | |
 |`cudaLaunchMemSyncDomain`|12.0| | | | | | | |
 |`cudaLaunchMemSyncDomainDefault`|12.0| | | | | | | |
-|`cudaLaunchMemSyncDomainMap`|12.0| | |`hipLaunchMemSyncDomainMap`| | | | |
-|`cudaLaunchMemSyncDomainMap_st`|12.0| | |`hipLaunchMemSyncDomainMap`| | | | |
+|`cudaLaunchMemSyncDomainMap`|12.0| | | | | | | |
+|`cudaLaunchMemSyncDomainMap_st`|12.0| | | | | | | |
 |`cudaLaunchMemSyncDomainRemote`|12.0| | | | | | | |
 |`cudaLaunchParams`|9.0| | |`hipLaunchParams`|2.6.0| | | |
 |`cudaLimit`| | | |`hipLimit_t`|1.6.0| | | |
@@ -1250,7 +1251,7 @@ Unsupported
 |`cudaMemAdviseUnsetAccessedBy`|8.0| | |`hipMemAdviseUnsetAccessedBy`|3.7.0| | | |
 |`cudaMemAdviseUnsetPreferredLocation`|8.0| | |`hipMemAdviseUnsetPreferredLocation`|3.7.0| | | |
 |`cudaMemAdviseUnsetReadMostly`|8.0| | |`hipMemAdviseUnsetReadMostly`|3.7.0| | | |
-|`cudaMemAllocNodeParams`|11.4| | |`hipMemallocNodeParams`| | | | |
+|`cudaMemAllocNodeParams`|11.4| | |`hipMemAllocNodeParams`|5.5.0| | |5.5.0|
 |`cudaMemAllocationHandleType`|11.2| | |`hipMemAllocationHandleType`|5.2.0| | | |
 |`cudaMemAllocationType`|11.2| | |`hipMemAllocationType`|5.2.0| | | |
 |`cudaMemAllocationTypeInvalid`|11.2| | |`hipMemAllocationTypeInvalid`|5.2.0| | | |

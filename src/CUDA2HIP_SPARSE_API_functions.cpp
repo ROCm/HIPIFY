@@ -1501,6 +1501,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_FUNCTION_VER_MAP {
   {"hipsparseZbsrilu02_bufferSize",                      {HIP_3090, HIP_0,    HIP_0   }},
   {"hipsparseSbsrilu02_analysis",                        {HIP_3090, HIP_0,    HIP_0   }},
   {"hipsparseDbsrilu02_analysis",                        {HIP_3090, HIP_0,    HIP_0   }},
+  {"hipsparseCbsrilu02_analysis",                        {HIP_3090, HIP_0,    HIP_0   }},
   {"hipsparseZbsrilu02_analysis",                        {HIP_3090, HIP_0,    HIP_0   }},
   {"hipsparseSbsrilu02",                                 {HIP_3090, HIP_0,    HIP_0   }},
   {"hipsparseDbsrilu02",                                 {HIP_3090, HIP_0,    HIP_0   }},
