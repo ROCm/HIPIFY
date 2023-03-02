@@ -236,6 +236,7 @@ enum cudaVersions {
   CUDA_117 = 11070,
   CUDA_118 = 11080,
   CUDA_120 = 12000,
+  CUDA_121 = 12010,
   CUDNN_10 = 100,
   CUDNN_20 = 200,
   CUDNN_30 = 300,
