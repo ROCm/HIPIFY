@@ -120,6 +120,7 @@
 |`CUDA_ERROR_TOO_MANY_PEERS`| | | | | | | | |
 |`CUDA_ERROR_UNKNOWN`| | | |`hipErrorUnknown`|1.6.0| | | |
 |`CUDA_ERROR_UNMAP_FAILED`| | | |`hipErrorUnmapFailed`|1.6.0| | | |
+|`CUDA_ERROR_UNSUPPORTED_DEVSIDE_SYNC`|12.1| | | | | | | |
 |`CUDA_ERROR_UNSUPPORTED_EXEC_AFFINITY`|11.4| | | | | | | |
 |`CUDA_ERROR_UNSUPPORTED_LIMIT`| | | |`hipErrorUnsupportedLimit`|1.6.0| | | |
 |`CUDA_ERROR_UNSUPPORTED_PTX_VERSION`|11.1| | | | | | | |
@@ -262,7 +263,15 @@
 |`CU_COMPUTEMODE_EXCLUSIVE_PROCESS`| | | |`hipComputeModeExclusiveProcess`|2.0.0| | | |
 |`CU_COMPUTEMODE_PROHIBITED`| | | |`hipComputeModeProhibited`|1.9.0| | | |
 |`CU_COMPUTE_ACCELERATED_TARGET_BASE`|12.0| | | | | | | |
+|`CU_COREDUMP_ENABLE_ON_EXCEPTION`|12.1| | | | | | | |
+|`CU_COREDUMP_ENABLE_USER_TRIGGER`|12.1| | | | | | | |
+|`CU_COREDUMP_FILE`|12.1| | | | | | | |
+|`CU_COREDUMP_LIGHTWEIGHT`|12.1| | | | | | | |
+|`CU_COREDUMP_MAX`|12.1| | | | | | | |
+|`CU_COREDUMP_PIPE`|12.1| | | | | | | |
+|`CU_COREDUMP_TRIGGER_HOST`|12.1| | | | | | | |
 |`CU_CTX_BLOCKING_SYNC`| |4.0| |`hipDeviceScheduleBlockingSync`|1.6.0| | | |
+|`CU_CTX_COREDUMP_ENABLE`|12.1| | | | | | | |
 |`CU_CTX_FLAGS_MASK`| | | | | | | | |
 |`CU_CTX_LMEM_RESIZE_TO_MAX`| | | |`hipDeviceLmemResizeToMax`|1.6.0| | | |
 |`CU_CTX_MAP_HOST`| | | |`hipDeviceMapHost`|1.6.0| | | |
@@ -271,6 +280,8 @@
 |`CU_CTX_SCHED_MASK`| | | |`hipDeviceScheduleMask`|1.6.0| | | |
 |`CU_CTX_SCHED_SPIN`| | | |`hipDeviceScheduleSpin`|1.6.0| | | |
 |`CU_CTX_SCHED_YIELD`| | | |`hipDeviceScheduleYield`|1.6.0| | | |
+|`CU_CTX_SYNC_MEMOPS`|12.1| | | | | | | |
+|`CU_CTX_USER_COREDUMP_ENABLE`|12.1| | | | | | | |
 |`CU_CUBEMAP_FACE_NEGATIVE_X`| | | | | | | | |
 |`CU_CUBEMAP_FACE_NEGATIVE_Y`| | | | | | | | |
 |`CU_CUBEMAP_FACE_NEGATIVE_Z`| | | | | | | | |
@@ -337,7 +348,7 @@
 |`CU_DEVICE_ATTRIBUTE_HOST_NATIVE_ATOMIC_SUPPORTED`|8.0| | |`hipDeviceAttributeHostNativeAtomicSupported`|4.3.0| | | |
 |`CU_DEVICE_ATTRIBUTE_HOST_REGISTER_SUPPORTED`|9.2| | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_INTEGRATED`| | | |`hipDeviceAttributeIntegrated`|1.9.0| | | |
-|`CU_DEVICE_ATTRIBUTE_IPC_EVENT_SUPPORTED`|12.0|12.0| | | | | | |
+|`CU_DEVICE_ATTRIBUTE_IPC_EVENT_SUPPORTED`|12.0| | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_KERNEL_EXEC_TIMEOUT`| | | |`hipDeviceAttributeKernelExecTimeout`|2.10.0| | | |
 |`CU_DEVICE_ATTRIBUTE_L2_CACHE_SIZE`| | | |`hipDeviceAttributeL2CacheSize`|1.6.0| | | |
 |`CU_DEVICE_ATTRIBUTE_LOCAL_L1_CACHE_SUPPORTED`| | | |`hipDeviceAttributeLocalL1CacheSupported`|4.3.0| | | |
@@ -406,7 +417,8 @@
 |`CU_DEVICE_ATTRIBUTE_MEMORY_CLOCK_RATE`| | | |`hipDeviceAttributeMemoryClockRate`|1.6.0| | | |
 |`CU_DEVICE_ATTRIBUTE_MEMORY_POOLS_SUPPORTED`|11.2| | |`hipDeviceAttributeMemoryPoolsSupported`|5.2.0| | | |
 |`CU_DEVICE_ATTRIBUTE_MEMPOOL_SUPPORTED_HANDLE_TYPES`|11.3| | | | | | | |
-|`CU_DEVICE_ATTRIBUTE_MEM_SYNC_DOMAIN_COUNT`|12.0|12.0| | | | | | |
+|`CU_DEVICE_ATTRIBUTE_MEM_SYNC_DOMAIN_COUNT`|12.0| | | | | | | |
+|`CU_DEVICE_ATTRIBUTE_MULTICAST_SUPPORTED`|12.1| | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_MULTIPROCESSOR_COUNT`| | | |`hipDeviceAttributeMultiprocessorCount`|1.6.0| | | |
 |`CU_DEVICE_ATTRIBUTE_MULTI_GPU_BOARD`| | | |`hipDeviceAttributeIsMultiGpuBoard`|1.6.0| | | |
 |`CU_DEVICE_ATTRIBUTE_MULTI_GPU_BOARD_GROUP_ID`| | | |`hipDeviceAttributeMultiGpuBoardGroupId`|4.3.0| | | |
@@ -424,13 +436,13 @@
 |`CU_DEVICE_ATTRIBUTE_STREAM_PRIORITIES_SUPPORTED`| | | |`hipDeviceAttributeStreamPrioritiesSupported`|4.3.0| | | |
 |`CU_DEVICE_ATTRIBUTE_SURFACE_ALIGNMENT`| | | |`hipDeviceAttributeSurfaceAlignment`|4.3.0| | | |
 |`CU_DEVICE_ATTRIBUTE_TCC_DRIVER`| | | |`hipDeviceAttributeTccDriver`|4.3.0| | | |
-|`CU_DEVICE_ATTRIBUTE_TENSOR_MAP_ACCESS_SUPPORTED`|12.0|12.0| | | | | | |
+|`CU_DEVICE_ATTRIBUTE_TENSOR_MAP_ACCESS_SUPPORTED`|12.0| | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_TEXTURE_ALIGNMENT`| | | |`hipDeviceAttributeTextureAlignment`|2.10.0| | | |
 |`CU_DEVICE_ATTRIBUTE_TEXTURE_PITCH_ALIGNMENT`| | | |`hipDeviceAttributeTexturePitchAlignment`|3.2.0| | | |
 |`CU_DEVICE_ATTRIBUTE_TIMELINE_SEMAPHORE_INTEROP_SUPPORTED`|11.2| | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_TOTAL_CONSTANT_MEMORY`| | | |`hipDeviceAttributeTotalConstantMemory`|1.6.0| | | |
 |`CU_DEVICE_ATTRIBUTE_UNIFIED_ADDRESSING`| | | |`hipDeviceAttributeUnifiedAddressing`|4.3.0| | | |
-|`CU_DEVICE_ATTRIBUTE_UNIFIED_FUNCTION_POINTERS`|12.0|12.0| | | | | | |
+|`CU_DEVICE_ATTRIBUTE_UNIFIED_FUNCTION_POINTERS`|12.0| | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_VIRTUAL_ADDRESS_MANAGEMENT_SUPPORTED`|10.2|11.2| | | | | | |
 |`CU_DEVICE_ATTRIBUTE_VIRTUAL_MEMORY_MANAGEMENT_SUPPORTED`|11.2| | |`hipDeviceAttributeVirtualMemoryManagementSupported`|5.3.0| | | |
 |`CU_DEVICE_ATTRIBUTE_WARP_SIZE`| | | |`hipDeviceAttributeWarpSize`|1.6.0| | | |
@@ -676,7 +688,7 @@
 |`CU_JIT_NUM_OPTIONS`| | | |`HIPRTC_JIT_NUM_OPTIONS`|1.6.0| | | |
 |`CU_JIT_OPTIMIZATION_LEVEL`| | | |`HIPRTC_JIT_OPTIMIZATION_LEVEL`|1.6.0| | | |
 |`CU_JIT_OPTIMIZE_UNUSED_DEVICE_VARIABLES`|11.7|12.0| | | | | | |
-|`CU_JIT_POSITION_INDEPENDENT_CODE`|12.0|12.0| | | | | | |
+|`CU_JIT_POSITION_INDEPENDENT_CODE`|12.0| | | | | | | |
 |`CU_JIT_PREC_DIV`|11.4|12.0| | | | | | |
 |`CU_JIT_PREC_SQRT`|11.4|12.0| | | | | | |
 |`CU_JIT_REFERENCED_KERNEL_COUNT`|11.7|12.0| | | | | | |
@@ -699,6 +711,7 @@
 |`CU_LAUNCH_ATTRIBUTE_CLUSTER_SCHEDULING_POLICY_PREFERENCE`|11.8| | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_COOPERATIVE`|11.8| | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_IGNORE`|11.8| | | | | | | |
+|`CU_LAUNCH_ATTRIBUTE_MAX`|12.1| | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN`|12.0| | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP`|12.0| | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_PRIORITY`|11.8| | | | | | | |
@@ -781,6 +794,8 @@
 |`CU_MEM_RANGE_HANDLE_TYPE_MAX`|11.7| | | | | | | |
 |`CU_MODULE_EAGER_LOADING`|11.7| | | | | | | |
 |`CU_MODULE_LAZY_LOADING`|11.7| | | | | | | |
+|`CU_MULTICAST_GRANULARITY_MINIMUM`|12.1| | | | | | | |
+|`CU_MULTICAST_GRANULARITY_RECOMMENDED`|12.1| | | | | | | |
 |`CU_OCCUPANCY_DEFAULT`| | | |`hipOccupancyDefault`|3.2.0| | | |
 |`CU_OCCUPANCY_DISABLE_CACHING_OVERRIDE`| | | |`hipOccupancyDisableCachingOverride`|5.5.0| | |5.5.0|
 |`CU_PARAM_TR_DEFAULT`| | | | | | | | |
@@ -978,6 +993,8 @@
 |`CUcomputemode`| | | |`hipComputeMode`|1.9.0| | | |
 |`CUcomputemode_enum`| | | |`hipComputeMode`|1.9.0| | | |
 |`CUcontext`| | | |`hipCtx_t`|1.6.0| | | |
+|`CUcoredumpSettings`|12.1| | | | | | | |
+|`CUcoredumpSettings_enum`|12.1| | | | | | | |
 |`CUctx_flags`| | | | | | | | |
 |`CUctx_flags_enum`| | | | | | | | |
 |`CUctx_st`| | | |`ihipCtx_t`|1.6.0| | | |
@@ -1185,6 +1202,11 @@
 |`CUmodule`| | | |`hipModule_t`|1.6.0| | | |
 |`CUmoduleLoadingMode`|11.7| | | | | | | |
 |`CUmoduleLoadingMode_enum`|11.7| | | | | | | |
+|`CUmulticastGranularity_flags`|12.1| | | | | | | |
+|`CUmulticastGranularity_flags_enum`|12.1| | | | | | | |
+|`CUmulticastObjectProp`|12.1| | | | | | | |
+|`CUmulticastObjectProp_st`|12.1| | | | | | | |
+|`CUmulticastObjectProp_v1`|12.1| | | | | | | |
 |`CUoccupancyB2DSize`| | | |`void*`| | | | |
 |`CUoccupancy_flags`| | | | | | | | |
 |`CUoccupancy_flags_enum`| | | | | | | | |
