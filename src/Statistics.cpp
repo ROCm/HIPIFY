@@ -38,6 +38,7 @@ const char *counterNames[NUM_CONV_TYPES] = {
   "memory", // CONV_MEMORY
   "virtual_memory", // CONV_VIRTUAL_MEMORY
   "stream_ordered_memory", // CONV_STREAM_ORDERED_MEMORY
+  "multicast_object_managenet", // CONV_MULTICAST_OBJECT_MANAGEMENT
   "addressing", // CONV_ADDRESSING
   "stream", // CONV_STREAM
   "event", // CONV_EVENT
@@ -51,6 +52,8 @@ const char *counterNames[NUM_CONV_TYPES] = {
   "tensor", // CONV_TENSOR
   "peer", // CONV_PEER
   "graphics", // CONV_GRAPHICS
+  "driver_entry_point", // CONV_DRIVER_ENTRY_POINT
+  "coredump", // CONV_COREDUMP
   "interactions", // CONV_INTERACTION
   "profiler", // CONV_PROFILER
   "openGL", // CONV_OPENGL
