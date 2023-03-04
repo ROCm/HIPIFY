@@ -781,6 +781,7 @@ my %removed_funcs = (
     "cudnnConvolutionBwdDataPreference_t" => "8.0.1",
     "cudaUnbindTexture" => "12.0",
     "cudaSetupArgument" => "10.1",
+    "cudaProfilerInitialize" => "12.0",
     "cudaOutputMode_t" => "12.0",
     "cudaOutputMode" => "12.0",
     "cudaLaunch" => "10.1",

@@ -372,40 +372,21 @@
 |`cudaGraphicsUnmapResources`| | | |`hipGraphicsUnmapResources`|4.5.0| | | |
 |`cudaGraphicsUnregisterResource`| | | |`hipGraphicsUnregisterResource`|4.5.0| | | |
 
-## **25. Texture Reference Management [DEPRECATED]**
+## **25. Texture Object Management**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
-|`cudaBindTexture`| |11.0|12.0|`hipBindTexture`|1.6.0|3.8.0| | |
-|`cudaBindTexture2D`| |11.0|12.0|`hipBindTexture2D`|1.7.0|3.8.0| | |
-|`cudaBindTextureToArray`| |11.0|12.0|`hipBindTextureToArray`|1.6.0|3.8.0| | |
-|`cudaBindTextureToMipmappedArray`| |11.0|12.0|`hipBindTextureToMipmappedArray`|1.7.0| | | |
 |`cudaCreateChannelDesc`| | | |`hipCreateChannelDesc`|1.6.0| | | |
-|`cudaGetChannelDesc`| | | |`hipGetChannelDesc`|1.7.0| | | |
-|`cudaGetTextureAlignmentOffset`| |11.0|12.0|`hipGetTextureAlignmentOffset`|1.9.0|3.8.0| | |
-|`cudaGetTextureReference`| |11.0|12.0|`hipGetTextureReference`|1.7.0|5.3.0| | |
-|`cudaUnbindTexture`| |11.0|12.0|`hipUnbindTexture`|1.6.0|3.8.0| | |
-
-## **26. Surface Reference Management [DEPRECATED]**
-
-|**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
-|:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
-|`cudaBindSurfaceToArray`| |11.0|12.0| | | | | |
-|`cudaGetSurfaceReference`| |11.0|12.0| | | | | |
-
-## **27. Texture Object Management**
-
-|**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
-|:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
 |`cudaCreateTextureObject`| | | |`hipCreateTextureObject`|1.7.0| | | |
 |`cudaCreateTextureObject_v2`|11.8| |12.0| | | | | |
 |`cudaDestroyTextureObject`| | | |`hipDestroyTextureObject`|1.7.0| | | |
+|`cudaGetChannelDesc`| | | |`hipGetChannelDesc`|1.7.0| | | |
 |`cudaGetTextureObjectResourceDesc`| | | |`hipGetTextureObjectResourceDesc`|1.7.0| | | |
 |`cudaGetTextureObjectResourceViewDesc`| | | |`hipGetTextureObjectResourceViewDesc`|1.7.0| | | |
 |`cudaGetTextureObjectTextureDesc`| | | |`hipGetTextureObjectTextureDesc`|1.7.0| | | |
 |`cudaGetTextureObjectTextureDesc_v2`|11.8| |12.0| | | | | |
 
-## **28. Surface Object Management**
+## **26. Surface Object Management**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -413,14 +394,14 @@
 |`cudaDestroySurfaceObject`| | | |`hipDestroySurfaceObject`|1.9.0| | | |
 |`cudaGetSurfaceObjectResourceDesc`| | | | | | | | |
 
-## **29. Version Management**
+## **27. Version Management**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
 |`cudaDriverGetVersion`| | | |`hipDriverGetVersion`|1.6.0| | | |
 |`cudaRuntimeGetVersion`| | | |`hipRuntimeGetVersion`|1.6.0| | | |
 
-## **30. Graph Management**
+## **28. Graph Management**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -509,36 +490,30 @@
 |`cudaUserObjectRelease`|11.3| | |`hipUserObjectRelease`|5.3.0| | | |
 |`cudaUserObjectRetain`|11.3| | |`hipUserObjectRetain`|5.3.0| | | |
 
-## **31. Driver Entry Point Access**
+## **29. Driver Entry Point Access**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
 |`cudaGetDriverEntryPoint`|11.3| | | | | | | |
 
-## **32. C++ API Routines**
+## **30. C++ API Routines**
 
 Unsupported
 
-## **33. Interactions with the CUDA Driver API**
+## **31. Interactions with the CUDA Driver API**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
 |`cudaGetFuncBySymbol`|11.0| | | | | | | |
 
-## **34. Profiler Control [DEPRECATED]**
-
-|**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
-|:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
-|`cudaProfilerInitialize`| |11.0| | | | | | |
-
-## **35. Profiler Control**
+## **32. Profiler Control**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
 |`cudaProfilerStart`| | | |`hipProfilerStart`|1.6.0|3.0.0| | |
 |`cudaProfilerStop`| | | |`hipProfilerStop`|1.6.0|3.0.0| | |
 
-## **36. Data types used by CUDA Runtime**
+## **33. Data types used by CUDA Runtime**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -1421,13 +1396,38 @@ Unsupported
 |`texture`| | |12.0|`texture`| | | | |
 |`textureReference`| | | |`textureReference`|1.6.0| | | |
 
-## **37. Execution Control [REMOVED]**
+## **34. Execution Control [REMOVED]**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
 |`cudaConfigureCall`| | |10.1|`hipConfigureCall`|1.9.0| | | |
 |`cudaLaunch`| | |10.1|`hipLaunchByPtr`|1.9.0| | | |
 |`cudaSetupArgument`| | |10.1|`hipSetupArgument`|1.9.0| | | |
+
+## **35. Texture Reference Management [REMOVED]**
+
+|**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
+|:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
+|`cudaBindTexture`| |11.0|12.0|`hipBindTexture`|1.6.0|3.8.0| | |
+|`cudaBindTexture2D`| |11.0|12.0|`hipBindTexture2D`|1.7.0|3.8.0| | |
+|`cudaBindTextureToArray`| |11.0|12.0|`hipBindTextureToArray`|1.6.0|3.8.0| | |
+|`cudaBindTextureToMipmappedArray`| |11.0|12.0|`hipBindTextureToMipmappedArray`|1.7.0| | | |
+|`cudaGetTextureAlignmentOffset`| |11.0|12.0|`hipGetTextureAlignmentOffset`|1.9.0|3.8.0| | |
+|`cudaGetTextureReference`| |11.0|12.0|`hipGetTextureReference`|1.7.0|5.3.0| | |
+|`cudaUnbindTexture`| |11.0|12.0|`hipUnbindTexture`|1.6.0|3.8.0| | |
+
+## **36. Surface Reference Management [REMOVED]**
+
+|**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
+|:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
+|`cudaBindSurfaceToArray`| |11.0|12.0| | | | | |
+|`cudaGetSurfaceReference`| |11.0|12.0| | | | | |
+
+## **37. Profiler Control [REMOVED]**
+
+|**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
+|:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
+|`cudaProfilerInitialize`| |11.0|12.0| | | | | |
 
 
 \*A - Added; D - Deprecated; R - Removed; E - Experimental
