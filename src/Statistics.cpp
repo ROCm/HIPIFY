@@ -38,6 +38,7 @@ const char *counterNames[NUM_CONV_TYPES] = {
   "memory", // CONV_MEMORY
   "virtual_memory", // CONV_VIRTUAL_MEMORY
   "stream_ordered_memory", // CONV_STREAM_ORDERED_MEMORY
+  "multicast_object_managenet", // CONV_MULTICAST_OBJECT_MANAGEMENT
   "addressing", // CONV_ADDRESSING
   "stream", // CONV_STREAM
   "event", // CONV_EVENT
@@ -51,6 +52,8 @@ const char *counterNames[NUM_CONV_TYPES] = {
   "tensor", // CONV_TENSOR
   "peer", // CONV_PEER
   "graphics", // CONV_GRAPHICS
+  "driver_entry_point", // CONV_DRIVER_ENTRY_POINT
+  "coredump", // CONV_COREDUMP
   "interactions", // CONV_INTERACTION
   "profiler", // CONV_PROFILER
   "openGL", // CONV_OPENGL
@@ -452,6 +455,7 @@ std::string Statistics::getCudaVersion(const cudaVersions& ver) {
     case CUDA_117: return "11.7";
     case CUDA_118: return "11.8";
     case CUDA_120: return "12.0";
+    case CUDA_121: return "12.1";
     case CUDNN_10: return "1.0.0";
     case CUDNN_20: return "2.0.0";
     case CUDNN_30: return "3.0.0";
@@ -490,6 +494,7 @@ std::string Statistics::getCudaVersion(const cudaVersions& ver) {
     case CUDNN_850: return "8.5.0";
     case CUDNN_860: return "8.6.0";
     case CUDNN_870: return "8.7.0";
+    case CUDNN_880: return "8.8.0";
   }
   return "";
 }
