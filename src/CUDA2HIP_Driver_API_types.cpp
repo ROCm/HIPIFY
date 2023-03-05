@@ -331,9 +331,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   //
   {"CUlibrary",                                                        {"hipLibraty",                                               "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
-  //
+  // the same CUkern_st
   {"CUkern_st",                                                        {"hipKernel",                                                "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-  //
+  // cudaKernel_t
   {"CUkernel",                                                         {"hipKernel",                                                "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   // cudaGraphInstantiateParams_st
@@ -504,7 +504,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_CTX_COREDUMP_ENABLE",                                           {"hipDeviceCoreDumpEnable",                                  "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0x20
   //
   {"CU_CTX_USER_COREDUMP_ENABLE",                                      {"hipDeviceUserCoreDumpEnable",                              "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0x40
-  //
+  // cudaDeviceSyncMemops
   {"CU_CTX_SYNC_MEMOPS",                                               {"hipDeviceSyncMemOps",                                      "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0x80
   // cudaDeviceMask
   {"CU_CTX_FLAGS_MASK",                                                {"hipDeviceMask",                                            "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0xff
@@ -1613,8 +1613,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUDA_ERROR_JIT_COMPILATION_DISABLED",                              {"hipErrorJitCompilationDisabled",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 223
   // cudaErrorUnsupportedExecAffinity
   {"CUDA_ERROR_UNSUPPORTED_EXEC_AFFINITY",                             {"hipErrorUnsupportedExecAffinity",                          "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 224
-  //
-  {"CUDA_ERROR_UNSUPPORTED_DEVSIDE_SYNC",                              {"hipErrorUnsupportedDevsideSync",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 225
+  // cudaErrorUnsupportedDevSideSync
+  {"CUDA_ERROR_UNSUPPORTED_DEVSIDE_SYNC",                              {"hipErrorUnsupportedDevSideSync",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 225
   // cudaErrorInvalidSource
   {"CUDA_ERROR_INVALID_SOURCE",                                        {"hipErrorInvalidSource",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}}, // 300
   // cudaErrorFileNotFound

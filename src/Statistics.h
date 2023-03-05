@@ -111,6 +111,8 @@ enum ConvTypes {
   //  driver::DRIVER_ENTRY_POINT
   // runtime::DRIVER_ENTRY_POINT
   CONV_DRIVER_ENTRY_POINT,
+  // runtime::CPP
+  CONV_CPP,
   //  driver::COREDUMP
   CONV_COREDUMP,
   // runtime::DRIVER_INTERACT
