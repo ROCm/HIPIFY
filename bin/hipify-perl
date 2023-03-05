@@ -982,7 +982,7 @@ push(@exclude_filelist, split(',', $exclude_files));
 %exclude_dirhash = map { $_ => 1 } @exclude_dirlist;
 %exclude_filehash = map { $_ => 1 } @exclude_filelist;
 
-@statNames = ("error", "init", "version", "device", "context", "module", "library_management", "memory", "virtual_memory", "stream_ordered_memory", "multicast_object_managenet", "addressing", "stream", "event", "external_resource_interop", "stream_memory", "execution", "graph", "occupancy", "texture", "surface", "tensor", "peer", "graphics", "driver_entry_point", "coredump", "interactions", "profiler", "openGL", "D3D9", "D3D10", "D3D11", "VDPAU", "EGL", "thread", "complex", "library", "device_library", "device_function", "device_type", "include", "include_cuda_main_header", "include_cuda_main_header_v2", "type", "literal", "numeric_literal", "define", "extern_shared", "kernel_launch");
+@statNames = ("error", "init", "version", "device", "context", "module", "library", "memory", "virtual_memory", "ordered_memory", "multicast", "unified", "stream", "event", "external_resource", "stream_memory", "execution", "graph", "occupancy", "texture", "surface", "tensor", "peer", "graphics", "driver_entry_point", "coredump", "driver_interact", "profiler", "openGL", "D3D9", "D3D10", "D3D11", "VDPAU", "EGL", "thread", "complex", "library", "device_library", "device_function", "device_type", "include", "include_cuda_main_header", "include_cuda_main_header_v2", "type", "literal", "numeric_literal", "define", "extern_shared", "kernel_launch");
 
 sub totalStats {
     my %count = %{shift()};
@@ -1052,7 +1052,7 @@ sub subst {
 }
 
 sub experimentalSubstitutions {
-    subst("cuPointerSetAttribute", "hipPointerSetAttribute", "addressing");
+    subst("cuPointerSetAttribute", "hipPointerSetAttribute", "unified");
     subst("cuLaunchCooperativeKernel", "hipModuleLaunchCooperativeKernel", "execution");
     subst("cuLaunchCooperativeKernelMultiDevice", "hipModuleLaunchCooperativeKernelMultiDevice", "execution");
     subst("cuGraphAddMemAllocNode", "hipGraphAddMemAllocNode", "graph");
@@ -1588,7 +1588,6 @@ sub simpleSubstitutions {
     subst("cudaDeviceSetMemPool", "hipDeviceSetMemPool", "device");
     subst("cudaDeviceSetSharedMemConfig", "hipDeviceSetSharedMemConfig", "device");
     subst("cudaDeviceSynchronize", "hipDeviceSynchronize", "device");
-    subst("cudaFuncSetCacheConfig", "hipFuncSetCacheConfig", "device");
     subst("cudaGetDevice", "hipGetDevice", "device");
     subst("cudaGetDeviceCount", "hipGetDeviceCount", "device");
     subst("cudaGetDeviceFlags", "hipGetDeviceFlags", "device");
@@ -1796,27 +1795,27 @@ sub simpleSubstitutions {
     subst("cuMemRetainAllocationHandle", "hipMemRetainAllocationHandle", "virtual_memory");
     subst("cuMemSetAccess", "hipMemSetAccess", "virtual_memory");
     subst("cuMemUnmap", "hipMemUnmap", "virtual_memory");
-    subst("cuMemAllocAsync", "hipMallocAsync", "stream_ordered_memory");
-    subst("cuMemAllocFromPoolAsync", "hipMallocFromPoolAsync", "stream_ordered_memory");
-    subst("cuMemFreeAsync", "hipFreeAsync", "stream_ordered_memory");
-    subst("cuMemPoolCreate", "hipMemPoolCreate", "stream_ordered_memory");
-    subst("cuMemPoolDestroy", "hipMemPoolDestroy", "stream_ordered_memory");
-    subst("cuMemPoolExportPointer", "hipMemPoolExportPointer", "stream_ordered_memory");
-    subst("cuMemPoolExportToShareableHandle", "hipMemPoolExportToShareableHandle", "stream_ordered_memory");
-    subst("cuMemPoolGetAccess", "hipMemPoolGetAccess", "stream_ordered_memory");
-    subst("cuMemPoolGetAttribute", "hipMemPoolGetAttribute", "stream_ordered_memory");
-    subst("cuMemPoolImportFromShareableHandle", "hipMemPoolImportFromShareableHandle", "stream_ordered_memory");
-    subst("cuMemPoolImportPointer", "hipMemPoolImportPointer", "stream_ordered_memory");
-    subst("cuMemPoolSetAccess", "hipMemPoolSetAccess", "stream_ordered_memory");
-    subst("cuMemPoolSetAttribute", "hipMemPoolSetAttribute", "stream_ordered_memory");
-    subst("cuMemPoolTrimTo", "hipMemPoolTrimTo", "stream_ordered_memory");
-    subst("cuMemAdvise", "hipMemAdvise", "addressing");
-    subst("cuMemPrefetchAsync", "hipMemPrefetchAsync", "addressing");
-    subst("cuMemRangeGetAttribute", "hipMemRangeGetAttribute", "addressing");
-    subst("cuMemRangeGetAttributes", "hipMemRangeGetAttributes", "addressing");
-    subst("cuPointerGetAttribute", "hipPointerGetAttribute", "addressing");
-    subst("cuPointerGetAttributes", "hipDrvPointerGetAttributes", "addressing");
-    subst("cudaPointerGetAttributes", "hipPointerGetAttributes", "addressing");
+    subst("cuMemAllocAsync", "hipMallocAsync", "ordered_memory");
+    subst("cuMemAllocFromPoolAsync", "hipMallocFromPoolAsync", "ordered_memory");
+    subst("cuMemFreeAsync", "hipFreeAsync", "ordered_memory");
+    subst("cuMemPoolCreate", "hipMemPoolCreate", "ordered_memory");
+    subst("cuMemPoolDestroy", "hipMemPoolDestroy", "ordered_memory");
+    subst("cuMemPoolExportPointer", "hipMemPoolExportPointer", "ordered_memory");
+    subst("cuMemPoolExportToShareableHandle", "hipMemPoolExportToShareableHandle", "ordered_memory");
+    subst("cuMemPoolGetAccess", "hipMemPoolGetAccess", "ordered_memory");
+    subst("cuMemPoolGetAttribute", "hipMemPoolGetAttribute", "ordered_memory");
+    subst("cuMemPoolImportFromShareableHandle", "hipMemPoolImportFromShareableHandle", "ordered_memory");
+    subst("cuMemPoolImportPointer", "hipMemPoolImportPointer", "ordered_memory");
+    subst("cuMemPoolSetAccess", "hipMemPoolSetAccess", "ordered_memory");
+    subst("cuMemPoolSetAttribute", "hipMemPoolSetAttribute", "ordered_memory");
+    subst("cuMemPoolTrimTo", "hipMemPoolTrimTo", "ordered_memory");
+    subst("cuMemAdvise", "hipMemAdvise", "unified");
+    subst("cuMemPrefetchAsync", "hipMemPrefetchAsync", "unified");
+    subst("cuMemRangeGetAttribute", "hipMemRangeGetAttribute", "unified");
+    subst("cuMemRangeGetAttributes", "hipMemRangeGetAttributes", "unified");
+    subst("cuPointerGetAttribute", "hipPointerGetAttribute", "unified");
+    subst("cuPointerGetAttributes", "hipDrvPointerGetAttributes", "unified");
+    subst("cudaPointerGetAttributes", "hipPointerGetAttributes", "unified");
     subst("cuStreamAddCallback", "hipStreamAddCallback", "stream");
     subst("cuStreamAttachMemAsync", "hipStreamAttachMemAsync", "stream");
     subst("cuStreamBeginCapture", "hipStreamBeginCapture", "stream");
@@ -1866,20 +1865,20 @@ sub simpleSubstitutions {
     subst("cudaEventQuery", "hipEventQuery", "event");
     subst("cudaEventRecord", "hipEventRecord", "event");
     subst("cudaEventSynchronize", "hipEventSynchronize", "event");
-    subst("cuDestroyExternalMemory", "hipDestroyExternalMemory", "external_resource_interop");
-    subst("cuDestroyExternalSemaphore", "hipDestroyExternalSemaphore", "external_resource_interop");
-    subst("cuExternalMemoryGetMappedBuffer", "hipExternalMemoryGetMappedBuffer", "external_resource_interop");
-    subst("cuImportExternalMemory", "hipImportExternalMemory", "external_resource_interop");
-    subst("cuImportExternalSemaphore", "hipImportExternalSemaphore", "external_resource_interop");
-    subst("cuSignalExternalSemaphoresAsync", "hipSignalExternalSemaphoresAsync", "external_resource_interop");
-    subst("cuWaitExternalSemaphoresAsync", "hipWaitExternalSemaphoresAsync", "external_resource_interop");
-    subst("cudaDestroyExternalMemory", "hipDestroyExternalMemory", "external_resource_interop");
-    subst("cudaDestroyExternalSemaphore", "hipDestroyExternalSemaphore", "external_resource_interop");
-    subst("cudaExternalMemoryGetMappedBuffer", "hipExternalMemoryGetMappedBuffer", "external_resource_interop");
-    subst("cudaImportExternalMemory", "hipImportExternalMemory", "external_resource_interop");
-    subst("cudaImportExternalSemaphore", "hipImportExternalSemaphore", "external_resource_interop");
-    subst("cudaSignalExternalSemaphoresAsync", "hipSignalExternalSemaphoresAsync", "external_resource_interop");
-    subst("cudaWaitExternalSemaphoresAsync", "hipWaitExternalSemaphoresAsync", "external_resource_interop");
+    subst("cuDestroyExternalMemory", "hipDestroyExternalMemory", "external_resource");
+    subst("cuDestroyExternalSemaphore", "hipDestroyExternalSemaphore", "external_resource");
+    subst("cuExternalMemoryGetMappedBuffer", "hipExternalMemoryGetMappedBuffer", "external_resource");
+    subst("cuImportExternalMemory", "hipImportExternalMemory", "external_resource");
+    subst("cuImportExternalSemaphore", "hipImportExternalSemaphore", "external_resource");
+    subst("cuSignalExternalSemaphoresAsync", "hipSignalExternalSemaphoresAsync", "external_resource");
+    subst("cuWaitExternalSemaphoresAsync", "hipWaitExternalSemaphoresAsync", "external_resource");
+    subst("cudaDestroyExternalMemory", "hipDestroyExternalMemory", "external_resource");
+    subst("cudaDestroyExternalSemaphore", "hipDestroyExternalSemaphore", "external_resource");
+    subst("cudaExternalMemoryGetMappedBuffer", "hipExternalMemoryGetMappedBuffer", "external_resource");
+    subst("cudaImportExternalMemory", "hipImportExternalMemory", "external_resource");
+    subst("cudaImportExternalSemaphore", "hipImportExternalSemaphore", "external_resource");
+    subst("cudaSignalExternalSemaphoresAsync", "hipSignalExternalSemaphoresAsync", "external_resource");
+    subst("cudaWaitExternalSemaphoresAsync", "hipWaitExternalSemaphoresAsync", "external_resource");
     subst("cuStreamWaitValue32", "hipStreamWaitValue32", "stream_memory");
     subst("cuStreamWaitValue32_v2", "hipStreamWaitValue32", "stream_memory");
     subst("cuStreamWaitValue64", "hipStreamWaitValue64", "stream_memory");
@@ -1894,6 +1893,7 @@ sub simpleSubstitutions {
     subst("cudaConfigureCall", "hipConfigureCall", "execution");
     subst("cudaFuncGetAttributes", "hipFuncGetAttributes", "execution");
     subst("cudaFuncSetAttribute", "hipFuncSetAttribute", "execution");
+    subst("cudaFuncSetCacheConfig", "hipFuncSetCacheConfig", "execution");
     subst("cudaFuncSetSharedMemConfig", "hipFuncSetSharedMemConfig", "execution");
     subst("cudaLaunch", "hipLaunchByPtr", "execution");
     subst("cudaLaunchCooperativeKernel", "hipLaunchCooperativeKernel", "execution");
@@ -9672,7 +9672,7 @@ while (@ARGV) {
             transformHostFunctions();
             # TODO: would like to move this code outside loop but it uses $_ which contains the whole file
             unless ($no_output) {
-                my $apiCalls   = $ft{'error'} + $ft{'init'} + $ft{'version'} + $ft{'device'} + $ft{'context'} + $ft{'module'} + $ft{'library_management'} + $ft{'memory'} + $ft{'virtual_memory'} + $ft{'stream_ordered_memory'} + $ft{'multicast_object_managenet'} + $ft{'addressing'} + $ft{'stream'} + $ft{'event'} + $ft{'external_resource_interop'} + $ft{'stream_memory'} + $ft{'execution'} + $ft{'graph'} + $ft{'occupancy'} + $ft{'texture'} + $ft{'surface'} + $ft{'tensor'} + $ft{'peer'} + $ft{'graphics'} + $ft{'driver_entry_point'} + $ft{'coredump'} + $ft{'interactions'} + $ft{'profiler'} + $ft{'openGL'} + $ft{'D3D9'} + $ft{'D3D10'} + $ft{'D3D11'} + $ft{'VDPAU'} + $ft{'EGL'} + $ft{'thread'} + $ft{'complex'} + $ft{'library'} + $ft{'device_library'} + $ft{'device_type'} + $ft{'include'} + $ft{'include_cuda_main_header'} + $ft{'include_cuda_main_header_v2'} + $ft{'type'} + $ft{'literal'} + $ft{'numeric_literal'} + $ft{'define'};
+                my $apiCalls   = $ft{'error'} + $ft{'init'} + $ft{'version'} + $ft{'device'} + $ft{'context'} + $ft{'module'} + $ft{'library'} + $ft{'memory'} + $ft{'virtual_memory'} + $ft{'ordered_memory'} + $ft{'multicast'} + $ft{'unified'} + $ft{'stream'} + $ft{'event'} + $ft{'external_resource'} + $ft{'stream_memory'} + $ft{'execution'} + $ft{'graph'} + $ft{'occupancy'} + $ft{'texture'} + $ft{'surface'} + $ft{'tensor'} + $ft{'peer'} + $ft{'graphics'} + $ft{'driver_entry_point'} + $ft{'coredump'} + $ft{'driver_interact'} + $ft{'profiler'} + $ft{'openGL'} + $ft{'D3D9'} + $ft{'D3D10'} + $ft{'D3D11'} + $ft{'VDPAU'} + $ft{'EGL'} + $ft{'thread'} + $ft{'complex'} + $ft{'library'} + $ft{'device_library'} + $ft{'device_type'} + $ft{'include'} + $ft{'include_cuda_main_header'} + $ft{'include_cuda_main_header_v2'} + $ft{'type'} + $ft{'literal'} + $ft{'numeric_literal'} + $ft{'define'};
                 my $kernStuff  = $hasDeviceCode + $ft{'kernel_launch'} + $ft{'device_function'};
                 my $totalCalls = $apiCalls + $kernStuff;
                 $is_dos = m/\r\n$/;
