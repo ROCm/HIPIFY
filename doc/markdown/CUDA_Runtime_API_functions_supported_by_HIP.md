@@ -498,7 +498,9 @@
 
 ## **30. C++ API Routines**
 
-Unsupported
+|**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
+|:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
+|`cudaGetKernel`|12.1| | | | | | | |
 
 ## **31. Interactions with the CUDA Driver API**
 
@@ -526,6 +528,7 @@ Unsupported
 |`CUgraphExec_st`|10.0| | |`hipGraphExec`|4.3.0| | | |
 |`CUgraphNode_st`|10.0| | |`hipGraphNode`|4.3.0| | | |
 |`CUgraph_st`|10.0| | |`ihipGraph`|4.3.0| | | |
+|`CUkern_st`|12.1| | | | | | | |
 |`CUstream_st`| | | |`ihipStream_t`|1.5.0| | | |
 |`CUuuid_st`| | | |`hipUUID_t`|5.2.0| | | |
 |`MAJOR_VERSION`|8.0| | | | | | | |
@@ -739,6 +742,10 @@ Unsupported
 |`cudaDevAttrReserved122`|12.0| | | | | | | |
 |`cudaDevAttrReserved123`|12.0| | | | | | | |
 |`cudaDevAttrReserved124`|12.0| | | | | | | |
+|`cudaDevAttrReserved127`|12.1| | | | | | | |
+|`cudaDevAttrReserved128`|12.1| | | | | | | |
+|`cudaDevAttrReserved129`|12.1| | | | | | | |
+|`cudaDevAttrReserved132`|12.1| | | | | | | |
 |`cudaDevAttrReserved92`|9.0| | | | | | | |
 |`cudaDevAttrReserved93`|9.0| | | | | | | |
 |`cudaDevAttrReserved94`|9.0| | |`hipDeviceAttributeCanUseStreamWaitValue`|4.3.0| | | |
@@ -771,6 +778,7 @@ Unsupported
 |`cudaDeviceScheduleMask`| | | |`hipDeviceScheduleMask`|1.6.0| | | |
 |`cudaDeviceScheduleSpin`| | | |`hipDeviceScheduleSpin`|1.6.0| | | |
 |`cudaDeviceScheduleYield`| | | |`hipDeviceScheduleYield`|1.6.0| | | |
+|`cudaDeviceSyncMemops`|12.1| | | | | | | |
 |`cudaDriverEntryPointQueryResult`|12.0| | | | | | | |
 |`cudaDriverEntryPointSuccess`|12.0| | | | | | | |
 |`cudaDriverEntryPointSymbolNotFound`|12.0| | | | | | | |
@@ -986,6 +994,7 @@ Unsupported
 |`cudaErrorTooManyPeers`| | | | | | | | |
 |`cudaErrorUnknown`| | | |`hipErrorUnknown`|1.6.0| | | |
 |`cudaErrorUnmapBufferObjectFailed`| | | |`hipErrorUnmapFailed`|1.6.0| | | |
+|`cudaErrorUnsupportedDevSideSync`|12.1| | | | | | | |
 |`cudaErrorUnsupportedExecAffinity`|11.4| | | | | | | |
 |`cudaErrorUnsupportedLimit`| | | |`hipErrorUnsupportedLimit`|1.6.0| | | |
 |`cudaErrorUnsupportedPtxVersion`|11.1| | | | | | | |
@@ -1183,6 +1192,7 @@ Unsupported
 |`cudaKernelNodeAttributeMemSyncDomainMap`|12.0| | | | | | | |
 |`cudaKernelNodeAttributePriority`|11.7| | | | | | | |
 |`cudaKernelNodeParams`|10.0| | |`hipKernelNodeParams`|4.3.0| | | |
+|`cudaKernel_t`|12.1| | | | | | | |
 |`cudaKeyValuePair`| | |12.0| | | | | |
 |`cudaLaunchAttribute`|11.8| | | | | | | |
 |`cudaLaunchAttributeAccessPolicyWindow`|11.8| | | | | | | |

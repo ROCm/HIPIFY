@@ -982,7 +982,7 @@ push(@exclude_filelist, split(',', $exclude_files));
 %exclude_dirhash = map { $_ => 1 } @exclude_dirlist;
 %exclude_filehash = map { $_ => 1 } @exclude_filelist;
 
-@statNames = ("error", "init", "version", "device", "context", "module", "library", "memory", "virtual_memory", "ordered_memory", "multicast", "unified", "stream", "event", "external_resource", "stream_memory", "execution", "graph", "occupancy", "texture", "surface", "tensor", "peer", "graphics", "driver_entry_point", "coredump", "driver_interact", "profiler", "openGL", "D3D9", "D3D10", "D3D11", "VDPAU", "EGL", "thread", "complex", "library", "device_library", "device_function", "device_type", "include", "include_cuda_main_header", "include_cuda_main_header_v2", "type", "literal", "numeric_literal", "define", "extern_shared", "kernel_launch");
+@statNames = ("error", "init", "version", "device", "context", "module", "library", "memory", "virtual_memory", "ordered_memory", "multicast", "unified", "stream", "event", "external_resource", "stream_memory", "execution", "graph", "occupancy", "texture", "surface", "tensor", "peer", "graphics", "driver_entry_point", "cpp", "coredump", "driver_interact", "profiler", "openGL", "D3D9", "D3D10", "D3D11", "VDPAU", "EGL", "thread", "complex", "library", "device_library", "device_function", "device_type", "include", "include_cuda_main_header", "include_cuda_main_header_v2", "type", "literal", "numeric_literal", "define", "extern_shared", "kernel_launch");
 
 sub totalStats {
     my %count = %{shift()};
@@ -6428,6 +6428,7 @@ sub warnUnsupportedFunctions {
         "cudaLaunchAttributeAccessPolicyWindow",
         "cudaLaunchAttribute",
         "cudaKeyValuePair",
+        "cudaKernel_t",
         "cudaKernelNodeAttributePriority",
         "cudaKernelNodeAttributeMemSyncDomainMap",
         "cudaKernelNodeAttributeMemSyncDomain",
@@ -6485,6 +6486,7 @@ sub warnUnsupportedFunctions {
         "cudaGetSurfaceObjectResourceDesc",
         "cudaGetParameterBufferV2",
         "cudaGetParameterBuffer",
+        "cudaGetKernel",
         "cudaGetFuncBySymbol",
         "cudaGetDriverEntryPointFlags",
         "cudaGetDriverEntryPoint",
@@ -6541,6 +6543,7 @@ sub warnUnsupportedFunctions {
         "cudaEventCreateFromEGLSync",
         "cudaErrorUnsupportedPtxVersion",
         "cudaErrorUnsupportedExecAffinity",
+        "cudaErrorUnsupportedDevSideSync",
         "cudaErrorTooManyPeers",
         "cudaErrorTimeout",
         "cudaErrorTextureNotBound",
@@ -6696,6 +6699,7 @@ sub warnUnsupportedFunctions {
         "cudaDriverEntryPointSymbolNotFound",
         "cudaDriverEntryPointSuccess",
         "cudaDriverEntryPointQueryResult",
+        "cudaDeviceSyncMemops",
         "cudaDevicePropDontCare",
         "cudaDeviceMask",
         "cudaDeviceGetTexture1DLinearMaxWidth",
@@ -6706,6 +6710,10 @@ sub warnUnsupportedFunctions {
         "cudaDevAttrReservedSharedMemoryPerBlock",
         "cudaDevAttrReserved93",
         "cudaDevAttrReserved92",
+        "cudaDevAttrReserved132",
+        "cudaDevAttrReserved129",
+        "cudaDevAttrReserved128",
+        "cudaDevAttrReserved127",
         "cudaDevAttrReserved124",
         "cudaDevAttrReserved123",
         "cudaDevAttrReserved122",
@@ -9672,7 +9680,7 @@ while (@ARGV) {
             transformHostFunctions();
             # TODO: would like to move this code outside loop but it uses $_ which contains the whole file
             unless ($no_output) {
-                my $apiCalls   = $ft{'error'} + $ft{'init'} + $ft{'version'} + $ft{'device'} + $ft{'context'} + $ft{'module'} + $ft{'library'} + $ft{'memory'} + $ft{'virtual_memory'} + $ft{'ordered_memory'} + $ft{'multicast'} + $ft{'unified'} + $ft{'stream'} + $ft{'event'} + $ft{'external_resource'} + $ft{'stream_memory'} + $ft{'execution'} + $ft{'graph'} + $ft{'occupancy'} + $ft{'texture'} + $ft{'surface'} + $ft{'tensor'} + $ft{'peer'} + $ft{'graphics'} + $ft{'driver_entry_point'} + $ft{'coredump'} + $ft{'driver_interact'} + $ft{'profiler'} + $ft{'openGL'} + $ft{'D3D9'} + $ft{'D3D10'} + $ft{'D3D11'} + $ft{'VDPAU'} + $ft{'EGL'} + $ft{'thread'} + $ft{'complex'} + $ft{'library'} + $ft{'device_library'} + $ft{'device_type'} + $ft{'include'} + $ft{'include_cuda_main_header'} + $ft{'include_cuda_main_header_v2'} + $ft{'type'} + $ft{'literal'} + $ft{'numeric_literal'} + $ft{'define'};
+                my $apiCalls   = $ft{'error'} + $ft{'init'} + $ft{'version'} + $ft{'device'} + $ft{'context'} + $ft{'module'} + $ft{'library'} + $ft{'memory'} + $ft{'virtual_memory'} + $ft{'ordered_memory'} + $ft{'multicast'} + $ft{'unified'} + $ft{'stream'} + $ft{'event'} + $ft{'external_resource'} + $ft{'stream_memory'} + $ft{'execution'} + $ft{'graph'} + $ft{'occupancy'} + $ft{'texture'} + $ft{'surface'} + $ft{'tensor'} + $ft{'peer'} + $ft{'graphics'} + $ft{'driver_entry_point'} + $ft{'cpp'} + $ft{'coredump'} + $ft{'driver_interact'} + $ft{'profiler'} + $ft{'openGL'} + $ft{'D3D9'} + $ft{'D3D10'} + $ft{'D3D11'} + $ft{'VDPAU'} + $ft{'EGL'} + $ft{'thread'} + $ft{'complex'} + $ft{'library'} + $ft{'device_library'} + $ft{'device_type'} + $ft{'include'} + $ft{'include_cuda_main_header'} + $ft{'include_cuda_main_header_v2'} + $ft{'type'} + $ft{'literal'} + $ft{'numeric_literal'} + $ft{'define'};
                 my $kernStuff  = $hasDeviceCode + $ft{'kernel_launch'} + $ft{'device_function'};
                 my $totalCalls = $apiCalls + $kernStuff;
                 $is_dos = m/\r\n$/;

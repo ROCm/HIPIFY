@@ -225,6 +225,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CUlaunchMemSyncDomainMap
   {"cudaLaunchMemSyncDomainMap",                                       {"hipLaunchMemSyncDomainMap",                                "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
+  // the same CUkern_st
+  {"CUkern_st",                                                        {"hipKernel",                                                "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // CUkernel
+  {"cudaKernel_t",                                                     {"hipKernel",                                                "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+
   // 2. Unions
 
   // CUstreamAttrValue
@@ -591,6 +596,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaDevAttrIpcEventSupport",                                       {"hipDevAttrIpcEventSupport",                                "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 125
   // CU_DEVICE_ATTRIBUTE_MEM_SYNC_DOMAIN_COUNT
   {"cudaDevAttrMemSyncDomainCount",                                    {"hipDevAttrMemSyncDomainCount",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 126
+  // CU_DEVICE_ATTRIBUTE_TENSOR_MAP_ACCESS_SUPPORTED
+  {"cudaDevAttrReserved127",                                           {"hipDeviceAttributeTensorMapAccessSupported",               "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 127
+  //
+  {"cudaDevAttrReserved128",                                           {"hipDevAttrReserved128",                                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 128
+  // CU_DEVICE_ATTRIBUTE_UNIFIED_FUNCTION_POINTERS
+  {"cudaDevAttrReserved129",                                           {"hipDeviceAttributeUnifiedFunctionPointers",                "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 129
+  // CU_DEVICE_ATTRIBUTE_MULTICAST_SUPPORTED
+  {"cudaDevAttrReserved132",                                           {"hipDeviceAttributeMulticastSupported",                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 132
   // CU_DEVICE_ATTRIBUTE_MAX
   {"cudaDevAttrMax",                                                   {"hipDeviceAttributeMax",                                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
@@ -930,6 +943,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaErrorJitCompilationDisabled",                                  {"hipErrorJitCompilationDisabled",                           "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 223
   // CUDA_ERROR_UNSUPPORTED_EXEC_AFFINITY
   {"cudaErrorUnsupportedExecAffinity",                                 {"hipErrorUnsupportedExecAffinity",                          "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 224
+  // CUDA_ERROR_UNSUPPORTED_DEVSIDE_SYNC
+  {"cudaErrorUnsupportedDevSideSync",                                  {"hipErrorUnsupportedDevSideSync",                           "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 225
   // CUDA_ERROR_INVALID_SOURCE
   {"cudaErrorInvalidSource",                                           {"hipErrorInvalidSource",                                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}}, // 300
   // CUDA_ERROR_FILE_NOT_FOUND
@@ -1869,6 +1884,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CU_CTX_LMEM_RESIZE_TO_MAX
   // NOTE: hipDeviceLmemResizeToMax = 0x16
   {"cudaDeviceLmemResizeToMax",                                        {"hipDeviceLmemResizeToMax",                                 "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES}}, // 0x10
+  // CU_CTX_SYNC_MEMOPS
+  {"cudaDeviceSyncMemops",                                             {"hipDeviceSyncMemops",                                      "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0x80
   // CU_CTX_MAP_HOST
   {"cudaDeviceMapHost",                                                {"hipDeviceMapHost",                                         "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES}}, // 0x08
   // CU_CTX_FLAGS_MASK
@@ -2492,6 +2509,14 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_TYPE_NAME_VER_MAP 
   {"cudaKernelNodeAttributeMemSyncDomain",                             {CUDA_120, CUDA_0,   CUDA_0  }},
   {"texture",                                                          {CUDA_0,   CUDA_0,   CUDA_120}},
   {"surfaceReference",                                                 {CUDA_0,   CUDA_0,   CUDA_120}},
+  {"cudaDeviceSyncMemops",                                             {CUDA_121, CUDA_0,   CUDA_0  }},
+  {"cudaErrorUnsupportedDevSideSync",                                  {CUDA_121, CUDA_0,   CUDA_0  }},
+  {"cudaDevAttrReserved127",                                           {CUDA_121, CUDA_0,   CUDA_0  }},
+  {"cudaDevAttrReserved128",                                           {CUDA_121, CUDA_0,   CUDA_0  }},
+  {"cudaDevAttrReserved129",                                           {CUDA_121, CUDA_0,   CUDA_0  }},
+  {"cudaDevAttrReserved132",                                           {CUDA_121, CUDA_0,   CUDA_0  }},
+  {"CUkern_st",                                                        {CUDA_121, CUDA_0,   CUDA_0  }},
+  {"cudaKernel_t",                                                     {CUDA_121, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {

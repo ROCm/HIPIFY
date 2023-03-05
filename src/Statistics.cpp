@@ -53,6 +53,7 @@ const char *counterNames[NUM_CONV_TYPES] = {
   "peer", // CONV_PEER
   "graphics", // CONV_GRAPHICS
   "driver_entry_point", // CONV_DRIVER_ENTRY_POINT
+  "cpp", // CONV_CPP
   "coredump", // CONV_COREDUMP
   "driver_interact", // CONV_DRIVER_INTERACT
   "profiler", // CONV_PROFILER
@@ -105,6 +106,7 @@ const char *counterTypes[NUM_CONV_TYPES] = {
   "CONV_PEER",
   "CONV_GRAPHICS",
   "CONV_DRIVER_ENTRY_POINT",
+  "CONV_CPP",
   "CONV_COREDUMP",
   "CONV_DRIVER_INTERACT",
   "CONV_PROFILER",

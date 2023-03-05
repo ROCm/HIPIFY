@@ -842,7 +842,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   {"cudaGetDriverEntryPoint",                                 {"hipGetProcAddress",                                      "", CONV_DRIVER_ENTRY_POINT, API_RUNTIME, SEC::DRIVER_ENTRY_POINT, HIP_UNSUPPORTED}},
 
   // 30. C++ API Routines
-  // TODO
+  {"cudaGetKernel",                                           {"hipGetKernel",                                           "", CONV_CPP, API_RUNTIME, SEC::CPP, HIP_UNSUPPORTED}},
 
   // 31. Interactions with the CUDA Driver API
   {"cudaGetFuncBySymbol",                                     {"hipGetFuncBySymbol",                                     "", CONV_DRIVER_INTERACT, API_RUNTIME, SEC::DRIVER_INTERACT, HIP_UNSUPPORTED}},
@@ -1109,6 +1109,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_FUNCTION_VER_MAP {
   {"cudaStreamGetId",                                         {CUDA_120, CUDA_0,   CUDA_0  }},
   {"cudaGraphInstantiateWithParams",                          {CUDA_120, CUDA_0,   CUDA_0  }},
   {"cudaGraphExecGetFlags",                                   {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"cudaGetKernel",                                           {CUDA_121, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP {
