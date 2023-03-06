@@ -7078,6 +7078,7 @@ sub warnUnsupportedFunctions {
         "_CUB_ASM_PTR_SIZE_",
         "_CUB_ASM_PTR_",
         "PATCH_LEVEL",
+        "NVRTC_ERROR_TIME_FILE_WRITE_FAILED",
         "NVCL_EVENT_SCHED_YIELD",
         "NVCL_EVENT_SCHED_SPIN",
         "NVCL_EVENT_SCHED_BLOCKING_SYNC",

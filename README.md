@@ -184,7 +184,7 @@ After applying all the matchers, the output HIP source is produced.
     </tr>
     <tr align="center">
       <td><a href="https://github.com/llvm/llvm-project">17.0.0git</a></td>
-      <td><a href="https://developer.nvidia.com/cuda-downloads">12.0.1</a>****</td>
+      <td><a href="https://developer.nvidia.com/cuda-downloads">12.1.0</a>****</td>
       <td>+</td>
       <td>+</td>
     </tr>
@@ -197,7 +197,7 @@ After applying all the matchers, the output HIP source is produced.
 
 `***`  Download the patch and unpack it into your `LLVM source directory`: the file `Cuda.cpp` will be overwritten; needs further rebuilding of `LLVM`.
 
-`****` [CUDA 12.0.1](https://developer.nvidia.com/cuda-downloads) is supported experimentally by `hipify-clang` built against the latest [LLVM 17.0.0git](https://github.com/llvm/llvm-project) sources.
+`****` [CUDA 12.1.0](https://developer.nvidia.com/cuda-downloads) is supported experimentally by `hipify-clang` built against the latest [LLVM 17.0.0git](https://github.com/llvm/llvm-project) sources.
 
 In most cases, you can get a suitable version of `LLVM+CLANG` with your package manager.
 
@@ -583,7 +583,7 @@ Testing Time: 6.94s
 | 12.0.0 - 13.0.1 | 7.0 - 11.5.1 | 7.6.5  - 8.3.2 | 2017.15.9.43, 2019.16.11.9               | 3.22.2         | 3.10.2       |
 | 14.0.0 - 14.0.6 | 7.0 - 11.7.1 | 8.0.5  - 8.4.1 | 2017.15.9.49, 2019.16.11.17, 2022.17.2.6 | 3.24.0         | 3.10.6       |
 | 15.0.0 - 15.0.7 | 7.0 - 11.8.0 | 8.0.5  - 8.7.0 | 2017.15.9.51, 2019.16.11.23, 2022.17.4.4 | 3.25.2         | 3.11.2       |
-| 17.0.0git       | 7.0 - 12.0.1 | 8.0.5  - 8.7.0 | 2017.15.9.52, 2019.16.11.24, 2022.17.5.0 | 3.25.2         | 3.11.2       |
+| 17.0.0git       | 7.0 - 12.1.0 | 8.0.5  - 8.7.0 | 2017.15.9.52, 2019.16.11.24, 2022.17.5.0 | 3.25.2         | 3.11.2       |
 
 *Building with testing support by `Visual Studio 17 2022` on `Windows 10`:*
 
