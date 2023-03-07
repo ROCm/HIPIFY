@@ -53,6 +53,7 @@ extern cl::opt<bool> TranslateToRoc;
 extern cl::opt<bool> TranslateToMIOpen;
 extern cl::opt<bool> DashDash;
 extern cl::opt<bool> SkipExcludedPPConditionalBlocks;
+extern cl::opt<bool> DefaultPreprocessor;
 extern cl::opt<std::string> CudaGpuArch;
 extern cl::opt<bool> GenerateMarkdown;
 extern cl::opt<bool> GenerateCSV;
