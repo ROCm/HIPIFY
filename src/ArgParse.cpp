@@ -144,6 +144,11 @@ cl::opt<bool> SkipExcludedPPConditionalBlocks("skip-excluded-preprocessor-condit
   cl::value_desc("skip-excluded-preprocessor-conditional-blocks"),
   cl::cat(ToolTemplateCategory));
 
+cl::opt<bool> DefaultPreprocessor("default-preprocessor",
+  cl::desc("Enable default preprocessor behaviour (synonymous with '--skip-excluded-preprocessor-conditional-blocks')"),
+  cl::value_desc("default-preprocessor"),
+  cl::cat(ToolTemplateCategory));
+
 cl::opt<std::string> CudaGpuArch("cuda-gpu-arch",
   cl::desc("CUDA GPU architecture (e.g. sm_35);\nmay be specified more than once"),
   cl::value_desc("value"),
