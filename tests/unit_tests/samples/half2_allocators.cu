@@ -25,8 +25,10 @@ __global__ void add(int n, T *x, T *y) {
   half2 tmp = __float2half2_rn(0.0f);
   // CHECK: float max_val = fmax((float)reinterpret_cast<half&>(tmp.x), (float)reinterpret_cast<half&>(tmp.y));
   float max_val = fmax((float)tmp.x, (float)tmp.y);
+  // CHECK: float min_val = fmin((float)reinterpret_cast<half&>(tmp.x), (float)reinterpret_cast<half&>(tmp.y));
+  float min_val = fmin((float)reinterpret_cast<half&>(tmp.x), (float)reinterpret_cast<half&>(tmp.y));
   for (int i = index; i < n; i += stride)
-      y[i] = x[i] + y[i];
+      y[i] = max_val - min_val + x[i] + y[i];
 }
 
 int main(int argc, char* argv[]) {
