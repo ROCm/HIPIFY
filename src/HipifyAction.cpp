@@ -622,7 +622,16 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
   Finder->addMatcher(mat::cudaKernelCallExpr(mat::isExpansionInMainFile()).bind(sCudaLaunchKernel), this);
   Finder->addMatcher(
     mat::memberExpr(
-      mat::isExpansionInMainFile()
+      mat::isExpansionInMainFile(),
+      mat::unless(
+        mat::hasParent(
+          mat::cxxReinterpretCastExpr(
+            mat::hasDestinationType(
+              mat::referenceType()
+            )
+          )
+        )
+      )
     ).bind(sHalf2Member),
     this
   );
