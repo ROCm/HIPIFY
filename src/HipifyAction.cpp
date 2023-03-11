@@ -74,6 +74,7 @@ const StringRef sCudaDeviceFuncCall = "cudaDeviceFuncCall";
 const StringRef sCubNamespacePrefix = "cubNamespacePrefix";
 const StringRef sCubFunctionTemplateDecl = "cubFunctionTemplateDecl";
 const StringRef sCubUsingNamespaceDecl = "cubUsingNamespaceDecl";
+const StringRef sHalf2Member = "half2Member";
 
 std::string getCastType(hipify::CastTypes c) {
   switch (c) {
@@ -583,6 +584,29 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
   return false;
 }
 
+bool HipifyAction::half2Member(const mat::MatchFinder::MatchResult &Result) {
+  if (auto *expr = Result.Nodes.getNodeAs<clang::MemberExpr>(sHalf2Member)) {
+    auto *baseExpr = expr->getBase();
+    if (!baseExpr) return false;
+    clang::QualType QT = baseExpr->getType();
+    if (QT.getAsString() != "half2") return false;
+    auto *val = expr->getMemberDecl();
+    if (!val) return false;
+    std::string valName = val->getNameAsString();
+    if (valName != "x" && valName != "y") return false;
+    const clang::SourceRange sr = expr->getSourceRange();
+    std::string exprName = readSourceText(*Result.SourceManager, sr).str();
+    clang::SmallString<40> XStr;
+    llvm::raw_svector_ostream OS(XStr);
+    OS << "reinterpret_cast<half&>(" << exprName << ")";
+    ct::Replacement Rep(*Result.SourceManager, sr.getBegin(), exprName.size(), OS.str());
+    clang::FullSourceLoc fullSL(sr.getBegin(), *Result.SourceManager);
+    insertReplacement(Rep, fullSL);
+    return true;
+  }
+  return false;
+}
+
 void HipifyAction::insertReplacement(const ct::Replacement &rep, const clang::FullSourceLoc &fullSL) {
   llcompat::insertReplacement(*replacements, rep);
   if (PrintStats || PrintStatsCSV) {
@@ -596,6 +620,12 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
   Finder.reset(new mat::MatchFinder);
   // Replace the <<<...>>> language extension with a hip kernel launch
   Finder->addMatcher(mat::cudaKernelCallExpr(mat::isExpansionInMainFile()).bind(sCudaLaunchKernel), this);
+  Finder->addMatcher(
+    mat::memberExpr(
+      mat::isExpansionInMainFile()
+    ).bind(sHalf2Member),
+    this
+  );
   Finder->addMatcher(
     mat::callExpr(
       mat::isExpansionInMainFile(),
@@ -793,4 +823,5 @@ void HipifyAction::run(const mat::MatchFinder::MatchResult &Result) {
   if (cubNamespacePrefix(Result)) return;
   if (cubFunctionTemplateDecl(Result)) return;
   if (cubUsingNamespaceDecl(Result)) return;
+  if (half2Member(Result)) return;
 }
