@@ -623,21 +623,23 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
   Finder.reset(new mat::MatchFinder);
   // Replace the <<<...>>> language extension with a hip kernel launch
   Finder->addMatcher(mat::cudaKernelCallExpr(mat::isExpansionInMainFile()).bind(sCudaLaunchKernel), this);
-  Finder->addMatcher(
-    mat::memberExpr(
-      mat::isExpansionInMainFile(),
-      mat::unless(
-        mat::hasParent(
-          mat::cxxReinterpretCastExpr(
-            mat::hasDestinationType(
-              mat::referenceType()
+  if (!NoUndocumented) {
+    Finder->addMatcher(
+      mat::memberExpr(
+        mat::isExpansionInMainFile(),
+        mat::unless(
+          mat::hasParent(
+            mat::cxxReinterpretCastExpr(
+              mat::hasDestinationType(
+                mat::referenceType()
+              )
             )
           )
         )
-      )
-    ).bind(sHalf2Member),
-    this
-  );
+      ).bind(sHalf2Member),
+      this
+    );
+  }
   Finder->addMatcher(
     mat::callExpr(
       mat::isExpansionInMainFile(),
@@ -835,5 +837,5 @@ void HipifyAction::run(const mat::MatchFinder::MatchResult &Result) {
   if (cubNamespacePrefix(Result)) return;
   if (cubFunctionTemplateDecl(Result)) return;
   if (cubUsingNamespaceDecl(Result)) return;
-  if (half2Member(Result)) return;
+  if (!NoUndocumented && half2Member(Result)) return;
 }
