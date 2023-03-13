@@ -177,6 +177,12 @@ bool generatePython() {
   return bToPython;
 }
 
+void printVersions() {
+  llvm::errs() << "\n" << sHipify << "Supports ROCm HIP from " << Statistics::getHipVersion(hipVersions::HIP_5000) << " up to " << Statistics::getHipVersion(hipVersions::HIP_LATEST);
+  llvm::errs() << "\n" << sHipify << "Supports CUDA Toolkit from " << Statistics::getCudaVersion(cudaVersions::CUDA_70) << " up to " << Statistics::getCudaVersion(cudaVersions::CUDA_LATEST);
+  llvm::errs() << "\n" << sHipify << "Supports cuDNN from " << Statistics::getCudaVersion(cudaVersions::CUDNN_705) << " up to " << Statistics::getCudaVersion(cudaVersions::CUDNN_LATEST) << " \n";
+}
+
 int main(int argc, const char **argv) {
   std::vector<const char*> new_argv(argv, argv + argc);
   std::string sCompilationDatabaseDir;
@@ -236,10 +242,11 @@ int main(int argc, const char **argv) {
   } else {
     fileSources = OptionsParser.getSourcePathList();
   }
-  if (fileSources.empty() && !GeneratePerl && !GeneratePython && !GenerateMarkdown && !GenerateCSV) {
+  if (fileSources.empty() && !GeneratePerl && !GeneratePython && !GenerateMarkdown && !GenerateCSV && !Versions) {
     llvm::errs() << "\n" << sHipify << sError << "Must specify at least 1 positional argument for source file" << "\n";
     return 1;
   }
+  if (Versions) printVersions();
   if (!GenerateMarkdown && !GenerateCSV && !DocFormat.empty()) {
     llvm::errs() << "\n" << sHipify << sError << "Must specify a document type to generate: \"md\" and | or \"csv\"" << "\n";
     return 1;

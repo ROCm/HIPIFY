@@ -63,3 +63,4 @@ extern cl::opt<bool> CudaKernelExecutionSyntax;
 extern cl::opt<bool> HipKernelExecutionSyntax;
 extern const std::vector<std::string> hipifyOptions;
 extern const std::vector<std::string> hipifyOptionsWithTwoArgs;
+extern cl::opt<bool> Versions;
