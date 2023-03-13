@@ -187,6 +187,11 @@ cl::opt<bool> HipKernelExecutionSyntax("hip-kernel-execution-syntax",
   cl::value_desc("hip-kernel-execution-syntax"),
   cl::cat(ToolTemplateCategory));
 
+cl::opt<bool> Versions("versions",
+  cl::desc("Display the versions of the supported 3rd-party software"),
+  cl::value_desc("versions"),
+  cl::cat(ToolTemplateCategory));
+
 cl::extrahelp CommonHelp(ct::CommonOptionsParser::HelpMessage);
 
 const std::vector<std::string> hipifyOptions {
@@ -209,6 +214,7 @@ const std::vector<std::string> hipifyOptions {
   std::string(SaveTemps.ArgStr),
   std::string(DocFormat.ArgStr),
   std::string(Experimental.ArgStr),
+  std::string(Versions.ArgStr),
 };
 
 const std::vector<std::string> hipifyOptionsWithTwoArgs {
