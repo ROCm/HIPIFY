@@ -34,15 +34,15 @@ const char *counterNames[NUM_CONV_TYPES] = {
   "device", // CONV_DEVICE
   "context", // CONV_CONTEXT
   "module", // CONV_MODULE
-  "library_management", // CONV_LIBRARY
+  "library", // CONV_LIBRARY
   "memory", // CONV_MEMORY
   "virtual_memory", // CONV_VIRTUAL_MEMORY
-  "stream_ordered_memory", // CONV_STREAM_ORDERED_MEMORY
-  "multicast_object_managenet", // CONV_MULTICAST_OBJECT_MANAGEMENT
-  "addressing", // CONV_ADDRESSING
+  "ordered_memory", // CONV_ORDERED_MEMORY
+  "multicast", // CONV_MULTICAST
+  "unified", // CONV_UNIFIED
   "stream", // CONV_STREAM
   "event", // CONV_EVENT
-  "external_resource_interop", // CONV_EXT_RES
+  "external_resource", // CONV_EXTERNAL_RES
   "stream_memory", // CONV_STREAM_MEMORY
   "execution", // CONV_EXECUTION
   "graph", // CONV_GRAPH
@@ -53,8 +53,9 @@ const char *counterNames[NUM_CONV_TYPES] = {
   "peer", // CONV_PEER
   "graphics", // CONV_GRAPHICS
   "driver_entry_point", // CONV_DRIVER_ENTRY_POINT
+  "cpp", // CONV_CPP
   "coredump", // CONV_COREDUMP
-  "interactions", // CONV_INTERACTION
+  "driver_interact", // CONV_DRIVER_INTERACT
   "profiler", // CONV_PROFILER
   "openGL", // CONV_OPENGL
   "D3D9", // CONV_D3D9
@@ -86,22 +87,28 @@ const char *counterTypes[NUM_CONV_TYPES] = {
   "CONV_DEVICE",
   "CONV_CONTEXT",
   "CONV_MODULE",
+  "CONV_LIBRARY",
   "CONV_MEMORY",
   "CONV_VIRTUAL_MEMORY",
-  "CONV_STREAM_ORDERED_MEMORY",
-  "CONV_ADDRESSING",
+  "CONV_ORDERED_MEMORY",
+  "CONV_MULTICAST",
+  "CONV_UNIFIED",
   "CONV_STREAM",
   "CONV_EVENT",
-  "CONV_EXT_RES",
+  "CONV_EXTERNAL_RES",
   "CONV_STREAM_MEMORY",
   "CONV_EXECUTION",
   "CONV_GRAPH",
   "CONV_OCCUPANCY",
   "CONV_TEXTURE",
   "CONV_SURFACE",
+  "CONV_TENSOR",
   "CONV_PEER",
   "CONV_GRAPHICS",
-  "CONV_INTERACTION",
+  "CONV_DRIVER_ENTRY_POINT",
+  "CONV_CPP",
+  "CONV_COREDUMP",
+  "CONV_DRIVER_INTERACT",
   "CONV_PROFILER",
   "CONV_OPENGL",
   "CONV_D3D9",
@@ -113,6 +120,8 @@ const char *counterTypes[NUM_CONV_TYPES] = {
   "CONV_COMPLEX",
   "CONV_LIB_FUNC",
   "CONV_LIB_DEVICE_FUNC",
+  "CONV_DEVICE_FUNC",
+  "CONV_DEVICE_TYPE",
   "CONV_INCLUDE",
   "CONV_INCLUDE_CUDA_MAIN_H",
   "CONV_INCLUDE_CUDA_MAIN_V2_H",
