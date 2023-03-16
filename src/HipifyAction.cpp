@@ -602,9 +602,11 @@ bool HipifyAction::half2Member(const mat::MatchFinder::MatchResult &Result) {
     ct::Replacement Rep(*Result.SourceManager, sr.getBegin(), exprName.size(), OS.str());
     clang::FullSourceLoc fullSL(sr.getBegin(), *Result.SourceManager);
     insertReplacement(Rep, fullSL);
-    clang::DiagnosticsEngine& DE = getCompilerInstance().getDiagnostics();
-    const auto ID = DE.getCustomDiagID(clang::DiagnosticsEngine::Warning, "Undocumented feature. CUDA API does not explicitly define the 'x' and 'y' members of 'half2' and the access through the dot operator, while in practice, nvcc supports it and treats them as 'half'. AMD HIP does define the 'x' and 'y' members of 'half2' as 'unsigned short'. Thus, without 'reinterpret_cast' to 'half' of the 'half2' members, the resulting values in the hipified code are incorrect and differ from CUDA ones. The '%0' will be transformed to 'reinterpret_cast<half&>(%0)'.");
-    DE.Report(fullSL, ID) << exprName;
+    if (!NoWarningsUndocumented) {
+      clang::DiagnosticsEngine& DE = getCompilerInstance().getDiagnostics();
+      const auto ID = DE.getCustomDiagID(clang::DiagnosticsEngine::Warning, "Undocumented feature. CUDA API does not explicitly define the 'x' and 'y' members of 'half2' and the access through the dot operator, while in practice, nvcc supports it and treats them as 'half'. AMD HIP does define the 'x' and 'y' members of 'half2' as 'unsigned short'. Thus, without 'reinterpret_cast' to 'half' of the 'half2' members, the resulting values in the hipified code are incorrect and differ from CUDA ones. The '%0' will be transformed to 'reinterpret_cast<half&>(%0)'.");
+      DE.Report(fullSL, ID) << exprName;
+    }
     return true;
   }
   return false;

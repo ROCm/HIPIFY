@@ -182,6 +182,12 @@ cl::opt<bool> NoUndocumented("no-undocumented-features",
   cl::init(false),
   cl::cat(ToolTemplateCategory));
 
+cl::opt<bool> NoWarningsUndocumented("no-warnings-on-undocumented-features",
+  cl::desc("Suppress warnings on undocumented features in code transformation"),
+  cl::value_desc("no-warnings-on-undocumented-features"),
+  cl::init(false),
+  cl::cat(ToolTemplateCategory));
+
 cl::opt<bool> CudaKernelExecutionSyntax("cuda-kernel-execution-syntax",
   cl::desc("Keep CUDA kernel launch syntax (default)"),
   cl::value_desc("cuda-kernel-execution-syntax"),
@@ -222,6 +228,7 @@ const std::vector<std::string> hipifyOptions {
   std::string(Experimental.ArgStr),
   std::string(Versions.ArgStr),
   std::string(NoUndocumented.ArgStr),
+  std::string(NoWarningsUndocumented.ArgStr),
 };
 
 const std::vector<std::string> hipifyOptionsWithTwoArgs {
