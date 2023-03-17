@@ -90,6 +90,8 @@ GetOptions(
 $cuda_kernel_execution_syntax = 1;
 
 my %deprecated_funcs = (
+    "nvrtcGetNVVMSize" => "12.0",
+    "nvrtcGetNVVM" => "12.0",
     "cusparseZsctr" => "11.0",
     "cusparseZhybsv_solve" => "10.2",
     "cusparseZhybsv_analysis" => "10.2",
@@ -552,6 +554,8 @@ my %deprecated_funcs = (
 );
 
 my %removed_funcs = (
+    "texture" => "12.0",
+    "surfaceReference" => "12.0",
     "cusparseZsctr" => "12.0",
     "cusparseZhybsv_solve" => "11.0",
     "cusparseZhybsv_analysis" => "11.0",
@@ -777,6 +781,7 @@ my %removed_funcs = (
     "cudnnConvolutionBwdDataPreference_t" => "8.0.1",
     "cudaUnbindTexture" => "12.0",
     "cudaSetupArgument" => "10.1",
+    "cudaProfilerInitialize" => "12.0",
     "cudaOutputMode_t" => "12.0",
     "cudaOutputMode" => "12.0",
     "cudaLaunch" => "10.1",
@@ -852,9 +857,18 @@ my %removed_funcs = (
 );
 
 my %experimental_funcs = (
+    "cudaOccupancyMaxPotentialBlockSizeVariableSMemWithFlags" => "5.5.0",
+    "cudaOccupancyMaxPotentialBlockSizeVariableSMem" => "5.5.0",
     "cudaOccupancyDisableCachingOverride" => "5.5.0",
+    "cudaMemAllocNodeParams" => "5.5.0",
     "cudaGraphNodeTypeMemFree" => "5.5.0",
     "cudaGraphNodeTypeMemAlloc" => "5.5.0",
+    "cudaGraphNodeSetEnabled" => "5.5.0",
+    "cudaGraphNodeGetEnabled" => "5.5.0",
+    "cudaGraphMemFreeNodeGetParams" => "5.5.0",
+    "cudaGraphMemAllocNodeGetParams" => "5.5.0",
+    "cudaGraphKernelNodeCopyAttributes" => "5.5.0",
+    "cudaGraphDebugDotPrint" => "5.5.0",
     "cudaGraphDebugDotFlagsVerbose" => "5.5.0",
     "cudaGraphDebugDotFlagsMemsetNodeParams" => "5.5.0",
     "cudaGraphDebugDotFlagsMemcpyNodeParams" => "5.5.0",
@@ -866,9 +880,20 @@ my %experimental_funcs = (
     "cudaGraphDebugDotFlagsExtSemasSignalNodeParams" => "5.5.0",
     "cudaGraphDebugDotFlagsEventNodeParams" => "5.5.0",
     "cudaGraphDebugDotFlags" => "5.5.0",
+    "cudaGraphAddMemFreeNode" => "5.5.0",
+    "cudaGraphAddMemAllocNode" => "5.5.0",
     "cudaExternalMemoryDedicated" => "5.5.0",
     "cuPointerSetAttribute" => "5.5.0",
+    "cuLaunchCooperativeKernelMultiDevice" => "5.5.0",
     "cuLaunchCooperativeKernel" => "5.5.0",
+    "cuGraphNodeSetEnabled" => "5.5.0",
+    "cuGraphNodeGetEnabled" => "5.5.0",
+    "cuGraphMemFreeNodeGetParams" => "5.5.0",
+    "cuGraphMemAllocNodeGetParams" => "5.5.0",
+    "cuGraphKernelNodeCopyAttributes" => "5.5.0",
+    "cuGraphDebugDotPrint" => "5.5.0",
+    "cuGraphAddMemFreeNode" => "5.5.0",
+    "cuGraphAddMemAllocNode" => "5.5.0",
     "CUgraphDebugDot_flags_enum" => "5.5.0",
     "CUgraphDebugDot_flags" => "5.5.0",
     "CU_OCCUPANCY_DISABLE_CACHING_OVERRIDE" => "5.5.0",
@@ -884,6 +909,11 @@ my %experimental_funcs = (
     "CU_GRAPH_DEBUG_DOT_FLAGS_EXT_SEMAS_WAIT_NODE_PARAMS" => "5.5.0",
     "CU_GRAPH_DEBUG_DOT_FLAGS_EXT_SEMAS_SIGNAL_NODE_PARAMS" => "5.5.0",
     "CU_GRAPH_DEBUG_DOT_FLAGS_EVENT_NODE_PARAMS" => "5.5.0",
+    "CUDA_MEM_ALLOC_NODE_PARAMS_st" => "5.5.0",
+    "CUDA_MEM_ALLOC_NODE_PARAMS" => "5.5.0",
+    "CUDA_LAUNCH_PARAMS_v1" => "5.5.0",
+    "CUDA_LAUNCH_PARAMS_st" => "5.5.0",
+    "CUDA_LAUNCH_PARAMS" => "5.5.0",
     "CUDA_EXTERNAL_MEMORY_DEDICATED" => "5.5.0"
 );
 
@@ -952,7 +982,7 @@ push(@exclude_filelist, split(',', $exclude_files));
 %exclude_dirhash = map { $_ => 1 } @exclude_dirlist;
 %exclude_filehash = map { $_ => 1 } @exclude_filelist;
 
-@statNames = ("error", "init", "version", "device", "context", "module", "library_management", "memory", "virtual_memory", "stream_ordered_memory", "addressing", "stream", "event", "external_resource_interop", "stream_memory", "execution", "graph", "occupancy", "texture", "surface", "tensor", "peer", "graphics", "interactions", "profiler", "openGL", "D3D9", "D3D10", "D3D11", "VDPAU", "EGL", "thread", "complex", "library", "device_library", "device_function", "device_type", "include", "include_cuda_main_header", "include_cuda_main_header_v2", "type", "literal", "numeric_literal", "define", "extern_shared", "kernel_launch");
+@statNames = ("error", "init", "version", "device", "context", "module", "library", "memory", "virtual_memory", "ordered_memory", "multicast", "unified", "stream", "event", "external_resource", "stream_memory", "execution", "graph", "occupancy", "texture", "surface", "tensor", "peer", "graphics", "driver_entry_point", "cpp", "coredump", "driver_interact", "profiler", "openGL", "D3D9", "D3D10", "D3D11", "VDPAU", "EGL", "thread", "complex", "library", "device_library", "device_function", "device_type", "include", "include_cuda_main_header", "include_cuda_main_header_v2", "type", "literal", "numeric_literal", "define", "extern_shared", "kernel_launch");
 
 sub totalStats {
     my %count = %{shift()};
@@ -1022,14 +1052,36 @@ sub subst {
 }
 
 sub experimentalSubstitutions {
-    subst("cuPointerSetAttribute", "hipPointerSetAttribute", "addressing");
+    subst("cuPointerSetAttribute", "hipPointerSetAttribute", "unified");
     subst("cuLaunchCooperativeKernel", "hipModuleLaunchCooperativeKernel", "execution");
-    subst("CUDA_MEM_ALLOC_NODE_PARAMS", "hipMemallocNodeParams", "type");
-    subst("CUDA_MEM_ALLOC_NODE_PARAMS_st", "hipMemallocNodeParams", "type");
+    subst("cuLaunchCooperativeKernelMultiDevice", "hipModuleLaunchCooperativeKernelMultiDevice", "execution");
+    subst("cuGraphAddMemAllocNode", "hipGraphAddMemAllocNode", "graph");
+    subst("cuGraphAddMemFreeNode", "hipGraphAddMemFreeNode", "graph");
+    subst("cuGraphDebugDotPrint", "hipGraphDebugDotPrint", "graph");
+    subst("cuGraphKernelNodeCopyAttributes", "hipGraphKernelNodeCopyAttributes", "graph");
+    subst("cuGraphMemAllocNodeGetParams", "hipGraphMemAllocNodeGetParams", "graph");
+    subst("cuGraphMemFreeNodeGetParams", "hipGraphMemFreeNodeGetParams", "graph");
+    subst("cuGraphNodeGetEnabled", "hipGraphNodeGetEnabled", "graph");
+    subst("cuGraphNodeSetEnabled", "hipGraphNodeSetEnabled", "graph");
+    subst("cudaGraphAddMemAllocNode", "hipGraphAddMemAllocNode", "graph");
+    subst("cudaGraphAddMemFreeNode", "hipGraphAddMemFreeNode", "graph");
+    subst("cudaGraphDebugDotPrint", "hipGraphDebugDotPrint", "graph");
+    subst("cudaGraphKernelNodeCopyAttributes", "hipGraphKernelNodeCopyAttributes", "graph");
+    subst("cudaGraphMemAllocNodeGetParams", "hipGraphMemAllocNodeGetParams", "graph");
+    subst("cudaGraphMemFreeNodeGetParams", "hipGraphMemFreeNodeGetParams", "graph");
+    subst("cudaGraphNodeGetEnabled", "hipGraphNodeGetEnabled", "graph");
+    subst("cudaGraphNodeSetEnabled", "hipGraphNodeSetEnabled", "graph");
+    subst("cudaOccupancyMaxPotentialBlockSizeVariableSMem", "hipOccupancyMaxPotentialBlockSizeVariableSMem", "occupancy");
+    subst("cudaOccupancyMaxPotentialBlockSizeVariableSMemWithFlags", "hipOccupancyMaxPotentialBlockSizeVariableSMemWithFlags", "occupancy");
+    subst("CUDA_LAUNCH_PARAMS", "hipFunctionLaunchParams", "type");
+    subst("CUDA_LAUNCH_PARAMS_st", "hipFunctionLaunchParams_t", "type");
+    subst("CUDA_LAUNCH_PARAMS_v1", "hipFunctionLaunchParams", "type");
+    subst("CUDA_MEM_ALLOC_NODE_PARAMS", "hipMemAllocNodeParams", "type");
+    subst("CUDA_MEM_ALLOC_NODE_PARAMS_st", "hipMemAllocNodeParams", "type");
     subst("CUgraphDebugDot_flags", "hipGraphDebugDotFlags", "type");
     subst("CUgraphDebugDot_flags_enum", "hipGraphDebugDotFlags", "type");
     subst("cudaGraphDebugDotFlags", "hipGraphDebugDotFlags", "type");
-    subst("cudaMemAllocNodeParams", "hipMemallocNodeParams", "type");
+    subst("cudaMemAllocNodeParams", "hipMemAllocNodeParams", "type");
     subst("CU_GRAPH_DEBUG_DOT_FLAGS_EVENT_NODE_PARAMS", "hipGraphDebugDotFlagsEventNodeParams", "numeric_literal");
     subst("CU_GRAPH_DEBUG_DOT_FLAGS_EXT_SEMAS_SIGNAL_NODE_PARAMS", "hipGraphDebugDotFlagsExtSemasSignalNodeParams", "numeric_literal");
     subst("CU_GRAPH_DEBUG_DOT_FLAGS_EXT_SEMAS_WAIT_NODE_PARAMS", "hipGraphDebugDotFlagsExtSemasWaitNodeParams", "numeric_literal");
@@ -1536,7 +1588,6 @@ sub simpleSubstitutions {
     subst("cudaDeviceSetMemPool", "hipDeviceSetMemPool", "device");
     subst("cudaDeviceSetSharedMemConfig", "hipDeviceSetSharedMemConfig", "device");
     subst("cudaDeviceSynchronize", "hipDeviceSynchronize", "device");
-    subst("cudaFuncSetCacheConfig", "hipFuncSetCacheConfig", "device");
     subst("cudaGetDevice", "hipGetDevice", "device");
     subst("cudaGetDeviceCount", "hipGetDeviceCount", "device");
     subst("cudaGetDeviceFlags", "hipGetDeviceFlags", "device");
@@ -1744,27 +1795,27 @@ sub simpleSubstitutions {
     subst("cuMemRetainAllocationHandle", "hipMemRetainAllocationHandle", "virtual_memory");
     subst("cuMemSetAccess", "hipMemSetAccess", "virtual_memory");
     subst("cuMemUnmap", "hipMemUnmap", "virtual_memory");
-    subst("cuMemAllocAsync", "hipMallocAsync", "stream_ordered_memory");
-    subst("cuMemAllocFromPoolAsync", "hipMallocFromPoolAsync", "stream_ordered_memory");
-    subst("cuMemFreeAsync", "hipFreeAsync", "stream_ordered_memory");
-    subst("cuMemPoolCreate", "hipMemPoolCreate", "stream_ordered_memory");
-    subst("cuMemPoolDestroy", "hipMemPoolDestroy", "stream_ordered_memory");
-    subst("cuMemPoolExportPointer", "hipMemPoolExportPointer", "stream_ordered_memory");
-    subst("cuMemPoolExportToShareableHandle", "hipMemPoolExportToShareableHandle", "stream_ordered_memory");
-    subst("cuMemPoolGetAccess", "hipMemPoolGetAccess", "stream_ordered_memory");
-    subst("cuMemPoolGetAttribute", "hipMemPoolGetAttribute", "stream_ordered_memory");
-    subst("cuMemPoolImportFromShareableHandle", "hipMemPoolImportFromShareableHandle", "stream_ordered_memory");
-    subst("cuMemPoolImportPointer", "hipMemPoolImportPointer", "stream_ordered_memory");
-    subst("cuMemPoolSetAccess", "hipMemPoolSetAccess", "stream_ordered_memory");
-    subst("cuMemPoolSetAttribute", "hipMemPoolSetAttribute", "stream_ordered_memory");
-    subst("cuMemPoolTrimTo", "hipMemPoolTrimTo", "stream_ordered_memory");
-    subst("cuMemAdvise", "hipMemAdvise", "addressing");
-    subst("cuMemPrefetchAsync", "hipMemPrefetchAsync", "addressing");
-    subst("cuMemRangeGetAttribute", "hipMemRangeGetAttribute", "addressing");
-    subst("cuMemRangeGetAttributes", "hipMemRangeGetAttributes", "addressing");
-    subst("cuPointerGetAttribute", "hipPointerGetAttribute", "addressing");
-    subst("cuPointerGetAttributes", "hipDrvPointerGetAttributes", "addressing");
-    subst("cudaPointerGetAttributes", "hipPointerGetAttributes", "addressing");
+    subst("cuMemAllocAsync", "hipMallocAsync", "ordered_memory");
+    subst("cuMemAllocFromPoolAsync", "hipMallocFromPoolAsync", "ordered_memory");
+    subst("cuMemFreeAsync", "hipFreeAsync", "ordered_memory");
+    subst("cuMemPoolCreate", "hipMemPoolCreate", "ordered_memory");
+    subst("cuMemPoolDestroy", "hipMemPoolDestroy", "ordered_memory");
+    subst("cuMemPoolExportPointer", "hipMemPoolExportPointer", "ordered_memory");
+    subst("cuMemPoolExportToShareableHandle", "hipMemPoolExportToShareableHandle", "ordered_memory");
+    subst("cuMemPoolGetAccess", "hipMemPoolGetAccess", "ordered_memory");
+    subst("cuMemPoolGetAttribute", "hipMemPoolGetAttribute", "ordered_memory");
+    subst("cuMemPoolImportFromShareableHandle", "hipMemPoolImportFromShareableHandle", "ordered_memory");
+    subst("cuMemPoolImportPointer", "hipMemPoolImportPointer", "ordered_memory");
+    subst("cuMemPoolSetAccess", "hipMemPoolSetAccess", "ordered_memory");
+    subst("cuMemPoolSetAttribute", "hipMemPoolSetAttribute", "ordered_memory");
+    subst("cuMemPoolTrimTo", "hipMemPoolTrimTo", "ordered_memory");
+    subst("cuMemAdvise", "hipMemAdvise", "unified");
+    subst("cuMemPrefetchAsync", "hipMemPrefetchAsync", "unified");
+    subst("cuMemRangeGetAttribute", "hipMemRangeGetAttribute", "unified");
+    subst("cuMemRangeGetAttributes", "hipMemRangeGetAttributes", "unified");
+    subst("cuPointerGetAttribute", "hipPointerGetAttribute", "unified");
+    subst("cuPointerGetAttributes", "hipDrvPointerGetAttributes", "unified");
+    subst("cudaPointerGetAttributes", "hipPointerGetAttributes", "unified");
     subst("cuStreamAddCallback", "hipStreamAddCallback", "stream");
     subst("cuStreamAttachMemAsync", "hipStreamAttachMemAsync", "stream");
     subst("cuStreamBeginCapture", "hipStreamBeginCapture", "stream");
@@ -1814,20 +1865,20 @@ sub simpleSubstitutions {
     subst("cudaEventQuery", "hipEventQuery", "event");
     subst("cudaEventRecord", "hipEventRecord", "event");
     subst("cudaEventSynchronize", "hipEventSynchronize", "event");
-    subst("cuDestroyExternalMemory", "hipDestroyExternalMemory", "external_resource_interop");
-    subst("cuDestroyExternalSemaphore", "hipDestroyExternalSemaphore", "external_resource_interop");
-    subst("cuExternalMemoryGetMappedBuffer", "hipExternalMemoryGetMappedBuffer", "external_resource_interop");
-    subst("cuImportExternalMemory", "hipImportExternalMemory", "external_resource_interop");
-    subst("cuImportExternalSemaphore", "hipImportExternalSemaphore", "external_resource_interop");
-    subst("cuSignalExternalSemaphoresAsync", "hipSignalExternalSemaphoresAsync", "external_resource_interop");
-    subst("cuWaitExternalSemaphoresAsync", "hipWaitExternalSemaphoresAsync", "external_resource_interop");
-    subst("cudaDestroyExternalMemory", "hipDestroyExternalMemory", "external_resource_interop");
-    subst("cudaDestroyExternalSemaphore", "hipDestroyExternalSemaphore", "external_resource_interop");
-    subst("cudaExternalMemoryGetMappedBuffer", "hipExternalMemoryGetMappedBuffer", "external_resource_interop");
-    subst("cudaImportExternalMemory", "hipImportExternalMemory", "external_resource_interop");
-    subst("cudaImportExternalSemaphore", "hipImportExternalSemaphore", "external_resource_interop");
-    subst("cudaSignalExternalSemaphoresAsync", "hipSignalExternalSemaphoresAsync", "external_resource_interop");
-    subst("cudaWaitExternalSemaphoresAsync", "hipWaitExternalSemaphoresAsync", "external_resource_interop");
+    subst("cuDestroyExternalMemory", "hipDestroyExternalMemory", "external_resource");
+    subst("cuDestroyExternalSemaphore", "hipDestroyExternalSemaphore", "external_resource");
+    subst("cuExternalMemoryGetMappedBuffer", "hipExternalMemoryGetMappedBuffer", "external_resource");
+    subst("cuImportExternalMemory", "hipImportExternalMemory", "external_resource");
+    subst("cuImportExternalSemaphore", "hipImportExternalSemaphore", "external_resource");
+    subst("cuSignalExternalSemaphoresAsync", "hipSignalExternalSemaphoresAsync", "external_resource");
+    subst("cuWaitExternalSemaphoresAsync", "hipWaitExternalSemaphoresAsync", "external_resource");
+    subst("cudaDestroyExternalMemory", "hipDestroyExternalMemory", "external_resource");
+    subst("cudaDestroyExternalSemaphore", "hipDestroyExternalSemaphore", "external_resource");
+    subst("cudaExternalMemoryGetMappedBuffer", "hipExternalMemoryGetMappedBuffer", "external_resource");
+    subst("cudaImportExternalMemory", "hipImportExternalMemory", "external_resource");
+    subst("cudaImportExternalSemaphore", "hipImportExternalSemaphore", "external_resource");
+    subst("cudaSignalExternalSemaphoresAsync", "hipSignalExternalSemaphoresAsync", "external_resource");
+    subst("cudaWaitExternalSemaphoresAsync", "hipWaitExternalSemaphoresAsync", "external_resource");
     subst("cuStreamWaitValue32", "hipStreamWaitValue32", "stream_memory");
     subst("cuStreamWaitValue32_v2", "hipStreamWaitValue32", "stream_memory");
     subst("cuStreamWaitValue64", "hipStreamWaitValue64", "stream_memory");
@@ -1842,6 +1893,7 @@ sub simpleSubstitutions {
     subst("cudaConfigureCall", "hipConfigureCall", "execution");
     subst("cudaFuncGetAttributes", "hipFuncGetAttributes", "execution");
     subst("cudaFuncSetAttribute", "hipFuncSetAttribute", "execution");
+    subst("cudaFuncSetCacheConfig", "hipFuncSetCacheConfig", "execution");
     subst("cudaFuncSetSharedMemConfig", "hipFuncSetSharedMemConfig", "execution");
     subst("cudaLaunch", "hipLaunchByPtr", "execution");
     subst("cudaLaunchCooperativeKernel", "hipLaunchCooperativeKernel", "execution");
@@ -3522,8 +3574,6 @@ sub simpleSubstitutions {
     subst("cudaKernelNodeAttrID", "hipKernelNodeAttrID", "type");
     subst("cudaKernelNodeAttrValue", "hipKernelNodeAttrValue", "type");
     subst("cudaKernelNodeParams", "hipKernelNodeParams", "type");
-    subst("cudaLaunchMemSyncDomainMap", "hipLaunchMemSyncDomainMap", "type");
-    subst("cudaLaunchMemSyncDomainMap_st", "hipLaunchMemSyncDomainMap", "type");
     subst("cudaLaunchParams", "hipLaunchParams", "type");
     subst("cudaLimit", "hipLimit_t", "type");
     subst("cudaMemAccessDesc", "hipMemAccessDesc", "type");
@@ -3688,6 +3738,7 @@ sub simpleSubstitutions {
     subst("nvrtcResult", "hiprtcResult", "type");
     subst("pruneInfo_t", "pruneInfo_t", "type");
     subst("surfaceReference", "surfaceReference", "type");
+    subst("texture", "texture", "type");
     subst("textureReference", "textureReference", "type");
     subst("CUBLAS_ATOMICS_ALLOWED", "HIPBLAS_ATOMICS_ALLOWED", "numeric_literal");
     subst("CUBLAS_ATOMICS_NOT_ALLOWED", "HIPBLAS_ATOMICS_NOT_ALLOWED", "numeric_literal");
@@ -5265,6 +5316,10 @@ sub countSupportedDeviceFunctions {
         "__hmul2_sat",
         "__hmul2",
         "__hmul",
+        "__hmin_nan",
+        "__hmin",
+        "__hmax_nan",
+        "__hmax",
         "__hltu2",
         "__hltu",
         "__hlt2",
@@ -5619,14 +5674,10 @@ sub warnUnsupportedDeviceFunctions {
         "__hne2_mask",
         "__hmul_rn",
         "__hmul2_rn",
-        "__hmin_nan",
         "__hmin2_nan",
         "__hmin2",
-        "__hmin",
-        "__hmax_nan",
         "__hmax2_nan",
         "__hmax2",
-        "__hmax",
         "__hltu2_mask",
         "__hlt2_mask",
         "__hleu2_mask",
@@ -5803,9 +5854,13 @@ sub warnUnsupportedFunctions {
     foreach $func (
         "pruneInfo",
         "nvrtcGetSupportedArchs",
+        "nvrtcGetOptiXIRSize",
+        "nvrtcGetOptiXIR",
         "nvrtcGetNumSupportedArchs",
         "nvrtcGetNVVMSize",
         "nvrtcGetNVVM",
+        "nvrtcGetLTOIRSize",
+        "nvrtcGetLTOIR",
         "nv_bfloat162",
         "nv_bfloat16",
         "memoryBarrier",
@@ -6333,8 +6388,6 @@ sub warnUnsupportedFunctions {
         "cudaOutputMode_t",
         "cudaOutputMode",
         "cudaOccupancyMaxPotentialClusterSize",
-        "cudaOccupancyMaxPotentialBlockSizeVariableSMemWithFlags",
-        "cudaOccupancyMaxPotentialBlockSizeVariableSMem",
         "cudaOccupancyMaxActiveClusters",
         "cudaOccupancyAvailableDynamicSMemPerBlock",
         "cudaNvSciSyncAttrWait",
@@ -6352,6 +6405,8 @@ sub warnUnsupportedFunctions {
         "cudaLimitDevRuntimeSyncDepth",
         "cudaLimitDevRuntimePendingLaunchCount",
         "cudaLaunchMemSyncDomainRemote",
+        "cudaLaunchMemSyncDomainMap_st",
+        "cudaLaunchMemSyncDomainMap",
         "cudaLaunchMemSyncDomainDefault",
         "cudaLaunchMemSyncDomain",
         "cudaLaunchKernelExC",
@@ -6373,6 +6428,7 @@ sub warnUnsupportedFunctions {
         "cudaLaunchAttributeAccessPolicyWindow",
         "cudaLaunchAttribute",
         "cudaKeyValuePair",
+        "cudaKernel_t",
         "cudaKernelNodeAttributePriority",
         "cudaKernelNodeAttributeMemSyncDomainMap",
         "cudaKernelNodeAttributeMemSyncDomain",
@@ -6401,10 +6457,6 @@ sub warnUnsupportedFunctions {
         "cudaGraphicsCubeFaceNegativeY",
         "cudaGraphicsCubeFaceNegativeX",
         "cudaGraphicsCubeFace",
-        "cudaGraphNodeSetEnabled",
-        "cudaGraphMemFreeNodeGetParams",
-        "cudaGraphMemAllocNodeGetParams",
-        "cudaGraphKernelNodeCopyAttributes",
         "cudaGraphInstantiateWithParams",
         "cudaGraphInstantiateSuccess",
         "cudaGraphInstantiateResult",
@@ -6427,9 +6479,6 @@ sub warnUnsupportedFunctions {
         "cudaGraphExecGetFlags",
         "cudaGraphExecExternalSemaphoresWaitNodeSetParams",
         "cudaGraphExecExternalSemaphoresSignalNodeSetParams",
-        "cudaGraphDebugDotPrint",
-        "cudaGraphAddMemFreeNode",
-        "cudaGraphAddMemAllocNode",
         "cudaGraphAddExternalSemaphoresWaitNode",
         "cudaGraphAddExternalSemaphoresSignalNode",
         "cudaGetTextureObjectTextureDesc_v2",
@@ -6437,6 +6486,7 @@ sub warnUnsupportedFunctions {
         "cudaGetSurfaceObjectResourceDesc",
         "cudaGetParameterBufferV2",
         "cudaGetParameterBuffer",
+        "cudaGetKernel",
         "cudaGetFuncBySymbol",
         "cudaGetDriverEntryPointFlags",
         "cudaGetDriverEntryPoint",
@@ -6493,6 +6543,7 @@ sub warnUnsupportedFunctions {
         "cudaEventCreateFromEGLSync",
         "cudaErrorUnsupportedPtxVersion",
         "cudaErrorUnsupportedExecAffinity",
+        "cudaErrorUnsupportedDevSideSync",
         "cudaErrorTooManyPeers",
         "cudaErrorTimeout",
         "cudaErrorTextureNotBound",
@@ -6648,6 +6699,7 @@ sub warnUnsupportedFunctions {
         "cudaDriverEntryPointSymbolNotFound",
         "cudaDriverEntryPointSuccess",
         "cudaDriverEntryPointQueryResult",
+        "cudaDeviceSyncMemops",
         "cudaDevicePropDontCare",
         "cudaDeviceMask",
         "cudaDeviceGetTexture1DLinearMaxWidth",
@@ -6658,6 +6710,10 @@ sub warnUnsupportedFunctions {
         "cudaDevAttrReservedSharedMemoryPerBlock",
         "cudaDevAttrReserved93",
         "cudaDevAttrReserved92",
+        "cudaDevAttrReserved132",
+        "cudaDevAttrReserved129",
+        "cudaDevAttrReserved128",
+        "cudaDevAttrReserved127",
         "cudaDevAttrReserved124",
         "cudaDevAttrReserved123",
         "cudaDevAttrReserved122",
@@ -6820,6 +6876,12 @@ sub warnUnsupportedFunctions {
         "cuOccupancyMaxPotentialClusterSize",
         "cuOccupancyMaxActiveClusters",
         "cuOccupancyAvailableDynamicSMemPerBlock",
+        "cuMulticastUnbind",
+        "cuMulticastGetGranularity",
+        "cuMulticastCreate",
+        "cuMulticastBindMem",
+        "cuMulticastBindAddr",
+        "cuMulticastAddDevice",
         "cuModuleLoadFatBinary",
         "cuModuleGetSurfRef",
         "cuModuleGetLoadingMode",
@@ -6861,7 +6923,6 @@ sub warnUnsupportedFunctions {
         "cuLaunchKernelEx",
         "cuLaunchGridAsync",
         "cuLaunchGrid",
-        "cuLaunchCooperativeKernelMultiDevice",
         "cuLaunch",
         "cuKernelSetCacheConfig",
         "cuKernelSetAttribute",
@@ -6877,11 +6938,6 @@ sub warnUnsupportedFunctions {
         "cuGraphicsD3D9RegisterResource",
         "cuGraphicsD3D11RegisterResource",
         "cuGraphicsD3D10RegisterResource",
-        "cuGraphNodeSetEnabled",
-        "cuGraphNodeGetEnabled",
-        "cuGraphMemFreeNodeGetParams",
-        "cuGraphMemAllocNodeGetParams",
-        "cuGraphKernelNodeCopyAttributes",
         "cuGraphInstantiateWithParams",
         "cuGraphExternalSemaphoresWaitNodeSetParams",
         "cuGraphExternalSemaphoresWaitNodeGetParams",
@@ -6893,13 +6949,10 @@ sub warnUnsupportedFunctions {
         "cuGraphExecExternalSemaphoresWaitNodeSetParams",
         "cuGraphExecExternalSemaphoresSignalNodeSetParams",
         "cuGraphExecBatchMemOpNodeSetParams",
-        "cuGraphDebugDotPrint",
         "cuGraphBatchMemOpNodeSetParams",
         "cuGraphBatchMemOpNodeGetParams",
         "cuGraphAddMemsetNode",
         "cuGraphAddMemcpyNode",
-        "cuGraphAddMemFreeNode",
-        "cuGraphAddMemAllocNode",
         "cuGraphAddExternalSemaphoresWaitNode",
         "cuGraphAddExternalSemaphoresSignalNode",
         "cuGraphAddBatchMemOpNode",
@@ -6972,12 +7025,17 @@ sub warnUnsupportedFunctions {
         "cuD3D10GetDevice",
         "cuD3D10CtxCreateOnDevice",
         "cuD3D10CtxCreate",
+        "cuCtxSetFlags",
         "cuCtxResetPersistingL2Cache",
         "cuCtxGetId",
         "cuCtxGetExecAffinity",
         "cuCtxDetach",
         "cuCtxCreate_v3",
         "cuCtxAttach",
+        "cuCoredumpSetAttributeGlobal",
+        "cuCoredumpSetAttribute",
+        "cuCoredumpGetAttributeGlobal",
+        "cuCoredumpGetAttribute",
         "cuArrayGetSparseProperties",
         "cuArrayGetPlane",
         "cuArrayGetMemoryRequirements",
@@ -7020,6 +7078,7 @@ sub warnUnsupportedFunctions {
         "_CUB_ASM_PTR_SIZE_",
         "_CUB_ASM_PTR_",
         "PATCH_LEVEL",
+        "NVRTC_ERROR_TIME_FILE_WRITE_FAILED",
         "NVCL_EVENT_SCHED_YIELD",
         "NVCL_EVENT_SCHED_SPIN",
         "NVCL_EVENT_SCHED_BLOCKING_SYNC",
@@ -7072,6 +7131,11 @@ sub warnUnsupportedFunctions {
         "CUshared_carveout",
         "CUoccupancy_flags_enum",
         "CUoccupancy_flags",
+        "CUmulticastObjectProp_v1",
+        "CUmulticastObjectProp_st",
+        "CUmulticastObjectProp",
+        "CUmulticastGranularity_flags_enum",
+        "CUmulticastGranularity_flags",
         "CUmoduleLoadingMode_enum",
         "CUmoduleLoadingMode",
         "CUmemRangeHandleType_enum",
@@ -7170,6 +7234,8 @@ sub warnUnsupportedFunctions {
         "CUd3d10DeviceList",
         "CUctx_flags_enum",
         "CUctx_flags",
+        "CUcoredumpSettings_enum",
+        "CUcoredumpSettings",
         "CUclusterSchedulingPolicy_enum",
         "CUclusterSchedulingPolicy",
         "CUarray_cubemap_face_enum",
@@ -7262,6 +7328,8 @@ sub warnUnsupportedFunctions {
         "CU_POINTER_ATTRIBUTE_ACCESS_FLAG_READ",
         "CU_POINTER_ATTRIBUTE_ACCESS_FLAG_NONE",
         "CU_PARAM_TR_DEFAULT",
+        "CU_MULTICAST_GRANULARITY_RECOMMENDED",
+        "CU_MULTICAST_GRANULARITY_MINIMUM",
         "CU_MODULE_LAZY_LOADING",
         "CU_MODULE_EAGER_LOADING",
         "CU_MEM_RANGE_HANDLE_TYPE_MAX",
@@ -7290,6 +7358,7 @@ sub warnUnsupportedFunctions {
         "CU_LAUNCH_ATTRIBUTE_PRIORITY",
         "CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP",
         "CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN",
+        "CU_LAUNCH_ATTRIBUTE_MAX",
         "CU_LAUNCH_ATTRIBUTE_IGNORE",
         "CU_LAUNCH_ATTRIBUTE_COOPERATIVE",
         "CU_LAUNCH_ATTRIBUTE_CLUSTER_SCHEDULING_POLICY_PREFERENCE",
@@ -7450,6 +7519,7 @@ sub warnUnsupportedFunctions {
         "CU_DEVICE_ATTRIBUTE_SPARSE_CUDA_ARRAY_SUPPORTED",
         "CU_DEVICE_ATTRIBUTE_RESERVED_SHARED_MEMORY_PER_BLOCK",
         "CU_DEVICE_ATTRIBUTE_READ_ONLY_HOST_REGISTER_SUPPORTED",
+        "CU_DEVICE_ATTRIBUTE_MULTICAST_SUPPORTED",
         "CU_DEVICE_ATTRIBUTE_MEM_SYNC_DOMAIN_COUNT",
         "CU_DEVICE_ATTRIBUTE_MEMPOOL_SUPPORTED_HANDLE_TYPES",
         "CU_DEVICE_ATTRIBUTE_MAX_PERSISTING_L2_CACHE_SIZE",
@@ -7508,7 +7578,17 @@ sub warnUnsupportedFunctions {
         "CU_CUBEMAP_FACE_NEGATIVE_Z",
         "CU_CUBEMAP_FACE_NEGATIVE_Y",
         "CU_CUBEMAP_FACE_NEGATIVE_X",
+        "CU_CTX_USER_COREDUMP_ENABLE",
+        "CU_CTX_SYNC_MEMOPS",
         "CU_CTX_FLAGS_MASK",
+        "CU_CTX_COREDUMP_ENABLE",
+        "CU_COREDUMP_TRIGGER_HOST",
+        "CU_COREDUMP_PIPE",
+        "CU_COREDUMP_MAX",
+        "CU_COREDUMP_LIGHTWEIGHT",
+        "CU_COREDUMP_FILE",
+        "CU_COREDUMP_ENABLE_USER_TRIGGER",
+        "CU_COREDUMP_ENABLE_ON_EXCEPTION",
         "CU_COMPUTE_ACCELERATED_TARGET_BASE",
         "CU_CLUSTER_SCHEDULING_POLICY_SPREAD",
         "CU_CLUSTER_SCHEDULING_POLICY_LOAD_BALANCING",
@@ -7658,6 +7738,7 @@ sub warnUnsupportedFunctions {
         "CUDNN_TRANSFORM_FOLD",
         "CUDNN_TENSOR_REORDERING_NONE",
         "CUDNN_TENSOR_REORDERING_INT8x32",
+        "CUDNN_TENSOR_REORDERING_F16x16",
         "CUDNN_TENSOR_OP_MATH_ALLOW_CONVERSION",
         "CUDNN_STATUS_VERSION_MISMATCH",
         "CUDNN_STATUS_RUNTIME_IN_PROGRESS",
@@ -7895,6 +7976,7 @@ sub warnUnsupportedFunctions {
         "CUDNN_KNOB_TYPE_CTA_SPLIT_K_MODE",
         "CUDNN_KNOB_TYPE_COUNTS",
         "CUDNN_KNOB_TYPE_CHUNK_K",
+        "CUDNN_KNOB_TYPE_BLOCK_SIZE",
         "CUDNN_INSTANCE_NORM",
         "CUDNN_HEUR_MODE_INSTANT",
         "CUDNN_HEUR_MODE_FALLBACK",
@@ -8030,6 +8112,7 @@ sub warnUnsupportedFunctions {
         "CUDNN_ATTR_OPERATION_SIGNAL_FLAGDESC",
         "CUDNN_ATTR_OPERATION_RNG_YDESC",
         "CUDNN_ATTR_OPERATION_RNG_SEED",
+        "CUDNN_ATTR_OPERATION_RNG_OFFSET_DESC",
         "CUDNN_ATTR_OPERATION_RNG_DESC",
         "CUDNN_ATTR_OPERATION_RESHAPE_YDESC",
         "CUDNN_ATTR_OPERATION_RESHAPE_XDESC",
@@ -8210,9 +8293,6 @@ sub warnUnsupportedFunctions {
         "CUDA_MEMCPY3D_PEER_v1",
         "CUDA_MEMCPY3D_PEER_st",
         "CUDA_MEMCPY3D_PEER",
-        "CUDA_LAUNCH_PARAMS_v1",
-        "CUDA_LAUNCH_PARAMS_st",
-        "CUDA_LAUNCH_PARAMS",
         "CUDA_KERNEL_NODE_PARAMS_v2_st",
         "CUDA_KERNEL_NODE_PARAMS_v2",
         "CUDA_GRAPH_INSTANTIATE_SUCCESS",
@@ -8238,6 +8318,7 @@ sub warnUnsupportedFunctions {
         "CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC",
         "CUDA_ERROR_UNSUPPORTED_PTX_VERSION",
         "CUDA_ERROR_UNSUPPORTED_EXEC_AFFINITY",
+        "CUDA_ERROR_UNSUPPORTED_DEVSIDE_SYNC",
         "CUDA_ERROR_TOO_MANY_PEERS",
         "CUDA_ERROR_TIMEOUT",
         "CUDA_ERROR_SYSTEM_NOT_READY",
@@ -9600,7 +9681,7 @@ while (@ARGV) {
             transformHostFunctions();
             # TODO: would like to move this code outside loop but it uses $_ which contains the whole file
             unless ($no_output) {
-                my $apiCalls   = $ft{'error'} + $ft{'init'} + $ft{'version'} + $ft{'device'} + $ft{'context'} + $ft{'module'} + $ft{'library_management'} + $ft{'memory'} + $ft{'virtual_memory'} + $ft{'stream_ordered_memory'} + $ft{'addressing'} + $ft{'stream'} + $ft{'event'} + $ft{'external_resource_interop'} + $ft{'stream_memory'} + $ft{'execution'} + $ft{'graph'} + $ft{'occupancy'} + $ft{'texture'} + $ft{'surface'} + $ft{'tensor'} + $ft{'peer'} + $ft{'graphics'} + $ft{'interactions'} + $ft{'profiler'} + $ft{'openGL'} + $ft{'D3D9'} + $ft{'D3D10'} + $ft{'D3D11'} + $ft{'VDPAU'} + $ft{'EGL'} + $ft{'thread'} + $ft{'complex'} + $ft{'library'} + $ft{'device_library'} + $ft{'device_type'} + $ft{'include'} + $ft{'include_cuda_main_header'} + $ft{'include_cuda_main_header_v2'} + $ft{'type'} + $ft{'literal'} + $ft{'numeric_literal'} + $ft{'define'};
+                my $apiCalls   = $ft{'error'} + $ft{'init'} + $ft{'version'} + $ft{'device'} + $ft{'context'} + $ft{'module'} + $ft{'library'} + $ft{'memory'} + $ft{'virtual_memory'} + $ft{'ordered_memory'} + $ft{'multicast'} + $ft{'unified'} + $ft{'stream'} + $ft{'event'} + $ft{'external_resource'} + $ft{'stream_memory'} + $ft{'execution'} + $ft{'graph'} + $ft{'occupancy'} + $ft{'texture'} + $ft{'surface'} + $ft{'tensor'} + $ft{'peer'} + $ft{'graphics'} + $ft{'driver_entry_point'} + $ft{'cpp'} + $ft{'coredump'} + $ft{'driver_interact'} + $ft{'profiler'} + $ft{'openGL'} + $ft{'D3D9'} + $ft{'D3D10'} + $ft{'D3D11'} + $ft{'VDPAU'} + $ft{'EGL'} + $ft{'thread'} + $ft{'complex'} + $ft{'library'} + $ft{'device_library'} + $ft{'device_type'} + $ft{'include'} + $ft{'include_cuda_main_header'} + $ft{'include_cuda_main_header_v2'} + $ft{'type'} + $ft{'literal'} + $ft{'numeric_literal'} + $ft{'define'};
                 my $kernStuff  = $hasDeviceCode + $ft{'kernel_launch'} + $ft{'device_function'};
                 my $totalCalls = $apiCalls + $kernStuff;
                 $is_dos = m/\r\n$/;

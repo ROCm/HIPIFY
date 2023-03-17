@@ -130,7 +130,13 @@ bool pragma_once_outside_header() {
 void RetainExcludedConditionalBlocks(clang::CompilerInstance &CI) {
 #if LLVM_VERSION_MAJOR > 9
   clang::PreprocessorOptions &PPOpts = CI.getPreprocessorOpts();
-  PPOpts.RetainExcludedConditionalBlocks = !SkipExcludedPPConditionalBlocks;
+  if (SkipExcludedPPConditionalBlocks) {
+    PPOpts.RetainExcludedConditionalBlocks = !SkipExcludedPPConditionalBlocks;
+  } else if (DefaultPreprocessor) {
+    PPOpts.RetainExcludedConditionalBlocks = !DefaultPreprocessor;
+  } else {
+    PPOpts.RetainExcludedConditionalBlocks = !SkipExcludedPPConditionalBlocks;
+  }
 #endif
 }
 
@@ -138,6 +144,9 @@ bool CheckCompatibility() {
 #if LLVM_VERSION_MAJOR < 10
   if (SkipExcludedPPConditionalBlocks) {
     llvm::errs() << "\n" << sHipify << sWarning << "Option '" << SkipExcludedPPConditionalBlocks.ArgStr.str() << "' is supported starting from LLVM version 10.0\n";
+  }
+  if (DefaultPreprocessor) {
+    llvm::errs() << "\n" << sHipify << sWarning << "Option '" << DefaultPreprocessor.ArgStr.str() << "' is supported starting from LLVM version 10.0\n";
   }
 #endif
   return true;

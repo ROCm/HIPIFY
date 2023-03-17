@@ -15,6 +15,7 @@
 |`NVRTC_ERROR_NO_NAME_EXPRESSIONS_AFTER_COMPILATION`|8.0| | |`HIPRTC_ERROR_NO_NAME_EXPRESSIONS_AFTER_COMPILATION`|2.6.0| | | |
 |`NVRTC_ERROR_OUT_OF_MEMORY`| | | |`HIPRTC_ERROR_OUT_OF_MEMORY`|2.6.0| | | |
 |`NVRTC_ERROR_PROGRAM_CREATION_FAILURE`| | | |`HIPRTC_ERROR_PROGRAM_CREATION_FAILURE`|2.6.0| | | |
+|`NVRTC_ERROR_TIME_FILE_WRITE_FAILED`|12.1| | | | | | | |
 |`NVRTC_SUCCESS`| | | |`HIPRTC_SUCCESS`|2.6.0| | | |
 |`nvrtcProgram`| | | |`hiprtcProgram`|2.6.0| | | |
 |`nvrtcResult`| | | |`hiprtcResult`|2.6.0| | | |
@@ -30,10 +31,14 @@
 |`nvrtcGetCUBIN`|11.1| | |`hiprtcGetBitcode`|5.3.0| | | |
 |`nvrtcGetCUBINSize`|11.1| | |`hiprtcGetBitcodeSize`|5.3.0| | | |
 |`nvrtcGetErrorString`| | | |`hiprtcGetErrorString`|2.6.0| | | |
+|`nvrtcGetLTOIR`|12.0| | | | | | | |
+|`nvrtcGetLTOIRSize`|12.0| | | | | | | |
 |`nvrtcGetLoweredName`|8.0| | |`hiprtcGetLoweredName`|2.6.0| | | |
-|`nvrtcGetNVVM`|11.4| | | | | | | |
-|`nvrtcGetNVVMSize`|11.4| | | | | | | |
+|`nvrtcGetNVVM`|11.4|12.0| | | | | | |
+|`nvrtcGetNVVMSize`|11.4|12.0| | | | | | |
 |`nvrtcGetNumSupportedArchs`|11.2| | | | | | | |
+|`nvrtcGetOptiXIR`|12.0| | | | | | | |
+|`nvrtcGetOptiXIRSize`|12.0| | | | | | | |
 |`nvrtcGetPTX`| | | |`hiprtcGetCode`|2.6.0| | | |
 |`nvrtcGetPTXSize`| | | |`hiprtcGetCodeSize`|2.6.0| | | |
 |`nvrtcGetProgramLog`| | | |`hiprtcGetProgramLog`|2.6.0| | | |

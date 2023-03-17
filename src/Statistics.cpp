@@ -34,14 +34,15 @@ const char *counterNames[NUM_CONV_TYPES] = {
   "device", // CONV_DEVICE
   "context", // CONV_CONTEXT
   "module", // CONV_MODULE
-  "library_management", // CONV_LIBRARY
+  "library", // CONV_LIBRARY
   "memory", // CONV_MEMORY
   "virtual_memory", // CONV_VIRTUAL_MEMORY
-  "stream_ordered_memory", // CONV_STREAM_ORDERED_MEMORY
-  "addressing", // CONV_ADDRESSING
+  "ordered_memory", // CONV_ORDERED_MEMORY
+  "multicast", // CONV_MULTICAST
+  "unified", // CONV_UNIFIED
   "stream", // CONV_STREAM
   "event", // CONV_EVENT
-  "external_resource_interop", // CONV_EXT_RES
+  "external_resource", // CONV_EXTERNAL_RES
   "stream_memory", // CONV_STREAM_MEMORY
   "execution", // CONV_EXECUTION
   "graph", // CONV_GRAPH
@@ -51,7 +52,10 @@ const char *counterNames[NUM_CONV_TYPES] = {
   "tensor", // CONV_TENSOR
   "peer", // CONV_PEER
   "graphics", // CONV_GRAPHICS
-  "interactions", // CONV_INTERACTION
+  "driver_entry_point", // CONV_DRIVER_ENTRY_POINT
+  "cpp", // CONV_CPP
+  "coredump", // CONV_COREDUMP
+  "driver_interact", // CONV_DRIVER_INTERACT
   "profiler", // CONV_PROFILER
   "openGL", // CONV_OPENGL
   "D3D9", // CONV_D3D9
@@ -83,22 +87,28 @@ const char *counterTypes[NUM_CONV_TYPES] = {
   "CONV_DEVICE",
   "CONV_CONTEXT",
   "CONV_MODULE",
+  "CONV_LIBRARY",
   "CONV_MEMORY",
   "CONV_VIRTUAL_MEMORY",
-  "CONV_STREAM_ORDERED_MEMORY",
-  "CONV_ADDRESSING",
+  "CONV_ORDERED_MEMORY",
+  "CONV_MULTICAST",
+  "CONV_UNIFIED",
   "CONV_STREAM",
   "CONV_EVENT",
-  "CONV_EXT_RES",
+  "CONV_EXTERNAL_RES",
   "CONV_STREAM_MEMORY",
   "CONV_EXECUTION",
   "CONV_GRAPH",
   "CONV_OCCUPANCY",
   "CONV_TEXTURE",
   "CONV_SURFACE",
+  "CONV_TENSOR",
   "CONV_PEER",
   "CONV_GRAPHICS",
-  "CONV_INTERACTION",
+  "CONV_DRIVER_ENTRY_POINT",
+  "CONV_CPP",
+  "CONV_COREDUMP",
+  "CONV_DRIVER_INTERACT",
   "CONV_PROFILER",
   "CONV_OPENGL",
   "CONV_D3D9",
@@ -110,6 +120,8 @@ const char *counterTypes[NUM_CONV_TYPES] = {
   "CONV_COMPLEX",
   "CONV_LIB_FUNC",
   "CONV_LIB_DEVICE_FUNC",
+  "CONV_DEVICE_FUNC",
+  "CONV_DEVICE_TYPE",
   "CONV_INCLUDE",
   "CONV_INCLUDE_CUDA_MAIN_H",
   "CONV_INCLUDE_CUDA_MAIN_V2_H",
@@ -452,6 +464,7 @@ std::string Statistics::getCudaVersion(const cudaVersions& ver) {
     case CUDA_117: return "11.7";
     case CUDA_118: return "11.8";
     case CUDA_120: return "12.0";
+    case CUDA_121: return "12.1";
     case CUDNN_10: return "1.0.0";
     case CUDNN_20: return "2.0.0";
     case CUDNN_30: return "3.0.0";
@@ -490,6 +503,8 @@ std::string Statistics::getCudaVersion(const cudaVersions& ver) {
     case CUDNN_850: return "8.5.0";
     case CUDNN_860: return "8.6.0";
     case CUDNN_870: return "8.7.0";
+    case CUDNN_880: return "8.8.0";
+    case CUDNN_881: return "8.8.1";
   }
   return "";
 }

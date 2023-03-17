@@ -74,6 +74,7 @@ const StringRef sCudaDeviceFuncCall = "cudaDeviceFuncCall";
 const StringRef sCubNamespacePrefix = "cubNamespacePrefix";
 const StringRef sCubFunctionTemplateDecl = "cubFunctionTemplateDecl";
 const StringRef sCubUsingNamespaceDecl = "cubUsingNamespaceDecl";
+const StringRef sHalf2Member = "half2Member";
 
 std::string getCastType(hipify::CastTypes c) {
   switch (c) {
@@ -583,6 +584,34 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
   return false;
 }
 
+bool HipifyAction::half2Member(const mat::MatchFinder::MatchResult &Result) {
+  if (auto *expr = Result.Nodes.getNodeAs<clang::MemberExpr>(sHalf2Member)) {
+    auto *baseExpr = expr->getBase();
+    if (!baseExpr) return false;
+    clang::QualType QT = baseExpr->getType();
+    if (QT.getAsString() != "half2") return false;
+    auto *val = expr->getMemberDecl();
+    if (!val) return false;
+    std::string valName = val->getNameAsString();
+    if (valName != "x" && valName != "y") return false;
+    const clang::SourceRange sr = expr->getSourceRange();
+    std::string exprName = readSourceText(*Result.SourceManager, sr).str();
+    clang::SmallString<40> XStr;
+    llvm::raw_svector_ostream OS(XStr);
+    OS << "reinterpret_cast<half&>(" << exprName << ")";
+    ct::Replacement Rep(*Result.SourceManager, sr.getBegin(), exprName.size(), OS.str());
+    clang::FullSourceLoc fullSL(sr.getBegin(), *Result.SourceManager);
+    insertReplacement(Rep, fullSL);
+    if (!NoWarningsUndocumented) {
+      clang::DiagnosticsEngine& DE = getCompilerInstance().getDiagnostics();
+      const auto ID = DE.getCustomDiagID(clang::DiagnosticsEngine::Warning, "Undocumented feature. CUDA API does not explicitly define the 'x' and 'y' members of 'half2' and the access through the dot operator, while in practice, nvcc supports it and treats them as 'half'. AMD HIP does define the 'x' and 'y' members of 'half2' as 'unsigned short'. Thus, without 'reinterpret_cast' to 'half' of the 'half2' members, the resulting values in the hipified code are incorrect and differ from CUDA ones. The '%0' will be transformed to 'reinterpret_cast<half&>(%0)'.");
+      DE.Report(fullSL, ID) << exprName;
+    }
+    return true;
+  }
+  return false;
+}
+
 void HipifyAction::insertReplacement(const ct::Replacement &rep, const clang::FullSourceLoc &fullSL) {
   llcompat::insertReplacement(*replacements, rep);
   if (PrintStats || PrintStatsCSV) {
@@ -596,6 +625,23 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
   Finder.reset(new mat::MatchFinder);
   // Replace the <<<...>>> language extension with a hip kernel launch
   Finder->addMatcher(mat::cudaKernelCallExpr(mat::isExpansionInMainFile()).bind(sCudaLaunchKernel), this);
+  if (!NoUndocumented) {
+    Finder->addMatcher(
+      mat::memberExpr(
+        mat::isExpansionInMainFile(),
+        mat::unless(
+          mat::hasParent(
+            mat::cxxReinterpretCastExpr(
+              mat::hasDestinationType(
+                mat::referenceType()
+              )
+            )
+          )
+        )
+      ).bind(sHalf2Member),
+      this
+    );
+  }
   Finder->addMatcher(
     mat::callExpr(
       mat::isExpansionInMainFile(),
@@ -793,4 +839,5 @@ void HipifyAction::run(const mat::MatchFinder::MatchResult &Result) {
   if (cubNamespacePrefix(Result)) return;
   if (cubFunctionTemplateDecl(Result)) return;
   if (cubUsingNamespaceDecl(Result)) return;
+  if (!NoUndocumented && half2Member(Result)) return;
 }

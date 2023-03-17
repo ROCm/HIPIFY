@@ -50,9 +50,6 @@ int main() {
   // CHECK: hipTextureDesc TextureDesc;
   cudaTextureDesc TextureDesc;
 
-  // CHECK: surfaceReference surfaceRef;
-  surfaceReference surfaceRef;
-
   // CHECK: ihipEvent_t* event_st;
   // CHECK-NEXT: hipEvent_t Event_t;
   CUevent_st* event_st;
@@ -177,8 +174,13 @@ int main() {
 #endif
 
 #if CUDA_VERSION >= 11040
-  // CHECK: hipMemallocNodeParams MemAllocNodeParams;
+  // CHECK: hipMemAllocNodeParams MemAllocNodeParams;
   cudaMemAllocNodeParams MemAllocNodeParams;
+#endif
+
+#if CUDA_VERSION < 12000
+  // CHECK: surfaceReference surfaceRef;
+  surfaceReference surfaceRef;
 #endif
 
   return 0;

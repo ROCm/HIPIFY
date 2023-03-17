@@ -137,8 +137,8 @@
 |`cudaOccupancyMaxActiveBlocksPerMultiprocessorWithFlags`| | | |`hipOccupancyMaxActiveBlocksPerMultiprocessorWithFlags`|2.6.0| | | |
 |`cudaOccupancyMaxActiveClusters`|11.8| | | | | | | |
 |`cudaOccupancyMaxPotentialBlockSize`| | | |`hipOccupancyMaxPotentialBlockSize`|1.6.0| | | |
-|`cudaOccupancyMaxPotentialBlockSizeVariableSMem`| | | | | | | | |
-|`cudaOccupancyMaxPotentialBlockSizeVariableSMemWithFlags`| | | | | | | | |
+|`cudaOccupancyMaxPotentialBlockSizeVariableSMem`| | | |`hipOccupancyMaxPotentialBlockSizeVariableSMem`|5.5.0| | |5.5.0|
+|`cudaOccupancyMaxPotentialBlockSizeVariableSMemWithFlags`| | | |`hipOccupancyMaxPotentialBlockSizeVariableSMemWithFlags`|5.5.0| | |5.5.0|
 |`cudaOccupancyMaxPotentialBlockSizeWithFlags`| | | |`hipOccupancyMaxPotentialBlockSizeWithFlags`|3.5.0| | | |
 |`cudaOccupancyMaxPotentialClusterSize`|11.8| | | | | | | |
 
@@ -157,7 +157,7 @@
 |`cudaGetMipmappedArrayLevel`| | | |`hipGetMipmappedArrayLevel`|3.5.0| | | |
 |`cudaGetSymbolAddress`| | | |`hipGetSymbolAddress`|2.0.0| | | |
 |`cudaGetSymbolSize`| | | |`hipGetSymbolSize`|2.0.0| | | |
-|`cudaHostAlloc`| | | |`hipHostAlloc`| | | | |
+|`cudaHostAlloc`| | | |`hipHostAlloc`|1.6.0| | | |
 |`cudaHostGetDevicePointer`| | | |`hipHostGetDevicePointer`|1.6.0| | | |
 |`cudaHostGetFlags`| | | |`hipHostGetFlags`|1.6.0| | | |
 |`cudaHostRegister`| | | |`hipHostRegister`|1.6.0| | | |
@@ -372,40 +372,21 @@
 |`cudaGraphicsUnmapResources`| | | |`hipGraphicsUnmapResources`|4.5.0| | | |
 |`cudaGraphicsUnregisterResource`| | | |`hipGraphicsUnregisterResource`|4.5.0| | | |
 
-## **25. Texture Reference Management [DEPRECATED]**
+## **25. Texture Object Management**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
-|`cudaBindTexture`| |11.0|12.0|`hipBindTexture`|1.6.0|3.8.0| | |
-|`cudaBindTexture2D`| |11.0|12.0|`hipBindTexture2D`|1.7.0|3.8.0| | |
-|`cudaBindTextureToArray`| |11.0|12.0|`hipBindTextureToArray`|1.6.0|3.8.0| | |
-|`cudaBindTextureToMipmappedArray`| |11.0|12.0|`hipBindTextureToMipmappedArray`|1.7.0| | | |
 |`cudaCreateChannelDesc`| | | |`hipCreateChannelDesc`|1.6.0| | | |
-|`cudaGetChannelDesc`| | | |`hipGetChannelDesc`|1.7.0| | | |
-|`cudaGetTextureAlignmentOffset`| |11.0|12.0|`hipGetTextureAlignmentOffset`|1.9.0|3.8.0| | |
-|`cudaGetTextureReference`| |11.0|12.0|`hipGetTextureReference`|1.7.0|5.3.0| | |
-|`cudaUnbindTexture`| |11.0|12.0|`hipUnbindTexture`|1.6.0|3.8.0| | |
-
-## **26. Surface Reference Management [DEPRECATED]**
-
-|**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
-|:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
-|`cudaBindSurfaceToArray`| |11.0|12.0| | | | | |
-|`cudaGetSurfaceReference`| |11.0|12.0| | | | | |
-
-## **27. Texture Object Management**
-
-|**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
-|:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
 |`cudaCreateTextureObject`| | | |`hipCreateTextureObject`|1.7.0| | | |
 |`cudaCreateTextureObject_v2`|11.8| |12.0| | | | | |
 |`cudaDestroyTextureObject`| | | |`hipDestroyTextureObject`|1.7.0| | | |
+|`cudaGetChannelDesc`| | | |`hipGetChannelDesc`|1.7.0| | | |
 |`cudaGetTextureObjectResourceDesc`| | | |`hipGetTextureObjectResourceDesc`|1.7.0| | | |
 |`cudaGetTextureObjectResourceViewDesc`| | | |`hipGetTextureObjectResourceViewDesc`|1.7.0| | | |
 |`cudaGetTextureObjectTextureDesc`| | | |`hipGetTextureObjectTextureDesc`|1.7.0| | | |
 |`cudaGetTextureObjectTextureDesc_v2`|11.8| |12.0| | | | | |
 
-## **28. Surface Object Management**
+## **26. Surface Object Management**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -413,14 +394,14 @@
 |`cudaDestroySurfaceObject`| | | |`hipDestroySurfaceObject`|1.9.0| | | |
 |`cudaGetSurfaceObjectResourceDesc`| | | | | | | | |
 
-## **29. Version Management**
+## **27. Version Management**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
 |`cudaDriverGetVersion`| | | |`hipDriverGetVersion`|1.6.0| | | |
 |`cudaRuntimeGetVersion`| | | |`hipRuntimeGetVersion`|1.6.0| | | |
 
-## **30. Graph Management**
+## **28. Graph Management**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -436,8 +417,8 @@
 |`cudaGraphAddExternalSemaphoresWaitNode`|11.2| | | | | | | |
 |`cudaGraphAddHostNode`|10.0| | |`hipGraphAddHostNode`|5.0.0| | | |
 |`cudaGraphAddKernelNode`|10.0| | |`hipGraphAddKernelNode`|4.3.0| | | |
-|`cudaGraphAddMemAllocNode`|11.4| | | | | | | |
-|`cudaGraphAddMemFreeNode`|11.4| | | | | | | |
+|`cudaGraphAddMemAllocNode`|11.4| | |`hipGraphAddMemAllocNode`|5.5.0| | |5.5.0|
+|`cudaGraphAddMemFreeNode`|11.4| | |`hipGraphAddMemFreeNode`|5.5.0| | |5.5.0|
 |`cudaGraphAddMemcpyNode`|10.0| | |`hipGraphAddMemcpyNode`|4.3.0| | | |
 |`cudaGraphAddMemcpyNode1D`|11.1| | |`hipGraphAddMemcpyNode1D`|4.5.0| | | |
 |`cudaGraphAddMemcpyNodeFromSymbol`|11.1| | |`hipGraphAddMemcpyNodeFromSymbol`|5.0.0| | | |
@@ -446,7 +427,7 @@
 |`cudaGraphChildGraphNodeGetGraph`|10.0| | |`hipGraphChildGraphNodeGetGraph`|5.0.0| | | |
 |`cudaGraphClone`|10.0| | |`hipGraphClone`|5.0.0| | | |
 |`cudaGraphCreate`|10.0| | |`hipGraphCreate`|4.3.0| | | |
-|`cudaGraphDebugDotPrint`|11.3| | | | | | | |
+|`cudaGraphDebugDotPrint`|11.3| | |`hipGraphDebugDotPrint`|5.5.0| | |5.5.0|
 |`cudaGraphDestroy`|10.0| | |`hipGraphDestroy`|4.3.0| | | |
 |`cudaGraphDestroyNode`|10.0| | |`hipGraphDestroyNode`|5.0.0| | | |
 |`cudaGraphEventRecordNodeGetEvent`|11.1| | |`hipGraphEventRecordNodeGetEvent`|5.0.0| | | |
@@ -480,14 +461,14 @@
 |`cudaGraphInstantiate`|10.0| | |`hipGraphInstantiate`|4.3.0| | | |
 |`cudaGraphInstantiateWithFlags`|11.4| | |`hipGraphInstantiateWithFlags`|5.0.0| | | |
 |`cudaGraphInstantiateWithParams`|12.0| | | | | | | |
-|`cudaGraphKernelNodeCopyAttributes`|11.0| | | | | | | |
+|`cudaGraphKernelNodeCopyAttributes`|11.0| | |`hipGraphKernelNodeCopyAttributes`|5.5.0| | |5.5.0|
 |`cudaGraphKernelNodeGetAttribute`|11.0| | |`hipGraphKernelNodeGetAttribute`|5.2.0| | | |
 |`cudaGraphKernelNodeGetParams`|11.0| | |`hipGraphKernelNodeGetParams`|4.5.0| | | |
 |`cudaGraphKernelNodeSetAttribute`|11.0| | |`hipGraphKernelNodeSetAttribute`|5.2.0| | | |
 |`cudaGraphKernelNodeSetParams`|11.0| | |`hipGraphKernelNodeSetParams`|4.5.0| | | |
 |`cudaGraphLaunch`|11.0| | |`hipGraphLaunch`|4.3.0| | | |
-|`cudaGraphMemAllocNodeGetParams`|11.4| | | | | | | |
-|`cudaGraphMemFreeNodeGetParams`|11.4| | | | | | | |
+|`cudaGraphMemAllocNodeGetParams`|11.4| | |`hipGraphMemAllocNodeGetParams`|5.5.0| | |5.5.0|
+|`cudaGraphMemFreeNodeGetParams`|11.4| | |`hipGraphMemFreeNodeGetParams`|5.5.0| | |5.5.0|
 |`cudaGraphMemcpyNodeGetParams`|11.0| | |`hipGraphMemcpyNodeGetParams`|4.5.0| | | |
 |`cudaGraphMemcpyNodeSetParams`|11.0| | |`hipGraphMemcpyNodeSetParams`|4.5.0| | | |
 |`cudaGraphMemcpyNodeSetParams1D`|11.1| | |`hipGraphMemcpyNodeSetParams1D`|5.0.0| | | |
@@ -498,8 +479,9 @@
 |`cudaGraphNodeFindInClone`|11.0| | |`hipGraphNodeFindInClone`|5.0.0| | | |
 |`cudaGraphNodeGetDependencies`|11.0| | |`hipGraphNodeGetDependencies`|5.0.0| | | |
 |`cudaGraphNodeGetDependentNodes`|11.0| | |`hipGraphNodeGetDependentNodes`|5.0.0| | | |
+|`cudaGraphNodeGetEnabled`|11.6| | |`hipGraphNodeGetEnabled`|5.5.0| | |5.5.0|
 |`cudaGraphNodeGetType`|11.0| | |`hipGraphNodeGetType`|5.0.0| | | |
-|`cudaGraphNodeSetEnabled`|11.6| | | | | | | |
+|`cudaGraphNodeSetEnabled`|11.6| | |`hipGraphNodeSetEnabled`|5.5.0| | |5.5.0|
 |`cudaGraphReleaseUserObject`|11.3| | |`hipGraphReleaseUserObject`|5.3.0| | | |
 |`cudaGraphRemoveDependencies`|11.0| | |`hipGraphRemoveDependencies`|5.0.0| | | |
 |`cudaGraphRetainUserObject`|11.3| | |`hipGraphRetainUserObject`|5.3.0| | | |
@@ -508,36 +490,32 @@
 |`cudaUserObjectRelease`|11.3| | |`hipUserObjectRelease`|5.3.0| | | |
 |`cudaUserObjectRetain`|11.3| | |`hipUserObjectRetain`|5.3.0| | | |
 
-## **31. Driver Entry Point Access**
+## **29. Driver Entry Point Access**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
 |`cudaGetDriverEntryPoint`|11.3| | | | | | | |
 
-## **32. C++ API Routines**
+## **30. C++ API Routines**
 
-Unsupported
+|**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
+|:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
+|`cudaGetKernel`|12.1| | | | | | | |
 
-## **33. Interactions with the CUDA Driver API**
+## **31. Interactions with the CUDA Driver API**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
 |`cudaGetFuncBySymbol`|11.0| | | | | | | |
 
-## **34. Profiler Control [DEPRECATED]**
-
-|**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
-|:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
-|`cudaProfilerInitialize`| |11.0| | | | | | |
-
-## **35. Profiler Control**
+## **32. Profiler Control**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
 |`cudaProfilerStart`| | | |`hipProfilerStart`|1.6.0|3.0.0| | |
 |`cudaProfilerStop`| | | |`hipProfilerStop`|1.6.0|3.0.0| | |
 
-## **36. Data types used by CUDA Runtime**
+## **33. Data types used by CUDA Runtime**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -550,6 +528,7 @@ Unsupported
 |`CUgraphExec_st`|10.0| | |`hipGraphExec`|4.3.0| | | |
 |`CUgraphNode_st`|10.0| | |`hipGraphNode`|4.3.0| | | |
 |`CUgraph_st`|10.0| | |`ihipGraph`|4.3.0| | | |
+|`CUkern_st`|12.1| | | | | | | |
 |`CUstream_st`| | | |`ihipStream_t`|1.5.0| | | |
 |`CUuuid_st`| | | |`hipUUID_t`|5.2.0| | | |
 |`MAJOR_VERSION`|8.0| | | | | | | |
@@ -763,6 +742,10 @@ Unsupported
 |`cudaDevAttrReserved122`|12.0| | | | | | | |
 |`cudaDevAttrReserved123`|12.0| | | | | | | |
 |`cudaDevAttrReserved124`|12.0| | | | | | | |
+|`cudaDevAttrReserved127`|12.1| | | | | | | |
+|`cudaDevAttrReserved128`|12.1| | | | | | | |
+|`cudaDevAttrReserved129`|12.1| | | | | | | |
+|`cudaDevAttrReserved132`|12.1| | | | | | | |
 |`cudaDevAttrReserved92`|9.0| | | | | | | |
 |`cudaDevAttrReserved93`|9.0| | | | | | | |
 |`cudaDevAttrReserved94`|9.0| | |`hipDeviceAttributeCanUseStreamWaitValue`|4.3.0| | | |
@@ -795,6 +778,7 @@ Unsupported
 |`cudaDeviceScheduleMask`| | | |`hipDeviceScheduleMask`|1.6.0| | | |
 |`cudaDeviceScheduleSpin`| | | |`hipDeviceScheduleSpin`|1.6.0| | | |
 |`cudaDeviceScheduleYield`| | | |`hipDeviceScheduleYield`|1.6.0| | | |
+|`cudaDeviceSyncMemops`|12.1| | | | | | | |
 |`cudaDriverEntryPointQueryResult`|12.0| | | | | | | |
 |`cudaDriverEntryPointSuccess`|12.0| | | | | | | |
 |`cudaDriverEntryPointSymbolNotFound`|12.0| | | | | | | |
@@ -1010,6 +994,7 @@ Unsupported
 |`cudaErrorTooManyPeers`| | | | | | | | |
 |`cudaErrorUnknown`| | | |`hipErrorUnknown`|1.6.0| | | |
 |`cudaErrorUnmapBufferObjectFailed`| | | |`hipErrorUnmapFailed`|1.6.0| | | |
+|`cudaErrorUnsupportedDevSideSync`|12.1| | | | | | | |
 |`cudaErrorUnsupportedExecAffinity`|11.4| | | | | | | |
 |`cudaErrorUnsupportedLimit`| | | |`hipErrorUnsupportedLimit`|1.6.0| | | |
 |`cudaErrorUnsupportedPtxVersion`|11.1| | | | | | | |
@@ -1087,6 +1072,7 @@ Unsupported
 |`cudaFuncCachePreferL1`| | | |`hipFuncCachePreferL1`|1.6.0| | | |
 |`cudaFuncCachePreferNone`| | | |`hipFuncCachePreferNone`|1.6.0| | | |
 |`cudaFuncCachePreferShared`| | | |`hipFuncCachePreferShared`|1.6.0| | | |
+|`cudaFunction_t`|11.0| | |`hipFunction_t`|1.6.0| | | |
 |`cudaGLDeviceList`| | | |`hipGLDeviceList`|4.4.0| | | |
 |`cudaGLDeviceListAll`| | | |`hipGLDeviceListAll`|4.4.0| | | |
 |`cudaGLDeviceListCurrentFrame`| | | |`hipGLDeviceListCurrentFrame`|4.4.0| | | |
@@ -1206,6 +1192,7 @@ Unsupported
 |`cudaKernelNodeAttributeMemSyncDomainMap`|12.0| | | | | | | |
 |`cudaKernelNodeAttributePriority`|11.7| | | | | | | |
 |`cudaKernelNodeParams`|10.0| | |`hipKernelNodeParams`|4.3.0| | | |
+|`cudaKernel_t`|12.1| | | | | | | |
 |`cudaKeyValuePair`| | |12.0| | | | | |
 |`cudaLaunchAttribute`|11.8| | | | | | | |
 |`cudaLaunchAttributeAccessPolicyWindow`|11.8| | | | | | | |
@@ -1226,8 +1213,8 @@ Unsupported
 |`cudaLaunchConfig_t`|11.8| | | | | | | |
 |`cudaLaunchMemSyncDomain`|12.0| | | | | | | |
 |`cudaLaunchMemSyncDomainDefault`|12.0| | | | | | | |
-|`cudaLaunchMemSyncDomainMap`|12.0| | |`hipLaunchMemSyncDomainMap`| | | | |
-|`cudaLaunchMemSyncDomainMap_st`|12.0| | |`hipLaunchMemSyncDomainMap`| | | | |
+|`cudaLaunchMemSyncDomainMap`|12.0| | | | | | | |
+|`cudaLaunchMemSyncDomainMap_st`|12.0| | | | | | | |
 |`cudaLaunchMemSyncDomainRemote`|12.0| | | | | | | |
 |`cudaLaunchParams`|9.0| | |`hipLaunchParams`|2.6.0| | | |
 |`cudaLimit`| | | |`hipLimit_t`|1.6.0| | | |
@@ -1249,7 +1236,7 @@ Unsupported
 |`cudaMemAdviseUnsetAccessedBy`|8.0| | |`hipMemAdviseUnsetAccessedBy`|3.7.0| | | |
 |`cudaMemAdviseUnsetPreferredLocation`|8.0| | |`hipMemAdviseUnsetPreferredLocation`|3.7.0| | | |
 |`cudaMemAdviseUnsetReadMostly`|8.0| | |`hipMemAdviseUnsetReadMostly`|3.7.0| | | |
-|`cudaMemAllocNodeParams`|11.4| | |`hipMemallocNodeParams`| | | | |
+|`cudaMemAllocNodeParams`|11.4| | |`hipMemAllocNodeParams`|5.5.0| | |5.5.0|
 |`cudaMemAllocationHandleType`|11.2| | |`hipMemAllocationHandleType`|5.2.0| | | |
 |`cudaMemAllocationType`|11.2| | |`hipMemAllocationType`|5.2.0| | | |
 |`cudaMemAllocationTypeInvalid`|11.2| | |`hipMemAllocationTypeInvalid`|5.2.0| | | |
@@ -1415,16 +1402,42 @@ Unsupported
 |`cudaUserObject_t`|11.3| | |`hipUserObject_t`|5.3.0| | | |
 |`libraryPropertyType`|8.0| | | | | | | |
 |`libraryPropertyType_t`|8.0| | | | | | | |
-|`surfaceReference`| | | |`surfaceReference`|1.9.0| | | |
+|`surfaceReference`| | |12.0|`surfaceReference`|1.9.0| | | |
+|`texture`| | |12.0|`texture`| | | | |
 |`textureReference`| | | |`textureReference`|1.6.0| | | |
 
-## **37. Execution Control [REMOVED]**
+## **34. Execution Control [REMOVED]**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
 |`cudaConfigureCall`| | |10.1|`hipConfigureCall`|1.9.0| | | |
 |`cudaLaunch`| | |10.1|`hipLaunchByPtr`|1.9.0| | | |
 |`cudaSetupArgument`| | |10.1|`hipSetupArgument`|1.9.0| | | |
+
+## **35. Texture Reference Management [REMOVED]**
+
+|**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
+|:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
+|`cudaBindTexture`| |11.0|12.0|`hipBindTexture`|1.6.0|3.8.0| | |
+|`cudaBindTexture2D`| |11.0|12.0|`hipBindTexture2D`|1.7.0|3.8.0| | |
+|`cudaBindTextureToArray`| |11.0|12.0|`hipBindTextureToArray`|1.6.0|3.8.0| | |
+|`cudaBindTextureToMipmappedArray`| |11.0|12.0|`hipBindTextureToMipmappedArray`|1.7.0| | | |
+|`cudaGetTextureAlignmentOffset`| |11.0|12.0|`hipGetTextureAlignmentOffset`|1.9.0|3.8.0| | |
+|`cudaGetTextureReference`| |11.0|12.0|`hipGetTextureReference`|1.7.0|5.3.0| | |
+|`cudaUnbindTexture`| |11.0|12.0|`hipUnbindTexture`|1.6.0|3.8.0| | |
+
+## **36. Surface Reference Management [REMOVED]**
+
+|**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
+|:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
+|`cudaBindSurfaceToArray`| |11.0|12.0| | | | | |
+|`cudaGetSurfaceReference`| |11.0|12.0| | | | | |
+
+## **37. Profiler Control [REMOVED]**
+
+|**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
+|:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
+|`cudaProfilerInitialize`| |11.0|12.0| | | | | |
 
 
 \*A - Added; D - Deprecated; R - Removed; E - Experimental

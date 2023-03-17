@@ -685,12 +685,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DEVICE_FUNCTION_MAP {
   {"__funnelshift_r",                   {"__funnelshift_r",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
   {"__funnelshift_rc",                  {"__funnelshift_rc",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
   {"__double2half",                     {"__double2half",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__hmax",                            {"__hmax",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__hmax_nan",                        {"__hmax_nan",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
+  {"__hmax",                            {"__hmax",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1, HIP_EXPERIMENTAL}},
+  {"__hmax_nan",                        {"__hmax_nan",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1, HIP_EXPERIMENTAL}},
   {"__hmax2",                           {"__hmax2",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
   {"__hmax2_nan",                       {"__hmax2_nan",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__hmin",                            {"__hmin",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__hmin_nan",                        {"__hmin_nan",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
+  {"__hmin",                            {"__hmin",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1, HIP_EXPERIMENTAL}},
+  {"__hmin_nan",                        {"__hmin_nan",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1, HIP_EXPERIMENTAL}},
   {"__hmin2",                           {"__hmin2",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
   {"__hmin2_nan",                       {"__hmin2_nan",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
   {"__stwb",                            {"__stwb",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
@@ -1452,6 +1452,10 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DEVICE_FUNCTION_VER_MAP {
   {"__funnelshift_lc",                  {HIP_4040, HIP_0,    HIP_0   }},
   {"__funnelshift_r",                   {HIP_4040, HIP_0,    HIP_0   }},
   {"__funnelshift_rc",                  {HIP_4040, HIP_0,    HIP_0   }},
+  {"__hmax",                            {HIP_5050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"__hmax_nan",                        {HIP_5050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"__hmin",                            {HIP_5050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"__hmin_nan",                        {HIP_5050, HIP_0,    HIP_0,  HIP_LATEST}},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_DEVICE_FUNCTION_API_SECTION_MAP {

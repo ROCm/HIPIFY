@@ -75,18 +75,18 @@ cl::opt<bool> Verbose("v",
   cl::cat(ToolTemplateCategory));
 
 cl::opt<bool> TranslateToRoc("roc",
-  cl::desc("Translate to roc instead of hip where it is possible"),
+  cl::desc("Translate to 'roc' instead of 'hip' where it is possible"),
   cl::value_desc("roc"),
   cl::cat(ToolTemplateCategory));
 
 cl::opt<bool> TranslateToMIOpen("miopen",
-  cl::desc("Translate to miopen instead of hip where it is possible"),
+  cl::desc("Translate to 'miopen' instead of 'hip' where it is possible"),
   cl::value_desc("miopen"),
   cl::init(false),
   cl::cat(ToolTemplateCategory));
 
 cl::opt<bool> Inplace("inplace",
-  cl::desc("Modify input file inplace, replacing input with hipified output, save backup in .prehip file"),
+  cl::desc("Modify input file in-place"),
   cl::value_desc("inplace"),
   cl::cat(ToolTemplateCategory));
 
@@ -106,7 +106,7 @@ cl::opt<bool> PrintStats("print-stats",
   cl::cat(ToolTemplateCategory));
 
 cl::opt<bool> PrintStatsCSV("print-stats-csv",
-  cl::desc("Print translation statistics in CSV file"),
+  cl::desc("Print translation statistics in a CSV file"),
   cl::value_desc("print-stats-csv"),
   cl::cat(ToolTemplateCategory));
 
@@ -116,12 +116,12 @@ cl::opt<std::string> OutputStatsFilename("o-stats",
   cl::cat(ToolTemplateCategory));
 
 cl::opt<bool> Examine("examine",
-  cl::desc("Combines -no-output and -print-stats options"),
+  cl::desc("Combine the '-no-output' and '-print-stats' options"),
   cl::value_desc("examine"),
   cl::cat(ToolTemplateCategory));
 
 cl::opt<bool> DashDash("  ",
-  cl::desc("Separator between hipify-clang and clang options;\ndon't specify if there are no clang options"),
+  cl::desc("Separator between hipify-clang and clang options; don't specify if there are no clang options"),
   cl::ValueDisallowed,
   cl::cat(ToolTemplateCategory));
 
@@ -144,8 +144,13 @@ cl::opt<bool> SkipExcludedPPConditionalBlocks("skip-excluded-preprocessor-condit
   cl::value_desc("skip-excluded-preprocessor-conditional-blocks"),
   cl::cat(ToolTemplateCategory));
 
+cl::opt<bool> DefaultPreprocessor("default-preprocessor",
+  cl::desc("Enable default preprocessor behaviour (synonymous with '--skip-excluded-preprocessor-conditional-blocks')"),
+  cl::value_desc("default-preprocessor"),
+  cl::cat(ToolTemplateCategory));
+
 cl::opt<std::string> CudaGpuArch("cuda-gpu-arch",
-  cl::desc("CUDA GPU architecture (e.g. sm_35);\nmay be specified more than once"),
+  cl::desc("CUDA GPU architecture (e.g. sm_35); may be specified more than once"),
   cl::value_desc("value"),
   cl::ZeroOrMore,
   cl::Prefix,
@@ -162,13 +167,25 @@ cl::opt<bool> GenerateCSV("csv",
   cl::cat(ToolTemplateCategory));
 
 cl::opt<std::string> DocFormat("doc-format",
-  cl::desc("Documentation format: 'full' (default), 'strict', or 'compact';\n'--md' or '--csv' option should be specified"),
+  cl::desc("Documentation format: 'full' (default), 'strict', or 'compact'; the '--md' or '--csv' option must be specified"),
   cl::value_desc("value"),
   cl::cat(ToolTemplateCategory));
 
 cl::opt<bool> Experimental("experimental",
-  cl::desc("HIP APIs that are experimentally supported"),
+  cl::desc("Hipify HIP APIs that are experimentally supported, otherwise, the corresponding warnings will be emitted"),
   cl::value_desc("experimental"),
+  cl::cat(ToolTemplateCategory));
+
+cl::opt<bool> NoUndocumented("no-undocumented-features",
+  cl::desc("Do not rely on undocumented features in code transformation"),
+  cl::value_desc("no-undocumented-features"),
+  cl::init(false),
+  cl::cat(ToolTemplateCategory));
+
+cl::opt<bool> NoWarningsUndocumented("no-warnings-on-undocumented-features",
+  cl::desc("Suppress warnings on undocumented features in code transformation"),
+  cl::value_desc("no-warnings-on-undocumented-features"),
+  cl::init(false),
   cl::cat(ToolTemplateCategory));
 
 cl::opt<bool> CudaKernelExecutionSyntax("cuda-kernel-execution-syntax",
@@ -178,8 +195,13 @@ cl::opt<bool> CudaKernelExecutionSyntax("cuda-kernel-execution-syntax",
   cl::cat(ToolTemplateCategory));
 
 cl::opt<bool> HipKernelExecutionSyntax("hip-kernel-execution-syntax",
-  cl::desc("Transform CUDA kernel launch syntax to a regular HIP function call (overrides \"--cuda-kernel-execution-syntax\")"),
+  cl::desc("Transform CUDA kernel launch syntax to a regular HIP function call (overrides '--cuda-kernel-execution-syntax')"),
   cl::value_desc("hip-kernel-execution-syntax"),
+  cl::cat(ToolTemplateCategory));
+
+cl::opt<bool> Versions("versions",
+  cl::desc("Display the versions of the supported 3rd-party software"),
+  cl::value_desc("versions"),
   cl::cat(ToolTemplateCategory));
 
 cl::extrahelp CommonHelp(ct::CommonOptionsParser::HelpMessage);
@@ -188,6 +210,7 @@ const std::vector<std::string> hipifyOptions {
   std::string(PrintStatsCSV.ArgStr),
   std::string(PrintStats.ArgStr),
   std::string(SkipExcludedPPConditionalBlocks.ArgStr),
+  std::string(DefaultPreprocessor.ArgStr),
   std::string(HipKernelExecutionSyntax.ArgStr),
   std::string(CudaKernelExecutionSyntax.ArgStr),
   std::string(GeneratePerl.ArgStr),
@@ -203,6 +226,9 @@ const std::vector<std::string> hipifyOptions {
   std::string(SaveTemps.ArgStr),
   std::string(DocFormat.ArgStr),
   std::string(Experimental.ArgStr),
+  std::string(Versions.ArgStr),
+  std::string(NoUndocumented.ArgStr),
+  std::string(NoWarningsUndocumented.ArgStr),
 };
 
 const std::vector<std::string> hipifyOptionsWithTwoArgs {
