@@ -1,6 +1,13 @@
 *.json
 *.hip
 **/__pycache__/*
-**/_build/*
-_toc.yml
 .python-version
+
+# documentation artifacts
+build/
+_build/
+_images/
+_static/
+_templates/
+_toc.yml
+docBin/
