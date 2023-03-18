@@ -883,6 +883,7 @@ my %experimental_funcs = (
     "cudaGraphAddMemFreeNode" => "5.5.0",
     "cudaGraphAddMemAllocNode" => "5.5.0",
     "cudaExternalMemoryDedicated" => "5.5.0",
+    "cudaArrayGetInfo" => "5.6.0",
     "cuPointerSetAttribute" => "5.5.0",
     "cuLaunchCooperativeKernelMultiDevice" => "5.5.0",
     "cuLaunchCooperativeKernel" => "5.5.0",
@@ -894,6 +895,10 @@ my %experimental_funcs = (
     "cuGraphDebugDotPrint" => "5.5.0",
     "cuGraphAddMemFreeNode" => "5.5.0",
     "cuGraphAddMemAllocNode" => "5.5.0",
+    "cuArrayGetDescriptor_v2" => "5.6.0",
+    "cuArrayGetDescriptor" => "5.6.0",
+    "cuArray3DGetDescriptor_v2" => "5.6.0",
+    "cuArray3DGetDescriptor" => "5.6.0",
     "CUgraphDebugDot_flags_enum" => "5.5.0",
     "CUgraphDebugDot_flags" => "5.5.0",
     "CU_OCCUPANCY_DISABLE_CACHING_OVERRIDE" => "5.5.0",
@@ -1052,6 +1057,11 @@ sub subst {
 }
 
 sub experimentalSubstitutions {
+    subst("cuArray3DGetDescriptor", "hipArray3DGetDescriptor", "memory");
+    subst("cuArray3DGetDescriptor_v2", "hipArray3DGetDescriptor", "memory");
+    subst("cuArrayGetDescriptor", "hipArrayGetDescriptor", "memory");
+    subst("cuArrayGetDescriptor_v2", "hipArrayGetDescriptor", "memory");
+    subst("cudaArrayGetInfo", "hipArrayGetInfo", "memory");
     subst("cuPointerSetAttribute", "hipPointerSetAttribute", "unified");
     subst("cuLaunchCooperativeKernel", "hipModuleLaunchCooperativeKernel", "execution");
     subst("cuLaunchCooperativeKernelMultiDevice", "hipModuleLaunchCooperativeKernelMultiDevice", "execution");
@@ -6842,7 +6852,6 @@ sub warnUnsupportedFunctions {
         "cudaArrayGetSparseProperties",
         "cudaArrayGetPlane",
         "cudaArrayGetMemoryRequirements",
-        "cudaArrayGetInfo",
         "cudaArrayDeferredMapping",
         "cudaArrayColorAttachment",
         "cuWGLGetDevice",
@@ -7039,10 +7048,6 @@ sub warnUnsupportedFunctions {
         "cuArrayGetSparseProperties",
         "cuArrayGetPlane",
         "cuArrayGetMemoryRequirements",
-        "cuArrayGetDescriptor_v2",
-        "cuArrayGetDescriptor",
-        "cuArray3DGetDescriptor_v2",
-        "cuArray3DGetDescriptor",
         "csrsv2Info",
         "csrsm2Info",
         "csrilu02Info",
@@ -9552,7 +9557,7 @@ if ($help) {
     print STDERR "$USAGE\n";
 }
 if ($version) {
-    print STDERR "HIP version 5.5.0\n";
+    print STDERR "HIP version 5.6.0\n";
 }
 while (@ARGV) {
     $fileName=shift (@ARGV);

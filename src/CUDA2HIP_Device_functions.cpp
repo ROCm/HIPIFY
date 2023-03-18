@@ -1452,10 +1452,10 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DEVICE_FUNCTION_VER_MAP {
   {"__funnelshift_lc",                  {HIP_4040, HIP_0,    HIP_0   }},
   {"__funnelshift_r",                   {HIP_4040, HIP_0,    HIP_0   }},
   {"__funnelshift_rc",                  {HIP_4040, HIP_0,    HIP_0   }},
-  {"__hmax",                            {HIP_5050, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"__hmax_nan",                        {HIP_5050, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"__hmin",                            {HIP_5050, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"__hmin_nan",                        {HIP_5050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"__hmax",                            {HIP_5050, HIP_0,    HIP_0,  HIP_5050}},
+  {"__hmax_nan",                        {HIP_5050, HIP_0,    HIP_0,  HIP_5050}},
+  {"__hmin",                            {HIP_5050, HIP_0,    HIP_0,  HIP_5050}},
+  {"__hmin_nan",                        {HIP_5050, HIP_0,    HIP_0,  HIP_5050}},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_DEVICE_FUNCTION_API_SECTION_MAP {

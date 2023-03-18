@@ -1447,13 +1447,13 @@
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
 |`cuArray3DCreate`| | | |`hipArray3DCreate`|1.7.1| | | |
 |`cuArray3DCreate_v2`| | | |`hipArray3DCreate`|1.7.1| | | |
-|`cuArray3DGetDescriptor`| | | | | | | | |
-|`cuArray3DGetDescriptor_v2`| | | | | | | | |
+|`cuArray3DGetDescriptor`| | | |`hipArray3DGetDescriptor`|5.6.0| | |5.6.0|
+|`cuArray3DGetDescriptor_v2`| | | |`hipArray3DGetDescriptor`|5.6.0| | |5.6.0|
 |`cuArrayCreate`| | | |`hipArrayCreate`|1.9.0| | | |
 |`cuArrayCreate_v2`| | | |`hipArrayCreate`|1.9.0| | | |
 |`cuArrayDestroy`| | | |`hipArrayDestroy`|4.2.0| | | |
-|`cuArrayGetDescriptor`| | | | | | | | |
-|`cuArrayGetDescriptor_v2`| | | | | | | | |
+|`cuArrayGetDescriptor`| | | |`hipArrayGetDescriptor`|5.6.0| | |5.6.0|
+|`cuArrayGetDescriptor_v2`| | | |`hipArrayGetDescriptor`|5.6.0| | |5.6.0|
 |`cuArrayGetMemoryRequirements`|11.6| | | | | | | |
 |`cuArrayGetPlane`|11.2| | | | | | | |
 |`cuArrayGetSparseProperties`|11.1| | | | | | | |
