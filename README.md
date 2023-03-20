@@ -3,7 +3,18 @@ HIPIFY is a set of tools to translate CUDA source code into portable [HIP](https
 
 ## Documentation
 Information about HIPIFY and other user topics is found in the [HIPIFY documentation](https://rocmdocs.amd.com/projects/HIPIFY/en/latest/).
-The documentation source is browseable [here](docs/source/index.md).
+
+### How to build documentation
+
+Run the steps below to build documentation locally.
+
+```
+cd docs
+
+pip3 install -r .sphinx/requirements.txt
+
+python3 -m sphinx -T -E -b html -d _build/doctrees -D language=en . _build/html
+```
 
 ## Prerequisites
 The [ROCm website](https://docs.amd.com) describes how to set up the ROCm repositories and install the required platform dependencies.
