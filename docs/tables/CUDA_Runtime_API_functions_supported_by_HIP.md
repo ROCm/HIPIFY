@@ -146,7 +146,7 @@
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
-|`cudaArrayGetInfo`| | | | | | | | |
+|`cudaArrayGetInfo`| | | |`hipArrayGetInfo`|5.6.0| | |5.6.0|
 |`cudaArrayGetMemoryRequirements`|11.6| | | | | | | |
 |`cudaArrayGetPlane`|11.2| | | | | | | |
 |`cudaArrayGetSparseProperties`|11.1| | | | | | | |

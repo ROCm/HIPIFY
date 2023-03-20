@@ -3844,6 +3844,6 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {
   {"HIPRTC_JIT_NUM_LEGACY_INPUT_TYPES",                                {HIP_5030, HIP_0,    HIP_0   }},
   {"ihiprtcLinkState",                                                 {HIP_5030, HIP_0,    HIP_0   }},
   {"hiprtcLinkState",                                                  {HIP_5030, HIP_0,    HIP_0   }},
-  {"hipFunctionLaunchParams_t",                                        {HIP_5050, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipFunctionLaunchParams",                                          {HIP_5050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipFunctionLaunchParams_t",                                        {HIP_5050, HIP_0,    HIP_0,  HIP_5050}},
+  {"hipFunctionLaunchParams",                                          {HIP_5050, HIP_0,    HIP_0,  HIP_5050}},
 };
