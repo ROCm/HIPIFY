@@ -1,3 +1,5 @@
+all
+
 # Extend line length
 rule 'MD013', :line_length => 99999
 
