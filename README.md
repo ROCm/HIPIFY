@@ -1,7 +1,9 @@
 # HIPIFY
+
 HIPIFY is a set of tools to translate CUDA source code into portable [HIP](https://github.com/ROCm-Developer-Tools/HIP) C++ automatically.
 
 ## Documentation
+
 Information about HIPIFY and other user topics is found in the [HIPIFY documentation](https://rocmdocs.amd.com/projects/HIPIFY/en/latest/).
 
 ### How to build documentation
@@ -17,9 +19,11 @@ python3 -m sphinx -T -E -b html -d _build/doctrees -D language=en . _build/html
 ```
 
 ## Prerequisites
+
 The [ROCm website](https://docs.amd.com) describes how to set up the ROCm repositories and install the required platform dependencies.
 
 ## Installing pre-built packages
+
 With the AMD ROCm package repositories installed, the `hipify` package can be retrieved from the system package manager. For example, on Ubuntu:
 
 ```
@@ -282,9 +286,9 @@ The binary can then be found at `./dist/hipify-clang` or at the folder specified
 2. build [`LLVM+CLANG`](http://releases.llvm.org/9.0.0/docs/CMake.html):
 
 ```bash
-     cd .. \
-     mkdir build dist \
-     cd build
+    cd .. \
+    mkdir build dist \
+    cd build
 ```
 
  **Linux**:
