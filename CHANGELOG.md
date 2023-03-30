@@ -12,9 +12,10 @@ Full documentation for HIPIFY is available at [hipify.readthedocs.io](https://hi
   - --no-undocumented-features
   - --no-warnings-on-undocumented-features
   - --versions
-  
+
 ### Fixed
 - Accessing half2 struct members (undocumented feature)
+- INSTALL to `bin` subfolder
 
 ## HIPIFY for ROCm 5.5.0
 ### Added
@@ -33,3 +34,20 @@ Full documentation for HIPIFY is available at [hipify.readthedocs.io](https://hi
 - hipRTC support
 - Error Handling API support
 - hipBLAS synthetic tests
+
+## HIPIFY for ROCm 5.3.0
+### Added
+- CUDA 11.7 support
+- cuDNN 8.4.1 support
+- CUB initial support
+- More synthetic tests
+- New options:
+  - --hip-kernel-execution-syntax
+
+### Fixed
+- Patches for LLVM 14.0.x (Windows only)
+- Add GNUInstallDirs for CMake on Linux
+
+### Misc
+- LLVM 3.8.0 is out ofsupport
+- HIPIFY-specific options support in unit testing
