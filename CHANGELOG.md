@@ -49,5 +49,38 @@ Full documentation for HIPIFY is available at [hipify.readthedocs.io](https://hi
 - Add GNUInstallDirs for CMake on Linux
 
 ### Misc
-- LLVM 3.8.0 is out ofsupport
+- LLVM 3.8.0 is out of support
 - HIPIFY-specific options support in unit testing
+
+## HIPIFY for ROCm 5.2.0
+### Added
+- CUDA 11.6 support
+- cuDNN 8.3.3 support
+- LLVM 14.0.0 support
+
+## HIPIFY for ROCm 5.1.0
+### Added
+- CUDA 11.5 support
+- cuDNN 8.3.2 support
+
+### Fixed
+- hipification of cuOccupancyMaxPotentialBlockSize and cuOccupancyMaxPotentialBlockSizeWithFlags
+
+## HIPIFY for ROCm 5.0.0
+### Added
+- CUDA 11.4 support
+- cuDNN 8.3.2 support
+- Initial hipRTC support
+- LLVM 13.0.0 support
+- GNU C/C++ 11.2 support
+- Visual Studio 2022 support
+- New options:
+  - --experimental
+  - --cuda-kernel-execution-syntax
+
+### Fixed
+- Packaging for Debian and RPM Linuxes
+
+### Misc
+- Support for different formats of the generated documentation
+- Experimentally supported APIs
