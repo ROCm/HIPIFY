@@ -43,10 +43,16 @@ namespace hipify {
   };
 
   typedef std::map<unsigned, CastInfo> ArgCastMap;
+
+  struct ArgCastStruct {
+    ArgCastMap castMap;
+    bool isToRoc = false;
+    bool isToMIOpen = false;
+  };
 }
 
 extern std::string getCastType(hipify::CastTypes c);
-extern std::map<std::string, hipify::ArgCastMap> FuncArgCasts;
+extern std::map<std::string, hipify::ArgCastStruct> FuncArgCasts;
 
 namespace perl {
 

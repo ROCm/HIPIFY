@@ -67,6 +67,7 @@ const std::string sCudaGraphExecMemcpyNodeSetParamsFromSymbol = "cudaGraphExecMe
 const std::string sCuOccupancyMaxPotentialBlockSize = "cuOccupancyMaxPotentialBlockSize";
 const std::string sCuOccupancyMaxPotentialBlockSizeWithFlags = "cuOccupancyMaxPotentialBlockSizeWithFlags";
 const std::string sCudaGetTextureReference = "cudaGetTextureReference";
+const std::string sCudnnGetConvolutionForwardWorkspaceSize = "cudnnGetConvolutionForwardWorkspaceSize";
 // Matchers' names
 const StringRef sCudaLaunchKernel = "cudaLaunchKernel";
 const StringRef sCudaHostFuncCall = "cudaHostFuncCall";
@@ -87,22 +88,121 @@ std::string getCastType(hipify::CastTypes c) {
   }
 }
 
-std::map<std::string, ArgCastMap> FuncArgCasts {
-  {sCudaMemcpyToSymbol, {{0, {e_HIP_SYMBOL, cw_None}}}},
-  {sCudaMemcpyToSymbolAsync, {{0, {e_HIP_SYMBOL, cw_None}}}},
-  {sCudaGetSymbolSize, {{1, {e_HIP_SYMBOL, cw_None}}}},
-  {sCudaGetSymbolAddress, {{1, {e_HIP_SYMBOL, cw_None}}}},
-  {sCudaMemcpyFromSymbol, {{1, {e_HIP_SYMBOL, cw_None}}}},
-  {sCudaMemcpyFromSymbolAsync, {{1, {e_HIP_SYMBOL, cw_None}}}},
-  {sCudaGraphAddMemcpyNodeToSymbol, {{4, {e_HIP_SYMBOL, cw_None}}}},
-  {sCudaGraphAddMemcpyNodeFromSymbol, {{5, {e_HIP_SYMBOL, cw_None}}}},
-  {sCudaGraphMemcpyNodeSetParamsToSymbol, {{1, {e_HIP_SYMBOL, cw_None}}}},
-  {sCudaGraphMemcpyNodeSetParamsFromSymbol, {{2, {e_HIP_SYMBOL, cw_None}}}},
-  {sCudaGraphExecMemcpyNodeSetParamsToSymbol, {{2, {e_HIP_SYMBOL, cw_None}}}},
-  {sCudaGraphExecMemcpyNodeSetParamsFromSymbol, {{3, {e_HIP_SYMBOL, cw_None}}}},
-  {sCudaGetTextureReference, {{1, {e_HIP_SYMBOL, cw_None}}}},
-  {sCuOccupancyMaxPotentialBlockSize, {{3, {e_remove_argument, cw_DataLoss}}}},
-  {sCuOccupancyMaxPotentialBlockSizeWithFlags, {{3, {e_remove_argument, cw_DataLoss}}}},
+std::map<std::string, ArgCastStruct> FuncArgCasts {
+  {sCudaMemcpyToSymbol,
+    {
+      {
+        {0, {e_HIP_SYMBOL, cw_None}}
+      }
+    }
+  },
+  {sCudaMemcpyToSymbolAsync,
+    {
+      {
+        {0, {e_HIP_SYMBOL, cw_None}}
+      }
+    }
+  },
+  {sCudaGetSymbolSize,
+    {
+      {
+        {1, {e_HIP_SYMBOL, cw_None}}
+      }
+    }
+  },
+  {sCudaGetSymbolAddress,
+    {
+      {
+        {1, {e_HIP_SYMBOL, cw_None}}
+      }
+    }
+  },
+  {sCudaMemcpyFromSymbol,
+    {
+      {
+        {1, {e_HIP_SYMBOL, cw_None}}
+      }
+    }
+  },
+  {sCudaMemcpyFromSymbolAsync,
+    {
+      {
+        {1, {e_HIP_SYMBOL, cw_None}}
+      }
+    }
+  },
+  {sCudaGraphAddMemcpyNodeToSymbol,
+    {
+      {
+        {4, {e_HIP_SYMBOL, cw_None}}
+      }
+    }
+  },
+  {sCudaGraphAddMemcpyNodeFromSymbol,
+    {
+      {
+        {5, {e_HIP_SYMBOL, cw_None}}
+      }
+    }
+  },
+  {sCudaGraphMemcpyNodeSetParamsToSymbol,
+    {
+      {
+        {1, {e_HIP_SYMBOL, cw_None}}
+      }
+    }
+  },
+  {sCudaGraphMemcpyNodeSetParamsFromSymbol,
+    {
+      {
+        {2, {e_HIP_SYMBOL, cw_None}}
+      }
+    }
+  },
+  {sCudaGraphExecMemcpyNodeSetParamsToSymbol,
+    {
+      {
+        {2, {e_HIP_SYMBOL, cw_None}}
+      }
+    }
+  },
+  {sCudaGraphExecMemcpyNodeSetParamsFromSymbol,
+    {
+      {
+        {3, {e_HIP_SYMBOL, cw_None}}
+      }
+    }
+  },
+  {sCudaGetTextureReference,
+    {
+      {
+        {1, {e_HIP_SYMBOL, cw_None}}
+      }
+    }
+  },
+  {sCuOccupancyMaxPotentialBlockSize,
+    {
+      {
+        {3, {e_remove_argument, cw_DataLoss}}
+      }
+    }
+  },
+  {sCuOccupancyMaxPotentialBlockSizeWithFlags,
+    {
+      {
+        {3, {e_remove_argument, cw_DataLoss}}
+      }
+    }
+  },
+  {sCudnnGetConvolutionForwardWorkspaceSize,
+    {
+      {
+        {5, {e_remove_argument, cw_None}}
+      },
+      true,
+      true
+    }
+  },
 };
 
 void HipifyAction::RewriteString(StringRef s, clang::SourceLocation start) {
@@ -539,9 +639,10 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
     std::string sName = funcDcl->getDeclName().getAsString();
     auto it = FuncArgCasts.find(sName);
     if (it == FuncArgCasts.end()) return false;
+    auto castStruct = it->second;
+    if (castStruct.isToMIOpen != TranslateToMIOpen || castStruct.isToRoc != TranslateToRoc) return false;
     clang::LangOptions DefaultLangOptions;
-    auto casts = it->second;
-    for (auto c : casts) {
+    for (auto c : castStruct.castMap) {
       unsigned int argNum = c.first;
       clang::SmallString<40> XStr;
       llvm::raw_svector_ostream OS(XStr);
@@ -662,7 +763,8 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
             sCudaGraphExecMemcpyNodeSetParamsFromSymbol,
             sCuOccupancyMaxPotentialBlockSize,
             sCuOccupancyMaxPotentialBlockSizeWithFlags,
-            sCudaGetTextureReference
+            sCudaGetTextureReference,
+            sCudnnGetConvolutionForwardWorkspaceSize
           )
         )
       )
