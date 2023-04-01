@@ -234,6 +234,11 @@ int main() {
   cudnnConvolutionFwdAlgoPerf_t ConvolutionFwdAlgoPerf_t;
   cudnnConvolutionFwdAlgoPerfStruct ConvolutionFwdAlgoPerfStruct;
 
+  // CHECK: miopenConvAlgoPerf_t ConvolutionBwdDataAlgoPerf_t;
+  // CHECK-NEXT: miopenConvAlgoPerf_t ConvolutionBwdDataAlgoPerfStruct;
+  cudnnConvolutionBwdDataAlgoPerf_t ConvolutionBwdDataAlgoPerf_t;
+  cudnnConvolutionBwdDataAlgoPerfStruct ConvolutionBwdDataAlgoPerfStruct;
+
   // CUDA: cudnnStatus_t CUDNNWINAPI cudnnCreateTensorDescriptor(cudnnTensorDescriptor_t* tensorDesc);
   // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenCreateTensorDescriptor(miopenTensorDescriptor_t* tensorDesc);
   // CHECK: status = miopenCreateTensorDescriptor(&tensorDescriptor);
@@ -267,6 +272,15 @@ int main() {
   // CHECK: status = miopenDestroyTensorDescriptor(tensorDescriptor);
   status = cudnnDestroyTensorDescriptor(tensorDescriptor);
 
+
+  // CHECK: miopenTensorDescriptor_t aD;
+  // CHECK-NEXT: miopenTensorDescriptor_t bD;
+  // CHECK-NEXT: miopenTensorDescriptor_t cD;
+  // CHECK-NEXT: miopenTensorDescriptor_t xD;
+  // CHECK-NEXT: miopenTensorDescriptor_t yD;
+  // CHECK-NEXT: miopenTensorDescriptor_t wD;
+  // CHECK-NEXT: miopenTensorDescriptor_t inputD;
+  // CHECK-NEXT: miopenTensorDescriptor_t dbD;
   cudnnTensorDescriptor_t aD;
   cudnnTensorDescriptor_t bD;
   cudnnTensorDescriptor_t cD;
@@ -274,6 +288,7 @@ int main() {
   cudnnTensorDescriptor_t yD;
   cudnnTensorDescriptor_t wD;
   cudnnTensorDescriptor_t inputD;
+  cudnnTensorDescriptor_t dbD;
   void* A = nullptr;
   void* B = nullptr;
   void* C = nullptr;
@@ -282,8 +297,11 @@ int main() {
   void* alpha2 = nullptr;
   void* beta = nullptr;
   void* x = nullptr;
+  void* dx = nullptr;
   void* y = nullptr;
+  void* dy = nullptr;
   void* W = nullptr;
+  void* db = nullptr;
   int groupCount = 0;
   int requestedAlgoCount = 0;
   int returnedAlgoCount = 0;
@@ -341,11 +359,33 @@ int main() {
   // CHECK: status = miopenConvolutionForwardGetWorkSpaceSize(handle, xD, filterDescriptor, convolutionDescriptor, yD,  &workSpaceSizeInBytes);
   status = cudnnGetConvolutionForwardWorkspaceSize(handle, xD, filterDescriptor, convolutionDescriptor, yD, convolutionFwdAlgo, &workSpaceSizeInBytes);
 
-  // TODO: swap correstly last 5 arguments
+  // TODO: swap correctly last 5 arguments
   // CUDA: cudnnStatus_t CUDNNWINAPI cudnnConvolutionForward(cudnnHandle_t handle, const void* alpha, const cudnnTensorDescriptor_t xDesc, const void* x, const cudnnFilterDescriptor_t wDesc, const void* w, const cudnnConvolutionDescriptor_t convDesc, cudnnConvolutionFwdAlgo_t algo, void* workSpace, size_t workSpaceSizeInBytes, const void* beta, const cudnnTensorDescriptor_t yDesc, void* y);
   // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenConvolutionForward(miopenHandle_t handle, const void* alpha, const miopenTensorDescriptor_t xDesc, const void* x, const miopenTensorDescriptor_t wDesc, const void* w, const miopenConvolutionDescriptor_t convDesc, miopenConvFwdAlgorithm_t algo, const void* beta, const miopenTensorDescriptor_t yDesc, void* y, void* workSpace, size_t workSpaceSize);
   // CHECK: status = miopenConvolutionForward(handle, alpha, xD, x, filterDescriptor, W, convolutionDescriptor, convolutionFwdAlgo, workSpace, workSpaceSizeInBytes, beta, yD, y);
   status = cudnnConvolutionForward(handle, alpha, xD, x, filterDescriptor, W, convolutionDescriptor, convolutionFwdAlgo, workSpace, workSpaceSizeInBytes, beta, yD, y);
+
+  // TODO: swap 2 and 3 arguments
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnGetConvolutionBackwardDataWorkspaceSize(cudnnHandle_t handle, const cudnnFilterDescriptor_t wDesc, const cudnnTensorDescriptor_t dyDesc, const cudnnConvolutionDescriptor_t convDesc, const cudnnTensorDescriptor_t dxDesc, cudnnConvolutionBwdDataAlgo_t algo, size_t* sizeInBytes);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenConvolutionBackwardDataGetWorkSpaceSize(miopenHandle_t handle, const miopenTensorDescriptor_t dyDesc, const miopenTensorDescriptor_t wDesc, const miopenConvolutionDescriptor_t convDesc, const miopenTensorDescriptor_t dxDesc, size_t* workSpaceSize);
+  // CHECK: status = miopenConvolutionBackwardDataGetWorkSpaceSize(handle, filterDescriptor, yD, convolutionDescriptor, xD,  &workSpaceSizeInBytes);
+  status = cudnnGetConvolutionBackwardDataWorkspaceSize(handle, filterDescriptor, yD, convolutionDescriptor, xD, ConvolutionBwdDataAlgo_t, &workSpaceSizeInBytes);
+
+  // TODO: swap correctly all args, starting from 3rd
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnConvolutionBackwardData(cudnnHandle_t handle, const void* alpha, const cudnnFilterDescriptor_t wDesc, const void* w, const cudnnTensorDescriptor_t dyDesc, const void* dy, const cudnnConvolutionDescriptor_t convDesc, cudnnConvolutionBwdDataAlgo_t algo, void* workSpace, size_t workSpaceSizeInBytes, const void* beta, const cudnnTensorDescriptor_t dxDesc, void* dx);
+  // MIOPEN MIOPEN_EXPORT miopenStatus_t miopenConvolutionBackwardData(miopenHandle_t handle, const void* alpha, const miopenTensorDescriptor_t dyDesc, const void* dy, const miopenTensorDescriptor_t wDesc, const void* w, const miopenConvolutionDescriptor_t convDesc, miopenConvBwdDataAlgorithm_t algo, const void* beta, const miopenTensorDescriptor_t dxDesc, void* dx, void* workSpace, size_t workSpaceSize);
+  // CHECK: status = miopenConvolutionBackwardData(handle, alpha, filterDescriptor, W, yD, dy, convolutionDescriptor, ConvolutionBwdDataAlgo_t, workSpace, workSpaceSizeInBytes, beta, xD, dx);
+  status = cudnnConvolutionBackwardData(handle, alpha, filterDescriptor, W, yD, dy, convolutionDescriptor, ConvolutionBwdDataAlgo_t, workSpace, workSpaceSizeInBytes, beta, xD, dx);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnConvolutionBackwardBias(cudnnHandle_t handle, const void* alpha, const cudnnTensorDescriptor_t dyDesc, const void* dy, const void* beta, const cudnnTensorDescriptor_t dbDesc, void* db);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenConvolutionBackwardBias(miopenHandle_t handle, const void* alpha, const miopenTensorDescriptor_t dyDesc, const void* dy, const void* beta, const miopenTensorDescriptor_t dbDesc, void* db);
+  // CHECK: status = miopenConvolutionBackwardBias(handle, alpha, yD, dy, beta, dbD, db);
+  status = cudnnConvolutionBackwardBias(handle, alpha, yD, dy, beta, dbD, db);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnCreatePoolingDescriptor(cudnnPoolingDescriptor_t* poolingDesc);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenCreatePoolingDescriptor(miopenPoolingDescriptor_t* poolDesc);
+  // CHECK: status = miopenCreatePoolingDescriptor(&poolingDescriptor);
+  status = cudnnCreatePoolingDescriptor(&poolingDescriptor);
 
   return 0;
 }
