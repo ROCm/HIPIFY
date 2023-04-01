@@ -68,6 +68,7 @@ const std::string sCuOccupancyMaxPotentialBlockSize = "cuOccupancyMaxPotentialBl
 const std::string sCuOccupancyMaxPotentialBlockSizeWithFlags = "cuOccupancyMaxPotentialBlockSizeWithFlags";
 const std::string sCudaGetTextureReference = "cudaGetTextureReference";
 const std::string sCudnnGetConvolutionForwardWorkspaceSize = "cudnnGetConvolutionForwardWorkspaceSize";
+const std::string sCudnnGetConvolutionBackwardDataWorkspaceSize = "cudnnGetConvolutionBackwardDataWorkspaceSize";
 // Matchers' names
 const StringRef sCudaLaunchKernel = "cudaLaunchKernel";
 const StringRef sCudaHostFuncCall = "cudaHostFuncCall";
@@ -195,6 +196,15 @@ std::map<std::string, ArgCastStruct> FuncArgCasts {
     }
   },
   {sCudnnGetConvolutionForwardWorkspaceSize,
+    {
+      {
+        {5, {e_remove_argument, cw_None}}
+      },
+      true,
+      true
+    }
+  },
+  {sCudnnGetConvolutionBackwardDataWorkspaceSize,
     {
       {
         {5, {e_remove_argument, cw_None}}
@@ -764,7 +774,8 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
             sCuOccupancyMaxPotentialBlockSize,
             sCuOccupancyMaxPotentialBlockSizeWithFlags,
             sCudaGetTextureReference,
-            sCudnnGetConvolutionForwardWorkspaceSize
+            sCudnnGetConvolutionForwardWorkspaceSize,
+            sCudnnGetConvolutionBackwardDataWorkspaceSize
           )
         )
       )

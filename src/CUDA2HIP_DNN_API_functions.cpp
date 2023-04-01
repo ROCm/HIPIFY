@@ -117,7 +117,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_FUNCTION_MAP {
   {"cudnnGetConvolutionForwardWorkspaceSize",             {"hipdnnGetConvolutionForwardWorkspaceSize",             "miopenConvolutionForwardGetWorkSpaceSize",             CONV_LIB_FUNC, API_DNN, 2}},
   {"cudnnConvolutionForward",                             {"hipdnnConvolutionForward",                             "miopenConvolutionForward",                             CONV_LIB_FUNC, API_DNN, 2}},
   {"cudnnConvolutionBiasActivationForward",               {"hipdnnConvolutionBiasActivationForward",               "", CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
-  {"cudnnConvolutionBackwardBias",                        {"hipdnnConvolutionBackwardBias",                        "", CONV_LIB_FUNC, API_DNN, 2}},
+  {"cudnnConvolutionBackwardBias",                        {"hipdnnConvolutionBackwardBias",                        "miopenConvolutionBackwardBias",                        CONV_LIB_FUNC, API_DNN, 2}},
   {"cudnnGetConvolutionBackwardFilterAlgorithmMaxCount",  {"hipdnnGetConvolutionBackwardFilterAlgorithmMaxCount",  "", CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
   {"cudnnFindConvolutionBackwardFilterAlgorithm",         {"hipdnnFindConvolutionBackwardFilterAlgorithm",         "", CONV_LIB_FUNC, API_DNN, 2}},
   {"cudnnFindConvolutionBackwardFilterAlgorithmEx",       {"hipdnnFindConvolutionBackwardFilterAlgorithmEx",       "", CONV_LIB_FUNC, API_DNN, 2}},
@@ -130,15 +130,15 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_FUNCTION_MAP {
   {"cudnnFindConvolutionBackwardDataAlgorithmEx",         {"hipdnnFindConvolutionBackwardDataAlgorithmEx",         "", CONV_LIB_FUNC, API_DNN, 2}},
   {"cudnnGetConvolutionBackwardDataAlgorithm",            {"hipdnnGetConvolutionBackwardDataAlgorithm",            "", CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED | CUDA_REMOVED}},
   {"cudnnGetConvolutionBackwardDataAlgorithm_v7",         {"hipdnnGetConvolutionBackwardDataAlgorithm_v7",         "", CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
-  {"cudnnGetConvolutionBackwardDataWorkspaceSize",        {"hipdnnGetConvolutionBackwardDataWorkspaceSize",        "", CONV_LIB_FUNC, API_DNN, 2}},
-  {"cudnnConvolutionBackwardData",                        {"hipdnnConvolutionBackwardData",                        "", CONV_LIB_FUNC, API_DNN, 2}},
+  {"cudnnGetConvolutionBackwardDataWorkspaceSize",        {"hipdnnGetConvolutionBackwardDataWorkspaceSize",        "miopenConvolutionBackwardDataGetWorkSpaceSize",        CONV_LIB_FUNC, API_DNN, 2}},
+  {"cudnnConvolutionBackwardData",                        {"hipdnnConvolutionBackwardData",                        "miopenConvolutionBackwardData",                        CONV_LIB_FUNC, API_DNN, 2}},
 
   // cuDNN Sortmax functions
   {"cudnnSoftmaxForward",                                 {"hipdnnSoftmaxForward",                                 "", CONV_LIB_FUNC, API_DNN, 2}},
   {"cudnnSoftmaxBackward",                                {"hipdnnSoftmaxBackward",                                "", CONV_LIB_FUNC, API_DNN, 2}},
 
   // cuDNN Pooling functions
-  {"cudnnCreatePoolingDescriptor",                        {"hipdnnCreatePoolingDescriptor",                        "", CONV_LIB_FUNC, API_DNN, 2}},
+  {"cudnnCreatePoolingDescriptor",                        {"hipdnnCreatePoolingDescriptor",                        "miopenCreatePoolingDescriptor",                        CONV_LIB_FUNC, API_DNN, 2}},
   {"cudnnSetPooling2dDescriptor",                         {"hipdnnSetPooling2dDescriptor",                         "", CONV_LIB_FUNC, API_DNN, 2}},
   {"cudnnGetPooling2dDescriptor",                         {"hipdnnGetPooling2dDescriptor",                         "", CONV_LIB_FUNC, API_DNN, 2}},
   {"cudnnSetPoolingNdDescriptor",                         {"hipdnnSetPoolingNdDescriptor",                         "", CONV_LIB_FUNC, API_DNN, 2}},
