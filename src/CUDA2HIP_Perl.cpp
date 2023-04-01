@@ -487,8 +487,8 @@ namespace perl {
     set<string> ReinterpretFunctions1;
     set<string> RemoveArgFunctions3;
     for (auto f : FuncArgCasts) {
-      auto casts = f.second;
-      for (auto c : casts) {
+      auto castStruct = f.second;
+      for (auto c : castStruct.castMap) {
         switch (c.first) {
           case 0:
             switch (c.second.castType) {
