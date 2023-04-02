@@ -69,6 +69,7 @@ const std::string sCuOccupancyMaxPotentialBlockSizeWithFlags = "cuOccupancyMaxPo
 const std::string sCudaGetTextureReference = "cudaGetTextureReference";
 const std::string sCudnnGetConvolutionForwardWorkspaceSize = "cudnnGetConvolutionForwardWorkspaceSize";
 const std::string sCudnnGetConvolutionBackwardDataWorkspaceSize = "cudnnGetConvolutionBackwardDataWorkspaceSize";
+const std::string sCudnnFindConvolutionForwardAlgorithmEx = "cudnnFindConvolutionForwardAlgorithmEx";
 // Matchers' names
 const StringRef sCudaLaunchKernel = "cudaLaunchKernel";
 const StringRef sCudaHostFuncCall = "cudaHostFuncCall";
@@ -85,6 +86,7 @@ std::string getCastType(hipify::CastTypes c) {
     case e_int32_t: return s_int32_t;
     case e_int64_t: return s_int64_t;
     case e_remove_argument: return "";
+    case e_add_const_argument: return "";
     default: return "";
   }
 }
@@ -208,6 +210,15 @@ std::map<std::string, ArgCastStruct> FuncArgCasts {
     {
       {
         {5, {e_remove_argument, cw_None}}
+      },
+      true,
+      true
+    }
+  },
+  {sCudnnFindConvolutionForwardAlgorithmEx,
+    {
+      {
+        {13, {e_add_const_argument, cw_None, "true"}}
       },
       true,
       true
@@ -656,32 +667,47 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
       unsigned int argNum = c.first;
       clang::SmallString<40> XStr;
       llvm::raw_svector_ostream OS(XStr);
-      clang::SourceRange sr = call->getArg(argNum)->getSourceRange();
-      auto* SM = Result.SourceManager;
-      clang::SourceRange replacementRange = getWriteRange(*SM, { sr.getBegin(), sr.getEnd() });
-      clang::SourceLocation s = replacementRange.getBegin();
-      clang::SourceLocation e = replacementRange.getEnd();
+      auto *SM = Result.SourceManager;
+      clang::SourceRange sr, replacementRange;
+      clang::SourceLocation s, e;
+      if (argNum < call->getNumArgs()) {
+        sr = call->getArg(argNum)->getSourceRange();
+        replacementRange = getWriteRange(*SM, { sr.getBegin(), sr.getEnd() });
+        s = replacementRange.getBegin();
+        e = replacementRange.getEnd();
+      } else {
+        s = e = call->getEndLoc();
+      }
       switch (c.second.castType) {
         case e_remove_argument:
         {
           OS << "";
-          if (argNum >= call->getNumArgs() - 1) continue;
           auto NextToken = clang::Lexer::findNextToken(e, *SM, DefaultLangOptions);
           if (!NextToken) continue;
           e = NextToken->getLocation();
+          break;
+        }
+        case e_add_const_argument:
+        {
+          if (argNum < call->getNumArgs())
+            OS << c.second.constValToAdd << ", ";
+          else
+            OS << ", " << c.second.constValToAdd;
           break;
         }
         default:
           OS << getCastType(c.second.castType) << "(" << readSourceText(*SM, sr) << ")";
           break;
       }
-      size_t length = SM->getCharacterData(clang::Lexer::getLocForEndOfToken(e, 0, *SM, DefaultLangOptions)) - SM->getCharacterData(s);
+      size_t length = 0;
+      if (c.second.castType != e_add_const_argument)
+        length = SM->getCharacterData(clang::Lexer::getLocForEndOfToken(e, 0, *SM, DefaultLangOptions)) - SM->getCharacterData(s);
       ct::Replacement Rep(*SM, s, length, OS.str());
       clang::FullSourceLoc fullSL(s, *SM);
       insertReplacement(Rep, fullSL);
       switch (c.second.castWarn) {
         case cw_DataLoss: {
-          clang::DiagnosticsEngine& DE = getCompilerInstance().getDiagnostics();
+          clang::DiagnosticsEngine &DE = getCompilerInstance().getDiagnostics();
           const auto ID = DE.getCustomDiagID(clang::DiagnosticsEngine::Warning, "Possible data loss in %0 argument of '%1'.");
           DE.Report(fullSL, ID) << argNum+1 << sName;
           break;
@@ -775,7 +801,8 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
             sCuOccupancyMaxPotentialBlockSizeWithFlags,
             sCudaGetTextureReference,
             sCudnnGetConvolutionForwardWorkspaceSize,
-            sCudnnGetConvolutionBackwardDataWorkspaceSize
+            sCudnnGetConvolutionBackwardDataWorkspaceSize,
+            sCudnnFindConvolutionForwardAlgorithmEx
           )
         )
       )
