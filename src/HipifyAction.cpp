@@ -70,6 +70,10 @@ const std::string sCudaGetTextureReference = "cudaGetTextureReference";
 const std::string sCudnnGetConvolutionForwardWorkspaceSize = "cudnnGetConvolutionForwardWorkspaceSize";
 const std::string sCudnnGetConvolutionBackwardDataWorkspaceSize = "cudnnGetConvolutionBackwardDataWorkspaceSize";
 const std::string sCudnnFindConvolutionForwardAlgorithmEx = "cudnnFindConvolutionForwardAlgorithmEx";
+const std::string sCudnnSetPooling2dDescriptor = "cudnnSetPooling2dDescriptor";
+const std::string sCudnnGetPooling2dDescriptor = "cudnnGetPooling2dDescriptor";
+const std::string sCudnnSetPoolingNdDescriptor = "cudnnSetPoolingNdDescriptor";
+const std::string sCudnnGetPoolingNdDescriptor = "cudnnGetPoolingNdDescriptor";
 // Matchers' names
 const StringRef sCudaLaunchKernel = "cudaLaunchKernel";
 const StringRef sCudaHostFuncCall = "cudaHostFuncCall";
@@ -219,6 +223,42 @@ std::map<std::string, ArgCastStruct> FuncArgCasts {
     {
       {
         {13, {e_add_const_argument, cw_None, "true"}}
+      },
+      true,
+      true
+    }
+  },
+  {sCudnnSetPooling2dDescriptor,
+    {
+      {
+        {2, {e_remove_argument, cw_None}}
+      },
+      true,
+      true
+    }
+  },
+  {sCudnnGetPooling2dDescriptor,
+    {
+      {
+        {2, {e_remove_argument, cw_None}}
+      },
+      true,
+      true
+    }
+  },
+  {sCudnnSetPoolingNdDescriptor,
+    {
+      {
+        {2, {e_remove_argument, cw_None}}
+      },
+      true,
+      true
+    }
+  },
+  {sCudnnGetPoolingNdDescriptor,
+    {
+      {
+        {3, {e_remove_argument, cw_None}}
       },
       true,
       true
@@ -802,7 +842,11 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
             sCudaGetTextureReference,
             sCudnnGetConvolutionForwardWorkspaceSize,
             sCudnnGetConvolutionBackwardDataWorkspaceSize,
-            sCudnnFindConvolutionForwardAlgorithmEx
+            sCudnnFindConvolutionForwardAlgorithmEx,
+            sCudnnSetPooling2dDescriptor,
+            sCudnnGetPooling2dDescriptor,
+            sCudnnSetPoolingNdDescriptor,
+            sCudnnGetPoolingNdDescriptor
           )
         )
       )
