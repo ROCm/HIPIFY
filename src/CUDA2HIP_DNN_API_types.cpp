@@ -149,12 +149,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"cudnnNanPropagation_t",                                          {"hipdnnNanPropagation_t",                                          "miopenNanPropagation_t",                                          CONV_TYPE, API_DNN, 1}},
   {"CUDNN_NOT_PROPAGATE_NAN",                                        {"HIPDNN_NOT_PROPAGATE_NAN",                                        "MIOPEN_NOT_PROPAGATE_NAN",                                        CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 0
   {"CUDNN_PROPAGATE_NAN",                                            {"HIPDNN_PROPAGATE_NAN",                                            "MIOPEN_PROPAGATE_NAN",                                            CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 1
-  {"cudnnConvolutionBwdDataAlgo_t",                                  {"hipdnnConvolutionBwdDataAlgo_t",                                  "", CONV_TYPE, API_DNN, 1}},
-  {"CUDNN_CONVOLUTION_BWD_DATA_ALGO_0",                              {"HIPDNN_CONVOLUTION_BWD_DATA_ALGO_0",                              "", CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 0
-  {"CUDNN_CONVOLUTION_BWD_DATA_ALGO_1",                              {"HIPDNN_CONVOLUTION_BWD_DATA_ALGO_1",                              "", CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 1
-  {"CUDNN_CONVOLUTION_BWD_DATA_ALGO_FFT",                            {"HIPDNN_CONVOLUTION_BWD_DATA_ALGO_FFT",                            "", CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 2
+  {"cudnnConvolutionBwdDataAlgo_t",                                  {"hipdnnConvolutionBwdDataAlgo_t",                                  "miopenConvBwdDataAlgorithm_t",                                    CONV_TYPE, API_DNN, 1}},
+  {"CUDNN_CONVOLUTION_BWD_DATA_ALGO_0",                              {"HIPDNN_CONVOLUTION_BWD_DATA_ALGO_0",                              "miopenConvolutionBwdDataAlgoGEMM",                                CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 0
+  {"CUDNN_CONVOLUTION_BWD_DATA_ALGO_1",                              {"HIPDNN_CONVOLUTION_BWD_DATA_ALGO_1",                              "miopenConvolutionBwdDataAlgoDirect",                              CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 1
+  {"CUDNN_CONVOLUTION_BWD_DATA_ALGO_FFT",                            {"HIPDNN_CONVOLUTION_BWD_DATA_ALGO_FFT",                            "miopenConvolutionBwdDataAlgoFFT",                                 CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 2
   {"CUDNN_CONVOLUTION_BWD_DATA_ALGO_FFT_TILING",                     {"HIPDNN_CONVOLUTION_BWD_DATA_ALGO_FFT_TILING",                     "", CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 3
-  {"CUDNN_CONVOLUTION_BWD_DATA_ALGO_WINOGRAD",                       {"HIPDNN_CONVOLUTION_BWD_DATA_ALGO_WINOGRAD",                       "", CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 4
+  {"CUDNN_CONVOLUTION_BWD_DATA_ALGO_WINOGRAD",                       {"HIPDNN_CONVOLUTION_BWD_DATA_ALGO_WINOGRAD",                       "miopenConvolutionBwdDataAlgoWinograd",                            CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 4
   {"CUDNN_CONVOLUTION_BWD_DATA_ALGO_WINOGRAD_NONFUSED",              {"HIPDNN_CONVOLUTION_BWD_DATA_ALGO_WINOGRAD_NONFUSED",              "", CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 5
   {"CUDNN_CONVOLUTION_BWD_DATA_ALGO_COUNT",                          {"HIPDNN_CONVOLUTION_BWD_DATA_ALGO_TRANSPOSE_GEMM",                 "", CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 6
   {"cudnnConvolutionBwdFilterAlgo_t",                                {"hipdnnConvolutionBwdFilterAlgo_t",                                "", CONV_TYPE, API_DNN, 1}},
@@ -825,12 +825,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"cudnnCTCLossDescriptor_t",                                       {"hipdnnCTCLossDescriptor_t",                                       "miopenCTCLossDescriptor_t",                                       CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
   {"cudnnTensorTransformStruct",                                     {"hipdnnTensorTransformStruct",                                     "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
   {"cudnnTensorTransformDescriptor_t",                               {"hipdnnTensorTransformDescriptor_t",                               "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
-  {"cudnnConvolutionFwdAlgoPerf_t",                                  {"hipdnnConvolutionFwdAlgoPerf_t",                                  "", CONV_TYPE, API_DNN, 1}},
-  {"cudnnConvolutionFwdAlgoPerfStruct",                              {"hipdnnConvolutionFwdAlgoPerf_t",                                  "", CONV_TYPE, API_DNN, 1}},
+  {"cudnnConvolutionFwdAlgoPerf_t",                                  {"hipdnnConvolutionFwdAlgoPerf_t",                                  "miopenConvAlgoPerf_t",                                            CONV_TYPE, API_DNN, 1}},
+  {"cudnnConvolutionFwdAlgoPerfStruct",                              {"hipdnnConvolutionFwdAlgoPerf_t",                                  "miopenConvAlgoPerf_t",                                            CONV_TYPE, API_DNN, 1}},
   {"cudnnConvolutionBwdFilterAlgoPerf_t",                            {"hipdnnConvolutionBwdFilterAlgoPerf_t",                            "", CONV_TYPE, API_DNN, 1}},
   {"cudnnConvolutionBwdFilterAlgoPerfStruct",                        {"hipdnnConvolutionBwdFilterAlgoPerf_t",                            "", CONV_TYPE, API_DNN, 1}},
-  {"cudnnConvolutionBwdDataAlgoPerf_t",                              {"hipdnnConvolutionBwdDataAlgoPerf_t",                              "", CONV_TYPE, API_DNN, 1}},
-  {"cudnnConvolutionBwdDataAlgoPerfStruct",                          {"hipdnnConvolutionBwdDataAlgoPerf_t",                              "", CONV_TYPE, API_DNN, 1}},
+  {"cudnnConvolutionBwdDataAlgoPerf_t",                              {"hipdnnConvolutionBwdDataAlgoPerf_t",                              "miopenConvAlgoPerf_t",                                            CONV_TYPE, API_DNN, 1}},
+  {"cudnnConvolutionBwdDataAlgoPerfStruct",                          {"hipdnnConvolutionBwdDataAlgoPerf_t",                              "miopenConvAlgoPerf_t",                                            CONV_TYPE, API_DNN, 1}},
   {"cudnnDropoutStruct",                                             {"hipdnnDropoutStruct",                                             "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
   {"cudnnDropoutDescriptor_t",                                       {"hipdnnDropoutDescriptor_t",                                       "miopenDropoutDescriptor_t",                                       CONV_TYPE, API_DNN, 1}},
   {"cudnnAlgorithmStruct",                                           {"hipdnnAlgorithmStruct",                                           "", CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},

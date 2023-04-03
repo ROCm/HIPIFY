@@ -30,6 +30,7 @@ namespace hipify {
     e_int32_t,
     e_int64_t,
     e_remove_argument,
+    e_add_const_argument,
   };
 
   enum CastWarning {
@@ -40,13 +41,20 @@ namespace hipify {
   struct CastInfo {
     CastTypes castType;
     CastWarning castWarn;
+    std::string constValToAdd = "";
   };
 
   typedef std::map<unsigned, CastInfo> ArgCastMap;
+
+  struct ArgCastStruct {
+    ArgCastMap castMap;
+    bool isToRoc = false;
+    bool isToMIOpen = false;
+  };
 }
 
 extern std::string getCastType(hipify::CastTypes c);
-extern std::map<std::string, hipify::ArgCastMap> FuncArgCasts;
+extern std::map<std::string, hipify::ArgCastStruct> FuncArgCasts;
 
 namespace perl {
 
