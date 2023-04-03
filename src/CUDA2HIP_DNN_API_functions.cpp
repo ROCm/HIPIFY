@@ -139,13 +139,13 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_FUNCTION_MAP {
 
   // cuDNN Pooling functions
   {"cudnnCreatePoolingDescriptor",                        {"hipdnnCreatePoolingDescriptor",                        "miopenCreatePoolingDescriptor",                        CONV_LIB_FUNC, API_DNN, 2}},
-  {"cudnnSetPooling2dDescriptor",                         {"hipdnnSetPooling2dDescriptor",                         "", CONV_LIB_FUNC, API_DNN, 2}},
-  {"cudnnGetPooling2dDescriptor",                         {"hipdnnGetPooling2dDescriptor",                         "", CONV_LIB_FUNC, API_DNN, 2}},
-  {"cudnnSetPoolingNdDescriptor",                         {"hipdnnSetPoolingNdDescriptor",                         "", CONV_LIB_FUNC, API_DNN, 2}},
-  {"cudnnGetPoolingNdDescriptor",                         {"hipdnnGetPoolingNdDescriptor",                         "", CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
-  {"cudnnGetPoolingNdForwardOutputDim",                   {"hipdnnGetPoolingNdForwardOutputDim",                   "", CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
-  {"cudnnGetPooling2dForwardOutputDim",                   {"hipdnnGetPooling2dForwardOutputDim",                   "", CONV_LIB_FUNC, API_DNN, 2}},
-  {"cudnnDestroyPoolingDescriptor",                       {"hipdnnDestroyPoolingDescriptor",                       "", CONV_LIB_FUNC, API_DNN, 2}},
+  {"cudnnSetPooling2dDescriptor",                         {"hipdnnSetPooling2dDescriptor",                         "miopenSet2dPoolingDescriptor",                         CONV_LIB_FUNC, API_DNN, 2}},
+  {"cudnnGetPooling2dDescriptor",                         {"hipdnnGetPooling2dDescriptor",                         "miopenGet2dPoolingDescriptor",                         CONV_LIB_FUNC, API_DNN, 2}},
+  {"cudnnSetPoolingNdDescriptor",                         {"hipdnnSetPoolingNdDescriptor",                         "miopenSetNdPoolingDescriptor",                         CONV_LIB_FUNC, API_DNN, 2}},
+  {"cudnnGetPoolingNdDescriptor",                         {"hipdnnGetPoolingNdDescriptor",                         "miopenGetNdPoolingDescriptor",                         CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
+  {"cudnnGetPoolingNdForwardOutputDim",                   {"hipdnnGetPoolingNdForwardOutputDim",                   "miopenGetPoolingNdForwardOutputDim",                   CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
+  {"cudnnGetPooling2dForwardOutputDim",                   {"hipdnnGetPooling2dForwardOutputDim",                   "miopenGetPoolingForwardOutputDim",                     CONV_LIB_FUNC, API_DNN, 2}},
+  {"cudnnDestroyPoolingDescriptor",                       {"hipdnnDestroyPoolingDescriptor",                       "miopenDestroyPoolingDescriptor",                       CONV_LIB_FUNC, API_DNN, 2}},
   {"cudnnPoolingForward",                                 {"hipdnnPoolingForward",                                 "", CONV_LIB_FUNC, API_DNN, 2}},
   {"cudnnPoolingBackward",                                {"hipdnnPoolingBackward",                                "", CONV_LIB_FUNC, API_DNN, 2}},
 
