@@ -160,10 +160,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_FUNCTION_MAP {
   {"cudnnGetActivationDescriptorSwishBeta",               {"hipdnnGetActivationDescriptorSwishBeta",               "", CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
 
   // cuDNN LRN functions
-  {"cudnnCreateLRNDescriptor",                            {"hipdnnCreateLRNDescriptor",                            "", CONV_LIB_FUNC, API_DNN, 2}},
-  {"cudnnSetLRNDescriptor",                               {"hipdnnSetLRNDescriptor",                               "", CONV_LIB_FUNC, API_DNN, 2}},
-  {"cudnnGetLRNDescriptor",                               {"hipdnnGetLRNDescriptor",                               "", CONV_LIB_FUNC, API_DNN, 2}},
-  {"cudnnDestroyLRNDescriptor",                           {"hipdnnDestroyLRNDescriptor",                           "", CONV_LIB_FUNC, API_DNN, 2}},
+  {"cudnnCreateLRNDescriptor",                            {"hipdnnCreateLRNDescriptor",                            "miopenCreateLRNDescriptor",                            CONV_LIB_FUNC, API_DNN, 2}},
+  {"cudnnSetLRNDescriptor",                               {"hipdnnSetLRNDescriptor",                               "miopenSetLRNDescriptor",                               CONV_LIB_FUNC, API_DNN, 2}},
+  {"cudnnGetLRNDescriptor",                               {"hipdnnGetLRNDescriptor",                               "miopenGetLRNDescriptor",                               CONV_LIB_FUNC, API_DNN, 2}},
+  {"cudnnDestroyLRNDescriptor",                           {"hipdnnDestroyLRNDescriptor",                           "miopenDestroyLRNDescriptor",                           CONV_LIB_FUNC, API_DNN, 2}},
   {"cudnnLRNCrossChannelForward",                         {"hipdnnLRNCrossChannelForward",                         "", CONV_LIB_FUNC, API_DNN, 2}},
   {"cudnnLRNCrossChannelBackward",                        {"hipdnnLRNCrossChannelBackward",                        "", CONV_LIB_FUNC, API_DNN, 2}},
 

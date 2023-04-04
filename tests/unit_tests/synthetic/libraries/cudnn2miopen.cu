@@ -436,5 +436,32 @@ int main() {
   // CHECK: status = miopenDestroyPoolingDescriptor(poolingDescriptor);
   status = cudnnDestroyPoolingDescriptor(poolingDescriptor);
 
+  unsigned lrnN = 0;
+  double lrnAlpha = 0.0f;
+  double lrnBeta = 0.0f;
+  double lrnK = 0.0f;
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnCreateLRNDescriptor(cudnnLRNDescriptor_t* normDesc);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenCreateLRNDescriptor(miopenLRNDescriptor_t* lrnDesc);
+  // CHECK: status = miopenCreateLRNDescriptor(&LRNDescriptor);
+  status = cudnnCreateLRNDescriptor(&LRNDescriptor);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnSetLRNDescriptor(cudnnLRNDescriptor_t normDesc, unsigned lrnN, double lrnAlpha, double lrnBeta, double lrnK);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenSetLRNDescriptor(const miopenLRNDescriptor_t lrnDesc, miopenLRNMode_t mode, unsigned int lrnN, double lrnAlpha, double lrnBeta, double lrnK);
+  // CHECK: status = miopenSetLRNDescriptor(LRNDescriptor, miopenLRNCrossChannel, lrnN, lrnAlpha, lrnBeta, lrnK);
+  status = cudnnSetLRNDescriptor(LRNDescriptor, lrnN, lrnAlpha, lrnBeta, lrnK);
+
+  // TODO: add a referrence to miopenLRNMode_t as a 2nd arg
+  // TODO: [feature] Add a new type of transformation with declaring a var before the function call to add that var referrence as an arg to the below function call
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnGetLRNDescriptor(cudnnLRNDescriptor_t normDesc, unsigned* lrnN, double* lrnAlpha, double* lrnBeta, double* lrnK);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenGetLRNDescriptor(const miopenLRNDescriptor_t lrnDesc, miopenLRNMode_t* mode, unsigned int* lrnN, double* lrnAlpha, double* lrnBeta, double* lrnK);
+  // CHECK: status = miopenGetLRNDescriptor(LRNDescriptor, &lrnN, &lrnAlpha, &lrnBeta, &lrnK);
+  status = cudnnGetLRNDescriptor(LRNDescriptor, &lrnN, &lrnAlpha, &lrnBeta, &lrnK);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnDestroyLRNDescriptor(cudnnLRNDescriptor_t lrnDesc);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenDestroyLRNDescriptor(miopenLRNDescriptor_t lrnDesc);
+  // CHECK: status = miopenDestroyLRNDescriptor(LRNDescriptor);
+  status = cudnnDestroyLRNDescriptor(LRNDescriptor);
+
   return 0;
 }
