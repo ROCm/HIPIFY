@@ -272,7 +272,6 @@ int main() {
   // CHECK: status = miopenDestroyTensorDescriptor(tensorDescriptor);
   status = cudnnDestroyTensorDescriptor(tensorDescriptor);
 
-
   // CHECK: miopenTensorDescriptor_t aD;
   // CHECK-NEXT: miopenTensorDescriptor_t bD;
   // CHECK-NEXT: miopenTensorDescriptor_t cD;
@@ -281,6 +280,7 @@ int main() {
   // CHECK-NEXT: miopenTensorDescriptor_t wD;
   // CHECK-NEXT: miopenTensorDescriptor_t inputD;
   // CHECK-NEXT: miopenTensorDescriptor_t dbD;
+  // CHECK-NEXT: miopenTensorDescriptor_t dxD;
   cudnnTensorDescriptor_t aD;
   cudnnTensorDescriptor_t bD;
   cudnnTensorDescriptor_t cD;
@@ -289,6 +289,7 @@ int main() {
   cudnnTensorDescriptor_t wD;
   cudnnTensorDescriptor_t inputD;
   cudnnTensorDescriptor_t dbD;
+  cudnnTensorDescriptor_t dxD;
   void* A = nullptr;
   void* B = nullptr;
   void* C = nullptr;
@@ -386,6 +387,7 @@ int main() {
   // CHECK: status = miopenCreatePoolingDescriptor(&poolingDescriptor);
   status = cudnnCreatePoolingDescriptor(&poolingDescriptor);
 
+  // CHECK: miopenNanPropagation_t maxpoolingNanOpt;
   cudnnNanPropagation_t maxpoolingNanOpt;
   int wH = 0;
   int wW = 0;
@@ -452,7 +454,7 @@ int main() {
   status = cudnnSetLRNDescriptor(LRNDescriptor, lrnN, lrnAlpha, lrnBeta, lrnK);
 
   // TODO: add a referrence to miopenLRNMode_t as a 2nd arg
-  // TODO: [feature] Add a new type of transformation with declaring a var before the function call to add that var referrence as an arg to the below function call
+  // TODO: [feature] Add a new type of transformation by declaring a var before the function call to add that var reference as an arg to the below function call
   // CUDA: cudnnStatus_t CUDNNWINAPI cudnnGetLRNDescriptor(cudnnLRNDescriptor_t normDesc, unsigned* lrnN, double* lrnAlpha, double* lrnBeta, double* lrnK);
   // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenGetLRNDescriptor(const miopenLRNDescriptor_t lrnDesc, miopenLRNMode_t* mode, unsigned int* lrnN, double* lrnAlpha, double* lrnBeta, double* lrnK);
   // CHECK: status = miopenGetLRNDescriptor(LRNDescriptor, &lrnN, &lrnAlpha, &lrnBeta, &lrnK);
@@ -462,6 +464,49 @@ int main() {
   // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenDestroyLRNDescriptor(miopenLRNDescriptor_t lrnDesc);
   // CHECK: status = miopenDestroyLRNDescriptor(LRNDescriptor);
   status = cudnnDestroyLRNDescriptor(LRNDescriptor);
+
+  // CHECK: miopenTensorDescriptor_t bnScaleBiasMeanVarDesc;
+  // CHECK: miopenTensorDescriptor_t bnScaleBiasDiffDesc;
+  cudnnTensorDescriptor_t bnScaleBiasMeanVarDesc;
+  cudnnTensorDescriptor_t bnScaleBiasDiffDesc;
+  void *bnScale = nullptr;
+  void *bnBias = nullptr;
+  double expAvgFactor = 0.0f;
+  void *resultRunningMean = nullptr;
+  void *resultRunningVariance = nullptr;
+  double epsilon = 0.0f;
+  void *resultSaveMean = nullptr;
+  void *resultSaveInvVariance = nullptr;
+  void *estimatedMean = nullptr;
+  void *estimatedVariance = nullptr;
+  void *alphaDataDiff = nullptr;
+  void *betaDataDiff = nullptr;
+  void *alphaParamDiff = nullptr;
+  void *betaParamDiff = nullptr;
+  void *resultBnScaleDiff = nullptr;
+  void *resultBnBiasDiff = nullptr;
+  void *savedMean = nullptr;
+  void *savedInvVariance = nullptr;
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnDeriveBNTensorDescriptor(cudnnTensorDescriptor_t derivedBnDesc, const cudnnTensorDescriptor_t xDesc, cudnnBatchNormMode_t mode);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenDeriveBNTensorDescriptor(miopenTensorDescriptor_t derivedBnDesc, const miopenTensorDescriptor_t xDesc, miopenBatchNormMode_t bn_mode);
+  // CHECK: status = miopenDeriveBNTensorDescriptor(tensorDescriptor, xD, batchNormMode);
+  status = cudnnDeriveBNTensorDescriptor(tensorDescriptor, xD, batchNormMode);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnBatchNormalizationForwardTraining(cudnnHandle_t handle, cudnnBatchNormMode_t mode, const void* alpha, const void* beta, const cudnnTensorDescriptor_t xDesc, const void* x, const cudnnTensorDescriptor_t yDesc, void* y, const cudnnTensorDescriptor_t bnScaleBiasMeanVarDesc, const void* bnScale, const void* bnBias, double exponentialAverageFactor, void* resultRunningMean, double epsilon, void* resultSaveMean, void* resultSaveInvVariance);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenBatchNormalizationForwardTraining(miopenHandle_t handle, miopenBatchNormMode_t bn_mode, void* alpha, void* beta, const miopenTensorDescriptor_t xDesc, const void* x, const miopenTensorDescriptor_t yDesc, void* y, const miopenTensorDescriptor_t bnScaleBiasMeanVarDesc, void* bnScale, void* bnBias, double expAvgFactor, void* resultRunningMean, void* resultRunningVariance, double epsilon, void* resultSaveMean, void* resultSaveInvVariance);
+  // CHECK: status = miopenBatchNormalizationForwardTraining(handle, batchNormMode, alpha, beta, xD, x, yD, y, bnScaleBiasMeanVarDesc, bnScale, bnBias, expAvgFactor, resultRunningMean, resultRunningVariance, epsilon, resultSaveMean, resultSaveInvVariance);
+  status = cudnnBatchNormalizationForwardTraining(handle, batchNormMode, alpha, beta, xD, x, yD, y, bnScaleBiasMeanVarDesc, bnScale, bnBias, expAvgFactor, resultRunningMean, resultRunningVariance, epsilon, resultSaveMean, resultSaveInvVariance);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnBatchNormalizationForwardInference(cudnnHandle_t handle, cudnnBatchNormMode_t mode, const void* alpha, const void* beta, const cudnnTensorDescriptor_t xDesc, const void* x, const cudnnTensorDescriptor_t yDesc, void* y, const cudnnTensorDescriptor_t bnScaleBiasMeanVarDesc, const void* bnScale, const void* bnBias, const void* estimatedMean, const void* estimatedVariance, double epsilon);
+  // MIOPEN: miopenBatchNormalizationForwardInference(miopenHandle_t handle, miopenBatchNormMode_t bn_mode, void* alpha, void* beta, const miopenTensorDescriptor_t xDesc, const void* x, const miopenTensorDescriptor_t yDesc, void* y, const miopenTensorDescriptor_t bnScaleBiasMeanVarDesc, void* bnScale, void* bnBias, void* estimatedMean, void* estimatedVariance, double epsilon);
+  // CHECK: status = miopenBatchNormalizationForwardInference(handle, batchNormMode, alpha, beta, xD, x, yD, y, bnScaleBiasMeanVarDesc, bnScale, bnBias, estimatedMean, estimatedVariance, epsilon);
+  status = cudnnBatchNormalizationForwardInference(handle, batchNormMode, alpha, beta, xD, x, yD, y, bnScaleBiasMeanVarDesc, bnScale, bnBias, estimatedMean, estimatedVariance, epsilon);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnBatchNormalizationBackward(cudnnHandle_t handle, cudnnBatchNormMode_t mode, const void* alphaDataDiff, const void* betaDataDiff, const void* alphaParamDiff, const void* betaParamDiff, const cudnnTensorDescriptor_t xDesc, const void* x, const cudnnTensorDescriptor_t dyDesc, const void* dy, const cudnnTensorDescriptor_t dxDesc, void* dx, const cudnnTensorDescriptor_t dBnScaleBiasDesc, const void* bnScale, void* dBnScaleResult, void* dBnBiasResult, double epsilon, const void* savedMean, const void* savedInvVariance);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenBatchNormalizationBackward(miopenHandle_t handle, miopenBatchNormMode_t bn_mode, const void* alphaDataDiff, const void* betaDataDiff, const void* alphaParamDiff, const void* betaParamDiff, const miopenTensorDescriptor_t xDesc, const void* x, const miopenTensorDescriptor_t dyDesc, const void* dy, const miopenTensorDescriptor_t dxDesc, void* dx, const miopenTensorDescriptor_t bnScaleBiasDiffDesc, const void* bnScale, void* resultBnScaleDiff, void* resultBnBiasDiff, double epsilon, const void* savedMean, const void* savedInvVariance);
+  // CHECK: status = miopenBatchNormalizationBackward(handle, batchNormMode, alphaDataDiff, betaDataDiff, alphaParamDiff, betaParamDiff, xD, x, yD, y, dxD, dx, bnScaleBiasDiffDesc, bnScale, resultBnScaleDiff, resultBnBiasDiff, epsilon, savedMean, savedInvVariance);
+  status = cudnnBatchNormalizationBackward(handle, batchNormMode, alphaDataDiff, betaDataDiff, alphaParamDiff, betaParamDiff, xD, x, yD, y, dxD, dx, bnScaleBiasDiffDesc, bnScale, resultBnScaleDiff, resultBnBiasDiff, epsilon, savedMean, savedInvVariance);
 
   return 0;
 }

@@ -172,11 +172,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_FUNCTION_MAP {
   {"cudnnDivisiveNormalizationBackward",                  {"hipdnnDivisiveNormalizationBackward",                  "", CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
 
   // cuDNN Batch Normalization functions
-  {"cudnnDeriveBNTensorDescriptor",                            {"hipdnnDeriveBNTensorDescriptor",                            "", CONV_LIB_FUNC, API_DNN, 2}},
-  {"cudnnBatchNormalizationForwardTraining",                   {"hipdnnBatchNormalizationForwardTraining",                   "", CONV_LIB_FUNC, API_DNN, 2}},
+  {"cudnnDeriveBNTensorDescriptor",                            {"hipdnnDeriveBNTensorDescriptor",                            "miopenDeriveBNTensorDescriptor",             CONV_LIB_FUNC, API_DNN, 2}},
+  {"cudnnBatchNormalizationForwardTraining",                   {"hipdnnBatchNormalizationForwardTraining",                   "miopenBatchNormalizationForwardTraining",    CONV_LIB_FUNC, API_DNN, 2}},
   {"cudnnBatchNormalizationForwardTrainingEx",                 {"hipdnnBatchNormalizationForwardTrainingEx",                 "", CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
-  {"cudnnBatchNormalizationForwardInference",                  {"hipdnnBatchNormalizationForwardInference",                  "", CONV_LIB_FUNC, API_DNN, 2}},
-  {"cudnnBatchNormalizationBackward",                          {"hipdnnBatchNormalizationBackward",                          "", CONV_LIB_FUNC, API_DNN, 2}},
+  {"cudnnBatchNormalizationForwardInference",                  {"hipdnnBatchNormalizationForwardInference",                  "miopenBatchNormalizationForwardInference",   CONV_LIB_FUNC, API_DNN, 2}},
+  {"cudnnBatchNormalizationBackward",                          {"hipdnnBatchNormalizationBackward",                          "miopenBatchNormalizationBackward",           CONV_LIB_FUNC, API_DNN, 2}},
   {"cudnnBatchNormalizationBackwardEx",                        {"hipdnnBatchNormalizationBackwardEx",                        "", CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
   {"cudnnGetBatchNormalizationForwardTrainingExWorkspaceSize", {"hipdnnGetBatchNormalizationForwardTrainingExWorkspaceSize", "", CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
   {"cudnnGetBatchNormalizationBackwardExWorkspaceSize",        {"hipdnnGetBatchNormalizationBackwardExWorkspaceSize",        "", CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
