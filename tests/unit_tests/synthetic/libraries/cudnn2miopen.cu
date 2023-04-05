@@ -161,6 +161,13 @@ int main() {
   cudnnSoftmaxAlgorithm_t SOFTMAX_ACCURATE = CUDNN_SOFTMAX_ACCURATE;
   cudnnSoftmaxAlgorithm_t SOFTMAX_LOG = CUDNN_SOFTMAX_LOG;
 
+  // CHECK: miopenSoftmaxMode_t softmaxMode;
+  // CHECK-NEXT: miopenSoftmaxMode_t SOFTMAX_MODE_INSTANCE = MIOPEN_SOFTMAX_MODE_INSTANCE;
+  // CHECK-NEXT: miopenSoftmaxMode_t SOFTMAX_MODE_CHANNEL = MIOPEN_SOFTMAX_MODE_CHANNEL;
+  cudnnSoftmaxMode_t softmaxMode;
+  cudnnSoftmaxMode_t SOFTMAX_MODE_INSTANCE = CUDNN_SOFTMAX_MODE_INSTANCE;
+  cudnnSoftmaxMode_t SOFTMAX_MODE_CHANNEL = CUDNN_SOFTMAX_MODE_CHANNEL;
+
   // CHECK: miopenReduceTensorOp_t reduceTensorOp;
   // CHECK-NEXT: miopenReduceTensorOp_t REDUCE_TENSOR_ADD = MIOPEN_REDUCE_TENSOR_ADD;
   // CHECK-NEXT: miopenReduceTensorOp_t REDUCE_TENSOR_MUL = MIOPEN_REDUCE_TENSOR_MUL;
@@ -281,6 +288,7 @@ int main() {
   // CHECK-NEXT: miopenTensorDescriptor_t inputD;
   // CHECK-NEXT: miopenTensorDescriptor_t dbD;
   // CHECK-NEXT: miopenTensorDescriptor_t dxD;
+  // CHECK-NEXT: miopenTensorDescriptor_t dyD;
   cudnnTensorDescriptor_t aD;
   cudnnTensorDescriptor_t bD;
   cudnnTensorDescriptor_t cD;
@@ -290,6 +298,7 @@ int main() {
   cudnnTensorDescriptor_t inputD;
   cudnnTensorDescriptor_t dbD;
   cudnnTensorDescriptor_t dxD;
+  cudnnTensorDescriptor_t dyD;
   void* A = nullptr;
   void* B = nullptr;
   void* C = nullptr;
@@ -507,6 +516,38 @@ int main() {
   // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenBatchNormalizationBackward(miopenHandle_t handle, miopenBatchNormMode_t bn_mode, const void* alphaDataDiff, const void* betaDataDiff, const void* alphaParamDiff, const void* betaParamDiff, const miopenTensorDescriptor_t xDesc, const void* x, const miopenTensorDescriptor_t dyDesc, const void* dy, const miopenTensorDescriptor_t dxDesc, void* dx, const miopenTensorDescriptor_t bnScaleBiasDiffDesc, const void* bnScale, void* resultBnScaleDiff, void* resultBnBiasDiff, double epsilon, const void* savedMean, const void* savedInvVariance);
   // CHECK: status = miopenBatchNormalizationBackward(handle, batchNormMode, alphaDataDiff, betaDataDiff, alphaParamDiff, betaParamDiff, xD, x, yD, y, dxD, dx, bnScaleBiasDiffDesc, bnScale, resultBnScaleDiff, resultBnBiasDiff, epsilon, savedMean, savedInvVariance);
   status = cudnnBatchNormalizationBackward(handle, batchNormMode, alphaDataDiff, betaDataDiff, alphaParamDiff, betaParamDiff, xD, x, yD, y, dxD, dx, bnScaleBiasDiffDesc, bnScale, resultBnScaleDiff, resultBnBiasDiff, epsilon, savedMean, savedInvVariance);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnCreateActivationDescriptor(cudnnActivationDescriptor_t* activationDesc);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenCreateActivationDescriptor(miopenActivationDescriptor_t* activDesc);
+  // CHECK: status = miopenCreateActivationDescriptor(&activationDescriptor);
+  status = cudnnCreateActivationDescriptor(&activationDescriptor);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnDestroyActivationDescriptor(cudnnActivationDescriptor_t activationDesc);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenDestroyActivationDescriptor(miopenActivationDescriptor_t activDesc);
+  // CHECK: status = miopenDestroyActivationDescriptor(activationDescriptor);
+  status = cudnnDestroyActivationDescriptor(activationDescriptor);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnActivationForward(cudnnHandle_t handle, cudnnActivationDescriptor_t activationDesc, const void* alpha, const cudnnTensorDescriptor_t xDesc, const void* x, const void* beta, const cudnnTensorDescriptor_t yDesc, void* y);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenActivationForward(miopenHandle_t handle, const miopenActivationDescriptor_t activDesc, const void* alpha, const miopenTensorDescriptor_t xDesc, const void* x, const void* beta, const miopenTensorDescriptor_t yDesc, void* y);
+  // CHECK: status = miopenActivationForward(handle, activationDescriptor, alpha, xD, x, beta, yD, y);
+  status = cudnnActivationForward(handle, activationDescriptor, alpha, xD, x, beta, yD, y);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnActivationBackward(cudnnHandle_t handle, cudnnActivationDescriptor_t activationDesc, const void* alpha, const cudnnTensorDescriptor_t yDesc, const void* y, const cudnnTensorDescriptor_t dyDesc, const void* dy, const cudnnTensorDescriptor_t xDesc, const void* x, const void* beta, const cudnnTensorDescriptor_t dxDesc, void* dx);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenActivationBackward(miopenHandle_t handle, const miopenActivationDescriptor_t activDesc, const void* alpha, const miopenTensorDescriptor_t yDesc, const void* y, const miopenTensorDescriptor_t dyDesc, const void* dy, const miopenTensorDescriptor_t xDesc, const void* x, const void* beta, const miopenTensorDescriptor_t dxDesc, void* dx);
+  // CHECK: status = miopenActivationBackward(handle, activationDescriptor, alpha, yD, y, dyD, dy, xD, x, beta, dxD, dx);
+  status = cudnnActivationBackward(handle, activationDescriptor, alpha, yD, y, dyD, dy, xD, x, beta, dxD, dx);
+
+  // TODO: Move args: 1 to 7, 2 to 8
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnSoftmaxForward(cudnnHandle_t handle, cudnnSoftmaxAlgorithm_t algo, cudnnSoftmaxMode_t mode, const void* alpha, const cudnnTensorDescriptor_t xDesc, const void* x, const void* beta, const cudnnTensorDescriptor_t yDesc, void* y);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenSoftmaxForward_V2(miopenHandle_t handle, const void* alpha, const miopenTensorDescriptor_t xDesc, const void* x, const void* beta, const miopenTensorDescriptor_t yDesc, void* y, miopenSoftmaxAlgorithm_t algorithm, miopenSoftmaxMode_t mode);
+  // CHECK: status = miopenSoftmaxForward_V2(handle, softmaxAlgorithm, softmaxMode, alpha, xD, x, beta, yD, y);
+  status = cudnnSoftmaxForward(handle, softmaxAlgorithm, softmaxMode, alpha, xD, x, beta, yD, y);
+
+  // TODO: Move args: 1 to 7, 2 to 8
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnSoftmaxBackward(cudnnHandle_t handle, cudnnSoftmaxAlgorithm_t algo, cudnnSoftmaxMode_t mode, const void* alpha, const cudnnTensorDescriptor_t yDesc, const void* y, const cudnnTensorDescriptor_t dyDesc, const void* dy, const void* beta, const cudnnTensorDescriptor_t dxDesc, void* dx);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenSoftmaxBackward_V2(miopenHandle_t handle, const void* alpha, const miopenTensorDescriptor_t yDesc, const void* y, const miopenTensorDescriptor_t dyDesc, const void* dy, const void* beta, const miopenTensorDescriptor_t dxDesc, void* dx, miopenSoftmaxAlgorithm_t algorithm, miopenSoftmaxMode_t mode);
+  // CHECK: status = miopenSoftmaxBackward_V2(handle, softmaxAlgorithm, softmaxMode, alpha, yD, y, dyD, dy, beta, dxD, dx);
+  status = cudnnSoftmaxBackward(handle, softmaxAlgorithm, softmaxMode, alpha, yD, y, dyD, dy, beta, dxD, dx);
 
   return 0;
 }
