@@ -133,9 +133,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_FUNCTION_MAP {
   {"cudnnGetConvolutionBackwardDataWorkspaceSize",             {"hipdnnGetConvolutionBackwardDataWorkspaceSize",             "miopenConvolutionBackwardDataGetWorkSpaceSize",                      CONV_LIB_FUNC, API_DNN, 2}},
   {"cudnnConvolutionBackwardData",                             {"hipdnnConvolutionBackwardData",                             "miopenConvolutionBackwardData",                                      CONV_LIB_FUNC, API_DNN, 2}},
 
-  // cuDNN Sortmax functions
-  {"cudnnSoftmaxForward",                                      {"hipdnnSoftmaxForward",                                      "", CONV_LIB_FUNC, API_DNN, 2}},
-  {"cudnnSoftmaxBackward",                                     {"hipdnnSoftmaxBackward",                                     "", CONV_LIB_FUNC, API_DNN, 2}},
+  // cuDNN Softmax functions
+  {"cudnnSoftmaxForward",                                      {"hipdnnSoftmaxForward",                                      "miopenSoftmaxForward_V2",                                            CONV_LIB_FUNC, API_DNN, 2}},
+  {"cudnnSoftmaxBackward",                                     {"hipdnnSoftmaxBackward",                                     "miopenSoftmaxBackward_V2",                                           CONV_LIB_FUNC, API_DNN, 2}},
 
   // cuDNN Pooling functions
   {"cudnnCreatePoolingDescriptor",                             {"hipdnnCreatePoolingDescriptor",                             "miopenCreatePoolingDescriptor",                                      CONV_LIB_FUNC, API_DNN, 2}},
@@ -150,12 +150,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_FUNCTION_MAP {
   {"cudnnPoolingBackward",                                     {"hipdnnPoolingBackward",                                     "", CONV_LIB_FUNC, API_DNN, 2}},
 
   // cuDNN Activation functions
-  {"cudnnCreateActivationDescriptor",                          {"hipdnnCreateActivationDescriptor",                          "", CONV_LIB_FUNC, API_DNN, 2}},
+  {"cudnnCreateActivationDescriptor",                          {"hipdnnCreateActivationDescriptor",                          "miopenCreateActivationDescriptor",                                   CONV_LIB_FUNC, API_DNN, 2}},
   {"cudnnSetActivationDescriptor",                             {"hipdnnSetActivationDescriptor",                             "", CONV_LIB_FUNC, API_DNN, 2}},
   {"cudnnGetActivationDescriptor",                             {"hipdnnGetActivationDescriptor",                             "", CONV_LIB_FUNC, API_DNN, 2}},
-  {"cudnnDestroyActivationDescriptor",                         {"hipdnnDestroyActivationDescriptor",                         "", CONV_LIB_FUNC, API_DNN, 2}},
-  {"cudnnActivationForward",                                   {"hipdnnActivationForward",                                   "", CONV_LIB_FUNC, API_DNN, 2}},
-  {"cudnnActivationBackward",                                  {"hipdnnActivationBackward",                                  "", CONV_LIB_FUNC, API_DNN, 2}},
+  {"cudnnDestroyActivationDescriptor",                         {"hipdnnDestroyActivationDescriptor",                         "miopenDestroyActivationDescriptor",                                  CONV_LIB_FUNC, API_DNN, 2}},
+  {"cudnnActivationForward",                                   {"hipdnnActivationForward",                                   "miopenActivationForward",                                            CONV_LIB_FUNC, API_DNN, 2}},
+  {"cudnnActivationBackward",                                  {"hipdnnActivationBackward",                                  "miopenActivationBackward",                                           CONV_LIB_FUNC, API_DNN, 2}},
   {"cudnnSetActivationDescriptorSwishBeta",                    {"hipdnnSetActivationDescriptorSwishBeta",                    "", CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
   {"cudnnGetActivationDescriptorSwishBeta",                    {"hipdnnGetActivationDescriptorSwishBeta",                    "", CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
 
