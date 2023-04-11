@@ -19,6 +19,8 @@ exclude_rule 'MD018'
 exclude_rule 'MD022'
 # Headers must start at the beginning of the line
 exclude_rule 'MD023'
+# Multiple headers with the same content
+exclude_rule 'MD024'
 # Multiple top level headers in the same document
 exclude_rule 'MD025'
 # Trailing punctuation in header
