@@ -108,6 +108,17 @@ int main() {
   cudnnDataType_t DATA_INT8x4 = CUDNN_DATA_INT8x4;
   cudnnDataType_t DATA_BFLOAT16 = CUDNN_DATA_BFLOAT16;
 
+  // CHECK: miopenRNNMode_t RNNMode;
+  // CHECK-NEXT: miopenRNNMode_t RNN_RELU = miopenRNNRELU;
+  // CHECK-NEXT: miopenRNNMode_t RNN_TANH = miopenRNNTANH;
+  // CHECK-NEXT: miopenRNNMode_t LSTM = miopenLSTM;
+  // CHECK-NEXT: miopenRNNMode_t GRU = miopenGRU;
+  cudnnRNNMode_t RNNMode;
+  cudnnRNNMode_t RNN_RELU = CUDNN_RNN_RELU;
+  cudnnRNNMode_t RNN_TANH = CUDNN_RNN_TANH;
+  cudnnRNNMode_t LSTM = CUDNN_LSTM;
+  cudnnRNNMode_t GRU = CUDNN_GRU;
+
   // CHECK: miopenTensorOp_t tensorOp;
   // CHECK-NEXT: miopenTensorOp_t OP_TENSOR_ADD = miopenTensorOpAdd;
   // CHECK-NEXT: miopenTensorOp_t OP_TENSOR_MUL = miopenTensorOpMul;
@@ -126,6 +137,29 @@ int main() {
   // CHECK-NEXT: miopenPoolingMode_t POOLING_MAX = miopenPoolingMax;
   cudnnPoolingMode_t poolingMode;
   cudnnPoolingMode_t POOLING_MAX = CUDNN_POOLING_MAX;
+
+  // CHECK: miopenRNNInputMode_t RNNInputMode;
+  // CHECK-NEXT: miopenRNNInputMode_t LINEAR_INPUT = miopenRNNlinear;
+  // CHECK-NEXT: miopenRNNInputMode_t SKIP_INPUT = miopenRNNskip;
+  cudnnRNNInputMode_t RNNInputMode;
+  cudnnRNNInputMode_t LINEAR_INPUT = CUDNN_LINEAR_INPUT;
+  cudnnRNNInputMode_t SKIP_INPUT = CUDNN_SKIP_INPUT;
+
+  // CHECK: miopenRNNAlgo_t RNNAlgo;
+  // CHECK-NEXT: miopenRNNAlgo_t RNN_ALGO_STANDARD = miopenRNNdefault;
+  cudnnRNNAlgo_t RNNAlgo;
+  cudnnRNNAlgo_t RNN_ALGO_STANDARD = CUDNN_RNN_ALGO_STANDARD;
+
+  // CHECK: miopenRNNBiasMode_t RNNBiasMode;
+  // CHECK-NEXT: miopenRNNBiasMode_t RNN_NO_BIAS = miopenRNNNoBias;
+  // CHECK-NEXT: miopenRNNBiasMode_t RNN_SINGLE_INP_BIAS = miopenRNNwithBias;
+  // CHECK-NEXT: miopenRNNBiasMode_t RNN_DOUBLE_BIAS = miopenRNNwithBias;
+  // CHECK-NEXT: miopenRNNBiasMode_t RNN_SINGLE_REC_BIAS = miopenRNNwithBias;
+  cudnnRNNBiasMode_t RNNBiasMode;
+  cudnnRNNBiasMode_t RNN_NO_BIAS = CUDNN_RNN_NO_BIAS;
+  cudnnRNNBiasMode_t RNN_SINGLE_INP_BIAS = CUDNN_RNN_SINGLE_INP_BIAS;
+  cudnnRNNBiasMode_t RNN_DOUBLE_BIAS = CUDNN_RNN_DOUBLE_BIAS;
+  cudnnRNNBiasMode_t RNN_SINGLE_REC_BIAS = CUDNN_RNN_SINGLE_REC_BIAS;
 
   // CHECK: miopenLRNMode_t LRNMode;
   // CHECK-NEXT: miopenLRNMode_t LRN_CROSS_CHANNEL_DIM1 = miopenLRNCrossChannel;
@@ -285,20 +319,24 @@ int main() {
   // CHECK-NEXT: miopenTensorDescriptor_t xD;
   // CHECK-NEXT: miopenTensorDescriptor_t yD;
   // CHECK-NEXT: miopenTensorDescriptor_t wD;
+  // CHECK-NEXT: miopenTensorDescriptor_t zD;
   // CHECK-NEXT: miopenTensorDescriptor_t inputD;
   // CHECK-NEXT: miopenTensorDescriptor_t dbD;
   // CHECK-NEXT: miopenTensorDescriptor_t dxD;
   // CHECK-NEXT: miopenTensorDescriptor_t dyD;
+  // CHECK-NEXT: miopenTensorDescriptor_t biasD;
   cudnnTensorDescriptor_t aD;
   cudnnTensorDescriptor_t bD;
   cudnnTensorDescriptor_t cD;
   cudnnTensorDescriptor_t xD;
   cudnnTensorDescriptor_t yD;
   cudnnTensorDescriptor_t wD;
+  cudnnTensorDescriptor_t zD;
   cudnnTensorDescriptor_t inputD;
   cudnnTensorDescriptor_t dbD;
   cudnnTensorDescriptor_t dxD;
   cudnnTensorDescriptor_t dyD;
+  cudnnTensorDescriptor_t biasD;
   void* A = nullptr;
   void* B = nullptr;
   void* C = nullptr;
@@ -309,9 +347,11 @@ int main() {
   void* x = nullptr;
   void* dx = nullptr;
   void* y = nullptr;
+  void* z = nullptr;
   void* dy = nullptr;
   void* W = nullptr;
   void* db = nullptr;
+  void* bias = nullptr;
   int groupCount = 0;
   int requestedAlgoCount = 0;
   int returnedAlgoCount = 0;
@@ -548,6 +588,11 @@ int main() {
   // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenSoftmaxBackward_V2(miopenHandle_t handle, const void* alpha, const miopenTensorDescriptor_t yDesc, const void* y, const miopenTensorDescriptor_t dyDesc, const void* dy, const void* beta, const miopenTensorDescriptor_t dxDesc, void* dx, miopenSoftmaxAlgorithm_t algorithm, miopenSoftmaxMode_t mode);
   // CHECK: status = miopenSoftmaxBackward_V2(handle, softmaxAlgorithm, softmaxMode, alpha, yD, y, dyD, dy, beta, dxD, dx);
   status = cudnnSoftmaxBackward(handle, softmaxAlgorithm, softmaxMode, alpha, yD, y, dyD, dy, beta, dxD, dx);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnConvolutionBiasActivationForward(cudnnHandle_t handle, const void* alpha1, const cudnnTensorDescriptor_t xDesc, const void* x, const cudnnFilterDescriptor_t wDesc, const void* w, const cudnnConvolutionDescriptor_t convDesc, cudnnConvolutionFwdAlgo_t algo, void* workSpace, size_t workSpaceSizeInBytes, const void* alpha2, const cudnnTensorDescriptor_t zDesc, const void* z, const cudnnTensorDescriptor_t biasDesc, const void* bias, const cudnnActivationDescriptor_t activationDesc, const cudnnTensorDescriptor_t yDesc, void* y);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenConvolutionBiasActivationForward(miopenHandle_t handle, const void* alpha1, const miopenTensorDescriptor_t xDesc, const void* x, const miopenTensorDescriptor_t wDesc, const void* w, const miopenConvolutionDescriptor_t convDesc, miopenConvFwdAlgorithm_t algo, void* workspace, size_t workspaceSizeInBytes, const void* alpha2, const miopenTensorDescriptor_t zDesc, const void* z, const miopenTensorDescriptor_t biasDesc, const void* bias, const miopenActivationDescriptor_t activationDesc, const miopenTensorDescriptor_t yDesc, void* y);
+  // CHECK: status = miopenConvolutionBiasActivationForward(handle, alpha1, xD, x, filterDescriptor, W, convolutionDescriptor, convolutionFwdAlgo, workSpace, workSpaceSizeInBytes, alpha2, zD, z, biasD, bias, activationDescriptor, yD, y);
+  status = cudnnConvolutionBiasActivationForward(handle, alpha1, xD, x, filterDescriptor, W, convolutionDescriptor, convolutionFwdAlgo, workSpace, workSpaceSizeInBytes, alpha2, zD, z, biasD, bias, activationDescriptor, yD, y);
 
   return 0;
 }
