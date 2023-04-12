@@ -64,6 +64,7 @@
 |`CUDNN_ATTR_LAYOUT_INFO_TENSOR_UID`|8.0.2| | | | | | | |
 |`CUDNN_ATTR_LAYOUT_INFO_TYPES`|8.0.2| | | | | | | |
 |`CUDNN_ATTR_MATMUL_COMP_TYPE`|8.1.0| | | | | | | |
+|`CUDNN_ATTR_MATMUL_PADDING_VALUE`|8.9.0| | | | | | | |
 |`CUDNN_ATTR_OPERATIONGRAPH_ENGINE_GLOBAL_COUNT`|8.0.1| | | | | | | |
 |`CUDNN_ATTR_OPERATIONGRAPH_HANDLE`|8.0.1| | | | | | | |
 |`CUDNN_ATTR_OPERATIONGRAPH_OPS`|8.0.1| | | | | | | |
@@ -225,6 +226,7 @@
 |`CUDNN_ATTR_TENSOR_DIMENSIONS`|8.0.1| | | | | | | |
 |`CUDNN_ATTR_TENSOR_IS_BY_VALUE`|8.1.0| | | | | | | |
 |`CUDNN_ATTR_TENSOR_IS_VIRTUAL`|8.0.1| | | | | | | |
+|`CUDNN_ATTR_TENSOR_RAGGED_OFFSET_DESC`|8.9.0| | | | | | | |
 |`CUDNN_ATTR_TENSOR_REORDERING_MODE`|8.3.0| | | | | | | |
 |`CUDNN_ATTR_TENSOR_STRIDES`|8.0.1| | | | | | | |
 |`CUDNN_ATTR_TENSOR_UNIQUE_ID`|8.0.1| | | | | | | |
@@ -369,6 +371,7 @@
 |`CUDNN_HEUR_MODE_FALLBACK`|8.3.0| | | | | | | |
 |`CUDNN_HEUR_MODE_INSTANT`|8.0.1| | | | | | | |
 |`CUDNN_INSTANCE_NORM`|8.5.0| | | | | | | |
+|`CUDNN_KNOB_TYPE_ARRAY_SIZE_PER_THREAD`|8.9.0| | | | | | | |
 |`CUDNN_KNOB_TYPE_BLOCK_SIZE`|8.8.0| | | | | | | |
 |`CUDNN_KNOB_TYPE_CHUNK_K`|8.0.1| | | | | | | |
 |`CUDNN_KNOB_TYPE_COUNTS`|8.0.1| | | | | | | |
@@ -381,6 +384,8 @@
 |`CUDNN_KNOB_TYPE_LDGB`|8.0.1| | | | | | | |
 |`CUDNN_KNOB_TYPE_LDGC`|8.0.1| | | | | | | |
 |`CUDNN_KNOB_TYPE_MULTIPLY`|8.0.1| | | | | | | |
+|`CUDNN_KNOB_TYPE_NUM_C_PER_BLOCK`|8.9.0| | | | | | | |
+|`CUDNN_KNOB_TYPE_OCCUPANCY`|8.9.0| | | | | | | |
 |`CUDNN_KNOB_TYPE_REDUCTION_MODE`|8.0.1| | | | | | | |
 |`CUDNN_KNOB_TYPE_SINGLEBUFFER`|8.0.1| | | | | | | |
 |`CUDNN_KNOB_TYPE_SLICED`|8.0.1| | | | | | | |
@@ -534,6 +539,7 @@
 |`CUDNN_POINTWISE_MUL`|8.0.1| | | | | | | |
 |`CUDNN_POINTWISE_NEG`|8.3.0| | | | | | | |
 |`CUDNN_POINTWISE_POW`|8.3.0| | | | | | | |
+|`CUDNN_POINTWISE_RECIPROCAL`|8.9.0| | | | | | | |
 |`CUDNN_POINTWISE_RELU_BWD`|8.1.0| | | | | | | |
 |`CUDNN_POINTWISE_RELU_FWD`|8.0.1| | | | | | | |
 |`CUDNN_POINTWISE_RSQRT`|8.3.0| | | | | | | |
