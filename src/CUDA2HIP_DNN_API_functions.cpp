@@ -116,7 +116,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_FUNCTION_MAP {
   {"cudnnGetConvolutionForwardAlgorithm_v7",                   {"hipdnnGetConvolutionForwardAlgorithm_v7",                   "", CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
   {"cudnnGetConvolutionForwardWorkspaceSize",                  {"hipdnnGetConvolutionForwardWorkspaceSize",                  "miopenConvolutionForwardGetWorkSpaceSize",                           CONV_LIB_FUNC, API_DNN, 2}},
   {"cudnnConvolutionForward",                                  {"hipdnnConvolutionForward",                                  "miopenConvolutionForward",                                           CONV_LIB_FUNC, API_DNN, 2}},
-  {"cudnnConvolutionBiasActivationForward",                    {"hipdnnConvolutionBiasActivationForward",                    "", CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
+  {"cudnnConvolutionBiasActivationForward",                    {"hipdnnConvolutionBiasActivationForward",                    "miopenConvolutionBiasActivationForward",                             CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
   {"cudnnConvolutionBackwardBias",                             {"hipdnnConvolutionBackwardBias",                             "miopenConvolutionBackwardBias",                                      CONV_LIB_FUNC, API_DNN, 2}},
   {"cudnnGetConvolutionBackwardFilterAlgorithmMaxCount",       {"hipdnnGetConvolutionBackwardFilterAlgorithmMaxCount",       "", CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
   {"cudnnFindConvolutionBackwardFilterAlgorithm",              {"hipdnnFindConvolutionBackwardFilterAlgorithm",              "", CONV_LIB_FUNC, API_DNN, 2}},
