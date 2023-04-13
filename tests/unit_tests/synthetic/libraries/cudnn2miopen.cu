@@ -270,6 +270,13 @@ int main() {
   cudnnConvolutionBwdDataAlgo_t CONVOLUTION_BWD_DATA_ALGO_FFT = CUDNN_CONVOLUTION_BWD_DATA_ALGO_FFT;
   cudnnConvolutionBwdDataAlgo_t CONVOLUTION_BWD_DATA_ALGO_WINOGRAD = CUDNN_CONVOLUTION_BWD_DATA_ALGO_WINOGRAD;
 
+  // CHECK: miopenRNNDirectionMode_t DirectionMode;
+  // CHECK-NEXT: miopenRNNDirectionMode_t UNIDIRECTIONAL = miopenRNNunidirection;
+  // CHECK-NEXT: miopenRNNDirectionMode_t BIDIRECTIONAL = miopenRNNbidirection;
+  cudnnDirectionMode_t DirectionMode;
+  cudnnDirectionMode_t UNIDIRECTIONAL = CUDNN_UNIDIRECTIONAL;
+  cudnnDirectionMode_t BIDIRECTIONAL = CUDNN_BIDIRECTIONAL;
+
   // CHECK: miopenConvAlgoPerf_t ConvolutionFwdAlgoPerf_t;
   // CHECK-NEXT: miopenConvAlgoPerf_t ConvolutionFwdAlgoPerfStruct;
   cudnnConvolutionFwdAlgoPerf_t ConvolutionFwdAlgoPerf_t;
@@ -593,6 +600,33 @@ int main() {
   // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenConvolutionBiasActivationForward(miopenHandle_t handle, const void* alpha1, const miopenTensorDescriptor_t xDesc, const void* x, const miopenTensorDescriptor_t wDesc, const void* w, const miopenConvolutionDescriptor_t convDesc, miopenConvFwdAlgorithm_t algo, void* workspace, size_t workspaceSizeInBytes, const void* alpha2, const miopenTensorDescriptor_t zDesc, const void* z, const miopenTensorDescriptor_t biasDesc, const void* bias, const miopenActivationDescriptor_t activationDesc, const miopenTensorDescriptor_t yDesc, void* y);
   // CHECK: status = miopenConvolutionBiasActivationForward(handle, alpha1, xD, x, filterDescriptor, W, convolutionDescriptor, convolutionFwdAlgo, workSpace, workSpaceSizeInBytes, alpha2, zD, z, biasD, bias, activationDescriptor, yD, y);
   status = cudnnConvolutionBiasActivationForward(handle, alpha1, xD, x, filterDescriptor, W, convolutionDescriptor, convolutionFwdAlgo, workSpace, workSpaceSizeInBytes, alpha2, zD, z, biasD, bias, activationDescriptor, yD, y);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnCreateRNNDescriptor(cudnnRNNDescriptor_t* rnnDesc);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenCreateRNNDescriptor(miopenRNNDescriptor_t* rnnDesc);
+  // CHECK: status = miopenCreateRNNDescriptor(&RNNDescriptor);
+  status = cudnnCreateRNNDescriptor(&RNNDescriptor);
+
+  // NOTE: cudnnGetRNNDescriptor - removed after cuDNN 7.6.5
+  // TODO: add cudnnGetRNNDescriptor -> miopenGetRNNDescriptor_V2 mapping after implementing cuDNN versioning in tests
+
+  int hiddenSize = 0;
+  int layer = 0;
+
+  // TODO: Insert miopenRNNBiasMode_t* biasMode in the hipified miopenGetRNNDescriptor_V2 after miopenRNNMode_t* rnnMode: will need variable declaration
+  // CUDA: CUDNN_DEPRECATED cudnnStatus_t CUDNNWINAPI cudnnGetRNNDescriptor_v6(cudnnHandle_t handle, cudnnRNNDescriptor_t rnnDesc, int* hiddenSize, int* numLayers, cudnnDropoutDescriptor_t* dropoutDesc, cudnnRNNInputMode_t* inputMode, cudnnDirectionMode_t* direction, cudnnRNNMode_t* cellMode, cudnnRNNAlgo_t* algo, cudnnDataType_t* mathPrec);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenGetRNNDescriptor_V2(miopenRNNDescriptor_t rnnDesc, int* hiddenSize, int* layer, miopenDropoutDescriptor_t* dropoutDesc, miopenRNNInputMode_t* inputMode, miopenRNNDirectionMode_t* dirMode, miopenRNNMode_t* rnnMode, miopenRNNBiasMode_t* biasMode, miopenRNNAlgo_t* algoMode, miopenDataType_t* dataType);
+  // CHECK: status = miopenGetRNNDescriptor_V2( RNNDescriptor, &hiddenSize, &layer, &DropoutDescriptor, &RNNInputMode, &DirectionMode, &RNNMode, &RNNAlgo, &dataType);
+  status = cudnnGetRNNDescriptor_v6(handle, RNNDescriptor, &hiddenSize, &layer, &DropoutDescriptor, &RNNInputMode, &DirectionMode, &RNNMode, &RNNAlgo, &dataType);
+
+  // NOTE: cudnnSetRNNDescriptor - removed after cuDNN 7.6.5
+  // NOTE: cudnnSetRNNDescriptor_v5 - removed after cuDNN 7.6.5
+  // TODO: add cudnnSetRNNDescriptor -> miopenSetRNNDescriptor_V2 mapping after implementing cuDNN versioning in tests
+
+  // TODO: Insert miopenRNNBiasMode_t* biasMode in the hipified miopenSetRNNDescriptor_V2 after miopenRNNMode_t rnnMode: will need variable declaration
+  // CUDA: CUDNN_DEPRECATED cudnnStatus_t CUDNNWINAPI cudnnSetRNNDescriptor_v6(cudnnHandle_t handle, cudnnRNNDescriptor_t rnnDesc, const int hiddenSize, const int numLayers, cudnnDropoutDescriptor_t dropoutDesc, cudnnRNNInputMode_t inputMode, cudnnDirectionMode_t direction, cudnnRNNMode_t cellMode, cudnnRNNAlgo_t algo, cudnnDataType_t mathPrec);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenSetRNNDescriptor_V2(miopenRNNDescriptor_t rnnDesc, const int hsize, const int nlayers, miopenDropoutDescriptor_t dropoutDesc, miopenRNNInputMode_t inMode, miopenRNNDirectionMode_t direction, miopenRNNMode_t rnnMode, miopenRNNBiasMode_t biasMode, miopenRNNAlgo_t algo, miopenDataType_t dataType);
+  // CHECK: status = miopenSetRNNDescriptor_V2( RNNDescriptor, hiddenSize, layer, DropoutDescriptor, RNNInputMode, DirectionMode, RNNMode, RNNAlgo, dataType);
+  status = cudnnSetRNNDescriptor_v6(handle, RNNDescriptor, hiddenSize, layer, DropoutDescriptor, RNNInputMode, DirectionMode, RNNMode, RNNAlgo, dataType);
 
   return 0;
 }

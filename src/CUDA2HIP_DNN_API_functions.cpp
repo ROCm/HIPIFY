@@ -209,7 +209,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_FUNCTION_MAP {
   {"cudnnDropoutBackward",                                     {"hipdnnDropoutBackward",                                     "", CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
 
   // cuDNN RNN functions
-  {"cudnnCreateRNNDescriptor",                                 {"hipdnnCreateRNNDescriptor",                                 "", CONV_LIB_FUNC, API_DNN, 2}},
+  {"cudnnCreateRNNDescriptor",                                 {"hipdnnCreateRNNDescriptor",                                 "miopenCreateRNNDescriptor",                                          CONV_LIB_FUNC, API_DNN, 2}},
   {"cudnnDestroyRNNDescriptor",                                {"hipdnnDestroyRNNDescriptor",                                "", CONV_LIB_FUNC, API_DNN, 2}},
   {"cudnnGetRNNForwardInferenceAlgorithmMaxCount",             {"hipdnnGetRNNForwardInferenceAlgorithmMaxCount",             "", CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   {"cudnnFindRNNForwardInferenceAlgorithmEx",                  {"hipdnnFindRNNForwardInferenceAlgorithmEx",                  "", CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
@@ -225,8 +225,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_FUNCTION_MAP {
   // NOTE" hipdnnSetRNNDescriptor has additional argument hipdnnRNNBiasMode_t *biasMode without default value
   {"cudnnSetRNNDescriptor",                                    {"hipdnnSetRNNDescriptor",                                    "", CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED | CUDA_REMOVED}},
   // NOTE" hipdnnGetRNNDescriptor has additional argument hipdnnRNNBiasMode_t *biasMode without default value
-  {"cudnnGetRNNDescriptor",                                    {"hipdnnGetRNNDescriptor",                                    "", CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnGetRNNDescriptor_v6",                                 {"hipdnnGetRNNDescriptor_v6",                                 "", CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cudnnGetRNNDescriptor",                                    {"hipdnnGetRNNDescriptor",                                    "miopenGetRNNDescriptor_V2",                                          CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED | CUDA_REMOVED}},
+  {"cudnnGetRNNDescriptor_v6",                                 {"hipdnnGetRNNDescriptor_v6",                                 "miopenGetRNNDescriptor_V2",                                          CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   {"cudnnGetRNNDescriptor_v8",                                 {"hipdnnGetRNNDescriptor_v8",                                 "", CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
   {"cudnnSetRNNProjectionLayers",                              {"hipdnnSetRNNProjectionLayers",                              "", CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   {"cudnnGetRNNProjectionLayers",                              {"hipdnnGetRNNProjectionLayers",                              "", CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
@@ -250,7 +250,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_FUNCTION_MAP {
   {"cudnnRNNBackwardWeights_v8",                               {"hipdnnRNNBackwardWeights_v8",                               "", CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
   {"cudnnRNNBackwardWeightsEx",                                {"hipdnnRNNBackwardWeightsEx",                                "", CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   {"cudnnSetRNNDescriptor_v5",                                 {"hipdnnSetRNNDescriptor_v5",                                 "", CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnSetRNNDescriptor_v6",                                 {"hipdnnSetRNNDescriptor_v6",                                 "", CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED}},
+  {"cudnnSetRNNDescriptor_v6",                                 {"hipdnnSetRNNDescriptor_v6",                                 "miopenSetRNNDescriptor_V2",                                          CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED}},
   {"cudnnSetRNNDescriptor_v8",                                 {"hipdnnSetRNNDescriptor_v8",                                 "", CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
   {"cudnnSetRNNPaddingMode",                                   {"hipdnnSetRNNPaddingMode",                                   "", CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   {"cudnnGetRNNPaddingMode",                                   {"hipdnnGetRNNPaddingMode",                                   "", CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
