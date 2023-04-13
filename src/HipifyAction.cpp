@@ -75,6 +75,8 @@ const std::string sCudnnGetPooling2dDescriptor = "cudnnGetPooling2dDescriptor";
 const std::string sCudnnSetPoolingNdDescriptor = "cudnnSetPoolingNdDescriptor";
 const std::string sCudnnGetPoolingNdDescriptor = "cudnnGetPoolingNdDescriptor";
 const std::string sCudnnSetLRNDescriptor = "cudnnSetLRNDescriptor";
+const std::string sCudnnGetRNNDescriptor_v6 = "cudnnGetRNNDescriptor_v6";
+const std::string sCudnnSetRNNDescriptor_v6 = "cudnnSetRNNDescriptor_v6";
 // Matchers' names
 const StringRef sCudaLaunchKernel = "cudaLaunchKernel";
 const StringRef sCudaHostFuncCall = "cudaHostFuncCall";
@@ -269,6 +271,24 @@ std::map<std::string, ArgCastStruct> FuncArgCasts {
     {
       {
         {1, {e_add_const_argument, cw_None, "miopenLRNCrossChannel"}}
+      },
+      true,
+      true
+    }
+  },
+  {sCudnnGetRNNDescriptor_v6,
+    {
+      {
+        {0, {e_remove_argument, cw_None}}
+      },
+      true,
+      true
+    }
+  },
+  {sCudnnSetRNNDescriptor_v6,
+    {
+      {
+        {0, {e_remove_argument, cw_None}}
       },
       true,
       true
@@ -857,7 +877,9 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
             sCudnnGetPooling2dDescriptor,
             sCudnnSetPoolingNdDescriptor,
             sCudnnGetPoolingNdDescriptor,
-            sCudnnSetLRNDescriptor
+            sCudnnSetLRNDescriptor,
+            sCudnnGetRNNDescriptor_v6,
+            sCudnnSetRNNDescriptor_v6
           )
         )
       )
