@@ -4,7 +4,7 @@ Full documentation for HIPIFY is available at [hipify.readthedocs.io](https://hi
 
 ## HIPIFY for ROCm 5.6.0
 ### Added
-- CUDA 12.1 support
+- CUDA 12.1.0 support
 - cuDNN 8.8.1 support
 - LLVM 16.0.0 support
 - New options:
@@ -18,7 +18,7 @@ Full documentation for HIPIFY is available at [hipify.readthedocs.io](https://hi
 
 ## HIPIFY for ROCm 5.5.0
 ### Added
-- Partial CUDA 12.0 support
+- Partial CUDA 12.0.0 support
 - cuDNN 8.7.0 support
 - Initial MIOpem support
 - cuBLAS 64bit API (CUDA 12.0) initial support
@@ -29,7 +29,7 @@ Full documentation for HIPIFY is available at [hipify.readthedocs.io](https://hi
 
 ## HIPIFY for ROCm 5.4.1
 ### Added
-- CUDA 11.8 support
+- CUDA 11.8.0 support
 - cuDNN 8.6.0 support
 - Device types support
 - LLVM 15.0.4 support
@@ -45,7 +45,7 @@ Full documentation for HIPIFY is available at [hipify.readthedocs.io](https://hi
 
 ## HIPIFY for ROCm 5.3.0
 ### Added
-- CUDA 11.7 support
+- CUDA 11.7.0 support
 - cuDNN 8.4.1 support
 - CUB initial support
 - More synthetic tests
@@ -60,20 +60,20 @@ Full documentation for HIPIFY is available at [hipify.readthedocs.io](https://hi
 
 ## HIPIFY for ROCm 5.2.0
 ### Added
-- CUDA 11.6 support
+- CUDA 11.6.0 support
 - cuDNN 8.3.3 support
 - LLVM 14.0.0 support
 
 ## HIPIFY for ROCm 5.1.0
 ### Added
-- CUDA 11.5 support
+- CUDA 11.5.1 support
 - cuDNN 8.3.2 support
 ### Fixed
 - hipification of cuOccupancyMaxPotentialBlockSize and cuOccupancyMaxPotentialBlockSizeWithFlags
 
 ## HIPIFY for ROCm 5.0.0
 ### Added
-- CUDA 11.4 support
+- CUDA 11.4.2 support
 - cuDNN 8.3.2 support
 - Initial hipRTC support
 - GNU C/C++ 11.2 support
@@ -103,7 +103,7 @@ Full documentation for HIPIFY is available at [hipify.readthedocs.io](https://hi
 
 ## HIPIFY for ROCm 4.3.0
 ### Added
-- CUDA 11.3 support
+- CUDA 11.3.0 support
 - cuDNN 8.2.0 support
 - LLVM 12.0.0 support
 ### Fixed
@@ -133,4 +133,48 @@ Full documentation for HIPIFY is available at [hipify.readthedocs.io](https://hi
 - Initial support for APIs versioning
 
 ## HIPIFY for ROCm 4.0.0
-- No changes since 3.10.0
+### Added
+- LLVM 11.0.0 support
+
+## HIPIFY for ROCm 3.10.0
+### Misc
+- CUDA and HIP APIs and data types versioning are revised
+- CUDA and HIP deprecated and removed APIs and data types are revised
+
+## HIPIFY for ROCm 3.9.0
+### Added
+- CUDA 11.0.1 support
+- Initial CUDA2HIP documentation generation in Markdown and CSV formats
+- Initial CUDA and HIP APIs versioning support
+- New options:
+  - --md (Generate Markdown documentation)
+  - --csv (Generate CSV documentation)
+  ### Misc
+- Improved hipify-perl generation
+
+## HIPIFY for ROCm 3.8.0
+### Added
+- cuDNN 8.0.2 support
+- compile_commands.json support (-p <build-path>)
+### Misc
+- Improved hipify-perl generation
+
+## HIPIFY for ROCm 3.7.0
+### Added
+- CUDA 11.0.0 support
+- Linux packaging
+- LLVM 10.0.1 support
+
+## HIPIFY for ROCm 3.6.0
+### Added
+- The 'deprecated' flag for all corresponding CUDA and HIP APIs
+### Misc
+- Started warning on deprecated APIs
+
+## HIPIFY for ROCm 3.5.0
+### Added
+- CUDA 10.2.0 support
+- cuDNN 7.6.5 support
+- LLVM 10.0.0 support
+### Misc
+- hipify-clang and clang options separator '--' support
