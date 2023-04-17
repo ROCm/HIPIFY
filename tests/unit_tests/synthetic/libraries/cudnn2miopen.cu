@@ -746,5 +746,59 @@ int main() {
   // CHECK: status = miopenCTCLoss(handle, probsD, probs, &labels, &labelLengths, &inputLengths, losses, gradientsD, gradients, CTCLossAlgo, CTCLossDescriptor, workSpace , workSpaceSizeInBytes);
   status = cudnnCTCLoss(handle, probsD, probs, &labels, &labelLengths, &inputLengths, losses, gradientsD, gradients, CTCLossAlgo, CTCLossDescriptor, workSpace , workSpaceSizeInBytes);
 
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnCreateDropoutDescriptor(cudnnDropoutDescriptor_t* dropoutDesc);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenCreateDropoutDescriptor(miopenDropoutDescriptor_t* dropoutDesc);
+  // CHECK: status = miopenCreateDropoutDescriptor(&DropoutDescriptor);
+  status = cudnnCreateDropoutDescriptor(&DropoutDescriptor);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnDestroyDropoutDescriptor(cudnnDropoutDescriptor_t dropoutDesc);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenDestroyDropoutDescriptor(miopenDropoutDescriptor_t dropoutDesc);
+  // CHECK: status = miopenDestroyDropoutDescriptor(DropoutDescriptor);
+  status = cudnnDestroyDropoutDescriptor(DropoutDescriptor);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnDropoutGetReserveSpaceSize(cudnnTensorDescriptor_t xdesc, size_t* sizeInBytes);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenDropoutGetReserveSpaceSize(const miopenTensorDescriptor_t xDesc, size_t* reserveSpaceSizeInBytes);
+  // CHECK: status = miopenDropoutGetReserveSpaceSize(xD, &reserveSpaceNumBytes);
+  status = cudnnDropoutGetReserveSpaceSize(xD, &reserveSpaceNumBytes);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnDropoutGetStatesSize(cudnnHandle_t handle, size_t* sizeInBytes);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenDropoutGetStatesSize(miopenHandle_t handle, size_t* stateSizeInBytes);
+  // CHECK: status = miopenDropoutGetStatesSize(handle, &reserveSpaceNumBytes);
+  status = cudnnDropoutGetStatesSize(handle, &reserveSpaceNumBytes);
+
+  float dropout = 0.0f;
+  void* states = nullptr;
+  unsigned long long seed = 0;
+
+  // TODO [#837]: Insert float* dropout, void** states, unsigned long long* seed in the hipified miopenGetDropoutDescriptor: will need variable declaration
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnGetDropoutDescriptor(cudnnDropoutDescriptor_t dropoutDesc, cudnnHandle_t handle, float* dropout, void** states, unsigned long long* seed);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenGetDropoutDescriptor(miopenDropoutDescriptor_t dropoutDesc, miopenHandle_t handle, float* dropout, void** states, unsigned long long* seed, bool* use_mask, bool* state_evo, miopenRNGType_t* rng_mode);
+  // CHECK: status = miopenGetDropoutDescriptor(DropoutDescriptor, handle, &dropout, &states, &seed);
+  status = cudnnGetDropoutDescriptor(DropoutDescriptor, handle, &dropout, &states, &seed);
+
+  // TODO [#837]: Insert bool use_mask, bool state_evo, miopenRNGType_t rng_mode in the hipified miopenGetDropoutDescriptor: will need variable declaration
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnSetDropoutDescriptor(cudnnDropoutDescriptor_t dropoutDesc, cudnnHandle_t handle, float dropout, void* states, size_t stateSizeInBytes, unsigned long long seed);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenSetDropoutDescriptor(miopenDropoutDescriptor_t dropoutDesc, miopenHandle_t handle, float dropout, void* states, size_t stateSizeInBytes, unsigned long long seed, bool use_mask, bool state_evo, miopenRNGType_t rng_mode);
+  // CHECK: status = miopenSetDropoutDescriptor(DropoutDescriptor, handle, dropout, states, reserveSpaceNumBytes, seed);
+  status = cudnnSetDropoutDescriptor(DropoutDescriptor, handle, dropout, states, reserveSpaceNumBytes, seed);
+
+  // TODO [#837]: Insert bool use_mask, bool state_evo, miopenRNGType_t rng_mode in the hipified miopenRestoreDropoutDescriptor: will need variable declaration
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnRestoreDropoutDescriptor(cudnnDropoutDescriptor_t dropoutDesc, cudnnHandle_t handle, float dropout, void* states, size_t stateSizeInBytes, unsigned long long seed);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenRestoreDropoutDescriptor(miopenDropoutDescriptor_t dropoutDesc, miopenHandle_t handle, float dropout, void* states, size_t stateSizeInBytes, unsigned long long seed, bool use_mask, bool state_evo, miopenRNGType_t rng_mode);
+  // CHECK: status = miopenRestoreDropoutDescriptor(DropoutDescriptor, handle, dropout, states, reserveSpaceNumBytes, seed);
+  status = cudnnRestoreDropoutDescriptor(DropoutDescriptor, handle, dropout, states, reserveSpaceNumBytes, seed);
+
+  // TODO [#837]: Insert const miopenTensorDescriptor_t noise_shape in the hipified miopenDropoutForward: will need variable declaration
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnDropoutForward(cudnnHandle_t handle, const cudnnDropoutDescriptor_t dropoutDesc, const cudnnTensorDescriptor_t xdesc, const void* x, const cudnnTensorDescriptor_t ydesc, void* y, void* reserveSpace, size_t reserveSpaceSizeInBytes);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenDropoutForward(miopenHandle_t handle, const miopenDropoutDescriptor_t dropoutDesc, const miopenTensorDescriptor_t noise_shape, const miopenTensorDescriptor_t xDesc, const void* x, const miopenTensorDescriptor_t yDesc, void* y, void* reserveSpace, size_t reserveSpaceSizeInBytes);
+  // CHECK: status = miopenDropoutForward(handle, DropoutDescriptor, xD, x, yD, y, reserveSpace, reserveSpaceNumBytes);
+  status = cudnnDropoutForward(handle, DropoutDescriptor, xD, x, yD, y, reserveSpace, reserveSpaceNumBytes);
+
+  // TODO [#837]: Insert const miopenTensorDescriptor_t noise_shape in the hipified miopenDropoutBackward: will need variable declaration
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnDropoutBackward(cudnnHandle_t handle, const cudnnDropoutDescriptor_t dropoutDesc, const cudnnTensorDescriptor_t dydesc, const void* dy, const cudnnTensorDescriptor_t dxdesc, void* dx, void* reserveSpace, size_t reserveSpaceSizeInBytes);
+  // MIOPNE: MIOPEN_EXPORT miopenStatus_t miopenDropoutBackward(miopenHandle_t handle, const miopenDropoutDescriptor_t dropoutDesc, const miopenTensorDescriptor_t noise_shape, const miopenTensorDescriptor_t dyDesc, const void* dy, const miopenTensorDescriptor_t dxDesc, void* dx, void* reserveSpace, size_t reserveSpaceSizeInBytes);
+  // CHECK: status = miopenDropoutBackward(handle, DropoutDescriptor, yD, y, xD, x, reserveSpace, reserveSpaceNumBytes);
+  status = cudnnDropoutBackward(handle, DropoutDescriptor, yD, y, xD, x, reserveSpace, reserveSpaceNumBytes);
+
   return 0;
 }

@@ -198,15 +198,15 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_FUNCTION_MAP {
   {"cudnnSpatialTfSamplerBackward",                            {"hipdnnSpatialTfSamplerBackward",                            "", CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
 
   // cuDNN Dropout functions
-  {"cudnnCreateDropoutDescriptor",                             {"hipdnnCreateDropoutDescriptor",                             "", CONV_LIB_FUNC, API_DNN, 2}},
-  {"cudnnDestroyDropoutDescriptor",                            {"hipdnnDestroyDropoutDescriptor",                            "", CONV_LIB_FUNC, API_DNN, 2}},
-  {"cudnnDropoutGetStatesSize",                                {"hipdnnDropoutGetStatesSize",                                "", CONV_LIB_FUNC, API_DNN, 2}},
-  {"cudnnDropoutGetReserveSpaceSize",                          {"hipdnnDropoutGetReserveSpaceSize",                          "", CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
-  {"cudnnSetDropoutDescriptor",                                {"hipdnnSetDropoutDescriptor",                                "", CONV_LIB_FUNC, API_DNN, 2}},
-  {"cudnnGetDropoutDescriptor",                                {"hipdnnGetDropoutDescriptor",                                "", CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
-  {"cudnnRestoreDropoutDescriptor",                            {"hipdnnRestoreDropoutDescriptor",                            "", CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
-  {"cudnnDropoutForward",                                      {"hipdnnDropoutForward",                                      "", CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
-  {"cudnnDropoutBackward",                                     {"hipdnnDropoutBackward",                                     "", CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
+  {"cudnnCreateDropoutDescriptor",                             {"hipdnnCreateDropoutDescriptor",                             "miopenCreateDropoutDescriptor",                                      CONV_LIB_FUNC, API_DNN, 2}},
+  {"cudnnDestroyDropoutDescriptor",                            {"hipdnnDestroyDropoutDescriptor",                            "miopenDestroyDropoutDescriptor",                                     CONV_LIB_FUNC, API_DNN, 2}},
+  {"cudnnDropoutGetStatesSize",                                {"hipdnnDropoutGetStatesSize",                                "miopenDropoutGetStatesSize",                                         CONV_LIB_FUNC, API_DNN, 2}},
+  {"cudnnDropoutGetReserveSpaceSize",                          {"hipdnnDropoutGetReserveSpaceSize",                          "miopenDropoutGetReserveSpaceSize",                                   CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
+  {"cudnnSetDropoutDescriptor",                                {"hipdnnSetDropoutDescriptor",                                "miopenSetDropoutDescriptor",                                         CONV_LIB_FUNC, API_DNN, 2}},
+  {"cudnnGetDropoutDescriptor",                                {"hipdnnGetDropoutDescriptor",                                "miopenGetDropoutDescriptor",                                         CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
+  {"cudnnRestoreDropoutDescriptor",                            {"hipdnnRestoreDropoutDescriptor",                            "miopenRestoreDropoutDescriptor",                                     CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
+  {"cudnnDropoutForward",                                      {"hipdnnDropoutForward",                                      "miopenDropoutForward",                                               CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
+  {"cudnnDropoutBackward",                                     {"hipdnnDropoutBackward",                                     "miopenDropoutBackward",                                              CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
 
   // cuDNN RNN functions
   {"cudnnCreateRNNDescriptor",                                 {"hipdnnCreateRNNDescriptor",                                 "miopenCreateRNNDescriptor",                                          CONV_LIB_FUNC, API_DNN, 2}},
