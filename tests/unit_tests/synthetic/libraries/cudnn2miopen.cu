@@ -453,7 +453,7 @@ int main() {
   // TODO: swap 2 and 3 arguments (const miopenTensorDescriptor_t wDesc and const miopenTensorDescriptor_t xDesc)
   // CUDA: cudnnStatus_t CUDNNWINAPI cudnnGetConvolutionForwardWorkspaceSize(cudnnHandle_t handle, const cudnnTensorDescriptor_t xDesc, const cudnnFilterDescriptor_t wDesc, const cudnnConvolutionDescriptor_t convDesc, const cudnnTensorDescriptor_t yDesc, cudnnConvolutionFwdAlgo_t algo, size_t* sizeInBytes);
   // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenConvolutionForwardGetWorkSpaceSize(miopenHandle_t handle, const miopenTensorDescriptor_t wDesc, const miopenTensorDescriptor_t xDesc, const miopenConvolutionDescriptor_t convDesc, const miopenTensorDescriptor_t yDesc, size_t* workSpaceSize);
-  // CHECK: status = miopenConvolutionForwardGetWorkSpaceSize(handle, xD, filterDescriptor, convolutionDescriptor, yD,  &workSpaceSizeInBytes);
+  // CHECK: status = miopenConvolutionForwardGetWorkSpaceSize(handle, xD, filterDescriptor, convolutionDescriptor, yD, &workSpaceSizeInBytes);
   status = cudnnGetConvolutionForwardWorkspaceSize(handle, xD, filterDescriptor, convolutionDescriptor, yD, convolutionFwdAlgo, &workSpaceSizeInBytes);
 
   // TODO: swap correctly last 5 arguments
@@ -465,7 +465,7 @@ int main() {
   // TODO: swap 2 and 3 arguments
   // CUDA: cudnnStatus_t CUDNNWINAPI cudnnGetConvolutionBackwardDataWorkspaceSize(cudnnHandle_t handle, const cudnnFilterDescriptor_t wDesc, const cudnnTensorDescriptor_t dyDesc, const cudnnConvolutionDescriptor_t convDesc, const cudnnTensorDescriptor_t dxDesc, cudnnConvolutionBwdDataAlgo_t algo, size_t* sizeInBytes);
   // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenConvolutionBackwardDataGetWorkSpaceSize(miopenHandle_t handle, const miopenTensorDescriptor_t dyDesc, const miopenTensorDescriptor_t wDesc, const miopenConvolutionDescriptor_t convDesc, const miopenTensorDescriptor_t dxDesc, size_t* workSpaceSize);
-  // CHECK: status = miopenConvolutionBackwardDataGetWorkSpaceSize(handle, filterDescriptor, yD, convolutionDescriptor, xD,  &workSpaceSizeInBytes);
+  // CHECK: status = miopenConvolutionBackwardDataGetWorkSpaceSize(handle, filterDescriptor, yD, convolutionDescriptor, xD, &workSpaceSizeInBytes);
   status = cudnnGetConvolutionBackwardDataWorkspaceSize(handle, filterDescriptor, yD, convolutionDescriptor, xD, ConvolutionBwdDataAlgo_t, &workSpaceSizeInBytes);
 
   // TODO: swap correctly all args, starting from 3rd
@@ -495,12 +495,12 @@ int main() {
 
   // CUDA: cudnnStatus_t CUDNNWINAPI cudnnSetPooling2dDescriptor(cudnnPoolingDescriptor_t poolingDesc, cudnnPoolingMode_t mode, cudnnNanPropagation_t maxpoolingNanOpt, int windowHeight, int windowWidth, int verticalPadding, int horizontalPadding, int verticalStride, int horizontalStride);
   // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenSet2dPoolingDescriptor(miopenPoolingDescriptor_t poolDesc, miopenPoolingMode_t mode, int windowHeight, int windowWidth, int pad_h, int pad_w, int stride_h, int stride_w);
-  // CHECK: status = miopenSet2dPoolingDescriptor(poolingDescriptor, poolingMode,  wH, wW, pad_h, pad_w, stride_h, stride_w);
+  // CHECK: status = miopenSet2dPoolingDescriptor(poolingDescriptor, poolingMode, wH, wW, pad_h, pad_w, stride_h, stride_w);
   status = cudnnSetPooling2dDescriptor(poolingDescriptor, poolingMode, maxpoolingNanOpt, wH, wW, pad_h, pad_w, stride_h, stride_w);
 
   // CUDA: cudnnStatus_t CUDNNWINAPI cudnnGetPooling2dDescriptor(const cudnnPoolingDescriptor_t poolingDesc, cudnnPoolingMode_t* mode, cudnnNanPropagation_t* maxpoolingNanOpt, int* windowHeight, int* windowWidth, int* verticalPadding, int* horizontalPadding, int* verticalStride, int* horizontalStride);
   // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenGet2dPoolingDescriptor(const miopenPoolingDescriptor_t poolDesc, miopenPoolingMode_t* mode, int* windowHeight, int* windowWidth, int* pad_h, int* pad_w, int* stride_h, int* stride_w);
-  // CHECK: status = miopenGet2dPoolingDescriptor(poolingDescriptor, &poolingMode,  &wH, &wW, &pad_h, &pad_w, &stride_h, &stride_w);
+  // CHECK: status = miopenGet2dPoolingDescriptor(poolingDescriptor, &poolingMode, &wH, &wW, &pad_h, &pad_w, &stride_h, &stride_w);
   status = cudnnGetPooling2dDescriptor(poolingDescriptor, &poolingMode, &maxpoolingNanOpt, &wH, &wW, &pad_h, &pad_w, &stride_h, &stride_w);
 
   int nbDims = 0;
@@ -527,7 +527,7 @@ int main() {
 
   // CUDA: cudnnStatus_t CUDNNWINAPI cudnnGetPoolingNdDescriptor(const cudnnPoolingDescriptor_t poolingDesc, int nbDimsRequested, cudnnPoolingMode_t* mode, cudnnNanPropagation_t* maxpoolingNanOpt, int* nbDims, int windowDimA[], int paddingA[], int strideA[]);
   // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenGetNdPoolingDescriptor(const miopenPoolingDescriptor_t poolDesc, int nbDimsRequested, miopenPoolingMode_t* mode, int* nbDims, int* windowDimA, int* padA, int* stridesA);
-  // CHECK: status = miopenGetNdPoolingDescriptor(poolingDescriptor, nbDimsRequested, &poolingMode,  &nbDims, windowDimA, padA, stridesA);
+  // CHECK: status = miopenGetNdPoolingDescriptor(poolingDescriptor, nbDimsRequested, &poolingMode, &nbDims, windowDimA, padA, stridesA);
   status = cudnnGetPoolingNdDescriptor(poolingDescriptor, nbDimsRequested, &poolingMode, &maxpoolingNanOpt, &nbDims, windowDimA, padA, stridesA);
 
   // CUDA: cudnnStatus_t CUDNNWINAPI cudnnDestroyPoolingDescriptor(cudnnPoolingDescriptor_t poolingDesc);
@@ -656,7 +656,7 @@ int main() {
   // TODO [#837]: Insert miopenRNNBiasMode_t* biasMode in the hipified miopenGetRNNDescriptor_V2 after miopenRNNMode_t* rnnMode: will need variable declaration
   // CUDA: CUDNN_DEPRECATED cudnnStatus_t CUDNNWINAPI cudnnGetRNNDescriptor_v6(cudnnHandle_t handle, cudnnRNNDescriptor_t rnnDesc, int* hiddenSize, int* numLayers, cudnnDropoutDescriptor_t* dropoutDesc, cudnnRNNInputMode_t* inputMode, cudnnDirectionMode_t* direction, cudnnRNNMode_t* cellMode, cudnnRNNAlgo_t* algo, cudnnDataType_t* mathPrec);
   // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenGetRNNDescriptor_V2(miopenRNNDescriptor_t rnnDesc, int* hiddenSize, int* layer, miopenDropoutDescriptor_t* dropoutDesc, miopenRNNInputMode_t* inputMode, miopenRNNDirectionMode_t* dirMode, miopenRNNMode_t* rnnMode, miopenRNNBiasMode_t* biasMode, miopenRNNAlgo_t* algoMode, miopenDataType_t* dataType);
-  // CHECK: status = miopenGetRNNDescriptor_V2( RNNDescriptor, &hiddenSize, &layer, &DropoutDescriptor, &RNNInputMode, &DirectionMode, &RNNMode, &RNNAlgo, &dataType);
+  // CHECK: status = miopenGetRNNDescriptor_V2(RNNDescriptor, &hiddenSize, &layer, &DropoutDescriptor, &RNNInputMode, &DirectionMode, &RNNMode, &RNNAlgo, &dataType);
   status = cudnnGetRNNDescriptor_v6(handle, RNNDescriptor, &hiddenSize, &layer, &DropoutDescriptor, &RNNInputMode, &DirectionMode, &RNNMode, &RNNAlgo, &dataType);
 
   // NOTE: cudnnSetRNNDescriptor - removed after cuDNN 7.6.5
@@ -666,7 +666,7 @@ int main() {
   // TODO [#837]: Insert miopenRNNBiasMode_t biasMode in the hipified miopenSetRNNDescriptor_V2 after miopenRNNMode_t rnnMode: will need variable declaration
   // CUDA: CUDNN_DEPRECATED cudnnStatus_t CUDNNWINAPI cudnnSetRNNDescriptor_v6(cudnnHandle_t handle, cudnnRNNDescriptor_t rnnDesc, const int hiddenSize, const int numLayers, cudnnDropoutDescriptor_t dropoutDesc, cudnnRNNInputMode_t inputMode, cudnnDirectionMode_t direction, cudnnRNNMode_t cellMode, cudnnRNNAlgo_t algo, cudnnDataType_t mathPrec);
   // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenSetRNNDescriptor_V2(miopenRNNDescriptor_t rnnDesc, const int hsize, const int nlayers, miopenDropoutDescriptor_t dropoutDesc, miopenRNNInputMode_t inMode, miopenRNNDirectionMode_t direction, miopenRNNMode_t rnnMode, miopenRNNBiasMode_t biasMode, miopenRNNAlgo_t algo, miopenDataType_t dataType);
-  // CHECK: status = miopenSetRNNDescriptor_V2( RNNDescriptor, hiddenSize, layer, DropoutDescriptor, RNNInputMode, DirectionMode, RNNMode, RNNAlgo, dataType);
+  // CHECK: status = miopenSetRNNDescriptor_V2(RNNDescriptor, hiddenSize, layer, DropoutDescriptor, RNNInputMode, DirectionMode, RNNMode, RNNAlgo, dataType);
   status = cudnnSetRNNDescriptor_v6(handle, RNNDescriptor, hiddenSize, layer, DropoutDescriptor, RNNInputMode, DirectionMode, RNNMode, RNNAlgo, dataType);
 
   int seqLength = 0;
