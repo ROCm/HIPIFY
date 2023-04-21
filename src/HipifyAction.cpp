@@ -734,6 +734,7 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
     if (castStruct.isToMIOpen != TranslateToMIOpen || castStruct.isToRoc != TranslateToRoc) return false;
     clang::LangOptions DefaultLangOptions;
     for (auto c : castStruct.castMap) {
+      size_t length = 0;
       unsigned int argNum = c.first;
       clang::SmallString<40> XStr;
       llvm::raw_svector_ostream OS(XStr);
@@ -752,9 +753,11 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
         case e_remove_argument:
         {
           OS << "";
-          auto NextToken = clang::Lexer::findNextToken(e, *SM, DefaultLangOptions);
-          if (!NextToken) continue;
-          e = NextToken->getLocation();
+          if (argNum < call->getNumArgs())
+            e = call->getArg(argNum + 1)->getBeginLoc();
+          else
+            e = call->getEndLoc();
+          length = SM->getCharacterData(e) - SM->getCharacterData(s);
           break;
         }
         case e_add_const_argument:
@@ -767,11 +770,9 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
         }
         default:
           OS << getCastType(c.second.castType) << "(" << readSourceText(*SM, sr) << ")";
+          length = SM->getCharacterData(clang::Lexer::getLocForEndOfToken(e, 0, *SM, DefaultLangOptions)) - SM->getCharacterData(s);
           break;
       }
-      size_t length = 0;
-      if (c.second.castType != e_add_const_argument)
-        length = SM->getCharacterData(clang::Lexer::getLocForEndOfToken(e, 0, *SM, DefaultLangOptions)) - SM->getCharacterData(s);
       ct::Replacement Rep(*SM, s, length, OS.str());
       clang::FullSourceLoc fullSL(s, *SM);
       insertReplacement(Rep, fullSL);

@@ -287,6 +287,11 @@ int main() {
   cudnnConvolutionBwdDataAlgoPerf_t ConvolutionBwdDataAlgoPerf_t;
   cudnnConvolutionBwdDataAlgoPerfStruct ConvolutionBwdDataAlgoPerfStruct;
 
+  // CHECK: miopenCTCLossAlgo_t CTCLossAlgo;
+  // CHECK-NEXT: miopenCTCLossAlgo_t CTC_LOSS_ALGO_DETERMINISTIC = MIOPEN_CTC_LOSS_ALGO_DETERMINISTIC;
+  cudnnCTCLossAlgo_t CTCLossAlgo;
+  cudnnCTCLossAlgo_t CTC_LOSS_ALGO_DETERMINISTIC = CUDNN_CTC_LOSS_ALGO_DETERMINISTIC;
+
   // CUDA: cudnnStatus_t CUDNNWINAPI cudnnCreateTensorDescriptor(cudnnTensorDescriptor_t* tensorDesc);
   // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenCreateTensorDescriptor(miopenTensorDescriptor_t* tensorDesc);
   // CHECK: status = miopenCreateTensorDescriptor(&tensorDescriptor);
@@ -324,26 +329,46 @@ int main() {
   // CHECK-NEXT: miopenTensorDescriptor_t bD;
   // CHECK-NEXT: miopenTensorDescriptor_t cD;
   // CHECK-NEXT: miopenTensorDescriptor_t xD;
+  // CHECK-NEXT: miopenTensorDescriptor_t hxD;
+  // CHECK-NEXT: miopenTensorDescriptor_t dhxD;
+  // CHECK-NEXT: miopenTensorDescriptor_t cxD;
+  // CHECK-NEXT: miopenTensorDescriptor_t dcxD;
   // CHECK-NEXT: miopenTensorDescriptor_t yD;
+  // CHECK-NEXT: miopenTensorDescriptor_t dyD;
+  // CHECK-NEXT: miopenTensorDescriptor_t hyD;
+  // CHECK-NEXT: miopenTensorDescriptor_t dhyD;
+  // CHECK-NEXT: miopenTensorDescriptor_t cyD;
+  // CHECK-NEXT: miopenTensorDescriptor_t dcyD;
   // CHECK-NEXT: miopenTensorDescriptor_t wD;
   // CHECK-NEXT: miopenTensorDescriptor_t zD;
   // CHECK-NEXT: miopenTensorDescriptor_t inputD;
   // CHECK-NEXT: miopenTensorDescriptor_t dbD;
   // CHECK-NEXT: miopenTensorDescriptor_t dxD;
-  // CHECK-NEXT: miopenTensorDescriptor_t dyD;
   // CHECK-NEXT: miopenTensorDescriptor_t biasD;
+  // CHECK-NEXT: miopenTensorDescriptor_t probsD;
+  // CHECK-NEXT: miopenTensorDescriptor_t gradientsD;
   cudnnTensorDescriptor_t aD;
   cudnnTensorDescriptor_t bD;
   cudnnTensorDescriptor_t cD;
   cudnnTensorDescriptor_t xD;
+  cudnnTensorDescriptor_t hxD;
+  cudnnTensorDescriptor_t dhxD;
+  cudnnTensorDescriptor_t cxD;
+  cudnnTensorDescriptor_t dcxD;
   cudnnTensorDescriptor_t yD;
+  cudnnTensorDescriptor_t dyD;
+  cudnnTensorDescriptor_t hyD;
+  cudnnTensorDescriptor_t dhyD;
+  cudnnTensorDescriptor_t cyD;
+  cudnnTensorDescriptor_t dcyD;
   cudnnTensorDescriptor_t wD;
   cudnnTensorDescriptor_t zD;
   cudnnTensorDescriptor_t inputD;
   cudnnTensorDescriptor_t dbD;
   cudnnTensorDescriptor_t dxD;
-  cudnnTensorDescriptor_t dyD;
   cudnnTensorDescriptor_t biasD;
+  cudnnTensorDescriptor_t probsD;
+  cudnnTensorDescriptor_t gradientsD;
   void* A = nullptr;
   void* B = nullptr;
   void* C = nullptr;
@@ -353,17 +378,33 @@ int main() {
   void* beta = nullptr;
   void* x = nullptr;
   void* dx = nullptr;
+  void* hx = nullptr;
+  void* dhx = nullptr;
+  void* cx = nullptr;
+  void* dcx = nullptr;
   void* y = nullptr;
-  void* z = nullptr;
   void* dy = nullptr;
+  void* hy = nullptr;
+  void* cy = nullptr;
+  void* dcy = nullptr;
+  void* z = nullptr;
+  void* dhy = nullptr;
   void* W = nullptr;
+  void* dw = nullptr;
   void* db = nullptr;
   void* bias = nullptr;
+  void* workSpace = nullptr;
+  void* indices = nullptr;
+  void* reserveSpace = nullptr;
+  void* probs = nullptr;
+  void* gradients = nullptr;
+  void* losses = nullptr;
   int groupCount = 0;
   int requestedAlgoCount = 0;
   int returnedAlgoCount = 0;
-  void* workSpace = nullptr;
   size_t workSpaceSizeInBytes = 0;
+  size_t reserveSpaceNumBytes = 0;
+  size_t indicesSizeInBytes = 0;
 
   // TODO: cudnnOpTensor -> miopenOpTensor: different signatures: cudnnOpTensorDescriptor_t != miopenTensorOp_t
   // CUDA: cudnnStatus_t CUDNNWINAPI cudnnOpTensor(cudnnHandle_t handle, const cudnnOpTensorDescriptor_t opTensorDesc, const void* alpha1, const cudnnTensorDescriptor_t aDesc, const void* A, const void* alpha2, const cudnnTensorDescriptor_t bDesc, const void* B, const void* beta, const cudnnTensorDescriptor_t cDesc, void* C);
@@ -412,7 +453,7 @@ int main() {
   // TODO: swap 2 and 3 arguments (const miopenTensorDescriptor_t wDesc and const miopenTensorDescriptor_t xDesc)
   // CUDA: cudnnStatus_t CUDNNWINAPI cudnnGetConvolutionForwardWorkspaceSize(cudnnHandle_t handle, const cudnnTensorDescriptor_t xDesc, const cudnnFilterDescriptor_t wDesc, const cudnnConvolutionDescriptor_t convDesc, const cudnnTensorDescriptor_t yDesc, cudnnConvolutionFwdAlgo_t algo, size_t* sizeInBytes);
   // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenConvolutionForwardGetWorkSpaceSize(miopenHandle_t handle, const miopenTensorDescriptor_t wDesc, const miopenTensorDescriptor_t xDesc, const miopenConvolutionDescriptor_t convDesc, const miopenTensorDescriptor_t yDesc, size_t* workSpaceSize);
-  // CHECK: status = miopenConvolutionForwardGetWorkSpaceSize(handle, xD, filterDescriptor, convolutionDescriptor, yD,  &workSpaceSizeInBytes);
+  // CHECK: status = miopenConvolutionForwardGetWorkSpaceSize(handle, xD, filterDescriptor, convolutionDescriptor, yD, &workSpaceSizeInBytes);
   status = cudnnGetConvolutionForwardWorkspaceSize(handle, xD, filterDescriptor, convolutionDescriptor, yD, convolutionFwdAlgo, &workSpaceSizeInBytes);
 
   // TODO: swap correctly last 5 arguments
@@ -424,7 +465,7 @@ int main() {
   // TODO: swap 2 and 3 arguments
   // CUDA: cudnnStatus_t CUDNNWINAPI cudnnGetConvolutionBackwardDataWorkspaceSize(cudnnHandle_t handle, const cudnnFilterDescriptor_t wDesc, const cudnnTensorDescriptor_t dyDesc, const cudnnConvolutionDescriptor_t convDesc, const cudnnTensorDescriptor_t dxDesc, cudnnConvolutionBwdDataAlgo_t algo, size_t* sizeInBytes);
   // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenConvolutionBackwardDataGetWorkSpaceSize(miopenHandle_t handle, const miopenTensorDescriptor_t dyDesc, const miopenTensorDescriptor_t wDesc, const miopenConvolutionDescriptor_t convDesc, const miopenTensorDescriptor_t dxDesc, size_t* workSpaceSize);
-  // CHECK: status = miopenConvolutionBackwardDataGetWorkSpaceSize(handle, filterDescriptor, yD, convolutionDescriptor, xD,  &workSpaceSizeInBytes);
+  // CHECK: status = miopenConvolutionBackwardDataGetWorkSpaceSize(handle, filterDescriptor, yD, convolutionDescriptor, xD, &workSpaceSizeInBytes);
   status = cudnnGetConvolutionBackwardDataWorkspaceSize(handle, filterDescriptor, yD, convolutionDescriptor, xD, ConvolutionBwdDataAlgo_t, &workSpaceSizeInBytes);
 
   // TODO: swap correctly all args, starting from 3rd
@@ -454,12 +495,12 @@ int main() {
 
   // CUDA: cudnnStatus_t CUDNNWINAPI cudnnSetPooling2dDescriptor(cudnnPoolingDescriptor_t poolingDesc, cudnnPoolingMode_t mode, cudnnNanPropagation_t maxpoolingNanOpt, int windowHeight, int windowWidth, int verticalPadding, int horizontalPadding, int verticalStride, int horizontalStride);
   // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenSet2dPoolingDescriptor(miopenPoolingDescriptor_t poolDesc, miopenPoolingMode_t mode, int windowHeight, int windowWidth, int pad_h, int pad_w, int stride_h, int stride_w);
-  // CHECK: status = miopenSet2dPoolingDescriptor(poolingDescriptor, poolingMode,  wH, wW, pad_h, pad_w, stride_h, stride_w);
+  // CHECK: status = miopenSet2dPoolingDescriptor(poolingDescriptor, poolingMode, wH, wW, pad_h, pad_w, stride_h, stride_w);
   status = cudnnSetPooling2dDescriptor(poolingDescriptor, poolingMode, maxpoolingNanOpt, wH, wW, pad_h, pad_w, stride_h, stride_w);
 
   // CUDA: cudnnStatus_t CUDNNWINAPI cudnnGetPooling2dDescriptor(const cudnnPoolingDescriptor_t poolingDesc, cudnnPoolingMode_t* mode, cudnnNanPropagation_t* maxpoolingNanOpt, int* windowHeight, int* windowWidth, int* verticalPadding, int* horizontalPadding, int* verticalStride, int* horizontalStride);
   // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenGet2dPoolingDescriptor(const miopenPoolingDescriptor_t poolDesc, miopenPoolingMode_t* mode, int* windowHeight, int* windowWidth, int* pad_h, int* pad_w, int* stride_h, int* stride_w);
-  // CHECK: status = miopenGet2dPoolingDescriptor(poolingDescriptor, &poolingMode,  &wH, &wW, &pad_h, &pad_w, &stride_h, &stride_w);
+  // CHECK: status = miopenGet2dPoolingDescriptor(poolingDescriptor, &poolingMode, &wH, &wW, &pad_h, &pad_w, &stride_h, &stride_w);
   status = cudnnGetPooling2dDescriptor(poolingDescriptor, &poolingMode, &maxpoolingNanOpt, &wH, &wW, &pad_h, &pad_w, &stride_h, &stride_w);
 
   int nbDims = 0;
@@ -486,7 +527,7 @@ int main() {
 
   // CUDA: cudnnStatus_t CUDNNWINAPI cudnnGetPoolingNdDescriptor(const cudnnPoolingDescriptor_t poolingDesc, int nbDimsRequested, cudnnPoolingMode_t* mode, cudnnNanPropagation_t* maxpoolingNanOpt, int* nbDims, int windowDimA[], int paddingA[], int strideA[]);
   // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenGetNdPoolingDescriptor(const miopenPoolingDescriptor_t poolDesc, int nbDimsRequested, miopenPoolingMode_t* mode, int* nbDims, int* windowDimA, int* padA, int* stridesA);
-  // CHECK: status = miopenGetNdPoolingDescriptor(poolingDescriptor, nbDimsRequested, &poolingMode,  &nbDims, windowDimA, padA, stridesA);
+  // CHECK: status = miopenGetNdPoolingDescriptor(poolingDescriptor, nbDimsRequested, &poolingMode, &nbDims, windowDimA, padA, stridesA);
   status = cudnnGetPoolingNdDescriptor(poolingDescriptor, nbDimsRequested, &poolingMode, &maxpoolingNanOpt, &nbDims, windowDimA, padA, stridesA);
 
   // CUDA: cudnnStatus_t CUDNNWINAPI cudnnDestroyPoolingDescriptor(cudnnPoolingDescriptor_t poolingDesc);
@@ -612,21 +653,189 @@ int main() {
   int hiddenSize = 0;
   int layer = 0;
 
-  // TODO: Insert miopenRNNBiasMode_t* biasMode in the hipified miopenGetRNNDescriptor_V2 after miopenRNNMode_t* rnnMode: will need variable declaration
+  // TODO [#837]: Insert miopenRNNBiasMode_t* biasMode in the hipified miopenGetRNNDescriptor_V2 after miopenRNNMode_t* rnnMode: will need variable declaration
   // CUDA: CUDNN_DEPRECATED cudnnStatus_t CUDNNWINAPI cudnnGetRNNDescriptor_v6(cudnnHandle_t handle, cudnnRNNDescriptor_t rnnDesc, int* hiddenSize, int* numLayers, cudnnDropoutDescriptor_t* dropoutDesc, cudnnRNNInputMode_t* inputMode, cudnnDirectionMode_t* direction, cudnnRNNMode_t* cellMode, cudnnRNNAlgo_t* algo, cudnnDataType_t* mathPrec);
   // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenGetRNNDescriptor_V2(miopenRNNDescriptor_t rnnDesc, int* hiddenSize, int* layer, miopenDropoutDescriptor_t* dropoutDesc, miopenRNNInputMode_t* inputMode, miopenRNNDirectionMode_t* dirMode, miopenRNNMode_t* rnnMode, miopenRNNBiasMode_t* biasMode, miopenRNNAlgo_t* algoMode, miopenDataType_t* dataType);
-  // CHECK: status = miopenGetRNNDescriptor_V2( RNNDescriptor, &hiddenSize, &layer, &DropoutDescriptor, &RNNInputMode, &DirectionMode, &RNNMode, &RNNAlgo, &dataType);
+  // CHECK: status = miopenGetRNNDescriptor_V2(RNNDescriptor, &hiddenSize, &layer, &DropoutDescriptor, &RNNInputMode, &DirectionMode, &RNNMode, &RNNAlgo, &dataType);
   status = cudnnGetRNNDescriptor_v6(handle, RNNDescriptor, &hiddenSize, &layer, &DropoutDescriptor, &RNNInputMode, &DirectionMode, &RNNMode, &RNNAlgo, &dataType);
 
   // NOTE: cudnnSetRNNDescriptor - removed after cuDNN 7.6.5
   // NOTE: cudnnSetRNNDescriptor_v5 - removed after cuDNN 7.6.5
   // TODO: add cudnnSetRNNDescriptor -> miopenSetRNNDescriptor_V2 mapping after implementing cuDNN versioning in tests
 
-  // TODO: Insert miopenRNNBiasMode_t* biasMode in the hipified miopenSetRNNDescriptor_V2 after miopenRNNMode_t rnnMode: will need variable declaration
+  // TODO [#837]: Insert miopenRNNBiasMode_t biasMode in the hipified miopenSetRNNDescriptor_V2 after miopenRNNMode_t rnnMode: will need variable declaration
   // CUDA: CUDNN_DEPRECATED cudnnStatus_t CUDNNWINAPI cudnnSetRNNDescriptor_v6(cudnnHandle_t handle, cudnnRNNDescriptor_t rnnDesc, const int hiddenSize, const int numLayers, cudnnDropoutDescriptor_t dropoutDesc, cudnnRNNInputMode_t inputMode, cudnnDirectionMode_t direction, cudnnRNNMode_t cellMode, cudnnRNNAlgo_t algo, cudnnDataType_t mathPrec);
   // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenSetRNNDescriptor_V2(miopenRNNDescriptor_t rnnDesc, const int hsize, const int nlayers, miopenDropoutDescriptor_t dropoutDesc, miopenRNNInputMode_t inMode, miopenRNNDirectionMode_t direction, miopenRNNMode_t rnnMode, miopenRNNBiasMode_t biasMode, miopenRNNAlgo_t algo, miopenDataType_t dataType);
-  // CHECK: status = miopenSetRNNDescriptor_V2( RNNDescriptor, hiddenSize, layer, DropoutDescriptor, RNNInputMode, DirectionMode, RNNMode, RNNAlgo, dataType);
+  // CHECK: status = miopenSetRNNDescriptor_V2(RNNDescriptor, hiddenSize, layer, DropoutDescriptor, RNNInputMode, DirectionMode, RNNMode, RNNAlgo, dataType);
   status = cudnnSetRNNDescriptor_v6(handle, RNNDescriptor, hiddenSize, layer, DropoutDescriptor, RNNInputMode, DirectionMode, RNNMode, RNNAlgo, dataType);
+
+  int seqLength = 0;
+
+  // CUDA: CUDNN_DEPRECATED cudnnStatus_t CUDNNWINAPI cudnnGetRNNWorkspaceSize(cudnnHandle_t handle, const cudnnRNNDescriptor_t rnnDesc, const int seqLength, const cudnnTensorDescriptor_t* xDesc, size_t* sizeInBytes);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenGetRNNWorkspaceSize(miopenHandle_t handle, const miopenRNNDescriptor_t rnnDesc, const int sequenceLen, const miopenTensorDescriptor_t* xDesc, size_t* numBytes);
+  // CHECK: status = miopenGetRNNWorkspaceSize(handle, RNNDescriptor, seqLength, &xD, &workSpaceSizeInBytes);
+  status = cudnnGetRNNWorkspaceSize(handle, RNNDescriptor, seqLength, &xD, &workSpaceSizeInBytes);
+
+  // CUDA: CUDNN_DEPRECATED cudnnStatus_t CUDNNWINAPI cudnnGetRNNTrainingReserveSize(cudnnHandle_t handle, const cudnnRNNDescriptor_t rnnDesc, const int seqLength, const cudnnTensorDescriptor_t* xDesc, size_t* sizeInBytes);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenGetRNNTrainingReserveSize(miopenHandle_t handle, miopenRNNDescriptor_t rnnDesc, const int sequenceLen, const miopenTensorDescriptor_t* xDesc, size_t* numBytes);
+  // CHECK: status = miopenGetRNNTrainingReserveSize(handle, RNNDescriptor, seqLength, &xD, &workSpaceSizeInBytes);
+  status = cudnnGetRNNTrainingReserveSize(handle, RNNDescriptor, seqLength, &xD, &workSpaceSizeInBytes);
+
+  // CUDA: CUDNN_DEPRECATED cudnnStatus_t CUDNNWINAPI cudnnGetRNNParamsSize(cudnnHandle_t handle, const cudnnRNNDescriptor_t rnnDesc, const cudnnTensorDescriptor_t xDesc, size_t* sizeInBytes, cudnnDataType_t dataType);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenGetRNNParamsSize(miopenHandle_t handle, miopenRNNDescriptor_t rnnDesc, miopenTensorDescriptor_t xDesc, size_t* numBytes, miopenDataType_t dtype);
+  // CHECK: status = miopenGetRNNParamsSize(handle, RNNDescriptor, xD, &workSpaceSizeInBytes, dataType);
+  status = cudnnGetRNNParamsSize(handle, RNNDescriptor, xD, &workSpaceSizeInBytes, dataType);
+
+  // CUDA: CUDNN_DEPRECATED cudnnStatus_t CUDNNWINAPI cudnnRNNForwardTraining(cudnnHandle_t handle, const cudnnRNNDescriptor_t rnnDesc, const int seqLength, const cudnnTensorDescriptor_t* xDesc, const void* x, const cudnnTensorDescriptor_t hxDesc, const void* hx, const cudnnTensorDescriptor_t cxDesc, const void* cx, const cudnnFilterDescriptor_t wDesc, const void* w, const cudnnTensorDescriptor_t* yDesc, void* y, const cudnnTensorDescriptor_t hyDesc, void* hy, const cudnnTensorDescriptor_t cyDesc, void* cy, void* workSpace, size_t workSpaceSizeInBytes, void* reserveSpace, size_t reserveSpaceSizeInBytes);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenRNNForwardTraining(miopenHandle_t handle, const miopenRNNDescriptor_t rnnDesc, const int sequenceLen, const miopenTensorDescriptor_t* xDesc, const void* x, const miopenTensorDescriptor_t hxDesc, const void* hx, const miopenTensorDescriptor_t cxDesc, const void* cx, const miopenTensorDescriptor_t wDesc, const void* w, const miopenTensorDescriptor_t* yDesc, void* y, const miopenTensorDescriptor_t hyDesc, void* hy, const miopenTensorDescriptor_t cyDesc, void* cy, void* workSpace, size_t workSpaceNumBytes, void* reserveSpace, size_t reserveSpaceNumBytes);
+  // CHECK: status = miopenRNNForwardTraining(handle, RNNDescriptor, seqLength, &xD, x, hxD, hx, cxD, cx, filterDescriptor, W, &yD, y, hyD, hy, cyD, cy, workSpace, workSpaceSizeInBytes, reserveSpace, reserveSpaceNumBytes);
+  status = cudnnRNNForwardTraining(handle, RNNDescriptor, seqLength, &xD, x, hxD, hx, cxD, cx, filterDescriptor, W, &yD, y, hyD, hy, cyD, cy, workSpace, workSpaceSizeInBytes, reserveSpace, reserveSpaceNumBytes);
+
+  // CUDA: CUDNN_DEPRECATED cudnnStatus_t CUDNNWINAPI cudnnRNNBackwardData(cudnnHandle_t handle, const cudnnRNNDescriptor_t rnnDesc, const int seqLength, const cudnnTensorDescriptor_t* yDesc, const void* y, const cudnnTensorDescriptor_t* dyDesc, const void* dy, const cudnnTensorDescriptor_t dhyDesc, const void* dhy, const cudnnTensorDescriptor_t dcyDesc, const void* dcy, const cudnnFilterDescriptor_t wDesc, const void* w, const cudnnTensorDescriptor_t hxDesc, const void* hx, const cudnnTensorDescriptor_t cxDesc, const void* cx, const cudnnTensorDescriptor_t* dxDesc, void* dx, const cudnnTensorDescriptor_t dhxDesc, void* dhx, const cudnnTensorDescriptor_t dcxDesc, void* dcx, void* workSpace, size_t workSpaceSizeInBytes, void* reserveSpace, size_t reserveSpaceSizeInBytes);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenRNNBackwardData(miopenHandle_t handle, const miopenRNNDescriptor_t rnnDesc, const int sequenceLen, const miopenTensorDescriptor_t* yDesc, const void* y, const miopenTensorDescriptor_t* dyDesc, const void* dy, const miopenTensorDescriptor_t dhyDesc, const void* dhy, const miopenTensorDescriptor_t dcyDesc, const void* dcy, const miopenTensorDescriptor_t wDesc, const void* w, const miopenTensorDescriptor_t hxDesc, const void* hx, const miopenTensorDescriptor_t cxDesc, const void* cx, const miopenTensorDescriptor_t* dxDesc, void* dx, const miopenTensorDescriptor_t dhxDesc, void* dhx, const miopenTensorDescriptor_t dcxDesc, void* dcx, void* workSpace, size_t workSpaceNumBytes, void* reserveSpace, size_t reserveSpaceNumBytes);
+  // CHECK: status = miopenRNNBackwardData(handle, RNNDescriptor, seqLength, &yD, y, &dyD, dy, dhyD, dhy, dcyD, dcy, filterDescriptor, W, hxD, hx, cxD, cx, &dxD, dx, dhxD, dhx, dcxD, dcx, workSpace, workSpaceSizeInBytes, &reserveSpace, reserveSpaceNumBytes);
+  status = cudnnRNNBackwardData(handle, RNNDescriptor, seqLength, &yD, y, &dyD, dy, dhyD, dhy, dcyD, dcy, filterDescriptor, W, hxD, hx, cxD, cx, &dxD, dx, dhxD, dhx, dcxD, dcx, workSpace, workSpaceSizeInBytes, &reserveSpace, reserveSpaceNumBytes);
+
+  // TODO: Move/swap args starting from 9th
+  // CUDA: CUDNN_DEPRECATED cudnnStatus_t CUDNNWINAPI cudnnRNNBackwardWeights(cudnnHandle_t handle, const cudnnRNNDescriptor_t rnnDesc, const int seqLength, const cudnnTensorDescriptor_t* xDesc, const void* x, const cudnnTensorDescriptor_t hxDesc, const void* hx, const cudnnTensorDescriptor_t* yDesc, const void* y, const void* workSpace, size_t workSpaceSizeInBytes, const cudnnFilterDescriptor_t dwDesc, void* dw, const void* reserveSpace, size_t reserveSpaceSizeInBytes);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenRNNBackwardWeights(miopenHandle_t handle, const miopenRNNDescriptor_t rnnDesc, const int sequenceLen, const miopenTensorDescriptor_t* xDesc, const void* x, const miopenTensorDescriptor_t hxDesc, const void* hx, const miopenTensorDescriptor_t* yDesc, const void* y, const miopenTensorDescriptor_t dwDesc, void* dw, void* workSpace, size_t workSpaceNumBytes, const void* reserveSpace, size_t reserveSpaceNumBytes);
+  // CHECK: status = miopenRNNBackwardWeights(handle, RNNDescriptor, seqLength, &xD, x, hxD, hx, &yD, y, workSpace, workSpaceSizeInBytes, filterDescriptor, dw, &reserveSpace, reserveSpaceNumBytes);
+  status = cudnnRNNBackwardWeights(handle, RNNDescriptor, seqLength, &xD, x, hxD, hx, &yD, y, workSpace, workSpaceSizeInBytes, filterDescriptor, dw, &reserveSpace, reserveSpaceNumBytes);
+
+  // CUDA: CUDNN_DEPRECATED cudnnStatus_t CUDNNWINAPI cudnnRNNForwardInference(cudnnHandle_t handle, const cudnnRNNDescriptor_t rnnDesc, const int seqLength, const cudnnTensorDescriptor_t* xDesc, const void* x, const cudnnTensorDescriptor_t hxDesc, const void* hx, const cudnnTensorDescriptor_t cxDesc, const void* cx, const cudnnFilterDescriptor_t wDesc, const void* w, const cudnnTensorDescriptor_t* yDesc, void* y, const cudnnTensorDescriptor_t hyDesc, void* hy, const cudnnTensorDescriptor_t cyDesc, void* cy, void* workSpace, size_t workSpaceSizeInBytes);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenRNNForwardInference(miopenHandle_t handle, miopenRNNDescriptor_t rnnDesc, const int sequenceLen, const miopenTensorDescriptor_t* xDesc, const void* x, const miopenTensorDescriptor_t hxDesc, const void* hx, const miopenTensorDescriptor_t cxDesc, const void* cx, const miopenTensorDescriptor_t wDesc, const void* w, const miopenTensorDescriptor_t* yDesc, void* y, const miopenTensorDescriptor_t hyDesc, void* hy, const miopenTensorDescriptor_t cyDesc, void* cy, void* workSpace, size_t workSpaceNumBytes);
+  // CHECK: status = miopenRNNForwardInference(handle, RNNDescriptor, seqLength, &xD, x, hxD, hx, cxD, cx, filterDescriptor, W, &yD, y, hyD, hy, cyD, cy, workSpace, workSpaceSizeInBytes);
+  status = cudnnRNNForwardInference(handle, RNNDescriptor, seqLength, &xD, x, hxD, hx, cxD, cx, filterDescriptor, W, &yD, y, hyD, hy, cyD, cy, workSpace, workSpaceSizeInBytes);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnDestroyRNNDescriptor(cudnnRNNDescriptor_t rnnDesc);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenDestroyRNNDescriptor(miopenRNNDescriptor_t rnnDesc);
+  // CHECK: status = miopenDestroyRNNDescriptor(RNNDescriptor);
+  status = cudnnDestroyRNNDescriptor(RNNDescriptor);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnCreateCTCLossDescriptor(cudnnCTCLossDescriptor_t* ctcLossDesc);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenCreateCTCLossDescriptor(miopenCTCLossDescriptor_t* ctcLossDesc);
+  // CHECK: status = miopenCreateCTCLossDescriptor(&CTCLossDescriptor);
+  status = cudnnCreateCTCLossDescriptor(&CTCLossDescriptor);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnDestroyCTCLossDescriptor(cudnnCTCLossDescriptor_t ctcLossDesc);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenDestroyCTCLossDescriptor(miopenCTCLossDescriptor_t ctcLossDesc);
+  // CHECK: status = miopenDestroyCTCLossDescriptor(CTCLossDescriptor);
+  status = cudnnDestroyCTCLossDescriptor(CTCLossDescriptor);
+
+  // TODO [#837]: Insert int* blank_label_id, bool* apply_softmax_layer in the hipified miopenGetCTCLossDescriptor: will need variable declaration
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnGetCTCLossDescriptor(cudnnCTCLossDescriptor_t ctcLossDesc, cudnnDataType_t* compType);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenGetCTCLossDescriptor(miopenCTCLossDescriptor_t ctcLossDesc, miopenDataType_t* dataType, int* blank_label_id, bool* apply_softmax_layer);
+  // CHECK: status = miopenGetCTCLossDescriptor(CTCLossDescriptor, &dataType);
+  status = cudnnGetCTCLossDescriptor(CTCLossDescriptor, &dataType);
+
+  // TODO [#837]: Insert int blank_label_id, bool apply_softmax_layer in the hipified miopenSetCTCLossDescriptor: will need variable declaration
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnSetCTCLossDescriptor(cudnnCTCLossDescriptor_t ctcLossDesc, cudnnDataType_t compType);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenSetCTCLossDescriptor(miopenCTCLossDescriptor_t ctcLossDesc, miopenDataType_t dataType, const int blank_label_id, bool apply_softmax_layer);
+  // CHECK: status = miopenSetCTCLossDescriptor(CTCLossDescriptor, dataType);
+  status = cudnnSetCTCLossDescriptor(CTCLossDescriptor, dataType);
+
+  int labels = 0;
+  int labelLengths = 0;
+  int inputLengths = 0;
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnGetCTCLossWorkspaceSize(cudnnHandle_t handle, const cudnnTensorDescriptor_t probsDesc, const cudnnTensorDescriptor_t gradientsDesc, const int* labels, const int* labelLengths, const int* inputLengths, cudnnCTCLossAlgo_t algo, cudnnCTCLossDescriptor_t ctcLossDesc, size_t* sizeInBytes);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenGetCTCLossWorkspaceSize(miopenHandle_t handle, const miopenTensorDescriptor_t probsDesc, const miopenTensorDescriptor_t gradientsDesc, const int* labels, const int* labelLengths, const int* inputLengths, miopenCTCLossAlgo_t algo, const miopenCTCLossDescriptor_t ctcLossDesc, size_t* workSpaceSize);
+  // CHECK: status = miopenGetCTCLossWorkspaceSize(handle, probsD, gradientsD, &labels, &labelLengths, &inputLengths, CTCLossAlgo, CTCLossDescriptor, &workSpaceSizeInBytes);
+  status = cudnnGetCTCLossWorkspaceSize(handle, probsD, gradientsD, &labels, &labelLengths, &inputLengths, CTCLossAlgo, CTCLossDescriptor, &workSpaceSizeInBytes);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnCTCLoss(cudnnHandle_t handle, const cudnnTensorDescriptor_t probsDesc, const void* probs, const int hostLabels[], const int hostLabelLengths[], const int hostInputLengths[], void* costs, const cudnnTensorDescriptor_t gradientsDesc, void* gradients, cudnnCTCLossAlgo_t algo, cudnnCTCLossDescriptor_t ctcLossDesc, void* workspace, size_t workSpaceSizeInBytes);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenCTCLoss(miopenHandle_t handle, const miopenTensorDescriptor_t probsDesc, const void* probs, const int* labels, const int* labelLengths, const int* inputLengths, void* losses, const miopenTensorDescriptor_t gradientsDesc, void* gradients, miopenCTCLossAlgo_t algo, const miopenCTCLossDescriptor_t ctcLossDesc, void* workSpace, size_t workSpaceSize);
+  // CHECK: status = miopenCTCLoss(handle, probsD, probs, &labels, &labelLengths, &inputLengths, losses, gradientsD, gradients, CTCLossAlgo, CTCLossDescriptor, workSpace , workSpaceSizeInBytes);
+  status = cudnnCTCLoss(handle, probsD, probs, &labels, &labelLengths, &inputLengths, losses, gradientsD, gradients, CTCLossAlgo, CTCLossDescriptor, workSpace , workSpaceSizeInBytes);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnCreateDropoutDescriptor(cudnnDropoutDescriptor_t* dropoutDesc);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenCreateDropoutDescriptor(miopenDropoutDescriptor_t* dropoutDesc);
+  // CHECK: status = miopenCreateDropoutDescriptor(&DropoutDescriptor);
+  status = cudnnCreateDropoutDescriptor(&DropoutDescriptor);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnDestroyDropoutDescriptor(cudnnDropoutDescriptor_t dropoutDesc);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenDestroyDropoutDescriptor(miopenDropoutDescriptor_t dropoutDesc);
+  // CHECK: status = miopenDestroyDropoutDescriptor(DropoutDescriptor);
+  status = cudnnDestroyDropoutDescriptor(DropoutDescriptor);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnDropoutGetReserveSpaceSize(cudnnTensorDescriptor_t xdesc, size_t* sizeInBytes);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenDropoutGetReserveSpaceSize(const miopenTensorDescriptor_t xDesc, size_t* reserveSpaceSizeInBytes);
+  // CHECK: status = miopenDropoutGetReserveSpaceSize(xD, &reserveSpaceNumBytes);
+  status = cudnnDropoutGetReserveSpaceSize(xD, &reserveSpaceNumBytes);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnDropoutGetStatesSize(cudnnHandle_t handle, size_t* sizeInBytes);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenDropoutGetStatesSize(miopenHandle_t handle, size_t* stateSizeInBytes);
+  // CHECK: status = miopenDropoutGetStatesSize(handle, &reserveSpaceNumBytes);
+  status = cudnnDropoutGetStatesSize(handle, &reserveSpaceNumBytes);
+
+  float dropout = 0.0f;
+  void* states = nullptr;
+  unsigned long long seed = 0;
+
+  // TODO [#837]: Insert float* dropout, void** states, unsigned long long* seed in the hipified miopenGetDropoutDescriptor: will need variable declaration
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnGetDropoutDescriptor(cudnnDropoutDescriptor_t dropoutDesc, cudnnHandle_t handle, float* dropout, void** states, unsigned long long* seed);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenGetDropoutDescriptor(miopenDropoutDescriptor_t dropoutDesc, miopenHandle_t handle, float* dropout, void** states, unsigned long long* seed, bool* use_mask, bool* state_evo, miopenRNGType_t* rng_mode);
+  // CHECK: status = miopenGetDropoutDescriptor(DropoutDescriptor, handle, &dropout, &states, &seed);
+  status = cudnnGetDropoutDescriptor(DropoutDescriptor, handle, &dropout, &states, &seed);
+
+  // TODO [#837]: Insert bool use_mask, bool state_evo, miopenRNGType_t rng_mode in the hipified miopenGetDropoutDescriptor: will need variable declaration
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnSetDropoutDescriptor(cudnnDropoutDescriptor_t dropoutDesc, cudnnHandle_t handle, float dropout, void* states, size_t stateSizeInBytes, unsigned long long seed);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenSetDropoutDescriptor(miopenDropoutDescriptor_t dropoutDesc, miopenHandle_t handle, float dropout, void* states, size_t stateSizeInBytes, unsigned long long seed, bool use_mask, bool state_evo, miopenRNGType_t rng_mode);
+  // CHECK: status = miopenSetDropoutDescriptor(DropoutDescriptor, handle, dropout, states, reserveSpaceNumBytes, seed);
+  status = cudnnSetDropoutDescriptor(DropoutDescriptor, handle, dropout, states, reserveSpaceNumBytes, seed);
+
+  // TODO [#837]: Insert bool use_mask, bool state_evo, miopenRNGType_t rng_mode in the hipified miopenRestoreDropoutDescriptor: will need variable declaration
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnRestoreDropoutDescriptor(cudnnDropoutDescriptor_t dropoutDesc, cudnnHandle_t handle, float dropout, void* states, size_t stateSizeInBytes, unsigned long long seed);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenRestoreDropoutDescriptor(miopenDropoutDescriptor_t dropoutDesc, miopenHandle_t handle, float dropout, void* states, size_t stateSizeInBytes, unsigned long long seed, bool use_mask, bool state_evo, miopenRNGType_t rng_mode);
+  // CHECK: status = miopenRestoreDropoutDescriptor(DropoutDescriptor, handle, dropout, states, reserveSpaceNumBytes, seed);
+  status = cudnnRestoreDropoutDescriptor(DropoutDescriptor, handle, dropout, states, reserveSpaceNumBytes, seed);
+
+  // TODO [#837]: Insert const miopenTensorDescriptor_t noise_shape in the hipified miopenDropoutForward: will need variable declaration
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnDropoutForward(cudnnHandle_t handle, const cudnnDropoutDescriptor_t dropoutDesc, const cudnnTensorDescriptor_t xdesc, const void* x, const cudnnTensorDescriptor_t ydesc, void* y, void* reserveSpace, size_t reserveSpaceSizeInBytes);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenDropoutForward(miopenHandle_t handle, const miopenDropoutDescriptor_t dropoutDesc, const miopenTensorDescriptor_t noise_shape, const miopenTensorDescriptor_t xDesc, const void* x, const miopenTensorDescriptor_t yDesc, void* y, void* reserveSpace, size_t reserveSpaceSizeInBytes);
+  // CHECK: status = miopenDropoutForward(handle, DropoutDescriptor, xD, x, yD, y, reserveSpace, reserveSpaceNumBytes);
+  status = cudnnDropoutForward(handle, DropoutDescriptor, xD, x, yD, y, reserveSpace, reserveSpaceNumBytes);
+
+  // TODO [#837]: Insert const miopenTensorDescriptor_t noise_shape in the hipified miopenDropoutBackward: will need variable declaration
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnDropoutBackward(cudnnHandle_t handle, const cudnnDropoutDescriptor_t dropoutDesc, const cudnnTensorDescriptor_t dydesc, const void* dy, const cudnnTensorDescriptor_t dxdesc, void* dx, void* reserveSpace, size_t reserveSpaceSizeInBytes);
+  // MIOPNE: MIOPEN_EXPORT miopenStatus_t miopenDropoutBackward(miopenHandle_t handle, const miopenDropoutDescriptor_t dropoutDesc, const miopenTensorDescriptor_t noise_shape, const miopenTensorDescriptor_t dyDesc, const void* dy, const miopenTensorDescriptor_t dxDesc, void* dx, void* reserveSpace, size_t reserveSpaceSizeInBytes);
+  // CHECK: status = miopenDropoutBackward(handle, DropoutDescriptor, yD, y, xD, x, reserveSpace, reserveSpaceNumBytes);
+  status = cudnnDropoutBackward(handle, DropoutDescriptor, yD, y, xD, x, reserveSpace, reserveSpaceNumBytes);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnCreateReduceTensorDescriptor(cudnnReduceTensorDescriptor_t* reduceTensorDesc);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenCreateReduceTensorDescriptor(miopenReduceTensorDescriptor_t* reduceTensorDesc);
+  // CHECK: status = miopenCreateReduceTensorDescriptor(&ReduceTensorDescriptor);
+  status = cudnnCreateReduceTensorDescriptor(&ReduceTensorDescriptor);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnDestroyReduceTensorDescriptor(cudnnReduceTensorDescriptor_t reduceTensorDesc);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenDestroyReduceTensorDescriptor(miopenReduceTensorDescriptor_t reduceTensorDesc);
+  // CHECK: status = miopenDestroyReduceTensorDescriptor(ReduceTensorDescriptor);
+  status = cudnnDestroyReduceTensorDescriptor(ReduceTensorDescriptor);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnSetReduceTensorDescriptor(cudnnReduceTensorDescriptor_t reduceTensorDesc, cudnnReduceTensorOp_t reduceTensorOp, cudnnDataType_t reduceTensorCompType, cudnnNanPropagation_t reduceTensorNanOpt, cudnnReduceTensorIndices_t reduceTensorIndices, cudnnIndicesType_t reduceTensorIndicesType);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenSetReduceTensorDescriptor(miopenReduceTensorDescriptor_t reduceTensorDesc, miopenReduceTensorOp_t reduceTensorOp, miopenDataType_t reduceTensorCompType, miopenNanPropagation_t reduceTensorNanOpt, miopenReduceTensorIndices_t reduceTensorIndices, miopenIndicesType_t reduceTensorIndicesType);
+  // CHECK: status = miopenSetReduceTensorDescriptor(ReduceTensorDescriptor, reduceTensorOp, dataType, nanPropagation_t, reduceTensorIndices, indicesType);
+  status = cudnnSetReduceTensorDescriptor(ReduceTensorDescriptor, reduceTensorOp, dataType, nanPropagation_t, reduceTensorIndices, indicesType);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnGetReduceTensorDescriptor(const cudnnReduceTensorDescriptor_t reduceTensorDesc, cudnnReduceTensorOp_t* reduceTensorOp, cudnnDataType_t* reduceTensorCompType, cudnnNanPropagation_t* reduceTensorNanOpt, cudnnReduceTensorIndices_t* reduceTensorIndices, cudnnIndicesType_t* reduceTensorIndicesType);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenGetReduceTensorDescriptor(const miopenReduceTensorDescriptor_t reduceTensorDesc, miopenReduceTensorOp_t* reduceTensorOp, miopenDataType_t* reduceTensorCompType, miopenNanPropagation_t* reduceTensorNanOpt, miopenReduceTensorIndices_t* reduceTensorIndices, miopenIndicesType_t* reduceTensorIndicesType);
+  // CHECK: status = miopenGetReduceTensorDescriptor(ReduceTensorDescriptor, &reduceTensorOp, &dataType, &nanPropagation_t, &reduceTensorIndices, &indicesType);
+  status = cudnnGetReduceTensorDescriptor(ReduceTensorDescriptor, &reduceTensorOp, &dataType, &nanPropagation_t, &reduceTensorIndices, &indicesType);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnGetReductionIndicesSize(cudnnHandle_t handle, const cudnnReduceTensorDescriptor_t reduceTensorDesc, const cudnnTensorDescriptor_t aDesc, const cudnnTensorDescriptor_t cDesc, size_t* sizeInBytes);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenGetReductionIndicesSize(miopenHandle_t handle, const miopenReduceTensorDescriptor_t reduceTensorDesc, const miopenTensorDescriptor_t aDesc, const miopenTensorDescriptor_t cDesc, size_t* sizeInBytes);
+  // CHECK: status = miopenGetReductionIndicesSize(handle, ReduceTensorDescriptor, aD, cD, &workSpaceSizeInBytes);
+  status = cudnnGetReductionIndicesSize(handle, ReduceTensorDescriptor, aD, cD, &workSpaceSizeInBytes);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnGetReductionWorkspaceSize(cudnnHandle_t handle, const cudnnReduceTensorDescriptor_t reduceTensorDesc, const cudnnTensorDescriptor_t aDesc, const cudnnTensorDescriptor_t cDesc, size_t* sizeInBytes);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenGetReductionWorkspaceSize(miopenHandle_t handle, const miopenReduceTensorDescriptor_t reduceTensorDesc, const miopenTensorDescriptor_t aDesc, const miopenTensorDescriptor_t cDesc, size_t* sizeInBytes);
+  // CHECK: status = miopenGetReductionWorkspaceSize(handle, ReduceTensorDescriptor, aD, cD, &workSpaceSizeInBytes);
+  status = cudnnGetReductionWorkspaceSize(handle, ReduceTensorDescriptor, aD, cD, &workSpaceSizeInBytes);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnReduceTensor(cudnnHandle_t handle, const cudnnReduceTensorDescriptor_t reduceTensorDesc, void* indices, size_t indicesSizeInBytes, void* workspace, size_t workspaceSizeInBytes, const void* alpha, const cudnnTensorDescriptor_t aDesc, const void* A, const void* beta, const cudnnTensorDescriptor_t cDesc, void* C);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenReduceTensor(miopenHandle_t handle, const miopenReduceTensorDescriptor_t reduceTensorDesc, void* indices, size_t indicesSizeInBytes, void* workspace, size_t workspaceSizeInBytes, const void* alpha, const miopenTensorDescriptor_t aDesc, const void* A, const void* beta, const miopenTensorDescriptor_t cDesc, void* C);
+  // CHECK: status = miopenReduceTensor(handle, ReduceTensorDescriptor, indices, indicesSizeInBytes, workSpace, workSpaceSizeInBytes, alpha, aD, A, beta, cD, C);
+  status = cudnnReduceTensor(handle, ReduceTensorDescriptor, indices, indicesSizeInBytes, workSpace, workSpaceSizeInBytes, alpha, aD, A, beta, cD, C);
 
   return 0;
 }
