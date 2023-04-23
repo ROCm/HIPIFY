@@ -31,6 +31,7 @@ namespace hipify {
     e_int64_t,
     e_remove_argument,
     e_add_const_argument,
+    e_move_argument,
   };
 
   enum CastWarning {
@@ -42,6 +43,8 @@ namespace hipify {
     CastTypes castType;
     CastWarning castWarn;
     std::string constValToAdd = "";
+    unsigned moveTo = 0;
+    unsigned numberToMove = 1;
   };
 
   typedef std::map<unsigned, CastInfo> ArgCastMap;
