@@ -75,6 +75,13 @@ const std::string sCudnnGetPooling2dDescriptor = "cudnnGetPooling2dDescriptor";
 const std::string sCudnnSetPoolingNdDescriptor = "cudnnSetPoolingNdDescriptor";
 const std::string sCudnnGetPoolingNdDescriptor = "cudnnGetPoolingNdDescriptor";
 const std::string sCudnnSetLRNDescriptor = "cudnnSetLRNDescriptor";
+const std::string sCudnnGetRNNDescriptor_v6 = "cudnnGetRNNDescriptor_v6";
+const std::string sCudnnSetRNNDescriptor_v6 = "cudnnSetRNNDescriptor_v6";
+const std::string sCudnnSoftmaxForward = "cudnnSoftmaxForward";
+const std::string sCudnnSoftmaxBackward = "cudnnSoftmaxBackward";
+const std::string sCudnnConvolutionForward = "cudnnConvolutionForward";
+const std::string sCudnnConvolutionBackwardData = "cudnnConvolutionBackwardData";
+const std::string sCudnnRNNBackwardWeights = "cudnnRNNBackwardWeights";
 // Matchers' names
 const StringRef sCudaLaunchKernel = "cudaLaunchKernel";
 const StringRef sCudaHostFuncCall = "cudaHostFuncCall";
@@ -92,6 +99,7 @@ std::string getCastType(hipify::CastTypes c) {
     case e_int64_t: return s_int64_t;
     case e_remove_argument: return "";
     case e_add_const_argument: return "";
+    case e_move_argument: return "";
     default: return "";
   }
 }
@@ -205,6 +213,8 @@ std::map<std::string, ArgCastStruct> FuncArgCasts {
   {sCudnnGetConvolutionForwardWorkspaceSize,
     {
       {
+        {1, {e_move_argument, cw_None, "", 2}},
+        {2, {e_move_argument, cw_None, "", 1}},
         {5, {e_remove_argument, cw_None}}
       },
       true,
@@ -214,6 +224,8 @@ std::map<std::string, ArgCastStruct> FuncArgCasts {
   {sCudnnGetConvolutionBackwardDataWorkspaceSize,
     {
       {
+        {1, {e_move_argument, cw_None, "", 2}},
+        {2, {e_move_argument, cw_None, "", 1}},
         {5, {e_remove_argument, cw_None}}
       },
       true,
@@ -269,6 +281,72 @@ std::map<std::string, ArgCastStruct> FuncArgCasts {
     {
       {
         {1, {e_add_const_argument, cw_None, "miopenLRNCrossChannel"}}
+      },
+      true,
+      true
+    }
+  },
+  {sCudnnGetRNNDescriptor_v6,
+    {
+      {
+        {0, {e_remove_argument, cw_None}}
+      },
+      true,
+      true
+    }
+  },
+  {sCudnnSetRNNDescriptor_v6,
+    {
+      {
+        {0, {e_remove_argument, cw_None}}
+      },
+      true,
+      true
+    }
+  },
+  {sCudnnSoftmaxForward,
+    {
+      {
+        {1, {e_move_argument, cw_None, "", 9, 2}},
+      },
+      true,
+      true
+    }
+  },
+  {sCudnnSoftmaxBackward,
+    {
+      {
+        {1, {e_move_argument, cw_None, "", 11, 2}},
+      },
+      true,
+      true
+    }
+  },
+  {sCudnnConvolutionForward,
+    {
+      {
+        {8, {e_move_argument, cw_None, "", 13, 2}},
+      },
+      true,
+      true
+    }
+  },
+  {sCudnnConvolutionBackwardData,
+    {
+      {
+        {2, {e_move_argument, cw_None, "", 4, 2}},
+        {4, {e_move_argument, cw_None, "", 2, 2}},
+        {8, {e_move_argument, cw_None, "", 13, 2}},
+      },
+      true,
+      true
+    }
+  },
+  {sCudnnRNNBackwardWeights,
+    {
+      {
+        {9, {e_move_argument, cw_None, "", 11, 2}},
+        {11, {e_move_argument, cw_None, "", 9, 2}},
       },
       true,
       true
@@ -714,6 +792,7 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
     if (castStruct.isToMIOpen != TranslateToMIOpen || castStruct.isToRoc != TranslateToRoc) return false;
     clang::LangOptions DefaultLangOptions;
     for (auto c : castStruct.castMap) {
+      size_t length = 0;
       unsigned int argNum = c.first;
       clang::SmallString<40> XStr;
       llvm::raw_svector_ostream OS(XStr);
@@ -732,9 +811,43 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
         case e_remove_argument:
         {
           OS << "";
-          auto NextToken = clang::Lexer::findNextToken(e, *SM, DefaultLangOptions);
-          if (!NextToken) continue;
-          e = NextToken->getLocation();
+          if (argNum < call->getNumArgs())
+            e = call->getArg(argNum + 1)->getBeginLoc();
+          else
+            e = call->getEndLoc();
+          length = SM->getCharacterData(e) - SM->getCharacterData(s);
+          break;
+        }
+        case e_move_argument:
+        {
+          std::string sArg;
+          clang::SmallString<40> dst_XStr;
+          llvm::raw_svector_ostream dst_OS(dst_XStr);
+          if (c.second.numberToMove > 1) {
+            if ((argNum + c.second.numberToMove - 1) >= call->getNumArgs())
+              continue;
+            sr = call->getArg(argNum + c.second.numberToMove - 1)->getSourceRange();
+            sr.setBegin(call->getArg(argNum)->getBeginLoc());
+          }
+          sArg = readSourceText(*SM, sr).str();
+          if (c.second.moveTo < call->getNumArgs())
+            dst_OS << sArg << ", ";
+          else
+            dst_OS << ", " << sArg;
+          clang::SourceLocation dst_s;
+          if (c.second.moveTo < call->getNumArgs())
+            dst_s = call->getArg(c.second.moveTo)->getBeginLoc();
+          else
+            dst_s = call->getEndLoc();
+          ct::Replacement dst_Rep(*SM, dst_s, 0, dst_OS.str());
+          clang::FullSourceLoc dst_fullSL(dst_s, *SM);
+          insertReplacement(dst_Rep, dst_fullSL);
+          OS << "";
+          if (argNum < call->getNumArgs())
+            e = call->getArg(argNum + c.second.numberToMove)->getBeginLoc();
+          else
+            e = call->getEndLoc();
+          length = SM->getCharacterData(e) - SM->getCharacterData(s);
           break;
         }
         case e_add_const_argument:
@@ -747,11 +860,9 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
         }
         default:
           OS << getCastType(c.second.castType) << "(" << readSourceText(*SM, sr) << ")";
+          length = SM->getCharacterData(clang::Lexer::getLocForEndOfToken(e, 0, *SM, DefaultLangOptions)) - SM->getCharacterData(s);
           break;
       }
-      size_t length = 0;
-      if (c.second.castType != e_add_const_argument)
-        length = SM->getCharacterData(clang::Lexer::getLocForEndOfToken(e, 0, *SM, DefaultLangOptions)) - SM->getCharacterData(s);
       ct::Replacement Rep(*SM, s, length, OS.str());
       clang::FullSourceLoc fullSL(s, *SM);
       insertReplacement(Rep, fullSL);
@@ -857,7 +968,14 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
             sCudnnGetPooling2dDescriptor,
             sCudnnSetPoolingNdDescriptor,
             sCudnnGetPoolingNdDescriptor,
-            sCudnnSetLRNDescriptor
+            sCudnnSetLRNDescriptor,
+            sCudnnGetRNNDescriptor_v6,
+            sCudnnSetRNNDescriptor_v6,
+            sCudnnSoftmaxForward,
+            sCudnnSoftmaxBackward,
+            sCudnnConvolutionForward,
+            sCudnnConvolutionBackwardData,
+            sCudnnRNNBackwardWeights
           )
         )
       )
