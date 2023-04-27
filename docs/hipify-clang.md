@@ -1,4 +1,4 @@
-## hipify-clang
+## <a name="hipify-clang"></a>hipify-clang
 
 `hipify-clang` is a clang-based tool for translating CUDA sources into HIP sources.
 It translates CUDA source into an abstract syntax tree, which is traversed by transformation matchers.
@@ -17,7 +17,7 @@ After applying all the matchers, the output HIP source is produced.
 2. CUDA should be installed and provided in case of multiple installations by `--cuda-path` option.
 3. All the includes and defines should be provided to transform code successfully.
 
-### <a name="dependencies"></a> hipify-clang: dependencies
+### <a name="hipify-clang-dependencies"></a>hipify-clang: dependencies
 
 `hipify-clang` requires:
 
@@ -188,7 +188,7 @@ In most cases, you can get a suitable version of `LLVM+CLANG` with your package 
 Failing that or having multiple versions of `LLVM`, you can [download a release archive](http://releases.llvm.org/), build or install it, and set
 [CMAKE_PREFIX_PATH](https://cmake.org/cmake/help/v3.5/variable/CMAKE_PREFIX_PATH.html) so `cmake` can find it; for instance: `-DCMAKE_PREFIX_PATH=d:\LLVM\16.0.2\dist`
 
-### <a name="hipify-clang-usage"></a> hipify-clang: usage
+### <a name="hipify-clang-usage"></a>hipify-clang: usage
 
 To process a file, `hipify-clang` needs access to the same headers that would be required to compile it with clang.
 
@@ -198,9 +198,9 @@ For example:
 ./hipify-clang square.cu --cuda-path=/usr/local/cuda-12.1 -I /usr/local/cuda-12.1/samples/common/inc
 ```
 
-## Prerequisites
+`hipify-clang` arguments are given first, followed by a separator `'--'`, and then the arguments you'd pass to `clang` if you
+were compiling the input file. For example:
 
-The [ROCm website](https://docs.amd.com) describes how to set up the ROCm repositories and install the required platform dependencies.
 ```bash
 ./hipify-clang cpp17.cu --cuda-path=/usr/local/cuda-12.1 -- -std=c++17
 ```
@@ -219,7 +219,7 @@ The compilation database should be provided in the `compile_commands.json` file 
 
 For a list of `hipify-clang` options, run `hipify-clang --help`.
 
-### <a name="building"></a> hipify-clang: building
+### <a name="hipify-clang-building"></a>hipify-clang: building
 
 ```bash
 cd .. \
@@ -241,7 +241,7 @@ Debug build type `-DCMAKE_BUILD_TYPE=Debug` is also supported and tested; `LLVM+
 
 The binary can then be found at `./dist/hipify-clang` or at the folder specified by the `-DCMAKE_INSTALL_PREFIX` option.
 
-### <a name="testing"></a> hipify-clang: testing
+### <a name="hipify-clang-testing"></a>hipify-clang: testing
 
 `hipify-clang` has unit tests using `LLVM` [`lit`](https://llvm.org/docs/CommandGuide/lit.html)/[`FileCheck`](https://llvm.org/docs/CommandGuide/FileCheck.html).
 
@@ -377,7 +377,7 @@ Run `Visual Studio 17 2022`, open the generated `LLVM.sln`, build all, build pro
 
 10. Build and run tests:
 
-### <a name="linux"></a> hipify-clang: Linux
+### <a name="linux"></a>hipify-clang: Linux testing
 
 On Linux the following configurations are tested:
 
@@ -547,7 +547,7 @@ Testing Time: 5.78s
   Expected Passes    : 82
 [100%] Built target test-hipify
 ```
-### <a name="windows"></a> hipify-clang: Windows
+### <a name="windows"></a>hipify-clang: Windows testing
 
 *Tested configurations:*
 
