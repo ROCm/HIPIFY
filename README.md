@@ -18,6 +18,8 @@ HIPIFY is a set of tools to translate CUDA source code into portable [HIP](https
      * [Building](./docs/hipify-perl.md#hipify-perl-building)
 - [Supported CUDA APIs](./docs/supported_apis.md#supported-cuda-apis)
 - [Documentation](#documentation)
+     * [How to build HIPIFY documentation](#how-to-build-hipify-documentation)
+     * [How to build CUDA2HIP documentation](#how-to-build-cuda2hip-documentation)
 - [Disclaimer](#disclaimer)
 
 <!-- tocstop -->
@@ -26,9 +28,9 @@ HIPIFY is a set of tools to translate CUDA source code into portable [HIP](https
 
 Information about HIPIFY and other user topics is found in the [HIPIFY documentation](https://rocmdocs.amd.com/projects/HIPIFY/en/latest/).
 
-### How to build documentation
+### <a name="how-to-build-HIPIFY-documentation"></a>How to build HIPIFY documentation
 
-Run the steps below to build documentation locally.
+Run the steps below to build the HIPIFY documentation locally.
 
 ```
 cd docs
@@ -37,6 +39,22 @@ pip3 install -r .sphinx/requirements.txt
 
 python3 -m sphinx -T -E -b html -d _build/doctrees -D language=en . _build/html
 ```
+
+### <a name="how-to-build-CUDA2HIP-documentation"></a>How to build CUDA2HIP documentation
+
+Run the following `hipify-clang` command to build the documentation for CUDA APIs supported by HIP (CUDA2HIP) locally.
+
+```
+hipify-clang --md --doc-format=full
+```
+
+By the above command, the CUDA2HIP documentation will be generated the same and in the same format as provided in the [Supported CUDA APIs](./docs/supported_apis.md#supported-cuda-apis) section.
+
+To generate CUDA2HIP documentation in CSV use the `--csv` option instead of `--md`.
+
+Besides the `full` format, CUDA2HIP documentation can also be generated in `strict` or `compact` format.
+
+To see all available options use the `--help` or `--help-hidden` hipify-clang option.
 
 ## <a name="disclaimer"></a>Disclaimer
 
