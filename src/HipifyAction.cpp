@@ -82,9 +82,12 @@ const std::string sCudnnSoftmaxBackward = "cudnnSoftmaxBackward";
 const std::string sCudnnConvolutionForward = "cudnnConvolutionForward";
 const std::string sCudnnConvolutionBackwardData = "cudnnConvolutionBackwardData";
 const std::string sCudnnRNNBackwardWeights = "cudnnRNNBackwardWeights";
+// CUDA_OVERLOADED
+const std::string sCudaEventCreate = "cudaEventCreate";
 // Matchers' names
 const StringRef sCudaLaunchKernel = "cudaLaunchKernel";
 const StringRef sCudaHostFuncCall = "cudaHostFuncCall";
+const StringRef sCudaOverloadedHostFuncCall = "cudaOverloadedHostFuncCall";
 const StringRef sCudaDeviceFuncCall = "cudaDeviceFuncCall";
 const StringRef sCubNamespacePrefix = "cubNamespacePrefix";
 const StringRef sCubFunctionTemplateDecl = "cubFunctionTemplateDecl";
@@ -103,6 +106,17 @@ std::string getCastType(hipify::CastTypes c) {
     default: return "";
   }
 }
+
+std::map<std::string, hipify::FuncOverloadsStruct> FuncOverloads {
+  {sCudaEventCreate,
+    {
+      {
+        {1, {{"hipEventCreate", "", CONV_EVENT, API_RUNTIME, runtime::CUDA_RUNTIME_API_SECTIONS::EVENT}, ot_arguments_number, ow_None}},
+        {2, {{"hipEventCreateWithFlags", "", CONV_EVENT, API_RUNTIME, runtime::CUDA_RUNTIME_API_SECTIONS::EVENT}, ot_arguments_number, ow_None}}
+      }
+    }
+  },
+};
 
 std::map<std::string, ArgCastStruct> FuncArgCasts {
   {sCudaMemcpyToSymbol,
@@ -882,6 +896,43 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
   return false;
 }
 
+bool HipifyAction::cudaOverloadedHostFuncCall(const mat::MatchFinder::MatchResult& Result) {
+  if (auto* call = Result.Nodes.getNodeAs<clang::CallExpr>(sCudaOverloadedHostFuncCall)) {
+    if (!call->getNumArgs()) return false;
+    auto* funcDcl = call->getDirectCallee();
+    if (!funcDcl) return false;
+    std::string name = funcDcl->getDeclName().getAsString();
+    const auto found = CUDA_RENAMES_MAP().find(name);
+    if (found == CUDA_RENAMES_MAP().end()) return false;
+    if (!Statistics::isCudaOverloaded(found->second)) return false;
+    auto it = FuncOverloads.find(name);
+    if (it == FuncOverloads.end()) return false;
+    auto FuncOverloadsStruct = it->second;
+    if (FuncOverloadsStruct.isToMIOpen != TranslateToMIOpen || FuncOverloadsStruct.isToRoc != TranslateToRoc) return false;
+    unsigned numArgs = call->getNumArgs();
+    auto itNumArgs = FuncOverloadsStruct.overloadMap.find(numArgs);
+    if (itNumArgs == FuncOverloadsStruct.overloadMap.end()) return false;
+    auto overrideInfo = itNumArgs->second;
+    auto counter = overrideInfo.counter;
+    // check if SUPPORTED
+    auto* SM = Result.SourceManager;
+    clang::SourceLocation s;
+    switch (overrideInfo.overloadType) {
+      case ot_arguments_number:
+      default:
+      {
+        s = call->getBeginLoc();
+        ct::Replacement Rep(*SM, s, name.size(), counter.hipName.str());
+        clang::FullSourceLoc fullSL(s, *SM);
+        insertReplacement(Rep, fullSL);
+        break;
+      }
+    }
+    return true;
+  }
+  return false;
+}
+
 bool HipifyAction::half2Member(const mat::MatchFinder::MatchResult &Result) {
   if (auto *expr = Result.Nodes.getNodeAs<clang::MemberExpr>(sHalf2Member)) {
     auto *baseExpr = expr->getBase();
@@ -980,6 +1031,19 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
         )
       )
     ).bind(sCudaHostFuncCall),
+    this
+  );
+  Finder->addMatcher(
+    mat::callExpr(
+      mat::isExpansionInMainFile(),
+      mat::callee(
+        mat::functionDecl(
+          mat::hasAnyName(
+            sCudaEventCreate
+          )
+        )
+      )
+    ).bind(sCudaOverloadedHostFuncCall),
     this
   );
   Finder->addMatcher(
@@ -1148,6 +1212,7 @@ void HipifyAction::ExecuteAction() {
 void HipifyAction::run(const mat::MatchFinder::MatchResult &Result) {
   if (cudaLaunchKernel(Result)) return;
   if (cudaHostFuncCall(Result)) return;
+  if (cudaOverloadedHostFuncCall(Result)) return;
   if (cudaDeviceFuncCall(Result)) return;
   if (cubNamespacePrefix(Result)) return;
   if (cubFunctionTemplateDecl(Result)) return;

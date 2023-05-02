@@ -170,7 +170,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // 5. Event Management
   // no analogue
   // NOTE: Not equal to cuEventCreate due to different signatures
-  {"cudaEventCreate",                                         {"hipEventCreate",                                         "", CONV_EVENT, API_RUNTIME, SEC::EVENT}},
+  {"cudaEventCreate",                                         {"hipEventCreate",                                         "", CONV_EVENT, API_RUNTIME, SEC::EVENT, CUDA_OVERLOADED}},
   // cuEventCreate
   {"cudaEventCreateWithFlags",                                {"hipEventCreateWithFlags",                                "", CONV_EVENT, API_RUNTIME, SEC::EVENT}},
   // cuEventDestroy
