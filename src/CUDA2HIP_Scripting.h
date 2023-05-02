@@ -34,9 +34,17 @@ namespace hipify {
     e_move_argument,
   };
 
+  enum OverloadTypes {
+    ot_arguments_number,
+  };
+
   enum CastWarning {
     cw_None,
     cw_DataLoss,
+  };
+
+  enum OverloadWarning {
+    ow_None,
   };
 
   struct CastInfo {
@@ -54,10 +62,26 @@ namespace hipify {
     bool isToRoc = false;
     bool isToMIOpen = false;
   };
+
+  struct OverloadInfo {
+    hipCounter counter;
+    OverloadTypes overloadType;
+    OverloadWarning overloadWarn;
+  };
+
+  typedef std::map<unsigned, OverloadInfo> OverloadMap;
+
+  struct FuncOverloadsStruct {
+    OverloadMap overloadMap;
+    bool isToRoc = false;
+    bool isToMIOpen = false;
+  };
 }
 
 extern std::string getCastType(hipify::CastTypes c);
 extern std::map<std::string, hipify::ArgCastStruct> FuncArgCasts;
+
+extern std::map<std::string, hipify::FuncOverloadsStruct> FuncOverloads;
 
 namespace perl {
 

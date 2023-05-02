@@ -74,6 +74,7 @@ public:
   bool cudaLaunchKernel(const mat::MatchFinder::MatchResult &Result);
   bool cudaDeviceFuncCall(const mat::MatchFinder::MatchResult &Result);
   bool cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result);
+  bool cudaOverloadedHostFuncCall(const mat::MatchFinder::MatchResult &Result);
   bool cubNamespacePrefix(const mat::MatchFinder::MatchResult &Result);
   bool cubFunctionTemplateDecl(const mat::MatchFinder::MatchResult &Result);
   bool cubUsingNamespaceDecl(const mat::MatchFinder::MatchResult &Result);

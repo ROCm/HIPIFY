@@ -1049,6 +1049,11 @@ int main() {
   // CHECK: result = hipEventCreate(&Event_t);
   result = cudaEventCreate(&Event_t);
 
+  // CUDA: static __inline__ __host__ cudaError_t cudaEventCreate(cudaEvent_t* event, unsigned int flags);
+  // HIP: hipError_t hipEventCreateWithFlags(hipEvent_t* event, unsigned flags);
+  // CHECK: result = hipEventCreateWithFlags(&Event_t, flags);
+  result = cudaEventCreate(&Event_t, flags);
+
   // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaEventCreateWithFlags(cudaEvent_t *event, unsigned int flags);
   // HIP: hipError_t hipEventCreateWithFlags(hipEvent_t* event, unsigned flags);
   // CHECK: result = hipEventCreateWithFlags(&Event_t, flags);
