@@ -84,6 +84,7 @@ const std::string sCudnnConvolutionBackwardData = "cudnnConvolutionBackwardData"
 const std::string sCudnnRNNBackwardWeights = "cudnnRNNBackwardWeights";
 // CUDA_OVERLOADED
 const std::string sCudaEventCreate = "cudaEventCreate";
+const std::string sCudaGraphInstantiate = "cudaGraphInstantiate";
 // Matchers' names
 const StringRef sCudaLaunchKernel = "cudaLaunchKernel";
 const StringRef sCudaHostFuncCall = "cudaHostFuncCall";
@@ -112,7 +113,15 @@ std::map<std::string, hipify::FuncOverloadsStruct> FuncOverloads {
     {
       {
         {1, {{"hipEventCreate", "", CONV_EVENT, API_RUNTIME, runtime::CUDA_RUNTIME_API_SECTIONS::EVENT}, ot_arguments_number, ow_None}},
-        {2, {{"hipEventCreateWithFlags", "", CONV_EVENT, API_RUNTIME, runtime::CUDA_RUNTIME_API_SECTIONS::EVENT}, ot_arguments_number, ow_None}}
+        {2, {{"hipEventCreateWithFlags", "", CONV_EVENT, API_RUNTIME, runtime::CUDA_RUNTIME_API_SECTIONS::EVENT}, ot_arguments_number, ow_None}},
+      }
+    }
+  },
+  {sCudaGraphInstantiate,
+    {
+      {
+        {5, {{"hipGraphInstantiate", "", CONV_GRAPH, API_RUNTIME, runtime::CUDA_RUNTIME_API_SECTIONS::GRAPH}, ot_arguments_number, ow_None}},
+        {3, {{"hipGraphInstantiateWithFlags", "", CONV_GRAPH, API_RUNTIME, runtime::CUDA_RUNTIME_API_SECTIONS::GRAPH}, ot_arguments_number, ow_None}},
       }
     }
   },
@@ -1039,7 +1048,8 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
       mat::callee(
         mat::functionDecl(
           mat::hasAnyName(
-            sCudaEventCreate
+            sCudaEventCreate,
+            sCudaGraphInstantiate
           )
         )
       )

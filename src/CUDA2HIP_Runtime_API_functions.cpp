@@ -699,7 +699,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   {"cudaGraphHostNodeSetParams",                              {"hipGraphHostNodeSetParams",                              "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH}},
   // cuGraphInstantiate
   // NOTE: CUDA signature changed since 12.0
-  {"cudaGraphInstantiate",                                    {"hipGraphInstantiate",                                    "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH}},
+  {"cudaGraphInstantiate",                                    {"hipGraphInstantiate",                                    "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, CUDA_OVERLOADED}},
   // cuGraphKernelNodeCopyAttributes
   {"cudaGraphKernelNodeCopyAttributes",                       {"hipGraphKernelNodeCopyAttributes",                       "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_EXPERIMENTAL}},
   // cuGraphKernelNodeGetAttribute
