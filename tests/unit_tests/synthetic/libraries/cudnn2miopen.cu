@@ -450,28 +450,24 @@ int main() {
   // CHECK: status = miopenFindConvolutionForwardAlgorithm(handle, xD, x, filterDescriptor, W, convolutionDescriptor, yD, y, requestedAlgoCount, &returnedAlgoCount, &ConvolutionFwdAlgoPerf_t, workSpace, workSpaceSizeInBytes, true);
   status = cudnnFindConvolutionForwardAlgorithmEx(handle, xD, x, filterDescriptor, W, convolutionDescriptor, yD, y, requestedAlgoCount, &returnedAlgoCount, &ConvolutionFwdAlgoPerf_t, workSpace, workSpaceSizeInBytes);
 
-  // TODO: swap 2 and 3 arguments (const miopenTensorDescriptor_t wDesc and const miopenTensorDescriptor_t xDesc)
   // CUDA: cudnnStatus_t CUDNNWINAPI cudnnGetConvolutionForwardWorkspaceSize(cudnnHandle_t handle, const cudnnTensorDescriptor_t xDesc, const cudnnFilterDescriptor_t wDesc, const cudnnConvolutionDescriptor_t convDesc, const cudnnTensorDescriptor_t yDesc, cudnnConvolutionFwdAlgo_t algo, size_t* sizeInBytes);
   // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenConvolutionForwardGetWorkSpaceSize(miopenHandle_t handle, const miopenTensorDescriptor_t wDesc, const miopenTensorDescriptor_t xDesc, const miopenConvolutionDescriptor_t convDesc, const miopenTensorDescriptor_t yDesc, size_t* workSpaceSize);
-  // CHECK: status = miopenConvolutionForwardGetWorkSpaceSize(handle, xD, filterDescriptor, convolutionDescriptor, yD, &workSpaceSizeInBytes);
+  // CHECK: status = miopenConvolutionForwardGetWorkSpaceSize(handle, filterDescriptor, xD, convolutionDescriptor, yD, &workSpaceSizeInBytes);
   status = cudnnGetConvolutionForwardWorkspaceSize(handle, xD, filterDescriptor, convolutionDescriptor, yD, convolutionFwdAlgo, &workSpaceSizeInBytes);
 
-  // TODO: swap correctly last 5 arguments
   // CUDA: cudnnStatus_t CUDNNWINAPI cudnnConvolutionForward(cudnnHandle_t handle, const void* alpha, const cudnnTensorDescriptor_t xDesc, const void* x, const cudnnFilterDescriptor_t wDesc, const void* w, const cudnnConvolutionDescriptor_t convDesc, cudnnConvolutionFwdAlgo_t algo, void* workSpace, size_t workSpaceSizeInBytes, const void* beta, const cudnnTensorDescriptor_t yDesc, void* y);
   // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenConvolutionForward(miopenHandle_t handle, const void* alpha, const miopenTensorDescriptor_t xDesc, const void* x, const miopenTensorDescriptor_t wDesc, const void* w, const miopenConvolutionDescriptor_t convDesc, miopenConvFwdAlgorithm_t algo, const void* beta, const miopenTensorDescriptor_t yDesc, void* y, void* workSpace, size_t workSpaceSize);
-  // CHECK: status = miopenConvolutionForward(handle, alpha, xD, x, filterDescriptor, W, convolutionDescriptor, convolutionFwdAlgo, workSpace, workSpaceSizeInBytes, beta, yD, y);
+  // CHECK: status = miopenConvolutionForward(handle, alpha, xD, x, filterDescriptor, W, convolutionDescriptor, convolutionFwdAlgo, beta, yD, y, workSpace, workSpaceSizeInBytes);
   status = cudnnConvolutionForward(handle, alpha, xD, x, filterDescriptor, W, convolutionDescriptor, convolutionFwdAlgo, workSpace, workSpaceSizeInBytes, beta, yD, y);
 
-  // TODO: swap 2 and 3 arguments
   // CUDA: cudnnStatus_t CUDNNWINAPI cudnnGetConvolutionBackwardDataWorkspaceSize(cudnnHandle_t handle, const cudnnFilterDescriptor_t wDesc, const cudnnTensorDescriptor_t dyDesc, const cudnnConvolutionDescriptor_t convDesc, const cudnnTensorDescriptor_t dxDesc, cudnnConvolutionBwdDataAlgo_t algo, size_t* sizeInBytes);
   // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenConvolutionBackwardDataGetWorkSpaceSize(miopenHandle_t handle, const miopenTensorDescriptor_t dyDesc, const miopenTensorDescriptor_t wDesc, const miopenConvolutionDescriptor_t convDesc, const miopenTensorDescriptor_t dxDesc, size_t* workSpaceSize);
-  // CHECK: status = miopenConvolutionBackwardDataGetWorkSpaceSize(handle, filterDescriptor, yD, convolutionDescriptor, xD, &workSpaceSizeInBytes);
+  // CHECK: status = miopenConvolutionBackwardDataGetWorkSpaceSize(handle, yD, filterDescriptor, convolutionDescriptor, xD, &workSpaceSizeInBytes);
   status = cudnnGetConvolutionBackwardDataWorkspaceSize(handle, filterDescriptor, yD, convolutionDescriptor, xD, ConvolutionBwdDataAlgo_t, &workSpaceSizeInBytes);
 
-  // TODO: swap correctly all args, starting from 3rd
   // CUDA: cudnnStatus_t CUDNNWINAPI cudnnConvolutionBackwardData(cudnnHandle_t handle, const void* alpha, const cudnnFilterDescriptor_t wDesc, const void* w, const cudnnTensorDescriptor_t dyDesc, const void* dy, const cudnnConvolutionDescriptor_t convDesc, cudnnConvolutionBwdDataAlgo_t algo, void* workSpace, size_t workSpaceSizeInBytes, const void* beta, const cudnnTensorDescriptor_t dxDesc, void* dx);
   // MIOPEN MIOPEN_EXPORT miopenStatus_t miopenConvolutionBackwardData(miopenHandle_t handle, const void* alpha, const miopenTensorDescriptor_t dyDesc, const void* dy, const miopenTensorDescriptor_t wDesc, const void* w, const miopenConvolutionDescriptor_t convDesc, miopenConvBwdDataAlgorithm_t algo, const void* beta, const miopenTensorDescriptor_t dxDesc, void* dx, void* workSpace, size_t workSpaceSize);
-  // CHECK: status = miopenConvolutionBackwardData(handle, alpha, filterDescriptor, W, yD, dy, convolutionDescriptor, ConvolutionBwdDataAlgo_t, workSpace, workSpaceSizeInBytes, beta, xD, dx);
+  // CHECK: status = miopenConvolutionBackwardData(handle, alpha, yD, dy, filterDescriptor, W, convolutionDescriptor, ConvolutionBwdDataAlgo_t, beta, xD, dx, workSpace, workSpaceSizeInBytes);
   status = cudnnConvolutionBackwardData(handle, alpha, filterDescriptor, W, yD, dy, convolutionDescriptor, ConvolutionBwdDataAlgo_t, workSpace, workSpaceSizeInBytes, beta, xD, dx);
 
   // CUDA: cudnnStatus_t CUDNNWINAPI cudnnConvolutionBackwardBias(cudnnHandle_t handle, const void* alpha, const cudnnTensorDescriptor_t dyDesc, const void* dy, const void* beta, const cudnnTensorDescriptor_t dbDesc, void* db);
@@ -625,16 +621,14 @@ int main() {
   // CHECK: status = miopenActivationBackward(handle, activationDescriptor, alpha, yD, y, dyD, dy, xD, x, beta, dxD, dx);
   status = cudnnActivationBackward(handle, activationDescriptor, alpha, yD, y, dyD, dy, xD, x, beta, dxD, dx);
 
-  // TODO: Move args: 1 to 7, 2 to 8
   // CUDA: cudnnStatus_t CUDNNWINAPI cudnnSoftmaxForward(cudnnHandle_t handle, cudnnSoftmaxAlgorithm_t algo, cudnnSoftmaxMode_t mode, const void* alpha, const cudnnTensorDescriptor_t xDesc, const void* x, const void* beta, const cudnnTensorDescriptor_t yDesc, void* y);
   // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenSoftmaxForward_V2(miopenHandle_t handle, const void* alpha, const miopenTensorDescriptor_t xDesc, const void* x, const void* beta, const miopenTensorDescriptor_t yDesc, void* y, miopenSoftmaxAlgorithm_t algorithm, miopenSoftmaxMode_t mode);
-  // CHECK: status = miopenSoftmaxForward_V2(handle, softmaxAlgorithm, softmaxMode, alpha, xD, x, beta, yD, y);
+  // CHECK: status = miopenSoftmaxForward_V2(handle, alpha, xD, x, beta, yD, y, softmaxAlgorithm, softmaxMode);
   status = cudnnSoftmaxForward(handle, softmaxAlgorithm, softmaxMode, alpha, xD, x, beta, yD, y);
 
-  // TODO: Move args: 1 to 7, 2 to 8
   // CUDA: cudnnStatus_t CUDNNWINAPI cudnnSoftmaxBackward(cudnnHandle_t handle, cudnnSoftmaxAlgorithm_t algo, cudnnSoftmaxMode_t mode, const void* alpha, const cudnnTensorDescriptor_t yDesc, const void* y, const cudnnTensorDescriptor_t dyDesc, const void* dy, const void* beta, const cudnnTensorDescriptor_t dxDesc, void* dx);
   // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenSoftmaxBackward_V2(miopenHandle_t handle, const void* alpha, const miopenTensorDescriptor_t yDesc, const void* y, const miopenTensorDescriptor_t dyDesc, const void* dy, const void* beta, const miopenTensorDescriptor_t dxDesc, void* dx, miopenSoftmaxAlgorithm_t algorithm, miopenSoftmaxMode_t mode);
-  // CHECK: status = miopenSoftmaxBackward_V2(handle, softmaxAlgorithm, softmaxMode, alpha, yD, y, dyD, dy, beta, dxD, dx);
+  // CHECK: status = miopenSoftmaxBackward_V2(handle, alpha, yD, y, dyD, dy, beta, dxD, dx, softmaxAlgorithm, softmaxMode);
   status = cudnnSoftmaxBackward(handle, softmaxAlgorithm, softmaxMode, alpha, yD, y, dyD, dy, beta, dxD, dx);
 
   // CUDA: cudnnStatus_t CUDNNWINAPI cudnnConvolutionBiasActivationForward(cudnnHandle_t handle, const void* alpha1, const cudnnTensorDescriptor_t xDesc, const void* x, const cudnnFilterDescriptor_t wDesc, const void* w, const cudnnConvolutionDescriptor_t convDesc, cudnnConvolutionFwdAlgo_t algo, void* workSpace, size_t workSpaceSizeInBytes, const void* alpha2, const cudnnTensorDescriptor_t zDesc, const void* z, const cudnnTensorDescriptor_t biasDesc, const void* bias, const cudnnActivationDescriptor_t activationDesc, const cudnnTensorDescriptor_t yDesc, void* y);
@@ -696,10 +690,9 @@ int main() {
   // CHECK: status = miopenRNNBackwardData(handle, RNNDescriptor, seqLength, &yD, y, &dyD, dy, dhyD, dhy, dcyD, dcy, filterDescriptor, W, hxD, hx, cxD, cx, &dxD, dx, dhxD, dhx, dcxD, dcx, workSpace, workSpaceSizeInBytes, &reserveSpace, reserveSpaceNumBytes);
   status = cudnnRNNBackwardData(handle, RNNDescriptor, seqLength, &yD, y, &dyD, dy, dhyD, dhy, dcyD, dcy, filterDescriptor, W, hxD, hx, cxD, cx, &dxD, dx, dhxD, dhx, dcxD, dcx, workSpace, workSpaceSizeInBytes, &reserveSpace, reserveSpaceNumBytes);
 
-  // TODO: Move/swap args starting from 9th
   // CUDA: CUDNN_DEPRECATED cudnnStatus_t CUDNNWINAPI cudnnRNNBackwardWeights(cudnnHandle_t handle, const cudnnRNNDescriptor_t rnnDesc, const int seqLength, const cudnnTensorDescriptor_t* xDesc, const void* x, const cudnnTensorDescriptor_t hxDesc, const void* hx, const cudnnTensorDescriptor_t* yDesc, const void* y, const void* workSpace, size_t workSpaceSizeInBytes, const cudnnFilterDescriptor_t dwDesc, void* dw, const void* reserveSpace, size_t reserveSpaceSizeInBytes);
   // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenRNNBackwardWeights(miopenHandle_t handle, const miopenRNNDescriptor_t rnnDesc, const int sequenceLen, const miopenTensorDescriptor_t* xDesc, const void* x, const miopenTensorDescriptor_t hxDesc, const void* hx, const miopenTensorDescriptor_t* yDesc, const void* y, const miopenTensorDescriptor_t dwDesc, void* dw, void* workSpace, size_t workSpaceNumBytes, const void* reserveSpace, size_t reserveSpaceNumBytes);
-  // CHECK: status = miopenRNNBackwardWeights(handle, RNNDescriptor, seqLength, &xD, x, hxD, hx, &yD, y, workSpace, workSpaceSizeInBytes, filterDescriptor, dw, &reserveSpace, reserveSpaceNumBytes);
+  // CHECK: status = miopenRNNBackwardWeights(handle, RNNDescriptor, seqLength, &xD, x, hxD, hx, &yD, y, filterDescriptor, dw, workSpace, workSpaceSizeInBytes, &reserveSpace, reserveSpaceNumBytes);
   status = cudnnRNNBackwardWeights(handle, RNNDescriptor, seqLength, &xD, x, hxD, hx, &yD, y, workSpace, workSpaceSizeInBytes, filterDescriptor, dw, &reserveSpace, reserveSpaceNumBytes);
 
   // CUDA: CUDNN_DEPRECATED cudnnStatus_t CUDNNWINAPI cudnnRNNForwardInference(cudnnHandle_t handle, const cudnnRNNDescriptor_t rnnDesc, const int seqLength, const cudnnTensorDescriptor_t* xDesc, const void* x, const cudnnTensorDescriptor_t hxDesc, const void* hx, const cudnnTensorDescriptor_t cxDesc, const void* cx, const cudnnFilterDescriptor_t wDesc, const void* w, const cudnnTensorDescriptor_t* yDesc, void* y, const cudnnTensorDescriptor_t hyDesc, void* hy, const cudnnTensorDescriptor_t cyDesc, void* cy, void* workSpace, size_t workSpaceSizeInBytes);

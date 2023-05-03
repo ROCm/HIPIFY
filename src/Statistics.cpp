@@ -425,6 +425,10 @@ bool Statistics::isRocMiopenOnly(const hipCounter& counter) {
   return ROC_MIOPEN_ONLY == (counter.supportDegree & ROC_MIOPEN_ONLY);
 }
 
+bool Statistics::isCudaOverloaded(const hipCounter& counter) {
+  return CUDA_OVERLOADED == (counter.supportDegree & CUDA_OVERLOADED);
+}
+
 std::string Statistics::getCudaVersion(const cudaVersions& ver) {
   switch (ver) {
     case CUDA_0:
