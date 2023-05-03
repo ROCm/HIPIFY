@@ -868,5 +868,17 @@ int main() {
   cudaGraphNodeType GraphNodeTypeMemFree = cudaGraphNodeTypeMemFree;
 #endif
 
+#if CUDA_VERSION >= 11070
+  // CHECK: hipGraphInstantiateFlags GraphInstantiateFlagUseNodePriority = hipGraphInstantiateFlagUseNodePriority;
+  cudaGraphInstantiateFlags GraphInstantiateFlagUseNodePriority = cudaGraphInstantiateFlagUseNodePriority;
+#endif
+
+#if CUDA_VERSION >= 12000
+  // CHECK: hipGraphInstantiateFlags GraphInstantiateFlagUpload = hipGraphInstantiateFlagUpload;
+  // CHECK-NEXT: hipGraphInstantiateFlags GraphInstantiateFlagDeviceLaunch = hipGraphInstantiateFlagDeviceLaunch;
+  cudaGraphInstantiateFlags GraphInstantiateFlagUpload = cudaGraphInstantiateFlagUpload;
+  cudaGraphInstantiateFlags GraphInstantiateFlagDeviceLaunch = cudaGraphInstantiateFlagDeviceLaunch;
+#endif
+
   return 0;
 }
