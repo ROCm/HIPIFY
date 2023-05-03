@@ -153,9 +153,9 @@
 |`CUDA_EXT_SEM_WAIT_NODE_PARAMS_v1`|11.3| | | | | | | |
 |`CUDA_GRAPH_INSTANTIATE_ERROR`|12.0| | | | | | | |
 |`CUDA_GRAPH_INSTANTIATE_FLAG_AUTO_FREE_ON_LAUNCH`|11.4| | |`hipGraphInstantiateFlagAutoFreeOnLaunch`|5.2.0| | | |
-|`CUDA_GRAPH_INSTANTIATE_FLAG_DEVICE_LAUNCH`|12.0| | | | | | | |
-|`CUDA_GRAPH_INSTANTIATE_FLAG_UPLOAD`|12.0| | | | | | | |
-|`CUDA_GRAPH_INSTANTIATE_FLAG_USE_NODE_PRIORITY`|11.7| | | | | | | |
+|`CUDA_GRAPH_INSTANTIATE_FLAG_DEVICE_LAUNCH`|12.0| | |`hipGraphInstantiateFlagDeviceLaunch`|5.6.0| | |5.6.0|
+|`CUDA_GRAPH_INSTANTIATE_FLAG_UPLOAD`|12.0| | |`hipGraphInstantiateFlagUpload`|5.6.0| | |5.6.0|
+|`CUDA_GRAPH_INSTANTIATE_FLAG_USE_NODE_PRIORITY`|11.7| | |`hipGraphInstantiateFlagUseNodePriority`|5.6.0| | |5.6.0|
 |`CUDA_GRAPH_INSTANTIATE_INVALID_STRUCTURE`|12.0| | | | | | | |
 |`CUDA_GRAPH_INSTANTIATE_MULTIPLE_CTXS_NOT_SUPPORTED`|12.0| | | | | | | |
 |`CUDA_GRAPH_INSTANTIATE_NODE_OPERATION_NOT_SUPPORTED`|12.0| | | | | | | |
@@ -743,7 +743,7 @@
 |`CU_MEMHOSTREGISTER_DEVICEMAP`| | | |`hipHostRegisterMapped`|1.6.0| | | |
 |`CU_MEMHOSTREGISTER_IOMEMORY`|7.5| | |`hipHostRegisterIoMemory`|1.6.0| | | |
 |`CU_MEMHOSTREGISTER_PORTABLE`| | | |`hipHostRegisterPortable`|1.6.0| | | |
-|`CU_MEMHOSTREGISTER_READ_ONLY`|11.1| | | | | | | |
+|`CU_MEMHOSTREGISTER_READ_ONLY`|11.1| | |`hipHostRegisterReadOnly`|5.6.0| | |5.6.0|
 |`CU_MEMORYTYPE_ARRAY`| | | |`hipMemoryTypeArray`|1.7.0| | | |
 |`CU_MEMORYTYPE_DEVICE`| | | |`hipMemoryTypeDevice`|1.6.0| | | |
 |`CU_MEMORYTYPE_HOST`| | | |`hipMemoryTypeHost`|1.6.0| | | |

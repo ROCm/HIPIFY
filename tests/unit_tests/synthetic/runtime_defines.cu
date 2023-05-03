@@ -114,5 +114,10 @@ int main() {
   int EXTERNAL_MEMORY_DEDICATED = cudaExternalMemoryDedicated;
 #endif
 
+#if CUDA_VERSION >= 11010
+  // CHECK: int HostRegisterReadOnly = hipHostRegisterReadOnly;
+  int HostRegisterReadOnly = cudaHostRegisterReadOnly;
+#endif
+
   return 0;
 }

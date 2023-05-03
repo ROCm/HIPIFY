@@ -857,11 +857,19 @@ my %removed_funcs = (
 );
 
 my %experimental_funcs = (
+    "cudaHostRegisterReadOnly" => "5.6.0",
+    "cudaGraphInstantiateFlagUseNodePriority" => "5.6.0",
+    "cudaGraphInstantiateFlagUpload" => "5.6.0",
+    "cudaGraphInstantiateFlagDeviceLaunch" => "5.6.0",
     "cudaArrayGetInfo" => "5.6.0",
     "cuArrayGetDescriptor_v2" => "5.6.0",
     "cuArrayGetDescriptor" => "5.6.0",
     "cuArray3DGetDescriptor_v2" => "5.6.0",
-    "cuArray3DGetDescriptor" => "5.6.0"
+    "cuArray3DGetDescriptor" => "5.6.0",
+    "CU_MEMHOSTREGISTER_READ_ONLY" => "5.6.0",
+    "CUDA_GRAPH_INSTANTIATE_FLAG_USE_NODE_PRIORITY" => "5.6.0",
+    "CUDA_GRAPH_INSTANTIATE_FLAG_UPLOAD" => "5.6.0",
+    "CUDA_GRAPH_INSTANTIATE_FLAG_DEVICE_LAUNCH" => "5.6.0"
 );
 
 $print_stats = 1 if $examine;
@@ -1004,6 +1012,14 @@ sub experimentalSubstitutions {
     subst("cuArrayGetDescriptor", "hipArrayGetDescriptor", "memory");
     subst("cuArrayGetDescriptor_v2", "hipArrayGetDescriptor", "memory");
     subst("cudaArrayGetInfo", "hipArrayGetInfo", "memory");
+    subst("CUDA_GRAPH_INSTANTIATE_FLAG_DEVICE_LAUNCH", "hipGraphInstantiateFlagDeviceLaunch", "numeric_literal");
+    subst("CUDA_GRAPH_INSTANTIATE_FLAG_UPLOAD", "hipGraphInstantiateFlagUpload", "numeric_literal");
+    subst("CUDA_GRAPH_INSTANTIATE_FLAG_USE_NODE_PRIORITY", "hipGraphInstantiateFlagUseNodePriority", "numeric_literal");
+    subst("cudaGraphInstantiateFlagDeviceLaunch", "hipGraphInstantiateFlagDeviceLaunch", "numeric_literal");
+    subst("cudaGraphInstantiateFlagUpload", "hipGraphInstantiateFlagUpload", "numeric_literal");
+    subst("cudaGraphInstantiateFlagUseNodePriority", "hipGraphInstantiateFlagUseNodePriority", "numeric_literal");
+    subst("CU_MEMHOSTREGISTER_READ_ONLY", "hipHostRegisterReadOnly", "define");
+    subst("cudaHostRegisterReadOnly", "hipHostRegisterReadOnly", "define");
 }
 
 sub rocSubstitutions {
@@ -6396,7 +6412,6 @@ sub warnUnsupportedFunctions {
         "cudaKernelNodeAttributeClusterDimension",
         "cudaInitDeviceFlagsAreValid",
         "cudaInitDevice",
-        "cudaHostRegisterReadOnly",
         "cudaGraphicsVDPAURegisterVideoSurface",
         "cudaGraphicsVDPAURegisterOutputSurface",
         "cudaGraphicsResourceSetMapFlags",
@@ -6425,9 +6440,6 @@ sub warnUnsupportedFunctions {
         "cudaGraphInstantiateNodeOperationNotSupported",
         "cudaGraphInstantiateMultipleDevicesNotSupported",
         "cudaGraphInstantiateInvalidStructure",
-        "cudaGraphInstantiateFlagUseNodePriority",
-        "cudaGraphInstantiateFlagUpload",
-        "cudaGraphInstantiateFlagDeviceLaunch",
         "cudaGraphInstantiateError",
         "cudaGraphExternalSemaphoresWaitNodeSetParams",
         "cudaGraphExternalSemaphoresWaitNodeGetParams",
@@ -7293,7 +7305,6 @@ sub warnUnsupportedFunctions {
         "CU_MEM_HANDLE_TYPE_MAX",
         "CU_MEM_CREATE_USAGE_TILE_POOL",
         "CU_MEM_ACCESS_FLAGS_PROT_MAX",
-        "CU_MEMHOSTREGISTER_READ_ONLY",
         "CU_LIMIT_PERSISTING_L2_CACHE_SIZE",
         "CU_LIMIT_MAX_L2_FETCH_GRANULARITY",
         "CU_LIMIT_MAX",
@@ -8267,9 +8278,6 @@ sub warnUnsupportedFunctions {
         "CUDA_GRAPH_INSTANTIATE_NODE_OPERATION_NOT_SUPPORTED",
         "CUDA_GRAPH_INSTANTIATE_MULTIPLE_CTXS_NOT_SUPPORTED",
         "CUDA_GRAPH_INSTANTIATE_INVALID_STRUCTURE",
-        "CUDA_GRAPH_INSTANTIATE_FLAG_USE_NODE_PRIORITY",
-        "CUDA_GRAPH_INSTANTIATE_FLAG_UPLOAD",
-        "CUDA_GRAPH_INSTANTIATE_FLAG_DEVICE_LAUNCH",
         "CUDA_GRAPH_INSTANTIATE_ERROR",
         "CUDA_EXT_SEM_WAIT_NODE_PARAMS_v1",
         "CUDA_EXT_SEM_WAIT_NODE_PARAMS_st",
