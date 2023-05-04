@@ -98,7 +98,7 @@ jupyter-core==5.1.2
     #   nbformat
 linkify-it-py==1.0.3
     # via myst-parser
-markdown-it-py==2.1.0
+markdown-it-py==2.2.0
     # via
     #   mdit-py-plugins
     #   myst-parser
