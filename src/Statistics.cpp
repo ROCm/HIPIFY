@@ -395,10 +395,16 @@ bool Statistics::isHipDeprecated(const hipCounter &counter) {
          DEPRECATED == (counter.supportDegree & DEPRECATED);
 }
 
+bool Statistics::isRocDeprecated(const hipCounter &counter) {
+  return ROC_DEPRECATED == (counter.supportDegree & ROC_DEPRECATED) ||
+         DEPRECATED == (counter.supportDegree & DEPRECATED);
+}
+
 bool Statistics::isDeprecated(const hipCounter &counter) {
   return DEPRECATED == (counter.supportDegree & DEPRECATED) || (
          CUDA_DEPRECATED == (counter.supportDegree & CUDA_DEPRECATED) &&
-         HIP_DEPRECATED == (counter.supportDegree & HIP_DEPRECATED));
+         HIP_DEPRECATED == (counter.supportDegree & HIP_DEPRECATED) &&
+         ROC_DEPRECATED == (counter.supportDegree & ROC_DEPRECATED));
 }
 
 bool Statistics::isCudaRemoved(const hipCounter &counter) {
@@ -411,10 +417,16 @@ bool Statistics::isHipRemoved(const hipCounter &counter) {
          REMOVED == (counter.supportDegree & REMOVED);
 }
 
+bool Statistics::isRocRemoved(const hipCounter &counter) {
+  return ROC_REMOVED == (counter.supportDegree & ROC_REMOVED) ||
+         REMOVED == (counter.supportDegree & REMOVED);
+}
+
 bool Statistics::isRemoved(const hipCounter &counter) {
   return REMOVED == (counter.supportDegree & REMOVED) || (
          CUDA_REMOVED == (counter.supportDegree & CUDA_REMOVED) &&
-         HIP_REMOVED == (counter.supportDegree & HIP_REMOVED));
+         HIP_REMOVED == (counter.supportDegree & HIP_REMOVED) &&
+         ROC_REMOVED == (counter.supportDegree & ROC_REMOVED));
 }
 
 bool Statistics::isHipSupportedV2Only(const hipCounter& counter) {

@@ -74,7 +74,7 @@ importlib-metadata==6.0.0
     #   myst-nb
 ipykernel==6.19.4
     # via myst-nb
-ipython==8.7.0
+ipython==8.10.0
     # via
     #   ipykernel
     #   myst-nb
@@ -98,7 +98,7 @@ jupyter-core==5.1.2
     #   nbformat
 linkify-it-py==1.0.3
     # via myst-parser
-markdown-it-py==2.1.0
+markdown-it-py==2.2.0
     # via
     #   mdit-py-plugins
     #   myst-parser
