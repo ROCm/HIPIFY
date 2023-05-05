@@ -447,7 +447,7 @@ void HipifyAction::FindAndReplace(StringRef name,
   Statistics::current().incrementCounter(found->second, name.str());
   clang::DiagnosticsEngine &DE = getCompilerInstance().getDiagnostics();
   // Warn about the deprecated identifier in CUDA but hipify it.
-  if (Statistics::isDeprecated(found->second)) {
+  if (Statistics::isCudaDeprecated(found->second)) {
     const auto ID = DE.getCustomDiagID(clang::DiagnosticsEngine::Warning, "'%0' is deprecated in CUDA.");
     DE.Report(sl, ID) << found->first;
   }
