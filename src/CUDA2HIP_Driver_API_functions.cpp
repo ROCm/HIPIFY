@@ -443,7 +443,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   // NOTE: Not equal to cudaPointerGetAttributes due to different signatures
   {"cuPointerGetAttributes",                               {"hipDrvPointerGetAttributes",                              "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED}},
   // no analogue
-  {"cuPointerSetAttribute",                                {"hipPointerSetAttribute",                                  "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED, HIP_EXPERIMENTAL}},
+  {"cuPointerSetAttribute",                                {"hipPointerSetAttribute",                                  "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED}},
 
   // 18. Stream Management
   // cudaStreamAddCallback
@@ -573,10 +573,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuFuncSetSharedMemConfig",                             {"hipFuncSetSharedMemConfig_",                              "", CONV_EXECUTION, API_DRIVER, SEC::EXECUTION, HIP_UNSUPPORTED}},
   // no analogue
   // NOTE: Not equal to cudaLaunchCooperativeKernel due to different signatures
-  {"cuLaunchCooperativeKernel",                            {"hipModuleLaunchCooperativeKernel",                        "", CONV_EXECUTION, API_DRIVER, SEC::EXECUTION, HIP_EXPERIMENTAL}},
+  {"cuLaunchCooperativeKernel",                            {"hipModuleLaunchCooperativeKernel",                        "", CONV_EXECUTION, API_DRIVER, SEC::EXECUTION}},
   // no analogue
   // NOTE: Not equal to cudaLaunchCooperativeKernelMultiDevice due to different signatures
-  {"cuLaunchCooperativeKernelMultiDevice",                 {"hipModuleLaunchCooperativeKernelMultiDevice",             "", CONV_EXECUTION, API_DRIVER, SEC::EXECUTION, HIP_EXPERIMENTAL | CUDA_DEPRECATED}},
+  {"cuLaunchCooperativeKernelMultiDevice",                 {"hipModuleLaunchCooperativeKernelMultiDevice",             "", CONV_EXECUTION, API_DRIVER, SEC::EXECUTION, CUDA_DEPRECATED}},
   // cudaLaunchHostFunc
   {"cuLaunchHostFunc",                                     {"hipLaunchHostFunc",                                       "", CONV_EXECUTION, API_DRIVER, SEC::EXECUTION}},
   // no analogue
@@ -637,7 +637,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   // cudaGraphCreate
   {"cuGraphCreate",                                        {"hipGraphCreate",                                          "", CONV_GRAPH, API_DRIVER, SEC::GRAPH}},
   // cudaGraphDebugDotPrint
-  {"cuGraphDebugDotPrint",                                 {"hipGraphDebugDotPrint",                                   "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_EXPERIMENTAL}},
+  {"cuGraphDebugDotPrint",                                 {"hipGraphDebugDotPrint",                                   "", CONV_GRAPH, API_DRIVER, SEC::GRAPH}},
   // cudaGraphDestroy
   {"cuGraphDestroy",                                       {"hipGraphDestroy",                                         "", CONV_GRAPH, API_DRIVER, SEC::GRAPH}},
   // cudaGraphDestroyNode
@@ -658,7 +658,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuGraphInstantiate",                                   {"hipGraphInstantiate",                                     "", CONV_GRAPH, API_DRIVER, SEC::GRAPH}},
   {"cuGraphInstantiate_v2",                                {"hipGraphInstantiate",                                     "", CONV_GRAPH, API_DRIVER, SEC::GRAPH}},
   // cudaGraphKernelNodeCopyAttributes
-  {"cuGraphKernelNodeCopyAttributes",                      {"hipGraphKernelNodeCopyAttributes",                        "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_EXPERIMENTAL}},
+  {"cuGraphKernelNodeCopyAttributes",                      {"hipGraphKernelNodeCopyAttributes",                        "", CONV_GRAPH, API_DRIVER, SEC::GRAPH}},
   // cudaGraphKernelNodeGetAttribute
   {"cuGraphKernelNodeGetAttribute",                        {"hipGraphKernelNodeGetAttribute",                          "", CONV_GRAPH, API_DRIVER, SEC::GRAPH}},
   // cudaGraphExecKernelNodeSetParams
@@ -686,11 +686,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   // cudaGraphNodeGetDependentNodes
   {"cuGraphNodeGetDependentNodes",                         {"hipGraphNodeGetDependentNodes",                           "", CONV_GRAPH, API_DRIVER, SEC::GRAPH}},
   // cudaGraphNodeGetEnabled
-  {"cuGraphNodeGetEnabled",                                {"hipGraphNodeGetEnabled",                                  "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_EXPERIMENTAL}},
+  {"cuGraphNodeGetEnabled",                                {"hipGraphNodeGetEnabled",                                  "", CONV_GRAPH, API_DRIVER, SEC::GRAPH}},
   // cudaGraphNodeGetType
   {"cuGraphNodeGetType",                                   {"hipGraphNodeGetType",                                     "", CONV_GRAPH, API_DRIVER, SEC::GRAPH}},
   // cudaGraphNodeSetEnabled
-  {"cuGraphNodeSetEnabled",                                {"hipGraphNodeSetEnabled",                                  "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_EXPERIMENTAL}},
+  {"cuGraphNodeSetEnabled",                                {"hipGraphNodeSetEnabled",                                  "", CONV_GRAPH, API_DRIVER, SEC::GRAPH}},
   // cudaGraphRemoveDependencies
   {"cuGraphRemoveDependencies",                            {"hipGraphRemoveDependencies",                              "", CONV_GRAPH, API_DRIVER, SEC::GRAPH}},
   // no analogue
@@ -755,13 +755,13 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   // cudaGraphReleaseUserObject
   {"cuGraphReleaseUserObject",                             {"hipGraphReleaseUserObject",                               "", CONV_GRAPH, API_DRIVER, SEC::GRAPH}},
   // cudaGraphAddMemAllocNode
-  {"cuGraphAddMemAllocNode",                               {"hipGraphAddMemAllocNode",                                 "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_EXPERIMENTAL}},
+  {"cuGraphAddMemAllocNode",                               {"hipGraphAddMemAllocNode",                                 "", CONV_GRAPH, API_DRIVER, SEC::GRAPH}},
   // cudaGraphMemAllocNodeGetParams
-  {"cuGraphMemAllocNodeGetParams",                         {"hipGraphMemAllocNodeGetParams",                           "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_EXPERIMENTAL}},
+  {"cuGraphMemAllocNodeGetParams",                         {"hipGraphMemAllocNodeGetParams",                           "", CONV_GRAPH, API_DRIVER, SEC::GRAPH}},
   // cudaGraphAddMemFreeNode
-  {"cuGraphAddMemFreeNode",                                {"hipGraphAddMemFreeNode",                                  "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_EXPERIMENTAL}},
+  {"cuGraphAddMemFreeNode",                                {"hipGraphAddMemFreeNode",                                  "", CONV_GRAPH, API_DRIVER, SEC::GRAPH}},
   // cudaGraphMemFreeNodeGetParams
-  {"cuGraphMemFreeNodeGetParams",                          {"hipGraphMemFreeNodeGetParams",                            "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_EXPERIMENTAL}},
+  {"cuGraphMemFreeNodeGetParams",                          {"hipGraphMemFreeNodeGetParams",                            "", CONV_GRAPH, API_DRIVER, SEC::GRAPH}},
   // cudaDeviceGraphMemTrim
   {"cuDeviceGraphMemTrim",                                 {"hipDeviceGraphMemTrim",                                   "", CONV_GRAPH, API_DRIVER, SEC::GRAPH}},
   // cudaDeviceGetGraphMemAttribute
@@ -1519,17 +1519,17 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_FUNCTION_VER_MAP {
   {"hiprtcLinkDestroy",                                    {HIP_5030, HIP_0,    HIP_0   }},
   {"hipDrvGetErrorName",                                   {HIP_5040, HIP_0,    HIP_0   }},
   {"hipDrvGetErrorString",                                 {HIP_5040, HIP_0,    HIP_0   }},
-  {"hipPointerSetAttribute",                               {HIP_5050, HIP_0,    HIP_0,  HIP_5050}},
-  {"hipModuleLaunchCooperativeKernel",                     {HIP_5050, HIP_0,    HIP_0,  HIP_5050}},
-  {"hipModuleLaunchCooperativeKernelMultiDevice",          {HIP_5050, HIP_0,    HIP_0,  HIP_5050}},
-  {"hipGraphAddMemAllocNode",                              {HIP_5050, HIP_0,    HIP_0,  HIP_5050}},
-  {"hipGraphMemAllocNodeGetParams",                        {HIP_5050, HIP_0,    HIP_0,  HIP_5050}},
-  {"hipGraphAddMemFreeNode",                               {HIP_5050, HIP_0,    HIP_0,  HIP_5050}},
-  {"hipGraphMemFreeNodeGetParams",                         {HIP_5050, HIP_0,    HIP_0,  HIP_5050}},
-  {"hipGraphDebugDotPrint",                                {HIP_5050, HIP_0,    HIP_0,  HIP_5050}},
-  {"hipGraphKernelNodeCopyAttributes",                     {HIP_5050, HIP_0,    HIP_0,  HIP_5050}},
-  {"hipGraphNodeSetEnabled",                               {HIP_5050, HIP_0,    HIP_0,  HIP_5050}},
-  {"hipGraphNodeGetEnabled",                               {HIP_5050, HIP_0,    HIP_0,  HIP_5050}},
+  {"hipPointerSetAttribute",                               {HIP_5050, HIP_0,    HIP_0   }},
+  {"hipModuleLaunchCooperativeKernel",                     {HIP_5050, HIP_0,    HIP_0   }},
+  {"hipModuleLaunchCooperativeKernelMultiDevice",          {HIP_5050, HIP_0,    HIP_0   }},
+  {"hipGraphAddMemAllocNode",                              {HIP_5050, HIP_0,    HIP_0   }},
+  {"hipGraphMemAllocNodeGetParams",                        {HIP_5050, HIP_0,    HIP_0   }},
+  {"hipGraphAddMemFreeNode",                               {HIP_5050, HIP_0,    HIP_0   }},
+  {"hipGraphMemFreeNodeGetParams",                         {HIP_5050, HIP_0,    HIP_0   }},
+  {"hipGraphDebugDotPrint",                                {HIP_5050, HIP_0,    HIP_0   }},
+  {"hipGraphKernelNodeCopyAttributes",                     {HIP_5050, HIP_0,    HIP_0   }},
+  {"hipGraphNodeSetEnabled",                               {HIP_5050, HIP_0,    HIP_0   }},
+  {"hipGraphNodeGetEnabled",                               {HIP_5050, HIP_0,    HIP_0   }},
   {"hipArrayGetDescriptor",                                {HIP_5060, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipArray3DGetDescriptor",                              {HIP_5060, HIP_0,    HIP_0,  HIP_LATEST}},
 };

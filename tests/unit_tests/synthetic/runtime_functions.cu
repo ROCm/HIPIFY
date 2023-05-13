@@ -773,6 +773,13 @@ int main() {
   result = cudaGraphNodeGetEnabled(GraphExec_t, graphNode, &flags);
 #endif
 
+#if CUDA_VERSION >= 12000
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphInstantiate(cudaGraphExec_t *pGraphExec, cudaGraph_t graph, unsigned long long flags __dv(0));
+  // HIP: hipError_t hipGraphInstantiateWithFlags(hipGraphExec_t* pGraphExec, hipGraph_t graph, unsigned long long flags);
+  // CHECK: result = hipGraphInstantiateWithFlags(&GraphExec_t, Graph_t, ull);
+  result = cudaGraphInstantiate(&GraphExec_t, Graph_t, ull);
+#endif
+
 #if CUDA_VERSION < 12000
   // CUDA: extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaBindTexture(size_t *offset, const struct textureReference *texref, const void *devPtr, const struct cudaChannelFormatDesc *desc, size_t size __dv(UINT_MAX));
   // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipBindTexture(size_t* offset, const textureReference* tex, const void* devPtr, const hipChannelFormatDesc* desc, size_t size __dparm(UINT_MAX));
@@ -1048,6 +1055,11 @@ int main() {
   // HIP: hipError_t hipEventCreate(hipEvent_t* event);
   // CHECK: result = hipEventCreate(&Event_t);
   result = cudaEventCreate(&Event_t);
+
+  // CUDA: static __inline__ __host__ cudaError_t cudaEventCreate(cudaEvent_t* event, unsigned int flags);
+  // HIP: hipError_t hipEventCreateWithFlags(hipEvent_t* event, unsigned flags);
+  // CHECK: result = hipEventCreateWithFlags(&Event_t, flags);
+  result = cudaEventCreate(&Event_t, flags);
 
   // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaEventCreateWithFlags(cudaEvent_t *event, unsigned int flags);
   // HIP: hipError_t hipEventCreateWithFlags(hipEvent_t* event, unsigned flags);

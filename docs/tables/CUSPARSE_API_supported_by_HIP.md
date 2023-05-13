@@ -27,10 +27,12 @@
 |`CUSPARSE_FILL_MODE_LOWER`| | | |`HIPSPARSE_FILL_MODE_LOWER`|1.9.2| | | |
 |`CUSPARSE_FILL_MODE_UPPER`| | | |`HIPSPARSE_FILL_MODE_UPPER`|1.9.2| | | |
 |`CUSPARSE_FORMAT_BLOCKED_ELL`|11.2| | |`HIPSPARSE_FORMAT_BLOCKED_ELL`|4.5.0| | | |
+|`CUSPARSE_FORMAT_BSR`|12.1| | | | | | | |
 |`CUSPARSE_FORMAT_COO`|10.1| | |`HIPSPARSE_FORMAT_COO`|4.1.0| | | |
 |`CUSPARSE_FORMAT_COO_AOS`|10.2| |12.0|`HIPSPARSE_FORMAT_COO_AOS`|4.1.0| | | |
 |`CUSPARSE_FORMAT_CSC`|10.1| | |`HIPSPARSE_FORMAT_CSC`|4.1.0| | | |
 |`CUSPARSE_FORMAT_CSR`|10.1| | |`HIPSPARSE_FORMAT_CSR`|4.1.0| | | |
+|`CUSPARSE_FORMAT_SLICED_ELLPACK`|12.1| | | | | | | |
 |`CUSPARSE_HYB_PARTITION_AUTO`| |10.2|11.0|`HIPSPARSE_HYB_PARTITION_AUTO`|1.9.2| | | |
 |`CUSPARSE_HYB_PARTITION_MAX`| |10.2|11.0|`HIPSPARSE_HYB_PARTITION_MAX`|1.9.2| | | |
 |`CUSPARSE_HYB_PARTITION_USER`| |10.2|11.0|`HIPSPARSE_HYB_PARTITION_USER`|1.9.2| | | |
@@ -86,8 +88,11 @@
 |`CUSPARSE_SPMV_COO_ALG2`|11.2| | |`HIPSPARSE_SPMV_COO_ALG2`|4.5.0| | | |
 |`CUSPARSE_SPMV_CSR_ALG1`|11.2| | |`HIPSPARSE_SPMV_CSR_ALG1`|4.5.0| | | |
 |`CUSPARSE_SPMV_CSR_ALG2`|11.2| | |`HIPSPARSE_SPMV_CSR_ALG2`|4.5.0| | | |
+|`CUSPARSE_SPMV_SELL_ALG1`|12.1| | | | | | | |
 |`CUSPARSE_SPSM_ALG_DEFAULT`|11.3| | |`HIPSPARSE_SPSM_ALG_DEFAULT`|4.5.0| | | |
 |`CUSPARSE_SPSV_ALG_DEFAULT`|11.3| | |`HIPSPARSE_SPSV_ALG_DEFAULT`|4.5.0| | | |
+|`CUSPARSE_SPSV_UPDATE_DIAGONAL`|12.1| | | | | | | |
+|`CUSPARSE_SPSV_UPDATE_GENERAL`|12.1| | | | | | | |
 |`CUSPARSE_STATUS_ALLOC_FAILED`| | | |`HIPSPARSE_STATUS_ALLOC_FAILED`|1.9.2| | | |
 |`CUSPARSE_STATUS_ARCH_MISMATCH`| | | |`HIPSPARSE_STATUS_ARCH_MISMATCH`|1.9.2| | | |
 |`CUSPARSE_STATUS_EXECUTION_FAILED`| | | |`HIPSPARSE_STATUS_EXECUTION_FAILED`|1.9.2| | | |
@@ -177,6 +182,7 @@
 |`cusparseSpSVAlg_t`|11.3| | |`hipsparseSpSVAlg_t`|4.5.0| | | |
 |`cusparseSpSVDescr`|11.3| | |`hipsparseSpSVDescr`|4.5.0| | | |
 |`cusparseSpSVDescr_t`|11.3| | |`hipsparseSpSVDescr_t`|4.5.0| | | |
+|`cusparseSpSVUpdate_t`|12.1| | | | | | | |
 |`cusparseSpVecDescr`|10.2| | | | | | | |
 |`cusparseSpVecDescr_t`|10.2| | |`hipsparseSpVecDescr_t`|4.1.0| | | |
 |`cusparseSparseToDenseAlg_t`|11.1| | |`hipsparseSparseToDenseAlg_t`|4.2.0| | | |
@@ -791,6 +797,7 @@
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
 |`cusparseAxpby`|11.0| | |`hipsparseAxpby`|4.1.0| | | |
 |`cusparseBlockedEllGet`|11.2| | |`hipsparseBlockedEllGet`|4.5.0| | | |
+|`cusparseBsrSetStridedBatch`|12.1| | | | | | | |
 |`cusparseConstBlockedEllGet`|12.0| | | | | | | |
 |`cusparseConstCooGet`|12.0| | | | | | | |
 |`cusparseConstCscGet`|12.0| | | | | | | |
@@ -809,12 +816,15 @@
 |`cusparseCooSetPointers`|11.1| | |`hipsparseCooSetPointers`|4.2.0| | | |
 |`cusparseCooSetStridedBatch`|11.0| | |`hipsparseCooSetStridedBatch`|5.2.0| | | |
 |`cusparseCreateBlockedEll`|11.2| | |`hipsparseCreateBlockedEll`|4.5.0| | | |
+|`cusparseCreateBsr`|12.1| | | | | | | |
 |`cusparseCreateConstBlockedEll`|12.0| | | | | | | |
+|`cusparseCreateConstBsr`|12.1| | | | | | | |
 |`cusparseCreateConstCoo`|12.0| | | | | | | |
 |`cusparseCreateConstCsc`|12.0| | | | | | | |
 |`cusparseCreateConstCsr`|12.0| | | | | | | |
 |`cusparseCreateConstDnMat`|12.0| | | | | | | |
 |`cusparseCreateConstDnVec`|12.0| | | | | | | |
+|`cusparseCreateConstSlicedEll`|12.1| | | | | | | |
 |`cusparseCreateConstSpVec`|12.0| | | | | | | |
 |`cusparseCreateCoo`|10.1| | |`hipsparseCreateCoo`|4.1.0| | | |
 |`cusparseCreateCooAoS`|10.2|11.2|12.0|`hipsparseCreateCooAoS`|4.1.0| | | |
@@ -822,6 +832,7 @@
 |`cusparseCreateCsr`|10.2| | |`hipsparseCreateCsr`|4.1.0| | | |
 |`cusparseCreateDnMat`|10.1| | |`hipsparseCreateDnMat`|4.2.0| | | |
 |`cusparseCreateDnVec`|10.2| | |`hipsparseCreateDnVec`|4.1.0| | | |
+|`cusparseCreateSlicedEll`|12.1| | | | | | | |
 |`cusparseCreateSpVec`|10.2| | |`hipsparseCreateSpVec`|4.1.0| | | |
 |`cusparseCscGet`|11.7| | | | | | | |
 |`cusparseCscSetPointers`|11.1| | |`hipsparseCscSetPointers`|4.2.0| | | |
@@ -889,6 +900,7 @@
 |`cusparseSpSV_createDescr`|11.3| | |`hipsparseSpSV_createDescr`|4.5.0| | | |
 |`cusparseSpSV_destroyDescr`|11.3| | |`hipsparseSpSV_destroyDescr`|4.5.0| | | |
 |`cusparseSpSV_solve`|11.3| | |`hipsparseSpSV_solve`|4.5.0| | | |
+|`cusparseSpSV_updateMatrix`|12.1| | | | | | | |
 |`cusparseSpVV`|10.2| | |`hipsparseSpVV`|4.1.0| | | |
 |`cusparseSpVV_bufferSize`|10.2| | |`hipsparseSpVV_bufferSize`|4.1.0| | | |
 |`cusparseSpVecGet`|10.2| | |`hipsparseSpVecGet`|4.1.0| | | |

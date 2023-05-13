@@ -77,9 +77,18 @@ const std::string sCudnnGetPoolingNdDescriptor = "cudnnGetPoolingNdDescriptor";
 const std::string sCudnnSetLRNDescriptor = "cudnnSetLRNDescriptor";
 const std::string sCudnnGetRNNDescriptor_v6 = "cudnnGetRNNDescriptor_v6";
 const std::string sCudnnSetRNNDescriptor_v6 = "cudnnSetRNNDescriptor_v6";
+const std::string sCudnnSoftmaxForward = "cudnnSoftmaxForward";
+const std::string sCudnnSoftmaxBackward = "cudnnSoftmaxBackward";
+const std::string sCudnnConvolutionForward = "cudnnConvolutionForward";
+const std::string sCudnnConvolutionBackwardData = "cudnnConvolutionBackwardData";
+const std::string sCudnnRNNBackwardWeights = "cudnnRNNBackwardWeights";
+// CUDA_OVERLOADED
+const std::string sCudaEventCreate = "cudaEventCreate";
+const std::string sCudaGraphInstantiate = "cudaGraphInstantiate";
 // Matchers' names
 const StringRef sCudaLaunchKernel = "cudaLaunchKernel";
 const StringRef sCudaHostFuncCall = "cudaHostFuncCall";
+const StringRef sCudaOverloadedHostFuncCall = "cudaOverloadedHostFuncCall";
 const StringRef sCudaDeviceFuncCall = "cudaDeviceFuncCall";
 const StringRef sCubNamespacePrefix = "cubNamespacePrefix";
 const StringRef sCubFunctionTemplateDecl = "cubFunctionTemplateDecl";
@@ -94,9 +103,29 @@ std::string getCastType(hipify::CastTypes c) {
     case e_int64_t: return s_int64_t;
     case e_remove_argument: return "";
     case e_add_const_argument: return "";
+    case e_move_argument: return "";
     default: return "";
   }
 }
+
+std::map<std::string, hipify::FuncOverloadsStruct> FuncOverloads {
+  {sCudaEventCreate,
+    {
+      {
+        {1, {{"hipEventCreate", "", CONV_EVENT, API_RUNTIME, runtime::CUDA_RUNTIME_API_SECTIONS::EVENT}, ot_arguments_number, ow_None}},
+        {2, {{"hipEventCreateWithFlags", "", CONV_EVENT, API_RUNTIME, runtime::CUDA_RUNTIME_API_SECTIONS::EVENT}, ot_arguments_number, ow_None}},
+      }
+    }
+  },
+  {sCudaGraphInstantiate,
+    {
+      {
+        {5, {{"hipGraphInstantiate", "", CONV_GRAPH, API_RUNTIME, runtime::CUDA_RUNTIME_API_SECTIONS::GRAPH}, ot_arguments_number, ow_None}},
+        {3, {{"hipGraphInstantiateWithFlags", "", CONV_GRAPH, API_RUNTIME, runtime::CUDA_RUNTIME_API_SECTIONS::GRAPH}, ot_arguments_number, ow_None}},
+      }
+    }
+  },
+};
 
 std::map<std::string, ArgCastStruct> FuncArgCasts {
   {sCudaMemcpyToSymbol,
@@ -207,6 +236,8 @@ std::map<std::string, ArgCastStruct> FuncArgCasts {
   {sCudnnGetConvolutionForwardWorkspaceSize,
     {
       {
+        {1, {e_move_argument, cw_None, "", 2}},
+        {2, {e_move_argument, cw_None, "", 1}},
         {5, {e_remove_argument, cw_None}}
       },
       true,
@@ -216,6 +247,8 @@ std::map<std::string, ArgCastStruct> FuncArgCasts {
   {sCudnnGetConvolutionBackwardDataWorkspaceSize,
     {
       {
+        {1, {e_move_argument, cw_None, "", 2}},
+        {2, {e_move_argument, cw_None, "", 1}},
         {5, {e_remove_argument, cw_None}}
       },
       true,
@@ -294,6 +327,54 @@ std::map<std::string, ArgCastStruct> FuncArgCasts {
       true
     }
   },
+  {sCudnnSoftmaxForward,
+    {
+      {
+        {1, {e_move_argument, cw_None, "", 9, 2}},
+      },
+      true,
+      true
+    }
+  },
+  {sCudnnSoftmaxBackward,
+    {
+      {
+        {1, {e_move_argument, cw_None, "", 11, 2}},
+      },
+      true,
+      true
+    }
+  },
+  {sCudnnConvolutionForward,
+    {
+      {
+        {8, {e_move_argument, cw_None, "", 13, 2}},
+      },
+      true,
+      true
+    }
+  },
+  {sCudnnConvolutionBackwardData,
+    {
+      {
+        {2, {e_move_argument, cw_None, "", 4, 2}},
+        {4, {e_move_argument, cw_None, "", 2, 2}},
+        {8, {e_move_argument, cw_None, "", 13, 2}},
+      },
+      true,
+      true
+    }
+  },
+  {sCudnnRNNBackwardWeights,
+    {
+      {
+        {9, {e_move_argument, cw_None, "", 11, 2}},
+        {11, {e_move_argument, cw_None, "", 9, 2}},
+      },
+      true,
+      true
+    }
+  },
 };
 
 void HipifyAction::RewriteString(StringRef s, clang::SourceLocation start) {
@@ -366,7 +447,7 @@ void HipifyAction::FindAndReplace(StringRef name,
   Statistics::current().incrementCounter(found->second, name.str());
   clang::DiagnosticsEngine &DE = getCompilerInstance().getDiagnostics();
   // Warn about the deprecated identifier in CUDA but hipify it.
-  if (Statistics::isDeprecated(found->second)) {
+  if (Statistics::isCudaDeprecated(found->second)) {
     const auto ID = DE.getCustomDiagID(clang::DiagnosticsEngine::Warning, "'%0' is deprecated in CUDA.");
     DE.Report(sl, ID) << found->first;
   }
@@ -760,6 +841,38 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
           length = SM->getCharacterData(e) - SM->getCharacterData(s);
           break;
         }
+        case e_move_argument:
+        {
+          std::string sArg;
+          clang::SmallString<40> dst_XStr;
+          llvm::raw_svector_ostream dst_OS(dst_XStr);
+          if (c.second.numberToMove > 1) {
+            if ((argNum + c.second.numberToMove - 1) >= call->getNumArgs())
+              continue;
+            sr = call->getArg(argNum + c.second.numberToMove - 1)->getSourceRange();
+            sr.setBegin(call->getArg(argNum)->getBeginLoc());
+          }
+          sArg = readSourceText(*SM, sr).str();
+          if (c.second.moveTo < call->getNumArgs())
+            dst_OS << sArg << ", ";
+          else
+            dst_OS << ", " << sArg;
+          clang::SourceLocation dst_s;
+          if (c.second.moveTo < call->getNumArgs())
+            dst_s = call->getArg(c.second.moveTo)->getBeginLoc();
+          else
+            dst_s = call->getEndLoc();
+          ct::Replacement dst_Rep(*SM, dst_s, 0, dst_OS.str());
+          clang::FullSourceLoc dst_fullSL(dst_s, *SM);
+          insertReplacement(dst_Rep, dst_fullSL);
+          OS << "";
+          if (argNum < call->getNumArgs())
+            e = call->getArg(argNum + c.second.numberToMove)->getBeginLoc();
+          else
+            e = call->getEndLoc();
+          length = SM->getCharacterData(e) - SM->getCharacterData(s);
+          break;
+        }
         case e_add_const_argument:
         {
           if (argNum < call->getNumArgs())
@@ -785,6 +898,43 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
         }
         case cw_None:
         default: break;
+      }
+    }
+    return true;
+  }
+  return false;
+}
+
+bool HipifyAction::cudaOverloadedHostFuncCall(const mat::MatchFinder::MatchResult& Result) {
+  if (auto* call = Result.Nodes.getNodeAs<clang::CallExpr>(sCudaOverloadedHostFuncCall)) {
+    if (!call->getNumArgs()) return false;
+    auto* funcDcl = call->getDirectCallee();
+    if (!funcDcl) return false;
+    std::string name = funcDcl->getDeclName().getAsString();
+    const auto found = CUDA_RENAMES_MAP().find(name);
+    if (found == CUDA_RENAMES_MAP().end()) return false;
+    if (!Statistics::isCudaOverloaded(found->second)) return false;
+    auto it = FuncOverloads.find(name);
+    if (it == FuncOverloads.end()) return false;
+    auto FuncOverloadsStruct = it->second;
+    if (FuncOverloadsStruct.isToMIOpen != TranslateToMIOpen || FuncOverloadsStruct.isToRoc != TranslateToRoc) return false;
+    unsigned numArgs = call->getNumArgs();
+    auto itNumArgs = FuncOverloadsStruct.overloadMap.find(numArgs);
+    if (itNumArgs == FuncOverloadsStruct.overloadMap.end()) return false;
+    auto overrideInfo = itNumArgs->second;
+    auto counter = overrideInfo.counter;
+    // check if SUPPORTED
+    auto* SM = Result.SourceManager;
+    clang::SourceLocation s;
+    switch (overrideInfo.overloadType) {
+      case ot_arguments_number:
+      default:
+      {
+        s = call->getBeginLoc();
+        ct::Replacement Rep(*SM, s, name.size(), counter.hipName.str());
+        clang::FullSourceLoc fullSL(s, *SM);
+        insertReplacement(Rep, fullSL);
+        break;
       }
     }
     return true;
@@ -880,11 +1030,30 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
             sCudnnGetPoolingNdDescriptor,
             sCudnnSetLRNDescriptor,
             sCudnnGetRNNDescriptor_v6,
-            sCudnnSetRNNDescriptor_v6
+            sCudnnSetRNNDescriptor_v6,
+            sCudnnSoftmaxForward,
+            sCudnnSoftmaxBackward,
+            sCudnnConvolutionForward,
+            sCudnnConvolutionBackwardData,
+            sCudnnRNNBackwardWeights
           )
         )
       )
     ).bind(sCudaHostFuncCall),
+    this
+  );
+  Finder->addMatcher(
+    mat::callExpr(
+      mat::isExpansionInMainFile(),
+      mat::callee(
+        mat::functionDecl(
+          mat::hasAnyName(
+            sCudaEventCreate,
+            sCudaGraphInstantiate
+          )
+        )
+      )
+    ).bind(sCudaOverloadedHostFuncCall),
     this
   );
   Finder->addMatcher(
@@ -1053,6 +1222,7 @@ void HipifyAction::ExecuteAction() {
 void HipifyAction::run(const mat::MatchFinder::MatchResult &Result) {
   if (cudaLaunchKernel(Result)) return;
   if (cudaHostFuncCall(Result)) return;
+  if (cudaOverloadedHostFuncCall(Result)) return;
   if (cudaDeviceFuncCall(Result)) return;
   if (cubNamespacePrefix(Result)) return;
   if (cubFunctionTemplateDecl(Result)) return;

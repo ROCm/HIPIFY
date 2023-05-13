@@ -187,13 +187,16 @@ enum SupportDegree {
   UNSUPPORTED = 0x4,
   CUDA_DEPRECATED = 0x8,
   HIP_DEPRECATED = 0x10,
-  DEPRECATED = 0x20,
-  CUDA_REMOVED = 0x40,
-  HIP_REMOVED = 0x80,
-  REMOVED = 0x100,
-  HIP_EXPERIMENTAL = 0x200,
-  HIP_SUPPORTED_V2_ONLY = 0x400,
-  ROC_MIOPEN_ONLY = 0x800
+  ROC_DEPRECATED = 0x20,
+  DEPRECATED = 0x40,
+  CUDA_REMOVED = 0x80,
+  HIP_REMOVED = 0x100,
+  ROC_REMOVED = 0x200,
+  REMOVED = 0x400,
+  HIP_EXPERIMENTAL = 0x800,
+  HIP_SUPPORTED_V2_ONLY = 0x1000,
+  ROC_MIOPEN_ONLY = 0x2000,
+  CUDA_OVERLOADED = 0x4000
 };
 
 enum cudaVersions {
@@ -456,18 +459,24 @@ public:
   static bool isCudaDeprecated(const hipCounter& counter);
   // Check whether the counter is HIP_DEPRECATED or not.
   static bool isHipDeprecated(const hipCounter& counter);
+  // Check whether the counter is ROC_DEPRECATED or not.
+  static bool isRocDeprecated(const hipCounter& counter);
   // Check whether the counter is DEPRECATED or not.
   static bool isDeprecated(const hipCounter& counter);
   // Check whether the counter is CUDA_REMOVED or not.
   static bool isCudaRemoved(const hipCounter& counter);
   // Check whether the counter is HIP_REMOVED or not.
   static bool isHipRemoved(const hipCounter& counter);
+  // Check whether the counter is ROC_REMOVED or not.
+  static bool isRocRemoved(const hipCounter& counter);
   // Check whether the counter is REMOVED or not.
   static bool isRemoved(const hipCounter& counter);
   // Check whether the counter is HIP_SUPPORTED_V2_ONLY or not.
   static bool isHipSupportedV2Only(const hipCounter& counter);
   // Check whether the counter is ROC_MIOPEN_ONLY or not.
   static bool isRocMiopenOnly(const hipCounter& counter);
+  // Check whether the counter is CUDA_OVERLOADED or not.
+  static bool isCudaOverloaded(const hipCounter& counter);
   // Get string CUDA version.
   static std::string getCudaVersion(const cudaVersions &ver);
   // Get string HIP version.
