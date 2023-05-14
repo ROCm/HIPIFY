@@ -372,11 +372,13 @@ bool Statistics::isHipExperimental(const hipCounter& counter) {
 }
 
 bool Statistics::isHipUnsupported(const hipCounter &counter) {
-  return HIP_UNSUPPORTED == (counter.supportDegree & HIP_UNSUPPORTED);
+  return HIP_UNSUPPORTED == (counter.supportDegree & HIP_UNSUPPORTED) ||
+    UNSUPPORTED == (counter.supportDegree & UNSUPPORTED);
 }
 
 bool Statistics::isRocUnsupported(const hipCounter &counter) {
-  return ROC_UNSUPPORTED == (counter.supportDegree & ROC_UNSUPPORTED);
+  return ROC_UNSUPPORTED == (counter.supportDegree & ROC_UNSUPPORTED) ||
+    UNSUPPORTED == (counter.supportDegree & UNSUPPORTED);
 }
 
 bool Statistics::isUnsupported(const hipCounter& counter) {

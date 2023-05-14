@@ -64,6 +64,9 @@ namespace doc {
   const string sBLAS = "CUBLAS_API_supported_by_HIP";
   const string sBLAS_md = sBLAS + md_ext;
   const string sBLAS_csv = sBLAS + csv_ext;
+  const string sROCBLAS = "CUBLAS_API_supported_by_ROC";
+  const string sROCBLAS_md = sROCBLAS + md_ext;
+  const string sROCBLAS_csv = sROCBLAS + csv_ext;
   const string sCUBLAS = "CUBLAS";
 
   const string sRAND = "CURAND_API_supported_by_HIP";
@@ -101,7 +104,7 @@ namespace doc {
   const string sCUB_csv = sCUB + csv_ext;
   const string sCUCUB = "CUB";
 
-  const string sAPI_supported = "API supported by HIP";
+  const string sAPI_supported_by = "API supported by ";
   const string sCUDA = "CUDA";
   const string sHIP = "HIP";
   const string sA = "A";
@@ -121,13 +124,20 @@ namespace doc {
     compact = 2,
   };
 
+  enum docRoc {
+    skip = 0,
+    separate = 1,
+    joint = 2,
+  };
+
   class DOC {
     public:
-      DOC(const string &outDir): dir(outDir), types(0), format(0) {}
+      DOC(const string &outDir): dir(outDir), types(0), format(0), hasROC(false), isROC(false) {}
       virtual ~DOC() {}
-      void setTypesAndFormat(unsigned int docTypes, unsigned int docFormat = full) {
+      void setTypesAndFormat(unsigned int docTypes, unsigned int docFormat = full, unsigned int docRoc = skip) {
         types = docTypes;
         format = docFormat;
+        roc = docRoc;
       }
       bool generate() {
         if (init()) return write() & fini();
@@ -146,12 +156,15 @@ namespace doc {
       virtual const versionMap &getTypeVersions() const = 0;
       virtual const hipVersionMap &getHipTypeVersions() const = 0;
       hipVersionMap commonHipVersionMap;
+      bool hasROC;
+      bool isROC;
 
     private:
       string dir;
       error_code EC;
       unsigned int types;
       unsigned int format;
+      unsigned int roc;
       map<docType, string> files;
       map<docType, string> tmpFiles;
       map<docType, unique_ptr<ostream>> streams;
@@ -187,7 +200,7 @@ namespace doc {
         const docType docs[] = {md, csv};
         for (auto doc : docs) {
           if (doc != (types & doc)) continue;
-          *streams[doc].get() << (doc == md ? "# " : "") << getName() << " " << sAPI_supported << endl << endl;
+          *streams[doc].get() << (doc == md ? "# " : "") << getName() << " " << sAPI_supported_by << (isROC ? "ROC" : "HIP") << endl << endl;
           unsigned int compact_only_cur_sec_num = 1;
           for (auto &s : getSections()) {
             const functionMap &ftMap = isTypeSection(s.first, getSections()) ? getTypes() : getFunctions();
@@ -196,8 +209,14 @@ namespace doc {
             functionMap fMap;
             for (auto &f : ftMap) {
               if (f.second.apiSection == s.first) {
-                if (format == full || (format != full && !Statistics::isUnsupported(f.second))) {
-                  fMap.insert(f);
+                if (isROC) {
+                  if (format == full || (format != full && !Statistics::isRocUnsupported(f.second))) {
+                    fMap.insert(f);
+                  }
+                } else {
+                  if (format == full || (format != full && !Statistics::isHipUnsupported(f.second))) {
+                    fMap.insert(f);
+                  }
                 }
               }
             }
@@ -213,14 +232,18 @@ namespace doc {
                   break;
                 }
               }
-              auto hv = hMap.find(f.second.hipName);
-              if (hv != hMap.end() && !Statistics::isUnsupported(f.second)) {
+              auto hv = (isROC) ? hMap.find(f.second.rocName) : hMap.find(f.second.hipName);
+              if (hv != hMap.end() && ((!Statistics::isRocUnsupported(f.second) && isROC) || (!Statistics::isHipUnsupported(f.second) && !isROC))) {
                 ha = Statistics::getHipVersion(hv->second.appeared);
                 hd = Statistics::getHipVersion(hv->second.deprecated);
                 hr = Statistics::getHipVersion(hv->second.removed);
                 he = Statistics::getHipVersion(hv->second.experimental);
               }
-              string sHip = Statistics::isUnsupported(f.second) ? "" : string(f.second.hipName);
+              string sHip;
+              if (isROC)
+                sHip = Statistics::isRocUnsupported(f.second) ? "" : string(f.second.rocName);
+              else
+                sHip = Statistics::isHipUnsupported(f.second) ? "" : string(f.second.hipName);
               if (doc == md) {
                 sHip = sHip.empty() ? " " : "`" + sHip + "`";
               }
@@ -321,10 +344,11 @@ namespace doc {
       vector<DOC*> docs;
       unsigned int types;
       unsigned int format;
+      unsigned int roc;
     public:
-      DOCS(unsigned int docTypes, unsigned int docFormat): types(docTypes), format(docFormat) {}
+      DOCS(unsigned int docTypes, unsigned int docFormat, unsigned docRoc): types(docTypes), format(docFormat), roc(docRoc) {}
       virtual ~DOCS() {}
-      void addDoc(DOC *doc) { docs.push_back(doc); doc->setTypesAndFormat(types, format); }
+      void addDoc(DOC *doc) { docs.push_back(doc); doc->setTypesAndFormat(types, format, roc); }
       bool generate() {
         bool bRet = true;
         for (auto &d : docs) {
@@ -418,7 +442,7 @@ namespace doc {
 
   class BLAS: public DOC {
     public:
-      BLAS(const string &outDir): DOC(outDir) {}
+      BLAS(const string &outDir): DOC(outDir) { hasROC = true; }
       virtual ~BLAS() {}
     protected:
       const sectionMap &getSections() const override { return CUDA_BLAS_API_SECTION_MAP; }
@@ -435,6 +459,21 @@ namespace doc {
           default: return sEmpty;
           case md: return sBLAS_md;
           case csv: return sBLAS_csv;
+        }
+      }
+  };
+
+  class ROCBLAS: public BLAS {
+    public:
+      ROCBLAS(const string &outDir): BLAS(outDir) { hasROC = false; isROC = true; }
+      virtual ~ROCBLAS() {}
+    protected:
+      const string &getFileName(docType format) const override {
+        switch (format) {
+          case none:
+          default: return sEmpty;
+          case md: return sROCBLAS_md;
+          case csv: return sROCBLAS_csv;
         }
       }
   };
@@ -617,10 +656,19 @@ namespace doc {
         return false;
       }
     }
+    unsigned int docRoc = skip;
+    if (!DocRoc.empty()) {
+      if (DocRoc == "separate") docRoc = separate;
+      else if (DocRoc == "joint") docRoc = joint;
+      else if (DocRoc != "skip") {
+        llvm::errs() << "\n" << sHipify << sError << "Unsupported ROC documentation format: '" << DocRoc << "'; supported formats: 'skip', 'separate', 'joint'\n";
+        return false;
+      }
+    }
     unsigned int docTypes = 0;
     if (GenerateMD) docTypes |= md;
     if (GenerateCSV) docTypes |= csv;
-    DOCS docs(docTypes, docFormat);
+    DOCS docs(docTypes, docFormat, docRoc);
     DRIVER driver(sOut);
     docs.addDoc(&driver);
     RUNTIME runtime(sOut);
@@ -629,6 +677,10 @@ namespace doc {
     docs.addDoc(&complex);
     BLAS blas(sOut);
     docs.addDoc(&blas);
+    ROCBLAS rocblas(sOut);
+    if (docRoc == separate) {
+      docs.addDoc(&rocblas);
+    }
     RAND rand(sOut);
     docs.addDoc(&rand);
     DNN dnn(sOut);
