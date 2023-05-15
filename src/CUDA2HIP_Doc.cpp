@@ -61,9 +61,12 @@ namespace doc {
   const string sCOMPLEX_csv = sCOMPLEX + csv_ext;
   const string sCUCOMPLEX = "CUCOMPLEX";
 
+  const string sandROC = "_and_ROC";
   const string sBLAS = "CUBLAS_API_supported_by_HIP";
   const string sBLAS_md = sBLAS + md_ext;
+  const string sBLAS_and_ROC_md = sBLAS + sandROC + md_ext;
   const string sBLAS_csv = sBLAS + csv_ext;
+  const string sBLAS_and_ROC_csv = sBLAS + sandROC + csv_ext;
   const string sROCBLAS = "CUBLAS_API_supported_by_ROC";
   const string sROCBLAS_md = sROCBLAS + md_ext;
   const string sROCBLAS_csv = sROCBLAS + csv_ext;
@@ -107,6 +110,8 @@ namespace doc {
   const string sAPI_supported_by = "API supported by ";
   const string sCUDA = "CUDA";
   const string sHIP = "HIP";
+  const string sROC = "ROC";
+  const string sHIPandROC = "HIP and ROC";
   const string sA = "A";
   const string sD = "D";
   const string sR = "R";
@@ -158,13 +163,13 @@ namespace doc {
       hipVersionMap commonHipVersionMap;
       bool hasROC;
       bool isROC;
+      unsigned int roc;
 
     private:
       string dir;
       error_code EC;
       unsigned int types;
       unsigned int format;
-      unsigned int roc;
       map<docType, string> files;
       map<docType, string> tmpFiles;
       map<docType, unique_ptr<ostream>> streams;
@@ -200,7 +205,7 @@ namespace doc {
         const docType docs[] = {md, csv};
         for (auto doc : docs) {
           if (doc != (types & doc)) continue;
-          *streams[doc].get() << (doc == md ? "# " : "") << getName() << " " << sAPI_supported_by << (isROC ? "ROC" : "HIP") << endl << endl;
+          *streams[doc].get() << (doc == md ? "# " : "") << getName() << " " << sAPI_supported_by << (isROC ? sROC : (roc == joint && hasROC ? sHIPandROC : sHIP)) << endl << endl;
           unsigned int compact_only_cur_sec_num = 1;
           for (auto &s : getSections()) {
             const functionMap &ftMap = isTypeSection(s.first, getSections()) ? getTypes() : getFunctions();
@@ -223,7 +228,7 @@ namespace doc {
             string sS = (doc == md) ? "|" : ",";
             stringstream rows;
             for (auto &f : fMap) {
-              string a, d, r, ha, hd, hr, he;
+              string a, d, r, ha, hd, hr, he, ra, rd, rr, re;
               for (auto &v : vMap) {
                 if (v.first == f.first) {
                   a = Statistics::getCudaVersion(v.second.appeared);
@@ -239,13 +244,27 @@ namespace doc {
                 hr = Statistics::getHipVersion(hv->second.removed);
                 he = Statistics::getHipVersion(hv->second.experimental);
               }
-              string sHip;
+              if (roc == joint && hasROC) {
+                auto rv = hMap.find(f.second.rocName);
+                if (rv != hMap.end() && !Statistics::isRocUnsupported(f.second)) {
+                  ra = Statistics::getHipVersion(rv->second.appeared);
+                  rd = Statistics::getHipVersion(rv->second.deprecated);
+                  rr = Statistics::getHipVersion(rv->second.removed);
+                  re = Statistics::getHipVersion(rv->second.experimental);
+                }
+              }
+              string sHip, sRoc;
               if (isROC)
                 sHip = Statistics::isRocUnsupported(f.second) ? "" : string(f.second.rocName);
-              else
+              else {
                 sHip = Statistics::isHipUnsupported(f.second) ? "" : string(f.second.hipName);
+                if (roc == joint && hasROC)
+                  sRoc = Statistics::isRocUnsupported(f.second) ? "" : string(f.second.rocName);
+              }
               if (doc == md) {
                 sHip = sHip.empty() ? " " : "`" + sHip + "`";
+                if (roc == joint && hasROC)
+                  sRoc = sRoc.empty() ? " " : "`" + sRoc + "`";
               }
               rows << (doc == md ? "|`" : "") << string(f.first) << (doc == md ? "`|" : sS);
               switch (doc) {
@@ -253,11 +272,17 @@ namespace doc {
                   switch (format) {
                     case strict:
                     case compact:
-                      rows << (d.empty() ? "" : "+") << sS << sHip << sS << (hd.empty() ? "" : "+") << sS << (he.empty() ? "" : "+") << endl;
+                      rows << (d.empty() ? "" : "+") << sS << sHip << sS << (hd.empty() ? "" : "+") << sS << (he.empty() ? "" : "+");
+                      if (roc == joint && hasROC)
+                        rows << sS << sRoc << sS << (rd.empty() ? "" : "+") << sS << (re.empty() ? "" : "+");
+                      rows << endl;
                       break;
                     case full:
                     default:
-                      rows << a << sS << d << sS << r << sS << sHip << sS << ha << sS << hd << sS << hr << sS << he << endl;
+                      rows << a << sS << d << sS << r << sS << sHip << sS << ha << sS << hd << sS << hr << sS << he;
+                      if (roc == joint && hasROC)
+                        rows << sS << sRoc << sS << ra << sS << rd << sS << rr << sS << re;
+                      rows << endl;
                       break;
                   }
                   break;
@@ -266,12 +291,18 @@ namespace doc {
                   switch (format) {
                     case strict:
                     case compact:
-                      rows << (d.empty() ? " " : "+") << sS << sHip << sS << (hd.empty() ? " " : "+") << sS << (he.empty() ? " " : "+") << sS << endl;
+                      rows << (d.empty() ? " " : "+") << sS << sHip << sS << (hd.empty() ? " " : "+") << sS << (he.empty() ? " " : "+") << sS;
+                      if (roc == joint && hasROC)
+                        rows << sRoc << sS << (rd.empty() ? " " : "+") << sS << (re.empty() ? " " : "+") << sS;
+                      rows << endl;
                       break;
                     case full:
                     default:
                       rows << (a.empty() ? " " : a) << sS << (d.empty() ? " " : d) << sS << (r.empty() ? " " : r) << sS << sHip << sS <<
-                        (ha.empty() ? " " : ha) << sS << (hd.empty() ? " " : hd) << sS << (hr.empty() ? " " : hr) << sS << (he.empty() ? " " : he) << sS << endl;
+                        (ha.empty() ? " " : ha) << sS << (hd.empty() ? " " : hd) << sS << (hr.empty() ? " " : hr) << sS << (he.empty() ? " " : he) << sS;
+                      if (roc == joint && hasROC)
+                        rows << sRoc << sS << (ra.empty() ? " " : ra) << sS << (rd.empty() ? " " : rd) << sS << (rr.empty() ? " " : rr) << sS << (re.empty() ? " " : re) << sS;
+                      rows << endl;
                       break;
                   }
                   break;
@@ -281,11 +312,17 @@ namespace doc {
             stringstream section, section_header;
             section_header << (doc == md ? "## **" : "") << (format != compact ? s.first : compact_only_cur_sec_num) << ". " << string(s.second) << (doc == md ? "**" : "") << endl << endl;
             section << (doc == md ? "|**" : "") << sCUDA << sS << (format == full ? sA : "") << (format == full ? sS : "") <<
-              sD << sS << (format == full ? sR : "") << (format == full ? sS : "") << sHIP << sS << (format == full ? sA : "") << (format == full ? sS : "") <<
-              sD << (format == full ? sS : "") << (format == full ? sR : "") << sS << sE << (doc == md ? "**|" : "") << endl;
+              sD << sS << (format == full ? sR : "") << (format == full ? sS : "") << (isROC ? sROC : sHIP) << sS << (format == full ? sA : "") << (format == full ? sS : "") <<
+              sD << (format == full ? sS : "") << (format == full ? sR : "") << sS << sE;
+            if (roc == joint && hasROC)
+              section << sS << sROC << sS << (format == full ? sA : "") << (format == full ? sS : "") << sD << (format == full ? sS : "") << (format == full ? sR : "") << sS << sE;
+            section << (doc == md ? "**|" : "") << endl;
             if (doc == md) {
               section << "|:--|" << (format == full ? ":-:|" : "") << ":-:|" << (format == full ? ":-:|" : "") <<
-                ":--|" << (format == full ? ":-:|" : "") << ":-:|" << (format == full ? ":-:|" : "") << ":-:|" << endl;
+                ":--|" << (format == full ? ":-:|" : "") << ":-:|" << (format == full ? ":-:|" : "") << ":-:|";
+              if (roc == joint && hasROC)
+                section << ":--|" << (format == full ? ":-:|" : "") << ":-:|" << (format == full ? ":-:|" : "") << ":-:|";
+              section << endl;
             }
             switch (format) {
               case full:
@@ -457,8 +494,8 @@ namespace doc {
         switch (format) {
           case none:
           default: return sEmpty;
-          case md: return sBLAS_md;
-          case csv: return sBLAS_csv;
+          case md: return roc == joint ? sBLAS_and_ROC_md : sBLAS_md;
+          case csv: return roc == joint ? sBLAS_and_ROC_csv : sBLAS_csv;
         }
       }
   };

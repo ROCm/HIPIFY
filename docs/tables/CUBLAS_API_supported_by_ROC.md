@@ -2,7 +2,7 @@
 
 ## **2. CUBLAS Data types**
 
-|**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
+|**CUDA**|**A**|**D**|**R**|**ROC**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
 |`CUBLAS_ATOMICS_ALLOWED`| | | |`rocblas_atomics_allowed`|3.8.0| | | |
 |`CUBLAS_ATOMICS_NOT_ALLOWED`| | | |`rocblas_atomics_not_allowed`|3.8.0| | | |
@@ -112,7 +112,7 @@
 
 ## **3. CUDA Datatypes Reference**
 
-|**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
+|**CUDA**|**A**|**D**|**R**|**ROC**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
 |`CUDA_C_16BF`| | | |`rocblas_datatype_bf16_c`|3.5.0| | | |
 |`CUDA_C_16F`|8.0| | |`rocblas_datatype_f16_c`|1.8.2| | | |
@@ -149,7 +149,7 @@
 
 ## **4. CUBLAS Helper Function Reference**
 
-|**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
+|**CUDA**|**A**|**D**|**R**|**ROC**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
 |`cublasAlloc`| | | | | | | | |
 |`cublasCreate`| | | |`rocblas_create_handle`|1.5.0| | | |
@@ -206,7 +206,7 @@
 
 ## **5. CUBLAS Level-1 Function Reference**
 
-|**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
+|**CUDA**|**A**|**D**|**R**|**ROC**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
 |`cublasCaxpy`| | | |`rocblas_caxpy`|1.5.0| | | |
 |`cublasCaxpy_64`|12.0| | | | | | | |
@@ -417,7 +417,7 @@
 
 ## **6. CUBLAS Level-2 Function Reference**
 
-|**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
+|**CUDA**|**A**|**D**|**R**|**ROC**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
 |`cublasCgbmv`| | | |`rocblas_cgbmv`|3.5.0| | | |
 |`cublasCgbmv_64`|12.0| | | | | | | |
@@ -710,7 +710,7 @@
 
 ## **7. CUBLAS Level-3 Function Reference**
 
-|**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
+|**CUDA**|**A**|**D**|**R**|**ROC**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
 |`cublasCgemm`| | | |`rocblas_cgemm`|1.5.0| | | |
 |`cublasCgemm3m`|8.0| | | | | | | |
@@ -911,7 +911,7 @@
 
 ## **8. BLAS-like Extension**
 
-|**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
+|**CUDA**|**A**|**D**|**R**|**ROC**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
 |`cublasAsumEx`|10.1| | | | | | | |
 |`cublasAsumEx_64`|12.0| | | | | | | |
