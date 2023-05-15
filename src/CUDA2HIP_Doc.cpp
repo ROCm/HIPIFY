@@ -64,8 +64,8 @@ namespace doc {
   const string sandROC = "_and_ROC";
   const string sBLAS = "CUBLAS_API_supported_by_HIP";
   const string sBLAS_md = sBLAS + md_ext;
-  const string sBLAS_and_ROC_md = sBLAS + sandROC + md_ext;
   const string sBLAS_csv = sBLAS + csv_ext;
+  const string sBLAS_and_ROC_md = sBLAS + sandROC + md_ext;
   const string sBLAS_and_ROC_csv = sBLAS + sandROC + csv_ext;
   const string sROCBLAS = "CUBLAS_API_supported_by_ROC";
   const string sROCBLAS_md = sROCBLAS + md_ext;
@@ -77,9 +77,15 @@ namespace doc {
   const string sRAND_csv = sRAND + csv_ext;
   const string sCURAND = "CURAND";
 
+  const string sandMIOPEN = "_and_MIOPEN";
   const string sDNN = "CUDNN_API_supported_by_HIP";
   const string sDNN_md = sDNN + md_ext;
   const string sDNN_csv = sDNN + csv_ext;
+  const string sDNN_and_MIOPEN_md = sDNN + sandMIOPEN + md_ext;
+  const string sDNN_and_MIOPEN_csv = sDNN + sandMIOPEN + csv_ext;
+  const string sMIOPEN_ = "CUDNN_API_supported_by_MIOPEN";
+  const string sMIOPEN_md = sMIOPEN_ + md_ext;
+  const string sMIOPEN_csv = sMIOPEN_ + csv_ext;
   const string sCUDNN = "CUDNN";
 
   const string sFFT = "CUFFT_API_supported_by_HIP";
@@ -111,7 +117,9 @@ namespace doc {
   const string sCUDA = "CUDA";
   const string sHIP = "HIP";
   const string sROC = "ROC";
+  const string sMIOPEN = "MIOPEN";
   const string sHIPandROC = "HIP and ROC";
+  const string sHIPandMIOPEN = "HIP and MIOPEN";
   const string sA = "A";
   const string sD = "D";
   const string sR = "R";
@@ -160,6 +168,9 @@ namespace doc {
       virtual const hipVersionMap &getHipFunctionVersions() const = 0;
       virtual const versionMap &getTypeVersions() const = 0;
       virtual const hipVersionMap &getHipTypeVersions() const = 0;
+      virtual const string &getAPI() const { return sHIP; }
+      virtual const string &getSecondAPI() const { return sROC; }
+      virtual const string &getJointAPI() const { return sEmpty; }
       hipVersionMap commonHipVersionMap;
       bool hasROC;
       bool isROC;
@@ -205,7 +216,7 @@ namespace doc {
         const docType docs[] = {md, csv};
         for (auto doc : docs) {
           if (doc != (types & doc)) continue;
-          *streams[doc].get() << (doc == md ? "# " : "") << getName() << " " << sAPI_supported_by << (isROC ? sROC : (roc == joint && hasROC ? sHIPandROC : sHIP)) << endl << endl;
+          *streams[doc].get() << (doc == md ? "# " : "") << getName() << " " << sAPI_supported_by << (roc == joint && hasROC ? getJointAPI() : getAPI()) << endl << endl;
           unsigned int compact_only_cur_sec_num = 1;
           for (auto &s : getSections()) {
             const functionMap &ftMap = isTypeSection(s.first, getSections()) ? getTypes() : getFunctions();
@@ -312,10 +323,10 @@ namespace doc {
             stringstream section, section_header;
             section_header << (doc == md ? "## **" : "") << (format != compact ? s.first : compact_only_cur_sec_num) << ". " << string(s.second) << (doc == md ? "**" : "") << endl << endl;
             section << (doc == md ? "|**" : "") << sCUDA << sS << (format == full ? sA : "") << (format == full ? sS : "") <<
-              sD << sS << (format == full ? sR : "") << (format == full ? sS : "") << (isROC ? sROC : sHIP) << sS << (format == full ? sA : "") << (format == full ? sS : "") <<
+              sD << sS << (format == full ? sR : "") << (format == full ? sS : "") << getAPI() << sS << (format == full ? sA : "") << (format == full ? sS : "") <<
               sD << (format == full ? sS : "") << (format == full ? sR : "") << sS << sE;
             if (roc == joint && hasROC)
-              section << sS << sROC << sS << (format == full ? sA : "") << (format == full ? sS : "") << sD << (format == full ? sS : "") << (format == full ? sR : "") << sS << sE;
+              section << sS << getSecondAPI() << sS << (format == full ? sA : "") << (format == full ? sS : "") << sD << (format == full ? sS : "") << (format == full ? sR : "") << sS << sE;
             section << (doc == md ? "**|" : "") << endl;
             if (doc == md) {
               section << "|:--|" << (format == full ? ":-:|" : "") << ":-:|" << (format == full ? ":-:|" : "") <<
@@ -490,6 +501,8 @@ namespace doc {
       const versionMap &getTypeVersions() const override { return CUDA_BLAS_TYPE_NAME_VER_MAP; }
       const hipVersionMap &getHipTypeVersions() const override { return HIP_BLAS_TYPE_NAME_VER_MAP; }
       const string &getName() const override { return sCUBLAS; }
+      const string& getSecondAPI() const { return sROC; }
+      const string &getJointAPI() const { return sHIPandROC; }
       const string &getFileName(docType format) const override {
         switch (format) {
           case none:
@@ -505,6 +518,7 @@ namespace doc {
       ROCBLAS(const string &outDir): BLAS(outDir) { hasROC = false; isROC = true; }
       virtual ~ROCBLAS() {}
     protected:
+      const string &getAPI() const { return sROC; }
       const string &getFileName(docType format) const override {
         switch (format) {
           case none:
@@ -540,7 +554,7 @@ namespace doc {
 
   class DNN: public DOC {
     public:
-      DNN(const string &outDir): DOC(outDir) {}
+      DNN(const string &outDir): DOC(outDir) { hasROC = true; }
       virtual ~DNN() {}
     protected:
       const sectionMap &getSections() const override { return CUDA_DNN_API_SECTION_MAP; }
@@ -551,12 +565,30 @@ namespace doc {
       const versionMap &getTypeVersions() const override { return CUDA_DNN_TYPE_NAME_VER_MAP; }
       const hipVersionMap &getHipTypeVersions() const override { return HIP_DNN_TYPE_NAME_VER_MAP; }
       const string &getName() const override { return sCUDNN; }
+      const string &getSecondAPI() const { return sMIOPEN; }
+      const string &getJointAPI() const { return sHIPandMIOPEN; }
       const string &getFileName(docType format) const override {
         switch (format) {
           case none:
           default: return sEmpty;
-          case md: return sDNN_md;
-          case csv: return sDNN_csv;
+          case md: return roc == joint ? sDNN_and_MIOPEN_md : sDNN_md;
+          case csv: return roc == joint ? sDNN_and_MIOPEN_csv : sDNN_csv;
+        }
+      }
+  };
+
+  class MIOPEN: public DNN {
+    public:
+      MIOPEN(const string &outDir): DNN(outDir) { hasROC = false; isROC = true; }
+      virtual ~MIOPEN() {}
+    protected:
+      const string &getAPI() const { return sMIOPEN; }
+      const string &getFileName(docType format) const override {
+        switch (format) {
+          case none:
+          default: return sEmpty;
+          case md: return sMIOPEN_md;
+          case csv: return sMIOPEN_csv;
         }
       }
   };
@@ -715,8 +747,10 @@ namespace doc {
     BLAS blas(sOut);
     docs.addDoc(&blas);
     ROCBLAS rocblas(sOut);
+    MIOPEN miopen(sOut);
     if (docRoc == separate) {
       docs.addDoc(&rocblas);
+      docs.addDoc(&miopen);
     }
     RAND rand(sOut);
     docs.addDoc(&rand);
