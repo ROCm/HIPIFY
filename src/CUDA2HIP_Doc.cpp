@@ -171,6 +171,7 @@ namespace doc {
       virtual const string &getAPI() const { return sHIP; }
       virtual const string &getSecondAPI() const { return sROC; }
       virtual const string &getJointAPI() const { return sEmpty; }
+      virtual bool isJoint() const { return roc == joint && hasROC; }
       hipVersionMap commonHipVersionMap;
       bool hasROC;
       bool isROC;
@@ -216,7 +217,7 @@ namespace doc {
         const docType docs[] = {md, csv};
         for (auto doc : docs) {
           if (doc != (types & doc)) continue;
-          *streams[doc].get() << (doc == md ? "# " : "") << getName() << " " << sAPI_supported_by << (roc == joint && hasROC ? getJointAPI() : getAPI()) << endl << endl;
+          *streams[doc].get() << (doc == md ? "# " : "") << getName() << " " << sAPI_supported_by << (isJoint() ? getJointAPI() : getAPI()) << endl << endl;
           unsigned int compact_only_cur_sec_num = 1;
           for (auto &s : getSections()) {
             const functionMap &ftMap = isTypeSection(s.first, getSections()) ? getTypes() : getFunctions();
@@ -226,11 +227,11 @@ namespace doc {
             for (auto &f : ftMap) {
               if (f.second.apiSection == s.first) {
                 if (isROC) {
-                  if (format == full || (format != full && !Statistics::isRocUnsupported(f.second))) {
+                  if (format != compact || (format == compact && !Statistics::isRocUnsupported(f.second))) {
                     fMap.insert(f);
                   }
                 } else {
-                  if (format == full || (format != full && !Statistics::isHipUnsupported(f.second))) {
+                  if (format != compact || (format == compact && !Statistics::isHipUnsupported(f.second))) {
                     fMap.insert(f);
                   }
                 }
@@ -255,7 +256,7 @@ namespace doc {
                 hr = Statistics::getHipVersion(hv->second.removed);
                 he = Statistics::getHipVersion(hv->second.experimental);
               }
-              if (roc == joint && hasROC) {
+              if (isJoint()) {
                 auto rv = hMap.find(f.second.rocName);
                 if (rv != hMap.end() && !Statistics::isRocUnsupported(f.second)) {
                   ra = Statistics::getHipVersion(rv->second.appeared);
@@ -269,12 +270,12 @@ namespace doc {
                 sHip = Statistics::isRocUnsupported(f.second) ? "" : string(f.second.rocName);
               else {
                 sHip = Statistics::isHipUnsupported(f.second) ? "" : string(f.second.hipName);
-                if (roc == joint && hasROC)
+                if (isJoint())
                   sRoc = Statistics::isRocUnsupported(f.second) ? "" : string(f.second.rocName);
               }
               if (doc == md) {
                 sHip = sHip.empty() ? " " : "`" + sHip + "`";
-                if (roc == joint && hasROC)
+                if (isJoint())
                   sRoc = sRoc.empty() ? " " : "`" + sRoc + "`";
               }
               rows << (doc == md ? "|`" : "") << string(f.first) << (doc == md ? "`|" : sS);
@@ -284,14 +285,14 @@ namespace doc {
                     case strict:
                     case compact:
                       rows << (d.empty() ? "" : "+") << sS << sHip << sS << (hd.empty() ? "" : "+") << sS << (he.empty() ? "" : "+");
-                      if (roc == joint && hasROC)
+                      if (isJoint())
                         rows << sS << sRoc << sS << (rd.empty() ? "" : "+") << sS << (re.empty() ? "" : "+");
                       rows << endl;
                       break;
                     case full:
                     default:
                       rows << a << sS << d << sS << r << sS << sHip << sS << ha << sS << hd << sS << hr << sS << he;
-                      if (roc == joint && hasROC)
+                      if (isJoint())
                         rows << sS << sRoc << sS << ra << sS << rd << sS << rr << sS << re;
                       rows << endl;
                       break;
@@ -303,7 +304,7 @@ namespace doc {
                     case strict:
                     case compact:
                       rows << (d.empty() ? " " : "+") << sS << sHip << sS << (hd.empty() ? " " : "+") << sS << (he.empty() ? " " : "+") << sS;
-                      if (roc == joint && hasROC)
+                      if (isJoint())
                         rows << sRoc << sS << (rd.empty() ? " " : "+") << sS << (re.empty() ? " " : "+") << sS;
                       rows << endl;
                       break;
@@ -311,7 +312,7 @@ namespace doc {
                     default:
                       rows << (a.empty() ? " " : a) << sS << (d.empty() ? " " : d) << sS << (r.empty() ? " " : r) << sS << sHip << sS <<
                         (ha.empty() ? " " : ha) << sS << (hd.empty() ? " " : hd) << sS << (hr.empty() ? " " : hr) << sS << (he.empty() ? " " : he) << sS;
-                      if (roc == joint && hasROC)
+                      if (isJoint())
                         rows << sRoc << sS << (ra.empty() ? " " : ra) << sS << (rd.empty() ? " " : rd) << sS << (rr.empty() ? " " : rr) << sS << (re.empty() ? " " : re) << sS;
                       rows << endl;
                       break;
@@ -325,13 +326,13 @@ namespace doc {
             section << (doc == md ? "|**" : "") << sCUDA << sS << (format == full ? sA : "") << (format == full ? sS : "") <<
               sD << sS << (format == full ? sR : "") << (format == full ? sS : "") << getAPI() << sS << (format == full ? sA : "") << (format == full ? sS : "") <<
               sD << (format == full ? sS : "") << (format == full ? sR : "") << sS << sE;
-            if (roc == joint && hasROC)
+            if (isJoint())
               section << sS << getSecondAPI() << sS << (format == full ? sA : "") << (format == full ? sS : "") << sD << (format == full ? sS : "") << (format == full ? sR : "") << sS << sE;
             section << (doc == md ? "**|" : "") << endl;
             if (doc == md) {
               section << "|:--|" << (format == full ? ":-:|" : "") << ":-:|" << (format == full ? ":-:|" : "") <<
                 ":--|" << (format == full ? ":-:|" : "") << ":-:|" << (format == full ? ":-:|" : "") << ":-:|";
-              if (roc == joint && hasROC)
+              if (isJoint())
                 section << ":--|" << (format == full ? ":-:|" : "") << ":-:|" << (format == full ? ":-:|" : "") << ":-:|";
               section << endl;
             }
