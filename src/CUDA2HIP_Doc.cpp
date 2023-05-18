@@ -231,7 +231,8 @@ namespace doc {
                     fMap.insert(f);
                   }
                 } else {
-                  if (format != compact || (format == compact && !Statistics::isHipUnsupported(f.second))) {
+                  if (format != compact || (format == compact && ((!isJoint() && !Statistics::isHipUnsupported(f.second)) ||
+                                                                   (isJoint() && (!Statistics::isHipUnsupported(f.second) || !Statistics::isRocUnsupported(f.second)))))) {
                     fMap.insert(f);
                   }
                 }
