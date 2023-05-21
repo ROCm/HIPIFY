@@ -61,9 +61,15 @@ namespace doc {
   const string sCOMPLEX_csv = sCOMPLEX + csv_ext;
   const string sCUCOMPLEX = "CUCOMPLEX";
 
+  const string sandROC = "_and_ROC";
   const string sBLAS = "CUBLAS_API_supported_by_HIP";
   const string sBLAS_md = sBLAS + md_ext;
   const string sBLAS_csv = sBLAS + csv_ext;
+  const string sBLAS_and_ROC_md = sBLAS + sandROC + md_ext;
+  const string sBLAS_and_ROC_csv = sBLAS + sandROC + csv_ext;
+  const string sROCBLAS = "CUBLAS_API_supported_by_ROC";
+  const string sROCBLAS_md = sROCBLAS + md_ext;
+  const string sROCBLAS_csv = sROCBLAS + csv_ext;
   const string sCUBLAS = "CUBLAS";
 
   const string sRAND = "CURAND_API_supported_by_HIP";
@@ -71,9 +77,15 @@ namespace doc {
   const string sRAND_csv = sRAND + csv_ext;
   const string sCURAND = "CURAND";
 
+  const string sandMIOPEN = "_and_MIOPEN";
   const string sDNN = "CUDNN_API_supported_by_HIP";
   const string sDNN_md = sDNN + md_ext;
   const string sDNN_csv = sDNN + csv_ext;
+  const string sDNN_and_MIOPEN_md = sDNN + sandMIOPEN + md_ext;
+  const string sDNN_and_MIOPEN_csv = sDNN + sandMIOPEN + csv_ext;
+  const string sMIOPEN_ = "CUDNN_API_supported_by_MIOPEN";
+  const string sMIOPEN_md = sMIOPEN_ + md_ext;
+  const string sMIOPEN_csv = sMIOPEN_ + csv_ext;
   const string sCUDNN = "CUDNN";
 
   const string sFFT = "CUFFT_API_supported_by_HIP";
@@ -101,9 +113,13 @@ namespace doc {
   const string sCUB_csv = sCUB + csv_ext;
   const string sCUCUB = "CUB";
 
-  const string sAPI_supported = "API supported by HIP";
+  const string sAPI_supported_by = "API supported by ";
   const string sCUDA = "CUDA";
   const string sHIP = "HIP";
+  const string sROC = "ROC";
+  const string sMIOPEN = "MIOPEN";
+  const string sHIPandROC = "HIP and ROC";
+  const string sHIPandMIOPEN = "HIP and MIOPEN";
   const string sA = "A";
   const string sD = "D";
   const string sR = "R";
@@ -121,13 +137,20 @@ namespace doc {
     compact = 2,
   };
 
+  enum docRoc {
+    skip = 0,
+    separate = 1,
+    joint = 2,
+  };
+
   class DOC {
     public:
-      DOC(const string &outDir): dir(outDir), types(0), format(0) {}
+      DOC(const string &outDir): dir(outDir), types(0), format(0), hasROC(false), isROC(false) {}
       virtual ~DOC() {}
-      void setTypesAndFormat(unsigned int docTypes, unsigned int docFormat = full) {
+      void setTypesAndFormat(unsigned int docTypes, unsigned int docFormat = full, unsigned int docRoc = skip) {
         types = docTypes;
         format = docFormat;
+        roc = docRoc;
       }
       bool generate() {
         if (init()) return write() & fini();
@@ -145,7 +168,14 @@ namespace doc {
       virtual const hipVersionMap &getHipFunctionVersions() const = 0;
       virtual const versionMap &getTypeVersions() const = 0;
       virtual const hipVersionMap &getHipTypeVersions() const = 0;
+      virtual const string &getAPI() const { return sHIP; }
+      virtual const string &getSecondAPI() const { return sROC; }
+      virtual const string &getJointAPI() const { return sEmpty; }
+      virtual bool isJoint() const { return roc == joint && hasROC; }
       hipVersionMap commonHipVersionMap;
+      bool hasROC;
+      bool isROC;
+      unsigned int roc;
 
     private:
       string dir;
@@ -187,7 +217,7 @@ namespace doc {
         const docType docs[] = {md, csv};
         for (auto doc : docs) {
           if (doc != (types & doc)) continue;
-          *streams[doc].get() << (doc == md ? "# " : "") << getName() << " " << sAPI_supported << endl << endl;
+          *streams[doc].get() << (doc == md ? "# " : "") << getName() << " " << sAPI_supported_by << (isJoint() ? getJointAPI() : getAPI()) << endl << endl;
           unsigned int compact_only_cur_sec_num = 1;
           for (auto &s : getSections()) {
             const functionMap &ftMap = isTypeSection(s.first, getSections()) ? getTypes() : getFunctions();
@@ -196,15 +226,22 @@ namespace doc {
             functionMap fMap;
             for (auto &f : ftMap) {
               if (f.second.apiSection == s.first) {
-                if (format == full || (format != full && !Statistics::isUnsupported(f.second))) {
-                  fMap.insert(f);
+                if (isROC) {
+                  if (format != compact || (format == compact && !Statistics::isRocUnsupported(f.second))) {
+                    fMap.insert(f);
+                  }
+                } else {
+                  if (format != compact || (format == compact && ((!isJoint() && !Statistics::isHipUnsupported(f.second)) ||
+                                                                   (isJoint() && (!Statistics::isHipUnsupported(f.second) || !Statistics::isRocUnsupported(f.second)))))) {
+                    fMap.insert(f);
+                  }
                 }
               }
             }
             string sS = (doc == md) ? "|" : ",";
             stringstream rows;
             for (auto &f : fMap) {
-              string a, d, r, ha, hd, hr, he;
+              string a, d, r, ha, hd, hr, he, ra, rd, rr, re;
               for (auto &v : vMap) {
                 if (v.first == f.first) {
                   a = Statistics::getCudaVersion(v.second.appeared);
@@ -213,16 +250,34 @@ namespace doc {
                   break;
                 }
               }
-              auto hv = hMap.find(f.second.hipName);
-              if (hv != hMap.end() && !Statistics::isUnsupported(f.second)) {
+              auto hv = (isROC) ? hMap.find(f.second.rocName) : hMap.find(f.second.hipName);
+              if (hv != hMap.end() && ((!Statistics::isRocUnsupported(f.second) && isROC) || (!Statistics::isHipUnsupported(f.second) && !isROC))) {
                 ha = Statistics::getHipVersion(hv->second.appeared);
                 hd = Statistics::getHipVersion(hv->second.deprecated);
                 hr = Statistics::getHipVersion(hv->second.removed);
                 he = Statistics::getHipVersion(hv->second.experimental);
               }
-              string sHip = Statistics::isUnsupported(f.second) ? "" : string(f.second.hipName);
+              if (isJoint()) {
+                auto rv = hMap.find(f.second.rocName);
+                if (rv != hMap.end() && !Statistics::isRocUnsupported(f.second)) {
+                  ra = Statistics::getHipVersion(rv->second.appeared);
+                  rd = Statistics::getHipVersion(rv->second.deprecated);
+                  rr = Statistics::getHipVersion(rv->second.removed);
+                  re = Statistics::getHipVersion(rv->second.experimental);
+                }
+              }
+              string sHip, sRoc;
+              if (isROC)
+                sHip = Statistics::isRocUnsupported(f.second) ? "" : string(f.second.rocName);
+              else {
+                sHip = Statistics::isHipUnsupported(f.second) ? "" : string(f.second.hipName);
+                if (isJoint())
+                  sRoc = Statistics::isRocUnsupported(f.second) ? "" : string(f.second.rocName);
+              }
               if (doc == md) {
                 sHip = sHip.empty() ? " " : "`" + sHip + "`";
+                if (isJoint())
+                  sRoc = sRoc.empty() ? " " : "`" + sRoc + "`";
               }
               rows << (doc == md ? "|`" : "") << string(f.first) << (doc == md ? "`|" : sS);
               switch (doc) {
@@ -230,11 +285,17 @@ namespace doc {
                   switch (format) {
                     case strict:
                     case compact:
-                      rows << (d.empty() ? "" : "+") << sS << sHip << sS << (hd.empty() ? "" : "+") << sS << (he.empty() ? "" : "+") << endl;
+                      rows << (d.empty() ? "" : "+") << sS << sHip << sS << (hd.empty() ? "" : "+") << sS << (he.empty() ? "" : "+");
+                      if (isJoint())
+                        rows << sS << sRoc << sS << (rd.empty() ? "" : "+") << sS << (re.empty() ? "" : "+");
+                      rows << endl;
                       break;
                     case full:
                     default:
-                      rows << a << sS << d << sS << r << sS << sHip << sS << ha << sS << hd << sS << hr << sS << he << endl;
+                      rows << a << sS << d << sS << r << sS << sHip << sS << ha << sS << hd << sS << hr << sS << he;
+                      if (isJoint())
+                        rows << sS << sRoc << sS << ra << sS << rd << sS << rr << sS << re;
+                      rows << endl;
                       break;
                   }
                   break;
@@ -243,12 +304,18 @@ namespace doc {
                   switch (format) {
                     case strict:
                     case compact:
-                      rows << (d.empty() ? " " : "+") << sS << sHip << sS << (hd.empty() ? " " : "+") << sS << (he.empty() ? " " : "+") << sS << endl;
+                      rows << (d.empty() ? " " : "+") << sS << sHip << sS << (hd.empty() ? " " : "+") << sS << (he.empty() ? " " : "+") << sS;
+                      if (isJoint())
+                        rows << sRoc << sS << (rd.empty() ? " " : "+") << sS << (re.empty() ? " " : "+") << sS;
+                      rows << endl;
                       break;
                     case full:
                     default:
                       rows << (a.empty() ? " " : a) << sS << (d.empty() ? " " : d) << sS << (r.empty() ? " " : r) << sS << sHip << sS <<
-                        (ha.empty() ? " " : ha) << sS << (hd.empty() ? " " : hd) << sS << (hr.empty() ? " " : hr) << sS << (he.empty() ? " " : he) << sS << endl;
+                        (ha.empty() ? " " : ha) << sS << (hd.empty() ? " " : hd) << sS << (hr.empty() ? " " : hr) << sS << (he.empty() ? " " : he) << sS;
+                      if (isJoint())
+                        rows << sRoc << sS << (ra.empty() ? " " : ra) << sS << (rd.empty() ? " " : rd) << sS << (rr.empty() ? " " : rr) << sS << (re.empty() ? " " : re) << sS;
+                      rows << endl;
                       break;
                   }
                   break;
@@ -258,11 +325,17 @@ namespace doc {
             stringstream section, section_header;
             section_header << (doc == md ? "## **" : "") << (format != compact ? s.first : compact_only_cur_sec_num) << ". " << string(s.second) << (doc == md ? "**" : "") << endl << endl;
             section << (doc == md ? "|**" : "") << sCUDA << sS << (format == full ? sA : "") << (format == full ? sS : "") <<
-              sD << sS << (format == full ? sR : "") << (format == full ? sS : "") << sHIP << sS << (format == full ? sA : "") << (format == full ? sS : "") <<
-              sD << (format == full ? sS : "") << (format == full ? sR : "") << sS << sE << (doc == md ? "**|" : "") << endl;
+              sD << sS << (format == full ? sR : "") << (format == full ? sS : "") << getAPI() << sS << (format == full ? sA : "") << (format == full ? sS : "") <<
+              sD << (format == full ? sS : "") << (format == full ? sR : "") << sS << sE;
+            if (isJoint())
+              section << sS << getSecondAPI() << sS << (format == full ? sA : "") << (format == full ? sS : "") << sD << (format == full ? sS : "") << (format == full ? sR : "") << sS << sE;
+            section << (doc == md ? "**|" : "") << endl;
             if (doc == md) {
               section << "|:--|" << (format == full ? ":-:|" : "") << ":-:|" << (format == full ? ":-:|" : "") <<
-                ":--|" << (format == full ? ":-:|" : "") << ":-:|" << (format == full ? ":-:|" : "") << ":-:|" << endl;
+                ":--|" << (format == full ? ":-:|" : "") << ":-:|" << (format == full ? ":-:|" : "") << ":-:|";
+              if (isJoint())
+                section << ":--|" << (format == full ? ":-:|" : "") << ":-:|" << (format == full ? ":-:|" : "") << ":-:|";
+              section << endl;
             }
             switch (format) {
               case full:
@@ -321,10 +394,11 @@ namespace doc {
       vector<DOC*> docs;
       unsigned int types;
       unsigned int format;
+      unsigned int roc;
     public:
-      DOCS(unsigned int docTypes, unsigned int docFormat): types(docTypes), format(docFormat) {}
+      DOCS(unsigned int docTypes, unsigned int docFormat, unsigned docRoc): types(docTypes), format(docFormat), roc(docRoc) {}
       virtual ~DOCS() {}
-      void addDoc(DOC *doc) { docs.push_back(doc); doc->setTypesAndFormat(types, format); }
+      void addDoc(DOC *doc) { docs.push_back(doc); doc->setTypesAndFormat(types, format, roc); }
       bool generate() {
         bool bRet = true;
         for (auto &d : docs) {
@@ -418,7 +492,7 @@ namespace doc {
 
   class BLAS: public DOC {
     public:
-      BLAS(const string &outDir): DOC(outDir) {}
+      BLAS(const string &outDir): DOC(outDir) { hasROC = true; }
       virtual ~BLAS() {}
     protected:
       const sectionMap &getSections() const override { return CUDA_BLAS_API_SECTION_MAP; }
@@ -429,12 +503,30 @@ namespace doc {
       const versionMap &getTypeVersions() const override { return CUDA_BLAS_TYPE_NAME_VER_MAP; }
       const hipVersionMap &getHipTypeVersions() const override { return HIP_BLAS_TYPE_NAME_VER_MAP; }
       const string &getName() const override { return sCUBLAS; }
+      const string& getSecondAPI() const { return sROC; }
+      const string &getJointAPI() const { return sHIPandROC; }
       const string &getFileName(docType format) const override {
         switch (format) {
           case none:
           default: return sEmpty;
-          case md: return sBLAS_md;
-          case csv: return sBLAS_csv;
+          case md: return roc == joint ? sBLAS_and_ROC_md : sBLAS_md;
+          case csv: return roc == joint ? sBLAS_and_ROC_csv : sBLAS_csv;
+        }
+      }
+  };
+
+  class ROCBLAS: public BLAS {
+    public:
+      ROCBLAS(const string &outDir): BLAS(outDir) { hasROC = false; isROC = true; }
+      virtual ~ROCBLAS() {}
+    protected:
+      const string &getAPI() const { return sROC; }
+      const string &getFileName(docType format) const override {
+        switch (format) {
+          case none:
+          default: return sEmpty;
+          case md: return sROCBLAS_md;
+          case csv: return sROCBLAS_csv;
         }
       }
   };
@@ -464,7 +556,7 @@ namespace doc {
 
   class DNN: public DOC {
     public:
-      DNN(const string &outDir): DOC(outDir) {}
+      DNN(const string &outDir): DOC(outDir) { hasROC = true; }
       virtual ~DNN() {}
     protected:
       const sectionMap &getSections() const override { return CUDA_DNN_API_SECTION_MAP; }
@@ -475,12 +567,30 @@ namespace doc {
       const versionMap &getTypeVersions() const override { return CUDA_DNN_TYPE_NAME_VER_MAP; }
       const hipVersionMap &getHipTypeVersions() const override { return HIP_DNN_TYPE_NAME_VER_MAP; }
       const string &getName() const override { return sCUDNN; }
+      const string &getSecondAPI() const { return sMIOPEN; }
+      const string &getJointAPI() const { return sHIPandMIOPEN; }
       const string &getFileName(docType format) const override {
         switch (format) {
           case none:
           default: return sEmpty;
-          case md: return sDNN_md;
-          case csv: return sDNN_csv;
+          case md: return roc == joint ? sDNN_and_MIOPEN_md : sDNN_md;
+          case csv: return roc == joint ? sDNN_and_MIOPEN_csv : sDNN_csv;
+        }
+      }
+  };
+
+  class MIOPEN: public DNN {
+    public:
+      MIOPEN(const string &outDir): DNN(outDir) { hasROC = false; isROC = true; }
+      virtual ~MIOPEN() {}
+    protected:
+      const string &getAPI() const { return sMIOPEN; }
+      const string &getFileName(docType format) const override {
+        switch (format) {
+          case none:
+          default: return sEmpty;
+          case md: return sMIOPEN_md;
+          case csv: return sMIOPEN_csv;
         }
       }
   };
@@ -617,10 +727,19 @@ namespace doc {
         return false;
       }
     }
+    unsigned int docRoc = skip;
+    if (!DocRoc.empty()) {
+      if (DocRoc == "separate") docRoc = separate;
+      else if (DocRoc == "joint") docRoc = joint;
+      else if (DocRoc != "skip") {
+        llvm::errs() << "\n" << sHipify << sError << "Unsupported ROC documentation format: '" << DocRoc << "'; supported formats: 'skip', 'separate', 'joint'\n";
+        return false;
+      }
+    }
     unsigned int docTypes = 0;
     if (GenerateMD) docTypes |= md;
     if (GenerateCSV) docTypes |= csv;
-    DOCS docs(docTypes, docFormat);
+    DOCS docs(docTypes, docFormat, docRoc);
     DRIVER driver(sOut);
     docs.addDoc(&driver);
     RUNTIME runtime(sOut);
@@ -629,6 +748,12 @@ namespace doc {
     docs.addDoc(&complex);
     BLAS blas(sOut);
     docs.addDoc(&blas);
+    ROCBLAS rocblas(sOut);
+    MIOPEN miopen(sOut);
+    if (docRoc == separate) {
+      docs.addDoc(&rocblas);
+      docs.addDoc(&miopen);
+    }
     RAND rand(sOut);
     docs.addDoc(&rand);
     DNN dnn(sOut);

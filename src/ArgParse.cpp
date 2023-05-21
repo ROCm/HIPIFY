@@ -171,6 +171,11 @@ cl::opt<std::string> DocFormat("doc-format",
   cl::value_desc("value"),
   cl::cat(ToolTemplateCategory));
 
+cl::opt<std::string> DocRoc("doc-roc",
+  cl::desc("ROC cocumentation generation: 'skip' (default), 'separate', or 'joint'; the '--md' or '--csv' option must be specified"),
+  cl::value_desc("value"),
+  cl::cat(ToolTemplateCategory));
+
 cl::opt<bool> Experimental("experimental",
   cl::desc("Hipify HIP APIs that are experimentally supported, otherwise, the corresponding warnings will be emitted"),
   cl::value_desc("experimental"),
@@ -225,6 +230,7 @@ const std::vector<std::string> hipifyOptions {
   std::string(Examine.ArgStr),
   std::string(SaveTemps.ArgStr),
   std::string(DocFormat.ArgStr),
+  std::string(DocRoc.ArgStr),
   std::string(Experimental.ArgStr),
   std::string(Versions.ArgStr),
   std::string(NoUndocumented.ArgStr),
