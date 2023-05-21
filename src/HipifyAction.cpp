@@ -580,6 +580,11 @@ bool HipifyAction::Exclude(const hipCounter &hipToken) {
           insertedBLASHeader_V2 = true;
           if (insertedBLASHeader) return true;
           return false;
+        case API_SPARSE:
+          if (insertedSPARSEHeader_V2) return true;
+          insertedSPARSEHeader_V2 = true;
+          if (insertedSPARSEHeader) return true;
+          return false;
         default:
           return false;
       }
