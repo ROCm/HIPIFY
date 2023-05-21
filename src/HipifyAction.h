@@ -55,6 +55,7 @@ private:
   bool insertedDNNHeader = false;
   bool insertedFFTHeader = false;
   bool insertedSPARSEHeader = false;
+  bool insertedSPARSEHeader_V2 = false;
   bool insertedComplexHeader = false;
   bool firstHeader = false;
   bool pragmaOnce = false;

@@ -3214,9 +3214,9 @@ sub simpleSubstitutions {
     subst("cufft.h", "hipfft.h", "include_cuda_main_header");
     subst("curand.h", "hiprand.h", "include_cuda_main_header");
     subst("cusparse.h", "hipsparse.h", "include_cuda_main_header");
-    subst("cusparse_v2.h", "hipsparse.h", "include_cuda_main_header");
     subst("nvrtc.h", "hiprtc.h", "include_cuda_main_header");
     subst("cublas_v2.h", "hipblas.h", "include_cuda_main_header_v2");
+    subst("cusparse_v2.h", "hipsparse.h", "include_cuda_main_header_v2");
     subst("CUDAContext", "HIPContext", "type");
     subst("CUDA_ARRAY3D_DESCRIPTOR", "HIP_ARRAY3D_DESCRIPTOR", "type");
     subst("CUDA_ARRAY3D_DESCRIPTOR_st", "HIP_ARRAY3D_DESCRIPTOR", "type");
@@ -3648,7 +3648,6 @@ sub simpleSubstitutions {
     subst("cusparseCsr2CscAlg_t", "hipsparseCsr2CscAlg_t", "type");
     subst("cusparseDiagType_t", "hipsparseDiagType_t", "type");
     subst("cusparseDirection_t", "hipsparseDirection_t", "type");
-    subst("cusparseDnMatDescr", "hipsparseDnMatDescr", "type");
     subst("cusparseDnMatDescr_t", "hipsparseDnMatDescr_t", "type");
     subst("cusparseDnVecDescr_t", "hipsparseDnVecDescr_t", "type");
     subst("cusparseFillMode_t", "hipsparseFillMode_t", "type");
@@ -5932,6 +5931,7 @@ sub warnUnsupportedFunctions {
         "cusparseHpruneCsr2csr",
         "cusparseGetLevelInfo",
         "cusparseDnVecDescr",
+        "cusparseDnMatDescr",
         "cusparseDhybsv_solve",
         "cusparseDhybsv_analysis",
         "cusparseDhyb2dense",

@@ -26,14 +26,14 @@ THE SOFTWARE.
 const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_TYPE_NAME_MAP {
 
   // 1. Structs
-  {"cusparseContext",                           {"hipsparseContext",                           "", CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED}},
-  {"cusparseHandle_t",                          {"hipsparseHandle_t",                          "", CONV_TYPE, API_SPARSE, 4}},
+  {"cusparseContext",                           {"hipsparseContext",                           "_rocsparse_handle",                                  CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED}},
+  {"cusparseHandle_t",                          {"hipsparseHandle_t",                          "rocsparse_handle",                                   CONV_TYPE, API_SPARSE, 4}},
 
-  {"cusparseHybMat",                            {"hipsparseHybMat",                            "", CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseHybMat_t",                          {"hipsparseHybMat_t",                          "", CONV_TYPE, API_SPARSE, 4, CUDA_DEPRECATED | CUDA_REMOVED}},
+  {"cusparseHybMat",                            {"hipsparseHybMat",                            "_rocsparse_hyb_mat",                                 CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
+  {"cusparseHybMat_t",                          {"hipsparseHybMat_t",                          "rocsparse_hyb_mat",                                  CONV_TYPE, API_SPARSE, 4, CUDA_DEPRECATED | CUDA_REMOVED}},
 
-  {"cusparseMatDescr",                          {"hipsparseMatDescr",                          "", CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED}},
-  {"cusparseMatDescr_t",                        {"hipsparseMatDescr_t",                        "", CONV_TYPE, API_SPARSE, 4}},
+  {"cusparseMatDescr",                          {"hipsparseMatDescr",                          "_rocsparse_mat_descr",                               CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED}},
+  {"cusparseMatDescr_t",                        {"hipsparseMatDescr_t",                        "rocsparse_mat_descr",                                CONV_TYPE, API_SPARSE, 4}},
 
   {"cusparseSolveAnalysisInfo",                 {"hipsparseSolveAnalysisInfo",                 "", CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
   {"cusparseSolveAnalysisInfo_t",               {"hipsparseSolveAnalysisInfo_t",               "", CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
@@ -71,17 +71,17 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_TYPE_NAME_MAP {
   {"pruneInfo",                                 {"pruneInfo",                                  "", CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED}},
   {"pruneInfo_t",                               {"pruneInfo_t",                                "", CONV_TYPE, API_SPARSE, 4}},
 
-  {"cusparseSpMatDescr",                        {"hipsparseSpMatDescr",                        "", CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED}},
-  {"cusparseSpMatDescr_t",                      {"hipsparseSpMatDescr_t",                      "", CONV_TYPE, API_SPARSE, 4}},
+  {"cusparseSpMatDescr",                        {"hipsparseSpMatDescr",                        "_rocsparse_spmat_descr",                             CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED}},
+  {"cusparseSpMatDescr_t",                      {"hipsparseSpMatDescr_t",                      "rocsparse_spmat_descr",                              CONV_TYPE, API_SPARSE, 4}},
 
-  {"cusparseDnMatDescr",                        {"hipsparseDnMatDescr",                        "", CONV_TYPE, API_SPARSE, 4}},
-  {"cusparseDnMatDescr_t",                      {"hipsparseDnMatDescr_t",                      "", CONV_TYPE, API_SPARSE, 4}},
+  {"cusparseDnMatDescr",                        {"hipsparseDnMatDescr",                        "_rocsparse_dnmat_descr",                             CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED}},
+  {"cusparseDnMatDescr_t",                      {"hipsparseDnMatDescr_t",                      "rocsparse_dnmat_descr",                              CONV_TYPE, API_SPARSE, 4}},
 
-  {"cusparseSpVecDescr",                        {"hipsparseSpVecDescr",                        "", CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED}},
-  {"cusparseSpVecDescr_t",                      {"hipsparseSpVecDescr_t",                      "", CONV_TYPE, API_SPARSE, 4}},
+  {"cusparseSpVecDescr",                        {"hipsparseSpVecDescr",                        "_rocsparse_spvec_descr",                             CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED}},
+  {"cusparseSpVecDescr_t",                      {"hipsparseSpVecDescr_t",                      "rocsparse_spvec_descr",                              CONV_TYPE, API_SPARSE, 4}},
 
-  {"cusparseDnVecDescr",                        {"hipsparseDnVecDescr",                        "", CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED}},
-  {"cusparseDnVecDescr_t",                      {"hipsparseDnVecDescr_t",                      "", CONV_TYPE, API_SPARSE, 4}},
+  {"cusparseDnVecDescr",                        {"hipsparseDnVecDescr",                        "_rocsparse_dnvec_descr",                             CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED}},
+  {"cusparseDnVecDescr_t",                      {"hipsparseDnVecDescr_t",                      "rocsparse_dnvec_descr",                              CONV_TYPE, API_SPARSE, 4}},
 
   {"cusparseSpGEMMDescr",                       {"hipsparseSpGEMMDescr",                       "", CONV_TYPE, API_SPARSE, 4}},
   {"cusparseSpGEMMDescr_t",                     {"hipsparseSpGEMMDescr_t",                     "", CONV_TYPE, API_SPARSE, 4}},
@@ -478,7 +478,6 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_TYPE_NAME_VER_MAP {
   {"HIPSPARSE_SPGEMM_DEFAULT",                   {HIP_4010, HIP_0,    HIP_0   }},
   {"csru2csrInfo",                               {HIP_4020, HIP_0,    HIP_0   }},
   {"csru2csrInfo_t",                             {HIP_4020, HIP_0,    HIP_0   }},
-  {"hipsparseDnMatDescr",                        {HIP_4020, HIP_0,    HIP_0   }},
   {"hipsparseDnMatDescr_t",                      {HIP_4020, HIP_0,    HIP_0   }},
   {"hipsparseOrder_t",                           {HIP_4020, HIP_0,    HIP_0   }},
   {"HIPSPARSE_ORDER_COL",                        {HIP_5040, HIP_0,    HIP_0   }},
@@ -526,4 +525,18 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_TYPE_NAME_VER_MAP {
   {"HIPSPARSE_CSR2CSC_ALG1",                     {HIP_5040, HIP_0,    HIP_0   }},
   {"HIPSPARSE_CSR2CSC_ALG2",                     {HIP_5040, HIP_0,    HIP_0   }},
   {"HIPSPARSE_ORDER_COLUMN",                     {HIP_4020, HIP_5040, HIP_0   }},
+  {"_rocsparse_handle",                          {HIP_1090, HIP_0,    HIP_0   }},
+  {"rocsparse_handle",                           {HIP_1090, HIP_0,    HIP_0   }},
+  {"_rocsparse_hyb_mat",                         {HIP_1090, HIP_0,    HIP_0   }},
+  {"rocsparse_hyb_mat",                          {HIP_1090, HIP_0,    HIP_0   }},
+  {"_rocsparse_mat_descr",                       {HIP_1090, HIP_0,    HIP_0   }},
+  {"rocsparse_mat_descr",                        {HIP_1090, HIP_0,    HIP_0   }},
+  {"_rocsparse_spvec_descr",                     {HIP_4010, HIP_0,    HIP_0   }},
+  {"rocsparse_spvec_descr",                      {HIP_4010, HIP_0,    HIP_0   }},
+  {"_rocsparse_spmat_descr",                     {HIP_4010, HIP_0,    HIP_0   }},
+  {"rocsparse_spmat_descr",                      {HIP_4010, HIP_0,    HIP_0   }},
+  {"_rocsparse_dnvec_descr",                     {HIP_4010, HIP_0,    HIP_0   }},
+  {"rocsparse_dnvec_descr",                      {HIP_4010, HIP_0,    HIP_0   }},
+  {"_rocsparse_dnmat_descr",                     {HIP_4010, HIP_0,    HIP_0   }},
+  {"rocsparse_dnmat_descr",                      {HIP_4010, HIP_0,    HIP_0   }},
 };

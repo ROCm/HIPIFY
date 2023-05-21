@@ -67,8 +67,8 @@ const std::map <llvm::StringRef, hipCounter> CUDA_INCLUDE_MAP {
   {"cufft.h",                                               {"hipfft.h",                                              "", CONV_INCLUDE_CUDA_MAIN_H,    API_FFT, 0}},
   {"cufftXt.h",                                             {"hipfftXt.h",                                            "", CONV_INCLUDE,                API_FFT, 0}},
   // cuSPARSE includes
-  {"cusparse.h",                                            {"hipsparse.h",                                           "", CONV_INCLUDE_CUDA_MAIN_H,    API_SPARSE, 0}},
-  {"cusparse_v2.h",                                         {"hipsparse.h",                                           "", CONV_INCLUDE_CUDA_MAIN_H,    API_SPARSE, 0}},
+  {"cusparse.h",                                            {"hipsparse.h",                                "rocsparse.h", CONV_INCLUDE_CUDA_MAIN_H,    API_SPARSE, 0}},
+  {"cusparse_v2.h",                                         {"hipsparse.h",                                "rocsparse.h", CONV_INCLUDE_CUDA_MAIN_V2_H, API_SPARSE, 0}},
   // CUB includes
   {"cub/cub.cuh",                                           {"hipcub/hipcub.hpp",                                     "", CONV_INCLUDE_CUDA_MAIN_H,    API_CUB, 0}},
   // CAFFE2 includes

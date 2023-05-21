@@ -141,7 +141,7 @@
 |`cusparseDenseToSparseAlg_t`|11.1| | | | | | | |
 |`cusparseDiagType_t`| | | |`hipsparseDiagType_t`|1.9.2| | | |
 |`cusparseDirection_t`| | | |`hipsparseDirection_t`|3.2.0| | | |
-|`cusparseDnMatDescr`|10.1| | |`hipsparseDnMatDescr`|4.2.0| | | |
+|`cusparseDnMatDescr`|10.1| | | | | | | |
 |`cusparseDnMatDescr_t`|10.1| | |`hipsparseDnMatDescr_t`|4.2.0| | | |
 |`cusparseDnVecDescr`|10.2| | | | | | | |
 |`cusparseDnVecDescr_t`|10.2| | |`hipsparseDnVecDescr_t`|4.1.0| | | |
