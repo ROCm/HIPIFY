@@ -508,7 +508,7 @@ namespace doc {
       const versionMap &getTypeVersions() const override { return CUDA_BLAS_TYPE_NAME_VER_MAP; }
       const hipVersionMap &getHipTypeVersions() const override { return HIP_BLAS_TYPE_NAME_VER_MAP; }
       const string &getName() const override { return sCUBLAS; }
-      const string& getSecondAPI() const { return sROC; }
+      const string &getSecondAPI() const { return sROC; }
       const string &getJointAPI() const { return sHIPandROC; }
       const string &getFileName(docType format) const override {
         switch (format) {
@@ -636,8 +636,8 @@ namespace doc {
       const versionMap &getTypeVersions() const override { return CUDA_SPARSE_TYPE_NAME_VER_MAP; }
       const hipVersionMap &getHipTypeVersions() const override { return HIP_SPARSE_TYPE_NAME_VER_MAP; }
       const string &getName() const override { return sCUSPARSE; }
-      const string& getSecondAPI() const { return sROC; }
-      const string& getJointAPI() const { return sHIPandROC; }
+      const string &getSecondAPI() const { return sROC; }
+      const string &getJointAPI() const { return sHIPandROC; }
       const string &getFileName(docType format) const override {
         switch (format) {
           case none:
@@ -650,11 +650,11 @@ namespace doc {
 
   class ROCSPARSE : public SPARSE {
   public:
-    ROCSPARSE(const string& outDir) : SPARSE(outDir) { hasROC = false; isROC = true; }
+    ROCSPARSE(const string &outDir) : SPARSE(outDir) { hasROC = false; isROC = true; }
     virtual ~ROCSPARSE() {}
   protected:
-    const string& getAPI() const { return sROC; }
-    const string& getFileName(docType format) const override {
+    const string &getAPI() const { return sROC; }
+    const string &getFileName(docType format) const override {
       switch (format) {
       case none:
       default: return sEmpty;
