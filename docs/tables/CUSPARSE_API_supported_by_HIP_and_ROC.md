@@ -39,17 +39,17 @@
 |`CUSPARSE_INDEX_16U`|10.1| | |`HIPSPARSE_INDEX_16U`|4.1.0| | | | | | | | |
 |`CUSPARSE_INDEX_32I`|10.1| | |`HIPSPARSE_INDEX_32I`|4.1.0| | | | | | | | |
 |`CUSPARSE_INDEX_64I`|10.2| | |`HIPSPARSE_INDEX_64I`|4.1.0| | | | | | | | |
-|`CUSPARSE_INDEX_BASE_ONE`| | | |`HIPSPARSE_INDEX_BASE_ONE`|1.9.2| | | | | | | | |
-|`CUSPARSE_INDEX_BASE_ZERO`| | | |`HIPSPARSE_INDEX_BASE_ZERO`|1.9.2| | | | | | | | |
-|`CUSPARSE_MATRIX_TYPE_GENERAL`| | | |`HIPSPARSE_MATRIX_TYPE_GENERAL`|1.9.2| | | | | | | | |
-|`CUSPARSE_MATRIX_TYPE_HERMITIAN`| | | |`HIPSPARSE_MATRIX_TYPE_HERMITIAN`|1.9.2| | | | | | | | |
-|`CUSPARSE_MATRIX_TYPE_SYMMETRIC`| | | |`HIPSPARSE_MATRIX_TYPE_SYMMETRIC`|1.9.2| | | | | | | | |
-|`CUSPARSE_MATRIX_TYPE_TRIANGULAR`| | | |`HIPSPARSE_MATRIX_TYPE_TRIANGULAR`|1.9.2| | | | | | | | |
+|`CUSPARSE_INDEX_BASE_ONE`| | | |`HIPSPARSE_INDEX_BASE_ONE`|1.9.2| | | |`rocsparse_index_base_one`|1.9.0| | | |
+|`CUSPARSE_INDEX_BASE_ZERO`| | | |`HIPSPARSE_INDEX_BASE_ZERO`|1.9.2| | | |`rocsparse_index_base_zero`|1.9.0| | | |
+|`CUSPARSE_MATRIX_TYPE_GENERAL`| | | |`HIPSPARSE_MATRIX_TYPE_GENERAL`|1.9.2| | | |`rocsparse_matrix_type_general`|1.9.0| | | |
+|`CUSPARSE_MATRIX_TYPE_HERMITIAN`| | | |`HIPSPARSE_MATRIX_TYPE_HERMITIAN`|1.9.2| | | |`rocsparse_matrix_type_hermitian`|1.9.0| | | |
+|`CUSPARSE_MATRIX_TYPE_SYMMETRIC`| | | |`HIPSPARSE_MATRIX_TYPE_SYMMETRIC`|1.9.2| | | |`rocsparse_matrix_type_symmetric`|1.9.0| | | |
+|`CUSPARSE_MATRIX_TYPE_TRIANGULAR`| | | |`HIPSPARSE_MATRIX_TYPE_TRIANGULAR`|1.9.2| | | |`rocsparse_matrix_type_triangular`|1.9.0| | | |
 |`CUSPARSE_MM_ALG_DEFAULT`|10.2|11.0|12.0|`HIPSPARSE_MM_ALG_DEFAULT`|4.2.0| | | | | | | | |
 |`CUSPARSE_MV_ALG_DEFAULT`|10.2|11.3|12.0|`HIPSPARSE_MV_ALG_DEFAULT`|4.1.0| | | | | | | | |
-|`CUSPARSE_OPERATION_CONJUGATE_TRANSPOSE`| | | |`HIPSPARSE_OPERATION_CONJUGATE_TRANSPOSE`|1.9.2| | | | | | | | |
-|`CUSPARSE_OPERATION_NON_TRANSPOSE`| | | |`HIPSPARSE_OPERATION_NON_TRANSPOSE`|1.9.2| | | | | | | | |
-|`CUSPARSE_OPERATION_TRANSPOSE`| | | |`HIPSPARSE_OPERATION_TRANSPOSE`|1.9.2| | | | | | | | |
+|`CUSPARSE_OPERATION_CONJUGATE_TRANSPOSE`| | | |`HIPSPARSE_OPERATION_CONJUGATE_TRANSPOSE`|1.9.2| | | |`rocsparse_operation_conjugate_transpose`|1.9.0| | | |
+|`CUSPARSE_OPERATION_NON_TRANSPOSE`| | | |`HIPSPARSE_OPERATION_NON_TRANSPOSE`|1.9.2| | | |`rocsparse_operation_none`|1.9.0| | | |
+|`CUSPARSE_OPERATION_TRANSPOSE`| | | |`HIPSPARSE_OPERATION_TRANSPOSE`|1.9.2| | | |`rocsparse_operation_transpose`|1.9.0| | | |
 |`CUSPARSE_ORDER_COL`|10.1| | |`HIPSPARSE_ORDER_COL`|5.4.0| | | | | | | | |
 |`CUSPARSE_ORDER_ROW`|10.1| | |`HIPSPARSE_ORDER_ROW`|4.2.0| | | | | | | | |
 |`CUSPARSE_POINTER_MODE_DEVICE`| | | |`HIPSPARSE_POINTER_MODE_DEVICE`|1.9.2| | | | | | | | |
@@ -130,8 +130,8 @@
 |`csru2csrInfo_t`| | | |`csru2csrInfo_t`|4.2.0| | | | | | | | |
 |`cusparseAction_t`| | | |`hipsparseAction_t`|1.9.2| | | | | | | | |
 |`cusparseAlgMode_t`|8.0| |12.0| | | | | | | | | | |
-|`cusparseColorInfo`| | | | | | | | | | | | | |
-|`cusparseColorInfo_t`| | | |`hipsparseColorInfo_t`|4.5.0| | | | | | | | |
+|`cusparseColorInfo`| | | | | | | | |`_rocsparse_color_info`|4.5.0| | | |
+|`cusparseColorInfo_t`| | | |`hipsparseColorInfo_t`|4.5.0| | | |`rocsparse_color_info`|4.5.0| | | |
 |`cusparseConstDnMatDescr_t`|12.0| | | | | | | | | | | | |
 |`cusparseConstDnVecDescr_t`|12.0| | | | | | | | | | | | |
 |`cusparseConstSpMatDescr_t`|12.0| | | | | | | | | | | | |
@@ -151,13 +151,13 @@
 |`cusparseHybMat`| |10.2|11.0| | | | | |`_rocsparse_hyb_mat`|1.9.0| | | |
 |`cusparseHybMat_t`| |10.2|11.0|`hipsparseHybMat_t`|1.9.2| | | |`rocsparse_hyb_mat`|1.9.0| | | |
 |`cusparseHybPartition_t`| |10.2|11.0|`hipsparseHybPartition_t`|1.9.2| | | | | | | | |
-|`cusparseIndexBase_t`| | | |`hipsparseIndexBase_t`|1.9.2| | | | | | | | |
+|`cusparseIndexBase_t`| | | |`hipsparseIndexBase_t`|1.9.2| | | |`rocsparse_index_base`|1.9.0| | | |
 |`cusparseIndexType_t`|10.1| | |`hipsparseIndexType_t`|4.1.0| | | | | | | | |
 |`cusparseLoggerCallback_t`|11.5| | | | | | | | | | | | |
 |`cusparseMatDescr`| | | | | | | | |`_rocsparse_mat_descr`|1.9.0| | | |
 |`cusparseMatDescr_t`| | | |`hipsparseMatDescr_t`|1.9.2| | | |`rocsparse_mat_descr`|1.9.0| | | |
-|`cusparseMatrixType_t`| | | |`hipsparseMatrixType_t`|1.9.2| | | | | | | | |
-|`cusparseOperation_t`| | | |`hipsparseOperation_t`|1.9.2| | | | | | | | |
+|`cusparseMatrixType_t`| | | |`hipsparseMatrixType_t`|1.9.2| | | |`rocsparse_matrix_type`|1.9.0| | | |
+|`cusparseOperation_t`| | | |`hipsparseOperation_t`|1.9.2| | | |`rocsparse_operation`|1.9.0| | | |
 |`cusparseOrder_t`|10.1| | |`hipsparseOrder_t`|4.2.0| | | | | | | | |
 |`cusparsePointerMode_t`| | | |`hipsparsePointerMode_t`|1.9.2| | | | | | | | |
 |`cusparseSDDMMAlg_t`|11.2| | |`hipsparseSDDMMAlg_t`|4.3.0| | | | | | | | |
