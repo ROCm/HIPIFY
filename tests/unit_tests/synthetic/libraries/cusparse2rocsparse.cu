@@ -87,6 +87,30 @@ int main() {
   cusparseSolvePolicy_t SOLVE_POLICY_NO_LEVEL = CUSPARSE_SOLVE_POLICY_NO_LEVEL;
   cusparseSolvePolicy_t SOLVE_POLICY_USE_LEVEL = CUSPARSE_SOLVE_POLICY_USE_LEVEL;
 
+  // CHECK: rocsparse_pointer_mode pointerMode_t;
+  // CHECK-NEXT: rocsparse_pointer_mode POINTER_MODE_HOST = rocsparse_pointer_mode_host;
+  // CHECK-NEXT: rocsparse_pointer_mode POINTER_MODE_DEVICE = rocsparse_pointer_mode_device;
+  cusparsePointerMode_t pointerMode_t;
+  cusparsePointerMode_t POINTER_MODE_HOST = CUSPARSE_POINTER_MODE_HOST;
+  cusparsePointerMode_t POINTER_MODE_DEVICE = CUSPARSE_POINTER_MODE_DEVICE;
+
+  // CHECK: rocsparse_status status_t;
+  // CHECK-NEXT: rocsparse_status STATUS_SUCCESS = rocsparse_status_success;
+  // CHECK-NEXT: rocsparse_status STATUS_NOT_INITIALIZED = rocsparse_status_not_initialized;
+  // CHECK-NEXT: rocsparse_status STATUS_ALLOC_FAILED = rocsparse_status_memory_error;
+  // CHECK-NEXT: rocsparse_status STATUS_INVALID_VALUE = rocsparse_status_invalid_value;
+  // CHECK-NEXT: rocsparse_status STATUS_ARCH_MISMATCH = rocsparse_status_arch_mismatch;
+  // CHECK-NEXT: rocsparse_status STATUS_INTERNAL_ERROR = rocsparse_status_internal_error;
+  // CHECK-NEXT: rocsparse_status STATUS_ZERO_PIVOT = rocsparse_status_zero_pivot;
+  cusparseStatus_t status_t;
+  cusparseStatus_t STATUS_SUCCESS = CUSPARSE_STATUS_SUCCESS;
+  cusparseStatus_t STATUS_NOT_INITIALIZED = CUSPARSE_STATUS_NOT_INITIALIZED;
+  cusparseStatus_t STATUS_ALLOC_FAILED = CUSPARSE_STATUS_ALLOC_FAILED;
+  cusparseStatus_t STATUS_INVALID_VALUE = CUSPARSE_STATUS_INVALID_VALUE;
+  cusparseStatus_t STATUS_ARCH_MISMATCH = CUSPARSE_STATUS_ARCH_MISMATCH;
+  cusparseStatus_t STATUS_INTERNAL_ERROR = CUSPARSE_STATUS_INTERNAL_ERROR;
+  cusparseStatus_t STATUS_ZERO_PIVOT = CUSPARSE_STATUS_ZERO_PIVOT;
+
 #if CUDA_VERSION >= 10010
   // CHECK: _rocsparse_spmat_descr *spMatDescr = nullptr;
   // CHECK-NEXT: rocsparse_spmat_descr spMatDescr_t;
@@ -97,6 +121,24 @@ int main() {
   // CHECK-NEXT: rocsparse_dnmat_descr dnMatDescr_t;
   cusparseDnMatDescr *dnMatDescr = nullptr;
   cusparseDnMatDescr_t dnMatDescr_t;
+
+  // CHECK: rocsparse_indextype indexType_t;
+  // CHECK-NEXT: rocsparse_indextype INDEX_16U = rocsparse_indextype_u16;
+  // CHECK-NEXT: rocsparse_indextype INDEX_32I = rocsparse_indextype_i32;
+  // CHECK-NEXT: rocsparse_indextype INDEX_64I = rocsparse_indextype_i64;
+  cusparseIndexType_t indexType_t;
+  cusparseIndexType_t INDEX_16U = CUSPARSE_INDEX_16U;
+  cusparseIndexType_t INDEX_32I = CUSPARSE_INDEX_32I;
+  cusparseIndexType_t INDEX_64I = CUSPARSE_INDEX_64I;
+
+  // CHECK: rocsparse_format format_t;
+  // CHECK-NEXT: rocsparse_format FORMAT_CSR = rocsparse_format_csr;
+  // CHECK-NEXT: rocsparse_format FORMAT_CSC = rocsparse_format_csc;
+  // CHECK-NEXT: rocsparse_format FORMAT_CSO = rocsparse_format_coo;
+  cusparseFormat_t format_t;
+  cusparseFormat_t FORMAT_CSR = CUSPARSE_FORMAT_CSR;
+  cusparseFormat_t FORMAT_CSC = CUSPARSE_FORMAT_CSC;
+  cusparseFormat_t FORMAT_CSO = CUSPARSE_FORMAT_COO;
 #endif
 
 #if CUDA_VERSION >= 10020
@@ -109,6 +151,14 @@ int main() {
   // CHECK-NEXT: rocsparse_dnvec_descr dnVecDescr_t;
   cusparseDnVecDescr *dnVecDescr = nullptr;
   cusparseDnVecDescr_t dnVecDescr_t;
+
+  // CHECK: rocsparse_status STATUS_NOT_SUPPORTED = rocsparse_status_not_implemented;
+  cusparseStatus_t STATUS_NOT_SUPPORTED = CUSPARSE_STATUS_NOT_SUPPORTED;
+#endif
+
+#if CUDA_VERSION >= 10020 && CUDA_VERSION < 12000
+  // CHECK: rocsparse_format FORMAT_COO_AOS = rocsparse_format_coo_aos;
+  cusparseFormat_t FORMAT_COO_AOS = CUSPARSE_FORMAT_COO_AOS;
 #endif
 
 #if CUDA_VERSION < 11000
@@ -125,6 +175,18 @@ int main() {
   cusparseHybPartition_t HYB_PARTITION_AUTO = CUSPARSE_HYB_PARTITION_AUTO;
   cusparseHybPartition_t HYB_PARTITION_USER = CUSPARSE_HYB_PARTITION_USER;
   cusparseHybPartition_t HYB_PARTITION_MAX = CUSPARSE_HYB_PARTITION_MAX;
+#endif
+
+#if CUDA_VERSION >= 11020
+  // CHECK: rocsparse_format FORMAT_BLOCKED_ELL = rocsparse_format_bell;
+  cusparseFormat_t FORMAT_BLOCKED_ELL = CUSPARSE_FORMAT_BLOCKED_ELL;
+#endif
+
+#if CUDA_VERSION >= 12010
+  // CHECK: rocsparse_format FORMAT_BSR = rocsparse_format_bsr;
+  // CHECK-NEXT: rocsparse_format FORMAT_SLICED_ELLPACK = rocsparse_format_ell;
+  cusparseFormat_t FORMAT_BSR = CUSPARSE_FORMAT_BSR;
+  cusparseFormat_t FORMAT_SLICED_ELLPACK = CUSPARSE_FORMAT_SLICED_ELLPACK;
 #endif
 
   return 0;

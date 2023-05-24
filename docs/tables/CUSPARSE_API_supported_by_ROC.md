@@ -26,19 +26,19 @@
 |`CUSPARSE_DIRECTION_ROW`| | | |`rocsparse_direction_row`|3.1.0| | | |
 |`CUSPARSE_FILL_MODE_LOWER`| | | |`rocsparse_fill_mode_lower`|1.9.0| | | |
 |`CUSPARSE_FILL_MODE_UPPER`| | | |`rocsparse_fill_mode_upper`|1.9.0| | | |
-|`CUSPARSE_FORMAT_BLOCKED_ELL`|11.2| | | | | | | |
-|`CUSPARSE_FORMAT_BSR`|12.1| | | | | | | |
-|`CUSPARSE_FORMAT_COO`|10.1| | | | | | | |
-|`CUSPARSE_FORMAT_COO_AOS`|10.2| |12.0| | | | | |
-|`CUSPARSE_FORMAT_CSC`|10.1| | | | | | | |
-|`CUSPARSE_FORMAT_CSR`|10.1| | | | | | | |
-|`CUSPARSE_FORMAT_SLICED_ELLPACK`|12.1| | | | | | | |
+|`CUSPARSE_FORMAT_BLOCKED_ELL`|11.2| | |`rocsparse_format_bell`|4.5.0| | | |
+|`CUSPARSE_FORMAT_BSR`|12.1| | |`rocsparse_format_bsr`|5.3.0| | | |
+|`CUSPARSE_FORMAT_COO`|10.1| | |`rocsparse_format_coo`|4.1.0| | | |
+|`CUSPARSE_FORMAT_COO_AOS`|10.2| |12.0|`rocsparse_format_coo_aos`|4.1.0| | | |
+|`CUSPARSE_FORMAT_CSC`|10.1| | |`rocsparse_format_csc`|4.1.0| | | |
+|`CUSPARSE_FORMAT_CSR`|10.1| | |`rocsparse_format_csr`|4.1.0| | | |
+|`CUSPARSE_FORMAT_SLICED_ELLPACK`|12.1| | |`rocsparse_format_ell`|4.1.0| | | |
 |`CUSPARSE_HYB_PARTITION_AUTO`| |10.2|11.0|`rocsparse_hyb_partition_auto`|1.9.0| | | |
 |`CUSPARSE_HYB_PARTITION_MAX`| |10.2|11.0|`rocsparse_hyb_partition_max`|1.9.0| | | |
 |`CUSPARSE_HYB_PARTITION_USER`| |10.2|11.0|`rocsparse_hyb_partition_user`|1.9.0| | | |
-|`CUSPARSE_INDEX_16U`|10.1| | | | | | | |
-|`CUSPARSE_INDEX_32I`|10.1| | | | | | | |
-|`CUSPARSE_INDEX_64I`|10.2| | | | | | | |
+|`CUSPARSE_INDEX_16U`|10.1| | |`rocsparse_indextype_u16`|4.1.0| | | |
+|`CUSPARSE_INDEX_32I`|10.1| | |`rocsparse_indextype_i32`|4.1.0| | | |
+|`CUSPARSE_INDEX_64I`|10.2| | |`rocsparse_indextype_i64`|4.1.0| | | |
 |`CUSPARSE_INDEX_BASE_ONE`| | | |`rocsparse_index_base_one`|1.9.0| | | |
 |`CUSPARSE_INDEX_BASE_ZERO`| | | |`rocsparse_index_base_zero`|1.9.0| | | |
 |`CUSPARSE_MATRIX_TYPE_GENERAL`| | | |`rocsparse_matrix_type_general`|1.9.0| | | |
@@ -52,8 +52,8 @@
 |`CUSPARSE_OPERATION_TRANSPOSE`| | | |`rocsparse_operation_transpose`|1.9.0| | | |
 |`CUSPARSE_ORDER_COL`|10.1| | | | | | | |
 |`CUSPARSE_ORDER_ROW`|10.1| | | | | | | |
-|`CUSPARSE_POINTER_MODE_DEVICE`| | | | | | | | |
-|`CUSPARSE_POINTER_MODE_HOST`| | | | | | | | |
+|`CUSPARSE_POINTER_MODE_DEVICE`| | | |`rocsparse_pointer_mode_device`|1.9.0| | | |
+|`CUSPARSE_POINTER_MODE_HOST`| | | |`rocsparse_pointer_mode_host`|1.9.0| | | |
 |`CUSPARSE_SDDMM_ALG_DEFAULT`|11.2| | | | | | | |
 |`CUSPARSE_SIDE_LEFT`| | |11.5| | | | | |
 |`CUSPARSE_SIDE_RIGHT`| | |11.5| | | | | |
@@ -93,18 +93,18 @@
 |`CUSPARSE_SPSV_ALG_DEFAULT`|11.3| | | | | | | |
 |`CUSPARSE_SPSV_UPDATE_DIAGONAL`|12.1| | | | | | | |
 |`CUSPARSE_SPSV_UPDATE_GENERAL`|12.1| | | | | | | |
-|`CUSPARSE_STATUS_ALLOC_FAILED`| | | | | | | | |
-|`CUSPARSE_STATUS_ARCH_MISMATCH`| | | | | | | | |
+|`CUSPARSE_STATUS_ALLOC_FAILED`| | | |`rocsparse_status_memory_error`|1.9.0| | | |
+|`CUSPARSE_STATUS_ARCH_MISMATCH`| | | |`rocsparse_status_arch_mismatch`|1.9.0| | | |
 |`CUSPARSE_STATUS_EXECUTION_FAILED`| | | | | | | | |
 |`CUSPARSE_STATUS_INSUFFICIENT_RESOURCES`|11.0| | | | | | | |
-|`CUSPARSE_STATUS_INTERNAL_ERROR`| | | | | | | | |
-|`CUSPARSE_STATUS_INVALID_VALUE`| | | | | | | | |
+|`CUSPARSE_STATUS_INTERNAL_ERROR`| | | |`rocsparse_status_internal_error`|1.9.0| | | |
+|`CUSPARSE_STATUS_INVALID_VALUE`| | | |`rocsparse_status_invalid_value`|1.9.0| | | |
 |`CUSPARSE_STATUS_MAPPING_ERROR`| | | | | | | | |
 |`CUSPARSE_STATUS_MATRIX_TYPE_NOT_SUPPORTED`| | | | | | | | |
-|`CUSPARSE_STATUS_NOT_INITIALIZED`| | | | | | | | |
-|`CUSPARSE_STATUS_NOT_SUPPORTED`|10.2| | | | | | | |
-|`CUSPARSE_STATUS_SUCCESS`| | | | | | | | |
-|`CUSPARSE_STATUS_ZERO_PIVOT`| | | | | | | | |
+|`CUSPARSE_STATUS_NOT_INITIALIZED`| | | |`rocsparse_status_not_initialized`|4.1.0| | | |
+|`CUSPARSE_STATUS_NOT_SUPPORTED`|10.2| | |`rocsparse_status_not_implemented`|1.9.0| | | |
+|`CUSPARSE_STATUS_SUCCESS`| | | |`rocsparse_status_success`|1.9.0| | | |
+|`CUSPARSE_STATUS_ZERO_PIVOT`| | | |`rocsparse_status_zero_pivot`|1.9.0| | | |
 |`CUSPARSE_VERSION`|10.2| | | | | | | |
 |`CUSPARSE_VER_BUILD`|10.2| | | | | | | |
 |`CUSPARSE_VER_MAJOR`|10.2| | | | | | | |
@@ -146,20 +146,20 @@
 |`cusparseDnVecDescr`|10.2| | |`_rocsparse_dnvec_descr`|4.1.0| | | |
 |`cusparseDnVecDescr_t`|10.2| | |`rocsparse_dnvec_descr`|4.1.0| | | |
 |`cusparseFillMode_t`| | | |`rocsparse_fill_mode`|1.9.0| | | |
-|`cusparseFormat_t`|10.1| | | | | | | |
+|`cusparseFormat_t`|10.1| | |`rocsparse_format`|4.1.0| | | |
 |`cusparseHandle_t`| | | |`rocsparse_handle`|1.9.0| | | |
 |`cusparseHybMat`| |10.2|11.0|`_rocsparse_hyb_mat`|1.9.0| | | |
 |`cusparseHybMat_t`| |10.2|11.0|`rocsparse_hyb_mat`|1.9.0| | | |
 |`cusparseHybPartition_t`| |10.2|11.0|`rocsparse_hyb_partition`|1.9.0| | | |
 |`cusparseIndexBase_t`| | | |`rocsparse_index_base`|1.9.0| | | |
-|`cusparseIndexType_t`|10.1| | | | | | | |
+|`cusparseIndexType_t`|10.1| | |`rocsparse_indextype`|4.1.0| | | |
 |`cusparseLoggerCallback_t`|11.5| | | | | | | |
 |`cusparseMatDescr`| | | |`_rocsparse_mat_descr`|1.9.0| | | |
 |`cusparseMatDescr_t`| | | |`rocsparse_mat_descr`|1.9.0| | | |
 |`cusparseMatrixType_t`| | | |`rocsparse_matrix_type`|1.9.0| | | |
 |`cusparseOperation_t`| | | |`rocsparse_operation`|1.9.0| | | |
 |`cusparseOrder_t`|10.1| | | | | | | |
-|`cusparsePointerMode_t`| | | | | | | | |
+|`cusparsePointerMode_t`| | | |`rocsparse_pointer_mode`|1.9.0| | | |
 |`cusparseSDDMMAlg_t`|11.2| | | | | | | |
 |`cusparseSideMode_t`| | |11.5| | | | | |
 |`cusparseSolveAnalysisInfo`| |10.2|11.0| | | | | |
@@ -186,7 +186,7 @@
 |`cusparseSpVecDescr`|10.2| | |`_rocsparse_spvec_descr`|4.1.0| | | |
 |`cusparseSpVecDescr_t`|10.2| | |`rocsparse_spvec_descr`|4.1.0| | | |
 |`cusparseSparseToDenseAlg_t`|11.1| | | | | | | |
-|`cusparseStatus_t`| | | | | | | | |
+|`cusparseStatus_t`| | | |`rocsparse_status`|1.9.0| | | |
 |`pruneInfo`|9.0| | | | | | | |
 |`pruneInfo_t`|9.0| | | | | | | |
 
