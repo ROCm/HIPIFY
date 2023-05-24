@@ -46,6 +46,41 @@ int main() {
   cusparseMatrixType_t MATRIX_TYPE_HERMITIAN = CUSPARSE_MATRIX_TYPE_HERMITIAN;
   cusparseMatrixType_t MATRIX_TYPE_TRIANGULAR = CUSPARSE_MATRIX_TYPE_TRIANGULAR;
 
+  // CHECK: hipsparseDiagType_t diagType_t;
+  // CHECK-NEXT: hipsparseDiagType_t DIAG_TYPE_NON_UNIT = HIPSPARSE_DIAG_TYPE_NON_UNIT;
+  // CHECK-NEXT: hipsparseDiagType_t DIAG_TYPE_UNIT = HIPSPARSE_DIAG_TYPE_UNIT;
+  cusparseDiagType_t diagType_t;
+  cusparseDiagType_t DIAG_TYPE_NON_UNIT = CUSPARSE_DIAG_TYPE_NON_UNIT;
+  cusparseDiagType_t DIAG_TYPE_UNIT = CUSPARSE_DIAG_TYPE_UNIT;
+
+  // CHECK: hipsparseFillMode_t fillMode_t;
+  // CHECK-NEXT: hipsparseFillMode_t FILL_MODE_LOWER = HIPSPARSE_FILL_MODE_LOWER;
+  // CHECK-NEXT: hipsparseFillMode_t FILL_MODE_UPPER = HIPSPARSE_FILL_MODE_UPPER;
+  cusparseFillMode_t fillMode_t;
+  cusparseFillMode_t FILL_MODE_LOWER = CUSPARSE_FILL_MODE_LOWER;
+  cusparseFillMode_t FILL_MODE_UPPER = CUSPARSE_FILL_MODE_UPPER;
+
+  // CHECK: hipsparseAction_t action_t;
+  // CHECK-NEXT: hipsparseAction_t ACTION_SYMBOLIC = HIPSPARSE_ACTION_SYMBOLIC;
+  // CHECK-NEXT: hipsparseAction_t ACTION_NUMERIC = HIPSPARSE_ACTION_NUMERIC;
+  cusparseAction_t action_t;
+  cusparseAction_t ACTION_SYMBOLIC = CUSPARSE_ACTION_SYMBOLIC;
+  cusparseAction_t ACTION_NUMERIC = CUSPARSE_ACTION_NUMERIC;
+
+  // CHECK: hipsparseDirection_t direction_t;
+  // CHECK-NEXT: hipsparseDirection_t DIRECTION_ROW = HIPSPARSE_DIRECTION_ROW;
+  // CHECK-NEXT: hipsparseDirection_t DIRECTION_COLUMN = HIPSPARSE_DIRECTION_COLUMN;
+  cusparseDirection_t direction_t;
+  cusparseDirection_t DIRECTION_ROW = CUSPARSE_DIRECTION_ROW;
+  cusparseDirection_t DIRECTION_COLUMN = CUSPARSE_DIRECTION_COLUMN;
+
+  // CHECK: hipsparseSolvePolicy_t solvePolicy_t;
+  // CHECK-NEXT: hipsparseSolvePolicy_t SOLVE_POLICY_NO_LEVEL = HIPSPARSE_SOLVE_POLICY_NO_LEVEL;
+  // CHECK-NEXT: hipsparseSolvePolicy_t SOLVE_POLICY_USE_LEVEL = HIPSPARSE_SOLVE_POLICY_USE_LEVEL;
+  cusparseSolvePolicy_t solvePolicy_t;
+  cusparseSolvePolicy_t SOLVE_POLICY_NO_LEVEL = CUSPARSE_SOLVE_POLICY_NO_LEVEL;
+  cusparseSolvePolicy_t SOLVE_POLICY_USE_LEVEL = CUSPARSE_SOLVE_POLICY_USE_LEVEL;
+
 #if CUDA_VERSION >= 10010
   // CHECK: hipsparseSpMatDescr_t spMatDescr_t;
   cusparseSpMatDescr_t spMatDescr_t;
@@ -65,6 +100,15 @@ int main() {
 #if CUDA_VERSION < 11000
   // CHECK: hipsparseHybMat_t hybMat_t;
   cusparseHybMat_t hybMat_t;
+
+  // CHECK: hipsparseHybPartition_t hybPartition_t;
+  // CHECK-NEXT: hipsparseHybPartition_t HYB_PARTITION_AUTO = HIPSPARSE_HYB_PARTITION_AUTO;
+  // CHECK-NEXT: hipsparseHybPartition_t HYB_PARTITION_USER = HIPSPARSE_HYB_PARTITION_USER;
+  // CHECK-NEXT: hipsparseHybPartition_t HYB_PARTITION_MAX = HIPSPARSE_HYB_PARTITION_MAX;
+  cusparseHybPartition_t hybPartition_t;
+  cusparseHybPartition_t HYB_PARTITION_AUTO = CUSPARSE_HYB_PARTITION_AUTO;
+  cusparseHybPartition_t HYB_PARTITION_USER = CUSPARSE_HYB_PARTITION_USER;
+  cusparseHybPartition_t HYB_PARTITION_MAX = CUSPARSE_HYB_PARTITION_MAX;
 #endif
 
   return 0;
