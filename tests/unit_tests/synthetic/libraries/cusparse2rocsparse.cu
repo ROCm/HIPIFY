@@ -52,6 +52,41 @@ int main() {
   cusparseMatrixType_t MATRIX_TYPE_HERMITIAN = CUSPARSE_MATRIX_TYPE_HERMITIAN;
   cusparseMatrixType_t MATRIX_TYPE_TRIANGULAR = CUSPARSE_MATRIX_TYPE_TRIANGULAR;
 
+  // CHECK: rocsparse_diag_type diagType_t;
+  // CHECK-NEXT: rocsparse_diag_type DIAG_TYPE_NON_UNIT = rocsparse_diag_type_non_unit;
+  // CHECK-NEXT: rocsparse_diag_type DIAG_TYPE_UNIT = rocsparse_diag_type_unit;
+  cusparseDiagType_t diagType_t;
+  cusparseDiagType_t DIAG_TYPE_NON_UNIT = CUSPARSE_DIAG_TYPE_NON_UNIT;
+  cusparseDiagType_t DIAG_TYPE_UNIT = CUSPARSE_DIAG_TYPE_UNIT;
+
+  // CHECK: rocsparse_fill_mode fillMode_t;
+  // CHECK-NEXT: rocsparse_fill_mode FILL_MODE_LOWER = rocsparse_fill_mode_lower;
+  // CHECK-NEXT: rocsparse_fill_mode FILL_MODE_UPPER = rocsparse_fill_mode_upper;
+  cusparseFillMode_t fillMode_t;
+  cusparseFillMode_t FILL_MODE_LOWER = CUSPARSE_FILL_MODE_LOWER;
+  cusparseFillMode_t FILL_MODE_UPPER = CUSPARSE_FILL_MODE_UPPER;
+
+  // CHECK: rocsparse_action action_t;
+  // CHECK-NEXT: rocsparse_action ACTION_SYMBOLIC = rocsparse_action_symbolic;
+  // CHECK-NEXT: rocsparse_action ACTION_NUMERIC = rocsparse_action_numeric;
+  cusparseAction_t action_t;
+  cusparseAction_t ACTION_SYMBOLIC = CUSPARSE_ACTION_SYMBOLIC;
+  cusparseAction_t ACTION_NUMERIC = CUSPARSE_ACTION_NUMERIC;
+
+  // CHECK: rocsparse_direction direction_t;
+  // CHECK-NEXT: rocsparse_direction DIRECTION_ROW = rocsparse_direction_row;
+  // CHECK-NEXT: rocsparse_direction DIRECTION_COLUMN = rocsparse_direction_column;
+  cusparseDirection_t direction_t;
+  cusparseDirection_t DIRECTION_ROW = CUSPARSE_DIRECTION_ROW;
+  cusparseDirection_t DIRECTION_COLUMN = CUSPARSE_DIRECTION_COLUMN;
+
+  // CHECK: rocsparse_solve_policy solvePolicy_t;
+  // CHECK-NEXT: rocsparse_solve_policy SOLVE_POLICY_NO_LEVEL = rocsparse_solve_policy_auto;
+  // CHECK-NEXT: rocsparse_solve_policy SOLVE_POLICY_USE_LEVEL = rocsparse_solve_policy_auto;
+  cusparseSolvePolicy_t solvePolicy_t;
+  cusparseSolvePolicy_t SOLVE_POLICY_NO_LEVEL = CUSPARSE_SOLVE_POLICY_NO_LEVEL;
+  cusparseSolvePolicy_t SOLVE_POLICY_USE_LEVEL = CUSPARSE_SOLVE_POLICY_USE_LEVEL;
+
 #if CUDA_VERSION >= 10010
   // CHECK: _rocsparse_spmat_descr *spMatDescr = nullptr;
   // CHECK-NEXT: rocsparse_spmat_descr spMatDescr_t;
@@ -81,6 +116,15 @@ int main() {
   // CHECK-NEXT: rocsparse_hyb_mat hybMat_t;
   cusparseHybMat *hybMat = nullptr;
   cusparseHybMat_t hybMat_t;
+
+  // CHECK: rocsparse_hyb_partition hybPartition_t;
+  // CHECK-NEXT: rocsparse_hyb_partition HYB_PARTITION_AUTO = rocsparse_hyb_partition_auto;
+  // CHECK-NEXT: rocsparse_hyb_partition HYB_PARTITION_USER = rocsparse_hyb_partition_user;
+  // CHECK-NEXT: rocsparse_hyb_partition HYB_PARTITION_MAX = rocsparse_hyb_partition_max;
+  cusparseHybPartition_t hybPartition_t;
+  cusparseHybPartition_t HYB_PARTITION_AUTO = CUSPARSE_HYB_PARTITION_AUTO;
+  cusparseHybPartition_t HYB_PARTITION_USER = CUSPARSE_HYB_PARTITION_USER;
+  cusparseHybPartition_t HYB_PARTITION_MAX = CUSPARSE_HYB_PARTITION_MAX;
 #endif
 
   return 0;
