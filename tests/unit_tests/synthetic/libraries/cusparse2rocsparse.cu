@@ -139,6 +139,13 @@ int main() {
   cusparseFormat_t FORMAT_CSR = CUSPARSE_FORMAT_CSR;
   cusparseFormat_t FORMAT_CSC = CUSPARSE_FORMAT_CSC;
   cusparseFormat_t FORMAT_CSO = CUSPARSE_FORMAT_COO;
+
+  // CHECK: rocsparse_order order_t;
+  // CHECK-NEXT: rocsparse_order ORDER_COL = rocsparse_order_row;
+  // CHECK-NEXT: rocsparse_order ORDER_ROW = rocsparse_order_column;
+  cusparseOrder_t order_t;
+  cusparseOrder_t ORDER_COL = CUSPARSE_ORDER_COL;
+  cusparseOrder_t ORDER_ROW = CUSPARSE_ORDER_ROW;
 #endif
 
 #if CUDA_VERSION >= 10020
@@ -154,6 +161,9 @@ int main() {
 
   // CHECK: rocsparse_status STATUS_NOT_SUPPORTED = rocsparse_status_not_implemented;
   cusparseStatus_t STATUS_NOT_SUPPORTED = CUSPARSE_STATUS_NOT_SUPPORTED;
+
+  // CHECK: rocsparse_spmv_alg spMVAlg_t;
+  cusparseSpMVAlg_t spMVAlg_t;
 #endif
 
 #if CUDA_VERSION >= 10020 && CUDA_VERSION < 12000
@@ -180,6 +190,31 @@ int main() {
 #if CUDA_VERSION >= 11020
   // CHECK: rocsparse_format FORMAT_BLOCKED_ELL = rocsparse_format_bell;
   cusparseFormat_t FORMAT_BLOCKED_ELL = CUSPARSE_FORMAT_BLOCKED_ELL;
+
+  // CHECK: rocsparse_spmv_alg SPMV_ALG_DEFAULT = rocsparse_spmv_alg_default;
+  // CHECK-NEXT: rocsparse_spmv_alg SPMV_COO_ALG1 = rocsparse_spmv_alg_coo;
+  // CHECK-NEXT: rocsparse_spmv_alg SPMV_COO_ALG2 = rocsparse_spmv_alg_coo_atomic;
+  // CHECK-NEXT: rocsparse_spmv_alg SPMV_CSR_ALG1 = rocsparse_spmv_alg_csr_adaptive;
+  // CHECK-NEXT: rocsparse_spmv_alg SPMV_CSR_ALG2 = rocsparse_spmv_alg_csr_stream;
+  cusparseSpMVAlg_t SPMV_ALG_DEFAULT = CUSPARSE_SPMV_ALG_DEFAULT;
+  cusparseSpMVAlg_t SPMV_COO_ALG1 = CUSPARSE_SPMV_COO_ALG1;
+  cusparseSpMVAlg_t SPMV_COO_ALG2 = CUSPARSE_SPMV_COO_ALG2;
+  cusparseSpMVAlg_t SPMV_CSR_ALG1 = CUSPARSE_SPMV_CSR_ALG1;
+  cusparseSpMVAlg_t SPMV_CSR_ALG2 = CUSPARSE_SPMV_CSR_ALG2;
+#endif
+
+#if CUDA_VERSION >= 11030
+  // CHECK: rocsparse_spmat_attribute spMatAttribute_t;
+  // CHECK-NEXT: rocsparse_spmat_attribute SPMAT_FILL_MODE = rocsparse_spmat_fill_mode;
+  // CHECK-NEXT: rocsparse_spmat_attribute SPMAT_DIAG_TYPE = rocsparse_spmat_diag_type;
+  cusparseSpMatAttribute_t spMatAttribute_t;
+  cusparseSpMatAttribute_t SPMAT_FILL_MODE = CUSPARSE_SPMAT_FILL_MODE;
+  cusparseSpMatAttribute_t SPMAT_DIAG_TYPE = CUSPARSE_SPMAT_DIAG_TYPE;
+
+  // CHECK: rocsparse_spsv_alg spSVAlg_t;
+  // CHECK-NEXT: rocsparse_spsv_alg SPSV_ALG_DEFAULT = rocsparse_spsv_alg_default;
+  cusparseSpSVAlg_t spSVAlg_t;
+  cusparseSpSVAlg_t SPSV_ALG_DEFAULT = CUSPARSE_SPSV_ALG_DEFAULT;
 #endif
 
 #if CUDA_VERSION >= 12010
@@ -187,6 +222,11 @@ int main() {
   // CHECK-NEXT: rocsparse_format FORMAT_SLICED_ELLPACK = rocsparse_format_ell;
   cusparseFormat_t FORMAT_BSR = CUSPARSE_FORMAT_BSR;
   cusparseFormat_t FORMAT_SLICED_ELLPACK = CUSPARSE_FORMAT_SLICED_ELLPACK;
+#endif
+
+#if CUDA_VERSION >= 12010 && CUSPARSE_VERSION >= 12100
+  // CHECK: rocsparse_spmv_alg SPMV_SELL_ALG1 = rocsparse_spmv_alg_ell;
+  cusparseSpMVAlg_t SPMV_SELL_ALG1 = CUSPARSE_SPMV_SELL_ALG1;
 #endif
 
   return 0;
