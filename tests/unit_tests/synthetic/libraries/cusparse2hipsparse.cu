@@ -135,6 +135,13 @@ int main() {
   cusparseFormat_t FORMAT_CSR = CUSPARSE_FORMAT_CSR;
   cusparseFormat_t FORMAT_CSC = CUSPARSE_FORMAT_CSC;
   cusparseFormat_t FORMAT_CSO = CUSPARSE_FORMAT_COO;
+
+  // CHECK: hipsparseOrder_t order_t;
+  // CHECK-NEXT: hipsparseOrder_t ORDER_COL = HIPSPARSE_ORDER_COL;
+  // CHECK-NEXT: hipsparseOrder_t ORDER_ROW = HIPSPARSE_ORDER_ROW;
+  cusparseOrder_t order_t;
+  cusparseOrder_t ORDER_COL = CUSPARSE_ORDER_COL;
+  cusparseOrder_t ORDER_ROW = CUSPARSE_ORDER_ROW;
 #endif
 
 #if CUDA_VERSION >= 10020
@@ -146,11 +153,24 @@ int main() {
 
   // CHECK: hipsparseStatus_t STATUS_NOT_SUPPORTED = HIPSPARSE_STATUS_NOT_SUPPORTED;
   cusparseStatus_t STATUS_NOT_SUPPORTED = CUSPARSE_STATUS_NOT_SUPPORTED;
+
+  // CHECK: hipsparseSpMVAlg_t spMVAlg_t;
+  cusparseSpMVAlg_t spMVAlg_t;
 #endif
 
 #if CUDA_VERSION >= 10020 && CUDA_VERSION < 12000
   // CHECK: hipsparseFormat_t FORMAT_COO_AOS = HIPSPARSE_FORMAT_COO_AOS;
   cusparseFormat_t FORMAT_COO_AOS = CUSPARSE_FORMAT_COO_AOS;
+
+  // CHECK: hipsparseSpMVAlg_t MV_ALG_DEFAULT = HIPSPARSE_MV_ALG_DEFAULT;
+  cusparseSpMVAlg_t MV_ALG_DEFAULT = CUSPARSE_MV_ALG_DEFAULT;
+
+  // CHECK: hipsparseSpMVAlg_t COOMV_ALG = HIPSPARSE_COOMV_ALG;
+  // CHECK-NEXT: hipsparseSpMVAlg_t CSRMV_ALG1 = HIPSPARSE_CSRMV_ALG1;
+  // CHECK-NEXT: hipsparseSpMVAlg_t CSRMV_ALG2 = HIPSPARSE_CSRMV_ALG2;
+  cusparseSpMVAlg_t COOMV_ALG = CUSPARSE_COOMV_ALG;
+  cusparseSpMVAlg_t CSRMV_ALG1 = CUSPARSE_CSRMV_ALG1;
+  cusparseSpMVAlg_t CSRMV_ALG2 = CUSPARSE_CSRMV_ALG2;
 #endif
 
 #if CUDA_VERSION >= 11000
@@ -175,6 +195,31 @@ int main() {
 #if CUDA_VERSION >= 11020
   // CHECK: hipsparseFormat_t FORMAT_BLOCKED_ELL = HIPSPARSE_FORMAT_BLOCKED_ELL;
   cusparseFormat_t FORMAT_BLOCKED_ELL = CUSPARSE_FORMAT_BLOCKED_ELL;
+
+  // CHECK: hipsparseSpMVAlg_t SPMV_ALG_DEFAULT = HIPSPARSE_SPMV_ALG_DEFAULT;
+  // CHECK-NEXT: hipsparseSpMVAlg_t SPMV_COO_ALG1 = HIPSPARSE_SPMV_COO_ALG1;
+  // CHECK-NEXT: hipsparseSpMVAlg_t SPMV_COO_ALG2 = HIPSPARSE_SPMV_COO_ALG2;
+  // CHECK-NEXT: hipsparseSpMVAlg_t SPMV_CSR_ALG1 = HIPSPARSE_SPMV_CSR_ALG1;
+  // CHECK-NEXT: hipsparseSpMVAlg_t SPMV_CSR_ALG2 = HIPSPARSE_SPMV_CSR_ALG2;
+  cusparseSpMVAlg_t SPMV_ALG_DEFAULT = CUSPARSE_SPMV_ALG_DEFAULT;
+  cusparseSpMVAlg_t SPMV_COO_ALG1 = CUSPARSE_SPMV_COO_ALG1;
+  cusparseSpMVAlg_t SPMV_COO_ALG2 = CUSPARSE_SPMV_COO_ALG2;
+  cusparseSpMVAlg_t SPMV_CSR_ALG1 = CUSPARSE_SPMV_CSR_ALG1;
+  cusparseSpMVAlg_t SPMV_CSR_ALG2 = CUSPARSE_SPMV_CSR_ALG2;
+#endif
+
+#if CUDA_VERSION >= 11030
+  // CHECK: hipsparseSpMatAttribute_t spMatAttribute_t;
+  // CHECK-NEXT: hipsparseSpMatAttribute_t SPMAT_FILL_MODE = HIPSPARSE_SPMAT_FILL_MODE;
+  // CHECK-NEXT: hipsparseSpMatAttribute_t SPMAT_DIAG_TYPE = HIPSPARSE_SPMAT_DIAG_TYPE;
+  cusparseSpMatAttribute_t spMatAttribute_t;
+  cusparseSpMatAttribute_t SPMAT_FILL_MODE = CUSPARSE_SPMAT_FILL_MODE;
+  cusparseSpMatAttribute_t SPMAT_DIAG_TYPE = CUSPARSE_SPMAT_DIAG_TYPE;
+
+  // CHECK: hipsparseSpSVAlg_t spSVAlg_t;
+  // CHECK-NEXT: hipsparseSpSVAlg_t SPSV_ALG_DEFAULT = HIPSPARSE_SPSV_ALG_DEFAULT;
+  cusparseSpSVAlg_t spSVAlg_t;
+  cusparseSpSVAlg_t SPSV_ALG_DEFAULT = CUSPARSE_SPSV_ALG_DEFAULT;
 #endif
 
   return 0;
