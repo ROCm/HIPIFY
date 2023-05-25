@@ -96,6 +96,11 @@ namespace doc {
   const string sSPARSE = "CUSPARSE_API_supported_by_HIP";
   const string sSPARSE_md = sSPARSE + md_ext;
   const string sSPARSE_csv = sSPARSE + csv_ext;
+  const string sSPARSE_and_ROC_md = sSPARSE + sandROC + md_ext;
+  const string sSPARSE_and_ROC_csv = sSPARSE + sandROC + csv_ext;
+  const string sROCSPARSE = "CUSPARSE_API_supported_by_ROC";
+  const string sROCSPARSE_md = sROCSPARSE + md_ext;
+  const string sROCSPARSE_csv = sROCSPARSE + csv_ext;
   const string sCUSPARSE = "CUSPARSE";
 
   const string sDEVICE = "CUDA_Device_API_supported_by_HIP";
@@ -503,7 +508,7 @@ namespace doc {
       const versionMap &getTypeVersions() const override { return CUDA_BLAS_TYPE_NAME_VER_MAP; }
       const hipVersionMap &getHipTypeVersions() const override { return HIP_BLAS_TYPE_NAME_VER_MAP; }
       const string &getName() const override { return sCUBLAS; }
-      const string& getSecondAPI() const { return sROC; }
+      const string &getSecondAPI() const { return sROC; }
       const string &getJointAPI() const { return sHIPandROC; }
       const string &getFileName(docType format) const override {
         switch (format) {
@@ -620,7 +625,7 @@ namespace doc {
 
   class SPARSE: public DOC {
     public:
-      SPARSE(const string &outDir): DOC(outDir) {}
+      SPARSE(const string &outDir): DOC(outDir) { hasROC = true; }
       virtual ~SPARSE() {}
     protected:
       const sectionMap &getSections() const override { return CUDA_SPARSE_API_SECTION_MAP; }
@@ -631,14 +636,32 @@ namespace doc {
       const versionMap &getTypeVersions() const override { return CUDA_SPARSE_TYPE_NAME_VER_MAP; }
       const hipVersionMap &getHipTypeVersions() const override { return HIP_SPARSE_TYPE_NAME_VER_MAP; }
       const string &getName() const override { return sCUSPARSE; }
+      const string &getSecondAPI() const { return sROC; }
+      const string &getJointAPI() const { return sHIPandROC; }
       const string &getFileName(docType format) const override {
         switch (format) {
           case none:
           default: return sEmpty;
-          case md: return sSPARSE_md;
-          case csv: return sSPARSE_csv;
+          case md: return roc == joint ? sSPARSE_and_ROC_md : sSPARSE_md;
+          case csv: return roc == joint ? sSPARSE_and_ROC_csv : sSPARSE_csv;
         }
       }
+  };
+
+  class ROCSPARSE : public SPARSE {
+  public:
+    ROCSPARSE(const string &outDir) : SPARSE(outDir) { hasROC = false; isROC = true; }
+    virtual ~ROCSPARSE() {}
+  protected:
+    const string &getAPI() const { return sROC; }
+    const string &getFileName(docType format) const override {
+      switch (format) {
+      case none:
+      default: return sEmpty;
+      case md: return sROCSPARSE_md;
+      case csv: return sROCSPARSE_csv;
+      }
+    }
   };
 
    class DEVICE : public DOC {
@@ -750,9 +773,11 @@ namespace doc {
     docs.addDoc(&blas);
     ROCBLAS rocblas(sOut);
     MIOPEN miopen(sOut);
+    ROCSPARSE rocsparse(sOut);
     if (docRoc == separate) {
       docs.addDoc(&rocblas);
       docs.addDoc(&miopen);
+      docs.addDoc(&rocsparse);
     }
     RAND rand(sOut);
     docs.addDoc(&rand);

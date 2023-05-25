@@ -363,7 +363,7 @@ void Statistics::setActive(const std::string &name) {
 }
 
 bool Statistics::isToRoc(const hipCounter &counter) {
-  return (counter.apiType == API_BLAS || counter.apiType == API_DNN || counter.apiType == API_RUNTIME || counter.apiType == API_COMPLEX) &&
+  return (counter.apiType == API_BLAS || counter.apiType == API_DNN || counter.apiType == API_SPARSE || counter.apiType == API_RUNTIME || counter.apiType == API_COMPLEX) &&
     ((TranslateToRoc && !TranslateToMIOpen && !isRocMiopenOnly(counter)) || TranslateToMIOpen);
 }
 
