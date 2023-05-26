@@ -3646,6 +3646,7 @@ sub simpleSubstitutions {
     subst("cusparseAction_t", "hipsparseAction_t", "type");
     subst("cusparseColorInfo_t", "hipsparseColorInfo_t", "type");
     subst("cusparseCsr2CscAlg_t", "hipsparseCsr2CscAlg_t", "type");
+    subst("cusparseDenseToSparseAlg_t", "hipsparseDenseToSparseAlg_t", "type");
     subst("cusparseDiagType_t", "hipsparseDiagType_t", "type");
     subst("cusparseDirection_t", "hipsparseDirection_t", "type");
     subst("cusparseDnMatDescr_t", "hipsparseDnMatDescr_t", "type");
@@ -3979,6 +3980,7 @@ sub simpleSubstitutions {
     subst("CUSPARSE_CSRMM_ALG1", "HIPSPARSE_CSRMM_ALG1", "numeric_literal");
     subst("CUSPARSE_CSRMV_ALG1", "HIPSPARSE_CSRMV_ALG1", "numeric_literal");
     subst("CUSPARSE_CSRMV_ALG2", "HIPSPARSE_CSRMV_ALG2", "numeric_literal");
+    subst("CUSPARSE_DENSETOSPARSE_ALG_DEFAULT", "HIPSPARSE_DENSETOSPARSE_ALG_DEFAULT", "numeric_literal");
     subst("CUSPARSE_DIAG_TYPE_NON_UNIT", "HIPSPARSE_DIAG_TYPE_NON_UNIT", "numeric_literal");
     subst("CUSPARSE_DIAG_TYPE_UNIT", "HIPSPARSE_DIAG_TYPE_UNIT", "numeric_literal");
     subst("CUSPARSE_DIRECTION_COLUMN", "HIPSPARSE_DIRECTION_COLUMN", "numeric_literal");
@@ -5942,7 +5944,6 @@ sub warnUnsupportedFunctions {
         "cusparseDgebsr2gebsr_bufferSizeExt",
         "cusparseDgebsr2gebsc_bufferSizeExt",
         "cusparseDestroySolveAnalysisInfo",
-        "cusparseDenseToSparseAlg_t",
         "cusparseDdense2hyb",
         "cusparseDcsrsv_solve",
         "cusparseDcsrsv_analysis",
@@ -7618,7 +7619,6 @@ sub warnUnsupportedFunctions {
         "CUSPARSE_SIDE_LEFT",
         "CUSPARSE_FORMAT_SLICED_ELLPACK",
         "CUSPARSE_FORMAT_BSR",
-        "CUSPARSE_DENSETOSPARSE_ALG_DEFAULT",
         "CUSPARSE_ALG_NAIVE",
         "CUSPARSE_ALG_MERGE_PATH",
         "CUSPARSE_ALG1",

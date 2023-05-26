@@ -19,7 +19,7 @@
 |`CUSPARSE_CSRMM_ALG1`|10.2|11.0|12.0|`HIPSPARSE_CSRMM_ALG1`|4.2.0| | | |
 |`CUSPARSE_CSRMV_ALG1`|10.2|11.2|12.0|`HIPSPARSE_CSRMV_ALG1`|4.1.0| | | |
 |`CUSPARSE_CSRMV_ALG2`|10.2|11.2|12.0|`HIPSPARSE_CSRMV_ALG2`|4.1.0| | | |
-|`CUSPARSE_DENSETOSPARSE_ALG_DEFAULT`|11.1| | | | | | | |
+|`CUSPARSE_DENSETOSPARSE_ALG_DEFAULT`|11.1| | |`HIPSPARSE_DENSETOSPARSE_ALG_DEFAULT`|4.2.0| | | |
 |`CUSPARSE_DIAG_TYPE_NON_UNIT`| | | |`HIPSPARSE_DIAG_TYPE_NON_UNIT`|1.9.2| | | |
 |`CUSPARSE_DIAG_TYPE_UNIT`| | | |`HIPSPARSE_DIAG_TYPE_UNIT`|1.9.2| | | |
 |`CUSPARSE_DIRECTION_COLUMN`| | | |`HIPSPARSE_DIRECTION_COLUMN`|3.2.0| | | |
@@ -138,7 +138,7 @@
 |`cusparseConstSpVecDescr_t`|12.0| | | | | | | |
 |`cusparseContext`| | | | | | | | |
 |`cusparseCsr2CscAlg_t`|10.1| | |`hipsparseCsr2CscAlg_t`|5.4.0| | | |
-|`cusparseDenseToSparseAlg_t`|11.1| | | | | | | |
+|`cusparseDenseToSparseAlg_t`|11.1| | |`hipsparseDenseToSparseAlg_t`|4.2.0| | | |
 |`cusparseDiagType_t`| | | |`hipsparseDiagType_t`|1.9.2| | | |
 |`cusparseDirection_t`| | | |`hipsparseDirection_t`|3.2.0| | | |
 |`cusparseDnMatDescr`|10.1| | | | | | | |
