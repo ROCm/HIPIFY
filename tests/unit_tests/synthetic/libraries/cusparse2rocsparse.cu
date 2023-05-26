@@ -146,6 +146,9 @@ int main() {
   cusparseOrder_t order_t;
   cusparseOrder_t ORDER_COL = CUSPARSE_ORDER_COL;
   cusparseOrder_t ORDER_ROW = CUSPARSE_ORDER_ROW;
+
+  // CHECK: rocsparse_spmm_alg spMMAlg_t;
+  cusparseSpMMAlg_t spMMAlg_t;
 #endif
 
 #if CUDA_VERSION >= 10020
@@ -187,6 +190,38 @@ int main() {
   cusparseHybPartition_t HYB_PARTITION_MAX = CUSPARSE_HYB_PARTITION_MAX;
 #endif
 
+#if CUDA_VERSION >= 11000
+  // CHECK: rocsparse_spmm_alg SPMM_ALG_DEFAULT = rocsparse_spmm_alg_default;
+  // CHECK-NEXT: rocsparse_spmm_alg SPMM_COO_ALG1 = rocsparse_spmm_alg_coo_segmented;
+  // CHECK-NEXT: rocsparse_spmm_alg SPMM_COO_ALG2 = rocsparse_spmm_alg_coo_atomic;
+  // CHECK-NEXT: rocsparse_spmm_alg SPMM_COO_ALG3 = rocsparse_spmm_alg_coo_segmented_atomic;
+  // CHECK-NEXT: rocsparse_spmm_alg SPMM_CSR_ALG1 = rocsparse_spmm_alg_csr;
+  // CHECK-NEXT: rocsparse_spmm_alg SPMM_CSR_ALG2 = rocsparse_spmm_alg_csr_row_split;
+  cusparseSpMMAlg_t SPMM_ALG_DEFAULT = CUSPARSE_SPMM_ALG_DEFAULT;
+  cusparseSpMMAlg_t SPMM_COO_ALG1 = CUSPARSE_SPMM_COO_ALG1;
+  cusparseSpMMAlg_t SPMM_COO_ALG2 = CUSPARSE_SPMM_COO_ALG2;
+  cusparseSpMMAlg_t SPMM_COO_ALG3 = CUSPARSE_SPMM_COO_ALG3;
+  cusparseSpMMAlg_t SPMM_CSR_ALG1 = CUSPARSE_SPMM_CSR_ALG1;
+  cusparseSpMMAlg_t SPMM_CSR_ALG2 = CUSPARSE_SPMM_CSR_ALG2;
+
+  // CHECK: rocsparse_spgemm_alg spGEMMAlg_t;
+  // CHECK-NEXT: rocsparse_spgemm_alg SPGEMM_DEFAULT = rocsparse_spgemm_alg_default;
+  cusparseSpGEMMAlg_t spGEMMAlg_t;
+  cusparseSpGEMMAlg_t SPGEMM_DEFAULT = CUSPARSE_SPGEMM_DEFAULT;
+#endif
+
+#if CUDA_VERSION >= 11010
+  // CHECK: rocsparse_sparse_to_dense_alg sparseToDenseAlg_t;
+  // CHECK-NEXT: rocsparse_sparse_to_dense_alg SPARSETODENSE_ALG_DEFAULT = rocsparse_sparse_to_dense_alg_default;
+  cusparseSparseToDenseAlg_t sparseToDenseAlg_t;
+  cusparseSparseToDenseAlg_t SPARSETODENSE_ALG_DEFAULT = CUSPARSE_SPARSETODENSE_ALG_DEFAULT;
+
+  // CHECK: rocsparse_dense_to_sparse_alg denseToSparseAlg_t;
+  // CHECK-NEXT: rocsparse_dense_to_sparse_alg DENSETOSPARSE_ALG_DEFAULT = rocsparse_dense_to_sparse_alg_default;
+  cusparseDenseToSparseAlg_t denseToSparseAlg_t;
+  cusparseDenseToSparseAlg_t DENSETOSPARSE_ALG_DEFAULT = CUSPARSE_DENSETOSPARSE_ALG_DEFAULT;
+#endif
+
 #if CUDA_VERSION >= 11020
   // CHECK: rocsparse_format FORMAT_BLOCKED_ELL = rocsparse_format_bell;
   cusparseFormat_t FORMAT_BLOCKED_ELL = CUSPARSE_FORMAT_BLOCKED_ELL;
@@ -201,6 +236,16 @@ int main() {
   cusparseSpMVAlg_t SPMV_COO_ALG2 = CUSPARSE_SPMV_COO_ALG2;
   cusparseSpMVAlg_t SPMV_CSR_ALG1 = CUSPARSE_SPMV_CSR_ALG1;
   cusparseSpMVAlg_t SPMV_CSR_ALG2 = CUSPARSE_SPMV_CSR_ALG2;
+
+  // CHECK: rocsparse_spmm_alg SPMM_CSR_ALG3 = rocsparse_spmm_alg_csr_merge;
+  // CHECK-NEXT: rocsparse_spmm_alg SPMM_BLOCKED_ELL_ALG1 = rocsparse_spmm_alg_bell;
+  cusparseSpMMAlg_t SPMM_CSR_ALG3 = CUSPARSE_SPMM_CSR_ALG3;
+  cusparseSpMMAlg_t SPMM_BLOCKED_ELL_ALG1 = CUSPARSE_SPMM_BLOCKED_ELL_ALG1;
+
+  // CHECK: rocsparse_sddmm_alg sDDMMAlg_t;
+  // CHECK-NEXT: rocsparse_sddmm_alg SDDMM_ALG_DEFAULT = rocsparse_sddmm_alg_default;
+  cusparseSDDMMAlg_t sDDMMAlg_t;
+  cusparseSDDMMAlg_t SDDMM_ALG_DEFAULT = CUSPARSE_SDDMM_ALG_DEFAULT;
 #endif
 
 #if CUDA_VERSION >= 11030
@@ -215,6 +260,11 @@ int main() {
   // CHECK-NEXT: rocsparse_spsv_alg SPSV_ALG_DEFAULT = rocsparse_spsv_alg_default;
   cusparseSpSVAlg_t spSVAlg_t;
   cusparseSpSVAlg_t SPSV_ALG_DEFAULT = CUSPARSE_SPSV_ALG_DEFAULT;
+
+  // CHECK: rocsparse_spsm_alg spSMAlg_t;
+  // CHECK-NEXT: rocsparse_spsm_alg SPSM_ALG_DEFAULT = rocsparse_spsm_alg_default;
+  cusparseSpSMAlg_t spSMAlg_t;
+  cusparseSpSMAlg_t SPSM_ALG_DEFAULT = CUSPARSE_SPSM_ALG_DEFAULT;
 #endif
 
 #if CUDA_VERSION >= 12010
