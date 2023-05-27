@@ -25,13 +25,13 @@ THE SOFTWARE.
 // Maps the names of CUDA SPARSE API functions to the corresponding HIP functions
 const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   // 5. cuSPARSE Management Function Reference
-  {"cusparseCreate",                                    {"hipsparseCreate",                                    "",                                                                 CONV_LIB_FUNC, API_SPARSE, 5, ROC_UNSUPPORTED}},
-  {"cusparseDestroy",                                   {"hipsparseDestroy",                                   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 5, ROC_UNSUPPORTED}},
-  {"cusparseGetPointerMode",                            {"hipsparseGetPointerMode",                            "",                                                                 CONV_LIB_FUNC, API_SPARSE, 5, ROC_UNSUPPORTED}},
-  {"cusparseGetVersion",                                {"hipsparseGetVersion",                                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 5, ROC_UNSUPPORTED}},
-  {"cusparseSetPointerMode",                            {"hipsparseSetPointerMode",                            "",                                                                 CONV_LIB_FUNC, API_SPARSE, 5, ROC_UNSUPPORTED}},
-  {"cusparseSetStream",                                 {"hipsparseSetStream",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 5, ROC_UNSUPPORTED}},
-  {"cusparseGetStream",                                 {"hipsparseGetStream",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 5, ROC_UNSUPPORTED}},
+  {"cusparseCreate",                                    {"hipsparseCreate",                                    "rocsparse_create_handle",                                          CONV_LIB_FUNC, API_SPARSE, 5}},
+  {"cusparseDestroy",                                   {"hipsparseDestroy",                                   "rocsparse_destroy_handle",                                         CONV_LIB_FUNC, API_SPARSE, 5}},
+  {"cusparseGetPointerMode",                            {"hipsparseGetPointerMode",                            "rocsparse_get_pointer_mode",                                       CONV_LIB_FUNC, API_SPARSE, 5}},
+  {"cusparseGetVersion",                                {"hipsparseGetVersion",                                "rocsparse_get_version",                                            CONV_LIB_FUNC, API_SPARSE, 5}},
+  {"cusparseSetPointerMode",                            {"hipsparseSetPointerMode",                            "rocsparse_set_pointer_mode",                                       CONV_LIB_FUNC, API_SPARSE, 5}},
+  {"cusparseSetStream",                                 {"hipsparseSetStream",                                 "rocsparse_set_stream",                                             CONV_LIB_FUNC, API_SPARSE, 5}},
+  {"cusparseGetStream",                                 {"hipsparseGetStream",                                 "rocsparse_get_stream",                                             CONV_LIB_FUNC, API_SPARSE, 5}},
 
   // 6. cuSPARSE Logging
   {"cusparseLoggerSetCallback",                         {"hipsparseLoggerSetCallback",                         "",                                                                 CONV_LIB_FUNC, API_SPARSE, 6, UNSUPPORTED}},
@@ -44,11 +44,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   // 7. cuSPARSE Helper Function Reference
   {"cusparseCreateSolveAnalysisInfo",                   {"hipsparseCreateSolveAnalysisInfo",                   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 7, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
   {"cusparseCreateHybMat",                              {"hipsparseCreateHybMat",                              "",                                                                 CONV_LIB_FUNC, API_SPARSE, 7, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseCreateMatDescr",                            {"hipsparseCreateMatDescr",                            "",                                                                 CONV_LIB_FUNC, API_SPARSE, 7, ROC_UNSUPPORTED}},
+  {"cusparseCreateMatDescr",                            {"hipsparseCreateMatDescr",                            "rocsparse_create_mat_descr",                                       CONV_LIB_FUNC, API_SPARSE, 7}},
   {"cusparseDestroySolveAnalysisInfo",                  {"hipsparseDestroySolveAnalysisInfo",                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 7, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
   {"cusparseDestroyHybMat",                             {"hipsparseDestroyHybMat",                             "",                                                                 CONV_LIB_FUNC, API_SPARSE, 7, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseDestroyMatDescr",                           {"hipsparseDestroyMatDescr",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 7, ROC_UNSUPPORTED}},
-  {"cusparseCopyMatDescr",                              {"hipsparseCopyMatDescr",                              "",                                                                 CONV_LIB_FUNC, API_SPARSE, 7, UNSUPPORTED | CUDA_REMOVED}},
+  {"cusparseDestroyMatDescr",                           {"hipsparseDestroyMatDescr",                           "rocsparse_destroy_mat_descr",                                      CONV_LIB_FUNC, API_SPARSE, 7}},
+  {"cusparseCopyMatDescr",                              {"hipsparseCopyMatDescr",                              "rocsparse_copy_mat_descr",                                         CONV_LIB_FUNC, API_SPARSE, 7, CUDA_REMOVED}},
   {"cusparseGetLevelInfo",                              {"hipsparseGetLevelInfo",                              "",                                                                 CONV_LIB_FUNC, API_SPARSE, 7, UNSUPPORTED | CUDA_REMOVED}},
   {"cusparseGetMatDiagType",                            {"hipsparseGetMatDiagType",                            "",                                                                 CONV_LIB_FUNC, API_SPARSE, 7, ROC_UNSUPPORTED}},
   {"cusparseGetMatFillMode",                            {"hipsparseGetMatFillMode",                            "",                                                                 CONV_LIB_FUNC, API_SPARSE, 7, ROC_UNSUPPORTED}},
@@ -1798,6 +1798,17 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_FUNCTION_VER_MAP {
   {"hipsparseDnMatSetStridedBatch",                      {HIP_5020, HIP_0,    HIP_0   }},
   {"hipsparseCsr2cscEx2_bufferSize",                     {HIP_5040, HIP_0,    HIP_0   }},
   {"hipsparseCsr2cscEx2",                                {HIP_5040, HIP_0,    HIP_0   }},
+  {"hipsparseCopyMatDescr",                              {HIP_1092, HIP_0,    HIP_0   }},
+  {"rocsparse_create_handle",                            {HIP_1090, HIP_0,    HIP_0   }},
+  {"rocsparse_destroy_handle",                           {HIP_1090, HIP_0,    HIP_0   }},
+  {"rocsparse_set_stream",                               {HIP_1090, HIP_0,    HIP_0   }},
+  {"rocsparse_get_stream",                               {HIP_1090, HIP_0,    HIP_0   }},
+  {"rocsparse_set_pointer_mode",                         {HIP_1090, HIP_0,    HIP_0   }},
+  {"rocsparse_get_pointer_mode",                         {HIP_1090, HIP_0,    HIP_0   }},
+  {"rocsparse_get_version",                              {HIP_1090, HIP_0,    HIP_0   }},
+  {"rocsparse_create_mat_descr",                         {HIP_1090, HIP_0,    HIP_0   }},
+  {"rocsparse_copy_mat_descr",                           {HIP_1090, HIP_0,    HIP_0   }},
+  {"rocsparse_destroy_mat_descr",                        {HIP_1090, HIP_0,    HIP_0   }},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_SPARSE_API_SECTION_MAP {

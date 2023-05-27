@@ -16,9 +16,9 @@ int main() {
   cusparseHandle_t handle_t;
 
   // CHECK: _rocsparse_mat_descr *matDescr = nullptr;
-  // CHECK-NEXT: rocsparse_mat_descr matDescr_t;
+  // CHECK-NEXT: rocsparse_mat_descr matDescr_t, matDescr_t_2;
   cusparseMatDescr *matDescr = nullptr;
-  cusparseMatDescr_t matDescr_t;
+  cusparseMatDescr_t matDescr_t, matDescr_t_2;
 
   // CHECK: _rocsparse_color_info *colorInfo = nullptr;
   // CHECK-NEXT: rocsparse_color_info colorInfo_t;
@@ -110,6 +110,63 @@ int main() {
   cusparseStatus_t STATUS_ARCH_MISMATCH = CUSPARSE_STATUS_ARCH_MISMATCH;
   cusparseStatus_t STATUS_INTERNAL_ERROR = CUSPARSE_STATUS_INTERNAL_ERROR;
   cusparseStatus_t STATUS_ZERO_PIVOT = CUSPARSE_STATUS_ZERO_PIVOT;
+
+  // CHECK: hipStream_t stream_t;
+  cudaStream_t stream_t;
+
+  int iVal = 0;
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCreate(cusparseHandle_t* handle);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_create_handle(rocsparse_handle* handle);
+  // CHECK: status_t = rocsparse_create_handle(&handle_t);
+  status_t = cusparseCreate(&handle_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDestroy(cusparseHandle_t handle);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_destroy_handle(rocsparse_handle handle);
+  // CHECK: status_t = rocsparse_destroy_handle(handle_t);
+  status_t = cusparseDestroy(handle_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSetStream(cusparseHandle_t handle, cudaStream_t streamId);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_set_stream(rocsparse_handle handle, hipStream_t stream);
+  // CHECK: status_t = rocsparse_set_stream(handle_t, stream_t);
+  status_t = cusparseSetStream(handle_t, stream_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseGetStream(cusparseHandle_t handle, cudaStream_t* streamId);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_get_stream(rocsparse_handle handle, hipStream_t* stream);
+  // CHECK: status_t = rocsparse_get_stream(handle_t, &stream_t);
+  status_t = cusparseGetStream(handle_t, &stream_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSetPointerMode(cusparseHandle_t handle, cusparsePointerMode_t mode);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_set_pointer_mode(rocsparse_handle handle, rocsparse_pointer_mode pointer_mode);
+  // CHECK: status_t = rocsparse_set_pointer_mode(handle_t, pointerMode_t);
+  status_t = cusparseSetPointerMode(handle_t, pointerMode_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseGetPointerMode(cusparseHandle_t handle, cusparsePointerMode_t* mode);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_get_pointer_mode(rocsparse_handle handle, rocsparse_pointer_mode* pointer_mode);
+  // CHECK: status_t = rocsparse_get_pointer_mode(handle_t, &pointerMode_t);
+  status_t = cusparseGetPointerMode(handle_t, &pointerMode_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseGetVersion(cusparseHandle_t handle, int* version);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_get_version(rocsparse_handle handle, int* version);
+  // CHECK: status_t = rocsparse_get_version(handle_t, &iVal);
+  status_t = cusparseGetVersion(handle_t, &iVal);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCreateMatDescr(cusparseMatDescr_t* descrA);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_create_mat_descr(rocsparse_mat_descr* descr);
+  // CHECK: status_t = rocsparse_create_mat_descr(&matDescr_t);
+  status_t = cusparseCreateMatDescr(&matDescr_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDestroyMatDescr(cusparseMatDescr_t descrA);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_destroy_mat_descr(rocsparse_mat_descr descr);
+  // CHECK: status_t = rocsparse_destroy_mat_descr(matDescr_t);
+  status_t = cusparseDestroyMatDescr(matDescr_t);
+
+#if CUDA_VERSION >= 8000 && CUDA_VERSION < 12000
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCopyMatDescr(cusparseMatDescr_t dest, const cusparseMatDescr_t src);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_copy_mat_descr(rocsparse_mat_descr dest, const rocsparse_mat_descr src);
+  // CHECK: status_t = rocsparse_copy_mat_descr(matDescr_t, matDescr_t_2);
+  status_t = cusparseCopyMatDescr(matDescr_t, matDescr_t_2);
+#endif
 
 #if CUDA_VERSION >= 10010
   // CHECK: _rocsparse_spmat_descr *spMatDescr = nullptr;

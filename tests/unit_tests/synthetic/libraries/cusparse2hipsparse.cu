@@ -13,8 +13,8 @@ int main() {
   // CHECK: hipsparseHandle_t handle_t;
   cusparseHandle_t handle_t;
 
-  // CHECK: hipsparseMatDescr_t matDescr_t;
-  cusparseMatDescr_t matDescr_t;
+  // CHECK: hipsparseMatDescr_t matDescr_t, matDescr_t_2;
+  cusparseMatDescr_t matDescr_t, matDescr_t_2;
 
   // CHECK: hipsparseColorInfo_t colorInfo_t;
   cusparseColorInfo_t colorInfo_t;
@@ -110,6 +110,63 @@ int main() {
   cusparseStatus_t STATUS_INTERNAL_ERROR = CUSPARSE_STATUS_INTERNAL_ERROR;
   cusparseStatus_t STATUS_MATRIX_TYPE_NOT_SUPPORTED = CUSPARSE_STATUS_MATRIX_TYPE_NOT_SUPPORTED;
   cusparseStatus_t STATUS_ZERO_PIVOT = CUSPARSE_STATUS_ZERO_PIVOT;
+
+  // CHECK: hipStream_t stream_t;
+  cudaStream_t stream_t;
+
+  int iVal = 0;
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCreate(cusparseHandle_t* handle);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseCreate(hipsparseHandle_t* handle);
+  // CHECK: status_t = hipsparseCreate(&handle_t);
+  status_t = cusparseCreate(&handle_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDestroy(cusparseHandle_t handle);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDestroy(hipsparseHandle_t handle);
+  // CHECK: status_t = hipsparseDestroy(handle_t);
+  status_t = cusparseDestroy(handle_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSetStream(cusparseHandle_t handle, cudaStream_t streamId);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSetStream(hipsparseHandle_t handle, hipStream_t streamId);
+  // CHECK: status_t = hipsparseSetStream(handle_t, stream_t);
+  status_t = cusparseSetStream(handle_t, stream_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseGetStream(cusparseHandle_t handle, cudaStream_t* streamId);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseGetStream(hipsparseHandle_t handle, hipStream_t* streamId);
+  // CHECK: status_t = hipsparseGetStream(handle_t, &stream_t);
+  status_t = cusparseGetStream(handle_t, &stream_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSetPointerMode(cusparseHandle_t handle, cusparsePointerMode_t mode);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSetPointerMode(hipsparseHandle_t handle, hipsparsePointerMode_t mode);
+  // CHECK: status_t = hipsparseSetPointerMode(handle_t, pointerMode_t);
+  status_t = cusparseSetPointerMode(handle_t, pointerMode_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseGetPointerMode(cusparseHandle_t handle, cusparsePointerMode_t* mode);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseGetPointerMode(hipsparseHandle_t handle, hipsparsePointerMode_t* mode);
+  // CHECK: status_t = hipsparseGetPointerMode(handle_t, &pointerMode_t);
+  status_t = cusparseGetPointerMode(handle_t, &pointerMode_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseGetVersion(cusparseHandle_t handle, int* version);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseGetVersion(hipsparseHandle_t handle, int* version);
+  // CHECK: status_t = hipsparseGetVersion(handle_t, &iVal);
+  status_t = cusparseGetVersion(handle_t, &iVal);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCreateMatDescr(cusparseMatDescr_t* descrA);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseCreateMatDescr(hipsparseMatDescr_t* descrA);
+  // CHECK: status_t = hipsparseCreateMatDescr(&matDescr_t);
+  status_t = cusparseCreateMatDescr(&matDescr_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDestroyMatDescr(cusparseMatDescr_t descrA);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDestroyMatDescr(hipsparseMatDescr_t descrA);
+  // CHECK: status_t = hipsparseDestroyMatDescr(matDescr_t);
+  status_t = cusparseDestroyMatDescr(matDescr_t);
+
+#if CUDA_VERSION >= 8000 && CUDA_VERSION < 12000
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCopyMatDescr(cusparseMatDescr_t dest, const cusparseMatDescr_t src);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseCopyMatDescr(hipsparseMatDescr_t dest, const hipsparseMatDescr_t src);
+  // CHECK: status_t = hipsparseCopyMatDescr(matDescr_t, matDescr_t_2);
+  status_t = cusparseCopyMatDescr(matDescr_t, matDescr_t_2);
+#endif
 
 #if CUDA_VERSION >= 10010
   // CHECK: hipsparseSpMatDescr_t spMatDescr_t;

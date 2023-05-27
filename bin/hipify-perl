@@ -2715,6 +2715,7 @@ sub simpleSubstitutions {
     subst("cusparseCooGet", "hipsparseCooGet", "library");
     subst("cusparseCooSetPointers", "hipsparseCooSetPointers", "library");
     subst("cusparseCooSetStridedBatch", "hipsparseCooSetStridedBatch", "library");
+    subst("cusparseCopyMatDescr", "hipsparseCopyMatDescr", "library");
     subst("cusparseCreate", "hipsparseCreate", "library");
     subst("cusparseCreateBlockedEll", "hipsparseCreateBlockedEll", "library");
     subst("cusparseCreateBsric02Info", "hipsparseCreateBsric02Info", "library");
@@ -5976,7 +5977,6 @@ sub warnUnsupportedFunctions {
         "cusparseCreateConstBsr",
         "cusparseCreateConstBlockedEll",
         "cusparseCreateBsr",
-        "cusparseCopyMatDescr",
         "cusparseContext",
         "cusparseConstrainedGeMM_bufferSize",
         "cusparseConstrainedGeMM",
