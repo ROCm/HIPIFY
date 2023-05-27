@@ -194,13 +194,13 @@
 
 |**CUDA**|**A**|**D**|**R**|**ROC**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
-|`cusparseCreate`| | | | | | | | |
-|`cusparseDestroy`| | | | | | | | |
-|`cusparseGetPointerMode`| | | | | | | | |
-|`cusparseGetStream`| | | | | | | | |
-|`cusparseGetVersion`| | | | | | | | |
-|`cusparseSetPointerMode`| | | | | | | | |
-|`cusparseSetStream`| | | | | | | | |
+|`cusparseCreate`| | | |`rocsparse_create_handle`|1.9.0| | | |
+|`cusparseDestroy`| | | |`rocsparse_destroy_handle`|1.9.0| | | |
+|`cusparseGetPointerMode`| | | |`rocsparse_get_pointer_mode`|1.9.0| | | |
+|`cusparseGetStream`| | | |`rocsparse_get_stream`|1.9.0| | | |
+|`cusparseGetVersion`| | | |`rocsparse_get_version`|1.9.0| | | |
+|`cusparseSetPointerMode`| | | |`rocsparse_set_pointer_mode`|1.9.0| | | |
+|`cusparseSetStream`| | | |`rocsparse_set_stream`|1.9.0| | | |
 
 ## **6. CUSPARSE Logging**
 
@@ -217,7 +217,7 @@
 
 |**CUDA**|**A**|**D**|**R**|**ROC**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
-|`cusparseCopyMatDescr`|8.0| |12.0| | | | | |
+|`cusparseCopyMatDescr`|8.0| |12.0|`rocsparse_copy_mat_descr`|1.9.0| | | |
 |`cusparseCreateBsric02Info`| | | | | | | | |
 |`cusparseCreateBsrilu02Info`| | | | | | | | |
 |`cusparseCreateBsrsm2Info`| | | | | | | | |
@@ -229,7 +229,7 @@
 |`cusparseCreateCsrsm2Info`|10.0|11.3|12.0| | | | | |
 |`cusparseCreateCsrsv2Info`| |11.3|12.0| | | | | |
 |`cusparseCreateHybMat`| |10.2|11.0| | | | | |
-|`cusparseCreateMatDescr`| | | | | | | | |
+|`cusparseCreateMatDescr`| | | |`rocsparse_create_mat_descr`|1.9.0| | | |
 |`cusparseCreatePruneInfo`|9.0| | | | | | | |
 |`cusparseCreateSolveAnalysisInfo`| |10.2|11.0| | | | | |
 |`cusparseDestroyBsric02Info`| | | | | | | | |
@@ -243,7 +243,7 @@
 |`cusparseDestroyCsrsm2Info`|10.0|11.3|12.0| | | | | |
 |`cusparseDestroyCsrsv2Info`| |11.3|12.0| | | | | |
 |`cusparseDestroyHybMat`| |10.2|11.0| | | | | |
-|`cusparseDestroyMatDescr`| | | | | | | | |
+|`cusparseDestroyMatDescr`| | | |`rocsparse_destroy_mat_descr`|1.9.0| | | |
 |`cusparseDestroyPruneInfo`|9.0| | | | | | | |
 |`cusparseDestroySolveAnalysisInfo`| |10.2|11.0| | | | | |
 |`cusparseGetLevelInfo`| | |11.0| | | | | |

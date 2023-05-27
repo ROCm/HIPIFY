@@ -194,13 +194,13 @@
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|**ROC**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
-|`cusparseCreate`| | | |`hipsparseCreate`|1.9.2| | | | | | | | |
-|`cusparseDestroy`| | | |`hipsparseDestroy`|1.9.2| | | | | | | | |
-|`cusparseGetPointerMode`| | | |`hipsparseGetPointerMode`|1.9.2| | | | | | | | |
-|`cusparseGetStream`| | | |`hipsparseGetStream`|1.9.2| | | | | | | | |
-|`cusparseGetVersion`| | | |`hipsparseGetVersion`|1.9.2| | | | | | | | |
-|`cusparseSetPointerMode`| | | |`hipsparseSetPointerMode`|1.9.2| | | | | | | | |
-|`cusparseSetStream`| | | |`hipsparseSetStream`|1.9.2| | | | | | | | |
+|`cusparseCreate`| | | |`hipsparseCreate`|1.9.2| | | |`rocsparse_create_handle`|1.9.0| | | |
+|`cusparseDestroy`| | | |`hipsparseDestroy`|1.9.2| | | |`rocsparse_destroy_handle`|1.9.0| | | |
+|`cusparseGetPointerMode`| | | |`hipsparseGetPointerMode`|1.9.2| | | |`rocsparse_get_pointer_mode`|1.9.0| | | |
+|`cusparseGetStream`| | | |`hipsparseGetStream`|1.9.2| | | |`rocsparse_get_stream`|1.9.0| | | |
+|`cusparseGetVersion`| | | |`hipsparseGetVersion`|1.9.2| | | |`rocsparse_get_version`|1.9.0| | | |
+|`cusparseSetPointerMode`| | | |`hipsparseSetPointerMode`|1.9.2| | | |`rocsparse_set_pointer_mode`|1.9.0| | | |
+|`cusparseSetStream`| | | |`hipsparseSetStream`|1.9.2| | | |`rocsparse_set_stream`|1.9.0| | | |
 
 ## **6. CUSPARSE Logging**
 
@@ -217,7 +217,7 @@
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|**ROC**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
-|`cusparseCopyMatDescr`|8.0| |12.0| | | | | | | | | | |
+|`cusparseCopyMatDescr`|8.0| |12.0|`hipsparseCopyMatDescr`|1.9.2| | | |`rocsparse_copy_mat_descr`|1.9.0| | | |
 |`cusparseCreateBsric02Info`| | | |`hipsparseCreateBsric02Info`|3.8.0| | | | | | | | |
 |`cusparseCreateBsrilu02Info`| | | |`hipsparseCreateBsrilu02Info`|3.9.0| | | | | | | | |
 |`cusparseCreateBsrsm2Info`| | | |`hipsparseCreateBsrsm2Info`|4.5.0| | | | | | | | |
@@ -229,7 +229,7 @@
 |`cusparseCreateCsrsm2Info`|10.0|11.3|12.0|`hipsparseCreateCsrsm2Info`|3.1.0| | | | | | | | |
 |`cusparseCreateCsrsv2Info`| |11.3|12.0|`hipsparseCreateCsrsv2Info`|1.9.2| | | | | | | | |
 |`cusparseCreateHybMat`| |10.2|11.0|`hipsparseCreateHybMat`|1.9.2| | | | | | | | |
-|`cusparseCreateMatDescr`| | | |`hipsparseCreateMatDescr`|1.9.2| | | | | | | | |
+|`cusparseCreateMatDescr`| | | |`hipsparseCreateMatDescr`|1.9.2| | | |`rocsparse_create_mat_descr`|1.9.0| | | |
 |`cusparseCreatePruneInfo`|9.0| | |`hipsparseCreatePruneInfo`|3.9.0| | | | | | | | |
 |`cusparseCreateSolveAnalysisInfo`| |10.2|11.0| | | | | | | | | | |
 |`cusparseDestroyBsric02Info`| | | |`hipsparseDestroyBsric02Info`|3.8.0| | | | | | | | |
@@ -243,7 +243,7 @@
 |`cusparseDestroyCsrsm2Info`|10.0|11.3|12.0|`hipsparseDestroyCsrsm2Info`|3.1.0| | | | | | | | |
 |`cusparseDestroyCsrsv2Info`| |11.3|12.0|`hipsparseDestroyCsrsv2Info`|1.9.2| | | | | | | | |
 |`cusparseDestroyHybMat`| |10.2|11.0|`hipsparseDestroyHybMat`|1.9.2| | | | | | | | |
-|`cusparseDestroyMatDescr`| | | |`hipsparseDestroyMatDescr`|1.9.2| | | | | | | | |
+|`cusparseDestroyMatDescr`| | | |`hipsparseDestroyMatDescr`|1.9.2| | | |`rocsparse_destroy_mat_descr`|1.9.0| | | |
 |`cusparseDestroyPruneInfo`|9.0| | |`hipsparseDestroyPruneInfo`|3.9.0| | | | | | | | |
 |`cusparseDestroySolveAnalysisInfo`| |10.2|11.0| | | | | | | | | | |
 |`cusparseGetLevelInfo`| | |11.0| | | | | | | | | | |

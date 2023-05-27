@@ -217,7 +217,7 @@
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
-|`cusparseCopyMatDescr`|8.0| |12.0| | | | | |
+|`cusparseCopyMatDescr`|8.0| |12.0|`hipsparseCopyMatDescr`|1.9.2| | | |
 |`cusparseCreateBsric02Info`| | | |`hipsparseCreateBsric02Info`|3.8.0| | | |
 |`cusparseCreateBsrilu02Info`| | | |`hipsparseCreateBsrilu02Info`|3.9.0| | | |
 |`cusparseCreateBsrsm2Info`| | | |`hipsparseCreateBsrsm2Info`|4.5.0| | | |
