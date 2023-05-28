@@ -222,13 +222,13 @@
 |`cusparseCreateBsrilu02Info`| | | |`hipsparseCreateBsrilu02Info`|3.9.0| | | | | | | | |
 |`cusparseCreateBsrsm2Info`| | | |`hipsparseCreateBsrsm2Info`|4.5.0| | | | | | | | |
 |`cusparseCreateBsrsv2Info`| | | |`hipsparseCreateBsrsv2Info`|3.6.0| | | | | | | | |
-|`cusparseCreateColorInfo`| | | |`hipsparseCreateColorInfo`|4.5.0| | | | | | | | |
+|`cusparseCreateColorInfo`| | | |`hipsparseCreateColorInfo`|4.5.0| | | |`rocsparse_create_color_info`|4.5.0| | | |
 |`cusparseCreateCsrgemm2Info`| |11.0|12.0|`hipsparseCreateCsrgemm2Info`|2.8.0| | | | | | | | |
 |`cusparseCreateCsric02Info`| | | |`hipsparseCreateCsric02Info`|3.1.0| | | | | | | | |
 |`cusparseCreateCsrilu02Info`| | | |`hipsparseCreateCsrilu02Info`|1.9.2| | | | | | | | |
 |`cusparseCreateCsrsm2Info`|10.0|11.3|12.0|`hipsparseCreateCsrsm2Info`|3.1.0| | | | | | | | |
 |`cusparseCreateCsrsv2Info`| |11.3|12.0|`hipsparseCreateCsrsv2Info`|1.9.2| | | | | | | | |
-|`cusparseCreateHybMat`| |10.2|11.0|`hipsparseCreateHybMat`|1.9.2| | | | | | | | |
+|`cusparseCreateHybMat`| |10.2|11.0|`hipsparseCreateHybMat`|1.9.2| | | |`rocsparse_create_hyb_mat`|1.9.0| | | |
 |`cusparseCreateMatDescr`| | | |`hipsparseCreateMatDescr`|1.9.2| | | |`rocsparse_create_mat_descr`|1.9.0| | | |
 |`cusparseCreatePruneInfo`|9.0| | |`hipsparseCreatePruneInfo`|3.9.0| | | | | | | | |
 |`cusparseCreateSolveAnalysisInfo`| |10.2|11.0| | | | | | | | | | |
@@ -236,25 +236,25 @@
 |`cusparseDestroyBsrilu02Info`| | | |`hipsparseDestroyBsrilu02Info`|3.9.0| | | | | | | | |
 |`cusparseDestroyBsrsm2Info`| | | |`hipsparseDestroyBsrsm2Info`|4.5.0| | | | | | | | |
 |`cusparseDestroyBsrsv2Info`| | | |`hipsparseDestroyBsrsv2Info`|3.6.0| | | | | | | | |
-|`cusparseDestroyColorInfo`| | | |`hipsparseDestroyColorInfo`|4.5.0| | | | | | | | |
+|`cusparseDestroyColorInfo`| | | |`hipsparseDestroyColorInfo`|4.5.0| | | |`rocsparse_destroy_color_info`|4.5.0| | | |
 |`cusparseDestroyCsrgemm2Info`| |11.0|12.0|`hipsparseDestroyCsrgemm2Info`|2.8.0| | | | | | | | |
 |`cusparseDestroyCsric02Info`| | | |`hipsparseDestroyCsric02Info`|3.1.0| | | | | | | | |
 |`cusparseDestroyCsrilu02Info`| | | |`hipsparseDestroyCsrilu02Info`|1.9.2| | | | | | | | |
 |`cusparseDestroyCsrsm2Info`|10.0|11.3|12.0|`hipsparseDestroyCsrsm2Info`|3.1.0| | | | | | | | |
 |`cusparseDestroyCsrsv2Info`| |11.3|12.0|`hipsparseDestroyCsrsv2Info`|1.9.2| | | | | | | | |
-|`cusparseDestroyHybMat`| |10.2|11.0|`hipsparseDestroyHybMat`|1.9.2| | | | | | | | |
+|`cusparseDestroyHybMat`| |10.2|11.0|`hipsparseDestroyHybMat`|1.9.2| | | |`rocsparse_destroy_hyb_mat`|1.9.0| | | |
 |`cusparseDestroyMatDescr`| | | |`hipsparseDestroyMatDescr`|1.9.2| | | |`rocsparse_destroy_mat_descr`|1.9.0| | | |
 |`cusparseDestroyPruneInfo`|9.0| | |`hipsparseDestroyPruneInfo`|3.9.0| | | | | | | | |
 |`cusparseDestroySolveAnalysisInfo`| |10.2|11.0| | | | | | | | | | |
 |`cusparseGetLevelInfo`| | |11.0| | | | | | | | | | |
-|`cusparseGetMatDiagType`| | | |`hipsparseGetMatDiagType`|1.9.2| | | | | | | | |
-|`cusparseGetMatFillMode`| | | |`hipsparseGetMatFillMode`|1.9.2| | | | | | | | |
-|`cusparseGetMatIndexBase`| | | |`hipsparseGetMatIndexBase`|1.9.2| | | | | | | | |
-|`cusparseGetMatType`| | | |`hipsparseGetMatType`|1.9.2| | | | | | | | |
-|`cusparseSetMatDiagType`| | | |`hipsparseSetMatDiagType`|1.9.2| | | | | | | | |
-|`cusparseSetMatFillMode`| | | |`hipsparseSetMatFillMode`|1.9.2| | | | | | | | |
-|`cusparseSetMatIndexBase`| | | |`hipsparseSetMatIndexBase`|1.9.2| | | | | | | | |
-|`cusparseSetMatType`| | | |`hipsparseSetMatType`|1.9.2| | | | | | | | |
+|`cusparseGetMatDiagType`| | | |`hipsparseGetMatDiagType`|1.9.2| | | |`rocsparse_get_mat_diag_type`|1.9.0| | | |
+|`cusparseGetMatFillMode`| | | |`hipsparseGetMatFillMode`|1.9.2| | | |`rocsparse_get_mat_fill_mode`|1.9.0| | | |
+|`cusparseGetMatIndexBase`| | | |`hipsparseGetMatIndexBase`|1.9.2| | | |`rocsparse_get_mat_index_base`|1.9.0| | | |
+|`cusparseGetMatType`| | | |`hipsparseGetMatType`|1.9.2| | | |`rocsparse_get_mat_type`|1.9.0| | | |
+|`cusparseSetMatDiagType`| | | |`hipsparseSetMatDiagType`|1.9.2| | | |`rocsparse_set_mat_diag_type`|1.9.0| | | |
+|`cusparseSetMatFillMode`| | | |`hipsparseSetMatFillMode`|1.9.2| | | |`rocsparse_set_mat_fill_mode`|1.9.0| | | |
+|`cusparseSetMatIndexBase`| | | |`hipsparseSetMatIndexBase`|1.9.2| | | |`rocsparse_set_mat_index_base`|1.9.0| | | |
+|`cusparseSetMatType`| | | |`hipsparseSetMatType`|1.9.2| | | |`rocsparse_set_mat_type`|1.9.0| | | |
 
 ## **8. CUSPARSE Level 1 Function Reference**
 
