@@ -222,13 +222,13 @@
 |`cusparseCreateBsrilu02Info`| | | | | | | | |
 |`cusparseCreateBsrsm2Info`| | | | | | | | |
 |`cusparseCreateBsrsv2Info`| | | | | | | | |
-|`cusparseCreateColorInfo`| | | | | | | | |
+|`cusparseCreateColorInfo`| | | |`rocsparse_create_color_info`|4.5.0| | | |
 |`cusparseCreateCsrgemm2Info`| |11.0|12.0| | | | | |
 |`cusparseCreateCsric02Info`| | | | | | | | |
 |`cusparseCreateCsrilu02Info`| | | | | | | | |
 |`cusparseCreateCsrsm2Info`|10.0|11.3|12.0| | | | | |
 |`cusparseCreateCsrsv2Info`| |11.3|12.0| | | | | |
-|`cusparseCreateHybMat`| |10.2|11.0| | | | | |
+|`cusparseCreateHybMat`| |10.2|11.0|`rocsparse_create_hyb_mat`|1.9.0| | | |
 |`cusparseCreateMatDescr`| | | |`rocsparse_create_mat_descr`|1.9.0| | | |
 |`cusparseCreatePruneInfo`|9.0| | | | | | | |
 |`cusparseCreateSolveAnalysisInfo`| |10.2|11.0| | | | | |
@@ -236,25 +236,25 @@
 |`cusparseDestroyBsrilu02Info`| | | | | | | | |
 |`cusparseDestroyBsrsm2Info`| | | | | | | | |
 |`cusparseDestroyBsrsv2Info`| | | | | | | | |
-|`cusparseDestroyColorInfo`| | | | | | | | |
+|`cusparseDestroyColorInfo`| | | |`rocsparse_destroy_color_info`|4.5.0| | | |
 |`cusparseDestroyCsrgemm2Info`| |11.0|12.0| | | | | |
 |`cusparseDestroyCsric02Info`| | | | | | | | |
 |`cusparseDestroyCsrilu02Info`| | | | | | | | |
 |`cusparseDestroyCsrsm2Info`|10.0|11.3|12.0| | | | | |
 |`cusparseDestroyCsrsv2Info`| |11.3|12.0| | | | | |
-|`cusparseDestroyHybMat`| |10.2|11.0| | | | | |
+|`cusparseDestroyHybMat`| |10.2|11.0|`rocsparse_destroy_hyb_mat`|1.9.0| | | |
 |`cusparseDestroyMatDescr`| | | |`rocsparse_destroy_mat_descr`|1.9.0| | | |
 |`cusparseDestroyPruneInfo`|9.0| | | | | | | |
 |`cusparseDestroySolveAnalysisInfo`| |10.2|11.0| | | | | |
 |`cusparseGetLevelInfo`| | |11.0| | | | | |
-|`cusparseGetMatDiagType`| | | | | | | | |
-|`cusparseGetMatFillMode`| | | | | | | | |
-|`cusparseGetMatIndexBase`| | | | | | | | |
-|`cusparseGetMatType`| | | | | | | | |
-|`cusparseSetMatDiagType`| | | | | | | | |
-|`cusparseSetMatFillMode`| | | | | | | | |
-|`cusparseSetMatIndexBase`| | | | | | | | |
-|`cusparseSetMatType`| | | | | | | | |
+|`cusparseGetMatDiagType`| | | |`rocsparse_get_mat_diag_type`|1.9.0| | | |
+|`cusparseGetMatFillMode`| | | |`rocsparse_get_mat_fill_mode`|1.9.0| | | |
+|`cusparseGetMatIndexBase`| | | |`rocsparse_get_mat_index_base`|1.9.0| | | |
+|`cusparseGetMatType`| | | |`rocsparse_get_mat_type`|1.9.0| | | |
+|`cusparseSetMatDiagType`| | | |`rocsparse_set_mat_diag_type`|1.9.0| | | |
+|`cusparseSetMatFillMode`| | | |`rocsparse_set_mat_fill_mode`|1.9.0| | | |
+|`cusparseSetMatIndexBase`| | | |`rocsparse_set_mat_index_base`|1.9.0| | | |
+|`cusparseSetMatType`| | | |`rocsparse_set_mat_type`|1.9.0| | | |
 
 ## **8. CUSPARSE Level 1 Function Reference**
 

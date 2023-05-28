@@ -161,6 +161,56 @@ int main() {
   // CHECK: status_t = rocsparse_destroy_mat_descr(matDescr_t);
   status_t = cusparseDestroyMatDescr(matDescr_t);
 
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSetMatIndexBase(cusparseMatDescr_t descrA, cusparseIndexBase_t base);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_set_mat_index_base(rocsparse_mat_descr descr, rocsparse_index_base base);
+  // CHECK: status_t = rocsparse_set_mat_index_base(matDescr_t, indexBase_t);
+  status_t = cusparseSetMatIndexBase(matDescr_t, indexBase_t);
+
+  // CUDA: cusparseIndexBase_t CUSPARSEAPI cusparseGetMatIndexBase(const cusparseMatDescr_t descrA);
+  // ROC: ROCSPARSE_EXPORT rocsparse_index_base rocsparse_get_mat_index_base(const rocsparse_mat_descr descr);
+  // CHECK: indexBase_t = rocsparse_get_mat_index_base(matDescr_t);
+  indexBase_t = cusparseGetMatIndexBase(matDescr_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSetMatType(cusparseMatDescr_t descrA, cusparseMatrixType_t type);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_set_mat_type(rocsparse_mat_descr descr, rocsparse_matrix_type type);
+  // CHECK: status_t = rocsparse_set_mat_type(matDescr_t, matrixType_t);
+  status_t = cusparseSetMatType(matDescr_t, matrixType_t);
+
+  // CUDA: cusparseMatrixType_t CUSPARSEAPI cusparseGetMatType(const cusparseMatDescr_t descrA);
+  // ROC: ROCSPARSE_EXPORT rocsparse_matrix_type rocsparse_get_mat_type(const rocsparse_mat_descr descr);
+  // CHECK: matrixType_t = rocsparse_get_mat_type(matDescr_t);
+  matrixType_t = cusparseGetMatType(matDescr_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSetMatFillMode(cusparseMatDescr_t descrA, cusparseFillMode_t fillMode);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_set_mat_fill_mode(rocsparse_mat_descr descr, rocsparse_fill_mode fill_mode);
+  // CHECK: status_t = rocsparse_set_mat_fill_mode(matDescr_t, fillMode_t);
+  status_t = cusparseSetMatFillMode(matDescr_t, fillMode_t);
+
+  // CUDA: cusparseFillMode_t CUSPARSEAPI cusparseGetMatFillMode(const cusparseMatDescr_t descrA);
+  // ROC: ROCSPARSE_EXPORT rocsparse_fill_mode rocsparse_get_mat_fill_mode(const rocsparse_mat_descr descr);
+  // CHECK: fillMode_t = rocsparse_get_mat_fill_mode(matDescr_t);
+  fillMode_t = cusparseGetMatFillMode(matDescr_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSetMatDiagType(cusparseMatDescr_t descrA, cusparseDiagType_t diagType);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_set_mat_diag_type(rocsparse_mat_descr descr, rocsparse_diag_type diag_type);
+  // CHECK: status_t = rocsparse_set_mat_diag_type(matDescr_t, diagType_t);
+  status_t = cusparseSetMatDiagType(matDescr_t, diagType_t);
+
+  // CUDA: cusparseDiagType_t CUSPARSEAPI cusparseGetMatDiagType(const cusparseMatDescr_t descrA);
+  // ROC: ROCSPARSE_EXPORT rocsparse_diag_type rocsparse_get_mat_diag_type(const rocsparse_mat_descr descr);
+  // CHECK: diagType_t = rocsparse_get_mat_diag_type(matDescr_t);
+  diagType_t = cusparseGetMatDiagType(matDescr_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCreateColorInfo(cusparseColorInfo_t* info);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_create_color_info(rocsparse_color_info* info);
+  // CHECK: status_t = rocsparse_create_color_info(&colorInfo_t);
+  status_t = cusparseCreateColorInfo(&colorInfo_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDestroyColorInfo(cusparseColorInfo_t info);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_destroy_color_info(rocsparse_color_info info);
+  // CHECK: status_t = rocsparse_destroy_color_info(colorInfo_t);
+  status_t = cusparseDestroyColorInfo(colorInfo_t);
+
 #if CUDA_VERSION >= 8000 && CUDA_VERSION < 12000
   // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCopyMatDescr(cusparseMatDescr_t dest, const cusparseMatDescr_t src);
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_copy_mat_descr(rocsparse_mat_descr dest, const rocsparse_mat_descr src);
@@ -245,6 +295,16 @@ int main() {
   cusparseHybPartition_t HYB_PARTITION_AUTO = CUSPARSE_HYB_PARTITION_AUTO;
   cusparseHybPartition_t HYB_PARTITION_USER = CUSPARSE_HYB_PARTITION_USER;
   cusparseHybPartition_t HYB_PARTITION_MAX = CUSPARSE_HYB_PARTITION_MAX;
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCreateHybMat(cusparseHybMat_t* hybA);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_create_hyb_mat(rocsparse_hyb_mat* hyb);
+  // CHECK: status_t = rocsparse_create_hyb_mat(&hybMat_t);
+  status_t = cusparseCreateHybMat(&hybMat_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDestroyHybMat(cusparseHybMat_t hybA);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_destroy_hyb_mat(rocsparse_hyb_mat hyb);
+  // CHECK: status_t = rocsparse_destroy_hyb_mat(hybMat_t);
+  status_t = cusparseDestroyHybMat(hybMat_t);
 #endif
 
 #if CUDA_VERSION >= 11000
