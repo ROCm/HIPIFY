@@ -386,7 +386,7 @@ namespace perl {
         }
       } else {
         for (auto &ma : CUDA_RENAMES_MAP()) {
-          if (ma.second.apiType != API_BLAS || Statistics::isUnsupported(ma.second) || ma.second.rocName.empty()) continue;
+          if (!Statistics::isToRoc(ma.second) || Statistics::isUnsupported(ma.second) || ma.second.rocName.empty()) continue;
           if (i == ma.second.type) {
             *streamPtr.get() << tab << "subst(\"" << ma.first.str() << "\", \"" << ma.second.rocName.str() << "\", \"" << counterNames[ma.second.type] << "\");" << endl;
           }
