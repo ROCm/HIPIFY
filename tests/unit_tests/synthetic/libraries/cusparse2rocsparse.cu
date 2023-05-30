@@ -16,9 +16,9 @@ int main() {
   cusparseHandle_t handle_t;
 
   // CHECK: _rocsparse_mat_descr *matDescr = nullptr;
-  // CHECK-NEXT: rocsparse_mat_descr matDescr_t;
+  // CHECK-NEXT: rocsparse_mat_descr matDescr_t, matDescr_t_2;
   cusparseMatDescr *matDescr = nullptr;
-  cusparseMatDescr_t matDescr_t;
+  cusparseMatDescr_t matDescr_t, matDescr_t_2;
 
   // CHECK: _rocsparse_color_info *colorInfo = nullptr;
   // CHECK-NEXT: rocsparse_color_info colorInfo_t;
@@ -111,6 +111,113 @@ int main() {
   cusparseStatus_t STATUS_INTERNAL_ERROR = CUSPARSE_STATUS_INTERNAL_ERROR;
   cusparseStatus_t STATUS_ZERO_PIVOT = CUSPARSE_STATUS_ZERO_PIVOT;
 
+  // CHECK: hipStream_t stream_t;
+  cudaStream_t stream_t;
+
+  int iVal = 0;
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCreate(cusparseHandle_t* handle);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_create_handle(rocsparse_handle* handle);
+  // CHECK: status_t = rocsparse_create_handle(&handle_t);
+  status_t = cusparseCreate(&handle_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDestroy(cusparseHandle_t handle);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_destroy_handle(rocsparse_handle handle);
+  // CHECK: status_t = rocsparse_destroy_handle(handle_t);
+  status_t = cusparseDestroy(handle_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSetStream(cusparseHandle_t handle, cudaStream_t streamId);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_set_stream(rocsparse_handle handle, hipStream_t stream);
+  // CHECK: status_t = rocsparse_set_stream(handle_t, stream_t);
+  status_t = cusparseSetStream(handle_t, stream_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseGetStream(cusparseHandle_t handle, cudaStream_t* streamId);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_get_stream(rocsparse_handle handle, hipStream_t* stream);
+  // CHECK: status_t = rocsparse_get_stream(handle_t, &stream_t);
+  status_t = cusparseGetStream(handle_t, &stream_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSetPointerMode(cusparseHandle_t handle, cusparsePointerMode_t mode);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_set_pointer_mode(rocsparse_handle handle, rocsparse_pointer_mode pointer_mode);
+  // CHECK: status_t = rocsparse_set_pointer_mode(handle_t, pointerMode_t);
+  status_t = cusparseSetPointerMode(handle_t, pointerMode_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseGetPointerMode(cusparseHandle_t handle, cusparsePointerMode_t* mode);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_get_pointer_mode(rocsparse_handle handle, rocsparse_pointer_mode* pointer_mode);
+  // CHECK: status_t = rocsparse_get_pointer_mode(handle_t, &pointerMode_t);
+  status_t = cusparseGetPointerMode(handle_t, &pointerMode_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseGetVersion(cusparseHandle_t handle, int* version);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_get_version(rocsparse_handle handle, int* version);
+  // CHECK: status_t = rocsparse_get_version(handle_t, &iVal);
+  status_t = cusparseGetVersion(handle_t, &iVal);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCreateMatDescr(cusparseMatDescr_t* descrA);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_create_mat_descr(rocsparse_mat_descr* descr);
+  // CHECK: status_t = rocsparse_create_mat_descr(&matDescr_t);
+  status_t = cusparseCreateMatDescr(&matDescr_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDestroyMatDescr(cusparseMatDescr_t descrA);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_destroy_mat_descr(rocsparse_mat_descr descr);
+  // CHECK: status_t = rocsparse_destroy_mat_descr(matDescr_t);
+  status_t = cusparseDestroyMatDescr(matDescr_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSetMatIndexBase(cusparseMatDescr_t descrA, cusparseIndexBase_t base);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_set_mat_index_base(rocsparse_mat_descr descr, rocsparse_index_base base);
+  // CHECK: status_t = rocsparse_set_mat_index_base(matDescr_t, indexBase_t);
+  status_t = cusparseSetMatIndexBase(matDescr_t, indexBase_t);
+
+  // CUDA: cusparseIndexBase_t CUSPARSEAPI cusparseGetMatIndexBase(const cusparseMatDescr_t descrA);
+  // ROC: ROCSPARSE_EXPORT rocsparse_index_base rocsparse_get_mat_index_base(const rocsparse_mat_descr descr);
+  // CHECK: indexBase_t = rocsparse_get_mat_index_base(matDescr_t);
+  indexBase_t = cusparseGetMatIndexBase(matDescr_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSetMatType(cusparseMatDescr_t descrA, cusparseMatrixType_t type);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_set_mat_type(rocsparse_mat_descr descr, rocsparse_matrix_type type);
+  // CHECK: status_t = rocsparse_set_mat_type(matDescr_t, matrixType_t);
+  status_t = cusparseSetMatType(matDescr_t, matrixType_t);
+
+  // CUDA: cusparseMatrixType_t CUSPARSEAPI cusparseGetMatType(const cusparseMatDescr_t descrA);
+  // ROC: ROCSPARSE_EXPORT rocsparse_matrix_type rocsparse_get_mat_type(const rocsparse_mat_descr descr);
+  // CHECK: matrixType_t = rocsparse_get_mat_type(matDescr_t);
+  matrixType_t = cusparseGetMatType(matDescr_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSetMatFillMode(cusparseMatDescr_t descrA, cusparseFillMode_t fillMode);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_set_mat_fill_mode(rocsparse_mat_descr descr, rocsparse_fill_mode fill_mode);
+  // CHECK: status_t = rocsparse_set_mat_fill_mode(matDescr_t, fillMode_t);
+  status_t = cusparseSetMatFillMode(matDescr_t, fillMode_t);
+
+  // CUDA: cusparseFillMode_t CUSPARSEAPI cusparseGetMatFillMode(const cusparseMatDescr_t descrA);
+  // ROC: ROCSPARSE_EXPORT rocsparse_fill_mode rocsparse_get_mat_fill_mode(const rocsparse_mat_descr descr);
+  // CHECK: fillMode_t = rocsparse_get_mat_fill_mode(matDescr_t);
+  fillMode_t = cusparseGetMatFillMode(matDescr_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSetMatDiagType(cusparseMatDescr_t descrA, cusparseDiagType_t diagType);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_set_mat_diag_type(rocsparse_mat_descr descr, rocsparse_diag_type diag_type);
+  // CHECK: status_t = rocsparse_set_mat_diag_type(matDescr_t, diagType_t);
+  status_t = cusparseSetMatDiagType(matDescr_t, diagType_t);
+
+  // CUDA: cusparseDiagType_t CUSPARSEAPI cusparseGetMatDiagType(const cusparseMatDescr_t descrA);
+  // ROC: ROCSPARSE_EXPORT rocsparse_diag_type rocsparse_get_mat_diag_type(const rocsparse_mat_descr descr);
+  // CHECK: diagType_t = rocsparse_get_mat_diag_type(matDescr_t);
+  diagType_t = cusparseGetMatDiagType(matDescr_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCreateColorInfo(cusparseColorInfo_t* info);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_create_color_info(rocsparse_color_info* info);
+  // CHECK: status_t = rocsparse_create_color_info(&colorInfo_t);
+  status_t = cusparseCreateColorInfo(&colorInfo_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDestroyColorInfo(cusparseColorInfo_t info);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_destroy_color_info(rocsparse_color_info info);
+  // CHECK: status_t = rocsparse_destroy_color_info(colorInfo_t);
+  status_t = cusparseDestroyColorInfo(colorInfo_t);
+
+#if CUDA_VERSION >= 8000 && CUDA_VERSION < 12000
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCopyMatDescr(cusparseMatDescr_t dest, const cusparseMatDescr_t src);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_copy_mat_descr(rocsparse_mat_descr dest, const rocsparse_mat_descr src);
+  // CHECK: status_t = rocsparse_copy_mat_descr(matDescr_t, matDescr_t_2);
+  status_t = cusparseCopyMatDescr(matDescr_t, matDescr_t_2);
+#endif
+
 #if CUDA_VERSION >= 10010
   // CHECK: _rocsparse_spmat_descr *spMatDescr = nullptr;
   // CHECK-NEXT: rocsparse_spmat_descr spMatDescr_t;
@@ -139,6 +246,16 @@ int main() {
   cusparseFormat_t FORMAT_CSR = CUSPARSE_FORMAT_CSR;
   cusparseFormat_t FORMAT_CSC = CUSPARSE_FORMAT_CSC;
   cusparseFormat_t FORMAT_CSO = CUSPARSE_FORMAT_COO;
+
+  // CHECK: rocsparse_order order_t;
+  // CHECK-NEXT: rocsparse_order ORDER_COL = rocsparse_order_row;
+  // CHECK-NEXT: rocsparse_order ORDER_ROW = rocsparse_order_column;
+  cusparseOrder_t order_t;
+  cusparseOrder_t ORDER_COL = CUSPARSE_ORDER_COL;
+  cusparseOrder_t ORDER_ROW = CUSPARSE_ORDER_ROW;
+
+  // CHECK: rocsparse_spmm_alg spMMAlg_t;
+  cusparseSpMMAlg_t spMMAlg_t;
 #endif
 
 #if CUDA_VERSION >= 10020
@@ -154,6 +271,9 @@ int main() {
 
   // CHECK: rocsparse_status STATUS_NOT_SUPPORTED = rocsparse_status_not_implemented;
   cusparseStatus_t STATUS_NOT_SUPPORTED = CUSPARSE_STATUS_NOT_SUPPORTED;
+
+  // CHECK: rocsparse_spmv_alg spMVAlg_t;
+  cusparseSpMVAlg_t spMVAlg_t;
 #endif
 
 #if CUDA_VERSION >= 10020 && CUDA_VERSION < 12000
@@ -175,11 +295,93 @@ int main() {
   cusparseHybPartition_t HYB_PARTITION_AUTO = CUSPARSE_HYB_PARTITION_AUTO;
   cusparseHybPartition_t HYB_PARTITION_USER = CUSPARSE_HYB_PARTITION_USER;
   cusparseHybPartition_t HYB_PARTITION_MAX = CUSPARSE_HYB_PARTITION_MAX;
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCreateHybMat(cusparseHybMat_t* hybA);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_create_hyb_mat(rocsparse_hyb_mat* hyb);
+  // CHECK: status_t = rocsparse_create_hyb_mat(&hybMat_t);
+  status_t = cusparseCreateHybMat(&hybMat_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDestroyHybMat(cusparseHybMat_t hybA);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_destroy_hyb_mat(rocsparse_hyb_mat hyb);
+  // CHECK: status_t = rocsparse_destroy_hyb_mat(hybMat_t);
+  status_t = cusparseDestroyHybMat(hybMat_t);
+#endif
+
+#if CUDA_VERSION >= 11000
+  // CHECK: rocsparse_spmm_alg SPMM_ALG_DEFAULT = rocsparse_spmm_alg_default;
+  // CHECK-NEXT: rocsparse_spmm_alg SPMM_COO_ALG1 = rocsparse_spmm_alg_coo_segmented;
+  // CHECK-NEXT: rocsparse_spmm_alg SPMM_COO_ALG2 = rocsparse_spmm_alg_coo_atomic;
+  // CHECK-NEXT: rocsparse_spmm_alg SPMM_COO_ALG3 = rocsparse_spmm_alg_coo_segmented_atomic;
+  // CHECK-NEXT: rocsparse_spmm_alg SPMM_CSR_ALG1 = rocsparse_spmm_alg_csr;
+  // CHECK-NEXT: rocsparse_spmm_alg SPMM_CSR_ALG2 = rocsparse_spmm_alg_csr_row_split;
+  cusparseSpMMAlg_t SPMM_ALG_DEFAULT = CUSPARSE_SPMM_ALG_DEFAULT;
+  cusparseSpMMAlg_t SPMM_COO_ALG1 = CUSPARSE_SPMM_COO_ALG1;
+  cusparseSpMMAlg_t SPMM_COO_ALG2 = CUSPARSE_SPMM_COO_ALG2;
+  cusparseSpMMAlg_t SPMM_COO_ALG3 = CUSPARSE_SPMM_COO_ALG3;
+  cusparseSpMMAlg_t SPMM_CSR_ALG1 = CUSPARSE_SPMM_CSR_ALG1;
+  cusparseSpMMAlg_t SPMM_CSR_ALG2 = CUSPARSE_SPMM_CSR_ALG2;
+
+  // CHECK: rocsparse_spgemm_alg spGEMMAlg_t;
+  // CHECK-NEXT: rocsparse_spgemm_alg SPGEMM_DEFAULT = rocsparse_spgemm_alg_default;
+  cusparseSpGEMMAlg_t spGEMMAlg_t;
+  cusparseSpGEMMAlg_t SPGEMM_DEFAULT = CUSPARSE_SPGEMM_DEFAULT;
+#endif
+
+#if CUDA_VERSION >= 11010
+  // CHECK: rocsparse_sparse_to_dense_alg sparseToDenseAlg_t;
+  // CHECK-NEXT: rocsparse_sparse_to_dense_alg SPARSETODENSE_ALG_DEFAULT = rocsparse_sparse_to_dense_alg_default;
+  cusparseSparseToDenseAlg_t sparseToDenseAlg_t;
+  cusparseSparseToDenseAlg_t SPARSETODENSE_ALG_DEFAULT = CUSPARSE_SPARSETODENSE_ALG_DEFAULT;
+
+  // CHECK: rocsparse_dense_to_sparse_alg denseToSparseAlg_t;
+  // CHECK-NEXT: rocsparse_dense_to_sparse_alg DENSETOSPARSE_ALG_DEFAULT = rocsparse_dense_to_sparse_alg_default;
+  cusparseDenseToSparseAlg_t denseToSparseAlg_t;
+  cusparseDenseToSparseAlg_t DENSETOSPARSE_ALG_DEFAULT = CUSPARSE_DENSETOSPARSE_ALG_DEFAULT;
 #endif
 
 #if CUDA_VERSION >= 11020
   // CHECK: rocsparse_format FORMAT_BLOCKED_ELL = rocsparse_format_bell;
   cusparseFormat_t FORMAT_BLOCKED_ELL = CUSPARSE_FORMAT_BLOCKED_ELL;
+
+  // CHECK: rocsparse_spmv_alg SPMV_ALG_DEFAULT = rocsparse_spmv_alg_default;
+  // CHECK-NEXT: rocsparse_spmv_alg SPMV_COO_ALG1 = rocsparse_spmv_alg_coo;
+  // CHECK-NEXT: rocsparse_spmv_alg SPMV_COO_ALG2 = rocsparse_spmv_alg_coo_atomic;
+  // CHECK-NEXT: rocsparse_spmv_alg SPMV_CSR_ALG1 = rocsparse_spmv_alg_csr_adaptive;
+  // CHECK-NEXT: rocsparse_spmv_alg SPMV_CSR_ALG2 = rocsparse_spmv_alg_csr_stream;
+  cusparseSpMVAlg_t SPMV_ALG_DEFAULT = CUSPARSE_SPMV_ALG_DEFAULT;
+  cusparseSpMVAlg_t SPMV_COO_ALG1 = CUSPARSE_SPMV_COO_ALG1;
+  cusparseSpMVAlg_t SPMV_COO_ALG2 = CUSPARSE_SPMV_COO_ALG2;
+  cusparseSpMVAlg_t SPMV_CSR_ALG1 = CUSPARSE_SPMV_CSR_ALG1;
+  cusparseSpMVAlg_t SPMV_CSR_ALG2 = CUSPARSE_SPMV_CSR_ALG2;
+
+  // CHECK: rocsparse_spmm_alg SPMM_CSR_ALG3 = rocsparse_spmm_alg_csr_merge;
+  // CHECK-NEXT: rocsparse_spmm_alg SPMM_BLOCKED_ELL_ALG1 = rocsparse_spmm_alg_bell;
+  cusparseSpMMAlg_t SPMM_CSR_ALG3 = CUSPARSE_SPMM_CSR_ALG3;
+  cusparseSpMMAlg_t SPMM_BLOCKED_ELL_ALG1 = CUSPARSE_SPMM_BLOCKED_ELL_ALG1;
+
+  // CHECK: rocsparse_sddmm_alg sDDMMAlg_t;
+  // CHECK-NEXT: rocsparse_sddmm_alg SDDMM_ALG_DEFAULT = rocsparse_sddmm_alg_default;
+  cusparseSDDMMAlg_t sDDMMAlg_t;
+  cusparseSDDMMAlg_t SDDMM_ALG_DEFAULT = CUSPARSE_SDDMM_ALG_DEFAULT;
+#endif
+
+#if CUDA_VERSION >= 11030
+  // CHECK: rocsparse_spmat_attribute spMatAttribute_t;
+  // CHECK-NEXT: rocsparse_spmat_attribute SPMAT_FILL_MODE = rocsparse_spmat_fill_mode;
+  // CHECK-NEXT: rocsparse_spmat_attribute SPMAT_DIAG_TYPE = rocsparse_spmat_diag_type;
+  cusparseSpMatAttribute_t spMatAttribute_t;
+  cusparseSpMatAttribute_t SPMAT_FILL_MODE = CUSPARSE_SPMAT_FILL_MODE;
+  cusparseSpMatAttribute_t SPMAT_DIAG_TYPE = CUSPARSE_SPMAT_DIAG_TYPE;
+
+  // CHECK: rocsparse_spsv_alg spSVAlg_t;
+  // CHECK-NEXT: rocsparse_spsv_alg SPSV_ALG_DEFAULT = rocsparse_spsv_alg_default;
+  cusparseSpSVAlg_t spSVAlg_t;
+  cusparseSpSVAlg_t SPSV_ALG_DEFAULT = CUSPARSE_SPSV_ALG_DEFAULT;
+
+  // CHECK: rocsparse_spsm_alg spSMAlg_t;
+  // CHECK-NEXT: rocsparse_spsm_alg SPSM_ALG_DEFAULT = rocsparse_spsm_alg_default;
+  cusparseSpSMAlg_t spSMAlg_t;
+  cusparseSpSMAlg_t SPSM_ALG_DEFAULT = CUSPARSE_SPSM_ALG_DEFAULT;
 #endif
 
 #if CUDA_VERSION >= 12010
@@ -187,6 +389,11 @@ int main() {
   // CHECK-NEXT: rocsparse_format FORMAT_SLICED_ELLPACK = rocsparse_format_ell;
   cusparseFormat_t FORMAT_BSR = CUSPARSE_FORMAT_BSR;
   cusparseFormat_t FORMAT_SLICED_ELLPACK = CUSPARSE_FORMAT_SLICED_ELLPACK;
+#endif
+
+#if CUDA_VERSION >= 12010 && CUSPARSE_VERSION >= 12100
+  // CHECK: rocsparse_spmv_alg SPMV_SELL_ALG1 = rocsparse_spmv_alg_ell;
+  cusparseSpMVAlg_t SPMV_SELL_ALG1 = CUSPARSE_SPMV_SELL_ALG1;
 #endif
 
   return 0;

@@ -19,7 +19,7 @@
 |`CUSPARSE_CSRMM_ALG1`|10.2|11.0|12.0| | | | | |
 |`CUSPARSE_CSRMV_ALG1`|10.2|11.2|12.0| | | | | |
 |`CUSPARSE_CSRMV_ALG2`|10.2|11.2|12.0| | | | | |
-|`CUSPARSE_DENSETOSPARSE_ALG_DEFAULT`|11.1| | | | | | | |
+|`CUSPARSE_DENSETOSPARSE_ALG_DEFAULT`|11.1| | |`rocsparse_dense_to_sparse_alg_default`|4.1.0| | | |
 |`CUSPARSE_DIAG_TYPE_NON_UNIT`| | | |`rocsparse_diag_type_non_unit`|1.9.0| | | |
 |`CUSPARSE_DIAG_TYPE_UNIT`| | | |`rocsparse_diag_type_unit`|1.9.0| | | |
 |`CUSPARSE_DIRECTION_COLUMN`| | | |`rocsparse_direction_column`|3.1.0| | | |
@@ -50,47 +50,47 @@
 |`CUSPARSE_OPERATION_CONJUGATE_TRANSPOSE`| | | |`rocsparse_operation_conjugate_transpose`|1.9.0| | | |
 |`CUSPARSE_OPERATION_NON_TRANSPOSE`| | | |`rocsparse_operation_none`|1.9.0| | | |
 |`CUSPARSE_OPERATION_TRANSPOSE`| | | |`rocsparse_operation_transpose`|1.9.0| | | |
-|`CUSPARSE_ORDER_COL`|10.1| | | | | | | |
-|`CUSPARSE_ORDER_ROW`|10.1| | | | | | | |
+|`CUSPARSE_ORDER_COL`|10.1| | |`rocsparse_order_row`|4.1.0| | | |
+|`CUSPARSE_ORDER_ROW`|10.1| | |`rocsparse_order_column`|4.1.0| | | |
 |`CUSPARSE_POINTER_MODE_DEVICE`| | | |`rocsparse_pointer_mode_device`|1.9.0| | | |
 |`CUSPARSE_POINTER_MODE_HOST`| | | |`rocsparse_pointer_mode_host`|1.9.0| | | |
-|`CUSPARSE_SDDMM_ALG_DEFAULT`|11.2| | | | | | | |
+|`CUSPARSE_SDDMM_ALG_DEFAULT`|11.2| | |`rocsparse_sddmm_alg_default`|4.3.0| | | |
 |`CUSPARSE_SIDE_LEFT`| | |11.5| | | | | |
 |`CUSPARSE_SIDE_RIGHT`| | |11.5| | | | | |
 |`CUSPARSE_SOLVE_POLICY_NO_LEVEL`| | | |`rocsparse_solve_policy_auto`|1.9.0| | | |
 |`CUSPARSE_SOLVE_POLICY_USE_LEVEL`| | | |`rocsparse_solve_policy_auto`|1.9.0| | | |
-|`CUSPARSE_SPARSETODENSE_ALG_DEFAULT`|11.1| | | | | | | |
+|`CUSPARSE_SPARSETODENSE_ALG_DEFAULT`|11.1| | |`rocsparse_sparse_to_dense_alg_default`|4.1.0| | | |
 |`CUSPARSE_SPGEMM_ALG1`|12.0| | | | | | | |
 |`CUSPARSE_SPGEMM_ALG2`|12.0| | | | | | | |
 |`CUSPARSE_SPGEMM_ALG3`|12.0| | | | | | | |
 |`CUSPARSE_SPGEMM_CSR_ALG_DETERMINITIC`|11.3| | | | | | | |
 |`CUSPARSE_SPGEMM_CSR_ALG_NONDETERMINITIC`|11.3| | | | | | | |
-|`CUSPARSE_SPGEMM_DEFAULT`|11.0| | | | | | | |
-|`CUSPARSE_SPMAT_DIAG_TYPE`|11.3| | | | | | | |
-|`CUSPARSE_SPMAT_FILL_MODE`|11.3| | | | | | | |
+|`CUSPARSE_SPGEMM_DEFAULT`|11.0| | |`rocsparse_spgemm_alg_default`|4.1.0| | | |
+|`CUSPARSE_SPMAT_DIAG_TYPE`|11.3| | |`rocsparse_spmat_diag_type`|4.5.0| | | |
+|`CUSPARSE_SPMAT_FILL_MODE`|11.3| | |`rocsparse_spmat_fill_mode`|4.5.0| | | |
 |`CUSPARSE_SPMMA_ALG1`|11.1| |11.2| | | | | |
 |`CUSPARSE_SPMMA_ALG2`|11.1| |11.2| | | | | |
 |`CUSPARSE_SPMMA_ALG3`|11.1| |11.2| | | | | |
 |`CUSPARSE_SPMMA_ALG4`|11.1| |11.2| | | | | |
 |`CUSPARSE_SPMMA_PREPROCESS`|11.1| |11.2| | | | | |
-|`CUSPARSE_SPMM_ALG_DEFAULT`|11.0| | | | | | | |
-|`CUSPARSE_SPMM_BLOCKED_ELL_ALG1`|11.2| | | | | | | |
-|`CUSPARSE_SPMM_COO_ALG1`|11.0| | | | | | | |
-|`CUSPARSE_SPMM_COO_ALG2`|11.0| | | | | | | |
-|`CUSPARSE_SPMM_COO_ALG3`|11.0| | | | | | | |
+|`CUSPARSE_SPMM_ALG_DEFAULT`|11.0| | |`rocsparse_spmm_alg_default`|4.2.0| | | |
+|`CUSPARSE_SPMM_BLOCKED_ELL_ALG1`|11.2| | |`rocsparse_spmm_alg_bell`|4.5.0| | | |
+|`CUSPARSE_SPMM_COO_ALG1`|11.0| | |`rocsparse_spmm_alg_coo_segmented`|4.2.0| | | |
+|`CUSPARSE_SPMM_COO_ALG2`|11.0| | |`rocsparse_spmm_alg_coo_atomic`|4.2.0| | | |
+|`CUSPARSE_SPMM_COO_ALG3`|11.0| | |`rocsparse_spmm_alg_coo_segmented_atomic`|4.5.0| | | |
 |`CUSPARSE_SPMM_COO_ALG4`|11.0| | | | | | | |
-|`CUSPARSE_SPMM_CSR_ALG1`|11.0| | | | | | | |
-|`CUSPARSE_SPMM_CSR_ALG2`|11.0| | | | | | | |
-|`CUSPARSE_SPMM_CSR_ALG3`|11.2| | | | | | | |
+|`CUSPARSE_SPMM_CSR_ALG1`|11.0| | |`rocsparse_spmm_alg_csr`|4.2.0| | | |
+|`CUSPARSE_SPMM_CSR_ALG2`|11.0| | |`rocsparse_spmm_alg_csr_row_split`|4.5.0| | | |
+|`CUSPARSE_SPMM_CSR_ALG3`|11.2| | |`rocsparse_spmm_alg_csr_merge`|4.5.0| | | |
 |`CUSPARSE_SPMM_OP_ALG_DEFAULT`|11.5| | | | | | | |
-|`CUSPARSE_SPMV_ALG_DEFAULT`| | | | | | | | |
-|`CUSPARSE_SPMV_COO_ALG1`|11.2| | | | | | | |
-|`CUSPARSE_SPMV_COO_ALG2`|11.2| | | | | | | |
-|`CUSPARSE_SPMV_CSR_ALG1`|11.2| | | | | | | |
-|`CUSPARSE_SPMV_CSR_ALG2`|11.2| | | | | | | |
-|`CUSPARSE_SPMV_SELL_ALG1`|12.1| | | | | | | |
-|`CUSPARSE_SPSM_ALG_DEFAULT`|11.3| | | | | | | |
-|`CUSPARSE_SPSV_ALG_DEFAULT`|11.3| | | | | | | |
+|`CUSPARSE_SPMV_ALG_DEFAULT`|11.2| | |`rocsparse_spmv_alg_default`|4.1.0| | | |
+|`CUSPARSE_SPMV_COO_ALG1`|11.2| | |`rocsparse_spmv_alg_coo`|4.1.0| | | |
+|`CUSPARSE_SPMV_COO_ALG2`|11.2| | |`rocsparse_spmv_alg_coo_atomic`|5.3.0| | | |
+|`CUSPARSE_SPMV_CSR_ALG1`|11.2| | |`rocsparse_spmv_alg_csr_adaptive`|4.1.0| | | |
+|`CUSPARSE_SPMV_CSR_ALG2`|11.2| | |`rocsparse_spmv_alg_csr_stream`|4.1.0| | | |
+|`CUSPARSE_SPMV_SELL_ALG1`|12.1| | |`rocsparse_spmv_alg_ell`|4.1.0| | | |
+|`CUSPARSE_SPSM_ALG_DEFAULT`|11.3| | |`rocsparse_spsm_alg_default`|4.5.0| | | |
+|`CUSPARSE_SPSV_ALG_DEFAULT`|11.3| | |`rocsparse_spsv_alg_default`|4.5.0| | | |
 |`CUSPARSE_SPSV_UPDATE_DIAGONAL`|12.1| | | | | | | |
 |`CUSPARSE_SPSV_UPDATE_GENERAL`|12.1| | | | | | | |
 |`CUSPARSE_STATUS_ALLOC_FAILED`| | | |`rocsparse_status_memory_error`|1.9.0| | | |
@@ -138,7 +138,7 @@
 |`cusparseConstSpVecDescr_t`|12.0| | | | | | | |
 |`cusparseContext`| | | |`_rocsparse_handle`|1.9.0| | | |
 |`cusparseCsr2CscAlg_t`|10.1| | | | | | | |
-|`cusparseDenseToSparseAlg_t`|11.1| | | | | | | |
+|`cusparseDenseToSparseAlg_t`|11.1| | |`rocsparse_dense_to_sparse_alg`|4.1.0| | | |
 |`cusparseDiagType_t`| | | |`rocsparse_diag_type`|1.9.0| | | |
 |`cusparseDirection_t`| | | |`rocsparse_direction`|3.1.0| | | |
 |`cusparseDnMatDescr`|10.1| | |`_rocsparse_dnmat_descr`|4.1.0| | | |
@@ -158,34 +158,34 @@
 |`cusparseMatDescr_t`| | | |`rocsparse_mat_descr`|1.9.0| | | |
 |`cusparseMatrixType_t`| | | |`rocsparse_matrix_type`|1.9.0| | | |
 |`cusparseOperation_t`| | | |`rocsparse_operation`|1.9.0| | | |
-|`cusparseOrder_t`|10.1| | | | | | | |
+|`cusparseOrder_t`|10.1| | |`rocsparse_order`|4.1.0| | | |
 |`cusparsePointerMode_t`| | | |`rocsparse_pointer_mode`|1.9.0| | | |
-|`cusparseSDDMMAlg_t`|11.2| | | | | | | |
+|`cusparseSDDMMAlg_t`|11.2| | |`rocsparse_sddmm_alg`|4.3.0| | | |
 |`cusparseSideMode_t`| | |11.5| | | | | |
 |`cusparseSolveAnalysisInfo`| |10.2|11.0| | | | | |
 |`cusparseSolveAnalysisInfo_t`| |10.2|11.0| | | | | |
 |`cusparseSolvePolicy_t`| | | |`rocsparse_solve_policy`|1.9.0| | | |
-|`cusparseSpGEMMAlg_t`|11.0| | | | | | | |
+|`cusparseSpGEMMAlg_t`|11.0| | |`rocsparse_spgemm_alg`|4.1.0| | | |
 |`cusparseSpGEMMDescr`|11.0| | | | | | | |
 |`cusparseSpGEMMDescr_t`|11.0| | | | | | | |
-|`cusparseSpMMAlg_t`|10.1| | | | | | | |
+|`cusparseSpMMAlg_t`|10.1| | |`rocsparse_spmm_alg`|4.2.0| | | |
 |`cusparseSpMMOpAlg_t`|11.5| | | | | | | |
 |`cusparseSpMMOpPlan`|11.5| | | | | | | |
 |`cusparseSpMMOpPlan_t`|11.5| | | | | | | |
-|`cusparseSpMVAlg_t`|10.2| | | | | | | |
-|`cusparseSpMatAttribute_t`|11.3| | | | | | | |
+|`cusparseSpMVAlg_t`|10.2| | |`rocsparse_spmv_alg`|4.1.0| | | |
+|`cusparseSpMatAttribute_t`|11.3| | |`rocsparse_spmat_attribute`|4.5.0| | | |
 |`cusparseSpMatDescr`|10.1| | |`_rocsparse_spmat_descr`|4.1.0| | | |
 |`cusparseSpMatDescr_t`|10.1| | |`rocsparse_spmat_descr`|4.1.0| | | |
-|`cusparseSpSMAlg_t`|11.3| | | | | | | |
+|`cusparseSpSMAlg_t`|11.3| | |`rocsparse_spsm_alg`|4.5.0| | | |
 |`cusparseSpSMDescr`|11.3| | | | | | | |
 |`cusparseSpSMDescr_t`|11.3| | | | | | | |
-|`cusparseSpSVAlg_t`|11.3| | | | | | | |
+|`cusparseSpSVAlg_t`|11.3| | |`rocsparse_spsv_alg`|4.5.0| | | |
 |`cusparseSpSVDescr`|11.3| | | | | | | |
 |`cusparseSpSVDescr_t`|11.3| | | | | | | |
 |`cusparseSpSVUpdate_t`|12.1| | | | | | | |
 |`cusparseSpVecDescr`|10.2| | |`_rocsparse_spvec_descr`|4.1.0| | | |
 |`cusparseSpVecDescr_t`|10.2| | |`rocsparse_spvec_descr`|4.1.0| | | |
-|`cusparseSparseToDenseAlg_t`|11.1| | | | | | | |
+|`cusparseSparseToDenseAlg_t`|11.1| | |`rocsparse_sparse_to_dense_alg`|4.1.0| | | |
 |`cusparseStatus_t`| | | |`rocsparse_status`|1.9.0| | | |
 |`pruneInfo`|9.0| | | | | | | |
 |`pruneInfo_t`|9.0| | | | | | | |
@@ -194,13 +194,13 @@
 
 |**CUDA**|**A**|**D**|**R**|**ROC**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
-|`cusparseCreate`| | | | | | | | |
-|`cusparseDestroy`| | | | | | | | |
-|`cusparseGetPointerMode`| | | | | | | | |
-|`cusparseGetStream`| | | | | | | | |
-|`cusparseGetVersion`| | | | | | | | |
-|`cusparseSetPointerMode`| | | | | | | | |
-|`cusparseSetStream`| | | | | | | | |
+|`cusparseCreate`| | | |`rocsparse_create_handle`|1.9.0| | | |
+|`cusparseDestroy`| | | |`rocsparse_destroy_handle`|1.9.0| | | |
+|`cusparseGetPointerMode`| | | |`rocsparse_get_pointer_mode`|1.9.0| | | |
+|`cusparseGetStream`| | | |`rocsparse_get_stream`|1.9.0| | | |
+|`cusparseGetVersion`| | | |`rocsparse_get_version`|1.9.0| | | |
+|`cusparseSetPointerMode`| | | |`rocsparse_set_pointer_mode`|1.9.0| | | |
+|`cusparseSetStream`| | | |`rocsparse_set_stream`|1.9.0| | | |
 
 ## **6. CUSPARSE Logging**
 
@@ -217,44 +217,44 @@
 
 |**CUDA**|**A**|**D**|**R**|**ROC**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
-|`cusparseCopyMatDescr`|8.0| |12.0| | | | | |
+|`cusparseCopyMatDescr`|8.0| |12.0|`rocsparse_copy_mat_descr`|1.9.0| | | |
 |`cusparseCreateBsric02Info`| | | | | | | | |
 |`cusparseCreateBsrilu02Info`| | | | | | | | |
 |`cusparseCreateBsrsm2Info`| | | | | | | | |
 |`cusparseCreateBsrsv2Info`| | | | | | | | |
-|`cusparseCreateColorInfo`| | | | | | | | |
+|`cusparseCreateColorInfo`| | | |`rocsparse_create_color_info`|4.5.0| | | |
 |`cusparseCreateCsrgemm2Info`| |11.0|12.0| | | | | |
 |`cusparseCreateCsric02Info`| | | | | | | | |
 |`cusparseCreateCsrilu02Info`| | | | | | | | |
 |`cusparseCreateCsrsm2Info`|10.0|11.3|12.0| | | | | |
 |`cusparseCreateCsrsv2Info`| |11.3|12.0| | | | | |
-|`cusparseCreateHybMat`| |10.2|11.0| | | | | |
-|`cusparseCreateMatDescr`| | | | | | | | |
+|`cusparseCreateHybMat`| |10.2|11.0|`rocsparse_create_hyb_mat`|1.9.0| | | |
+|`cusparseCreateMatDescr`| | | |`rocsparse_create_mat_descr`|1.9.0| | | |
 |`cusparseCreatePruneInfo`|9.0| | | | | | | |
 |`cusparseCreateSolveAnalysisInfo`| |10.2|11.0| | | | | |
 |`cusparseDestroyBsric02Info`| | | | | | | | |
 |`cusparseDestroyBsrilu02Info`| | | | | | | | |
 |`cusparseDestroyBsrsm2Info`| | | | | | | | |
 |`cusparseDestroyBsrsv2Info`| | | | | | | | |
-|`cusparseDestroyColorInfo`| | | | | | | | |
+|`cusparseDestroyColorInfo`| | | |`rocsparse_destroy_color_info`|4.5.0| | | |
 |`cusparseDestroyCsrgemm2Info`| |11.0|12.0| | | | | |
 |`cusparseDestroyCsric02Info`| | | | | | | | |
 |`cusparseDestroyCsrilu02Info`| | | | | | | | |
 |`cusparseDestroyCsrsm2Info`|10.0|11.3|12.0| | | | | |
 |`cusparseDestroyCsrsv2Info`| |11.3|12.0| | | | | |
-|`cusparseDestroyHybMat`| |10.2|11.0| | | | | |
-|`cusparseDestroyMatDescr`| | | | | | | | |
+|`cusparseDestroyHybMat`| |10.2|11.0|`rocsparse_destroy_hyb_mat`|1.9.0| | | |
+|`cusparseDestroyMatDescr`| | | |`rocsparse_destroy_mat_descr`|1.9.0| | | |
 |`cusparseDestroyPruneInfo`|9.0| | | | | | | |
 |`cusparseDestroySolveAnalysisInfo`| |10.2|11.0| | | | | |
 |`cusparseGetLevelInfo`| | |11.0| | | | | |
-|`cusparseGetMatDiagType`| | | | | | | | |
-|`cusparseGetMatFillMode`| | | | | | | | |
-|`cusparseGetMatIndexBase`| | | | | | | | |
-|`cusparseGetMatType`| | | | | | | | |
-|`cusparseSetMatDiagType`| | | | | | | | |
-|`cusparseSetMatFillMode`| | | | | | | | |
-|`cusparseSetMatIndexBase`| | | | | | | | |
-|`cusparseSetMatType`| | | | | | | | |
+|`cusparseGetMatDiagType`| | | |`rocsparse_get_mat_diag_type`|1.9.0| | | |
+|`cusparseGetMatFillMode`| | | |`rocsparse_get_mat_fill_mode`|1.9.0| | | |
+|`cusparseGetMatIndexBase`| | | |`rocsparse_get_mat_index_base`|1.9.0| | | |
+|`cusparseGetMatType`| | | |`rocsparse_get_mat_type`|1.9.0| | | |
+|`cusparseSetMatDiagType`| | | |`rocsparse_set_mat_diag_type`|1.9.0| | | |
+|`cusparseSetMatFillMode`| | | |`rocsparse_set_mat_fill_mode`|1.9.0| | | |
+|`cusparseSetMatIndexBase`| | | |`rocsparse_set_mat_index_base`|1.9.0| | | |
+|`cusparseSetMatType`| | | |`rocsparse_set_mat_type`|1.9.0| | | |
 
 ## **8. CUSPARSE Level 1 Function Reference**
 

@@ -19,7 +19,7 @@
 |`CUSPARSE_CSRMM_ALG1`|10.2|11.0|12.0|`HIPSPARSE_CSRMM_ALG1`|4.2.0| | | |
 |`CUSPARSE_CSRMV_ALG1`|10.2|11.2|12.0|`HIPSPARSE_CSRMV_ALG1`|4.1.0| | | |
 |`CUSPARSE_CSRMV_ALG2`|10.2|11.2|12.0|`HIPSPARSE_CSRMV_ALG2`|4.1.0| | | |
-|`CUSPARSE_DENSETOSPARSE_ALG_DEFAULT`|11.1| | | | | | | |
+|`CUSPARSE_DENSETOSPARSE_ALG_DEFAULT`|11.1| | |`HIPSPARSE_DENSETOSPARSE_ALG_DEFAULT`|4.2.0| | | |
 |`CUSPARSE_DIAG_TYPE_NON_UNIT`| | | |`HIPSPARSE_DIAG_TYPE_NON_UNIT`|1.9.2| | | |
 |`CUSPARSE_DIAG_TYPE_UNIT`| | | |`HIPSPARSE_DIAG_TYPE_UNIT`|1.9.2| | | |
 |`CUSPARSE_DIRECTION_COLUMN`| | | |`HIPSPARSE_DIRECTION_COLUMN`|3.2.0| | | |
@@ -83,7 +83,7 @@
 |`CUSPARSE_SPMM_CSR_ALG2`|11.0| | |`HIPSPARSE_SPMM_CSR_ALG2`|4.2.0| | | |
 |`CUSPARSE_SPMM_CSR_ALG3`|11.2| | |`HIPSPARSE_SPMM_CSR_ALG3`|4.5.0| | | |
 |`CUSPARSE_SPMM_OP_ALG_DEFAULT`|11.5| | | | | | | |
-|`CUSPARSE_SPMV_ALG_DEFAULT`| | | |`HIPSPARSE_SPMV_ALG_DEFAULT`|4.5.0| | | |
+|`CUSPARSE_SPMV_ALG_DEFAULT`|11.2| | |`HIPSPARSE_SPMV_ALG_DEFAULT`|4.5.0| | | |
 |`CUSPARSE_SPMV_COO_ALG1`|11.2| | |`HIPSPARSE_SPMV_COO_ALG1`|4.5.0| | | |
 |`CUSPARSE_SPMV_COO_ALG2`|11.2| | |`HIPSPARSE_SPMV_COO_ALG2`|4.5.0| | | |
 |`CUSPARSE_SPMV_CSR_ALG1`|11.2| | |`HIPSPARSE_SPMV_CSR_ALG1`|4.5.0| | | |
@@ -138,7 +138,7 @@
 |`cusparseConstSpVecDescr_t`|12.0| | | | | | | |
 |`cusparseContext`| | | | | | | | |
 |`cusparseCsr2CscAlg_t`|10.1| | |`hipsparseCsr2CscAlg_t`|5.4.0| | | |
-|`cusparseDenseToSparseAlg_t`|11.1| | | | | | | |
+|`cusparseDenseToSparseAlg_t`|11.1| | |`hipsparseDenseToSparseAlg_t`|4.2.0| | | |
 |`cusparseDiagType_t`| | | |`hipsparseDiagType_t`|1.9.2| | | |
 |`cusparseDirection_t`| | | |`hipsparseDirection_t`|3.2.0| | | |
 |`cusparseDnMatDescr`|10.1| | | | | | | |
@@ -217,7 +217,7 @@
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
-|`cusparseCopyMatDescr`|8.0| |12.0| | | | | |
+|`cusparseCopyMatDescr`|8.0| |12.0|`hipsparseCopyMatDescr`|1.9.2| | | |
 |`cusparseCreateBsric02Info`| | | |`hipsparseCreateBsric02Info`|3.8.0| | | |
 |`cusparseCreateBsrilu02Info`| | | |`hipsparseCreateBsrilu02Info`|3.9.0| | | |
 |`cusparseCreateBsrsm2Info`| | | |`hipsparseCreateBsrsm2Info`|4.5.0| | | |
