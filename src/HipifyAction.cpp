@@ -94,6 +94,7 @@ const StringRef sCubNamespacePrefix = "cubNamespacePrefix";
 const StringRef sCubFunctionTemplateDecl = "cubFunctionTemplateDecl";
 const StringRef sCubUsingNamespaceDecl = "cubUsingNamespaceDecl";
 const StringRef sHalf2Member = "half2Member";
+const StringRef sDataTypeSelection = "dataTypeSelection";
 
 std::string getCastType(hipify::CastTypes c) {
   switch (c) {
@@ -107,6 +108,11 @@ std::string getCastType(hipify::CastTypes c) {
     default: return "";
   }
 }
+
+std::map<std::string, std::string> TypeOverloads {
+  {"cudaDataType_t", "hipDataType"},
+  {"cudaDataType", "hipDataType"},
+};
 
 std::map<std::string, hipify::FuncOverloadsStruct> FuncOverloads {
   {sCudaEventCreate,
@@ -975,6 +981,25 @@ bool HipifyAction::half2Member(const mat::MatchFinder::MatchResult &Result) {
   return false;
 }
 
+bool HipifyAction::dataTypeSelection(const mat::MatchFinder::MatchResult& Result) {
+  if (auto *vardecl = Result.Nodes.getNodeAs<clang::VarDecl>(sDataTypeSelection)) {
+    clang::QualType QT = vardecl->getType();
+    std::string name = QT.getAsString();
+    const auto found = TypeOverloads.find(name);
+    if (found == TypeOverloads.end()) return false;
+    std::string correct_name = found->second;
+    const clang::TypeSourceInfo *si = vardecl->getTypeSourceInfo();
+    const clang::TypeLoc tloc = si->getTypeLoc();
+    const clang::SourceRange sr = tloc.getSourceRange();
+    const clang::SourceLocation sl = sr.getBegin();
+    auto *SM = Result.SourceManager;
+    ct::Replacement Rep(*SM, sl, name.size(), correct_name);
+    clang::FullSourceLoc fullSL(sl, *SM);
+    insertReplacement(Rep, fullSL);
+  }
+  return false;
+}
+
 void HipifyAction::insertReplacement(const ct::Replacement &rep, const clang::FullSourceLoc &fullSL) {
   llcompat::insertReplacement(*replacements, rep);
   if (PrintStats || PrintStatsCSV) {
@@ -1105,6 +1130,17 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
     ).bind(sCubUsingNamespaceDecl),
     this
   );
+  Finder->addMatcher(
+    mat::varDecl(
+      mat::isExpansionInMainFile(),
+      mat::hasType(
+        mat::qualType(
+          mat::hasCanonicalType(mat::enumType())
+        )
+      )
+    ).bind(sDataTypeSelection),
+    this
+  );
   // Ownership is transferred to the caller.
   return Finder->newASTConsumer();
 }
@@ -1232,5 +1268,6 @@ void HipifyAction::run(const mat::MatchFinder::MatchResult &Result) {
   if (cubNamespacePrefix(Result)) return;
   if (cubFunctionTemplateDecl(Result)) return;
   if (cubUsingNamespaceDecl(Result)) return;
+  if (UseHipDataType && dataTypeSelection(Result)) return;
   if (!NoUndocumented && half2Member(Result)) return;
 }

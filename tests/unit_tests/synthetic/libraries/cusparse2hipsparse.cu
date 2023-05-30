@@ -1,4 +1,4 @@
-// RUN: %run_test hipify "%s" "%t" %hipify_args 2 --skip-excluded-preprocessor-conditional-blocks --experimental %clang_args -ferror-limit=500
+// RUN: %run_test hipify "%s" "%t" %hipify_args 3 --skip-excluded-preprocessor-conditional-blocks --experimental --use-hip-data-types %clang_args -ferror-limit=500
 
 // CHECK: #include <hip/hip_runtime.h>
 #include <cuda_runtime.h>
@@ -211,6 +211,13 @@ int main() {
   // CHECK: status_t = hipsparseDestroyColorInfo(colorInfo_t);
   status_t = cusparseDestroyColorInfo(colorInfo_t);
 
+#if CUDA_VERSION >= 8000
+  // CHECK: hipDataType dataType_t;
+  // CHECK-NEXT: hipDataType dataType;
+  cudaDataType_t dataType_t;
+  cudaDataType dataType;
+#endif
+
 #if CUDA_VERSION >= 8000 && CUDA_VERSION < 12000
   // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCopyMatDescr(cusparseMatDescr_t dest, const cusparseMatDescr_t src);
   // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseCopyMatDescr(hipsparseMatDescr_t dest, const hipsparseMatDescr_t src);
@@ -275,6 +282,16 @@ int main() {
 
   // CHECK: hipsparseSpMVAlg_t spMVAlg_t;
   cusparseSpMVAlg_t spMVAlg_t;
+
+  int64_t size = 0;
+  int64_t nnz = 0;
+  void *indices = nullptr;
+  void *values = nullptr;
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCreateSpVec(cusparseSpVecDescr_t* spVecDescr, int64_t size, int64_t nnz, void* indices, void* values, cusparseIndexType_t idxType, cusparseIndexBase_t idxBase, cudaDataType valueType);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseCreateSpVec(hipsparseSpVecDescr_t* spVecDescr, int64_t size, int64_t nnz, void* indices, void* values, hipsparseIndexType_t idxType, hipsparseIndexBase_t idxBase, hipDataType valueType);
+  // CHECK: status_t = hipsparseCreateSpVec(&spVecDescr_t, size, nnz, indices, values, indexType_t, indexBase_t, dataType);
+  status_t = cusparseCreateSpVec(&spVecDescr_t, size, nnz, indices, values, indexType_t, indexBase_t, dataType);
 #endif
 
 #if CUDA_VERSION >= 10020 && CUDA_VERSION < 12000

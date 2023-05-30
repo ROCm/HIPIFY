@@ -80,6 +80,7 @@ public:
   bool cubFunctionTemplateDecl(const mat::MatchFinder::MatchResult &Result);
   bool cubUsingNamespaceDecl(const mat::MatchFinder::MatchResult &Result);
   bool half2Member(const mat::MatchFinder::MatchResult &Result);
+  bool dataTypeSelection(const mat::MatchFinder::MatchResult &Result);
 
   // Called by the preprocessor for each include directive during the non-raw lexing pass.
   void InclusionDirective(clang::SourceLocation hash_loc,

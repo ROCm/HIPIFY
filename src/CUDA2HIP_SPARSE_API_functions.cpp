@@ -758,7 +758,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   {"cusparseCreateSlicedEll",                           {"hipsparseCreateSlicedEll",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
   {"cusparseCreateConstSlicedEll",                      {"hipsparseCreateConstSlicedEll",                      "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
   // Sparse Vector descriptor
-  {"cusparseCreateSpVec",                               {"hipsparseCreateSpVec",                               "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
+  {"cusparseCreateSpVec",                               {"hipsparseCreateSpVec",                               "rocsparse_create_spvec_descr",                                     CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseCreateConstSpVec",                          {"hipsparseCreateConstSpVec",                          "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
   {"cusparseDestroySpVec",                              {"hipsparseDestroySpVec",                              "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
   {"cusparseSpVecGet",                                  {"hipsparseSpVecGet",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
@@ -1821,6 +1821,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_FUNCTION_VER_MAP {
   {"rocsparse_destroy_hyb_mat",                          {HIP_1090, HIP_0,    HIP_0   }},
   {"rocsparse_create_color_info",                        {HIP_4050, HIP_0,    HIP_0   }},
   {"rocsparse_destroy_color_info",                       {HIP_4050, HIP_0,    HIP_0   }},
+  {"rocsparse_create_spvec_descr",                       {HIP_4010, HIP_0,    HIP_0   }},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_SPARSE_API_SECTION_MAP {

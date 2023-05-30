@@ -83,6 +83,8 @@ extern std::map<std::string, hipify::ArgCastStruct> FuncArgCasts;
 
 extern std::map<std::string, hipify::FuncOverloadsStruct> FuncOverloads;
 
+extern std::map<std::string, std::string> TypeOverloads;
+
 namespace perl {
 
   bool generate(bool Generate = true);
