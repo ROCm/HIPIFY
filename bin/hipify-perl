@@ -1481,6 +1481,7 @@ sub rocSubstitutions {
     subst("cusparseCreateColorInfo", "rocsparse_create_color_info", "library");
     subst("cusparseCreateHybMat", "rocsparse_create_hyb_mat", "library");
     subst("cusparseCreateMatDescr", "rocsparse_create_mat_descr", "library");
+    subst("cusparseCreateSpVec", "rocsparse_create_spvec_descr", "library");
     subst("cusparseDestroy", "rocsparse_destroy_handle", "library");
     subst("cusparseDestroyColorInfo", "rocsparse_destroy_color_info", "library");
     subst("cusparseDestroyHybMat", "rocsparse_destroy_hyb_mat", "library");

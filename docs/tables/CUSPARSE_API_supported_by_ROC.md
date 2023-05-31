@@ -833,7 +833,7 @@
 |`cusparseCreateDnMat`|10.1| | | | | | | |
 |`cusparseCreateDnVec`|10.2| | | | | | | |
 |`cusparseCreateSlicedEll`|12.1| | | | | | | |
-|`cusparseCreateSpVec`|10.2| | | | | | | |
+|`cusparseCreateSpVec`|10.2| | |`rocsparse_create_spvec_descr`|4.1.0| | | |
 |`cusparseCscGet`|11.7| | | | | | | |
 |`cusparseCscSetPointers`|11.1| | | | | | | |
 |`cusparseCsrGet`|10.2| | | | | | | |
