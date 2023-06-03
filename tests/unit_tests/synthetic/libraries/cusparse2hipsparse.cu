@@ -283,6 +283,11 @@ int main() {
   // CHECK: hipsparseSpMMAlg_t spMMAlg_t;
   cusparseSpMMAlg_t spMMAlg_t;
 
+  // CHECK: hipsparseCsr2CscAlg_t Csr2CscAlg_t;
+  // CHECK-NEXT: hipsparseCsr2CscAlg_t CSR2CSC_ALG1 = HIPSPARSE_CSR2CSC_ALG1;
+  cusparseCsr2CscAlg_t Csr2CscAlg_t;
+  cusparseCsr2CscAlg_t CSR2CSC_ALG1 = CUSPARSE_CSR2CSC_ALG1;
+
   // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCreateCoo(cusparseSpMatDescr_t* spMatDescr, int64_t ows, int64_t cols, int64_t nnz, void* cooRowInd, void* cooColInd, void* cooValues, cusparseIndexType_t cooIdxType, cusparseIndexBase_t idxBase, cudaDataType valueType);
   // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseCreateCoo(hipsparseSpMatDescr_t* spMatDescr, int64_t rows, int64_t cols, int64_t nnz, void* cooRowInd, void* cooColInd, void* cooValues, hipsparseIndexType_t cooIdxType, hipsparseIndexBase_t idxBase, hipDataType valueType);
   // CHECK: status_t = hipsparseCreateCoo(&spMatDescr_t, rows, cols, nnz, cooRowInd, cooColInd, cooValues, indexType_t, indexBase_t, dataType);
@@ -296,6 +301,9 @@ int main() {
   cusparseSpMMAlg_t COOMM_ALG1 = CUSPARSE_COOMM_ALG1;
   cusparseSpMMAlg_t COOMM_ALG2 = CUSPARSE_COOMM_ALG2;
   cusparseSpMMAlg_t COOMM_ALG3 = CUSPARSE_COOMM_ALG3;
+
+  // CHECK: hipsparseCsr2CscAlg_t CSR2CSC_ALG2 = HIPSPARSE_CSR2CSC_ALG2;
+  cusparseCsr2CscAlg_t CSR2CSC_ALG2 = CUSPARSE_CSR2CSC_ALG2;
 #endif
 
 #if CUDA_VERSION >= 10020
@@ -481,6 +489,23 @@ int main() {
   // CHECK-NEXT: hipsparseSpSMAlg_t SPSM_ALG_DEFAULT = HIPSPARSE_SPSM_ALG_DEFAULT;
   cusparseSpSMAlg_t spSMAlg_t;
   cusparseSpSMAlg_t SPSM_ALG_DEFAULT = CUSPARSE_SPSM_ALG_DEFAULT;
+
+  // CHECK: hipsparseSpGEMMAlg_t SPGEMM_CSR_ALG_DETERMINITIC = HIPSPARSE_SPGEMM_CSR_ALG_DETERMINISTIC;
+  // CHECK: hipsparseSpGEMMAlg_t SPGEMM_CSR_ALG_NONDETERMINITIC = HIPSPARSE_SPGEMM_CSR_ALG_NONDETERMINISTIC;
+  cusparseSpGEMMAlg_t SPGEMM_CSR_ALG_DETERMINITIC = CUSPARSE_SPGEMM_CSR_ALG_DETERMINITIC;
+  cusparseSpGEMMAlg_t SPGEMM_CSR_ALG_NONDETERMINITIC = CUSPARSE_SPGEMM_CSR_ALG_NONDETERMINITIC;
+#endif
+
+#if CUDA_VERSION >= 12000
+  // CHECK: hipsparseCsr2CscAlg_t CSR2CSC_ALG_DEFAULT = HIPSPARSE_CSR2CSC_ALG_DEFAULT;
+  cusparseCsr2CscAlg_t CSR2CSC_ALG_DEFAULT = CUSPARSE_CSR2CSC_ALG_DEFAULT;
+
+  // CHECK: hipsparseSpGEMMAlg_t SPGEMM_ALG1 = HIPSPARSE_SPGEMM_ALG1;
+  // CHECK: hipsparseSpGEMMAlg_t SPGEMM_ALG2 = HIPSPARSE_SPGEMM_ALG2;
+  // CHECK: hipsparseSpGEMMAlg_t SPGEMM_ALG3 = HIPSPARSE_SPGEMM_ALG3;
+  cusparseSpGEMMAlg_t SPGEMM_ALG1 = CUSPARSE_SPGEMM_ALG1;
+  cusparseSpGEMMAlg_t SPGEMM_ALG2 = CUSPARSE_SPGEMM_ALG2;
+  cusparseSpGEMMAlg_t SPGEMM_ALG3 = CUSPARSE_SPGEMM_ALG3;
 #endif
 
   return 0;
