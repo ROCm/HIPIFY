@@ -24,13 +24,6 @@ THE SOFTWARE.
 
 // Map of all functions
 const std::map<llvm::StringRef, hipCounter> CUDA_RAND_TYPE_NAME_MAP {
-  // RAND defines
-  {"CURAND_VER_MAJOR",              {"HIPRAND_VER_MAJOR",              "", CONV_DEFINE, API_RAND, 1, HIP_UNSUPPORTED}},
-  {"CURAND_VER_MINOR",              {"HIPRAND_VER_MINOR",              "", CONV_DEFINE, API_RAND, 1, HIP_UNSUPPORTED}},
-  {"CURAND_VER_PATCH",              {"HIPRAND_VER_PATCH",              "", CONV_DEFINE, API_RAND, 1, HIP_UNSUPPORTED}},
-  {"CURAND_VER_BUILD",              {"HIPRAND_VER_BUILD",              "", CONV_DEFINE, API_RAND, 1, HIP_UNSUPPORTED}},
-  {"CURAND_VERSION",                {"HIPRAND_VERSION",                "", CONV_DEFINE, API_RAND, 1}},
-
   // RAND Host types
   {"curandStatus",                  {"hiprandStatus_t",                "", CONV_TYPE, API_RAND, 1}},
   {"curandStatus_t",                {"hiprandStatus_t",                "", CONV_TYPE, API_RAND, 1}},
@@ -142,17 +135,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RAND_TYPE_NAME_MAP {
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_RAND_TYPE_NAME_VER_MAP {
-  {"CURAND_VER_MAJOR",                              {CUDA_102, CUDA_0, CUDA_0}},
-  {"CURAND_VER_MINOR",                              {CUDA_102, CUDA_0, CUDA_0}},
-  {"CURAND_VER_PATCH",                              {CUDA_102, CUDA_0, CUDA_0}},
-  {"CURAND_VER_BUILD",                              {CUDA_102, CUDA_0, CUDA_0}},
-  {"CURAND_VERSION",                                {CUDA_102, CUDA_0, CUDA_0}},
   {"CURAND_ORDERING_PSEUDO_LEGACY",                 {CUDA_110, CUDA_0, CUDA_0}},
   {"CURAND_ORDERING_PSEUDO_DYNAMIC",                {CUDA_115, CUDA_0, CUDA_0}},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_RAND_TYPE_NAME_VER_MAP {
-  {"HIPRAND_VERSION",                                {HIP_1050, HIP_0,    HIP_0   }},
   {"hiprandStatus_t",                                {HIP_1050, HIP_0,    HIP_0   }},
   {"hiprandRngType_t",                               {HIP_1050, HIP_0,    HIP_0   }},
   {"hiprandGenerator_st",                            {HIP_1050, HIP_0,    HIP_0   }},

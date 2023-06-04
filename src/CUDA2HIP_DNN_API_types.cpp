@@ -25,7 +25,6 @@ THE SOFTWARE.
 // Map of all functions
 const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   // cuDNN defines
-  {"CUDNN_VERSION",                                                  {"HIPDNN_VERSION",                                                  "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, ROC_UNSUPPORTED}},
   {"CUDNN_DIM_MAX",                                                  {"HIPDNN_DIM_MAX",                                                  "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    //  8
   {"CUDNN_LRN_MIN_N",                                                {"HIPDNN_LRN_MIN_N",                                                "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    //  1
   {"CUDNN_LRN_MAX_N",                                                {"HIPDNN_LRN_MAX_N",                                                "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 16
@@ -36,27 +35,6 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"CUDNN_SEV_WARNING_EN",                                           {"HIPDNN_SEV_WARNING_EN",                                           "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_SEV_INFO_EN",                                              {"HIPDNN_SEV_INFO_EN",                                              "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_SEQDATA_DIM_COUNT",                                        {"HIPDNN_SEQDATA_DIM_COUNT",                                        "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 4
-  {"CUDNN_MAJOR",                                                    {"HIPDNN_MAJOR",                                                    "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
-  {"CUDNN_MINOR",                                                    {"HIPDNN_MINOR",                                                    "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
-  {"CUDNN_PATCHLEVEL",                                               {"HIPDNN_PATCHLEVEL",                                               "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
-  {"CUDNN_ADV_INFER_MAJOR",                                          {"HIPDNN_ADV_INFER_MAJOR",                                          "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
-  {"CUDNN_ADV_INFER_MINOR",                                          {"HIPDNN_ADV_INFER_MINOR",                                          "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
-  {"CUDNN_ADV_INFER_PATCH",                                          {"HIPDNN_ADV_INFER_PATCH",                                          "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
-  {"CUDNN_ADV_TRAIN_MAJOR",                                          {"HIPDNN_ADV_TRAIN_MAJOR",                                          "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
-  {"CUDNN_ADV_TRAIN_MINOR",                                          {"HIPDNN_ADV_TRAIN_MINOR",                                          "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
-  {"CUDNN_ADV_TRAIN_PATCH",                                          {"HIPDNN_ADV_TRAIN_PATCH",                                          "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
-  {"CUDNN_CNN_INFER_MAJOR",                                          {"HIPDNN_CNN_INFER_MAJOR",                                          "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
-  {"CUDNN_CNN_INFER_MINOR",                                          {"HIPDNN_CNN_INFER_MINOR",                                          "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
-  {"CUDNN_CNN_INFER_PATCH",                                          {"HIPDNN_CNN_INFER_PATCH",                                          "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
-  {"CUDNN_CNN_TRAIN_MAJOR",                                          {"HIPDNN_CNN_TRAIN_MAJOR",                                          "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
-  {"CUDNN_CNN_TRAIN_MINOR",                                          {"HIPDNN_CNN_TRAIN_MINOR",                                          "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
-  {"CUDNN_CNN_TRAIN_PATCH",                                          {"HIPDNN_CNN_TRAIN_PATCH",                                          "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
-  {"CUDNN_OPS_INFER_MAJOR",                                          {"HIPDNN_OPS_INFER_MAJOR",                                          "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
-  {"CUDNN_OPS_INFER_MINOR",                                          {"HIPDNN_OPS_INFER_MINOR",                                          "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
-  {"CUDNN_OPS_INFER_PATCH",                                          {"HIPDNN_OPS_INFER_PATCH",                                          "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
-  {"CUDNN_OPS_TRAIN_MAJOR",                                          {"HIPDNN_OPS_TRAIN_MAJOR",                                          "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
-  {"CUDNN_OPS_TRAIN_MINOR",                                          {"HIPDNN_OPS_TRAIN_MINOR",                                          "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
-  {"CUDNN_OPS_TRAIN_PATCH",                                          {"HIPDNN_OPS_TRAIN_PATCH",                                          "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
 
   // cuDNN enums
   {"cudnnStatus_t",                                                  {"hipdnnStatus_t",                                                  "miopenStatus_t",                                                  CONV_TYPE, API_DNN, 1}},
@@ -872,9 +850,6 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_TYPE_NAME_VER_MAP {
-  {"CUDNN_MAJOR",                                                    {CUDNN_30,  CUDA_0,   CUDA_0  }},
-  {"CUDNN_MINOR",                                                    {CUDNN_30,  CUDA_0,   CUDA_0  }},
-  {"CUDNN_PATCHLEVEL",                                               {CUDNN_30,  CUDA_0,   CUDA_0  }},
   {"cudnnForwardMode_t",                                             {CUDNN_801, CUDA_0,   CUDA_0  }},
   {"CUDNN_FWD_MODE_INFERENCE",                                       {CUDNN_801, CUDA_0,   CUDA_0  }},
   {"CUDNN_FWD_MODE_TRAINING",                                        {CUDNN_801, CUDA_0,   CUDA_0  }},
@@ -910,12 +885,6 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_TYPE_NAME_VER_MAP {
   {"cudnnPersistentRNNPlan_t",                                       {CUDNN_60,  CUDA_0,   CUDA_0  }},
   {"cudnnRNNDataStruct",                                             {CUDNN_721, CUDA_0,   CUDA_0  }},
   {"cudnnRNNDataDescriptor_t",                                       {CUDNN_721, CUDA_0,   CUDA_0  }},
-  {"CUDNN_ADV_TRAIN_MAJOR",                                          {CUDNN_801, CUDA_0,   CUDA_0  }},
-  {"CUDNN_ADV_TRAIN_MINOR",                                          {CUDNN_801, CUDA_0,   CUDA_0  }},
-  {"CUDNN_ADV_TRAIN_PATCH",                                          {CUDNN_801, CUDA_0,   CUDA_0  }},
-  {"CUDNN_ADV_INFER_MAJOR",                                          {CUDNN_801, CUDA_0,   CUDA_0  }},
-  {"CUDNN_ADV_INFER_MINOR",                                          {CUDNN_801, CUDA_0,   CUDA_0  }},
-  {"CUDNN_ADV_INFER_PATCH",                                          {CUDNN_801, CUDA_0,   CUDA_0  }},
   {"cudnnWgradMode_t",                                               {CUDNN_750, CUDA_0,   CUDA_0  }},
   {"CUDNN_WGRAD_MODE_ADD",                                           {CUDNN_750, CUDA_0,   CUDA_0  }},
   {"CUDNN_WGRAD_MODE_SET",                                           {CUDNN_750, CUDA_0,   CUDA_0  }},
@@ -1160,18 +1129,9 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_TYPE_NAME_VER_MAP {
   {"CUDNN_CROSS_CORRELATION",                                        {CUDNN_10,  CUDA_0,   CUDA_0  }},
   {"cudnnConvolutionStruct",                                         {CUDNN_10,  CUDA_0,   CUDA_0  }},
   {"cudnnConvolutionDescriptor_t",                                   {CUDNN_10,  CUDA_0,   CUDA_0  }},
-  {"CUDNN_CNN_INFER_MAJOR",                                          {CUDNN_801, CUDA_0,   CUDA_0  }},
-  {"CUDNN_CNN_INFER_MINOR",                                          {CUDNN_801, CUDA_0,   CUDA_0  }},
-  {"CUDNN_CNN_INFER_PATCH",                                          {CUDNN_801, CUDA_0,   CUDA_0  }},
   {"cudnnConvolutionBwdFilterAlgoPerf_t",                            {CUDNN_30,  CUDA_0,   CUDA_0  }},
-  {"CUDNN_CNN_TRAIN_MAJOR",                                          {CUDNN_801, CUDA_0,   CUDA_0  }},
-  {"CUDNN_CNN_TRAIN_MINOR",                                          {CUDNN_801, CUDA_0,   CUDA_0  }},
-  {"CUDNN_CNN_TRAIN_PATCH",                                          {CUDNN_801, CUDA_0,   CUDA_0  }},
   {"cudnnContext",                                                   {CUDNN_10,  CUDA_0,   CUDA_0  }},
   {"cudnnHandle_t",                                                  {CUDNN_10,  CUDA_0,   CUDA_0  }},
-  {"CUDNN_OPS_INFER_MAJOR",                                          {CUDNN_801, CUDA_0,   CUDA_0  }},
-  {"CUDNN_OPS_INFER_MINOR",                                          {CUDNN_801, CUDA_0,   CUDA_0  }},
-  {"CUDNN_OPS_INFER_PATCH",                                          {CUDNN_801, CUDA_0,   CUDA_0  }},
   {"cudnnStatus_t",                                                  {CUDNN_10,  CUDA_0,   CUDA_0  }},
   {"CUDNN_STATUS_SUCCESS",                                           {CUDNN_10,  CUDA_0,   CUDA_0  }},
   {"CUDNN_STATUS_NOT_INITIALIZED",                                   {CUDNN_10,  CUDA_0,   CUDA_0  }},
@@ -1193,9 +1153,6 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_TYPE_NAME_VER_MAP {
   {"CUDNN_ERRQUERY_RAWCODE",                                         {CUDNN_705, CUDA_0,   CUDA_0  }},
   {"CUDNN_ERRQUERY_NONBLOCKING",                                     {CUDNN_705, CUDA_0,   CUDA_0  }},
   {"CUDNN_ERRQUERY_BLOCKING",                                        {CUDNN_705, CUDA_0,   CUDA_0  }},
-  {"CUDNN_OPS_TRAIN_MAJOR",                                          {CUDNN_801, CUDA_0,   CUDA_0  }},
-  {"CUDNN_OPS_TRAIN_MINOR",                                          {CUDNN_801, CUDA_0,   CUDA_0  }},
-  {"CUDNN_OPS_TRAIN_PATCH",                                          {CUDNN_801, CUDA_0,   CUDA_0  }},
   {"libraryPropertyType",                                            {CUDNN_60,  CUDA_0,   CUDA_0  }},
   {"libraryPropertyType_t",                                          {CUDNN_60,  CUDA_0,   CUDA_0  }},
   {"cudnnTensorDescriptor_t",                                        {CUDNN_20,  CUDA_0,   CUDA_0  }},
@@ -1504,7 +1461,6 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_TYPE_NAME_VER_MAP {
   {"cudnnLossNormalizationMode_t",                                   {CUDNN_760, CUDA_0,   CUDA_0  }},
   {"CUDNN_LOSS_NORMALIZATION_NONE",                                  {CUDNN_760, CUDA_0,   CUDA_0  }},
   {"CUDNN_LOSS_NORMALIZATION_SOFTMAX",                               {CUDNN_760, CUDA_0,   CUDA_0  }},
-  {"CUDNN_VERSION",                                                  {CUDNN_20,  CUDA_0,   CUDA_0  }},
   {"cudnnCTCLossStruct",                                             {CUDNN_705, CUDA_0,   CUDA_0  }},
   {"cudnnCallback_t",                                                {CUDNN_713, CUDA_0,   CUDA_0  }},
   {"cudnnBnFinalizeStatsMode_t",                                     {CUDNN_810, CUDA_0,   CUDA_0  }},

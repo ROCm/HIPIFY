@@ -45,11 +45,6 @@
 |`CUFFT_SETUP_FAILED`| | | |`HIPFFT_SETUP_FAILED`|1.7.0| | | |
 |`CUFFT_SUCCESS`| | | |`HIPFFT_SUCCESS`|1.7.0| | | |
 |`CUFFT_UNALIGNED_DATA`| | | |`HIPFFT_UNALIGNED_DATA`|1.7.0| | | |
-|`CUFFT_VERSION`|10.2| | | | | | | |
-|`CUFFT_VER_BUILD`|10.2| | | | | | | |
-|`CUFFT_VER_MAJOR`|10.2| | | | | | | |
-|`CUFFT_VER_MINOR`|10.2| | | | | | | |
-|`CUFFT_VER_PATCH`|10.2| | | | | | | |
 |`CUFFT_WORKAREA_MINIMAL`|9.2| | | | | | | |
 |`CUFFT_WORKAREA_PERFORMANCE`| | | | | | | | |
 |`CUFFT_WORKAREA_USER`|9.2| | | | | | | |

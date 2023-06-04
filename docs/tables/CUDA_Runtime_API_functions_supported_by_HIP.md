@@ -531,9 +531,6 @@
 |`CUkern_st`|12.1| | | | | | | |
 |`CUstream_st`| | | |`ihipStream_t`|1.5.0| | | |
 |`CUuuid_st`| | | |`hipUUID_t`|5.2.0| | | |
-|`MAJOR_VERSION`|8.0| | | | | | | |
-|`MINOR_VERSION`|8.0| | | | | | | |
-|`PATCH_LEVEL`|8.0| | | | | | | |
 |`cudaAccessPolicyWindow`|11.0| | |`hipAccessPolicyWindow`|5.2.0| | | |
 |`cudaAccessProperty`|11.0| | |`hipAccessProperty`|5.2.0| | | |
 |`cudaAccessPropertyNormal`|11.0| | |`hipAccessPropertyNormal`|5.2.0| | | |
