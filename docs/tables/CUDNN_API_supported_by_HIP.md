@@ -15,12 +15,6 @@
 |`CUDNN_ACTIVATION_SIGMOID`|1.0.0| | |`HIPDNN_ACTIVATION_SIGMOID`| | | | |
 |`CUDNN_ACTIVATION_SWISH`|8.2.0| | |`HIPDNN_ACTIVATION_SWISH`| | | | |
 |`CUDNN_ACTIVATION_TANH`|1.0.0| | |`HIPDNN_ACTIVATION_TANH`| | | | |
-|`CUDNN_ADV_INFER_MAJOR`|8.0.1| | | | | | | |
-|`CUDNN_ADV_INFER_MINOR`|8.0.1| | | | | | | |
-|`CUDNN_ADV_INFER_PATCH`|8.0.1| | | | | | | |
-|`CUDNN_ADV_TRAIN_MAJOR`|8.0.1| | | | | | | |
-|`CUDNN_ADV_TRAIN_MINOR`|8.0.1| | | | | | | |
-|`CUDNN_ADV_TRAIN_PATCH`|8.0.1| | | | | | | |
 |`CUDNN_ATTN_DISABLE_PROJ_BIASES`|7.6.3| | | | | | | |
 |`CUDNN_ATTN_ENABLE_PROJ_BIASES`|7.6.3| | | | | | | |
 |`CUDNN_ATTN_QUERYMAP_ALL_TO_ONE`|7.5.0| | | | | | | |
@@ -285,12 +279,6 @@
 |`CUDNN_BN_FINALIZE_STATISTICS_INFERENCE`|8.1.0| | | | | | | |
 |`CUDNN_BN_FINALIZE_STATISTICS_TRAINING`|8.1.0| | | | | | | |
 |`CUDNN_BN_MIN_EPSILON`|4.0.0| | |`HIPDNN_BN_MIN_EPSILON`| | | | |
-|`CUDNN_CNN_INFER_MAJOR`|8.0.1| | | | | | | |
-|`CUDNN_CNN_INFER_MINOR`|8.0.1| | | | | | | |
-|`CUDNN_CNN_INFER_PATCH`|8.0.1| | | | | | | |
-|`CUDNN_CNN_TRAIN_MAJOR`|8.0.1| | | | | | | |
-|`CUDNN_CNN_TRAIN_MINOR`|8.0.1| | | | | | | |
-|`CUDNN_CNN_TRAIN_PATCH`|8.0.1| | | | | | | |
 |`CUDNN_CONVOLUTION`|1.0.0| | |`HIPDNN_CONVOLUTION`| | | | |
 |`CUDNN_CONVOLUTION_BWD_DATA_ALGO_0`|3.0.0| | |`HIPDNN_CONVOLUTION_BWD_DATA_ALGO_0`| | | | |
 |`CUDNN_CONVOLUTION_BWD_DATA_ALGO_1`|3.0.0| | |`HIPDNN_CONVOLUTION_BWD_DATA_ALGO_1`| | | | |
@@ -420,7 +408,6 @@
 |`CUDNN_LRN_MIN_K`|3.0.0| | | | | | | |
 |`CUDNN_LRN_MIN_N`|3.0.0| | | | | | | |
 |`CUDNN_LSTM`|5.0.0| | |`HIPDNN_LSTM`| | | | |
-|`CUDNN_MAJOR`|3.0.0| | | | | | | |
 |`CUDNN_MH_ATTN_K_BIASES`|7.6.3| | | | | | | |
 |`CUDNN_MH_ATTN_K_WEIGHTS`|7.5.0| | | | | | | |
 |`CUDNN_MH_ATTN_O_BIASES`|7.6.3| | | | | | | |
@@ -429,7 +416,6 @@
 |`CUDNN_MH_ATTN_Q_WEIGHTS`|7.5.0| | | | | | | |
 |`CUDNN_MH_ATTN_V_BIASES`|7.6.3| | | | | | | |
 |`CUDNN_MH_ATTN_V_WEIGHTS`|7.5.0| | | | | | | |
-|`CUDNN_MINOR`|3.0.0| | | | | | | |
 |`CUDNN_NEG_INF_PAD`|8.3.0| | | | | | | |
 |`CUDNN_NON_DETERMINISTIC`|6.0.0| | | | | | | |
 |`CUDNN_NORM_ALGO_PERSIST`|8.0.1| | | | | | | |
@@ -453,12 +439,6 @@
 |`CUDNN_NUMERICAL_NOTE_WINOGRAD_TILE_13x13`|8.3.0| | | | | | | |
 |`CUDNN_NUMERICAL_NOTE_WINOGRAD_TILE_4x4`|8.3.0| | | | | | | |
 |`CUDNN_NUMERICAL_NOTE_WINOGRAD_TILE_6x6`|8.3.0| | | | | | | |
-|`CUDNN_OPS_INFER_MAJOR`|8.0.1| | | | | | | |
-|`CUDNN_OPS_INFER_MINOR`|8.0.1| | | | | | | |
-|`CUDNN_OPS_INFER_PATCH`|8.0.1| | | | | | | |
-|`CUDNN_OPS_TRAIN_MAJOR`|8.0.1| | | | | | | |
-|`CUDNN_OPS_TRAIN_MINOR`|8.0.1| | | | | | | |
-|`CUDNN_OPS_TRAIN_PATCH`|8.0.1| | | | | | | |
 |`CUDNN_OP_TENSOR_ADD`|5.0.0| | |`HIPDNN_OP_TENSOR_ADD`| | | | |
 |`CUDNN_OP_TENSOR_MAX`|5.0.0| | |`HIPDNN_OP_TENSOR_MAX`| | | | |
 |`CUDNN_OP_TENSOR_MIN`|5.0.0| | |`HIPDNN_OP_TENSOR_MIN`| | | | |
@@ -504,7 +484,6 @@
 |`CUDNN_PARAM_YSUM_PLACEHOLDER`|7.6.0| | | | | | | |
 |`CUDNN_PARAM_ZDATA_PLACEHOLDER`|7.6.0| | | | | | | |
 |`CUDNN_PARAM_ZDESC`|7.6.0| | | | | | | |
-|`CUDNN_PATCHLEVEL`|3.0.0| | | | | | | |
 |`CUDNN_POINTWISE_ABS`|8.3.0| | | | | | | |
 |`CUDNN_POINTWISE_ADD`|8.0.1| | | | | | | |
 |`CUDNN_POINTWISE_ADD_SQUARE`|8.3.0| | | | | | | |
@@ -706,7 +685,6 @@
 |`CUDNN_TYPE_TENSOR_REORDERING_MODE`|8.3.0| | | | | | | |
 |`CUDNN_TYPE_VOID_PTR`|8.0.1| | | | | | | |
 |`CUDNN_UNIDIRECTIONAL`|5.0.0| | |`HIPDNN_UNIDIRECTIONAL`| | | | |
-|`CUDNN_VERSION`|2.0.0| | |`HIPDNN_VERSION`| | | | |
 |`CUDNN_WGRAD_MODE_ADD`|7.5.0| | | | | | | |
 |`CUDNN_WGRAD_MODE_SET`|7.5.0| | | | | | | |
 |`CUDNN_ZERO_PAD`|8.3.0| | | | | | | |

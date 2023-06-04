@@ -106,11 +106,6 @@
 |`CUSPARSE_STATUS_NOT_SUPPORTED`|10.2| | |`HIPSPARSE_STATUS_NOT_SUPPORTED`|4.1.0| | | |
 |`CUSPARSE_STATUS_SUCCESS`| | | |`HIPSPARSE_STATUS_SUCCESS`|1.9.2| | | |
 |`CUSPARSE_STATUS_ZERO_PIVOT`| | | |`HIPSPARSE_STATUS_ZERO_PIVOT`|1.9.2| | | |
-|`CUSPARSE_VERSION`|10.2| | | | | | | |
-|`CUSPARSE_VER_BUILD`|10.2| | | | | | | |
-|`CUSPARSE_VER_MAJOR`|10.2| | | | | | | |
-|`CUSPARSE_VER_MINOR`|10.2| | | | | | | |
-|`CUSPARSE_VER_PATCH`|10.2| | | | | | | |
 |`bsric02Info`| | | | | | | | |
 |`bsric02Info_t`| | | |`bsric02Info_t`|3.8.0| | | |
 |`bsrilu02Info`| | | | | | | | |

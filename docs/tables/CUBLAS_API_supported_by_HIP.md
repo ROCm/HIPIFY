@@ -90,11 +90,6 @@
 |`CUBLAS_STATUS_SUCCESS`| | | |`HIPBLAS_STATUS_SUCCESS`|1.8.2| | | |
 |`CUBLAS_TENSOR_OP_MATH`|9.0|11.0| | | | | | |
 |`CUBLAS_TF32_TENSOR_OP_MATH`|11.0| | | | | | | |
-|`CUBLAS_VERSION`|10.1| | | | | | | |
-|`CUBLAS_VER_BUILD`|10.2| | | | | | | |
-|`CUBLAS_VER_MAJOR`|10.1| | | | | | | |
-|`CUBLAS_VER_MINOR`|10.1| | | | | | | |
-|`CUBLAS_VER_PATCH`|10.1| | | | | | | |
 |`cublasAtomicsMode_t`| | | |`hipblasAtomicsMode_t`|3.10.0| | | |
 |`cublasComputeType_t`|11.0| | |`hipblasDatatype_t`|1.8.2| | | |
 |`cublasContext`| | | | | | | | |

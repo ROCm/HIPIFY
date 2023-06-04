@@ -24,13 +24,6 @@ THE SOFTWARE.
 
 // Map of all functions
 const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP {
-  // Blas defines
-  {"CUBLAS_VER_MAJOR",               {"HIPBLAS_VER_MAJOR",               "",                                      CONV_DEFINE, API_BLAS, 2, UNSUPPORTED}},
-  {"CUBLAS_VER_MINOR",               {"HIPBLAS_VER_MINOR",               "",                                      CONV_DEFINE, API_BLAS, 2, UNSUPPORTED}},
-  {"CUBLAS_VER_PATCH",               {"HIPBLAS_VER_PATCH",               "",                                      CONV_DEFINE, API_BLAS, 2, UNSUPPORTED}},
-  {"CUBLAS_VER_BUILD",               {"HIPBLAS_VER_BUILD",               "",                                      CONV_DEFINE, API_BLAS, 2, UNSUPPORTED}},
-  {"CUBLAS_VERSION",                 {"HIPBLAS_VERSION",                 "",                                      CONV_DEFINE, API_BLAS, 2, UNSUPPORTED}},
-
   // Blas operations
   {"cublasOperation_t",              {"hipblasOperation_t",              "rocblas_operation",                     CONV_TYPE, API_BLAS, 2}},
   {"CUBLAS_OP_N",                    {"HIPBLAS_OP_N",                    "rocblas_operation_none",                CONV_NUMERIC_LITERAL, API_BLAS, 2}},
@@ -192,11 +185,6 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP {
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_TYPE_NAME_VER_MAP {
-  {"CUBLAS_VER_MAJOR",                                 {CUDA_101, CUDA_0, CUDA_0}},
-  {"CUBLAS_VER_MINOR",                                 {CUDA_101, CUDA_0, CUDA_0}},
-  {"CUBLAS_VER_PATCH",                                 {CUDA_101, CUDA_0, CUDA_0}},
-  {"CUBLAS_VER_BUILD",                                 {CUDA_102, CUDA_0, CUDA_0}},
-  {"CUBLAS_VERSION",                                   {CUDA_101, CUDA_0, CUDA_0}},
   {"CUBLAS_OP_CONJG",                                  {CUDA_101, CUDA_0, CUDA_0}},
   {"CUBLAS_OP_HERMITAN",                               {CUDA_101, CUDA_0, CUDA_0}},
   {"CUBLAS_FILL_MODE_FULL",                            {CUDA_101, CUDA_0, CUDA_0}},
