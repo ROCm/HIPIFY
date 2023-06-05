@@ -1554,12 +1554,6 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // no analogue
   {"libraryPropertyType",                                              {"hipLibraryPropertyType_t",                                 "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   {"libraryPropertyType_t",                                            {"hipLibraryPropertyType_t",                                 "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-  // no analogue
-  {"MAJOR_VERSION",                                                    {"hipLibraryMajorVersion",                                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-  // no analogue
-  {"MINOR_VERSION",                                                    {"hipLibraryMinorVersion",                                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-  // no analogue
-  {"PATCH_LEVEL",                                                      {"hipLibraryPatchVersion",                                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   // CUaccessProperty
   {"cudaAccessProperty",                                               {"hipAccessProperty",                                        "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES}},
@@ -2254,9 +2248,6 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_TYPE_NAME_VER_MAP 
   {"cudaStreamCaptureModeRelaxed",                                     {CUDA_101, CUDA_0,   CUDA_0  }},
   {"libraryPropertyType",                                              {CUDA_80,  CUDA_0,   CUDA_0  }},
   {"libraryPropertyType_t",                                            {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"MAJOR_VERSION",                                                    {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"MINOR_VERSION",                                                    {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"PATCH_LEVEL",                                                      {CUDA_80,  CUDA_0,   CUDA_0  }},
   {"cudaAccessProperty",                                               {CUDA_110, CUDA_0,   CUDA_0  }},
   {"cudaAccessPropertyNormal",                                         {CUDA_110, CUDA_0,   CUDA_0  }},
   {"cudaAccessPropertyStreaming",                                      {CUDA_110, CUDA_0,   CUDA_0  }},

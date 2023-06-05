@@ -1479,12 +1479,18 @@ sub rocSubstitutions {
     subst("cusparseCopyMatDescr", "rocsparse_copy_mat_descr", "library");
     subst("cusparseCreate", "rocsparse_create_handle", "library");
     subst("cusparseCreateColorInfo", "rocsparse_create_color_info", "library");
+    subst("cusparseCreateCoo", "rocsparse_create_coo_descr", "library");
+    subst("cusparseCreateCooAoS", "rocsparse_create_coo_aos_descr", "library");
+    subst("cusparseCreateCsc", "rocsparse_create_csc_descr", "library");
+    subst("cusparseCreateCsr", "rocsparse_create_csr_descr", "library");
     subst("cusparseCreateHybMat", "rocsparse_create_hyb_mat", "library");
     subst("cusparseCreateMatDescr", "rocsparse_create_mat_descr", "library");
+    subst("cusparseCreateSpVec", "rocsparse_create_spvec_descr", "library");
     subst("cusparseDestroy", "rocsparse_destroy_handle", "library");
     subst("cusparseDestroyColorInfo", "rocsparse_destroy_color_info", "library");
     subst("cusparseDestroyHybMat", "rocsparse_destroy_hyb_mat", "library");
     subst("cusparseDestroyMatDescr", "rocsparse_destroy_mat_descr", "library");
+    subst("cusparseDestroySpVec", "rocsparse_destroy_spvec_descr", "library");
     subst("cusparseGetMatDiagType", "rocsparse_get_mat_diag_type", "library");
     subst("cusparseGetMatFillMode", "rocsparse_get_mat_fill_mode", "library");
     subst("cusparseGetMatIndexBase", "rocsparse_get_mat_index_base", "library");
@@ -1498,6 +1504,10 @@ sub rocSubstitutions {
     subst("cusparseSetMatType", "rocsparse_set_mat_type", "library");
     subst("cusparseSetPointerMode", "rocsparse_set_pointer_mode", "library");
     subst("cusparseSetStream", "rocsparse_set_stream", "library");
+    subst("cusparseSpVecGet", "rocsparse_spvec_get", "library");
+    subst("cusparseSpVecGetIndexBase", "rocsparse_spvec_get_index_base", "library");
+    subst("cusparseSpVecGetValues", "rocsparse_spvec_get_values", "library");
+    subst("cusparseSpVecSetValues", "rocsparse_spvec_set_values", "library");
     subst("cublas.h", "rocblas.h", "include_cuda_main_header");
     subst("cublas_v2.h", "rocblas.h", "include_cuda_main_header_v2");
     subst("cuComplex", "rocblas_float_complex", "type");
@@ -4228,7 +4238,6 @@ sub simpleSubstitutions {
     subst("CUDNN_TENSOR_NHWC", "HIPDNN_TENSOR_NHWC", "numeric_literal");
     subst("CUDNN_TENSOR_OP_MATH", "HIPDNN_TENSOR_OP_MATH", "numeric_literal");
     subst("CUDNN_UNIDIRECTIONAL", "HIPDNN_UNIDIRECTIONAL", "numeric_literal");
-    subst("CUDNN_VERSION", "HIPDNN_VERSION", "numeric_literal");
     subst("CUFFT_ALLOC_FAILED", "HIPFFT_ALLOC_FAILED", "numeric_literal");
     subst("CUFFT_C2C", "HIPFFT_C2C", "numeric_literal");
     subst("CUFFT_C2R", "HIPFFT_C2R", "numeric_literal");
@@ -4295,6 +4304,7 @@ sub simpleSubstitutions {
     subst("CUSPARSE_COOMV_ALG", "HIPSPARSE_COOMV_ALG", "numeric_literal");
     subst("CUSPARSE_CSR2CSC_ALG1", "HIPSPARSE_CSR2CSC_ALG1", "numeric_literal");
     subst("CUSPARSE_CSR2CSC_ALG2", "HIPSPARSE_CSR2CSC_ALG2", "numeric_literal");
+    subst("CUSPARSE_CSR2CSC_ALG_DEFAULT", "HIPSPARSE_CSR2CSC_ALG_DEFAULT", "numeric_literal");
     subst("CUSPARSE_CSRMM_ALG1", "HIPSPARSE_CSRMM_ALG1", "numeric_literal");
     subst("CUSPARSE_CSRMV_ALG1", "HIPSPARSE_CSRMV_ALG1", "numeric_literal");
     subst("CUSPARSE_CSRMV_ALG2", "HIPSPARSE_CSRMV_ALG2", "numeric_literal");
@@ -4335,6 +4345,11 @@ sub simpleSubstitutions {
     subst("CUSPARSE_SOLVE_POLICY_NO_LEVEL", "HIPSPARSE_SOLVE_POLICY_NO_LEVEL", "numeric_literal");
     subst("CUSPARSE_SOLVE_POLICY_USE_LEVEL", "HIPSPARSE_SOLVE_POLICY_USE_LEVEL", "numeric_literal");
     subst("CUSPARSE_SPARSETODENSE_ALG_DEFAULT", "HIPSPARSE_SPARSETODENSE_ALG_DEFAULT", "numeric_literal");
+    subst("CUSPARSE_SPGEMM_ALG1", "HIPSPARSE_SPGEMM_ALG1", "numeric_literal");
+    subst("CUSPARSE_SPGEMM_ALG2", "HIPSPARSE_SPGEMM_ALG2", "numeric_literal");
+    subst("CUSPARSE_SPGEMM_ALG3", "HIPSPARSE_SPGEMM_ALG3", "numeric_literal");
+    subst("CUSPARSE_SPGEMM_CSR_ALG_DETERMINITIC", "HIPSPARSE_SPGEMM_CSR_ALG_DETERMINISTIC", "numeric_literal");
+    subst("CUSPARSE_SPGEMM_CSR_ALG_NONDETERMINITIC", "HIPSPARSE_SPGEMM_CSR_ALG_NONDETERMINISTIC", "numeric_literal");
     subst("CUSPARSE_SPGEMM_DEFAULT", "HIPSPARSE_SPGEMM_DEFAULT", "numeric_literal");
     subst("CUSPARSE_SPMAT_DIAG_TYPE", "HIPSPARSE_SPMAT_DIAG_TYPE", "numeric_literal");
     subst("CUSPARSE_SPMAT_FILL_MODE", "HIPSPARSE_SPMAT_FILL_MODE", "numeric_literal");
@@ -5098,7 +5113,6 @@ sub simpleSubstitutions {
     subst("CUDA_COOPERATIVE_LAUNCH_MULTI_DEVICE_NO_PRE_LAUNCH_SYNC", "hipCooperativeLaunchMultiDeviceNoPreSync", "define");
     subst("CUDA_EXTERNAL_MEMORY_DEDICATED", "hipExternalMemoryDedicated", "define");
     subst("CUDA_IPC_HANDLE_SIZE", "HIP_IPC_HANDLE_SIZE", "define");
-    subst("CURAND_VERSION", "HIPRAND_VERSION", "define");
     subst("CU_DEVICE_CPU", "hipCpuDeviceId", "define");
     subst("CU_DEVICE_INVALID", "hipInvalidDeviceId", "define");
     subst("CU_IPC_HANDLE_SIZE", "HIP_IPC_HANDLE_SIZE", "define");
@@ -7370,7 +7384,6 @@ sub warnUnsupportedFunctions {
         "__CUB_LP64__",
         "_CUB_ASM_PTR_SIZE_",
         "_CUB_ASM_PTR_",
-        "PATCH_LEVEL",
         "NVRTC_ERROR_TIME_FILE_WRITE_FAILED",
         "NVCL_EVENT_SCHED_YIELD",
         "NVCL_EVENT_SCHED_SPIN",
@@ -7380,9 +7393,7 @@ sub warnUnsupportedFunctions {
         "NVCL_CTX_SCHED_SPIN",
         "NVCL_CTX_SCHED_BLOCKING_SYNC",
         "NVCL_CTX_SCHED_AUTO",
-        "MINOR_VERSION",
         "MAX_CUFFT_ERROR",
-        "MAJOR_VERSION",
         "CubVector",
         "CubDebugExit",
         "CUtensorMap_st",
@@ -7913,11 +7924,6 @@ sub warnUnsupportedFunctions {
         "CU_AD_FORMAT_BC2_UNORM",
         "CU_AD_FORMAT_BC1_UNORM_SRGB",
         "CU_AD_FORMAT_BC1_UNORM",
-        "CUSPARSE_VER_PATCH",
-        "CUSPARSE_VER_MINOR",
-        "CUSPARSE_VER_MAJOR",
-        "CUSPARSE_VER_BUILD",
-        "CUSPARSE_VERSION",
         "CUSPARSE_SPSV_UPDATE_GENERAL",
         "CUSPARSE_SPSV_UPDATE_DIAGONAL",
         "CUSPARSE_SPMV_SELL_ALG1",
@@ -7927,11 +7933,6 @@ sub warnUnsupportedFunctions {
         "CUSPARSE_SPMMA_ALG3",
         "CUSPARSE_SPMMA_ALG2",
         "CUSPARSE_SPMMA_ALG1",
-        "CUSPARSE_SPGEMM_CSR_ALG_NONDETERMINITIC",
-        "CUSPARSE_SPGEMM_CSR_ALG_DETERMINITIC",
-        "CUSPARSE_SPGEMM_ALG3",
-        "CUSPARSE_SPGEMM_ALG2",
-        "CUSPARSE_SPGEMM_ALG1",
         "CUSPARSE_SIDE_RIGHT",
         "CUSPARSE_SIDE_LEFT",
         "CUSPARSE_FORMAT_SLICED_ELLPACK",
@@ -7940,10 +7941,6 @@ sub warnUnsupportedFunctions {
         "CUSPARSE_ALG_MERGE_PATH",
         "CUSPARSE_ALG1",
         "CUSPARSE_ALG0",
-        "CURAND_VER_PATCH",
-        "CURAND_VER_MINOR",
-        "CURAND_VER_MAJOR",
-        "CURAND_VER_BUILD",
         "CURAND_SCRAMBLED_DIRECTION_VECTORS_64_JOEKUO6",
         "CURAND_SCRAMBLED_DIRECTION_VECTORS_32_JOEKUO6",
         "CURAND_REJECTION",
@@ -7982,11 +7979,6 @@ sub warnUnsupportedFunctions {
         "CUFFT_WORKAREA_USER",
         "CUFFT_WORKAREA_PERFORMANCE",
         "CUFFT_WORKAREA_MINIMAL",
-        "CUFFT_VER_PATCH",
-        "CUFFT_VER_MINOR",
-        "CUFFT_VER_MAJOR",
-        "CUFFT_VER_BUILD",
-        "CUFFT_VERSION",
         "CUFFT_QUERY_UNDEFINED",
         "CUFFT_QUERY_1D_FACTORS",
         "CUFFT_LICENSE_ERROR",
@@ -8152,7 +8144,6 @@ sub warnUnsupportedFunctions {
         "CUDNN_POINTWISE_ADD_SQUARE",
         "CUDNN_POINTWISE_ADD",
         "CUDNN_POINTWISE_ABS",
-        "CUDNN_PATCHLEVEL",
         "CUDNN_PARAM_ZDESC",
         "CUDNN_PARAM_ZDATA_PLACEHOLDER",
         "CUDNN_PARAM_YSUM_PLACEHOLDER",
@@ -8193,12 +8184,6 @@ sub warnUnsupportedFunctions {
         "CUDNN_PARAM_ACTIVATION_BITMASK_PLACEHOLDER",
         "CUDNN_PARAM_ACTIVATION_BITMASK_DESC",
         "CUDNN_OP_TENSOR_NOT",
-        "CUDNN_OPS_TRAIN_PATCH",
-        "CUDNN_OPS_TRAIN_MINOR",
-        "CUDNN_OPS_TRAIN_MAJOR",
-        "CUDNN_OPS_INFER_PATCH",
-        "CUDNN_OPS_INFER_MINOR",
-        "CUDNN_OPS_INFER_MAJOR",
         "CUDNN_NUMERICAL_NOTE_WINOGRAD_TILE_6x6",
         "CUDNN_NUMERICAL_NOTE_WINOGRAD_TILE_4x4",
         "CUDNN_NUMERICAL_NOTE_WINOGRAD_TILE_13x13",
@@ -8221,7 +8206,6 @@ sub warnUnsupportedFunctions {
         "CUDNN_NORM_ALGO_PERSIST",
         "CUDNN_NON_DETERMINISTIC",
         "CUDNN_NEG_INF_PAD",
-        "CUDNN_MINOR",
         "CUDNN_MH_ATTN_V_WEIGHTS",
         "CUDNN_MH_ATTN_V_BIASES",
         "CUDNN_MH_ATTN_Q_WEIGHTS",
@@ -8230,7 +8214,6 @@ sub warnUnsupportedFunctions {
         "CUDNN_MH_ATTN_O_BIASES",
         "CUDNN_MH_ATTN_K_WEIGHTS",
         "CUDNN_MH_ATTN_K_BIASES",
-        "CUDNN_MAJOR",
         "CUDNN_LRN_MIN_N",
         "CUDNN_LRN_MIN_K",
         "CUDNN_LRN_MIN_BETA",
@@ -8314,12 +8297,6 @@ sub warnUnsupportedFunctions {
         "CUDNN_DATA_BFLOAT16",
         "CUDNN_CTC_LOSS_ALGO_NON_DETERMINISTIC",
         "CUDNN_CTC_LOSS_ALGO_DETERMINISTIC",
-        "CUDNN_CNN_TRAIN_PATCH",
-        "CUDNN_CNN_TRAIN_MINOR",
-        "CUDNN_CNN_TRAIN_MAJOR",
-        "CUDNN_CNN_INFER_PATCH",
-        "CUDNN_CNN_INFER_MINOR",
-        "CUDNN_CNN_INFER_MAJOR",
         "CUDNN_BN_FINALIZE_STATISTICS_TRAINING",
         "CUDNN_BN_FINALIZE_STATISTICS_INFERENCE",
         "CUDNN_BEHAVIOR_NOTE_TYPE_COUNT",
@@ -8579,12 +8556,6 @@ sub warnUnsupportedFunctions {
         "CUDNN_ATTN_QUERYMAP_ALL_TO_ONE",
         "CUDNN_ATTN_ENABLE_PROJ_BIASES",
         "CUDNN_ATTN_DISABLE_PROJ_BIASES",
-        "CUDNN_ADV_TRAIN_PATCH",
-        "CUDNN_ADV_TRAIN_MINOR",
-        "CUDNN_ADV_TRAIN_MAJOR",
-        "CUDNN_ADV_INFER_PATCH",
-        "CUDNN_ADV_INFER_MINOR",
-        "CUDNN_ADV_INFER_MAJOR",
         "CUDA_POINTER_ATTRIBUTE_P2P_TOKENS_v1",
         "CUDA_POINTER_ATTRIBUTE_P2P_TOKENS_st",
         "CUDA_POINTER_ATTRIBUTE_P2P_TOKENS",
@@ -9195,11 +9166,6 @@ sub warnHipOnlyUnsupportedFunctions {
         "CUDA_C_4I",
         "CUDA_C_16U",
         "CUDA_C_16I",
-        "CUBLAS_VER_PATCH",
-        "CUBLAS_VER_MINOR",
-        "CUBLAS_VER_MAJOR",
-        "CUBLAS_VER_BUILD",
-        "CUBLAS_VERSION",
         "CUBLAS_TF32_TENSOR_OP_MATH",
         "CUBLAS_TENSOR_OP_MATH",
         "CUBLAS_PEDANTIC_MATH",
@@ -9756,11 +9722,6 @@ sub warnRocOnlyUnsupportedFunctions {
         "CUDA_C_4I",
         "CUDA_C_16U",
         "CUDA_C_16I",
-        "CUBLAS_VER_PATCH",
-        "CUBLAS_VER_MINOR",
-        "CUBLAS_VER_MAJOR",
-        "CUBLAS_VER_BUILD",
-        "CUBLAS_VERSION",
         "CUBLAS_TF32_TENSOR_OP_MATH",
         "CUBLAS_TENSOR_OP_MATH",
         "CUBLAS_STATUS_LICENSE_ERROR",

@@ -53,11 +53,6 @@
 |`CURAND_STATUS_SUCCESS`| | | |`HIPRAND_STATUS_SUCCESS`|1.5.0| | | |
 |`CURAND_STATUS_TYPE_ERROR`| | | |`HIPRAND_STATUS_TYPE_ERROR`|1.5.0| | | |
 |`CURAND_STATUS_VERSION_MISMATCH`| | | |`HIPRAND_STATUS_VERSION_MISMATCH`|1.5.0| | | |
-|`CURAND_VERSION`|10.2| | |`HIPRAND_VERSION`|1.5.0| | | |
-|`CURAND_VER_BUILD`|10.2| | | | | | | |
-|`CURAND_VER_MAJOR`|10.2| | | | | | | |
-|`CURAND_VER_MINOR`|10.2| | | | | | | |
-|`CURAND_VER_PATCH`|10.2| | | | | | | |
 |`curandDirectionVectorSet`| | | | | | | | |
 |`curandDirectionVectorSet_t`| | | | | | | | |
 |`curandDirectionVectors32_t`| | | |`hiprandDirectionVectors32_t`|1.5.0| | | |

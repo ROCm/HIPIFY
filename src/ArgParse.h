@@ -67,3 +67,4 @@ extern const std::vector<std::string> hipifyOptionsWithTwoArgs;
 extern cl::opt<bool> Versions;
 extern cl::opt<bool> NoUndocumented;
 extern cl::opt<bool> NoWarningsUndocumented;
+extern cl::opt<bool> UseHipDataType;

@@ -90,11 +90,6 @@
 |`CUBLAS_STATUS_SUCCESS`| | | |`rocblas_status_success`|1.5.0| | | |
 |`CUBLAS_TENSOR_OP_MATH`|9.0|11.0| | | | | | |
 |`CUBLAS_TF32_TENSOR_OP_MATH`|11.0| | | | | | | |
-|`CUBLAS_VERSION`|10.1| | | | | | | |
-|`CUBLAS_VER_BUILD`|10.2| | | | | | | |
-|`CUBLAS_VER_MAJOR`|10.1| | | | | | | |
-|`CUBLAS_VER_MINOR`|10.1| | | | | | | |
-|`CUBLAS_VER_PATCH`|10.1| | | | | | | |
 |`cublasAtomicsMode_t`| | | |`rocblas_atomics_mode`|3.8.0| | | |
 |`cublasComputeType_t`|11.0| | | | | | | |
 |`cublasContext`| | | |`_rocblas_handle`|1.5.0| | | |

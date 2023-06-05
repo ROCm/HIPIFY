@@ -716,12 +716,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   // 15. cuSPARSE Generic API Reference
   // Generic Sparse API helper functions
   // Sparse Matrix descriptor
-  {"cusparseCreateCoo",                                 {"hipsparseCreateCoo",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
+  {"cusparseCreateCoo",                                 {"hipsparseCreateCoo",                                 "rocsparse_create_coo_descr",                                       CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseCreateConstCoo",                            {"hipsparseCreateConstCoo",                            "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
-  {"cusparseCreateCooAoS",                              {"hipsparseCreateCooAoS",                              "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseCreateCsr",                                 {"hipsparseCreateCsr",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
+  {"cusparseCreateCooAoS",                              {"hipsparseCreateCooAoS",                              "rocsparse_create_coo_aos_descr",                                   CONV_LIB_FUNC, API_SPARSE, 15, CUDA_DEPRECATED | CUDA_REMOVED}},
+  {"cusparseCreateCsr",                                 {"hipsparseCreateCsr",                                 "rocsparse_create_csr_descr",                                       CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseCreateConstCsr",                            {"hipsparseCreateConstCsr",                            "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
-  {"cusparseCreateCsc",                                 {"hipsparseCreateCsc",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
+  {"cusparseCreateCsc",                                 {"hipsparseCreateCsc",                                 "rocsparse_create_csc_descr",                                       CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseCreateConstCsc",                            {"hipsparseCreateConstCsc",                            "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
   {"cusparseDestroySpMat",                              {"hipsparseDestroySpMat",                              "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
   {"cusparseCooGet",                                    {"hipsparseCooGet",                                    "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
@@ -753,20 +753,21 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   {"cusparseCreateBlockedEll",                          {"hipsparseCreateBlockedEll",                          "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
   {"cusparseCreateConstBlockedEll",                     {"hipsparseCreateConstBlockedEll",                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
   {"cusparseBsrSetStridedBatch",                        {"hipsparseBsrSetStridedBatch",                        "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
+  // NOTE: rocsparse_create_bsr_descr has appeared earlier than cusparseCreateBsr and has a different signature
   {"cusparseCreateBsr",                                 {"hipsparseCreateBsr",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
   {"cusparseCreateConstBsr",                            {"hipsparseCreateConstBsr",                            "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
   {"cusparseCreateSlicedEll",                           {"hipsparseCreateSlicedEll",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
   {"cusparseCreateConstSlicedEll",                      {"hipsparseCreateConstSlicedEll",                      "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
   // Sparse Vector descriptor
-  {"cusparseCreateSpVec",                               {"hipsparseCreateSpVec",                               "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
+  {"cusparseCreateSpVec",                               {"hipsparseCreateSpVec",                               "rocsparse_create_spvec_descr",                                     CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseCreateConstSpVec",                          {"hipsparseCreateConstSpVec",                          "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
-  {"cusparseDestroySpVec",                              {"hipsparseDestroySpVec",                              "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
-  {"cusparseSpVecGet",                                  {"hipsparseSpVecGet",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
+  {"cusparseDestroySpVec",                              {"hipsparseDestroySpVec",                              "rocsparse_destroy_spvec_descr",                                    CONV_LIB_FUNC, API_SPARSE, 15}},
+  {"cusparseSpVecGet",                                  {"hipsparseSpVecGet",                                  "rocsparse_spvec_get",                                              CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseConstSpVecGet",                             {"hipsparseConstSpVecGet",                             "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
-  {"cusparseSpVecGetIndexBase",                         {"hipsparseSpVecGetIndexBase",                         "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
-  {"cusparseSpVecGetValues",                            {"hipsparseSpVecGetValues",                            "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
+  {"cusparseSpVecGetIndexBase",                         {"hipsparseSpVecGetIndexBase",                         "rocsparse_spvec_get_index_base",                                   CONV_LIB_FUNC, API_SPARSE, 15}},
+  {"cusparseSpVecGetValues",                            {"hipsparseSpVecGetValues",                            "rocsparse_spvec_get_values",                                       CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseConstSpVecGetValues",                       {"hipsparseConstSpVecGetValues",                       "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
-  {"cusparseSpVecSetValues",                            {"hipsparseSpVecSetValues",                            "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
+  {"cusparseSpVecSetValues",                            {"hipsparseSpVecSetValues",                            "rocsparse_spvec_set_values",                                       CONV_LIB_FUNC, API_SPARSE, 15}},
 
   // Generic Dense API helper functions
   // Dense Matrix descriptor
@@ -1821,6 +1822,16 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_FUNCTION_VER_MAP {
   {"rocsparse_destroy_hyb_mat",                          {HIP_1090, HIP_0,    HIP_0   }},
   {"rocsparse_create_color_info",                        {HIP_4050, HIP_0,    HIP_0   }},
   {"rocsparse_destroy_color_info",                       {HIP_4050, HIP_0,    HIP_0   }},
+  {"rocsparse_create_spvec_descr",                       {HIP_4010, HIP_0,    HIP_0   }},
+  {"rocsparse_destroy_spvec_descr",                      {HIP_4010, HIP_0,    HIP_0   }},
+  {"rocsparse_spvec_get",                                {HIP_4010, HIP_0,    HIP_0   }},
+  {"rocsparse_spvec_get_index_base",                     {HIP_4010, HIP_0,    HIP_0   }},
+  {"rocsparse_spvec_get_values",                         {HIP_4010, HIP_0,    HIP_0   }},
+  {"rocsparse_spvec_set_values",                         {HIP_4010, HIP_0,    HIP_0   }},
+  {"rocsparse_create_coo_descr",                         {HIP_4010, HIP_0,    HIP_0   }},
+  {"rocsparse_create_coo_aos_descr",                     {HIP_4010, HIP_0,    HIP_0   }},
+  {"rocsparse_create_csr_descr",                         {HIP_4010, HIP_0,    HIP_0   }},
+  {"rocsparse_create_csc_descr",                         {HIP_4010, HIP_0,    HIP_0   }},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_SPARSE_API_SECTION_MAP {

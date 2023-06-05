@@ -26,11 +26,6 @@ THE SOFTWARE.
 const std::map<llvm::StringRef, hipCounter> CUDA_FFT_TYPE_NAME_MAP {
 
   // cuFFT defines
-  {"CUFFT_VER_MAJOR",                             {"HIPRAND_VER_MAJOR",                            "", CONV_DEFINE, API_FFT, 1, UNSUPPORTED}},
-  {"CUFFT_VER_MINOR",                             {"HIPRAND_VER_MINOR",                            "", CONV_DEFINE, API_FFT, 1, UNSUPPORTED}},
-  {"CUFFT_VER_PATCH",                             {"HIPRAND_VER_PATCH",                            "", CONV_DEFINE, API_FFT, 1, UNSUPPORTED}},
-  {"CUFFT_VER_BUILD",                             {"HIPRAND_VER_BUILD",                            "", CONV_DEFINE, API_FFT, 1, UNSUPPORTED}},
-  {"CUFFT_VERSION",                               {"HIPRAND_VERSION",                              "", CONV_DEFINE, API_FFT, 1, UNSUPPORTED}},
   {"CUFFT_FORWARD",                               {"HIPFFT_FORWARD",                               "", CONV_NUMERIC_LITERAL, API_FFT, 1}},  // -1
   {"CUFFT_INVERSE",                               {"HIPFFT_BACKWARD",                              "", CONV_NUMERIC_LITERAL, API_FFT, 1}}, //  1
   {"CUFFT_COMPATIBILITY_DEFAULT",                 {"HIPFFT_COMPATIBILITY_DEFAULT",                 "", CONV_NUMERIC_LITERAL, API_FFT, 1, UNSUPPORTED}},  //  CUFFT_COMPATIBILITY_FFTW_PADDING
@@ -124,11 +119,6 @@ const std::map<llvm::StringRef, hipCounter> CUDA_FFT_TYPE_NAME_MAP {
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_FFT_TYPE_NAME_VER_MAP {
-  {"CUFFT_VER_MAJOR",                             {CUDA_102, CUDA_0, CUDA_0}},
-  {"CUFFT_VER_MINOR",                             {CUDA_102, CUDA_0, CUDA_0}},
-  {"CUFFT_VER_PATCH",                             {CUDA_102, CUDA_0, CUDA_0}},
-  {"CUFFT_VER_BUILD",                             {CUDA_102, CUDA_0, CUDA_0}},
-  {"CUFFT_VERSION",                               {CUDA_102, CUDA_0, CUDA_0}},
   {"CUFFT_NOT_SUPPORTED",                         {CUDA_80,  CUDA_0, CUDA_0}},
   {"cufftXtWorkAreaPolicy_t",                     {CUDA_92,  CUDA_0, CUDA_0}},
   {"cufftXtWorkAreaPolicy",                       {CUDA_92,  CUDA_0, CUDA_0}},
