@@ -792,7 +792,7 @@
 |**CUDA**|**A**|**D**|**R**|**ROC**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
 |`cusparseAxpby`|11.0| | | | | | | |
-|`cusparseBlockedEllGet`|11.2| | | | | | | |
+|`cusparseBlockedEllGet`|11.2| | |`rocsparse_bell_get`|4.1.0| | | |
 |`cusparseBsrSetStridedBatch`|12.1| | | | | | | |
 |`cusparseConstBlockedEllGet`|12.0| | | | | | | |
 |`cusparseConstCooGet`|12.0| | | | | | | |
@@ -807,11 +807,11 @@
 |`cusparseConstSpVecGetValues`|12.0| | | | | | | |
 |`cusparseConstrainedGeMM`|10.2|11.2|12.0| | | | | |
 |`cusparseConstrainedGeMM_bufferSize`|10.2|11.2|12.0| | | | | |
-|`cusparseCooAoSGet`|10.2|11.2|12.0| | | | | |
-|`cusparseCooGet`|10.1| | | | | | | |
-|`cusparseCooSetPointers`|11.1| | | | | | | |
+|`cusparseCooAoSGet`|10.2|11.2|12.0|`rocsparse_coo_aos_get`|4.1.0| | | |
+|`cusparseCooGet`|10.1| | |`rocsparse_coo_get`|4.1.0| | | |
+|`cusparseCooSetPointers`|11.1| | |`rocsparse_coo_set_pointers`|4.1.0| | | |
 |`cusparseCooSetStridedBatch`|11.0| | | | | | | |
-|`cusparseCreateBlockedEll`|11.2| | | | | | | |
+|`cusparseCreateBlockedEll`|11.2| | |`rocsparse_create_bell_descr`|4.5.0| | | |
 |`cusparseCreateBsr`|12.1| | | | | | | |
 |`cusparseCreateConstBlockedEll`|12.0| | | | | | | |
 |`cusparseCreateConstBsr`|12.1| | | | | | | |
@@ -831,16 +831,16 @@
 |`cusparseCreateSlicedEll`|12.1| | | | | | | |
 |`cusparseCreateSpVec`|10.2| | |`rocsparse_create_spvec_descr`|4.1.0| | | |
 |`cusparseCscGet`|11.7| | | | | | | |
-|`cusparseCscSetPointers`|11.1| | | | | | | |
-|`cusparseCsrGet`|10.2| | | | | | | |
-|`cusparseCsrSetPointers`|11.0| | | | | | | |
+|`cusparseCscSetPointers`|11.1| | |`rocsparse_csc_set_pointers`|4.1.0| | | |
+|`cusparseCsrGet`|10.2| | |`rocsparse_csr_get`|4.1.0| | | |
+|`cusparseCsrSetPointers`|11.0| | |`rocsparse_csr_set_pointers`|4.1.0| | | |
 |`cusparseCsrSetStridedBatch`|11.0| | | | | | | |
 |`cusparseDenseToSparse_analysis`|11.1| | | | | | | |
 |`cusparseDenseToSparse_bufferSize`|11.1| | | | | | | |
 |`cusparseDenseToSparse_convert`|11.1| | | | | | | |
 |`cusparseDestroyDnMat`|10.1| | | | | | | |
 |`cusparseDestroyDnVec`|10.2| | | | | | | |
-|`cusparseDestroySpMat`|10.1| | | | | | | |
+|`cusparseDestroySpMat`|10.1| | |`rocsparse_destroy_spmat_descr`|4.1.0| | | |
 |`cusparseDestroySpVec`|10.2| | |`rocsparse_destroy_spvec_descr`|4.1.0| | | |
 |`cusparseDnMatGet`|10.1| | | | | | | |
 |`cusparseDnMatGetStridedBatch`|10.1| | | | | | | |
@@ -876,10 +876,10 @@
 |`cusparseSpMV`|10.2| | | | | | | |
 |`cusparseSpMV_bufferSize`|10.2| | | | | | | |
 |`cusparseSpMatGetAttribute`|11.3| | | | | | | |
-|`cusparseSpMatGetFormat`|10.1| | | | | | | |
+|`cusparseSpMatGetFormat`|10.1| | |`rocsparse_spmat_get_format`|4.1.0| | | |
 |`cusparseSpMatGetIndexBase`|10.1| | | | | | | |
 |`cusparseSpMatGetNumBatches`|10.1| |10.2| | | | | |
-|`cusparseSpMatGetSize`|11.0| | | | | | | |
+|`cusparseSpMatGetSize`|11.0| | |`rocsparse_spmat_get_size`|4.1.0| | | |
 |`cusparseSpMatGetStridedBatch`|10.2| | | | | | | |
 |`cusparseSpMatGetValues`|10.2| | | | | | | |
 |`cusparseSpMatSetAttribute`|11.3| | | | | | | |
