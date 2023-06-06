@@ -1476,8 +1476,13 @@ sub rocSubstitutions {
     subst("cudnnSoftmaxBackward", "miopenSoftmaxBackward_V2", "library");
     subst("cudnnSoftmaxForward", "miopenSoftmaxForward_V2", "library");
     subst("cudnnTransformTensor", "miopenTransformTensor", "library");
+    subst("cusparseBlockedEllGet", "rocsparse_bell_get", "library");
+    subst("cusparseCooAoSGet", "rocsparse_coo_aos_get", "library");
+    subst("cusparseCooGet", "rocsparse_coo_get", "library");
+    subst("cusparseCooSetPointers", "rocsparse_coo_set_pointers", "library");
     subst("cusparseCopyMatDescr", "rocsparse_copy_mat_descr", "library");
     subst("cusparseCreate", "rocsparse_create_handle", "library");
+    subst("cusparseCreateBlockedEll", "rocsparse_create_bell_descr", "library");
     subst("cusparseCreateColorInfo", "rocsparse_create_color_info", "library");
     subst("cusparseCreateCoo", "rocsparse_create_coo_descr", "library");
     subst("cusparseCreateCooAoS", "rocsparse_create_coo_aos_descr", "library");
@@ -1486,10 +1491,14 @@ sub rocSubstitutions {
     subst("cusparseCreateHybMat", "rocsparse_create_hyb_mat", "library");
     subst("cusparseCreateMatDescr", "rocsparse_create_mat_descr", "library");
     subst("cusparseCreateSpVec", "rocsparse_create_spvec_descr", "library");
+    subst("cusparseCscSetPointers", "rocsparse_csc_set_pointers", "library");
+    subst("cusparseCsrGet", "rocsparse_csr_get", "library");
+    subst("cusparseCsrSetPointers", "rocsparse_csr_set_pointers", "library");
     subst("cusparseDestroy", "rocsparse_destroy_handle", "library");
     subst("cusparseDestroyColorInfo", "rocsparse_destroy_color_info", "library");
     subst("cusparseDestroyHybMat", "rocsparse_destroy_hyb_mat", "library");
     subst("cusparseDestroyMatDescr", "rocsparse_destroy_mat_descr", "library");
+    subst("cusparseDestroySpMat", "rocsparse_destroy_spmat_descr", "library");
     subst("cusparseDestroySpVec", "rocsparse_destroy_spvec_descr", "library");
     subst("cusparseGetMatDiagType", "rocsparse_get_mat_diag_type", "library");
     subst("cusparseGetMatFillMode", "rocsparse_get_mat_fill_mode", "library");
@@ -1504,6 +1513,8 @@ sub rocSubstitutions {
     subst("cusparseSetMatType", "rocsparse_set_mat_type", "library");
     subst("cusparseSetPointerMode", "rocsparse_set_pointer_mode", "library");
     subst("cusparseSetStream", "rocsparse_set_stream", "library");
+    subst("cusparseSpMatGetFormat", "rocsparse_spmat_get_format", "library");
+    subst("cusparseSpMatGetSize", "rocsparse_spmat_get_size", "library");
     subst("cusparseSpVecGet", "rocsparse_spvec_get", "library");
     subst("cusparseSpVecGetIndexBase", "rocsparse_spvec_get_index_base", "library");
     subst("cusparseSpVecGetValues", "rocsparse_spvec_get_values", "library");
