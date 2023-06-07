@@ -608,6 +608,7 @@ my %removed_funcs = (
     "cusparseXcsrgeamNnz" => "11.0",
     "cusparseSsctr" => "12.0",
     "cusparseSroti" => "12.0",
+    "cusparseSpMatSetStridedBatch" => "12.0",
     "cusparseSolveAnalysisInfo_t" => "11.0",
     "cusparseSolveAnalysisInfo" => "11.0",
     "cusparseSideMode_t" => "11.5",
@@ -1480,6 +1481,7 @@ sub rocSubstitutions {
     subst("cusparseCooAoSGet", "rocsparse_coo_aos_get", "library");
     subst("cusparseCooGet", "rocsparse_coo_get", "library");
     subst("cusparseCooSetPointers", "rocsparse_coo_set_pointers", "library");
+    subst("cusparseCooSetStridedBatch", "rocsparse_coo_set_strided_batch", "library");
     subst("cusparseCopyMatDescr", "rocsparse_copy_mat_descr", "library");
     subst("cusparseCreate", "rocsparse_create_handle", "library");
     subst("cusparseCreateBlockedEll", "rocsparse_create_bell_descr", "library");
@@ -1494,6 +1496,7 @@ sub rocSubstitutions {
     subst("cusparseCscSetPointers", "rocsparse_csc_set_pointers", "library");
     subst("cusparseCsrGet", "rocsparse_csr_get", "library");
     subst("cusparseCsrSetPointers", "rocsparse_csr_set_pointers", "library");
+    subst("cusparseCsrSetStridedBatch", "rocsparse_csr_set_strided_batch", "library");
     subst("cusparseDestroy", "rocsparse_destroy_handle", "library");
     subst("cusparseDestroyColorInfo", "rocsparse_destroy_color_info", "library");
     subst("cusparseDestroyHybMat", "rocsparse_destroy_hyb_mat", "library");
@@ -1513,8 +1516,15 @@ sub rocSubstitutions {
     subst("cusparseSetMatType", "rocsparse_set_mat_type", "library");
     subst("cusparseSetPointerMode", "rocsparse_set_pointer_mode", "library");
     subst("cusparseSetStream", "rocsparse_set_stream", "library");
+    subst("cusparseSpMatGetAttribute", "rocsparse_spmat_get_attribute", "library");
     subst("cusparseSpMatGetFormat", "rocsparse_spmat_get_format", "library");
+    subst("cusparseSpMatGetIndexBase", "rocsparse_spmat_get_index_base", "library");
     subst("cusparseSpMatGetSize", "rocsparse_spmat_get_size", "library");
+    subst("cusparseSpMatGetStridedBatch", "rocsparse_spmat_get_strided_batch", "library");
+    subst("cusparseSpMatGetValues", "rocsparse_spmat_get_values", "library");
+    subst("cusparseSpMatSetAttribute", "rocsparse_spmat_set_attribute", "library");
+    subst("cusparseSpMatSetStridedBatch", "rocsparse_spmat_set_strided_batch", "library");
+    subst("cusparseSpMatSetValues", "rocsparse_spmat_set_values", "library");
     subst("cusparseSpVecGet", "rocsparse_spvec_get", "library");
     subst("cusparseSpVecGetIndexBase", "rocsparse_spvec_get_index_base", "library");
     subst("cusparseSpVecGetValues", "rocsparse_spvec_get_values", "library");

@@ -115,12 +115,16 @@ int main() {
   cudaStream_t stream_t;
 
   int iVal = 0;
+  int batchCount = 0;
   int64_t size = 0;
   int64_t nnz = 0;
   int64_t rows = 0;
   int64_t cols = 0;
   int64_t ellCols = 0;
   int64_t ellBlockSize = 0;
+  int64_t batchStride = 0;
+  int64_t offsetsBatchStride = 0;
+  int64_t columnsValuesBatchStride = 0;
   void* indices = nullptr;
   void* values = nullptr;
   void* cooRowInd = nullptr;
@@ -136,6 +140,8 @@ int main() {
   void* cscColOffsets = nullptr;
   void* cooRows = nullptr;
   void* cooColumns = nullptr;
+  void* data = nullptr;
+  size_t dataSize = 0;
 
   // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCreate(cusparseHandle_t* handle);
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_create_handle(rocsparse_handle* handle);
@@ -315,6 +321,11 @@ int main() {
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_spmat_get_format(const rocsparse_spmat_descr descr, rocsparse_format* format);
   // CHECK: status_t = rocsparse_spmat_get_format(spMatDescr_t, &format_t);
   status_t = cusparseSpMatGetFormat(spMatDescr_t, &format_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpMatGetIndexBase(cusparseConstSpMatDescr_t spMatDescr, cusparseIndexBase_t* idxBase);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_spmat_get_index_base(const rocsparse_spmat_descr descr, rocsparse_index_base* idx_base);
+  // CHECK: status_t = rocsparse_spmat_get_index_base(spMatDescr_t, &indexBase_t);
+  status_t = cusparseSpMatGetIndexBase(spMatDescr_t, &indexBase_t);
 #endif
 
 #if CUDA_VERSION >= 10020
@@ -373,6 +384,21 @@ int main() {
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_csr_get(const rocsparse_spmat_descr descr, int64_t* rows, int64_t* cols, int64_t* nnz, void** csr_row_ptr, void** csr_col_ind, void** csr_val, rocsparse_indextype* row_ptr_type, rocsparse_indextype* col_ind_type, rocsparse_index_base* idx_base, rocsparse_datatype* data_type);
   // CHECK: status_t = rocsparse_csr_get(spMatDescr_t, &rows, &cols, &nnz, &csrRowOffsets, &csrColInd, &csrValues, &csrRowOffsetsType, &csrColIndType, &indexBase_t, &dataType);
   status_t = cusparseCsrGet(spMatDescr_t, &rows, &cols, &nnz, &csrRowOffsets, &csrColInd, &csrValues, &csrRowOffsetsType, &csrColIndType, &indexBase_t, &dataType);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpMatGetValues(cusparseSpMatDescr_t spMatDescr, void** values);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_spmat_get_values(rocsparse_spmat_descr descr, void** values);
+  // CHECK: status_t = rocsparse_spmat_get_values(spMatDescr_t, &values);
+  status_t = cusparseSpMatGetValues(spMatDescr_t, &values);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpMatSetValues(cusparseSpMatDescr_t spMatDescr, void* values);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_spmat_set_values(rocsparse_spmat_descr descr, void* values);
+  // CHECK: status_t = rocsparse_spmat_set_values(spMatDescr_t, values);
+  status_t = cusparseSpMatSetValues(spMatDescr_t, values);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpMatGetStridedBatch(cusparseConstSpMatDescr_t spMatDescr, int* batchCount);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_spmat_get_strided_batch(rocsparse_spmat_descr descr, int* batch_count);
+  // CHECK: status_t = rocsparse_spmat_get_strided_batch(spMatDescr_t, &batchCount);
+  status_t = cusparseSpMatGetStridedBatch(spMatDescr_t, &batchCount);
 #endif
 
 #if CUDA_VERSION >= 10020 && CUDA_VERSION < 12000
@@ -388,6 +414,11 @@ int main() {
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_coo_aos_get(const rocsparse_spmat_descr descr, int64_t* rows, int64_t* cols, int64_t* nnz, void** coo_ind, void** coo_val, rocsparse_indextype* idx_type, rocsparse_index_base* idx_base, rocsparse_datatype* data_type);
   // CHECK: status_t = rocsparse_coo_aos_get(spMatDescr_t, &rows, &cols, &nnz, &cooRowInd, &cooColInd, &cooValues, &indexType_t, &indexBase_t, &dataType);
   status_t = cusparseCooAoSGet(spMatDescr_t, &rows, &cols, &nnz, &cooRowInd, &cooColInd, &cooValues, &indexType_t, &indexBase_t, &dataType);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpMatSetStridedBatch(cusparseSpMatDescr_t spMatDescr, int batchCount);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_spmat_set_strided_batch(rocsparse_spmat_descr descr, int batch_count);
+  // CHECK: status_t = rocsparse_spmat_set_strided_batch(spMatDescr_t, batchCount);
+  status_t = cusparseSpMatSetStridedBatch(spMatDescr_t, batchCount);
 #endif
 
 #if CUDA_VERSION < 11000
@@ -444,6 +475,16 @@ int main() {
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_spmat_get_size(rocsparse_spmat_descr descr, int64_t* rows, int64_t* cols, int64_t* nnz);
   // CHECK: status_t = rocsparse_spmat_get_size(spMatDescr_t, &rows, &cols, &nnz);
   status_t = cusparseSpMatGetSize(spMatDescr_t, &rows, &cols, &nnz);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCooSetStridedBatch(cusparseSpMatDescr_t spMatDescr, int batchCount, int64_t batchStride);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_coo_set_strided_batch(rocsparse_spmat_descr descr, int batch_count, int64_t batch_stride);
+  // CHECK: status_t = rocsparse_coo_set_strided_batch(spMatDescr_t, batchCount, batchStride);
+  status_t = cusparseCooSetStridedBatch(spMatDescr_t, batchCount, batchStride);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCsrSetStridedBatch(cusparseSpMatDescr_t spMatDescr, int batchCount, int64_t offsetsBatchStride, int64_t columnsValuesBatchStride);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_csr_set_strided_batch(rocsparse_spmat_descr descr, int batch_count, int64_t offsets_batch_stride, int64_t columns_values_batch_stride);
+  // CHECK: status_t = rocsparse_csr_set_strided_batch(spMatDescr_t, batchCount, offsetsBatchStride, columnsValuesBatchStride);
+  status_t = cusparseCsrSetStridedBatch(spMatDescr_t, batchCount, offsetsBatchStride, columnsValuesBatchStride);
 #endif
 
 #if CUDA_VERSION >= 11010
@@ -526,6 +567,16 @@ int main() {
   // CHECK-NEXT: rocsparse_spsm_alg SPSM_ALG_DEFAULT = rocsparse_spsm_alg_default;
   cusparseSpSMAlg_t spSMAlg_t;
   cusparseSpSMAlg_t SPSM_ALG_DEFAULT = CUSPARSE_SPSM_ALG_DEFAULT;
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpMatGetAttribute(cusparseConstSpMatDescr_t spMatDescr, cusparseSpMatAttribute_t attribute, void* data, size_t dataSize);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_spmat_get_attribute(rocsparse_spmat_descr descr, rocsparse_spmat_attribute attribute, void* data, size_t data_size);
+  // CHECK: status_t = rocsparse_spmat_get_attribute(spMatDescr_t, spMatAttribute_t, &data, dataSize);
+  status_t = cusparseSpMatGetAttribute(spMatDescr_t, spMatAttribute_t, &data, dataSize);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpMatSetAttribute(cusparseSpMatDescr_t spMatDescr, cusparseSpMatAttribute_t attribute, void* data, size_t dataSize);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_spmat_set_attribute(rocsparse_spmat_descr descr, rocsparse_spmat_attribute attribute, const void* data, size_t data_size);
+  // CHECK: status_t = rocsparse_spmat_set_attribute(spMatDescr_t, spMatAttribute_t, &data, dataSize);
+  status_t = cusparseSpMatSetAttribute(spMatDescr_t, spMatAttribute_t, &data, dataSize);
 #endif
 
 #if CUDA_VERSION >= 12010
