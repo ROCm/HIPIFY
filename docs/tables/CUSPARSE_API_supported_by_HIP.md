@@ -884,7 +884,7 @@
 |`cusparseSpMatGetValues`|10.2| | |`hipsparseSpMatGetValues`|4.1.0| | | |
 |`cusparseSpMatSetAttribute`|11.3| | |`hipsparseSpMatSetAttribute`|4.5.0| | | |
 |`cusparseSpMatSetNumBatches`|10.1| |10.2| | | | | |
-|`cusparseSpMatSetStridedBatch`|10.2| | |`hipsparseSpMatSetStridedBatch`|5.2.0| | | |
+|`cusparseSpMatSetStridedBatch`|10.2| |12.0|`hipsparseSpMatSetStridedBatch`|5.2.0| | | |
 |`cusparseSpMatSetValues`|10.2| | |`hipsparseSpMatSetValues`|4.1.0| | | |
 |`cusparseSpSM_analysis`|11.3| | |`hipsparseSpSM_analysis`|4.5.0| | | |
 |`cusparseSpSM_bufferSize`|11.3| | |`hipsparseSpSM_bufferSize`|4.5.0| | | |
