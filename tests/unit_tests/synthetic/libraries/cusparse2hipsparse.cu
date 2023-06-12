@@ -125,6 +125,7 @@ int main() {
   int64_t batchStride = 0;
   int64_t offsetsBatchStride = 0;
   int64_t columnsValuesBatchStride = 0;
+  int64_t ld = 0;
   void *indices = nullptr;
   void *values = nullptr;
   void *cooRowInd = nullptr;
@@ -326,6 +327,31 @@ int main() {
   // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpMatGetIndexBase(const hipsparseSpMatDescr_t spMatDescr, hipsparseIndexBase_t* idxBase);
   // CHECK: status_t = hipsparseSpMatGetIndexBase(spMatDescr_t, &indexBase_t);
   status_t = cusparseSpMatGetIndexBase(spMatDescr_t, &indexBase_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCreateDnMat(cusparseDnMatDescr_t* dnMatDescr, int64_t rows, int64_t cols, int64_t ld, void* values, cudaDataType valueType, cusparseOrder_t order);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseCreateDnMat(hipsparseDnMatDescr_t* dnMatDescr, int64_t rows, int64_t cols, int64_t ld, void* values, hipDataType valueType, hipsparseOrder_t order);
+  // CHECK: status_t = hipsparseCreateDnMat(&dnMatDescr_t, rows, cols, ld, values, dataType, order_t);
+  status_t = cusparseCreateDnMat(&dnMatDescr_t, rows, cols, ld, values, dataType, order_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDestroyDnMat(cusparseConstDnMatDescr_t dnMatDescr);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDestroyDnMat(hipsparseDnMatDescr_t dnMatDescr);
+  // CHECK: status_t = hipsparseDestroyDnMat(dnMatDescr_t);
+  status_t = cusparseDestroyDnMat(dnMatDescr_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDnMatGet(cusparseDnMatDescr_t dnMatDescr, int64_t* rows, int64_t* cols, int64_t* ld, void** values, cudaDataType* type, cusparseOrder_t* order);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDnMatGet(const hipsparseDnMatDescr_t dnMatDescr, int64_t* rows, int64_t* cols, int64_t* ld, void** values, hipDataType* valueType, hipsparseOrder_t* order);
+  // CHECK: status_t = hipsparseDnMatGet(dnMatDescr_t, &rows, &cols, &ld, &values, &dataType, &order_t);
+  status_t = cusparseDnMatGet(dnMatDescr_t, &rows, &cols, &ld, &values, &dataType, &order_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDnMatGetStridedBatch(cusparseConstDnMatDescr_t dnMatDescr, int* batchCount, int64_t* batchStride);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDnMatGetStridedBatch(hipsparseDnMatDescr_t dnMatDescr, int* batchCount, int64_t* batchStride);
+  // CHECK: status_t = hipsparseDnMatGetStridedBatch(dnMatDescr_t, &batchCount, &batchStride);
+  status_t = cusparseDnMatGetStridedBatch(dnMatDescr_t, &batchCount, &batchStride);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDnMatSetStridedBatch(cusparseDnMatDescr_t dnMatDescr, int batchCount, int64_t batchStride);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDnMatSetStridedBatch(hipsparseDnMatDescr_t dnMatDescr, int batchCount, int64_t batchStride);
+  // CHECK: status_t = hipsparseDnMatSetStridedBatch(dnMatDescr_t, batchCount, batchStride);
+  status_t = cusparseDnMatSetStridedBatch(dnMatDescr_t, batchCount, batchStride);
 #endif
 
 #if CUDA_VERSION >= 10010 && CUDA_VERSION < 12000
@@ -407,6 +433,41 @@ int main() {
   // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpMatGetStridedBatch(hipsparseSpMatDescr_t spMatDescr, int* batchCount);
   // CHECK: status_t = hipsparseSpMatGetStridedBatch(spMatDescr_t, &batchCount);
   status_t = cusparseSpMatGetStridedBatch(spMatDescr_t, &batchCount);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCreateDnVec(cusparseDnVecDescr_t* dnVecDescr, int64_t size, void* values, cudaDataType valueType);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseCreateDnVec(hipsparseDnVecDescr_t* dnVecDescr, int64_t size, void* values, hipDataType valueType);
+  // CHECK: status_t = hipsparseCreateDnVec(&dnVecDescr_t, size, values, dataType);
+  status_t = cusparseCreateDnVec(&dnVecDescr_t, size, values, dataType);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDestroyDnVec(cusparseConstDnVecDescr_t dnVecDescr);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDestroyDnVec(hipsparseDnVecDescr_t dnVecDescr);
+  // CHECK: status_t = hipsparseDestroyDnVec(dnVecDescr_t);
+  status_t = cusparseDestroyDnVec(dnVecDescr_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDnVecGet(cusparseDnVecDescr_t dnVecDescr, int64_t* size, void** values, cudaDataType* valueType);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDnVecGet(const hipsparseDnVecDescr_t dnVecDescr, int64_t* size, void** values, hipDataType* valueType);
+  // CHECK: status_t = hipsparseDnVecGet(dnVecDescr_t, &size, &values, &dataType);
+  status_t = cusparseDnVecGet(dnVecDescr_t, &size, &values, &dataType);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDnVecGetValues(cusparseDnVecDescr_t dnVecDescr, void** values);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDnVecGetValues(const hipsparseDnVecDescr_t dnVecDescr, void** values);
+  // CHECK: status_t = hipsparseDnVecGetValues(dnVecDescr_t, &values);
+  status_t = cusparseDnVecGetValues(dnVecDescr_t, &values);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDnVecSetValues(cusparseDnVecDescr_t dnVecDescr, void* values);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDnVecSetValues(hipsparseDnVecDescr_t dnVecDescr, void* values);
+  // CHECK: status_t = hipsparseDnVecSetValues(dnVecDescr_t, values);
+  status_t = cusparseDnVecSetValues(dnVecDescr_t, values);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDnMatGetValues(cusparseDnMatDescr_t dnMatDescr, void** values);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDnMatGetValues(const hipsparseDnMatDescr_t dnMatDescr, void** values);
+  // CHECK: status_t = hipsparseDnMatGetValues(dnMatDescr_t, &values);
+  status_t = cusparseDnMatGetValues(dnMatDescr_t, &values);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDnMatSetValues(cusparseDnMatDescr_t dnMatDescr, void* values);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDnMatSetValues(hipsparseDnMatDescr_t dnMatDescr, void* values);
+  // CHECK: status_t = hipsparseDnMatSetValues(dnMatDescr_t, values);
+  status_t = cusparseDnMatSetValues(dnMatDescr_t, values);
 #endif
 
 #if CUDA_VERSION >= 10020 && CUDA_VERSION < 12000
