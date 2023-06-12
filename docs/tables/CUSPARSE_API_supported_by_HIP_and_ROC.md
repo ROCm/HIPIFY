@@ -826,8 +826,8 @@
 |`cusparseCreateCooAoS`|10.2|11.2|12.0|`hipsparseCreateCooAoS`|4.1.0| | | |`rocsparse_create_coo_aos_descr`|4.1.0| | | |
 |`cusparseCreateCsc`|11.1| | |`hipsparseCreateCsc`|4.2.0| | | |`rocsparse_create_csc_descr`|4.1.0| | | |
 |`cusparseCreateCsr`|10.2| | |`hipsparseCreateCsr`|4.1.0| | | |`rocsparse_create_csr_descr`|4.1.0| | | |
-|`cusparseCreateDnMat`|10.1| | |`hipsparseCreateDnMat`|4.2.0| | | | | | | | |
-|`cusparseCreateDnVec`|10.2| | |`hipsparseCreateDnVec`|4.1.0| | | | | | | | |
+|`cusparseCreateDnMat`|10.1| | |`hipsparseCreateDnMat`|4.2.0| | | |`rocsparse_create_dnmat_descr`|4.1.0| | | |
+|`cusparseCreateDnVec`|10.2| | |`hipsparseCreateDnVec`|4.1.0| | | |`rocsparse_create_dnvec_descr`|4.1.0| | | |
 |`cusparseCreateSlicedEll`|12.1| | | | | | | | | | | | |
 |`cusparseCreateSpVec`|10.2| | |`hipsparseCreateSpVec`|4.1.0| | | |`rocsparse_create_spvec_descr`|4.1.0| | | |
 |`cusparseCscGet`|11.7| | | | | | | | | | | | |
@@ -838,18 +838,18 @@
 |`cusparseDenseToSparse_analysis`|11.1| | |`hipsparseDenseToSparse_analysis`|4.2.0| | | | | | | | |
 |`cusparseDenseToSparse_bufferSize`|11.1| | |`hipsparseDenseToSparse_bufferSize`|4.2.0| | | | | | | | |
 |`cusparseDenseToSparse_convert`|11.1| | |`hipsparseDenseToSparse_convert`|4.2.0| | | | | | | | |
-|`cusparseDestroyDnMat`|10.1| | |`hipsparseDestroyDnMat`|4.2.0| | | | | | | | |
-|`cusparseDestroyDnVec`|10.2| | |`hipsparseDestroyDnVec`|4.1.0| | | | | | | | |
+|`cusparseDestroyDnMat`|10.1| | |`hipsparseDestroyDnMat`|4.2.0| | | |`rocsparse_destroy_dnmat_descr`|4.1.0| | | |
+|`cusparseDestroyDnVec`|10.2| | |`hipsparseDestroyDnVec`|4.1.0| | | |`rocsparse_destroy_dnvec_descr`|4.1.0| | | |
 |`cusparseDestroySpMat`|10.1| | |`hipsparseDestroySpMat`|4.1.0| | | |`rocsparse_destroy_spmat_descr`|4.1.0| | | |
 |`cusparseDestroySpVec`|10.2| | |`hipsparseDestroySpVec`|4.1.0| | | |`rocsparse_destroy_spvec_descr`|4.1.0| | | |
-|`cusparseDnMatGet`|10.1| | |`hipsparseDnMatGet`|4.2.0| | | | | | | | |
-|`cusparseDnMatGetStridedBatch`|10.1| | |`hipsparseDnMatGetStridedBatch`|5.2.0| | | | | | | | |
-|`cusparseDnMatGetValues`|10.2| | |`hipsparseDnMatGetValues`|4.2.0| | | | | | | | |
-|`cusparseDnMatSetStridedBatch`|10.1| | |`hipsparseDnMatSetStridedBatch`|5.2.0| | | | | | | | |
-|`cusparseDnMatSetValues`|10.2| | |`hipsparseDnMatSetValues`|4.2.0| | | | | | | | |
-|`cusparseDnVecGet`|10.2| | |`hipsparseDnVecGet`|4.1.0| | | | | | | | |
-|`cusparseDnVecGetValues`|10.2| | |`hipsparseDnVecGetValues`|4.1.0| | | | | | | | |
-|`cusparseDnVecSetValues`|10.2| | |`hipsparseDnVecSetValues`|4.1.0| | | | | | | | |
+|`cusparseDnMatGet`|10.1| | |`hipsparseDnMatGet`|4.2.0| | | |`rocsparse_dnmat_get`|4.1.0| | | |
+|`cusparseDnMatGetStridedBatch`|10.1| | |`hipsparseDnMatGetStridedBatch`|5.2.0| | | |`rocsparse_dnmat_get_strided_batch`|5.2.0| | | |
+|`cusparseDnMatGetValues`|10.2| | |`hipsparseDnMatGetValues`|4.2.0| | | |`rocsparse_dnmat_get_values`|4.1.0| | | |
+|`cusparseDnMatSetStridedBatch`|10.1| | |`hipsparseDnMatSetStridedBatch`|5.2.0| | | |`rocsparse_dnmat_set_strided_batch`|5.2.0| | | |
+|`cusparseDnMatSetValues`|10.2| | |`hipsparseDnMatSetValues`|4.2.0| | | |`rocsparse_dnmat_set_values`|4.1.0| | | |
+|`cusparseDnVecGet`|10.2| | |`hipsparseDnVecGet`|4.1.0| | | |`rocsparse_dnvec_get`|4.1.0| | | |
+|`cusparseDnVecGetValues`|10.2| | |`hipsparseDnVecGetValues`|4.1.0| | | |`rocsparse_dnvec_get_values`|4.1.0| | | |
+|`cusparseDnVecSetValues`|10.2| | |`hipsparseDnVecSetValues`|4.1.0| | | |`rocsparse_dnvec_set_values`|4.1.0| | | |
 |`cusparseGather`|11.0| | |`hipsparseGather`|4.1.0| | | | | | | | |
 |`cusparseRot`|11.0| | |`hipsparseRot`|4.1.0| | | | | | | | |
 |`cusparseSDDMM`|11.2| | |`hipsparseSDDMM`|4.3.0| | | | | | | | |

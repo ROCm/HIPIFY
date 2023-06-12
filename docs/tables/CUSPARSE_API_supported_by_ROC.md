@@ -826,8 +826,8 @@
 |`cusparseCreateCooAoS`|10.2|11.2|12.0|`rocsparse_create_coo_aos_descr`|4.1.0| | | |
 |`cusparseCreateCsc`|11.1| | |`rocsparse_create_csc_descr`|4.1.0| | | |
 |`cusparseCreateCsr`|10.2| | |`rocsparse_create_csr_descr`|4.1.0| | | |
-|`cusparseCreateDnMat`|10.1| | | | | | | |
-|`cusparseCreateDnVec`|10.2| | | | | | | |
+|`cusparseCreateDnMat`|10.1| | |`rocsparse_create_dnmat_descr`|4.1.0| | | |
+|`cusparseCreateDnVec`|10.2| | |`rocsparse_create_dnvec_descr`|4.1.0| | | |
 |`cusparseCreateSlicedEll`|12.1| | | | | | | |
 |`cusparseCreateSpVec`|10.2| | |`rocsparse_create_spvec_descr`|4.1.0| | | |
 |`cusparseCscGet`|11.7| | | | | | | |
@@ -838,18 +838,18 @@
 |`cusparseDenseToSparse_analysis`|11.1| | | | | | | |
 |`cusparseDenseToSparse_bufferSize`|11.1| | | | | | | |
 |`cusparseDenseToSparse_convert`|11.1| | | | | | | |
-|`cusparseDestroyDnMat`|10.1| | | | | | | |
-|`cusparseDestroyDnVec`|10.2| | | | | | | |
+|`cusparseDestroyDnMat`|10.1| | |`rocsparse_destroy_dnmat_descr`|4.1.0| | | |
+|`cusparseDestroyDnVec`|10.2| | |`rocsparse_destroy_dnvec_descr`|4.1.0| | | |
 |`cusparseDestroySpMat`|10.1| | |`rocsparse_destroy_spmat_descr`|4.1.0| | | |
 |`cusparseDestroySpVec`|10.2| | |`rocsparse_destroy_spvec_descr`|4.1.0| | | |
-|`cusparseDnMatGet`|10.1| | | | | | | |
-|`cusparseDnMatGetStridedBatch`|10.1| | | | | | | |
-|`cusparseDnMatGetValues`|10.2| | | | | | | |
-|`cusparseDnMatSetStridedBatch`|10.1| | | | | | | |
-|`cusparseDnMatSetValues`|10.2| | | | | | | |
-|`cusparseDnVecGet`|10.2| | | | | | | |
-|`cusparseDnVecGetValues`|10.2| | | | | | | |
-|`cusparseDnVecSetValues`|10.2| | | | | | | |
+|`cusparseDnMatGet`|10.1| | |`rocsparse_dnmat_get`|4.1.0| | | |
+|`cusparseDnMatGetStridedBatch`|10.1| | |`rocsparse_dnmat_get_strided_batch`|5.2.0| | | |
+|`cusparseDnMatGetValues`|10.2| | |`rocsparse_dnmat_get_values`|4.1.0| | | |
+|`cusparseDnMatSetStridedBatch`|10.1| | |`rocsparse_dnmat_set_strided_batch`|5.2.0| | | |
+|`cusparseDnMatSetValues`|10.2| | |`rocsparse_dnmat_set_values`|4.1.0| | | |
+|`cusparseDnVecGet`|10.2| | |`rocsparse_dnvec_get`|4.1.0| | | |
+|`cusparseDnVecGetValues`|10.2| | |`rocsparse_dnvec_get_values`|4.1.0| | | |
+|`cusparseDnVecSetValues`|10.2| | |`rocsparse_dnvec_set_values`|4.1.0| | | |
 |`cusparseGather`|11.0| | | | | | | |
 |`cusparseRot`|11.0| | | | | | | |
 |`cusparseSDDMM`|11.2| | | | | | | |
