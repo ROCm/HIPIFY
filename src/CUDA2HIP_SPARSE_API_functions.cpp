@@ -426,7 +426,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   {"cusparseDgtsv",                                     {"hipsparseDgtsv",                                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
   {"cusparseCgtsv",                                     {"hipsparseCgtsv",                                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
   {"cusparseZgtsv",                                     {"hipsparseZgtsv",                                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-                                                                                                                                                                                   
+
   {"cusparseSgtsv_nopivot",                             {"hipsparseSgtsv_nopivot",                             "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
   {"cusparseDgtsv_nopivot",                             {"hipsparseDgtsv_nopivot",                             "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
   {"cusparseCgtsv_nopivot",                             {"hipsparseCgtsv_nopivot",                             "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
@@ -462,40 +462,40 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   {"cusparseDgtsv2StridedBatch_bufferSizeExt",          {"hipsparseDgtsv2StridedBatch_bufferSizeExt",          "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED}},
   {"cusparseCgtsv2StridedBatch_bufferSizeExt",          {"hipsparseCgtsv2StridedBatch_bufferSizeExt",          "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED}},
   {"cusparseZgtsv2StridedBatch_bufferSizeExt",          {"hipsparseZgtsv2StridedBatch_bufferSizeExt",          "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED}},
-                                                                                                                                                                                   
+
   {"cusparseSgtsv2StridedBatch",                        {"hipsparseSgtsv2StridedBatch",                        "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED}},
   {"cusparseDgtsv2StridedBatch",                        {"hipsparseDgtsv2StridedBatch",                        "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED}},
   {"cusparseCgtsv2StridedBatch",                        {"hipsparseCgtsv2StridedBatch",                        "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED}},
   {"cusparseZgtsv2StridedBatch",                        {"hipsparseZgtsv2StridedBatch",                        "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED}},
-                                                                                                                                                                                   
+
   {"cusparseSgtsvInterleavedBatch_bufferSizeExt",       {"hipsparseSgtsvInterleavedBatch_bufferSizeExt",       "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED}},
   {"cusparseDgtsvInterleavedBatch_bufferSizeExt",       {"hipsparseDgtsvInterleavedBatch_bufferSizeExt",       "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED}},
   {"cusparseCgtsvInterleavedBatch_bufferSizeExt",       {"hipsparseCgtsvInterleavedBatch_bufferSizeExt",       "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED}},
   {"cusparseZgtsvInterleavedBatch_bufferSizeExt",       {"hipsparseZgtsvInterleavedBatch_bufferSizeExt",       "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED}},
-                                                                                                                                                                                   
+
   {"cusparseSgtsvInterleavedBatch",                     {"hipsparseSgtsvInterleavedBatch",                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED}},
   {"cusparseDgtsvInterleavedBatch",                     {"hipsparseDgtsvInterleavedBatch",                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED}},
   {"cusparseCgtsvInterleavedBatch",                     {"hipsparseCgtsvInterleavedBatch",                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED}},
   {"cusparseZgtsvInterleavedBatch",                     {"hipsparseZgtsvInterleavedBatch",                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED}},
-                                                                                                                                                                                   
-  // 12.5. Batched Pentadiagonal Solve                                                                                                                                             
+
+  // 12.5. Batched Pentadiagonal Solve
   {"cusparseSgpsvInterleavedBatch_bufferSizeExt",       {"hipsparseSgpsvInterleavedBatch_bufferSizeExt",       "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED}},
   {"cusparseDgpsvInterleavedBatch_bufferSizeExt",       {"hipsparseDgpsvInterleavedBatch_bufferSizeExt",       "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED}},
   {"cusparseCgpsvInterleavedBatch_bufferSizeExt",       {"hipsparseCgpsvInterleavedBatch_bufferSizeExt",       "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED}},
   {"cusparseZgpsvInterleavedBatch_bufferSizeExt",       {"hipsparseZgpsvInterleavedBatch_bufferSizeExt",       "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED}},
-                                                                                                                                                                                   
+
   {"cusparseSgpsvInterleavedBatch",                     {"hipsparseSgpsvInterleavedBatch",                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED}},
   {"cusparseDgpsvInterleavedBatch",                     {"hipsparseDgpsvInterleavedBatch",                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED}},
   {"cusparseCgpsvInterleavedBatch",                     {"hipsparseCgpsvInterleavedBatch",                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED}},
   {"cusparseZgpsvInterleavedBatch",                     {"hipsparseZgpsvInterleavedBatch",                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED}},
-                                                                                                                                                                                   
-  // 13. cuSPARSE Matrix Reorderings Reference                                                                                                                                     
-  {"cusparseScsrcolor",                                 {"hipsparseScsrcolor",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 13, ROC_UNSUPPORTED}},
-  {"cusparseDcsrcolor",                                 {"hipsparseDcsrcolor",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 13, ROC_UNSUPPORTED}},
-  {"cusparseCcsrcolor",                                 {"hipsparseCcsrcolor",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 13, ROC_UNSUPPORTED}},
-  {"cusparseZcsrcolor",                                 {"hipsparseZcsrcolor",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 13, ROC_UNSUPPORTED}},
-                                                                                                                                                                                   
-  // 14. cuSPARSE Format Conversion Reference                                                                                                                                      
+
+  // 13. cuSPARSE Matrix Reorderings Reference
+  {"cusparseScsrcolor",                                 {"hipsparseScsrcolor",                                 "rocsparse_scsrcolor",                                              CONV_LIB_FUNC, API_SPARSE, 13}},
+  {"cusparseDcsrcolor",                                 {"hipsparseDcsrcolor",                                 "rocsparse_dcsrcolor",                                              CONV_LIB_FUNC, API_SPARSE, 13}},
+  {"cusparseCcsrcolor",                                 {"hipsparseCcsrcolor",                                 "rocsparse_ccsrcolor",                                              CONV_LIB_FUNC, API_SPARSE, 13}},
+  {"cusparseZcsrcolor",                                 {"hipsparseZcsrcolor",                                 "rocsparse_zcsrcolor",                                              CONV_LIB_FUNC, API_SPARSE, 13}},
+
+  // 14. cuSPARSE Format Conversion Reference
   {"cusparseSbsr2csr",                                  {"hipsparseSbsr2csr",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED}},
   {"cusparseDbsr2csr",                                  {"hipsparseDbsr2csr",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED}},
   {"cusparseCbsr2csr",                                  {"hipsparseCbsr2csr",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED}},
@@ -814,7 +814,6 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   {"cusparseSpMMOp",                                    {"hipsparseSpMMOp",                                    "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
   {"cusparseSpMMOp_createPlan",                         {"hipsparseSpMMOp_createPlan",                         "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
   {"cusparseSpMMOp_destroyPlan",                        {"hipsparseSpMMOp_destroyPlan",                        "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
-
 
   // Sparse Triangular Matrix Solve
   {"cusparseSpSM_createDescr",                          {"hipsparseSpSM_createDescr",                          "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
@@ -1864,6 +1863,10 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_FUNCTION_VER_MAP {
   {"rocsparse_dnmat_set_values",                         {HIP_4010, HIP_0,    HIP_0   }},
   {"rocsparse_dnmat_get_strided_batch",                  {HIP_5020, HIP_0,    HIP_0   }},
   {"rocsparse_dnmat_set_strided_batch",                  {HIP_5020, HIP_0,    HIP_0   }},
+  {"rocsparse_zcsrcolor",                                {HIP_4050, HIP_0,    HIP_0   }},
+  {"rocsparse_ccsrcolor",                                {HIP_4050, HIP_0,    HIP_0   }},
+  {"rocsparse_dcsrcolor",                                {HIP_4050, HIP_0,    HIP_0   }},
+  {"rocsparse_scsrcolor",                                {HIP_4050, HIP_0,    HIP_0   }},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_SPARSE_API_SECTION_MAP {

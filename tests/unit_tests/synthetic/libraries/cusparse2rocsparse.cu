@@ -2,6 +2,8 @@
 
 // CHECK: #include <hip/hip_runtime.h>
 #include <cuda_runtime.h>
+// CHECK: #include "hip/hip_complex.h"
+#include "cuComplex.h"
 #include <stdio.h>
 // CHECK: #include "rocsparse.h"
 #include "cusparse.h"
@@ -116,6 +118,13 @@ int main() {
 
   int iVal = 0;
   int batchCount = 0;
+  int m = 0;
+  int innz = 0;
+  int csrRowPtrA = 0;
+  int csrColIndA = 0;
+  int ncolors = 0;
+  int coloring = 0;
+  int reordering = 0;
   int64_t size = 0;
   int64_t nnz = 0;
   int64_t rows = 0;
@@ -143,6 +152,20 @@ int main() {
   void* cooColumns = nullptr;
   void* data = nullptr;
   size_t dataSize = 0;
+  double dfractionToColor = 0.f;
+  float ffractionToColor = 0.f;
+  double csrValA = 0.f;
+  float csrSortedValA = 0.f;
+
+  // TODO: should be rocsparse_double_complex
+  // TODO: add to TypeOverloads cuDoubleComplex -> rocsparse_double_complex under a new option --sparse
+  // CHECK: rocblas_double_complex dcomplex;
+  cuDoubleComplex dcomplex;
+
+  // TODO: should be rocsparse_double_complex
+  // TODO: add to TypeOverloads cuComplex -> rocsparse_float_complex under a new option --sparse
+  // CHECK: rocblas_float_complex complex;
+  cuComplex complex;
 
   // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCreate(cusparseHandle_t* handle);
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_create_handle(rocsparse_handle* handle);
@@ -238,6 +261,26 @@ int main() {
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_destroy_color_info(rocsparse_color_info info);
   // CHECK: status_t = rocsparse_destroy_color_info(colorInfo_t);
   status_t = cusparseDestroyColorInfo(colorInfo_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseZcsrcolor(cusparseHandle_t handle, int m, int nnz, const cusparseMatDescr_t descrA, const cuDoubleComplex* csrSortedValA, const int* csrSortedRowPtrA, const int* csrSortedColIndA, const double* fractionToColor, int* ncolors, int* coloring, int* reordering, const cusparseColorInfo_t info);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_zcsrcolor(rocsparse_handle handle, rocsparse_int m, rocsparse_int nnz, const rocsparse_mat_descr descr, const rocsparse_double_complex* csr_val, const rocsparse_int* csr_row_ptr, const rocsparse_int* csr_col_ind, const double* fraction_to_color, rocsparse_int* ncolors, rocsparse_int* coloring, rocsparse_int* reordering, rocsparse_mat_info info);
+  // CHECK: status_t = rocsparse_zcsrcolor(handle_t, m, innz, matDescr_t, &dcomplex, &csrRowPtrA, &csrColIndA, &dfractionToColor, &ncolors, &coloring, &reordering, colorInfo_t);
+  status_t = cusparseZcsrcolor(handle_t, m, innz, matDescr_t, &dcomplex, &csrRowPtrA, &csrColIndA, &dfractionToColor, &ncolors, &coloring, &reordering, colorInfo_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCcsrcolor(cusparseHandle_t handle, int m, int nnz, const cusparseMatDescr_t descrA, const cuComplex* csrSortedValA, const int* csrSortedRowPtrA, const int* csrSortedColIndA, const float* fractionToColor, int* ncolors, int* coloring, int* reordering, const cusparseColorInfo_t info);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_ccsrcolor(rocsparse_handle handle, rocsparse_int m, rocsparse_int nnz, const rocsparse_mat_descr descr, const rocsparse_float_complex* csr_val, const rocsparse_int* csr_row_ptr, const rocsparse_int* csr_col_ind, const float* fraction_to_color, rocsparse_int* ncolors, rocsparse_int* coloring, rocsparse_int* reordering, rocsparse_mat_info info);
+  // CHECK: status_t = rocsparse_ccsrcolor(handle_t, m, innz, matDescr_t, &complex, &csrRowPtrA, &csrColIndA, &ffractionToColor, &ncolors, &coloring, &reordering, colorInfo_t);
+  status_t = cusparseCcsrcolor(handle_t, m, innz, matDescr_t, &complex, &csrRowPtrA, &csrColIndA, &ffractionToColor, &ncolors, &coloring, &reordering, colorInfo_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDcsrcolor(cusparseHandle_t handle, int m, int nnz, const cusparseMatDescr_t descrA, const double* csrSortedValA, const int* csrSortedRowPtrA, const int* csrSortedColIndA, const double* fractionToColor, int* ncolors, int* coloring, int* reordering, const cusparseColorInfo_t info);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_dcsrcolor(rocsparse_handle handle, rocsparse_int m, rocsparse_int nnz, const rocsparse_mat_descr descr, const double* csr_val, const rocsparse_int* csr_row_ptr, const rocsparse_int* csr_col_ind, const double* fraction_to_color, rocsparse_int* ncolors, rocsparse_int* coloring, rocsparse_int* reordering, rocsparse_mat_info info);
+  // CHECK: status_t = rocsparse_dcsrcolor(handle_t, m, innz, matDescr_t, &csrValA, &csrRowPtrA, &csrColIndA, &dfractionToColor, &ncolors, &coloring, &reordering, colorInfo_t);
+  status_t = cusparseDcsrcolor(handle_t, m, innz, matDescr_t, &csrValA, &csrRowPtrA, &csrColIndA, &dfractionToColor, &ncolors, &coloring, &reordering, colorInfo_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseScsrcolor(cusparseHandle_t handle, int m, int nnz, const cusparseMatDescr_t descrA, const float* csrSortedValA, const int* csrSortedRowPtrA, const int* csrSortedColIndA, const float* fractionToColor, int* ncolors, int* coloring, int* reordering, const cusparseColorInfo_t info);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_scsrcolor(rocsparse_handle handle, rocsparse_int m, rocsparse_int nnz, const rocsparse_mat_descr descr, const float* csr_val, const rocsparse_int* csr_row_ptr, const rocsparse_int* csr_col_ind, const float* fraction_to_color, rocsparse_int* ncolors, rocsparse_int* coloring, rocsparse_int* reordering, rocsparse_mat_info info);
+  // CHECK: status_t = rocsparse_scsrcolor(handle_t, m, innz, matDescr_t, &csrSortedValA, &csrRowPtrA, &csrColIndA, &ffractionToColor, &ncolors, &coloring, &reordering, colorInfo_t);
+  status_t = cusparseScsrcolor(handle_t, m, innz, matDescr_t, &csrSortedValA, &csrRowPtrA, &csrColIndA, &ffractionToColor, &ncolors, &coloring, &reordering, colorInfo_t);
 
 #if CUDA_VERSION >= 8000
   // CHECK: hipDataType dataType_t;
