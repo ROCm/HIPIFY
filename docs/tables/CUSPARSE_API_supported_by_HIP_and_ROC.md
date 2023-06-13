@@ -606,10 +606,10 @@
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|**ROC**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
-|`cusparseCcsrcolor`| | | |`hipsparseCcsrcolor`|4.5.0| | | | | | | | |
-|`cusparseDcsrcolor`| | | |`hipsparseDcsrcolor`|4.5.0| | | | | | | | |
-|`cusparseScsrcolor`| | | |`hipsparseScsrcolor`|4.5.0| | | | | | | | |
-|`cusparseZcsrcolor`| | | |`hipsparseZcsrcolor`|4.5.0| | | | | | | | |
+|`cusparseCcsrcolor`| | | |`hipsparseCcsrcolor`|4.5.0| | | |`rocsparse_ccsrcolor`|4.5.0| | | |
+|`cusparseDcsrcolor`| | | |`hipsparseDcsrcolor`|4.5.0| | | |`rocsparse_dcsrcolor`|4.5.0| | | |
+|`cusparseScsrcolor`| | | |`hipsparseScsrcolor`|4.5.0| | | |`rocsparse_scsrcolor`|4.5.0| | | |
+|`cusparseZcsrcolor`| | | |`hipsparseZcsrcolor`|4.5.0| | | |`rocsparse_zcsrcolor`|4.5.0| | | |
 
 ## **14. CUSPARSE Format Conversion Reference**
 

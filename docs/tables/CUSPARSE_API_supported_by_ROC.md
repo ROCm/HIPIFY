@@ -606,10 +606,10 @@
 
 |**CUDA**|**A**|**D**|**R**|**ROC**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
-|`cusparseCcsrcolor`| | | | | | | | |
-|`cusparseDcsrcolor`| | | | | | | | |
-|`cusparseScsrcolor`| | | | | | | | |
-|`cusparseZcsrcolor`| | | | | | | | |
+|`cusparseCcsrcolor`| | | |`rocsparse_ccsrcolor`|4.5.0| | | |
+|`cusparseDcsrcolor`| | | |`rocsparse_dcsrcolor`|4.5.0| | | |
+|`cusparseScsrcolor`| | | |`rocsparse_scsrcolor`|4.5.0| | | |
+|`cusparseZcsrcolor`| | | |`rocsparse_zcsrcolor`|4.5.0| | | |
 
 ## **14. CUSPARSE Format Conversion Reference**
 
