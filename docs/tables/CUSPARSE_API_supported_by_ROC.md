@@ -851,10 +851,10 @@
 |`cusparseDnVecGetValues`|10.2| | |`rocsparse_dnvec_get_values`|4.1.0| | | |
 |`cusparseDnVecSetValues`|10.2| | |`rocsparse_dnvec_set_values`|4.1.0| | | |
 |`cusparseGather`|11.0| | | | | | | |
-|`cusparseRot`|11.0| | | | | | | |
-|`cusparseSDDMM`|11.2| | | | | | | |
-|`cusparseSDDMM_bufferSize`|11.2| | | | | | | |
-|`cusparseSDDMM_preprocess`|11.2| | | | | | | |
+|`cusparseRot`|11.0| | |`rocsparse_rot`|4.1.0| | | |
+|`cusparseSDDMM`|11.2| | |`rocsparse_sddmm`|4.3.0| | | |
+|`cusparseSDDMM_bufferSize`|11.2| | |`rocsparse_sddmm_buffer_size`|4.3.0| | | |
+|`cusparseSDDMM_preprocess`|11.2| | |`rocsparse_sddmm_preprocess`|4.3.0| | | |
 |`cusparseScatter`|11.0| | | | | | | |
 |`cusparseSpGEMM_compute`|11.0| | | | | | | |
 |`cusparseSpGEMM_copy`|11.0| | | | | | | |
@@ -873,7 +873,7 @@
 |`cusparseSpMMOp_destroyPlan`|11.5| | | | | | | |
 |`cusparseSpMM_bufferSize`|10.1| | | | | | | |
 |`cusparseSpMM_preprocess`|11.2| | | | | | | |
-|`cusparseSpMV`|10.2| | | | | | | |
+|`cusparseSpMV`|10.2| | |`rocsparse_spmv`|4.1.0| | | |
 |`cusparseSpMV_bufferSize`|10.2| | | | | | | |
 |`cusparseSpMatGetAttribute`|11.3| | |`rocsparse_spmat_get_attribute`|4.5.0| | | |
 |`cusparseSpMatGetFormat`|10.1| | |`rocsparse_spmat_get_format`|4.1.0| | | |
