@@ -1524,6 +1524,10 @@ sub rocSubstitutions {
     subst("cusparseGetPointerMode", "rocsparse_get_pointer_mode", "library");
     subst("cusparseGetStream", "rocsparse_get_stream", "library");
     subst("cusparseGetVersion", "rocsparse_get_version", "library");
+    subst("cusparseRot", "rocsparse_rot", "library");
+    subst("cusparseSDDMM", "rocsparse_sddmm", "library");
+    subst("cusparseSDDMM_bufferSize", "rocsparse_sddmm_buffer_size", "library");
+    subst("cusparseSDDMM_preprocess", "rocsparse_sddmm_preprocess", "library");
     subst("cusparseScsrcolor", "rocsparse_scsrcolor", "library");
     subst("cusparseSetMatDiagType", "rocsparse_set_mat_diag_type", "library");
     subst("cusparseSetMatFillMode", "rocsparse_set_mat_fill_mode", "library");
@@ -1531,6 +1535,7 @@ sub rocSubstitutions {
     subst("cusparseSetMatType", "rocsparse_set_mat_type", "library");
     subst("cusparseSetPointerMode", "rocsparse_set_pointer_mode", "library");
     subst("cusparseSetStream", "rocsparse_set_stream", "library");
+    subst("cusparseSpMV", "rocsparse_spmv", "library");
     subst("cusparseSpMatGetAttribute", "rocsparse_spmat_get_attribute", "library");
     subst("cusparseSpMatGetFormat", "rocsparse_spmat_get_format", "library");
     subst("cusparseSpMatGetIndexBase", "rocsparse_spmat_get_index_base", "library");
