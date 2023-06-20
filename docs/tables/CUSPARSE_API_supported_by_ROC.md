@@ -636,8 +636,8 @@
 |`cusparseCgebsr2gebsc`| | | | | | | | |
 |`cusparseCgebsr2gebsc_bufferSize`| | | | | | | | |
 |`cusparseCgebsr2gebsc_bufferSizeExt`| | | | | | | | |
-|`cusparseCgebsr2gebsr`| | | | | | | | |
-|`cusparseCgebsr2gebsr_bufferSize`| | | | | | | | |
+|`cusparseCgebsr2gebsr`| | | |`rocsparse_cgebsr2gebsr`|4.1.0| | | |
+|`cusparseCgebsr2gebsr_bufferSize`| | | |`rocsparse_cgebsr2gebsr_buffer_size`|4.1.0| | | |
 |`cusparseCgebsr2gebsr_bufferSizeExt`| | | | | | | | |
 |`cusparseChyb2csc`| |10.2|11.0| | | | | |
 |`cusparseChyb2csr`| |10.2|11.0| | | | | |
@@ -671,8 +671,8 @@
 |`cusparseDgebsr2gebsc`| | | | | | | | |
 |`cusparseDgebsr2gebsc_bufferSize`| | | | | | | | |
 |`cusparseDgebsr2gebsc_bufferSizeExt`| | | | | | | | |
-|`cusparseDgebsr2gebsr`| | | | | | | | |
-|`cusparseDgebsr2gebsr_bufferSize`| | | | | | | | |
+|`cusparseDgebsr2gebsr`| | | |`rocsparse_dgebsr2gebsr`|4.1.0| | | |
+|`cusparseDgebsr2gebsr_bufferSize`| | | |`rocsparse_dgebsr2gebsr_buffer_size`|4.1.0| | | |
 |`cusparseDgebsr2gebsr_bufferSizeExt`| | | | | | | | |
 |`cusparseDhyb2csc`| |10.2|11.0| | | | | |
 |`cusparseDhyb2csr`| |10.2|11.0| | | | | |
@@ -724,8 +724,8 @@
 |`cusparseSgebsr2gebsc`| | | | | | | | |
 |`cusparseSgebsr2gebsc_bufferSize`| | | | | | | | |
 |`cusparseSgebsr2gebsc_bufferSizeExt`| | | | | | | | |
-|`cusparseSgebsr2gebsr`| | | | | | | | |
-|`cusparseSgebsr2gebsr_bufferSize`| | | | | | | | |
+|`cusparseSgebsr2gebsr`| | | |`rocsparse_sgebsr2gebsr`|4.1.0| | | |
+|`cusparseSgebsr2gebsr_bufferSize`| | | |`rocsparse_sgebsr2gebsr_buffer_size`|4.1.0| | | |
 |`cusparseSgebsr2gebsr_bufferSizeExt`| | | | | | | | |
 |`cusparseShyb2csc`| |10.2|11.0| | | | | |
 |`cusparseShyb2csr`| |10.2|11.0| | | | | |
