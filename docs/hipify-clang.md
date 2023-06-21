@@ -576,8 +576,8 @@ Testing Time: 7.90s
 | 12.0.0 - 13.0.1 | 7.0 - 11.5.1 | 7.6.5  - 8.3.2 | 2017.15.9.43, 2019.16.11.9               | 3.22.2          | 3.10.2        |
 | 14.0.0 - 14.0.6 | 7.0 - 11.7.1 | 8.0.5  - 8.4.1 | 2017.15.9.49, 2019.16.11.17, 2022.17.2.6 | 3.24.0          | 3.10.6        |
 | 15.0.0 - 15.0.7 | 7.0 - 11.8.0 | 8.0.5  - 8.8.1 | 2017.15.9.53, 2019.16.11.25, 2022.17.5.2 | 3.26.0          | 3.11.2        |
-| 16.0.0 - 16.0.6 | 7.0 - 12.1.1 | 8.0.5  - 8.9.2 | 2017.15.9.54, 2019.16.11.26, 2022.17.6.2 | 3.26.4          | 3.11.3        |
-| 17.0.0git       | 7.0 - 12.1.1 | 8.0.5  - 8.9.2 | 2017.15.9.54, 2019.16.11.26, 2022.17.6.2 | 3.26.4          | 3.11.3        |
+| 16.0.0 - 16.0.6 | 7.0 - 12.1.1 | 8.0.5  - 8.9.2 | 2017.15.9.55, 2019.16.11.27, 2022.17.6.4 | 3.26.4          | 3.11.4        |
+| 17.0.0git       | 7.0 - 12.1.1 | 8.0.5  - 8.9.2 | 2017.15.9.55, 2019.16.11.27, 2022.17.6.4 | 3.26.4          | 3.11.4        |
 
 *Building with testing support by `Visual Studio 17 2022` on `Windows 10`:*
 
@@ -603,7 +603,7 @@ cmake
 --    - CMake module path: d:/LLVM/16.0.6/dist/lib/cmake/llvm
 --    - Include path     : d:/LLVM/16.0.6/dist/include
 --    - Binary path      : d:/LLVM/16.0.6/dist/bin
--- Found PythonInterp: c:/Program Files/Python311/python.exe (found suitable version "3.11.3", minimum required is "3.6")
+-- Found PythonInterp: c:/Program Files/Python311/python.exe (found suitable version "3.11.4", minimum required is "3.6")
 -- Found lit: c:/Program Files/Python311/Scripts/lit.exe
 -- Found FileCheck: d:/LLVM/16.0.6/dist/bin/FileCheck.exe
 -- Found CUDA: c:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.1 (found version "12.1")
