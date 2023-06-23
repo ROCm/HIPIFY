@@ -606,10 +606,10 @@
 
 |**CUDA**|**A**|**D**|**R**|**ROC**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
-|`cusparseCcsrcolor`| | | | | | | | |
-|`cusparseDcsrcolor`| | | | | | | | |
-|`cusparseScsrcolor`| | | | | | | | |
-|`cusparseZcsrcolor`| | | | | | | | |
+|`cusparseCcsrcolor`| | | |`rocsparse_ccsrcolor`|4.5.0| | | |
+|`cusparseDcsrcolor`| | | |`rocsparse_dcsrcolor`|4.5.0| | | |
+|`cusparseScsrcolor`| | | |`rocsparse_scsrcolor`|4.5.0| | | |
+|`cusparseZcsrcolor`| | | |`rocsparse_zcsrcolor`|4.5.0| | | |
 
 ## **14. CUSPARSE Format Conversion Reference**
 
@@ -636,8 +636,8 @@
 |`cusparseCgebsr2gebsc`| | | | | | | | |
 |`cusparseCgebsr2gebsc_bufferSize`| | | | | | | | |
 |`cusparseCgebsr2gebsc_bufferSizeExt`| | | | | | | | |
-|`cusparseCgebsr2gebsr`| | | | | | | | |
-|`cusparseCgebsr2gebsr_bufferSize`| | | | | | | | |
+|`cusparseCgebsr2gebsr`| | | |`rocsparse_cgebsr2gebsr`|4.1.0| | | |
+|`cusparseCgebsr2gebsr_bufferSize`| | | |`rocsparse_cgebsr2gebsr_buffer_size`|4.1.0| | | |
 |`cusparseCgebsr2gebsr_bufferSizeExt`| | | | | | | | |
 |`cusparseChyb2csc`| |10.2|11.0| | | | | |
 |`cusparseChyb2csr`| |10.2|11.0| | | | | |
@@ -671,8 +671,8 @@
 |`cusparseDgebsr2gebsc`| | | | | | | | |
 |`cusparseDgebsr2gebsc_bufferSize`| | | | | | | | |
 |`cusparseDgebsr2gebsc_bufferSizeExt`| | | | | | | | |
-|`cusparseDgebsr2gebsr`| | | | | | | | |
-|`cusparseDgebsr2gebsr_bufferSize`| | | | | | | | |
+|`cusparseDgebsr2gebsr`| | | |`rocsparse_dgebsr2gebsr`|4.1.0| | | |
+|`cusparseDgebsr2gebsr_bufferSize`| | | |`rocsparse_dgebsr2gebsr_buffer_size`|4.1.0| | | |
 |`cusparseDgebsr2gebsr_bufferSizeExt`| | | | | | | | |
 |`cusparseDhyb2csc`| |10.2|11.0| | | | | |
 |`cusparseDhyb2csr`| |10.2|11.0| | | | | |
@@ -724,8 +724,8 @@
 |`cusparseSgebsr2gebsc`| | | | | | | | |
 |`cusparseSgebsr2gebsc_bufferSize`| | | | | | | | |
 |`cusparseSgebsr2gebsc_bufferSizeExt`| | | | | | | | |
-|`cusparseSgebsr2gebsr`| | | | | | | | |
-|`cusparseSgebsr2gebsr_bufferSize`| | | | | | | | |
+|`cusparseSgebsr2gebsr`| | | |`rocsparse_sgebsr2gebsr`|4.1.0| | | |
+|`cusparseSgebsr2gebsr_bufferSize`| | | |`rocsparse_sgebsr2gebsr_buffer_size`|4.1.0| | | |
 |`cusparseSgebsr2gebsr_bufferSizeExt`| | | | | | | | |
 |`cusparseShyb2csc`| |10.2|11.0| | | | | |
 |`cusparseShyb2csr`| |10.2|11.0| | | | | |
@@ -778,8 +778,8 @@
 |`cusparseZgebsr2gebsc`| | | | | | | | |
 |`cusparseZgebsr2gebsc_bufferSize`| | | | | | | | |
 |`cusparseZgebsr2gebsc_bufferSizeExt`| | | | | | | | |
-|`cusparseZgebsr2gebsr`| | | | | | | | |
-|`cusparseZgebsr2gebsr_bufferSize`| | | | | | | | |
+|`cusparseZgebsr2gebsr`| | | |`rocsparse_zgebsr2gebsr`|4.1.0| | | |
+|`cusparseZgebsr2gebsr_bufferSize`| | | |`rocsparse_zgebsr2gebsr_buffer_size`|4.1.0| | | |
 |`cusparseZgebsr2gebsr_bufferSizeExt`| | | | | | | | |
 |`cusparseZhyb2csc`| |10.2|11.0| | | | | |
 |`cusparseZhyb2csr`| |10.2|11.0| | | | | |
@@ -791,7 +791,7 @@
 
 |**CUDA**|**A**|**D**|**R**|**ROC**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
-|`cusparseAxpby`|11.0| | | | | | | |
+|`cusparseAxpby`|11.0| | |`rocsparse_axpby`|4.1.0| | | |
 |`cusparseBlockedEllGet`|11.2| | |`rocsparse_bell_get`|4.1.0| | | |
 |`cusparseBsrSetStridedBatch`|12.1| | | | | | | |
 |`cusparseConstBlockedEllGet`|12.0| | | | | | | |
@@ -850,12 +850,12 @@
 |`cusparseDnVecGet`|10.2| | |`rocsparse_dnvec_get`|4.1.0| | | |
 |`cusparseDnVecGetValues`|10.2| | |`rocsparse_dnvec_get_values`|4.1.0| | | |
 |`cusparseDnVecSetValues`|10.2| | |`rocsparse_dnvec_set_values`|4.1.0| | | |
-|`cusparseGather`|11.0| | | | | | | |
-|`cusparseRot`|11.0| | | | | | | |
-|`cusparseSDDMM`|11.2| | | | | | | |
-|`cusparseSDDMM_bufferSize`|11.2| | | | | | | |
-|`cusparseSDDMM_preprocess`|11.2| | | | | | | |
-|`cusparseScatter`|11.0| | | | | | | |
+|`cusparseGather`|11.0| | |`rocsparse_gather`|4.1.0| | | |
+|`cusparseRot`|11.0| | |`rocsparse_rot`|4.1.0| | | |
+|`cusparseSDDMM`|11.2| | |`rocsparse_sddmm`|4.3.0| | | |
+|`cusparseSDDMM_bufferSize`|11.2| | |`rocsparse_sddmm_buffer_size`|4.3.0| | | |
+|`cusparseSDDMM_preprocess`|11.2| | |`rocsparse_sddmm_preprocess`|4.3.0| | | |
+|`cusparseScatter`|11.0| | |`rocsparse_scatter`|4.1.0| | | |
 |`cusparseSpGEMM_compute`|11.0| | | | | | | |
 |`cusparseSpGEMM_copy`|11.0| | | | | | | |
 |`cusparseSpGEMM_createDescr`|11.0| | | | | | | |
@@ -873,7 +873,7 @@
 |`cusparseSpMMOp_destroyPlan`|11.5| | | | | | | |
 |`cusparseSpMM_bufferSize`|10.1| | | | | | | |
 |`cusparseSpMM_preprocess`|11.2| | | | | | | |
-|`cusparseSpMV`|10.2| | | | | | | |
+|`cusparseSpMV`|10.2| | |`rocsparse_spmv`|4.1.0| | | |
 |`cusparseSpMV_bufferSize`|10.2| | | | | | | |
 |`cusparseSpMatGetAttribute`|11.3| | |`rocsparse_spmat_get_attribute`|4.5.0| | | |
 |`cusparseSpMatGetFormat`|10.1| | |`rocsparse_spmat_get_format`|4.1.0| | | |

@@ -606,10 +606,10 @@
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|**ROC**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
-|`cusparseCcsrcolor`| | | |`hipsparseCcsrcolor`|4.5.0| | | | | | | | |
-|`cusparseDcsrcolor`| | | |`hipsparseDcsrcolor`|4.5.0| | | | | | | | |
-|`cusparseScsrcolor`| | | |`hipsparseScsrcolor`|4.5.0| | | | | | | | |
-|`cusparseZcsrcolor`| | | |`hipsparseZcsrcolor`|4.5.0| | | | | | | | |
+|`cusparseCcsrcolor`| | | |`hipsparseCcsrcolor`|4.5.0| | | |`rocsparse_ccsrcolor`|4.5.0| | | |
+|`cusparseDcsrcolor`| | | |`hipsparseDcsrcolor`|4.5.0| | | |`rocsparse_dcsrcolor`|4.5.0| | | |
+|`cusparseScsrcolor`| | | |`hipsparseScsrcolor`|4.5.0| | | |`rocsparse_scsrcolor`|4.5.0| | | |
+|`cusparseZcsrcolor`| | | |`hipsparseZcsrcolor`|4.5.0| | | |`rocsparse_zcsrcolor`|4.5.0| | | |
 
 ## **14. CUSPARSE Format Conversion Reference**
 
@@ -636,8 +636,8 @@
 |`cusparseCgebsr2gebsc`| | | |`hipsparseCgebsr2gebsc`|4.1.0| | | | | | | | |
 |`cusparseCgebsr2gebsc_bufferSize`| | | |`hipsparseCgebsr2gebsc_bufferSize`|4.1.0| | | | | | | | |
 |`cusparseCgebsr2gebsc_bufferSizeExt`| | | | | | | | | | | | | |
-|`cusparseCgebsr2gebsr`| | | |`hipsparseCgebsr2gebsr`|4.1.0| | | | | | | | |
-|`cusparseCgebsr2gebsr_bufferSize`| | | |`hipsparseCgebsr2gebsr_bufferSize`|4.1.0| | | | | | | | |
+|`cusparseCgebsr2gebsr`| | | |`hipsparseCgebsr2gebsr`|4.1.0| | | |`rocsparse_cgebsr2gebsr`|4.1.0| | | |
+|`cusparseCgebsr2gebsr_bufferSize`| | | |`hipsparseCgebsr2gebsr_bufferSize`|4.1.0| | | |`rocsparse_cgebsr2gebsr_buffer_size`|4.1.0| | | |
 |`cusparseCgebsr2gebsr_bufferSizeExt`| | | | | | | | | | | | | |
 |`cusparseChyb2csc`| |10.2|11.0| | | | | | | | | | |
 |`cusparseChyb2csr`| |10.2|11.0|`hipsparseChyb2csr`|3.1.0| | | | | | | | |
@@ -671,8 +671,8 @@
 |`cusparseDgebsr2gebsc`| | | |`hipsparseDgebsr2gebsc`|4.1.0| | | | | | | | |
 |`cusparseDgebsr2gebsc_bufferSize`| | | |`hipsparseDgebsr2gebsc_bufferSize`|4.1.0| | | | | | | | |
 |`cusparseDgebsr2gebsc_bufferSizeExt`| | | | | | | | | | | | | |
-|`cusparseDgebsr2gebsr`| | | |`hipsparseDgebsr2gebsr`|4.1.0| | | | | | | | |
-|`cusparseDgebsr2gebsr_bufferSize`| | | |`hipsparseDgebsr2gebsr_bufferSize`|4.1.0| | | | | | | | |
+|`cusparseDgebsr2gebsr`| | | |`hipsparseDgebsr2gebsr`|4.1.0| | | |`rocsparse_dgebsr2gebsr`|4.1.0| | | |
+|`cusparseDgebsr2gebsr_bufferSize`| | | |`hipsparseDgebsr2gebsr_bufferSize`|4.1.0| | | |`rocsparse_dgebsr2gebsr_buffer_size`|4.1.0| | | |
 |`cusparseDgebsr2gebsr_bufferSizeExt`| | | | | | | | | | | | | |
 |`cusparseDhyb2csc`| |10.2|11.0| | | | | | | | | | |
 |`cusparseDhyb2csr`| |10.2|11.0|`hipsparseDhyb2csr`|3.1.0| | | | | | | | |
@@ -724,8 +724,8 @@
 |`cusparseSgebsr2gebsc`| | | |`hipsparseSgebsr2gebsc`|4.1.0| | | | | | | | |
 |`cusparseSgebsr2gebsc_bufferSize`| | | |`hipsparseSgebsr2gebsc_bufferSize`|4.1.0| | | | | | | | |
 |`cusparseSgebsr2gebsc_bufferSizeExt`| | | | | | | | | | | | | |
-|`cusparseSgebsr2gebsr`| | | |`hipsparseSgebsr2gebsr`|4.1.0| | | | | | | | |
-|`cusparseSgebsr2gebsr_bufferSize`| | | |`hipsparseSgebsr2gebsr_bufferSize`|4.1.0| | | | | | | | |
+|`cusparseSgebsr2gebsr`| | | |`hipsparseSgebsr2gebsr`|4.1.0| | | |`rocsparse_sgebsr2gebsr`|4.1.0| | | |
+|`cusparseSgebsr2gebsr_bufferSize`| | | |`hipsparseSgebsr2gebsr_bufferSize`|4.1.0| | | |`rocsparse_sgebsr2gebsr_buffer_size`|4.1.0| | | |
 |`cusparseSgebsr2gebsr_bufferSizeExt`| | | | | | | | | | | | | |
 |`cusparseShyb2csc`| |10.2|11.0| | | | | | | | | | |
 |`cusparseShyb2csr`| |10.2|11.0|`hipsparseShyb2csr`|3.1.0| | | | | | | | |
@@ -778,8 +778,8 @@
 |`cusparseZgebsr2gebsc`| | | |`hipsparseZgebsr2gebsc`|4.1.0| | | | | | | | |
 |`cusparseZgebsr2gebsc_bufferSize`| | | |`hipsparseZgebsr2gebsc_bufferSize`|4.1.0| | | | | | | | |
 |`cusparseZgebsr2gebsc_bufferSizeExt`| | | | | | | | | | | | | |
-|`cusparseZgebsr2gebsr`| | | |`hipsparseZgebsr2gebsr`|4.1.0| | | | | | | | |
-|`cusparseZgebsr2gebsr_bufferSize`| | | |`hipsparseZgebsr2gebsr_bufferSize`|4.1.0| | | | | | | | |
+|`cusparseZgebsr2gebsr`| | | |`hipsparseZgebsr2gebsr`|4.1.0| | | |`rocsparse_zgebsr2gebsr`|4.1.0| | | |
+|`cusparseZgebsr2gebsr_bufferSize`| | | |`hipsparseZgebsr2gebsr_bufferSize`|4.1.0| | | |`rocsparse_zgebsr2gebsr_buffer_size`|4.1.0| | | |
 |`cusparseZgebsr2gebsr_bufferSizeExt`| | | | | | | | | | | | | |
 |`cusparseZhyb2csc`| |10.2|11.0| | | | | | | | | | |
 |`cusparseZhyb2csr`| |10.2|11.0|`hipsparseZhyb2csr`|3.1.0| | | | | | | | |
@@ -791,7 +791,7 @@
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|**ROC**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
-|`cusparseAxpby`|11.0| | |`hipsparseAxpby`|4.1.0| | | | | | | | |
+|`cusparseAxpby`|11.0| | |`hipsparseAxpby`|4.1.0| | | |`rocsparse_axpby`|4.1.0| | | |
 |`cusparseBlockedEllGet`|11.2| | |`hipsparseBlockedEllGet`|4.5.0| | | |`rocsparse_bell_get`|4.1.0| | | |
 |`cusparseBsrSetStridedBatch`|12.1| | | | | | | | | | | | |
 |`cusparseConstBlockedEllGet`|12.0| | | | | | | | | | | | |
@@ -850,12 +850,12 @@
 |`cusparseDnVecGet`|10.2| | |`hipsparseDnVecGet`|4.1.0| | | |`rocsparse_dnvec_get`|4.1.0| | | |
 |`cusparseDnVecGetValues`|10.2| | |`hipsparseDnVecGetValues`|4.1.0| | | |`rocsparse_dnvec_get_values`|4.1.0| | | |
 |`cusparseDnVecSetValues`|10.2| | |`hipsparseDnVecSetValues`|4.1.0| | | |`rocsparse_dnvec_set_values`|4.1.0| | | |
-|`cusparseGather`|11.0| | |`hipsparseGather`|4.1.0| | | | | | | | |
-|`cusparseRot`|11.0| | |`hipsparseRot`|4.1.0| | | | | | | | |
-|`cusparseSDDMM`|11.2| | |`hipsparseSDDMM`|4.3.0| | | | | | | | |
-|`cusparseSDDMM_bufferSize`|11.2| | |`hipsparseSDDMM_bufferSize`|4.3.0| | | | | | | | |
-|`cusparseSDDMM_preprocess`|11.2| | |`hipsparseSDDMM_preprocess`|4.3.0| | | | | | | | |
-|`cusparseScatter`|11.0| | |`hipsparseScatter`|4.1.0| | | | | | | | |
+|`cusparseGather`|11.0| | |`hipsparseGather`|4.1.0| | | |`rocsparse_gather`|4.1.0| | | |
+|`cusparseRot`|11.0| | |`hipsparseRot`|4.1.0| | | |`rocsparse_rot`|4.1.0| | | |
+|`cusparseSDDMM`|11.2| | |`hipsparseSDDMM`|4.3.0| | | |`rocsparse_sddmm`|4.3.0| | | |
+|`cusparseSDDMM_bufferSize`|11.2| | |`hipsparseSDDMM_bufferSize`|4.3.0| | | |`rocsparse_sddmm_buffer_size`|4.3.0| | | |
+|`cusparseSDDMM_preprocess`|11.2| | |`hipsparseSDDMM_preprocess`|4.3.0| | | |`rocsparse_sddmm_preprocess`|4.3.0| | | |
+|`cusparseScatter`|11.0| | |`hipsparseScatter`|4.1.0| | | |`rocsparse_scatter`|4.1.0| | | |
 |`cusparseSpGEMM_compute`|11.0| | |`hipsparseSpGEMM_compute`|4.1.0| | | | | | | | |
 |`cusparseSpGEMM_copy`|11.0| | |`hipsparseSpGEMM_copy`|4.1.0| | | | | | | | |
 |`cusparseSpGEMM_createDescr`|11.0| | |`hipsparseSpGEMM_createDescr`|4.1.0| | | | | | | | |
@@ -873,7 +873,7 @@
 |`cusparseSpMMOp_destroyPlan`|11.5| | | | | | | | | | | | |
 |`cusparseSpMM_bufferSize`|10.1| | |`hipsparseSpMM_bufferSize`|4.2.0| | | | | | | | |
 |`cusparseSpMM_preprocess`|11.2| | |`hipsparseSpMM_preprocess`|4.5.0| | | | | | | | |
-|`cusparseSpMV`|10.2| | |`hipsparseSpMV`|4.1.0| | | | | | | | |
+|`cusparseSpMV`|10.2| | |`hipsparseSpMV`|4.1.0| | | |`rocsparse_spmv`|4.1.0| | | |
 |`cusparseSpMV_bufferSize`|10.2| | |`hipsparseSpMV_bufferSize`|4.1.0| | | | | | | | |
 |`cusparseSpMatGetAttribute`|11.3| | |`hipsparseSpMatGetAttribute`|4.5.0| | | |`rocsparse_spmat_get_attribute`|4.5.0| | | |
 |`cusparseSpMatGetFormat`|10.1| | |`hipsparseSpMatGetFormat`|4.1.0| | | |`rocsparse_spmat_get_format`|4.1.0| | | |
