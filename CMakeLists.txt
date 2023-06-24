@@ -136,7 +136,7 @@ install(
     PATTERN "*.sh")
 # install all folders under clang/version/ in CMAKE_INSTALL_PREFIX path
 install(
-    DIRECTORY ${LLVM_DIR}/../../clang/${LLVM_VERSION_MAJOR}.${LLVM_VERSION_MINOR}.${LLVM_VERSION_PATCH}/
+    DIRECTORY ${LLVM_DIR}/../../clang/${LIB_CLANG_RES}/
     DESTINATION .
     COMPONENT clang-resource-headers
     FILES_MATCHING
