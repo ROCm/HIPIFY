@@ -1480,6 +1480,7 @@ sub rocSubstitutions {
     subst("cusparseAxpby", "rocsparse_axpby", "library");
     subst("cusparseBlockedEllGet", "rocsparse_bell_get", "library");
     subst("cusparseCcsrcolor", "rocsparse_ccsrcolor", "library");
+    subst("cusparseCgebsr2csr", "rocsparse_cgebsr2csr", "library");
     subst("cusparseCgebsr2gebsr", "rocsparse_cgebsr2gebsr", "library");
     subst("cusparseCgebsr2gebsr_bufferSize", "rocsparse_cgebsr2gebsr_buffer_size", "library");
     subst("cusparseCooAoSGet", "rocsparse_coo_aos_get", "library");
@@ -1512,6 +1513,7 @@ sub rocSubstitutions {
     subst("cusparseDestroyMatDescr", "rocsparse_destroy_mat_descr", "library");
     subst("cusparseDestroySpMat", "rocsparse_destroy_spmat_descr", "library");
     subst("cusparseDestroySpVec", "rocsparse_destroy_spvec_descr", "library");
+    subst("cusparseDgebsr2csr", "rocsparse_dgebsr2csr", "library");
     subst("cusparseDgebsr2gebsr", "rocsparse_dgebsr2gebsr", "library");
     subst("cusparseDgebsr2gebsr_bufferSize", "rocsparse_dgebsr2gebsr_buffer_size", "library");
     subst("cusparseDnMatGet", "rocsparse_dnmat_get", "library");
@@ -1542,6 +1544,7 @@ sub rocSubstitutions {
     subst("cusparseSetMatType", "rocsparse_set_mat_type", "library");
     subst("cusparseSetPointerMode", "rocsparse_set_pointer_mode", "library");
     subst("cusparseSetStream", "rocsparse_set_stream", "library");
+    subst("cusparseSgebsr2csr", "rocsparse_sgebsr2csr", "library");
     subst("cusparseSgebsr2gebsr", "rocsparse_sgebsr2gebsr", "library");
     subst("cusparseSgebsr2gebsr_bufferSize", "rocsparse_sgebsr2gebsr_buffer_size", "library");
     subst("cusparseSpMV", "rocsparse_spmv", "library");
@@ -1558,7 +1561,9 @@ sub rocSubstitutions {
     subst("cusparseSpVecGetIndexBase", "rocsparse_spvec_get_index_base", "library");
     subst("cusparseSpVecGetValues", "rocsparse_spvec_get_values", "library");
     subst("cusparseSpVecSetValues", "rocsparse_spvec_set_values", "library");
+    subst("cusparseXgebsr2gebsrNnz", "rocsparse_gebsr2gebsr_nnz", "library");
     subst("cusparseZcsrcolor", "rocsparse_zcsrcolor", "library");
+    subst("cusparseZgebsr2csr", "rocsparse_zgebsr2csr", "library");
     subst("cusparseZgebsr2gebsr", "rocsparse_zgebsr2gebsr", "library");
     subst("cusparseZgebsr2gebsr_bufferSize", "rocsparse_zgebsr2gebsr_buffer_size", "library");
     subst("cublas.h", "rocblas.h", "include_cuda_main_header");
