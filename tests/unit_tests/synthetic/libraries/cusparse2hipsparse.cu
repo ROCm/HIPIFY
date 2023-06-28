@@ -15,8 +15,8 @@ int main() {
   // CHECK: hipsparseHandle_t handle_t;
   cusparseHandle_t handle_t;
 
-  // CHECK: hipsparseMatDescr_t matDescr_t, matDescr_t_2, matDescr_C;
-  cusparseMatDescr_t matDescr_t, matDescr_t_2, matDescr_C;
+  // CHECK: hipsparseMatDescr_t matDescr_t, matDescr_t_2, matDescr_A, matDescr_C;
+  cusparseMatDescr_t matDescr_t, matDescr_t_2, matDescr_A, matDescr_C;
 
   // CHECK: hipsparseColorInfo_t colorInfo_t;
   cusparseColorInfo_t colorInfo_t;
@@ -130,8 +130,10 @@ int main() {
   int reordering = 0;
   int bsrRowPtrA = 0;
   int bsrRowPtrC = 0;
+  int csrRowPtrC = 0;
   int bsrColIndA = 0;
   int bsrColIndC = 0;
+  int csrColIndC = 0;
   int rowBlockDimA = 0;
   int colBlockDimA = 0;
   int rowBlockDimC = 0;
@@ -139,6 +141,7 @@ int main() {
   int bsrSortedRowPtrC = 0;
   int bsrSortedColIndC = 0;
   int bufferSizeInBytes = 0;
+  int nnzTotalDevHostPtr = 0;
   int64_t size = 0;
   int64_t nnz = 0;
   int64_t rows = 0;
@@ -174,18 +177,21 @@ int main() {
   size_t bufferSize = 0;
   double dfractionToColor = 0.f;
   float ffractionToColor = 0.f;
+  double bsrValA = 0.f;
   double csrValA = 0.f;
+  double csrValC = 0.f;
   float csrSortedValA = 0.f;
   double dbsrSortedValA = 0.f;
   double dbsrSortedValC = 0.f;
   float fbsrSortedValA = 0.f;
   float fbsrSortedValC = 0.f;
+  float fcsrSortedValC = 0.f;
 
-  // CHECK: hipDoubleComplex dcomplex, dComplexbsrSortedValC;
-  cuDoubleComplex dcomplex, dComplexbsrSortedValC;
+  // CHECK: hipDoubleComplex dcomplex, dComplexbsrSortedValA, dComplexbsrSortedValC;
+  cuDoubleComplex dcomplex, dComplexbsrSortedValA, dComplexbsrSortedValC;
 
-  // CHECK: hipComplex complex, complexbsrSortedValC;
-  cuComplex complex, complexbsrSortedValC;
+  // CHECK: hipComplex complex, complexbsrValA, complexbsrSortedValC;
+  cuComplex complex, complexbsrValA, complexbsrSortedValC;
 
   // CHECK: hipsparseOperation_t opA, opB;
   cusparseOperation_t opA, opB;
@@ -344,6 +350,31 @@ int main() {
   // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSgebsr2gebsr_bufferSize(hipsparseHandle_t handle, hipsparseDirection_t dirA, int mb, int nb, int nnzb, const hipsparseMatDescr_t descrA, const float* bsrValA, const int* bsrRowPtrA, const int* bsrColIndA, int rowBlockDimA, int colBlockDimA, int rowBlockDimC, int colBlockDimC, int* bufferSize);
   // CHECK: status_t = hipsparseSgebsr2gebsr_bufferSize(handle_t, direction_t, mb, nb, nnzb, matDescr_t, &fbsrSortedValA, &bsrRowPtrA, &bsrColIndA, rowBlockDimA, colBlockDimA, rowBlockDimC, colBlockDimC, &bufferSizeInBytes);
   status_t = cusparseSgebsr2gebsr_bufferSize(handle_t, direction_t, mb, nb, nnzb, matDescr_t, &fbsrSortedValA, &bsrRowPtrA, &bsrColIndA, rowBlockDimA, colBlockDimA, rowBlockDimC, colBlockDimC, &bufferSizeInBytes);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseXgebsr2gebsrNnz(cusparseHandle_t handle, cusparseDirection_t dirA, int mb, int nb, int nnzb, const cusparseMatDescr_t descrA, const int* bsrSortedRowPtrA, const int* bsrSortedColIndA, int rowBlockDimA, int colBlockDimA, const cusparseMatDescr_t descrC, int* bsrSortedRowPtrC, int rowBlockDimC, int colBlockDimC, int* nnzTotalDevHostPtr, void* pBuffer);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseXgebsr2gebsrNnz(hipsparseHandle_t handle, hipsparseDirection_t dirA, int mb, int nb, int nnzb, const hipsparseMatDescr_t descrA, const int* bsrRowPtrA, const int* bsrColIndA, int rowBlockDimA, int colBlockDimA, const hipsparseMatDescr_t descrC, int* bsrRowPtrC, int rowBlockDimC, int colBlockDimC, int* nnzTotalDevHostPtr, void* buffer);
+  // CHECK: status_t = hipsparseXgebsr2gebsrNnz(handle_t, direction_t, mb, nb, nnzb, matDescr_t, &bsrRowPtrA, &bsrColIndA, rowBlockDimA, colBlockDimA, matDescr_C, &bsrSortedRowPtrC,  rowBlockDimC, colBlockDimC, &nnzTotalDevHostPtr, &tempBuffer);
+  status_t = cusparseXgebsr2gebsrNnz(handle_t, direction_t, mb, nb, nnzb, matDescr_t, &bsrRowPtrA, &bsrColIndA, rowBlockDimA, colBlockDimA, matDescr_C, &bsrSortedRowPtrC,  rowBlockDimC, colBlockDimC, &nnzTotalDevHostPtr, &tempBuffer);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseZgebsr2csr(cusparseHandle_t handle, cusparseDirection_t dirA, int mb, int nb, const cusparseMatDescr_t descrA, const cuDoubleComplex* bsrSortedValA, const int* bsrSortedRowPtrA, const int* bsrSortedColIndA, int rowBlockDim, int colBlockDim, const cusparseMatDescr_t descrC, cuDoubleComplex* csrSortedValC, int* csrSortedRowPtrC, int* csrSortedColIndC);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseZgebsr2csr(hipsparseHandle_t handle, hipsparseDirection_t dirA, int mb, int nb, const hipsparseMatDescr_t descrA, const hipDoubleComplex* bsrValA, const int* bsrRowPtrA, const int* bsrColIndA, int rowBlockDim, int colBlockDim, const hipsparseMatDescr_t descrC, hipDoubleComplex* csrValC, int* csrRowPtrC, int* csrColIndC);
+  // CHECK: status_t = hipsparseZgebsr2csr(handle_t, direction_t, mb, nb, matDescr_A, &dComplexbsrSortedValA, &bsrRowPtrA, &bsrColIndA, rowBlockDimA, colBlockDimA, matDescr_C, &dComplexbsrSortedValC, &csrRowPtrC, &csrColIndC);
+  status_t = cusparseZgebsr2csr(handle_t, direction_t, mb, nb, matDescr_A, &dComplexbsrSortedValA, &bsrRowPtrA, &bsrColIndA, rowBlockDimA, colBlockDimA, matDescr_C, &dComplexbsrSortedValC, &csrRowPtrC, &csrColIndC);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCgebsr2csr(cusparseHandle_t handle, cusparseDirection_t dirA, int mb, int nb, const cusparseMatDescr_t descrA, const cuComplex* bsrSortedValA, const int* bsrSortedRowPtrA, const int* bsrSortedColIndA, int rowBlockDim, int colBlockDim, const cusparseMatDescr_t descrC, cuComplex* csrSortedValC, int* csrSortedRowPtrC, int* csrSortedColIndC);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseCgebsr2csr(hipsparseHandle_t handle, hipsparseDirection_t dirA, int mb, int nb, const hipsparseMatDescr_t descrA, const hipComplex* bsrValA, const int* bsrRowPtrA, const int* bsrColIndA, int rowBlockDim, int colBlockDim, const hipsparseMatDescr_t descrC, hipComplex* csrValC, int* csrRowPtrC, int* csrColIndC);
+  // CHECK: status_t = hipsparseCgebsr2csr(handle_t, direction_t, mb, nb, matDescr_A, &complexbsrValA, &bsrRowPtrA, &bsrColIndA, rowBlockDimA, colBlockDimA, matDescr_C, &complexbsrSortedValC, &csrRowPtrC, &csrColIndC);
+  status_t = cusparseCgebsr2csr(handle_t, direction_t, mb, nb, matDescr_A, &complexbsrValA, &bsrRowPtrA, &bsrColIndA, rowBlockDimA, colBlockDimA, matDescr_C, &complexbsrSortedValC, &csrRowPtrC, &csrColIndC);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDgebsr2csr(cusparseHandle_t handle, cusparseDirection_t dirA, int mb, int nb, const cusparseMatDescr_t descrA, const double* bsrSortedValA, const int* bsrSortedRowPtrA, const int* bsrSortedColIndA, int rowBlockDim, int colBlockDim, const cusparseMatDescr_t descrC, double* csrSortedValC, int* csrSortedRowPtrC, int* csrSortedColIndC);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDgebsr2csr(hipsparseHandle_t handle, hipsparseDirection_t dirA, int mb, int nb, const hipsparseMatDescr_t descrA, const double* bsrValA, const int* bsrRowPtrA, const int* bsrColIndA, int rowBlockDim, int colBlockDim, const hipsparseMatDescr_t descrC, double* csrValC, int* csrRowPtrC, int* csrColIndC);
+  // CHECK: status_t = hipsparseDgebsr2csr(handle_t, direction_t, mb, nb, matDescr_A, &bsrValA, &bsrRowPtrA, &bsrColIndA, rowBlockDimA, colBlockDimA, matDescr_C, &csrValC, &csrRowPtrC, &csrColIndC);
+  status_t = cusparseDgebsr2csr(handle_t, direction_t, mb, nb, matDescr_A, &bsrValA, &bsrRowPtrA, &bsrColIndA, rowBlockDimA, colBlockDimA, matDescr_C, &csrValC, &csrRowPtrC, &csrColIndC);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSgebsr2csr(cusparseHandle_t handle, cusparseDirection_t dirA, int mb, int nb, const cusparseMatDescr_t descrA, const float* bsrSortedValA, const int* bsrSortedRowPtrA, const int* bsrSortedColIndA, int rowBlockDim, int colBlockDim, const cusparseMatDescr_t descrC, float* csrSortedValC, int* csrSortedRowPtrC, int* csrSortedColIndC);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSgebsr2csr(hipsparseHandle_t handle, hipsparseDirection_t dirA, int mb, int nb, const hipsparseMatDescr_t descrA, const float* bsrValA, const int* bsrRowPtrA, const int* bsrColIndA, int rowBlockDim, int colBlockDim, const hipsparseMatDescr_t descrC, float* csrValC, int* csrRowPtrC, int* csrColIndC);
+  // CHECK: status_t = hipsparseSgebsr2csr(handle_t, direction_t, mb, nb, matDescr_A, &fbsrSortedValA, &bsrRowPtrA, &bsrColIndA, rowBlockDimA, colBlockDimA, matDescr_C, &fcsrSortedValC, &csrRowPtrC, &csrColIndC);
+  status_t = cusparseSgebsr2csr(handle_t, direction_t, mb, nb, matDescr_A, &fbsrSortedValA, &bsrRowPtrA, &bsrColIndA, rowBlockDimA, colBlockDimA, matDescr_C, &fcsrSortedValC, &csrRowPtrC, &csrColIndC);
 
 #if CUDA_VERSION >= 8000
   // CHECK: hipDataType dataType_t;
