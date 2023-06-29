@@ -821,16 +821,14 @@ int main() {
   status_t = cusparseSpMatSetAttribute(spMatDescr_t, spMatAttribute_t, &data, dataSize);
 #endif
 
-#if CUDA_VERSION >= 12010
+#if CUDA_VERSION >= 12010 && CUSPARSE_VERSION >= 12100
+  // CHECK: rocsparse_spmv_alg SPMV_SELL_ALG1 = rocsparse_spmv_alg_ell;
+  cusparseSpMVAlg_t SPMV_SELL_ALG1 = CUSPARSE_SPMV_SELL_ALG1;
+
   // CHECK: rocsparse_format FORMAT_BSR = rocsparse_format_bsr;
   // CHECK-NEXT: rocsparse_format FORMAT_SLICED_ELLPACK = rocsparse_format_ell;
   cusparseFormat_t FORMAT_BSR = CUSPARSE_FORMAT_BSR;
   cusparseFormat_t FORMAT_SLICED_ELLPACK = CUSPARSE_FORMAT_SLICED_ELLPACK;
-#endif
-
-#if CUDA_VERSION >= 12010 && CUSPARSE_VERSION >= 12100
-  // CHECK: rocsparse_spmv_alg SPMV_SELL_ALG1 = rocsparse_spmv_alg_ell;
-  cusparseSpMVAlg_t SPMV_SELL_ALG1 = CUSPARSE_SPMV_SELL_ALG1;
 #endif
 
   return 0;
