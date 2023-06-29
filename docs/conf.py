@@ -6,6 +6,8 @@
 
 from rocm_docs import ROCmDocs
 
+external_projects_current_project = "hipify"
+
 docs_core = ROCmDocs("HIPIFY Documentation")
 docs_core.setup()
 
