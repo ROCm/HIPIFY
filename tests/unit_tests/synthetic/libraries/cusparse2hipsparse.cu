@@ -736,7 +736,7 @@ int main() {
   status_t = cusparseDestroyHybMat(hybMat_t);
 #endif
 
-#if CUDA_VERSION >= 11010
+#if CUDA_VERSION >= 11010 && CUSPARSE_VERSION >= 11300
   // CHECK: hipsparseSparseToDenseAlg_t sparseToDenseAlg_t;
   // CHECK-NEXT: hipsparseSparseToDenseAlg_t SPARSETODENSE_ALG_DEFAULT = HIPSPARSE_SPARSETODENSE_ALG_DEFAULT;
   cusparseSparseToDenseAlg_t sparseToDenseAlg_t;
