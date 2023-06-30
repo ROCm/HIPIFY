@@ -763,7 +763,7 @@ int main() {
   status_t = cusparseCscSetPointers(spMatDescr_t, cscColOffsets, cscRowInd, cscValues);
 #endif
 
-#if CUDA_VERSION >= 11020
+#if CUDA_VERSION >= 11020 && CUSPARSE_VERSION >= 11400
   // CHECK: hipsparseFormat_t FORMAT_BLOCKED_ELL = HIPSPARSE_FORMAT_BLOCKED_ELL;
   cusparseFormat_t FORMAT_BLOCKED_ELL = CUSPARSE_FORMAT_BLOCKED_ELL;
 

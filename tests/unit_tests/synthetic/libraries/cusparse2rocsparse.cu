@@ -741,7 +741,7 @@ int main() {
   status_t = cusparseCscSetPointers(spMatDescr_t, cscColOffsets, cscRowInd, cscValues);
 #endif
 
-#if CUDA_VERSION >= 11020
+#if CUDA_VERSION >= 11020 && CUSPARSE_VERSION >= 11400
   // CHECK: rocsparse_format FORMAT_BLOCKED_ELL = rocsparse_format_bell;
   cusparseFormat_t FORMAT_BLOCKED_ELL = CUSPARSE_FORMAT_BLOCKED_ELL;
 
