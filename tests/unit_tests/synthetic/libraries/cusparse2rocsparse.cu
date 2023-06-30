@@ -714,7 +714,7 @@ int main() {
   status_t = cusparseAxpby(handle_t, alpha, spVecDescr_t, beta, vecY);
 #endif
 
-#if CUDA_VERSION >= 11010
+#if CUDA_VERSION >= 11010 && CUSPARSE_VERSION >= 11300
   // CHECK: rocsparse_sparse_to_dense_alg sparseToDenseAlg_t;
   // CHECK-NEXT: rocsparse_sparse_to_dense_alg SPARSETODENSE_ALG_DEFAULT = rocsparse_sparse_to_dense_alg_default;
   cusparseSparseToDenseAlg_t sparseToDenseAlg_t;
