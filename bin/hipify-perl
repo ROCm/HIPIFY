@@ -858,19 +858,7 @@ my %removed_funcs = (
 );
 
 my %experimental_funcs = (
-    "cudaHostRegisterReadOnly" => "5.6.0",
-    "cudaGraphInstantiateFlagUseNodePriority" => "5.6.0",
-    "cudaGraphInstantiateFlagUpload" => "5.6.0",
-    "cudaGraphInstantiateFlagDeviceLaunch" => "5.6.0",
-    "cudaArrayGetInfo" => "5.6.0",
-    "cuArrayGetDescriptor_v2" => "5.6.0",
-    "cuArrayGetDescriptor" => "5.6.0",
-    "cuArray3DGetDescriptor_v2" => "5.6.0",
-    "cuArray3DGetDescriptor" => "5.6.0",
-    "CU_MEMHOSTREGISTER_READ_ONLY" => "5.6.0",
-    "CUDA_GRAPH_INSTANTIATE_FLAG_USE_NODE_PRIORITY" => "5.6.0",
-    "CUDA_GRAPH_INSTANTIATE_FLAG_UPLOAD" => "5.6.0",
-    "CUDA_GRAPH_INSTANTIATE_FLAG_DEVICE_LAUNCH" => "5.6.0"
+
 );
 
 $print_stats = 1 if $examine;
@@ -1008,19 +996,6 @@ sub subst {
 }
 
 sub experimentalSubstitutions {
-    subst("cuArray3DGetDescriptor", "hipArray3DGetDescriptor", "memory");
-    subst("cuArray3DGetDescriptor_v2", "hipArray3DGetDescriptor", "memory");
-    subst("cuArrayGetDescriptor", "hipArrayGetDescriptor", "memory");
-    subst("cuArrayGetDescriptor_v2", "hipArrayGetDescriptor", "memory");
-    subst("cudaArrayGetInfo", "hipArrayGetInfo", "memory");
-    subst("CUDA_GRAPH_INSTANTIATE_FLAG_DEVICE_LAUNCH", "hipGraphInstantiateFlagDeviceLaunch", "numeric_literal");
-    subst("CUDA_GRAPH_INSTANTIATE_FLAG_UPLOAD", "hipGraphInstantiateFlagUpload", "numeric_literal");
-    subst("CUDA_GRAPH_INSTANTIATE_FLAG_USE_NODE_PRIORITY", "hipGraphInstantiateFlagUseNodePriority", "numeric_literal");
-    subst("cudaGraphInstantiateFlagDeviceLaunch", "hipGraphInstantiateFlagDeviceLaunch", "numeric_literal");
-    subst("cudaGraphInstantiateFlagUpload", "hipGraphInstantiateFlagUpload", "numeric_literal");
-    subst("cudaGraphInstantiateFlagUseNodePriority", "hipGraphInstantiateFlagUseNodePriority", "numeric_literal");
-    subst("CU_MEMHOSTREGISTER_READ_ONLY", "hipHostRegisterReadOnly", "define");
-    subst("cudaHostRegisterReadOnly", "hipHostRegisterReadOnly", "define");
 }
 
 sub rocSubstitutions {
@@ -1940,9 +1915,13 @@ sub simpleSubstitutions {
     subst("cuModuleUnload", "hipModuleUnload", "module");
     subst("cuArray3DCreate", "hipArray3DCreate", "memory");
     subst("cuArray3DCreate_v2", "hipArray3DCreate", "memory");
+    subst("cuArray3DGetDescriptor", "hipArray3DGetDescriptor", "memory");
+    subst("cuArray3DGetDescriptor_v2", "hipArray3DGetDescriptor", "memory");
     subst("cuArrayCreate", "hipArrayCreate", "memory");
     subst("cuArrayCreate_v2", "hipArrayCreate", "memory");
     subst("cuArrayDestroy", "hipArrayDestroy", "memory");
+    subst("cuArrayGetDescriptor", "hipArrayGetDescriptor", "memory");
+    subst("cuArrayGetDescriptor_v2", "hipArrayGetDescriptor", "memory");
     subst("cuDeviceGetByPCIBusId", "hipDeviceGetByPCIBusId", "memory");
     subst("cuDeviceGetPCIBusId", "hipDeviceGetPCIBusId", "memory");
     subst("cuIpcCloseMemHandle", "hipIpcCloseMemHandle", "memory");
@@ -2009,6 +1988,7 @@ sub simpleSubstitutions {
     subst("cuMipmappedArrayCreate", "hipMipmappedArrayCreate", "memory");
     subst("cuMipmappedArrayDestroy", "hipMipmappedArrayDestroy", "memory");
     subst("cuMipmappedArrayGetLevel", "hipMipmappedArrayGetLevel", "memory");
+    subst("cudaArrayGetInfo", "hipArrayGetInfo", "memory");
     subst("cudaFree", "hipFree", "memory");
     subst("cudaFreeArray", "hipFreeArray", "memory");
     subst("cudaFreeAsync", "hipFreeAsync", "memory");
@@ -4170,6 +4150,9 @@ sub simpleSubstitutions {
     subst("CUDA_ERROR_UNMAP_FAILED", "hipErrorUnmapFailed", "numeric_literal");
     subst("CUDA_ERROR_UNSUPPORTED_LIMIT", "hipErrorUnsupportedLimit", "numeric_literal");
     subst("CUDA_GRAPH_INSTANTIATE_FLAG_AUTO_FREE_ON_LAUNCH", "hipGraphInstantiateFlagAutoFreeOnLaunch", "numeric_literal");
+    subst("CUDA_GRAPH_INSTANTIATE_FLAG_DEVICE_LAUNCH", "hipGraphInstantiateFlagDeviceLaunch", "numeric_literal");
+    subst("CUDA_GRAPH_INSTANTIATE_FLAG_UPLOAD", "hipGraphInstantiateFlagUpload", "numeric_literal");
+    subst("CUDA_GRAPH_INSTANTIATE_FLAG_USE_NODE_PRIORITY", "hipGraphInstantiateFlagUseNodePriority", "numeric_literal");
     subst("CUDA_R_16BF", "HIPBLAS_R_16B", "numeric_literal");
     subst("CUDA_R_16F", "HIPBLAS_R_16F", "numeric_literal");
     subst("CUDA_R_32F", "HIPBLAS_R_32F", "numeric_literal");
@@ -5035,6 +5018,9 @@ sub simpleSubstitutions {
     subst("cudaGraphExecUpdateErrorUnsupportedFunctionChange", "hipGraphExecUpdateErrorUnsupportedFunctionChange", "numeric_literal");
     subst("cudaGraphExecUpdateSuccess", "hipGraphExecUpdateSuccess", "numeric_literal");
     subst("cudaGraphInstantiateFlagAutoFreeOnLaunch", "hipGraphInstantiateFlagAutoFreeOnLaunch", "numeric_literal");
+    subst("cudaGraphInstantiateFlagDeviceLaunch", "hipGraphInstantiateFlagDeviceLaunch", "numeric_literal");
+    subst("cudaGraphInstantiateFlagUpload", "hipGraphInstantiateFlagUpload", "numeric_literal");
+    subst("cudaGraphInstantiateFlagUseNodePriority", "hipGraphInstantiateFlagUseNodePriority", "numeric_literal");
     subst("cudaGraphMemAttrReservedMemCurrent", "hipGraphMemAttrReservedMemCurrent", "numeric_literal");
     subst("cudaGraphMemAttrReservedMemHigh", "hipGraphMemAttrReservedMemHigh", "numeric_literal");
     subst("cudaGraphMemAttrUsedMemCurrent", "hipGraphMemAttrUsedMemCurrent", "numeric_literal");
@@ -5183,6 +5169,7 @@ sub simpleSubstitutions {
     subst("CU_MEMHOSTREGISTER_DEVICEMAP", "hipHostRegisterMapped", "define");
     subst("CU_MEMHOSTREGISTER_IOMEMORY", "hipHostRegisterIoMemory", "define");
     subst("CU_MEMHOSTREGISTER_PORTABLE", "hipHostRegisterPortable", "define");
+    subst("CU_MEMHOSTREGISTER_READ_ONLY", "hipHostRegisterReadOnly", "define");
     subst("CU_STREAM_PER_THREAD", "hipStreamPerThread", "define");
     subst("CU_TRSA_OVERRIDE_FORMAT", "HIP_TRSA_OVERRIDE_FORMAT", "define");
     subst("CU_TRSF_NORMALIZED_COORDINATES", "HIP_TRSF_NORMALIZED_COORDINATES", "define");
@@ -5223,6 +5210,7 @@ sub simpleSubstitutions {
     subst("cudaHostRegisterIoMemory", "hipHostRegisterIoMemory", "define");
     subst("cudaHostRegisterMapped", "hipHostRegisterMapped", "define");
     subst("cudaHostRegisterPortable", "hipHostRegisterPortable", "define");
+    subst("cudaHostRegisterReadOnly", "hipHostRegisterReadOnly", "define");
     subst("cudaInvalidDeviceId", "hipInvalidDeviceId", "define");
     subst("cudaIpcMemLazyEnablePeerAccess", "hipIpcMemLazyEnablePeerAccess", "define");
     subst("cudaMemAttachGlobal", "hipMemAttachGlobal", "define");
@@ -9862,7 +9850,7 @@ if ($help) {
     print STDERR "$USAGE\n";
 }
 if ($version) {
-    print STDERR "HIP version 5.6.0\n";
+    print STDERR "HIP version 5.7.0\n";
 }
 while (@ARGV) {
     $fileName=shift (@ARGV);

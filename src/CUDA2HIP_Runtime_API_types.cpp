@@ -1748,11 +1748,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CUDA_GRAPH_INSTANTIATE_FLAG_AUTO_FREE_ON_LAUNCH
   {"cudaGraphInstantiateFlagAutoFreeOnLaunch",                         {"hipGraphInstantiateFlagAutoFreeOnLaunch",                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}},
   // CUDA_GRAPH_INSTANTIATE_FLAG_UPLOAD
-  {"cudaGraphInstantiateFlagUpload",                                   {"hipGraphInstantiateFlagUpload",                            "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
+  {"cudaGraphInstantiateFlagUpload",                                   {"hipGraphInstantiateFlagUpload",                            "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}},
   // CUDA_GRAPH_INSTANTIATE_FLAG_DEVICE_LAUNCH
-  {"cudaGraphInstantiateFlagDeviceLaunch",                             {"hipGraphInstantiateFlagDeviceLaunch",                      "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
+  {"cudaGraphInstantiateFlagDeviceLaunch",                             {"hipGraphInstantiateFlagDeviceLaunch",                      "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}},
   // CUDA_GRAPH_INSTANTIATE_FLAG_USE_NODE_PRIORITY
-  {"cudaGraphInstantiateFlagUseNodePriority",                          {"hipGraphInstantiateFlagUseNodePriority",                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
+  {"cudaGraphInstantiateFlagUseNodePriority",                          {"hipGraphInstantiateFlagUseNodePriority",                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}},
 
   // CUclusterSchedulingPolicy
   {"cudaClusterSchedulingPolicy",                                      {"hipClusterSchedulingPolicy",                               "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
@@ -1939,7 +1939,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CU_MEMHOSTREGISTER_IOMEMORY
   {"cudaHostRegisterIoMemory",                                         {"hipHostRegisterIoMemory",                                  "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES}}, // 0x04
   // CU_MEMHOSTREGISTER_READ_ONLY
-  {"cudaHostRegisterReadOnly",                                         {"hipHostRegisterReadOnly",                                  "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}}, // 0x08
+  {"cudaHostRegisterReadOnly",                                         {"hipHostRegisterReadOnly",                                  "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES}}, // 0x08
   // CU_IPC_MEM_LAZY_ENABLE_PEER_ACCESS
   {"cudaIpcMemLazyEnablePeerAccess",                                   {"hipIpcMemLazyEnablePeerAccess",                            "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES}}, // 0x01
   // CU_MEM_ATTACH_GLOBAL
@@ -2742,8 +2742,8 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {
   {"hipGraphDebugDotFlagsExtSemasWaitNodeParams",                      {HIP_5050, HIP_0,    HIP_0   }},
   {"hipGraphDebugDotFlagsKernelNodeAttributes",                        {HIP_5050, HIP_0,    HIP_0   }},
   {"hipGraphDebugDotFlagsHandles",                                     {HIP_5050, HIP_0,    HIP_0   }},
-  {"hipGraphInstantiateFlagUpload",                                    {HIP_5060, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipGraphInstantiateFlagDeviceLaunch",                              {HIP_5060, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipGraphInstantiateFlagUseNodePriority",                           {HIP_5060, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipHostRegisterReadOnly",                                          {HIP_5060, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipGraphInstantiateFlagUpload",                                    {HIP_5060, HIP_0,    HIP_0   }},
+  {"hipGraphInstantiateFlagDeviceLaunch",                              {HIP_5060, HIP_0,    HIP_0   }},
+  {"hipGraphInstantiateFlagUseNodePriority",                           {HIP_5060, HIP_0,    HIP_0   }},
+  {"hipHostRegisterReadOnly",                                          {HIP_5060, HIP_0,    HIP_0   }},
 };
