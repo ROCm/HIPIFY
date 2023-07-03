@@ -2213,11 +2213,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaGraphInstantiateFlagAutoFreeOnLaunch
   {"CUDA_GRAPH_INSTANTIATE_FLAG_AUTO_FREE_ON_LAUNCH",                  {"hipGraphInstantiateFlagAutoFreeOnLaunch",                  "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}},
   // cudaGraphInstantiateFlagUpload
-  {"CUDA_GRAPH_INSTANTIATE_FLAG_UPLOAD",                               {"hipGraphInstantiateFlagUpload",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
+  {"CUDA_GRAPH_INSTANTIATE_FLAG_UPLOAD",                               {"hipGraphInstantiateFlagUpload",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}},
   // cudaGraphInstantiateFlagDeviceLaunch
-  {"CUDA_GRAPH_INSTANTIATE_FLAG_DEVICE_LAUNCH",                        {"hipGraphInstantiateFlagDeviceLaunch",                      "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
+  {"CUDA_GRAPH_INSTANTIATE_FLAG_DEVICE_LAUNCH",                        {"hipGraphInstantiateFlagDeviceLaunch",                      "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}},
   // cudaGraphInstantiateFlagUseNodePriority
-  {"CUDA_GRAPH_INSTANTIATE_FLAG_USE_NODE_PRIORITY",                    {"hipGraphInstantiateFlagUseNodePriority",                   "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
+  {"CUDA_GRAPH_INSTANTIATE_FLAG_USE_NODE_PRIORITY",                    {"hipGraphInstantiateFlagUseNodePriority",                   "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}},
 
   // no analogue
   {"CUstreamMemoryBarrier_flags",                                      {"hipGraphInstantiateFlags",                                 "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
@@ -2531,7 +2531,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaHostRegisterIoMemory
   {"CU_MEMHOSTREGISTER_IOMEMORY",                                      {"hipHostRegisterIoMemory",                                  "", CONV_DEFINE, API_DRIVER, SEC::DATA_TYPES}}, // 0x04
   // cudaHostRegisterReadOnly
-  {"CU_MEMHOSTREGISTER_READ_ONLY",                                     {"hipHostRegisterReadOnly",                                  "", CONV_DEFINE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}}, // 0x08
+  {"CU_MEMHOSTREGISTER_READ_ONLY",                                     {"hipHostRegisterReadOnly",                                  "", CONV_DEFINE, API_DRIVER, SEC::DATA_TYPES}}, // 0x08
   //
   {"CU_PARAM_TR_DEFAULT",                                              {"HIP_PARAM_TR_DEFAULT",                                     "", CONV_DEFINE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // -1
   // cudaStreamLegacy ((cudaStream_t)0x1)

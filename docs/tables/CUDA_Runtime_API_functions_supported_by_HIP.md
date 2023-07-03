@@ -146,7 +146,7 @@
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
-|`cudaArrayGetInfo`| | | |`hipArrayGetInfo`|5.6.0| | |5.6.0|
+|`cudaArrayGetInfo`| | | |`hipArrayGetInfo`|5.6.0| | | |
 |`cudaArrayGetMemoryRequirements`|11.6| | | | | | | |
 |`cudaArrayGetPlane`|11.2| | | | | | | |
 |`cudaArrayGetSparseProperties`|11.1| | | | | | | |
@@ -1109,9 +1109,9 @@
 |`cudaGraphExec_t`|10.0| | |`hipGraphExec_t`|4.3.0| | | |
 |`cudaGraphInstantiateError`|12.0| | | | | | | |
 |`cudaGraphInstantiateFlagAutoFreeOnLaunch`|11.4| | |`hipGraphInstantiateFlagAutoFreeOnLaunch`|5.2.0| | | |
-|`cudaGraphInstantiateFlagDeviceLaunch`|12.0| | |`hipGraphInstantiateFlagDeviceLaunch`|5.6.0| | |5.6.0|
-|`cudaGraphInstantiateFlagUpload`|12.0| | |`hipGraphInstantiateFlagUpload`|5.6.0| | |5.6.0|
-|`cudaGraphInstantiateFlagUseNodePriority`|11.7| | |`hipGraphInstantiateFlagUseNodePriority`|5.6.0| | |5.6.0|
+|`cudaGraphInstantiateFlagDeviceLaunch`|12.0| | |`hipGraphInstantiateFlagDeviceLaunch`|5.6.0| | | |
+|`cudaGraphInstantiateFlagUpload`|12.0| | |`hipGraphInstantiateFlagUpload`|5.6.0| | | |
+|`cudaGraphInstantiateFlagUseNodePriority`|11.7| | |`hipGraphInstantiateFlagUseNodePriority`|5.6.0| | | |
 |`cudaGraphInstantiateFlags`|11.4| | |`hipGraphInstantiateFlags`|5.2.0| | | |
 |`cudaGraphInstantiateInvalidStructure`|12.0| | | | | | | |
 |`cudaGraphInstantiateMultipleDevicesNotSupported`|12.0| | | | | | | |
@@ -1171,7 +1171,7 @@
 |`cudaHostRegisterIoMemory`|7.5| | |`hipHostRegisterIoMemory`|1.6.0| | | |
 |`cudaHostRegisterMapped`| | | |`hipHostRegisterMapped`|1.6.0| | | |
 |`cudaHostRegisterPortable`| | | |`hipHostRegisterPortable`|1.6.0| | | |
-|`cudaHostRegisterReadOnly`|11.1| | |`hipHostRegisterReadOnly`|5.6.0| | |5.6.0|
+|`cudaHostRegisterReadOnly`|11.1| | |`hipHostRegisterReadOnly`|5.6.0| | | |
 |`cudaInitDeviceFlagsAreValid`|12.0| | | | | | | |
 |`cudaInvalidDeviceId`|8.0| | |`hipInvalidDeviceId`|3.7.0| | | |
 |`cudaIpcEventHandle_st`| | | |`hipIpcEventHandle_st`|3.5.0| | | |
