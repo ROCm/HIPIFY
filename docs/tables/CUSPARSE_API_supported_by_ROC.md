@@ -615,7 +615,7 @@
 
 |**CUDA**|**A**|**D**|**R**|**ROC**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
-|`cusparseCbsr2csr`| | | | | | | | |
+|`cusparseCbsr2csr`| | | |`rocsparse_cbsr2csr`|3.10.0| | | |
 |`cusparseCcsc2dense`| |11.1|12.0| | | | | |
 |`cusparseCcsc2hyb`| |10.2|11.0| | | | | |
 |`cusparseCcsr2bsr`| | | | | | | | |
@@ -649,7 +649,7 @@
 |`cusparseCsr2cscEx`|8.0|10.2|11.0| | | | | |
 |`cusparseCsr2cscEx2`|10.1| | | | | | | |
 |`cusparseCsr2cscEx2_bufferSize`|10.1| | | | | | | |
-|`cusparseDbsr2csr`| | | | | | | | |
+|`cusparseDbsr2csr`| | | |`rocsparse_dbsr2csr`|3.10.0| | | |
 |`cusparseDcsc2dense`| |11.1|12.0| | | | | |
 |`cusparseDcsc2hyb`| |10.2|11.0| | | | | |
 |`cusparseDcsr2bsr`| | | | | | | | |
@@ -703,7 +703,7 @@
 |`cusparseHpruneDense2csrNnz`|9.0| | | | | | | |
 |`cusparseHpruneDense2csrNnzByPercentage`|9.0| | | | | | | |
 |`cusparseHpruneDense2csr_bufferSizeExt`|9.0| | | | | | | |
-|`cusparseSbsr2csr`| | | | | | | | |
+|`cusparseSbsr2csr`| | | |`rocsparse_sbsr2csr`|3.10.0| | | |
 |`cusparseScsc2dense`| |11.1|12.0| | | | | |
 |`cusparseScsc2hyb`| |10.2|11.0| | | | | |
 |`cusparseScsr2bsr`| | | | | | | | |
@@ -745,8 +745,8 @@
 |`cusparseSpruneDense2csrNnzByPercentage`|9.0| | | | | | | |
 |`cusparseSpruneDense2csr_bufferSizeExt`|9.0| | | | | | | |
 |`cusparseXcoo2csr`| | | | | | | | |
-|`cusparseXcoosortByColumn`| | | | | | | | |
-|`cusparseXcoosortByRow`| | | | | | | | |
+|`cusparseXcoosortByColumn`| | | |`rocsparse_coosort_by_column`|1.9.0| | | |
+|`cusparseXcoosortByRow`| | | |`rocsparse_coosort_by_row`|1.9.0| | | |
 |`cusparseXcoosort_bufferSizeExt`| | | | | | | | |
 |`cusparseXcscsort`| | | | | | | | |
 |`cusparseXcscsort_bufferSizeExt`| | | | | | | | |
@@ -757,7 +757,7 @@
 |`cusparseXcsrsort_bufferSizeExt`| | | | | | | | |
 |`cusparseXgebsr2csr`| | | | | | | | |
 |`cusparseXgebsr2gebsrNnz`| | | |`rocsparse_gebsr2gebsr_nnz`|4.1.0| | | |
-|`cusparseZbsr2csr`| | | | | | | | |
+|`cusparseZbsr2csr`| | | |`rocsparse_zbsr2csr`|3.10.0| | | |
 |`cusparseZcsc2dense`| |11.1|12.0| | | | | |
 |`cusparseZcsc2hyb`| |10.2|11.0| | | | | |
 |`cusparseZcsr2bsr`| | | | | | | | |

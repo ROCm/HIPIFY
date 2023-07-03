@@ -1454,6 +1454,7 @@ sub rocSubstitutions {
     subst("cudnnTransformTensor", "miopenTransformTensor", "library");
     subst("cusparseAxpby", "rocsparse_axpby", "library");
     subst("cusparseBlockedEllGet", "rocsparse_bell_get", "library");
+    subst("cusparseCbsr2csr", "rocsparse_cbsr2csr", "library");
     subst("cusparseCcsrcolor", "rocsparse_ccsrcolor", "library");
     subst("cusparseCgebsr2csr", "rocsparse_cgebsr2csr", "library");
     subst("cusparseCgebsr2gebsr", "rocsparse_cgebsr2gebsr", "library");
@@ -1479,6 +1480,7 @@ sub rocSubstitutions {
     subst("cusparseCsrGet", "rocsparse_csr_get", "library");
     subst("cusparseCsrSetPointers", "rocsparse_csr_set_pointers", "library");
     subst("cusparseCsrSetStridedBatch", "rocsparse_csr_set_strided_batch", "library");
+    subst("cusparseDbsr2csr", "rocsparse_dbsr2csr", "library");
     subst("cusparseDcsrcolor", "rocsparse_dcsrcolor", "library");
     subst("cusparseDestroy", "rocsparse_destroy_handle", "library");
     subst("cusparseDestroyColorInfo", "rocsparse_destroy_color_info", "library");
@@ -1511,6 +1513,7 @@ sub rocSubstitutions {
     subst("cusparseSDDMM", "rocsparse_sddmm", "library");
     subst("cusparseSDDMM_bufferSize", "rocsparse_sddmm_buffer_size", "library");
     subst("cusparseSDDMM_preprocess", "rocsparse_sddmm_preprocess", "library");
+    subst("cusparseSbsr2csr", "rocsparse_sbsr2csr", "library");
     subst("cusparseScatter", "rocsparse_scatter", "library");
     subst("cusparseScsrcolor", "rocsparse_scsrcolor", "library");
     subst("cusparseSetMatDiagType", "rocsparse_set_mat_diag_type", "library");
@@ -1536,7 +1539,10 @@ sub rocSubstitutions {
     subst("cusparseSpVecGetIndexBase", "rocsparse_spvec_get_index_base", "library");
     subst("cusparseSpVecGetValues", "rocsparse_spvec_get_values", "library");
     subst("cusparseSpVecSetValues", "rocsparse_spvec_set_values", "library");
+    subst("cusparseXcoosortByColumn", "rocsparse_coosort_by_column", "library");
+    subst("cusparseXcoosortByRow", "rocsparse_coosort_by_row", "library");
     subst("cusparseXgebsr2gebsrNnz", "rocsparse_gebsr2gebsr_nnz", "library");
+    subst("cusparseZbsr2csr", "rocsparse_zbsr2csr", "library");
     subst("cusparseZcsrcolor", "rocsparse_zcsrcolor", "library");
     subst("cusparseZgebsr2csr", "rocsparse_zgebsr2csr", "library");
     subst("cusparseZgebsr2gebsr", "rocsparse_zgebsr2gebsr", "library");

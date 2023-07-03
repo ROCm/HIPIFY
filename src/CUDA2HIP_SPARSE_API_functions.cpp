@@ -496,10 +496,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   {"cusparseZcsrcolor",                                 {"hipsparseZcsrcolor",                                 "rocsparse_zcsrcolor",                                              CONV_LIB_FUNC, API_SPARSE, 13}},
 
   // 14. cuSPARSE Format Conversion Reference
-  {"cusparseSbsr2csr",                                  {"hipsparseSbsr2csr",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED}},
-  {"cusparseDbsr2csr",                                  {"hipsparseDbsr2csr",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED}},
-  {"cusparseCbsr2csr",                                  {"hipsparseCbsr2csr",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED}},
-  {"cusparseZbsr2csr",                                  {"hipsparseZbsr2csr",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED}},
+  {"cusparseSbsr2csr",                                  {"hipsparseSbsr2csr",                                  "rocsparse_sbsr2csr",                                               CONV_LIB_FUNC, API_SPARSE, 14}},
+  {"cusparseDbsr2csr",                                  {"hipsparseDbsr2csr",                                  "rocsparse_dbsr2csr",                                               CONV_LIB_FUNC, API_SPARSE, 14}},
+  {"cusparseCbsr2csr",                                  {"hipsparseCbsr2csr",                                  "rocsparse_cbsr2csr",                                               CONV_LIB_FUNC, API_SPARSE, 14}},
+  {"cusparseZbsr2csr",                                  {"hipsparseZbsr2csr",                                  "rocsparse_zbsr2csr",                                               CONV_LIB_FUNC, API_SPARSE, 14}},
 
   {"cusparseSgebsr2gebsc_bufferSize",                   {"hipsparseSgebsr2gebsc_bufferSize",                   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED}},
   {"cusparseSgebsr2gebsc_bufferSizeExt",                {"hipsparseSgebsr2gebsc_bufferSizeExt",                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED}},
@@ -633,8 +633,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   {"cusparseCreateIdentityPermutation",                 {"hipsparseCreateIdentityPermutation",                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED}},
 
   {"cusparseXcoosort_bufferSizeExt",                    {"hipsparseXcoosort_bufferSizeExt",                    "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED}},
-  {"cusparseXcoosortByRow",                             {"hipsparseXcoosortByRow",                             "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED}},
-  {"cusparseXcoosortByColumn",                          {"hipsparseXcoosortByColumn",                          "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED}},
+  {"cusparseXcoosortByRow",                             {"hipsparseXcoosortByRow",                             "rocsparse_coosort_by_row",                                         CONV_LIB_FUNC, API_SPARSE, 14}},
+  {"cusparseXcoosortByColumn",                          {"hipsparseXcoosortByColumn",                          "rocsparse_coosort_by_column",                                      CONV_LIB_FUNC, API_SPARSE, 14}},
 
   {"cusparseXcsrsort_bufferSizeExt",                    {"hipsparseXcsrsort_bufferSizeExt",                    "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED}},
   {"cusparseXcsrsort",                                  {"hipsparseXcsrsort",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED}},
@@ -1889,6 +1889,12 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_FUNCTION_VER_MAP {
   {"rocsparse_cgebsr2csr",                               {HIP_3100, HIP_0,    HIP_0   }},
   {"rocsparse_dgebsr2csr",                               {HIP_3100, HIP_0,    HIP_0   }},
   {"rocsparse_sgebsr2csr",                               {HIP_3100, HIP_0,    HIP_0   }},
+  {"rocsparse_zbsr2csr",                                 {HIP_3100, HIP_0,    HIP_0   }},
+  {"rocsparse_cbsr2csr",                                 {HIP_3100, HIP_0,    HIP_0   }},
+  {"rocsparse_dbsr2csr",                                 {HIP_3100, HIP_0,    HIP_0   }},
+  {"rocsparse_sbsr2csr",                                 {HIP_3100, HIP_0,    HIP_0   }},
+  {"rocsparse_coosort_by_column",                        {HIP_1090, HIP_0,    HIP_0   }},
+  {"rocsparse_coosort_by_row",                           {HIP_1090, HIP_0,    HIP_0   }},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_SPARSE_API_SECTION_MAP {
