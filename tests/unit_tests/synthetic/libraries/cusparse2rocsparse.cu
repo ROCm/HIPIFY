@@ -119,10 +119,12 @@ int main() {
   int iVal = 0;
   int batchCount = 0;
   int m = 0;
+  int n = 0;
   int mb = 0;
   int nb = 0;
   int nnzb = 0;
   int innz = 0;
+  int blockDim = 0;
   int csrRowPtrA = 0;
   int csrColIndA = 0;
   int ncolors = 0;
@@ -152,27 +154,31 @@ int main() {
   int64_t offsetsBatchStride = 0;
   int64_t columnsValuesBatchStride = 0;
   int64_t ld = 0;
-  void* indices = nullptr;
-  void* values = nullptr;
-  void* cooRowInd = nullptr;
-  void* cscRowInd = nullptr;
-  void* csrColInd = nullptr;
-  void* cooColInd = nullptr;
-  void* ellColInd = nullptr;
-  void* cooValues = nullptr;
-  void* csrValues = nullptr;
-  void* cscValues = nullptr;
-  void* ellValue = nullptr;
-  void* csrRowOffsets = nullptr;
-  void* cscColOffsets = nullptr;
-  void* cooRows = nullptr;
-  void* cooColumns = nullptr;
-  void* data = nullptr;
-  void* alpha = nullptr;
-  void* beta = nullptr;
-  void* tempBuffer = nullptr;
-  void* c_coeff = nullptr;
-  void* s_coeff = nullptr;
+  void *indices = nullptr;
+  void *values = nullptr;
+  void *cooRowInd = nullptr;
+  void *cscRowInd = nullptr;
+  void *csrColInd = nullptr;
+  void *cooColInd = nullptr;
+  void *ellColInd = nullptr;
+  void *cooValues = nullptr;
+  void *csrValues = nullptr;
+  void *cscValues = nullptr;
+  void *ellValue = nullptr;
+  void *csrRowOffsets = nullptr;
+  void *cscColOffsets = nullptr;
+  void *cooRows = nullptr;
+  int icooRows = 0;
+  void *cooColumns = nullptr;
+  int icooColumns = 0;
+  void *data = nullptr;
+  void *alpha = nullptr;
+  void *beta = nullptr;
+  void *pBuffer = nullptr;
+  int *P = nullptr;
+  void *tempBuffer = nullptr;
+  void *c_coeff = nullptr;
+  void *s_coeff = nullptr;
   size_t dataSize = 0;
   size_t bufferSize = 0;
   double dfractionToColor = 0.f;
@@ -379,6 +385,36 @@ int main() {
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_sgebsr2csr(rocsparse_handle handle, rocsparse_direction dir, rocsparse_int mb, rocsparse_int nb, const rocsparse_mat_descr bsr_descr, const float* bsr_val, const rocsparse_int* bsr_row_ptr, const rocsparse_int* bsr_col_ind, rocsparse_int row_block_dim, rocsparse_int col_block_dim, const rocsparse_mat_descr csr_descr, float* csr_val, rocsparse_int* csr_row_ptr, rocsparse_int* csr_col_ind);
   // CHECK: status_t = rocsparse_sgebsr2csr(handle_t, direction_t, mb, nb, matDescr_A, &fbsrSortedValA, &bsrRowPtrA, &bsrColIndA, rowBlockDimA, colBlockDimA, matDescr_C, &fcsrSortedValC, &csrRowPtrC, &csrColIndC);
   status_t = cusparseSgebsr2csr(handle_t, direction_t, mb, nb, matDescr_A, &fbsrSortedValA, &bsrRowPtrA, &bsrColIndA, rowBlockDimA, colBlockDimA, matDescr_C, &fcsrSortedValC, &csrRowPtrC, &csrColIndC);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseZbsr2csr(cusparseHandle_t handle, cusparseDirection_t dirA, int mb, int nb, const cusparseMatDescr_t descrA, const cuDoubleComplex* bsrSortedValA, const int* bsrSortedRowPtrA, const int* bsrSortedColIndA, int blockDim, const cusparseMatDescr_t descrC, cuDoubleComplex* csrSortedValC, int* csrSortedRowPtrC, int* csrSortedColIndC);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_zbsr2csr(rocsparse_handle handle, rocsparse_direction dir, rocsparse_int mb, rocsparse_int nb, const rocsparse_mat_descr bsr_descr, const rocsparse_double_complex* bsr_val, const rocsparse_int* bsr_row_ptr, const rocsparse_int* bsr_col_ind, rocsparse_int block_dim, const rocsparse_mat_descr csr_descr, rocsparse_double_complex* csr_val, rocsparse_int* csr_row_ptr, rocsparse_int* csr_col_ind);
+  // CHECK: status_t = rocsparse_zbsr2csr(handle_t, direction_t, mb, nb, matDescr_A, &dComplexbsrSortedValA, &bsrRowPtrA, &bsrColIndA, blockDim, matDescr_C, &dComplexbsrSortedValC, &csrRowPtrC, &csrColIndC);
+  status_t = cusparseZbsr2csr(handle_t, direction_t, mb, nb, matDescr_A, &dComplexbsrSortedValA, &bsrRowPtrA, &bsrColIndA, blockDim, matDescr_C, &dComplexbsrSortedValC, &csrRowPtrC, &csrColIndC);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCbsr2csr(cusparseHandle_t handle, cusparseDirection_t dirA, int mb, int nb, const cusparseMatDescr_t descrA, const cuComplex* bsrSortedValA, const int* bsrSortedRowPtrA, const int* bsrSortedColIndA, int blockDim, const cusparseMatDescr_t descrC, cuComplex* csrSortedValC, int* csrSortedRowPtrC, int* csrSortedColIndC);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_cbsr2csr(rocsparse_handle handle, rocsparse_direction dir, rocsparse_int mb, rocsparse_int nb, const rocsparse_mat_descr bsr_descr, const rocsparse_float_complex* bsr_val, const rocsparse_int* bsr_row_ptr, const rocsparse_int* bsr_col_ind, rocsparse_int block_dim, const rocsparse_mat_descr csr_descr, rocsparse_float_complex* csr_val, rocsparse_int* csr_row_ptr, rocsparse_int* csr_col_ind);
+  // CHECK: status_t = rocsparse_cbsr2csr(handle_t, direction_t, mb, nb, matDescr_A, &complexbsrValA, &bsrRowPtrA, &bsrColIndA, blockDim, matDescr_C, &complexbsrSortedValC, &csrRowPtrC, &csrColIndC);
+  status_t = cusparseCbsr2csr(handle_t, direction_t, mb, nb, matDescr_A, &complexbsrValA, &bsrRowPtrA, &bsrColIndA, blockDim, matDescr_C, &complexbsrSortedValC, &csrRowPtrC, &csrColIndC);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDbsr2csr(cusparseHandle_t handle, cusparseDirection_t dirA, int mb, int nb, const cusparseMatDescr_t descrA, const double* bsrSortedValA, const int* bsrSortedRowPtrA, const int* bsrSortedColIndA, int blockDim, const cusparseMatDescr_t descrC, double* csrSortedValC, int* csrSortedRowPtrC, int* csrSortedColIndC);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_dbsr2csr(rocsparse_handle handle, rocsparse_direction dir, rocsparse_int mb, rocsparse_int nb, const rocsparse_mat_descr bsr_descr, const double* bsr_val, const rocsparse_int* bsr_row_ptr, const rocsparse_int* bsr_col_ind, rocsparse_int block_dim, const rocsparse_mat_descr csr_descr, double* csr_val, rocsparse_int* csr_row_ptr, rocsparse_int* csr_col_ind);
+  // CHECK: status_t = rocsparse_dbsr2csr(handle_t, direction_t, mb, nb, matDescr_A, &bsrValA, &bsrRowPtrA, &bsrColIndA, blockDim, matDescr_C, &csrValC, &csrRowPtrC, &csrColIndC);
+  status_t = cusparseDbsr2csr(handle_t, direction_t, mb, nb, matDescr_A, &bsrValA, &bsrRowPtrA, &bsrColIndA, blockDim, matDescr_C, &csrValC, &csrRowPtrC, &csrColIndC);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSbsr2csr(cusparseHandle_t handle, cusparseDirection_t dirA, int mb, int nb, const cusparseMatDescr_t descrA, const float* bsrSortedValA, const int* bsrSortedRowPtrA, const int* bsrSortedColIndA, int blockDim, const cusparseMatDescr_t descrC, float* csrSortedValC, int* csrSortedRowPtrC, int* csrSortedColIndC);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_sbsr2csr(rocsparse_handle handle, rocsparse_direction dir, rocsparse_int mb, rocsparse_int nb, const rocsparse_mat_descr bsr_descr, const float* bsr_val, const rocsparse_int* bsr_row_ptr, const rocsparse_int* bsr_col_ind, rocsparse_int block_dim, const rocsparse_mat_descr csr_descr, float* csr_val, rocsparse_int* csr_row_ptr, rocsparse_int* csr_col_ind);
+  // CHECK: status_t = rocsparse_sbsr2csr(handle_t, direction_t, mb, nb, matDescr_A, &fbsrSortedValA, &bsrRowPtrA, &bsrColIndA, blockDim, matDescr_C, &fcsrSortedValC, &csrRowPtrC, &csrColIndC);
+  status_t = cusparseSbsr2csr(handle_t, direction_t, mb, nb, matDescr_A, &fbsrSortedValA, &bsrRowPtrA, &bsrColIndA, blockDim, matDescr_C, &fcsrSortedValC, &csrRowPtrC, &csrColIndC);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseXcoosortByColumn(cusparseHandle_t handle, int m, int n, int nnz, int* cooRowsA, int* cooColsA, int* P, void* pBuffer);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_coosort_by_column(rocsparse_handle handle, rocsparse_int m, rocsparse_int n, rocsparse_int nnz, rocsparse_int* coo_row_ind, rocsparse_int* coo_col_ind, rocsparse_int* perm, void* temp_buffer);
+  // CHECK: status_t = rocsparse_coosort_by_column(handle_t, m, n, innz, &icooRows, &icooColumns, P, pBuffer);
+  status_t = cusparseXcoosortByColumn(handle_t, m, n, innz, &icooRows, &icooColumns, P, pBuffer);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseXcoosortByRow(cusparseHandle_t handle, int m, int n, int nnz, int* cooRowsA, int* cooColsA, int* P, void* pBuffer);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_coosort_by_row(rocsparse_handle handle, rocsparse_int m, rocsparse_int n, rocsparse_int nnz, rocsparse_int* coo_row_ind, rocsparse_int* coo_col_ind, rocsparse_int* perm, void* temp_buffer);
+  // CHECK: status_t = rocsparse_coosort_by_row(handle_t, m, n, innz, &icooRows, &icooColumns, P, pBuffer);
+  status_t = cusparseXcoosortByRow(handle_t, m, n, innz, &icooRows, &icooColumns, P, pBuffer);
 
 #if CUDA_VERSION >= 8000
   // CHECK: hipDataType dataType_t;
