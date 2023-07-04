@@ -300,8 +300,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUexecAffinityParam_v1",                                           {"hipExecAffinityParam",                                     "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   // cudaMemAllocNodeParams
-  {"CUDA_MEM_ALLOC_NODE_PARAMS_st",                                    {"hipMemAllocNodeParams",                                    "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES}},
+  {"CUDA_MEM_ALLOC_NODE_PARAMS_st",                                    {"hipMemAllocNodeParams",                                    "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, CUDA_REMOVED}},
+  {"CUDA_MEM_ALLOC_NODE_PARAMS_v1_st",                                 {"hipMemAllocNodeParams",                                    "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES}},
+  {"CUDA_MEM_ALLOC_NODE_PARAMS_v2_st",                                 {"hipMemAllocNodeParams_v2",                                 "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   {"CUDA_MEM_ALLOC_NODE_PARAMS",                                       {"hipMemAllocNodeParams",                                    "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES}},
+  {"CUDA_MEM_ALLOC_NODE_PARAMS_v1",                                    {"hipMemAllocNodeParams",                                    "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES}},
+  {"CUDA_MEM_ALLOC_NODE_PARAMS_v2",                                    {"hipMemAllocNodeParams_v2",                                 "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   // cudaArrayMemoryRequirements
   {"CUDA_ARRAY_MEMORY_REQUIREMENTS_st",                                {"hipArrayMemoryRequirements",                               "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
@@ -3147,7 +3151,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_TYPE_NAME_VER_MAP {
   {"CUDA_ERROR_MPS_SERVER_NOT_READY",                                  {CUDA_114, CUDA_0,   CUDA_0  }},
   {"CUDA_ERROR_MPS_MAX_CLIENTS_REACHED",                               {CUDA_114, CUDA_0,   CUDA_0  }},
   {"CUDA_ERROR_MPS_MAX_CONNECTIONS_REACHED",                           {CUDA_114, CUDA_0,   CUDA_0  }},
-  {"CUDA_MEM_ALLOC_NODE_PARAMS_st",                                    {CUDA_114, CUDA_0,   CUDA_0  }},
+  {"CUDA_MEM_ALLOC_NODE_PARAMS_st",                                    {CUDA_114, CUDA_0,   CUDA_122}},
   {"CUDA_MEM_ALLOC_NODE_PARAMS",                                       {CUDA_114, CUDA_0,   CUDA_0  }},
   {"CUgraphMem_attribute",                                             {CUDA_114, CUDA_0,   CUDA_0  }},
   {"CUgraphMem_attribute_enum",                                        {CUDA_114, CUDA_0,   CUDA_0  }},
@@ -3405,6 +3409,10 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_TYPE_NAME_VER_MAP {
   {"CU_COREDUMP_FILE",                                                 {CUDA_121, CUDA_0,   CUDA_0  }},
   {"CU_COREDUMP_PIPE",                                                 {CUDA_121, CUDA_0,   CUDA_0  }},
   {"CU_COREDUMP_MAX",                                                  {CUDA_121, CUDA_0,   CUDA_0  }},
+  {"CUDA_MEM_ALLOC_NODE_PARAMS_v1_st",                                 {CUDA_122, CUDA_0,   CUDA_0  }},
+  {"CUDA_MEM_ALLOC_NODE_PARAMS_v1",                                    {CUDA_122, CUDA_0,   CUDA_0  }},
+  {"CUDA_MEM_ALLOC_NODE_PARAMS_v2_st",                                 {CUDA_122, CUDA_0,   CUDA_0  }},
+  {"CUDA_MEM_ALLOC_NODE_PARAMS_v2",                                    {CUDA_122, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {

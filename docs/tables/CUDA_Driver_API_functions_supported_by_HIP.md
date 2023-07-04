@@ -190,7 +190,11 @@
 |`CUDA_MEMSET_NODE_PARAMS_st`|10.0| | |`hipMemsetParams`|4.3.0| | | |
 |`CUDA_MEMSET_NODE_PARAMS_v1`|11.3| | |`hipMemsetParams`|4.3.0| | | |
 |`CUDA_MEM_ALLOC_NODE_PARAMS`|11.4| | |`hipMemAllocNodeParams`|5.5.0| | | |
-|`CUDA_MEM_ALLOC_NODE_PARAMS_st`|11.4| | |`hipMemAllocNodeParams`|5.5.0| | | |
+|`CUDA_MEM_ALLOC_NODE_PARAMS_st`|11.4| |12.2|`hipMemAllocNodeParams`|5.5.0| | | |
+|`CUDA_MEM_ALLOC_NODE_PARAMS_v1`|12.2| | |`hipMemAllocNodeParams`|5.5.0| | | |
+|`CUDA_MEM_ALLOC_NODE_PARAMS_v1_st`|12.2| | |`hipMemAllocNodeParams`|5.5.0| | | |
+|`CUDA_MEM_ALLOC_NODE_PARAMS_v2`|12.2| | | | | | | |
+|`CUDA_MEM_ALLOC_NODE_PARAMS_v2_st`|12.2| | | | | | | |
 |`CUDA_NVSCISYNC_ATTR_SIGNAL`|10.2| | | | | | | |
 |`CUDA_NVSCISYNC_ATTR_WAIT`|10.2| | | | | | | |
 |`CUDA_POINTER_ATTRIBUTE_ACCESS_FLAGS`|11.1| | | | | | | |
