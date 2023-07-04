@@ -786,6 +786,11 @@ int main() {
   result = cuGraphDebugDotPrint(graph, name.c_str(), flags);
 #endif
 
+#if CUDA_VERSION >= 11040 && CUDA_VERSION < 12020
+  // CHECK: hipMemAllocNodeParams MEM_ALLOC_NODE_PARAMS_st;
+  CUDA_MEM_ALLOC_NODE_PARAMS_st MEM_ALLOC_NODE_PARAMS_st;
+#endif
+
 #if CUDA_VERSION >= 11040
   // CUDA: CUresult CUDAAPI cuGraphInstantiateWithFlags(CUgraphExec *phGraphExec, CUgraph hGraph, unsigned long long flags);
   // HIP: hipError_t hipGraphInstantiateWithFlags(hipGraphExec_t* pGraphExec, hipGraph_t graph, unsigned long long flags);
@@ -810,9 +815,7 @@ int main() {
   // CHECK: result = hipDeviceGraphMemTrim(device);
   result = cuDeviceGraphMemTrim(device);
 
-  // CHECK: hipMemAllocNodeParams MEM_ALLOC_NODE_PARAMS_st;
-  // CHECK-NEXT: hipMemAllocNodeParams MEM_ALLOC_NODE_PARAMS;
-  CUDA_MEM_ALLOC_NODE_PARAMS_st MEM_ALLOC_NODE_PARAMS_st;
+  // CHECK: hipMemAllocNodeParams MEM_ALLOC_NODE_PARAMS;
   CUDA_MEM_ALLOC_NODE_PARAMS MEM_ALLOC_NODE_PARAMS;
 
   // CUDA: CUresult CUDAAPI cuGraphAddMemAllocNode(CUgraphNode *phGraphNode, CUgraph hGraph, const CUgraphNode *dependencies, size_t numDependencies, CUDA_MEM_ALLOC_NODE_PARAMS *nodeParams);

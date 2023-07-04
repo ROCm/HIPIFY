@@ -854,7 +854,8 @@ my %removed_funcs = (
     "CUDNN_CONVOLUTION_BWD_FILTER_NO_WORKSPACE" => "8.0.1",
     "CUDNN_CONVOLUTION_BWD_DATA_SPECIFY_WORKSPACE_LIMIT" => "8.0.1",
     "CUDNN_CONVOLUTION_BWD_DATA_PREFER_FASTEST" => "8.0.1",
-    "CUDNN_CONVOLUTION_BWD_DATA_NO_WORKSPACE" => "8.0.1"
+    "CUDNN_CONVOLUTION_BWD_DATA_NO_WORKSPACE" => "8.0.1",
+    "CUDA_MEM_ALLOC_NODE_PARAMS_st" => "12.2"
 );
 
 my %experimental_funcs = (
@@ -3637,6 +3638,8 @@ sub simpleSubstitutions {
     subst("CUDA_MEMSET_NODE_PARAMS_v1", "hipMemsetParams", "type");
     subst("CUDA_MEM_ALLOC_NODE_PARAMS", "hipMemAllocNodeParams", "type");
     subst("CUDA_MEM_ALLOC_NODE_PARAMS_st", "hipMemAllocNodeParams", "type");
+    subst("CUDA_MEM_ALLOC_NODE_PARAMS_v1", "hipMemAllocNodeParams", "type");
+    subst("CUDA_MEM_ALLOC_NODE_PARAMS_v1_st", "hipMemAllocNodeParams", "type");
     subst("CUDA_RESOURCE_DESC", "HIP_RESOURCE_DESC", "type");
     subst("CUDA_RESOURCE_DESC_st", "HIP_RESOURCE_DESC_st", "type");
     subst("CUDA_RESOURCE_DESC_v1", "HIP_RESOURCE_DESC", "type");
@@ -8615,6 +8618,8 @@ sub warnUnsupportedFunctions {
         "CUDA_POINTER_ATTRIBUTE_ACCESS_FLAGS",
         "CUDA_NVSCISYNC_ATTR_WAIT",
         "CUDA_NVSCISYNC_ATTR_SIGNAL",
+        "CUDA_MEM_ALLOC_NODE_PARAMS_v2_st",
+        "CUDA_MEM_ALLOC_NODE_PARAMS_v2",
         "CUDA_MEMCPY3D_PEER_v1",
         "CUDA_MEMCPY3D_PEER_st",
         "CUDA_MEMCPY3D_PEER",
