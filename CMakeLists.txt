@@ -3,12 +3,6 @@ cmake_minimum_required(VERSION 3.16.8)
 project(hipify-clang)
 
 include(GNUInstallDirs)
-find_package(LLVM REQUIRED CONFIG PATHS ${CMAKE_PREFIX_PATH})
-
-message(STATUS "Found LLVM ${LLVM_PACKAGE_VERSION}:")
-message(STATUS "   - CMake module path: ${LLVM_CMAKE_DIR}")
-message(STATUS "   - Include path     : ${LLVM_INCLUDE_DIRS}")
-message(STATUS "   - Binary path      : ${LLVM_TOOLS_BINARY_DIR}")
 
 option(HIPIFY_CLANG_TESTS "Build HIPIFY tests, if lit is installed" OFF)
 option(HIPIFY_CLANG_TESTS_ONLY "Build HIPIFY tests only, if lit is installed and hipify-clang binary is already produced" OFF)
@@ -31,8 +25,51 @@ file(GLOB_RECURSE HIPIFY_HEADERS src/*.h)
 add_llvm_executable(hipify-clang ${HIPIFY_SOURCES} ${HIPIFY_HEADERS})
 target_link_directories(hipify-clang PRIVATE ${LLVM_LIBRARY_DIRS})
 
-set(CMAKE_CXX_COMPILER ${LLVM_TOOLS_BINARY_DIR}/clang++)
-set(CMAKE_C_COMPILER ${LLVM_TOOLS_BINARY_DIR}/clang)
+set(HIPIFY_INSTALL_ROOT_DIR ${CMAKE_INSTALL_PREFIX})
+set(HIPIFY_INSTALL_BIN_DIR ${HIPIFY_INSTALL_ROOT_DIR/bin})
+
+set(INSTALL_PATH_DOC_STRING "hipify-clang Installation Path")
+if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+    set(CMAKE_INSTALL_PREFIX "${PROJECT_BINARY_DIR}/dist" CACHE PATH ${INSTALL_PATH_DOC_STRING} FORCE)
+endif()
+
+option(HIPIFY_INCLUDE_IN_HIP_SDK "Include HIPIFY in HIP SDK" OFF)
+if(HIPIFY_INCLUDE_IN_HIP_SDK)
+  if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+    message(FATAL_ERROR "In order to include HIPIFY in HIP SDK, HIPIFY needs to be built with LLVM_EXTERNAL_PROJECTS")
+  endif()
+
+  # Need to add clang include directories explicitly if
+  # building as part of llvm.
+  if(LLVM_EXTERNAL_CLANG_SOURCE_DIR)
+    target_include_directories(hipify-clang
+      PRIVATE
+        ${LLVM_BINARY_DIR}/tools/clang/include
+        ${LLVM_EXTERNAL_CLANG_SOURCE_DIR}/include)
+  endif()
+  # Need to add lld include directories explicitly if
+  # building as part of llvm.
+  if(LLVM_EXTERNAL_LLD_SOURCE_DIR)
+    target_include_directories(hipify-clang
+      PRIVATE
+        ${LLVM_BINARY_DIR}/tools/lld/include
+        ${LLVM_EXTERNAL_LLD_SOURCE_DIR}/include)
+  endif()
+
+  set(CLANG_RESOURCE_HEADERS ${CMAKE_INSTALL_PREFIX}/lib/clang/${LLVM_VERSION_MAJOR}.${LLVM_VERSION_MINOR}.${LLVM_VERSION_PATCH})
+else()
+  find_package(LLVM REQUIRED CONFIG PATHS ${CMAKE_PREFIX_PATH})
+
+  message(STATUS "Found LLVM ${LLVM_PACKAGE_VERSION}:")
+  message(STATUS "   - CMake module path: ${LLVM_CMAKE_DIR}")
+  message(STATUS "   - Include path     : ${LLVM_INCLUDE_DIRS}")
+  message(STATUS "   - Binary path      : ${LLVM_TOOLS_BINARY_DIR}")
+
+  set(CMAKE_C_COMPILER ${LLVM_TOOLS_BINARY_DIR}/clang)
+  set(CMAKE_CXX_COMPILER ${LLVM_TOOLS_BINARY_DIR}/clang++)
+
+  set(CLANG_RESOURCE_HEADERS ${LLVM_DIR}/../../clang/${LLVM_VERSION_MAJOR}.${LLVM_VERSION_MINOR}.${LLVM_VERSION_PATCH})
+endif()
 
 # Link against LLVM and CLANG libraries
 target_link_libraries(hipify-clang PRIVATE
@@ -119,25 +156,22 @@ else()
 endif()
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${EXTRA_CFLAGS} -DHIPIFY_CLANG_RES=\\\"${LLVM_LIBRARY_DIRS}/clang/${LIB_CLANG_RES}\\\" ${addr_var}")
 
-set(INSTALL_PATH_DOC_STRING "hipify-clang Installation Path")
-if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
-    set(CMAKE_INSTALL_PREFIX "${PROJECT_BINARY_DIR}/dist" CACHE PATH ${INSTALL_PATH_DOC_STRING} FORCE)
-endif()
-
-set(HIPIFY_BIN_INSTALL_PATH "${CMAKE_INSTALL_PREFIX}/bin")
-
-install(TARGETS hipify-clang DESTINATION bin)
-# install bin directory in CMAKE_INSTALL_PREFIX path
 install(
-    DIRECTORY ${CMAKE_SOURCE_DIR}/bin
-    DESTINATION .
-    USE_SOURCE_PERMISSIONS
-    PATTERN "hipify-perl"
-    PATTERN "*.sh")
-# install all folders under clang/version/ in CMAKE_INSTALL_PREFIX path
+  TARGETS hipify-clang
+  DESTINATION ${HIPIFY_INSTALL_BIN_DIR})
 install(
-    DIRECTORY ${LLVM_DIR}/../../clang/${LIB_CLANG_RES}/
-    DESTINATION .
+  DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin
+  DESTINATION ${HIPIFY_INSTALL_ROOT_DIR}
+  USE_SOURCE_PERMISSIONS
+  PATTERN "hipify-perl"
+  PATTERN "*.sh")
+
+# Headers are already included in HIP SDK, so skip those if including
+# HIPIFY in HIP SDK.
+if(NOT HIPIFY_INCLUDE_IN_HIP_SDK)
+  install(
+    DIRECTORY ${CLANG_RESOURCE_HEADERS}
+    DESTINATION ${CMAKE_INSTALL_PREFIX}
     COMPONENT clang-resource-headers
     FILES_MATCHING
     PATTERN "*.h"
@@ -147,11 +181,11 @@ install(
     PATTERN "new"
     PATTERN "ppc_wrappers" EXCLUDE
     PATTERN "openmp_wrappers" EXCLUDE)
+endif()
 
 option(FILE_REORG_BACKWARD_COMPATIBILITY "Enable File Reorg with backward compatibility" ON)
 
 if(UNIX)
-
     #get rid of any RPATH definations already
     set_target_properties(hipify-clang PROPERTIES INSTALL_RPATH "")
     #set RPATH for the binary
