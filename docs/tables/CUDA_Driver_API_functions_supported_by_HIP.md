@@ -28,8 +28,14 @@
 |`CUDA_ARRAY_SPARSE_PROPERTIES_st`|11.1| | | | | | | |
 |`CUDA_ARRAY_SPARSE_PROPERTIES_v1`|11.3| | | | | | | |
 |`CUDA_BATCH_MEM_OP_NODE_PARAMS`|11.7| | | | | | | |
-|`CUDA_BATCH_MEM_OP_NODE_PARAMS_st`|11.7| | | | | | | |
+|`CUDA_BATCH_MEM_OP_NODE_PARAMS_st`|11.7| |12.2| | | | | |
+|`CUDA_BATCH_MEM_OP_NODE_PARAMS_v1`|12.2| | | | | | | |
+|`CUDA_BATCH_MEM_OP_NODE_PARAMS_v1_st`|12.2| | | | | | | |
+|`CUDA_BATCH_MEM_OP_NODE_PARAMS_v2`|12.2| | | | | | | |
+|`CUDA_BATCH_MEM_OP_NODE_PARAMS_v2_st`|12.2| | | | | | | |
 |`CUDA_CB`| | | | | | | | |
+|`CUDA_CHILD_GRAPH_NODE_PARAMS`|12.2| | | | | | | |
+|`CUDA_CHILD_GRAPH_NODE_PARAMS_st`|12.2| | | | | | | |
 |`CUDA_COOPERATIVE_LAUNCH_MULTI_DEVICE_NO_POST_LAUNCH_SYNC`|9.0| | |`hipCooperativeLaunchMultiDeviceNoPostSync`|3.2.0| | | |
 |`CUDA_COOPERATIVE_LAUNCH_MULTI_DEVICE_NO_PRE_LAUNCH_SYNC`|9.0| | |`hipCooperativeLaunchMultiDeviceNoPreSync`|3.2.0| | | |
 |`CUDA_ERROR_ALREADY_ACQUIRED`| | | |`hipErrorAlreadyAcquired`|1.6.0| | | |
@@ -124,6 +130,10 @@
 |`CUDA_ERROR_UNSUPPORTED_EXEC_AFFINITY`|11.4| | | | | | | |
 |`CUDA_ERROR_UNSUPPORTED_LIMIT`| | | |`hipErrorUnsupportedLimit`|1.6.0| | | |
 |`CUDA_ERROR_UNSUPPORTED_PTX_VERSION`|11.1| | | | | | | |
+|`CUDA_EVENT_RECORD_NODE_PARAMS`|12.2| | | | | | | |
+|`CUDA_EVENT_RECORD_NODE_PARAMS_st`|12.2| | | | | | | |
+|`CUDA_EVENT_WAIT_NODE_PARAMS`|12.2| | | | | | | |
+|`CUDA_EVENT_WAIT_NODE_PARAMS_st`|12.2| | | | | | | |
 |`CUDA_EXTERNAL_MEMORY_BUFFER_DESC`|10.0| | |`hipExternalMemoryBufferDesc`|4.3.0| | | |
 |`CUDA_EXTERNAL_MEMORY_BUFFER_DESC_st`|10.0| | |`hipExternalMemoryBufferDesc_st`|4.3.0| | | |
 |`CUDA_EXTERNAL_MEMORY_BUFFER_DESC_v1`|11.3| | |`hipExternalMemoryBufferDesc`|4.3.0| | | |
@@ -148,9 +158,13 @@
 |`CUDA_EXT_SEM_SIGNAL_NODE_PARAMS`|11.2| | | | | | | |
 |`CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_st`|11.2| | | | | | | |
 |`CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_v1`|11.3| | | | | | | |
+|`CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_v2`|12.2| | | | | | | |
+|`CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_v2_st`|12.2| | | | | | | |
 |`CUDA_EXT_SEM_WAIT_NODE_PARAMS`|11.2| | | | | | | |
 |`CUDA_EXT_SEM_WAIT_NODE_PARAMS_st`|11.2| | | | | | | |
 |`CUDA_EXT_SEM_WAIT_NODE_PARAMS_v1`|11.3| | | | | | | |
+|`CUDA_EXT_SEM_WAIT_NODE_PARAMS_v2`|12.2| | | | | | | |
+|`CUDA_EXT_SEM_WAIT_NODE_PARAMS_v2_st`|12.2| | | | | | | |
 |`CUDA_GRAPH_INSTANTIATE_ERROR`|12.0| | | | | | | |
 |`CUDA_GRAPH_INSTANTIATE_FLAG_AUTO_FREE_ON_LAUNCH`|11.4| | |`hipGraphInstantiateFlagAutoFreeOnLaunch`|5.2.0| | | |
 |`CUDA_GRAPH_INSTANTIATE_FLAG_DEVICE_LAUNCH`|12.0| | |`hipGraphInstantiateFlagDeviceLaunch`|5.6.0| | | |
@@ -165,11 +179,15 @@
 |`CUDA_HOST_NODE_PARAMS`|10.0| | |`hipHostNodeParams`|4.3.0| | | |
 |`CUDA_HOST_NODE_PARAMS_st`|10.0| | |`hipHostNodeParams`|4.3.0| | | |
 |`CUDA_HOST_NODE_PARAMS_v1`|11.3| | |`hipHostNodeParams`|4.3.0| | | |
+|`CUDA_HOST_NODE_PARAMS_v2`|12.2| | | | | | | |
+|`CUDA_HOST_NODE_PARAMS_v2_st`|12.2| | | | | | | |
 |`CUDA_KERNEL_NODE_PARAMS`|10.0| | |`hipKernelNodeParams`|4.3.0| | | |
 |`CUDA_KERNEL_NODE_PARAMS_st`|10.0| | |`hipKernelNodeParams`|4.3.0| | | |
 |`CUDA_KERNEL_NODE_PARAMS_v1`|11.3| | |`hipKernelNodeParams`|4.3.0| | | |
 |`CUDA_KERNEL_NODE_PARAMS_v2`|12.0| | | | | | | |
 |`CUDA_KERNEL_NODE_PARAMS_v2_st`|12.0| | | | | | | |
+|`CUDA_KERNEL_NODE_PARAMS_v3`|12.2| | | | | | | |
+|`CUDA_KERNEL_NODE_PARAMS_v3_st`|12.2| | | | | | | |
 |`CUDA_LAUNCH_PARAMS`|9.0| | |`hipFunctionLaunchParams`|5.5.0| | | |
 |`CUDA_LAUNCH_PARAMS_st`|9.0| | |`hipFunctionLaunchParams_t`|5.5.0| | | |
 |`CUDA_LAUNCH_PARAMS_v1`|11.3| | |`hipFunctionLaunchParams`|5.5.0| | | |
@@ -186,15 +204,21 @@
 |`CUDA_MEMCPY3D_v1`| | | |`HIP_MEMCPY3D`|3.2.0| | | |
 |`CUDA_MEMCPY3D_v1_st`| | | |`HIP_MEMCPY3D`|3.2.0| | | |
 |`CUDA_MEMCPY3D_v2`|11.3| | |`HIP_MEMCPY3D`|3.2.0| | | |
+|`CUDA_MEMCPY_NODE_PARAMS`|12.2| | | | | | | |
+|`CUDA_MEMCPY_NODE_PARAMS_st`|12.2| | | | | | | |
 |`CUDA_MEMSET_NODE_PARAMS`|10.0| | |`hipMemsetParams`|4.3.0| | | |
 |`CUDA_MEMSET_NODE_PARAMS_st`|10.0| | |`hipMemsetParams`|4.3.0| | | |
 |`CUDA_MEMSET_NODE_PARAMS_v1`|11.3| | |`hipMemsetParams`|4.3.0| | | |
+|`CUDA_MEMSET_NODE_PARAMS_v2`|12.2| | | | | | | |
+|`CUDA_MEMSET_NODE_PARAMS_v2_st`|12.2| | | | | | | |
 |`CUDA_MEM_ALLOC_NODE_PARAMS`|11.4| | |`hipMemAllocNodeParams`|5.5.0| | | |
 |`CUDA_MEM_ALLOC_NODE_PARAMS_st`|11.4| |12.2|`hipMemAllocNodeParams`|5.5.0| | | |
 |`CUDA_MEM_ALLOC_NODE_PARAMS_v1`|12.2| | |`hipMemAllocNodeParams`|5.5.0| | | |
 |`CUDA_MEM_ALLOC_NODE_PARAMS_v1_st`|12.2| | |`hipMemAllocNodeParams`|5.5.0| | | |
 |`CUDA_MEM_ALLOC_NODE_PARAMS_v2`|12.2| | | | | | | |
 |`CUDA_MEM_ALLOC_NODE_PARAMS_v2_st`|12.2| | | | | | | |
+|`CUDA_MEM_FREE_NODE_PARAMS`|12.2| | | | | | | |
+|`CUDA_MEM_FREE_NODE_PARAMS_st`|12.2| | | | | | | |
 |`CUDA_NVSCISYNC_ATTR_SIGNAL`|10.2| | | | | | | |
 |`CUDA_NVSCISYNC_ATTR_WAIT`|10.2| | | | | | | |
 |`CUDA_POINTER_ATTRIBUTE_ACCESS_FLAGS`|11.1| | | | | | | |
@@ -350,6 +374,7 @@
 |`CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_WIN32_HANDLE_SUPPORTED`|10.2| | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_WIN32_KMT_HANDLE_SUPPORTED`|10.2| | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_HOST_NATIVE_ATOMIC_SUPPORTED`|8.0| | |`hipDeviceAttributeHostNativeAtomicSupported`|4.3.0| | | |
+|`CU_DEVICE_ATTRIBUTE_HOST_NUMA_ID`|12.2| | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_HOST_REGISTER_SUPPORTED`|9.2| | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_INTEGRATED`| | | |`hipDeviceAttributeIntegrated`|1.9.0| | | |
 |`CU_DEVICE_ATTRIBUTE_IPC_EVENT_SUPPORTED`|12.0| | | | | | | |
@@ -426,6 +451,8 @@
 |`CU_DEVICE_ATTRIBUTE_MULTIPROCESSOR_COUNT`| | | |`hipDeviceAttributeMultiprocessorCount`|1.6.0| | | |
 |`CU_DEVICE_ATTRIBUTE_MULTI_GPU_BOARD`| | | |`hipDeviceAttributeIsMultiGpuBoard`|1.6.0| | | |
 |`CU_DEVICE_ATTRIBUTE_MULTI_GPU_BOARD_GROUP_ID`| | | |`hipDeviceAttributeMultiGpuBoardGroupId`|4.3.0| | | |
+|`CU_DEVICE_ATTRIBUTE_NUMA_CONFIG`|12.2| | | | | | | |
+|`CU_DEVICE_ATTRIBUTE_NUMA_ID`|12.2| | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_PAGEABLE_MEMORY_ACCESS`|8.0| | |`hipDeviceAttributePageableMemoryAccess`|3.10.0| | | |
 |`CU_DEVICE_ATTRIBUTE_PAGEABLE_MEMORY_ACCESS_USES_HOST_PAGE_TABLES`|9.2| | |`hipDeviceAttributePageableMemoryAccessUsesHostPageTables`|3.10.0| | | |
 |`CU_DEVICE_ATTRIBUTE_PCI_BUS_ID`| | | |`hipDeviceAttributePciBusId`|1.6.0| | | |
@@ -786,13 +813,20 @@
 |`CU_MEM_HANDLE_TYPE_WIN32`|10.2| | |`hipMemHandleTypeWin32`|5.2.0| | | |
 |`CU_MEM_HANDLE_TYPE_WIN32_KMT`|10.2| | |`hipMemHandleTypeWin32Kmt`|5.2.0| | | |
 |`CU_MEM_LOCATION_TYPE_DEVICE`|10.2| | |`hipMemLocationTypeDevice`|5.2.0| | | |
+|`CU_MEM_LOCATION_TYPE_HOST`|12.2| | | | | | | |
+|`CU_MEM_LOCATION_TYPE_HOST_NUMA`|12.2| | | | | | | |
+|`CU_MEM_LOCATION_TYPE_HOST_NUMA_CURRENT`|12.2| | | | | | | |
 |`CU_MEM_LOCATION_TYPE_INVALID`|10.2| | |`hipMemLocationTypeInvalid`|5.2.0| | | |
 |`CU_MEM_LOCATION_TYPE_MAX`|10.2| | | | | | | |
 |`CU_MEM_OPERATION_TYPE_MAP`|11.1| | |`hipMemOperationTypeMap`|5.2.0| | | |
 |`CU_MEM_OPERATION_TYPE_UNMAP`|11.1| | |`hipMemOperationTypeUnmap`|5.2.0| | | |
 |`CU_MEM_RANGE_ATTRIBUTE_ACCESSED_BY`|8.0| | |`hipMemRangeAttributeAccessedBy`|3.7.0| | | |
 |`CU_MEM_RANGE_ATTRIBUTE_LAST_PREFETCH_LOCATION`|8.0| | |`hipMemRangeAttributeLastPrefetchLocation`|3.7.0| | | |
+|`CU_MEM_RANGE_ATTRIBUTE_LAST_PREFETCH_LOCATION_ID`|12.2| | | | | | | |
+|`CU_MEM_RANGE_ATTRIBUTE_LAST_PREFETCH_LOCATION_TYPE`|12.2| | | | | | | |
 |`CU_MEM_RANGE_ATTRIBUTE_PREFERRED_LOCATION`|8.0| | |`hipMemRangeAttributePreferredLocation`|3.7.0| | | |
+|`CU_MEM_RANGE_ATTRIBUTE_PREFERRED_LOCATION_ID`|12.2| | | | | | | |
+|`CU_MEM_RANGE_ATTRIBUTE_PREFERRED_LOCATION_TYPE`|12.2| | | | | | | |
 |`CU_MEM_RANGE_ATTRIBUTE_READ_MOSTLY`|8.0| | |`hipMemRangeAttributeReadMostly`|3.7.0| | | |
 |`CU_MEM_RANGE_HANDLE_TYPE_DMA_BUF_FD`|11.7| | | | | | | |
 |`CU_MEM_RANGE_HANDLE_TYPE_MAX`|11.7| | | | | | | |
@@ -1017,6 +1051,8 @@
 |`CUd3d9register_flags`| | | | | | | | |
 |`CUd3d9register_flags_enum`| | | | | | | | |
 |`CUdevice`| | | |`hipDevice_t`|1.6.0| | | |
+|`CUdeviceNumaConfig`|12.2| | | | | | | |
+|`CUdeviceNumaConfig_enum`|12.2| | | | | | | |
 |`CUdevice_P2PAttribute`|8.0| | |`hipDeviceP2PAttr`|3.8.0| | | |
 |`CUdevice_P2PAttribute_enum`|8.0| | |`hipDeviceP2PAttr`|3.8.0| | | |
 |`CUdevice_attribute`| | | |`hipDeviceAttribute_t`|1.6.0| | | |
@@ -1097,6 +1133,8 @@
 |`CUgraphMem_attribute`|11.4| | |`hipGraphMemAttributeType`|5.3.0| | | |
 |`CUgraphMem_attribute_enum`|11.4| | |`hipGraphMemAttributeType`|5.3.0| | | |
 |`CUgraphNode`|10.0| | |`hipGraphNode_t`|4.3.0| | | |
+|`CUgraphNodeParams`|12.2| | | | | | | |
+|`CUgraphNodeParams_st`|12.2| | | | | | | |
 |`CUgraphNodeType`|10.0| | |`hipGraphNodeType`|4.3.0| | | |
 |`CUgraphNodeType_enum`|10.0| | |`hipGraphNodeType`|4.3.0| | | |
 |`CUgraphNode_st`|10.0| | |`hipGraphNode`|4.3.0| | | |
