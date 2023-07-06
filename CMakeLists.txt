@@ -5,14 +5,14 @@ project(hipify-clang)
 include(GNUInstallDirs)
 
 option(HIPIFY_INCLUDE_IN_HIP_SDK "Include HIPIFY in HIP SDK" OFF)
-
 if(HIPIFY_INCLUDE_IN_HIP_SDK)
   if(NOT WIN32)
     message(FATAL_ERROR "HIPIFY_INCLUDE_IN_HIP_SDK is only supported on Windows")
   endif()
-endif()
-
-if(NOT HIPIFY_INCLUDE_IN_HIP_SDK)
+  if(CMAKE_GENERATOR MATCHES "Visual Studio")
+    message(FATAL_ERROR "HIPIFY_INCLUDE_IN_HIP_SDK is not targeting Visual Studio")
+  endif()
+else()
   find_package(LLVM REQUIRED CONFIG PATHS ${CMAKE_PREFIX_PATH})
 
   message(STATUS "Found LLVM ${LLVM_PACKAGE_VERSION}:")
@@ -42,14 +42,6 @@ file(GLOB_RECURSE HIPIFY_HEADERS src/*.h)
 add_llvm_executable(hipify-clang ${HIPIFY_SOURCES} ${HIPIFY_HEADERS})
 target_link_directories(hipify-clang PRIVATE ${LLVM_LIBRARY_DIRS})
 
-set(HIPIFY_INSTALL_ROOT_DIR ${CMAKE_INSTALL_PREFIX})
-set(HIPIFY_INSTALL_BIN_DIR ${HIPIFY_INSTALL_ROOT_DIR/bin})
-
-set(INSTALL_PATH_DOC_STRING "hipify-clang Installation Path")
-if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
-    set(CMAKE_INSTALL_PREFIX "${PROJECT_BINARY_DIR}/dist" CACHE PATH ${INSTALL_PATH_DOC_STRING} FORCE)
-endif()
-
 if(HIPIFY_INCLUDE_IN_HIP_SDK)
   if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
     message(FATAL_ERROR "In order to include HIPIFY in HIP SDK, HIPIFY needs to be built with LLVM_EXTERNAL_PROJECTS")
@@ -72,8 +64,8 @@ if(HIPIFY_INCLUDE_IN_HIP_SDK)
         ${LLVM_EXTERNAL_LLD_SOURCE_DIR}/include)
   endif()
 else()
-  set(CMAKE_C_COMPILER ${LLVM_TOOLS_BINARY_DIR}/clang)
   set(CMAKE_CXX_COMPILER ${LLVM_TOOLS_BINARY_DIR}/clang++)
+  set(CMAKE_C_COMPILER ${LLVM_TOOLS_BINARY_DIR}/clang)
 endif()
 
 # Link against LLVM and CLANG libraries
@@ -161,15 +153,21 @@ else()
 endif()
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${EXTRA_CFLAGS} -DHIPIFY_CLANG_RES=\\\"${LLVM_LIBRARY_DIRS}/clang/${LIB_CLANG_RES}\\\" ${addr_var}")
 
+set(INSTALL_PATH_DOC_STRING "hipify-clang Installation Path")
+if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+    set(CMAKE_INSTALL_PREFIX "${PROJECT_BINARY_DIR}/dist" CACHE PATH ${INSTALL_PATH_DOC_STRING} FORCE)
+endif()
+
+set(HIPIFY_BIN_INSTALL_PATH "${CMAKE_INSTALL_PREFIX}/bin")
+
+install(TARGETS hipify-clang DESTINATION bin)
+# install bin directory in CMAKE_INSTALL_PREFIX path
 install(
-  TARGETS hipify-clang
-  DESTINATION ${HIPIFY_INSTALL_BIN_DIR})
-install(
-  DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin
-  DESTINATION ${HIPIFY_INSTALL_ROOT_DIR}
-  USE_SOURCE_PERMISSIONS
-  PATTERN "hipify-perl"
-  PATTERN "*.sh")
+    DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin
+    DESTINATION .
+    USE_SOURCE_PERMISSIONS
+    PATTERN "hipify-perl"
+    PATTERN "*.sh")
 
 # Headers are already included in HIP SDK, so skip those if including
 # HIPIFY in HIP SDK.
