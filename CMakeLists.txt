@@ -4,6 +4,16 @@ project(hipify-clang)
 
 include(GNUInstallDirs)
 
+option(HIPIFY_INCLUDE_IN_HIP_SDK "Include HIPIFY in HIP SDK" OFF)
+if(NOT HIPIFY_INCLUDE_IN_HIP_SDK)
+  find_package(LLVM REQUIRED CONFIG PATHS ${CMAKE_PREFIX_PATH})
+
+  message(STATUS "Found LLVM ${LLVM_PACKAGE_VERSION}:")
+  message(STATUS "   - CMake module path: ${LLVM_CMAKE_DIR}")
+  message(STATUS "   - Include path     : ${LLVM_INCLUDE_DIRS}")
+  message(STATUS "   - Binary path      : ${LLVM_TOOLS_BINARY_DIR}")
+endif()
+
 option(HIPIFY_CLANG_TESTS "Build HIPIFY tests, if lit is installed" OFF)
 option(HIPIFY_CLANG_TESTS_ONLY "Build HIPIFY tests only, if lit is installed and hipify-clang binary is already produced" OFF)
 
@@ -58,13 +68,6 @@ if(HIPIFY_INCLUDE_IN_HIP_SDK)
 
   set(CLANG_RESOURCE_HEADERS ${CMAKE_INSTALL_PREFIX}/lib/clang/${LLVM_VERSION_MAJOR}.${LLVM_VERSION_MINOR}.${LLVM_VERSION_PATCH})
 else()
-  find_package(LLVM REQUIRED CONFIG PATHS ${CMAKE_PREFIX_PATH})
-
-  message(STATUS "Found LLVM ${LLVM_PACKAGE_VERSION}:")
-  message(STATUS "   - CMake module path: ${LLVM_CMAKE_DIR}")
-  message(STATUS "   - Include path     : ${LLVM_INCLUDE_DIRS}")
-  message(STATUS "   - Binary path      : ${LLVM_TOOLS_BINARY_DIR}")
-
   set(CMAKE_C_COMPILER ${LLVM_TOOLS_BINARY_DIR}/clang)
   set(CMAKE_CXX_COMPILER ${LLVM_TOOLS_BINARY_DIR}/clang++)
 
