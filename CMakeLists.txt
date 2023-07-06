@@ -5,6 +5,13 @@ project(hipify-clang)
 include(GNUInstallDirs)
 
 option(HIPIFY_INCLUDE_IN_HIP_SDK "Include HIPIFY in HIP SDK" OFF)
+
+if(HIPIFY_INCLUDE_IN_HIP_SDK)
+  if(NOT WIN32)
+    message(FATAL_ERROR "HIPIFY_INCLUDE_IN_HIP_SDK is only supported on Windows")
+  endif()
+endif()
+
 if(NOT HIPIFY_INCLUDE_IN_HIP_SDK)
   find_package(LLVM REQUIRED CONFIG PATHS ${CMAKE_PREFIX_PATH})
 
@@ -43,7 +50,6 @@ if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
     set(CMAKE_INSTALL_PREFIX "${PROJECT_BINARY_DIR}/dist" CACHE PATH ${INSTALL_PATH_DOC_STRING} FORCE)
 endif()
 
-option(HIPIFY_INCLUDE_IN_HIP_SDK "Include HIPIFY in HIP SDK" OFF)
 if(HIPIFY_INCLUDE_IN_HIP_SDK)
   if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
     message(FATAL_ERROR "In order to include HIPIFY in HIP SDK, HIPIFY needs to be built with LLVM_EXTERNAL_PROJECTS")
@@ -65,13 +71,9 @@ if(HIPIFY_INCLUDE_IN_HIP_SDK)
         ${LLVM_BINARY_DIR}/tools/lld/include
         ${LLVM_EXTERNAL_LLD_SOURCE_DIR}/include)
   endif()
-
-  set(CLANG_RESOURCE_HEADERS ${CMAKE_INSTALL_PREFIX}/lib/clang/${LLVM_VERSION_MAJOR}.${LLVM_VERSION_MINOR}.${LLVM_VERSION_PATCH})
 else()
   set(CMAKE_C_COMPILER ${LLVM_TOOLS_BINARY_DIR}/clang)
   set(CMAKE_CXX_COMPILER ${LLVM_TOOLS_BINARY_DIR}/clang++)
-
-  set(CLANG_RESOURCE_HEADERS ${LLVM_DIR}/../../clang/${LLVM_VERSION_MAJOR}.${LLVM_VERSION_MINOR}.${LLVM_VERSION_PATCH})
 endif()
 
 # Link against LLVM and CLANG libraries
@@ -172,23 +174,25 @@ install(
 # Headers are already included in HIP SDK, so skip those if including
 # HIPIFY in HIP SDK.
 if(NOT HIPIFY_INCLUDE_IN_HIP_SDK)
+  # install all folders under clang/version/ in CMAKE_INSTALL_PREFIX path
   install(
-    DIRECTORY ${CLANG_RESOURCE_HEADERS}
-    DESTINATION ${CMAKE_INSTALL_PREFIX}
-    COMPONENT clang-resource-headers
-    FILES_MATCHING
-    PATTERN "*.h"
-    PATTERN "*.modulemap"
-    PATTERN "algorithm"
-    PATTERN "complex"
-    PATTERN "new"
-    PATTERN "ppc_wrappers" EXCLUDE
-    PATTERN "openmp_wrappers" EXCLUDE)
+      DIRECTORY ${LLVM_DIR}/../../clang/${LIB_CLANG_RES}/
+      DESTINATION .
+      COMPONENT clang-resource-headers
+      FILES_MATCHING
+      PATTERN "*.h"
+      PATTERN "*.modulemap"
+      PATTERN "algorithm"
+      PATTERN "complex"
+      PATTERN "new"
+      PATTERN "ppc_wrappers" EXCLUDE
+      PATTERN "openmp_wrappers" EXCLUDE)
 endif()
 
 option(FILE_REORG_BACKWARD_COMPATIBILITY "Enable File Reorg with backward compatibility" ON)
 
 if(UNIX)
+
     #get rid of any RPATH definations already
     set_target_properties(hipify-clang PROPERTIES INSTALL_RPATH "")
     #set RPATH for the binary
