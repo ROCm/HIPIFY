@@ -168,6 +168,7 @@ install(
     USE_SOURCE_PERMISSIONS
     PATTERN "hipify-perl"
     PATTERN "*.sh")
+<<<<<<< HEAD
 
 # Headers are already included in HIP SDK, so skip those if including
 # HIPIFY in HIP SDK.
@@ -186,6 +187,21 @@ if(NOT HIPIFY_INCLUDE_IN_HIP_SDK)
       PATTERN "ppc_wrappers" EXCLUDE
       PATTERN "openmp_wrappers" EXCLUDE)
 endif()
+=======
+# install all folders under clang/version/ in CMAKE_INSTALL_PREFIX path
+install(
+    DIRECTORY ${LLVM_DIR}/../../clang/${LLVM_VERSION_MAJOR}.${LLVM_VERSION_MINOR}.${LLVM_VERSION_PATCH}/
+    DESTINATION .
+    COMPONENT clang-resource-headers
+    FILES_MATCHING
+    PATTERN "*.h"
+    PATTERN "*.modulemap"
+    PATTERN "algorithm"
+    PATTERN "complex"
+    PATTERN "new"
+    PATTERN "ppc_wrappers" EXCLUDE
+    PATTERN "openmp_wrappers" EXCLUDE)
+>>>>>>> parent of 6c43bc2 ([HIPIFY][SWDEV-405584][#713][install][fix] Make install clang version-independent)
 
 option(FILE_REORG_BACKWARD_COMPATIBILITY "Enable File Reorg with backward compatibility" ON)
 
