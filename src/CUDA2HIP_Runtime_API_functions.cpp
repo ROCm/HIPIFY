@@ -261,7 +261,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
 
   // 9. Memory Management
   // no analogue
-  {"cudaArrayGetInfo",                                        {"hipArrayGetInfo",                                        "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_EXPERIMENTAL}},
+  {"cudaArrayGetInfo",                                        {"hipArrayGetInfo",                                        "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY}},
   // cuMemFree
   {"cudaFree",                                                {"hipFree",                                                "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY}},
   // no analogue
@@ -1354,7 +1354,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP {
   {"hipGraphReleaseUserObject",                               {HIP_5030, HIP_0,    HIP_0   }},
   {"hipOccupancyMaxPotentialBlockSizeVariableSMem",           {HIP_5050, HIP_0,    HIP_0   }},
   {"hipOccupancyMaxPotentialBlockSizeVariableSMemWithFlags",  {HIP_5050, HIP_0,    HIP_0   }},
-  {"hipArrayGetInfo",                                         {HIP_5060, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipArrayGetInfo",                                         {HIP_5060, HIP_0,    HIP_0   }},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_RUNTIME_API_SECTION_MAP {
