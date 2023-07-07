@@ -426,7 +426,7 @@ int main() {
   status_t = cusparseCopyMatDescr(matDescr_t, matDescr_t_2);
 #endif
 
-#if CUDA_VERSION >= 10010
+#if (CUDA_VERSION >= 10010 && CUDA_VERSION < 11000 && !defined(_WIN32)) || CUDA_VERSION >= 11000
   // CHECK: hipsparseSpMatDescr_t spMatDescr_t, matC;
   cusparseSpMatDescr_t spMatDescr_t, matC;
 
@@ -470,11 +470,6 @@ int main() {
 
   // CHECK: hipsparseSpMMAlg_t spMMAlg_t;
   cusparseSpMMAlg_t spMMAlg_t;
-
-  // CHECK: hipsparseCsr2CscAlg_t Csr2CscAlg_t;
-  // CHECK-NEXT: hipsparseCsr2CscAlg_t CSR2CSC_ALG1 = HIPSPARSE_CSR2CSC_ALG1;
-  cusparseCsr2CscAlg_t Csr2CscAlg_t;
-  cusparseCsr2CscAlg_t CSR2CSC_ALG1 = CUSPARSE_CSR2CSC_ALG1;
 
   // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCreateCoo(cusparseSpMatDescr_t* spMatDescr, int64_t ows, int64_t cols, int64_t nnz, void* cooRowInd, void* cooColInd, void* cooValues, cusparseIndexType_t cooIdxType, cusparseIndexBase_t idxBase, cudaDataType valueType);
   // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseCreateCoo(hipsparseSpMatDescr_t* spMatDescr, int64_t rows, int64_t cols, int64_t nnz, void* cooRowInd, void* cooColInd, void* cooValues, hipsparseIndexType_t cooIdxType, hipsparseIndexBase_t idxBase, hipDataType valueType);
@@ -527,27 +522,33 @@ int main() {
   status_t = cusparseDnMatSetStridedBatch(dnMatDescr_t, batchCount, batchStride);
 #endif
 
-#if CUDA_VERSION >= 10010 && CUDA_VERSION < 12000
+#if CUDA_VERSION >= 10010
+  // CHECK: hipsparseCsr2CscAlg_t Csr2CscAlg_t;
+  // CHECK-NEXT: hipsparseCsr2CscAlg_t CSR2CSC_ALG1 = HIPSPARSE_CSR2CSC_ALG1;
+  cusparseCsr2CscAlg_t Csr2CscAlg_t;
+  cusparseCsr2CscAlg_t CSR2CSC_ALG1 = CUSPARSE_CSR2CSC_ALG1;
+#endif
+
+#if (CUDA_VERSION >= 10010 && CUDA_VERSION < 11000 && !defined(_WIN32)) || (CUDA_VERSION >= 11000 && CUDA_VERSION < 12000)
   // CHECK: hipsparseSpMMAlg_t COOMM_ALG1 = HIPSPARSE_COOMM_ALG1;
   // CHECK-NEXT: hipsparseSpMMAlg_t COOMM_ALG2 = HIPSPARSE_COOMM_ALG2;
   // CHECK-NEXT: hipsparseSpMMAlg_t COOMM_ALG3 = HIPSPARSE_COOMM_ALG3;
   cusparseSpMMAlg_t COOMM_ALG1 = CUSPARSE_COOMM_ALG1;
   cusparseSpMMAlg_t COOMM_ALG2 = CUSPARSE_COOMM_ALG2;
   cusparseSpMMAlg_t COOMM_ALG3 = CUSPARSE_COOMM_ALG3;
+#endif
 
+#if CUDA_VERSION >= 10010 && CUDA_VERSION < 12000
   // CHECK: hipsparseCsr2CscAlg_t CSR2CSC_ALG2 = HIPSPARSE_CSR2CSC_ALG2;
   cusparseCsr2CscAlg_t CSR2CSC_ALG2 = CUSPARSE_CSR2CSC_ALG2;
 #endif
 
-#if CUDA_VERSION >= 10020
+#if (CUDA_VERSION >= 10020 && CUDA_VERSION < 11000 && !defined(_WIN32)) || CUDA_VERSION >= 11000
   // CHECK: hipsparseSpVecDescr_t spVecDescr_t;
   cusparseSpVecDescr_t spVecDescr_t;
 
   // CHECK: hipsparseDnVecDescr_t dnVecDescr_t, vecX, vecY;
   cusparseDnVecDescr_t dnVecDescr_t, vecX, vecY;
-
-  // CHECK: hipsparseStatus_t STATUS_NOT_SUPPORTED = HIPSPARSE_STATUS_NOT_SUPPORTED;
-  cusparseStatus_t STATUS_NOT_SUPPORTED = CUSPARSE_STATUS_NOT_SUPPORTED;
 
   // CHECK: hipsparseSpMVAlg_t spMVAlg_t;
   cusparseSpMVAlg_t spMVAlg_t;
@@ -648,7 +649,12 @@ int main() {
   status_t = cusparseSpMV(handle_t, opA, alpha, spMatDescr_t, vecX, beta, vecY, dataType, spMVAlg_t, tempBuffer);
 #endif
 
-#if CUDA_VERSION >= 10020 && CUDA_VERSION < 12000
+#if CUDA_VERSION >= 10020
+  // CHECK: hipsparseStatus_t STATUS_NOT_SUPPORTED = HIPSPARSE_STATUS_NOT_SUPPORTED;
+  cusparseStatus_t STATUS_NOT_SUPPORTED = CUSPARSE_STATUS_NOT_SUPPORTED;
+#endif
+
+#if (CUDA_VERSION >= 10020 && CUDA_VERSION < 11000 && !defined(_WIN32)) || (CUDA_VERSION >= 11000 && CUDA_VERSION < 12000)
   // CHECK: hipsparseFormat_t FORMAT_COO_AOS = HIPSPARSE_FORMAT_COO_AOS;
   cusparseFormat_t FORMAT_COO_AOS = CUSPARSE_FORMAT_COO_AOS;
 

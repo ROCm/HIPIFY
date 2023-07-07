@@ -431,7 +431,7 @@ int main() {
   status_t = cusparseCopyMatDescr(matDescr_t, matDescr_t_2);
 #endif
 
-#if CUDA_VERSION >= 10010
+#if (CUDA_VERSION >= 10010 && CUDA_VERSION < 11000 && !defined(_WIN32)) || CUDA_VERSION >= 11000
   // CHECK: _rocsparse_spmat_descr *spMatDescr = nullptr;
   // CHECK-NEXT: rocsparse_spmat_descr spMatDescr_t, matC;
   cusparseSpMatDescr *spMatDescr = nullptr;
@@ -531,7 +531,7 @@ int main() {
   status_t = cusparseDnMatSetStridedBatch(dnMatDescr_t, batchCount, batchStride);
 #endif
 
-#if CUDA_VERSION >= 10020
+#if (CUDA_VERSION >= 10020 && CUDA_VERSION < 11000 && !defined(_WIN32)) || CUDA_VERSION >= 11000
   // CHECK: _rocsparse_spvec_descr *spVecDescr = nullptr;
   // CHECK-NEXT: rocsparse_spvec_descr spVecDescr_t;
   cusparseSpVecDescr *spVecDescr = nullptr;
@@ -541,9 +541,6 @@ int main() {
   // CHECK-NEXT: rocsparse_dnvec_descr dnVecDescr_t, vecX, vecY;
   cusparseDnVecDescr *dnVecDescr = nullptr;
   cusparseDnVecDescr_t dnVecDescr_t, vecX, vecY;
-
-  // CHECK: rocsparse_status STATUS_NOT_SUPPORTED = rocsparse_status_not_implemented;
-  cusparseStatus_t STATUS_NOT_SUPPORTED = CUSPARSE_STATUS_NOT_SUPPORTED;
 
   // CHECK: rocsparse_spmv_alg spMVAlg_t;
   cusparseSpMVAlg_t spMVAlg_t;
@@ -644,7 +641,12 @@ int main() {
   status_t = cusparseSpMV(handle_t, opA, alpha, spMatDescr_t, vecX, beta, vecY, dataType, spMVAlg_t, tempBuffer);
 #endif
 
-#if CUDA_VERSION >= 10020 && CUDA_VERSION < 12000
+#if CUDA_VERSION >= 10020
+  // CHECK: rocsparse_status STATUS_NOT_SUPPORTED = rocsparse_status_not_implemented;
+  cusparseStatus_t STATUS_NOT_SUPPORTED = CUSPARSE_STATUS_NOT_SUPPORTED;
+#endif
+
+#if (CUDA_VERSION >= 10020 && CUDA_VERSION < 11000 && !defined(_WIN32)) || (CUDA_VERSION >= 11000 && CUDA_VERSION < 12000)
   // CHECK: rocsparse_format FORMAT_COO_AOS = rocsparse_format_coo_aos;
   cusparseFormat_t FORMAT_COO_AOS = CUSPARSE_FORMAT_COO_AOS;
 
