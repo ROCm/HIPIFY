@@ -431,8 +431,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   // 17. Unified Addressing
   // cudaMemAdvise
   {"cuMemAdvise",                                          {"hipMemAdvise",                                            "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED}},
+  //
+  {"cuMemAdvise_v2",                                       {"hipMemAdvise_v2",                                         "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED, HIP_UNSUPPORTED}},
   // TODO: double check cudaMemPrefetchAsync
   {"cuMemPrefetchAsync",                                   {"hipMemPrefetchAsync",                                     "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED}},
+  //
+  {"cuMemPrefetchAsync_v2",                                {"hipMemPrefetchAsync_v2",                                  "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED, HIP_UNSUPPORTED}},
   // cudaMemRangeGetAttribute
   {"cuMemRangeGetAttribute",                               {"hipMemRangeGetAttribute",                                 "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED}},
   // cudaMemRangeGetAttributes
@@ -782,6 +786,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuGraphInstantiateWithParams",                         {"hipGraphInstantiateWithParams",                           "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_UNSUPPORTED}},
   // cudaGraphExecGetFlags
   {"cuGraphExecGetFlags",                                  {"hipGraphExecGetFlags",                                    "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_UNSUPPORTED}},
+  //
+  {"cuGraphAddNode",                                       {"hipGraphAddNode",                                         "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_UNSUPPORTED}},
+  //
+  {"cuGraphNodeSetParams",                                 {"hipGraphNodeSetParams",                                   "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_UNSUPPORTED}},
+  //
+  {"cuGraphExecNodeSetParams",                             {"hipGraphExecNodeSetParams",                               "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_UNSUPPORTED}},
 
   // 25. Occupancy
   // cudaOccupancyAvailableDynamicSMemPerBlock
@@ -1384,6 +1394,11 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_FUNCTION_VER_MAP {
   {"cuCoredumpGetAttributeGlobal",                         {CUDA_121, CUDA_0,   CUDA_0  }},
   {"cuCoredumpSetAttribute",                               {CUDA_121, CUDA_0,   CUDA_0  }},
   {"cuCoredumpSetAttributeGlobal",                         {CUDA_121, CUDA_0,   CUDA_0  }},
+  {"cuMemPrefetchAsync_v2",                                {CUDA_122, CUDA_0,   CUDA_0  }},
+  {"cuMemAdvise_v2",                                       {CUDA_122, CUDA_0,   CUDA_0  }},
+  {"cuGraphAddNode",                                       {CUDA_122, CUDA_0,   CUDA_0  }},
+  {"cuGraphNodeSetParams",                                 {CUDA_122, CUDA_0,   CUDA_0  }},
+  {"cuGraphExecNodeSetParams",                             {CUDA_122, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_FUNCTION_VER_MAP {
