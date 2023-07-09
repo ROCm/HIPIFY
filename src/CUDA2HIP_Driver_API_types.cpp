@@ -340,10 +340,6 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUgraphNodeParams_st",                                             {"hipGraphNodeParams",                                       "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   {"CUgraphNodeParams",                                                {"hipGraphNodeParams",                                       "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
-  //
-  {"CUdeviceNumaConfig_enum",                                          {"hipDeviceNumaConfig",                                      "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-  {"CUdeviceNumaConfig",                                               {"hipDeviceNumaConfig",                                      "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-
   // cudaArrayMemoryRequirements
   {"CUDA_ARRAY_MEMORY_REQUIREMENTS_st",                                {"hipArrayMemoryRequirements",                               "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   {"CUDA_ARRAY_MEMORY_REQUIREMENTS_v1",                                {"hipArrayMemoryRequirements",                               "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
@@ -2534,6 +2530,15 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   //
   {"CU_COREDUMP_MAX",                                                  {"HIP_COREDUMP_MAX",                                         "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
+  //
+  {"CUdeviceNumaConfig",                                               {"hipDeviceNumaConfig",                                      "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CUdeviceNumaConfig_enum",                                          {"hipDeviceNumaConfig",                                      "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // CUdeviceNumaConfig enum values
+  //
+  {"CU_DEVICE_NUMA_CONFIG_NONE",                                       {"HIP_DEVICE_NUMA_CONFIG_NONE",                              "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CU_DEVICE_NUMA_CONFIG_NUMA_NODE",                                  {"HIP_DEVICE_NUMA_CONFIG_NUMA_NODE",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+
   // 4. Typedefs
 
   // no analogue
@@ -3512,6 +3517,8 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_TYPE_NAME_VER_MAP {
   {"CUgraphNodeParams",                                                {CUDA_122, CUDA_0,   CUDA_0  }},
   {"CUdeviceNumaConfig_enum",                                          {CUDA_122, CUDA_0,   CUDA_0  }},
   {"CUdeviceNumaConfig",                                               {CUDA_122, CUDA_0,   CUDA_0  }},
+  {"CU_DEVICE_NUMA_CONFIG_NONE",                                       {CUDA_122, CUDA_0,   CUDA_0  }},
+  {"CU_DEVICE_NUMA_CONFIG_NUMA_NODE",                                  {CUDA_122, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {

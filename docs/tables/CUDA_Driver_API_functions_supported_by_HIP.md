@@ -479,6 +479,8 @@
 |`CU_DEVICE_ATTRIBUTE_WARP_SIZE`| | | |`hipDeviceAttributeWarpSize`|1.6.0| | | |
 |`CU_DEVICE_CPU`|8.0| | |`hipCpuDeviceId`|3.7.0| | | |
 |`CU_DEVICE_INVALID`|8.0| | |`hipInvalidDeviceId`|3.7.0| | | |
+|`CU_DEVICE_NUMA_CONFIG_NONE`|12.2| | | | | | | |
+|`CU_DEVICE_NUMA_CONFIG_NUMA_NODE`|12.2| | | | | | | |
 |`CU_DEVICE_P2P_ATTRIBUTE_ACCESS_ACCESS_SUPPORTED`|10.1|10.1| |`hipDevP2PAttrHipArrayAccessSupported`|3.8.0| | | |
 |`CU_DEVICE_P2P_ATTRIBUTE_ACCESS_SUPPORTED`|8.0| | |`hipDevP2PAttrAccessSupported`|3.8.0| | | |
 |`CU_DEVICE_P2P_ATTRIBUTE_ARRAY_ACCESS_ACCESS_SUPPORTED`|9.2|10.0|10.1|`hipDevP2PAttrHipArrayAccessSupported`|3.8.0| | | |
@@ -1647,7 +1649,9 @@
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
 |`cuMemAdvise`|8.0| | |`hipMemAdvise`|3.7.0| | | |
+|`cuMemAdvise_v2`|12.2| | | | | | | |
 |`cuMemPrefetchAsync`|8.0| | |`hipMemPrefetchAsync`|3.7.0| | | |
+|`cuMemPrefetchAsync_v2`|12.2| | | | | | | |
 |`cuMemRangeGetAttribute`|8.0| | |`hipMemRangeGetAttribute`|3.7.0| | | |
 |`cuMemRangeGetAttributes`|8.0| | |`hipMemRangeGetAttributes`|3.7.0| | | |
 |`cuPointerGetAttribute`| | | |`hipPointerGetAttribute`|5.0.0| | | |
@@ -1776,6 +1780,7 @@
 |`cuGraphAddMemFreeNode`|11.4| | |`hipGraphAddMemFreeNode`|5.5.0| | | |
 |`cuGraphAddMemcpyNode`|10.0| | | | | | | |
 |`cuGraphAddMemsetNode`|10.0| | | | | | | |
+|`cuGraphAddNode`|12.2| | | | | | | |
 |`cuGraphBatchMemOpNodeGetParams`|11.7| | | | | | | |
 |`cuGraphBatchMemOpNodeSetParams`|11.7| | | | | | | |
 |`cuGraphChildGraphNodeGetGraph`|10.0| | |`hipGraphChildGraphNodeGetGraph`|5.0.0| | | |
@@ -1800,6 +1805,7 @@
 |`cuGraphExecKernelNodeSetParams`|10.1| | |`hipGraphExecKernelNodeSetParams`|4.5.0| | | |
 |`cuGraphExecMemcpyNodeSetParams`|10.2| | | | | | | |
 |`cuGraphExecMemsetNodeSetParams`|10.2| | | | | | | |
+|`cuGraphExecNodeSetParams`|12.2| | | | | | | |
 |`cuGraphExecUpdate`|10.2| | |`hipGraphExecUpdate`|5.0.0| | | |
 |`cuGraphExternalSemaphoresSignalNodeGetParams`|11.2| | | | | | | |
 |`cuGraphExternalSemaphoresSignalNodeSetParams`|11.2| | | | | | | |
@@ -1832,6 +1838,7 @@
 |`cuGraphNodeGetEnabled`|11.6| | |`hipGraphNodeGetEnabled`|5.5.0| | | |
 |`cuGraphNodeGetType`|10.0| | |`hipGraphNodeGetType`|5.0.0| | | |
 |`cuGraphNodeSetEnabled`|11.6| | |`hipGraphNodeSetEnabled`|5.5.0| | | |
+|`cuGraphNodeSetParams`|12.2| | | | | | | |
 |`cuGraphReleaseUserObject`|11.3| | |`hipGraphReleaseUserObject`|5.3.0| | | |
 |`cuGraphRemoveDependencies`|10.0| | |`hipGraphRemoveDependencies`|5.0.0| | | |
 |`cuGraphRetainUserObject`|11.3| | |`hipGraphRetainUserObject`|5.3.0| | | |
