@@ -431,11 +431,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   // 17. Unified Addressing
   // cudaMemAdvise
   {"cuMemAdvise",                                          {"hipMemAdvise",                                            "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED}},
-  //
+  // cudaMemAdvise_v2
   {"cuMemAdvise_v2",                                       {"hipMemAdvise_v2",                                         "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED, HIP_UNSUPPORTED}},
-  // TODO: double check cudaMemPrefetchAsync
+  // cudaMemPrefetchAsync
   {"cuMemPrefetchAsync",                                   {"hipMemPrefetchAsync",                                     "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED}},
-  //
+  // cudaMemPrefetchAsync_v2
   {"cuMemPrefetchAsync_v2",                                {"hipMemPrefetchAsync_v2",                                  "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED, HIP_UNSUPPORTED}},
   // cudaMemRangeGetAttribute
   {"cuMemRangeGetAttribute",                               {"hipMemRangeGetAttribute",                                 "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED}},
@@ -786,11 +786,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuGraphInstantiateWithParams",                         {"hipGraphInstantiateWithParams",                           "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_UNSUPPORTED}},
   // cudaGraphExecGetFlags
   {"cuGraphExecGetFlags",                                  {"hipGraphExecGetFlags",                                    "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_UNSUPPORTED}},
-  //
+  // cudaGraphAddNode
   {"cuGraphAddNode",                                       {"hipGraphAddNode",                                         "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_UNSUPPORTED}},
-  //
+  // cudaGraphNodeSetParams
   {"cuGraphNodeSetParams",                                 {"hipGraphNodeSetParams",                                   "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_UNSUPPORTED}},
-  //
+  // cudaGraphExecNodeSetParams
   {"cuGraphExecNodeSetParams",                             {"hipGraphExecNodeSetParams",                               "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_UNSUPPORTED}},
 
   // 25. Occupancy
