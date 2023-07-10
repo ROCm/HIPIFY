@@ -171,8 +171,10 @@
 |`cudaMallocMipmappedArray`| | | |`hipMallocMipmappedArray`|3.5.0| | | |
 |`cudaMallocPitch`| | | |`hipMallocPitch`|1.6.0| | | |
 |`cudaMemAdvise`|8.0| | |`hipMemAdvise`|3.7.0| | | |
+|`cudaMemAdvise_v2`|12.2| | | | | | | |
 |`cudaMemGetInfo`| | | |`hipMemGetInfo`|1.6.0| | | |
 |`cudaMemPrefetchAsync`|8.0| | |`hipMemPrefetchAsync`|3.7.0| | | |
+|`cudaMemPrefetchAsync_v2`|12.2| | | | | | | |
 |`cudaMemRangeGetAttribute`|8.0| | |`hipMemRangeGetAttribute`|3.7.0| | | |
 |`cudaMemRangeGetAttributes`|8.0| | |`hipMemRangeGetAttributes`|3.7.0| | | |
 |`cudaMemcpy`| | | |`hipMemcpy`|1.5.0| | | |
@@ -424,6 +426,7 @@
 |`cudaGraphAddMemcpyNodeFromSymbol`|11.1| | |`hipGraphAddMemcpyNodeFromSymbol`|5.0.0| | | |
 |`cudaGraphAddMemcpyNodeToSymbol`|11.1| | |`hipGraphAddMemcpyNodeToSymbol`|5.0.0| | | |
 |`cudaGraphAddMemsetNode`|10.0| | |`hipGraphAddMemsetNode`|4.3.0| | | |
+|`cudaGraphAddNode`|12.2| | | | | | | |
 |`cudaGraphChildGraphNodeGetGraph`|10.0| | |`hipGraphChildGraphNodeGetGraph`|5.0.0| | | |
 |`cudaGraphClone`|10.0| | |`hipGraphClone`|5.0.0| | | |
 |`cudaGraphCreate`|10.0| | |`hipGraphCreate`|4.3.0| | | |
@@ -448,6 +451,7 @@
 |`cudaGraphExecMemcpyNodeSetParamsFromSymbol`|11.1| | |`hipGraphExecMemcpyNodeSetParamsFromSymbol`|5.0.0| | | |
 |`cudaGraphExecMemcpyNodeSetParamsToSymbol`|11.1| | |`hipGraphExecMemcpyNodeSetParamsToSymbol`|5.0.0| | | |
 |`cudaGraphExecMemsetNodeSetParams`|11.0| | |`hipGraphExecMemsetNodeSetParams`|5.0.0| | | |
+|`cudaGraphExecNodeSetParams`|12.2| | | | | | | |
 |`cudaGraphExecUpdate`|11.0| | |`hipGraphExecUpdate`|5.0.0| | | |
 |`cudaGraphExternalSemaphoresSignalNodeGetParams`|11.2| | | | | | | |
 |`cudaGraphExternalSemaphoresSignalNodeSetParams`|11.2| | | | | | | |
@@ -482,6 +486,7 @@
 |`cudaGraphNodeGetEnabled`|11.6| | |`hipGraphNodeGetEnabled`|5.5.0| | | |
 |`cudaGraphNodeGetType`|11.0| | |`hipGraphNodeGetType`|5.0.0| | | |
 |`cudaGraphNodeSetEnabled`|11.6| | |`hipGraphNodeSetEnabled`|5.5.0| | | |
+|`cudaGraphNodeSetParams`|12.2| | | | | | | |
 |`cudaGraphReleaseUserObject`|11.3| | |`hipGraphReleaseUserObject`|5.3.0| | | |
 |`cudaGraphRemoveDependencies`|11.0| | |`hipGraphRemoveDependencies`|5.0.0| | | |
 |`cudaGraphRetainUserObject`|11.3| | |`hipGraphRetainUserObject`|5.3.0| | | |
