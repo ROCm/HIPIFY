@@ -180,13 +180,13 @@ if (NOT HIPIFY_CLANG_TESTS_ONLY)
       PATTERN "openmp_wrappers" EXCLUDE)
   endif()
 
-  option(FILE_REORG_BACKWARD_COMPATIBILITY "Enable File Reorg with backward compatibility" ON)
-
   if(UNIX)
     # Get rid of any RPATH definations already.
     set_target_properties(hipify-clang PROPERTIES INSTALL_RPATH "")
     # Set RPATH for the binary.
     set_target_properties(hipify-clang PROPERTIES LINK_FLAGS "-Wl,--enable-new-dtags -Wl,--rpath,$ORIGIN/../lib" )
+
+    option(FILE_REORG_BACKWARD_COMPATIBILITY "Enable File Reorg with backward compatibility" ON)
 
     if(FILE_REORG_BACKWARD_COMPATIBILITY)
       include(hipify-backward-compat.cmake)
