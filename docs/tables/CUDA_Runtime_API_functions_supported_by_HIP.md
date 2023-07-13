@@ -662,6 +662,7 @@
 |`cudaDevAttrGlobalMemoryBusWidth`| | | |`hipDeviceAttributeMemoryBusWidth`|1.6.0| | | |
 |`cudaDevAttrGpuOverlap`| | | |`hipDeviceAttributeAsyncEngineCount`|4.3.0| | | |
 |`cudaDevAttrHostNativeAtomicSupported`|8.0| | |`hipDeviceAttributeHostNativeAtomicSupported`|4.3.0| | | |
+|`cudaDevAttrHostNumaId`|12.2| | | | | | | |
 |`cudaDevAttrHostRegisterReadOnlySupported`|11.1| | | | | | | |
 |`cudaDevAttrHostRegisterSupported`|9.2| | | | | | | |
 |`cudaDevAttrIntegrated`| | | |`hipDeviceAttributeIntegrated`|1.9.0| | | |
@@ -736,6 +737,8 @@
 |`cudaDevAttrMemoryPoolsSupported`|11.2| | |`hipDeviceAttributeMemoryPoolsSupported`|5.2.0| | | |
 |`cudaDevAttrMultiGpuBoardGroupID`| | | |`hipDeviceAttributeMultiGpuBoardGroupID`|5.0.0| | | |
 |`cudaDevAttrMultiProcessorCount`| | | |`hipDeviceAttributeMultiprocessorCount`|1.6.0| | | |
+|`cudaDevAttrNumaConfig`|12.2| | | | | | | |
+|`cudaDevAttrNumaId`|12.2| | | | | | | |
 |`cudaDevAttrPageableMemoryAccess`|8.0| | |`hipDeviceAttributePageableMemoryAccess`|3.10.0| | | |
 |`cudaDevAttrPageableMemoryAccessUsesHostPageTables`|9.2| | |`hipDeviceAttributePageableMemoryAccessUsesHostPageTables`|3.10.0| | | |
 |`cudaDevAttrPciBusId`| | | |`hipDeviceAttributePciBusId`|1.6.0| | | |
@@ -1172,6 +1175,7 @@
 |`cudaHostAllocWriteCombined`| | | |`hipHostMallocWriteCombined`|1.6.0| | | |
 |`cudaHostFn_t`|10.0| | |`hipHostFn_t`|4.3.0| | | |
 |`cudaHostNodeParams`|10.0| | |`hipHostNodeParams`|4.3.0| | | |
+|`cudaHostNodeParamsV2`|12.2| | | | | | | |
 |`cudaHostRegisterDefault`| | | |`hipHostRegisterDefault`|1.6.0| | | |
 |`cudaHostRegisterIoMemory`|7.5| | |`hipHostRegisterIoMemory`|1.6.0| | | |
 |`cudaHostRegisterMapped`| | | |`hipHostRegisterMapped`|1.6.0| | | |
@@ -1270,7 +1274,11 @@
 |`cudaMemRangeAttribute`|8.0| | |`hipMemRangeAttribute`|3.7.0| | | |
 |`cudaMemRangeAttributeAccessedBy`|8.0| | |`hipMemRangeAttributeAccessedBy`|3.7.0| | | |
 |`cudaMemRangeAttributeLastPrefetchLocation`|8.0| | |`hipMemRangeAttributeLastPrefetchLocation`|3.7.0| | | |
+|`cudaMemRangeAttributeLastPrefetchLocationId`|12.2| | | | | | | |
+|`cudaMemRangeAttributeLastPrefetchLocationType`|12.2| | | | | | | |
 |`cudaMemRangeAttributePreferredLocation`|8.0| | |`hipMemRangeAttributePreferredLocation`|3.7.0| | | |
+|`cudaMemRangeAttributePreferredLocationId`|12.2| | | | | | | |
+|`cudaMemRangeAttributePreferredLocationType`|12.2| | | | | | | |
 |`cudaMemRangeAttributeReadMostly`|8.0| | |`hipMemRangeAttributeReadMostly`|3.7.0| | | |
 |`cudaMemcpy3DParms`| | | |`hipMemcpy3DParms`|1.7.0| | | |
 |`cudaMemcpy3DPeerParms`| | | | | | | | |
@@ -1280,6 +1288,7 @@
 |`cudaMemcpyHostToDevice`| | | |`hipMemcpyHostToDevice`|1.5.0| | | |
 |`cudaMemcpyHostToHost`| | | |`hipMemcpyHostToHost`|1.5.0| | | |
 |`cudaMemcpyKind`| | | |`hipMemcpyKind`|1.5.0| | | |
+|`cudaMemcpyNodeParams`|12.2| | | | | | | |
 |`cudaMemoryAdvise`|8.0| | |`hipMemoryAdvise`|3.7.0| | | |
 |`cudaMemoryType`| | | |`hipMemoryType`|1.6.0| | | |
 |`cudaMemoryTypeDevice`| | | |`hipMemoryTypeDevice`|1.6.0| | | |
@@ -1287,6 +1296,7 @@
 |`cudaMemoryTypeManaged`|10.0| | |`hipMemoryTypeManaged`|5.3.0| | | |
 |`cudaMemoryTypeUnregistered`| | | | | | | | |
 |`cudaMemsetParams`|10.0| | |`hipMemsetParams`|4.3.0| | | |
+|`cudaMemsetParamsV2`|12.2| | | | | | | |
 |`cudaMipmappedArray`| | | |`hipMipmappedArray`|1.7.0| | | |
 |`cudaMipmappedArray_const_t`| | | |`hipMipmappedArray_const_t`|1.6.0| | | |
 |`cudaMipmappedArray_t`| | | |`hipMipmappedArray_t`|1.7.0| | | |
