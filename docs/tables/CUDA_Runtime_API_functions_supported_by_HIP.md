@@ -600,6 +600,7 @@
 |`cudaChannelFormatKindUnsignedNormalized8X1`|11.5| | | | | | | |
 |`cudaChannelFormatKindUnsignedNormalized8X2`|11.5| | | | | | | |
 |`cudaChannelFormatKindUnsignedNormalized8X4`|11.5| | | | | | | |
+|`cudaChildGraphNodeParams`|12.2| | | | | | | |
 |`cudaClusterSchedulingPolicy`|11.8| | | | | | | |
 |`cudaClusterSchedulingPolicyDefault`|11.8| | | | | | | |
 |`cudaClusterSchedulingPolicyLoadBalancing`|11.8| | | | | | | |
@@ -775,6 +776,9 @@
 |`cudaDeviceLmemResizeToMax`| | | |`hipDeviceLmemResizeToMax`|1.6.0| | | |
 |`cudaDeviceMapHost`| | | |`hipDeviceMapHost`|1.6.0| | | |
 |`cudaDeviceMask`| | | | | | | | |
+|`cudaDeviceNumaConfig`|12.2| | | | | | | |
+|`cudaDeviceNumaConfigNone`|12.2| | | | | | | |
+|`cudaDeviceNumaConfigNumaNode`|12.2| | | | | | | |
 |`cudaDeviceP2PAttr`|8.0| | |`hipDeviceP2PAttr`|3.8.0| | | |
 |`cudaDeviceProp`| | | |`hipDeviceProp_t`|1.6.0| | | |
 |`cudaDevicePropDontCare`| | |12.0| | | | | |
@@ -1010,8 +1014,10 @@
 |`cudaEventInterprocess`| | | |`hipEventInterprocess`|1.6.0| | | |
 |`cudaEventRecordDefault`|11.1| | | | | | | |
 |`cudaEventRecordExternal`|11.1| | | | | | | |
+|`cudaEventRecordNodeParams`|12.2| | | | | | | |
 |`cudaEventWaitDefault`|11.1| | | | | | | |
 |`cudaEventWaitExternal`| | | | | | | | |
+|`cudaEventWaitNodeParams`|12.2| | | | | | | |
 |`cudaEvent_t`| | | |`hipEvent_t`|1.6.0| | | |
 |`cudaExtent`| | | |`hipExtent`|1.7.0| | | |
 |`cudaExternalMemoryBufferDesc`|10.0| | |`hipExternalMemoryBufferDesc`|4.3.0| | | |
@@ -1041,10 +1047,12 @@
 |`cudaExternalSemaphoreHandleTypeTimelineSemaphoreFd`|11.2| | | | | | | |
 |`cudaExternalSemaphoreHandleTypeTimelineSemaphoreWin32`|11.2| | | | | | | |
 |`cudaExternalSemaphoreSignalNodeParams`|11.2| | | | | | | |
+|`cudaExternalSemaphoreSignalNodeParamsV2`|12.2| | | | | | | |
 |`cudaExternalSemaphoreSignalParams`|10.0| | |`hipExternalSemaphoreSignalParams`|4.4.0| | | |
 |`cudaExternalSemaphoreSignalParams_v1`|11.2| | |`hipExternalSemaphoreSignalParams`|4.4.0| | | |
 |`cudaExternalSemaphoreSignalSkipNvSciBufMemSync`|10.2| | | | | | | |
 |`cudaExternalSemaphoreWaitNodeParams`|11.2| | | | | | | |
+|`cudaExternalSemaphoreWaitNodeParamsV2`|12.2| | | | | | | |
 |`cudaExternalSemaphoreWaitParams`|10.0| | |`hipExternalSemaphoreWaitParams`|4.4.0| | | |
 |`cudaExternalSemaphoreWaitParams_v1`|11.2| | |`hipExternalSemaphoreWaitParams`|4.4.0| | | |
 |`cudaExternalSemaphoreWaitSkipNvSciBufMemSync`|10.2| | | | | | | |
@@ -1133,6 +1141,7 @@
 |`cudaGraphMemAttrUsedMemCurrent`|11.4| | |`hipGraphMemAttrUsedMemCurrent`|5.3.0| | | |
 |`cudaGraphMemAttrUsedMemHigh`|11.4| | |`hipGraphMemAttrUsedMemHigh`|5.3.0| | | |
 |`cudaGraphMemAttributeType`|11.4| | |`hipGraphMemAttributeType`|5.3.0| | | |
+|`cudaGraphNodeParams`|12.2| | | | | | | |
 |`cudaGraphNodeType`|10.0| | |`hipGraphNodeType`|4.3.0| | | |
 |`cudaGraphNodeTypeCount`|10.0| | |`hipGraphNodeTypeCount`|4.3.0| | | |
 |`cudaGraphNodeTypeEmpty`|10.0| | |`hipGraphNodeTypeEmpty`|4.3.0| | | |
@@ -1198,6 +1207,7 @@
 |`cudaKernelNodeAttributeMemSyncDomainMap`|12.0| | | | | | | |
 |`cudaKernelNodeAttributePriority`|11.7| | | | | | | |
 |`cudaKernelNodeParams`|10.0| | |`hipKernelNodeParams`|4.3.0| | | |
+|`cudaKernelNodeParamsV2`|12.2| | | | | | | |
 |`cudaKernel_t`|12.1| | | | | | | |
 |`cudaKeyValuePair`| | |12.0| | | | | |
 |`cudaLaunchAttribute`|11.8| | | | | | | |
@@ -1243,6 +1253,7 @@
 |`cudaMemAdviseUnsetPreferredLocation`|8.0| | |`hipMemAdviseUnsetPreferredLocation`|3.7.0| | | |
 |`cudaMemAdviseUnsetReadMostly`|8.0| | |`hipMemAdviseUnsetReadMostly`|3.7.0| | | |
 |`cudaMemAllocNodeParams`|11.4| | |`hipMemAllocNodeParams`|5.5.0| | | |
+|`cudaMemAllocNodeParamsV2`|12.2| | | | | | | |
 |`cudaMemAllocationHandleType`|11.2| | |`hipMemAllocationHandleType`|5.2.0| | | |
 |`cudaMemAllocationType`|11.2| | |`hipMemAllocationType`|5.2.0| | | |
 |`cudaMemAllocationTypeInvalid`|11.2| | |`hipMemAllocationTypeInvalid`|5.2.0| | | |
@@ -1251,6 +1262,7 @@
 |`cudaMemAttachGlobal`| | | |`hipMemAttachGlobal`|2.5.0| | | |
 |`cudaMemAttachHost`| | | |`hipMemAttachHost`|2.5.0| | | |
 |`cudaMemAttachSingle`| | | |`hipMemAttachSingle`|3.7.0| | | |
+|`cudaMemFreeNodeParams`|12.2| | | | | | | |
 |`cudaMemHandleTypeNone`|11.2| | |`hipMemHandleTypeNone`|5.2.0| | | |
 |`cudaMemHandleTypePosixFileDescriptor`|11.2| | |`hipMemHandleTypePosixFileDescriptor`|5.2.0| | | |
 |`cudaMemHandleTypeWin32`|11.2| | |`hipMemHandleTypeWin32`|5.2.0| | | |
@@ -1258,6 +1270,9 @@
 |`cudaMemLocation`|11.2| | |`hipMemLocation`|5.2.0| | | |
 |`cudaMemLocationType`|11.2| | |`hipMemLocationType`|5.2.0| | | |
 |`cudaMemLocationTypeDevice`|11.2| | |`hipMemLocationTypeDevice`|5.2.0| | | |
+|`cudaMemLocationTypeHost`|12.2| | | | | | | |
+|`cudaMemLocationTypeHostNuma`|12.2| | | | | | | |
+|`cudaMemLocationTypeHostNumaCurrent`|12.2| | | | | | | |
 |`cudaMemLocationTypeInvalid`|11.2| | |`hipMemLocationTypeInvalid`|5.2.0| | | |
 |`cudaMemPoolAttr`|11.2| | |`hipMemPoolAttr`|5.2.0| | | |
 |`cudaMemPoolAttrReleaseThreshold`|11.2| | |`hipMemPoolAttrReleaseThreshold`|5.2.0| | | |
