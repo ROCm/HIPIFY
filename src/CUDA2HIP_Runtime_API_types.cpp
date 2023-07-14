@@ -85,6 +85,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
 
   // CUDA_KERNEL_NODE_PARAMS
   {"cudaKernelNodeParams",                                             {"hipKernelNodeParams",                                      "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES}},
+  // CUDA_KERNEL_NODE_PARAMS_v2_st
+  {"cudaKernelNodeParamsV2",                                           {"hipKernelNodeParams_v2",                                   "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   // no analogue
   // CUDA_LAUNCH_PARAMS struct differs
@@ -214,12 +216,33 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
 
   // CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_st
   {"cudaExternalSemaphoreSignalNodeParams",                            {"hipExternalSemaphoreSignalNodeParams",                     "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_v2_st
+  {"cudaExternalSemaphoreSignalNodeParamsV2",                          {"hipExternalSemaphoreSignalNodeParams_v2",                  "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   // CUDA_EXT_SEM_WAIT_NODE_PARAMS_st
   {"cudaExternalSemaphoreWaitNodeParams",                              {"hipExternalSemaphoreWaitNodeParams",                       "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // CUDA_EXT_SEM_WAIT_NODE_PARAMS_v2_st
+  {"cudaExternalSemaphoreWaitNodeParamsV2",                            {"hipExternalSemaphoreWaitNodeParams_v2",                    "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   // CUDA_MEM_ALLOC_NODE_PARAMS_st
   {"cudaMemAllocNodeParams",                                           {"hipMemAllocNodeParams",                                    "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES}},
+  // CUDA_MEM_ALLOC_NODE_PARAMS_v2_st
+  {"cudaMemAllocNodeParamsV2",                                         {"hipMemAllocNodeParams_v2",                                 "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+
+  // CUDA_MEM_FREE_NODE_PARAMS_st
+  {"cudaMemFreeNodeParams",                                            {"hipMemFreeNodeParams",                                     "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+
+  // CUDA_CHILD_GRAPH_NODE_PARAMS_st
+  {"cudaChildGraphNodeParams",                                         {"hipChildGraphNodeParams",                                  "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+
+  // CUDA_EVENT_RECORD_NODE_PARAMS_st
+  {"cudaEventRecordNodeParams",                                        {"hipEventRecordNodeParams",                                 "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+
+  // CUDA_EVENT_WAIT_NODE_PARAMS_st
+  {"cudaEventWaitNodeParams",                                          {"hipEventWaitNodeParams",                                   "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+
+  // CUgraphNodeParams_st
+  {"cudaGraphNodeParams",                                              {"hipGraphNodeParams",                                       "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   // CUDA_ARRAY_MEMORY_REQUIREMENTS_st
   {"cudaArrayMemoryRequirements",                                      {"hipArrayMemoryRequirements",                               "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
@@ -1632,6 +1655,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaMemLocationTypeInvalid",                                       {"hipMemLocationTypeInvalid",                                "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}}, // 0
   // CU_MEM_LOCATION_TYPE_DEVICE
   {"cudaMemLocationTypeDevice",                                        {"hipMemLocationTypeDevice",                                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}}, // 1
+  // CU_MEM_LOCATION_TYPE_HOST
+  {"cudaMemLocationTypeHost",                                          {"hipMemLocationTypeHost",                                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 2
+  // CU_MEM_LOCATION_TYPE_HOST_NUMA
+  {"cudaMemLocationTypeHostNuma",                                      {"hipMemLocationTypeHostNuma",                               "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 3
+  // CU_MEM_LOCATION_TYPE_HOST_NUMA_CURRENT
+  {"cudaMemLocationTypeHostNumaCurrent",                               {"hipMemLocationTypeHostNumaCurrent",                        "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 4
 
   // CUmemAllocationType
   {"cudaMemAllocationType",                                            {"hipMemAllocationType",                                     "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES}},
@@ -1839,6 +1868,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaLaunchMemSyncDomainDefault",                                   {"hipLaunchMemSyncDomainDefault",                            "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   // CU_LAUNCH_MEM_SYNC_DOMAIN_REMOTE
   {"cudaLaunchMemSyncDomainRemote",                                    {"hipLaunchMemSyncDomainRemote",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+
+  // CUdeviceNumaConfig
+  {"cudaDeviceNumaConfig",                                             {"hipDeviceNumaConfig",                                      "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // cudaDeviceNumaConfig enum values
+  // CU_DEVICE_NUMA_CONFIG_NONE
+  {"cudaDeviceNumaConfigNone",                                         {"hipDeviceNumaConfigNone",                                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // CU_DEVICE_NUMA_CONFIG_NUMA_NODE
+  {"cudaDeviceNumaConfigNumaNode",                                     {"hipDeviceNumaConfigNumaNode",                              "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   // 4. Typedefs
 
@@ -2539,6 +2576,21 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_TYPE_NAME_VER_MAP 
   {"cudaDevAttrNumaConfig",                                            {CUDA_122, CUDA_0,   CUDA_0  }},
   {"cudaDevAttrNumaId",                                                {CUDA_122, CUDA_0,   CUDA_0  }},
   {"cudaDevAttrHostNumaId",                                            {CUDA_122, CUDA_0,   CUDA_0  }},
+  {"cudaMemLocationTypeHost",                                          {CUDA_122, CUDA_0,   CUDA_0  }},
+  {"cudaMemLocationTypeHostNuma",                                      {CUDA_122, CUDA_0,   CUDA_0  }},
+  {"cudaMemLocationTypeHostNumaCurrent",                               {CUDA_122, CUDA_0,   CUDA_0  }},
+  {"cudaMemAllocNodeParamsV2",                                         {CUDA_122, CUDA_0,   CUDA_0  }},
+  {"cudaMemFreeNodeParams",                                            {CUDA_122, CUDA_0,   CUDA_0  }},
+  {"cudaKernelNodeParamsV2",                                           {CUDA_122, CUDA_0,   CUDA_0  }},
+  {"cudaExternalSemaphoreSignalNodeParamsV2",                          {CUDA_122, CUDA_0,   CUDA_0  }},
+  {"cudaExternalSemaphoreWaitNodeParamsV2",                            {CUDA_122, CUDA_0,   CUDA_0  }},
+  {"cudaChildGraphNodeParams",                                         {CUDA_122, CUDA_0,   CUDA_0  }},
+  {"cudaEventRecordNodeParams",                                        {CUDA_122, CUDA_0,   CUDA_0  }},
+  {"cudaEventWaitNodeParams",                                          {CUDA_122, CUDA_0,   CUDA_0  }},
+  {"cudaGraphNodeParams",                                              {CUDA_122, CUDA_0,   CUDA_0  }},
+  {"cudaDeviceNumaConfig",                                             {CUDA_122, CUDA_0,   CUDA_0  }},
+  {"cudaDeviceNumaConfigNone",                                         {CUDA_122, CUDA_0,   CUDA_0  }},
+  {"cudaDeviceNumaConfigNumaNode",                                     {CUDA_122, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {

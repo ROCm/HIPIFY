@@ -81,6 +81,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUDA_KERNEL_NODE_PARAMS_st",                                       {"hipKernelNodeParams",                                      "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES}},
   {"CUDA_KERNEL_NODE_PARAMS",                                          {"hipKernelNodeParams",                                      "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES}},
   {"CUDA_KERNEL_NODE_PARAMS_v1",                                       {"hipKernelNodeParams",                                      "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES}},
+  // cudaKernelNodeParamsV2
   {"CUDA_KERNEL_NODE_PARAMS_v2_st",                                    {"hipKernelNodeParams_v2",                                   "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   {"CUDA_KERNEL_NODE_PARAMS_v2",                                       {"hipKernelNodeParams_v2",                                   "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   {"CUDA_KERNEL_NODE_PARAMS_v3_st",                                    {"hipKernelNodeParams_v3",                                   "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
@@ -280,6 +281,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_st",                               {"hipExternalSemaphoreSignalNodeParams",                     "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   {"CUDA_EXT_SEM_SIGNAL_NODE_PARAMS",                                  {"hipExternalSemaphoreSignalNodeParams",                     "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   {"CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_v1",                               {"hipExternalSemaphoreSignalNodeParams",                     "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // cudaExternalSemaphoreSignalNodeParamsV2
   {"CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_v2_st",                            {"hipExternalSemaphoreSignalNodeParams_v2",                  "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   {"CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_v2",                               {"hipExternalSemaphoreSignalNodeParams_v2",                  "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
@@ -287,6 +289,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUDA_EXT_SEM_WAIT_NODE_PARAMS_st",                                 {"hipExternalSemaphoreWaitNodeParams",                       "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   {"CUDA_EXT_SEM_WAIT_NODE_PARAMS",                                    {"hipExternalSemaphoreWaitNodeParams",                       "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   {"CUDA_EXT_SEM_WAIT_NODE_PARAMS_v1",                                 {"hipExternalSemaphoreWaitNodeParams",                       "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // cudaExternalSemaphoreWaitNodeParamsV2
   {"CUDA_EXT_SEM_WAIT_NODE_PARAMS_v2_st",                              {"hipExternalSemaphoreWaitNodeParams_v2",                    "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   {"CUDA_EXT_SEM_WAIT_NODE_PARAMS_v2",                                 {"hipExternalSemaphoreWaitNodeParams_v2",                    "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
@@ -318,28 +321,29 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaMemAllocNodeParams
   {"CUDA_MEM_ALLOC_NODE_PARAMS_st",                                    {"hipMemAllocNodeParams",                                    "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, CUDA_REMOVED}},
   {"CUDA_MEM_ALLOC_NODE_PARAMS_v1_st",                                 {"hipMemAllocNodeParams",                                    "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES}},
+  // cudaMemAllocNodeParamsV2
   {"CUDA_MEM_ALLOC_NODE_PARAMS_v2_st",                                 {"hipMemAllocNodeParams_v2",                                 "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   {"CUDA_MEM_ALLOC_NODE_PARAMS",                                       {"hipMemAllocNodeParams",                                    "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES}},
   {"CUDA_MEM_ALLOC_NODE_PARAMS_v1",                                    {"hipMemAllocNodeParams",                                    "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES}},
   {"CUDA_MEM_ALLOC_NODE_PARAMS_v2",                                    {"hipMemAllocNodeParams_v2",                                 "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
-  //
+  // cudaMemFreeNodeParams
   {"CUDA_MEM_FREE_NODE_PARAMS_st",                                     {"hipMemFreeNodeParams",                                     "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   {"CUDA_MEM_FREE_NODE_PARAMS",                                        {"hipMemFreeNodeParams",                                     "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
-  //
+  // cudaChildGraphNodeParams
   {"CUDA_CHILD_GRAPH_NODE_PARAMS_st",                                  {"hipChildGraphNodeParams",                                  "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   {"CUDA_CHILD_GRAPH_NODE_PARAMS",                                     {"hipChildGraphNodeParams",                                  "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
-  //
+  // cudaEventRecordNodeParams
   {"CUDA_EVENT_RECORD_NODE_PARAMS_st",                                 {"hipEventRecordNodeParams",                                 "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   {"CUDA_EVENT_RECORD_NODE_PARAMS",                                    {"hipEventRecordNodeParams",                                 "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
-  //
+  // cudaEventWaitNodeParams
   {"CUDA_EVENT_WAIT_NODE_PARAMS_st",                                   {"hipEventWaitNodeParams",                                   "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   {"CUDA_EVENT_WAIT_NODE_PARAMS",                                      {"hipEventWaitNodeParams",                                   "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
-  //
+  // cudaGraphNodeParams
   {"CUgraphNodeParams_st",                                             {"hipGraphNodeParams",                                       "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   {"CUgraphNodeParams",                                                {"hipGraphNodeParams",                                       "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
@@ -1997,11 +2001,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_MEM_LOCATION_TYPE_INVALID",                                     {"hipMemLocationTypeInvalid",                                "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}}, // 0x0
   // cudaMemLocationTypeDevice
   {"CU_MEM_LOCATION_TYPE_DEVICE",                                      {"hipMemLocationTypeDevice",                                 "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}}, // 0x1
-  //
+  // cudaMemLocationTypeHost
   {"CU_MEM_LOCATION_TYPE_HOST",                                        {"hipMemLocationTypeHost",                                   "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0x2
-  //
+  // cudaMemLocationTypeHostNuma
   {"CU_MEM_LOCATION_TYPE_HOST_NUMA",                                   {"hipMemLocationTypeHostNuma",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0x3
-  //
+  // cudaMemLocationTypeHostNumaCurrent
   {"CU_MEM_LOCATION_TYPE_HOST_NUMA_CURRENT",                           {"hipMemLocationTypeHostNumaCurrent",                        "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0x4
   // no analogue
   {"CU_MEM_LOCATION_TYPE_MAX",                                         {"hipMemLocationTypeMax",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0x7FFFFFFF
@@ -2533,14 +2537,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   //
   {"CU_COREDUMP_MAX",                                                  {"HIP_COREDUMP_MAX",                                         "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
-  //
+  // cudaDeviceNumaConfig
   {"CUdeviceNumaConfig",                                               {"hipDeviceNumaConfig",                                      "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   {"CUdeviceNumaConfig_enum",                                          {"hipDeviceNumaConfig",                                      "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   // CUdeviceNumaConfig enum values
-  //
-  {"CU_DEVICE_NUMA_CONFIG_NONE",                                       {"HIP_DEVICE_NUMA_CONFIG_NONE",                              "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-  //
-  {"CU_DEVICE_NUMA_CONFIG_NUMA_NODE",                                  {"HIP_DEVICE_NUMA_CONFIG_NUMA_NODE",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // cudaDeviceNumaConfigNone
+  {"CU_DEVICE_NUMA_CONFIG_NONE",                                       {"hipDeviceNumaConfigNone",                                  "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // cudaDeviceNumaConfigNumaNode
+  {"CU_DEVICE_NUMA_CONFIG_NUMA_NODE",                                  {"hipDeviceNumaConfigNumaNode",                              "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   // 4. Typedefs
 
