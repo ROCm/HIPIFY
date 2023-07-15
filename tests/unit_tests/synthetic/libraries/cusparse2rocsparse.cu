@@ -125,6 +125,8 @@ int main() {
   int nnzb = 0;
   int innz = 0;
   int blockDim = 0;
+  int cscRowIndA = 0;
+  int cscColPtrA = 0;
   int csrRowPtrA = 0;
   int csrColIndA = 0;
   int ncolors = 0;
@@ -415,6 +417,36 @@ int main() {
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_coosort_by_row(rocsparse_handle handle, rocsparse_int m, rocsparse_int n, rocsparse_int nnz, rocsparse_int* coo_row_ind, rocsparse_int* coo_col_ind, rocsparse_int* perm, void* temp_buffer);
   // CHECK: status_t = rocsparse_coosort_by_row(handle_t, m, n, innz, &icooRows, &icooColumns, P, pBuffer);
   status_t = cusparseXcoosortByRow(handle_t, m, n, innz, &icooRows, &icooColumns, P, pBuffer);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseXcoosort_bufferSizeExt(cusparseHandle_t handle, int m, int n, int nnz, const int* cooRowsA, const int* cooColsA, size_t* pBufferSizeInBytes);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_coosort_buffer_size(rocsparse_handle handle, rocsparse_int m, rocsparse_int n, rocsparse_int nnz, const rocsparse_int* coo_row_ind, const rocsparse_int* coo_col_ind, size_t* buffer_size);
+  // CHECK: status_t = rocsparse_coosort_buffer_size(handle_t, m, n, innz, &icooRows, &icooColumns, &bufferSize);
+  status_t = cusparseXcoosort_bufferSizeExt(handle_t, m, n, innz, &icooRows, &icooColumns, &bufferSize);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseXcscsort(cusparseHandle_t handle, int m, int n, int nnz, const cusparseMatDescr_t descrA, const int* cscColPtrA, int* cscRowIndA, int* P, void* pBuffer);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_cscsort(rocsparse_handle handle, rocsparse_int m, rocsparse_int n, rocsparse_int nnz, const rocsparse_mat_descr descr, const rocsparse_int* csc_col_ptr, rocsparse_int* csc_row_ind, rocsparse_int* perm, void* temp_buffer);
+  // CHECK: status_t = rocsparse_cscsort(handle_t, m, n, innz, matDescr_A, &cscColPtrA, &cscRowIndA, P, pBuffer);
+  status_t = cusparseXcscsort(handle_t, m, n, innz, matDescr_A, &cscColPtrA, &cscRowIndA, P, pBuffer);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseXcscsort_bufferSizeExt(cusparseHandle_t handle, int m, int n, int nnz, const int* cscColPtrA, const int* cscRowIndA, size_t* pBufferSizeInBytes);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_cscsort_buffer_size(rocsparse_handle handle, rocsparse_int m, rocsparse_int n, rocsparse_int nnz, const rocsparse_int* csc_col_ptr, const rocsparse_int* csc_row_ind, size_t* buffer_size);
+  // CHECK: status_t = rocsparse_cscsort_buffer_size(handle_t, m, n, innz, &cscColPtrA, &cscRowIndA, &bufferSize);
+  status_t = cusparseXcscsort_bufferSizeExt(handle_t, m, n, innz, &cscColPtrA, &cscRowIndA, &bufferSize);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseXcsrsort(cusparseHandle_t handle, int m, int n, int nnz, const cusparseMatDescr_t descrA, const int* csrRowPtrA, int* csrColIndA, int* P, void* pBuffer);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_csrsort(rocsparse_handle handle, rocsparse_int m, rocsparse_int n, rocsparse_int nnz, const rocsparse_mat_descr descr, const rocsparse_int* csr_row_ptr, rocsparse_int* csr_col_ind, rocsparse_int* perm, void* temp_buffer);
+  // CHECK: status_t = rocsparse_csrsort(handle_t, m, n, innz, matDescr_A, &cscRowIndA, &cscColPtrA, P, pBuffer);
+  status_t = cusparseXcsrsort(handle_t, m, n, innz, matDescr_A, &cscRowIndA, &cscColPtrA, P, pBuffer);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseXcsrsort_bufferSizeExt(cusparseHandle_t handle, int m, int n, int nnz, const int* csrRowPtrA, const int* csrColIndA, size_t* pBufferSizeInBytes);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_csrsort_buffer_size(rocsparse_handle handle, rocsparse_int m, rocsparse_int n, rocsparse_int nnz, const rocsparse_int* csr_row_ptr, const rocsparse_int* csr_col_ind, size_t* buffer_size);
+  // CHECK: status_t = rocsparse_csrsort_buffer_size(handle_t, m, n, innz, &cscRowIndA, &cscColPtrA, &bufferSize);
+  status_t = cusparseXcsrsort_bufferSizeExt(handle_t, m, n, innz, &cscRowIndA, &cscColPtrA, &bufferSize);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCreateIdentityPermutation(cusparseHandle_t handle, int n, int* p);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_create_identity_permutation(rocsparse_handle handle, rocsparse_int n, rocsparse_int* p);
+  // CHECK: status_t = rocsparse_create_identity_permutation(handle_t, n, P);
+  status_t = cusparseCreateIdentityPermutation(handle_t, n, P);
 
 #if CUDA_VERSION >= 8000
   // CHECK: hipDataType dataType_t;

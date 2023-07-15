@@ -1476,6 +1476,7 @@ sub rocSubstitutions {
     subst("cusparseCreateDnMat", "rocsparse_create_dnmat_descr", "library");
     subst("cusparseCreateDnVec", "rocsparse_create_dnvec_descr", "library");
     subst("cusparseCreateHybMat", "rocsparse_create_hyb_mat", "library");
+    subst("cusparseCreateIdentityPermutation", "rocsparse_create_identity_permutation", "library");
     subst("cusparseCreateMatDescr", "rocsparse_create_mat_descr", "library");
     subst("cusparseCreateSpVec", "rocsparse_create_spvec_descr", "library");
     subst("cusparseCscSetPointers", "rocsparse_csc_set_pointers", "library");
@@ -1543,6 +1544,11 @@ sub rocSubstitutions {
     subst("cusparseSpVecSetValues", "rocsparse_spvec_set_values", "library");
     subst("cusparseXcoosortByColumn", "rocsparse_coosort_by_column", "library");
     subst("cusparseXcoosortByRow", "rocsparse_coosort_by_row", "library");
+    subst("cusparseXcoosort_bufferSizeExt", "rocsparse_coosort_buffer_size", "library");
+    subst("cusparseXcscsort", "rocsparse_cscsort", "library");
+    subst("cusparseXcscsort_bufferSizeExt", "rocsparse_cscsort_buffer_size", "library");
+    subst("cusparseXcsrsort", "rocsparse_csrsort", "library");
+    subst("cusparseXcsrsort_bufferSizeExt", "rocsparse_csrsort_buffer_size", "library");
     subst("cusparseXgebsr2gebsrNnz", "rocsparse_gebsr2gebsr_nnz", "library");
     subst("cusparseZbsr2csr", "rocsparse_zbsr2csr", "library");
     subst("cusparseZcsrcolor", "rocsparse_zcsrcolor", "library");
