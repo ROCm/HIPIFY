@@ -1504,6 +1504,7 @@ sub rocSubstitutions {
     subst("cusparseDnVecGet", "rocsparse_dnvec_get", "library");
     subst("cusparseDnVecGetValues", "rocsparse_dnvec_get_values", "library");
     subst("cusparseDnVecSetValues", "rocsparse_dnvec_set_values", "library");
+    subst("cusparseDpruneCsr2csrByPercentage", "rocsparse_dprune_csr2csr_by_percentage", "library");
     subst("cusparseGather", "rocsparse_gather", "library");
     subst("cusparseGetMatDiagType", "rocsparse_get_mat_diag_type", "library");
     subst("cusparseGetMatFillMode", "rocsparse_get_mat_fill_mode", "library");
@@ -1542,6 +1543,7 @@ sub rocSubstitutions {
     subst("cusparseSpVecGetIndexBase", "rocsparse_spvec_get_index_base", "library");
     subst("cusparseSpVecGetValues", "rocsparse_spvec_get_values", "library");
     subst("cusparseSpVecSetValues", "rocsparse_spvec_set_values", "library");
+    subst("cusparseXcoo2csr", "rocsparse_coo2csr", "library");
     subst("cusparseXcoosortByColumn", "rocsparse_coosort_by_column", "library");
     subst("cusparseXcoosortByRow", "rocsparse_coosort_by_row", "library");
     subst("cusparseXcoosort_bufferSizeExt", "rocsparse_coosort_buffer_size", "library");
@@ -1650,6 +1652,8 @@ sub rocSubstitutions {
     subst("cusparseSpVecDescr_t", "rocsparse_spvec_descr", "type");
     subst("cusparseSparseToDenseAlg_t", "rocsparse_sparse_to_dense_alg", "type");
     subst("cusparseStatus_t", "rocsparse_status", "type");
+    subst("pruneInfo", "_rocsparse_mat_info", "type");
+    subst("pruneInfo_t", "rocsparse_mat_info", "type");
     subst("CUBLAS_ATOMICS_ALLOWED", "rocblas_atomics_allowed", "numeric_literal");
     subst("CUBLAS_ATOMICS_NOT_ALLOWED", "rocblas_atomics_not_allowed", "numeric_literal");
     subst("CUBLAS_DIAG_NON_UNIT", "rocblas_diagonal_non_unit", "numeric_literal");
@@ -4065,6 +4069,7 @@ sub simpleSubstitutions {
     subst("cusparseStatus_t", "hipsparseStatus_t", "type");
     subst("nvrtcProgram", "hiprtcProgram", "type");
     subst("nvrtcResult", "hiprtcResult", "type");
+    subst("pruneInfo", "pruneInfo", "type");
     subst("pruneInfo_t", "pruneInfo_t", "type");
     subst("surfaceReference", "surfaceReference", "type");
     subst("texture", "texture", "type");
@@ -6228,7 +6233,6 @@ sub warnUnsupportedFunctions {
     my $line_num = shift;
     my $k = 0;
     foreach $func (
-        "pruneInfo",
         "nvrtcGetSupportedArchs",
         "nvrtcGetOptiXIRSize",
         "nvrtcGetOptiXIR",

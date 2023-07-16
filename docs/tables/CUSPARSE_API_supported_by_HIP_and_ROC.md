@@ -183,8 +183,8 @@
 |`cusparseSpVecDescr_t`|10.2| | |`hipsparseSpVecDescr_t`|4.1.0| | | |`rocsparse_spvec_descr`|4.1.0| | | |
 |`cusparseSparseToDenseAlg_t`|11.1| | |`hipsparseSparseToDenseAlg_t`|4.2.0| | | |`rocsparse_sparse_to_dense_alg`|4.1.0| | | |
 |`cusparseStatus_t`| | | |`hipsparseStatus_t`|1.9.2| | | |`rocsparse_status`|1.9.0| | | |
-|`pruneInfo`|9.0| | | | | | | | | | | | |
-|`pruneInfo_t`|9.0| | |`pruneInfo_t`|3.9.0| | | | | | | | |
+|`pruneInfo`|9.0| | |`pruneInfo`|3.9.0| | | |`_rocsparse_mat_info`|1.9.0| | | |
+|`pruneInfo_t`|9.0| | |`pruneInfo_t`|3.9.0| | | |`rocsparse_mat_info`|1.9.0| | | |
 
 ## **5. CUSPARSE Management Function Reference**
 
@@ -680,7 +680,7 @@
 |`cusparseDnnz`| | | |`hipsparseDnnz`|3.2.0| | | | | | | | |
 |`cusparseDnnz_compress`|8.0| | |`hipsparseDnnz_compress`|3.5.0| | | | | | | | |
 |`cusparseDpruneCsr2csr`|9.0| | |`hipsparseDpruneCsr2csr`|3.9.0| | | | | | | | |
-|`cusparseDpruneCsr2csrByPercentage`|9.0| | |`hipsparseDpruneCsr2csrByPercentage`|3.9.0| | | | | | | | |
+|`cusparseDpruneCsr2csrByPercentage`|9.0| | |`hipsparseDpruneCsr2csrByPercentage`|3.9.0| | | |`rocsparse_dprune_csr2csr_by_percentage`|3.9.0| | | |
 |`cusparseDpruneCsr2csrByPercentage_bufferSizeExt`|9.0| | |`hipsparseDpruneCsr2csrByPercentage_bufferSizeExt`|3.9.0| | | | | | | | |
 |`cusparseDpruneCsr2csrNnz`|9.0| | |`hipsparseDpruneCsr2csrNnz`|3.9.0| | | | | | | | |
 |`cusparseDpruneCsr2csrNnzByPercentage`|9.0| | |`hipsparseDpruneCsr2csrNnzByPercentage`|3.9.0| | | | | | | | |
@@ -744,7 +744,7 @@
 |`cusparseSpruneDense2csrNnz`|9.0| | |`hipsparseSpruneDense2csrNnz`|3.9.0| | | | | | | | |
 |`cusparseSpruneDense2csrNnzByPercentage`|9.0| | |`hipsparseSpruneDense2csrNnzByPercentage`|3.9.0| | | | | | | | |
 |`cusparseSpruneDense2csr_bufferSizeExt`|9.0| | |`hipsparseSpruneDense2csr_bufferSizeExt`|3.9.0| | | | | | | | |
-|`cusparseXcoo2csr`| | | |`hipsparseXcoo2csr`|1.9.2| | | | | | | | |
+|`cusparseXcoo2csr`| | | |`hipsparseXcoo2csr`|1.9.2| | | |`rocsparse_coo2csr`|1.9.0| | | |
 |`cusparseXcoosortByColumn`| | | |`hipsparseXcoosortByColumn`|1.9.2| | | |`rocsparse_coosort_by_column`|1.9.0| | | |
 |`cusparseXcoosortByRow`| | | |`hipsparseXcoosortByRow`|1.9.2| | | |`rocsparse_coosort_by_row`|1.9.0| | | |
 |`cusparseXcoosort_bufferSizeExt`| | | |`hipsparseXcoosort_bufferSizeExt`|1.9.2| | | |`rocsparse_coosort_buffer_size`|1.9.0| | | |
