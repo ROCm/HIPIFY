@@ -12,6 +12,7 @@
 |`__ballot`| | | |`__ballot`|1.6.0| | | |
 |`__bfloat1622float2`|11.0| | | | | | | |
 |`__bfloat162bfloat162`|11.0| | | | | | | |
+|`__bfloat162char_rz`|12.2| | | | | | | |
 |`__bfloat162float`|11.0| | | | | | | |
 |`__bfloat162int_rd`|11.0| | | | | | | |
 |`__bfloat162int_rn`|11.0| | | | | | | |
@@ -25,6 +26,7 @@
 |`__bfloat162short_rn`|11.0| | | | | | | |
 |`__bfloat162short_ru`|11.0| | | | | | | |
 |`__bfloat162short_rz`|11.0| | | | | | | |
+|`__bfloat162uchar_rz`|12.2| | | | | | | |
 |`__bfloat162uint_rd`|11.0| | | | | | | |
 |`__bfloat162uint_rn`|11.0| | | | | | | |
 |`__bfloat162uint_ru`|11.0| | | | | | | |
@@ -111,6 +113,7 @@
 |`__finite`| | | | | | | | |
 |`__finitef`| | | | | | | | |
 |`__finitel`| | | | | | | | |
+|`__float22bfloat162_rn`|11.0| | | | | | | |
 |`__float22half2_rn`| | | |`__float22half2_rn`|1.6.0| | | |
 |`__float2bfloat16`|11.0| | | | | | | |
 |`__float2bfloat162_rn`|11.0| | | | | | | |
@@ -707,6 +710,7 @@
 |`lrintf`| | | |`lrintf`|1.6.0| | | |
 |`lround`| | | |`lround`|1.6.0| | | |
 |`lroundf`| | | |`lroundf`|1.6.0| | | |
+|`make_bfloat162`|12.2| | | | | | | |
 |`max`| | | |`max`|1.6.0| | | |
 |`min`| | | |`min`|1.6.0| | | |
 |`modf`| | | |`modf`|1.9.0| | | |
