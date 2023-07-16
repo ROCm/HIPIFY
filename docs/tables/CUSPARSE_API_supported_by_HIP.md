@@ -183,7 +183,7 @@
 |`cusparseSpVecDescr_t`|10.2| | |`hipsparseSpVecDescr_t`|4.1.0| | | |
 |`cusparseSparseToDenseAlg_t`|11.1| | |`hipsparseSparseToDenseAlg_t`|4.2.0| | | |
 |`cusparseStatus_t`| | | |`hipsparseStatus_t`|1.9.2| | | |
-|`pruneInfo`|9.0| | | | | | | |
+|`pruneInfo`|9.0| | |`pruneInfo`|3.9.0| | | |
 |`pruneInfo_t`|9.0| | |`pruneInfo_t`|3.9.0| | | |
 
 ## **5. CUSPARSE Management Function Reference**
