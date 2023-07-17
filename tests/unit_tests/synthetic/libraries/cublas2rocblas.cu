@@ -1665,6 +1665,23 @@ int main() {
 #if CUDA_VERSION >= 9000
   // CHECK: rocblas_gemm_algo BLAS_GEMM_DEFAULT = rocblas_gemm_algo_standard;
   cublasGemmAlgo_t BLAS_GEMM_DEFAULT = CUBLAS_GEMM_DEFAULT;
+
+  // CHECK: rocblas_math_mode blasMath;
+  // CHECK-NEXT: rocblas_math_mode BLAS_DEFAULT_MATH = rocblas_default_math;
+  // CHECK-NEXT: rocblas_math_mode BLAS_TF32_TENSOR_OP_MATH = rocblas_xf32_xdl_math_op;
+  cublasMath_t blasMath;
+  cublasMath_t BLAS_DEFAULT_MATH = CUBLAS_DEFAULT_MATH;
+  cublasMath_t BLAS_TF32_TENSOR_OP_MATH = CUBLAS_TF32_TENSOR_OP_MATH;
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasGetMathMode(cublasHandle_t handle, cublasMath_t* mode);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_get_math_mode(rocblas_handle handle, rocblas_math_mode* math_mode);
+  // CHECK: blasStatus = rocblas_get_math_mode(blasHandle, &blasMath);
+  blasStatus = cublasGetMathMode(blasHandle, &blasMath);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasSetMathMode(cublasHandle_t handle, cublasMath_t mode);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_set_math_mode(rocblas_handle handle, rocblas_math_mode math_mode);
+  // CHECK: blasStatus = rocblas_set_math_mode(blasHandle, blasMath);
+  blasStatus = cublasSetMathMode(blasHandle, blasMath);
 #endif
 
 #if CUDA_VERSION >= 9010 && CUDA_VERSION < 11000
@@ -1700,6 +1717,11 @@ int main() {
   // CHECK-NEXT: rocblas_datatype C_16BF = rocblas_datatype_bf16_c;
   cublasDataType_t R_16BF = CUDA_R_16BF;
   cublasDataType_t C_16BF = CUDA_C_16BF;
+
+  // CHECK: rocblas_computetype blasComputeType;
+  // CHECK-NEXT: rocblas_computetype BLAS_COMPUTE_32F = rocblas_compute_type_f32;
+  cublasComputeType_t blasComputeType;
+  cublasComputeType_t BLAS_COMPUTE_32F = CUBLAS_COMPUTE_32F;
 #endif
 
 #if CUDA_VERSION >= 11040 && CUBLAS_VERSION >= 11600

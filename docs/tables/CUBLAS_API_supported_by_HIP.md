@@ -182,7 +182,7 @@
 |`cublasSetAtomicsMode`| | | |`hipblasSetAtomicsMode`|3.10.0| | | |
 |`cublasSetKernelStream`| | | | | | | | |
 |`cublasSetLoggerCallback`|9.2| | | | | | | |
-|`cublasSetMathMode`| | | | | | | | |
+|`cublasSetMathMode`|9.0| | | | | | | |
 |`cublasSetMatrix`| | | |`hipblasSetMatrix`|1.8.2| | | |
 |`cublasSetMatrixAsync`| | | |`hipblasSetMatrixAsync`|3.7.0| | | |
 |`cublasSetMatrixAsync_64`|12.0| | | | | | | |
