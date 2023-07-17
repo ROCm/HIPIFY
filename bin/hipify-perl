@@ -1173,6 +1173,7 @@ sub rocSubstitutions {
     subst("cublasGemmEx", "rocblas_gemm_ex", "library");
     subst("cublasGemmStridedBatchedEx", "rocblas_gemm_strided_batched_ex", "library");
     subst("cublasGetAtomicsMode", "rocblas_get_atomics_mode", "library");
+    subst("cublasGetMathMode", "rocblas_get_math_mode", "library");
     subst("cublasGetMatrix", "rocblas_get_matrix", "library");
     subst("cublasGetMatrixAsync", "rocblas_get_matrix_async", "library");
     subst("cublasGetPointerMode", "rocblas_get_pointer_mode", "library");
@@ -1219,6 +1220,7 @@ sub rocSubstitutions {
     subst("cublasSdot", "rocblas_sdot", "library");
     subst("cublasSdot_v2", "rocblas_sdot", "library");
     subst("cublasSetAtomicsMode", "rocblas_set_atomics_mode", "library");
+    subst("cublasSetMathMode", "rocblas_set_math_mode", "library");
     subst("cublasSetMatrix", "rocblas_set_matrix", "library");
     subst("cublasSetMatrixAsync", "rocblas_set_matrix_async", "library");
     subst("cublasSetPointerMode", "rocblas_set_pointer_mode", "library");
@@ -1563,12 +1565,14 @@ sub rocSubstitutions {
     subst("cuDoubleComplex", "rocblas_double_complex", "type");
     subst("cuFloatComplex", "rocblas_float_complex", "type");
     subst("cublasAtomicsMode_t", "rocblas_atomics_mode", "type");
+    subst("cublasComputeType_t", "rocblas_computetype", "type");
     subst("cublasContext", "_rocblas_handle", "type");
     subst("cublasDataType_t", "rocblas_datatype", "type");
     subst("cublasDiagType_t", "rocblas_diagonal", "type");
     subst("cublasFillMode_t", "rocblas_fill", "type");
     subst("cublasGemmAlgo_t", "rocblas_gemm_algo", "type");
     subst("cublasHandle_t", "rocblas_handle", "type");
+    subst("cublasMath_t", "rocblas_math_mode", "type");
     subst("cublasOperation_t", "rocblas_operation", "type");
     subst("cublasPointerMode_t", "rocblas_pointer_mode", "type");
     subst("cublasSideMode_t", "rocblas_side", "type");
@@ -1656,6 +1660,8 @@ sub rocSubstitutions {
     subst("pruneInfo_t", "rocsparse_mat_info", "type");
     subst("CUBLAS_ATOMICS_ALLOWED", "rocblas_atomics_allowed", "numeric_literal");
     subst("CUBLAS_ATOMICS_NOT_ALLOWED", "rocblas_atomics_not_allowed", "numeric_literal");
+    subst("CUBLAS_COMPUTE_32F", "rocblas_compute_type_f32", "numeric_literal");
+    subst("CUBLAS_DEFAULT_MATH", "rocblas_default_math", "numeric_literal");
     subst("CUBLAS_DIAG_NON_UNIT", "rocblas_diagonal_non_unit", "numeric_literal");
     subst("CUBLAS_DIAG_UNIT", "rocblas_diagonal_unit", "numeric_literal");
     subst("CUBLAS_FILL_MODE_FULL", "rocblas_fill_full", "numeric_literal");
@@ -1680,6 +1686,7 @@ sub rocSubstitutions {
     subst("CUBLAS_STATUS_NOT_INITIALIZED", "rocblas_status_invalid_handle", "numeric_literal");
     subst("CUBLAS_STATUS_NOT_SUPPORTED", "rocblas_status_perf_degraded", "numeric_literal");
     subst("CUBLAS_STATUS_SUCCESS", "rocblas_status_success", "numeric_literal");
+    subst("CUBLAS_TF32_TENSOR_OP_MATH", "rocblas_xf32_xdl_math_op", "numeric_literal");
     subst("CUDA_C_16BF", "rocblas_datatype_bf16_c", "numeric_literal");
     subst("CUDA_C_16F", "rocblas_datatype_f16_c", "numeric_literal");
     subst("CUDA_C_32F", "rocblas_datatype_f32_c", "numeric_literal");
@@ -9578,7 +9585,6 @@ sub warnRocOnlyUnsupportedFunctions {
         "cublasSetSmCountTarget",
         "cublasSetMatrix_64",
         "cublasSetMatrixAsync_64",
-        "cublasSetMathMode",
         "cublasSetLoggerCallback",
         "cublasSetKernelStream",
         "cublasSdot_v2_64",
@@ -9602,7 +9608,6 @@ sub warnRocOnlyUnsupportedFunctions {
         "cublasRotEx_64",
         "cublasNrm2Ex_64",
         "cublasMigrateComputeType",
-        "cublasMath_t",
         "cublasLoggerConfigure",
         "cublasLogCallback",
         "cublasIzamin_v2_64",
@@ -9645,7 +9650,6 @@ sub warnRocOnlyUnsupportedFunctions {
         "cublasGetProperty",
         "cublasGetMatrix_64",
         "cublasGetMatrixAsync_64",
-        "cublasGetMathMode",
         "cublasGetLoggerCallback",
         "cublasGetError",
         "cublasGetCudartVersion",
@@ -9872,7 +9876,6 @@ sub warnRocOnlyUnsupportedFunctions {
         "CUDA_C_4I",
         "CUDA_C_16U",
         "CUDA_C_16I",
-        "CUBLAS_TF32_TENSOR_OP_MATH",
         "CUBLAS_TENSOR_OP_MATH",
         "CUBLAS_STATUS_LICENSE_ERROR",
         "CUBLAS_PEDANTIC_MATH",
@@ -9920,7 +9923,6 @@ sub warnRocOnlyUnsupportedFunctions {
         "CUBLAS_GEMM_ALGO1",
         "CUBLAS_GEMM_ALGO0_TENSOR_OP",
         "CUBLAS_GEMM_ALGO0",
-        "CUBLAS_DEFAULT_MATH",
         "CUBLAS_COMPUTE_64F_PEDANTIC",
         "CUBLAS_COMPUTE_64F",
         "CUBLAS_COMPUTE_32I_PEDANTIC",
@@ -9929,7 +9931,6 @@ sub warnRocOnlyUnsupportedFunctions {
         "CUBLAS_COMPUTE_32F_FAST_TF32",
         "CUBLAS_COMPUTE_32F_FAST_16F",
         "CUBLAS_COMPUTE_32F_FAST_16BF",
-        "CUBLAS_COMPUTE_32F",
         "CUBLAS_COMPUTE_16F_PEDANTIC",
         "CUBLAS_COMPUTE_16F"
     )

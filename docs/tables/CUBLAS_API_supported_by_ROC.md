@@ -8,7 +8,7 @@
 |`CUBLAS_ATOMICS_NOT_ALLOWED`| | | |`rocblas_atomics_not_allowed`|3.8.0| | | |
 |`CUBLAS_COMPUTE_16F`|11.0| | | | | | | |
 |`CUBLAS_COMPUTE_16F_PEDANTIC`|11.0| | | | | | | |
-|`CUBLAS_COMPUTE_32F`|11.0| | | | | | | |
+|`CUBLAS_COMPUTE_32F`|11.0| | |`rocblas_compute_type_f32`|5.7.0| | | |
 |`CUBLAS_COMPUTE_32F_FAST_16BF`|11.0| | | | | | | |
 |`CUBLAS_COMPUTE_32F_FAST_16F`|11.0| | | | | | | |
 |`CUBLAS_COMPUTE_32F_FAST_TF32`|11.0| | | | | | | |
@@ -17,7 +17,7 @@
 |`CUBLAS_COMPUTE_32I_PEDANTIC`|11.0| | | | | | | |
 |`CUBLAS_COMPUTE_64F`|11.0| | | | | | | |
 |`CUBLAS_COMPUTE_64F_PEDANTIC`|11.0| | | | | | | |
-|`CUBLAS_DEFAULT_MATH`|9.0| | | | | | | |
+|`CUBLAS_DEFAULT_MATH`|9.0| | |`rocblas_default_math`|5.7.0| | | |
 |`CUBLAS_DIAG_NON_UNIT`| | | |`rocblas_diagonal_non_unit`|1.5.0| | | |
 |`CUBLAS_DIAG_UNIT`| | | |`rocblas_diagonal_unit`|1.5.0| | | |
 |`CUBLAS_FILL_MODE_FULL`|10.1| | |`rocblas_fill_full`|1.5.0| | | |
@@ -89,16 +89,16 @@
 |`CUBLAS_STATUS_NOT_SUPPORTED`| | | |`rocblas_status_perf_degraded`|3.5.0| | | |
 |`CUBLAS_STATUS_SUCCESS`| | | |`rocblas_status_success`|1.5.0| | | |
 |`CUBLAS_TENSOR_OP_MATH`|9.0|11.0| | | | | | |
-|`CUBLAS_TF32_TENSOR_OP_MATH`|11.0| | | | | | | |
+|`CUBLAS_TF32_TENSOR_OP_MATH`|11.0| | |`rocblas_xf32_xdl_math_op`|5.7.0| | | |
 |`cublasAtomicsMode_t`| | | |`rocblas_atomics_mode`|3.8.0| | | |
-|`cublasComputeType_t`|11.0| | | | | | | |
+|`cublasComputeType_t`|11.0| | |`rocblas_computetype`|5.7.0| | | |
 |`cublasContext`| | | |`_rocblas_handle`|1.5.0| | | |
 |`cublasDataType_t`|7.5| | |`rocblas_datatype`|1.8.2| | | |
 |`cublasDiagType_t`| | | |`rocblas_diagonal`|1.5.0| | | |
 |`cublasFillMode_t`| | | |`rocblas_fill`|1.5.0| | | |
 |`cublasGemmAlgo_t`|8.0| | |`rocblas_gemm_algo`|1.8.2| | | |
 |`cublasHandle_t`| | | |`rocblas_handle`|1.5.0| | | |
-|`cublasMath_t`|9.0| | | | | | | |
+|`cublasMath_t`|9.0| | |`rocblas_math_mode`|5.7.0| | | |
 |`cublasOperation_t`| | | |`rocblas_operation`|1.5.0| | | |
 |`cublasPointerMode_t`| | | |`rocblas_pointer_mode`|1.6.0| | | |
 |`cublasSideMode_t`| | | |`rocblas_side`|1.5.0| | | |
@@ -156,7 +156,7 @@
 |`cublasGetCudartVersion`|10.1| | | | | | | |
 |`cublasGetError`| | | | | | | | |
 |`cublasGetLoggerCallback`|9.2| | | | | | | |
-|`cublasGetMathMode`|9.0| | | | | | | |
+|`cublasGetMathMode`|9.0| | |`rocblas_get_math_mode`|5.7.0| | | |
 |`cublasGetMatrix`| | | |`rocblas_get_matrix`|1.6.0| | | |
 |`cublasGetMatrixAsync`| | | |`rocblas_get_matrix_async`|3.5.0| | | |
 |`cublasGetMatrixAsync_64`|12.0| | | | | | | |
@@ -182,7 +182,7 @@
 |`cublasSetAtomicsMode`| | | |`rocblas_set_atomics_mode`|3.8.0| | | |
 |`cublasSetKernelStream`| | | | | | | | |
 |`cublasSetLoggerCallback`|9.2| | | | | | | |
-|`cublasSetMathMode`| | | | | | | | |
+|`cublasSetMathMode`|9.0| | |`rocblas_set_math_mode`|5.7.0| | | |
 |`cublasSetMatrix`| | | |`rocblas_set_matrix`|1.6.0| | | |
 |`cublasSetMatrixAsync`| | | |`rocblas_set_matrix_async`|3.5.0| | | |
 |`cublasSetMatrixAsync_64`|12.0| | | | | | | |
