@@ -2,6 +2,22 @@
 
 Full documentation for HIPIFY is available at [hipify.readthedocs.io](https://hipify.readthedocs.io/en/latest/).
 
+## HIPIFY for ROCm 5.7.0
+### Added
+- CUDA 12.2.0 support
+- cuDNN 8.9.2 support
+- LLVM 16.0.6 support
+- Initial rocSPARSE support
+- Initial CUDA2ROC documentation generation for rocBLAS, rocSPARSE, and MIOpen:
+  - in separate files: hipify-clang --md --doc-format=full --doc-roc=separate
+  - in a single file: hipify-clang --md --doc-format=full --doc-roc=joint
+- New options:
+  - --use-hip-data-types (Use 'hipDataType' instead of 'hipblasDatatype_t' or 'rocblas_datatype')
+  - --doc-roc=\<value\> (ROC documentation generation: 'skip' (default), 'separate', or 'joint'; the '--md' or '--csv' option must be specified)
+### Fixed
+- [#822] Add a new function call transformation type "additional const by value arg"
+- [#830] Add a new function call transformation type "move arg from place X to place Y"
+
 ## HIPIFY for ROCm 5.6.0
 ### Added
 - CUDA 12.1.0 support
