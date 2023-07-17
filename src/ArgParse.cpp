@@ -172,7 +172,7 @@ cl::opt<std::string> DocFormat("doc-format",
   cl::cat(ToolTemplateCategory));
 
 cl::opt<std::string> DocRoc("doc-roc",
-  cl::desc("ROC cocumentation generation: 'skip' (default), 'separate', or 'joint'; the '--md' or '--csv' option must be specified"),
+  cl::desc("ROC documentation generation: 'skip' (default), 'separate', or 'joint'; the '--md' or '--csv' option must be specified"),
   cl::value_desc("value"),
   cl::cat(ToolTemplateCategory));
 
