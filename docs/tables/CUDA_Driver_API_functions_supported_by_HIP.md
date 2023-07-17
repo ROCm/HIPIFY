@@ -1590,9 +1590,9 @@
 |`cuMemsetD8`| | | |`hipMemsetD8`|1.6.0| | | |
 |`cuMemsetD8Async`| | | |`hipMemsetD8Async`|3.0.0| | | |
 |`cuMemsetD8_v2`| | | |`hipMemsetD8`|1.6.0| | | |
-|`cuMipmappedArrayCreate`| | | |`hipMipmappedArrayCreate`|3.5.0| | | |
-|`cuMipmappedArrayDestroy`| | | |`hipMipmappedArrayDestroy`|3.5.0| | | |
-|`cuMipmappedArrayGetLevel`| | | |`hipMipmappedArrayGetLevel`|3.5.0| | | |
+|`cuMipmappedArrayCreate`| | | |`hipMipmappedArrayCreate`|3.5.0|5.7.0| | |
+|`cuMipmappedArrayDestroy`| | | |`hipMipmappedArrayDestroy`|3.5.0|5.7.0| | |
+|`cuMipmappedArrayGetLevel`| | | |`hipMipmappedArrayGetLevel`|3.5.0|5.7.0| | |
 |`cuMipmappedArrayGetMemoryRequirements`|11.6| | | | | | | |
 
 ## **14. Virtual Memory Management**

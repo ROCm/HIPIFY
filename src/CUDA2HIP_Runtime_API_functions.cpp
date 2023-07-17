@@ -885,7 +885,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // no analogue
   {"cudaBindTextureToArray",                                  {"hipBindTextureToArray",                                  "", CONV_TEXTURE, API_RUNTIME, SEC::TEXTURE_REMOVED, HIP_DEPRECATED | CUDA_REMOVED}},
   // no analogue
-  {"cudaBindTextureToMipmappedArray",                         {"hipBindTextureToMipmappedArray",                         "", CONV_TEXTURE, API_RUNTIME, SEC::TEXTURE_REMOVED, CUDA_REMOVED}},
+  {"cudaBindTextureToMipmappedArray",                         {"hipBindTextureToMipmappedArray",                         "", CONV_TEXTURE, API_RUNTIME, SEC::TEXTURE_REMOVED, HIP_DEPRECATED | CUDA_REMOVED}},
   // no analogue
   {"cudaGetTextureAlignmentOffset",                           {"hipGetTextureAlignmentOffset",                           "", CONV_TEXTURE, API_RUNTIME, SEC::TEXTURE_REMOVED, HIP_DEPRECATED | CUDA_REMOVED}},
   // no analogue
@@ -1245,7 +1245,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP {
   {"hipBindTexture",                                          {HIP_1060, HIP_3080, HIP_0   }},
   {"hipBindTexture2D",                                        {HIP_1070, HIP_3080, HIP_0   }},
   {"hipBindTextureToArray",                                   {HIP_1060, HIP_3080, HIP_0   }},
-  {"hipBindTextureToMipmappedArray",                          {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipBindTextureToMipmappedArray",                          {HIP_1070, HIP_5070, HIP_0   }},
   {"hipCreateChannelDesc",                                    {HIP_1060, HIP_0,    HIP_0   }},
   {"hipGetChannelDesc",                                       {HIP_1070, HIP_0,    HIP_0   }},
   {"hipGetTextureAlignmentOffset",                            {HIP_1090, HIP_3080, HIP_0   }},
