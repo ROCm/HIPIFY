@@ -710,6 +710,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DEVICE_FUNCTION_MAP {
   {"__hgeu2_mask",                      {"__hgeu2_mask",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
   {"__hltu2_mask",                      {"__hltu2_mask",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
   {"__hgtu2_mask",                      {"__hgtu2_mask",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
+  {"make_half2",                        {"make_half2",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
+  {"__half2char_rz",                    {"__half2char_rz",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
+  {"__half2uchar_rz",                   {"__half2uchar_rz",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
   // bfp16 functions
   {"__double2bfloat16",                 {"__double2bfloat16",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
   {"__float2bfloat16",                  {"__float2bfloat16",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
@@ -775,12 +778,16 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DEVICE_FUNCTION_MAP {
   {"__high2bfloat16",                   {"__high2bfloat16",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
   {"__low2bfloat16",                    {"__low2bfloat16",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
   {"__halves2bfloat162",                {"__halves2bfloat162",                 "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__low2bfloat162",                   {"__halves2bfloat162",                 "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
+  {"__low2bfloat162",                   {"__low2bfloat162",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
   {"__high2bfloat162",                  {"__high2bfloat162",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
   {"__bfloat16_as_short",               {"__bfloat16_as_short",                "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
   {"__bfloat16_as_ushort",              {"__bfloat16_as_ushort",               "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
   {"__short_as_bfloat16",               {"__short_as_bfloat16",                "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
   {"__ushort_as_bfloat16",              {"__ushort_as_bfloat16",               "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
+  {"__float22bfloat162_rn",             {"__float22bfloat162_rn",              "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
+  {"__bfloat162char_rz",                {"__bfloat162char_rz",                 "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
+  {"__bfloat162uchar_rz",               {"__bfloat162uchar_rz",                "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
+  {"make_bfloat162",                    {"make_bfloat162",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
   // atomic functions
   {"atomicAdd",                         {"atomicAdd",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
   {"atomicAdd_system",                  {"atomicAdd_system",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
@@ -945,6 +952,13 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DEVICE_FUNCTION_VER_MAP {
   {"__hgeu2_mask",                      {CUDA_120, CUDA_0,   CUDA_0  }},
   {"__hltu2_mask",                      {CUDA_120, CUDA_0,   CUDA_0  }},
   {"__hgtu2_mask",                      {CUDA_120, CUDA_0,   CUDA_0  }},
+  {"__float22bfloat162_rn",             {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"__bfloat162char_rz",                {CUDA_122, CUDA_0,   CUDA_0  }},
+  {"__bfloat162uchar_rz",               {CUDA_122, CUDA_0,   CUDA_0  }},
+  {"make_bfloat162",                    {CUDA_122, CUDA_0,   CUDA_0  }},
+  {"make_half2",                        {CUDA_122, CUDA_0,   CUDA_0  }},
+  {"__half2char_rz",                    {CUDA_122, CUDA_0,   CUDA_0  }},
+  {"__half2uchar_rz",                   {CUDA_122, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_DEVICE_FUNCTION_VER_MAP {

@@ -73,12 +73,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP {
   {"CUBLAS_ATOMICS_ALLOWED",         {"HIPBLAS_ATOMICS_ALLOWED",         "rocblas_atomics_allowed",               CONV_NUMERIC_LITERAL, API_BLAS, 2}},
 
   // Blas Math mode/tensor operation
-  {"cublasMath_t",                                     {"hipblasMath_t",                                     "",  CONV_TYPE, API_BLAS, 2, UNSUPPORTED}},
-  {"CUBLAS_DEFAULT_MATH",                              {"HIPBLAS_DEFAULT_MATH",                              "",  CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}}, // 0
-  {"CUBLAS_TENSOR_OP_MATH",                            {"HIPBLAS_TENSOR_OP_MATH",                            "",  CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED | CUDA_DEPRECATED}}, // 1
-  {"CUBLAS_PEDANTIC_MATH",                             {"HIPBLAS_PEDANTIC_MATH",                             "",  CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}}, // 2
-  {"CUBLAS_TF32_TENSOR_OP_MATH",                       {"HIPBLAS_TF32_TENSOR_OP_MATH",                       "",  CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}}, // 3
-  {"CUBLAS_MATH_DISALLOW_REDUCED_PRECISION_REDUCTION", {"HIPBLAS_MATH_DISALLOW_REDUCED_PRECISION_REDUCTION", "",  CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}}, // 16
+  {"cublasMath_t",                                     {"hipblasMath_t",                                     "rocblas_math_mode",         CONV_TYPE, API_BLAS, 2, HIP_UNSUPPORTED}},
+  {"CUBLAS_DEFAULT_MATH",                              {"HIPBLAS_DEFAULT_MATH",                              "rocblas_default_math",      CONV_NUMERIC_LITERAL, API_BLAS, 2, HIP_UNSUPPORTED}}, // 0
+  {"CUBLAS_TENSOR_OP_MATH",                            {"HIPBLAS_TENSOR_OP_MATH",                            "",                          CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED | CUDA_DEPRECATED}}, // 1
+  {"CUBLAS_PEDANTIC_MATH",                             {"HIPBLAS_PEDANTIC_MATH",                             "",                          CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}}, // 2
+  {"CUBLAS_TF32_TENSOR_OP_MATH",                       {"HIPBLAS_TF32_TENSOR_OP_MATH",                       "rocblas_xf32_xdl_math_op",  CONV_NUMERIC_LITERAL, API_BLAS, 2, HIP_UNSUPPORTED}}, // 3
+  {"CUBLAS_MATH_DISALLOW_REDUCED_PRECISION_REDUCTION", {"HIPBLAS_MATH_DISALLOW_REDUCED_PRECISION_REDUCTION", "",                          CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}}, // 16
 
   // Blass different GEMM algorithms
   {"cublasGemmAlgo_t",               {"hipblasGemmAlgo_t",               "rocblas_gemm_algo",                     CONV_TYPE, API_BLAS, 2}},
@@ -170,10 +170,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP {
 
   // NOTE: renamed UNSUPPORTED hipblasComputeType_t to the HIP supported hipblasDatatype_t (workaround)
   // TODO: change the type to the correct one after fixing https://github.com/ROCmSoftwarePlatform/hipBLAS/issues/529
-  {"cublasComputeType_t",            {"hipblasDatatype_t",               "",                                      CONV_TYPE, API_BLAS, 2}},
+  {"cublasComputeType_t",            {"hipblasDatatype_t",               "rocblas_computetype",                   CONV_TYPE, API_BLAS, 2}},
   {"CUBLAS_COMPUTE_16F",             {"HIPBLAS_COMPUTE_16F",             "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}}, // 64
   {"CUBLAS_COMPUTE_16F_PEDANTIC",    {"HIPBLAS_COMPUTE_16F_PEDANTIC",    "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}}, // 65
-  {"CUBLAS_COMPUTE_32F",             {"HIPBLAS_COMPUTE_32F",             "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}}, // 68
+  {"CUBLAS_COMPUTE_32F",             {"HIPBLAS_COMPUTE_32F",             "rocblas_compute_type_f32",              CONV_NUMERIC_LITERAL, API_BLAS, 2, HIP_UNSUPPORTED}}, // 68
   {"CUBLAS_COMPUTE_32F_PEDANTIC",    {"HIPBLAS_COMPUTE_32F_PEDANTIC",    "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}}, // 69
   {"CUBLAS_COMPUTE_32F_FAST_16F",    {"HIPBLAS_COMPUTE_32F_FAST_16F",    "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}}, // 74
   {"CUBLAS_COMPUTE_32F_FAST_16BF",   {"HIPBLAS_COMPUTE_32F_FAST_16BF",   "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}}, // 75
@@ -387,4 +387,9 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_TYPE_NAME_VER_MAP {
   {"rocblas_atomics_allowed",                          {HIP_3080, HIP_0,    HIP_0   }},
   {"rocblas_gemm_algo",                                {HIP_1082, HIP_0,    HIP_0   }},
   {"rocblas_gemm_algo_standard",                       {HIP_1082, HIP_0,    HIP_0   }},
+  {"rocblas_math_mode",                                {HIP_5070, HIP_0,    HIP_0   }},
+  {"rocblas_default_math",                             {HIP_5070, HIP_0,    HIP_0   }},
+  {"rocblas_xf32_xdl_math_op",                         {HIP_5070, HIP_0,    HIP_0   }},
+  {"rocblas_computetype",                              {HIP_5070, HIP_0,    HIP_0   }},
+  {"rocblas_compute_type_f32",                         {HIP_5070, HIP_0,    HIP_0   }},
 };

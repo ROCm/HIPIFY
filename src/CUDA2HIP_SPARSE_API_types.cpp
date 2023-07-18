@@ -68,8 +68,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_TYPE_NAME_MAP {
   {"cusparseColorInfo",                         {"hipsparseColorInfo",                         "_rocsparse_color_info",                              CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED}},
   {"cusparseColorInfo_t",                       {"hipsparseColorInfo_t",                       "rocsparse_color_info",                               CONV_TYPE, API_SPARSE, 4}},
 
-  {"pruneInfo",                                 {"pruneInfo",                                  "",                                                   CONV_TYPE, API_SPARSE, 4, UNSUPPORTED}},
-  {"pruneInfo_t",                               {"pruneInfo_t",                                "",                                                   CONV_TYPE, API_SPARSE, 4, ROC_UNSUPPORTED}},
+  {"pruneInfo",                                 {"pruneInfo",                                  "_rocsparse_mat_info",                                CONV_TYPE, API_SPARSE, 4}},
+  {"pruneInfo_t",                               {"pruneInfo_t",                                "rocsparse_mat_info",                                 CONV_TYPE, API_SPARSE, 4}},
 
   {"cusparseSpMatDescr",                        {"hipsparseSpMatDescr",                        "_rocsparse_spmat_descr",                             CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED}},
   {"cusparseSpMatDescr_t",                      {"hipsparseSpMatDescr_t",                      "rocsparse_spmat_descr",                              CONV_TYPE, API_SPARSE, 4}},
@@ -401,6 +401,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_TYPE_NAME_VER_MAP {
   {"csrilu02Info_t",                             {HIP_1092, HIP_0,    HIP_0   }},
   {"bsrilu02Info_t",                             {HIP_3090, HIP_0,    HIP_0   }},
   {"csrgemm2Info_t",                             {HIP_2080, HIP_0,    HIP_0   }},
+  {"pruneInfo",                                  {HIP_3090, HIP_0,    HIP_0   }},
   {"pruneInfo_t",                                {HIP_3090, HIP_0,    HIP_0   }},
   {"hipsparseAction_t",                          {HIP_1092, HIP_0,    HIP_0   }},
   {"HIPSPARSE_ACTION_SYMBOLIC",                  {HIP_1092, HIP_0,    HIP_0   }},
@@ -631,4 +632,6 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_TYPE_NAME_VER_MAP {
   {"rocsparse_dense_to_sparse_alg_default",      {HIP_4010, HIP_0,    HIP_0   }},
   {"rocsparse_spgemm_alg",                       {HIP_4010, HIP_0,    HIP_0   }},
   {"rocsparse_spgemm_alg_default",               {HIP_4010, HIP_0,    HIP_0   }},
+  {"_rocsparse_mat_info",                        {HIP_1090, HIP_0,    HIP_0   }},
+  {"rocsparse_mat_info",                         {HIP_1090, HIP_0,    HIP_0   }},
 };

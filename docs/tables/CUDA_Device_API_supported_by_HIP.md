@@ -12,6 +12,7 @@
 |`__ballot`| | | |`__ballot`|1.6.0| | | |
 |`__bfloat1622float2`|11.0| | | | | | | |
 |`__bfloat162bfloat162`|11.0| | | | | | | |
+|`__bfloat162char_rz`|12.2| | | | | | | |
 |`__bfloat162float`|11.0| | | | | | | |
 |`__bfloat162int_rd`|11.0| | | | | | | |
 |`__bfloat162int_rn`|11.0| | | | | | | |
@@ -25,6 +26,7 @@
 |`__bfloat162short_rn`|11.0| | | | | | | |
 |`__bfloat162short_ru`|11.0| | | | | | | |
 |`__bfloat162short_rz`|11.0| | | | | | | |
+|`__bfloat162uchar_rz`|12.2| | | | | | | |
 |`__bfloat162uint_rd`|11.0| | | | | | | |
 |`__bfloat162uint_rn`|11.0| | | | | | | |
 |`__bfloat162uint_ru`|11.0| | | | | | | |
@@ -111,6 +113,7 @@
 |`__finite`| | | | | | | | |
 |`__finitef`| | | | | | | | |
 |`__finitel`| | | | | | | | |
+|`__float22bfloat162_rn`|11.0| | | | | | | |
 |`__float22half2_rn`| | | |`__float22half2_rn`|1.6.0| | | |
 |`__float2bfloat16`|11.0| | | | | | | |
 |`__float2bfloat162_rn`|11.0| | | | | | | |
@@ -183,6 +186,7 @@
 |`__hadd_rn`|11.6| | | | | | | |
 |`__hadd_sat`| | | |`__hadd_sat`|1.6.0| | | |
 |`__half22float2`| | | |`__half22float2`|1.6.0| | | |
+|`__half2char_rz`|12.2| | | | | | | |
 |`__half2float`| | | |`__half2float`|1.6.0| | | |
 |`__half2half2`| | | |`__half2half2`|1.9.0| | | |
 |`__half2int_rd`| | | |`__half2int_rd`|1.6.0| | | |
@@ -197,6 +201,7 @@
 |`__half2short_rn`| | | |`__half2short_rn`|1.6.0| | | |
 |`__half2short_ru`| | | |`__half2short_ru`|1.6.0| | | |
 |`__half2short_rz`| | | |`__half2short_rz`|1.6.0| | | |
+|`__half2uchar_rz`|12.2| | | | | | | |
 |`__half2uint_rd`| | | |`__half2uint_rd`|1.6.0| | | |
 |`__half2uint_rn`| | | |`__half2uint_rn`|1.6.0| | | |
 |`__half2uint_ru`| | | |`__half2uint_ru`|1.6.0| | | |
@@ -707,6 +712,8 @@
 |`lrintf`| | | |`lrintf`|1.6.0| | | |
 |`lround`| | | |`lround`|1.6.0| | | |
 |`lroundf`| | | |`lroundf`|1.6.0| | | |
+|`make_bfloat162`|12.2| | | | | | | |
+|`make_half2`|12.2| | | | | | | |
 |`max`| | | |`max`|1.6.0| | | |
 |`min`| | | |`min`|1.6.0| | | |
 |`modf`| | | |`modf`|1.9.0| | | |

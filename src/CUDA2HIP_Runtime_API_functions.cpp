@@ -308,6 +308,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   {"cudaMallocPitch",                                         {"hipMallocPitch",                                         "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY}},
   // cuMemAdvise
   {"cudaMemAdvise",                                           {"hipMemAdvise",                                           "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY}},
+  // cuMemAdvise_v2
+  {"cudaMemAdvise_v2",                                        {"hipMemAdvise_v2",                                        "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_UNSUPPORTED}},
   // no analogue
   // NOTE: Not equal to cuMemcpy due to different signatures
   {"cudaMemcpy",                                              {"hipMemcpy",                                              "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY}},
@@ -358,8 +360,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   {"cudaMemcpyToSymbolAsync",                                 {"hipMemcpyToSymbolAsync",                                 "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY}},
   // cuMemGetInfo
   {"cudaMemGetInfo",                                          {"hipMemGetInfo",                                          "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY}},
-  // TODO: double check cuMemPrefetchAsync
+  // cuMemPrefetchAsync
   {"cudaMemPrefetchAsync",                                    {"hipMemPrefetchAsync",                                    "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY}},
+  // cuMemPrefetchAsync_v2
+  {"cudaMemPrefetchAsync_v2",                                 {"hipMemPrefetchAsync_v2",                                 "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_UNSUPPORTED}},
   // cuMemRangeGetAttribute
   {"cudaMemRangeGetAttribute",                                {"hipMemRangeGetAttribute",                                "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY}},
   // cuMemRangeGetAttributes
@@ -836,6 +840,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   {"cudaGraphInstantiateWithParams",                          {"hipGraphInstantiateWithParams",                          "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_UNSUPPORTED}},
   // cuGraphExecGetFlags
   {"cudaGraphExecGetFlags",                                   {"hipGraphExecGetFlags",                                   "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_UNSUPPORTED}},
+  // cuGraphAddNode
+  {"cudaGraphAddNode",                                        {"hipGraphAddNode",                                        "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_UNSUPPORTED}},
+  // cuGraphNodeSetParams
+  {"cudaGraphNodeSetParams",                                  {"hipGraphNodeSetParams",                                  "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_UNSUPPORTED}},
+  // cuGraphExecNodeSetParams
+  {"cudaGraphExecNodeSetParams",                              {"hipGraphExecNodeSetParams",                              "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_UNSUPPORTED}},
 
   // 29. Driver Entry Point Access
   // cuGetProcAddress
@@ -875,7 +885,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // no analogue
   {"cudaBindTextureToArray",                                  {"hipBindTextureToArray",                                  "", CONV_TEXTURE, API_RUNTIME, SEC::TEXTURE_REMOVED, HIP_DEPRECATED | CUDA_REMOVED}},
   // no analogue
-  {"cudaBindTextureToMipmappedArray",                         {"hipBindTextureToMipmappedArray",                         "", CONV_TEXTURE, API_RUNTIME, SEC::TEXTURE_REMOVED, CUDA_REMOVED}},
+  {"cudaBindTextureToMipmappedArray",                         {"hipBindTextureToMipmappedArray",                         "", CONV_TEXTURE, API_RUNTIME, SEC::TEXTURE_REMOVED, HIP_DEPRECATED | CUDA_REMOVED}},
   // no analogue
   {"cudaGetTextureAlignmentOffset",                           {"hipGetTextureAlignmentOffset",                           "", CONV_TEXTURE, API_RUNTIME, SEC::TEXTURE_REMOVED, HIP_DEPRECATED | CUDA_REMOVED}},
   // no analogue
@@ -1110,6 +1120,11 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_FUNCTION_VER_MAP {
   {"cudaGraphInstantiateWithParams",                          {CUDA_120, CUDA_0,   CUDA_0  }},
   {"cudaGraphExecGetFlags",                                   {CUDA_120, CUDA_0,   CUDA_0  }},
   {"cudaGetKernel",                                           {CUDA_121, CUDA_0,   CUDA_0  }},
+  {"cudaMemPrefetchAsync_v2",                                 {CUDA_122, CUDA_0,   CUDA_0  }},
+  {"cudaMemAdvise_v2",                                        {CUDA_122, CUDA_0,   CUDA_0  }},
+  {"cudaGraphAddNode",                                        {CUDA_122, CUDA_0,   CUDA_0  }},
+  {"cudaGraphNodeSetParams",                                  {CUDA_122, CUDA_0,   CUDA_0  }},
+  {"cudaGraphExecNodeSetParams",                              {CUDA_122, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP {
@@ -1230,7 +1245,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP {
   {"hipBindTexture",                                          {HIP_1060, HIP_3080, HIP_0   }},
   {"hipBindTexture2D",                                        {HIP_1070, HIP_3080, HIP_0   }},
   {"hipBindTextureToArray",                                   {HIP_1060, HIP_3080, HIP_0   }},
-  {"hipBindTextureToMipmappedArray",                          {HIP_1070, HIP_0,    HIP_0   }},
+  {"hipBindTextureToMipmappedArray",                          {HIP_1070, HIP_5070, HIP_0   }},
   {"hipCreateChannelDesc",                                    {HIP_1060, HIP_0,    HIP_0   }},
   {"hipGetChannelDesc",                                       {HIP_1070, HIP_0,    HIP_0   }},
   {"hipGetTextureAlignmentOffset",                            {HIP_1090, HIP_3080, HIP_0   }},
