@@ -353,13 +353,13 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuMemsetD8Async",                                      {"hipMemsetD8Async",                                        "", CONV_MEMORY, API_DRIVER, SEC::MEMORY}},
   // no analogue
   // NOTE: Not equal to cudaMallocMipmappedArray due to different signatures
-  {"cuMipmappedArrayCreate",                               {"hipMipmappedArrayCreate",                                 "", CONV_MEMORY, API_DRIVER, SEC::MEMORY}},
+  {"cuMipmappedArrayCreate",                               {"hipMipmappedArrayCreate",                                 "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_DEPRECATED}},
   // no analogue
   // NOTE: Not equal to cudaFreeMipmappedArray due to different signatures
-  {"cuMipmappedArrayDestroy",                              {"hipMipmappedArrayDestroy",                                "", CONV_MEMORY, API_DRIVER, SEC::MEMORY}},
+  {"cuMipmappedArrayDestroy",                              {"hipMipmappedArrayDestroy",                                "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_DEPRECATED}},
   // no analogue
   // NOTE: Not equal to cudaGetMipmappedArrayLevel due to different signatures
-  {"cuMipmappedArrayGetLevel",                             {"hipMipmappedArrayGetLevel",                               "", CONV_MEMORY, API_DRIVER, SEC::MEMORY}},
+  {"cuMipmappedArrayGetLevel",                             {"hipMipmappedArrayGetLevel",                               "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_DEPRECATED}},
   // cudaArrayGetSparseProperties
   {"cuArrayGetSparseProperties",                           {"hipArrayGetSparseProperties",                             "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_UNSUPPORTED}},
   // cudaArrayGetPlane
@@ -431,8 +431,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   // 17. Unified Addressing
   // cudaMemAdvise
   {"cuMemAdvise",                                          {"hipMemAdvise",                                            "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED}},
-  // TODO: double check cudaMemPrefetchAsync
+  // cudaMemAdvise_v2
+  {"cuMemAdvise_v2",                                       {"hipMemAdvise_v2",                                         "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED, HIP_UNSUPPORTED}},
+  // cudaMemPrefetchAsync
   {"cuMemPrefetchAsync",                                   {"hipMemPrefetchAsync",                                     "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED}},
+  // cudaMemPrefetchAsync_v2
+  {"cuMemPrefetchAsync_v2",                                {"hipMemPrefetchAsync_v2",                                  "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED, HIP_UNSUPPORTED}},
   // cudaMemRangeGetAttribute
   {"cuMemRangeGetAttribute",                               {"hipMemRangeGetAttribute",                                 "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED}},
   // cudaMemRangeGetAttributes
@@ -782,6 +786,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuGraphInstantiateWithParams",                         {"hipGraphInstantiateWithParams",                           "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_UNSUPPORTED}},
   // cudaGraphExecGetFlags
   {"cuGraphExecGetFlags",                                  {"hipGraphExecGetFlags",                                    "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_UNSUPPORTED}},
+  // cudaGraphAddNode
+  {"cuGraphAddNode",                                       {"hipGraphAddNode",                                         "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_UNSUPPORTED}},
+  // cudaGraphNodeSetParams
+  {"cuGraphNodeSetParams",                                 {"hipGraphNodeSetParams",                                   "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_UNSUPPORTED}},
+  // cudaGraphExecNodeSetParams
+  {"cuGraphExecNodeSetParams",                             {"hipGraphExecNodeSetParams",                               "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_UNSUPPORTED}},
 
   // 25. Occupancy
   // cudaOccupancyAvailableDynamicSMemPerBlock
@@ -1384,6 +1394,11 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_FUNCTION_VER_MAP {
   {"cuCoredumpGetAttributeGlobal",                         {CUDA_121, CUDA_0,   CUDA_0  }},
   {"cuCoredumpSetAttribute",                               {CUDA_121, CUDA_0,   CUDA_0  }},
   {"cuCoredumpSetAttributeGlobal",                         {CUDA_121, CUDA_0,   CUDA_0  }},
+  {"cuMemPrefetchAsync_v2",                                {CUDA_122, CUDA_0,   CUDA_0  }},
+  {"cuMemAdvise_v2",                                       {CUDA_122, CUDA_0,   CUDA_0  }},
+  {"cuGraphAddNode",                                       {CUDA_122, CUDA_0,   CUDA_0  }},
+  {"cuGraphNodeSetParams",                                 {CUDA_122, CUDA_0,   CUDA_0  }},
+  {"cuGraphExecNodeSetParams",                             {CUDA_122, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_FUNCTION_VER_MAP {
@@ -1443,9 +1458,9 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_FUNCTION_VER_MAP {
   {"hipMemsetD32Async",                                    {HIP_2030, HIP_0,    HIP_0   }},
   {"hipMemsetD8",                                          {HIP_1060, HIP_0,    HIP_0   }},
   {"hipMemsetD8Async",                                     {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipMipmappedArrayCreate",                              {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipMipmappedArrayDestroy",                             {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipMipmappedArrayGetLevel",                            {HIP_3050, HIP_0,    HIP_0   }},
+  {"hipMipmappedArrayCreate",                              {HIP_3050, HIP_5070, HIP_0   }},
+  {"hipMipmappedArrayDestroy",                             {HIP_3050, HIP_5070, HIP_0   }},
+  {"hipMipmappedArrayGetLevel",                            {HIP_3050, HIP_5070, HIP_0   }},
   {"hipFuncGetAttribute",                                  {HIP_2080, HIP_0,    HIP_0   }},
   {"hipModuleLaunchKernel",                                {HIP_1060, HIP_0,    HIP_0   }},
   {"hipModuleOccupancyMaxActiveBlocksPerMultiprocessor",   {HIP_3050, HIP_0,    HIP_0   }},

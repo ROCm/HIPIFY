@@ -1199,12 +1199,11 @@ class PPCallbackProxy : public clang::PPCallbacks {
 
 public:
   explicit PPCallbackProxy(HipifyAction &action): hipifyAction(action) {}
-  // [ToDo] Remove SWDEV_375013 related guards from CMakeLists.txt and HipifyAction.cpp along with the LLVM 16.0.0 official release
   void InclusionDirective(clang::SourceLocation hash_loc, const clang::Token &include_token,
                           StringRef file_name, bool is_angled, clang::CharSourceRange filename_range,
 #if LLVM_VERSION_MAJOR < 15
                           const clang::FileEntry *file,
-#elif (LLVM_VERSION_MAJOR == 15) || (LLVM_VERSION_MAJOR == 16 && SWDEV_375013)
+#elif LLVM_VERSION_MAJOR == 15
                           Optional<clang::FileEntryRef> file,
 #else
                           clang::OptionalFileEntryRef file,

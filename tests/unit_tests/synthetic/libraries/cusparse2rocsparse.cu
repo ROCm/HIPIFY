@@ -125,6 +125,8 @@ int main() {
   int nnzb = 0;
   int innz = 0;
   int blockDim = 0;
+  int cscRowIndA = 0;
+  int cscColPtrA = 0;
   int csrRowPtrA = 0;
   int csrColIndA = 0;
   int ncolors = 0;
@@ -157,6 +159,7 @@ int main() {
   void *indices = nullptr;
   void *values = nullptr;
   void *cooRowInd = nullptr;
+  int icooRowInd = 0;
   void *cscRowInd = nullptr;
   void *csrColInd = nullptr;
   void *cooColInd = nullptr;
@@ -192,6 +195,10 @@ int main() {
   float fbsrSortedValA = 0.f;
   float fbsrSortedValC = 0.f;
   float fcsrSortedValC = 0.f;
+  double percentage = 0.f;
+
+  // CHECK: rocsparse_mat_info prune_info;
+  pruneInfo_t prune_info;
 
   // TODO: should be rocsparse_double_complex
   // TODO: add to TypeOverloads cuDoubleComplex -> rocsparse_double_complex under a new option --sparse
@@ -416,12 +423,54 @@ int main() {
   // CHECK: status_t = rocsparse_coosort_by_row(handle_t, m, n, innz, &icooRows, &icooColumns, P, pBuffer);
   status_t = cusparseXcoosortByRow(handle_t, m, n, innz, &icooRows, &icooColumns, P, pBuffer);
 
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseXcoosort_bufferSizeExt(cusparseHandle_t handle, int m, int n, int nnz, const int* cooRowsA, const int* cooColsA, size_t* pBufferSizeInBytes);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_coosort_buffer_size(rocsparse_handle handle, rocsparse_int m, rocsparse_int n, rocsparse_int nnz, const rocsparse_int* coo_row_ind, const rocsparse_int* coo_col_ind, size_t* buffer_size);
+  // CHECK: status_t = rocsparse_coosort_buffer_size(handle_t, m, n, innz, &icooRows, &icooColumns, &bufferSize);
+  status_t = cusparseXcoosort_bufferSizeExt(handle_t, m, n, innz, &icooRows, &icooColumns, &bufferSize);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseXcscsort(cusparseHandle_t handle, int m, int n, int nnz, const cusparseMatDescr_t descrA, const int* cscColPtrA, int* cscRowIndA, int* P, void* pBuffer);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_cscsort(rocsparse_handle handle, rocsparse_int m, rocsparse_int n, rocsparse_int nnz, const rocsparse_mat_descr descr, const rocsparse_int* csc_col_ptr, rocsparse_int* csc_row_ind, rocsparse_int* perm, void* temp_buffer);
+  // CHECK: status_t = rocsparse_cscsort(handle_t, m, n, innz, matDescr_A, &cscColPtrA, &cscRowIndA, P, pBuffer);
+  status_t = cusparseXcscsort(handle_t, m, n, innz, matDescr_A, &cscColPtrA, &cscRowIndA, P, pBuffer);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseXcscsort_bufferSizeExt(cusparseHandle_t handle, int m, int n, int nnz, const int* cscColPtrA, const int* cscRowIndA, size_t* pBufferSizeInBytes);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_cscsort_buffer_size(rocsparse_handle handle, rocsparse_int m, rocsparse_int n, rocsparse_int nnz, const rocsparse_int* csc_col_ptr, const rocsparse_int* csc_row_ind, size_t* buffer_size);
+  // CHECK: status_t = rocsparse_cscsort_buffer_size(handle_t, m, n, innz, &cscColPtrA, &cscRowIndA, &bufferSize);
+  status_t = cusparseXcscsort_bufferSizeExt(handle_t, m, n, innz, &cscColPtrA, &cscRowIndA, &bufferSize);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseXcsrsort(cusparseHandle_t handle, int m, int n, int nnz, const cusparseMatDescr_t descrA, const int* csrRowPtrA, int* csrColIndA, int* P, void* pBuffer);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_csrsort(rocsparse_handle handle, rocsparse_int m, rocsparse_int n, rocsparse_int nnz, const rocsparse_mat_descr descr, const rocsparse_int* csr_row_ptr, rocsparse_int* csr_col_ind, rocsparse_int* perm, void* temp_buffer);
+  // CHECK: status_t = rocsparse_csrsort(handle_t, m, n, innz, matDescr_A, &cscRowIndA, &cscColPtrA, P, pBuffer);
+  status_t = cusparseXcsrsort(handle_t, m, n, innz, matDescr_A, &cscRowIndA, &cscColPtrA, P, pBuffer);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseXcsrsort_bufferSizeExt(cusparseHandle_t handle, int m, int n, int nnz, const int* csrRowPtrA, const int* csrColIndA, size_t* pBufferSizeInBytes);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_csrsort_buffer_size(rocsparse_handle handle, rocsparse_int m, rocsparse_int n, rocsparse_int nnz, const rocsparse_int* csr_row_ptr, const rocsparse_int* csr_col_ind, size_t* buffer_size);
+  // CHECK: status_t = rocsparse_csrsort_buffer_size(handle_t, m, n, innz, &cscRowIndA, &cscColPtrA, &bufferSize);
+  status_t = cusparseXcsrsort_bufferSizeExt(handle_t, m, n, innz, &cscRowIndA, &cscColPtrA, &bufferSize);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCreateIdentityPermutation(cusparseHandle_t handle, int n, int* p);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_create_identity_permutation(rocsparse_handle handle, rocsparse_int n, rocsparse_int* p);
+  // CHECK: status_t = rocsparse_create_identity_permutation(handle_t, n, P);
+  status_t = cusparseCreateIdentityPermutation(handle_t, n, P);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseXcoo2csr(cusparseHandle_t handle, const int* cooRowInd, int nnz, int m, int* csrSortedRowPtr, cusparseIndexBase_t idxBase);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_coo2csr(rocsparse_handle handle, const rocsparse_int* coo_row_ind, rocsparse_int nnz, rocsparse_int m, rocsparse_int* csr_row_ptr, rocsparse_index_base idx_base);
+  // CHECK: status_t = rocsparse_coo2csr(handle_t, &icooRowInd, nnz, m, &csrRowPtrA, indexBase_t);
+  status_t = cusparseXcoo2csr(handle_t, &icooRowInd, nnz, m, &csrRowPtrA, indexBase_t);
+
 #if CUDA_VERSION >= 8000
   // CHECK: hipDataType dataType_t;
   // TODO: [#899] There should be rocsparse_datatype
   // CHECK-NEXT: hipDataType dataType;
   cudaDataType_t dataType_t;
   cudaDataType dataType;
+#endif
+
+#if CUDA_VERSION >= 9000
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDpruneCsr2csrByPercentage(cusparseHandle_t handle, int m, int n, int nnzA, const cusparseMatDescr_t descrA, const double* csrSortedValA, const int* csrSortedRowPtrA, const int* csrSortedColIndA, float percentage, const cusparseMatDescr_t descrC, double* csrSortedValC, const int* csrSortedRowPtrC, int* csrSortedColIndC, pruneInfo_t info, void* pBuffer);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_dprune_csr2csr_by_percentage(rocsparse_handle handle, rocsparse_int m, rocsparse_int n, rocsparse_int nnz_A, const rocsparse_mat_descr csr_descr_A, const double* csr_val_A, const rocsparse_int* csr_row_ptr_A, const rocsparse_int* csr_col_ind_A, double percentage, const rocsparse_mat_descr csr_descr_C, double* csr_val_C, const rocsparse_int* csr_row_ptr_C, rocsparse_int* csr_col_ind_C, rocsparse_mat_info info, void* temp_buffer);
+  // CHECK: status_t = rocsparse_dprune_csr2csr_by_percentage(handle_t, m, n, nnz, matDescr_A, &csrValA, &csrRowPtrA, &csrColIndA, percentage, matDescr_C, &csrValC, &csrRowPtrC, &csrColIndC, prune_info, pBuffer);
+  status_t = cusparseDpruneCsr2csrByPercentage(handle_t, m, n, nnz, matDescr_A, &csrValA, &csrRowPtrA, &csrColIndA, percentage, matDescr_C, &csrValC, &csrRowPtrC, &csrColIndC, prune_info, pBuffer);
 #endif
 
 #if CUDA_VERSION >= 8000 && CUDA_VERSION < 12000
@@ -431,7 +480,7 @@ int main() {
   status_t = cusparseCopyMatDescr(matDescr_t, matDescr_t_2);
 #endif
 
-#if CUDA_VERSION >= 10010
+#if (CUDA_VERSION >= 10010 && CUDA_VERSION < 11000 && !defined(_WIN32)) || CUDA_VERSION >= 11000
   // CHECK: _rocsparse_spmat_descr *spMatDescr = nullptr;
   // CHECK-NEXT: rocsparse_spmat_descr spMatDescr_t, matC;
   cusparseSpMatDescr *spMatDescr = nullptr;
@@ -531,7 +580,7 @@ int main() {
   status_t = cusparseDnMatSetStridedBatch(dnMatDescr_t, batchCount, batchStride);
 #endif
 
-#if CUDA_VERSION >= 10020
+#if (CUDA_VERSION >= 10020 && CUDA_VERSION < 11000 && !defined(_WIN32)) || CUDA_VERSION >= 11000
   // CHECK: _rocsparse_spvec_descr *spVecDescr = nullptr;
   // CHECK-NEXT: rocsparse_spvec_descr spVecDescr_t;
   cusparseSpVecDescr *spVecDescr = nullptr;
@@ -541,9 +590,6 @@ int main() {
   // CHECK-NEXT: rocsparse_dnvec_descr dnVecDescr_t, vecX, vecY;
   cusparseDnVecDescr *dnVecDescr = nullptr;
   cusparseDnVecDescr_t dnVecDescr_t, vecX, vecY;
-
-  // CHECK: rocsparse_status STATUS_NOT_SUPPORTED = rocsparse_status_not_implemented;
-  cusparseStatus_t STATUS_NOT_SUPPORTED = CUSPARSE_STATUS_NOT_SUPPORTED;
 
   // CHECK: rocsparse_spmv_alg spMVAlg_t;
   cusparseSpMVAlg_t spMVAlg_t;
@@ -644,7 +690,12 @@ int main() {
   status_t = cusparseSpMV(handle_t, opA, alpha, spMatDescr_t, vecX, beta, vecY, dataType, spMVAlg_t, tempBuffer);
 #endif
 
-#if CUDA_VERSION >= 10020 && CUDA_VERSION < 12000
+#if CUDA_VERSION >= 10020
+  // CHECK: rocsparse_status STATUS_NOT_SUPPORTED = rocsparse_status_not_implemented;
+  cusparseStatus_t STATUS_NOT_SUPPORTED = CUSPARSE_STATUS_NOT_SUPPORTED;
+#endif
+
+#if (CUDA_VERSION >= 10020 && CUDA_VERSION < 11000 && !defined(_WIN32)) || (CUDA_VERSION >= 11000 && CUDA_VERSION < 12000)
   // CHECK: rocsparse_format FORMAT_COO_AOS = rocsparse_format_coo_aos;
   cusparseFormat_t FORMAT_COO_AOS = CUSPARSE_FORMAT_COO_AOS;
 

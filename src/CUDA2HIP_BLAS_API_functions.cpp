@@ -35,8 +35,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
   {"cublasSetKernelStream",          {"hipblasSetKernelStream",          "",                                         CONV_LIB_FUNC, API_BLAS, 4, UNSUPPORTED}},
   {"cublasGetAtomicsMode",           {"hipblasGetAtomicsMode",           "rocblas_get_atomics_mode",                 CONV_LIB_FUNC, API_BLAS, 4}},
   {"cublasSetAtomicsMode",           {"hipblasSetAtomicsMode",           "rocblas_set_atomics_mode",                 CONV_LIB_FUNC, API_BLAS, 4}},
-  {"cublasGetMathMode",              {"hipblasGetMathMode",              "",                                         CONV_LIB_FUNC, API_BLAS, 4, UNSUPPORTED}},
-  {"cublasSetMathMode",              {"hipblasSetMathMode",              "",                                         CONV_LIB_FUNC, API_BLAS, 4, UNSUPPORTED}},
+  {"cublasGetMathMode",              {"hipblasGetMathMode",              "rocblas_get_math_mode",                    CONV_LIB_FUNC, API_BLAS, 4, HIP_UNSUPPORTED}},
+  {"cublasSetMathMode",              {"hipblasSetMathMode",              "rocblas_set_math_mode",                    CONV_LIB_FUNC, API_BLAS, 4, HIP_UNSUPPORTED}},
   {"cublasMigrateComputeType",       {"hipblasMigrateComputeType",       "",                                         CONV_LIB_FUNC, API_BLAS, 4, UNSUPPORTED}},
   {"cublasGetSmCountTarget",         {"hipblasGetSmCountTarget",         "",                                         CONV_LIB_FUNC, API_BLAS, 4, UNSUPPORTED}},
   {"cublasSetSmCountTarget",         {"hipblasSetSmCountTarget",         "",                                         CONV_LIB_FUNC, API_BLAS, 4, UNSUPPORTED}},
@@ -1075,6 +1075,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_FUNCTION_VER_MAP {
   {"cublasGetMathMode",                          {CUDA_90,  CUDA_0, CUDA_0}},
+  {"cublasSetMathMode",                          {CUDA_90,  CUDA_0, CUDA_0}},
   {"cublasMigrateComputeType",                   {CUDA_110, CUDA_0, CUDA_0}},
   {"cublasLogCallback",                          {CUDA_92,  CUDA_0, CUDA_0}},
   {"cublasLoggerConfigure",                      {CUDA_92,  CUDA_0, CUDA_0}},
@@ -1962,6 +1963,8 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_FUNCTION_VER_MAP {
   {"hipblasDgelsBatched",                        {HIP_5040, HIP_0,    HIP_0   }},
   {"hipblasCgelsBatched",                        {HIP_5040, HIP_0,    HIP_0   }},
   {"hipblasZgelsBatched",                        {HIP_5040, HIP_0,    HIP_0   }},
+  {"rocblas_get_math_mode",                      {HIP_5070, HIP_0,    HIP_0   }},
+  {"rocblas_set_math_mode",                      {HIP_5070, HIP_0,    HIP_0   }},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_BLAS_API_SECTION_MAP {
