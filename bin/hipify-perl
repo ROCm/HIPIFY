@@ -1506,7 +1506,10 @@ sub rocSubstitutions {
     subst("cusparseDnVecGet", "rocsparse_dnvec_get", "library");
     subst("cusparseDnVecGetValues", "rocsparse_dnvec_get_values", "library");
     subst("cusparseDnVecSetValues", "rocsparse_dnvec_set_values", "library");
+    subst("cusparseDpruneCsr2csr", "rocsparse_dprune_csr2csr", "library");
     subst("cusparseDpruneCsr2csrByPercentage", "rocsparse_dprune_csr2csr_by_percentage", "library");
+    subst("cusparseDpruneCsr2csrByPercentage_bufferSizeExt", "rocsparse_dprune_csr2csr_by_percentage_buffer_size", "library");
+    subst("cusparseDpruneCsr2csrNnzByPercentage", "rocsparse_dprune_csr2csr_nnz_by_percentage", "library");
     subst("cusparseGather", "rocsparse_gather", "library");
     subst("cusparseGetMatDiagType", "rocsparse_get_mat_diag_type", "library");
     subst("cusparseGetMatFillMode", "rocsparse_get_mat_fill_mode", "library");
@@ -1545,6 +1548,10 @@ sub rocSubstitutions {
     subst("cusparseSpVecGetIndexBase", "rocsparse_spvec_get_index_base", "library");
     subst("cusparseSpVecGetValues", "rocsparse_spvec_get_values", "library");
     subst("cusparseSpVecSetValues", "rocsparse_spvec_set_values", "library");
+    subst("cusparseSpruneCsr2csr", "rocsparse_sprune_csr2csr", "library");
+    subst("cusparseSpruneCsr2csrByPercentage", "rocsparse_sprune_csr2csr_by_percentage", "library");
+    subst("cusparseSpruneCsr2csrByPercentage_bufferSizeExt", "rocsparse_sprune_csr2csr_by_percentage_buffer_size", "library");
+    subst("cusparseSpruneCsr2csrNnzByPercentage", "rocsparse_sprune_csr2csr_nnz_by_percentage", "library");
     subst("cusparseXcoo2csr", "rocsparse_coo2csr", "library");
     subst("cusparseXcoosortByColumn", "rocsparse_coosort_by_column", "library");
     subst("cusparseXcoosortByRow", "rocsparse_coosort_by_row", "library");
