@@ -12,7 +12,7 @@
 # (this is useful for testing improvements to the hipify-perl toolset).
 
 
-SCRIPT_DIR=`dirname $0`
+SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
 PRIV_SCRIPT_DIR="$SCRIPT_DIR/../libexec/hipify"
 SEARCH_DIR=$1
 shift
