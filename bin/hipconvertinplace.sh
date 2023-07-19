@@ -6,7 +6,7 @@
 # This can be quite handy when dealing with an existing CUDA code base since the script
 # preserves the existing directory structure.
 
-SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
+SCRIPT_DIR="$(dirname "$(realpath "$0")")"
 PRIV_SCRIPT_DIR="$SCRIPT_DIR/../libexec/hipify"
 SEARCH_DIR=$1
 

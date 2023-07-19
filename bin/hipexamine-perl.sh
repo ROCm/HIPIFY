@@ -6,7 +6,7 @@
 # in the specified directory.
 
 
-SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
+SCRIPT_DIR="$(dirname "$(realpath "$0")")"
 PRIV_SCRIPT_DIR="$SCRIPT_DIR/../libexec/hipify"
 SEARCH_DIR=$1
 shift
