@@ -11,8 +11,7 @@
 #   - If ".prehip" file exists, this is used as input to hipify.
 # (this is useful for testing improvements to the hipify-perl toolset).
 
-
-SCRIPT_DIR=`dirname $0`
+SCRIPT_DIR="$(dirname "$(realpath "$0")")"
 PRIV_SCRIPT_DIR="$SCRIPT_DIR/../libexec/hipify"
 SEARCH_DIR=$1
 shift
