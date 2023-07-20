@@ -18,7 +18,7 @@ else()
 
   message(STATUS "Found LLVM ${LLVM_PACKAGE_VERSION}:")
   message(STATUS "   - CMake module path:  ${LLVM_CMAKE_DIR}")
-  message(STATUS "   - Clang include path: ${CLANG_INCLUDE_DIRS})
+  message(STATUS "   - Clang include path: ${CLANG_INCLUDE_DIRS}")
   message(STATUS "   - LLVM Include path:  ${LLVM_INCLUDE_DIRS}")
   message(STATUS "   - Binary path      :  ${LLVM_TOOLS_BINARY_DIR}")
 endif()
