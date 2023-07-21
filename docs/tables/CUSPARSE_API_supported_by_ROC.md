@@ -679,11 +679,11 @@
 |`cusparseDhyb2dense`| |10.2|11.0| | | | | |
 |`cusparseDnnz`| | | | | | | | |
 |`cusparseDnnz_compress`|8.0| | | | | | | |
-|`cusparseDpruneCsr2csr`|9.0| | | | | | | |
+|`cusparseDpruneCsr2csr`|9.0| | |`rocsparse_dprune_csr2csr`|3.9.0| | | |
 |`cusparseDpruneCsr2csrByPercentage`|9.0| | |`rocsparse_dprune_csr2csr_by_percentage`|3.9.0| | | |
-|`cusparseDpruneCsr2csrByPercentage_bufferSizeExt`|9.0| | | | | | | |
+|`cusparseDpruneCsr2csrByPercentage_bufferSizeExt`|9.0| | |`rocsparse_dprune_csr2csr_by_percentage_buffer_size`|3.9.0| | | |
 |`cusparseDpruneCsr2csrNnz`|9.0| | | | | | | |
-|`cusparseDpruneCsr2csrNnzByPercentage`|9.0| | | | | | | |
+|`cusparseDpruneCsr2csrNnzByPercentage`|9.0| | |`rocsparse_dprune_csr2csr_nnz_by_percentage`|3.9.0| | | |
 |`cusparseDpruneCsr2csr_bufferSizeExt`|9.0| | | | | | | |
 |`cusparseDpruneDense2csr`|9.0| | | | | | | |
 |`cusparseDpruneDense2csrByPercentage`|9.0| | | | | | | |
@@ -732,11 +732,11 @@
 |`cusparseShyb2dense`| |10.2|11.0| | | | | |
 |`cusparseSnnz`| | | | | | | | |
 |`cusparseSnnz_compress`|8.0| | | | | | | |
-|`cusparseSpruneCsr2csr`|9.0| | | | | | | |
-|`cusparseSpruneCsr2csrByPercentage`|9.0| | | | | | | |
-|`cusparseSpruneCsr2csrByPercentage_bufferSizeExt`|9.0| | | | | | | |
+|`cusparseSpruneCsr2csr`|9.0| | |`rocsparse_sprune_csr2csr`|3.9.0| | | |
+|`cusparseSpruneCsr2csrByPercentage`|9.0| | |`rocsparse_sprune_csr2csr_by_percentage`|3.9.0| | | |
+|`cusparseSpruneCsr2csrByPercentage_bufferSizeExt`|9.0| | |`rocsparse_sprune_csr2csr_by_percentage_buffer_size`|3.9.0| | | |
 |`cusparseSpruneCsr2csrNnz`|9.0| | | | | | | |
-|`cusparseSpruneCsr2csrNnzByPercentage`|9.0| | | | | | | |
+|`cusparseSpruneCsr2csrNnzByPercentage`|9.0| | |`rocsparse_sprune_csr2csr_nnz_by_percentage`|3.9.0| | | |
 |`cusparseSpruneCsr2csr_bufferSizeExt`|9.0| | | | | | | |
 |`cusparseSpruneDense2csr`|9.0| | | | | | | |
 |`cusparseSpruneDense2csrByPercentage`|9.0| | | | | | | |
