@@ -213,7 +213,12 @@ if (NOT HIPIFY_CLANG_TESTS_ONLY)
 endif() # if (NOT HIPIFY_CLANG_TESTS_ONLY)
 
 if(HIPIFY_CLANG_TESTS OR HIPIFY_CLANG_TESTS_ONLY)
-  find_package(PythonInterp 2.7 REQUIRED)
+
+  if(${CMAKE_VERSION} VERSION_LESS "3.27.0")
+    find_package(PythonInterp 2.7 REQUIRED)
+  else()
+    find_package(Python 2.7...3.12 REQUIRED)
+  endif()
 
   function (require_program PROGRAM_NAME)
     find_program(FOUND_${PROGRAM_NAME} ${PROGRAM_NAME})
