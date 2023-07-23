@@ -232,7 +232,25 @@ if(HIPIFY_CLANG_TESTS OR HIPIFY_CLANG_TESTS_ONLY)
   require_program(lit)
   require_program(FileCheck)
 
-  find_package(CUDA REQUIRED)
+  set(CUDA_TOOLKIT_ROOT_DIR OFF CACHE PATH "Path to CUDA Toolkit to use in hipify-clang unit testing")
+
+  if(${CMAKE_VERSION} VERSION_LESS "3.27.0")
+    find_package(CUDA REQUIRED)
+  else()
+    if(DEFINED CUDA_TOOLKIT_ROOT_DIR)
+      if(NOT DEFINED CUDAToolkit_ROOT)
+        set(CUDAToolkit_ROOT "${CUDA_TOOLKIT_ROOT_DIR}")
+      endif()
+    endif()
+    find_package(CUDAToolkit REQUIRED)
+    set(CUDA_VERSION_MAJOR "${CUDAToolkit_VERSION_MAJOR}")
+    set(CUDA_VERSION_MINOR "${CUDAToolkit_VERSION_MINOR}")
+    set(CUDA_VERSION "${CUDAToolkit_VERSION_MAJOR}.${CUDAToolkit_VERSION_MINOR}")
+    if(NOT DEFINED CUDA_TOOLKIT_ROOT_DIR)
+      set(CUDA_TOOLKIT_ROOT_DIR "${CUDAToolkit_ROOT}")
+    endif()
+  endif()
+
   if((CUDA_VERSION VERSION_LESS "7.0") OR (LLVM_PACKAGE_VERSION VERSION_LESS "3.8") OR
      (CUDA_VERSION VERSION_GREATER "7.5" AND LLVM_PACKAGE_VERSION VERSION_LESS "4.0") OR
      (CUDA_VERSION VERSION_GREATER "8.0" AND LLVM_PACKAGE_VERSION VERSION_LESS "6.0") OR
