@@ -17,13 +17,6 @@ config.cuda_version_full = "@CUDA_VERSION_FULL@"
 config.cuda_version = "@CUDA_VERSION@"
 if sys.platform in ['win32']:
     config.cuda_sdk_root = "@CUDA_SDK_ROOT_DIR@"
-    if not config.cuda_sdk_root or config.cuda_sdk_root == "CUDA_SDK_ROOT_DIR-NOTFOUND":
-        cuda_version = config.cuda_version
-        cuda_version = cuda_version.replace('.','_')
-        config.cuda_samples_root = os.environ.get('NVCUDASAMPLES' + cuda_version + '_ROOT')
-        if not config.cuda_samples_root:
-            lit_config.fatal('No CUDA Samples dir set! Please set CUDA_SDK_ROOT_DIR.')
-        config.cuda_sdk_root = config.cuda_samples_root
     config.build_type = "@CMAKE_BUILD_TYPE@"
     if not config.build_type:
         config.build_type = "Debug"
