@@ -1459,6 +1459,7 @@ sub rocSubstitutions {
     subst("cusparseAxpby", "rocsparse_axpby", "library");
     subst("cusparseBlockedEllGet", "rocsparse_bell_get", "library");
     subst("cusparseCbsr2csr", "rocsparse_cbsr2csr", "library");
+    subst("cusparseCcsr2csr_compress", "rocsparse_ccsr2csr_compress", "library");
     subst("cusparseCcsrcolor", "rocsparse_ccsrcolor", "library");
     subst("cusparseCgebsr2csr", "rocsparse_cgebsr2csr", "library");
     subst("cusparseCgebsr2gebsr", "rocsparse_cgebsr2gebsr", "library");
@@ -1509,7 +1510,9 @@ sub rocSubstitutions {
     subst("cusparseDpruneCsr2csr", "rocsparse_dprune_csr2csr", "library");
     subst("cusparseDpruneCsr2csrByPercentage", "rocsparse_dprune_csr2csr_by_percentage", "library");
     subst("cusparseDpruneCsr2csrByPercentage_bufferSizeExt", "rocsparse_dprune_csr2csr_by_percentage_buffer_size", "library");
+    subst("cusparseDpruneCsr2csrNnz", "rocsparse_dprune_csr2csr_nnz", "library");
     subst("cusparseDpruneCsr2csrNnzByPercentage", "rocsparse_dprune_csr2csr_nnz_by_percentage", "library");
+    subst("cusparseDpruneCsr2csr_bufferSizeExt", "rocsparse_dprune_csr2csr_buffer_size", "library");
     subst("cusparseGather", "rocsparse_gather", "library");
     subst("cusparseGetMatDiagType", "rocsparse_get_mat_diag_type", "library");
     subst("cusparseGetMatFillMode", "rocsparse_get_mat_fill_mode", "library");
@@ -1551,7 +1554,9 @@ sub rocSubstitutions {
     subst("cusparseSpruneCsr2csr", "rocsparse_sprune_csr2csr", "library");
     subst("cusparseSpruneCsr2csrByPercentage", "rocsparse_sprune_csr2csr_by_percentage", "library");
     subst("cusparseSpruneCsr2csrByPercentage_bufferSizeExt", "rocsparse_sprune_csr2csr_by_percentage_buffer_size", "library");
+    subst("cusparseSpruneCsr2csrNnz", "rocsparse_sprune_csr2csr_nnz", "library");
     subst("cusparseSpruneCsr2csrNnzByPercentage", "rocsparse_sprune_csr2csr_nnz_by_percentage", "library");
+    subst("cusparseSpruneCsr2csr_bufferSizeExt", "rocsparse_sprune_csr2csr_buffer_size", "library");
     subst("cusparseXcoo2csr", "rocsparse_coo2csr", "library");
     subst("cusparseXcoosortByColumn", "rocsparse_coosort_by_column", "library");
     subst("cusparseXcoosortByRow", "rocsparse_coosort_by_row", "library");
@@ -1562,6 +1567,7 @@ sub rocSubstitutions {
     subst("cusparseXcsrsort_bufferSizeExt", "rocsparse_csrsort_buffer_size", "library");
     subst("cusparseXgebsr2gebsrNnz", "rocsparse_gebsr2gebsr_nnz", "library");
     subst("cusparseZbsr2csr", "rocsparse_zbsr2csr", "library");
+    subst("cusparseZcsr2csr_compress", "rocsparse_zcsr2csr_compress", "library");
     subst("cusparseZcsrcolor", "rocsparse_zcsrcolor", "library");
     subst("cusparseZgebsr2csr", "rocsparse_zgebsr2csr", "library");
     subst("cusparseZgebsr2gebsr", "rocsparse_zgebsr2gebsr", "library");
