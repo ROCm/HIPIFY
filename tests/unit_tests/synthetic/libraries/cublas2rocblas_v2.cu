@@ -9,7 +9,7 @@
 // CHECK-NOT: #include "rocblas.h"
 
 int main() {
-  printf("16. cuBLAS API to hipBLAS API synthetic test\n");
+  printf("16.v2. cuBLAS API to hipBLAS API synthetic test\n");
 
   // CHECK: rocblas_operation blasOperation;
   // CHECK-NEXT: rocblas_operation BLAS_OP_N = rocblas_operation_none;
