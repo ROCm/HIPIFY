@@ -9,7 +9,7 @@
 // CHECK-NOT: #include "hipblas.h"
 
 int main() {
-  printf("14. cuBLAS API to hipBLAS API synthetic test\n");
+  printf("14.v2. cuBLAS API to hipBLAS API synthetic test\n");
 
   // CHECK: hipblasOperation_t blasOperation;
   // CHECK-NEXT: hipblasOperation_t BLAS_OP_N = HIPBLAS_OP_N;

@@ -5,12 +5,12 @@
 #include <stdio.h>
 
 int main() {
-    printf("11. CUDA Runtime API Unions synthetic test\n");
+  printf("11. CUDA Runtime API Unions synthetic test\n");
 
 #if CUDA_VERSION >= 11000
-    // CHECK: hipKernelNodeAttrValue KernelNodeAttrValue;
-    cudaKernelNodeAttrValue KernelNodeAttrValue;
+  // CHECK: hipKernelNodeAttrValue KernelNodeAttrValue;
+  cudaKernelNodeAttrValue KernelNodeAttrValue;
 #endif
 
-    return 0;
+  return 0;
 }

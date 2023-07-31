@@ -7,11 +7,6 @@
 int main() {
   printf("07. CUDA Runtime API Typedefs synthetic test\n");
 
-#if CUDA_VERSION >= 10000
-  // CHECK: hipHostFn_t HostFn_t;
-  cudaHostFn_t HostFn_t;
-#endif
-
   // CHECK: hipStreamCallback_t StreamCallback_t;
   // CHECK-NEXT: hipSurfaceObject_t SurfaceObject_t;
   // CHECK-NEXT: hipTextureObject_t TextureObject_t;
@@ -21,6 +16,11 @@ int main() {
 
   // CHECK: hipUUID uuid;
   cudaUUID_t uuid;
+
+#if CUDA_VERSION >= 10000
+  // CHECK: hipHostFn_t HostFn_t;
+  cudaHostFn_t HostFn_t;
+#endif
 
   return 0;
 }
