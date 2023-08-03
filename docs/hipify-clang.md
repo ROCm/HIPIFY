@@ -173,7 +173,7 @@ After applying all the matchers, the output HIP source is produced.
       <td colspan=2 bgcolor="eefaeb"><font color="green"><b>LATEST STABLE CONFIG</b></font></td>
     </tr>
     <tr align="center">
-      <td><a href="https://github.com/llvm/llvm-project">17.0.0git</a></td>
+      <td><a href="https://github.com/llvm/llvm-project">18.0.0git</a></td>
       <td><a href="https://developer.nvidia.com/cuda-downloads">12.2.0</a></td>
       <td>+</td>
       <td>+</td>
@@ -579,7 +579,7 @@ Testing Time: 7.90s
 | 14.0.0 - 14.0.6 | 7.0 - 11.7.1 | 8.0.5  - 8.4.1 | 2017.15.9.49, 2019.16.11.17, 2022.17.2.6 | 3.24.0          | 3.10.6        |
 | 15.0.0 - 15.0.7 | 7.0 - 11.8.0 | 8.0.5  - 8.8.1 | 2017.15.9.53, 2019.16.11.25, 2022.17.5.2 | 3.26.0          | 3.11.2        |
 | 16.0.0 - 16.0.6 | 7.0 - 12.2.0 | 8.0.5  - 8.9.3 | 2017.15.9.55, 2019.16.11.27, 2022.17.6.5 | 3.27.0          | 3.11.4        |
-| 17.0.0git       | 7.0 - 12.2.0 | 8.0.5  - 8.9.3 | 2017.15.9.55, 2019.16.11.27, 2022.17.6.5 | 3.27.0          | 3.11.4        |
+| 18.0.0git       | 7.0 - 12.2.0 | 8.0.5  - 8.9.3 | 2017.15.9.55, 2019.16.11.27, 2022.17.6.5 | 3.27.0          | 3.11.4        |
 
 *Building with testing support by `Visual Studio 17 2022` on `Windows 10`:*
 
