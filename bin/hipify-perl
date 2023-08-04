@@ -1460,6 +1460,7 @@ sub rocSubstitutions {
     subst("cusparseBlockedEllGet", "rocsparse_bell_get", "library");
     subst("cusparseCbsr2csr", "rocsparse_cbsr2csr", "library");
     subst("cusparseCcsr2csr_compress", "rocsparse_ccsr2csr_compress", "library");
+    subst("cusparseCcsr2gebsr", "rocsparse_ccsr2gebsr", "library");
     subst("cusparseCcsrcolor", "rocsparse_ccsrcolor", "library");
     subst("cusparseCgebsr2csr", "rocsparse_cgebsr2csr", "library");
     subst("cusparseCgebsr2gebsr", "rocsparse_cgebsr2gebsr", "library");
@@ -1487,6 +1488,8 @@ sub rocSubstitutions {
     subst("cusparseCsrSetPointers", "rocsparse_csr_set_pointers", "library");
     subst("cusparseCsrSetStridedBatch", "rocsparse_csr_set_strided_batch", "library");
     subst("cusparseDbsr2csr", "rocsparse_dbsr2csr", "library");
+    subst("cusparseDcsr2csr_compress", "rocsparse_dcsr2csr_compress", "library");
+    subst("cusparseDcsr2gebsr", "rocsparse_dcsr2gebsr", "library");
     subst("cusparseDcsrcolor", "rocsparse_dcsrcolor", "library");
     subst("cusparseDestroy", "rocsparse_destroy_handle", "library");
     subst("cusparseDestroyColorInfo", "rocsparse_destroy_color_info", "library");
@@ -1527,6 +1530,8 @@ sub rocSubstitutions {
     subst("cusparseSDDMM_preprocess", "rocsparse_sddmm_preprocess", "library");
     subst("cusparseSbsr2csr", "rocsparse_sbsr2csr", "library");
     subst("cusparseScatter", "rocsparse_scatter", "library");
+    subst("cusparseScsr2csr_compress", "rocsparse_scsr2csr_compress", "library");
+    subst("cusparseScsr2gebsr", "rocsparse_scsr2gebsr", "library");
     subst("cusparseScsrcolor", "rocsparse_scsrcolor", "library");
     subst("cusparseSetMatDiagType", "rocsparse_set_mat_diag_type", "library");
     subst("cusparseSetMatFillMode", "rocsparse_set_mat_fill_mode", "library");
@@ -1563,11 +1568,13 @@ sub rocSubstitutions {
     subst("cusparseXcoosort_bufferSizeExt", "rocsparse_coosort_buffer_size", "library");
     subst("cusparseXcscsort", "rocsparse_cscsort", "library");
     subst("cusparseXcscsort_bufferSizeExt", "rocsparse_cscsort_buffer_size", "library");
+    subst("cusparseXcsr2gebsrNnz", "rocsparse_csr2gebsr_nnz", "library");
     subst("cusparseXcsrsort", "rocsparse_csrsort", "library");
     subst("cusparseXcsrsort_bufferSizeExt", "rocsparse_csrsort_buffer_size", "library");
     subst("cusparseXgebsr2gebsrNnz", "rocsparse_gebsr2gebsr_nnz", "library");
     subst("cusparseZbsr2csr", "rocsparse_zbsr2csr", "library");
     subst("cusparseZcsr2csr_compress", "rocsparse_zcsr2csr_compress", "library");
+    subst("cusparseZcsr2gebsr", "rocsparse_zcsr2gebsr", "library");
     subst("cusparseZcsrcolor", "rocsparse_zcsrcolor", "library");
     subst("cusparseZgebsr2csr", "rocsparse_zgebsr2csr", "library");
     subst("cusparseZgebsr2gebsr", "rocsparse_zgebsr2gebsr", "library");
