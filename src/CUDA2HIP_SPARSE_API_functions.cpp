@@ -510,10 +510,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   {"cusparseZgebsr2gebsc_bufferSize",                   {"hipsparseZgebsr2gebsc_bufferSize",                   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED}},
   {"cusparseZgebsr2gebsc_bufferSizeExt",                {"hipsparseZgebsr2gebsc_bufferSizeExt",                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED}},
 
-  {"cusparseSgebsr2gebsc",                              {"hipsparseSgebsr2gebsc",                              "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED}},
-  {"cusparseDgebsr2gebsc",                              {"hipsparseDgebsr2gebsc",                              "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED}},
-  {"cusparseCgebsr2gebsc",                              {"hipsparseCgebsr2gebsc",                              "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED}},
-  {"cusparseZgebsr2gebsc",                              {"hipsparseZgebsr2gebsc",                              "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED}},
+  {"cusparseSgebsr2gebsc",                              {"hipsparseSgebsr2gebsc",                              "rocsparse_sgebsr2gebsc",                                           CONV_LIB_FUNC, API_SPARSE, 14}},
+  {"cusparseDgebsr2gebsc",                              {"hipsparseDgebsr2gebsc",                              "rocsparse_dgebsr2gebsc",                                           CONV_LIB_FUNC, API_SPARSE, 14}},
+  {"cusparseCgebsr2gebsc",                              {"hipsparseCgebsr2gebsc",                              "rocsparse_cgebsr2gebsc",                                           CONV_LIB_FUNC, API_SPARSE, 14}},
+  {"cusparseZgebsr2gebsc",                              {"hipsparseZgebsr2gebsc",                              "rocsparse_zgebsr2gebsc",                                           CONV_LIB_FUNC, API_SPARSE, 14}},
 
   {"cusparseSgebsr2gebsr_bufferSize",                   {"hipsparseSgebsr2gebsr_bufferSize",                   "rocsparse_sgebsr2gebsr_buffer_size",                               CONV_LIB_FUNC, API_SPARSE, 14}},
   {"cusparseSgebsr2gebsr_bufferSizeExt",                {"hipsparseSgebsr2gebsr_bufferSizeExt",                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED}},
@@ -590,10 +590,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   {"cusparseCcsr2csr_compress",                         {"hipsparseCcsr2csr_compress",                         "rocsparse_ccsr2csr_compress",                                      CONV_LIB_FUNC, API_SPARSE, 14}},
   {"cusparseZcsr2csr_compress",                         {"hipsparseZcsr2csr_compress",                         "rocsparse_zcsr2csr_compress",                                      CONV_LIB_FUNC, API_SPARSE, 14}},
 
-  {"cusparseScsr2hyb",                                  {"hipsparseScsr2hyb",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseDcsr2hyb",                                  {"hipsparseDcsr2hyb",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseCcsr2hyb",                                  {"hipsparseCcsr2hyb",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseZcsr2hyb",                                  {"hipsparseZcsr2hyb",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
+  {"cusparseScsr2hyb",                                  {"hipsparseScsr2hyb",                                  "rocsparse_scsr2hyb",                                               CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | CUDA_REMOVED}},
+  {"cusparseDcsr2hyb",                                  {"hipsparseDcsr2hyb",                                  "rocsparse_dcsr2hyb",                                               CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | CUDA_REMOVED}},
+  {"cusparseCcsr2hyb",                                  {"hipsparseCcsr2hyb",                                  "rocsparse_ccsr2hyb",                                               CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | CUDA_REMOVED}},
+  {"cusparseZcsr2hyb",                                  {"hipsparseZcsr2hyb",                                  "rocsparse_zcsr2hyb",                                               CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | CUDA_REMOVED}},
 
   {"cusparseSdense2csc",                                {"hipsparseSdense2csc",                                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
   {"cusparseDdense2csc",                                {"hipsparseDdense2csc",                                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
@@ -1936,6 +1936,14 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_FUNCTION_VER_MAP {
   {"rocsparse_dcsr2bsr",                                 {HIP_3050, HIP_0,    HIP_0   }},
   {"rocsparse_scsr2bsr",                                 {HIP_3050, HIP_0,    HIP_0   }},
   {"rocsparse_csr2bsr_nnz",                              {HIP_3050, HIP_0,    HIP_0   }},
+  {"rocsparse_zcsr2hyb",                                 {HIP_2100, HIP_0,    HIP_0   }},
+  {"rocsparse_ccsr2hyb",                                 {HIP_2100, HIP_0,    HIP_0   }},
+  {"rocsparse_dcsr2hyb",                                 {HIP_1090, HIP_0,    HIP_0   }},
+  {"rocsparse_scsr2hyb",                                 {HIP_1090, HIP_0,    HIP_0   }},
+  {"rocsparse_zgebsr2gebsc",                             {HIP_4010, HIP_0,    HIP_0   }},
+  {"rocsparse_cgebsr2gebsc",                             {HIP_4010, HIP_0,    HIP_0   }},
+  {"rocsparse_dgebsr2gebsc",                             {HIP_4010, HIP_0,    HIP_0   }},
+  {"rocsparse_sgebsr2gebsc",                             {HIP_4010, HIP_0,    HIP_0   }},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_SPARSE_API_SECTION_MAP {
