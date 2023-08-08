@@ -10,6 +10,8 @@
 |`CUSPARSE_ALG1`|8.0| |11.0| | | | | |
 |`CUSPARSE_ALG_MERGE_PATH`|9.2| |12.0| | | | | |
 |`CUSPARSE_ALG_NAIVE`|9.2| |11.0| | | | | |
+|`CUSPARSE_COLOR_ALG0`|8.0|12.2| | | | | | |
+|`CUSPARSE_COLOR_ALG1`|8.0|12.2| | | | | | |
 |`CUSPARSE_COOMM_ALG1`|10.1|11.0|12.0|`HIPSPARSE_COOMM_ALG1`|4.2.0| | | |
 |`CUSPARSE_COOMM_ALG2`|10.1|11.0|12.0|`HIPSPARSE_COOMM_ALG2`|4.2.0| | | |
 |`CUSPARSE_COOMM_ALG3`|10.1|11.0|12.0|`HIPSPARSE_COOMM_ALG3`|4.2.0| | | |
@@ -58,8 +60,8 @@
 |`CUSPARSE_SDDMM_ALG_DEFAULT`|11.2| | |`HIPSPARSE_SDDMM_ALG_DEFAULT`|4.3.0| | | |
 |`CUSPARSE_SIDE_LEFT`| | |11.5| | | | | |
 |`CUSPARSE_SIDE_RIGHT`| | |11.5| | | | | |
-|`CUSPARSE_SOLVE_POLICY_NO_LEVEL`| | | |`HIPSPARSE_SOLVE_POLICY_NO_LEVEL`|1.9.2| | | |
-|`CUSPARSE_SOLVE_POLICY_USE_LEVEL`| | | |`HIPSPARSE_SOLVE_POLICY_USE_LEVEL`|1.9.2| | | |
+|`CUSPARSE_SOLVE_POLICY_NO_LEVEL`| |12.2| |`HIPSPARSE_SOLVE_POLICY_NO_LEVEL`|1.9.2| | | |
+|`CUSPARSE_SOLVE_POLICY_USE_LEVEL`| |12.2| |`HIPSPARSE_SOLVE_POLICY_USE_LEVEL`|1.9.2| | | |
 |`CUSPARSE_SPARSETODENSE_ALG_DEFAULT`|11.1| | |`HIPSPARSE_SPARSETODENSE_ALG_DEFAULT`|4.2.0| | | |
 |`CUSPARSE_SPGEMM_ALG1`|12.0| | |`HIPSPARSE_SPGEMM_ALG1`|5.6.0| | | |
 |`CUSPARSE_SPGEMM_ALG2`|12.0| | |`HIPSPARSE_SPGEMM_ALG2`|5.6.0| | | |
@@ -106,28 +108,31 @@
 |`CUSPARSE_STATUS_NOT_SUPPORTED`|10.2| | |`HIPSPARSE_STATUS_NOT_SUPPORTED`|4.1.0| | | |
 |`CUSPARSE_STATUS_SUCCESS`| | | |`HIPSPARSE_STATUS_SUCCESS`|1.9.2| | | |
 |`CUSPARSE_STATUS_ZERO_PIVOT`| | | |`HIPSPARSE_STATUS_ZERO_PIVOT`|1.9.2| | | |
-|`bsric02Info`| | | | | | | | |
+|`bsric02Info`| | | |`bsric02Info`|3.8.0| | | |
 |`bsric02Info_t`| | | |`bsric02Info_t`|3.8.0| | | |
-|`bsrilu02Info`| | | | | | | | |
-|`bsrilu02Info_t`| | | |`bsrilu02Info_t`|3.9.0| | | |
-|`bsrsm2Info`| | | |`bsrsm2Info`|4.5.0| | | |
-|`bsrsm2Info_t`| | | |`bsrsm2Info_t`|4.5.0| | | |
-|`bsrsv2Info`| | | | | | | | |
-|`bsrsv2Info_t`| | | |`bsrsv2Info_t`|3.6.0| | | |
+|`bsrilu02Info`| |12.2| |`bsrilu02Info`|3.9.0| | | |
+|`bsrilu02Info_t`| |12.2| |`bsrilu02Info_t`|3.9.0| | | |
+|`bsrsm2Info`| |12.2| |`bsrsm2Info`|4.5.0| | | |
+|`bsrsm2Info_t`| |12.2| |`bsrsm2Info_t`|4.5.0| | | |
+|`bsrsv2Info`| |12.2| |`bsrsv2Info`|3.6.0| | | |
+|`bsrsv2Info_t`| |12.2| |`bsrsv2Info_t`|3.6.0| | | |
 |`csrgemm2Info`| | |12.0| | | | | |
 |`csrgemm2Info_t`| | |12.0|`csrgemm2Info_t`|2.8.0| | | |
-|`csrilu02Info`| | | | | | | | |
-|`csrilu02Info_t`| | | |`csrilu02Info_t`|1.9.2| | | |
+|`csric02Info`| |12.2| |`csric02Info`|3.1.0| | | |
+|`csric02Info_t`| |12.2| |`csric02Info_t`|3.1.0| | | |
+|`csrilu02Info`| |12.2| |`csrilu02Info`|1.9.2| | | |
+|`csrilu02Info_t`| |12.2| |`csrilu02Info_t`|1.9.2| | | |
 |`csrsm2Info`|9.2| |12.0| | | | | |
 |`csrsm2Info_t`|9.2| |12.0|`csrsm2Info_t`|3.1.0| | | |
 |`csrsv2Info`| | |12.0| | | | | |
 |`csrsv2Info_t`| | |12.0|`csrsv2Info_t`|1.9.2| | | |
-|`csru2csrInfo`| | | |`csru2csrInfo`|4.2.0| | | |
-|`csru2csrInfo_t`| | | |`csru2csrInfo_t`|4.2.0| | | |
+|`csru2csrInfo`| |12.2| |`csru2csrInfo`|4.2.0| | | |
+|`csru2csrInfo_t`| |12.2| |`csru2csrInfo_t`|4.2.0| | | |
 |`cusparseAction_t`| | | |`hipsparseAction_t`|1.9.2| | | |
 |`cusparseAlgMode_t`|8.0| |12.0| | | | | |
-|`cusparseColorInfo`| | | | | | | | |
-|`cusparseColorInfo_t`| | | |`hipsparseColorInfo_t`|4.5.0| | | |
+|`cusparseColorAlg_t`|8.0|12.2| | | | | | |
+|`cusparseColorInfo`| |12.2| | | | | | |
+|`cusparseColorInfo_t`| |12.2| |`hipsparseColorInfo_t`|4.5.0| | | |
 |`cusparseConstDnMatDescr_t`|12.0| | | | | | | |
 |`cusparseConstDnVecDescr_t`|12.0| | | | | | | |
 |`cusparseConstSpMatDescr_t`|12.0| | | | | | | |
@@ -160,7 +165,7 @@
 |`cusparseSideMode_t`| | |11.5| | | | | |
 |`cusparseSolveAnalysisInfo`| |10.2|11.0| | | | | |
 |`cusparseSolveAnalysisInfo_t`| |10.2|11.0| | | | | |
-|`cusparseSolvePolicy_t`| | | |`hipsparseSolvePolicy_t`|1.9.2| | | |
+|`cusparseSolvePolicy_t`| |12.2| |`hipsparseSolvePolicy_t`|1.9.2| | | |
 |`cusparseSpGEMMAlg_t`|11.0| | |`hipsparseSpGEMMAlg_t`|4.1.0| | | |
 |`cusparseSpGEMMDescr`|11.0| | |`hipsparseSpGEMMDescr`|4.1.0| | | |
 |`cusparseSpGEMMDescr_t`|11.0| | |`hipsparseSpGEMMDescr_t`|4.1.0| | | |
@@ -183,8 +188,8 @@
 |`cusparseSpVecDescr_t`|10.2| | |`hipsparseSpVecDescr_t`|4.1.0| | | |
 |`cusparseSparseToDenseAlg_t`|11.1| | |`hipsparseSparseToDenseAlg_t`|4.2.0| | | |
 |`cusparseStatus_t`| | | |`hipsparseStatus_t`|1.9.2| | | |
-|`pruneInfo`|9.0| | |`pruneInfo`|3.9.0| | | |
-|`pruneInfo_t`|9.0| | |`pruneInfo_t`|3.9.0| | | |
+|`pruneInfo`|9.0|12.2| |`pruneInfo`|3.9.0| | | |
+|`pruneInfo_t`|9.0|12.2| |`pruneInfo_t`|3.9.0| | | |
 
 ## **5. CUSPARSE Management Function Reference**
 
