@@ -90,6 +90,8 @@ GetOptions(
 $cuda_kernel_execution_syntax = 1;
 
 my %deprecated_funcs = (
+    "pruneInfo_t" => "12.2",
+    "pruneInfo" => "12.2",
     "nvrtcGetNVVMSize" => "12.0",
     "nvrtcGetNVVM" => "12.0",
     "cusparseZsctr" => "11.0",
@@ -144,6 +146,7 @@ my %deprecated_funcs = (
     "cusparseXcsrgeamNnz" => "10.2",
     "cusparseSsctr" => "11.0",
     "cusparseSroti" => "11.0",
+    "cusparseSolvePolicy_t" => "12.2",
     "cusparseSolveAnalysisInfo_t" => "10.2",
     "cusparseSolveAnalysisInfo" => "10.2",
     "cusparseShybsv_solve" => "10.2",
@@ -258,6 +261,9 @@ my %deprecated_funcs = (
     "cusparseCooAoSGet" => "11.2",
     "cusparseConstrainedGeMM_bufferSize" => "11.2",
     "cusparseConstrainedGeMM" => "11.2",
+    "cusparseColorInfo_t" => "12.2",
+    "cusparseColorInfo" => "12.2",
+    "cusparseColorAlg_t" => "12.2",
     "cusparseChybsv_solve" => "10.2",
     "cusparseChybsv_analysis" => "10.2",
     "cusparseChybmv" => "10.2",
@@ -501,6 +507,18 @@ my %deprecated_funcs = (
     "cuD3D10GetDirect3DDevice" => "9.2",
     "cuD3D10CtxCreateOnDevice" => "9.2",
     "cuD3D10CtxCreate" => "9.2",
+    "csru2csrInfo_t" => "12.2",
+    "csru2csrInfo" => "12.2",
+    "csrilu02Info_t" => "12.2",
+    "csrilu02Info" => "12.2",
+    "csric02Info_t" => "12.2",
+    "csric02Info" => "12.2",
+    "bsrsv2Info_t" => "12.2",
+    "bsrsv2Info" => "12.2",
+    "bsrsm2Info_t" => "12.2",
+    "bsrsm2Info" => "12.2",
+    "bsrilu02Info_t" => "12.2",
+    "bsrilu02Info" => "12.2",
     "CU_JIT_REFERENCED_VARIABLE_NAMES" => "12.0",
     "CU_JIT_REFERENCED_VARIABLE_COUNT" => "12.0",
     "CU_JIT_REFERENCED_KERNEL_NAMES" => "12.0",
@@ -524,6 +542,8 @@ my %deprecated_funcs = (
     "CU_DEVICE_ATTRIBUTE_GPU_OVERLAP" => "5.0",
     "CU_DEVICE_ATTRIBUTE_CAN_TEX2D_GATHER" => "5.0",
     "CU_CTX_BLOCKING_SYNC" => "4.0",
+    "CUSPARSE_SOLVE_POLICY_USE_LEVEL" => "12.2",
+    "CUSPARSE_SOLVE_POLICY_NO_LEVEL" => "12.2",
     "CUSPARSE_MV_ALG_DEFAULT" => "11.3",
     "CUSPARSE_MM_ALG_DEFAULT" => "11.0",
     "CUSPARSE_HYB_PARTITION_USER" => "10.2",
@@ -536,6 +556,8 @@ my %deprecated_funcs = (
     "CUSPARSE_COOMM_ALG3" => "11.0",
     "CUSPARSE_COOMM_ALG2" => "11.0",
     "CUSPARSE_COOMM_ALG1" => "11.0",
+    "CUSPARSE_COLOR_ALG1" => "12.2",
+    "CUSPARSE_COLOR_ALG0" => "12.2",
     "CUDNN_CONVOLUTION_FWD_SPECIFY_WORKSPACE_LIMIT" => "7.6.5",
     "CUDNN_CONVOLUTION_FWD_PREFER_FASTEST" => "7.6.5",
     "CUDNN_CONVOLUTION_FWD_NO_WORKSPACE" => "7.6.5",
@@ -3870,12 +3892,18 @@ sub simpleSubstitutions {
     subst("CUuuid_st", "hipUUID_t", "type");
     subst("GLenum", "GLenum", "type");
     subst("GLuint", "GLuint", "type");
+    subst("bsric02Info", "bsric02Info", "type");
     subst("bsric02Info_t", "bsric02Info_t", "type");
+    subst("bsrilu02Info", "bsrilu02Info", "type");
     subst("bsrilu02Info_t", "bsrilu02Info_t", "type");
     subst("bsrsm2Info", "bsrsm2Info", "type");
     subst("bsrsm2Info_t", "bsrsm2Info_t", "type");
+    subst("bsrsv2Info", "bsrsv2Info", "type");
     subst("bsrsv2Info_t", "bsrsv2Info_t", "type");
     subst("csrgemm2Info_t", "csrgemm2Info_t", "type");
+    subst("csric02Info", "csric02Info", "type");
+    subst("csric02Info_t", "csric02Info_t", "type");
+    subst("csrilu02Info", "csrilu02Info", "type");
     subst("csrilu02Info_t", "csrilu02Info_t", "type");
     subst("csrsm2Info_t", "csrsm2Info_t", "type");
     subst("csrsv2Info_t", "csrsv2Info_t", "type");
@@ -6444,6 +6472,7 @@ sub warnUnsupportedFunctions {
         "cusparseConstCooGet",
         "cusparseConstBlockedEllGet",
         "cusparseColorInfo",
+        "cusparseColorAlg_t",
         "cusparseChybsv_solve",
         "cusparseChybsv_analysis",
         "cusparseChyb2dense",
@@ -7504,15 +7533,11 @@ sub warnUnsupportedFunctions {
         "cuArrayGetMemoryRequirements",
         "csrsv2Info",
         "csrsm2Info",
-        "csrilu02Info",
         "csrgemm2Info",
         "cl_event_flags_enum",
         "cl_event_flags",
         "cl_context_flags_enum",
         "cl_context_flags",
-        "bsrsv2Info",
-        "bsrilu02Info",
-        "bsric02Info",
         "__nv_saturation_t",
         "__nv_fp8x4_storage_t",
         "__nv_fp8x4_e5m2",
@@ -8105,6 +8130,8 @@ sub warnUnsupportedFunctions {
         "CUSPARSE_SIDE_LEFT",
         "CUSPARSE_FORMAT_SLICED_ELLPACK",
         "CUSPARSE_FORMAT_BSR",
+        "CUSPARSE_COLOR_ALG1",
+        "CUSPARSE_COLOR_ALG0",
         "CUSPARSE_ALG_NAIVE",
         "CUSPARSE_ALG_MERGE_PATH",
         "CUSPARSE_ALG1",
