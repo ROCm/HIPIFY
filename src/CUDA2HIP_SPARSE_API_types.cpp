@@ -395,28 +395,28 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SPARSE_TYPE_NAME_VER_MAP {
   {"cusparseSpSVUpdate_t",                      {CUDA_121, CUDA_0,   CUDA_0  }}, // CUSPARSE_VERSION 12100
   {"CUSPARSE_SPSV_UPDATE_GENERAL",              {CUDA_121, CUDA_0,   CUDA_0  }}, // CUSPARSE_VERSION 12100
   {"CUSPARSE_SPSV_UPDATE_DIAGONAL",             {CUDA_121, CUDA_0,   CUDA_0  }}, // CUSPARSE_VERSION 12100
-  {"bsrsv2Info",                                {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12200
-  {"bsrsv2Info_t",                              {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12200
-  {"bsrsm2Info",                                {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12200
-  {"bsrsm2Info_t",                              {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12200
-  {"csric02Info",                               {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12200
-  {"csric02Info_t",                             {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12200
-  {"csrilu02Info",                              {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12200
-  {"csrilu02Info_t",                            {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12200
-  {"bsrilu02Info",                              {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12200
-  {"bsrilu02Info_t",                            {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12200
-  {"csru2csrInfo",                              {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12200
-  {"csru2csrInfo_t",                            {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12200
-  {"cusparseColorInfo",                         {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12200
-  {"cusparseColorInfo_t",                       {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12200
-  {"pruneInfo",                                 {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12200
-  {"pruneInfo_t",                               {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12200
-  {"cusparseSolvePolicy_t",                     {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12200
-  {"CUSPARSE_SOLVE_POLICY_NO_LEVEL",            {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12200
-  {"CUSPARSE_SOLVE_POLICY_USE_LEVEL",           {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12200
-  {"cusparseColorAlg_t",                        {CUDA_80,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12200
-  {"CUSPARSE_COLOR_ALG0",                       {CUDA_80,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12200
-  {"CUSPARSE_COLOR_ALG1",                       {CUDA_80,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12200
+  {"bsrsv2Info",                                {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
+  {"bsrsv2Info_t",                              {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
+  {"bsrsm2Info",                                {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
+  {"bsrsm2Info_t",                              {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
+  {"csric02Info",                               {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
+  {"csric02Info_t",                             {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
+  {"csrilu02Info",                              {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
+  {"csrilu02Info_t",                            {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
+  {"bsrilu02Info",                              {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
+  {"bsrilu02Info_t",                            {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
+  {"csru2csrInfo",                              {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
+  {"csru2csrInfo_t",                            {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
+  {"cusparseColorInfo",                         {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
+  {"cusparseColorInfo_t",                       {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
+  {"pruneInfo",                                 {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
+  {"pruneInfo_t",                               {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
+  {"cusparseSolvePolicy_t",                     {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
+  {"CUSPARSE_SOLVE_POLICY_NO_LEVEL",            {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
+  {"CUSPARSE_SOLVE_POLICY_USE_LEVEL",           {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
+  {"cusparseColorAlg_t",                        {CUDA_80,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
+  {"CUSPARSE_COLOR_ALG0",                       {CUDA_80,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
+  {"CUSPARSE_COLOR_ALG1",                       {CUDA_80,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_TYPE_NAME_VER_MAP {
