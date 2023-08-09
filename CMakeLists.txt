@@ -204,7 +204,7 @@ if (NOT HIPIFY_CLANG_TESTS_ONLY)
     # Set RPATH for the binary.
     set_target_properties(hipify-clang PROPERTIES LINK_FLAGS "-Wl,--enable-new-dtags -Wl,--rpath,$ORIGIN/../lib" )
 
-    option(FILE_REORG_BACKWARD_COMPATIBILITY "Enable File Reorg with backward compatibility" ON)
+    option(FILE_REORG_BACKWARD_COMPATIBILITY "Enable File Reorg with backward compatibility" OFF)
 
     if(FILE_REORG_BACKWARD_COMPATIBILITY)
       include(hipify-backward-compat.cmake)
