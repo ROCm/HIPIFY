@@ -639,7 +639,7 @@
 |`cusparseCdense2hyb`| |10.2|11.0| | | | | |
 |`cusparseCgebsr2csr`| | | |`rocsparse_cgebsr2csr`|3.10.0| | | |
 |`cusparseCgebsr2gebsc`| | | |`rocsparse_cgebsr2gebsc`|4.1.0| | | |
-|`cusparseCgebsr2gebsc_bufferSize`| | | | | | | | |
+|`cusparseCgebsr2gebsc_bufferSize`| | | |`rocsparse_cgebsr2gebsc_buffer_size`|4.1.0| | | |
 |`cusparseCgebsr2gebsc_bufferSizeExt`| | | | | | | | |
 |`cusparseCgebsr2gebsr`| | | |`rocsparse_cgebsr2gebsr`|4.1.0| | | |
 |`cusparseCgebsr2gebsr_bufferSize`| | | |`rocsparse_cgebsr2gebsr_buffer_size`|4.1.0| | | |
@@ -674,7 +674,7 @@
 |`cusparseDestroyCsru2csrInfo`| |12.2| | | | | | |
 |`cusparseDgebsr2csr`| | | |`rocsparse_dgebsr2csr`|3.10.0| | | |
 |`cusparseDgebsr2gebsc`| | | |`rocsparse_dgebsr2gebsc`|4.1.0| | | |
-|`cusparseDgebsr2gebsc_bufferSize`| | | | | | | | |
+|`cusparseDgebsr2gebsc_bufferSize`| | | |`rocsparse_dgebsr2gebsc_buffer_size`|4.1.0| | | |
 |`cusparseDgebsr2gebsc_bufferSizeExt`| | | | | | | | |
 |`cusparseDgebsr2gebsr`| | | |`rocsparse_dgebsr2gebsr`|4.1.0| | | |
 |`cusparseDgebsr2gebsr_bufferSize`| | | |`rocsparse_dgebsr2gebsr_buffer_size`|4.1.0| | | |
@@ -727,7 +727,7 @@
 |`cusparseSdense2hyb`| |10.2|11.0| | | | | |
 |`cusparseSgebsr2csr`| | | |`rocsparse_sgebsr2csr`|3.10.0| | | |
 |`cusparseSgebsr2gebsc`| | | |`rocsparse_sgebsr2gebsc`|4.1.0| | | |
-|`cusparseSgebsr2gebsc_bufferSize`| | | | | | | | |
+|`cusparseSgebsr2gebsc_bufferSize`| | | |`rocsparse_sgebsr2gebsc_buffer_size`|4.1.0| | | |
 |`cusparseSgebsr2gebsc_bufferSizeExt`| | | | | | | | |
 |`cusparseSgebsr2gebsr`| | | |`rocsparse_sgebsr2gebsr`|4.1.0| | | |
 |`cusparseSgebsr2gebsr_bufferSize`| | | |`rocsparse_sgebsr2gebsr_buffer_size`|4.1.0| | | |
@@ -781,7 +781,7 @@
 |`cusparseZdense2hyb`| |10.2|11.0| | | | | |
 |`cusparseZgebsr2csr`| | | |`rocsparse_zgebsr2csr`|3.10.0| | | |
 |`cusparseZgebsr2gebsc`| | | |`rocsparse_zgebsr2gebsc`|4.1.0| | | |
-|`cusparseZgebsr2gebsc_bufferSize`| | | | | | | | |
+|`cusparseZgebsr2gebsc_bufferSize`| | | |`rocsparse_zgebsr2gebsc_buffer_size`|4.1.0| | | |
 |`cusparseZgebsr2gebsc_bufferSizeExt`| | | | | | | | |
 |`cusparseZgebsr2gebsr`| | | |`rocsparse_zgebsr2gebsr`|4.1.0| | | |
 |`cusparseZgebsr2gebsr_bufferSize`| | | |`rocsparse_zgebsr2gebsr_buffer_size`|4.1.0| | | |

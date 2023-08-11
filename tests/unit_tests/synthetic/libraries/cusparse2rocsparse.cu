@@ -127,6 +127,8 @@ int main() {
   int nnzPerRow = 0;
   int innz = 0;
   int blockDim = 0;
+  int csrSortedRowPtr = 0;
+  int csrSortedColInd = 0;
   int cscRowIndA = 0;
   int cscColPtrA = 0;
   int csrRowPtrA = 0;
@@ -200,7 +202,11 @@ int main() {
   float fcsrValA = 0.f;
   double csrValC = 0.f;
   float fcsrValC = 0.f;
+  float csrSortedVal = 0.f;
+  float cscSortedVal = 0.f;
   float csrSortedValA = 0.f;
+  double dcsrSortedVal = 0.f;
+  double dcscSortedVal = 0.f;
   double dcsrSortedValA = 0.f;
   double dbsrSortedVal = 0.f;
   double dbsrSortedValA = 0.f;
@@ -223,13 +229,13 @@ int main() {
 
   // TODO: should be rocsparse_double_complex
   // TODO: add to TypeOverloads cuDoubleComplex -> rocsparse_double_complex under a new option --sparse
-  // CHECK: rocblas_double_complex dcomplex, dComplexbsrSortedValA, dComplexbsrSortedValC, dComplexcsrSortedValA, dComplexcsrSortedValC, dcomplextol, dComplexbsrSortedVal, dComplexbscVal;
-  cuDoubleComplex dcomplex, dComplexbsrSortedValA, dComplexbsrSortedValC, dComplexcsrSortedValA, dComplexcsrSortedValC, dcomplextol, dComplexbsrSortedVal, dComplexbscVal;
+  // CHECK: rocblas_double_complex dcomplex, dComplexbsrSortedValA, dComplexbsrSortedValC, dComplexcsrSortedValA, dComplexcsrSortedValC, dcomplextol, dComplexbsrSortedVal, dComplexbscVal, dComplexcscSortedVal;
+  cuDoubleComplex dcomplex, dComplexbsrSortedValA, dComplexbsrSortedValC, dComplexcsrSortedValA, dComplexcsrSortedValC, dcomplextol, dComplexbsrSortedVal, dComplexbscVal, dComplexcscSortedVal;
 
   // TODO: should be rocsparse_double_complex
   // TODO: add to TypeOverloads cuComplex -> rocsparse_float_complex under a new option --sparse
-  // CHECK: rocblas_float_complex complex, complexbsrValA, complexbsrSortedValC, complexcsrSortedValA, complexcsrSortedValC, complextol, complexbsrSortedVal, complexbscVal;
-  cuComplex complex, complexbsrValA, complexbsrSortedValC, complexcsrSortedValA, complexcsrSortedValC, complextol, complexbsrSortedVal, complexbscVal;
+  // CHECK: rocblas_float_complex complex, complexbsrValA, complexbsrSortedValC, complexcsrSortedValA, complexcsrSortedValC, complextol, complexbsrSortedVal, complexbscVal, complexcscSortedVal;
+  cuComplex complex, complexbsrValA, complexbsrSortedValC, complexcsrSortedValA, complexcsrSortedValC, complextol, complexbsrSortedVal, complexbscVal, complexcscSortedVal;
 
   // CHECK: rocsparse_operation opA, opB;
   cusparseOperation_t opA, opB;
@@ -568,6 +574,26 @@ int main() {
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_sgebsr2gebsc(rocsparse_handle handle, rocsparse_int mb, rocsparse_int nb, rocsparse_int nnzb, const float* bsr_val, const rocsparse_int* bsr_row_ptr, const rocsparse_int* bsr_col_ind, rocsparse_int row_block_dim, rocsparse_int col_block_dim, float* bsc_val, rocsparse_int* bsc_row_ind, rocsparse_int* bsc_col_ptr, rocsparse_action copy_values, rocsparse_index_base idx_base, void* temp_buffer);
   // CHECK: status_t = rocsparse_sgebsr2gebsc(handle_t, mb, nb, nnzb, &fbsrSortedVal, &bsrSortedRowPtr, &bsrSortedColInd, rowBlockDim, colBlockDim, &fbscVal, &bscRowInd, &bscColPtr, copyValues, indexBase_t, pBuffer);
   status_t = cusparseSgebsr2gebsc(handle_t, mb, nb, nnzb, &fbsrSortedVal, &bsrSortedRowPtr, &bsrSortedColInd, rowBlockDim, colBlockDim, &fbscVal, &bscRowInd, &bscColPtr, copyValues, indexBase_t, pBuffer);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseZgebsr2gebsc_bufferSize(cusparseHandle_t handle, int mb, int nb, int nnzb, const cuDoubleComplex* bsrSortedVal, const int* bsrSortedRowPtr, const int* bsrSortedColInd, int rowBlockDim, int colBlockDim, int* pBufferSizeInBytes);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_zgebsr2gebsc_buffer_size(rocsparse_handle handle, rocsparse_int mb, rocsparse_int nb, rocsparse_int nnzb, const rocsparse_double_complex* bsr_val, const rocsparse_int* bsr_row_ptr, const rocsparse_int* bsr_col_ind, rocsparse_int row_block_dim, rocsparse_int col_block_dim, size_t* p_buffer_size);
+  // CHECK: status_t = rocsparse_zgebsr2gebsc_buffer_size(handle_t, mb, nb, nnzb, &dComplexbsrSortedVal, &bsrSortedRowPtr, &bsrSortedColInd, rowBlockDim, colBlockDim, &bufferSizeInBytes);
+  status_t = cusparseZgebsr2gebsc_bufferSize(handle_t, mb, nb, nnzb, &dComplexbsrSortedVal, &bsrSortedRowPtr, &bsrSortedColInd, rowBlockDim, colBlockDim, &bufferSizeInBytes);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCgebsr2gebsc_bufferSize(cusparseHandle_t handle, int mb, int nb, int nnzb, const cuComplex* bsrSortedVal, const int* bsrSortedRowPtr, const int* bsrSortedColInd, int rowBlockDim, int colBlockDim, int* pBufferSizeInBytes);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_cgebsr2gebsc_buffer_size(rocsparse_handle handle, rocsparse_int mb, rocsparse_int nb, rocsparse_int nnzb, const rocsparse_float_complex* bsr_val, const rocsparse_int* bsr_row_ptr, const rocsparse_int* bsr_col_ind, rocsparse_int row_block_dim, rocsparse_int col_block_dim, size_t* p_buffer_size);
+  // CHECK: status_t = rocsparse_cgebsr2gebsc_buffer_size(handle_t, mb, nb, nnzb, &complexbsrSortedVal, &bsrSortedRowPtr, &bsrSortedColInd, rowBlockDim, colBlockDim, &bufferSizeInBytes);
+  status_t = cusparseCgebsr2gebsc_bufferSize(handle_t, mb, nb, nnzb, &complexbsrSortedVal, &bsrSortedRowPtr, &bsrSortedColInd, rowBlockDim, colBlockDim, &bufferSizeInBytes);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDgebsr2gebsc_bufferSize(cusparseHandle_t handle, int mb, int nb, int nnzb, const double* bsrSortedVal, const int* bsrSortedRowPtr, const int* bsrSortedColInd, int rowBlockDim, int colBlockDim, int* pBufferSizeInBytes);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_dgebsr2gebsc_buffer_size(rocsparse_handle handle, rocsparse_int mb, rocsparse_int nb, rocsparse_int nnzb, const double* bsr_val, const rocsparse_int* bsr_row_ptr, const rocsparse_int* bsr_col_ind, rocsparse_int row_block_dim, rocsparse_int col_block_dim, size_t* p_buffer_size);
+  // CHECK: status_t = rocsparse_dgebsr2gebsc_buffer_size(handle_t, mb, nb, nnzb, &dbsrSortedVal, &bsrSortedRowPtr, &bsrSortedColInd, rowBlockDim, colBlockDim, &bufferSizeInBytes);
+  status_t = cusparseDgebsr2gebsc_bufferSize(handle_t, mb, nb, nnzb, &dbsrSortedVal, &bsrSortedRowPtr, &bsrSortedColInd, rowBlockDim, colBlockDim, &bufferSizeInBytes);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSgebsr2gebsc_bufferSize(cusparseHandle_t handle, int mb, int nb, int nnzb, const float* bsrSortedVal, const int* bsrSortedRowPtr, const int* bsrSortedColInd, int rowBlockDim, int colBlockDim, int* pBufferSizeInBytes);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_sgebsr2gebsc_buffer_size(rocsparse_handle handle, rocsparse_int mb, rocsparse_int nb, rocsparse_int nnzb, const float* bsr_val, const rocsparse_int* bsr_row_ptr, const rocsparse_int* bsr_col_ind, rocsparse_int row_block_dim, rocsparse_int col_block_dim, size_t* p_buffer_size);
+  // CHECK: status_t = rocsparse_sgebsr2gebsc_buffer_size(handle_t, mb, nb, nnzb, &fbsrSortedVal, &bsrSortedRowPtr, &bsrSortedColInd, rowBlockDim, colBlockDim, &bufferSizeInBytes);
+  status_t = cusparseSgebsr2gebsc_bufferSize(handle_t, mb, nb, nnzb, &fbsrSortedVal, &bsrSortedRowPtr, &bsrSortedColInd, rowBlockDim, colBlockDim, &bufferSizeInBytes);
 
 #if CUDA_VERSION >= 8000
   // CHECK: hipDataType dataType_t;
