@@ -621,7 +621,7 @@
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|**ROC**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
 |`cusparseCbsr2csr`| | | |`hipsparseCbsr2csr`|3.5.0| | | |`rocsparse_cbsr2csr`|3.10.0| | | |
-|`cusparseCcsc2dense`| |11.1|12.0|`hipsparseCcsc2dense`|3.5.0| | | | | | | | |
+|`cusparseCcsc2dense`| |11.1|12.0|`hipsparseCcsc2dense`|3.5.0| | | |`rocsparse_ccsc2dense`|3.5.0| | | |
 |`cusparseCcsc2hyb`| |10.2|11.0| | | | | | | | | | |
 |`cusparseCcsr2bsr`| | | |`hipsparseCcsr2bsr`|3.5.0| | | |`rocsparse_ccsr2bsr`|3.5.0| | | |
 |`cusparseCcsr2csc`| |10.2|11.0|`hipsparseCcsr2csc`|3.1.0| | | | | | | | |
@@ -648,14 +648,14 @@
 |`cusparseChyb2csr`| |10.2|11.0|`hipsparseChyb2csr`|3.1.0| | | | | | | | |
 |`cusparseChyb2dense`| |10.2|11.0| | | | | | | | | | |
 |`cusparseCnnz`| | | |`hipsparseCnnz`|3.2.0| | | | | | | | |
-|`cusparseCnnz_compress`|8.0|12.2| |`hipsparseCnnz_compress`|3.5.0| | | | | | | | |
+|`cusparseCnnz_compress`|8.0|12.2| |`hipsparseCnnz_compress`|3.5.0| | | |`rocsparse_cnnz_compress`|3.5.0| | | |
 |`cusparseCreateCsru2csrInfo`| |12.2| |`hipsparseCreateCsru2csrInfo`|4.2.0| | | | | | | | |
 |`cusparseCreateIdentityPermutation`| |12.2| |`hipsparseCreateIdentityPermutation`|1.9.2| | | |`rocsparse_create_identity_permutation`|1.9.0| | | |
 |`cusparseCsr2cscEx`|8.0|10.2|11.0| | | | | | | | | | |
 |`cusparseCsr2cscEx2`|10.1| | |`hipsparseCsr2cscEx2`|5.4.0| | | | | | | | |
 |`cusparseCsr2cscEx2_bufferSize`|10.1| | |`hipsparseCsr2cscEx2_bufferSize`|5.4.0| | | | | | | | |
 |`cusparseDbsr2csr`| | | |`hipsparseDbsr2csr`|3.5.0| | | |`rocsparse_dbsr2csr`|3.10.0| | | |
-|`cusparseDcsc2dense`| |11.1|12.0|`hipsparseDcsc2dense`|3.5.0| | | | | | | | |
+|`cusparseDcsc2dense`| |11.1|12.0|`hipsparseDcsc2dense`|3.5.0| | | |`rocsparse_dcsc2dense`|3.5.0| | | |
 |`cusparseDcsc2hyb`| |10.2|11.0| | | | | | | | | | |
 |`cusparseDcsr2bsr`| | | |`hipsparseDcsr2bsr`|3.5.0| | | |`rocsparse_dcsr2bsr`|3.5.0| | | |
 |`cusparseDcsr2csc`| |10.2|11.0|`hipsparseDcsr2csc`|1.9.2| | | | | | | | |
@@ -683,7 +683,7 @@
 |`cusparseDhyb2csr`| |10.2|11.0|`hipsparseDhyb2csr`|3.1.0| | | | | | | | |
 |`cusparseDhyb2dense`| |10.2|11.0| | | | | | | | | | |
 |`cusparseDnnz`| | | |`hipsparseDnnz`|3.2.0| | | | | | | | |
-|`cusparseDnnz_compress`|8.0|12.2| |`hipsparseDnnz_compress`|3.5.0| | | | | | | | |
+|`cusparseDnnz_compress`|8.0|12.2| |`hipsparseDnnz_compress`|3.5.0| | | |`rocsparse_dnnz_compress`|3.5.0| | | |
 |`cusparseDpruneCsr2csr`|9.0| | |`hipsparseDpruneCsr2csr`|3.9.0| | | |`rocsparse_dprune_csr2csr`|3.9.0| | | |
 |`cusparseDpruneCsr2csrByPercentage`|9.0| | |`hipsparseDpruneCsr2csrByPercentage`|3.9.0| | | |`rocsparse_dprune_csr2csr_by_percentage`|3.9.0| | | |
 |`cusparseDpruneCsr2csrByPercentage_bufferSizeExt`|9.0| | |`hipsparseDpruneCsr2csrByPercentage_bufferSizeExt`|3.9.0| | | |`rocsparse_dprune_csr2csr_by_percentage_buffer_size`|3.9.0| | | |
@@ -709,7 +709,7 @@
 |`cusparseHpruneDense2csrNnzByPercentage`|9.0| | | | | | | | | | | | |
 |`cusparseHpruneDense2csr_bufferSizeExt`|9.0|12.2| | | | | | | | | | | |
 |`cusparseSbsr2csr`| | | |`hipsparseSbsr2csr`|3.5.0| | | |`rocsparse_sbsr2csr`|3.10.0| | | |
-|`cusparseScsc2dense`| |11.1|12.0|`hipsparseScsc2dense`|3.5.0| | | | | | | | |
+|`cusparseScsc2dense`| |11.1|12.0|`hipsparseScsc2dense`|3.5.0| | | |`rocsparse_scsc2dense`|3.5.0| | | |
 |`cusparseScsc2hyb`| |10.2|11.0| | | | | | | | | | |
 |`cusparseScsr2bsr`| | | |`hipsparseScsr2bsr`|3.5.0| | | |`rocsparse_scsr2bsr`|3.5.0| | | |
 |`cusparseScsr2csc`| |10.2|11.0|`hipsparseScsr2csc`|1.9.2| | | | | | | | |
@@ -736,7 +736,7 @@
 |`cusparseShyb2csr`| |10.2|11.0|`hipsparseShyb2csr`|3.1.0| | | | | | | | |
 |`cusparseShyb2dense`| |10.2|11.0| | | | | | | | | | |
 |`cusparseSnnz`| | | |`hipsparseSnnz`|3.2.0| | | | | | | | |
-|`cusparseSnnz_compress`|8.0|12.2| |`hipsparseSnnz_compress`|3.5.0| | | | | | | | |
+|`cusparseSnnz_compress`|8.0|12.2| |`hipsparseSnnz_compress`|3.5.0| | | |`rocsparse_snnz_compress`|3.5.0| | | |
 |`cusparseSpruneCsr2csr`|9.0| | |`hipsparseSpruneCsr2csr`|3.9.0| | | |`rocsparse_sprune_csr2csr`|3.9.0| | | |
 |`cusparseSpruneCsr2csrByPercentage`|9.0| | |`hipsparseSpruneCsr2csrByPercentage`|3.9.0| | | |`rocsparse_sprune_csr2csr_by_percentage`|3.9.0| | | |
 |`cusparseSpruneCsr2csrByPercentage_bufferSizeExt`|9.0| | |`hipsparseSpruneCsr2csrByPercentage_bufferSizeExt`|3.9.0| | | |`rocsparse_sprune_csr2csr_by_percentage_buffer_size`|3.9.0| | | |
@@ -756,14 +756,14 @@
 |`cusparseXcscsort`| | | |`hipsparseXcscsort`|2.10.0| | | |`rocsparse_cscsort`|2.10.0| | | |
 |`cusparseXcscsort_bufferSizeExt`| | | |`hipsparseXcscsort_bufferSizeExt`|2.10.0| | | |`rocsparse_cscsort_buffer_size`|2.10.0| | | |
 |`cusparseXcsr2bsrNnz`| | | |`hipsparseXcsr2bsrNnz`|3.5.0| | | |`rocsparse_csr2bsr_nnz`|3.5.0| | | |
-|`cusparseXcsr2coo`| | | |`hipsparseXcsr2coo`|1.9.2| | | | | | | | |
+|`cusparseXcsr2coo`| | | |`hipsparseXcsr2coo`|1.9.2| | | |`rocsparse_csr2coo`|1.9.0| | | |
 |`cusparseXcsr2gebsrNnz`| | | |`hipsparseXcsr2gebsrNnz`|4.1.0| | | |`rocsparse_csr2gebsr_nnz`|4.1.0| | | |
 |`cusparseXcsrsort`| | | |`hipsparseXcsrsort`|1.9.2| | | |`rocsparse_csrsort`|1.9.0| | | |
 |`cusparseXcsrsort_bufferSizeExt`| | | |`hipsparseXcsrsort_bufferSizeExt`|1.9.2| | | |`rocsparse_csrsort_buffer_size`|1.9.0| | | |
 |`cusparseXgebsr2csr`| | | | | | | | | | | | | |
 |`cusparseXgebsr2gebsrNnz`| | | |`hipsparseXgebsr2gebsrNnz`|4.1.0| | | |`rocsparse_gebsr2gebsr_nnz`|4.1.0| | | |
 |`cusparseZbsr2csr`| | | |`hipsparseZbsr2csr`|3.5.0| | | |`rocsparse_zbsr2csr`|3.10.0| | | |
-|`cusparseZcsc2dense`| |11.1|12.0|`hipsparseZcsc2dense`|3.5.0| | | | | | | | |
+|`cusparseZcsc2dense`| |11.1|12.0|`hipsparseZcsc2dense`|3.5.0| | | |`rocsparse_zcsc2dense`|3.5.0| | | |
 |`cusparseZcsc2hyb`| |10.2|11.0| | | | | | | | | | |
 |`cusparseZcsr2bsr`| | | |`hipsparseZcsr2bsr`|3.5.0| | | |`rocsparse_zcsr2bsr`|3.5.0| | | |
 |`cusparseZcsr2csc`| |10.2|11.0|`hipsparseZcsr2csc`|3.1.0| | | | | | | | |
@@ -790,7 +790,7 @@
 |`cusparseZhyb2csr`| |10.2|11.0|`hipsparseZhyb2csr`|3.1.0| | | | | | | | |
 |`cusparseZhyb2dense`| |10.2|11.0| | | | | | | | | | |
 |`cusparseZnnz`| | | |`hipsparseZnnz`|3.2.0| | | | | | | | |
-|`cusparseZnnz_compress`|8.0|12.2| |`hipsparseZnnz_compress`|3.5.0| | | | | | | | |
+|`cusparseZnnz_compress`|8.0|12.2| |`hipsparseZnnz_compress`|3.5.0| | | |`rocsparse_znnz_compress`|3.5.0| | | |
 
 ## **15. CUSPARSE Generic API Reference**
 
