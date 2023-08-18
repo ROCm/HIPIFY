@@ -126,6 +126,7 @@ int main() {
   int nnzb = 0;
   int nnzc = 0;
   int nnzPerRow = 0;
+  int nnzPerCol = 0;
   int innz = 0;
   int lda = 0;
   int blockDim = 0;
@@ -1263,6 +1264,46 @@ int main() {
   // HIP: DEPRECATED_CUDA_11000("The routine will be removed in CUDA 12") HIPSPARSE_EXPORT hipsparseStatus_t hipsparseScsc2dense(hipsparseHandle_t handle, int m, int n, const hipsparseMatDescr_t descr, const float* csc_val, const int* csc_row_ind, const int* csc_col_ptr, float* A, int ld);
   // CHECK: status_t = hipsparseScsc2dense(handle_t, m, n, matDescr_A, &cscSortedVal, &csrSortedRowPtr, &csrSortedColInd, &fA, lda);
   status_t = cusparseScsc2dense(handle_t, m, n, matDescr_A, &cscSortedVal, &csrSortedRowPtr, &csrSortedColInd, &fA, lda);
+
+  // CUDA: CUSPARSE_DEPRECATED(cusparseSparseToDense) cusparseStatus_t CUSPARSEAPI cusparseZcsr2dense(cusparseHandle_t handle, int m, int n, const cusparseMatDescr_t descrA, const cuDoubleComplex* csrSortedValA, const int* csrSortedRowPtrA, const int* csrSortedColIndA, cuDoubleComplex* A, int lda);
+  // HIP: DEPRECATED_CUDA_11000("The routine will be removed in CUDA 12") HIPSPARSE_EXPORT hipsparseStatus_t hipsparseZcsr2dense(hipsparseHandle_t handle, int m, int n, const hipsparseMatDescr_t descr, const hipDoubleComplex* csr_val, const int* csr_row_ptr, const int* csr_col_ind, hipDoubleComplex* A, int ld);
+  // CHECK: status_t = hipsparseZcsr2dense(handle_t, m, n, matDescr_A, &dComplexcscSortedVal, &csrSortedRowPtr, &csrSortedColInd, &dcomplexA, lda);
+  status_t = cusparseZcsr2dense(handle_t, m, n, matDescr_A, &dComplexcscSortedVal, &csrSortedRowPtr, &csrSortedColInd, &dcomplexA, lda);
+
+  // CUDA: CUSPARSE_DEPRECATED(cusparseSparseToDense) cusparseStatus_t CUSPARSEAPI cusparseCcsr2dense(cusparseHandle_t handle, int m, int n, const cusparseMatDescr_t descrA, const cuComplex* csrSortedValA, const int* csrSortedRowPtrA, const int* csrSortedColIndA, cuComplex* A, int lda);
+  // HIP: DEPRECATED_CUDA_11000("The routine will be removed in CUDA 12") HIPSPARSE_EXPORT hipsparseStatus_t hipsparseCcsr2dense(hipsparseHandle_t handle, int m, int n, const hipsparseMatDescr_t descr, const hipComplex* csr_val, const int* csr_row_ptr, const int* csr_col_ind, hipComplex* A, int ld);
+  // CHECK: status_t = hipsparseCcsr2dense(handle_t, m, n, matDescr_A, &complexcscSortedVal, &csrSortedRowPtr, &csrSortedColInd, &complexA, lda);
+  status_t = cusparseCcsr2dense(handle_t, m, n, matDescr_A, &complexcscSortedVal, &csrSortedRowPtr, &csrSortedColInd, &complexA, lda);
+
+  // CUDA: CUSPARSE_DEPRECATED(cusparseSparseToDense) cusparseStatus_t CUSPARSEAPI cusparseDcsr2dense(cusparseHandle_t handle, int m, int n, const cusparseMatDescr_t descrA, const double* csrSortedValA, const int* csrSortedRowPtrA, const int* csrSortedColIndA, double* A, int lda);
+  // HIP: DEPRECATED_CUDA_11000("The routine will be removed in CUDA 12") HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDcsr2dense(hipsparseHandle_t handle, int m, int n, const hipsparseMatDescr_t descr, const double* csr_val, const int* csr_row_ptr, const int* csr_col_ind, double* A, int ld);
+  // CHECK: status_t = hipsparseDcsr2dense(handle_t, m, n, matDescr_A, &dcscSortedVal, &csrSortedRowPtr, &csrSortedColInd, &dA, lda);
+  status_t = cusparseDcsr2dense(handle_t, m, n, matDescr_A, &dcscSortedVal, &csrSortedRowPtr, &csrSortedColInd, &dA, lda);
+
+  // CUDA: CUSPARSE_DEPRECATED(cusparseSparseToDense) cusparseStatus_t CUSPARSEAPI cusparseScsr2dense(cusparseHandle_t handle, int m, int n, const cusparseMatDescr_t descrA, const float* csrSortedValA, const int* csrSortedRowPtrA, const int* csrSortedColIndA, float* A, int lda);
+  // HIP: DEPRECATED_CUDA_11000("The routine will be removed in CUDA 12") HIPSPARSE_EXPORT hipsparseStatus_t hipsparseScsr2dense(hipsparseHandle_t handle, int m, int n, const hipsparseMatDescr_t descr, const float* csr_val, const int* csr_row_ptr, const int* csr_col_ind, float* A, int ld);
+  // CHECK: status_t = hipsparseScsr2dense(handle_t, m, n, matDescr_A, &cscSortedVal, &csrSortedRowPtr, &csrSortedColInd, &fA, lda);
+  status_t = cusparseScsr2dense(handle_t, m, n, matDescr_A, &cscSortedVal, &csrSortedRowPtr, &csrSortedColInd, &fA, lda);
+
+  // CUDA: CUSPARSE_DEPRECATED(cusparseDenseToSparse) cusparseStatus_t CUSPARSEAPI cusparseZdense2csc(cusparseHandle_t handle, int m, int n, const cusparseMatDescr_t descrA, const cuDoubleComplex* A, int lda, const int* nnzPerCol, cuDoubleComplex* cscSortedValA, int* cscSortedRowIndA, int* cscSortedColPtrA);
+  // HIP: DEPRECATED_CUDA_11000("The routine will be removed in CUDA 12") HIPSPARSE_EXPORT hipsparseStatus_t hipsparseZdense2csc(hipsparseHandle_t handle, int m, int n, const hipsparseMatDescr_t descr, const hipDoubleComplex* A, int ld, const int* nnz_per_columns, hipDoubleComplex* csc_val, int* csc_row_ind, int* csc_col_ptr);
+  // CHECK: status_t = hipsparseZdense2csc(handle_t, m, n, matDescr_A, &dcomplexA, lda, &nnzPerCol, &dComplexcscSortedVal, &csrSortedRowPtr, &csrSortedColInd);
+  status_t = cusparseZdense2csc(handle_t, m, n, matDescr_A, &dcomplexA, lda, &nnzPerCol, &dComplexcscSortedVal, &csrSortedRowPtr, &csrSortedColInd);
+
+  // CUDA: CUSPARSE_DEPRECATED(cusparseDenseToSparse) cusparseStatus_t CUSPARSEAPI cusparseCdense2csc(cusparseHandle_t handle, int m, int n, const cusparseMatDescr_t descrA, const cuComplex* A, int lda, const int* nnzPerCol, cuComplex* cscSortedValA, int* cscSortedRowIndA, int* cscSortedColPtrA);
+  // HIP: DEPRECATED_CUDA_11000("The routine will be removed in CUDA 12") HIPSPARSE_EXPORT hipsparseStatus_t hipsparseCdense2csc(hipsparseHandle_t handle, int m, int n, const hipsparseMatDescr_t descr, const hipComplex* A, int ld, const int* nnz_per_columns, hipComplex* csc_val, int* csc_row_ind, int* csc_col_ptr);
+  // CHECK: status_t = hipsparseCdense2csc(handle_t, m, n, matDescr_A, &complexA, lda, &nnzPerCol, &complexcscSortedVal, &csrSortedRowPtr, &csrSortedColInd);
+  status_t = cusparseCdense2csc(handle_t, m, n, matDescr_A, &complexA, lda, &nnzPerCol, &complexcscSortedVal, &csrSortedRowPtr, &csrSortedColInd);
+
+  // CUDA: CUSPARSE_DEPRECATED(cusparseDenseToSparse) cusparseStatus_t CUSPARSEAPI cusparseDdense2csc(cusparseHandle_t handle, int m, int n, const cusparseMatDescr_t descrA, const double* A, int lda, const int* nnzPerCol, double* cscSortedValA, int* cscSortedRowIndA, int* cscSortedColPtrA);
+  // HIP: DEPRECATED_CUDA_11000("The routine will be removed in CUDA 12") HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDdense2csc(hipsparseHandle_t handle, int m, int n, const hipsparseMatDescr_t descr, const double* A, int ld, const int* nnz_per_columns, double* csc_val, int* csc_row_ind, int* csc_col_ptr);
+  // CHECK: status_t = hipsparseDdense2csc(handle_t, m, n, matDescr_A, &dA, lda, &nnzPerCol, &dcscSortedVal, &csrSortedRowPtr, &csrSortedColInd);
+  status_t = cusparseDdense2csc(handle_t, m, n, matDescr_A, &dA, lda, &nnzPerCol, &dcscSortedVal, &csrSortedRowPtr, &csrSortedColInd);
+
+  // CUDA: CUSPARSE_DEPRECATED(cusparseDenseToSparse) cusparseStatus_t CUSPARSEAPI cusparseSdense2csc(cusparseHandle_t handle, int m, int n, const cusparseMatDescr_t descrA, const float* A, int lda, const int* nnzPerCol, float* cscSortedValA, int* cscSortedRowIndA, int* cscSortedColPtrA);
+  // HIP: DEPRECATED_CUDA_11000("The routine will be removed in CUDA 12") HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSdense2csc(hipsparseHandle_t handle, int m, int n, const hipsparseMatDescr_t descr, const float* A, int ld, const int* nnz_per_columns, float* csc_val, int* csc_row_ind, int* csc_col_ptr);
+  // CHECK: status_t = hipsparseSdense2csc(handle_t, m, n, matDescr_A, &fA, lda, &nnzPerCol, &cscSortedVal, &csrSortedRowPtr, &csrSortedColInd);
+  status_t = cusparseSdense2csc(handle_t, m, n, matDescr_A, &fA, lda, &nnzPerCol, &cscSortedVal, &csrSortedRowPtr, &csrSortedColInd);
 #endif
 
 #if CUDA_VERSION >= 12000
