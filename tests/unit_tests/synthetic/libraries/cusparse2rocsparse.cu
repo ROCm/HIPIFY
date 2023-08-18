@@ -126,6 +126,7 @@ int main() {
   int nnzb = 0;
   int nnzc = 0;
   int nnzPerRow = 0;
+  int nnzPerCol = 0;
   int innz = 0;
   int lda = 0;
   int blockDim = 0;
@@ -1193,6 +1194,46 @@ int main() {
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_scsc2dense(rocsparse_handle handle, rocsparse_int m, rocsparse_int n, const rocsparse_mat_descr descr, const float* csc_val, const rocsparse_int* csc_col_ptr, const rocsparse_int* csc_row_ind, float* A, rocsparse_int ld);
   // CHECK: status_t = rocsparse_scsc2dense(handle_t, m, n, matDescr_A, &cscSortedVal, &csrSortedRowPtr, &csrSortedColInd, &fA, lda);
   status_t = cusparseScsc2dense(handle_t, m, n, matDescr_A, &cscSortedVal, &csrSortedRowPtr, &csrSortedColInd, &fA, lda);
+
+  // CUDA: CUSPARSE_DEPRECATED(cusparseSparseToDense) cusparseStatus_t CUSPARSEAPI cusparseZcsr2dense(cusparseHandle_t handle, int m, int n, const cusparseMatDescr_t descrA, const cuDoubleComplex* csrSortedValA, const int* csrSortedRowPtrA, const int* csrSortedColIndA, cuDoubleComplex* A, int lda);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_zcsr2dense(rocsparse_handle handle, rocsparse_int m, rocsparse_int n, const rocsparse_mat_descr descr, const rocsparse_double_complex* csr_val, const rocsparse_int* csr_row_ptr, const rocsparse_int* csr_col_ind, rocsparse_double_complex* A, rocsparse_int ld);
+  // CHECK: status_t = rocsparse_zcsr2dense(handle_t, m, n, matDescr_A, &dComplexcscSortedVal, &csrSortedRowPtr, &csrSortedColInd, &dcomplexA, lda);
+  status_t = cusparseZcsr2dense(handle_t, m, n, matDescr_A, &dComplexcscSortedVal, &csrSortedRowPtr, &csrSortedColInd, &dcomplexA, lda);
+
+  // CUDA: CUSPARSE_DEPRECATED(cusparseSparseToDense) cusparseStatus_t CUSPARSEAPI cusparseCcsr2dense(cusparseHandle_t handle, int m, int n, const cusparseMatDescr_t descrA, const cuComplex* csrSortedValA, const int* csrSortedRowPtrA, const int* csrSortedColIndA, cuComplex* A, int lda);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_ccsr2dense(rocsparse_handle handle, rocsparse_int m, rocsparse_int n, const rocsparse_mat_descr descr, const rocsparse_float_complex* csr_val, const rocsparse_int* csr_row_ptr, const rocsparse_int* csr_col_ind,rocsparse_float_complex* A, rocsparse_int ld);
+  // CHECK: status_t = rocsparse_ccsr2dense(handle_t, m, n, matDescr_A, &complexcscSortedVal, &csrSortedRowPtr, &csrSortedColInd, &complexA, lda);
+  status_t = cusparseCcsr2dense(handle_t, m, n, matDescr_A, &complexcscSortedVal, &csrSortedRowPtr, &csrSortedColInd, &complexA, lda);
+
+  // CUDA: CUSPARSE_DEPRECATED(cusparseSparseToDense) cusparseStatus_t CUSPARSEAPI cusparseDcsr2dense(cusparseHandle_t handle, int m, int n, const cusparseMatDescr_t descrA, const double* csrSortedValA, const int* csrSortedRowPtrA, const int* csrSortedColIndA, double* A, int lda);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_dcsr2dense(rocsparse_handle handle, rocsparse_int m, rocsparse_int n, const rocsparse_mat_descr descr, const double* csr_val, const rocsparse_int* csr_row_ptr, const rocsparse_int* csr_col_ind, double* A, rocsparse_int ld);
+  // CHECK: status_t = rocsparse_dcsr2dense(handle_t, m, n, matDescr_A, &dcscSortedVal, &csrSortedRowPtr, &csrSortedColInd, &dA, lda);
+  status_t = cusparseDcsr2dense(handle_t, m, n, matDescr_A, &dcscSortedVal, &csrSortedRowPtr, &csrSortedColInd, &dA, lda);
+
+  // CUDA: CUSPARSE_DEPRECATED(cusparseSparseToDense) cusparseStatus_t CUSPARSEAPI cusparseScsr2dense(cusparseHandle_t handle, int m, int n, const cusparseMatDescr_t descrA, const float* csrSortedValA, const int* csrSortedRowPtrA, const int* csrSortedColIndA, float* A, int lda);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_scsr2dense(rocsparse_handle handle, rocsparse_int m, rocsparse_int n, const rocsparse_mat_descr descr, const float* csr_val, const rocsparse_int* csr_row_ptr, const rocsparse_int* csr_col_ind, float* A, rocsparse_int ld);
+  // CHECK: status_t = rocsparse_scsr2dense(handle_t, m, n, matDescr_A, &cscSortedVal, &csrSortedRowPtr, &csrSortedColInd, &fA, lda);
+  status_t = cusparseScsr2dense(handle_t, m, n, matDescr_A, &cscSortedVal, &csrSortedRowPtr, &csrSortedColInd, &fA, lda);
+
+  // CUDA: CUSPARSE_DEPRECATED(cusparseDenseToSparse) cusparseStatus_t CUSPARSEAPI cusparseZdense2csc(cusparseHandle_t handle, int m, int n, const cusparseMatDescr_t descrA, const cuDoubleComplex* A, int lda, const int* nnzPerCol, cuDoubleComplex* cscSortedValA, int* cscSortedRowIndA, int* cscSortedColPtrA);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_zdense2csc(rocsparse_handle handle, rocsparse_int m, rocsparse_int n, const rocsparse_mat_descr descr, const rocsparse_double_complex* A, rocsparse_int ld, const rocsparse_int* nnz_per_columns, rocsparse_double_complex* csc_val, rocsparse_int* csc_col_ptr, rocsparse_int* csc_row_ind);
+  // CHECK: status_t = rocsparse_zdense2csc(handle_t, m, n, matDescr_A, &dcomplexA, lda, &nnzPerCol, &dComplexcscSortedVal, &csrSortedRowPtr, &csrSortedColInd);
+  status_t = cusparseZdense2csc(handle_t, m, n, matDescr_A, &dcomplexA, lda, &nnzPerCol, &dComplexcscSortedVal, &csrSortedRowPtr, &csrSortedColInd);
+
+  // CUDA: CUSPARSE_DEPRECATED(cusparseDenseToSparse) cusparseStatus_t CUSPARSEAPI cusparseCdense2csc(cusparseHandle_t handle, int m, int n, const cusparseMatDescr_t descrA, const cuComplex* A, int lda, const int* nnzPerCol, cuComplex* cscSortedValA, int* cscSortedRowIndA, int* cscSortedColPtrA);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_cdense2csc(rocsparse_handle handle, rocsparse_int m, rocsparse_int n, const rocsparse_mat_descr descr, const rocsparse_float_complex* A, rocsparse_int ld, const rocsparse_int* nnz_per_columns, rocsparse_float_complex* csc_val, rocsparse_int* csc_col_ptr, rocsparse_int* csc_row_ind);
+  // CHECK: status_t = rocsparse_cdense2csc(handle_t, m, n, matDescr_A, &complexA, lda, &nnzPerCol, &complexcscSortedVal, &csrSortedRowPtr, &csrSortedColInd);
+  status_t = cusparseCdense2csc(handle_t, m, n, matDescr_A, &complexA, lda, &nnzPerCol, &complexcscSortedVal, &csrSortedRowPtr, &csrSortedColInd);
+
+  // CUDA: CUSPARSE_DEPRECATED(cusparseDenseToSparse) cusparseStatus_t CUSPARSEAPI cusparseDdense2csc(cusparseHandle_t handle, int m, int n, const cusparseMatDescr_t descrA, const double* A, int lda, const int* nnzPerCol, double* cscSortedValA, int* cscSortedRowIndA, int* cscSortedColPtrA);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_ddense2csc(rocsparse_handle handle, rocsparse_int m, rocsparse_int n, const rocsparse_mat_descr descr, const double* A, rocsparse_int ld, const rocsparse_int* nnz_per_columns, double* csc_val, rocsparse_int* csc_col_ptr, rocsparse_int* csc_row_ind);
+  // CHECK: status_t = rocsparse_ddense2csc(handle_t, m, n, matDescr_A, &dA, lda, &nnzPerCol, &dcscSortedVal, &csrSortedRowPtr, &csrSortedColInd);
+  status_t = cusparseDdense2csc(handle_t, m, n, matDescr_A, &dA, lda, &nnzPerCol, &dcscSortedVal, &csrSortedRowPtr, &csrSortedColInd);
+
+  // CUDA: CUSPARSE_DEPRECATED(cusparseDenseToSparse) cusparseStatus_t CUSPARSEAPI cusparseSdense2csc(cusparseHandle_t handle, int m, int n, const cusparseMatDescr_t descrA, const float* A, int lda, const int* nnzPerCol, float* cscSortedValA, int* cscSortedRowIndA, int* cscSortedColPtrA);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_sdense2csc(rocsparse_handle handle, rocsparse_int m, rocsparse_int n, const rocsparse_mat_descr descr, const float* A, rocsparse_int ld, const rocsparse_int* nnz_per_columns, float* csc_val, rocsparse_int* csc_col_ptr, rocsparse_int* csc_row_ind);
+  // CHECK: status_t = rocsparse_sdense2csc(handle_t, m, n, matDescr_A, &fA, lda, &nnzPerCol, &cscSortedVal, &csrSortedRowPtr, &csrSortedColInd);
+  status_t = cusparseSdense2csc(handle_t, m, n, matDescr_A, &fA, lda, &nnzPerCol, &cscSortedVal, &csrSortedRowPtr, &csrSortedColInd);
 #endif
 
 #if CUDA_VERSION >= 12010 && CUSPARSE_VERSION >= 12100
