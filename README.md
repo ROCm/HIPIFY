@@ -16,6 +16,7 @@ HIPIFY is a set of tools to translate CUDA source code into portable [HIP](https
 - [hipify-perl](./docs/hipify-perl.md#hipify-perl)
      * [Usage](./docs/hipify-perl.md#hipify-perl-usage)
      * [Building](./docs/hipify-perl.md#hipify-perl-building)
+- Related: [hipify_torch](https://github.com/ROCmSoftwarePlatform/hipify_torch)
 - [Supported CUDA APIs](./docs/supported_apis.md#supported-cuda-apis)
 - [Documentation](#documentation)
      * [How to build HIPIFY documentation](#how-to-build-hipify-documentation)
