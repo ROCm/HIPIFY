@@ -220,6 +220,7 @@ int main() {
   float fcsrSortedValC = 0.f;
   double dcsrSortedValC = 0.f;
   double percentage = 0.f;
+  float fpercentage = 0.f;
   double dthreshold = 0.f;
   float fthreshold = 0.f;
   double dtol = 0.f;
@@ -714,6 +715,46 @@ int main() {
   // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpruneCsr2csr_bufferSizeExt(hipsparseHandle_t handle, int m, int n, int nnzA, const hipsparseMatDescr_t descrA, const float* csrValA, const int* csrRowPtrA, const int* csrColIndA, const float* threshold, const hipsparseMatDescr_t descrC, const float* csrValC, const int* csrRowPtrC, const int* csrColIndC, size_t* bufferSize);
   // CHECK: status_t = hipsparseSpruneCsr2csr_bufferSizeExt(handle_t, m, n, nnz, matDescr_A, &fbsrSortedValA, &csrRowPtrA, &csrColIndA, &fthreshold, matDescr_C, &fbsrSortedValC, &csrRowPtrC, &csrColIndC, &bufferSize);
   status_t = cusparseSpruneCsr2csr_bufferSizeExt(handle_t, m, n, nnz, matDescr_A, &fbsrSortedValA, &csrRowPtrA, &csrColIndA, &fthreshold, matDescr_C, &fbsrSortedValC, &csrRowPtrC, &csrColIndC, &bufferSize);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseDpruneDense2csrByPercentage(cusparseHandle_t handle, int m, int n, const double* A, int lda, float percentage, const cusparseMatDescr_t descrC, double* csrSortedValC, const int* csrSortedRowPtrC,int* csrSortedColIndC, pruneInfo_t info, void* pBuffer);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDpruneDense2csrByPercentage(hipsparseHandle_t handle, int m, int n, const double* A, int lda, double percentage, const hipsparseMatDescr_t descr, double* csrVal, const int* csrRowPtr, int* csrColInd, pruneInfo_t info, void* buffer);
+  // CHECK: status_t = hipsparseDpruneDense2csrByPercentage(handle_t, m, n, &dA, lda, percentage, matDescr_C, &dcsrSortedValC, &csrRowPtrC, &csrColIndC, prune_info, pBuffer);
+  status_t = cusparseDpruneDense2csrByPercentage(handle_t, m, n, &dA, lda, percentage, matDescr_C, &dcsrSortedValC, &csrRowPtrC, &csrColIndC, prune_info, pBuffer);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseSpruneDense2csrByPercentage(cusparseHandle_t handle, int m, int n, const float* A, int lda, float percentage, const cusparseMatDescr_t descrC, float* csrSortedValC, const int* csrSortedRowPtrC, int* csrSortedColIndC, pruneInfo_t info, void* pBuffer);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpruneDense2csrByPercentage(hipsparseHandle_t handle, int m, int n, const float* A, int lda, float percentage, const hipsparseMatDescr_t descr, float* csrVal, const int* csrRowPtr, int* csrColInd, pruneInfo_t info, void* buffer);
+  // CHECK: status_t = hipsparseSpruneDense2csrByPercentage(handle_t, m, n, &fA, lda, fpercentage, matDescr_C, &fcsrSortedValC, &csrRowPtrC, &csrColIndC, prune_info, pBuffer);
+  status_t = cusparseSpruneDense2csrByPercentage(handle_t, m, n, &fA, lda, fpercentage, matDescr_C, &fcsrSortedValC, &csrRowPtrC, &csrColIndC, prune_info, pBuffer);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseDpruneDense2csrNnzByPercentage(cusparseHandle_t handle, int m, int n, const double* A, int lda, float percentage, const cusparseMatDescr_t descrC, int* csrRowPtrC, int* nnzTotalDevHostPtr, pruneInfo_t info, void* pBuffer);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDpruneDense2csrNnzByPercentage(hipsparseHandle_t handle, int m, int n, const double* A, int lda, double percentage, const hipsparseMatDescr_t descr, int* csrRowPtr, int* nnzTotalDevHostPtr, pruneInfo_t info, void* buffer);
+  // CHECK: status_t = hipsparseDpruneDense2csrNnzByPercentage(handle_t, m, n, &dA, lda, fpercentage, matDescr_C, &csrRowPtrC, &nnzTotalDevHostPtr, prune_info, pBuffer);
+  status_t = cusparseDpruneDense2csrNnzByPercentage(handle_t, m, n, &dA, lda, fpercentage, matDescr_C, &csrRowPtrC, &nnzTotalDevHostPtr, prune_info, pBuffer);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseSpruneDense2csrNnzByPercentage(cusparseHandle_t handle, int m, int n, const float* A, int lda, float percentage, const cusparseMatDescr_t descrC, int* csrRowPtrC, int* nnzTotalDevHostPtr, pruneInfo_t info, void* pBuffer);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpruneDense2csrNnzByPercentage(hipsparseHandle_t handle, int m, int n, const float* A, int lda, float percentage, const hipsparseMatDescr_t descr, int* csrRowPtr, int* nnzTotalDevHostPtr, pruneInfo_t info, void* buffer);
+  // CHECK: status_t = hipsparseSpruneDense2csrNnzByPercentage(handle_t, m, n, &fA, lda, fpercentage, matDescr_C, &csrRowPtrC, &nnzTotalDevHostPtr, prune_info, pBuffer);
+  status_t = cusparseSpruneDense2csrNnzByPercentage(handle_t, m, n, &fA, lda, fpercentage, matDescr_C, &csrRowPtrC, &nnzTotalDevHostPtr, prune_info, pBuffer);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseDpruneDense2csrByPercentage_bufferSizeExt(cusparseHandle_t handle, int m, int n, const double* A, int lda, float percentage, const cusparseMatDescr_t descrC, const double* csrSortedValC, const int* csrSortedRowPtrC, const int* csrSortedColIndC, pruneInfo_t info, size_t* pBufferSizeInBytes);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDpruneDense2csrByPercentage_bufferSizeExt(hipsparseHandle_t handle, int m, int n, const double* A, int lda, double percentage, const hipsparseMatDescr_t descr, const double* csrVal, const int* csrRowPtr, const int* csrColInd, pruneInfo_t info, size_t* bufferSize);
+  // CHECK: status_t = hipsparseDpruneDense2csrByPercentage_bufferSizeExt(handle_t, m, n, &dA, lda, fpercentage, matDescr_C, &dcsrSortedValC, &csrRowPtrC, &csrColIndC, prune_info, &bufferSize);
+  status_t = cusparseDpruneDense2csrByPercentage_bufferSizeExt(handle_t, m, n, &dA, lda, fpercentage, matDescr_C, &dcsrSortedValC, &csrRowPtrC, &csrColIndC, prune_info, &bufferSize);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseSpruneDense2csrByPercentage_bufferSizeExt(cusparseHandle_t handle, int m, int n, const float* A, int lda, float percentage, const cusparseMatDescr_t descrC, const float* csrSortedValC, const int* csrSortedRowPtrC, const int* csrSortedColIndC, pruneInfo_t info, size_t* pBufferSizeInBytes);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpruneDense2csrByPercentage_bufferSizeExt(hipsparseHandle_t handle, int m, int n, const float* A, int lda, float percentage, const hipsparseMatDescr_t descr, const float* csrVal, const int* csrRowPtr, const int* csrColInd, pruneInfo_t info, size_t* bufferSize);
+  // CHECK: status_t = hipsparseSpruneDense2csrByPercentage_bufferSizeExt(handle_t, m, n, &fA, lda, fpercentage, matDescr_C, &fcsrSortedValC, &csrRowPtrC, &csrColIndC, prune_info, &bufferSize);
+  status_t = cusparseSpruneDense2csrByPercentage_bufferSizeExt(handle_t, m, n, &fA, lda, fpercentage, matDescr_C, &fcsrSortedValC, &csrRowPtrC, &csrColIndC, prune_info, &bufferSize);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseDpruneDense2csr(cusparseHandle_t handle, int m, int n, const double* A, int lda, const double* threshold, const cusparseMatDescr_t descrC, double* csrSortedValC, const int* csrSortedRowPtrC, int* csrSortedColIndC, void* pBuffer);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDpruneDense2csr(hipsparseHandle_t handle, int m, int n, const double* A, int lda, const double* threshold, const hipsparseMatDescr_t descr, double* csrVal, const int* csrRowPtr, int* csrColInd, void* buffer);
+  // CHECK: status_t = hipsparseDpruneDense2csr(handle_t, m, n, &dA, lda, &dthreshold, matDescr_C, &dcsrSortedValC, &csrRowPtrC, &csrColIndC, pBuffer);
+  status_t = cusparseDpruneDense2csr(handle_t, m, n, &dA, lda, &dthreshold, matDescr_C, &dcsrSortedValC, &csrRowPtrC, &csrColIndC, pBuffer);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseSpruneDense2csr(cusparseHandle_t handle, int m, int n, const float* A, int lda, const float* threshold, const cusparseMatDescr_t descrC, float* csrSortedValC, const int* csrSortedRowPtrC, int* csrSortedColIndC, void* pBuffer);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpruneDense2csr(hipsparseHandle_t handle, int m, int n, const float* A, int lda, const float* threshold, const hipsparseMatDescr_t descr, float* csrVal, const int* csrRowPtr, int* csrColInd, void* buffer);
+  // CHECK: status_t = hipsparseSpruneDense2csr(handle_t, m, n, &fA, lda, &fthreshold, matDescr_C, &fcsrSortedValC, &csrRowPtrC, &csrColIndC, pBuffer);
+  status_t = cusparseSpruneDense2csr(handle_t, m, n, &fA, lda, &fthreshold, matDescr_C, &fcsrSortedValC, &csrRowPtrC, &csrColIndC, pBuffer);
 #endif
 
 #if CUDA_VERSION >= 10010
