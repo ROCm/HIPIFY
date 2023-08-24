@@ -755,6 +755,26 @@ int main() {
   // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpruneDense2csr(hipsparseHandle_t handle, int m, int n, const float* A, int lda, const float* threshold, const hipsparseMatDescr_t descr, float* csrVal, const int* csrRowPtr, int* csrColInd, void* buffer);
   // CHECK: status_t = hipsparseSpruneDense2csr(handle_t, m, n, &fA, lda, &fthreshold, matDescr_C, &fcsrSortedValC, &csrRowPtrC, &csrColIndC, pBuffer);
   status_t = cusparseSpruneDense2csr(handle_t, m, n, &fA, lda, &fthreshold, matDescr_C, &fcsrSortedValC, &csrRowPtrC, &csrColIndC, pBuffer);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseDpruneDense2csrNnz(cusparseHandle_t handle, int m, int n, const double* A, int lda, const double* threshold, const cusparseMatDescr_t descrC, int* csrSortedRowPtrC, int* nnzTotalDevHostPtr, void* pBuffer);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDpruneDense2csrNnz(hipsparseHandle_t handle, int m, int n, const double* A, int lda, const double* threshold, const hipsparseMatDescr_t descr, int* csrRowPtr, int* nnzTotalDevHostPtr, void* buffer);
+  // CHECK: status_t = hipsparseDpruneDense2csrNnz(handle_t, m, n, &dA, lda, &dthreshold, matDescr_C, &csrRowPtrC, &nnzTotalDevHostPtr, pBuffer);
+  status_t = cusparseDpruneDense2csrNnz(handle_t, m, n, &dA, lda, &dthreshold, matDescr_C, &csrRowPtrC, &nnzTotalDevHostPtr, pBuffer);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseSpruneDense2csrNnz(cusparseHandle_t handle, int m, int n, const float* A, int lda, const float* threshold, const cusparseMatDescr_t descrC, int* csrRowPtrC, int* nnzTotalDevHostPtr, void* pBuffer);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpruneDense2csrNnz(hipsparseHandle_t handle, int m, int n, const float* A, int lda, const float* threshold, const hipsparseMatDescr_t descr, int* csrRowPtr, int* nnzTotalDevHostPtr, void* buffer);
+  // CHECK: status_t = hipsparseSpruneDense2csrNnz(handle_t, m, n, &fA, lda, &fthreshold, matDescr_C, &csrRowPtrC, &nnzTotalDevHostPtr, pBuffer);
+  status_t = cusparseSpruneDense2csrNnz(handle_t, m, n, &fA, lda, &fthreshold, matDescr_C, &csrRowPtrC, &nnzTotalDevHostPtr, pBuffer);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseDpruneDense2csr_bufferSizeExt(cusparseHandle_t handle, int m, int n, const double* A, int lda, const double* threshold, const cusparseMatDescr_t descrC, const double* csrSortedValC, const int* csrSortedRowPtrC, const int* csrSortedColIndC, size_t* pBufferSizeInBytes);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDpruneDense2csr_bufferSizeExt(hipsparseHandle_t handle, int m, int n, const double* A, int lda, const double* threshold, const hipsparseMatDescr_t descr, const double* csrVal, const int* csrRowPtr, const int* csrColInd, size_t* bufferSize);
+  // CHECK: status_t = hipsparseDpruneDense2csr_bufferSizeExt(handle_t, m, n, &dA, lda, &dthreshold, matDescr_C, &dcsrSortedValC, &csrRowPtrC, &csrColIndC, &bufferSize);
+  status_t = cusparseDpruneDense2csr_bufferSizeExt(handle_t, m, n, &dA, lda, &dthreshold, matDescr_C, &dcsrSortedValC, &csrRowPtrC, &csrColIndC, &bufferSize);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseSpruneDense2csr_bufferSizeExt(cusparseHandle_t handle, int m, int n, const float* A, int lda, const float* threshold, const cusparseMatDescr_t descrC, const float* csrSortedValC, const int* csrSortedRowPtrC, const int* csrSortedColIndC, size_t* pBufferSizeInBytes);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpruneDense2csr_bufferSizeExt(hipsparseHandle_t handle, int m, int n, const float* A, int lda, const float* threshold, const hipsparseMatDescr_t descr,const float* csrVal, const int* csrRowPtr, const int* csrColInd, size_t* bufferSize);
+  // CHECK: status_t = hipsparseSpruneDense2csr_bufferSizeExt(handle_t, m, n, &fA, lda, &fthreshold, matDescr_C, &fcsrSortedValC, &csrRowPtrC, &csrColIndC, &bufferSize);
+  status_t = cusparseSpruneDense2csr_bufferSizeExt(handle_t, m, n, &fA, lda, &fthreshold, matDescr_C, &fcsrSortedValC, &csrRowPtrC, &csrColIndC, &bufferSize);
 #endif
 
 #if CUDA_VERSION >= 10010
@@ -1345,6 +1365,26 @@ int main() {
   // HIP: DEPRECATED_CUDA_11000("The routine will be removed in CUDA 12") HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSdense2csc(hipsparseHandle_t handle, int m, int n, const hipsparseMatDescr_t descr, const float* A, int ld, const int* nnz_per_columns, float* csc_val, int* csc_row_ind, int* csc_col_ptr);
   // CHECK: status_t = hipsparseSdense2csc(handle_t, m, n, matDescr_A, &fA, lda, &nnzPerCol, &cscSortedVal, &csrSortedRowPtr, &csrSortedColInd);
   status_t = cusparseSdense2csc(handle_t, m, n, matDescr_A, &fA, lda, &nnzPerCol, &cscSortedVal, &csrSortedRowPtr, &csrSortedColInd);
+
+  // CUDA: CUSPARSE_DEPRECATED(cusparseDenseToSparse) cusparseStatus_t CUSPARSEAPI cusparseZdense2csr(cusparseHandle_t handle, int m, int n, const cusparseMatDescr_t descrA, const cuDoubleComplex* A, int lda, const int* nnzPerRow, cuDoubleComplex* csrSortedValA, int* csrSortedRowPtrA, int* csrSortedColIndA);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseZdense2csr(hipsparseHandle_t handle, int m, int n, const hipsparseMatDescr_t descr, const hipDoubleComplex* A, int ld, const int* nnz_per_rows, hipDoubleComplex* csr_val, int* csr_row_ptr, int* csr_col_ind);
+  // CHECK: status_t = hipsparseZdense2csr(handle_t, m, n, matDescr_A, &dcomplexA, lda, &nnzPerRow, &dComplexcsrSortedValA, &csrRowPtrA, &csrColIndA);
+  status_t = cusparseZdense2csr(handle_t, m, n, matDescr_A, &dcomplexA, lda, &nnzPerRow, &dComplexcsrSortedValA, &csrRowPtrA, &csrColIndA);
+
+  // CUDA: CUSPARSE_DEPRECATED(cusparseDenseToSparse) cusparseStatus_t CUSPARSEAPI cusparseCdense2csr(cusparseHandle_t handle, int m, int n, const cusparseMatDescr_t descrA, const cuComplex* A, int lda, const int* nnzPerRow, cuComplex* csrSortedValA, int* csrSortedRowPtrA, int* csrSortedColIndA);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseCdense2csr(hipsparseHandle_t handle, int m, int n, const hipsparseMatDescr_t descr, const hipComplex* A, int ld, const int* nnz_per_rows, hipComplex* csr_val, int* csr_row_ptr, int* csr_col_ind);
+  // CHECK: status_t = hipsparseCdense2csr(handle_t, m, n, matDescr_A, &complexA, lda, &nnzPerRow, &complexcsrSortedValA, &csrRowPtrA, &csrColIndA);
+  status_t = cusparseCdense2csr(handle_t, m, n, matDescr_A, &complexA, lda, &nnzPerRow, &complexcsrSortedValA, &csrRowPtrA, &csrColIndA);
+
+  // CUDA: CUSPARSE_DEPRECATED(cusparseDenseToSparse) cusparseStatus_t CUSPARSEAPI cusparseDdense2csr(cusparseHandle_t handle, int m, int n, const cusparseMatDescr_t descrA, const double* A, int lda, const int* nnzPerRow, double* csrSortedValA, int* csrSortedRowPtrA, int* csrSortedColIndA);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDdense2csr(hipsparseHandle_t handle, int m, int n, const hipsparseMatDescr_t descr, const double* A, int ld, const int* nnz_per_rows, double* csr_val, int* csr_row_ptr, int* csr_col_ind);
+  // CHECK: status_t = hipsparseDdense2csr(handle_t, m, n, matDescr_A, &dA, lda, &nnzPerRow, &dcsrSortedValA, &csrRowPtrA, &csrColIndA);
+  status_t = cusparseDdense2csr(handle_t, m, n, matDescr_A, &dA, lda, &nnzPerRow, &dcsrSortedValA, &csrRowPtrA, &csrColIndA);
+
+  // CUDA: CUSPARSE_DEPRECATED(cusparseDenseToSparse) cusparseStatus_t CUSPARSEAPI cusparseSdense2csr(cusparseHandle_t handle, int m, int n, const cusparseMatDescr_t descrA, const float* A, int lda, const int* nnzPerRow, float* csrSortedValA, int* csrSortedRowPtrA, int* csrSortedColIndA);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSdense2csr(hipsparseHandle_t handle, int m, int n, const hipsparseMatDescr_t descr, const float* A, int ld, const int* nnz_per_rows, float* csr_val, int* csr_row_ptr, int* csr_col_ind);
+  // CHECK: status_t = hipsparseSdense2csr(handle_t, m, n, matDescr_A, &fA, lda, &nnzPerRow, &csrSortedValA, &csrRowPtrA, &csrColIndA);
+  status_t = cusparseSdense2csr(handle_t, m, n, matDescr_A, &fA, lda, &nnzPerRow, &csrSortedValA, &csrRowPtrA, &csrColIndA);
 #endif
 
 #if CUDA_VERSION >= 12000
