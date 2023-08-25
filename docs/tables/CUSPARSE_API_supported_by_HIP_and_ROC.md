@@ -647,7 +647,7 @@
 |`cusparseChyb2csc`| |10.2|11.0| | | | | | | | | | |
 |`cusparseChyb2csr`| |10.2|11.0|`hipsparseChyb2csr`|3.1.0| | | | | | | | |
 |`cusparseChyb2dense`| |10.2|11.0| | | | | | | | | | |
-|`cusparseCnnz`| | | |`hipsparseCnnz`|3.2.0| | | | | | | | |
+|`cusparseCnnz`| | | |`hipsparseCnnz`|3.2.0| | | |`rocsparse_cnnz`|3.2.0| | | |
 |`cusparseCnnz_compress`|8.0|12.2| |`hipsparseCnnz_compress`|3.5.0| | | |`rocsparse_cnnz_compress`|3.5.0| | | |
 |`cusparseCreateCsru2csrInfo`| |12.2| |`hipsparseCreateCsru2csrInfo`|4.2.0| | | | | | | | |
 |`cusparseCreateIdentityPermutation`| |12.2| |`hipsparseCreateIdentityPermutation`|1.9.2| | | |`rocsparse_create_identity_permutation`|1.9.0| | | |
@@ -682,7 +682,7 @@
 |`cusparseDhyb2csc`| |10.2|11.0| | | | | | | | | | |
 |`cusparseDhyb2csr`| |10.2|11.0|`hipsparseDhyb2csr`|3.1.0| | | | | | | | |
 |`cusparseDhyb2dense`| |10.2|11.0| | | | | | | | | | |
-|`cusparseDnnz`| | | |`hipsparseDnnz`|3.2.0| | | | | | | | |
+|`cusparseDnnz`| | | |`hipsparseDnnz`|3.2.0| | | |`rocsparse_dnnz`|3.2.0| | | |
 |`cusparseDnnz_compress`|8.0|12.2| |`hipsparseDnnz_compress`|3.5.0| | | |`rocsparse_dnnz_compress`|3.5.0| | | |
 |`cusparseDpruneCsr2csr`|9.0|12.2| |`hipsparseDpruneCsr2csr`|3.9.0| | | |`rocsparse_dprune_csr2csr`|3.9.0| | | |
 |`cusparseDpruneCsr2csrByPercentage`|9.0|12.2| |`hipsparseDpruneCsr2csrByPercentage`|3.9.0| | | |`rocsparse_dprune_csr2csr_by_percentage`|3.9.0| | | |
@@ -735,7 +735,7 @@
 |`cusparseShyb2csc`| |10.2|11.0| | | | | | | | | | |
 |`cusparseShyb2csr`| |10.2|11.0|`hipsparseShyb2csr`|3.1.0| | | | | | | | |
 |`cusparseShyb2dense`| |10.2|11.0| | | | | | | | | | |
-|`cusparseSnnz`| | | |`hipsparseSnnz`|3.2.0| | | | | | | | |
+|`cusparseSnnz`| | | |`hipsparseSnnz`|3.2.0| | | |`rocsparse_snnz`|3.2.0| | | |
 |`cusparseSnnz_compress`|8.0|12.2| |`hipsparseSnnz_compress`|3.5.0| | | |`rocsparse_snnz_compress`|3.5.0| | | |
 |`cusparseSpruneCsr2csr`|9.0|12.2| |`hipsparseSpruneCsr2csr`|3.9.0| | | |`rocsparse_sprune_csr2csr`|3.9.0| | | |
 |`cusparseSpruneCsr2csrByPercentage`|9.0|12.2| |`hipsparseSpruneCsr2csrByPercentage`|3.9.0| | | |`rocsparse_sprune_csr2csr_by_percentage`|3.9.0| | | |
@@ -789,7 +789,7 @@
 |`cusparseZhyb2csc`| |10.2|11.0| | | | | | | | | | |
 |`cusparseZhyb2csr`| |10.2|11.0|`hipsparseZhyb2csr`|3.1.0| | | | | | | | |
 |`cusparseZhyb2dense`| |10.2|11.0| | | | | | | | | | |
-|`cusparseZnnz`| | | |`hipsparseZnnz`|3.2.0| | | | | | | | |
+|`cusparseZnnz`| | | |`hipsparseZnnz`|3.2.0| | | |`rocsparse_znnz`|3.2.0| | | |
 |`cusparseZnnz_compress`|8.0|12.2| |`hipsparseZnnz_compress`|3.5.0| | | |`rocsparse_znnz_compress`|3.5.0| | | |
 
 ## **15. CUSPARSE Generic API Reference**

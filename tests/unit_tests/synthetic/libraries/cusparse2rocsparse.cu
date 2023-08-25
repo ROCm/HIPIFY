@@ -159,6 +159,7 @@ int main() {
   int bsrSortedColIndC = 0;
   int bufferSizeInBytes = 0;
   int nnzTotalDevHostPtr = 0;
+  int nnzPerRowCol = 0;
   int userEllWidth = 0;
   int64_t size = 0;
   int64_t nnz = 0;
@@ -605,6 +606,26 @@ int main() {
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_csr2coo(rocsparse_handle handle, const rocsparse_int* csr_row_ptr, rocsparse_int nnz, rocsparse_int m, rocsparse_int* coo_row_ind, rocsparse_index_base idx_base);
   // CHECK: status_t = rocsparse_csr2coo(handle_t, &csrSortedRowPtr, nnz, m, &icooRowInd, indexBase_t);
   status_t = cusparseXcsr2coo(handle_t, &csrSortedRowPtr, nnz, m, &icooRowInd, indexBase_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseZnnz(cusparseHandle_t handle, cusparseDirection_t dirA, int m, int n, const cusparseMatDescr_t descrA, const cuDoubleComplex* A, int lda, int* nnzPerRowCol, int* nnzTotalDevHostPtr);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_znnz(rocsparse_handle handle, rocsparse_direction dir, rocsparse_int m, rocsparse_int n, const rocsparse_mat_descr descr, const rocsparse_double_complex* A, rocsparse_int ld, rocsparse_int* nnz_per_row_columns, rocsparse_int* nnz_total_dev_host_ptr);
+  // CHECK: status_t = rocsparse_znnz(handle_t, direction_t, m, n, matDescr_A, &dcomplexA, lda, &nnzPerRowCol, &nnzTotalDevHostPtr);
+  status_t = cusparseZnnz(handle_t, direction_t, m, n, matDescr_A, &dcomplexA, lda, &nnzPerRowCol, &nnzTotalDevHostPtr);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCnnz(cusparseHandle_t handle, cusparseDirection_t dirA, int m, int n, const cusparseMatDescr_t descrA, const cuComplex* A, int lda, int* nnzPerRowCol, int* nnzTotalDevHostPtr);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_cnnz(rocsparse_handle handle, rocsparse_direction dir, rocsparse_int m, rocsparse_int n, const rocsparse_mat_descr descr, const rocsparse_float_complex* A, rocsparse_int ld, rocsparse_int* nnz_per_row_columns, rocsparse_int* nnz_total_dev_host_ptr);
+  // CHECK: status_t = rocsparse_cnnz(handle_t, direction_t, m, n, matDescr_A, &complexA, lda, &nnzPerRowCol, &nnzTotalDevHostPtr);
+  status_t = cusparseCnnz(handle_t, direction_t, m, n, matDescr_A, &complexA, lda, &nnzPerRowCol, &nnzTotalDevHostPtr);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDnnz(cusparseHandle_t handle, cusparseDirection_t dirA, int m, int n, const cusparseMatDescr_t descrA, const double* A, int lda, int* nnzPerRowCol, int* nnzTotalDevHostPtr);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_dnnz(rocsparse_handle handle, rocsparse_direction dir, rocsparse_int m, rocsparse_int n, const rocsparse_mat_descr descr, const double* A, rocsparse_int ld, rocsparse_int* nnz_per_row_columns, rocsparse_int* nnz_total_dev_host_ptr);
+  // CHECK: status_t = rocsparse_dnnz(handle_t, direction_t, m, n, matDescr_A, &dA, lda, &nnzPerRowCol, &nnzTotalDevHostPtr);
+  status_t = cusparseDnnz(handle_t, direction_t, m, n, matDescr_A, &dA, lda, &nnzPerRowCol, &nnzTotalDevHostPtr);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSnnz(cusparseHandle_t handle, cusparseDirection_t dirA, int m, int n, const cusparseMatDescr_t descrA, const float* A, int lda, int* nnzPerRowCol, int* nnzTotalDevHostPtr);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_snnz(rocsparse_handle handle, rocsparse_direction dir, rocsparse_int m, rocsparse_int n, const rocsparse_mat_descr descr, const float* A, rocsparse_int ld, rocsparse_int* nnz_per_row_columns, rocsparse_int* nnz_total_dev_host_ptr);
+  // CHECK: status_t = rocsparse_snnz(handle_t, direction_t, m, n, matDescr_A, &fA, lda, &nnzPerRowCol, &nnzTotalDevHostPtr);
+  status_t = cusparseSnnz(handle_t, direction_t, m, n, matDescr_A, &fA, lda, &nnzPerRowCol, &nnzTotalDevHostPtr);
 
 #if CUDA_VERSION >= 8000
   // CHECK: hipDataType dataType_t;
