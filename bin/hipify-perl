@@ -1689,6 +1689,7 @@ sub rocSubstitutions {
     subst("cusparseCgebsr2gebsc_bufferSize", "rocsparse_cgebsr2gebsc_buffer_size", "library");
     subst("cusparseCgebsr2gebsr", "rocsparse_cgebsr2gebsr", "library");
     subst("cusparseCgebsr2gebsr_bufferSize", "rocsparse_cgebsr2gebsr_buffer_size", "library");
+    subst("cusparseCnnz", "rocsparse_cnnz", "library");
     subst("cusparseCnnz_compress", "rocsparse_cnnz_compress", "library");
     subst("cusparseCooAoSGet", "rocsparse_coo_aos_get", "library");
     subst("cusparseCooGet", "rocsparse_coo_get", "library");
@@ -1744,6 +1745,7 @@ sub rocSubstitutions {
     subst("cusparseDnVecGet", "rocsparse_dnvec_get", "library");
     subst("cusparseDnVecGetValues", "rocsparse_dnvec_get_values", "library");
     subst("cusparseDnVecSetValues", "rocsparse_dnvec_set_values", "library");
+    subst("cusparseDnnz", "rocsparse_dnnz", "library");
     subst("cusparseDnnz_compress", "rocsparse_dnnz_compress", "library");
     subst("cusparseDpruneCsr2csr", "rocsparse_dprune_csr2csr", "library");
     subst("cusparseDpruneCsr2csrByPercentage", "rocsparse_dprune_csr2csr_by_percentage", "library");
@@ -1792,6 +1794,7 @@ sub rocSubstitutions {
     subst("cusparseSgebsr2gebsc_bufferSize", "rocsparse_sgebsr2gebsc_buffer_size", "library");
     subst("cusparseSgebsr2gebsr", "rocsparse_sgebsr2gebsr", "library");
     subst("cusparseSgebsr2gebsr_bufferSize", "rocsparse_sgebsr2gebsr_buffer_size", "library");
+    subst("cusparseSnnz", "rocsparse_snnz", "library");
     subst("cusparseSnnz_compress", "rocsparse_snnz_compress", "library");
     subst("cusparseSpMV", "rocsparse_spmv", "library");
     subst("cusparseSpMatGetAttribute", "rocsparse_spmat_get_attribute", "library");
@@ -1847,6 +1850,7 @@ sub rocSubstitutions {
     subst("cusparseZgebsr2gebsc_bufferSize", "rocsparse_zgebsr2gebsc_buffer_size", "library");
     subst("cusparseZgebsr2gebsr", "rocsparse_zgebsr2gebsr", "library");
     subst("cusparseZgebsr2gebsr_bufferSize", "rocsparse_zgebsr2gebsr_buffer_size", "library");
+    subst("cusparseZnnz", "rocsparse_znnz", "library");
     subst("cusparseZnnz_compress", "rocsparse_znnz_compress", "library");
     subst("cublas.h", "rocblas.h", "include_cuda_main_header");
     subst("cublas_v2.h", "rocblas.h", "include_cuda_main_header_v2");
