@@ -365,6 +365,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   {"cusparseXbsric02_zeroPivot",                        {"hipsparseXbsric02_zeroPivot",                        "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
 
   // 12.2. Incomplete LU Factorization: level 0
+  // NOTE: rocsparse_(s|d|c|z)csrilu0 have different signatures
   {"cusparseScsrilu0",                                  {"hipsparseScsrilu0",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
   {"cusparseDcsrilu0",                                  {"hipsparseDcsrilu0",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
   {"cusparseCcsrilu0",                                  {"hipsparseCcsrilu0",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
@@ -422,11 +423,13 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   {"cusparseXbsrilu02_zeroPivot",                       {"hipsparseXbsrilu02_zeroPivot",                       "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
 
   // 12.3. Tridiagonal Solve
+  // NOTE: rocsparse_(s|d|c|z)gtsv have an additional parameter void* temp_buffer
   {"cusparseSgtsv",                                     {"hipsparseSgtsv",                                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
   {"cusparseDgtsv",                                     {"hipsparseDgtsv",                                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
   {"cusparseCgtsv",                                     {"hipsparseCgtsv",                                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
   {"cusparseZgtsv",                                     {"hipsparseZgtsv",                                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
 
+  // NOTE: rocsparse_(s|d|c|z)gtsv_no_pivot have an additional parameter void* temp_buffer
   {"cusparseSgtsv_nopivot",                             {"hipsparseSgtsv_nopivot",                             "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
   {"cusparseDgtsv_nopivot",                             {"hipsparseDgtsv_nopivot",                             "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
   {"cusparseCgtsv_nopivot",                             {"hipsparseCgtsv_nopivot",                             "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
@@ -484,11 +487,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   {"cusparseCgpsvInterleavedBatch_bufferSizeExt",       {"hipsparseCgpsvInterleavedBatch_bufferSizeExt",       "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED}},
   {"cusparseZgpsvInterleavedBatch_bufferSizeExt",       {"hipsparseZgpsvInterleavedBatch_bufferSizeExt",       "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED}},
 
-  // NOTE: rocsparse_(s|d|c|z)gpsv_interleaved_batch have an additional parameter rocsparse_int batch_stride
-  {"cusparseSgpsvInterleavedBatch",                     {"hipsparseSgpsvInterleavedBatch",                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED}},
-  {"cusparseDgpsvInterleavedBatch",                     {"hipsparseDgpsvInterleavedBatch",                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED}},
-  {"cusparseCgpsvInterleavedBatch",                     {"hipsparseCgpsvInterleavedBatch",                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED}},
-  {"cusparseZgpsvInterleavedBatch",                     {"hipsparseZgpsvInterleavedBatch",                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED}},
+  {"cusparseSgpsvInterleavedBatch",                     {"hipsparseSgpsvInterleavedBatch",                     "rocsparse_sgpsv_interleaved_batch",                                CONV_LIB_FUNC, API_SPARSE, 12}},
+  {"cusparseDgpsvInterleavedBatch",                     {"hipsparseDgpsvInterleavedBatch",                     "rocsparse_dgpsv_interleaved_batch",                                CONV_LIB_FUNC, API_SPARSE, 12}},
+  {"cusparseCgpsvInterleavedBatch",                     {"hipsparseCgpsvInterleavedBatch",                     "rocsparse_cgpsv_interleaved_batch",                                CONV_LIB_FUNC, API_SPARSE, 12}},
+  {"cusparseZgpsvInterleavedBatch",                     {"hipsparseZgpsvInterleavedBatch",                     "rocsparse_zgpsv_interleaved_batch",                                CONV_LIB_FUNC, API_SPARSE, 12}},
 
   // 13. cuSPARSE Matrix Reorderings Reference
   {"cusparseScsrcolor",                                 {"hipsparseScsrcolor",                                 "rocsparse_scsrcolor",                                              CONV_LIB_FUNC, API_SPARSE, 13, CUDA_DEPRECATED}},
@@ -2133,6 +2135,10 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_FUNCTION_VER_MAP {
   {"rocsparse_cnnz",                                     {HIP_3020, HIP_0,    HIP_0   }},
   {"rocsparse_dnnz",                                     {HIP_3020, HIP_0,    HIP_0   }},
   {"rocsparse_snnz",                                     {HIP_3020, HIP_0,    HIP_0   }},
+  {"rocsparse_zgpsv_interleaved_batch",                  {HIP_5010, HIP_0,    HIP_0   }},
+  {"rocsparse_cgpsv_interleaved_batch",                  {HIP_5010, HIP_0,    HIP_0   }},
+  {"rocsparse_dgpsv_interleaved_batch",                  {HIP_5010, HIP_0,    HIP_0   }},
+  {"rocsparse_sgpsv_interleaved_batch",                  {HIP_5010, HIP_0,    HIP_0   }},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_SPARSE_API_SECTION_MAP {
