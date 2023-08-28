@@ -82,6 +82,10 @@ const std::string sCudnnSoftmaxBackward = "cudnnSoftmaxBackward";
 const std::string sCudnnConvolutionForward = "cudnnConvolutionForward";
 const std::string sCudnnConvolutionBackwardData = "cudnnConvolutionBackwardData";
 const std::string sCudnnRNNBackwardWeights = "cudnnRNNBackwardWeights";
+const std::string sCusparseZgpsvInterleavedBatch = "cusparseZgpsvInterleavedBatch";
+const std::string sCusparseCgpsvInterleavedBatch = "cusparseCgpsvInterleavedBatch";
+const std::string sCusparseDgpsvInterleavedBatch = "cusparseDgpsvInterleavedBatch";
+const std::string sCusparseSgpsvInterleavedBatch = "cusparseSgpsvInterleavedBatch";
 // CUDA_OVERLOADED
 const std::string sCudaEventCreate = "cudaEventCreate";
 const std::string sCudaGraphInstantiate = "cudaGraphInstantiate";
@@ -104,6 +108,7 @@ std::string getCastType(hipify::CastTypes c) {
     case e_int64_t: return s_int64_t;
     case e_remove_argument: return "";
     case e_add_const_argument: return "";
+    case e_add_var_argument: return "";
     case e_move_argument: return "";
     default: return "";
   }
@@ -379,6 +384,42 @@ std::map<std::string, ArgCastStruct> FuncArgCasts {
       },
       true,
       true
+    }
+  },
+  {sCusparseZgpsvInterleavedBatch,
+    {
+      {
+        {9, {e_add_var_argument, cw_None, "", 10}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseCgpsvInterleavedBatch,
+    {
+      {
+        {9, {e_add_var_argument, cw_None, "", 10}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseDgpsvInterleavedBatch,
+    {
+      {
+        {9, {e_add_var_argument, cw_None, "", 10}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseSgpsvInterleavedBatch,
+    {
+      {
+        {9, {e_add_var_argument, cw_None, "", 10}}
+      },
+      true,
+      false
     }
   },
 };
@@ -857,20 +898,20 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
           std::string sArg;
           clang::SmallString<40> dst_XStr;
           llvm::raw_svector_ostream dst_OS(dst_XStr);
-          if (c.second.numberToMove > 1) {
-            if ((argNum + c.second.numberToMove - 1) >= call->getNumArgs())
+          if (c.second.numberToMoveOrCopy > 1) {
+            if ((argNum + c.second.numberToMoveOrCopy - 1) >= call->getNumArgs())
               continue;
-            sr = call->getArg(argNum + c.second.numberToMove - 1)->getSourceRange();
+            sr = call->getArg(argNum + c.second.numberToMoveOrCopy - 1)->getSourceRange();
             sr.setBegin(call->getArg(argNum)->getBeginLoc());
           }
           sArg = readSourceText(*SM, sr).str();
-          if (c.second.moveTo < call->getNumArgs())
+          if (c.second.moveOrCopyTo < call->getNumArgs())
             dst_OS << sArg << ", ";
           else
             dst_OS << ", " << sArg;
           clang::SourceLocation dst_s;
-          if (c.second.moveTo < call->getNumArgs())
-            dst_s = call->getArg(c.second.moveTo)->getBeginLoc();
+          if (c.second.moveOrCopyTo < call->getNumArgs())
+            dst_s = call->getArg(c.second.moveOrCopyTo)->getBeginLoc();
           else
             dst_s = call->getEndLoc();
           ct::Replacement dst_Rep(*SM, dst_s, 0, dst_OS.str());
@@ -878,7 +919,7 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
           insertReplacement(dst_Rep, dst_fullSL);
           OS << "";
           if (argNum < call->getNumArgs())
-            e = call->getArg(argNum + c.second.numberToMove)->getBeginLoc();
+            e = call->getArg(argNum + c.second.numberToMoveOrCopy)->getBeginLoc();
           else
             e = call->getEndLoc();
           length = SM->getCharacterData(e) - SM->getCharacterData(s);
@@ -890,6 +931,23 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
             OS << c.second.constValToAdd << ", ";
           else
             OS << ", " << c.second.constValToAdd;
+          break;
+        }
+        case e_add_var_argument:
+        {
+          if (argNum >= call->getNumArgs())
+            continue;
+          sr = call->getArg(argNum)->getSourceRange();
+          sr.setBegin(call->getArg(argNum)->getBeginLoc());
+          std::string sArg = readSourceText(*SM, sr).str();
+          if (c.second.moveOrCopyTo < call->getNumArgs()) {
+            OS << sArg << ", ";
+            s = call->getArg(c.second.moveOrCopyTo)->getBeginLoc();
+          }
+          else {
+            OS << ", " << sArg;
+            s = call->getEndLoc();
+          }
           break;
         }
         default:
@@ -1065,7 +1123,11 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
             sCudnnSoftmaxBackward,
             sCudnnConvolutionForward,
             sCudnnConvolutionBackwardData,
-            sCudnnRNNBackwardWeights
+            sCudnnRNNBackwardWeights,
+            sCusparseZgpsvInterleavedBatch,
+            sCusparseCgpsvInterleavedBatch,
+            sCusparseDgpsvInterleavedBatch,
+            sCusparseSgpsvInterleavedBatch
           )
         )
       )

@@ -489,7 +489,7 @@
 |`cusparseCcsrilu02_bufferSize`| |12.2| |`hipsparseCcsrilu02_bufferSize`|3.1.0| | | | | | | | |
 |`cusparseCcsrilu02_bufferSizeExt`| |12.2| |`hipsparseCcsrilu02_bufferSizeExt`|3.1.0| | | | | | | | |
 |`cusparseCcsrilu02_numericBoost`| |12.2| |`hipsparseCcsrilu02_numericBoost`|3.10.0| | | | | | | | |
-|`cusparseCgpsvInterleavedBatch`|9.2| | |`hipsparseCgpsvInterleavedBatch`|5.1.0| | | | | | | | |
+|`cusparseCgpsvInterleavedBatch`|9.2| | |`hipsparseCgpsvInterleavedBatch`|5.1.0| | | |`rocsparse_cgpsv_interleaved_batch`|5.1.0| | | |
 |`cusparseCgpsvInterleavedBatch_bufferSizeExt`|9.2| | |`hipsparseCgpsvInterleavedBatch_bufferSizeExt`|5.1.0| | | | | | | | |
 |`cusparseCgtsv`| |10.2|11.0| | | | | | | | | | |
 |`cusparseCgtsv2`|9.0| | |`hipsparseCgtsv2`|4.3.0| | | | | | | | |
@@ -523,7 +523,7 @@
 |`cusparseDcsrilu02_bufferSize`| |12.2| |`hipsparseDcsrilu02_bufferSize`|1.9.2| | | | | | | | |
 |`cusparseDcsrilu02_bufferSizeExt`| |12.2| |`hipsparseDcsrilu02_bufferSizeExt`|1.9.2| | | | | | | | |
 |`cusparseDcsrilu02_numericBoost`| |12.2| |`hipsparseDcsrilu02_numericBoost`|3.10.0| | | | | | | | |
-|`cusparseDgpsvInterleavedBatch`|9.2| | |`hipsparseDgpsvInterleavedBatch`|5.1.0| | | | | | | | |
+|`cusparseDgpsvInterleavedBatch`|9.2| | |`hipsparseDgpsvInterleavedBatch`|5.1.0| | | |`rocsparse_dgpsv_interleaved_batch`|5.1.0| | | |
 |`cusparseDgpsvInterleavedBatch_bufferSizeExt`|9.2| | |`hipsparseDgpsvInterleavedBatch_bufferSizeExt`|5.1.0| | | | | | | | |
 |`cusparseDgtsv`| |10.2|11.0| | | | | | | | | | |
 |`cusparseDgtsv2`|9.0| | |`hipsparseDgtsv2`|4.3.0| | | | | | | | |
@@ -556,7 +556,7 @@
 |`cusparseScsrilu02_bufferSize`| |12.2| |`hipsparseScsrilu02_bufferSize`|1.9.2| | | | | | | | |
 |`cusparseScsrilu02_bufferSizeExt`| |12.2| |`hipsparseScsrilu02_bufferSizeExt`|1.9.2| | | | | | | | |
 |`cusparseScsrilu02_numericBoost`| |12.2| |`hipsparseScsrilu02_numericBoost`|3.10.0| | | | | | | | |
-|`cusparseSgpsvInterleavedBatch`|9.2| | |`hipsparseSgpsvInterleavedBatch`|5.1.0| | | | | | | | |
+|`cusparseSgpsvInterleavedBatch`|9.2| | |`hipsparseSgpsvInterleavedBatch`|5.1.0| | | |`rocsparse_sgpsv_interleaved_batch`|5.1.0| | | |
 |`cusparseSgpsvInterleavedBatch_bufferSizeExt`|9.2| | |`hipsparseSgpsvInterleavedBatch_bufferSizeExt`|5.1.0| | | | | | | | |
 |`cusparseSgtsv`| |10.2|11.0| | | | | | | | | | |
 |`cusparseSgtsv2`|9.0| | |`hipsparseSgtsv2`|4.3.0| | | | | | | | |
@@ -593,7 +593,7 @@
 |`cusparseZcsrilu02_bufferSize`| |12.2| |`hipsparseZcsrilu02_bufferSize`|3.1.0| | | | | | | | |
 |`cusparseZcsrilu02_bufferSizeExt`| |12.2| |`hipsparseZcsrilu02_bufferSizeExt`|3.1.0| | | | | | | | |
 |`cusparseZcsrilu02_numericBoost`| |12.2| |`hipsparseZcsrilu02_numericBoost`|3.10.0| | | | | | | | |
-|`cusparseZgpsvInterleavedBatch`|9.2| | |`hipsparseZgpsvInterleavedBatch`|5.1.0| | | | | | | | |
+|`cusparseZgpsvInterleavedBatch`|9.2| | |`hipsparseZgpsvInterleavedBatch`|5.1.0| | | |`rocsparse_zgpsv_interleaved_batch`|5.1.0| | | |
 |`cusparseZgpsvInterleavedBatch_bufferSizeExt`|9.2| | |`hipsparseZgpsvInterleavedBatch_bufferSizeExt`|5.1.0| | | | | | | | |
 |`cusparseZgtsv`| |10.2|11.0| | | | | | | | | | |
 |`cusparseZgtsv2`|9.0| | |`hipsparseZgtsv2`|4.3.0| | | | | | | | |

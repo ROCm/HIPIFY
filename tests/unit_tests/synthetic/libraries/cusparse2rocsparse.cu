@@ -230,19 +230,32 @@ int main() {
   float fbscVal = 0.f;
   double dA = 0.f;
   float fA = 0.f;
+  int algo = 0;
+  double dds = 0.f;
+  double ddl = 0.f;
+  double dd = 0.f;
+  double ddu = 0.f;
+  double ddw = 0.f;
+  double dx = 0.f;
+  float fds = 0.f;
+  float fdl = 0.f;
+  float fd = 0.f;
+  float fdu = 0.f;
+  float fdw = 0.f;
+  float fx = 0.f;
 
   // CHECK: rocsparse_mat_info prune_info;
   pruneInfo_t prune_info;
 
   // TODO: should be rocsparse_double_complex
   // TODO: add to TypeOverloads cuDoubleComplex -> rocsparse_double_complex under a new option --sparse
-  // CHECK: rocblas_double_complex dcomplex, dcomplexA, dComplexbsrSortedValA, dComplexbsrSortedValC, dComplexcsrSortedValA, dComplexcsrSortedValC, dcomplextol, dComplexbsrSortedVal, dComplexbscVal, dComplexcscSortedVal;
-  cuDoubleComplex dcomplex, dcomplexA, dComplexbsrSortedValA, dComplexbsrSortedValC, dComplexcsrSortedValA, dComplexcsrSortedValC, dcomplextol, dComplexbsrSortedVal, dComplexbscVal, dComplexcscSortedVal;
+  // CHECK: rocblas_double_complex dcomplex, dcomplexA, dComplexbsrSortedValA, dComplexbsrSortedValC, dComplexcsrSortedValA, dComplexcsrSortedValC, dcomplextol, dComplexbsrSortedVal, dComplexbscVal, dComplexcscSortedVal, dcomplexds, dcomplexdl, dcomplexd, dcomplexdu, dcomplexdw, dcomplexx;
+  cuDoubleComplex dcomplex, dcomplexA, dComplexbsrSortedValA, dComplexbsrSortedValC, dComplexcsrSortedValA, dComplexcsrSortedValC, dcomplextol, dComplexbsrSortedVal, dComplexbscVal, dComplexcscSortedVal, dcomplexds, dcomplexdl, dcomplexd, dcomplexdu, dcomplexdw, dcomplexx;
 
   // TODO: should be rocsparse_double_complex
   // TODO: add to TypeOverloads cuComplex -> rocsparse_float_complex under a new option --sparse
-  // CHECK: rocblas_float_complex complex, complexA, complexbsrValA, complexbsrSortedValC, complexcsrSortedValA, complexcsrSortedValC, complextol, complexbsrSortedVal, complexbscVal, complexcscSortedVal;
-  cuComplex complex, complexA, complexbsrValA, complexbsrSortedValC, complexcsrSortedValA, complexcsrSortedValC, complextol, complexbsrSortedVal, complexbscVal, complexcscSortedVal;
+  // CHECK: rocblas_float_complex complex, complexA, complexbsrValA, complexbsrSortedValC, complexcsrSortedValA, complexcsrSortedValC, complextol, complexbsrSortedVal, complexbscVal, complexcscSortedVal, complexds, complexdl, complexd, complexdu, complexdw, complexx;
+  cuComplex complex, complexA, complexbsrValA, complexbsrSortedValC, complexcsrSortedValA, complexcsrSortedValC, complextol, complexbsrSortedVal, complexbscVal, complexcscSortedVal, complexds, complexdl, complexd, complexdu, complexdw, complexx;
 
   // CHECK: rocsparse_operation opA, opB;
   cusparseOperation_t opA, opB;
@@ -802,6 +815,32 @@ int main() {
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_sprune_dense2csr_buffer_size(rocsparse_handle handle, rocsparse_int m, rocsparse_int n, const float* A, rocsparse_int lda, const float* threshold, const rocsparse_mat_descr descr, const float* csr_val, const rocsparse_int* csr_row_ptr, const rocsparse_int* csr_col_ind, size_t* buffer_size);
   // CHECK: status_t = rocsparse_sprune_dense2csr_buffer_size(handle_t, m, n, &fA, lda, &fthreshold, matDescr_C, &fcsrSortedValC, &csrRowPtrC, &csrColIndC, &bufferSize);
   status_t = cusparseSpruneDense2csr_bufferSizeExt(handle_t, m, n, &fA, lda, &fthreshold, matDescr_C, &fcsrSortedValC, &csrRowPtrC, &csrColIndC, &bufferSize);
+#endif
+
+#if CUDA_VERSION >= 9020
+  // NOTE: An additional argument rocsparse_int batch_stride is added for the rocsparse_zgpsv_interleaved_batch function call: the argument is copied from the previous one: rocsparse_int batch_count. It is how hipsparseZgpsvInterleavedBatch calls rocsparse_zgpsv_interleaved_batch in its implementation.
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseZgpsvInterleavedBatch(cusparseHandle_t handle, int algo, int m, cuDoubleComplex* ds, cuDoubleComplex* dl, cuDoubleComplex* d, cuDoubleComplex* du, cuDoubleComplex* dw, cuDoubleComplex* x, int batchCount, void* pBuffer);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_zgpsv_interleaved_batch(rocsparse_handle handle, rocsparse_gpsv_interleaved_alg alg, rocsparse_int m, rocsparse_double_complex* ds, rocsparse_double_complex* dl, rocsparse_double_complex* d, rocsparse_double_complex* du, rocsparse_double_complex* dw, rocsparse_double_complex* x, rocsparse_int batch_count, rocsparse_int batch_stride, void* temp_buffer);
+  // CHECK: status_t = rocsparse_zgpsv_interleaved_batch(handle_t, algo, m, &dcomplexds, &dcomplexdl, &dcomplexd, &dcomplexdu, &dcomplexdw, &dcomplexx, batchCount, batchCount, pBuffer);
+  status_t = cusparseZgpsvInterleavedBatch(handle_t, algo, m, &dcomplexds, &dcomplexdl, &dcomplexd, &dcomplexdu, &dcomplexdw, &dcomplexx, batchCount, pBuffer);
+
+  // NOTE: An additional argument rocsparse_int batch_stride is added for the rocsparse_cgpsv_interleaved_batch function call: the argument is copied from the previous one: rocsparse_int batch_count. It is how hipsparseCgpsvInterleavedBatch calls rocsparse_cgpsv_interleaved_batch in its implementation.
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCgpsvInterleavedBatch(cusparseHandle_t handle, int algo, int m, cuComplex* ds, cuComplex* dl, cuComplex* d, cuComplex* du, cuComplex* dw, cuComplex* x, int batchCount, void* pBuffer);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_cgpsv_interleaved_batch(rocsparse_handle handle, rocsparse_gpsv_interleaved_alg alg, rocsparse_int m, rocsparse_float_complex* ds, rocsparse_float_complex* dl, rocsparse_float_complex* d, rocsparse_float_complex* du, rocsparse_float_complex* dw, rocsparse_float_complex* x, rocsparse_int batch_count, rocsparse_int batch_stride, void* temp_buffer);
+  // CHECK: status_t = rocsparse_cgpsv_interleaved_batch(handle_t, algo, m, &complexds, &complexdl, &complexd, &complexdu, &complexdw, &complexx, batchCount, batchCount, pBuffer);
+  status_t = cusparseCgpsvInterleavedBatch(handle_t, algo, m, &complexds, &complexdl, &complexd, &complexdu, &complexdw, &complexx, batchCount, pBuffer);
+
+  // NOTE: An additional argument rocsparse_int batch_stride is added for the rocsparse_dgpsv_interleaved_batch function call: the argument is copied from the previous one: rocsparse_int batch_count. It is how hipsparseDgpsvInterleavedBatch calls rocsparse_dgpsv_interleaved_batch in its implementation.
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDgpsvInterleavedBatch(cusparseHandle_t handle, int algo, int m, double* ds, double* dl, double* d, double* du, double* dw, double* x, int batchCount, void* pBuffer);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_dgpsv_interleaved_batch(rocsparse_handle handle, rocsparse_gpsv_interleaved_alg alg, rocsparse_int m, double* ds, double* dl, double* d, double* du, double* dw, double* x, rocsparse_int batch_count, rocsparse_int batch_stride, void* temp_buffer);
+  // CHECK: status_t = rocsparse_dgpsv_interleaved_batch(handle_t, algo, m, &dds, &ddl, &dd, &ddu, &ddw, &dx, batchCount, batchCount, pBuffer);
+  status_t = cusparseDgpsvInterleavedBatch(handle_t, algo, m, &dds, &ddl, &dd, &ddu, &ddw, &dx, batchCount, pBuffer);
+
+  // NOTE: An additional argument rocsparse_int batch_stride is added for the rocsparse_sgpsv_interleaved_batch function call: the argument is copied from the previous one: rocsparse_int batch_count. It is how hipsparseSgpsvInterleavedBatch calls rocsparse_sgpsv_interleaved_batch in its implementation.
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSgpsvInterleavedBatch(cusparseHandle_t handle, int algo, int m, float* ds, float* dl, float* d, float* du, float* dw, float* x, int batchCount, void* pBuffer);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_sgpsv_interleaved_batch(rocsparse_handle handle, rocsparse_gpsv_interleaved_alg alg, rocsparse_int m, float* ds, float* dl, float* d, float* du, float* dw, float* x, rocsparse_int batch_count, rocsparse_int batch_stride, void* temp_buffer);
+  // CHECK: status_t = rocsparse_sgpsv_interleaved_batch(handle_t, algo, m, &fds, &fdl, &fd, &fdu, &fdw, &fx, batchCount, batchCount, pBuffer);
+  status_t = cusparseSgpsvInterleavedBatch(handle_t, algo, m, &fds, &fdl, &fd, &fdu, &fdw, &fx, batchCount, pBuffer);
 #endif
 
 #if (CUDA_VERSION >= 10010 && CUDA_VERSION < 11000 && !defined(_WIN32)) || CUDA_VERSION >= 11000
