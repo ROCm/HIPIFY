@@ -482,10 +482,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   {"cusparseZgtsvInterleavedBatch",                     {"hipsparseZgtsvInterleavedBatch",                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED}},
 
   // 12.5. Batched Pentadiagonal Solve
-  {"cusparseSgpsvInterleavedBatch_bufferSizeExt",       {"hipsparseSgpsvInterleavedBatch_bufferSizeExt",       "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED}},
-  {"cusparseDgpsvInterleavedBatch_bufferSizeExt",       {"hipsparseDgpsvInterleavedBatch_bufferSizeExt",       "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED}},
-  {"cusparseCgpsvInterleavedBatch_bufferSizeExt",       {"hipsparseCgpsvInterleavedBatch_bufferSizeExt",       "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED}},
-  {"cusparseZgpsvInterleavedBatch_bufferSizeExt",       {"hipsparseZgpsvInterleavedBatch_bufferSizeExt",       "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED}},
+  {"cusparseSgpsvInterleavedBatch_bufferSizeExt",       {"hipsparseSgpsvInterleavedBatch_bufferSizeExt",       "rocsparse_sgpsv_interleaved_batch_buffer_size",                    CONV_LIB_FUNC, API_SPARSE, 12}},
+  {"cusparseDgpsvInterleavedBatch_bufferSizeExt",       {"hipsparseDgpsvInterleavedBatch_bufferSizeExt",       "rocsparse_dgpsv_interleaved_batch_buffer_size",                    CONV_LIB_FUNC, API_SPARSE, 12}},
+  {"cusparseCgpsvInterleavedBatch_bufferSizeExt",       {"hipsparseCgpsvInterleavedBatch_bufferSizeExt",       "rocsparse_cgpsv_interleaved_batch_buffer_size",                    CONV_LIB_FUNC, API_SPARSE, 12}},
+  {"cusparseZgpsvInterleavedBatch_bufferSizeExt",       {"hipsparseZgpsvInterleavedBatch_bufferSizeExt",       "rocsparse_zgpsv_interleaved_batch_buffer_size",                    CONV_LIB_FUNC, API_SPARSE, 12}},
 
   {"cusparseSgpsvInterleavedBatch",                     {"hipsparseSgpsvInterleavedBatch",                     "rocsparse_sgpsv_interleaved_batch",                                CONV_LIB_FUNC, API_SPARSE, 12}},
   {"cusparseDgpsvInterleavedBatch",                     {"hipsparseDgpsvInterleavedBatch",                     "rocsparse_dgpsv_interleaved_batch",                                CONV_LIB_FUNC, API_SPARSE, 12}},
@@ -2139,6 +2139,10 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_FUNCTION_VER_MAP {
   {"rocsparse_cgpsv_interleaved_batch",                  {HIP_5010, HIP_0,    HIP_0   }},
   {"rocsparse_dgpsv_interleaved_batch",                  {HIP_5010, HIP_0,    HIP_0   }},
   {"rocsparse_sgpsv_interleaved_batch",                  {HIP_5010, HIP_0,    HIP_0   }},
+  {"rocsparse_zgpsv_interleaved_batch_buffer_size",      {HIP_5010, HIP_0,    HIP_0   }},
+  {"rocsparse_cgpsv_interleaved_batch_buffer_size",      {HIP_5010, HIP_0,    HIP_0   }},
+  {"rocsparse_dgpsv_interleaved_batch_buffer_size",      {HIP_5010, HIP_0,    HIP_0   }},
+  {"rocsparse_sgpsv_interleaved_batch_buffer_size",      {HIP_5010, HIP_0,    HIP_0   }},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_SPARSE_API_SECTION_MAP {

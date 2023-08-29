@@ -490,7 +490,7 @@
 |`cusparseCcsrilu02_bufferSizeExt`| |12.2| | | | | | |
 |`cusparseCcsrilu02_numericBoost`| |12.2| | | | | | |
 |`cusparseCgpsvInterleavedBatch`|9.2| | |`rocsparse_cgpsv_interleaved_batch`|5.1.0| | | |
-|`cusparseCgpsvInterleavedBatch_bufferSizeExt`|9.2| | | | | | | |
+|`cusparseCgpsvInterleavedBatch_bufferSizeExt`|9.2| | |`rocsparse_cgpsv_interleaved_batch_buffer_size`|5.1.0| | | |
 |`cusparseCgtsv`| |10.2|11.0| | | | | |
 |`cusparseCgtsv2`|9.0| | | | | | | |
 |`cusparseCgtsv2StridedBatch`| | | | | | | | |
@@ -524,7 +524,7 @@
 |`cusparseDcsrilu02_bufferSizeExt`| |12.2| | | | | | |
 |`cusparseDcsrilu02_numericBoost`| |12.2| | | | | | |
 |`cusparseDgpsvInterleavedBatch`|9.2| | |`rocsparse_dgpsv_interleaved_batch`|5.1.0| | | |
-|`cusparseDgpsvInterleavedBatch_bufferSizeExt`|9.2| | | | | | | |
+|`cusparseDgpsvInterleavedBatch_bufferSizeExt`|9.2| | |`rocsparse_dgpsv_interleaved_batch_buffer_size`|5.1.0| | | |
 |`cusparseDgtsv`| |10.2|11.0| | | | | |
 |`cusparseDgtsv2`|9.0| | | | | | | |
 |`cusparseDgtsv2StridedBatch`| | | | | | | | |
@@ -557,7 +557,7 @@
 |`cusparseScsrilu02_bufferSizeExt`| |12.2| | | | | | |
 |`cusparseScsrilu02_numericBoost`| |12.2| | | | | | |
 |`cusparseSgpsvInterleavedBatch`|9.2| | |`rocsparse_sgpsv_interleaved_batch`|5.1.0| | | |
-|`cusparseSgpsvInterleavedBatch_bufferSizeExt`|9.2| | | | | | | |
+|`cusparseSgpsvInterleavedBatch_bufferSizeExt`|9.2| | |`rocsparse_sgpsv_interleaved_batch_buffer_size`|5.1.0| | | |
 |`cusparseSgtsv`| |10.2|11.0| | | | | |
 |`cusparseSgtsv2`|9.0| | | | | | | |
 |`cusparseSgtsv2StridedBatch`|9.0| | | | | | | |
@@ -594,7 +594,7 @@
 |`cusparseZcsrilu02_bufferSizeExt`| |12.2| | | | | | |
 |`cusparseZcsrilu02_numericBoost`| |12.2| | | | | | |
 |`cusparseZgpsvInterleavedBatch`|9.2| | |`rocsparse_zgpsv_interleaved_batch`|5.1.0| | | |
-|`cusparseZgpsvInterleavedBatch_bufferSizeExt`|9.2| | | | | | | |
+|`cusparseZgpsvInterleavedBatch_bufferSizeExt`|9.2| | |`rocsparse_zgpsv_interleaved_batch_buffer_size`|5.1.0| | | |
 |`cusparseZgtsv`| |10.2|11.0| | | | | |
 |`cusparseZgtsv2`|9.0| | | | | | | |
 |`cusparseZgtsv2StridedBatch`| | | | | | | | |
