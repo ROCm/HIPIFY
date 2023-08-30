@@ -4,7 +4,26 @@ project(hipify-clang)
 
 include(GNUInstallDirs)
 
+option(HIPIFY_CLANG_TESTS "Build HIPIFY tests, if lit is installed" OFF)
+option(HIPIFY_CLANG_TESTS_ONLY "Build HIPIFY tests only, if lit is installed and hipify-clang binary is already produced" OFF)
 option(HIPIFY_INCLUDE_IN_HIP_SDK "Include HIPIFY in HIP SDK" OFF)
+
+if(HIPIFY_CLANG_TESTS OR HIPIFY_CLANG_TESTS_ONLY)
+  set(HIPIFY_TEST "ON")
+else()
+  set(HIPIFY_TEST "OFF")
+endif()
+
+if(HIPIFY_CLANG_TESTS_ONLY)
+  set(HIPIFY_BUILD "OFF")
+else()
+  set(HIPIFY_BUILD "ON")
+endif()
+
+message(STATUS "HIPIFY config:")
+message(STATUS "   - Build hipify-clang : ${HIPIFY_BUILD}")
+message(STATUS "   - Test  hipify-clang : ${HIPIFY_TEST}")
+message(STATUS "   - Is part of HIP SDK : ${HIPIFY_INCLUDE_IN_HIP_SDK}")
 
 if(HIPIFY_INCLUDE_IN_HIP_SDK)
   if(NOT WIN32)
@@ -17,14 +36,11 @@ else()
   find_package(LLVM REQUIRED CONFIG PATHS ${CMAKE_PREFIX_PATH})
 
   message(STATUS "Found LLVM ${LLVM_PACKAGE_VERSION}:")
-  message(STATUS "   - CMake module path:  ${LLVM_CMAKE_DIR}")
-  message(STATUS "   - Clang include path: ${CLANG_INCLUDE_DIRS}")
-  message(STATUS "   - LLVM Include path:  ${LLVM_INCLUDE_DIRS}")
-  message(STATUS "   - Binary path      :  ${LLVM_TOOLS_BINARY_DIR}")
+  message(STATUS "   - CMake module path  : ${LLVM_CMAKE_DIR}")
+  message(STATUS "   - Clang include path : ${CLANG_INCLUDE_DIRS}")
+  message(STATUS "   - LLVM Include path  : ${LLVM_INCLUDE_DIRS}")
+  message(STATUS "   - Binary path        : ${LLVM_TOOLS_BINARY_DIR}")
 endif()
-
-option(HIPIFY_CLANG_TESTS "Build HIPIFY tests, if lit is installed" OFF)
-option(HIPIFY_CLANG_TESTS_ONLY "Build HIPIFY tests only, if lit is installed and hipify-clang binary is already produced" OFF)
 
 list(APPEND CMAKE_MODULE_PATH ${LLVM_CMAKE_DIR})
 include(AddLLVM)
@@ -202,7 +218,7 @@ install(
     # Set RPATH for the binary.
     set_target_properties(hipify-clang PROPERTIES LINK_FLAGS "-Wl,--enable-new-dtags -Wl,--rpath,$ORIGIN/../lib" )
 
-    option(FILE_REORG_BACKWARD_COMPATIBILITY "Enable File Reorg with backward compatibility" ON)
+    option(FILE_REORG_BACKWARD_COMPATIBILITY "Enable File Reorg with backward compatibility" OFF)
 
     if(FILE_REORG_BACKWARD_COMPATIBILITY)
       include(hipify-backward-compat.cmake)
@@ -227,7 +243,14 @@ install(
 endif() # if (NOT HIPIFY_CLANG_TESTS_ONLY)
 
 if(HIPIFY_CLANG_TESTS OR HIPIFY_CLANG_TESTS_ONLY)
-  find_package(PythonInterp 2.7 REQUIRED)
+
+  message(STATUS "---- The below configuring for hipify-clang testing only ----")
+
+  if(${CMAKE_VERSION} VERSION_LESS "3.27.0")
+    find_package(PythonInterp 2.7 REQUIRED)
+  else()
+    find_package(Python 2.7...3.12 REQUIRED)
+  endif()
 
   function (require_program PROGRAM_NAME)
     find_program(FOUND_${PROGRAM_NAME} ${PROGRAM_NAME})
@@ -241,7 +264,54 @@ if(HIPIFY_CLANG_TESTS OR HIPIFY_CLANG_TESTS_ONLY)
   require_program(lit)
   require_program(FileCheck)
 
-  find_package(CUDA REQUIRED)
+  set(CUDA_TOOLKIT_ROOT_DIR OFF CACHE PATH "Path to CUDA Toolkit to use in hipify-clang unit testing")
+  set(CUDA_SDK_ROOT_DIR OFF CACHE PATH "Path to CUDA Toolkit Samples")
+  set(CUDA_DNN_ROOT_DIR OFF CACHE PATH "Path to cuDNN")
+  set(CUDA_CUB_ROOT_DIR OFF CACHE PATH "Path to CUB")
+
+  if(DEFINED CUDA_TOOLKIT_ROOT_DIR AND NOT CUDA_TOOLKIT_ROOT_DIR MATCHES "OFF")
+    if(NOT DEFINED CUDAToolkit_ROOT OR CUDAToolkit_ROOT MATCHES "OFF")
+      set(CUDAToolkit_ROOT "${CUDA_TOOLKIT_ROOT_DIR}")
+    endif()
+  else()
+    if(DEFINED CUDAToolkit_ROOT AND NOT CUDAToolkit_ROOT MATCHES "OFF")
+      set(CUDA_TOOLKIT_ROOT_DIR "${CUDAToolkit_ROOT}")
+    endif()
+  endif()
+
+  message(STATUS "Initial CUDA to configure:")
+  message(STATUS "   - CUDA Toolkit path  : ${CUDA_TOOLKIT_ROOT_DIR}")
+  message(STATUS "   - CUDA Samples path  : ${CUDA_SDK_ROOT_DIR}")
+  message(STATUS "   - cuDNN path         : ${CUDA_DNN_ROOT_DIR}")
+  message(STATUS "   - CUB path           : ${CUDA_CUB_ROOT_DIR}")
+
+  if(${CMAKE_VERSION} VERSION_LESS "3.27.0")
+    find_package(CUDA REQUIRED)
+    set(CUDA_VERSION_FULL     "${CUDA_VERSION}")
+  else()
+    find_package(CUDAToolkit REQUIRED)
+    set(CUDA_VERSION_MAJOR    "${CUDAToolkit_VERSION_MAJOR}")
+    set(CUDA_VERSION_MINOR    "${CUDAToolkit_VERSION_MINOR}")
+    set(CUDA_VERSION_PATCH    "${CUDAToolkit_VERSION_PATCH}")
+    set(CUDA_VERSION_FULL     "${CUDAToolkit_VERSION}")
+    set(CUDA_VERSION          "${CUDAToolkit_VERSION_MAJOR}.${CUDAToolkit_VERSION_MINOR}")
+    set(CUDA_TOOLKIT_ROOT_DIR "${CUDAToolkit_LIBRARY_ROOT}")
+  endif()
+
+  if(WIN32 AND CUDA_VERSION VERSION_LESS "11.6" AND CUDA_SDK_ROOT_DIR STREQUAL "OFF" AND NOT CUDA_TOOLKIT_ROOT_DIR MATCHES "OFF")
+    set(NVCUDASAMPLES "NVCUDASAMPLES${CUDA_VERSION_MAJOR}_${CUDA_VERSION_MINOR}_ROOT")
+    if(DEFINED ENV{${NVCUDASAMPLES}})
+      set(CUDA_SDK_ROOT_DIR "$ENV{${NVCUDASAMPLES}}")
+      string(REPLACE "\\" "/" CUDA_SDK_ROOT_DIR ${CUDA_SDK_ROOT_DIR})
+    endif()
+  endif()
+
+  message(STATUS "Found CUDA config:")
+  message(STATUS "   - CUDA Toolkit path  : ${CUDA_TOOLKIT_ROOT_DIR}")
+  message(STATUS "   - CUDA Samples path  : ${CUDA_SDK_ROOT_DIR}")
+  message(STATUS "   - cuDNN path         : ${CUDA_DNN_ROOT_DIR}")
+  message(STATUS "   - CUB path           : ${CUDA_CUB_ROOT_DIR}")
+
   if((CUDA_VERSION VERSION_LESS "7.0") OR (LLVM_PACKAGE_VERSION VERSION_LESS "3.8") OR
      (CUDA_VERSION VERSION_GREATER "7.5" AND LLVM_PACKAGE_VERSION VERSION_LESS "4.0") OR
      (CUDA_VERSION VERSION_GREATER "8.0" AND LLVM_PACKAGE_VERSION VERSION_LESS "6.0") OR

@@ -90,9 +90,12 @@ GetOptions(
 $cuda_kernel_execution_syntax = 1;
 
 my %deprecated_funcs = (
+    "pruneInfo_t" => "12.2",
+    "pruneInfo" => "12.2",
     "nvrtcGetNVVMSize" => "12.0",
     "nvrtcGetNVVM" => "12.0",
     "cusparseZsctr" => "11.0",
+    "cusparseZnnz_compress" => "12.2",
     "cusparseZhybsv_solve" => "10.2",
     "cusparseZhybsv_analysis" => "10.2",
     "cusparseZhybmv" => "10.2",
@@ -110,6 +113,8 @@ my %deprecated_funcs = (
     "cusparseZdense2hyb" => "10.2",
     "cusparseZdense2csr" => "11.1",
     "cusparseZdense2csc" => "11.1",
+    "cusparseZcsru2csr_bufferSizeExt" => "12.2",
+    "cusparseZcsru2csr" => "12.2",
     "cusparseZcsrsv_solve" => "10.2",
     "cusparseZcsrsv_analysis" => "10.2",
     "cusparseZcsrsv2_solve" => "11.3",
@@ -125,27 +130,76 @@ my %deprecated_funcs = (
     "cusparseZcsrmv" => "10.2",
     "cusparseZcsrmm2" => "10.2",
     "cusparseZcsrmm" => "10.2",
+    "cusparseZcsrilu02_numericBoost" => "12.2",
+    "cusparseZcsrilu02_bufferSizeExt" => "12.2",
+    "cusparseZcsrilu02_bufferSize" => "12.2",
+    "cusparseZcsrilu02_analysis" => "12.2",
+    "cusparseZcsrilu02" => "12.2",
     "cusparseZcsrilu0" => "10.2",
+    "cusparseZcsric02_bufferSizeExt" => "12.2",
+    "cusparseZcsric02_bufferSize" => "12.2",
+    "cusparseZcsric02_analysis" => "12.2",
+    "cusparseZcsric02" => "12.2",
     "cusparseZcsric0" => "10.2",
     "cusparseZcsrgemm2_bufferSizeExt" => "11.0",
     "cusparseZcsrgemm2" => "11.0",
     "cusparseZcsrgemm" => "10.2",
     "cusparseZcsrgeam" => "10.2",
+    "cusparseZcsrcolor" => "12.2",
     "cusparseZcsr2hyb" => "10.2",
     "cusparseZcsr2dense" => "11.1",
+    "cusparseZcsr2csru" => "12.2",
+    "cusparseZcsr2csr_compress" => "12.2",
     "cusparseZcsr2csc" => "10.2",
     "cusparseZcsc2hyb" => "10.2",
     "cusparseZcsc2dense" => "11.1",
+    "cusparseZbsrxmv" => "12.2",
+    "cusparseZbsrsv2_solve" => "12.2",
+    "cusparseZbsrsv2_bufferSizeExt" => "12.2",
+    "cusparseZbsrsv2_bufferSize" => "12.2",
+    "cusparseZbsrsv2_analysis" => "12.2",
+    "cusparseZbsrsm2_solve" => "12.2",
+    "cusparseZbsrsm2_bufferSizeExt" => "12.2",
+    "cusparseZbsrsm2_bufferSize" => "12.2",
+    "cusparseZbsrsm2_analysis" => "12.2",
+    "cusparseZbsrilu02_numericBoost" => "12.2",
+    "cusparseZbsrilu02_bufferSizeExt" => "12.2",
+    "cusparseZbsrilu02_bufferSize" => "12.2",
+    "cusparseZbsrilu02_analysis" => "12.2",
+    "cusparseZbsrilu02" => "12.2",
+    "cusparseZbsric02_bufferSizeExt" => "12.2",
+    "cusparseZbsric02_bufferSize" => "12.2",
+    "cusparseZbsric02_analysis" => "12.2",
+    "cusparseZbsric02" => "12.2",
     "cusparseZaxpyi" => "11.0",
     "cusparseXcsrsv2_zeroPivot" => "11.3",
     "cusparseXcsrsm2_zeroPivot" => "11.3",
+    "cusparseXcsrilu02_zeroPivot" => "12.2",
+    "cusparseXcsric02_zeroPivot" => "12.2",
     "cusparseXcsrgemmNnz" => "10.2",
     "cusparseXcsrgemm2Nnz" => "11.0",
     "cusparseXcsrgeamNnz" => "10.2",
+    "cusparseXbsrsv2_zeroPivot" => "12.2",
+    "cusparseXbsrsm2_zeroPivot" => "12.2",
+    "cusparseXbsrilu02_zeroPivot" => "12.2",
     "cusparseSsctr" => "11.0",
     "cusparseSroti" => "11.0",
+    "cusparseSpruneDense2csr_bufferSizeExt" => "12.2",
+    "cusparseSpruneDense2csrNnzByPercentage" => "12.2",
+    "cusparseSpruneDense2csrNnz" => "12.2",
+    "cusparseSpruneDense2csrByPercentage_bufferSizeExt" => "12.2",
+    "cusparseSpruneDense2csrByPercentage" => "12.2",
+    "cusparseSpruneDense2csr" => "12.2",
+    "cusparseSpruneCsr2csr_bufferSizeExt" => "12.2",
+    "cusparseSpruneCsr2csrNnzByPercentage" => "12.2",
+    "cusparseSpruneCsr2csrNnz" => "12.2",
+    "cusparseSpruneCsr2csrByPercentage_bufferSizeExt" => "12.2",
+    "cusparseSpruneCsr2csrByPercentage" => "12.2",
+    "cusparseSpruneCsr2csr" => "12.2",
+    "cusparseSolvePolicy_t" => "12.2",
     "cusparseSolveAnalysisInfo_t" => "10.2",
     "cusparseSolveAnalysisInfo" => "10.2",
+    "cusparseSnnz_compress" => "12.2",
     "cusparseShybsv_solve" => "10.2",
     "cusparseShybsv_analysis" => "10.2",
     "cusparseShybmv" => "10.2",
@@ -162,6 +216,8 @@ my %deprecated_funcs = (
     "cusparseSdense2hyb" => "10.2",
     "cusparseSdense2csr" => "11.1",
     "cusparseSdense2csc" => "11.1",
+    "cusparseScsru2csr_bufferSizeExt" => "12.2",
+    "cusparseScsru2csr" => "12.2",
     "cusparseScsrsv_solve" => "10.2",
     "cusparseScsrsv_analysis" => "10.2",
     "cusparseScsrsv2_solve" => "11.3",
@@ -177,23 +233,79 @@ my %deprecated_funcs = (
     "cusparseScsrmv" => "10.2",
     "cusparseScsrmm2" => "10.2",
     "cusparseScsrmm" => "10.2",
+    "cusparseScsrilu02_numericBoost" => "12.2",
+    "cusparseScsrilu02_bufferSizeExt" => "12.2",
+    "cusparseScsrilu02_bufferSize" => "12.2",
+    "cusparseScsrilu02_analysis" => "12.2",
+    "cusparseScsrilu02" => "12.2",
     "cusparseScsrilu0" => "10.2",
+    "cusparseScsric02_bufferSizeExt" => "12.2",
+    "cusparseScsric02_bufferSize" => "12.2",
+    "cusparseScsric02_analysis" => "12.2",
+    "cusparseScsric02" => "12.2",
     "cusparseScsric0" => "10.2",
     "cusparseScsrgemm2_bufferSizeExt" => "11.0",
     "cusparseScsrgemm2" => "11.0",
     "cusparseScsrgemm" => "10.2",
     "cusparseScsrgeam" => "10.2",
+    "cusparseScsrcolor" => "12.2",
     "cusparseScsr2hyb" => "10.2",
     "cusparseScsr2dense" => "11.1",
+    "cusparseScsr2csru" => "12.2",
+    "cusparseScsr2csr_compress" => "12.2",
     "cusparseScsr2csc" => "10.2",
     "cusparseScsc2hyb" => "10.2",
     "cusparseScsc2dense" => "11.1",
+    "cusparseSbsrxmv" => "12.2",
+    "cusparseSbsrsv2_solve" => "12.2",
+    "cusparseSbsrsv2_bufferSizeExt" => "12.2",
+    "cusparseSbsrsv2_bufferSize" => "12.2",
+    "cusparseSbsrsv2_analysis" => "12.2",
+    "cusparseSbsrsm2_solve" => "12.2",
+    "cusparseSbsrsm2_bufferSizeExt" => "12.2",
+    "cusparseSbsrsm2_bufferSize" => "12.2",
+    "cusparseSbsrsm2_analysis" => "12.2",
+    "cusparseSbsrilu02_numericBoost" => "12.2",
+    "cusparseSbsrilu02_bufferSizeExt" => "12.2",
+    "cusparseSbsrilu02_bufferSize" => "12.2",
+    "cusparseSbsrilu02_analysis" => "12.2",
+    "cusparseSbsrilu02" => "12.2",
+    "cusparseSbsric02_bufferSizeExt" => "12.2",
+    "cusparseSbsric02_bufferSize" => "12.2",
+    "cusparseSbsric02_analysis" => "12.2",
+    "cusparseSbsric02" => "12.2",
     "cusparseSaxpyi" => "11.0",
+    "cusparseRot" => "12.2",
     "cusparseHybPartition_t" => "10.2",
     "cusparseHybMat_t" => "10.2",
     "cusparseHybMat" => "10.2",
+    "cusparseHpruneDense2csr_bufferSizeExt" => "12.2",
+    "cusparseHpruneDense2csrNnzByPercentage" => "12.2",
+    "cusparseHpruneDense2csrNnz" => "12.2",
+    "cusparseHpruneDense2csrByPercentage_bufferSizeExt" => "12.2",
+    "cusparseHpruneDense2csrByPercentage" => "12.2",
+    "cusparseHpruneDense2csr" => "12.2",
+    "cusparseHpruneCsr2csr_bufferSizeExt" => "12.2",
+    "cusparseHpruneCsr2csrNnzByPercentage" => "12.2",
+    "cusparseHpruneCsr2csrNnz" => "12.2",
+    "cusparseHpruneCsr2csrByPercentage_bufferSizeExt" => "12.2",
+    "cusparseHpruneCsr2csrByPercentage" => "12.2",
+    "cusparseHpruneCsr2csr" => "12.2",
     "cusparseDsctr" => "11.0",
     "cusparseDroti" => "11.0",
+    "cusparseDpruneDense2csr_bufferSizeExt" => "12.2",
+    "cusparseDpruneDense2csrNnzByPercentage" => "12.2",
+    "cusparseDpruneDense2csrNnz" => "12.2",
+    "cusparseDpruneDense2csrByPercentage_bufferSizeExt" => "12.2",
+    "cusparseDpruneDense2csrByPercentage" => "12.2",
+    "cusparseDpruneDense2csr" => "12.2",
+    "cusparseDpruneCsr2csr_bufferSizeExt" => "12.2",
+    "cusparseDpruneCsr2csrNnzByPercentage" => "12.2",
+    "cusparseDpruneCsr2csrNnz" => "12.2",
+    "cusparseDpruneCsr2csrByPercentage_bufferSizeExt" => "12.2",
+    "cusparseDpruneCsr2csrByPercentage" => "12.2",
+    "cusparseDpruneCsr2csr" => "12.2",
+    "cusparseDnnz_compress" => "12.2",
     "cusparseDhybsv_solve" => "10.2",
     "cusparseDhybsv_analysis" => "10.2",
     "cusparseDhybmv" => "10.2",
@@ -207,14 +319,25 @@ my %deprecated_funcs = (
     "cusparseDgthr" => "11.0",
     "cusparseDgemmi" => "11.0",
     "cusparseDestroySolveAnalysisInfo" => "10.2",
+    "cusparseDestroyPruneInfo" => "12.2",
     "cusparseDestroyHybMat" => "10.2",
+    "cusparseDestroyCsru2csrInfo" => "12.2",
     "cusparseDestroyCsrsv2Info" => "11.3",
     "cusparseDestroyCsrsm2Info" => "11.3",
+    "cusparseDestroyCsrilu02Info" => "12.2",
+    "cusparseDestroyCsric02Info" => "12.2",
     "cusparseDestroyCsrgemm2Info" => "11.0",
+    "cusparseDestroyColorInfo" => "12.2",
+    "cusparseDestroyBsrsv2Info" => "12.2",
+    "cusparseDestroyBsrsm2Info" => "12.2",
+    "cusparseDestroyBsrilu02Info" => "12.2",
+    "cusparseDestroyBsric02Info" => "12.2",
     "cusparseDdoti" => "10.2",
     "cusparseDdense2hyb" => "10.2",
     "cusparseDdense2csr" => "11.1",
     "cusparseDdense2csc" => "11.1",
+    "cusparseDcsru2csr_bufferSizeExt" => "12.2",
+    "cusparseDcsru2csr" => "12.2",
     "cusparseDcsrsv_solve" => "10.2",
     "cusparseDcsrsv_analysis" => "10.2",
     "cusparseDcsrsv2_solve" => "11.3",
@@ -230,17 +353,47 @@ my %deprecated_funcs = (
     "cusparseDcsrmv" => "10.2",
     "cusparseDcsrmm2" => "10.2",
     "cusparseDcsrmm" => "10.2",
+    "cusparseDcsrilu02_numericBoost" => "12.2",
+    "cusparseDcsrilu02_bufferSizeExt" => "12.2",
+    "cusparseDcsrilu02_bufferSize" => "12.2",
+    "cusparseDcsrilu02_analysis" => "12.2",
+    "cusparseDcsrilu02" => "12.2",
     "cusparseDcsrilu0" => "10.2",
+    "cusparseDcsric02_bufferSizeExt" => "12.2",
+    "cusparseDcsric02_bufferSize" => "12.2",
+    "cusparseDcsric02_analysis" => "12.2",
+    "cusparseDcsric02" => "12.2",
     "cusparseDcsric0" => "10.2",
     "cusparseDcsrgemm2_bufferSizeExt" => "11.0",
     "cusparseDcsrgemm2" => "11.0",
     "cusparseDcsrgemm" => "10.2",
     "cusparseDcsrgeam" => "10.2",
+    "cusparseDcsrcolor" => "12.2",
     "cusparseDcsr2hyb" => "10.2",
     "cusparseDcsr2dense" => "11.1",
+    "cusparseDcsr2csru" => "12.2",
+    "cusparseDcsr2csr_compress" => "12.2",
     "cusparseDcsr2csc" => "10.2",
     "cusparseDcsc2hyb" => "10.2",
     "cusparseDcsc2dense" => "11.1",
+    "cusparseDbsrxmv" => "12.2",
+    "cusparseDbsrsv2_solve" => "12.2",
+    "cusparseDbsrsv2_bufferSizeExt" => "12.2",
+    "cusparseDbsrsv2_bufferSize" => "12.2",
+    "cusparseDbsrsv2_analysis" => "12.2",
+    "cusparseDbsrsm2_solve" => "12.2",
+    "cusparseDbsrsm2_bufferSizeExt" => "12.2",
+    "cusparseDbsrsm2_bufferSize" => "12.2",
+    "cusparseDbsrsm2_analysis" => "12.2",
+    "cusparseDbsrilu02_numericBoost" => "12.2",
+    "cusparseDbsrilu02_bufferSizeExt" => "12.2",
+    "cusparseDbsrilu02_bufferSize" => "12.2",
+    "cusparseDbsrilu02_analysis" => "12.2",
+    "cusparseDbsrilu02" => "12.2",
+    "cusparseDbsric02_bufferSizeExt" => "12.2",
+    "cusparseDbsric02_bufferSize" => "12.2",
+    "cusparseDbsric02_analysis" => "12.2",
+    "cusparseDbsric02" => "12.2",
     "cusparseDaxpyi" => "11.0",
     "cusparseCsrsv_solveEx" => "10.2",
     "cusparseCsrsv_analysisEx" => "10.2",
@@ -250,14 +403,28 @@ my %deprecated_funcs = (
     "cusparseCsr2cscEx" => "10.2",
     "cusparseCsctr" => "11.0",
     "cusparseCreateSolveAnalysisInfo" => "10.2",
+    "cusparseCreatePruneInfo" => "12.2",
+    "cusparseCreateIdentityPermutation" => "12.2",
     "cusparseCreateHybMat" => "10.2",
+    "cusparseCreateCsru2csrInfo" => "12.2",
     "cusparseCreateCsrsv2Info" => "11.3",
     "cusparseCreateCsrsm2Info" => "11.3",
+    "cusparseCreateCsrilu02Info" => "12.2",
+    "cusparseCreateCsric02Info" => "12.2",
     "cusparseCreateCsrgemm2Info" => "11.0",
     "cusparseCreateCooAoS" => "11.2",
+    "cusparseCreateColorInfo" => "12.2",
+    "cusparseCreateBsrsv2Info" => "12.2",
+    "cusparseCreateBsrsm2Info" => "12.2",
+    "cusparseCreateBsrilu02Info" => "12.2",
+    "cusparseCreateBsric02Info" => "12.2",
     "cusparseCooAoSGet" => "11.2",
     "cusparseConstrainedGeMM_bufferSize" => "11.2",
     "cusparseConstrainedGeMM" => "11.2",
+    "cusparseColorInfo_t" => "12.2",
+    "cusparseColorInfo" => "12.2",
+    "cusparseColorAlg_t" => "12.2",
+    "cusparseCnnz_compress" => "12.2",
     "cusparseChybsv_solve" => "10.2",
     "cusparseChybsv_analysis" => "10.2",
     "cusparseChybmv" => "10.2",
@@ -275,6 +442,8 @@ my %deprecated_funcs = (
     "cusparseCdense2hyb" => "10.2",
     "cusparseCdense2csr" => "11.1",
     "cusparseCdense2csc" => "11.1",
+    "cusparseCcsru2csr_bufferSizeExt" => "12.2",
+    "cusparseCcsru2csr" => "12.2",
     "cusparseCcsrsv_solve" => "10.2",
     "cusparseCcsrsv_analysis" => "10.2",
     "cusparseCcsrsv2_solve" => "11.3",
@@ -290,17 +459,47 @@ my %deprecated_funcs = (
     "cusparseCcsrmv" => "10.2",
     "cusparseCcsrmm2" => "10.2",
     "cusparseCcsrmm" => "10.2",
+    "cusparseCcsrilu02_numericBoost" => "12.2",
+    "cusparseCcsrilu02_bufferSizeExt" => "12.2",
+    "cusparseCcsrilu02_bufferSize" => "12.2",
+    "cusparseCcsrilu02_analysis" => "12.2",
+    "cusparseCcsrilu02" => "12.2",
     "cusparseCcsrilu0" => "10.2",
+    "cusparseCcsric02_bufferSizeExt" => "12.2",
+    "cusparseCcsric02_bufferSize" => "12.2",
+    "cusparseCcsric02_analysis" => "12.2",
+    "cusparseCcsric02" => "12.2",
     "cusparseCcsric0" => "10.2",
     "cusparseCcsrgemm2_bufferSizeExt" => "11.0",
     "cusparseCcsrgemm2" => "11.0",
     "cusparseCcsrgemm" => "10.2",
     "cusparseCcsrgeam" => "10.2",
+    "cusparseCcsrcolor" => "12.2",
     "cusparseCcsr2hyb" => "10.2",
     "cusparseCcsr2dense" => "11.1",
+    "cusparseCcsr2csru" => "12.2",
+    "cusparseCcsr2csr_compress" => "12.2",
     "cusparseCcsr2csc" => "10.2",
     "cusparseCcsc2hyb" => "10.2",
     "cusparseCcsc2dense" => "11.1",
+    "cusparseCbsrxmv" => "12.2",
+    "cusparseCbsrsv2_solve" => "12.2",
+    "cusparseCbsrsv2_bufferSizeExt" => "12.2",
+    "cusparseCbsrsv2_bufferSize" => "12.2",
+    "cusparseCbsrsv2_analysis" => "12.2",
+    "cusparseCbsrsm2_solve" => "12.2",
+    "cusparseCbsrsm2_bufferSizeExt" => "12.2",
+    "cusparseCbsrsm2_bufferSize" => "12.2",
+    "cusparseCbsrsm2_analysis" => "12.2",
+    "cusparseCbsrilu02_numericBoost" => "12.2",
+    "cusparseCbsrilu02_bufferSizeExt" => "12.2",
+    "cusparseCbsrilu02_bufferSize" => "12.2",
+    "cusparseCbsrilu02_analysis" => "12.2",
+    "cusparseCbsrilu02" => "12.2",
+    "cusparseCbsric02_bufferSizeExt" => "12.2",
+    "cusparseCbsric02_bufferSize" => "12.2",
+    "cusparseCbsric02_analysis" => "12.2",
+    "cusparseCbsric02" => "12.2",
     "cusparseCaxpyi" => "11.0",
     "cudnnSetRNNProjectionLayers" => "8.0.1",
     "cudnnSetRNNPaddingMode" => "8.0.1",
@@ -501,6 +700,18 @@ my %deprecated_funcs = (
     "cuD3D10GetDirect3DDevice" => "9.2",
     "cuD3D10CtxCreateOnDevice" => "9.2",
     "cuD3D10CtxCreate" => "9.2",
+    "csru2csrInfo_t" => "12.2",
+    "csru2csrInfo" => "12.2",
+    "csrilu02Info_t" => "12.2",
+    "csrilu02Info" => "12.2",
+    "csric02Info_t" => "12.2",
+    "csric02Info" => "12.2",
+    "bsrsv2Info_t" => "12.2",
+    "bsrsv2Info" => "12.2",
+    "bsrsm2Info_t" => "12.2",
+    "bsrsm2Info" => "12.2",
+    "bsrilu02Info_t" => "12.2",
+    "bsrilu02Info" => "12.2",
     "CU_JIT_REFERENCED_VARIABLE_NAMES" => "12.0",
     "CU_JIT_REFERENCED_VARIABLE_COUNT" => "12.0",
     "CU_JIT_REFERENCED_KERNEL_NAMES" => "12.0",
@@ -524,6 +735,8 @@ my %deprecated_funcs = (
     "CU_DEVICE_ATTRIBUTE_GPU_OVERLAP" => "5.0",
     "CU_DEVICE_ATTRIBUTE_CAN_TEX2D_GATHER" => "5.0",
     "CU_CTX_BLOCKING_SYNC" => "4.0",
+    "CUSPARSE_SOLVE_POLICY_USE_LEVEL" => "12.2",
+    "CUSPARSE_SOLVE_POLICY_NO_LEVEL" => "12.2",
     "CUSPARSE_MV_ALG_DEFAULT" => "11.3",
     "CUSPARSE_MM_ALG_DEFAULT" => "11.0",
     "CUSPARSE_HYB_PARTITION_USER" => "10.2",
@@ -536,6 +749,8 @@ my %deprecated_funcs = (
     "CUSPARSE_COOMM_ALG3" => "11.0",
     "CUSPARSE_COOMM_ALG2" => "11.0",
     "CUSPARSE_COOMM_ALG1" => "11.0",
+    "CUSPARSE_COLOR_ALG1" => "12.2",
+    "CUSPARSE_COLOR_ALG0" => "12.2",
     "CUDNN_CONVOLUTION_FWD_SPECIFY_WORKSPACE_LIMIT" => "7.6.5",
     "CUDNN_CONVOLUTION_FWD_PREFER_FASTEST" => "7.6.5",
     "CUDNN_CONVOLUTION_FWD_NO_WORKSPACE" => "7.6.5",
@@ -1459,10 +1674,26 @@ sub rocSubstitutions {
     subst("cusparseAxpby", "rocsparse_axpby", "library");
     subst("cusparseBlockedEllGet", "rocsparse_bell_get", "library");
     subst("cusparseCbsr2csr", "rocsparse_cbsr2csr", "library");
+    subst("cusparseCcsc2dense", "rocsparse_ccsc2dense", "library");
+    subst("cusparseCcsr2bsr", "rocsparse_ccsr2bsr", "library");
+    subst("cusparseCcsr2csr_compress", "rocsparse_ccsr2csr_compress", "library");
+    subst("cusparseCcsr2dense", "rocsparse_ccsr2dense", "library");
+    subst("cusparseCcsr2gebsr", "rocsparse_ccsr2gebsr", "library");
+    subst("cusparseCcsr2gebsr_bufferSize", "rocsparse_ccsr2gebsr_buffer_size", "library");
+    subst("cusparseCcsr2hyb", "rocsparse_ccsr2hyb", "library");
     subst("cusparseCcsrcolor", "rocsparse_ccsrcolor", "library");
+    subst("cusparseCdense2csc", "rocsparse_cdense2csc", "library");
+    subst("cusparseCdense2csr", "rocsparse_cdense2csr", "library");
     subst("cusparseCgebsr2csr", "rocsparse_cgebsr2csr", "library");
+    subst("cusparseCgebsr2gebsc", "rocsparse_cgebsr2gebsc", "library");
+    subst("cusparseCgebsr2gebsc_bufferSize", "rocsparse_cgebsr2gebsc_buffer_size", "library");
     subst("cusparseCgebsr2gebsr", "rocsparse_cgebsr2gebsr", "library");
     subst("cusparseCgebsr2gebsr_bufferSize", "rocsparse_cgebsr2gebsr_buffer_size", "library");
+    subst("cusparseCgpsvInterleavedBatch", "rocsparse_cgpsv_interleaved_batch", "library");
+    subst("cusparseCgpsvInterleavedBatch_bufferSizeExt", "rocsparse_cgpsv_interleaved_batch_buffer_size", "library");
+    subst("cusparseCgtsvInterleavedBatch", "rocsparse_cgtsv_interleaved_batch", "library");
+    subst("cusparseCnnz", "rocsparse_cnnz", "library");
+    subst("cusparseCnnz_compress", "rocsparse_cnnz_compress", "library");
     subst("cusparseCooAoSGet", "rocsparse_coo_aos_get", "library");
     subst("cusparseCooGet", "rocsparse_coo_get", "library");
     subst("cusparseCooSetPointers", "rocsparse_coo_set_pointers", "library");
@@ -1486,7 +1717,16 @@ sub rocSubstitutions {
     subst("cusparseCsrSetPointers", "rocsparse_csr_set_pointers", "library");
     subst("cusparseCsrSetStridedBatch", "rocsparse_csr_set_strided_batch", "library");
     subst("cusparseDbsr2csr", "rocsparse_dbsr2csr", "library");
+    subst("cusparseDcsc2dense", "rocsparse_dcsc2dense", "library");
+    subst("cusparseDcsr2bsr", "rocsparse_dcsr2bsr", "library");
+    subst("cusparseDcsr2csr_compress", "rocsparse_dcsr2csr_compress", "library");
+    subst("cusparseDcsr2dense", "rocsparse_dcsr2dense", "library");
+    subst("cusparseDcsr2gebsr", "rocsparse_dcsr2gebsr", "library");
+    subst("cusparseDcsr2gebsr_bufferSize", "rocsparse_dcsr2gebsr_buffer_size", "library");
+    subst("cusparseDcsr2hyb", "rocsparse_dcsr2hyb", "library");
     subst("cusparseDcsrcolor", "rocsparse_dcsrcolor", "library");
+    subst("cusparseDdense2csc", "rocsparse_ddense2csc", "library");
+    subst("cusparseDdense2csr", "rocsparse_ddense2csr", "library");
     subst("cusparseDestroy", "rocsparse_destroy_handle", "library");
     subst("cusparseDestroyColorInfo", "rocsparse_destroy_color_info", "library");
     subst("cusparseDestroyDnMat", "rocsparse_destroy_dnmat_descr", "library");
@@ -1496,8 +1736,13 @@ sub rocSubstitutions {
     subst("cusparseDestroySpMat", "rocsparse_destroy_spmat_descr", "library");
     subst("cusparseDestroySpVec", "rocsparse_destroy_spvec_descr", "library");
     subst("cusparseDgebsr2csr", "rocsparse_dgebsr2csr", "library");
+    subst("cusparseDgebsr2gebsc", "rocsparse_dgebsr2gebsc", "library");
+    subst("cusparseDgebsr2gebsc_bufferSize", "rocsparse_dgebsr2gebsc_buffer_size", "library");
     subst("cusparseDgebsr2gebsr", "rocsparse_dgebsr2gebsr", "library");
     subst("cusparseDgebsr2gebsr_bufferSize", "rocsparse_dgebsr2gebsr_buffer_size", "library");
+    subst("cusparseDgpsvInterleavedBatch", "rocsparse_dgpsv_interleaved_batch", "library");
+    subst("cusparseDgpsvInterleavedBatch_bufferSizeExt", "rocsparse_dgpsv_interleaved_batch_buffer_size", "library");
+    subst("cusparseDgtsvInterleavedBatch", "rocsparse_dgtsv_interleaved_batch", "library");
     subst("cusparseDnMatGet", "rocsparse_dnmat_get", "library");
     subst("cusparseDnMatGetStridedBatch", "rocsparse_dnmat_get_strided_batch", "library");
     subst("cusparseDnMatGetValues", "rocsparse_dnmat_get_values", "library");
@@ -1506,10 +1751,20 @@ sub rocSubstitutions {
     subst("cusparseDnVecGet", "rocsparse_dnvec_get", "library");
     subst("cusparseDnVecGetValues", "rocsparse_dnvec_get_values", "library");
     subst("cusparseDnVecSetValues", "rocsparse_dnvec_set_values", "library");
+    subst("cusparseDnnz", "rocsparse_dnnz", "library");
+    subst("cusparseDnnz_compress", "rocsparse_dnnz_compress", "library");
     subst("cusparseDpruneCsr2csr", "rocsparse_dprune_csr2csr", "library");
     subst("cusparseDpruneCsr2csrByPercentage", "rocsparse_dprune_csr2csr_by_percentage", "library");
     subst("cusparseDpruneCsr2csrByPercentage_bufferSizeExt", "rocsparse_dprune_csr2csr_by_percentage_buffer_size", "library");
+    subst("cusparseDpruneCsr2csrNnz", "rocsparse_dprune_csr2csr_nnz", "library");
     subst("cusparseDpruneCsr2csrNnzByPercentage", "rocsparse_dprune_csr2csr_nnz_by_percentage", "library");
+    subst("cusparseDpruneCsr2csr_bufferSizeExt", "rocsparse_dprune_csr2csr_buffer_size", "library");
+    subst("cusparseDpruneDense2csr", "rocsparse_dprune_dense2csr", "library");
+    subst("cusparseDpruneDense2csrByPercentage", "rocsparse_dprune_dense2csr_by_percentage", "library");
+    subst("cusparseDpruneDense2csrByPercentage_bufferSizeExt", "rocsparse_dprune_dense2csr_by_percentage_buffer_size", "library");
+    subst("cusparseDpruneDense2csrNnz", "rocsparse_dprune_dense2csr_nnz", "library");
+    subst("cusparseDpruneDense2csrNnzByPercentage", "rocsparse_dprune_dense2csr_nnz_by_percentage", "library");
+    subst("cusparseDpruneDense2csr_bufferSizeExt", "rocsparse_dprune_dense2csr_buffer_size", "library");
     subst("cusparseGather", "rocsparse_gather", "library");
     subst("cusparseGetMatDiagType", "rocsparse_get_mat_diag_type", "library");
     subst("cusparseGetMatFillMode", "rocsparse_get_mat_fill_mode", "library");
@@ -1524,7 +1779,16 @@ sub rocSubstitutions {
     subst("cusparseSDDMM_preprocess", "rocsparse_sddmm_preprocess", "library");
     subst("cusparseSbsr2csr", "rocsparse_sbsr2csr", "library");
     subst("cusparseScatter", "rocsparse_scatter", "library");
+    subst("cusparseScsc2dense", "rocsparse_scsc2dense", "library");
+    subst("cusparseScsr2bsr", "rocsparse_scsr2bsr", "library");
+    subst("cusparseScsr2csr_compress", "rocsparse_scsr2csr_compress", "library");
+    subst("cusparseScsr2dense", "rocsparse_scsr2dense", "library");
+    subst("cusparseScsr2gebsr", "rocsparse_scsr2gebsr", "library");
+    subst("cusparseScsr2gebsr_bufferSize", "rocsparse_scsr2gebsr_buffer_size", "library");
+    subst("cusparseScsr2hyb", "rocsparse_scsr2hyb", "library");
     subst("cusparseScsrcolor", "rocsparse_scsrcolor", "library");
+    subst("cusparseSdense2csc", "rocsparse_sdense2csc", "library");
+    subst("cusparseSdense2csr", "rocsparse_sdense2csr", "library");
     subst("cusparseSetMatDiagType", "rocsparse_set_mat_diag_type", "library");
     subst("cusparseSetMatFillMode", "rocsparse_set_mat_fill_mode", "library");
     subst("cusparseSetMatIndexBase", "rocsparse_set_mat_index_base", "library");
@@ -1532,8 +1796,15 @@ sub rocSubstitutions {
     subst("cusparseSetPointerMode", "rocsparse_set_pointer_mode", "library");
     subst("cusparseSetStream", "rocsparse_set_stream", "library");
     subst("cusparseSgebsr2csr", "rocsparse_sgebsr2csr", "library");
+    subst("cusparseSgebsr2gebsc", "rocsparse_sgebsr2gebsc", "library");
+    subst("cusparseSgebsr2gebsc_bufferSize", "rocsparse_sgebsr2gebsc_buffer_size", "library");
     subst("cusparseSgebsr2gebsr", "rocsparse_sgebsr2gebsr", "library");
     subst("cusparseSgebsr2gebsr_bufferSize", "rocsparse_sgebsr2gebsr_buffer_size", "library");
+    subst("cusparseSgpsvInterleavedBatch", "rocsparse_sgpsv_interleaved_batch", "library");
+    subst("cusparseSgpsvInterleavedBatch_bufferSizeExt", "rocsparse_sgpsv_interleaved_batch_buffer_size", "library");
+    subst("cusparseSgtsvInterleavedBatch", "rocsparse_sgtsv_interleaved_batch", "library");
+    subst("cusparseSnnz", "rocsparse_snnz", "library");
+    subst("cusparseSnnz_compress", "rocsparse_snnz_compress", "library");
     subst("cusparseSpMV", "rocsparse_spmv", "library");
     subst("cusparseSpMatGetAttribute", "rocsparse_spmat_get_attribute", "library");
     subst("cusparseSpMatGetFormat", "rocsparse_spmat_get_format", "library");
@@ -1551,21 +1822,48 @@ sub rocSubstitutions {
     subst("cusparseSpruneCsr2csr", "rocsparse_sprune_csr2csr", "library");
     subst("cusparseSpruneCsr2csrByPercentage", "rocsparse_sprune_csr2csr_by_percentage", "library");
     subst("cusparseSpruneCsr2csrByPercentage_bufferSizeExt", "rocsparse_sprune_csr2csr_by_percentage_buffer_size", "library");
+    subst("cusparseSpruneCsr2csrNnz", "rocsparse_sprune_csr2csr_nnz", "library");
     subst("cusparseSpruneCsr2csrNnzByPercentage", "rocsparse_sprune_csr2csr_nnz_by_percentage", "library");
+    subst("cusparseSpruneCsr2csr_bufferSizeExt", "rocsparse_sprune_csr2csr_buffer_size", "library");
+    subst("cusparseSpruneDense2csr", "rocsparse_sprune_dense2csr", "library");
+    subst("cusparseSpruneDense2csrByPercentage", "rocsparse_sprune_dense2csr_by_percentage", "library");
+    subst("cusparseSpruneDense2csrByPercentage_bufferSizeExt", "rocsparse_sprune_dense2csr_by_percentage_buffer_size", "library");
+    subst("cusparseSpruneDense2csrNnz", "rocsparse_sprune_dense2csr_nnz", "library");
+    subst("cusparseSpruneDense2csrNnzByPercentage", "rocsparse_sprune_dense2csr_nnz_by_percentage", "library");
+    subst("cusparseSpruneDense2csr_bufferSizeExt", "rocsparse_sprune_dense2csr_buffer_size", "library");
     subst("cusparseXcoo2csr", "rocsparse_coo2csr", "library");
     subst("cusparseXcoosortByColumn", "rocsparse_coosort_by_column", "library");
     subst("cusparseXcoosortByRow", "rocsparse_coosort_by_row", "library");
     subst("cusparseXcoosort_bufferSizeExt", "rocsparse_coosort_buffer_size", "library");
     subst("cusparseXcscsort", "rocsparse_cscsort", "library");
     subst("cusparseXcscsort_bufferSizeExt", "rocsparse_cscsort_buffer_size", "library");
+    subst("cusparseXcsr2bsrNnz", "rocsparse_csr2bsr_nnz", "library");
+    subst("cusparseXcsr2coo", "rocsparse_csr2coo", "library");
+    subst("cusparseXcsr2gebsrNnz", "rocsparse_csr2gebsr_nnz", "library");
     subst("cusparseXcsrsort", "rocsparse_csrsort", "library");
     subst("cusparseXcsrsort_bufferSizeExt", "rocsparse_csrsort_buffer_size", "library");
     subst("cusparseXgebsr2gebsrNnz", "rocsparse_gebsr2gebsr_nnz", "library");
     subst("cusparseZbsr2csr", "rocsparse_zbsr2csr", "library");
+    subst("cusparseZcsc2dense", "rocsparse_zcsc2dense", "library");
+    subst("cusparseZcsr2bsr", "rocsparse_zcsr2bsr", "library");
+    subst("cusparseZcsr2csr_compress", "rocsparse_zcsr2csr_compress", "library");
+    subst("cusparseZcsr2dense", "rocsparse_zcsr2dense", "library");
+    subst("cusparseZcsr2gebsr", "rocsparse_zcsr2gebsr", "library");
+    subst("cusparseZcsr2gebsr_bufferSize", "rocsparse_zcsr2gebsr_buffer_size", "library");
+    subst("cusparseZcsr2hyb", "rocsparse_zcsr2hyb", "library");
     subst("cusparseZcsrcolor", "rocsparse_zcsrcolor", "library");
+    subst("cusparseZdense2csc", "rocsparse_zdense2csc", "library");
+    subst("cusparseZdense2csr", "rocsparse_zdense2csr", "library");
     subst("cusparseZgebsr2csr", "rocsparse_zgebsr2csr", "library");
+    subst("cusparseZgebsr2gebsc", "rocsparse_zgebsr2gebsc", "library");
+    subst("cusparseZgebsr2gebsc_bufferSize", "rocsparse_zgebsr2gebsc_buffer_size", "library");
     subst("cusparseZgebsr2gebsr", "rocsparse_zgebsr2gebsr", "library");
     subst("cusparseZgebsr2gebsr_bufferSize", "rocsparse_zgebsr2gebsr_buffer_size", "library");
+    subst("cusparseZgpsvInterleavedBatch", "rocsparse_zgpsv_interleaved_batch", "library");
+    subst("cusparseZgpsvInterleavedBatch_bufferSizeExt", "rocsparse_zgpsv_interleaved_batch_buffer_size", "library");
+    subst("cusparseZgtsvInterleavedBatch", "rocsparse_zgtsv_interleaved_batch", "library");
+    subst("cusparseZnnz", "rocsparse_znnz", "library");
+    subst("cusparseZnnz_compress", "rocsparse_znnz_compress", "library");
     subst("cublas.h", "rocblas.h", "include_cuda_main_header");
     subst("cublas_v2.h", "rocblas.h", "include_cuda_main_header_v2");
     subst("cuComplex", "rocblas_float_complex", "type");
@@ -3840,12 +4138,18 @@ sub simpleSubstitutions {
     subst("CUuuid_st", "hipUUID_t", "type");
     subst("GLenum", "GLenum", "type");
     subst("GLuint", "GLuint", "type");
+    subst("bsric02Info", "bsric02Info", "type");
     subst("bsric02Info_t", "bsric02Info_t", "type");
+    subst("bsrilu02Info", "bsrilu02Info", "type");
     subst("bsrilu02Info_t", "bsrilu02Info_t", "type");
     subst("bsrsm2Info", "bsrsm2Info", "type");
     subst("bsrsm2Info_t", "bsrsm2Info_t", "type");
+    subst("bsrsv2Info", "bsrsv2Info", "type");
     subst("bsrsv2Info_t", "bsrsv2Info_t", "type");
     subst("csrgemm2Info_t", "csrgemm2Info_t", "type");
+    subst("csric02Info", "csric02Info", "type");
+    subst("csric02Info_t", "csric02Info_t", "type");
+    subst("csrilu02Info", "csrilu02Info", "type");
     subst("csrilu02Info_t", "csrilu02Info_t", "type");
     subst("csrsm2Info_t", "csrsm2Info_t", "type");
     subst("csrsv2Info_t", "csrsv2Info_t", "type");
@@ -6414,6 +6718,7 @@ sub warnUnsupportedFunctions {
         "cusparseConstCooGet",
         "cusparseConstBlockedEllGet",
         "cusparseColorInfo",
+        "cusparseColorAlg_t",
         "cusparseChybsv_solve",
         "cusparseChybsv_analysis",
         "cusparseChyb2dense",
@@ -7474,15 +7779,11 @@ sub warnUnsupportedFunctions {
         "cuArrayGetMemoryRequirements",
         "csrsv2Info",
         "csrsm2Info",
-        "csrilu02Info",
         "csrgemm2Info",
         "cl_event_flags_enum",
         "cl_event_flags",
         "cl_context_flags_enum",
         "cl_context_flags",
-        "bsrsv2Info",
-        "bsrilu02Info",
-        "bsric02Info",
         "__nv_saturation_t",
         "__nv_fp8x4_storage_t",
         "__nv_fp8x4_e5m2",
@@ -8075,6 +8376,8 @@ sub warnUnsupportedFunctions {
         "CUSPARSE_SIDE_LEFT",
         "CUSPARSE_FORMAT_SLICED_ELLPACK",
         "CUSPARSE_FORMAT_BSR",
+        "CUSPARSE_COLOR_ALG1",
+        "CUSPARSE_COLOR_ALG0",
         "CUSPARSE_ALG_NAIVE",
         "CUSPARSE_ALG_MERGE_PATH",
         "CUSPARSE_ALG1",
