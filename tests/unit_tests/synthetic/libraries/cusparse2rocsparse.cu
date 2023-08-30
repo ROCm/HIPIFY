@@ -865,6 +865,30 @@ int main() {
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_sgpsv_interleaved_batch_buffer_size(rocsparse_handle handle, rocsparse_gpsv_interleaved_alg alg, rocsparse_int m, const float* ds, const float* dl, const float* d, const float* du, const float* dw, const float* x, rocsparse_int batch_count, rocsparse_int batch_stride, size_t* buffer_size);
   // CHECK: status_t = rocsparse_sgpsv_interleaved_batch_buffer_size(handle_t, algo, m, &fds, &fdl, &fd, &fdu, &fdw, &fx, batchCount, batchCount, &bufferSize);
   status_t = cusparseSgpsvInterleavedBatch_bufferSizeExt(handle_t, algo, m, &fds, &fdl, &fd, &fdu, &fdw, &fx, batchCount, &bufferSize);
+
+  // NOTE: An additional argument rocsparse_int batch_stride is added for the rocsparse_zgtsv_interleaved_batch function call: the argument is copied from the previous one: rocsparse_int batch_count. It is how hipsparseZgtsvInterleavedBatch calls rocsparse_zgtsv_interleaved_batch in its implementation.
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseZgtsvInterleavedBatch(cusparseHandle_t handle, int algo, int m, cuDoubleComplex* dl, cuDoubleComplex* d, cuDoubleComplex* du, cuDoubleComplex* x, int batchCount, void* pBuffer);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_zgtsv_interleaved_batch(rocsparse_handle handle, rocsparse_gtsv_interleaved_alg alg, rocsparse_int m, rocsparse_double_complex* dl, rocsparse_double_complex* d, rocsparse_double_complex* du, rocsparse_double_complex* x, rocsparse_int batch_count, rocsparse_int batch_stride, void* temp_buffer);
+  // CHECK: status_t = rocsparse_zgtsv_interleaved_batch(handle_t, algo, m, &dcomplexdl, &dcomplexd, &dcomplexdu, &dcomplexx, batchCount, batchCount, pBuffer);
+  status_t = cusparseZgtsvInterleavedBatch(handle_t, algo, m, &dcomplexdl, &dcomplexd, &dcomplexdu, &dcomplexx, batchCount, pBuffer);
+
+  // NOTE: An additional argument rocsparse_int batch_stride is added for the rocsparse_zgtsv_interleaved_batch function call: the argument is copied from the previous one: rocsparse_int batch_count. It is how hipsparseCgtsvInterleavedBatch calls rocsparse_zgtsv_interleaved_batch in its implementation.
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCgtsvInterleavedBatch(cusparseHandle_t handle, int algo, int m, cuComplex* dl, cuComplex* d, cuComplex* du, cuComplex* x, int batchCount, void* pBuffer);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_cgtsv_interleaved_batch(rocsparse_handle handle, rocsparse_gtsv_interleaved_alg alg, rocsparse_int m, rocsparse_float_complex* dl, rocsparse_float_complex* d, rocsparse_float_complex* du, rocsparse_float_complex* x, rocsparse_int batch_count, rocsparse_int batch_stride, void* temp_buffer);
+  // CHECK: status_t = rocsparse_cgtsv_interleaved_batch(handle_t, algo, m, &complexdl, &complexd, &complexdu, &complexx, batchCount, batchCount, pBuffer);
+  status_t = cusparseCgtsvInterleavedBatch(handle_t, algo, m, &complexdl, &complexd, &complexdu, &complexx, batchCount, pBuffer);
+
+  // NOTE: An additional argument rocsparse_int batch_stride is added for the rocsparse_dgtsv_interleaved_batch function call: the argument is copied from the previous one: rocsparse_int batch_count. It is how hipsparseDgtsvInterleavedBatch calls rocsparse_dgtsv_interleaved_batch in its implementation.
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDgtsvInterleavedBatch(cusparseHandle_t handle, int algo, int m, double* dl, double* d, double* du, double* x, int batchCount, void* pBuffer);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_dgtsv_interleaved_batch(rocsparse_handle handle, rocsparse_gtsv_interleaved_alg alg, rocsparse_int m, double* dl, double* d, double* du, double* x, rocsparse_int batch_count, rocsparse_int batch_stride, void* temp_buffer);
+  // CHECK: status_t = rocsparse_dgtsv_interleaved_batch(handle_t, algo, m, &ddl, &dd, &ddu, &dx, batchCount, batchCount, pBuffer);
+  status_t = cusparseDgtsvInterleavedBatch(handle_t, algo, m, &ddl, &dd, &ddu, &dx, batchCount, pBuffer);
+
+  // NOTE: An additional argument rocsparse_int batch_stride is added for the rocsparse_sgtsv_interleaved_batch function call: the argument is copied from the previous one: rocsparse_int batch_count. It is how hipsparseSgtsvInterleavedBatch calls rocsparse_sgtsv_interleaved_batch in its implementation.
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSgtsvInterleavedBatch(cusparseHandle_t handle, int algo, int m, float* dl, float* d, float* du, float* x, int batchCount, void* pBuffer);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_sgtsv_interleaved_batch(rocsparse_handle handle, rocsparse_gtsv_interleaved_alg alg, rocsparse_int m, float* dl, float* d, float* du, float* x, rocsparse_int batch_count, rocsparse_int batch_stride, void* temp_buffer);
+  // CHECK: status_t = rocsparse_sgtsv_interleaved_batch(handle_t, algo, m, &fdl, &fd, &fdu, &fx, batchCount, batchCount, pBuffer);
+  status_t = cusparseSgtsvInterleavedBatch(handle_t, algo, m, &fdl, &fd, &fdu, &fx, batchCount, pBuffer);
 #endif
 
 #if (CUDA_VERSION >= 10010 && CUDA_VERSION < 11000 && !defined(_WIN32)) || CUDA_VERSION >= 11000

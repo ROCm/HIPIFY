@@ -498,7 +498,7 @@
 |`cusparseCgtsv2_bufferSizeExt`|9.0| | |`hipsparseCgtsv2_bufferSizeExt`|4.3.0| | | | | | | | |
 |`cusparseCgtsv2_nopivot`|9.0| | |`hipsparseCgtsv2_nopivot`|4.3.0| | | | | | | | |
 |`cusparseCgtsv2_nopivot_bufferSizeExt`|9.0| | |`hipsparseCgtsv2_nopivot_bufferSizeExt`|4.3.0| | | | | | | | |
-|`cusparseCgtsvInterleavedBatch`|9.2| | |`hipsparseCgtsvInterleavedBatch`|5.1.0| | | | | | | | |
+|`cusparseCgtsvInterleavedBatch`|9.2| | |`hipsparseCgtsvInterleavedBatch`|5.1.0| | | |`rocsparse_cgtsv_interleaved_batch`|5.1.0| | | |
 |`cusparseCgtsvInterleavedBatch_bufferSizeExt`|9.2| | |`hipsparseCgtsvInterleavedBatch_bufferSizeExt`|5.1.0| | | | | | | | |
 |`cusparseCgtsvStridedBatch`| |10.2|11.0| | | | | | | | | | |
 |`cusparseCgtsv_nopivot`| |10.2|11.0| | | | | | | | | | |
@@ -532,7 +532,7 @@
 |`cusparseDgtsv2_bufferSizeExt`|9.0| | |`hipsparseDgtsv2_bufferSizeExt`|4.3.0| | | | | | | | |
 |`cusparseDgtsv2_nopivot`|9.0| | |`hipsparseDgtsv2_nopivot`|4.3.0| | | | | | | | |
 |`cusparseDgtsv2_nopivot_bufferSizeExt`|9.0| | |`hipsparseDgtsv2_nopivot_bufferSizeExt`|4.3.0| | | | | | | | |
-|`cusparseDgtsvInterleavedBatch`|9.2| | |`hipsparseDgtsvInterleavedBatch`|5.1.0| | | | | | | | |
+|`cusparseDgtsvInterleavedBatch`|9.2| | |`hipsparseDgtsvInterleavedBatch`|5.1.0| | | |`rocsparse_dgtsv_interleaved_batch`|5.1.0| | | |
 |`cusparseDgtsvInterleavedBatch_bufferSizeExt`|9.2| | |`hipsparseDgtsvInterleavedBatch_bufferSizeExt`|5.1.0| | | | | | | | |
 |`cusparseDgtsvStridedBatch`| |10.2|11.0| | | | | | | | | | |
 |`cusparseDgtsv_nopivot`| |10.2|11.0| | | | | | | | | | |
@@ -565,7 +565,7 @@
 |`cusparseSgtsv2_bufferSizeExt`|9.0| | |`hipsparseSgtsv2_bufferSizeExt`|4.3.0| | | | | | | | |
 |`cusparseSgtsv2_nopivot`|9.0| | |`hipsparseSgtsv2_nopivot`|4.3.0| | | | | | | | |
 |`cusparseSgtsv2_nopivot_bufferSizeExt`|9.0| | |`hipsparseSgtsv2_nopivot_bufferSizeExt`|4.3.0| | | | | | | | |
-|`cusparseSgtsvInterleavedBatch`|9.2| | |`hipsparseSgtsvInterleavedBatch`|5.1.0| | | | | | | | |
+|`cusparseSgtsvInterleavedBatch`|9.2| | |`hipsparseSgtsvInterleavedBatch`|5.1.0| | | |`rocsparse_sgtsv_interleaved_batch`|5.1.0| | | |
 |`cusparseSgtsvInterleavedBatch_bufferSizeExt`|9.2| | |`hipsparseSgtsvInterleavedBatch_bufferSizeExt`|5.1.0| | | | | | | | |
 |`cusparseSgtsvStridedBatch`| |10.2|11.0| | | | | | | | | | |
 |`cusparseSgtsv_nopivot`| |10.2|11.0| | | | | | | | | | |
@@ -602,7 +602,7 @@
 |`cusparseZgtsv2_bufferSizeExt`|9.0| | |`hipsparseZgtsv2_bufferSizeExt`|4.3.0| | | | | | | | |
 |`cusparseZgtsv2_nopivot`|9.0| | |`hipsparseZgtsv2_nopivot`|4.3.0| | | | | | | | |
 |`cusparseZgtsv2_nopivot_bufferSizeExt`|9.0| | |`hipsparseZgtsv2_nopivot_bufferSizeExt`|4.3.0| | | | | | | | |
-|`cusparseZgtsvInterleavedBatch`|9.2| | |`hipsparseZgtsvInterleavedBatch`|5.1.0| | | | | | | | |
+|`cusparseZgtsvInterleavedBatch`|9.2| | |`hipsparseZgtsvInterleavedBatch`|5.1.0| | | |`rocsparse_zgtsv_interleaved_batch`|5.1.0| | | |
 |`cusparseZgtsvInterleavedBatch_bufferSizeExt`|9.2| | |`hipsparseZgtsvInterleavedBatch_bufferSizeExt`|5.1.0| | | | | | | | |
 |`cusparseZgtsvStridedBatch`| |10.2|11.0| | | | | | | | | | |
 |`cusparseZgtsv_nopivot`| |10.2|11.0| | | | | | | | | | |

@@ -850,6 +850,26 @@ int main() {
   // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSgpsvInterleavedBatch_bufferSizeExt(hipsparseHandle_t handle, int algo, int m, const float* ds, const float* dl, const float* d, const float* du, const float* dw, const float* x, int batchCount, size_t* pBufferSizeInBytes);
   // CHECK: status_t = hipsparseSgpsvInterleavedBatch_bufferSizeExt(handle_t, algo, m, &fds, &fdl, &fd, &fdu, &fdw, &fx, batchCount, &bufferSize);
   status_t = cusparseSgpsvInterleavedBatch_bufferSizeExt(handle_t, algo, m, &fds, &fdl, &fd, &fdu, &fdw, &fx, batchCount, &bufferSize);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseZgtsvInterleavedBatch(cusparseHandle_t handle, int algo, int m, cuDoubleComplex* dl, cuDoubleComplex* d, cuDoubleComplex* du, cuDoubleComplex* x, int batchCount, void* pBuffer);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseZgtsvInterleavedBatch(hipsparseHandle_t handle, int algo, int m, hipDoubleComplex* dl, hipDoubleComplex* d, hipDoubleComplex* du, hipDoubleComplex* x, int batchCount, void* pBuffer);
+  // CHECK: status_t = hipsparseZgtsvInterleavedBatch(handle_t, algo, m, &dcomplexdl, &dcomplexd, &dcomplexdu, &dcomplexx, batchCount, pBuffer);
+  status_t = cusparseZgtsvInterleavedBatch(handle_t, algo, m, &dcomplexdl, &dcomplexd, &dcomplexdu, &dcomplexx, batchCount, pBuffer);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCgtsvInterleavedBatch(cusparseHandle_t handle, int algo, int m, cuComplex* dl, cuComplex* d, cuComplex* du, cuComplex* x, int batchCount, void* pBuffer);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseCgtsvInterleavedBatch(hipsparseHandle_t handle, int algo, int m, hipComplex* dl, hipComplex* d, hipComplex* du, hipComplex* x, int batchCount, void* pBuffer);
+  // CHECK: status_t = hipsparseCgtsvInterleavedBatch(handle_t, algo, m, &complexdl, &complexd, &complexdu, &complexx, batchCount, pBuffer);
+  status_t = cusparseCgtsvInterleavedBatch(handle_t, algo, m, &complexdl, &complexd, &complexdu, &complexx, batchCount, pBuffer);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDgtsvInterleavedBatch(cusparseHandle_t handle, int algo, int m, double* dl, double* d, double* du, double* x, int batchCount, void* pBuffer);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDgtsvInterleavedBatch(hipsparseHandle_t handle, int algo, int m, double* dl, double* d, double* du, double* x, int batchCount, void* pBuffer);
+  // CHECK: status_t = hipsparseDgtsvInterleavedBatch(handle_t, algo, m, &ddl, &dd, &ddu, &dx, batchCount, pBuffer);
+  status_t = cusparseDgtsvInterleavedBatch(handle_t, algo, m, &ddl, &dd, &ddu, &dx, batchCount, pBuffer);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSgtsvInterleavedBatch(cusparseHandle_t handle, int algo, int m, float* dl, float* d, float* du, float* x, int batchCount, void* pBuffer);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSgtsvInterleavedBatch(hipsparseHandle_t handle, int algo, int m, float* dl, float* d, float* du, float* x, int batchCount, void* pBuffer);
+  // CHECK: status_t = hipsparseSgtsvInterleavedBatch(handle_t, algo, m, &fdl, &fd, &fdu, &fx, batchCount, pBuffer);
+  status_t = cusparseSgtsvInterleavedBatch(handle_t, algo, m, &fdl, &fd, &fdu, &fx, batchCount, pBuffer);
 #endif
 
 #if CUDA_VERSION >= 10010
