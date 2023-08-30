@@ -90,6 +90,10 @@ const std::string sCusparseZgpsvInterleavedBatch_bufferSizeExt = "cusparseZgpsvI
 const std::string sCusparseCgpsvInterleavedBatch_bufferSizeExt = "cusparseCgpsvInterleavedBatch_bufferSizeExt";
 const std::string sCusparseDgpsvInterleavedBatch_bufferSizeExt = "cusparseDgpsvInterleavedBatch_bufferSizeExt";
 const std::string sCusparseSgpsvInterleavedBatch_bufferSizeExt = "cusparseSgpsvInterleavedBatch_bufferSizeExt";
+const std::string sCusparseZgtsvInterleavedBatch = "cusparseZgtsvInterleavedBatch";
+const std::string sCusparseCgtsvInterleavedBatch = "cusparseCgtsvInterleavedBatch";
+const std::string sCusparseDgtsvInterleavedBatch = "cusparseDgtsvInterleavedBatch";
+const std::string sCusparseSgtsvInterleavedBatch = "cusparseSgtsvInterleavedBatch";
 // CUDA_OVERLOADED
 const std::string sCudaEventCreate = "cudaEventCreate";
 const std::string sCudaGraphInstantiate = "cudaGraphInstantiate";
@@ -457,6 +461,42 @@ std::map<std::string, ArgCastStruct> FuncArgCasts {
     {
       {
         {9, {e_add_var_argument, cw_None, "", 10}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseZgtsvInterleavedBatch,
+    {
+      {
+        {7, {e_add_var_argument, cw_None, "", 8}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseCgtsvInterleavedBatch,
+    {
+      {
+        {7, {e_add_var_argument, cw_None, "", 8}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseDgtsvInterleavedBatch,
+    {
+      {
+        {7, {e_add_var_argument, cw_None, "", 8}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseSgtsvInterleavedBatch,
+    {
+      {
+        {7, {e_add_var_argument, cw_None, "", 8}}
       },
       true,
       false
@@ -1171,7 +1211,11 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
             sCusparseZgpsvInterleavedBatch_bufferSizeExt,
             sCusparseCgpsvInterleavedBatch_bufferSizeExt,
             sCusparseDgpsvInterleavedBatch_bufferSizeExt,
-            sCusparseSgpsvInterleavedBatch_bufferSizeExt
+            sCusparseSgpsvInterleavedBatch_bufferSizeExt,
+            sCusparseZgtsvInterleavedBatch,
+            sCusparseCgtsvInterleavedBatch,
+            sCusparseDgtsvInterleavedBatch,
+            sCusparseSgtsvInterleavedBatch
           )
         )
       )
