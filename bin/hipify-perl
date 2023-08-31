@@ -1692,6 +1692,7 @@ sub rocSubstitutions {
     subst("cusparseCgpsvInterleavedBatch", "rocsparse_cgpsv_interleaved_batch", "library");
     subst("cusparseCgpsvInterleavedBatch_bufferSizeExt", "rocsparse_cgpsv_interleaved_batch_buffer_size", "library");
     subst("cusparseCgtsvInterleavedBatch", "rocsparse_cgtsv_interleaved_batch", "library");
+    subst("cusparseCgtsvInterleavedBatch_bufferSizeExt", "rocsparse_cgtsv_interleaved_batch_buffer_size", "library");
     subst("cusparseCnnz", "rocsparse_cnnz", "library");
     subst("cusparseCnnz_compress", "rocsparse_cnnz_compress", "library");
     subst("cusparseCooAoSGet", "rocsparse_coo_aos_get", "library");
@@ -1743,6 +1744,7 @@ sub rocSubstitutions {
     subst("cusparseDgpsvInterleavedBatch", "rocsparse_dgpsv_interleaved_batch", "library");
     subst("cusparseDgpsvInterleavedBatch_bufferSizeExt", "rocsparse_dgpsv_interleaved_batch_buffer_size", "library");
     subst("cusparseDgtsvInterleavedBatch", "rocsparse_dgtsv_interleaved_batch", "library");
+    subst("cusparseDgtsvInterleavedBatch_bufferSizeExt", "rocsparse_dgtsv_interleaved_batch_buffer_size", "library");
     subst("cusparseDnMatGet", "rocsparse_dnmat_get", "library");
     subst("cusparseDnMatGetStridedBatch", "rocsparse_dnmat_get_strided_batch", "library");
     subst("cusparseDnMatGetValues", "rocsparse_dnmat_get_values", "library");
@@ -1803,6 +1805,7 @@ sub rocSubstitutions {
     subst("cusparseSgpsvInterleavedBatch", "rocsparse_sgpsv_interleaved_batch", "library");
     subst("cusparseSgpsvInterleavedBatch_bufferSizeExt", "rocsparse_sgpsv_interleaved_batch_buffer_size", "library");
     subst("cusparseSgtsvInterleavedBatch", "rocsparse_sgtsv_interleaved_batch", "library");
+    subst("cusparseSgtsvInterleavedBatch_bufferSizeExt", "rocsparse_sgtsv_interleaved_batch_buffer_size", "library");
     subst("cusparseSnnz", "rocsparse_snnz", "library");
     subst("cusparseSnnz_compress", "rocsparse_snnz_compress", "library");
     subst("cusparseSpMV", "rocsparse_spmv", "library");
@@ -1862,6 +1865,7 @@ sub rocSubstitutions {
     subst("cusparseZgpsvInterleavedBatch", "rocsparse_zgpsv_interleaved_batch", "library");
     subst("cusparseZgpsvInterleavedBatch_bufferSizeExt", "rocsparse_zgpsv_interleaved_batch_buffer_size", "library");
     subst("cusparseZgtsvInterleavedBatch", "rocsparse_zgtsv_interleaved_batch", "library");
+    subst("cusparseZgtsvInterleavedBatch_bufferSizeExt", "rocsparse_zgtsv_interleaved_batch_buffer_size", "library");
     subst("cusparseZnnz", "rocsparse_znnz", "library");
     subst("cusparseZnnz_compress", "rocsparse_znnz_compress", "library");
     subst("cublas.h", "rocblas.h", "include_cuda_main_header");
