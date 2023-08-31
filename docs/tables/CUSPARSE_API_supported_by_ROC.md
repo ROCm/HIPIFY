@@ -499,7 +499,7 @@
 |`cusparseCgtsv2_nopivot`|9.0| | | | | | | |
 |`cusparseCgtsv2_nopivot_bufferSizeExt`|9.0| | | | | | | |
 |`cusparseCgtsvInterleavedBatch`|9.2| | |`rocsparse_cgtsv_interleaved_batch`|5.1.0| | | |
-|`cusparseCgtsvInterleavedBatch_bufferSizeExt`|9.2| | | | | | | |
+|`cusparseCgtsvInterleavedBatch_bufferSizeExt`|9.2| | |`rocsparse_cgtsv_interleaved_batch_buffer_size`|5.1.0| | | |
 |`cusparseCgtsvStridedBatch`| |10.2|11.0| | | | | |
 |`cusparseCgtsv_nopivot`| |10.2|11.0| | | | | |
 |`cusparseCsrilu0Ex`|8.0|10.2|11.0| | | | | |
@@ -533,7 +533,7 @@
 |`cusparseDgtsv2_nopivot`|9.0| | | | | | | |
 |`cusparseDgtsv2_nopivot_bufferSizeExt`|9.0| | | | | | | |
 |`cusparseDgtsvInterleavedBatch`|9.2| | |`rocsparse_dgtsv_interleaved_batch`|5.1.0| | | |
-|`cusparseDgtsvInterleavedBatch_bufferSizeExt`|9.2| | | | | | | |
+|`cusparseDgtsvInterleavedBatch_bufferSizeExt`|9.2| | |`rocsparse_dgtsv_interleaved_batch_buffer_size`|5.1.0| | | |
 |`cusparseDgtsvStridedBatch`| |10.2|11.0| | | | | |
 |`cusparseDgtsv_nopivot`| |10.2|11.0| | | | | |
 |`cusparseSbsric02`| |12.2| | | | | | |
@@ -566,7 +566,7 @@
 |`cusparseSgtsv2_nopivot`|9.0| | | | | | | |
 |`cusparseSgtsv2_nopivot_bufferSizeExt`|9.0| | | | | | | |
 |`cusparseSgtsvInterleavedBatch`|9.2| | |`rocsparse_sgtsv_interleaved_batch`|5.1.0| | | |
-|`cusparseSgtsvInterleavedBatch_bufferSizeExt`|9.2| | | | | | | |
+|`cusparseSgtsvInterleavedBatch_bufferSizeExt`|9.2| | |`rocsparse_sgtsv_interleaved_batch_buffer_size`|5.1.0| | | |
 |`cusparseSgtsvStridedBatch`| |10.2|11.0| | | | | |
 |`cusparseSgtsv_nopivot`| |10.2|11.0| | | | | |
 |`cusparseXbsric02_zeroPivot`| | | | | | | | |
@@ -603,7 +603,7 @@
 |`cusparseZgtsv2_nopivot`|9.0| | | | | | | |
 |`cusparseZgtsv2_nopivot_bufferSizeExt`|9.0| | | | | | | |
 |`cusparseZgtsvInterleavedBatch`|9.2| | |`rocsparse_zgtsv_interleaved_batch`|5.1.0| | | |
-|`cusparseZgtsvInterleavedBatch_bufferSizeExt`|9.2| | | | | | | |
+|`cusparseZgtsvInterleavedBatch_bufferSizeExt`|9.2| | |`rocsparse_zgtsv_interleaved_batch_buffer_size`|5.1.0| | | |
 |`cusparseZgtsvStridedBatch`| |10.2|11.0| | | | | |
 |`cusparseZgtsv_nopivot`| |10.2|11.0| | | | | |
 
