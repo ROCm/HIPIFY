@@ -461,15 +461,15 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   {"cusparseCgtsvStridedBatch",                         {"hipsparseCgtsvStridedBatch",                         "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
   {"cusparseZgtsvStridedBatch",                         {"hipsparseZgtsvStridedBatch",                         "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
 
-  {"cusparseSgtsv2StridedBatch_bufferSizeExt",          {"hipsparseSgtsv2StridedBatch_bufferSizeExt",          "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED}},
-  {"cusparseDgtsv2StridedBatch_bufferSizeExt",          {"hipsparseDgtsv2StridedBatch_bufferSizeExt",          "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED}},
-  {"cusparseCgtsv2StridedBatch_bufferSizeExt",          {"hipsparseCgtsv2StridedBatch_bufferSizeExt",          "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED}},
-  {"cusparseZgtsv2StridedBatch_bufferSizeExt",          {"hipsparseZgtsv2StridedBatch_bufferSizeExt",          "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED}},
+  {"cusparseSgtsv2StridedBatch_bufferSizeExt",          {"hipsparseSgtsv2StridedBatch_bufferSizeExt",          "rocsparse_sgtsv_no_pivot_strided_batch_buffer_size",               CONV_LIB_FUNC, API_SPARSE, 12}},
+  {"cusparseDgtsv2StridedBatch_bufferSizeExt",          {"hipsparseDgtsv2StridedBatch_bufferSizeExt",          "rocsparse_dgtsv_no_pivot_strided_batch_buffer_size",               CONV_LIB_FUNC, API_SPARSE, 12}},
+  {"cusparseCgtsv2StridedBatch_bufferSizeExt",          {"hipsparseCgtsv2StridedBatch_bufferSizeExt",          "rocsparse_cgtsv_no_pivot_strided_batch_buffer_size",               CONV_LIB_FUNC, API_SPARSE, 12}},
+  {"cusparseZgtsv2StridedBatch_bufferSizeExt",          {"hipsparseZgtsv2StridedBatch_bufferSizeExt",          "rocsparse_zgtsv_no_pivot_strided_batch_buffer_size",               CONV_LIB_FUNC, API_SPARSE, 12}},
 
-  {"cusparseSgtsv2StridedBatch",                        {"hipsparseSgtsv2StridedBatch",                        "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED}},
-  {"cusparseDgtsv2StridedBatch",                        {"hipsparseDgtsv2StridedBatch",                        "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED}},
-  {"cusparseCgtsv2StridedBatch",                        {"hipsparseCgtsv2StridedBatch",                        "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED}},
-  {"cusparseZgtsv2StridedBatch",                        {"hipsparseZgtsv2StridedBatch",                        "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED}},
+  {"cusparseSgtsv2StridedBatch",                        {"hipsparseSgtsv2StridedBatch",                        "rocsparse_sgtsv_no_pivot_strided_batch",                           CONV_LIB_FUNC, API_SPARSE, 12}},
+  {"cusparseDgtsv2StridedBatch",                        {"hipsparseDgtsv2StridedBatch",                        "rocsparse_dgtsv_no_pivot_strided_batch",                           CONV_LIB_FUNC, API_SPARSE, 12}},
+  {"cusparseCgtsv2StridedBatch",                        {"hipsparseCgtsv2StridedBatch",                        "rocsparse_cgtsv_no_pivot_strided_batch",                           CONV_LIB_FUNC, API_SPARSE, 12}},
+  {"cusparseZgtsv2StridedBatch",                        {"hipsparseZgtsv2StridedBatch",                        "rocsparse_zgtsv_no_pivot_strided_batch",                           CONV_LIB_FUNC, API_SPARSE, 12}},
 
   {"cusparseSgtsvInterleavedBatch_bufferSizeExt",       {"hipsparseSgtsvInterleavedBatch_bufferSizeExt",       "rocsparse_sgtsv_interleaved_batch_buffer_size",                    CONV_LIB_FUNC, API_SPARSE, 12}},
   {"cusparseDgtsvInterleavedBatch_bufferSizeExt",       {"hipsparseDgtsvInterleavedBatch_bufferSizeExt",       "rocsparse_dgtsv_interleaved_batch_buffer_size",                    CONV_LIB_FUNC, API_SPARSE, 12}},
@@ -2151,6 +2151,14 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_FUNCTION_VER_MAP {
   {"rocsparse_cgtsv_interleaved_batch_buffer_size",      {HIP_5010, HIP_0,    HIP_0   }},
   {"rocsparse_dgtsv_interleaved_batch_buffer_size",      {HIP_5010, HIP_0,    HIP_0   }},
   {"rocsparse_sgtsv_interleaved_batch_buffer_size",      {HIP_5010, HIP_0,    HIP_0   }},
+  {"rocsparse_zgtsv_no_pivot_strided_batch",             {HIP_4030, HIP_0,    HIP_0   }},
+  {"rocsparse_cgtsv_no_pivot_strided_batch",             {HIP_4030, HIP_0,    HIP_0   }},
+  {"rocsparse_dgtsv_no_pivot_strided_batch",             {HIP_4030, HIP_0,    HIP_0   }},
+  {"rocsparse_sgtsv_no_pivot_strided_batch",             {HIP_4030, HIP_0,    HIP_0   }},
+  {"rocsparse_zgtsv_no_pivot_strided_batch_buffer_size", {HIP_4030, HIP_0,    HIP_0   }},
+  {"rocsparse_cgtsv_no_pivot_strided_batch_buffer_size", {HIP_4030, HIP_0,    HIP_0   }},
+  {"rocsparse_dgtsv_no_pivot_strided_batch_buffer_size", {HIP_4030, HIP_0,    HIP_0   }},
+  {"rocsparse_sgtsv_no_pivot_strided_batch_buffer_size", {HIP_4030, HIP_0,    HIP_0   }},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_SPARSE_API_SECTION_MAP {
