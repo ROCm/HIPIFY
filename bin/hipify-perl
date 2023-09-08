@@ -1693,6 +1693,8 @@ sub rocSubstitutions {
     subst("cusparseCgpsvInterleavedBatch_bufferSizeExt", "rocsparse_cgpsv_interleaved_batch_buffer_size", "library");
     subst("cusparseCgtsv2StridedBatch", "rocsparse_cgtsv_no_pivot_strided_batch", "library");
     subst("cusparseCgtsv2StridedBatch_bufferSizeExt", "rocsparse_cgtsv_no_pivot_strided_batch_buffer_size", "library");
+    subst("cusparseCgtsv2_nopivot", "rocsparse_cgtsv_no_pivot", "library");
+    subst("cusparseCgtsv2_nopivot_bufferSizeExt", "rocsparse_cgtsv_no_pivot_buffer_size", "library");
     subst("cusparseCgtsvInterleavedBatch", "rocsparse_cgtsv_interleaved_batch", "library");
     subst("cusparseCgtsvInterleavedBatch_bufferSizeExt", "rocsparse_cgtsv_interleaved_batch_buffer_size", "library");
     subst("cusparseCnnz", "rocsparse_cnnz", "library");
@@ -1747,6 +1749,8 @@ sub rocSubstitutions {
     subst("cusparseDgpsvInterleavedBatch_bufferSizeExt", "rocsparse_dgpsv_interleaved_batch_buffer_size", "library");
     subst("cusparseDgtsv2StridedBatch", "rocsparse_dgtsv_no_pivot_strided_batch", "library");
     subst("cusparseDgtsv2StridedBatch_bufferSizeExt", "rocsparse_dgtsv_no_pivot_strided_batch_buffer_size", "library");
+    subst("cusparseDgtsv2_nopivot", "rocsparse_dgtsv_no_pivot", "library");
+    subst("cusparseDgtsv2_nopivot_bufferSizeExt", "rocsparse_dgtsv_no_pivot_buffer_size", "library");
     subst("cusparseDgtsvInterleavedBatch", "rocsparse_dgtsv_interleaved_batch", "library");
     subst("cusparseDgtsvInterleavedBatch_bufferSizeExt", "rocsparse_dgtsv_interleaved_batch_buffer_size", "library");
     subst("cusparseDnMatGet", "rocsparse_dnmat_get", "library");
@@ -1810,6 +1814,8 @@ sub rocSubstitutions {
     subst("cusparseSgpsvInterleavedBatch_bufferSizeExt", "rocsparse_sgpsv_interleaved_batch_buffer_size", "library");
     subst("cusparseSgtsv2StridedBatch", "rocsparse_sgtsv_no_pivot_strided_batch", "library");
     subst("cusparseSgtsv2StridedBatch_bufferSizeExt", "rocsparse_sgtsv_no_pivot_strided_batch_buffer_size", "library");
+    subst("cusparseSgtsv2_nopivot", "rocsparse_sgtsv_no_pivot", "library");
+    subst("cusparseSgtsv2_nopivot_bufferSizeExt", "rocsparse_sgtsv_no_pivot_buffer_size", "library");
     subst("cusparseSgtsvInterleavedBatch", "rocsparse_sgtsv_interleaved_batch", "library");
     subst("cusparseSgtsvInterleavedBatch_bufferSizeExt", "rocsparse_sgtsv_interleaved_batch_buffer_size", "library");
     subst("cusparseSnnz", "rocsparse_snnz", "library");
@@ -1872,6 +1878,8 @@ sub rocSubstitutions {
     subst("cusparseZgpsvInterleavedBatch_bufferSizeExt", "rocsparse_zgpsv_interleaved_batch_buffer_size", "library");
     subst("cusparseZgtsv2StridedBatch", "rocsparse_zgtsv_no_pivot_strided_batch", "library");
     subst("cusparseZgtsv2StridedBatch_bufferSizeExt", "rocsparse_zgtsv_no_pivot_strided_batch_buffer_size", "library");
+    subst("cusparseZgtsv2_nopivot", "rocsparse_zgtsv_no_pivot", "library");
+    subst("cusparseZgtsv2_nopivot_bufferSizeExt", "rocsparse_zgtsv_no_pivot_buffer_size", "library");
     subst("cusparseZgtsvInterleavedBatch", "rocsparse_zgtsv_interleaved_batch", "library");
     subst("cusparseZgtsvInterleavedBatch_bufferSizeExt", "rocsparse_zgtsv_interleaved_batch_buffer_size", "library");
     subst("cusparseZnnz", "rocsparse_znnz", "library");
