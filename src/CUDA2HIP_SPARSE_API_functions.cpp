@@ -435,15 +435,15 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   {"cusparseCgtsv_nopivot",                             {"hipsparseCgtsv_nopivot",                             "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
   {"cusparseZgtsv_nopivot",                             {"hipsparseZgtsv_nopivot",                             "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
 
-  {"cusparseSgtsv2_bufferSizeExt",                      {"hipsparseSgtsv2_bufferSizeExt",                      "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED}},
-  {"cusparseDgtsv2_bufferSizeExt",                      {"hipsparseDgtsv2_bufferSizeExt",                      "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED}},
-  {"cusparseCgtsv2_bufferSizeExt",                      {"hipsparseCgtsv2_bufferSizeExt",                      "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED}},
-  {"cusparseZgtsv2_bufferSizeExt",                      {"hipsparseZgtsv2_bufferSizeExt",                      "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED}},
+  {"cusparseSgtsv2_bufferSizeExt",                      {"hipsparseSgtsv2_bufferSizeExt",                      "rocsparse_sgtsv_buffer_size",                                      CONV_LIB_FUNC, API_SPARSE, 12}},
+  {"cusparseDgtsv2_bufferSizeExt",                      {"hipsparseDgtsv2_bufferSizeExt",                      "rocsparse_dgtsv_buffer_size",                                      CONV_LIB_FUNC, API_SPARSE, 12}},
+  {"cusparseCgtsv2_bufferSizeExt",                      {"hipsparseCgtsv2_bufferSizeExt",                      "rocsparse_cgtsv_buffer_size",                                      CONV_LIB_FUNC, API_SPARSE, 12}},
+  {"cusparseZgtsv2_bufferSizeExt",                      {"hipsparseZgtsv2_bufferSizeExt",                      "rocsparse_zgtsv_buffer_size",                                      CONV_LIB_FUNC, API_SPARSE, 12}},
 
-  {"cusparseSgtsv2",                                    {"hipsparseSgtsv2",                                    "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED}},
-  {"cusparseDgtsv2",                                    {"hipsparseDgtsv2",                                    "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED}},
-  {"cusparseCgtsv2",                                    {"hipsparseCgtsv2",                                    "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED}},
-  {"cusparseZgtsv2",                                    {"hipsparseZgtsv2",                                    "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED}},
+  {"cusparseSgtsv2",                                    {"hipsparseSgtsv2",                                    "rocsparse_sgtsv",                                                  CONV_LIB_FUNC, API_SPARSE, 12}},
+  {"cusparseDgtsv2",                                    {"hipsparseDgtsv2",                                    "rocsparse_dgtsv",                                                  CONV_LIB_FUNC, API_SPARSE, 12}},
+  {"cusparseCgtsv2",                                    {"hipsparseCgtsv2",                                    "rocsparse_cgtsv",                                                  CONV_LIB_FUNC, API_SPARSE, 12}},
+  {"cusparseZgtsv2",                                    {"hipsparseZgtsv2",                                    "rocsparse_zgtsv",                                                  CONV_LIB_FUNC, API_SPARSE, 12}},
 
   {"cusparseSgtsv2_nopivot_bufferSizeExt",              {"hipsparseSgtsv2_nopivot_bufferSizeExt",              "rocsparse_sgtsv_no_pivot_buffer_size",                             CONV_LIB_FUNC, API_SPARSE, 12}},
   {"cusparseDgtsv2_nopivot_bufferSizeExt",              {"hipsparseDgtsv2_nopivot_bufferSizeExt",              "rocsparse_dgtsv_no_pivot_buffer_size",                             CONV_LIB_FUNC, API_SPARSE, 12}},
@@ -2167,6 +2167,14 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_FUNCTION_VER_MAP {
   {"rocsparse_cgtsv_no_pivot_buffer_size",               {HIP_4030, HIP_0,    HIP_0   }},
   {"rocsparse_dgtsv_no_pivot_buffer_size",               {HIP_4030, HIP_0,    HIP_0   }},
   {"rocsparse_sgtsv_no_pivot_buffer_size",               {HIP_4030, HIP_0,    HIP_0   }},
+  {"rocsparse_zgtsv",                                    {HIP_4030, HIP_0,    HIP_0   }},
+  {"rocsparse_cgtsv",                                    {HIP_4030, HIP_0,    HIP_0   }},
+  {"rocsparse_dgtsv",                                    {HIP_4030, HIP_0,    HIP_0   }},
+  {"rocsparse_sgtsv",                                    {HIP_4030, HIP_0,    HIP_0   }},
+  {"rocsparse_zgtsv_buffer_size",                        {HIP_4030, HIP_0,    HIP_0   }},
+  {"rocsparse_cgtsv_buffer_size",                        {HIP_4030, HIP_0,    HIP_0   }},
+  {"rocsparse_dgtsv_buffer_size",                        {HIP_4030, HIP_0,    HIP_0   }},
+  {"rocsparse_sgtsv_buffer_size",                        {HIP_4030, HIP_0,    HIP_0   }},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_SPARSE_API_SECTION_MAP {
