@@ -892,6 +892,46 @@ int main() {
   // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSgtsv2_nopivot_bufferSizeExt(hipsparseHandle_t handle, int m, int n, const float* dl, const float* d, const float* du, const float* B, int ldb, size_t* pBufferSizeInBytes);
   // CHECK: status_t = hipsparseSgtsv2_nopivot_bufferSizeExt(handle_t, m, n, &fdl, &fd, &fdu, &fB, ldb, &bufferSize);
   status_t = cusparseSgtsv2_nopivot_bufferSizeExt(handle_t, m, n, &fdl, &fd, &fdu, &fB, ldb, &bufferSize);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseZgtsv2(cusparseHandle_t handle, int m, int n, const cuDoubleComplex* dl, const cuDoubleComplex* d, const cuDoubleComplex* du, cuDoubleComplex* B, int ldb, void* pBuffer);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseZgtsv2(hipsparseHandle_t handle, int m, int n, const hipDoubleComplex* dl, const hipDoubleComplex* d, const hipDoubleComplex* du, hipDoubleComplex* B, int ldb, void* pBuffer);
+  // CHECK: status_t = hipsparseZgtsv2(handle_t, m, n, &dcomplexdl, &dcomplexd, &dcomplexdu, &dcomplexB, ldb, pBuffer);
+  status_t = cusparseZgtsv2(handle_t, m, n, &dcomplexdl, &dcomplexd, &dcomplexdu, &dcomplexB, ldb, pBuffer);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCgtsv2(cusparseHandle_t handle, int m, int n, const cuComplex* dl, const cuComplex* d, const cuComplex* du, cuComplex* B, int ldb, void* pBuffer);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseCgtsv2(hipsparseHandle_t handle, int m, int n, const hipComplex* dl, const hipComplex* d, const hipComplex* du, hipComplex* B, int ldb, void* pBuffer);
+  // CHECK: status_t = hipsparseCgtsv2(handle_t, m, n, &complexdl, &complexd, &complexdu, &complexB, ldb, pBuffer);
+  status_t = cusparseCgtsv2(handle_t, m, n, &complexdl, &complexd, &complexdu, &complexB, ldb, pBuffer);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDgtsv2(cusparseHandle_t handle, int m, int n, const double* dl, const double* d, const double* du, double* B, int ldb, void* pBuffer);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDgtsv2(hipsparseHandle_t handle, int m, int n, const double* dl, const double* d, const double* du, double* B, int ldb, void* pBuffer);
+  // CHECK: status_t = hipsparseDgtsv2(handle_t, m, n, &ddl, &dd, &ddu, &dB, ldb, pBuffer);
+  status_t = cusparseDgtsv2(handle_t, m, n, &ddl, &dd, &ddu, &dB, ldb, pBuffer);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSgtsv2(cusparseHandle_t handle, int m, int n, const float* dl, const float* d, const float* du, float* B, int ldb, void* pBuffer);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSgtsv2(hipsparseHandle_t handle, int m, int n, const float* dl, const float* d, const float* du, float* B, int ldb, void* pBuffer);
+  // CHECK: status_t = hipsparseSgtsv2(handle_t, m, n, &fdl, &fd, &fdu, &fB, ldb, pBuffer);
+  status_t = cusparseSgtsv2(handle_t, m, n, &fdl, &fd, &fdu, &fB, ldb, pBuffer);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseZgtsv2_bufferSizeExt(cusparseHandle_t handle, int m, int n, const cuDoubleComplex* dl, const cuDoubleComplex* d, const cuDoubleComplex* du, const cuDoubleComplex* B, int ldb, size_t* bufferSizeInBytes);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseZgtsv2_bufferSizeExt(hipsparseHandle_t handle, int m, int n, const hipDoubleComplex* dl, const hipDoubleComplex* d, const hipDoubleComplex* du, const hipDoubleComplex* B, int ldb, size_t* pBufferSizeInBytes);
+  // CHECK: status_t = hipsparseZgtsv2_bufferSizeExt(handle_t, m, n, &dcomplexdl, &dcomplexd, &dcomplexdu, &dcomplexB, ldb, &bufferSize);
+  status_t = cusparseZgtsv2_bufferSizeExt(handle_t, m, n, &dcomplexdl, &dcomplexd, &dcomplexdu, &dcomplexB, ldb, &bufferSize);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCgtsv2_bufferSizeExt(cusparseHandle_t handle, int m, int n, const cuComplex* dl, const cuComplex* d, const cuComplex* du, const cuComplex* B, int ldb, size_t* bufferSizeInBytes);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseCgtsv2_bufferSizeExt(hipsparseHandle_t handle, int m, int n, const hipComplex* dl, const hipComplex* d, const hipComplex* du, const hipComplex* B, int ldb, size_t* pBufferSizeInBytes);
+  // CHECK: status_t = hipsparseCgtsv2_bufferSizeExt(handle_t, m, n, &complexdl, &complexd, &complexdu, &complexB, ldb, &bufferSize);
+  status_t = cusparseCgtsv2_bufferSizeExt(handle_t, m, n, &complexdl, &complexd, &complexdu, &complexB, ldb, &bufferSize);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDgtsv2_bufferSizeExt(cusparseHandle_t handle, int m, int n, const double* dl, const double* d, const double* du, const double* B, int ldb, size_t* bufferSizeInBytes);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDgtsv2_bufferSizeExt(hipsparseHandle_t handle, int m, int n, const double* dl, const double* d, const double* du, const double* B, int db, size_t* pBufferSizeInBytes);
+  // CHECK: status_t = hipsparseDgtsv2_bufferSizeExt(handle_t, m, n, &ddl, &dd, &ddu, &dB, ldb, &bufferSize);
+  status_t = cusparseDgtsv2_bufferSizeExt(handle_t, m, n, &ddl, &dd, &ddu, &dB, ldb, &bufferSize);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSgtsv2_bufferSizeExt(cusparseHandle_t handle, int m, int n, const float* dl, const float* d, const float* du, const float* B, int ldb, size_t* bufferSizeInBytes);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSgtsv2_bufferSizeExt(hipsparseHandle_t handle, int m, int n, const float* dl, const float* d, const float* du, const float* B, int ldb, size_t* pBufferSizeInBytes);
+  // CHECK: status_t = hipsparseSgtsv2_bufferSizeExt(handle_t, m, n, &fdl, &fd, &fdu, &fB, ldb, &bufferSize);
+  status_t = cusparseSgtsv2_bufferSizeExt(handle_t, m, n, &fdl, &fd, &fdu, &fB, ldb, &bufferSize);
 #endif
 
 #if CUDA_VERSION >= 9020

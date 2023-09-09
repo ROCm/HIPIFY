@@ -899,6 +899,46 @@ int main() {
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_sgtsv_no_pivot_buffer_size(rocsparse_handle handle, rocsparse_int m, rocsparse_int n, const float* dl, const float* d, const float* du, const float* B, rocsparse_int ldb, size_t* buffer_size);
   // CHECK: status_t = rocsparse_sgtsv_no_pivot_buffer_size(handle_t, m, n, &fdl, &fd, &fdu, &fB, ldb, &bufferSize);
   status_t = cusparseSgtsv2_nopivot_bufferSizeExt(handle_t, m, n, &fdl, &fd, &fdu, &fB, ldb, &bufferSize);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseZgtsv2(cusparseHandle_t handle, int m, int n, const cuDoubleComplex* dl, const cuDoubleComplex* d, const cuDoubleComplex* du, cuDoubleComplex* B, int ldb, void* pBuffer);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_zgtsv(rocsparse_handle handle, rocsparse_int m, rocsparse_int n, const rocsparse_double_complex* dl, const rocsparse_double_complex* d, const rocsparse_double_complex* du, rocsparse_double_complex* B, rocsparse_int ldb, void* temp_buffer);
+  // CHECK: status_t = rocsparse_zgtsv(handle_t, m, n, &dcomplexdl, &dcomplexd, &dcomplexdu, &dcomplexB, ldb, pBuffer);
+  status_t = cusparseZgtsv2(handle_t, m, n, &dcomplexdl, &dcomplexd, &dcomplexdu, &dcomplexB, ldb, pBuffer);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCgtsv2(cusparseHandle_t handle, int m, int n, const cuComplex* dl, const cuComplex* d, const cuComplex* du, cuComplex* B, int ldb, void* pBuffer);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_cgtsv(rocsparse_handle handle, rocsparse_int m, rocsparse_int n, const rocsparse_float_complex* dl, const rocsparse_float_complex* d, const rocsparse_float_complex* du, rocsparse_float_complex* B, rocsparse_int ldb, void* temp_buffer);
+  // CHECK: status_t = rocsparse_cgtsv(handle_t, m, n, &complexdl, &complexd, &complexdu, &complexB, ldb, pBuffer);
+  status_t = cusparseCgtsv2(handle_t, m, n, &complexdl, &complexd, &complexdu, &complexB, ldb, pBuffer);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDgtsv2(cusparseHandle_t handle, int m, int n, const double* dl, const double* d, const double* du, double* B, int ldb, void* pBuffer);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_dgtsv(rocsparse_handle handle, rocsparse_int m, rocsparse_int n, const double* dl, const double* d, const double* du, double* B, rocsparse_int ldb, void* temp_buffer);
+  // CHECK: status_t = rocsparse_dgtsv(handle_t, m, n, &ddl, &dd, &ddu, &dB, ldb, pBuffer);
+  status_t = cusparseDgtsv2(handle_t, m, n, &ddl, &dd, &ddu, &dB, ldb, pBuffer);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSgtsv2(cusparseHandle_t handle, int m, int n, const float* dl, const float* d, const float* du, float* B, int ldb, void* pBuffer);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_sgtsv(rocsparse_handle handle, rocsparse_int m, rocsparse_int n, const float* dl, const float* d, const float* du, float* B, rocsparse_int ldb, void* temp_buffer);
+  // CHECK: status_t = rocsparse_sgtsv(handle_t, m, n, &fdl, &fd, &fdu, &fB, ldb, pBuffer);
+  status_t = cusparseSgtsv2(handle_t, m, n, &fdl, &fd, &fdu, &fB, ldb, pBuffer);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseZgtsv2_bufferSizeExt(cusparseHandle_t handle, int m, int n, const cuDoubleComplex* dl, const cuDoubleComplex* d, const cuDoubleComplex* du, const cuDoubleComplex* B, int ldb, size_t* bufferSizeInBytes);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_zgtsv_buffer_size(rocsparse_handle handle, rocsparse_int m, rocsparse_int n, const rocsparse_double_complex* dl, const rocsparse_double_complex* d, const rocsparse_double_complex* du, const rocsparse_double_complex* B, rocsparse_int ldb, size_t* buffer_size);
+  // CHECK: status_t = rocsparse_zgtsv_buffer_size(handle_t, m, n, &dcomplexdl, &dcomplexd, &dcomplexdu, &dcomplexB, ldb, &bufferSize);
+  status_t = cusparseZgtsv2_bufferSizeExt(handle_t, m, n, &dcomplexdl, &dcomplexd, &dcomplexdu, &dcomplexB, ldb, &bufferSize);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCgtsv2_bufferSizeExt(cusparseHandle_t handle, int m, int n, const cuComplex* dl, const cuComplex* d, const cuComplex* du, const cuComplex* B, int ldb, size_t* bufferSizeInBytes);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_cgtsv_buffer_size(rocsparse_handle handle, rocsparse_int m, rocsparse_int n, const rocsparse_float_complex* dl, const rocsparse_float_complex* d, const rocsparse_float_complex* du, const rocsparse_float_complex* B, rocsparse_int ldb, size_t* buffer_size);
+  // CHECK: status_t = rocsparse_cgtsv_buffer_size(handle_t, m, n, &complexdl, &complexd, &complexdu, &complexB, ldb, &bufferSize);
+  status_t = cusparseCgtsv2_bufferSizeExt(handle_t, m, n, &complexdl, &complexd, &complexdu, &complexB, ldb, &bufferSize);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDgtsv2_bufferSizeExt(cusparseHandle_t handle, int m, int n, const double* dl, const double* d, const double* du, const double* B, int ldb, size_t* bufferSizeInBytes);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_dgtsv_buffer_size(rocsparse_handle handle, rocsparse_int m, rocsparse_int n, const double* dl, const double* d, const double* du, const double* B, rocsparse_int ldb, size_t* buffer_size);
+  // CHECK: status_t = rocsparse_dgtsv_buffer_size(handle_t, m, n, &ddl, &dd, &ddu, &dB, ldb, &bufferSize);
+  status_t = cusparseDgtsv2_bufferSizeExt(handle_t, m, n, &ddl, &dd, &ddu, &dB, ldb, &bufferSize);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSgtsv2_bufferSizeExt(cusparseHandle_t handle, int m, int n, const float* dl, const float* d, const float* du, const float* B, int ldb, size_t* bufferSizeInBytes);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_sgtsv_buffer_size(rocsparse_handle handle, rocsparse_int m, rocsparse_int n, const float* dl, const float* d, const float* du, const float* B, rocsparse_int ldb, size_t* buffer_size);
+  // CHECK: status_t = rocsparse_sgtsv_buffer_size(handle_t, m, n, &fdl, &fd, &fdu, &fB, ldb, &bufferSize);
+  status_t = cusparseSgtsv2_bufferSizeExt(handle_t, m, n, &fdl, &fd, &fdu, &fB, ldb, &bufferSize);
 #endif
 
 #if CUDA_VERSION >= 9020
