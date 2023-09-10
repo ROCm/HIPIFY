@@ -120,8 +120,8 @@
 |`csrgemm2Info_t`| | |12.0| | | | | |
 |`csric02Info`| |12.2| | | | | | |
 |`csric02Info_t`| |12.2| | | | | | |
-|`csrilu02Info`| |12.2| | | | | | |
-|`csrilu02Info_t`| |12.2| | | | | | |
+|`csrilu02Info`| |12.2| |`_rocsparse_mat_info`|1.9.0| | | |
+|`csrilu02Info_t`| |12.2| |`rocsparse_mat_info`|1.9.0| | | |
 |`csrsm2Info`|9.2| |12.0| | | | | |
 |`csrsm2Info_t`|9.2| |12.0| | | | | |
 |`csrsv2Info`| | |12.0| | | | | |
@@ -484,7 +484,7 @@
 |`cusparseCcsric02_bufferSize`| |12.2| | | | | | |
 |`cusparseCcsric02_bufferSizeExt`| |12.2| | | | | | |
 |`cusparseCcsrilu0`| |10.2|11.0| | | | | |
-|`cusparseCcsrilu02`| |12.2| | | | | | |
+|`cusparseCcsrilu02`| |12.2| |`rocsparse_ccsrilu0`|2.10.0| | | |
 |`cusparseCcsrilu02_analysis`| |12.2| | | | | | |
 |`cusparseCcsrilu02_bufferSize`| |12.2| | | | | | |
 |`cusparseCcsrilu02_bufferSizeExt`| |12.2| | | | | | |
@@ -518,7 +518,7 @@
 |`cusparseDcsric02_bufferSize`| |12.2| | | | | | |
 |`cusparseDcsric02_bufferSizeExt`| |12.2| | | | | | |
 |`cusparseDcsrilu0`| |10.2|11.0| | | | | |
-|`cusparseDcsrilu02`| |12.2| | | | | | |
+|`cusparseDcsrilu02`| |12.2| |`rocsparse_dcsrilu0`|1.9.0| | | |
 |`cusparseDcsrilu02_analysis`| |12.2| | | | | | |
 |`cusparseDcsrilu02_bufferSize`| |12.2| | | | | | |
 |`cusparseDcsrilu02_bufferSizeExt`| |12.2| | | | | | |
@@ -551,7 +551,7 @@
 |`cusparseScsric02_bufferSize`| |12.2| | | | | | |
 |`cusparseScsric02_bufferSizeExt`| |12.2| | | | | | |
 |`cusparseScsrilu0`| |10.2|11.0| | | | | |
-|`cusparseScsrilu02`| |12.2| | | | | | |
+|`cusparseScsrilu02`| |12.2| |`rocsparse_scsrilu0`|1.9.0| | | |
 |`cusparseScsrilu02_analysis`| |12.2| | | | | | |
 |`cusparseScsrilu02_bufferSize`| |12.2| | | | | | |
 |`cusparseScsrilu02_bufferSizeExt`| |12.2| | | | | | |
@@ -588,7 +588,7 @@
 |`cusparseZcsric02_bufferSize`| |12.2| | | | | | |
 |`cusparseZcsric02_bufferSizeExt`| |12.2| | | | | | |
 |`cusparseZcsrilu0`| |10.2|11.0| | | | | |
-|`cusparseZcsrilu02`| |12.2| | | | | | |
+|`cusparseZcsrilu02`| |12.2| |`rocsparse_zcsrilu0`|2.10.0| | | |
 |`cusparseZcsrilu02_analysis`| |12.2| | | | | | |
 |`cusparseZcsrilu02_bufferSize`| |12.2| | | | | | |
 |`cusparseZcsrilu02_bufferSizeExt`| |12.2| | | | | | |

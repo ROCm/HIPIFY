@@ -33,6 +33,7 @@ namespace hipify {
     e_add_const_argument,
     e_add_var_argument,
     e_move_argument,
+    e_replace_argument_with_const,
   };
 
   enum OverloadTypes {
@@ -51,7 +52,7 @@ namespace hipify {
   struct CastInfo {
     CastTypes castType;
     CastWarning castWarn;
-    std::string constValToAdd = "";
+    std::string constValToAddOrReplace = "";
     unsigned moveOrCopyTo = 0;
     unsigned numberToMoveOrCopy = 1;
   };

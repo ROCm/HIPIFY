@@ -98,6 +98,10 @@ const std::string sCusparseZgtsvInterleavedBatch_bufferSizeExt = "cusparseZgtsvI
 const std::string sCusparseCgtsvInterleavedBatch_bufferSizeExt = "cusparseCgtsvInterleavedBatch_bufferSizeExt";
 const std::string sCusparseDgtsvInterleavedBatch_bufferSizeExt = "cusparseDgtsvInterleavedBatch_bufferSizeExt";
 const std::string sCusparseSgtsvInterleavedBatch_bufferSizeExt = "cusparseSgtsvInterleavedBatch_bufferSizeExt";
+const std::string sCusparseZcsrilu02 = "cusparseZcsrilu02";
+const std::string sCusparseCcsrilu02 = "cusparseCcsrilu02";
+const std::string sCusparseDcsrilu02 = "cusparseDcsrilu02";
+const std::string sCusparseScsrilu02 = "cusparseScsrilu02";
 // CUDA_OVERLOADED
 const std::string sCudaEventCreate = "cudaEventCreate";
 const std::string sCudaGraphInstantiate = "cudaGraphInstantiate";
@@ -122,6 +126,7 @@ std::string getCastType(hipify::CastTypes c) {
     case e_add_const_argument: return "";
     case e_add_var_argument: return "";
     case e_move_argument: return "";
+    case e_replace_argument_with_const: return "";
     default: return "";
   }
 }
@@ -537,6 +542,42 @@ std::map<std::string, ArgCastStruct> FuncArgCasts {
     {
       {
         {7, {e_add_var_argument, cw_None, "", 8}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseZcsrilu02,
+    {
+      {
+        {8, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseCcsrilu02,
+    {
+      {
+        {8, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseDcsrilu02,
+    {
+      {
+        {8, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseScsrilu02,
+    {
+      {
+        {8, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
       },
       true,
       false
@@ -1048,9 +1089,9 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
         case e_add_const_argument:
         {
           if (argNum < call->getNumArgs())
-            OS << c.second.constValToAdd << ", ";
+            OS << c.second.constValToAddOrReplace << ", ";
           else
-            OS << ", " << c.second.constValToAdd;
+            OS << ", " << c.second.constValToAddOrReplace;
           break;
         }
         case e_add_var_argument:
@@ -1068,6 +1109,14 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
             OS << ", " << sArg;
             s = call->getEndLoc();
           }
+          break;
+        }
+        case e_replace_argument_with_const:
+        {
+          if (argNum >= call->getNumArgs())
+            break;
+          OS << c.second.constValToAddOrReplace;
+          length = SM->getCharacterData(clang::Lexer::getLocForEndOfToken(e, 0, *SM, DefaultLangOptions)) - SM->getCharacterData(s);
           break;
         }
         default:
@@ -1259,7 +1308,11 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
             sCusparseZgtsvInterleavedBatch_bufferSizeExt,
             sCusparseCgtsvInterleavedBatch_bufferSizeExt,
             sCusparseDgtsvInterleavedBatch_bufferSizeExt,
-            sCusparseSgtsvInterleavedBatch_bufferSizeExt
+            sCusparseSgtsvInterleavedBatch_bufferSizeExt,
+            sCusparseZcsrilu02,
+            sCusparseCcsrilu02,
+            sCusparseDcsrilu02,
+            sCusparseScsrilu02
           )
         )
       )
