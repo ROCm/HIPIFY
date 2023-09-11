@@ -1683,6 +1683,7 @@ sub rocSubstitutions {
     subst("cusparseCcsr2hyb", "rocsparse_ccsr2hyb", "library");
     subst("cusparseCcsrcolor", "rocsparse_ccsrcolor", "library");
     subst("cusparseCcsrilu02", "rocsparse_ccsrilu0", "library");
+    subst("cusparseCcsrilu02_analysis", "rocsparse_ccsrilu0_analysis", "library");
     subst("cusparseCdense2csc", "rocsparse_cdense2csc", "library");
     subst("cusparseCdense2csr", "rocsparse_cdense2csr", "library");
     subst("cusparseCgebsr2csr", "rocsparse_cgebsr2csr", "library");
@@ -1734,6 +1735,7 @@ sub rocSubstitutions {
     subst("cusparseDcsr2hyb", "rocsparse_dcsr2hyb", "library");
     subst("cusparseDcsrcolor", "rocsparse_dcsrcolor", "library");
     subst("cusparseDcsrilu02", "rocsparse_dcsrilu0", "library");
+    subst("cusparseDcsrilu02_analysis", "rocsparse_dcsrilu0_analysis", "library");
     subst("cusparseDdense2csc", "rocsparse_ddense2csc", "library");
     subst("cusparseDdense2csr", "rocsparse_ddense2csr", "library");
     subst("cusparseDestroy", "rocsparse_destroy_handle", "library");
@@ -1804,6 +1806,7 @@ sub rocSubstitutions {
     subst("cusparseScsr2hyb", "rocsparse_scsr2hyb", "library");
     subst("cusparseScsrcolor", "rocsparse_scsrcolor", "library");
     subst("cusparseScsrilu02", "rocsparse_scsrilu0", "library");
+    subst("cusparseScsrilu02_analysis", "rocsparse_scsrilu0_analysis", "library");
     subst("cusparseSdense2csc", "rocsparse_sdense2csc", "library");
     subst("cusparseSdense2csr", "rocsparse_sdense2csr", "library");
     subst("cusparseSetMatDiagType", "rocsparse_set_mat_diag_type", "library");
@@ -1877,6 +1880,7 @@ sub rocSubstitutions {
     subst("cusparseZcsr2hyb", "rocsparse_zcsr2hyb", "library");
     subst("cusparseZcsrcolor", "rocsparse_zcsrcolor", "library");
     subst("cusparseZcsrilu02", "rocsparse_zcsrilu0", "library");
+    subst("cusparseZcsrilu02_analysis", "rocsparse_zcsrilu0_analysis", "library");
     subst("cusparseZdense2csc", "rocsparse_zdense2csc", "library");
     subst("cusparseZdense2csr", "rocsparse_zdense2csr", "library");
     subst("cusparseZgebsr2csr", "rocsparse_zgebsr2csr", "library");
