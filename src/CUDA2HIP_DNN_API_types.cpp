@@ -420,6 +420,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"CUDNN_ATTR_ENGINEHEUR_MODE",                                     {"HIPDNN_ATTR_ENGINEHEUR_MODE",                                     "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 200
   {"CUDNN_ATTR_ENGINEHEUR_OPERATION_GRAPH",                          {"HIPDNN_ATTR_ENGINEHEUR_OPERATION_GRAPH",                          "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 201
   {"CUDNN_ATTR_ENGINEHEUR_RESULTS",                                  {"HIPDNN_ATTR_ENGINEHEUR_RESULTS",                                  "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 202
+  {"CUDNN_ATTR_ENGINEHEUR_SM_COUNT_TARGET",                          {"HIPDNN_ATTR_ENGINEHEUR_SM_COUNT_TARGET",                          "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 203
   {"CUDNN_ATTR_ENGINECFG_ENGINE",                                    {"HIPDNN_ATTR_ENGINECFG_ENGINE",                                    "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 300
   {"CUDNN_ATTR_ENGINECFG_INTERMEDIATE_INFO",                         {"HIPDNN_ATTR_ENGINECFG_INTERMEDIATE_INFO",                         "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 301
   {"CUDNN_ATTR_ENGINECFG_KNOB_CHOICES",                              {"HIPDNN_ATTR_ENGINECFG_KNOB_CHOICES",                              "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 302
@@ -514,6 +515,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"CUDNN_ATTR_ENGINE_NUMERICAL_NOTE",                               {"HIPDNN_ATTR_ENGINE_NUMERICAL_NOTE",                               "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 1303
   {"CUDNN_ATTR_ENGINE_LAYOUT_INFO",                                  {"HIPDNN_ATTR_ENGINE_LAYOUT_INFO",                                  "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 1304
   {"CUDNN_ATTR_ENGINE_BEHAVIOR_NOTE",                                {"HIPDNN_ATTR_ENGINE_BEHAVIOR_NOTE",                                "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 1305
+  {"CUDNN_ATTR_ENGINE_SM_COUNT_TARGET",                              {"HIPDNN_ATTR_ENGINE_SM_COUNT_TARGET",                              "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 1306
   {"CUDNN_ATTR_MATMUL_COMP_TYPE",                                    {"HIPDNN_ATTR_MATMUL_COMP_TYPE",                                    "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 1500
   {"CUDNN_ATTR_MATMUL_PADDING_VALUE",                                {"HIPDNN_ATTR_MATMUL_PADDING_VALUE",                                "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 1503
   {"CUDNN_ATTR_OPERATION_MATMUL_ADESC",                              {"HIPDNN_ATTR_OPERATION_MATMUL_ADESC",                              "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 1520
@@ -727,6 +729,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"CUDNN_KNOB_TYPE_OCCUPANCY",                                      {"HIPDNN_KNOB_TYPE_OCCUPANCY",                                      "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_KNOB_TYPE_ARRAY_SIZE_PER_THREAD",                          {"HIPDNN_KNOB_TYPE_ARRAY_SIZE_PER_THREAD",                          "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_KNOB_TYPE_NUM_C_PER_BLOCK",                                {"HIPDNN_KNOB_TYPE_NUM_C_PER_BLOCK",                                "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_KNOB_TYPE_SPLIT_COLS",                                     {"HIPDNN_KNOB_TYPE_SPLIT_COLS",                                     "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_KNOB_TYPE_TILE_ROWS",                                      {"HIPDNN_KNOB_TYPE_TILE_ROWS",                                      "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_KNOB_TYPE_TILE_COLS",                                      {"HIPDNN_KNOB_TYPE_TILE_COLS",                                      "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_KNOB_TYPE_LOAD_SIZE",                                      {"HIPDNN_KNOB_TYPE_LOAD_SIZE",                                      "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_KNOB_TYPE_COUNTS",                                         {"HIPDNN_KNOB_TYPE_COUNTS",                                         "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
   {"cudnnBackendHeurMode_t",                                         {"hipdnnBackendHeurMode_t",                                         "",                                                                CONV_TYPE, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_HEUR_MODE_INSTANT",                                        {"HIPDNN_HEUR_MODE_INSTANT",                                        "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
@@ -1669,6 +1675,12 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_TYPE_NAME_VER_MAP {
   {"CUDNN_KNOB_TYPE_OCCUPANCY",                                      {CUDNN_890, CUDA_0,   CUDA_0  }},
   {"CUDNN_KNOB_TYPE_ARRAY_SIZE_PER_THREAD",                          {CUDNN_890, CUDA_0,   CUDA_0  }},
   {"CUDNN_KNOB_TYPE_NUM_C_PER_BLOCK",                                {CUDNN_890, CUDA_0,   CUDA_0  }},
+  {"CUDNN_ATTR_ENGINEHEUR_SM_COUNT_TARGET",                          {CUDNN_895, CUDA_0,   CUDA_0  }},
+  {"CUDNN_ATTR_ENGINE_SM_COUNT_TARGET",                              {CUDNN_895, CUDA_0,   CUDA_0  }},
+  {"CUDNN_KNOB_TYPE_SPLIT_COLS",                                     {CUDNN_895, CUDA_0,   CUDA_0  }},
+  {"CUDNN_KNOB_TYPE_TILE_ROWS",                                      {CUDNN_895, CUDA_0,   CUDA_0  }},
+  {"CUDNN_KNOB_TYPE_TILE_COLS",                                      {CUDNN_895, CUDA_0,   CUDA_0  }},
+  {"CUDNN_KNOB_TYPE_LOAD_SIZE",                                      {CUDNN_895, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_DNN_TYPE_NAME_VER_MAP {
