@@ -33,12 +33,14 @@
 |`CUDNN_ATTR_ENGINEHEUR_MODE`|8.0.1| | | | | | | |
 |`CUDNN_ATTR_ENGINEHEUR_OPERATION_GRAPH`|8.0.1| | | | | | | |
 |`CUDNN_ATTR_ENGINEHEUR_RESULTS`|8.0.1| | | | | | | |
+|`CUDNN_ATTR_ENGINEHEUR_SM_COUNT_TARGET`|8.9.5| | | | | | | |
 |`CUDNN_ATTR_ENGINE_BEHAVIOR_NOTE`|8.2.0| | | | | | | |
 |`CUDNN_ATTR_ENGINE_GLOBAL_INDEX`|8.0.1| | | | | | | |
 |`CUDNN_ATTR_ENGINE_KNOB_INFO`|8.0.2| | | | | | | |
 |`CUDNN_ATTR_ENGINE_LAYOUT_INFO`|8.0.2| | | | | | | |
 |`CUDNN_ATTR_ENGINE_NUMERICAL_NOTE`|8.0.1| | | | | | | |
 |`CUDNN_ATTR_ENGINE_OPERATION_GRAPH`|8.0.1| | | | | | | |
+|`CUDNN_ATTR_ENGINE_SM_COUNT_TARGET`|8.9.5| | | | | | | |
 |`CUDNN_ATTR_EXECUTION_PLAN_COMPUTED_INTERMEDIATE_UIDS`|8.0.2| | | | | | | |
 |`CUDNN_ATTR_EXECUTION_PLAN_ENGINE_CONFIG`|8.0.1| | | | | | | |
 |`CUDNN_ATTR_EXECUTION_PLAN_HANDLE`|8.0.1| | | | | | | |
@@ -371,6 +373,7 @@
 |`CUDNN_KNOB_TYPE_LDGA`|8.0.1| | | | | | | |
 |`CUDNN_KNOB_TYPE_LDGB`|8.0.1| | | | | | | |
 |`CUDNN_KNOB_TYPE_LDGC`|8.0.1| | | | | | | |
+|`CUDNN_KNOB_TYPE_LOAD_SIZE`|8.9.5| | | | | | | |
 |`CUDNN_KNOB_TYPE_MULTIPLY`|8.0.1| | | | | | | |
 |`CUDNN_KNOB_TYPE_NUM_C_PER_BLOCK`|8.9.0| | | | | | | |
 |`CUDNN_KNOB_TYPE_OCCUPANCY`|8.9.0| | | | | | | |
@@ -378,6 +381,7 @@
 |`CUDNN_KNOB_TYPE_SINGLEBUFFER`|8.0.1| | | | | | | |
 |`CUDNN_KNOB_TYPE_SLICED`|8.0.1| | | | | | | |
 |`CUDNN_KNOB_TYPE_SPECFILT`|8.0.1| | | | | | | |
+|`CUDNN_KNOB_TYPE_SPLIT_COLS`|8.9.5| | | | | | | |
 |`CUDNN_KNOB_TYPE_SPLIT_H`|8.0.1| | | | | | | |
 |`CUDNN_KNOB_TYPE_SPLIT_K`|8.0.1| | | | | | | |
 |`CUDNN_KNOB_TYPE_SPLIT_K_BUF`|8.0.1| | | | | | | |
@@ -389,6 +393,8 @@
 |`CUDNN_KNOB_TYPE_TILE_CGA`|8.6.0| | | | | | | |
 |`CUDNN_KNOB_TYPE_TILE_CGA_M`|8.6.0| | | | | | | |
 |`CUDNN_KNOB_TYPE_TILE_CGA_N`|8.6.0| | | | | | | |
+|`CUDNN_KNOB_TYPE_TILE_COLS`|8.9.5| | | | | | | |
+|`CUDNN_KNOB_TYPE_TILE_ROWS`|8.9.5| | | | | | | |
 |`CUDNN_KNOB_TYPE_TILE_SIZE`|8.0.1| | | | | | | |
 |`CUDNN_KNOB_TYPE_USE_TEX`|8.0.1| | | | | | | |
 |`CUDNN_KNOB_TYPE_WINO_TILE`|8.0.1| | | | | | | |
