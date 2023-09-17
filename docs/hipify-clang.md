@@ -381,7 +381,7 @@ Run `Visual Studio 17 2022`, open the generated `LLVM.sln`, build all, build pro
 
         - ***Windows***: nothing to do: all the required headers are shipped with Windows SDK
 
-9. Set `HIPIFY_CLANG_TESTS` option turned on: `-DHIPIFY_CLANG_TESTS=1`.
+9. Set `HIPIFY_CLANG_TESTS` option turned on: `-DHIPIFY_CLANG_TESTS=ON`.
 
 10. Build and run tests:
 
@@ -409,7 +409,7 @@ Here is an example of building `hipify-clang` with testing support on `Ubuntu 21
 
 ```bash
 cmake
- -DHIPIFY_CLANG_TESTS=1 \
+ -DHIPIFY_CLANG_TESTS=ON \
  -DCMAKE_BUILD_TYPE=Release \
  -DCMAKE_INSTALL_PREFIX=../dist \
  -DCMAKE_PREFIX_PATH=/usr/llvm/16.0.6/dist \
@@ -592,7 +592,7 @@ cmake
  -G "Visual Studio 17 2022" \
  -A x64 \
  -Thost=x64 \
- -DHIPIFY_CLANG_TESTS=1 \
+ -DHIPIFY_CLANG_TESTS=ON \
  -DCMAKE_BUILD_TYPE=Release \
  -DCMAKE_INSTALL_PREFIX=../dist \
  -DCMAKE_PREFIX_PATH=d:/LLVM/16.0.6/dist \
