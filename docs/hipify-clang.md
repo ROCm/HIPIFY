@@ -268,6 +268,7 @@ The binary can then be found at `./dist/hipify-clang` or at the folder specified
          -DCMAKE_INSTALL_PREFIX=../dist \
          -DLLVM_SOURCE_DIR=../llvm \
          -DLLVM_TARGETS_TO_BUILD="X86;NVPTX" \
+         -DLLVM_INCLUDE_TESTS=OFF \
          -DCMAKE_BUILD_TYPE=Release \
          ../llvm
         make -j install
@@ -281,6 +282,7 @@ The binary can then be found at `./dist/hipify-clang` or at the folder specified
          -DCMAKE_INSTALL_PREFIX=../dist \
          -DLLVM_SOURCE_DIR=../llvm \
          -DLLVM_TARGETS_TO_BUILD="NVPTX" \
+         -DLLVM_INCLUDE_TESTS=OFF \
          -DCMAKE_BUILD_TYPE=Release \
          ../llvm
    ```
@@ -303,6 +305,7 @@ Run `Visual Studio 16 2019`, open the generated `LLVM.sln`, build all, and build
          -DCMAKE_INSTALL_PREFIX=../dist \
          -DLLVM_TARGETS_TO_BUILD="X86;NVPTX" \
          -DLLVM_ENABLE_PROJECTS="clang" \
+         -DLLVM_INCLUDE_TESTS=OFF \
          -DCMAKE_BUILD_TYPE=Release \
          ../llvm-project/llvm
         make -j install
@@ -316,6 +319,7 @@ Run `Visual Studio 16 2019`, open the generated `LLVM.sln`, build all, and build
          -DCMAKE_INSTALL_PREFIX=../dist \
          -DLLVM_TARGETS_TO_BUILD="NVPTX" \
          -DLLVM_ENABLE_PROJECTS="clang" \
+         -DLLVM_INCLUDE_TESTS=OFF \
          -DCMAKE_BUILD_TYPE=Release \
          ../llvm-project/llvm
    ```
