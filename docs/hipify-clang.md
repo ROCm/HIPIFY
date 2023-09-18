@@ -89,8 +89,8 @@ After applying all the matchers, the output HIP source is produced.
       <td>+</td>
     </tr>
     <tr align="center">
-      <td rowspan=2><a href="http://releases.llvm.org/download.html#10.0.0">10.0.0</a>,
-          <a href="http://releases.llvm.org/download.html#10.0.1">10.0.1</a></td>
+      <td rowspan=2><a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-10.0.0">10.0.0</a>,
+          <a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-10.0.1">10.0.1</a></td>
       <td><a href="https://developer.nvidia.com/cuda-11.0-download-archive">11.0</a></td>
       <td>+</td>
       <td>+</td>
@@ -104,7 +104,7 @@ After applying all the matchers, the output HIP source is produced.
           <a href="../patches/patch_for_clang_10.0.1_bug_47332.zip">patch for 10.0.1</a>***<br></td>
     </tr>
     <tr align="center">
-      <td rowspan=2><a href="http://releases.llvm.org/download.html#11.0.0">11.0.0</a></td>
+      <td rowspan=2><a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-11.0.0">11.0.0</a></td>
       <td><a href="https://developer.nvidia.com/cuda-11.0-download-archive">11.0</a></td>
       <td>+</td>
       <td>+</td>
