@@ -67,9 +67,9 @@ After applying all the matchers, the output HIP source is produced.
           <a href="http://releases.llvm.org/download.html#7.1.0">7.1.0</a></td>
       <td><a href="https://developer.nvidia.com/cuda-92-download-archive">9.2</a></td>
       <td>works only with the patch <br> due to the clang's bug <a href="https://bugs.llvm.org/show_bug.cgi?id=38811">38811</a><br>
-          <a href="patches/patch_for_clang_7.0.0_bug_38811.zip">patch for 7.0.0</a>**<br>
-          <a href="patches/patch_for_clang_7.0.1_bug_38811.zip">patch for 7.0.1</a>**<br>
-          <a href="patches/patch_for_clang_7.1.0_bug_38811.zip">patch for 7.1.0</a>**<br></td>
+          <a href="../patches/patch_for_clang_7.0.0_bug_38811.zip">patch for 7.0.0</a>**<br>
+          <a href="../patches/patch_for_clang_7.0.1_bug_38811.zip">patch for 7.0.1</a>**<br>
+          <a href="../patches/patch_for_clang_7.1.0_bug_38811.zip">patch for 7.1.0</a>**<br></td>
       <td>-<br> not working due to <br> the clang's bug <a href="https://bugs.llvm.org/show_bug.cgi?id=36384">36384</a></td>
     </tr>
     <tr align="center">
@@ -77,8 +77,8 @@ After applying all the matchers, the output HIP source is produced.
           <a href="http://releases.llvm.org/download.html#8.0.1">8.0.1</a></td>
       <td><a href="https://developer.nvidia.com/cuda-10.0-download-archive">10.0</a></td>
       <td>works only with the patch <br> due to the clang's bug <a href="https://bugs.llvm.org/show_bug.cgi?id=38811">38811</a><br>
-          <a href="patches/patch_for_clang_8.0.0_bug_38811.zip">patch for 8.0.0</a>**<br>
-          <a href="patches/patch_for_clang_8.0.1_bug_38811.zip">patch for 8.0.1</a>**<br></td>
+          <a href="../patches/patch_for_clang_8.0.0_bug_38811.zip">patch for 8.0.0</a>**<br>
+          <a href="../patches/patch_for_clang_8.0.1_bug_38811.zip">patch for 8.0.1</a>**<br></td>
       <td>+</td>
     </tr>
     <tr align="center">
@@ -100,8 +100,8 @@ After applying all the matchers, the output HIP source is produced.
           <a href="https://developer.nvidia.com/cuda-11.1.0-download-archive">11.1.0</a>,
           <a href="https://developer.nvidia.com/cuda-11.1.1-download-archive">11.1.1</a></td>
       <td colspan=2>works only with the patch <br> due to the clang's bug <a href="https://bugs.llvm.org/show_bug.cgi?id=47332">47332</a><br>
-          <a href="patches/patch_for_clang_10.0.0_bug_47332.zip">patch for 10.0.0</a>***<br>
-          <a href="patches/patch_for_clang_10.0.1_bug_47332.zip">patch for 10.0.1</a>***<br></td>
+          <a href="../patches/patch_for_clang_10.0.0_bug_47332.zip">patch for 10.0.0</a>***<br>
+          <a href="../patches/patch_for_clang_10.0.1_bug_47332.zip">patch for 10.0.1</a>***<br></td>
     </tr>
     <tr align="center">
       <td rowspan=2><a href="http://releases.llvm.org/download.html#11.0.0">11.0.0</a></td>
@@ -114,7 +114,7 @@ After applying all the matchers, the output HIP source is produced.
           <a href="https://developer.nvidia.com/cuda-11.1.0-download-archive">11.1.0</a>,
           <a href="https://developer.nvidia.com/cuda-11.1.1-download-archive">11.1.1</a></td>
       <td colspan=2>works only with the patch <br> due to the clang's bug <a href="https://bugs.llvm.org/show_bug.cgi?id=47332">47332</a><br>
-          <a href="patches/patch_for_clang_11.0.0_bug_47332.zip">patch for 11.0.0</a>***</td>
+          <a href="../patches/patch_for_clang_11.0.0_bug_47332.zip">patch for 11.0.0</a>***</td>
     </tr>
     <tr align="center">
       <td><a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-11.0.1">11.0.1</a>,
@@ -140,11 +140,11 @@ After applying all the matchers, the output HIP source is produced.
           <a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-14.0.4">14.0.4</a>
       <td><a href="https://developer.nvidia.com/cuda-11-7-1-download-archive">11.7.1</a></td>
       <td>works only with the patch <br> due to the clang's bug <a href="https://github.com/llvm/llvm-project/issues/54609">54609</a><br>
-          <a href="patches/patch_for_clang_14.0.0_bug_54609.zip">patch for 14.0.0</a>**<br>
-          <a href="patches/patch_for_clang_14.0.1_bug_54609.zip">patch for 14.0.1</a>**<br>
-          <a href="patches/patch_for_clang_14.0.2_bug_54609.zip">patch for 14.0.2</a>**<br>
-          <a href="patches/patch_for_clang_14.0.3_bug_54609.zip">patch for 14.0.3</a>**<br>
-          <a href="patches/patch_for_clang_14.0.4_bug_54609.zip">patch for 14.0.4</a>**<br></td>
+          <a href="../patches/patch_for_clang_14.0.0_bug_54609.zip">patch for 14.0.0</a>**<br>
+          <a href="../patches/patch_for_clang_14.0.1_bug_54609.zip">patch for 14.0.1</a>**<br>
+          <a href="../patches/patch_for_clang_14.0.2_bug_54609.zip">patch for 14.0.2</a>**<br>
+          <a href="../patches/patch_for_clang_14.0.3_bug_54609.zip">patch for 14.0.3</a>**<br>
+          <a href="../patches/patch_for_clang_14.0.4_bug_54609.zip">patch for 14.0.4</a>**<br></td>
       <td>+</td>
     <tr align="center">
       <td><a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-14.0.5">14.0.5</a>,
