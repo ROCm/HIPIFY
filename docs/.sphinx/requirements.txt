@@ -46,6 +46,10 @@ idna==3.4
     # via requests
 imagesize==1.4.1
     # via sphinx
+importlib-metadata==6.8.0
+    # via sphinx
+importlib-resources==6.0.1
+    # via rocm-docs-core
 jinja2==3.1.2
     # via
     #   myst-parser
@@ -83,16 +87,18 @@ pyjwt[crypto]==2.6.0
     # via pygithub
 pynacl==1.5.0
     # via pygithub
+pytz==2023.3.post1
+    # via babel
 pyyaml==6.0
     # via
     #   myst-parser
     #   rocm-docs-core
     #   sphinx-external-toc
-requests==2.28.2
+requests==2.31.0
     # via
     #   pygithub
     #   sphinx
-rocm-docs-core==0.19.0
+rocm-docs-core==0.24.1
     # via -r requirements.in
 smmap==5.0.0
     # via gitdb
@@ -139,3 +145,7 @@ urllib3==1.26.15
     # via requests
 wrapt==1.15.0
     # via deprecated
+zipp==3.16.2
+    # via
+    #   importlib-metadata
+    #   importlib-resources
