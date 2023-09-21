@@ -106,6 +106,10 @@ const std::string sCusparseZcsrilu02_analysis = "cusparseZcsrilu02_analysis";
 const std::string sCusparseCcsrilu02_analysis = "cusparseCcsrilu02_analysis";
 const std::string sCusparseDcsrilu02_analysis = "cusparseDcsrilu02_analysis";
 const std::string sCusparseScsrilu02_analysis = "cusparseScsrilu02_analysis";
+const std::string sCusparseZcsric02_analysis = "cusparseZcsric02_analysis";
+const std::string sCusparseCcsric02_analysis = "cusparseCcsric02_analysis";
+const std::string sCusparseDcsric02_analysis = "cusparseDcsric02_analysis";
+const std::string sCusparseScsric02_analysis = "cusparseScsric02_analysis";
 // CUDA_OVERLOADED
 const std::string sCudaEventCreate = "cudaEventCreate";
 const std::string sCudaGraphInstantiate = "cudaGraphInstantiate";
@@ -618,6 +622,46 @@ std::map<std::string, ArgCastStruct> FuncArgCasts {
     }
   },
   {sCusparseScsrilu02_analysis,
+    {
+      {
+        {8, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+        {9, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseZcsric02_analysis,
+    {
+      {
+        {8, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+        {9, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseCcsric02_analysis,
+    {
+      {
+        {8, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+        {9, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseDcsric02_analysis,
+    {
+      {
+        {8, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+        {9, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseScsric02_analysis,
     {
       {
         {8, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
@@ -1360,7 +1404,11 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
             sCusparseZcsrilu02_analysis,
             sCusparseCcsrilu02_analysis,
             sCusparseDcsrilu02_analysis,
-            sCusparseScsrilu02_analysis
+            sCusparseScsrilu02_analysis,
+            sCusparseZcsric02_analysis,
+            sCusparseCcsric02_analysis,
+            sCusparseDcsric02_analysis,
+            sCusparseScsric02_analysis
           )
         )
       )

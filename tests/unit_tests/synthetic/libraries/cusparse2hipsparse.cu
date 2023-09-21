@@ -789,6 +789,26 @@ int main() {
   // CHECK: status_t = hipsparseScsric02(handle_t, m, innz, matDescr_A, &csrSortedValA, &csrRowPtrA, &csrColIndA, csric02_info, solvePolicy_t, pBuffer);
   status_t = cusparseScsric02(handle_t, m, innz, matDescr_A, &csrSortedValA, &csrRowPtrA, &csrColIndA, csric02_info, solvePolicy_t, pBuffer);
 
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseZcsric02_analysis(cusparseHandle_t handle, int m, int nnz, const cusparseMatDescr_t descrA, const cuDoubleComplex* csrSortedValA, const int* csrSortedRowPtrA, const int* csrSortedColIndA, csric02Info_t info, cusparseSolvePolicy_t policy, void* pBuffer);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseZcsric02_analysis(hipsparseHandle_t handle, int m, int nnz, const hipsparseMatDescr_t descrA, const hipDoubleComplex* csrSortedValA, const int* csrSortedRowPtrA, const int* csrSortedColIndA, csric02Info_t info, hipsparseSolvePolicy_t policy, void* pBuffer);
+  // CHECK: status_t = hipsparseZcsric02_analysis(handle_t, m, innz, matDescr_A, &dComplexcsrSortedValA, &csrRowPtrA, &csrColIndA, csric02_info, solvePolicy_t, pBuffer);
+  status_t = cusparseZcsric02_analysis(handle_t, m, innz, matDescr_A, &dComplexcsrSortedValA, &csrRowPtrA, &csrColIndA, csric02_info, solvePolicy_t, pBuffer);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCcsric02_analysis(cusparseHandle_t handle, int m, int nnz, const cusparseMatDescr_t descrA, const cuComplex* csrSortedValA, const int* csrSortedRowPtrA, const int* csrSortedColIndA, csric02Info_t info, cusparseSolvePolicy_t policy, void* pBuffer);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseCcsric02_analysis(hipsparseHandle_t handle, int m, int nnz, const hipsparseMatDescr_t descrA, const hipComplex* csrSortedValA, const int* csrSortedRowPtrA, const int* csrSortedColIndA, csric02Info_t info, hipsparseSolvePolicy_t policy, void* pBuffer);
+  // CHECK: status_t = hipsparseCcsric02_analysis(handle_t, m, innz, matDescr_A, &complexcsrSortedValA, &csrRowPtrA, &csrColIndA, csric02_info, solvePolicy_t, pBuffer);
+  status_t = cusparseCcsric02_analysis(handle_t, m, innz, matDescr_A, &complexcsrSortedValA, &csrRowPtrA, &csrColIndA, csric02_info, solvePolicy_t, pBuffer);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDcsric02_analysis(cusparseHandle_t handle, int m, int nnz, const cusparseMatDescr_t descrA, const double* csrSortedValA, const int* csrSortedRowPtrA, const int* csrSortedColIndA, csric02Info_t info, cusparseSolvePolicy_t policy, void* pBuffer);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDcsric02_analysis(hipsparseHandle_t handle, int m, int nnz, const hipsparseMatDescr_t descrA, const double* csrSortedValA, const int* csrSortedRowPtrA, const int* csrSortedColIndA, csric02Info_t info, hipsparseSolvePolicy_t policy, void* pBuffer);
+  // CHECK: status_t = hipsparseDcsric02_analysis(handle_t, m, innz, matDescr_A, &dcsrSortedValA, &csrRowPtrA, &csrColIndA, csric02_info, solvePolicy_t, pBuffer);
+  status_t = cusparseDcsric02_analysis(handle_t, m, innz, matDescr_A, &dcsrSortedValA, &csrRowPtrA, &csrColIndA, csric02_info, solvePolicy_t, pBuffer);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseScsric02_analysis(cusparseHandle_t handle, int m, int nnz, const cusparseMatDescr_t descrA, const float* csrSortedValA, const int* csrSortedRowPtrA, const int* csrSortedColIndA, csric02Info_t info, cusparseSolvePolicy_t policy, void* pBuffer);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseScsric02_analysis(hipsparseHandle_t handle, int m, int nnz, const hipsparseMatDescr_t descrA, const float* csrSortedValA, const int* csrSortedRowPtrA, const int* csrSortedColIndA, csric02Info_t info, hipsparseSolvePolicy_t policy, void* pBuffer);
+  // CHECK: status_t = hipsparseScsric02_analysis(handle_t, m, innz, matDescr_A, &csrSortedValA, &csrRowPtrA, &csrColIndA, csric02_info, solvePolicy_t, pBuffer);
+  status_t = cusparseScsric02_analysis(handle_t, m, innz, matDescr_A, &csrSortedValA, &csrRowPtrA, &csrColIndA, csric02_info, solvePolicy_t, pBuffer);
+
 #if CUDA_VERSION >= 8000
   // CHECK: hipDataType dataType_t;
   // CHECK-NEXT: hipDataType dataType;
