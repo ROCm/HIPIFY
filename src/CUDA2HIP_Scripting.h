@@ -27,6 +27,7 @@ namespace hipify {
   enum CastTypes {
     e_HIP_SYMBOL,
     e_reinterpret_cast,
+    e_reinterpret_cast_size_t,
     e_int32_t,
     e_int64_t,
     e_remove_argument,

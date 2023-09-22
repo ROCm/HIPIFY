@@ -1684,6 +1684,8 @@ sub rocSubstitutions {
     subst("cusparseCcsrcolor", "rocsparse_ccsrcolor", "library");
     subst("cusparseCcsric02", "rocsparse_ccsric0", "library");
     subst("cusparseCcsric02_analysis", "rocsparse_ccsric0_analysis", "library");
+    subst("cusparseCcsric02_bufferSize", "rocsparse_ccsric0_buffer_size", "library");
+    subst("cusparseCcsric02_bufferSizeExt", "rocsparse_ccsric0_buffer_size", "library");
     subst("cusparseCcsrilu02", "rocsparse_ccsrilu0", "library");
     subst("cusparseCcsrilu02_analysis", "rocsparse_ccsrilu0_analysis", "library");
     subst("cusparseCcsrilu02_bufferSize", "rocsparse_ccsrilu0_buffer_size", "library");
@@ -1740,6 +1742,8 @@ sub rocSubstitutions {
     subst("cusparseDcsrcolor", "rocsparse_dcsrcolor", "library");
     subst("cusparseDcsric02", "rocsparse_dcsric0", "library");
     subst("cusparseDcsric02_analysis", "rocsparse_dcsric0_analysis", "library");
+    subst("cusparseDcsric02_bufferSize", "rocsparse_dcsric0_buffer_size", "library");
+    subst("cusparseDcsric02_bufferSizeExt", "rocsparse_dcsric0_buffer_size", "library");
     subst("cusparseDcsrilu02", "rocsparse_dcsrilu0", "library");
     subst("cusparseDcsrilu02_analysis", "rocsparse_dcsrilu0_analysis", "library");
     subst("cusparseDcsrilu02_bufferSize", "rocsparse_dcsrilu0_buffer_size", "library");
@@ -1815,6 +1819,8 @@ sub rocSubstitutions {
     subst("cusparseScsrcolor", "rocsparse_scsrcolor", "library");
     subst("cusparseScsric02", "rocsparse_scsric0", "library");
     subst("cusparseScsric02_analysis", "rocsparse_scsric0_analysis", "library");
+    subst("cusparseScsric02_bufferSize", "rocsparse_scsric0_buffer_size", "library");
+    subst("cusparseScsric02_bufferSizeExt", "rocsparse_scsric0_buffer_size", "library");
     subst("cusparseScsrilu02", "rocsparse_scsrilu0", "library");
     subst("cusparseScsrilu02_analysis", "rocsparse_scsrilu0_analysis", "library");
     subst("cusparseScsrilu02_bufferSize", "rocsparse_scsrilu0_buffer_size", "library");
@@ -1894,6 +1900,8 @@ sub rocSubstitutions {
     subst("cusparseZcsrcolor", "rocsparse_zcsrcolor", "library");
     subst("cusparseZcsric02", "rocsparse_zcsric0", "library");
     subst("cusparseZcsric02_analysis", "rocsparse_zcsric0_analysis", "library");
+    subst("cusparseZcsric02_bufferSize", "rocsparse_zcsric0_buffer_size", "library");
+    subst("cusparseZcsric02_bufferSizeExt", "rocsparse_zcsric0_buffer_size", "library");
     subst("cusparseZcsrilu02", "rocsparse_zcsrilu0", "library");
     subst("cusparseZcsrilu02_analysis", "rocsparse_zcsrilu0_analysis", "library");
     subst("cusparseZcsrilu02_bufferSize", "rocsparse_zcsrilu0_buffer_size", "library");
