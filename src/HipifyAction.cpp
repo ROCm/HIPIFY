@@ -43,6 +43,7 @@ const std::string sHipcub = "hipcub";
 const std::string sHIP_KERNEL_NAME = "HIP_KERNEL_NAME";
 std::string sHIP_SYMBOL = "HIP_SYMBOL";
 std::string s_reinterpret_cast = "reinterpret_cast<const void*>";
+std::string s_reinterpret_cast_size_t = "reinterpret_cast<size_t*>";
 std::string s_int32_t = "int32_t";
 std::string s_int64_t = "int64_t";
 const std::string sHipLaunchKernelGGL = "hipLaunchKernelGGL";
@@ -110,6 +111,10 @@ const std::string sCusparseZcsric02_analysis = "cusparseZcsric02_analysis";
 const std::string sCusparseCcsric02_analysis = "cusparseCcsric02_analysis";
 const std::string sCusparseDcsric02_analysis = "cusparseDcsric02_analysis";
 const std::string sCusparseScsric02_analysis = "cusparseScsric02_analysis";
+const std::string sCusparseZcsric02_bufferSize = "cusparseZcsric02_bufferSize";
+const std::string sCusparseCcsric02_bufferSize = "cusparseCcsric02_bufferSize";
+const std::string sCusparseDcsric02_bufferSize = "cusparseDcsric02_bufferSize";
+const std::string sCusparseScsric02_bufferSize = "cusparseScsric02_bufferSize";
 // CUDA_OVERLOADED
 const std::string sCudaEventCreate = "cudaEventCreate";
 const std::string sCudaGraphInstantiate = "cudaGraphInstantiate";
@@ -128,6 +133,7 @@ std::string getCastType(hipify::CastTypes c) {
   switch (c) {
     case e_HIP_SYMBOL: return sHIP_SYMBOL;
     case e_reinterpret_cast: return s_reinterpret_cast;
+    case e_reinterpret_cast_size_t: return s_reinterpret_cast_size_t;
     case e_int32_t: return s_int32_t;
     case e_int64_t: return s_int64_t;
     case e_remove_argument: return "";
@@ -666,6 +672,42 @@ std::map<std::string, ArgCastStruct> FuncArgCasts {
       {
         {8, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
         {9, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseZcsric02_bufferSize,
+    {
+      {
+        {8, {e_reinterpret_cast_size_t, cw_None}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseCcsric02_bufferSize,
+    {
+      {
+        {8, {e_reinterpret_cast_size_t, cw_None}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseDcsric02_bufferSize,
+    {
+      {
+        {8, {e_reinterpret_cast_size_t, cw_None}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseScsric02_bufferSize,
+    {
+      {
+        {8, {e_reinterpret_cast_size_t, cw_None}}
       },
       true,
       false
@@ -1408,7 +1450,11 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
             sCusparseZcsric02_analysis,
             sCusparseCcsric02_analysis,
             sCusparseDcsric02_analysis,
-            sCusparseScsric02_analysis
+            sCusparseScsric02_analysis,
+            sCusparseZcsric02_bufferSize,
+            sCusparseCcsric02_bufferSize,
+            sCusparseDcsric02_bufferSize,
+            sCusparseScsric02_bufferSize
           )
         )
       )
