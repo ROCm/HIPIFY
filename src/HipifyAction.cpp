@@ -146,6 +146,7 @@ std::string getCastType(hipify::CastTypes c) {
 }
 
 std::map<std::string, std::string> TypeOverloads {
+  {"enum cudaDataType_t", "hipDataType"},
   {"cudaDataType_t", "hipDataType"},
   {"cudaDataType", "hipDataType"},
 };
@@ -1344,6 +1345,8 @@ bool HipifyAction::dataTypeSelection(const mat::MatchFinder::MatchResult& Result
     std::string name = QT.getAsString();
     const auto found = TypeOverloads.find(name);
     if (found == TypeOverloads.end()) return false;
+    if (name.find("enum ") == 0)
+      name.erase(0, 5);
     std::string correct_name = found->second;
     const clang::TypeSourceInfo *si = vardecl->getTypeSourceInfo();
     const clang::TypeLoc tloc = si->getTypeLoc();
