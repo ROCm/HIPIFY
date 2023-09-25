@@ -34,3 +34,10 @@ extern "C" __global__ void tex2dKernel(float* outputData, int width, int height)
   int y = blockDim.y * blockIdx.y + threadIdx.y;
   outputData[y * width + x] = tex2D(tex, x, y);
 }
+
+int main(int argc, char** argv) {
+  float out = 0.f;
+  // CHECK: tex2dKernel<<<512, 512>>>(&out, 128, 128);
+  tex2dKernel<<<512, 512>>>(&out, 128, 128);
+  return 0;
+}
