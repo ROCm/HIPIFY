@@ -589,8 +589,8 @@ Testing Time: 7.90s
 | 14.0.0 - 14.0.6 | 7.0 - 11.7.1 | 8.0.5  - 8.4.1 | 2017.15.9.57*, 2019.16.11.17, 2022.17.2.6 | 3.24.0          | 3.10.6        |
 | 15.0.0 - 15.0.7 | 7.0 - 11.8.0 | 8.0.5  - 8.8.1 | 2019.16.11.25, 2022.17.5.2                | 3.26.0          | 3.11.2        |
 | 16.0.0 - 16.0.6 | 7.0 - 12.2.2 | 8.0.5  - 8.9.5 | 2019.16.11.29, 2022.17.7.1                | 3.27.3          | 3.11.4        |
-| 17.0.1**        | 7.0 - 12.2.2 | 8.0.5  - 8.9.5 | 2019.16.11.29, 2022.17.7.1                | 3.27.3          | 3.11.4        |
-| 18.0.0git       | 7.0 - 12.2.2 | 8.0.5  - 8.9.5 | 2019.16.11.29, 2022.17.7.1                | 3.27.3          | 3.11.4        |
+| 17.0.1**        | 7.0 - 12.2.2 | 8.0.5  - 8.9.5 | 2019.16.11.30, 2022.17.7.4                | 3.27.6          | 3.11.5        |
+| 18.0.0git       | 7.0 - 12.2.2 | 8.0.5  - 8.9.5 | 2019.16.11.30, 2022.17.7.4                | 3.27.6          | 3.11.5        |
 
 `*` LLVM 14.x.x is the latest major release supporting Visual Studio 2017.
 To build LLVM 14.x.x correctly by Visual Studio 2017, `-DLLVM_FORCE_USE_OLD_TOOLCHAIN=ON` should be added to a corresponding cmake command line.
@@ -622,7 +622,7 @@ cmake
 --    - CMake module path: d:/LLVM/17.0.1/dist/lib/cmake/llvm
 --    - Include path     : d:/LLVM/17.0.1/dist/include
 --    - Binary path      : d:/LLVM/17.0.1/dist/bin
--- Found PythonInterp: c:/Program Files/Python311/python.exe (found suitable version "3.11.4", minimum required is "3.6")
+-- Found PythonInterp: c:/Program Files/Python311/python.exe (found suitable version "3.11.5", minimum required is "3.6")
 -- Found lit: c:/Program Files/Python311/Scripts/lit.exe
 -- Found FileCheck: d:/LLVM/17.0.1/dist/bin/FileCheck.exe
 -- Found CUDA: c:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.2 (found version "12.2")
