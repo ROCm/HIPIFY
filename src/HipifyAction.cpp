@@ -115,6 +115,10 @@ const std::string sCusparseZcsric02_bufferSize = "cusparseZcsric02_bufferSize";
 const std::string sCusparseCcsric02_bufferSize = "cusparseCcsric02_bufferSize";
 const std::string sCusparseDcsric02_bufferSize = "cusparseDcsric02_bufferSize";
 const std::string sCusparseScsric02_bufferSize = "cusparseScsric02_bufferSize";
+const std::string sCusparseZbsrilu02 = "cusparseZbsrilu02";
+const std::string sCusparseCbsrilu02 = "cusparseCbsrilu02";
+const std::string sCusparseDbsrilu02 = "cusparseDbsrilu02";
+const std::string sCusparseSbsrilu02 = "cusparseSbsrilu02";
 // CUDA_OVERLOADED
 const std::string sCudaEventCreate = "cudaEventCreate";
 const std::string sCudaGraphInstantiate = "cudaGraphInstantiate";
@@ -709,6 +713,42 @@ std::map<std::string, ArgCastStruct> FuncArgCasts {
     {
       {
         {8, {e_reinterpret_cast_size_t, cw_None}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseZbsrilu02,
+    {
+      {
+        {10, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseCbsrilu02,
+    {
+      {
+        {10, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseDbsrilu02,
+    {
+      {
+        {10, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseSbsrilu02,
+    {
+      {
+        {10, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
       },
       true,
       false
@@ -1457,7 +1497,11 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
             sCusparseZcsric02_bufferSize,
             sCusparseCcsric02_bufferSize,
             sCusparseDcsric02_bufferSize,
-            sCusparseScsric02_bufferSize
+            sCusparseScsric02_bufferSize,
+            sCusparseZbsrilu02,
+            sCusparseCbsrilu02,
+            sCusparseDbsrilu02,
+            sCusparseSbsrilu02
           )
         )
       )
