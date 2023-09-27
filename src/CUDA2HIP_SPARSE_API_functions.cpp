@@ -343,7 +343,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   {"cusparseCcsric02",                                  {"hipsparseCcsric02",                                  "rocsparse_ccsric0",                                                CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED}},
   {"cusparseZcsric02",                                  {"hipsparseZcsric02",                                  "rocsparse_zcsric0",                                                CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED}},
 
-  {"cusparseXcsric02_zeroPivot",                        {"hipsparseXcsric02_zeroPivot",                        "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cusparseXcsric02_zeroPivot",                        {"hipsparseXcsric02_zeroPivot",                        "rocsparse_csric0_zero_pivot",                                      CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED}},
   {"cusparseSbsric02_bufferSize",                       {"hipsparseSbsric02_bufferSize",                       "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
   {"cusparseSbsric02_bufferSizeExt",                    {"hipsparseSbsric02_bufferSizeExt",                    "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED}},
   {"cusparseDbsric02_bufferSize",                       {"hipsparseDbsric02_bufferSize",                       "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
@@ -416,11 +416,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   {"cusparseCbsrilu02_analysis",                        {"hipsparseCbsrilu02_analysis",                        "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
   {"cusparseZbsrilu02_analysis",                        {"hipsparseZbsrilu02_analysis",                        "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
 
-  {"cusparseSbsrilu02",                                 {"hipsparseSbsrilu02",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cusparseDbsrilu02",                                 {"hipsparseDbsrilu02",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cusparseCbsrilu02",                                 {"hipsparseCbsrilu02",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cusparseZbsrilu02",                                 {"hipsparseZbsrilu02",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cusparseXbsrilu02_zeroPivot",                       {"hipsparseXbsrilu02_zeroPivot",                       "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cusparseSbsrilu02",                                 {"hipsparseSbsrilu02",                                 "rocsparse_sbsrilu0",                                               CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED}},
+  {"cusparseDbsrilu02",                                 {"hipsparseDbsrilu02",                                 "rocsparse_dbsrilu0",                                               CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED}},
+  {"cusparseCbsrilu02",                                 {"hipsparseCbsrilu02",                                 "rocsparse_cbsrilu0",                                               CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED}},
+  {"cusparseZbsrilu02",                                 {"hipsparseZbsrilu02",                                 "rocsparse_zbsrilu0",                                               CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED}},
+  {"cusparseXbsrilu02_zeroPivot",                       {"hipsparseXbsrilu02_zeroPivot",                       "rocsparse_bsrilu0_zero_pivot",                                     CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED}},
 
   // 12.3. Tridiagonal Solve
   // NOTE: rocsparse_(s|d|c|z)gtsv have an additional parameter void* temp_buffer
@@ -2204,6 +2204,12 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_FUNCTION_VER_MAP {
   {"rocsparse_ccsric0_buffer_size",                      {HIP_3010, HIP_0,    HIP_0   }},
   {"rocsparse_dcsric0_buffer_size",                      {HIP_3010, HIP_0,    HIP_0   }},
   {"rocsparse_scsric0_buffer_size",                      {HIP_3010, HIP_0,    HIP_0   }},
+  {"rocsparse_csric0_zero_pivot",                        {HIP_3010, HIP_0,    HIP_0   }},
+  {"rocsparse_zbsrilu0",                                 {HIP_3090, HIP_0,    HIP_0   }},
+  {"rocsparse_cbsrilu0",                                 {HIP_3090, HIP_0,    HIP_0   }},
+  {"rocsparse_dbsrilu0",                                 {HIP_3090, HIP_0,    HIP_0   }},
+  {"rocsparse_sbsrilu0",                                 {HIP_3090, HIP_0,    HIP_0   }},
+  {"rocsparse_bsrilu0_zero_pivot",                       {HIP_3090, HIP_0,    HIP_0   }},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_SPARSE_API_SECTION_MAP {
