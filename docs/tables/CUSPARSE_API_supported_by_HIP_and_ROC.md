@@ -474,7 +474,7 @@
 |`cusparseCbsric02_bufferSize`| |12.2| |`hipsparseCbsric02_bufferSize`|3.8.0| | | | | | | | |
 |`cusparseCbsric02_bufferSizeExt`| |12.2| | | | | | | | | | | |
 |`cusparseCbsrilu02`| |12.2| |`hipsparseCbsrilu02`|3.9.0| | | |`rocsparse_cbsrilu0`|3.9.0| | | |
-|`cusparseCbsrilu02_analysis`| |12.2| |`hipsparseCbsrilu02_analysis`|3.9.0| | | | | | | | |
+|`cusparseCbsrilu02_analysis`| |12.2| |`hipsparseCbsrilu02_analysis`|3.9.0| | | |`rocsparse_cbsrilu0_analysis`|3.6.0| | | |
 |`cusparseCbsrilu02_bufferSize`| |12.2| |`hipsparseCbsrilu02_bufferSize`|3.9.0| | | | | | | | |
 |`cusparseCbsrilu02_bufferSizeExt`| |12.2| | | | | | | | | | | |
 |`cusparseCbsrilu02_numericBoost`| |12.2| |`hipsparseCbsrilu02_numericBoost`|3.9.0| | | | | | | | |
@@ -508,7 +508,7 @@
 |`cusparseDbsric02_bufferSize`| |12.2| |`hipsparseDbsric02_bufferSize`|3.8.0| | | | | | | | |
 |`cusparseDbsric02_bufferSizeExt`| |12.2| | | | | | | | | | | |
 |`cusparseDbsrilu02`| |12.2| |`hipsparseDbsrilu02`|3.9.0| | | |`rocsparse_dbsrilu0`|3.9.0| | | |
-|`cusparseDbsrilu02_analysis`| |12.2| |`hipsparseDbsrilu02_analysis`|3.9.0| | | | | | | | |
+|`cusparseDbsrilu02_analysis`| |12.2| |`hipsparseDbsrilu02_analysis`|3.9.0| | | |`rocsparse_dbsrilu0_analysis`|3.6.0| | | |
 |`cusparseDbsrilu02_bufferSize`| |12.2| |`hipsparseDbsrilu02_bufferSize`|3.9.0| | | | | | | | |
 |`cusparseDbsrilu02_bufferSizeExt`| |12.2| | | | | | | | | | | |
 |`cusparseDbsrilu02_numericBoost`| |12.2| |`hipsparseDbsrilu02_numericBoost`|3.9.0| | | | | | | | |
@@ -541,7 +541,7 @@
 |`cusparseSbsric02_bufferSize`| |12.2| |`hipsparseSbsric02_bufferSize`|3.8.0| | | | | | | | |
 |`cusparseSbsric02_bufferSizeExt`| |12.2| | | | | | | | | | | |
 |`cusparseSbsrilu02`| |12.2| |`hipsparseSbsrilu02`|3.9.0| | | |`rocsparse_sbsrilu0`|3.9.0| | | |
-|`cusparseSbsrilu02_analysis`| |12.2| |`hipsparseSbsrilu02_analysis`|3.9.0| | | | | | | | |
+|`cusparseSbsrilu02_analysis`| |12.2| |`hipsparseSbsrilu02_analysis`|3.9.0| | | |`rocsparse_sbsrilu0_analysis`|3.6.0| | | |
 |`cusparseSbsrilu02_bufferSize`| |12.2| |`hipsparseSbsrilu02_bufferSize`|3.9.0| | | | | | | | |
 |`cusparseSbsrilu02_bufferSizeExt`| |12.2| | | | | | | | | | | |
 |`cusparseSbsrilu02_numericBoost`| |12.2| |`hipsparseSbsrilu02_numericBoost`|3.9.0| | | | | | | | |
@@ -578,7 +578,7 @@
 |`cusparseZbsric02_bufferSize`| |12.2| |`hipsparseZbsric02_bufferSize`|3.8.0| | | | | | | | |
 |`cusparseZbsric02_bufferSizeExt`| |12.2| | | | | | | | | | | |
 |`cusparseZbsrilu02`| |12.2| |`hipsparseZbsrilu02`|3.9.0| | | |`rocsparse_zbsrilu0`|3.9.0| | | |
-|`cusparseZbsrilu02_analysis`| |12.2| |`hipsparseZbsrilu02_analysis`|3.9.0| | | | | | | | |
+|`cusparseZbsrilu02_analysis`| |12.2| |`hipsparseZbsrilu02_analysis`|3.9.0| | | |`rocsparse_zbsrilu0_analysis`|3.6.0| | | |
 |`cusparseZbsrilu02_bufferSize`| |12.2| |`hipsparseZbsrilu02_bufferSize`|3.9.0| | | | | | | | |
 |`cusparseZbsrilu02_bufferSizeExt`| |12.2| | | | | | | | | | | |
 |`cusparseZbsrilu02_numericBoost`| |12.2| |`hipsparseZbsrilu02_numericBoost`|3.9.0| | | | | | | | |
