@@ -123,6 +123,10 @@ const std::string sCusparseZbsrilu02_analysis = "cusparseZbsrilu02_analysis";
 const std::string sCusparseCbsrilu02_analysis = "cusparseCbsrilu02_analysis";
 const std::string sCusparseDbsrilu02_analysis = "cusparseDbsrilu02_analysis";
 const std::string sCusparseSbsrilu02_analysis = "cusparseSbsrilu02_analysis";
+const std::string sCusparseZbsric02 = "cusparseZbsric02";
+const std::string sCusparseCbsric02 = "cusparseCbsric02";
+const std::string sCusparseDbsric02 = "cusparseDbsric02";
+const std::string sCusparseSbsric02 = "cusparseSbsric02";
 // CUDA_OVERLOADED
 const std::string sCudaEventCreate = "cudaEventCreate";
 const std::string sCudaGraphInstantiate = "cudaGraphInstantiate";
@@ -793,6 +797,42 @@ std::map<std::string, ArgCastStruct> FuncArgCasts {
       {
         {10, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
         {11, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseZbsric02,
+    {
+      {
+        {10, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseCbsric02,
+    {
+      {
+        {10, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseDbsric02,
+    {
+      {
+        {10, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseSbsric02,
+    {
+      {
+        {10, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
       },
       true,
       false
@@ -1549,7 +1589,11 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
             sCusparseZbsrilu02_analysis,
             sCusparseCbsrilu02_analysis,
             sCusparseDbsrilu02_analysis,
-            sCusparseSbsrilu02_analysis
+            sCusparseSbsrilu02_analysis,
+            sCusparseZbsric02,
+            sCusparseCbsric02,
+            sCusparseDbsric02,
+            sCusparseSbsric02
           )
         )
       )

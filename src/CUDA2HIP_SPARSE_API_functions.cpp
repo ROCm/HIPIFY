@@ -358,10 +358,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   {"cusparseCbsric02_analysis",                         {"hipsparseCbsric02_analysis",                         "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
   {"cusparseZbsric02_analysis",                         {"hipsparseZbsric02_analysis",                         "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
 
-  {"cusparseSbsric02",                                  {"hipsparseSbsric02",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cusparseDbsric02",                                  {"hipsparseDbsric02",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cusparseCbsric02",                                  {"hipsparseCbsric02",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cusparseZbsric02",                                  {"hipsparseZbsric02",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cusparseSbsric02",                                  {"hipsparseSbsric02",                                  "rocsparse_sbsric0",                                                CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED}},
+  {"cusparseDbsric02",                                  {"hipsparseDbsric02",                                  "rocsparse_dbsric0",                                                CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED}},
+  {"cusparseCbsric02",                                  {"hipsparseCbsric02",                                  "rocsparse_cbsric0",                                                CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED}},
+  {"cusparseZbsric02",                                  {"hipsparseZbsric02",                                  "rocsparse_zbsric0",                                                CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED}},
   {"cusparseXbsric02_zeroPivot",                        {"hipsparseXbsric02_zeroPivot",                        "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
 
   // 12.2. Incomplete LU Factorization: level 0
@@ -397,11 +397,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   {"cusparseZcsrilu02",                                 {"hipsparseZcsrilu02",                                 "rocsparse_zcsrilu0",                                               CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED}},
   {"cusparseXcsrilu02_zeroPivot",                       {"hipsparseXcsrilu02_zeroPivot",                       "rocsparse_csrilu0_zero_pivot",                                     CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED}},
 
-  {"cusparseSbsrilu02_numericBoost",                    {"hipsparseSbsrilu02_numericBoost",                    "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cusparseDbsrilu02_numericBoost",                    {"hipsparseDbsrilu02_numericBoost",                    "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cusparseCbsrilu02_numericBoost",                    {"hipsparseCbsrilu02_numericBoost",                    "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cusparseZbsrilu02_numericBoost",                    {"hipsparseZbsrilu02_numericBoost",                    "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cusparseSbsrilu02_numericBoost",                    {"hipsparseSbsrilu02_numericBoost",                    "rocsparse_dsbsrilu0_numeric_boost",                                CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED}},
+  {"cusparseDbsrilu02_numericBoost",                    {"hipsparseDbsrilu02_numericBoost",                    "rocsparse_dbsrilu0_numeric_boost",                                 CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED}},
+  {"cusparseCbsrilu02_numericBoost",                    {"hipsparseCbsrilu02_numericBoost",                    "rocsparse_dcbsrilu0_numeric_boost",                                CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED}},
+  {"cusparseZbsrilu02_numericBoost",                    {"hipsparseZbsrilu02_numericBoost",                    "rocsparse_zbsrilu0_numeric_boost",                                 CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED}},
 
+  // NOTE: rocsparse_(s|d|c|z)bsrilu0_buffer_size have an additional parameter void* temp_buffer
   {"cusparseSbsrilu02_bufferSize",                      {"hipsparseSbsrilu02_bufferSize",                      "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
   {"cusparseSbsrilu02_bufferSizeExt",                   {"hipsparseSbsrilu02_bufferSizeExt",                   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED}},
   {"cusparseDbsrilu02_bufferSize",                      {"hipsparseDbsrilu02_bufferSize",                      "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
@@ -2214,6 +2215,14 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_FUNCTION_VER_MAP {
   {"rocsparse_cbsrilu0_analysis",                        {HIP_3060, HIP_0,    HIP_0   }},
   {"rocsparse_dbsrilu0_analysis",                        {HIP_3060, HIP_0,    HIP_0   }},
   {"rocsparse_sbsrilu0_analysis",                        {HIP_3060, HIP_0,    HIP_0   }},
+  {"rocsparse_dcbsrilu0_numeric_boost",                  {HIP_4050, HIP_0,    HIP_0   }},
+  {"rocsparse_dsbsrilu0_numeric_boost",                  {HIP_4050, HIP_0,    HIP_0   }},
+  {"rocsparse_zbsrilu0_numeric_boost",                   {HIP_3090, HIP_0,    HIP_0   }},
+  {"rocsparse_dbsrilu0_numeric_boost",                   {HIP_3090, HIP_0,    HIP_0   }},
+  {"rocsparse_zbsric0",                                  {HIP_3080, HIP_0,    HIP_0   }},
+  {"rocsparse_cbsric0",                                  {HIP_3080, HIP_0,    HIP_0   }},
+  {"rocsparse_dbsric0",                                  {HIP_3080, HIP_0,    HIP_0   }},
+  {"rocsparse_sbsric0",                                  {HIP_3080, HIP_0,    HIP_0   }},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_SPARSE_API_SECTION_MAP {
