@@ -470,7 +470,7 @@
 |**CUDA**|**A**|**D**|**R**|**ROC**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
 |`cusparseCbsric02`| |12.2| |`rocsparse_cbsric0`|3.8.0| | | |
-|`cusparseCbsric02_analysis`| |12.2| | | | | | |
+|`cusparseCbsric02_analysis`| |12.2| |`rocsparse_cbsric0_analysis`|3.6.0| | | |
 |`cusparseCbsric02_bufferSize`| |12.2| | | | | | |
 |`cusparseCbsric02_bufferSizeExt`| |12.2| | | | | | |
 |`cusparseCbsrilu02`| |12.2| |`rocsparse_cbsrilu0`|3.9.0| | | |
@@ -504,7 +504,7 @@
 |`cusparseCgtsv_nopivot`| |10.2|11.0| | | | | |
 |`cusparseCsrilu0Ex`|8.0|10.2|11.0| | | | | |
 |`cusparseDbsric02`| |12.2| |`rocsparse_dbsric0`|3.8.0| | | |
-|`cusparseDbsric02_analysis`| |12.2| | | | | | |
+|`cusparseDbsric02_analysis`| |12.2| |`rocsparse_dbsric0_analysis`|3.6.0| | | |
 |`cusparseDbsric02_bufferSize`| |12.2| | | | | | |
 |`cusparseDbsric02_bufferSizeExt`| |12.2| | | | | | |
 |`cusparseDbsrilu02`| |12.2| |`rocsparse_dbsrilu0`|3.9.0| | | |
@@ -537,7 +537,7 @@
 |`cusparseDgtsvStridedBatch`| |10.2|11.0| | | | | |
 |`cusparseDgtsv_nopivot`| |10.2|11.0| | | | | |
 |`cusparseSbsric02`| |12.2| |`rocsparse_sbsric0`|3.8.0| | | |
-|`cusparseSbsric02_analysis`| |12.2| | | | | | |
+|`cusparseSbsric02_analysis`| |12.2| |`rocsparse_sbsric0_analysis`|3.6.0| | | |
 |`cusparseSbsric02_bufferSize`| |12.2| | | | | | |
 |`cusparseSbsric02_bufferSizeExt`| |12.2| | | | | | |
 |`cusparseSbsrilu02`| |12.2| |`rocsparse_sbsrilu0`|3.9.0| | | |
@@ -574,7 +574,7 @@
 |`cusparseXcsric02_zeroPivot`| |12.2| |`rocsparse_csric0_zero_pivot`|3.1.0| | | |
 |`cusparseXcsrilu02_zeroPivot`| |12.2| |`rocsparse_csrilu0_zero_pivot`|1.9.0| | | |
 |`cusparseZbsric02`| |12.2| |`rocsparse_zbsric0`|3.8.0| | | |
-|`cusparseZbsric02_analysis`| |12.2| | | | | | |
+|`cusparseZbsric02_analysis`| |12.2| |`rocsparse_zbsric0_analysis`|3.6.0| | | |
 |`cusparseZbsric02_bufferSize`| |12.2| | | | | | |
 |`cusparseZbsric02_bufferSizeExt`| |12.2| | | | | | |
 |`cusparseZbsrilu02`| |12.2| |`rocsparse_zbsrilu0`|3.9.0| | | |
