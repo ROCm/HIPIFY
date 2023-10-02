@@ -1736,12 +1736,9 @@ void HipifyAction::EndSourceFileAction() {
     // one copy of the hip include into every file.
     bool placeForIncludeCalculated = false;
     clang::SourceLocation sl, controllingMacroLoc;
-    auto &SM = getCompilerInstance().getSourceManager();
-    clang::Preprocessor &PP = getCompilerInstance().getPreprocessor();
-    clang::HeaderSearch &HS = PP.getHeaderSearchInfo();
-    clang::ExternalPreprocessorSource *EPL = HS.getExternalLookup();
-    const clang::FileEntry *FE = SM.getFileEntryForID(SM.getMainFileID());
-    const clang::IdentifierInfo *controllingMacro = HS.getFileInfo(FE).getControllingMacro(EPL);
+    auto &CI = getCompilerInstance();
+    auto &SM = CI.getSourceManager();
+    const clang::IdentifierInfo *controllingMacro = llcompat::getControllingMacro(CI);
     if (controllingMacro) {
       auto found = Ifndefs.find(controllingMacro->getName().str());
       if (found != Ifndefs.end()) {

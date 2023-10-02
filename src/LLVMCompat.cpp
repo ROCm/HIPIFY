@@ -175,4 +175,17 @@ void addTargetIfNeeded(ct::RefactoringTool& Tool) {
 #endif
 }
 
+const clang::IdentifierInfo *getControllingMacro(clang::CompilerInstance &CI) {
+  auto &SM = CI.getSourceManager();
+  clang::Preprocessor &PP = CI.getPreprocessor();
+  clang::HeaderSearch &HS = PP.getHeaderSearchInfo();
+  clang::ExternalPreprocessorSource *EPL = HS.getExternalLookup();
+  const clang::FileEntry *FE = SM.getFileEntryForID(SM.getMainFileID());
+#if LLVM_VERSION_MAJOR >= 18
+  return HS.getFileInfo(FE->getLastRef()).getControllingMacro(EPL);
+#else
+  return HS.getFileInfo(FE).getControllingMacro(EPL);
+#endif
+}
+
 } // namespace llcompat
