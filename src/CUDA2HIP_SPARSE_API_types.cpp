@@ -50,20 +50,20 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_TYPE_NAME_MAP {
   {"bsrsm2Info",                                {"bsrsm2Info",                                 "",                                                   CONV_TYPE, API_SPARSE, 4, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
   {"bsrsm2Info_t",                              {"bsrsm2Info_t",                               "",                                                   CONV_TYPE, API_SPARSE, 4, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
 
-  {"bsric02Info",                               {"bsric02Info",                                "",                                                   CONV_TYPE, API_SPARSE, 4, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"bsric02Info_t",                             {"bsric02Info_t",                              "",                                                   CONV_TYPE, API_SPARSE, 4, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"bsric02Info",                               {"bsric02Info",                                "_rocsparse_mat_info",                                CONV_TYPE, API_SPARSE, 4, CUDA_DEPRECATED}},
+  {"bsric02Info_t",                             {"bsric02Info_t",                              "rocsparse_mat_info",                                 CONV_TYPE, API_SPARSE, 4, CUDA_DEPRECATED}},
 
-  {"csrilu02Info",                              {"csrilu02Info",                               "",                                                   CONV_TYPE, API_SPARSE, 4, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"csrilu02Info_t",                            {"csrilu02Info_t",                             "",                                                   CONV_TYPE, API_SPARSE, 4, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"csrilu02Info",                              {"csrilu02Info",                               "_rocsparse_mat_info",                                CONV_TYPE, API_SPARSE, 4, CUDA_DEPRECATED}},
+  {"csrilu02Info_t",                            {"csrilu02Info_t",                             "rocsparse_mat_info",                                 CONV_TYPE, API_SPARSE, 4, CUDA_DEPRECATED}},
 
-  {"bsrilu02Info",                              {"bsrilu02Info",                               "",                                                   CONV_TYPE, API_SPARSE, 4, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"bsrilu02Info_t",                            {"bsrilu02Info_t",                             "",                                                   CONV_TYPE, API_SPARSE, 4, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"bsrilu02Info",                              {"bsrilu02Info",                               "_rocsparse_mat_info",                                CONV_TYPE, API_SPARSE, 4, CUDA_DEPRECATED}},
+  {"bsrilu02Info_t",                            {"bsrilu02Info_t",                             "rocsparse_mat_info",                                 CONV_TYPE, API_SPARSE, 4, CUDA_DEPRECATED}},
 
   {"csru2csrInfo",                              {"csru2csrInfo",                               "",                                                   CONV_TYPE, API_SPARSE, 4, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
   {"csru2csrInfo_t",                            {"csru2csrInfo_t",                             "",                                                   CONV_TYPE, API_SPARSE, 4, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
 
-  {"csric02Info",                               {"csric02Info",                                "",                                                   CONV_TYPE, API_SPARSE, 4, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"csric02Info_t",                             {"csric02Info_t",                              "",                                                   CONV_TYPE, API_SPARSE, 4, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"csric02Info",                               {"csric02Info",                                "_rocsparse_mat_info",                                CONV_TYPE, API_SPARSE, 4, CUDA_DEPRECATED}},
+  {"csric02Info_t",                             {"csric02Info_t",                              "rocsparse_mat_info",                                 CONV_TYPE, API_SPARSE, 4, CUDA_DEPRECATED}},
 
   {"csrgemm2Info",                              {"csrgemm2Info",                               "",                                                   CONV_TYPE, API_SPARSE, 4, UNSUPPORTED | CUDA_REMOVED}},
   {"csrgemm2Info_t",                            {"csrgemm2Info_t",                             "",                                                   CONV_TYPE, API_SPARSE, 4, ROC_UNSUPPORTED | CUDA_REMOVED}},

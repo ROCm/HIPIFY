@@ -101,4 +101,6 @@ Memory_Buffer getMemoryBuffer(const clang::SourceManager &SM);
 
 void addTargetIfNeeded(ct::RefactoringTool& Tool);
 
+const clang::IdentifierInfo *getControllingMacro(clang::CompilerInstance &CI);
+
 } // namespace llcompat

@@ -108,20 +108,20 @@
 |`CUSPARSE_STATUS_NOT_SUPPORTED`|10.2| | |`rocsparse_status_not_implemented`|1.9.0| | | |
 |`CUSPARSE_STATUS_SUCCESS`| | | |`rocsparse_status_success`|1.9.0| | | |
 |`CUSPARSE_STATUS_ZERO_PIVOT`| | | |`rocsparse_status_zero_pivot`|1.9.0| | | |
-|`bsric02Info`| | | | | | | | |
-|`bsric02Info_t`| | | | | | | | |
-|`bsrilu02Info`| |12.2| | | | | | |
-|`bsrilu02Info_t`| |12.2| | | | | | |
+|`bsric02Info`| | | |`_rocsparse_mat_info`|1.9.0| | | |
+|`bsric02Info_t`| | | |`rocsparse_mat_info`|1.9.0| | | |
+|`bsrilu02Info`| |12.2| |`_rocsparse_mat_info`|1.9.0| | | |
+|`bsrilu02Info_t`| |12.2| |`rocsparse_mat_info`|1.9.0| | | |
 |`bsrsm2Info`| |12.2| | | | | | |
 |`bsrsm2Info_t`| |12.2| | | | | | |
 |`bsrsv2Info`| |12.2| | | | | | |
 |`bsrsv2Info_t`| |12.2| | | | | | |
 |`csrgemm2Info`| | |12.0| | | | | |
 |`csrgemm2Info_t`| | |12.0| | | | | |
-|`csric02Info`| |12.2| | | | | | |
-|`csric02Info_t`| |12.2| | | | | | |
-|`csrilu02Info`| |12.2| | | | | | |
-|`csrilu02Info_t`| |12.2| | | | | | |
+|`csric02Info`| |12.2| |`_rocsparse_mat_info`|1.9.0| | | |
+|`csric02Info_t`| |12.2| |`rocsparse_mat_info`|1.9.0| | | |
+|`csrilu02Info`| |12.2| |`_rocsparse_mat_info`|1.9.0| | | |
+|`csrilu02Info_t`| |12.2| |`rocsparse_mat_info`|1.9.0| | | |
 |`csrsm2Info`|9.2| |12.0| | | | | |
 |`csrsm2Info_t`|9.2| |12.0| | | | | |
 |`csrsv2Info`| | |12.0| | | | | |
@@ -469,141 +469,141 @@
 
 |**CUDA**|**A**|**D**|**R**|**ROC**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
-|`cusparseCbsric02`| |12.2| | | | | | |
-|`cusparseCbsric02_analysis`| |12.2| | | | | | |
+|`cusparseCbsric02`| |12.2| |`rocsparse_cbsric0`|3.8.0| | | |
+|`cusparseCbsric02_analysis`| |12.2| |`rocsparse_cbsric0_analysis`|3.6.0| | | |
 |`cusparseCbsric02_bufferSize`| |12.2| | | | | | |
 |`cusparseCbsric02_bufferSizeExt`| |12.2| | | | | | |
-|`cusparseCbsrilu02`| |12.2| | | | | | |
-|`cusparseCbsrilu02_analysis`| |12.2| | | | | | |
+|`cusparseCbsrilu02`| |12.2| |`rocsparse_cbsrilu0`|3.9.0| | | |
+|`cusparseCbsrilu02_analysis`| |12.2| |`rocsparse_cbsrilu0_analysis`|3.6.0| | | |
 |`cusparseCbsrilu02_bufferSize`| |12.2| | | | | | |
 |`cusparseCbsrilu02_bufferSizeExt`| |12.2| | | | | | |
-|`cusparseCbsrilu02_numericBoost`| |12.2| | | | | | |
+|`cusparseCbsrilu02_numericBoost`| |12.2| |`rocsparse_dcbsrilu0_numeric_boost`|4.5.0| | | |
 |`cusparseCcsric0`| |10.2|11.0| | | | | |
-|`cusparseCcsric02`| |12.2| | | | | | |
-|`cusparseCcsric02_analysis`| |12.2| | | | | | |
-|`cusparseCcsric02_bufferSize`| |12.2| | | | | | |
-|`cusparseCcsric02_bufferSizeExt`| |12.2| | | | | | |
+|`cusparseCcsric02`| |12.2| |`rocsparse_ccsric0`|3.1.0| | | |
+|`cusparseCcsric02_analysis`| |12.2| |`rocsparse_ccsric0_analysis`|3.1.0| | | |
+|`cusparseCcsric02_bufferSize`| |12.2| |`rocsparse_ccsric0_buffer_size`|3.1.0| | | |
+|`cusparseCcsric02_bufferSizeExt`| |12.2| |`rocsparse_ccsric0_buffer_size`|3.1.0| | | |
 |`cusparseCcsrilu0`| |10.2|11.0| | | | | |
-|`cusparseCcsrilu02`| |12.2| | | | | | |
-|`cusparseCcsrilu02_analysis`| |12.2| | | | | | |
-|`cusparseCcsrilu02_bufferSize`| |12.2| | | | | | |
+|`cusparseCcsrilu02`| |12.2| |`rocsparse_ccsrilu0`|2.10.0| | | |
+|`cusparseCcsrilu02_analysis`| |12.2| |`rocsparse_ccsrilu0_analysis`|2.10.0| | | |
+|`cusparseCcsrilu02_bufferSize`| |12.2| |`rocsparse_ccsrilu0_buffer_size`|2.10.0| | | |
 |`cusparseCcsrilu02_bufferSizeExt`| |12.2| | | | | | |
-|`cusparseCcsrilu02_numericBoost`| |12.2| | | | | | |
+|`cusparseCcsrilu02_numericBoost`| |12.2| |`rocsparse_dccsrilu0_numeric_boost`|4.5.0| | | |
 |`cusparseCgpsvInterleavedBatch`|9.2| | |`rocsparse_cgpsv_interleaved_batch`|5.1.0| | | |
 |`cusparseCgpsvInterleavedBatch_bufferSizeExt`|9.2| | |`rocsparse_cgpsv_interleaved_batch_buffer_size`|5.1.0| | | |
 |`cusparseCgtsv`| |10.2|11.0| | | | | |
-|`cusparseCgtsv2`|9.0| | | | | | | |
-|`cusparseCgtsv2StridedBatch`| | | | | | | | |
-|`cusparseCgtsv2StridedBatch_bufferSizeExt`| | | | | | | | |
-|`cusparseCgtsv2_bufferSizeExt`|9.0| | | | | | | |
-|`cusparseCgtsv2_nopivot`|9.0| | | | | | | |
-|`cusparseCgtsv2_nopivot_bufferSizeExt`|9.0| | | | | | | |
+|`cusparseCgtsv2`|9.0| | |`rocsparse_cgtsv`|4.3.0| | | |
+|`cusparseCgtsv2StridedBatch`| | | |`rocsparse_cgtsv_no_pivot_strided_batch`|4.3.0| | | |
+|`cusparseCgtsv2StridedBatch_bufferSizeExt`| | | |`rocsparse_cgtsv_no_pivot_strided_batch_buffer_size`|4.3.0| | | |
+|`cusparseCgtsv2_bufferSizeExt`|9.0| | |`rocsparse_cgtsv_buffer_size`|4.3.0| | | |
+|`cusparseCgtsv2_nopivot`|9.0| | |`rocsparse_cgtsv_no_pivot`|4.3.0| | | |
+|`cusparseCgtsv2_nopivot_bufferSizeExt`|9.0| | |`rocsparse_cgtsv_no_pivot_buffer_size`|4.3.0| | | |
 |`cusparseCgtsvInterleavedBatch`|9.2| | |`rocsparse_cgtsv_interleaved_batch`|5.1.0| | | |
-|`cusparseCgtsvInterleavedBatch_bufferSizeExt`|9.2| | | | | | | |
+|`cusparseCgtsvInterleavedBatch_bufferSizeExt`|9.2| | |`rocsparse_cgtsv_interleaved_batch_buffer_size`|5.1.0| | | |
 |`cusparseCgtsvStridedBatch`| |10.2|11.0| | | | | |
 |`cusparseCgtsv_nopivot`| |10.2|11.0| | | | | |
 |`cusparseCsrilu0Ex`|8.0|10.2|11.0| | | | | |
-|`cusparseDbsric02`| |12.2| | | | | | |
-|`cusparseDbsric02_analysis`| |12.2| | | | | | |
+|`cusparseDbsric02`| |12.2| |`rocsparse_dbsric0`|3.8.0| | | |
+|`cusparseDbsric02_analysis`| |12.2| |`rocsparse_dbsric0_analysis`|3.6.0| | | |
 |`cusparseDbsric02_bufferSize`| |12.2| | | | | | |
 |`cusparseDbsric02_bufferSizeExt`| |12.2| | | | | | |
-|`cusparseDbsrilu02`| |12.2| | | | | | |
-|`cusparseDbsrilu02_analysis`| |12.2| | | | | | |
+|`cusparseDbsrilu02`| |12.2| |`rocsparse_dbsrilu0`|3.9.0| | | |
+|`cusparseDbsrilu02_analysis`| |12.2| |`rocsparse_dbsrilu0_analysis`|3.6.0| | | |
 |`cusparseDbsrilu02_bufferSize`| |12.2| | | | | | |
 |`cusparseDbsrilu02_bufferSizeExt`| |12.2| | | | | | |
-|`cusparseDbsrilu02_numericBoost`| |12.2| | | | | | |
+|`cusparseDbsrilu02_numericBoost`| |12.2| |`rocsparse_dbsrilu0_numeric_boost`|3.9.0| | | |
 |`cusparseDcsric0`| |10.2|11.0| | | | | |
-|`cusparseDcsric02`| |12.2| | | | | | |
-|`cusparseDcsric02_analysis`| |12.2| | | | | | |
-|`cusparseDcsric02_bufferSize`| |12.2| | | | | | |
-|`cusparseDcsric02_bufferSizeExt`| |12.2| | | | | | |
+|`cusparseDcsric02`| |12.2| |`rocsparse_dcsric0`|3.1.0| | | |
+|`cusparseDcsric02_analysis`| |12.2| |`rocsparse_dcsric0_analysis`|3.1.0| | | |
+|`cusparseDcsric02_bufferSize`| |12.2| |`rocsparse_dcsric0_buffer_size`|3.1.0| | | |
+|`cusparseDcsric02_bufferSizeExt`| |12.2| |`rocsparse_dcsric0_buffer_size`|3.1.0| | | |
 |`cusparseDcsrilu0`| |10.2|11.0| | | | | |
-|`cusparseDcsrilu02`| |12.2| | | | | | |
-|`cusparseDcsrilu02_analysis`| |12.2| | | | | | |
-|`cusparseDcsrilu02_bufferSize`| |12.2| | | | | | |
+|`cusparseDcsrilu02`| |12.2| |`rocsparse_dcsrilu0`|1.9.0| | | |
+|`cusparseDcsrilu02_analysis`| |12.2| |`rocsparse_dcsrilu0_analysis`|1.9.0| | | |
+|`cusparseDcsrilu02_bufferSize`| |12.2| |`rocsparse_dcsrilu0_buffer_size`|1.9.0| | | |
 |`cusparseDcsrilu02_bufferSizeExt`| |12.2| | | | | | |
-|`cusparseDcsrilu02_numericBoost`| |12.2| | | | | | |
+|`cusparseDcsrilu02_numericBoost`| |12.2| |`rocsparse_dcsrilu0_numeric_boost`|3.9.0| | | |
 |`cusparseDgpsvInterleavedBatch`|9.2| | |`rocsparse_dgpsv_interleaved_batch`|5.1.0| | | |
 |`cusparseDgpsvInterleavedBatch_bufferSizeExt`|9.2| | |`rocsparse_dgpsv_interleaved_batch_buffer_size`|5.1.0| | | |
 |`cusparseDgtsv`| |10.2|11.0| | | | | |
-|`cusparseDgtsv2`|9.0| | | | | | | |
-|`cusparseDgtsv2StridedBatch`| | | | | | | | |
-|`cusparseDgtsv2StridedBatch_bufferSizeExt`| | | | | | | | |
-|`cusparseDgtsv2_bufferSizeExt`|9.0| | | | | | | |
-|`cusparseDgtsv2_nopivot`|9.0| | | | | | | |
-|`cusparseDgtsv2_nopivot_bufferSizeExt`|9.0| | | | | | | |
+|`cusparseDgtsv2`|9.0| | |`rocsparse_dgtsv`|4.3.0| | | |
+|`cusparseDgtsv2StridedBatch`| | | |`rocsparse_dgtsv_no_pivot_strided_batch`|4.3.0| | | |
+|`cusparseDgtsv2StridedBatch_bufferSizeExt`| | | |`rocsparse_dgtsv_no_pivot_strided_batch_buffer_size`|4.3.0| | | |
+|`cusparseDgtsv2_bufferSizeExt`|9.0| | |`rocsparse_dgtsv_buffer_size`|4.3.0| | | |
+|`cusparseDgtsv2_nopivot`|9.0| | |`rocsparse_dgtsv_no_pivot`|4.3.0| | | |
+|`cusparseDgtsv2_nopivot_bufferSizeExt`|9.0| | |`rocsparse_dgtsv_no_pivot_buffer_size`|4.3.0| | | |
 |`cusparseDgtsvInterleavedBatch`|9.2| | |`rocsparse_dgtsv_interleaved_batch`|5.1.0| | | |
-|`cusparseDgtsvInterleavedBatch_bufferSizeExt`|9.2| | | | | | | |
+|`cusparseDgtsvInterleavedBatch_bufferSizeExt`|9.2| | |`rocsparse_dgtsv_interleaved_batch_buffer_size`|5.1.0| | | |
 |`cusparseDgtsvStridedBatch`| |10.2|11.0| | | | | |
 |`cusparseDgtsv_nopivot`| |10.2|11.0| | | | | |
-|`cusparseSbsric02`| |12.2| | | | | | |
-|`cusparseSbsric02_analysis`| |12.2| | | | | | |
+|`cusparseSbsric02`| |12.2| |`rocsparse_sbsric0`|3.8.0| | | |
+|`cusparseSbsric02_analysis`| |12.2| |`rocsparse_sbsric0_analysis`|3.6.0| | | |
 |`cusparseSbsric02_bufferSize`| |12.2| | | | | | |
 |`cusparseSbsric02_bufferSizeExt`| |12.2| | | | | | |
-|`cusparseSbsrilu02`| |12.2| | | | | | |
-|`cusparseSbsrilu02_analysis`| |12.2| | | | | | |
+|`cusparseSbsrilu02`| |12.2| |`rocsparse_sbsrilu0`|3.9.0| | | |
+|`cusparseSbsrilu02_analysis`| |12.2| |`rocsparse_sbsrilu0_analysis`|3.6.0| | | |
 |`cusparseSbsrilu02_bufferSize`| |12.2| | | | | | |
 |`cusparseSbsrilu02_bufferSizeExt`| |12.2| | | | | | |
-|`cusparseSbsrilu02_numericBoost`| |12.2| | | | | | |
+|`cusparseSbsrilu02_numericBoost`| |12.2| |`rocsparse_dsbsrilu0_numeric_boost`|4.5.0| | | |
 |`cusparseScsric0`| |10.2|11.0| | | | | |
-|`cusparseScsric02`| |12.2| | | | | | |
-|`cusparseScsric02_analysis`| |12.2| | | | | | |
-|`cusparseScsric02_bufferSize`| |12.2| | | | | | |
-|`cusparseScsric02_bufferSizeExt`| |12.2| | | | | | |
+|`cusparseScsric02`| |12.2| |`rocsparse_scsric0`|3.1.0| | | |
+|`cusparseScsric02_analysis`| |12.2| |`rocsparse_scsric0_analysis`|3.1.0| | | |
+|`cusparseScsric02_bufferSize`| |12.2| |`rocsparse_scsric0_buffer_size`|3.1.0| | | |
+|`cusparseScsric02_bufferSizeExt`| |12.2| |`rocsparse_scsric0_buffer_size`|3.1.0| | | |
 |`cusparseScsrilu0`| |10.2|11.0| | | | | |
-|`cusparseScsrilu02`| |12.2| | | | | | |
-|`cusparseScsrilu02_analysis`| |12.2| | | | | | |
-|`cusparseScsrilu02_bufferSize`| |12.2| | | | | | |
+|`cusparseScsrilu02`| |12.2| |`rocsparse_scsrilu0`|1.9.0| | | |
+|`cusparseScsrilu02_analysis`| |12.2| |`rocsparse_scsrilu0_analysis`|1.9.0| | | |
+|`cusparseScsrilu02_bufferSize`| |12.2| |`rocsparse_scsrilu0_buffer_size`|1.9.0| | | |
 |`cusparseScsrilu02_bufferSizeExt`| |12.2| | | | | | |
-|`cusparseScsrilu02_numericBoost`| |12.2| | | | | | |
+|`cusparseScsrilu02_numericBoost`| |12.2| |`rocsparse_dscsrilu0_numeric_boost`|4.5.0| | | |
 |`cusparseSgpsvInterleavedBatch`|9.2| | |`rocsparse_sgpsv_interleaved_batch`|5.1.0| | | |
 |`cusparseSgpsvInterleavedBatch_bufferSizeExt`|9.2| | |`rocsparse_sgpsv_interleaved_batch_buffer_size`|5.1.0| | | |
 |`cusparseSgtsv`| |10.2|11.0| | | | | |
-|`cusparseSgtsv2`|9.0| | | | | | | |
-|`cusparseSgtsv2StridedBatch`|9.0| | | | | | | |
-|`cusparseSgtsv2StridedBatch_bufferSizeExt`|9.0| | | | | | | |
-|`cusparseSgtsv2_bufferSizeExt`|9.0| | | | | | | |
-|`cusparseSgtsv2_nopivot`|9.0| | | | | | | |
-|`cusparseSgtsv2_nopivot_bufferSizeExt`|9.0| | | | | | | |
+|`cusparseSgtsv2`|9.0| | |`rocsparse_sgtsv`|4.3.0| | | |
+|`cusparseSgtsv2StridedBatch`|9.0| | |`rocsparse_sgtsv_no_pivot_strided_batch`|4.3.0| | | |
+|`cusparseSgtsv2StridedBatch_bufferSizeExt`|9.0| | |`rocsparse_sgtsv_no_pivot_strided_batch_buffer_size`|4.3.0| | | |
+|`cusparseSgtsv2_bufferSizeExt`|9.0| | |`rocsparse_sgtsv_buffer_size`|4.3.0| | | |
+|`cusparseSgtsv2_nopivot`|9.0| | |`rocsparse_sgtsv_no_pivot`|4.3.0| | | |
+|`cusparseSgtsv2_nopivot_bufferSizeExt`|9.0| | |`rocsparse_sgtsv_no_pivot_buffer_size`|4.3.0| | | |
 |`cusparseSgtsvInterleavedBatch`|9.2| | |`rocsparse_sgtsv_interleaved_batch`|5.1.0| | | |
-|`cusparseSgtsvInterleavedBatch_bufferSizeExt`|9.2| | | | | | | |
+|`cusparseSgtsvInterleavedBatch_bufferSizeExt`|9.2| | |`rocsparse_sgtsv_interleaved_batch_buffer_size`|5.1.0| | | |
 |`cusparseSgtsvStridedBatch`| |10.2|11.0| | | | | |
 |`cusparseSgtsv_nopivot`| |10.2|11.0| | | | | |
 |`cusparseXbsric02_zeroPivot`| | | | | | | | |
-|`cusparseXbsrilu02_zeroPivot`| |12.2| | | | | | |
-|`cusparseXcsric02_zeroPivot`| |12.2| | | | | | |
-|`cusparseXcsrilu02_zeroPivot`| |12.2| | | | | | |
-|`cusparseZbsric02`| |12.2| | | | | | |
-|`cusparseZbsric02_analysis`| |12.2| | | | | | |
+|`cusparseXbsrilu02_zeroPivot`| |12.2| |`rocsparse_bsrilu0_zero_pivot`|3.9.0| | | |
+|`cusparseXcsric02_zeroPivot`| |12.2| |`rocsparse_csric0_zero_pivot`|3.1.0| | | |
+|`cusparseXcsrilu02_zeroPivot`| |12.2| |`rocsparse_csrilu0_zero_pivot`|1.9.0| | | |
+|`cusparseZbsric02`| |12.2| |`rocsparse_zbsric0`|3.8.0| | | |
+|`cusparseZbsric02_analysis`| |12.2| |`rocsparse_zbsric0_analysis`|3.6.0| | | |
 |`cusparseZbsric02_bufferSize`| |12.2| | | | | | |
 |`cusparseZbsric02_bufferSizeExt`| |12.2| | | | | | |
-|`cusparseZbsrilu02`| |12.2| | | | | | |
-|`cusparseZbsrilu02_analysis`| |12.2| | | | | | |
+|`cusparseZbsrilu02`| |12.2| |`rocsparse_zbsrilu0`|3.9.0| | | |
+|`cusparseZbsrilu02_analysis`| |12.2| |`rocsparse_zbsrilu0_analysis`|3.6.0| | | |
 |`cusparseZbsrilu02_bufferSize`| |12.2| | | | | | |
 |`cusparseZbsrilu02_bufferSizeExt`| |12.2| | | | | | |
-|`cusparseZbsrilu02_numericBoost`| |12.2| | | | | | |
+|`cusparseZbsrilu02_numericBoost`| |12.2| |`rocsparse_zbsrilu0_numeric_boost`|3.9.0| | | |
 |`cusparseZcsric0`| |10.2|11.0| | | | | |
-|`cusparseZcsric02`| |12.2| | | | | | |
-|`cusparseZcsric02_analysis`| |12.2| | | | | | |
-|`cusparseZcsric02_bufferSize`| |12.2| | | | | | |
-|`cusparseZcsric02_bufferSizeExt`| |12.2| | | | | | |
+|`cusparseZcsric02`| |12.2| |`rocsparse_zcsric0`|3.1.0| | | |
+|`cusparseZcsric02_analysis`| |12.2| |`rocsparse_zcsric0_analysis`|3.1.0| | | |
+|`cusparseZcsric02_bufferSize`| |12.2| |`rocsparse_zcsric0_buffer_size`|3.1.0| | | |
+|`cusparseZcsric02_bufferSizeExt`| |12.2| |`rocsparse_zcsric0_buffer_size`|3.1.0| | | |
 |`cusparseZcsrilu0`| |10.2|11.0| | | | | |
-|`cusparseZcsrilu02`| |12.2| | | | | | |
-|`cusparseZcsrilu02_analysis`| |12.2| | | | | | |
-|`cusparseZcsrilu02_bufferSize`| |12.2| | | | | | |
+|`cusparseZcsrilu02`| |12.2| |`rocsparse_zcsrilu0`|2.10.0| | | |
+|`cusparseZcsrilu02_analysis`| |12.2| |`rocsparse_zcsrilu0_analysis`|2.10.0| | | |
+|`cusparseZcsrilu02_bufferSize`| |12.2| |`rocsparse_zcsrilu0_buffer_size`|2.10.0| | | |
 |`cusparseZcsrilu02_bufferSizeExt`| |12.2| | | | | | |
-|`cusparseZcsrilu02_numericBoost`| |12.2| | | | | | |
+|`cusparseZcsrilu02_numericBoost`| |12.2| |`rocsparse_zcsrilu0_numeric_boost`|3.9.0| | | |
 |`cusparseZgpsvInterleavedBatch`|9.2| | |`rocsparse_zgpsv_interleaved_batch`|5.1.0| | | |
 |`cusparseZgpsvInterleavedBatch_bufferSizeExt`|9.2| | |`rocsparse_zgpsv_interleaved_batch_buffer_size`|5.1.0| | | |
 |`cusparseZgtsv`| |10.2|11.0| | | | | |
-|`cusparseZgtsv2`|9.0| | | | | | | |
-|`cusparseZgtsv2StridedBatch`| | | | | | | | |
-|`cusparseZgtsv2StridedBatch_bufferSizeExt`| | | | | | | | |
-|`cusparseZgtsv2_bufferSizeExt`|9.0| | | | | | | |
-|`cusparseZgtsv2_nopivot`|9.0| | | | | | | |
-|`cusparseZgtsv2_nopivot_bufferSizeExt`|9.0| | | | | | | |
+|`cusparseZgtsv2`|9.0| | |`rocsparse_zgtsv`|4.3.0| | | |
+|`cusparseZgtsv2StridedBatch`| | | |`rocsparse_zgtsv_no_pivot_strided_batch`|4.3.0| | | |
+|`cusparseZgtsv2StridedBatch_bufferSizeExt`| | | |`rocsparse_zgtsv_no_pivot_strided_batch_buffer_size`|4.3.0| | | |
+|`cusparseZgtsv2_bufferSizeExt`|9.0| | |`rocsparse_zgtsv_buffer_size`|4.3.0| | | |
+|`cusparseZgtsv2_nopivot`|9.0| | |`rocsparse_zgtsv_no_pivot`|4.3.0| | | |
+|`cusparseZgtsv2_nopivot_bufferSizeExt`|9.0| | |`rocsparse_zgtsv_no_pivot_buffer_size`|4.3.0| | | |
 |`cusparseZgtsvInterleavedBatch`|9.2| | |`rocsparse_zgtsv_interleaved_batch`|5.1.0| | | |
-|`cusparseZgtsvInterleavedBatch_bufferSizeExt`|9.2| | | | | | | |
+|`cusparseZgtsvInterleavedBatch_bufferSizeExt`|9.2| | |`rocsparse_zgtsv_interleaved_batch_buffer_size`|5.1.0| | | |
 |`cusparseZgtsvStridedBatch`| |10.2|11.0| | | | | |
 |`cusparseZgtsv_nopivot`| |10.2|11.0| | | | | |
 

@@ -43,6 +43,7 @@ const std::string sHipcub = "hipcub";
 const std::string sHIP_KERNEL_NAME = "HIP_KERNEL_NAME";
 std::string sHIP_SYMBOL = "HIP_SYMBOL";
 std::string s_reinterpret_cast = "reinterpret_cast<const void*>";
+std::string s_reinterpret_cast_size_t = "reinterpret_cast<size_t*>";
 std::string s_int32_t = "int32_t";
 std::string s_int64_t = "int64_t";
 const std::string sHipLaunchKernelGGL = "hipLaunchKernelGGL";
@@ -94,6 +95,42 @@ const std::string sCusparseZgtsvInterleavedBatch = "cusparseZgtsvInterleavedBatc
 const std::string sCusparseCgtsvInterleavedBatch = "cusparseCgtsvInterleavedBatch";
 const std::string sCusparseDgtsvInterleavedBatch = "cusparseDgtsvInterleavedBatch";
 const std::string sCusparseSgtsvInterleavedBatch = "cusparseSgtsvInterleavedBatch";
+const std::string sCusparseZgtsvInterleavedBatch_bufferSizeExt = "cusparseZgtsvInterleavedBatch_bufferSizeExt";
+const std::string sCusparseCgtsvInterleavedBatch_bufferSizeExt = "cusparseCgtsvInterleavedBatch_bufferSizeExt";
+const std::string sCusparseDgtsvInterleavedBatch_bufferSizeExt = "cusparseDgtsvInterleavedBatch_bufferSizeExt";
+const std::string sCusparseSgtsvInterleavedBatch_bufferSizeExt = "cusparseSgtsvInterleavedBatch_bufferSizeExt";
+const std::string sCusparseZcsrilu02 = "cusparseZcsrilu02";
+const std::string sCusparseCcsrilu02 = "cusparseCcsrilu02";
+const std::string sCusparseDcsrilu02 = "cusparseDcsrilu02";
+const std::string sCusparseScsrilu02 = "cusparseScsrilu02";
+const std::string sCusparseZcsrilu02_analysis = "cusparseZcsrilu02_analysis";
+const std::string sCusparseCcsrilu02_analysis = "cusparseCcsrilu02_analysis";
+const std::string sCusparseDcsrilu02_analysis = "cusparseDcsrilu02_analysis";
+const std::string sCusparseScsrilu02_analysis = "cusparseScsrilu02_analysis";
+const std::string sCusparseZcsric02_analysis = "cusparseZcsric02_analysis";
+const std::string sCusparseCcsric02_analysis = "cusparseCcsric02_analysis";
+const std::string sCusparseDcsric02_analysis = "cusparseDcsric02_analysis";
+const std::string sCusparseScsric02_analysis = "cusparseScsric02_analysis";
+const std::string sCusparseZcsric02_bufferSize = "cusparseZcsric02_bufferSize";
+const std::string sCusparseCcsric02_bufferSize = "cusparseCcsric02_bufferSize";
+const std::string sCusparseDcsric02_bufferSize = "cusparseDcsric02_bufferSize";
+const std::string sCusparseScsric02_bufferSize = "cusparseScsric02_bufferSize";
+const std::string sCusparseZbsrilu02 = "cusparseZbsrilu02";
+const std::string sCusparseCbsrilu02 = "cusparseCbsrilu02";
+const std::string sCusparseDbsrilu02 = "cusparseDbsrilu02";
+const std::string sCusparseSbsrilu02 = "cusparseSbsrilu02";
+const std::string sCusparseZbsrilu02_analysis = "cusparseZbsrilu02_analysis";
+const std::string sCusparseCbsrilu02_analysis = "cusparseCbsrilu02_analysis";
+const std::string sCusparseDbsrilu02_analysis = "cusparseDbsrilu02_analysis";
+const std::string sCusparseSbsrilu02_analysis = "cusparseSbsrilu02_analysis";
+const std::string sCusparseZbsric02 = "cusparseZbsric02";
+const std::string sCusparseCbsric02 = "cusparseCbsric02";
+const std::string sCusparseDbsric02 = "cusparseDbsric02";
+const std::string sCusparseSbsric02 = "cusparseSbsric02";
+const std::string sCusparseZbsric02_analysis = "cusparseZbsric02_analysis";
+const std::string sCusparseCbsric02_analysis = "cusparseCbsric02_analysis";
+const std::string sCusparseDbsric02_analysis = "cusparseDbsric02_analysis";
+const std::string sCusparseSbsric02_analysis = "cusparseSbsric02_analysis";
 // CUDA_OVERLOADED
 const std::string sCudaEventCreate = "cudaEventCreate";
 const std::string sCudaGraphInstantiate = "cudaGraphInstantiate";
@@ -112,17 +149,20 @@ std::string getCastType(hipify::CastTypes c) {
   switch (c) {
     case e_HIP_SYMBOL: return sHIP_SYMBOL;
     case e_reinterpret_cast: return s_reinterpret_cast;
+    case e_reinterpret_cast_size_t: return s_reinterpret_cast_size_t;
     case e_int32_t: return s_int32_t;
     case e_int64_t: return s_int64_t;
     case e_remove_argument: return "";
     case e_add_const_argument: return "";
     case e_add_var_argument: return "";
     case e_move_argument: return "";
+    case e_replace_argument_with_const: return "";
     default: return "";
   }
 }
 
 std::map<std::string, std::string> TypeOverloads {
+  {"enum cudaDataType_t", "hipDataType"},
   {"cudaDataType_t", "hipDataType"},
   {"cudaDataType", "hipDataType"},
 };
@@ -497,6 +537,346 @@ std::map<std::string, ArgCastStruct> FuncArgCasts {
     {
       {
         {7, {e_add_var_argument, cw_None, "", 8}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseZgtsvInterleavedBatch_bufferSizeExt,
+    {
+      {
+        {7, {e_add_var_argument, cw_None, "", 8}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseCgtsvInterleavedBatch_bufferSizeExt,
+    {
+      {
+        {7, {e_add_var_argument, cw_None, "", 8}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseDgtsvInterleavedBatch_bufferSizeExt,
+    {
+      {
+        {7, {e_add_var_argument, cw_None, "", 8}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseSgtsvInterleavedBatch_bufferSizeExt,
+    {
+      {
+        {7, {e_add_var_argument, cw_None, "", 8}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseZcsrilu02,
+    {
+      {
+        {8, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseCcsrilu02,
+    {
+      {
+        {8, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseDcsrilu02,
+    {
+      {
+        {8, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseScsrilu02,
+    {
+      {
+        {8, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseZcsrilu02_analysis,
+    {
+      {
+        {8, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+        {9, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseCcsrilu02_analysis,
+    {
+      {
+        {8, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+        {9, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseDcsrilu02_analysis,
+    {
+      {
+        {8, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+        {9, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseScsrilu02_analysis,
+    {
+      {
+        {8, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+        {9, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseZcsric02_analysis,
+    {
+      {
+        {8, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+        {9, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseCcsric02_analysis,
+    {
+      {
+        {8, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+        {9, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseDcsric02_analysis,
+    {
+      {
+        {8, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+        {9, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseScsric02_analysis,
+    {
+      {
+        {8, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+        {9, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseZcsric02_bufferSize,
+    {
+      {
+        {8, {e_reinterpret_cast_size_t, cw_None}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseCcsric02_bufferSize,
+    {
+      {
+        {8, {e_reinterpret_cast_size_t, cw_None}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseDcsric02_bufferSize,
+    {
+      {
+        {8, {e_reinterpret_cast_size_t, cw_None}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseScsric02_bufferSize,
+    {
+      {
+        {8, {e_reinterpret_cast_size_t, cw_None}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseZbsrilu02,
+    {
+      {
+        {10, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseCbsrilu02,
+    {
+      {
+        {10, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseDbsrilu02,
+    {
+      {
+        {10, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseSbsrilu02,
+    {
+      {
+        {10, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseZbsrilu02_analysis,
+    {
+      {
+        {10, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+        {11, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseCbsrilu02_analysis,
+    {
+      {
+        {10, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+        {11, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseDbsrilu02_analysis,
+    {
+      {
+        {10, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+        {11, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseSbsrilu02_analysis,
+    {
+      {
+        {10, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+        {11, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseZbsric02,
+    {
+      {
+        {10, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseCbsric02,
+    {
+      {
+        {10, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseDbsric02,
+    {
+      {
+        {10, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseSbsric02,
+    {
+      {
+        {10, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseZbsric02_analysis,
+    {
+      {
+        {10, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+        {11, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseCbsric02_analysis,
+    {
+      {
+        {10, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+        {11, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseDbsric02_analysis,
+    {
+      {
+        {10, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+        {11, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseSbsric02_analysis,
+    {
+      {
+        {10, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+        {11, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
       },
       true,
       false
@@ -1008,9 +1388,9 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
         case e_add_const_argument:
         {
           if (argNum < call->getNumArgs())
-            OS << c.second.constValToAdd << ", ";
+            OS << c.second.constValToAddOrReplace << ", ";
           else
-            OS << ", " << c.second.constValToAdd;
+            OS << ", " << c.second.constValToAddOrReplace;
           break;
         }
         case e_add_var_argument:
@@ -1028,6 +1408,14 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
             OS << ", " << sArg;
             s = call->getEndLoc();
           }
+          break;
+        }
+        case e_replace_argument_with_const:
+        {
+          if (argNum >= call->getNumArgs())
+            break;
+          OS << c.second.constValToAddOrReplace;
+          length = SM->getCharacterData(clang::Lexer::getLocForEndOfToken(e, 0, *SM, DefaultLangOptions)) - SM->getCharacterData(s);
           break;
         }
         default:
@@ -1125,6 +1513,8 @@ bool HipifyAction::dataTypeSelection(const mat::MatchFinder::MatchResult& Result
     std::string name = QT.getAsString();
     const auto found = TypeOverloads.find(name);
     if (found == TypeOverloads.end()) return false;
+    if (name.find("enum ") == 0)
+      name.erase(0, 5);
     std::string correct_name = found->second;
     const clang::TypeSourceInfo *si = vardecl->getTypeSourceInfo();
     const clang::TypeLoc tloc = si->getTypeLoc();
@@ -1215,7 +1605,43 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
             sCusparseZgtsvInterleavedBatch,
             sCusparseCgtsvInterleavedBatch,
             sCusparseDgtsvInterleavedBatch,
-            sCusparseSgtsvInterleavedBatch
+            sCusparseSgtsvInterleavedBatch,
+            sCusparseZgtsvInterleavedBatch_bufferSizeExt,
+            sCusparseCgtsvInterleavedBatch_bufferSizeExt,
+            sCusparseDgtsvInterleavedBatch_bufferSizeExt,
+            sCusparseSgtsvInterleavedBatch_bufferSizeExt,
+            sCusparseZcsrilu02,
+            sCusparseCcsrilu02,
+            sCusparseDcsrilu02,
+            sCusparseScsrilu02,
+            sCusparseZcsrilu02_analysis,
+            sCusparseCcsrilu02_analysis,
+            sCusparseDcsrilu02_analysis,
+            sCusparseScsrilu02_analysis,
+            sCusparseZcsric02_analysis,
+            sCusparseCcsric02_analysis,
+            sCusparseDcsric02_analysis,
+            sCusparseScsric02_analysis,
+            sCusparseZcsric02_bufferSize,
+            sCusparseCcsric02_bufferSize,
+            sCusparseDcsric02_bufferSize,
+            sCusparseScsric02_bufferSize,
+            sCusparseZbsrilu02,
+            sCusparseCbsrilu02,
+            sCusparseDbsrilu02,
+            sCusparseSbsrilu02,
+            sCusparseZbsrilu02_analysis,
+            sCusparseCbsrilu02_analysis,
+            sCusparseDbsrilu02_analysis,
+            sCusparseSbsrilu02_analysis,
+            sCusparseZbsric02,
+            sCusparseCbsric02,
+            sCusparseDbsric02,
+            sCusparseSbsric02,
+            sCusparseZbsric02_analysis,
+            sCusparseCbsric02_analysis,
+            sCusparseDbsric02_analysis,
+            sCusparseSbsric02_analysis
           )
         )
       )
@@ -1310,12 +1736,9 @@ void HipifyAction::EndSourceFileAction() {
     // one copy of the hip include into every file.
     bool placeForIncludeCalculated = false;
     clang::SourceLocation sl, controllingMacroLoc;
-    auto &SM = getCompilerInstance().getSourceManager();
-    clang::Preprocessor &PP = getCompilerInstance().getPreprocessor();
-    clang::HeaderSearch &HS = PP.getHeaderSearchInfo();
-    clang::ExternalPreprocessorSource *EPL = HS.getExternalLookup();
-    const clang::FileEntry *FE = SM.getFileEntryForID(SM.getMainFileID());
-    const clang::IdentifierInfo *controllingMacro = HS.getFileInfo(FE).getControllingMacro(EPL);
+    auto &CI = getCompilerInstance();
+    auto &SM = CI.getSourceManager();
+    const clang::IdentifierInfo *controllingMacro = llcompat::getControllingMacro(CI);
     if (controllingMacro) {
       auto found = Ifndefs.find(controllingMacro->getName().str());
       if (found != Ifndefs.end()) {
