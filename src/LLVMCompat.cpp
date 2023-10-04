@@ -180,10 +180,11 @@ const clang::IdentifierInfo *getControllingMacro(clang::CompilerInstance &CI) {
   clang::Preprocessor &PP = CI.getPreprocessor();
   clang::HeaderSearch &HS = PP.getHeaderSearchInfo();
   clang::ExternalPreprocessorSource *EPL = HS.getExternalLookup();
-  const clang::FileEntry *FE = SM.getFileEntryForID(SM.getMainFileID());
 #if LLVM_VERSION_MAJOR >= 18
-  return HS.getFileInfo(FE->getLastRef()).getControllingMacro(EPL);
+  const clang::OptionalFileEntryRef OFE = SM.getFileEntryRefForID(SM.getMainFileID());
+  return HS.getFileInfo(*OFE.getPointer()).getControllingMacro(EPL);
 #else
+  const clang::FileEntry *FE = SM.getFileEntryForID(SM.getMainFileID());
   return HS.getFileInfo(FE).getControllingMacro(EPL);
 #endif
 }
