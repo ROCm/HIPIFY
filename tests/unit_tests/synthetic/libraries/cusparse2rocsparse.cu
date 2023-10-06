@@ -975,6 +975,26 @@ int main() {
   // CHECK: status_t = rocsparse_sbsric0_analysis(handle_t, direction_t, mb, nnzb, matDescr_A, &fbsrSortedVal, &bsrSortedRowPtr, &bsrSortedColInd, blockDim, bsric02_info, rocsparse_analysis_policy_force, rocsparse_solve_policy_auto, pBuffer);
   status_t = cusparseSbsric02_analysis(handle_t, direction_t, mb, nnzb, matDescr_A, &fbsrSortedVal, &bsrSortedRowPtr, &bsrSortedColInd, blockDim, bsric02_info, solvePolicy_t, pBuffer);
 
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseZbsric02_bufferSize(cusparseHandle_t handle, cusparseDirection_t dirA, int mb, int nnzb, const cusparseMatDescr_t descrA, cuDoubleComplex* bsrSortedVal, const int* bsrSortedRowPtr, const int* bsrSortedColInd, int blockDim, bsric02Info_t info, int* pBufferSizeInBytes);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_zbsric0_buffer_size(rocsparse_handle handle, rocsparse_direction dir, rocsparse_int mb, rocsparse_int nnzb, const rocsparse_mat_descr descr, const rocsparse_double_complex* bsr_val, const rocsparse_int* bsr_row_ptr, const rocsparse_int* bsr_col_ind, rocsparse_int block_dim, rocsparse_mat_info info, size_t* buffer_size);
+  // CHECK: status_t = rocsparse_zbsric0_buffer_size(handle_t, direction_t, mb, nnzb, matDescr_A, &dComplexbsrSortedVal, &bsrSortedRowPtr, &bsrSortedColInd, blockDim, bsric02_info, reinterpret_cast<size_t*>(&bufferSizeInBytes));
+  status_t = cusparseZbsric02_bufferSize(handle_t, direction_t, mb, nnzb, matDescr_A, &dComplexbsrSortedVal, &bsrSortedRowPtr, &bsrSortedColInd, blockDim, bsric02_info, &bufferSizeInBytes);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseCbsric02_bufferSize(cusparseHandle_t handle, cusparseDirection_t dirA, int mb, int nnzb, const cusparseMatDescr_t descrA, cuComplex* bsrSortedVal, const int* bsrSortedRowPtr, const int* bsrSortedColInd, int blockDim, bsric02Info_t info, int* pBufferSizeInBytes);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_cbsric0_buffer_size(rocsparse_handle handle, rocsparse_direction dir, rocsparse_int mb, rocsparse_int nnzb, const rocsparse_mat_descr descr, const rocsparse_float_complex* bsr_val, const rocsparse_int* bsr_row_ptr, const rocsparse_int* bsr_col_ind, rocsparse_int block_dim, rocsparse_mat_info info, size_t* buffer_size);
+  // CHECK: status_t = rocsparse_cbsric0_buffer_size(handle_t, direction_t, mb, nnzb, matDescr_A, &complexbsrSortedVal, &bsrSortedRowPtr, &bsrSortedColInd, blockDim, bsric02_info, reinterpret_cast<size_t*>(&bufferSizeInBytes));
+  status_t = cusparseCbsric02_bufferSize(handle_t, direction_t, mb, nnzb, matDescr_A, &complexbsrSortedVal, &bsrSortedRowPtr, &bsrSortedColInd, blockDim, bsric02_info, &bufferSizeInBytes);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseDbsric02_bufferSize(cusparseHandle_t handle, cusparseDirection_t dirA, int mb, int nnzb, const cusparseMatDescr_t descrA, double* bsrSortedVal, const int* bsrSortedRowPtr, const int* bsrSortedColInd, int blockDim, bsric02Info_t info, int* pBufferSizeInBytes);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_dbsric0_buffer_size(rocsparse_handle handle, rocsparse_direction dir, rocsparse_int mb, rocsparse_int nnzb, const rocsparse_mat_descr descr, const double* bsr_val, const rocsparse_int* bsr_row_ptr, const rocsparse_int* bsr_col_ind, rocsparse_int block_dim, rocsparse_mat_info info, size_t* buffer_size);
+  // CHECK: status_t = rocsparse_dbsric0_buffer_size(handle_t, direction_t, mb, nnzb, matDescr_A, &dbsrSortedVal, &bsrSortedRowPtr, &bsrSortedColInd, blockDim, bsric02_info, reinterpret_cast<size_t*>(&bufferSizeInBytes));
+  status_t = cusparseDbsric02_bufferSize(handle_t, direction_t, mb, nnzb, matDescr_A, &dbsrSortedVal, &bsrSortedRowPtr, &bsrSortedColInd, blockDim, bsric02_info, &bufferSizeInBytes);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseSbsric02_bufferSize(cusparseHandle_t handle, cusparseDirection_t dirA, int mb, int nnzb, const cusparseMatDescr_t descrA, float* bsrSortedVal, const int* bsrSortedRowPtr, const int* bsrSortedColInd, int blockDim, bsric02Info_t info, int* pBufferSizeInBytes);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_sbsric0_buffer_size(rocsparse_handle handle, rocsparse_direction dir, rocsparse_int mb, rocsparse_int nnzb, const rocsparse_mat_descr descr, const float* bsr_val, const rocsparse_int* bsr_row_ptr, const rocsparse_int* bsr_col_ind, rocsparse_int block_dim, rocsparse_mat_info info, size_t* buffer_size);
+  // CHECK: status_t = rocsparse_sbsric0_buffer_size(handle_t, direction_t, mb, nnzb, matDescr_A, &fbsrSortedVal, &bsrSortedRowPtr, &bsrSortedColInd, blockDim, bsric02_info, reinterpret_cast<size_t*>(&bufferSizeInBytes));
+  status_t = cusparseSbsric02_bufferSize(handle_t, direction_t, mb, nnzb, matDescr_A, &fbsrSortedVal, &bsrSortedRowPtr, &bsrSortedColInd, blockDim, bsric02_info, &bufferSizeInBytes);
+
 #if CUDA_VERSION >= 8000
   // CHECK: hipDataType dataType_t;
   // TODO: [#899] There should be rocsparse_datatype

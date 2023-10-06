@@ -131,6 +131,10 @@ const std::string sCusparseZbsric02_analysis = "cusparseZbsric02_analysis";
 const std::string sCusparseCbsric02_analysis = "cusparseCbsric02_analysis";
 const std::string sCusparseDbsric02_analysis = "cusparseDbsric02_analysis";
 const std::string sCusparseSbsric02_analysis = "cusparseSbsric02_analysis";
+const std::string sCusparseZbsric02_bufferSize = "cusparseZbsric02_bufferSize";
+const std::string sCusparseCbsric02_bufferSize = "cusparseCbsric02_bufferSize";
+const std::string sCusparseDbsric02_bufferSize = "cusparseDbsric02_bufferSize";
+const std::string sCusparseSbsric02_bufferSize = "cusparseSbsric02_bufferSize";
 // CUDA_OVERLOADED
 const std::string sCudaEventCreate = "cudaEventCreate";
 const std::string sCudaGraphInstantiate = "cudaGraphInstantiate";
@@ -877,6 +881,42 @@ std::map<std::string, ArgCastStruct> FuncArgCasts {
       {
         {10, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
         {11, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseZbsric02_bufferSize,
+    {
+      {
+        {10, {e_reinterpret_cast_size_t, cw_None}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseCbsric02_bufferSize,
+    {
+      {
+        {10, {e_reinterpret_cast_size_t, cw_None}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseDbsric02_bufferSize,
+    {
+      {
+        {10, {e_reinterpret_cast_size_t, cw_None}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseSbsric02_bufferSize,
+    {
+      {
+        {10, {e_reinterpret_cast_size_t, cw_None}}
       },
       true,
       false
@@ -1641,7 +1681,11 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
             sCusparseZbsric02_analysis,
             sCusparseCbsric02_analysis,
             sCusparseDbsric02_analysis,
-            sCusparseSbsric02_analysis
+            sCusparseSbsric02_analysis,
+            sCusparseZbsric02_bufferSize,
+            sCusparseCbsric02_bufferSize,
+            sCusparseDbsric02_bufferSize,
+            sCusparseSbsric02_bufferSize
           )
         )
       )
