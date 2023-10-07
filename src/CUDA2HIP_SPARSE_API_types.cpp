@@ -65,8 +65,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_TYPE_NAME_MAP {
   {"csric02Info",                               {"csric02Info",                                "_rocsparse_mat_info",                                CONV_TYPE, API_SPARSE, 4, CUDA_DEPRECATED}},
   {"csric02Info_t",                             {"csric02Info_t",                              "rocsparse_mat_info",                                 CONV_TYPE, API_SPARSE, 4, CUDA_DEPRECATED}},
 
-  {"csrgemm2Info",                              {"csrgemm2Info",                               "",                                                   CONV_TYPE, API_SPARSE, 4, UNSUPPORTED | CUDA_REMOVED}},
-  {"csrgemm2Info_t",                            {"csrgemm2Info_t",                             "",                                                   CONV_TYPE, API_SPARSE, 4, ROC_UNSUPPORTED | CUDA_REMOVED}},
+  {"csrgemm2Info",                              {"csrgemm2Info",                               "_rocsparse_mat_info",                                CONV_TYPE, API_SPARSE, 4, CUDA_REMOVED}},
+  {"csrgemm2Info_t",                            {"csrgemm2Info_t",                             "rocsparse_mat_info",                                 CONV_TYPE, API_SPARSE, 4, CUDA_REMOVED}},
 
   {"cusparseColorInfo",                         {"hipsparseColorInfo",                         "_rocsparse_color_info",                              CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   {"cusparseColorInfo_t",                       {"hipsparseColorInfo_t",                       "rocsparse_color_info",                               CONV_TYPE, API_SPARSE, 4, CUDA_DEPRECATED}},
@@ -433,6 +433,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_TYPE_NAME_VER_MAP {
   {"csrilu02Info_t",                             {HIP_1092, HIP_0,    HIP_0   }},
   {"bsrilu02Info",                               {HIP_3090, HIP_0,    HIP_0   }},
   {"bsrilu02Info_t",                             {HIP_3090, HIP_0,    HIP_0   }},
+  {"csrgemm2Info",                               {HIP_2080, HIP_0,    HIP_0   }},
   {"csrgemm2Info_t",                             {HIP_2080, HIP_0,    HIP_0   }},
   {"pruneInfo",                                  {HIP_3090, HIP_0,    HIP_0   }},
   {"pruneInfo_t",                                {HIP_3090, HIP_0,    HIP_0   }},

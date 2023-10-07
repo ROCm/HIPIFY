@@ -116,7 +116,7 @@
 |`bsrsm2Info_t`| |12.2| |`bsrsm2Info_t`|4.5.0| | | |
 |`bsrsv2Info`| |12.2| |`bsrsv2Info`|3.6.0| | | |
 |`bsrsv2Info_t`| |12.2| |`bsrsv2Info_t`|3.6.0| | | |
-|`csrgemm2Info`| | |12.0| | | | | |
+|`csrgemm2Info`| | |12.0|`csrgemm2Info`|2.8.0| | | |
 |`csrgemm2Info_t`| | |12.0|`csrgemm2Info_t`|2.8.0| | | |
 |`csric02Info`| |12.2| |`csric02Info`|3.1.0| | | |
 |`csric02Info_t`| |12.2| |`csric02Info_t`|3.1.0| | | |
@@ -569,7 +569,7 @@
 |`cusparseSgtsvInterleavedBatch_bufferSizeExt`|9.2| | |`hipsparseSgtsvInterleavedBatch_bufferSizeExt`|5.1.0| | | |
 |`cusparseSgtsvStridedBatch`| |10.2|11.0| | | | | |
 |`cusparseSgtsv_nopivot`| |10.2|11.0| | | | | |
-|`cusparseXbsric02_zeroPivot`| | | |`hipsparseXbsric02_zeroPivot`|3.8.0| | | |
+|`cusparseXbsric02_zeroPivot`| |12.2| |`hipsparseXbsric02_zeroPivot`|3.8.0| | | |
 |`cusparseXbsrilu02_zeroPivot`| |12.2| |`hipsparseXbsrilu02_zeroPivot`|3.9.0| | | |
 |`cusparseXcsric02_zeroPivot`| |12.2| |`hipsparseXcsric02_zeroPivot`|3.1.0| | | |
 |`cusparseXcsrilu02_zeroPivot`| |12.2| |`hipsparseXcsrilu02_zeroPivot`|1.9.2| | | |

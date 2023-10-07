@@ -182,6 +182,7 @@ my %deprecated_funcs = (
     "cusparseXbsrsv2_zeroPivot" => "12.2",
     "cusparseXbsrsm2_zeroPivot" => "12.2",
     "cusparseXbsrilu02_zeroPivot" => "12.2",
+    "cusparseXbsric02_zeroPivot" => "12.2",
     "cusparseSsctr" => "11.0",
     "cusparseSroti" => "11.0",
     "cusparseSpruneDense2csr_bufferSizeExt" => "12.2",
@@ -1894,6 +1895,7 @@ sub rocSubstitutions {
     subst("cusparseSpruneDense2csrNnz", "rocsparse_sprune_dense2csr_nnz", "library");
     subst("cusparseSpruneDense2csrNnzByPercentage", "rocsparse_sprune_dense2csr_nnz_by_percentage", "library");
     subst("cusparseSpruneDense2csr_bufferSizeExt", "rocsparse_sprune_dense2csr_buffer_size", "library");
+    subst("cusparseXbsric02_zeroPivot", "rocsparse_bsric0_zero_pivot", "library");
     subst("cusparseXbsrilu02_zeroPivot", "rocsparse_bsrilu0_zero_pivot", "library");
     subst("cusparseXcoo2csr", "rocsparse_coo2csr", "library");
     subst("cusparseXcoosortByColumn", "rocsparse_coosort_by_column", "library");
@@ -1904,6 +1906,7 @@ sub rocSubstitutions {
     subst("cusparseXcsr2bsrNnz", "rocsparse_csr2bsr_nnz", "library");
     subst("cusparseXcsr2coo", "rocsparse_csr2coo", "library");
     subst("cusparseXcsr2gebsrNnz", "rocsparse_csr2gebsr_nnz", "library");
+    subst("cusparseXcsrgemm2Nnz", "rocsparse_csrgemm_nnz", "library");
     subst("cusparseXcsric02_zeroPivot", "rocsparse_csric0_zero_pivot", "library");
     subst("cusparseXcsrilu02_zeroPivot", "rocsparse_csrilu0_zero_pivot", "library");
     subst("cusparseXcsrsort", "rocsparse_csrsort", "library");
@@ -1957,6 +1960,8 @@ sub rocSubstitutions {
     subst("bsric02Info_t", "rocsparse_mat_info", "type");
     subst("bsrilu02Info", "_rocsparse_mat_info", "type");
     subst("bsrilu02Info_t", "rocsparse_mat_info", "type");
+    subst("csrgemm2Info", "_rocsparse_mat_info", "type");
+    subst("csrgemm2Info_t", "rocsparse_mat_info", "type");
     subst("csric02Info", "_rocsparse_mat_info", "type");
     subst("csric02Info_t", "rocsparse_mat_info", "type");
     subst("csrilu02Info", "_rocsparse_mat_info", "type");
@@ -4241,6 +4246,7 @@ sub simpleSubstitutions {
     subst("bsrsm2Info_t", "bsrsm2Info_t", "type");
     subst("bsrsv2Info", "bsrsv2Info", "type");
     subst("bsrsv2Info_t", "bsrsv2Info_t", "type");
+    subst("csrgemm2Info", "csrgemm2Info", "type");
     subst("csrgemm2Info_t", "csrgemm2Info_t", "type");
     subst("csric02Info", "csric02Info", "type");
     subst("csric02Info_t", "csric02Info_t", "type");
@@ -7874,7 +7880,6 @@ sub warnUnsupportedFunctions {
         "cuArrayGetMemoryRequirements",
         "csrsv2Info",
         "csrsm2Info",
-        "csrgemm2Info",
         "cl_event_flags_enum",
         "cl_event_flags",
         "cl_context_flags_enum",
