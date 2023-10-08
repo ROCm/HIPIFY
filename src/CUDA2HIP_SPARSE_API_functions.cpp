@@ -314,10 +314,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   {"cusparseZcsrgemm2",                                 {"hipsparseZcsrgemm2",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 11, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
   {"cusparseXcsrgemm2Nnz",                              {"hipsparseXcsrgemm2Nnz",                              "rocsparse_csrgemm_nnz",                                            CONV_LIB_FUNC, API_SPARSE, 11, CUDA_DEPRECATED | CUDA_REMOVED}},
 
-  {"cusparseScsrgemm2_bufferSizeExt",                   {"hipsparseScsrgemm2_bufferSizeExt",                   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 11, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseDcsrgemm2_bufferSizeExt",                   {"hipsparseDcsrgemm2_bufferSizeExt",                   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 11, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseCcsrgemm2_bufferSizeExt",                   {"hipsparseCcsrgemm2_bufferSizeExt",                   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 11, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseZcsrgemm2_bufferSizeExt",                   {"hipsparseZcsrgemm2_bufferSizeExt",                   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 11, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
+  {"cusparseScsrgemm2_bufferSizeExt",                   {"hipsparseScsrgemm2_bufferSizeExt",                   "rocsparse_scsrgemm_buffer_size",                                   CONV_LIB_FUNC, API_SPARSE, 11, CUDA_DEPRECATED | CUDA_REMOVED}},
+  {"cusparseDcsrgemm2_bufferSizeExt",                   {"hipsparseDcsrgemm2_bufferSizeExt",                   "rocsparse_dcsrgemm_buffer_size",                                   CONV_LIB_FUNC, API_SPARSE, 11, CUDA_DEPRECATED | CUDA_REMOVED}},
+  {"cusparseCcsrgemm2_bufferSizeExt",                   {"hipsparseCcsrgemm2_bufferSizeExt",                   "rocsparse_ccsrgemm_buffer_size",                                   CONV_LIB_FUNC, API_SPARSE, 11, CUDA_DEPRECATED | CUDA_REMOVED}},
+  {"cusparseZcsrgemm2_bufferSizeExt",                   {"hipsparseZcsrgemm2_bufferSizeExt",                   "rocsparse_zcsrgemm_buffer_size",                                   CONV_LIB_FUNC, API_SPARSE, 11, CUDA_DEPRECATED | CUDA_REMOVED}},
 
   // 12. cuSPARSE Preconditioners Reference
   // 12.1. Incomplete Cholesky Factorization : level 0
@@ -2237,6 +2237,10 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_FUNCTION_VER_MAP {
   {"rocsparse_sbsric0_buffer_size",                      {HIP_3080, HIP_0,    HIP_0   }},
   {"rocsparse_bsric0_zero_pivot",                        {HIP_3080, HIP_0,    HIP_0   }},
   {"rocsparse_csrgemm_nnz",                              {HIP_2080, HIP_0,    HIP_0   }},
+  {"rocsparse_zcsrgemm_buffer_size",                     {HIP_2080, HIP_0,    HIP_0   }},
+  {"rocsparse_ccsrgemm_buffer_size",                     {HIP_2080, HIP_0,    HIP_0   }},
+  {"rocsparse_dcsrgemm_buffer_size",                     {HIP_2080, HIP_0,    HIP_0   }},
+  {"rocsparse_scsrgemm_buffer_size",                     {HIP_2080, HIP_0,    HIP_0   }},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_SPARSE_API_SECTION_MAP {
