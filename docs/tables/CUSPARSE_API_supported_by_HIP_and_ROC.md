@@ -436,19 +436,19 @@
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|**ROC**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
-|`cusparseCcsrgeam`| |10.2|11.0|`hipsparseCcsrgeam`|3.5.0| | | | | | | | |
+|`cusparseCcsrgeam`| |10.2|11.0|`hipsparseCcsrgeam`|3.5.0| | | |`rocsparse_ccsrgeam`|3.5.0| | | |
 |`cusparseCcsrgeam2`|10.0| | |`hipsparseCcsrgeam2`|3.5.0| | | | | | | | |
 |`cusparseCcsrgeam2_bufferSizeExt`|10.0| | |`hipsparseCcsrgeam2_bufferSizeExt`|3.5.0| | | | | | | | |
 |`cusparseCcsrgemm`| |10.2|11.0|`hipsparseCcsrgemm`|3.1.0| | | | | | | | |
 |`cusparseCcsrgemm2`| |11.0|12.0|`hipsparseCcsrgemm2`|3.1.0| | | | | | | | |
 |`cusparseCcsrgemm2_bufferSizeExt`| |11.0|12.0|`hipsparseCcsrgemm2_bufferSizeExt`|3.1.0| | | |`rocsparse_ccsrgemm_buffer_size`|2.8.0| | | |
-|`cusparseDcsrgeam`| |10.2|11.0|`hipsparseDcsrgeam`|3.5.0| | | | | | | | |
+|`cusparseDcsrgeam`| |10.2|11.0|`hipsparseDcsrgeam`|3.5.0| | | |`rocsparse_dcsrgeam`|3.5.0| | | |
 |`cusparseDcsrgeam2`|10.0| | |`hipsparseDcsrgeam2`|3.5.0| | | | | | | | |
 |`cusparseDcsrgeam2_bufferSizeExt`|10.0| | |`hipsparseDcsrgeam2_bufferSizeExt`|3.5.0| | | | | | | | |
 |`cusparseDcsrgemm`| |10.2|11.0|`hipsparseDcsrgemm`|2.8.0| | | | | | | | |
 |`cusparseDcsrgemm2`| |11.0|12.0|`hipsparseDcsrgemm2`|2.8.0| | | | | | | | |
 |`cusparseDcsrgemm2_bufferSizeExt`| |11.0|12.0|`hipsparseDcsrgemm2_bufferSizeExt`|2.8.0| | | |`rocsparse_dcsrgemm_buffer_size`|2.8.0| | | |
-|`cusparseScsrgeam`| |10.2|11.0|`hipsparseScsrgeam`|3.5.0| | | | | | | | |
+|`cusparseScsrgeam`| |10.2|11.0|`hipsparseScsrgeam`|3.5.0| | | |`rocsparse_scsrgeam`|3.5.0| | | |
 |`cusparseScsrgeam2`|10.0| | |`hipsparseScsrgeam2`|3.5.0| | | | | | | | |
 |`cusparseScsrgeam2_bufferSizeExt`|10.0| | |`hipsparseScsrgeam2_bufferSizeExt`|3.5.0| | | | | | | | |
 |`cusparseScsrgemm`| |10.2|11.0|`hipsparseScsrgemm`|2.8.0| | | | | | | | |
@@ -458,7 +458,7 @@
 |`cusparseXcsrgeamNnz`| |10.2|11.0|`hipsparseXcsrgeamNnz`|3.5.0| | | | | | | | |
 |`cusparseXcsrgemm2Nnz`| |11.0|12.0|`hipsparseXcsrgemm2Nnz`|2.8.0| | | |`rocsparse_csrgemm_nnz`|2.8.0| | | |
 |`cusparseXcsrgemmNnz`| |10.2|11.0|`hipsparseXcsrgemmNnz`|2.8.0| | | | | | | | |
-|`cusparseZcsrgeam`| |10.2|11.0|`hipsparseZcsrgeam`|3.5.0| | | | | | | | |
+|`cusparseZcsrgeam`| |10.2|11.0|`hipsparseZcsrgeam`|3.5.0| | | |`rocsparse_zcsrgeam`|3.5.0| | | |
 |`cusparseZcsrgeam2`|10.0| | |`hipsparseZcsrgeam2`|3.5.0| | | | | | | | |
 |`cusparseZcsrgeam2_bufferSizeExt`|10.0| | |`hipsparseZcsrgeam2_bufferSizeExt`|3.5.0| | | | | | | | |
 |`cusparseZcsrgemm`| |10.2|11.0|`hipsparseZcsrgemm`|3.1.0| | | | | | | | |
