@@ -1668,10 +1668,8 @@ int main() {
 
   // CHECK: rocblas_math_mode blasMath;
   // CHECK-NEXT: rocblas_math_mode BLAS_DEFAULT_MATH = rocblas_default_math;
-  // CHECK-NEXT: rocblas_math_mode BLAS_TF32_TENSOR_OP_MATH = rocblas_xf32_xdl_math_op;
   cublasMath_t blasMath;
   cublasMath_t BLAS_DEFAULT_MATH = CUBLAS_DEFAULT_MATH;
-  cublasMath_t BLAS_TF32_TENSOR_OP_MATH = CUBLAS_TF32_TENSOR_OP_MATH;
 
   // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasGetMathMode(cublasHandle_t handle, cublasMath_t* mode);
   // ROC: ROCBLAS_EXPORT rocblas_status rocblas_get_math_mode(rocblas_handle handle, rocblas_math_mode* math_mode);
@@ -1722,6 +1720,9 @@ int main() {
   // CHECK-NEXT: rocblas_computetype BLAS_COMPUTE_32F = rocblas_compute_type_f32;
   cublasComputeType_t blasComputeType;
   cublasComputeType_t BLAS_COMPUTE_32F = CUBLAS_COMPUTE_32F;
+
+  // CHECK: rocblas_math_mode BLAS_TF32_TENSOR_OP_MATH = rocblas_xf32_xdl_math_op;
+  cublasMath_t BLAS_TF32_TENSOR_OP_MATH = CUBLAS_TF32_TENSOR_OP_MATH;
 #endif
 
 #if CUDA_VERSION >= 11040 && CUBLAS_VERSION >= 11600
