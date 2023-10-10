@@ -155,16 +155,16 @@
 |`CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS_st`|10.0| | |`hipExternalSemaphoreWaitParams_st`|4.4.0| | | |
 |`CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS_v1`|11.3| | |`hipExternalSemaphoreWaitParams`|4.4.0| | | |
 |`CUDA_EXTERNAL_SEMAPHORE_WAIT_SKIP_NVSCIBUF_MEMSYNC`|10.2| | | | | | | |
-|`CUDA_EXT_SEM_SIGNAL_NODE_PARAMS`|11.2| | | | | | | |
-|`CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_st`|11.2| | | | | | | |
-|`CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_v1`|11.3| | | | | | | |
-|`CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_v2`|12.2| | | | | | | |
-|`CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_v2_st`|12.2| | | | | | | |
-|`CUDA_EXT_SEM_WAIT_NODE_PARAMS`|11.2| | | | | | | |
-|`CUDA_EXT_SEM_WAIT_NODE_PARAMS_st`|11.2| | | | | | | |
-|`CUDA_EXT_SEM_WAIT_NODE_PARAMS_v1`|11.3| | | | | | | |
-|`CUDA_EXT_SEM_WAIT_NODE_PARAMS_v2`|12.2| | | | | | | |
-|`CUDA_EXT_SEM_WAIT_NODE_PARAMS_v2_st`|12.2| | | | | | | |
+|`CUDA_EXT_SEM_SIGNAL_NODE_PARAMS`|11.2| | |`hipExternalSemaphoreSignalNodeParams`|6.0.0| | |6.0.0|
+|`CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_st`|11.2| | |`hipExternalSemaphoreSignalNodeParams`|6.0.0| | |6.0.0|
+|`CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_v1`|11.3| | |`hipExternalSemaphoreSignalNodeParams`|6.0.0| | |6.0.0|
+|`CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_v2`|12.2| | |`hipExternalSemaphoreSignalNodeParams`|6.0.0| | |6.0.0|
+|`CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_v2_st`|12.2| | |`hipExternalSemaphoreSignalNodeParams`|6.0.0| | |6.0.0|
+|`CUDA_EXT_SEM_WAIT_NODE_PARAMS`|11.2| | |`hipExternalSemaphoreWaitNodeParams`|6.0.0| | |6.0.0|
+|`CUDA_EXT_SEM_WAIT_NODE_PARAMS_st`|11.2| | |`hipExternalSemaphoreWaitNodeParams`|6.0.0| | |6.0.0|
+|`CUDA_EXT_SEM_WAIT_NODE_PARAMS_v1`|11.3| | |`hipExternalSemaphoreWaitNodeParams`|6.0.0| | |6.0.0|
+|`CUDA_EXT_SEM_WAIT_NODE_PARAMS_v2`|12.2| | |`hipExternalSemaphoreWaitNodeParams`|6.0.0| | |6.0.0|
+|`CUDA_EXT_SEM_WAIT_NODE_PARAMS_v2_st`|12.2| | |`hipExternalSemaphoreWaitNodeParams`|6.0.0| | |6.0.0|
 |`CUDA_GRAPH_INSTANTIATE_ERROR`|12.0| | | | | | | |
 |`CUDA_GRAPH_INSTANTIATE_FLAG_AUTO_FREE_ON_LAUNCH`|11.4| | |`hipGraphInstantiateFlagAutoFreeOnLaunch`|5.2.0| | | |
 |`CUDA_GRAPH_INSTANTIATE_FLAG_DEVICE_LAUNCH`|12.0| | |`hipGraphInstantiateFlagDeviceLaunch`|5.6.0| | | |
@@ -375,7 +375,7 @@
 |`CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_WIN32_KMT_HANDLE_SUPPORTED`|10.2| | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_HOST_NATIVE_ATOMIC_SUPPORTED`|8.0| | |`hipDeviceAttributeHostNativeAtomicSupported`|4.3.0| | | |
 |`CU_DEVICE_ATTRIBUTE_HOST_NUMA_ID`|12.2| | | | | | | |
-|`CU_DEVICE_ATTRIBUTE_HOST_REGISTER_SUPPORTED`|9.2| | | | | | | |
+|`CU_DEVICE_ATTRIBUTE_HOST_REGISTER_SUPPORTED`|9.2| | |`hipDeviceAttributeHostRegisterSupported`|6.0.0| | |6.0.0|
 |`CU_DEVICE_ATTRIBUTE_INTEGRATED`| | | |`hipDeviceAttributeIntegrated`|1.9.0| | | |
 |`CU_DEVICE_ATTRIBUTE_IPC_EVENT_SUPPORTED`|12.0| | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_KERNEL_EXEC_TIMEOUT`| | | |`hipDeviceAttributeKernelExecTimeout`|2.10.0| | | |
