@@ -278,20 +278,20 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUmemoryPool",                                                     {"hipMemPool_t",                                             "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES}},
 
   // cudaExternalSemaphoreSignalNodeParams
-  {"CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_st",                               {"hipExternalSemaphoreSignalNodeParams",                     "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-  {"CUDA_EXT_SEM_SIGNAL_NODE_PARAMS",                                  {"hipExternalSemaphoreSignalNodeParams",                     "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-  {"CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_v1",                               {"hipExternalSemaphoreSignalNodeParams",                     "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_st",                               {"hipExternalSemaphoreSignalNodeParams",                     "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
+  {"CUDA_EXT_SEM_SIGNAL_NODE_PARAMS",                                  {"hipExternalSemaphoreSignalNodeParams",                     "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
+  {"CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_v1",                               {"hipExternalSemaphoreSignalNodeParams",                     "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
   // cudaExternalSemaphoreSignalNodeParamsV2
-  {"CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_v2_st",                            {"hipExternalSemaphoreSignalNodeParams_v2",                  "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-  {"CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_v2",                               {"hipExternalSemaphoreSignalNodeParams_v2",                  "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_v2_st",                            {"hipExternalSemaphoreSignalNodeParams",                     "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
+  {"CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_v2",                               {"hipExternalSemaphoreSignalNodeParams",                     "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
 
   // cudaExternalSemaphoreWaitNodeParams
-  {"CUDA_EXT_SEM_WAIT_NODE_PARAMS_st",                                 {"hipExternalSemaphoreWaitNodeParams",                       "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-  {"CUDA_EXT_SEM_WAIT_NODE_PARAMS",                                    {"hipExternalSemaphoreWaitNodeParams",                       "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-  {"CUDA_EXT_SEM_WAIT_NODE_PARAMS_v1",                                 {"hipExternalSemaphoreWaitNodeParams",                       "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CUDA_EXT_SEM_WAIT_NODE_PARAMS_st",                                 {"hipExternalSemaphoreWaitNodeParams",                       "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
+  {"CUDA_EXT_SEM_WAIT_NODE_PARAMS",                                    {"hipExternalSemaphoreWaitNodeParams",                       "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
+  {"CUDA_EXT_SEM_WAIT_NODE_PARAMS_v1",                                 {"hipExternalSemaphoreWaitNodeParams",                       "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
   // cudaExternalSemaphoreWaitNodeParamsV2
-  {"CUDA_EXT_SEM_WAIT_NODE_PARAMS_v2_st",                              {"hipExternalSemaphoreWaitNodeParams_v2",                    "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-  {"CUDA_EXT_SEM_WAIT_NODE_PARAMS_v2",                                 {"hipExternalSemaphoreWaitNodeParams_v2",                    "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CUDA_EXT_SEM_WAIT_NODE_PARAMS_v2_st",                              {"hipExternalSemaphoreWaitNodeParams",                       "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
+  {"CUDA_EXT_SEM_WAIT_NODE_PARAMS_v2",                                 {"hipExternalSemaphoreWaitNodeParams",                       "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
 
   // cudaMemPoolProps
   {"CUmemPoolProps_st",                                                {"hipMemPoolProps",                                          "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES}},
@@ -814,7 +814,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaDevAttrCanFlushRemoteWrites
   {"CU_DEVICE_ATTRIBUTE_CAN_FLUSH_REMOTE_WRITES",                      {"hipDeviceAttributeCanFlushRemoteWrites",                   "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 98
   // cudaDevAttrHostRegisterSupported
-  {"CU_DEVICE_ATTRIBUTE_HOST_REGISTER_SUPPORTED",                      {"hipDeviceAttributeHostRegisterSupported",                  "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 99
+  {"CU_DEVICE_ATTRIBUTE_HOST_REGISTER_SUPPORTED",                      {"hipDeviceAttributeHostRegisterSupported",                  "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}}, // 99
   // cudaDevAttrPageableMemoryAccessUsesHostPageTables
   {"CU_DEVICE_ATTRIBUTE_PAGEABLE_MEMORY_ACCESS_USES_HOST_PAGE_TABLES", {"hipDeviceAttributePageableMemoryAccessUsesHostPageTables", "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}}, // 100
   // cudaDevAttrDirectManagedMemAccessFromHost
@@ -3967,4 +3967,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {
   {"hiprtcLinkState",                                                  {HIP_5030, HIP_0,    HIP_0   }},
   {"hipFunctionLaunchParams_t",                                        {HIP_5050, HIP_0,    HIP_0   }},
   {"hipFunctionLaunchParams",                                          {HIP_5050, HIP_0,    HIP_0   }},
+  {"hipDeviceAttributeHostRegisterSupported",                          {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipExternalSemaphoreSignalNodeParams",                             {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipExternalSemaphoreWaitNodeParams",                               {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
 };

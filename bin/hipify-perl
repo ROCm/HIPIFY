@@ -1076,7 +1076,22 @@ my %removed_funcs = (
 );
 
 my %experimental_funcs = (
-
+    "cudaExternalSemaphoreWaitNodeParamsV2" => "6.0.0",
+    "cudaExternalSemaphoreWaitNodeParams" => "6.0.0",
+    "cudaExternalSemaphoreSignalNodeParamsV2" => "6.0.0",
+    "cudaExternalSemaphoreSignalNodeParams" => "6.0.0",
+    "cudaDevAttrHostRegisterSupported" => "6.0.0",
+    "CU_DEVICE_ATTRIBUTE_HOST_REGISTER_SUPPORTED" => "6.0.0",
+    "CUDA_EXT_SEM_WAIT_NODE_PARAMS_v2_st" => "6.0.0",
+    "CUDA_EXT_SEM_WAIT_NODE_PARAMS_v2" => "6.0.0",
+    "CUDA_EXT_SEM_WAIT_NODE_PARAMS_v1" => "6.0.0",
+    "CUDA_EXT_SEM_WAIT_NODE_PARAMS_st" => "6.0.0",
+    "CUDA_EXT_SEM_WAIT_NODE_PARAMS" => "6.0.0",
+    "CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_v2_st" => "6.0.0",
+    "CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_v2" => "6.0.0",
+    "CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_v1" => "6.0.0",
+    "CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_st" => "6.0.0",
+    "CUDA_EXT_SEM_SIGNAL_NODE_PARAMS" => "6.0.0"
 );
 
 $print_stats = 1 if $examine;
@@ -1214,6 +1229,22 @@ sub subst {
 }
 
 sub experimentalSubstitutions {
+    subst("CUDA_EXT_SEM_SIGNAL_NODE_PARAMS", "hipExternalSemaphoreSignalNodeParams", "type");
+    subst("CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_st", "hipExternalSemaphoreSignalNodeParams", "type");
+    subst("CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_v1", "hipExternalSemaphoreSignalNodeParams", "type");
+    subst("CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_v2", "hipExternalSemaphoreSignalNodeParams", "type");
+    subst("CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_v2_st", "hipExternalSemaphoreSignalNodeParams", "type");
+    subst("CUDA_EXT_SEM_WAIT_NODE_PARAMS", "hipExternalSemaphoreWaitNodeParams", "type");
+    subst("CUDA_EXT_SEM_WAIT_NODE_PARAMS_st", "hipExternalSemaphoreWaitNodeParams", "type");
+    subst("CUDA_EXT_SEM_WAIT_NODE_PARAMS_v1", "hipExternalSemaphoreWaitNodeParams", "type");
+    subst("CUDA_EXT_SEM_WAIT_NODE_PARAMS_v2", "hipExternalSemaphoreWaitNodeParams", "type");
+    subst("CUDA_EXT_SEM_WAIT_NODE_PARAMS_v2_st", "hipExternalSemaphoreWaitNodeParams", "type");
+    subst("cudaExternalSemaphoreSignalNodeParams", "hipExternalSemaphoreSignalNodeParams", "type");
+    subst("cudaExternalSemaphoreSignalNodeParamsV2", "hipExternalSemaphoreSignalNodeParams", "type");
+    subst("cudaExternalSemaphoreWaitNodeParams", "hipExternalSemaphoreWaitNodeParams", "type");
+    subst("cudaExternalSemaphoreWaitNodeParamsV2", "hipExternalSemaphoreWaitNodeParams", "type");
+    subst("CU_DEVICE_ATTRIBUTE_HOST_REGISTER_SUPPORTED", "hipDeviceAttributeHostRegisterSupported", "numeric_literal");
+    subst("cudaDevAttrHostRegisterSupported", "hipDeviceAttributeHostRegisterSupported", "numeric_literal");
 }
 
 sub rocSubstitutions {
@@ -7355,11 +7386,7 @@ sub warnUnsupportedFunctions {
         "cudaFlushGPUDirectRDMAWritesOptionMemOps",
         "cudaFlushGPUDirectRDMAWritesOptionHost",
         "cudaExternalSemaphoreWaitSkipNvSciBufMemSync",
-        "cudaExternalSemaphoreWaitNodeParamsV2",
-        "cudaExternalSemaphoreWaitNodeParams",
         "cudaExternalSemaphoreSignalSkipNvSciBufMemSync",
-        "cudaExternalSemaphoreSignalNodeParamsV2",
-        "cudaExternalSemaphoreSignalNodeParams",
         "cudaExternalSemaphoreHandleTypeTimelineSemaphoreWin32",
         "cudaExternalSemaphoreHandleTypeTimelineSemaphoreFd",
         "cudaExternalSemaphoreHandleTypeNvSciSync",
@@ -7571,7 +7598,6 @@ sub warnUnsupportedFunctions {
         "cudaDevAttrMaxAccessPolicyWindowSize",
         "cudaDevAttrMax",
         "cudaDevAttrIpcEventSupport",
-        "cudaDevAttrHostRegisterSupported",
         "cudaDevAttrHostRegisterReadOnlySupported",
         "cudaDevAttrHostNumaId",
         "cudaDevAttrGPUDirectRDMAWritesOrdering",
@@ -8382,7 +8408,6 @@ sub warnUnsupportedFunctions {
         "CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE1D_LAYERED_LAYERS",
         "CU_DEVICE_ATTRIBUTE_MAX",
         "CU_DEVICE_ATTRIBUTE_IPC_EVENT_SUPPORTED",
-        "CU_DEVICE_ATTRIBUTE_HOST_REGISTER_SUPPORTED",
         "CU_DEVICE_ATTRIBUTE_HOST_NUMA_ID",
         "CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_WIN32_KMT_HANDLE_SUPPORTED",
         "CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_WIN32_HANDLE_SUPPORTED",
@@ -9142,16 +9167,6 @@ sub warnUnsupportedFunctions {
         "CUDA_GRAPH_INSTANTIATE_MULTIPLE_CTXS_NOT_SUPPORTED",
         "CUDA_GRAPH_INSTANTIATE_INVALID_STRUCTURE",
         "CUDA_GRAPH_INSTANTIATE_ERROR",
-        "CUDA_EXT_SEM_WAIT_NODE_PARAMS_v2_st",
-        "CUDA_EXT_SEM_WAIT_NODE_PARAMS_v2",
-        "CUDA_EXT_SEM_WAIT_NODE_PARAMS_v1",
-        "CUDA_EXT_SEM_WAIT_NODE_PARAMS_st",
-        "CUDA_EXT_SEM_WAIT_NODE_PARAMS",
-        "CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_v2_st",
-        "CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_v2",
-        "CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_v1",
-        "CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_st",
-        "CUDA_EXT_SEM_SIGNAL_NODE_PARAMS",
         "CUDA_EXTERNAL_SEMAPHORE_WAIT_SKIP_NVSCIBUF_MEMSYNC",
         "CUDA_EXTERNAL_SEMAPHORE_SIGNAL_SKIP_NVSCIBUF_MEMSYNC",
         "CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC_v1",
@@ -10379,7 +10394,7 @@ if ($help) {
     print STDERR "$USAGE\n";
 }
 if ($version) {
-    print STDERR "HIP version 5.7.0\n";
+    print STDERR "HIP version 6.0.0\n";
 }
 while (@ARGV) {
     $fileName=shift (@ARGV);

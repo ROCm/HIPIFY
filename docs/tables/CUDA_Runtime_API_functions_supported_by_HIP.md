@@ -665,7 +665,7 @@
 |`cudaDevAttrHostNativeAtomicSupported`|8.0| | |`hipDeviceAttributeHostNativeAtomicSupported`|4.3.0| | | |
 |`cudaDevAttrHostNumaId`|12.2| | | | | | | |
 |`cudaDevAttrHostRegisterReadOnlySupported`|11.1| | | | | | | |
-|`cudaDevAttrHostRegisterSupported`|9.2| | | | | | | |
+|`cudaDevAttrHostRegisterSupported`|9.2| | |`hipDeviceAttributeHostRegisterSupported`|6.0.0| | |6.0.0|
 |`cudaDevAttrIntegrated`| | | |`hipDeviceAttributeIntegrated`|1.9.0| | | |
 |`cudaDevAttrIpcEventSupport`|12.0| | | | | | | |
 |`cudaDevAttrIsMultiGpuBoard`| | | |`hipDeviceAttributeIsMultiGpuBoard`|1.6.0| | | |
@@ -1046,13 +1046,13 @@
 |`cudaExternalSemaphoreHandleTypeOpaqueWin32Kmt`|10.0| | |`hipExternalSemaphoreHandleTypeOpaqueWin32Kmt`|4.4.0| | | |
 |`cudaExternalSemaphoreHandleTypeTimelineSemaphoreFd`|11.2| | | | | | | |
 |`cudaExternalSemaphoreHandleTypeTimelineSemaphoreWin32`|11.2| | | | | | | |
-|`cudaExternalSemaphoreSignalNodeParams`|11.2| | | | | | | |
-|`cudaExternalSemaphoreSignalNodeParamsV2`|12.2| | | | | | | |
+|`cudaExternalSemaphoreSignalNodeParams`|11.2| | |`hipExternalSemaphoreSignalNodeParams`|6.0.0| | |6.0.0|
+|`cudaExternalSemaphoreSignalNodeParamsV2`|12.2| | |`hipExternalSemaphoreSignalNodeParams`|6.0.0| | |6.0.0|
 |`cudaExternalSemaphoreSignalParams`|10.0| | |`hipExternalSemaphoreSignalParams`|4.4.0| | | |
 |`cudaExternalSemaphoreSignalParams_v1`|11.2| | |`hipExternalSemaphoreSignalParams`|4.4.0| | | |
 |`cudaExternalSemaphoreSignalSkipNvSciBufMemSync`|10.2| | | | | | | |
-|`cudaExternalSemaphoreWaitNodeParams`|11.2| | | | | | | |
-|`cudaExternalSemaphoreWaitNodeParamsV2`|12.2| | | | | | | |
+|`cudaExternalSemaphoreWaitNodeParams`|11.2| | |`hipExternalSemaphoreWaitNodeParams`|6.0.0| | |6.0.0|
+|`cudaExternalSemaphoreWaitNodeParamsV2`|12.2| | |`hipExternalSemaphoreWaitNodeParams`|6.0.0| | |6.0.0|
 |`cudaExternalSemaphoreWaitParams`|10.0| | |`hipExternalSemaphoreWaitParams`|4.4.0| | | |
 |`cudaExternalSemaphoreWaitParams_v1`|11.2| | |`hipExternalSemaphoreWaitParams`|4.4.0| | | |
 |`cudaExternalSemaphoreWaitSkipNvSciBufMemSync`|10.2| | | | | | | |

@@ -210,6 +210,16 @@ int main() {
   // CHECK-NEXT: hipMemPoolPtrExportData memPoolPtrExportData;
   CUmemPoolPtrExportData_st memPoolPtrExportData_st;
   CUmemPoolPtrExportData memPoolPtrExportData;
+
+  // CHECK: hipExternalSemaphoreSignalNodeParams EXT_SEM_SIGNAL_NODE_PARAMS_st;
+  // CHECK-NEXT: hipExternalSemaphoreSignalNodeParams EXT_SEM_SIGNAL_NODE_PARAMS;
+  CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_st EXT_SEM_SIGNAL_NODE_PARAMS_st;
+  CUDA_EXT_SEM_SIGNAL_NODE_PARAMS EXT_SEM_SIGNAL_NODE_PARAMS;
+
+  // CHECK: hipExternalSemaphoreWaitNodeParams EXT_SEM_WAIT_NODE_PARAMS_st;
+  // CHECK-NEXT: hipExternalSemaphoreWaitNodeParams EXT_SEM_WAIT_NODE_PARAMS;
+  CUDA_EXT_SEM_WAIT_NODE_PARAMS_st EXT_SEM_WAIT_NODE_PARAMS_st;
+  CUDA_EXT_SEM_WAIT_NODE_PARAMS EXT_SEM_WAIT_NODE_PARAMS;
 #endif
 
 #if CUDA_VERSION >= 11030
@@ -280,6 +290,12 @@ int main() {
 
   // CHECK: hipFunctionLaunchParams LAUNCH_PARAMS_v1;
   CUDA_LAUNCH_PARAMS_v1 LAUNCH_PARAMS_v1;
+
+  // CHECK: hipExternalSemaphoreSignalNodeParams EXT_SEM_SIGNAL_NODE_PARAMS_v1;
+  CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_v1 EXT_SEM_SIGNAL_NODE_PARAMS_v1;
+
+  // CHECK: hipExternalSemaphoreWaitNodeParams EXT_SEM_WAIT_NODE_PARAMS_v1;
+  CUDA_EXT_SEM_WAIT_NODE_PARAMS_v1 EXT_SEM_WAIT_NODE_PARAMS_v1;
 #endif
 
 #if CUDA_VERSION >= 11040
@@ -297,6 +313,16 @@ int main() {
   // CHECK-NEXT: hipMemAllocNodeParams MEM_ALLOC_NODE_PARAMS_v1;
   CUDA_MEM_ALLOC_NODE_PARAMS_v1_st MEM_ALLOC_NODE_PARAMS_v1_st;
   CUDA_MEM_ALLOC_NODE_PARAMS_v1 MEM_ALLOC_NODE_PARAMS_v1;
+
+  // CHECK: hipExternalSemaphoreSignalNodeParams EXT_SEM_SIGNAL_NODE_PARAMS_v2_st;
+  // CHECK-NEXT: hipExternalSemaphoreSignalNodeParams EXT_SEM_SIGNAL_NODE_PARAMS_v2;
+  CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_v2_st EXT_SEM_SIGNAL_NODE_PARAMS_v2_st;
+  CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_v2 EXT_SEM_SIGNAL_NODE_PARAMS_v2;
+
+  // CHECK: hipExternalSemaphoreWaitNodeParams EXT_SEM_WAIT_NODE_PARAMS_v2_st;
+  // CHECK-NEXT: hipExternalSemaphoreWaitNodeParams EXT_SEM_WAIT_NODE_PARAMS_v2;
+  CUDA_EXT_SEM_WAIT_NODE_PARAMS_v2_st EXT_SEM_WAIT_NODE_PARAMS_v2_st;
+  CUDA_EXT_SEM_WAIT_NODE_PARAMS_v2 EXT_SEM_WAIT_NODE_PARAMS_v2;
 #endif
 
   return 0;

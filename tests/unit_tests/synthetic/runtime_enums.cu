@@ -562,6 +562,9 @@ int main() {
 
   // CHECK: hipDeviceP2PAttr DevP2PAttrCudaArrayAccessSupported = hipDevP2PAttrHipArrayAccessSupported;
   cudaDeviceP2PAttr DevP2PAttrCudaArrayAccessSupported = cudaDevP2PAttrCudaArrayAccessSupported;
+
+  // CHECK: hipDeviceAttribute_t DevAttrHostRegisterSupported = hipDeviceAttributeHostRegisterSupported;
+  cudaDeviceAttr DevAttrHostRegisterSupported = cudaDevAttrHostRegisterSupported;
 #endif
 
 #if CUDA_VERSION >= 10000
