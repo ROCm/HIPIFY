@@ -197,7 +197,7 @@ After applying all the matchers, the output HIP source is produced.
 In most cases, you can get a suitable version of `LLVM+CLANG` with your package manager.
 
 Failing that or having multiple versions of `LLVM`, you can [download a release archive](http://releases.llvm.org/), build or install it, and set
-[CMAKE_PREFIX_PATH](https://cmake.org/cmake/help/v3.5/variable/CMAKE_PREFIX_PATH.html) so `cmake` can find it; for instance: `-DCMAKE_PREFIX_PATH=d:\LLVM\17.0.2\dist`
+[CMAKE_PREFIX_PATH](https://cmake.org/cmake/help/v3.5/variable/CMAKE_PREFIX_PATH.html) so `cmake` can find it; for instance: `-DCMAKE_PREFIX_PATH=D:\LLVM\17.0.2\dist`
 
 ### <a name="hipify-clang-usage"></a>hipify-clang: usage
 
@@ -338,9 +338,9 @@ Run `Visual Studio 17 2022`, open the generated `LLVM.sln`, build all, build pro
 
         - ***Linux***: `-DCUDA_TOOLKIT_ROOT_DIR=/usr/include`
 
-        - ***Windows***: `-DCUDA_TOOLKIT_ROOT_DIR="c:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.2"`
+        - ***Windows***: `-DCUDA_TOOLKIT_ROOT_DIR="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.2"`
 
-          `-DCUDA_SDK_ROOT_DIR="c:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.2"`
+          `-DCUDA_SDK_ROOT_DIR="C:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.2"`
 
 4. Ensure [`cuDNN`](https://developer.nvidia.com/rdp/cudnn-archive) of the version corresponding to CUDA's version is installed.
 
@@ -348,7 +348,7 @@ Run `Visual Studio 17 2022`, open the generated `LLVM.sln`, build all, build pro
 
         - ***Linux***: `-DCUDA_DNN_ROOT_DIR=/usr/include`
 
-        - ***Windows***: `-DCUDA_DNN_ROOT_DIR=d:/CUDNN/cudnn-12.2-windows-x64-v8.9.5`
+        - ***Windows***: `-DCUDA_DNN_ROOT_DIR=D:/CUDA/cuDNN/8.9.5`
 
 5. Ensure [`CUB`](https://github.com/NVlabs/cub) of the version corresponding to CUDA's version is installed.
 
@@ -356,7 +356,7 @@ Run `Visual Studio 17 2022`, open the generated `LLVM.sln`, build all, build pro
 
         - ***Linux***: `-DCUDA_CUB_ROOT_DIR=/srv/git/CUB`
 
-        - ***Windows***: `-DCUDA_CUB_ROOT_DIR=d:/GIT/cub`
+        - ***Windows***: `-DCUDA_CUB_ROOT_DIR=D:/CUDA/CUB/cub-2.1.0`
 
 6. Ensure [`python`](https://www.python.org/downloads) of minimum required version 2.7 is installed.
 
@@ -366,7 +366,7 @@ Run `Visual Studio 17 2022`, open the generated `LLVM.sln`, build all, build pro
 
         - ***Linux***: `python /usr/llvm/17.0.2/llvm-project/llvm/utils/lit/setup.py install`
 
-        - ***Windows***: `python d:/LLVM/17.0.2/llvm-project/llvm/utils/lit/setup.py install`
+        - ***Windows***: `python D:/LLVM/17.0.2/llvm-project/llvm/utils/lit/setup.py install`
 
        In case of errors, similar to `ModuleNotFoundError: No module named 'setuptools'`, upgrade the `setuptools` package:
 
@@ -376,13 +376,13 @@ Run `Visual Studio 17 2022`, open the generated `LLVM.sln`, build all, build pro
 
         - ***Linux***: `-DLLVM_EXTERNAL_LIT=/usr/llvm/17.0.2/build/bin/llvm-lit`
 
-        - ***Windows***: `-DLLVM_EXTERNAL_LIT=d:/LLVM/17.0.2/build/Release/bin/llvm-lit.py`
+        - ***Windows***: `-DLLVM_EXTERNAL_LIT=D:/LLVM/17.0.2/build/Release/bin/llvm-lit.py`
 
     * `FileCheck`:
 
         - ***Linux***: copy from `/usr/llvm/17.0.2/build/bin/` to `CMAKE_INSTALL_PREFIX/dist/bin`
 
-        - ***Windows***: copy from `d:/LLVM/17.0.2/build/Release/bin` to `CMAKE_INSTALL_PREFIX/dist/bin`
+        - ***Windows***: copy from `D:/LLVM/17.0.2/build/Release/bin` to `CMAKE_INSTALL_PREFIX/dist/bin`
 
         - Or specify the path to `FileCheck` in `CMAKE_INSTALL_PREFIX` option
 
@@ -613,27 +613,56 @@ cmake
  -DHIPIFY_CLANG_TESTS=ON \
  -DCMAKE_BUILD_TYPE=Release \
  -DCMAKE_INSTALL_PREFIX=../dist \
- -DCMAKE_PREFIX_PATH=d:/LLVM/17.0.2/dist \
- -DCUDA_TOOLKIT_ROOT_DIR="c:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.2" \
- -DCUDA_SDK_ROOT_DIR="c:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.2" \
- -DCUDA_DNN_ROOT_DIR=d:/CUDNN/cudnn-12.2-windows-x64-v8.9.5 \
- -DCUDA_CUB_ROOT_DIR=d:/GIT/cub \
- -DLLVM_EXTERNAL_LIT=d:/LLVM/17.0.2/build/Release/bin/llvm-lit.py \
+ -DCMAKE_PREFIX_PATH=D:/LLVM/17.0.2/dist \
+ -DCUDA_TOOLKIT_ROOT_DIR="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.2" \
+ -DCUDA_SDK_ROOT_DIR="C:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.2" \
+ -DCUDA_DNN_ROOT_DIR=D:/CUDA/cuDNN/8.9.5 \
+ -DCUDA_CUB_ROOT_DIR=D:/CUDA/CUB/cub-2.1.0 \
+ -DLLVM_EXTERNAL_LIT=D:/LLVM/17.0.2/build/Release/bin/llvm-lit.py \
  ../hipify
 ```
 *A corresponding successful output:*
 ```shell
+-- Selecting Windows SDK version 10.0.22621.0 to target Windows 10.0.19045.
+-- The C compiler identification is MSVC 19.37.32824.0
+-- The CXX compiler identification is MSVC 19.37.32824.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.37.32822/bin/Hostx64/x64/cl.exe - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.37.32822/bin/Hostx64/x64/cl.exe - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- HIPIFY config:
+--    - Build hipify-clang : ON
+--    - Test  hipify-clang : ON
+--    - Is part of HIP SDK : OFF
 -- Found LLVM 17.0.2:
---    - CMake module path: d:/LLVM/17.0.2/dist/lib/cmake/llvm
---    - Include path     : d:/LLVM/17.0.2/dist/include
---    - Binary path      : d:/LLVM/17.0.2/dist/bin
--- Found PythonInterp: c:/Program Files/Python312/python.exe (found suitable version "3.12.0", minimum required is "3.6")
--- Found lit: c:/Program Files/Python312/Scripts/lit.exe
--- Found FileCheck: d:/LLVM/17.0.2/dist/bin/FileCheck.exe
--- Found CUDA: c:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.2 (found version "12.2")
--- Configuring done
--- Generating done
--- Build files have been written to: d:/hipify/build
+--    - CMake module path  : D:/LLVM/17.0.2/dist/lib/cmake/llvm
+--    - Clang include path : D:/LLVM/17.0.2/dist/include
+--    - LLVM Include path  : D:/LLVM/17.0.2/dist/include
+--    - Binary path        : D:/LLVM/17.0.2/dist/bin
+-- ---- The below configuring for hipify-clang testing only ----
+-- Found Python: C:/Users/TT/AppData/Local/Programs/Python/Python312/python.exe (found version "3.12.0") found components: Interpreter
+-- Found lit: C:/Users/TT/AppData/Local/Programs/Python/Python312/Scripts/lit.exe
+-- Found FileCheck: D:/toltec/work/LLVM/trunk-for-submit/llvm-64-release-vs2022-17.7.4/dist/bin/FileCheck.exe
+-- Initial CUDA to configure:
+--    - CUDA Toolkit path  : C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.2
+--    - CUDA Samples path  : C:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.2
+--    - cuDNN path         : D:/CUDA/cuDNN/8.9.5
+--    - CUB path           : D:/CUDA/CUB/cub-2.1.0
+-- Found CUDAToolkit: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.8/include (found version "12.2.140")
+-- Found CUDA config:
+--    - CUDA Toolkit path  : C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.2
+--    - CUDA Samples path  : C:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.2
+--    - cuDNN path         : D:/CUDA/cuDNN/8.9.5
+--    - CUB path           : D:/CUDA/CUB/cub-2.1.0
+-- Configuring done (1.4s)
+-- Generating done (0.1s)
+-- Build files have been written to: D:/HIPIFY/build
 ```
 
-Run `Visual Studio 17 2022`, open the generated `hipify-clang.sln`, build project `test-hipify`.
+Run `Visual Studio 17 2022`, open the generated `hipify-clang.sln`, build the project `test-hipify`.
