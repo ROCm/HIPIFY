@@ -1076,11 +1076,28 @@ my %removed_funcs = (
 );
 
 my %experimental_funcs = (
+    "cudaGraphExternalSemaphoresWaitNodeSetParams" => "6.0.0",
+    "cudaGraphExternalSemaphoresWaitNodeGetParams" => "6.0.0",
+    "cudaGraphExternalSemaphoresSignalNodeSetParams" => "6.0.0",
+    "cudaGraphExternalSemaphoresSignalNodeGetParams" => "6.0.0",
+    "cudaGraphExecExternalSemaphoresWaitNodeSetParams" => "6.0.0",
+    "cudaGraphExecExternalSemaphoresSignalNodeSetParams" => "6.0.0",
+    "cudaGraphAddExternalSemaphoresWaitNode" => "6.0.0",
+    "cudaGraphAddExternalSemaphoresSignalNode" => "6.0.0",
     "cudaExternalSemaphoreWaitNodeParamsV2" => "6.0.0",
     "cudaExternalSemaphoreWaitNodeParams" => "6.0.0",
     "cudaExternalSemaphoreSignalNodeParamsV2" => "6.0.0",
     "cudaExternalSemaphoreSignalNodeParams" => "6.0.0",
     "cudaDevAttrHostRegisterSupported" => "6.0.0",
+    "cuGraphExternalSemaphoresWaitNodeSetParams" => "6.0.0",
+    "cuGraphExternalSemaphoresWaitNodeGetParams" => "6.0.0",
+    "cuGraphExternalSemaphoresSignalNodeSetParams" => "6.0.0",
+    "cuGraphExternalSemaphoresSignalNodeGetParams" => "6.0.0",
+    "cuGraphExecExternalSemaphoresWaitNodeSetParams" => "6.0.0",
+    "cuGraphExecExternalSemaphoresSignalNodeSetParams" => "6.0.0",
+    "cuGraphAddMemcpyNode" => "6.0.0",
+    "cuGraphAddExternalSemaphoresWaitNode" => "6.0.0",
+    "cuGraphAddExternalSemaphoresSignalNode" => "6.0.0",
     "CU_DEVICE_ATTRIBUTE_HOST_REGISTER_SUPPORTED" => "6.0.0",
     "CUDA_EXT_SEM_WAIT_NODE_PARAMS_v2_st" => "6.0.0",
     "CUDA_EXT_SEM_WAIT_NODE_PARAMS_v2" => "6.0.0",
@@ -1229,6 +1246,23 @@ sub subst {
 }
 
 sub experimentalSubstitutions {
+    subst("cuGraphAddExternalSemaphoresSignalNode", "hipGraphAddExternalSemaphoresSignalNode", "graph");
+    subst("cuGraphAddExternalSemaphoresWaitNode", "hipGraphAddExternalSemaphoresWaitNode", "graph");
+    subst("cuGraphAddMemcpyNode", "hipDrvGraphAddMemcpyNode", "graph");
+    subst("cuGraphExecExternalSemaphoresSignalNodeSetParams", "hipGraphExecExternalSemaphoresSignalNodeSetParams", "graph");
+    subst("cuGraphExecExternalSemaphoresWaitNodeSetParams", "hipGraphExecExternalSemaphoresWaitNodeSetParams", "graph");
+    subst("cuGraphExternalSemaphoresSignalNodeGetParams", "hipGraphExternalSemaphoresSignalNodeGetParams", "graph");
+    subst("cuGraphExternalSemaphoresSignalNodeSetParams", "hipGraphExternalSemaphoresSignalNodeSetParams", "graph");
+    subst("cuGraphExternalSemaphoresWaitNodeGetParams", "hipGraphExternalSemaphoresWaitNodeGetParams", "graph");
+    subst("cuGraphExternalSemaphoresWaitNodeSetParams", "hipGraphExternalSemaphoresWaitNodeSetParams", "graph");
+    subst("cudaGraphAddExternalSemaphoresSignalNode", "hipGraphAddExternalSemaphoresSignalNode", "graph");
+    subst("cudaGraphAddExternalSemaphoresWaitNode", "hipGraphAddExternalSemaphoresWaitNode", "graph");
+    subst("cudaGraphExecExternalSemaphoresSignalNodeSetParams", "hipGraphExecExternalSemaphoresSignalNodeSetParams", "graph");
+    subst("cudaGraphExecExternalSemaphoresWaitNodeSetParams", "hipGraphExecExternalSemaphoresWaitNodeSetParams", "graph");
+    subst("cudaGraphExternalSemaphoresSignalNodeGetParams", "hipGraphExternalSemaphoresSignalNodeGetParams", "graph");
+    subst("cudaGraphExternalSemaphoresSignalNodeSetParams", "hipGraphExternalSemaphoresSignalNodeSetParams", "graph");
+    subst("cudaGraphExternalSemaphoresWaitNodeGetParams", "hipGraphExternalSemaphoresWaitNodeGetParams", "graph");
+    subst("cudaGraphExternalSemaphoresWaitNodeSetParams", "hipGraphExternalSemaphoresWaitNodeSetParams", "graph");
     subst("CUDA_EXT_SEM_SIGNAL_NODE_PARAMS", "hipExternalSemaphoreSignalNodeParams", "type");
     subst("CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_st", "hipExternalSemaphoreSignalNodeParams", "type");
     subst("CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_v1", "hipExternalSemaphoreSignalNodeParams", "type");
@@ -7330,20 +7364,12 @@ sub warnUnsupportedFunctions {
         "cudaGraphInstantiateMultipleDevicesNotSupported",
         "cudaGraphInstantiateInvalidStructure",
         "cudaGraphInstantiateError",
-        "cudaGraphExternalSemaphoresWaitNodeSetParams",
-        "cudaGraphExternalSemaphoresWaitNodeGetParams",
-        "cudaGraphExternalSemaphoresSignalNodeSetParams",
-        "cudaGraphExternalSemaphoresSignalNodeGetParams",
         "cudaGraphExecUpdateResultInfo_st",
         "cudaGraphExecUpdateResultInfo",
         "cudaGraphExecUpdateErrorAttributesChanged",
         "cudaGraphExecNodeSetParams",
         "cudaGraphExecGetFlags",
-        "cudaGraphExecExternalSemaphoresWaitNodeSetParams",
-        "cudaGraphExecExternalSemaphoresSignalNodeSetParams",
         "cudaGraphAddNode",
-        "cudaGraphAddExternalSemaphoresWaitNode",
-        "cudaGraphAddExternalSemaphoresSignalNode",
         "cudaGetTextureObjectTextureDesc_v2",
         "cudaGetSurfaceReference",
         "cudaGetSurfaceObjectResourceDesc",
@@ -7810,24 +7836,15 @@ sub warnUnsupportedFunctions {
         "cuGraphicsD3D10RegisterResource",
         "cuGraphNodeSetParams",
         "cuGraphInstantiateWithParams",
-        "cuGraphExternalSemaphoresWaitNodeSetParams",
-        "cuGraphExternalSemaphoresWaitNodeGetParams",
-        "cuGraphExternalSemaphoresSignalNodeSetParams",
-        "cuGraphExternalSemaphoresSignalNodeGetParams",
         "cuGraphExecNodeSetParams",
         "cuGraphExecMemsetNodeSetParams",
         "cuGraphExecMemcpyNodeSetParams",
         "cuGraphExecGetFlags",
-        "cuGraphExecExternalSemaphoresWaitNodeSetParams",
-        "cuGraphExecExternalSemaphoresSignalNodeSetParams",
         "cuGraphExecBatchMemOpNodeSetParams",
         "cuGraphBatchMemOpNodeSetParams",
         "cuGraphBatchMemOpNodeGetParams",
         "cuGraphAddNode",
         "cuGraphAddMemsetNode",
-        "cuGraphAddMemcpyNode",
-        "cuGraphAddExternalSemaphoresWaitNode",
-        "cuGraphAddExternalSemaphoresSignalNode",
         "cuGraphAddBatchMemOpNode",
         "cuGetProcAddress",
         "cuGLUnregisterBufferObject",

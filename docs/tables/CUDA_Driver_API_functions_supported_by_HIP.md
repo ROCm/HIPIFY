@@ -1772,13 +1772,13 @@
 |`cuGraphAddEmptyNode`|10.0| | |`hipGraphAddEmptyNode`|4.5.0| | | |
 |`cuGraphAddEventRecordNode`|11.1| | |`hipGraphAddEventRecordNode`|5.0.0| | | |
 |`cuGraphAddEventWaitNode`|11.1| | |`hipGraphAddEventWaitNode`|5.0.0| | | |
-|`cuGraphAddExternalSemaphoresSignalNode`|11.2| | | | | | | |
-|`cuGraphAddExternalSemaphoresWaitNode`|11.2| | | | | | | |
+|`cuGraphAddExternalSemaphoresSignalNode`|11.2| | |`hipGraphAddExternalSemaphoresSignalNode`|6.0.0| | |6.0.0|
+|`cuGraphAddExternalSemaphoresWaitNode`|11.2| | |`hipGraphAddExternalSemaphoresWaitNode`|6.0.0| | |6.0.0|
 |`cuGraphAddHostNode`|10.0| | |`hipGraphAddHostNode`|5.0.0| | | |
 |`cuGraphAddKernelNode`|10.0| | |`hipGraphAddKernelNode`|4.3.0| | | |
 |`cuGraphAddMemAllocNode`|11.4| | |`hipGraphAddMemAllocNode`|5.5.0| | | |
 |`cuGraphAddMemFreeNode`|11.4| | |`hipGraphAddMemFreeNode`|5.5.0| | | |
-|`cuGraphAddMemcpyNode`|10.0| | | | | | | |
+|`cuGraphAddMemcpyNode`|10.0| | |`hipDrvGraphAddMemcpyNode`|6.0.0| | |6.0.0|
 |`cuGraphAddMemsetNode`|10.0| | | | | | | |
 |`cuGraphAddNode`|12.2| | | | | | | |
 |`cuGraphBatchMemOpNodeGetParams`|11.7| | | | | | | |
@@ -1798,8 +1798,8 @@
 |`cuGraphExecDestroy`|10.0| | |`hipGraphExecDestroy`|4.3.0| | | |
 |`cuGraphExecEventRecordNodeSetEvent`|11.1| | |`hipGraphExecEventRecordNodeSetEvent`|5.0.0| | | |
 |`cuGraphExecEventWaitNodeSetEvent`|11.1| | |`hipGraphExecEventWaitNodeSetEvent`|5.0.0| | | |
-|`cuGraphExecExternalSemaphoresSignalNodeSetParams`|11.2| | | | | | | |
-|`cuGraphExecExternalSemaphoresWaitNodeSetParams`|11.2| | | | | | | |
+|`cuGraphExecExternalSemaphoresSignalNodeSetParams`|11.2| | |`hipGraphExecExternalSemaphoresSignalNodeSetParams`|6.0.0| | |6.0.0|
+|`cuGraphExecExternalSemaphoresWaitNodeSetParams`|11.2| | |`hipGraphExecExternalSemaphoresWaitNodeSetParams`|6.0.0| | |6.0.0|
 |`cuGraphExecGetFlags`|12.0| | | | | | | |
 |`cuGraphExecHostNodeSetParams`|10.2| | |`hipGraphExecHostNodeSetParams`|5.0.0| | | |
 |`cuGraphExecKernelNodeSetParams`|10.1| | |`hipGraphExecKernelNodeSetParams`|4.5.0| | | |
@@ -1807,10 +1807,10 @@
 |`cuGraphExecMemsetNodeSetParams`|10.2| | | | | | | |
 |`cuGraphExecNodeSetParams`|12.2| | | | | | | |
 |`cuGraphExecUpdate`|10.2| | |`hipGraphExecUpdate`|5.0.0| | | |
-|`cuGraphExternalSemaphoresSignalNodeGetParams`|11.2| | | | | | | |
-|`cuGraphExternalSemaphoresSignalNodeSetParams`|11.2| | | | | | | |
-|`cuGraphExternalSemaphoresWaitNodeGetParams`|11.2| | | | | | | |
-|`cuGraphExternalSemaphoresWaitNodeSetParams`|11.2| | | | | | | |
+|`cuGraphExternalSemaphoresSignalNodeGetParams`|11.2| | |`hipGraphExternalSemaphoresSignalNodeGetParams`|6.0.0| | |6.0.0|
+|`cuGraphExternalSemaphoresSignalNodeSetParams`|11.2| | |`hipGraphExternalSemaphoresSignalNodeSetParams`|6.0.0| | |6.0.0|
+|`cuGraphExternalSemaphoresWaitNodeGetParams`|11.2| | |`hipGraphExternalSemaphoresWaitNodeGetParams`|6.0.0| | |6.0.0|
+|`cuGraphExternalSemaphoresWaitNodeSetParams`|11.2| | |`hipGraphExternalSemaphoresWaitNodeSetParams`|6.0.0| | |6.0.0|
 |`cuGraphGetEdges`|10.0| | |`hipGraphGetEdges`|5.0.0| | | |
 |`cuGraphGetNodes`|10.0| | |`hipGraphGetNodes`|4.5.0| | | |
 |`cuGraphGetRootNodes`|10.0| | |`hipGraphGetRootNodes`|4.5.0| | | |
