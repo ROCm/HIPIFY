@@ -1279,6 +1279,11 @@ int main() {
   // HIP: hipError_t hipGraphClone(hipGraph_t* pGraphClone, hipGraph_t originalGraph);
   // CHECK: result = hipGraphClone(&graph, graph2);
   result = cuGraphClone(&graph, graph2);
+
+  // CUDA: CUresult CUDAAPI cuGraphAddMemcpyNode(CUgraphNode *phGraphNode, CUgraph hGraph, const CUgraphNode *dependencies, size_t numDependencies, const CUDA_MEMCPY3D *copyParams, CUcontext ctx);
+  // HIP: hipError_t hipDrvGraphAddMemcpyNode(hipGraphNode_t* phGraphNode, hipGraph_t hGraph, const hipGraphNode_t* dependencies, size_t numDependencies, const HIP_MEMCPY3D* copyParams, hipCtx_t ctx);
+  // CHECK: result = hipDrvGraphAddMemcpyNode(&graphNode, graph, &graphNode2, bytes, &MEMCPY3D, context);
+  result = cuGraphAddMemcpyNode(&graphNode, graph, &graphNode2, bytes, &MEMCPY3D, context);
 #endif
 
 #if CUDA_VERSION >= 10000 && CUDA_VERSION < 12000
@@ -1607,6 +1612,52 @@ int main() {
   // HIP: hipError_t hipMemPoolImportPointer(void** dev_ptr, hipMemPool_t mem_pool, hipMemPoolPtrExportData* export_data);
   // CHECK: result = hipMemPoolImportPointer(&deviceptr, memPool_t, &memPoolPtrExportData);
   result = cuMemPoolImportPointer(&deviceptr, memPool_t, &memPoolPtrExportData);
+
+  // CHECK: hipExternalSemaphoreSignalNodeParams EXT_SEM_SIGNAL_NODE_PARAMS;
+  CUDA_EXT_SEM_SIGNAL_NODE_PARAMS EXT_SEM_SIGNAL_NODE_PARAMS;
+
+  // CUDA: CUresult CUDAAPI cuGraphAddExternalSemaphoresSignalNode(CUgraphNode *phGraphNode, CUgraph hGraph, const CUgraphNode *dependencies, size_t numDependencies, const CUDA_EXT_SEM_SIGNAL_NODE_PARAMS *nodeParams);
+  // HIP: hipError_t hipGraphAddExternalSemaphoresSignalNode(hipGraphNode_t* pGraphNode, hipGraph_t graph, const hipGraphNode_t* pDependencies, size_t numDependencies, const hipExternalSemaphoreSignalNodeParams* nodeParams);
+  // CHECK: result = hipGraphAddExternalSemaphoresSignalNode(&graphNode, graph, &graphNode2, bytes, &EXT_SEM_SIGNAL_NODE_PARAMS);
+  result = cuGraphAddExternalSemaphoresSignalNode(&graphNode, graph, &graphNode2, bytes, &EXT_SEM_SIGNAL_NODE_PARAMS);
+
+  // CUDA: CUresult CUDAAPI cuGraphExternalSemaphoresSignalNodeGetParams(CUgraphNode hNode, CUDA_EXT_SEM_SIGNAL_NODE_PARAMS *params_out);
+  // HIP: hipError_t hipGraphExternalSemaphoresSignalNodeGetParams(hipGraphNode_t hNode, hipExternalSemaphoreSignalNodeParams* params_out);
+  // CHECK: result = hipGraphExternalSemaphoresSignalNodeGetParams(graphNode, &EXT_SEM_SIGNAL_NODE_PARAMS);
+  result = cuGraphExternalSemaphoresSignalNodeGetParams(graphNode, &EXT_SEM_SIGNAL_NODE_PARAMS);
+
+  // CUDA: CUresult CUDAAPI cuGraphExternalSemaphoresSignalNodeSetParams(CUgraphNode hNode, const CUDA_EXT_SEM_SIGNAL_NODE_PARAMS *nodeParams);
+  // HIP: hipError_t hipGraphExternalSemaphoresSignalNodeSetParams(hipGraphNode_t hNode, const hipExternalSemaphoreSignalNodeParams* nodeParams);
+  // CHECK: result = hipGraphExternalSemaphoresSignalNodeSetParams(graphNode, &EXT_SEM_SIGNAL_NODE_PARAMS);
+  result = cuGraphExternalSemaphoresSignalNodeSetParams(graphNode, &EXT_SEM_SIGNAL_NODE_PARAMS);
+
+  // CHECK: hipExternalSemaphoreWaitNodeParams EXT_SEM_WAIT_NODE_PARAMS;
+  CUDA_EXT_SEM_WAIT_NODE_PARAMS EXT_SEM_WAIT_NODE_PARAMS;
+
+  // CUDA: CUresult CUDAAPI cuGraphAddExternalSemaphoresWaitNode(CUgraphNode *phGraphNode, CUgraph hGraph, const CUgraphNode *dependencies, size_t numDependencies, const CUDA_EXT_SEM_WAIT_NODE_PARAMS *nodeParams);
+  // HIP: hipError_t hipGraphAddExternalSemaphoresWaitNode(hipGraphNode_t* pGraphNode, hipGraph_t graph, const hipGraphNode_t* pDependencies, size_t numDependencies, const hipExternalSemaphoreWaitNodeParams* nodeParams);
+  // CHECK: result = hipGraphAddExternalSemaphoresWaitNode(&graphNode, graph, &graphNode2, bytes, &EXT_SEM_WAIT_NODE_PARAMS);
+  result = cuGraphAddExternalSemaphoresWaitNode(&graphNode, graph, &graphNode2, bytes, &EXT_SEM_WAIT_NODE_PARAMS);
+
+  // CUDA: CUresult CUDAAPI cuGraphExternalSemaphoresWaitNodeGetParams(CUgraphNode hNode, CUDA_EXT_SEM_WAIT_NODE_PARAMS *params_out);
+  // HIP: hipError_t hipGraphExternalSemaphoresWaitNodeGetParams(hipGraphNode_t hNode, hipExternalSemaphoreWaitNodeParams* params_out);
+  // CHECK: result = hipGraphExternalSemaphoresWaitNodeGetParams(graphNode, &EXT_SEM_WAIT_NODE_PARAMS);
+  result = cuGraphExternalSemaphoresWaitNodeGetParams(graphNode, &EXT_SEM_WAIT_NODE_PARAMS);
+
+  // CUDA: CUresult CUDAAPI cuGraphExternalSemaphoresWaitNodeSetParams(CUgraphNode hNode, const CUDA_EXT_SEM_WAIT_NODE_PARAMS *nodeParams);
+  // HIP: hipError_t hipGraphExternalSemaphoresWaitNodeSetParams(hipGraphNode_t hNode, const hipExternalSemaphoreWaitNodeParams* nodeParams);
+  // CHECK: result = hipGraphExternalSemaphoresWaitNodeSetParams(graphNode, &EXT_SEM_WAIT_NODE_PARAMS);
+  result = cuGraphExternalSemaphoresWaitNodeSetParams(graphNode, &EXT_SEM_WAIT_NODE_PARAMS);
+
+  // CUDA: CUresult CUDAAPI cuGraphExecExternalSemaphoresSignalNodeSetParams(CUgraphExec hGraphExec, CUgraphNode hNode, const CUDA_EXT_SEM_SIGNAL_NODE_PARAMS *nodeParams);
+  // HIP: hipError_t hipGraphExecExternalSemaphoresSignalNodeSetParams(hipGraphExec_t hGraphExec, hipGraphNode_t hNode, const hipExternalSemaphoreSignalNodeParams* nodeParams);
+  // CHECK: result = hipGraphExecExternalSemaphoresSignalNodeSetParams(graphExec, graphNode, &EXT_SEM_SIGNAL_NODE_PARAMS);
+  result = cuGraphExecExternalSemaphoresSignalNodeSetParams(graphExec, graphNode, &EXT_SEM_SIGNAL_NODE_PARAMS);
+
+  // CUDA: CUresult CUDAAPI cuGraphExecExternalSemaphoresWaitNodeSetParams(CUgraphExec hGraphExec, CUgraphNode hNode, const CUDA_EXT_SEM_WAIT_NODE_PARAMS *nodeParams);
+  // HIP: hipError_t hipGraphExecExternalSemaphoresWaitNodeSetParams(hipGraphExec_t hGraphExec, hipGraphNode_t hNode, const hipExternalSemaphoreWaitNodeParams* nodeParams);
+  // CHECK: result = hipGraphExecExternalSemaphoresWaitNodeSetParams(graphExec, graphNode, &EXT_SEM_WAIT_NODE_PARAMS);
+  result = cuGraphExecExternalSemaphoresWaitNodeSetParams(graphExec, graphNode, &EXT_SEM_WAIT_NODE_PARAMS);
 #endif
 
 #if CUDA_VERSION >= 11030
