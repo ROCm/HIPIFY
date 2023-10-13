@@ -93,7 +93,6 @@
 |`cublasAtomicsMode_t`| | | |`rocblas_atomics_mode`|3.8.0| | | |
 |`cublasComputeType_t`|11.0| | |`rocblas_computetype`|5.7.0| | | |
 |`cublasContext`| | | |`_rocblas_handle`|1.5.0| | | |
-|`cublasDataType_t`|7.5| | |`rocblas_datatype`|1.8.2| | | |
 |`cublasDiagType_t`| | | |`rocblas_diagonal`|1.5.0| | | |
 |`cublasFillMode_t`| | | |`rocblas_fill`|1.5.0| | | |
 |`cublasGemmAlgo_t`|8.0| | |`rocblas_gemm_algo`|1.8.2| | | |
@@ -105,7 +104,7 @@
 |`cublasStatus`| | | |`rocblas_status`|1.5.0| | | |
 |`cublasStatus_t`| | | |`rocblas_status`|1.5.0| | | |
 
-## **3. CUDA Datatypes Reference**
+## **3. CUDA Library Data types**
 
 |**CUDA**|**A**|**D**|**R**|**ROC**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
@@ -139,6 +138,7 @@
 |`CUDA_R_8F_E5M2`|11.8| | | | | | | |
 |`CUDA_R_8I`|8.0| | |`rocblas_datatype_i8_r`|2.0.0| | | |
 |`CUDA_R_8U`|8.0| | |`rocblas_datatype_u8_r`|2.0.0| | | |
+|`cublasDataType_t`|7.5| | |`rocblas_datatype`|1.8.2| | | |
 |`cudaDataType`|8.0| | |`rocblas_datatype`|1.8.2| | | |
 |`cudaDataType_t`|8.0| | |`rocblas_datatype_`|1.8.2| | | |
 

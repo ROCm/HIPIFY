@@ -93,7 +93,6 @@
 |`cublasAtomicsMode_t`| | | |`hipblasAtomicsMode_t`|3.10.0| | | |`rocblas_atomics_mode`|3.8.0| | | |
 |`cublasComputeType_t`|11.0| | |`hipblasDatatype_t`|1.8.2| | | |`rocblas_computetype`|5.7.0| | | |
 |`cublasContext`| | | | | | | | |`_rocblas_handle`|1.5.0| | | |
-|`cublasDataType_t`|7.5| | |`hipblasDatatype_t`|1.8.2| | | |`rocblas_datatype`|1.8.2| | | |
 |`cublasDiagType_t`| | | |`hipblasDiagType_t`|1.8.2| | | |`rocblas_diagonal`|1.5.0| | | |
 |`cublasFillMode_t`| | | |`hipblasFillMode_t`|1.8.2| | | |`rocblas_fill`|1.5.0| | | |
 |`cublasGemmAlgo_t`|8.0| | |`hipblasGemmAlgo_t`|1.8.2| | | |`rocblas_gemm_algo`|1.8.2| | | |
@@ -105,42 +104,43 @@
 |`cublasStatus`| | | |`hipblasStatus_t`|1.8.2| | | |`rocblas_status`|1.5.0| | | |
 |`cublasStatus_t`| | | |`hipblasStatus_t`|1.8.2| | | |`rocblas_status`|1.5.0| | | |
 
-## **3. CUDA Datatypes Reference**
+## **3. CUDA Library Data types**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|**ROC**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
-|`CUDA_C_16BF`| | | |`HIPBLAS_C_16B`|3.0.0| | | |`rocblas_datatype_bf16_c`|3.5.0| | | |
-|`CUDA_C_16F`|8.0| | |`HIPBLAS_C_16F`|1.8.2| | | |`rocblas_datatype_f16_c`|1.8.2| | | |
+|`CUDA_C_16BF`| | | |`HIP_C_16BF`|5.7.0| | | |`rocblas_datatype_bf16_c`|3.5.0| | | |
+|`CUDA_C_16F`|8.0| | |`HIP_C_16F`|5.7.0| | | |`rocblas_datatype_f16_c`|1.8.2| | | |
 |`CUDA_C_16I`|11.0| | | | | | | | | | | | |
 |`CUDA_C_16U`|11.0| | | | | | | | | | | | |
-|`CUDA_C_32F`|8.0| | |`HIPBLAS_C_32F`|1.8.2| | | |`rocblas_datatype_f32_c`|1.8.2| | | |
-|`CUDA_C_32I`|8.0| | |`HIPBLAS_C_32I`|3.0.0| | | |`rocblas_datatype_i32_c`|2.0.0| | | |
-|`CUDA_C_32U`|8.0| | |`HIPBLAS_C_32U`|3.0.0| | | |`rocblas_datatype_u32_c`|2.0.0| | | |
+|`CUDA_C_32F`|8.0| | |`HIP_C_32F`|5.7.0| | | |`rocblas_datatype_f32_c`|1.8.2| | | |
+|`CUDA_C_32I`|8.0| | |`HIP_C_32I`|5.7.0| | | |`rocblas_datatype_i32_c`|2.0.0| | | |
+|`CUDA_C_32U`|8.0| | |`HIP_C_32U`|5.7.0| | | |`rocblas_datatype_u32_c`|2.0.0| | | |
 |`CUDA_C_4I`|11.0| | | | | | | | | | | | |
 |`CUDA_C_4U`|11.0| | | | | | | | | | | | |
-|`CUDA_C_64F`|8.0| | |`HIPBLAS_C_64F`|1.8.2| | | |`rocblas_datatype_f64_c`|1.8.2| | | |
+|`CUDA_C_64F`|8.0| | |`HIP_C_64F`|5.7.0| | | |`rocblas_datatype_f64_c`|1.8.2| | | |
 |`CUDA_C_64I`|11.0| | | | | | | | | | | | |
 |`CUDA_C_64U`|11.0| | | | | | | | | | | | |
-|`CUDA_C_8I`|8.0| | |`HIPBLAS_C_8I`|3.0.0| | | |`rocblas_datatype_i8_c`|2.0.0| | | |
-|`CUDA_C_8U`|8.0| | |`HIPBLAS_C_8U`|3.0.0| | | |`rocblas_datatype_u8_c`|2.0.0| | | |
-|`CUDA_R_16BF`| | | |`HIPBLAS_R_16B`|3.0.0| | | |`rocblas_datatype_bf16_r`|3.5.0| | | |
-|`CUDA_R_16F`|8.0| | |`HIPBLAS_R_16F`|1.8.2| | | |`rocblas_datatype_f16_r`|1.8.2| | | |
+|`CUDA_C_8I`|8.0| | |`HIP_C_8I`|5.7.0| | | |`rocblas_datatype_i8_c`|2.0.0| | | |
+|`CUDA_C_8U`|8.0| | |`HIP_C_8U`|5.7.0| | | |`rocblas_datatype_u8_c`|2.0.0| | | |
+|`CUDA_R_16BF`| | | |`HIP_R_16BF`|5.7.0| | | |`rocblas_datatype_bf16_r`|3.5.0| | | |
+|`CUDA_R_16F`|8.0| | |`HIP_R_16F`|5.7.0| | | |`rocblas_datatype_f16_r`|1.8.2| | | |
 |`CUDA_R_16I`|11.0| | | | | | | | | | | | |
 |`CUDA_R_16U`|11.0| | | | | | | | | | | | |
-|`CUDA_R_32F`|8.0| | |`HIPBLAS_R_32F`|1.8.2| | | |`rocblas_datatype_f32_r`|1.8.2| | | |
-|`CUDA_R_32I`|8.0| | |`HIPBLAS_R_32I`|3.0.0| | | |`rocblas_datatype_i32_r`|2.0.0| | | |
-|`CUDA_R_32U`|8.0| | |`HIPBLAS_R_32U`|3.0.0| | | |`rocblas_datatype_u32_r`|2.0.0| | | |
+|`CUDA_R_32F`|8.0| | |`HIP_R_32F`|5.7.0| | | |`rocblas_datatype_f32_r`|1.8.2| | | |
+|`CUDA_R_32I`|8.0| | |`HIP_R_32I`|5.7.0| | | |`rocblas_datatype_i32_r`|2.0.0| | | |
+|`CUDA_R_32U`|8.0| | |`HIP_R_32U`|5.7.0| | | |`rocblas_datatype_u32_r`|2.0.0| | | |
 |`CUDA_R_4I`|11.0| | | | | | | | | | | | |
 |`CUDA_R_4U`|11.0| | | | | | | | | | | | |
-|`CUDA_R_64F`|8.0| | |`HIPBLAS_R_64F`|1.8.2| | | |`rocblas_datatype_f64_r`|1.8.2| | | |
+|`CUDA_R_64F`|8.0| | |`HIP_R_64F`|5.7.0| | | |`rocblas_datatype_f64_r`|1.8.2| | | |
 |`CUDA_R_64I`|11.0| | | | | | | | | | | | |
 |`CUDA_R_64U`|11.0| | | | | | | | | | | | |
 |`CUDA_R_8F_E4M3`|11.8| | | | | | | | | | | | |
 |`CUDA_R_8F_E5M2`|11.8| | | | | | | | | | | | |
-|`CUDA_R_8I`|8.0| | |`HIPBLAS_R_8I`|3.0.0| | | |`rocblas_datatype_i8_r`|2.0.0| | | |
-|`CUDA_R_8U`|8.0| | |`HIPBLAS_R_8U`|3.0.0| | | |`rocblas_datatype_u8_r`|2.0.0| | | |
-|`cudaDataType`|8.0| | |`hipblasDatatype_t`|1.8.2| | | |`rocblas_datatype`|1.8.2| | | |
-|`cudaDataType_t`|8.0| | |`hipblasDatatype_t`|1.8.2| | | |`rocblas_datatype_`|1.8.2| | | |
+|`CUDA_R_8I`|8.0| | |`HIP_R_8I`|5.7.0| | | |`rocblas_datatype_i8_r`|2.0.0| | | |
+|`CUDA_R_8U`|8.0| | |`HIP_R_8U`|5.7.0| | | |`rocblas_datatype_u8_r`|2.0.0| | | |
+|`cublasDataType_t`|7.5| | |`hipDataType`|5.7.0| | | |`rocblas_datatype`|1.8.2| | | |
+|`cudaDataType`|8.0| | |`hipDataType`|5.7.0| | | |`rocblas_datatype`|1.8.2| | | |
+|`cudaDataType_t`|8.0| | |`hipDataType`|5.7.0| | | |`rocblas_datatype_`|1.8.2| | | |
 
 ## **4. CUBLAS Helper Function Reference**
 

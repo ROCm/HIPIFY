@@ -37,6 +37,7 @@ const std::map <llvm::StringRef, hipCounter> CUDA_INCLUDE_MAP {
   {"vector_types.h",                                        {"hip/hip_vector_types.h",                                "", CONV_INCLUDE,                API_RUNTIME, 0}},
   {"cuda_profiler_api.h",                                   {"hip/hip_runtime_api.h",                                 "", CONV_INCLUDE,                API_RUNTIME, 0}},
   {"cooperative_groups.h",                                  {"hip/hip_cooperative_groups.h",                          "", CONV_INCLUDE,                API_RUNTIME, 0}},
+  {"library_types.h",                                       {"hip/library_types.h",                                   "", CONV_INCLUDE,                API_RUNTIME, 0}},
   // cuComplex includes
   {"cuComplex.h",                                           {"hip/hip_complex.h",                                     "", CONV_INCLUDE_CUDA_MAIN_H,    API_COMPLEX, 0}},
   // cuBLAS includes

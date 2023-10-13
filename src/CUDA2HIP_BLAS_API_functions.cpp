@@ -1969,7 +1969,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_FUNCTION_VER_MAP {
 
 const std::map<unsigned int, llvm::StringRef> CUDA_BLAS_API_SECTION_MAP {
   {2, "CUBLAS Data types"},
-  {3, "CUDA Datatypes Reference"},
+  {3, "CUDA Library Data types"},
   {4, "CUBLAS Helper Function Reference"},
   {5, "CUBLAS Level-1 Function Reference"},
   {6, "CUBLAS Level-2 Function Reference"},
