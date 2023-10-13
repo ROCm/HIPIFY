@@ -1406,23 +1406,23 @@ int main() {
   long long int strideC = 0;
 
 #if CUDA_VERSION >= 8000
-  // CHECK: hipblasDatatype_t DataType;
-  // CHECK-NEXT: hipblasDatatype_t DataType_t;
-  // CHECK-NEXT: hipblasDatatype_t blasDataType;
-  // CHECK-NEXT: hipblasDatatype_t R_16F = HIPBLAS_R_16F;
-  // CHECK-NEXT: hipblasDatatype_t C_16F = HIPBLAS_C_16F;
-  // CHECK-NEXT: hipblasDatatype_t R_32F = HIPBLAS_R_32F;
-  // CHECK-NEXT: hipblasDatatype_t C_32F = HIPBLAS_C_32F;
-  // CHECK-NEXT: hipblasDatatype_t R_64F = HIPBLAS_R_64F;
-  // CHECK-NEXT: hipblasDatatype_t C_64F = HIPBLAS_C_64F;
-  // CHECK-NEXT: hipblasDatatype_t R_8I = HIPBLAS_R_8I;
-  // CHECK-NEXT: hipblasDatatype_t C_8I = HIPBLAS_C_8I;
-  // CHECK-NEXT: hipblasDatatype_t R_8U = HIPBLAS_R_8U;
-  // CHECK-NEXT: hipblasDatatype_t C_8U = HIPBLAS_C_8U;
-  // CHECK-NEXT: hipblasDatatype_t R_32I = HIPBLAS_R_32I;
-  // CHECK-NEXT: hipblasDatatype_t C_32I = HIPBLAS_C_32I;
-  // CHECK-NEXT: hipblasDatatype_t R_32U = HIPBLAS_R_32U;
-  // CHECK-NEXT: hipblasDatatype_t C_32U = HIPBLAS_C_32U;
+  // CHECK: hipDataType DataType;
+  // CHECK-NEXT: hipDataType DataType_t;
+  // CHECK-NEXT: hipDataType blasDataType;
+  // CHECK-NEXT: hipDataType R_16F = HIP_R_16F;
+  // CHECK-NEXT: hipDataType C_16F = HIP_C_16F;
+  // CHECK-NEXT: hipDataType R_32F = HIP_R_32F;
+  // CHECK-NEXT: hipDataType C_32F = HIP_C_32F;
+  // CHECK-NEXT: hipDataType R_64F = HIP_R_64F;
+  // CHECK-NEXT: hipDataType C_64F = HIP_C_64F;
+  // CHECK-NEXT: hipDataType R_8I = HIP_R_8I;
+  // CHECK-NEXT: hipDataType C_8I = HIP_C_8I;
+  // CHECK-NEXT: hipDataType R_8U = HIP_R_8U;
+  // CHECK-NEXT: hipDataType C_8U = HIP_C_8U;
+  // CHECK-NEXT: hipDataType R_32I = HIP_R_32I;
+  // CHECK-NEXT: hipDataType C_32I = HIP_C_32I;
+  // CHECK-NEXT: hipDataType R_32U = HIP_R_32U;
+  // CHECK-NEXT: hipDataType C_32U = HIP_C_32U;
   cudaDataType DataType;
   cudaDataType_t DataType_t;
   cublasDataType_t blasDataType;
@@ -1441,7 +1441,7 @@ int main() {
   cublasDataType_t R_32U = CUDA_R_32U;
   cublasDataType_t C_32U = CUDA_C_32U;
 
-  // CHECK: hipblasDatatype_t DataType_2, DataType_3;
+  // CHECK: hipDataType DataType_2, DataType_3;
   cudaDataType DataType_2, DataType_3;
 
   // CHECK: hipblasGemmAlgo_t blasGemmAlgo;
@@ -1488,13 +1488,13 @@ int main() {
   void* yptr = nullptr;
   void* sptr = nullptr;
 
-  // CHECK: hipblasDatatype_t Atype;
-  // CHECK-NEXT: hipblasDatatype_t Btype;
-  // CHECK-NEXT: hipblasDatatype_t Ctype;
-  // CHECK-NEXT: hipblasDatatype_t Xtype;
-  // CHECK-NEXT: hipblasDatatype_t Ytype;
-  // CHECK-NEXT: hipblasDatatype_t CStype;
-  // CHECK-NEXT: hipblasDatatype_t Executiontype;
+  // CHECK: hipDataType Atype;
+  // CHECK-NEXT: hipDataType Btype;
+  // CHECK-NEXT: hipDataType Ctype;
+  // CHECK-NEXT: hipDataType Xtype;
+  // CHECK-NEXT: hipDataType Ytype;
+  // CHECK-NEXT: hipDataType CStype;
+  // CHECK-NEXT: hipDataType Executiontype;
   cudaDataType Atype;
   cudaDataType Btype;
   cudaDataType Ctype;
@@ -1525,7 +1525,7 @@ int main() {
 #endif
 
 #if CUDA_VERSION >= 8000 && CUDA_VERSION < 11000
-  // CHECK: hipblasDatatype_t computeType;
+  // CHECK: hipDataType computeType;
   cudaDataType computeType;
 
   // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasGemmEx(cublasHandle_t handle, cublasOperation_t transa, cublasOperation_t transb, int m, int n, int k, const void* alpha, const void* A, cudaDataType Atype, int lda, const void* B, cudaDataType Btype, int ldb, const void* beta, void* C, cudaDataType Ctype, int ldc, cudaDataType computeType, cublasGemmAlgo_t algo);
@@ -1565,8 +1565,8 @@ int main() {
 #endif
 
 #if CUDA_VERSION >= 11000
-  // CHECK: hipblasDatatype_t R_16BF = HIPBLAS_R_16B;
-  // CHECK-NEXT: hipblasDatatype_t C_16BF = HIPBLAS_C_16B;
+  // CHECK: hipDataType R_16BF = HIP_R_16BF;
+  // CHECK-NEXT: hipDataType C_16BF = HIP_C_16BF;
   cublasDataType_t R_16BF = CUDA_R_16BF;
   cublasDataType_t C_16BF = CUDA_C_16BF;
 
