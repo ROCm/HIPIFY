@@ -169,20 +169,18 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP {
   // TODO: dereferencing: typedef struct cublasContext *cublasHandle_t;
   {"cublasContext",                  {"hipblasContext",                  "_rocblas_handle",                       CONV_TYPE, API_BLAS, 2, HIP_UNSUPPORTED}},
 
-  // NOTE: renamed UNSUPPORTED hipblasComputeType_t to the HIP supported hipblasDatatype_t (workaround)
-  // TODO: change the type to the correct one after fixing https://github.com/ROCmSoftwarePlatform/hipBLAS/issues/529
-  {"cublasComputeType_t",            {"hipblasDatatype_t",               "rocblas_computetype",                   CONV_TYPE, API_BLAS, 2}},
-  {"CUBLAS_COMPUTE_16F",             {"HIPBLAS_COMPUTE_16F",             "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}}, // 64
-  {"CUBLAS_COMPUTE_16F_PEDANTIC",    {"HIPBLAS_COMPUTE_16F_PEDANTIC",    "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}}, // 65
-  {"CUBLAS_COMPUTE_32F",             {"HIPBLAS_COMPUTE_32F",             "rocblas_compute_type_f32",              CONV_NUMERIC_LITERAL, API_BLAS, 2, HIP_UNSUPPORTED}}, // 68
-  {"CUBLAS_COMPUTE_32F_PEDANTIC",    {"HIPBLAS_COMPUTE_32F_PEDANTIC",    "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}}, // 69
-  {"CUBLAS_COMPUTE_32F_FAST_16F",    {"HIPBLAS_COMPUTE_32F_FAST_16F",    "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}}, // 74
-  {"CUBLAS_COMPUTE_32F_FAST_16BF",   {"HIPBLAS_COMPUTE_32F_FAST_16BF",   "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}}, // 75
-  {"CUBLAS_COMPUTE_32F_FAST_TF32",   {"HIPBLAS_COMPUTE_32F_FAST_TF32",   "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}}, // 77
-  {"CUBLAS_COMPUTE_64F",             {"HIPBLAS_COMPUTE_64F",             "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}}, // 70
-  {"CUBLAS_COMPUTE_64F_PEDANTIC",    {"HIPBLAS_COMPUTE_64F_PEDANTIC",    "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}}, // 71
-  {"CUBLAS_COMPUTE_32I",             {"HIPBLAS_COMPUTE_32I",             "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}}, // 72
-  {"CUBLAS_COMPUTE_32I_PEDANTIC",    {"HIPBLAS_COMPUTE_32I_PEDANTIC",    "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}}, // 73
+  {"cublasComputeType_t",            {"hipblasComputeType_t",            "rocblas_computetype",                   CONV_TYPE, API_BLAS, 2}},
+  {"CUBLAS_COMPUTE_16F",             {"HIPBLAS_COMPUTE_16F",             "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, ROC_UNSUPPORTED}}, // 64
+  {"CUBLAS_COMPUTE_16F_PEDANTIC",    {"HIPBLAS_COMPUTE_16F_PEDANTIC",    "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, ROC_UNSUPPORTED}}, // 65
+  {"CUBLAS_COMPUTE_32F",             {"HIPBLAS_COMPUTE_32F",             "rocblas_compute_type_f32",              CONV_NUMERIC_LITERAL, API_BLAS, 2}}, // 68
+  {"CUBLAS_COMPUTE_32F_PEDANTIC",    {"HIPBLAS_COMPUTE_32F_PEDANTIC",    "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, ROC_UNSUPPORTED}}, // 69
+  {"CUBLAS_COMPUTE_32F_FAST_16F",    {"HIPBLAS_COMPUTE_32F_FAST_16F",    "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, ROC_UNSUPPORTED}}, // 74
+  {"CUBLAS_COMPUTE_32F_FAST_16BF",   {"HIPBLAS_COMPUTE_32F_FAST_16BF",   "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, ROC_UNSUPPORTED}}, // 75
+  {"CUBLAS_COMPUTE_32F_FAST_TF32",   {"HIPBLAS_COMPUTE_32F_FAST_TF32",   "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, ROC_UNSUPPORTED}}, // 77
+  {"CUBLAS_COMPUTE_64F",             {"HIPBLAS_COMPUTE_64F",             "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, ROC_UNSUPPORTED}}, // 70
+  {"CUBLAS_COMPUTE_64F_PEDANTIC",    {"HIPBLAS_COMPUTE_64F_PEDANTIC",    "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, ROC_UNSUPPORTED}}, // 71
+  {"CUBLAS_COMPUTE_32I",             {"HIPBLAS_COMPUTE_32I",             "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, ROC_UNSUPPORTED}}, // 72
+  {"CUBLAS_COMPUTE_32I_PEDANTIC",    {"HIPBLAS_COMPUTE_32I_PEDANTIC",    "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, ROC_UNSUPPORTED}}, // 73
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_TYPE_NAME_VER_MAP {
@@ -353,6 +351,18 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_TYPE_NAME_VER_MAP {
   {"HIP_C_32U",                                        {HIP_5070, HIP_0,    HIP_0   }},
   {"HIP_R_16BF",                                       {HIP_5070, HIP_0,    HIP_0   }},
   {"HIP_C_16BF",                                       {HIP_5070, HIP_0,    HIP_0   }},
+  {"hipblasComputeType_t",                             {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"HIPBLAS_COMPUTE_16F",                              {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"HIPBLAS_COMPUTE_16F_PEDANTIC",                     {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"HIPBLAS_COMPUTE_32F",                              {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"HIPBLAS_COMPUTE_32F_PEDANTIC",                     {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"HIPBLAS_COMPUTE_32F_FAST_16F",                     {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"HIPBLAS_COMPUTE_32F_FAST_16BF",                    {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"HIPBLAS_COMPUTE_32F_FAST_TF32",                    {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"HIPBLAS_COMPUTE_64F",                              {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"HIPBLAS_COMPUTE_64F_PEDANTIC",                     {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"HIPBLAS_COMPUTE_32I",                              {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"HIPBLAS_COMPUTE_32I_PEDANTIC",                     {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
   {"rocblas_handle",                                   {HIP_1050, HIP_0,    HIP_0   }},
   {"_rocblas_handle",                                  {HIP_1050, HIP_0,    HIP_0   }},
   {"rocblas_operation",                                {HIP_1050, HIP_0,    HIP_0   }},

@@ -4334,7 +4334,7 @@ sub simpleSubstitutions {
     subst("cuDoubleComplex", "hipDoubleComplex", "type");
     subst("cuFloatComplex", "hipFloatComplex", "type");
     subst("cublasAtomicsMode_t", "hipblasAtomicsMode_t", "type");
-    subst("cublasComputeType_t", "hipblasDatatype_t", "type");
+    subst("cublasComputeType_t", "hipblasComputeType_t", "type");
     subst("cublasDataType_t", "hipDataType", "type");
     subst("cublasDiagType_t", "hipblasDiagType_t", "type");
     subst("cublasFillMode_t", "hipblasFillMode_t", "type");
@@ -4569,6 +4569,17 @@ sub simpleSubstitutions {
     subst("textureReference", "textureReference", "type");
     subst("CUBLAS_ATOMICS_ALLOWED", "HIPBLAS_ATOMICS_ALLOWED", "numeric_literal");
     subst("CUBLAS_ATOMICS_NOT_ALLOWED", "HIPBLAS_ATOMICS_NOT_ALLOWED", "numeric_literal");
+    subst("CUBLAS_COMPUTE_16F", "HIPBLAS_COMPUTE_16F", "numeric_literal");
+    subst("CUBLAS_COMPUTE_16F_PEDANTIC", "HIPBLAS_COMPUTE_16F_PEDANTIC", "numeric_literal");
+    subst("CUBLAS_COMPUTE_32F", "HIPBLAS_COMPUTE_32F", "numeric_literal");
+    subst("CUBLAS_COMPUTE_32F_FAST_16BF", "HIPBLAS_COMPUTE_32F_FAST_16BF", "numeric_literal");
+    subst("CUBLAS_COMPUTE_32F_FAST_16F", "HIPBLAS_COMPUTE_32F_FAST_16F", "numeric_literal");
+    subst("CUBLAS_COMPUTE_32F_FAST_TF32", "HIPBLAS_COMPUTE_32F_FAST_TF32", "numeric_literal");
+    subst("CUBLAS_COMPUTE_32F_PEDANTIC", "HIPBLAS_COMPUTE_32F_PEDANTIC", "numeric_literal");
+    subst("CUBLAS_COMPUTE_32I", "HIPBLAS_COMPUTE_32I", "numeric_literal");
+    subst("CUBLAS_COMPUTE_32I_PEDANTIC", "HIPBLAS_COMPUTE_32I_PEDANTIC", "numeric_literal");
+    subst("CUBLAS_COMPUTE_64F", "HIPBLAS_COMPUTE_64F", "numeric_literal");
+    subst("CUBLAS_COMPUTE_64F_PEDANTIC", "HIPBLAS_COMPUTE_64F_PEDANTIC", "numeric_literal");
     subst("CUBLAS_DIAG_NON_UNIT", "HIPBLAS_DIAG_NON_UNIT", "numeric_literal");
     subst("CUBLAS_DIAG_UNIT", "HIPBLAS_DIAG_UNIT", "numeric_literal");
     subst("CUBLAS_FILL_MODE_FULL", "HIPBLAS_FILL_MODE_FULL", "numeric_literal");
@@ -9827,18 +9838,7 @@ sub warnHipOnlyUnsupportedFunctions {
         "CUBLAS_GEMM_ALGO1",
         "CUBLAS_GEMM_ALGO0_TENSOR_OP",
         "CUBLAS_GEMM_ALGO0",
-        "CUBLAS_DEFAULT_MATH",
-        "CUBLAS_COMPUTE_64F_PEDANTIC",
-        "CUBLAS_COMPUTE_64F",
-        "CUBLAS_COMPUTE_32I_PEDANTIC",
-        "CUBLAS_COMPUTE_32I",
-        "CUBLAS_COMPUTE_32F_PEDANTIC",
-        "CUBLAS_COMPUTE_32F_FAST_TF32",
-        "CUBLAS_COMPUTE_32F_FAST_16F",
-        "CUBLAS_COMPUTE_32F_FAST_16BF",
-        "CUBLAS_COMPUTE_32F",
-        "CUBLAS_COMPUTE_16F_PEDANTIC",
-        "CUBLAS_COMPUTE_16F"
+        "CUBLAS_DEFAULT_MATH"
     )
     {
         my $mt = m/($func)/g;
