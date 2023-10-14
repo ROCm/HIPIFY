@@ -223,23 +223,23 @@
 |`cublasCrot_64`|12.0| | | | | | | |
 |`cublasCrot_v2`| | | |`hipblasCrot_v2`|6.0.0| | |6.0.0|
 |`cublasCrot_v2_64`|12.0| | | | | | | |
-|`cublasCrotg`| | | |`hipblasCrotg`|3.0.0| | | |
-|`cublasCrotg_v2`| | | |`hipblasCrotg`|3.0.0| | | |
-|`cublasCscal`| | | |`hipblasCscal`|1.8.2| | | |
+|`cublasCrotg`| | | |`hipblasCrotg_v2`|6.0.0| | |6.0.0|
+|`cublasCrotg_v2`| | | |`hipblasCrotg_v2`|6.0.0| | |6.0.0|
+|`cublasCscal`| | | |`hipblasCscal_v2`|6.0.0| | |6.0.0|
 |`cublasCscal_64`|12.0| | | | | | | |
-|`cublasCscal_v2`| | | |`hipblasCscal`|1.8.2| | | |
+|`cublasCscal_v2`| | | |`hipblasCscal_v2`|6.0.0| | |6.0.0|
 |`cublasCscal_v2_64`|12.0| | | | | | | |
 |`cublasCsrot`| | | |`hipblasCsrot_v2`|6.0.0| | |6.0.0|
 |`cublasCsrot_64`|12.0| | | | | | | |
 |`cublasCsrot_v2`| | | |`hipblasCsrot_v2`|6.0.0| | |6.0.0|
 |`cublasCsrot_v2_64`|12.0| | | | | | | |
-|`cublasCsscal`| | | |`hipblasCsscal`|3.0.0| | | |
+|`cublasCsscal`| | | |`hipblasCsscal_v2`|6.0.0| | |6.0.0|
 |`cublasCsscal_64`|12.0| | | | | | | |
-|`cublasCsscal_v2`| | | |`hipblasCsscal`|3.0.0| | | |
+|`cublasCsscal_v2`| | | |`hipblasCsscal_v2`|6.0.0| | |6.0.0|
 |`cublasCsscal_v2_64`|12.0| | | | | | | |
-|`cublasCswap`| | | |`hipblasCswap`|3.0.0| | | |
+|`cublasCswap`| | | |`hipblasCswap_v2`|6.0.0| | |6.0.0|
 |`cublasCswap_64`|12.0| | | | | | | |
-|`cublasCswap_v2`| | | |`hipblasCswap`|3.0.0| | | |
+|`cublasCswap_v2`| | | |`hipblasCswap_v2`|6.0.0| | |6.0.0|
 |`cublasCswap_v2_64`|12.0| | | | | | | |
 |`cublasDasum`| | | |`hipblasDasum`|1.8.2| | | |
 |`cublasDasum_64`|12.0| | | | | | | |
@@ -391,32 +391,32 @@
 |`cublasZdrot_64`|12.0| | | | | | | |
 |`cublasZdrot_v2`| | | |`hipblasZdrot_v2`|6.0.0| | |6.0.0|
 |`cublasZdrot_v2_64`|12.0| | | | | | | |
-|`cublasZdscal`| | | |`hipblasZdscal`|3.0.0| | | |
+|`cublasZdscal`| | | |`hipblasZdscal_v2`|6.0.0| | |6.0.0|
 |`cublasZdscal_64`|12.0| | | | | | | |
-|`cublasZdscal_v2`| | | |`hipblasZdscal`|3.0.0| | | |
+|`cublasZdscal_v2`| | | |`hipblasZdscal_v2`|6.0.0| | |6.0.0|
 |`cublasZdscal_v2_64`|12.0| | | | | | | |
 |`cublasZrot`| | | |`hipblasZrot_v2`|6.0.0| | |6.0.0|
 |`cublasZrot_64`|12.0| | | | | | | |
 |`cublasZrot_v2`| | | |`hipblasZrot_v2`|6.0.0| | |6.0.0|
 |`cublasZrot_v2_64`|12.0| | | | | | | |
-|`cublasZrotg`| | | |`hipblasZrotg`|3.0.0| | | |
-|`cublasZrotg_v2`| | | |`hipblasZrotg`|3.0.0| | | |
-|`cublasZscal`| | | |`hipblasZscal`|1.8.2| | | |
+|`cublasZrotg`| | | |`hipblasZrotg_v2`|6.0.0| | |6.0.0|
+|`cublasZrotg_v2`| | | |`hipblasZrotg_v2`|6.0.0| | |6.0.0|
+|`cublasZscal`| | | |`hipblasZscal_v2`|6.0.0| | |6.0.0|
 |`cublasZscal_64`|12.0| | | | | | | |
-|`cublasZscal_v2`| | | |`hipblasZscal`|1.8.2| | | |
+|`cublasZscal_v2`| | | |`hipblasZscal_v2`|6.0.0| | |6.0.0|
 |`cublasZscal_v2_64`|12.0| | | | | | | |
-|`cublasZswap`| | | |`hipblasZswap`|3.0.0| | | |
+|`cublasZswap`| | | |`hipblasZswap_v2`|6.0.0| | |6.0.0|
 |`cublasZswap_64`|12.0| | | | | | | |
-|`cublasZswap_v2`| | | |`hipblasZswap`|3.0.0| | | |
+|`cublasZswap_v2`| | | |`hipblasZswap_v2`|6.0.0| | |6.0.0|
 |`cublasZswap_v2_64`|12.0| | | | | | | |
 
 ## **6. CUBLAS Level-2 Function Reference**
 
 |**CUDA**|**A**|**D**|**R**|**HIP**|**A**|**D**|**R**|**E**|
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
-|`cublasCgbmv`| | | |`hipblasCgbmv`|3.5.0| | | |
+|`cublasCgbmv`| | | |`hipblasCgbmv_v2`|6.0.0| | |6.0.0|
 |`cublasCgbmv_64`|12.0| | | | | | | |
-|`cublasCgbmv_v2`| | | |`hipblasCgbmv`|3.5.0| | | |
+|`cublasCgbmv_v2`| | | |`hipblasCgbmv_v2`|6.0.0| | |6.0.0|
 |`cublasCgbmv_v2_64`|12.0| | | | | | | |
 |`cublasCgemv`| | | |`hipblasCgemv`|3.0.0| | | |
 |`cublasCgemv_64`|12.0| | | | | | | |
@@ -622,9 +622,9 @@
 |`cublasStrsv_64`|12.0| | | | | | | |
 |`cublasStrsv_v2`| | | |`hipblasStrsv`|3.0.0| | | |
 |`cublasStrsv_v2_64`|12.0| | | | | | | |
-|`cublasZgbmv`| | | |`hipblasZgbmv`|3.5.0| | | |
+|`cublasZgbmv`| | | |`hipblasZgbmv_v2`|6.0.0| | |6.0.0|
 |`cublasZgbmv_64`|12.0| | | | | | | |
-|`cublasZgbmv_v2`| | | |`hipblasZgbmv`|3.5.0| | | |
+|`cublasZgbmv_v2`| | | |`hipblasZgbmv_v2`|6.0.0| | |6.0.0|
 |`cublasZgbmv_v2_64`|12.0| | | | | | | |
 |`cublasZgemv`| | | |`hipblasZgemv`|3.0.0| | | |
 |`cublasZgemv_64`|12.0| | | | | | | |
