@@ -6,17 +6,17 @@
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
 |`CUBLAS_ATOMICS_ALLOWED`| | | |`HIPBLAS_ATOMICS_ALLOWED`|3.10.0| | | |`rocblas_atomics_allowed`|3.8.0| | | |
 |`CUBLAS_ATOMICS_NOT_ALLOWED`| | | |`HIPBLAS_ATOMICS_NOT_ALLOWED`|3.10.0| | | |`rocblas_atomics_not_allowed`|3.8.0| | | |
-|`CUBLAS_COMPUTE_16F`|11.0| | | | | | | | | | | | |
-|`CUBLAS_COMPUTE_16F_PEDANTIC`|11.0| | | | | | | | | | | | |
-|`CUBLAS_COMPUTE_32F`|11.0| | | | | | | |`rocblas_compute_type_f32`|5.7.0| | | |
-|`CUBLAS_COMPUTE_32F_FAST_16BF`|11.0| | | | | | | | | | | | |
-|`CUBLAS_COMPUTE_32F_FAST_16F`|11.0| | | | | | | | | | | | |
-|`CUBLAS_COMPUTE_32F_FAST_TF32`|11.0| | | | | | | | | | | | |
-|`CUBLAS_COMPUTE_32F_PEDANTIC`|11.0| | | | | | | | | | | | |
-|`CUBLAS_COMPUTE_32I`|11.0| | | | | | | | | | | | |
-|`CUBLAS_COMPUTE_32I_PEDANTIC`|11.0| | | | | | | | | | | | |
-|`CUBLAS_COMPUTE_64F`|11.0| | | | | | | | | | | | |
-|`CUBLAS_COMPUTE_64F_PEDANTIC`|11.0| | | | | | | | | | | | |
+|`CUBLAS_COMPUTE_16F`|11.0| | |`HIPBLAS_COMPUTE_16F`|6.0.0| | |6.0.0| | | | | |
+|`CUBLAS_COMPUTE_16F_PEDANTIC`|11.0| | |`HIPBLAS_COMPUTE_16F_PEDANTIC`|6.0.0| | |6.0.0| | | | | |
+|`CUBLAS_COMPUTE_32F`|11.0| | |`HIPBLAS_COMPUTE_32F`|6.0.0| | |6.0.0|`rocblas_compute_type_f32`|5.7.0| | | |
+|`CUBLAS_COMPUTE_32F_FAST_16BF`|11.0| | |`HIPBLAS_COMPUTE_32F_FAST_16BF`|6.0.0| | |6.0.0| | | | | |
+|`CUBLAS_COMPUTE_32F_FAST_16F`|11.0| | |`HIPBLAS_COMPUTE_32F_FAST_16F`|6.0.0| | |6.0.0| | | | | |
+|`CUBLAS_COMPUTE_32F_FAST_TF32`|11.0| | |`HIPBLAS_COMPUTE_32F_FAST_TF32`|6.0.0| | |6.0.0| | | | | |
+|`CUBLAS_COMPUTE_32F_PEDANTIC`|11.0| | |`HIPBLAS_COMPUTE_32F_PEDANTIC`|6.0.0| | |6.0.0| | | | | |
+|`CUBLAS_COMPUTE_32I`|11.0| | |`HIPBLAS_COMPUTE_32I`|6.0.0| | |6.0.0| | | | | |
+|`CUBLAS_COMPUTE_32I_PEDANTIC`|11.0| | |`HIPBLAS_COMPUTE_32I_PEDANTIC`|6.0.0| | |6.0.0| | | | | |
+|`CUBLAS_COMPUTE_64F`|11.0| | |`HIPBLAS_COMPUTE_64F`|6.0.0| | |6.0.0| | | | | |
+|`CUBLAS_COMPUTE_64F_PEDANTIC`|11.0| | |`HIPBLAS_COMPUTE_64F_PEDANTIC`|6.0.0| | |6.0.0| | | | | |
 |`CUBLAS_DEFAULT_MATH`|9.0| | | | | | | |`rocblas_default_math`|5.7.0| | | |
 |`CUBLAS_DIAG_NON_UNIT`| | | |`HIPBLAS_DIAG_NON_UNIT`|1.8.2| | | |`rocblas_diagonal_non_unit`|1.5.0| | | |
 |`CUBLAS_DIAG_UNIT`| | | |`HIPBLAS_DIAG_UNIT`|1.8.2| | | |`rocblas_diagonal_unit`|1.5.0| | | |
@@ -91,7 +91,7 @@
 |`CUBLAS_TENSOR_OP_MATH`|9.0|11.0| | | | | | | | | | | |
 |`CUBLAS_TF32_TENSOR_OP_MATH`|11.0| | | | | | | |`rocblas_xf32_xdl_math_op`|5.7.0| | | |
 |`cublasAtomicsMode_t`| | | |`hipblasAtomicsMode_t`|3.10.0| | | |`rocblas_atomics_mode`|3.8.0| | | |
-|`cublasComputeType_t`|11.0| | |`hipblasDatatype_t`|1.8.2| | | |`rocblas_computetype`|5.7.0| | | |
+|`cublasComputeType_t`|11.0| | |`hipblasComputeType_t`|6.0.0| | |6.0.0|`rocblas_computetype`|5.7.0| | | |
 |`cublasContext`| | | | | | | | |`_rocblas_handle`|1.5.0| | | |
 |`cublasDiagType_t`| | | |`hipblasDiagType_t`|1.8.2| | | |`rocblas_diagonal`|1.5.0| | | |
 |`cublasFillMode_t`| | | |`hipblasFillMode_t`|1.8.2| | | |`rocblas_fill`|1.5.0| | | |

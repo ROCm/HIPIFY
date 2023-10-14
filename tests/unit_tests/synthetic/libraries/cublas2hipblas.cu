@@ -1570,9 +1570,7 @@ int main() {
   cublasDataType_t R_16BF = CUDA_R_16BF;
   cublasDataType_t C_16BF = CUDA_C_16BF;
 
-  // NOTE: WORKAROUND: cublasComputeType_t is not actually supported by hipBLAS
-  // TODO: Fix it after fixing https://github.com/ROCmSoftwarePlatform/hipBLAS/issues/529
-  // CHECK: hipblasDatatype_t blasComputeType;
+  // CHECK: hipblasComputeType_t blasComputeType;
   cublasComputeType_t blasComputeType;
 
   // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasGemmEx(cublasHandle_t handle, cublasOperation_t transa, cublasOperation_t transb, int m, int n, int k, const void* alpha, const void* A, cudaDataType Atype, int lda, const void* B, cudaDataType Btype, int ldb, const void* beta, void* C, cudaDataType Ctype, int ldc, cublasComputeType_t computeType, cublasGemmAlgo_t algo);

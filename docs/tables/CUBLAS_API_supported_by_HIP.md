@@ -6,17 +6,17 @@
 |:--|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
 |`CUBLAS_ATOMICS_ALLOWED`| | | |`HIPBLAS_ATOMICS_ALLOWED`|3.10.0| | | |
 |`CUBLAS_ATOMICS_NOT_ALLOWED`| | | |`HIPBLAS_ATOMICS_NOT_ALLOWED`|3.10.0| | | |
-|`CUBLAS_COMPUTE_16F`|11.0| | | | | | | |
-|`CUBLAS_COMPUTE_16F_PEDANTIC`|11.0| | | | | | | |
-|`CUBLAS_COMPUTE_32F`|11.0| | | | | | | |
-|`CUBLAS_COMPUTE_32F_FAST_16BF`|11.0| | | | | | | |
-|`CUBLAS_COMPUTE_32F_FAST_16F`|11.0| | | | | | | |
-|`CUBLAS_COMPUTE_32F_FAST_TF32`|11.0| | | | | | | |
-|`CUBLAS_COMPUTE_32F_PEDANTIC`|11.0| | | | | | | |
-|`CUBLAS_COMPUTE_32I`|11.0| | | | | | | |
-|`CUBLAS_COMPUTE_32I_PEDANTIC`|11.0| | | | | | | |
-|`CUBLAS_COMPUTE_64F`|11.0| | | | | | | |
-|`CUBLAS_COMPUTE_64F_PEDANTIC`|11.0| | | | | | | |
+|`CUBLAS_COMPUTE_16F`|11.0| | |`HIPBLAS_COMPUTE_16F`|6.0.0| | |6.0.0|
+|`CUBLAS_COMPUTE_16F_PEDANTIC`|11.0| | |`HIPBLAS_COMPUTE_16F_PEDANTIC`|6.0.0| | |6.0.0|
+|`CUBLAS_COMPUTE_32F`|11.0| | |`HIPBLAS_COMPUTE_32F`|6.0.0| | |6.0.0|
+|`CUBLAS_COMPUTE_32F_FAST_16BF`|11.0| | |`HIPBLAS_COMPUTE_32F_FAST_16BF`|6.0.0| | |6.0.0|
+|`CUBLAS_COMPUTE_32F_FAST_16F`|11.0| | |`HIPBLAS_COMPUTE_32F_FAST_16F`|6.0.0| | |6.0.0|
+|`CUBLAS_COMPUTE_32F_FAST_TF32`|11.0| | |`HIPBLAS_COMPUTE_32F_FAST_TF32`|6.0.0| | |6.0.0|
+|`CUBLAS_COMPUTE_32F_PEDANTIC`|11.0| | |`HIPBLAS_COMPUTE_32F_PEDANTIC`|6.0.0| | |6.0.0|
+|`CUBLAS_COMPUTE_32I`|11.0| | |`HIPBLAS_COMPUTE_32I`|6.0.0| | |6.0.0|
+|`CUBLAS_COMPUTE_32I_PEDANTIC`|11.0| | |`HIPBLAS_COMPUTE_32I_PEDANTIC`|6.0.0| | |6.0.0|
+|`CUBLAS_COMPUTE_64F`|11.0| | |`HIPBLAS_COMPUTE_64F`|6.0.0| | |6.0.0|
+|`CUBLAS_COMPUTE_64F_PEDANTIC`|11.0| | |`HIPBLAS_COMPUTE_64F_PEDANTIC`|6.0.0| | |6.0.0|
 |`CUBLAS_DEFAULT_MATH`|9.0| | | | | | | |
 |`CUBLAS_DIAG_NON_UNIT`| | | |`HIPBLAS_DIAG_NON_UNIT`|1.8.2| | | |
 |`CUBLAS_DIAG_UNIT`| | | |`HIPBLAS_DIAG_UNIT`|1.8.2| | | |
@@ -91,7 +91,7 @@
 |`CUBLAS_TENSOR_OP_MATH`|9.0|11.0| | | | | | |
 |`CUBLAS_TF32_TENSOR_OP_MATH`|11.0| | | | | | | |
 |`cublasAtomicsMode_t`| | | |`hipblasAtomicsMode_t`|3.10.0| | | |
-|`cublasComputeType_t`|11.0| | |`hipblasDatatype_t`|1.8.2| | | |
+|`cublasComputeType_t`|11.0| | |`hipblasComputeType_t`|6.0.0| | |6.0.0|
 |`cublasContext`| | | | | | | | |
 |`cublasDiagType_t`| | | |`hipblasDiagType_t`|1.8.2| | | |
 |`cublasFillMode_t`| | | |`hipblasFillMode_t`|1.8.2| | | |
