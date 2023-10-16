@@ -424,11 +424,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
   {"cublasCgemm3mBatched_64",        {"hipblasCgemm3mBatched_64",        "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
   {"cublasZgemmBatched",             {"hipblasZgemmBatched_v2",          "rocblas_zgemm_batched",                    CONV_LIB_FUNC, API_BLAS, 7}},
   {"cublasZgemmBatched_64",          {"hipblasZgemmBatched_64",          "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
-  {"cublasCgemmStridedBatched",      {"hipblasCgemmStridedBatched",      "rocblas_cgemm_strided_batched",            CONV_LIB_FUNC, API_BLAS, 7}},
+  {"cublasCgemmStridedBatched",      {"hipblasCgemmStridedBatched_v2",   "rocblas_cgemm_strided_batched",            CONV_LIB_FUNC, API_BLAS, 7}},
   {"cublasCgemmStridedBatched_64",   {"hipblasCgemmStridedBatched_64",   "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
   {"cublasCgemm3mStridedBatched",    {"hipblasCgemm3mStridedBatched",    "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
   {"cublasCgemm3mStridedBatched_64", {"hipblasCgemm3mStridedBatched_64", "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
-  {"cublasZgemmStridedBatched",      {"hipblasZgemmStridedBatched",      "rocblas_zgemm_strided_batched",            CONV_LIB_FUNC, API_BLAS, 7}},
+  {"cublasZgemmStridedBatched",      {"hipblasZgemmStridedBatched_v2",   "rocblas_zgemm_strided_batched",            CONV_LIB_FUNC, API_BLAS, 7}},
   {"cublasZgemmStridedBatched_64",   {"hipblasZgemmStridedBatched_64",   "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
   {"cublasHgemmStridedBatched",      {"hipblasHgemmStridedBatched",      "rocblas_hgemm_strided_batched",            CONV_LIB_FUNC, API_BLAS, 7}},
   {"cublasHgemmStridedBatched_64",   {"hipblasHgemmStridedBatched_64",   "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
@@ -478,9 +478,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
   {"cublasZsyrk_64",                 {"hipblasZsyrk_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
 
   // HERK
-  {"cublasCherk",                    {"hipblasCherk",                    "rocblas_cherk",                            CONV_LIB_FUNC, API_BLAS, 7, HIP_SUPPORTED_V2_ONLY}},
+  {"cublasCherk",                    {"hipblasCherk_v2",                 "rocblas_cherk",                            CONV_LIB_FUNC, API_BLAS, 7, HIP_SUPPORTED_V2_ONLY}},
   {"cublasCherk_64",                 {"hipblasCherk_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
-  {"cublasZherk",                    {"hipblasZherk",                    "rocblas_zherk",                            CONV_LIB_FUNC, API_BLAS, 7, HIP_SUPPORTED_V2_ONLY}},
+  {"cublasZherk",                    {"hipblasZherk_v2",                 "rocblas_zherk",                            CONV_LIB_FUNC, API_BLAS, 7, HIP_SUPPORTED_V2_ONLY}},
   {"cublasZherk_64",                 {"hipblasZherk_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
 
   // SYR2K
@@ -504,15 +504,15 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
   {"cublasZsyrkx_64",                {"hipblasZsyrkx_64",                "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
 
   // HER2K
-  {"cublasCher2k",                   {"hipblasCher2k",                   "rocblas_cher2k",                           CONV_LIB_FUNC, API_BLAS, 7, HIP_SUPPORTED_V2_ONLY}},
+  {"cublasCher2k",                   {"hipblasCher2k_v2",                "rocblas_cher2k",                           CONV_LIB_FUNC, API_BLAS, 7, HIP_SUPPORTED_V2_ONLY}},
   {"cublasCher2k_64",                {"hipblasCher2k_64",                "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
-  {"cublasZher2k",                   {"hipblasZher2k",                   "rocblas_zher2k",                           CONV_LIB_FUNC, API_BLAS, 7, HIP_SUPPORTED_V2_ONLY}},
+  {"cublasZher2k",                   {"hipblasZher2k_v2",                "rocblas_zher2k",                           CONV_LIB_FUNC, API_BLAS, 7, HIP_SUPPORTED_V2_ONLY}},
   {"cublasZher2k_64",                {"hipblasZher2k_64",                "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
 
   // HERKX - eXtended HERK
-  {"cublasCherkx",                   {"hipblasCherkx",                   "rocblas_cherkx",                           CONV_LIB_FUNC, API_BLAS, 7}},
+  {"cublasCherkx",                   {"hipblasCherkx_v2",                "rocblas_cherkx",                           CONV_LIB_FUNC, API_BLAS, 7}},
   {"cublasCherkx_64",                {"hipblasCherkx_64",                "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
-  {"cublasZherkx",                   {"hipblasZherkx",                   "rocblas_zherkx",                           CONV_LIB_FUNC, API_BLAS, 7}},
+  {"cublasZherkx",                   {"hipblasZherkx_v2",                "rocblas_zherkx",                           CONV_LIB_FUNC, API_BLAS, 7}},
   {"cublasZherkx_64",                {"hipblasZherkx_64",                "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
 
   // SYMM
@@ -520,9 +520,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
   {"cublasSsymm_64",                 {"hipblasSsymm_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
   {"cublasDsymm",                    {"hipblasDsymm",                    "rocblas_dsymm",                            CONV_LIB_FUNC, API_BLAS, 7, HIP_SUPPORTED_V2_ONLY}},
   {"cublasDsymm_64",                 {"hipblasDsymm_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
-  {"cublasCsymm",                    {"hipblasCsymm",                    "rocblas_csymm",                            CONV_LIB_FUNC, API_BLAS, 7, HIP_SUPPORTED_V2_ONLY}},
+  {"cublasCsymm",                    {"hipblasCsymm_v2",                 "rocblas_csymm",                            CONV_LIB_FUNC, API_BLAS, 7, HIP_SUPPORTED_V2_ONLY}},
   {"cublasCsymm_64",                 {"hipblasCsymm_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
-  {"cublasZsymm",                    {"hipblasZsymm",                    "rocblas_zsymm",                            CONV_LIB_FUNC, API_BLAS, 7, HIP_SUPPORTED_V2_ONLY}},
+  {"cublasZsymm",                    {"hipblasZsymm_v2",                 "rocblas_zsymm",                            CONV_LIB_FUNC, API_BLAS, 7, HIP_SUPPORTED_V2_ONLY}},
   {"cublasZsymm_64",                 {"hipblasZsymm_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
 
   // HEMM
@@ -855,7 +855,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
   {"cublasCsyrk3mEx_64",             {"hipblasCsyrk3mEx_64",             "",                                         CONV_LIB_FUNC, API_BLAS, 8, UNSUPPORTED}},
 
   // HERK
-  {"cublasCherk_v2",                 {"hipblasCherk",                    "rocblas_cherk",                            CONV_LIB_FUNC, API_BLAS, 7}},
+  {"cublasCherk_v2",                 {"hipblasCherk_v2",                 "rocblas_cherk",                            CONV_LIB_FUNC, API_BLAS, 7}},
   {"cublasCherk_v2_64",              {"hipblasCherk_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
   // IO in Int8 complex/cuComplex, computation in cuComplex
   {"cublasCherkEx",                  {"hipblasCherkEx",                  "",                                         CONV_LIB_FUNC, API_BLAS, 8, UNSUPPORTED}},
@@ -863,7 +863,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
   // IO in Int8 complex/cuComplex, computation in cuComplex, Gaussian math
   {"cublasCherk3mEx",                {"hipblasCherk3mEx",                "",                                         CONV_LIB_FUNC, API_BLAS, 8, UNSUPPORTED}},
   {"cublasCherk3mEx_64",             {"hipblasCherk3mEx_64",             "",                                         CONV_LIB_FUNC, API_BLAS, 8, UNSUPPORTED}},
-  {"cublasZherk_v2",                 {"hipblasZherk",                    "rocblas_zherk",                            CONV_LIB_FUNC, API_BLAS, 7}},
+  {"cublasZherk_v2",                 {"hipblasZherk_v2",                 "rocblas_zherk",                            CONV_LIB_FUNC, API_BLAS, 7}},
   {"cublasZherk_v2_64",              {"hipblasZherk_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
 
   // SYR2K
@@ -877,9 +877,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
   {"cublasZsyr2k_v2_64",             {"hipblasZsyr2k_64",                "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
 
   // HER2K
-  {"cublasCher2k_v2",                {"hipblasCher2k",                   "rocblas_cher2k",                           CONV_LIB_FUNC, API_BLAS, 7}},
+  {"cublasCher2k_v2",                {"hipblasCher2k_v2",                "rocblas_cher2k",                           CONV_LIB_FUNC, API_BLAS, 7}},
   {"cublasCher2k_v2_64",             {"hipblasCher2k_64",                "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
-  {"cublasZher2k_v2",                {"hipblasZher2k",                   "rocblas_zher2k",                           CONV_LIB_FUNC, API_BLAS, 7}},
+  {"cublasZher2k_v2",                {"hipblasZher2k_v2",                "rocblas_zher2k",                           CONV_LIB_FUNC, API_BLAS, 7}},
   {"cublasZher2k_v2_64",             {"hipblasZher2k_64",                "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
 
   // SYMM
@@ -887,9 +887,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
   {"cublasSsymm_v2_64",              {"hipblasSsymm_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
   {"cublasDsymm_v2",                 {"hipblasDsymm",                    "rocblas_dsymm",                            CONV_LIB_FUNC, API_BLAS, 7}},
   {"cublasDsymm_v2_64",              {"hipblasDsymm_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
-  {"cublasCsymm_v2",                 {"hipblasCsymm",                    "rocblas_csymm",                            CONV_LIB_FUNC, API_BLAS, 7}},
+  {"cublasCsymm_v2",                 {"hipblasCsymm_v2",                 "rocblas_csymm",                            CONV_LIB_FUNC, API_BLAS, 7}},
   {"cublasCsymm_v2_64",              {"hipblasCsymm_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
-  {"cublasZsymm_v2",                 {"hipblasZsymm",                    "rocblas_zsymm",                            CONV_LIB_FUNC, API_BLAS, 7}},
+  {"cublasZsymm_v2",                 {"hipblasZsymm_v2",                 "rocblas_zsymm",                            CONV_LIB_FUNC, API_BLAS, 7}},
   {"cublasZsymm_v2_64",              {"hipblasZsymm_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
 
   // HEMM
@@ -1822,6 +1822,16 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_FUNCTION_VER_MAP {
   {"hipblasZgemm_v2",                            {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipblasCgemmBatched_v2",                     {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipblasZgemmBatched_v2",                     {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipblasCgemmStridedBatched_v2",              {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipblasZgemmStridedBatched_v2",              {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipblasCherk_v2",                            {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipblasZherk_v2",                            {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipblasCherkx_v2",                           {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipblasZherkx_v2",                           {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipblasCher2k_v2",                           {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipblasZher2k_v2",                           {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipblasCsymm_v2",                            {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipblasZsymm_v2",                            {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
   {"rocblas_status_to_string",                   {HIP_3050, HIP_0,    HIP_0   }},
   {"rocblas_sscal",                              {HIP_1050, HIP_0,    HIP_0   }},
   {"rocblas_dscal",                              {HIP_1050, HIP_0,    HIP_0   }},
