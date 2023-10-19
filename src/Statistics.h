@@ -367,6 +367,8 @@ struct hipAPIversions {
   hipVersions experimental = HIP_0;
 };
 
+typedef std::list<hipVersions> hipAPIChangedVersions;
+
 // The names of various fields in in the statistics reports.
 extern const char *counterNames[NUM_CONV_TYPES];
 extern const char *counterTypes[NUM_CONV_TYPES];
