@@ -837,9 +837,9 @@
 |`cublasSsyrk_v2_64`|12.0| | | | | | | | |
 |`cublasSsyrkx`| | | |`rocblas_ssyrkx`|3.5.0| | | | |
 |`cublasSsyrkx_64`|12.0| | | | | | | | |
-|`cublasStrmm`| | | |`rocblas_strmm_outofplace`|5.0.0|5.6.0| | | |
+|`cublasStrmm`| | | | | | | | | |
 |`cublasStrmm_64`|12.0| | | | | | | | |
-|`cublasStrmm_v2`| | | |`rocblas_strmm_outofplace`|5.0.0|5.6.0| | | |
+|`cublasStrmm_v2`| | | |`rocblas_strmm`|3.5.0| |6.0.0| |6.0.0|
 |`cublasStrmm_v2_64`|12.0| | | | | | | | |
 |`cublasStrsm`| | | |`rocblas_strsm`|1.5.0| | | | |
 |`cublasStrsm_64`|12.0| | | | | | | | |
