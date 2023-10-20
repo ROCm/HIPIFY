@@ -280,7 +280,6 @@ namespace doc {
                   rc = cc;
                 else
                   hc = cc;
-                llvm::errs() << "\n" << f.first << ": " << f.second.hipName << ": " << f.second.rocName << ": " << isROC << ": " << (isROC ? rc : hc) << "\n";
               }
               if (isJoint()) {
                 auto rv = hMap.find(f.second.rocName);
@@ -347,7 +346,7 @@ namespace doc {
                     case full:
                     default:
                       rows << (a.empty() ? " " : a) << sS << (d.empty() ? " " : d) << sS << (r.empty() ? " " : r) << sS << sHip << sS <<
-                        (ha.empty() ? " " : ha) << sS << (hd.empty() ? " " : hd) << sS << (isROC ? rc : hc) << sS << (hr.empty() ? " " : hr) << sS << (he.empty() ? " " : he) << sS;
+                        (ha.empty() ? " " : ha) << sS << (hd.empty() ? " " : hd) << sS << (isROC ? (rc.empty() ? " " : rc) : (hc.empty() ? " " : hc)) << sS << (hr.empty() ? " " : hr) << sS << (he.empty() ? " " : he) << sS;
                       if (isJoint())
                         rows << sRoc << sS << (ra.empty() ? " " : ra) << sS << (rd.empty() ? " " : rd) << sS << (rc.empty() ? " " : rc) << sS << (rr.empty() ? " " : rr) << sS << (re.empty() ? " " : re) << sS;
                       rows << endl;
