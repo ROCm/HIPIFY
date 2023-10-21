@@ -755,9 +755,9 @@
 |`cublasCsyrk_v2_64`|12.0| | | | | | | | |
 |`cublasCsyrkx`| | | |`hipblasCsyrkx_v2`|6.0.0| | | |6.0.0|
 |`cublasCsyrkx_64`|12.0| | | | | | | | |
-|`cublasCtrmm`| | | |`hipblasCtrmm`|3.5.0|5.6.0| | | |
+|`cublasCtrmm`| | | |`hipblasCtrmm`|3.5.0| |6.0.0| |6.0.0|
 |`cublasCtrmm_64`|12.0| | | | | | | | |
-|`cublasCtrmm_v2`| | | |`hipblasCtrmm`|3.5.0|5.6.0| | | |
+|`cublasCtrmm_v2`| | | |`hipblasCtrmm`|3.5.0| |6.0.0| |6.0.0|
 |`cublasCtrmm_v2_64`|12.0| | | | | | | | |
 |`cublasCtrsm`| | | |`hipblasCtrsm`|3.5.0| | | | |
 |`cublasCtrsm_64`|12.0| | | | | | | | |
@@ -789,9 +789,9 @@
 |`cublasDsyrk_v2_64`|12.0| | | | | | | | |
 |`cublasDsyrkx`| | | |`hipblasDsyrkx`|3.5.0| | | | |
 |`cublasDsyrkx_64`|12.0| | | | | | | | |
-|`cublasDtrmm`| | | |`hipblasDtrmm`|3.2.0|5.6.0| | | |
+|`cublasDtrmm`| | | |`hipblasDtrmm`|3.2.0| |6.0.0| |6.0.0|
 |`cublasDtrmm_64`|12.0| | | | | | | | |
-|`cublasDtrmm_v2`| | | |`hipblasDtrmm`|3.2.0|5.6.0| | | |
+|`cublasDtrmm_v2`| | | |`hipblasDtrmm`|3.2.0| |6.0.0| |6.0.0|
 |`cublasDtrmm_v2_64`|12.0| | | | | | | | |
 |`cublasDtrsm`| | | |`hipblasDtrsm`|1.8.2| | | | |
 |`cublasDtrsm_64`|12.0| | | | | | | | |
@@ -837,7 +837,7 @@
 |`cublasSsyrk_v2_64`|12.0| | | | | | | | |
 |`cublasSsyrkx`| | | |`hipblasSsyrkx`|3.5.0| | | | |
 |`cublasSsyrkx_64`|12.0| | | | | | | | |
-|`cublasStrmm`| | | | | | | | | |
+|`cublasStrmm`| | | |`hipblasStrmm`|3.2.0| |6.0.0| |6.0.0|
 |`cublasStrmm_64`|12.0| | | | | | | | |
 |`cublasStrmm_v2`| | | |`hipblasStrmm`|3.2.0| |6.0.0| |6.0.0|
 |`cublasStrmm_v2_64`|12.0| | | | | | | | |
@@ -895,9 +895,9 @@
 |`cublasZsyrk_v2_64`|12.0| | | | | | | | |
 |`cublasZsyrkx`| | | |`hipblasZsyrkx_v2`|6.0.0| | | |6.0.0|
 |`cublasZsyrkx_64`|12.0| | | | | | | | |
-|`cublasZtrmm`| | | |`hipblasZtrmm`|3.5.0|5.6.0| | | |
+|`cublasZtrmm`| | | |`hipblasZtrmm`|3.5.0| |6.0.0| |6.0.0|
 |`cublasZtrmm_64`|12.0| | | | | | | | |
-|`cublasZtrmm_v2`| | | |`hipblasZtrmm`|3.5.0|5.6.0| | | |
+|`cublasZtrmm_v2`| | | |`hipblasZtrmm`|3.5.0| |6.0.0| |6.0.0|
 |`cublasZtrmm_v2_64`|12.0| | | | | | | | |
 |`cublasZtrsm`| | | |`hipblasZtrsm`|3.5.0| | | | |
 |`cublasZtrsm_64`|12.0| | | | | | | | |
