@@ -755,13 +755,13 @@
 |`cublasCsyrk_v2_64`|12.0| | | | | | | | |
 |`cublasCsyrkx`| | | |`hipblasCsyrkx_v2`|6.0.0| | | |6.0.0|
 |`cublasCsyrkx_64`|12.0| | | | | | | | |
-|`cublasCtrmm`| | | |`hipblasCtrmm`|3.5.0| |6.0.0| |6.0.0|
+|`cublasCtrmm`| | | |`hipblasCtrmm_v2`|6.0.0| | | |6.0.0|
 |`cublasCtrmm_64`|12.0| | | | | | | | |
-|`cublasCtrmm_v2`| | | |`hipblasCtrmm`|3.5.0| |6.0.0| |6.0.0|
+|`cublasCtrmm_v2`| | | |`hipblasCtrmm_v2`|6.0.0| | | |6.0.0|
 |`cublasCtrmm_v2_64`|12.0| | | | | | | | |
-|`cublasCtrsm`| | | |`hipblasCtrsm`|3.5.0| | | | |
+|`cublasCtrsm`| | | |`hipblasCtrsm_v2`|6.0.0| | | |6.0.0|
 |`cublasCtrsm_64`|12.0| | | | | | | | |
-|`cublasCtrsm_v2`| | | |`hipblasCtrsm`|3.5.0| | | | |
+|`cublasCtrsm_v2`| | | |`hipblasCtrsm_v2`|6.0.0| | | |6.0.0|
 |`cublasCtrsm_v2_64`|12.0| | | | | | | | |
 |`cublasDgemm`| | | |`hipblasDgemm`|1.8.2| | | | |
 |`cublasDgemmBatched`| | | |`hipblasDgemmBatched`|1.8.2| | | | |
@@ -895,13 +895,13 @@
 |`cublasZsyrk_v2_64`|12.0| | | | | | | | |
 |`cublasZsyrkx`| | | |`hipblasZsyrkx_v2`|6.0.0| | | |6.0.0|
 |`cublasZsyrkx_64`|12.0| | | | | | | | |
-|`cublasZtrmm`| | | |`hipblasZtrmm`|3.5.0| |6.0.0| |6.0.0|
+|`cublasZtrmm`| | | |`hipblasZtrmm_v2`|6.0.0| | | |6.0.0|
 |`cublasZtrmm_64`|12.0| | | | | | | | |
-|`cublasZtrmm_v2`| | | |`hipblasZtrmm`|3.5.0| |6.0.0| |6.0.0|
+|`cublasZtrmm_v2`| | | |`hipblasZtrmm_v2`|6.0.0| | | |6.0.0|
 |`cublasZtrmm_v2_64`|12.0| | | | | | | | |
-|`cublasZtrsm`| | | |`hipblasZtrsm`|3.5.0| | | | |
+|`cublasZtrsm`| | | |`hipblasZtrsm_v2`|6.0.0| | | |6.0.0|
 |`cublasZtrsm_64`|12.0| | | | | | | | |
-|`cublasZtrsm_v2`| | | |`hipblasZtrsm`|3.5.0| | | | |
+|`cublasZtrsm_v2`| | | |`hipblasZtrsm_v2`|6.0.0| | | |6.0.0|
 |`cublasZtrsm_v2_64`|12.0| | | | | | | | |
 
 ## **8. BLAS-like Extension**
@@ -912,7 +912,7 @@
 |`cublasAsumEx_64`|12.0| | | | | | | | |
 |`cublasAxpyEx`|8.0| | |`hipblasAxpyEx`|4.1.0| | | | |
 |`cublasAxpyEx_64`|12.0| | | | | | | | |
-|`cublasCdgmm`| | | |`hipblasCdgmm`|3.6.0| | | | |
+|`cublasCdgmm`| | | |`hipblasCdgmm_v2`|6.0.0| | | |6.0.0|
 |`cublasCdgmm_64`|12.0| | | | | | | | |
 |`cublasCgeam`| | | |`hipblasCgeam_v2`|6.0.0| | | |6.0.0|
 |`cublasCgeam_64`|12.0| | | | | | | | |
@@ -920,7 +920,7 @@
 |`cublasCgemmEx`|8.0| | | | | | | | |
 |`cublasCgemmEx_64`|12.0| | | | | | | | |
 |`cublasCgeqrfBatched`| | | |`hipblasCgeqrfBatched`|3.5.0| | | | |
-|`cublasCgetrfBatched`| | | |`hipblasCgetrfBatched`|3.5.0| | | | |
+|`cublasCgetrfBatched`| | | |`hipblasCgetrfBatched_v2`|6.0.0| | | |6.0.0|
 |`cublasCgetriBatched`| | | |`hipblasCgetriBatched`|3.7.0| | | | |
 |`cublasCgetrsBatched`| | | |`hipblasCgetrsBatched`|3.5.0| | | | |
 |`cublasCherk3mEx`|8.0| | | | | | | | |
@@ -935,7 +935,7 @@
 |`cublasCsyrkEx`|8.0| | | | | | | | |
 |`cublasCsyrkEx_64`|12.0| | | | | | | | |
 |`cublasCtpttr`| | | | | | | | | |
-|`cublasCtrsmBatched`| | | |`hipblasCtrsmBatched`|3.5.0| | | | |
+|`cublasCtrsmBatched`| | | |`hipblasCtrsmBatched_v2`|6.0.0| | | |6.0.0|
 |`cublasCtrsmBatched_64`|12.0| | | | | | | | |
 |`cublasCtrttp`| | | | | | | | | |
 |`cublasDdgmm`| | | |`hipblasDdgmm`|3.6.0| | | | |
@@ -993,18 +993,18 @@
 |`cublasSwapEx`|10.1| | | | | | | | |
 |`cublasSwapEx_64`|12.0| | | | | | | | |
 |`cublasUint8gemmBias`|8.0| | | | | | | | |
-|`cublasZdgmm`| | | |`hipblasZdgmm`|3.6.0| | | | |
+|`cublasZdgmm`| | | |`hipblasZdgmm_v2`|6.0.0| | | |6.0.0|
 |`cublasZdgmm_64`|12.0| | | | | | | | |
 |`cublasZgeam`| | | |`hipblasZgeam_v2`|6.0.0| | | |6.0.0|
 |`cublasZgeam_64`|12.0| | | | | | | | |
 |`cublasZgelsBatched`| | | |`hipblasZgelsBatched`|5.4.0| | | | |
 |`cublasZgeqrfBatched`| | | |`hipblasZgeqrfBatched`|3.5.0| | | | |
-|`cublasZgetrfBatched`| | | |`hipblasZgetrfBatched`|3.5.0| | | | |
+|`cublasZgetrfBatched`| | | |`hipblasZgetrfBatched_v2`|6.0.0| | | |6.0.0|
 |`cublasZgetriBatched`| | | |`hipblasZgetriBatched`|3.7.0| | | | |
 |`cublasZgetrsBatched`| | | |`hipblasZgetrsBatched`|3.5.0| | | | |
 |`cublasZmatinvBatched`| | | | | | | | | |
 |`cublasZtpttr`| | | | | | | | | |
-|`cublasZtrsmBatched`| | | |`hipblasZtrsmBatched`|3.5.0| | | | |
+|`cublasZtrsmBatched`| | | |`hipblasZtrsmBatched_v2`|6.0.0| | | |6.0.0|
 |`cublasZtrsmBatched_64`|12.0| | | | | | | | |
 |`cublasZtrttp`| | | | | | | | | |
 
