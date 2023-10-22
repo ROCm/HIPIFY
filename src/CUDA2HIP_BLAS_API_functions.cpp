@@ -571,14 +571,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
   // Batched inversion based on LU factorization from getrf
   {"cublasSgetriBatched",            {"hipblasSgetriBatched",            "",                                         CONV_LIB_FUNC, API_BLAS, 8, ROC_UNSUPPORTED}},
   {"cublasDgetriBatched",            {"hipblasDgetriBatched",            "",                                         CONV_LIB_FUNC, API_BLAS, 8, ROC_UNSUPPORTED}},
-  {"cublasCgetriBatched",            {"hipblasCgetriBatched",            "",                                         CONV_LIB_FUNC, API_BLAS, 8, ROC_UNSUPPORTED}},
-  {"cublasZgetriBatched",            {"hipblasZgetriBatched",            "",                                         CONV_LIB_FUNC, API_BLAS, 8, ROC_UNSUPPORTED}},
+  {"cublasCgetriBatched",            {"hipblasCgetriBatched_v2",         "",                                         CONV_LIB_FUNC, API_BLAS, 8, ROC_UNSUPPORTED}},
+  {"cublasZgetriBatched",            {"hipblasZgetriBatched_v2",         "",                                         CONV_LIB_FUNC, API_BLAS, 8, ROC_UNSUPPORTED}},
 
   // Batched solver based on LU factorization from getrf
   {"cublasSgetrsBatched",            {"hipblasSgetrsBatched",            "",                                         CONV_LIB_FUNC, API_BLAS, 8, ROC_UNSUPPORTED}},
   {"cublasDgetrsBatched",            {"hipblasDgetrsBatched",            "",                                         CONV_LIB_FUNC, API_BLAS, 8, ROC_UNSUPPORTED}},
-  {"cublasCgetrsBatched",            {"hipblasCgetrsBatched",            "",                                         CONV_LIB_FUNC, API_BLAS, 8, ROC_UNSUPPORTED}},
-  {"cublasZgetrsBatched",            {"hipblasZgetrsBatched",            "",                                         CONV_LIB_FUNC, API_BLAS, 8, ROC_UNSUPPORTED}},
+  {"cublasCgetrsBatched",            {"hipblasCgetrsBatched_v2",         "",                                         CONV_LIB_FUNC, API_BLAS, 8, ROC_UNSUPPORTED}},
+  {"cublasZgetrsBatched",            {"hipblasZgetrsBatched_v2",         "",                                         CONV_LIB_FUNC, API_BLAS, 8, ROC_UNSUPPORTED}},
 
   // TRSM - Batched Triangular Solver
   {"cublasStrsmBatched",             {"hipblasStrsmBatched",             "rocblas_strsm_batched",                    CONV_LIB_FUNC, API_BLAS, 8}},
@@ -599,14 +599,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
   // Batch QR Factorization
   {"cublasSgeqrfBatched",            {"hipblasSgeqrfBatched",            "",                                         CONV_LIB_FUNC, API_BLAS, 8, ROC_UNSUPPORTED}},
   {"cublasDgeqrfBatched",            {"hipblasDgeqrfBatched",            "",                                         CONV_LIB_FUNC, API_BLAS, 8, ROC_UNSUPPORTED}},
-  {"cublasCgeqrfBatched",            {"hipblasCgeqrfBatched",            "",                                         CONV_LIB_FUNC, API_BLAS, 8, ROC_UNSUPPORTED}},
-  {"cublasZgeqrfBatched",            {"hipblasZgeqrfBatched",            "",                                         CONV_LIB_FUNC, API_BLAS, 8, ROC_UNSUPPORTED}},
+  {"cublasCgeqrfBatched",            {"hipblasCgeqrfBatched_v2",         "",                                         CONV_LIB_FUNC, API_BLAS, 8, ROC_UNSUPPORTED}},
+  {"cublasZgeqrfBatched",            {"hipblasZgeqrfBatched_v2",         "",                                         CONV_LIB_FUNC, API_BLAS, 8, ROC_UNSUPPORTED}},
 
   // Least Square Min only m >= n and Non-transpose supported
   {"cublasSgelsBatched",             {"hipblasSgelsBatched",             "",                                         CONV_LIB_FUNC, API_BLAS, 8, ROC_UNSUPPORTED}},
   {"cublasDgelsBatched",             {"hipblasDgelsBatched",             "",                                         CONV_LIB_FUNC, API_BLAS, 8, ROC_UNSUPPORTED}},
-  {"cublasCgelsBatched",             {"hipblasCgelsBatched",             "",                                         CONV_LIB_FUNC, API_BLAS, 8, ROC_UNSUPPORTED}},
-  {"cublasZgelsBatched",             {"hipblasZgelsBatched",             "",                                         CONV_LIB_FUNC, API_BLAS, 8, ROC_UNSUPPORTED}},
+  {"cublasCgelsBatched",             {"hipblasCgelsBatched_v2",          "",                                         CONV_LIB_FUNC, API_BLAS, 8, ROC_UNSUPPORTED}},
+  {"cublasZgelsBatched",             {"hipblasZgelsBatched_v2",          "",                                         CONV_LIB_FUNC, API_BLAS, 8, ROC_UNSUPPORTED}},
 
   // DGMM
   {"cublasSdgmm",                    {"hipblasSdgmm",                    "rocblas_sdgmm",                            CONV_LIB_FUNC, API_BLAS, 8}},
@@ -826,9 +826,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
   //IO in FP16 / FP32, computation in float
   {"cublasSgemmEx",                  {"hipblasSgemmEx",                  "",                                         CONV_LIB_FUNC, API_BLAS, 8, UNSUPPORTED}},
   {"cublasSgemmEx_64",               {"hipblasSgemmEx_64",               "",                                         CONV_LIB_FUNC, API_BLAS, 8, UNSUPPORTED}},
-  {"cublasGemmEx",                   {"hipblasGemmEx",                   "rocblas_gemm_ex",                          CONV_LIB_FUNC, API_BLAS, 8}},
+  {"cublasGemmEx",                   {"hipblasGemmEx_v2",                "rocblas_gemm_ex",                          CONV_LIB_FUNC, API_BLAS, 8}},
   {"cublasGemmEx_64",                {"hipblasGemmEx_64",                "",                                         CONV_LIB_FUNC, API_BLAS, 8, UNSUPPORTED}},
-  {"cublasGemmBatchedEx",            {"hipblasGemmBatchedEx",            "rocblas_gemm_batched_ex",                  CONV_LIB_FUNC, API_BLAS, 8}},
+  {"cublasGemmBatchedEx",            {"hipblasGemmBatchedEx_v2",         "rocblas_gemm_batched_ex",                  CONV_LIB_FUNC, API_BLAS, 8}},
   {"cublasGemmBatchedEx_64",         {"hipblasGemmBatchedEx_64",         "",                                         CONV_LIB_FUNC, API_BLAS, 8, UNSUPPORTED}},
   {"cublasGemmStridedBatchedEx",     {"hipblasGemmStridedBatchedEx",     "rocblas_gemm_strided_batched_ex",          CONV_LIB_FUNC, API_BLAS, 8}},
   {"cublasGemmStridedBatchedEx_64",  {"hipblasGemmStridedBatchedEx_64",  "",                                         CONV_LIB_FUNC, API_BLAS, 8, UNSUPPORTED}},
@@ -1852,6 +1852,16 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_FUNCTION_VER_MAP {
   {"hipblasZdgmm_v2",                            {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipblasCgetrfBatched_v2",                    {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipblasZgetrfBatched_v2",                    {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipblasCgetrsBatched_v2",                    {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipblasZgetrsBatched_v2",                    {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipblasCgetriBatched_v2",                    {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipblasZgetriBatched_v2",                    {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipblasCgelsBatched_v2",                     {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipblasZgelsBatched_v2",                     {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipblasCgeqrfBatched_v2",                    {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipblasZgeqrfBatched_v2",                    {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipblasGemmEx_v2",                           {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipblasGemmBatchedEx_v2",                    {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
   {"rocblas_status_to_string",                   {HIP_3050, HIP_0,    HIP_0   }},
   {"rocblas_sscal",                              {HIP_1050, HIP_0,    HIP_0   }},
   {"rocblas_dscal",                              {HIP_1050, HIP_0,    HIP_0   }},
