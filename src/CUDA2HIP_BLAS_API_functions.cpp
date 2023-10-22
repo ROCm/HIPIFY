@@ -442,13 +442,13 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
   {"cublasCgemvBatched_64",          {"hipblasCgemvBatched_64",          "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
   {"cublasZgemvBatched",             {"hipblasZgemvBatched_v2",          "rocblas_zgemv_batched",                    CONV_LIB_FUNC, API_BLAS, 7}},
   {"cublasZgemvBatched_64",          {"hipblasZgemvBatched_64",          "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
-  {"cublasHSHgemvBatched",           {"hipblasHSHgemvBatched",           "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
+  {"cublasHSHgemvBatched",           {"hipblasHSHgemvBatched",           "rocblas_hshgemv_batched",                  CONV_LIB_FUNC, API_BLAS, 7, HIP_UNSUPPORTED}},
   {"cublasHSHgemvBatched_64",        {"hipblasHSHgemvBatched_64",        "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
-  {"cublasHSSgemvBatched",           {"hipblasHSSgemvBatched",           "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
+  {"cublasHSSgemvBatched",           {"hipblasHSSgemvBatched",           "rocblas_hssgemv_batched",                  CONV_LIB_FUNC, API_BLAS, 7, HIP_UNSUPPORTED}},
   {"cublasHSSgemvBatched_64",        {"hipblasHSSgemvBatched_64",        "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
-  {"cublasTSTgemvBatched",           {"hipblasTSTgemvBatched",           "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
+  {"cublasTSTgemvBatched",           {"hipblasTSTgemvBatched",           "rocblas_tstgemv_batched",                  CONV_LIB_FUNC, API_BLAS, 7, HIP_UNSUPPORTED}},
   {"cublasTSTgemvBatched_64",        {"hipblasTSTgemvBatched_64",        "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
-  {"cublasTSSgemvBatched",           {"hipblasTSSgemvBatched",           "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
+  {"cublasTSSgemvBatched",           {"hipblasTSSgemvBatched",           "rocblas_tssgemv_batched",                  CONV_LIB_FUNC, API_BLAS, 7, HIP_UNSUPPORTED}},
   {"cublasTSSgemvBatched_64",        {"hipblasTSSgemvBatched_64",        "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
   {"cublasSgemvStridedBatched",      {"hipblasSgemvStridedBatched",      "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
   {"cublasSgemvStridedBatched_64",   {"hipblasSgemvStridedBatched_64",   "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
@@ -2096,6 +2096,10 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_FUNCTION_VER_MAP {
   {"rocblas_dtrmm",                              {HIP_3050, HIP_0,    HIP_0,  HIP_LATEST}},
   {"rocblas_ctrmm",                              {HIP_3050, HIP_0,    HIP_0,  HIP_LATEST}},
   {"rocblas_ztrmm",                              {HIP_3050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"rocblas_hshgemv_batched",                    {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"rocblas_hssgemv_batched",                    {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"rocblas_tstgemv_batched",                    {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"rocblas_tssgemv_batched",                    {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
 };
 
 const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_BLAS_FUNCTION_CHANGED_VER_MAP {

@@ -1466,6 +1466,8 @@ sub rocSubstitutions {
     subst("cublasGetStream_v2", "rocblas_get_stream", "library");
     subst("cublasGetVector", "rocblas_get_vector", "library");
     subst("cublasGetVectorAsync", "rocblas_get_vector_async", "library");
+    subst("cublasHSHgemvBatched", "rocblas_hshgemv_batched", "library");
+    subst("cublasHSSgemvBatched", "rocblas_hssgemv_batched", "library");
     subst("cublasHgemm", "rocblas_hgemm", "library");
     subst("cublasHgemmBatched", "rocblas_hgemm_batched", "library");
     subst("cublasHgemmStridedBatched", "rocblas_hgemm_strided_batched", "library");
@@ -1575,6 +1577,8 @@ sub rocSubstitutions {
     subst("cublasStrsm_v2", "rocblas_strsm", "library");
     subst("cublasStrsv", "rocblas_strsv", "library");
     subst("cublasStrsv_v2", "rocblas_strsv", "library");
+    subst("cublasTSSgemvBatched", "rocblas_tssgemv_batched", "library");
+    subst("cublasTSTgemvBatched", "rocblas_tstgemv_batched", "library");
     subst("cublasZaxpy", "rocblas_zaxpy", "library");
     subst("cublasZaxpy_v2", "rocblas_zaxpy", "library");
     subst("cublasZcopy", "rocblas_zcopy", "library");
@@ -2031,6 +2035,8 @@ sub rocSubstitutions {
     subst("cusparseZgtsvInterleavedBatch_bufferSizeExt", "rocsparse_zgtsv_interleaved_batch_buffer_size", "library");
     subst("cusparseZnnz", "rocsparse_znnz", "library");
     subst("cusparseZnnz_compress", "rocsparse_znnz_compress", "library");
+    subst("__half", "rocblas_half", "device_type");
+    subst("__nv_bfloat16", "rocblas_bfloat16", "device_type");
     subst("cublas.h", "rocblas.h", "include_cuda_main_header");
     subst("cublas_v2.h", "rocblas.h", "include_cuda_main_header_v2");
     subst("bsric02Info", "_rocsparse_mat_info", "type");
@@ -4052,6 +4058,7 @@ sub simpleSubstitutions {
     subst("__half2", "__half2", "device_type");
     subst("__half2_raw", "__half2_raw", "device_type");
     subst("__half_raw", "__half_raw", "device_type");
+    subst("__nv_bfloat16", "hip_bfloat16", "device_type");
     subst("caffe2\/core\/common_cudnn.h", "caffe2\/core\/hip\/common_miopen.h", "include");
     subst("caffe2\/operators\/spatial_batch_norm_op.h", "caffe2\/operators\/hip\/spatial_batch_norm_op_miopen.hip", "include");
     subst("channel_descriptor.h", "hip\/channel_descriptor.h", "include");
@@ -6757,7 +6764,6 @@ sub warnUnsupportedFunctions {
         "nvrtcGetLTOIRSize",
         "nvrtcGetLTOIR",
         "nv_bfloat162",
-        "nv_bfloat16",
         "memoryBarrier",
         "libraryPropertyType_t",
         "libraryPropertyType",
@@ -7969,7 +7975,6 @@ sub warnUnsupportedFunctions {
         "__nv_bfloat16_raw",
         "__nv_bfloat162_raw",
         "__nv_bfloat162",
-        "__nv_bfloat16",
         "__curand_umul",
         "__NV_SATFINITE",
         "__NV_NOSAT",
@@ -9958,11 +9963,9 @@ sub warnRocOnlyUnsupportedFunctions {
         "cublasTSTgemvStridedBatched_64",
         "cublasTSTgemvStridedBatched",
         "cublasTSTgemvBatched_64",
-        "cublasTSTgemvBatched",
         "cublasTSSgemvStridedBatched_64",
         "cublasTSSgemvStridedBatched",
         "cublasTSSgemvBatched_64",
-        "cublasTSSgemvBatched",
         "cublasSwapEx_64",
         "cublasSwapEx",
         "cublasStrttp",
@@ -10095,11 +10098,9 @@ sub warnRocOnlyUnsupportedFunctions {
         "cublasHSSgemvStridedBatched_64",
         "cublasHSSgemvStridedBatched",
         "cublasHSSgemvBatched_64",
-        "cublasHSSgemvBatched",
         "cublasHSHgemvStridedBatched_64",
         "cublasHSHgemvStridedBatched",
         "cublasHSHgemvBatched_64",
-        "cublasHSHgemvBatched",
         "cublasGetVersion_v2",
         "cublasGetVersion",
         "cublasGetVector_64",
