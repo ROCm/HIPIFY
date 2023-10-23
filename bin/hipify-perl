@@ -1467,7 +1467,9 @@ sub rocSubstitutions {
     subst("cublasGetVector", "rocblas_get_vector", "library");
     subst("cublasGetVectorAsync", "rocblas_get_vector_async", "library");
     subst("cublasHSHgemvBatched", "rocblas_hshgemv_batched", "library");
+    subst("cublasHSHgemvStridedBatched", "rocblas_hshgemv_strided_batched", "library");
     subst("cublasHSSgemvBatched", "rocblas_hssgemv_batched", "library");
+    subst("cublasHSSgemvStridedBatched", "rocblas_hssgemv_strided_batched", "library");
     subst("cublasHgemm", "rocblas_hgemm", "library");
     subst("cublasHgemmBatched", "rocblas_hgemm_batched", "library");
     subst("cublasHgemmStridedBatched", "rocblas_hgemm_strided_batched", "library");
@@ -1578,7 +1580,9 @@ sub rocSubstitutions {
     subst("cublasStrsv", "rocblas_strsv", "library");
     subst("cublasStrsv_v2", "rocblas_strsv", "library");
     subst("cublasTSSgemvBatched", "rocblas_tssgemv_batched", "library");
+    subst("cublasTSSgemvStridedBatched", "rocblas_tssgemv_strided_batched", "library");
     subst("cublasTSTgemvBatched", "rocblas_tstgemv_batched", "library");
+    subst("cublasTSTgemvStridedBatched", "rocblas_tstgemv_strided_batched", "library");
     subst("cublasZaxpy", "rocblas_zaxpy", "library");
     subst("cublasZaxpy_v2", "rocblas_zaxpy", "library");
     subst("cublasZcopy", "rocblas_zcopy", "library");
@@ -9961,10 +9965,8 @@ sub warnRocOnlyUnsupportedFunctions {
         "cublasXerbla",
         "cublasUint8gemmBias",
         "cublasTSTgemvStridedBatched_64",
-        "cublasTSTgemvStridedBatched",
         "cublasTSTgemvBatched_64",
         "cublasTSSgemvStridedBatched_64",
-        "cublasTSSgemvStridedBatched",
         "cublasTSSgemvBatched_64",
         "cublasSwapEx_64",
         "cublasSwapEx",
@@ -10096,10 +10098,8 @@ sub warnRocOnlyUnsupportedFunctions {
         "cublasHgemmStridedBatched_64",
         "cublasHgemmBatched_64",
         "cublasHSSgemvStridedBatched_64",
-        "cublasHSSgemvStridedBatched",
         "cublasHSSgemvBatched_64",
         "cublasHSHgemvStridedBatched_64",
-        "cublasHSHgemvStridedBatched",
         "cublasHSHgemvBatched_64",
         "cublasGetVersion_v2",
         "cublasGetVersion",
