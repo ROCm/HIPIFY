@@ -3597,6 +3597,8 @@ sub simpleSubstitutions {
     subst("cusparseChybmv", "hipsparseChybmv", "library");
     subst("cusparseCnnz", "hipsparseCnnz", "library");
     subst("cusparseCnnz_compress", "hipsparseCnnz_compress", "library");
+    subst("cusparseConstSpVecGet", "hipsparseConstSpVecGet", "library");
+    subst("cusparseConstSpVecGetValues", "hipsparseConstSpVecGetValues", "library");
     subst("cusparseCooAoSGet", "hipsparseCooAoSGet", "library");
     subst("cusparseCooGet", "hipsparseCooGet", "library");
     subst("cusparseCooSetPointers", "hipsparseCooSetPointers", "library");
@@ -3609,6 +3611,7 @@ sub simpleSubstitutions {
     subst("cusparseCreateBsrsm2Info", "hipsparseCreateBsrsm2Info", "library");
     subst("cusparseCreateBsrsv2Info", "hipsparseCreateBsrsv2Info", "library");
     subst("cusparseCreateColorInfo", "hipsparseCreateColorInfo", "library");
+    subst("cusparseCreateConstSpVec", "hipsparseCreateConstSpVec", "library");
     subst("cusparseCreateCoo", "hipsparseCreateCoo", "library");
     subst("cusparseCreateCooAoS", "hipsparseCreateCooAoS", "library");
     subst("cusparseCreateCsc", "hipsparseCreateCsc", "library");
@@ -3761,6 +3764,8 @@ sub simpleSubstitutions {
     subst("cusparseDroti", "hipsparseDroti", "library");
     subst("cusparseDsctr", "hipsparseDsctr", "library");
     subst("cusparseGather", "hipsparseGather", "library");
+    subst("cusparseGetErrorName", "hipsparseGetErrorName", "library");
+    subst("cusparseGetErrorString", "hipsparseGetErrorString", "library");
     subst("cusparseGetMatDiagType", "hipsparseGetMatDiagType", "library");
     subst("cusparseGetMatFillMode", "hipsparseGetMatFillMode", "library");
     subst("cusparseGetMatIndexBase", "hipsparseGetMatIndexBase", "library");
@@ -4543,6 +4548,7 @@ sub simpleSubstitutions {
     subst("curandStatus_t", "hiprandStatus_t", "type");
     subst("cusparseAction_t", "hipsparseAction_t", "type");
     subst("cusparseColorInfo_t", "hipsparseColorInfo_t", "type");
+    subst("cusparseConstSpVecDescr_t", "hipsparseConstSpVecDescr_t", "type");
     subst("cusparseCsr2CscAlg_t", "hipsparseCsr2CscAlg_t", "type");
     subst("cusparseDenseToSparseAlg_t", "hipsparseDenseToSparseAlg_t", "type");
     subst("cusparseDiagType_t", "hipsparseDiagType_t", "type");
@@ -6893,7 +6899,6 @@ sub warnUnsupportedFunctions {
         "cusparseCscGet",
         "cusparseCreateSolveAnalysisInfo",
         "cusparseCreateSlicedEll",
-        "cusparseCreateConstSpVec",
         "cusparseCreateConstSlicedEll",
         "cusparseCreateConstDnVec",
         "cusparseCreateConstDnMat",
@@ -6906,9 +6911,6 @@ sub warnUnsupportedFunctions {
         "cusparseContext",
         "cusparseConstrainedGeMM_bufferSize",
         "cusparseConstrainedGeMM",
-        "cusparseConstSpVecGetValues",
-        "cusparseConstSpVecGet",
-        "cusparseConstSpVecDescr_t",
         "cusparseConstSpMatGetValues",
         "cusparseConstSpMatDescr_t",
         "cusparseConstDnVecGetValues",

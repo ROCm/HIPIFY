@@ -90,7 +90,7 @@ int main() {
   cusparsePointerMode_t POINTER_MODE_HOST = CUSPARSE_POINTER_MODE_HOST;
   cusparsePointerMode_t POINTER_MODE_DEVICE = CUSPARSE_POINTER_MODE_DEVICE;
 
-  // CHECK: hipsparseStatus_t status_t;
+  // CHECK: hipsparseStatus_t status_t, status_2;
   // CHECK-NEXT: hipsparseStatus_t STATUS_SUCCESS = HIPSPARSE_STATUS_SUCCESS;
   // CHECK-NEXT: hipsparseStatus_t STATUS_NOT_INITIALIZED = HIPSPARSE_STATUS_NOT_INITIALIZED;
   // CHECK-NEXT: hipsparseStatus_t STATUS_ALLOC_FAILED = HIPSPARSE_STATUS_ALLOC_FAILED;
@@ -101,7 +101,7 @@ int main() {
   // CHECK-NEXT: hipsparseStatus_t STATUS_INTERNAL_ERROR = HIPSPARSE_STATUS_INTERNAL_ERROR;
   // CHECK-NEXT: hipsparseStatus_t STATUS_MATRIX_TYPE_NOT_SUPPORTED = HIPSPARSE_STATUS_MATRIX_TYPE_NOT_SUPPORTED;
   // CHECK-NEXT: hipsparseStatus_t STATUS_ZERO_PIVOT = HIPSPARSE_STATUS_ZERO_PIVOT;
-  cusparseStatus_t status_t;
+  cusparseStatus_t status_t, status_2;
   cusparseStatus_t STATUS_SUCCESS = CUSPARSE_STATUS_SUCCESS;
   cusparseStatus_t STATUS_NOT_INITIALIZED = CUSPARSE_STATUS_NOT_INITIALIZED;
   cusparseStatus_t STATUS_ALLOC_FAILED = CUSPARSE_STATUS_ALLOC_FAILED;
@@ -182,7 +182,9 @@ int main() {
   int64_t columnsValuesBatchStride = 0;
   int64_t ld = 0;
   void *indices = nullptr;
+  const void** const indices_const = const_cast<const void**>(&indices);
   void *values = nullptr;
+  const void** const values_const = const_cast<const void**>(&values);
   void *cooRowInd = nullptr;
   int icooRowInd = 0;
   void *cscRowInd = nullptr;
@@ -260,6 +262,7 @@ int main() {
   float fx = 0.f;
   double dboost_val = 0.f;
   float boost_val = 0.f;
+  const char* const_ch = nullptr;
   pruneInfo_t prune_info;
   csrilu02Info_t csrilu02_info;
   csric02Info_t csric02_info;
@@ -1465,20 +1468,24 @@ int main() {
   // CHECK: status_t = hipsparseCreateSpVec(&spVecDescr_t, size, nnz, indices, values, indexType_t, indexBase_t, dataType);
   status_t = cusparseCreateSpVec(&spVecDescr_t, size, nnz, indices, values, indexType_t, indexBase_t, dataType);
 
-  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDestroySpVec(cusparseConstSpVecDescr_t spVecDescr);
+#if CUDA_VERSION < 12000
+  // TODO: Mark as C-Changed in 12.0.0
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDestroySpVec(cusparseSpVecDescr_t spVecDescr);
   // HIP: hipsparseStatus_t hipsparseDestroySpVec(hipsparseSpVecDescr_t spVecDescr);
   // CHECK: status_t = hipsparseDestroySpVec(spVecDescr_t);
   status_t = cusparseDestroySpVec(spVecDescr_t);
+
+  // TODO: Mark as C-Changed in 12.0.0
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpVecGetIndexBase(cusparseSpVecDescr_t spVecDescr, cusparseIndexBase_t* idxBase);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpVecGetIndexBase(const hipsparseSpVecDescr_t spVecDescr, hipsparseIndexBase_t* idxBase);
+  // CHECK: status_t = hipsparseSpVecGetIndexBase(spVecDescr_t, &indexBase_t);
+  status_t = cusparseSpVecGetIndexBase(spVecDescr_t, &indexBase_t);
+#endif
 
   // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpVecGet(cusparseSpVecDescr_t spVecDescr, int64_t* size, int64_t* nnz, void** indices, void** values, cusparseIndexType_t* idxType, cusparseIndexBase_t* idxBase, cudaDataType* valueType);
   // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpVecGet(const hipsparseSpVecDescr_t spVecDescr, int64_t* size, int64_t* nnz, void** indices, void** values, hipsparseIndexType_t* idxType, hipsparseIndexBase_t* idxBase, hipDataType* valueType);
   // CHECK: status_t = hipsparseSpVecGet(spVecDescr_t, &size, &nnz, &indices, &values, &indexType_t, &indexBase_t, &dataType);
   status_t = cusparseSpVecGet(spVecDescr_t, &size, &nnz, &indices, &values, &indexType_t, &indexBase_t, &dataType);
-
-  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpVecGetIndexBase(cusparseConstSpVecDescr_t spVecDescr, cusparseIndexBase_t* idxBase);
-  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpVecGetIndexBase(const hipsparseSpVecDescr_t spVecDescr, hipsparseIndexBase_t* idxBase);
-  // CHECK: status_t = hipsparseSpVecGetIndexBase(spVecDescr_t, &indexBase_t);
-  status_t = cusparseSpVecGetIndexBase(spVecDescr_t, &indexBase_t);
 
   // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpVecGetValues(cusparseSpVecDescr_t spVecDescr, void** values);
   // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpVecGetValues(const hipsparseSpVecDescr_t spVecDescr, void** values);
@@ -1559,6 +1566,18 @@ int main() {
 #if CUDA_VERSION >= 10020
   // CHECK: hipsparseStatus_t STATUS_NOT_SUPPORTED = HIPSPARSE_STATUS_NOT_SUPPORTED;
   cusparseStatus_t STATUS_NOT_SUPPORTED = CUSPARSE_STATUS_NOT_SUPPORTED;
+#endif
+
+#if CUDA_VERSION >= 10020 && CUSPARSE_VERSION >= 10301
+  // CUDA: const char* CUSPARSEAPI cusparseGetErrorName(cusparseStatus_t status);
+  // HIP: HIPSPARSE_EXPORT const char* hipsparseGetErrorName(hipsparseStatus_t status);
+  // CHECK: const_ch = hipsparseGetErrorName(status_2);
+  const_ch = cusparseGetErrorName(status_2);
+
+  // CUDA: const char* CUSPARSEAPI cusparseGetErrorString(cusparseStatus_t status);
+  // HIP: HIPSPARSE_EXPORT const char* hipsparseGetErrorString(hipsparseStatus_t status);
+  // CHECK: const_ch = hipsparseGetErrorString(status_2);
+  const_ch = cusparseGetErrorString(status_2);
 #endif
 
 #if (CUDA_VERSION >= 10020 && CUDA_VERSION < 11000 && !defined(_WIN32)) || (CUDA_VERSION >= 11000 && CUDA_VERSION < 12000)
@@ -2000,6 +2019,34 @@ int main() {
   cusparseSpGEMMAlg_t SPGEMM_ALG1 = CUSPARSE_SPGEMM_ALG1;
   cusparseSpGEMMAlg_t SPGEMM_ALG2 = CUSPARSE_SPGEMM_ALG2;
   cusparseSpGEMMAlg_t SPGEMM_ALG3 = CUSPARSE_SPGEMM_ALG3;
+
+  // CHECK: hipsparseConstSpVecDescr_t constSpVecDescr = nullptr;
+  cusparseConstSpVecDescr_t constSpVecDescr = nullptr;
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCreateConstSpVec(cusparseConstSpVecDescr_t* spVecDescr, int64_t size, int64_t nnz, const void* indices, const void* values, cusparseIndexType_t idxType, cusparseIndexBase_t idxBase, cudaDataType valueType);
+  // HIP: hipsparseStatus_t hipsparseCreateConstSpVec(hipsparseConstSpVecDescr_t* spVecDescr, int64_t size, int64_t nnz, const void* indices, const void* values, hipsparseIndexType_t idxType, hipsparseIndexBase_t idxBase, hipDataType valueType);
+  // CHECK: status_t = hipsparseCreateConstSpVec(&constSpVecDescr, size, nnz, indices, values, indexType_t, indexBase_t, dataType);
+  status_t = cusparseCreateConstSpVec(&constSpVecDescr, size, nnz, indices, values, indexType_t, indexBase_t, dataType);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDestroySpVec(cusparseConstSpVecDescr_t spVecDescr);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDestroySpVec(hipsparseConstSpVecDescr_t spVecDescr);
+  // CHECK: status_t = hipsparseDestroySpVec(constSpVecDescr);
+  status_t = cusparseDestroySpVec(constSpVecDescr);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseConstSpVecGet(cusparseConstSpVecDescr_t spVecDescr, int64_t* size, int64_t* nnz, const void** indices, const void** values, cusparseIndexType_t* idxType, cusparseIndexBase_t* idxBase, cudaDataType* valueType);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseConstSpVecGet(hipsparseConstSpVecDescr_t spVecDescr, int64_t* size, int64_t* nnz, const void** indices, const void** values, hipsparseIndexType_t* idxType, hipsparseIndexBase_t* idxBase, hipDataType* valueType);
+  // CHECK: status_t = hipsparseConstSpVecGet(constSpVecDescr, &size, &nnz, indices_const, values_const, &indexType_t, &indexBase_t, &dataType);
+  status_t = cusparseConstSpVecGet(constSpVecDescr, &size, &nnz, indices_const, values_const, &indexType_t, &indexBase_t, &dataType);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpVecGetIndexBase(cusparseSpVecDescr_t spVecDescr, cusparseIndexBase_t* idxBase);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpVecGetIndexBase(const hipsparseConstSpVecDescr_t spVecDescr, hipsparseIndexBase_t* idxBase);
+  // CHECK: status_t = hipsparseSpVecGetIndexBase(constSpVecDescr, &indexBase_t);
+  status_t = cusparseSpVecGetIndexBase(constSpVecDescr, &indexBase_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseConstSpVecGetValues(cusparseConstSpVecDescr_t spVecDescr, const void** values);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseConstSpVecGetValues(hipsparseConstSpVecDescr_t spVecDescr, const void** values);
+  // CHECK: status_t = hipsparseConstSpVecGetValues(constSpVecDescr, values_const);
+  status_t = cusparseConstSpVecGetValues(constSpVecDescr, values_const);
 #endif
 
   return 0;
