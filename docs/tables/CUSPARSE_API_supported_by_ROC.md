@@ -197,6 +197,8 @@
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
 |`cusparseCreate`| | | |`rocsparse_create_handle`|1.9.0| | | | |
 |`cusparseDestroy`| | | |`rocsparse_destroy_handle`|1.9.0| | | | |
+|`cusparseGetErrorName`|10.2| | | | | | | | |
+|`cusparseGetErrorString`|10.2| | | | | | | | |
 |`cusparseGetPointerMode`| | | |`rocsparse_get_pointer_mode`|1.9.0| | | | |
 |`cusparseGetStream`| | | |`rocsparse_get_stream`|1.9.0| | | | |
 |`cusparseGetVersion`| | | |`rocsparse_get_version`|1.9.0| | | | |

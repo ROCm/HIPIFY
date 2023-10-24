@@ -136,7 +136,7 @@
 |`cusparseConstDnMatDescr_t`|12.0| | | | | | | | | | | | | | |
 |`cusparseConstDnVecDescr_t`|12.0| | | | | | | | | | | | | | |
 |`cusparseConstSpMatDescr_t`|12.0| | | | | | | | | | | | | | |
-|`cusparseConstSpVecDescr_t`|12.0| | | | | | | | | | | | | | |
+|`cusparseConstSpVecDescr_t`|12.0| | |`hipsparseConstSpVecDescr_t`|6.0.0| | | |6.0.0| | | | | | |
 |`cusparseContext`| | | | | | | | | |`_rocsparse_handle`|1.9.0| | | | |
 |`cusparseCsr2CscAlg_t`|10.1| | |`hipsparseCsr2CscAlg_t`|5.4.0| | | | | | | | | | |
 |`cusparseDenseToSparseAlg_t`|11.1| | |`hipsparseDenseToSparseAlg_t`|4.2.0| | | | |`rocsparse_dense_to_sparse_alg`|4.1.0| | | | |
@@ -197,6 +197,8 @@
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
 |`cusparseCreate`| | | |`hipsparseCreate`|1.9.2| | | | |`rocsparse_create_handle`|1.9.0| | | | |
 |`cusparseDestroy`| | | |`hipsparseDestroy`|1.9.2| | | | |`rocsparse_destroy_handle`|1.9.0| | | | |
+|`cusparseGetErrorName`|10.2| | |`hipsparseGetErrorName`|6.0.0| | | |6.0.0| | | | | | |
+|`cusparseGetErrorString`|10.2| | |`hipsparseGetErrorString`|6.0.0| | | |6.0.0| | | | | | |
 |`cusparseGetPointerMode`| | | |`hipsparseGetPointerMode`|1.9.2| | | | |`rocsparse_get_pointer_mode`|1.9.0| | | | |
 |`cusparseGetStream`| | | |`hipsparseGetStream`|1.9.2| | | | |`rocsparse_get_stream`|1.9.0| | | | |
 |`cusparseGetVersion`| | | |`hipsparseGetVersion`|1.9.2| | | | |`rocsparse_get_version`|1.9.0| | | | |
@@ -808,8 +810,8 @@
 |`cusparseConstDnVecGet`|12.0| | | | | | | | | | | | | | |
 |`cusparseConstDnVecGetValues`|12.0| | | | | | | | | | | | | | |
 |`cusparseConstSpMatGetValues`|12.0| | | | | | | | | | | | | | |
-|`cusparseConstSpVecGet`|12.0| | | | | | | | | | | | | | |
-|`cusparseConstSpVecGetValues`|12.0| | | | | | | | | | | | | | |
+|`cusparseConstSpVecGet`|12.0| | |`hipsparseConstSpVecGet`|6.0.0| | | |6.0.0| | | | | | |
+|`cusparseConstSpVecGetValues`|12.0| | |`hipsparseConstSpVecGetValues`|6.0.0| | | |6.0.0| | | | | | |
 |`cusparseConstrainedGeMM`|10.2|11.2|12.0| | | | | | | | | | | | |
 |`cusparseConstrainedGeMM_bufferSize`|10.2|11.2|12.0| | | | | | | | | | | | |
 |`cusparseCooAoSGet`|10.2|11.2|12.0|`hipsparseCooAoSGet`|4.1.0| | | | |`rocsparse_coo_aos_get`|4.1.0| | | | |
@@ -826,7 +828,7 @@
 |`cusparseCreateConstDnMat`|12.0| | | | | | | | | | | | | | |
 |`cusparseCreateConstDnVec`|12.0| | | | | | | | | | | | | | |
 |`cusparseCreateConstSlicedEll`|12.1| | | | | | | | | | | | | | |
-|`cusparseCreateConstSpVec`|12.0| | | | | | | | | | | | | | |
+|`cusparseCreateConstSpVec`|12.0| | |`hipsparseCreateConstSpVec`|6.0.0| | | |6.0.0| | | | | | |
 |`cusparseCreateCoo`|10.1| | |`hipsparseCreateCoo`|4.1.0| | | | |`rocsparse_create_coo_descr`|4.1.0| | | | |
 |`cusparseCreateCooAoS`|10.2|11.2|12.0|`hipsparseCreateCooAoS`|4.1.0| | | | |`rocsparse_create_coo_aos_descr`|4.1.0| | | | |
 |`cusparseCreateCsc`|11.1| | |`hipsparseCreateCsc`|4.2.0| | | | |`rocsparse_create_csc_descr`|4.1.0| | | | |

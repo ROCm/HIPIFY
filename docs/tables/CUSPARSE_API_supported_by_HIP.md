@@ -136,7 +136,7 @@
 |`cusparseConstDnMatDescr_t`|12.0| | | | | | | | |
 |`cusparseConstDnVecDescr_t`|12.0| | | | | | | | |
 |`cusparseConstSpMatDescr_t`|12.0| | | | | | | | |
-|`cusparseConstSpVecDescr_t`|12.0| | | | | | | | |
+|`cusparseConstSpVecDescr_t`|12.0| | |`hipsparseConstSpVecDescr_t`|6.0.0| | | |6.0.0|
 |`cusparseContext`| | | | | | | | | |
 |`cusparseCsr2CscAlg_t`|10.1| | |`hipsparseCsr2CscAlg_t`|5.4.0| | | | |
 |`cusparseDenseToSparseAlg_t`|11.1| | |`hipsparseDenseToSparseAlg_t`|4.2.0| | | | |
@@ -197,6 +197,8 @@
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|
 |`cusparseCreate`| | | |`hipsparseCreate`|1.9.2| | | | |
 |`cusparseDestroy`| | | |`hipsparseDestroy`|1.9.2| | | | |
+|`cusparseGetErrorName`|10.2| | |`hipsparseGetErrorName`|6.0.0| | | |6.0.0|
+|`cusparseGetErrorString`|10.2| | |`hipsparseGetErrorString`|6.0.0| | | |6.0.0|
 |`cusparseGetPointerMode`| | | |`hipsparseGetPointerMode`|1.9.2| | | | |
 |`cusparseGetStream`| | | |`hipsparseGetStream`|1.9.2| | | | |
 |`cusparseGetVersion`| | | |`hipsparseGetVersion`|1.9.2| | | | |
@@ -808,8 +810,8 @@
 |`cusparseConstDnVecGet`|12.0| | | | | | | | |
 |`cusparseConstDnVecGetValues`|12.0| | | | | | | | |
 |`cusparseConstSpMatGetValues`|12.0| | | | | | | | |
-|`cusparseConstSpVecGet`|12.0| | | | | | | | |
-|`cusparseConstSpVecGetValues`|12.0| | | | | | | | |
+|`cusparseConstSpVecGet`|12.0| | |`hipsparseConstSpVecGet`|6.0.0| | | |6.0.0|
+|`cusparseConstSpVecGetValues`|12.0| | |`hipsparseConstSpVecGetValues`|6.0.0| | | |6.0.0|
 |`cusparseConstrainedGeMM`|10.2|11.2|12.0| | | | | | |
 |`cusparseConstrainedGeMM_bufferSize`|10.2|11.2|12.0| | | | | | |
 |`cusparseCooAoSGet`|10.2|11.2|12.0|`hipsparseCooAoSGet`|4.1.0| | | | |
@@ -826,7 +828,7 @@
 |`cusparseCreateConstDnMat`|12.0| | | | | | | | |
 |`cusparseCreateConstDnVec`|12.0| | | | | | | | |
 |`cusparseCreateConstSlicedEll`|12.1| | | | | | | | |
-|`cusparseCreateConstSpVec`|12.0| | | | | | | | |
+|`cusparseCreateConstSpVec`|12.0| | |`hipsparseCreateConstSpVec`|6.0.0| | | |6.0.0|
 |`cusparseCreateCoo`|10.1| | |`hipsparseCreateCoo`|4.1.0| | | | |
 |`cusparseCreateCooAoS`|10.2|11.2|12.0|`hipsparseCreateCooAoS`|4.1.0| | | | |
 |`cusparseCreateCsc`|11.1| | |`hipsparseCreateCsc`|4.2.0| | | | |

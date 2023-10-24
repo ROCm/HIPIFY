@@ -32,6 +32,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   {"cusparseSetPointerMode",                            {"hipsparseSetPointerMode",                            "rocsparse_set_pointer_mode",                                       CONV_LIB_FUNC, API_SPARSE, 5}},
   {"cusparseSetStream",                                 {"hipsparseSetStream",                                 "rocsparse_set_stream",                                             CONV_LIB_FUNC, API_SPARSE, 5}},
   {"cusparseGetStream",                                 {"hipsparseGetStream",                                 "rocsparse_get_stream",                                             CONV_LIB_FUNC, API_SPARSE, 5}},
+  {"cusparseGetErrorName",                              {"hipsparseGetErrorName",                              "",                                                                 CONV_LIB_FUNC, API_SPARSE, 5, ROC_UNSUPPORTED}},
+  {"cusparseGetErrorString",                            {"hipsparseGetErrorString",                            "",                                                                 CONV_LIB_FUNC, API_SPARSE, 5, ROC_UNSUPPORTED}},
 
   // 6. cuSPARSE Logging
   {"cusparseLoggerSetCallback",                         {"hipsparseLoggerSetCallback",                         "",                                                                 CONV_LIB_FUNC, API_SPARSE, 6, UNSUPPORTED}},
@@ -771,13 +773,13 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   {"cusparseCreateConstSlicedEll",                      {"hipsparseCreateConstSlicedEll",                      "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
   // Sparse Vector descriptor
   {"cusparseCreateSpVec",                               {"hipsparseCreateSpVec",                               "rocsparse_create_spvec_descr",                                     CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseCreateConstSpVec",                          {"hipsparseCreateConstSpVec",                          "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
+  {"cusparseCreateConstSpVec",                          {"hipsparseCreateConstSpVec",                          "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
   {"cusparseDestroySpVec",                              {"hipsparseDestroySpVec",                              "rocsparse_destroy_spvec_descr",                                    CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseSpVecGet",                                  {"hipsparseSpVecGet",                                  "rocsparse_spvec_get",                                              CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseConstSpVecGet",                             {"hipsparseConstSpVecGet",                             "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
+  {"cusparseConstSpVecGet",                             {"hipsparseConstSpVecGet",                             "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
   {"cusparseSpVecGetIndexBase",                         {"hipsparseSpVecGetIndexBase",                         "rocsparse_spvec_get_index_base",                                   CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseSpVecGetValues",                            {"hipsparseSpVecGetValues",                            "rocsparse_spvec_get_values",                                       CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseConstSpVecGetValues",                       {"hipsparseConstSpVecGetValues",                       "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
+  {"cusparseConstSpVecGetValues",                       {"hipsparseConstSpVecGetValues",                       "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
   {"cusparseSpVecSetValues",                            {"hipsparseSpVecSetValues",                            "rocsparse_spvec_set_values",                                       CONV_LIB_FUNC, API_SPARSE, 15}},
 
   // Generic Dense API helper functions
@@ -1445,6 +1447,8 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SPARSE_FUNCTION_VER_MAP {
   {"cusparseCcsr2csru",                                 {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
   {"cusparseZcsr2csru",                                 {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
   {"cusparseXbsric02_zeroPivot",                        {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
+  {"cusparseGetErrorName",                              {CUDA_102, CUDA_0,   CUDA_0  }}, // CUSPARSE_VERSION 10301
+  {"cusparseGetErrorString",                            {CUDA_102, CUDA_0,   CUDA_0  }}, // CUSPARSE_VERSION 10301
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_FUNCTION_VER_MAP {
@@ -1959,6 +1963,11 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_FUNCTION_VER_MAP {
   {"hipsparseCsr2cscEx2_bufferSize",                     {HIP_5040, HIP_0,    HIP_0   }},
   {"hipsparseCsr2cscEx2",                                {HIP_5040, HIP_0,    HIP_0   }},
   {"hipsparseCopyMatDescr",                              {HIP_1092, HIP_0,    HIP_0   }},
+  {"hipsparseGetErrorName",                              {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsparseGetErrorString",                            {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsparseCreateConstSpVec",                          {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsparseConstSpVecGet",                             {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsparseConstSpVecGetValues",                       {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
   {"rocsparse_create_handle",                            {HIP_1090, HIP_0,    HIP_0   }},
   {"rocsparse_destroy_handle",                           {HIP_1090, HIP_0,    HIP_0   }},
   {"rocsparse_set_stream",                               {HIP_1090, HIP_0,    HIP_0   }},
