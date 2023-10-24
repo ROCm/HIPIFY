@@ -3597,6 +3597,8 @@ sub simpleSubstitutions {
     subst("cusparseChybmv", "hipsparseChybmv", "library");
     subst("cusparseCnnz", "hipsparseCnnz", "library");
     subst("cusparseCnnz_compress", "hipsparseCnnz_compress", "library");
+    subst("cusparseConstCooGet", "hipsparseConstCooGet", "library");
+    subst("cusparseConstCsrGet", "hipsparseConstCsrGet", "library");
     subst("cusparseConstSpVecGet", "hipsparseConstSpVecGet", "library");
     subst("cusparseConstSpVecGetValues", "hipsparseConstSpVecGetValues", "library");
     subst("cusparseCooAoSGet", "hipsparseCooAoSGet", "library");
@@ -3611,6 +3613,10 @@ sub simpleSubstitutions {
     subst("cusparseCreateBsrsm2Info", "hipsparseCreateBsrsm2Info", "library");
     subst("cusparseCreateBsrsv2Info", "hipsparseCreateBsrsv2Info", "library");
     subst("cusparseCreateColorInfo", "hipsparseCreateColorInfo", "library");
+    subst("cusparseCreateConstBlockedEll", "hipsparseCreateConstBlockedEll", "library");
+    subst("cusparseCreateConstCoo", "hipsparseCreateConstCoo", "library");
+    subst("cusparseCreateConstCsc", "hipsparseCreateConstCsc", "library");
+    subst("cusparseCreateConstCsr", "hipsparseCreateConstCsr", "library");
     subst("cusparseCreateConstSpVec", "hipsparseCreateConstSpVec", "library");
     subst("cusparseCreateCoo", "hipsparseCreateCoo", "library");
     subst("cusparseCreateCooAoS", "hipsparseCreateCooAoS", "library");
@@ -4548,6 +4554,7 @@ sub simpleSubstitutions {
     subst("curandStatus_t", "hiprandStatus_t", "type");
     subst("cusparseAction_t", "hipsparseAction_t", "type");
     subst("cusparseColorInfo_t", "hipsparseColorInfo_t", "type");
+    subst("cusparseConstSpMatDescr_t", "hipsparseConstSpMatDescr_t", "type");
     subst("cusparseConstSpVecDescr_t", "hipsparseConstSpVecDescr_t", "type");
     subst("cusparseCsr2CscAlg_t", "hipsparseCsr2CscAlg_t", "type");
     subst("cusparseDenseToSparseAlg_t", "hipsparseDenseToSparseAlg_t", "type");
@@ -6902,26 +6909,19 @@ sub warnUnsupportedFunctions {
         "cusparseCreateConstSlicedEll",
         "cusparseCreateConstDnVec",
         "cusparseCreateConstDnMat",
-        "cusparseCreateConstCsr",
-        "cusparseCreateConstCsc",
-        "cusparseCreateConstCoo",
         "cusparseCreateConstBsr",
-        "cusparseCreateConstBlockedEll",
         "cusparseCreateBsr",
         "cusparseContext",
         "cusparseConstrainedGeMM_bufferSize",
         "cusparseConstrainedGeMM",
         "cusparseConstSpMatGetValues",
-        "cusparseConstSpMatDescr_t",
         "cusparseConstDnVecGetValues",
         "cusparseConstDnVecGet",
         "cusparseConstDnVecDescr_t",
         "cusparseConstDnMatGetValues",
         "cusparseConstDnMatGet",
         "cusparseConstDnMatDescr_t",
-        "cusparseConstCsrGet",
         "cusparseConstCscGet",
-        "cusparseConstCooGet",
         "cusparseConstBlockedEllGet",
         "cusparseColorInfo",
         "cusparseColorAlg_t",

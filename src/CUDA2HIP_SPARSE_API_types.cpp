@@ -268,7 +268,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_TYPE_NAME_MAP {
   {"cusparseLoggerCallback_t",                  {"hipsparseLoggerCallback_t",                  "",                                                   CONV_TYPE, API_SPARSE, 4, UNSUPPORTED}},
   {"cusparseConstSpVecDescr_t",                 {"hipsparseConstSpVecDescr_t",                 "",                                                   CONV_TYPE, API_SPARSE, 4, ROC_UNSUPPORTED}},
   {"cusparseConstDnVecDescr_t",                 {"hipsparseConstDnVecDescr_t",                 "",                                                   CONV_TYPE, API_SPARSE, 4, UNSUPPORTED}},
-  {"cusparseConstSpMatDescr_t",                 {"hipsparseConstSpMatDescr_t",                 "",                                                   CONV_TYPE, API_SPARSE, 4, UNSUPPORTED}},
+  {"cusparseConstSpMatDescr_t",                 {"hipsparseConstSpMatDescr_t",                 "",                                                   CONV_TYPE, API_SPARSE, 4, ROC_UNSUPPORTED}},
   {"cusparseConstDnMatDescr_t",                 {"hipsparseConstDnMatDescr_t",                 "",                                                   CONV_TYPE, API_SPARSE, 4, UNSUPPORTED}},
 };
 
@@ -563,6 +563,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_TYPE_NAME_VER_MAP {
   {"HIPSPARSE_SPGEMM_ALG2",                      {HIP_5060, HIP_0,    HIP_0   }},
   {"HIPSPARSE_SPGEMM_ALG3",                      {HIP_5060, HIP_0,    HIP_0   }},
   {"hipsparseConstSpVecDescr_t",                 {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsparseConstSpMatDescr_t",                 {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
   {"csric02Info_t",                              {HIP_3010, HIP_0,    HIP_0   }},
   {"csric02Info",                                {HIP_3010, HIP_0,    HIP_0   }},
   {"_rocsparse_handle",                          {HIP_1090, HIP_0,    HIP_0   }},
