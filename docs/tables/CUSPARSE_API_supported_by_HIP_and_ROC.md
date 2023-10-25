@@ -133,7 +133,7 @@
 |`cusparseColorAlg_t`|8.0|12.2| | | | | | | | | | | | | |
 |`cusparseColorInfo`| |12.2| | | | | | | |`_rocsparse_color_info`|4.5.0| | | | |
 |`cusparseColorInfo_t`| |12.2| |`hipsparseColorInfo_t`|4.5.0| | | | |`rocsparse_color_info`|4.5.0| | | | |
-|`cusparseConstDnMatDescr_t`|12.0| | | | | | | | | | | | | | |
+|`cusparseConstDnMatDescr_t`|12.0| | |`hipsparseConstDnMatDescr_t`|6.0.0| | | |6.0.0| | | | | | |
 |`cusparseConstDnVecDescr_t`|12.0| | |`hipsparseConstDnVecDescr_t`|6.0.0| | | |6.0.0| | | | | | |
 |`cusparseConstSpMatDescr_t`|12.0| | |`hipsparseConstSpMatDescr_t`|6.0.0| | | |6.0.0| | | | | | |
 |`cusparseConstSpVecDescr_t`|12.0| | |`hipsparseConstSpVecDescr_t`|6.0.0| | | |6.0.0| | | | | | |
@@ -805,10 +805,10 @@
 |`cusparseConstCooGet`|12.0| | |`hipsparseConstCooGet`|6.0.0| | | |6.0.0| | | | | | |
 |`cusparseConstCscGet`|12.0| | | | | | | | | | | | | | |
 |`cusparseConstCsrGet`|12.0| | |`hipsparseConstCsrGet`|6.0.0| | | |6.0.0| | | | | | |
-|`cusparseConstDnMatGet`|12.0| | | | | | | | | | | | | | |
-|`cusparseConstDnMatGetValues`|12.0| | | | | | | | | | | | | | |
-|`cusparseConstDnVecGet`|12.0| | | | | | | | | | | | | | |
-|`cusparseConstDnVecGetValues`|12.0| | | | | | | | | | | | | | |
+|`cusparseConstDnMatGet`|12.0| | |`hipsparseConstDnMatGet`|6.0.0| | | |6.0.0| | | | | | |
+|`cusparseConstDnMatGetValues`|12.0| | |`hipsparseConstDnMatGetValues`|6.0.0| | | |6.0.0| | | | | | |
+|`cusparseConstDnVecGet`|12.0| | |`hipsparseConstDnVecGet`|6.0.0| | | |6.0.0| | | | | | |
+|`cusparseConstDnVecGetValues`|12.0| | |`hipsparseConstDnVecGetValues`|6.0.0| | | |6.0.0| | | | | | |
 |`cusparseConstSpMatGetValues`|12.0| | |`hipsparseConstSpMatGetValues`|6.0.0| | | |6.0.0| | | | | | |
 |`cusparseConstSpVecGet`|12.0| | |`hipsparseConstSpVecGet`|6.0.0| | | |6.0.0| | | | | | |
 |`cusparseConstSpVecGetValues`|12.0| | |`hipsparseConstSpVecGetValues`|6.0.0| | | |6.0.0| | | | | | |
@@ -825,7 +825,7 @@
 |`cusparseCreateConstCoo`|12.0| | |`hipsparseCreateConstCoo`|6.0.0| | | |6.0.0| | | | | | |
 |`cusparseCreateConstCsc`|12.0| | |`hipsparseCreateConstCsc`|6.0.0| | | |6.0.0| | | | | | |
 |`cusparseCreateConstCsr`|12.0| | |`hipsparseCreateConstCsr`|6.0.0| | | |6.0.0| | | | | | |
-|`cusparseCreateConstDnMat`|12.0| | | | | | | | | | | | | | |
+|`cusparseCreateConstDnMat`|12.0| | |`hipsparseCreateConstDnMat`|6.0.0| | | |6.0.0| | | | | | |
 |`cusparseCreateConstDnVec`|12.0| | |`hipsparseCreateConstDnVec`|6.0.0| | | |6.0.0| | | | | | |
 |`cusparseCreateConstSlicedEll`|12.1| | | | | | | | | | | | | | |
 |`cusparseCreateConstSpVec`|12.0| | |`hipsparseCreateConstSpVec`|6.0.0| | | |6.0.0| | | | | | |
