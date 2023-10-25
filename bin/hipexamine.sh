@@ -5,7 +5,7 @@
 # Generate CUDA->HIP conversion statistics for all the code files in the specified directory.
 
 SCRIPT_DIR="$(dirname "$(realpath "$0")")"
-PRIV_SCRIPT_DIR="$SCRIPT_DIR/../libexec/hipify"
+PRIV_SCRIPT_DIR="$SCRIPT_DIR/../../libexec/hipify"
 SEARCH_DIR=$1
 
 hipify_args=''
