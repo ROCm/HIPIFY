@@ -134,7 +134,7 @@
 |`cusparseColorInfo`| |12.2| | | | | | | |
 |`cusparseColorInfo_t`| |12.2| |`hipsparseColorInfo_t`|4.5.0| | | | |
 |`cusparseConstDnMatDescr_t`|12.0| | | | | | | | |
-|`cusparseConstDnVecDescr_t`|12.0| | | | | | | | |
+|`cusparseConstDnVecDescr_t`|12.0| | |`hipsparseConstDnVecDescr_t`|6.0.0| | | |6.0.0|
 |`cusparseConstSpMatDescr_t`|12.0| | |`hipsparseConstSpMatDescr_t`|6.0.0| | | |6.0.0|
 |`cusparseConstSpVecDescr_t`|12.0| | |`hipsparseConstSpVecDescr_t`|6.0.0| | | |6.0.0|
 |`cusparseContext`| | | | | | | | | |
@@ -801,7 +801,7 @@
 |`cusparseAxpby`|11.0| | |`hipsparseAxpby`|4.1.0| | | | |
 |`cusparseBlockedEllGet`|11.2| | |`hipsparseBlockedEllGet`|4.5.0| | | | |
 |`cusparseBsrSetStridedBatch`|12.1| | | | | | | | |
-|`cusparseConstBlockedEllGet`|12.0| | | | | | | | |
+|`cusparseConstBlockedEllGet`|12.0| | |`hipsparseConstBlockedEllGet`|6.0.0| | | |6.0.0|
 |`cusparseConstCooGet`|12.0| | |`hipsparseConstCooGet`|6.0.0| | | |6.0.0|
 |`cusparseConstCscGet`|12.0| | | | | | | | |
 |`cusparseConstCsrGet`|12.0| | |`hipsparseConstCsrGet`|6.0.0| | | |6.0.0|
@@ -809,7 +809,7 @@
 |`cusparseConstDnMatGetValues`|12.0| | | | | | | | |
 |`cusparseConstDnVecGet`|12.0| | | | | | | | |
 |`cusparseConstDnVecGetValues`|12.0| | | | | | | | |
-|`cusparseConstSpMatGetValues`|12.0| | | | | | | | |
+|`cusparseConstSpMatGetValues`|12.0| | |`hipsparseConstSpMatGetValues`|6.0.0| | | |6.0.0|
 |`cusparseConstSpVecGet`|12.0| | |`hipsparseConstSpVecGet`|6.0.0| | | |6.0.0|
 |`cusparseConstSpVecGetValues`|12.0| | |`hipsparseConstSpVecGetValues`|6.0.0| | | |6.0.0|
 |`cusparseConstrainedGeMM`|10.2|11.2|12.0| | | | | | |
@@ -826,7 +826,7 @@
 |`cusparseCreateConstCsc`|12.0| | |`hipsparseCreateConstCsc`|6.0.0| | | |6.0.0|
 |`cusparseCreateConstCsr`|12.0| | |`hipsparseCreateConstCsr`|6.0.0| | | |6.0.0|
 |`cusparseCreateConstDnMat`|12.0| | | | | | | | |
-|`cusparseCreateConstDnVec`|12.0| | | | | | | | |
+|`cusparseCreateConstDnVec`|12.0| | |`hipsparseCreateConstDnVec`|6.0.0| | | |6.0.0|
 |`cusparseCreateConstSlicedEll`|12.1| | | | | | | | |
 |`cusparseCreateConstSpVec`|12.0| | |`hipsparseCreateConstSpVec`|6.0.0| | | |6.0.0|
 |`cusparseCreateCoo`|10.1| | |`hipsparseCreateCoo`|4.1.0| | | | |
