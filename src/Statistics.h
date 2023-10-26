@@ -27,6 +27,7 @@ THE SOFTWARE.
 #include <fstream>
 #include <map>
 #include <set>
+#include <list>
 #include <llvm/ADT/StringRef.h>
 #include <llvm/Support/raw_ostream.h>
 
@@ -350,7 +351,8 @@ enum hipVersions {
   HIP_5050 = 5050,
   HIP_5060 = 5060,
   HIP_5070 = 5070,
-  HIP_LATEST = HIP_5070,
+  HIP_6000 = 6000,
+  HIP_LATEST = HIP_6000,
 };
 
 struct cudaAPIversions {
@@ -365,6 +367,8 @@ struct hipAPIversions {
   hipVersions removed;
   hipVersions experimental = HIP_0;
 };
+
+typedef std::list<hipVersions> hipAPIChangedVersions;
 
 // The names of various fields in in the statistics reports.
 extern const char *counterNames[NUM_CONV_TYPES];

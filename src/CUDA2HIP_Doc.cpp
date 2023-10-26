@@ -39,6 +39,7 @@ namespace doc {
   typedef functionMap typeMap;
   typedef map<StringRef, cudaAPIversions> versionMap;
   typedef map<StringRef, hipAPIversions> hipVersionMap;
+  typedef map<llvm::StringRef, hipAPIChangedVersions> hipChangedVersionMap;
 
   const string sEmpty = "";
   const string sMd = "md";
@@ -127,8 +128,10 @@ namespace doc {
   const string sHIPandMIOPEN = "HIP and MIOPEN";
   const string sA = "A";
   const string sD = "D";
+  const string sC = "C";
   const string sR = "R";
   const string sE = "E";
+  const hipChangedVersionMap mEmpty = {};
 
   enum docType {
     none = 0,
@@ -171,6 +174,7 @@ namespace doc {
       virtual const typeMap &getTypes() const = 0;
       virtual const versionMap &getFunctionVersions() const = 0;
       virtual const hipVersionMap &getHipFunctionVersions() const = 0;
+      virtual const hipChangedVersionMap &getHipChangedFunctionVersions() const { return mEmpty; };
       virtual const versionMap &getTypeVersions() const = 0;
       virtual const hipVersionMap &getHipTypeVersions() const = 0;
       virtual const string &getAPI() const { return sHIP; }
@@ -228,6 +232,7 @@ namespace doc {
             const functionMap &ftMap = isTypeSection(s.first, getSections()) ? getTypes() : getFunctions();
             const versionMap &vMap = isTypeSection(s.first, getSections()) ? getTypeVersions() : getFunctionVersions();
             const hipVersionMap &hMap = commonHipVersionMap.empty() ? (isTypeSection(s.first, getSections()) ? getHipTypeVersions() : getHipFunctionVersions()) : commonHipVersionMap;
+            const hipChangedVersionMap &hChangedMap = getHipChangedFunctionVersions();
             functionMap fMap;
             for (auto &f : ftMap) {
               if (f.second.apiSection == s.first) {
@@ -246,7 +251,7 @@ namespace doc {
             string sS = (doc == md) ? "|" : ",";
             stringstream rows;
             for (auto &f : fMap) {
-              string a, d, r, ha, hd, hr, he, ra, rd, rr, re;
+              string a, d, r, ha, hd, hc, hr, he, ra, rd, rc, rr, re, cc;
               for (auto &v : vMap) {
                 if (v.first == f.first) {
                   a = Statistics::getCudaVersion(v.second.appeared);
@@ -262,6 +267,20 @@ namespace doc {
                 hr = Statistics::getHipVersion(hv->second.removed);
                 he = Statistics::getHipVersion(hv->second.experimental);
               }
+              auto hcv = (isROC) ? hChangedMap.find(f.second.rocName) : hChangedMap.find(f.second.hipName);
+              if (hcv != hChangedMap.end() && ((!Statistics::isRocUnsupported(f.second) && isROC) || (!Statistics::isHipUnsupported(f.second) && !isROC))) {
+                int icount = 0;
+                for (auto &cv : hcv->second) {
+                  if (icount > 0)
+                    cc += ", ";
+                  cc += Statistics::getHipVersion(cv);
+                  icount++;
+                }
+                if (isROC)
+                  rc = cc;
+                else
+                  hc = cc;
+              }
               if (isJoint()) {
                 auto rv = hMap.find(f.second.rocName);
                 if (rv != hMap.end() && !Statistics::isRocUnsupported(f.second)) {
@@ -269,6 +288,16 @@ namespace doc {
                   rd = Statistics::getHipVersion(rv->second.deprecated);
                   rr = Statistics::getHipVersion(rv->second.removed);
                   re = Statistics::getHipVersion(rv->second.experimental);
+                }
+                auto hrv = hChangedMap.find(f.second.rocName);
+                if (hrv != hChangedMap.end() && !Statistics::isRocUnsupported(f.second)) {
+                  int icount = 0;
+                  for (auto &cv : hrv->second) {
+                    if (icount > 0)
+                      rc += ", ";
+                    rc += Statistics::getHipVersion(cv);
+                    icount++;
+                  }
                 }
               }
               string sHip, sRoc;
@@ -297,9 +326,9 @@ namespace doc {
                       break;
                     case full:
                     default:
-                      rows << a << sS << d << sS << r << sS << sHip << sS << ha << sS << hd << sS << hr << sS << he;
+                      rows << a << sS << d << sS << r << sS << sHip << sS << ha << sS << hd << sS << (isROC ? rc : hc) << sS << hr << sS << he;
                       if (isJoint())
-                        rows << sS << sRoc << sS << ra << sS << rd << sS << rr << sS << re;
+                        rows << sS << sRoc << sS << ra << sS << rd << sS << rc << sS << rr << sS << re;
                       rows << endl;
                       break;
                   }
@@ -317,9 +346,9 @@ namespace doc {
                     case full:
                     default:
                       rows << (a.empty() ? " " : a) << sS << (d.empty() ? " " : d) << sS << (r.empty() ? " " : r) << sS << sHip << sS <<
-                        (ha.empty() ? " " : ha) << sS << (hd.empty() ? " " : hd) << sS << (hr.empty() ? " " : hr) << sS << (he.empty() ? " " : he) << sS;
+                        (ha.empty() ? " " : ha) << sS << (hd.empty() ? " " : hd) << sS << (isROC ? (rc.empty() ? " " : rc) : (hc.empty() ? " " : hc)) << sS << (hr.empty() ? " " : hr) << sS << (he.empty() ? " " : he) << sS;
                       if (isJoint())
-                        rows << sRoc << sS << (ra.empty() ? " " : ra) << sS << (rd.empty() ? " " : rd) << sS << (rr.empty() ? " " : rr) << sS << (re.empty() ? " " : re) << sS;
+                        rows << sRoc << sS << (ra.empty() ? " " : ra) << sS << (rd.empty() ? " " : rd) << sS << (rc.empty() ? " " : rc) << sS << (rr.empty() ? " " : rr) << sS << (re.empty() ? " " : re) << sS;
                       rows << endl;
                       break;
                   }
@@ -331,15 +360,15 @@ namespace doc {
             section_header << (doc == md ? "## **" : "") << (format != compact ? s.first : compact_only_cur_sec_num) << ". " << string(s.second) << (doc == md ? "**" : "") << endl << endl;
             section << (doc == md ? "|**" : "") << sCUDA << sS << (format == full ? sA : "") << (format == full ? sS : "") <<
               sD << sS << (format == full ? sR : "") << (format == full ? sS : "") << getAPI() << sS << (format == full ? sA : "") << (format == full ? sS : "") <<
-              sD << (format == full ? sS : "") << (format == full ? sR : "") << sS << sE;
+              sD << (format == full ? sS : "") << (format == full ? sC : "") << (format == full ? sS : "") << (format == full ? sR : "") << sS << sE;
             if (isJoint())
-              section << sS << getSecondAPI() << sS << (format == full ? sA : "") << (format == full ? sS : "") << sD << (format == full ? sS : "") << (format == full ? sR : "") << sS << sE;
+              section << sS << getSecondAPI() << sS << (format == full ? sA : "") << (format == full ? sS : "") << sD << (format == full ? sS : "") << (format == full ? sC : "") << (format == full ? sS : "") << (format == full ? sR : "") << sS << sE;
             section << (doc == md ? "**|" : "") << endl;
             if (doc == md) {
-              section << "|:--|" << (format == full ? ":-:|" : "") << ":-:|" << (format == full ? ":-:|" : "") <<
+              section << "|:--|" << (format == full ? ":-:|" : "") << ":-:|" << (format == full ? ":-:|" : "") << (format == full ? ":-:|" : "") <<
                 ":--|" << (format == full ? ":-:|" : "") << ":-:|" << (format == full ? ":-:|" : "") << ":-:|";
               if (isJoint())
-                section << ":--|" << (format == full ? ":-:|" : "") << ":-:|" << (format == full ? ":-:|" : "") << ":-:|";
+                section << ":--|" << (format == full ? ":-:|" : "") << ":-:|" << (format == full ? ":-:|" : "") << (format == full ? ":-:|" : "") << ":-:|";
               section << endl;
             }
             switch (format) {
@@ -360,7 +389,7 @@ namespace doc {
               *streams[doc].get() << rows.str() << endl;
             }
           }
-          *streams[doc].get() << endl << (doc == md ? "\\" : "") << (format == full ? "*A - Added; D - Deprecated; R - Removed; E - Experimental" : "*D - Deprecated; E - Experimental");
+          *streams[doc].get() << endl << (doc == md ? "\\" : "") << (format == full ? "*A - Added; D - Deprecated; C - Changed; R - Removed; E - Experimental" : "*D - Deprecated; E - Experimental");
         }
         return true;
       }
@@ -505,11 +534,12 @@ namespace doc {
       const typeMap &getTypes() const override { return CUDA_BLAS_TYPE_NAME_MAP; }
       const versionMap &getFunctionVersions() const override { return CUDA_BLAS_FUNCTION_VER_MAP; }
       const hipVersionMap &getHipFunctionVersions() const override { return HIP_BLAS_FUNCTION_VER_MAP; }
+      const hipChangedVersionMap &getHipChangedFunctionVersions() const override { return HIP_BLAS_FUNCTION_CHANGED_VER_MAP; }
       const versionMap &getTypeVersions() const override { return CUDA_BLAS_TYPE_NAME_VER_MAP; }
       const hipVersionMap &getHipTypeVersions() const override { return HIP_BLAS_TYPE_NAME_VER_MAP; }
       const string &getName() const override { return sCUBLAS; }
-      const string &getSecondAPI() const { return sROC; }
-      const string &getJointAPI() const { return sHIPandROC; }
+      const string &getSecondAPI() const override { return sROC; }
+      const string &getJointAPI() const override { return sHIPandROC; }
       const string &getFileName(docType format) const override {
         switch (format) {
           case none:
@@ -525,7 +555,7 @@ namespace doc {
       ROCBLAS(const string &outDir): BLAS(outDir) { hasROC = false; isROC = true; }
       virtual ~ROCBLAS() {}
     protected:
-      const string &getAPI() const { return sROC; }
+      const string &getAPI() const override { return sROC; }
       const string &getFileName(docType format) const override {
         switch (format) {
           case none:
@@ -572,8 +602,8 @@ namespace doc {
       const versionMap &getTypeVersions() const override { return CUDA_DNN_TYPE_NAME_VER_MAP; }
       const hipVersionMap &getHipTypeVersions() const override { return HIP_DNN_TYPE_NAME_VER_MAP; }
       const string &getName() const override { return sCUDNN; }
-      const string &getSecondAPI() const { return sMIOPEN; }
-      const string &getJointAPI() const { return sHIPandMIOPEN; }
+      const string &getSecondAPI() const override { return sMIOPEN; }
+      const string &getJointAPI() const override { return sHIPandMIOPEN; }
       const string &getFileName(docType format) const override {
         switch (format) {
           case none:
@@ -589,7 +619,7 @@ namespace doc {
       MIOPEN(const string &outDir): DNN(outDir) { hasROC = false; isROC = true; }
       virtual ~MIOPEN() {}
     protected:
-      const string &getAPI() const { return sMIOPEN; }
+      const string &getAPI() const override { return sMIOPEN; }
       const string &getFileName(docType format) const override {
         switch (format) {
           case none:
@@ -636,8 +666,8 @@ namespace doc {
       const versionMap &getTypeVersions() const override { return CUDA_SPARSE_TYPE_NAME_VER_MAP; }
       const hipVersionMap &getHipTypeVersions() const override { return HIP_SPARSE_TYPE_NAME_VER_MAP; }
       const string &getName() const override { return sCUSPARSE; }
-      const string &getSecondAPI() const { return sROC; }
-      const string &getJointAPI() const { return sHIPandROC; }
+      const string &getSecondAPI() const override { return sROC; }
+      const string &getJointAPI() const override { return sHIPandROC; }
       const string &getFileName(docType format) const override {
         switch (format) {
           case none:
@@ -653,7 +683,7 @@ namespace doc {
     ROCSPARSE(const string &outDir) : SPARSE(outDir) { hasROC = false; isROC = true; }
     virtual ~ROCSPARSE() {}
   protected:
-    const string &getAPI() const { return sROC; }
+    const string &getAPI() const override { return sROC; }
     const string &getFileName(docType format) const override {
       switch (format) {
       case none:

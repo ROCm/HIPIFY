@@ -25,13 +25,12 @@ THE SOFTWARE.
 // Maps the names of CUDA Device/Host types to the corresponding HIP types
 const std::map<llvm::StringRef, hipCounter> CUDA_DEVICE_TYPE_NAME_MAP {
   // float16 Precision Device types
-  {"__half",                               {"__half",                                "", CONV_DEVICE_TYPE, API_RUNTIME, 2}},
+  {"__half",                               {"__half",                                "rocblas_half", CONV_DEVICE_TYPE, API_RUNTIME, 2}},
   {"__half_raw",                           {"__half_raw",                            "", CONV_DEVICE_TYPE, API_RUNTIME, 2}},
   {"__half2",                              {"__half2",                               "", CONV_DEVICE_TYPE, API_RUNTIME, 2}},
   {"__half2_raw",                          {"__half2_raw",                           "", CONV_DEVICE_TYPE, API_RUNTIME, 2}},
   // Bfloat16 Precision Device types
-  {"__nv_bfloat16",                        {"__hip_bfloat16",                        "", CONV_DEVICE_TYPE, API_RUNTIME, 2, UNSUPPORTED}},
-  {"nv_bfloat16",                          {"hip_bfloat16",                          "", CONV_DEVICE_TYPE, API_RUNTIME, 2, UNSUPPORTED}},
+  {"__nv_bfloat16",                        {"hip_bfloat16",                          "rocblas_bfloat16", CONV_DEVICE_TYPE, API_RUNTIME, 2}},
   {"__nv_bfloat16_raw",                    {"__hip_bfloat16_raw",                    "", CONV_DEVICE_TYPE, API_RUNTIME, 2, UNSUPPORTED}},
   {"__nv_bfloat162",                       {"__hip_bfloat162",                       "", CONV_DEVICE_TYPE, API_RUNTIME, 2, UNSUPPORTED}},
   {"nv_bfloat162",                         {"hip_bfloat162",                         "", CONV_DEVICE_TYPE, API_RUNTIME, 2, UNSUPPORTED}},
@@ -83,4 +82,8 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DEVICE_TYPE_NAME_VER_MAP {
   {"__half2",                              {HIP_1060, HIP_0,    HIP_0   }},
   {"__half_raw",                           {HIP_1090, HIP_0,    HIP_0   }},
   {"__half2_raw",                          {HIP_1090, HIP_0,    HIP_0   }},
+  {"hip_bfloat16",                         {HIP_3050, HIP_0,    HIP_0   }},
+
+  {"rocblas_half",                         {HIP_1050, HIP_0,    HIP_0   }},
+  {"rocblas_bfloat16",                     {HIP_3050, HIP_0,    HIP_0   }},
 };

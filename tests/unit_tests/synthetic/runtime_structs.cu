@@ -163,6 +163,12 @@ int main() {
 
   // CHECK: hipMemPoolProps MemPoolProps;
   cudaMemPoolProps MemPoolProps;
+
+  // CHECK: hipExternalSemaphoreSignalNodeParams ExternalSemaphoreSignalNodeParams;
+  cudaExternalSemaphoreSignalNodeParams ExternalSemaphoreSignalNodeParams;
+
+  // CHECK: hipExternalSemaphoreWaitNodeParams ExternalSemaphoreWaitNodeParams;
+  cudaExternalSemaphoreWaitNodeParams ExternalSemaphoreWaitNodeParams;
 #endif
 
 #if CUDA_VERSION >= 11030
@@ -181,6 +187,14 @@ int main() {
 #if CUDA_VERSION < 12000
   // CHECK: surfaceReference surfaceRef;
   surfaceReference surfaceRef;
+#endif
+
+#if CUDA_VERSION >= 12020
+  // CHECK: hipExternalSemaphoreSignalNodeParams ExternalSemaphoreSignalNodeParams_v2;
+  cudaExternalSemaphoreSignalNodeParamsV2 ExternalSemaphoreSignalNodeParams_v2;
+
+  // CHECK: hipExternalSemaphoreWaitNodeParams ExternalSemaphoreWaitNodeParams_v2;
+  cudaExternalSemaphoreWaitNodeParamsV2 ExternalSemaphoreWaitNodeParams_v2;
 #endif
 
   return 0;

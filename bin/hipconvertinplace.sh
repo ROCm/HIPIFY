@@ -7,7 +7,7 @@
 # preserves the existing directory structure.
 
 SCRIPT_DIR="$(dirname "$(realpath "$0")")"
-PRIV_SCRIPT_DIR="$SCRIPT_DIR/../libexec/hipify"
+PRIV_SCRIPT_DIR="$SCRIPT_DIR/../../libexec/hipify"
 SEARCH_DIR=$1
 
 hipify_args=''
