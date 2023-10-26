@@ -185,7 +185,7 @@ const clang::IdentifierInfo *getControllingMacro(clang::CompilerInstance &CI) {
   clang::ExternalPreprocessorSource *EPL = HS.getExternalLookup();
 #if LLVM_VERSION_MAJOR >= 18
   const clang::OptionalFileEntryRef OFE = SM.getFileEntryRefForID(SM.getMainFileID());
-  return HS.getFileInfo(*OFE.getPointer()).getControllingMacro(EPL);
+  return HS.getFileInfo(*OFE).getControllingMacro(EPL);
 #else
   const clang::FileEntry *FE = SM.getFileEntryForID(SM.getMainFileID());
   return HS.getFileInfo(FE).getControllingMacro(EPL);
