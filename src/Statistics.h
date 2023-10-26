@@ -27,6 +27,7 @@ THE SOFTWARE.
 #include <fstream>
 #include <map>
 #include <set>
+#include <list>
 #include <llvm/ADT/StringRef.h>
 #include <llvm/Support/raw_ostream.h>
 
