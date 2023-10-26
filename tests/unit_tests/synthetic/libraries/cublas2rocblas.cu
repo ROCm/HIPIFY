@@ -278,24 +278,6 @@ int main() {
   // CHECK: rocblas_half** hyarray = 0;
   __half** hyarray = 0;
 
-  // CHECK: rocblas_bfloat16* bf16A = 0;
-  __nv_bfloat16* bf16A = 0;
-  // CHECK: rocblas_bfloat16* bf16x = 0;
-  __nv_bfloat16* bf16x = 0;
-  // CHECK: rocblas_bfloat16* bf16y = 0;
-  __nv_bfloat16* bf16y = 0;
-
-  // CHECK: rocblas_bfloat16** bf16Aarray = 0;
-  __nv_bfloat16** bf16Aarray = 0;
-  // CHECK: const rocblas_bfloat16** const bf16Aarray_const = const_cast<const rocblas_bfloat16**>(bf16Aarray);
-  const __nv_bfloat16** const bf16Aarray_const = const_cast<const __nv_bfloat16**>(bf16Aarray);
-  // CHECK: rocblas_bfloat16** bf16xarray = 0;
-  __nv_bfloat16** bf16xarray = 0;
-  // CHECK: const rocblas_bfloat16** const bf16xarray_const = const_cast<const rocblas_bfloat16**>(bf16xarray_const);
-  const __nv_bfloat16** const bf16xarray_const = const_cast<const __nv_bfloat16**>(bf16xarray_const);
-  // CHECK: rocblas_bfloat16** bf16yarray = 0;
-  __nv_bfloat16** bf16yarray = 0;
-
   double da = 0;
   double dA = 0;
   double db = 0;
@@ -1792,6 +1774,24 @@ int main() {
   // CHECK-NEXT: rocblas_datatype C_16BF = rocblas_datatype_bf16_c;
   cublasDataType_t R_16BF = CUDA_R_16BF;
   cublasDataType_t C_16BF = CUDA_C_16BF;
+
+  // CHECK: rocblas_bfloat16* bf16A = 0;
+  __nv_bfloat16* bf16A = 0;
+  // CHECK: rocblas_bfloat16* bf16x = 0;
+  __nv_bfloat16* bf16x = 0;
+  // CHECK: rocblas_bfloat16* bf16y = 0;
+  __nv_bfloat16* bf16y = 0;
+
+  // CHECK: rocblas_bfloat16** bf16Aarray = 0;
+  __nv_bfloat16** bf16Aarray = 0;
+  // CHECK: const rocblas_bfloat16** const bf16Aarray_const = const_cast<const rocblas_bfloat16**>(bf16Aarray);
+  const __nv_bfloat16** const bf16Aarray_const = const_cast<const __nv_bfloat16**>(bf16Aarray);
+  // CHECK: rocblas_bfloat16** bf16xarray = 0;
+  __nv_bfloat16** bf16xarray = 0;
+  // CHECK: const rocblas_bfloat16** const bf16xarray_const = const_cast<const rocblas_bfloat16**>(bf16xarray_const);
+  const __nv_bfloat16** const bf16xarray_const = const_cast<const __nv_bfloat16**>(bf16xarray_const);
+  // CHECK: rocblas_bfloat16** bf16yarray = 0;
+  __nv_bfloat16** bf16yarray = 0;
 
   // CHECK: rocblas_computetype blasComputeType;
   // CHECK-NEXT: rocblas_computetype BLAS_COMPUTE_32F = rocblas_compute_type_f32;

@@ -246,17 +246,6 @@ int main() {
   // CHECK: __half** hyarray = 0;
   __half** hyarray = 0;
 
-  // CHECK: hip_bfloat16** bf16Aarray = 0;
-  __nv_bfloat16** bf16Aarray = 0;
-  // CHECK: const hip_bfloat16** const bf16Aarray_const = const_cast<const hip_bfloat16**>(bf16Aarray);
-  const __nv_bfloat16** const bf16Aarray_const = const_cast<const __nv_bfloat16**>(bf16Aarray);
-  // CHECK: hip_bfloat16** bf16xarray = 0;
-  __nv_bfloat16** bf16xarray = 0;
-  // CHECK: const hip_bfloat16** const bf16xarray_const = const_cast<const hip_bfloat16**>(bf16xarray_const);
-  const __nv_bfloat16** const bf16xarray_const = const_cast<const __nv_bfloat16**>(bf16xarray_const);
-  // CHECK: hip_bfloat16** bf16yarray = 0;
-  __nv_bfloat16** bf16yarray = 0;
-
   double da = 0;
   double dA = 0;
   double db = 0;
@@ -1657,6 +1646,17 @@ int main() {
   // CHECK-NEXT: hipDataType C_16BF = HIP_C_16BF;
   cublasDataType_t R_16BF = CUDA_R_16BF;
   cublasDataType_t C_16BF = CUDA_C_16BF;
+
+  // CHECK: hip_bfloat16** bf16Aarray = 0;
+  __nv_bfloat16** bf16Aarray = 0;
+  // CHECK: const hip_bfloat16** const bf16Aarray_const = const_cast<const hip_bfloat16**>(bf16Aarray);
+  const __nv_bfloat16** const bf16Aarray_const = const_cast<const __nv_bfloat16**>(bf16Aarray);
+  // CHECK: hip_bfloat16** bf16xarray = 0;
+  __nv_bfloat16** bf16xarray = 0;
+  // CHECK: const hip_bfloat16** const bf16xarray_const = const_cast<const hip_bfloat16**>(bf16xarray_const);
+  const __nv_bfloat16** const bf16xarray_const = const_cast<const __nv_bfloat16**>(bf16xarray_const);
+  // CHECK: hip_bfloat16** bf16yarray = 0;
+  __nv_bfloat16** bf16yarray = 0;
 
   // CHECK: hipblasComputeType_t blasComputeType;
   cublasComputeType_t blasComputeType;
