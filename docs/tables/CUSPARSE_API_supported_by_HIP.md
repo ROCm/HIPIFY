@@ -869,11 +869,11 @@
 |`cusparseSpGEMM_destroyDescr`|11.0| | |`hipsparseSpGEMM_destroyDescr`|4.1.0| | | | |
 |`cusparseSpGEMM_estimateMemory`|12.0| | | | | | | | |
 |`cusparseSpGEMM_getNumProducts`|12.0| | | | | | | | |
-|`cusparseSpGEMM_workEstimation`| | | |`hipsparseSpGEMM_workEstimation`|4.1.0| | | | |
+|`cusparseSpGEMM_workEstimation`|11.0| | |`hipsparseSpGEMM_workEstimation`|4.1.0| | | | |
 |`cusparseSpGEMMreuse_compute`|11.3| | | | | | | | |
 |`cusparseSpGEMMreuse_copy`|11.3| | | | | | | | |
 |`cusparseSpGEMMreuse_nnz`|11.3| | | | | | | | |
-|`cusparseSpGEMMreuse_workEstimation`|11.3| | | | | | | | |
+|`cusparseSpGEMMreuse_workEstimation`|11.3| | |`hipsparseSpGEMMreuse_workEstimation`|5.1.0| | | | |
 |`cusparseSpMM`|10.1| | |`hipsparseSpMM`|4.2.0| | | | |
 |`cusparseSpMMOp`|11.5| | | | | | | | |
 |`cusparseSpMMOp_createPlan`|11.5| | | | | | | | |

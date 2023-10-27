@@ -836,7 +836,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   {"cusparseSpSM_solve",                                {"hipsparseSpSM_solve",                                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
 
   // Sparse Matrix Multiplication (SpGEMM) Structure Reuse
-  {"cusparseSpGEMMreuse_workEstimation",                {"hipsparseSpGEMMreuse_workEstimation",                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
+  {"cusparseSpGEMMreuse_workEstimation",                {"hipsparseSpGEMMreuse_workEstimation",                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
   {"cusparseSpGEMMreuse_nnz",                           {"hipsparseSpGEMMreuse_nnz",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
   {"cusparseSpGEMMreuse_copy",                          {"hipsparseSpGEMMreuse_copy",                          "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
   {"cusparseSpGEMMreuse_compute",                       {"hipsparseSpGEMMreuse_compute",                       "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
@@ -1194,6 +1194,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SPARSE_FUNCTION_VER_MAP {
   {"cusparseSpGEMM_destroyDescr",                       {CUDA_110, CUDA_0,   CUDA_0  }},
   {"cusparseSpGEMM_compute",                            {CUDA_110, CUDA_0,   CUDA_0  }},
   {"cusparseSpGEMM_copy",                               {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"cusparseSpGEMM_workEstimation",                     {CUDA_110, CUDA_0,   CUDA_0  }},
   {"cusparseConstrainedGeMM",                           {CUDA_102, CUDA_112, CUDA_120}},
   {"cusparseConstrainedGeMM_bufferSize",                {CUDA_102, CUDA_112, CUDA_120}},
   {"cusparseSdense2csr",                                {CUDA_0,   CUDA_111, CUDA_120}},
@@ -1954,6 +1955,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_FUNCTION_VER_MAP {
   {"hipsparseDgpsvInterleavedBatch",                     {HIP_5010, HIP_0,    HIP_0   }},
   {"hipsparseCgpsvInterleavedBatch",                     {HIP_5010, HIP_0,    HIP_0   }},
   {"hipsparseZgpsvInterleavedBatch",                     {HIP_5010, HIP_0,    HIP_0   }},
+  {"hipsparseSpGEMMreuse_workEstimation",                {HIP_5010, HIP_0,    HIP_0   }},
   {"hipsparseSpMatGetStridedBatch",                      {HIP_5020, HIP_0,    HIP_0   }},
   {"hipsparseSpMatSetStridedBatch",                      {HIP_5020, HIP_0,    HIP_0   }},
   {"hipsparseCooSetStridedBatch",                        {HIP_5020, HIP_0,    HIP_0   }},

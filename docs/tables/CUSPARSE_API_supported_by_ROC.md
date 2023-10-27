@@ -869,7 +869,7 @@
 |`cusparseSpGEMM_destroyDescr`|11.0| | | | | | | | |
 |`cusparseSpGEMM_estimateMemory`|12.0| | | | | | | | |
 |`cusparseSpGEMM_getNumProducts`|12.0| | | | | | | | |
-|`cusparseSpGEMM_workEstimation`| | | | | | | | | |
+|`cusparseSpGEMM_workEstimation`|11.0| | | | | | | | |
 |`cusparseSpGEMMreuse_compute`|11.3| | | | | | | | |
 |`cusparseSpGEMMreuse_copy`|11.3| | | | | | | | |
 |`cusparseSpGEMMreuse_nnz`|11.3| | | | | | | | |
