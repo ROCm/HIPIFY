@@ -3886,6 +3886,9 @@ sub simpleSubstitutions {
     subst("cusparseSpGEMM_createDescr", "hipsparseSpGEMM_createDescr", "library");
     subst("cusparseSpGEMM_destroyDescr", "hipsparseSpGEMM_destroyDescr", "library");
     subst("cusparseSpGEMM_workEstimation", "hipsparseSpGEMM_workEstimation", "library");
+    subst("cusparseSpGEMMreuse_compute", "hipsparseSpGEMMreuse_compute", "library");
+    subst("cusparseSpGEMMreuse_copy", "hipsparseSpGEMMreuse_copy", "library");
+    subst("cusparseSpGEMMreuse_nnz", "hipsparseSpGEMMreuse_nnz", "library");
     subst("cusparseSpGEMMreuse_workEstimation", "hipsparseSpGEMMreuse_workEstimation", "library");
     subst("cusparseSpMM", "hipsparseSpMM", "library");
     subst("cusparseSpMM_bufferSize", "hipsparseSpMM_bufferSize", "library");
@@ -6830,9 +6833,6 @@ sub warnUnsupportedFunctions {
         "cusparseSpMMOpPlan",
         "cusparseSpMMOpAlg_t",
         "cusparseSpMMOp",
-        "cusparseSpGEMMreuse_nnz",
-        "cusparseSpGEMMreuse_copy",
-        "cusparseSpGEMMreuse_compute",
         "cusparseSpGEMM_getNumProducts",
         "cusparseSpGEMM_estimateMemory",
         "cusparseSolveAnalysisInfo_t",
