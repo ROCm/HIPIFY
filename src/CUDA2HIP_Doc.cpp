@@ -40,6 +40,7 @@ namespace doc {
   typedef map<StringRef, cudaAPIversions> versionMap;
   typedef map<StringRef, hipAPIversions> hipVersionMap;
   typedef map<llvm::StringRef, hipAPIChangedVersions> hipChangedVersionMap;
+  typedef map<llvm::StringRef, cudaAPIChangedVersions> cudaChangedVersionMap;
 
   const string sEmpty = "";
   const string sMd = "md";
@@ -131,7 +132,8 @@ namespace doc {
   const string sC = "C";
   const string sR = "R";
   const string sE = "E";
-  const hipChangedVersionMap mEmpty = {};
+  const hipChangedVersionMap hipChangedVersionMapEmpty = {};
+  const cudaChangedVersionMap cudaChangedVersionMapEmpty = {};
 
   enum docType {
     none = 0,
@@ -174,7 +176,8 @@ namespace doc {
       virtual const typeMap &getTypes() const = 0;
       virtual const versionMap &getFunctionVersions() const = 0;
       virtual const hipVersionMap &getHipFunctionVersions() const = 0;
-      virtual const hipChangedVersionMap &getHipChangedFunctionVersions() const { return mEmpty; };
+      virtual const hipChangedVersionMap &getHipChangedFunctionVersions() const { return hipChangedVersionMapEmpty; };
+      virtual const cudaChangedVersionMap &getCudaChangedFunctionVersions() const { return cudaChangedVersionMapEmpty; };
       virtual const versionMap &getTypeVersions() const = 0;
       virtual const hipVersionMap &getHipTypeVersions() const = 0;
       virtual const string &getAPI() const { return sHIP; }
@@ -663,7 +666,8 @@ namespace doc {
       const typeMap &getTypes() const override { return CUDA_SPARSE_TYPE_NAME_MAP; }
       const versionMap &getFunctionVersions() const override { return CUDA_SPARSE_FUNCTION_VER_MAP; }
       const hipVersionMap &getHipFunctionVersions() const override { return HIP_SPARSE_FUNCTION_VER_MAP; }
-      const hipChangedVersionMap& getHipChangedFunctionVersions() const override { return HIP_SPARSE_FUNCTION_CHANGED_VER_MAP; }
+      const hipChangedVersionMap &getHipChangedFunctionVersions() const override { return HIP_SPARSE_FUNCTION_CHANGED_VER_MAP; }
+      const cudaChangedVersionMap &getCudaChangedFunctionVersions() const override { return CUDA_SPARSE_FUNCTION_CHANGED_VER_MAP; }
       const versionMap &getTypeVersions() const override { return CUDA_SPARSE_TYPE_NAME_VER_MAP; }
       const hipVersionMap &getHipTypeVersions() const override { return HIP_SPARSE_TYPE_NAME_VER_MAP; }
       const string &getName() const override { return sCUSPARSE; }

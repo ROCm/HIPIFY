@@ -369,6 +369,7 @@ struct hipAPIversions {
 };
 
 typedef std::list<hipVersions> hipAPIChangedVersions;
+typedef std::list<cudaVersions> cudaAPIChangedVersions;
 
 // The names of various fields in in the statistics reports.
 extern const char *counterNames[NUM_CONV_TYPES];
