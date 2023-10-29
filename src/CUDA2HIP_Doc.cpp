@@ -236,6 +236,7 @@ namespace doc {
             const versionMap &vMap = isTypeSection(s.first, getSections()) ? getTypeVersions() : getFunctionVersions();
             const hipVersionMap &hMap = commonHipVersionMap.empty() ? (isTypeSection(s.first, getSections()) ? getHipTypeVersions() : getHipFunctionVersions()) : commonHipVersionMap;
             const hipChangedVersionMap &hChangedMap = getHipChangedFunctionVersions();
+            const cudaChangedVersionMap &cudaChangedMap = getCudaChangedFunctionVersions();
             functionMap fMap;
             for (auto &f : ftMap) {
               if (f.second.apiSection == s.first) {
@@ -254,13 +255,23 @@ namespace doc {
             string sS = (doc == md) ? "|" : ",";
             stringstream rows;
             for (auto &f : fMap) {
-              string a, d, r, ha, hd, hc, hr, he, ra, rd, rc, rr, re, cc;
+              string a, d, c, r, ha, hd, hc, hr, he, ra, rd, rc, rr, re, cc;
               for (auto &v : vMap) {
                 if (v.first == f.first) {
                   a = Statistics::getCudaVersion(v.second.appeared);
                   d = Statistics::getCudaVersion(v.second.deprecated);
                   r = Statistics::getCudaVersion(v.second.removed);
                   break;
+                }
+              }
+              auto cudacv = cudaChangedMap.find(f.first);
+              if (cudacv != cudaChangedMap.end()) {
+                int icount = 0;
+                for (auto &cv : cudacv->second) {
+                  if (icount > 0)
+                    c += ", ";
+                  c += Statistics::getCudaVersion(cv);
+                  icount++;
                 }
               }
               auto hv = (isROC) ? hMap.find(f.second.rocName) : hMap.find(f.second.hipName);
@@ -329,7 +340,7 @@ namespace doc {
                       break;
                     case full:
                     default:
-                      rows << a << sS << d << sS << r << sS << sHip << sS << ha << sS << hd << sS << (isROC ? rc : hc) << sS << hr << sS << he;
+                      rows << a << sS << d << sS << c << sS << r << sS << sHip << sS << ha << sS << hd << sS << (isROC ? rc : hc) << sS << hr << sS << he;
                       if (isJoint())
                         rows << sS << sRoc << sS << ra << sS << rd << sS << rc << sS << rr << sS << re;
                       rows << endl;
@@ -348,7 +359,7 @@ namespace doc {
                       break;
                     case full:
                     default:
-                      rows << (a.empty() ? " " : a) << sS << (d.empty() ? " " : d) << sS << (r.empty() ? " " : r) << sS << sHip << sS <<
+                      rows << (a.empty() ? " " : a) << sS << (d.empty() ? " " : d) << sS << (c.empty() ? " " : c) << sS << (r.empty() ? " " : r) << sS << sHip << sS <<
                         (ha.empty() ? " " : ha) << sS << (hd.empty() ? " " : hd) << sS << (isROC ? (rc.empty() ? " " : rc) : (hc.empty() ? " " : hc)) << sS << (hr.empty() ? " " : hr) << sS << (he.empty() ? " " : he) << sS;
                       if (isJoint())
                         rows << sRoc << sS << (ra.empty() ? " " : ra) << sS << (rd.empty() ? " " : rd) << sS << (rc.empty() ? " " : rc) << sS << (rr.empty() ? " " : rr) << sS << (re.empty() ? " " : re) << sS;
@@ -362,14 +373,14 @@ namespace doc {
             stringstream section, section_header;
             section_header << (doc == md ? "## **" : "") << (format != compact ? s.first : compact_only_cur_sec_num) << ". " << string(s.second) << (doc == md ? "**" : "") << endl << endl;
             section << (doc == md ? "|**" : "") << sCUDA << sS << (format == full ? sA : "") << (format == full ? sS : "") <<
-              sD << sS << (format == full ? sR : "") << (format == full ? sS : "") << getAPI() << sS << (format == full ? sA : "") << (format == full ? sS : "") <<
+              sD << sS << (format == full ? sC : "") << (format == full ? sS : "") << (format == full ? sR : "") << (format == full ? sS : "") << getAPI() << sS << (format == full ? sA : "") << (format == full ? sS : "") <<
               sD << (format == full ? sS : "") << (format == full ? sC : "") << (format == full ? sS : "") << (format == full ? sR : "") << sS << sE;
             if (isJoint())
               section << sS << getSecondAPI() << sS << (format == full ? sA : "") << (format == full ? sS : "") << sD << (format == full ? sS : "") << (format == full ? sC : "") << (format == full ? sS : "") << (format == full ? sR : "") << sS << sE;
             section << (doc == md ? "**|" : "") << endl;
             if (doc == md) {
               section << "|:--|" << (format == full ? ":-:|" : "") << ":-:|" << (format == full ? ":-:|" : "") << (format == full ? ":-:|" : "") <<
-                ":--|" << (format == full ? ":-:|" : "") << ":-:|" << (format == full ? ":-:|" : "") << ":-:|";
+                ":--|" << (format == full ? ":-:|" : "") << ":-:|" << (format == full ? ":-:|" : "") << (format == full ? ":-:|" : "") << ":-:|";
               if (isJoint())
                 section << ":--|" << (format == full ? ":-:|" : "") << ":-:|" << (format == full ? ":-:|" : "") << (format == full ? ":-:|" : "") << ":-:|";
               section << endl;
