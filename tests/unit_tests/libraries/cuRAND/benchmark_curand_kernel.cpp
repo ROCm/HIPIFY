@@ -297,8 +297,7 @@ struct runner<curandStateSobol32_t>
         CUDA_CALL(cudaMalloc((void **)&directions, size));
         // CHECK: hiprandDirectionVectors32_t * h_directions;
         curandDirectionVectors32_t * h_directions;
-        // hiprandGetDirectionVectors32 and HIPRAND_DIRECTION_VECTORS_32_JOEKUO6 (of hiprandDirectionVectorSet_t) are yet unsupported by HIP
-        // CHECK-NOT: CURAND_CALL(hiprandGetDirectionVectors32(&h_directions, HIPRAND_DIRECTION_VECTORS_32_JOEKUO6));
+        // CHECK: CURAND_CALL(hiprandGetDirectionVectors32(&h_directions, HIPRAND_DIRECTION_VECTORS_32_JOEKUO6));
         CURAND_CALL(curandGetDirectionVectors32(&h_directions, CURAND_DIRECTION_VECTORS_32_JOEKUO6));
         // CHECK: CUDA_CALL(hipMemcpy(directions, h_directions, size, hipMemcpyHostToDevice));
         CUDA_CALL(cudaMemcpy(directions, h_directions, size, cudaMemcpyHostToDevice));
