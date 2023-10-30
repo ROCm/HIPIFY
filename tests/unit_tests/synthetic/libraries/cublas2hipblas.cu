@@ -1677,7 +1677,7 @@ int main() {
   blasStatus = cublasGemmStridedBatchedEx(blasHandle, transa, transb, m, n, k, aptr, Aptr, Atype, lda, strideA, Bptr, Btype, ldb, strideB, bptr, Cptr, Ctype, ldc, strideC, batchCount, blasComputeType, blasGemmAlgo);
 #endif
 
-#if CUDA_VERSION >= 11060
+#if CUDA_VERSION >= 11060 && CUBLAS_VERSION >= 110902 // CUDA 11.6.2
   // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasCgemvBatched(cublasHandle_t handle, cublasOperation_t trans, int m, int n, const cuComplex* alpha, const cuComplex* const Aarray[], int lda, const cuComplex* const xarray[], int incx, const cuComplex* beta, cuComplex* const yarray[], int incy, int batchCount);
   // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasCgemvBatched_v2(hipblasHandle_t handle, hipblasOperation_t trans, int m, int n, const hipComplex* alpha, const hipComplex* const AP[], int lda, const hipComplex* const x[], int incx, const hipComplex* beta, hipComplex* const y[], int incy, int batchCount);
   // CHECK: blasStatus = hipblasCgemvBatched_v2(blasHandle, blasOperation, m, n, &complexa, complexAarray_const, lda, complexXarray_const, incx, &complexb, complexYarray, incy, batchCount);
