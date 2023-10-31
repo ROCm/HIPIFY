@@ -215,10 +215,20 @@ int main() {
   void *pBuffer = nullptr;
   int *P = nullptr;
   void *tempBuffer = nullptr;
+  void *tempBuffer1 = nullptr;
+  void *tempBuffer2 = nullptr;
+  void *tempBuffer3 = nullptr;
+  void *tempBuffer4 = nullptr;
+  void *tempBuffer5 = nullptr;
   void *c_coeff = nullptr;
   void *s_coeff = nullptr;
   size_t dataSize = 0;
   size_t bufferSize = 0;
+  size_t bufferSize1 = 0;
+  size_t bufferSize2 = 0;
+  size_t bufferSize3 = 0;
+  size_t bufferSize4 = 0;
+  size_t bufferSize5 = 0;
   double dfractionToColor = 0.f;
   float ffractionToColor = 0.f;
   double bsrValA = 0.f;
@@ -271,6 +281,7 @@ int main() {
   double dboost_val = 0.f;
   float boost_val = 0.f;
   const char* const_ch = nullptr;
+  void* result = nullptr;
   pruneInfo_t prune_info;
   csrilu02Info_t csrilu02_info;
   csric02Info_t csric02_info;
@@ -283,8 +294,8 @@ int main() {
   // CHECK: hipComplex complex, complexA, complexB, complexbsrValA, complexbsrSortedValC, complexcsrSortedValA, complexcsrSortedValB, complexcsrSortedValC, complextol, complexbsrSortedVal, complexbscVal, complexcscSortedVal, complexds, complexdl, complexd, complexdu, complexdw, complexx, complex_boost_val;
   cuComplex complex, complexA, complexB, complexbsrValA, complexbsrSortedValC, complexcsrSortedValA, complexcsrSortedValB, complexcsrSortedValC, complextol, complexbsrSortedVal, complexbscVal, complexcscSortedVal, complexds, complexdl, complexd, complexdu, complexdw, complexx, complex_boost_val;
 
-  // CHECK: hipsparseOperation_t opA, opB;
-  cusparseOperation_t opA, opB;
+  // CHECK: hipsparseOperation_t opA, opB, opX;
+  cusparseOperation_t opA, opB, opX;
 
   // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCreate(cusparseHandle_t* handle);
   // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseCreate(hipsparseHandle_t* handle);
@@ -1352,11 +1363,11 @@ int main() {
 #endif
 
 #if (CUDA_VERSION >= 10010 && CUDA_VERSION < 11000 && !defined(_WIN32)) || CUDA_VERSION >= 11000
-  // CHECK: hipsparseSpMatDescr_t spMatDescr_t, matC;
-  cusparseSpMatDescr_t spMatDescr_t, matC;
+  // CHECK: hipsparseSpMatDescr_t spMatDescr_t, spmatA, spmatB, spmatC;
+  cusparseSpMatDescr_t spMatDescr_t, spmatA, spmatB, spmatC;
 
-  // CHECK: hipsparseDnMatDescr_t dnMatDescr_t, matA, matB;
-  cusparseDnMatDescr_t dnMatDescr_t, matA, matB;
+  // CHECK: hipsparseDnMatDescr_t dnMatDescr_t, dnmatA, dnmatB, dnmatC;
+  cusparseDnMatDescr_t dnMatDescr_t, dnmatA, dnmatB, dnmatC;
 
   // CHECK: hipsparseIndexType_t indexType_t;
   // CHECK-NEXT: hipsparseIndexType_t csrRowOffsetsType;
@@ -1431,6 +1442,18 @@ int main() {
   // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDnMatGetStridedBatch(hipsparseDnMatDescr_t dnMatDescr, int* batchCount, int64_t* batchStride);
   // CHECK: status_t = hipsparseDnMatGetStridedBatch(dnMatDescr_t, &batchCount, &batchStride);
   status_t = cusparseDnMatGetStridedBatch(dnMatDescr_t, &batchCount, &batchStride);
+
+  // TODO: Mark as C-Changed in 12.0.0
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpMM_bufferSize(cusparseHandle_t handle, cusparseOperation_t opA, cusparseOperation_t opB, const void* alpha, const cusparseSpMatDescr_t matA, const cusparseDnMatDescr_t matB, const void* beta, cusparseDnMatDescr_t matC, cudaDataType computeType, cusparseSpMMAlg_t alg, size_t* bufferSize);
+  // HIP: hipsparseStatus_t hipsparseSpMM_bufferSize(hipsparseHandle_t handle, hipsparseOperation_t opA, hipsparseOperation_t opB, const void* alpha, const hipsparseSpMatDescr_t matA, const hipsparseDnMatDescr_t matB, const void* beta, const hipsparseDnMatDescr_t matC, hipDataType computeType, hipsparseSpMMAlg_t alg, size_t* bufferSize);
+  // CHECK: status_t = hipsparseSpMM_bufferSize(handle_t, opA, opB, alpha, spmatA, dnmatB, beta, dnmatC, dataType, spMMAlg_t, &bufferSize);
+  status_t = cusparseSpMM_bufferSize(handle_t, opA, opB, alpha, spmatA, dnmatB, beta, dnmatC, dataType, spMMAlg_t, &bufferSize);
+
+  // TODO: Mark as C-Changed in 12.0.0
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpMM(cusparseHandle_t handle, cusparseOperation_t transA, cusparseOperation_t transB, const void* alpha, const cusparseSpMatDescr_t matA, const cusparseDnMatDescr_t matB, const void* beta, cusparseDnMatDescr_t matC, cudaDataType computeType, cusparseSpMMAlg_t alg, void* externalBuffer);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpMM(hipsparseHandle_t handle, hipsparseOperation_t opA, hipsparseOperation_t opB, const void* alpha, const hipsparseSpMatDescr_t matA, const hipsparseDnMatDescr_t matB, const void* beta, const hipsparseDnMatDescr_t matC, hipDataType computeType, hipsparseSpMMAlg_t alg, void* externalBuffer);
+  // CHECK: status_t = hipsparseSpMM(handle_t, opA, opB, alpha, spmatA, dnmatB, beta, dnmatC, dataType, spMMAlg_t, tempBuffer);
+  status_t = cusparseSpMM(handle_t, opA, opB, alpha, spmatA, dnmatB, beta, dnmatC, dataType, spMMAlg_t, tempBuffer);
 #endif
 
   // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCooGet(cusparseSpMatDescr_t spMatDescr, int64_t* rows, int64_t* cols, int64_t* nnz, void** cooRowInd, void** cooColInd, void** cooValues, cusparseIndexType_t* idxType, cusparseIndexBase_t* idxBase, cudaDataType* valueType);
@@ -1507,6 +1530,30 @@ int main() {
   // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDestroyDnVec(hipsparseDnVecDescr_t dnVecDescr);
   // CHECK: status_t = hipsparseDestroyDnVec(dnVecDescr_t);
   status_t = cusparseDestroyDnVec(dnVecDescr_t);
+
+  // TODO: Mark as C-Changed in 12.0.0
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpVV_bufferSize(cusparseHandle_t handle, cusparseOperation_t opX, const cusparseSpVecDescr_t vecX, const cusparseDnVecDescr_t vecY, const void* result, cudaDataType computeType, size_t* bufferSize);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpVV_bufferSize(hipsparseHandle_t handle, hipsparseOperation_t opX, hipsparseSpVecDescr_t vecX, hipsparseDnVecDescr_t vecY, void* result, hipDataType computeType, size_t* bufferSize);
+  // CHECK: status_t = hipsparseSpVV_bufferSize(handle_t, opX, spVecDescr_t, vecY, result, dataType, &bufferSize);
+  status_t = cusparseSpVV_bufferSize(handle_t, opX, spVecDescr_t, vecY, result, dataType, &bufferSize);
+
+  // TODO: Mark as C-Changed in 12.0.0
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpVV(cusparseHandle_t handle, cusparseOperation_t opX, const cusparseSpVecDescr_t vecX, const cusparseDnVecDescr_t vecY, void* result, cudaDataType computeType, void* externalBuffer);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpVV(hipsparseHandle_t handle, hipsparseOperation_t  opX, hipsparseSpVecDescr_t vecX, hipsparseDnVecDescr_t vecY, void* result, hipDataType computeType, void* externalBuffer);
+  // CHECK: status_t = hipsparseSpVV(handle_t, opX, spVecDescr_t, vecY, result, dataType, tempBuffer);
+  status_t = cusparseSpVV(handle_t, opX, spVecDescr_t, vecY, result, dataType, tempBuffer);
+
+  // TODO: Mark as C-Changed in 12.0.0
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpMV_bufferSize(cusparseHandle_t handle, cusparseOperation_t opA, const void* alpha, const cusparseSpMatDescr_t matA, const cusparseDnVecDescr_t vecX, const void* beta, const cusparseDnVecDescr_t vecY, cudaDataType computeType, cusparseSpMVAlg_t alg, size_t* bufferSize);
+  // HIP: hipsparseStatus_t hipsparseSpMV_bufferSize(hipsparseHandle_t handle, hipsparseOperation_t opA, const void* alpha, const hipsparseSpMatDescr_t matA, const hipsparseDnVecDescr_t vecX, const void* beta, const hipsparseDnVecDescr_t vecY, hipDataType computeType, hipsparseSpMVAlg_t alg, size_t* bufferSize);
+  // CHECK: status_t = hipsparseSpMV_bufferSize(handle_t, opA, alpha, spmatA, vecX, beta, vecY, dataType, spMVAlg_t, &bufferSize);
+  status_t = cusparseSpMV_bufferSize(handle_t, opA, alpha, spmatA, vecX, beta, vecY, dataType, spMVAlg_t, &bufferSize);
+
+  // TODO: Mark as C-Changed in 12.0.0
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpMV(cusparseHandle_t handle, cusparseOperation_t opA, const void* alpha, const cusparseSpMatDescr_t matA, const cusparseDnVecDescr_t vecX, const void* beta, const cusparseDnVecDescr_t vecY, cudaDataType computeType, cusparseSpMVAlg_t alg, void* externalBuffer);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpMV(hipsparseHandle_t handle, hipsparseOperation_t opA, const void* alpha, const hipsparseSpMatDescr_t matA, const hipsparseDnVecDescr_t vecX, const void* beta, const hipsparseDnVecDescr_t vecY, hipDataType computeType, hipsparseSpMVAlg_t alg, void* externalBuffer);
+  // CHECK: status_t = hipsparseSpMV(handle_t, opA, alpha, spmatA, vecX, beta, vecY, dataType, spMVAlg_t, tempBuffer);
+  status_t = cusparseSpMV(handle_t, opA, alpha, spmatA, vecX, beta, vecY, dataType, spMVAlg_t, tempBuffer);
 #endif
 
   // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpVecGet(cusparseSpVecDescr_t spVecDescr, int64_t* size, int64_t* nnz, void** indices, void** values, cusparseIndexType_t* idxType, cusparseIndexBase_t* idxBase, cudaDataType* valueType);
@@ -1573,11 +1620,6 @@ int main() {
   // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDnMatSetValues(hipsparseDnMatDescr_t dnMatDescr, void* values);
   // CHECK: status_t = hipsparseDnMatSetValues(dnMatDescr_t, values);
   status_t = cusparseDnMatSetValues(dnMatDescr_t, values);
-
-  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpMV(cusparseHandle_t handle, cusparseOperation_t opA, const void* alpha, cusparseConstSpMatDescr_t matA, cusparseConstDnVecDescr_t vecX, const void* beta, cusparseDnVecDescr_t vecY, cudaDataType computeType, cusparseSpMVAlg_t alg, void* externalBuffer);
-  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpMV(hipsparseHandle_t handle, hipsparseOperation_t opA, const void* alpha, const hipsparseSpMatDescr_t matA, const hipsparseDnVecDescr_t vecX, const void* beta, const hipsparseDnVecDescr_t vecY, hipDataType computeType, hipsparseSpMVAlg_t alg, void* externalBuffer);
-  // CHECK: status_t = hipsparseSpMV(handle_t, opA, alpha, spMatDescr_t, vecX, beta, vecY, dataType, spMVAlg_t, tempBuffer);
-  status_t = cusparseSpMV(handle_t, opA, alpha, spMatDescr_t, vecX, beta, vecY, dataType, spMVAlg_t, tempBuffer);
 #endif
 
 #if CUDA_VERSION >= 10020
@@ -1745,6 +1787,9 @@ int main() {
   cusparseSpGEMMAlg_t spGEMMAlg_t;
   cusparseSpGEMMAlg_t SPGEMM_DEFAULT = CUSPARSE_SPGEMM_DEFAULT;
 
+  // CHECK: hipsparseSpGEMMDescr_t spGEMMDescr;
+  cusparseSpGEMMDescr_t spGEMMDescr;
+
   // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCsrSetPointers(cusparseSpMatDescr_t spMatDescr, void* csrRowOffsets, void* csrColInd, void* csrValues);
   // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseCsrSetPointers(hipsparseSpMatDescr_t spMatDescr, void* csrRowOffsets, void* csrColInd, void* csrValues);
   // CHECK: status_t = hipsparseCsrSetPointers(spMatDescr_t, csrRowOffsets, csrColInd, csrValues);
@@ -1756,6 +1801,24 @@ int main() {
   // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpMatGetSize(hipsparseSpMatDescr_t spMatDescr, int64_t* rows, int64_t* cols, int64_t* nnz);
   // CHECK: status_t = hipsparseSpMatGetSize(spMatDescr_t, &rows, &cols, &nnz);
   status_t = cusparseSpMatGetSize(spMatDescr_t, &rows, &cols, &nnz);
+
+  // TODO: Mark as C-Changed in 12.0.0
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpGEMM_workEstimation(cusparseHandle_t handle, cusparseOperation_t opA, cusparseOperation_t opB, const void* alpha, cusparseSpMatDescr_t matA, cusparseSpMatDescr_t matB, const void* beta, cusparseSpMatDescr_t matC, cudaDataType computeType, cusparseSpGEMMAlg_t alg, cusparseSpGEMMDescr_t spgemmDescr, size_t* bufferSize1, void* externalBuffer1);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpGEMM_workEstimation(hipsparseHandle_t handle, hipsparseOperation_t opA, hipsparseOperation_t opB, const void* alpha, hipsparseSpMatDescr_t matA, hipsparseSpMatDescr_t matB, const void* beta, hipsparseSpMatDescr_t matC, hipDataType computeType, hipsparseSpGEMMAlg_t alg, hipsparseSpGEMMDescr_t spgemmDescr, size_t* bufferSize1, void* externalBuffer1);
+  // CHECK: status_t = hipsparseSpGEMM_workEstimation(handle_t, opA, opB, alpha, spmatA, spmatB, beta, spmatC, dataType, spGEMMAlg_t, spGEMMDescr, &bufferSize, tempBuffer);
+  status_t = cusparseSpGEMM_workEstimation(handle_t, opA, opB, alpha, spmatA, spmatB, beta, spmatC, dataType, spGEMMAlg_t, spGEMMDescr, &bufferSize, tempBuffer);
+
+  // TODO: Mark as C-Changed in 12.0.0
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpGEMM_compute(cusparseHandle_t handle, cusparseOperation_t opA, cusparseOperation_t opB, const void* alpha, cusparseSpMatDescr_t matA, cusparseSpMatDescr_t matB, const void* beta, cusparseSpMatDescr_t matC, cudaDataType computeType, cusparseSpGEMMAlg_t alg, cusparseSpGEMMDescr_t spgemmDescr, size_t* bufferSize2, void* externalBuffer2);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpGEMM_compute(hipsparseHandle_t handle, hipsparseOperation_t opA, hipsparseOperation_t opB, const void* alpha, hipsparseSpMatDescr_t matA, hipsparseSpMatDescr_t matB, const void* beta, hipsparseSpMatDescr_t matC, hipDataType computeType, hipsparseSpGEMMAlg_t alg, hipsparseSpGEMMDescr_t spgemmDescr, size_t* bufferSize2, void* externalBuffer2);
+  // CHECK: status_t = hipsparseSpGEMM_compute(handle_t, opA, opB, alpha, spmatA, spmatB, beta, spmatC, dataType, spGEMMAlg_t, spGEMMDescr, &bufferSize, tempBuffer);
+  status_t = cusparseSpGEMM_compute(handle_t, opA, opB, alpha, spmatA, spmatB, beta, spmatC, dataType, spGEMMAlg_t, spGEMMDescr, &bufferSize, tempBuffer);
+
+  // TODO: Mark as C-Changed in 12.0.0
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpGEMM_copy(cusparseHandle_t handle, cusparseOperation_t opA, cusparseOperation_t opB, const void* alpha, cusparseSpMatDescr_t matA, cusparseSpMatDescr_t matB, const void* beta, cusparseSpMatDescr_t matC, cudaDataType computeType, cusparseSpGEMMAlg_t alg, cusparseSpGEMMDescr_t spgemmDescr);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpGEMM_copy(hipsparseHandle_t handle, hipsparseOperation_t opA, hipsparseOperation_t opB, const void* alpha, hipsparseSpMatDescr_t matA, hipsparseSpMatDescr_t matB, const void* beta, hipsparseSpMatDescr_t matC, hipDataType computeType, hipsparseSpGEMMAlg_t alg, hipsparseSpGEMMDescr_t spgemmDescr);
+  // CHECK: status_t = hipsparseSpGEMM_copy(handle_t, opA, opB, alpha, spmatA, spmatB, beta, spmatC, dataType, spGEMMAlg_t, spGEMMDescr);
+  status_t = cusparseSpGEMM_copy(handle_t, opA, opB, alpha, spmatA, spmatB, beta, spmatC, dataType, spGEMMAlg_t, spGEMMDescr);
 #endif
 #endif
 
@@ -1790,20 +1853,25 @@ int main() {
   // CHECK: status_t = hipsparseRot(handle_t, c_coeff, s_coeff, spVecDescr_t, vecY);
   status_t = cusparseRot(handle_t, c_coeff, s_coeff, spVecDescr_t, vecY);
 
-  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseScatter(cusparseHandle_t handle, cusparseConstSpVecDescr_t vecX, cusparseDnVecDescr_t vecY);
+#if CUDA_VERSION < 12000
+  // TODO: Mark as C-Changed in 12.0.0
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseScatter(cusparseHandle_t handle, cusparseSpVecDescr_t vecX, cusparseDnVecDescr_t vecY);
   // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseScatter(hipsparseHandle_t handle, hipsparseSpVecDescr_t vecX, hipsparseDnVecDescr_t vecY);
   // CHECK: status_t = hipsparseScatter(handle_t, spVecDescr_t, vecY);
   status_t = cusparseScatter(handle_t, spVecDescr_t, vecY);
 
-  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseGather(cusparseHandle_t handle, cusparseConstDnVecDescr_t vecY, cusparseSpVecDescr_t vecX);
+  // TODO: Mark as C-Changed in 12.0.0
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseGather(cusparseHandle_t handle, cusparseDnVecDescr_t vecY, cusparseSpVecDescr_t vecX);
   // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseGather(hipsparseHandle_t handle, hipsparseDnVecDescr_t vecY, hipsparseSpVecDescr_t vecX);
   // CHECK: status_t = hipsparseGather(handle_t, vecY, spVecDescr_t);
   status_t = cusparseGather(handle_t, vecY, spVecDescr_t);
 
-  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseAxpby(cusparseHandle_t handle, const void* alpha, cusparseConstSpVecDescr_t vecX, const void* beta, cusparseDnVecDescr_t vecY);
+  // TODO: Mark as C-Changed in 12.0.0
+  // CUDA: CUSPARSE_DEPRECATED(cusparseAxpby) cusparseStatus_t CUSPARSEAPI  cusparseSaxpyi(cusparseHandle_t handle, int nnz, const float* alpha, const float* xVal, const int* xInd, float* y, cusparseIndexBase_t idxBase);
   // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseAxpby(hipsparseHandle_t handle, const void* alpha, hipsparseSpVecDescr_t vecX, const void* beta, hipsparseDnVecDescr_t vecY);
   // CHECK: status_t = hipsparseAxpby(handle_t, alpha, spVecDescr_t, beta, vecY);
   status_t = cusparseAxpby(handle_t, alpha, spVecDescr_t, beta, vecY);
+#endif
 #endif
 
 #if CUDA_VERSION >= 11010 && CUSPARSE_VERSION >= 11300
@@ -1831,6 +1899,38 @@ int main() {
   // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseCscSetPointers(hipsparseSpMatDescr_t spMatDescr, void* cscColOffsets, void* cscRowInd, void* cscValues);
   // CHECK: status_t = hipsparseCscSetPointers(spMatDescr_t, cscColOffsets, cscRowInd, cscValues);
   status_t = cusparseCscSetPointers(spMatDescr_t, cscColOffsets, cscRowInd, cscValues);
+
+#if CUDA_VERSION < 12000
+  // TODO: Mark as C-Changed in 12.0.0
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSparseToDense_bufferSize(cusparseHandle_t handle, cusparseSpMatDescr_t matA, cusparseDnMatDescr_t matB, cusparseSparseToDenseAlg_t alg, size_t* bufferSize);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSparseToDense_bufferSize(hipsparseHandle_t handle, hipsparseSpMatDescr_t matA, hipsparseDnMatDescr_t matB, hipsparseSparseToDenseAlg_t alg, size_t* bufferSize);
+  // CHECK: status_t = hipsparseSparseToDense_bufferSize(handle_t, spmatA, dnmatB, sparseToDenseAlg_t, &bufferSize);
+  status_t = cusparseSparseToDense_bufferSize(handle_t, spmatA, dnmatB, sparseToDenseAlg_t, &bufferSize);
+
+  // TODO: Mark as C-Changed in 12.0.0
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSparseToDense(cusparseHandle_t handle, cusparseSpMatDescr_t matA, cusparseDnMatDescr_t matB, cusparseSparseToDenseAlg_t alg, void* buffer);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSparseToDense(hipsparseHandle_t handle, hipsparseSpMatDescr_t matA, hipsparseDnMatDescr_t matB, hipsparseSparseToDenseAlg_t alg, void* externalBuffer);
+  // CHECK: status_t = hipsparseSparseToDense(handle_t, spmatA, dnmatB, sparseToDenseAlg_t, tempBuffer);
+  status_t = cusparseSparseToDense(handle_t, spmatA, dnmatB, sparseToDenseAlg_t, tempBuffer);
+
+  // TODO: Mark as C-Changed in 12.0.0
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDenseToSparse_bufferSize(cusparseHandle_t handle, cusparseDnMatDescr_t matA, cusparseSpMatDescr_t matB, cusparseDenseToSparseAlg_t alg, size_t* bufferSize);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDenseToSparse_bufferSize(hipsparseHandle_t handle, hipsparseDnMatDescr_t matA, hipsparseSpMatDescr_t matB, hipsparseDenseToSparseAlg_t alg, size_t* bufferSize);
+  // CHECK: status_t = hipsparseDenseToSparse_bufferSize(handle_t, dnmatA, spmatB, denseToSparseAlg_t, &bufferSize);
+  status_t = cusparseDenseToSparse_bufferSize(handle_t, dnmatA, spmatB, denseToSparseAlg_t, &bufferSize);
+
+  // TODO: Mark as C-Changed in 12.0.0
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDenseToSparse_analysis(cusparseHandle_t handle, cusparseDnMatDescr_t matA, cusparseSpMatDescr_t matB, cusparseDenseToSparseAlg_t alg, void* buffer);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDenseToSparse_analysis(hipsparseHandle_t handle, hipsparseDnMatDescr_t matA, hipsparseSpMatDescr_t matB, hipsparseDenseToSparseAlg_t alg, void* externalBuffer);
+  // CHECK: status_t = hipsparseDenseToSparse_analysis(handle_t, dnmatA, spmatB, denseToSparseAlg_t, tempBuffer);
+  status_t = cusparseDenseToSparse_analysis(handle_t, dnmatA, spmatB, denseToSparseAlg_t, tempBuffer);
+
+  // TODO: Mark as C-Changed in 12.0.0
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDenseToSparse_convert(cusparseHandle_t handle, cusparseDnMatDescr_t matA, cusparseSpMatDescr_t matB, cusparseDenseToSparseAlg_t alg, void* buffer);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDenseToSparse_convert(hipsparseHandle_t handle, hipsparseDnMatDescr_t matA, hipsparseSpMatDescr_t matB, hipsparseDenseToSparseAlg_t alg, void* externalBuffer);
+  // CHECK: status_t = hipsparseDenseToSparse_convert(handle_t, dnmatA, spmatB, denseToSparseAlg_t, tempBuffer);
+  status_t = cusparseDenseToSparse_convert(handle_t, dnmatA, spmatB, denseToSparseAlg_t, tempBuffer);
+#endif
 #endif
 
 #if CUDA_VERSION >= 11020 && CUSPARSE_VERSION >= 11400
@@ -1868,20 +1968,31 @@ int main() {
   // CHECK: status_t = hipsparseBlockedEllGet(spMatDescr_t, &rows, &cols, &ellBlockSize, &ellCols, &ellColInd, &ellValue, &ellIdxType, &indexBase_t, &dataType);
   status_t = cusparseBlockedEllGet(spMatDescr_t, &rows, &cols, &ellBlockSize, &ellCols, &ellColInd, &ellValue, &ellIdxType, &indexBase_t, &dataType);
 
-  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSDDMM_preprocess(cusparseHandle_t handle, cusparseOperation_t opA, cusparseOperation_t opB, const void* alpha, cusparseConstDnMatDescr_t matA, cusparseConstDnMatDescr_t matB, const void* beta, cusparseSpMatDescr_t matC, cudaDataType computeType, cusparseSDDMMAlg_t alg, void* externalBuffer);
-  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSDDMM_preprocess(hipsparseHandle_t handle, hipsparseOperation_t opA, hipsparseOperation_t opB, const void* alpha, const hipsparseDnMatDescr_t A, const hipsparseDnMatDescr_t B, const void* beta, hipsparseSpMatDescr_t C, hipDataType computeType, hipsparseSDDMMAlg_t alg, void* tempBuffer);
-  // CHECK: status_t = hipsparseSDDMM_preprocess(handle_t, opA, opB, alpha, matA, matB, beta, matC, dataType, sDDMMAlg_t, tempBuffer);
- status_t = cusparseSDDMM_preprocess(handle_t, opA, opB, alpha, matA, matB, beta, matC, dataType, sDDMMAlg_t, tempBuffer);
+#if CUDA_VERSION < 12000
+  // TODO: Mark as C-Changed in 12.0.0
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpMM_preprocess(cusparseHandle_t handle, cusparseOperation_t opA, cusparseOperation_t opB, const void* alpha, cusparseSpMatDescr_t matA, cusparseDnMatDescr_t matB, const void* beta, cusparseDnMatDescr_t matC, cudaDataType computeType, cusparseSpMMAlg_t alg, void* externalBuffer);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpMM_preprocess(hipsparseHandle_t handle, hipsparseOperation_t opA, hipsparseOperation_t opB, const void* alpha, const hipsparseSpMatDescr_t matA, const hipsparseDnMatDescr_t matB, const void* beta, const hipsparseDnMatDescr_t matC, hipDataType computeType, hipsparseSpMMAlg_t alg, void* externalBuffer);
+  // CHECK: status_t = hipsparseSpMM_preprocess(handle_t, opA, opB, alpha, spmatA, dnmatB, beta, dnmatC, dataType, spMMAlg_t, tempBuffer);
+  status_t = cusparseSpMM_preprocess(handle_t, opA, opB, alpha, spmatA, dnmatB, beta, dnmatC, dataType, spMMAlg_t, tempBuffer);
 
-  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSDDMM_bufferSize(cusparseHandle_t handle, cusparseOperation_t opA, cusparseOperation_t opB, const void* alpha, cusparseConstDnMatDescr_t matA, cusparseConstDnMatDescr_t matB, const void* beta, cusparseSpMatDescr_t matC, cudaDataType computeType, cusparseSDDMMAlg_t alg, size_t* bufferSize);
+  // TODO: Mark as C-Changed in 12.0.0
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSDDMM_bufferSize(cusparseHandle_t handle, cusparseOperation_t opA, cusparseOperation_t opB, const void* alpha, cusparseDnMatDescr_t matA, cusparseDnMatDescr_t matB, const void* beta, cusparseSpMatDescr_t matC, cudaDataType computeType, cusparseSDDMMAlg_t alg, size_t* bufferSize);
   // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSDDMM_bufferSize(hipsparseHandle_t handle, hipsparseOperation_t opA, hipsparseOperation_t opB, const void* alpha, const hipsparseDnMatDescr_t A, const hipsparseDnMatDescr_t B, const void* beta, hipsparseSpMatDescr_t C, hipDataType computeType, hipsparseSDDMMAlg_t alg, size_t* bufferSize);
-  // CHECK: status_t = hipsparseSDDMM_bufferSize(handle_t, opA, opB, alpha, matA, matB, beta, matC, dataType, sDDMMAlg_t, &bufferSize);
- status_t = cusparseSDDMM_bufferSize(handle_t, opA, opB, alpha, matA, matB, beta, matC, dataType, sDDMMAlg_t, &bufferSize);
+  // CHECK: status_t = hipsparseSDDMM_bufferSize(handle_t, opA, opB, alpha, dnmatA, dnmatB, beta, spmatC, dataType, sDDMMAlg_t, &bufferSize);
+  status_t = cusparseSDDMM_bufferSize(handle_t, opA, opB, alpha, dnmatA, dnmatB, beta, spmatC, dataType, sDDMMAlg_t, &bufferSize);
 
-  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSDDMM(cusparseHandle_t handle, cusparseOperation_t opA, cusparseOperation_t opB, const void* alpha, cusparseConstDnMatDescr_t matA, cusparseConstDnMatDescr_t matB, const void* beta, cusparseSpMatDescr_t matC, cudaDataType computeType, cusparseSDDMMAlg_t alg, void* externalBuffer);
+  // TODO: Mark as C-Changed in 12.0.0
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSDDMM_preprocess(cusparseHandle_t handle, cusparseOperation_t opA, cusparseOperation_t opB, const void* alpha, cusparseDnMatDescr_t matA, cusparseDnMatDescr_t matB, const void* beta, cusparseSpMatDescr_t matC, cudaDataType computeType, cusparseSDDMMAlg_t alg, void* externalBuffer);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSDDMM_preprocess(hipsparseHandle_t handle, hipsparseOperation_t opA, hipsparseOperation_t opB, const void* alpha, const hipsparseDnMatDescr_t A, const hipsparseDnMatDescr_t B, const void* beta, hipsparseSpMatDescr_t C, hipDataType computeType, hipsparseSDDMMAlg_t alg, void* tempBuffer);
+  // CHECK: status_t = hipsparseSDDMM_preprocess(handle_t, opA, opB, alpha, dnmatA, dnmatB, beta, spmatC, dataType, sDDMMAlg_t, tempBuffer);
+  status_t = cusparseSDDMM_preprocess(handle_t, opA, opB, alpha, dnmatA, dnmatB, beta, spmatC, dataType, sDDMMAlg_t, tempBuffer);
+
+  // TODO: Mark as C-Changed in 12.0.0
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSDDMM(cusparseHandle_t handle, cusparseOperation_t opA, cusparseOperation_t opB, const void* alpha, cusparseDnMatDescr_t matA, cusparseDnMatDescr_t matB, const void* beta, cusparseSpMatDescr_t matC, cudaDataType computeType, cusparseSDDMMAlg_t alg, void* externalBuffer);
   // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSDDMM(hipsparseHandle_t handle, hipsparseOperation_t opA, hipsparseOperation_t opB, const void* alpha, const hipsparseDnMatDescr_t A, const hipsparseDnMatDescr_t B, const void* beta, hipsparseSpMatDescr_t C, hipDataType computeType, hipsparseSDDMMAlg_t alg, void* tempBuffer);
-  // CHECK: status_t = hipsparseSDDMM(handle_t, opA, opB, alpha, matA, matB, beta, matC, dataType, sDDMMAlg_t, tempBuffer);
- status_t = cusparseSDDMM(handle_t, opA, opB, alpha, matA, matB, beta, matC, dataType, sDDMMAlg_t, tempBuffer);
+  // CHECK: status_t = hipsparseSDDMM(handle_t, opA, opB, alpha, dnmatA, dnmatB, beta, spmatC, dataType, sDDMMAlg_t, tempBuffer);
+  status_t = cusparseSDDMM(handle_t, opA, opB, alpha, dnmatA, dnmatB, beta, spmatC, dataType, sDDMMAlg_t, tempBuffer);
+#endif
 #endif
 
 #if CUDA_VERSION >= 11030
@@ -1897,12 +2008,33 @@ int main() {
   cusparseSpSVAlg_t spSVAlg_t;
   cusparseSpSVAlg_t SPSV_ALG_DEFAULT = CUSPARSE_SPSV_ALG_DEFAULT;
 
+  // CHECK: hipsparseSpSVDescr_t spSVDescr;
+  cusparseSpSVDescr_t spSVDescr;
+
 #if CUDA_VERSION < 12000
   // TODO: Mark as C-Changed in 12.0.0
   // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpMatGetAttribute(cusparseSpMatDescr_t spMatDescr, cusparseSpMatAttribute_t attribute, void* data, size_t dataSize);
   // HIP: hipsparseStatus_t hipsparseSpMatGetAttribute(hipsparseSpMatDescr_t spMatDescr, hipsparseSpMatAttribute_t attribute, void* data, size_t dataSize);
   // CHECK: status_t = hipsparseSpMatGetAttribute(spMatDescr_t, spMatAttribute_t, &data, dataSize);
   status_t = cusparseSpMatGetAttribute(spMatDescr_t, spMatAttribute_t, &data, dataSize);
+
+  // TODO: Mark as C-Changed in 12.0.0
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpSV_bufferSize(cusparseHandle_t handle, cusparseOperation_t opA, const void* alpha, cusparseSpMatDescr_t matA, cusparseDnVecDescr_t vecX, cusparseDnVecDescr_t vecY, cudaDataType computeType, cusparseSpSVAlg_t alg, cusparseSpSVDescr_t spsvDescr, size_t* bufferSize);
+  // HIP: hipsparseStatus_t hipsparseSpSV_bufferSize(hipsparseHandle_t handle, hipsparseOperation_t opA, const void* alpha, const hipsparseSpMatDescr_t matA, const hipsparseDnVecDescr_t x, const hipsparseDnVecDescr_t y, hipDataType computeType, hipsparseSpSVAlg_t alg, hipsparseSpSVDescr_t spsvDescr, size_t* bufferSize);
+  // CHECK: status_t = hipsparseSpSV_bufferSize(handle_t, opA, alpha, spmatA, vecX, vecY, dataType, spSVAlg_t, spSVDescr, &bufferSize);
+  status_t = cusparseSpSV_bufferSize(handle_t, opA, alpha, spmatA, vecX, vecY, dataType, spSVAlg_t, spSVDescr, &bufferSize);
+
+  // TODO: Mark as C-Changed in 12.0.0
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpSV_analysis(cusparseHandle_t handle, cusparseOperation_t opA, const void* alpha, cusparseSpMatDescr_t matA, cusparseDnVecDescr_t vecX, cusparseDnVecDescr_t vecY, cudaDataType computeType, cusparseSpSVAlg_t alg, cusparseSpSVDescr_t spsvDescr, void* externalBuffer);
+  // HIP: hipsparseStatus_t hipsparseSpSV_analysis(hipsparseHandle_t handle, hipsparseOperation_t opA, const void* alpha, const hipsparseSpMatDescr_t matA, const hipsparseDnVecDescr_t x, const hipsparseDnVecDescr_t y, hipDataType computeType, hipsparseSpSVAlg_t alg, hipsparseSpSVDescr_t spsvDescr, void* externalBuffer);
+  // CHECK: status_t = hipsparseSpSV_analysis(handle_t, opA, alpha, spmatA, vecX, vecY, dataType, spSVAlg_t, spSVDescr, tempBuffer);
+  status_t = cusparseSpSV_analysis(handle_t, opA, alpha, spmatA, vecX, vecY, dataType, spSVAlg_t, spSVDescr, tempBuffer);
+
+  // TODO: Mark as C-Changed in 12.0.0
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpSV_solve(cusparseHandle_t handle, cusparseOperation_t opA, const void* alpha, cusparseSpMatDescr_t matA, cusparseDnVecDescr_t vecX, cusparseDnVecDescr_t vecY, cudaDataType computeType, cusparseSpSVAlg_t alg, cusparseSpSVDescr_t spsvDescr);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpSV_solve(hipsparseHandle_t handle, hipsparseOperation_t opA, const void* alpha, const hipsparseSpMatDescr_t matA, const hipsparseDnVecDescr_t x, const hipsparseDnVecDescr_t y, hipDataType computeType, hipsparseSpSVAlg_t alg, hipsparseSpSVDescr_t spsvDescr);
+  // CHECK: status_t = hipsparseSpSV_solve(handle_t, opA, alpha, spmatA, vecX, vecY, dataType, spSVAlg_t, spSVDescr);
+  status_t = cusparseSpSV_solve(handle_t, opA, alpha, spmatA, vecX, vecY, dataType, spSVAlg_t, spSVDescr);
 #endif
 
   // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpMatSetAttribute(cusparseSpMatDescr_t spMatDescr, cusparseSpMatAttribute_t attribute, void* data, size_t dataSize);
@@ -1917,10 +2049,57 @@ int main() {
   cusparseSpSMAlg_t spSMAlg_t;
   cusparseSpSMAlg_t SPSM_ALG_DEFAULT = CUSPARSE_SPSM_ALG_DEFAULT;
 
+  // CHECK: hipsparseSpSMDescr_t spSMDescr;
+  cusparseSpSMDescr_t spSMDescr;
+
   // CHECK: hipsparseSpGEMMAlg_t SPGEMM_CSR_ALG_DETERMINITIC = HIPSPARSE_SPGEMM_CSR_ALG_DETERMINISTIC;
   // CHECK-NEXT: hipsparseSpGEMMAlg_t SPGEMM_CSR_ALG_NONDETERMINITIC = HIPSPARSE_SPGEMM_CSR_ALG_NONDETERMINISTIC;
   cusparseSpGEMMAlg_t SPGEMM_CSR_ALG_DETERMINITIC = CUSPARSE_SPGEMM_CSR_ALG_DETERMINITIC;
   cusparseSpGEMMAlg_t SPGEMM_CSR_ALG_NONDETERMINITIC = CUSPARSE_SPGEMM_CSR_ALG_NONDETERMINITIC;
+
+#if CUDA_VERSION < 12000
+  // TODO: Mark as C-Changed in 12.0.0
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpGEMMreuse_workEstimation(cusparseHandle_t handle, cusparseOperation_t opA, cusparseOperation_t opB, cusparseSpMatDescr_t matA, cusparseSpMatDescr_t matB, cusparseSpMatDescr_t matC, cusparseSpGEMMAlg_t alg, cusparseSpGEMMDescr_t spgemmDescr, size_t* bufferSize1, void* externalBuffer1);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpGEMMreuse_workEstimation(hipsparseHandle_t handle, hipsparseOperation_t opA, hipsparseOperation_t opB, hipsparseSpMatDescr_t matA, hipsparseSpMatDescr_t matB, hipsparseSpMatDescr_t matC, hipsparseSpGEMMAlg_t alg, hipsparseSpGEMMDescr_t spgemmDescr, size_t* bufferSize1, void* externalBuffer1);
+  // CHECK: status_t = hipsparseSpGEMMreuse_workEstimation(handle_t, opA, opB, spmatA, spmatB, spmatC, spGEMMAlg_t, spGEMMDescr, &bufferSize, tempBuffer);
+  status_t = cusparseSpGEMMreuse_workEstimation(handle_t, opA, opB, spmatA, spmatB, spmatC, spGEMMAlg_t, spGEMMDescr, &bufferSize, tempBuffer);
+
+  // TODO: Mark as C-Changed in 12.0.0
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpGEMMreuse_nnz(cusparseHandle_t handle, cusparseOperation_t opA, cusparseOperation_t opB, cusparseSpMatDescr_t matA, cusparseSpMatDescr_t matB, cusparseSpMatDescr_t matC, cusparseSpGEMMAlg_t alg, cusparseSpGEMMDescr_t spgemmDescr, size_t* bufferSize2, void* externalBuffer2, size_t* bufferSize3, void* externalBuffer3, size_t* bufferSize4, void* externalBuffer4);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpGEMMreuse_nnz(hipsparseHandle_t handle, hipsparseOperation_t opA, hipsparseOperation_t opB, hipsparseSpMatDescr_t matA, hipsparseSpMatDescr_t matB, hipsparseSpMatDescr_t matC, hipsparseSpGEMMAlg_t alg, hipsparseSpGEMMDescr_t spgemmDescr, size_t* bufferSize2, void* externalBuffer2, size_t* bufferSize3, void* externalBuffer3, size_t* bufferSize4, void* externalBuffer4);
+  // CHECK: status_t = hipsparseSpGEMMreuse_nnz(handle_t, opA, opB, spmatA, spmatB, spmatC, spGEMMAlg_t, spGEMMDescr, &bufferSize2, tempBuffer2, &bufferSize3, tempBuffer3, &bufferSize4, tempBuffer4);
+  status_t = cusparseSpGEMMreuse_nnz(handle_t, opA, opB, spmatA, spmatB, spmatC, spGEMMAlg_t, spGEMMDescr, &bufferSize2, tempBuffer2, &bufferSize3, tempBuffer3, &bufferSize4, tempBuffer4);
+
+  // TODO: Mark as C-Changed in 12.0.0
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpGEMMreuse_compute(cusparseHandle_t handle, cusparseOperation_t opA, cusparseOperation_t opB, const void* alpha, cusparseSpMatDescr_t matA, cusparseSpMatDescr_t matB, const void* beta, cusparseSpMatDescr_t matC, cudaDataType computeType, cusparseSpGEMMAlg_t alg, cusparseSpGEMMDescr_t spgemmDescr);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpGEMMreuse_compute(hipsparseHandle_t handle, hipsparseOperation_t opA, hipsparseOperation_t opB, const void* alpha, hipsparseSpMatDescr_t matA, hipsparseSpMatDescr_t matB, const void* beta, hipsparseSpMatDescr_t  matC, hipDataType computeType, hipsparseSpGEMMAlg_t alg, hipsparseSpGEMMDescr_t spgemmDescr);
+  // CHECK: status_t = hipsparseSpGEMMreuse_compute(handle_t, opA, opB, alpha, spmatA, spmatB, beta, spmatC, dataType, spGEMMAlg_t, spGEMMDescr);
+  status_t = cusparseSpGEMMreuse_compute(handle_t, opA, opB, alpha, spmatA, spmatB, beta, spmatC, dataType, spGEMMAlg_t, spGEMMDescr);
+
+  // TODO: Mark as C-Changed in 12.0.0
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpGEMMreuse_copy(cusparseHandle_t handle, cusparseOperation_t opA, cusparseOperation_t opB, cusparseSpMatDescr_t matA, cusparseSpMatDescr_t matB, cusparseSpMatDescr_t matC, cusparseSpGEMMAlg_t alg, cusparseSpGEMMDescr_t spgemmDescr, size_t* bufferSize5, void* externalBuffer5);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpGEMMreuse_copy(hipsparseHandle_t handle, hipsparseOperation_t opA, hipsparseOperation_t opB, hipsparseSpMatDescr_t matA, hipsparseSpMatDescr_t matB, hipsparseSpMatDescr_t matC, hipsparseSpGEMMAlg_t alg, hipsparseSpGEMMDescr_t spgemmDescr, size_t* bufferSize5, void* externalBuffer5);
+  // CHECK: status_t = hipsparseSpGEMMreuse_copy(handle_t, opA, opB, spmatA, spmatB, spmatC, spGEMMAlg_t, spGEMMDescr, &bufferSize5, tempBuffer5);
+  status_t = cusparseSpGEMMreuse_copy(handle_t, opA, opB, spmatA, spmatB, spmatC, spGEMMAlg_t, spGEMMDescr, &bufferSize5, tempBuffer5);
+
+  // TODO: Mark as C-Changed in 12.0.0
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpSM_bufferSize(cusparseHandle_t handle, cusparseOperation_t opA, cusparseOperation_t opB, const void* alpha, cusparseSpMatDescr_t matA, cusparseDnMatDescr_t matB, cusparseDnMatDescr_t matC, cudaDataType computeType, cusparseSpSMAlg_t alg, cusparseSpSMDescr_t spsmDescr, size_t* bufferSize);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpSM_bufferSize(hipsparseHandle_t handle, hipsparseOperation_t opA, hipsparseOperation_t opB, const void* alpha, const hipsparseSpMatDescr_t matA, const hipsparseDnMatDescr_t matB, const hipsparseDnMatDescr_t matC, hipDataType computeType, hipsparseSpSMAlg_t alg, hipsparseSpSMDescr_t spsmDescr, size_t* bufferSize);
+  // CHECK: status_t = hipsparseSpSM_bufferSize(handle_t, opA, opB, alpha, spmatA, dnmatB, dnmatC, dataType, spSMAlg_t, spSMDescr, &bufferSize);
+  status_t = cusparseSpSM_bufferSize(handle_t, opA, opB, alpha, spmatA, dnmatB, dnmatC, dataType, spSMAlg_t, spSMDescr, &bufferSize);
+
+  // TODO: Mark as C-Changed in 12.0.0
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpSM_analysis(cusparseHandle_t handle, cusparseOperation_t opA, cusparseOperation_t opB, const void* alpha, cusparseSpMatDescr_t matA, cusparseDnMatDescr_t matB, cusparseDnMatDescr_t matC, cudaDataType computeType, cusparseSpSMAlg_t alg, cusparseSpSMDescr_t spsmDescr, void* externalBuffer);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpSM_analysis(hipsparseHandle_t handle, hipsparseOperation_t opA, hipsparseOperation_t opB, const void* alpha, const hipsparseSpMatDescr_t matA, const hipsparseDnMatDescr_t matB, const hipsparseDnMatDescr_t matC, hipDataType computeType, hipsparseSpSMAlg_t alg, hipsparseSpSMDescr_t spsmDescr, void* externalBuffer);
+  // CHECK: status_t = hipsparseSpSM_analysis(handle_t, opA, opB, alpha, spmatA, dnmatB, dnmatC, dataType, spSMAlg_t, spSMDescr, tempBuffer);
+  status_t = cusparseSpSM_analysis(handle_t, opA, opB, alpha, spmatA, dnmatB, dnmatC, dataType, spSMAlg_t, spSMDescr, tempBuffer);
+
+  // TODO: Mark as C-Changed in 12.0.0
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpSM_solve(cusparseHandle_t handle, cusparseOperation_t opA, cusparseOperation_t opB, const void* alpha, cusparseSpMatDescr_t matA, cusparseDnMatDescr_t matB, cusparseDnMatDescr_t matC, cudaDataType computeType, cusparseSpSMAlg_t alg, cusparseSpSMDescr_t spsmDescr);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpSM_solve(hipsparseHandle_t handle, hipsparseOperation_t opA, hipsparseOperation_t opB, const void* alpha, const hipsparseSpMatDescr_t matA, const hipsparseDnMatDescr_t matB, const hipsparseDnMatDescr_t matC, hipDataType computeType, hipsparseSpSMAlg_t alg, hipsparseSpSMDescr_t spsmDescr, void* externalBuffer);
+  // CHECK: status_t = hipsparseSpSM_solve(handle_t, opA, opB, alpha, spmatA, dnmatB, dnmatC, dataType, spSMAlg_t, spSMDescr);
+  status_t = cusparseSpSM_solve(handle_t, opA, opB, alpha, spmatA, dnmatB, dnmatC, dataType, spSMAlg_t, spSMDescr);
+#endif
 #endif
 
 #if CUDA_VERSION < 12000
@@ -2047,13 +2226,17 @@ int main() {
   cusparseConstSpVecDescr_t constSpVecDescr = nullptr;
 
   // CHECK: hipsparseConstSpMatDescr_t constSpMatDescr = nullptr;
+  // CHECK-NEXT: hipsparseConstSpMatDescr_t constSpMatDescrB = nullptr;
   cusparseConstSpMatDescr_t constSpMatDescr = nullptr;
+  cusparseConstSpMatDescr_t constSpMatDescrB = nullptr;
 
   // CHECK: hipsparseConstDnVecDescr_t constDnVecDescr = nullptr;
   cusparseConstDnVecDescr_t constDnVecDescr = nullptr;
 
   // CHECK: hipsparseConstDnMatDescr_t constDnMatDescr = nullptr;
+  // CHECK-NEXT: hipsparseConstDnMatDescr_t constDnMatDescrB = nullptr;
   cusparseConstDnMatDescr_t constDnMatDescr = nullptr;
+  cusparseConstDnMatDescr_t constDnMatDescrB = nullptr;
 
   // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCreateConstSpVec(cusparseConstSpVecDescr_t* spVecDescr, int64_t size, int64_t nnz, const void* indices, const void* values, cusparseIndexType_t idxType, cusparseIndexBase_t idxBase, cudaDataType valueType);
   // HIP: hipsparseStatus_t hipsparseCreateConstSpVec(hipsparseConstSpVecDescr_t* spVecDescr, int64_t size, int64_t nnz, const void* indices, const void* values, hipsparseIndexType_t idxType, hipsparseIndexBase_t idxBase, hipDataType valueType);
@@ -2189,6 +2372,161 @@ int main() {
   // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDnMatGetStridedBatch(hipsparseConstDnMatDescr_t dnMatDescr, int* batchCount, int64_t* batchStride);
   // CHECK: status_t = hipsparseDnMatGetStridedBatch(constDnMatDescr, &batchCount, &batchStride);
   status_t = cusparseDnMatGetStridedBatch(constDnMatDescr, &batchCount, &batchStride);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseAxpby(cusparseHandle_t handle, const void* alpha, cusparseConstSpVecDescr_t vecX, const void* beta, cusparseDnVecDescr_t vecY);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseAxpby(hipsparseHandle_t handle, const void* alpha, hipsparseConstSpVecDescr_t vecX, const void* beta, hipsparseDnVecDescr_t vecY);
+  // CHECK: status_t = hipsparseAxpby(handle_t, alpha, constSpVecDescr, beta, vecY);
+  status_t = cusparseAxpby(handle_t, alpha, constSpVecDescr, beta, vecY);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseGather(cusparseHandle_t handle, cusparseConstDnVecDescr_t vecY, cusparseSpVecDescr_t vecX);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseGather(hipsparseHandle_t handle, hipsparseConstDnVecDescr_t vecY, hipsparseSpVecDescr_t vecX);
+  // CHECK: status_t = hipsparseGather(handle_t, constDnVecDescr, spVecDescr_t);
+  status_t = cusparseGather(handle_t, constDnVecDescr, spVecDescr_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseScatter(cusparseHandle_t handle, cusparseConstSpVecDescr_t vecX, cusparseDnVecDescr_t vecY);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseScatter(hipsparseHandle_t handle, hipsparseConstSpVecDescr_t vecX, hipsparseDnVecDescr_t vecY);
+  // CHECK: status_t = hipsparseScatter(handle_t, constSpVecDescr, vecY);
+  status_t = cusparseScatter(handle_t, constSpVecDescr, vecY);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSparseToDense_bufferSize(cusparseHandle_t handle, cusparseConstSpMatDescr_t matA, cusparseDnMatDescr_t matB, cusparseSparseToDenseAlg_t alg, size_t* bufferSize);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSparseToDense_bufferSize(hipsparseHandle_t handle, hipsparseConstSpMatDescr_t matA, hipsparseDnMatDescr_t matB, hipsparseSparseToDenseAlg_t alg, size_t* bufferSize);
+  // CHECK: status_t = hipsparseSparseToDense_bufferSize(handle_t, constSpMatDescr, dnmatB, sparseToDenseAlg_t, &bufferSize);
+  status_t = cusparseSparseToDense_bufferSize(handle_t, constSpMatDescr, dnmatB, sparseToDenseAlg_t, &bufferSize);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSparseToDense(cusparseHandle_t handle, cusparseConstSpMatDescr_t matA, cusparseDnMatDescr_t matB, cusparseSparseToDenseAlg_t alg, void* externalBuffer);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSparseToDense(hipsparseHandle_t handle, hipsparseConstSpMatDescr_t matA, hipsparseDnMatDescr_t matB, hipsparseSparseToDenseAlg_t alg, void* externalBuffer);
+  // CHECK: status_t = hipsparseSparseToDense(handle_t, constSpMatDescr, dnmatB, sparseToDenseAlg_t, tempBuffer);
+  status_t = cusparseSparseToDense(handle_t, constSpMatDescr, dnmatB, sparseToDenseAlg_t, tempBuffer);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDenseToSparse_bufferSize(cusparseHandle_t handle, cusparseConstDnMatDescr_t matA, cusparseSpMatDescr_t matB, cusparseDenseToSparseAlg_t alg, size_t* bufferSize);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDenseToSparse_bufferSize(hipsparseHandle_t handle, hipsparseConstDnMatDescr_t matA, hipsparseSpMatDescr_t matB, hipsparseDenseToSparseAlg_t alg, size_t* bufferSize);
+  // CHECK: status_t = hipsparseDenseToSparse_bufferSize(handle_t, dnmatB, spMatDescr_t, denseToSparseAlg_t, &bufferSize);
+  status_t = cusparseDenseToSparse_bufferSize(handle_t, dnmatB, spMatDescr_t, denseToSparseAlg_t, &bufferSize);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDenseToSparse_analysis(cusparseHandle_t handle, cusparseConstDnMatDescr_t matA, cusparseSpMatDescr_t matB, cusparseDenseToSparseAlg_t alg, void* externalBuffer);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDenseToSparse_analysis(hipsparseHandle_t handle, hipsparseConstDnMatDescr_t matA, hipsparseSpMatDescr_t matB, hipsparseDenseToSparseAlg_t alg, void* externalBuffer);
+  // CHECK: status_t = hipsparseDenseToSparse_analysis(handle_t, constDnMatDescr, spmatB, denseToSparseAlg_t, tempBuffer);
+  status_t = cusparseDenseToSparse_analysis(handle_t, constDnMatDescr, spmatB, denseToSparseAlg_t, tempBuffer);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDenseToSparse_convert(cusparseHandle_t handle, cusparseConstDnMatDescr_t matA, cusparseSpMatDescr_t matB, cusparseDenseToSparseAlg_t alg, void* externalBuffer);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDenseToSparse_convert(hipsparseHandle_t handle, hipsparseConstDnMatDescr_t matA, hipsparseSpMatDescr_t matB, hipsparseDenseToSparseAlg_t alg, void* externalBuffer);
+  // CHECK: status_t = hipsparseDenseToSparse_convert(handle_t, constDnMatDescr, spmatB, denseToSparseAlg_t, tempBuffer);
+  status_t = cusparseDenseToSparse_convert(handle_t, constDnMatDescr, spmatB, denseToSparseAlg_t, tempBuffer);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpVV_bufferSize(cusparseHandle_t handle, cusparseOperation_t opX, cusparseConstSpVecDescr_t vecX, cusparseConstDnVecDescr_t vecY, const void* result, cudaDataType computeType, size_t* bufferSize);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpVV_bufferSize(hipsparseHandle_t handle, hipsparseOperation_t opX, hipsparseConstSpVecDescr_t vecX, hipsparseConstDnVecDescr_t vecY, void* result, hipDataType computeType, size_t* bufferSize);
+  // CHECK: status_t = hipsparseSpVV_bufferSize(handle_t, opX, constSpVecDescr, constDnVecDescr, result, dataType, &bufferSize);
+  status_t = cusparseSpVV_bufferSize(handle_t, opX, constSpVecDescr, constDnVecDescr, result, dataType, &bufferSize);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpVV(cusparseHandle_t handle, cusparseOperation_t opX, cusparseConstSpVecDescr_t vecX, cusparseConstDnVecDescr_t vecY, void* result, cudaDataType computeType, void* externalBuffer);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpVV(hipsparseHandle_t handle, hipsparseOperation_t opX, hipsparseConstSpVecDescr_t vecX, hipsparseConstDnVecDescr_t vecY, void* result, hipDataType computeType, void* externalBuffer);
+  // CHECK: status_t = hipsparseSpVV(handle_t, opX, constSpVecDescr, constDnVecDescr, result, dataType, tempBuffer);
+  status_t = cusparseSpVV(handle_t, opX, constSpVecDescr, constDnVecDescr, result, dataType, tempBuffer);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpMV_bufferSize(cusparseHandle_t handle, cusparseOperation_t opA, const void* alpha, cusparseConstSpMatDescr_t matA, cusparseConstDnVecDescr_t vecX, const void* beta, cusparseDnVecDescr_t vecY, cudaDataType computeType, cusparseSpMVAlg_t alg, size_t* bufferSize);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpMV_bufferSize(hipsparseHandle_t handle, hipsparseOperation_t opA, const void* alpha, hipsparseConstSpMatDescr_t matA, hipsparseConstDnVecDescr_t vecX, const void* beta, const hipsparseDnVecDescr_t vecY, hipDataType computeType, hipsparseSpMVAlg_t alg, size_t* bufferSize);
+  // CHECK: status_t = hipsparseSpMV_bufferSize(handle_t, opA, alpha, constSpMatDescr, constDnVecDescr, beta, vecY, dataType, spMVAlg_t, &bufferSize);
+  status_t = cusparseSpMV_bufferSize(handle_t, opA, alpha, constSpMatDescr, constDnVecDescr, beta, vecY, dataType, spMVAlg_t, &bufferSize);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpMV(cusparseHandle_t handle, cusparseOperation_t opA, const void* alpha, cusparseConstSpMatDescr_t matA, cusparseConstDnVecDescr_t vecX, const void* beta, cusparseDnVecDescr_t vecY, cudaDataType computeType, cusparseSpMVAlg_t alg, void* externalBuffer);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpMV(hipsparseHandle_t handle, hipsparseOperation_t opA, const void* alpha, hipsparseConstSpMatDescr_t matA, hipsparseConstDnVecDescr_t vecX, const void* beta, const hipsparseDnVecDescr_t vecY, hipDataType computeType, hipsparseSpMVAlg_t alg, void* externalBuffer);
+  // CHECK: status_t = hipsparseSpMV(handle_t, opA, alpha, constSpMatDescr, constDnVecDescr, beta, vecY, dataType, spMVAlg_t, tempBuffer);
+  status_t = cusparseSpMV(handle_t, opA, alpha, constSpMatDescr, constDnVecDescr, beta, vecY, dataType, spMVAlg_t, tempBuffer);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpMM_bufferSize(cusparseHandle_t handle, cusparseOperation_t opA, cusparseOperation_t opB, const void* alpha, cusparseConstSpMatDescr_t matA, cusparseConstDnMatDescr_t matB, const void* beta, cusparseDnMatDescr_t matC, cudaDataType computeType, cusparseSpMMAlg_t alg, size_t* bufferSize);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpMM_bufferSize(hipsparseHandle_t handle, hipsparseOperation_t opA, hipsparseOperation_t opB, const void* alpha, hipsparseConstSpMatDescr_t matA, hipsparseConstDnMatDescr_t matB, const void* beta, const hipsparseDnMatDescr_t matC, hipDataType computeType, hipsparseSpMMAlg_t alg, size_t* bufferSize);
+  // CHECK: status_t = hipsparseSpMM_bufferSize(handle_t, opA, opB, alpha, constSpMatDescr, constDnMatDescr, beta, dnmatC, dataType, spMMAlg_t, &bufferSize);
+  status_t = cusparseSpMM_bufferSize(handle_t, opA, opB, alpha, constSpMatDescr, constDnMatDescr, beta, dnmatC, dataType, spMMAlg_t, &bufferSize);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpMM_preprocess(cusparseHandle_t handle, cusparseOperation_t opA, cusparseOperation_t opB, const void* alpha, cusparseConstSpMatDescr_t matA, cusparseConstDnMatDescr_t matB, const void* beta, cusparseDnMatDescr_t matC, cudaDataType computeType, cusparseSpMMAlg_t alg, void* externalBuffer);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpMM_preprocess(hipsparseHandle_t handle, hipsparseOperation_t opA, hipsparseOperation_t opB, const void* alpha, hipsparseConstSpMatDescr_t matA, hipsparseConstDnMatDescr_t matB, const void* beta, const hipsparseDnMatDescr_t matC, hipDataType computeType, hipsparseSpMMAlg_t alg, void* externalBuffer);
+  // CHECK: status_t = hipsparseSpMM_preprocess(handle_t, opA, opB, alpha, constSpMatDescr, constDnMatDescr, beta, dnmatC, dataType, spMMAlg_t, tempBuffer);
+  status_t = cusparseSpMM_preprocess(handle_t, opA, opB, alpha, constSpMatDescr, constDnMatDescr, beta, dnmatC, dataType, spMMAlg_t, tempBuffer);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpMM(cusparseHandle_t handle, cusparseOperation_t opA, cusparseOperation_t opB, const void* alpha, cusparseConstSpMatDescr_t matA, cusparseConstDnMatDescr_t matB, const void* beta, cusparseDnMatDescr_t matC, cudaDataType computeType, cusparseSpMMAlg_t alg, void* externalBuffer);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpMM(hipsparseHandle_t handle, hipsparseOperation_t opA, hipsparseOperation_t opB, const void* alpha, hipsparseConstSpMatDescr_t matA, hipsparseConstDnMatDescr_t matB, const void* beta, const hipsparseDnMatDescr_t matC, hipDataType computeType, hipsparseSpMMAlg_t alg, void* externalBuffer);
+  // CHECK: status_t = hipsparseSpMM(handle_t, opA, opB, alpha, constSpMatDescr, constDnMatDescr, beta, dnmatC, dataType, spMMAlg_t, tempBuffer);
+  status_t = cusparseSpMM(handle_t, opA, opB, alpha, constSpMatDescr, constDnMatDescr, beta, dnmatC, dataType, spMMAlg_t, tempBuffer);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpGEMM_workEstimation(cusparseHandle_t handle, cusparseOperation_t opA, cusparseOperation_t opB, const void* alpha, cusparseConstSpMatDescr_t matA, cusparseConstSpMatDescr_t matB, const void* beta, cusparseSpMatDescr_t matC, cudaDataType computeType, cusparseSpGEMMAlg_t alg, cusparseSpGEMMDescr_t spgemmDescr, size_t* bufferSize1, void* externalBuffer1);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpGEMM_workEstimation(hipsparseHandle_t handle, hipsparseOperation_t opA, hipsparseOperation_t opB, const void* alpha, hipsparseConstSpMatDescr_t matA, hipsparseConstSpMatDescr_t matB, const void* beta, hipsparseSpMatDescr_t matC, hipDataType computeType, hipsparseSpGEMMAlg_t alg, hipsparseSpGEMMDescr_t spgemmDescr, size_t* bufferSize1, void* externalBuffer1);
+  // CHECK: status_t = hipsparseSpGEMM_workEstimation(handle_t, opA, opB, alpha, constSpMatDescr, constSpMatDescrB, beta, spmatC, dataType, spGEMMAlg_t, spGEMMDescr, &bufferSize, tempBuffer);
+  status_t = cusparseSpGEMM_workEstimation(handle_t, opA, opB, alpha, constSpMatDescr, constSpMatDescrB, beta, spmatC, dataType, spGEMMAlg_t, spGEMMDescr, &bufferSize, tempBuffer);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpGEMM_compute(cusparseHandle_t handle, cusparseOperation_t opA, cusparseOperation_t opB, const void* alpha, cusparseConstSpMatDescr_t matA, cusparseConstSpMatDescr_t matB, const void* beta, cusparseSpMatDescr_t matC, cudaDataType computeType, cusparseSpGEMMAlg_t alg, cusparseSpGEMMDescr_t spgemmDescr, size_t* bufferSize2, void* externalBuffer2);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpGEMM_compute(hipsparseHandle_t handle, hipsparseOperation_t opA, hipsparseOperation_t opB, const void* alpha, hipsparseConstSpMatDescr_t matA, hipsparseConstSpMatDescr_t matB, const void* beta, hipsparseSpMatDescr_t matC, hipDataType computeType, hipsparseSpGEMMAlg_t alg, hipsparseSpGEMMDescr_t spgemmDescr, size_t* bufferSize2, void* externalBuffer2);
+  // CHECK: status_t = hipsparseSpGEMM_compute(handle_t, opA, opB, alpha, constSpMatDescr, constSpMatDescrB, beta, spmatC, dataType, spGEMMAlg_t, spGEMMDescr, &bufferSize, tempBuffer);
+  status_t = cusparseSpGEMM_compute(handle_t, opA, opB, alpha, constSpMatDescr, constSpMatDescrB, beta, spmatC, dataType, spGEMMAlg_t, spGEMMDescr, &bufferSize, tempBuffer);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpGEMM_copy(cusparseHandle_t handle, cusparseOperation_t opA, cusparseOperation_t opB, const void* alpha, cusparseConstSpMatDescr_t matA, cusparseConstSpMatDescr_t matB, const void* beta, cusparseSpMatDescr_t matC, cudaDataType computeType, cusparseSpGEMMAlg_t alg, cusparseSpGEMMDescr_t spgemmDescr);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpGEMM_copy(hipsparseHandle_t handle, hipsparseOperation_t opA, hipsparseOperation_t opB, const void* alpha, hipsparseConstSpMatDescr_t matA, hipsparseConstSpMatDescr_t matB, const void* beta, hipsparseSpMatDescr_t matC, hipDataType computeType, hipsparseSpGEMMAlg_t alg, hipsparseSpGEMMDescr_t spgemmDescr);
+  // CHECK: status_t = hipsparseSpGEMM_copy(handle_t, opA, opB, alpha, constSpMatDescr, constSpMatDescrB, beta, spmatC, dataType, spGEMMAlg_t, spGEMMDescr);
+  status_t = cusparseSpGEMM_copy(handle_t, opA, opB, alpha, constSpMatDescr, constSpMatDescrB, beta, spmatC, dataType, spGEMMAlg_t, spGEMMDescr);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpGEMMreuse_workEstimation(cusparseHandle_t handle, cusparseOperation_t opA, cusparseOperation_t opB, cusparseConstSpMatDescr_t matA, cusparseConstSpMatDescr_t matB, cusparseSpMatDescr_t matC, cusparseSpGEMMAlg_t alg, cusparseSpGEMMDescr_t spgemmDescr, size_t* bufferSize1, void* externalBuffer1);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpGEMMreuse_workEstimation(hipsparseHandle_t handle, hipsparseOperation_t opA, hipsparseOperation_t opB, hipsparseConstSpMatDescr_t matA, hipsparseConstSpMatDescr_t matB, hipsparseSpMatDescr_t matC, hipsparseSpGEMMAlg_t alg, hipsparseSpGEMMDescr_t spgemmDescr, size_t* bufferSize1, void* externalBuffer1);
+  // CHECK: status_t = hipsparseSpGEMMreuse_workEstimation(handle_t, opA, opB, constSpMatDescr, constSpMatDescrB, spmatC, spGEMMAlg_t, spGEMMDescr, &bufferSize, tempBuffer);
+  status_t = cusparseSpGEMMreuse_workEstimation(handle_t, opA, opB, constSpMatDescr, constSpMatDescrB, spmatC, spGEMMAlg_t, spGEMMDescr, &bufferSize, tempBuffer);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpGEMMreuse_nnz(cusparseHandle_t handle, cusparseOperation_t opA, cusparseOperation_t opB, cusparseConstSpMatDescr_t matA, cusparseConstSpMatDescr_t matB, cusparseSpMatDescr_t matC, cusparseSpGEMMAlg_t alg, cusparseSpGEMMDescr_t spgemmDescr, size_t* bufferSize2, void* externalBuffer2, size_t* bufferSize3, void* externalBuffer3, size_t* bufferSize4, void* externalBuffer4);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpGEMMreuse_nnz(hipsparseHandle_t handle, hipsparseOperation_t opA, hipsparseOperation_t opB, hipsparseConstSpMatDescr_t matA, hipsparseConstSpMatDescr_t matB, hipsparseSpMatDescr_t matC, hipsparseSpGEMMAlg_t alg, hipsparseSpGEMMDescr_t spgemmDescr, size_t* bufferSize2, void* externalBuffer2, size_t* bufferSize3, void* externalBuffer3, size_t* bufferSize4, void* externalBuffer4);
+  // CHECK: status_t = hipsparseSpGEMMreuse_nnz(handle_t, opA, opB, constSpMatDescr, constSpMatDescrB, spmatC, spGEMMAlg_t, spGEMMDescr, &bufferSize2, tempBuffer2, &bufferSize3, tempBuffer3, &bufferSize4, tempBuffer4);
+  status_t = cusparseSpGEMMreuse_nnz(handle_t, opA, opB, constSpMatDescr, constSpMatDescrB, spmatC, spGEMMAlg_t, spGEMMDescr, &bufferSize2, tempBuffer2, &bufferSize3, tempBuffer3, &bufferSize4, tempBuffer4);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpGEMMreuse_compute(cusparseHandle_t handle, cusparseOperation_t opA, cusparseOperation_t opB, const void* alpha, cusparseConstSpMatDescr_t matA, cusparseConstSpMatDescr_t matB, const void* beta, cusparseSpMatDescr_t matC, cudaDataType computeType, cusparseSpGEMMAlg_t alg, cusparseSpGEMMDescr_t spgemmDescr);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpGEMMreuse_compute(hipsparseHandle_t handle, hipsparseOperation_t opA, hipsparseOperation_t opB, const void* alpha, hipsparseConstSpMatDescr_t matA, hipsparseConstSpMatDescr_t matB, const void* beta, hipsparseSpMatDescr_t matC, hipDataType computeType, hipsparseSpGEMMAlg_t alg, hipsparseSpGEMMDescr_t spgemmDescr);
+  // CHECK: status_t = hipsparseSpGEMMreuse_compute(handle_t, opA, opB, alpha, constSpMatDescr, constSpMatDescrB, beta, spmatC, dataType, spGEMMAlg_t, spGEMMDescr);
+  status_t = cusparseSpGEMMreuse_compute(handle_t, opA, opB, alpha, constSpMatDescr, constSpMatDescrB, beta, spmatC, dataType, spGEMMAlg_t, spGEMMDescr);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpGEMMreuse_copy(cusparseHandle_t handle, cusparseOperation_t opA, cusparseOperation_t opB, cusparseConstSpMatDescr_t matA, cusparseConstSpMatDescr_t matB, cusparseSpMatDescr_t matC, cusparseSpGEMMAlg_t alg, cusparseSpGEMMDescr_t spgemmDescr, size_t* bufferSize5, void* externalBuffer5);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpGEMMreuse_copy(hipsparseHandle_t handle, hipsparseOperation_t opA, hipsparseOperation_t opB, hipsparseConstSpMatDescr_t matA, hipsparseConstSpMatDescr_t matB, hipsparseSpMatDescr_t matC, hipsparseSpGEMMAlg_t alg, hipsparseSpGEMMDescr_t spgemmDescr, size_t* bufferSize5, void* externalBuffer5);
+  // CHECK: status_t = hipsparseSpGEMMreuse_copy(handle_t, opA, opB, constSpMatDescr, constSpMatDescrB, spmatC, spGEMMAlg_t, spGEMMDescr, &bufferSize5, tempBuffer5);
+  status_t = cusparseSpGEMMreuse_copy(handle_t, opA, opB, constSpMatDescr, constSpMatDescrB, spmatC, spGEMMAlg_t, spGEMMDescr, &bufferSize5, tempBuffer5);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSDDMM_bufferSize(cusparseHandle_t handle, cusparseOperation_t opA, cusparseOperation_t opB, const void* alpha, cusparseConstDnMatDescr_t matA, cusparseConstDnMatDescr_t matB, const void* beta, cusparseSpMatDescr_t matC, cudaDataType computeType, cusparseSDDMMAlg_t alg, size_t* bufferSize);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSDDMM_bufferSize(hipsparseHandle_t handle, hipsparseOperation_t opA, hipsparseOperation_t opB, const void* alpha, hipsparseConstDnMatDescr_t A, hipsparseConstDnMatDescr_t B, const void* beta, hipsparseSpMatDescr_t C, hipDataType computeType, hipsparseSDDMMAlg_t alg, size_t* bufferSize);
+  // CHECK: status_t = hipsparseSDDMM_bufferSize(handle_t, opA, opB, alpha, constDnMatDescr, constDnMatDescrB, beta, spmatC, dataType, sDDMMAlg_t, &bufferSize);
+  status_t = cusparseSDDMM_bufferSize(handle_t, opA, opB, alpha, constDnMatDescr, constDnMatDescrB, beta, spmatC, dataType, sDDMMAlg_t, &bufferSize);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSDDMM_preprocess(cusparseHandle_t handle, cusparseOperation_t opA, cusparseOperation_t opB, const void* alpha, cusparseConstDnMatDescr_t matA, cusparseConstDnMatDescr_t matB, const void* beta, cusparseSpMatDescr_t matC, cudaDataType computeType, cusparseSDDMMAlg_t alg, void* externalBuffer);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSDDMM_preprocess(hipsparseHandle_t handle, hipsparseOperation_t opA, hipsparseOperation_t opB, const void* alpha, hipsparseConstDnMatDescr_t A, hipsparseConstDnMatDescr_t B, const void* beta, hipsparseSpMatDescr_t C, hipDataType computeType, hipsparseSDDMMAlg_t alg, void* tempBuffer);
+  // CHECK: status_t = hipsparseSDDMM_preprocess(handle_t, opA, opB, alpha, constDnMatDescr, constDnMatDescrB, beta, spmatC, dataType, sDDMMAlg_t, tempBuffer);
+  status_t = cusparseSDDMM_preprocess(handle_t, opA, opB, alpha, constDnMatDescr, constDnMatDescrB, beta, spmatC, dataType, sDDMMAlg_t, tempBuffer);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSDDMM(cusparseHandle_t handle, cusparseOperation_t opA, cusparseOperation_t opB, const void* alpha, cusparseConstDnMatDescr_t matA, cusparseConstDnMatDescr_t matB, const void* beta, cusparseSpMatDescr_t matC, cudaDataType computeType, cusparseSDDMMAlg_t alg, void* externalBuffer);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSDDMM(hipsparseHandle_t handle, hipsparseOperation_t opA, hipsparseOperation_t opB, const void* alpha, hipsparseConstDnMatDescr_t A, hipsparseConstDnMatDescr_t B, const void* beta, hipsparseSpMatDescr_t C, hipDataType computeType, hipsparseSDDMMAlg_t alg, void* tempBuffer);
+  // CHECK: status_t = hipsparseSDDMM(handle_t, opA, opB, alpha, constDnMatDescr, constDnMatDescrB, beta, spmatC, dataType, sDDMMAlg_t, tempBuffer);
+  status_t = cusparseSDDMM(handle_t, opA, opB, alpha, constDnMatDescr, constDnMatDescrB, beta, spmatC, dataType, sDDMMAlg_t, tempBuffer);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpSV_bufferSize(cusparseHandle_t handle, cusparseOperation_t opA, const void* alpha, cusparseConstSpMatDescr_t matA, cusparseConstDnVecDescr_t vecX, cusparseDnVecDescr_t vecY, cudaDataType computeType, cusparseSpSVAlg_t alg, cusparseSpSVDescr_t spsvDescr, size_t* bufferSize);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpSV_bufferSize(hipsparseHandle_t handle, hipsparseOperation_t opA, const void* alpha, hipsparseConstSpMatDescr_t matA, hipsparseConstDnVecDescr_t x, const hipsparseDnVecDescr_t y, hipDataType computeType, hipsparseSpSVAlg_t alg, hipsparseSpSVDescr_t spsvDescr, size_t* bufferSize);
+  // CHECK: status_t = hipsparseSpSV_bufferSize(handle_t, opA, alpha, constSpMatDescr, constDnVecDescr, vecY, dataType, spSVAlg_t, spSVDescr, &bufferSize);
+  status_t = cusparseSpSV_bufferSize(handle_t, opA, alpha, constSpMatDescr, constDnVecDescr, vecY, dataType, spSVAlg_t, spSVDescr, &bufferSize);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpSV_analysis(cusparseHandle_t handle, cusparseOperation_t opA, const void* alpha, cusparseConstSpMatDescr_t matA, cusparseConstDnVecDescr_t vecX, cusparseDnVecDescr_t vecY, cudaDataType computeType, cusparseSpSVAlg_t alg, cusparseSpSVDescr_t spsvDescr, void* externalBuffer);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpSV_analysis(hipsparseHandle_t handle, hipsparseOperation_t opA, const void* alpha, hipsparseConstSpMatDescr_t matA, hipsparseConstDnVecDescr_t x, const hipsparseDnVecDescr_t y, hipDataType computeType, hipsparseSpSVAlg_t alg, hipsparseSpSVDescr_t spsvDescr, void* externalBuffer);
+  // CHECK: status_t = hipsparseSpSV_analysis(handle_t, opA, alpha, constSpMatDescr, constDnVecDescr, vecY, dataType, spSVAlg_t, spSVDescr, tempBuffer);
+  status_t = cusparseSpSV_analysis(handle_t, opA, alpha, constSpMatDescr, constDnVecDescr, vecY, dataType, spSVAlg_t, spSVDescr, tempBuffer);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpSV_solve(cusparseHandle_t handle, cusparseOperation_t opA, const void* alpha, cusparseConstSpMatDescr_t matA, cusparseConstDnVecDescr_t vecX, cusparseDnVecDescr_t vecY, cudaDataType computeType, cusparseSpSVAlg_t alg, cusparseSpSVDescr_t spsvDescr);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpSV_solve(hipsparseHandle_t handle, hipsparseOperation_t opA, const void* alpha, hipsparseConstSpMatDescr_t matA, hipsparseConstDnVecDescr_t  x, const hipsparseDnVecDescr_t y, hipDataType computeType, hipsparseSpSVAlg_t alg, hipsparseSpSVDescr_t spsvDescr);
+  // CHECK: status_t = hipsparseSpSV_solve(handle_t, opA, alpha, constSpMatDescr, constDnVecDescr, vecY, dataType, spSVAlg_t, spSVDescr);
+  status_t = cusparseSpSV_solve(handle_t, opA, alpha, constSpMatDescr, constDnVecDescr, vecY, dataType, spSVAlg_t, spSVDescr);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpSM_bufferSize(cusparseHandle_t handle, cusparseOperation_t opA, cusparseOperation_t opB, const void* alpha, cusparseConstSpMatDescr_t matA, cusparseConstDnMatDescr_t matB, cusparseDnMatDescr_t matC, cudaDataType computeType, cusparseSpSMAlg_t alg, cusparseSpSMDescr_t spsmDescr, size_t* bufferSize);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpSM_bufferSize(hipsparseHandle_t handle, hipsparseOperation_t opA, hipsparseOperation_t opB, const void* alpha, hipsparseConstSpMatDescr_t matA, hipsparseConstDnMatDescr_t matB, const hipsparseDnMatDescr_t matC, hipDataType computeType, hipsparseSpSMAlg_t alg, hipsparseSpSMDescr_t spsmDescr, size_t* bufferSize);
+  // CHECK: status_t = hipsparseSpSM_bufferSize(handle_t, opA, opB, alpha, constSpMatDescr, constDnMatDescrB, dnmatC, dataType, spSMAlg_t, spSMDescr, &bufferSize);
+  status_t = cusparseSpSM_bufferSize(handle_t, opA, opB, alpha, constSpMatDescr, constDnMatDescrB, dnmatC, dataType, spSMAlg_t, spSMDescr, &bufferSize);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpSM_analysis(cusparseHandle_t handle, cusparseOperation_t opA, cusparseOperation_t opB, const void* alpha, cusparseConstSpMatDescr_t matA, cusparseConstDnMatDescr_t matB, cusparseDnMatDescr_t matC, cudaDataType computeType, cusparseSpSMAlg_t alg, cusparseSpSMDescr_t spsmDescr, void* externalBuffer);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpSM_analysis(hipsparseHandle_t handle, hipsparseOperation_t opA, hipsparseOperation_t opB, const void* alpha, hipsparseConstSpMatDescr_t matA, hipsparseConstDnMatDescr_t matB, const hipsparseDnMatDescr_t matC, hipDataType computeType, hipsparseSpSMAlg_t alg, hipsparseSpSMDescr_t spsmDescr, void* externalBuffer);
+  // CHECK: status_t = hipsparseSpSM_analysis(handle_t, opA, opB, alpha, constSpMatDescr, constDnMatDescrB, dnmatC, dataType, spSMAlg_t, spSMDescr, tempBuffer);
+  status_t = cusparseSpSM_analysis(handle_t, opA, opB, alpha, constSpMatDescr, constDnMatDescrB, dnmatC, dataType, spSMAlg_t, spSMDescr, tempBuffer);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpSM_solve(cusparseHandle_t handle, cusparseOperation_t opA, cusparseOperation_t opB, const void* alpha, cusparseConstSpMatDescr_t matA, cusparseConstDnMatDescr_t matB, cusparseDnMatDescr_t matC, cudaDataType computeType, cusparseSpSMAlg_t alg, cusparseSpSMDescr_t spsmDescr);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpSM_solve(hipsparseHandle_t handle, hipsparseOperation_t opA, hipsparseOperation_t opB, const void* alpha, hipsparseConstSpMatDescr_t matA, hipsparseConstDnMatDescr_t matB, const hipsparseDnMatDescr_t matC, hipDataType computeType, hipsparseSpSMAlg_t alg, hipsparseSpSMDescr_t spsmDescr, void* externalBuffer);
+  // CHECK: status_t = hipsparseSpSM_solve(handle_t, opA, opB, alpha, constSpMatDescr, constDnMatDescrB, dnmatC, dataType, spSMAlg_t, spSMDescr);
+  status_t = cusparseSpSM_solve(handle_t, opA, opB, alpha, constSpMatDescr, constDnMatDescrB, dnmatC, dataType, spSMAlg_t, spSMDescr);
 #endif
 
   return 0;

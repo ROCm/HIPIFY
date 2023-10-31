@@ -1809,7 +1809,7 @@ int main() {
   const_ch = cublasGetStatusString(blasStatus);
 #endif
 
-#if CUDA_VERSION >= 11060
+#if CUDA_VERSION >= 11060 && CUBLAS_VERSION >= 110902 // CUDA 11.6.2
   // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasCgemvBatched(cublasHandle_t handle, cublasOperation_t trans, int m, int n, const cuComplex* alpha, const cuComplex* const Aarray[], int lda, const cuComplex* const xarray[], int incx, const cuComplex* beta, cuComplex* const yarray[], int incy, int batchCount);
   // ROC: ROCBLAS_EXPORT rocblas_status rocblas_cgemv_batched(rocblas_handle handle, rocblas_operation trans, rocblas_int m, rocblas_int n, const rocblas_float_complex* alpha, const rocblas_float_complex* const A[], rocblas_int lda, const rocblas_float_complex* const x[], rocblas_int incx, const rocblas_float_complex* beta, rocblas_float_complex* const y[], rocblas_int incy, rocblas_int batch_count);
   // CHECK: blasStatus = rocblas_cgemv_batched(blasHandle, blasOperation, m, n, &complexa, complexAarray_const, lda, complexXarray_const, incx, &complexb, complexYarray, incy, batchCount);
