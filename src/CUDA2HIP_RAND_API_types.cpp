@@ -31,8 +31,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RAND_TYPE_NAME_MAP {
   {"curandRngType_t",               {"hiprandRngType_t",               "", CONV_TYPE, API_RAND, 1}},
   {"curandGenerator_st",            {"hiprandGenerator_st",            "", CONV_TYPE, API_RAND, 1}},
   {"curandGenerator_t",             {"hiprandGenerator_t",             "", CONV_TYPE, API_RAND, 1}},
-  {"curandDirectionVectorSet",      {"hiprandDirectionVectorSet_t",    "", CONV_TYPE, API_RAND, 1, HIP_UNSUPPORTED}},
-  {"curandDirectionVectorSet_t",    {"hiprandDirectionVectorSet_t",    "", CONV_TYPE, API_RAND, 1, HIP_UNSUPPORTED}},
+  {"curandDirectionVectorSet",      {"hiprandDirectionVectorSet_t",    "", CONV_TYPE, API_RAND, 1}},
+  {"curandDirectionVectorSet_t",    {"hiprandDirectionVectorSet_t",    "", CONV_TYPE, API_RAND, 1}},
   {"curandOrdering",                {"hiprandOrdering_t",              "", CONV_TYPE, API_RAND, 1, HIP_UNSUPPORTED}},
   {"curandOrdering_t",              {"hiprandOrdering_t",              "", CONV_TYPE, API_RAND, 1, HIP_UNSUPPORTED}},
   {"curandDistribution_st",         {"hiprandDistribution_st",         "", CONV_TYPE, API_RAND, 1, HIP_UNSUPPORTED}},
@@ -112,10 +112,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RAND_TYPE_NAME_MAP {
   {"CURAND_ORDERING_QUASI_DEFAULT",                 {"HIPRAND_ORDERING_QUASI_DEFAULT",                 "", CONV_NUMERIC_LITERAL, API_RAND, 1, HIP_UNSUPPORTED}},
 
   // RAND choice of direction vector set (enum curandDirectionVectorSet)
-  {"CURAND_DIRECTION_VECTORS_32_JOEKUO6",           {"HIPRAND_DIRECTION_VECTORS_32_JOEKUO6",           "", CONV_NUMERIC_LITERAL, API_RAND, 1, HIP_UNSUPPORTED}},
-  {"CURAND_SCRAMBLED_DIRECTION_VECTORS_32_JOEKUO6", {"HIPRAND_SCRAMBLED_DIRECTION_VECTORS_32_JOEKUO6", "", CONV_NUMERIC_LITERAL, API_RAND, 1, HIP_UNSUPPORTED}},
-  {"CURAND_DIRECTION_VECTORS_64_JOEKUO6",           {"HIPRAND_DIRECTION_VECTORS_64_JOEKUO6",           "", CONV_NUMERIC_LITERAL, API_RAND, 1, HIP_UNSUPPORTED}},
-  {"CURAND_SCRAMBLED_DIRECTION_VECTORS_64_JOEKUO6", {"HIPRAND_SCRAMBLED_DIRECTION_VECTORS_64_JOEKUO6", "", CONV_NUMERIC_LITERAL, API_RAND, 1, HIP_UNSUPPORTED}},
+  {"CURAND_DIRECTION_VECTORS_32_JOEKUO6",           {"HIPRAND_DIRECTION_VECTORS_32_JOEKUO6",           "", CONV_NUMERIC_LITERAL, API_RAND, 1}},
+  {"CURAND_SCRAMBLED_DIRECTION_VECTORS_32_JOEKUO6", {"HIPRAND_SCRAMBLED_DIRECTION_VECTORS_32_JOEKUO6", "", CONV_NUMERIC_LITERAL, API_RAND, 1}},
+  {"CURAND_DIRECTION_VECTORS_64_JOEKUO6",           {"HIPRAND_DIRECTION_VECTORS_64_JOEKUO6",           "", CONV_NUMERIC_LITERAL, API_RAND, 1}},
+  {"CURAND_SCRAMBLED_DIRECTION_VECTORS_64_JOEKUO6", {"HIPRAND_SCRAMBLED_DIRECTION_VECTORS_64_JOEKUO6", "", CONV_NUMERIC_LITERAL, API_RAND, 1}},
 
   // RAND method (enum curandMethod)
   {"CURAND_CHOOSE_BEST",                            {"HIPRAND_CHOOSE_BEST",                            "", CONV_NUMERIC_LITERAL, API_RAND, 1, HIP_UNSUPPORTED}},
@@ -184,4 +184,9 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RAND_TYPE_NAME_VER_MAP {
   {"HIPRAND_RNG_QUASI_SCRAMBLED_SOBOL32",            {HIP_1050, HIP_0,    HIP_0   }},
   {"HIPRAND_RNG_QUASI_SOBOL64",                      {HIP_1050, HIP_0,    HIP_0   }},
   {"HIPRAND_RNG_QUASI_SCRAMBLED_SOBOL64",            {HIP_1050, HIP_0,    HIP_0   }},
+  {"hiprandDirectionVectorSet_t",                    {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"HIPRAND_DIRECTION_VECTORS_32_JOEKUO6",           {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"HIPRAND_SCRAMBLED_DIRECTION_VECTORS_32_JOEKUO6", {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"HIPRAND_DIRECTION_VECTORS_64_JOEKUO6",           {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"HIPRAND_SCRAMBLED_DIRECTION_VECTORS_64_JOEKUO6", {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
 };

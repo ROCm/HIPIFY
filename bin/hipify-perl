@@ -3504,6 +3504,10 @@ sub simpleSubstitutions {
     subst("curandGenerateSeeds", "hiprandGenerateSeeds", "library");
     subst("curandGenerateUniform", "hiprandGenerateUniform", "library");
     subst("curandGenerateUniformDouble", "hiprandGenerateUniformDouble", "library");
+    subst("curandGetDirectionVectors32", "hiprandGetDirectionVectors32", "library");
+    subst("curandGetDirectionVectors64", "hiprandGetDirectionVectors64", "library");
+    subst("curandGetScrambleConstants32", "hiprandGetScrambleConstants32", "library");
+    subst("curandGetScrambleConstants64", "hiprandGetScrambleConstants64", "library");
     subst("curandGetVersion", "hiprandGetVersion", "library");
     subst("curandMakeMTGP32Constants", "hiprandMakeMTGP32Constants", "library");
     subst("curandMakeMTGP32KernelState", "hiprandMakeMTGP32KernelState", "library");
@@ -3886,6 +3890,10 @@ sub simpleSubstitutions {
     subst("cusparseSpGEMM_createDescr", "hipsparseSpGEMM_createDescr", "library");
     subst("cusparseSpGEMM_destroyDescr", "hipsparseSpGEMM_destroyDescr", "library");
     subst("cusparseSpGEMM_workEstimation", "hipsparseSpGEMM_workEstimation", "library");
+    subst("cusparseSpGEMMreuse_compute", "hipsparseSpGEMMreuse_compute", "library");
+    subst("cusparseSpGEMMreuse_copy", "hipsparseSpGEMMreuse_copy", "library");
+    subst("cusparseSpGEMMreuse_nnz", "hipsparseSpGEMMreuse_nnz", "library");
+    subst("cusparseSpGEMMreuse_workEstimation", "hipsparseSpGEMMreuse_workEstimation", "library");
     subst("cusparseSpMM", "hipsparseSpMM", "library");
     subst("cusparseSpMM_bufferSize", "hipsparseSpMM_bufferSize", "library");
     subst("cusparseSpMM_preprocess", "hipsparseSpMM_preprocess", "library");
@@ -4539,6 +4547,8 @@ sub simpleSubstitutions {
     subst("cufftType_t", "hipfftType_t", "type");
     subst("cufftXtCallbackType", "hipfftXtCallbackType", "type");
     subst("cufftXtCallbackType_t", "hipfftXtCallbackType_t", "type");
+    subst("curandDirectionVectorSet", "hiprandDirectionVectorSet_t", "type");
+    subst("curandDirectionVectorSet_t", "hiprandDirectionVectorSet_t", "type");
     subst("curandDirectionVectors32_t", "hiprandDirectionVectors32_t", "type");
     subst("curandDiscreteDistribution_st", "hiprandDiscreteDistribution_st", "type");
     subst("curandDiscreteDistribution_t", "hiprandDiscreteDistribution_t", "type");
@@ -4879,6 +4889,8 @@ sub simpleSubstitutions {
     subst("CUFFT_UNALIGNED_DATA", "HIPFFT_UNALIGNED_DATA", "numeric_literal");
     subst("CUFFT_Z2D", "HIPFFT_Z2D", "numeric_literal");
     subst("CUFFT_Z2Z", "HIPFFT_Z2Z", "numeric_literal");
+    subst("CURAND_DIRECTION_VECTORS_32_JOEKUO6", "HIPRAND_DIRECTION_VECTORS_32_JOEKUO6", "numeric_literal");
+    subst("CURAND_DIRECTION_VECTORS_64_JOEKUO6", "HIPRAND_DIRECTION_VECTORS_64_JOEKUO6", "numeric_literal");
     subst("CURAND_RNG_PSEUDO_DEFAULT", "HIPRAND_RNG_PSEUDO_DEFAULT", "numeric_literal");
     subst("CURAND_RNG_PSEUDO_MRG32K3A", "HIPRAND_RNG_PSEUDO_MRG32K3A", "numeric_literal");
     subst("CURAND_RNG_PSEUDO_MT19937", "HIPRAND_RNG_PSEUDO_MT19937", "numeric_literal");
@@ -4891,6 +4903,8 @@ sub simpleSubstitutions {
     subst("CURAND_RNG_QUASI_SOBOL32", "HIPRAND_RNG_QUASI_SOBOL32", "numeric_literal");
     subst("CURAND_RNG_QUASI_SOBOL64", "HIPRAND_RNG_QUASI_SOBOL64", "numeric_literal");
     subst("CURAND_RNG_TEST", "HIPRAND_RNG_TEST", "numeric_literal");
+    subst("CURAND_SCRAMBLED_DIRECTION_VECTORS_32_JOEKUO6", "HIPRAND_SCRAMBLED_DIRECTION_VECTORS_32_JOEKUO6", "numeric_literal");
+    subst("CURAND_SCRAMBLED_DIRECTION_VECTORS_64_JOEKUO6", "HIPRAND_SCRAMBLED_DIRECTION_VECTORS_64_JOEKUO6", "numeric_literal");
     subst("CURAND_STATUS_ALLOCATION_FAILED", "HIPRAND_STATUS_ALLOCATION_FAILED", "numeric_literal");
     subst("CURAND_STATUS_ARCH_MISMATCH", "HIPRAND_STATUS_ARCH_MISMATCH", "numeric_literal");
     subst("CURAND_STATUS_DOUBLE_PRECISION_REQUIRED", "HIPRAND_STATUS_DOUBLE_PRECISION_REQUIRED", "numeric_literal");
@@ -6829,10 +6843,6 @@ sub warnUnsupportedFunctions {
         "cusparseSpMMOpPlan",
         "cusparseSpMMOpAlg_t",
         "cusparseSpMMOp",
-        "cusparseSpGEMMreuse_workEstimation",
-        "cusparseSpGEMMreuse_nnz",
-        "cusparseSpGEMMreuse_copy",
-        "cusparseSpGEMMreuse_compute",
         "cusparseSpGEMM_getNumProducts",
         "cusparseSpGEMM_estimateMemory",
         "cusparseSolveAnalysisInfo_t",
@@ -6970,11 +6980,7 @@ sub warnUnsupportedFunctions {
         "curandHistogramM2V_st",
         "curandHistogramM2K_t",
         "curandHistogramM2K_st",
-        "curandGetScrambleConstants64",
-        "curandGetScrambleConstants32",
         "curandGetProperty",
-        "curandGetDirectionVectors64",
-        "curandGetDirectionVectors32",
         "curandGenerateLongLong",
         "curandDistribution_t",
         "curandDistribution_st",
@@ -6983,8 +6989,6 @@ sub warnUnsupportedFunctions {
         "curandDistributionM2Shift_t",
         "curandDistributionM2Shift_st",
         "curandDirectionVectors64_t",
-        "curandDirectionVectorSet_t",
-        "curandDirectionVectorSet",
         "cufftXtWorkAreaPolicy_t",
         "cufftXtWorkAreaPolicy",
         "cufftXtSubFormat_t",
@@ -8563,8 +8567,6 @@ sub warnUnsupportedFunctions {
         "CUSPARSE_ALG_MERGE_PATH",
         "CUSPARSE_ALG1",
         "CUSPARSE_ALG0",
-        "CURAND_SCRAMBLED_DIRECTION_VECTORS_64_JOEKUO6",
-        "CURAND_SCRAMBLED_DIRECTION_VECTORS_32_JOEKUO6",
         "CURAND_REJECTION",
         "CURAND_POISSON",
         "CURAND_ORDERING_QUASI_DEFAULT",
@@ -8580,8 +8582,6 @@ sub warnUnsupportedFunctions {
         "CURAND_HITR",
         "CURAND_FAST_REJECTION",
         "CURAND_DISCRETE_GAUSS",
-        "CURAND_DIRECTION_VECTORS_64_JOEKUO6",
-        "CURAND_DIRECTION_VECTORS_32_JOEKUO6",
         "CURAND_DEVICE_API",
         "CURAND_DEFINITION",
         "CURAND_CHOOSE_BEST",
