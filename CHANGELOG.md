@@ -2,6 +2,18 @@
 
 Full documentation for HIPIFY is available at [hipify.readthedocs.io](https://hipify.readthedocs.io/en/latest/).
 
+## HIPIFY for ROCm 6.0.0
+### Added
+- CUDA 12.2.2 support
+- cuDNN 8.9.5 support
+- LLVM 17.0.3 support
+- Improved support for Windows and Visual Studio 2019 and 2022
+- More rocSPARSE support
+- [doc] ABI changes are shown in the 'C' ('Changed') column for CUDA, HIP, and ROC API correspondingly
+### Fixed
+- [#837] Add a new function call transformation type "additional non-const arg"
+- [#1014] Add a new function call transformation type "replace argument with a const"
+
 ## HIPIFY for ROCm 5.7.0
 ### Added
 - CUDA 12.2.0 support
