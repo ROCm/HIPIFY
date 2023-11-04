@@ -268,10 +268,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   {"cusparseZbsrsm2_bufferSize",                        {"hipsparseZbsrsm2_bufferSize",                        "",                                                                 CONV_LIB_FUNC, API_SPARSE, 10, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
   {"cusparseZbsrsm2_bufferSizeExt",                     {"hipsparseZbsrsm2_bufferSizeExt",                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 10, UNSUPPORTED | CUDA_DEPRECATED}},
 
-  {"cusparseSbsrsm2_analysis",                          {"hipsparseSbsrsm2_analysis",                          "",                                                                 CONV_LIB_FUNC, API_SPARSE, 10, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cusparseDbsrsm2_analysis",                          {"hipsparseDbsrsm2_analysis",                          "",                                                                 CONV_LIB_FUNC, API_SPARSE, 10, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cusparseCbsrsm2_analysis",                          {"hipsparseCbsrsm2_analysis",                          "",                                                                 CONV_LIB_FUNC, API_SPARSE, 10, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cusparseZbsrsm2_analysis",                          {"hipsparseZbsrsm2_analysis",                          "",                                                                 CONV_LIB_FUNC, API_SPARSE, 10, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cusparseSbsrsm2_analysis",                          {"hipsparseSbsrsm2_analysis",                          "rocsparse_sbsrsm_analysis",                                        CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED}},
+  {"cusparseDbsrsm2_analysis",                          {"hipsparseDbsrsm2_analysis",                          "rocsparse_dbsrsm_analysis",                                        CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED}},
+  {"cusparseCbsrsm2_analysis",                          {"hipsparseCbsrsm2_analysis",                          "rocsparse_cbsrsm_analysis",                                        CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED}},
+  {"cusparseZbsrsm2_analysis",                          {"hipsparseZbsrsm2_analysis",                          "rocsparse_zbsrsm_analysis",                                        CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED}},
 
   {"cusparseSbsrsm2_solve",                             {"hipsparseSbsrsm2_solve",                             "rocsparse_sbsrsm_solve",                                           CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED}},
   {"cusparseDbsrsm2_solve",                             {"hipsparseDbsrsm2_solve",                             "rocsparse_dbsrsm_solve",                                           CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED}},
@@ -2280,6 +2280,10 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_FUNCTION_VER_MAP {
   {"rocsparse_cbsrsm_solve",                             {HIP_4050, HIP_0,    HIP_0   }},
   {"rocsparse_dbsrsm_solve",                             {HIP_4050, HIP_0,    HIP_0   }},
   {"rocsparse_sbsrsm_solve",                             {HIP_4050, HIP_0,    HIP_0   }},
+  {"rocsparse_zbsrsm_analysis",                          {HIP_3060, HIP_0,    HIP_0   }},
+  {"rocsparse_cbsrsm_analysis",                          {HIP_3060, HIP_0,    HIP_0   }},
+  {"rocsparse_dbsrsm_analysis",                          {HIP_3060, HIP_0,    HIP_0   }},
+  {"rocsparse_sbsrsm_analysis",                          {HIP_3060, HIP_0,    HIP_0   }},
 };
 
 const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_SPARSE_FUNCTION_CHANGED_VER_MAP {

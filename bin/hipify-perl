@@ -1758,6 +1758,7 @@ sub rocSubstitutions {
     subst("cusparseCbsrilu02", "rocsparse_cbsrilu0", "library");
     subst("cusparseCbsrilu02_analysis", "rocsparse_cbsrilu0_analysis", "library");
     subst("cusparseCbsrilu02_numericBoost", "rocsparse_dcbsrilu0_numeric_boost", "library");
+    subst("cusparseCbsrsm2_analysis", "rocsparse_cbsrsm_analysis", "library");
     subst("cusparseCbsrsm2_solve", "rocsparse_cbsrsm_solve", "library");
     subst("cusparseCcsc2dense", "rocsparse_ccsc2dense", "library");
     subst("cusparseCcsr2bsr", "rocsparse_ccsr2bsr", "library");
@@ -1825,6 +1826,7 @@ sub rocSubstitutions {
     subst("cusparseDbsrilu02", "rocsparse_dbsrilu0", "library");
     subst("cusparseDbsrilu02_analysis", "rocsparse_dbsrilu0_analysis", "library");
     subst("cusparseDbsrilu02_numericBoost", "rocsparse_dbsrilu0_numeric_boost", "library");
+    subst("cusparseDbsrsm2_analysis", "rocsparse_dbsrsm_analysis", "library");
     subst("cusparseDbsrsm2_solve", "rocsparse_dbsrsm_solve", "library");
     subst("cusparseDcsc2dense", "rocsparse_dcsc2dense", "library");
     subst("cusparseDcsr2bsr", "rocsparse_dcsr2bsr", "library");
@@ -1910,6 +1912,7 @@ sub rocSubstitutions {
     subst("cusparseSbsrilu02", "rocsparse_sbsrilu0", "library");
     subst("cusparseSbsrilu02_analysis", "rocsparse_sbsrilu0_analysis", "library");
     subst("cusparseSbsrilu02_numericBoost", "rocsparse_dsbsrilu0_numeric_boost", "library");
+    subst("cusparseSbsrsm2_analysis", "rocsparse_sbsrsm_analysis", "library");
     subst("cusparseSbsrsm2_solve", "rocsparse_sbsrsm_solve", "library");
     subst("cusparseScatter", "rocsparse_scatter", "library");
     subst("cusparseScsc2dense", "rocsparse_scsc2dense", "library");
@@ -2006,6 +2009,7 @@ sub rocSubstitutions {
     subst("cusparseZbsrilu02", "rocsparse_zbsrilu0", "library");
     subst("cusparseZbsrilu02_analysis", "rocsparse_zbsrilu0_analysis", "library");
     subst("cusparseZbsrilu02_numericBoost", "rocsparse_zbsrilu0_numeric_boost", "library");
+    subst("cusparseZbsrsm2_analysis", "rocsparse_zbsrsm_analysis", "library");
     subst("cusparseZbsrsm2_solve", "rocsparse_zbsrsm_solve", "library");
     subst("cusparseZcsc2dense", "rocsparse_zcsc2dense", "library");
     subst("cusparseZcsr2bsr", "rocsparse_zcsr2bsr", "library");
