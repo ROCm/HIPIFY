@@ -135,6 +135,10 @@ const std::string sCusparseZbsric02_bufferSize = "cusparseZbsric02_bufferSize";
 const std::string sCusparseCbsric02_bufferSize = "cusparseCbsric02_bufferSize";
 const std::string sCusparseDbsric02_bufferSize = "cusparseDbsric02_bufferSize";
 const std::string sCusparseSbsric02_bufferSize = "cusparseSbsric02_bufferSize";
+const std::string sCusparseZbsrsm2_bufferSize = "cusparseZbsrsm2_bufferSize";
+const std::string sCusparseCbsrsm2_bufferSize = "cusparseCbsrsm2_bufferSize";
+const std::string sCusparseDbsrsm2_bufferSize = "cusparseDbsrsm2_bufferSize";
+const std::string sCusparseSbsrsm2_bufferSize = "cusparseSbsrsm2_bufferSize";
 // CUDA_OVERLOADED
 const std::string sCudaEventCreate = "cudaEventCreate";
 const std::string sCudaGraphInstantiate = "cudaGraphInstantiate";
@@ -922,6 +926,42 @@ std::map<std::string, ArgCastStruct> FuncArgCasts {
       false
     }
   },
+  {sCusparseZbsrsm2_bufferSize,
+    {
+      {
+        {13, {e_reinterpret_cast_size_t, cw_None}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseCbsrsm2_bufferSize,
+    {
+      {
+        {13, {e_reinterpret_cast_size_t, cw_None}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseDbsrsm2_bufferSize,
+    {
+      {
+        {13, {e_reinterpret_cast_size_t, cw_None}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseSbsrsm2_bufferSize,
+    {
+      {
+        {13, {e_reinterpret_cast_size_t, cw_None}}
+      },
+      true,
+      false
+    }
+  },
 };
 
 void HipifyAction::RewriteString(StringRef s, clang::SourceLocation start) {
@@ -1685,7 +1725,11 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
             sCusparseZbsric02_bufferSize,
             sCusparseCbsric02_bufferSize,
             sCusparseDbsric02_bufferSize,
-            sCusparseSbsric02_bufferSize
+            sCusparseSbsric02_bufferSize,
+            sCusparseZbsrsm2_bufferSize,
+            sCusparseCbsrsm2_bufferSize,
+            sCusparseDbsrsm2_bufferSize,
+            sCusparseSbsrsm2_bufferSize
           )
         )
       )
