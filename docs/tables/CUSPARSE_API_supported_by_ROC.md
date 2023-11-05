@@ -381,7 +381,7 @@
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
 |`cusparseCbsrmm`| | | | | | | | | | |
 |`cusparseCbsrsm2_analysis`| |12.2| | |`rocsparse_cbsrsm_analysis`|3.6.0| | | | |
-|`cusparseCbsrsm2_bufferSize`| |12.2| | | | | | | | |
+|`cusparseCbsrsm2_bufferSize`| |12.2| | |`rocsparse_cbsrsm_buffer_size`|4.5.0| | | | |
 |`cusparseCbsrsm2_bufferSizeExt`| |12.2| | | | | | | | |
 |`cusparseCbsrsm2_solve`| |12.2| | |`rocsparse_cbsrsm_solve`|4.5.0| | | | |
 |`cusparseCcsrmm`| |10.2| |11.0| | | | | | |
@@ -394,7 +394,7 @@
 |`cusparseCgemmi`|8.0|11.0| |12.0| | | | | | |
 |`cusparseDbsrmm`| | | | | | | | | | |
 |`cusparseDbsrsm2_analysis`| |12.2| | |`rocsparse_dbsrsm_analysis`|3.6.0| | | | |
-|`cusparseDbsrsm2_bufferSize`| |12.2| | | | | | | | |
+|`cusparseDbsrsm2_bufferSize`| |12.2| | |`rocsparse_dbsrsm_buffer_size`|4.5.0| | | | |
 |`cusparseDbsrsm2_bufferSizeExt`| |12.2| | | | | | | | |
 |`cusparseDbsrsm2_solve`| |12.2| | |`rocsparse_dbsrsm_solve`|4.5.0| | | | |
 |`cusparseDcsrmm`| |10.2| |11.0| | | | | | |
@@ -407,7 +407,7 @@
 |`cusparseDgemmi`|8.0|11.0| |12.0| | | | | | |
 |`cusparseSbsrmm`| | | | | | | | | | |
 |`cusparseSbsrsm2_analysis`| |12.2| | |`rocsparse_sbsrsm_analysis`|3.6.0| | | | |
-|`cusparseSbsrsm2_bufferSize`| |12.2| | | | | | | | |
+|`cusparseSbsrsm2_bufferSize`| |12.2| | |`rocsparse_sbsrsm_buffer_size`|4.5.0| | | | |
 |`cusparseSbsrsm2_bufferSizeExt`| |12.2| | | | | | | | |
 |`cusparseSbsrsm2_solve`| |12.2| | |`rocsparse_sbsrsm_solve`|4.5.0| | | | |
 |`cusparseScsrmm`| |10.2| |11.0| | | | | | |
@@ -422,7 +422,7 @@
 |`cusparseXcsrsm2_zeroPivot`|10.0|11.3| |12.0| | | | | | |
 |`cusparseZbsrmm`| | | | | | | | | | |
 |`cusparseZbsrsm2_analysis`| |12.2| | |`rocsparse_zbsrsm_analysis`|3.6.0| | | | |
-|`cusparseZbsrsm2_bufferSize`| |12.2| | | | | | | | |
+|`cusparseZbsrsm2_bufferSize`| |12.2| | |`rocsparse_zbsrsm_buffer_size`|4.5.0| | | | |
 |`cusparseZbsrsm2_bufferSizeExt`| |12.2| | | | | | | | |
 |`cusparseZbsrsm2_solve`| |12.2| | |`rocsparse_zbsrsm_solve`|4.5.0| | | | |
 |`cusparseZcsrmm`| |10.2| |11.0| | | | | | |
