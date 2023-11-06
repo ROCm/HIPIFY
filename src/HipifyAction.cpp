@@ -139,6 +139,10 @@ const std::string sCusparseZbsrsm2_bufferSize = "cusparseZbsrsm2_bufferSize";
 const std::string sCusparseCbsrsm2_bufferSize = "cusparseCbsrsm2_bufferSize";
 const std::string sCusparseDbsrsm2_bufferSize = "cusparseDbsrsm2_bufferSize";
 const std::string sCusparseSbsrsm2_bufferSize = "cusparseSbsrsm2_bufferSize";
+const std::string sCusparseZcsrsm2_solve = "cusparseZcsrsm2_solve";
+const std::string sCusparseCcsrsm2_solve = "cusparseCcsrsm2_solve";
+const std::string sCusparseDcsrsm2_solve = "cusparseDcsrsm2_solve";
+const std::string sCusparseScsrsm2_solve = "cusparseScsrsm2_solve";
 // CUDA_OVERLOADED
 const std::string sCudaEventCreate = "cudaEventCreate";
 const std::string sCudaGraphInstantiate = "cudaGraphInstantiate";
@@ -962,6 +966,42 @@ std::map<std::string, ArgCastStruct> FuncArgCasts {
       false
     }
   },
+  {sCusparseZcsrsm2_solve,
+    {
+      {
+        {15, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseCcsrsm2_solve,
+    {
+      {
+        {15, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseDcsrsm2_solve,
+    {
+      {
+        {15, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseScsrsm2_solve,
+    {
+      {
+        {15, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
 };
 
 void HipifyAction::RewriteString(StringRef s, clang::SourceLocation start) {
@@ -1729,7 +1769,11 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
             sCusparseZbsrsm2_bufferSize,
             sCusparseCbsrsm2_bufferSize,
             sCusparseDbsrsm2_bufferSize,
-            sCusparseSbsrsm2_bufferSize
+            sCusparseSbsrsm2_bufferSize,
+            sCusparseZcsrsm2_solve,
+            sCusparseCcsrsm2_solve,
+            sCusparseDcsrsm2_solve,
+            sCusparseScsrsm2_solve
           )
         )
       )

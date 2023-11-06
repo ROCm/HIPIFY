@@ -1074,6 +1074,12 @@ int main() {
   // CHECK: status_t = rocsparse_sbsrsm_buffer_size(handle_t, direction_t, opA, opX, mb, n, nnzb, matDescr_A, &fbsrSortedVal, &bsrRowPtrA, &bsrColIndA, blockDim, bsrsm2_info, reinterpret_cast<size_t*>(&bufferSizeInBytes));
   status_t = cusparseSbsrsm2_bufferSize(handle_t, direction_t, opA, opX, mb, n, nnzb, matDescr_A, &fbsrSortedVal, &bsrRowPtrA, &bsrColIndA, blockDim, bsrsm2_info, &bufferSizeInBytes);
 
+  // TODO: rocsparse_bsrsm_zero_pivot needs explicit synchronization because cusparseXbsrsm2_zeroPivot is blocking
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseXbsrsm2_zeroPivot(cusparseHandle_t handle, bsrsm2Info_t info, int* position);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_bsrsm_zero_pivot(rocsparse_handle handle, rocsparse_mat_info info, rocsparse_int* position);
+  // CHECK: status_t = rocsparse_bsrsm_zero_pivot(handle_t, bsrsm2_info, &iposition);
+  status_t = cusparseXbsrsm2_zeroPivot(handle_t, bsrsm2_info, &iposition);
+
 #if CUDA_VERSION >= 8000
   // CHECK: hipDataType dataType_t;
   // TODO: [#899] There should be rocsparse_datatype
