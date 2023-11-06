@@ -41,8 +41,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_TYPE_NAME_MAP {
   {"csrsv2Info",                                {"csrsv2Info",                                 "",                                                   CONV_TYPE, API_SPARSE, 4, UNSUPPORTED | CUDA_REMOVED}},
   {"csrsv2Info_t",                              {"csrsv2Info_t",                               "",                                                   CONV_TYPE, API_SPARSE, 4, ROC_UNSUPPORTED | CUDA_REMOVED}},
 
-  {"csrsm2Info",                                {"csrsm2Info",                                 "",                                                   CONV_TYPE, API_SPARSE, 4, UNSUPPORTED | CUDA_REMOVED}},
-  {"csrsm2Info_t",                              {"csrsm2Info_t",                               "",                                                   CONV_TYPE, API_SPARSE, 4, ROC_UNSUPPORTED | CUDA_REMOVED}},
+  {"csrsm2Info",                                {"csrsm2Info",                                 "_rocsparse_mat_info",                                CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED | CUDA_REMOVED}},
+  {"csrsm2Info_t",                              {"csrsm2Info_t",                               "rocsparse_mat_info",                                 CONV_TYPE, API_SPARSE, 4, CUDA_REMOVED}},
 
   {"bsrsv2Info",                                {"bsrsv2Info",                                 "",                                                   CONV_TYPE, API_SPARSE, 4, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
   {"bsrsv2Info_t",                              {"bsrsv2Info_t",                               "",                                                   CONV_TYPE, API_SPARSE, 4, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
