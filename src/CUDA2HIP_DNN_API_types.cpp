@@ -781,6 +781,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"CUDNN_INSTANCE_NORM",                                            {"HIPDNN_INSTANCE_NORM",                                            "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_BATCH_NORM",                                               {"HIPDNN_BATCH_NORM",                                               "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_GROUP_NORM",                                               {"HIPDNN_GROUP_NORM",                                               "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_RMS_NORM",                                                 {"HIPDNN_RMS_NORM",                                                 "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
   {"cudnnBackendNormFwdPhase_t",                                     {"hipdnnBackendNormFwdPhase_t",                                     "",                                                                CONV_TYPE, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_NORM_FWD_INFERENCE",                                       {"HIPDNN_NORM_FWD_INFERENCE",                                       "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_NORM_FWD_TRAINING",                                        {"HIPDNN_NORM_FWD_TRAINING",                                        "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
@@ -1681,6 +1682,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_TYPE_NAME_VER_MAP {
   {"CUDNN_KNOB_TYPE_TILE_ROWS",                                      {CUDNN_895, CUDA_0,   CUDA_0  }},
   {"CUDNN_KNOB_TYPE_TILE_COLS",                                      {CUDNN_895, CUDA_0,   CUDA_0  }},
   {"CUDNN_KNOB_TYPE_LOAD_SIZE",                                      {CUDNN_895, CUDA_0,   CUDA_0  }},
+  {"CUDNN_RMS_NORM",                                                 {CUDNN_896, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_DNN_TYPE_NAME_VER_MAP {

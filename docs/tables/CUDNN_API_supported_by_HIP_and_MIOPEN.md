@@ -589,6 +589,7 @@
 |`CUDNN_RESAMPLE_BILINEAR`|8.3.0| | | | | | | | | | | | | | | |
 |`CUDNN_RESAMPLE_MAXPOOL`|8.3.0| | | | | | | | | | | | | | | |
 |`CUDNN_RESAMPLE_NEAREST`|8.3.0| | | | | | | | | | | | | | | |
+|`CUDNN_RMS_NORM`|8.9.6| | | | | | | | | | | | | | | |
 |`CUDNN_RNG_DISTRIBUTION_BERNOULLI`|8.7.0| | | | | | | | | | | | | | | |
 |`CUDNN_RNG_DISTRIBUTION_NORMAL`|8.7.0| | | | | | | | | | | | | | | |
 |`CUDNN_RNG_DISTRIBUTION_UNIFORM`|8.7.0| | | | | | | | | | | | | | | |
