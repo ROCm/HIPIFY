@@ -286,7 +286,8 @@ enum cudaVersions {
   CUDNN_893 = 893,
   CUDNN_894 = 894,
   CUDNN_895 = 895,
-  CUDNN_LATEST = CUDNN_895,
+  CUDNN_896 = 896,
+  CUDNN_LATEST = CUDNN_896,
 };
 
 enum hipVersions {

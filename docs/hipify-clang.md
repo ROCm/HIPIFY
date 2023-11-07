@@ -350,7 +350,7 @@ Run `Visual Studio 17 2022`, open the generated `LLVM.sln`, build all, build pro
 
         - ***Linux***: `-DCUDA_DNN_ROOT_DIR=/usr/include`
 
-        - ***Windows***: `-DCUDA_DNN_ROOT_DIR=D:/CUDA/cuDNN/8.9.5`
+        - ***Windows***: `-DCUDA_DNN_ROOT_DIR=D:/CUDA/cuDNN/8.9.6`
 
 5. Ensure [`CUB`](https://github.com/NVlabs/cub) of the version corresponding to CUDA's version is installed.
 
@@ -406,9 +406,9 @@ Ubuntu 14: LLVM 4.0.0 - 7.1.0, CUDA 7.0 - 9.0, cuDNN 5.0.5 - 7.6.5
 
 Ubuntu 16-18: LLVM 8.0.0 - 14.0.6, CUDA 8.0 - 10.2, cuDNN 5.1.10 - 8.0.5
 
-Ubuntu 20-21: LLVM 9.0.0 - 17.0.4, CUDA 8.0 - 12.2.2, cuDNN 5.1.10 - 8.9.5
+Ubuntu 20-21: LLVM 9.0.0 - 17.0.4, CUDA 8.0 - 12.2.2, cuDNN 5.1.10 - 8.9.6
 
-Ubuntu 22: LLVM 13.0.0 - 17.0.4, CUDA 10.0 - 12.2.2, cuDNN 8.0.5 - 8.9.5
+Ubuntu 22: LLVM 13.0.0 - 17.0.4, CUDA 10.0 - 12.2.2, cuDNN 8.0.5 - 8.9.6
 
 Minimum build system requirements for the above configurations:
 
@@ -596,8 +596,8 @@ Testing Time: 7.90s
 | 14.0.0 - 14.0.6 | 7.0 - 11.7.1 | 8.0.5  - 8.4.1 | 2017.15.9.57*, 2019.16.11.17, 2022.17.2.6 | 3.24.0          | 3.10.6        |
 | 15.0.0 - 15.0.7 | 7.0 - 11.8.0 | 8.0.5  - 8.8.1 | 2019.16.11.25, 2022.17.5.2                | 3.26.0          | 3.11.2        |
 | 16.0.0 - 16.0.6 | 7.0 - 12.2.2 | 8.0.5  - 8.9.5 | 2019.16.11.29, 2022.17.7.1                | 3.27.3          | 3.11.4        |
-| 17.0.1** 17.0.4 | 7.0 - 12.2.2 | 8.0.5  - 8.9.5 | 2019.16.11.30, 2022.17.7.4                | 3.27.6          | 3.12.0        |
-| 18.0.0git       | 7.0 - 12.2.2 | 8.0.5  - 8.9.5 | 2019.16.11.30, 2022.17.7.4                | 3.27.6          | 3.12.0        |
+| 17.0.1** 17.0.4 | 7.0 - 12.2.2 | 8.0.5  - 8.9.6 | 2019.16.11.30, 2022.17.7.4                | 3.27.6          | 3.12.0        |
+| 18.0.0git       | 7.0 - 12.2.2 | 8.0.5  - 8.9.6 | 2019.16.11.30, 2022.17.7.4                | 3.27.6          | 3.12.0        |
 
 `*` LLVM 14.x.x is the latest major release supporting Visual Studio 2017.
 To build LLVM 14.x.x correctly by Visual Studio 2017, `-DLLVM_FORCE_USE_OLD_TOOLCHAIN=ON` should be added to a corresponding cmake command line.
@@ -618,7 +618,7 @@ cmake
  -DCMAKE_PREFIX_PATH=D:/LLVM/17.0.4/dist \
  -DCUDA_TOOLKIT_ROOT_DIR="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.2" \
  -DCUDA_SDK_ROOT_DIR="C:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.2" \
- -DCUDA_DNN_ROOT_DIR=D:/CUDA/cuDNN/8.9.5 \
+ -DCUDA_DNN_ROOT_DIR=D:/CUDA/cuDNN/8.9.6 \
  -DCUDA_CUB_ROOT_DIR=D:/CUDA/CUB/cub-2.1.0 \
  -DLLVM_EXTERNAL_LIT=D:/LLVM/17.0.4/build/Release/bin/llvm-lit.py \
  ../hipify
@@ -654,13 +654,13 @@ cmake
 -- Initial CUDA to configure:
 --    - CUDA Toolkit path  : C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.2
 --    - CUDA Samples path  : C:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.2
---    - cuDNN path         : D:/CUDA/cuDNN/8.9.5
+--    - cuDNN path         : D:/CUDA/cuDNN/8.9.6
 --    - CUB path           : D:/CUDA/CUB/cub-2.1.0
 -- Found CUDAToolkit: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.2/include (found version "12.2.140")
 -- Found CUDA config:
 --    - CUDA Toolkit path  : C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.2
 --    - CUDA Samples path  : C:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.2
---    - cuDNN path         : D:/CUDA/cuDNN/8.9.5
+--    - cuDNN path         : D:/CUDA/cuDNN/8.9.6
 --    - CUB path           : D:/CUDA/CUB/cub-2.1.0
 -- Configuring done (1.4s)
 -- Generating done (0.1s)
