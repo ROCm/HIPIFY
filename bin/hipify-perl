@@ -1263,6 +1263,10 @@ sub experimentalSubstitutions {
     subst("cudaGraphExternalSemaphoresSignalNodeSetParams", "hipGraphExternalSemaphoresSignalNodeSetParams", "graph");
     subst("cudaGraphExternalSemaphoresWaitNodeGetParams", "hipGraphExternalSemaphoresWaitNodeGetParams", "graph");
     subst("cudaGraphExternalSemaphoresWaitNodeSetParams", "hipGraphExternalSemaphoresWaitNodeSetParams", "graph");
+    subst("cusolverDnCreate", "hipsolverDnCreate", "library");
+    subst("cusolverDnDestroy", "hipsolverDnDestroy", "library");
+    subst("cusolverDnHandle_t", "hipsolverHandle_t", "library");
+    subst("cusolverStatus_t", "hipsolverStatus_t", "library");
     subst("CUDA_EXT_SEM_SIGNAL_NODE_PARAMS", "hipExternalSemaphoreSignalNodeParams", "type");
     subst("CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_st", "hipExternalSemaphoreSignalNodeParams", "type");
     subst("CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_v1", "hipExternalSemaphoreSignalNodeParams", "type");
@@ -1749,6 +1753,10 @@ sub rocSubstitutions {
     subst("cudnnSoftmaxBackward", "miopenSoftmaxBackward_V2", "library");
     subst("cudnnSoftmaxForward", "miopenSoftmaxForward_V2", "library");
     subst("cudnnTransformTensor", "miopenTransformTensor", "library");
+    subst("cusolverDnCreate", "rocblas_create_handle", "library");
+    subst("cusolverDnDestroy", "rocblas_destroy_handle", "library");
+    subst("cusolverDnHandle_t", "rocblas_handle", "library");
+    subst("cusolverStatus_t", "rocblas_status", "library");
     subst("cusparseAxpby", "rocsparse_axpby", "library");
     subst("cusparseBlockedEllGet", "rocsparse_bell_get", "library");
     subst("cusparseCbsr2csr", "rocsparse_cbsr2csr", "library");
@@ -4138,6 +4146,11 @@ sub simpleSubstitutions {
     subst("curand_poisson.h", "hiprand_kernel.h", "include");
     subst("curand_precalc.h", "hiprand_kernel.h", "include");
     subst("curand_uniform.h", "hiprand_kernel.h", "include");
+    subst("cusolverDn.h", "hipsolver.h", "include");
+    subst("cusolverMg.h", "hipsolver.h", "include");
+    subst("cusolverRf.h", "hipsolver.h", "include");
+    subst("cusolverSp.h", "hipsolver.h", "include");
+    subst("cusolver_common.h", "hipsolver.h", "include");
     subst("device_functions.h", "hip\/device_functions.h", "include");
     subst("driver_types.h", "hip\/driver_types.h", "include");
     subst("library_types.h", "hip\/library_types.h", "include");

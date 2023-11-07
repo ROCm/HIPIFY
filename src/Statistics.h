@@ -174,6 +174,7 @@ enum ApiTypes {
   API_DNN,
   API_FFT,
   API_SPARSE,
+  API_SOLVER,
   API_CUB,
   API_CAFFE2,
   API_RTC,
