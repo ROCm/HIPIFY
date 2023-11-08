@@ -1265,7 +1265,13 @@ sub experimentalSubstitutions {
     subst("cudaGraphExternalSemaphoresWaitNodeSetParams", "hipGraphExternalSemaphoresWaitNodeSetParams", "graph");
     subst("cusolverDnCreate", "hipsolverDnCreate", "library");
     subst("cusolverDnDestroy", "hipsolverDnDestroy", "library");
+    subst("cusolverDnDgetrf", "hipsolverDnDgetrf", "library");
+    subst("cusolverDnDgetrf_bufferSize", "hipsolverDnDgetrf_bufferSize", "library");
+    subst("cusolverDnDgetrs", "hipsolverDnDgetrs", "library");
     subst("cusolverDnHandle_t", "hipsolverHandle_t", "library");
+    subst("cusolverDnSgetrf", "hipsolverDnSgetrf", "library");
+    subst("cusolverDnSgetrf_bufferSize", "hipsolverDnSgetrf_bufferSize", "library");
+    subst("cusolverDnSgetrs", "hipsolverDnSgetrs", "library");
     subst("cusolverStatus_t", "hipsolverStatus_t", "library");
     subst("CUDA_EXT_SEM_SIGNAL_NODE_PARAMS", "hipExternalSemaphoreSignalNodeParams", "type");
     subst("CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_st", "hipExternalSemaphoreSignalNodeParams", "type");
