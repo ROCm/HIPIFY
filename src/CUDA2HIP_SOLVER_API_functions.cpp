@@ -38,9 +38,19 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SOLVER_FUNCTION_MAP {
   {"cusolverDnDgetrs",                                    {"hipsolverDnDgetrs",                                    "rocsolver_dgetrs",                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
   // [HIPIFY feature] TODO: cusolverDnSgetrs -> rocsolver_sgetrs + harness of other API calls
   {"cusolverDnSgetrs",                                    {"hipsolverDnSgetrs",                                    "rocsolver_sgetrs",                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  {"cusolverDnXgetrf",                                    {"hipsolverDnXgetrf",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnXgetrf_bufferSize",                         {"hipsolverDnXgetrf_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnXgetrs",                                    {"hipsolverDnXgetrs",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnCreateParams",                              {"hipsolverDnCreateParams",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnSetAdvOptions",                             {"hipsolverDnSetAdvOptions",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_SOLVER_FUNCTION_VER_MAP {
+  {"cusolverDnCreateParams",                              {CUDA_110,  CUDA_0, CUDA_0}},
+  {"cusolverDnSetAdvOptions",                             {CUDA_110,  CUDA_0, CUDA_0}},
+  {"cusolverDnXgetrf",                                    {CUDA_111,  CUDA_0, CUDA_0}},
+  {"cusolverDnXgetrf_bufferSize",                         {CUDA_111,  CUDA_0, CUDA_0}},
+  {"cusolverDnXgetrs",                                    {CUDA_111,  CUDA_0, CUDA_0}},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_SOLVER_FUNCTION_VER_MAP {
