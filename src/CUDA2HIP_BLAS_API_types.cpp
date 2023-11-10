@@ -38,12 +38,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP {
   {"CUBLAS_STATUS_SUCCESS",          {"HIPBLAS_STATUS_SUCCESS",          "rocblas_status_success",                CONV_NUMERIC_LITERAL, API_BLAS, 2}},
   {"CUBLAS_STATUS_NOT_INITIALIZED",  {"HIPBLAS_STATUS_NOT_INITIALIZED",  "rocblas_status_invalid_handle",         CONV_NUMERIC_LITERAL, API_BLAS, 2}},
   {"CUBLAS_STATUS_ALLOC_FAILED",     {"HIPBLAS_STATUS_ALLOC_FAILED",     "rocblas_status_not_implemented",        CONV_NUMERIC_LITERAL, API_BLAS, 2}},
-  {"CUBLAS_STATUS_INVALID_VALUE",    {"HIPBLAS_STATUS_INVALID_VALUE",    "rocblas_status_invalid_pointer",        CONV_NUMERIC_LITERAL, API_BLAS, 2}},
+  {"CUBLAS_STATUS_INVALID_VALUE",    {"HIPBLAS_STATUS_INVALID_VALUE",    "rocblas_status_invalid_value",          CONV_NUMERIC_LITERAL, API_BLAS, 2}},
   {"CUBLAS_STATUS_MAPPING_ERROR",    {"HIPBLAS_STATUS_MAPPING_ERROR",    "rocblas_status_invalid_size",           CONV_NUMERIC_LITERAL, API_BLAS, 2}},
   {"CUBLAS_STATUS_EXECUTION_FAILED", {"HIPBLAS_STATUS_EXECUTION_FAILED", "rocblas_status_memory_error",           CONV_NUMERIC_LITERAL, API_BLAS, 2}},
   {"CUBLAS_STATUS_INTERNAL_ERROR",   {"HIPBLAS_STATUS_INTERNAL_ERROR",   "rocblas_status_internal_error",         CONV_NUMERIC_LITERAL, API_BLAS, 2}},
   {"CUBLAS_STATUS_NOT_SUPPORTED",    {"HIPBLAS_STATUS_NOT_SUPPORTED",    "rocblas_status_perf_degraded",          CONV_NUMERIC_LITERAL, API_BLAS, 2}},
-  {"CUBLAS_STATUS_ARCH_MISMATCH",    {"HIPBLAS_STATUS_ARCH_MISMATCH",    "rocblas_status_size_query_mismatch",    CONV_NUMERIC_LITERAL, API_BLAS, 2}},
+  {"CUBLAS_STATUS_ARCH_MISMATCH",    {"HIPBLAS_STATUS_ARCH_MISMATCH",    "rocblas_status_arch_mismatch",          CONV_NUMERIC_LITERAL, API_BLAS, 2}},
   {"CUBLAS_STATUS_LICENSE_ERROR",    {"HIPBLAS_STATUS_UNKNOWN",          "rocblas_status_not_implemented",        CONV_NUMERIC_LITERAL, API_BLAS, 2, ROC_UNSUPPORTED}},
 
   // Blas Fill Modes
@@ -389,6 +389,8 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_TYPE_NAME_VER_MAP {
   {"rocblas_status_internal_error",                    {HIP_1050, HIP_0,    HIP_0   }},
   {"rocblas_status_perf_degraded",                     {HIP_3050, HIP_0,    HIP_0   }},
   {"rocblas_status_size_query_mismatch",               {HIP_3050, HIP_0,    HIP_0   }},
+  {"rocblas_status_arch_mismatch",                     {HIP_5070, HIP_0,    HIP_0   }},
+  {"rocblas_status_invalid_value",                     {HIP_3050, HIP_0,    HIP_0   }},
   {"rocblas_datatype",                                 {HIP_1082, HIP_0,    HIP_0   }},
   {"rocblas_datatype_",                                {HIP_1082, HIP_0,    HIP_0   }},
   {"rocblas_datatype_f16_r",                           {HIP_1082, HIP_0,    HIP_0   }},

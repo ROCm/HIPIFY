@@ -79,10 +79,10 @@
 |`CUBLAS_SIDE_LEFT`| | | | |`HIPBLAS_SIDE_LEFT`|1.8.2| | | | |`rocblas_side_left`|1.5.0| | | | |
 |`CUBLAS_SIDE_RIGHT`| | | | |`HIPBLAS_SIDE_RIGHT`|1.8.2| | | | |`rocblas_side_right`|1.5.0| | | | |
 |`CUBLAS_STATUS_ALLOC_FAILED`| | | | |`HIPBLAS_STATUS_ALLOC_FAILED`|1.8.2| | | | |`rocblas_status_not_implemented`|1.5.0| | | | |
-|`CUBLAS_STATUS_ARCH_MISMATCH`| | | | |`HIPBLAS_STATUS_ARCH_MISMATCH`|1.8.2| | | | |`rocblas_status_size_query_mismatch`|3.5.0| | | | |
+|`CUBLAS_STATUS_ARCH_MISMATCH`| | | | |`HIPBLAS_STATUS_ARCH_MISMATCH`|1.8.2| | | | |`rocblas_status_arch_mismatch`|5.7.0| | | | |
 |`CUBLAS_STATUS_EXECUTION_FAILED`| | | | |`HIPBLAS_STATUS_EXECUTION_FAILED`|1.8.2| | | | |`rocblas_status_memory_error`|1.5.0| | | | |
 |`CUBLAS_STATUS_INTERNAL_ERROR`| | | | |`HIPBLAS_STATUS_INTERNAL_ERROR`|1.8.2| | | | |`rocblas_status_internal_error`|1.5.0| | | | |
-|`CUBLAS_STATUS_INVALID_VALUE`| | | | |`HIPBLAS_STATUS_INVALID_VALUE`|1.8.2| | | | |`rocblas_status_invalid_pointer`|1.5.0| | | | |
+|`CUBLAS_STATUS_INVALID_VALUE`| | | | |`HIPBLAS_STATUS_INVALID_VALUE`|1.8.2| | | | |`rocblas_status_invalid_value`|3.5.0| | | | |
 |`CUBLAS_STATUS_LICENSE_ERROR`| | | | |`HIPBLAS_STATUS_UNKNOWN`| | | | | | | | | | | |
 |`CUBLAS_STATUS_MAPPING_ERROR`| | | | |`HIPBLAS_STATUS_MAPPING_ERROR`|1.8.2| | | | |`rocblas_status_invalid_size`|1.5.0| | | | |
 |`CUBLAS_STATUS_NOT_INITIALIZED`| | | | |`HIPBLAS_STATUS_NOT_INITIALIZED`|1.8.2| | | | |`rocblas_status_invalid_handle`|1.5.0| | | | |
