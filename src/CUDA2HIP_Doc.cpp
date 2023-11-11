@@ -74,6 +74,16 @@ namespace doc {
   const string sROCBLAS_csv = sROCBLAS + csv_ext;
   const string sCUBLAS = "CUBLAS";
 
+  const string sSOLVER = "CUSOLVER_API_supported_by_HIP";
+  const string sSOLVER_md = sSOLVER + md_ext;
+  const string sSOLVER_csv = sSOLVER + csv_ext;
+  const string sSOLVER_and_ROC_md = sSOLVER + sandROC + md_ext;
+  const string sSOLVER_and_ROC_csv = sSOLVER + sandROC + csv_ext;
+  const string sROCSOLVER = "CUSOLVER_API_supported_by_ROC";
+  const string sROCSOLVER_md = sROCSOLVER + md_ext;
+  const string sROCSOLVER_csv = sROCSOLVER + csv_ext;
+  const string sCUSOLVER = "CUSOLVER";
+
   const string sRAND = "CURAND_API_supported_by_HIP";
   const string sRAND_md = sRAND + md_ext;
   const string sRAND_csv = sRAND + csv_ext;
@@ -580,6 +590,47 @@ namespace doc {
       }
   };
 
+  class SOLVER : public DOC {
+  public:
+    SOLVER(const string& outDir) : DOC(outDir) { hasROC = true; }
+    virtual ~SOLVER() {}
+  protected:
+    const sectionMap& getSections() const override { return CUDA_SOLVER_API_SECTION_MAP; }
+    const functionMap& getFunctions() const override { return CUDA_SOLVER_FUNCTION_MAP; }
+    const typeMap& getTypes() const override { return CUDA_SOLVER_TYPE_NAME_MAP; }
+    const versionMap& getFunctionVersions() const override { return CUDA_SOLVER_FUNCTION_VER_MAP; }
+    const hipVersionMap& getHipFunctionVersions() const override { return HIP_SOLVER_FUNCTION_VER_MAP; }
+    const versionMap& getTypeVersions() const override { return CUDA_SOLVER_TYPE_NAME_VER_MAP; }
+    const hipVersionMap& getHipTypeVersions() const override { return HIP_SOLVER_TYPE_NAME_VER_MAP; }
+    const string& getName() const override { return sCUSOLVER; }
+    const string& getSecondAPI() const override { return sROC; }
+    const string& getJointAPI() const override { return sHIPandROC; }
+    const string& getFileName(docType format) const override {
+      switch (format) {
+      case none:
+      default: return sEmpty;
+      case md: return roc == joint ? sSOLVER_and_ROC_md : sSOLVER_md;
+      case csv: return roc == joint ? sSOLVER_and_ROC_csv : sSOLVER_csv;
+      }
+    }
+  };
+
+  class ROCSOLVER : public SOLVER {
+  public:
+    ROCSOLVER(const string& outDir) : SOLVER(outDir) { hasROC = false; isROC = true; }
+    virtual ~ROCSOLVER() {}
+  protected:
+    const string& getAPI() const override { return sROC; }
+    const string& getFileName(docType format) const override {
+      switch (format) {
+      case none:
+      default: return sEmpty;
+      case md: return sROCSOLVER_md;
+      case csv: return sROCSOLVER_csv;
+      }
+    }
+  };
+
   class RAND: public DOC {
     public:
       RAND(const string &outDir): DOC(outDir) {}
@@ -818,12 +869,16 @@ namespace doc {
     BLAS blas(sOut);
     docs.addDoc(&blas);
     ROCBLAS rocblas(sOut);
+    SOLVER solver(sOut);
+    docs.addDoc(&solver);
+    ROCSOLVER rocsolver(sOut);
     MIOPEN miopen(sOut);
     ROCSPARSE rocsparse(sOut);
     if (docRoc == separate) {
       docs.addDoc(&rocblas);
       docs.addDoc(&miopen);
       docs.addDoc(&rocsparse);
+      docs.addDoc(&rocsolver);
     }
     RAND rand(sOut);
     docs.addDoc(&rand);

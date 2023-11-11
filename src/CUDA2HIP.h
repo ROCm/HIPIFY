@@ -120,6 +120,8 @@ extern const std::map<llvm::StringRef, cudaAPIversions> CUDA_CUB_TYPE_NAME_VER_M
 extern const std::map<llvm::StringRef, cudaAPIversions> CUDA_CUB_FUNCTION_VER_MAP;
 extern const std::map<llvm::StringRef, cudaAPIversions> CUDA_RTC_TYPE_NAME_VER_MAP;
 extern const std::map<llvm::StringRef, cudaAPIversions> CUDA_RTC_FUNCTION_VER_MAP;
+extern const std::map<llvm::StringRef, cudaAPIversions> CUDA_SOLVER_TYPE_NAME_VER_MAP;
+extern const std::map<llvm::StringRef, cudaAPIversions> CUDA_SOLVER_FUNCTION_VER_MAP;
 
 /**
   * The union of all the above CUDA maps.
@@ -154,6 +156,8 @@ extern const std::map<llvm::StringRef, hipAPIversions> HIP_CUB_TYPE_NAME_VER_MAP
 extern const std::map<llvm::StringRef, hipAPIversions> HIP_CUB_FUNCTION_VER_MAP;
 extern const std::map<llvm::StringRef, hipAPIversions> HIP_RTC_TYPE_NAME_VER_MAP;
 extern const std::map<llvm::StringRef, hipAPIversions> HIP_RTC_FUNCTION_VER_MAP;
+extern const std::map<llvm::StringRef, hipAPIversions> HIP_SOLVER_TYPE_NAME_VER_MAP;
+extern const std::map<llvm::StringRef, hipAPIversions> HIP_SOLVER_FUNCTION_VER_MAP;
 
 /**
   * The union of all the above HIP maps.
@@ -172,6 +176,7 @@ extern const std::map<unsigned int, llvm::StringRef> CUDA_SPARSE_API_SECTION_MAP
 extern const std::map<unsigned int, llvm::StringRef> CUDA_DEVICE_FUNCTION_API_SECTION_MAP;
 extern const std::map<unsigned int, llvm::StringRef> CUDA_RTC_API_SECTION_MAP;
 extern const std::map<unsigned int, llvm::StringRef> CUDA_CUB_API_SECTION_MAP;
+extern const std::map<unsigned int, llvm::StringRef> CUDA_SOLVER_API_SECTION_MAP;
 
 namespace driver {
   enum CUDA_DRIVER_API_SECTIONS {

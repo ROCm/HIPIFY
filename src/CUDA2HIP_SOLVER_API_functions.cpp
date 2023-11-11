@@ -63,3 +63,8 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SOLVER_FUNCTION_VER_MAP {
   {"hipsolverDnDgetrs",                                   {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipsolverDnSgetrs",                                   {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
 };
+
+const std::map<unsigned int, llvm::StringRef> CUDA_SOLVER_API_SECTION_MAP {
+  {1, "CUSOLVER Data types"},
+  {2, "CUSOLVER Function Reference"},
+};

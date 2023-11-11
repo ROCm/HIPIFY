@@ -155,6 +155,8 @@ const std::map<llvm::StringRef, cudaAPIversions> &CUDA_VERSIONS_MAP() {
   ret.insert(CUDA_CUB_FUNCTION_VER_MAP.begin(), CUDA_CUB_FUNCTION_VER_MAP.end());
   ret.insert(CUDA_RTC_TYPE_NAME_VER_MAP.begin(), CUDA_RTC_TYPE_NAME_VER_MAP.end());
   ret.insert(CUDA_RTC_FUNCTION_VER_MAP.begin(), CUDA_RTC_FUNCTION_VER_MAP.end());
+  ret.insert(CUDA_SOLVER_TYPE_NAME_VER_MAP.begin(), CUDA_SOLVER_TYPE_NAME_VER_MAP.end());
+  ret.insert(CUDA_SOLVER_FUNCTION_VER_MAP.begin(), CUDA_SOLVER_FUNCTION_VER_MAP.end());
   return ret;
 }
 
@@ -187,5 +189,7 @@ const std::map<llvm::StringRef, hipAPIversions> &HIP_VERSIONS_MAP() {
   ret.insert(HIP_CUB_FUNCTION_VER_MAP.begin(), HIP_CUB_FUNCTION_VER_MAP.end());
   ret.insert(HIP_RTC_TYPE_NAME_VER_MAP.begin(), HIP_RTC_TYPE_NAME_VER_MAP.end());
   ret.insert(HIP_RTC_FUNCTION_VER_MAP.begin(), HIP_RTC_FUNCTION_VER_MAP.end());
+  ret.insert(HIP_SOLVER_TYPE_NAME_VER_MAP.begin(), HIP_SOLVER_TYPE_NAME_VER_MAP.end());
+  ret.insert(HIP_SOLVER_FUNCTION_VER_MAP.begin(), HIP_SOLVER_FUNCTION_VER_MAP.end());
   return ret;
 }
