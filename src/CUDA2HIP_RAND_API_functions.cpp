@@ -136,10 +136,10 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RAND_FUNCTION_VER_MAP {
   {"hiprand_discrete4",                              {HIP_1050, HIP_0,    HIP_0   }},
   {"hiprand_poisson",                                {HIP_1050, HIP_0,    HIP_0   }},
   {"hiprand_poisson4",                               {HIP_1050, HIP_0,    HIP_0   }},
-  {"hiprandGetDirectionVectors32",                   {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hiprandGetDirectionVectors64",                   {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hiprandGetScrambleConstants32",                  {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hiprandGetScrambleConstants64",                  {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hiprandGetDirectionVectors32",                   {HIP_6000, HIP_0,    HIP_0,  }},
+  {"hiprandGetDirectionVectors64",                   {HIP_6000, HIP_0,    HIP_0,  }},
+  {"hiprandGetScrambleConstants32",                  {HIP_6000, HIP_0,    HIP_0,  }},
+  {"hiprandGetScrambleConstants64",                  {HIP_6000, HIP_0,    HIP_0,  }},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_RAND_API_SECTION_MAP {
