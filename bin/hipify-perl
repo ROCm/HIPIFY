@@ -1286,7 +1286,11 @@ sub experimentalSubstitutions {
     subst("cudaExternalSemaphoreWaitNodeParams", "hipExternalSemaphoreWaitNodeParams", "type");
     subst("cudaExternalSemaphoreWaitNodeParamsV2", "hipExternalSemaphoreWaitNodeParams", "type");
     subst("cusolverDnHandle_t", "hipsolverHandle_t", "type");
+    subst("cusolverEigType_t", "hipsolverEigType_t", "type");
     subst("cusolverStatus_t", "hipsolverStatus_t", "type");
+    subst("CUSOLVER_EIG_TYPE_1", "HIPSOLVER_EIG_TYPE_1", "numeric_literal");
+    subst("CUSOLVER_EIG_TYPE_2", "HIPSOLVER_EIG_TYPE_2", "numeric_literal");
+    subst("CUSOLVER_EIG_TYPE_3", "HIPSOLVER_EIG_TYPE_3", "numeric_literal");
     subst("CUSOLVER_STATUS_ALLOC_FAILED", "HIPSOLVER_STATUS_ALLOC_FAILED", "numeric_literal");
     subst("CUSOLVER_STATUS_ARCH_MISMATCH", "HIPSOLVER_STATUS_ARCH_MISMATCH", "numeric_literal");
     subst("CUSOLVER_STATUS_EXECUTION_FAILED", "HIPSOLVER_STATUS_EXECUTION_FAILED", "numeric_literal");
@@ -2154,6 +2158,7 @@ sub rocSubstitutions {
     subst("cudnnStatus_t", "miopenStatus_t", "type");
     subst("cudnnTensorDescriptor_t", "miopenTensorDescriptor_t", "type");
     subst("cusolverDnHandle_t", "rocblas_handle", "type");
+    subst("cusolverEigType_t", "rocblas_eform", "type");
     subst("cusolverStatus_t", "rocblas_status", "type");
     subst("cusparseAction_t", "rocsparse_action", "type");
     subst("cusparseColorInfo", "_rocsparse_color_info", "type");
@@ -2312,6 +2317,9 @@ sub rocSubstitutions {
     subst("CUDNN_STATUS_NOT_SUPPORTED", "miopenStatusUnsupportedOp", "numeric_literal");
     subst("CUDNN_STATUS_SUCCESS", "miopenStatusSuccess", "numeric_literal");
     subst("CUDNN_UNIDIRECTIONAL", "miopenRNNunidirection", "numeric_literal");
+    subst("CUSOLVER_EIG_TYPE_1", "rocblas_eform_ax", "numeric_literal");
+    subst("CUSOLVER_EIG_TYPE_2", "rocblas_eform_abx", "numeric_literal");
+    subst("CUSOLVER_EIG_TYPE_3", "rocblas_eform_bax", "numeric_literal");
     subst("CUSOLVER_STATUS_ALLOC_FAILED", "rocblas_status_memory_error", "numeric_literal");
     subst("CUSOLVER_STATUS_ARCH_MISMATCH", "rocblas_status_arch_mismatch", "numeric_literal");
     subst("CUSOLVER_STATUS_EXECUTION_FAILED", "rocblas_status_not_implemented", "numeric_literal");
@@ -8634,6 +8642,19 @@ sub warnUnsupportedFunctions {
         "CUSPARSE_ALG1",
         "CUSPARSE_ALG0",
         "CUSOLVER_STATUS_MATRIX_TYPE_NOT_SUPPORTED",
+        "CUSOLVER_STATUS_IRS_PARAMS_NOT_INITIALIZED",
+        "CUSOLVER_STATUS_IRS_PARAMS_INVALID_REFINE",
+        "CUSOLVER_STATUS_IRS_PARAMS_INVALID_PREC",
+        "CUSOLVER_STATUS_IRS_PARAMS_INVALID_MAXITER",
+        "CUSOLVER_STATUS_IRS_PARAMS_INVALID",
+        "CUSOLVER_STATUS_IRS_OUT_OF_RANGE",
+        "CUSOLVER_STATUS_IRS_NRHS_NOT_SUPPORTED_FOR_REFINE_GMRES",
+        "CUSOLVER_STATUS_IRS_NOT_SUPPORTED",
+        "CUSOLVER_STATUS_IRS_MATRIX_SINGULAR",
+        "CUSOLVER_STATUS_IRS_INTERNAL_ERROR",
+        "CUSOLVER_STATUS_IRS_INFOS_NOT_INITIALIZED",
+        "CUSOLVER_STATUS_IRS_INFOS_NOT_DESTROYED",
+        "CUSOLVER_STATUS_INVALID_WORKSPACE",
         "CUSOLVER_STATUS_INVALID_LICENSE",
         "CURAND_REJECTION",
         "CURAND_POISSON",

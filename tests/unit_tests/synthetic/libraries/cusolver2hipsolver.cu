@@ -93,5 +93,16 @@ int main() {
   // CHECK: status = hipsolverDnSgetrs(handle, blasOperation, n, nrhs , &fA, lda, &devIpiv, &fB, ldb, &devInfo);
   status = cusolverDnSgetrs(handle, blasOperation, n, nrhs , &fA, lda, &devIpiv, &fB, ldb, &devInfo);
 
+#if CUDA_VERSION >= 8000
+  // CHECK: hipsolverEigType_t eigType;
+  // CHECK-NEXT: hipsolverEigType_t EIG_TYPE_1 = HIPSOLVER_EIG_TYPE_1;
+  // CHECK-NEXT: hipsolverEigType_t EIG_TYPE_2 = HIPSOLVER_EIG_TYPE_2;
+  // CHECK-NEXT: hipsolverEigType_t EIG_TYPE_3 = HIPSOLVER_EIG_TYPE_3;
+  cusolverEigType_t eigType;
+  cusolverEigType_t EIG_TYPE_1 = CUSOLVER_EIG_TYPE_1;
+  cusolverEigType_t EIG_TYPE_2 = CUSOLVER_EIG_TYPE_2;
+  cusolverEigType_t EIG_TYPE_3 = CUSOLVER_EIG_TYPE_3;
+#endif
+
   return 0;
 }
