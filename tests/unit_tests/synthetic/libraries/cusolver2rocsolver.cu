@@ -45,5 +45,16 @@ int main() {
   // CHECK: status = rocblas_destroy_handle(handle);
   status = cusolverDnDestroy(handle);
 
+#if CUDA_VERSION >= 8000
+  // CHECK: rocblas_eform eigType;
+  // CHECK-NEXT: rocblas_eform EIG_TYPE_1 = rocblas_eform_ax;
+  // CHECK-NEXT: rocblas_eform EIG_TYPE_2 = rocblas_eform_abx;
+  // CHECK-NEXT: rocblas_eform EIG_TYPE_3 = rocblas_eform_bax;
+  cusolverEigType_t eigType;
+  cusolverEigType_t EIG_TYPE_1 = CUSOLVER_EIG_TYPE_1;
+  cusolverEigType_t EIG_TYPE_2 = CUSOLVER_EIG_TYPE_2;
+  cusolverEigType_t EIG_TYPE_3 = CUSOLVER_EIG_TYPE_3;
+#endif
+
   return 0;
 }
