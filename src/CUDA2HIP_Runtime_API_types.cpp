@@ -215,14 +215,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaMemPoolPtrExportData",                                         {"hipMemPoolPtrExportData",                                  "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES}},
 
   // CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_st
-  {"cudaExternalSemaphoreSignalNodeParams",                            {"hipExternalSemaphoreSignalNodeParams",                     "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
+  {"cudaExternalSemaphoreSignalNodeParams",                            {"hipExternalSemaphoreSignalNodeParams",                     "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES}},
   // CUDA_EXT_SEM_SIGNAL_NODE_PARAMS_v2_st
-  {"cudaExternalSemaphoreSignalNodeParamsV2",                          {"hipExternalSemaphoreSignalNodeParams",                     "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
+  {"cudaExternalSemaphoreSignalNodeParamsV2",                          {"hipExternalSemaphoreSignalNodeParams",                     "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES}},
 
   // CUDA_EXT_SEM_WAIT_NODE_PARAMS_st
-  {"cudaExternalSemaphoreWaitNodeParams",                              {"hipExternalSemaphoreWaitNodeParams",                       "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
+  {"cudaExternalSemaphoreWaitNodeParams",                              {"hipExternalSemaphoreWaitNodeParams",                       "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES}},
   // CUDA_EXT_SEM_WAIT_NODE_PARAMS_v2_st
-  {"cudaExternalSemaphoreWaitNodeParamsV2",                            {"hipExternalSemaphoreWaitNodeParams",                       "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
+  {"cudaExternalSemaphoreWaitNodeParamsV2",                            {"hipExternalSemaphoreWaitNodeParams",                       "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES}},
 
   // CUDA_MEM_ALLOC_NODE_PARAMS_st
   {"cudaMemAllocNodeParams",                                           {"hipMemAllocNodeParams",                                    "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES}},
@@ -580,7 +580,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CU_DEVICE_ATTRIBUTE_CAN_FLUSH_REMOTE_WRITES
   {"cudaDevAttrCanFlushRemoteWrites",                                  {"hipDeviceAttributeCanFlushRemoteWrites",                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 98
   // CU_DEVICE_ATTRIBUTE_HOST_REGISTER_SUPPORTED
-  {"cudaDevAttrHostRegisterSupported",                                 {"hipDeviceAttributeHostRegisterSupported",                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}}, // 99
+  {"cudaDevAttrHostRegisterSupported",                                 {"hipDeviceAttributeHostRegisterSupported",                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}}, // 99
   // CU_DEVICE_ATTRIBUTE_PAGEABLE_MEMORY_ACCESS_USES_HOST_PAGE_TABLES
   {"cudaDevAttrPageableMemoryAccessUsesHostPageTables",                {"hipDeviceAttributePageableMemoryAccessUsesHostPageTables", "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}}, // 100
   // CU_DEVICE_ATTRIBUTE_DIRECT_MANAGED_MEM_ACCESS_FROM_HOST

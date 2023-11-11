@@ -415,8 +415,8 @@
 |`cudaGraphAddEmptyNode`|10.0| | | |`hipGraphAddEmptyNode`|4.5.0| | | | |
 |`cudaGraphAddEventRecordNode`|11.1| | | |`hipGraphAddEventRecordNode`|5.0.0| | | | |
 |`cudaGraphAddEventWaitNode`|11.1| | | |`hipGraphAddEventWaitNode`|5.0.0| | | | |
-|`cudaGraphAddExternalSemaphoresSignalNode`|11.2| | | |`hipGraphAddExternalSemaphoresSignalNode`|6.0.0| | | |6.0.0|
-|`cudaGraphAddExternalSemaphoresWaitNode`|11.2| | | |`hipGraphAddExternalSemaphoresWaitNode`|6.0.0| | | |6.0.0|
+|`cudaGraphAddExternalSemaphoresSignalNode`|11.2| | | |`hipGraphAddExternalSemaphoresSignalNode`|6.0.0| | | | |
+|`cudaGraphAddExternalSemaphoresWaitNode`|11.2| | | |`hipGraphAddExternalSemaphoresWaitNode`|6.0.0| | | | |
 |`cudaGraphAddHostNode`|10.0| | | |`hipGraphAddHostNode`|5.0.0| | | | |
 |`cudaGraphAddKernelNode`|10.0| | | |`hipGraphAddKernelNode`|4.3.0| | | | |
 |`cudaGraphAddMemAllocNode`|11.4| | | |`hipGraphAddMemAllocNode`|5.5.0| | | | |
@@ -441,8 +441,8 @@
 |`cudaGraphExecDestroy`|10.0| | | |`hipGraphExecDestroy`|4.3.0| | | | |
 |`cudaGraphExecEventRecordNodeSetEvent`|11.1| | | |`hipGraphExecEventRecordNodeSetEvent`|5.0.0| | | | |
 |`cudaGraphExecEventWaitNodeSetEvent`|11.1| | | |`hipGraphExecEventWaitNodeSetEvent`|5.0.0| | | | |
-|`cudaGraphExecExternalSemaphoresSignalNodeSetParams`|11.2| | | |`hipGraphExecExternalSemaphoresSignalNodeSetParams`|6.0.0| | | |6.0.0|
-|`cudaGraphExecExternalSemaphoresWaitNodeSetParams`|11.2| | | |`hipGraphExecExternalSemaphoresWaitNodeSetParams`|6.0.0| | | |6.0.0|
+|`cudaGraphExecExternalSemaphoresSignalNodeSetParams`|11.2| | | |`hipGraphExecExternalSemaphoresSignalNodeSetParams`|6.0.0| | | | |
+|`cudaGraphExecExternalSemaphoresWaitNodeSetParams`|11.2| | | |`hipGraphExecExternalSemaphoresWaitNodeSetParams`|6.0.0| | | | |
 |`cudaGraphExecGetFlags`|12.0| | | | | | | | | |
 |`cudaGraphExecHostNodeSetParams`|11.0| | | |`hipGraphExecHostNodeSetParams`|5.0.0| | | | |
 |`cudaGraphExecKernelNodeSetParams`|11.0| | | |`hipGraphExecKernelNodeSetParams`|4.5.0| | | | |
@@ -453,10 +453,10 @@
 |`cudaGraphExecMemsetNodeSetParams`|11.0| | | |`hipGraphExecMemsetNodeSetParams`|5.0.0| | | | |
 |`cudaGraphExecNodeSetParams`|12.2| | | | | | | | | |
 |`cudaGraphExecUpdate`|11.0| | | |`hipGraphExecUpdate`|5.0.0| | | | |
-|`cudaGraphExternalSemaphoresSignalNodeGetParams`|11.2| | | |`hipGraphExternalSemaphoresSignalNodeGetParams`|6.0.0| | | |6.0.0|
-|`cudaGraphExternalSemaphoresSignalNodeSetParams`|11.2| | | |`hipGraphExternalSemaphoresSignalNodeSetParams`|6.0.0| | | |6.0.0|
-|`cudaGraphExternalSemaphoresWaitNodeGetParams`|11.2| | | |`hipGraphExternalSemaphoresWaitNodeGetParams`|6.0.0| | | |6.0.0|
-|`cudaGraphExternalSemaphoresWaitNodeSetParams`|11.2| | | |`hipGraphExternalSemaphoresWaitNodeSetParams`|6.0.0| | | |6.0.0|
+|`cudaGraphExternalSemaphoresSignalNodeGetParams`|11.2| | | |`hipGraphExternalSemaphoresSignalNodeGetParams`|6.0.0| | | | |
+|`cudaGraphExternalSemaphoresSignalNodeSetParams`|11.2| | | |`hipGraphExternalSemaphoresSignalNodeSetParams`|6.0.0| | | | |
+|`cudaGraphExternalSemaphoresWaitNodeGetParams`|11.2| | | |`hipGraphExternalSemaphoresWaitNodeGetParams`|6.0.0| | | | |
+|`cudaGraphExternalSemaphoresWaitNodeSetParams`|11.2| | | |`hipGraphExternalSemaphoresWaitNodeSetParams`|6.0.0| | | | |
 |`cudaGraphGetEdges`|10.0| | | |`hipGraphGetEdges`|5.0.0| | | | |
 |`cudaGraphGetNodes`|10.0| | | |`hipGraphGetNodes`|4.5.0| | | | |
 |`cudaGraphGetRootNodes`|10.0| | | |`hipGraphGetRootNodes`|4.5.0| | | | |
@@ -665,7 +665,7 @@
 |`cudaDevAttrHostNativeAtomicSupported`|8.0| | | |`hipDeviceAttributeHostNativeAtomicSupported`|4.3.0| | | | |
 |`cudaDevAttrHostNumaId`|12.2| | | | | | | | | |
 |`cudaDevAttrHostRegisterReadOnlySupported`|11.1| | | | | | | | | |
-|`cudaDevAttrHostRegisterSupported`|9.2| | | |`hipDeviceAttributeHostRegisterSupported`|6.0.0| | | |6.0.0|
+|`cudaDevAttrHostRegisterSupported`|9.2| | | |`hipDeviceAttributeHostRegisterSupported`|6.0.0| | | | |
 |`cudaDevAttrIntegrated`| | | | |`hipDeviceAttributeIntegrated`|1.9.0| | | | |
 |`cudaDevAttrIpcEventSupport`|12.0| | | | | | | | | |
 |`cudaDevAttrIsMultiGpuBoard`| | | | |`hipDeviceAttributeIsMultiGpuBoard`|1.6.0| | | | |
@@ -1046,13 +1046,13 @@
 |`cudaExternalSemaphoreHandleTypeOpaqueWin32Kmt`|10.0| | | |`hipExternalSemaphoreHandleTypeOpaqueWin32Kmt`|4.4.0| | | | |
 |`cudaExternalSemaphoreHandleTypeTimelineSemaphoreFd`|11.2| | | | | | | | | |
 |`cudaExternalSemaphoreHandleTypeTimelineSemaphoreWin32`|11.2| | | | | | | | | |
-|`cudaExternalSemaphoreSignalNodeParams`|11.2| | | |`hipExternalSemaphoreSignalNodeParams`|6.0.0| | | |6.0.0|
-|`cudaExternalSemaphoreSignalNodeParamsV2`|12.2| | | |`hipExternalSemaphoreSignalNodeParams`|6.0.0| | | |6.0.0|
+|`cudaExternalSemaphoreSignalNodeParams`|11.2| | | |`hipExternalSemaphoreSignalNodeParams`|6.0.0| | | | |
+|`cudaExternalSemaphoreSignalNodeParamsV2`|12.2| | | |`hipExternalSemaphoreSignalNodeParams`|6.0.0| | | | |
 |`cudaExternalSemaphoreSignalParams`|10.0| | | |`hipExternalSemaphoreSignalParams`|4.4.0| | | | |
 |`cudaExternalSemaphoreSignalParams_v1`|11.2| | | |`hipExternalSemaphoreSignalParams`|4.4.0| | | | |
 |`cudaExternalSemaphoreSignalSkipNvSciBufMemSync`|10.2| | | | | | | | | |
-|`cudaExternalSemaphoreWaitNodeParams`|11.2| | | |`hipExternalSemaphoreWaitNodeParams`|6.0.0| | | |6.0.0|
-|`cudaExternalSemaphoreWaitNodeParamsV2`|12.2| | | |`hipExternalSemaphoreWaitNodeParams`|6.0.0| | | |6.0.0|
+|`cudaExternalSemaphoreWaitNodeParams`|11.2| | | |`hipExternalSemaphoreWaitNodeParams`|6.0.0| | | | |
+|`cudaExternalSemaphoreWaitNodeParamsV2`|12.2| | | |`hipExternalSemaphoreWaitNodeParams`|6.0.0| | | | |
 |`cudaExternalSemaphoreWaitParams`|10.0| | | |`hipExternalSemaphoreWaitParams`|4.4.0| | | | |
 |`cudaExternalSemaphoreWaitParams_v1`|11.2| | | |`hipExternalSemaphoreWaitParams`|4.4.0| | | | |
 |`cudaExternalSemaphoreWaitSkipNvSciBufMemSync`|10.2| | | | | | | | | |
