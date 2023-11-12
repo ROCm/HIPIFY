@@ -9,6 +9,11 @@
 #include "cusparse.h"
 // CHECK-NOT: #include "hipsparse.h"
 
+#if defined(_WIN32) && CUDDA_VERSION < 9000
+  typedef signed   __int64 int64_t;
+  typedef unsigned __int64 uint64_t;
+#endif
+
 int main() {
   printf("17. cuSPARSE API to hipSPARSE API synthetic test\n");
 
