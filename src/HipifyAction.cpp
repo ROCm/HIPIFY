@@ -143,6 +143,11 @@ const std::string sCusparseZcsrsm2_solve = "cusparseZcsrsm2_solve";
 const std::string sCusparseCcsrsm2_solve = "cusparseCcsrsm2_solve";
 const std::string sCusparseDcsrsm2_solve = "cusparseDcsrsm2_solve";
 const std::string sCusparseScsrsm2_solve = "cusparseScsrsm2_solve";
+const std::string sCusparseZcsrsm2_analysis = "cusparseZcsrsm2_analysis";
+const std::string sCusparseCcsrsm2_analysis = "cusparseCcsrsm2_analysis";
+const std::string sCusparseDcsrsm2_analysis = "cusparseDcsrsm2_analysis";
+const std::string sCusparseScsrsm2_analysis = "cusparseScsrsm2_analysis";
+
 // CUDA_OVERLOADED
 const std::string sCudaEventCreate = "cudaEventCreate";
 const std::string sCudaGraphInstantiate = "cudaGraphInstantiate";
@@ -1002,6 +1007,46 @@ std::map<std::string, ArgCastStruct> FuncArgCasts {
       false
     }
   },
+  {sCusparseZcsrsm2_analysis,
+    {
+      {
+        {15, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+        {16, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseCcsrsm2_analysis,
+    {
+      {
+        {15, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+        {16, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseDcsrsm2_analysis,
+    {
+      {
+        {15, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+        {16, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseScsrsm2_analysis,
+    {
+      {
+        {15, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+        {16, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
 };
 
 void HipifyAction::RewriteString(StringRef s, clang::SourceLocation start) {
@@ -1773,7 +1818,11 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
             sCusparseZcsrsm2_solve,
             sCusparseCcsrsm2_solve,
             sCusparseDcsrsm2_solve,
-            sCusparseScsrsm2_solve
+            sCusparseScsrsm2_solve,
+            sCusparseZcsrsm2_analysis,
+            sCusparseCcsrsm2_analysis,
+            sCusparseDcsrsm2_analysis,
+            sCusparseScsrsm2_analysis
           )
         )
       )
