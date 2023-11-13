@@ -55,6 +55,13 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SOLVER_TYPE_NAME_MAP {
   {"CUSOLVER_EIG_TYPE_1",                                      {"HIPSOLVER_EIG_TYPE_1",                                      "rocblas_eform_ax",                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, HIP_EXPERIMENTAL}},
   {"CUSOLVER_EIG_TYPE_2",                                      {"HIPSOLVER_EIG_TYPE_2",                                      "rocblas_eform_abx",                                                CONV_NUMERIC_LITERAL, API_SOLVER, 1, HIP_EXPERIMENTAL}},
   {"CUSOLVER_EIG_TYPE_3",                                      {"HIPSOLVER_EIG_TYPE_3",                                      "rocblas_eform_bax",                                                CONV_NUMERIC_LITERAL, API_SOLVER, 1, HIP_EXPERIMENTAL}},
+  {"cusolverEigMode_t",                                        {"hipsolverEigMode_t",                                        "rocblas_evect",                                                    CONV_TYPE, API_SOLVER, 1, HIP_EXPERIMENTAL}},
+  {"CUSOLVER_EIG_MODE_NOVECTOR",                               {"HIPSOLVER_EIG_MODE_NOVECTOR",                               "rocblas_evect_none",                                               CONV_NUMERIC_LITERAL, API_SOLVER, 1, HIP_EXPERIMENTAL}},
+  {"CUSOLVER_EIG_MODE_VECTOR",                                 {"HIPSOLVER_EIG_MODE_VECTOR",                                 "rocblas_evect_original",                                           CONV_NUMERIC_LITERAL, API_SOLVER, 1, HIP_EXPERIMENTAL}},
+  {"cusolverEigRange_t",                                       {"hipsolverEigRange_t",                                       "rocblas_erange",                                                   CONV_TYPE, API_SOLVER, 1, HIP_EXPERIMENTAL}},
+  {"CUSOLVER_EIG_RANGE_ALL",                                   {"HIPSOLVER_EIG_RANGE_ALL",                                   "rocblas_erange_all",                                               CONV_NUMERIC_LITERAL, API_SOLVER, 1, HIP_EXPERIMENTAL}},
+  {"CUSOLVER_EIG_RANGE_I",                                     {"HIPSOLVER_EIG_RANGE_I",                                     "rocblas_erange_index",                                             CONV_NUMERIC_LITERAL, API_SOLVER, 1, HIP_EXPERIMENTAL}},
+  {"CUSOLVER_EIG_RANGE_V",                                     {"HIPSOLVER_EIG_RANGE_V",                                     "rocblas_erange_value",                                             CONV_NUMERIC_LITERAL, API_SOLVER, 1, HIP_EXPERIMENTAL}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_SOLVER_TYPE_NAME_VER_MAP {
@@ -75,6 +82,13 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SOLVER_TYPE_NAME_VER_MAP {
   {"CUSOLVER_EIG_TYPE_1",                                      {CUDA_80,  CUDA_0, CUDA_0}},
   {"CUSOLVER_EIG_TYPE_2",                                      {CUDA_80,  CUDA_0, CUDA_0}},
   {"CUSOLVER_EIG_TYPE_3",                                      {CUDA_80,  CUDA_0, CUDA_0}},
+  {"cusolverEigMode_t",                                        {CUDA_80,  CUDA_0, CUDA_0}},
+  {"CUSOLVER_EIG_MODE_NOVECTOR",                               {CUDA_80,  CUDA_0, CUDA_0}},
+  {"CUSOLVER_EIG_MODE_VECTOR",                                 {CUDA_80,  CUDA_0, CUDA_0}},
+  {"cusolverEigRange_t",                                       {CUDA_101, CUDA_0, CUDA_0}},
+  {"CUSOLVER_EIG_RANGE_ALL",                                   {CUDA_101, CUDA_0, CUDA_0}},
+  {"CUSOLVER_EIG_RANGE_I",                                     {CUDA_101, CUDA_0, CUDA_0}},
+  {"CUSOLVER_EIG_RANGE_V",                                     {CUDA_101, CUDA_0, CUDA_0}},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_SOLVER_TYPE_NAME_VER_MAP {
@@ -93,6 +107,14 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SOLVER_TYPE_NAME_VER_MAP {
   {"HIPSOLVER_EIG_TYPE_1",                                     {HIP_4050, HIP_0,    HIP_0,  HIP_LATEST}},
   {"HIPSOLVER_EIG_TYPE_2",                                     {HIP_4050, HIP_0,    HIP_0,  HIP_LATEST}},
   {"HIPSOLVER_EIG_TYPE_3",                                     {HIP_4050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverEigMode_t",                                       {HIP_4050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"HIPSOLVER_EIG_MODE_NOVECTOR",                              {HIP_4050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"HIPSOLVER_EIG_MODE_VECTOR",                                {HIP_4050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverEigRange_t",                                      {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"HIPSOLVER_EIG_RANGE_ALL",                                  {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"HIPSOLVER_EIG_RANGE_I",                                    {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"HIPSOLVER_EIG_RANGE_V",                                    {HIP_5030, HIP_0,    HIP_0,  HIP_LATEST}},
+
   {"rocblas_status",                                           {HIP_3000, HIP_0,    HIP_0,  HIP_LATEST}},
   {"rocblas_status_success",                                   {HIP_3000, HIP_0,    HIP_0,  HIP_LATEST}},
   {"rocblas_status_invalid_handle",                            {HIP_5060, HIP_0,    HIP_0,  HIP_LATEST}},
@@ -106,4 +128,11 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SOLVER_TYPE_NAME_VER_MAP {
   {"rocblas_eform_ax",                                         {HIP_4020, HIP_0,    HIP_0,  HIP_LATEST}},
   {"rocblas_eform_abx",                                        {HIP_4020, HIP_0,    HIP_0,  HIP_LATEST}},
   {"rocblas_eform_bax",                                        {HIP_4020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"rocblas_evect",                                            {HIP_4010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"rocblas_evect_none",                                       {HIP_4010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"rocblas_evect_original",                                   {HIP_4010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"rocblas_erange",                                           {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"rocblas_erange_all",                                       {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"rocblas_erange_index",                                     {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"rocblas_erange_value",                                     {HIP_5020, HIP_0,    HIP_0,  HIP_LATEST}},
 };

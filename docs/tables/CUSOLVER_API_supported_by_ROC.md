@@ -4,6 +4,11 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**ROC**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
+|`CUSOLVER_EIG_MODE_NOVECTOR`|8.0| | | |`rocblas_evect_none`|4.1.0| | | |6.1.0|
+|`CUSOLVER_EIG_MODE_VECTOR`|8.0| | | |`rocblas_evect_original`|4.1.0| | | |6.1.0|
+|`CUSOLVER_EIG_RANGE_ALL`|10.1| | | |`rocblas_erange_all`|5.2.0| | | |6.1.0|
+|`CUSOLVER_EIG_RANGE_I`|10.1| | | |`rocblas_erange_index`|5.2.0| | | |6.1.0|
+|`CUSOLVER_EIG_RANGE_V`|10.1| | | |`rocblas_erange_value`|5.2.0| | | |6.1.0|
 |`CUSOLVER_EIG_TYPE_1`|8.0| | | |`rocblas_eform_ax`|4.2.0| | | |6.1.0|
 |`CUSOLVER_EIG_TYPE_2`|8.0| | | |`rocblas_eform_abx`|4.2.0| | | |6.1.0|
 |`CUSOLVER_EIG_TYPE_3`|8.0| | | |`rocblas_eform_bax`|4.2.0| | | |6.1.0|
@@ -33,6 +38,8 @@
 |`CUSOLVER_STATUS_SUCCESS`| | | | |`rocblas_status_success`|3.0.0| | | |6.1.0|
 |`CUSOLVER_STATUS_ZERO_PIVOT`| | | | |`rocblas_status_not_implemented`|1.5.0| | | |6.1.0|
 |`cusolverDnHandle_t`| | | | |`rocblas_handle`|1.5.0| | | |6.1.0|
+|`cusolverEigMode_t`|8.0| | | |`rocblas_evect`|4.1.0| | | |6.1.0|
+|`cusolverEigRange_t`|10.1| | | |`rocblas_erange`|5.2.0| | | |6.1.0|
 |`cusolverEigType_t`|8.0| | | |`rocblas_eform`|4.2.0| | | |6.1.0|
 |`cusolverStatus_t`| | | | |`rocblas_status`|3.0.0| | | |6.1.0|
 

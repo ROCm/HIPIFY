@@ -102,6 +102,24 @@ int main() {
   cusolverEigType_t EIG_TYPE_1 = CUSOLVER_EIG_TYPE_1;
   cusolverEigType_t EIG_TYPE_2 = CUSOLVER_EIG_TYPE_2;
   cusolverEigType_t EIG_TYPE_3 = CUSOLVER_EIG_TYPE_3;
+
+  // CHECK: hipsolverEigMode_t eigMode;
+  // CHECK-NEXT: hipsolverEigMode_t SOLVER_EIG_MODE_NOVECTOR = HIPSOLVER_EIG_MODE_NOVECTOR;
+  // CHECK-NEXT: hipsolverEigMode_t SOLVER_EIG_MODE_VECTOR = HIPSOLVER_EIG_MODE_VECTOR;
+  cusolverEigMode_t eigMode;
+  cusolverEigMode_t SOLVER_EIG_MODE_NOVECTOR = CUSOLVER_EIG_MODE_NOVECTOR;
+  cusolverEigMode_t SOLVER_EIG_MODE_VECTOR = CUSOLVER_EIG_MODE_VECTOR;
+#endif
+
+#if CUDA_VERSION >= 10010
+  // CHECK: hipsolverEigRange_t eigRange;
+  // CHECK-NEXT: hipsolverEigRange_t EIG_RANGE_ALL = HIPSOLVER_EIG_RANGE_ALL;
+  // CHECK-NEXT: hipsolverEigRange_t EIG_RANGE_I = HIPSOLVER_EIG_RANGE_I;
+  // CHECK-NEXT: hipsolverEigRange_t EIG_RANGE_V = HIPSOLVER_EIG_RANGE_V;
+  cusolverEigRange_t eigRange;
+  cusolverEigRange_t EIG_RANGE_ALL = CUSOLVER_EIG_RANGE_ALL;
+  cusolverEigRange_t EIG_RANGE_I = CUSOLVER_EIG_RANGE_I;
+  cusolverEigRange_t EIG_RANGE_V = CUSOLVER_EIG_RANGE_V;
 #endif
 
   return 0;
