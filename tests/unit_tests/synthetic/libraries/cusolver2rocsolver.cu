@@ -54,6 +54,24 @@ int main() {
   cusolverEigType_t EIG_TYPE_1 = CUSOLVER_EIG_TYPE_1;
   cusolverEigType_t EIG_TYPE_2 = CUSOLVER_EIG_TYPE_2;
   cusolverEigType_t EIG_TYPE_3 = CUSOLVER_EIG_TYPE_3;
+
+  // CHECK: rocblas_evect eigMode;
+  // CHECK-NEXT: rocblas_evect SOLVER_EIG_MODE_NOVECTOR = rocblas_evect_none;
+  // CHECK-NEXT: rocblas_evect SOLVER_EIG_MODE_VECTOR = rocblas_evect_original;
+  cusolverEigMode_t eigMode;
+  cusolverEigMode_t SOLVER_EIG_MODE_NOVECTOR = CUSOLVER_EIG_MODE_NOVECTOR;
+  cusolverEigMode_t SOLVER_EIG_MODE_VECTOR = CUSOLVER_EIG_MODE_VECTOR;
+#endif
+
+#if CUDA_VERSION >= 10010
+  // CHECK: rocblas_erange eigRange;
+  // CHECK-NEXT: rocblas_erange EIG_RANGE_ALL = rocblas_erange_all;
+  // CHECK-NEXT: rocblas_erange EIG_RANGE_I = rocblas_erange_index;
+  // CHECK-NEXT: rocblas_erange EIG_RANGE_V = rocblas_erange_value;
+  cusolverEigRange_t eigRange;
+  cusolverEigRange_t EIG_RANGE_ALL = CUSOLVER_EIG_RANGE_ALL;
+  cusolverEigRange_t EIG_RANGE_I = CUSOLVER_EIG_RANGE_I;
+  cusolverEigRange_t EIG_RANGE_V = CUSOLVER_EIG_RANGE_V;
 #endif
 
   return 0;

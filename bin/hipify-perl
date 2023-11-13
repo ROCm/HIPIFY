@@ -1078,6 +1078,8 @@ my %removed_funcs = (
 my %experimental_funcs = (
     "cusolverStatus_t" => "6.1.0",
     "cusolverEigType_t" => "6.1.0",
+    "cusolverEigRange_t" => "6.1.0",
+    "cusolverEigMode_t" => "6.1.0",
     "cusolverDnSgetrs" => "6.1.0",
     "cusolverDnSgetrf_bufferSize" => "6.1.0",
     "cusolverDnSgetrf" => "6.1.0",
@@ -1098,7 +1100,12 @@ my %experimental_funcs = (
     "CUSOLVER_STATUS_ALLOC_FAILED" => "6.1.0",
     "CUSOLVER_EIG_TYPE_3" => "6.1.0",
     "CUSOLVER_EIG_TYPE_2" => "6.1.0",
-    "CUSOLVER_EIG_TYPE_1" => "6.1.0"
+    "CUSOLVER_EIG_TYPE_1" => "6.1.0",
+    "CUSOLVER_EIG_RANGE_V" => "6.1.0",
+    "CUSOLVER_EIG_RANGE_I" => "6.1.0",
+    "CUSOLVER_EIG_RANGE_ALL" => "6.1.0",
+    "CUSOLVER_EIG_MODE_VECTOR" => "6.1.0",
+    "CUSOLVER_EIG_MODE_NOVECTOR" => "6.1.0"
 );
 
 $print_stats = 1 if $examine;
@@ -1245,8 +1252,15 @@ sub experimentalSubstitutions {
     subst("cusolverDnSgetrf_bufferSize", "hipsolverDnSgetrf_bufferSize", "library");
     subst("cusolverDnSgetrs", "hipsolverDnSgetrs", "library");
     subst("cusolverDnHandle_t", "hipsolverHandle_t", "type");
+    subst("cusolverEigMode_t", "hipsolverEigMode_t", "type");
+    subst("cusolverEigRange_t", "hipsolverEigRange_t", "type");
     subst("cusolverEigType_t", "hipsolverEigType_t", "type");
     subst("cusolverStatus_t", "hipsolverStatus_t", "type");
+    subst("CUSOLVER_EIG_MODE_NOVECTOR", "HIPSOLVER_EIG_MODE_NOVECTOR", "numeric_literal");
+    subst("CUSOLVER_EIG_MODE_VECTOR", "HIPSOLVER_EIG_MODE_VECTOR", "numeric_literal");
+    subst("CUSOLVER_EIG_RANGE_ALL", "HIPSOLVER_EIG_RANGE_ALL", "numeric_literal");
+    subst("CUSOLVER_EIG_RANGE_I", "HIPSOLVER_EIG_RANGE_I", "numeric_literal");
+    subst("CUSOLVER_EIG_RANGE_V", "HIPSOLVER_EIG_RANGE_V", "numeric_literal");
     subst("CUSOLVER_EIG_TYPE_1", "HIPSOLVER_EIG_TYPE_1", "numeric_literal");
     subst("CUSOLVER_EIG_TYPE_2", "HIPSOLVER_EIG_TYPE_2", "numeric_literal");
     subst("CUSOLVER_EIG_TYPE_3", "HIPSOLVER_EIG_TYPE_3", "numeric_literal");
@@ -2119,6 +2133,8 @@ sub rocSubstitutions {
     subst("cudnnStatus_t", "miopenStatus_t", "type");
     subst("cudnnTensorDescriptor_t", "miopenTensorDescriptor_t", "type");
     subst("cusolverDnHandle_t", "rocblas_handle", "type");
+    subst("cusolverEigMode_t", "rocblas_evect", "type");
+    subst("cusolverEigRange_t", "rocblas_erange", "type");
     subst("cusolverEigType_t", "rocblas_eform", "type");
     subst("cusolverStatus_t", "rocblas_status", "type");
     subst("cusparseAction_t", "rocsparse_action", "type");
@@ -2278,6 +2294,11 @@ sub rocSubstitutions {
     subst("CUDNN_STATUS_NOT_SUPPORTED", "miopenStatusUnsupportedOp", "numeric_literal");
     subst("CUDNN_STATUS_SUCCESS", "miopenStatusSuccess", "numeric_literal");
     subst("CUDNN_UNIDIRECTIONAL", "miopenRNNunidirection", "numeric_literal");
+    subst("CUSOLVER_EIG_MODE_NOVECTOR", "rocblas_evect_none", "numeric_literal");
+    subst("CUSOLVER_EIG_MODE_VECTOR", "rocblas_evect_original", "numeric_literal");
+    subst("CUSOLVER_EIG_RANGE_ALL", "rocblas_erange_all", "numeric_literal");
+    subst("CUSOLVER_EIG_RANGE_I", "rocblas_erange_index", "numeric_literal");
+    subst("CUSOLVER_EIG_RANGE_V", "rocblas_erange_value", "numeric_literal");
     subst("CUSOLVER_EIG_TYPE_1", "rocblas_eform_ax", "numeric_literal");
     subst("CUSOLVER_EIG_TYPE_2", "rocblas_eform_abx", "numeric_literal");
     subst("CUSOLVER_EIG_TYPE_3", "rocblas_eform_bax", "numeric_literal");
