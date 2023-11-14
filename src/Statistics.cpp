@@ -142,6 +142,7 @@ const char *apiNames[NUM_API_TYPES] = {
   "cuDNN API",
   "cuFFT API",
   "cuSPARSE API",
+  "cuSOLVER API",
   "CUB API",
   "CAFFE2 API",
   "RTC API"
@@ -157,6 +158,7 @@ const char *apiTypes[NUM_API_TYPES] = {
   "API_FFT",
   "API_CUB",
   "API_SPARSE",
+  "API_SOLVER",
   "API_CAFFE2",
   "API_RTC"
 };
@@ -363,8 +365,9 @@ void Statistics::setActive(const std::string &name) {
 }
 
 bool Statistics::isToRoc(const hipCounter &counter) {
-  return (counter.apiType == API_BLAS || counter.apiType == API_DNN || counter.apiType == API_SPARSE || counter.apiType == API_RUNTIME || counter.apiType == API_COMPLEX) &&
-    ((TranslateToRoc && !TranslateToMIOpen && !isRocMiopenOnly(counter)) || TranslateToMIOpen);
+  return (counter.apiType == API_BLAS || counter.apiType == API_DNN || counter.apiType == API_SPARSE || counter.apiType == API_SOLVER ||
+          counter.apiType == API_RUNTIME || counter.apiType == API_COMPLEX) &&
+          ((TranslateToRoc && !TranslateToMIOpen && !isRocMiopenOnly(counter)) || TranslateToMIOpen);
 }
 
 bool Statistics::isHipExperimental(const hipCounter& counter) {
@@ -530,6 +533,7 @@ std::string Statistics::getCudaVersion(const cudaVersions& ver) {
     case CUDNN_893: return "8.9.3";
     case CUDNN_894: return "8.9.4";
     case CUDNN_895: return "8.9.5";
+    case CUDNN_896: return "8.9.6";
   }
   return "";
 }
@@ -599,6 +603,7 @@ std::string Statistics::getHipVersion(const hipVersions& ver) {
     case HIP_5060: return "5.6.0";
     case HIP_5070: return "5.7.0";
     case HIP_6000: return "6.0.0";
+    case HIP_6010: return "6.1.0";
   }
   return "";
 }

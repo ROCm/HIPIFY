@@ -174,6 +174,7 @@ enum ApiTypes {
   API_DNN,
   API_FFT,
   API_SPARSE,
+  API_SOLVER,
   API_CUB,
   API_CAFFE2,
   API_RTC,
@@ -286,7 +287,8 @@ enum cudaVersions {
   CUDNN_893 = 893,
   CUDNN_894 = 894,
   CUDNN_895 = 895,
-  CUDNN_LATEST = CUDNN_895,
+  CUDNN_896 = 896,
+  CUDNN_LATEST = CUDNN_896,
 };
 
 enum hipVersions {
@@ -352,7 +354,8 @@ enum hipVersions {
   HIP_5060 = 5060,
   HIP_5070 = 5070,
   HIP_6000 = 6000,
-  HIP_LATEST = HIP_6000,
+  HIP_6010 = 6010,
+  HIP_LATEST = HIP_6010,
 };
 
 struct cudaAPIversions {

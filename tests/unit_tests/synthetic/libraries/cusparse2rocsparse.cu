@@ -9,6 +9,11 @@
 #include "cusparse.h"
 // CHECK-NOT: #include "rocsparse.h"
 
+#if defined(_WIN32) && CUDDA_VERSION < 9000
+  typedef signed   __int64 int64_t;
+  typedef unsigned __int64 uint64_t;
+#endif
+
 int main() {
   printf("18. cuSPARSE API to rocSPARSE API synthetic test\n");
 
@@ -127,11 +132,13 @@ int main() {
   int nnzb = 0;
   int nnzc = 0;
   int nnzd = 0;
+  int nrhs = 0;
   int nnzPerRow = 0;
   int nnzPerCol = 0;
   int innz = 0;
   int lda = 0;
   int ldb = 0;
+  int ldx = 0;
   int blockDim = 0;
   int csrSortedRowPtr = 0;
   int csrSortedColInd = 0;
@@ -261,9 +268,6 @@ int main() {
   double dboost_val = 0.f;
   float boost_val = 0.f;
 
-  // CHECK: rocsparse_mat_info prune_info;
-  pruneInfo_t prune_info;
-
   // CHECK: rocsparse_mat_info csrilu02_info;
   csrilu02Info_t csrilu02_info;
 
@@ -276,18 +280,21 @@ int main() {
   // CHECK: rocsparse_mat_info bsric02_info;
   bsric02Info_t bsric02_info;
 
+  // CHECK: rocsparse_mat_info bsrsm2_info;
+  bsrsm2Info_t bsrsm2_info;
+
   // TODO: should be rocsparse_double_complex
   // TODO: add to TypeOverloads cuDoubleComplex -> rocsparse_double_complex under a new option --sparse
-  // CHECK: rocblas_double_complex dcomplex, dcomplexA, dcomplexB, dComplexbsrSortedValA, dComplexbsrSortedValC, dComplexcsrSortedValA, dComplexcsrSortedValB, dComplexcsrSortedValC, dcomplextol, dComplexbsrSortedVal, dComplexbscVal, dComplexcscSortedVal, dcomplexds, dcomplexdl, dcomplexd, dcomplexdu, dcomplexdw, dcomplexx, dcomplex_boost_val;
-  cuDoubleComplex dcomplex, dcomplexA, dcomplexB, dComplexbsrSortedValA, dComplexbsrSortedValC, dComplexcsrSortedValA, dComplexcsrSortedValB, dComplexcsrSortedValC, dcomplextol, dComplexbsrSortedVal, dComplexbscVal, dComplexcscSortedVal, dcomplexds, dcomplexdl, dcomplexd, dcomplexdu, dcomplexdw, dcomplexx, dcomplex_boost_val;
+  // CHECK: rocblas_double_complex dcomplex, dcomplexA, dcomplexB, dcomplexX, dComplexbsrSortedValA, dComplexbsrSortedValC, dComplexcsrSortedValA, dComplexcsrSortedValB, dComplexcsrSortedValC, dcomplextol, dComplexbsrSortedVal, dComplexbscVal, dComplexcscSortedVal, dcomplexds, dcomplexdl, dcomplexd, dcomplexdu, dcomplexdw, dcomplexx, dcomplex_boost_val;
+  cuDoubleComplex dcomplex, dcomplexA, dcomplexB, dcomplexX, dComplexbsrSortedValA, dComplexbsrSortedValC, dComplexcsrSortedValA, dComplexcsrSortedValB, dComplexcsrSortedValC, dcomplextol, dComplexbsrSortedVal, dComplexbscVal, dComplexcscSortedVal, dcomplexds, dcomplexdl, dcomplexd, dcomplexdu, dcomplexdw, dcomplexx, dcomplex_boost_val;
 
   // TODO: should be rocsparse_double_complex
   // TODO: add to TypeOverloads cuComplex -> rocsparse_float_complex under a new option --sparse
-  // CHECK: rocblas_float_complex complex, complexA, complexB, complexbsrValA, complexbsrSortedValC, complexcsrSortedValA, complexcsrSortedValB, complexcsrSortedValC, complextol, complexbsrSortedVal, complexbscVal, complexcscSortedVal, complexds, complexdl, complexd, complexdu, complexdw, complexx, complex_boost_val;
-  cuComplex complex, complexA, complexB, complexbsrValA, complexbsrSortedValC, complexcsrSortedValA, complexcsrSortedValB, complexcsrSortedValC, complextol, complexbsrSortedVal, complexbscVal, complexcscSortedVal, complexds, complexdl, complexd, complexdu, complexdw, complexx, complex_boost_val;
+  // CHECK: rocblas_float_complex complex, complexA, complexB, complexX, complexbsrValA, complexbsrSortedValC, complexcsrSortedValA, complexcsrSortedValB, complexcsrSortedValC, complextol, complexbsrSortedVal, complexbscVal, complexcscSortedVal, complexds, complexdl, complexd, complexdu, complexdw, complexx, complex_boost_val;
+  cuComplex complex, complexA, complexB, complexX, complexbsrValA, complexbsrSortedValC, complexcsrSortedValA, complexcsrSortedValB, complexcsrSortedValC, complextol, complexbsrSortedVal, complexbscVal, complexcscSortedVal, complexds, complexdl, complexd, complexdu, complexdw, complexx, complex_boost_val;
 
-  // CHECK: rocsparse_operation opA, opB;
-  cusparseOperation_t opA, opB;
+  // CHECK: rocsparse_operation opA, opB, opX;
+  cusparseOperation_t opA, opB, opX;
 
   // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCreate(cusparseHandle_t* handle);
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_create_handle(rocsparse_handle* handle);
@@ -669,46 +676,6 @@ int main() {
   // CHECK: status_t = rocsparse_snnz(handle_t, direction_t, m, n, matDescr_A, &fA, lda, &nnzPerRowCol, &nnzTotalDevHostPtr);
   status_t = cusparseSnnz(handle_t, direction_t, m, n, matDescr_A, &fA, lda, &nnzPerRowCol, &nnzTotalDevHostPtr);
 
-  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseZgtsv2StridedBatch(cusparseHandle_t handle, int m, const cuDoubleComplex* dl, const cuDoubleComplex* d, const cuDoubleComplex* du, cuDoubleComplex* x, int batchCount, int batchStride, void* pBuffer);
-  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_zgtsv_no_pivot_strided_batch(rocsparse_handle handle, rocsparse_int m, const rocsparse_double_complex* dl, const rocsparse_double_complex* d, const rocsparse_double_complex* du, rocsparse_double_complex* x, rocsparse_int batch_count, rocsparse_int batch_stride, void* temp_buffer);
-  // CHECK: status_t = rocsparse_zgtsv_no_pivot_strided_batch(handle_t, m, &dcomplexdl, &dcomplexd, &dcomplexdu, &dcomplexx, batchCount, ibatchStride, pBuffer);
-  status_t = cusparseZgtsv2StridedBatch(handle_t, m, &dcomplexdl, &dcomplexd, &dcomplexdu, &dcomplexx, batchCount, ibatchStride, pBuffer);
-
-  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCgtsv2StridedBatch(cusparseHandle_t handle, int m, const cuComplex* dl, const cuComplex* d, const cuComplex* du, cuComplex* x, int batchCount, int batchStride, void* pBuffer);
-  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_cgtsv_no_pivot_strided_batch(rocsparse_handle handle, rocsparse_int m, const rocsparse_float_complex* dl, const rocsparse_float_complex* d, const rocsparse_float_complex* du, rocsparse_float_complex* x, rocsparse_int batch_count, rocsparse_int batch_stride, void* temp_buffer);
-  // CHECK: status_t = rocsparse_cgtsv_no_pivot_strided_batch(handle_t, m, &complexdl, &complexd, &complexdu, &complexx, batchCount, ibatchStride, pBuffer);
-  status_t = cusparseCgtsv2StridedBatch(handle_t, m, &complexdl, &complexd, &complexdu, &complexx, batchCount, ibatchStride, pBuffer);
-
-  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDgtsv2StridedBatch(cusparseHandle_t handle, int m, const double* dl, const double* d, const double* du, double* x, int batchCount, int batchStride, void* pBuffer);
-  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_dgtsv_no_pivot_strided_batch(rocsparse_handle handle, rocsparse_int m, const double* dl, const double* d, const double* du, double* x, rocsparse_int batch_count, rocsparse_int batch_stride, void* temp_buffer);
-  // CHECK: status_t = rocsparse_dgtsv_no_pivot_strided_batch(handle_t, m, &ddl, &dd, &ddu, &dx, batchCount, ibatchStride, pBuffer);
-  status_t = cusparseDgtsv2StridedBatch(handle_t, m, &ddl, &dd, &ddu, &dx, batchCount, ibatchStride, pBuffer);
-
-  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSgtsv2StridedBatch(cusparseHandle_t handle, int m, const float* dl, const float* d, const float* du, float* x, int batchCount, int batchStride, void* pBuffer);
-  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_sgtsv_no_pivot_strided_batch(rocsparse_handle handle, rocsparse_int m, const float* dl, const float* d, const float* du, float* x, rocsparse_int batch_count, rocsparse_int batch_stride, void* temp_buffer);
-  // CHECK: status_t = rocsparse_sgtsv_no_pivot_strided_batch(handle_t, m, &fdl, &fd, &fdu, &fx, batchCount, ibatchStride, pBuffer);
-  status_t = cusparseSgtsv2StridedBatch(handle_t, m, &fdl, &fd, &fdu, &fx, batchCount, ibatchStride, pBuffer);
-
-  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseZgtsv2StridedBatch_bufferSizeExt(cusparseHandle_t handle, int m, const cuDoubleComplex* dl, const cuDoubleComplex* d, const cuDoubleComplex* du, const cuDoubleComplex* x, int batchCount, int batchStride, size_t* bufferSizeInBytes);
-  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_zgtsv_no_pivot_strided_batch_buffer_size(rocsparse_handle handle, rocsparse_int m, const rocsparse_double_complex* dl, const rocsparse_double_complex* d, const rocsparse_double_complex* du, const rocsparse_double_complex* x, rocsparse_int batch_count, rocsparse_int batch_stride, size_t* buffer_size);
-  // CHECK: status_t = rocsparse_zgtsv_no_pivot_strided_batch_buffer_size(handle_t, m, &dcomplexdl, &dcomplexd, &dcomplexdu, &dcomplexx, batchCount, ibatchStride, &bufferSize);
-  status_t = cusparseZgtsv2StridedBatch_bufferSizeExt(handle_t, m, &dcomplexdl, &dcomplexd, &dcomplexdu, &dcomplexx, batchCount, ibatchStride, &bufferSize);
-
-  // CUDA: cusparseStatus_t CUSPARSEAPI  cusparseCgtsv2StridedBatch_bufferSizeExt(cusparseHandle_t handle, int m, const cuComplex* dl, const cuComplex* d, const cuComplex* du, const cuComplex* x, int batchCount, int batchStride, size_t* bufferSizeInBytes);
-  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_cgtsv_no_pivot_strided_batch_buffer_size(rocsparse_handle handle, rocsparse_int m, const rocsparse_float_complex* dl, const rocsparse_float_complex* d, const rocsparse_float_complex* du, const rocsparse_float_complex* x, rocsparse_int batch_count, rocsparse_int batch_stride, size_t* buffer_size);
-  // CHECK: status_t = rocsparse_cgtsv_no_pivot_strided_batch_buffer_size(handle_t, m, &complexdl, &complexd, &complexdu, &complexx, batchCount, ibatchStride, &bufferSize);
-  status_t = cusparseCgtsv2StridedBatch_bufferSizeExt(handle_t, m, &complexdl, &complexd, &complexdu, &complexx, batchCount, ibatchStride, &bufferSize);
-
-  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDgtsv2StridedBatch_bufferSizeExt(cusparseHandle_t handle, int m, const double* dl, const double* d, const double* du, const double* x, int batchCount, int batchStride, size_t* bufferSizeInBytes);
-  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_dgtsv_no_pivot_strided_batch_buffer_size(rocsparse_handle handle, rocsparse_int m, const double* dl, const double* d, const double* du, const double* x, rocsparse_int batch_count, rocsparse_int batch_stride, size_t* buffer_size);
-  // CHECK: status_t = rocsparse_dgtsv_no_pivot_strided_batch_buffer_size(handle_t, m, &ddl, &dd, &ddu, &dx, batchCount, ibatchStride, &bufferSize);
-  status_t = cusparseDgtsv2StridedBatch_bufferSizeExt(handle_t, m, &ddl, &dd, &ddu, &dx, batchCount, ibatchStride, &bufferSize);
-
-  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSgtsv2StridedBatch_bufferSizeExt(cusparseHandle_t handle, int m, const float* dl, const float* d, const float* du, const float* x, int batchCount, int batchStride, size_t* bufferSizeInBytes);
-  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_sgtsv_no_pivot_strided_batch_buffer_size(rocsparse_handle handle, rocsparse_int m, const float* dl, const float* d, const float* du, const float* x, rocsparse_int batch_count, rocsparse_int batch_stride, size_t* buffer_size);
-  // CHECK: status_t = rocsparse_sgtsv_no_pivot_strided_batch_buffer_size(handle_t, m, &fdl, &fd, &fdu, &fx, batchCount, ibatchStride, &bufferSize);
-  status_t = cusparseSgtsv2StridedBatch_bufferSizeExt(handle_t, m, &fdl, &fd, &fdu, &fx, batchCount, ibatchStride, &bufferSize);
-
   // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseZcsrilu02(cusparseHandle_t handle, int m, int nnz, const cusparseMatDescr_t descrA, cuDoubleComplex* csrSortedValA_valM, const int* csrSortedRowPtrA, const int* csrSortedColIndA, csrilu02Info_t info, cusparseSolvePolicy_t policy, void* pBuffer);
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_zcsrilu0(rocsparse_handle handle, rocsparse_int m, rocsparse_int nnz, const rocsparse_mat_descr descr, rocsparse_double_complex* csr_val, const rocsparse_int* csr_row_ptr, const rocsparse_int* csr_col_ind, rocsparse_mat_info info, rocsparse_solve_policy policy, void* temp_buffer);
   // CHECK: status_t = rocsparse_zcsrilu0(handle_t, m, innz, matDescr_A, &dComplexcsrSortedValA, &csrRowPtrA, &csrColIndA, csrilu02_info, rocsparse_solve_policy_auto, pBuffer);
@@ -1009,6 +976,72 @@ int main() {
   // CHECK: status_t = rocsparse_bsric0_zero_pivot(handle_t, bsric02_info, &iposition);
   status_t = cusparseXbsric02_zeroPivot(handle_t, bsric02_info, &iposition);
 
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseZbsrsm2_solve(cusparseHandle_t handle, cusparseDirection_t dirA, cusparseOperation_t transA, cusparseOperation_t transXY, int mb, int n, int nnzb, const cuDoubleComplex* alpha, const cusparseMatDescr_t descrA, const cuDoubleComplex* bsrSortedVal, const int* bsrSortedRowPtr, const int* bsrSortedColInd, int blockSize, bsrsm2Info_t info, const cuDoubleComplex* B, int ldb, cuDoubleComplex* X, int ldx, cusparseSolvePolicy_t policy, void* pBuffer);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_zbsrsm_solve(rocsparse_handle handle, rocsparse_direction dir, rocsparse_operation trans_A, rocsparse_operation trans_X, rocsparse_int mb, rocsparse_int nrhs, rocsparse_int nnzb, const rocsparse_double_complex* alpha, const rocsparse_mat_descr descr, const rocsparse_double_complex* bsr_val, const rocsparse_int* bsr_row_ptr, const rocsparse_int* bsr_col_ind, rocsparse_int block_dim, rocsparse_mat_info info, const rocsparse_double_complex* B, rocsparse_int ldb, rocsparse_double_complex* X, rocsparse_int ldx, rocsparse_solve_policy policy, void* temp_buffer);
+  // CHECK: status_t = rocsparse_zbsrsm_solve(handle_t, direction_t, opA, opX, mb, nrhs, nnzb, &dcomplexA, matDescr_A, &dComplexbsrSortedValA, &bsrRowPtrA, &bsrColIndA, blockDim, bsrsm2_info, &dcomplexB, ldb, &dcomplexX, ldx, solvePolicy_t, pBuffer);
+  status_t = cusparseZbsrsm2_solve(handle_t, direction_t, opA, opX, mb, nrhs, nnzb, &dcomplexA, matDescr_A, &dComplexbsrSortedValA, &bsrRowPtrA, &bsrColIndA, blockDim, bsrsm2_info, &dcomplexB, ldb, &dcomplexX, ldx, solvePolicy_t, pBuffer);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseCbsrsm2_solve(cusparseHandle_t handle, cusparseDirection_t dirA, cusparseOperation_t transA, cusparseOperation_t transXY, int mb, int n, int nnzb, const cuComplex* alpha, const cusparseMatDescr_t descrA, const cuComplex* bsrSortedVal, const int* bsrSortedRowPtr, const int* bsrSortedColInd, int blockSize, bsrsm2Info_t info, const cuComplex* B, int ldb, cuComplex* X, int ldx, cusparseSolvePolicy_t policy, void* pBuffer);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_cbsrsm_solve(rocsparse_handle handle, rocsparse_direction dir, rocsparse_operation trans_A, rocsparse_operation trans_X, rocsparse_int mb, rocsparse_int nrhs, rocsparse_int nnzb, const rocsparse_float_complex* alpha, const rocsparse_mat_descr descr, const rocsparse_float_complex* bsr_val, const rocsparse_int* bsr_row_ptr, const rocsparse_int* bsr_col_ind, rocsparse_int block_dim, rocsparse_mat_info info, const rocsparse_float_complex* B, rocsparse_int ldb, rocsparse_float_complex* X, rocsparse_int ldx, rocsparse_solve_policy policy, void* temp_buffer);
+  // CHECK: status_t = rocsparse_cbsrsm_solve(handle_t, direction_t, opA, opX, mb, nrhs, nnzb, &complexA, matDescr_A, &complexbsrValA, &bsrRowPtrA, &bsrColIndA, blockDim, bsrsm2_info, &complexB, ldb, &complexX, ldx, solvePolicy_t, pBuffer);
+  status_t = cusparseCbsrsm2_solve(handle_t, direction_t, opA, opX, mb, nrhs, nnzb, &complexA, matDescr_A, &complexbsrValA, &bsrRowPtrA, &bsrColIndA, blockDim, bsrsm2_info, &complexB, ldb, &complexX, ldx, solvePolicy_t, pBuffer);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseDbsrsm2_solve(cusparseHandle_t handle, cusparseDirection_t dirA, cusparseOperation_t transA, cusparseOperation_t transXY, int mb, int n, int nnzb, const double* alpha, const cusparseMatDescr_t descrA, const double* bsrSortedVal, const int* bsrSortedRowPtr, const int* bsrSortedColInd, int blockSize, bsrsm2Info_t info, const double* B, int ldb, double* X, int ldx, cusparseSolvePolicy_t policy, void* pBuffer);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_dbsrsm_solve(rocsparse_handle handle, rocsparse_direction dir, rocsparse_operation trans_A, rocsparse_operation trans_X, rocsparse_int mb, rocsparse_int nrhs, rocsparse_int nnzb, const double* alpha, const rocsparse_mat_descr descr, const double* bsr_val, const rocsparse_int* bsr_row_ptr, const rocsparse_int* bsr_col_ind, rocsparse_int block_dim, rocsparse_mat_info info, const double* B, rocsparse_int ldb, double* X, rocsparse_int ldx, rocsparse_solve_policy policy, void* temp_buffer);
+  // CHECK: status_t = rocsparse_dbsrsm_solve(handle_t, direction_t, opA, opX, mb, nrhs, nnzb, &dA, matDescr_A, &dbsrSortedVal, &bsrRowPtrA, &bsrColIndA, blockDim, bsrsm2_info, &dB, ldb, &dx, ldx, solvePolicy_t, pBuffer);
+  status_t = cusparseDbsrsm2_solve(handle_t, direction_t, opA, opX, mb, nrhs, nnzb, &dA, matDescr_A, &dbsrSortedVal, &bsrRowPtrA, &bsrColIndA, blockDim, bsrsm2_info, &dB, ldb, &dx, ldx, solvePolicy_t, pBuffer);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseSbsrsm2_solve(cusparseHandle_t handle, cusparseDirection_t dirA, cusparseOperation_t transA, cusparseOperation_t transXY, int mb, int n, int nnzb, const float* alpha, const cusparseMatDescr_t descrA, const float* bsrSortedVal, const int* bsrSortedRowPtr, const int* bsrSortedColInd, int blockSize, bsrsm2Info_t info, const float* B, int ldb, float* X, int ldx, cusparseSolvePolicy_t policy, void* pBuffer);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_sbsrsm_solve(rocsparse_handle handle, rocsparse_direction dir, rocsparse_operation trans_A, rocsparse_operation trans_X, rocsparse_int mb,rocsparse_int nrhs, rocsparse_int nnzb, const float* alpha, const rocsparse_mat_descr descr, const float* bsr_val, const rocsparse_int* bsr_row_ptr, const rocsparse_int* bsr_col_ind, rocsparse_int block_dim, rocsparse_mat_info info, const float* B, rocsparse_int ldb, float* X, rocsparse_int ldx, rocsparse_solve_policy policy, void* temp_buffer);
+  // CHECK: status_t = rocsparse_sbsrsm_solve(handle_t, direction_t, opA, opX, mb, nrhs, nnzb, &fA, matDescr_A, &fbsrSortedVal, &bsrRowPtrA, &bsrColIndA, blockDim, bsrsm2_info, &fB, ldb, &fx, ldx, solvePolicy_t, pBuffer);
+  status_t = cusparseSbsrsm2_solve(handle_t, direction_t, opA, opX, mb, nrhs, nnzb, &fA, matDescr_A, &fbsrSortedVal, &bsrRowPtrA, &bsrColIndA, blockDim, bsrsm2_info, &fB, ldb, &fx, ldx, solvePolicy_t, pBuffer);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseZbsrsm2_analysis(cusparseHandle_t handle, cusparseDirection_t dirA, cusparseOperation_t transA, cusparseOperation_t transXY, int mb, int n, int nnzb, const cusparseMatDescr_t descrA, const cuDoubleComplex* bsrSortedVal, const int* bsrSortedRowPtr, const int* bsrSortedColInd, int blockSize, bsrsm2Info_t info, cusparseSolvePolicy_t policy, void* pBuffer);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_zbsrsm_analysis(rocsparse_handle handle, rocsparse_direction dir, rocsparse_operation trans_A, rocsparse_operation trans_X, rocsparse_int mb, rocsparse_int nrhs, rocsparse_int nnzb, const rocsparse_mat_descr descr, const rocsparse_double_complex* bsr_val, const rocsparse_int* bsr_row_ptr, const rocsparse_int* bsr_col_ind, rocsparse_int block_dim, rocsparse_mat_info info, rocsparse_analysis_policy analysis, rocsparse_solve_policy solve, void* temp_buffer);
+  // CHECK: status_t = rocsparse_zbsrsm_analysis(handle_t, direction_t, opA, opX, mb, n, nnzb, matDescr_A, &dComplexbsrSortedValA, &bsrRowPtrA, &bsrColIndA, blockDim, bsrsm2_info, solvePolicy_t, pBuffer);
+  status_t = cusparseZbsrsm2_analysis(handle_t, direction_t, opA, opX, mb, n, nnzb, matDescr_A, &dComplexbsrSortedValA, &bsrRowPtrA, &bsrColIndA, blockDim, bsrsm2_info, solvePolicy_t, pBuffer);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseCbsrsm2_analysis(cusparseHandle_t handle, cusparseDirection_t dirA, cusparseOperation_t transA, cusparseOperation_t transXY, int mb, int n, int nnzb, const cusparseMatDescr_t descrA, const cuComplex* bsrSortedVal, const int* bsrSortedRowPtr, const int* bsrSortedColInd, int blockSize, bsrsm2Info_t info, cusparseSolvePolicy_t policy, void* pBuffer);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_cbsrsm_analysis(rocsparse_handle handle, rocsparse_direction dir, rocsparse_operation trans_A, rocsparse_operation trans_X, rocsparse_int mb, rocsparse_int nrhs, rocsparse_int nnzb, const rocsparse_mat_descr descr, const rocsparse_float_complex* bsr_val, const rocsparse_int* bsr_row_ptr, const rocsparse_int* bsr_col_ind, rocsparse_int block_dim, rocsparse_mat_info info, rocsparse_analysis_policy analysis, rocsparse_solve_policy solve, void* temp_buffer);
+  // CHECK: status_t = rocsparse_cbsrsm_analysis(handle_t, direction_t, opA, opX, mb, n, nnzb, matDescr_A, &complexbsrValA, &bsrRowPtrA, &bsrColIndA, blockDim, bsrsm2_info, solvePolicy_t, pBuffer);
+  status_t = cusparseCbsrsm2_analysis(handle_t, direction_t, opA, opX, mb, n, nnzb, matDescr_A, &complexbsrValA, &bsrRowPtrA, &bsrColIndA, blockDim, bsrsm2_info, solvePolicy_t, pBuffer);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseDbsrsm2_analysis(cusparseHandle_t handle, cusparseDirection_t dirA, cusparseOperation_t transA, cusparseOperation_t transXY, int mb, int n, int nnzb, const cusparseMatDescr_t descrA, const double* bsrSortedVal, const int* bsrSortedRowPtr, const int* bsrSortedColInd, int blockSize, bsrsm2Info_t info, cusparseSolvePolicy_t policy, void* pBuffer);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_dbsrsm_analysis(rocsparse_handle handle, rocsparse_direction dir, rocsparse_operation trans_A, rocsparse_operation trans_X, rocsparse_int mb, rocsparse_int nrhs, rocsparse_int nnzb, const rocsparse_mat_descr descr, const double* bsr_val, const rocsparse_int* bsr_row_ptr, const rocsparse_int* bsr_col_ind, rocsparse_int block_dim, rocsparse_mat_info info, rocsparse_analysis_policy analysis, rocsparse_solve_policy solve, void* temp_buffer);
+  // CHECK: status_t = rocsparse_dbsrsm_analysis(handle_t, direction_t, opA, opX, mb, n, nnzb, matDescr_A, &dbsrSortedVal, &bsrRowPtrA, &bsrColIndA, blockDim, bsrsm2_info, solvePolicy_t, pBuffer);
+  status_t = cusparseDbsrsm2_analysis(handle_t, direction_t, opA, opX, mb, n, nnzb, matDescr_A, &dbsrSortedVal, &bsrRowPtrA, &bsrColIndA, blockDim, bsrsm2_info, solvePolicy_t, pBuffer);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseSbsrsm2_analysis(cusparseHandle_t handle, cusparseDirection_t dirA, cusparseOperation_t transA, cusparseOperation_t transXY, int mb, int n, int nnzb, const cusparseMatDescr_t descrA, const float* bsrSortedVal, const int* bsrSortedRowPtr, const int* bsrSortedColInd, int blockSize, bsrsm2Info_t info, cusparseSolvePolicy_t policy, void* pBuffer);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_sbsrsm_analysis(rocsparse_handle handle, rocsparse_direction dir, rocsparse_operation trans_A, rocsparse_operation trans_X, rocsparse_int mb, rocsparse_int nrhs, rocsparse_int nnzb, const rocsparse_mat_descr descr, const float* bsr_val, const rocsparse_int* bsr_row_ptr, const rocsparse_int* bsr_col_ind, rocsparse_int block_dim, rocsparse_mat_info info, rocsparse_analysis_policy analysis, rocsparse_solve_policy solve, void* temp_buffer);
+  // CHECK: status_t = rocsparse_sbsrsm_analysis(handle_t, direction_t, opA, opX, mb, n, nnzb, matDescr_A, &fbsrSortedVal, &bsrRowPtrA, &bsrColIndA, blockDim, bsrsm2_info, solvePolicy_t, pBuffer);
+  status_t = cusparseSbsrsm2_analysis(handle_t, direction_t, opA, opX, mb, n, nnzb, matDescr_A, &fbsrSortedVal, &bsrRowPtrA, &bsrColIndA, blockDim, bsrsm2_info, solvePolicy_t, pBuffer);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseZbsrsm2_bufferSize(cusparseHandle_t handle, cusparseDirection_t dirA, cusparseOperation_t transA, cusparseOperation_t transXY, int mb, int n, int nnzb, const cusparseMatDescr_t descrA, cuDoubleComplex* bsrSortedVal, const int* bsrSortedRowPtr, const int* bsrSortedColInd, int blockSize, bsrsm2Info_t info, int* pBufferSizeInBytes);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_zbsrsm_buffer_size(rocsparse_handle handle, rocsparse_direction dir, rocsparse_operation trans_A, rocsparse_operation trans_X, rocsparse_int mb, rocsparse_int nrhs, rocsparse_int nnzb, const rocsparse_mat_descr descr, const rocsparse_double_complex* bsr_val, const rocsparse_int* bsr_row_ptr, const rocsparse_int* bsr_col_ind, rocsparse_int block_dim, rocsparse_mat_info info, size_t* buffer_size);
+  // CHECK: status_t = rocsparse_zbsrsm_buffer_size(handle_t, direction_t, opA, opX, mb, n, nnzb, matDescr_A, &dComplexbsrSortedValA, &bsrRowPtrA, &bsrColIndA, blockDim, bsrsm2_info, reinterpret_cast<size_t*>(&bufferSizeInBytes));
+  status_t = cusparseZbsrsm2_bufferSize(handle_t, direction_t, opA, opX, mb, n, nnzb, matDescr_A, &dComplexbsrSortedValA, &bsrRowPtrA, &bsrColIndA, blockDim, bsrsm2_info, &bufferSizeInBytes);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseCbsrsm2_bufferSize(cusparseHandle_t handle, cusparseDirection_t dirA, cusparseOperation_t transA, cusparseOperation_t transXY, int mb, int n, int nnzb, const cusparseMatDescr_t descrA, cuComplex* bsrSortedVal, const int* bsrSortedRowPtr, const int* bsrSortedColInd, int blockSize, bsrsm2Info_t info, int* pBufferSizeInBytes);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_cbsrsm_buffer_size(rocsparse_handle handle, rocsparse_direction dir, rocsparse_operation trans_A, rocsparse_operation trans_X, rocsparse_int mb, rocsparse_int nrhs, rocsparse_int nnzb, const rocsparse_mat_descr descr, const rocsparse_float_complex* bsr_val, const rocsparse_int* bsr_row_ptr, const rocsparse_int* bsr_col_ind, rocsparse_int block_dim, rocsparse_mat_info info, size_t* buffer_size);
+  // CHECK: status_t = rocsparse_cbsrsm_buffer_size(handle_t, direction_t, opA, opX, mb, n, nnzb, matDescr_A, &complexbsrValA, &bsrRowPtrA, &bsrColIndA, blockDim, bsrsm2_info, reinterpret_cast<size_t*>(&bufferSizeInBytes));
+  status_t = cusparseCbsrsm2_bufferSize(handle_t, direction_t, opA, opX, mb, n, nnzb, matDescr_A, &complexbsrValA, &bsrRowPtrA, &bsrColIndA, blockDim, bsrsm2_info, &bufferSizeInBytes);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseDbsrsm2_bufferSize(cusparseHandle_t handle, cusparseDirection_t dirA, cusparseOperation_t transA, cusparseOperation_t transXY, int mb, int n, int nnzb, const cusparseMatDescr_t descrA, double* bsrSortedVal, const int* bsrSortedRowPtr, const int* bsrSortedColInd, int blockSize, bsrsm2Info_t info, int* pBufferSizeInBytes);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_dbsrsm_buffer_size(rocsparse_handle handle, rocsparse_direction dir, rocsparse_operation trans_A, rocsparse_operation trans_X, rocsparse_int mb, rocsparse_int nrhs, rocsparse_int nnzb, const rocsparse_mat_descr descr, const double* bsr_val, const rocsparse_int* bsr_row_ptr, const rocsparse_int* bsr_col_ind, rocsparse_int block_dim, rocsparse_mat_info info, size_t* buffer_size);
+  // CHECK: status_t = rocsparse_dbsrsm_buffer_size(handle_t, direction_t, opA, opX, mb, n, nnzb, matDescr_A, &dbsrSortedValA, &bsrRowPtrA, &bsrColIndA, blockDim, bsrsm2_info, reinterpret_cast<size_t*>(&bufferSizeInBytes));
+  status_t = cusparseDbsrsm2_bufferSize(handle_t, direction_t, opA, opX, mb, n, nnzb, matDescr_A, &dbsrSortedValA, &bsrRowPtrA, &bsrColIndA, blockDim, bsrsm2_info, &bufferSizeInBytes);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseSbsrsm2_bufferSize(cusparseHandle_t handle, cusparseDirection_t dirA, cusparseOperation_t transA, cusparseOperation_t transXY, int mb, int n, int nnzb, const cusparseMatDescr_t descrA, float* bsrSortedVal, const int* bsrSortedRowPtr, const int* bsrSortedColInd, int blockSize, bsrsm2Info_t info, int* pBufferSizeInBytes);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_sbsrsm_buffer_size(rocsparse_handle handle, rocsparse_direction dir, rocsparse_operation trans_A, rocsparse_operation trans_X, rocsparse_int mb, rocsparse_int nrhs, rocsparse_int nnzb, const rocsparse_mat_descr descr, const float* bsr_val, const rocsparse_int* bsr_row_ptr, const rocsparse_int* bsr_col_ind, rocsparse_int block_dim, rocsparse_mat_info info, size_t* buffer_size);
+  // CHECK: status_t = rocsparse_sbsrsm_buffer_size(handle_t, direction_t, opA, opX, mb, n, nnzb, matDescr_A, &fbsrSortedVal, &bsrRowPtrA, &bsrColIndA, blockDim, bsrsm2_info, reinterpret_cast<size_t*>(&bufferSizeInBytes));
+  status_t = cusparseSbsrsm2_bufferSize(handle_t, direction_t, opA, opX, mb, n, nnzb, matDescr_A, &fbsrSortedVal, &bsrRowPtrA, &bsrColIndA, blockDim, bsrsm2_info, &bufferSizeInBytes);
+
+  // TODO: rocsparse_bsrsm_zero_pivot needs explicit synchronization because cusparseXbsrsm2_zeroPivot is blocking
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseXbsrsm2_zeroPivot(cusparseHandle_t handle, bsrsm2Info_t info, int* position);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_bsrsm_zero_pivot(rocsparse_handle handle, rocsparse_mat_info info, rocsparse_int* position);
+  // CHECK: status_t = rocsparse_bsrsm_zero_pivot(handle_t, bsrsm2_info, &iposition);
+  status_t = cusparseXbsrsm2_zeroPivot(handle_t, bsrsm2_info, &iposition);
+
 #if CUDA_VERSION >= 8000
   // CHECK: hipDataType dataType_t;
   // TODO: [#899] There should be rocsparse_datatype
@@ -1065,6 +1098,9 @@ int main() {
 #endif
 
 #if CUDA_VERSION >= 9000
+  // CHECK: rocsparse_mat_info prune_info;
+  pruneInfo_t prune_info;
+
   // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDpruneCsr2csrByPercentage(cusparseHandle_t handle, int m, int n, int nnzA, const cusparseMatDescr_t descrA, const double* csrSortedValA, const int* csrSortedRowPtrA, const int* csrSortedColIndA, float percentage, const cusparseMatDescr_t descrC, double* csrSortedValC, const int* csrSortedRowPtrC, int* csrSortedColIndC, pruneInfo_t info, void* pBuffer);
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_dprune_csr2csr_by_percentage(rocsparse_handle handle, rocsparse_int m, rocsparse_int n, rocsparse_int nnz_A, const rocsparse_mat_descr csr_descr_A, const double* csr_val_A, const rocsparse_int* csr_row_ptr_A, const rocsparse_int* csr_col_ind_A, double percentage, const rocsparse_mat_descr csr_descr_C, double* csr_val_C, const rocsparse_int* csr_row_ptr_C, rocsparse_int* csr_col_ind_C, rocsparse_mat_info info, void* temp_buffer);
   // CHECK: status_t = rocsparse_dprune_csr2csr_by_percentage(handle_t, m, n, nnz, matDescr_A, &csrValA, &csrRowPtrA, &csrColIndA, percentage, matDescr_C, &csrValC, &csrRowPtrC, &csrColIndC, prune_info, pBuffer);
@@ -1264,104 +1300,46 @@ int main() {
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_sgtsv_buffer_size(rocsparse_handle handle, rocsparse_int m, rocsparse_int n, const float* dl, const float* d, const float* du, const float* B, rocsparse_int ldb, size_t* buffer_size);
   // CHECK: status_t = rocsparse_sgtsv_buffer_size(handle_t, m, n, &fdl, &fd, &fdu, &fB, ldb, &bufferSize);
   status_t = cusparseSgtsv2_bufferSizeExt(handle_t, m, n, &fdl, &fd, &fdu, &fB, ldb, &bufferSize);
-#endif
 
-#if CUDA_VERSION >= 9020
-  // NOTE: An additional argument rocsparse_int batch_stride is added for the rocsparse_zgpsv_interleaved_batch function call: the argument is copied from the previous one: rocsparse_int batch_count. It is how hipsparseZgpsvInterleavedBatch calls rocsparse_zgpsv_interleaved_batch in its implementation.
-  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseZgpsvInterleavedBatch(cusparseHandle_t handle, int algo, int m, cuDoubleComplex* ds, cuDoubleComplex* dl, cuDoubleComplex* d, cuDoubleComplex* du, cuDoubleComplex* dw, cuDoubleComplex* x, int batchCount, void* pBuffer);
-  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_zgpsv_interleaved_batch(rocsparse_handle handle, rocsparse_gpsv_interleaved_alg alg, rocsparse_int m, rocsparse_double_complex* ds, rocsparse_double_complex* dl, rocsparse_double_complex* d, rocsparse_double_complex* du, rocsparse_double_complex* dw, rocsparse_double_complex* x, rocsparse_int batch_count, rocsparse_int batch_stride, void* temp_buffer);
-  // CHECK: status_t = rocsparse_zgpsv_interleaved_batch(handle_t, algo, m, &dcomplexds, &dcomplexdl, &dcomplexd, &dcomplexdu, &dcomplexdw, &dcomplexx, batchCount, batchCount, pBuffer);
-  status_t = cusparseZgpsvInterleavedBatch(handle_t, algo, m, &dcomplexds, &dcomplexdl, &dcomplexd, &dcomplexdu, &dcomplexdw, &dcomplexx, batchCount, pBuffer);
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseZgtsv2StridedBatch(cusparseHandle_t handle, int m, const cuDoubleComplex* dl, const cuDoubleComplex* d, const cuDoubleComplex* du, cuDoubleComplex* x, int batchCount, int batchStride, void* pBuffer);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_zgtsv_no_pivot_strided_batch(rocsparse_handle handle, rocsparse_int m, const rocsparse_double_complex* dl, const rocsparse_double_complex* d, const rocsparse_double_complex* du, rocsparse_double_complex* x, rocsparse_int batch_count, rocsparse_int batch_stride, void* temp_buffer);
+  // CHECK: status_t = rocsparse_zgtsv_no_pivot_strided_batch(handle_t, m, &dcomplexdl, &dcomplexd, &dcomplexdu, &dcomplexx, batchCount, ibatchStride, pBuffer);
+  status_t = cusparseZgtsv2StridedBatch(handle_t, m, &dcomplexdl, &dcomplexd, &dcomplexdu, &dcomplexx, batchCount, ibatchStride, pBuffer);
 
-  // NOTE: An additional argument rocsparse_int batch_stride is added for the rocsparse_cgpsv_interleaved_batch function call: the argument is copied from the previous one: rocsparse_int batch_count. It is how hipsparseCgpsvInterleavedBatch calls rocsparse_cgpsv_interleaved_batch in its implementation.
-  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCgpsvInterleavedBatch(cusparseHandle_t handle, int algo, int m, cuComplex* ds, cuComplex* dl, cuComplex* d, cuComplex* du, cuComplex* dw, cuComplex* x, int batchCount, void* pBuffer);
-  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_cgpsv_interleaved_batch(rocsparse_handle handle, rocsparse_gpsv_interleaved_alg alg, rocsparse_int m, rocsparse_float_complex* ds, rocsparse_float_complex* dl, rocsparse_float_complex* d, rocsparse_float_complex* du, rocsparse_float_complex* dw, rocsparse_float_complex* x, rocsparse_int batch_count, rocsparse_int batch_stride, void* temp_buffer);
-  // CHECK: status_t = rocsparse_cgpsv_interleaved_batch(handle_t, algo, m, &complexds, &complexdl, &complexd, &complexdu, &complexdw, &complexx, batchCount, batchCount, pBuffer);
-  status_t = cusparseCgpsvInterleavedBatch(handle_t, algo, m, &complexds, &complexdl, &complexd, &complexdu, &complexdw, &complexx, batchCount, pBuffer);
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCgtsv2StridedBatch(cusparseHandle_t handle, int m, const cuComplex* dl, const cuComplex* d, const cuComplex* du, cuComplex* x, int batchCount, int batchStride, void* pBuffer);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_cgtsv_no_pivot_strided_batch(rocsparse_handle handle, rocsparse_int m, const rocsparse_float_complex* dl, const rocsparse_float_complex* d, const rocsparse_float_complex* du, rocsparse_float_complex* x, rocsparse_int batch_count, rocsparse_int batch_stride, void* temp_buffer);
+  // CHECK: status_t = rocsparse_cgtsv_no_pivot_strided_batch(handle_t, m, &complexdl, &complexd, &complexdu, &complexx, batchCount, ibatchStride, pBuffer);
+  status_t = cusparseCgtsv2StridedBatch(handle_t, m, &complexdl, &complexd, &complexdu, &complexx, batchCount, ibatchStride, pBuffer);
 
-  // NOTE: An additional argument rocsparse_int batch_stride is added for the rocsparse_dgpsv_interleaved_batch function call: the argument is copied from the previous one: rocsparse_int batch_count. It is how hipsparseDgpsvInterleavedBatch calls rocsparse_dgpsv_interleaved_batch in its implementation.
-  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDgpsvInterleavedBatch(cusparseHandle_t handle, int algo, int m, double* ds, double* dl, double* d, double* du, double* dw, double* x, int batchCount, void* pBuffer);
-  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_dgpsv_interleaved_batch(rocsparse_handle handle, rocsparse_gpsv_interleaved_alg alg, rocsparse_int m, double* ds, double* dl, double* d, double* du, double* dw, double* x, rocsparse_int batch_count, rocsparse_int batch_stride, void* temp_buffer);
-  // CHECK: status_t = rocsparse_dgpsv_interleaved_batch(handle_t, algo, m, &dds, &ddl, &dd, &ddu, &ddw, &dx, batchCount, batchCount, pBuffer);
-  status_t = cusparseDgpsvInterleavedBatch(handle_t, algo, m, &dds, &ddl, &dd, &ddu, &ddw, &dx, batchCount, pBuffer);
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDgtsv2StridedBatch(cusparseHandle_t handle, int m, const double* dl, const double* d, const double* du, double* x, int batchCount, int batchStride, void* pBuffer);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_dgtsv_no_pivot_strided_batch(rocsparse_handle handle, rocsparse_int m, const double* dl, const double* d, const double* du, double* x, rocsparse_int batch_count, rocsparse_int batch_stride, void* temp_buffer);
+  // CHECK: status_t = rocsparse_dgtsv_no_pivot_strided_batch(handle_t, m, &ddl, &dd, &ddu, &dx, batchCount, ibatchStride, pBuffer);
+  status_t = cusparseDgtsv2StridedBatch(handle_t, m, &ddl, &dd, &ddu, &dx, batchCount, ibatchStride, pBuffer);
 
-  // NOTE: An additional argument rocsparse_int batch_stride is added for the rocsparse_sgpsv_interleaved_batch function call: the argument is copied from the previous one: rocsparse_int batch_count. It is how hipsparseSgpsvInterleavedBatch calls rocsparse_sgpsv_interleaved_batch in its implementation.
-  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSgpsvInterleavedBatch(cusparseHandle_t handle, int algo, int m, float* ds, float* dl, float* d, float* du, float* dw, float* x, int batchCount, void* pBuffer);
-  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_sgpsv_interleaved_batch(rocsparse_handle handle, rocsparse_gpsv_interleaved_alg alg, rocsparse_int m, float* ds, float* dl, float* d, float* du, float* dw, float* x, rocsparse_int batch_count, rocsparse_int batch_stride, void* temp_buffer);
-  // CHECK: status_t = rocsparse_sgpsv_interleaved_batch(handle_t, algo, m, &fds, &fdl, &fd, &fdu, &fdw, &fx, batchCount, batchCount, pBuffer);
-  status_t = cusparseSgpsvInterleavedBatch(handle_t, algo, m, &fds, &fdl, &fd, &fdu, &fdw, &fx, batchCount, pBuffer);
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSgtsv2StridedBatch(cusparseHandle_t handle, int m, const float* dl, const float* d, const float* du, float* x, int batchCount, int batchStride, void* pBuffer);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_sgtsv_no_pivot_strided_batch(rocsparse_handle handle, rocsparse_int m, const float* dl, const float* d, const float* du, float* x, rocsparse_int batch_count, rocsparse_int batch_stride, void* temp_buffer);
+  // CHECK: status_t = rocsparse_sgtsv_no_pivot_strided_batch(handle_t, m, &fdl, &fd, &fdu, &fx, batchCount, ibatchStride, pBuffer);
+  status_t = cusparseSgtsv2StridedBatch(handle_t, m, &fdl, &fd, &fdu, &fx, batchCount, ibatchStride, pBuffer);
 
-  // NOTE: An additional argument rocsparse_int batch_stride is added for the rocsparse_zgpsv_interleaved_batch_buffer_size function call: the argument is copied from the previous one: rocsparse_int batch_count. It is how hipsparseSgpsvInterleavedBatch calls rocsparse_zgpsv_interleaved_batch_buffer_size in its implementation.
-  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseZgpsvInterleavedBatch_bufferSizeExt(cusparseHandle_t handle, int algo, int m, const cuDoubleComplex* ds, const cuDoubleComplex* dl, const cuDoubleComplex* d, const cuDoubleComplex* du, const cuDoubleComplex* dw, const cuDoubleComplex* x, int batchCount, size_t* pBufferSizeInBytes);
-  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_zgpsv_interleaved_batch_buffer_size(rocsparse_handle handle, rocsparse_gpsv_interleaved_alg alg, rocsparse_int m, const rocsparse_double_complex* ds, const rocsparse_double_complex* dl, const rocsparse_double_complex* d, const rocsparse_double_complex* du, const rocsparse_double_complex* dw, const rocsparse_double_complex* x, rocsparse_int batch_count, rocsparse_int batch_stride, size_t* buffer_size);
-  // CHECK: status_t = rocsparse_zgpsv_interleaved_batch_buffer_size(handle_t, algo, m, &dcomplexds, &dcomplexdl, &dcomplexd, &dcomplexdu, &dcomplexdw, &dcomplexx, batchCount, batchCount, &bufferSize);
-  status_t = cusparseZgpsvInterleavedBatch_bufferSizeExt(handle_t, algo, m, &dcomplexds, &dcomplexdl, &dcomplexd, &dcomplexdu, &dcomplexdw, &dcomplexx, batchCount, &bufferSize);
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseZgtsv2StridedBatch_bufferSizeExt(cusparseHandle_t handle, int m, const cuDoubleComplex* dl, const cuDoubleComplex* d, const cuDoubleComplex* du, const cuDoubleComplex* x, int batchCount, int batchStride, size_t* bufferSizeInBytes);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_zgtsv_no_pivot_strided_batch_buffer_size(rocsparse_handle handle, rocsparse_int m, const rocsparse_double_complex* dl, const rocsparse_double_complex* d, const rocsparse_double_complex* du, const rocsparse_double_complex* x, rocsparse_int batch_count, rocsparse_int batch_stride, size_t* buffer_size);
+  // CHECK: status_t = rocsparse_zgtsv_no_pivot_strided_batch_buffer_size(handle_t, m, &dcomplexdl, &dcomplexd, &dcomplexdu, &dcomplexx, batchCount, ibatchStride, &bufferSize);
+  status_t = cusparseZgtsv2StridedBatch_bufferSizeExt(handle_t, m, &dcomplexdl, &dcomplexd, &dcomplexdu, &dcomplexx, batchCount, ibatchStride, &bufferSize);
 
-  // NOTE: An additional argument rocsparse_int batch_stride is added for the rocsparse_cgpsv_interleaved_batch_buffer_size function call: the argument is copied from the previous one: rocsparse_int batch_count. It is how hipsparseCgpsvInterleavedBatch_bufferSizeExt calls rocsparse_cgpsv_interleaved_batch_buffer_size in its implementation.
-  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCgpsvInterleavedBatch_bufferSizeExt(cusparseHandle_t handle, int algo, int m, const cuComplex* ds, const cuComplex* dl, const cuComplex* d, const cuComplex* du, const cuComplex* dw, const cuComplex* x, int batchCount, size_t* pBufferSizeInBytes);
-  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_cgpsv_interleaved_batch_buffer_size(rocsparse_handle handle, rocsparse_gpsv_interleaved_alg alg, rocsparse_int m, const rocsparse_float_complex* ds, const rocsparse_float_complex* dl, const rocsparse_float_complex* d, const rocsparse_float_complex* du, const rocsparse_float_complex* dw, const rocsparse_float_complex* x, rocsparse_int batch_count, rocsparse_int batch_stride, size_t* buffer_size);
-  // CHECK: status_t = rocsparse_cgpsv_interleaved_batch_buffer_size(handle_t, algo, m, &complexds, &complexdl, &complexd, &complexdu, &complexdw, &complexx, batchCount, batchCount, &bufferSize);
-  status_t = cusparseCgpsvInterleavedBatch_bufferSizeExt(handle_t, algo, m, &complexds, &complexdl, &complexd, &complexdu, &complexdw, &complexx, batchCount, &bufferSize);
+  // CUDA: cusparseStatus_t CUSPARSEAPI  cusparseCgtsv2StridedBatch_bufferSizeExt(cusparseHandle_t handle, int m, const cuComplex* dl, const cuComplex* d, const cuComplex* du, const cuComplex* x, int batchCount, int batchStride, size_t* bufferSizeInBytes);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_cgtsv_no_pivot_strided_batch_buffer_size(rocsparse_handle handle, rocsparse_int m, const rocsparse_float_complex* dl, const rocsparse_float_complex* d, const rocsparse_float_complex* du, const rocsparse_float_complex* x, rocsparse_int batch_count, rocsparse_int batch_stride, size_t* buffer_size);
+  // CHECK: status_t = rocsparse_cgtsv_no_pivot_strided_batch_buffer_size(handle_t, m, &complexdl, &complexd, &complexdu, &complexx, batchCount, ibatchStride, &bufferSize);
+  status_t = cusparseCgtsv2StridedBatch_bufferSizeExt(handle_t, m, &complexdl, &complexd, &complexdu, &complexx, batchCount, ibatchStride, &bufferSize);
 
-  // NOTE: An additional argument rocsparse_int batch_stride is added for the rocsparse_dgpsv_interleaved_batch_buffer_size function call: the argument is copied from the previous one: rocsparse_int batch_count. It is how hipsparseDgpsvInterleavedBatch_bufferSizeExt calls rocsparse_dgpsv_interleaved_batch_buffer_size in its implementation.
-  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDgpsvInterleavedBatch_bufferSizeExt(cusparseHandle_t handle, int algo, int m, const double* ds, const double* dl, const double* d, const double* du, const double* dw, const double* x, int batchCount, size_t* pBufferSizeInBytes);
-  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_dgpsv_interleaved_batch_buffer_size(rocsparse_handle handle, rocsparse_gpsv_interleaved_alg alg, rocsparse_int m, const double* ds, const double* dl, const double* d, const double* du, const double* dw, const double* x, rocsparse_int batch_count, rocsparse_int batch_stride, size_t* buffer_size);
-  // CHECK: status_t = rocsparse_dgpsv_interleaved_batch_buffer_size(handle_t, algo, m, &dds, &ddl, &dd, &ddu, &ddw, &dx, batchCount, batchCount, &bufferSize);
-  status_t = cusparseDgpsvInterleavedBatch_bufferSizeExt(handle_t, algo, m, &dds, &ddl, &dd, &ddu, &ddw, &dx, batchCount, &bufferSize);
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDgtsv2StridedBatch_bufferSizeExt(cusparseHandle_t handle, int m, const double* dl, const double* d, const double* du, const double* x, int batchCount, int batchStride, size_t* bufferSizeInBytes);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_dgtsv_no_pivot_strided_batch_buffer_size(rocsparse_handle handle, rocsparse_int m, const double* dl, const double* d, const double* du, const double* x, rocsparse_int batch_count, rocsparse_int batch_stride, size_t* buffer_size);
+  // CHECK: status_t = rocsparse_dgtsv_no_pivot_strided_batch_buffer_size(handle_t, m, &ddl, &dd, &ddu, &dx, batchCount, ibatchStride, &bufferSize);
+  status_t = cusparseDgtsv2StridedBatch_bufferSizeExt(handle_t, m, &ddl, &dd, &ddu, &dx, batchCount, ibatchStride, &bufferSize);
 
-  // NOTE: An additional argument rocsparse_int batch_stride is added for the rocsparse_dgpsv_interleaved_batch_buffer_size function call: the argument is copied from the previous one: rocsparse_int batch_count. It is how hipsparseSgpsvInterleavedBatch_bufferSizeExt calls rocsparse_dgpsv_interleaved_batch_buffer_size in its implementation.
-  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSgpsvInterleavedBatch_bufferSizeExt(cusparseHandle_t handle, int algo, int m, const float* ds, const float* dl, const float* d, const float* du, const float* dw, const float* x, int batchCount, size_t* pBufferSizeInBytes);
-  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_sgpsv_interleaved_batch_buffer_size(rocsparse_handle handle, rocsparse_gpsv_interleaved_alg alg, rocsparse_int m, const float* ds, const float* dl, const float* d, const float* du, const float* dw, const float* x, rocsparse_int batch_count, rocsparse_int batch_stride, size_t* buffer_size);
-  // CHECK: status_t = rocsparse_sgpsv_interleaved_batch_buffer_size(handle_t, algo, m, &fds, &fdl, &fd, &fdu, &fdw, &fx, batchCount, batchCount, &bufferSize);
-  status_t = cusparseSgpsvInterleavedBatch_bufferSizeExt(handle_t, algo, m, &fds, &fdl, &fd, &fdu, &fdw, &fx, batchCount, &bufferSize);
-
-  // NOTE: An additional argument rocsparse_int batch_stride is added for the rocsparse_zgtsv_interleaved_batch function call: the argument is copied from the previous one: rocsparse_int batch_count. It is how hipsparseZgtsvInterleavedBatch calls rocsparse_zgtsv_interleaved_batch in its implementation.
-  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseZgtsvInterleavedBatch(cusparseHandle_t handle, int algo, int m, cuDoubleComplex* dl, cuDoubleComplex* d, cuDoubleComplex* du, cuDoubleComplex* x, int batchCount, void* pBuffer);
-  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_zgtsv_interleaved_batch(rocsparse_handle handle, rocsparse_gtsv_interleaved_alg alg, rocsparse_int m, rocsparse_double_complex* dl, rocsparse_double_complex* d, rocsparse_double_complex* du, rocsparse_double_complex* x, rocsparse_int batch_count, rocsparse_int batch_stride, void* temp_buffer);
-  // CHECK: status_t = rocsparse_zgtsv_interleaved_batch(handle_t, algo, m, &dcomplexdl, &dcomplexd, &dcomplexdu, &dcomplexx, batchCount, batchCount, pBuffer);
-  status_t = cusparseZgtsvInterleavedBatch(handle_t, algo, m, &dcomplexdl, &dcomplexd, &dcomplexdu, &dcomplexx, batchCount, pBuffer);
-
-  // NOTE: An additional argument rocsparse_int batch_stride is added for the rocsparse_zgtsv_interleaved_batch function call: the argument is copied from the previous one: rocsparse_int batch_count. It is how hipsparseCgtsvInterleavedBatch calls rocsparse_zgtsv_interleaved_batch in its implementation.
-  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCgtsvInterleavedBatch(cusparseHandle_t handle, int algo, int m, cuComplex* dl, cuComplex* d, cuComplex* du, cuComplex* x, int batchCount, void* pBuffer);
-  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_cgtsv_interleaved_batch(rocsparse_handle handle, rocsparse_gtsv_interleaved_alg alg, rocsparse_int m, rocsparse_float_complex* dl, rocsparse_float_complex* d, rocsparse_float_complex* du, rocsparse_float_complex* x, rocsparse_int batch_count, rocsparse_int batch_stride, void* temp_buffer);
-  // CHECK: status_t = rocsparse_cgtsv_interleaved_batch(handle_t, algo, m, &complexdl, &complexd, &complexdu, &complexx, batchCount, batchCount, pBuffer);
-  status_t = cusparseCgtsvInterleavedBatch(handle_t, algo, m, &complexdl, &complexd, &complexdu, &complexx, batchCount, pBuffer);
-
-  // NOTE: An additional argument rocsparse_int batch_stride is added for the rocsparse_dgtsv_interleaved_batch function call: the argument is copied from the previous one: rocsparse_int batch_count. It is how hipsparseDgtsvInterleavedBatch calls rocsparse_dgtsv_interleaved_batch in its implementation.
-  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDgtsvInterleavedBatch(cusparseHandle_t handle, int algo, int m, double* dl, double* d, double* du, double* x, int batchCount, void* pBuffer);
-  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_dgtsv_interleaved_batch(rocsparse_handle handle, rocsparse_gtsv_interleaved_alg alg, rocsparse_int m, double* dl, double* d, double* du, double* x, rocsparse_int batch_count, rocsparse_int batch_stride, void* temp_buffer);
-  // CHECK: status_t = rocsparse_dgtsv_interleaved_batch(handle_t, algo, m, &ddl, &dd, &ddu, &dx, batchCount, batchCount, pBuffer);
-  status_t = cusparseDgtsvInterleavedBatch(handle_t, algo, m, &ddl, &dd, &ddu, &dx, batchCount, pBuffer);
-
-  // NOTE: An additional argument rocsparse_int batch_stride is added for the rocsparse_sgtsv_interleaved_batch function call: the argument is copied from the previous one: rocsparse_int batch_count. It is how hipsparseSgtsvInterleavedBatch calls rocsparse_sgtsv_interleaved_batch in its implementation.
-  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSgtsvInterleavedBatch(cusparseHandle_t handle, int algo, int m, float* dl, float* d, float* du, float* x, int batchCount, void* pBuffer);
-  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_sgtsv_interleaved_batch(rocsparse_handle handle, rocsparse_gtsv_interleaved_alg alg, rocsparse_int m, float* dl, float* d, float* du, float* x, rocsparse_int batch_count, rocsparse_int batch_stride, void* temp_buffer);
-  // CHECK: status_t = rocsparse_sgtsv_interleaved_batch(handle_t, algo, m, &fdl, &fd, &fdu, &fx, batchCount, batchCount, pBuffer);
-  status_t = cusparseSgtsvInterleavedBatch(handle_t, algo, m, &fdl, &fd, &fdu, &fx, batchCount, pBuffer);
-
-  // NOTE: An additional argument rocsparse_int batch_stride is added for the rocsparse_zgtsv_interleaved_batch_buffer_size function call: the argument is copied from the previous one: rocsparse_int batch_count. It is how hipsparseZgtsvInterleavedBatch_bufferSizeExt calls rocsparse_zgtsv_interleaved_batch_buffer_size in its implementation.
-  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseZgtsvInterleavedBatch_bufferSizeExt(cusparseHandle_t handle, int algo, int m, const cuDoubleComplex* dl, const cuDoubleComplex* d, const cuDoubleComplex* du, const cuDoubleComplex* x, int batchCount, size_t* pBufferSizeInBytes);
-  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_zgtsv_interleaved_batch_buffer_size(rocsparse_handle handle, rocsparse_gtsv_interleaved_alg  alg, rocsparse_int m, const rocsparse_double_complex* dl, const rocsparse_double_complex* d, const rocsparse_double_complex* du, const rocsparse_double_complex* x, rocsparse_int batch_count, rocsparse_int batch_stride, size_t* buffer_size);
-  // CHECK: status_t = rocsparse_zgtsv_interleaved_batch_buffer_size(handle_t, algo, m, &dcomplexdl, &dcomplexd, &dcomplexdu, &dcomplexx, batchCount, batchCount, &bufferSize);
-  status_t = cusparseZgtsvInterleavedBatch_bufferSizeExt(handle_t, algo, m, &dcomplexdl, &dcomplexd, &dcomplexdu, &dcomplexx, batchCount, &bufferSize);
-
-  // NOTE: An additional argument rocsparse_int batch_stride is added for the rocsparse_cgtsv_interleaved_batch_buffer_size function call: the argument is copied from the previous one: rocsparse_int batch_count. It is how hipsparseCgtsvInterleavedBatch_bufferSizeExt calls rocsparse_cgtsv_interleaved_batch_buffer_size in its implementation.
-  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCgtsvInterleavedBatch_bufferSizeExt(cusparseHandle_t handle, int algo, int m, const cuComplex* dl, const cuComplex* d, const cuComplex* du, const cuComplex* x, int batchCount, size_t* pBufferSizeInBytes);
-  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_cgtsv_interleaved_batch_buffer_size(rocsparse_handle handle, rocsparse_gtsv_interleaved_alg alg, rocsparse_int m, const rocsparse_float_complex* dl, const rocsparse_float_complex* d, const rocsparse_float_complex* du, const rocsparse_float_complex* x, rocsparse_int batch_count, rocsparse_int batch_stride, size_t* buffer_size);
-  // CHECK: status_t = rocsparse_cgtsv_interleaved_batch_buffer_size(handle_t, algo, m, &complexdl, &complexd, &complexdu, &complexx, batchCount, batchCount, &bufferSize);
-  status_t = cusparseCgtsvInterleavedBatch_bufferSizeExt(handle_t, algo, m, &complexdl, &complexd, &complexdu, &complexx, batchCount, &bufferSize);
-
-  // NOTE: An additional argument rocsparse_int batch_stride is added for the rocsparse_cgtsv_interleaved_batch_buffer_size function call: the argument is copied from the previous one: rocsparse_int batch_count. It is how hipsparseDgtsvInterleavedBatch_bufferSizeExt calls rocsparse_cgtsv_interleaved_batch_buffer_size in its implementation.
-  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDgtsvInterleavedBatch_bufferSizeExt(cusparseHandle_t handle, int algo, int m, const double* dl, const double* d, const double* du, const double* x, int batchCount, size_t* pBufferSizeInBytes);
-  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_dgtsv_interleaved_batch_buffer_size(rocsparse_handle handle, rocsparse_gtsv_interleaved_alg alg, rocsparse_int m, const double* dl, const double* d, const double* du, const double* x, rocsparse_int batch_count, rocsparse_int batch_stride, size_t* buffer_size);
-  // CHECK: status_t = rocsparse_dgtsv_interleaved_batch_buffer_size(handle_t, algo, m, &ddl, &dd, &ddu, &dx, batchCount, batchCount, &bufferSize);
-  status_t = cusparseDgtsvInterleavedBatch_bufferSizeExt(handle_t, algo, m, &ddl, &dd, &ddu, &dx, batchCount, &bufferSize);
-
-  // NOTE: An additional argument rocsparse_int batch_stride is added for the rocsparse_sgtsv_interleaved_batch_buffer_size function call: the argument is copied from the previous one: rocsparse_int batch_count. It is how hipsparseSgtsvInterleavedBatch_bufferSizeExt calls rocsparse_sgtsv_interleaved_batch_buffer_size in its implementation.
-  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSgtsvInterleavedBatch_bufferSizeExt(cusparseHandle_t handle, int algo, int m, const float* dl, const float* d, const float* du, const float* x, int batchCount, size_t* pBufferSizeInBytes);
-  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_sgtsv_interleaved_batch_buffer_size(rocsparse_handle handle, rocsparse_gtsv_interleaved_alg alg, rocsparse_int m, const float* dl, const float* d, const float* du, const float* x, rocsparse_int batch_count, rocsparse_int batch_stride, size_t* buffer_size);
-  // CHECK: status_t = rocsparse_sgtsv_interleaved_batch_buffer_size(handle_t, algo, m, &fdl, &fd, &fdu, &fx, batchCount, batchCount, &bufferSize);
-  status_t = cusparseSgtsvInterleavedBatch_bufferSizeExt(handle_t, algo, m, &fdl, &fd, &fdu, &fx, batchCount, &bufferSize);
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSgtsv2StridedBatch_bufferSizeExt(cusparseHandle_t handle, int m, const float* dl, const float* d, const float* du, const float* x, int batchCount, int batchStride, size_t* bufferSizeInBytes);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_sgtsv_no_pivot_strided_batch_buffer_size(rocsparse_handle handle, rocsparse_int m, const float* dl, const float* d, const float* du, const float* x, rocsparse_int batch_count, rocsparse_int batch_stride, size_t* buffer_size);
+  // CHECK: status_t = rocsparse_sgtsv_no_pivot_strided_batch_buffer_size(handle_t, m, &fdl, &fd, &fdu, &fx, batchCount, ibatchStride, &bufferSize);
+  status_t = cusparseSgtsv2StridedBatch_bufferSizeExt(handle_t, m, &fdl, &fd, &fdu, &fx, batchCount, ibatchStride, &bufferSize);
 #endif
 
 #if (CUDA_VERSION >= 10010 && CUDA_VERSION < 11000 && !defined(_WIN32)) || CUDA_VERSION >= 11000
@@ -1663,6 +1641,11 @@ int main() {
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_scsrgeam(rocsparse_handle handle, rocsparse_int m, rocsparse_int n, const float* alpha, const rocsparse_mat_descr descr_A, rocsparse_int nnz_A, const float* csr_val_A, const rocsparse_int* csr_row_ptr_A, const rocsparse_int* csr_col_ind_A, const float* beta, const rocsparse_mat_descr descr_B, rocsparse_int nnz_B, const float* csr_val_B, const rocsparse_int* csr_row_ptr_B, const rocsparse_int* csr_col_ind_B, const rocsparse_mat_descr descr_C, float* csr_val_C, const rocsparse_int* csr_row_ptr_C, rocsparse_int* csr_col_ind_C);
   // CHECK: status_t = rocsparse_scsrgeam(handle_t, m, n, &fA, matDescr_A, nnza, &csrSortedValA, &csrRowPtrA, &csrColIndA, &fB, matDescr_B, nnzb, &csrSortedValB, &csrRowPtrB, &csrColIndB, matDescr_C, &csrSortedValC, &csrRowPtrC, &csrColIndC);
   status_t = cusparseScsrgeam(handle_t, m, n, &fA, matDescr_A, nnza, &csrSortedValA, &csrRowPtrA, &csrColIndA, &fB, matDescr_B, nnzb, &csrSortedValB, &csrRowPtrB, &csrColIndB, matDescr_C, &csrSortedValC, &csrRowPtrC, &csrColIndC);
+
+  // CUDA: CUSPARSE_DEPRECATED_HINT(cusparseXcsrgeam2) cusparseStatus_t CUSPARSEAPI cusparseXcsrgeamNnz(cusparseHandle_t handle, int m, int n, const cusparseMatDescr_t descrA, int nnzA, const int* csrSortedRowPtrA, const int* csrSortedColIndA, const cusparseMatDescr_t descrB, int nnzB, const int* csrSortedRowPtrB, const int* csrSortedColIndB, const cusparseMatDescr_t descrC, int* csrSortedRowPtrC, int* nnzTotalDevHostPtr);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_csrgeam_nnz(rocsparse_handle handle, rocsparse_int m, rocsparse_int n, const rocsparse_mat_descr descr_A, rocsparse_int nnz_A, const rocsparse_int* csr_row_ptr_A, const rocsparse_int* csr_col_ind_A, const rocsparse_mat_descr descr_B, rocsparse_int nnz_B, const rocsparse_int* csr_row_ptr_B, const rocsparse_int* csr_col_ind_B, const rocsparse_mat_descr descr_C, rocsparse_int* csr_row_ptr_C, rocsparse_int* nnz_C);
+  // CHECK: status_t = rocsparse_csrgeam_nnz(handle_t, m, n, matDescr_A, nnza, &csrRowPtrA, &csrColIndA, matDescr_B, nnzb, &csrRowPtrB, &csrColIndB, matDescr_C, &csrRowPtrC, &nnzTotalDevHostPtr);
+  status_t = cusparseXcsrgeamNnz(handle_t, m, n, matDescr_A, nnza, &csrRowPtrA, &csrColIndA, matDescr_B, nnzb, &csrRowPtrB, &csrColIndB, matDescr_C, &csrRowPtrC, &nnzTotalDevHostPtr);
 #endif
 
 #if CUDA_VERSION >= 11000

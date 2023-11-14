@@ -41,14 +41,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_TYPE_NAME_MAP {
   {"csrsv2Info",                                {"csrsv2Info",                                 "",                                                   CONV_TYPE, API_SPARSE, 4, UNSUPPORTED | CUDA_REMOVED}},
   {"csrsv2Info_t",                              {"csrsv2Info_t",                               "",                                                   CONV_TYPE, API_SPARSE, 4, ROC_UNSUPPORTED | CUDA_REMOVED}},
 
-  {"csrsm2Info",                                {"csrsm2Info",                                 "",                                                   CONV_TYPE, API_SPARSE, 4, UNSUPPORTED | CUDA_REMOVED}},
-  {"csrsm2Info_t",                              {"csrsm2Info_t",                               "",                                                   CONV_TYPE, API_SPARSE, 4, ROC_UNSUPPORTED | CUDA_REMOVED}},
+  {"csrsm2Info",                                {"csrsm2Info",                                 "_rocsparse_mat_info",                                CONV_TYPE, API_SPARSE, 4, HIP_UNSUPPORTED | CUDA_REMOVED}},
+  {"csrsm2Info_t",                              {"csrsm2Info_t",                               "rocsparse_mat_info",                                 CONV_TYPE, API_SPARSE, 4, CUDA_REMOVED}},
 
   {"bsrsv2Info",                                {"bsrsv2Info",                                 "",                                                   CONV_TYPE, API_SPARSE, 4, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
   {"bsrsv2Info_t",                              {"bsrsv2Info_t",                               "",                                                   CONV_TYPE, API_SPARSE, 4, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
 
-  {"bsrsm2Info",                                {"bsrsm2Info",                                 "",                                                   CONV_TYPE, API_SPARSE, 4, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"bsrsm2Info_t",                              {"bsrsm2Info_t",                               "",                                                   CONV_TYPE, API_SPARSE, 4, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"bsrsm2Info",                                {"bsrsm2Info",                                 "_rocsparse_mat_info",                                CONV_TYPE, API_SPARSE, 4, CUDA_DEPRECATED}},
+  {"bsrsm2Info_t",                              {"bsrsm2Info_t",                               "rocsparse_mat_info",                                 CONV_TYPE, API_SPARSE, 4, CUDA_DEPRECATED}},
 
   {"bsric02Info",                               {"bsric02Info",                                "_rocsparse_mat_info",                                CONV_TYPE, API_SPARSE, 4, CUDA_DEPRECATED}},
   {"bsric02Info_t",                             {"bsric02Info_t",                              "rocsparse_mat_info",                                 CONV_TYPE, API_SPARSE, 4, CUDA_DEPRECATED}},
@@ -562,10 +562,10 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_TYPE_NAME_VER_MAP {
   {"HIPSPARSE_SPGEMM_ALG1",                      {HIP_5060, HIP_0,    HIP_0   }},
   {"HIPSPARSE_SPGEMM_ALG2",                      {HIP_5060, HIP_0,    HIP_0   }},
   {"HIPSPARSE_SPGEMM_ALG3",                      {HIP_5060, HIP_0,    HIP_0   }},
-  {"hipsparseConstSpVecDescr_t",                 {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipsparseConstSpMatDescr_t",                 {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipsparseConstDnVecDescr_t",                 {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipsparseConstDnMatDescr_t",                 {HIP_6000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsparseConstSpVecDescr_t",                 {HIP_6000, HIP_0,    HIP_0,  }},
+  {"hipsparseConstSpMatDescr_t",                 {HIP_6000, HIP_0,    HIP_0,  }},
+  {"hipsparseConstDnVecDescr_t",                 {HIP_6000, HIP_0,    HIP_0,  }},
+  {"hipsparseConstDnMatDescr_t",                 {HIP_6000, HIP_0,    HIP_0,  }},
   {"csric02Info_t",                              {HIP_3010, HIP_0,    HIP_0   }},
   {"csric02Info",                                {HIP_3010, HIP_0,    HIP_0   }},
   {"_rocsparse_handle",                          {HIP_1090, HIP_0,    HIP_0   }},
