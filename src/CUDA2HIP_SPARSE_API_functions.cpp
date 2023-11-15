@@ -1124,6 +1124,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SPARSE_FUNCTION_VER_MAP {
   {"cusparseDnnz_compress",                             {CUDA_80,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
   {"cusparseCnnz_compress",                             {CUDA_80,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
   {"cusparseZnnz_compress",                             {CUDA_80,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
+  {"cusparseGetStream",                                 {CUDA_80,  CUDA_0,   CUDA_0  }},
   {"cusparseCreateCoo",                                 {CUDA_101, CUDA_0,   CUDA_0  }},
   {"cusparseCreateCooAoS",                              {CUDA_102, CUDA_112, CUDA_120}},
   {"cusparseCreateCsr",                                 {CUDA_102, CUDA_0,   CUDA_0  }},

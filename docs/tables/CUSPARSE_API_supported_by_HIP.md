@@ -200,7 +200,7 @@
 |`cusparseGetErrorName`|10.2| | | |`hipsparseGetErrorName`|6.0.0| | | | |
 |`cusparseGetErrorString`|10.2| | | |`hipsparseGetErrorString`|6.0.0| | | | |
 |`cusparseGetPointerMode`| | | | |`hipsparseGetPointerMode`|1.9.2| | | | |
-|`cusparseGetStream`| | | | |`hipsparseGetStream`|1.9.2| | | | |
+|`cusparseGetStream`|8.0| | | |`hipsparseGetStream`|1.9.2| | | | |
 |`cusparseGetVersion`| | | | |`hipsparseGetVersion`|1.9.2| | | | |
 |`cusparseSetPointerMode`| | | | |`hipsparseSetPointerMode`|1.9.2| | | | |
 |`cusparseSetStream`| | | | |`hipsparseSetStream`|1.9.2| | | | |
