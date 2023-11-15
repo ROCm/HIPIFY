@@ -78,11 +78,6 @@ int main() {
   cublasAtomicsMode_t BLAS_ATOMICS_NOT_ALLOWED = CUBLAS_ATOMICS_NOT_ALLOWED;
   cublasAtomicsMode_t BLAS_ATOMICS_ALLOWED = CUBLAS_ATOMICS_ALLOWED;
 
-  // CHECK: rocblas_gemm_algo blasGemmAlgo;
-  // CHECK-NEXT: rocblas_gemm_algo BLAS_GEMM_DFALT = rocblas_gemm_algo_standard;
-  cublasGemmAlgo_t blasGemmAlgo;
-  cublasGemmAlgo_t BLAS_GEMM_DFALT = CUBLAS_GEMM_DFALT;
-
   // CHECK: rocblas_handle blasHandle;
   cublasHandle_t blasHandle;
 
@@ -1764,6 +1759,11 @@ int main() {
 
   // CHECK: rocblas_datatype DataType_2, DataType_3;
   cudaDataType DataType_2, DataType_3;
+
+  // CHECK: rocblas_gemm_algo blasGemmAlgo;
+  // CHECK-NEXT: rocblas_gemm_algo BLAS_GEMM_DFALT = rocblas_gemm_algo_standard;
+  cublasGemmAlgo_t blasGemmAlgo;
+  cublasGemmAlgo_t BLAS_GEMM_DFALT = CUBLAS_GEMM_DFALT;
 
   // TODO: #1281
   // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasNrm2Ex(cublasHandle_t handle, int n, const void* x, cudaDataType xType, int incx, void* result, cudaDataType resultType, cudaDataType executionType);
