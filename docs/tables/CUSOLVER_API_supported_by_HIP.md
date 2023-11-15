@@ -6,6 +6,19 @@
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
 |`CUBLAS_DIRECT_BACKWARD`|11.0| | | | | | | | | |
 |`CUBLAS_DIRECT_FORWARD`|11.0| | | | | | | | | |
+|`CUBLAS_STOREV_COLUMNWISE`|11.0| | | | | | | | | |
+|`CUBLAS_STOREV_ROWWISE`|11.0| | | | | | | | | |
+|`CUSOLVER_ALG_0`|11.0| | | | | | | | | |
+|`CUSOLVER_ALG_1`|11.0| | | | | | | | | |
+|`CUSOLVER_ALG_2`|11.5| | | | | | | | | |
+|`CUSOLVER_C_16BF`|11.0| | | | | | | | | |
+|`CUSOLVER_C_16F`|11.0| | | | | | | | | |
+|`CUSOLVER_C_32F`|11.0| | | | | | | | | |
+|`CUSOLVER_C_64F`|11.0| | | | | | | | | |
+|`CUSOLVER_C_8I`|11.0| | | | | | | | | |
+|`CUSOLVER_C_8U`|11.0| | | | | | | | | |
+|`CUSOLVER_C_AP`|11.0| | | | | | | | | |
+|`CUSOLVER_C_TF32`|11.0| | | | | | | | | |
 |`CUSOLVER_EIG_MODE_NOVECTOR`|8.0| | | |`HIPSOLVER_EIG_MODE_NOVECTOR`|4.5.0| | | |6.1.0|
 |`CUSOLVER_EIG_MODE_VECTOR`|8.0| | | |`HIPSOLVER_EIG_MODE_VECTOR`|4.5.0| | | |6.1.0|
 |`CUSOLVER_EIG_RANGE_ALL`|10.1| | | |`HIPSOLVER_EIG_RANGE_ALL`|5.3.0| | | |6.1.0|
@@ -28,6 +41,14 @@
 |`CUSOLVER_PREC_DD`|10.2| | | | | | | | | |
 |`CUSOLVER_PREC_SHT`|10.2| | | | | | | | | |
 |`CUSOLVER_PREC_SS`|10.2| | | | | | | | | |
+|`CUSOLVER_R_16BF`|11.0| | | | | | | | | |
+|`CUSOLVER_R_16F`|11.0| | | | | | | | | |
+|`CUSOLVER_R_32F`|11.0| | | | | | | | | |
+|`CUSOLVER_R_64F`|11.0| | | | | | | | | |
+|`CUSOLVER_R_8I`|11.0| | | | | | | | | |
+|`CUSOLVER_R_8U`|11.0| | | | | | | | | |
+|`CUSOLVER_R_AP`|11.0| | | | | | | | | |
+|`CUSOLVER_R_TF32`|11.0| | | | | | | | | |
 |`CUSOLVER_STATUS_ALLOC_FAILED`| | | | |`HIPSOLVER_STATUS_ALLOC_FAILED`|4.5.0| | | |6.1.0|
 |`CUSOLVER_STATUS_ARCH_MISMATCH`| | | | |`HIPSOLVER_STATUS_ARCH_MISMATCH`|4.5.0| | | |6.1.0|
 |`CUSOLVER_STATUS_EXECUTION_FAILED`| | | | |`HIPSOLVER_STATUS_EXECUTION_FAILED`|4.5.0| | | |6.1.0|
@@ -53,6 +74,7 @@
 |`CUSOLVER_STATUS_NOT_SUPPORTED`| | | | |`HIPSOLVER_STATUS_NOT_SUPPORTED`|4.5.0| | | |6.1.0|
 |`CUSOLVER_STATUS_SUCCESS`| | | | |`HIPSOLVER_STATUS_SUCCESS`|4.5.0| | | |6.1.0|
 |`CUSOLVER_STATUS_ZERO_PIVOT`| | | | |`HIPSOLVER_STATUS_ZERO_PIVOT`| | | | | |
+|`cusolverAlgMode_t`|11.0| | | | | | | | | |
 |`cusolverDirectMode_t`|11.0| | | | | | | | | |
 |`cusolverDnHandle_t`| | | | |`hipsolverHandle_t`|4.5.0| | | |6.1.0|
 |`cusolverEigMode_t`|8.0| | | |`hipsolverEigMode_t`|4.5.0| | | |6.1.0|
@@ -60,7 +82,9 @@
 |`cusolverEigType_t`|8.0| | | |`hipsolverEigType_t`|4.5.0| | | |6.1.0|
 |`cusolverIRSRefinement_t`|10.2| | | | | | | | | |
 |`cusolverNorm_t`|10.2| | | | | | | | | |
+|`cusolverPrecType_t`|11.0| | | | | | | | | |
 |`cusolverStatus_t`| | | | |`hipsolverStatus_t`|4.5.0| | | |6.1.0|
+|`cusolverStorevMode_t`|11.0| | | | | | | | | |
 
 ## **2. CUSOLVER Function Reference**
 
