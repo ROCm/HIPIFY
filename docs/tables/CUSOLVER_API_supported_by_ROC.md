@@ -6,6 +6,19 @@
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
 |`CUBLAS_DIRECT_BACKWARD`|11.0| | | | | | | | | |
 |`CUBLAS_DIRECT_FORWARD`|11.0| | | | | | | | | |
+|`CUBLAS_STOREV_COLUMNWISE`|11.0| | | | | | | | | |
+|`CUBLAS_STOREV_ROWWISE`|11.0| | | | | | | | | |
+|`CUSOLVER_ALG_0`|11.0| | | | | | | | | |
+|`CUSOLVER_ALG_1`|11.0| | | | | | | | | |
+|`CUSOLVER_ALG_2`|11.5| | | | | | | | | |
+|`CUSOLVER_C_16BF`|11.0| | | | | | | | | |
+|`CUSOLVER_C_16F`|11.0| | | | | | | | | |
+|`CUSOLVER_C_32F`|11.0| | | | | | | | | |
+|`CUSOLVER_C_64F`|11.0| | | | | | | | | |
+|`CUSOLVER_C_8I`|11.0| | | | | | | | | |
+|`CUSOLVER_C_8U`|11.0| | | | | | | | | |
+|`CUSOLVER_C_AP`|11.0| | | | | | | | | |
+|`CUSOLVER_C_TF32`|11.0| | | | | | | | | |
 |`CUSOLVER_EIG_MODE_NOVECTOR`|8.0| | | |`rocblas_evect_none`|4.1.0| | | |6.1.0|
 |`CUSOLVER_EIG_MODE_VECTOR`|8.0| | | |`rocblas_evect_original`|4.1.0| | | |6.1.0|
 |`CUSOLVER_EIG_RANGE_ALL`|10.1| | | |`rocblas_erange_all`|5.2.0| | | |6.1.0|
@@ -28,6 +41,14 @@
 |`CUSOLVER_PREC_DD`|10.2| | | | | | | | | |
 |`CUSOLVER_PREC_SHT`|10.2| | | | | | | | | |
 |`CUSOLVER_PREC_SS`|10.2| | | | | | | | | |
+|`CUSOLVER_R_16BF`|11.0| | | | | | | | | |
+|`CUSOLVER_R_16F`|11.0| | | | | | | | | |
+|`CUSOLVER_R_32F`|11.0| | | | | | | | | |
+|`CUSOLVER_R_64F`|11.0| | | | | | | | | |
+|`CUSOLVER_R_8I`|11.0| | | | | | | | | |
+|`CUSOLVER_R_8U`|11.0| | | | | | | | | |
+|`CUSOLVER_R_AP`|11.0| | | | | | | | | |
+|`CUSOLVER_R_TF32`|11.0| | | | | | | | | |
 |`CUSOLVER_STATUS_ALLOC_FAILED`| | | | |`rocblas_status_memory_error`|5.6.0| | | |6.1.0|
 |`CUSOLVER_STATUS_ARCH_MISMATCH`| | | | |`rocblas_status_arch_mismatch`|5.7.0| | | |6.1.0|
 |`CUSOLVER_STATUS_EXECUTION_FAILED`| | | | |`rocblas_status_not_implemented`|1.5.0| | | |6.1.0|
@@ -53,6 +74,7 @@
 |`CUSOLVER_STATUS_NOT_SUPPORTED`| | | | |`rocblas_status_not_implemented`|1.5.0| | | |6.1.0|
 |`CUSOLVER_STATUS_SUCCESS`| | | | |`rocblas_status_success`|3.0.0| | | |6.1.0|
 |`CUSOLVER_STATUS_ZERO_PIVOT`| | | | |`rocblas_status_not_implemented`|1.5.0| | | |6.1.0|
+|`cusolverAlgMode_t`|11.0| | | | | | | | | |
 |`cusolverDirectMode_t`|11.0| | | | | | | | | |
 |`cusolverDnHandle_t`| | | | |`rocblas_handle`|1.5.0| | | |6.1.0|
 |`cusolverEigMode_t`|8.0| | | |`rocblas_evect`|4.1.0| | | |6.1.0|
@@ -60,7 +82,9 @@
 |`cusolverEigType_t`|8.0| | | |`rocblas_eform`|4.2.0| | | |6.1.0|
 |`cusolverIRSRefinement_t`|10.2| | | | | | | | | |
 |`cusolverNorm_t`|10.2| | | | | | | | | |
+|`cusolverPrecType_t`|11.0| | | | | | | | | |
 |`cusolverStatus_t`| | | | |`rocblas_status`|3.0.0| | | |6.1.0|
+|`cusolverStorevMode_t`|11.0| | | | | | | | | |
 
 ## **2. CUSOLVER Function Reference**
 
