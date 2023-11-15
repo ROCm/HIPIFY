@@ -200,7 +200,7 @@
 |`cusparseGetErrorName`|10.2| | | | | | | | | |
 |`cusparseGetErrorString`|10.2| | | | | | | | | |
 |`cusparseGetPointerMode`| | | | |`rocsparse_get_pointer_mode`|1.9.0| | | | |
-|`cusparseGetStream`| | | | |`rocsparse_get_stream`|1.9.0| | | | |
+|`cusparseGetStream`|8.0| | | |`rocsparse_get_stream`|1.9.0| | | | |
 |`cusparseGetVersion`| | | | |`rocsparse_get_version`|1.9.0| | | | |
 |`cusparseSetPointerMode`| | | | |`rocsparse_set_pointer_mode`|1.9.0| | | | |
 |`cusparseSetStream`| | | | |`rocsparse_set_stream`|1.9.0| | | | |

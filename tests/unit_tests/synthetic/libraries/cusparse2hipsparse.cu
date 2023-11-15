@@ -319,11 +319,6 @@ int main() {
   // CHECK: status_t = hipsparseSetStream(handle_t, stream_t);
   status_t = cusparseSetStream(handle_t, stream_t);
 
-  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseGetStream(cusparseHandle_t handle, cudaStream_t* streamId);
-  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseGetStream(hipsparseHandle_t handle, hipStream_t* streamId);
-  // CHECK: status_t = hipsparseGetStream(handle_t, &stream_t);
-  status_t = cusparseGetStream(handle_t, &stream_t);
-
   // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSetPointerMode(cusparseHandle_t handle, cusparsePointerMode_t mode);
   // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSetPointerMode(hipsparseHandle_t handle, hipsparsePointerMode_t mode);
   // CHECK: status_t = hipsparseSetPointerMode(handle_t, pointerMode_t);
@@ -1094,6 +1089,11 @@ int main() {
   // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSnnz_compress(hipsparseHandle_t handle, int m, const hipsparseMatDescr_t descrA, const float* csrValA, const int* csrRowPtrA, int* nnzPerRow, int* nnzC, float tol);
   // CHECK: status_t = hipsparseSnnz_compress(handle_t, m, matDescr_A, &csrSortedValA, &csrRowPtrA, &nnzPerRow, &nnzc, ftol);
  status_t = cusparseSnnz_compress(handle_t, m, matDescr_A, &csrSortedValA, &csrRowPtrA, &nnzPerRow, &nnzc, ftol);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseGetStream(cusparseHandle_t handle, cudaStream_t* streamId);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseGetStream(hipsparseHandle_t handle, hipStream_t* streamId);
+  // CHECK: status_t = hipsparseGetStream(handle_t, &stream_t);
+  status_t = cusparseGetStream(handle_t, &stream_t);
 #endif
 
 #if CUDA_VERSION >= 8000 && CUDA_VERSION < 12000

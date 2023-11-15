@@ -311,11 +311,6 @@ int main() {
   // CHECK: status_t = rocsparse_set_stream(handle_t, stream_t);
   status_t = cusparseSetStream(handle_t, stream_t);
 
-  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseGetStream(cusparseHandle_t handle, cudaStream_t* streamId);
-  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_get_stream(rocsparse_handle handle, hipStream_t* stream);
-  // CHECK: status_t = rocsparse_get_stream(handle_t, &stream_t);
-  status_t = cusparseGetStream(handle_t, &stream_t);
-
   // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSetPointerMode(cusparseHandle_t handle, cusparsePointerMode_t mode);
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_set_pointer_mode(rocsparse_handle handle, rocsparse_pointer_mode pointer_mode);
   // CHECK: status_t = rocsparse_set_pointer_mode(handle_t, pointerMode_t);
@@ -1043,9 +1038,7 @@ int main() {
   status_t = cusparseXbsrsm2_zeroPivot(handle_t, bsrsm2_info, &iposition);
 
 #if CUDA_VERSION >= 8000
-  // CHECK: hipDataType dataType_t;
-  // TODO: [#899] There should be rocsparse_datatype
-  // CHECK-NEXT: hipDataType dataType;
+  // TODO: [#899] There should be rocsparse_datatype instead of hipDataType
   cudaDataType_t dataType_t;
   cudaDataType dataType;
 
@@ -1088,6 +1081,11 @@ int main() {
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_snnz_compress(rocsparse_handle handle, rocsparse_int m, const rocsparse_mat_descr descr_A, const float* csr_val_A, const rocsparse_int* csr_row_ptr_A, rocsparse_int* nnz_per_row, rocsparse_int* nnz_C, float tol);
   // CHECK: status_t = rocsparse_snnz_compress(handle_t, m, matDescr_A, &csrSortedValA, &csrRowPtrA, &nnzPerRow, &nnzc, ftol);
   status_t = cusparseSnnz_compress(handle_t, m, matDescr_A, &csrSortedValA, &csrRowPtrA, &nnzPerRow, &nnzc, ftol);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseGetStream(cusparseHandle_t handle, cudaStream_t* streamId);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_get_stream(rocsparse_handle handle, hipStream_t* stream);
+  // CHECK: status_t = rocsparse_get_stream(handle_t, &stream_t);
+  status_t = cusparseGetStream(handle_t, &stream_t);
 #endif
 
 #if CUDA_VERSION >= 8000 && CUDA_VERSION < 12000
