@@ -214,38 +214,6 @@ int main() {
   float** fCarray = 0;
   float** fTauarray = 0;
 
-  // CHECK: __half* ha = 0;
-  __half* ha = 0;
-  // CHECK: __half* hA = 0;
-  __half* hA = 0;
-  // CHECK: __half* hb = 0;
-  __half* hb = 0;
-  // CHECK: __half* hB = 0;
-  __half* hB = 0;
-  // CHECK: __half* hc = 0;
-  __half* hc = 0;
-  // CHECK: __half* hC = 0;
-  __half* hC = 0;
-
-  // CHECK: __half** hAarray = 0;
-  __half** hAarray = 0;
-  // CHECK: const __half** const hAarray_const = const_cast<const __half**>(hAarray);
-  const __half** const hAarray_const = const_cast<const __half**>(hAarray);
-  // CHECK: __half** hBarray = 0;
-  __half** hBarray = 0;
-  // CHECK: const __half** const hBarray_const = const_cast<const __half**>(hBarray);
-  const __half** const hBarray_const = const_cast<const __half**>(hBarray);
-  // CHECK: __half** hCarray = 0;
-  __half** hCarray = 0;
-  // CHECK: const __half** const hCarray_const = const_cast<const __half**>(hCarray);
-  const __half** const hCarray_const = const_cast<const __half**>(hCarray);
-  // CHECK: __half** hxarray = 0;
-  __half** hxarray = 0;
-  // CHECK: const __half** const hxarray_const = const_cast<const __half**>(hxarray_const);
-  const __half** const hxarray_const = const_cast<const __half**>(hxarray_const);
-  // CHECK: __half** hyarray = 0;
-  __half** hyarray = 0;
-
   double da = 0;
   double dA = 0;
   double db = 0;
@@ -1097,11 +1065,6 @@ int main() {
   // CHECK: blasStatus = hipblasZgemm_v2(blasHandle, transa, transb, m, n, k, &dcomplexa, &dcomplexA, lda, &dcomplexB, ldb, &dcomplexb, &dcomplexC, ldc);
   blasStatus = cublasZgemm_v2(blasHandle, transa, transb, m, n, k, &dcomplexa, &dcomplexA, lda, &dcomplexB, ldb, &dcomplexb, &dcomplexC, ldc);
 
-  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasHgemm(cublasHandle_t handle, cublasOperation_t transa, cublasOperation_t transb, int m, int n, int k, const __half* alpha, const __half* A, int lda, const __half* B, int ldb, const __half* beta, __half* C, int ldc);
-  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasHgemm(hipblasHandle_t handle, hipblasOperation_t transA, hipblasOperation_t transB, int m, int n, int k, const hipblasHalf* alpha, const hipblasHalf* AP, int lda, const hipblasHalf* BP, int ldb, const hipblasHalf* beta, hipblasHalf* CP, int ldc);
-  // CHECK: blasStatus = hipblasHgemm(blasHandle, transa, transb, m, n, k, ha, hA, lda, hB, ldb, hb, hC, ldc);
-  blasStatus = cublasHgemm(blasHandle, transa, transb, m, n, k, ha, hA, lda, hB, ldb, hb, hC, ldc);
-
   // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasSgemmBatched(cublasHandle_t handle, cublasOperation_t transa, cublasOperation_t transb, int m, int n, int k, const float* alpha, const float* const Aarray[], int lda, const float* const Barray[], int ldb, const float* beta, float* const Carray[], int ldc, int batchCount);
   // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasSgemmBatched(hipblasHandle_t handle, hipblasOperation_t transA, hipblasOperation_t transB, int m, int n, int k, const float* alpha, const float* const AP[], int lda, const float* const BP[], int ldb, const float* beta, float* const CP[], int ldc, int batchCount);
   // CHECK: blasStatus = hipblasSgemmBatched(blasHandle, transa, transb, m, n, k, &fa, fAarray_const, lda, fBarray_const, ldb, &fb, fCarray, ldc, batchCount);
@@ -1475,6 +1438,45 @@ int main() {
   long long int strideC = 0;
   long long int stridex = 0;
   long long int stridey = 0;
+
+#if CUDA_VERSION >= 7050
+  // CHECK: __half* ha = 0;
+  __half* ha = 0;
+  // CHECK: __half* hA = 0;
+  __half* hA = 0;
+  // CHECK: __half* hb = 0;
+  __half* hb = 0;
+  // CHECK: __half* hB = 0;
+  __half* hB = 0;
+  // CHECK: __half* hc = 0;
+  __half* hc = 0;
+  // CHECK: __half* hC = 0;
+  __half* hC = 0;
+
+  // CHECK: __half** hAarray = 0;
+  __half** hAarray = 0;
+  // CHECK: const __half** const hAarray_const = const_cast<const __half**>(hAarray);
+  const __half** const hAarray_const = const_cast<const __half**>(hAarray);
+  // CHECK: __half** hBarray = 0;
+  __half** hBarray = 0;
+  // CHECK: const __half** const hBarray_const = const_cast<const __half**>(hBarray);
+  const __half** const hBarray_const = const_cast<const __half**>(hBarray);
+  // CHECK: __half** hCarray = 0;
+  __half** hCarray = 0;
+  // CHECK: const __half** const hCarray_const = const_cast<const __half**>(hCarray);
+  const __half** const hCarray_const = const_cast<const __half**>(hCarray);
+  // CHECK: __half** hxarray = 0;
+  __half** hxarray = 0;
+  // CHECK: const __half** const hxarray_const = const_cast<const __half**>(hxarray_const);
+  const __half** const hxarray_const = const_cast<const __half**>(hxarray_const);
+  // CHECK: __half** hyarray = 0;
+  __half** hyarray = 0;
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasHgemm(cublasHandle_t handle, cublasOperation_t transa, cublasOperation_t transb, int m, int n, int k, const __half* alpha, const __half* A, int lda, const __half* B, int ldb, const __half* beta, __half* C, int ldc);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasHgemm(hipblasHandle_t handle, hipblasOperation_t transA, hipblasOperation_t transB, int m, int n, int k, const hipblasHalf* alpha, const hipblasHalf* AP, int lda, const hipblasHalf* BP, int ldb, const hipblasHalf* beta, hipblasHalf* CP, int ldc);
+  // CHECK: blasStatus = hipblasHgemm(blasHandle, transa, transb, m, n, k, ha, hA, lda, hB, ldb, hb, hC, ldc);
+  blasStatus = cublasHgemm(blasHandle, transa, transb, m, n, k, ha, hA, lda, hB, ldb, hb, hC, ldc);
+#endif
 
 #if CUDA_VERSION >= 8000
   // CHECK: hipDataType DataType;
