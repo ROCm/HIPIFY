@@ -794,6 +794,7 @@ namespace doc {
       const typeMap &getTypes() const override { return CUDA_RTC_TYPE_NAME_MAP; }
       const versionMap &getFunctionVersions() const override { return CUDA_RTC_FUNCTION_VER_MAP; }
       const hipVersionMap &getHipFunctionVersions() const override { return HIP_RTC_FUNCTION_VER_MAP; }
+      const cudaChangedVersionMap& getCudaChangedFunctionVersions() const override { return CUDA_RTC_FUNCTION_CHANGED_VER_MAP; }
       const versionMap &getTypeVersions() const override { return CUDA_RTC_TYPE_NAME_VER_MAP; }
       const hipVersionMap &getHipTypeVersions() const override { return HIP_RTC_TYPE_NAME_VER_MAP; }
       const string &getName() const override { return sCURTC; }

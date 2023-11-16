@@ -78,6 +78,11 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RTC_FUNCTION_VER_MAP {
   {"hiprtcGetBitcodeSize",                        {HIP_5030, HIP_0,    HIP_0   }},
 };
 
+const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_RTC_FUNCTION_CHANGED_VER_MAP {
+  {"nvrtcCreateProgram",                          {CUDA_80}},
+  {"nvrtcCompileProgram",                         {CUDA_80}},
+};
+
 const std::map<unsigned int, llvm::StringRef> CUDA_RTC_API_SECTION_MAP {
   {1, "RTC Data types"},
   {2, "RTC API functions"},
