@@ -147,6 +147,10 @@ const std::string sCusparseZcsrsm2_analysis = "cusparseZcsrsm2_analysis";
 const std::string sCusparseCcsrsm2_analysis = "cusparseCcsrsm2_analysis";
 const std::string sCusparseDcsrsm2_analysis = "cusparseDcsrsm2_analysis";
 const std::string sCusparseScsrsm2_analysis = "cusparseScsrsm2_analysis";
+const std::string sCusparseScsrsm2_bufferSizeExt = "cusparseScsrsm2_bufferSizeExt";
+const std::string sCusparseDcsrsm2_bufferSizeExt = "cusparseDcsrsm2_bufferSizeExt";
+const std::string sCusparseCcsrsm2_bufferSizeExt = "cusparseCcsrsm2_bufferSizeExt";
+const std::string sCusparseZcsrsm2_bufferSizeExt = "cusparseZcsrsm2_bufferSizeExt";
 
 // CUDA_OVERLOADED
 const std::string sCudaEventCreate = "cudaEventCreate";
@@ -1047,6 +1051,42 @@ std::map<std::string, ArgCastStruct> FuncArgCasts {
       false
     }
   },
+  {sCusparseScsrsm2_bufferSizeExt,
+    {
+      {
+        {15, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseDcsrsm2_bufferSizeExt,
+    {
+      {
+        {15, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseCcsrsm2_bufferSizeExt,
+    {
+      {
+        {15, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseZcsrsm2_bufferSizeExt,
+    {
+      {
+        {15, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
 };
 
 void HipifyAction::RewriteString(StringRef s, clang::SourceLocation start) {
@@ -1822,7 +1862,11 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
             sCusparseZcsrsm2_analysis,
             sCusparseCcsrsm2_analysis,
             sCusparseDcsrsm2_analysis,
-            sCusparseScsrsm2_analysis
+            sCusparseScsrsm2_analysis,
+            sCusparseScsrsm2_bufferSizeExt,
+            sCusparseDcsrsm2_bufferSizeExt,
+            sCusparseCcsrsm2_bufferSizeExt,
+            sCusparseZcsrsm2_bufferSizeExt
           )
         )
       )
