@@ -25,8 +25,8 @@
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
 |`nvrtcAddNameExpression`|8.0| | | |`hiprtcAddNameExpression`|2.6.0| | | | |
-|`nvrtcCompileProgram`| | | | |`hiprtcCompileProgram`|2.6.0| | | | |
-|`nvrtcCreateProgram`| | | | |`hiprtcCreateProgram`|2.6.0| | | | |
+|`nvrtcCompileProgram`| | |8.0| |`hiprtcCompileProgram`|2.6.0| | | | |
+|`nvrtcCreateProgram`| | |8.0| |`hiprtcCreateProgram`|2.6.0| | | | |
 |`nvrtcDestroyProgram`| | | | |`hiprtcDestroyProgram`|2.6.0| | | | |
 |`nvrtcGetCUBIN`|11.1| | | |`hiprtcGetBitcode`|5.3.0| | | | |
 |`nvrtcGetCUBINSize`|11.1| | | |`hiprtcGetBitcodeSize`|5.3.0| | | | |
