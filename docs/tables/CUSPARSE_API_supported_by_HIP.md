@@ -419,7 +419,7 @@
 |`cusparseScsrsm_solve`| |10.2| |11.0| | | | | | |
 |`cusparseSgemmi`|8.0|11.0| |12.0|`hipsparseSgemmi`|3.7.0| | | | |
 |`cusparseXbsrsm2_zeroPivot`| |12.2| | |`hipsparseXbsrsm2_zeroPivot`|4.5.0| | | | |
-|`cusparseXcsrsm2_zeroPivot`|10.0|11.3| |12.0|`hipsparseXcsrsm2_zeroPivot`|3.1.0| | | | |
+|`cusparseXcsrsm2_zeroPivot`|9.2|11.3| |12.0|`hipsparseXcsrsm2_zeroPivot`|3.1.0| | | | |
 |`cusparseZbsrmm`| | | | |`hipsparseZbsrmm`|3.7.0| | | | |
 |`cusparseZbsrsm2_analysis`| |12.2| | |`hipsparseZbsrsm2_analysis`|4.5.0| | | | |
 |`cusparseZbsrsm2_bufferSize`| |12.2| | |`hipsparseZbsrsm2_bufferSize`|4.5.0| | | | |

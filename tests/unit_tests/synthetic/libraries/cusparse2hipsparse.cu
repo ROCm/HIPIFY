@@ -138,6 +138,7 @@ int main() {
   int innz = 0;
   int lda = 0;
   int ldb = 0;
+  int ldc = 0;
   int ldx = 0;
   int blockDim = 0;
   int csrSortedRowPtr = 0;
@@ -270,8 +271,12 @@ int main() {
   float fbscVal = 0.f;
   double dA = 0.f;
   double dB = 0.f;
+  double dBeta = 0.f;
+  double dC = 0.f;
   float fA = 0.f;
   float fB = 0.f;
+  float fBeta = 0.f;
+  float fC = 0.f;
   int algo = 0;
   double dds = 0.f;
   double ddl = 0.f;
@@ -295,11 +300,11 @@ int main() {
   bsric02Info_t bsric02_info;
   bsrsm2Info_t bsrsm2_info;
 
-  // CHECK: hipDoubleComplex dcomplex, dcomplexA, dcomplexB, dcomplexX, dComplexbsrSortedValA, dComplexbsrSortedValC, dComplexcsrSortedValA, dComplexcsrSortedValB, dComplexcsrSortedValC, dcomplextol, dComplexbsrSortedVal, dComplexbscVal, dComplexcscSortedVal, dcomplexds, dcomplexdl, dcomplexd, dcomplexdu, dcomplexdw, dcomplexx, dcomplex_boost_val;
-  cuDoubleComplex dcomplex, dcomplexA, dcomplexB, dcomplexX, dComplexbsrSortedValA, dComplexbsrSortedValC, dComplexcsrSortedValA, dComplexcsrSortedValB, dComplexcsrSortedValC, dcomplextol, dComplexbsrSortedVal, dComplexbscVal, dComplexcscSortedVal, dcomplexds, dcomplexdl, dcomplexd, dcomplexdu, dcomplexdw, dcomplexx, dcomplex_boost_val;
+  // CHECK: hipDoubleComplex dcomplex, dcomplexA, dcomplexB, dcomplexBeta, dcomplexC, dcomplexX, dComplexbsrSortedValA, dComplexbsrSortedValC, dComplexcsrSortedValA, dComplexcsrSortedValB, dComplexcsrSortedValC, dcomplextol, dComplexbsrSortedVal, dComplexbscVal, dComplexcscSortedVal, dcomplexds, dcomplexdl, dcomplexd, dcomplexdu, dcomplexdw, dcomplexx, dcomplex_boost_val;
+  cuDoubleComplex dcomplex, dcomplexA, dcomplexB, dcomplexBeta, dcomplexC, dcomplexX, dComplexbsrSortedValA, dComplexbsrSortedValC, dComplexcsrSortedValA, dComplexcsrSortedValB, dComplexcsrSortedValC, dcomplextol, dComplexbsrSortedVal, dComplexbscVal, dComplexcscSortedVal, dcomplexds, dcomplexdl, dcomplexd, dcomplexdu, dcomplexdw, dcomplexx, dcomplex_boost_val;
 
-  // CHECK: hipComplex complex, complexA, complexB, complexX, complexbsrValA, complexbsrSortedValC, complexcsrSortedValA, complexcsrSortedValB, complexcsrSortedValC, complextol, complexbsrSortedVal, complexbscVal, complexcscSortedVal, complexds, complexdl, complexd, complexdu, complexdw, complexx, complex_boost_val;
-  cuComplex complex, complexA, complexB, complexX, complexbsrValA, complexbsrSortedValC, complexcsrSortedValA, complexcsrSortedValB, complexcsrSortedValC, complextol, complexbsrSortedVal, complexbscVal, complexcscSortedVal, complexds, complexdl, complexd, complexdu, complexdw, complexx, complex_boost_val;
+  // CHECK: hipComplex complex, complexA, complexB, complexBeta, complexC, complexX, complexbsrValA, complexbsrSortedValC, complexcsrSortedValA, complexcsrSortedValB, complexcsrSortedValC, complextol, complexbsrSortedVal, complexbscVal, complexcscSortedVal, complexds, complexdl, complexd, complexdu, complexdw, complexx, complex_boost_val;
+  cuComplex complex, complexA, complexB, complexBeta, complexC, complexX, complexbsrValA, complexbsrSortedValC, complexcsrSortedValA, complexcsrSortedValB, complexcsrSortedValC, complextol, complexbsrSortedVal, complexbscVal, complexcscSortedVal, complexds, complexdl, complexd, complexdu, complexdw, complexx, complex_boost_val;
 
   // CHECK: hipsparseOperation_t opA, opB, opX;
   cusparseOperation_t opA, opB, opX;
@@ -1473,23 +1478,28 @@ int main() {
 
   // CUDA: CUSPARSE_DEPRECATED(cusparseSpSM) cusparseStatus_t CUSPARSEAPI cusparseZcsrsm2_bufferSizeExt(cusparseHandle_t handle, int algo, cusparseOperation_t transA, cusparseOperation_t transB, int m, int nrhs, int nnz, const cuDoubleComplex* alpha, const cusparseMatDescr_t descrA, const cuDoubleComplex* csrSortedValA, const int* csrSortedRowPtrA, const int* csrSortedColIndA, const cuDoubleComplex* B, int ldb, csrsm2Info_t info, cusparseSolvePolicy_t policy, size_t* pBufferSize);
   // HIP: DEPRECATED_CUDA_11000("The routine will be removed in CUDA 12") HIPSPARSE_EXPORT hipsparseStatus_t hipsparseZcsrsm2_bufferSizeExt(hipsparseHandle_t handle, int algo, hipsparseOperation_t transA, hipsparseOperation_t transB, int m, int nrhs, int nnz, const hipDoubleComplex* alpha, const hipsparseMatDescr_t descrA, const hipDoubleComplex* csrSortedValA, const int* csrSortedRowPtrA, const int* csrSortedColIndA, const hipDoubleComplex* B, int ldb, csrsm2Info_t info, hipsparseSolvePolicy_t policy, size_t* pBufferSize);
-  // CHECK: status_t = hipsparseZcsrsm2_bufferSizeExt(handle_t, algo, opA, opB, m, nrhs, innz, &dcomplexA, matDescr_A, &dComplexcsrSortedValA, &csrRowPtrA, &csrColIndA, &dcomplexB, ldb, csrsm2_info, solvePolicy_t, pBuffer);
-  status_t = cusparseZcsrsm2_bufferSizeExt(handle_t, algo, opA, opB, m, nrhs, innz, &dcomplexA, matDescr_A, &dComplexcsrSortedValA, &csrRowPtrA, &csrColIndA, &dcomplexB, ldb, csrsm2_info, solvePolicy_t, pBuffer);
+  // CHECK: status_t = hipsparseZcsrsm2_bufferSizeExt(handle_t, algo, opA, opB, m, nrhs, innz, &dcomplexA, matDescr_A, &dComplexcsrSortedValA, &csrRowPtrA, &csrColIndA, &dcomplexB, ldb, csrsm2_info, solvePolicy_t, &bufferSize);
+  status_t = cusparseZcsrsm2_bufferSizeExt(handle_t, algo, opA, opB, m, nrhs, innz, &dcomplexA, matDescr_A, &dComplexcsrSortedValA, &csrRowPtrA, &csrColIndA, &dcomplexB, ldb, csrsm2_info, solvePolicy_t, &bufferSize);
 
   // CUDA: CUSPARSE_DEPRECATED(cusparseSpSM) cusparseStatus_t CUSPARSEAPI cusparseCcsrsm2_bufferSizeExt(cusparseHandle_t handle, int algo, cusparseOperation_t transA, cusparseOperation_t transB, int m, int nrhs, int nnz, const cuComplex* alpha, const cusparseMatDescr_t descrA, const cuComplex* csrSortedValA, const int* csrSortedRowPtrA, const int* csrSortedColIndA, const cuComplex* B, int ldb, csrsm2Info_t info, cusparseSolvePolicy_t policy, size_t* pBufferSize);
   // HIP: DEPRECATED_CUDA_11000("The routine will be removed in CUDA 12") HIPSPARSE_EXPORT hipsparseStatus_t hipsparseCcsrsm2_bufferSizeExt(hipsparseHandle_t handle, int algo, hipsparseOperation_t transA, hipsparseOperation_t transB, int m, int nrhs, int nnz, const hipComplex* alpha, const hipsparseMatDescr_t descrA, const hipComplex* csrSortedValA, const int* csrSortedRowPtrA, const int* csrSortedColIndA, const hipComplex* B, int ldb, csrsm2Info_t info, hipsparseSolvePolicy_t policy, size_t* pBufferSize);
-  // CHECK: status_t = hipsparseCcsrsm2_bufferSizeExt(handle_t, algo, opA, opB, m, nrhs, innz, &complexA, matDescr_A, &complex, &csrRowPtrA, &csrColIndA, &complexB, ldb, csrsm2_info, solvePolicy_t, pBuffer);
-  status_t = cusparseCcsrsm2_bufferSizeExt(handle_t, algo, opA, opB, m, nrhs, innz, &complexA, matDescr_A, &complex, &csrRowPtrA, &csrColIndA, &complexB, ldb, csrsm2_info, solvePolicy_t, pBuffer);
+  // CHECK: status_t = hipsparseCcsrsm2_bufferSizeExt(handle_t, algo, opA, opB, m, nrhs, innz, &complexA, matDescr_A, &complex, &csrRowPtrA, &csrColIndA, &complexB, ldb, csrsm2_info, solvePolicy_t, &bufferSize);
+  status_t = cusparseCcsrsm2_bufferSizeExt(handle_t, algo, opA, opB, m, nrhs, innz, &complexA, matDescr_A, &complex, &csrRowPtrA, &csrColIndA, &complexB, ldb, csrsm2_info, solvePolicy_t, &bufferSize);
 
   // CUDA: CUSPARSE_DEPRECATED(cusparseSpSM) cusparseStatus_t CUSPARSEAPI cusparseDcsrsm2_bufferSizeExt(cusparseHandle_t handle, int algo, cusparseOperation_t transA, cusparseOperation_t transB, int m, int nrhs, int nnz, const double* alpha, const cusparseMatDescr_t descrA, const double* csrSortedValA, const int* csrSortedRowPtrA, const int* csrSortedColIndA, const double* B, int ldb, csrsm2Info_t info, cusparseSolvePolicy_t policy, size_t* pBufferSize);
   // HIP: DEPRECATED_CUDA_11000("The routine will be removed in CUDA 12") HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDcsrsm2_bufferSizeExt(hipsparseHandle_t handle, int algo, hipsparseOperation_t transA, hipsparseOperation_t transB, int m, int nrhs, int nnz, const double* alpha, const hipsparseMatDescr_t descrA, const double* csrSortedValA, const int* csrSortedRowPtrA, const int* csrSortedColIndA, const double* B, int ldb, csrsm2Info_t info, hipsparseSolvePolicy_t policy,  size_t* pBufferSize);
-  // CHECK: status_t = hipsparseDcsrsm2_bufferSizeExt(handle_t, algo, opA, opB, m, nrhs, innz, &dA, matDescr_A, &dcsrSortedVal, &csrRowPtrA, &csrColIndA, &dB, ldb, csrsm2_info, solvePolicy_t, pBuffer);
-  status_t = cusparseDcsrsm2_bufferSizeExt(handle_t, algo, opA, opB, m, nrhs, innz, &dA, matDescr_A, &dcsrSortedVal, &csrRowPtrA, &csrColIndA, &dB, ldb, csrsm2_info, solvePolicy_t, pBuffer);
+  // CHECK: status_t = hipsparseDcsrsm2_bufferSizeExt(handle_t, algo, opA, opB, m, nrhs, innz, &dA, matDescr_A, &dcsrSortedVal, &csrRowPtrA, &csrColIndA, &dB, ldb, csrsm2_info, solvePolicy_t, &bufferSize);
+  status_t = cusparseDcsrsm2_bufferSizeExt(handle_t, algo, opA, opB, m, nrhs, innz, &dA, matDescr_A, &dcsrSortedVal, &csrRowPtrA, &csrColIndA, &dB, ldb, csrsm2_info, solvePolicy_t, &bufferSize);
 
   // CUDA: CUSPARSE_DEPRECATED(cusparseSpSM) cusparseStatus_t CUSPARSEAPI cusparseScsrsm2_bufferSizeExt(cusparseHandle_t handle, int algo, cusparseOperation_t transA, cusparseOperation_t transB, int m, int nrhs, int nnz, const float* alpha, const cusparseMatDescr_t descrA, const float* csrSortedValA, const int* csrSortedRowPtrA, const int* csrSortedColIndA, const float* B, int ldb, csrsm2Info_t info, cusparseSolvePolicy_t policy, size_t* pBufferSize);
   // HIP: DEPRECATED_CUDA_11000("The routine will be removed in CUDA 12") HIPSPARSE_EXPORT hipsparseStatus_t hipsparseScsrsm2_bufferSizeExt(hipsparseHandle_t handle, int algo, hipsparseOperation_t transA, hipsparseOperation_t transB, int m, int nrhs, int nnz, const float* alpha, const hipsparseMatDescr_t descrA, const float* csrSortedValA, const int* csrSortedRowPtrA, const int* csrSortedColIndA, const float* B, int ldb, csrsm2Info_t info, hipsparseSolvePolicy_t policy, size_t* pBufferSize);
-  // CHECK: status_t = hipsparseScsrsm2_bufferSizeExt(handle_t, algo, opA, opB, m, nrhs, innz, &fA, matDescr_A, &csrSortedVal, &csrRowPtrA, &csrColIndA, &fB, ldb, csrsm2_info, solvePolicy_t, pBuffer);
-  status_t = cusparseScsrsm2_bufferSizeExt(handle_t, algo, opA, opB, m, nrhs, innz, &fA, matDescr_A, &csrSortedVal, &csrRowPtrA, &csrColIndA, &fB, ldb, csrsm2_info, solvePolicy_t, pBuffer);
+  // CHECK: status_t = hipsparseScsrsm2_bufferSizeExt(handle_t, algo, opA, opB, m, nrhs, innz, &fA, matDescr_A, &csrSortedVal, &csrRowPtrA, &csrColIndA, &fB, ldb, csrsm2_info, solvePolicy_t, &bufferSize);
+  status_t = cusparseScsrsm2_bufferSizeExt(handle_t, algo, opA, opB, m, nrhs, innz, &fA, matDescr_A, &csrSortedVal, &csrRowPtrA, &csrColIndA, &fB, ldb, csrsm2_info, solvePolicy_t, &bufferSize);
+
+  // CUDA: CUSPARSE_DEPRECATED(cusparseSpSM) cusparseStatus_t CUSPARSEAPI cusparseXcsrsm2_zeroPivot(cusparseHandle_t handle, csrsm2Info_t info, int* position);
+  // HIP: DEPRECATED_CUDA_11000("The routine will be removed in CUDA 12") HIPSPARSE_EXPORT hipsparseStatus_t hipsparseXcsrsm2_zeroPivot(hipsparseHandle_t handle, csrsm2Info_t info, int* position);
+  // CHECK: status_t = hipsparseXcsrsm2_zeroPivot(handle_t, csrsm2_info, &iposition);
+  status_t = cusparseXcsrsm2_zeroPivot(handle_t, csrsm2_info, &iposition);
 #endif
 #endif
 
@@ -1919,6 +1929,26 @@ int main() {
   // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseXcsrgeamNnz(hipsparseHandle_t handle, int m, int n, const hipsparseMatDescr_t descrA, int nnzA, const int* csrRowPtrA, const int* csrColIndA, const hipsparseMatDescr_t descrB, int nnzB, const int* csrRowPtrB, const int* csrColIndB, const hipsparseMatDescr_t descrC, int* csrRowPtrC, int* nnzTotalDevHostPtr);
   // CHECK: status_t = hipsparseXcsrgeamNnz(handle_t, m, n, matDescr_A, nnza, &csrRowPtrA, &csrColIndA, matDescr_B, nnzb, &csrRowPtrB, &csrColIndB, matDescr_C, &csrRowPtrC, &nnzTotalDevHostPtr);
   status_t = cusparseXcsrgeamNnz(handle_t, m, n, matDescr_A, nnza, &csrRowPtrA, &csrColIndA, matDescr_B, nnzb, &csrRowPtrB, &csrColIndB, matDescr_C, &csrRowPtrC, &nnzTotalDevHostPtr);
+
+  // CUDA: CUSPARSE_DEPRECATED_HINT(cusparseSpMM) cusparseStatus_t CUSPARSEAPI cusparseZcsrmm(cusparseHandle_t handle, cusparseOperation_t transA, int m, int n, int k, int nnz, const cuDoubleComplex* alpha, const cusparseMatDescr_t descrA, const cuDoubleComplex* csrSortedValA, const int* csrSortedRowPtrA, const int* csrSortedColIndA, const cuDoubleComplex* B, int ldb, const cuDoubleComplex* beta, cuDoubleComplex* C, int ldc);
+  // HIP: DEPRECATED_CUDA_10000("The routine will be removed in CUDA 11") HIPSPARSE_EXPORT hipsparseStatus_t hipsparseZcsrmm(hipsparseHandle_t handle, hipsparseOperation_t transA, int m, int n, int k, int nnz, const hipDoubleComplex* alpha, const hipsparseMatDescr_t descrA, const hipDoubleComplex* csrSortedValA, const int* csrSortedRowPtrA, const int* csrSortedColIndA, const hipDoubleComplex* B, int ldb, const hipDoubleComplex* beta, hipDoubleComplex* C, int ldc);
+  // CHECK: status_t = hipsparseZcsrmm(handle_t, opA, m, n, k, innz, &dcomplexA, matDescr_A, &dComplexcsrSortedValA, &csrRowPtrA, &csrColIndA, &dcomplexB, ldb, &dcomplexBeta, &dcomplexC, ldc);
+  status_t = cusparseZcsrmm(handle_t, opA, m, n, k, innz, &dcomplexA, matDescr_A, &dComplexcsrSortedValA, &csrRowPtrA, &csrColIndA, &dcomplexB, ldb, &dcomplexBeta, &dcomplexC, ldc);
+
+  // CUDA: CUSPARSE_DEPRECATED_HINT(cusparseSpMM) cusparseStatus_t CUSPARSEAPI cusparseCcsrmm(cusparseHandle_t handle, cusparseOperation_t transA, int m, int n, int k, int nnz, const cuComplex* alpha, const cusparseMatDescr_t descrA, const cuComplex* csrSortedValA, const int* csrSortedRowPtrA, const int* csrSortedColIndA, const cuComplex* B, int ldb, const cuComplex* beta, cuComplex* C, int ldc);
+  // HIP: DEPRECATED_CUDA_10000("The routine will be removed in CUDA 11") HIPSPARSE_EXPORT hipsparseStatus_t hipsparseCcsrmm(hipsparseHandle_t handle, hipsparseOperation_t transA, int m, int n, int k, int nnz, const hipComplex* alpha, const hipsparseMatDescr_t descrA, const hipComplex* csrSortedValA, const int* csrSortedRowPtrA, const int* csrSortedColIndA, const hipComplex* B, int ldb, const hipComplex* beta, hipComplex* C, int ldc);
+  // CHECK: status_t = hipsparseCcsrmm(handle_t, opA, m, n, k, innz, &complexA, matDescr_A, &complexcsrSortedValA, &csrRowPtrA, &csrColIndA, &complexB, ldb, &complexBeta, &complexC, ldc);
+  status_t = cusparseCcsrmm(handle_t, opA, m, n, k, innz, &complexA, matDescr_A, &complexcsrSortedValA, &csrRowPtrA, &csrColIndA, &complexB, ldb, &complexBeta, &complexC, ldc);
+
+  // CUDA: CUSPARSE_DEPRECATED_HINT(cusparseSpMM) cusparseStatus_t CUSPARSEAPI cusparseDcsrmm(cusparseHandle_t handle, cusparseOperation_t transA, int m, int n, int k, int nnz, const double* alpha, const cusparseMatDescr_t descrA, const double* csrSortedValA, const int* csrSortedRowPtrA, const int* csrSortedColIndA, const double* B, int ldb, const double* beta, double* C, int ldc);
+  // HIP: DEPRECATED_CUDA_10000("The routine will be removed in CUDA 11") HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDcsrmm(hipsparseHandle_t handle, hipsparseOperation_t transA, int m, int n, int k, int nnz, const double* alpha, const hipsparseMatDescr_t descrA, const double* csrSortedValA, const int* csrSortedRowPtrA, const int* csrSortedColIndA, const double* B, int ldb, const double* beta, double* C, int ldc);
+  // CHECK: status_t = hipsparseDcsrmm(handle_t, opA, m, n, k, innz, &dA, matDescr_A, &dcsrSortedValA, &csrRowPtrA, &csrColIndA, &dB, ldb, &dBeta, &dC, ldc);
+  status_t = cusparseDcsrmm(handle_t, opA, m, n, k, innz, &dA, matDescr_A, &dcsrSortedValA, &csrRowPtrA, &csrColIndA, &dB, ldb, &dBeta, &dC, ldc);
+
+  // CUDA: CUSPARSE_DEPRECATED_HINT(cusparseSpMM) cusparseStatus_t CUSPARSEAPI cusparseScsrmm(cusparseHandle_t handle, cusparseOperation_t transA, int m, int n, int k, int nnz, const float* alpha, const cusparseMatDescr_t descrA, const float* csrSortedValA, const int* csrSortedRowPtrA, const int* csrSortedColIndA, const float* B, int ldb, const float* beta, float* C, int ldc);
+  // HIP: DEPRECATED_CUDA_10000("The routine will be removed in CUDA 11") HIPSPARSE_EXPORT hipsparseStatus_t hipsparseScsrmm(hipsparseHandle_t handle, hipsparseOperation_t transA, int m, int n, int k, int nnz, const float* alpha, const hipsparseMatDescr_t descrA, const float* csrSortedValA, const int* csrSortedRowPtrA, const int* csrSortedColIndA, const float* B, int ldb, const float* beta, float* C, int ldc);
+  // CHECK: status_t = hipsparseScsrmm(handle_t, opA, m, n, k, innz, &fA, matDescr_A, &csrSortedValA, &csrRowPtrA, &csrColIndA, &fB, ldb, &fBeta, &fC, ldc);
+  status_t = cusparseScsrmm(handle_t, opA, m, n, k, innz, &fA, matDescr_A, &csrSortedValA, &csrRowPtrA, &csrColIndA, &fB, ldb, &fBeta, &fC, ldc);
 #endif
 
 #if CUDA_VERSION >= 11000
