@@ -1089,6 +1089,7 @@ my %experimental_funcs = (
     "cusolverDnDgetrf" => "6.1.0",
     "cusolverDnDestroy" => "6.1.0",
     "cusolverDnCreate" => "6.1.0",
+    "CUSOLVER_STATUS_ZERO_PIVOT" => "6.1.0",
     "CUSOLVER_STATUS_SUCCESS" => "6.1.0",
     "CUSOLVER_STATUS_NOT_SUPPORTED" => "6.1.0",
     "CUSOLVER_STATUS_NOT_INITIALIZED" => "6.1.0",
@@ -4708,11 +4709,13 @@ sub simpleSubstitutions {
     subst("cusparseSpVecDescr_t", "hipsparseSpVecDescr_t", "type");
     subst("cusparseSparseToDenseAlg_t", "hipsparseSparseToDenseAlg_t", "type");
     subst("cusparseStatus_t", "hipsparseStatus_t", "type");
+    subst("gesvdjInfo_t", "hipsolverGesvdjInfo_t", "type");
     subst("nvrtcProgram", "hiprtcProgram", "type");
     subst("nvrtcResult", "hiprtcResult", "type");
     subst("pruneInfo", "pruneInfo", "type");
     subst("pruneInfo_t", "pruneInfo_t", "type");
     subst("surfaceReference", "surfaceReference", "type");
+    subst("syevjInfo_t", "hipsolverSyevjInfo_t", "type");
     subst("texture", "texture", "type");
     subst("textureReference", "textureReference", "type");
     subst("CUBLAS_ATOMICS_ALLOWED", "HIPBLAS_ATOMICS_ALLOWED", "numeric_literal");
@@ -5014,6 +5017,9 @@ sub simpleSubstitutions {
     subst("CURAND_STATUS_SUCCESS", "HIPRAND_STATUS_SUCCESS", "numeric_literal");
     subst("CURAND_STATUS_TYPE_ERROR", "HIPRAND_STATUS_TYPE_ERROR", "numeric_literal");
     subst("CURAND_STATUS_VERSION_MISMATCH", "HIPRAND_STATUS_VERSION_MISMATCH", "numeric_literal");
+    subst("CUSOLVER_STATUS_IRS_INTERNAL_ERROR", "HIPSOLVER_STATUS_INTERNAL_ERROR", "numeric_literal");
+    subst("CUSOLVER_STATUS_IRS_NOT_SUPPORTED", "HIPSOLVER_STATUS_NOT_SUPPORTED", "numeric_literal");
+    subst("CUSOLVER_STATUS_IRS_PARAMS_INVALID", "HIPSOLVER_STATUS_INVALID_VALUE", "numeric_literal");
     subst("CUSPARSE_ACTION_NUMERIC", "HIPSPARSE_ACTION_NUMERIC", "numeric_literal");
     subst("CUSPARSE_ACTION_SYMBOLIC", "HIPSPARSE_ACTION_SYMBOLIC", "numeric_literal");
     subst("CUSPARSE_COOMM_ALG1", "HIPSPARSE_COOMM_ALG1", "numeric_literal");
@@ -6894,6 +6900,7 @@ sub warnUnsupportedFunctions {
     my $line_num = shift;
     my $k = 0;
     foreach $func (
+        "syevjInfo",
         "nvrtcGetSupportedArchs",
         "nvrtcGetOptiXIRSize",
         "nvrtcGetOptiXIR",
@@ -6906,6 +6913,7 @@ sub warnUnsupportedFunctions {
         "memoryBarrier",
         "libraryPropertyType_t",
         "libraryPropertyType",
+        "gesvdjInfo",
         "cusparseZhybsv_solve",
         "cusparseZhybsv_analysis",
         "cusparseZhyb2dense",
@@ -7065,8 +7073,17 @@ sub warnUnsupportedFunctions {
         "cusolverDnXgetrf_bufferSize",
         "cusolverDnXgetrf",
         "cusolverDnSetAdvOptions",
+        "cusolverDnParams_t",
+        "cusolverDnParams",
+        "cusolverDnIRSParams_t",
+        "cusolverDnIRSParams",
+        "cusolverDnIRSInfos_t",
+        "cusolverDnIRSInfos",
+        "cusolverDnFunction_t",
         "cusolverDnCreateParams",
+        "cusolverDnContext",
         "cusolverDirectMode_t",
+        "cusolverDeterministicMode_t",
         "cusolverAlgMode_t",
         "curand_mtgp32_specific",
         "curand_mtgp32_single_specific",
@@ -8671,12 +8688,9 @@ sub warnUnsupportedFunctions {
         "CUSOLVER_STATUS_IRS_PARAMS_INVALID_REFINE",
         "CUSOLVER_STATUS_IRS_PARAMS_INVALID_PREC",
         "CUSOLVER_STATUS_IRS_PARAMS_INVALID_MAXITER",
-        "CUSOLVER_STATUS_IRS_PARAMS_INVALID",
         "CUSOLVER_STATUS_IRS_OUT_OF_RANGE",
         "CUSOLVER_STATUS_IRS_NRHS_NOT_SUPPORTED_FOR_REFINE_GMRES",
-        "CUSOLVER_STATUS_IRS_NOT_SUPPORTED",
         "CUSOLVER_STATUS_IRS_MATRIX_SINGULAR",
-        "CUSOLVER_STATUS_IRS_INTERNAL_ERROR",
         "CUSOLVER_STATUS_IRS_INFOS_NOT_INITIALIZED",
         "CUSOLVER_STATUS_IRS_INFOS_NOT_DESTROYED",
         "CUSOLVER_STATUS_INVALID_WORKSPACE",
@@ -8703,6 +8717,7 @@ sub warnUnsupportedFunctions {
         "CUSOLVER_IRS_REFINE_CLASSICAL",
         "CUSOLVER_INF_NORM",
         "CUSOLVER_FRO_NORM",
+        "CUSOLVER_DETERMINISTIC_RESULTS",
         "CUSOLVER_C_TF32",
         "CUSOLVER_C_AP",
         "CUSOLVER_C_8U",
@@ -8711,9 +8726,12 @@ sub warnUnsupportedFunctions {
         "CUSOLVER_C_32F",
         "CUSOLVER_C_16F",
         "CUSOLVER_C_16BF",
+        "CUSOLVER_ALLOW_NON_DETERMINISTIC_RESULTS",
         "CUSOLVER_ALG_2",
         "CUSOLVER_ALG_1",
         "CUSOLVER_ALG_0",
+        "CUSOLVERDN_POTRF",
+        "CUSOLVERDN_GETRF",
         "CURAND_REJECTION",
         "CURAND_POISSON",
         "CURAND_ORDERING_QUASI_DEFAULT",

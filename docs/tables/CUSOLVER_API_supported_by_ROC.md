@@ -8,9 +8,12 @@
 |`CUBLAS_DIRECT_FORWARD`|11.0| | | | | | | | | |
 |`CUBLAS_STOREV_COLUMNWISE`|11.0| | | | | | | | | |
 |`CUBLAS_STOREV_ROWWISE`|11.0| | | | | | | | | |
+|`CUSOLVERDN_GETRF`|11.0| | | | | | | | | |
+|`CUSOLVERDN_POTRF`|11.5| | | | | | | | | |
 |`CUSOLVER_ALG_0`|11.0| | | | | | | | | |
 |`CUSOLVER_ALG_1`|11.0| | | | | | | | | |
 |`CUSOLVER_ALG_2`|11.5| | | | | | | | | |
+|`CUSOLVER_ALLOW_NON_DETERMINISTIC_RESULTS`|12.2| | | | | | | | | |
 |`CUSOLVER_C_16BF`|11.0| | | | | | | | | |
 |`CUSOLVER_C_16F`|11.0| | | | | | | | | |
 |`CUSOLVER_C_32F`|11.0| | | | | | | | | |
@@ -19,6 +22,7 @@
 |`CUSOLVER_C_8U`|11.0| | | | | | | | | |
 |`CUSOLVER_C_AP`|11.0| | | | | | | | | |
 |`CUSOLVER_C_TF32`|11.0| | | | | | | | | |
+|`CUSOLVER_DETERMINISTIC_RESULTS`|12.2| | | | | | | | | |
 |`CUSOLVER_EIG_MODE_NOVECTOR`|8.0| | | |`rocblas_evect_none`|4.1.0| | | |6.1.0|
 |`CUSOLVER_EIG_MODE_VECTOR`|8.0| | | |`rocblas_evect_original`|4.1.0| | | |6.1.0|
 |`CUSOLVER_EIG_RANGE_ALL`|10.1| | | |`rocblas_erange_all`|5.2.0| | | |6.1.0|
@@ -75,8 +79,17 @@
 |`CUSOLVER_STATUS_SUCCESS`| | | | |`rocblas_status_success`|3.0.0| | | |6.1.0|
 |`CUSOLVER_STATUS_ZERO_PIVOT`| | | | |`rocblas_status_not_implemented`|1.5.0| | | |6.1.0|
 |`cusolverAlgMode_t`|11.0| | | | | | | | | |
+|`cusolverDeterministicMode_t`|12.2| | | | | | | | | |
 |`cusolverDirectMode_t`|11.0| | | | | | | | | |
+|`cusolverDnContext`| | | | | | | | | | |
+|`cusolverDnFunction_t`|11.0| | | | | | | | | |
 |`cusolverDnHandle_t`| | | | |`rocblas_handle`|1.5.0| | | |6.1.0|
+|`cusolverDnIRSInfos`|10.2| | | | | | | | | |
+|`cusolverDnIRSInfos_t`|10.2| | | | | | | | | |
+|`cusolverDnIRSParams`|10.2| | | | | | | | | |
+|`cusolverDnIRSParams_t`|10.2| | | | | | | | | |
+|`cusolverDnParams`|11.0| | | | | | | | | |
+|`cusolverDnParams_t`|11.0| | | | | | | | | |
 |`cusolverEigMode_t`|8.0| | | |`rocblas_evect`|4.1.0| | | |6.1.0|
 |`cusolverEigRange_t`|10.1| | | |`rocblas_erange`|5.2.0| | | |6.1.0|
 |`cusolverEigType_t`|8.0| | | |`rocblas_eform`|4.2.0| | | |6.1.0|
@@ -85,6 +98,10 @@
 |`cusolverPrecType_t`|11.0| | | | | | | | | |
 |`cusolverStatus_t`| | | | |`rocblas_status`|3.0.0| | | |6.1.0|
 |`cusolverStorevMode_t`|11.0| | | | | | | | | |
+|`gesvdjInfo`|9.0| | | | | | | | | |
+|`gesvdjInfo_t`|9.0| | | | | | | | | |
+|`syevjInfo`|9.0| | | | | | | | | |
+|`syevjInfo_t`|9.0| | | | | | | | | |
 
 ## **2. CUSOLVER Function Reference**
 
