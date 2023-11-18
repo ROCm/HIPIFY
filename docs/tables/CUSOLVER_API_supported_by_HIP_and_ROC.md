@@ -113,7 +113,24 @@
 |`cusolverDnDgetrf`| | | | |`hipsolverDnDgetrf`|5.1.0| | | |6.1.0| | | | | | |
 |`cusolverDnDgetrf_bufferSize`| | | | |`hipsolverDnDgetrf_bufferSize`|5.1.0| | | |6.1.0| | | | | | |
 |`cusolverDnDgetrs`| | | | |`hipsolverDnDgetrs`|5.1.0| | | |6.1.0| | | | | | |
+|`cusolverDnGetDeterministicMode`|12.2| | | | | | | | | | | | | | | |
+|`cusolverDnGetStream`| | | | |`hipsolverGetStream`|4.5.0| | | |6.1.0|`rocblas_get_stream`| | | | | |
+|`cusolverDnIRSParamsCreate`|10.2| | | | | | | | | | | | | | | |
+|`cusolverDnIRSParamsDestroy`|10.2| | | | | | | | | | | | | | | |
+|`cusolverDnIRSParamsDisableFallback`|11.0| | | | | | | | | | | | | | | |
+|`cusolverDnIRSParamsEnableFallback`|11.0| | | | | | | | | | | | | | | |
+|`cusolverDnIRSParamsGetMaxIters`|10.2| | | | | | | | | | | | | | | |
+|`cusolverDnIRSParamsSetMaxIters`|10.2| | | | | | | | | | | | | | | |
+|`cusolverDnIRSParamsSetMaxItersInner`|10.2| | | | | | | | | | | | | | | |
+|`cusolverDnIRSParamsSetRefinementSolver`|10.2| | | | | | | | | | | | | | | |
+|`cusolverDnIRSParamsSetSolverLowestPrecision`|10.2| | | | | | | | | | | | | | | |
+|`cusolverDnIRSParamsSetSolverMainPrecision`|10.2| | | | | | | | | | | | | | | |
+|`cusolverDnIRSParamsSetSolverPrecisions`|10.2| | | | | | | | | | | | | | | |
+|`cusolverDnIRSParamsSetTol`|10.2| | | | | | | | | | | | | | | |
+|`cusolverDnIRSParamsSetTolInner`|10.2| | | | | | | | | | | | | | | |
 |`cusolverDnSetAdvOptions`|11.0| | | | | | | | | | | | | | | |
+|`cusolverDnSetDeterministicMode`|12.2| | | | | | | | | | | | | | | |
+|`cusolverDnSetStream`| | | | |`hipsolverSetStream`|4.5.0| | | |6.1.0|`rocblas_set_stream`| | | | | |
 |`cusolverDnSgetrf`| | | | |`hipsolverDnSgetrf`|5.1.0| | | |6.1.0| | | | | | |
 |`cusolverDnSgetrf_bufferSize`| | | | |`hipsolverDnSgetrf_bufferSize`|5.1.0| | | |6.1.0| | | | | | |
 |`cusolverDnSgetrs`| | | | |`hipsolverDnSgetrs`|5.1.0| | | |6.1.0| | | | | | |

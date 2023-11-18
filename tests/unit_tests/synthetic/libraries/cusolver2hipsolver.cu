@@ -53,6 +53,9 @@ int main() {
   // CHECK: hipblasOperation_t blasOperation;
   cublasOperation_t blasOperation;
 
+  // CHECK: hipStream_t stream_t;
+  cudaStream_t stream_t;
+
   // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnCreate(cusolverDnHandle_t *handle);
   // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnCreate(hipsolverHandle_t* handle);
   // CHECK: status = hipsolverDnCreate(&handle);
@@ -92,6 +95,16 @@ int main() {
   // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnSgetrs(hipsolverHandle_t handle, hipsolverOperation_t trans, int n, int nrhs, const float* A, int lda, const int* devIpiv, float* B, int ldb, int* devInfo);
   // CHECK: status = hipsolverDnSgetrs(handle, blasOperation, n, nrhs , &fA, lda, &devIpiv, &fB, ldb, &devInfo);
   status = cusolverDnSgetrs(handle, blasOperation, n, nrhs , &fA, lda, &devIpiv, &fB, ldb, &devInfo);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnSetStream(cusolverDnHandle_t handle, cudaStream_t streamId);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverSetStream(hipsolverHandle_t handle, hipStream_t streamId);
+  // CHECK: status = hipsolverSetStream(handle, stream_t);
+  status = cusolverDnSetStream(handle, stream_t);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnGetStream(cusolverDnHandle_t handle, cudaStream_t *streamId);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverGetStream(hipsolverHandle_t handle, hipStream_t* streamId);
+  // CHECK: status = hipsolverGetStream(handle, &stream_t);
+  status = cusolverDnGetStream(handle, &stream_t);
 
 #if CUDA_VERSION >= 8000
   // CHECK: hipsolverEigType_t eigType;
