@@ -12,6 +12,9 @@ int main() {
   // CHECK: rocblas_handle handle;
   cusolverDnHandle_t handle;
 
+  // CHECK: hipStream_t stream_t;
+  cudaStream_t stream_t;
+
   // CHECK: rocblas_status status;
   // CHECK-NEXT: rocblas_status STATUS_SUCCESS = rocblas_status_success;
   // CHECK-NEXT: rocblas_status STATUS_NOT_INITIALIZED = rocblas_status_invalid_handle;
@@ -44,6 +47,16 @@ int main() {
   // ROC: ROCBLAS_EXPORT rocblas_status rocblas_destroy_handle(rocblas_handle handle);
   // CHECK: status = rocblas_destroy_handle(handle);
   status = cusolverDnDestroy(handle);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnSetStream(cusolverDnHandle_t handle, cudaStream_t streamId);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_set_stream(rocblas_handle handle, hipStream_t stream);
+  // CHECK: status = rocblas_set_stream(handle, stream_t);
+  status = cusolverDnSetStream(handle, stream_t);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnGetStream(cusolverDnHandle_t handle, cudaStream_t *streamId);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_get_stream(rocblas_handle handle, hipStream_t* stream);
+  // CHECK: status = rocblas_get_stream(handle, &stream_t);
+  status = cusolverDnGetStream(handle, &stream_t);
 
 #if CUDA_VERSION >= 8000
   // CHECK: rocblas_eform eigType;

@@ -43,6 +43,23 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SOLVER_FUNCTION_MAP {
   {"cusolverDnXgetrs",                                    {"hipsolverDnXgetrs",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
   {"cusolverDnCreateParams",                              {"hipsolverDnCreateParams",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
   {"cusolverDnSetAdvOptions",                             {"hipsolverDnSetAdvOptions",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnSetStream",                                 {"hipsolverSetStream",                                   "rocblas_set_stream",                                             CONV_LIB_FUNC, API_SOLVER, 2, HIP_EXPERIMENTAL}},
+  {"cusolverDnGetStream",                                 {"hipsolverGetStream",                                   "rocblas_get_stream",                                             CONV_LIB_FUNC, API_SOLVER, 2, HIP_EXPERIMENTAL}},
+  {"cusolverDnSetDeterministicMode",                      {"hipsolverDnSetDeterministicMode",                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnGetDeterministicMode",                      {"hipsolverDnGetDeterministicMode",                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnIRSParamsCreate",                           {"hipsolverDnIRSParamsCreate",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnIRSParamsDestroy",                          {"hipsolverDnIRSParamsDestroy",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnIRSParamsSetRefinementSolver",              {"hipsolverDnIRSParamsSetRefinementSolver",              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnIRSParamsSetSolverMainPrecision",           {"hipsolverDnIRSParamsSetSolverMainPrecision",           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnIRSParamsSetSolverLowestPrecision",         {"hipsolverDnIRSParamsSetSolverLowestPrecision",         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnIRSParamsSetSolverPrecisions",              {"hipsolverDnIRSParamsSetSolverPrecisions",              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnIRSParamsSetTol",                           {"hipsolverDnIRSParamsSetTol",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnIRSParamsSetTolInner",                      {"hipsolverDnIRSParamsSetTolInner",                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnIRSParamsSetMaxIters",                      {"hipsolverDnIRSParamsSetMaxIters",                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnIRSParamsSetMaxItersInner",                 {"hipsolverDnIRSParamsSetMaxItersInner",                 "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnIRSParamsGetMaxIters",                      {"hipsolverDnIRSParamsGetMaxIters",                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnIRSParamsEnableFallback",                   {"hipsolverDnIRSParamsEnableFallback",                   "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnIRSParamsDisableFallback",                  {"hipsolverDnIRSParamsDisableFallback",                  "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_SOLVER_FUNCTION_VER_MAP {
@@ -51,6 +68,21 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SOLVER_FUNCTION_VER_MAP {
   {"cusolverDnXgetrf",                                    {CUDA_111,  CUDA_0, CUDA_0}},
   {"cusolverDnXgetrf_bufferSize",                         {CUDA_111,  CUDA_0, CUDA_0}},
   {"cusolverDnXgetrs",                                    {CUDA_111,  CUDA_0, CUDA_0}},
+  {"cusolverDnSetDeterministicMode",                      {CUDA_122,  CUDA_0, CUDA_0}},
+  {"cusolverDnGetDeterministicMode",                      {CUDA_122,  CUDA_0, CUDA_0}},
+  {"cusolverDnIRSParamsCreate",                           {CUDA_102,  CUDA_0, CUDA_0}},
+  {"cusolverDnIRSParamsDestroy",                          {CUDA_102,  CUDA_0, CUDA_0}},
+  {"cusolverDnIRSParamsSetRefinementSolver",              {CUDA_102,  CUDA_0, CUDA_0}},
+  {"cusolverDnIRSParamsSetSolverMainPrecision",           {CUDA_102,  CUDA_0, CUDA_0}},
+  {"cusolverDnIRSParamsSetSolverLowestPrecision",         {CUDA_102,  CUDA_0, CUDA_0}},
+  {"cusolverDnIRSParamsSetSolverPrecisions",              {CUDA_102,  CUDA_0, CUDA_0}},
+  {"cusolverDnIRSParamsSetTol",                           {CUDA_102,  CUDA_0, CUDA_0}},
+  {"cusolverDnIRSParamsSetTolInner",                      {CUDA_102,  CUDA_0, CUDA_0}},
+  {"cusolverDnIRSParamsSetMaxIters",                      {CUDA_102,  CUDA_0, CUDA_0}},
+  {"cusolverDnIRSParamsSetMaxItersInner",                 {CUDA_102,  CUDA_0, CUDA_0}},
+  {"cusolverDnIRSParamsGetMaxIters",                      {CUDA_102,  CUDA_0, CUDA_0}},
+  {"cusolverDnIRSParamsEnableFallback",                   {CUDA_110,  CUDA_0, CUDA_0}},
+  {"cusolverDnIRSParamsDisableFallback",                  {CUDA_110,  CUDA_0, CUDA_0}},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_SOLVER_FUNCTION_VER_MAP {
@@ -62,6 +94,8 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SOLVER_FUNCTION_VER_MAP {
   {"hipsolverDnSgetrf_bufferSize",                        {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipsolverDnDgetrs",                                   {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipsolverDnSgetrs",                                   {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverSetStream",                                  {HIP_4050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverGetStream",                                  {HIP_4050, HIP_0,    HIP_0,  HIP_LATEST}},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_SOLVER_API_SECTION_MAP {

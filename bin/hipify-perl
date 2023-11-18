@@ -1083,7 +1083,9 @@ my %experimental_funcs = (
     "cusolverDnSgetrs" => "6.1.0",
     "cusolverDnSgetrf_bufferSize" => "6.1.0",
     "cusolverDnSgetrf" => "6.1.0",
+    "cusolverDnSetStream" => "6.1.0",
     "cusolverDnHandle_t" => "6.1.0",
+    "cusolverDnGetStream" => "6.1.0",
     "cusolverDnDgetrs" => "6.1.0",
     "cusolverDnDgetrf_bufferSize" => "6.1.0",
     "cusolverDnDgetrf" => "6.1.0",
@@ -1249,6 +1251,8 @@ sub experimentalSubstitutions {
     subst("cusolverDnDgetrf", "hipsolverDnDgetrf", "library");
     subst("cusolverDnDgetrf_bufferSize", "hipsolverDnDgetrf_bufferSize", "library");
     subst("cusolverDnDgetrs", "hipsolverDnDgetrs", "library");
+    subst("cusolverDnGetStream", "hipsolverGetStream", "library");
+    subst("cusolverDnSetStream", "hipsolverSetStream", "library");
     subst("cusolverDnSgetrf", "hipsolverDnSgetrf", "library");
     subst("cusolverDnSgetrf_bufferSize", "hipsolverDnSgetrf_bufferSize", "library");
     subst("cusolverDnSgetrs", "hipsolverDnSgetrs", "library");
@@ -1747,6 +1751,8 @@ sub rocSubstitutions {
     subst("cudnnTransformTensor", "miopenTransformTensor", "library");
     subst("cusolverDnCreate", "rocblas_create_handle", "library");
     subst("cusolverDnDestroy", "rocblas_destroy_handle", "library");
+    subst("cusolverDnGetStream", "rocblas_get_stream", "library");
+    subst("cusolverDnSetStream", "rocblas_set_stream", "library");
     subst("cusparseAxpby", "rocsparse_axpby", "library");
     subst("cusparseBlockedEllGet", "rocsparse_bell_get", "library");
     subst("cusparseCbsr2csr", "rocsparse_cbsr2csr", "library");
@@ -7077,13 +7083,28 @@ sub warnUnsupportedFunctions {
         "cusolverDnXgetrs",
         "cusolverDnXgetrf_bufferSize",
         "cusolverDnXgetrf",
+        "cusolverDnSetDeterministicMode",
         "cusolverDnSetAdvOptions",
         "cusolverDnParams_t",
         "cusolverDnParams",
         "cusolverDnIRSParams_t",
+        "cusolverDnIRSParamsSetTolInner",
+        "cusolverDnIRSParamsSetTol",
+        "cusolverDnIRSParamsSetSolverPrecisions",
+        "cusolverDnIRSParamsSetSolverMainPrecision",
+        "cusolverDnIRSParamsSetSolverLowestPrecision",
+        "cusolverDnIRSParamsSetRefinementSolver",
+        "cusolverDnIRSParamsSetMaxItersInner",
+        "cusolverDnIRSParamsSetMaxIters",
+        "cusolverDnIRSParamsGetMaxIters",
+        "cusolverDnIRSParamsEnableFallback",
+        "cusolverDnIRSParamsDisableFallback",
+        "cusolverDnIRSParamsDestroy",
+        "cusolverDnIRSParamsCreate",
         "cusolverDnIRSParams",
         "cusolverDnIRSInfos_t",
         "cusolverDnIRSInfos",
+        "cusolverDnGetDeterministicMode",
         "cusolverDnFunction_t",
         "cusolverDnCreateParams",
         "cusolverDnContext",
