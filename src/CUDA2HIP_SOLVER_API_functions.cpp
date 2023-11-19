@@ -60,6 +60,15 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SOLVER_FUNCTION_MAP {
   {"cusolverDnIRSParamsGetMaxIters",                      {"hipsolverDnIRSParamsGetMaxIters",                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
   {"cusolverDnIRSParamsEnableFallback",                   {"hipsolverDnIRSParamsEnableFallback",                   "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
   {"cusolverDnIRSParamsDisableFallback",                  {"hipsolverDnIRSParamsDisableFallback",                  "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnIRSInfosCreate",                            {"hipsolverDnIRSInfosCreate",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnIRSInfosDestroy",                           {"hipsolverDnIRSInfosDestroy",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnIRSInfosGetNiters",                         {"hipsolverDnIRSInfosGetNiters",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnIRSInfosGetOuterNiters",                    {"hipsolverDnIRSInfosGetOuterNiters",                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnIRSInfosRequestResidual",                   {"hipsolverDnIRSInfosRequestResidual",                   "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnIRSInfosGetResidualHistory",                {"hipsolverDnIRSInfosGetResidualHistory",                "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnIRSInfosGetMaxIters",                       {"hipsolverDnIRSInfosGetMaxIters",                       "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  // NOTE: rocsolver_zgesv has a harness of rocblas_set_workspace, hipsolverZZgesv_bufferSize, and rocsolver_zgesv_outofplace
+  {"cusolverDnZZgesv",                                    {"hipsolverDnZZgesv",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_SOLVER_FUNCTION_VER_MAP {
@@ -83,6 +92,14 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SOLVER_FUNCTION_VER_MAP {
   {"cusolverDnIRSParamsGetMaxIters",                      {CUDA_102,  CUDA_0, CUDA_0}},
   {"cusolverDnIRSParamsEnableFallback",                   {CUDA_110,  CUDA_0, CUDA_0}},
   {"cusolverDnIRSParamsDisableFallback",                  {CUDA_110,  CUDA_0, CUDA_0}},
+  {"cusolverDnIRSInfosCreate",                            {CUDA_102,  CUDA_0, CUDA_0}},
+  {"cusolverDnIRSInfosDestroy",                           {CUDA_102,  CUDA_0, CUDA_0}},
+  {"cusolverDnIRSInfosGetNiters",                         {CUDA_102,  CUDA_0, CUDA_0}},
+  {"cusolverDnIRSInfosGetOuterNiters",                    {CUDA_102,  CUDA_0, CUDA_0}},
+  {"cusolverDnIRSInfosRequestResidual",                   {CUDA_102,  CUDA_0, CUDA_0}},
+  {"cusolverDnIRSInfosGetResidualHistory",                {CUDA_102,  CUDA_0, CUDA_0}},
+  {"cusolverDnIRSInfosGetMaxIters",                       {CUDA_102,  CUDA_0, CUDA_0}},
+  {"cusolverDnZZgesv",                                    {CUDA_102,  CUDA_0, CUDA_0}},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_SOLVER_FUNCTION_VER_MAP {
@@ -96,6 +113,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SOLVER_FUNCTION_VER_MAP {
   {"hipsolverDnSgetrs",                                   {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipsolverSetStream",                                  {HIP_4050, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipsolverGetStream",                                  {HIP_4050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverDnZZgesv",                                   {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_SOLVER_API_SECTION_MAP {

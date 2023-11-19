@@ -98,6 +98,7 @@
 |`cusolverPrecType_t`|11.0| | | | | | | | | |
 |`cusolverStatus_t`| | | | |`hipsolverStatus_t`|4.5.0| | | |6.1.0|
 |`cusolverStorevMode_t`|11.0| | | | | | | | | |
+|`cusolver_int_t`|10.1| | | |`int`| | | | | |
 |`gesvdjInfo`|9.0| | | | | | | | | |
 |`gesvdjInfo_t`|9.0| | | |`hipsolverGesvdjInfo_t`|5.1.0| | | |6.1.0|
 |`syevjInfo`|9.0| | | | | | | | | |
@@ -115,6 +116,13 @@
 |`cusolverDnDgetrs`| | | | |`hipsolverDnDgetrs`|5.1.0| | | |6.1.0|
 |`cusolverDnGetDeterministicMode`|12.2| | | | | | | | | |
 |`cusolverDnGetStream`| | | | |`hipsolverGetStream`|4.5.0| | | |6.1.0|
+|`cusolverDnIRSInfosCreate`|10.2| | | | | | | | | |
+|`cusolverDnIRSInfosDestroy`|10.2| | | | | | | | | |
+|`cusolverDnIRSInfosGetMaxIters`|10.2| | | | | | | | | |
+|`cusolverDnIRSInfosGetNiters`|10.2| | | | | | | | | |
+|`cusolverDnIRSInfosGetOuterNiters`|10.2| | | | | | | | | |
+|`cusolverDnIRSInfosGetResidualHistory`|10.2| | | | | | | | | |
+|`cusolverDnIRSInfosRequestResidual`|10.2| | | | | | | | | |
 |`cusolverDnIRSParamsCreate`|10.2| | | | | | | | | |
 |`cusolverDnIRSParamsDestroy`|10.2| | | | | | | | | |
 |`cusolverDnIRSParamsDisableFallback`|11.0| | | | | | | | | |
@@ -137,6 +145,7 @@
 |`cusolverDnXgetrf`|11.1| | | | | | | | | |
 |`cusolverDnXgetrf_bufferSize`|11.1| | | | | | | | | |
 |`cusolverDnXgetrs`|11.1| | | | | | | | | |
+|`cusolverDnZZgesv`|10.2| | | |`hipsolverDnZZgesv`|5.1.0| | | |6.1.0|
 
 
 \*A - Added; D - Deprecated; C - Changed; R - Removed; E - Experimental

@@ -2398,6 +2398,7 @@ sub rocSubstitutions {
     subst("CUSPARSE_STATUS_NOT_SUPPORTED", "rocsparse_status_not_implemented", "numeric_literal");
     subst("CUSPARSE_STATUS_SUCCESS", "rocsparse_status_success", "numeric_literal");
     subst("CUSPARSE_STATUS_ZERO_PIVOT", "rocsparse_status_zero_pivot", "numeric_literal");
+    subst("cusolver_int_t", "rocblas_int", "numeric_literal");
 }
 
 sub simpleSubstitutions {
@@ -3608,6 +3609,7 @@ sub simpleSubstitutions {
     subst("curandSetPseudoRandomGeneratorSeed", "hiprandSetPseudoRandomGeneratorSeed", "library");
     subst("curandSetQuasiRandomGeneratorDimensions", "hiprandSetQuasiRandomGeneratorDimensions", "library");
     subst("curandSetStream", "hiprandSetStream", "library");
+    subst("cusolverDnZZgesv", "hipsolverDnZZgesv", "library");
     subst("cusparseAxpby", "hipsparseAxpby", "library");
     subst("cusparseBlockedEllGet", "hipsparseBlockedEllGet", "library");
     subst("cusparseCaxpyi", "hipsparseCaxpyi", "library");
@@ -5841,6 +5843,7 @@ sub simpleSubstitutions {
     subst("cudaStreamSetCaptureDependencies", "hipStreamSetCaptureDependencies", "numeric_literal");
     subst("cudaSuccess", "hipSuccess", "numeric_literal");
     subst("cudaUserObjectNoDestructorSync", "hipUserObjectNoDestructorSync", "numeric_literal");
+    subst("cusolver_int_t", "int", "numeric_literal");
     subst("CUB_MAX", "CUB_MAX", "define");
     subst("CUB_MIN", "CUB_MIN", "define");
     subst("CUB_NAMESPACE_BEGIN", "BEGIN_HIPCUB_NAMESPACE", "define");
@@ -7107,6 +7110,13 @@ sub warnUnsupportedFunctions {
         "cusolverDnIRSParamsCreate",
         "cusolverDnIRSParams",
         "cusolverDnIRSInfos_t",
+        "cusolverDnIRSInfosRequestResidual",
+        "cusolverDnIRSInfosGetResidualHistory",
+        "cusolverDnIRSInfosGetOuterNiters",
+        "cusolverDnIRSInfosGetNiters",
+        "cusolverDnIRSInfosGetMaxIters",
+        "cusolverDnIRSInfosDestroy",
+        "cusolverDnIRSInfosCreate",
         "cusolverDnIRSInfos",
         "cusolverDnGetDeterministicMode",
         "cusolverDnFunction_t",
