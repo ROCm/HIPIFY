@@ -122,9 +122,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SOLVER_TYPE_NAME_MAP {
   {"cusolverDeterministicMode_t",                              {"hipsolverDeterministicMode_t",                              "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
   {"CUSOLVER_DETERMINISTIC_RESULTS",                           {"HIPSOLVER_DETERMINISTIC_RESULTS",                           "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
   {"CUSOLVER_ALLOW_NON_DETERMINISTIC_RESULTS",                 {"HIPSOLVER_ALLOW_NON_DETERMINISTIC_RESULTS",                 "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
+  {"cusolver_int_t",                                           {"int",                                                       "rocblas_int",                                                      CONV_NUMERIC_LITERAL, API_SOLVER, 1}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_SOLVER_TYPE_NAME_VER_MAP {
+  {"cusolver_int_t",                                           {CUDA_101, CUDA_0, CUDA_0}},
   {"CUSOLVER_STATUS_IRS_PARAMS_NOT_INITIALIZED",               {CUDA_102, CUDA_0, CUDA_0}},
   {"CUSOLVER_STATUS_IRS_PARAMS_INVALID",                       {CUDA_102, CUDA_0, CUDA_0}},
   {"CUSOLVER_STATUS_IRS_PARAMS_INVALID_PREC",                  {CUDA_110, CUDA_0, CUDA_0}},
@@ -237,6 +239,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SOLVER_TYPE_NAME_VER_MAP {
   {"hipsolverSyevjInfo_t",                                     {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipsolverGesvdjInfo_t",                                    {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
 
+  {"rocblas_int",                                              {HIP_3000, HIP_0,    HIP_0,  HIP_LATEST}},
   {"rocblas_status",                                           {HIP_3000, HIP_0,    HIP_0,  HIP_LATEST}},
   {"rocblas_status_success",                                   {HIP_3000, HIP_0,    HIP_0,  HIP_LATEST}},
   {"rocblas_status_invalid_handle",                            {HIP_5060, HIP_0,    HIP_0,  HIP_LATEST}},

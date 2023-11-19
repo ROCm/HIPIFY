@@ -23,6 +23,11 @@ int main() {
   double dB = 0.f;
   float fWorkspace = 0.f;
   double dWorkspace = 0.f;
+  void *Workspace = nullptr;
+  size_t lwork_bytes = 0;
+
+  // CHECK: hipDoubleComplex dComplexA, dComplexB, dComplexX;
+  cuDoubleComplex dComplexA, dComplexB, dComplexX;
 
   // CHECK: hipsolverHandle_t handle;
   cusolverDnHandle_t handle;
@@ -133,6 +138,23 @@ int main() {
 #endif
 
 #if CUDA_VERSION >= 10010
+  // CHECK: int solver_int = 0;
+  // CHECK: int ln = 0;
+  // CHECK: int ldda = 0;
+  // CHECK: int lddb = 0;
+  // CHECK: int lddx = 0;
+  // CHECK: int dipiv = 0;
+  // CHECK: int iter = 0;
+  // CHECK: int d_info = 0;
+  cusolver_int_t solver_int = 0;
+  cusolver_int_t ln = 0;
+  cusolver_int_t ldda = 0;
+  cusolver_int_t lddb = 0;
+  cusolver_int_t lddx = 0;
+  cusolver_int_t dipiv = 0;
+  cusolver_int_t iter = 0;
+  cusolver_int_t d_info = 0;
+
   // CHECK: hipsolverEigRange_t eigRange;
   // CHECK-NEXT: hipsolverEigRange_t EIG_RANGE_ALL = HIPSOLVER_EIG_RANGE_ALL;
   // CHECK-NEXT: hipsolverEigRange_t EIG_RANGE_I = HIPSOLVER_EIG_RANGE_I;
@@ -150,6 +172,11 @@ int main() {
   cusolverStatus_t STATUS_IRS_PARAMS_INVALID = CUSOLVER_STATUS_IRS_PARAMS_INVALID;
   cusolverStatus_t STATUS_IRS_INTERNAL_ERROR = CUSOLVER_STATUS_IRS_INTERNAL_ERROR;
   cusolverStatus_t STATUS_IRS_NOT_SUPPORTED = CUSOLVER_STATUS_IRS_NOT_SUPPORTED;
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnZZgesv(cusolverDnHandle_t handle, cusolver_int_t n, cusolver_int_t nrhs, cuDoubleComplex * dA, cusolver_int_t ldda, cusolver_int_t * dipiv, cuDoubleComplex * dB, cusolver_int_t lddb, cuDoubleComplex * dX, cusolver_int_t lddx, void * dWorkspace, size_t lwork_bytes, cusolver_int_t * iter, cusolver_int_t * d_info);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnZZgesv(hipsolverHandle_t handle, int n, int nrhs, hipDoubleComplex* A, int lda, int* devIpiv, hipDoubleComplex* B, int ldb, hipDoubleComplex* X, int ldx, void* work, size_t lwork, int* niters, int* devInfo);
+  // CHECK: status = hipsolverDnZZgesv(handle, ln, nrhs, &dComplexA, ldda, &dipiv, &dComplexB, lddb, &dComplexX, lddx, &Workspace, lwork_bytes, &iter, &d_info);
+  status = cusolverDnZZgesv(handle, ln, nrhs, &dComplexA, ldda, &dipiv, &dComplexB, lddb, &dComplexX, lddx, &Workspace, lwork_bytes, &iter, &d_info);
 #endif
 
   return 0;
