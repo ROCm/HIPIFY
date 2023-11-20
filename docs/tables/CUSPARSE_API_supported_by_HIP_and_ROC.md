@@ -306,7 +306,7 @@
 |`cusparseCcsrsv2_solve`| |11.3| |12.0|`hipsparseCcsrsv2_solve`|3.1.0| | | | | | | | | | |
 |`cusparseCcsrsv_analysis`| |10.2| |11.0| | | | | | | | | | | | |
 |`cusparseCcsrsv_solve`| |10.2| |11.0| | | | | | | | | | | | |
-|`cusparseCgemvi`|7.5| | | |`hipsparseCgemvi`|4.3.0| | | | | | | | | | |
+|`cusparseCgemvi`|7.5| | | |`hipsparseCgemvi`|4.3.0| | | | |`rocsparse_cgemvi`|4.3.0| | | | |
 |`cusparseCgemvi_bufferSize`|7.5| | | |`hipsparseCgemvi_bufferSize`|4.3.0| | | | | | | | | | |
 |`cusparseChybmv`| |10.2| |11.0|`hipsparseChybmv`|3.1.0| | | | | | | | | | |
 |`cusparseChybsv_analysis`| |10.2| |11.0| | | | | | | | | | | | |
@@ -329,7 +329,7 @@
 |`cusparseDcsrsv2_solve`| |11.3| |12.0|`hipsparseDcsrsv2_solve`|1.9.2| | | | | | | | | | |
 |`cusparseDcsrsv_analysis`| |10.2| |11.0| | | | | | | | | | | | |
 |`cusparseDcsrsv_solve`| |10.2| |11.0| | | | | | | | | | | | |
-|`cusparseDgemvi`|7.5| | | |`hipsparseDgemvi`|4.3.0| | | | | | | | | | |
+|`cusparseDgemvi`|7.5| | | |`hipsparseDgemvi`|4.3.0| | | | |`rocsparse_dgemvi`|4.3.0| | | | |
 |`cusparseDgemvi_bufferSize`|7.5| | | |`hipsparseDgemvi_bufferSize`|4.3.0| | | | | | | | | | |
 |`cusparseDhybmv`| |10.2| |11.0|`hipsparseDhybmv`|1.9.2| | | | | | | | | | |
 |`cusparseDhybsv_analysis`| |10.2| |11.0| | | | | | | | | | | | |
@@ -348,7 +348,7 @@
 |`cusparseScsrsv2_solve`| |11.3| |12.0|`hipsparseScsrsv2_solve`|1.9.2| | | | | | | | | | |
 |`cusparseScsrsv_analysis`| |10.2| |11.0| | | | | | | | | | | | |
 |`cusparseScsrsv_solve`| |10.2| |11.0| | | | | | | | | | | | |
-|`cusparseSgemvi`|7.5| | | |`hipsparseSgemvi`|4.3.0| | | | | | | | | | |
+|`cusparseSgemvi`|7.5| | | |`hipsparseSgemvi`|4.3.0| | | | |`rocsparse_sgemvi`|4.3.0| | | | |
 |`cusparseSgemvi_bufferSize`|7.5| | | |`hipsparseSgemvi_bufferSize`|4.3.0| | | | | | | | | | |
 |`cusparseShybmv`| |10.2| |11.0|`hipsparseShybmv`|1.9.2| | | | | | | | | | |
 |`cusparseShybsv_analysis`| |10.2| |11.0| | | | | | | | | | | | |
@@ -369,7 +369,7 @@
 |`cusparseZcsrsv2_solve`| |11.3| |12.0|`hipsparseZcsrsv2_solve`|3.1.0| | | | | | | | | | |
 |`cusparseZcsrsv_analysis`| |10.2| |11.0| | | | | | | | | | | | |
 |`cusparseZcsrsv_solve`| |10.2| |11.0| | | | | | | | | | | | |
-|`cusparseZgemvi`|7.5| | | |`hipsparseZgemvi`|4.3.0| | | | | | | | | | |
+|`cusparseZgemvi`|7.5| | | |`hipsparseZgemvi`|4.3.0| | | | |`rocsparse_zgemvi`|4.3.0| | | | |
 |`cusparseZgemvi_bufferSize`|7.5| | | |`hipsparseZgemvi_bufferSize`|4.3.0| | | | | | | | | | |
 |`cusparseZhybmv`| |10.2| |11.0|`hipsparseZhybmv`|3.1.0| | | | | | | | | | |
 |`cusparseZhybsv_analysis`| |10.2| |11.0| | | | | | | | | | | | |
