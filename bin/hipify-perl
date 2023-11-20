@@ -1795,6 +1795,7 @@ sub rocSubstitutions {
     subst("cusparseCgebsr2gebsc_bufferSize", "rocsparse_cgebsr2gebsc_buffer_size", "library");
     subst("cusparseCgebsr2gebsr", "rocsparse_cgebsr2gebsr", "library");
     subst("cusparseCgebsr2gebsr_bufferSize", "rocsparse_cgebsr2gebsr_buffer_size", "library");
+    subst("cusparseCgemvi", "rocsparse_cgemvi", "library");
     subst("cusparseCgpsvInterleavedBatch", "rocsparse_cgpsv_interleaved_batch", "library");
     subst("cusparseCgpsvInterleavedBatch_bufferSizeExt", "rocsparse_cgpsv_interleaved_batch_buffer_size", "library");
     subst("cusparseCgtsv2", "rocsparse_cgtsv", "library");
@@ -1877,6 +1878,7 @@ sub rocSubstitutions {
     subst("cusparseDgebsr2gebsc_bufferSize", "rocsparse_dgebsr2gebsc_buffer_size", "library");
     subst("cusparseDgebsr2gebsr", "rocsparse_dgebsr2gebsr", "library");
     subst("cusparseDgebsr2gebsr_bufferSize", "rocsparse_dgebsr2gebsr_buffer_size", "library");
+    subst("cusparseDgemvi", "rocsparse_dgemvi", "library");
     subst("cusparseDgpsvInterleavedBatch", "rocsparse_dgpsv_interleaved_batch", "library");
     subst("cusparseDgpsvInterleavedBatch_bufferSizeExt", "rocsparse_dgpsv_interleaved_batch_buffer_size", "library");
     subst("cusparseDgtsv2", "rocsparse_dgtsv", "library");
@@ -1968,6 +1970,7 @@ sub rocSubstitutions {
     subst("cusparseSgebsr2gebsc_bufferSize", "rocsparse_sgebsr2gebsc_buffer_size", "library");
     subst("cusparseSgebsr2gebsr", "rocsparse_sgebsr2gebsr", "library");
     subst("cusparseSgebsr2gebsr_bufferSize", "rocsparse_sgebsr2gebsr_buffer_size", "library");
+    subst("cusparseSgemvi", "rocsparse_sgemvi", "library");
     subst("cusparseSgpsvInterleavedBatch", "rocsparse_sgpsv_interleaved_batch", "library");
     subst("cusparseSgpsvInterleavedBatch_bufferSizeExt", "rocsparse_sgpsv_interleaved_batch_buffer_size", "library");
     subst("cusparseSgtsv2", "rocsparse_sgtsv", "library");
@@ -2066,6 +2069,7 @@ sub rocSubstitutions {
     subst("cusparseZgebsr2gebsc_bufferSize", "rocsparse_zgebsr2gebsc_buffer_size", "library");
     subst("cusparseZgebsr2gebsr", "rocsparse_zgebsr2gebsr", "library");
     subst("cusparseZgebsr2gebsr_bufferSize", "rocsparse_zgebsr2gebsr_buffer_size", "library");
+    subst("cusparseZgemvi", "rocsparse_zgemvi", "library");
     subst("cusparseZgpsvInterleavedBatch", "rocsparse_zgpsv_interleaved_batch", "library");
     subst("cusparseZgpsvInterleavedBatch_bufferSizeExt", "rocsparse_zgpsv_interleaved_batch_buffer_size", "library");
     subst("cusparseZgtsv2", "rocsparse_zgtsv", "library");

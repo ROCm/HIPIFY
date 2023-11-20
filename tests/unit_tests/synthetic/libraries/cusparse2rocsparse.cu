@@ -179,6 +179,7 @@ int main() {
   int userEllWidth = 0;
   int ienable_boost = 0;
   int iposition = 0;
+  int xInd = 0;
   int64_t size = 0;
   int64_t nnz = 0;
   int64_t rows = 0;
@@ -251,13 +252,19 @@ int main() {
   double dbscVal = 0.f;
   float fbscVal = 0.f;
   double dA = 0.f;
+  double dAlpha = 0.f;
   double dB = 0.f;
   double dBeta = 0.f;
   double dC = 0.f;
+  double dX = 0.f;
+  double dY = 0.f;
   float fA = 0.f;
+  float fAlpha = 0.f;
   float fB = 0.f;
   float fBeta = 0.f;
   float fC = 0.f;
+  float fX = 0.f;
+  float fY = 0.f;
   int algo = 0;
   double dds = 0.f;
   double ddl = 0.f;
@@ -291,13 +298,13 @@ int main() {
 
   // TODO: should be rocsparse_double_complex
   // TODO: add to TypeOverloads cuDoubleComplex -> rocsparse_double_complex under a new option --sparse
-  // CHECK: rocblas_double_complex dcomplex, dcomplexA, dcomplexB, dcomplexBeta, dcomplexC, dcomplexX, dComplexbsrSortedValA, dComplexbsrSortedValC, dComplexcsrSortedValA, dComplexcsrSortedValB, dComplexcsrSortedValC, dcomplextol, dComplexbsrSortedVal, dComplexbscVal, dComplexcscSortedVal, dcomplexds, dcomplexdl, dcomplexd, dcomplexdu, dcomplexdw, dcomplexx, dcomplex_boost_val;
-  cuDoubleComplex dcomplex, dcomplexA, dcomplexB, dcomplexBeta, dcomplexC, dcomplexX, dComplexbsrSortedValA, dComplexbsrSortedValC, dComplexcsrSortedValA, dComplexcsrSortedValB, dComplexcsrSortedValC, dcomplextol, dComplexbsrSortedVal, dComplexbscVal, dComplexcscSortedVal, dcomplexds, dcomplexdl, dcomplexd, dcomplexdu, dcomplexdw, dcomplexx, dcomplex_boost_val;
+  // CHECK: rocblas_double_complex dcomplex, dcomplexA, dcomplexAlpha, dcomplexB, dcomplexBeta, dcomplexC, dcomplexX, dcomplexY, dComplexbsrSortedValA, dComplexbsrSortedValC, dComplexcsrSortedValA, dComplexcsrSortedValB, dComplexcsrSortedValC, dcomplextol, dComplexbsrSortedVal, dComplexbscVal, dComplexcscSortedVal, dcomplexds, dcomplexdl, dcomplexd, dcomplexdu, dcomplexdw, dcomplexx, dcomplex_boost_val;
+  cuDoubleComplex dcomplex, dcomplexA, dcomplexAlpha, dcomplexB, dcomplexBeta, dcomplexC, dcomplexX, dcomplexY, dComplexbsrSortedValA, dComplexbsrSortedValC, dComplexcsrSortedValA, dComplexcsrSortedValB, dComplexcsrSortedValC, dcomplextol, dComplexbsrSortedVal, dComplexbscVal, dComplexcscSortedVal, dcomplexds, dcomplexdl, dcomplexd, dcomplexdu, dcomplexdw, dcomplexx, dcomplex_boost_val;
 
   // TODO: should be rocsparse_double_complex
   // TODO: add to TypeOverloads cuComplex -> rocsparse_float_complex under a new option --sparse
-  // CHECK: rocblas_float_complex complex, complexA, complexB, complexBeta, complexC, complexX, complexbsrValA, complexbsrSortedValC, complexcsrSortedValA, complexcsrSortedValB, complexcsrSortedValC, complextol, complexbsrSortedVal, complexbscVal, complexcscSortedVal, complexds, complexdl, complexd, complexdu, complexdw, complexx, complex_boost_val;
-  cuComplex complex, complexA, complexB, complexBeta, complexC, complexX, complexbsrValA, complexbsrSortedValC, complexcsrSortedValA, complexcsrSortedValB, complexcsrSortedValC, complextol, complexbsrSortedVal, complexbscVal, complexcscSortedVal, complexds, complexdl, complexd, complexdu, complexdw, complexx, complex_boost_val;
+  // CHECK: rocblas_float_complex complex, complexA, complexAlpha, complexB, complexBeta, complexC, complexX, complexY, complexbsrValA, complexbsrSortedValC, complexcsrSortedValA, complexcsrSortedValB, complexcsrSortedValC, complextol, complexbsrSortedVal, complexbscVal, complexcscSortedVal, complexds, complexdl, complexd, complexdu, complexdw, complexx, complex_boost_val;
+  cuComplex complex, complexA, complexAlpha, complexB, complexBeta, complexC, complexX, complexY, complexbsrValA, complexbsrSortedValC, complexcsrSortedValA, complexcsrSortedValB, complexcsrSortedValC, complextol, complexbsrSortedVal, complexbscVal, complexcscSortedVal, complexds, complexdl, complexd, complexdu, complexdw, complexx, complex_boost_val;
 
   // CHECK: rocsparse_operation opA, opB, opX;
   cusparseOperation_t opA, opB, opX;
@@ -1062,6 +1069,28 @@ int main() {
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_sbsrmm(rocsparse_handle handle, rocsparse_direction dir, rocsparse_operation trans_A, rocsparse_operation trans_B, rocsparse_int mb, rocsparse_int n, rocsparse_int kb, rocsparse_int nnzb, const float* alpha, const rocsparse_mat_descr descr, const float* bsr_val, const rocsparse_int* bsr_row_ptr, const rocsparse_int* bsr_col_ind, rocsparse_int block_dim, const float* B, rocsparse_int ldb, const float* beta, float* C, rocsparse_int ldc);
   // CHECK: status_t = rocsparse_sbsrmm(handle_t, direction_t, opA, opB, mb, n, kb, nnzb, &fA, matDescr_A, &fbscVal, &bsrRowPtrA, &bsrColIndA, blockDim, &fB, ldb, &fBeta, &fC, ldc);
   status_t = cusparseSbsrmm(handle_t, direction_t, opA, opB, mb, n, kb, nnzb, &fA, matDescr_A, &fbscVal, &bsrRowPtrA, &bsrColIndA, blockDim, &fB, ldb, &fBeta, &fC, ldc);
+
+#if CUDA_VERSION >= 7050
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseZgemvi(cusparseHandle_t handle, cusparseOperation_t transA, int m, int n, const cuDoubleComplex* alpha, const cuDoubleComplex* A, int lda, int nnz, const cuDoubleComplex* xVal, const int* xInd, const cuDoubleComplex* beta, cuDoubleComplex* y, cusparseIndexBase_t idxBase, void* pBuffer);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_zgemvi(rocsparse_handle handle, rocsparse_operation trans, rocsparse_int m, rocsparse_int n, const rocsparse_double_complex* alpha, const rocsparse_double_complex* A, rocsparse_int lda, rocsparse_int nnz, const rocsparse_double_complex* x_val, const rocsparse_int* x_ind, const rocsparse_double_complex* beta, rocsparse_double_complex* y, rocsparse_index_base idx_base,void* temp_buffer);
+  // CHECK: status_t = rocsparse_zgemvi(handle_t, opA, m, n, &dcomplexAlpha, &dcomplexA, lda, innz, &dcomplexX, &xInd, &dcomplexBeta, &dcomplexY, indexBase_t, pBuffer);
+  status_t = cusparseZgemvi(handle_t, opA, m, n, &dcomplexAlpha, &dcomplexA, lda, innz, &dcomplexX, &xInd, &dcomplexBeta, &dcomplexY, indexBase_t, pBuffer);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCgemvi(cusparseHandle_t handle, cusparseOperation_t transA, int m, int n, const cuComplex* alpha, const cuComplex* A, int lda, int nnz, const cuComplex* xVal, const int* xInd, const cuComplex* beta, cuComplex* y, cusparseIndexBase_t idxBase, void* pBuffer);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_cgemvi(rocsparse_handle handle, rocsparse_operation trans, rocsparse_int m, rocsparse_int n, const rocsparse_float_complex* alpha, const rocsparse_float_complex* A, rocsparse_int lda, rocsparse_int nnz, const rocsparse_float_complex* x_val, const rocsparse_int* x_ind, const rocsparse_float_complex* beta, rocsparse_float_complex* y, rocsparse_index_base idx_base, void* temp_buffer);
+  // CHECK: status_t = rocsparse_cgemvi(handle_t, opA, m, n, &complexAlpha, &complexA, lda, innz, &complexX, &xInd, &complexBeta, &complexY, indexBase_t, pBuffer);
+  status_t = cusparseCgemvi(handle_t, opA, m, n, &complexAlpha, &complexA, lda, innz, &complexX, &xInd, &complexBeta, &complexY, indexBase_t, pBuffer);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDgemvi(cusparseHandle_t handle, cusparseOperation_t transA, int m, int n, const double* alpha, const double* A, int lda, int nnz, const double* xVal, const int* xInd, const double* beta, double* y, cusparseIndexBase_t idxBase, void* pBuffer);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_dgemvi(rocsparse_handle handle, rocsparse_operation trans, rocsparse_int m, rocsparse_int n, const double* alpha, const double* A, rocsparse_int lda, rocsparse_int nnz, const double* x_val, const rocsparse_int* x_ind, const double* beta, double* y, rocsparse_index_base idx_base, void* temp_buffer);
+  // CHECK: status_t = rocsparse_dgemvi(handle_t, opA, m, n, &dAlpha, &dA, lda, innz, &dX, &xInd, &dBeta, &dY, indexBase_t, pBuffer);
+  status_t = cusparseDgemvi(handle_t, opA, m, n, &dAlpha, &dA, lda, innz, &dX, &xInd, &dBeta, &dY, indexBase_t, pBuffer);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSgemvi(cusparseHandle_t handle, cusparseOperation_t transA, int m, int n, const float* alpha, const float* A, int lda, int nnz, const float* xVal, const int* xInd, const float* beta, float* y, cusparseIndexBase_t idxBase, void* pBuffer);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_sgemvi(rocsparse_handle handle, rocsparse_operation trans, rocsparse_int m, rocsparse_int n, const float* alpha, const float* A, rocsparse_int lda, rocsparse_int nnz, const float* x_val, const rocsparse_int* x_ind, const float* beta, float* y, rocsparse_index_base idx_base, void* temp_buffer);
+  // CHECK: status_t = rocsparse_sgemvi(handle_t, opA, m, n, &fAlpha, &fA, lda, innz, &fX, &xInd, &fBeta, &fY, indexBase_t, pBuffer);
+  status_t = cusparseSgemvi(handle_t, opA, m, n, &fAlpha, &fA, lda, innz, &fX, &xInd, &fBeta, &fY, indexBase_t, pBuffer);
+#endif
 
 #if CUDA_VERSION >= 8000
   // TODO: [#899] There should be rocsparse_datatype instead of hipDataType
