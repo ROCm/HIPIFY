@@ -69,6 +69,26 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SOLVER_FUNCTION_MAP {
   {"cusolverDnIRSInfosGetMaxIters",                       {"hipsolverDnIRSInfosGetMaxIters",                       "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
   // NOTE: rocsolver_zgesv has a harness of rocblas_set_workspace, hipsolverZZgesv_bufferSize, and rocsolver_zgesv_outofplace
   {"cusolverDnZZgesv",                                    {"hipsolverDnZZgesv",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  {"cusolverDnZCgesv",                                    {"hipsolverDnZCgesv",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnZKgesv",                                    {"hipsolverDnZKgesv",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnZEgesv",                                    {"hipsolverDnZEgesv",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnZYgesv",                                    {"hipsolverDnZYgesv",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  // NOTE: rocsolver_cgesv has a harness of rocblas_set_workspace, hipsolverCCgesv_bufferSize, and rocsolver_cgesv_outofplace
+  {"cusolverDnCCgesv",                                    {"hipsolverDnCCgesv",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  {"cusolverDnCEgesv",                                    {"hipsolverDnCEgesv",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnCKgesv",                                    {"hipsolverDnCKgesv",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnCYgesv",                                    {"hipsolverDnCYgesv",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  // NOTE: rocsolver_dgesv has a harness of rocblas_set_workspace, hipsolverDDgesv_bufferSize, and rocsolver_dgesv_outofplace
+  {"cusolverDnDDgesv",                                    {"hipsolverDnDDgesv",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  {"cusolverDnDSgesv",                                    {"hipsolverDnDSgesv",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnDHgesv",                                    {"hipsolverDnDHgesv",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnDBgesv",                                    {"hipsolverDnDBgesv",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnDXgesv",                                    {"hipsolverDnDXgesv",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  // NOTE: rocsolver_sgesv has a harness of rocblas_set_workspace, hipsolverSSgesv_bufferSize, and rocsolver_sgesv_outofplace
+  {"cusolverDnSSgesv",                                    {"hipsolverDnSSgesv",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  {"cusolverDnSHgesv",                                    {"hipsolverDnSHgesv",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnSBgesv",                                    {"hipsolverDnSBgesv",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnSXgesv",                                    {"hipsolverDnSXgesv",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_SOLVER_FUNCTION_VER_MAP {
@@ -100,6 +120,23 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SOLVER_FUNCTION_VER_MAP {
   {"cusolverDnIRSInfosGetResidualHistory",                {CUDA_102,  CUDA_0, CUDA_0}},
   {"cusolverDnIRSInfosGetMaxIters",                       {CUDA_102,  CUDA_0, CUDA_0}},
   {"cusolverDnZZgesv",                                    {CUDA_102,  CUDA_0, CUDA_0}},
+  {"cusolverDnZCgesv",                                    {CUDA_102,  CUDA_0, CUDA_0}},
+  {"cusolverDnZKgesv",                                    {CUDA_102,  CUDA_0, CUDA_0}},
+  {"cusolverDnZEgesv",                                    {CUDA_110,  CUDA_0, CUDA_0}},
+  {"cusolverDnZYgesv",                                    {CUDA_110,  CUDA_0, CUDA_0}},
+  {"cusolverDnCCgesv",                                    {CUDA_102,  CUDA_0, CUDA_0}},
+  {"cusolverDnCEgesv",                                    {CUDA_110,  CUDA_0, CUDA_0}},
+  {"cusolverDnCKgesv",                                    {CUDA_102,  CUDA_0, CUDA_0}},
+  {"cusolverDnCYgesv",                                    {CUDA_110,  CUDA_0, CUDA_0}},
+  {"cusolverDnDDgesv",                                    {CUDA_102,  CUDA_0, CUDA_0}},
+  {"cusolverDnDSgesv",                                    {CUDA_102,  CUDA_0, CUDA_0}},
+  {"cusolverDnDHgesv",                                    {CUDA_102,  CUDA_0, CUDA_0}},
+  {"cusolverDnDBgesv",                                    {CUDA_110,  CUDA_0, CUDA_0}},
+  {"cusolverDnDXgesv",                                    {CUDA_110,  CUDA_0, CUDA_0}},
+  {"cusolverDnSSgesv",                                    {CUDA_102,  CUDA_0, CUDA_0}},
+  {"cusolverDnSHgesv",                                    {CUDA_102,  CUDA_0, CUDA_0}},
+  {"cusolverDnSBgesv",                                    {CUDA_110,  CUDA_0, CUDA_0}},
+  {"cusolverDnSXgesv",                                    {CUDA_110,  CUDA_0, CUDA_0}},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_SOLVER_FUNCTION_VER_MAP {
@@ -114,6 +151,9 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SOLVER_FUNCTION_VER_MAP {
   {"hipsolverSetStream",                                  {HIP_4050, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipsolverGetStream",                                  {HIP_4050, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipsolverDnZZgesv",                                   {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverDnCCgesv",                                   {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverDnDDgesv",                                   {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverDnSSgesv",                                   {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_SOLVER_API_SECTION_MAP {
