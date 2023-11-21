@@ -1097,6 +1097,26 @@ int main() {
   // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSgemvi(hipsparseHandle_t handle, hipsparseOperation_t transA, int m, int n, const float* alpha, const float* A, int lda, int nnz, const float* x, const int* xInd, const float* beta, float* y, hipsparseIndexBase_t idxBase, void* pBuffer);
   // CHECK: status_t = hipsparseSgemvi(handle_t, opA, m, n, &fAlpha, &fA, lda, innz, &fX, &xInd, &fBeta, &fY, indexBase_t, pBuffer);
   status_t = cusparseSgemvi(handle_t, opA, m, n, &fAlpha, &fA, lda, innz, &fX, &xInd, &fBeta, &fY, indexBase_t, pBuffer);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseZgemvi_bufferSize(cusparseHandle_t handle, cusparseOperation_t transA, int m, int n, int nnz, int* pBufferSize);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseZgemvi_bufferSize(hipsparseHandle_t handle, hipsparseOperation_t transA, int m, int n, int nnz, int* pBufferSize);
+  // CHECK: status_t = hipsparseZgemvi_bufferSize(handle_t, opA, m, n, innz, &bufferSizeInBytes);
+  status_t = cusparseZgemvi_bufferSize(handle_t, opA, m, n, innz, &bufferSizeInBytes);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCgemvi_bufferSize(cusparseHandle_t handle, cusparseOperation_t transA, int m, int n, int nnz, int* pBufferSize);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseCgemvi_bufferSize(hipsparseHandle_t handle, hipsparseOperation_t transA, int m, int n, int nnz, int* pBufferSize);
+  // CHECK: status_t = hipsparseCgemvi_bufferSize(handle_t, opA, m, n, innz, &bufferSizeInBytes);
+  status_t = cusparseCgemvi_bufferSize(handle_t, opA, m, n, innz, &bufferSizeInBytes);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDgemvi_bufferSize(cusparseHandle_t handle, cusparseOperation_t transA, int m, int n, int nnz, int* pBufferSize);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDgemvi_bufferSize(hipsparseHandle_t handle, hipsparseOperation_t transA, int m, int n, int nnz, int* pBufferSize);
+  // CHECK: status_t = hipsparseDgemvi_bufferSize(handle_t, opA, m, n, innz, &bufferSizeInBytes);
+  status_t = cusparseDgemvi_bufferSize(handle_t, opA, m, n, innz, &bufferSizeInBytes);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSgemvi_bufferSize(cusparseHandle_t handle, cusparseOperation_t transA, int m, int n, int nnz, int* pBufferSize);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSgemvi_bufferSize(hipsparseHandle_t handle, hipsparseOperation_t transA, int m, int n, int nnz, int* pBufferSize);
+  // CHECK: status_t = hipsparseSgemvi_bufferSize(handle_t, opA, m, n, innz, &bufferSizeInBytes);
+  status_t = cusparseSgemvi_bufferSize(handle_t, opA, m, n, innz, &bufferSizeInBytes);
 #endif
 
 #if CUDA_VERSION >= 8000
