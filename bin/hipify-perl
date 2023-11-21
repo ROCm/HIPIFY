@@ -3613,6 +3613,9 @@ sub simpleSubstitutions {
     subst("curandSetPseudoRandomGeneratorSeed", "hiprandSetPseudoRandomGeneratorSeed", "library");
     subst("curandSetQuasiRandomGeneratorDimensions", "hiprandSetQuasiRandomGeneratorDimensions", "library");
     subst("curandSetStream", "hiprandSetStream", "library");
+    subst("cusolverDnCCgesv", "hipsolverDnCCgesv", "library");
+    subst("cusolverDnDDgesv", "hipsolverDnDDgesv", "library");
+    subst("cusolverDnSSgesv", "hipsolverDnSSgesv", "library");
     subst("cusolverDnZZgesv", "hipsolverDnZZgesv", "library");
     subst("cusparseAxpby", "hipsparseAxpby", "library");
     subst("cusparseBlockedEllGet", "hipsparseBlockedEllGet", "library");
@@ -7091,11 +7094,18 @@ sub warnUnsupportedFunctions {
         "cusolverPrecType_t",
         "cusolverNorm_t",
         "cusolverIRSRefinement_t",
+        "cusolverDnZYgesv",
+        "cusolverDnZKgesv",
+        "cusolverDnZEgesv",
+        "cusolverDnZCgesv",
         "cusolverDnXgetrs",
         "cusolverDnXgetrf_bufferSize",
         "cusolverDnXgetrf",
         "cusolverDnSetDeterministicMode",
         "cusolverDnSetAdvOptions",
+        "cusolverDnSXgesv",
+        "cusolverDnSHgesv",
+        "cusolverDnSBgesv",
         "cusolverDnParams_t",
         "cusolverDnParams",
         "cusolverDnIRSParams_t",
@@ -7124,8 +7134,15 @@ sub warnUnsupportedFunctions {
         "cusolverDnIRSInfos",
         "cusolverDnGetDeterministicMode",
         "cusolverDnFunction_t",
+        "cusolverDnDXgesv",
+        "cusolverDnDSgesv",
+        "cusolverDnDHgesv",
+        "cusolverDnDBgesv",
         "cusolverDnCreateParams",
         "cusolverDnContext",
+        "cusolverDnCYgesv",
+        "cusolverDnCKgesv",
+        "cusolverDnCEgesv",
         "cusolverDirectMode_t",
         "cusolverDeterministicMode_t",
         "cusolverAlgMode_t",
