@@ -3,7 +3,7 @@
 HIPIFY is a set of tools that you can use to automatically translate CUDA source code into portable
 [HIP](https://github.com/ROCm-Developer-Tools/HIP) C++.
 
-## Table of Contents
+## Table of contents
 
 <!-- toc -->
 
@@ -20,7 +20,6 @@ HIPIFY is a set of tools that you can use to automatically translate CUDA source
 * Related: [hipify_torch](https://github.com/ROCmSoftwarePlatform/hipify_torch)
 * [Supported CUDA APIs](./docs/supported_apis.md#supported-cuda-apis)
 * [Documentation](#documentation)
-* [Disclaimer](#disclaimer)
 
 <!-- tocstop -->
 
@@ -54,4 +53,4 @@ hipify-clang --md --doc-format=full --doc-roc=separate
 To generate this documentation in CSV, use the `--csv` option instead of `--md`. Instead of using
 the `full` format, you can also build in `strict` or `compact` format.
 
-To see all available options use the `--help` or `--help-hidden` HIPIFY-Clang option.
+To see all available options, use the `--help` or `--help-hidden` HIPIFY-Clang option.
