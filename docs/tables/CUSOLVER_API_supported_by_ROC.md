@@ -109,16 +109,25 @@
 |**CUDA**|**A**|**D**|**C**|**R**|**ROC**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
 |`cusolverDnCCgesv`|10.2| | | | | | | | | |
+|`cusolverDnCCgesv_bufferSize`|10.2| | | | | | | | | |
 |`cusolverDnCEgesv`|11.0| | | | | | | | | |
+|`cusolverDnCEgesv_bufferSize`|11.0| | | | | | | | | |
 |`cusolverDnCKgesv`|10.2| | | | | | | | | |
+|`cusolverDnCKgesv_bufferSize`|10.2| | | | | | | | | |
 |`cusolverDnCYgesv`|11.0| | | | | | | | | |
+|`cusolverDnCYgesv_bufferSize`|11.0| | | | | | | | | |
 |`cusolverDnCreate`| | | | |`rocblas_create_handle`| | | | | |
 |`cusolverDnCreateParams`|11.0| | | | | | | | | |
 |`cusolverDnDBgesv`|11.0| | | | | | | | | |
+|`cusolverDnDBgesv_bufferSize`|11.0| | | | | | | | | |
 |`cusolverDnDDgesv`|10.2| | | | | | | | | |
+|`cusolverDnDDgesv_bufferSize`|10.2| | | | | | | | | |
 |`cusolverDnDHgesv`|10.2| | | | | | | | | |
+|`cusolverDnDHgesv_bufferSize`|10.2| | | | | | | | | |
 |`cusolverDnDSgesv`|10.2| | | | | | | | | |
+|`cusolverDnDSgesv_bufferSize`|10.2| | | | | | | | | |
 |`cusolverDnDXgesv`|11.0| | | | | | | | | |
+|`cusolverDnDXgesv_bufferSize`|11.0| | | | | | | | | |
 |`cusolverDnDestroy`| | | | |`rocblas_destroy_handle`| | | | | |
 |`cusolverDnDgetrf`| | | | | | | | | | |
 |`cusolverDnDgetrf_bufferSize`| | | | | | | | | | |
@@ -146,9 +155,13 @@
 |`cusolverDnIRSParamsSetTol`|10.2| | | | | | | | | |
 |`cusolverDnIRSParamsSetTolInner`|10.2| | | | | | | | | |
 |`cusolverDnSBgesv`|11.0| | | | | | | | | |
+|`cusolverDnSBgesv_bufferSize`|11.0| | | | | | | | | |
 |`cusolverDnSHgesv`|10.2| | | | | | | | | |
+|`cusolverDnSHgesv_bufferSize`|10.2| | | | | | | | | |
 |`cusolverDnSSgesv`|10.2| | | | | | | | | |
+|`cusolverDnSSgesv_bufferSize`|10.2| | | | | | | | | |
 |`cusolverDnSXgesv`|11.0| | | | | | | | | |
+|`cusolverDnSXgesv_bufferSize`|11.0| | | | | | | | | |
 |`cusolverDnSetAdvOptions`|11.0| | | | | | | | | |
 |`cusolverDnSetDeterministicMode`|12.2| | | | | | | | | |
 |`cusolverDnSetStream`| | | | |`rocblas_set_stream`| | | | | |
@@ -159,10 +172,15 @@
 |`cusolverDnXgetrf_bufferSize`|11.1| | | | | | | | | |
 |`cusolverDnXgetrs`|11.1| | | | | | | | | |
 |`cusolverDnZCgesv`|10.2| | | | | | | | | |
+|`cusolverDnZCgesv_bufferSize`|10.2| | | | | | | | | |
 |`cusolverDnZEgesv`|11.0| | | | | | | | | |
+|`cusolverDnZEgesv_bufferSize`|11.0| | | | | | | | | |
 |`cusolverDnZKgesv`|10.2| | | | | | | | | |
+|`cusolverDnZKgesv_bufferSize`|10.2| | | | | | | | | |
 |`cusolverDnZYgesv`|11.0| | | | | | | | | |
+|`cusolverDnZYgesv_bufferSize`|11.0| | | | | | | | | |
 |`cusolverDnZZgesv`|10.2| | | | | | | | | |
+|`cusolverDnZZgesv_bufferSize`|10.2| | | | | | | | | |
 
 
 \*A - Added; D - Deprecated; C - Changed; R - Removed; E - Experimental
