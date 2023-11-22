@@ -2019,6 +2019,26 @@ int main() {
   // HIP: DEPRECATED_CUDA_10000("The routine will be removed in CUDA 11") HIPSPARSE_EXPORT hipsparseStatus_t hipsparseScsrmm(hipsparseHandle_t handle, hipsparseOperation_t transA, int m, int n, int k, int nnz, const float* alpha, const hipsparseMatDescr_t descrA, const float* csrSortedValA, const int* csrSortedRowPtrA, const int* csrSortedColIndA, const float* B, int ldb, const float* beta, float* C, int ldc);
   // CHECK: status_t = hipsparseScsrmm(handle_t, opA, m, n, k, innz, &fA, matDescr_A, &csrSortedValA, &csrRowPtrA, &csrColIndA, &fB, ldb, &fBeta, &fC, ldc);
   status_t = cusparseScsrmm(handle_t, opA, m, n, k, innz, &fA, matDescr_A, &csrSortedValA, &csrRowPtrA, &csrColIndA, &fB, ldb, &fBeta, &fC, ldc);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseZhybmv(cusparseHandle_t handle, cusparseOperation_t transA, const cuDoubleComplex* alpha, const cusparseMatDescr_t descrA, const cusparseHybMat_t hybA, const cuDoubleComplex* x, const cuDoubleComplex* beta, cuDoubleComplex* y);
+  // HIP: DEPRECATED_CUDA_10000("The routine will be removed in CUDA 11") HIPSPARSE_EXPORT hipsparseStatus_t hipsparseZhybmv(hipsparseHandle_t handle, hipsparseOperation_t transA, const hipDoubleComplex* alpha, const hipsparseMatDescr_t descrA, const hipsparseHybMat_t hybA, const hipDoubleComplex* x, const hipDoubleComplex* beta, hipDoubleComplex* y);
+  // CHECK: status_t = hipsparseZhybmv(handle_t, opA, &dcomplexAlpha, matDescr_A, hybMat_t, &dcomplexX, &dcomplexBeta, &dcomplexY);
+  status_t = cusparseZhybmv(handle_t, opA, &dcomplexAlpha, matDescr_A, hybMat_t, &dcomplexX, &dcomplexBeta, &dcomplexY);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseChybmv(cusparseHandle_t handle, cusparseOperation_t transA, const cuComplex* alpha, const cusparseMatDescr_t descrA, const cusparseHybMat_t hybA, const cuComplex* x, const cuComplex* beta, cuComplex* y);
+  // HIP: DEPRECATED_CUDA_10000("The routine will be removed in CUDA 11") HIPSPARSE_EXPORT hipsparseStatus_t hipsparseChybmv(hipsparseHandle_t handle, hipsparseOperation_t transA, const hipComplex* alpha, const hipsparseMatDescr_t descrA, const hipsparseHybMat_t hybA, const hipComplex* x, const hipComplex* beta, hipComplex* y);
+  // CHECK: status_t = hipsparseChybmv(handle_t, opA, &complexAlpha, matDescr_A, hybMat_t, &complexX, &complexBeta, &complexY);
+  status_t = cusparseChybmv(handle_t, opA, &complexAlpha, matDescr_A, hybMat_t, &complexX, &complexBeta, &complexY);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseDhybmv(cusparseHandle_t handle, cusparseOperation_t transA, const double* alpha, const cusparseMatDescr_t descrA, const cusparseHybMat_t hybA, const double* x, const double* beta, double* y);
+  // HIP: DEPRECATED_CUDA_10000("The routine will be removed in CUDA 11") HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDhybmv(hipsparseHandle_t handle, hipsparseOperation_t transA, const double* alpha, const hipsparseMatDescr_t descrA, const hipsparseHybMat_t hybA, const double* x, const double* beta, double* y);
+  // CHECK: status_t = hipsparseDhybmv(handle_t, opA, &dAlpha, matDescr_A, hybMat_t, &dX, &dBeta, &dY);
+  status_t = cusparseDhybmv(handle_t, opA, &dAlpha, matDescr_A, hybMat_t, &dX, &dBeta, &dY);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseShybmv(cusparseHandle_t handle, cusparseOperation_t transA, const float* alpha, const cusparseMatDescr_t descrA, const cusparseHybMat_t hybA, const float* x, const float* beta, float* y);
+  // HIP: DEPRECATED_CUDA_10000("The routine will be removed in CUDA 11") HIPSPARSE_EXPORT hipsparseStatus_t hipsparseShybmv(hipsparseHandle_t handle, hipsparseOperation_t transA, const float* alpha, const hipsparseMatDescr_t descrA, const hipsparseHybMat_t hybA, const float* x, const float* beta, float* y);
+  // CHECK: status_t = hipsparseShybmv(handle_t, opA, &fAlpha, matDescr_A, hybMat_t, &fX, &fBeta, &fY);
+  status_t = cusparseShybmv(handle_t, opA, &fAlpha, matDescr_A, hybMat_t, &fX, &fBeta, &fY);
 #endif
 
 #if CUDA_VERSION >= 11000
