@@ -1,7 +1,7 @@
 # Changelog for HIPIFY
 
 Documentation for HIPIFY is available at
-[[HIPIFY documentation](https://rocmdocs.amd.com/projects/HIPIFY/en/latest/)](https://rocmdocs.amd.com/projects/HIPIFY/en/latest/).
+[https://rocmdocs.amd.com/projects/HIPIFY/en/latest/](https://rocmdocs.amd.com/projects/HIPIFY/en/latest/).
 
 ## HIPIFY for ROCm 6.0.0
 
@@ -32,7 +32,7 @@ Documentation for HIPIFY is available at
   * In one file: `hipify-clang --md --doc-format=full --doc-roc=joint`
 * New options:
   * `--use-hip-data-types` (Use 'hipDataType' instead of 'hipblasDatatype_t' or 'rocblas_datatype')
-  * `--doc-roc=\<value\>` (ROC documentation generation: `skip` (default), `separate`, and `joint`; the 
+  * `--doc-roc=\<value\>` (ROC documentation generation: `skip` (default), `separate`, and `joint`; the
     `--md` or `--csv` option must be included)
 
 ### Known issues
@@ -56,7 +56,7 @@ Documentation for HIPIFY is available at
 ### Fixes
 
 * Accessing `half2 struct` members (undocumented feature)
-* Moved `INSTALL` to the `bin` subfolder
+* Retargeted `INSTALL` to the `bin` subfolder
 
 ## HIPIFY for ROCm 5.5.0
 

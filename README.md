@@ -20,8 +20,6 @@ HIPIFY is a set of tools that you can use to automatically translate CUDA source
 * Related: [hipify_torch](https://github.com/ROCmSoftwarePlatform/hipify_torch)
 * [Supported CUDA APIs](./docs/supported_apis.md#supported-cuda-apis)
 * [Documentation](#documentation)
-  * [How to build HIPIFY documentation](#how-to-build-hipify-documentation)
-  * [How to build CUDA2HIP documentation](#how-to-build-cuda2hip-documentation)
 * [Disclaimer](#disclaimer)
 
 <!-- tocstop -->
@@ -29,7 +27,7 @@ HIPIFY is a set of tools that you can use to automatically translate CUDA source
 ## Documentation
 
 Documentation for HIPIFY is available at
-[[HIPIFY documentation](https://rocmdocs.amd.com/projects/HIPIFY/en/latest/)](https://rocmdocs.amd.com/projects/HIPIFY/en/latest/).
+[https://rocmdocs.amd.com/projects/HIPIFY/en/latest/](https://rocmdocs.amd.com/projects/HIPIFY/en/latest/).
 
 To build our documentation locally, run the following code.
 
@@ -46,7 +44,11 @@ command. This builds the same content as
 [Supported CUDA APIs](./docs/supported_apis.md#supported-cuda-apis).
 
 ```bash
-hipify-clang --md --doc-format=full
+hipify-clang --md --doc-format=full --doc-roc=joint
+
+# Alternatively, you can use:
+
+hipify-clang --md --doc-format=full --doc-roc=separate
 ```
 
 To generate this documentation in CSV, use the `--csv` option instead of `--md`. Instead of using
