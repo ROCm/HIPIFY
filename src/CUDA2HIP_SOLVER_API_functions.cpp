@@ -111,6 +111,28 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SOLVER_FUNCTION_MAP {
   {"cusolverDnSHgesv_bufferSize",                         {"hipsolverDnSHgesv_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
   {"cusolverDnSBgesv_bufferSize",                         {"hipsolverDnSBgesv_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
   {"cusolverDnSXgesv_bufferSize",                         {"hipsolverDnSXgesv_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  // NOTE: rocsolver_zgels has a harness of rocblas_set_workspace, hipsolverZZgels_bufferSize, hipsolverManageWorkspace, and rocsolver_zgels_outofplace
+  {"cusolverDnZZgels",                                    {"hipsolverDnZZgels",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  {"cusolverDnZCgels",                                    {"hipsolverDnZCgels",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnZKgels",                                    {"hipsolverDnZKgels",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnZEgels",                                    {"hipsolverDnZEgels",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnZYgels",                                    {"hipsolverDnZYgels",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  // NOTE: rocsolver_cgels has a harness of rocblas_set_workspace, hipsolverCCgels_bufferSize, hipsolverManageWorkspace, and rocsolver_cgels_outofplace
+  {"cusolverDnCCgels",                                    {"hipsolverDnCCgels",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  {"cusolverDnCKgels",                                    {"hipsolverDnCKgels",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnCEgels",                                    {"hipsolverDnCEgels",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnCYgels",                                    {"hipsolverDnCYgels",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  // NOTE: rocsolver_dgels has a harness of rocblas_set_workspace, hipsolverDDgels_bufferSize, hipsolverManageWorkspace, and rocsolver_dgels_outofplace
+  {"cusolverDnDDgels",                                    {"hipsolverDnDDgels",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  {"cusolverDnDSgels",                                    {"hipsolverDnDSgels",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnDHgels",                                    {"hipsolverDnDHgels",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnDBgels",                                    {"hipsolverDnDBgels",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnDXgels",                                    {"hipsolverDnDXgels",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  // NOTE: rocsolver_sgels has a harness of rocblas_set_workspace, hipsolverSSgels_bufferSize, hipsolverManageWorkspace, and rocsolver_sgels_outofplace
+  {"cusolverDnSSgels",                                    {"hipsolverDnSSgels",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  {"cusolverDnSHgels",                                    {"hipsolverDnSHgels",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnSBgels",                                    {"hipsolverDnSBgels",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnSXgels",                                    {"hipsolverDnSXgels",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_SOLVER_FUNCTION_VER_MAP {
@@ -177,6 +199,24 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SOLVER_FUNCTION_VER_MAP {
   {"cusolverDnSHgesv_bufferSize",                         {CUDA_102,  CUDA_0, CUDA_0}},
   {"cusolverDnSBgesv_bufferSize",                         {CUDA_110,  CUDA_0, CUDA_0}},
   {"cusolverDnSXgesv_bufferSize",                         {CUDA_110,  CUDA_0, CUDA_0}},
+  {"cusolverDnZZgels",                                    {CUDA_110,  CUDA_0, CUDA_0}},
+  {"cusolverDnZCgels",                                    {CUDA_110,  CUDA_0, CUDA_0}},
+  {"cusolverDnZKgels",                                    {CUDA_110,  CUDA_0, CUDA_0}},
+  {"cusolverDnZEgels",                                    {CUDA_110,  CUDA_0, CUDA_0}},
+  {"cusolverDnZYgels",                                    {CUDA_110,  CUDA_0, CUDA_0}},
+  {"cusolverDnCCgels",                                    {CUDA_110,  CUDA_0, CUDA_0}},
+  {"cusolverDnCKgels",                                    {CUDA_110,  CUDA_0, CUDA_0}},
+  {"cusolverDnCEgels",                                    {CUDA_110,  CUDA_0, CUDA_0}},
+  {"cusolverDnCYgels",                                    {CUDA_110,  CUDA_0, CUDA_0}},
+  {"cusolverDnDDgels",                                    {CUDA_110,  CUDA_0, CUDA_0}},
+  {"cusolverDnDSgels",                                    {CUDA_110,  CUDA_0, CUDA_0}},
+  {"cusolverDnDHgels",                                    {CUDA_110,  CUDA_0, CUDA_0}},
+  {"cusolverDnDBgels",                                    {CUDA_110,  CUDA_0, CUDA_0}},
+  {"cusolverDnDXgels",                                    {CUDA_110,  CUDA_0, CUDA_0}},
+  {"cusolverDnSSgels",                                    {CUDA_110,  CUDA_0, CUDA_0}},
+  {"cusolverDnSHgels",                                    {CUDA_110,  CUDA_0, CUDA_0}},
+  {"cusolverDnSBgels",                                    {CUDA_110,  CUDA_0, CUDA_0}},
+  {"cusolverDnSXgels",                                    {CUDA_110,  CUDA_0, CUDA_0}},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_SOLVER_FUNCTION_VER_MAP {
@@ -198,6 +238,10 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SOLVER_FUNCTION_VER_MAP {
   {"hipsolverDnCCgesv_bufferSize",                        {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipsolverDnDDgesv_bufferSize",                        {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipsolverDnSSgesv_bufferSize",                        {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverDnZZgels",                                   {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverDnCCgels",                                   {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverDnDDgels",                                   {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverDnSSgels",                                   {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_SOLVER_API_SECTION_MAP {
