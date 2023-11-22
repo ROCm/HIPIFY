@@ -53,4 +53,4 @@ hipify-clang --md --doc-format=full --doc-roc=separate
 To generate this documentation in CSV, use the `--csv` option instead of `--md`. Instead of using
 the `full` format, you can also build in `strict` or `compact` format.
 
-To see all available options, use the `--help` or `--help-hidden` HIPIFY-Clang option.
+To see all available options, use the `--help` or `--help-hidden` `hipify-clang` option.
