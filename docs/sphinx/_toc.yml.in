@@ -21,4 +21,6 @@ subtrees:
           - file: tables/CUFFT_API_supported_by_HIP
           - file: tables/CUSPARSE_API_supported_by_HIP
           - file: tables/CUB_API_supported_by_HIP
-
+- caption: About
+  entries:
+  - file: license
