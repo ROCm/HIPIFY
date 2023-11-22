@@ -1739,6 +1739,26 @@ int main() {
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_scsrmm(rocsparse_handle handle, rocsparse_operation trans_A, rocsparse_operation trans_B, rocsparse_int m, rocsparse_int n, rocsparse_int k, rocsparse_int nnz, const float* alpha, const rocsparse_mat_descr descr, const float* csr_val, const rocsparse_int* csr_row_ptr, const rocsparse_int* csr_col_ind, const float* B, rocsparse_int ldb, const float* beta, float* C, rocsparse_int ldc);
   // CHECK: status_t = rocsparse_scsrmm(handle_t, opA, m, n, k, innz, &fA, matDescr_A, &csrSortedValA, &csrRowPtrA, &csrColIndA, &fB, ldb, &fBeta, &fC, ldc);
   status_t = cusparseScsrmm(handle_t, opA, m, n, k, innz, &fA, matDescr_A, &csrSortedValA, &csrRowPtrA, &csrColIndA, &fB, ldb, &fBeta, &fC, ldc);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseZhybmv(cusparseHandle_t handle, cusparseOperation_t transA, const cuDoubleComplex* alpha, const cusparseMatDescr_t descrA, const cusparseHybMat_t hybA, const cuDoubleComplex* x, const cuDoubleComplex* beta, cuDoubleComplex* y);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_zhybmv(rocsparse_handle handle, rocsparse_operation trans, const rocsparse_double_complex* alpha, const rocsparse_mat_descr descr, const rocsparse_hyb_mat hyb, const rocsparse_double_complex* x, const rocsparse_double_complex* beta, rocsparse_double_complex* y);
+  // CHECK: status_t = rocsparse_zhybmv(handle_t, opA, &dcomplexAlpha, matDescr_A, hybMat_t, &dcomplexX, &dcomplexBeta, &dcomplexY);
+  status_t = cusparseZhybmv(handle_t, opA, &dcomplexAlpha, matDescr_A, hybMat_t, &dcomplexX, &dcomplexBeta, &dcomplexY);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseChybmv(cusparseHandle_t handle, cusparseOperation_t transA, const cuComplex* alpha, const cusparseMatDescr_t descrA, const cusparseHybMat_t hybA, const cuComplex* x, const cuComplex* beta, cuComplex* y);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_chybmv(rocsparse_handle handle, rocsparse_operation trans, const rocsparse_float_complex* alpha, const rocsparse_mat_descr descr, const rocsparse_hyb_mat hyb, const rocsparse_float_complex* x, const rocsparse_float_complex* beta, rocsparse_float_complex* y);
+  // CHECK: status_t = rocsparse_chybmv(handle_t, opA, &complexAlpha, matDescr_A, hybMat_t, &complexX, &complexBeta, &complexY);
+  status_t = cusparseChybmv(handle_t, opA, &complexAlpha, matDescr_A, hybMat_t, &complexX, &complexBeta, &complexY);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseDhybmv(cusparseHandle_t handle, cusparseOperation_t transA, const double* alpha, const cusparseMatDescr_t descrA, const cusparseHybMat_t hybA, const double* x, const double* beta, double* y);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_dhybmv(rocsparse_handle handle, rocsparse_operation trans, const double* alpha, const rocsparse_mat_descr descr, const rocsparse_hyb_mat hyb, const double* x, const double* beta, double* y);
+  // CHECK: status_t = rocsparse_dhybmv(handle_t, opA, &dAlpha, matDescr_A, hybMat_t, &dX, &dBeta, &dY);
+  status_t = cusparseDhybmv(handle_t, opA, &dAlpha, matDescr_A, hybMat_t, &dX, &dBeta, &dY);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseShybmv(cusparseHandle_t handle, cusparseOperation_t transA, const float* alpha, const cusparseMatDescr_t descrA, const cusparseHybMat_t hybA, const float* x, const float* beta, float* y);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_shybmv(rocsparse_handle handle, rocsparse_operation trans, const float* alpha, const rocsparse_mat_descr descr, const rocsparse_hyb_mat hyb, const float* x, const float* beta, float* y);
+  // CHECK: status_t = rocsparse_shybmv(handle_t, opA, &fAlpha, matDescr_A, hybMat_t, &fX, &fBeta, &fY);
+  status_t = cusparseShybmv(handle_t, opA, &fAlpha, matDescr_A, hybMat_t, &fX, &fBeta, &fY);
 #endif
 
 #if CUDA_VERSION >= 11000
