@@ -133,6 +133,28 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SOLVER_FUNCTION_MAP {
   {"cusolverDnSHgels",                                    {"hipsolverDnSHgels",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
   {"cusolverDnSBgels",                                    {"hipsolverDnSBgels",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
   {"cusolverDnSXgels",                                    {"hipsolverDnSXgels",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  // NOTE: rocsolver_zgels has a harness of rocblas_start_device_memory_size_query, rocsolver_zgels_outofplace, and rocblas_stop_device_memory_size_query
+  {"cusolverDnZZgels_bufferSize",                         {"hipsolverDnZZgels_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  {"cusolverDnZCgels_bufferSize",                         {"hipsolverDnZCgels_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnZKgels_bufferSize",                         {"hipsolverDnZKgels_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnZEgels_bufferSize",                         {"hipsolverDnZEgels_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnZYgels_bufferSize",                         {"hipsolverDnZYgels_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  // NOTE: rocsolver_cgels has a harness of rocblas_start_device_memory_size_query, rocsolver_cgels_outofplace, and rocblas_stop_device_memory_size_query
+  {"cusolverDnCCgels_bufferSize",                         {"hipsolverDnCCgels_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  {"cusolverDnCKgels_bufferSize",                         {"hipsolverDnCKgels_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnCEgels_bufferSize",                         {"hipsolverDnCEgels_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnCYgels_bufferSize",                         {"hipsolverDnCYgels_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  // NOTE: rocsolver_dgels has a harness of rocblas_start_device_memory_size_query, rocsolver_dgels_outofplace, and rocblas_stop_device_memory_size_query
+  {"cusolverDnDDgels_bufferSize",                         {"hipsolverDnDDgels_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  {"cusolverDnDSgels_bufferSize",                         {"hipsolverDnDSgels_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnDHgels_bufferSize",                         {"hipsolverDnDHgels_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnDBgels_bufferSize",                         {"hipsolverDnDBgels_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnDXgels_bufferSize",                         {"hipsolverDnDXgels_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  // NOTE: rocsolver_sgels has a harness of rocblas_start_device_memory_size_query, rocsolver_sgels_outofplace, and rocblas_stop_device_memory_size_query
+  {"cusolverDnSSgels_bufferSize",                         {"hipsolverDnSSgels_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  {"cusolverDnSHgels_bufferSize",                         {"hipsolverDnSHgels_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnSBgels_bufferSize",                         {"hipsolverDnSBgels_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnSXgels_bufferSize",                         {"hipsolverDnSXgels_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_SOLVER_FUNCTION_VER_MAP {
@@ -217,6 +239,24 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SOLVER_FUNCTION_VER_MAP {
   {"cusolverDnSHgels",                                    {CUDA_110,  CUDA_0, CUDA_0}},
   {"cusolverDnSBgels",                                    {CUDA_110,  CUDA_0, CUDA_0}},
   {"cusolverDnSXgels",                                    {CUDA_110,  CUDA_0, CUDA_0}},
+  {"cusolverDnZZgels_bufferSize",                         {CUDA_110,  CUDA_0, CUDA_0}},
+  {"cusolverDnZCgels_bufferSize",                         {CUDA_110,  CUDA_0, CUDA_0}},
+  {"cusolverDnZKgels_bufferSize",                         {CUDA_110,  CUDA_0, CUDA_0}},
+  {"cusolverDnZEgels_bufferSize",                         {CUDA_110,  CUDA_0, CUDA_0}},
+  {"cusolverDnZYgels_bufferSize",                         {CUDA_110,  CUDA_0, CUDA_0}},
+  {"cusolverDnCCgels_bufferSize",                         {CUDA_110,  CUDA_0, CUDA_0}},
+  {"cusolverDnCKgels_bufferSize",                         {CUDA_110,  CUDA_0, CUDA_0}},
+  {"cusolverDnCEgels_bufferSize",                         {CUDA_110,  CUDA_0, CUDA_0}},
+  {"cusolverDnCYgels_bufferSize",                         {CUDA_110,  CUDA_0, CUDA_0}},
+  {"cusolverDnDDgels_bufferSize",                         {CUDA_110,  CUDA_0, CUDA_0}},
+  {"cusolverDnDSgels_bufferSize",                         {CUDA_110,  CUDA_0, CUDA_0}},
+  {"cusolverDnDHgels_bufferSize",                         {CUDA_110,  CUDA_0, CUDA_0}},
+  {"cusolverDnDBgels_bufferSize",                         {CUDA_110,  CUDA_0, CUDA_0}},
+  {"cusolverDnDXgels_bufferSize",                         {CUDA_110,  CUDA_0, CUDA_0}},
+  {"cusolverDnSSgels_bufferSize",                         {CUDA_110,  CUDA_0, CUDA_0}},
+  {"cusolverDnSHgels_bufferSize",                         {CUDA_110,  CUDA_0, CUDA_0}},
+  {"cusolverDnSBgels_bufferSize",                         {CUDA_110,  CUDA_0, CUDA_0}},
+  {"cusolverDnSXgels_bufferSize",                         {CUDA_110,  CUDA_0, CUDA_0}},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_SOLVER_FUNCTION_VER_MAP {
@@ -242,6 +282,10 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SOLVER_FUNCTION_VER_MAP {
   {"hipsolverDnCCgels",                                   {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipsolverDnDDgels",                                   {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipsolverDnSSgels",                                   {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverDnZZgels_bufferSize",                        {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverDnCCgels_bufferSize",                        {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverDnDDgels_bufferSize",                        {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverDnSSgels_bufferSize",                        {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_SOLVER_API_SECTION_MAP {
