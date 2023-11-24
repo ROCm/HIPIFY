@@ -159,6 +159,10 @@ const std::string sCusparseZcsrsv2_solve = "cusparseZcsrsv2_solve";
 const std::string sCusparseCcsrsv2_solve = "cusparseCcsrsv2_solve";
 const std::string sCusparseDcsrsv2_solve = "cusparseDcsrsv2_solve";
 const std::string sCusparseScsrsv2_solve = "cusparseScsrsv2_solve";
+const std::string sCusparseZcsrsv2_analysis = "cusparseZcsrsv2_analysis";
+const std::string sCusparseCcsrsv2_analysis = "cusparseCcsrsv2_analysis";
+const std::string sCusparseDcsrsv2_analysis = "cusparseDcsrsv2_analysis";
+const std::string sCusparseScsrsv2_analysis = "cusparseScsrsv2_analysis";
 
 // CUDA_OVERLOADED
 const std::string sCudaEventCreate = "cudaEventCreate";
@@ -1167,6 +1171,46 @@ std::map<std::string, ArgCastStruct> FuncArgCasts {
       false
     }
   },
+  {sCusparseZcsrsv2_analysis,
+    {
+      {
+        {9, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+        {10, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseCcsrsv2_analysis,
+    {
+      {
+        {9, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+        {10, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseDcsrsv2_analysis,
+    {
+      {
+        {9, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+        {10, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseScsrsv2_analysis,
+    {
+      {
+        {9, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+        {10, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
 };
 
 void HipifyAction::RewriteString(StringRef s, clang::SourceLocation start) {
@@ -1954,7 +1998,11 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
             sCusparseZcsrsv2_solve,
             sCusparseCcsrsv2_solve,
             sCusparseDcsrsv2_solve,
-            sCusparseScsrsv2_solve
+            sCusparseScsrsv2_solve,
+            sCusparseZcsrsv2_analysis,
+            sCusparseCcsrsv2_analysis,
+            sCusparseDcsrsv2_analysis,
+            sCusparseScsrsv2_analysis
           )
         )
       )
