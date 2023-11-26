@@ -9,11 +9,39 @@
 int main() {
   printf("20. cuSOLVER API to rocSOLVER API synthetic test\n");
 
+  int m = 0;
+  int n = 0;
+  int nrhs = 0;
+  int lda = 0;
+  int ldb = 0;
+  int Lwork = 0;
+  int devIpiv = 0;
+  int devInfo = 0;
+  float fA = 0.f;
+  float fB = 0.f;
+  float fX = 0.f;
+  double dA = 0.f;
+  double dB = 0.f;
+  double dX = 0.f;
+  float fWorkspace = 0.f;
+  double dWorkspace = 0.f;
+  void *Workspace = nullptr;
+  size_t lwork_bytes = 0;
+
+  // CHECK: rocblas_double_complex dComplexA, dComplexB, dComplexX, dComplexWorkspace;
+  cuDoubleComplex dComplexA, dComplexB, dComplexX, dComplexWorkspace;
+
+  // CHECK: rocblas_float_complex complexA, complexB, complexX, complexWorkspace;
+  cuComplex complexA, complexB, complexX, complexWorkspace;
+
   // CHECK: rocblas_handle handle;
   cusolverDnHandle_t handle;
 
   // CHECK: hipStream_t stream_t;
   cudaStream_t stream_t;
+
+  // CHECK: rocblas_fill fillMode;
+  cublasFillMode_t fillMode;
 
   // CHECK: rocblas_status status;
   // CHECK-NEXT: rocblas_status STATUS_SUCCESS = rocblas_status_success;
@@ -57,6 +85,26 @@ int main() {
   // ROC: ROCBLAS_EXPORT rocblas_status rocblas_get_stream(rocblas_handle handle, hipStream_t* stream);
   // CHECK: status = rocblas_get_stream(handle, &stream_t);
   status = cusolverDnGetStream(handle, &stream_t);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnSpotrf(cusolverDnHandle_t handle, cublasFillMode_t uplo, int n, float * A, int lda, float * Workspace, int Lwork, int * devInfo);
+  // ROC: ROCSOLVER_EXPORT rocblas_status rocsolver_spotrf(rocblas_handle handle, const rocblas_fill uplo, const rocblas_int n, float* A, const rocblas_int lda, rocblas_int* info);
+  // CHECK: status = rocsolver_spotrf(handle, fillMode, n, &fA, lda, &fWorkspace, Lwork, &devInfo);
+  status = cusolverDnSpotrf(handle, fillMode, n, &fA, lda, &fWorkspace, Lwork, &devInfo);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnDpotrf(cusolverDnHandle_t handle, cublasFillMode_t uplo, int n, double * A, int lda, double * Workspace, int Lwork, int * devInfo);
+  // ROC: ROCSOLVER_EXPORT rocblas_status rocsolver_dpotrf(rocblas_handle handle, const rocblas_fill uplo, const rocblas_int n, double* A, const rocblas_int lda, rocblas_int* info);
+  // CHECK: status = rocsolver_dpotrf(handle, fillMode, n, &dA, lda, &dWorkspace, Lwork, &devInfo);
+  status = cusolverDnDpotrf(handle, fillMode, n, &dA, lda, &dWorkspace, Lwork, &devInfo);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnCpotrf(cusolverDnHandle_t handle, cublasFillMode_t uplo, int n, cuComplex * A, int lda, cuComplex * Workspace, int Lwork, int * devInfo);
+  // ROC: ROCSOLVER_EXPORT rocblas_status rocsolver_cpotrf(rocblas_handle handle, const rocblas_fill uplo, const rocblas_int n, rocblas_float_complex* A, const rocblas_int lda, rocblas_int* info);
+  // CHECK: status = rocsolver_cpotrf(handle, fillMode, n, &complexA, lda, &complexWorkspace, Lwork, &devInfo);
+  status = cusolverDnCpotrf(handle, fillMode, n, &complexA, lda, &complexWorkspace, Lwork, &devInfo);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnZpotrf(cusolverDnHandle_t handle, cublasFillMode_t uplo, int n, cuDoubleComplex * A, int lda, cuDoubleComplex * Workspace, int Lwork, int * devInfo);
+  // ROC: ROCSOLVER_EXPORT rocblas_status rocsolver_zpotrf(rocblas_handle handle, const rocblas_fill uplo, const rocblas_int n, rocblas_double_complex* A, const rocblas_int lda, rocblas_int* info);
+  // CHECK: status = rocsolver_zpotrf(handle, fillMode, n, &dComplexA, lda, &dComplexWorkspace, Lwork, &devInfo);
+  status = cusolverDnZpotrf(handle, fillMode, n, &dComplexA, lda, &dComplexWorkspace, Lwork, &devInfo);
 
 #if CUDA_VERSION >= 8000
   // CHECK: rocblas_eform eigType;
