@@ -126,10 +126,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   {"cusparseCbsrxmv",                                   {"hipsparseCbsrxmv",                                   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
   {"cusparseZbsrxmv",                                   {"hipsparseZbsrxmv",                                   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
 
-  {"cusparseScsrmv",                                    {"hipsparseScsrmv",                                    "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseDcsrmv",                                    {"hipsparseDcsrmv",                                    "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseCcsrmv",                                    {"hipsparseCcsrmv",                                    "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseZcsrmv",                                    {"hipsparseZcsrmv",                                    "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
+  {"cusparseScsrmv",                                    {"hipsparseScsrmv",                                    "rocsparse_scsrmv",                                                 CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED}},
+  {"cusparseDcsrmv",                                    {"hipsparseDcsrmv",                                    "rocsparse_dcsrmv",                                                 CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED}},
+  {"cusparseCcsrmv",                                    {"hipsparseCcsrmv",                                    "rocsparse_ccsrmv",                                                 CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED}},
+  {"cusparseZcsrmv",                                    {"hipsparseZcsrmv",                                    "rocsparse_zcsrmv",                                                 CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED}},
 
   {"cusparseCsrmvEx",                                   {"hipsparseCsrmvEx",                                   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
   {"cusparseCsrmvEx_bufferSize",                        {"hipsparseCsrmvEx_bufferSize",                        "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
@@ -200,7 +200,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   {"cusparseDcsrsv2_solve",                             {"hipsparseDcsrsv2_solve",                             "rocsparse_dcsrsv_solve",                                           CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED}},
   {"cusparseCcsrsv2_solve",                             {"hipsparseCcsrsv2_solve",                             "rocsparse_ccsrsv_solve",                                           CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED}},
   {"cusparseZcsrsv2_solve",                             {"hipsparseZcsrsv2_solve",                             "rocsparse_zcsrsv_solve",                                           CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseXcsrsv2_zeroPivot",                         {"hipsparseXcsrsv2_zeroPivot",                         "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
+  // TODO: rocsparse_get_stream and hipStreamSynchronize need to be added correspondingly before and after rocsparse_csrsv_zero_pivot call, because cusparseXcsrsv2_zeroPivot is blocking, and rocsparse_csrsv_zero_pivot is not
+  {"cusparseXcsrsv2_zeroPivot",                         {"hipsparseXcsrsv2_zeroPivot",                         "rocsparse_csrsv_zero_pivot",                                       CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED}},
 
   {"cusparseShybmv",                                    {"hipsparseShybmv",                                    "rocsparse_shybmv",                                                 CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED}},
   {"cusparseDhybmv",                                    {"hipsparseDhybmv",                                    "rocsparse_dhybmv",                                                 CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED}},
@@ -1990,6 +1991,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_FUNCTION_VER_MAP {
   {"hipsparseCreateConstDnMat",                          {HIP_6000, HIP_0,    HIP_0,  }},
   {"hipsparseConstDnMatGet",                             {HIP_6000, HIP_0,    HIP_0,  }},
   {"hipsparseConstDnMatGetValues",                       {HIP_6000, HIP_0,    HIP_0,  }},
+
   {"rocsparse_create_handle",                            {HIP_1090, HIP_0,    HIP_0   }},
   {"rocsparse_destroy_handle",                           {HIP_1090, HIP_0,    HIP_0   }},
   {"rocsparse_set_stream",                               {HIP_1090, HIP_0,    HIP_0   }},
@@ -2335,6 +2337,11 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_FUNCTION_VER_MAP {
   {"rocsparse_ccsrsv_buffer_size",                       {HIP_2100, HIP_0,    HIP_0   }},
   {"rocsparse_dcsrsv_buffer_size",                       {HIP_1090, HIP_0,    HIP_0   }},
   {"rocsparse_scsrsv_buffer_size",                       {HIP_1090, HIP_0,    HIP_0   }},
+  {"rocsparse_csrsv_zero_pivot",                         {HIP_1090, HIP_0,    HIP_0   }},
+  {"rocsparse_zcsrmv",                                   {HIP_1090, HIP_0,    HIP_0   }},
+  {"rocsparse_ccsrmv",                                   {HIP_1090, HIP_0,    HIP_0   }},
+  {"rocsparse_dcsrmv",                                   {HIP_1090, HIP_0,    HIP_0   }},
+  {"rocsparse_scsrmv",                                   {HIP_1090, HIP_0,    HIP_0   }},
 };
 
 const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_SPARSE_FUNCTION_CHANGED_VER_MAP {
