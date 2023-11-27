@@ -17,6 +17,8 @@ int main() {
   int Lwork = 0;
   int devIpiv = 0;
   int devInfo = 0;
+  int infoArray = 0;
+  int batchSize = 0;
   float fA = 0.f;
   float fB = 0.f;
   float fX = 0.f;
@@ -28,11 +30,20 @@ int main() {
   void *Workspace = nullptr;
   size_t lwork_bytes = 0;
 
+  float** fAarray = 0;
+  double** dAarray = 0;
+
   // CHECK: hipDoubleComplex dComplexA, dComplexB, dComplexX, dComplexWorkspace;
   cuDoubleComplex dComplexA, dComplexB, dComplexX, dComplexWorkspace;
 
   // CHECK: hipComplex complexA, complexB, complexX, complexWorkspace;
   cuComplex complexA, complexB, complexX, complexWorkspace;
+
+  // CHECK: hipDoubleComplex** dcomplexAarray = 0;
+  cuDoubleComplex** dcomplexAarray = 0;
+
+  // CHECK: hipComplex** complexAarray = 0;
+  cuComplex** complexAarray = 0;
 
   // CHECK: hipsolverHandle_t handle;
   cusolverDnHandle_t handle;
@@ -159,6 +170,26 @@ int main() {
   // CHECK: status = hipsolverDnZpotrf(handle, fillMode, n, &dComplexA, lda, &dComplexWorkspace, Lwork, &devInfo);
   status = cusolverDnZpotrf(handle, fillMode, n, &dComplexA, lda, &dComplexWorkspace, Lwork, &devInfo);
 
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnSpotrs(cusolverDnHandle_t handle, cublasFillMode_t uplo, int n, int nrhs, const float * A, int lda, float * B, int ldb, int * devInfo);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnSpotrs(hipsolverHandle_t handle, hipblasFillMode_t uplo, int n, int nrhs, const float* A, int lda, float* B, int ldb, int* devInfo);
+  // CHECK: status = hipsolverDnSpotrs(handle, fillMode, n, nrhs, &fA, lda, &fB, ldb, &devInfo);
+  status = cusolverDnSpotrs(handle, fillMode, n, nrhs, &fA, lda, &fB, ldb, &devInfo);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnDpotrs(cusolverDnHandle_t handle, cublasFillMode_t uplo, int n, int nrhs, const double * A, int lda, double * B, int ldb, int * devInfo);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnDpotrs(hipsolverHandle_t handle, hipblasFillMode_t uplo, int n, int nrhs, const double* A, int lda, double* B, int ldb, int* devInfo);
+  // CHECK: status = hipsolverDnDpotrs(handle, fillMode, n, nrhs, &dA, lda, &dB, ldb, &devInfo);
+  status = cusolverDnDpotrs(handle, fillMode, n, nrhs, &dA, lda, &dB, ldb, &devInfo);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnCpotrs(cusolverDnHandle_t handle, cublasFillMode_t uplo, int n, int nrhs, const cuComplex * A, int lda, cuComplex * B, int ldb, int * devInfo);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnCpotrs(hipsolverHandle_t handle, hipblasFillMode_t uplo, int n, int nrhs, const hipFloatComplex* A, int lda, hipFloatComplex* B, int ldb, int* devInfo);
+  // CHECK: status = hipsolverDnCpotrs(handle, fillMode, n, nrhs, &complexA, lda, &complexB, ldb, &devInfo);
+  status = cusolverDnCpotrs(handle, fillMode, n, nrhs, &complexA, lda, &complexB, ldb, &devInfo);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnZpotrs(cusolverDnHandle_t handle, cublasFillMode_t uplo, int n, int nrhs, const cuDoubleComplex *A, int lda, cuDoubleComplex * B, int ldb, int * devInfo);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnZpotrs(hipsolverHandle_t handle, hipblasFillMode_t uplo, int n, int nrhs, const hipDoubleComplex* A, int lda, hipDoubleComplex* B, int ldb, int* devInfo);
+  // CHECK: status = hipsolverDnZpotrs(handle, fillMode, n, nrhs, &dComplexA, lda, &dComplexB, ldb, &devInfo);
+  status = cusolverDnZpotrs(handle, fillMode, n, nrhs, &dComplexA, lda, &dComplexB, ldb, &devInfo);
+
 #if CUDA_VERSION >= 8000
   // CHECK: hipsolverEigType_t eigType;
   // CHECK-NEXT: hipsolverEigType_t EIG_TYPE_1 = HIPSOLVER_EIG_TYPE_1;
@@ -183,6 +214,28 @@ int main() {
 
   // CHECK: hipsolverGesvdjInfo_t gesvdj_info;
   gesvdjInfo_t gesvdj_info;
+#endif
+
+#if CUDA_VERSION >= 9010
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnSpotrfBatched(cusolverDnHandle_t handle, cublasFillMode_t uplo, int n, float * Aarray[], int lda, int * infoArray, int batchSize);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnSpotrfBatched(hipsolverHandle_t handle, hipblasFillMode_t uplo, int n, float* A[], int lda, int* devInfo, int batch_count);
+  // CHECK: status = hipsolverDnSpotrfBatched(handle, fillMode, n, fAarray, lda, &infoArray, batchSize);
+  status = cusolverDnSpotrfBatched(handle, fillMode, n, fAarray, lda, &infoArray, batchSize);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnDpotrfBatched(cusolverDnHandle_t handle, cublasFillMode_t uplo, int n, double * Aarray[], int lda, int * infoArray, int batchSize);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnDpotrfBatched(hipsolverHandle_t handle, hipblasFillMode_t uplo, int n, double* A[], int lda, int* devInfo, int batch_count);
+  // CHECK: status = hipsolverDnDpotrfBatched(handle, fillMode, n, dAarray, lda, &infoArray, batchSize);
+  status = cusolverDnDpotrfBatched(handle, fillMode, n, dAarray, lda, &infoArray, batchSize);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnCpotrfBatched(cusolverDnHandle_t handle, cublasFillMode_t uplo, int n, cuComplex * Aarray[], int lda, int * infoArray, int batchSize);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnCpotrfBatched(hipsolverHandle_t handle, hipblasFillMode_t uplo, int n, hipFloatComplex* A[], int lda, int* devInfo, int batch_count);
+  // CHECK: status = hipsolverDnCpotrfBatched(handle, fillMode, n, complexAarray, lda, &infoArray, batchSize);
+  status = cusolverDnCpotrfBatched(handle, fillMode, n, complexAarray, lda, &infoArray, batchSize);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnZpotrfBatched(cusolverDnHandle_t handle, cublasFillMode_t uplo, int n, cuDoubleComplex * Aarray[], int lda, int * infoArray, int batchSize);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnZpotrfBatched(hipsolverHandle_t handle, hipblasFillMode_t uplo, int n, hipDoubleComplex* A[], int lda, int* devInfo, int batch_count);
+  // CHECK: status = hipsolverDnZpotrfBatched(handle, fillMode, n, dcomplexAarray, lda, &infoArray, batchSize);
+  status = cusolverDnZpotrfBatched(handle, fillMode, n, dcomplexAarray, lda, &infoArray, batchSize);
 #endif
 
 #if CUDA_VERSION >= 10010
