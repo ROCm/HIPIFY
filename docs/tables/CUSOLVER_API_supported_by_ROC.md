@@ -125,7 +125,9 @@
 |`cusolverDnCYgesv`|11.0| | | | | | | | | |
 |`cusolverDnCYgesv_bufferSize`|11.0| | | | | | | | | |
 |`cusolverDnCpotrf`| | | | |`rocsolver_cpotrf`|3.6.0| | | |6.1.0|
+|`cusolverDnCpotrfBatched`|9.1| | | | | | | | | |
 |`cusolverDnCpotrf_bufferSize`| | | | | | | | | | |
+|`cusolverDnCpotrs`| | | | | | | | | | |
 |`cusolverDnCreate`| | | | |`rocblas_create_handle`| | | | | |
 |`cusolverDnCreateParams`|11.0| | | | | | | | | |
 |`cusolverDnDBgels`|11.0| | | | | | | | | |
@@ -153,7 +155,9 @@
 |`cusolverDnDgetrf_bufferSize`| | | | | | | | | | |
 |`cusolverDnDgetrs`| | | | | | | | | | |
 |`cusolverDnDpotrf`| | | | |`rocsolver_dpotrf`|3.2.0| | | |6.1.0|
+|`cusolverDnDpotrfBatched`|9.1| | | | | | | | | |
 |`cusolverDnDpotrf_bufferSize`| | | | | | | | | | |
+|`cusolverDnDpotrs`| | | | | | | | | | |
 |`cusolverDnGetDeterministicMode`|12.2| | | | | | | | | |
 |`cusolverDnGetStream`| | | | |`rocblas_get_stream`| | | | | |
 |`cusolverDnIRSInfosCreate`|10.2| | | | | | | | | |
@@ -203,7 +207,9 @@
 |`cusolverDnSgetrf_bufferSize`| | | | | | | | | | |
 |`cusolverDnSgetrs`| | | | | | | | | | |
 |`cusolverDnSpotrf`| | | | |`rocsolver_spotrf`|3.2.0| | | |6.1.0|
+|`cusolverDnSpotrfBatched`|9.1| | | | | | | | | |
 |`cusolverDnSpotrf_bufferSize`| | | | | | | | | | |
+|`cusolverDnSpotrs`| | | | | | | | | | |
 |`cusolverDnXgetrf`|11.1| | | | | | | | | |
 |`cusolverDnXgetrf_bufferSize`|11.1| | | | | | | | | |
 |`cusolverDnXgetrs`|11.1| | | | | | | | | |
@@ -228,7 +234,9 @@
 |`cusolverDnZZgesv`|10.2| | | | | | | | | |
 |`cusolverDnZZgesv_bufferSize`|10.2| | | | | | | | | |
 |`cusolverDnZpotrf`| | | | |`rocsolver_zpotrf`|3.6.0| | | |6.1.0|
+|`cusolverDnZpotrfBatched`|9.1| | | | | | | | | |
 |`cusolverDnZpotrf_bufferSize`| | | | | | | | | | |
+|`cusolverDnZpotrs`| | | | | | | | | | |
 
 
 \*A - Added; D - Deprecated; C - Changed; R - Removed; E - Experimental

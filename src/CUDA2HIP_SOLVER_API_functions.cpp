@@ -172,6 +172,16 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SOLVER_FUNCTION_MAP {
   {"cusolverDnDpotrf",                                    {"hipsolverDnDpotrf",                                    "rocsolver_dpotrf",                                               CONV_LIB_FUNC, API_SOLVER, 2, HIP_EXPERIMENTAL}},
   {"cusolverDnCpotrf",                                    {"hipsolverDnCpotrf",                                    "rocsolver_cpotrf",                                               CONV_LIB_FUNC, API_SOLVER, 2, HIP_EXPERIMENTAL}},
   {"cusolverDnZpotrf",                                    {"hipsolverDnZpotrf",                                    "rocsolver_zpotrf",                                               CONV_LIB_FUNC, API_SOLVER, 2, HIP_EXPERIMENTAL}},
+  // NOTE: rocsolver_(s|d|c|z)potrs has a harness of rocblas_set_workspace, hipsolver(S|D|C|Z)potrs_bufferSize, hipsolverManageWorkspace, and hipsolverZeroInfo
+  {"cusolverDnSpotrs",                                    {"hipsolverDnSpotrs",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  {"cusolverDnDpotrs",                                    {"hipsolverDnDpotrs",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  {"cusolverDnCpotrs",                                    {"hipsolverDnCpotrs",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  {"cusolverDnZpotrs",                                    {"hipsolverDnZpotrs",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  // NOTE: rocsolver_(s|d|c|z)potrf_batched has a harness of rocblas_set_workspace, hipsolver(S|D|C|Z)potrfBatched_bufferSize, and hipsolverManageWorkspace
+  {"cusolverDnSpotrfBatched",                             {"hipsolverDnSpotrfBatched",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  {"cusolverDnDpotrfBatched",                             {"hipsolverDnDpotrfBatched",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  {"cusolverDnCpotrfBatched",                             {"hipsolverDnCpotrfBatched",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  {"cusolverDnZpotrfBatched",                             {"hipsolverDnZpotrfBatched",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_SOLVER_FUNCTION_VER_MAP {
@@ -278,6 +288,10 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SOLVER_FUNCTION_VER_MAP {
   {"cusolverDnIRSXgesv_bufferSize",                       {CUDA_102,  CUDA_0, CUDA_0}},
   {"cusolverDnIRSXgels",                                  {CUDA_110,  CUDA_0, CUDA_0}},
   {"cusolverDnIRSXgels_bufferSize",                       {CUDA_110,  CUDA_0, CUDA_0}},
+  {"cusolverDnSpotrfBatched",                             {CUDA_91,   CUDA_0, CUDA_0}},
+  {"cusolverDnDpotrfBatched",                             {CUDA_91,   CUDA_0, CUDA_0}},
+  {"cusolverDnCpotrfBatched",                             {CUDA_91,   CUDA_0, CUDA_0}},
+  {"cusolverDnZpotrfBatched",                             {CUDA_91,   CUDA_0, CUDA_0}},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_SOLVER_FUNCTION_VER_MAP {
@@ -315,6 +329,14 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SOLVER_FUNCTION_VER_MAP {
   {"hipsolverDnDpotrf",                                   {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipsolverDnCpotrf",                                   {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipsolverDnZpotrf",                                   {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverDnSpotrs",                                   {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverDnDpotrs",                                   {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverDnCpotrs",                                   {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverDnZpotrs",                                   {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverDnSpotrfBatched",                            {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverDnDpotrfBatched",                            {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverDnCpotrfBatched",                            {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverDnZpotrfBatched",                            {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
 
   {"rocsolver_spotrf",                                    {HIP_3020, HIP_0,    HIP_0,  HIP_LATEST}},
   {"rocsolver_dpotrf",                                    {HIP_3020, HIP_0,    HIP_0,  HIP_LATEST}},
