@@ -147,6 +147,26 @@ const std::string sCusparseZcsrsm2_analysis = "cusparseZcsrsm2_analysis";
 const std::string sCusparseCcsrsm2_analysis = "cusparseCcsrsm2_analysis";
 const std::string sCusparseDcsrsm2_analysis = "cusparseDcsrsm2_analysis";
 const std::string sCusparseScsrsm2_analysis = "cusparseScsrsm2_analysis";
+const std::string sCusparseScsrsm2_bufferSizeExt = "cusparseScsrsm2_bufferSizeExt";
+const std::string sCusparseDcsrsm2_bufferSizeExt = "cusparseDcsrsm2_bufferSizeExt";
+const std::string sCusparseCcsrsm2_bufferSizeExt = "cusparseCcsrsm2_bufferSizeExt";
+const std::string sCusparseZcsrsm2_bufferSizeExt = "cusparseZcsrsm2_bufferSizeExt";
+const std::string sCusparseZgemvi_bufferSize = "cusparseZgemvi_bufferSize";
+const std::string sCusparseCgemvi_bufferSize = "cusparseCgemvi_bufferSize";
+const std::string sCusparseDgemvi_bufferSize = "cusparseDgemvi_bufferSize";
+const std::string sCusparseSgemvi_bufferSize = "cusparseSgemvi_bufferSize";
+const std::string sCusparseZcsrsv2_solve = "cusparseZcsrsv2_solve";
+const std::string sCusparseCcsrsv2_solve = "cusparseCcsrsv2_solve";
+const std::string sCusparseDcsrsv2_solve = "cusparseDcsrsv2_solve";
+const std::string sCusparseScsrsv2_solve = "cusparseScsrsv2_solve";
+const std::string sCusparseZcsrsv2_analysis = "cusparseZcsrsv2_analysis";
+const std::string sCusparseCcsrsv2_analysis = "cusparseCcsrsv2_analysis";
+const std::string sCusparseDcsrsv2_analysis = "cusparseDcsrsv2_analysis";
+const std::string sCusparseScsrsv2_analysis = "cusparseScsrsv2_analysis";
+const std::string sCusparseZcsrmv = "cusparseZcsrmv";
+const std::string sCusparseCcsrmv = "cusparseCcsrmv";
+const std::string sCusparseDcsrmv = "cusparseDcsrmv";
+const std::string sCusparseScsrmv = "cusparseScsrmv";
 
 // CUDA_OVERLOADED
 const std::string sCudaEventCreate = "cudaEventCreate";
@@ -1047,6 +1067,190 @@ std::map<std::string, ArgCastStruct> FuncArgCasts {
       false
     }
   },
+  {sCusparseScsrsm2_bufferSizeExt,
+    {
+      {
+        {15, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseDcsrsm2_bufferSizeExt,
+    {
+      {
+        {15, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseCcsrsm2_bufferSizeExt,
+    {
+      {
+        {15, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseZcsrsm2_bufferSizeExt,
+    {
+      {
+        {15, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseZgemvi_bufferSize,
+    {
+      {
+        {5, {e_reinterpret_cast_size_t, cw_None}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseCgemvi_bufferSize,
+    {
+      {
+        {5, {e_reinterpret_cast_size_t, cw_None}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseDgemvi_bufferSize,
+    {
+      {
+        {5, {e_reinterpret_cast_size_t, cw_None}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseSgemvi_bufferSize,
+    {
+      {
+        {5, {e_reinterpret_cast_size_t, cw_None}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseZcsrsv2_solve,
+    {
+      {
+        {12, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseCcsrsv2_solve,
+    {
+      {
+        {12, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseDcsrsv2_solve,
+    {
+      {
+        {12, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseScsrsv2_solve,
+    {
+      {
+        {12, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseZcsrsv2_analysis,
+    {
+      {
+        {9, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+        {10, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseCcsrsv2_analysis,
+    {
+      {
+        {9, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+        {10, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseDcsrsv2_analysis,
+    {
+      {
+        {9, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+        {10, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseScsrsv2_analysis,
+    {
+      {
+        {9, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+        {10, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseZcsrmv,
+    {
+      {
+        {10, {e_add_const_argument, cw_None, "nullptr"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseCcsrmv,
+    {
+      {
+        {10, {e_add_const_argument, cw_None, "nullptr"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseDcsrmv,
+    {
+      {
+        {10, {e_add_const_argument, cw_None, "nullptr"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseScsrmv,
+    {
+      {
+        {10, {e_add_const_argument, cw_None, "nullptr"}}
+      },
+      true,
+      false
+    }
+  },
 };
 
 void HipifyAction::RewriteString(StringRef s, clang::SourceLocation start) {
@@ -1822,7 +2026,27 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
             sCusparseZcsrsm2_analysis,
             sCusparseCcsrsm2_analysis,
             sCusparseDcsrsm2_analysis,
-            sCusparseScsrsm2_analysis
+            sCusparseScsrsm2_analysis,
+            sCusparseScsrsm2_bufferSizeExt,
+            sCusparseDcsrsm2_bufferSizeExt,
+            sCusparseCcsrsm2_bufferSizeExt,
+            sCusparseZcsrsm2_bufferSizeExt,
+            sCusparseZgemvi_bufferSize,
+            sCusparseCgemvi_bufferSize,
+            sCusparseDgemvi_bufferSize,
+            sCusparseSgemvi_bufferSize,
+            sCusparseZcsrsv2_solve,
+            sCusparseCcsrsv2_solve,
+            sCusparseDcsrsv2_solve,
+            sCusparseScsrsv2_solve,
+            sCusparseZcsrsv2_analysis,
+            sCusparseCcsrsv2_analysis,
+            sCusparseDcsrsv2_analysis,
+            sCusparseScsrsv2_analysis,
+            sCusparseZcsrmv,
+            sCusparseCcsrmv,
+            sCusparseDcsrmv,
+            sCusparseScsrmv
           )
         )
       )

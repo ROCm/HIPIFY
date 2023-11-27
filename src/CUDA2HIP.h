@@ -156,6 +156,7 @@ extern const std::map<llvm::StringRef, hipAPIversions> HIP_CUB_TYPE_NAME_VER_MAP
 extern const std::map<llvm::StringRef, hipAPIversions> HIP_CUB_FUNCTION_VER_MAP;
 extern const std::map<llvm::StringRef, hipAPIversions> HIP_RTC_TYPE_NAME_VER_MAP;
 extern const std::map<llvm::StringRef, hipAPIversions> HIP_RTC_FUNCTION_VER_MAP;
+extern const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_RTC_FUNCTION_CHANGED_VER_MAP;
 extern const std::map<llvm::StringRef, hipAPIversions> HIP_SOLVER_TYPE_NAME_VER_MAP;
 extern const std::map<llvm::StringRef, hipAPIversions> HIP_SOLVER_FUNCTION_VER_MAP;
 
