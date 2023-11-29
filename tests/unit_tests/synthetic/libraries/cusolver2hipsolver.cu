@@ -31,7 +31,9 @@ int main() {
   size_t lwork_bytes = 0;
 
   float** fAarray = 0;
+  float** fBarray = 0;
   double** dAarray = 0;
+  double** dBarray = 0;
 
   // CHECK: hipDoubleComplex dComplexA, dComplexB, dComplexX, dComplexWorkspace;
   cuDoubleComplex dComplexA, dComplexB, dComplexX, dComplexWorkspace;
@@ -40,10 +42,14 @@ int main() {
   cuComplex complexA, complexB, complexX, complexWorkspace;
 
   // CHECK: hipDoubleComplex** dcomplexAarray = 0;
+  // CHECK-NEXT: hipDoubleComplex** dcomplexBarray = 0;
   cuDoubleComplex** dcomplexAarray = 0;
+  cuDoubleComplex** dcomplexBarray = 0;
 
   // CHECK: hipComplex** complexAarray = 0;
+  // CHECK-NEXT: hipComplex** complexBarray = 0;
   cuComplex** complexAarray = 0;
+  cuComplex** complexBarray = 0;
 
   // CHECK: hipsolverHandle_t handle;
   cusolverDnHandle_t handle;
@@ -236,6 +242,26 @@ int main() {
   // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnZpotrfBatched(hipsolverHandle_t handle, hipblasFillMode_t uplo, int n, hipDoubleComplex* A[], int lda, int* devInfo, int batch_count);
   // CHECK: status = hipsolverDnZpotrfBatched(handle, fillMode, n, dcomplexAarray, lda, &infoArray, batchSize);
   status = cusolverDnZpotrfBatched(handle, fillMode, n, dcomplexAarray, lda, &infoArray, batchSize);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnSpotrsBatched(cusolverDnHandle_t handle, cublasFillMode_t uplo, int n, int nrhs, float * A[], int lda, float * B[], int ldb, int * d_info, int batchSize);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnSpotrsBatched(hipsolverHandle_t handle, hipblasFillMode_t uplo, int n, int nrhs, float* A[], int lda, float* B[], int ldb, int* devInfo, int batch_count);
+  // CHECK: status = hipsolverDnSpotrsBatched(handle, fillMode, n, nrhs, fAarray, lda, fBarray, ldb, &infoArray, batchSize);
+  status = cusolverDnSpotrsBatched(handle, fillMode, n, nrhs, fAarray, lda, fBarray, ldb, &infoArray, batchSize);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnDpotrsBatched(cusolverDnHandle_t handle, cublasFillMode_t uplo, int n, int nrhs, double * A[], int lda, double * B[], int ldb, int * d_info, int batchSize);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnDpotrsBatched(hipsolverHandle_t handle, hipblasFillMode_t uplo, int n, int nrhs, double* A[], int lda, double* B[], int ldb, int* devInfo, int batch_count);
+  // CHECK: status = hipsolverDnDpotrsBatched(handle, fillMode, n, nrhs, dAarray, lda, dBarray, ldb, &infoArray, batchSize);
+  status = cusolverDnDpotrsBatched(handle, fillMode, n, nrhs, dAarray, lda, dBarray, ldb, &infoArray, batchSize);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnCpotrsBatched(cusolverDnHandle_t handle, cublasFillMode_t uplo, int n, int nrhs, cuComplex * A[], int lda, cuComplex * B[], int ldb, int * d_info, int batchSize);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnCpotrsBatched(hipsolverHandle_t handle, hipblasFillMode_t uplo, int n, int nrhs, hipFloatComplex* A[], int lda, hipFloatComplex* B[], int ldb, int* devInfo, int batch_count);
+  // CHECK: status = hipsolverDnCpotrsBatched(handle, fillMode, n, nrhs, complexAarray, lda, complexBarray, ldb, &infoArray, batchSize);
+  status = cusolverDnCpotrsBatched(handle, fillMode, n, nrhs, complexAarray, lda, complexBarray, ldb, &infoArray, batchSize);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnZpotrsBatched(cusolverDnHandle_t handle, cublasFillMode_t uplo, int n, int nrhs, cuDoubleComplex * A[], int lda, cuDoubleComplex * B[], int ldb, int * d_info, int batchSize);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnZpotrsBatched(hipsolverHandle_t handle, hipblasFillMode_t uplo, int n, int nrhs, hipDoubleComplex* A[], int lda, hipDoubleComplex* B[], int ldb, int* devInfo, int batch_count);
+  // CHECK: status = hipsolverDnZpotrsBatched(handle, fillMode, n, nrhs, dcomplexAarray, lda, dcomplexBarray, ldb, &infoArray, batchSize);
+  status = cusolverDnZpotrsBatched(handle, fillMode, n, nrhs, dcomplexAarray, lda, dcomplexBarray, ldb, &infoArray, batchSize);
 #endif
 
 #if CUDA_VERSION >= 10010
