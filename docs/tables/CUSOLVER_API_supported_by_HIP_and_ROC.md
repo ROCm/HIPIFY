@@ -128,6 +128,7 @@
 |`cusolverDnCpotrfBatched`|9.1| | | |`hipsolverDnCpotrfBatched`|5.1.0| | | |6.1.0| | | | | | |
 |`cusolverDnCpotrf_bufferSize`| | | | |`hipsolverDnCpotrf_bufferSize`|5.1.0| | | |6.1.0| | | | | | |
 |`cusolverDnCpotrs`| | | | |`hipsolverDnCpotrs`|5.1.0| | | |6.1.0| | | | | | |
+|`cusolverDnCpotrsBatched`|9.1| | | |`hipsolverDnCpotrsBatched`|5.1.0| | | |6.1.0| | | | | | |
 |`cusolverDnCreate`| | | | |`hipsolverDnCreate`|5.1.0| | | |6.1.0|`rocblas_create_handle`| | | | | |
 |`cusolverDnCreateParams`|11.0| | | | | | | | | | | | | | | |
 |`cusolverDnDBgels`|11.0| | | | | | | | | | | | | | | |
@@ -158,6 +159,7 @@
 |`cusolverDnDpotrfBatched`|9.1| | | |`hipsolverDnDpotrfBatched`|5.1.0| | | |6.1.0| | | | | | |
 |`cusolverDnDpotrf_bufferSize`| | | | |`hipsolverDnDpotrf_bufferSize`|5.1.0| | | |6.1.0| | | | | | |
 |`cusolverDnDpotrs`| | | | |`hipsolverDnDpotrs`|5.1.0| | | |6.1.0| | | | | | |
+|`cusolverDnDpotrsBatched`|9.1| | | |`hipsolverDnDpotrsBatched`|5.1.0| | | |6.1.0| | | | | | |
 |`cusolverDnGetDeterministicMode`|12.2| | | | | | | | | | | | | | | |
 |`cusolverDnGetStream`| | | | |`hipsolverGetStream`|4.5.0| | | |6.1.0|`rocblas_get_stream`| | | | | |
 |`cusolverDnIRSInfosCreate`|10.2| | | | | | | | | | | | | | | |
@@ -210,6 +212,7 @@
 |`cusolverDnSpotrfBatched`|9.1| | | |`hipsolverDnSpotrfBatched`|5.1.0| | | |6.1.0| | | | | | |
 |`cusolverDnSpotrf_bufferSize`| | | | |`hipsolverDnSpotrf_bufferSize`|5.1.0| | | |6.1.0| | | | | | |
 |`cusolverDnSpotrs`| | | | |`hipsolverDnSpotrs`|5.1.0| | | |6.1.0| | | | | | |
+|`cusolverDnSpotrsBatched`|9.1| | | |`hipsolverDnSpotrsBatched`|5.1.0| | | |6.1.0| | | | | | |
 |`cusolverDnXgetrf`|11.1| | | | | | | | | | | | | | | |
 |`cusolverDnXgetrf_bufferSize`|11.1| | | | | | | | | | | | | | | |
 |`cusolverDnXgetrs`|11.1| | | | | | | | | | | | | | | |
@@ -237,6 +240,7 @@
 |`cusolverDnZpotrfBatched`|9.1| | | |`hipsolverDnZpotrfBatched`|5.1.0| | | |6.1.0| | | | | | |
 |`cusolverDnZpotrf_bufferSize`| | | | |`hipsolverDnZpotrf_bufferSize`|5.1.0| | | |6.1.0| | | | | | |
 |`cusolverDnZpotrs`| | | | |`hipsolverDnZpotrs`|5.1.0| | | |6.1.0| | | | | | |
+|`cusolverDnZpotrsBatched`|9.1| | | |`hipsolverDnZpotrsBatched`|5.1.0| | | |6.1.0| | | | | | |
 
 
 \*A - Added; D - Deprecated; C - Changed; R - Removed; E - Experimental
