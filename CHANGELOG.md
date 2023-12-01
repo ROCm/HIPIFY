@@ -109,7 +109,7 @@ Documentation for HIPIFY is available at
 ### Fixes
 
 * Patches for LLVM 14.0.x (Windows only)
-* Add` GNUInstallDirs` for CMake on Linux
+* Add `GNUInstallDirs` for CMake on Linux
 
 ### Changes
 
