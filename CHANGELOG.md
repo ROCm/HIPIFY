@@ -72,19 +72,25 @@ Full documentation for HIPIFY is available at [hipify.readthedocs.io](https://hi
 - LLVM 15.0.0 support
 
 ## HIPIFY for ROCm 5.3.0
-### Added
-- CUDA 11.7.0 support
-- cuDNN 8.4.1 support
-- CUB initial support
-- More synthetic tests
-- New options:
-  - --hip-kernel-execution-syntax
-### Fixed
-- Patches for LLVM 14.0.x (Windows only)
-- Add GNUInstallDirs for CMake on Linux
-### Misc
-- LLVM 3.8.0 is out of support
-- HIPIFY-specific options support in unit testing
+
+### Additions
+
+* CUDA 11.7.0 support
+* cuDNN 8.4.1 support
+* CUB initial support
+* More synthetic tests
+* New options:
+  * `--hip-kernel-execution-syntax`
+
+### Fixes
+
+* Patches for LLVM 14.0.x (Windows only)
+* Add `GNUInstallDirs` for CMake on Linux
+
+### Changes
+
+* LLVM 3.8.0 is out of support
+* HIPIFY-specific options support in unit testing
 
 ## HIPIFY for ROCm 5.2.0
 ### Added

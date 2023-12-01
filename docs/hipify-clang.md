@@ -345,63 +345,63 @@ Run `Visual Studio 17 2022`, open the generated `LLVM.sln`, build all, build pro
 
 3. Ensure [`CUDA`](https://developer.nvidia.com/cuda-toolkit-archive) of minimum version 7.0 is installed.
 
-    * Having multiple CUDA installations to choose a particular version the `DCUDA_TOOLKIT_ROOT_DIR` option should be specified:
+* Having multiple CUDA installations to choose a particular version the `DCUDA_TOOLKIT_ROOT_DIR` option should be specified:
 
-        * ***Linux***: `-DCUDA_TOOLKIT_ROOT_DIR=/usr/include`
+  * ***Linux***: `-DCUDA_TOOLKIT_ROOT_DIR=/usr/include`
 
-        * ***Windows***: `-DCUDA_TOOLKIT_ROOT_DIR="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.2"`
+  * ***Windows***: `-DCUDA_TOOLKIT_ROOT_DIR="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.2"`
 
-          `-DCUDA_SDK_ROOT_DIR="C:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.2"`
+      `-DCUDA_SDK_ROOT_DIR="C:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.2"`
 
 4. Ensure [`cuDNN`](https://developer.nvidia.com/rdp/cudnn-archive) of the version corresponding to CUDA's version is installed.
 
-    * Path to [`cuDNN`](https://developer.nvidia.com/rdp/cudnn-download) should be specified by the `CUDA_DNN_ROOT_DIR` option:
+* Path to [`cuDNN`](https://developer.nvidia.com/rdp/cudnn-download) should be specified by the `CUDA_DNN_ROOT_DIR` option:
 
-        * ***Linux***: `-DCUDA_DNN_ROOT_DIR=/usr/include`
+  * ***Linux***: `-DCUDA_DNN_ROOT_DIR=/usr/include`
 
-        * ***Windows***: `-DCUDA_DNN_ROOT_DIR=D:/CUDA/cuDNN/8.9.6`
+  * ***Windows***: `-DCUDA_DNN_ROOT_DIR=D:/CUDA/cuDNN/8.9.6`
 
 5. Ensure [`CUB`](https://github.com/NVlabs/cub) of the version corresponding to CUDA's version is installed.
 
-    * Path to CUB should be specified by the `CUDA_CUB_ROOT_DIR` option:
+* Path to CUB should be specified by the `CUDA_CUB_ROOT_DIR` option:
 
-        * ***Linux***: `-DCUDA_CUB_ROOT_DIR=/srv/git/CUB`
+  * ***Linux***: `-DCUDA_CUB_ROOT_DIR=/srv/git/CUB`
 
-        * ***Windows***: `-DCUDA_CUB_ROOT_DIR=D:/CUDA/CUB/cub-2.1.0`
+  * ***Windows***: `-DCUDA_CUB_ROOT_DIR=D:/CUDA/CUB/cub-2.1.0`
 
 6. Ensure [`python`](https://www.python.org/downloads) of minimum required version 2.7 is installed.
 
 7. Ensure `lit` and `FileCheck` are installed - these are distributed with `LLVM`.
 
-    * Install `lit` into `python`:
+* Install `lit` into `python`:
 
-        * ***Linux***: `python /usr/llvm/17.0.6/llvm-project/llvm/utils/lit/setup.py install`
+  * ***Linux***: `python /usr/llvm/17.0.6/llvm-project/llvm/utils/lit/setup.py install`
 
-        * ***Windows***: `python D:/LLVM/17.0.6/llvm-project/llvm/utils/lit/setup.py install`
+  * ***Windows***: `python D:/LLVM/17.0.6/llvm-project/llvm/utils/lit/setup.py install`
 
-       In case of errors, similar to `ModuleNotFoundError: No module named 'setuptools'`, upgrade the `setuptools` package:
+    In case of errors, similar to `ModuleNotFoundError: No module named 'setuptools'`, upgrade the `setuptools` package:
 
-       `python -m pip install --upgrade pip setuptools`
+    `python -m pip install --upgrade pip setuptools`
 
-    * Starting with LLVM 6.0.1 path to `llvm-lit` python script should be specified by the `LLVM_EXTERNAL_LIT` option:
+* Starting with LLVM 6.0.1 path to `llvm-lit` python script should be specified by the `LLVM_EXTERNAL_LIT` option:
 
-        - ***Linux***: `-DLLVM_EXTERNAL_LIT=/usr/llvm/17.0.6/build/bin/llvm-lit`
+  * ***Linux***: `-DLLVM_EXTERNAL_LIT=/usr/llvm/17.0.6/build/bin/llvm-lit`
 
-        - ***Windows***: `-DLLVM_EXTERNAL_LIT=D:/LLVM/17.0.6/build/Release/bin/llvm-lit.py`
+  * ***Windows***: `-DLLVM_EXTERNAL_LIT=D:/LLVM/17.0.6/build/Release/bin/llvm-lit.py`
 
-    * `FileCheck`:
+* `FileCheck`:
 
-        - ***Linux***: copy from `/usr/llvm/17.0.6/build/bin/` to `CMAKE_INSTALL_PREFIX/dist/bin`
+  * ***Linux***: copy from `/usr/llvm/17.0.6/build/bin/` to `CMAKE_INSTALL_PREFIX/dist/bin`
 
-        - ***Windows***: copy from `D:/LLVM/17.0.6/build/Release/bin` to `CMAKE_INSTALL_PREFIX/dist/bin`
+  * ***Windows***: copy from `D:/LLVM/17.0.6/build/Release/bin` to `CMAKE_INSTALL_PREFIX/dist/bin`
 
-        * Or specify the path to `FileCheck` in `CMAKE_INSTALL_PREFIX` option
+  * Or specify the path to `FileCheck` in `CMAKE_INSTALL_PREFIX` option
 
 8. To run OpenGL tests successfully on:
 
-        - ***Linux***: install at least essential GL headers (on Ubuntu by `sudo apt-get install mesa-common-dev`)
+* ***Linux***: install at least essential GL headers (on Ubuntu by `sudo apt-get install mesa-common-dev`)
 
-        - ***Windows***: nothing to do: all the required headers are shipped with Windows SDK
+* ***Windows***: nothing to do: all the required headers are shipped with Windows SDK
 
 9. Set `HIPIFY_CLANG_TESTS` option turned on: `-DHIPIFY_CLANG_TESTS=ON`.
 
