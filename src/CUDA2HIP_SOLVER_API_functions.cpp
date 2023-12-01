@@ -194,6 +194,16 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SOLVER_FUNCTION_MAP {
   {"cusolverDnDpotri",                                    {"hipsolverDnDpotri",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
   {"cusolverDnCpotri",                                    {"hipsolverDnCpotri",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
   {"cusolverDnZpotri",                                    {"hipsolverDnZpotri",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  {"cusolverDnXtrtri_bufferSize",                         {"hipsolverDnXtrtri_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnXtrtri",                                    {"hipsolverDnXtrtri",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnSlauum_bufferSize",                         {"hipsolverDnSlauum_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnDlauum_bufferSize",                         {"hipsolverDnDlauum_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnClauum_bufferSize",                         {"hipsolverDnClauum_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnZlauum_bufferSize",                         {"hipsolverDnZlauum_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnSlauum",                                    {"hipsolverDnSlauum",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnDlauum",                                    {"hipsolverDnDlauum",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnClauum",                                    {"hipsolverDnClauum",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnZlauum",                                    {"hipsolverDnZlauum",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_SOLVER_FUNCTION_VER_MAP {
@@ -316,6 +326,16 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SOLVER_FUNCTION_VER_MAP {
   {"cusolverDnDpotri",                                    {CUDA_101,  CUDA_0, CUDA_0}},
   {"cusolverDnCpotri",                                    {CUDA_101,  CUDA_0, CUDA_0}},
   {"cusolverDnZpotri",                                    {CUDA_101,  CUDA_0, CUDA_0}},
+  {"cusolverDnXtrtri_bufferSize",                         {CUDA_114,  CUDA_0, CUDA_0}},
+  {"cusolverDnXtrtri",                                    {CUDA_114,  CUDA_0, CUDA_0}},
+  {"cusolverDnSlauum_bufferSize",                         {CUDA_101,  CUDA_0, CUDA_0}},
+  {"cusolverDnDlauum_bufferSize",                         {CUDA_101,  CUDA_0, CUDA_0}},
+  {"cusolverDnClauum_bufferSize",                         {CUDA_101,  CUDA_0, CUDA_0}},
+  {"cusolverDnZlauum_bufferSize",                         {CUDA_101,  CUDA_0, CUDA_0}},
+  {"cusolverDnSlauum",                                    {CUDA_101,  CUDA_0, CUDA_0}},
+  {"cusolverDnDlauum",                                    {CUDA_101,  CUDA_0, CUDA_0}},
+  {"cusolverDnClauum",                                    {CUDA_101,  CUDA_0, CUDA_0}},
+  {"cusolverDnZlauum",                                    {CUDA_101,  CUDA_0, CUDA_0}},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_SOLVER_FUNCTION_VER_MAP {
