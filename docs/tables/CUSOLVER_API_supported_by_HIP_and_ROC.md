@@ -124,6 +124,8 @@
 |`cusolverDnCYgels_bufferSize`|11.0| | | | | | | | | | | | | | | |
 |`cusolverDnCYgesv`|11.0| | | | | | | | | | | | | | | |
 |`cusolverDnCYgesv_bufferSize`|11.0| | | | | | | | | | | | | | | |
+|`cusolverDnClauum`|10.1| | | | | | | | | | | | | | | |
+|`cusolverDnClauum_bufferSize`|10.1| | | | | | | | | | | | | | | |
 |`cusolverDnCpotrf`| | | | |`hipsolverDnCpotrf`|5.1.0| | | |6.1.0|`rocsolver_cpotrf`|3.6.0| | | |6.1.0|
 |`cusolverDnCpotrfBatched`|9.1| | | |`hipsolverDnCpotrfBatched`|5.1.0| | | |6.1.0| | | | | | |
 |`cusolverDnCpotrf_bufferSize`| | | | |`hipsolverDnCpotrf_bufferSize`|5.1.0| | | |6.1.0| | | | | | |
@@ -157,6 +159,8 @@
 |`cusolverDnDgetrf`| | | | |`hipsolverDnDgetrf`|5.1.0| | | |6.1.0| | | | | | |
 |`cusolverDnDgetrf_bufferSize`| | | | |`hipsolverDnDgetrf_bufferSize`|5.1.0| | | |6.1.0| | | | | | |
 |`cusolverDnDgetrs`| | | | |`hipsolverDnDgetrs`|5.1.0| | | |6.1.0| | | | | | |
+|`cusolverDnDlauum`|10.1| | | | | | | | | | | | | | | |
+|`cusolverDnDlauum_bufferSize`|10.1| | | | | | | | | | | | | | | |
 |`cusolverDnDpotrf`| | | | |`hipsolverDnDpotrf`|5.1.0| | | |6.1.0|`rocsolver_dpotrf`|3.2.0| | | |6.1.0|
 |`cusolverDnDpotrfBatched`|9.1| | | |`hipsolverDnDpotrfBatched`|5.1.0| | | |6.1.0| | | | | | |
 |`cusolverDnDpotrf_bufferSize`| | | | |`hipsolverDnDpotrf_bufferSize`|5.1.0| | | |6.1.0| | | | | | |
@@ -212,6 +216,8 @@
 |`cusolverDnSgetrf`| | | | |`hipsolverDnSgetrf`|5.1.0| | | |6.1.0| | | | | | |
 |`cusolverDnSgetrf_bufferSize`| | | | |`hipsolverDnSgetrf_bufferSize`|5.1.0| | | |6.1.0| | | | | | |
 |`cusolverDnSgetrs`| | | | |`hipsolverDnSgetrs`|5.1.0| | | |6.1.0| | | | | | |
+|`cusolverDnSlauum`|10.1| | | | | | | | | | | | | | | |
+|`cusolverDnSlauum_bufferSize`|10.1| | | | | | | | | | | | | | | |
 |`cusolverDnSpotrf`| | | | |`hipsolverDnSpotrf`|5.1.0| | | |6.1.0|`rocsolver_spotrf`|3.2.0| | | |6.1.0|
 |`cusolverDnSpotrfBatched`|9.1| | | |`hipsolverDnSpotrfBatched`|5.1.0| | | |6.1.0| | | | | | |
 |`cusolverDnSpotrf_bufferSize`| | | | |`hipsolverDnSpotrf_bufferSize`|5.1.0| | | |6.1.0| | | | | | |
@@ -222,6 +228,8 @@
 |`cusolverDnXgetrf`|11.1| | | | | | | | | | | | | | | |
 |`cusolverDnXgetrf_bufferSize`|11.1| | | | | | | | | | | | | | | |
 |`cusolverDnXgetrs`|11.1| | | | | | | | | | | | | | | |
+|`cusolverDnXtrtri`|11.4| | | | | | | | | | | | | | | |
+|`cusolverDnXtrtri_bufferSize`|11.4| | | | | | | | | | | | | | | |
 |`cusolverDnZCgels`|11.0| | | | | | | | | | | | | | | |
 |`cusolverDnZCgels_bufferSize`|11.0| | | | | | | | | | | | | | | |
 |`cusolverDnZCgesv`|10.2| | | | | | | | | | | | | | | |
@@ -242,6 +250,8 @@
 |`cusolverDnZZgels_bufferSize`|11.0| | | |`hipsolverDnZZgels_bufferSize`|5.1.0| | | |6.1.0| | | | | | |
 |`cusolverDnZZgesv`|10.2| | | |`hipsolverDnZZgesv`|5.1.0| | | |6.1.0| | | | | | |
 |`cusolverDnZZgesv_bufferSize`|10.2| | | |`hipsolverDnZZgesv_bufferSize`|5.1.0| | | |6.1.0| | | | | | |
+|`cusolverDnZlauum`|10.1| | | | | | | | | | | | | | | |
+|`cusolverDnZlauum_bufferSize`|10.1| | | | | | | | | | | | | | | |
 |`cusolverDnZpotrf`| | | | |`hipsolverDnZpotrf`|5.1.0| | | |6.1.0|`rocsolver_zpotrf`|3.6.0| | | |6.1.0|
 |`cusolverDnZpotrfBatched`|9.1| | | |`hipsolverDnZpotrfBatched`|5.1.0| | | |6.1.0| | | | | | |
 |`cusolverDnZpotrf_bufferSize`| | | | |`hipsolverDnZpotrf_bufferSize`|5.1.0| | | |6.1.0| | | | | | |

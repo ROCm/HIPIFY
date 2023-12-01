@@ -124,6 +124,8 @@
 |`cusolverDnCYgels_bufferSize`|11.0| | | | | | | | | |
 |`cusolverDnCYgesv`|11.0| | | | | | | | | |
 |`cusolverDnCYgesv_bufferSize`|11.0| | | | | | | | | |
+|`cusolverDnClauum`|10.1| | | | | | | | | |
+|`cusolverDnClauum_bufferSize`|10.1| | | | | | | | | |
 |`cusolverDnCpotrf`| | | | |`rocsolver_cpotrf`|3.6.0| | | |6.1.0|
 |`cusolverDnCpotrfBatched`|9.1| | | | | | | | | |
 |`cusolverDnCpotrf_bufferSize`| | | | | | | | | | |
@@ -157,6 +159,8 @@
 |`cusolverDnDgetrf`| | | | | | | | | | |
 |`cusolverDnDgetrf_bufferSize`| | | | | | | | | | |
 |`cusolverDnDgetrs`| | | | | | | | | | |
+|`cusolverDnDlauum`|10.1| | | | | | | | | |
+|`cusolverDnDlauum_bufferSize`|10.1| | | | | | | | | |
 |`cusolverDnDpotrf`| | | | |`rocsolver_dpotrf`|3.2.0| | | |6.1.0|
 |`cusolverDnDpotrfBatched`|9.1| | | | | | | | | |
 |`cusolverDnDpotrf_bufferSize`| | | | | | | | | | |
@@ -212,6 +216,8 @@
 |`cusolverDnSgetrf`| | | | | | | | | | |
 |`cusolverDnSgetrf_bufferSize`| | | | | | | | | | |
 |`cusolverDnSgetrs`| | | | | | | | | | |
+|`cusolverDnSlauum`|10.1| | | | | | | | | |
+|`cusolverDnSlauum_bufferSize`|10.1| | | | | | | | | |
 |`cusolverDnSpotrf`| | | | |`rocsolver_spotrf`|3.2.0| | | |6.1.0|
 |`cusolverDnSpotrfBatched`|9.1| | | | | | | | | |
 |`cusolverDnSpotrf_bufferSize`| | | | | | | | | | |
@@ -222,6 +228,8 @@
 |`cusolverDnXgetrf`|11.1| | | | | | | | | |
 |`cusolverDnXgetrf_bufferSize`|11.1| | | | | | | | | |
 |`cusolverDnXgetrs`|11.1| | | | | | | | | |
+|`cusolverDnXtrtri`|11.4| | | | | | | | | |
+|`cusolverDnXtrtri_bufferSize`|11.4| | | | | | | | | |
 |`cusolverDnZCgels`|11.0| | | | | | | | | |
 |`cusolverDnZCgels_bufferSize`|11.0| | | | | | | | | |
 |`cusolverDnZCgesv`|10.2| | | | | | | | | |
@@ -242,6 +250,8 @@
 |`cusolverDnZZgels_bufferSize`|11.0| | | | | | | | | |
 |`cusolverDnZZgesv`|10.2| | | | | | | | | |
 |`cusolverDnZZgesv_bufferSize`|10.2| | | | | | | | | |
+|`cusolverDnZlauum`|10.1| | | | | | | | | |
+|`cusolverDnZlauum_bufferSize`|10.1| | | | | | | | | |
 |`cusolverDnZpotrf`| | | | |`rocsolver_zpotrf`|3.6.0| | | |6.1.0|
 |`cusolverDnZpotrfBatched`|9.1| | | | | | | | | |
 |`cusolverDnZpotrf_bufferSize`| | | | | | | | | | |
