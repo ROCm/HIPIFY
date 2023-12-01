@@ -1,4 +1,4 @@
-## <a name="supported-cuda-apis"></a>Supported CUDA APIs
+# Supported CUDA APIs
 
 - [Runtime API](tables/CUDA_Runtime_API_functions_supported_by_HIP.md)
 - [Driver API](tables/CUDA_Driver_API_functions_supported_by_HIP.md)
