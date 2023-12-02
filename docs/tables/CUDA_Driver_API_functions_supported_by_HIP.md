@@ -81,6 +81,7 @@
 |`CUDA_ERROR_LAUNCH_INCOMPATIBLE_TEXTURING`| | | | | | | | | | |
 |`CUDA_ERROR_LAUNCH_OUT_OF_RESOURCES`| | | | |`hipErrorLaunchOutOfResources`|1.6.0| | | | |
 |`CUDA_ERROR_LAUNCH_TIMEOUT`| | | | |`hipErrorLaunchTimeOut`|1.6.0| | | | |
+|`CUDA_ERROR_LOSSY_QUERY`| | | | | | | | | | |
 |`CUDA_ERROR_MAP_FAILED`| | | | |`hipErrorMapFailed`|1.6.0| | | | |
 |`CUDA_ERROR_MISALIGNED_ADDRESS`| | | | | | | | | | |
 |`CUDA_ERROR_MPS_CLIENT_TERMINATED`|11.8| | | | | | | | | |
@@ -652,6 +653,7 @@
 |`CU_GRAPH_COND_TYPE_IF`|12.3| | | | | | | | | |
 |`CU_GRAPH_COND_TYPE_WHILE`|12.3| | | | | | | | | |
 |`CU_GRAPH_DEBUG_DOT_FLAGS_BATCH_MEM_OP_NODE_PARAMS`|11.7| | | | | | | | | |
+|`CU_GRAPH_DEBUG_DOT_FLAGS_CONDITIONAL_NODE_PARAMS`|12.3| | | | | | | | | |
 |`CU_GRAPH_DEBUG_DOT_FLAGS_EVENT_NODE_PARAMS`|11.3| | | |`hipGraphDebugDotFlagsEventNodeParams`|5.5.0| | | | |
 |`CU_GRAPH_DEBUG_DOT_FLAGS_EXTRA_TOPO_INFO`|12.0| | | | | | | | | |
 |`CU_GRAPH_DEBUG_DOT_FLAGS_EXT_SEMAS_SIGNAL_NODE_PARAMS`|11.3| | | |`hipGraphDebugDotFlagsExtSemasSignalNodeParams`|5.5.0| | | | |
@@ -757,6 +759,7 @@
 |`CU_LAUNCH_ATTRIBUTE_CLUSTER_SCHEDULING_POLICY_PREFERENCE`|11.8| | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_COOPERATIVE`|11.8| | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_IGNORE`|11.8| | | | | | | | | |
+|`CU_LAUNCH_ATTRIBUTE_LAUNCH_COMPLETION_EVENT`|12.3| | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_MAX`|12.1| | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN`|12.0| | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP`|12.0| | | | | | | | | |
@@ -821,6 +824,7 @@
 |`CU_MEM_ATTACH_HOST`| | | | |`hipMemAttachHost`|2.5.0| | | | |
 |`CU_MEM_ATTACH_SINGLE`| | | | |`hipMemAttachSingle`|3.7.0| | | | |
 |`CU_MEM_CREATE_USAGE_TILE_POOL`|11.1| | | | | | | | | |
+|`CU_MEM_HANDLE_TYPE_FABRIC`|12.3| | | | | | | | | |
 |`CU_MEM_HANDLE_TYPE_GENERIC`|11.1| | | |`hipMemHandleTypeGeneric`|5.2.0| | | | |
 |`CU_MEM_HANDLE_TYPE_MAX`|10.2| | | | | | | | | |
 |`CU_MEM_HANDLE_TYPE_NONE`|11.2| | | |`hipMemHandleTypeNone`|5.2.0| | | | |
