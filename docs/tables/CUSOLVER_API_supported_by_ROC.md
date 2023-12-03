@@ -124,6 +124,8 @@
 |`cusolverDnCYgels_bufferSize`|11.0| | | | | | | | | |
 |`cusolverDnCYgesv`|11.0| | | | | | | | | |
 |`cusolverDnCYgesv_bufferSize`|11.0| | | | | | | | | |
+|`cusolverDnCgetrf`| | | | | | | | | | |
+|`cusolverDnCgetrf_bufferSize`| | | | | | | | | | |
 |`cusolverDnClauum`|10.1| | | | | | | | | |
 |`cusolverDnClauum_bufferSize`|10.1| | | | | | | | | |
 |`cusolverDnCpotrf`| | | | |`rocsolver_cpotrf`|3.6.0| | | |6.1.0|
@@ -250,6 +252,8 @@
 |`cusolverDnZZgels_bufferSize`|11.0| | | | | | | | | |
 |`cusolverDnZZgesv`|10.2| | | | | | | | | |
 |`cusolverDnZZgesv_bufferSize`|10.2| | | | | | | | | |
+|`cusolverDnZgetrf`| | | | | | | | | | |
+|`cusolverDnZgetrf_bufferSize`| | | | | | | | | | |
 |`cusolverDnZlauum`|10.1| | | | | | | | | |
 |`cusolverDnZlauum_bufferSize`|10.1| | | | | | | | | |
 |`cusolverDnZpotrf`| | | | |`rocsolver_zpotrf`|3.6.0| | | |6.1.0|
