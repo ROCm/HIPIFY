@@ -1501,6 +1501,7 @@
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
 |`cuKernelGetAttribute`|12.0| | | | | | | | | |
 |`cuKernelGetFunction`|12.0| | | | | | | | | |
+|`cuKernelGetName`|12.3| | | | | | | | | |
 |`cuKernelSetAttribute`|12.0| | | | | | | | | |
 |`cuKernelSetCacheConfig`|12.0| | | | | | | | | |
 |`cuLibraryGetGlobal`|12.0| | | | | | | | | |
@@ -1692,6 +1693,7 @@
 |`cuStreamAddCallback`| | | | |`hipStreamAddCallback`|1.6.0| | | | |
 |`cuStreamAttachMemAsync`| | | | |`hipStreamAttachMemAsync`|3.7.0| | | | |
 |`cuStreamBeginCapture`|10.0| | | |`hipStreamBeginCapture`|4.3.0| | | | |
+|`cuStreamBeginCaptureToGraph`|12.3| | | | | | | | | |
 |`cuStreamBeginCapture_ptsz`|10.1| | | | | | | | | |
 |`cuStreamBeginCapture_v2`|10.1| | | |`hipStreamBeginCapture`|4.3.0| | | | |
 |`cuStreamCopyAttributes`|11.0| | | | | | | | | |
@@ -1703,6 +1705,7 @@
 |`cuStreamGetAttribute`|11.0| | | | | | | | | |
 |`cuStreamGetCaptureInfo`|10.1| | | |`hipStreamGetCaptureInfo`|5.0.0| | | | |
 |`cuStreamGetCaptureInfo_v2`|11.3| | | |`hipStreamGetCaptureInfo_v2`|5.0.0| | | | |
+|`cuStreamGetCaptureInfo_v3`|12.3| | | | | | | | | |
 |`cuStreamGetCtx`|9.2| | | | | | | | | |
 |`cuStreamGetFlags`| | | | |`hipStreamGetFlags`|1.6.0| | | | |
 |`cuStreamGetId`|12.0| | | | | | | | | |
@@ -1712,6 +1715,7 @@
 |`cuStreamSetAttribute`|11.0| | | | | | | | | |
 |`cuStreamSynchronize`| | | | |`hipStreamSynchronize`|1.6.0| | | | |
 |`cuStreamUpdateCaptureDependencies`|11.3| | | |`hipStreamUpdateCaptureDependencies`|5.0.0| | | | |
+|`cuStreamUpdateCaptureDependencies_v2`|12.3| | | | | | | | | |
 |`cuStreamWaitEvent`| | | | |`hipStreamWaitEvent`|1.6.0| | | | |
 |`cuThreadExchangeStreamCaptureMode`|10.1| | | |`hipThreadExchangeStreamCaptureMode`|5.2.0| | | | |
 
@@ -1762,6 +1766,7 @@
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
 |`cuFuncGetAttribute`| | | | |`hipFuncGetAttribute`|2.8.0| | | | |
 |`cuFuncGetModule`|11.0| | | | | | | | | |
+|`cuFuncGetName`|12.3| | | | | | | | | |
 |`cuFuncSetAttribute`|9.0| | | | | | | | | |
 |`cuFuncSetCacheConfig`| | | | | | | | | | |
 |`cuFuncSetSharedMemConfig`| | | | | | | | | | |
@@ -1796,6 +1801,7 @@
 |`cuGraphAddBatchMemOpNode`|11.7| | | |`hipGraphAddBatchMemOpNode`| | | | | |
 |`cuGraphAddChildGraphNode`|10.0| | | |`hipGraphAddChildGraphNode`|5.0.0| | | | |
 |`cuGraphAddDependencies`|10.0| | | |`hipGraphAddDependencies`|4.5.0| | | | |
+|`cuGraphAddDependencies_v2`|12.3| | | | | | | | | |
 |`cuGraphAddEmptyNode`|10.0| | | |`hipGraphAddEmptyNode`|4.5.0| | | | |
 |`cuGraphAddEventRecordNode`|11.1| | | |`hipGraphAddEventRecordNode`|5.0.0| | | | |
 |`cuGraphAddEventWaitNode`|11.1| | | |`hipGraphAddEventWaitNode`|5.0.0| | | | |
@@ -1808,10 +1814,12 @@
 |`cuGraphAddMemcpyNode`|10.0| | | |`hipDrvGraphAddMemcpyNode`|6.0.0| | | | |
 |`cuGraphAddMemsetNode`|10.0| | | |`hipGraphAddMemsetNode`|4.3.0| | | | |
 |`cuGraphAddNode`|12.2| | | |`hipGraphAddNode`| | | | | |
+|`cuGraphAddNode_v2`|12.3| | | | | | | | | |
 |`cuGraphBatchMemOpNodeGetParams`|11.7| | | |`hipGraphBatchMemOpNodeGetParams`| | | | | |
 |`cuGraphBatchMemOpNodeSetParams`|11.7| | | |`hipGraphBatchMemOpNodeSetParams`| | | | | |
 |`cuGraphChildGraphNodeGetGraph`|10.0| | | |`hipGraphChildGraphNodeGetGraph`|5.0.0| | | | |
 |`cuGraphClone`|10.0| | | |`hipGraphClone`|5.0.0| | | | |
+|`cuGraphConditionalHandleCreate`|12.3| | | | | | | | | |
 |`cuGraphCreate`|10.0| | | |`hipGraphCreate`|4.3.0| | | | |
 |`cuGraphDebugDotPrint`|11.3| | | |`hipGraphDebugDotPrint`|5.5.0| | | | |
 |`cuGraphDestroy`|10.0| | | |`hipGraphDestroy`|4.3.0| | | | |
@@ -1839,6 +1847,7 @@
 |`cuGraphExternalSemaphoresWaitNodeGetParams`|11.2| | | |`hipGraphExternalSemaphoresWaitNodeGetParams`|6.0.0| | | | |
 |`cuGraphExternalSemaphoresWaitNodeSetParams`|11.2| | | |`hipGraphExternalSemaphoresWaitNodeSetParams`|6.0.0| | | | |
 |`cuGraphGetEdges`|10.0| | | |`hipGraphGetEdges`|5.0.0| | | | |
+|`cuGraphGetEdges_v2`|12.3| | | | | | | | | |
 |`cuGraphGetNodes`|10.0| | | |`hipGraphGetNodes`|4.5.0| | | | |
 |`cuGraphGetRootNodes`|10.0| | | |`hipGraphGetRootNodes`|4.5.0| | | | |
 |`cuGraphHostNodeGetParams`|10.0| | | |`hipGraphHostNodeGetParams`|5.0.0| | | | |
@@ -1861,6 +1870,7 @@
 |`cuGraphMemsetNodeSetParams`|10.0| | | |`hipGraphMemsetNodeSetParams`|4.5.0| | | | |
 |`cuGraphNodeFindInClone`|10.0| | | |`hipGraphNodeFindInClone`|5.0.0| | | | |
 |`cuGraphNodeGetDependencies`|10.0| | | |`hipGraphNodeGetDependencies`|5.0.0| | | | |
+|`cuGraphNodeGetDependencies_v2`|12.3| | | | | | | | | |
 |`cuGraphNodeGetDependentNodes`|10.0| | | |`hipGraphNodeGetDependentNodes`|5.0.0| | | | |
 |`cuGraphNodeGetEnabled`|11.6| | | |`hipGraphNodeGetEnabled`|5.5.0| | | | |
 |`cuGraphNodeGetType`|10.0| | | |`hipGraphNodeGetType`|5.0.0| | | | |
@@ -1868,6 +1878,7 @@
 |`cuGraphNodeSetParams`|12.2| | | |`hipGraphNodeSetParams`| | | | | |
 |`cuGraphReleaseUserObject`|11.3| | | |`hipGraphReleaseUserObject`|5.3.0| | | | |
 |`cuGraphRemoveDependencies`|10.0| | | |`hipGraphRemoveDependencies`|5.0.0| | | | |
+|`cuGraphRemoveDependencies_v2`|12.3| | | | | | | | | |
 |`cuGraphRetainUserObject`|11.3| | | |`hipGraphRetainUserObject`|5.3.0| | | | |
 |`cuGraphUpload`|11.1| | | |`hipGraphUpload`|5.3.0| | | | |
 |`cuUserObjectCreate`|11.3| | | |`hipUserObjectCreate`|5.3.0| | | | |
