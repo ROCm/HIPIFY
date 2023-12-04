@@ -146,6 +146,16 @@ int main() {
   // CHECK: status = hipsolverDnDgetrs(handle, blasOperation, n, nrhs , &dA, lda, &devIpiv, &dB, ldb, &devInfo);
   status = cusolverDnDgetrs(handle, blasOperation, n, nrhs , &dA, lda, &devIpiv, &dB, ldb, &devInfo);
 
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnCgetrs(cusolverDnHandle_t handle, cublasOperation_t trans, int n, int nrhs, const cuComplex * A, int lda, const int * devIpiv, cuComplex * B, int ldb, int * devInfo);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnCgetrs(hipsolverHandle_t handle, hipblasOperation_t trans, int n, int nrhs, const hipFloatComplex* A, int lda, const int* devIpiv, hipFloatComplex* B, int ldb, int* devInfo);
+  // CHECK: status = hipsolverDnCgetrs(handle, blasOperation, n, nrhs , &complexA, lda, &devIpiv, &complexB, ldb, &devInfo);
+  status = cusolverDnCgetrs(handle, blasOperation, n, nrhs , &complexA, lda, &devIpiv, &complexB, ldb, &devInfo);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnZgetrs(cusolverDnHandle_t handle, cublasOperation_t trans, int n, int nrhs, const cuDoubleComplex *A, int lda, const int * devIpiv, cuDoubleComplex * B, int ldb, int * devInfo);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnZgetrs(hipsolverHandle_t handle, hipblasOperation_t trans, int n, int nrhs, const hipDoubleComplex* A, int lda, const int* devIpiv, hipDoubleComplex* B, int ldb, int* devInfo);
+  // CHECK: status = hipsolverDnZgetrs(handle, blasOperation, n, nrhs , &dComplexA, lda, &devIpiv, &dComplexB, ldb, &devInfo);
+  status = cusolverDnZgetrs(handle, blasOperation, n, nrhs , &dComplexA, lda, &devIpiv, &dComplexB, ldb, &devInfo);
+
   // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnSetStream(cusolverDnHandle_t handle, cudaStream_t streamId);
   // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverSetStream(hipsolverHandle_t handle, hipStream_t streamId);
   // CHECK: status = hipsolverSetStream(handle, stream_t);

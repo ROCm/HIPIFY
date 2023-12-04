@@ -126,6 +126,8 @@
 |`cusolverDnCYgesv_bufferSize`|11.0| | | | | | | | | |
 |`cusolverDnCgetrf`| | | | | | | | | | |
 |`cusolverDnCgetrf_bufferSize`| | | | | | | | | | |
+|`cusolverDnCgetrs`| | | | | | | | | | |
+|`cusolverDnClaswp`| | | | | | | | | | |
 |`cusolverDnClauum`|10.1| | | | | | | | | |
 |`cusolverDnClauum_bufferSize`|10.1| | | | | | | | | |
 |`cusolverDnCpotrf`| | | | |`rocsolver_cpotrf`|3.6.0| | | |6.1.0|
@@ -161,6 +163,7 @@
 |`cusolverDnDgetrf`| | | | | | | | | | |
 |`cusolverDnDgetrf_bufferSize`| | | | | | | | | | |
 |`cusolverDnDgetrs`| | | | | | | | | | |
+|`cusolverDnDlaswp`| | | | | | | | | | |
 |`cusolverDnDlauum`|10.1| | | | | | | | | |
 |`cusolverDnDlauum_bufferSize`|10.1| | | | | | | | | |
 |`cusolverDnDpotrf`| | | | |`rocsolver_dpotrf`|3.2.0| | | |6.1.0|
@@ -218,6 +221,7 @@
 |`cusolverDnSgetrf`| | | | | | | | | | |
 |`cusolverDnSgetrf_bufferSize`| | | | | | | | | | |
 |`cusolverDnSgetrs`| | | | | | | | | | |
+|`cusolverDnSlaswp`| | | | | | | | | | |
 |`cusolverDnSlauum`|10.1| | | | | | | | | |
 |`cusolverDnSlauum_bufferSize`|10.1| | | | | | | | | |
 |`cusolverDnSpotrf`| | | | |`rocsolver_spotrf`|3.2.0| | | |6.1.0|
@@ -254,6 +258,8 @@
 |`cusolverDnZZgesv_bufferSize`|10.2| | | | | | | | | |
 |`cusolverDnZgetrf`| | | | | | | | | | |
 |`cusolverDnZgetrf_bufferSize`| | | | | | | | | | |
+|`cusolverDnZgetrs`| | | | | | | | | | |
+|`cusolverDnZlaswp`| | | | | | | | | | |
 |`cusolverDnZlauum`|10.1| | | | | | | | | |
 |`cusolverDnZlauum_bufferSize`|10.1| | | | | | | | | |
 |`cusolverDnZpotrf`| | | | |`rocsolver_zpotrf`|3.6.0| | | |6.1.0|
