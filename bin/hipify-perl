@@ -1087,6 +1087,7 @@ my %experimental_funcs = (
     "cusolverDnZpotrf_bufferSize" => "6.1.0",
     "cusolverDnZpotrfBatched" => "6.1.0",
     "cusolverDnZpotrf" => "6.1.0",
+    "cusolverDnZgetrs" => "6.1.0",
     "cusolverDnZgetrf_bufferSize" => "6.1.0",
     "cusolverDnZgetrf" => "6.1.0",
     "cusolverDnZZgesv_bufferSize" => "6.1.0",
@@ -1133,6 +1134,7 @@ my %experimental_funcs = (
     "cusolverDnCpotrf_bufferSize" => "6.1.0",
     "cusolverDnCpotrfBatched" => "6.1.0",
     "cusolverDnCpotrf" => "6.1.0",
+    "cusolverDnCgetrs" => "6.1.0",
     "cusolverDnCgetrf_bufferSize" => "6.1.0",
     "cusolverDnCgetrf" => "6.1.0",
     "cusolverDnCCgesv_bufferSize" => "6.1.0",
@@ -1300,6 +1302,7 @@ sub experimentalSubstitutions {
     subst("cusolverDnCCgesv_bufferSize", "hipsolverDnCCgesv_bufferSize", "library");
     subst("cusolverDnCgetrf", "hipsolverDnCgetrf", "library");
     subst("cusolverDnCgetrf_bufferSize", "hipsolverDnCgetrf_bufferSize", "library");
+    subst("cusolverDnCgetrs", "hipsolverDnCgetrs", "library");
     subst("cusolverDnCpotrf", "hipsolverDnCpotrf", "library");
     subst("cusolverDnCpotrfBatched", "hipsolverDnCpotrfBatched", "library");
     subst("cusolverDnCpotrf_bufferSize", "hipsolverDnCpotrf_bufferSize", "library");
@@ -1345,6 +1348,7 @@ sub experimentalSubstitutions {
     subst("cusolverDnZZgesv_bufferSize", "hipsolverDnZZgesv_bufferSize", "library");
     subst("cusolverDnZgetrf", "hipsolverDnZgetrf", "library");
     subst("cusolverDnZgetrf_bufferSize", "hipsolverDnZgetrf_bufferSize", "library");
+    subst("cusolverDnZgetrs", "hipsolverDnZgetrs", "library");
     subst("cusolverDnZpotrf", "hipsolverDnZpotrf", "library");
     subst("cusolverDnZpotrfBatched", "hipsolverDnZpotrfBatched", "library");
     subst("cusolverDnZpotrf_bufferSize", "hipsolverDnZpotrf_bufferSize", "library");
@@ -7225,6 +7229,7 @@ sub warnUnsupportedFunctions {
         "cusolverIRSRefinement_t",
         "cusolverDnZlauum_bufferSize",
         "cusolverDnZlauum",
+        "cusolverDnZlaswp",
         "cusolverDnZYgesv_bufferSize",
         "cusolverDnZYgesv",
         "cusolverDnZYgels_bufferSize",
@@ -7248,6 +7253,7 @@ sub warnUnsupportedFunctions {
         "cusolverDnXgetrf",
         "cusolverDnSlauum_bufferSize",
         "cusolverDnSlauum",
+        "cusolverDnSlaswp",
         "cusolverDnSetDeterministicMode",
         "cusolverDnSetAdvOptions",
         "cusolverDnSXgesv_bufferSize",
@@ -7296,6 +7302,7 @@ sub warnUnsupportedFunctions {
         "cusolverDnFunction_t",
         "cusolverDnDlauum_bufferSize",
         "cusolverDnDlauum",
+        "cusolverDnDlaswp",
         "cusolverDnDXgesv_bufferSize",
         "cusolverDnDXgesv",
         "cusolverDnDXgels_bufferSize",
@@ -7316,6 +7323,7 @@ sub warnUnsupportedFunctions {
         "cusolverDnContext",
         "cusolverDnClauum_bufferSize",
         "cusolverDnClauum",
+        "cusolverDnClaswp",
         "cusolverDnCYgesv_bufferSize",
         "cusolverDnCYgesv",
         "cusolverDnCYgels_bufferSize",
