@@ -124,6 +124,8 @@
 |`cusolverDnCYgels_bufferSize`|11.0| | | | | | | | | |
 |`cusolverDnCYgesv`|11.0| | | | | | | | | |
 |`cusolverDnCYgesv_bufferSize`|11.0| | | | | | | | | |
+|`cusolverDnCgeqrf`| | | | | | | | | | |
+|`cusolverDnCgeqrf_bufferSize`| | | | | | | | | | |
 |`cusolverDnCgetrf`| | | | | | | | | | |
 |`cusolverDnCgetrf_bufferSize`| | | | | | | | | | |
 |`cusolverDnCgetrs`| | | | | | | | | | |
@@ -160,6 +162,8 @@
 |`cusolverDnDXgesv`|11.0| | | | | | | | | |
 |`cusolverDnDXgesv_bufferSize`|11.0| | | | | | | | | |
 |`cusolverDnDestroy`| | | | |`rocblas_destroy_handle`| | | | | |
+|`cusolverDnDgeqrf`| | | | | | | | | | |
+|`cusolverDnDgeqrf_bufferSize`| | | | | | | | | | |
 |`cusolverDnDgetrf`| | | | | | | | | | |
 |`cusolverDnDgetrf_bufferSize`| | | | | | | | | | |
 |`cusolverDnDgetrs`| | | | | | | | | | |
@@ -218,6 +222,8 @@
 |`cusolverDnSetAdvOptions`|11.0| | | | | | | | | |
 |`cusolverDnSetDeterministicMode`|12.2| | | | | | | | | |
 |`cusolverDnSetStream`| | | | |`rocblas_set_stream`| | | | | |
+|`cusolverDnSgeqrf`| | | | | | | | | | |
+|`cusolverDnSgeqrf_bufferSize`| | | | | | | | | | |
 |`cusolverDnSgetrf`| | | | | | | | | | |
 |`cusolverDnSgetrf_bufferSize`| | | | | | | | | | |
 |`cusolverDnSgetrs`| | | | | | | | | | |
@@ -256,6 +262,8 @@
 |`cusolverDnZZgels_bufferSize`|11.0| | | | | | | | | |
 |`cusolverDnZZgesv`|10.2| | | | | | | | | |
 |`cusolverDnZZgesv_bufferSize`|10.2| | | | | | | | | |
+|`cusolverDnZgeqrf`| | | | | | | | | | |
+|`cusolverDnZgeqrf_bufferSize`| | | | | | | | | | |
 |`cusolverDnZgetrf`| | | | | | | | | | |
 |`cusolverDnZgetrf_bufferSize`| | | | | | | | | | |
 |`cusolverDnZgetrs`| | | | | | | | | | |
