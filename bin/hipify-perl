@@ -1080,6 +1080,8 @@ my %experimental_funcs = (
     "cusolverEigType_t" => "6.1.0",
     "cusolverEigRange_t" => "6.1.0",
     "cusolverEigMode_t" => "6.1.0",
+    "cusolverDnZunmqr_bufferSize" => "6.1.0",
+    "cusolverDnZunmqr" => "6.1.0",
     "cusolverDnZungqr_bufferSize" => "6.1.0",
     "cusolverDnZungqr" => "6.1.0",
     "cusolverDnZpotrsBatched" => "6.1.0",
@@ -1105,6 +1107,8 @@ my %experimental_funcs = (
     "cusolverDnSpotrf_bufferSize" => "6.1.0",
     "cusolverDnSpotrfBatched" => "6.1.0",
     "cusolverDnSpotrf" => "6.1.0",
+    "cusolverDnSormqr_bufferSize" => "6.1.0",
+    "cusolverDnSormqr" => "6.1.0",
     "cusolverDnSorgqr_bufferSize" => "6.1.0",
     "cusolverDnSorgqr" => "6.1.0",
     "cusolverDnSgetrs" => "6.1.0",
@@ -1126,6 +1130,8 @@ my %experimental_funcs = (
     "cusolverDnDpotrf_bufferSize" => "6.1.0",
     "cusolverDnDpotrfBatched" => "6.1.0",
     "cusolverDnDpotrf" => "6.1.0",
+    "cusolverDnDormqr_bufferSize" => "6.1.0",
+    "cusolverDnDormqr" => "6.1.0",
     "cusolverDnDorgqr_bufferSize" => "6.1.0",
     "cusolverDnDorgqr" => "6.1.0",
     "cusolverDnDgetrs" => "6.1.0",
@@ -1138,6 +1144,8 @@ my %experimental_funcs = (
     "cusolverDnDDgesv" => "6.1.0",
     "cusolverDnDDgels_bufferSize" => "6.1.0",
     "cusolverDnDDgels" => "6.1.0",
+    "cusolverDnCunmqr_bufferSize" => "6.1.0",
+    "cusolverDnCunmqr" => "6.1.0",
     "cusolverDnCungqr_bufferSize" => "6.1.0",
     "cusolverDnCungqr" => "6.1.0",
     "cusolverDnCreate" => "6.1.0",
@@ -1331,6 +1339,8 @@ sub experimentalSubstitutions {
     subst("cusolverDnCreate", "hipsolverDnCreate", "library");
     subst("cusolverDnCungqr", "hipsolverDnCungqr", "library");
     subst("cusolverDnCungqr_bufferSize", "hipsolverDnCungqr_bufferSize", "library");
+    subst("cusolverDnCunmqr", "hipsolverDnCunmqr", "library");
+    subst("cusolverDnCunmqr_bufferSize", "hipsolverDnCunmqr_bufferSize", "library");
     subst("cusolverDnDDgels", "hipsolverDnDDgels", "library");
     subst("cusolverDnDDgels_bufferSize", "hipsolverDnDDgels_bufferSize", "library");
     subst("cusolverDnDDgesv", "hipsolverDnDDgesv", "library");
@@ -1343,6 +1353,8 @@ sub experimentalSubstitutions {
     subst("cusolverDnDgetrs", "hipsolverDnDgetrs", "library");
     subst("cusolverDnDorgqr", "hipsolverDnDorgqr", "library");
     subst("cusolverDnDorgqr_bufferSize", "hipsolverDnDorgqr_bufferSize", "library");
+    subst("cusolverDnDormqr", "hipsolverDnDormqr", "library");
+    subst("cusolverDnDormqr_bufferSize", "hipsolverDnDormqr_bufferSize", "library");
     subst("cusolverDnDpotrf", "hipsolverDnDpotrf", "library");
     subst("cusolverDnDpotrfBatched", "hipsolverDnDpotrfBatched", "library");
     subst("cusolverDnDpotrf_bufferSize", "hipsolverDnDpotrf_bufferSize", "library");
@@ -1363,6 +1375,8 @@ sub experimentalSubstitutions {
     subst("cusolverDnSgetrs", "hipsolverDnSgetrs", "library");
     subst("cusolverDnSorgqr", "hipsolverDnSorgqr", "library");
     subst("cusolverDnSorgqr_bufferSize", "hipsolverDnSorgqr_bufferSize", "library");
+    subst("cusolverDnSormqr", "hipsolverDnSormqr", "library");
+    subst("cusolverDnSormqr_bufferSize", "hipsolverDnSormqr_bufferSize", "library");
     subst("cusolverDnSpotrf", "hipsolverDnSpotrf", "library");
     subst("cusolverDnSpotrfBatched", "hipsolverDnSpotrfBatched", "library");
     subst("cusolverDnSpotrf_bufferSize", "hipsolverDnSpotrf_bufferSize", "library");
@@ -1388,6 +1402,8 @@ sub experimentalSubstitutions {
     subst("cusolverDnZpotrsBatched", "hipsolverDnZpotrsBatched", "library");
     subst("cusolverDnZungqr", "hipsolverDnZungqr", "library");
     subst("cusolverDnZungqr_bufferSize", "hipsolverDnZungqr_bufferSize", "library");
+    subst("cusolverDnZunmqr", "hipsolverDnZunmqr", "library");
+    subst("cusolverDnZunmqr_bufferSize", "hipsolverDnZunmqr_bufferSize", "library");
     subst("cusolverDnHandle_t", "hipsolverHandle_t", "type");
     subst("cusolverEigMode_t", "hipsolverEigMode_t", "type");
     subst("cusolverEigRange_t", "hipsolverEigRange_t", "type");
