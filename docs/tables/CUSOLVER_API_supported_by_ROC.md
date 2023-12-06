@@ -143,6 +143,8 @@
 |`cusolverDnCreateParams`|11.0| | | | | | | | | |
 |`cusolverDnCungqr`|8.0| | | | | | | | | |
 |`cusolverDnCungqr_bufferSize`|8.0| | | | | | | | | |
+|`cusolverDnCunmqr`| | | | | | | | | | |
+|`cusolverDnCunmqr_bufferSize`|8.0| | | | | | | | | |
 |`cusolverDnDBgels`|11.0| | | | | | | | | |
 |`cusolverDnDBgels_bufferSize`|11.0| | | | | | | | | |
 |`cusolverDnDBgesv`|11.0| | | | | | | | | |
@@ -174,6 +176,8 @@
 |`cusolverDnDlauum_bufferSize`|10.1| | | | | | | | | |
 |`cusolverDnDorgqr`|8.0| | | | | | | | | |
 |`cusolverDnDorgqr_bufferSize`|8.0| | | | | | | | | |
+|`cusolverDnDormqr`| | | | | | | | | | |
+|`cusolverDnDormqr_bufferSize`|8.0| | | | | | | | | |
 |`cusolverDnDpotrf`| | | | |`rocsolver_dpotrf`|3.2.0| | | |6.1.0|
 |`cusolverDnDpotrfBatched`|9.1| | | | | | | | | |
 |`cusolverDnDpotrf_bufferSize`| | | | | | | | | | |
@@ -236,6 +240,8 @@
 |`cusolverDnSlauum_bufferSize`|10.1| | | | | | | | | |
 |`cusolverDnSorgqr`|8.0| | | | | | | | | |
 |`cusolverDnSorgqr_bufferSize`|8.0| | | | | | | | | |
+|`cusolverDnSormqr`| | | | | | | | | | |
+|`cusolverDnSormqr_bufferSize`|8.0| | | | | | | | | |
 |`cusolverDnSpotrf`| | | | |`rocsolver_spotrf`|3.2.0| | | |6.1.0|
 |`cusolverDnSpotrfBatched`|9.1| | | | | | | | | |
 |`cusolverDnSpotrf_bufferSize`| | | | | | | | | | |
@@ -285,6 +291,8 @@
 |`cusolverDnZpotrsBatched`|9.1| | | | | | | | | |
 |`cusolverDnZungqr`|8.0| | | | | | | | | |
 |`cusolverDnZungqr_bufferSize`|8.0| | | | | | | | | |
+|`cusolverDnZunmqr`| | | | | | | | | | |
+|`cusolverDnZunmqr_bufferSize`|8.0| | | | | | | | | |
 
 
 \*A - Added; D - Deprecated; C - Changed; R - Removed; E - Experimental
