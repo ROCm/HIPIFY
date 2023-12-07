@@ -295,7 +295,7 @@
 |`cusparseCbsrmv`| | | | | | | | | | |
 |`cusparseCbsrsv2_analysis`| |12.2| | |`rocsparse_cbsrsv_analysis`|3.6.0| | | | |
 |`cusparseCbsrsv2_bufferSize`| |12.2| | | | | | | | |
-|`cusparseCbsrsv2_bufferSizeExt`| |12.2| | | | | | | | |
+|`cusparseCbsrsv2_bufferSizeExt`| |12.2| | |`rocsparse_cbsrsv_buffer_size`|3.6.0| | | | |
 |`cusparseCbsrsv2_solve`| |12.2| | |`rocsparse_cbsrsv_solve`|3.6.0| | | | |
 |`cusparseCbsrxmv`| |12.2| | | | | | | | |
 |`cusparseCcsrmv`| |10.2| |11.0|`rocsparse_ccsrmv`|1.9.0| | | | |
@@ -318,7 +318,7 @@
 |`cusparseDbsrmv`| | | | | | | | | | |
 |`cusparseDbsrsv2_analysis`| |12.2| | |`rocsparse_dbsrsv_analysis`|3.6.0| | | | |
 |`cusparseDbsrsv2_bufferSize`| |12.2| | | | | | | | |
-|`cusparseDbsrsv2_bufferSizeExt`| |12.2| | | | | | | | |
+|`cusparseDbsrsv2_bufferSizeExt`| |12.2| | |`rocsparse_dbsrsv_buffer_size`|3.6.0| | | | |
 |`cusparseDbsrsv2_solve`| |12.2| | |`rocsparse_dbsrsv_solve`|3.6.0| | | | |
 |`cusparseDbsrxmv`| |12.2| | | | | | | | |
 |`cusparseDcsrmv`| |10.2| |11.0|`rocsparse_dcsrmv`|1.9.0| | | | |
@@ -337,7 +337,7 @@
 |`cusparseSbsrmv`| | | | | | | | | | |
 |`cusparseSbsrsv2_analysis`| |12.2| | |`rocsparse_sbsrsv_analysis`|3.6.0| | | | |
 |`cusparseSbsrsv2_bufferSize`| |12.2| | | | | | | | |
-|`cusparseSbsrsv2_bufferSizeExt`| |12.2| | | | | | | | |
+|`cusparseSbsrsv2_bufferSizeExt`| |12.2| | |`rocsparse_sbsrsv_buffer_size`|3.6.0| | | | |
 |`cusparseSbsrsv2_solve`| |12.2| | |`rocsparse_sbsrsv_solve`|3.6.0| | | | |
 |`cusparseSbsrxmv`| |12.2| | | | | | | | |
 |`cusparseScsrmv`| |10.2| |11.0|`rocsparse_scsrmv`|1.9.0| | | | |
@@ -358,7 +358,7 @@
 |`cusparseZbsrmv`| | | | | | | | | | |
 |`cusparseZbsrsv2_analysis`| |12.2| | |`rocsparse_zbsrsv_analysis`|3.6.0| | | | |
 |`cusparseZbsrsv2_bufferSize`| |12.2| | | | | | | | |
-|`cusparseZbsrsv2_bufferSizeExt`| |12.2| | | | | | | | |
+|`cusparseZbsrsv2_bufferSizeExt`| |12.2| | |`rocsparse_zbsrsv_buffer_size`|3.6.0| | | | |
 |`cusparseZbsrsv2_solve`| |12.2| | |`rocsparse_zbsrsv_solve`|3.6.0| | | | |
 |`cusparseZbsrxmv`| |12.2| | | | | | | | |
 |`cusparseZcsrmv`| |10.2| |11.0|`rocsparse_zcsrmv`|1.9.0| | | | |
