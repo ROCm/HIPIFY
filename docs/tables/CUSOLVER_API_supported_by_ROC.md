@@ -143,6 +143,8 @@
 |`cusolverDnCreateParams`|11.0| | | | | | | | | |
 |`cusolverDnCsytrf`| | | | | | | | | | |
 |`cusolverDnCsytrf_bufferSize`| | | | | | | | | | |
+|`cusolverDnCsytri`|10.1| | | | | | | | | |
+|`cusolverDnCsytri_bufferSize`|10.1| | | | | | | | | |
 |`cusolverDnCungqr`|8.0| | | | | | | | | |
 |`cusolverDnCungqr_bufferSize`|8.0| | | | | | | | | |
 |`cusolverDnCunmqr`| | | | | | | | | | |
@@ -189,6 +191,8 @@
 |`cusolverDnDpotrsBatched`|9.1| | | | | | | | | |
 |`cusolverDnDsytrf`| | | | | | | | | | |
 |`cusolverDnDsytrf_bufferSize`| | | | | | | | | | |
+|`cusolverDnDsytri`|10.1| | | | | | | | | |
+|`cusolverDnDsytri_bufferSize`|10.1| | | | | | | | | |
 |`cusolverDnGetDeterministicMode`|12.2| | | | | | | | | |
 |`cusolverDnGetStream`| | | | |`rocblas_get_stream`| | | | | |
 |`cusolverDnIRSInfosCreate`|10.2| | | | | | | | | |
@@ -255,9 +259,13 @@
 |`cusolverDnSpotrsBatched`|9.1| | | | | | | | | |
 |`cusolverDnSsytrf`| | | | | | | | | | |
 |`cusolverDnSsytrf_bufferSize`| | | | | | | | | | |
+|`cusolverDnSsytri`|10.1| | | | | | | | | |
+|`cusolverDnSsytri_bufferSize`|10.1| | | | | | | | | |
 |`cusolverDnXgetrf`|11.1| | | | | | | | | |
 |`cusolverDnXgetrf_bufferSize`|11.1| | | | | | | | | |
 |`cusolverDnXgetrs`|11.1| | | | | | | | | |
+|`cusolverDnXsytrs`|11.3| | | | | | | | | |
+|`cusolverDnXsytrs_bufferSize`|11.3| | | | | | | | | |
 |`cusolverDnXtrtri`|11.4| | | | | | | | | |
 |`cusolverDnXtrtri_bufferSize`|11.4| | | | | | | | | |
 |`cusolverDnZCgels`|11.0| | | | | | | | | |
@@ -297,6 +305,8 @@
 |`cusolverDnZpotrsBatched`|9.1| | | | | | | | | |
 |`cusolverDnZsytrf`| | | | | | | | | | |
 |`cusolverDnZsytrf_bufferSize`| | | | | | | | | | |
+|`cusolverDnZsytri`|10.1| | | | | | | | | |
+|`cusolverDnZsytri_bufferSize`|10.1| | | | | | | | | |
 |`cusolverDnZungqr`|8.0| | | | | | | | | |
 |`cusolverDnZungqr_bufferSize`|8.0| | | | | | | | | |
 |`cusolverDnZunmqr`| | | | | | | | | | |
