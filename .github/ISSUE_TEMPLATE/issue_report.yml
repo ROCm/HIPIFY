@@ -41,46 +41,6 @@ body:
     required: true
 - type: dropdown
   attributes:
-    label: GPU
-    description: What GPU(s) did you encounter the issue on (you can select multiple GPUs from the list)
-    multiple: true
-    options:
-        - AMD Instinct MI250X
-        - AMD Instinct MI250
-        - AMD Instinct MI210
-        - AMD Instinct MI100
-        - AMD Instinct MI50
-        - AMD Instinct MI25
-        - AMD Radeon Pro V620
-        - AMD Radeon Pro VII
-        - AMD Radeon RX 7900 XTX
-        - AMD Radeon VII
-        - AMD Radeon Pro W7900
-        - AMD Radeon Pro W7800
-        - AMD Radeon Pro W6800
-        - AMD Radeon Pro W6600
-        - AMD Radeon Pro W5500
-        - AMD Radeon RX 7900 XT
-        - AMD Radeon RX 7600
-        - AMD Radeon RX 6950 XT
-        - AMD Radeon RX 6900 XT
-        - AMD Radeon RX 6800 XT
-        - AMD Radeon RX 6800
-        - AMD Radeon RX 6750
-        - AMD Radeon RX 6700 XT
-        - AMD Radeon RX 6700
-        - AMD Radeon RX 6650 XT
-        - AMD Radeon RX 6600 XT
-        - AMD Radeon RX 6600
-        - Other
-  validations:
-    required: true
-- type: input
-  attributes:
-    label: Other
-    description: If you selected Other, please specify
-- type: dropdown
-  attributes:
     label: ROCm Version
     description: What version(s) of ROCm did you encounter the issue on?
     multiple: true
