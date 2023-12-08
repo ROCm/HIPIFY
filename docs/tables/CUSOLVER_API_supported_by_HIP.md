@@ -141,6 +141,8 @@
 |`cusolverDnCpotrsBatched`|9.1| | | |`hipsolverDnCpotrsBatched`|5.1.0| | | |6.1.0|
 |`cusolverDnCreate`| | | | |`hipsolverDnCreate`|5.1.0| | | |6.1.0|
 |`cusolverDnCreateParams`|11.0| | | | | | | | | |
+|`cusolverDnCsytrf`| | | | |`hipsolverDnCsytrf`|5.1.0| | | |6.1.0|
+|`cusolverDnCsytrf_bufferSize`| | | | |`hipsolverDnCsytrf_bufferSize`|5.1.0| | | |6.1.0|
 |`cusolverDnCungqr`|8.0| | | |`hipsolverDnCungqr`|5.1.0| | | |6.1.0|
 |`cusolverDnCungqr_bufferSize`|8.0| | | |`hipsolverDnCungqr_bufferSize`|5.1.0| | | |6.1.0|
 |`cusolverDnCunmqr`| | | | |`hipsolverDnCunmqr`|5.1.0| | | |6.1.0|
@@ -185,6 +187,8 @@
 |`cusolverDnDpotri_bufferSize`|10.1| | | |`hipsolverDnDpotri_bufferSize`|5.1.0| | | |6.1.0|
 |`cusolverDnDpotrs`| | | | |`hipsolverDnDpotrs`|5.1.0| | | |6.1.0|
 |`cusolverDnDpotrsBatched`|9.1| | | |`hipsolverDnDpotrsBatched`|5.1.0| | | |6.1.0|
+|`cusolverDnDsytrf`| | | | |`hipsolverDnDsytrf`|5.1.0| | | |6.1.0|
+|`cusolverDnDsytrf_bufferSize`| | | | |`hipsolverDnDsytrf_bufferSize`|5.1.0| | | |6.1.0|
 |`cusolverDnGetDeterministicMode`|12.2| | | | | | | | | |
 |`cusolverDnGetStream`| | | | |`hipsolverGetStream`|4.5.0| | | |6.1.0|
 |`cusolverDnIRSInfosCreate`|10.2| | | | | | | | | |
@@ -249,6 +253,8 @@
 |`cusolverDnSpotri_bufferSize`|10.1| | | |`hipsolverDnSpotri_bufferSize`|5.1.0| | | |6.1.0|
 |`cusolverDnSpotrs`| | | | |`hipsolverDnSpotrs`|5.1.0| | | |6.1.0|
 |`cusolverDnSpotrsBatched`|9.1| | | |`hipsolverDnSpotrsBatched`|5.1.0| | | |6.1.0|
+|`cusolverDnSsytrf`| | | | |`hipsolverDnSsytrf`|5.1.0| | | |6.1.0|
+|`cusolverDnSsytrf_bufferSize`| | | | |`hipsolverDnSsytrf_bufferSize`|5.1.0| | | |6.1.0|
 |`cusolverDnXgetrf`|11.1| | | | | | | | | |
 |`cusolverDnXgetrf_bufferSize`|11.1| | | | | | | | | |
 |`cusolverDnXgetrs`|11.1| | | | | | | | | |
@@ -289,6 +295,8 @@
 |`cusolverDnZpotri_bufferSize`|10.1| | | |`hipsolverDnZpotri_bufferSize`|5.1.0| | | |6.1.0|
 |`cusolverDnZpotrs`| | | | |`hipsolverDnZpotrs`|5.1.0| | | |6.1.0|
 |`cusolverDnZpotrsBatched`|9.1| | | |`hipsolverDnZpotrsBatched`|5.1.0| | | |6.1.0|
+|`cusolverDnZsytrf`| | | | |`hipsolverDnZsytrf`|5.1.0| | | |6.1.0|
+|`cusolverDnZsytrf_bufferSize`| | | | |`hipsolverDnZsytrf_bufferSize`|5.1.0| | | |6.1.0|
 |`cusolverDnZungqr`|8.0| | | |`hipsolverDnZungqr`|5.1.0| | | |6.1.0|
 |`cusolverDnZungqr_bufferSize`|8.0| | | |`hipsolverDnZungqr_bufferSize`|5.1.0| | | |6.1.0|
 |`cusolverDnZunmqr`| | | | |`hipsolverDnZunmqr`|5.1.0| | | |6.1.0|
