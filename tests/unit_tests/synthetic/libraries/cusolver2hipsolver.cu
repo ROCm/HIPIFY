@@ -465,27 +465,6 @@ int main() {
 #endif
 
 #if CUDA_VERSION >= 10010
-  // CHECK: int solver_int = 0;
-  // CHECK: int lm = 0;
-  // CHECK: int ln = 0;
-  // CHECK: int lnrhs = 0;
-  // CHECK: int ldda = 0;
-  // CHECK: int lddb = 0;
-  // CHECK: int lddx = 0;
-  // CHECK: int dipiv = 0;
-  // CHECK: int iter = 0;
-  // CHECK: int d_info = 0;
-  cusolver_int_t solver_int = 0;
-  cusolver_int_t lm = 0;
-  cusolver_int_t ln = 0;
-  cusolver_int_t lnrhs = 0;
-  cusolver_int_t ldda = 0;
-  cusolver_int_t lddb = 0;
-  cusolver_int_t lddx = 0;
-  cusolver_int_t dipiv = 0;
-  cusolver_int_t iter = 0;
-  cusolver_int_t d_info = 0;
-
   // CHECK: hipsolverEigRange_t eigRange;
   // CHECK-NEXT: hipsolverEigRange_t EIG_RANGE_ALL = HIPSOLVER_EIG_RANGE_ALL;
   // CHECK-NEXT: hipsolverEigRange_t EIG_RANGE_I = HIPSOLVER_EIG_RANGE_I;
@@ -537,6 +516,27 @@ int main() {
 #endif
 
 #if CUDA_VERSION >= 10020
+  // CHECK: int solver_int = 0;
+  // CHECK: int lm = 0;
+  // CHECK: int ln = 0;
+  // CHECK: int lnrhs = 0;
+  // CHECK: int ldda = 0;
+  // CHECK: int lddb = 0;
+  // CHECK: int lddx = 0;
+  // CHECK: int dipiv = 0;
+  // CHECK: int iter = 0;
+  // CHECK: int d_info = 0;
+  cusolver_int_t solver_int = 0;
+  cusolver_int_t lm = 0;
+  cusolver_int_t ln = 0;
+  cusolver_int_t lnrhs = 0;
+  cusolver_int_t ldda = 0;
+  cusolver_int_t lddb = 0;
+  cusolver_int_t lddx = 0;
+  cusolver_int_t dipiv = 0;
+  cusolver_int_t iter = 0;
+  cusolver_int_t d_info = 0;
+
   // CHECK: hipsolverStatus_t STATUS_IRS_PARAMS_INVALID = HIPSOLVER_STATUS_INVALID_VALUE;
   // CHECK-NEXT: hipsolverStatus_t STATUS_IRS_INTERNAL_ERROR = HIPSOLVER_STATUS_INTERNAL_ERROR;
   // CHECK-NEXT: hipsolverStatus_t STATUS_IRS_NOT_SUPPORTED = HIPSOLVER_STATUS_NOT_SUPPORTED;
