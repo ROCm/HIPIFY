@@ -276,6 +276,46 @@ int main() {
   // CHECK: status = hipsolverDnZgeqrf(handle, m, n, &dComplexA, lda, &dComplexTAU, &dComplexWorkspace, Lwork, &devInfo);
   status = cusolverDnZgeqrf(handle, m, n, &dComplexA, lda, &dComplexTAU, &dComplexWorkspace, Lwork, &devInfo);
 
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnSsytrf_bufferSize(cusolverDnHandle_t handle, int n, float * A, int lda, int * lwork);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnSsytrf_bufferSize(hipsolverHandle_t handle, int n, float* A, int lda, int* lwork);
+  // CHECK: status = hipsolverDnSsytrf_bufferSize(handle, n, &fA, lda, &Lwork);
+  status = cusolverDnSsytrf_bufferSize(handle, n, &fA, lda, &Lwork);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnDsytrf_bufferSize(cusolverDnHandle_t handle, int n, double * A, int lda, int * lwork);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnDsytrf_bufferSize(hipsolverHandle_t handle, int n, double* A, int lda, int* lwork);
+  // CHECK: status = hipsolverDnDsytrf_bufferSize(handle, n, &dA, lda, &Lwork);
+  status = cusolverDnDsytrf_bufferSize(handle, n, &dA, lda, &Lwork);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnCsytrf_bufferSize(cusolverDnHandle_t handle, int n, cuComplex * A, int lda, int * lwork);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnCsytrf_bufferSize(hipsolverHandle_t handle, int n, hipFloatComplex* A, int lda, int* lwork);
+  // CHECK: status = hipsolverDnCsytrf_bufferSize(handle, n, &complexA, lda, &Lwork);
+  status = cusolverDnCsytrf_bufferSize(handle, n, &complexA, lda, &Lwork);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnZsytrf_bufferSize(cusolverDnHandle_t handle, int n, cuDoubleComplex * A, int lda, int * lwork);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnZsytrf_bufferSize(hipsolverHandle_t handle, int n, hipDoubleComplex* A, int lda, int* lwork);
+  // CHECK: status = hipsolverDnZsytrf_bufferSize(handle, n, &dComplexA, lda, &Lwork);
+  status = cusolverDnZsytrf_bufferSize(handle, n, &dComplexA, lda, &Lwork);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnSsytrf(cusolverDnHandle_t handle, cublasFillMode_t uplo, int n, float * A, int lda, int * ipiv, float * work, int lwork, int * info);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnSsytrf(hipsolverHandle_t handle, hipblasFillMode_t uplo, int n, float* A, int lda, int* ipiv, float* work, int lwork, int* devInfo);
+  // CHECK: status = hipsolverDnSsytrf(handle, fillMode, n, &fA, lda, &devIpiv, &fWorkspace, Lwork, &devInfo);
+  status = cusolverDnSsytrf(handle, fillMode, n, &fA, lda, &devIpiv, &fWorkspace, Lwork, &devInfo);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnDsytrf(cusolverDnHandle_t handle, cublasFillMode_t uplo, int n, double * A, int lda, int * ipiv, double * work, int lwork, int * info);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnDsytrf(hipsolverHandle_t handle, hipblasFillMode_t uplo, int n, double* A, int lda, int* ipiv, double* work, int lwork, int* devInfo);
+  // CHECK: status = hipsolverDnDsytrf(handle, fillMode, n, &dA, lda, &devIpiv, &dWorkspace, Lwork, &devInfo);
+  status = cusolverDnDsytrf(handle, fillMode, n, &dA, lda, &devIpiv, &dWorkspace, Lwork, &devInfo);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnCsytrf(cusolverDnHandle_t handle, cublasFillMode_t uplo, int n, cuComplex * A, int lda, int * ipiv, cuComplex * work, int lwork, int * info);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnCsytrf(hipsolverHandle_t handle, hipblasFillMode_t uplo, int n, hipFloatComplex* A, int lda, int* ipiv, hipFloatComplex* work, int lwork, int* devInfo);
+  // CHECK: status = hipsolverDnCsytrf(handle, fillMode, n, &complexA, lda, &devIpiv, &complexWorkspace, Lwork, &devInfo);
+  status = cusolverDnCsytrf(handle, fillMode, n, &complexA, lda, &devIpiv, &complexWorkspace, Lwork, &devInfo);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnZsytrf(cusolverDnHandle_t handle, cublasFillMode_t uplo, int n, cuDoubleComplex * A, int lda, int * ipiv, cuDoubleComplex * work, int lwork, int * info);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnZsytrf(hipsolverHandle_t handle, hipblasFillMode_t uplo, int n, hipDoubleComplex* A, int lda, int* ipiv, hipDoubleComplex* work, int lwork, int* devInfo);
+  // CHECK: status = hipsolverDnZsytrf(handle, fillMode, n, &dComplexA, lda, &devIpiv, &dComplexWorkspace, Lwork, &devInfo);
+  status = cusolverDnZsytrf(handle, fillMode, n, &dComplexA, lda, &devIpiv, &dComplexWorkspace, Lwork, &devInfo);
+
 #if CUDA_VERSION >= 8000
   // CHECK: hipsolverEigType_t eigType;
   // CHECK-NEXT: hipsolverEigType_t EIG_TYPE_1 = HIPSOLVER_EIG_TYPE_1;
