@@ -1155,26 +1155,6 @@ int main() {
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_sgemvi(rocsparse_handle handle, rocsparse_operation trans, rocsparse_int m, rocsparse_int n, const float* alpha, const float* A, rocsparse_int lda, rocsparse_int nnz, const float* x_val, const rocsparse_int* x_ind, const float* beta, float* y, rocsparse_index_base idx_base, void* temp_buffer);
   // CHECK: status_t = rocsparse_sgemvi(handle_t, opA, m, n, &fAlpha, &fA, lda, innz, &fX, &xInd, &fBeta, &fY, indexBase_t, pBuffer);
   status_t = cusparseSgemvi(handle_t, opA, m, n, &fAlpha, &fA, lda, innz, &fX, &xInd, &fBeta, &fY, indexBase_t, pBuffer);
-
-  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseZgemvi_bufferSize(cusparseHandle_t handle, cusparseOperation_t transA, int m, int n, int nnz, int* pBufferSize);
-  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_zgemvi_buffer_size(rocsparse_handle handle, rocsparse_operation trans, rocsparse_int m, rocsparse_int n, rocsparse_int nnz, size_t* buffer_size);
-  // CHECK: status_t = rocsparse_zgemvi_buffer_size(handle_t, opA, m, n, innz, reinterpret_cast<size_t*>(&bufferSizeInBytes));
-  status_t = cusparseZgemvi_bufferSize(handle_t, opA, m, n, innz, &bufferSizeInBytes);
-
-  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCgemvi_bufferSize(cusparseHandle_t handle, cusparseOperation_t transA, int m, int n, int nnz, int* pBufferSize);
-  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_cgemvi_buffer_size(rocsparse_handle handle, rocsparse_operation trans, rocsparse_int m, rocsparse_int n, rocsparse_int nnz, size_t* buffer_size);
-  // CHECK: status_t = rocsparse_cgemvi_buffer_size(handle_t, opA, m, n, innz, reinterpret_cast<size_t*>(&bufferSizeInBytes));
-  status_t = cusparseCgemvi_bufferSize(handle_t, opA, m, n, innz, &bufferSizeInBytes);
-
-  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDgemvi_bufferSize(cusparseHandle_t handle, cusparseOperation_t transA, int m, int n, int nnz, int* pBufferSize);
-  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_dgemvi_buffer_size(rocsparse_handle handle, rocsparse_operation trans, rocsparse_int m, rocsparse_int n, rocsparse_int nnz, size_t* buffer_size);
-  // CHECK: status_t = rocsparse_dgemvi_buffer_size(handle_t, opA, m, n, innz, reinterpret_cast<size_t*>(&bufferSizeInBytes));
-  status_t = cusparseDgemvi_bufferSize(handle_t, opA, m, n, innz, &bufferSizeInBytes);
-
-  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSgemvi_bufferSize(cusparseHandle_t handle, cusparseOperation_t transA, int m, int n, int nnz, int* pBufferSize);
-  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_sgemvi_buffer_size(rocsparse_handle handle, rocsparse_operation trans, rocsparse_int m, rocsparse_int n, rocsparse_int nnz, size_t* buffer_size);
-  // CHECK: status_t = rocsparse_sgemvi_buffer_size(handle_t, opA, m, n, innz, reinterpret_cast<size_t*>(&bufferSizeInBytes));
-  status_t = cusparseSgemvi_bufferSize(handle_t, opA, m, n, innz, &bufferSizeInBytes);
 #endif
 
 #if CUDA_VERSION >= 8000
