@@ -1772,6 +1772,11 @@ int main() {
   cusparseCsr2CscAlg_t CSR2CSC_ALG2 = CUSPARSE_CSR2CSC_ALG2;
 #endif
 
+#if CUDA_VERSION < 12000
+  csrgemm2Info_t csrgemm2_info;
+  csrsv2Info_t csrsv2_info;
+#endif
+
 #if (CUDA_VERSION >= 10020 && CUDA_VERSION < 11000 && !defined(_WIN32)) || CUDA_VERSION >= 11000
   // CHECK: hipsparseSpVecDescr_t spVecDescr_t;
   cusparseSpVecDescr_t spVecDescr_t;
@@ -2489,9 +2494,6 @@ int main() {
 #endif
 
 #if CUDA_VERSION < 12000
-  csrgemm2Info_t csrgemm2_info;
-  csrsv2Info_t csrsv2_info;
-
   // CUDA: CUSPARSE_DEPRECATED(cusparseSparseToDense) cusparseStatus_t CUSPARSEAPI cusparseZcsc2dense(cusparseHandle_t handle, int m, int n, const cusparseMatDescr_t descrA, const cuDoubleComplex* cscSortedValA, const int* cscSortedRowIndA, const int* cscSortedColPtrA, cuDoubleComplex* A, int lda);
   // HIP: DEPRECATED_CUDA_11000("The routine will be removed in CUDA 12") HIPSPARSE_EXPORT hipsparseStatus_t hipsparseZcsc2dense(hipsparseHandle_t handle, int m, int n, const hipsparseMatDescr_t descr, const hipDoubleComplex* csc_val, const int* csc_row_ind, const int* csc_col_ptr, hipDoubleComplex* A, int ld);
   // CHECK: status_t = hipsparseZcsc2dense(handle_t, m, n, matDescr_A, &dComplexcscSortedVal, &csrSortedRowPtr, &csrSortedColInd, &dcomplexA, lda);
