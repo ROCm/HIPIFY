@@ -1095,6 +1095,8 @@ my %experimental_funcs = (
     "cusolverDnZpotrf_bufferSize" => "6.1.0",
     "cusolverDnZpotrfBatched" => "6.1.0",
     "cusolverDnZpotrf" => "6.1.0",
+    "cusolverDnZhetrd_bufferSize" => "6.1.0",
+    "cusolverDnZhetrd" => "6.1.0",
     "cusolverDnZgetrs" => "6.1.0",
     "cusolverDnZgetrf_bufferSize" => "6.1.0",
     "cusolverDnZgetrf" => "6.1.0",
@@ -1108,6 +1110,8 @@ my %experimental_funcs = (
     "cusolverDnZZgels" => "6.1.0",
     "cusolverDnSsytrf_bufferSize" => "6.1.0",
     "cusolverDnSsytrf" => "6.1.0",
+    "cusolverDnSsytrd_bufferSize" => "6.1.0",
+    "cusolverDnSsytrd" => "6.1.0",
     "cusolverDnSpotrsBatched" => "6.1.0",
     "cusolverDnSpotrs" => "6.1.0",
     "cusolverDnSpotri_bufferSize" => "6.1.0",
@@ -1137,6 +1141,8 @@ my %experimental_funcs = (
     "cusolverDnGetStream" => "6.1.0",
     "cusolverDnDsytrf_bufferSize" => "6.1.0",
     "cusolverDnDsytrf" => "6.1.0",
+    "cusolverDnDsytrd_bufferSize" => "6.1.0",
+    "cusolverDnDsytrd" => "6.1.0",
     "cusolverDnDpotrsBatched" => "6.1.0",
     "cusolverDnDpotrs" => "6.1.0",
     "cusolverDnDpotri_bufferSize" => "6.1.0",
@@ -1178,6 +1184,8 @@ my %experimental_funcs = (
     "cusolverDnCpotrf_bufferSize" => "6.1.0",
     "cusolverDnCpotrfBatched" => "6.1.0",
     "cusolverDnCpotrf" => "6.1.0",
+    "cusolverDnChetrd_bufferSize" => "6.1.0",
+    "cusolverDnChetrd" => "6.1.0",
     "cusolverDnCgetrs" => "6.1.0",
     "cusolverDnCgetrf_bufferSize" => "6.1.0",
     "cusolverDnCgetrf" => "6.1.0",
@@ -1355,6 +1363,8 @@ sub experimentalSubstitutions {
     subst("cusolverDnCgetrf", "hipsolverDnCgetrf", "library");
     subst("cusolverDnCgetrf_bufferSize", "hipsolverDnCgetrf_bufferSize", "library");
     subst("cusolverDnCgetrs", "hipsolverDnCgetrs", "library");
+    subst("cusolverDnChetrd", "hipsolverDnChetrd", "library");
+    subst("cusolverDnChetrd_bufferSize", "hipsolverDnChetrd_bufferSize", "library");
     subst("cusolverDnCpotrf", "hipsolverDnCpotrf", "library");
     subst("cusolverDnCpotrfBatched", "hipsolverDnCpotrfBatched", "library");
     subst("cusolverDnCpotrf_bufferSize", "hipsolverDnCpotrf_bufferSize", "library");
@@ -1396,6 +1406,8 @@ sub experimentalSubstitutions {
     subst("cusolverDnDpotri_bufferSize", "hipsolverDnDpotri_bufferSize", "library");
     subst("cusolverDnDpotrs", "hipsolverDnDpotrs", "library");
     subst("cusolverDnDpotrsBatched", "hipsolverDnDpotrsBatched", "library");
+    subst("cusolverDnDsytrd", "hipsolverDnDsytrd", "library");
+    subst("cusolverDnDsytrd_bufferSize", "hipsolverDnDsytrd_bufferSize", "library");
     subst("cusolverDnDsytrf", "hipsolverDnDsytrf", "library");
     subst("cusolverDnDsytrf_bufferSize", "hipsolverDnDsytrf_bufferSize", "library");
     subst("cusolverDnGetStream", "hipsolverGetStream", "library");
@@ -1424,6 +1436,8 @@ sub experimentalSubstitutions {
     subst("cusolverDnSpotri_bufferSize", "hipsolverDnSpotri_bufferSize", "library");
     subst("cusolverDnSpotrs", "hipsolverDnSpotrs", "library");
     subst("cusolverDnSpotrsBatched", "hipsolverDnSpotrsBatched", "library");
+    subst("cusolverDnSsytrd", "hipsolverDnSsytrd", "library");
+    subst("cusolverDnSsytrd_bufferSize", "hipsolverDnSsytrd_bufferSize", "library");
     subst("cusolverDnSsytrf", "hipsolverDnSsytrf", "library");
     subst("cusolverDnSsytrf_bufferSize", "hipsolverDnSsytrf_bufferSize", "library");
     subst("cusolverDnZZgels", "hipsolverDnZZgels", "library");
@@ -1437,6 +1451,8 @@ sub experimentalSubstitutions {
     subst("cusolverDnZgetrf", "hipsolverDnZgetrf", "library");
     subst("cusolverDnZgetrf_bufferSize", "hipsolverDnZgetrf_bufferSize", "library");
     subst("cusolverDnZgetrs", "hipsolverDnZgetrs", "library");
+    subst("cusolverDnZhetrd", "hipsolverDnZhetrd", "library");
+    subst("cusolverDnZhetrd_bufferSize", "hipsolverDnZhetrd_bufferSize", "library");
     subst("cusolverDnZpotrf", "hipsolverDnZpotrf", "library");
     subst("cusolverDnZpotrfBatched", "hipsolverDnZpotrfBatched", "library");
     subst("cusolverDnZpotrf_bufferSize", "hipsolverDnZpotrf_bufferSize", "library");
