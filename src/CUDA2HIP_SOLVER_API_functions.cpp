@@ -281,6 +281,16 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SOLVER_FUNCTION_MAP {
   {"cusolverDnDorgbr",                                   {"hipsolverDnDorgbr",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
   {"cusolverDnCungbr",                                   {"hipsolverDnCungbr",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
   {"cusolverDnZungbr",                                   {"hipsolverDnZungbr",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  // NOTE: rocsolver_(s|d)sytrd and rocsolver_(c|z)hetrd have a harness of other HIP and ROC API calls
+  {"cusolverDnSsytrd_bufferSize",                        {"hipsolverDnSsytrd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  {"cusolverDnDsytrd_bufferSize",                        {"hipsolverDnDsytrd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  {"cusolverDnChetrd_bufferSize",                        {"hipsolverDnChetrd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  {"cusolverDnZhetrd_bufferSize",                        {"hipsolverDnZhetrd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  // NOTE: rocsolver_(s|d)sytrd and rocsolver_(c|z)hetrd have a harness of other HIP and ROC API calls
+  {"cusolverDnSsytrd",                                   {"hipsolverDnSsytrd",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  {"cusolverDnDsytrd",                                   {"hipsolverDnDsytrd",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  {"cusolverDnChetrd",                                   {"hipsolverDnChetrd",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  {"cusolverDnZhetrd",                                   {"hipsolverDnZhetrd",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_SOLVER_FUNCTION_VER_MAP {
@@ -443,6 +453,12 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SOLVER_FUNCTION_VER_MAP {
   {"cusolverDnDorgbr",                                    {CUDA_80,   CUDA_0, CUDA_0}},
   {"cusolverDnCungbr",                                    {CUDA_80,   CUDA_0, CUDA_0}},
   {"cusolverDnZungbr",                                    {CUDA_80,   CUDA_0, CUDA_0}},
+  {"cusolverDnSsytrd_bufferSize",                         {CUDA_80,   CUDA_0, CUDA_0}},
+  {"cusolverDnDsytrd_bufferSize",                         {CUDA_80,   CUDA_0, CUDA_0}},
+  {"cusolverDnChetrd_bufferSize",                         {CUDA_80,   CUDA_0, CUDA_0}},
+  {"cusolverDnZhetrd_bufferSize",                         {CUDA_80,   CUDA_0, CUDA_0}},
+  {"cusolverDnChetrd",                                    {CUDA_80,   CUDA_0, CUDA_0}},
+  {"cusolverDnZhetrd",                                    {CUDA_80,   CUDA_0, CUDA_0}},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_SOLVER_FUNCTION_VER_MAP {
@@ -554,6 +570,14 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SOLVER_FUNCTION_VER_MAP {
   {"hipsolverDnDorgbr",                                   {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipsolverDnCungbr",                                   {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipsolverDnZungbr",                                   {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverDnSsytrd_bufferSize",                        {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverDnDsytrd_bufferSize",                        {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverDnChetrd_bufferSize",                        {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverDnZhetrd_bufferSize",                        {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverDnSsytrd",                                   {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverDnDsytrd",                                   {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverDnChetrd",                                   {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverDnZhetrd",                                   {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
 
   {"rocsolver_spotrf",                                    {HIP_3020, HIP_0,    HIP_0,  HIP_LATEST}},
   {"rocsolver_dpotrf",                                    {HIP_3020, HIP_0,    HIP_0,  HIP_LATEST}},
