@@ -167,6 +167,14 @@ const std::string sCusparseZcsrmv = "cusparseZcsrmv";
 const std::string sCusparseCcsrmv = "cusparseCcsrmv";
 const std::string sCusparseDcsrmv = "cusparseDcsrmv";
 const std::string sCusparseScsrmv = "cusparseScsrmv";
+const std::string sCusparseZbsrsv2_solve = "cusparseZbsrsv2_solve";
+const std::string sCusparseCbsrsv2_solve = "cusparseCbsrsv2_solve";
+const std::string sCusparseDbsrsv2_solve = "cusparseDbsrsv2_solve";
+const std::string sCusparseSbsrsv2_solve = "cusparseSbsrsv2_solve";
+const std::string sCusparseSbsrsv2_analysis = "cusparseSbsrsv2_analysis";
+const std::string sCusparseDbsrsv2_analysis = "cusparseDbsrsv2_analysis";
+const std::string sCusparseCbsrsv2_analysis = "cusparseCbsrsv2_analysis";
+const std::string sCusparseZbsrsv2_analysis = "cusparseZbsrsv2_analysis";
 
 // CUDA_OVERLOADED
 const std::string sCudaEventCreate = "cudaEventCreate";
@@ -1251,6 +1259,82 @@ std::map<std::string, ArgCastStruct> FuncArgCasts {
       false
     }
   },
+  {sCusparseZbsrsv2_solve,
+    {
+      {
+        {14, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseCbsrsv2_solve,
+    {
+      {
+        {14, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseDbsrsv2_solve,
+    {
+      {
+        {14, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseSbsrsv2_solve,
+    {
+      {
+        {14, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseZbsrsv2_analysis,
+    {
+      {
+        {11, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+        {12, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseCbsrsv2_analysis,
+    {
+      {
+        {11, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+        {12, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseDbsrsv2_analysis,
+    {
+      {
+        {11, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+        {12, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseSbsrsv2_analysis,
+    {
+      {
+        {11, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+        {12, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+      },
+      true,
+      false
+    }
+  },
 };
 
 void HipifyAction::RewriteString(StringRef s, clang::SourceLocation start) {
@@ -2046,7 +2130,15 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
             sCusparseZcsrmv,
             sCusparseCcsrmv,
             sCusparseDcsrmv,
-            sCusparseScsrmv
+            sCusparseScsrmv,
+            sCusparseZbsrsv2_solve,
+            sCusparseCbsrsv2_solve,
+            sCusparseDbsrsv2_solve,
+            sCusparseSbsrsv2_solve,
+            sCusparseSbsrsv2_analysis,
+            sCusparseDbsrsv2_analysis,
+            sCusparseCbsrsv2_analysis,
+            sCusparseZbsrsv2_analysis
           )
         )
       )

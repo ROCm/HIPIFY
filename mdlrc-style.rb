@@ -35,6 +35,8 @@ exclude_rule 'MD032'
 exclude_rule 'MD033'
 # Bare URLs
 exclude_rule 'MD034'
+# Spaces inside emphasis markers
+exclude_rule 'MD037'
 # Fenced code blocks should have a language specified
 exclude_rule 'MD040'
 # First line in file should be a top level header

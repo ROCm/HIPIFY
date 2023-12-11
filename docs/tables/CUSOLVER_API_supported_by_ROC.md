@@ -124,12 +124,33 @@
 |`cusolverDnCYgels_bufferSize`|11.0| | | | | | | | | |
 |`cusolverDnCYgesv`|11.0| | | | | | | | | |
 |`cusolverDnCYgesv_bufferSize`|11.0| | | | | | | | | |
+|`cusolverDnCgebrd`| | | | | | | | | | |
+|`cusolverDnCgebrd_bufferSize`| | | | | | | | | | |
+|`cusolverDnCgeqrf`| | | | | | | | | | |
+|`cusolverDnCgeqrf_bufferSize`| | | | | | | | | | |
+|`cusolverDnCgetrf`| | | | | | | | | | |
+|`cusolverDnCgetrf_bufferSize`| | | | | | | | | | |
+|`cusolverDnCgetrs`| | | | | | | | | | |
+|`cusolverDnClaswp`| | | | | | | | | | |
+|`cusolverDnClauum`|10.1| | | | | | | | | |
+|`cusolverDnClauum_bufferSize`|10.1| | | | | | | | | |
 |`cusolverDnCpotrf`| | | | |`rocsolver_cpotrf`|3.6.0| | | |6.1.0|
 |`cusolverDnCpotrfBatched`|9.1| | | | | | | | | |
 |`cusolverDnCpotrf_bufferSize`| | | | | | | | | | |
+|`cusolverDnCpotri`|10.1| | | | | | | | | |
+|`cusolverDnCpotri_bufferSize`|10.1| | | | | | | | | |
 |`cusolverDnCpotrs`| | | | | | | | | | |
+|`cusolverDnCpotrsBatched`|9.1| | | | | | | | | |
 |`cusolverDnCreate`| | | | |`rocblas_create_handle`| | | | | |
 |`cusolverDnCreateParams`|11.0| | | | | | | | | |
+|`cusolverDnCsytrf`| | | | | | | | | | |
+|`cusolverDnCsytrf_bufferSize`| | | | | | | | | | |
+|`cusolverDnCsytri`|10.1| | | | | | | | | |
+|`cusolverDnCsytri_bufferSize`|10.1| | | | | | | | | |
+|`cusolverDnCungqr`|8.0| | | | | | | | | |
+|`cusolverDnCungqr_bufferSize`|8.0| | | | | | | | | |
+|`cusolverDnCunmqr`| | | | | | | | | | |
+|`cusolverDnCunmqr_bufferSize`|8.0| | | | | | | | | |
 |`cusolverDnDBgels`|11.0| | | | | | | | | |
 |`cusolverDnDBgels_bufferSize`|11.0| | | | | | | | | |
 |`cusolverDnDBgesv`|11.0| | | | | | | | | |
@@ -151,13 +172,31 @@
 |`cusolverDnDXgesv`|11.0| | | | | | | | | |
 |`cusolverDnDXgesv_bufferSize`|11.0| | | | | | | | | |
 |`cusolverDnDestroy`| | | | |`rocblas_destroy_handle`| | | | | |
+|`cusolverDnDgebrd`| | | | | | | | | | |
+|`cusolverDnDgebrd_bufferSize`| | | | | | | | | | |
+|`cusolverDnDgeqrf`| | | | | | | | | | |
+|`cusolverDnDgeqrf_bufferSize`| | | | | | | | | | |
 |`cusolverDnDgetrf`| | | | | | | | | | |
 |`cusolverDnDgetrf_bufferSize`| | | | | | | | | | |
 |`cusolverDnDgetrs`| | | | | | | | | | |
+|`cusolverDnDlaswp`| | | | | | | | | | |
+|`cusolverDnDlauum`|10.1| | | | | | | | | |
+|`cusolverDnDlauum_bufferSize`|10.1| | | | | | | | | |
+|`cusolverDnDorgqr`|8.0| | | | | | | | | |
+|`cusolverDnDorgqr_bufferSize`|8.0| | | | | | | | | |
+|`cusolverDnDormqr`| | | | | | | | | | |
+|`cusolverDnDormqr_bufferSize`|8.0| | | | | | | | | |
 |`cusolverDnDpotrf`| | | | |`rocsolver_dpotrf`|3.2.0| | | |6.1.0|
 |`cusolverDnDpotrfBatched`|9.1| | | | | | | | | |
 |`cusolverDnDpotrf_bufferSize`| | | | | | | | | | |
+|`cusolverDnDpotri`|10.1| | | | | | | | | |
+|`cusolverDnDpotri_bufferSize`|10.1| | | | | | | | | |
 |`cusolverDnDpotrs`| | | | | | | | | | |
+|`cusolverDnDpotrsBatched`|9.1| | | | | | | | | |
+|`cusolverDnDsytrf`| | | | | | | | | | |
+|`cusolverDnDsytrf_bufferSize`| | | | | | | | | | |
+|`cusolverDnDsytri`|10.1| | | | | | | | | |
+|`cusolverDnDsytri_bufferSize`|10.1| | | | | | | | | |
 |`cusolverDnGetDeterministicMode`|12.2| | | | | | | | | |
 |`cusolverDnGetStream`| | | | |`rocblas_get_stream`| | | | | |
 |`cusolverDnIRSInfosCreate`|10.2| | | | | | | | | |
@@ -203,16 +242,38 @@
 |`cusolverDnSetAdvOptions`|11.0| | | | | | | | | |
 |`cusolverDnSetDeterministicMode`|12.2| | | | | | | | | |
 |`cusolverDnSetStream`| | | | |`rocblas_set_stream`| | | | | |
+|`cusolverDnSgebrd`| | | | | | | | | | |
+|`cusolverDnSgebrd_bufferSize`| | | | | | | | | | |
+|`cusolverDnSgeqrf`| | | | | | | | | | |
+|`cusolverDnSgeqrf_bufferSize`| | | | | | | | | | |
 |`cusolverDnSgetrf`| | | | | | | | | | |
 |`cusolverDnSgetrf_bufferSize`| | | | | | | | | | |
 |`cusolverDnSgetrs`| | | | | | | | | | |
+|`cusolverDnSlaswp`| | | | | | | | | | |
+|`cusolverDnSlauum`|10.1| | | | | | | | | |
+|`cusolverDnSlauum_bufferSize`|10.1| | | | | | | | | |
+|`cusolverDnSorgqr`|8.0| | | | | | | | | |
+|`cusolverDnSorgqr_bufferSize`|8.0| | | | | | | | | |
+|`cusolverDnSormqr`| | | | | | | | | | |
+|`cusolverDnSormqr_bufferSize`|8.0| | | | | | | | | |
 |`cusolverDnSpotrf`| | | | |`rocsolver_spotrf`|3.2.0| | | |6.1.0|
 |`cusolverDnSpotrfBatched`|9.1| | | | | | | | | |
 |`cusolverDnSpotrf_bufferSize`| | | | | | | | | | |
+|`cusolverDnSpotri`|10.1| | | | | | | | | |
+|`cusolverDnSpotri_bufferSize`|10.1| | | | | | | | | |
 |`cusolverDnSpotrs`| | | | | | | | | | |
+|`cusolverDnSpotrsBatched`|9.1| | | | | | | | | |
+|`cusolverDnSsytrf`| | | | | | | | | | |
+|`cusolverDnSsytrf_bufferSize`| | | | | | | | | | |
+|`cusolverDnSsytri`|10.1| | | | | | | | | |
+|`cusolverDnSsytri_bufferSize`|10.1| | | | | | | | | |
 |`cusolverDnXgetrf`|11.1| | | | | | | | | |
 |`cusolverDnXgetrf_bufferSize`|11.1| | | | | | | | | |
 |`cusolverDnXgetrs`|11.1| | | | | | | | | |
+|`cusolverDnXsytrs`|11.3| | | | | | | | | |
+|`cusolverDnXsytrs_bufferSize`|11.3| | | | | | | | | |
+|`cusolverDnXtrtri`|11.4| | | | | | | | | |
+|`cusolverDnXtrtri_bufferSize`|11.4| | | | | | | | | |
 |`cusolverDnZCgels`|11.0| | | | | | | | | |
 |`cusolverDnZCgels_bufferSize`|11.0| | | | | | | | | |
 |`cusolverDnZCgesv`|10.2| | | | | | | | | |
@@ -233,10 +294,31 @@
 |`cusolverDnZZgels_bufferSize`|11.0| | | | | | | | | |
 |`cusolverDnZZgesv`|10.2| | | | | | | | | |
 |`cusolverDnZZgesv_bufferSize`|10.2| | | | | | | | | |
+|`cusolverDnZgebrd`| | | | | | | | | | |
+|`cusolverDnZgebrd_bufferSize`| | | | | | | | | | |
+|`cusolverDnZgeqrf`| | | | | | | | | | |
+|`cusolverDnZgeqrf_bufferSize`| | | | | | | | | | |
+|`cusolverDnZgetrf`| | | | | | | | | | |
+|`cusolverDnZgetrf_bufferSize`| | | | | | | | | | |
+|`cusolverDnZgetrs`| | | | | | | | | | |
+|`cusolverDnZlaswp`| | | | | | | | | | |
+|`cusolverDnZlauum`|10.1| | | | | | | | | |
+|`cusolverDnZlauum_bufferSize`|10.1| | | | | | | | | |
 |`cusolverDnZpotrf`| | | | |`rocsolver_zpotrf`|3.6.0| | | |6.1.0|
 |`cusolverDnZpotrfBatched`|9.1| | | | | | | | | |
 |`cusolverDnZpotrf_bufferSize`| | | | | | | | | | |
+|`cusolverDnZpotri`|10.1| | | | | | | | | |
+|`cusolverDnZpotri_bufferSize`|10.1| | | | | | | | | |
 |`cusolverDnZpotrs`| | | | | | | | | | |
+|`cusolverDnZpotrsBatched`|9.1| | | | | | | | | |
+|`cusolverDnZsytrf`| | | | | | | | | | |
+|`cusolverDnZsytrf_bufferSize`| | | | | | | | | | |
+|`cusolverDnZsytri`|10.1| | | | | | | | | |
+|`cusolverDnZsytri_bufferSize`|10.1| | | | | | | | | |
+|`cusolverDnZungqr`|8.0| | | | | | | | | |
+|`cusolverDnZungqr_bufferSize`|8.0| | | | | | | | | |
+|`cusolverDnZunmqr`| | | | | | | | | | |
+|`cusolverDnZunmqr_bufferSize`|8.0| | | | | | | | | |
 
 
 \*A - Added; D - Deprecated; C - Changed; R - Removed; E - Experimental
