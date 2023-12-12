@@ -580,6 +580,46 @@ int main() {
   // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnZungtr(hipsolverHandle_t handle, hipblasFillMode_t uplo, int n, hipDoubleComplex* A, int lda, const hipDoubleComplex* tau, hipDoubleComplex* work, int lwork, int* devInfo);
   // CHECK: status = hipsolverDnZungtr(handle, fillMode, n, &dComplexA, lda, &dComplexTAU, &dComplexWorkspace, Lwork, &info);
   status = cusolverDnZungtr(handle, fillMode, n, &dComplexA, lda, &dComplexTAU, &dComplexWorkspace, Lwork, &info);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnSormtr_bufferSize(cusolverDnHandle_t handle, cublasSideMode_t side, cublasFillMode_t uplo, cublasOperation_t trans, int m, int n, const float * A, int lda, const float * tau, const float * C, int ldc, int * lwork);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnSormtr_bufferSize(hipsolverHandle_t  handle, hipblasSideMode_t side, hipblasFillMode_t uplo, hipblasOperation_t trans, int m, int n, const float* A, int lda, const float* tau, const float* C, int ldc, int* lwork);
+  // CHECK: status = hipsolverDnSormtr_bufferSize(handle, blasSideMode, fillMode, blasOperation, m, n, &fA, lda, &fTAU, &fC, ldc, &Lwork);
+  status = cusolverDnSormtr_bufferSize(handle, blasSideMode, fillMode, blasOperation, m, n, &fA, lda, &fTAU, &fC, ldc, &Lwork);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnDormtr_bufferSize(cusolverDnHandle_t handle, cublasSideMode_t side, cublasFillMode_t uplo, cublasOperation_t trans, int m, int n, const double * A, int lda, const double * tau, const double * C, int ldc, int * lwork);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnDormtr_bufferSize(hipsolverHandle_t  handle, hipblasSideMode_t side, hipblasFillMode_t uplo, hipblasOperation_t trans, int m, int n, const double* A, int lda, const double* tau, const double* C, int ldc, int* lwork);
+  // CHECK: status = hipsolverDnDormtr_bufferSize(handle, blasSideMode, fillMode, blasOperation, m, n, &dA, lda, &dTAU, &dC, ldc, &Lwork);
+  status = cusolverDnDormtr_bufferSize(handle, blasSideMode, fillMode, blasOperation, m, n, &dA, lda, &dTAU, &dC, ldc, &Lwork);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnCunmtr_bufferSize(cusolverDnHandle_t handle, cublasSideMode_t side, cublasFillMode_t uplo, cublasOperation_t trans, int m, int n, const cuComplex * A, int lda, const cuComplex * tau, const cuComplex * C, int ldc, int * lwork);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnCunmtr_bufferSize(hipsolverHandle_t handle, hipblasSideMode_t side, hipblasFillMode_t uplo, hipblasOperation_t trans, int m, int n, const hipFloatComplex* A, int lda, const hipFloatComplex* tau, const hipFloatComplex* C, int ldc, int* lwork);
+  // CHECK: status = hipsolverDnCunmtr_bufferSize(handle, blasSideMode, fillMode, blasOperation, m, n, &complexA, lda, &complexTAU, &complexC, ldc, &Lwork);
+  status = cusolverDnCunmtr_bufferSize(handle, blasSideMode, fillMode, blasOperation, m, n, &complexA, lda, &complexTAU, &complexC, ldc, &Lwork);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnZunmtr_bufferSize(cusolverDnHandle_t handle, cublasSideMode_t side, cublasFillMode_t uplo, cublasOperation_t trans, int m, int n, const cuDoubleComplex *A, int lda, const cuDoubleComplex *tau, const cuDoubleComplex *C, int ldc, int * lwork);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnZunmtr_bufferSize(hipsolverHandle_t handle, hipblasSideMode_t side, hipblasFillMode_t uplo, hipblasOperation_t trans, int m, int n, const hipDoubleComplex* A, int lda, const hipDoubleComplex* tau, const hipDoubleComplex* C, int ldc, int* lwork);
+  // CHECK: status = hipsolverDnZunmtr_bufferSize(handle, blasSideMode, fillMode, blasOperation, m, n, &dComplexA, lda, &dComplexTAU, &dComplexC, ldc, &Lwork);
+  status = cusolverDnZunmtr_bufferSize(handle, blasSideMode, fillMode, blasOperation, m, n, &dComplexA, lda, &dComplexTAU, &dComplexC, ldc, &Lwork);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnSormtr(cusolverDnHandle_t handle, cublasSideMode_t side, cublasFillMode_t uplo, cublasOperation_t trans, int m, int n, float * A, int lda, float * tau, float * C, int ldc, float * work, int lwork, int * info);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnSormtr(hipsolverHandle_t handle, hipblasSideMode_t side, hipblasFillMode_t uplo, hipblasOperation_t trans, int m, int n, float* A, int lda, float* tau, float* C, int ldc, float* work, int lwork, int* devInfo);
+  // CHECK: status = hipsolverDnSormtr(handle, blasSideMode, fillMode, blasOperation, m, n, &fA, lda, &fTAU, &fC, ldc, &fWorkspace, Lwork, &info);
+  status = cusolverDnSormtr(handle, blasSideMode, fillMode, blasOperation, m, n, &fA, lda, &fTAU, &fC, ldc, &fWorkspace, Lwork, &info);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnDormtr(cusolverDnHandle_t handle, cublasSideMode_t side, cublasFillMode_t uplo, cublasOperation_t trans, int m, int n, double * A, int lda, double * tau, double * C, int ldc, double * work, int lwork, int * info);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnDormtr(hipsolverHandle_t handle, hipblasSideMode_t side, hipblasFillMode_t uplo, hipblasOperation_t trans, int m, int n, double* A, int lda, double* tau, double* C, int ldc, double* work, int lwork, int* devInfo);
+  // CHECK: status = hipsolverDnDormtr(handle, blasSideMode, fillMode, blasOperation, m, n, &dA, lda, &dTAU, &dC, ldc, &dWorkspace, Lwork, &info);
+  status = cusolverDnDormtr(handle, blasSideMode, fillMode, blasOperation, m, n, &dA, lda, &dTAU, &dC, ldc, &dWorkspace, Lwork, &info);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnCunmtr(cusolverDnHandle_t handle, cublasSideMode_t side, cublasFillMode_t uplo, cublasOperation_t trans, int m, int n, cuComplex * A, int lda, cuComplex * tau, cuComplex * C, int ldc, cuComplex * work, int lwork, int * info);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnCunmtr(hipsolverHandle_t handle, hipblasSideMode_t side, hipblasFillMode_t uplo, hipblasOperation_t trans, int m, int n, hipFloatComplex* A, int lda, hipFloatComplex* tau, hipFloatComplex* C, int ldc, hipFloatComplex* work, int lwork, int* devInfo);
+  // CHECK: status = hipsolverDnCunmtr(handle, blasSideMode, fillMode, blasOperation, m, n, &complexA, lda, &complexTAU, &complexC, ldc, &complexWorkspace, Lwork, &info);
+  status = cusolverDnCunmtr(handle, blasSideMode, fillMode, blasOperation, m, n, &complexA, lda, &complexTAU, &complexC, ldc, &complexWorkspace, Lwork, &info);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnZunmtr(cusolverDnHandle_t handle, cublasSideMode_t side, cublasFillMode_t uplo, cublasOperation_t trans, int m, int n, cuDoubleComplex * A, int lda, cuDoubleComplex * tau, cuDoubleComplex * C, int ldc, cuDoubleComplex * work, int lwork, int * info);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnZunmtr(hipsolverHandle_t handle, hipblasSideMode_t side, hipblasFillMode_t uplo, hipblasOperation_t trans, int m, int n, hipDoubleComplex* A, int lda, hipDoubleComplex* tau, hipDoubleComplex* C, int ldc, hipDoubleComplex* work, int lwork, int* devInfo);
+  // CHECK: status = hipsolverDnZunmtr(handle, blasSideMode, fillMode, blasOperation, m, n, &dComplexA, lda, &dComplexTAU, &dComplexC, ldc, &dComplexWorkspace, Lwork, &info);
+  status = cusolverDnZunmtr(handle, blasSideMode, fillMode, blasOperation, m, n, &dComplexA, lda, &dComplexTAU, &dComplexC, ldc, &dComplexWorkspace, Lwork, &info);
 #endif
 
 #if CUDA_VERSION >= 9000

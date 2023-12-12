@@ -157,6 +157,8 @@
 |`cusolverDnCungtr_bufferSize`|8.0| | | |`hipsolverDnCungtr_bufferSize`|5.1.0| | | |6.1.0|
 |`cusolverDnCunmqr`| | | | |`hipsolverDnCunmqr`|5.1.0| | | |6.1.0|
 |`cusolverDnCunmqr_bufferSize`|8.0| | | |`hipsolverDnCunmqr_bufferSize`|5.1.0| | | |6.1.0|
+|`cusolverDnCunmtr`|8.0| | | |`hipsolverDnCunmtr`|5.1.0| | | |6.1.0|
+|`cusolverDnCunmtr_bufferSize`|8.0| | | |`hipsolverDnCunmtr_bufferSize`|5.1.0| | | |6.1.0|
 |`cusolverDnDBgels`|11.0| | | | | | | | | |
 |`cusolverDnDBgels_bufferSize`|11.0| | | | | | | | | |
 |`cusolverDnDBgesv`|11.0| | | | | | | | | |
@@ -196,6 +198,8 @@
 |`cusolverDnDorgtr_bufferSize`|8.0| | | |`hipsolverDnDorgtr_bufferSize`|5.1.0| | | |6.1.0|
 |`cusolverDnDormqr`| | | | |`hipsolverDnDormqr`|5.1.0| | | |6.1.0|
 |`cusolverDnDormqr_bufferSize`|8.0| | | |`hipsolverDnDormqr_bufferSize`|5.1.0| | | |6.1.0|
+|`cusolverDnDormtr`|8.0| | | |`hipsolverDnDormtr`|5.1.0| | | |6.1.0|
+|`cusolverDnDormtr_bufferSize`|8.0| | | |`hipsolverDnDormtr_bufferSize`|5.1.0| | | |6.1.0|
 |`cusolverDnDpotrf`| | | | |`hipsolverDnDpotrf`|5.1.0| | | |6.1.0|
 |`cusolverDnDpotrfBatched`|9.1| | | |`hipsolverDnDpotrfBatched`|5.1.0| | | |6.1.0|
 |`cusolverDnDpotrf_bufferSize`| | | | |`hipsolverDnDpotrf_bufferSize`|5.1.0| | | |6.1.0|
@@ -272,6 +276,8 @@
 |`cusolverDnSorgtr_bufferSize`|8.0| | | |`hipsolverDnSorgtr_bufferSize`|5.1.0| | | |6.1.0|
 |`cusolverDnSormqr`| | | | |`hipsolverDnSormqr`|5.1.0| | | |6.1.0|
 |`cusolverDnSormqr_bufferSize`|8.0| | | |`hipsolverDnSormqr_bufferSize`|5.1.0| | | |6.1.0|
+|`cusolverDnSormtr`|8.0| | | |`hipsolverDnSormtr`|5.1.0| | | |6.1.0|
+|`cusolverDnSormtr_bufferSize`|8.0| | | |`hipsolverDnSormtr_bufferSize`|5.1.0| | | |6.1.0|
 |`cusolverDnSpotrf`| | | | |`hipsolverDnSpotrf`|5.1.0| | | |6.1.0|
 |`cusolverDnSpotrfBatched`|9.1| | | |`hipsolverDnSpotrfBatched`|5.1.0| | | |6.1.0|
 |`cusolverDnSpotrf_bufferSize`| | | | |`hipsolverDnSpotrf_bufferSize`|5.1.0| | | |6.1.0|
@@ -343,6 +349,8 @@
 |`cusolverDnZungtr_bufferSize`|8.0| | | |`hipsolverDnZungtr_bufferSize`|5.1.0| | | |6.1.0|
 |`cusolverDnZunmqr`| | | | |`hipsolverDnZunmqr`|5.1.0| | | |6.1.0|
 |`cusolverDnZunmqr_bufferSize`|8.0| | | |`hipsolverDnZunmqr_bufferSize`|5.1.0| | | |6.1.0|
+|`cusolverDnZunmtr`|8.0| | | |`hipsolverDnZunmtr`|5.1.0| | | |6.1.0|
+|`cusolverDnZunmtr_bufferSize`|8.0| | | |`hipsolverDnZunmtr_bufferSize`|5.1.0| | | |6.1.0|
 
 
 \*A - Added; D - Deprecated; C - Changed; R - Removed; E - Experimental
