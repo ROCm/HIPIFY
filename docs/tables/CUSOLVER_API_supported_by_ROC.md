@@ -128,6 +128,8 @@
 |`cusolverDnCgebrd_bufferSize`| | | | | | | | | | |
 |`cusolverDnCgeqrf`| | | | | | | | | | |
 |`cusolverDnCgeqrf_bufferSize`| | | | | | | | | | |
+|`cusolverDnCgesvd`| | | | | | | | | | |
+|`cusolverDnCgesvd_bufferSize`| | | | | | | | | | |
 |`cusolverDnCgetrf`| | | | | | | | | | |
 |`cusolverDnCgetrf_bufferSize`| | | | | | | | | | |
 |`cusolverDnCgetrs`| | | | | | | | | | |
@@ -184,6 +186,8 @@
 |`cusolverDnDgebrd_bufferSize`| | | | | | | | | | |
 |`cusolverDnDgeqrf`| | | | | | | | | | |
 |`cusolverDnDgeqrf_bufferSize`| | | | | | | | | | |
+|`cusolverDnDgesvd`| | | | | | | | | | |
+|`cusolverDnDgesvd_bufferSize`| | | | | | | | | | |
 |`cusolverDnDgetrf`| | | | | | | | | | |
 |`cusolverDnDgetrf_bufferSize`| | | | | | | | | | |
 |`cusolverDnDgetrs`| | | | | | | | | | |
@@ -262,6 +266,8 @@
 |`cusolverDnSgebrd_bufferSize`| | | | | | | | | | |
 |`cusolverDnSgeqrf`| | | | | | | | | | |
 |`cusolverDnSgeqrf_bufferSize`| | | | | | | | | | |
+|`cusolverDnSgesvd`| | | | | | | | | | |
+|`cusolverDnSgesvd_bufferSize`| | | | | | | | | | |
 |`cusolverDnSgetrf`| | | | | | | | | | |
 |`cusolverDnSgetrf_bufferSize`| | | | | | | | | | |
 |`cusolverDnSgetrs`| | | | | | | | | | |
@@ -322,6 +328,8 @@
 |`cusolverDnZgebrd_bufferSize`| | | | | | | | | | |
 |`cusolverDnZgeqrf`| | | | | | | | | | |
 |`cusolverDnZgeqrf_bufferSize`| | | | | | | | | | |
+|`cusolverDnZgesvd`| | | | | | | | | | |
+|`cusolverDnZgesvd_bufferSize`| | | | | | | | | | |
 |`cusolverDnZgetrf`| | | | | | | | | | |
 |`cusolverDnZgetrf_bufferSize`| | | | | | | | | | |
 |`cusolverDnZgetrs`| | | | | | | | | | |

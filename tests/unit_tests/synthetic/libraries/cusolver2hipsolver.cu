@@ -16,6 +16,8 @@ int main() {
   int lda = 0;
   int ldb = 0;
   int ldc = 0;
+  int ldu = 0;
+  int ldvt = 0;
   int Lwork = 0;
   int devIpiv = 0;
   int devInfo = 0;
@@ -27,6 +29,9 @@ int main() {
   float fC = 0.f;
   float fD = 0.f;
   float fE = 0.f;
+  float fS = 0.f;
+  float fU = 0.f;
+  float fVT = 0.f;
   float fX = 0.f;
   float fTAU = 0.f;
   float fTAUQ = 0.f;
@@ -36,25 +41,33 @@ int main() {
   double dC = 0.f;
   double dD = 0.f;
   double dE = 0.f;
+  double dS = 0.f;
+  double dU = 0.f;
+  double dVT = 0.f;
   double dX = 0.f;
   double dTAU = 0.f;
   double dTAUQ = 0.f;
   double dTAUP = 0.f;
   float fWorkspace = 0.f;
+  float frWork = 0.f;
   double dWorkspace = 0.f;
+  double drWork = 0.f;
   void *Workspace = nullptr;
   size_t lwork_bytes = 0;
+
+  signed char jobu = 0;
+  signed char jobvt = 0;
 
   float** fAarray = 0;
   float** fBarray = 0;
   double** dAarray = 0;
   double** dBarray = 0;
 
-  // CHECK: hipDoubleComplex dComplexA, dComplexB, dComplexC, dComplexD, dComplexE, dComplexX, dComplexWorkspace, dComplexTAU, dComplexTAUQ, dComplexTAUP;
-  cuDoubleComplex dComplexA, dComplexB, dComplexC, dComplexD, dComplexE, dComplexX, dComplexWorkspace, dComplexTAU, dComplexTAUQ, dComplexTAUP;
+  // CHECK: hipDoubleComplex dComplexA, dComplexB, dComplexC, dComplexD, dComplexE, dComplexS, dComplexU, dComplexVT, dComplexX, dComplexWorkspace, dComplexrWork, dComplexTAU, dComplexTAUQ, dComplexTAUP;
+  cuDoubleComplex dComplexA, dComplexB, dComplexC, dComplexD, dComplexE, dComplexS, dComplexU, dComplexVT, dComplexX, dComplexWorkspace, dComplexrWork, dComplexTAU, dComplexTAUQ, dComplexTAUP;
 
-  // CHECK: hipComplex complexA, complexB, complexC, complexD, complexE, complexX, complexWorkspace, complexTAU, complexTAUQ, complexTAUP;
-  cuComplex complexA, complexB, complexC, complexD, complexE, complexX, complexWorkspace, complexTAU, complexTAUQ, complexTAUP;
+  // CHECK: hipComplex complexA, complexB, complexC, complexD, complexE, complexS, complexU, complexVT, complexX, complexWorkspace, complexrWork, complexTAU, complexTAUQ, complexTAUP;
+  cuComplex complexA, complexB, complexC, complexD, complexE, complexS, complexU, complexVT, complexX, complexWorkspace, complexrWork, complexTAU, complexTAUQ, complexTAUP;
 
   // CHECK: hipDoubleComplex** dcomplexAarray = 0;
   // CHECK-NEXT: hipDoubleComplex** dcomplexBarray = 0;
@@ -373,6 +386,46 @@ int main() {
   // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnDsytrd(hipsolverHandle_t handle, hipblasFillMode_t uplo, int n, double* A, int lda, double* D, double* E, double* tau, double* work, int lwork, int* devInfo);
   // CHECK: status = hipsolverDnDsytrd(handle, fillMode, n, &dA, lda, &dD, &dE, &dTAU, &dWorkspace, Lwork, &info);
   status = cusolverDnDsytrd(handle, fillMode, n, &dA, lda, &dD, &dE, &dTAU, &dWorkspace, Lwork, &info);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnSgesvd_bufferSize(cusolverDnHandle_t handle, int m, int n, int * lwork);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnSgesvd_bufferSize(hipsolverHandle_t handle, int m, int n, int* lwork);
+  // CHECK: status = hipsolverDnSgesvd_bufferSize(handle, m, n, &Lwork);
+  status = cusolverDnSgesvd_bufferSize(handle, m, n, &Lwork);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnDgesvd_bufferSize(cusolverDnHandle_t handle, int m, int n, int * lwork);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnDgesvd_bufferSize(hipsolverHandle_t handle, int m, int n, int* lwork);
+  // CHECK: status = hipsolverDnDgesvd_bufferSize(handle, m, n, &Lwork);
+  status = cusolverDnDgesvd_bufferSize(handle, m, n, &Lwork);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnCgesvd_bufferSize(cusolverDnHandle_t handle, int m, int n, int * lwork);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnCgesvd_bufferSize(hipsolverHandle_t handle, int m, int n, int* lwork);
+  // CHECK: status = hipsolverDnCgesvd_bufferSize(handle, m, n, &Lwork);
+  status = cusolverDnCgesvd_bufferSize(handle, m, n, &Lwork);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnZgesvd_bufferSize(cusolverDnHandle_t handle, int m, int n, int * lwork);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnZgesvd_bufferSize(hipsolverHandle_t handle, int m, int n, int* lwork);
+  // CHECK: status = hipsolverDnZgesvd_bufferSize(handle, m, n, &Lwork);
+  status = cusolverDnZgesvd_bufferSize(handle, m, n, &Lwork);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnSgesvd(cusolverDnHandle_t handle, signed char jobu, signed char jobvt, int m, int n, float * A, int lda, float * S, float * U, int ldu, float * VT, int ldvt, float * work, int lwork, float * rwork, int * info);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnSgesvd(hipsolverHandle_t handle, signed char jobu, signed char jobv, int m, int n, float* A, int lda, float* S, float* U, int ldu, float* V, int ldv, float* work, int lwork, float* rwork, int* devInfo);
+  // CHECK: status = hipsolverDnSgesvd(handle, jobu, jobvt, m, n, &fA, lda, &fS, &fU, ldu, &fVT, ldvt, &fWorkspace, Lwork, &frWork, &info);
+  status = cusolverDnSgesvd(handle, jobu, jobvt, m, n, &fA, lda, &fS, &fU, ldu, &fVT, ldvt, &fWorkspace, Lwork, &frWork, &info);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnDgesvd(cusolverDnHandle_t handle, signed char jobu, signed char jobvt, int m, int n, double * A, int lda, double * S, double * U, int ldu, double * VT, int ldvt, double * work, int lwork, double * rwork, int * info);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnDgesvd(hipsolverHandle_t handle, signed char jobu, signed char jobv, int m, int n, double* A, int lda, double* S, double* U, int ldu, double* V, int ldv, double* work, int lwork, double* rwork, int* devInfo);
+  // CHECK: status = hipsolverDnDgesvd(handle, jobu, jobvt, m, n, &dA, lda, &dS, &dU, ldu, &dVT, ldvt, &dWorkspace, Lwork, &drWork, &info);
+  status = cusolverDnDgesvd(handle, jobu, jobvt, m, n, &dA, lda, &dS, &dU, ldu, &dVT, ldvt, &dWorkspace, Lwork, &drWork, &info);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnCgesvd(cusolverDnHandle_t handle, signed char jobu, signed char jobvt, int m, int n, cuComplex * A, int lda, float * S, cuComplex * U, int ldu, cuComplex * VT, int ldvt, cuComplex * work, int lwork, float * rwork, int * info);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnCgesvd(hipsolverHandle_t handle, signed char jobu, signed char jobv, int m, int n, hipFloatComplex* A, int lda, float* S, hipFloatComplex* U, int ldu, hipFloatComplex* V, int ldv, hipFloatComplex* work, int lwork, float* rwork, int* devInfo);
+  // CHECK: status = hipsolverDnCgesvd(handle, jobu, jobvt, m, n, &complexA, lda, &fS, &complexU, ldu, &complexVT, ldvt, &complexWorkspace, Lwork, &frWork, &info);
+  status = cusolverDnCgesvd(handle, jobu, jobvt, m, n, &complexA, lda, &fS, &complexU, ldu, &complexVT, ldvt, &complexWorkspace, Lwork, &frWork, &info);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnZgesvd(cusolverDnHandle_t handle, signed char jobu, signed char jobvt, int m, int n, cuDoubleComplex * A, int lda, double * S, cuDoubleComplex * U, int ldu, cuDoubleComplex * VT, int ldvt, cuDoubleComplex * work, int lwork, double * rwork, int * info);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnZgesvd(hipsolverHandle_t handle, signed char jobu, signed char jobv, int m, int n, hipDoubleComplex* A, int lda, double* S, hipDoubleComplex* U, int ldu, hipDoubleComplex* V, int ldv, hipDoubleComplex* work, int lwork, double* rwork, int* devInfo);
+  // CHECK: status = hipsolverDnZgesvd(handle, jobu, jobvt, m, n, &dComplexA, lda, &dS, &dComplexU, ldu, &dComplexVT, ldvt, &dComplexWorkspace, Lwork, &drWork, &info);
+  status = cusolverDnZgesvd(handle, jobu, jobvt, m, n, &dComplexA, lda, &dS, &dComplexU, ldu, &dComplexVT, ldvt, &dComplexWorkspace, Lwork, &drWork, &info);
 
 #if CUDA_VERSION >= 8000
   // CHECK: hipsolverEigType_t eigType;
