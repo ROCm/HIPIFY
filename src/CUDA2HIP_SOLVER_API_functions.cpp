@@ -369,6 +369,16 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SOLVER_FUNCTION_MAP {
   {"cusolverDnXsyevjSetSortEig",                         {"hipsolverDnXsyevjSetSortEig",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
   {"cusolverDnXsyevjGetResidual",                        {"hipsolverDnXsyevjGetResidual",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
   {"cusolverDnXsyevjGetSweeps",                          {"hipsolverDnXsyevjGetSweeps",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  // NOTE: rocsolver_(s|d)syevj_strided_batched and rocsolver_(c|z)heevj_strided_batched have a harness of other ROC and HIP API calls
+  {"cusolverDnSsyevjBatched_bufferSize",                 {"hipsolverDnSsyevjBatched_bufferSize",                   "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  {"cusolverDnDsyevjBatched_bufferSize",                 {"hipsolverDnDsyevjBatched_bufferSize",                   "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  {"cusolverDnCheevjBatched_bufferSize",                 {"hipsolverDnCheevjBatched_bufferSize",                   "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  {"cusolverDnZheevjBatched_bufferSize",                 {"hipsolverDnZheevjBatched_bufferSize",                   "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  // NOTE: rocsolver_(s|d)syevj_strided_batched and rocsolver_(c|z)heevj_strided_batched have a harness of other ROC and HIP API calls
+  {"cusolverDnSsyevjBatched",                            {"hipsolverDnSsyevjBatched",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  {"cusolverDnDsyevjBatched",                            {"hipsolverDnDsyevjBatched",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  {"cusolverDnCheevjBatched",                            {"hipsolverDnCheevjBatched",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  {"cusolverDnZheevjBatched",                            {"hipsolverDnZheevjBatched",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_SOLVER_FUNCTION_VER_MAP {
@@ -592,6 +602,14 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SOLVER_FUNCTION_VER_MAP {
   {"cusolverDnXsyevjSetSortEig",                          {CUDA_90,   CUDA_0, CUDA_0}},
   {"cusolverDnXsyevjGetResidual",                         {CUDA_90,   CUDA_0, CUDA_0}},
   {"cusolverDnXsyevjGetSweeps",                           {CUDA_90,   CUDA_0, CUDA_0}},
+  {"cusolverDnSsyevjBatched_bufferSize",                  {CUDA_90,   CUDA_0, CUDA_0}},
+  {"cusolverDnDsyevjBatched_bufferSize",                  {CUDA_90,   CUDA_0, CUDA_0}},
+  {"cusolverDnCheevjBatched_bufferSize",                  {CUDA_90,   CUDA_0, CUDA_0}},
+  {"cusolverDnZheevjBatched_bufferSize",                  {CUDA_90,   CUDA_0, CUDA_0}},
+  {"cusolverDnSsyevjBatched",                             {CUDA_90,   CUDA_0, CUDA_0}},
+  {"cusolverDnDsyevjBatched",                             {CUDA_90,   CUDA_0, CUDA_0}},
+  {"cusolverDnCheevjBatched",                             {CUDA_90,   CUDA_0, CUDA_0}},
+  {"cusolverDnZheevjBatched",                             {CUDA_90,   CUDA_0, CUDA_0}},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_SOLVER_FUNCTION_VER_MAP {
@@ -774,6 +792,14 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SOLVER_FUNCTION_VER_MAP {
   {"hipsolverDnXsyevjSetSortEig",                         {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipsolverDnXsyevjGetResidual",                        {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipsolverDnXsyevjGetSweeps",                          {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverDnSsyevjBatched_bufferSize",                 {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverDnDsyevjBatched_bufferSize",                 {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverDnCheevjBatched_bufferSize",                 {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverDnZheevjBatched_bufferSize",                 {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverDnSsyevjBatched",                            {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverDnDsyevjBatched",                            {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverDnCheevjBatched",                            {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverDnZheevjBatched",                            {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
 
   {"rocsolver_spotrf",                                    {HIP_3020, HIP_0,    HIP_0,  HIP_LATEST}},
   {"rocsolver_dpotrf",                                    {HIP_3020, HIP_0,    HIP_0,  HIP_LATEST}},
