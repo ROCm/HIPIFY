@@ -155,6 +155,7 @@
 |`cusolverDnCpotrsBatched`|9.1| | | | | | | | | |
 |`cusolverDnCreate`| | | | |`rocblas_create_handle`| | | | | |
 |`cusolverDnCreateParams`|11.0| | | | | | | | | |
+|`cusolverDnCreateSyevjInfo`|9.0| | | | | | | | | |
 |`cusolverDnCsytrf`| | | | | | | | | | |
 |`cusolverDnCsytrf_bufferSize`| | | | | | | | | | |
 |`cusolverDnCsytri`|10.1| | | | | | | | | |
@@ -190,6 +191,7 @@
 |`cusolverDnDXgesv`|11.0| | | | | | | | | |
 |`cusolverDnDXgesv_bufferSize`|11.0| | | | | | | | | |
 |`cusolverDnDestroy`| | | | |`rocblas_destroy_handle`| | | | | |
+|`cusolverDnDestroySyevjInfo`|9.0| | | | | | | | | |
 |`cusolverDnDgebrd`| | | | | | | | | | |
 |`cusolverDnDgebrd_bufferSize`| | | | | | | | | | |
 |`cusolverDnDgeqrf`| | | | | | | | | | |
@@ -324,6 +326,11 @@
 |`cusolverDnXgetrf`|11.1| | | | | | | | | |
 |`cusolverDnXgetrf_bufferSize`|11.1| | | | | | | | | |
 |`cusolverDnXgetrs`|11.1| | | | | | | | | |
+|`cusolverDnXsyevjGetResidual`|9.0| | | | | | | | | |
+|`cusolverDnXsyevjGetSweeps`|9.0| | | | | | | | | |
+|`cusolverDnXsyevjSetMaxSweeps`|9.0| | | | | | | | | |
+|`cusolverDnXsyevjSetSortEig`|9.0| | | | | | | | | |
+|`cusolverDnXsyevjSetTolerance`|9.0| | | | | | | | | |
 |`cusolverDnXsytrs`|11.3| | | | | | | | | |
 |`cusolverDnXsytrs_bufferSize`|11.3| | | | | | | | | |
 |`cusolverDnXtrtri`|11.4| | | | | | | | | |

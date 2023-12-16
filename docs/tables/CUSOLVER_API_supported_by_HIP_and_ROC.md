@@ -155,6 +155,7 @@
 |`cusolverDnCpotrsBatched`|9.1| | | |`hipsolverDnCpotrsBatched`|5.1.0| | | |6.1.0| | | | | | |
 |`cusolverDnCreate`| | | | |`hipsolverDnCreate`|5.1.0| | | |6.1.0|`rocblas_create_handle`| | | | | |
 |`cusolverDnCreateParams`|11.0| | | | | | | | | | | | | | | |
+|`cusolverDnCreateSyevjInfo`|9.0| | | |`hipsolverDnCreateSyevjInfo`|5.1.0| | | |6.1.0| | | | | | |
 |`cusolverDnCsytrf`| | | | |`hipsolverDnCsytrf`|5.1.0| | | |6.1.0| | | | | | |
 |`cusolverDnCsytrf_bufferSize`| | | | |`hipsolverDnCsytrf_bufferSize`|5.1.0| | | |6.1.0| | | | | | |
 |`cusolverDnCsytri`|10.1| | | | | | | | | | | | | | | |
@@ -190,6 +191,7 @@
 |`cusolverDnDXgesv`|11.0| | | | | | | | | | | | | | | |
 |`cusolverDnDXgesv_bufferSize`|11.0| | | | | | | | | | | | | | | |
 |`cusolverDnDestroy`| | | | |`hipsolverDnDestroy`|5.1.0| | | |6.1.0|`rocblas_destroy_handle`| | | | | |
+|`cusolverDnDestroySyevjInfo`|9.0| | | |`hipsolverDnDestroySyevjInfo`|5.1.0| | | |6.1.0| | | | | | |
 |`cusolverDnDgebrd`| | | | |`hipsolverDnDgebrd`|5.1.0| | | |6.1.0| | | | | | |
 |`cusolverDnDgebrd_bufferSize`| | | | |`hipsolverDnDgebrd_bufferSize`|5.1.0| | | |6.1.0| | | | | | |
 |`cusolverDnDgeqrf`| | | | |`hipsolverDnDgeqrf`|5.1.0| | | |6.1.0| | | | | | |
@@ -324,6 +326,11 @@
 |`cusolverDnXgetrf`|11.1| | | | | | | | | | | | | | | |
 |`cusolverDnXgetrf_bufferSize`|11.1| | | | | | | | | | | | | | | |
 |`cusolverDnXgetrs`|11.1| | | | | | | | | | | | | | | |
+|`cusolverDnXsyevjGetResidual`|9.0| | | |`hipsolverDnXsyevjGetResidual`|5.1.0| | | |6.1.0| | | | | | |
+|`cusolverDnXsyevjGetSweeps`|9.0| | | |`hipsolverDnXsyevjGetSweeps`|5.1.0| | | |6.1.0| | | | | | |
+|`cusolverDnXsyevjSetMaxSweeps`|9.0| | | |`hipsolverDnXsyevjSetMaxSweeps`|5.1.0| | | |6.1.0| | | | | | |
+|`cusolverDnXsyevjSetSortEig`|9.0| | | |`hipsolverDnXsyevjSetSortEig`|5.1.0| | | |6.1.0| | | | | | |
+|`cusolverDnXsyevjSetTolerance`|9.0| | | |`hipsolverDnXsyevjSetTolerance`|5.1.0| | | |6.1.0| | | | | | |
 |`cusolverDnXsytrs`|11.3| | | | | | | | | | | | | | | |
 |`cusolverDnXsytrs_bufferSize`|11.3| | | | | | | | | | | | | | | |
 |`cusolverDnXtrtri`|11.4| | | | | | | | | | | | | | | |
