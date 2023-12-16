@@ -852,6 +852,46 @@ int main() {
   // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnXsyevjGetSweeps(hipsolverDnHandle_t handle, hipsolverSyevjInfo_t info, int* executed_sweeps);
   // CHECK: status = hipsolverDnXsyevjGetSweeps(handle, syevj_info, &iexecuted_sweeps);
   status = cusolverDnXsyevjGetSweeps(handle, syevj_info, &iexecuted_sweeps);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnSsyevjBatched_bufferSize(cusolverDnHandle_t handle, cusolverEigMode_t jobz, cublasFillMode_t uplo, int n, const float * A, int lda, const float * W, int * lwork, syevjInfo_t params, int batchSize);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnSsyevjBatched_bufferSize(hipsolverDnHandle_t handle, hipsolverEigMode_t jobz, hipblasFillMode_t uplo, int n, const float* A, int lda, const float* W, int* lwork, hipsolverSyevjInfo_t params, int batch_count);
+  // CHECK: status = hipsolverDnSsyevjBatched_bufferSize(handle, jobz, fillMode, n, &fA, lda, &fW, &Lwork, syevj_info, batchSize);
+  status = cusolverDnSsyevjBatched_bufferSize(handle, jobz, fillMode, n, &fA, lda, &fW, &Lwork, syevj_info, batchSize);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnDsyevjBatched_bufferSize(cusolverDnHandle_t handle, cusolverEigMode_t jobz, cublasFillMode_t uplo, int n, const double * A, int lda, const double * W, int * lwork, syevjInfo_t params, int batchSize);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnDsyevjBatched_bufferSize(hipsolverDnHandle_t handle, hipsolverEigMode_t jobz, hipblasFillMode_t uplo, int n, const double* A, int lda, const double* W, int* lwork, hipsolverSyevjInfo_t params, int batch_count);
+  // CHECK: status = hipsolverDnDsyevjBatched_bufferSize(handle, jobz, fillMode, n, &dA, lda, &dW, &Lwork, syevj_info, batchSize);
+  status = cusolverDnDsyevjBatched_bufferSize(handle, jobz, fillMode, n, &dA, lda, &dW, &Lwork, syevj_info, batchSize);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnCheevjBatched_bufferSize(cusolverDnHandle_t handle, cusolverEigMode_t jobz, cublasFillMode_t uplo, int n, const cuComplex * A, int lda, const float * W, int * lwork, syevjInfo_t params, int batchSize);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnCheevjBatched_bufferSize(hipsolverDnHandle_t handle, hipsolverEigMode_t jobz, hipblasFillMode_t uplo, int n, const hipFloatComplex* A, int lda, const float* W, int* lwork, hipsolverSyevjInfo_t params, int batch_count);
+  // CHECK: status = hipsolverDnCheevjBatched_bufferSize(handle, jobz, fillMode, n, &complexA, lda, &fW, &Lwork, syevj_info, batchSize);
+  status = cusolverDnCheevjBatched_bufferSize(handle, jobz, fillMode, n, &complexA, lda, &fW, &Lwork, syevj_info, batchSize);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnZheevjBatched_bufferSize(cusolverDnHandle_t handle, cusolverEigMode_t jobz, cublasFillMode_t uplo, int n, const cuDoubleComplex *A, int lda, const double * W, int * lwork, syevjInfo_t params, int batchSize);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnZheevjBatched_bufferSize(hipsolverDnHandle_t handle, hipsolverEigMode_t jobz, hipblasFillMode_t uplo, int n, const hipDoubleComplex* A, int lda, const double* W, int* lwork, hipsolverSyevjInfo_t params, int batch_count);
+  // CHECK: status = hipsolverDnZheevjBatched_bufferSize(handle, jobz, fillMode, n, &dComplexA, lda, &dW, &Lwork, syevj_info, batchSize);
+  status = cusolverDnZheevjBatched_bufferSize(handle, jobz, fillMode, n, &dComplexA, lda, &dW, &Lwork, syevj_info, batchSize);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnSsyevjBatched(cusolverDnHandle_t handle, cusolverEigMode_t jobz, cublasFillMode_t uplo, int n, float * A, int lda, float * W, float * work, int lwork, int * info, syevjInfo_t params, int batchSize);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnSsyevjBatched(hipsolverDnHandle_t  handle, hipsolverEigMode_t jobz, hipblasFillMode_t uplo, int n, float* A, int lda, float* W, float* work, int lwork, int* devInfo, hipsolverSyevjInfo_t params, int batch_count);
+  // CHECK: status = hipsolverDnSsyevjBatched(handle, jobz, fillMode, n, &fA, lda, &fW, &fWorkspace, Lwork, &info, syevj_info, batchSize);
+  status = cusolverDnSsyevjBatched(handle, jobz, fillMode, n, &fA, lda, &fW, &fWorkspace, Lwork, &info, syevj_info, batchSize);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnDsyevjBatched(cusolverDnHandle_t handle, cusolverEigMode_t jobz, cublasFillMode_t uplo, int n, double * A, int lda, double * W, double * work, int lwork, int * info, syevjInfo_t params, int batchSize);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnDsyevjBatched(hipsolverDnHandle_t handle, hipsolverEigMode_t jobz, hipblasFillMode_t uplo, int n, double* A, int lda, double* W, double* work, int lwork, int* devInfo, hipsolverSyevjInfo_t params, int batch_count);
+  // CHECK: status = hipsolverDnDsyevjBatched(handle, jobz, fillMode, n, &dA, lda, &dW, &dWorkspace, Lwork, &info, syevj_info, batchSize);
+  status = cusolverDnDsyevjBatched(handle, jobz, fillMode, n, &dA, lda, &dW, &dWorkspace, Lwork, &info, syevj_info, batchSize);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnCheevjBatched(cusolverDnHandle_t handle, cusolverEigMode_t jobz, cublasFillMode_t uplo, int n, cuComplex * A, int lda, float * W, cuComplex * work, int lwork, int * info, syevjInfo_t params, int batchSize);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnCheevjBatched(hipsolverDnHandle_t handle, hipsolverEigMode_t jobz, hipblasFillMode_t uplo, int n, hipFloatComplex* A, int lda, float* W, hipFloatComplex* work, int lwork, int* devInfo, hipsolverSyevjInfo_t params, int batch_count);
+  // CHECK: status = hipsolverDnCheevjBatched(handle, jobz, fillMode, n, &complexA, lda, &fW, &complexWorkspace, Lwork, &info, syevj_info, batchSize);
+  status = cusolverDnCheevjBatched(handle, jobz, fillMode, n, &complexA, lda, &fW, &complexWorkspace, Lwork, &info, syevj_info, batchSize);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnZheevjBatched(cusolverDnHandle_t handle, cusolverEigMode_t jobz, cublasFillMode_t uplo, int n, cuDoubleComplex * A, int lda, double * W, cuDoubleComplex * work, int lwork, int * info, syevjInfo_t params, int batchSize);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnZheevjBatched(hipsolverDnHandle_t handle, hipsolverEigMode_t jobz, hipblasFillMode_t uplo, int n, hipDoubleComplex* A, int lda, double* W, hipDoubleComplex* work, int lwork, int* devInfo, hipsolverSyevjInfo_t params, int batch_count);
+  // CHECK: status = hipsolverDnZheevjBatched(handle, jobz, fillMode, n, &dComplexA, lda, &dW, &dComplexWorkspace, Lwork, &info, syevj_info, batchSize);
+  status = cusolverDnZheevjBatched(handle, jobz, fillMode, n, &dComplexA, lda, &dW, &dComplexWorkspace, Lwork, &info, syevj_info, batchSize);
 #endif
 
 #if CUDA_VERSION >= 10010
