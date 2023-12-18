@@ -31,6 +31,7 @@ int main() {
   int imax_sweeps = 0;
   int isort_eig = 0;
   int iexecuted_sweeps = 0;
+  int iecon = 0;
   float fA = 0.f;
   float fB = 0.f;
   float fC = 0.f;
@@ -1008,6 +1009,46 @@ int main() {
   // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnZgesvdjBatched(hipsolverDnHandle_t handle, hipsolverEigMode_t jobz, int m, int n, hipDoubleComplex* A, int lda, double* S, hipDoubleComplex* U, int ldu, hipDoubleComplex* V, int ldv, hipDoubleComplex* work, int lwork, int* devInfo, hipsolverGesvdjInfo_t params, int batch_count);
   // CHECK: status = hipsolverDnZgesvdjBatched(handle, jobz, m, n, &dComplexA, lda, &dS, &dComplexU, ldu, &dComplexV, ldv, &dComplexWorkspace, Lwork, &info, gesvdj_info, batchSize);
   status = cusolverDnZgesvdjBatched(handle, jobz, m, n, &dComplexA, lda, &dS, &dComplexU, ldu, &dComplexV, ldv, &dComplexWorkspace, Lwork, &info, gesvdj_info, batchSize);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnSgesvdj_bufferSize(cusolverDnHandle_t handle, cusolverEigMode_t jobz, int econ, int m, int n, const float * A, int lda, const float * S, const float * U, int ldu, const float * V, int ldv, int * lwork, gesvdjInfo_t params);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnSgesvdj_bufferSize(hipsolverDnHandle_t handle, hipsolverEigMode_t jobz, int econ, int m, int n, const float* A, int lda, const float* S, const float* U, int ldu, const float* V, int ldv, int* lwork, hipsolverGesvdjInfo_t params);
+  // CHECK: status = hipsolverDnSgesvdj_bufferSize(handle, jobz, iecon, m, n, &fA, lda, &fS, &fU, ldu, &fV, ldv, &Lwork, gesvdj_info);
+  status = cusolverDnSgesvdj_bufferSize(handle, jobz, iecon, m, n, &fA, lda, &fS, &fU, ldu, &fV, ldv, &Lwork, gesvdj_info);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnDgesvdj_bufferSize(cusolverDnHandle_t handle, cusolverEigMode_t jobz, int econ, int m, int n, const double * A, int lda, const double * S, const double * U, int ldu, const double * V, int ldv, int * lwork, gesvdjInfo_t params);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnDgesvdj_bufferSize(hipsolverDnHandle_t handle, hipsolverEigMode_t jobz, int econ, int m, int n, const double* A, int lda, const double* S, const double* U, int ldu, const double* V, int ldv, int* lwork, hipsolverGesvdjInfo_t params);
+  // CHECK: status = hipsolverDnDgesvdj_bufferSize(handle, jobz, iecon, m, n, &dA, lda, &dS, &dU, ldu, &dV, ldv, &Lwork, gesvdj_info);
+  status = cusolverDnDgesvdj_bufferSize(handle, jobz, iecon, m, n, &dA, lda, &dS, &dU, ldu, &dV, ldv, &Lwork, gesvdj_info);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnCgesvdj_bufferSize(cusolverDnHandle_t handle, cusolverEigMode_t jobz, int econ, int m, int n, const cuComplex * A, int lda, const float * S, const cuComplex * U, int ldu, const cuComplex * V, int ldv, int * lwork, gesvdjInfo_t params);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnCgesvdj_bufferSize(hipsolverDnHandle_t handle, hipsolverEigMode_t jobz, int econ, int m, int n, const hipFloatComplex* A, int lda, const float* S, const hipFloatComplex* U, int ldu, const hipFloatComplex* V, int ldv, int* lwork, hipsolverGesvdjInfo_t  params);
+  // CHECK: status = hipsolverDnCgesvdj_bufferSize(handle, jobz, iecon, m, n, &complexA, lda, &fS, &complexU, ldu, &complexV, ldv, &Lwork, gesvdj_info);
+  status = cusolverDnCgesvdj_bufferSize(handle, jobz, iecon, m, n, &complexA, lda, &fS, &complexU, ldu, &complexV, ldv, &Lwork, gesvdj_info);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnZgesvdj_bufferSize(cusolverDnHandle_t handle, cusolverEigMode_t jobz, int econ, int m, int n, const cuDoubleComplex *A, int lda, const double * S, const cuDoubleComplex *U, int ldu, const cuDoubleComplex *V, int ldv, int * lwork, gesvdjInfo_t params);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnZgesvdj_bufferSize(hipsolverDnHandle_t handle, hipsolverEigMode_t jobz, int econ, int m, int n, const hipDoubleComplex* A, int lda, const double* S, const hipDoubleComplex* U, int ldu, const hipDoubleComplex* V, int ldv, int* lwork, hipsolverGesvdjInfo_t params);
+  // CHECK: status = hipsolverDnZgesvdj_bufferSize(handle, jobz, iecon, m, n, &dComplexA, lda, &dS, &dComplexU, ldu, &dComplexV, ldv, &Lwork, gesvdj_info);
+  status = cusolverDnZgesvdj_bufferSize(handle, jobz, iecon, m, n, &dComplexA, lda, &dS, &dComplexU, ldu, &dComplexV, ldv, &Lwork, gesvdj_info);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnSgesvdj(cusolverDnHandle_t handle, cusolverEigMode_t jobz, int econ, int m, int n, float * A, int lda, float * S, float * U, int ldu, float * V, int ldv, float * work, int lwork, int * info, gesvdjInfo_t params);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnSgesvdj(hipsolverDnHandle_t handle, hipsolverEigMode_t jobz, int econ, int m, int n, float* A, int lda, float* S, float* U, int ldu, float* V, int ldv, float* work, int lwork, int* devInfo, hipsolverGesvdjInfo_t params);
+  // CHECK: status = hipsolverDnSgesvdj(handle, jobz, iecon, m, n, &fA, lda, &fS, &fU, ldu, &fV, ldv, &fWorkspace, Lwork, &info, gesvdj_info);
+  status = cusolverDnSgesvdj(handle, jobz, iecon, m, n, &fA, lda, &fS, &fU, ldu, &fV, ldv, &fWorkspace, Lwork, &info, gesvdj_info);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnDgesvdj(cusolverDnHandle_t handle, cusolverEigMode_t jobz, int econ, int m, int n, double * A, int lda, double * S, double * U, int ldu, double * V, int ldv, double * work, int lwork, int * info, gesvdjInfo_t params);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnDgesvdj(hipsolverDnHandle_t handle, hipsolverEigMode_t jobz, int econ, int m, int n, double* A, int lda, double* S, double* U, int ldu, double* V, int ldv, double* work, int lwork, int* devInfo, hipsolverGesvdjInfo_t params);
+  // CHECK: status = hipsolverDnDgesvdj(handle, jobz, iecon, m, n, &dA, lda, &dS, &dU, ldu, &dV, ldv, &dWorkspace, Lwork, &info, gesvdj_info);
+  status = cusolverDnDgesvdj(handle, jobz, iecon, m, n, &dA, lda, &dS, &dU, ldu, &dV, ldv, &dWorkspace, Lwork, &info, gesvdj_info);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnCgesvdj(cusolverDnHandle_t handle, cusolverEigMode_t jobz, int econ, int m, int n, cuComplex * A, int lda, float * S, cuComplex * U, int ldu, cuComplex * V, int ldv, cuComplex * work, int lwork, int * info, gesvdjInfo_t params);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnCgesvdj(hipsolverDnHandle_t handle, hipsolverEigMode_t jobz, int econ, int m, int n, hipFloatComplex* A, int lda, float* S, hipFloatComplex* U, int ldu, hipFloatComplex* V, int ldv, hipFloatComplex* work, int lwork, int* devInfo, hipsolverGesvdjInfo_t params);
+  // CHECK: status = hipsolverDnCgesvdj(handle, jobz, iecon, m, n, &complexA, lda, &fS, &complexU, ldu, &complexV, ldv, &complexWorkspace, Lwork, &info, gesvdj_info);
+  status = cusolverDnCgesvdj(handle, jobz, iecon, m, n, &complexA, lda, &fS, &complexU, ldu, &complexV, ldv, &complexWorkspace, Lwork, &info, gesvdj_info);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnZgesvdj(cusolverDnHandle_t handle, cusolverEigMode_t jobz, int econ, int m, int n, cuDoubleComplex * A, int lda, double * S, cuDoubleComplex * U, int ldu, cuDoubleComplex * V, int ldv, cuDoubleComplex * work, int lwork, int * info, gesvdjInfo_t params);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnZgesvdj(hipsolverDnHandle_t handle, hipsolverEigMode_t jobz, int econ, int m, int n, hipDoubleComplex* A, int lda, double* S, hipDoubleComplex* U, int ldu, hipDoubleComplex* V, int ldv, hipDoubleComplex* work, int lwork, int* devInfo, hipsolverGesvdjInfo_t params);
+  // CHECK: status = hipsolverDnZgesvdj(handle, jobz, iecon, m, n, &dComplexA, lda, &dS, &dComplexU, ldu, &dComplexV, ldv, &dComplexWorkspace, Lwork, &info, gesvdj_info);
+  status = cusolverDnZgesvdj(handle, jobz, iecon, m, n, &dComplexA, lda, &dS, &dComplexU, ldu, &dComplexV, ldv, &dComplexWorkspace, Lwork, &info, gesvdj_info);
 #endif
 
 #if CUDA_VERSION >= 9010
