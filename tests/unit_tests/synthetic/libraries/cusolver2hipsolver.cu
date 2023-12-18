@@ -775,6 +775,41 @@ int main() {
 
   // CHECK: hipsolverGesvdjInfo_t gesvdj_info;
   gesvdjInfo_t gesvdj_info;
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnCreateGesvdjInfo(gesvdjInfo_t *info);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnCreateGesvdjInfo(hipsolverGesvdjInfo_t* info);
+  // CHECK: status = hipsolverDnCreateGesvdjInfo(&gesvdj_info);
+  status = cusolverDnCreateGesvdjInfo(&gesvdj_info);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnDestroyGesvdjInfo(gesvdjInfo_t info);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnDestroyGesvdjInfo(hipsolverGesvdjInfo_t info);
+  // CHECK: status = hipsolverDnDestroyGesvdjInfo(gesvdj_info);
+  status = cusolverDnDestroyGesvdjInfo(gesvdj_info);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnXgesvdjSetTolerance(gesvdjInfo_t info, double tolerance);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnXgesvdjSetTolerance(hipsolverGesvdjInfo_t info, double tolerance);
+  // CHECK: status = hipsolverDnXgesvdjSetTolerance(gesvdj_info, dtolerance);
+  status = cusolverDnXgesvdjSetTolerance(gesvdj_info, dtolerance);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnXgesvdjSetMaxSweeps(gesvdjInfo_t info, int max_sweeps);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnXgesvdjSetMaxSweeps(hipsolverGesvdjInfo_t info, int max_sweeps);
+  // CHECK: status = hipsolverDnXgesvdjSetMaxSweeps(gesvdj_info, imax_sweeps);
+  status = cusolverDnXgesvdjSetMaxSweeps(gesvdj_info, imax_sweeps);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnXgesvdjSetSortEig(gesvdjInfo_t info, int sort_svd);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnXgesvdjSetSortEig(hipsolverGesvdjInfo_t info, int sort_eig);
+  // CHECK: status = hipsolverDnXgesvdjSetSortEig(gesvdj_info, isort_eig);
+  status = cusolverDnXgesvdjSetSortEig(gesvdj_info, isort_eig);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnXgesvdjGetResidual(cusolverDnHandle_t handle, gesvdjInfo_t info, double * residual);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnXgesvdjGetResidual(hipsolverDnHandle_t handle, hipsolverGesvdjInfo_t info, double* residual);
+  // CHECK: status = hipsolverDnXgesvdjGetResidual(handle, gesvdj_info, &dresidual);
+  status = cusolverDnXgesvdjGetResidual(handle, gesvdj_info, &dresidual);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnXgesvdjGetSweeps(cusolverDnHandle_t handle, gesvdjInfo_t info, int * executed_sweeps);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnXgesvdjGetSweeps(hipsolverDnHandle_t handle, hipsolverGesvdjInfo_t info, int* executed_sweeps);
+  // CHECK: status = hipsolverDnXgesvdjGetSweeps(handle, gesvdj_info, &iexecuted_sweeps);
+  status = cusolverDnXgesvdjGetSweeps(handle, gesvdj_info, &iexecuted_sweeps);
 #endif
 
 #if CUDA_VERSION >= 9010

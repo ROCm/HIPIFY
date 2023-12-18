@@ -160,6 +160,7 @@
 |`cusolverDnCpotrs`| | | | |`hipsolverDnCpotrs`|5.1.0| | | |6.1.0|
 |`cusolverDnCpotrsBatched`|9.1| | | |`hipsolverDnCpotrsBatched`|5.1.0| | | |6.1.0|
 |`cusolverDnCreate`| | | | |`hipsolverDnCreate`|5.1.0| | | |6.1.0|
+|`cusolverDnCreateGesvdjInfo`|9.0| | | |`hipsolverDnCreateGesvdjInfo`|5.1.0| | | |6.1.0|
 |`cusolverDnCreateParams`|11.0| | | | | | | | | |
 |`cusolverDnCreateSyevjInfo`|9.0| | | |`hipsolverDnCreateSyevjInfo`|5.1.0| | | |6.1.0|
 |`cusolverDnCsytrf`| | | | |`hipsolverDnCsytrf`|5.1.0| | | |6.1.0|
@@ -197,6 +198,7 @@
 |`cusolverDnDXgesv`|11.0| | | | | | | | | |
 |`cusolverDnDXgesv_bufferSize`|11.0| | | | | | | | | |
 |`cusolverDnDestroy`| | | | |`hipsolverDnDestroy`|5.1.0| | | |6.1.0|
+|`cusolverDnDestroyGesvdjInfo`|9.0| | | |`hipsolverDnDestroyGesvdjInfo`|5.1.0| | | |6.1.0|
 |`cusolverDnDestroySyevjInfo`|9.0| | | |`hipsolverDnDestroySyevjInfo`|5.1.0| | | |6.1.0|
 |`cusolverDnDgebrd`| | | | |`hipsolverDnDgebrd`|5.1.0| | | |6.1.0|
 |`cusolverDnDgebrd_bufferSize`| | | | |`hipsolverDnDgebrd_bufferSize`|5.1.0| | | |6.1.0|
@@ -341,6 +343,11 @@
 |`cusolverDnSsytrf_bufferSize`| | | | |`hipsolverDnSsytrf_bufferSize`|5.1.0| | | |6.1.0|
 |`cusolverDnSsytri`|10.1| | | | | | | | | |
 |`cusolverDnSsytri_bufferSize`|10.1| | | | | | | | | |
+|`cusolverDnXgesvdjGetResidual`|9.0| | | |`hipsolverDnXgesvdjGetResidual`|5.1.0| | | |6.1.0|
+|`cusolverDnXgesvdjGetSweeps`|9.0| | | |`hipsolverDnXgesvdjGetSweeps`|5.1.0| | | |6.1.0|
+|`cusolverDnXgesvdjSetMaxSweeps`|9.0| | | |`hipsolverDnXgesvdjSetMaxSweeps`|5.1.0| | | |6.1.0|
+|`cusolverDnXgesvdjSetSortEig`|9.0| | | |`hipsolverDnXgesvdjSetSortEig`|5.1.0| | | |6.1.0|
+|`cusolverDnXgesvdjSetTolerance`|9.0| | | |`hipsolverDnXgesvdjSetTolerance`|5.1.0| | | |6.1.0|
 |`cusolverDnXgetrf`|11.1| | | | | | | | | |
 |`cusolverDnXgetrf_bufferSize`|11.1| | | | | | | | | |
 |`cusolverDnXgetrs`|11.1| | | | | | | | | |

@@ -399,6 +399,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SOLVER_FUNCTION_MAP {
   {"cusolverDnDsygvj",                                   {"hipsolverDnDsygvj",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
   {"cusolverDnChegvj",                                   {"hipsolverDnChegvj",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
   {"cusolverDnZhegvj",                                   {"hipsolverDnZhegvj",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  // no ROC analogues
+  {"cusolverDnCreateGesvdjInfo",                         {"hipsolverDnCreateGesvdjInfo",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  {"cusolverDnDestroyGesvdjInfo",                        {"hipsolverDnDestroyGesvdjInfo",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  {"cusolverDnXgesvdjSetTolerance",                      {"hipsolverDnXgesvdjSetTolerance",                        "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  {"cusolverDnXgesvdjSetMaxSweeps",                      {"hipsolverDnXgesvdjSetMaxSweeps",                        "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  {"cusolverDnXgesvdjSetSortEig",                        {"hipsolverDnXgesvdjSetSortEig",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  {"cusolverDnXgesvdjGetResidual",                       {"hipsolverDnXgesvdjGetResidual",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  {"cusolverDnXgesvdjGetSweeps",                         {"hipsolverDnXgesvdjGetSweeps",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_SOLVER_FUNCTION_VER_MAP {
@@ -646,6 +654,13 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SOLVER_FUNCTION_VER_MAP {
   {"cusolverDnDsygvj",                                    {CUDA_90,   CUDA_0, CUDA_0}},
   {"cusolverDnChegvj",                                    {CUDA_90,   CUDA_0, CUDA_0}},
   {"cusolverDnZhegvj",                                    {CUDA_90,   CUDA_0, CUDA_0}},
+  {"cusolverDnCreateGesvdjInfo",                          {CUDA_90,   CUDA_0, CUDA_0}},
+  {"cusolverDnDestroyGesvdjInfo",                         {CUDA_90,   CUDA_0, CUDA_0}},
+  {"cusolverDnXgesvdjSetTolerance",                       {CUDA_90,   CUDA_0, CUDA_0}},
+  {"cusolverDnXgesvdjSetMaxSweeps",                       {CUDA_90,   CUDA_0, CUDA_0}},
+  {"cusolverDnXgesvdjSetSortEig",                         {CUDA_90,   CUDA_0, CUDA_0}},
+  {"cusolverDnXgesvdjGetResidual",                        {CUDA_90,   CUDA_0, CUDA_0}},
+  {"cusolverDnXgesvdjGetSweeps",                          {CUDA_90,   CUDA_0, CUDA_0}},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_SOLVER_FUNCTION_VER_MAP {
@@ -852,6 +867,13 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SOLVER_FUNCTION_VER_MAP {
   {"hipsolverDnDsygvj",                                   {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipsolverDnChegvj",                                   {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipsolverDnZhegvj",                                   {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverDnCreateGesvdjInfo",                         {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverDnDestroyGesvdjInfo",                        {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverDnXgesvdjSetTolerance",                      {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverDnXgesvdjSetMaxSweeps",                      {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverDnXgesvdjSetSortEig",                        {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverDnXgesvdjGetResidual",                       {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverDnXgesvdjGetSweeps",                         {HIP_5010, HIP_0,    HIP_0,  HIP_LATEST}},
 
   {"rocsolver_spotrf",                                    {HIP_3020, HIP_0,    HIP_0,  HIP_LATEST}},
   {"rocsolver_dpotrf",                                    {HIP_3020, HIP_0,    HIP_0,  HIP_LATEST}},
