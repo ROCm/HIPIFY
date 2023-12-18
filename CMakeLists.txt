@@ -196,6 +196,20 @@ if (NOT HIPIFY_CLANG_TESTS_ONLY)
       PATTERN "openmp_wrappers" EXCLUDE)
   endif()
 
+# install all folders under clang/version/ in CMAKE_INSTALL_PREFIX path
+install(
+    DIRECTORY ${LLVM_DIR}/../../clang/${LLVM_VERSION_MAJOR}.${LLVM_VERSION_MINOR}.${LLVM_VERSION_PATCH}/
+    DESTINATION .
+    COMPONENT clang-resource-headers
+    FILES_MATCHING
+    PATTERN "*.h"
+    PATTERN "*.modulemap"
+    PATTERN "algorithm"
+    PATTERN "complex"
+    PATTERN "new"
+    PATTERN "ppc_wrappers" EXCLUDE
+    PATTERN "openmp_wrappers" EXCLUDE)
+
   if(UNIX)
     # Get rid of any RPATH definations already.
     set_target_properties(hipify-clang PROPERTIES INSTALL_RPATH "")
