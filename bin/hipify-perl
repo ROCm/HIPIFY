@@ -1133,6 +1133,11 @@ my %experimental_funcs = (
     "cusolverDnXsyevjSetMaxSweeps" => "6.1.0",
     "cusolverDnXsyevjGetSweeps" => "6.1.0",
     "cusolverDnXsyevjGetResidual" => "6.1.0",
+    "cusolverDnXgesvdjSetTolerance" => "6.1.0",
+    "cusolverDnXgesvdjSetSortEig" => "6.1.0",
+    "cusolverDnXgesvdjSetMaxSweeps" => "6.1.0",
+    "cusolverDnXgesvdjGetSweeps" => "6.1.0",
+    "cusolverDnXgesvdjGetResidual" => "6.1.0",
     "cusolverDnSsytrf_bufferSize" => "6.1.0",
     "cusolverDnSsytrf" => "6.1.0",
     "cusolverDnSsytrd_bufferSize" => "6.1.0",
@@ -1229,6 +1234,7 @@ my %experimental_funcs = (
     "cusolverDnDgebrd_bufferSize" => "6.1.0",
     "cusolverDnDgebrd" => "6.1.0",
     "cusolverDnDestroySyevjInfo" => "6.1.0",
+    "cusolverDnDestroyGesvdjInfo" => "6.1.0",
     "cusolverDnDestroy" => "6.1.0",
     "cusolverDnDDgesv_bufferSize" => "6.1.0",
     "cusolverDnDDgesv" => "6.1.0",
@@ -1247,6 +1253,7 @@ my %experimental_funcs = (
     "cusolverDnCsytrf_bufferSize" => "6.1.0",
     "cusolverDnCsytrf" => "6.1.0",
     "cusolverDnCreateSyevjInfo" => "6.1.0",
+    "cusolverDnCreateGesvdjInfo" => "6.1.0",
     "cusolverDnCreate" => "6.1.0",
     "cusolverDnCpotrsBatched" => "6.1.0",
     "cusolverDnCpotrs" => "6.1.0",
@@ -1476,6 +1483,7 @@ sub experimentalSubstitutions {
     subst("cusolverDnCpotrs", "hipsolverDnCpotrs", "library");
     subst("cusolverDnCpotrsBatched", "hipsolverDnCpotrsBatched", "library");
     subst("cusolverDnCreate", "hipsolverDnCreate", "library");
+    subst("cusolverDnCreateGesvdjInfo", "hipsolverDnCreateGesvdjInfo", "library");
     subst("cusolverDnCreateSyevjInfo", "hipsolverDnCreateSyevjInfo", "library");
     subst("cusolverDnCsytrf", "hipsolverDnCsytrf", "library");
     subst("cusolverDnCsytrf_bufferSize", "hipsolverDnCsytrf_bufferSize", "library");
@@ -1494,6 +1502,7 @@ sub experimentalSubstitutions {
     subst("cusolverDnDDgesv", "hipsolverDnDDgesv", "library");
     subst("cusolverDnDDgesv_bufferSize", "hipsolverDnDDgesv_bufferSize", "library");
     subst("cusolverDnDestroy", "hipsolverDnDestroy", "library");
+    subst("cusolverDnDestroyGesvdjInfo", "hipsolverDnDestroyGesvdjInfo", "library");
     subst("cusolverDnDestroySyevjInfo", "hipsolverDnDestroySyevjInfo", "library");
     subst("cusolverDnDgebrd", "hipsolverDnDgebrd", "library");
     subst("cusolverDnDgebrd_bufferSize", "hipsolverDnDgebrd_bufferSize", "library");
@@ -1589,6 +1598,11 @@ sub experimentalSubstitutions {
     subst("cusolverDnSsytrd_bufferSize", "hipsolverDnSsytrd_bufferSize", "library");
     subst("cusolverDnSsytrf", "hipsolverDnSsytrf", "library");
     subst("cusolverDnSsytrf_bufferSize", "hipsolverDnSsytrf_bufferSize", "library");
+    subst("cusolverDnXgesvdjGetResidual", "hipsolverDnXgesvdjGetResidual", "library");
+    subst("cusolverDnXgesvdjGetSweeps", "hipsolverDnXgesvdjGetSweeps", "library");
+    subst("cusolverDnXgesvdjSetMaxSweeps", "hipsolverDnXgesvdjSetMaxSweeps", "library");
+    subst("cusolverDnXgesvdjSetSortEig", "hipsolverDnXgesvdjSetSortEig", "library");
+    subst("cusolverDnXgesvdjSetTolerance", "hipsolverDnXgesvdjSetTolerance", "library");
     subst("cusolverDnXsyevjGetResidual", "hipsolverDnXsyevjGetResidual", "library");
     subst("cusolverDnXsyevjGetSweeps", "hipsolverDnXsyevjGetSweeps", "library");
     subst("cusolverDnXsyevjSetMaxSweeps", "hipsolverDnXsyevjSetMaxSweeps", "library");
