@@ -123,6 +123,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SOLVER_TYPE_NAME_MAP {
   {"CUSOLVER_DETERMINISTIC_RESULTS",                           {"HIPSOLVER_DETERMINISTIC_RESULTS",                           "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
   {"CUSOLVER_ALLOW_NON_DETERMINISTIC_RESULTS",                 {"HIPSOLVER_ALLOW_NON_DETERMINISTIC_RESULTS",                 "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
   {"cusolver_int_t",                                           {"int",                                                       "rocblas_int",                                                      CONV_NUMERIC_LITERAL, API_SOLVER, 1}},
+  {"cusolverDnLoggerCallback_t",                               {"hipsolverDnLoggerCallback_t",                               "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_SOLVER_TYPE_NAME_VER_MAP {
@@ -210,6 +211,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SOLVER_TYPE_NAME_VER_MAP {
   {"cusolverDeterministicMode_t",                              {CUDA_122, CUDA_0, CUDA_0}},
   {"CUSOLVER_DETERMINISTIC_RESULTS",                           {CUDA_122, CUDA_0, CUDA_0}},
   {"CUSOLVER_ALLOW_NON_DETERMINISTIC_RESULTS",                 {CUDA_122, CUDA_0, CUDA_0}},
+  {"cusolverDnLoggerCallback_t",                               {CUDA_117, CUDA_0, CUDA_0}},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_SOLVER_TYPE_NAME_VER_MAP {
