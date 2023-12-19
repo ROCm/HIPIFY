@@ -15,6 +15,7 @@ int main() {
   int il = 0;
   int iu = 0;
   int imeig = 0;
+  int irank = 0;
   int nrhs = 0;
   int lda = 0;
   int ldb = 0;
@@ -26,6 +27,7 @@ int main() {
   int devIpiv = 0;
   int devInfo = 0;
   int info = 0;
+  int id_info = 0;
   int infoArray = 0;
   int batchSize = 0;
   int imax_sweeps = 0;
@@ -33,15 +35,19 @@ int main() {
   int iexecuted_sweeps = 0;
   int iecon = 0;
   float fA = 0.f;
+  float fd_A = 0.f;
   float fB = 0.f;
   float fC = 0.f;
   float fD = 0.f;
   float fE = 0.f;
   float fS = 0.f;
+  float fd_S = 0.f;
   float fU = 0.f;
+  float fd_U = 0.f;
   float fvl = 0.f;
   float fvu = 0.f;
   float fV = 0.f;
+  float fd_V = 0.f;
   float fVT = 0.f;
   float fX = 0.f;
   float fW = 0.f;
@@ -49,15 +55,19 @@ int main() {
   float fTAUQ = 0.f;
   float fTAUP = 0.f;
   double dA = 0.f;
+  double dd_A = 0.f;
   double dB = 0.f;
   double dC = 0.f;
   double dD = 0.f;
   double dE = 0.f;
   double dS = 0.f;
+  double dd_S = 0.f;
   double dU = 0.f;
+  double dd_U = 0.f;
   double dvl = 0.f;
   double dvu = 0.f;
   double dV = 0.f;
+  double dd_V = 0.f;
   double dVT = 0.f;
   double dX = 0.f;
   double dW = 0.f;
@@ -67,25 +77,33 @@ int main() {
   double dtolerance = 0.f;
   double dresidual = 0.f;
   float fWorkspace = 0.f;
+  float fd_Workspace = 0.f;
   float frWork = 0.f;
   double dWorkspace = 0.f;
+  double dd_Workspace = 0.f;
   double drWork = 0.f;
+  double dh_R_nrmF = 0.f;
   void *Workspace = nullptr;
   size_t lwork_bytes = 0;
 
   signed char jobu = 0;
   signed char jobvt = 0;
 
+  long long int strideA = 0;
+  long long int strideS = 0;
+  long long int strideU = 0;
+  long long int strideV = 0;
+
   float** fAarray = 0;
   float** fBarray = 0;
   double** dAarray = 0;
   double** dBarray = 0;
 
-  // CHECK: hipDoubleComplex dComplexA, dComplexB, dComplexC, dComplexD, dComplexE, dComplexS, dComplexU, dComplexV, dComplexVT, dComplexX, dComplexWorkspace, dComplexrWork, dComplexTAU, dComplexTAUQ, dComplexTAUP;
-  cuDoubleComplex dComplexA, dComplexB, dComplexC, dComplexD, dComplexE, dComplexS, dComplexU, dComplexV, dComplexVT, dComplexX, dComplexWorkspace, dComplexrWork, dComplexTAU, dComplexTAUQ, dComplexTAUP;
+  // CHECK: hipDoubleComplex dComplexA, dComplexd_A, dComplexB, dComplexC, dComplexD, dComplexE, dComplexS, dComplexU, dComplexd_U, dComplexV, dComplexd_V, dComplexVT, dComplexX, dComplexWorkspace, dComplexd_Workspace, dComplexrWork, dComplexTAU, dComplexTAUQ, dComplexTAUP;
+  cuDoubleComplex dComplexA, dComplexd_A, dComplexB, dComplexC, dComplexD, dComplexE, dComplexS, dComplexU, dComplexd_U, dComplexV, dComplexd_V, dComplexVT, dComplexX, dComplexWorkspace, dComplexd_Workspace, dComplexrWork, dComplexTAU, dComplexTAUQ, dComplexTAUP;
 
-  // CHECK: hipComplex complexA, complexB, complexC, complexD, complexE, complexS, complexU, complexV, complexVT, complexX, complexWorkspace, complexrWork, complexTAU, complexTAUQ, complexTAUP;
-  cuComplex complexA, complexB, complexC, complexD, complexE, complexS, complexU, complexV, complexVT, complexX, complexWorkspace, complexrWork, complexTAU, complexTAUQ, complexTAUP;
+  // CHECK: hipComplex complexA, complexd_A, complexB, complexC, complexD, complexE, complexS, complexU, complexd_U, complexV, complexd_V, complexVT, complexX, complexWorkspace, complexd_Workspace, complexrWork, complexTAU, complexTAUQ, complexTAUP;
+  cuComplex complexA, complexd_A, complexB, complexC, complexD, complexE, complexS, complexU, complexd_U, complexV, complexd_V, complexVT, complexX, complexWorkspace, complexd_Workspace, complexrWork, complexTAU, complexTAUQ, complexTAUP;
 
   // CHECK: hipDoubleComplex** dcomplexAarray = 0;
   // CHECK-NEXT: hipDoubleComplex** dcomplexBarray = 0;
@@ -1222,6 +1240,46 @@ int main() {
   // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnZhegvdx(hipsolverHandle_t handle, hipsolverEigType_t itype, hipsolverEigMode_t jobz, hipsolverEigRange_t range, hipblasFillMode_t uplo, int n, hipDoubleComplex* A, int lda, hipDoubleComplex* B, int ldb, double vl, double vu, int il, int iu, int* nev, double* W, hipDoubleComplex* work, int lwork, int* devInfo);
   // CHECK: status = hipsolverDnZhegvdx(handle, eigType, jobz, eigRange, fillMode, n, &dComplexA, lda, &dComplexB, ldb, dvl, dvu, il, iu, &imeig, &dW, &dComplexWorkspace, Lwork, &info);
   status = cusolverDnZhegvdx(handle, eigType, jobz, eigRange, fillMode, n, &dComplexA, lda, &dComplexB, ldb, dvl, dvu, il, iu, &imeig, &dW, &dComplexWorkspace, Lwork, &info);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnSgesvdaStridedBatched_bufferSize(cusolverDnHandle_t handle, cusolverEigMode_t jobz, int rank, int m, int n, const float * d_A, int lda, long long int strideA, const float * d_S, long long int strideS, const float * d_U, int ldu, long long int strideU, const float * d_V, int ldv, long long int strideV, int * lwork, int batchSize);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnSgesvdaStridedBatched_bufferSize(hipsolverHandle_t handle, hipsolverEigMode_t jobz, int rank, int m, int n, const float* A, int lda, long long int strideA, const float* S, long long int strideS, const float* U, int ldu, long long int strideU, const float* V, int ldv, long long int strideV, int* lwork, int batch_count);
+  // CHECK: status = hipsolverDnSgesvdaStridedBatched_bufferSize(handle, jobz, irank, m, n, &fd_A, lda, strideA, &fd_S, strideS, &fd_U, ldu, strideU, &fd_V, ldv, strideV, &Lwork, batchSize);
+  status = cusolverDnSgesvdaStridedBatched_bufferSize(handle, jobz, irank, m, n, &fd_A, lda, strideA, &fd_S, strideS, &fd_U, ldu, strideU, &fd_V, ldv, strideV, &Lwork, batchSize);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnDgesvdaStridedBatched_bufferSize(cusolverDnHandle_t handle, cusolverEigMode_t jobz, int rank, int m, int n, const double * d_A, int lda, long long int strideA, const double * d_S, long long int strideS, const double * d_U, int ldu, long long int strideU, const double * d_V, int ldv, long long int strideV, int * lwork, int batchSize);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnDgesvdaStridedBatched_bufferSize(hipsolverHandle_t handle, hipsolverEigMode_t jobz, int rank, int m, int n, const double* A, int lda, long long int strideA, const double* S, long long int strideS, const double* U, int ldu, long long int strideU, const double* V, int ldv, long long int strideV, int* lwork, int batch_count);
+  // CHECK: status = hipsolverDnDgesvdaStridedBatched_bufferSize(handle, jobz, irank, m, n, &dd_A, lda, strideA, &dd_S, strideS, &dd_U, ldu, strideU, &dd_V, ldv, strideV, &Lwork, batchSize);
+  status = cusolverDnDgesvdaStridedBatched_bufferSize(handle, jobz, irank, m, n, &dd_A, lda, strideA, &dd_S, strideS, &dd_U, ldu, strideU, &dd_V, ldv, strideV, &Lwork, batchSize);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnCgesvdaStridedBatched_bufferSize(cusolverDnHandle_t handle, cusolverEigMode_t jobz, int rank, int m, int n, const cuComplex * d_A, int lda, long long int strideA, const float * d_S, long long int strideS, const cuComplex * d_U, int ldu, long long int strideU, const cuComplex * d_V, int ldv, long long int strideV, int * lwork, int batchSize);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnCgesvdaStridedBatched_bufferSize(hipsolverHandle_t handle, hipsolverEigMode_t jobz, int rank, int m, int n, const hipFloatComplex* A, int lda, long long int strideA, const float* S, long long int strideS, const hipFloatComplex* U, int ldu, long long int strideU, const hipFloatComplex* V, int ldv, long long int strideV, int* lwork, int batch_count);
+  // CHECK: status = hipsolverDnCgesvdaStridedBatched_bufferSize(handle, jobz, irank, m, n, &complexd_A, lda, strideA, &fd_S, strideS, &complexd_U, ldu, strideU, &complexd_V, ldv, strideV, &Lwork, batchSize);
+  status = cusolverDnCgesvdaStridedBatched_bufferSize(handle, jobz, irank, m, n, &complexd_A, lda, strideA, &fd_S, strideS, &complexd_U, ldu, strideU, &complexd_V, ldv, strideV, &Lwork, batchSize);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnZgesvdaStridedBatched_bufferSize(cusolverDnHandle_t handle, cusolverEigMode_t jobz, int rank, int m, int n, const cuDoubleComplex *d_A, int lda, long long int strideA, const double * d_S, long long int strideS, const cuDoubleComplex *d_U, int ldu, long long int strideU, const cuDoubleComplex *d_V, int ldv, long long int strideV, int * lwork, int batchSize);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnZgesvdaStridedBatched_bufferSize(hipsolverHandle_t handle, hipsolverEigMode_t jobz, int rank, int m, int n, const hipDoubleComplex* A, int lda, long long int strideA, const double* S, long long int strideS, const hipDoubleComplex* U, int ldu, long long int strideU, const hipDoubleComplex* V, int ldv, long long int strideV, int* lwork, int batch_count);
+  // CHECK: status = hipsolverDnZgesvdaStridedBatched_bufferSize(handle, jobz, irank, m, n, &dComplexd_A, lda, strideA, &dd_S, strideS, &dComplexd_U, ldu, strideU, &dComplexd_V, ldv, strideV, &Lwork, batchSize);
+  status = cusolverDnZgesvdaStridedBatched_bufferSize(handle, jobz, irank, m, n, &dComplexd_A, lda, strideA, &dd_S, strideS, &dComplexd_U, ldu, strideU, &dComplexd_V, ldv, strideV, &Lwork, batchSize);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnSgesvdaStridedBatched(cusolverDnHandle_t handle, cusolverEigMode_t jobz, int rank, int m, int n, const float * d_A, int lda, long long int strideA, float * d_S, long long int strideS, float * d_U, int ldu, long long int strideU, float * d_V, int ldv, long long int strideV, float * d_work, int lwork, int * d_info, double * h_R_nrmF, int batchSize);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnSgesvdaStridedBatched(hipsolverHandle_t handle, hipsolverEigMode_t jobz, int rank, int m, int n, const float* A, int lda, long long int strideA, float* S, long long int strideS, float* U, int ldu, long long int strideU, float* V, int ldv, long long int strideV, float* work, int lwork, int* devInfo, double* hRnrmF, int batch_count);
+  // CHECK: status = hipsolverDnSgesvdaStridedBatched(handle, jobz, irank, m, n, &fd_A, lda, strideA, &fd_S, strideS, &fd_U, ldu, strideU, &fd_V, ldv, strideV, &fd_Workspace, Lwork, &id_info, &dh_R_nrmF, batchSize);
+  status = cusolverDnSgesvdaStridedBatched(handle, jobz, irank, m, n, &fd_A, lda, strideA, &fd_S, strideS, &fd_U, ldu, strideU, &fd_V, ldv, strideV, &fd_Workspace, Lwork, &id_info, &dh_R_nrmF, batchSize);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnDgesvdaStridedBatched(cusolverDnHandle_t handle, cusolverEigMode_t jobz, int rank, int m, int n, const double * d_A, int lda, long long int strideA, double * d_S, long long int strideS, double * d_U, int ldu, long long int strideU, double * d_V, int ldv, long long int strideV, double * d_work, int lwork, int * d_info, double * h_R_nrmF, int batchSize);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnDgesvdaStridedBatched(hipsolverHandle_t handle, hipsolverEigMode_t jobz, int rank, int m, int n, const double* A, int lda, long long int strideA, double* S, long long int strideS, double* U, int ldu, long long int strideU, double* V, int ldv, long long int strideV, double* work, int lwork, int* devInfo, double* hRnrmF, int batch_count);
+  // CHECK: status = hipsolverDnDgesvdaStridedBatched(handle, jobz, irank, m, n, &dd_A, lda, strideA, &dd_S, strideS, &dd_U, ldu, strideU, &dd_V, ldv, strideV, &dd_Workspace, Lwork, &id_info, &dh_R_nrmF, batchSize);
+  status = cusolverDnDgesvdaStridedBatched(handle, jobz, irank, m, n, &dd_A, lda, strideA, &dd_S, strideS, &dd_U, ldu, strideU, &dd_V, ldv, strideV, &dd_Workspace, Lwork, &id_info, &dh_R_nrmF, batchSize);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnCgesvdaStridedBatched(cusolverDnHandle_t handle, cusolverEigMode_t jobz, int rank, int m, int n, const cuComplex * d_A, int lda, long long int strideA, float * d_S, long long int strideS, cuComplex * d_U, int ldu, long long int strideU, cuComplex * d_V, int ldv, long long int strideV, cuComplex * d_work, int lwork, int * d_info, double * h_R_nrmF, int batchSize);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnCgesvdaStridedBatched(hipsolverHandle_t handle, hipsolverEigMode_t jobz, int rank, int m, int n, const hipFloatComplex* A, int lda, long long int strideA, float* S, long long int strideS, hipFloatComplex* U, int ldu, long long int strideU, hipFloatComplex* V, int ldv, long long int strideV, hipFloatComplex* work, int lwork, int* devInfo, double* hRnrmF, int batch_count);
+  // CHECK: status = hipsolverDnCgesvdaStridedBatched(handle, jobz, irank, m, n, &complexd_A, lda, strideA, &fd_S, strideS, &complexd_U, ldu, strideU, &complexd_V, ldv, strideV, &complexd_Workspace, Lwork, &id_info, &dh_R_nrmF, batchSize);
+  status = cusolverDnCgesvdaStridedBatched(handle, jobz, irank, m, n, &complexd_A, lda, strideA, &fd_S, strideS, &complexd_U, ldu, strideU, &complexd_V, ldv, strideV, &complexd_Workspace, Lwork, &id_info, &dh_R_nrmF, batchSize);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnZgesvdaStridedBatched(cusolverDnHandle_t handle, cusolverEigMode_t jobz, int rank, int m, int n, const cuDoubleComplex *d_A, int lda, long long int strideA, double * d_S, long long int strideS, cuDoubleComplex * d_U, int ldu, long long int strideU, cuDoubleComplex * d_V, int ldv, long long int strideV, cuDoubleComplex * d_work, int lwork, int * d_info, double * h_R_nrmF, int batchSize);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnZgesvdaStridedBatched(hipsolverHandle_t handle, hipsolverEigMode_t jobz, int rank, int m, int n, const hipDoubleComplex* A, int lda, long long int strideA, double* S, long long int strideS, hipDoubleComplex* U, int ldu, long long int strideU, hipDoubleComplex* V, int ldv, long long int strideV, hipDoubleComplex* work, int lwork, int* devInfo, double* hRnrmF, int batch_count);
+  // CHECK: status = hipsolverDnZgesvdaStridedBatched(handle, jobz, irank, m, n, &dComplexd_A, lda, strideA, &dd_S, strideS, &dComplexd_U, ldu, strideU, &dComplexd_V, ldv, strideV, &dComplexd_Workspace, Lwork, &id_info, &dh_R_nrmF, batchSize);
+  status = cusolverDnZgesvdaStridedBatched(handle, jobz, irank, m, n, &dComplexd_A, lda, strideA, &dd_S, strideS, &dComplexd_U, ldu, strideU, &dComplexd_V, ldv, strideV, &dComplexd_Workspace, Lwork, &id_info, &dh_R_nrmF, batchSize);
 #endif
 
 #if CUDA_VERSION >= 10020
