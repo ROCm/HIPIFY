@@ -205,6 +205,7 @@
 |`cusolverDnDXgesv_bufferSize`|11.0| | | | | | | | | |
 |`cusolverDnDestroy`| | | | |`rocblas_destroy_handle`| | | | | |
 |`cusolverDnDestroyGesvdjInfo`|9.0| | | | | | | | | |
+|`cusolverDnDestroyParams`|11.0| | | | | | | | | |
 |`cusolverDnDestroySyevjInfo`|9.0| | | | | | | | | |
 |`cusolverDnDgebrd`| | | | | | | | | | |
 |`cusolverDnDgebrd_bufferSize`| | | | | | | | | | |
@@ -261,8 +262,15 @@
 |`cusolverDnDsytrf_bufferSize`| | | | | | | | | | |
 |`cusolverDnDsytri`|10.1| | | | | | | | | |
 |`cusolverDnDsytri_bufferSize`|10.1| | | | | | | | | |
+|`cusolverDnGeqrf`|11.0|11.1| | | | | | | | |
+|`cusolverDnGeqrf_bufferSize`|11.0|11.1| | | | | | | | |
+|`cusolverDnGesvd`|11.0|11.1| | | | | | | | |
+|`cusolverDnGesvd_bufferSize`|11.0|11.1| | | | | | | | |
 |`cusolverDnGetDeterministicMode`|12.2| | | | | | | | | |
 |`cusolverDnGetStream`| | | | |`rocblas_get_stream`| | | | | |
+|`cusolverDnGetrf`|11.0|11.1| | | | | | | | |
+|`cusolverDnGetrf_bufferSize`|11.0|11.1| | | | | | | | |
+|`cusolverDnGetrs`|11.0|11.1| | | | | | | | |
 |`cusolverDnIRSInfosCreate`|10.2| | | | | | | | | |
 |`cusolverDnIRSInfosDestroy`|10.2| | | | | | | | | |
 |`cusolverDnIRSInfosGetMaxIters`|10.2| | | | | | | | | |
@@ -287,6 +295,9 @@
 |`cusolverDnIRSXgels_bufferSize`|11.0| | | | | | | | | |
 |`cusolverDnIRSXgesv`|10.2| | | | | | | | | |
 |`cusolverDnIRSXgesv_bufferSize`|10.2| | | | | | | | | |
+|`cusolverDnPotrf`|11.0|11.1| | | | | | | | |
+|`cusolverDnPotrf_bufferSize`|11.0|11.1| | | | | | | | |
+|`cusolverDnPotrs`|11.0|11.1| | | | | | | | |
 |`cusolverDnSBgels`|11.0| | | | | | | | | |
 |`cusolverDnSBgels_bufferSize`|11.0| | | | | | | | | |
 |`cusolverDnSBgesv`|11.0| | | | | | | | | |
@@ -361,6 +372,10 @@
 |`cusolverDnSsytrf_bufferSize`| | | | | | | | | | |
 |`cusolverDnSsytri`|10.1| | | | | | | | | |
 |`cusolverDnSsytri_bufferSize`|10.1| | | | | | | | | |
+|`cusolverDnSyevd`|11.0|11.1| | | | | | | | |
+|`cusolverDnSyevd_bufferSize`|11.0|11.1| | | | | | | | |
+|`cusolverDnSyevdx`|11.0|11.1| | | | | | | | |
+|`cusolverDnSyevdx_bufferSize`|11.0|11.1| | | | | | | | |
 |`cusolverDnXgesvdjGetResidual`|9.0| | | | | | | | | |
 |`cusolverDnXgesvdjGetSweeps`|9.0| | | | | | | | | |
 |`cusolverDnXgesvdjSetMaxSweeps`|9.0| | | | | | | | | |
@@ -369,6 +384,9 @@
 |`cusolverDnXgetrf`|11.1| | | | | | | | | |
 |`cusolverDnXgetrf_bufferSize`|11.1| | | | | | | | | |
 |`cusolverDnXgetrs`|11.1| | | | | | | | | |
+|`cusolverDnXpotrf`|11.1|11.1| | | | | | | | |
+|`cusolverDnXpotrf_bufferSize`|11.1|11.1| | | | | | | | |
+|`cusolverDnXpotrs`|11.1|11.1| | | | | | | | |
 |`cusolverDnXsyevjGetResidual`|9.0| | | | | | | | | |
 |`cusolverDnXsyevjGetSweeps`|9.0| | | | | | | | | |
 |`cusolverDnXsyevjSetMaxSweeps`|9.0| | | | | | | | | |
