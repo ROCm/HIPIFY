@@ -8,6 +8,8 @@
 |`CUBLAS_DIRECT_FORWARD`|11.0| | | | | | | | | |
 |`CUBLAS_STOREV_COLUMNWISE`|11.0| | | | | | | | | |
 |`CUBLAS_STOREV_ROWWISE`|11.0| | | | | | | | | |
+|`CUDALIBMG_GRID_MAPPING_COL_MAJOR`|10.1| | | | | | | | | |
+|`CUDALIBMG_GRID_MAPPING_ROW_MAJOR`|10.1| | | | | | | | | |
 |`CUSOLVERDN_GETRF`|11.0| | | | | | | | | |
 |`CUSOLVERDN_POTRF`|11.5| | | | | | | | | |
 |`CUSOLVER_ALG_0`|11.0| | | | | | | | | |
@@ -78,6 +80,8 @@
 |`CUSOLVER_STATUS_NOT_SUPPORTED`| | | | |`rocblas_status_not_implemented`|1.5.0| | | |6.1.0|
 |`CUSOLVER_STATUS_SUCCESS`| | | | |`rocblas_status_success`|3.0.0| | | |6.1.0|
 |`CUSOLVER_STATUS_ZERO_PIVOT`| | | | |`rocblas_status_not_implemented`|1.5.0| | | |6.1.0|
+|`cudaLibMgGrid_t`|10.1| | | | | | | | | |
+|`cudaLibMgMatrixDesc_t`|10.1| | | | | | | | | |
 |`cusolverAlgMode_t`|11.0| | | | | | | | | |
 |`cusolverDeterministicMode_t`|12.2| | | | | | | | | |
 |`cusolverDirectMode_t`|11.0| | | | | | | | | |
@@ -95,6 +99,9 @@
 |`cusolverEigRange_t`|10.1| | | |`rocblas_erange`|5.2.0| | | |6.1.0|
 |`cusolverEigType_t`|8.0| | | |`rocblas_eform`|4.2.0| | | |6.1.0|
 |`cusolverIRSRefinement_t`|10.2| | | | | | | | | |
+|`cusolverMgContext`|10.1| | | | | | | | | |
+|`cusolverMgGridMapping_t`|10.1| | | | | | | | | |
+|`cusolverMgHandle_t`|10.1| | | | | | | | | |
 |`cusolverNorm_t`|10.2| | | | | | | | | |
 |`cusolverPrecType_t`|11.0| | | | | | | | | |
 |`cusolverStatus_t`| | | | |`rocblas_status`|3.0.0| | | |6.1.0|
@@ -490,6 +497,24 @@
 |`cusolverDnZunmqr_bufferSize`|8.0| | | | | | | | | |
 |`cusolverDnZunmtr`|8.0| | | | | | | | | |
 |`cusolverDnZunmtr_bufferSize`|8.0| | | | | | | | | |
+|`cusolverMgCreate`|10.1| | | | | | | | | |
+|`cusolverMgCreateDeviceGrid`|10.1| | | | | | | | | |
+|`cusolverMgCreateMatrixDesc`|10.1| | | | | | | | | |
+|`cusolverMgDestroy`|10.1| | | | | | | | | |
+|`cusolverMgDestroyGrid`|10.1| | | | | | | | | |
+|`cusolverMgDeviceSelect`|10.1| | | | | | | | | |
+|`cusolverMgGetrf`|10.2| | | | | | | | | |
+|`cusolverMgGetrf_bufferSize`|10.2| | | | | | | | | |
+|`cusolverMgGetrs`|10.2| | | | | | | | | |
+|`cusolverMgGetrs_bufferSize`|10.2| | | | | | | | | |
+|`cusolverMgPotrf`|11.0| | | | | | | | | |
+|`cusolverMgPotrf_bufferSize`|11.0| | | | | | | | | |
+|`cusolverMgPotri`|11.0| | | | | | | | | |
+|`cusolverMgPotri_bufferSize`|11.0| | | | | | | | | |
+|`cusolverMgPotrs`|11.0| | | | | | | | | |
+|`cusolverMgPotrs_bufferSize`|11.0| | | | | | | | | |
+|`cusolverMgSyevd`|10.1| | | | | | | | | |
+|`cusolverMgSyevd_bufferSize`|10.1| | | | | | | | | |
 
 
 \*A - Added; D - Deprecated; C - Changed; R - Removed; E - Experimental

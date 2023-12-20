@@ -124,6 +124,13 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SOLVER_TYPE_NAME_MAP {
   {"CUSOLVER_ALLOW_NON_DETERMINISTIC_RESULTS",                 {"HIPSOLVER_ALLOW_NON_DETERMINISTIC_RESULTS",                 "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
   {"cusolver_int_t",                                           {"int",                                                       "rocblas_int",                                                      CONV_NUMERIC_LITERAL, API_SOLVER, 1}},
   {"cusolverDnLoggerCallback_t",                               {"hipsolverDnLoggerCallback_t",                               "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
+  {"cusolverMgContext",                                        {"hipsolverMgContext",                                        "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
+  {"cusolverMgHandle_t",                                       {"hipsolverMgHandle_t",                                       "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
+  {"cusolverMgGridMapping_t",                                  {"hipsolverMgGridMapping_t",                                  "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
+  {"CUDALIBMG_GRID_MAPPING_ROW_MAJOR",                         {"HIP_LIBMG_GRID_MAPPING_ROW_MAJOR",                          "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
+  {"CUDALIBMG_GRID_MAPPING_COL_MAJOR",                         {"HIP_LIBMG_GRID_MAPPING_COL_MAJOR",                          "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
+  {"cudaLibMgGrid_t",                                          {"hipLibMgGrid_t",                                            "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
+  {"cudaLibMgMatrixDesc_t",                                    {"hipLibMgMatrixDesc_t",                                      "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_SOLVER_TYPE_NAME_VER_MAP {
@@ -212,6 +219,13 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SOLVER_TYPE_NAME_VER_MAP {
   {"CUSOLVER_DETERMINISTIC_RESULTS",                           {CUDA_122, CUDA_0, CUDA_0}},
   {"CUSOLVER_ALLOW_NON_DETERMINISTIC_RESULTS",                 {CUDA_122, CUDA_0, CUDA_0}},
   {"cusolverDnLoggerCallback_t",                               {CUDA_117, CUDA_0, CUDA_0}},
+  {"cusolverMgContext",                                        {CUDA_101, CUDA_0, CUDA_0}},
+  {"cusolverMgHandle_t",                                       {CUDA_101, CUDA_0, CUDA_0}},
+  {"cusolverMgGridMapping_t",                                  {CUDA_101, CUDA_0, CUDA_0}},
+  {"CUDALIBMG_GRID_MAPPING_ROW_MAJOR",                         {CUDA_101, CUDA_0, CUDA_0}},
+  {"CUDALIBMG_GRID_MAPPING_COL_MAJOR",                         {CUDA_101, CUDA_0, CUDA_0}},
+  {"cudaLibMgGrid_t",                                          {CUDA_101, CUDA_0, CUDA_0}},
+  {"cudaLibMgMatrixDesc_t",                                    {CUDA_101, CUDA_0, CUDA_0}},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_SOLVER_TYPE_NAME_VER_MAP {
