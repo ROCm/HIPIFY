@@ -5,6 +5,7 @@
 #include <stdio.h>
 // CHECK: #include "hipsolver.h"
 #include "cusolverDn.h"
+#include "cusolverRf.h"
 
 int main() {
   printf("19. cuSOLVER API to hipSOLVER API synthetic test\n");
@@ -152,6 +153,59 @@ int main() {
 
   // CHECK: hipStream_t stream_t;
   cudaStream_t stream_t;
+
+  // CHECK: hipsolverRfResetValuesFastMode_t RfResetValuesFastMode;
+  // CHECK-NEXT: hipsolverRfResetValuesFastMode_t RESET_VALUES_FAST_MODE_OFF = HIPSOLVERRF_RESET_VALUES_FAST_MODE_OFF;
+  // CHECK-NEXT: hipsolverRfResetValuesFastMode_t RESET_VALUES_FAST_MODE_ON = HIPSOLVERRF_RESET_VALUES_FAST_MODE_ON;
+  cusolverRfResetValuesFastMode_t RfResetValuesFastMode;
+  cusolverRfResetValuesFastMode_t RESET_VALUES_FAST_MODE_OFF = CUSOLVERRF_RESET_VALUES_FAST_MODE_OFF;
+  cusolverRfResetValuesFastMode_t RESET_VALUES_FAST_MODE_ON = CUSOLVERRF_RESET_VALUES_FAST_MODE_ON;
+
+  // CHECK: hipsolverRfMatrixFormat_t RfMatrixFormat;
+  // CHECK-NEXT: hipsolverRfMatrixFormat_t MATRIX_FORMAT_CSR = HIPSOLVERRF_MATRIX_FORMAT_CSR;
+  // CHECK-NEXT: hipsolverRfMatrixFormat_t MATRIX_FORMAT_CSC = HIPSOLVERRF_MATRIX_FORMAT_CSC;
+  cusolverRfMatrixFormat_t RfMatrixFormat;
+  cusolverRfMatrixFormat_t MATRIX_FORMAT_CSR = CUSOLVERRF_MATRIX_FORMAT_CSR;
+  cusolverRfMatrixFormat_t MATRIX_FORMAT_CSC = CUSOLVERRF_MATRIX_FORMAT_CSC;
+
+  // CHECK: hipsolverRfUnitDiagonal_t RfUnitDiagonal;
+  // CHECK-NEXT: hipsolverRfUnitDiagonal_t UNIT_DIAGONAL_STORED_L = HIPSOLVERRF_UNIT_DIAGONAL_STORED_L;
+  // CHECK-NEXT: hipsolverRfUnitDiagonal_t UNIT_DIAGONAL_STORED_U = HIPSOLVERRF_UNIT_DIAGONAL_STORED_U;
+  // CHECK-NEXT: hipsolverRfUnitDiagonal_t UNIT_DIAGONAL_ASSUMED_L = HIPSOLVERRF_UNIT_DIAGONAL_ASSUMED_L;
+  // CHECK-NEXT: hipsolverRfUnitDiagonal_t UNIT_DIAGONAL_ASSUMED_U = HIPSOLVERRF_UNIT_DIAGONAL_ASSUMED_U;
+  cusolverRfUnitDiagonal_t RfUnitDiagonal;
+  cusolverRfUnitDiagonal_t UNIT_DIAGONAL_STORED_L = CUSOLVERRF_UNIT_DIAGONAL_STORED_L;
+  cusolverRfUnitDiagonal_t UNIT_DIAGONAL_STORED_U = CUSOLVERRF_UNIT_DIAGONAL_STORED_U;
+  cusolverRfUnitDiagonal_t UNIT_DIAGONAL_ASSUMED_L = CUSOLVERRF_UNIT_DIAGONAL_ASSUMED_L;
+  cusolverRfUnitDiagonal_t UNIT_DIAGONAL_ASSUMED_U = CUSOLVERRF_UNIT_DIAGONAL_ASSUMED_U;
+
+  // CHECK: hipsolverRfFactorization_t RfFactorization;
+  // CHECK-NEXT: hipsolverRfFactorization_t FACTORIZATION_ALG0 = HIPSOLVERRF_FACTORIZATION_ALG0;
+  // CHECK-NEXT: hipsolverRfFactorization_t FACTORIZATION_ALG1 = HIPSOLVERRF_FACTORIZATION_ALG1;
+  // CHECK-NEXT: hipsolverRfFactorization_t FACTORIZATION_ALG2 = HIPSOLVERRF_FACTORIZATION_ALG2;
+  cusolverRfFactorization_t RfFactorization;
+  cusolverRfFactorization_t FACTORIZATION_ALG0 = CUSOLVERRF_FACTORIZATION_ALG0;
+  cusolverRfFactorization_t FACTORIZATION_ALG1 = CUSOLVERRF_FACTORIZATION_ALG1;
+  cusolverRfFactorization_t FACTORIZATION_ALG2 = CUSOLVERRF_FACTORIZATION_ALG2;
+
+  // CHECK: hipsolverRfTriangularSolve_t RfTriangularSolve;
+  // CHECK-NEXT: hipsolverRfTriangularSolve_t TRIANGULAR_SOLVE_ALG1 = HIPSOLVERRF_TRIANGULAR_SOLVE_ALG1;
+  // CHECK-NEXT: hipsolverRfTriangularSolve_t TRIANGULAR_SOLVE_ALG2 = HIPSOLVERRF_TRIANGULAR_SOLVE_ALG2;
+  // CHECK-NEXT: hipsolverRfTriangularSolve_t TRIANGULAR_SOLVE_ALG3 = HIPSOLVERRF_TRIANGULAR_SOLVE_ALG3;
+  cusolverRfTriangularSolve_t RfTriangularSolve;
+  cusolverRfTriangularSolve_t TRIANGULAR_SOLVE_ALG1 = CUSOLVERRF_TRIANGULAR_SOLVE_ALG1;
+  cusolverRfTriangularSolve_t TRIANGULAR_SOLVE_ALG2 = CUSOLVERRF_TRIANGULAR_SOLVE_ALG2;
+  cusolverRfTriangularSolve_t TRIANGULAR_SOLVE_ALG3 = CUSOLVERRF_TRIANGULAR_SOLVE_ALG3;
+
+  // CHECK: hipsolverRfNumericBoostReport_t RfNumericBoostReport;
+  // CHECK-NEXT: hipsolverRfNumericBoostReport_t NUMERIC_BOOST_NOT_USED = HIPSOLVERRF_NUMERIC_BOOST_NOT_USED;
+  // CHECK-NEXT: hipsolverRfNumericBoostReport_t NUMERIC_BOOST_USED = HIPSOLVERRF_NUMERIC_BOOST_USED;
+  cusolverRfNumericBoostReport_t RfNumericBoostReport;
+  cusolverRfNumericBoostReport_t NUMERIC_BOOST_NOT_USED = CUSOLVERRF_NUMERIC_BOOST_NOT_USED;
+  cusolverRfNumericBoostReport_t NUMERIC_BOOST_USED = CUSOLVERRF_NUMERIC_BOOST_USED;
+
+  // CHECK: hipsolverRfHandle_t RfHandle;
+  cusolverRfHandle_t RfHandle;
 
   // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnCreate(cusolverDnHandle_t *handle);
   // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnCreate(hipsolverHandle_t* handle);

@@ -12,6 +12,22 @@
 |`CUDALIBMG_GRID_MAPPING_ROW_MAJOR`|10.1| | | | | | | | | |
 |`CUSOLVERDN_GETRF`|11.0| | | | | | | | | |
 |`CUSOLVERDN_POTRF`|11.5| | | | | | | | | |
+|`CUSOLVERRF_FACTORIZATION_ALG0`| | | | | | | | | | |
+|`CUSOLVERRF_FACTORIZATION_ALG1`| | | | | | | | | | |
+|`CUSOLVERRF_FACTORIZATION_ALG2`| | | | | | | | | | |
+|`CUSOLVERRF_MATRIX_FORMAT_CSC`| | | | | | | | | | |
+|`CUSOLVERRF_MATRIX_FORMAT_CSR`| | | | | | | | | | |
+|`CUSOLVERRF_NUMERIC_BOOST_NOT_USED`| | | | | | | | | | |
+|`CUSOLVERRF_NUMERIC_BOOST_USED`| | | | | | | | | | |
+|`CUSOLVERRF_RESET_VALUES_FAST_MODE_OFF`| | | | | | | | | | |
+|`CUSOLVERRF_RESET_VALUES_FAST_MODE_ON`| | | | | | | | | | |
+|`CUSOLVERRF_TRIANGULAR_SOLVE_ALG1`| | | | | | | | | | |
+|`CUSOLVERRF_TRIANGULAR_SOLVE_ALG2`| | | | | | | | | | |
+|`CUSOLVERRF_TRIANGULAR_SOLVE_ALG3`| | | | | | | | | | |
+|`CUSOLVERRF_UNIT_DIAGONAL_ASSUMED_L`| | | | | | | | | | |
+|`CUSOLVERRF_UNIT_DIAGONAL_ASSUMED_U`| | | | | | | | | | |
+|`CUSOLVERRF_UNIT_DIAGONAL_STORED_L`| | | | | | | | | | |
+|`CUSOLVERRF_UNIT_DIAGONAL_STORED_U`| | | | | | | | | | |
 |`CUSOLVER_ALG_0`|11.0| | | | | | | | | |
 |`CUSOLVER_ALG_1`|11.0| | | | | | | | | |
 |`CUSOLVER_ALG_2`|11.5| | | | | | | | | |
@@ -104,6 +120,14 @@
 |`cusolverMgHandle_t`|10.1| | | | | | | | | |
 |`cusolverNorm_t`|10.2| | | | | | | | | |
 |`cusolverPrecType_t`|11.0| | | | | | | | | |
+|`cusolverRfCommon`| | | | | | | | | | |
+|`cusolverRfFactorization_t`| | | | | | | | | | |
+|`cusolverRfHandle_t`| | | | | | | | | | |
+|`cusolverRfMatrixFormat_t`| | | | | | | | | | |
+|`cusolverRfNumericBoostReport_t`| | | | | | | | | | |
+|`cusolverRfResetValuesFastMode_t`| | | | | | | | | | |
+|`cusolverRfTriangularSolve_t`| | | | | | | | | | |
+|`cusolverRfUnitDiagonal_t`| | | | | | | | | | |
 |`cusolverStatus_t`| | | | |`rocblas_status`|3.0.0| | | |6.1.0|
 |`cusolverStorevMode_t`|11.0| | | | | | | | | |
 |`cusolver_int_t`|10.1| | | |`rocblas_int`|3.0.0| | | |6.1.0|
