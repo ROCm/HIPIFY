@@ -1,7 +1,7 @@
 // RUN: %run_test hipify "%s" "%t" %hipify_args 1 --hip-kernel-execution-syntax %clang_args
 // CHECK: #include <hip/hip_runtime.h>
 #include <iostream>
-// CHECK: #include <hiprand.h>
+// CHECK: #include <hiprand/hiprand.h>
 #include <curand.h>
 #define THRUST_NS_QUALIFIER ::thrust
 // CHECK: #include <hipcub/hipcub.hpp>
