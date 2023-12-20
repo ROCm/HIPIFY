@@ -23,13 +23,13 @@
 
 // CHECK: #include <stdio.h>
 
-// CHECK: #include "hiprand.h"
-// CHECK: #include "hiprand_kernel.h"
+// CHECK: #include "hiprand/hiprand.h"
+// CHECK: #include "hiprand/hiprand_kernel.h"
 
 // CHECK: #include <algorithm>
 
-// CHECK-NOT: #include "hiprand.h"
-// CHECK-NOT: #include "hiprand_kernel.h"
+// CHECK-NOT: #include "hiprand/hiprand.h"
+// CHECK-NOT: #include "hiprand/hiprand_kernel.h"
 // CHECK-NOT: #include "curand_discrete.h"
 // CHECK-NOT: #include "curand_discrete2.h"
 // CHECK-NOT: #include "curand_globals.h"
@@ -46,9 +46,12 @@
 // CHECK-NOT: #include "curand_precalc.h"
 // CHECK-NOT: #include "curand_uniform.h"
 
+// CHECK: #include "hiprand/hiprand_mtgp32_host.h"
+// CHECK: #include "rocrand_mtgp32_11213.h"
+
 // CHECK: #include <string>
 
-// CHECK: #include "hipfft.h"
+// CHECK: #include "hipfft/hipfft.h"
 // CHECK: #include "hipsparse.h"
 
 #include <cuda.h>

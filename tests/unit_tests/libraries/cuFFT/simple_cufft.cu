@@ -2,7 +2,7 @@
 
 // CHECK: #include <hip/hip_runtime.h>
 #include <cuda.h>
-// CHECK: #include <hipfft.h>
+// CHECK: #include <hipfft/hipfft.h>
 #include <cufft.h>
 #include <stdio.h>
 #include <math.h>

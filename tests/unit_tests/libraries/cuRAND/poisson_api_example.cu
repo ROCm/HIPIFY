@@ -19,9 +19,9 @@
 #include <stdlib.h>
 // CHECK: #include <hip/hip_runtime.h>
 #include <cuda.h>
-// CHECK: #include <hiprand_kernel.h>
+// CHECK: #include <hiprand/hiprand_kernel.h>
 #include <curand_kernel.h>
-// CHECK: #include <hiprand.h>
+// CHECK: #include <hiprand/hiprand.h>
 #include <curand.h>
 
 // CHECK: #define CUDA_CALL(x) do { if((x) != hipSuccess) {
