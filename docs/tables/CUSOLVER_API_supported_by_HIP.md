@@ -12,6 +12,22 @@
 |`CUDALIBMG_GRID_MAPPING_ROW_MAJOR`|10.1| | | | | | | | | |
 |`CUSOLVERDN_GETRF`|11.0| | | | | | | | | |
 |`CUSOLVERDN_POTRF`|11.5| | | | | | | | | |
+|`CUSOLVERRF_FACTORIZATION_ALG0`| | | | |`HIPSOLVERRF_FACTORIZATION_ALG0`|5.6.0| | | |6.1.0|
+|`CUSOLVERRF_FACTORIZATION_ALG1`| | | | |`HIPSOLVERRF_FACTORIZATION_ALG1`|5.6.0| | | |6.1.0|
+|`CUSOLVERRF_FACTORIZATION_ALG2`| | | | |`HIPSOLVERRF_FACTORIZATION_ALG2`|5.6.0| | | |6.1.0|
+|`CUSOLVERRF_MATRIX_FORMAT_CSC`| | | | |`HIPSOLVERRF_MATRIX_FORMAT_CSC`|5.6.0| | | |6.1.0|
+|`CUSOLVERRF_MATRIX_FORMAT_CSR`| | | | |`HIPSOLVERRF_MATRIX_FORMAT_CSR`|5.6.0| | | |6.1.0|
+|`CUSOLVERRF_NUMERIC_BOOST_NOT_USED`| | | | |`HIPSOLVERRF_NUMERIC_BOOST_NOT_USED`|5.6.0| | | |6.1.0|
+|`CUSOLVERRF_NUMERIC_BOOST_USED`| | | | |`HIPSOLVERRF_NUMERIC_BOOST_USED`|5.6.0| | | |6.1.0|
+|`CUSOLVERRF_RESET_VALUES_FAST_MODE_OFF`| | | | |`HIPSOLVERRF_RESET_VALUES_FAST_MODE_OFF`|5.6.0| | | |6.1.0|
+|`CUSOLVERRF_RESET_VALUES_FAST_MODE_ON`| | | | |`HIPSOLVERRF_RESET_VALUES_FAST_MODE_ON`|5.6.0| | | |6.1.0|
+|`CUSOLVERRF_TRIANGULAR_SOLVE_ALG1`| | | | |`HIPSOLVERRF_TRIANGULAR_SOLVE_ALG1`|5.6.0| | | |6.1.0|
+|`CUSOLVERRF_TRIANGULAR_SOLVE_ALG2`| | | | |`HIPSOLVERRF_TRIANGULAR_SOLVE_ALG2`|5.6.0| | | |6.1.0|
+|`CUSOLVERRF_TRIANGULAR_SOLVE_ALG3`| | | | |`HIPSOLVERRF_TRIANGULAR_SOLVE_ALG3`|5.6.0| | | |6.1.0|
+|`CUSOLVERRF_UNIT_DIAGONAL_ASSUMED_L`| | | | |`HIPSOLVERRF_UNIT_DIAGONAL_ASSUMED_L`|5.6.0| | | |6.1.0|
+|`CUSOLVERRF_UNIT_DIAGONAL_ASSUMED_U`| | | | |`HIPSOLVERRF_UNIT_DIAGONAL_ASSUMED_U`|5.6.0| | | |6.1.0|
+|`CUSOLVERRF_UNIT_DIAGONAL_STORED_L`| | | | |`HIPSOLVERRF_UNIT_DIAGONAL_STORED_L`|5.6.0| | | |6.1.0|
+|`CUSOLVERRF_UNIT_DIAGONAL_STORED_U`| | | | |`HIPSOLVERRF_UNIT_DIAGONAL_STORED_U`|5.6.0| | | |6.1.0|
 |`CUSOLVER_ALG_0`|11.0| | | | | | | | | |
 |`CUSOLVER_ALG_1`|11.0| | | | | | | | | |
 |`CUSOLVER_ALG_2`|11.5| | | | | | | | | |
@@ -104,6 +120,14 @@
 |`cusolverMgHandle_t`|10.1| | | | | | | | | |
 |`cusolverNorm_t`|10.2| | | | | | | | | |
 |`cusolverPrecType_t`|11.0| | | | | | | | | |
+|`cusolverRfCommon`| | | | | | | | | | |
+|`cusolverRfFactorization_t`| | | | |`hipsolverRfFactorization_t`|5.6.0| | | |6.1.0|
+|`cusolverRfHandle_t`| | | | |`hipsolverRfHandle_t`|5.6.0| | | |6.1.0|
+|`cusolverRfMatrixFormat_t`| | | | |`hipsolverRfMatrixFormat_t`|5.6.0| | | |6.1.0|
+|`cusolverRfNumericBoostReport_t`| | | | |`hipsolverRfNumericBoostReport_t`|5.6.0| | | |6.1.0|
+|`cusolverRfResetValuesFastMode_t`| | | | |`hipsolverRfResetValuesFastMode_t`|5.6.0| | | |6.1.0|
+|`cusolverRfTriangularSolve_t`| | | | |`hipsolverRfTriangularSolve_t`|5.6.0| | | |6.1.0|
+|`cusolverRfUnitDiagonal_t`| | | | |`hipsolverRfUnitDiagonal_t`|5.6.0| | | |6.1.0|
 |`cusolverStatus_t`| | | | |`hipsolverStatus_t`|4.5.0| | | |6.1.0|
 |`cusolverStorevMode_t`|11.0| | | | | | | | | |
 |`cusolver_int_t`|10.1| | | |`int`| | | | | |

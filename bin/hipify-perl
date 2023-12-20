@@ -5185,6 +5185,13 @@ sub simpleSubstitutions {
     subst("curandState_t", "hiprandState_t", "type");
     subst("curandStatus", "hiprandStatus_t", "type");
     subst("curandStatus_t", "hiprandStatus_t", "type");
+    subst("cusolverRfFactorization_t", "hipsolverRfFactorization_t", "type");
+    subst("cusolverRfHandle_t", "hipsolverRfHandle_t", "type");
+    subst("cusolverRfMatrixFormat_t", "hipsolverRfMatrixFormat_t", "type");
+    subst("cusolverRfNumericBoostReport_t", "hipsolverRfNumericBoostReport_t", "type");
+    subst("cusolverRfResetValuesFastMode_t", "hipsolverRfResetValuesFastMode_t", "type");
+    subst("cusolverRfTriangularSolve_t", "hipsolverRfTriangularSolve_t", "type");
+    subst("cusolverRfUnitDiagonal_t", "hipsolverRfUnitDiagonal_t", "type");
     subst("cusparseAction_t", "hipsparseAction_t", "type");
     subst("cusparseColorInfo_t", "hipsparseColorInfo_t", "type");
     subst("cusparseConstDnMatDescr_t", "hipsparseConstDnMatDescr_t", "type");
@@ -5535,6 +5542,22 @@ sub simpleSubstitutions {
     subst("CURAND_STATUS_SUCCESS", "HIPRAND_STATUS_SUCCESS", "numeric_literal");
     subst("CURAND_STATUS_TYPE_ERROR", "HIPRAND_STATUS_TYPE_ERROR", "numeric_literal");
     subst("CURAND_STATUS_VERSION_MISMATCH", "HIPRAND_STATUS_VERSION_MISMATCH", "numeric_literal");
+    subst("CUSOLVERRF_FACTORIZATION_ALG0", "HIPSOLVERRF_FACTORIZATION_ALG0", "numeric_literal");
+    subst("CUSOLVERRF_FACTORIZATION_ALG1", "HIPSOLVERRF_FACTORIZATION_ALG1", "numeric_literal");
+    subst("CUSOLVERRF_FACTORIZATION_ALG2", "HIPSOLVERRF_FACTORIZATION_ALG2", "numeric_literal");
+    subst("CUSOLVERRF_MATRIX_FORMAT_CSC", "HIPSOLVERRF_MATRIX_FORMAT_CSC", "numeric_literal");
+    subst("CUSOLVERRF_MATRIX_FORMAT_CSR", "HIPSOLVERRF_MATRIX_FORMAT_CSR", "numeric_literal");
+    subst("CUSOLVERRF_NUMERIC_BOOST_NOT_USED", "HIPSOLVERRF_NUMERIC_BOOST_NOT_USED", "numeric_literal");
+    subst("CUSOLVERRF_NUMERIC_BOOST_USED", "HIPSOLVERRF_NUMERIC_BOOST_USED", "numeric_literal");
+    subst("CUSOLVERRF_RESET_VALUES_FAST_MODE_OFF", "HIPSOLVERRF_RESET_VALUES_FAST_MODE_OFF", "numeric_literal");
+    subst("CUSOLVERRF_RESET_VALUES_FAST_MODE_ON", "HIPSOLVERRF_RESET_VALUES_FAST_MODE_ON", "numeric_literal");
+    subst("CUSOLVERRF_TRIANGULAR_SOLVE_ALG1", "HIPSOLVERRF_TRIANGULAR_SOLVE_ALG1", "numeric_literal");
+    subst("CUSOLVERRF_TRIANGULAR_SOLVE_ALG2", "HIPSOLVERRF_TRIANGULAR_SOLVE_ALG2", "numeric_literal");
+    subst("CUSOLVERRF_TRIANGULAR_SOLVE_ALG3", "HIPSOLVERRF_TRIANGULAR_SOLVE_ALG3", "numeric_literal");
+    subst("CUSOLVERRF_UNIT_DIAGONAL_ASSUMED_L", "HIPSOLVERRF_UNIT_DIAGONAL_ASSUMED_L", "numeric_literal");
+    subst("CUSOLVERRF_UNIT_DIAGONAL_ASSUMED_U", "HIPSOLVERRF_UNIT_DIAGONAL_ASSUMED_U", "numeric_literal");
+    subst("CUSOLVERRF_UNIT_DIAGONAL_STORED_L", "HIPSOLVERRF_UNIT_DIAGONAL_STORED_L", "numeric_literal");
+    subst("CUSOLVERRF_UNIT_DIAGONAL_STORED_U", "HIPSOLVERRF_UNIT_DIAGONAL_STORED_U", "numeric_literal");
     subst("CUSOLVER_STATUS_IRS_INTERNAL_ERROR", "HIPSOLVER_STATUS_INTERNAL_ERROR", "numeric_literal");
     subst("CUSOLVER_STATUS_IRS_NOT_SUPPORTED", "HIPSOLVER_STATUS_NOT_SUPPORTED", "numeric_literal");
     subst("CUSOLVER_STATUS_IRS_PARAMS_INVALID", "HIPSOLVER_STATUS_INVALID_VALUE", "numeric_literal");
@@ -7585,6 +7608,7 @@ sub warnUnsupportedFunctions {
         "cusparseBsrSetStridedBatch",
         "cusparseAlgMode_t",
         "cusolverStorevMode_t",
+        "cusolverRfCommon",
         "cusolverPrecType_t",
         "cusolverNorm_t",
         "cusolverMgSyevd_bufferSize",
