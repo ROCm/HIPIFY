@@ -1077,6 +1077,7 @@ my %removed_funcs = (
 
 my %experimental_funcs = (
     "cusolverStatus_t" => "6.1.0",
+    "cusolverRfSolve" => "6.1.0",
     "cusolverRfSetupHost" => "6.1.0",
     "cusolverRfSetupDevice" => "6.1.0",
     "cusolverRfSetResetValuesFastMode" => "6.1.0",
@@ -1084,12 +1085,23 @@ my %experimental_funcs = (
     "cusolverRfSetMatrixFormat" => "6.1.0",
     "cusolverRfSetAlgs" => "6.1.0",
     "cusolverRfResetValues" => "6.1.0",
+    "cusolverRfRefactor" => "6.1.0",
     "cusolverRfGetResetValuesFastMode" => "6.1.0",
     "cusolverRfGetNumericProperties" => "6.1.0",
     "cusolverRfGetNumericBoostReport" => "6.1.0",
     "cusolverRfGetMatrixFormat" => "6.1.0",
+    "cusolverRfExtractSplitFactorsHost" => "6.1.0",
+    "cusolverRfExtractBundledFactorsHost" => "6.1.0",
     "cusolverRfDestroy" => "6.1.0",
     "cusolverRfCreate" => "6.1.0",
+    "cusolverRfBatchZeroPivot" => "6.1.0",
+    "cusolverRfBatchSolve" => "6.1.0",
+    "cusolverRfBatchSetupHost" => "6.1.0",
+    "cusolverRfBatchResetValues" => "6.1.0",
+    "cusolverRfBatchRefactor" => "6.1.0",
+    "cusolverRfBatchAnalyze" => "6.1.0",
+    "cusolverRfAnalyze" => "6.1.0",
+    "cusolverRfAccessBundledFactorsDevice" => "6.1.0",
     "cusolverEigType_t" => "6.1.0",
     "cusolverEigRange_t" => "6.1.0",
     "cusolverEigMode_t" => "6.1.0",
@@ -1717,12 +1729,23 @@ sub experimentalSubstitutions {
     subst("cusolverDnZunmqr_bufferSize", "hipsolverDnZunmqr_bufferSize", "library");
     subst("cusolverDnZunmtr", "hipsolverDnZunmtr", "library");
     subst("cusolverDnZunmtr_bufferSize", "hipsolverDnZunmtr_bufferSize", "library");
+    subst("cusolverRfAccessBundledFactorsDevice", "hipsolverRfAccessBundledFactorsDevice", "library");
+    subst("cusolverRfAnalyze", "hipsolverRfAnalyze", "library");
+    subst("cusolverRfBatchAnalyze", "hipsolverRfBatchAnalyze", "library");
+    subst("cusolverRfBatchRefactor", "hipsolverRfBatchRefactor", "library");
+    subst("cusolverRfBatchResetValues", "hipsolverRfBatchResetValues", "library");
+    subst("cusolverRfBatchSetupHost", "hipsolverRfBatchSetupHost", "library");
+    subst("cusolverRfBatchSolve", "hipsolverRfBatchSolve", "library");
+    subst("cusolverRfBatchZeroPivot", "hipsolverRfBatchZeroPivot", "library");
     subst("cusolverRfCreate", "hipsolverRfCreate", "library");
     subst("cusolverRfDestroy", "hipsolverRfDestroy", "library");
+    subst("cusolverRfExtractBundledFactorsHost", "hipsolverRfExtractBundledFactorsHost", "library");
+    subst("cusolverRfExtractSplitFactorsHost", "hipsolverRfExtractSplitFactorsHost", "library");
     subst("cusolverRfGetMatrixFormat", "hipsolverRfGetMatrixFormat", "library");
     subst("cusolverRfGetNumericBoostReport", "hipsolverRfGetNumericBoostReport", "library");
     subst("cusolverRfGetNumericProperties", "hipsolverRfGetNumericProperties", "library");
     subst("cusolverRfGetResetValuesFastMode", "hipsolverRfGetResetValuesFastMode", "library");
+    subst("cusolverRfRefactor", "hipsolverRfRefactor", "library");
     subst("cusolverRfResetValues", "hipsolverRfResetValues", "library");
     subst("cusolverRfSetAlgs", "hipsolverRfSetAlgs", "library");
     subst("cusolverRfSetMatrixFormat", "hipsolverRfSetMatrixFormat", "library");
@@ -1730,6 +1753,7 @@ sub experimentalSubstitutions {
     subst("cusolverRfSetResetValuesFastMode", "hipsolverRfSetResetValuesFastMode", "library");
     subst("cusolverRfSetupDevice", "hipsolverRfSetupDevice", "library");
     subst("cusolverRfSetupHost", "hipsolverRfSetupHost", "library");
+    subst("cusolverRfSolve", "hipsolverRfSolve", "library");
     subst("cusolverDnHandle_t", "hipsolverHandle_t", "type");
     subst("cusolverEigMode_t", "hipsolverEigMode_t", "type");
     subst("cusolverEigRange_t", "hipsolverEigRange_t", "type");

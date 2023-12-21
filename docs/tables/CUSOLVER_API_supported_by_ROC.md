@@ -539,13 +539,24 @@
 |`cusolverMgPotrs_bufferSize`|11.0| | | | | | | | | |
 |`cusolverMgSyevd`|10.1| | | | | | | | | |
 |`cusolverMgSyevd_bufferSize`|10.1| | | | | | | | | |
+|`cusolverRfAccessBundledFactorsDevice`| | | | | | | | | | |
+|`cusolverRfAnalyze`| | | | | | | | | | |
+|`cusolverRfBatchAnalyze`| | | | | | | | | | |
+|`cusolverRfBatchRefactor`| | | | | | | | | | |
+|`cusolverRfBatchResetValues`| | | | | | | | | | |
+|`cusolverRfBatchSetupHost`| | | | | | | | | | |
+|`cusolverRfBatchSolve`| | | | | | | | | | |
+|`cusolverRfBatchZeroPivot`| | | | | | | | | | |
 |`cusolverRfCreate`| | | | | | | | | | |
 |`cusolverRfDestroy`| | | | | | | | | | |
+|`cusolverRfExtractBundledFactorsHost`| | | | | | | | | | |
+|`cusolverRfExtractSplitFactorsHost`| | | | | | | | | | |
 |`cusolverRfGetAlgs`| | | | | | | | | | |
 |`cusolverRfGetMatrixFormat`| | | | | | | | | | |
 |`cusolverRfGetNumericBoostReport`| | | | | | | | | | |
 |`cusolverRfGetNumericProperties`| | | | | | | | | | |
 |`cusolverRfGetResetValuesFastMode`| | | | | | | | | | |
+|`cusolverRfRefactor`| | | | | | | | | | |
 |`cusolverRfResetValues`| | | | | | | | | | |
 |`cusolverRfSetAlgs`| | | | | | | | | | |
 |`cusolverRfSetMatrixFormat`| | | | | | | | | | |
@@ -553,6 +564,7 @@
 |`cusolverRfSetResetValuesFastMode`| | | | | | | | | | |
 |`cusolverRfSetupDevice`| | | | | | | | | | |
 |`cusolverRfSetupHost`| | | | | | | | | | |
+|`cusolverRfSolve`| | | | | | | | | | |
 
 
 \*A - Added; D - Deprecated; C - Changed; R - Removed; E - Experimental

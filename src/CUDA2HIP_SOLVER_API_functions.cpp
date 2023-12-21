@@ -511,6 +511,30 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SOLVER_FUNCTION_MAP {
   {"cusolverRfSetupDevice",                              {"hipsolverRfSetupDevice",                                "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
   // no ROC analogues
   {"cusolverRfResetValues",                              {"hipsolverRfResetValues",                                "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  // NOTE: can't call rocsolver_dcsrrf_analysis w/o using hipSOLVER's hipsolverRfHandle
+  {"cusolverRfAnalyze",                                  {"hipsolverRfAnalyze",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  // NOTE: can't call rocsolver_dcsrrf_refactlu w/o using hipSOLVER's hipsolverRfHandle
+  {"cusolverRfRefactor",                                 {"hipsolverRfRefactor",                                   "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  // no ROC analogues
+  {"cusolverRfAccessBundledFactorsDevice",               {"hipsolverRfAccessBundledFactorsDevice",                 "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  // no ROC analogues
+  {"cusolverRfExtractBundledFactorsHost",                {"hipsolverRfExtractBundledFactorsHost",                  "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  // no ROC analogues
+  {"cusolverRfExtractSplitFactorsHost",                  {"hipsolverRfExtractSplitFactorsHost",                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  // NOTE: can't call rocsolver_dcsrrf_solve w/o using hipSOLVER's hipsolverRfHandle
+  {"cusolverRfSolve",                                    {"hipsolverRfSolve",                                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  // no ROC analogues
+  {"cusolverRfBatchSetupHost",                           {"hipsolverRfBatchSetupHost",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  // no ROC analogues
+  {"cusolverRfBatchResetValues",                         {"hipsolverRfBatchResetValues",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  // no ROC analogues
+  {"cusolverRfBatchAnalyze",                             {"hipsolverRfBatchAnalyze",                               "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  // no ROC analogues
+  {"cusolverRfBatchRefactor",                            {"hipsolverRfBatchRefactor",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  // no ROC analogues
+  {"cusolverRfBatchSolve",                               {"hipsolverRfBatchSolve",                                 "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  // no ROC analogues
+  {"cusolverRfBatchZeroPivot",                           {"hipsolverRfBatchZeroPivot",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_SOLVER_FUNCTION_VER_MAP {
@@ -1093,6 +1117,18 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SOLVER_FUNCTION_VER_MAP {
   {"hipsolverRfSetupHost",                                {HIP_5060, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipsolverRfSetupDevice",                              {HIP_5060, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipsolverRfResetValues",                              {HIP_5060, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverRfAnalyze",                                  {HIP_5060, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverRfRefactor",                                 {HIP_5060, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverRfAccessBundledFactorsDevice",               {HIP_5060, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverRfExtractBundledFactorsHost",                {HIP_5060, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverRfExtractSplitFactorsHost",                  {HIP_5060, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverRfSolve",                                    {HIP_5060, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverRfBatchSetupHost",                           {HIP_5060, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverRfBatchResetValues",                         {HIP_5060, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverRfBatchAnalyze",                             {HIP_5060, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverRfBatchRefactor",                            {HIP_5060, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverRfBatchSolve",                               {HIP_5060, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverRfBatchZeroPivot",                           {HIP_5060, HIP_0,    HIP_0,  HIP_LATEST}},
 
   {"rocsolver_spotrf",                                    {HIP_3020, HIP_0,    HIP_0,  HIP_LATEST}},
   {"rocsolver_dpotrf",                                    {HIP_3020, HIP_0,    HIP_0,  HIP_LATEST}},
