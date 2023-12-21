@@ -539,6 +539,20 @@
 |`cusolverMgPotrs_bufferSize`|11.0| | | | | | | | | |
 |`cusolverMgSyevd`|10.1| | | | | | | | | |
 |`cusolverMgSyevd_bufferSize`|10.1| | | | | | | | | |
+|`cusolverRfCreate`| | | | | | | | | | |
+|`cusolverRfDestroy`| | | | | | | | | | |
+|`cusolverRfGetAlgs`| | | | | | | | | | |
+|`cusolverRfGetMatrixFormat`| | | | | | | | | | |
+|`cusolverRfGetNumericBoostReport`| | | | | | | | | | |
+|`cusolverRfGetNumericProperties`| | | | | | | | | | |
+|`cusolverRfGetResetValuesFastMode`| | | | | | | | | | |
+|`cusolverRfResetValues`| | | | | | | | | | |
+|`cusolverRfSetAlgs`| | | | | | | | | | |
+|`cusolverRfSetMatrixFormat`| | | | | | | | | | |
+|`cusolverRfSetNumericProperties`| | | | | | | | | | |
+|`cusolverRfSetResetValuesFastMode`| | | | | | | | | | |
+|`cusolverRfSetupDevice`| | | | | | | | | | |
+|`cusolverRfSetupHost`| | | | | | | | | | |
 
 
 \*A - Added; D - Deprecated; C - Changed; R - Removed; E - Experimental

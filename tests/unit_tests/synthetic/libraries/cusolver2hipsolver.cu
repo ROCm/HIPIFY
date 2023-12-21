@@ -12,6 +12,9 @@ int main() {
 
   int m = 0;
   int n = 0;
+  int nnzA = 0;
+  int nnzL = 0;
+  int nnzU = 0;
   int k = 0;
   int il = 0;
   int iu = 0;
@@ -35,6 +38,14 @@ int main() {
   int isort_eig = 0;
   int iexecuted_sweeps = 0;
   int iecon = 0;
+  int ih_csrRowPtrA = 0;
+  int ih_csrColIndA = 0;
+  int ih_csrRowPtrL = 0;
+  int ih_csrColIndL = 0;
+  int ih_csrRowPtrU = 0;
+  int ih_csrColIndU = 0;
+  int ih_P = 0;
+  int ih_Q = 0;
   float fA = 0.f;
   float fd_A = 0.f;
   float fB = 0.f;
@@ -84,6 +95,11 @@ int main() {
   double dd_Workspace = 0.f;
   double drWork = 0.f;
   double dh_R_nrmF = 0.f;
+  double dzero = 0.f;
+  double dboost = 0.f;
+  double dh_csrValA = 0.f;
+  double dh_csrValL = 0.f;
+  double dh_csrValU = 0.f;
   void *Workspace = nullptr;
   size_t lwork_bytes = 0;
 
@@ -516,6 +532,76 @@ int main() {
   // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnZgesvd(hipsolverHandle_t handle, signed char jobu, signed char jobv, int m, int n, hipDoubleComplex* A, int lda, double* S, hipDoubleComplex* U, int ldu, hipDoubleComplex* V, int ldv, hipDoubleComplex* work, int lwork, double* rwork, int* devInfo);
   // CHECK: status = hipsolverDnZgesvd(handle, jobu, jobvt, m, n, &dComplexA, lda, &dS, &dComplexU, ldu, &dComplexVT, ldvt, &dComplexWorkspace, Lwork, &drWork, &info);
   status = cusolverDnZgesvd(handle, jobu, jobvt, m, n, &dComplexA, lda, &dS, &dComplexU, ldu, &dComplexVT, ldvt, &dComplexWorkspace, Lwork, &drWork, &info);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverRfCreate(cusolverRfHandle_t* handle);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverRfCreate(hipsolverRfHandle_t* handle);
+  // CHECK: status = hipsolverRfCreate(&RfHandle);
+  status = cusolverRfCreate(&RfHandle);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverRfDestroy(cusolverRfHandle_t handle);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverRfDestroy(hipsolverRfHandle_t handle);
+  // CHECK: status = hipsolverRfDestroy(RfHandle);
+  status = cusolverRfDestroy(RfHandle);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverRfGetMatrixFormat(cusolverRfHandle_t handle, cusolverRfMatrixFormat_t* format, cusolverRfUnitDiagonal_t* diag);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverRfGetMatrixFormat(hipsolverRfHandle_t handle, hipsolverRfMatrixFormat_t* format, hipsolverRfUnitDiagonal_t* diag);
+  // CHECK: status = hipsolverRfGetMatrixFormat(RfHandle, &RfMatrixFormat, &RfUnitDiagonal);
+  status = cusolverRfGetMatrixFormat(RfHandle, &RfMatrixFormat, &RfUnitDiagonal);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverRfSetMatrixFormat(cusolverRfHandle_t handle, cusolverRfMatrixFormat_t format, cusolverRfUnitDiagonal_t diag);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverRfSetMatrixFormat(hipsolverRfHandle_t handle, hipsolverRfMatrixFormat_t format, hipsolverRfUnitDiagonal_t diag);
+  // CHECK: status = hipsolverRfSetMatrixFormat(RfHandle, RfMatrixFormat, RfUnitDiagonal);
+  status = cusolverRfSetMatrixFormat(RfHandle, RfMatrixFormat, RfUnitDiagonal);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverRfSetNumericProperties(cusolverRfHandle_t handle, double zero, double boost);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverRfSetNumericProperties(hipsolverRfHandle_t handle, double effective_zero, double boost_val);
+  // CHECK: status = hipsolverRfSetNumericProperties(RfHandle, dzero, dboost);
+  status = cusolverRfSetNumericProperties(RfHandle, dzero, dboost);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverRfGetNumericProperties(cusolverRfHandle_t handle, double* zero, double* boost);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverRfGetNumericProperties(hipsolverRfHandle_t handle, double* zero, double* boost);
+  // CHECK: status = hipsolverRfGetNumericProperties(RfHandle, &dzero, &dboost);
+  status = cusolverRfGetNumericProperties(RfHandle, &dzero, &dboost);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverRfGetNumericBoostReport(cusolverRfHandle_t handle, cusolverRfNumericBoostReport_t* report);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverRfGetNumericBoostReport(hipsolverRfHandle_t handle, hipsolverRfNumericBoostReport_t* report);
+  // CHECK: status = hipsolverRfGetNumericBoostReport(RfHandle, &RfNumericBoostReport);
+  status = cusolverRfGetNumericBoostReport(RfHandle, &RfNumericBoostReport);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverRfSetAlgs(cusolverRfHandle_t handle, cusolverRfFactorization_t factAlg, cusolverRfTriangularSolve_t solveAlg);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverRfSetAlgs(hipsolverRfHandle_t handle, hipsolverRfFactorization_t fact_alg, hipsolverRfTriangularSolve_t solve_alg);
+  // CHECK: status = hipsolverRfSetAlgs(RfHandle, RfFactorization, RfTriangularSolve);
+  status = cusolverRfSetAlgs(RfHandle, RfFactorization, RfTriangularSolve);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverRfGetResetValuesFastMode(cusolverRfHandle_t handle, cusolverRfResetValuesFastMode_t* fastMode);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverRfGetResetValuesFastMode(hipsolverRfHandle_t handle, hipsolverRfResetValuesFastMode_t* fastMode);
+  // CHECK: status = hipsolverRfGetResetValuesFastMode(RfHandle, &RfResetValuesFastMode);
+  status = cusolverRfGetResetValuesFastMode(RfHandle, &RfResetValuesFastMode);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverRfGetResetValuesFastMode(cusolverRfHandle_t handle, cusolverRfResetValuesFastMode_t* fastMode);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverRfGetResetValuesFastMode(hipsolverRfHandle_t handle, hipsolverRfResetValuesFastMode_t* fastMode);
+  // CHECK: status = hipsolverRfGetResetValuesFastMode(RfHandle, &RfResetValuesFastMode);
+  status = cusolverRfGetResetValuesFastMode(RfHandle, &RfResetValuesFastMode);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverRfSetResetValuesFastMode(cusolverRfHandle_t handle, cusolverRfResetValuesFastMode_t fastMode);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverRfSetResetValuesFastMode(hipsolverRfHandle_t handle, hipsolverRfResetValuesFastMode_t fastMode);
+  // CHECK: status = hipsolverRfSetResetValuesFastMode(RfHandle, RfResetValuesFastMode);
+  status = cusolverRfSetResetValuesFastMode(RfHandle, RfResetValuesFastMode);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverRfSetupHost(int n, int nnzA, int* h_csrRowPtrA, int* h_csrColIndA, double* h_csrValA, int nnzL, int* h_csrRowPtrL, int* h_csrColIndL, double* h_csrValL, int nnzU, int* h_csrRowPtrU, int* h_csrColIndU, double* h_csrValU, int* h_P, int* h_Q, cusolverRfHandle_t handle);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverRfSetupHost(int n, int nnzA, int* h_csrRowPtrA, int* h_csrColIndA, double* h_csrValA, int nnzL, int* h_csrRowPtrL, int* h_csrColIndL, double* h_csrValL, int nnzU, int* h_csrRowPtrU, int* h_csrColIndU, double* h_csrValU, int* h_P, int* h_Q, hipsolverRfHandle_t handle);
+  // CHECK: status = hipsolverRfSetupHost(n, nnzA, &ih_csrRowPtrA, &ih_csrColIndA, &dh_csrValA, nnzL, &ih_csrRowPtrL, &ih_csrColIndL, &dh_csrValL, nnzU, &ih_csrRowPtrU, &ih_csrColIndU, &dh_csrValU, &ih_P, &ih_Q, RfHandle);
+  status = cusolverRfSetupHost(n, nnzA, &ih_csrRowPtrA, &ih_csrColIndA, &dh_csrValA, nnzL, &ih_csrRowPtrL, &ih_csrColIndL, &dh_csrValL, nnzU, &ih_csrRowPtrU, &ih_csrColIndU, &dh_csrValU, &ih_P, &ih_Q, RfHandle);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverRfSetupDevice(int n, int nnzA, int* csrRowPtrA, int* csrColIndA, double* csrValA, int nnzL, int* csrRowPtrL, int* csrColIndL, double* csrValL, int nnzU, int* csrRowPtrU, int* csrColIndU, double* csrValU, int* P, int* Q, cusolverRfHandle_t handle);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverRfSetupDevice(int n, int nnzA, int* csrRowPtrA, int* csrColIndA, double* csrValA, int nnzL, int* csrRowPtrL, int* csrColIndL, double* csrValL, int nnzU, int* csrRowPtrU, int* csrColIndU, double* csrValU, int* P, int* Q, hipsolverRfHandle_t handle);
+  // CHECK: status = hipsolverRfSetupDevice(n, nnzA, &ih_csrRowPtrA, &ih_csrColIndA, &dh_csrValA, nnzL, &ih_csrRowPtrL, &ih_csrColIndL, &dh_csrValL, nnzU, &ih_csrRowPtrU, &ih_csrColIndU, &dh_csrValU, &ih_P, &ih_Q, RfHandle);
+  status = cusolverRfSetupDevice(n, nnzA, &ih_csrRowPtrA, &ih_csrColIndA, &dh_csrValA, nnzL, &ih_csrRowPtrL, &ih_csrColIndL, &dh_csrValL, nnzU, &ih_csrRowPtrU, &ih_csrColIndU, &dh_csrValU, &ih_P, &ih_Q, RfHandle);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverRfResetValues(int n, int nnzA, int* csrRowPtrA, int* csrColIndA, double* csrValA, int* P, int* Q, cusolverRfHandle_t handle);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverRfResetValues(int n, int nnzA, int* csrRowPtrA, int* csrColIndA, double* csrValA, int* P, int* Q, hipsolverRfHandle_t handle);
+  // CHECK: status = hipsolverRfResetValues(n, nnzA, &ih_csrRowPtrA, &ih_csrColIndA, &dh_csrValA, &ih_P, &ih_Q, RfHandle);
+  status = cusolverRfResetValues(n, nnzA, &ih_csrRowPtrA, &ih_csrColIndA, &dh_csrValA, &ih_P, &ih_Q, RfHandle);
 
 #if CUDA_VERSION >= 8000
   // CHECK: hipsolverEigType_t eigType;

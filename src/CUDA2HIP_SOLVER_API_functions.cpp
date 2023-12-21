@@ -491,6 +491,26 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SOLVER_FUNCTION_MAP {
   {"cusolverMgPotrs",                                    {"hipsolverMgPotrs",                                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
   {"cusolverMgPotri_bufferSize",                         {"hipsolverMgPotri_bufferSize",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
   {"cusolverMgPotri",                                    {"hipsolverMgPotri",                                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  // NOTE: rocsolver_create_rfinfo have a harness of other ROC and HIP API calls
+  {"cusolverRfCreate",                                   {"hipsolverRfCreate",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  // NOTE: rocsolver_destroy_rfinfo have a harness of other ROC and HIP API calls
+  {"cusolverRfDestroy",                                  {"hipsolverRfDestroy",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  // no ROC analogues
+  {"cusolverRfGetMatrixFormat",                          {"hipsolverRfGetMatrixFormat",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  {"cusolverRfSetMatrixFormat",                          {"hipsolverRfSetMatrixFormat",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  {"cusolverRfSetNumericProperties",                     {"hipsolverRfSetNumericProperties",                       "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  {"cusolverRfGetNumericProperties",                     {"hipsolverRfGetNumericProperties",                       "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  {"cusolverRfGetNumericBoostReport",                    {"hipsolverRfGetNumericBoostReport",                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  {"cusolverRfSetAlgs",                                  {"hipsolverRfSetAlgs",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  {"cusolverRfGetAlgs",                                  {"hipsolverRfGetAlgs",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverRfGetResetValuesFastMode",                   {"hipsolverRfGetResetValuesFastMode",                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  {"cusolverRfSetResetValuesFastMode",                   {"hipsolverRfSetResetValuesFastMode",                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  // NOTE: rocsolver_dcsrrf_sumlu have a harness of other ROC and HIP API calls
+  {"cusolverRfSetupHost",                                {"hipsolverRfSetupHost",                                  "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  // NOTE: rocsolver_dcsrrf_sumlu have a harness of other ROC and HIP API calls
+  {"cusolverRfSetupDevice",                              {"hipsolverRfSetupDevice",                                "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  // no ROC analogues
+  {"cusolverRfResetValues",                              {"hipsolverRfResetValues",                                "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_SOLVER_FUNCTION_VER_MAP {
@@ -1060,6 +1080,19 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SOLVER_FUNCTION_VER_MAP {
   {"hipsolverDnDgesvdaStridedBatched",                    {HIP_5040, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipsolverDnCgesvdaStridedBatched",                    {HIP_5040, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipsolverDnZgesvdaStridedBatched",                    {HIP_5040, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverRfCreate",                                   {HIP_5060, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverRfDestroy",                                  {HIP_5060, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverRfGetMatrixFormat",                          {HIP_5060, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverRfSetMatrixFormat",                          {HIP_5060, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverRfSetNumericProperties",                     {HIP_5060, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverRfGetNumericProperties",                     {HIP_5060, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverRfGetNumericBoostReport",                    {HIP_5060, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverRfSetAlgs",                                  {HIP_5060, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverRfGetResetValuesFastMode",                   {HIP_5060, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverRfSetResetValuesFastMode",                   {HIP_5060, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverRfSetupHost",                                {HIP_5060, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverRfSetupDevice",                              {HIP_5060, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverRfResetValues",                              {HIP_5060, HIP_0,    HIP_0,  HIP_LATEST}},
 
   {"rocsolver_spotrf",                                    {HIP_3020, HIP_0,    HIP_0,  HIP_LATEST}},
   {"rocsolver_dpotrf",                                    {HIP_3020, HIP_0,    HIP_0,  HIP_LATEST}},
