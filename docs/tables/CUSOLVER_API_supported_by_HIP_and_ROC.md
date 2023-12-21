@@ -539,13 +539,24 @@
 |`cusolverMgPotrs_bufferSize`|11.0| | | | | | | | | | | | | | | |
 |`cusolverMgSyevd`|10.1| | | | | | | | | | | | | | | |
 |`cusolverMgSyevd_bufferSize`|10.1| | | | | | | | | | | | | | | |
+|`cusolverRfAccessBundledFactorsDevice`| | | | |`hipsolverRfAccessBundledFactorsDevice`|5.6.0| | | |6.1.0| | | | | | |
+|`cusolverRfAnalyze`| | | | |`hipsolverRfAnalyze`|5.6.0| | | |6.1.0| | | | | | |
+|`cusolverRfBatchAnalyze`| | | | |`hipsolverRfBatchAnalyze`|5.6.0| | | |6.1.0| | | | | | |
+|`cusolverRfBatchRefactor`| | | | |`hipsolverRfBatchRefactor`|5.6.0| | | |6.1.0| | | | | | |
+|`cusolverRfBatchResetValues`| | | | |`hipsolverRfBatchResetValues`|5.6.0| | | |6.1.0| | | | | | |
+|`cusolverRfBatchSetupHost`| | | | |`hipsolverRfBatchSetupHost`|5.6.0| | | |6.1.0| | | | | | |
+|`cusolverRfBatchSolve`| | | | |`hipsolverRfBatchSolve`|5.6.0| | | |6.1.0| | | | | | |
+|`cusolverRfBatchZeroPivot`| | | | |`hipsolverRfBatchZeroPivot`|5.6.0| | | |6.1.0| | | | | | |
 |`cusolverRfCreate`| | | | |`hipsolverRfCreate`|5.6.0| | | |6.1.0| | | | | | |
 |`cusolverRfDestroy`| | | | |`hipsolverRfDestroy`|5.6.0| | | |6.1.0| | | | | | |
+|`cusolverRfExtractBundledFactorsHost`| | | | |`hipsolverRfExtractBundledFactorsHost`|5.6.0| | | |6.1.0| | | | | | |
+|`cusolverRfExtractSplitFactorsHost`| | | | |`hipsolverRfExtractSplitFactorsHost`|5.6.0| | | |6.1.0| | | | | | |
 |`cusolverRfGetAlgs`| | | | | | | | | | | | | | | | |
 |`cusolverRfGetMatrixFormat`| | | | |`hipsolverRfGetMatrixFormat`|5.6.0| | | |6.1.0| | | | | | |
 |`cusolverRfGetNumericBoostReport`| | | | |`hipsolverRfGetNumericBoostReport`|5.6.0| | | |6.1.0| | | | | | |
 |`cusolverRfGetNumericProperties`| | | | |`hipsolverRfGetNumericProperties`|5.6.0| | | |6.1.0| | | | | | |
 |`cusolverRfGetResetValuesFastMode`| | | | |`hipsolverRfGetResetValuesFastMode`|5.6.0| | | |6.1.0| | | | | | |
+|`cusolverRfRefactor`| | | | |`hipsolverRfRefactor`|5.6.0| | | |6.1.0| | | | | | |
 |`cusolverRfResetValues`| | | | |`hipsolverRfResetValues`|5.6.0| | | |6.1.0| | | | | | |
 |`cusolverRfSetAlgs`| | | | |`hipsolverRfSetAlgs`|5.6.0| | | |6.1.0| | | | | | |
 |`cusolverRfSetMatrixFormat`| | | | |`hipsolverRfSetMatrixFormat`|5.6.0| | | |6.1.0| | | | | | |
@@ -553,6 +564,7 @@
 |`cusolverRfSetResetValuesFastMode`| | | | |`hipsolverRfSetResetValuesFastMode`|5.6.0| | | |6.1.0| | | | | | |
 |`cusolverRfSetupDevice`| | | | |`hipsolverRfSetupDevice`|5.6.0| | | |6.1.0| | | | | | |
 |`cusolverRfSetupHost`| | | | |`hipsolverRfSetupHost`|5.6.0| | | |6.1.0| | | | | | |
+|`cusolverRfSolve`| | | | |`hipsolverRfSolve`|5.6.0| | | |6.1.0| | | | | | |
 
 
 \*A - Added; D - Deprecated; C - Changed; R - Removed; E - Experimental

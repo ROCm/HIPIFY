@@ -10,10 +10,13 @@
 int main() {
   printf("19. cuSOLVER API to hipSOLVER API synthetic test\n");
 
+  int ldt = 0;
+  int ldxf = 0;
   int m = 0;
   int n = 0;
   int nnzA = 0;
   int nnzL = 0;
+  int nnzM = 0;
   int nnzU = 0;
   int k = 0;
   int il = 0;
@@ -41,11 +44,18 @@ int main() {
   int ih_csrRowPtrA = 0;
   int ih_csrColIndA = 0;
   int ih_csrRowPtrL = 0;
+  int *pih_csrRowPtrL = nullptr;
   int ih_csrColIndL = 0;
+  int *pih_csrColIndL = nullptr;
   int ih_csrRowPtrU = 0;
+  int *pih_csrRowPtrU = nullptr;
   int ih_csrColIndU = 0;
+  int *pih_csrColIndU = nullptr;
+  int ih_nnzL = 0;
+  int ih_nnzU = 0;
   int ih_P = 0;
   int ih_Q = 0;
+  int iposition = 0;
   float fA = 0.f;
   float fd_A = 0.f;
   float fB = 0.f;
@@ -82,6 +92,7 @@ int main() {
   double dd_V = 0.f;
   double dVT = 0.f;
   double dX = 0.f;
+  double dXF = 0.f;
   double dW = 0.f;
   double dTAU = 0.f;
   double dTAUQ = 0.f;
@@ -99,8 +110,14 @@ int main() {
   double dboost = 0.f;
   double dh_csrValA = 0.f;
   double dh_csrValL = 0.f;
+  double *pdh_csrValL = nullptr;
   double dh_csrValU = 0.f;
+  double *pdh_csrValU = nullptr;
+  double dTemp = 0.f;
   void *Workspace = nullptr;
+  int *piMp = nullptr;
+  int *piMi = nullptr;
+  double *pdMx = nullptr;
   size_t lwork_bytes = 0;
 
   signed char jobu = 0;
@@ -602,6 +619,66 @@ int main() {
   // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverRfResetValues(int n, int nnzA, int* csrRowPtrA, int* csrColIndA, double* csrValA, int* P, int* Q, hipsolverRfHandle_t handle);
   // CHECK: status = hipsolverRfResetValues(n, nnzA, &ih_csrRowPtrA, &ih_csrColIndA, &dh_csrValA, &ih_P, &ih_Q, RfHandle);
   status = cusolverRfResetValues(n, nnzA, &ih_csrRowPtrA, &ih_csrColIndA, &dh_csrValA, &ih_P, &ih_Q, RfHandle);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverRfAnalyze(cusolverRfHandle_t handle);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverRfAnalyze(hipsolverRfHandle_t handle);
+  // CHECK: status = hipsolverRfAnalyze(RfHandle);
+  status = cusolverRfAnalyze(RfHandle);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverRfRefactor(cusolverRfHandle_t handle);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverRfRefactor(hipsolverRfHandle_t handle);
+  // CHECK: status = hipsolverRfRefactor(RfHandle);
+  status = cusolverRfRefactor(RfHandle);
+
+  // CUDA: cusolverRfAccessBundledFactorsDevice(cusolverRfHandle_t handle, int* nnzM, int** Mp, int** Mi, double** Mx);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverRfAccessBundledFactorsDevice(hipsolverRfHandle_t handle, int* nnzM, int** Mp, int** Mi, double** Mx);
+  // CHECK: status = hipsolverRfAccessBundledFactorsDevice(RfHandle, &nnzM, &piMp, &piMi, &pdMx);
+  status = cusolverRfAccessBundledFactorsDevice(RfHandle, &nnzM, &piMp, &piMi, &pdMx);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverRfExtractBundledFactorsHost(cusolverRfHandle_t handle, int* h_nnzM, int** h_Mp, int** h_Mi, double** h_Mx);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverRfExtractBundledFactorsHost(hipsolverRfHandle_t handle, int* h_nnzM, int** h_Mp, int** h_Mi, double** h_Mx);
+  // CHECK: status = hipsolverRfExtractBundledFactorsHost(RfHandle, &nnzM, &piMp, &piMi, &pdMx);
+  status = cusolverRfExtractBundledFactorsHost(RfHandle, &nnzM, &piMp, &piMi, &pdMx);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverRfExtractSplitFactorsHost(cusolverRfHandle_t handle, int* h_nnzL, int** h_csrRowPtrL, int** h_csrColIndL, double** h_csrValL, int* h_nnzU, int** h_csrRowPtrU, int** h_csrColIndU, double** h_csrValU);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverRfExtractSplitFactorsHost(hipsolverRfHandle_t handle, int* h_nnzL, int** h_Lp, int** h_Li, double** h_Lx, int* h_nnzU, int** h_Up, int** h_Ui, double** h_Ux);
+  // CHECK: status = hipsolverRfExtractSplitFactorsHost(RfHandle, &ih_nnzL, &pih_csrRowPtrL, &pih_csrColIndL, &pdh_csrValL, &ih_nnzU, &pih_csrRowPtrU, &pih_csrColIndU, &pdh_csrValU);
+  status = cusolverRfExtractSplitFactorsHost(RfHandle, &ih_nnzL, &pih_csrRowPtrL, &pih_csrColIndL, &pdh_csrValL, &ih_nnzU, &pih_csrRowPtrU, &pih_csrColIndU, &pdh_csrValU);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverRfSolve( cusolverRfHandle_t handle, int* P, int* Q, int nrhs, double* Temp, int ldt, double* XF, int ldxf);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverRfSolve(hipsolverRfHandle_t handle, int* P, int* Q, int nrhs, double* Temp, int ldt, double* XF, int ldxf);
+  // CHECK: status = hipsolverRfSolve(RfHandle, &ih_P, &ih_Q, nrhs, &dTemp, ldt, &dXF, ldxf);
+  status = cusolverRfSolve(RfHandle, &ih_P, &ih_Q, nrhs, &dTemp, ldt, &dXF, ldxf);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverRfBatchSetupHost( int batchSize, int n, int nnzA, int* h_csrRowPtrA, int* h_csrColIndA, double* h_csrValA_array[], int nnzL, int* h_csrRowPtrL, int* h_csrColIndL, double* h_csrValL, int nnzU, int* h_csrRowPtrU, int* h_csrColIndU, double* h_csrValU, int* h_P, int* h_Q, cusolverRfHandle_t handle);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverRfBatchSetupHost(int batchSize, int n, int nnzA, int* h_csrRowPtrA, int* h_csrColIndA, double* h_csrValA_array[], int nnzL, int* h_csrRowPtrL, int* h_csrColIndL, double* h_csrValL, int nnzU, int* h_csrRowPtrU, int* h_csrColIndU, double* h_csrValU, int* h_P, int* h_Q, hipsolverRfHandle_t handle);
+  // CHECK: status = hipsolverRfBatchSetupHost(batchSize, n, nnzA, &ih_csrRowPtrA, &ih_csrColIndA, dAarray, nnzL, &ih_csrRowPtrL, &ih_csrColIndL, &dh_csrValL, nnzU, &ih_csrRowPtrU, &ih_csrColIndU, &dh_csrValU, &ih_P, &ih_Q, RfHandle);
+  status = cusolverRfBatchSetupHost(batchSize, n, nnzA, &ih_csrRowPtrA, &ih_csrColIndA, dAarray, nnzL, &ih_csrRowPtrL, &ih_csrColIndL, &dh_csrValL, nnzU, &ih_csrRowPtrU, &ih_csrColIndU, &dh_csrValU, &ih_P, &ih_Q, RfHandle);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverRfBatchResetValues(int batchSize, int n, int nnzA, int* csrRowPtrA, int* csrColIndA, double* csrValA_array[], int* P, int* Q, cusolverRfHandle_t handle);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverRfBatchResetValues(int batchSize, int n, int nnzA, int* csrRowPtrA, int* csrColIndA, double* csrValA_array[], int* P, int* Q, hipsolverRfHandle_t handle);
+  // CHECK: status = hipsolverRfBatchResetValues(batchSize, n, nnzA, &ih_csrRowPtrA, &ih_csrColIndA, dAarray, &ih_P, &ih_Q, RfHandle);
+  status = cusolverRfBatchResetValues(batchSize, n, nnzA, &ih_csrRowPtrA, &ih_csrColIndA, dAarray, &ih_P, &ih_Q, RfHandle);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverRfBatchAnalyze(cusolverRfHandle_t handle);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverRfBatchAnalyze(hipsolverRfHandle_t handle);
+  // CHECK: status = hipsolverRfBatchAnalyze(RfHandle);
+  status = cusolverRfBatchAnalyze(RfHandle);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverRfBatchRefactor(cusolverRfHandle_t handle);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverRfBatchRefactor(hipsolverRfHandle_t handle);
+  // CHECK: status = hipsolverRfBatchRefactor(RfHandle);
+  status = cusolverRfBatchRefactor(RfHandle);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverRfBatchSolve(cusolverRfHandle_t handle, int* P, int* Q, int nrhs, double* Temp, int ldt, double* XF_array[], int ldxf);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverRfBatchSolve(hipsolverRfHandle_t handle, int* P, int* Q, int nrhs, double* Temp, int ldt, double* XF_array[], int ldxf);
+  // CHECK: status = hipsolverRfBatchSolve(RfHandle, &ih_P, &ih_Q, nrhs, &dTemp, ldt, dAarray, ldxf);
+  status = cusolverRfBatchSolve(RfHandle, &ih_P, &ih_Q, nrhs, &dTemp, ldt, dAarray, ldxf);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverRfBatchZeroPivot(cusolverRfHandle_t handle, int* position);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverRfBatchZeroPivot(hipsolverRfHandle_t handle, int* position);
+  // CHECK: status = hipsolverRfBatchZeroPivot(RfHandle, &iposition);
+  status = cusolverRfBatchZeroPivot(RfHandle, &iposition);
 
 #if CUDA_VERSION >= 8000
   // CHECK: hipsolverEigType_t eigType;
