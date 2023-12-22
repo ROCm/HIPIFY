@@ -96,6 +96,8 @@
 |`CUSOLVER_STATUS_NOT_SUPPORTED`| | | | |`rocblas_status_not_implemented`|1.5.0| | | |6.1.0|
 |`CUSOLVER_STATUS_SUCCESS`| | | | |`rocblas_status_success`|3.0.0| | | |6.1.0|
 |`CUSOLVER_STATUS_ZERO_PIVOT`| | | | |`rocblas_status_not_implemented`|1.5.0| | | |6.1.0|
+|`csrqrInfo`| | | | | | | | | | |
+|`csrqrInfo_t`| | | | | | | | | | |
 |`cudaLibMgGrid_t`|10.1| | | | | | | | | |
 |`cudaLibMgMatrixDesc_t`|10.1| | | | | | | | | |
 |`cusolverAlgMode_t`|11.0| | | | | | | | | |
@@ -128,6 +130,8 @@
 |`cusolverRfResetValuesFastMode_t`| | | | | | | | | | |
 |`cusolverRfTriangularSolve_t`| | | | | | | | | | |
 |`cusolverRfUnitDiagonal_t`| | | | | | | | | | |
+|`cusolverSpContext`| | | | | | | | | | |
+|`cusolverSpHandle_t`| | | | | | | | | | |
 |`cusolverStatus_t`| | | | |`rocblas_status`|3.0.0| | | |6.1.0|
 |`cusolverStorevMode_t`|11.0| | | | | | | | | |
 |`cusolver_int_t`|10.1| | | |`rocblas_int`|3.0.0| | | |6.1.0|
@@ -565,6 +569,35 @@
 |`cusolverRfSetupDevice`| | | | | | | | | | |
 |`cusolverRfSetupHost`| | | | | | | | | | |
 |`cusolverRfSolve`| | | | | | | | | | |
+|`cusolverSpCcsrlsqvqrHost`| | | | | | | | | | |
+|`cusolverSpCcsrlsvchol`| | | | | | | | | | |
+|`cusolverSpCcsrlsvcholHost`| | | | | | | | | | |
+|`cusolverSpCcsrlsvluHost`| | | | | | | | | | |
+|`cusolverSpCcsrlsvqr`| | | | | | | | | | |
+|`cusolverSpCcsrlsvqrHost`| | | | | | | | | | |
+|`cusolverSpCreate`| | | | | | | | | | |
+|`cusolverSpDcsrlsqvqrHost`| | | | | | | | | | |
+|`cusolverSpDcsrlsvchol`| | | | | | | | | | |
+|`cusolverSpDcsrlsvcholHost`| | | | | | | | | | |
+|`cusolverSpDcsrlsvluHost`| | | | | | | | | | |
+|`cusolverSpDcsrlsvqr`| | | | | | | | | | |
+|`cusolverSpDcsrlsvqrHost`| | | | | | | | | | |
+|`cusolverSpDestroy`| | | | | | | | | | |
+|`cusolverSpGetStream`| | | | | | | | | | |
+|`cusolverSpScsrlsqvqrHost`| | | | | | | | | | |
+|`cusolverSpScsrlsvchol`| | | | | | | | | | |
+|`cusolverSpScsrlsvcholHost`| | | | | | | | | | |
+|`cusolverSpScsrlsvluHost`| | | | | | | | | | |
+|`cusolverSpScsrlsvqr`| | | | | | | | | | |
+|`cusolverSpScsrlsvqrHost`| | | | | | | | | | |
+|`cusolverSpSetStream`| | | | | | | | | | |
+|`cusolverSpXcsrissymHost`| | | | | | | | | | |
+|`cusolverSpZcsrlsqvqrHost`| | | | | | | | | | |
+|`cusolverSpZcsrlsvchol`| | | | | | | | | | |
+|`cusolverSpZcsrlsvcholHost`| | | | | | | | | | |
+|`cusolverSpZcsrlsvluHost`| | | | | | | | | | |
+|`cusolverSpZcsrlsvqr`| | | | | | | | | | |
+|`cusolverSpZcsrlsvqrHost`| | | | | | | | | | |
 
 
 \*A - Added; D - Deprecated; C - Changed; R - Removed; E - Experimental
