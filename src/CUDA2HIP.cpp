@@ -71,11 +71,12 @@ const std::map <llvm::StringRef, hipCounter> CUDA_INCLUDE_MAP {
   {"cusparse.h",                                            {"hipsparse.h",                                "rocsparse.h", CONV_INCLUDE_CUDA_MAIN_H,    API_SPARSE, 0}},
   {"cusparse_v2.h",                                         {"hipsparse.h",                                "rocsparse.h", CONV_INCLUDE_CUDA_MAIN_V2_H, API_SPARSE, 0}},
   // cuSOLVER includes
-  {"cusolverDn.h",                                          {"hipsolver.h",                      "rocsolver/rocsolver.h", CONV_INCLUDE,                API_SOLVER, 0}},
-  {"cusolverMg.h",                                          {"hipsolver.h",                      "rocsolver/rocsolver.h", CONV_INCLUDE,                API_SOLVER, 0}},
-  {"cusolverRf.h",                                          {"hipsolver.h",                      "rocsolver/rocsolver.h", CONV_INCLUDE,                API_SOLVER, 0}},
-  {"cusolverSp.h",                                          {"hipsolver.h",                      "rocsolver/rocsolver.h", CONV_INCLUDE,                API_SOLVER, 0}},
-  {"cusolver_common.h",                                     {"hipsolver.h",                      "rocsolver/rocsolver.h", CONV_INCLUDE,                API_SOLVER, 0}},
+  {"cusolverDn.h",                                          {"hipsolver.h",                      "rocsolver/rocsolver.h", CONV_INCLUDE_CUDA_MAIN_H,    API_SOLVER, 0}},
+  {"cusolverMg.h",                                          {"hipsolver.h",                      "rocsolver/rocsolver.h", CONV_INCLUDE_CUDA_MAIN_H,    API_SOLVER, 0}},
+  {"cusolverRf.h",                                          {"hipsolver.h",                      "rocsolver/rocsolver.h", CONV_INCLUDE_CUDA_MAIN_H,    API_SOLVER, 0}},
+  {"cusolverSp.h",                                          {"hipsolver.h",                      "rocsolver/rocsolver.h", CONV_INCLUDE_CUDA_MAIN_H,    API_SOLVER, 0}},
+  {"cusolverSp_LOWLEVEL_PREVIEW.h",                         {"hipsolver.h",                      "rocsolver/rocsolver.h", CONV_INCLUDE_CUDA_MAIN_H,    API_SOLVER, 0}},
+  {"cusolver_common.h",                                     {"hipsolver.h",                      "rocsolver/rocsolver.h", CONV_INCLUDE_CUDA_MAIN_H,    API_SOLVER, 0}},
   // CUB includes
   {"cub/cub.cuh",                                           {"hipcub/hipcub.hpp",                                     "", CONV_INCLUDE_CUDA_MAIN_H,    API_CUB, 0}},
   // CAFFE2 includes

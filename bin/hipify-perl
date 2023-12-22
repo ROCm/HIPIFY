@@ -4762,11 +4762,6 @@ sub simpleSubstitutions {
     subst("curand_poisson.h", "hiprand\/hiprand_kernel.h", "include");
     subst("curand_precalc.h", "hiprand\/hiprand_kernel.h", "include");
     subst("curand_uniform.h", "hiprand\/hiprand_kernel.h", "include");
-    subst("cusolverDn.h", "hipsolver.h", "include");
-    subst("cusolverMg.h", "hipsolver.h", "include");
-    subst("cusolverRf.h", "hipsolver.h", "include");
-    subst("cusolverSp.h", "hipsolver.h", "include");
-    subst("cusolver_common.h", "hipsolver.h", "include");
     subst("device_functions.h", "hip\/device_functions.h", "include");
     subst("driver_types.h", "hip\/driver_types.h", "include");
     subst("library_types.h", "hip\/library_types.h", "include");
@@ -4780,6 +4775,12 @@ sub simpleSubstitutions {
     subst("cudnn.h", "hipDNN.h", "include_cuda_main_header");
     subst("cufft.h", "hipfft\/hipfft.h", "include_cuda_main_header");
     subst("curand.h", "hiprand\/hiprand.h", "include_cuda_main_header");
+    subst("cusolverDn.h", "hipsolver.h", "include_cuda_main_header");
+    subst("cusolverMg.h", "hipsolver.h", "include_cuda_main_header");
+    subst("cusolverRf.h", "hipsolver.h", "include_cuda_main_header");
+    subst("cusolverSp.h", "hipsolver.h", "include_cuda_main_header");
+    subst("cusolverSp_LOWLEVEL_PREVIEW.h", "hipsolver.h", "include_cuda_main_header");
+    subst("cusolver_common.h", "hipsolver.h", "include_cuda_main_header");
     subst("cusparse.h", "hipsparse.h", "include_cuda_main_header");
     subst("nvrtc.h", "hiprtc.h", "include_cuda_main_header");
     subst("cublas_v2.h", "hipblas.h", "include_cuda_main_header_v2");
