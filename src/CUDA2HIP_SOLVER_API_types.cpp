@@ -155,6 +155,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SOLVER_TYPE_NAME_MAP {
   {"CUSOLVERRF_NUMERIC_BOOST_USED",                            {"HIPSOLVERRF_NUMERIC_BOOST_USED",                            "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED}},
   {"cusolverRfCommon",                                         {"hipsolverRfCommon",                                         "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
   {"cusolverRfHandle_t",                                       {"hipsolverRfHandle_t",                                       "",                                                                 CONV_TYPE, API_SOLVER, 1, ROC_UNSUPPORTED}},
+  {"cusolverSpContext",                                        {"hipsolverSpContext",                                        "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
+  {"cusolverSpHandle_t",                                       {"hipsolverSpHandle_t",                                       "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
+  {"csrqrInfo",                                                {"hipsolvercsrqrInfo",                                        "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
+  {"csrqrInfo_t",                                              {"hipsolvercsrqrInfo_t",                                      "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_SOLVER_TYPE_NAME_VER_MAP {
