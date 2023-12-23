@@ -569,35 +569,68 @@
 |`cusolverRfSetupDevice`| | | | | | | | | | |
 |`cusolverRfSetupHost`| | | | | | | | | | |
 |`cusolverRfSolve`| | | | | | | | | | |
+|`cusolverSpCcsreigsHost`| | | | | | | | | | |
+|`cusolverSpCcsreigvsi`| | | | | | | | | | |
+|`cusolverSpCcsreigvsiHost`| | | | | | | | | | |
 |`cusolverSpCcsrlsqvqrHost`| | | | | | | | | | |
 |`cusolverSpCcsrlsvchol`| | | | | | | | | | |
 |`cusolverSpCcsrlsvcholHost`| | | | | | | | | | |
 |`cusolverSpCcsrlsvluHost`| | | | | | | | | | |
 |`cusolverSpCcsrlsvqr`| | | | | | | | | | |
 |`cusolverSpCcsrlsvqrHost`| | | | | | | | | | |
+|`cusolverSpCcsrqrBufferInfoBatched`| | | | | | | | | | |
+|`cusolverSpCcsrqrsvBatched`| | | | | | | | | | |
+|`cusolverSpCcsrzfdHost`|9.2| | | | | | | | | |
 |`cusolverSpCreate`| | | | | | | | | | |
+|`cusolverSpCreateCsrqrInfo`| | | | | | | | | | |
+|`cusolverSpDcsreigsHost`| | | | | | | | | | |
+|`cusolverSpDcsreigvsi`| | | | | | | | | | |
+|`cusolverSpDcsreigvsiHost`| | | | | | | | | | |
 |`cusolverSpDcsrlsqvqrHost`| | | | | | | | | | |
 |`cusolverSpDcsrlsvchol`| | | | | | | | | | |
 |`cusolverSpDcsrlsvcholHost`| | | | | | | | | | |
 |`cusolverSpDcsrlsvluHost`| | | | | | | | | | |
 |`cusolverSpDcsrlsvqr`| | | | | | | | | | |
 |`cusolverSpDcsrlsvqrHost`| | | | | | | | | | |
+|`cusolverSpDcsrqrBufferInfoBatched`| | | | | | | | | | |
+|`cusolverSpDcsrqrsvBatched`| | | | | | | | | | |
+|`cusolverSpDcsrzfdHost`|9.2| | | | | | | | | |
 |`cusolverSpDestroy`| | | | | | | | | | |
+|`cusolverSpDestroyCsrqrInfo`| | | | | | | | | | |
 |`cusolverSpGetStream`| | | | | | | | | | |
+|`cusolverSpScsreigsHost`| | | | | | | | | | |
+|`cusolverSpScsreigvsi`| | | | | | | | | | |
+|`cusolverSpScsreigvsiHost`| | | | | | | | | | |
 |`cusolverSpScsrlsqvqrHost`| | | | | | | | | | |
 |`cusolverSpScsrlsvchol`| | | | | | | | | | |
 |`cusolverSpScsrlsvcholHost`| | | | | | | | | | |
 |`cusolverSpScsrlsvluHost`| | | | | | | | | | |
 |`cusolverSpScsrlsvqr`| | | | | | | | | | |
 |`cusolverSpScsrlsvqrHost`| | | | | | | | | | |
+|`cusolverSpScsrqrBufferInfoBatched`| | | | | | | | | | |
+|`cusolverSpScsrqrsvBatched`| | | | | | | | | | |
+|`cusolverSpScsrzfdHost`|9.2| | | | | | | | | |
 |`cusolverSpSetStream`| | | | | | | | | | |
 |`cusolverSpXcsrissymHost`| | | | | | | | | | |
+|`cusolverSpXcsrmetisndHost`|9.2| | | | | | | | | |
+|`cusolverSpXcsrpermHost`| | | | | | | | | | |
+|`cusolverSpXcsrperm_bufferSizeHost`| | | | | | | | | | |
+|`cusolverSpXcsrqrAnalysisBatched`| | | | | | | | | | |
+|`cusolverSpXcsrsymamdHost`|7.5| | | | | | | | | |
+|`cusolverSpXcsrsymmdqHost`|7.5| | | | | | | | | |
+|`cusolverSpXcsrsymrcmHost`| | | | | | | | | | |
+|`cusolverSpZcsreigsHost`| | | | | | | | | | |
+|`cusolverSpZcsreigvsi`| | | | | | | | | | |
+|`cusolverSpZcsreigvsiHost`| | | | | | | | | | |
 |`cusolverSpZcsrlsqvqrHost`| | | | | | | | | | |
 |`cusolverSpZcsrlsvchol`| | | | | | | | | | |
 |`cusolverSpZcsrlsvcholHost`| | | | | | | | | | |
 |`cusolverSpZcsrlsvluHost`| | | | | | | | | | |
 |`cusolverSpZcsrlsvqr`| | | | | | | | | | |
 |`cusolverSpZcsrlsvqrHost`| | | | | | | | | | |
+|`cusolverSpZcsrqrBufferInfoBatched`| | | | | | | | | | |
+|`cusolverSpZcsrqrsvBatched`| | | | | | | | | | |
+|`cusolverSpZcsrzfdHost`|9.2| | | | | | | | | |
 
 
 \*A - Added; D - Deprecated; C - Changed; R - Removed; E - Experimental
