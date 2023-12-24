@@ -159,6 +159,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SOLVER_TYPE_NAME_MAP {
   {"cusolverSpHandle_t",                                       {"hipsolverSpHandle_t",                                       "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
   {"csrqrInfo",                                                {"hipsolvercsrqrInfo",                                        "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
   {"csrqrInfo_t",                                              {"hipsolvercsrqrInfo_t",                                      "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
+  {"csrluInfoHost",                                            {"hipsolvercsrluInfoHost",                                    "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
+  {"csrluInfoHost_t",                                          {"hipsolvercsrluInfoHost_t",                                  "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
+  {"csrqrInfoHost",                                            {"hipsolvercsrqrInfoHost",                                    "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
+  {"csrqrInfoHost_t",                                          {"hipsolvercsrqrInfoHost_t",                                  "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
+  {"csrcholInfoHost",                                          {"hipsolvercsrcholInfoHost",                                  "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
+  {"csrcholInfoHost_t",                                        {"hipsolvercsrcholInfoHost_t",                                "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
+  {"csrcholInfo",                                              {"hipsolvercsrcholInfo",                                      "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
+  {"csrcholInfo_t",                                            {"hipsolvercsrcholInfo_t",                                    "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_SOLVER_TYPE_NAME_VER_MAP {
@@ -254,6 +262,14 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SOLVER_TYPE_NAME_VER_MAP {
   {"CUDALIBMG_GRID_MAPPING_COL_MAJOR",                         {CUDA_101, CUDA_0, CUDA_0}},
   {"cudaLibMgGrid_t",                                          {CUDA_101, CUDA_0, CUDA_0}},
   {"cudaLibMgMatrixDesc_t",                                    {CUDA_101, CUDA_0, CUDA_0}},
+  {"csrluInfoHost",                                            {CUDA_75,  CUDA_0, CUDA_0}},
+  {"csrluInfoHost_t",                                          {CUDA_75,  CUDA_0, CUDA_0}},
+  {"csrqrInfoHost",                                            {CUDA_75,  CUDA_0, CUDA_0}},
+  {"csrqrInfoHost_t",                                          {CUDA_75,  CUDA_0, CUDA_0}},
+  {"csrcholInfoHost",                                          {CUDA_75,  CUDA_0, CUDA_0}},
+  {"csrcholInfoHost_t",                                        {CUDA_75,  CUDA_0, CUDA_0}},
+  {"csrcholInfo",                                              {CUDA_75,  CUDA_0, CUDA_0}},
+  {"csrcholInfo_t",                                            {CUDA_75,  CUDA_0, CUDA_0}},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_SOLVER_TYPE_NAME_VER_MAP {
