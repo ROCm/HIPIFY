@@ -591,8 +591,17 @@
 |`cusolverSpCcsrluFactorHost`|7.5| | | | | | | | | | | | | | | |
 |`cusolverSpCcsrluSolveHost`|7.5| | | | | | | | | | | | | | | |
 |`cusolverSpCcsrluZeroPivotHost`|7.5| | | | | | | | | | | | | | | |
+|`cusolverSpCcsrqrBufferInfo`|7.5| | | | | | | | | | | | | | | |
 |`cusolverSpCcsrqrBufferInfoBatched`| | | | | | | | | | | | | | | | |
 |`cusolverSpCcsrqrBufferInfoHost`|7.5| | | | | | | | | | | | | | | |
+|`cusolverSpCcsrqrFactor`|7.5| | | | | | | | | | | | | | | |
+|`cusolverSpCcsrqrFactorHost`|7.5| | | | | | | | | | | | | | | |
+|`cusolverSpCcsrqrSetup`|7.5| | | | | | | | | | | | | | | |
+|`cusolverSpCcsrqrSetupHost`|7.5| | | | | | | | | | | | | | | |
+|`cusolverSpCcsrqrSolve`|7.5| | | | | | | | | | | | | | | |
+|`cusolverSpCcsrqrSolveHost`|7.5| | | | | | | | | | | | | | | |
+|`cusolverSpCcsrqrZeroPivot`|7.5| | | | | | | | | | | | | | | |
+|`cusolverSpCcsrqrZeroPivotHost`|7.5| | | | | | | | | | | | | | | |
 |`cusolverSpCcsrqrsvBatched`| | | | | | | | | | | | | | | | |
 |`cusolverSpCcsrzfdHost`|9.2| | | | | | | | | | | | | | | |
 |`cusolverSpCreate`| | | | | | | | | | | | | | | | |
@@ -613,8 +622,17 @@
 |`cusolverSpDcsrluFactorHost`|7.5| | | | | | | | | | | | | | | |
 |`cusolverSpDcsrluSolveHost`|7.5| | | | | | | | | | | | | | | |
 |`cusolverSpDcsrluZeroPivotHost`|7.5| | | | | | | | | | | | | | | |
+|`cusolverSpDcsrqrBufferInfo`|7.5| | | | | | | | | | | | | | | |
 |`cusolverSpDcsrqrBufferInfoBatched`| | | | | | | | | | | | | | | | |
 |`cusolverSpDcsrqrBufferInfoHost`|7.5| | | | | | | | | | | | | | | |
+|`cusolverSpDcsrqrFactor`|7.5| | | | | | | | | | | | | | | |
+|`cusolverSpDcsrqrFactorHost`|7.5| | | | | | | | | | | | | | | |
+|`cusolverSpDcsrqrSetup`|7.5| | | | | | | | | | | | | | | |
+|`cusolverSpDcsrqrSetupHost`|7.5| | | | | | | | | | | | | | | |
+|`cusolverSpDcsrqrSolve`|7.5| | | | | | | | | | | | | | | |
+|`cusolverSpDcsrqrSolveHost`|7.5| | | | | | | | | | | | | | | |
+|`cusolverSpDcsrqrZeroPivot`|7.5| | | | | | | | | | | | | | | |
+|`cusolverSpDcsrqrZeroPivotHost`|7.5| | | | | | | | | | | | | | | |
 |`cusolverSpDcsrqrsvBatched`| | | | | | | | | | | | | | | | |
 |`cusolverSpDcsrzfdHost`|9.2| | | | | | | | | | | | | | | |
 |`cusolverSpDestroy`| | | | | | | | | | | | | | | | |
@@ -636,8 +654,17 @@
 |`cusolverSpScsrluFactorHost`|7.5| | | | | | | | | | | | | | | |
 |`cusolverSpScsrluSolveHost`|7.5| | | | | | | | | | | | | | | |
 |`cusolverSpScsrluZeroPivotHost`|7.5| | | | | | | | | | | | | | | |
+|`cusolverSpScsrqrBufferInfo`|7.5| | | | | | | | | | | | | | | |
 |`cusolverSpScsrqrBufferInfoBatched`| | | | | | | | | | | | | | | | |
 |`cusolverSpScsrqrBufferInfoHost`|7.5| | | | | | | | | | | | | | | |
+|`cusolverSpScsrqrFactor`|7.5| | | | | | | | | | | | | | | |
+|`cusolverSpScsrqrFactorHost`|7.5| | | | | | | | | | | | | | | |
+|`cusolverSpScsrqrSetup`|7.5| | | | | | | | | | | | | | | |
+|`cusolverSpScsrqrSetupHost`|7.5| | | | | | | | | | | | | | | |
+|`cusolverSpScsrqrSolve`|7.5| | | | | | | | | | | | | | | |
+|`cusolverSpScsrqrSolveHost`|7.5| | | | | | | | | | | | | | | |
+|`cusolverSpScsrqrZeroPivot`|7.5| | | | | | | | | | | | | | | |
+|`cusolverSpScsrqrZeroPivotHost`|7.5| | | | | | | | | | | | | | | |
 |`cusolverSpScsrqrsvBatched`| | | | | | | | | | | | | | | | |
 |`cusolverSpScsrzfdHost`|9.2| | | | | | | | | | | | | | | |
 |`cusolverSpSetStream`| | | | | | | | | | | | | | | | |
@@ -647,6 +674,7 @@
 |`cusolverSpXcsrmetisndHost`|9.2| | | | | | | | | | | | | | | |
 |`cusolverSpXcsrpermHost`| | | | | | | | | | | | | | | | |
 |`cusolverSpXcsrperm_bufferSizeHost`| | | | | | | | | | | | | | | | |
+|`cusolverSpXcsrqrAnalysis`|7.5| | | | | | | | | | | | | | | |
 |`cusolverSpXcsrqrAnalysisBatched`| | | | | | | | | | | | | | | | |
 |`cusolverSpXcsrqrAnalysisHost`|7.5| | | | | | | | | | | | | | | |
 |`cusolverSpXcsrsymamdHost`|7.5| | | | | | | | | | | | | | | |
@@ -666,8 +694,17 @@
 |`cusolverSpZcsrluFactorHost`|7.5| | | | | | | | | | | | | | | |
 |`cusolverSpZcsrluSolveHost`|7.5| | | | | | | | | | | | | | | |
 |`cusolverSpZcsrluZeroPivotHost`|7.5| | | | | | | | | | | | | | | |
+|`cusolverSpZcsrqrBufferInfo`|7.5| | | | | | | | | | | | | | | |
 |`cusolverSpZcsrqrBufferInfoBatched`| | | | | | | | | | | | | | | | |
 |`cusolverSpZcsrqrBufferInfoHost`|7.5| | | | | | | | | | | | | | | |
+|`cusolverSpZcsrqrFactor`|7.5| | | | | | | | | | | | | | | |
+|`cusolverSpZcsrqrFactorHost`|7.5| | | | | | | | | | | | | | | |
+|`cusolverSpZcsrqrSetup`|7.5| | | | | | | | | | | | | | | |
+|`cusolverSpZcsrqrSetupHost`|7.5| | | | | | | | | | | | | | | |
+|`cusolverSpZcsrqrSolve`|7.5| | | | | | | | | | | | | | | |
+|`cusolverSpZcsrqrSolveHost`|7.5| | | | | | | | | | | | | | | |
+|`cusolverSpZcsrqrZeroPivot`|7.5| | | | | | | | | | | | | | | |
+|`cusolverSpZcsrqrZeroPivotHost`|7.5| | | | | | | | | | | | | | | |
 |`cusolverSpZcsrqrsvBatched`| | | | | | | | | | | | | | | | |
 |`cusolverSpZcsrzfdHost`|9.2| | | | | | | | | | | | | | | |
 
