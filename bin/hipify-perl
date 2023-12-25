@@ -1077,13 +1077,44 @@ my %removed_funcs = (
 
 my %experimental_funcs = (
     "cusolverStatus_t" => "6.1.0",
+    "cusolverRfSolve" => "6.1.0",
+    "cusolverRfSetupHost" => "6.1.0",
+    "cusolverRfSetupDevice" => "6.1.0",
+    "cusolverRfSetResetValuesFastMode" => "6.1.0",
+    "cusolverRfSetNumericProperties" => "6.1.0",
+    "cusolverRfSetMatrixFormat" => "6.1.0",
+    "cusolverRfSetAlgs" => "6.1.0",
+    "cusolverRfResetValues" => "6.1.0",
+    "cusolverRfRefactor" => "6.1.0",
+    "cusolverRfGetResetValuesFastMode" => "6.1.0",
+    "cusolverRfGetNumericProperties" => "6.1.0",
+    "cusolverRfGetNumericBoostReport" => "6.1.0",
+    "cusolverRfGetMatrixFormat" => "6.1.0",
+    "cusolverRfExtractSplitFactorsHost" => "6.1.0",
+    "cusolverRfExtractBundledFactorsHost" => "6.1.0",
+    "cusolverRfDestroy" => "6.1.0",
+    "cusolverRfCreate" => "6.1.0",
+    "cusolverRfBatchZeroPivot" => "6.1.0",
+    "cusolverRfBatchSolve" => "6.1.0",
+    "cusolverRfBatchSetupHost" => "6.1.0",
+    "cusolverRfBatchResetValues" => "6.1.0",
+    "cusolverRfBatchRefactor" => "6.1.0",
+    "cusolverRfBatchAnalyze" => "6.1.0",
+    "cusolverRfAnalyze" => "6.1.0",
+    "cusolverRfAccessBundledFactorsDevice" => "6.1.0",
     "cusolverEigType_t" => "6.1.0",
     "cusolverEigRange_t" => "6.1.0",
     "cusolverEigMode_t" => "6.1.0",
+    "cusolverDnZunmtr_bufferSize" => "6.1.0",
+    "cusolverDnZunmtr" => "6.1.0",
     "cusolverDnZunmqr_bufferSize" => "6.1.0",
     "cusolverDnZunmqr" => "6.1.0",
+    "cusolverDnZungtr_bufferSize" => "6.1.0",
+    "cusolverDnZungtr" => "6.1.0",
     "cusolverDnZungqr_bufferSize" => "6.1.0",
     "cusolverDnZungqr" => "6.1.0",
+    "cusolverDnZungbr_bufferSize" => "6.1.0",
+    "cusolverDnZungbr" => "6.1.0",
     "cusolverDnZsytrf_bufferSize" => "6.1.0",
     "cusolverDnZsytrf" => "6.1.0",
     "cusolverDnZpotrsBatched" => "6.1.0",
@@ -1093,9 +1124,33 @@ my %experimental_funcs = (
     "cusolverDnZpotrf_bufferSize" => "6.1.0",
     "cusolverDnZpotrfBatched" => "6.1.0",
     "cusolverDnZpotrf" => "6.1.0",
+    "cusolverDnZhetrd_bufferSize" => "6.1.0",
+    "cusolverDnZhetrd" => "6.1.0",
+    "cusolverDnZhegvj_bufferSize" => "6.1.0",
+    "cusolverDnZhegvj" => "6.1.0",
+    "cusolverDnZhegvdx_bufferSize" => "6.1.0",
+    "cusolverDnZhegvdx" => "6.1.0",
+    "cusolverDnZhegvd_bufferSize" => "6.1.0",
+    "cusolverDnZhegvd" => "6.1.0",
+    "cusolverDnZheevj_bufferSize" => "6.1.0",
+    "cusolverDnZheevjBatched_bufferSize" => "6.1.0",
+    "cusolverDnZheevjBatched" => "6.1.0",
+    "cusolverDnZheevj" => "6.1.0",
+    "cusolverDnZheevdx_bufferSize" => "6.1.0",
+    "cusolverDnZheevdx" => "6.1.0",
+    "cusolverDnZheevd_bufferSize" => "6.1.0",
+    "cusolverDnZheevd" => "6.1.0",
     "cusolverDnZgetrs" => "6.1.0",
     "cusolverDnZgetrf_bufferSize" => "6.1.0",
     "cusolverDnZgetrf" => "6.1.0",
+    "cusolverDnZgesvdj_bufferSize" => "6.1.0",
+    "cusolverDnZgesvdjBatched_bufferSize" => "6.1.0",
+    "cusolverDnZgesvdjBatched" => "6.1.0",
+    "cusolverDnZgesvdj" => "6.1.0",
+    "cusolverDnZgesvdaStridedBatched_bufferSize" => "6.1.0",
+    "cusolverDnZgesvdaStridedBatched" => "6.1.0",
+    "cusolverDnZgesvd_bufferSize" => "6.1.0",
+    "cusolverDnZgesvd" => "6.1.0",
     "cusolverDnZgeqrf_bufferSize" => "6.1.0",
     "cusolverDnZgeqrf" => "6.1.0",
     "cusolverDnZgebrd_bufferSize" => "6.1.0",
@@ -1104,8 +1159,34 @@ my %experimental_funcs = (
     "cusolverDnZZgesv" => "6.1.0",
     "cusolverDnZZgels_bufferSize" => "6.1.0",
     "cusolverDnZZgels" => "6.1.0",
+    "cusolverDnXsyevjSetTolerance" => "6.1.0",
+    "cusolverDnXsyevjSetSortEig" => "6.1.0",
+    "cusolverDnXsyevjSetMaxSweeps" => "6.1.0",
+    "cusolverDnXsyevjGetSweeps" => "6.1.0",
+    "cusolverDnXsyevjGetResidual" => "6.1.0",
+    "cusolverDnXgesvdjSetTolerance" => "6.1.0",
+    "cusolverDnXgesvdjSetSortEig" => "6.1.0",
+    "cusolverDnXgesvdjSetMaxSweeps" => "6.1.0",
+    "cusolverDnXgesvdjGetSweeps" => "6.1.0",
+    "cusolverDnXgesvdjGetResidual" => "6.1.0",
     "cusolverDnSsytrf_bufferSize" => "6.1.0",
     "cusolverDnSsytrf" => "6.1.0",
+    "cusolverDnSsytrd_bufferSize" => "6.1.0",
+    "cusolverDnSsytrd" => "6.1.0",
+    "cusolverDnSsygvj_bufferSize" => "6.1.0",
+    "cusolverDnSsygvj" => "6.1.0",
+    "cusolverDnSsygvdx_bufferSize" => "6.1.0",
+    "cusolverDnSsygvdx" => "6.1.0",
+    "cusolverDnSsygvd_bufferSize" => "6.1.0",
+    "cusolverDnSsygvd" => "6.1.0",
+    "cusolverDnSsyevj_bufferSize" => "6.1.0",
+    "cusolverDnSsyevjBatched_bufferSize" => "6.1.0",
+    "cusolverDnSsyevjBatched" => "6.1.0",
+    "cusolverDnSsyevj" => "6.1.0",
+    "cusolverDnSsyevdx_bufferSize" => "6.1.0",
+    "cusolverDnSsyevdx" => "6.1.0",
+    "cusolverDnSsyevd_bufferSize" => "6.1.0",
+    "cusolverDnSsyevd" => "6.1.0",
     "cusolverDnSpotrsBatched" => "6.1.0",
     "cusolverDnSpotrs" => "6.1.0",
     "cusolverDnSpotri_bufferSize" => "6.1.0",
@@ -1113,13 +1194,27 @@ my %experimental_funcs = (
     "cusolverDnSpotrf_bufferSize" => "6.1.0",
     "cusolverDnSpotrfBatched" => "6.1.0",
     "cusolverDnSpotrf" => "6.1.0",
+    "cusolverDnSormtr_bufferSize" => "6.1.0",
+    "cusolverDnSormtr" => "6.1.0",
     "cusolverDnSormqr_bufferSize" => "6.1.0",
     "cusolverDnSormqr" => "6.1.0",
+    "cusolverDnSorgtr_bufferSize" => "6.1.0",
+    "cusolverDnSorgtr" => "6.1.0",
     "cusolverDnSorgqr_bufferSize" => "6.1.0",
     "cusolverDnSorgqr" => "6.1.0",
+    "cusolverDnSorgbr_bufferSize" => "6.1.0",
+    "cusolverDnSorgbr" => "6.1.0",
     "cusolverDnSgetrs" => "6.1.0",
     "cusolverDnSgetrf_bufferSize" => "6.1.0",
     "cusolverDnSgetrf" => "6.1.0",
+    "cusolverDnSgesvdj_bufferSize" => "6.1.0",
+    "cusolverDnSgesvdjBatched_bufferSize" => "6.1.0",
+    "cusolverDnSgesvdjBatched" => "6.1.0",
+    "cusolverDnSgesvdj" => "6.1.0",
+    "cusolverDnSgesvdaStridedBatched_bufferSize" => "6.1.0",
+    "cusolverDnSgesvdaStridedBatched" => "6.1.0",
+    "cusolverDnSgesvd_bufferSize" => "6.1.0",
+    "cusolverDnSgesvd" => "6.1.0",
     "cusolverDnSgeqrf_bufferSize" => "6.1.0",
     "cusolverDnSgeqrf" => "6.1.0",
     "cusolverDnSgebrd_bufferSize" => "6.1.0",
@@ -1133,6 +1228,22 @@ my %experimental_funcs = (
     "cusolverDnGetStream" => "6.1.0",
     "cusolverDnDsytrf_bufferSize" => "6.1.0",
     "cusolverDnDsytrf" => "6.1.0",
+    "cusolverDnDsytrd_bufferSize" => "6.1.0",
+    "cusolverDnDsytrd" => "6.1.0",
+    "cusolverDnDsygvj_bufferSize" => "6.1.0",
+    "cusolverDnDsygvj" => "6.1.0",
+    "cusolverDnDsygvdx_bufferSize" => "6.1.0",
+    "cusolverDnDsygvdx" => "6.1.0",
+    "cusolverDnDsygvd_bufferSize" => "6.1.0",
+    "cusolverDnDsygvd" => "6.1.0",
+    "cusolverDnDsyevj_bufferSize" => "6.1.0",
+    "cusolverDnDsyevjBatched_bufferSize" => "6.1.0",
+    "cusolverDnDsyevjBatched" => "6.1.0",
+    "cusolverDnDsyevj" => "6.1.0",
+    "cusolverDnDsyevdx_bufferSize" => "6.1.0",
+    "cusolverDnDsyevdx" => "6.1.0",
+    "cusolverDnDsyevd_bufferSize" => "6.1.0",
+    "cusolverDnDsyevd" => "6.1.0",
     "cusolverDnDpotrsBatched" => "6.1.0",
     "cusolverDnDpotrs" => "6.1.0",
     "cusolverDnDpotri_bufferSize" => "6.1.0",
@@ -1140,28 +1251,52 @@ my %experimental_funcs = (
     "cusolverDnDpotrf_bufferSize" => "6.1.0",
     "cusolverDnDpotrfBatched" => "6.1.0",
     "cusolverDnDpotrf" => "6.1.0",
+    "cusolverDnDormtr_bufferSize" => "6.1.0",
+    "cusolverDnDormtr" => "6.1.0",
     "cusolverDnDormqr_bufferSize" => "6.1.0",
     "cusolverDnDormqr" => "6.1.0",
+    "cusolverDnDorgtr_bufferSize" => "6.1.0",
+    "cusolverDnDorgtr" => "6.1.0",
     "cusolverDnDorgqr_bufferSize" => "6.1.0",
     "cusolverDnDorgqr" => "6.1.0",
+    "cusolverDnDorgbr_bufferSize" => "6.1.0",
+    "cusolverDnDorgbr" => "6.1.0",
     "cusolverDnDgetrs" => "6.1.0",
     "cusolverDnDgetrf_bufferSize" => "6.1.0",
     "cusolverDnDgetrf" => "6.1.0",
+    "cusolverDnDgesvdj_bufferSize" => "6.1.0",
+    "cusolverDnDgesvdjBatched_bufferSize" => "6.1.0",
+    "cusolverDnDgesvdjBatched" => "6.1.0",
+    "cusolverDnDgesvdj" => "6.1.0",
+    "cusolverDnDgesvdaStridedBatched_bufferSize" => "6.1.0",
+    "cusolverDnDgesvdaStridedBatched" => "6.1.0",
+    "cusolverDnDgesvd_bufferSize" => "6.1.0",
+    "cusolverDnDgesvd" => "6.1.0",
     "cusolverDnDgeqrf_bufferSize" => "6.1.0",
     "cusolverDnDgeqrf" => "6.1.0",
     "cusolverDnDgebrd_bufferSize" => "6.1.0",
     "cusolverDnDgebrd" => "6.1.0",
+    "cusolverDnDestroySyevjInfo" => "6.1.0",
+    "cusolverDnDestroyGesvdjInfo" => "6.1.0",
     "cusolverDnDestroy" => "6.1.0",
     "cusolverDnDDgesv_bufferSize" => "6.1.0",
     "cusolverDnDDgesv" => "6.1.0",
     "cusolverDnDDgels_bufferSize" => "6.1.0",
     "cusolverDnDDgels" => "6.1.0",
+    "cusolverDnCunmtr_bufferSize" => "6.1.0",
+    "cusolverDnCunmtr" => "6.1.0",
     "cusolverDnCunmqr_bufferSize" => "6.1.0",
     "cusolverDnCunmqr" => "6.1.0",
+    "cusolverDnCungtr_bufferSize" => "6.1.0",
+    "cusolverDnCungtr" => "6.1.0",
     "cusolverDnCungqr_bufferSize" => "6.1.0",
     "cusolverDnCungqr" => "6.1.0",
+    "cusolverDnCungbr_bufferSize" => "6.1.0",
+    "cusolverDnCungbr" => "6.1.0",
     "cusolverDnCsytrf_bufferSize" => "6.1.0",
     "cusolverDnCsytrf" => "6.1.0",
+    "cusolverDnCreateSyevjInfo" => "6.1.0",
+    "cusolverDnCreateGesvdjInfo" => "6.1.0",
     "cusolverDnCreate" => "6.1.0",
     "cusolverDnCpotrsBatched" => "6.1.0",
     "cusolverDnCpotrs" => "6.1.0",
@@ -1170,9 +1305,33 @@ my %experimental_funcs = (
     "cusolverDnCpotrf_bufferSize" => "6.1.0",
     "cusolverDnCpotrfBatched" => "6.1.0",
     "cusolverDnCpotrf" => "6.1.0",
+    "cusolverDnChetrd_bufferSize" => "6.1.0",
+    "cusolverDnChetrd" => "6.1.0",
+    "cusolverDnChegvj_bufferSize" => "6.1.0",
+    "cusolverDnChegvj" => "6.1.0",
+    "cusolverDnChegvdx_bufferSize" => "6.1.0",
+    "cusolverDnChegvdx" => "6.1.0",
+    "cusolverDnChegvd_bufferSize" => "6.1.0",
+    "cusolverDnChegvd" => "6.1.0",
+    "cusolverDnCheevj_bufferSize" => "6.1.0",
+    "cusolverDnCheevjBatched_bufferSize" => "6.1.0",
+    "cusolverDnCheevjBatched" => "6.1.0",
+    "cusolverDnCheevj" => "6.1.0",
+    "cusolverDnCheevdx_bufferSize" => "6.1.0",
+    "cusolverDnCheevdx" => "6.1.0",
+    "cusolverDnCheevd_bufferSize" => "6.1.0",
+    "cusolverDnCheevd" => "6.1.0",
     "cusolverDnCgetrs" => "6.1.0",
     "cusolverDnCgetrf_bufferSize" => "6.1.0",
     "cusolverDnCgetrf" => "6.1.0",
+    "cusolverDnCgesvdj_bufferSize" => "6.1.0",
+    "cusolverDnCgesvdjBatched_bufferSize" => "6.1.0",
+    "cusolverDnCgesvdjBatched" => "6.1.0",
+    "cusolverDnCgesvdj" => "6.1.0",
+    "cusolverDnCgesvdaStridedBatched_bufferSize" => "6.1.0",
+    "cusolverDnCgesvdaStridedBatched" => "6.1.0",
+    "cusolverDnCgesvd_bufferSize" => "6.1.0",
+    "cusolverDnCgesvd" => "6.1.0",
     "cusolverDnCgeqrf_bufferSize" => "6.1.0",
     "cusolverDnCgeqrf" => "6.1.0",
     "cusolverDnCgebrd_bufferSize" => "6.1.0",
@@ -1344,9 +1503,33 @@ sub experimentalSubstitutions {
     subst("cusolverDnCgebrd_bufferSize", "hipsolverDnCgebrd_bufferSize", "library");
     subst("cusolverDnCgeqrf", "hipsolverDnCgeqrf", "library");
     subst("cusolverDnCgeqrf_bufferSize", "hipsolverDnCgeqrf_bufferSize", "library");
+    subst("cusolverDnCgesvd", "hipsolverDnCgesvd", "library");
+    subst("cusolverDnCgesvd_bufferSize", "hipsolverDnCgesvd_bufferSize", "library");
+    subst("cusolverDnCgesvdaStridedBatched", "hipsolverDnCgesvdaStridedBatched", "library");
+    subst("cusolverDnCgesvdaStridedBatched_bufferSize", "hipsolverDnCgesvdaStridedBatched_bufferSize", "library");
+    subst("cusolverDnCgesvdj", "hipsolverDnCgesvdj", "library");
+    subst("cusolverDnCgesvdjBatched", "hipsolverDnCgesvdjBatched", "library");
+    subst("cusolverDnCgesvdjBatched_bufferSize", "hipsolverDnCgesvdjBatched_bufferSize", "library");
+    subst("cusolverDnCgesvdj_bufferSize", "hipsolverDnCgesvdj_bufferSize", "library");
     subst("cusolverDnCgetrf", "hipsolverDnCgetrf", "library");
     subst("cusolverDnCgetrf_bufferSize", "hipsolverDnCgetrf_bufferSize", "library");
     subst("cusolverDnCgetrs", "hipsolverDnCgetrs", "library");
+    subst("cusolverDnCheevd", "hipsolverDnCheevd", "library");
+    subst("cusolverDnCheevd_bufferSize", "hipsolverDnCheevd_bufferSize", "library");
+    subst("cusolverDnCheevdx", "hipsolverDnCheevdx", "library");
+    subst("cusolverDnCheevdx_bufferSize", "hipsolverDnCheevdx_bufferSize", "library");
+    subst("cusolverDnCheevj", "hipsolverDnCheevj", "library");
+    subst("cusolverDnCheevjBatched", "hipsolverDnCheevjBatched", "library");
+    subst("cusolverDnCheevjBatched_bufferSize", "hipsolverDnCheevjBatched_bufferSize", "library");
+    subst("cusolverDnCheevj_bufferSize", "hipsolverDnCheevj_bufferSize", "library");
+    subst("cusolverDnChegvd", "hipsolverDnChegvd", "library");
+    subst("cusolverDnChegvd_bufferSize", "hipsolverDnChegvd_bufferSize", "library");
+    subst("cusolverDnChegvdx", "hipsolverDnChegvdx", "library");
+    subst("cusolverDnChegvdx_bufferSize", "hipsolverDnChegvdx_bufferSize", "library");
+    subst("cusolverDnChegvj", "hipsolverDnChegvj", "library");
+    subst("cusolverDnChegvj_bufferSize", "hipsolverDnChegvj_bufferSize", "library");
+    subst("cusolverDnChetrd", "hipsolverDnChetrd", "library");
+    subst("cusolverDnChetrd_bufferSize", "hipsolverDnChetrd_bufferSize", "library");
     subst("cusolverDnCpotrf", "hipsolverDnCpotrf", "library");
     subst("cusolverDnCpotrfBatched", "hipsolverDnCpotrfBatched", "library");
     subst("cusolverDnCpotrf_bufferSize", "hipsolverDnCpotrf_bufferSize", "library");
@@ -1355,28 +1538,52 @@ sub experimentalSubstitutions {
     subst("cusolverDnCpotrs", "hipsolverDnCpotrs", "library");
     subst("cusolverDnCpotrsBatched", "hipsolverDnCpotrsBatched", "library");
     subst("cusolverDnCreate", "hipsolverDnCreate", "library");
+    subst("cusolverDnCreateGesvdjInfo", "hipsolverDnCreateGesvdjInfo", "library");
+    subst("cusolverDnCreateSyevjInfo", "hipsolverDnCreateSyevjInfo", "library");
     subst("cusolverDnCsytrf", "hipsolverDnCsytrf", "library");
     subst("cusolverDnCsytrf_bufferSize", "hipsolverDnCsytrf_bufferSize", "library");
+    subst("cusolverDnCungbr", "hipsolverDnCungbr", "library");
+    subst("cusolverDnCungbr_bufferSize", "hipsolverDnCungbr_bufferSize", "library");
     subst("cusolverDnCungqr", "hipsolverDnCungqr", "library");
     subst("cusolverDnCungqr_bufferSize", "hipsolverDnCungqr_bufferSize", "library");
+    subst("cusolverDnCungtr", "hipsolverDnCungtr", "library");
+    subst("cusolverDnCungtr_bufferSize", "hipsolverDnCungtr_bufferSize", "library");
     subst("cusolverDnCunmqr", "hipsolverDnCunmqr", "library");
     subst("cusolverDnCunmqr_bufferSize", "hipsolverDnCunmqr_bufferSize", "library");
+    subst("cusolverDnCunmtr", "hipsolverDnCunmtr", "library");
+    subst("cusolverDnCunmtr_bufferSize", "hipsolverDnCunmtr_bufferSize", "library");
     subst("cusolverDnDDgels", "hipsolverDnDDgels", "library");
     subst("cusolverDnDDgels_bufferSize", "hipsolverDnDDgels_bufferSize", "library");
     subst("cusolverDnDDgesv", "hipsolverDnDDgesv", "library");
     subst("cusolverDnDDgesv_bufferSize", "hipsolverDnDDgesv_bufferSize", "library");
     subst("cusolverDnDestroy", "hipsolverDnDestroy", "library");
+    subst("cusolverDnDestroyGesvdjInfo", "hipsolverDnDestroyGesvdjInfo", "library");
+    subst("cusolverDnDestroySyevjInfo", "hipsolverDnDestroySyevjInfo", "library");
     subst("cusolverDnDgebrd", "hipsolverDnDgebrd", "library");
     subst("cusolverDnDgebrd_bufferSize", "hipsolverDnDgebrd_bufferSize", "library");
     subst("cusolverDnDgeqrf", "hipsolverDnDgeqrf", "library");
     subst("cusolverDnDgeqrf_bufferSize", "hipsolverDnDgeqrf_bufferSize", "library");
+    subst("cusolverDnDgesvd", "hipsolverDnDgesvd", "library");
+    subst("cusolverDnDgesvd_bufferSize", "hipsolverDnDgesvd_bufferSize", "library");
+    subst("cusolverDnDgesvdaStridedBatched", "hipsolverDnDgesvdaStridedBatched", "library");
+    subst("cusolverDnDgesvdaStridedBatched_bufferSize", "hipsolverDnDgesvdaStridedBatched_bufferSize", "library");
+    subst("cusolverDnDgesvdj", "hipsolverDnDgesvdj", "library");
+    subst("cusolverDnDgesvdjBatched", "hipsolverDnDgesvdjBatched", "library");
+    subst("cusolverDnDgesvdjBatched_bufferSize", "hipsolverDnDgesvdjBatched_bufferSize", "library");
+    subst("cusolverDnDgesvdj_bufferSize", "hipsolverDnDgesvdj_bufferSize", "library");
     subst("cusolverDnDgetrf", "hipsolverDnDgetrf", "library");
     subst("cusolverDnDgetrf_bufferSize", "hipsolverDnDgetrf_bufferSize", "library");
     subst("cusolverDnDgetrs", "hipsolverDnDgetrs", "library");
+    subst("cusolverDnDorgbr", "hipsolverDnDorgbr", "library");
+    subst("cusolverDnDorgbr_bufferSize", "hipsolverDnDorgbr_bufferSize", "library");
     subst("cusolverDnDorgqr", "hipsolverDnDorgqr", "library");
     subst("cusolverDnDorgqr_bufferSize", "hipsolverDnDorgqr_bufferSize", "library");
+    subst("cusolverDnDorgtr", "hipsolverDnDorgtr", "library");
+    subst("cusolverDnDorgtr_bufferSize", "hipsolverDnDorgtr_bufferSize", "library");
     subst("cusolverDnDormqr", "hipsolverDnDormqr", "library");
     subst("cusolverDnDormqr_bufferSize", "hipsolverDnDormqr_bufferSize", "library");
+    subst("cusolverDnDormtr", "hipsolverDnDormtr", "library");
+    subst("cusolverDnDormtr_bufferSize", "hipsolverDnDormtr_bufferSize", "library");
     subst("cusolverDnDpotrf", "hipsolverDnDpotrf", "library");
     subst("cusolverDnDpotrfBatched", "hipsolverDnDpotrfBatched", "library");
     subst("cusolverDnDpotrf_bufferSize", "hipsolverDnDpotrf_bufferSize", "library");
@@ -1384,6 +1591,22 @@ sub experimentalSubstitutions {
     subst("cusolverDnDpotri_bufferSize", "hipsolverDnDpotri_bufferSize", "library");
     subst("cusolverDnDpotrs", "hipsolverDnDpotrs", "library");
     subst("cusolverDnDpotrsBatched", "hipsolverDnDpotrsBatched", "library");
+    subst("cusolverDnDsyevd", "hipsolverDnDsyevd", "library");
+    subst("cusolverDnDsyevd_bufferSize", "hipsolverDnDsyevd_bufferSize", "library");
+    subst("cusolverDnDsyevdx", "hipsolverDnDsyevdx", "library");
+    subst("cusolverDnDsyevdx_bufferSize", "hipsolverDnDsyevdx_bufferSize", "library");
+    subst("cusolverDnDsyevj", "hipsolverDnDsyevj", "library");
+    subst("cusolverDnDsyevjBatched", "hipsolverDnDsyevjBatched", "library");
+    subst("cusolverDnDsyevjBatched_bufferSize", "hipsolverDnDsyevjBatched_bufferSize", "library");
+    subst("cusolverDnDsyevj_bufferSize", "hipsolverDnDsyevj_bufferSize", "library");
+    subst("cusolverDnDsygvd", "hipsolverDnDsygvd", "library");
+    subst("cusolverDnDsygvd_bufferSize", "hipsolverDnDsygvd_bufferSize", "library");
+    subst("cusolverDnDsygvdx", "hipsolverDnDsygvdx", "library");
+    subst("cusolverDnDsygvdx_bufferSize", "hipsolverDnDsygvdx_bufferSize", "library");
+    subst("cusolverDnDsygvj", "hipsolverDnDsygvj", "library");
+    subst("cusolverDnDsygvj_bufferSize", "hipsolverDnDsygvj_bufferSize", "library");
+    subst("cusolverDnDsytrd", "hipsolverDnDsytrd", "library");
+    subst("cusolverDnDsytrd_bufferSize", "hipsolverDnDsytrd_bufferSize", "library");
     subst("cusolverDnDsytrf", "hipsolverDnDsytrf", "library");
     subst("cusolverDnDsytrf_bufferSize", "hipsolverDnDsytrf_bufferSize", "library");
     subst("cusolverDnGetStream", "hipsolverGetStream", "library");
@@ -1396,13 +1619,27 @@ sub experimentalSubstitutions {
     subst("cusolverDnSgebrd_bufferSize", "hipsolverDnSgebrd_bufferSize", "library");
     subst("cusolverDnSgeqrf", "hipsolverDnSgeqrf", "library");
     subst("cusolverDnSgeqrf_bufferSize", "hipsolverDnSgeqrf_bufferSize", "library");
+    subst("cusolverDnSgesvd", "hipsolverDnSgesvd", "library");
+    subst("cusolverDnSgesvd_bufferSize", "hipsolverDnSgesvd_bufferSize", "library");
+    subst("cusolverDnSgesvdaStridedBatched", "hipsolverDnSgesvdaStridedBatched", "library");
+    subst("cusolverDnSgesvdaStridedBatched_bufferSize", "hipsolverDnSgesvdaStridedBatched_bufferSize", "library");
+    subst("cusolverDnSgesvdj", "hipsolverDnSgesvdj", "library");
+    subst("cusolverDnSgesvdjBatched", "hipsolverDnSgesvdjBatched", "library");
+    subst("cusolverDnSgesvdjBatched_bufferSize", "hipsolverDnSgesvdjBatched_bufferSize", "library");
+    subst("cusolverDnSgesvdj_bufferSize", "hipsolverDnSgesvdj_bufferSize", "library");
     subst("cusolverDnSgetrf", "hipsolverDnSgetrf", "library");
     subst("cusolverDnSgetrf_bufferSize", "hipsolverDnSgetrf_bufferSize", "library");
     subst("cusolverDnSgetrs", "hipsolverDnSgetrs", "library");
+    subst("cusolverDnSorgbr", "hipsolverDnSorgbr", "library");
+    subst("cusolverDnSorgbr_bufferSize", "hipsolverDnSorgbr_bufferSize", "library");
     subst("cusolverDnSorgqr", "hipsolverDnSorgqr", "library");
     subst("cusolverDnSorgqr_bufferSize", "hipsolverDnSorgqr_bufferSize", "library");
+    subst("cusolverDnSorgtr", "hipsolverDnSorgtr", "library");
+    subst("cusolverDnSorgtr_bufferSize", "hipsolverDnSorgtr_bufferSize", "library");
     subst("cusolverDnSormqr", "hipsolverDnSormqr", "library");
     subst("cusolverDnSormqr_bufferSize", "hipsolverDnSormqr_bufferSize", "library");
+    subst("cusolverDnSormtr", "hipsolverDnSormtr", "library");
+    subst("cusolverDnSormtr_bufferSize", "hipsolverDnSormtr_bufferSize", "library");
     subst("cusolverDnSpotrf", "hipsolverDnSpotrf", "library");
     subst("cusolverDnSpotrfBatched", "hipsolverDnSpotrfBatched", "library");
     subst("cusolverDnSpotrf_bufferSize", "hipsolverDnSpotrf_bufferSize", "library");
@@ -1410,8 +1647,34 @@ sub experimentalSubstitutions {
     subst("cusolverDnSpotri_bufferSize", "hipsolverDnSpotri_bufferSize", "library");
     subst("cusolverDnSpotrs", "hipsolverDnSpotrs", "library");
     subst("cusolverDnSpotrsBatched", "hipsolverDnSpotrsBatched", "library");
+    subst("cusolverDnSsyevd", "hipsolverDnSsyevd", "library");
+    subst("cusolverDnSsyevd_bufferSize", "hipsolverDnSsyevd_bufferSize", "library");
+    subst("cusolverDnSsyevdx", "hipsolverDnSsyevdx", "library");
+    subst("cusolverDnSsyevdx_bufferSize", "hipsolverDnSsyevdx_bufferSize", "library");
+    subst("cusolverDnSsyevj", "hipsolverDnSsyevj", "library");
+    subst("cusolverDnSsyevjBatched", "hipsolverDnSsyevjBatched", "library");
+    subst("cusolverDnSsyevjBatched_bufferSize", "hipsolverDnSsyevjBatched_bufferSize", "library");
+    subst("cusolverDnSsyevj_bufferSize", "hipsolverDnSsyevj_bufferSize", "library");
+    subst("cusolverDnSsygvd", "hipsolverDnSsygvd", "library");
+    subst("cusolverDnSsygvd_bufferSize", "hipsolverDnSsygvd_bufferSize", "library");
+    subst("cusolverDnSsygvdx", "hipsolverDnSsygvdx", "library");
+    subst("cusolverDnSsygvdx_bufferSize", "hipsolverDnSsygvdx_bufferSize", "library");
+    subst("cusolverDnSsygvj", "hipsolverDnSsygvj", "library");
+    subst("cusolverDnSsygvj_bufferSize", "hipsolverDnSsygvj_bufferSize", "library");
+    subst("cusolverDnSsytrd", "hipsolverDnSsytrd", "library");
+    subst("cusolverDnSsytrd_bufferSize", "hipsolverDnSsytrd_bufferSize", "library");
     subst("cusolverDnSsytrf", "hipsolverDnSsytrf", "library");
     subst("cusolverDnSsytrf_bufferSize", "hipsolverDnSsytrf_bufferSize", "library");
+    subst("cusolverDnXgesvdjGetResidual", "hipsolverDnXgesvdjGetResidual", "library");
+    subst("cusolverDnXgesvdjGetSweeps", "hipsolverDnXgesvdjGetSweeps", "library");
+    subst("cusolverDnXgesvdjSetMaxSweeps", "hipsolverDnXgesvdjSetMaxSweeps", "library");
+    subst("cusolverDnXgesvdjSetSortEig", "hipsolverDnXgesvdjSetSortEig", "library");
+    subst("cusolverDnXgesvdjSetTolerance", "hipsolverDnXgesvdjSetTolerance", "library");
+    subst("cusolverDnXsyevjGetResidual", "hipsolverDnXsyevjGetResidual", "library");
+    subst("cusolverDnXsyevjGetSweeps", "hipsolverDnXsyevjGetSweeps", "library");
+    subst("cusolverDnXsyevjSetMaxSweeps", "hipsolverDnXsyevjSetMaxSweeps", "library");
+    subst("cusolverDnXsyevjSetSortEig", "hipsolverDnXsyevjSetSortEig", "library");
+    subst("cusolverDnXsyevjSetTolerance", "hipsolverDnXsyevjSetTolerance", "library");
     subst("cusolverDnZZgels", "hipsolverDnZZgels", "library");
     subst("cusolverDnZZgels_bufferSize", "hipsolverDnZZgels_bufferSize", "library");
     subst("cusolverDnZZgesv", "hipsolverDnZZgesv", "library");
@@ -1420,9 +1683,33 @@ sub experimentalSubstitutions {
     subst("cusolverDnZgebrd_bufferSize", "hipsolverDnZgebrd_bufferSize", "library");
     subst("cusolverDnZgeqrf", "hipsolverDnZgeqrf", "library");
     subst("cusolverDnZgeqrf_bufferSize", "hipsolverDnZgeqrf_bufferSize", "library");
+    subst("cusolverDnZgesvd", "hipsolverDnZgesvd", "library");
+    subst("cusolverDnZgesvd_bufferSize", "hipsolverDnZgesvd_bufferSize", "library");
+    subst("cusolverDnZgesvdaStridedBatched", "hipsolverDnZgesvdaStridedBatched", "library");
+    subst("cusolverDnZgesvdaStridedBatched_bufferSize", "hipsolverDnZgesvdaStridedBatched_bufferSize", "library");
+    subst("cusolverDnZgesvdj", "hipsolverDnZgesvdj", "library");
+    subst("cusolverDnZgesvdjBatched", "hipsolverDnZgesvdjBatched", "library");
+    subst("cusolverDnZgesvdjBatched_bufferSize", "hipsolverDnZgesvdjBatched_bufferSize", "library");
+    subst("cusolverDnZgesvdj_bufferSize", "hipsolverDnZgesvdj_bufferSize", "library");
     subst("cusolverDnZgetrf", "hipsolverDnZgetrf", "library");
     subst("cusolverDnZgetrf_bufferSize", "hipsolverDnZgetrf_bufferSize", "library");
     subst("cusolverDnZgetrs", "hipsolverDnZgetrs", "library");
+    subst("cusolverDnZheevd", "hipsolverDnZheevd", "library");
+    subst("cusolverDnZheevd_bufferSize", "hipsolverDnZheevd_bufferSize", "library");
+    subst("cusolverDnZheevdx", "hipsolverDnZheevdx", "library");
+    subst("cusolverDnZheevdx_bufferSize", "hipsolverDnZheevdx_bufferSize", "library");
+    subst("cusolverDnZheevj", "hipsolverDnZheevj", "library");
+    subst("cusolverDnZheevjBatched", "hipsolverDnZheevjBatched", "library");
+    subst("cusolverDnZheevjBatched_bufferSize", "hipsolverDnZheevjBatched_bufferSize", "library");
+    subst("cusolverDnZheevj_bufferSize", "hipsolverDnZheevj_bufferSize", "library");
+    subst("cusolverDnZhegvd", "hipsolverDnZhegvd", "library");
+    subst("cusolverDnZhegvd_bufferSize", "hipsolverDnZhegvd_bufferSize", "library");
+    subst("cusolverDnZhegvdx", "hipsolverDnZhegvdx", "library");
+    subst("cusolverDnZhegvdx_bufferSize", "hipsolverDnZhegvdx_bufferSize", "library");
+    subst("cusolverDnZhegvj", "hipsolverDnZhegvj", "library");
+    subst("cusolverDnZhegvj_bufferSize", "hipsolverDnZhegvj_bufferSize", "library");
+    subst("cusolverDnZhetrd", "hipsolverDnZhetrd", "library");
+    subst("cusolverDnZhetrd_bufferSize", "hipsolverDnZhetrd_bufferSize", "library");
     subst("cusolverDnZpotrf", "hipsolverDnZpotrf", "library");
     subst("cusolverDnZpotrfBatched", "hipsolverDnZpotrfBatched", "library");
     subst("cusolverDnZpotrf_bufferSize", "hipsolverDnZpotrf_bufferSize", "library");
@@ -1432,10 +1719,41 @@ sub experimentalSubstitutions {
     subst("cusolverDnZpotrsBatched", "hipsolverDnZpotrsBatched", "library");
     subst("cusolverDnZsytrf", "hipsolverDnZsytrf", "library");
     subst("cusolverDnZsytrf_bufferSize", "hipsolverDnZsytrf_bufferSize", "library");
+    subst("cusolverDnZungbr", "hipsolverDnZungbr", "library");
+    subst("cusolverDnZungbr_bufferSize", "hipsolverDnZungbr_bufferSize", "library");
     subst("cusolverDnZungqr", "hipsolverDnZungqr", "library");
     subst("cusolverDnZungqr_bufferSize", "hipsolverDnZungqr_bufferSize", "library");
+    subst("cusolverDnZungtr", "hipsolverDnZungtr", "library");
+    subst("cusolverDnZungtr_bufferSize", "hipsolverDnZungtr_bufferSize", "library");
     subst("cusolverDnZunmqr", "hipsolverDnZunmqr", "library");
     subst("cusolverDnZunmqr_bufferSize", "hipsolverDnZunmqr_bufferSize", "library");
+    subst("cusolverDnZunmtr", "hipsolverDnZunmtr", "library");
+    subst("cusolverDnZunmtr_bufferSize", "hipsolverDnZunmtr_bufferSize", "library");
+    subst("cusolverRfAccessBundledFactorsDevice", "hipsolverRfAccessBundledFactorsDevice", "library");
+    subst("cusolverRfAnalyze", "hipsolverRfAnalyze", "library");
+    subst("cusolverRfBatchAnalyze", "hipsolverRfBatchAnalyze", "library");
+    subst("cusolverRfBatchRefactor", "hipsolverRfBatchRefactor", "library");
+    subst("cusolverRfBatchResetValues", "hipsolverRfBatchResetValues", "library");
+    subst("cusolverRfBatchSetupHost", "hipsolverRfBatchSetupHost", "library");
+    subst("cusolverRfBatchSolve", "hipsolverRfBatchSolve", "library");
+    subst("cusolverRfBatchZeroPivot", "hipsolverRfBatchZeroPivot", "library");
+    subst("cusolverRfCreate", "hipsolverRfCreate", "library");
+    subst("cusolverRfDestroy", "hipsolverRfDestroy", "library");
+    subst("cusolverRfExtractBundledFactorsHost", "hipsolverRfExtractBundledFactorsHost", "library");
+    subst("cusolverRfExtractSplitFactorsHost", "hipsolverRfExtractSplitFactorsHost", "library");
+    subst("cusolverRfGetMatrixFormat", "hipsolverRfGetMatrixFormat", "library");
+    subst("cusolverRfGetNumericBoostReport", "hipsolverRfGetNumericBoostReport", "library");
+    subst("cusolverRfGetNumericProperties", "hipsolverRfGetNumericProperties", "library");
+    subst("cusolverRfGetResetValuesFastMode", "hipsolverRfGetResetValuesFastMode", "library");
+    subst("cusolverRfRefactor", "hipsolverRfRefactor", "library");
+    subst("cusolverRfResetValues", "hipsolverRfResetValues", "library");
+    subst("cusolverRfSetAlgs", "hipsolverRfSetAlgs", "library");
+    subst("cusolverRfSetMatrixFormat", "hipsolverRfSetMatrixFormat", "library");
+    subst("cusolverRfSetNumericProperties", "hipsolverRfSetNumericProperties", "library");
+    subst("cusolverRfSetResetValuesFastMode", "hipsolverRfSetResetValuesFastMode", "library");
+    subst("cusolverRfSetupDevice", "hipsolverRfSetupDevice", "library");
+    subst("cusolverRfSetupHost", "hipsolverRfSetupHost", "library");
+    subst("cusolverRfSolve", "hipsolverRfSolve", "library");
     subst("cusolverDnHandle_t", "hipsolverHandle_t", "type");
     subst("cusolverEigMode_t", "hipsolverEigMode_t", "type");
     subst("cusolverEigRange_t", "hipsolverEigRange_t", "type");
@@ -1953,6 +2271,7 @@ sub rocSubstitutions {
     subst("cusparseCbsrsv2_analysis", "rocsparse_cbsrsv_analysis", "library");
     subst("cusparseCbsrsv2_bufferSizeExt", "rocsparse_cbsrsv_buffer_size", "library");
     subst("cusparseCbsrsv2_solve", "rocsparse_cbsrsv_solve", "library");
+    subst("cusparseCbsrxmv", "rocsparse_cbsrxmv", "library");
     subst("cusparseCcsc2dense", "rocsparse_ccsc2dense", "library");
     subst("cusparseCcsr2bsr", "rocsparse_ccsr2bsr", "library");
     subst("cusparseCcsr2csr_compress", "rocsparse_ccsr2csr_compress", "library");
@@ -2037,6 +2356,7 @@ sub rocSubstitutions {
     subst("cusparseDbsrsv2_analysis", "rocsparse_dbsrsv_analysis", "library");
     subst("cusparseDbsrsv2_bufferSizeExt", "rocsparse_dbsrsv_buffer_size", "library");
     subst("cusparseDbsrsv2_solve", "rocsparse_dbsrsv_solve", "library");
+    subst("cusparseDbsrxmv", "rocsparse_dbsrxmv", "library");
     subst("cusparseDcsc2dense", "rocsparse_dcsc2dense", "library");
     subst("cusparseDcsr2bsr", "rocsparse_dcsr2bsr", "library");
     subst("cusparseDcsr2csr_compress", "rocsparse_dcsr2csr_compress", "library");
@@ -2139,6 +2459,7 @@ sub rocSubstitutions {
     subst("cusparseSbsrsv2_analysis", "rocsparse_sbsrsv_analysis", "library");
     subst("cusparseSbsrsv2_bufferSizeExt", "rocsparse_sbsrsv_buffer_size", "library");
     subst("cusparseSbsrsv2_solve", "rocsparse_sbsrsv_solve", "library");
+    subst("cusparseSbsrxmv", "rocsparse_sbsrxmv", "library");
     subst("cusparseScatter", "rocsparse_scatter", "library");
     subst("cusparseScsc2dense", "rocsparse_scsc2dense", "library");
     subst("cusparseScsr2bsr", "rocsparse_scsr2bsr", "library");
@@ -2223,6 +2544,7 @@ sub rocSubstitutions {
     subst("cusparseXbsric02_zeroPivot", "rocsparse_bsric0_zero_pivot", "library");
     subst("cusparseXbsrilu02_zeroPivot", "rocsparse_bsrilu0_zero_pivot", "library");
     subst("cusparseXbsrsm2_zeroPivot", "rocsparse_bsrsm_zero_pivot", "library");
+    subst("cusparseXbsrsv2_zeroPivot", "rocsparse_bsrsv_zero_pivot", "library");
     subst("cusparseXcoo2csr", "rocsparse_coo2csr", "library");
     subst("cusparseXcoosortByColumn", "rocsparse_coosort_by_column", "library");
     subst("cusparseXcoosortByRow", "rocsparse_coosort_by_row", "library");
@@ -2255,6 +2577,7 @@ sub rocSubstitutions {
     subst("cusparseZbsrsv2_analysis", "rocsparse_zbsrsv_analysis", "library");
     subst("cusparseZbsrsv2_bufferSizeExt", "rocsparse_zbsrsv_buffer_size", "library");
     subst("cusparseZbsrsv2_solve", "rocsparse_zbsrsv_solve", "library");
+    subst("cusparseZbsrxmv", "rocsparse_zbsrxmv", "library");
     subst("cusparseZcsc2dense", "rocsparse_zcsc2dense", "library");
     subst("cusparseZcsr2bsr", "rocsparse_zcsr2bsr", "library");
     subst("cusparseZcsr2csr_compress", "rocsparse_zcsr2csr_compress", "library");
@@ -4422,28 +4745,23 @@ sub simpleSubstitutions {
     subst("cuda_profiler_api.h", "hip\/hip_runtime_api.h", "include");
     subst("cuda_runtime_api.h", "hip\/hip_runtime_api.h", "include");
     subst("cuda_texture_types.h", "hip\/hip_texture_types.h", "include");
-    subst("cufftXt.h", "hipfftXt.h", "include");
-    subst("curand_discrete.h", "hiprand_kernel.h", "include");
-    subst("curand_discrete2.h", "hiprand_kernel.h", "include");
-    subst("curand_globals.h", "hiprand_kernel.h", "include");
-    subst("curand_kernel.h", "hiprand_kernel.h", "include");
-    subst("curand_lognormal.h", "hiprand_kernel.h", "include");
-    subst("curand_mrg32k3a.h", "hiprand_kernel.h", "include");
-    subst("curand_mtgp32.h", "hiprand_kernel.h", "include");
-    subst("curand_mtgp32_host.h", "hiprand_mtgp32_host.h", "include");
-    subst("curand_mtgp32_kernel.h", "hiprand_kernel.h", "include");
+    subst("cufftXt.h", "hipfft\/hipfftXt.h", "include");
+    subst("curand_discrete.h", "hiprand\/hiprand_kernel.h", "include");
+    subst("curand_discrete2.h", "hiprand\/hiprand_kernel.h", "include");
+    subst("curand_globals.h", "hiprand\/hiprand_kernel.h", "include");
+    subst("curand_kernel.h", "hiprand\/hiprand_kernel.h", "include");
+    subst("curand_lognormal.h", "hiprand\/hiprand_kernel.h", "include");
+    subst("curand_mrg32k3a.h", "hiprand\/hiprand_kernel.h", "include");
+    subst("curand_mtgp32.h", "hiprand\/hiprand_kernel.h", "include");
+    subst("curand_mtgp32_host.h", "hiprand\/hiprand_mtgp32_host.h", "include");
+    subst("curand_mtgp32_kernel.h", "hiprand\/hiprand_kernel.h", "include");
     subst("curand_mtgp32dc_p_11213.h", "rocrand_mtgp32_11213.h", "include");
-    subst("curand_normal.h", "hiprand_kernel.h", "include");
-    subst("curand_normal_static.h", "hiprand_kernel.h", "include");
-    subst("curand_philox4x32_x.h", "hiprand_kernel.h", "include");
-    subst("curand_poisson.h", "hiprand_kernel.h", "include");
-    subst("curand_precalc.h", "hiprand_kernel.h", "include");
-    subst("curand_uniform.h", "hiprand_kernel.h", "include");
-    subst("cusolverDn.h", "hipsolver.h", "include");
-    subst("cusolverMg.h", "hipsolver.h", "include");
-    subst("cusolverRf.h", "hipsolver.h", "include");
-    subst("cusolverSp.h", "hipsolver.h", "include");
-    subst("cusolver_common.h", "hipsolver.h", "include");
+    subst("curand_normal.h", "hiprand\/hiprand_kernel.h", "include");
+    subst("curand_normal_static.h", "hiprand\/hiprand_kernel.h", "include");
+    subst("curand_philox4x32_x.h", "hiprand\/hiprand_kernel.h", "include");
+    subst("curand_poisson.h", "hiprand\/hiprand_kernel.h", "include");
+    subst("curand_precalc.h", "hiprand\/hiprand_kernel.h", "include");
+    subst("curand_uniform.h", "hiprand\/hiprand_kernel.h", "include");
     subst("device_functions.h", "hip\/device_functions.h", "include");
     subst("driver_types.h", "hip\/driver_types.h", "include");
     subst("library_types.h", "hip\/library_types.h", "include");
@@ -4455,8 +4773,14 @@ sub simpleSubstitutions {
     subst("cuda.h", "hip\/hip_runtime.h", "include_cuda_main_header");
     subst("cuda_runtime.h", "hip\/hip_runtime.h", "include_cuda_main_header");
     subst("cudnn.h", "hipDNN.h", "include_cuda_main_header");
-    subst("cufft.h", "hipfft.h", "include_cuda_main_header");
-    subst("curand.h", "hiprand.h", "include_cuda_main_header");
+    subst("cufft.h", "hipfft\/hipfft.h", "include_cuda_main_header");
+    subst("curand.h", "hiprand\/hiprand.h", "include_cuda_main_header");
+    subst("cusolverDn.h", "hipsolver.h", "include_cuda_main_header");
+    subst("cusolverMg.h", "hipsolver.h", "include_cuda_main_header");
+    subst("cusolverRf.h", "hipsolver.h", "include_cuda_main_header");
+    subst("cusolverSp.h", "hipsolver.h", "include_cuda_main_header");
+    subst("cusolverSp_LOWLEVEL_PREVIEW.h", "hipsolver.h", "include_cuda_main_header");
+    subst("cusolver_common.h", "hipsolver.h", "include_cuda_main_header");
     subst("cusparse.h", "hipsparse.h", "include_cuda_main_header");
     subst("nvrtc.h", "hiprtc.h", "include_cuda_main_header");
     subst("cublas_v2.h", "hipblas.h", "include_cuda_main_header_v2");
@@ -4912,6 +5236,13 @@ sub simpleSubstitutions {
     subst("curandState_t", "hiprandState_t", "type");
     subst("curandStatus", "hiprandStatus_t", "type");
     subst("curandStatus_t", "hiprandStatus_t", "type");
+    subst("cusolverRfFactorization_t", "hipsolverRfFactorization_t", "type");
+    subst("cusolverRfHandle_t", "hipsolverRfHandle_t", "type");
+    subst("cusolverRfMatrixFormat_t", "hipsolverRfMatrixFormat_t", "type");
+    subst("cusolverRfNumericBoostReport_t", "hipsolverRfNumericBoostReport_t", "type");
+    subst("cusolverRfResetValuesFastMode_t", "hipsolverRfResetValuesFastMode_t", "type");
+    subst("cusolverRfTriangularSolve_t", "hipsolverRfTriangularSolve_t", "type");
+    subst("cusolverRfUnitDiagonal_t", "hipsolverRfUnitDiagonal_t", "type");
     subst("cusparseAction_t", "hipsparseAction_t", "type");
     subst("cusparseColorInfo_t", "hipsparseColorInfo_t", "type");
     subst("cusparseConstDnMatDescr_t", "hipsparseConstDnMatDescr_t", "type");
@@ -5262,6 +5593,22 @@ sub simpleSubstitutions {
     subst("CURAND_STATUS_SUCCESS", "HIPRAND_STATUS_SUCCESS", "numeric_literal");
     subst("CURAND_STATUS_TYPE_ERROR", "HIPRAND_STATUS_TYPE_ERROR", "numeric_literal");
     subst("CURAND_STATUS_VERSION_MISMATCH", "HIPRAND_STATUS_VERSION_MISMATCH", "numeric_literal");
+    subst("CUSOLVERRF_FACTORIZATION_ALG0", "HIPSOLVERRF_FACTORIZATION_ALG0", "numeric_literal");
+    subst("CUSOLVERRF_FACTORIZATION_ALG1", "HIPSOLVERRF_FACTORIZATION_ALG1", "numeric_literal");
+    subst("CUSOLVERRF_FACTORIZATION_ALG2", "HIPSOLVERRF_FACTORIZATION_ALG2", "numeric_literal");
+    subst("CUSOLVERRF_MATRIX_FORMAT_CSC", "HIPSOLVERRF_MATRIX_FORMAT_CSC", "numeric_literal");
+    subst("CUSOLVERRF_MATRIX_FORMAT_CSR", "HIPSOLVERRF_MATRIX_FORMAT_CSR", "numeric_literal");
+    subst("CUSOLVERRF_NUMERIC_BOOST_NOT_USED", "HIPSOLVERRF_NUMERIC_BOOST_NOT_USED", "numeric_literal");
+    subst("CUSOLVERRF_NUMERIC_BOOST_USED", "HIPSOLVERRF_NUMERIC_BOOST_USED", "numeric_literal");
+    subst("CUSOLVERRF_RESET_VALUES_FAST_MODE_OFF", "HIPSOLVERRF_RESET_VALUES_FAST_MODE_OFF", "numeric_literal");
+    subst("CUSOLVERRF_RESET_VALUES_FAST_MODE_ON", "HIPSOLVERRF_RESET_VALUES_FAST_MODE_ON", "numeric_literal");
+    subst("CUSOLVERRF_TRIANGULAR_SOLVE_ALG1", "HIPSOLVERRF_TRIANGULAR_SOLVE_ALG1", "numeric_literal");
+    subst("CUSOLVERRF_TRIANGULAR_SOLVE_ALG2", "HIPSOLVERRF_TRIANGULAR_SOLVE_ALG2", "numeric_literal");
+    subst("CUSOLVERRF_TRIANGULAR_SOLVE_ALG3", "HIPSOLVERRF_TRIANGULAR_SOLVE_ALG3", "numeric_literal");
+    subst("CUSOLVERRF_UNIT_DIAGONAL_ASSUMED_L", "HIPSOLVERRF_UNIT_DIAGONAL_ASSUMED_L", "numeric_literal");
+    subst("CUSOLVERRF_UNIT_DIAGONAL_ASSUMED_U", "HIPSOLVERRF_UNIT_DIAGONAL_ASSUMED_U", "numeric_literal");
+    subst("CUSOLVERRF_UNIT_DIAGONAL_STORED_L", "HIPSOLVERRF_UNIT_DIAGONAL_STORED_L", "numeric_literal");
+    subst("CUSOLVERRF_UNIT_DIAGONAL_STORED_U", "HIPSOLVERRF_UNIT_DIAGONAL_STORED_U", "numeric_literal");
     subst("CUSOLVER_STATUS_IRS_INTERNAL_ERROR", "HIPSOLVER_STATUS_INTERNAL_ERROR", "numeric_literal");
     subst("CUSOLVER_STATUS_IRS_NOT_SUPPORTED", "HIPSOLVER_STATUS_NOT_SUPPORTED", "numeric_literal");
     subst("CUSOLVER_STATUS_IRS_PARAMS_INVALID", "HIPSOLVER_STATUS_INVALID_VALUE", "numeric_literal");
@@ -7312,8 +7659,163 @@ sub warnUnsupportedFunctions {
         "cusparseBsrSetStridedBatch",
         "cusparseAlgMode_t",
         "cusolverStorevMode_t",
+        "cusolverSpZcsrzfdHost",
+        "cusolverSpZcsrqrsvBatched",
+        "cusolverSpZcsrqrZeroPivotHost",
+        "cusolverSpZcsrqrZeroPivot",
+        "cusolverSpZcsrqrSolveHost",
+        "cusolverSpZcsrqrSolve",
+        "cusolverSpZcsrqrSetupHost",
+        "cusolverSpZcsrqrSetup",
+        "cusolverSpZcsrqrFactorHost",
+        "cusolverSpZcsrqrFactor",
+        "cusolverSpZcsrqrBufferInfoHost",
+        "cusolverSpZcsrqrBufferInfoBatched",
+        "cusolverSpZcsrqrBufferInfo",
+        "cusolverSpZcsrluZeroPivotHost",
+        "cusolverSpZcsrluSolveHost",
+        "cusolverSpZcsrluFactorHost",
+        "cusolverSpZcsrluExtractHost",
+        "cusolverSpZcsrluBufferInfoHost",
+        "cusolverSpZcsrlsvqrHost",
+        "cusolverSpZcsrlsvqr",
+        "cusolverSpZcsrlsvluHost",
+        "cusolverSpZcsrlsvcholHost",
+        "cusolverSpZcsrlsvchol",
+        "cusolverSpZcsrlsqvqrHost",
+        "cusolverSpZcsreigvsiHost",
+        "cusolverSpZcsreigvsi",
+        "cusolverSpZcsreigsHost",
+        "cusolverSpXcsrsymrcmHost",
+        "cusolverSpXcsrsymmdqHost",
+        "cusolverSpXcsrsymamdHost",
+        "cusolverSpXcsrqrAnalysisHost",
+        "cusolverSpXcsrqrAnalysisBatched",
+        "cusolverSpXcsrqrAnalysis",
+        "cusolverSpXcsrperm_bufferSizeHost",
+        "cusolverSpXcsrpermHost",
+        "cusolverSpXcsrmetisndHost",
+        "cusolverSpXcsrluNnzHost",
+        "cusolverSpXcsrluAnalysisHost",
+        "cusolverSpXcsrissymHost",
+        "cusolverSpSetStream",
+        "cusolverSpScsrzfdHost",
+        "cusolverSpScsrqrsvBatched",
+        "cusolverSpScsrqrZeroPivotHost",
+        "cusolverSpScsrqrZeroPivot",
+        "cusolverSpScsrqrSolveHost",
+        "cusolverSpScsrqrSolve",
+        "cusolverSpScsrqrSetupHost",
+        "cusolverSpScsrqrSetup",
+        "cusolverSpScsrqrFactorHost",
+        "cusolverSpScsrqrFactor",
+        "cusolverSpScsrqrBufferInfoHost",
+        "cusolverSpScsrqrBufferInfoBatched",
+        "cusolverSpScsrqrBufferInfo",
+        "cusolverSpScsrluZeroPivotHost",
+        "cusolverSpScsrluSolveHost",
+        "cusolverSpScsrluFactorHost",
+        "cusolverSpScsrluExtractHost",
+        "cusolverSpScsrluBufferInfoHost",
+        "cusolverSpScsrlsvqrHost",
+        "cusolverSpScsrlsvqr",
+        "cusolverSpScsrlsvluHost",
+        "cusolverSpScsrlsvcholHost",
+        "cusolverSpScsrlsvchol",
+        "cusolverSpScsrlsqvqrHost",
+        "cusolverSpScsreigvsiHost",
+        "cusolverSpScsreigvsi",
+        "cusolverSpScsreigsHost",
+        "cusolverSpHandle_t",
+        "cusolverSpGetStream",
+        "cusolverSpDestroyCsrqrInfoHost",
+        "cusolverSpDestroyCsrqrInfo",
+        "cusolverSpDestroyCsrluInfoHost",
+        "cusolverSpDestroy",
+        "cusolverSpDcsrzfdHost",
+        "cusolverSpDcsrqrsvBatched",
+        "cusolverSpDcsrqrZeroPivotHost",
+        "cusolverSpDcsrqrZeroPivot",
+        "cusolverSpDcsrqrSolveHost",
+        "cusolverSpDcsrqrSolve",
+        "cusolverSpDcsrqrSetupHost",
+        "cusolverSpDcsrqrSetup",
+        "cusolverSpDcsrqrFactorHost",
+        "cusolverSpDcsrqrFactor",
+        "cusolverSpDcsrqrBufferInfoHost",
+        "cusolverSpDcsrqrBufferInfoBatched",
+        "cusolverSpDcsrqrBufferInfo",
+        "cusolverSpDcsrluZeroPivotHost",
+        "cusolverSpDcsrluSolveHost",
+        "cusolverSpDcsrluFactorHost",
+        "cusolverSpDcsrluExtractHost",
+        "cusolverSpDcsrluBufferInfoHost",
+        "cusolverSpDcsrlsvqrHost",
+        "cusolverSpDcsrlsvqr",
+        "cusolverSpDcsrlsvluHost",
+        "cusolverSpDcsrlsvcholHost",
+        "cusolverSpDcsrlsvchol",
+        "cusolverSpDcsrlsqvqrHost",
+        "cusolverSpDcsreigvsiHost",
+        "cusolverSpDcsreigvsi",
+        "cusolverSpDcsreigsHost",
+        "cusolverSpCreateCsrqrInfoHost",
+        "cusolverSpCreateCsrqrInfo",
+        "cusolverSpCreateCsrluInfoHost",
+        "cusolverSpCreate",
+        "cusolverSpContext",
+        "cusolverSpCcsrzfdHost",
+        "cusolverSpCcsrqrsvBatched",
+        "cusolverSpCcsrqrZeroPivotHost",
+        "cusolverSpCcsrqrZeroPivot",
+        "cusolverSpCcsrqrSolveHost",
+        "cusolverSpCcsrqrSolve",
+        "cusolverSpCcsrqrSetupHost",
+        "cusolverSpCcsrqrSetup",
+        "cusolverSpCcsrqrFactorHost",
+        "cusolverSpCcsrqrFactor",
+        "cusolverSpCcsrqrBufferInfoHost",
+        "cusolverSpCcsrqrBufferInfoBatched",
+        "cusolverSpCcsrqrBufferInfo",
+        "cusolverSpCcsrluZeroPivotHost",
+        "cusolverSpCcsrluSolveHost",
+        "cusolverSpCcsrluFactorHost",
+        "cusolverSpCcsrluExtractHost",
+        "cusolverSpCcsrluBufferInfoHost",
+        "cusolverSpCcsrlsvqrHost",
+        "cusolverSpCcsrlsvqr",
+        "cusolverSpCcsrlsvluHost",
+        "cusolverSpCcsrlsvcholHost",
+        "cusolverSpCcsrlsvchol",
+        "cusolverSpCcsrlsqvqrHost",
+        "cusolverSpCcsreigvsiHost",
+        "cusolverSpCcsreigvsi",
+        "cusolverSpCcsreigsHost",
+        "cusolverRfGetAlgs",
+        "cusolverRfCommon",
         "cusolverPrecType_t",
         "cusolverNorm_t",
+        "cusolverMgSyevd_bufferSize",
+        "cusolverMgSyevd",
+        "cusolverMgPotrs_bufferSize",
+        "cusolverMgPotrs",
+        "cusolverMgPotri_bufferSize",
+        "cusolverMgPotri",
+        "cusolverMgPotrf_bufferSize",
+        "cusolverMgPotrf",
+        "cusolverMgHandle_t",
+        "cusolverMgGridMapping_t",
+        "cusolverMgGetrs_bufferSize",
+        "cusolverMgGetrs",
+        "cusolverMgGetrf_bufferSize",
+        "cusolverMgGetrf",
+        "cusolverMgDeviceSelect",
+        "cusolverMgDestroyGrid",
+        "cusolverMgDestroy",
+        "cusolverMgCreateMatrixDesc",
+        "cusolverMgCreateDeviceGrid",
+        "cusolverMgCreate",
+        "cusolverMgContext",
         "cusolverIRSRefinement_t",
         "cusolverDnZsytri_bufferSize",
         "cusolverDnZsytri",
@@ -7340,9 +7842,28 @@ sub warnUnsupportedFunctions {
         "cusolverDnXtrtri",
         "cusolverDnXsytrs_bufferSize",
         "cusolverDnXsytrs",
+        "cusolverDnXsyevdx_bufferSize",
+        "cusolverDnXsyevdx",
+        "cusolverDnXsyevd_bufferSize",
+        "cusolverDnXsyevd",
+        "cusolverDnXpotrs",
+        "cusolverDnXpotrf_bufferSize",
+        "cusolverDnXpotrf",
         "cusolverDnXgetrs",
         "cusolverDnXgetrf_bufferSize",
         "cusolverDnXgetrf",
+        "cusolverDnXgesvdr_bufferSize",
+        "cusolverDnXgesvdr",
+        "cusolverDnXgesvdp_bufferSize",
+        "cusolverDnXgesvdp",
+        "cusolverDnXgesvd_bufferSize",
+        "cusolverDnXgesvd",
+        "cusolverDnXgeqrf_bufferSize",
+        "cusolverDnXgeqrf",
+        "cusolverDnSyevdx_bufferSize",
+        "cusolverDnSyevdx",
+        "cusolverDnSyevd_bufferSize",
+        "cusolverDnSyevd",
         "cusolverDnSsytri_bufferSize",
         "cusolverDnSsytri",
         "cusolverDnSlauum_bufferSize",
@@ -7362,8 +7883,18 @@ sub warnUnsupportedFunctions {
         "cusolverDnSBgesv",
         "cusolverDnSBgels_bufferSize",
         "cusolverDnSBgels",
+        "cusolverDnPotrs",
+        "cusolverDnPotrf_bufferSize",
+        "cusolverDnPotrf",
         "cusolverDnParams_t",
         "cusolverDnParams",
+        "cusolverDnLoggerSetMask",
+        "cusolverDnLoggerSetLevel",
+        "cusolverDnLoggerSetFile",
+        "cusolverDnLoggerSetCallback",
+        "cusolverDnLoggerOpenFile",
+        "cusolverDnLoggerForceDisable",
+        "cusolverDnLoggerCallback_t",
         "cusolverDnIRSXgesv_bufferSize",
         "cusolverDnIRSXgesv",
         "cusolverDnIRSXgels_bufferSize",
@@ -7392,13 +7923,21 @@ sub warnUnsupportedFunctions {
         "cusolverDnIRSInfosDestroy",
         "cusolverDnIRSInfosCreate",
         "cusolverDnIRSInfos",
+        "cusolverDnGetrs",
+        "cusolverDnGetrf_bufferSize",
+        "cusolverDnGetrf",
         "cusolverDnGetDeterministicMode",
+        "cusolverDnGesvd_bufferSize",
+        "cusolverDnGesvd",
+        "cusolverDnGeqrf_bufferSize",
+        "cusolverDnGeqrf",
         "cusolverDnFunction_t",
         "cusolverDnDsytri_bufferSize",
         "cusolverDnDsytri",
         "cusolverDnDlauum_bufferSize",
         "cusolverDnDlauum",
         "cusolverDnDlaswp",
+        "cusolverDnDestroyParams",
         "cusolverDnDXgesv_bufferSize",
         "cusolverDnDXgesv",
         "cusolverDnDXgels_bufferSize",
@@ -7813,6 +8352,8 @@ sub warnUnsupportedFunctions {
         "cudaLimitMaxL2FetchGranularity",
         "cudaLimitDevRuntimeSyncDepth",
         "cudaLimitDevRuntimePendingLaunchCount",
+        "cudaLibMgMatrixDesc_t",
+        "cudaLibMgGrid_t",
         "cudaLaunchMemSyncDomainRemote",
         "cudaLaunchMemSyncDomainMap_st",
         "cudaLaunchMemSyncDomainMap",
@@ -8446,6 +8987,16 @@ sub warnUnsupportedFunctions {
         "cuArrayGetMemoryRequirements",
         "csrsv2Info",
         "csrsm2Info",
+        "csrqrInfo_t",
+        "csrqrInfoHost_t",
+        "csrqrInfoHost",
+        "csrqrInfo",
+        "csrluInfoHost_t",
+        "csrluInfoHost",
+        "csrcholInfo_t",
+        "csrcholInfoHost_t",
+        "csrcholInfoHost",
+        "csrcholInfo",
         "cl_event_flags_enum",
         "cl_event_flags",
         "cl_context_flags_enum",
@@ -9832,6 +10383,8 @@ sub warnUnsupportedFunctions {
         "CUDA_ARRAY3D_DEFERRED_MAPPING",
         "CUDA_ARRAY3D_COLOR_ATTACHMENT",
         "CUDA_ARRAY3D_2DARRAY",
+        "CUDALIBMG_GRID_MAPPING_ROW_MAJOR",
+        "CUDALIBMG_GRID_MAPPING_COL_MAJOR",
         "CUB_USE_COOPERATIVE_GROUPS",
         "CUB_SUBSCRIPTION_FACTOR",
         "CUB_STATIC_ASSERT",

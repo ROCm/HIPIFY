@@ -33,11 +33,11 @@
 #include "cmdparser.hpp"
 // CHECK: #include <hip/hip_runtime.h>
 #include <cuda_runtime.h>
-// CHECK: #include <hiprand.h>
+// CHECK: #include <hiprand/hiprand.h>
 #include <curand.h>
-// CHECK: #include <hiprand_kernel.h>
+// CHECK: #include <hiprand/hiprand_kernel.h>
 #include <curand_kernel.h>
-// CHECK: #include <hiprand_mtgp32_host.h>
+// CHECK: #include <hiprand/hiprand_mtgp32_host.h>
 #include <curand_mtgp32_host.h>
 // CHECK: #include <rocrand_mtgp32_11213.h>
 #include <curand_mtgp32dc_p_11213.h>

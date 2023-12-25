@@ -32,7 +32,7 @@
 #include "cmdparser.hpp"
 // CHECK: #include <hip/hip_runtime.h>
 #include <cuda_runtime.h>
-// CHECK: #include <hiprand.h>
+// CHECK: #include <hiprand/hiprand.h>
 #include <curand.h>
 
 // CHECK: if ((x) != hipSuccess) {

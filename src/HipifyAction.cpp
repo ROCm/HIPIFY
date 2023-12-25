@@ -48,8 +48,8 @@ std::string s_int32_t = "int32_t";
 std::string s_int64_t = "int64_t";
 const std::string sHipLaunchKernelGGL = "hipLaunchKernelGGL";
 const std::string sDim3 = "dim3(";
-const std::string s_hiprand_kernel_h = "hiprand_kernel.h";
-const std::string s_hiprand_h = "hiprand.h";
+const std::string s_hiprand_kernel_h = "hiprand/hiprand_kernel.h";
+const std::string s_hiprand_h = "hiprand/hiprand.h";
 const std::string sOnce = "once";
 const std::string s_string_literal = "[string literal]";
 // CUDA identifiers, used in matchers
@@ -1528,6 +1528,10 @@ bool HipifyAction::Exclude(const hipCounter &hipToken) {
         case API_SPARSE:
           if (insertedSPARSEHeader) return true;
           insertedSPARSEHeader = true;
+          return false;
+        case API_SOLVER:
+          if (insertedSOLVERHeader) return true;
+          insertedSOLVERHeader = true;
           return false;
         default:
           return false;

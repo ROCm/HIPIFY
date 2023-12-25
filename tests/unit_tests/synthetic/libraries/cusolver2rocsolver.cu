@@ -3,7 +3,7 @@
 // CHECK: #include <hip/hip_runtime.h>
 #include <cuda_runtime.h>
 #include <stdio.h>
-// CHECK: #include "rocsolver.h"
+// CHECK: #include "rocsolver/rocsolver.h"
 #include "cusolverDn.h"
 
 int main() {
