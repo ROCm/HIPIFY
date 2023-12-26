@@ -610,6 +610,7 @@
 |`cudaComputeModeExclusive`| | | | |`hipComputeModeExclusive`|1.9.0| | | | |
 |`cudaComputeModeExclusiveProcess`| | | | |`hipComputeModeExclusiveProcess`|2.0.0| | | | |
 |`cudaComputeModeProhibited`| | | | |`hipComputeModeProhibited`|1.9.0| | | | |
+|`cudaConditionalNodeParams`|12.3| | | | | | | | | |
 |`cudaCooperativeLaunchMultiDeviceNoPostSync`|9.0| | | |`hipCooperativeLaunchMultiDeviceNoPostSync`|3.2.0| | | | |
 |`cudaCooperativeLaunchMultiDeviceNoPreSync`|9.0| | | |`hipCooperativeLaunchMultiDeviceNoPreSync`|3.2.0| | | | |
 |`cudaCpuDeviceId`|8.0| | | |`hipCpuDeviceId`|3.7.0| | | | |
@@ -736,6 +737,7 @@
 |`cudaDevAttrMemoryClockRate`| | | | |`hipDeviceAttributeMemoryClockRate`|1.6.0| | | | |
 |`cudaDevAttrMemoryPoolSupportedHandleTypes`|11.3| | | | | | | | | |
 |`cudaDevAttrMemoryPoolsSupported`|11.2| | | |`hipDeviceAttributeMemoryPoolsSupported`|5.2.0| | | | |
+|`cudaDevAttrMpsEnabled`|12.3| | | | | | | | | |
 |`cudaDevAttrMultiGpuBoardGroupID`| | | | |`hipDeviceAttributeMultiGpuBoardGroupID`|5.0.0| | | | |
 |`cudaDevAttrMultiProcessorCount`| | | | |`hipDeviceAttributeMultiprocessorCount`|1.6.0| | | | |
 |`cudaDevAttrNumaConfig`|12.2| | | | | | | | | |
@@ -947,6 +949,7 @@
 |`cudaErrorLaunchOutOfResources`| | | | |`hipErrorLaunchOutOfResources`|1.6.0| | | | |
 |`cudaErrorLaunchPendingCountExceeded`| | | | | | | | | | |
 |`cudaErrorLaunchTimeout`| | | | |`hipErrorLaunchTimeOut`|1.6.0| | | | |
+|`cudaErrorLossyQuery`|12.3| | | |`hipErrorLossyQuery`| | | | | |
 |`cudaErrorMapBufferObjectFailed`| | | | |`hipErrorMapFailed`|1.6.0| | | | |
 |`cudaErrorMemoryAllocation`| | | | |`hipErrorOutOfMemory`|1.6.0| | | | |
 |`cudaErrorMemoryValueTooLarge`| |3.1| | | | | | | | |
@@ -1099,6 +1102,12 @@
 |`cudaGPUDirectRDMAWritesOrderingNone`|11.3| | | | | | | | | |
 |`cudaGPUDirectRDMAWritesOrderingOwner`|11.3| | | | | | | | | |
 |`cudaGetDriverEntryPointFlags`|11.3| | | | | | | | | |
+|`cudaGraphCondAssignDefault`|12.3| | | | | | | | | |
+|`cudaGraphCondTypeIf`|12.3| | | | | | | | | |
+|`cudaGraphCondTypeWhile`|12.3| | | | | | | | | |
+|`cudaGraphConditionalHandle`|12.3| | | | | | | | | |
+|`cudaGraphConditionalHandleFlags`|12.3| | | | | | | | | |
+|`cudaGraphConditionalNodeType`|12.3| | | | | | | | | |
 |`cudaGraphDebugDotFlags`|11.3| | | |`hipGraphDebugDotFlags`|5.5.0| | | | |
 |`cudaGraphDebugDotFlagsEventNodeParams`|11.3| | | |`hipGraphDebugDotFlagsEventNodeParams`|5.5.0| | | | |
 |`cudaGraphDebugDotFlagsExtSemasSignalNodeParams`|11.3| | | |`hipGraphDebugDotFlagsExtSemasSignalNodeParams`|5.5.0| | | | |
@@ -1143,6 +1152,7 @@
 |`cudaGraphMemAttributeType`|11.4| | | |`hipGraphMemAttributeType`|5.3.0| | | | |
 |`cudaGraphNodeParams`|12.2| | | | | | | | | |
 |`cudaGraphNodeType`|10.0| | | |`hipGraphNodeType`|4.3.0| | | | |
+|`cudaGraphNodeTypeConditional`|12.3| | | |`hipGraphNodeTypeConditional`| | | | | |
 |`cudaGraphNodeTypeCount`|10.0| | | |`hipGraphNodeTypeCount`|4.3.0| | | | |
 |`cudaGraphNodeTypeEmpty`|10.0| | | |`hipGraphNodeTypeEmpty`|4.3.0| | | | |
 |`cudaGraphNodeTypeEventRecord`|11.1| | | |`hipGraphNodeTypeEventRecord`|4.3.0| | | | |
@@ -1262,6 +1272,8 @@
 |`cudaMemAttachGlobal`| | | | |`hipMemAttachGlobal`|2.5.0| | | | |
 |`cudaMemAttachHost`| | | | |`hipMemAttachHost`|2.5.0| | | | |
 |`cudaMemAttachSingle`| | | | |`hipMemAttachSingle`|3.7.0| | | | |
+|`cudaMemFabricHandle_st`|12.3| | | | | | | | | |
+|`cudaMemFabricHandle_t`|12.3| | | | | | | | | |
 |`cudaMemFreeNodeParams`|12.2| | | | | | | | | |
 |`cudaMemHandleTypeNone`|11.2| | | |`hipMemHandleTypeNone`|5.2.0| | | | |
 |`cudaMemHandleTypePosixFileDescriptor`|11.2| | | |`hipMemHandleTypePosixFileDescriptor`|5.2.0| | | | |
