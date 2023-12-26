@@ -260,6 +260,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CUDA_MEMCPY_NODE_PARAMS
   {"cudaMemcpyNodeParams",                                             {"hiMemcpyNodeParams",                                       "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
+  // CUDA_CONDITIONAL_NODE_PARAMS
+  {"cudaConditionalNodeParams",                                        {"hipConditionalNodeParams",                                 "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+
   // 2. Unions
 
   // CUstreamAttrValue
@@ -290,6 +293,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaGraphExecUpdateResultInfo_st",                                 {"hipGraphExecUpdateResultInfo",                             "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   // CUgraphExecUpdateResultInfo
   {"cudaGraphExecUpdateResultInfo",                                    {"hipGraphExecUpdateResultInfo",                             "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+
+  // CUmemFabricHandle_st
+  {"cudaMemFabricHandle_st",                                           {"hipMemFabricHandle",                                       "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // CUmemFabricHandle
+  {"cudaMemFabricHandle_t",                                            {"hipMemFabricHandle",                                       "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   // 3. Enums
 
@@ -638,6 +646,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaDevAttrNumaId",                                                {"hipDeviceAttributeNumaId",                                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 131
   // CU_DEVICE_ATTRIBUTE_MULTICAST_SUPPORTED
   {"cudaDevAttrReserved132",                                           {"hipDeviceAttributeMulticastSupported",                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 132
+  // CU_DEVICE_ATTRIBUTE_MPS_ENABLED
+  {"cudaDevAttrMpsEnabled",                                            {"hipDeviceAttributeMpsEnables",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 133
   // CU_DEVICE_ATTRIBUTE_HOST_NUMA_ID
   {"cudaDevAttrHostNumaId",                                            {"hipDeviceAttributeHostNumaId",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 134
   // CU_DEVICE_ATTRIBUTE_MAX
@@ -995,6 +1005,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaErrorInvalidResourceHandle",                                   {"hipErrorInvalidHandle",                                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}}, // 400
   // CUDA_ERROR_ILLEGAL_STATE
   {"cudaErrorIllegalState",                                            {"hipErrorIllegalState",                                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}}, // 401
+  // CUDA_ERROR_LOSSY_QUERY
+  {"cudaErrorLossyQuery",                                              {"hipErrorLossyQuery",                                       "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}}, // 402
   // CUDA_ERROR_NOT_FOUND
   {"cudaErrorSymbolNotFound",                                          {"hipErrorNotFound",                                         "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}}, // 500
   // CUDA_ERROR_NOT_READY
@@ -1240,6 +1252,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaGraphNodeTypeMemAlloc",                                        {"hipGraphNodeTypeMemAlloc",                                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}}, // 0x0a
   // CU_GRAPH_NODE_TYPE_MEM_FREE = 11
   {"cudaGraphNodeTypeMemFree",                                         {"hipGraphNodeTypeMemFree",                                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}}, // 0x0b
+  // CU_GRAPH_NODE_TYPE_CONDITIONAL = 13
+  {"cudaGraphNodeTypeConditional",                                     {"hipGraphNodeTypeConditional",                              "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}}, // 0x0d
   // CU_GRAPH_NODE_TYPE_COUNT
   {"cudaGraphNodeTypeCount",                                           {"hipGraphNodeTypeCount",                                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}},
 
@@ -1877,6 +1891,20 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CU_DEVICE_NUMA_CONFIG_NUMA_NODE
   {"cudaDeviceNumaConfigNumaNode",                                     {"hipDeviceNumaConfigNumaNode",                              "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
+  // no analogues
+  {"cudaGraphConditionalHandleFlags",                                  {"hipGraphConditionalHandleFlags",                           "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // cudaGraphConditionalHandleFlags enum values
+  //
+  {"cudaGraphCondAssignDefault",                                       {"hipGraphCondAssignDefault",                                "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+
+  // CUgraphConditionalNodeType
+  {"cudaGraphConditionalNodeType",                                     {"hipGraphConditionalNodeType",                              "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // CUgraphConditionalNodeType enum values
+  // CU_GRAPH_COND_TYPE_IF
+  {"cudaGraphCondTypeIf",                                              {"hipGraphCondTypeIf",                                       "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // CU_GRAPH_COND_TYPE_WHILE
+  {"cudaGraphCondTypeWhile",                                           {"hipGraphCondTypeWhile",                                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+
   // 4. Typedefs
 
   // CUhostFn
@@ -1899,6 +1927,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
 
   // CUuserObject
   {"cudaUserObject_t",                                                 {"hipUserObject_t",                                          "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES}},
+
+  // CUgraphConditionalHandle
+  {"cudaGraphConditionalHandle",                                       {"hipGraphConditionalHandle",                                "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   // 5. Defines
 
@@ -2591,6 +2622,18 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_TYPE_NAME_VER_MAP 
   {"cudaDeviceNumaConfig",                                             {CUDA_122, CUDA_0,   CUDA_0  }},
   {"cudaDeviceNumaConfigNone",                                         {CUDA_122, CUDA_0,   CUDA_0  }},
   {"cudaDeviceNumaConfigNumaNode",                                     {CUDA_122, CUDA_0,   CUDA_0  }},
+  {"cudaErrorLossyQuery",                                              {CUDA_123, CUDA_0,   CUDA_0  }},
+  {"cudaDevAttrMpsEnabled",                                            {CUDA_123, CUDA_0,   CUDA_0  }},
+  {"cudaMemFabricHandle_st",                                           {CUDA_123, CUDA_0,   CUDA_0  }},
+  {"cudaMemFabricHandle_t",                                            {CUDA_123, CUDA_0,   CUDA_0  }},
+  {"cudaGraphConditionalHandle",                                       {CUDA_123, CUDA_0,   CUDA_0  }},
+  {"cudaGraphConditionalHandleFlags",                                  {CUDA_123, CUDA_0,   CUDA_0  }},
+  {"cudaGraphCondAssignDefault",                                       {CUDA_123, CUDA_0,   CUDA_0  }},
+  {"cudaGraphConditionalNodeType",                                     {CUDA_123, CUDA_0,   CUDA_0  }},
+  {"cudaGraphCondTypeIf",                                              {CUDA_123, CUDA_0,   CUDA_0  }},
+  {"cudaGraphCondTypeWhile",                                           {CUDA_123, CUDA_0,   CUDA_0  }},
+  {"cudaConditionalNodeParams",                                        {CUDA_123, CUDA_0,   CUDA_0  }},
+  {"cudaGraphNodeTypeConditional",                                     {CUDA_123, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {

@@ -6219,6 +6219,7 @@ sub simpleSubstitutions {
     subst("cudaErrorLaunchFailure", "hipErrorLaunchFailure", "numeric_literal");
     subst("cudaErrorLaunchOutOfResources", "hipErrorLaunchOutOfResources", "numeric_literal");
     subst("cudaErrorLaunchTimeout", "hipErrorLaunchTimeOut", "numeric_literal");
+    subst("cudaErrorLossyQuery", "hipErrorLossyQuery", "numeric_literal");
     subst("cudaErrorMapBufferObjectFailed", "hipErrorMapFailed", "numeric_literal");
     subst("cudaErrorMemoryAllocation", "hipErrorOutOfMemory", "numeric_literal");
     subst("cudaErrorMissingConfiguration", "hipErrorMissingConfiguration", "numeric_literal");
@@ -6302,6 +6303,7 @@ sub simpleSubstitutions {
     subst("cudaGraphMemAttrReservedMemHigh", "hipGraphMemAttrReservedMemHigh", "numeric_literal");
     subst("cudaGraphMemAttrUsedMemCurrent", "hipGraphMemAttrUsedMemCurrent", "numeric_literal");
     subst("cudaGraphMemAttrUsedMemHigh", "hipGraphMemAttrUsedMemHigh", "numeric_literal");
+    subst("cudaGraphNodeTypeConditional", "hipGraphNodeTypeConditional", "numeric_literal");
     subst("cudaGraphNodeTypeCount", "hipGraphNodeTypeCount", "numeric_literal");
     subst("cudaGraphNodeTypeEmpty", "hipGraphNodeTypeEmpty", "numeric_literal");
     subst("cudaGraphNodeTypeEventRecord", "hipGraphNodeTypeEventRecord", "numeric_literal");
@@ -8388,6 +8390,8 @@ sub warnUnsupportedFunctions {
         "cudaMemLocationTypeHostNuma",
         "cudaMemLocationTypeHost",
         "cudaMemFreeNodeParams",
+        "cudaMemFabricHandle_t",
+        "cudaMemFabricHandle_st",
         "cudaMemAllocNodeParamsV2",
         "cudaMemAdvise_v2",
         "cudaLimitPersistingL2CacheSize",
@@ -8466,6 +8470,12 @@ sub warnUnsupportedFunctions {
         "cudaGraphExecUpdateErrorAttributesChanged",
         "cudaGraphExecNodeSetParams",
         "cudaGraphExecGetFlags",
+        "cudaGraphConditionalNodeType",
+        "cudaGraphConditionalHandleFlags",
+        "cudaGraphConditionalHandle",
+        "cudaGraphCondTypeWhile",
+        "cudaGraphCondTypeIf",
+        "cudaGraphCondAssignDefault",
         "cudaGraphAddNode",
         "cudaGetTextureObjectTextureDesc_v2",
         "cudaGetSurfaceReference",
@@ -8708,6 +8718,7 @@ sub warnUnsupportedFunctions {
         "cudaDevAttrReserved122",
         "cudaDevAttrNumaId",
         "cudaDevAttrNumaConfig",
+        "cudaDevAttrMpsEnabled",
         "cudaDevAttrMemoryPoolSupportedHandleTypes",
         "cudaDevAttrMemSyncDomainCount",
         "cudaDevAttrMaxTimelineSemaphoreInteropSupported",
@@ -8789,6 +8800,7 @@ sub warnUnsupportedFunctions {
         "cudaD3D10DeviceList",
         "cudaCtxResetPersistingL2Cache",
         "cudaCreateTextureObject_v2",
+        "cudaConditionalNodeParams",
         "cudaClusterSchedulingPolicySpread",
         "cudaClusterSchedulingPolicyLoadBalancing",
         "cudaClusterSchedulingPolicyDefault",
