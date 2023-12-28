@@ -263,6 +263,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CUDA_CONDITIONAL_NODE_PARAMS
   {"cudaConditionalNodeParams",                                        {"hipConditionalNodeParams",                                 "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
+  // CUgraphEdgeData_st
+  {"cudaGraphEdgeData_st",                                             {"hipGraphEdgeData",                                         "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // CUgraphEdgeData
+  {"cudaGraphEdgeData",                                                {"hipGraphEdgeData",                                         "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+
   // 2. Unions
 
   // CUstreamAttrValue
@@ -1793,6 +1798,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaGraphDebugDotFlagsKernelNodeAttributes",                       {"hipGraphDebugDotFlagsKernelNodeAttributes",                "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}}, // 1<<9
   // CU_GRAPH_DEBUG_DOT_FLAGS_HANDLES
   {"cudaGraphDebugDotFlagsHandles",                                    {"hipGraphDebugDotFlagsHandles",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}}, // 1<<10
+  // CU_GRAPH_DEBUG_DOT_FLAGS_CONDITIONAL_NODE_PARAMS
+  {"cudaGraphDebugDotFlagsConditionalNodeParams",                      {"hipGraphDebugDotFlagsConditionalNodeParams",               "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 1<<15
 
   // CUgraphMem_attribute
   {"cudaGraphMemAttributeType",                                        {"hipGraphMemAttributeType",                                 "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES}},
@@ -1853,6 +1860,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaLaunchAttributeMemSyncDomainMap",                              {"hipLaunchAttributeMemSyncDomainMap",                       "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   // CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN
   {"cudaLaunchAttributeMemSyncDomain",                                 {"hipLaunchAttributeMemSyncDomain",                          "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // CU_LAUNCH_ATTRIBUTE_LAUNCH_COMPLETION_EVENT
+  {"cudaLaunchAttributeLaunchCompletionEvent",                         {"hipLaunchAttributeLaunchCompletionEvent",                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   // CUgraphInstantiateResult
   {"cudaGraphInstantiateResult",                                       {"hipGraphInstantiateResult",                                "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
@@ -1904,6 +1913,16 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaGraphCondTypeIf",                                              {"hipGraphCondTypeIf",                                       "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   // CU_GRAPH_COND_TYPE_WHILE
   {"cudaGraphCondTypeWhile",                                           {"hipGraphCondTypeWhile",                                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+
+  // CUgraphDependencyType
+  {"cudaGraphDependencyType",                                          {"hipGraphDependencyType",                                   "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // CUgraphDependencyType_enum
+  {"cudaGraphDependencyType_enum",                                     {"hipGraphDependencyType",                                   "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // CUgraphDependencyType enum values
+  // CU_GRAPH_DEPENDENCY_TYPE_DEFAULT
+  {"cudaGraphDependencyTypeDefault",                                   {"hipGraphDependencyTypeDefault",                            "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // CU_GRAPH_DEPENDENCY_TYPE_PROGRAMMATIC
+  {"cudaGraphDependencyTypeProgrammatic",                              {"hipGraphDependencyTypeProgrammatic",                       "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   // 4. Typedefs
 
@@ -2087,6 +2106,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaStreamAttributeMemSyncDomainMap",                              {"hipStreamAttributeMemSyncDomainMap",                       "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // cudaLaunchAttributeMemSyncDomainMap
   // CU_STREAM_ATTRIBUTE_MEM_SYNC_DOMAIN
   {"cudaStreamAttributeMemSyncDomain",                                 {"hipStreamAttributeMemSyncDomain",                          "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // cudaLaunchAttributeMemSyncDomain
+  // CU_GRAPH_KERNEL_NODE_PORT_DEFAULT
+  {"cudaGraphKernelNodePortDefault",                                   {"hipGraphKernelNodePortDefault",                            "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0
+  // CU_GRAPH_KERNEL_NODE_PORT_PROGRAMMATIC
+  {"cudaGraphKernelNodePortProgrammatic",                              {"hipGraphKernelNodePortProgrammatic",                       "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 1
+  // CU_GRAPH_KERNEL_NODE_PORT_LAUNCH_ORDER
+  {"cudaGraphKernelNodePortLaunchCompletion",                          {"hipGraphKernelNodePortLaunchCompletion",                   "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 2
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_TYPE_NAME_VER_MAP {
@@ -2634,6 +2659,17 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_TYPE_NAME_VER_MAP 
   {"cudaGraphCondTypeWhile",                                           {CUDA_123, CUDA_0,   CUDA_0  }},
   {"cudaConditionalNodeParams",                                        {CUDA_123, CUDA_0,   CUDA_0  }},
   {"cudaGraphNodeTypeConditional",                                     {CUDA_123, CUDA_0,   CUDA_0  }},
+  {"cudaGraphDependencyType",                                          {CUDA_123, CUDA_0,   CUDA_0  }},
+  {"cudaGraphDependencyType_enum",                                     {CUDA_123, CUDA_0,   CUDA_0  }},
+  {"cudaGraphDependencyTypeDefault",                                   {CUDA_123, CUDA_0,   CUDA_0  }},
+  {"cudaGraphDependencyTypeProgrammatic",                              {CUDA_123, CUDA_0,   CUDA_0  }},
+  {"cudaGraphEdgeData_st",                                             {CUDA_123, CUDA_0,   CUDA_0  }},
+  {"cudaGraphEdgeData",                                                {CUDA_123, CUDA_0,   CUDA_0  }},
+  {"cudaGraphKernelNodePortDefault",                                   {CUDA_123, CUDA_0,   CUDA_0  }},
+  {"cudaGraphKernelNodePortProgrammatic",                              {CUDA_123, CUDA_0,   CUDA_0  }},
+  {"cudaGraphKernelNodePortLaunchCompletion",                          {CUDA_123, CUDA_0,   CUDA_0  }},
+  {"cudaGraphDebugDotFlagsConditionalNodeParams",                      {CUDA_123, CUDA_0,   CUDA_0  }},
+  {"cudaLaunchAttributeLaunchCompletionEvent",                         {CUDA_123, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {
