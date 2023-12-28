@@ -1109,6 +1109,7 @@
 |`cudaGraphConditionalHandleFlags`|12.3| | | | | | | | | |
 |`cudaGraphConditionalNodeType`|12.3| | | | | | | | | |
 |`cudaGraphDebugDotFlags`|11.3| | | |`hipGraphDebugDotFlags`|5.5.0| | | | |
+|`cudaGraphDebugDotFlagsConditionalNodeParams`|12.3| | | | | | | | | |
 |`cudaGraphDebugDotFlagsEventNodeParams`|11.3| | | |`hipGraphDebugDotFlagsEventNodeParams`|5.5.0| | | | |
 |`cudaGraphDebugDotFlagsExtSemasSignalNodeParams`|11.3| | | |`hipGraphDebugDotFlagsExtSemasSignalNodeParams`|5.5.0| | | | |
 |`cudaGraphDebugDotFlagsExtSemasWaitNodeParams`|11.3| | | |`hipGraphDebugDotFlagsExtSemasWaitNodeParams`|5.5.0| | | | |
@@ -1119,6 +1120,12 @@
 |`cudaGraphDebugDotFlagsMemcpyNodeParams`|11.3| | | |`hipGraphDebugDotFlagsMemcpyNodeParams`|5.5.0| | | | |
 |`cudaGraphDebugDotFlagsMemsetNodeParams`|11.3| | | |`hipGraphDebugDotFlagsMemsetNodeParams`|5.5.0| | | | |
 |`cudaGraphDebugDotFlagsVerbose`|11.3| | | |`hipGraphDebugDotFlagsVerbose`|5.5.0| | | | |
+|`cudaGraphDependencyType`|12.3| | | | | | | | | |
+|`cudaGraphDependencyTypeDefault`|12.3| | | | | | | | | |
+|`cudaGraphDependencyTypeProgrammatic`|12.3| | | | | | | | | |
+|`cudaGraphDependencyType_enum`|12.3| | | | | | | | | |
+|`cudaGraphEdgeData`|12.3| | | | | | | | | |
+|`cudaGraphEdgeData_st`|12.3| | | | | | | | | |
 |`cudaGraphExecUpdateError`|10.2| | | |`hipGraphExecUpdateError`|4.3.0| | | | |
 |`cudaGraphExecUpdateErrorAttributesChanged`|11.6| | | | | | | | | |
 |`cudaGraphExecUpdateErrorFunctionChanged`|10.2| | | |`hipGraphExecUpdateErrorFunctionChanged`|4.3.0| | | | |
@@ -1145,6 +1152,9 @@
 |`cudaGraphInstantiateParams_st`|12.0| | | | | | | | | |
 |`cudaGraphInstantiateResult`|12.0| | | | | | | | | |
 |`cudaGraphInstantiateSuccess`|12.0| | | | | | | | | |
+|`cudaGraphKernelNodePortDefault`|12.3| | | | | | | | | |
+|`cudaGraphKernelNodePortLaunchCompletion`|12.3| | | | | | | | | |
+|`cudaGraphKernelNodePortProgrammatic`|12.3| | | | | | | | | |
 |`cudaGraphMemAttrReservedMemCurrent`|11.4| | | |`hipGraphMemAttrReservedMemCurrent`|5.3.0| | | | |
 |`cudaGraphMemAttrReservedMemHigh`|11.4| | | |`hipGraphMemAttrReservedMemHigh`|5.3.0| | | | |
 |`cudaGraphMemAttrUsedMemCurrent`|11.4| | | |`hipGraphMemAttrUsedMemCurrent`|5.3.0| | | | |
@@ -1227,6 +1237,7 @@
 |`cudaLaunchAttributeCooperative`|11.8| | | | | | | | | |
 |`cudaLaunchAttributeID`|11.8| | | | | | | | | |
 |`cudaLaunchAttributeIgnore`|11.8| | | | | | | | | |
+|`cudaLaunchAttributeLaunchCompletionEvent`|12.3| | | | | | | | | |
 |`cudaLaunchAttributeMemSyncDomain`|12.0| | | | | | | | | |
 |`cudaLaunchAttributeMemSyncDomainMap`|12.0| | | | | | | | | |
 |`cudaLaunchAttributePriority`|11.8| | | | | | | | | |
