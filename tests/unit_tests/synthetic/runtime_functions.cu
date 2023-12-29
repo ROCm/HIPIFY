@@ -1485,6 +1485,11 @@ int main() {
   // HIP: hipError_t hipGraphDebugDotPrint(hipGraph_t graph, const char* path, unsigned int flags);
   // CHECK: result = hipGraphDebugDotPrint(Graph_t, name.c_str(), flags);
   result = cudaGraphDebugDotPrint(Graph_t, name.c_str(), flags);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaStreamUpdateCaptureDependencies(cudaStream_t stream, cudaGraphNode_t *dependencies, size_t numDependencies, unsigned int flags __dv(0));
+  // HIP: hipError_t hipStreamUpdateCaptureDependencies(hipStream_t stream, hipGraphNode_t* dependencies, size_t numDependencies, unsigned int flags __dparm(0));
+  // CHECK: result = hipStreamUpdateCaptureDependencies(stream, &graphNode, bytes, flags);
+  result = cudaStreamUpdateCaptureDependencies(stream, &graphNode, bytes, flags);
 #endif
 
 #if CUDA_VERSION >= 11040
