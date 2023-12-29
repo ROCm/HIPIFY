@@ -2160,6 +2160,26 @@ int main() {
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_csrsv_zero_pivot(rocsparse_handle handle, const rocsparse_mat_descr descr, rocsparse_mat_info info, rocsparse_int* position);
   // CHECK: status_t = rocsparse_csrsv_zero_pivot(handle_t,csrsv2_info, &iposition);
   status_t = cusparseXcsrsv2_zeroPivot(handle_t,csrsv2_info, &iposition);
+
+  // CUDA: CUSPARSE_DEPRECATED(cusparseScatter) cusparseStatus_t CUSPARSEAPI cusparseZsctr(cusparseHandle_t handle, int nnz, const cuDoubleComplex* xVal, const int* xInd, cuDoubleComplex* y, cusparseIndexBase_t idxBase);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_zsctr(rocsparse_handle handle, rocsparse_int nnz, const rocsparse_double_complex* x_val, const rocsparse_int* x_ind, rocsparse_double_complex* y, rocsparse_index_base idx_base);
+  // CHECK: status_t = rocsparse_zsctr(handle_t, innz, &dcomplexX, &xInd, &dcomplexY, indexBase_t);
+  status_t = cusparseZsctr(handle_t, innz, &dcomplexX, &xInd, &dcomplexY, indexBase_t);
+
+  // CUDA: CUSPARSE_DEPRECATED(cusparseScatter) cusparseStatus_t CUSPARSEAPI cusparseCsctr(cusparseHandle_t handle, int nnz, const cuComplex* xVal, const int* xInd, cuComplex* y, cusparseIndexBase_t idxBase);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_csctr(rocsparse_handle handle, rocsparse_int nnz, const rocsparse_float_complex* x_val, const rocsparse_int* x_ind, rocsparse_float_complex* y, rocsparse_index_base idx_base);
+  // CHECK: status_t = rocsparse_csctr(handle_t, innz, &complexX, &xInd, &complexY, indexBase_t);
+  status_t = cusparseCsctr(handle_t, innz, &complexX, &xInd, &complexY, indexBase_t);
+
+  // CUDA: CUSPARSE_DEPRECATED(cusparseScatter) cusparseStatus_t CUSPARSEAPI cusparseDsctr(cusparseHandle_t handle, int nnz, const double* xVal, const int* xInd, double* y, cusparseIndexBase_t idxBase);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_dsctr(rocsparse_handle handle, rocsparse_int nnz, const double* x_val, const rocsparse_int* x_ind, double* y, rocsparse_index_base idx_base);
+  // CHECK: status_t = rocsparse_dsctr(handle_t, innz, &dX, &xInd, &dY, indexBase_t);
+  status_t = cusparseDsctr(handle_t, innz, &dX, &xInd, &dY, indexBase_t);
+
+  // CUDA: CUSPARSE_DEPRECATED(cusparseScatter) cusparseStatus_t CUSPARSEAPI cusparseSsctr(cusparseHandle_t handle, int nnz, const float* xVal, const int* xInd, float* y, cusparseIndexBase_t idxBase);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_ssctr(rocsparse_handle handle, rocsparse_int nnz, const float* x_val, const rocsparse_int* x_ind, float* y, rocsparse_index_base idx_base);
+  // CHECK: status_t = rocsparse_ssctr(handle_t, innz, &fX, &xInd, &fY, indexBase_t);
+  status_t = cusparseSsctr(handle_t, innz, &fX, &xInd, &fY, indexBase_t);
 #endif
 
 #if CUDA_VERSION >= 12010 && CUSPARSE_VERSION >= 12100
