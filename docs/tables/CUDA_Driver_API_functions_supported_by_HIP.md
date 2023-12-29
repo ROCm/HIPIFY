@@ -1872,6 +1872,7 @@
 |`cuGraphNodeGetDependencies`|10.0| | | |`hipGraphNodeGetDependencies`|5.0.0| | | | |
 |`cuGraphNodeGetDependencies_v2`|12.3| | | | | | | | | |
 |`cuGraphNodeGetDependentNodes`|10.0| | | |`hipGraphNodeGetDependentNodes`|5.0.0| | | | |
+|`cuGraphNodeGetDependentNodes_v2`|12.3| | | | | | | | | |
 |`cuGraphNodeGetEnabled`|11.6| | | |`hipGraphNodeGetEnabled`|5.5.0| | | | |
 |`cuGraphNodeGetType`|10.0| | | |`hipGraphNodeGetType`|5.0.0| | | | |
 |`cuGraphNodeSetEnabled`|11.6| | | |`hipGraphNodeSetEnabled`|5.5.0| | | | |

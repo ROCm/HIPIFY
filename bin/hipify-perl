@@ -3268,6 +3268,7 @@ sub simpleSubstitutions {
     subst("cudaStreamIsCapturing", "hipStreamIsCapturing", "stream");
     subst("cudaStreamQuery", "hipStreamQuery", "stream");
     subst("cudaStreamSynchronize", "hipStreamSynchronize", "stream");
+    subst("cudaStreamUpdateCaptureDependencies", "hipStreamUpdateCaptureDependencies", "stream");
     subst("cudaStreamWaitEvent", "hipStreamWaitEvent", "stream");
     subst("cudaThreadExchangeStreamCaptureMode", "hipThreadExchangeStreamCaptureMode", "stream");
     subst("cuEventCreate", "hipEventCreateWithFlags", "event");
@@ -8352,11 +8353,14 @@ sub warnUnsupportedFunctions {
         "cudaSyncPolicyBlockingSync",
         "cudaSyncPolicyAuto",
         "cudaSurfaceFormatMode",
+        "cudaStreamUpdateCaptureDependencies_v2",
         "cudaStreamSetAttribute",
         "cudaStreamLegacy",
         "cudaStreamGetId",
+        "cudaStreamGetCaptureInfo_v3",
         "cudaStreamGetAttribute",
         "cudaStreamCopyAttributes",
+        "cudaStreamBeginCaptureToGraph",
         "cudaStreamAttributeSynchronizationPolicy",
         "cudaStreamAttributePriority",
         "cudaStreamAttributeMemSyncDomainMap",
@@ -8463,8 +8467,11 @@ sub warnUnsupportedFunctions {
         "cudaGraphicsCubeFaceNegativeY",
         "cudaGraphicsCubeFaceNegativeX",
         "cudaGraphicsCubeFace",
+        "cudaGraphRemoveDependencies_v2",
         "cudaGraphNodeSetParams",
         "cudaGraphNodeParams",
+        "cudaGraphNodeGetDependentNodes_v2",
+        "cudaGraphNodeGetDependencies_v2",
         "cudaGraphKernelNodePortProgrammatic",
         "cudaGraphKernelNodePortLaunchCompletion",
         "cudaGraphKernelNodePortDefault",
@@ -8477,6 +8484,7 @@ sub warnUnsupportedFunctions {
         "cudaGraphInstantiateMultipleDevicesNotSupported",
         "cudaGraphInstantiateInvalidStructure",
         "cudaGraphInstantiateError",
+        "cudaGraphGetEdges_v2",
         "cudaGraphExecUpdateResultInfo_st",
         "cudaGraphExecUpdateResultInfo",
         "cudaGraphExecUpdateErrorAttributesChanged",
@@ -8491,11 +8499,14 @@ sub warnUnsupportedFunctions {
         "cudaGraphDebugDotFlagsConditionalNodeParams",
         "cudaGraphConditionalNodeType",
         "cudaGraphConditionalHandleFlags",
+        "cudaGraphConditionalHandleCreate",
         "cudaGraphConditionalHandle",
         "cudaGraphCondTypeWhile",
         "cudaGraphCondTypeIf",
         "cudaGraphCondAssignDefault",
+        "cudaGraphAddNode_v2",
         "cudaGraphAddNode",
+        "cudaGraphAddDependencies_v2",
         "cudaGetTextureObjectTextureDesc_v2",
         "cudaGetSurfaceReference",
         "cudaGetSurfaceObjectResourceDesc",
@@ -8521,6 +8532,7 @@ sub warnUnsupportedFunctions {
         "cudaGLMapFlags",
         "cudaGLMapBufferObjectAsync",
         "cudaGLMapBufferObject",
+        "cudaFuncGetName",
         "cudaFuncAttributeRequiredClusterWidth",
         "cudaFuncAttributeRequiredClusterHeight",
         "cudaFuncAttributeRequiredClusterDepth",
@@ -8967,6 +8979,7 @@ sub warnUnsupportedFunctions {
         "cuGraphicsD3D11RegisterResource",
         "cuGraphicsD3D10RegisterResource",
         "cuGraphRemoveDependencies_v2",
+        "cuGraphNodeGetDependentNodes_v2",
         "cuGraphNodeGetDependencies_v2",
         "cuGraphGetEdges_v2",
         "cuGraphExecMemsetNodeSetParams",

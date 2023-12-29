@@ -66,6 +66,7 @@
 |`cudaStreamAddCallback`| | | | |`hipStreamAddCallback`|1.6.0| | | | |
 |`cudaStreamAttachMemAsync`| | | | |`hipStreamAttachMemAsync`|3.7.0| | | | |
 |`cudaStreamBeginCapture`|10.0| | | |`hipStreamBeginCapture`|4.3.0| | | | |
+|`cudaStreamBeginCaptureToGraph`|12.3| | | | | | | | | |
 |`cudaStreamCopyAttributes`|11.0| | | | | | | | | |
 |`cudaStreamCreate`| | | | |`hipStreamCreate`|1.6.0| | | | |
 |`cudaStreamCreateWithFlags`| | | | |`hipStreamCreateWithFlags`|1.6.0| | | | |
@@ -74,6 +75,7 @@
 |`cudaStreamEndCapture`|10.0| | | |`hipStreamEndCapture`|4.3.0| | | | |
 |`cudaStreamGetAttribute`|11.0| | | | | | | | | |
 |`cudaStreamGetCaptureInfo`|10.1| | | |`hipStreamGetCaptureInfo`|5.0.0| | | | |
+|`cudaStreamGetCaptureInfo_v3`|12.3| | | | | | | | | |
 |`cudaStreamGetFlags`| | | | |`hipStreamGetFlags`|1.6.0| | | | |
 |`cudaStreamGetId`|12.0| | | | | | | | | |
 |`cudaStreamGetPriority`| | | | |`hipStreamGetPriority`|2.0.0| | | | |
@@ -81,6 +83,8 @@
 |`cudaStreamQuery`| | | | |`hipStreamQuery`|1.6.0| | | | |
 |`cudaStreamSetAttribute`|11.0| | | | | | | | | |
 |`cudaStreamSynchronize`| | | | |`hipStreamSynchronize`|1.6.0| | | | |
+|`cudaStreamUpdateCaptureDependencies`|11.3| | | |`hipStreamUpdateCaptureDependencies`|5.0.0| | | | |
+|`cudaStreamUpdateCaptureDependencies_v2`|12.3| | | | | | | | | |
 |`cudaStreamWaitEvent`| | | | |`hipStreamWaitEvent`|1.6.0| | | | |
 |`cudaThreadExchangeStreamCaptureMode`|10.1| | | |`hipThreadExchangeStreamCaptureMode`|5.2.0| | | | |
 
@@ -115,6 +119,7 @@
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
 |`cudaFuncGetAttributes`| | | | |`hipFuncGetAttributes`|1.9.0| | | | |
+|`cudaFuncGetName`|12.3| | | | | | | | | |
 |`cudaFuncSetAttribute`|9.0| | | |`hipFuncSetAttribute`|3.9.0| | | | |
 |`cudaFuncSetCacheConfig`| | | | |`hipFuncSetCacheConfig`|1.6.0| | | | |
 |`cudaFuncSetSharedMemConfig`| | | | |`hipFuncSetSharedMemConfig`|3.9.0| | | | |
@@ -412,6 +417,7 @@
 |`cudaDeviceSetGraphMemAttribute`|11.4| | | |`hipDeviceSetGraphMemAttribute`|5.3.0| | | | |
 |`cudaGraphAddChildGraphNode`|10.0| | | |`hipGraphAddChildGraphNode`|5.0.0| | | | |
 |`cudaGraphAddDependencies`|10.0| | | |`hipGraphAddDependencies`|4.5.0| | | | |
+|`cudaGraphAddDependencies_v2`|12.3| | | | | | | | | |
 |`cudaGraphAddEmptyNode`|10.0| | | |`hipGraphAddEmptyNode`|4.5.0| | | | |
 |`cudaGraphAddEventRecordNode`|11.1| | | |`hipGraphAddEventRecordNode`|5.0.0| | | | |
 |`cudaGraphAddEventWaitNode`|11.1| | | |`hipGraphAddEventWaitNode`|5.0.0| | | | |
@@ -427,8 +433,10 @@
 |`cudaGraphAddMemcpyNodeToSymbol`|11.1| | | |`hipGraphAddMemcpyNodeToSymbol`|5.0.0| | | | |
 |`cudaGraphAddMemsetNode`|10.0| | | |`hipGraphAddMemsetNode`|4.3.0| | | | |
 |`cudaGraphAddNode`|12.2| | | | | | | | | |
+|`cudaGraphAddNode_v2`|12.3| | | | | | | | | |
 |`cudaGraphChildGraphNodeGetGraph`|10.0| | | |`hipGraphChildGraphNodeGetGraph`|5.0.0| | | | |
 |`cudaGraphClone`|10.0| | | |`hipGraphClone`|5.0.0| | | | |
+|`cudaGraphConditionalHandleCreate`|12.3| | | | | | | | | |
 |`cudaGraphCreate`|10.0| | | |`hipGraphCreate`|4.3.0| | | | |
 |`cudaGraphDebugDotPrint`|11.3| | | |`hipGraphDebugDotPrint`|5.5.0| | | | |
 |`cudaGraphDestroy`|10.0| | | |`hipGraphDestroy`|4.3.0| | | | |
@@ -458,6 +466,7 @@
 |`cudaGraphExternalSemaphoresWaitNodeGetParams`|11.2| | | |`hipGraphExternalSemaphoresWaitNodeGetParams`|6.0.0| | | | |
 |`cudaGraphExternalSemaphoresWaitNodeSetParams`|11.2| | | |`hipGraphExternalSemaphoresWaitNodeSetParams`|6.0.0| | | | |
 |`cudaGraphGetEdges`|10.0| | | |`hipGraphGetEdges`|5.0.0| | | | |
+|`cudaGraphGetEdges_v2`|12.3| | | | | | | | | |
 |`cudaGraphGetNodes`|10.0| | | |`hipGraphGetNodes`|4.5.0| | | | |
 |`cudaGraphGetRootNodes`|10.0| | | |`hipGraphGetRootNodes`|4.5.0| | | | |
 |`cudaGraphHostNodeGetParams`|10.0| | | |`hipGraphHostNodeGetParams`|5.0.0| | | | |
@@ -482,13 +491,16 @@
 |`cudaGraphMemsetNodeSetParams`|11.0| | | |`hipGraphMemsetNodeSetParams`|4.5.0| | | | |
 |`cudaGraphNodeFindInClone`|11.0| | | |`hipGraphNodeFindInClone`|5.0.0| | | | |
 |`cudaGraphNodeGetDependencies`|11.0| | | |`hipGraphNodeGetDependencies`|5.0.0| | | | |
+|`cudaGraphNodeGetDependencies_v2`|12.3| | | | | | | | | |
 |`cudaGraphNodeGetDependentNodes`|11.0| | | |`hipGraphNodeGetDependentNodes`|5.0.0| | | | |
+|`cudaGraphNodeGetDependentNodes_v2`|12.3| | | | | | | | | |
 |`cudaGraphNodeGetEnabled`|11.6| | | |`hipGraphNodeGetEnabled`|5.5.0| | | | |
 |`cudaGraphNodeGetType`|11.0| | | |`hipGraphNodeGetType`|5.0.0| | | | |
 |`cudaGraphNodeSetEnabled`|11.6| | | |`hipGraphNodeSetEnabled`|5.5.0| | | | |
 |`cudaGraphNodeSetParams`|12.2| | | | | | | | | |
 |`cudaGraphReleaseUserObject`|11.3| | | |`hipGraphReleaseUserObject`|5.3.0| | | | |
 |`cudaGraphRemoveDependencies`|11.0| | | |`hipGraphRemoveDependencies`|5.0.0| | | | |
+|`cudaGraphRemoveDependencies_v2`|12.3| | | | | | | | | |
 |`cudaGraphRetainUserObject`|11.3| | | |`hipGraphRetainUserObject`|5.3.0| | | | |
 |`cudaGraphUpload`|11.1| | | |`hipGraphUpload`|5.3.0| | | | |
 |`cudaUserObjectCreate`|11.3| | | |`hipUserObjectCreate`|5.3.0| | | | |
