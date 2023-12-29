@@ -2340,6 +2340,7 @@ sub rocSubstitutions {
     subst("cusparseCreateMatDescr", "rocsparse_create_mat_descr", "library");
     subst("cusparseCreateSpVec", "rocsparse_create_spvec_descr", "library");
     subst("cusparseCscSetPointers", "rocsparse_csc_set_pointers", "library");
+    subst("cusparseCsctr", "rocsparse_csctr", "library");
     subst("cusparseCsrGet", "rocsparse_csr_get", "library");
     subst("cusparseCsrSetPointers", "rocsparse_csr_set_pointers", "library");
     subst("cusparseCsrSetStridedBatch", "rocsparse_csr_set_strided_batch", "library");
@@ -2435,6 +2436,7 @@ sub rocSubstitutions {
     subst("cusparseDpruneDense2csrNnz", "rocsparse_dprune_dense2csr_nnz", "library");
     subst("cusparseDpruneDense2csrNnzByPercentage", "rocsparse_dprune_dense2csr_nnz_by_percentage", "library");
     subst("cusparseDpruneDense2csr_bufferSizeExt", "rocsparse_dprune_dense2csr_buffer_size", "library");
+    subst("cusparseDsctr", "rocsparse_dsctr", "library");
     subst("cusparseGather", "rocsparse_gather", "library");
     subst("cusparseGetMatDiagType", "rocsparse_get_mat_diag_type", "library");
     subst("cusparseGetMatFillMode", "rocsparse_get_mat_fill_mode", "library");
@@ -2544,6 +2546,7 @@ sub rocSubstitutions {
     subst("cusparseSpruneDense2csrNnz", "rocsparse_sprune_dense2csr_nnz", "library");
     subst("cusparseSpruneDense2csrNnzByPercentage", "rocsparse_sprune_dense2csr_nnz_by_percentage", "library");
     subst("cusparseSpruneDense2csr_bufferSizeExt", "rocsparse_sprune_dense2csr_buffer_size", "library");
+    subst("cusparseSsctr", "rocsparse_ssctr", "library");
     subst("cusparseXbsric02_zeroPivot", "rocsparse_bsric0_zero_pivot", "library");
     subst("cusparseXbsrilu02_zeroPivot", "rocsparse_bsrilu0_zero_pivot", "library");
     subst("cusparseXbsrsm2_zeroPivot", "rocsparse_bsrsm_zero_pivot", "library");
@@ -2630,6 +2633,7 @@ sub rocSubstitutions {
     subst("cusparseZhybmv", "rocsparse_zhybmv", "library");
     subst("cusparseZnnz", "rocsparse_znnz", "library");
     subst("cusparseZnnz_compress", "rocsparse_znnz_compress", "library");
+    subst("cusparseZsctr", "rocsparse_zsctr", "library");
     subst("__half", "rocblas_half", "device_type");
     subst("__nv_bfloat16", "rocblas_bfloat16", "device_type");
     subst("cublas.h", "rocblas.h", "include_cuda_main_header");
