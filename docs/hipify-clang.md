@@ -23,7 +23,7 @@ After applying all the matchers, the output HIP source is produced.
 
 1. [**LLVM+CLANG**](http://releases.llvm.org) of at least version [4.0.0](http://releases.llvm.org/download.html#4.0.0); the latest stable and recommended release: [**17.0.6**](https://github.com/llvm/llvm-project/releases/tag/llvmorg-17.0.6).
 
-2. [**CUDA**](https://developer.nvidia.com/cuda-downloads) of at least version [8.0](https://developer.nvidia.com/cuda-80-ga2-download-archive), the latest supported version is [**12.3.0**](https://developer.nvidia.com/cuda-12-3-0-download-archive).
+2. [**CUDA**](https://developer.nvidia.com/cuda-downloads) of at least version [8.0](https://developer.nvidia.com/cuda-80-ga2-download-archive), the latest supported version is [**12.3.1**](https://developer.nvidia.com/cuda-downloads).
 
 <table align="center">
   <thead>
@@ -180,12 +180,12 @@ After applying all the matchers, the output HIP source is produced.
                            <a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-17.0.4">17.0.4</a>,
                            <a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-17.0.5">17.0.5</a>,
                            <a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-17.0.6"><b>17.0.6</b></a></td>
-      <td bgcolor="eefaeb"><a href="https://developer.nvidia.com/cuda-12-3-0-download-archive"><b>12.3.0</b></a></td>
+      <td bgcolor="eefaeb"><a href="https://developer.nvidia.com/cuda-downloads"><b>12.3.1</b></a></td>
       <td colspan=2 bgcolor="eefaeb"><font color="green"><b>LATEST STABLE CONFIG</b></font></td>
     </tr>
     <tr align="center">
       <td><a href="https://github.com/llvm/llvm-project">18.0.0git</a></td>
-      <td><a href="https://developer.nvidia.com/cuda-12-3-0-download-archive">12.3.0</a></td>
+      <td><a href="https://developer.nvidia.com/cuda-downloads">12.3.1</a></td>
       <td>+</td>
       <td>+</td>
     </tr>
@@ -416,9 +416,9 @@ Ubuntu 14: LLVM 4.0.0 - 7.1.0, CUDA 7.0 - 9.0, cuDNN 5.0.5 - 7.6.5
 
 Ubuntu 16-18: LLVM 8.0.0 - 14.0.6, CUDA 8.0 - 10.2, cuDNN 5.1.10 - 8.0.5
 
-Ubuntu 20-21: LLVM 9.0.0 - 17.0.6, CUDA 8.0 - 12.3.0, cuDNN 5.1.10 - 8.9.7
+Ubuntu 20-21: LLVM 9.0.0 - 17.0.6, CUDA 8.0 - 12.3.1, cuDNN 5.1.10 - 8.9.7
 
-Ubuntu 22: LLVM 13.0.0 - 17.0.6, CUDA 10.0 - 12.3.0, cuDNN 8.0.5 - 8.9.7
+Ubuntu 22: LLVM 13.0.0 - 17.0.6, CUDA 10.0 - 12.3.1, cuDNN 8.0.5 - 8.9.7
 
 Minimum build system requirements for the above configurations:
 
@@ -487,7 +487,7 @@ make test-hipify
 ```shell
 Running HIPify regression tests
 ========================================
-CUDA 12.3.52 - will be used for testing
+CUDA 12.3.103 - will be used for testing
 LLVM 17.0.6 - will be used for testing
 x86_64 - Platform architecture
 Linux 5.13.0-21-generic - Platform OS
@@ -608,8 +608,8 @@ Testing Time: 7.90s
 | 14.0.0 - 14.0.6 | 7.0 - 11.7.1 | 8.0.5  - 8.4.1 | 2017.15.9.57*, 2019.16.11.17, 2022.17.2.6 | 3.24.0          | 3.10.6        |
 | 15.0.0 - 15.0.7 | 7.0 - 11.8.0 | 8.0.5  - 8.8.1 | 2019.16.11.25, 2022.17.5.2                | 3.26.0          | 3.11.2        |
 | 16.0.0 - 16.0.6 | 7.0 - 12.2.2 | 8.0.5  - 8.9.5 | 2019.16.11.29, 2022.17.7.1                | 3.27.3          | 3.11.4        |
-| 17.0.1** 17.0.6 | 7.0 - 12.3.0 | 8.0.5  - 8.9.7 | 2019.16.11.32, 2022.17.8.3                | 3.28.1          | 3.12.1        |
-| 18.0.0git       | 7.0 - 12.3.0 | 8.0.5  - 8.9.7 | 2019.16.11.32, 2022.17.8.3                | 3.28.1          | 3.12.1        |
+| 17.0.1** 17.0.6 | 7.0 - 12.3.1 | 8.0.5  - 8.9.7 | 2019.16.11.32, 2022.17.8.3                | 3.28.1          | 3.12.1        |
+| 18.0.0git       | 7.0 - 12.3.1 | 8.0.5  - 8.9.7 | 2019.16.11.32, 2022.17.8.3                | 3.28.1          | 3.12.1        |
 
 `*` LLVM 14.x.x is the latest major release supporting Visual Studio 2017.
 To build LLVM 14.x.x correctly by Visual Studio 2017, `-DLLVM_FORCE_USE_OLD_TOOLCHAIN=ON` should be added to a corresponding cmake command line.
