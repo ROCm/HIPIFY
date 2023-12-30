@@ -267,25 +267,25 @@
 |`cusparseCdotci`| |10.2| |11.0|`hipsparseCdotci`|3.1.0| | | | | | | | | | |
 |`cusparseCdoti`| |10.2| |11.0|`hipsparseCdoti`|3.1.0| | | | | | | | | | |
 |`cusparseCgthr`| |11.0| |12.0|`hipsparseCgthr`|3.1.0| | | | | | | | | | |
-|`cusparseCgthrz`| |11.0| |12.0|`hipsparseCgthrz`|3.1.0| | | | | | | | | | |
+|`cusparseCgthrz`| |11.0| |12.0|`hipsparseCgthrz`|3.1.0| | | | |`rocsparse_cgthrz`|1.9.0| | | | |
 |`cusparseCsctr`| |11.0| |12.0|`hipsparseCsctr`|3.1.0| | | | |`rocsparse_csctr`|1.9.0| | | | |
 |`cusparseDaxpyi`| |11.0| |12.0|`hipsparseDaxpyi`|1.9.2| | | | | | | | | | |
 |`cusparseDdoti`| |10.2| |11.0|`hipsparseDdoti`|1.9.2| | | | | | | | | | |
 |`cusparseDgthr`| |11.0| |12.0|`hipsparseDgthr`|1.9.2| | | | | | | | | | |
-|`cusparseDgthrz`| |11.0| |12.0|`hipsparseDgthrz`|1.9.2| | | | | | | | | | |
+|`cusparseDgthrz`| |11.0| |12.0|`hipsparseDgthrz`|1.9.2| | | | |`rocsparse_dgthrz`|1.9.0| | | | |
 |`cusparseDroti`| |11.0| |12.0|`hipsparseDroti`|1.9.2| | | | |`rocsparse_droti`|1.9.0| | | | |
 |`cusparseDsctr`| |11.0| |12.0|`hipsparseDsctr`|1.9.2| | | | |`rocsparse_dsctr`|1.9.0| | | | |
 |`cusparseSaxpyi`| |11.0| |12.0|`hipsparseSaxpyi`|1.9.2| | | | | | | | | | |
 |`cusparseSdoti`| |10.2| |11.0|`hipsparseSdoti`|1.9.2| | | | | | | | | | |
 |`cusparseSgthr`| |11.0| |12.0|`hipsparseSgthr`|1.9.2| | | | | | | | | | |
-|`cusparseSgthrz`| |11.0| |12.0|`hipsparseSgthrz`|1.9.2| | | | | | | | | | |
+|`cusparseSgthrz`| |11.0| |12.0|`hipsparseSgthrz`|1.9.2| | | | |`rocsparse_sgthrz`|1.9.0| | | | |
 |`cusparseSroti`| |11.0| |12.0|`hipsparseSroti`|1.9.2| | | | |`rocsparse_sroti`|1.9.0| | | | |
 |`cusparseSsctr`| |11.0| |12.0|`hipsparseSsctr`|1.9.2| | | | |`rocsparse_ssctr`|1.9.0| | | | |
 |`cusparseZaxpyi`| |11.0| |12.0|`hipsparseZaxpyi`|3.1.0| | | | | | | | | | |
 |`cusparseZdotci`| |10.2| |11.0|`hipsparseZdotci`|3.1.0| | | | | | | | | | |
 |`cusparseZdoti`| |10.2| |11.0|`hipsparseZdoti`|3.1.0| | | | | | | | | | |
 |`cusparseZgthr`| |11.0| |12.0|`hipsparseZgthr`|3.1.0| | | | | | | | | | |
-|`cusparseZgthrz`| |11.0| |12.0|`hipsparseZgthrz`|3.1.0| | | | | | | | | | |
+|`cusparseZgthrz`| |11.0| |12.0|`hipsparseZgthrz`|3.1.0| | | | |`rocsparse_zgthrz`|1.9.0| | | | |
 |`cusparseZsctr`| |11.0| |12.0|`hipsparseZsctr`|3.1.0| | | | |`rocsparse_zsctr`|1.9.0| | | | |
 
 ## **9. CUSPARSE Level 2 Function Reference**
