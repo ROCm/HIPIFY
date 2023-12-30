@@ -280,6 +280,7 @@ int main() {
   double dBeta = 0.f;
   double dC = 0.f;
   double dF = 0.f;
+  double dS = 0.f;
   double dX = 0.f;
   double dY = 0.f;
   float fA = 0.f;
@@ -288,6 +289,7 @@ int main() {
   float fBeta = 0.f;
   float fC = 0.f;
   float fF = 0.f;
+  float fS = 0.f;
   float fX = 0.f;
   float fY = 0.f;
   int algo = 0;
@@ -2691,6 +2693,16 @@ int main() {
   // HIP: DEPRECATED_CUDA_11000("The routine will be removed in CUDA 12") HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSsctr(hipsparseHandle_t handle, int nnz, const float* xVal, const int* xInd, float* y, hipsparseIndexBase_t idxBase);
   // CHECK: status_t = hipsparseSsctr(handle_t, innz, &fX, &xInd, &fY, indexBase_t);
   status_t = cusparseSsctr(handle_t, innz, &fX, &xInd, &fY, indexBase_t);
+
+  // CUDA: CUSPARSE_DEPRECATED(cusparseRot) cusparseStatus_t CUSPARSEAPI cusparseDroti(cusparseHandle_t handle, int nnz, double* xVal, const int* xInd, double* y, const double* c, const double* s, cusparseIndexBase_t idxBase);
+  // HIP: DEPRECATED_CUDA_11000("The routine will be removed in CUDA 12") HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDroti(hipsparseHandle_t handle, int nnz, double* xVal, const int* xInd, double* y, const double* c, const double* s, hipsparseIndexBase_t idxBase);
+  // CHECK: status_t = hipsparseDroti(handle_t, innz, &dX, &xInd, &dY, &dC, &dS, indexBase_t);
+  status_t = cusparseDroti(handle_t, innz, &dX, &xInd, &dY, &dC, &dS, indexBase_t);
+
+  // CUDA: CUSPARSE_DEPRECATED(cusparseRot) cusparseStatus_t CUSPARSEAPI cusparseSroti(cusparseHandle_t handle, int nnz, float* xVal, const int* xInd, float* y, const float* c, const float* s, cusparseIndexBase_t idxBase);
+  // HIP: DEPRECATED_CUDA_11000("The routine will be removed in CUDA 12") HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSroti(hipsparseHandle_t handle, int nnz, float* xVal, const int* xInd, float* y, const float* c, const float* s, hipsparseIndexBase_t idxBase);
+  // CHECK: status_t = hipsparseSroti(handle_t, innz, &fX, &xInd, &fY, &fC, &fS, indexBase_t);
+  status_t = cusparseSroti(handle_t, innz, &fX, &xInd, &fY, &fC, &fS, indexBase_t);
 #endif
 
 #if CUDA_VERSION >= 12000

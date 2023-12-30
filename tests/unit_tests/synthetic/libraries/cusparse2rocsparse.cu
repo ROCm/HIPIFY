@@ -260,6 +260,7 @@ int main() {
   double dBeta = 0.f;
   double dC = 0.f;
   double dF = 0.f;
+  double dS = 0.f;
   double dX = 0.f;
   double dY = 0.f;
   float fA = 0.f;
@@ -268,6 +269,7 @@ int main() {
   float fBeta = 0.f;
   float fC = 0.f;
   float fF = 0.f;
+  float fS = 0.f;
   float fX = 0.f;
   float fY = 0.f;
   int algo = 0;
@@ -2180,6 +2182,16 @@ int main() {
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_ssctr(rocsparse_handle handle, rocsparse_int nnz, const float* x_val, const rocsparse_int* x_ind, float* y, rocsparse_index_base idx_base);
   // CHECK: status_t = rocsparse_ssctr(handle_t, innz, &fX, &xInd, &fY, indexBase_t);
   status_t = cusparseSsctr(handle_t, innz, &fX, &xInd, &fY, indexBase_t);
+
+  // CUDA: CUSPARSE_DEPRECATED(cusparseRot) cusparseStatus_t CUSPARSEAPI cusparseDroti(cusparseHandle_t handle, int nnz, double* xVal, const int* xInd, double* y, const double* c, const double* s, cusparseIndexBase_t idxBase);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_droti(rocsparse_handle handle, rocsparse_int nnz, double* x_val, const rocsparse_int* x_ind, double* y, const double* c, const double* s, rocsparse_index_base idx_base);
+  // CHECK: status_t = rocsparse_droti(handle_t, innz, &dX, &xInd, &dY, &dC, &dS, indexBase_t);
+  status_t = cusparseDroti(handle_t, innz, &dX, &xInd, &dY, &dC, &dS, indexBase_t);
+
+  // CUDA: CUSPARSE_DEPRECATED(cusparseRot) cusparseStatus_t CUSPARSEAPI cusparseSroti(cusparseHandle_t handle, int nnz, float* xVal, const int* xInd, float* y, const float* c, const float* s, cusparseIndexBase_t idxBase);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_sroti(rocsparse_handle handle, rocsparse_int nnz, float* x_val, const rocsparse_int* x_ind, float* y, const float* c, const float* s, rocsparse_index_base idx_base);
+  // CHECK: status_t = rocsparse_sroti(handle_t, innz, &fX, &xInd, &fY, &fC, &fS, indexBase_t);
+  status_t = cusparseSroti(handle_t, innz, &fX, &xInd, &fY, &fC, &fS, indexBase_t);
 #endif
 
 #if CUDA_VERSION >= 12010 && CUSPARSE_VERSION >= 12100

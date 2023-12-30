@@ -273,13 +273,13 @@
 |`cusparseDdoti`| |10.2| |11.0| | | | | | |
 |`cusparseDgthr`| |11.0| |12.0| | | | | | |
 |`cusparseDgthrz`| |11.0| |12.0| | | | | | |
-|`cusparseDroti`| |11.0| |12.0| | | | | | |
+|`cusparseDroti`| |11.0| |12.0|`rocsparse_droti`|1.9.0| | | | |
 |`cusparseDsctr`| |11.0| |12.0|`rocsparse_dsctr`|1.9.0| | | | |
 |`cusparseSaxpyi`| |11.0| |12.0| | | | | | |
 |`cusparseSdoti`| |10.2| |11.0| | | | | | |
 |`cusparseSgthr`| |11.0| |12.0| | | | | | |
 |`cusparseSgthrz`| |11.0| |12.0| | | | | | |
-|`cusparseSroti`| |11.0| |12.0| | | | | | |
+|`cusparseSroti`| |11.0| |12.0|`rocsparse_sroti`|1.9.0| | | | |
 |`cusparseSsctr`| |11.0| |12.0|`rocsparse_ssctr`|1.9.0| | | | |
 |`cusparseZaxpyi`| |11.0| |12.0| | | | | | |
 |`cusparseZdotci`| |10.2| |11.0| | | | | | |
