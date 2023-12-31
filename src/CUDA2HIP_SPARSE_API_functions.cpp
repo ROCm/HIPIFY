@@ -89,10 +89,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   {"cusparseCaxpyi",                                    {"hipsparseCaxpyi",                                    "",                                                                 CONV_LIB_FUNC, API_SPARSE, 8, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
   {"cusparseZaxpyi",                                    {"hipsparseZaxpyi",                                    "",                                                                 CONV_LIB_FUNC, API_SPARSE, 8, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
 
-  {"cusparseSdoti",                                     {"hipsparseSdoti",                                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 8, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseDdoti",                                     {"hipsparseDdoti",                                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 8, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseCdoti",                                     {"hipsparseCdoti",                                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 8, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseZdoti",                                     {"hipsparseZdoti",                                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 8, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
+  // TODO: rocsparse_get_stream and hipStreamSynchronize need to be added correspondingly before and after rocsparse_(s|d|c|z)doti call, because cusparse(S|D|C|Z)doti is blocking, and rocsparse_(s|d|c|z)doti is not
+  {"cusparseSdoti",                                     {"hipsparseSdoti",                                     "rocsparse_sdoti",                                                  CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED}},
+  {"cusparseDdoti",                                     {"hipsparseDdoti",                                     "rocsparse_ddoti",                                                  CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED}},
+  {"cusparseCdoti",                                     {"hipsparseCdoti",                                     "rocsparse_cdoti",                                                  CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED}},
+  {"cusparseZdoti",                                     {"hipsparseZdoti",                                     "rocsparse_zdoti",                                                  CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED}},
 
   // TODO: rocsparse_get_stream and hipStreamSynchronize need to be added correspondingly before and after rocsparse_(c|z)dotci call, because cusparse(C|Z)dotci is blocking, and rocsparse_(c|z)dotci is not
   {"cusparseCdotci",                                    {"hipsparseCdotci",                                    "rocsparse_cdotci",                                                 CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED}},
@@ -2380,6 +2381,10 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_FUNCTION_VER_MAP {
   {"rocsparse_zgthr",                                    {HIP_1090, HIP_0,    HIP_0   }},
   {"rocsparse_cdotci",                                   {HIP_3000, HIP_0,    HIP_0   }},
   {"rocsparse_zdotci",                                   {HIP_3000, HIP_0,    HIP_0   }},
+  {"rocsparse_sdoti",                                    {HIP_1090, HIP_0,    HIP_0   }},
+  {"rocsparse_ddoti",                                    {HIP_1090, HIP_0,    HIP_0   }},
+  {"rocsparse_cdoti",                                    {HIP_1090, HIP_0,    HIP_0   }},
+  {"rocsparse_zdoti",                                    {HIP_1090, HIP_0,    HIP_0   }},
 };
 
 const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_SPARSE_FUNCTION_CHANGED_VER_MAP {
