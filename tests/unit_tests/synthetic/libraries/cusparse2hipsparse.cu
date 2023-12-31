@@ -316,11 +316,11 @@ int main() {
   bsrsm2Info_t bsrsm2_info;
   bsrsv2Info_t bsrsv2_info;
 
-  // CHECK: hipDoubleComplex dcomplex, dcomplexA, dcomplexAlpha, dcomplexB, dcomplexBeta, dcomplexC, dcomplexF, dcomplexX, dcomplexY, dComplexbsrSortedValA, dComplexbsrSortedValC, dComplexcsrSortedValA, dComplexcsrSortedValB, dComplexcsrSortedValC, dcomplextol, dComplexbsrSortedVal, dComplexbscVal, dComplexcscSortedVal, dcomplexds, dcomplexdl, dcomplexd, dcomplexdu, dcomplexdw, dcomplexx, dcomplex_boost_val;
-  cuDoubleComplex dcomplex, dcomplexA, dcomplexAlpha, dcomplexB, dcomplexBeta, dcomplexC, dcomplexF, dcomplexX, dcomplexY, dComplexbsrSortedValA, dComplexbsrSortedValC, dComplexcsrSortedValA, dComplexcsrSortedValB, dComplexcsrSortedValC, dcomplextol, dComplexbsrSortedVal, dComplexbscVal, dComplexcscSortedVal, dcomplexds, dcomplexdl, dcomplexd, dcomplexdu, dcomplexdw, dcomplexx, dcomplex_boost_val;
+  // CHECK: hipDoubleComplex dcomplex, dcomplexA, dcomplexAlpha, dcomplexB, dcomplexBeta, dcomplexC, dcomplexF, dcomplexX, dcomplexY, dComplexbsrSortedValA, dComplexbsrSortedValC, dComplexcsrSortedValA, dComplexcsrSortedValB, dComplexcsrSortedValC, dcomplextol, dComplexbsrSortedVal, dComplexbscVal, dComplexcscSortedVal, dcomplexds, dcomplexdl, dcomplexd, dcomplexdu, dcomplexdw, dcomplexx, dcomplex_boost_val, dcomplex_resultDevHostPtr;
+  cuDoubleComplex dcomplex, dcomplexA, dcomplexAlpha, dcomplexB, dcomplexBeta, dcomplexC, dcomplexF, dcomplexX, dcomplexY, dComplexbsrSortedValA, dComplexbsrSortedValC, dComplexcsrSortedValA, dComplexcsrSortedValB, dComplexcsrSortedValC, dcomplextol, dComplexbsrSortedVal, dComplexbscVal, dComplexcscSortedVal, dcomplexds, dcomplexdl, dcomplexd, dcomplexdu, dcomplexdw, dcomplexx, dcomplex_boost_val, dcomplex_resultDevHostPtr;
 
-  // CHECK: hipComplex complex, complexA, complexAlpha, complexB, complexBeta, complexC, complexF, complexX, complexY, complexbsrValA, complexbsrSortedValC, complexcsrSortedValA, complexcsrSortedValB, complexcsrSortedValC, complextol, complexbsrSortedVal, complexbscVal, complexcscSortedVal, complexds, complexdl, complexd, complexdu, complexdw, complexx, complex_boost_val;
-  cuComplex complex, complexA, complexAlpha, complexB, complexBeta, complexC, complexF, complexX, complexY, complexbsrValA, complexbsrSortedValC, complexcsrSortedValA, complexcsrSortedValB, complexcsrSortedValC, complextol, complexbsrSortedVal, complexbscVal, complexcscSortedVal, complexds, complexdl, complexd, complexdu, complexdw, complexx, complex_boost_val;
+  // CHECK: hipComplex complex, complexA, complexAlpha, complexB, complexBeta, complexC, complexF, complexX, complexY, complexbsrValA, complexbsrSortedValC, complexcsrSortedValA, complexcsrSortedValB, complexcsrSortedValC, complextol, complexbsrSortedVal, complexbscVal, complexcscSortedVal, complexds, complexdl, complexd, complexdu, complexdw, complexx, complex_boost_val, complex_resultDevHostPtr;
+  cuComplex complex, complexA, complexAlpha, complexB, complexBeta, complexC, complexF, complexX, complexY, complexbsrValA, complexbsrSortedValC, complexcsrSortedValA, complexcsrSortedValB, complexcsrSortedValC, complextol, complexbsrSortedVal, complexbscVal, complexcscSortedVal, complexds, complexdl, complexd, complexdu, complexdw, complexx, complex_boost_val, complex_resultDevHostPtr;
 
   // CHECK: hipsparseOperation_t opA, opB, opX;
   cusparseOperation_t opA, opB, opX;
@@ -2217,6 +2217,16 @@ int main() {
   // HIP: DEPRECATED_CUDA_10000("The routine will be removed in CUDA 11") HIPSPARSE_EXPORT hipsparseStatus_t hipsparseScsrmv(hipsparseHandle_t handle, hipsparseOperation_t transA, int m, int n, int nnz, const float* alpha, const hipsparseMatDescr_t descrA, const float* csrSortedValA, const int* csrSortedRowPtrA, const int* csrSortedColIndA, const float* x, const float* beta, float* y);
   // CHECK: status_t = hipsparseScsrmv(handle_t, opA, m, n, innz, &fAlpha, matDescr_A, &csrSortedValA, &csrRowPtrA, &csrColIndA, &fX, &fBeta, &fY);
   status_t = cusparseScsrmv(handle_t, opA, m, n, innz, &fAlpha, matDescr_A, &csrSortedValA, &csrRowPtrA, &csrColIndA, &fX, &fBeta, &fY);
+
+  // CUDA: CUSPARSE_DEPRECATED_HINT(cusparseSpVV) cusparseStatus_t CUSPARSEAPI cusparseZdotci(cusparseHandle_t handle, int nnz, const cuDoubleComplex* xVal, const int* xInd, const cuDoubleComplex* y, cuDoubleComplex* resultDevHostPtr, cusparseIndexBase_t idxBase);
+  // HIP: DEPRECATED_CUDA_10000("The routine will be removed in CUDA 11") HIPSPARSE_EXPORT hipsparseStatus_t hipsparseZdotci(hipsparseHandle_t handle, int nnz, const hipDoubleComplex* xVal, const int* xInd, const hipDoubleComplex* y, hipDoubleComplex* result, hipsparseIndexBase_t idxBase);
+  // CHECK: status_t = hipsparseZdotci(handle_t, innz, &dcomplexX, &xInd, &dcomplexY, &dcomplex_resultDevHostPtr, indexBase_t);
+  status_t = cusparseZdotci(handle_t, innz, &dcomplexX, &xInd, &dcomplexY, &dcomplex_resultDevHostPtr, indexBase_t);
+
+  // CUDA: CUSPARSE_DEPRECATED_HINT(cusparseSpVV) cusparseStatus_t CUSPARSEAPI cusparseCdotci(cusparseHandle_t handle, int nnz, const cuComplex* xVal, const int* xInd, const cuComplex* y, cuComplex* resultDevHostPtr, cusparseIndexBase_t idxBase);
+  // HIP: DEPRECATED_CUDA_10000("The routine will be removed in CUDA 11") HIPSPARSE_EXPORT hipsparseStatus_t hipsparseCdotci(hipsparseHandle_t handle, int nnz, const hipComplex* xVal, const int* xInd, const hipComplex* y, hipComplex* result, hipsparseIndexBase_t idxBase);
+  // CHECK: status_t = hipsparseCdotci(handle_t, innz, &complexX, &xInd, &complexY, &complex_resultDevHostPtr, indexBase_t);
+  status_t = cusparseCdotci(handle_t, innz, &complexX, &xInd, &complexY, &complex_resultDevHostPtr, indexBase_t);
 #endif
 
 #if CUDA_VERSION >= 11000

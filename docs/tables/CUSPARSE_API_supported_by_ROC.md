@@ -264,7 +264,7 @@
 |**CUDA**|**A**|**D**|**C**|**R**|**ROC**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
 |`cusparseCaxpyi`| |11.0| |12.0| | | | | | |
-|`cusparseCdotci`| |10.2| |11.0| | | | | | |
+|`cusparseCdotci`| |10.2| |11.0|`rocsparse_cdotci`|3.0.0| | | | |
 |`cusparseCdoti`| |10.2| |11.0| | | | | | |
 |`cusparseCgthr`| |11.0| |12.0|`rocsparse_cgthr`|1.9.0| | | | |
 |`cusparseCgthrz`| |11.0| |12.0|`rocsparse_cgthrz`|1.9.0| | | | |
@@ -282,7 +282,7 @@
 |`cusparseSroti`| |11.0| |12.0|`rocsparse_sroti`|1.9.0| | | | |
 |`cusparseSsctr`| |11.0| |12.0|`rocsparse_ssctr`|1.9.0| | | | |
 |`cusparseZaxpyi`| |11.0| |12.0| | | | | | |
-|`cusparseZdotci`| |10.2| |11.0| | | | | | |
+|`cusparseZdotci`| |10.2| |11.0|`rocsparse_zdotci`|3.0.0| | | | |
 |`cusparseZdoti`| |10.2| |11.0| | | | | | |
 |`cusparseZgthr`| |11.0| |12.0|`rocsparse_zgthr`|1.9.0| | | | |
 |`cusparseZgthrz`| |11.0| |12.0|`rocsparse_zgthrz`|1.9.0| | | | |
