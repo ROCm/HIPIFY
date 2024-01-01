@@ -2286,6 +2286,24 @@ int main() {
   status_t = cusparseSaxpyi(handle_t, innz, &fAlpha, &fX, &xInd, &fY, indexBase_t);
 #endif
 
+#if CUDA_VERSION >= 12000
+  // CHECK: rocsparse_const_spvec_descr constSpVecDescr = nullptr;
+  cusparseConstSpVecDescr_t constSpVecDescr = nullptr;
+
+  // CHECK: rocsparse_const_spmat_descr constSpMatDescr = nullptr;
+  // CHECK-NEXT: rocsparse_const_spmat_descr constSpMatDescrB = nullptr;
+  cusparseConstSpMatDescr_t constSpMatDescr = nullptr;
+  cusparseConstSpMatDescr_t constSpMatDescrB = nullptr;
+
+  // CHECK: rocsparse_const_dnvec_descr constDnVecDescr = nullptr;
+  cusparseConstDnVecDescr_t constDnVecDescr = nullptr;
+
+  // CHECK: rocsparse_const_dnmat_descr constDnMatDescr = nullptr;
+  // CHECK-NEXT: rocsparse_const_dnmat_descr constDnMatDescrB = nullptr;
+  cusparseConstDnMatDescr_t constDnMatDescr = nullptr;
+  cusparseConstDnMatDescr_t constDnMatDescrB = nullptr;
+#endif
+
 #if CUDA_VERSION >= 12010 && CUSPARSE_VERSION >= 12100
   // CHECK: rocsparse_spmv_alg SPMV_SELL_ALG1 = rocsparse_spmv_alg_ell;
   cusparseSpMVAlg_t SPMV_SELL_ALG1 = CUSPARSE_SPMV_SELL_ALG1;

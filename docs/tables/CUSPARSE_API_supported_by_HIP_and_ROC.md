@@ -133,10 +133,10 @@
 |`cusparseColorAlg_t`|8.0|12.2| | | | | | | | | | | | | | |
 |`cusparseColorInfo`| |12.2| | | | | | | | |`_rocsparse_color_info`|4.5.0| | | | |
 |`cusparseColorInfo_t`| |12.2| | |`hipsparseColorInfo_t`|4.5.0| | | | |`rocsparse_color_info`|4.5.0| | | | |
-|`cusparseConstDnMatDescr_t`|12.0| | | |`hipsparseConstDnMatDescr_t`|6.0.0| | | | | | | | | | |
-|`cusparseConstDnVecDescr_t`|12.0| | | |`hipsparseConstDnVecDescr_t`|6.0.0| | | | | | | | | | |
-|`cusparseConstSpMatDescr_t`|12.0| | | |`hipsparseConstSpMatDescr_t`|6.0.0| | | | | | | | | | |
-|`cusparseConstSpVecDescr_t`|12.0| | | |`hipsparseConstSpVecDescr_t`|6.0.0| | | | | | | | | | |
+|`cusparseConstDnMatDescr_t`|12.0| | | |`hipsparseConstDnMatDescr_t`|6.0.0| | | | |`rocsparse_const_dnmat_descr`|6.0.0| | | | |
+|`cusparseConstDnVecDescr_t`|12.0| | | |`hipsparseConstDnVecDescr_t`|6.0.0| | | | |`rocsparse_const_dnvec_descr`|6.0.0| | | | |
+|`cusparseConstSpMatDescr_t`|12.0| | | |`hipsparseConstSpMatDescr_t`|6.0.0| | | | |`rocsparse_const_spmat_descr`|6.0.0| | | | |
+|`cusparseConstSpVecDescr_t`|12.0| | | |`hipsparseConstSpVecDescr_t`|6.0.0| | | | |`rocsparse_const_spvec_descr`|6.0.0| | | | |
 |`cusparseContext`| | | | | | | | | | |`_rocsparse_handle`|1.9.0| | | | |
 |`cusparseCsr2CscAlg_t`|10.1| | | |`hipsparseCsr2CscAlg_t`|5.4.0| | | | | | | | | | |
 |`cusparseDenseToSparseAlg_t`|11.1| | | |`hipsparseDenseToSparseAlg_t`|4.2.0| | | | |`rocsparse_dense_to_sparse_alg`|4.1.0| | | | |
