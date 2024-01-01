@@ -2775,6 +2775,26 @@ int main() {
   // HIP: DEPRECATED_CUDA_11000("The routine will be removed in CUDA 12") HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSgthr(hipsparseHandle_t handle, int nnz, const float* y, float* xVal, const int* xInd, hipsparseIndexBase_t idxBase);
   // CHECK: status_t = hipsparseSgthr(handle_t, innz, &fY, &fX, &xInd, indexBase_t);
   status_t = cusparseSgthr(handle_t, innz, &fY, &fX, &xInd, indexBase_t);
+
+  // CUDA: CUSPARSE_DEPRECATED(cusparseAxpby) cusparseStatus_t CUSPARSEAPI cusparseZaxpyi(cusparseHandle_t handle, int nnz, const cuDoubleComplex* alpha, const cuDoubleComplex* xVal, const int* xInd, cuDoubleComplex* y, cusparseIndexBase_t idxBase);
+  // HIP: DEPRECATED_CUDA_11000("The routine will be removed in CUDA 12") HIPSPARSE_EXPORT hipsparseStatus_t hipsparseZaxpyi(hipsparseHandle_t handle, int nnz, const hipDoubleComplex* alpha, const hipDoubleComplex* xVal, const int* xInd, hipDoubleComplex* y, hipsparseIndexBase_t idxBase);
+  // CHECK: status_t = hipsparseZaxpyi(handle_t, innz, &dcomplexAlpha, &dcomplexX, &xInd, &dcomplexY, indexBase_t);
+  status_t = cusparseZaxpyi(handle_t, innz, &dcomplexAlpha, &dcomplexX, &xInd, &dcomplexY, indexBase_t);
+
+  // CUDA: CUSPARSE_DEPRECATED(cusparseAxpby) cusparseStatus_t CUSPARSEAPI cusparseCaxpyi(cusparseHandle_t handle, int nnz, const cuComplex* alpha, const cuComplex* xVal, const int* xInd, cuComplex* y, cusparseIndexBase_t idxBase);
+  // HIP: DEPRECATED_CUDA_11000("The routine will be removed in CUDA 12") HIPSPARSE_EXPORT hipsparseStatus_t hipsparseCaxpyi(hipsparseHandle_t handle, int nnz, const hipComplex* alpha, const hipComplex* xVal, const int* xInd, hipComplex* y, hipsparseIndexBase_t idxBase);
+  // CHECK: status_t = hipsparseCaxpyi(handle_t, innz, &complexAlpha, &complexX, &xInd, &complexY, indexBase_t);
+  status_t = cusparseCaxpyi(handle_t, innz, &complexAlpha, &complexX, &xInd, &complexY, indexBase_t);
+
+  // CUDA: CUSPARSE_DEPRECATED(cusparseAxpby) cusparseStatus_t CUSPARSEAPI cusparseDaxpyi(cusparseHandle_t handle, int nnz, const double* alpha, const double* xVal, const int* xInd, double* y, cusparseIndexBase_t idxBase);
+  // HIP: DEPRECATED_CUDA_11000("The routine will be removed in CUDA 12") HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDaxpyi(hipsparseHandle_t handle, int nnz, const double* alpha, const double* xVal, const int* xInd, double* y, hipsparseIndexBase_t idxBase);
+  // CHECK: status_t = hipsparseDaxpyi(handle_t, innz, &dAlpha, &dX, &xInd, &dY, indexBase_t);
+  status_t = cusparseDaxpyi(handle_t, innz, &dAlpha, &dX, &xInd, &dY, indexBase_t);
+
+  // CUDA: CUSPARSE_DEPRECATED(cusparseAxpby) cusparseStatus_t CUSPARSEAPI cusparseSaxpyi(cusparseHandle_t handle, int nnz, const float* alpha, const float* xVal, const int* xInd, float* y, cusparseIndexBase_t idxBase);
+  // HIP: DEPRECATED_CUDA_11000("The routine will be removed in CUDA 12") HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSaxpyi(hipsparseHandle_t handle, int nnz, const float* alpha, const float* xVal, const int* xInd, float* y, hipsparseIndexBase_t idxBase);
+  // CHECK: status_t = hipsparseSaxpyi(handle_t, innz, &fAlpha, &fX, &xInd, &fY, indexBase_t);
+  status_t = cusparseSaxpyi(handle_t, innz, &fAlpha, &fX, &xInd, &fY, indexBase_t);
 #endif
 
 #if CUDA_VERSION >= 12000

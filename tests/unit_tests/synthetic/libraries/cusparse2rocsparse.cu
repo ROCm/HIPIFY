@@ -2264,6 +2264,26 @@ int main() {
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_sgthr(rocsparse_handle handle, rocsparse_int nnz, const float* y, float* x_val, const rocsparse_int* x_ind, rocsparse_index_base idx_base);
   // CHECK: status_t = rocsparse_sgthr(handle_t, innz, &fY, &fX, &xInd, indexBase_t);
   status_t = cusparseSgthr(handle_t, innz, &fY, &fX, &xInd, indexBase_t);
+
+  // CUDA: CUSPARSE_DEPRECATED(cusparseAxpby) cusparseStatus_t CUSPARSEAPI cusparseZaxpyi(cusparseHandle_t handle, int nnz, const cuDoubleComplex* alpha, const cuDoubleComplex* xVal, const int* xInd, cuDoubleComplex* y, cusparseIndexBase_t idxBase);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_zaxpyi(rocsparse_handle handle, rocsparse_int nnz, const rocsparse_double_complex* alpha, const rocsparse_double_complex* x_val, const rocsparse_int* x_ind, rocsparse_double_complex* y, rocsparse_index_base idx_base);
+  // CHECK: status_t = rocsparse_zaxpyi(handle_t, innz, &dcomplexAlpha, &dcomplexX, &xInd, &dcomplexY, indexBase_t);
+  status_t = cusparseZaxpyi(handle_t, innz, &dcomplexAlpha, &dcomplexX, &xInd, &dcomplexY, indexBase_t);
+
+  // CUDA: CUSPARSE_DEPRECATED(cusparseAxpby) cusparseStatus_t CUSPARSEAPI cusparseCaxpyi(cusparseHandle_t handle, int nnz, const cuComplex* alpha, const cuComplex* xVal, const int* xInd, cuComplex* y, cusparseIndexBase_t idxBase);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_caxpyi(rocsparse_handle handle, rocsparse_int nnz, const rocsparse_float_complex* alpha, const rocsparse_float_complex* x_val, const rocsparse_int* x_ind, rocsparse_float_complex* y, rocsparse_index_base idx_base);
+  // CHECK: status_t = rocsparse_caxpyi(handle_t, innz, &complexAlpha, &complexX, &xInd, &complexY, indexBase_t);
+  status_t = cusparseCaxpyi(handle_t, innz, &complexAlpha, &complexX, &xInd, &complexY, indexBase_t);
+
+  // CUDA: CUSPARSE_DEPRECATED(cusparseAxpby) cusparseStatus_t CUSPARSEAPI cusparseDaxpyi(cusparseHandle_t handle, int nnz, const double* alpha, const double* xVal, const int* xInd, double* y, cusparseIndexBase_t idxBase);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_daxpyi(rocsparse_handle handle, rocsparse_int nnz, const double* alpha, const double* x_val, const rocsparse_int* x_ind, double* y, rocsparse_index_base idx_base);
+  // CHECK: status_t = rocsparse_daxpyi(handle_t, innz, &dAlpha, &dX, &xInd, &dY, indexBase_t);
+  status_t = cusparseDaxpyi(handle_t, innz, &dAlpha, &dX, &xInd, &dY, indexBase_t);
+
+  // CUDA: CUSPARSE_DEPRECATED(cusparseAxpby) cusparseStatus_t CUSPARSEAPI cusparseSaxpyi(cusparseHandle_t handle, int nnz, const float* alpha, const float* xVal, const int* xInd, float* y, cusparseIndexBase_t idxBase);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_saxpyi(rocsparse_handle handle, rocsparse_int nnz, const float* alpha, const float* x_val, const rocsparse_int* x_ind, float* y, rocsparse_index_base idx_base);
+  // CHECK: status_t = rocsparse_saxpyi(handle_t, innz, &fAlpha, &fX, &xInd, &fY, indexBase_t);
+  status_t = cusparseSaxpyi(handle_t, innz, &fAlpha, &fX, &xInd, &fY, indexBase_t);
 #endif
 
 #if CUDA_VERSION >= 12010 && CUSPARSE_VERSION >= 12100
