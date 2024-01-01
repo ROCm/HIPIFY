@@ -32,8 +32,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   {"cusparseSetPointerMode",                            {"hipsparseSetPointerMode",                            "rocsparse_set_pointer_mode",                                       CONV_LIB_FUNC, API_SPARSE, 5}},
   {"cusparseSetStream",                                 {"hipsparseSetStream",                                 "rocsparse_set_stream",                                             CONV_LIB_FUNC, API_SPARSE, 5}},
   {"cusparseGetStream",                                 {"hipsparseGetStream",                                 "rocsparse_get_stream",                                             CONV_LIB_FUNC, API_SPARSE, 5}},
-  {"cusparseGetErrorName",                              {"hipsparseGetErrorName",                              "",                                                                 CONV_LIB_FUNC, API_SPARSE, 5, ROC_UNSUPPORTED}},
-  {"cusparseGetErrorString",                            {"hipsparseGetErrorString",                            "",                                                                 CONV_LIB_FUNC, API_SPARSE, 5, ROC_UNSUPPORTED}},
+  {"cusparseGetErrorName",                              {"hipsparseGetErrorName",                              "rocsparse_get_status_name",                                        CONV_LIB_FUNC, API_SPARSE, 5}},
+  {"cusparseGetErrorString",                            {"hipsparseGetErrorString",                            "rocsparse_get_status_description",                                 CONV_LIB_FUNC, API_SPARSE, 5}},
 
   // 6. cuSPARSE Logging
   {"cusparseLoggerSetCallback",                         {"hipsparseLoggerSetCallback",                         "",                                                                 CONV_LIB_FUNC, API_SPARSE, 6, UNSUPPORTED}},
@@ -778,13 +778,13 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   {"cusparseCreateConstSlicedEll",                      {"hipsparseCreateConstSlicedEll",                      "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
   // Sparse Vector descriptor
   {"cusparseCreateSpVec",                               {"hipsparseCreateSpVec",                               "rocsparse_create_spvec_descr",                                     CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseCreateConstSpVec",                          {"hipsparseCreateConstSpVec",                          "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
+  {"cusparseCreateConstSpVec",                          {"hipsparseCreateConstSpVec",                          "rocsparse_create_const_spvec_descr",                               CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseDestroySpVec",                              {"hipsparseDestroySpVec",                              "rocsparse_destroy_spvec_descr",                                    CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseSpVecGet",                                  {"hipsparseSpVecGet",                                  "rocsparse_spvec_get",                                              CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseConstSpVecGet",                             {"hipsparseConstSpVecGet",                             "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
+  {"cusparseConstSpVecGet",                             {"hipsparseConstSpVecGet",                             "rocsparse_const_spvec_get",                                        CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseSpVecGetIndexBase",                         {"hipsparseSpVecGetIndexBase",                         "rocsparse_spvec_get_index_base",                                   CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseSpVecGetValues",                            {"hipsparseSpVecGetValues",                            "rocsparse_spvec_get_values",                                       CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseConstSpVecGetValues",                       {"hipsparseConstSpVecGetValues",                       "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
+  {"cusparseConstSpVecGetValues",                       {"hipsparseConstSpVecGetValues",                       "rocsparse_const_spvec_get_values",                                 CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseSpVecSetValues",                            {"hipsparseSpVecSetValues",                            "rocsparse_spvec_set_values",                                       CONV_LIB_FUNC, API_SPARSE, 15}},
 
   // Generic Dense API helper functions
@@ -2389,6 +2389,11 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_FUNCTION_VER_MAP {
   {"rocsparse_daxpyi",                                   {HIP_1090, HIP_0,    HIP_0   }},
   {"rocsparse_caxpyi",                                   {HIP_1090, HIP_0,    HIP_0   }},
   {"rocsparse_zaxpyi",                                   {HIP_1090, HIP_0,    HIP_0   }},
+  {"rocsparse_get_status_name",                          {HIP_6000, HIP_0,    HIP_0   }},
+  {"rocsparse_get_status_description",                   {HIP_6000, HIP_0,    HIP_0   }},
+  {"rocsparse_create_const_spvec_descr",                 {HIP_6000, HIP_0,    HIP_0   }},
+  {"rocsparse_const_spvec_get",                          {HIP_6000, HIP_0,    HIP_0   }},
+  {"rocsparse_const_spvec_get_values",                   {HIP_6000, HIP_0,    HIP_0   }},
 };
 
 const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_SPARSE_FUNCTION_CHANGED_VER_MAP {
@@ -2479,6 +2484,9 @@ const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_SPARSE_FUNCTION_CHANG
   {"hipsparseDenseToSparse_analysis",                    {HIP_6000}},
   {"hipsparseDenseToSparse_bufferSize",                  {HIP_6000}},
   {"hipsparseDenseToSparse_convert",                     {HIP_6000}},
+
+  {"rocsparse_destroy_spvec_descr",                      {HIP_6000}},
+  {"rocsparse_spvec_get_index_base",                     {HIP_6000}},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_SPARSE_API_SECTION_MAP {

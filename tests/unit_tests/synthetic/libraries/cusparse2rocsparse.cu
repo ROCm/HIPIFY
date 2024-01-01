@@ -101,7 +101,7 @@ int main() {
   cusparsePointerMode_t POINTER_MODE_HOST = CUSPARSE_POINTER_MODE_HOST;
   cusparsePointerMode_t POINTER_MODE_DEVICE = CUSPARSE_POINTER_MODE_DEVICE;
 
-  // CHECK: rocsparse_status status_t;
+  // CHECK: rocsparse_status status_t, status_2;
   // CHECK-NEXT: rocsparse_status STATUS_SUCCESS = rocsparse_status_success;
   // CHECK-NEXT: rocsparse_status STATUS_NOT_INITIALIZED = rocsparse_status_not_initialized;
   // CHECK-NEXT: rocsparse_status STATUS_ALLOC_FAILED = rocsparse_status_memory_error;
@@ -109,7 +109,7 @@ int main() {
   // CHECK-NEXT: rocsparse_status STATUS_ARCH_MISMATCH = rocsparse_status_arch_mismatch;
   // CHECK-NEXT: rocsparse_status STATUS_INTERNAL_ERROR = rocsparse_status_internal_error;
   // CHECK-NEXT: rocsparse_status STATUS_ZERO_PIVOT = rocsparse_status_zero_pivot;
-  cusparseStatus_t status_t;
+  cusparseStatus_t status_t, status_2;
   cusparseStatus_t STATUS_SUCCESS = CUSPARSE_STATUS_SUCCESS;
   cusparseStatus_t STATUS_NOT_INITIALIZED = CUSPARSE_STATUS_NOT_INITIALIZED;
   cusparseStatus_t STATUS_ALLOC_FAILED = CUSPARSE_STATUS_ALLOC_FAILED;
@@ -195,7 +195,9 @@ int main() {
   int64_t columnsValuesBatchStride = 0;
   int64_t ld = 0;
   void *indices = nullptr;
+  const void** const indices_const = const_cast<const void**>(&indices);
   void *values = nullptr;
+  const void** const values_const = const_cast<const void**>(&values);
   void *cooRowInd = nullptr;
   int icooRowInd = 0;
   void *cscRowInd = nullptr;
@@ -289,6 +291,7 @@ int main() {
   float fx = 0.f;
   double dboost_val = 0.f;
   float boost_val = 0.f;
+  const char* const_ch = nullptr;
 
   // CHECK: rocsparse_mat_info csrilu02_info;
   csrilu02Info_t csrilu02_info;
@@ -1636,20 +1639,10 @@ int main() {
   // CHECK: status_t = rocsparse_create_spvec_descr(&spVecDescr_t, size, nnz, indices, values, indexType_t, indexBase_t, dataType);
   status_t = cusparseCreateSpVec(&spVecDescr_t, size, nnz, indices, values, indexType_t, indexBase_t, dataType);
 
-  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDestroySpVec(cusparseConstSpVecDescr_t spVecDescr);
-  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_destroy_spvec_descr(rocsparse_spvec_descr descr);
-  // CHECK: status_t = rocsparse_destroy_spvec_descr(spVecDescr_t);
-  status_t = cusparseDestroySpVec(spVecDescr_t);
-
   // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpVecGet(cusparseSpVecDescr_t spVecDescr, int64_t* size, int64_t* nnz, void** indices, void** values, cusparseIndexType_t* idxType, cusparseIndexBase_t* idxBase, cudaDataType* valueType);
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_spvec_get(const rocsparse_spvec_descr descr, int64_t* size, int64_t* nnz, void** indices, void** values, rocsparse_indextype* idx_type, rocsparse_index_base* idx_base, rocsparse_datatype* data_type);
   // CHECK: status_t = rocsparse_spvec_get(spVecDescr_t, &size, &nnz, &indices, &values, &indexType_t, &indexBase_t, &dataType);
   status_t = cusparseSpVecGet(spVecDescr_t, &size, &nnz, &indices, &values, &indexType_t, &indexBase_t, &dataType);
-
-  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpVecGetIndexBase(cusparseConstSpVecDescr_t spVecDescr, cusparseIndexBase_t* idxBase);
-  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_spvec_get_index_base(const rocsparse_spvec_descr descr, rocsparse_index_base* idx_base);
-  // CHECK: status_t = rocsparse_spvec_get_index_base(spVecDescr_t, &indexBase_t);
-  status_t = cusparseSpVecGetIndexBase(spVecDescr_t, &indexBase_t);
 
   // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpVecGetValues(cusparseSpVecDescr_t spVecDescr, void** values);
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_spvec_get_values(const rocsparse_spvec_descr descr, void** values);
@@ -1725,9 +1718,8 @@ int main() {
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_spmv(rocsparse_handle handle, rocsparse_operation trans, const void* alpha, const rocsparse_spmat_descr mat, const rocsparse_dnvec_descr x, const void* beta, const rocsparse_dnvec_descr y, rocsparse_datatype compute_type, rocsparse_spmv_alg alg, size_t* buffer_size, void* temp_buffer);
   // CHECK: status_t = rocsparse_spmv(handle_t, opA, alpha, spMatDescr_t, vecX, beta, vecY, dataType, spMVAlg_t, tempBuffer);
   status_t = cusparseSpMV(handle_t, opA, alpha, spMatDescr_t, vecX, beta, vecY, dataType, spMVAlg_t, tempBuffer);
-#endif
 
-#if (CUDA_VERSION >= 10020 && CUDA_VERSION < 11000 && !defined(_WIN32)) || (CUDA_VERSION >= 11000 && CUDA_VERSION < 12000)
+#if CUDA_VERSION < 12000
   // CHECK: rocsparse_format FORMAT_COO_AOS = rocsparse_format_coo_aos;
   cusparseFormat_t FORMAT_COO_AOS = CUSPARSE_FORMAT_COO_AOS;
 
@@ -1745,6 +1737,29 @@ int main() {
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_spmat_set_strided_batch(rocsparse_spmat_descr descr, int batch_count);
   // CHECK: status_t = rocsparse_spmat_set_strided_batch(spMatDescr_t, batchCount);
   status_t = cusparseSpMatSetStridedBatch(spMatDescr_t, batchCount);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDestroySpVec(cusparseSpVecDescr_t spVecDescr);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_destroy_spvec_descr(rocsparse_spvec_descr descr);
+  // CHECK: status_t = rocsparse_destroy_spvec_descr(spVecDescr_t);
+  status_t = cusparseDestroySpVec(spVecDescr_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpVecGetIndexBase(cusparseConstSpVecDescr_t spVecDescr, cusparseIndexBase_t* idxBase);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_spvec_get_index_base(const rocsparse_spvec_descr descr, rocsparse_index_base* idx_base);
+  // CHECK: status_t = rocsparse_spvec_get_index_base(spVecDescr_t, &indexBase_t);
+  status_t = cusparseSpVecGetIndexBase(spVecDescr_t, &indexBase_t);
+#endif
+#endif
+
+#if CUDA_VERSION >= 10020 && CUSPARSE_VERSION >= 10301
+  // CUDA: const char* CUSPARSEAPI cusparseGetErrorName(cusparseStatus_t status);
+  // ROC: ROCSPARSE_EXPORT const char* rocsparse_get_status_name(rocsparse_status status);
+  // CHECK: const_ch = rocsparse_get_status_name(status_2);
+  const_ch = cusparseGetErrorName(status_2);
+
+  // CUDA: const char* CUSPARSEAPI cusparseGetErrorString(cusparseStatus_t status);
+  // ROC: ROCSPARSE_EXPORT const char* rocsparse_get_status_description(rocsparse_status status);
+  // CHECK: const_ch = rocsparse_get_status_description(status_2);
+  const_ch = cusparseGetErrorString(status_2);
 #endif
 
 #if CUDA_VERSION < 11000
@@ -2302,6 +2317,31 @@ int main() {
   // CHECK-NEXT: rocsparse_const_dnmat_descr constDnMatDescrB = nullptr;
   cusparseConstDnMatDescr_t constDnMatDescr = nullptr;
   cusparseConstDnMatDescr_t constDnMatDescrB = nullptr;
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCreateConstSpVec(cusparseConstSpVecDescr_t* spVecDescr, int64_t size, int64_t nnz, const void* indices, const void* values, cusparseIndexType_t idxType, cusparseIndexBase_t idxBase, cudaDataType valueType);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_create_const_spvec_descr(rocsparse_const_spvec_descr* descr, int64_t size, int64_t nnz, const void* indices, const void* values, rocsparse_indextype idx_type, rocsparse_index_base idx_base, rocsparse_datatype data_type);
+  // CHECK: status_t = rocsparse_create_const_spvec_descr(&constSpVecDescr, size, nnz, indices, values, indexType_t, indexBase_t, dataType);
+  status_t = cusparseCreateConstSpVec(&constSpVecDescr, size, nnz, indices, values, indexType_t, indexBase_t, dataType);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDestroySpVec(cusparseConstSpVecDescr_t spVecDescr);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_destroy_spvec_descr(rocsparse_const_spvec_descr descr);
+  // CHECK: status_t = rocsparse_destroy_spvec_descr(constSpVecDescr);
+  status_t = cusparseDestroySpVec(constSpVecDescr);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseConstSpVecGet(cusparseConstSpVecDescr_t spVecDescr, int64_t* size, int64_t* nnz, const void** indices, const void** values, cusparseIndexType_t* idxType, cusparseIndexBase_t* idxBase, cudaDataType* valueType);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_const_spvec_get(rocsparse_const_spvec_descr descr, int64_t* size, int64_t* nnz, const void** indices, const void** values, rocsparse_indextype* idx_type, rocsparse_index_base* idx_base, rocsparse_datatype* data_type);
+  // CHECK: status_t = rocsparse_const_spvec_get(constSpVecDescr, &size, &nnz, indices_const, values_const, &indexType_t, &indexBase_t, &dataType);
+  status_t = cusparseConstSpVecGet(constSpVecDescr, &size, &nnz, indices_const, values_const, &indexType_t, &indexBase_t, &dataType);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpVecGetIndexBase(cusparseSpVecDescr_t spVecDescr, cusparseIndexBase_t* idxBase);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_spvec_get_index_base(rocsparse_const_spvec_descr descr, rocsparse_index_base* idx_base);
+  // CHECK: status_t = rocsparse_spvec_get_index_base(constSpVecDescr, &indexBase_t);
+  status_t = cusparseSpVecGetIndexBase(constSpVecDescr, &indexBase_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseConstSpVecGetValues(cusparseConstSpVecDescr_t spVecDescr, const void** values);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_const_spvec_get_values(rocsparse_const_spvec_descr descr, const void** values);
+  // CHECK: status_t = rocsparse_const_spvec_get_values(constSpVecDescr, values_const);
+  status_t = cusparseConstSpVecGetValues(constSpVecDescr, values_const);
 #endif
 
 #if CUDA_VERSION >= 12010 && CUSPARSE_VERSION >= 12100
