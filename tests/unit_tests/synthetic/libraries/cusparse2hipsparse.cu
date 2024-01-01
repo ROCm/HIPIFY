@@ -1845,13 +1845,11 @@ int main() {
   status_t = cusparseCreateSpVec(&spVecDescr_t, size, nnz, indices, values, indexType_t, indexBase_t, dataType);
 
 #if CUDA_VERSION < 12000
-  // TODO: Mark as C-Changed in 12.0.0
   // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDestroySpVec(cusparseSpVecDescr_t spVecDescr);
   // HIP: hipsparseStatus_t hipsparseDestroySpVec(hipsparseSpVecDescr_t spVecDescr);
   // CHECK: status_t = hipsparseDestroySpVec(spVecDescr_t);
   status_t = cusparseDestroySpVec(spVecDescr_t);
 
-  // TODO: Mark as C-Changed in 12.0.0
   // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpVecGetIndexBase(cusparseSpVecDescr_t spVecDescr, cusparseIndexBase_t* idxBase);
   // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpVecGetIndexBase(const hipsparseSpVecDescr_t spVecDescr, hipsparseIndexBase_t* idxBase);
   // CHECK: status_t = hipsparseSpVecGetIndexBase(spVecDescr_t, &indexBase_t);

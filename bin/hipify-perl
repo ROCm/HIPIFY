@@ -2326,6 +2326,8 @@ sub rocSubstitutions {
     subst("cusparseChybmv", "rocsparse_chybmv", "library");
     subst("cusparseCnnz", "rocsparse_cnnz", "library");
     subst("cusparseCnnz_compress", "rocsparse_cnnz_compress", "library");
+    subst("cusparseConstSpVecGet", "rocsparse_const_spvec_get", "library");
+    subst("cusparseConstSpVecGetValues", "rocsparse_const_spvec_get_values", "library");
     subst("cusparseCooAoSGet", "rocsparse_coo_aos_get", "library");
     subst("cusparseCooGet", "rocsparse_coo_get", "library");
     subst("cusparseCooSetPointers", "rocsparse_coo_set_pointers", "library");
@@ -2334,6 +2336,7 @@ sub rocSubstitutions {
     subst("cusparseCreate", "rocsparse_create_handle", "library");
     subst("cusparseCreateBlockedEll", "rocsparse_create_bell_descr", "library");
     subst("cusparseCreateColorInfo", "rocsparse_create_color_info", "library");
+    subst("cusparseCreateConstSpVec", "rocsparse_create_const_spvec_descr", "library");
     subst("cusparseCreateCoo", "rocsparse_create_coo_descr", "library");
     subst("cusparseCreateCooAoS", "rocsparse_create_coo_aos_descr", "library");
     subst("cusparseCreateCsc", "rocsparse_create_csc_descr", "library");
@@ -2448,6 +2451,8 @@ sub rocSubstitutions {
     subst("cusparseDroti", "rocsparse_droti", "library");
     subst("cusparseDsctr", "rocsparse_dsctr", "library");
     subst("cusparseGather", "rocsparse_gather", "library");
+    subst("cusparseGetErrorName", "rocsparse_get_status_name", "library");
+    subst("cusparseGetErrorString", "rocsparse_get_status_description", "library");
     subst("cusparseGetMatDiagType", "rocsparse_get_mat_diag_type", "library");
     subst("cusparseGetMatFillMode", "rocsparse_get_mat_fill_mode", "library");
     subst("cusparseGetMatIndexBase", "rocsparse_get_mat_index_base", "library");
