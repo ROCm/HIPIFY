@@ -84,10 +84,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   {"cusparseDestroyColorInfo",                          {"hipsparseDestroyColorInfo",                          "rocsparse_destroy_color_info",                                     CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED}},
 
   // 8. cuSPARSE Level 1 Function Reference
-  {"cusparseSaxpyi",                                    {"hipsparseSaxpyi",                                    "",                                                                 CONV_LIB_FUNC, API_SPARSE, 8, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseDaxpyi",                                    {"hipsparseDaxpyi",                                    "",                                                                 CONV_LIB_FUNC, API_SPARSE, 8, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseCaxpyi",                                    {"hipsparseCaxpyi",                                    "",                                                                 CONV_LIB_FUNC, API_SPARSE, 8, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseZaxpyi",                                    {"hipsparseZaxpyi",                                    "",                                                                 CONV_LIB_FUNC, API_SPARSE, 8, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
+  {"cusparseSaxpyi",                                    {"hipsparseSaxpyi",                                    "rocsparse_saxpyi",                                                 CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED}},
+  {"cusparseDaxpyi",                                    {"hipsparseDaxpyi",                                    "rocsparse_daxpyi",                                                 CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED}},
+  {"cusparseCaxpyi",                                    {"hipsparseCaxpyi",                                    "rocsparse_caxpyi",                                                 CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED}},
+  {"cusparseZaxpyi",                                    {"hipsparseZaxpyi",                                    "rocsparse_zaxpyi",                                                 CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED}},
 
   // TODO: rocsparse_get_stream and hipStreamSynchronize need to be added correspondingly before and after rocsparse_(s|d|c|z)doti call, because cusparse(S|D|C|Z)doti is blocking, and rocsparse_(s|d|c|z)doti is not
   {"cusparseSdoti",                                     {"hipsparseSdoti",                                     "rocsparse_sdoti",                                                  CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED}},
@@ -2385,6 +2385,10 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_FUNCTION_VER_MAP {
   {"rocsparse_ddoti",                                    {HIP_1090, HIP_0,    HIP_0   }},
   {"rocsparse_cdoti",                                    {HIP_1090, HIP_0,    HIP_0   }},
   {"rocsparse_zdoti",                                    {HIP_1090, HIP_0,    HIP_0   }},
+  {"rocsparse_saxpyi",                                   {HIP_1090, HIP_0,    HIP_0   }},
+  {"rocsparse_daxpyi",                                   {HIP_1090, HIP_0,    HIP_0   }},
+  {"rocsparse_caxpyi",                                   {HIP_1090, HIP_0,    HIP_0   }},
+  {"rocsparse_zaxpyi",                                   {HIP_1090, HIP_0,    HIP_0   }},
 };
 
 const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_SPARSE_FUNCTION_CHANGED_VER_MAP {
