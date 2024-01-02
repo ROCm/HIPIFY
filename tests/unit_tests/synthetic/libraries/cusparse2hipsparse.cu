@@ -1746,7 +1746,6 @@ int main() {
   status_t = cusparseCreateCoo(&spMatDescr_t, rows, cols, nnz, cooRowInd, cooColInd, cooValues, indexType_t, indexBase_t, dataType);
 
 #if CUDA_VERSION < 12000
-  // TODO: Mark as C-Changed in 12.0.0
   // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDestroySpMat(cusparseSpMatDescr_t spMatDescr);
   // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDestroySpMat(hipsparseSpMatDescr_t spMatDescr);
   // CHECK: status_t = hipsparseDestroySpMat(spMatDescr_t);
