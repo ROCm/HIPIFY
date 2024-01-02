@@ -790,23 +790,23 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   // Generic Dense API helper functions
   // Dense Matrix descriptor
   {"cusparseCreateDnMat",                               {"hipsparseCreateDnMat",                               "rocsparse_create_dnmat_descr",                                     CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseCreateConstDnMat",                          {"hipsparseCreateConstDnMat",                          "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
+  {"cusparseCreateConstDnMat",                          {"hipsparseCreateConstDnMat",                          "rocsparse_create_const_dnmat_descr",                               CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseDestroyDnMat",                              {"hipsparseDestroyDnMat",                              "rocsparse_destroy_dnmat_descr",                                    CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseDnMatGet",                                  {"hipsparseDnMatGet",                                  "rocsparse_dnmat_get",                                              CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseConstDnMatGet",                             {"hipsparseConstDnMatGet",                             "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
+  {"cusparseConstDnMatGet",                             {"hipsparseConstDnMatGet",                             "rocsparse_const_dnmat_get",                                        CONV_LIB_FUNC, API_SPARSE, 15,}},
   {"cusparseDnMatGetValues",                            {"hipsparseDnMatGetValues",                            "rocsparse_dnmat_get_values",                                       CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseConstDnMatGetValues",                       {"hipsparseConstDnMatGetValues",                       "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
+  {"cusparseConstDnMatGetValues",                       {"hipsparseConstDnMatGetValues",                       "rocsparse_const_dnmat_get_values",                                 CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseDnMatSetValues",                            {"hipsparseDnMatSetValues",                            "rocsparse_dnmat_set_values",                                       CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseDnMatSetStridedBatch",                      {"hipsparseDnMatSetStridedBatch",                      "rocsparse_dnmat_set_strided_batch",                                CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseDnMatGetStridedBatch",                      {"hipsparseDnMatGetStridedBatch",                      "rocsparse_dnmat_get_strided_batch",                                CONV_LIB_FUNC, API_SPARSE, 15}},
   // Dense Vector descriptor
   {"cusparseCreateDnVec",                               {"hipsparseCreateDnVec",                               "rocsparse_create_dnvec_descr",                                     CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseCreateConstDnVec",                          {"hipsparseCreateConstDnVec",                          "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
+  {"cusparseCreateConstDnVec",                          {"hipsparseCreateConstDnVec",                          "rocsparse_create_const_dnvec_descr",                               CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseDestroyDnVec",                              {"hipsparseDestroyDnVec",                              "rocsparse_destroy_dnvec_descr",                                    CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseDnVecGet",                                  {"hipsparseDnVecGet",                                  "rocsparse_dnvec_get",                                              CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseConstDnVecGet",                             {"hipsparseConstDnVecGet",                             "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
+  {"cusparseConstDnVecGet",                             {"hipsparseConstDnVecGet",                             "rocsparse_const_dnvec_get",                                        CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseDnVecGetValues",                            {"hipsparseDnVecGetValues",                            "rocsparse_dnvec_get_values",                                       CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseConstDnVecGetValues",                       {"hipsparseConstDnVecGetValues",                       "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
+  {"cusparseConstDnVecGetValues",                       {"hipsparseConstDnVecGetValues",                       "rocsparse_const_dnvec_get_values",                                 CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseDnVecSetValues",                            {"hipsparseDnVecSetValues",                            "rocsparse_dnvec_set_values",                                       CONV_LIB_FUNC, API_SPARSE, 15}},
 
   {"cusparseSpGEMM_createDescr",                        {"hipsparseSpGEMM_createDescr",                        "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
@@ -2403,6 +2403,12 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_FUNCTION_VER_MAP {
   {"rocsparse_const_csc_get",                            {HIP_6000, HIP_0,    HIP_0   }},
   {"rocsparse_const_bell_get",                           {HIP_6000, HIP_0,    HIP_0   }},
   {"rocsparse_const_spmat_get_values",                   {HIP_6000, HIP_0,    HIP_0   }},
+  {"rocsparse_create_const_dnvec_descr",                 {HIP_6000, HIP_0,    HIP_0   }},
+  {"rocsparse_const_dnvec_get",                          {HIP_6000, HIP_0,    HIP_0   }},
+  {"rocsparse_const_dnvec_get_values",                   {HIP_6000, HIP_0,    HIP_0   }},
+  {"rocsparse_create_const_dnmat_descr",                 {HIP_6000, HIP_0,    HIP_0   }},
+  {"rocsparse_const_dnmat_get",                          {HIP_6000, HIP_0,    HIP_0   }},
+  {"rocsparse_const_dnmat_get_values",                   {HIP_6000, HIP_0,    HIP_0   }},
 };
 
 const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_SPARSE_FUNCTION_CHANGED_VER_MAP {
@@ -2502,6 +2508,9 @@ const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_SPARSE_FUNCTION_CHANG
   {"rocsparse_spmat_get_index_base",                     {HIP_6000}},
   {"rocsparse_spmat_get_strided_batch",                  {HIP_6000}},
   {"rocsparse_spmat_get_attribute",                      {HIP_6000}},
+  {"rocsparse_destroy_dnvec_descr",                      {HIP_6000}},
+  {"rocsparse_destroy_dnmat_descr",                      {HIP_6000}},
+  {"rocsparse_dnmat_get_strided_batch",                  {HIP_6000}},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_SPARSE_API_SECTION_MAP {
