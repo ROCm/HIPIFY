@@ -2330,6 +2330,10 @@ sub rocSubstitutions {
     subst("cusparseConstCooGet", "rocsparse_const_coo_get", "library");
     subst("cusparseConstCscGet", "rocsparse_const_csc_get", "library");
     subst("cusparseConstCsrGet", "rocsparse_const_csr_get", "library");
+    subst("cusparseConstDnMatGet", "rocsparse_const_dnmat_get", "library");
+    subst("cusparseConstDnMatGetValues", "rocsparse_const_dnmat_get_values", "library");
+    subst("cusparseConstDnVecGet", "rocsparse_const_dnvec_get", "library");
+    subst("cusparseConstDnVecGetValues", "rocsparse_const_dnvec_get_values", "library");
     subst("cusparseConstSpMatGetValues", "rocsparse_const_spmat_get_values", "library");
     subst("cusparseConstSpVecGet", "rocsparse_const_spvec_get", "library");
     subst("cusparseConstSpVecGetValues", "rocsparse_const_spvec_get_values", "library");
@@ -2345,6 +2349,8 @@ sub rocSubstitutions {
     subst("cusparseCreateConstCoo", "rocsparse_create_const_coo_descr", "library");
     subst("cusparseCreateConstCsc", "rocsparse_create_const_csc_descr", "library");
     subst("cusparseCreateConstCsr", "rocsparse_create_const_csr_descr", "library");
+    subst("cusparseCreateConstDnMat", "rocsparse_create_const_dnmat_descr", "library");
+    subst("cusparseCreateConstDnVec", "rocsparse_create_const_dnvec_descr", "library");
     subst("cusparseCreateConstSpVec", "rocsparse_create_const_spvec_descr", "library");
     subst("cusparseCreateCoo", "rocsparse_create_coo_descr", "library");
     subst("cusparseCreateCooAoS", "rocsparse_create_coo_aos_descr", "library");
