@@ -2326,8 +2326,11 @@ sub rocSubstitutions {
     subst("cusparseChybmv", "rocsparse_chybmv", "library");
     subst("cusparseCnnz", "rocsparse_cnnz", "library");
     subst("cusparseCnnz_compress", "rocsparse_cnnz_compress", "library");
+    subst("cusparseConstBlockedEllGet", "rocsparse_const_bell_get", "library");
     subst("cusparseConstCooGet", "rocsparse_const_coo_get", "library");
+    subst("cusparseConstCscGet", "rocsparse_const_csc_get", "library");
     subst("cusparseConstCsrGet", "rocsparse_const_csr_get", "library");
+    subst("cusparseConstSpMatGetValues", "rocsparse_const_spmat_get_values", "library");
     subst("cusparseConstSpVecGet", "rocsparse_const_spvec_get", "library");
     subst("cusparseConstSpVecGetValues", "rocsparse_const_spvec_get_values", "library");
     subst("cusparseCooAoSGet", "rocsparse_coo_aos_get", "library");

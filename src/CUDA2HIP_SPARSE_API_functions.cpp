@@ -751,13 +751,13 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   {"cusparseCsrSetPointers",                            {"hipsparseCsrSetPointers",                            "rocsparse_csr_set_pointers",                                       CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseCscSetPointers",                            {"hipsparseCscSetPointers",                            "rocsparse_csc_set_pointers",                                       CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseCscGet",                                    {"hipsparseCscGet",                                    "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
-  {"cusparseConstCscGet",                               {"hipsparseConstCscGet",                               "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
+  {"cusparseConstCscGet",                               {"hipsparseConstCscGet",                               "rocsparse_const_csc_get",                                          CONV_LIB_FUNC, API_SPARSE, 15, HIP_UNSUPPORTED}},
   {"cusparseCooSetPointers",                            {"hipsparseCooSetPointers",                            "rocsparse_coo_set_pointers",                                       CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseCsrSetStridedBatch",                        {"hipsparseCsrSetStridedBatch",                        "rocsparse_csr_set_strided_batch",                                  CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseSpMatGetFormat",                            {"hipsparseSpMatGetFormat",                            "rocsparse_spmat_get_format",                                       CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseSpMatGetIndexBase",                         {"hipsparseSpMatGetIndexBase",                         "rocsparse_spmat_get_index_base",                                   CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseSpMatGetValues",                            {"hipsparseSpMatGetValues",                            "rocsparse_spmat_get_values",                                       CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseConstSpMatGetValues",                       {"hipsparseConstSpMatGetValues",                       "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
+  {"cusparseConstSpMatGetValues",                       {"hipsparseConstSpMatGetValues",                       "rocsparse_const_spmat_get_values",                                 CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseSpMatSetValues",                            {"hipsparseSpMatSetValues",                            "rocsparse_spmat_set_values",                                       CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseSpMatGetStridedBatch",                      {"hipsparseSpMatGetStridedBatch",                      "rocsparse_spmat_get_strided_batch",                                CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseSpMatSetStridedBatch",                      {"hipsparseSpMatSetStridedBatch",                      "rocsparse_spmat_set_strided_batch",                                CONV_LIB_FUNC, API_SPARSE, 15, CUDA_REMOVED}},
@@ -767,7 +767,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   {"cusparseSpMatGetAttribute",                         {"hipsparseSpMatGetAttribute",                         "rocsparse_spmat_get_attribute",                                    CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseSpMatSetAttribute",                         {"hipsparseSpMatSetAttribute",                         "rocsparse_spmat_set_attribute",                                    CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseBlockedEllGet",                             {"hipsparseBlockedEllGet",                             "rocsparse_bell_get",                                               CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseConstBlockedEllGet",                        {"hipsparseConstBlockedEllGet",                        "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
+  {"cusparseConstBlockedEllGet",                        {"hipsparseConstBlockedEllGet",                        "rocsparse_const_bell_get",                                         CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseCreateBlockedEll",                          {"hipsparseCreateBlockedEll",                          "rocsparse_create_bell_descr",                                      CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseCreateConstBlockedEll",                     {"hipsparseCreateConstBlockedEll",                     "rocsparse_create_const_bell_descr",                                CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseBsrSetStridedBatch",                        {"hipsparseBsrSetStridedBatch",                        "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
@@ -2400,6 +2400,9 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_FUNCTION_VER_MAP {
   {"rocsparse_create_const_bell_descr",                  {HIP_6000, HIP_0,    HIP_0   }},
   {"rocsparse_const_coo_get",                            {HIP_6000, HIP_0,    HIP_0   }},
   {"rocsparse_const_csr_get",                            {HIP_6000, HIP_0,    HIP_0   }},
+  {"rocsparse_const_csc_get",                            {HIP_6000, HIP_0,    HIP_0   }},
+  {"rocsparse_const_bell_get",                           {HIP_6000, HIP_0,    HIP_0   }},
+  {"rocsparse_const_spmat_get_values",                   {HIP_6000, HIP_0,    HIP_0   }},
 };
 
 const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_SPARSE_FUNCTION_CHANGED_VER_MAP {
@@ -2494,6 +2497,11 @@ const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_SPARSE_FUNCTION_CHANG
   {"rocsparse_destroy_spvec_descr",                      {HIP_6000}},
   {"rocsparse_spvec_get_index_base",                     {HIP_6000}},
   {"rocsparse_destroy_spmat_descr",                      {HIP_6000}},
+  {"rocsparse_spmat_get_size",                           {HIP_6000}},
+  {"rocsparse_spmat_get_format",                         {HIP_6000}},
+  {"rocsparse_spmat_get_index_base",                     {HIP_6000}},
+  {"rocsparse_spmat_get_strided_batch",                  {HIP_6000}},
+  {"rocsparse_spmat_get_attribute",                      {HIP_6000}},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_SPARSE_API_SECTION_MAP {
