@@ -2224,8 +2224,8 @@ int main() {
 
   // CUDA: CUSPARSE_DEPRECATED(cusparseSpSV) cusparseStatus_t CUSPARSEAPI cusparseXcsrsv2_zeroPivot(cusparseHandle_t handle, csrsv2Info_t info, int* position);
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_csrsv_zero_pivot(rocsparse_handle handle, const rocsparse_mat_descr descr, rocsparse_mat_info info, rocsparse_int* position);
-  // CHECK: status_t = rocsparse_csrsv_zero_pivot(handle_t,csrsv2_info, &iposition);
-  status_t = cusparseXcsrsv2_zeroPivot(handle_t,csrsv2_info, &iposition);
+  // CHECK: status_t = rocsparse_csrsv_zero_pivot(handle_t, csrsv2_info, &iposition);
+  status_t = cusparseXcsrsv2_zeroPivot(handle_t, csrsv2_info, &iposition);
 
   // CUDA: CUSPARSE_DEPRECATED(cusparseScatter) cusparseStatus_t CUSPARSEAPI cusparseZsctr(cusparseHandle_t handle, int nnz, const cuDoubleComplex* xVal, const int* xInd, cuDoubleComplex* y, cusparseIndexBase_t idxBase);
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_zsctr(rocsparse_handle handle, rocsparse_int nnz, const rocsparse_double_complex* x_val, const rocsparse_int* x_ind, rocsparse_double_complex* y, rocsparse_index_base idx_base);
@@ -2316,6 +2316,16 @@ int main() {
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_saxpyi(rocsparse_handle handle, rocsparse_int nnz, const float* alpha, const float* x_val, const rocsparse_int* x_ind, float* y, rocsparse_index_base idx_base);
   // CHECK: status_t = rocsparse_saxpyi(handle_t, innz, &fAlpha, &fX, &xInd, &fY, indexBase_t);
   status_t = cusparseSaxpyi(handle_t, innz, &fAlpha, &fX, &xInd, &fY, indexBase_t);
+
+  // CUDA: CUSPARSE_DEPRECATED(cusparseSpSV) cusparseStatus_t CUSPARSEAPI cusparseCreateCsrsv2Info(csrsv2Info_t* info);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_create_mat_info(rocsparse_mat_info* info);
+  // CHECK: status_t = rocsparse_create_mat_info(&csrsv2_info);
+  status_t = cusparseCreateCsrsv2Info(&csrsv2_info);
+
+  // CUDA: CUSPARSE_DEPRECATED(cusparseSpSV) cusparseStatus_t CUSPARSEAPI cusparseDestroyCsrsv2Info(csrsv2Info_t info);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_destroy_mat_info(rocsparse_mat_info info);
+  // CHECK: status_t = rocsparse_destroy_mat_info(csrsv2_info);
+  status_t = cusparseDestroyCsrsv2Info(csrsv2_info);
 #endif
 
 #if CUDA_VERSION >= 12000
