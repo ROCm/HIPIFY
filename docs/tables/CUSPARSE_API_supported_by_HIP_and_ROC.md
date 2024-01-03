@@ -229,8 +229,8 @@
 |`cusparseCreateCsrgemm2Info`| |11.0| |12.0|`hipsparseCreateCsrgemm2Info`|2.8.0| | | | | | | | | | |
 |`cusparseCreateCsric02Info`| |12.2| | |`hipsparseCreateCsric02Info`|3.1.0| | | | | | | | | | |
 |`cusparseCreateCsrilu02Info`| |12.2| | |`hipsparseCreateCsrilu02Info`|1.9.2| | | | | | | | | | |
-|`cusparseCreateCsrsm2Info`|10.0|11.3| |12.0|`hipsparseCreateCsrsm2Info`|3.1.0| | | | | | | | | | |
-|`cusparseCreateCsrsv2Info`| |11.3| |12.0|`hipsparseCreateCsrsv2Info`|1.9.2| | | | | | | | | | |
+|`cusparseCreateCsrsm2Info`|9.2|11.3| |12.0|`hipsparseCreateCsrsm2Info`|3.1.0| | | | |`rocsparse_create_mat_info`|1.9.0| | | | |
+|`cusparseCreateCsrsv2Info`| |11.3| |12.0|`hipsparseCreateCsrsv2Info`|1.9.2| | | | |`rocsparse_create_mat_info`|1.9.0| | | | |
 |`cusparseCreateHybMat`| |10.2| |11.0|`hipsparseCreateHybMat`|1.9.2| | | | |`rocsparse_create_hyb_mat`|1.9.0| | | | |
 |`cusparseCreateMatDescr`| | | | |`hipsparseCreateMatDescr`|1.9.2| | | | |`rocsparse_create_mat_descr`|1.9.0| | | | |
 |`cusparseCreatePruneInfo`|9.0|12.2| | |`hipsparseCreatePruneInfo`|3.9.0| | | | | | | | | | |
@@ -243,8 +243,8 @@
 |`cusparseDestroyCsrgemm2Info`| |11.0| |12.0|`hipsparseDestroyCsrgemm2Info`|2.8.0| | | | | | | | | | |
 |`cusparseDestroyCsric02Info`| |12.2| | |`hipsparseDestroyCsric02Info`|3.1.0| | | | | | | | | | |
 |`cusparseDestroyCsrilu02Info`| |12.2| | |`hipsparseDestroyCsrilu02Info`|1.9.2| | | | | | | | | | |
-|`cusparseDestroyCsrsm2Info`|10.0|11.3| |12.0|`hipsparseDestroyCsrsm2Info`|3.1.0| | | | | | | | | | |
-|`cusparseDestroyCsrsv2Info`| |11.3| |12.0|`hipsparseDestroyCsrsv2Info`|1.9.2| | | | | | | | | | |
+|`cusparseDestroyCsrsm2Info`|9.2|11.3| |12.0|`hipsparseDestroyCsrsm2Info`|3.1.0| | | | |`rocsparse_destroy_mat_info`|1.9.0| | | | |
+|`cusparseDestroyCsrsv2Info`| |11.3| |12.0|`hipsparseDestroyCsrsv2Info`|1.9.2| | | | |`rocsparse_destroy_mat_info`|1.9.0| | | | |
 |`cusparseDestroyHybMat`| |10.2| |11.0|`hipsparseDestroyHybMat`|1.9.2| | | | |`rocsparse_destroy_hyb_mat`|1.9.0| | | | |
 |`cusparseDestroyMatDescr`| | | | |`hipsparseDestroyMatDescr`|1.9.2| | | | |`rocsparse_destroy_mat_descr`|1.9.0| | | | |
 |`cusparseDestroyPruneInfo`|9.0|12.2| | |`hipsparseDestroyPruneInfo`|3.9.0| | | | | | | | | | |

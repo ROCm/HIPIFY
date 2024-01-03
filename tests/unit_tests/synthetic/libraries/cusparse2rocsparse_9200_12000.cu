@@ -145,6 +145,16 @@ int main() {
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_csrsm_zero_pivot(rocsparse_handle handle, rocsparse_mat_info info, rocsparse_int* position);
   // CHECK: status_t = rocsparse_csrsm_zero_pivot(handle_t, csrsm2_info, &iposition);
   status_t = cusparseXcsrsm2_zeroPivot(handle_t, csrsm2_info, &iposition);
+
+  // CUDA: CUSPARSE_DEPRECATED(cusparseSpSM) cusparseStatus_t CUSPARSEAPI cusparseCreateCsrsm2Info(csrsm2Info_t* info);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_create_mat_info(rocsparse_mat_info* info);
+  // CHECK: status_t = rocsparse_create_mat_info(&csrsm2_info);
+  status_t = cusparseCreateCsrsm2Info(&csrsm2_info);
+
+  // CUDA: CUSPARSE_DEPRECATED(cusparseSpSM) cusparseStatus_t CUSPARSEAPI cusparseDestroyCsrsm2Info(csrsm2Info_t info);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_destroy_mat_info(rocsparse_mat_info info);
+  // CHECK: status_t = rocsparse_destroy_mat_info(csrsm2_info);
+  status_t = cusparseDestroyCsrsm2Info(csrsm2_info);
 #endif
 #endif
 

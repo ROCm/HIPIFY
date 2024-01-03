@@ -1685,6 +1685,16 @@ int main() {
   // HIP: DEPRECATED_CUDA_11000("The routine will be removed in CUDA 12") HIPSPARSE_EXPORT hipsparseStatus_t hipsparseXcsrsm2_zeroPivot(hipsparseHandle_t handle, csrsm2Info_t info, int* position);
   // CHECK: status_t = hipsparseXcsrsm2_zeroPivot(handle_t, csrsm2_info, &iposition);
   status_t = cusparseXcsrsm2_zeroPivot(handle_t, csrsm2_info, &iposition);
+
+  // CUDA: CUSPARSE_DEPRECATED(cusparseSpSM) cusparseStatus_t CUSPARSEAPI cusparseCreateCsrsm2Info(csrsm2Info_t* info);
+  // HIP: DEPRECATED_CUDA_11000("The routine will be removed in CUDA 12") HIPSPARSE_EXPORT hipsparseStatus_t hipsparseCreateCsrsm2Info(csrsm2Info_t* info);
+  // CHECK: status_t = hipsparseCreateCsrsm2Info(&csrsm2_info);
+  status_t = cusparseCreateCsrsm2Info(&csrsm2_info);
+
+  // CUDA: CUSPARSE_DEPRECATED(cusparseSpSM) cusparseStatus_t CUSPARSEAPI cusparseDestroyCsrsm2Info(csrsm2Info_t info);
+  // HIP: DEPRECATED_CUDA_11000("The routine will be removed in CUDA 12") HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDestroyCsrsm2Info(csrsm2Info_t info);
+  // CHECK: status_t = hipsparseDestroyCsrsm2Info(csrsm2_info);
+  status_t = cusparseDestroyCsrsm2Info(csrsm2_info);
 #endif
 #endif
 
@@ -1822,6 +1832,16 @@ int main() {
 #if CUDA_VERSION < 12000
   csrgemm2Info_t csrgemm2_info;
   csrsv2Info_t csrsv2_info;
+
+  // CUDA: CUSPARSE_DEPRECATED(cusparseSpSV) cusparseStatus_t CUSPARSEAPI cusparseCreateCsrsv2Info(csrsv2Info_t* info);
+  // HIP: DEPRECATED_CUDA_11000("The routine will be removed in CUDA 12") HIPSPARSE_EXPORT hipsparseStatus_t hipsparseCreateCsrsv2Info(csrsv2Info_t* info);
+  // CHECK: status_t = hipsparseCreateCsrsv2Info(&csrsv2_info);
+  status_t = cusparseCreateCsrsv2Info(&csrsv2_info);
+
+  // CUDA: CUSPARSE_DEPRECATED(cusparseSpSV) cusparseStatus_t CUSPARSEAPI cusparseDestroyCsrsv2Info(csrsv2Info_t info);
+  // HIP: DEPRECATED_CUDA_11000("The routine will be removed in CUDA 12") HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDestroyCsrsv2Info(csrsv2Info_t info);
+  // CHECK: status_t = hipsparseDestroyCsrsv2Info(csrsv2_info);
+  status_t = cusparseDestroyCsrsv2Info(csrsv2_info);
 #endif
 
 #if (CUDA_VERSION >= 10020 && CUDA_VERSION < 11000 && !defined(_WIN32)) || CUDA_VERSION >= 11000
@@ -2692,8 +2712,8 @@ int main() {
 
   // CUDA: CUSPARSE_DEPRECATED(cusparseSpSV) cusparseStatus_t CUSPARSEAPI cusparseXcsrsv2_zeroPivot(cusparseHandle_t handle, csrsv2Info_t info, int* position);
   // HIP: DEPRECATED_CUDA_11000("The routine will be removed in CUDA 12") HIPSPARSE_EXPORT hipsparseStatus_t hipsparseXcsrsv2_zeroPivot(hipsparseHandle_t handle, csrsv2Info_t info, int* position);
-  // CHECK: status_t = hipsparseXcsrsv2_zeroPivot(handle_t,csrsv2_info, &iposition);
-  status_t = cusparseXcsrsv2_zeroPivot(handle_t,csrsv2_info, &iposition);
+  // CHECK: status_t = hipsparseXcsrsv2_zeroPivot(handle_t, csrsv2_info, &iposition);
+  status_t = cusparseXcsrsv2_zeroPivot(handle_t, csrsv2_info, &iposition);
 
   // CUDA: CUSPARSE_DEPRECATED(cusparseScatter) cusparseStatus_t CUSPARSEAPI cusparseZsctr(cusparseHandle_t handle, int nnz, const cuDoubleComplex* xVal, const int* xInd, cuDoubleComplex* y, cusparseIndexBase_t idxBase);
   // HIP: DEPRECATED_CUDA_11000("The routine will be removed in CUDA 12") HIPSPARSE_EXPORT hipsparseStatus_t hipsparseZsctr(hipsparseHandle_t handle, int nnz, const hipDoubleComplex* xVal, const int* xInd, hipDoubleComplex* y, hipsparseIndexBase_t idxBase);
