@@ -1192,6 +1192,26 @@ int main() {
   // CHECK: status_t = hipsparseSbsrmv(handle_t, direction_t, opA, mb, nb, nnzb, &fAlpha, matDescr_t, &fbsrSortedValA, &bsrSortedMaskPtrA, &bsrRowPtrA, blockDim, &fX, &fBeta, &fY);
   status_t = cusparseSbsrmv(handle_t, direction_t, opA, mb, nb, nnzb, &fAlpha, matDescr_t, &fbsrSortedValA, &bsrSortedMaskPtrA, &bsrRowPtrA, blockDim, &fX, &fBeta, &fY);
 
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseCreateCsric02Info(csric02Info_t* info);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseCreateCsric02Info(csric02Info_t* info);
+  // CHECK: status_t = hipsparseCreateCsric02Info(&csric02_info);
+  status_t = cusparseCreateCsric02Info(&csric02_info);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseDestroyCsric02Info(csric02Info_t info);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDestroyCsric02Info(csric02Info_t info);
+  // CHECK: status_t = hipsparseDestroyCsric02Info(csric02_info);
+  status_t = cusparseDestroyCsric02Info(csric02_info);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseCreateCsrilu02Info(csrilu02Info_t* info);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseCreateCsrilu02Info(csrilu02Info_t* info);
+  // CHECK: status_t = hipsparseCreateCsrilu02Info(&csrilu02_info);
+  status_t = cusparseCreateCsrilu02Info(&csrilu02_info);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseDestroyCsrilu02Info(csrilu02Info_t info);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDestroyCsrilu02Info(csrilu02Info_t info);
+  // CHECK: status_t = hipsparseDestroyCsrilu02Info(csrilu02_info);
+  status_t = cusparseDestroyCsrilu02Info(csrilu02_info);
+
 #if CUDA_VERSION >= 7050
   // CUDA: cusparseStatus_t CUSPARSEAPI cusparseZgemvi(cusparseHandle_t handle, cusparseOperation_t transA, int m, int n, const cuDoubleComplex* alpha, const cuDoubleComplex* A, int lda, int nnz, const cuDoubleComplex* xVal, const int* xInd, const cuDoubleComplex* beta, cuDoubleComplex* y, cusparseIndexBase_t idxBase, void* pBuffer);
   // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseZgemvi(hipsparseHandle_t handle, hipsparseOperation_t transA, int m, int n, const hipDoubleComplex* alpha, const hipDoubleComplex* A, int lda, int nnz, const hipDoubleComplex* x, const int* xInd, const hipDoubleComplex* beta, hipDoubleComplex* y, hipsparseIndexBase_t idxBase, void* pBuffer);

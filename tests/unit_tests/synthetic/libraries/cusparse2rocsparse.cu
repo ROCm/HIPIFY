@@ -1201,6 +1201,26 @@ int main() {
   // CHECK: status_t = rocsparse_sbsrmv(handle_t, direction_t, opA, mb, nb, nnzb, &fAlpha, matDescr_t, &fbsrSortedValA, &bsrSortedMaskPtrA, &bsrRowPtrA, blockDim, &fX, &fBeta, &fY);
   status_t = cusparseSbsrmv(handle_t, direction_t, opA, mb, nb, nnzb, &fAlpha, matDescr_t, &fbsrSortedValA, &bsrSortedMaskPtrA, &bsrRowPtrA, blockDim, &fX, &fBeta, &fY);
 
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseCreateCsric02Info(csric02Info_t* info);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_create_mat_info(rocsparse_mat_info* info);
+  // CHECK: status_t = rocsparse_create_mat_info(&csric02_info);
+  status_t = cusparseCreateCsric02Info(&csric02_info);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseDestroyCsric02Info(csric02Info_t info);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_destroy_mat_info(rocsparse_mat_info info);
+  // CHECK: status_t = rocsparse_destroy_mat_info(csric02_info);
+  status_t = cusparseDestroyCsric02Info(csric02_info);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseCreateCsrilu02Info(csrilu02Info_t* info);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_create_mat_info(rocsparse_mat_info* info);
+  // CHECK: status_t = rocsparse_create_mat_info(&csrilu02_info);
+  status_t = cusparseCreateCsrilu02Info(&csrilu02_info);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseDestroyCsrilu02Info(csrilu02Info_t info);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_destroy_mat_info(rocsparse_mat_info info);
+  // CHECK: status_t = rocsparse_destroy_mat_info(csrilu02_info);
+  status_t = cusparseDestroyCsrilu02Info(csrilu02_info);
+
 #if CUDA_VERSION >= 7050
   // CUDA: cusparseStatus_t CUSPARSEAPI cusparseZgemvi(cusparseHandle_t handle, cusparseOperation_t transA, int m, int n, const cuDoubleComplex* alpha, const cuDoubleComplex* A, int lda, int nnz, const cuDoubleComplex* xVal, const int* xInd, const cuDoubleComplex* beta, cuDoubleComplex* y, cusparseIndexBase_t idxBase, void* pBuffer);
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_zgemvi(rocsparse_handle handle, rocsparse_operation trans, rocsparse_int m, rocsparse_int n, const rocsparse_double_complex* alpha, const rocsparse_double_complex* A, rocsparse_int lda, rocsparse_int nnz, const rocsparse_double_complex* x_val, const rocsparse_int* x_ind, const rocsparse_double_complex* beta, rocsparse_double_complex* y, rocsparse_index_base idx_base,void* temp_buffer);
