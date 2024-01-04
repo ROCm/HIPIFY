@@ -221,8 +221,8 @@
 |**CUDA**|**A**|**D**|**C**|**R**|**ROC**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
 |`cusparseCopyMatDescr`|8.0| | |12.0|`rocsparse_copy_mat_descr`|1.9.0| | | | |
-|`cusparseCreateBsric02Info`| |12.2| | | | | | | | |
-|`cusparseCreateBsrilu02Info`| |12.2| | | | | | | | |
+|`cusparseCreateBsric02Info`| |12.2| | |`rocsparse_create_mat_info`|1.9.0| | | | |
+|`cusparseCreateBsrilu02Info`| |12.2| | |`rocsparse_create_mat_info`|1.9.0| | | | |
 |`cusparseCreateBsrsm2Info`| |12.2| | |`rocsparse_create_mat_info`|1.9.0| | | | |
 |`cusparseCreateBsrsv2Info`| |12.2| | |`rocsparse_create_mat_info`|1.9.0| | | | |
 |`cusparseCreateColorInfo`| |12.2| | |`rocsparse_create_color_info`|4.5.0| | | | |
@@ -235,8 +235,8 @@
 |`cusparseCreateMatDescr`| | | | |`rocsparse_create_mat_descr`|1.9.0| | | | |
 |`cusparseCreatePruneInfo`|9.0|12.2| | | | | | | | |
 |`cusparseCreateSolveAnalysisInfo`| |10.2| |11.0| | | | | | |
-|`cusparseDestroyBsric02Info`| |12.2| | | | | | | | |
-|`cusparseDestroyBsrilu02Info`| |12.2| | | | | | | | |
+|`cusparseDestroyBsric02Info`| |12.2| | |`rocsparse_destroy_mat_info`|1.9.0| | | | |
+|`cusparseDestroyBsrilu02Info`| |12.2| | |`rocsparse_destroy_mat_info`|1.9.0| | | | |
 |`cusparseDestroyBsrsm2Info`| |12.2| | |`rocsparse_destroy_mat_info`|1.9.0| | | | |
 |`cusparseDestroyBsrsv2Info`| |12.2| | |`rocsparse_destroy_mat_info`|1.9.0| | | | |
 |`cusparseDestroyColorInfo`| |12.2| | |`rocsparse_destroy_color_info`|4.5.0| | | | |

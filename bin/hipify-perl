@@ -2344,6 +2344,8 @@ sub rocSubstitutions {
     subst("cusparseCopyMatDescr", "rocsparse_copy_mat_descr", "library");
     subst("cusparseCreate", "rocsparse_create_handle", "library");
     subst("cusparseCreateBlockedEll", "rocsparse_create_bell_descr", "library");
+    subst("cusparseCreateBsric02Info", "rocsparse_create_mat_info", "library");
+    subst("cusparseCreateBsrilu02Info", "rocsparse_create_mat_info", "library");
     subst("cusparseCreateBsrsm2Info", "rocsparse_create_mat_info", "library");
     subst("cusparseCreateBsrsv2Info", "rocsparse_create_mat_info", "library");
     subst("cusparseCreateColorInfo", "rocsparse_create_color_info", "library");
@@ -2420,6 +2422,8 @@ sub rocSubstitutions {
     subst("cusparseDdense2csr", "rocsparse_ddense2csr", "library");
     subst("cusparseDdoti", "rocsparse_ddoti", "library");
     subst("cusparseDestroy", "rocsparse_destroy_handle", "library");
+    subst("cusparseDestroyBsric02Info", "rocsparse_destroy_mat_info", "library");
+    subst("cusparseDestroyBsrilu02Info", "rocsparse_destroy_mat_info", "library");
     subst("cusparseDestroyBsrsm2Info", "rocsparse_destroy_mat_info", "library");
     subst("cusparseDestroyBsrsv2Info", "rocsparse_destroy_mat_info", "library");
     subst("cusparseDestroyColorInfo", "rocsparse_destroy_color_info", "library");
