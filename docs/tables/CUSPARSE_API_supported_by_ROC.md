@@ -223,8 +223,8 @@
 |`cusparseCopyMatDescr`|8.0| | |12.0|`rocsparse_copy_mat_descr`|1.9.0| | | | |
 |`cusparseCreateBsric02Info`| |12.2| | | | | | | | |
 |`cusparseCreateBsrilu02Info`| |12.2| | | | | | | | |
-|`cusparseCreateBsrsm2Info`| |12.2| | | | | | | | |
-|`cusparseCreateBsrsv2Info`| |12.2| | | | | | | | |
+|`cusparseCreateBsrsm2Info`| |12.2| | |`rocsparse_create_mat_info`|1.9.0| | | | |
+|`cusparseCreateBsrsv2Info`| |12.2| | |`rocsparse_create_mat_info`|1.9.0| | | | |
 |`cusparseCreateColorInfo`| |12.2| | |`rocsparse_create_color_info`|4.5.0| | | | |
 |`cusparseCreateCsrgemm2Info`| |11.0| |12.0| | | | | | |
 |`cusparseCreateCsric02Info`| |12.2| | |`rocsparse_create_mat_info`|1.9.0| | | | |
@@ -237,8 +237,8 @@
 |`cusparseCreateSolveAnalysisInfo`| |10.2| |11.0| | | | | | |
 |`cusparseDestroyBsric02Info`| |12.2| | | | | | | | |
 |`cusparseDestroyBsrilu02Info`| |12.2| | | | | | | | |
-|`cusparseDestroyBsrsm2Info`| |12.2| | | | | | | | |
-|`cusparseDestroyBsrsv2Info`| |12.2| | | | | | | | |
+|`cusparseDestroyBsrsm2Info`| |12.2| | |`rocsparse_destroy_mat_info`|1.9.0| | | | |
+|`cusparseDestroyBsrsv2Info`| |12.2| | |`rocsparse_destroy_mat_info`|1.9.0| | | | |
 |`cusparseDestroyColorInfo`| |12.2| | |`rocsparse_destroy_color_info`|4.5.0| | | | |
 |`cusparseDestroyCsrgemm2Info`| |11.0| |12.0| | | | | | |
 |`cusparseDestroyCsric02Info`| |12.2| | |`rocsparse_destroy_mat_info`|1.9.0| | | | |
