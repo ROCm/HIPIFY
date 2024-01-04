@@ -221,8 +221,8 @@
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|**ROC**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
 |`cusparseCopyMatDescr`|8.0| | |12.0|`hipsparseCopyMatDescr`|1.9.2| | | | |`rocsparse_copy_mat_descr`|1.9.0| | | | |
-|`cusparseCreateBsric02Info`| |12.2| | |`hipsparseCreateBsric02Info`|3.8.0| | | | | | | | | | |
-|`cusparseCreateBsrilu02Info`| |12.2| | |`hipsparseCreateBsrilu02Info`|3.9.0| | | | | | | | | | |
+|`cusparseCreateBsric02Info`| |12.2| | |`hipsparseCreateBsric02Info`|3.8.0| | | | |`rocsparse_create_mat_info`|1.9.0| | | | |
+|`cusparseCreateBsrilu02Info`| |12.2| | |`hipsparseCreateBsrilu02Info`|3.9.0| | | | |`rocsparse_create_mat_info`|1.9.0| | | | |
 |`cusparseCreateBsrsm2Info`| |12.2| | |`hipsparseCreateBsrsm2Info`|4.5.0| | | | |`rocsparse_create_mat_info`|1.9.0| | | | |
 |`cusparseCreateBsrsv2Info`| |12.2| | |`hipsparseCreateBsrsv2Info`|3.6.0| | | | |`rocsparse_create_mat_info`|1.9.0| | | | |
 |`cusparseCreateColorInfo`| |12.2| | |`hipsparseCreateColorInfo`|4.5.0| | | | |`rocsparse_create_color_info`|4.5.0| | | | |
@@ -235,8 +235,8 @@
 |`cusparseCreateMatDescr`| | | | |`hipsparseCreateMatDescr`|1.9.2| | | | |`rocsparse_create_mat_descr`|1.9.0| | | | |
 |`cusparseCreatePruneInfo`|9.0|12.2| | |`hipsparseCreatePruneInfo`|3.9.0| | | | | | | | | | |
 |`cusparseCreateSolveAnalysisInfo`| |10.2| |11.0| | | | | | | | | | | | |
-|`cusparseDestroyBsric02Info`| |12.2| | |`hipsparseDestroyBsric02Info`|3.8.0| | | | | | | | | | |
-|`cusparseDestroyBsrilu02Info`| |12.2| | |`hipsparseDestroyBsrilu02Info`|3.9.0| | | | | | | | | | |
+|`cusparseDestroyBsric02Info`| |12.2| | |`hipsparseDestroyBsric02Info`|3.8.0| | | | |`rocsparse_destroy_mat_info`|1.9.0| | | | |
+|`cusparseDestroyBsrilu02Info`| |12.2| | |`hipsparseDestroyBsrilu02Info`|3.9.0| | | | |`rocsparse_destroy_mat_info`|1.9.0| | | | |
 |`cusparseDestroyBsrsm2Info`| |12.2| | |`hipsparseDestroyBsrsm2Info`|4.5.0| | | | |`rocsparse_destroy_mat_info`|1.9.0| | | | |
 |`cusparseDestroyBsrsv2Info`| |12.2| | |`hipsparseDestroyBsrsv2Info`|3.6.0| | | | |`rocsparse_destroy_mat_info`|1.9.0| | | | |
 |`cusparseDestroyColorInfo`| |12.2| | |`hipsparseDestroyColorInfo`|4.5.0| | | | |`rocsparse_destroy_color_info`|4.5.0| | | | |
