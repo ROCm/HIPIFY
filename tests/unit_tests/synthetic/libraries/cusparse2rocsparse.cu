@@ -1584,6 +1584,16 @@ int main() {
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_sgtsv_no_pivot_strided_batch_buffer_size(rocsparse_handle handle, rocsparse_int m, const float* dl, const float* d, const float* du, const float* x, rocsparse_int batch_count, rocsparse_int batch_stride, size_t* buffer_size);
   // CHECK: status_t = rocsparse_sgtsv_no_pivot_strided_batch_buffer_size(handle_t, m, &fdl, &fd, &fdu, &fx, batchCount, ibatchStride, &bufferSize);
   status_t = cusparseSgtsv2StridedBatch_bufferSizeExt(handle_t, m, &fdl, &fd, &fdu, &fx, batchCount, ibatchStride, &bufferSize);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseCreatePruneInfo(pruneInfo_t* info);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_create_mat_info(rocsparse_mat_info* info);
+  // CHECK: status_t = rocsparse_create_mat_info(&prune_info);
+  status_t = cusparseCreatePruneInfo(&prune_info);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseDestroyPruneInfo(pruneInfo_t info);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_destroy_mat_info(rocsparse_mat_info info);
+  // CHECK: status_t = rocsparse_destroy_mat_info(prune_info);
+  status_t = cusparseDestroyPruneInfo(prune_info);
 #endif
 
 #if (CUDA_VERSION >= 10010 && CUDA_VERSION < 11000 && !defined(_WIN32)) || CUDA_VERSION >= 11000
@@ -2386,6 +2396,16 @@ int main() {
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_destroy_mat_info(rocsparse_mat_info info);
   // CHECK: status_t = rocsparse_destroy_mat_info(csrsv2_info);
   status_t = cusparseDestroyCsrsv2Info(csrsv2_info);
+
+  // CUDA: CUSPARSE_DEPRECATED(cusparseSpGEMM) cusparseStatus_t CUSPARSEAPI cusparseCreateCsrgemm2Info(csrgemm2Info_t* info);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_create_mat_info(rocsparse_mat_info* info);
+  // CHECK: status_t = rocsparse_create_mat_info(&csrgemm2_info);
+  status_t = cusparseCreateCsrgemm2Info(&csrgemm2_info);
+
+  // CUDA: CUSPARSE_DEPRECATED(cusparseSpGEMM) cusparseStatus_t CUSPARSEAPI cusparseDestroyCsrgemm2Info(csrgemm2Info_t info);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_destroy_mat_info(rocsparse_mat_info info);
+  // CHECK: status_t = rocsparse_destroy_mat_info(csrgemm2_info);
+  status_t = cusparseDestroyCsrgemm2Info(csrgemm2_info);
 #endif
 
 #if CUDA_VERSION >= 12000

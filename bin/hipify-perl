@@ -2360,6 +2360,7 @@ sub rocSubstitutions {
     subst("cusparseCreateCooAoS", "rocsparse_create_coo_aos_descr", "library");
     subst("cusparseCreateCsc", "rocsparse_create_csc_descr", "library");
     subst("cusparseCreateCsr", "rocsparse_create_csr_descr", "library");
+    subst("cusparseCreateCsrgemm2Info", "rocsparse_create_mat_info", "library");
     subst("cusparseCreateCsric02Info", "rocsparse_create_mat_info", "library");
     subst("cusparseCreateCsrilu02Info", "rocsparse_create_mat_info", "library");
     subst("cusparseCreateCsrsm2Info", "rocsparse_create_mat_info", "library");
@@ -2369,6 +2370,7 @@ sub rocSubstitutions {
     subst("cusparseCreateHybMat", "rocsparse_create_hyb_mat", "library");
     subst("cusparseCreateIdentityPermutation", "rocsparse_create_identity_permutation", "library");
     subst("cusparseCreateMatDescr", "rocsparse_create_mat_descr", "library");
+    subst("cusparseCreatePruneInfo", "rocsparse_create_mat_info", "library");
     subst("cusparseCreateSpVec", "rocsparse_create_spvec_descr", "library");
     subst("cusparseCscSetPointers", "rocsparse_csc_set_pointers", "library");
     subst("cusparseCsctr", "rocsparse_csctr", "library");
@@ -2427,6 +2429,7 @@ sub rocSubstitutions {
     subst("cusparseDestroyBsrsm2Info", "rocsparse_destroy_mat_info", "library");
     subst("cusparseDestroyBsrsv2Info", "rocsparse_destroy_mat_info", "library");
     subst("cusparseDestroyColorInfo", "rocsparse_destroy_color_info", "library");
+    subst("cusparseDestroyCsrgemm2Info", "rocsparse_destroy_mat_info", "library");
     subst("cusparseDestroyCsric02Info", "rocsparse_destroy_mat_info", "library");
     subst("cusparseDestroyCsrilu02Info", "rocsparse_destroy_mat_info", "library");
     subst("cusparseDestroyCsrsm2Info", "rocsparse_destroy_mat_info", "library");
@@ -2435,6 +2438,7 @@ sub rocSubstitutions {
     subst("cusparseDestroyDnVec", "rocsparse_destroy_dnvec_descr", "library");
     subst("cusparseDestroyHybMat", "rocsparse_destroy_hyb_mat", "library");
     subst("cusparseDestroyMatDescr", "rocsparse_destroy_mat_descr", "library");
+    subst("cusparseDestroyPruneInfo", "rocsparse_destroy_mat_info", "library");
     subst("cusparseDestroySpMat", "rocsparse_destroy_spmat_descr", "library");
     subst("cusparseDestroySpVec", "rocsparse_destroy_spvec_descr", "library");
     subst("cusparseDgebsr2csr", "rocsparse_dgebsr2csr", "library");

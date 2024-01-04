@@ -1595,6 +1595,16 @@ int main() {
   // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSgtsv2StridedBatch_bufferSizeExt(hipsparseHandle_t handle, int m, const float* dl, const float* d, const float* du, const float* x, int batchCount, int batchStride, size_t* pBufferSizeInBytes);
   // CHECK: status_t = hipsparseSgtsv2StridedBatch_bufferSizeExt(handle_t, m, &fdl, &fd, &fdu, &fx, batchCount, ibatchStride, &bufferSize);
   status_t = cusparseSgtsv2StridedBatch_bufferSizeExt(handle_t, m, &fdl, &fd, &fdu, &fx, batchCount, ibatchStride, &bufferSize);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseCreatePruneInfo(pruneInfo_t* info);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseCreatePruneInfo(pruneInfo_t* info);
+  // CHECK: status_t = hipsparseCreatePruneInfo(&prune_info);
+  status_t = cusparseCreatePruneInfo(&prune_info);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseDestroyPruneInfo(pruneInfo_t info);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDestroyPruneInfo(pruneInfo_t info);
+  // CHECK: status_t = hipsparseDestroyPruneInfo(prune_info);
+  status_t = cusparseDestroyPruneInfo(prune_info);
 #endif
 
 #if CUDA_VERSION >= 9020
@@ -1902,6 +1912,16 @@ int main() {
   // HIP: DEPRECATED_CUDA_11000("The routine will be removed in CUDA 12") HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDestroyCsrsv2Info(csrsv2Info_t info);
   // CHECK: status_t = hipsparseDestroyCsrsv2Info(csrsv2_info);
   status_t = cusparseDestroyCsrsv2Info(csrsv2_info);
+
+  // CUDA: CUSPARSE_DEPRECATED(cusparseSpGEMM) cusparseStatus_t CUSPARSEAPI cusparseCreateCsrgemm2Info(csrgemm2Info_t* info);
+  // HIP: DEPRECATED_CUDA_11000("The routine will be removed in CUDA 12") HIPSPARSE_EXPORT hipsparseStatus_t hipsparseCreateCsrgemm2Info(csrgemm2Info_t* info);
+  // CHECK: status_t = hipsparseCreateCsrgemm2Info(&csrgemm2_info);
+  status_t = cusparseCreateCsrgemm2Info(&csrgemm2_info);
+
+  // CUDA: CUSPARSE_DEPRECATED(cusparseSpGEMM) cusparseStatus_t CUSPARSEAPI cusparseDestroyCsrgemm2Info(csrgemm2Info_t info);
+  // HIP: DEPRECATED_CUDA_11000("The routine will be removed in CUDA 12") HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDestroyCsrgemm2Info(csrgemm2Info_t info);
+  // CHECK: status_t = hipsparseDestroyCsrgemm2Info(csrgemm2_info);
+  status_t = cusparseDestroyCsrgemm2Info(csrgemm2_info);
 #endif
 
 #if (CUDA_VERSION >= 10020 && CUDA_VERSION < 11000 && !defined(_WIN32)) || CUDA_VERSION >= 11000

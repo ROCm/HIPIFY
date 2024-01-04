@@ -226,28 +226,28 @@
 |`cusparseCreateBsrsm2Info`| |12.2| | |`rocsparse_create_mat_info`|1.9.0| | | | |
 |`cusparseCreateBsrsv2Info`| |12.2| | |`rocsparse_create_mat_info`|1.9.0| | | | |
 |`cusparseCreateColorInfo`| |12.2| | |`rocsparse_create_color_info`|4.5.0| | | | |
-|`cusparseCreateCsrgemm2Info`| |11.0| |12.0| | | | | | |
+|`cusparseCreateCsrgemm2Info`| |11.0| |12.0|`rocsparse_create_mat_info`|1.9.0| | | | |
 |`cusparseCreateCsric02Info`| |12.2| | |`rocsparse_create_mat_info`|1.9.0| | | | |
 |`cusparseCreateCsrilu02Info`| |12.2| | |`rocsparse_create_mat_info`|1.9.0| | | | |
 |`cusparseCreateCsrsm2Info`|9.2|11.3| |12.0|`rocsparse_create_mat_info`|1.9.0| | | | |
 |`cusparseCreateCsrsv2Info`| |11.3| |12.0|`rocsparse_create_mat_info`|1.9.0| | | | |
 |`cusparseCreateHybMat`| |10.2| |11.0|`rocsparse_create_hyb_mat`|1.9.0| | | | |
 |`cusparseCreateMatDescr`| | | | |`rocsparse_create_mat_descr`|1.9.0| | | | |
-|`cusparseCreatePruneInfo`|9.0|12.2| | | | | | | | |
+|`cusparseCreatePruneInfo`|9.0|12.2| | |`rocsparse_create_mat_info`|1.9.0| | | | |
 |`cusparseCreateSolveAnalysisInfo`| |10.2| |11.0| | | | | | |
 |`cusparseDestroyBsric02Info`| |12.2| | |`rocsparse_destroy_mat_info`|1.9.0| | | | |
 |`cusparseDestroyBsrilu02Info`| |12.2| | |`rocsparse_destroy_mat_info`|1.9.0| | | | |
 |`cusparseDestroyBsrsm2Info`| |12.2| | |`rocsparse_destroy_mat_info`|1.9.0| | | | |
 |`cusparseDestroyBsrsv2Info`| |12.2| | |`rocsparse_destroy_mat_info`|1.9.0| | | | |
 |`cusparseDestroyColorInfo`| |12.2| | |`rocsparse_destroy_color_info`|4.5.0| | | | |
-|`cusparseDestroyCsrgemm2Info`| |11.0| |12.0| | | | | | |
+|`cusparseDestroyCsrgemm2Info`| |11.0| |12.0|`rocsparse_destroy_mat_info`|1.9.0| | | | |
 |`cusparseDestroyCsric02Info`| |12.2| | |`rocsparse_destroy_mat_info`|1.9.0| | | | |
 |`cusparseDestroyCsrilu02Info`| |12.2| | |`rocsparse_destroy_mat_info`|1.9.0| | | | |
 |`cusparseDestroyCsrsm2Info`|9.2|11.3| |12.0|`rocsparse_destroy_mat_info`|1.9.0| | | | |
 |`cusparseDestroyCsrsv2Info`| |11.3| |12.0|`rocsparse_destroy_mat_info`|1.9.0| | | | |
 |`cusparseDestroyHybMat`| |10.2| |11.0|`rocsparse_destroy_hyb_mat`|1.9.0| | | | |
 |`cusparseDestroyMatDescr`| | | | |`rocsparse_destroy_mat_descr`|1.9.0| | | | |
-|`cusparseDestroyPruneInfo`|9.0|12.2| | | | | | | | |
+|`cusparseDestroyPruneInfo`|9.0|12.2| | |`rocsparse_destroy_mat_info`|1.9.0| | | | |
 |`cusparseDestroySolveAnalysisInfo`| |10.2| |11.0| | | | | | |
 |`cusparseGetLevelInfo`| | | |11.0| | | | | | |
 |`cusparseGetMatDiagType`| | | | |`rocsparse_get_mat_diag_type`|1.9.0| | | | |
