@@ -68,10 +68,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   {"cusparseDestroyCsric02Info",                        {"hipsparseDestroyCsric02Info",                        "rocsparse_destroy_mat_info",                                       CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED}},
   {"cusparseCreateCsrilu02Info",                        {"hipsparseCreateCsrilu02Info",                        "rocsparse_create_mat_info",                                        CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED}},
   {"cusparseDestroyCsrilu02Info",                       {"hipsparseDestroyCsrilu02Info",                       "rocsparse_destroy_mat_info",                                       CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED}},
-  {"cusparseCreateBsrsv2Info",                          {"hipsparseCreateBsrsv2Info",                          "",                                                                 CONV_LIB_FUNC, API_SPARSE, 7, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cusparseDestroyBsrsv2Info",                         {"hipsparseDestroyBsrsv2Info",                         "",                                                                 CONV_LIB_FUNC, API_SPARSE, 7, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cusparseCreateBsrsm2Info",                          {"hipsparseCreateBsrsm2Info",                          "",                                                                 CONV_LIB_FUNC, API_SPARSE, 7, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cusparseDestroyBsrsm2Info",                         {"hipsparseDestroyBsrsm2Info",                         "",                                                                 CONV_LIB_FUNC, API_SPARSE, 7, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cusparseCreateBsrsv2Info",                          {"hipsparseCreateBsrsv2Info",                          "rocsparse_create_mat_info",                                        CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED}},
+  {"cusparseDestroyBsrsv2Info",                         {"hipsparseDestroyBsrsv2Info",                         "rocsparse_destroy_mat_info",                                       CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED}},
+  {"cusparseCreateBsrsm2Info",                          {"hipsparseCreateBsrsm2Info",                          "rocsparse_create_mat_info",                                        CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED}},
+  {"cusparseDestroyBsrsm2Info",                         {"hipsparseDestroyBsrsm2Info",                         "rocsparse_destroy_mat_info",                                       CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED}},
   {"cusparseCreateBsric02Info",                         {"hipsparseCreateBsric02Info",                         "",                                                                 CONV_LIB_FUNC, API_SPARSE, 7, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
   {"cusparseDestroyBsric02Info",                        {"hipsparseDestroyBsric02Info",                        "",                                                                 CONV_LIB_FUNC, API_SPARSE, 7, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
   {"cusparseCreateBsrilu02Info",                        {"hipsparseCreateBsrilu02Info",                        "",                                                                 CONV_LIB_FUNC, API_SPARSE, 7, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
@@ -1314,10 +1314,10 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SPARSE_FUNCTION_VER_MAP {
   {"cusparseDestroyCsrilu02Info",                       {CUDA_0,   CUDA_122, CUDA_0  }}, // D: CUSPARSE_VERSION 12102
   {"cusparseCreateBsrilu02Info",                        {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
   {"cusparseDestroyBsrilu02Info",                       {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseCreateBsrsv2Info",                          {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseDestroyBsrsv2Info",                         {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseCreateBsrsm2Info",                          {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseDestroyBsrsm2Info",                         {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
+  {"cusparseCreateBsrsv2Info",                          {CUDA_0,   CUDA_122, CUDA_0  }}, // D: CUSPARSE_VERSION 12102
+  {"cusparseDestroyBsrsv2Info",                         {CUDA_0,   CUDA_122, CUDA_0  }}, // D: CUSPARSE_VERSION 12102
+  {"cusparseCreateBsrsm2Info",                          {CUDA_0,   CUDA_122, CUDA_0  }}, // D: CUSPARSE_VERSION 12102
+  {"cusparseDestroyBsrsm2Info",                         {CUDA_0,   CUDA_122, CUDA_0  }}, // D: CUSPARSE_VERSION 12102
   {"cusparseCreateCsru2csrInfo",                        {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
   {"cusparseDestroyCsru2csrInfo",                       {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
   {"cusparseCreateColorInfo",                           {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
