@@ -2293,6 +2293,7 @@ sub rocSubstitutions {
     subst("cusparseCcsrilu02_bufferSize", "rocsparse_ccsrilu0_buffer_size", "library");
     subst("cusparseCcsrilu02_numericBoost", "rocsparse_dccsrilu0_numeric_boost", "library");
     subst("cusparseCcsrmm", "rocsparse_ccsrmm", "library");
+    subst("cusparseCcsrmm2", "rocsparse_ccsrmm", "library");
     subst("cusparseCcsrmv", "rocsparse_ccsrmv", "library");
     subst("cusparseCcsrsm2_analysis", "rocsparse_ccsrsm_analysis", "library");
     subst("cusparseCcsrsm2_bufferSizeExt", "rocsparse_ccsrsm_buffer_size", "library");
@@ -2413,6 +2414,7 @@ sub rocSubstitutions {
     subst("cusparseDcsrilu02_bufferSize", "rocsparse_dcsrilu0_buffer_size", "library");
     subst("cusparseDcsrilu02_numericBoost", "rocsparse_dcsrilu0_numeric_boost", "library");
     subst("cusparseDcsrmm", "rocsparse_dcsrmm", "library");
+    subst("cusparseDcsrmm2", "rocsparse_dcsrmm", "library");
     subst("cusparseDcsrmv", "rocsparse_dcsrmv", "library");
     subst("cusparseDcsrsm2_analysis", "rocsparse_dcsrsm_analysis", "library");
     subst("cusparseDcsrsm2_bufferSizeExt", "rocsparse_dcsrsm_buffer_size", "library");
@@ -2536,6 +2538,7 @@ sub rocSubstitutions {
     subst("cusparseScsrilu02_bufferSize", "rocsparse_scsrilu0_buffer_size", "library");
     subst("cusparseScsrilu02_numericBoost", "rocsparse_dscsrilu0_numeric_boost", "library");
     subst("cusparseScsrmm", "rocsparse_scsrmm", "library");
+    subst("cusparseScsrmm2", "rocsparse_scsrmm", "library");
     subst("cusparseScsrmv", "rocsparse_scsrmv", "library");
     subst("cusparseScsrsm2_analysis", "rocsparse_scsrsm_analysis", "library");
     subst("cusparseScsrsm2_bufferSizeExt", "rocsparse_scsrsm_buffer_size", "library");
@@ -2660,6 +2663,7 @@ sub rocSubstitutions {
     subst("cusparseZcsrilu02_bufferSize", "rocsparse_zcsrilu0_buffer_size", "library");
     subst("cusparseZcsrilu02_numericBoost", "rocsparse_zcsrilu0_numeric_boost", "library");
     subst("cusparseZcsrmm", "rocsparse_zcsrmm", "library");
+    subst("cusparseZcsrmm2", "rocsparse_zcsrmm", "library");
     subst("cusparseZcsrmv", "rocsparse_zcsrmv", "library");
     subst("cusparseZcsrsm2_analysis", "rocsparse_zcsrsm_analysis", "library");
     subst("cusparseZcsrsm2_bufferSizeExt", "rocsparse_zcsrsm_buffer_size", "library");
