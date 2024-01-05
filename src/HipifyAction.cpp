@@ -175,6 +175,10 @@ const std::string sCusparseSbsrsv2_analysis = "cusparseSbsrsv2_analysis";
 const std::string sCusparseDbsrsv2_analysis = "cusparseDbsrsv2_analysis";
 const std::string sCusparseCbsrsv2_analysis = "cusparseCbsrsv2_analysis";
 const std::string sCusparseZbsrsv2_analysis = "cusparseZbsrsv2_analysis";
+const std::string sCusparseZcsrmm = "cusparseZcsrmm";
+const std::string sCusparseCcsrmm = "cusparseCcsrmm";
+const std::string sCusparseDcsrmm = "cusparseDcsrmm";
+const std::string sCusparseScsrmm = "cusparseScsrmm";
 
 // CUDA_OVERLOADED
 const std::string sCudaEventCreate = "cudaEventCreate";
@@ -1335,6 +1339,42 @@ std::map<std::string, ArgCastStruct> FuncArgCasts {
       false
     }
   },
+  {sCusparseZcsrmm,
+    {
+      {
+        {2, {e_add_const_argument, cw_None, "rocsparse_operation_none"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseCcsrmm,
+    {
+      {
+        {2, {e_add_const_argument, cw_None, "rocsparse_operation_none"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseDcsrmm,
+    {
+      {
+        {2, {e_add_const_argument, cw_None, "rocsparse_operation_none"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseScsrmm,
+    {
+      {
+        {2, {e_add_const_argument, cw_None, "rocsparse_operation_none"}}
+      },
+      true,
+      false
+    }
+  },
 };
 
 void HipifyAction::RewriteString(StringRef s, clang::SourceLocation start) {
@@ -2142,7 +2182,11 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
             sCusparseSbsrsv2_analysis,
             sCusparseDbsrsv2_analysis,
             sCusparseCbsrsv2_analysis,
-            sCusparseZbsrsv2_analysis
+            sCusparseZbsrsv2_analysis,
+            sCusparseZcsrmm,
+            sCusparseCcsrmm,
+            sCusparseDcsrmm,
+            sCusparseScsrmm
           )
         )
       )
