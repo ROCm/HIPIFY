@@ -179,6 +179,10 @@ const std::string sCusparseZcsrmm = "cusparseZcsrmm";
 const std::string sCusparseCcsrmm = "cusparseCcsrmm";
 const std::string sCusparseDcsrmm = "cusparseDcsrmm";
 const std::string sCusparseScsrmm = "cusparseScsrmm";
+const std::string sCusparseZcsrgeam2 = "cusparseZcsrgeam2";
+const std::string sCusparseCcsrgeam2 = "cusparseCcsrgeam2";
+const std::string sCusparseDcsrgeam2 = "cusparseDcsrgeam2";
+const std::string sCusparseScsrgeam2 = "cusparseScsrgeam2";
 
 // CUDA_OVERLOADED
 const std::string sCudaEventCreate = "cudaEventCreate";
@@ -1375,6 +1379,42 @@ std::map<std::string, ArgCastStruct> FuncArgCasts {
       false
     }
   },
+  {sCusparseZcsrgeam2,
+    {
+      {
+        {19, {e_remove_argument, cw_None}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseCcsrgeam2,
+    {
+      {
+        {19, {e_remove_argument, cw_None}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseDcsrgeam2,
+    {
+      {
+        {19, {e_remove_argument, cw_None}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseScsrgeam2,
+    {
+      {
+        {19, {e_remove_argument, cw_None}}
+      },
+      true,
+      false
+    }
+  },
 };
 
 void HipifyAction::RewriteString(StringRef s, clang::SourceLocation start) {
@@ -2186,7 +2226,11 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
             sCusparseZcsrmm,
             sCusparseCcsrmm,
             sCusparseDcsrmm,
-            sCusparseScsrmm
+            sCusparseScsrmm,
+            sCusparseZcsrgeam2,
+            sCusparseCcsrgeam2,
+            sCusparseDcsrgeam2,
+            sCusparseScsrgeam2
           )
         )
       )
