@@ -33,17 +33,27 @@ int main() {
 
   int m = 0;
   int n = 0;
+  int k = 0;
   int innz = 0;
+  int lda = 0;
+  int ldb = 0;
+  int ldc = 0;
   int csrRowPtrA = 0;
   int csrColIndA = 0;
   double dAlpha = 0.f;
   double dBeta = 0.f;
+  double dA = 0.f;
+  double dB = 0.f;
+  double dC = 0.f;
   double dF = 0.f;
   double dX = 0.f;
   double dY = 0.f;
   double dcsrSortedValA = 0.f;
   float fAlpha = 0.f;
   float fBeta = 0.f;
+  float fA = 0.f;
+  float fB = 0.f;
+  float fC = 0.f;
   float fF = 0.f;
   float fX = 0.f;
   float fY = 0.f;
