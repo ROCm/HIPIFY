@@ -296,10 +296,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   {"cusparseZcsrgeam",                                  {"hipsparseZcsrgeam",                                  "rocsparse_zcsrgeam",                                               CONV_LIB_FUNC, API_SPARSE, 11, CUDA_DEPRECATED | CUDA_REMOVED}},
   {"cusparseXcsrgeamNnz",                               {"hipsparseXcsrgeamNnz",                               "rocsparse_csrgeam_nnz",                                            CONV_LIB_FUNC, API_SPARSE, 11, CUDA_DEPRECATED | CUDA_REMOVED}},
 
-  {"cusparseScsrgeam2",                                 {"hipsparseScsrgeam2",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 11, ROC_UNSUPPORTED}},
-  {"cusparseDcsrgeam2",                                 {"hipsparseDcsrgeam2",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 11, ROC_UNSUPPORTED}},
-  {"cusparseCcsrgeam2",                                 {"hipsparseCcsrgeam2",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 11, ROC_UNSUPPORTED}},
-  {"cusparseZcsrgeam2",                                 {"hipsparseZcsrgeam2",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 11, ROC_UNSUPPORTED}},
+  {"cusparseScsrgeam2",                                 {"hipsparseScsrgeam2",                                 "rocsparse_scsrgeam",                                               CONV_LIB_FUNC, API_SPARSE, 11}},
+  {"cusparseDcsrgeam2",                                 {"hipsparseDcsrgeam2",                                 "rocsparse_dcsrgeam",                                               CONV_LIB_FUNC, API_SPARSE, 11}},
+  {"cusparseCcsrgeam2",                                 {"hipsparseCcsrgeam2",                                 "rocsparse_ccsrgeam",                                               CONV_LIB_FUNC, API_SPARSE, 11}},
+  {"cusparseZcsrgeam2",                                 {"hipsparseZcsrgeam2",                                 "rocsparse_zcsrgeam",                                               CONV_LIB_FUNC, API_SPARSE, 11}},
   {"cusparseXcsrgeam2Nnz",                              {"hipsparseXcsrgeam2Nnz",                              "",                                                                 CONV_LIB_FUNC, API_SPARSE, 11, ROC_UNSUPPORTED}},
 
   {"cusparseScsrgeam2_bufferSizeExt",                   {"hipsparseScsrgeam2_bufferSizeExt",                   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 11, ROC_UNSUPPORTED}},
