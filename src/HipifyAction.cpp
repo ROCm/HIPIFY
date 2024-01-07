@@ -1883,10 +1883,18 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
         case e_remove_argument:
         {
           OS << "";
-          if (argNum < call->getNumArgs())
+          if (argNum < call->getNumArgs() - 1) {
             e = call->getArg(argNum + 1)->getBeginLoc();
-          else
+          }
+          else {
             e = call->getEndLoc();
+            if (call->getNumArgs() > 1) {
+              auto prevComma = clang::Lexer::findNextToken(call->getArg(argNum - 1)->getSourceRange().getEnd(), *SM, DefaultLangOptions);
+              if (!prevComma)
+                s = call->getEndLoc();
+              s = prevComma->getLocation();
+            }
+          }
           length = SM->getCharacterData(e) - SM->getCharacterData(s);
           break;
         }
