@@ -15,8 +15,10 @@ static int counter = 0;
 // CHECK-NOT: #include "cusolverDn.h"
 // CHECK-NOT: #include "cusolverRf.h"
 // CHECK-NOT: #include "cusolverSp.h"
+// CHECK-NOT: #include "cusolverSp_LOWLEVEL_PREVIEW.h"
 #include "cusolver_common.h"
 #include "cusolverDn.h"
 #include "cusolverRf.h"
 #include "cusolverSp.h"
+#include "cusolverSp_LOWLEVEL_PREVIEW.h"
 #endif // HEADERS_TEST_12_SOLVER_H
