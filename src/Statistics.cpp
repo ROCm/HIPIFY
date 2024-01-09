@@ -535,6 +535,7 @@ std::string Statistics::getCudaVersion(const cudaVersions& ver) {
     case CUDNN_894: return "8.9.4";
     case CUDNN_895: return "8.9.5";
     case CUDNN_896: return "8.9.6";
+    case CUDNN_897: return "8.9.7";
   }
   return "";
 }

@@ -23,7 +23,7 @@ After applying all the matchers, the output HIP source is produced.
 
 1. [**LLVM+CLANG**](http://releases.llvm.org) of at least version [4.0.0](http://releases.llvm.org/download.html#4.0.0); the latest stable and recommended release: [**17.0.6**](https://github.com/llvm/llvm-project/releases/tag/llvmorg-17.0.6).
 
-2. [**CUDA**](https://developer.nvidia.com/cuda-downloads) of at least version [8.0](https://developer.nvidia.com/cuda-80-ga2-download-archive), the latest supported version is [**12.2.2**](https://developer.nvidia.com/cuda-downloads).
+2. [**CUDA**](https://developer.nvidia.com/cuda-downloads) of at least version [8.0](https://developer.nvidia.com/cuda-80-ga2-download-archive), the latest supported version is [**12.3.2**](https://developer.nvidia.com/cuda-downloads).
 
 <table align="center">
   <thead>
@@ -169,7 +169,7 @@ After applying all the matchers, the output HIP source is produced.
           <a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-16.0.4">16.0.4</a>,
           <a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-16.0.5">16.0.5</a>,<br>
           <a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-16.0.6">16.0.6</a></td>
-      <td><a href="https://developer.nvidia.com/cuda-downloads">12.2.2</a></td>
+      <td><a href="https://developer.nvidia.com/cuda-12-2-2-download-archive">12.2.2</a></td>
       <td>+</td>
       <td>+</td>
     </tr>
@@ -180,12 +180,12 @@ After applying all the matchers, the output HIP source is produced.
                            <a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-17.0.4">17.0.4</a>,
                            <a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-17.0.5">17.0.5</a>,
                            <a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-17.0.6"><b>17.0.6</b></a></td>
-      <td bgcolor="eefaeb"><a href="https://developer.nvidia.com/cuda-downloads"><b>12.2.2</b></a></td>
+      <td bgcolor="eefaeb"><a href="https://developer.nvidia.com/cuda-downloads"><b>12.3.2</b></a></td>
       <td colspan=2 bgcolor="eefaeb"><font color="green"><b>LATEST STABLE CONFIG</b></font></td>
     </tr>
     <tr align="center">
       <td><a href="https://github.com/llvm/llvm-project">18.0.0git</a></td>
-      <td><a href="https://developer.nvidia.com/cuda-downloads">12.2.2</a></td>
+      <td><a href="https://developer.nvidia.com/cuda-downloads">12.3.2</a></td>
       <td>+</td>
       <td>+</td>
     </tr>
@@ -210,14 +210,14 @@ To process a file, `hipify-clang` needs access to the same headers that would be
 For example:
 
 ```shell
-./hipify-clang square.cu --cuda-path=/usr/local/cuda-12.2 -I /usr/local/cuda-12.2/samples/common/inc
+./hipify-clang square.cu --cuda-path=/usr/local/cuda-12.3 -I /usr/local/cuda-12.3/samples/common/inc
 ```
 
 `hipify-clang` arguments are given first, followed by a separator `'--'`, and then the arguments you'd pass to `clang` if you
 were compiling the input file. For example:
 
 ```bash
-./hipify-clang cpp17.cu --cuda-path=/usr/local/cuda-12.2 -- -std=c++17
+./hipify-clang cpp17.cu --cuda-path=/usr/local/cuda-12.3 -- -std=c++17
 ```
 
 The [Clang manual for compiling CUDA](https://llvm.org/docs/CompileCudaWithLLVM.html#compiling-cuda-code) may be useful.
@@ -350,9 +350,9 @@ Run `Visual Studio 17 2022`, open the generated `LLVM.sln`, build all, build pro
 
   * ***Linux***: `-DCUDA_TOOLKIT_ROOT_DIR=/usr/include`
 
-  * ***Windows***: `-DCUDA_TOOLKIT_ROOT_DIR="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.2"`
+  * ***Windows***: `-DCUDA_TOOLKIT_ROOT_DIR="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.3"`
 
-      `-DCUDA_SDK_ROOT_DIR="C:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.2"`
+      `-DCUDA_SDK_ROOT_DIR="C:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.3"`
 
 4. Ensure [`cuDNN`](https://developer.nvidia.com/rdp/cudnn-archive) of the version corresponding to CUDA's version is installed.
 
@@ -360,7 +360,7 @@ Run `Visual Studio 17 2022`, open the generated `LLVM.sln`, build all, build pro
 
   * ***Linux***: `-DCUDA_DNN_ROOT_DIR=/usr/include`
 
-  * ***Windows***: `-DCUDA_DNN_ROOT_DIR=D:/CUDA/cuDNN/8.9.6`
+  * ***Windows***: `-DCUDA_DNN_ROOT_DIR=D:/CUDA/cuDNN/8.9.7`
 
 5. Ensure [`CUB`](https://github.com/NVlabs/cub) of the version corresponding to CUDA's version is installed.
 
@@ -416,9 +416,9 @@ Ubuntu 14: LLVM 4.0.0 - 7.1.0, CUDA 7.0 - 9.0, cuDNN 5.0.5 - 7.6.5
 
 Ubuntu 16-18: LLVM 8.0.0 - 14.0.6, CUDA 8.0 - 10.2, cuDNN 5.1.10 - 8.0.5
 
-Ubuntu 20-21: LLVM 9.0.0 - 17.0.6, CUDA 8.0 - 12.2.2, cuDNN 5.1.10 - 8.9.6
+Ubuntu 20-21: LLVM 9.0.0 - 17.0.6, CUDA 8.0 - 12.3.2, cuDNN 5.1.10 - 8.9.7
 
-Ubuntu 22: LLVM 13.0.0 - 17.0.6, CUDA 10.0 - 12.2.2, cuDNN 8.0.5 - 8.9.6
+Ubuntu 22: LLVM 13.0.0 - 17.0.6, CUDA 10.0 - 12.3.2, cuDNN 8.0.5 - 8.9.7
 
 Minimum build system requirements for the above configurations:
 
@@ -426,7 +426,7 @@ Python 2.7, cmake 3.16.8, GNU C/C++ 7.5.
 
 Recommended build system requirements:
 
-Python 3.11.4, cmake 3.27.3, GNU C/C++ 12.x.
+Python 3.12.0, cmake 3.28.0, GNU C/C++ 12.x.
 
 Here is an example of building `hipify-clang` with testing support on `Ubuntu 21.10.0`:
 
@@ -472,7 +472,7 @@ cmake
 -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
 -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
 -- Found Threads: TRUE
--- Found CUDA: /usr/local/cuda (found version "12.2")
+-- Found CUDA: /usr/local/cuda (found version "12.3")
 -- Configuring done
 -- Generating done
 -- Build files have been written to: /usr/hipify/build
@@ -487,7 +487,7 @@ make test-hipify
 ```shell
 Running HIPify regression tests
 ========================================
-CUDA 12.2 - will be used for testing
+CUDA 12.3.107 - will be used for testing
 LLVM 17.0.6 - will be used for testing
 x86_64 - Platform architecture
 Linux 5.13.0-21-generic - Platform OS
@@ -608,8 +608,8 @@ Testing Time: 7.90s
 | 14.0.0 - 14.0.6 | 7.0 - 11.7.1 | 8.0.5  - 8.4.1 | 2017.15.9.57*, 2019.16.11.17, 2022.17.2.6 | 3.24.0          | 3.10.6        |
 | 15.0.0 - 15.0.7 | 7.0 - 11.8.0 | 8.0.5  - 8.8.1 | 2019.16.11.25, 2022.17.5.2                | 3.26.0          | 3.11.2        |
 | 16.0.0 - 16.0.6 | 7.0 - 12.2.2 | 8.0.5  - 8.9.5 | 2019.16.11.29, 2022.17.7.1                | 3.27.3          | 3.11.4        |
-| 17.0.1** 17.0.6 | 7.0 - 12.2.2 | 8.0.5  - 8.9.6 | 2019.16.11.30, 2022.17.7.4                | 3.27.6          | 3.12.0        |
-| 18.0.0git       | 7.0 - 12.2.2 | 8.0.5  - 8.9.6 | 2019.16.11.30, 2022.17.7.4                | 3.27.6          | 3.12.0        |
+| 17.0.1** 17.0.6 | 7.0 - 12.3.2 | 8.0.5  - 8.9.7 | 2019.16.11.32, 2022.17.8.3                | 3.28.1          | 3.12.1        |
+| 18.0.0git       | 7.0 - 12.3.2 | 8.0.5  - 8.9.7 | 2019.16.11.32, 2022.17.8.3                | 3.28.1          | 3.12.1        |
 
 `*` LLVM 14.x.x is the latest major release supporting Visual Studio 2017.
 To build LLVM 14.x.x correctly by Visual Studio 2017, `-DLLVM_FORCE_USE_OLD_TOOLCHAIN=ON` should be added to a corresponding cmake command line.
@@ -628,9 +628,9 @@ cmake
  -DCMAKE_BUILD_TYPE=Release \
  -DCMAKE_INSTALL_PREFIX=../dist \
  -DCMAKE_PREFIX_PATH=D:/LLVM/17.0.6/dist \
- -DCUDA_TOOLKIT_ROOT_DIR="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.2" \
- -DCUDA_SDK_ROOT_DIR="C:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.2" \
- -DCUDA_DNN_ROOT_DIR=D:/CUDA/cuDNN/8.9.6 \
+ -DCUDA_TOOLKIT_ROOT_DIR="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.3" \
+ -DCUDA_SDK_ROOT_DIR="C:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.3" \
+ -DCUDA_DNN_ROOT_DIR=D:/CUDA/cuDNN/8.9.7 \
  -DCUDA_CUB_ROOT_DIR=D:/CUDA/CUB/cub-2.1.0 \
  -DLLVM_EXTERNAL_LIT=D:/LLVM/17.0.6/build/Release/bin/llvm-lit.py \
  ../hipify
@@ -666,15 +666,15 @@ cmake
 -- Found lit: C:/Users/TT/AppData/Local/Programs/Python/Python312/Scripts/lit.exe
 -- Found FileCheck: D:/LLVM/17.0.6/dist/bin/FileCheck.exe
 -- Initial CUDA to configure:
---    - CUDA Toolkit path  : C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.2
---    - CUDA Samples path  : C:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.2
---    - cuDNN path         : D:/CUDA/cuDNN/8.9.6
+--    - CUDA Toolkit path  : C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.3
+--    - CUDA Samples path  : C:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.3
+--    - cuDNN path         : D:/CUDA/cuDNN/8.9.7
 --    - CUB path           : D:/CUDA/CUB/cub-2.1.0
--- Found CUDAToolkit: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.2/include (found version "12.2.140")
+-- Found CUDAToolkit: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.3/include (found version "12.3.52")
 -- Found CUDA config:
---    - CUDA Toolkit path  : C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.2
---    - CUDA Samples path  : C:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.2
---    - cuDNN path         : D:/CUDA/cuDNN/8.9.6
+--    - CUDA Toolkit path  : C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.3
+--    - CUDA Samples path  : C:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.3
+--    - cuDNN path         : D:/CUDA/cuDNN/8.9.7
 --    - CUB path           : D:/CUDA/CUB/cub-2.1.0
 -- Configuring done (1.4s)
 -- Generating done (0.1s)

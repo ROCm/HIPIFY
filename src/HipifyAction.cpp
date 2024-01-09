@@ -175,6 +175,18 @@ const std::string sCusparseSbsrsv2_analysis = "cusparseSbsrsv2_analysis";
 const std::string sCusparseDbsrsv2_analysis = "cusparseDbsrsv2_analysis";
 const std::string sCusparseCbsrsv2_analysis = "cusparseCbsrsv2_analysis";
 const std::string sCusparseZbsrsv2_analysis = "cusparseZbsrsv2_analysis";
+const std::string sCusparseZcsrmm = "cusparseZcsrmm";
+const std::string sCusparseCcsrmm = "cusparseCcsrmm";
+const std::string sCusparseDcsrmm = "cusparseDcsrmm";
+const std::string sCusparseScsrmm = "cusparseScsrmm";
+const std::string sCusparseZcsrgeam2 = "cusparseZcsrgeam2";
+const std::string sCusparseCcsrgeam2 = "cusparseCcsrgeam2";
+const std::string sCusparseDcsrgeam2 = "cusparseDcsrgeam2";
+const std::string sCusparseScsrgeam2 = "cusparseScsrgeam2";
+const std::string sCusparseZbsrsv2_bufferSize = "cusparseZbsrsv2_bufferSize";
+const std::string sCusparseCbsrsv2_bufferSize = "cusparseCbsrsv2_bufferSize";
+const std::string sCusparseDbsrsv2_bufferSize = "cusparseDbsrsv2_bufferSize";
+const std::string sCusparseSbsrsv2_bufferSize = "cusparseSbsrsv2_bufferSize";
 
 // CUDA_OVERLOADED
 const std::string sCudaEventCreate = "cudaEventCreate";
@@ -1335,6 +1347,114 @@ std::map<std::string, ArgCastStruct> FuncArgCasts {
       false
     }
   },
+  {sCusparseZcsrmm,
+    {
+      {
+        {2, {e_add_const_argument, cw_None, "rocsparse_operation_none"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseCcsrmm,
+    {
+      {
+        {2, {e_add_const_argument, cw_None, "rocsparse_operation_none"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseDcsrmm,
+    {
+      {
+        {2, {e_add_const_argument, cw_None, "rocsparse_operation_none"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseScsrmm,
+    {
+      {
+        {2, {e_add_const_argument, cw_None, "rocsparse_operation_none"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseZcsrgeam2,
+    {
+      {
+        {19, {e_remove_argument, cw_None}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseCcsrgeam2,
+    {
+      {
+        {19, {e_remove_argument, cw_None}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseDcsrgeam2,
+    {
+      {
+        {19, {e_remove_argument, cw_None}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseScsrgeam2,
+    {
+      {
+        {19, {e_remove_argument, cw_None}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseZbsrsv2_bufferSize,
+    {
+      {
+        {11, {e_reinterpret_cast_size_t, cw_None}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseCbsrsv2_bufferSize,
+    {
+      {
+        {11, {e_reinterpret_cast_size_t, cw_None}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseDbsrsv2_bufferSize,
+    {
+      {
+        {11, {e_reinterpret_cast_size_t, cw_None}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseSbsrsv2_bufferSize,
+    {
+      {
+        {11, {e_reinterpret_cast_size_t, cw_None}}
+      },
+      true,
+      false
+    }
+  },
 };
 
 void HipifyAction::RewriteString(StringRef s, clang::SourceLocation start) {
@@ -1803,10 +1923,18 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
         case e_remove_argument:
         {
           OS << "";
-          if (argNum < call->getNumArgs())
+          if (argNum < call->getNumArgs() - 1) {
             e = call->getArg(argNum + 1)->getBeginLoc();
-          else
+          }
+          else {
             e = call->getEndLoc();
+            if (call->getNumArgs() > 1) {
+              auto prevComma = clang::Lexer::findNextToken(call->getArg(argNum - 1)->getSourceRange().getEnd(), *SM, DefaultLangOptions);
+              if (!prevComma)
+                s = call->getEndLoc();
+              s = prevComma->getLocation();
+            }
+          }
           length = SM->getCharacterData(e) - SM->getCharacterData(s);
           break;
         }
@@ -2142,7 +2270,19 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
             sCusparseSbsrsv2_analysis,
             sCusparseDbsrsv2_analysis,
             sCusparseCbsrsv2_analysis,
-            sCusparseZbsrsv2_analysis
+            sCusparseZbsrsv2_analysis,
+            sCusparseZcsrmm,
+            sCusparseCcsrmm,
+            sCusparseDcsrmm,
+            sCusparseScsrmm,
+            sCusparseZcsrgeam2,
+            sCusparseCcsrgeam2,
+            sCusparseDcsrgeam2,
+            sCusparseScsrgeam2,
+            sCusparseZbsrsv2_bufferSize,
+            sCusparseCbsrsv2_bufferSize,
+            sCusparseDbsrsv2_bufferSize,
+            sCusparseSbsrsv2_bufferSize
           )
         )
       )

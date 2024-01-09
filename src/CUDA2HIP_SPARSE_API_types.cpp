@@ -266,10 +266,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_TYPE_NAME_MAP {
 
   // 4. Typedefs
   {"cusparseLoggerCallback_t",                  {"hipsparseLoggerCallback_t",                  "",                                                   CONV_TYPE, API_SPARSE, 4, UNSUPPORTED}},
-  {"cusparseConstSpVecDescr_t",                 {"hipsparseConstSpVecDescr_t",                 "",                                                   CONV_TYPE, API_SPARSE, 4, ROC_UNSUPPORTED}},
-  {"cusparseConstDnVecDescr_t",                 {"hipsparseConstDnVecDescr_t",                 "",                                                   CONV_TYPE, API_SPARSE, 4, ROC_UNSUPPORTED}},
-  {"cusparseConstSpMatDescr_t",                 {"hipsparseConstSpMatDescr_t",                 "",                                                   CONV_TYPE, API_SPARSE, 4, ROC_UNSUPPORTED}},
-  {"cusparseConstDnMatDescr_t",                 {"hipsparseConstDnMatDescr_t",                 "",                                                   CONV_TYPE, API_SPARSE, 4, ROC_UNSUPPORTED}},
+  {"cusparseConstSpVecDescr_t",                 {"hipsparseConstSpVecDescr_t",                 "rocsparse_const_spvec_descr",                        CONV_TYPE, API_SPARSE, 4}},
+  {"cusparseConstDnVecDescr_t",                 {"hipsparseConstDnVecDescr_t",                 "rocsparse_const_dnvec_descr",                        CONV_TYPE, API_SPARSE, 4}},
+  {"cusparseConstSpMatDescr_t",                 {"hipsparseConstSpMatDescr_t",                 "rocsparse_const_spmat_descr",                        CONV_TYPE, API_SPARSE, 4}},
+  {"cusparseConstDnMatDescr_t",                 {"hipsparseConstDnMatDescr_t",                 "rocsparse_const_dnmat_descr",                        CONV_TYPE, API_SPARSE, 4}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_SPARSE_TYPE_NAME_VER_MAP {
@@ -674,4 +674,8 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_TYPE_NAME_VER_MAP {
   {"rocsparse_spgemm_alg_default",               {HIP_4010, HIP_0,    HIP_0   }},
   {"_rocsparse_mat_info",                        {HIP_1090, HIP_0,    HIP_0   }},
   {"rocsparse_mat_info",                         {HIP_1090, HIP_0,    HIP_0   }},
+  {"rocsparse_const_spvec_descr",                {HIP_6000, HIP_0,    HIP_0   }},
+  {"rocsparse_const_spmat_descr",                {HIP_6000, HIP_0,    HIP_0   }},
+  {"rocsparse_const_dnvec_descr",                {HIP_6000, HIP_0,    HIP_0   }},
+  {"rocsparse_const_dnmat_descr",                {HIP_6000, HIP_0,    HIP_0   }},
 };
