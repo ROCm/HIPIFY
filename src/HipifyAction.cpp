@@ -187,6 +187,10 @@ const std::string sCusparseZbsrsv2_bufferSize = "cusparseZbsrsv2_bufferSize";
 const std::string sCusparseCbsrsv2_bufferSize = "cusparseCbsrsv2_bufferSize";
 const std::string sCusparseDbsrsv2_bufferSize = "cusparseDbsrsv2_bufferSize";
 const std::string sCusparseSbsrsv2_bufferSize = "cusparseSbsrsv2_bufferSize";
+const std::string sCusparseZcsrsv2_bufferSize = "cusparseZcsrsv2_bufferSize";
+const std::string sCusparseCcsrsv2_bufferSize = "cusparseCcsrsv2_bufferSize";
+const std::string sCusparseDcsrsv2_bufferSize = "cusparseDcsrsv2_bufferSize";
+const std::string sCusparseScsrsv2_bufferSize = "cusparseScsrsv2_bufferSize";
 
 // CUDA_OVERLOADED
 const std::string sCudaEventCreate = "cudaEventCreate";
@@ -1455,6 +1459,42 @@ std::map<std::string, ArgCastStruct> FuncArgCasts {
       false
     }
   },
+  {sCusparseZcsrsv2_bufferSize,
+    {
+      {
+        {9, {e_reinterpret_cast_size_t, cw_None}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseCcsrsv2_bufferSize,
+    {
+      {
+        {9, {e_reinterpret_cast_size_t, cw_None}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseDcsrsv2_bufferSize,
+    {
+      {
+        {9, {e_reinterpret_cast_size_t, cw_None}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseScsrsv2_bufferSize,
+    {
+      {
+        {9, {e_reinterpret_cast_size_t, cw_None}}
+      },
+      true,
+      false
+    }
+  },
 };
 
 void HipifyAction::RewriteString(StringRef s, clang::SourceLocation start) {
@@ -2282,7 +2322,11 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
             sCusparseZbsrsv2_bufferSize,
             sCusparseCbsrsv2_bufferSize,
             sCusparseDbsrsv2_bufferSize,
-            sCusparseSbsrsv2_bufferSize
+            sCusparseSbsrsv2_bufferSize,
+            sCusparseZcsrsv2_bufferSize,
+            sCusparseCcsrsv2_bufferSize,
+            sCusparseDcsrsv2_bufferSize,
+            sCusparseScsrsv2_bufferSize
           )
         )
       )
