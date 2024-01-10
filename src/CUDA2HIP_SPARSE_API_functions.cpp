@@ -1365,10 +1365,10 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SPARSE_FUNCTION_VER_MAP {
   {"cusparseCcsrilu02_numericBoost",                    {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
   {"cusparseZcsrilu02_numericBoost",                    {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
   {"cusparseXcsrilu02_zeroPivot",                       {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseScsrilu02_bufferSize",                      {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseDcsrilu02_bufferSize",                      {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseCcsrilu02_bufferSize",                      {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseZcsrilu02_bufferSize",                      {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
+  {"cusparseScsrilu02_bufferSize",                      {CUDA_0,   CUDA_122, CUDA_0  }}, // D: CUSPARSE_VERSION 12102
+  {"cusparseDcsrilu02_bufferSize",                      {CUDA_0,   CUDA_122, CUDA_0  }}, // D: CUSPARSE_VERSION 12102
+  {"cusparseCcsrilu02_bufferSize",                      {CUDA_0,   CUDA_122, CUDA_0  }}, // D: CUSPARSE_VERSION 12102
+  {"cusparseZcsrilu02_bufferSize",                      {CUDA_0,   CUDA_122, CUDA_0  }}, // D: CUSPARSE_VERSION 12102
   {"cusparseScsrilu02_bufferSizeExt",                   {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
   {"cusparseDcsrilu02_bufferSizeExt",                   {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
   {"cusparseCcsrilu02_bufferSizeExt",                   {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
