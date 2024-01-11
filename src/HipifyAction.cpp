@@ -187,6 +187,18 @@ const std::string sCusparseZbsrsv2_bufferSize = "cusparseZbsrsv2_bufferSize";
 const std::string sCusparseCbsrsv2_bufferSize = "cusparseCbsrsv2_bufferSize";
 const std::string sCusparseDbsrsv2_bufferSize = "cusparseDbsrsv2_bufferSize";
 const std::string sCusparseSbsrsv2_bufferSize = "cusparseSbsrsv2_bufferSize";
+const std::string sCusparseZcsrsv2_bufferSize = "cusparseZcsrsv2_bufferSize";
+const std::string sCusparseCcsrsv2_bufferSize = "cusparseCcsrsv2_bufferSize";
+const std::string sCusparseDcsrsv2_bufferSize = "cusparseDcsrsv2_bufferSize";
+const std::string sCusparseScsrsv2_bufferSize = "cusparseScsrsv2_bufferSize";
+const std::string sCusparseZcsrgemm2 = "cusparseZcsrgemm2";
+const std::string sCusparseCcsrgemm2 = "cusparseCcsrgemm2";
+const std::string sCusparseDcsrgemm2 = "cusparseDcsrgemm2";
+const std::string sCusparseScsrgemm2 = "cusparseScsrgemm2";
+const std::string sCusparseZcsrilu02_bufferSize = "cusparseZcsrilu02_bufferSize";
+const std::string sCusparseCcsrilu02_bufferSize = "cusparseCcsrilu02_bufferSize";
+const std::string sCusparseDcsrilu02_bufferSize = "cusparseDcsrilu02_bufferSize";
+const std::string sCusparseScsrilu02_bufferSize = "cusparseScsrilu02_bufferSize";
 
 // CUDA_OVERLOADED
 const std::string sCudaEventCreate = "cudaEventCreate";
@@ -1455,6 +1467,114 @@ std::map<std::string, ArgCastStruct> FuncArgCasts {
       false
     }
   },
+  {sCusparseZcsrsv2_bufferSize,
+    {
+      {
+        {9, {e_reinterpret_cast_size_t, cw_None}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseCcsrsv2_bufferSize,
+    {
+      {
+        {9, {e_reinterpret_cast_size_t, cw_None}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseDcsrsv2_bufferSize,
+    {
+      {
+        {9, {e_reinterpret_cast_size_t, cw_None}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseScsrsv2_bufferSize,
+    {
+      {
+        {9, {e_reinterpret_cast_size_t, cw_None}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseZcsrgemm2,
+    {
+      {
+        {1, {e_add_const_argument, cw_None, "rocsparse_operation_none, rocsparse_operation_none"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseCcsrgemm2,
+    {
+      {
+        {1, {e_add_const_argument, cw_None, "rocsparse_operation_none, rocsparse_operation_none"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseDcsrgemm2,
+    {
+      {
+        {1, {e_add_const_argument, cw_None, "rocsparse_operation_none, rocsparse_operation_none"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseScsrgemm2,
+    {
+      {
+        {1, {e_add_const_argument, cw_None, "rocsparse_operation_none, rocsparse_operation_none"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseZcsrilu02_bufferSize,
+    {
+      {
+        {8, {e_reinterpret_cast_size_t, cw_None}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseCcsrilu02_bufferSize,
+    {
+      {
+        {8, {e_reinterpret_cast_size_t, cw_None}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseDcsrilu02_bufferSize,
+    {
+      {
+        {8, {e_reinterpret_cast_size_t, cw_None}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseScsrilu02_bufferSize,
+    {
+      {
+        {8, {e_reinterpret_cast_size_t, cw_None}}
+      },
+      true,
+      false
+    }
+  },
 };
 
 void HipifyAction::RewriteString(StringRef s, clang::SourceLocation start) {
@@ -2282,7 +2402,19 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
             sCusparseZbsrsv2_bufferSize,
             sCusparseCbsrsv2_bufferSize,
             sCusparseDbsrsv2_bufferSize,
-            sCusparseSbsrsv2_bufferSize
+            sCusparseSbsrsv2_bufferSize,
+            sCusparseZcsrsv2_bufferSize,
+            sCusparseCcsrsv2_bufferSize,
+            sCusparseDcsrsv2_bufferSize,
+            sCusparseScsrsv2_bufferSize,
+            sCusparseZcsrgemm2,
+            sCusparseCcsrgemm2,
+            sCusparseDcsrgemm2,
+            sCusparseScsrgemm2,
+            sCusparseZcsrilu02_bufferSize,
+            sCusparseCcsrilu02_bufferSize,
+            sCusparseDcsrilu02_bufferSize,
+            sCusparseScsrilu02_bufferSize
           )
         )
       )

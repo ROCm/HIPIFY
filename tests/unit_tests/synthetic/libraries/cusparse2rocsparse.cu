@@ -752,23 +752,43 @@ int main() {
 
   // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseZcsrilu02_bufferSize(cusparseHandle_t handle, int m, int nnz, const cusparseMatDescr_t descrA, cuDoubleComplex* csrSortedValA, const int* csrSortedRowPtrA, const int* csrSortedColIndA, csrilu02Info_t info, int* pBufferSizeInBytes);
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_zcsrilu0_buffer_size(rocsparse_handle handle, rocsparse_int m, rocsparse_int nnz, const rocsparse_mat_descr descr, const rocsparse_double_complex* csr_val, const rocsparse_int* csr_row_ptr, const rocsparse_int* csr_col_ind, rocsparse_mat_info info, size_t* buffer_size);
-  // CHECK: status_t = rocsparse_zcsrilu0_buffer_size(handle_t, m, innz, matDescr_A, &dComplexcsrSortedValA, &csrRowPtrA, &csrColIndA, csrilu02_info, &bufferSizeInBytes);
+  // CHECK: status_t = rocsparse_zcsrilu0_buffer_size(handle_t, m, innz, matDescr_A, &dComplexcsrSortedValA, &csrRowPtrA, &csrColIndA, csrilu02_info, reinterpret_cast<size_t*>(&bufferSizeInBytes));
   status_t = cusparseZcsrilu02_bufferSize(handle_t, m, innz, matDescr_A, &dComplexcsrSortedValA, &csrRowPtrA, &csrColIndA, csrilu02_info, &bufferSizeInBytes);
 
   // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseCcsrilu02_bufferSize(cusparseHandle_t handle, int m, int nnz, const cusparseMatDescr_t descrA, cuComplex* csrSortedValA, const int* csrSortedRowPtrA, const int* csrSortedColIndA, csrilu02Info_t info, int* pBufferSizeInBytes);
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_ccsrilu0_buffer_size(rocsparse_handle handle, rocsparse_int m, rocsparse_int nnz, const rocsparse_mat_descr descr, const rocsparse_float_complex* csr_val, const rocsparse_int* csr_row_ptr, const rocsparse_int* csr_col_ind, rocsparse_mat_info info, size_t* buffer_size);
-  // CHECK: status_t = rocsparse_ccsrilu0_buffer_size(handle_t, m, innz, matDescr_A, &complexcsrSortedValA, &csrRowPtrA, &csrColIndA, csrilu02_info, &bufferSizeInBytes);
+  // CHECK: status_t = rocsparse_ccsrilu0_buffer_size(handle_t, m, innz, matDescr_A, &complexcsrSortedValA, &csrRowPtrA, &csrColIndA, csrilu02_info, reinterpret_cast<size_t*>(&bufferSizeInBytes));
   status_t = cusparseCcsrilu02_bufferSize(handle_t, m, innz, matDescr_A, &complexcsrSortedValA, &csrRowPtrA, &csrColIndA, csrilu02_info, &bufferSizeInBytes);
 
   // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseDcsrilu02_bufferSize(cusparseHandle_t handle, int m, int nnz, const cusparseMatDescr_t descrA, double* csrSortedValA, const int* csrSortedRowPtrA, const int* csrSortedColIndA, csrilu02Info_t info, int* pBufferSizeInBytes);
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_dcsrilu0_buffer_size(rocsparse_handle handle, rocsparse_int m, rocsparse_int nnz, const rocsparse_mat_descr descr, const double* csr_val, const rocsparse_int* csr_row_ptr, const rocsparse_int* csr_col_ind, rocsparse_mat_info info, size_t* buffer_size);
-  // CHECK: status_t = rocsparse_dcsrilu0_buffer_size(handle_t, m, innz, matDescr_A, &dcsrSortedValA, &csrRowPtrA, &csrColIndA, csrilu02_info, &bufferSizeInBytes);
+  // CHECK: status_t = rocsparse_dcsrilu0_buffer_size(handle_t, m, innz, matDescr_A, &dcsrSortedValA, &csrRowPtrA, &csrColIndA, csrilu02_info, reinterpret_cast<size_t*>(&bufferSizeInBytes));
   status_t = cusparseDcsrilu02_bufferSize(handle_t, m, innz, matDescr_A, &dcsrSortedValA, &csrRowPtrA, &csrColIndA, csrilu02_info, &bufferSizeInBytes);
 
   // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseScsrilu02_bufferSize(cusparseHandle_t handle, int m, int nnz, const cusparseMatDescr_t descrA, float* csrSortedValA, const int* csrSortedRowPtrA, const int* csrSortedColIndA, csrilu02Info_t info, int* pBufferSizeInBytes);
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_scsrilu0_buffer_size(rocsparse_handle handle, rocsparse_int m, rocsparse_int nnz, const rocsparse_mat_descr descr, const float* csr_val, const rocsparse_int* csr_row_ptr, const rocsparse_int* csr_col_ind, rocsparse_mat_info info, size_t* buffer_size);
-  // CHECK: status_t = rocsparse_scsrilu0_buffer_size(handle_t, m, innz, matDescr_A, &csrSortedValA, &csrRowPtrA, &csrColIndA, csrilu02_info, &bufferSizeInBytes);
+  // CHECK: status_t = rocsparse_scsrilu0_buffer_size(handle_t, m, innz, matDescr_A, &csrSortedValA, &csrRowPtrA, &csrColIndA, csrilu02_info, reinterpret_cast<size_t*>(&bufferSizeInBytes));
   status_t = cusparseScsrilu02_bufferSize(handle_t, m, innz, matDescr_A, &csrSortedValA, &csrRowPtrA, &csrColIndA, csrilu02_info, &bufferSizeInBytes);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseZcsrilu02_bufferSizeExt(cusparseHandle_t handle, int m, int nnz, const cusparseMatDescr_t descrA, cuDoubleComplex* csrSortedVal, const int* csrSortedRowPtr, const int* csrSortedColInd, csrilu02Info_t info, size_t* pBufferSize);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_zcsrilu0_buffer_size(rocsparse_handle handle, rocsparse_int m, rocsparse_int nnz, const rocsparse_mat_descr descr, const rocsparse_double_complex* csr_val, const rocsparse_int* csr_row_ptr, const rocsparse_int* csr_col_ind, rocsparse_mat_info info, size_t* buffer_size);
+  // CHECK: status_t = rocsparse_zcsrilu0_buffer_size(handle_t, m, innz, matDescr_A, &dComplexcsrSortedValA, &csrRowPtrA, &csrColIndA, csrilu02_info, &bufferSize);
+  status_t = cusparseZcsrilu02_bufferSizeExt(handle_t, m, innz, matDescr_A, &dComplexcsrSortedValA, &csrRowPtrA, &csrColIndA, csrilu02_info, &bufferSize);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseCcsrilu02_bufferSizeExt(cusparseHandle_t handle, int m, int nnz, const cusparseMatDescr_t descrA, cuComplex* csrSortedVal, const int* csrSortedRowPtr, const int* csrSortedColInd, csrilu02Info_t info, size_t* pBufferSize);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_ccsrilu0_buffer_size(rocsparse_handle handle, rocsparse_int m, rocsparse_int nnz, const rocsparse_mat_descr descr, const rocsparse_float_complex* csr_val, const rocsparse_int* csr_row_ptr, const rocsparse_int* csr_col_ind, rocsparse_mat_info info, size_t* buffer_size);
+  // CHECK: status_t = rocsparse_ccsrilu0_buffer_size(handle_t, m, innz, matDescr_A, &complexcsrSortedValA, &csrRowPtrA, &csrColIndA, csrilu02_info, &bufferSize);
+  status_t = cusparseCcsrilu02_bufferSizeExt(handle_t, m, innz, matDescr_A, &complexcsrSortedValA, &csrRowPtrA, &csrColIndA, csrilu02_info, &bufferSize);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseDcsrilu02_bufferSizeExt(cusparseHandle_t handle, int m, int nnz, const cusparseMatDescr_t descrA, double* csrSortedVal, const int* csrSortedRowPtr, const int* csrSortedColInd, csrilu02Info_t info, size_t* pBufferSize);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_dcsrilu0_buffer_size(rocsparse_handle handle, rocsparse_int m, rocsparse_int nnz, const rocsparse_mat_descr descr, const double* csr_val, const rocsparse_int* csr_row_ptr, const rocsparse_int* csr_col_ind, rocsparse_mat_info info, size_t* buffer_size);
+  // CHECK: status_t = rocsparse_dcsrilu0_buffer_size(handle_t, m, innz, matDescr_A, &dcsrSortedValA, &csrRowPtrA, &csrColIndA, csrilu02_info, &bufferSize);
+  status_t = cusparseDcsrilu02_bufferSizeExt(handle_t, m, innz, matDescr_A, &dcsrSortedValA, &csrRowPtrA, &csrColIndA, csrilu02_info, &bufferSize);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseScsrilu02_bufferSizeExt(cusparseHandle_t handle, int m, int nnz, const cusparseMatDescr_t descrA, float* csrSortedVal, const int* csrSortedRowPtr, const int* csrSortedColInd, csrilu02Info_t info, size_t* pBufferSize);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_scsrilu0_buffer_size(rocsparse_handle handle, rocsparse_int m, rocsparse_int nnz, const rocsparse_mat_descr descr, const float* csr_val, const rocsparse_int* csr_row_ptr, const rocsparse_int* csr_col_ind, rocsparse_mat_info info, size_t* buffer_size);
+  // CHECK: status_t = rocsparse_scsrilu0_buffer_size(handle_t, m, innz, matDescr_A, &csrSortedValA, &csrRowPtrA, &csrColIndA, csrilu02_info, &bufferSize);
+  status_t = cusparseScsrilu02_bufferSizeExt(handle_t, m, innz, matDescr_A, &csrSortedValA, &csrRowPtrA, &csrColIndA, csrilu02_info, &bufferSize);
 
   // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseZcsrilu02_numericBoost(cusparseHandle_t handle, csrilu02Info_t info, int enable_boost, double* tol, cuDoubleComplex* boost_val);
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_zcsrilu0_numeric_boost(rocsparse_handle handle, rocsparse_mat_info info, int enable_boost, const double* boost_tol, const rocsparse_double_complex* boost_val);
