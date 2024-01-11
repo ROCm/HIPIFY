@@ -199,6 +199,10 @@ const std::string sCusparseZcsrilu02_bufferSize = "cusparseZcsrilu02_bufferSize"
 const std::string sCusparseCcsrilu02_bufferSize = "cusparseCcsrilu02_bufferSize";
 const std::string sCusparseDcsrilu02_bufferSize = "cusparseDcsrilu02_bufferSize";
 const std::string sCusparseScsrilu02_bufferSize = "cusparseScsrilu02_bufferSize";
+const std::string sCusparseZbsrilu02_bufferSize = "cusparseZbsrilu02_bufferSize";
+const std::string sCusparseCbsrilu02_bufferSize = "cusparseCbsrilu02_bufferSize";
+const std::string sCusparseDbsrilu02_bufferSize = "cusparseDbsrilu02_bufferSize";
+const std::string sCusparseSbsrilu02_bufferSize = "cusparseSbsrilu02_bufferSize";
 
 // CUDA_OVERLOADED
 const std::string sCudaEventCreate = "cudaEventCreate";
@@ -1575,6 +1579,42 @@ std::map<std::string, ArgCastStruct> FuncArgCasts {
       false
     }
   },
+  {sCusparseZbsrilu02_bufferSize,
+    {
+      {
+        {10, {e_reinterpret_cast_size_t, cw_None}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseCbsrilu02_bufferSize,
+    {
+      {
+        {10, {e_reinterpret_cast_size_t, cw_None}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseDbsrilu02_bufferSize,
+    {
+      {
+        {10, {e_reinterpret_cast_size_t, cw_None}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseSbsrilu02_bufferSize,
+    {
+      {
+        {10, {e_reinterpret_cast_size_t, cw_None}}
+      },
+      true,
+      false
+    }
+  },
 };
 
 void HipifyAction::RewriteString(StringRef s, clang::SourceLocation start) {
@@ -2414,7 +2454,11 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
             sCusparseZcsrilu02_bufferSize,
             sCusparseCcsrilu02_bufferSize,
             sCusparseDcsrilu02_bufferSize,
-            sCusparseScsrilu02_bufferSize
+            sCusparseScsrilu02_bufferSize,
+            sCusparseZbsrilu02_bufferSize,
+            sCusparseCbsrilu02_bufferSize,
+            sCusparseDbsrilu02_bufferSize,
+            sCusparseSbsrilu02_bufferSize
           )
         )
       )
