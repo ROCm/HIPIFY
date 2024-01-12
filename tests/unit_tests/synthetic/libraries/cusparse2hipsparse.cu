@@ -226,6 +226,8 @@ int main() {
   void *alpha = nullptr;
   void *beta = nullptr;
   void *pBuffer = nullptr;
+  void *pcsrVal = nullptr;
+  void *pcscVal = nullptr;
   int *P = nullptr;
   void *tempBuffer = nullptr;
   void *tempBuffer1 = nullptr;
@@ -1857,6 +1859,11 @@ int main() {
   // CHECK-NEXT: hipsparseCsr2CscAlg_t CSR2CSC_ALG1 = HIPSPARSE_CSR2CSC_ALG1;
   cusparseCsr2CscAlg_t Csr2CscAlg_t;
   cusparseCsr2CscAlg_t CSR2CSC_ALG1 = CUSPARSE_CSR2CSC_ALG1;
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCsr2cscEx2_bufferSize(cusparseHandle_t handle, int m, int n, int nnz, const void* csrVal, const int* csrRowPtr, const int* csrColInd, void* cscVal, int* cscColPtr, int* cscRowInd, cudaDataType valType, cusparseAction_t copyValues, cusparseIndexBase_t idxBase, cusparseCsr2CscAlg_t alg, size_t* bufferSize);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseCsr2cscEx2_bufferSize(hipsparseHandle_t handle, int m, int n, int nnz, const void* csrVal, const int* csrRowPtr, const int* csrColInd, void* cscVal, int* cscColPtr, int* cscRowInd, hipDataType valType, hipsparseAction_t copyValues, hipsparseIndexBase_t idxBase, hipsparseCsr2CscAlg_t alg, size_t* bufferSize);
+  // CHECK: status_t = hipsparseCsr2cscEx2_bufferSize(handle_t, m, n, innz, pcsrVal, &csrRowPtrA, &csrColIndA, pcscVal, &cscColPtrA, &cscRowIndA, dataType, action_t, indexBase_t, Csr2CscAlg_t, &bufferSize);
+  status_t = cusparseCsr2cscEx2_bufferSize(handle_t, m, n, innz, pcsrVal, &csrRowPtrA, &csrColIndA, pcscVal, &cscColPtrA, &cscRowIndA, dataType, action_t, indexBase_t, Csr2CscAlg_t, &bufferSize);
 #endif
 
 #if (CUDA_VERSION >= 10010 && CUDA_VERSION < 11000 && !defined(_WIN32)) || CUDA_VERSION >= 11000

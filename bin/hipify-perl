@@ -2381,6 +2381,7 @@ sub rocSubstitutions {
     subst("cusparseCreateSpVec", "rocsparse_create_spvec_descr", "library");
     subst("cusparseCscSetPointers", "rocsparse_csc_set_pointers", "library");
     subst("cusparseCsctr", "rocsparse_csctr", "library");
+    subst("cusparseCsr2cscEx2_bufferSize", "rocsparse_csr2csc_buffer_size", "library");
     subst("cusparseCsrGet", "rocsparse_csr_get", "library");
     subst("cusparseCsrSetPointers", "rocsparse_csr_set_pointers", "library");
     subst("cusparseCsrSetStridedBatch", "rocsparse_csr_set_strided_batch", "library");
