@@ -655,7 +655,7 @@
 |`cusparseCreateIdentityPermutation`| |12.2| | |`hipsparseCreateIdentityPermutation`|1.9.2| | | | |`rocsparse_create_identity_permutation`|1.9.0| | | | |
 |`cusparseCsr2cscEx`|8.0|10.2| |11.0| | | | | | | | | | | | |
 |`cusparseCsr2cscEx2`|10.1| | | |`hipsparseCsr2cscEx2`|5.4.0| | | | | | | | | | |
-|`cusparseCsr2cscEx2_bufferSize`|10.1| | | |`hipsparseCsr2cscEx2_bufferSize`|5.4.0| | | | | | | | | | |
+|`cusparseCsr2cscEx2_bufferSize`|10.1| | | |`hipsparseCsr2cscEx2_bufferSize`|5.4.0| | | | |`rocsparse_csr2csc_buffer_size`|1.9.0| | | | |
 |`cusparseDbsr2csr`| | | | |`hipsparseDbsr2csr`|3.5.0| | | | |`rocsparse_dbsr2csr`|3.10.0| | | | |
 |`cusparseDcsc2dense`| |11.1| |12.0|`hipsparseDcsc2dense`|3.5.0| | | | |`rocsparse_dcsc2dense`|3.5.0| | | | |
 |`cusparseDcsc2hyb`| |10.2| |11.0| | | | | | | | | | | | |
