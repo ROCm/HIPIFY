@@ -1305,6 +1305,7 @@ int main() {
   blasStatus = cublasZhpr2(blasHandle, blasFillMode, n, &dcomplexa, &dcomplexx, incx, &dcomplexy, incy, &dcomplexA);
   blasStatus = cublasZhpr2_v2(blasHandle, blasFillMode, n, &dcomplexa, &dcomplexx, incx, &dcomplexy, incy, &dcomplexA);
 
+  // CHECK rocblas_operation transa, transb;
   cublasOperation_t transa, transb;
 
   // TODO: #1281

@@ -738,7 +738,7 @@ int main() {
   status = cusolverDnZungqr(handle, m, n, k, &dComplexA, lda, &dComplexTAU, &dComplexWorkspace, Lwork, &info);
 
   // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnSormqr_bufferSize(cusolverDnHandle_t handle, cublasSideMode_t side, cublasOperation_t trans, int m, int n, int k, const float * A, int lda, const float * tau, const float * C, int ldc, int * lwork);
-  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnSormqr_bufferSize(hipsolverHandle_t  handle, hipblasSideMode_t side, hipblasOperation_t trans, int m, int n, int k, const float* A, int lda, const float* tau, const float* C, int ldc, int* lwork);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnSormqr_bufferSize(hipsolverHandle_t handle, hipblasSideMode_t side, hipblasOperation_t trans, int m, int n, int k, const float* A, int lda, const float* tau, const float* C, int ldc, int* lwork);
   // CHECK: status = hipsolverDnSormqr_bufferSize(handle, blasSideMode, blasOperation, m, n, k, &fA, lda, &fTAU, &fC, ldc, &Lwork);
   status = cusolverDnSormqr_bufferSize(handle, blasSideMode, blasOperation, m, n, k, &fA, lda, &fTAU, &fC, ldc, &Lwork);
 
@@ -888,12 +888,12 @@ int main() {
   status = cusolverDnZungtr(handle, fillMode, n, &dComplexA, lda, &dComplexTAU, &dComplexWorkspace, Lwork, &info);
 
   // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnSormtr_bufferSize(cusolverDnHandle_t handle, cublasSideMode_t side, cublasFillMode_t uplo, cublasOperation_t trans, int m, int n, const float * A, int lda, const float * tau, const float * C, int ldc, int * lwork);
-  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnSormtr_bufferSize(hipsolverHandle_t  handle, hipblasSideMode_t side, hipblasFillMode_t uplo, hipblasOperation_t trans, int m, int n, const float* A, int lda, const float* tau, const float* C, int ldc, int* lwork);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnSormtr_bufferSize(hipsolverHandle_t handle, hipblasSideMode_t side, hipblasFillMode_t uplo, hipblasOperation_t trans, int m, int n, const float* A, int lda, const float* tau, const float* C, int ldc, int* lwork);
   // CHECK: status = hipsolverDnSormtr_bufferSize(handle, blasSideMode, fillMode, blasOperation, m, n, &fA, lda, &fTAU, &fC, ldc, &Lwork);
   status = cusolverDnSormtr_bufferSize(handle, blasSideMode, fillMode, blasOperation, m, n, &fA, lda, &fTAU, &fC, ldc, &Lwork);
 
   // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnDormtr_bufferSize(cusolverDnHandle_t handle, cublasSideMode_t side, cublasFillMode_t uplo, cublasOperation_t trans, int m, int n, const double * A, int lda, const double * tau, const double * C, int ldc, int * lwork);
-  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnDormtr_bufferSize(hipsolverHandle_t  handle, hipblasSideMode_t side, hipblasFillMode_t uplo, hipblasOperation_t trans, int m, int n, const double* A, int lda, const double* tau, const double* C, int ldc, int* lwork);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnDormtr_bufferSize(hipsolverHandle_t handle, hipblasSideMode_t side, hipblasFillMode_t uplo, hipblasOperation_t trans, int m, int n, const double* A, int lda, const double* tau, const double* C, int ldc, int* lwork);
   // CHECK: status = hipsolverDnDormtr_bufferSize(handle, blasSideMode, fillMode, blasOperation, m, n, &dA, lda, &dTAU, &dC, ldc, &Lwork);
   status = cusolverDnDormtr_bufferSize(handle, blasSideMode, fillMode, blasOperation, m, n, &dA, lda, &dTAU, &dC, ldc, &Lwork);
 
@@ -958,7 +958,7 @@ int main() {
   status = cusolverDnDsyevd(handle, eigMode, fillMode, n, &dA, lda, &dW, &dWorkspace, Lwork, &info);
 
   // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnCheevd(cusolverDnHandle_t handle, cusolverEigMode_t jobz, cublasFillMode_t uplo, int n, cuComplex * A, int lda, float * W, cuComplex * work, int lwork, int * info);
-  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnCheevd(hipsolverHandle_t  handle, hipsolverEigMode_t jobz, hipblasFillMode_t uplo, int n, hipFloatComplex* A, int lda, float* W, hipFloatComplex* work, int lwork, int* devInfo);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnCheevd(hipsolverHandle_t handle, hipsolverEigMode_t jobz, hipblasFillMode_t uplo, int n, hipFloatComplex* A, int lda, float* W, hipFloatComplex* work, int lwork, int* devInfo);
   // CHECK: status = hipsolverDnCheevd(handle, eigMode, fillMode, n, &complexA, lda, &fW, &complexWorkspace, Lwork, &info);
   status = cusolverDnCheevd(handle, eigMode, fillMode, n, &complexA, lda, &fW, &complexWorkspace, Lwork, &info);
 
@@ -1071,7 +1071,7 @@ int main() {
   status = cusolverDnZheevjBatched_bufferSize(handle, jobz, fillMode, n, &dComplexA, lda, &dW, &Lwork, syevj_info, batchSize);
 
   // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnSsyevjBatched(cusolverDnHandle_t handle, cusolverEigMode_t jobz, cublasFillMode_t uplo, int n, float * A, int lda, float * W, float * work, int lwork, int * info, syevjInfo_t params, int batchSize);
-  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnSsyevjBatched(hipsolverDnHandle_t  handle, hipsolverEigMode_t jobz, hipblasFillMode_t uplo, int n, float* A, int lda, float* W, float* work, int lwork, int* devInfo, hipsolverSyevjInfo_t params, int batch_count);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnSsyevjBatched(hipsolverDnHandle_t handle, hipsolverEigMode_t jobz, hipblasFillMode_t uplo, int n, float* A, int lda, float* W, float* work, int lwork, int* devInfo, hipsolverSyevjInfo_t params, int batch_count);
   // CHECK: status = hipsolverDnSsyevjBatched(handle, jobz, fillMode, n, &fA, lda, &fW, &fWorkspace, Lwork, &info, syevj_info, batchSize);
   status = cusolverDnSsyevjBatched(handle, jobz, fillMode, n, &fA, lda, &fW, &fWorkspace, Lwork, &info, syevj_info, batchSize);
 
@@ -1116,7 +1116,7 @@ int main() {
   status = cusolverDnSsyevj(handle, jobz, fillMode, n, &fA, lda, &fW, &fWorkspace, Lwork, &info, syevj_info);
 
   // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnDsyevj(cusolverDnHandle_t handle, cusolverEigMode_t jobz, cublasFillMode_t uplo, int n, double * A, int lda, double * W, double * work, int lwork, int * info, syevjInfo_t params);
-  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnDsyevj(hipsolverDnHandle_t  handle, hipsolverEigMode_t jobz, hipblasFillMode_t uplo, int n, double* A, int lda, double* W, double* work, int lwork, int* devInfo, hipsolverSyevjInfo_t params);B
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnDsyevj(hipsolverDnHandle_t handle, hipsolverEigMode_t jobz, hipblasFillMode_t uplo, int n, double* A, int lda, double* W, double* work, int lwork, int* devInfo, hipsolverSyevjInfo_t params);B
   // CHECK: status = hipsolverDnDsyevj(handle, jobz, fillMode, n, &dA, lda, &dW, &dWorkspace, Lwork, &info, syevj_info);
   status = cusolverDnDsyevj(handle, jobz, fillMode, n, &dA, lda, &dW, &dWorkspace, Lwork, &info, syevj_info);
 
@@ -1130,7 +1130,7 @@ int main() {
   // CHECK: status = hipsolverDnZheevj(handle, jobz, fillMode, n, &dComplexA, lda, &dW, &dComplexWorkspace, Lwork, &info, syevj_info);
   status = cusolverDnZheevj(handle, jobz, fillMode, n, &dComplexA, lda, &dW, &dComplexWorkspace, Lwork, &info, syevj_info);
 
-  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnSsygvj_bufferSize(cusolverDnHandle_t handle, cusolverEigType_t itype, cusolverEigMode_t  jobz, cublasFillMode_t uplo, int n, const float * A, int lda, const float * B, int ldb, const float * W, int * lwork, syevjInfo_t params);
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnSsygvj_bufferSize(cusolverDnHandle_t handle, cusolverEigType_t itype, cusolverEigMode_t jobz, cublasFillMode_t uplo, int n, const float * A, int lda, const float * B, int ldb, const float * W, int * lwork, syevjInfo_t params);
   // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnSsygvj_bufferSize(hipsolverDnHandle_t handle, hipsolverEigType_t itype, hipsolverEigMode_t jobz, hipblasFillMode_t uplo, int n, const float* A, int lda, const float* B, int ldb, const float* W, int* lwork, hipsolverSyevjInfo_t params);
   // CHECK: status = hipsolverDnSsygvj_bufferSize(handle, eigType, jobz, fillMode, n, &fA, lda, &fB, ldb, &fW, &Lwork, syevj_info);
   status = cusolverDnSsygvj_bufferSize(handle, eigType, jobz, fillMode, n, &fA, lda, &fB, ldb, &fW, &Lwork, syevj_info);
