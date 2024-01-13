@@ -123,7 +123,7 @@ int main() {
 
   // NOTE: An additional argument rocsparse_int batch_stride is added for the rocsparse_zgtsv_interleaved_batch_buffer_size function call: the argument is copied from the previous one: rocsparse_int batch_count. It is how hipsparseZgtsvInterleavedBatch_bufferSizeExt calls rocsparse_zgtsv_interleaved_batch_buffer_size in its implementation.
   // CUDA: cusparseStatus_t CUSPARSEAPI cusparseZgtsvInterleavedBatch_bufferSizeExt(cusparseHandle_t handle, int algo, int m, const cuDoubleComplex* dl, const cuDoubleComplex* d, const cuDoubleComplex* du, const cuDoubleComplex* x, int batchCount, size_t* pBufferSizeInBytes);
-  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_zgtsv_interleaved_batch_buffer_size(rocsparse_handle handle, rocsparse_gtsv_interleaved_alg  alg, rocsparse_int m, const rocsparse_double_complex* dl, const rocsparse_double_complex* d, const rocsparse_double_complex* du, const rocsparse_double_complex* x, rocsparse_int batch_count, rocsparse_int batch_stride, size_t* buffer_size);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_zgtsv_interleaved_batch_buffer_size(rocsparse_handle handle, rocsparse_gtsv_interleaved_alg alg, rocsparse_int m, const rocsparse_double_complex* dl, const rocsparse_double_complex* d, const rocsparse_double_complex* du, const rocsparse_double_complex* x, rocsparse_int batch_count, rocsparse_int batch_stride, size_t* buffer_size);
   // CHECK: status_t = rocsparse_zgtsv_interleaved_batch_buffer_size(handle_t, algo, m, &dcomplexdl, &dcomplexd, &dcomplexdu, &dcomplexx, batchCount, batchCount, &bufferSize);
   status_t = cusparseZgtsvInterleavedBatch_bufferSizeExt(handle_t, algo, m, &dcomplexdl, &dcomplexd, &dcomplexdu, &dcomplexx, batchCount, &bufferSize);
 
