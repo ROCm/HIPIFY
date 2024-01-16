@@ -67,6 +67,7 @@ int main() {
   float csrSortedValC = 0.f;
   float csrSortedValD = 0.f;
   void *pBuffer = nullptr;
+  void *tempBuffer = nullptr;
 
   // TODO: should be rocsparse_double_complex
   // TODO: add to TypeOverloads cuDoubleComplex -> rocsparse_double_complex under a new option --sparse
@@ -77,6 +78,26 @@ int main() {
   // TODO: add to TypeOverloads cuComplex -> rocsparse_float_complex under a new option --sparse
   // CHECK: rocblas_float_complex complex, complexA, complexAlpha, complexB, complexBeta, complexC, complexF, complexX, complexY, complexbsrValA, complexbsrSortedValC, complexcsrSortedValA, complexcsrSortedValB, complexcsrSortedValC, complexcsrSortedValD, complextol, complexbsrSortedVal, complexbscVal, complexcscSortedVal, complexds, complexdl, complexd, complexdu, complexdw, complexx, complex_boost_val;
   cuComplex complex, complexA, complexAlpha, complexB, complexBeta, complexC, complexF, complexX, complexY, complexbsrValA, complexbsrSortedValC, complexcsrSortedValA, complexcsrSortedValB, complexcsrSortedValC, complexcsrSortedValD, complextol, complexbsrSortedVal, complexbscVal, complexcscSortedVal, complexds, complexdl, complexd, complexdu, complexdw, complexx, complex_boost_val;
+
+#if CUDA_VERSION >= 11010 && CUSPARSE_VERSION >= 11300
+  // CHECK: rocsparse_sparse_to_dense_alg sparseToDenseAlg_t;
+  cusparseSparseToDenseAlg_t sparseToDenseAlg_t;
+#endif
+
+#if (CUDA_VERSION >= 10010 && CUDA_VERSION < 11000 && !defined(_WIN32)) || CUDA_VERSION >= 11000
+  // CHECK: rocsparse_spmat_descr spMatDescr_t, spmatA, spmatB, spmatC;
+  cusparseSpMatDescr_t spMatDescr_t, spmatA, spmatB, spmatC;
+
+  // CHECK: rocsparse_dnmat_descr dnMatDescr_t, dnmatA, dnmatB, dnmatC;
+  cusparseDnMatDescr_t dnMatDescr_t, dnmatA, dnmatB, dnmatC;
+
+#if CUDA_VERSION < 12000
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSparseToDense(cusparseHandle_t handle, cusparseSpMatDescr_t matA, cusparseDnMatDescr_t matB, cusparseSparseToDenseAlg_t alg, void* buffer);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_sparse_to_dense(rocsparse_handle handle, const rocsparse_spmat_descr mat_A, rocsparse_dnmat_descr mat_B, rocsparse_sparse_to_dense_alg alg, size_t* buffer_size, void* temp_buffer);
+  // CHECK: status_t = rocsparse_sparse_to_dense(handle_t, spmatA, dnmatB, sparseToDenseAlg_t, nullptr, tempBuffer);
+  status_t = cusparseSparseToDense(handle_t, spmatA, dnmatB, sparseToDenseAlg_t, tempBuffer);
+#endif
+#endif
 
 #if CUDA_VERSION < 12000
   // CHECK: rocsparse_mat_descr csrsv2_info;
