@@ -864,7 +864,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   {"cusparseSpMV_bufferSize",                           {"hipsparseSpMV_bufferSize",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
 
   {"cusparseSparseToDense",                             {"hipsparseSparseToDense",                             "rocsparse_sparse_to_dense",                                        CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseSparseToDense_bufferSize",                  {"hipsparseSparseToDense_bufferSize",                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
+  {"cusparseSparseToDense_bufferSize",                  {"hipsparseSparseToDense_bufferSize",                  "rocsparse_sparse_to_dense",                                        CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseDenseToSparse_bufferSize",                  {"hipsparseDenseToSparse_bufferSize",                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
   {"cusparseDenseToSparse_analysis",                    {"hipsparseDenseToSparse_analysis",                    "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
   {"cusparseDenseToSparse_convert",                     {"hipsparseDenseToSparse_convert",                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
@@ -1222,8 +1222,8 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SPARSE_FUNCTION_VER_MAP {
   {"cusparseCsrSetPointers",                            {CUDA_110, CUDA_0,   CUDA_0  }},
   {"cusparseCscSetPointers",                            {CUDA_111, CUDA_0,   CUDA_0  }},
   {"cusparseCooSetPointers",                            {CUDA_111, CUDA_0,   CUDA_0  }},
-  {"cusparseSparseToDense_bufferSize",                  {CUDA_111, CUDA_0,   CUDA_0  }},
-  {"cusparseSparseToDense",                             {CUDA_111, CUDA_0,   CUDA_0  }},// A: CUSPARSE_VERSION 11300 C: CUSPARSE_VERSION 12000
+  {"cusparseSparseToDense_bufferSize",                  {CUDA_111, CUDA_0,   CUDA_0  }}, // A: CUSPARSE_VERSION 11300 C: CUSPARSE_VERSION 12000
+  {"cusparseSparseToDense",                             {CUDA_111, CUDA_0,   CUDA_0  }}, // A: CUSPARSE_VERSION 11300 C: CUSPARSE_VERSION 12000
   {"cusparseDenseToSparse_bufferSize",                  {CUDA_111, CUDA_0,   CUDA_0  }},
   {"cusparseDenseToSparse_analysis",                    {CUDA_111, CUDA_0,   CUDA_0  }},
   {"cusparseDenseToSparse_convert",                     {CUDA_111, CUDA_0,   CUDA_0  }},

@@ -48,6 +48,7 @@ int main() {
   int csrColIndC = 0;
   int csrColIndD = 0;
   int bufferSizeInBytes = 0;
+  size_t bufferSize = 0;
   double dA = 0.f;
   double dB = 0.f;
   double dAlpha = 0.f;
@@ -96,6 +97,11 @@ int main() {
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_sparse_to_dense(rocsparse_handle handle, const rocsparse_spmat_descr mat_A, rocsparse_dnmat_descr mat_B, rocsparse_sparse_to_dense_alg alg, size_t* buffer_size, void* temp_buffer);
   // CHECK: status_t = rocsparse_sparse_to_dense(handle_t, spmatA, dnmatB, sparseToDenseAlg_t, nullptr, tempBuffer);
   status_t = cusparseSparseToDense(handle_t, spmatA, dnmatB, sparseToDenseAlg_t, tempBuffer);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSparseToDense_bufferSize(cusparseHandle_t handle, cusparseSpMatDescr_t matA, cusparseDnMatDescr_t matB, cusparseSparseToDenseAlg_t alg, size_t* bufferSize);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_sparse_to_dense(rocsparse_handle handle, const rocsparse_spmat_descr mat_A, rocsparse_dnmat_descr mat_B, rocsparse_sparse_to_dense_alg alg, size_t* buffer_size, void* temp_buffer);
+  // CHECK: status_t = rocsparse_sparse_to_dense(handle_t, spmatA, dnmatB, sparseToDenseAlg_t, &bufferSize, nullptr);
+  status_t = cusparseSparseToDense_bufferSize(handle_t, spmatA, dnmatB, sparseToDenseAlg_t, &bufferSize);
 #endif
 #endif
 

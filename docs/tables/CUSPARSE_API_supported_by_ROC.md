@@ -911,7 +911,7 @@
 |`cusparseSpVecGetValues`|10.2| | | |`rocsparse_spvec_get_values`|4.1.0| | | | |
 |`cusparseSpVecSetValues`|10.2| | | |`rocsparse_spvec_set_values`|4.1.0| | | | |
 |`cusparseSparseToDense`|11.1| |12.0| |`rocsparse_sparse_to_dense`|4.1.0| |6.0.0| | |
-|`cusparseSparseToDense_bufferSize`|11.1| |12.0| | | | | | | |
+|`cusparseSparseToDense_bufferSize`|11.1| |12.0| |`rocsparse_sparse_to_dense`|4.1.0| |6.0.0| | |
 
 
 \*A - Added; D - Deprecated; C - Changed; R - Removed; E - Experimental
