@@ -2575,7 +2575,6 @@ int main() {
   status_t = cusparseCscSetPointers(spMatDescr_t, cscColOffsets, cscRowInd, cscValues);
 
 #if CUDA_VERSION < 12000
-  // TODO: Mark as C-Changed in 12.0.0
   // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSparseToDense_bufferSize(cusparseHandle_t handle, cusparseSpMatDescr_t matA, cusparseDnMatDescr_t matB, cusparseSparseToDenseAlg_t alg, size_t* bufferSize);
   // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSparseToDense_bufferSize(hipsparseHandle_t handle, hipsparseSpMatDescr_t matA, hipsparseDnMatDescr_t matB, hipsparseSparseToDenseAlg_t alg, size_t* bufferSize);
   // CHECK: status_t = hipsparseSparseToDense_bufferSize(handle_t, spmatA, dnmatB, sparseToDenseAlg_t, &bufferSize);

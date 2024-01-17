@@ -2611,6 +2611,7 @@ sub rocSubstitutions {
     subst("cusparseSpVecGetValues", "rocsparse_spvec_get_values", "library");
     subst("cusparseSpVecSetValues", "rocsparse_spvec_set_values", "library");
     subst("cusparseSparseToDense", "rocsparse_sparse_to_dense", "library");
+    subst("cusparseSparseToDense_bufferSize", "rocsparse_sparse_to_dense", "library");
     subst("cusparseSpruneCsr2csr", "rocsparse_sprune_csr2csr", "library");
     subst("cusparseSpruneCsr2csrByPercentage", "rocsparse_sprune_csr2csr_by_percentage", "library");
     subst("cusparseSpruneCsr2csrByPercentage_bufferSizeExt", "rocsparse_sprune_csr2csr_by_percentage_buffer_size", "library");
