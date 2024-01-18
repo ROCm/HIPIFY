@@ -2585,7 +2585,6 @@ int main() {
   // CHECK: status_t = hipsparseSparseToDense(handle_t, spmatA, dnmatB, sparseToDenseAlg_t, tempBuffer);
   status_t = cusparseSparseToDense(handle_t, spmatA, dnmatB, sparseToDenseAlg_t, tempBuffer);
 
-  // TODO: Mark as C-Changed in 12.0.0
   // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDenseToSparse_bufferSize(cusparseHandle_t handle, cusparseDnMatDescr_t matA, cusparseSpMatDescr_t matB, cusparseDenseToSparseAlg_t alg, size_t* bufferSize);
   // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDenseToSparse_bufferSize(hipsparseHandle_t handle, hipsparseDnMatDescr_t matA, hipsparseSpMatDescr_t matB, hipsparseDenseToSparseAlg_t alg, size_t* bufferSize);
   // CHECK: status_t = hipsparseDenseToSparse_bufferSize(handle_t, dnmatA, spmatB, denseToSparseAlg_t, &bufferSize);

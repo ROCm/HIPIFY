@@ -843,7 +843,7 @@
 |`cusparseCsrSetPointers`|11.0| | | |`rocsparse_csr_set_pointers`|4.1.0| | | | |
 |`cusparseCsrSetStridedBatch`|11.0| | | |`rocsparse_csr_set_strided_batch`|5.2.0| | | | |
 |`cusparseDenseToSparse_analysis`|11.1| |12.0| | | | | | | |
-|`cusparseDenseToSparse_bufferSize`|11.1| |12.0| | | | | | | |
+|`cusparseDenseToSparse_bufferSize`|11.1| |12.0| |`rocsparse_dense_to_sparse`|4.1.0| |6.0.0| | |
 |`cusparseDenseToSparse_convert`|11.1| |12.0| | | | | | | |
 |`cusparseDestroyDnMat`|10.1| |12.0| |`rocsparse_destroy_dnmat_descr`|4.1.0| |6.0.0| | |
 |`cusparseDestroyDnVec`|10.2| |12.0| |`rocsparse_destroy_dnvec_descr`|4.1.0| |6.0.0| | |
