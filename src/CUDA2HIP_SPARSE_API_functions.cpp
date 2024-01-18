@@ -866,7 +866,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   {"cusparseSparseToDense",                             {"hipsparseSparseToDense",                             "rocsparse_sparse_to_dense",                                        CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseSparseToDense_bufferSize",                  {"hipsparseSparseToDense_bufferSize",                  "rocsparse_sparse_to_dense",                                        CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseDenseToSparse_bufferSize",                  {"hipsparseDenseToSparse_bufferSize",                  "rocsparse_dense_to_sparse",                                        CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseDenseToSparse_analysis",                    {"hipsparseDenseToSparse_analysis",                    "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
+  {"cusparseDenseToSparse_analysis",                    {"hipsparseDenseToSparse_analysis",                    "rocsparse_dense_to_sparse",                                        CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseDenseToSparse_convert",                     {"hipsparseDenseToSparse_convert",                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
 
   // Sampled Dense-dense Matrix Multiplication
@@ -1225,7 +1225,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SPARSE_FUNCTION_VER_MAP {
   {"cusparseSparseToDense_bufferSize",                  {CUDA_111, CUDA_0,   CUDA_0  }}, // A: CUSPARSE_VERSION 11300 C: CUSPARSE_VERSION 12000
   {"cusparseSparseToDense",                             {CUDA_111, CUDA_0,   CUDA_0  }}, // A: CUSPARSE_VERSION 11300 C: CUSPARSE_VERSION 12000
   {"cusparseDenseToSparse_bufferSize",                  {CUDA_111, CUDA_0,   CUDA_0  }}, // A: CUSPARSE_VERSION 11300 C: CUSPARSE_VERSION 12000
-  {"cusparseDenseToSparse_analysis",                    {CUDA_111, CUDA_0,   CUDA_0  }},
+  {"cusparseDenseToSparse_analysis",                    {CUDA_111, CUDA_0,   CUDA_0  }}, // A: CUSPARSE_VERSION 11300 C: CUSPARSE_VERSION 12000
   {"cusparseDenseToSparse_convert",                     {CUDA_111, CUDA_0,   CUDA_0  }},
   {"cusparseCreateCsrsv2Info",                          {CUDA_0,   CUDA_113, CUDA_120}}, // D: CUSPARSE_VERSION 11500 R: CUSPARSE_VERSION 12000
   {"cusparseDestroyCsrsv2Info",                         {CUDA_0,   CUDA_113, CUDA_120}}, // D: CUSPARSE_VERSION 11500 R: CUSPARSE_VERSION 12000
