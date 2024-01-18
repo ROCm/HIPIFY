@@ -2438,6 +2438,7 @@ sub rocSubstitutions {
     subst("cusparseDdense2csc", "rocsparse_ddense2csc", "library");
     subst("cusparseDdense2csr", "rocsparse_ddense2csr", "library");
     subst("cusparseDdoti", "rocsparse_ddoti", "library");
+    subst("cusparseDenseToSparse_analysis", "rocsparse_dense_to_sparse", "library");
     subst("cusparseDenseToSparse_bufferSize", "rocsparse_dense_to_sparse", "library");
     subst("cusparseDestroy", "rocsparse_destroy_handle", "library");
     subst("cusparseDestroyBsric02Info", "rocsparse_destroy_mat_info", "library");

@@ -102,6 +102,11 @@ int main() {
   cusparseConstSpMatDescr_t constSpMatDescr = nullptr;
   cusparseConstSpMatDescr_t constSpMatDescrB = nullptr;
 
+  // CHECK: rocsparse_const_dnmat_descr constDnMatDescr = nullptr;
+  // CHECK-NEXT: rocsparse_const_dnmat_descr constDnMatDescrB = nullptr;
+  cusparseConstDnMatDescr_t constDnMatDescr = nullptr;
+  cusparseConstDnMatDescr_t constDnMatDescrB = nullptr;
+
   // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSparseToDense(cusparseHandle_t handle, cusparseConstSpMatDescr_t matA, cusparseDnMatDescr_t matB, cusparseSparseToDenseAlg_t alg, void* externalBuffer);
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_sparse_to_dense(rocsparse_handle handle, rocsparse_const_spmat_descr mat_A, rocsparse_dnmat_descr mat_B, rocsparse_sparse_to_dense_alg alg, size_t* buffer_size, void* temp_buffer);
   // CHECK: status_t = rocsparse_sparse_to_dense(handle_t, constSpMatDescr, dnmatB, sparseToDenseAlg_t, nullptr, tempBuffer);
@@ -116,6 +121,11 @@ int main() {
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_dense_to_sparse(rocsparse_handle handle, rocsparse_const_dnmat_descr mat_A, rocsparse_spmat_descr mat_B, rocsparse_dense_to_sparse_alg alg, size_t* buffer_size, void* temp_buffer);
   // CHECK: status_t = rocsparse_dense_to_sparse(handle_t, dnmatB, spMatDescr_t, denseToSparseAlg_t, &bufferSize, nullptr);
   status_t = cusparseDenseToSparse_bufferSize(handle_t, dnmatB, spMatDescr_t, denseToSparseAlg_t, &bufferSize);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseDenseToSparse_analysis(cusparseHandle_t handle, cusparseConstDnMatDescr_t matA, cusparseSpMatDescr_t matB, cusparseDenseToSparseAlg_t alg, void* externalBuffer);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_dense_to_sparse(rocsparse_handle handle, rocsparse_const_dnmat_descr mat_A, rocsparse_spmat_descr mat_B, rocsparse_dense_to_sparse_alg alg, size_t* buffer_size, void* temp_buffer);
+  // CHECK: status_t = rocsparse_dense_to_sparse(handle_t, constDnMatDescr, spmatB, denseToSparseAlg_t, nullptr, tempBuffer);
+  status_t = cusparseDenseToSparse_analysis(handle_t, constDnMatDescr, spmatB, denseToSparseAlg_t, tempBuffer);
 #endif
 
   return 0;
