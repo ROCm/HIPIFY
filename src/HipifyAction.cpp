@@ -206,6 +206,7 @@ const std::string sCusparseSbsrilu02_bufferSize = "cusparseSbsrilu02_bufferSize"
 const std::string sCusparseCsr2cscEx2_bufferSize = "cusparseCsr2cscEx2_bufferSize";
 const std::string sCusparseSparseToDense = "cusparseSparseToDense";
 const std::string sCusparseSparseToDense_bufferSize = "cusparseSparseToDense_bufferSize";
+const std::string sCusparseDenseToSparse_bufferSize = "cusparseDenseToSparse_bufferSize";
 
 // CUDA_OVERLOADED
 const std::string sCudaEventCreate = "cudaEventCreate";
@@ -1651,6 +1652,15 @@ std::map<std::string, ArgCastStruct> FuncArgCasts {
       false
     }
   },
+  {sCusparseDenseToSparse_bufferSize,
+    {
+      {
+        {5, {e_add_const_argument, cw_None, "nullptr"}}
+      },
+      true,
+      false
+    }
+  },
 };
 
 void HipifyAction::RewriteString(StringRef s, clang::SourceLocation start) {
@@ -2497,7 +2507,8 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
             sCusparseSbsrilu02_bufferSize,
             sCusparseCsr2cscEx2_bufferSize,
             sCusparseSparseToDense,
-            sCusparseSparseToDense_bufferSize
+            sCusparseSparseToDense_bufferSize,
+            sCusparseDenseToSparse_bufferSize
           )
         )
       )
