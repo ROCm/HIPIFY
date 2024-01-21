@@ -825,8 +825,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   {"cusparseSpSV_updateMatrix",                         {"hipsparseSpSV_updateMatrix",                         "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
 
   // Sparse Matrix * Matrix Multiplication
+  // TODO: hipification cusparseSpMM into rocsparse_spmm needs additional variable declared and allocated
   {"cusparseSpMM",                                      {"hipsparseSpMM",                                      "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
-  {"cusparseSpMM_bufferSize",                           {"hipsparseSpMM_bufferSize",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
+  {"cusparseSpMM_bufferSize",                           {"hipsparseSpMM_bufferSize",                           "rocsparse_spmm",                                                   CONV_LIB_FUNC, API_SPARSE, 15}},
+  // TODO: hipification cusparseSpMM_preprocess into rocsparse_spmm needs additional variable declared and allocated
   {"cusparseSpMM_preprocess",                           {"hipsparseSpMM_preprocess",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
   {"cusparseSpMMOp",                                    {"hipsparseSpMMOp",                                    "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
   {"cusparseSpMMOp_createPlan",                         {"hipsparseSpMMOp_createPlan",                         "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
@@ -835,6 +837,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   // Sparse Triangular Matrix Solve
   {"cusparseSpSM_createDescr",                          {"hipsparseSpSM_createDescr",                          "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
   {"cusparseSpSM_destroyDescr",                         {"hipsparseSpSM_destroyDescr",                         "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
+  // NTOE: Additional calculations are needed after calling rocsparse_spsm
   {"cusparseSpSM_bufferSize",                           {"hipsparseSpSM_bufferSize",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
   {"cusparseSpSM_analysis",                             {"hipsparseSpSM_analysis",                             "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
   {"cusparseSpSM_solve",                                {"hipsparseSpSM_solve",                                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
@@ -867,6 +870,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   {"cusparseSparseToDense_bufferSize",                  {"hipsparseSparseToDense_bufferSize",                  "rocsparse_sparse_to_dense",                                        CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseDenseToSparse_bufferSize",                  {"hipsparseDenseToSparse_bufferSize",                  "rocsparse_dense_to_sparse",                                        CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseDenseToSparse_analysis",                    {"hipsparseDenseToSparse_analysis",                    "rocsparse_dense_to_sparse",                                        CONV_LIB_FUNC, API_SPARSE, 15}},
+  // TODO: hipification cusparseDenseToSparse_convert into rocsparse_dense_to_sparse needs additional variable declared and allocated
   {"cusparseDenseToSparse_convert",                     {"hipsparseDenseToSparse_convert",                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
 
   // Sampled Dense-dense Matrix Multiplication
@@ -2425,6 +2429,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_FUNCTION_VER_MAP {
   {"rocsparse_csr2csc_buffer_size",                      {HIP_1090, HIP_0,    HIP_0   }},
   {"rocsparse_sparse_to_dense",                          {HIP_4010, HIP_0,    HIP_0   }},
   {"rocsparse_dense_to_sparse",                          {HIP_4010, HIP_0,    HIP_0   }},
+  {"rocsparse_spmm",                                     {HIP_4020, HIP_0,    HIP_0   }},
 };
 
 const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_SPARSE_FUNCTION_CHANGED_VER_MAP {
@@ -2529,6 +2534,7 @@ const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_SPARSE_FUNCTION_CHANG
   {"rocsparse_dnmat_get_strided_batch",                  {HIP_6000}},
   {"rocsparse_sparse_to_dense",                          {HIP_6000}},
   {"rocsparse_dense_to_sparse",                          {HIP_6000}},
+  {"rocsparse_spmm",                                     {HIP_6000}},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_SPARSE_API_SECTION_MAP {

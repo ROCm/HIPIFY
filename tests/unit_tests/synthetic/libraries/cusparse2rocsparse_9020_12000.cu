@@ -75,8 +75,7 @@ int main() {
   cusparseSolvePolicy_t SOLVE_POLICY_NO_LEVEL = CUSPARSE_SOLVE_POLICY_NO_LEVEL;
   cusparseSolvePolicy_t SOLVE_POLICY_USE_LEVEL = CUSPARSE_SOLVE_POLICY_USE_LEVEL;
 
-#if CUDA_VERSION >= 9020
-#if CUDA_VERSION < 12000
+#if CUDA_VERSION >= 9020 && CUDA_VERSION < 12000
   // CHECK: rocsparse_mat_info csrsm2_info;
   csrsm2Info_t csrsm2_info;
 
@@ -155,7 +154,6 @@ int main() {
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_destroy_mat_info(rocsparse_mat_info info);
   // CHECK: status_t = rocsparse_destroy_mat_info(csrsm2_info);
   status_t = cusparseDestroyCsrsm2Info(csrsm2_info);
-#endif
 #endif
 
   return 0;
