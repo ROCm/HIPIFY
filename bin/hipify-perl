@@ -2598,6 +2598,7 @@ sub rocSubstitutions {
     subst("cusparseShybmv", "rocsparse_shybmv", "library");
     subst("cusparseSnnz", "rocsparse_snnz", "library");
     subst("cusparseSnnz_compress", "rocsparse_snnz_compress", "library");
+    subst("cusparseSpMM_bufferSize", "rocsparse_spmm", "library");
     subst("cusparseSpMV", "rocsparse_spmv", "library");
     subst("cusparseSpMatGetAttribute", "rocsparse_spmat_get_attribute", "library");
     subst("cusparseSpMatGetFormat", "rocsparse_spmat_get_format", "library");

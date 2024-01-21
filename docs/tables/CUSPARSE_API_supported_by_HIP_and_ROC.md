@@ -878,7 +878,7 @@
 |`cusparseSpMMOp`|11.5| | | | | | | | | | | | | | | |
 |`cusparseSpMMOp_createPlan`|11.5| | | | | | | | | | | | | | | |
 |`cusparseSpMMOp_destroyPlan`|11.5| | | | | | | | | | | | | | | |
-|`cusparseSpMM_bufferSize`|10.1| |12.0| |`hipsparseSpMM_bufferSize`|4.2.0| |6.0.0| | | | | | | | |
+|`cusparseSpMM_bufferSize`|10.1| |12.0| |`hipsparseSpMM_bufferSize`|4.2.0| |6.0.0| | |`rocsparse_spmm`|4.2.0| |6.0.0| | |
 |`cusparseSpMM_preprocess`|11.2| |12.0| |`hipsparseSpMM_preprocess`|4.5.0| |6.0.0| | | | | | | | |
 |`cusparseSpMV`|10.2| |12.0| |`hipsparseSpMV`|4.1.0| |6.0.0| | |`rocsparse_spmv`|4.1.0| | | | |
 |`cusparseSpMV_bufferSize`|10.2| |12.0| |`hipsparseSpMV_bufferSize`|4.1.0| |6.0.0| | | | | | | | |
