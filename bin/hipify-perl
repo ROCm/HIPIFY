@@ -2609,6 +2609,7 @@ sub rocSubstitutions {
     subst("cusparseSpMatSetAttribute", "rocsparse_spmat_set_attribute", "library");
     subst("cusparseSpMatSetStridedBatch", "rocsparse_spmat_set_strided_batch", "library");
     subst("cusparseSpMatSetValues", "rocsparse_spmat_set_values", "library");
+    subst("cusparseSpSM_analysis", "rocsparse_spsm", "library");
     subst("cusparseSpVecGet", "rocsparse_spvec_get", "library");
     subst("cusparseSpVecGetIndexBase", "rocsparse_spvec_get_index_base", "library");
     subst("cusparseSpVecGetValues", "rocsparse_spvec_get_values", "library");
