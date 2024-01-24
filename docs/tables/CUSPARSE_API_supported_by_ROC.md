@@ -893,7 +893,7 @@
 |`cusparseSpMatSetNumBatches`|10.1| | |10.2| | | | | | |
 |`cusparseSpMatSetStridedBatch`|10.2| | |12.0|`rocsparse_spmat_set_strided_batch`|5.2.0| | | | |
 |`cusparseSpMatSetValues`|10.2| | | |`rocsparse_spmat_set_values`|4.1.0| | | | |
-|`cusparseSpSM_analysis`|11.3| |12.0| | | | | | | |
+|`cusparseSpSM_analysis`|11.3| |12.0| |`rocsparse_spsm`|4.5.0| |6.0.0| | |
 |`cusparseSpSM_bufferSize`|11.3| |12.0| | | | | | | |
 |`cusparseSpSM_createDescr`|11.3| | | | | | | | | |
 |`cusparseSpSM_destroyDescr`|11.3| | | | | | | | | |

@@ -893,7 +893,7 @@
 |`cusparseSpMatSetNumBatches`|10.1| | |10.2| | | | | | | | | | | | |
 |`cusparseSpMatSetStridedBatch`|10.2| | |12.0|`hipsparseSpMatSetStridedBatch`|5.2.0| | | | |`rocsparse_spmat_set_strided_batch`|5.2.0| | | | |
 |`cusparseSpMatSetValues`|10.2| | | |`hipsparseSpMatSetValues`|4.1.0| | | | |`rocsparse_spmat_set_values`|4.1.0| | | | |
-|`cusparseSpSM_analysis`|11.3| |12.0| |`hipsparseSpSM_analysis`|4.5.0| |6.0.0| | | | | | | | |
+|`cusparseSpSM_analysis`|11.3| |12.0| |`hipsparseSpSM_analysis`|4.5.0| |6.0.0| | |`rocsparse_spsm`|4.5.0| |6.0.0| | |
 |`cusparseSpSM_bufferSize`|11.3| |12.0| |`hipsparseSpSM_bufferSize`|4.5.0| |6.0.0| | | | | | | | |
 |`cusparseSpSM_createDescr`|11.3| | | |`hipsparseSpSM_createDescr`|4.5.0| | | | | | | | | | |
 |`cusparseSpSM_destroyDescr`|11.3| | | |`hipsparseSpSM_destroyDescr`|4.5.0| | | | | | | | | | |
