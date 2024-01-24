@@ -1,7 +1,7 @@
 # HIPIFY
 
 HIPIFY is a set of tools that you can use to automatically translate CUDA source code into portable
-[HIP](https://github.com/ROCm-Developer-Tools/HIP) C++.
+[HIP](https://github.com/ROCm/HIP) C++.
 
 ## Table of contents
 

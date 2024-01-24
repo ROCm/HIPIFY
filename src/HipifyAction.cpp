@@ -199,6 +199,16 @@ const std::string sCusparseZcsrilu02_bufferSize = "cusparseZcsrilu02_bufferSize"
 const std::string sCusparseCcsrilu02_bufferSize = "cusparseCcsrilu02_bufferSize";
 const std::string sCusparseDcsrilu02_bufferSize = "cusparseDcsrilu02_bufferSize";
 const std::string sCusparseScsrilu02_bufferSize = "cusparseScsrilu02_bufferSize";
+const std::string sCusparseZbsrilu02_bufferSize = "cusparseZbsrilu02_bufferSize";
+const std::string sCusparseCbsrilu02_bufferSize = "cusparseCbsrilu02_bufferSize";
+const std::string sCusparseDbsrilu02_bufferSize = "cusparseDbsrilu02_bufferSize";
+const std::string sCusparseSbsrilu02_bufferSize = "cusparseSbsrilu02_bufferSize";
+const std::string sCusparseCsr2cscEx2_bufferSize = "cusparseCsr2cscEx2_bufferSize";
+const std::string sCusparseSparseToDense = "cusparseSparseToDense";
+const std::string sCusparseSparseToDense_bufferSize = "cusparseSparseToDense_bufferSize";
+const std::string sCusparseDenseToSparse_bufferSize = "cusparseDenseToSparse_bufferSize";
+const std::string sCusparseDenseToSparse_analysis = "cusparseDenseToSparse_analysis";
+const std::string sCusparseSpMM_bufferSize = "cusparseSpMM_bufferSize";
 
 // CUDA_OVERLOADED
 const std::string sCudaEventCreate = "cudaEventCreate";
@@ -1575,6 +1585,103 @@ std::map<std::string, ArgCastStruct> FuncArgCasts {
       false
     }
   },
+  {sCusparseZbsrilu02_bufferSize,
+    {
+      {
+        {10, {e_reinterpret_cast_size_t, cw_None}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseCbsrilu02_bufferSize,
+    {
+      {
+        {10, {e_reinterpret_cast_size_t, cw_None}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseDbsrilu02_bufferSize,
+    {
+      {
+        {10, {e_reinterpret_cast_size_t, cw_None}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseSbsrilu02_bufferSize,
+    {
+      {
+        {10, {e_reinterpret_cast_size_t, cw_None}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseCsr2cscEx2_bufferSize,
+    {
+      {
+        {4, {e_remove_argument, cw_None}},
+        {7, {e_remove_argument, cw_None}},
+        {8, {e_remove_argument, cw_None}},
+        {9, {e_remove_argument, cw_None}},
+        {10, {e_remove_argument, cw_None}},
+        {12, {e_remove_argument, cw_None}},
+        {13, {e_remove_argument, cw_None}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseSparseToDense,
+    {
+      {
+        {4, {e_add_const_argument, cw_None, "nullptr"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseSparseToDense_bufferSize,
+    {
+      {
+        {5, {e_add_const_argument, cw_None, "nullptr"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseDenseToSparse_bufferSize,
+    {
+      {
+        {5, {e_add_const_argument, cw_None, "nullptr"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseDenseToSparse_analysis,
+    {
+      {
+        {4, {e_add_const_argument, cw_None, "nullptr"}}
+      },
+      true,
+      false
+    }
+  },
+  {sCusparseSpMM_bufferSize,
+    {
+      {
+        {10, {e_add_const_argument, cw_None, "rocsparse_spmm_stage_compute"}},
+        {12, {e_add_const_argument, cw_None, "nullptr"}}
+      },
+      true,
+      false
+    }
+  },
 };
 
 void HipifyAction::RewriteString(StringRef s, clang::SourceLocation start) {
@@ -2414,7 +2521,17 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
             sCusparseZcsrilu02_bufferSize,
             sCusparseCcsrilu02_bufferSize,
             sCusparseDcsrilu02_bufferSize,
-            sCusparseScsrilu02_bufferSize
+            sCusparseScsrilu02_bufferSize,
+            sCusparseZbsrilu02_bufferSize,
+            sCusparseCbsrilu02_bufferSize,
+            sCusparseDbsrilu02_bufferSize,
+            sCusparseSbsrilu02_bufferSize,
+            sCusparseCsr2cscEx2_bufferSize,
+            sCusparseSparseToDense,
+            sCusparseSparseToDense_bufferSize,
+            sCusparseDenseToSparse_bufferSize,
+            sCusparseDenseToSparse_analysis,
+            sCusparseSpMM_bufferSize
           )
         )
       )

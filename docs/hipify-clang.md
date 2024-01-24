@@ -23,7 +23,7 @@ After applying all the matchers, the output HIP source is produced.
 
 1. [**LLVM+CLANG**](http://releases.llvm.org) of at least version [4.0.0](http://releases.llvm.org/download.html#4.0.0); the latest stable and recommended release: [**17.0.6**](https://github.com/llvm/llvm-project/releases/tag/llvmorg-17.0.6).
 
-2. [**CUDA**](https://developer.nvidia.com/cuda-downloads) of at least version [8.0](https://developer.nvidia.com/cuda-80-ga2-download-archive), the latest supported version is [**12.3.2**](https://developer.nvidia.com/cuda-downloads).
+2. [**CUDA**](https://developer.nvidia.com/cuda-downloads) of at least version [7.0](https://developer.nvidia.com/cuda-toolkit-70), the latest supported version is [**12.3.2**](https://developer.nvidia.com/cuda-downloads).
 
 <table align="center">
   <thead>
@@ -84,19 +84,19 @@ After applying all the matchers, the output HIP source is produced.
     <tr align="center">
       <td><a href="http://releases.llvm.org/download.html#9.0.0">9.0.0</a>,
           <a href="http://releases.llvm.org/download.html#9.0.1">9.0.1</a></td>
-      <td><a href="https://developer.nvidia.com/cuda-10.1-download-archive-base">10.1</a></td>
+      <td><a href="https://developer.nvidia.com/cuda-10.1-download-archive-update2">10.1</a></td>
       <td>+</td>
       <td>+</td>
     </tr>
     <tr align="center">
       <td rowspan=2><a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-10.0.0">10.0.0</a>,
           <a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-10.0.1">10.0.1</a></td>
-      <td><a href="https://developer.nvidia.com/cuda-11.0-download-archive">11.0</a></td>
+      <td><a href="https://developer.nvidia.com/cuda-11.0-download-archive">11.0.0</a></td>
       <td>+</td>
       <td>+</td>
     </tr>
     <tr align="center">
-      <td><a href="https://developer.nvidia.com/cuda-11.0-update1-download-archive">11.0.1</a>,
+      <td><a href="https://developer.nvidia.com/cuda-11-0-1-download-archive">11.0.1</a>,
           <a href="https://developer.nvidia.com/cuda-11.1.0-download-archive">11.1.0</a>,
           <a href="https://developer.nvidia.com/cuda-11.1.1-download-archive">11.1.1</a></td>
       <td colspan=2>works only with the patch <br> due to the clang's bug <a href="https://bugs.llvm.org/show_bug.cgi?id=47332">47332</a><br>
@@ -105,12 +105,12 @@ After applying all the matchers, the output HIP source is produced.
     </tr>
     <tr align="center">
       <td rowspan=2><a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-11.0.0">11.0.0</a></td>
-      <td><a href="https://developer.nvidia.com/cuda-11.0-download-archive">11.0</a></td>
+      <td><a href="https://developer.nvidia.com/cuda-11.0-download-archive">11.0.0</a></td>
       <td>+</td>
       <td>+</td>
     </tr>
     <tr align="center">
-      <td><a href="https://developer.nvidia.com/cuda-11.0-update1-download-archive">11.0.1</a>,
+      <td><a href="https://developer.nvidia.com/cuda-11-0-1-download-archive">11.0.1</a>,
           <a href="https://developer.nvidia.com/cuda-11.1.0-download-archive">11.1.0</a>,
           <a href="https://developer.nvidia.com/cuda-11.1.1-download-archive">11.1.1</a></td>
       <td colspan=2>works only with the patch <br> due to the clang's bug <a href="https://bugs.llvm.org/show_bug.cgi?id=47332">47332</a><br>
@@ -119,7 +119,7 @@ After applying all the matchers, the output HIP source is produced.
     <tr align="center">
       <td><a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-11.0.1">11.0.1</a>,
           <a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-11.1.0">11.1.0</a>
-      <td><a href="https://developer.nvidia.com/cuda-11.2.2-download-archive">11.2.2</a></td>
+      <td><a href="https://developer.nvidia.com/cuda-11-2-2-download-archive">11.2.2</a></td>
       <td>+</td>
       <td>+</td>
     </tr>
@@ -414,19 +414,19 @@ On Linux the following configurations are tested:
 
 Ubuntu 14: LLVM 4.0.0 - 7.1.0, CUDA 7.0 - 9.0, cuDNN 5.0.5 - 7.6.5
 
-Ubuntu 16-18: LLVM 8.0.0 - 14.0.6, CUDA 8.0 - 10.2, cuDNN 5.1.10 - 8.0.5
+Ubuntu 16-18: LLVM 8.0.0 - 14.0.6, CUDA 7.0 - 10.2, cuDNN 5.1.10 - 8.0.5
 
-Ubuntu 20-21: LLVM 9.0.0 - 17.0.6, CUDA 8.0 - 12.3.2, cuDNN 5.1.10 - 8.9.7
+Ubuntu 20-21: LLVM 9.0.0 - 17.0.6, CUDA 7.0 - 12.3.2, cuDNN 5.1.10 - 8.9.7
 
-Ubuntu 22: LLVM 13.0.0 - 17.0.6, CUDA 10.0 - 12.3.2, cuDNN 8.0.5 - 8.9.7
+Ubuntu 22: LLVM 13.0.0 - 17.0.6, CUDA 7.0 - 12.3.2, cuDNN 8.0.5 - 8.9.7
 
 Minimum build system requirements for the above configurations:
 
-Python 2.7, cmake 3.16.8, GNU C/C++ 7.5.
+cmake 3.16.8, GNU C/C++ 7.5, Python 2.7.
 
 Recommended build system requirements:
 
-Python 3.12.0, cmake 3.28.0, GNU C/C++ 12.x.
+cmake 3.28.0, GNU C/C++ 12.x, Python 3.12.0.
 
 Here is an example of building `hipify-clang` with testing support on `Ubuntu 21.10.0`:
 

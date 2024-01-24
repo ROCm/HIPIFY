@@ -48,6 +48,7 @@ int main() {
   int csrColIndC = 0;
   int csrColIndD = 0;
   int bufferSizeInBytes = 0;
+  size_t bufferSize = 0;
   double dA = 0.f;
   double dB = 0.f;
   double dAlpha = 0.f;
@@ -67,6 +68,7 @@ int main() {
   float csrSortedValC = 0.f;
   float csrSortedValD = 0.f;
   void *pBuffer = nullptr;
+  void *tempBuffer = nullptr;
 
   // TODO: should be rocsparse_double_complex
   // TODO: add to TypeOverloads cuDoubleComplex -> rocsparse_double_complex under a new option --sparse
