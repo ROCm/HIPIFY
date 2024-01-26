@@ -42,6 +42,7 @@ class HipifyAction : public clang::ASTFrontendAction,
 private:
   ct::Replacements *replacements;
   std::map<std::string, clang::SourceLocation> Ifndefs;
+  std::vector<clang::SourceRange> SkippedSourceRanges;
   std::unique_ptr<mat::MatchFinder> Finder;
   // CUDA implicitly adds its runtime header. We rewrite explicitly-provided CUDA includes with equivalent
   // ones, and track - using this flag - if the result led to us including the hip runtime header. If it did
@@ -98,6 +99,8 @@ public:
   // Called by the preprocessor for each ifndef directive during the non-raw lexing pass.
   // Found ifndef will be used in EndSourceFileAction() for catching include guard controlling macro.
   void Ifndef(clang::SourceLocation Loc, const clang::Token &MacroNameTok, const clang::MacroDefinition &MD);
+  //
+  void AddSkippedSourceRange(clang::SourceRange Range);
 
 protected:
   // Add a Replacement for the current file. These will all be applied after executing the FrontendAction.
