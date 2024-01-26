@@ -1739,6 +1739,13 @@ clang::SourceLocation HipifyAction::GetSubstrLocation(const std::string &str, co
   * Otherwise, the source file is updated with the corresponding hipification.
   */
 void HipifyAction::RewriteToken(const clang::Token &t) {
+  if (!HipifyAMAP) {
+    clang::SourceRange sr(t.getLocation());
+    for (const auto& skipped : SkippedSourceRanges) {
+      if (skipped.fullyContains(sr))
+        return;
+    }
+  }
   // String literals containing CUDA references need fixing.
   if (t.is(clang::tok::string_literal)) {
     StringRef s(t.getLiteralData(), t.getLength());
@@ -2704,6 +2711,10 @@ public:
   void Ifndef(clang::SourceLocation Loc, const clang::Token &MacroNameTok, const clang::MacroDefinition &MD) override {
     hipifyAction.Ifndef(Loc, MacroNameTok, MD);
   }
+
+  virtual void SourceRangeSkipped(clang::SourceRange Range, clang::SourceLocation EndifLoc) {
+    hipifyAction.AddSkippedSourceRange(Range);
+  }
 };
 }
 
@@ -2732,6 +2743,10 @@ void HipifyAction::ExecuteAction() {
     RewriteToken(RawTok);
     RawLex.LexFromRawLexer(RawTok);
   }
+}
+
+void HipifyAction::AddSkippedSourceRange(clang::SourceRange Range) {
+  SkippedSourceRanges.push_back(Range);
 }
 
 void HipifyAction::run(const mat::MatchFinder::MatchResult &Result) {
