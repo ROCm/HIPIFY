@@ -2712,7 +2712,7 @@ public:
     hipifyAction.Ifndef(Loc, MacroNameTok, MD);
   }
 
-  virtual void SourceRangeSkipped(clang::SourceRange Range, clang::SourceLocation EndifLoc) {
+  void SourceRangeSkipped(clang::SourceRange Range, clang::SourceLocation EndifLoc) override {
     hipifyAction.AddSkippedSourceRange(Range);
   }
 };
