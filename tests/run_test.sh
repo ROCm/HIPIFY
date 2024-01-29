@@ -29,6 +29,10 @@ elif [ $NUM = "4" ]
 then
 HIPIFY_OPTS="$6 $7 $8 $9"
 shift 9
+elif [ $NUM = "5" ]
+then
+HIPIFY_OPTS="$6 $7 $8 $9 ${10}"
+shift 10
 fi
 
 test_dir=${IN_FILE%/*}
