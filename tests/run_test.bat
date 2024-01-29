@@ -14,24 +14,23 @@ set all_args=%*
 if %NUM% EQU 1 (
   set HIPIFY_OPTS=%6
   call set clang_args=%%all_args:*%6=%%
-)
-if %NUM% EQU 2 (
+) else if %NUM% EQU 2 (
   set HIPIFY_OPTS=%6 %7
   call set clang_args=%%all_args:*%7=%%
-)
-if %NUM% EQU 3 (
+) else if %NUM% EQU 3 (
   set HIPIFY_OPTS=%6 %7 %8
   shift
   call set clang_args=%%all_args:*%8=%%
-)
-if %NUM% EQU 4 (
+) else if %NUM% EQU 4 (
   set HIPIFY_OPTS=%6 %7 %8 %9
   shift
   call set clang_args=%%all_args:*%9=%%
-)
-if %NUM% EQU 5 (
+) else if %NUM% EQU 5 (
   shift
   call set HIPIFY_OPTS=%%5 %%6 %%7 %%8 %%9
+) else (
+  set clang_args=%%all_args:*%5=%%
+  set NUM=0
 )
 if %NUM% EQU 5 (
   shift
