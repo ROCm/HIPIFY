@@ -1,4 +1,4 @@
-// RUN: %run_test hipify "%s" "%t" %hipify_args 2 --hip-kernel-execution-syntax --skip-excluded-preprocessor-conditional-blocks %clang_args
+// RUN: %run_test hipify "%s" "%t" %hipify_args 3 --amap --hip-kernel-execution-syntax --skip-excluded-preprocessor-conditional-blocks %clang_args
 
 #include <iomanip>
 #include <iostream>
