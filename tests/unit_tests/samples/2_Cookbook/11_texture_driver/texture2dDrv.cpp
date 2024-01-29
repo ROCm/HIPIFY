@@ -1,4 +1,4 @@
-// RUN: %run_test hipify "%s" "%t" %hipify_args 1 --skip-excluded-preprocessor-conditional-blocks %clang_args
+// RUN: %run_test hipify "%s" "%t" %hipify_args 2 --amap --skip-excluded-preprocessor-conditional-blocks %clang_args
 /*
 Copyright (c) 2015-present Advanced Micro Devices, Inc. All rights reserved.
 

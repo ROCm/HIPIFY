@@ -1,4 +1,4 @@
-// RUN: %run_test hipify "%s" "%t" %hipify_args 1 --skip-excluded-preprocessor-conditional-blocks %clang_args
+// RUN: %run_test hipify "%s" "%t" %hipify_args 2 --amap --skip-excluded-preprocessor-conditional-blocks %clang_args
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
