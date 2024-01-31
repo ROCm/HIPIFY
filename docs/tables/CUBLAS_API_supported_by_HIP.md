@@ -17,7 +17,7 @@
 |`CUBLAS_COMPUTE_32I_PEDANTIC`|11.0| | | |`HIPBLAS_COMPUTE_32I_PEDANTIC`|6.0.0| | | | |
 |`CUBLAS_COMPUTE_64F`|11.0| | | |`HIPBLAS_COMPUTE_64F`|6.0.0| | | | |
 |`CUBLAS_COMPUTE_64F_PEDANTIC`|11.0| | | |`HIPBLAS_COMPUTE_64F_PEDANTIC`|6.0.0| | | | |
-|`CUBLAS_DEFAULT_MATH`|9.0| | | | | | | | | |
+|`CUBLAS_DEFAULT_MATH`|9.0| | | |`HIPBLAS_DEFAULT_MATH`|6.1.0| | | | |
 |`CUBLAS_DIAG_NON_UNIT`| | | | |`HIPBLAS_DIAG_NON_UNIT`|1.8.2| | | | |
 |`CUBLAS_DIAG_UNIT`| | | | |`HIPBLAS_DIAG_UNIT`|1.8.2| | | | |
 |`CUBLAS_FILL_MODE_FULL`|10.1| | | |`HIPBLAS_FILL_MODE_FULL`|1.8.2| | | | |
@@ -67,13 +67,13 @@
 |`CUBLAS_GEMM_DEFAULT_TENSOR_OP`|9.0| | | | | | | | | |
 |`CUBLAS_GEMM_DFALT`|8.0| | | |`HIPBLAS_GEMM_DEFAULT`|1.8.2| | | | |
 |`CUBLAS_GEMM_DFALT_TENSOR_OP`|9.0| | | | | | | | | |
-|`CUBLAS_MATH_DISALLOW_REDUCED_PRECISION_REDUCTION`|11.0| | | | | | | | | |
+|`CUBLAS_MATH_DISALLOW_REDUCED_PRECISION_REDUCTION`|11.0| | | |`HIPBLAS_MATH_DISALLOW_REDUCED_PRECISION_REDUCTION`|6.1.0| | | | |
 |`CUBLAS_OP_C`| | | | |`HIPBLAS_OP_C`|1.8.2| | | | |
 |`CUBLAS_OP_CONJG`|10.1| | | | | | | | | |
 |`CUBLAS_OP_HERMITAN`|10.1| | | |`HIPBLAS_OP_C`|1.8.2| | | | |
 |`CUBLAS_OP_N`| | | | |`HIPBLAS_OP_N`|1.8.2| | | | |
 |`CUBLAS_OP_T`| | | | |`HIPBLAS_OP_T`|1.8.2| | | | |
-|`CUBLAS_PEDANTIC_MATH`|11.0| | | | | | | | | |
+|`CUBLAS_PEDANTIC_MATH`|11.0| | | |`HIPBLAS_PEDANTIC_MATH`|6.1.0| | | | |
 |`CUBLAS_POINTER_MODE_DEVICE`| | | | |`HIPBLAS_POINTER_MODE_DEVICE`|1.8.2| | | | |
 |`CUBLAS_POINTER_MODE_HOST`| | | | |`HIPBLAS_POINTER_MODE_HOST`|1.8.2| | | | |
 |`CUBLAS_SIDE_LEFT`| | | | |`HIPBLAS_SIDE_LEFT`|1.8.2| | | | |
@@ -88,8 +88,8 @@
 |`CUBLAS_STATUS_NOT_INITIALIZED`| | | | |`HIPBLAS_STATUS_NOT_INITIALIZED`|1.8.2| | | | |
 |`CUBLAS_STATUS_NOT_SUPPORTED`| | | | |`HIPBLAS_STATUS_NOT_SUPPORTED`|1.8.2| | | | |
 |`CUBLAS_STATUS_SUCCESS`| | | | |`HIPBLAS_STATUS_SUCCESS`|1.8.2| | | | |
-|`CUBLAS_TENSOR_OP_MATH`|9.0|11.0| | | | | | | | |
-|`CUBLAS_TF32_TENSOR_OP_MATH`|11.0| | | | | | | | | |
+|`CUBLAS_TENSOR_OP_MATH`|9.0|11.0| | |`HIPBLAS_TENSOR_OP_MATH`|6.1.0| | | | |
+|`CUBLAS_TF32_TENSOR_OP_MATH`|11.0| | | |`HIPBLAS_TF32_TENSOR_OP_MATH`|6.1.0| | | | |
 |`cublasAtomicsMode_t`| | | | |`hipblasAtomicsMode_t`|3.10.0| | | | |
 |`cublasComputeType_t`|11.0| | | |`hipblasComputeType_t`|6.0.0| | | | |
 |`cublasContext`| | | | | | | | | | |
@@ -97,7 +97,7 @@
 |`cublasFillMode_t`| | | | |`hipblasFillMode_t`|1.8.2| | | | |
 |`cublasGemmAlgo_t`|8.0| | | |`hipblasGemmAlgo_t`|1.8.2| | | | |
 |`cublasHandle_t`| | | | |`hipblasHandle_t`|3.0.0| | | | |
-|`cublasMath_t`|9.0| | | | | | | | | |
+|`cublasMath_t`|9.0| | | |`hipblasMath_t`|6.1.0| | | | |
 |`cublasOperation_t`| | | | |`hipblasOperation_t`|1.8.2| | | | |
 |`cublasPointerMode_t`| | | | |`hipblasPointerMode_t`|1.8.2| | | | |
 |`cublasSideMode_t`| | | | |`hipblasSideMode_t`|1.8.2| | | | |
@@ -156,7 +156,7 @@
 |`cublasGetCudartVersion`|10.1| | | | | | | | | |
 |`cublasGetError`| | | | | | | | | | |
 |`cublasGetLoggerCallback`|9.2| | | | | | | | | |
-|`cublasGetMathMode`|9.0| | | | | | | | | |
+|`cublasGetMathMode`|9.0| | | |`hipblasGetMathMode`|6.1.0| | | | |
 |`cublasGetMatrix`| | | | |`hipblasGetMatrix`|1.8.2| | | | |
 |`cublasGetMatrixAsync`| | | | |`hipblasGetMatrixAsync`|3.7.0| | | | |
 |`cublasGetMatrixAsync_64`|12.0| | | | | | | | | |
@@ -182,7 +182,7 @@
 |`cublasSetAtomicsMode`| | | | |`hipblasSetAtomicsMode`|3.10.0| | | | |
 |`cublasSetKernelStream`| | | | | | | | | | |
 |`cublasSetLoggerCallback`|9.2| | | | | | | | | |
-|`cublasSetMathMode`|9.0| | | | | | | | | |
+|`cublasSetMathMode`|9.0| | | |`hipblasSetMathMode`|6.1.0| | | | |
 |`cublasSetMatrix`| | | | |`hipblasSetMatrix`|1.8.2| | | | |
 |`cublasSetMatrixAsync`| | | | |`hipblasSetMatrixAsync`|3.7.0| | | | |
 |`cublasSetMatrixAsync_64`|12.0| | | | | | | | | |

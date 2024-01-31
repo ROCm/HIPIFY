@@ -1800,9 +1800,6 @@ int main() {
   // CHECK-NEXT: rocblas_computetype BLAS_COMPUTE_32F = rocblas_compute_type_f32;
   cublasComputeType_t blasComputeType;
   cublasComputeType_t BLAS_COMPUTE_32F = CUBLAS_COMPUTE_32F;
-
-  // CHECK: rocblas_math_mode BLAS_TF32_TENSOR_OP_MATH = rocblas_xf32_xdl_math_op;
-  cublasMath_t BLAS_TF32_TENSOR_OP_MATH = CUBLAS_TF32_TENSOR_OP_MATH;
 #endif
 
 #if CUDA_VERSION >= 11040 && CUBLAS_VERSION >= 11600

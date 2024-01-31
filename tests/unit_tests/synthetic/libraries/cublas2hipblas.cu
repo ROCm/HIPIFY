@@ -1616,6 +1616,23 @@ int main() {
   // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasHgemmBatched(hipblasHandle_t handle, hipblasOperation_t transA, hipblasOperation_t transB, int m, int n, int k, const hipblasHalf* alpha, const hipblasHalf* const AP[], int lda, const hipblasHalf* const BP[], int ldb, const hipblasHalf* beta, hipblasHalf* const CP[], int ldc, int batchCount);
   // CHECK: blasStatus = hipblasHgemmBatched(blasHandle, transa, transb, m, n, k, ha, hAarray_const, lda, hBarray_const, ldb, hb, hCarray, ldc, batchCount);
   blasStatus = cublasHgemmBatched(blasHandle, transa, transb, m, n, k, ha, hAarray_const, lda, hBarray_const, ldb, hb, hCarray, ldc, batchCount);
+
+  // CHECK: hipblasMath_t blasMath;
+  // CHECK-NEXT: hipblasMath_t BLAS_DEFAULT_MATH = HIPBLAS_DEFAULT_MATH;
+  // CHECK-NEXT: hipblasMath_t BLAS_TENSOR_OP_MATH = HIPBLAS_TENSOR_OP_MATH;
+  cublasMath_t blasMath;
+  cublasMath_t BLAS_DEFAULT_MATH = CUBLAS_DEFAULT_MATH;
+  cublasMath_t BLAS_TENSOR_OP_MATH = CUBLAS_TENSOR_OP_MATH;
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasGetMathMode(cublasHandle_t handle, cublasMath_t* mode);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasGetMathMode(hipblasHandle_t handle, hipblasMath_t* mode);
+  // CHECK: blasStatus = hipblasGetMathMode(blasHandle, &blasMath);
+  blasStatus = cublasGetMathMode(blasHandle, &blasMath);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasSetMathMode(cublasHandle_t handle, cublasMath_t mode);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasSetMathMode(hipblasHandle_t handle, hipblasMath_t mode);
+  // CHECK: blasStatus = hipblasSetMathMode(blasHandle, blasMath);
+  blasStatus = cublasSetMathMode(blasHandle, blasMath);
 #endif
 
 #if CUDA_VERSION >= 9010 && CUDA_VERSION < 11000
@@ -1648,6 +1665,13 @@ int main() {
   // CHECK-NEXT: hipDataType C_16BF = HIP_C_16BF;
   cublasDataType_t R_16BF = CUDA_R_16BF;
   cublasDataType_t C_16BF = CUDA_C_16BF;
+
+  // CHECK: hipblasMath_t BLAS_PEDANTIC_MATH = HIPBLAS_PEDANTIC_MATH;
+  // CHECK-NEXT: hipblasMath_t BLAS_TF32_TENSOR_OP_MATH = HIPBLAS_TF32_TENSOR_OP_MATH;
+  // CHECK-NEXT: hipblasMath_t BLAS_MATH_DISALLOW_REDUCED_PRECISION_REDUCTION = HIPBLAS_MATH_DISALLOW_REDUCED_PRECISION_REDUCTION;
+  cublasMath_t BLAS_PEDANTIC_MATH = CUBLAS_PEDANTIC_MATH;
+  cublasMath_t BLAS_TF32_TENSOR_OP_MATH = CUBLAS_TF32_TENSOR_OP_MATH;
+  cublasMath_t BLAS_MATH_DISALLOW_REDUCED_PRECISION_REDUCTION = CUBLAS_MATH_DISALLOW_REDUCED_PRECISION_REDUCTION;
 
   // CHECK: hip_bfloat16** bf16Aarray = 0;
   __nv_bfloat16** bf16Aarray = 0;
