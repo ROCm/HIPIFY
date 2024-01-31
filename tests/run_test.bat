@@ -13,23 +13,29 @@ set all_args=%*
 
 if %NUM% EQU 1 (
   set HIPIFY_OPTS=%6
-  set NUM=%7
-)
-if %NUM% EQU 2 (
+  call set clang_args=%%all_args:*%6=%%
+) else if %NUM% EQU 2 (
   set HIPIFY_OPTS=%6 %7
-  set NUM=%8
-)
-if %NUM% EQU 3 (
+  call set clang_args=%%all_args:*%7=%%
+) else if %NUM% EQU 3 (
   set HIPIFY_OPTS=%6 %7 %8
-  set NUM=%9
-)
-if %NUM% EQU 4 (
+  shift
+  call set clang_args=%%all_args:*%8=%%
+) else if %NUM% EQU 4 (
   set HIPIFY_OPTS=%6 %7 %8 %9
-  set NUM=%10
+  shift
+  call set clang_args=%%all_args:*%9=%%
+) else if %NUM% EQU 5 (
+  shift
+  call set HIPIFY_OPTS=%%5 %%6 %%7 %%8 %%9
+) else (
+  set clang_args=%%all_args:*%5=%%
+  set NUM=0
 )
-
-call set clang_args=%%all_args:*%NUM%=%%
-set clang_args=%NUM%%clang_args%
+if %NUM% EQU 5 (
+  shift
+  call set clang_args=%%all_args:*%9=%%
+)
 
 set test_dir=%~dp2
 set "test_dir=%test_dir:\=/%"
@@ -40,10 +46,16 @@ set json_out=%test_dir%%compile_commands%
 
 if exist %json_in% (
   powershell -Command "(gc %json_in%) -replace '<test dir>', '%test_dir%' -replace '<CUDA dir>', '%CUDA_ROOT%' | Out-File -encoding ASCII %json_out%"
-  %HIPIFY% -o=%TMP_FILE% %IN_FILE% %CUDA_ROOT% -p=%test_dir% %HIPIFY_OPTS% -D_ALLOW_COMPILER_AND_STL_VERSION_MISMATCH=1
+  set hipify_cmd=%HIPIFY% -o=%TMP_FILE% %IN_FILE% %CUDA_ROOT% -p=%test_dir% %HIPIFY_OPTS% -D_ALLOW_COMPILER_AND_STL_VERSION_MISMATCH=1
 ) else (
-  %HIPIFY% -o=%TMP_FILE% %IN_FILE% %CUDA_ROOT% %HIPIFY_OPTS% -D_ALLOW_COMPILER_AND_STL_VERSION_MISMATCH=1 -- %clang_args%
+  set hipify_cmd=%HIPIFY% -o=%TMP_FILE% %IN_FILE% %CUDA_ROOT% %HIPIFY_OPTS% -D_ALLOW_COMPILER_AND_STL_VERSION_MISMATCH=1 -- %clang_args%
 )
+echo [HIPIFY] hipify options count: %NUM%
+echo [HIPIFY] hipify options      : %HIPIFY_OPTS%
+echo [HIPIFY] clang  options      : %clang_args%
+echo [HIPIFY] hipify-clang command: %hipify_cmd%
+
+call %hipify_cmd%
 
 if errorlevel 1 (echo      Error: hipify-clang.exe failed with exit code: %errorlevel% && exit /b %errorlevel%)
 

@@ -149,6 +149,11 @@ cl::opt<bool> DefaultPreprocessor("default-preprocessor",
   cl::value_desc("default-preprocessor"),
   cl::cat(ToolTemplateCategory));
 
+cl::opt<bool> HipifyAMAP("amap",
+  cl::desc("Try to hipify as much as possible; ignores 'default-preprocessor'"),
+  cl::value_desc("amap"),
+  cl::cat(ToolTemplateCategory));
+
 cl::opt<std::string> CudaGpuArch("cuda-gpu-arch",
   cl::desc("CUDA GPU architecture (e.g. sm_35); may be specified more than once"),
   cl::value_desc("value"),
