@@ -89,7 +89,7 @@
 |`CUBLAS_STATUS_NOT_SUPPORTED`| | | | |`rocblas_status_perf_degraded`|3.5.0| | | | |
 |`CUBLAS_STATUS_SUCCESS`| | | | |`rocblas_status_success`|1.5.0| | | | |
 |`CUBLAS_TENSOR_OP_MATH`|9.0|11.0| | | | | | | | |
-|`CUBLAS_TF32_TENSOR_OP_MATH`|11.0| | | |`rocblas_xf32_xdl_math_op`|5.7.0| | | | |
+|`CUBLAS_TF32_TENSOR_OP_MATH`|11.0| | | | | | | | | |
 |`cublasAtomicsMode_t`| | | | |`rocblas_atomics_mode`|3.8.0| | | | |
 |`cublasComputeType_t`|11.0| | | |`rocblas_computetype`|5.7.0| | | | |
 |`cublasContext`| | | | |`_rocblas_handle`|1.5.0| | | | |
