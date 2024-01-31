@@ -3,6 +3,12 @@
 Documentation for HIPIFY is available at
 [https://rocmdocs.amd.com/projects/HIPIFY/en/latest/](https://rocmdocs.amd.com/projects/HIPIFY/en/latest/).
 
+## HIPIFY for ROCm 6.0.2
+
+### Fixes
+
+* Use the new locations of header files of some HIP and ROCm libraries (`hipRAND`, `hipFFT`, `rocSOLVER`)
+
 ## HIPIFY for ROCm 6.0.0
 
 ### Additions
