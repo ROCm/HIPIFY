@@ -242,9 +242,9 @@
 |`cublasCswap_v2`| | | | |`hipblasCswap_v2`|6.0.0| | | | |
 |`cublasCswap_v2_64`|12.0| | | | | | | | | |
 |`cublasDasum`| | | | |`hipblasDasum`|1.8.2| | | | |
-|`cublasDasum_64`|12.0| | | | | | | | | |
+|`cublasDasum_64`|12.0| | | |`hipblasDasum_64`|6.1.0| | | | |
 |`cublasDasum_v2`| | | | |`hipblasDasum`|1.8.2| | | | |
-|`cublasDasum_v2_64`|12.0| | | | | | | | | |
+|`cublasDasum_v2_64`|12.0| | | |`hipblasDasum_64`|6.1.0| | | | |
 |`cublasDaxpy`| | | | |`hipblasDaxpy`|1.8.2| | | | |
 |`cublasDaxpy_64`|12.0| | | | | | | | | |
 |`cublasDaxpy_v2`| | | | |`hipblasDaxpy`|1.8.2| | | | |
@@ -282,9 +282,9 @@
 |`cublasDswap_v2`| | | | |`hipblasDswap`|3.0.0| | | | |
 |`cublasDswap_v2_64`|12.0| | | | | | | | | |
 |`cublasDzasum`| | | | |`hipblasDzasum_v2`|6.0.0| | | | |
-|`cublasDzasum_64`|12.0| | | | | | | | | |
+|`cublasDzasum_64`|12.0| | | |`hipblasDzasum_v2_64`|6.1.0| | | | |
 |`cublasDzasum_v2`| | | | |`hipblasDzasum_v2`|6.0.0| | | | |
-|`cublasDzasum_v2_64`|12.0| | | | | | | | | |
+|`cublasDzasum_v2_64`|12.0| | | |`hipblasDzasum_v2_64`|6.1.0| | | | |
 |`cublasDznrm2`| | | | |`hipblasDznrm2_v2`|6.0.0| | | | |
 |`cublasDznrm2_64`|12.0| | | | | | | | | |
 |`cublasDznrm2_v2`| | | | |`hipblasDznrm2_v2`|6.0.0| | | | |
@@ -324,17 +324,17 @@
 |`cublasNrm2Ex`|8.0| | | |`hipblasNrm2Ex_v2`|6.0.0| | | | |
 |`cublasNrm2Ex_64`|12.0| | | | | | | | | |
 |`cublasSasum`| | | | |`hipblasSasum`|1.8.2| | | | |
-|`cublasSasum_64`|12.0| | | | | | | | | |
+|`cublasSasum_64`|12.0| | | |`hipblasSasum_64`|6.1.0| | | | |
 |`cublasSasum_v2`| | | | |`hipblasSasum`|1.8.2| | | | |
-|`cublasSasum_v2_64`|12.0| | | | | | | | | |
+|`cublasSasum_v2_64`|12.0| | | |`hipblasSasum_64`|6.1.0| | | | |
 |`cublasSaxpy`| | | | |`hipblasSaxpy`|1.8.2| | | | |
 |`cublasSaxpy_64`|12.0| | | | | | | | | |
 |`cublasSaxpy_v2`| | | | |`hipblasSaxpy`|1.8.2| | | | |
 |`cublasSaxpy_v2_64`|12.0| | | | | | | | | |
 |`cublasScasum`| | | | |`hipblasScasum_v2`|6.0.0| | | | |
-|`cublasScasum_64`|12.0| | | | | | | | | |
+|`cublasScasum_64`|12.0| | | |`hipblasScasum_v2_64`|6.1.0| | | | |
 |`cublasScasum_v2`| | | | |`hipblasScasum_v2`|6.0.0| | | | |
-|`cublasScasum_v2_64`|12.0| | | | | | | | | |
+|`cublasScasum_v2_64`|12.0| | | |`hipblasScasum_v2_64`|6.1.0| | | | |
 |`cublasScnrm2`| | | | |`hipblasScnrm2_v2`|6.0.0| | | | |
 |`cublasScnrm2_64`|12.0| | | | | | | | | |
 |`cublasScnrm2_v2`| | | | |`hipblasScnrm2_v2`|6.0.0| | | | |

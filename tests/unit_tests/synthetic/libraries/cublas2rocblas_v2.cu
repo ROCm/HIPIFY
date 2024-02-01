@@ -1979,6 +1979,34 @@ int main() {
   // CHECK-NEXT: blasStatus = rocblas_izamin_64(blasHandle, n_64, &dcomplexx, incx_64, &res_64);
   blasStatus = cublasIzamin_64(blasHandle, n_64, &dcomplexx, incx_64, &res_64);
   blasStatus = cublasIzamin_v2_64(blasHandle, n_64, &dcomplexx, incx_64, &res_64);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasSasum_v2_64(cublasHandle_t handle, int64_t n, const float* x, int64_t incx, float* result);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_sasum_64(rocblas_handle handle, int64_t n, const float* x, int64_t incx, float* result);
+  // CHECK: blasStatus = rocblas_sasum_64(blasHandle, n_64, &fx, incx_64, &fresult);
+  // CHECK-NEXT: blasStatus = rocblas_sasum_64(blasHandle, n_64, &fx, incx_64, &fresult);
+  blasStatus = cublasSasum_64(blasHandle, n_64, &fx, incx_64, &fresult);
+  blasStatus = cublasSasum_v2_64(blasHandle, n_64, &fx, incx_64, &fresult);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasDasum_v2_64(cublasHandle_t handle, int64_t n, const double* x, int64_t incx, double* result);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_dasum_64(rocblas_handle handle, int64_t n, const double* x, int64_t incx, double* result);
+  // CHECK: blasStatus = rocblas_dasum_64(blasHandle, n_64, &dx, incx_64, &dresult);
+  // CHECK-NEXT: blasStatus = rocblas_dasum_64(blasHandle, n_64, &dx, incx_64, &dresult);
+  blasStatus = cublasDasum_64(blasHandle, n_64, &dx, incx_64, &dresult);
+  blasStatus = cublasDasum_v2_64(blasHandle, n_64, &dx, incx_64, &dresult);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasScasum_v2_64(cublasHandle_t handle, int64_t n, const cuComplex* x, int64_t incx, float* result);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_scasum_64(rocblas_handle handle, int64_t n, const rocblas_float_complex* x, int64_t incx, float* result);
+  // CHECK: blasStatus = rocblas_scasum_64(blasHandle, n_64, &complexx, incx_64, &fresult);
+  // CHECK-NEXT: blasStatus = rocblas_scasum_64(blasHandle, n_64, &complexx, incx_64, &fresult);
+  blasStatus = cublasScasum_64(blasHandle, n_64, &complexx, incx_64, &fresult);
+  blasStatus = cublasScasum_v2_64(blasHandle, n_64, &complexx, incx_64, &fresult);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasDzasum_v2_64(cublasHandle_t handle, int64_t n, const cuDoubleComplex* x, int64_t incx, double* result);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_dzasum_64(rocblas_handle handle, int64_t n, const rocblas_double_complex* x, int64_t incx, double* result);
+  // CHECK: blasStatus = rocblas_dzasum_64(blasHandle, n_64, &dcomplexx, incx_64, &dresult);
+  // CHECK-NEXT: blasStatus = rocblas_dzasum_64(blasHandle, n_64, &dcomplexx, incx_64, &dresult);
+  blasStatus = cublasDzasum_64(blasHandle, n_64, &dcomplexx, incx_64, &dresult);
+  blasStatus = cublasDzasum_v2_64(blasHandle, n_64, &dcomplexx, incx_64, &dresult);
 #endif
 
   return 0;

@@ -242,9 +242,9 @@
 |`cublasCswap_v2`| | | | |`rocblas_cswap`|1.5.0| | | | |
 |`cublasCswap_v2_64`|12.0| | | | | | | | | |
 |`cublasDasum`| | | | |`rocblas_dasum`|1.5.0| | | | |
-|`cublasDasum_64`|12.0| | | | | | | | | |
+|`cublasDasum_64`|12.0| | | |`rocblas_dasum_64`|6.1.0| | | | |
 |`cublasDasum_v2`| | | | |`rocblas_dasum`|1.5.0| | | | |
-|`cublasDasum_v2_64`|12.0| | | | | | | | | |
+|`cublasDasum_v2_64`|12.0| | | |`rocblas_dasum_64`|6.1.0| | | | |
 |`cublasDaxpy`| | | | |`rocblas_daxpy`|1.5.0| | | | |
 |`cublasDaxpy_64`|12.0| | | | | | | | | |
 |`cublasDaxpy_v2`| | | | |`rocblas_daxpy`|1.5.0| | | | |
@@ -282,9 +282,9 @@
 |`cublasDswap_v2`| | | | |`rocblas_dswap`|1.5.0| | | | |
 |`cublasDswap_v2_64`|12.0| | | | | | | | | |
 |`cublasDzasum`| | | | |`rocblas_dzasum`|1.5.0| | | | |
-|`cublasDzasum_64`|12.0| | | | | | | | | |
+|`cublasDzasum_64`|12.0| | | |`rocblas_dzasum_64`|6.1.0| | | | |
 |`cublasDzasum_v2`| | | | |`rocblas_dzasum`|1.5.0| | | | |
-|`cublasDzasum_v2_64`|12.0| | | | | | | | | |
+|`cublasDzasum_v2_64`|12.0| | | |`rocblas_dzasum_64`|6.1.0| | | | |
 |`cublasDznrm2`| | | | |`rocblas_dznrm2`|1.5.0| | | | |
 |`cublasDznrm2_64`|12.0| | | | | | | | | |
 |`cublasDznrm2_v2`| | | | |`rocblas_dznrm2`|1.5.0| | | | |
@@ -324,17 +324,17 @@
 |`cublasNrm2Ex`|8.0| | | |`rocblas_nrm2_ex`|4.1.0| | | | |
 |`cublasNrm2Ex_64`|12.0| | | | | | | | | |
 |`cublasSasum`| | | | |`rocblas_sasum`|1.5.0| | | | |
-|`cublasSasum_64`|12.0| | | | | | | | | |
+|`cublasSasum_64`|12.0| | | |`rocblas_sasum_64`|6.1.0| | | | |
 |`cublasSasum_v2`| | | | |`rocblas_sasum`|1.5.0| | | | |
-|`cublasSasum_v2_64`|12.0| | | | | | | | | |
+|`cublasSasum_v2_64`|12.0| | | |`rocblas_sasum_64`|6.1.0| | | | |
 |`cublasSaxpy`| | | | |`rocblas_saxpy`|1.5.0| | | | |
 |`cublasSaxpy_64`|12.0| | | | | | | | | |
 |`cublasSaxpy_v2`| | | | |`rocblas_saxpy`|1.5.0| | | | |
 |`cublasSaxpy_v2_64`|12.0| | | | | | | | | |
 |`cublasScasum`| | | | |`rocblas_scasum`|1.5.0| | | | |
-|`cublasScasum_64`|12.0| | | | | | | | | |
+|`cublasScasum_64`|12.0| | | |`rocblas_scasum_64`|6.1.0| | | | |
 |`cublasScasum_v2`| | | | |`rocblas_scasum`|1.5.0| | | | |
-|`cublasScasum_v2_64`|12.0| | | | | | | | | |
+|`cublasScasum_v2_64`|12.0| | | |`rocblas_scasum_64`|6.1.0| | | | |
 |`cublasScnrm2`| | | | |`rocblas_scnrm2`|1.5.0| | | | |
 |`cublasScnrm2_64`|12.0| | | | | | | | | |
 |`cublasScnrm2_v2`| | | | |`rocblas_scnrm2`|1.5.0| | | | |
