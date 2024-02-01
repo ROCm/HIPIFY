@@ -294,33 +294,33 @@
 |`cublasIcamax_v2`| | | | |`rocblas_icamax`|3.5.0| | | | |
 |`cublasIcamax_v2_64`|12.0| | | |`rocblas_icamax_64`|6.1.0| | | | |
 |`cublasIcamin`| | | | |`rocblas_icamin`|3.5.0| | | | |
-|`cublasIcamin_64`|12.0| | | | | | | | | |
+|`cublasIcamin_64`|12.0| | | |`rocblas_icamin_64`|6.1.0| | | | |
 |`cublasIcamin_v2`| | | | |`rocblas_icamin`|3.5.0| | | | |
-|`cublasIcamin_v2_64`|12.0| | | | | | | | | |
+|`cublasIcamin_v2_64`|12.0| | | |`rocblas_icamin_64`|6.1.0| | | | |
 |`cublasIdamax`| | | | |`rocblas_idamax`|1.6.4| | | | |
 |`cublasIdamax_64`|12.0| | | |`rocblas_idamax_64`|6.1.0| | | | |
 |`cublasIdamax_v2`| | | | |`rocblas_idamax`|1.6.4| | | | |
 |`cublasIdamax_v2_64`|12.0| | | |`rocblas_idamax_64`|6.1.0| | | | |
 |`cublasIdamin`| | | | |`rocblas_idamin`|1.6.4| | | | |
-|`cublasIdamin_64`|12.0| | | | | | | | | |
+|`cublasIdamin_64`|12.0| | | |`rocblas_idamin_64`|6.1.0| | | | |
 |`cublasIdamin_v2`| | | | |`rocblas_idamin`|1.6.4| | | | |
-|`cublasIdamin_v2_64`|12.0| | | | | | | | | |
+|`cublasIdamin_v2_64`|12.0| | | |`rocblas_idamin_64`|6.1.0| | | | |
 |`cublasIsamax`| | | | |`rocblas_isamax`|1.6.4| | | | |
 |`cublasIsamax_64`|12.0| | | |`rocblas_isamax_64`|6.1.0| | | | |
 |`cublasIsamax_v2`| | | | |`rocblas_isamax`|1.6.4| | | | |
 |`cublasIsamax_v2_64`|12.0| | | |`rocblas_isamax_64`|6.1.0| | | | |
 |`cublasIsamin`| | | | |`rocblas_isamin`|1.6.4| | | | |
-|`cublasIsamin_64`|12.0| | | | | | | | | |
+|`cublasIsamin_64`|12.0| | | |`rocblas_isamin_64`|6.1.0| | | | |
 |`cublasIsamin_v2`| | | | |`rocblas_isamin`|1.6.4| | | | |
-|`cublasIsamin_v2_64`|12.0| | | | | | | | | |
+|`cublasIsamin_v2_64`|12.0| | | |`rocblas_isamin_64`|6.1.0| | | | |
 |`cublasIzamax`| | | | |`rocblas_izamax`|3.5.0| | | | |
 |`cublasIzamax_64`|12.0| | | |`rocblas_izamax_64`|6.1.0| | | | |
 |`cublasIzamax_v2`| | | | |`rocblas_izamax`|3.5.0| | | | |
 |`cublasIzamax_v2_64`|12.0| | | |`rocblas_izamax_64`|6.1.0| | | | |
 |`cublasIzamin`| | | | |`rocblas_izamin`|3.5.0| | | | |
-|`cublasIzamin_64`|12.0| | | | | | | | | |
+|`cublasIzamin_64`|12.0| | | |`rocblas_izamin_64`|6.1.0| | | | |
 |`cublasIzamin_v2`| | | | |`rocblas_izamin`|3.5.0| | | | |
-|`cublasIzamin_v2_64`|12.0| | | | | | | | | |
+|`cublasIzamin_v2_64`|12.0| | | |`rocblas_izamin_64`|6.1.0| | | | |
 |`cublasNrm2Ex`|8.0| | | |`rocblas_nrm2_ex`|4.1.0| | | | |
 |`cublasNrm2Ex_64`|12.0| | | | | | | | | |
 |`cublasSasum`| | | | |`rocblas_sasum`|1.5.0| | | | |
