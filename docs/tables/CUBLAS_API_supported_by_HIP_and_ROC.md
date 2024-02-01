@@ -204,9 +204,9 @@
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|**ROC**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
 |`cublasCaxpy`| | | | |`hipblasCaxpy_v2`|6.0.0| | | | |`rocblas_caxpy`|1.5.0| | | | |
-|`cublasCaxpy_64`|12.0| | | | | | | | | | | | | | | |
+|`cublasCaxpy_64`|12.0| | | |`hipblasCaxpy_v2_64`|6.1.0| | | | |`rocblas_caxpy_64`|6.1.0| | | | |
 |`cublasCaxpy_v2`| | | | |`hipblasCaxpy_v2`|6.0.0| | | | |`rocblas_caxpy`|1.5.0| | | | |
-|`cublasCaxpy_v2_64`|12.0| | | | | | | | | | | | | | | |
+|`cublasCaxpy_v2_64`|12.0| | | |`hipblasCaxpy_v2_64`|6.1.0| | | | |`rocblas_caxpy_64`|6.1.0| | | | |
 |`cublasCcopy`| | | | |`hipblasCcopy_v2`|6.0.0| | | | |`rocblas_ccopy`|1.5.0| | | | |
 |`cublasCcopy_64`|12.0| | | | | | | | | | | | | | | |
 |`cublasCcopy_v2`| | | | |`hipblasCcopy_v2`|6.0.0| | | | |`rocblas_ccopy`|1.5.0| | | | |
@@ -246,9 +246,9 @@
 |`cublasDasum_v2`| | | | |`hipblasDasum`|1.8.2| | | | |`rocblas_dasum`|1.5.0| | | | |
 |`cublasDasum_v2_64`|12.0| | | |`hipblasDasum_64`|6.1.0| | | | |`rocblas_dasum_64`|6.1.0| | | | |
 |`cublasDaxpy`| | | | |`hipblasDaxpy`|1.8.2| | | | |`rocblas_daxpy`|1.5.0| | | | |
-|`cublasDaxpy_64`|12.0| | | | | | | | | | | | | | | |
+|`cublasDaxpy_64`|12.0| | | |`hipblasDaxpy_64`|6.1.0| | | | |`rocblas_daxpy_64`|6.1.0| | | | |
 |`cublasDaxpy_v2`| | | | |`hipblasDaxpy`|1.8.2| | | | |`rocblas_daxpy`|1.5.0| | | | |
-|`cublasDaxpy_v2_64`|12.0| | | | | | | | | | | | | | | |
+|`cublasDaxpy_v2_64`|12.0| | | |`hipblasDaxpy_64`|6.1.0| | | | |`rocblas_daxpy_64`|6.1.0| | | | |
 |`cublasDcopy`| | | | |`hipblasDcopy`|1.8.2| | | | |`rocblas_dcopy`|1.5.0| | | | |
 |`cublasDcopy_64`|12.0| | | | | | | | | | | | | | | |
 |`cublasDcopy_v2`| | | | |`hipblasDcopy`|1.8.2| | | | |`rocblas_dcopy`|1.5.0| | | | |
@@ -328,9 +328,9 @@
 |`cublasSasum_v2`| | | | |`hipblasSasum`|1.8.2| | | | |`rocblas_sasum`|1.5.0| | | | |
 |`cublasSasum_v2_64`|12.0| | | |`hipblasSasum_64`|6.1.0| | | | |`rocblas_sasum_64`|6.1.0| | | | |
 |`cublasSaxpy`| | | | |`hipblasSaxpy`|1.8.2| | | | |`rocblas_saxpy`|1.5.0| | | | |
-|`cublasSaxpy_64`|12.0| | | | | | | | | | | | | | | |
+|`cublasSaxpy_64`|12.0| | | |`hipblasSaxpy_64`|6.1.0| | | | |`rocblas_saxpy_64`|6.1.0| | | | |
 |`cublasSaxpy_v2`| | | | |`hipblasSaxpy`|1.8.2| | | | |`rocblas_saxpy`|1.5.0| | | | |
-|`cublasSaxpy_v2_64`|12.0| | | | | | | | | | | | | | | |
+|`cublasSaxpy_v2_64`|12.0| | | |`hipblasSaxpy_64`|6.1.0| | | | |`rocblas_saxpy_64`|6.1.0| | | | |
 |`cublasScasum`| | | | |`hipblasScasum_v2`|6.0.0| | | | |`rocblas_scasum`|1.5.0| | | | |
 |`cublasScasum_64`|12.0| | | |`hipblasScasum_v2_64`|6.1.0| | | | |`rocblas_scasum_64`|6.1.0| | | | |
 |`cublasScasum_v2`| | | | |`hipblasScasum_v2`|6.0.0| | | | |`rocblas_scasum`|1.5.0| | | | |
@@ -372,9 +372,9 @@
 |`cublasSswap_v2`| | | | |`hipblasSswap`|3.0.0| | | | |`rocblas_sswap`|1.5.0| | | | |
 |`cublasSswap_v2_64`|12.0| | | | | | | | | | | | | | | |
 |`cublasZaxpy`| | | | |`hipblasZaxpy_v2`|6.0.0| | | | |`rocblas_zaxpy`|1.5.0| | | | |
-|`cublasZaxpy_64`|12.0| | | | | | | | | | | | | | | |
+|`cublasZaxpy_64`|12.0| | | |`hipblasZaxpy_v2_64`|6.1.0| | | | |`rocblas_zaxpy_64`|6.1.0| | | | |
 |`cublasZaxpy_v2`| | | | |`hipblasZaxpy_v2`|6.0.0| | | | |`rocblas_zaxpy`|1.5.0| | | | |
-|`cublasZaxpy_v2_64`|12.0| | | | | | | | | | | | | | | |
+|`cublasZaxpy_v2_64`|12.0| | | |`hipblasZaxpy_v2_64`|6.1.0| | | | |`rocblas_zaxpy_64`|6.1.0| | | | |
 |`cublasZcopy`| | | | |`hipblasZcopy_v2`|6.0.0| | | | |`rocblas_zcopy`|1.5.0| | | | |
 |`cublasZcopy_64`|12.0| | | | | | | | | | | | | | | |
 |`cublasZcopy_v2`| | | | |`hipblasZcopy_v2`|6.0.0| | | | |`rocblas_zcopy`|1.5.0| | | | |
