@@ -1925,7 +1925,9 @@ sub rocSubstitutions {
     subst("cublasDrotg", "rocblas_drotg", "library");
     subst("cublasDrotg_v2", "rocblas_drotg", "library");
     subst("cublasDrotm", "rocblas_drotm", "library");
+    subst("cublasDrotm_64", "rocblas_drotm_64", "library");
     subst("cublasDrotm_v2", "rocblas_drotm", "library");
+    subst("cublasDrotm_v2_64", "rocblas_drotm_64", "library");
     subst("cublasDrotmg", "rocblas_drotmg", "library");
     subst("cublasDrotmg_v2", "rocblas_drotmg", "library");
     subst("cublasDsbmv", "rocblas_dsbmv", "library");
@@ -2092,7 +2094,9 @@ sub rocSubstitutions {
     subst("cublasSrotg", "rocblas_srotg", "library");
     subst("cublasSrotg_v2", "rocblas_srotg", "library");
     subst("cublasSrotm", "rocblas_srotm", "library");
+    subst("cublasSrotm_64", "rocblas_srotm_64", "library");
     subst("cublasSrotm_v2", "rocblas_srotm", "library");
+    subst("cublasSrotm_v2_64", "rocblas_srotm_64", "library");
     subst("cublasSrotmg", "rocblas_srotmg", "library");
     subst("cublasSrotmg_v2", "rocblas_srotmg", "library");
     subst("cublasSsbmv", "rocblas_ssbmv", "library");
@@ -3925,7 +3929,9 @@ sub simpleSubstitutions {
     subst("cublasDrotg", "hipblasDrotg", "library");
     subst("cublasDrotg_v2", "hipblasDrotg", "library");
     subst("cublasDrotm", "hipblasDrotm", "library");
+    subst("cublasDrotm_64", "hipblasDrotm_64", "library");
     subst("cublasDrotm_v2", "hipblasDrotm", "library");
+    subst("cublasDrotm_v2_64", "hipblasDrotm_64", "library");
     subst("cublasDrotmg", "hipblasDrotmg", "library");
     subst("cublasDrotmg_v2", "hipblasDrotmg", "library");
     subst("cublasDsbmv", "hipblasDsbmv", "library");
@@ -4091,7 +4097,9 @@ sub simpleSubstitutions {
     subst("cublasSrotg", "hipblasSrotg", "library");
     subst("cublasSrotg_v2", "hipblasSrotg", "library");
     subst("cublasSrotm", "hipblasSrotm", "library");
+    subst("cublasSrotm_64", "hipblasSrotm_64", "library");
     subst("cublasSrotm_v2", "hipblasSrotm", "library");
+    subst("cublasSrotm_v2_64", "hipblasSrotm_64", "library");
     subst("cublasSrotmg", "hipblasSrotmg", "library");
     subst("cublasSrotmg_v2", "hipblasSrotmg", "library");
     subst("cublasSsbmv", "hipblasSsbmv", "library");
@@ -10928,8 +10936,6 @@ sub warnHipOnlyUnsupportedFunctions {
         "cublasSscal_64",
         "cublasSsbmv_v2_64",
         "cublasSsbmv_64",
-        "cublasSrotm_v2_64",
-        "cublasSrotm_64",
         "cublasSmatinvBatched",
         "cublasShutdown",
         "cublasSger_v2_64",
@@ -11044,8 +11050,6 @@ sub warnHipOnlyUnsupportedFunctions {
         "cublasDscal_64",
         "cublasDsbmv_v2_64",
         "cublasDsbmv_64",
-        "cublasDrotm_v2_64",
-        "cublasDrotm_64",
         "cublasDotcEx_64",
         "cublasDotEx_64",
         "cublasDmatinvBatched",
@@ -11373,8 +11377,6 @@ sub warnRocOnlyUnsupportedFunctions {
         "cublasSscal_64",
         "cublasSsbmv_v2_64",
         "cublasSsbmv_64",
-        "cublasSrotm_v2_64",
-        "cublasSrotm_64",
         "cublasSmatinvBatched",
         "cublasShutdown",
         "cublasSgetrsBatched",
@@ -11488,8 +11490,6 @@ sub warnRocOnlyUnsupportedFunctions {
         "cublasDscal_64",
         "cublasDsbmv_v2_64",
         "cublasDsbmv_64",
-        "cublasDrotm_v2_64",
-        "cublasDrotm_64",
         "cublasDotcEx_64",
         "cublasDotEx_64",
         "cublasDmatinvBatched",

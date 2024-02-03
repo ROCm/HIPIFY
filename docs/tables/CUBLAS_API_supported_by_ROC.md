@@ -268,9 +268,9 @@
 |`cublasDrotg`| | | | |`rocblas_drotg`|3.5.0| | | | |
 |`cublasDrotg_v2`| | | | |`rocblas_drotg`|3.5.0| | | | |
 |`cublasDrotm`| | | | |`rocblas_drotm`|3.5.0| | | | |
-|`cublasDrotm_64`|12.0| | | | | | | | | |
+|`cublasDrotm_64`|12.0| | | |`rocblas_drotm_64`|6.1.0| | | | |
 |`cublasDrotm_v2`| | | | |`rocblas_drotm`|3.5.0| | | | |
-|`cublasDrotm_v2_64`|12.0| | | | | | | | | |
+|`cublasDrotm_v2_64`|12.0| | | |`rocblas_drotm_64`|6.1.0| | | | |
 |`cublasDrotmg`| | | | |`rocblas_drotmg`|3.5.0| | | | |
 |`cublasDrotmg_v2`| | | | |`rocblas_drotmg`|3.5.0| | | | |
 |`cublasDscal`| | | | |`rocblas_dscal`|1.5.0| | | | |
@@ -358,9 +358,9 @@
 |`cublasSrotg`| | | | |`rocblas_srotg`|3.5.0| | | | |
 |`cublasSrotg_v2`| | | | |`rocblas_srotg`|3.5.0| | | | |
 |`cublasSrotm`| | | | |`rocblas_srotm`|3.5.0| | | | |
-|`cublasSrotm_64`|12.0| | | | | | | | | |
+|`cublasSrotm_64`|12.0| | | |`rocblas_srotm_64`|6.1.0| | | | |
 |`cublasSrotm_v2`| | | | |`rocblas_srotm`|3.5.0| | | | |
-|`cublasSrotm_v2_64`|12.0| | | | | | | | | |
+|`cublasSrotm_v2_64`|12.0| | | |`rocblas_srotm_64`|6.1.0| | | | |
 |`cublasSrotmg`| | | | |`rocblas_srotmg`|3.5.0| | | | |
 |`cublasSrotmg_v2`| | | | |`rocblas_srotmg`|3.5.0| | | | |
 |`cublasSscal`| | | | |`rocblas_sscal`|1.5.0| | | | |

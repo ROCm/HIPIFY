@@ -241,6 +241,7 @@ int main() {
   float fd1 = 0;
   float fd2 = 0;
   float fresult = 0;
+  float fparam = 0;
 
   float** fAarray = 0;
   const float** const fAarray_const = const_cast<const float**>(fAarray);
@@ -263,6 +264,7 @@ int main() {
   double dd1 = 0;
   double dd2 = 0;
   double dresult = 0;
+  double dparam = 0;
 
   double** dAarray = 0;
   const double** const dAarray_const = const_cast<const double**>(dAarray);
@@ -2175,6 +2177,20 @@ int main() {
   // CHECK-NEXT: blasStatus = rocblas_zdrot_64(blasHandle, n_64, &dcomplexx, incx_64, &dcomplexy, incy_64, &dc, &ds);
   blasStatus = cublasZdrot_64(blasHandle, n_64, &dcomplexx, incx_64, &dcomplexy, incy_64, &dc, &ds);
   blasStatus = cublasZdrot_v2_64(blasHandle, n_64, &dcomplexx, incx_64, &dcomplexy, incy_64, &dc, &ds);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasSrotm_v2_64(cublasHandle_t handle, int64_t n, float* x, int64_t incx, float* y, int64_t incy, const float* param);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_srotm_64(rocblas_handle handle, int64_t n, float* x, int64_t incx, float* y, int64_t incy, const float* param);
+  // CHECK: blasStatus = rocblas_srotm_64(blasHandle, n_64, &fx, incx_64, &fy, incy_64, &fparam);
+  // CHECK-NEXT: blasStatus = rocblas_srotm_64(blasHandle, n_64, &fx, incx_64, &fy, incy_64, &fparam);
+  blasStatus = cublasSrotm_64(blasHandle, n_64, &fx, incx_64, &fy, incy_64, &fparam);
+  blasStatus = cublasSrotm_v2_64(blasHandle, n_64, &fx, incx_64, &fy, incy_64, &fparam);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasDrotm_v2_64(cublasHandle_t handle, int64_t n, double* x, int64_t incx, double* y, int64_t incy, const double* param);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_drotm_64(rocblas_handle handle, int64_t n, double* x, int64_t incx, double* y, int64_t incy, const double* param);
+  // CHECK: blasStatus = rocblas_drotm_64(blasHandle, n_64, &dx, incx_64, &dy, incy_64, &dparam);
+  // CHECK-NEXT: blasStatus = rocblas_drotm_64(blasHandle, n_64, &dx, incx_64, &dy, incy_64, &dparam);
+  blasStatus = cublasDrotm_64(blasHandle, n_64, &dx, incx_64, &dy, incy_64, &dparam);
+  blasStatus = cublasDrotm_v2_64(blasHandle, n_64, &dx, incx_64, &dy, incy_64, &dparam);
 #endif
 
   return 0;
