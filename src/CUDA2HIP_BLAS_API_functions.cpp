@@ -88,13 +88,13 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
   // NRM2
   // NRM2 functions' signatures differ from _v2 ones, hipblas and rocblas NRM2 functions have mapping to NRM2_v2 functions only
   {"cublasSnrm2",                    {"hipblasSnrm2",                    "rocblas_snrm2",                            CONV_LIB_FUNC, API_BLAS, 5, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasSnrm2_64",                 {"hipblasSnrm2_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 5, UNSUPPORTED}},
+  {"cublasSnrm2_64",                 {"hipblasSnrm2_64",                 "rocblas_snrm2_64",                         CONV_LIB_FUNC, API_BLAS, 5}},
   {"cublasDnrm2",                    {"hipblasDnrm2",                    "rocblas_dnrm2",                            CONV_LIB_FUNC, API_BLAS, 5, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasDnrm2_64",                 {"hipblasDnrm2_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 5, UNSUPPORTED}},
+  {"cublasDnrm2_64",                 {"hipblasDnrm2_64",                 "rocblas_dnrm2_64",                         CONV_LIB_FUNC, API_BLAS, 5}},
   {"cublasScnrm2",                   {"hipblasScnrm2_v2",                "rocblas_scnrm2",                           CONV_LIB_FUNC, API_BLAS, 5, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasScnrm2_64",                {"hipblasScnrm2_64",                "",                                         CONV_LIB_FUNC, API_BLAS, 5, UNSUPPORTED}},
+  {"cublasScnrm2_64",                {"hipblasScnrm2_v2_64",             "rocblas_scnrm2_64",                        CONV_LIB_FUNC, API_BLAS, 5}},
   {"cublasDznrm2",                   {"hipblasDznrm2_v2",                "rocblas_dznrm2",                           CONV_LIB_FUNC, API_BLAS, 5, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasDznrm2_64",                {"hipblasDznrm2_64",                "",                                         CONV_LIB_FUNC, API_BLAS, 5, UNSUPPORTED}},
+  {"cublasDznrm2_64",                {"hipblasDznrm2_v2_64",             "rocblas_dznrm2_64",                        CONV_LIB_FUNC, API_BLAS, 5}},
   {"cublasNrm2Ex",                   {"hipblasNrm2Ex_v2",                "rocblas_nrm2_ex",                          CONV_LIB_FUNC, API_BLAS, 5}},
   {"cublasNrm2Ex_64",                {"hipblasNrm2Ex_64",                "",                                         CONV_LIB_FUNC, API_BLAS, 5, UNSUPPORTED}},
 
@@ -920,13 +920,13 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
 
   // NRM2
   {"cublasSnrm2_v2",                 {"hipblasSnrm2",                    "rocblas_snrm2",                            CONV_LIB_FUNC, API_BLAS, 5}},
-  {"cublasSnrm2_v2_64",              {"hipblasSnrm2_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 5, UNSUPPORTED}},
+  {"cublasSnrm2_v2_64",              {"hipblasSnrm2_64",                 "rocblas_snrm2_64",                         CONV_LIB_FUNC, API_BLAS, 5}},
   {"cublasDnrm2_v2",                 {"hipblasDnrm2",                    "rocblas_dnrm2",                            CONV_LIB_FUNC, API_BLAS, 5}},
-  {"cublasDnrm2_v2_64",              {"hipblasDnrm2_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 5, UNSUPPORTED}},
+  {"cublasDnrm2_v2_64",              {"hipblasDnrm2_64",                 "rocblas_dnrm2_64",                         CONV_LIB_FUNC, API_BLAS, 5}},
   {"cublasScnrm2_v2",                {"hipblasScnrm2_v2",                "rocblas_scnrm2",                           CONV_LIB_FUNC, API_BLAS, 5}},
-  {"cublasScnrm2_v2_64",             {"hipblasScnrm2_64",                "",                                         CONV_LIB_FUNC, API_BLAS, 5, UNSUPPORTED}},
+  {"cublasScnrm2_v2_64",             {"hipblasScnrm2_v2_64",             "rocblas_scnrm2_64",                        CONV_LIB_FUNC, API_BLAS, 5}},
   {"cublasDznrm2_v2",                {"hipblasDznrm2_v2",                "rocblas_dznrm2",                           CONV_LIB_FUNC, API_BLAS, 5}},
-  {"cublasDznrm2_v2_64",             {"hipblasDznrm2_64",                "",                                         CONV_LIB_FUNC, API_BLAS, 5, UNSUPPORTED}},
+  {"cublasDznrm2_v2_64",             {"hipblasDznrm2_v2_64",             "rocblas_dznrm2_64",                        CONV_LIB_FUNC, API_BLAS, 5}},
 
   // DOT
   {"cublasDotEx",                    {"hipblasDotEx_v2",                 "rocblas_dot_ex",                           CONV_LIB_FUNC, API_BLAS, 8}},
@@ -1897,6 +1897,10 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_FUNCTION_VER_MAP {
   {"hipblasCdotu_v2_64",                         {HIP_6010, HIP_0,    HIP_0,  }},
   {"hipblasZdotc_v2_64",                         {HIP_6010, HIP_0,    HIP_0,  }},
   {"hipblasZdotu_v2_64",                         {HIP_6010, HIP_0,    HIP_0,  }},
+  {"hipblasSnrm2_64",                            {HIP_6010, HIP_0,    HIP_0,  }},
+  {"hipblasDnrm2_64",                            {HIP_6010, HIP_0,    HIP_0,  }},
+  {"hipblasScnrm2_v2_64",                        {HIP_6010, HIP_0,    HIP_0,  }},
+  {"hipblasDznrm2_v2_64",                        {HIP_6010, HIP_0,    HIP_0,  }},
 
   {"rocblas_status_to_string",                   {HIP_3050, HIP_0,    HIP_0   }},
   {"rocblas_sscal",                              {HIP_1050, HIP_0,    HIP_0   }},
@@ -2159,6 +2163,10 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_FUNCTION_VER_MAP {
   {"rocblas_cdotu_64",                           {HIP_6010, HIP_0,    HIP_0,  }},
   {"rocblas_zdotc_64",                           {HIP_6010, HIP_0,    HIP_0,  }},
   {"rocblas_zdotu_64",                           {HIP_6010, HIP_0,    HIP_0,  }},
+  {"rocblas_snrm2_64",                           {HIP_6010, HIP_0,    HIP_0,  }},
+  {"rocblas_dnrm2_64",                           {HIP_6010, HIP_0,    HIP_0,  }},
+  {"rocblas_scnrm2_64",                          {HIP_6010, HIP_0,    HIP_0,  }},
+  {"rocblas_dznrm2_64",                          {HIP_6010, HIP_0,    HIP_0,  }},
 };
 
 const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_BLAS_FUNCTION_CHANGED_VER_MAP {
