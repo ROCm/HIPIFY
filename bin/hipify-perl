@@ -1076,7 +1076,15 @@ my %removed_funcs = (
 );
 
 my %experimental_funcs = (
-
+    "cusolverSpSetStream" => "6.1.0",
+    "cusolverSpScsrlsvcholHost" => "6.1.0",
+    "cusolverSpScsrlsvchol" => "6.1.0",
+    "cusolverSpHandle_t" => "6.1.0",
+    "cusolverSpDestroy" => "6.1.0",
+    "cusolverSpDcsrlsvcholHost" => "6.1.0",
+    "cusolverSpDcsrlsvchol" => "6.1.0",
+    "cusolverSpCreate" => "6.1.0",
+    "CUSOLVER_STATUS_MATRIX_TYPE_NOT_SUPPORTED" => "6.1.0"
 );
 
 $print_stats = 1 if $examine;
@@ -1214,6 +1222,15 @@ sub subst {
 }
 
 sub experimentalSubstitutions {
+    subst("cusolverSpCreate", "hipsolverSpCreate", "library");
+    subst("cusolverSpDcsrlsvchol", "hipsolverSpDcsrlsvchol", "library");
+    subst("cusolverSpDcsrlsvcholHost", "hipsolverSpDcsrlsvcholHost", "library");
+    subst("cusolverSpDestroy", "hipsolverSpDestroy", "library");
+    subst("cusolverSpScsrlsvchol", "hipsolverSpScsrlsvchol", "library");
+    subst("cusolverSpScsrlsvcholHost", "hipsolverSpScsrlsvcholHost", "library");
+    subst("cusolverSpSetStream", "hipsolverSpSetStream", "library");
+    subst("cusolverSpHandle_t", "hipsolverSpHandle_t", "type");
+    subst("CUSOLVER_STATUS_MATRIX_TYPE_NOT_SUPPORTED", "HIPSOLVER_STATUS_MATRIX_TYPE_NOT_SUPPORTED", "numeric_literal");
 }
 
 sub rocSubstitutions {
@@ -7697,7 +7714,6 @@ sub warnUnsupportedFunctions {
         "cusolverSpXcsrissymHost",
         "cusolverSpXcsrcholAnalysisHost",
         "cusolverSpXcsrcholAnalysis",
-        "cusolverSpSetStream",
         "cusolverSpScsrzfdHost",
         "cusolverSpScsrqrsvBatched",
         "cusolverSpScsrqrZeroPivotHost",
@@ -7719,8 +7735,6 @@ sub warnUnsupportedFunctions {
         "cusolverSpScsrlsvqrHost",
         "cusolverSpScsrlsvqr",
         "cusolverSpScsrlsvluHost",
-        "cusolverSpScsrlsvcholHost",
-        "cusolverSpScsrlsvchol",
         "cusolverSpScsrlsqvqrHost",
         "cusolverSpScsreigvsiHost",
         "cusolverSpScsreigvsi",
@@ -7734,14 +7748,12 @@ sub warnUnsupportedFunctions {
         "cusolverSpScsrcholDiag",
         "cusolverSpScsrcholBufferInfoHost",
         "cusolverSpScsrcholBufferInfo",
-        "cusolverSpHandle_t",
         "cusolverSpGetStream",
         "cusolverSpDestroyCsrqrInfoHost",
         "cusolverSpDestroyCsrqrInfo",
         "cusolverSpDestroyCsrluInfoHost",
         "cusolverSpDestroyCsrcholInfoHost",
         "cusolverSpDestroyCsrcholInfo",
-        "cusolverSpDestroy",
         "cusolverSpDcsrzfdHost",
         "cusolverSpDcsrqrsvBatched",
         "cusolverSpDcsrqrZeroPivotHost",
@@ -7763,8 +7775,6 @@ sub warnUnsupportedFunctions {
         "cusolverSpDcsrlsvqrHost",
         "cusolverSpDcsrlsvqr",
         "cusolverSpDcsrlsvluHost",
-        "cusolverSpDcsrlsvcholHost",
-        "cusolverSpDcsrlsvchol",
         "cusolverSpDcsrlsqvqrHost",
         "cusolverSpDcsreigvsiHost",
         "cusolverSpDcsreigvsi",
@@ -7783,7 +7793,6 @@ sub warnUnsupportedFunctions {
         "cusolverSpCreateCsrluInfoHost",
         "cusolverSpCreateCsrcholInfoHost",
         "cusolverSpCreateCsrcholInfo",
-        "cusolverSpCreate",
         "cusolverSpContext",
         "cusolverSpCcsrzfdHost",
         "cusolverSpCcsrqrsvBatched",
@@ -9685,7 +9694,6 @@ sub warnUnsupportedFunctions {
         "CUSPARSE_ALG_MERGE_PATH",
         "CUSPARSE_ALG1",
         "CUSPARSE_ALG0",
-        "CUSOLVER_STATUS_MATRIX_TYPE_NOT_SUPPORTED",
         "CUSOLVER_STATUS_IRS_PARAMS_NOT_INITIALIZED",
         "CUSOLVER_STATUS_IRS_PARAMS_INVALID_REFINE",
         "CUSOLVER_STATUS_IRS_PARAMS_INVALID_PREC",

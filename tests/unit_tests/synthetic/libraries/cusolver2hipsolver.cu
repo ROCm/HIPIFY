@@ -6,6 +6,7 @@
 // CHECK: #include "hipsolver.h"
 #include "cusolverDn.h"
 #include "cusolverRf.h"
+#include "cusolverSp.h"
 
 int main() {
   printf("19. cuSOLVER API to hipSOLVER API synthetic test\n");
@@ -41,6 +42,8 @@ int main() {
   int isort_eig = 0;
   int iexecuted_sweeps = 0;
   int iecon = 0;
+  int icsrRowPtr = 0;
+  int icsrColInd = 0;
   int ih_csrRowPtrA = 0;
   int ih_csrColIndA = 0;
   int ih_csrRowPtrL = 0;
@@ -56,6 +59,8 @@ int main() {
   int ih_P = 0;
   int ih_Q = 0;
   int iposition = 0;
+  int ireorder = 0;
+  int isingularity = 0;
   float fA = 0.f;
   float fd_A = 0.f;
   float fB = 0.f;
@@ -76,6 +81,8 @@ int main() {
   float fTAU = 0.f;
   float fTAUQ = 0.f;
   float fTAUP = 0.f;
+  float fcsrVal = 0.f;
+  float ftol = 0.f;
   double dA = 0.f;
   double dd_A = 0.f;
   double dB = 0.f;
@@ -99,6 +106,8 @@ int main() {
   double dTAUP = 0.f;
   double dtolerance = 0.f;
   double dresidual = 0.f;
+  double dcsrVal = 0.f;
+  double dtol = 0.f;
   float fWorkspace = 0.f;
   float fd_Workspace = 0.f;
   float frWork = 0.f;
@@ -164,6 +173,7 @@ int main() {
   // CHECK-NEXT: hipsolverStatus_t STATUS_MAPPING_ERROR = HIPSOLVER_STATUS_MAPPING_ERROR;
   // CHECK-NEXT: hipsolverStatus_t STATUS_EXECUTION_FAILED = HIPSOLVER_STATUS_EXECUTION_FAILED;
   // CHECK-NEXT: hipsolverStatus_t STATUS_INTERNAL_ERROR = HIPSOLVER_STATUS_INTERNAL_ERROR;
+  // CHECK-NEXT: hipsolverStatus_t STATUS_MATRIX_TYPE_NOT_SUPPORTED = HIPSOLVER_STATUS_MATRIX_TYPE_NOT_SUPPORTED;
   // CHECK-NEXT: hipsolverStatus_t STATUS_NOT_SUPPORTED = HIPSOLVER_STATUS_NOT_SUPPORTED;
   // CHECK-NEXT: hipsolverStatus_t STATUS_ZERO_PIVOT = HIPSOLVER_STATUS_ZERO_PIVOT;
   cusolverStatus_t status;
@@ -175,6 +185,7 @@ int main() {
   cusolverStatus_t STATUS_MAPPING_ERROR = CUSOLVER_STATUS_MAPPING_ERROR;
   cusolverStatus_t STATUS_EXECUTION_FAILED = CUSOLVER_STATUS_EXECUTION_FAILED;
   cusolverStatus_t STATUS_INTERNAL_ERROR = CUSOLVER_STATUS_INTERNAL_ERROR;
+  cusolverStatus_t STATUS_MATRIX_TYPE_NOT_SUPPORTED = CUSOLVER_STATUS_MATRIX_TYPE_NOT_SUPPORTED;
   cusolverStatus_t STATUS_NOT_SUPPORTED = CUSOLVER_STATUS_NOT_SUPPORTED;
   cusolverStatus_t STATUS_ZERO_PIVOT = CUSOLVER_STATUS_ZERO_PIVOT;
 
@@ -679,6 +690,47 @@ int main() {
   // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverRfBatchZeroPivot(hipsolverRfHandle_t handle, int* position);
   // CHECK: status = hipsolverRfBatchZeroPivot(RfHandle, &iposition);
   status = cusolverRfBatchZeroPivot(RfHandle, &iposition);
+
+  // CHECK: hipsolverSpHandle_t SpHandle_t;
+  cusolverSpHandle_t SpHandle_t;
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverSpCreate(cusolverSpHandle_t *handle);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverSpCreate(hipsolverSpHandle_t* handle);
+  // CHECK: status = hipsolverSpCreate(&SpHandle_t);
+  status = cusolverSpCreate(&SpHandle_t);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverSpDestroy(cusolverSpHandle_t handle);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverSpDestroy(hipsolverSpHandle_t handle);
+  // CHECK: status = hipsolverSpDestroy(SpHandle_t);
+  status = cusolverSpDestroy(SpHandle_t);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverSpSetStream(cusolverSpHandle_t handle, cudaStream_t streamId);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverSpSetStream(hipsolverSpHandle_t handle, hipStream_t streamId);
+  // CHECK: status = hipsolverSpSetStream(SpHandle_t, stream_t);
+  status = cusolverSpSetStream(SpHandle_t, stream_t);
+
+  // CHECK: hipsparseMatDescr_t MatDescr_t;
+  cusparseMatDescr_t MatDescr_t;
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverSpScsrlsvchol(cusolverSpHandle_t handle, int m, int nnz, const cusparseMatDescr_t descrA, const float * csrVal, const int * csrRowPtr, const int * csrColInd, const float * b, float tol, int reorder, float *x, int * singularity);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverSpScsrlsvchol(hipsolverSpHandle_t handle, int n, int nnzA, const hipsparseMatDescr_t descrA, const float* csrVal, const int* csrRowPtr, const int* csrColInd, const float* b, float tolerance, int reorder, float* x, int* singularity);
+  // CHECK: status = hipsolverSpScsrlsvchol(SpHandle_t, m, nnzA, MatDescr_t, &fcsrVal, &icsrRowPtr, &icsrColInd, &fB, ftol, ireorder, &fX, &isingularity);
+  status = cusolverSpScsrlsvchol(SpHandle_t, m, nnzA, MatDescr_t, &fcsrVal, &icsrRowPtr, &icsrColInd, &fB, ftol, ireorder, &fX, &isingularity);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverSpDcsrlsvchol(cusolverSpHandle_t handle, int m, int nnz, const cusparseMatDescr_t descrA, const double * csrVal, const int * csrRowPtr, const int * csrColInd, const double * b, double tol, int reorder, double *x, int * singularity);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverSpDcsrlsvchol(hipsolverSpHandle_t handle, int n, int nnzA, const hipsparseMatDescr_t descrA, const double* csrVal, const int* csrRowPtr, const int* csrColInd, const double* b, double tolerance, int reorder, double* x, int* singularity);
+  // CHECK: status = hipsolverSpDcsrlsvchol(SpHandle_t, m, nnzA, MatDescr_t, &dcsrVal, &icsrRowPtr, &icsrColInd, &dB, dtol, ireorder, &dX, &isingularity);
+  status = cusolverSpDcsrlsvchol(SpHandle_t, m, nnzA, MatDescr_t, &dcsrVal, &icsrRowPtr, &icsrColInd, &dB, dtol, ireorder, &dX, &isingularity);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverSpScsrlsvcholHost(cusolverSpHandle_t handle, int m, int nnz, const cusparseMatDescr_t descrA, const float * csrVal, const int * csrRowPtr, const int * csrColInd, const float * b, float tol, int reorder, float * x, int * singularity);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverSpScsrlsvcholHost(hipsolverSpHandle_t handle, int n, int nnzA, const hipsparseMatDescr_t descrA, const float* csrVal, const int* csrRowPtr, const int* csrColInd, const float* b, float tolerance, int reorder, float* x, int* singularity);
+  // CHECK: status = hipsolverSpScsrlsvcholHost(SpHandle_t, m, nnzA, MatDescr_t, &fcsrVal, &icsrRowPtr, &icsrColInd, &fB, ftol, ireorder, &fX, &isingularity);
+  status = cusolverSpScsrlsvcholHost(SpHandle_t, m, nnzA, MatDescr_t, &fcsrVal, &icsrRowPtr, &icsrColInd, &fB, ftol, ireorder, &fX, &isingularity);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverSpDcsrlsvcholHost(cusolverSpHandle_t handle, int m,int nnz, const cusparseMatDescr_t descrA, const double * csrVal, const int * csrRowPtr, const int * csrColInd, const double * b, double tol, int reorder, double * x, int * singularity);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverSpDcsrlsvcholHost(hipsolverSpHandle_t handle, int n, int nnzA, const hipsparseMatDescr_t descrA, const double* csrVal, const int* csrRowPtr, const int* csrColInd, const double* b, double tolerance, int reorder, double* x, int* singularity);
+  // CHECK: status = hipsolverSpDcsrlsvcholHost(SpHandle_t, m, nnzA, MatDescr_t, &dcsrVal, &icsrRowPtr, &icsrColInd, &dB, dtol, ireorder, &dX, &isingularity);
+  status = cusolverSpDcsrlsvcholHost(SpHandle_t, m, nnzA, MatDescr_t, &dcsrVal, &icsrRowPtr, &icsrColInd, &dB, dtol, ireorder, &dX, &isingularity);
 
 #if CUDA_VERSION >= 8000
   // CHECK: hipsolverEigType_t eigType;
