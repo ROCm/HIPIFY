@@ -930,9 +930,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
 
   // DOT
   {"cublasDotEx",                    {"hipblasDotEx_v2",                 "rocblas_dot_ex",                           CONV_LIB_FUNC, API_BLAS, 8}},
-  {"cublasDotEx_64",                 {"hipblasDotEx_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 8, UNSUPPORTED}},
+  {"cublasDotEx_64",                 {"hipblasDotEx_64",                 "rocblas_dot_ex_64",                        CONV_LIB_FUNC, API_BLAS, 8, HIP_UNSUPPORTED}},
   {"cublasDotcEx",                   {"hipblasDotcEx_v2",                "rocblas_dotc_ex",                          CONV_LIB_FUNC, API_BLAS, 8}},
-  {"cublasDotcEx_64",                {"hipblasDotcEx_64",                "",                                         CONV_LIB_FUNC, API_BLAS, 8, UNSUPPORTED}},
+  {"cublasDotcEx_64",                {"hipblasDotcEx_64",                "rocblas_dotc_ex_64",                       CONV_LIB_FUNC, API_BLAS, 8, HIP_UNSUPPORTED}},
 
   {"cublasSdot_v2",                  {"hipblasSdot",                     "rocblas_sdot",                             CONV_LIB_FUNC, API_BLAS, 5}},
   {"cublasSdot_v2_64",               {"hipblasSdot_64",                  "rocblas_sdot_64",                          CONV_LIB_FUNC, API_BLAS, 5}},
@@ -966,7 +966,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
 
   // AXPY
   {"cublasAxpyEx",                   {"hipblasAxpyEx_v2",                "rocblas_axpy_ex",                          CONV_LIB_FUNC, API_BLAS, 8}},
-  {"cublasAxpyEx_64",                {"hipblasAxpyEx_64",                "",                                         CONV_LIB_FUNC, API_BLAS, 8, UNSUPPORTED}},
+  {"cublasAxpyEx_64",                {"hipblasAxpyEx_64",                "rocblas_axpy_ex_64",                       CONV_LIB_FUNC, API_BLAS, 8, HIP_UNSUPPORTED}},
   {"cublasSaxpy_v2",                 {"hipblasSaxpy",                    "rocblas_saxpy",                            CONV_LIB_FUNC, API_BLAS, 5}},
   {"cublasSaxpy_v2_64",              {"hipblasSaxpy_64",                 "rocblas_saxpy_64",                         CONV_LIB_FUNC, API_BLAS, 5}},
   {"cublasDaxpy_v2",                 {"hipblasDaxpy",                    "rocblas_daxpy",                            CONV_LIB_FUNC, API_BLAS, 5}},
@@ -2203,6 +2203,9 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_FUNCTION_VER_MAP {
   {"rocblas_dswap_64",                           {HIP_6010, HIP_0,    HIP_0,  }},
   {"rocblas_cswap_64",                           {HIP_6010, HIP_0,    HIP_0,  }},
   {"rocblas_zswap_64",                           {HIP_6010, HIP_0,    HIP_0,  }},
+  {"rocblas_axpy_ex_64",                         {HIP_6010, HIP_0,    HIP_0,  }},
+  {"rocblas_dot_ex_64",                          {HIP_6010, HIP_0,    HIP_0,  }},
+  {"rocblas_dotc_ex_64",                         {HIP_6010, HIP_0,    HIP_0,  }},
 };
 
 const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_BLAS_FUNCTION_CHANGED_VER_MAP {

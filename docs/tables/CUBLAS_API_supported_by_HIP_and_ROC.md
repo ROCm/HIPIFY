@@ -911,7 +911,7 @@
 |`cublasAsumEx`|10.1| | | | | | | | | | | | | | | |
 |`cublasAsumEx_64`|12.0| | | | | | | | | | | | | | | |
 |`cublasAxpyEx`|8.0| | | |`hipblasAxpyEx_v2`|6.0.0| | | | |`rocblas_axpy_ex`|3.9.0| | | | |
-|`cublasAxpyEx_64`|12.0| | | | | | | | | | | | | | | |
+|`cublasAxpyEx_64`|12.0| | | | | | | | | |`rocblas_axpy_ex_64`|6.1.0| | | | |
 |`cublasCdgmm`| | | | |`hipblasCdgmm_v2`|6.0.0| | | | |`rocblas_cdgmm`|3.5.0| | | | |
 |`cublasCdgmm_64`|12.0| | | | | | | | | | | | | | | |
 |`cublasCgeam`| | | | |`hipblasCgeam_v2`|6.0.0| | | | |`rocblas_cgeam`|3.5.0| | | | |
@@ -949,9 +949,9 @@
 |`cublasDgetrsBatched`| | | | |`hipblasDgetrsBatched`|3.5.0| | | | | | | | | | |
 |`cublasDmatinvBatched`| | | | | | | | | | | | | | | | |
 |`cublasDotEx`|8.0| | | |`hipblasDotEx_v2`|6.0.0| | | | |`rocblas_dot_ex`|4.1.0| | | | |
-|`cublasDotEx_64`|12.0| | | | | | | | | | | | | | | |
+|`cublasDotEx_64`|12.0| | | | | | | | | |`rocblas_dot_ex_64`|6.1.0| | | | |
 |`cublasDotcEx`|8.0| | | |`hipblasDotcEx_v2`|6.0.0| | | | |`rocblas_dotc_ex`|4.1.0| | | | |
-|`cublasDotcEx_64`|12.0| | | | | | | | | | | | | | | |
+|`cublasDotcEx_64`|12.0| | | | | | | | | |`rocblas_dotc_ex_64`|6.1.0| | | | |
 |`cublasDtpttr`| | | | | | | | | | | | | | | | |
 |`cublasDtrsmBatched`| | | | |`hipblasDtrsmBatched`|3.2.0| | | | |`rocblas_dtrsm_batched`|3.5.0| | | | |
 |`cublasDtrsmBatched_64`|12.0| | | | | | | | | | | | | | | |

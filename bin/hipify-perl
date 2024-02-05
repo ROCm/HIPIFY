@@ -1235,6 +1235,7 @@ sub experimentalSubstitutions {
 
 sub rocSubstitutions {
     subst("cublasAxpyEx", "rocblas_axpy_ex", "library");
+    subst("cublasAxpyEx_64", "rocblas_axpy_ex_64", "library");
     subst("cublasCaxpy", "rocblas_caxpy", "library");
     subst("cublasCaxpy_64", "rocblas_caxpy_64", "library");
     subst("cublasCaxpy_v2", "rocblas_caxpy", "library");
@@ -1377,7 +1378,9 @@ sub rocSubstitutions {
     subst("cublasDnrm2_v2", "rocblas_dnrm2", "library");
     subst("cublasDnrm2_v2_64", "rocblas_dnrm2_64", "library");
     subst("cublasDotEx", "rocblas_dot_ex", "library");
+    subst("cublasDotEx_64", "rocblas_dot_ex_64", "library");
     subst("cublasDotcEx", "rocblas_dotc_ex", "library");
+    subst("cublasDotcEx_64", "rocblas_dotc_ex_64", "library");
     subst("cublasDrot", "rocblas_drot", "library");
     subst("cublasDrot_64", "rocblas_drot_64", "library");
     subst("cublasDrot_v2", "rocblas_drot", "library");
@@ -11224,8 +11227,6 @@ sub warnRocOnlyUnsupportedFunctions {
         "cublasDspmv_64",
         "cublasDsbmv_v2_64",
         "cublasDsbmv_64",
-        "cublasDotcEx_64",
-        "cublasDotEx_64",
         "cublasDmatinvBatched",
         "cublasDgetrsBatched",
         "cublasDgetriBatched",
@@ -11343,7 +11344,6 @@ sub warnRocOnlyUnsupportedFunctions {
         "cublasCgbmv_v2_64",
         "cublasCgbmv_64",
         "cublasCdgmm_64",
-        "cublasAxpyEx_64",
         "cublasAsumEx_64",
         "cublasAsumEx",
         "cublasAlloc",
