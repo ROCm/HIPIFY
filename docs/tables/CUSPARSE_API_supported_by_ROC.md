@@ -456,7 +456,7 @@
 |`cusparseScsrgemm`| |10.2| |11.0| | | | | | |
 |`cusparseScsrgemm2`| |11.0| |12.0|`rocsparse_scsrgemm`|2.8.0| | | | |
 |`cusparseScsrgemm2_bufferSizeExt`| |11.0| |12.0|`rocsparse_scsrgemm_buffer_size`|2.8.0| | | | |
-|`cusparseXcsrgeam2Nnz`|10.0| | | | | | | | | |
+|`cusparseXcsrgeam2Nnz`|10.0| | | |`rocsparse_csrgeam_nnz`|3.5.0| | | | |
 |`cusparseXcsrgeamNnz`| |10.2| |11.0|`rocsparse_csrgeam_nnz`|3.5.0| | | | |
 |`cusparseXcsrgemm2Nnz`| |11.0| |12.0|`rocsparse_csrgemm_nnz`|2.8.0| | | | |
 |`cusparseXcsrgemmNnz`| |10.2| |11.0| | | | | | |

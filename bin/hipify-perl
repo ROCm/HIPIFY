@@ -2193,6 +2193,7 @@ sub rocSubstitutions {
     subst("cusparseXcsr2bsrNnz", "rocsparse_csr2bsr_nnz", "library");
     subst("cusparseXcsr2coo", "rocsparse_csr2coo", "library");
     subst("cusparseXcsr2gebsrNnz", "rocsparse_csr2gebsr_nnz", "library");
+    subst("cusparseXcsrgeam2Nnz", "rocsparse_csrgeam_nnz", "library");
     subst("cusparseXcsrgeamNnz", "rocsparse_csrgeam_nnz", "library");
     subst("cusparseXcsrgemm2Nnz", "rocsparse_csrgemm_nnz", "library");
     subst("cusparseXcsric02_zeroPivot", "rocsparse_csric0_zero_pivot", "library");
