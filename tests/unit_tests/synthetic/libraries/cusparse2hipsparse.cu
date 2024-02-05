@@ -237,6 +237,7 @@ int main() {
   void *tempBuffer5 = nullptr;
   void *c_coeff = nullptr;
   void *s_coeff = nullptr;
+  void *workspace = nullptr;
   size_t dataSize = 0;
   size_t bufferSize = 0;
   size_t bufferSize1 = 0;
@@ -1852,6 +1853,11 @@ int main() {
   // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseScsrgeam2(hipsparseHandle_t handle, int m, int n, const float* alpha, const hipsparseMatDescr_t descrA, int nnzA, const float* csrSortedValA, const int* csrSortedRowPtrA, const int* csrSortedColIndA, const float* beta, const hipsparseMatDescr_t descrB, int nnzB, const float* csrSortedValB, const int* csrSortedRowPtrB, const int* csrSortedColIndB, const hipsparseMatDescr_t descrC, float* csrSortedValC, int* csrSortedRowPtrC, int* csrSortedColIndC, void* pBuffer);
   // CHECK: status_t = hipsparseScsrgeam2(handle_t, m, n, &fA, matDescr_A, nnza, &csrSortedValA, &csrRowPtrA, &csrColIndA, &fB, matDescr_B, nnzb, &csrSortedValB, &csrRowPtrB, &csrColIndB, matDescr_C, &csrSortedValC, &csrRowPtrC, &csrColIndC, pBuffer);
   status_t = cusparseScsrgeam2(handle_t, m, n, &fA, matDescr_A, nnza, &csrSortedValA, &csrRowPtrA, &csrColIndA, &fB, matDescr_B, nnzb, &csrSortedValB, &csrRowPtrB, &csrColIndB, matDescr_C, &csrSortedValC, &csrRowPtrC, &csrColIndC, pBuffer);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseXcsrgeam2Nnz(cusparseHandle_t handle, int m, int n, const cusparseMatDescr_t descrA, int nnzA, const int* csrSortedRowPtrA, const int* csrSortedColIndA, const cusparseMatDescr_t descrB, int nnzB, const int* csrSortedRowPtrB, const int* csrSortedColIndB, const cusparseMatDescr_t descrC, int* csrSortedRowPtrC, int* nnzTotalDevHostPtr, void* workspace);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseXcsrgeam2Nnz(hipsparseHandle_t handle, int m, int n, const hipsparseMatDescr_t descrA, int nnzA, const int* csrSortedRowPtrA, const int* csrSortedColIndA, const hipsparseMatDescr_t descrB, int nnzB, const int* csrSortedRowPtrB, const int* csrSortedColIndB, const hipsparseMatDescr_t descrC, int* csrSortedRowPtrC, int* nnzTotalDevHostPtr, void* workspace);
+  // CHECK: status_t = hipsparseXcsrgeam2Nnz(handle_t, m, n, matDescr_A, nnza, &csrRowPtrA, &csrColIndA, matDescr_B, nnzb, &csrRowPtrB, &csrColIndB, matDescr_C, &csrRowPtrC, &nnzTotalDevHostPtr, workspace);
+  status_t = cusparseXcsrgeam2Nnz(handle_t, m, n, matDescr_A, nnza, &csrRowPtrA, &csrColIndA, matDescr_B, nnzb, &csrRowPtrB, &csrColIndB, matDescr_C, &csrRowPtrC, &nnzTotalDevHostPtr, workspace);
 #endif
 
 #if CUDA_VERSION >= 10010
