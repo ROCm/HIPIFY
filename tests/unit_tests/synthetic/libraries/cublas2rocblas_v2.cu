@@ -2191,6 +2191,48 @@ int main() {
   // CHECK-NEXT: blasStatus = rocblas_drotm_64(blasHandle, n_64, &dx, incx_64, &dy, incy_64, &dparam);
   blasStatus = cublasDrotm_64(blasHandle, n_64, &dx, incx_64, &dy, incy_64, &dparam);
   blasStatus = cublasDrotm_v2_64(blasHandle, n_64, &dx, incx_64, &dy, incy_64, &dparam);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasSscal_v2_64(cublasHandle_t handle, int64_t n, const float* alpha, float* x, int64_t incx);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_sscal_64(rocblas_handle handle, int64_t n, const float* alpha, float* x, int64_t incx);
+  // CHECK: blasStatus = rocblas_sscal_64(blasHandle, n_64, &fa, &fx, incx_64);
+  // CHECK-NEXT: blasStatus = rocblas_sscal_64(blasHandle, n_64, &fa, &fx, incx_64);
+  blasStatus = cublasSscal_64(blasHandle, n_64, &fa, &fx, incx_64);
+  blasStatus = cublasSscal_v2_64(blasHandle, n_64, &fa, &fx, incx_64);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasDscal_v2_64(cublasHandle_t handle, int64_t n, const double* alpha, double* x, int64_t incx);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_dscal_64(rocblas_handle handle, int64_t n, const double* alpha, double* x, int64_t incx);
+  // CHECK: blasStatus = rocblas_dscal_64(blasHandle, n_64, &da, &dx, incx_64);
+  // CHECK-NEXT: blasStatus = rocblas_dscal_64(blasHandle, n_64, &da, &dx, incx_64);
+  blasStatus = cublasDscal_64(blasHandle, n_64, &da, &dx, incx_64);
+  blasStatus = cublasDscal_v2_64(blasHandle, n_64, &da, &dx, incx_64);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasCscal_v2_64(cublasHandle_t handle, int64_t n, const cuComplex* alpha, cuComplex* x, int64_t incx);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_cscal_64(rocblas_handle handle, int64_t n, const rocblas_float_complex* alpha, rocblas_float_complex* x, int64_t incx);
+  // CHECK: blasStatus = rocblas_cscal_64(blasHandle, n_64, &complexa, &complexx, incx_64);
+  // CHECK-NEXT: blasStatus = rocblas_cscal_64(blasHandle, n_64, &complexa, &complexx, incx_64);
+  blasStatus = cublasCscal_64(blasHandle, n_64, &complexa, &complexx, incx_64);
+  blasStatus = cublasCscal_v2_64(blasHandle, n_64, &complexa, &complexx, incx_64);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasCsscal_v2_64(cublasHandle_t handle, int64_t n, const float* alpha, cuComplex* x, int64_t incx);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_csscal_64(rocblas_handle handle, int64_t n, const float* alpha, rocblas_float_complex* x, int64_t incx);
+  // CHECK: blasStatus = rocblas_csscal_64(blasHandle, n_64, &fa, &complexx, incx_64);
+  // CHECK-NEXT: blasStatus = rocblas_csscal_64(blasHandle, n_64, &fa, &complexx, incx_64);
+  blasStatus = cublasCsscal_64(blasHandle, n_64, &fa, &complexx, incx_64);
+  blasStatus = cublasCsscal_v2_64(blasHandle, n_64, &fa, &complexx, incx_64);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasZscal_v2_64(cublasHandle_t handle, int64_t n, const cuDoubleComplex* alpha, cuDoubleComplex* x, int64_t incx);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_zscal_64(rocblas_handle handle, int64_t n, const rocblas_double_complex* alpha, rocblas_double_complex* x, int64_t incx);
+  // CHECK: blasStatus = rocblas_zscal_64(blasHandle, n_64, &dcomplexa, &dcomplexx, incx_64);
+  // CHECK-NEXT: blasStatus = rocblas_zscal_64(blasHandle, n_64, &dcomplexa, &dcomplexx, incx_64);
+  blasStatus = cublasZscal_64(blasHandle, n_64, &dcomplexa, &dcomplexx, incx_64);
+  blasStatus = cublasZscal_v2_64(blasHandle, n_64, &dcomplexa, &dcomplexx, incx_64);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasZdscal_v2_64(cublasHandle_t handle, int64_t n, const double* alpha, cuDoubleComplex* x, int64_t incx);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_zdscal_64(rocblas_handle handle, int64_t n, const double* alpha, rocblas_double_complex* x, int64_t incx);
+  // CHECK: blasStatus = rocblas_zdscal_64(blasHandle, n_64, &da, &dcomplexx, incx_64);
+  // CHECK-NEXT: blasStatus = rocblas_zdscal_64(blasHandle, n_64, &da, &dcomplexx, incx_64);
+  blasStatus = cublasZdscal_64(blasHandle, n_64, &da, &dcomplexx, incx_64);
+  blasStatus = cublasZdscal_v2_64(blasHandle, n_64, &da, &dcomplexx, incx_64);
 #endif
 
   return 0;
