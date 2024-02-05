@@ -116,17 +116,17 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
   // SCAL
   // SCAL functions' signatures differ from _v2 ones, hipblas and rocblas SCAL functions have mapping to SCAL_v2 functions only
   {"cublasSscal",                    {"hipblasSscal",                    "rocblas_sscal",                            CONV_LIB_FUNC, API_BLAS, 5, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasSscal_64",                 {"hipblasSscal_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 5, UNSUPPORTED}},
+  {"cublasSscal_64",                 {"hipblasSscal_64",                 "rocblas_sscal_64",                         CONV_LIB_FUNC, API_BLAS, 5}},
   {"cublasDscal",                    {"hipblasDscal",                    "rocblas_dscal",                            CONV_LIB_FUNC, API_BLAS, 5, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasDscal_64",                 {"hipblasDscal_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 5, UNSUPPORTED}},
+  {"cublasDscal_64",                 {"hipblasDscal_64",                 "rocblas_dscal_64",                         CONV_LIB_FUNC, API_BLAS, 5}},
   {"cublasCscal",                    {"hipblasCscal_v2",                 "rocblas_cscal",                            CONV_LIB_FUNC, API_BLAS, 5, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasCscal_64",                 {"hipblasCscal_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 5, UNSUPPORTED}},
+  {"cublasCscal_64",                 {"hipblasCscal_v2_64",              "rocblas_cscal_64",                         CONV_LIB_FUNC, API_BLAS, 5}},
   {"cublasCsscal",                   {"hipblasCsscal_v2",                "rocblas_csscal",                           CONV_LIB_FUNC, API_BLAS, 5, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasCsscal_64",                {"hipblasCsscal_64",                "",                                         CONV_LIB_FUNC, API_BLAS, 5, UNSUPPORTED}},
+  {"cublasCsscal_64",                {"hipblasCsscal_v2_64",             "rocblas_csscal_64",                        CONV_LIB_FUNC, API_BLAS, 5}},
   {"cublasZscal",                    {"hipblasZscal_v2",                 "rocblas_zscal",                            CONV_LIB_FUNC, API_BLAS, 5, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasZscal_64",                 {"hipblasZscal_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 5, UNSUPPORTED}},
+  {"cublasZscal_64",                 {"hipblasZscal_v2_64",              "rocblas_zscal_64",                         CONV_LIB_FUNC, API_BLAS, 5}},
   {"cublasZdscal",                   {"hipblasZdscal_v2",                "rocblas_zdscal",                           CONV_LIB_FUNC, API_BLAS, 5, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasZdscal_64",                {"hipblasZdscal_64",                "",                                         CONV_LIB_FUNC, API_BLAS, 5, UNSUPPORTED}},
+  {"cublasZdscal_64",                {"hipblasZdscal_v2_64",             "rocblas_zdscal_64",                        CONV_LIB_FUNC, API_BLAS, 5}},
 
   // AXPY
   {"cublasSaxpy",                    {"hipblasSaxpy",                    "rocblas_saxpy",                            CONV_LIB_FUNC, API_BLAS, 5, HIP_SUPPORTED_V2_ONLY}},
@@ -952,17 +952,17 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
   {"cublasScalEx",                   {"hipblasScalEx_v2",                "rocblas_scal_ex",                          CONV_LIB_FUNC, API_BLAS, 8}},
   {"cublasScalEx_64",                {"hipblasScalEx_64",                "",                                         CONV_LIB_FUNC, API_BLAS, 8, UNSUPPORTED}},
   {"cublasSscal_v2",                 {"hipblasSscal",                    "rocblas_sscal",                            CONV_LIB_FUNC, API_BLAS, 5}},
-  {"cublasSscal_v2_64",              {"hipblasSscal_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 5, UNSUPPORTED}},
+  {"cublasSscal_v2_64",              {"hipblasSscal_64",                 "rocblas_sscal_64",                         CONV_LIB_FUNC, API_BLAS, 5}},
   {"cublasDscal_v2",                 {"hipblasDscal",                    "rocblas_dscal",                            CONV_LIB_FUNC, API_BLAS, 5}},
-  {"cublasDscal_v2_64",              {"hipblasDscal_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 5, UNSUPPORTED}},
+  {"cublasDscal_v2_64",              {"hipblasDscal_64",                 "rocblas_dscal_64",                         CONV_LIB_FUNC, API_BLAS, 5}},
   {"cublasCscal_v2",                 {"hipblasCscal_v2",                 "rocblas_cscal",                            CONV_LIB_FUNC, API_BLAS, 5}},
-  {"cublasCscal_v2_64",              {"hipblasCscal_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 5, UNSUPPORTED}},
+  {"cublasCscal_v2_64",              {"hipblasCscal_v2_64",              "rocblas_cscal_64",                         CONV_LIB_FUNC, API_BLAS, 5}},
   {"cublasCsscal_v2",                {"hipblasCsscal_v2",                "rocblas_csscal",                           CONV_LIB_FUNC, API_BLAS, 5}},
-  {"cublasCsscal_v2_64",             {"hipblasCsscal_64",                "",                                         CONV_LIB_FUNC, API_BLAS, 5, UNSUPPORTED}},
+  {"cublasCsscal_v2_64",             {"hipblasCsscal_v2_64",             "rocblas_csscal_64",                        CONV_LIB_FUNC, API_BLAS, 5}},
   {"cublasZscal_v2",                 {"hipblasZscal_v2",                 "rocblas_zscal",                            CONV_LIB_FUNC, API_BLAS, 5}},
-  {"cublasZscal_v2_64",              {"hipblasZscal_64",                 "",                                         CONV_LIB_FUNC, API_BLAS, 5, UNSUPPORTED}},
+  {"cublasZscal_v2_64",              {"hipblasZscal_v2_64",              "rocblas_zscal_64",                         CONV_LIB_FUNC, API_BLAS, 5}},
   {"cublasZdscal_v2",                {"hipblasZdscal_v2",                "rocblas_zdscal",                           CONV_LIB_FUNC, API_BLAS, 5}},
-  {"cublasZdscal_v2_64",             {"hipblasZdscal_64",                "",                                         CONV_LIB_FUNC, API_BLAS, 5, UNSUPPORTED}},
+  {"cublasZdscal_v2_64",             {"hipblasZdscal_v2_64",             "rocblas_zdscal_64",                        CONV_LIB_FUNC, API_BLAS, 5}},
 
   // AXPY
   {"cublasAxpyEx",                   {"hipblasAxpyEx_v2",                "rocblas_axpy_ex",                          CONV_LIB_FUNC, API_BLAS, 8}},
@@ -1909,6 +1909,12 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_FUNCTION_VER_MAP {
   {"hipblasZdrot_v2_64",                         {HIP_6010, HIP_0,    HIP_0,  }},
   {"hipblasSrotm_64",                            {HIP_6010, HIP_0,    HIP_0,  }},
   {"hipblasDrotm_64",                            {HIP_6010, HIP_0,    HIP_0,  }},
+  {"hipblasSscal_64",                            {HIP_6010, HIP_0,    HIP_0,  }},
+  {"hipblasDscal_64",                            {HIP_6010, HIP_0,    HIP_0,  }},
+  {"hipblasCscal_v2_64",                         {HIP_6010, HIP_0,    HIP_0,  }},
+  {"hipblasCsscal_v2_64",                        {HIP_6010, HIP_0,    HIP_0,  }},
+  {"hipblasZscal_v2_64",                         {HIP_6010, HIP_0,    HIP_0,  }},
+  {"hipblasZdscal_v2_64",                        {HIP_6010, HIP_0,    HIP_0,  }},
 
   {"rocblas_status_to_string",                   {HIP_3050, HIP_0,    HIP_0   }},
   {"rocblas_sscal",                              {HIP_1050, HIP_0,    HIP_0   }},
@@ -2183,6 +2189,12 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_FUNCTION_VER_MAP {
   {"rocblas_zdrot_64",                           {HIP_6010, HIP_0,    HIP_0,  }},
   {"rocblas_srotm_64",                           {HIP_6010, HIP_0,    HIP_0,  }},
   {"rocblas_drotm_64",                           {HIP_6010, HIP_0,    HIP_0,  }},
+  {"rocblas_sscal_64",                           {HIP_6010, HIP_0,    HIP_0,  }},
+  {"rocblas_dscal_64",                           {HIP_6010, HIP_0,    HIP_0,  }},
+  {"rocblas_cscal_64",                           {HIP_6010, HIP_0,    HIP_0,  }},
+  {"rocblas_csscal_64",                          {HIP_6010, HIP_0,    HIP_0,  }},
+  {"rocblas_zscal_64",                           {HIP_6010, HIP_0,    HIP_0,  }},
+  {"rocblas_zdscal_64",                          {HIP_6010, HIP_0,    HIP_0,  }},
 };
 
 const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_BLAS_FUNCTION_CHANGED_VER_MAP {
