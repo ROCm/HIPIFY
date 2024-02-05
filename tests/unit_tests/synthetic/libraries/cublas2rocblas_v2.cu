@@ -162,8 +162,12 @@ int main() {
   int kl = 0;
   int ku = 0;
   int batchCount = 0;
-  void* image = nullptr;
-  void* image_2 = nullptr;
+  void *image = nullptr;
+  void *image_2 = nullptr;
+  void *valpha = nullptr;
+  void *vx = nullptr;
+  void *vy = nullptr;
+  void *vresult = nullptr;
 
   // https://github.com/ROCmSoftwarePlatform/rocBLAS/issues/1281
   // TODO: Apply the chosen typecasting of int to rocblas_int arguments
@@ -1767,8 +1771,8 @@ int main() {
   cublasDataType_t R_32U = CUDA_R_32U;
   cublasDataType_t C_32U = CUDA_C_32U;
 
-  // CHECK: rocblas_datatype DataType_2, DataType_3;
-  cudaDataType DataType_2, DataType_3;
+  // CHECK: rocblas_datatype DataType_2, DataType_3, alpha_type, x_type, y_type, execution_type, result_type;
+  cudaDataType DataType_2, DataType_3, alpha_type, x_type, y_type, execution_type, result_type;
 
   // CHECK: rocblas_gemm_algo blasGemmAlgo;
   // CHECK-NEXT: rocblas_gemm_algo BLAS_GEMM_DFALT = rocblas_gemm_algo_standard;
@@ -2261,6 +2265,21 @@ int main() {
   // CHECK-NEXT: blasStatus = rocblas_zswap_64(blasHandle, n_64, &dcomplexx, incx_64, &dcomplexy, incy_64);
   blasStatus = cublasZswap_64(blasHandle, n_64, &dcomplexx, incx_64, &dcomplexy, incy_64);
   blasStatus = cublasZswap_v2_64(blasHandle, n_64, &dcomplexx, incx_64, &dcomplexy, incy_64);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasAxpyEx_64(cublasHandle_t handle, int64_t n, const void* alpha, cudaDataType alphaType, const void* x, cudaDataType xType, int64_t incx, void* y, cudaDataType yType, int64_t incy, cudaDataType executiontype);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_axpy_ex_64(rocblas_handle handle, int64_t n, const void* alpha, rocblas_datatype alpha_type, const void* x, rocblas_datatype x_type, int64_t incx, void* y, rocblas_datatype y_type, int64_t incy, rocblas_datatype execution_type);
+  // CHECK: blasStatus = rocblas_axpy_ex_64(blasHandle, n_64, valpha, alpha_type, vx, x_type, incx_64, vy, y_type, incy_64, execution_type);
+  blasStatus = cublasAxpyEx_64(blasHandle, n_64, valpha, alpha_type, vx, x_type, incx_64, vy, y_type, incy_64, execution_type);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasDotEx_64(cublasHandle_t handle, int64_t n, const void* x, cudaDataType xType, int64_t incx, const void* y, cudaDataType yType, int64_t incy, void* result, cudaDataType resultType, cudaDataType executionType);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_dot_ex_64(rocblas_handle handle, int64_t n, const void* x, rocblas_datatype x_type, int64_t incx, const void* y, rocblas_datatype y_type, int64_t incy, void* result, rocblas_datatype result_type, rocblas_datatype execution_type);
+  // CHECK: blasStatus = rocblas_dot_ex_64(blasHandle, n_64, vx, x_type, incx_64, vy, y_type, incy_64, vresult, result_type, execution_type);
+  blasStatus = cublasDotEx_64(blasHandle, n_64, vx, x_type, incx_64, vy, y_type, incy_64, vresult, result_type, execution_type);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasDotcEx_64(cublasHandle_t handle, int64_t n, const void* x, cudaDataType xType, int64_t incx, const void* y, cudaDataType yType, int64_t incy, void* result, cudaDataType resultType, cudaDataType executionType);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_dotc_ex_64(rocblas_handle handle, int64_t n, const void* x, rocblas_datatype x_type, int64_t incx, const void* y, rocblas_datatype y_type, int64_t incy, void* result, rocblas_datatype result_type, rocblas_datatype execution_type);
+  // CHECK: blasStatus = rocblas_dotc_ex_64(blasHandle, n_64, vx, x_type, incx_64, vy, y_type, incy_64, vresult, result_type, execution_type);
+  blasStatus = cublasDotcEx_64(blasHandle, n_64, vx, x_type, incx_64, vy, y_type, incy_64, vresult, result_type, execution_type);
 #endif
 
   return 0;
