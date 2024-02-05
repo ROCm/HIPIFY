@@ -238,9 +238,9 @@
 |`cublasCsscal_v2`| | | | |`rocblas_csscal`|3.5.0| | | | |
 |`cublasCsscal_v2_64`|12.0| | | |`rocblas_csscal_64`|6.1.0| | | | |
 |`cublasCswap`| | | | |`rocblas_cswap`|1.5.0| | | | |
-|`cublasCswap_64`|12.0| | | | | | | | | |
+|`cublasCswap_64`|12.0| | | |`rocblas_cswap_64`|6.1.0| | | | |
 |`cublasCswap_v2`| | | | |`rocblas_cswap`|1.5.0| | | | |
-|`cublasCswap_v2_64`|12.0| | | | | | | | | |
+|`cublasCswap_v2_64`|12.0| | | |`rocblas_cswap_64`|6.1.0| | | | |
 |`cublasDasum`| | | | |`rocblas_dasum`|1.5.0| | | | |
 |`cublasDasum_64`|12.0| | | |`rocblas_dasum_64`|6.1.0| | | | |
 |`cublasDasum_v2`| | | | |`rocblas_dasum`|1.5.0| | | | |
@@ -278,9 +278,9 @@
 |`cublasDscal_v2`| | | | |`rocblas_dscal`|1.5.0| | | | |
 |`cublasDscal_v2_64`|12.0| | | |`rocblas_dscal_64`|6.1.0| | | | |
 |`cublasDswap`| | | | |`rocblas_dswap`|1.5.0| | | | |
-|`cublasDswap_64`|12.0| | | | | | | | | |
+|`cublasDswap_64`|12.0| | | |`rocblas_dswap_64`|6.1.0| | | | |
 |`cublasDswap_v2`| | | | |`rocblas_dswap`|1.5.0| | | | |
-|`cublasDswap_v2_64`|12.0| | | | | | | | | |
+|`cublasDswap_v2_64`|12.0| | | |`rocblas_dswap_64`|6.1.0| | | | |
 |`cublasDzasum`| | | | |`rocblas_dzasum`|1.5.0| | | | |
 |`cublasDzasum_64`|12.0| | | |`rocblas_dzasum_64`|6.1.0| | | | |
 |`cublasDzasum_v2`| | | | |`rocblas_dzasum`|1.5.0| | | | |
@@ -368,9 +368,9 @@
 |`cublasSscal_v2`| | | | |`rocblas_sscal`|1.5.0| | | | |
 |`cublasSscal_v2_64`|12.0| | | |`rocblas_sscal_64`|6.1.0| | | | |
 |`cublasSswap`| | | | |`rocblas_sswap`|1.5.0| | | | |
-|`cublasSswap_64`|12.0| | | | | | | | | |
+|`cublasSswap_64`|12.0| | | |`rocblas_sswap_64`|6.1.0| | | | |
 |`cublasSswap_v2`| | | | |`rocblas_sswap`|1.5.0| | | | |
-|`cublasSswap_v2_64`|12.0| | | | | | | | | |
+|`cublasSswap_v2_64`|12.0| | | |`rocblas_sswap_64`|6.1.0| | | | |
 |`cublasZaxpy`| | | | |`rocblas_zaxpy`|1.5.0| | | | |
 |`cublasZaxpy_64`|12.0| | | |`rocblas_zaxpy_64`|6.1.0| | | | |
 |`cublasZaxpy_v2`| | | | |`rocblas_zaxpy`|1.5.0| | | | |
@@ -406,9 +406,9 @@
 |`cublasZscal_v2`| | | | |`rocblas_zscal`|1.5.0| | | | |
 |`cublasZscal_v2_64`|12.0| | | |`rocblas_zscal_64`|6.1.0| | | | |
 |`cublasZswap`| | | | |`rocblas_zswap`|1.5.0| | | | |
-|`cublasZswap_64`|12.0| | | | | | | | | |
+|`cublasZswap_64`|12.0| | | |`rocblas_zswap_64`|6.1.0| | | | |
 |`cublasZswap_v2`| | | | |`rocblas_zswap`|1.5.0| | | | |
-|`cublasZswap_v2_64`|12.0| | | | | | | | | |
+|`cublasZswap_v2_64`|12.0| | | |`rocblas_zswap_64`|6.1.0| | | | |
 
 ## **6. CUBLAS Level-2 Function Reference**
 
