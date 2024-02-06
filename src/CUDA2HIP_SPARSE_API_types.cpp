@@ -336,7 +336,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SPARSE_TYPE_NAME_VER_MAP {
   {"cusparseIndexType_t",                       {CUDA_101, CUDA_0,   CUDA_0  }},
   {"CUSPARSE_INDEX_16U",                        {CUDA_101, CUDA_0,   CUDA_0  }},
   {"CUSPARSE_INDEX_32I",                        {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"CUSPARSE_INDEX_64I",                        {CUDA_102, CUDA_0,   CUDA_0  }},
+  {"CUSPARSE_INDEX_64I",                        {CUDA_101, CUDA_0,   CUDA_0  }}, // CUSPARSE_VERSION 10200
   {"cusparseSpGEMMAlg_t",                       {CUDA_110, CUDA_0,   CUDA_0  }},
   {"CUSPARSE_SPGEMM_DEFAULT",                   {CUDA_110, CUDA_0,   CUDA_0  }},
   {"cusparseSpGEMMDescr",                       {CUDA_110, CUDA_0,   CUDA_0  }},
