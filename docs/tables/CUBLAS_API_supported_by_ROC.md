@@ -322,7 +322,7 @@
 |`cublasIzamin_v2`| | | | |`rocblas_izamin`|3.5.0| | | | |
 |`cublasIzamin_v2_64`|12.0| | | |`rocblas_izamin_64`|6.1.0| | | | |
 |`cublasNrm2Ex`|8.0| | | |`rocblas_nrm2_ex`|4.1.0| | | | |
-|`cublasNrm2Ex_64`|12.0| | | | | | | | | |
+|`cublasNrm2Ex_64`|12.0| | | |`rocblas_nrm2_ex_64`|6.1.0| | | | |
 |`cublasSasum`| | | | |`rocblas_sasum`|1.5.0| | | | |
 |`cublasSasum_64`|12.0| | | |`rocblas_sasum_64`|6.1.0| | | | |
 |`cublasSasum_v2`| | | | |`rocblas_sasum`|1.5.0| | | | |
@@ -967,13 +967,13 @@
 |`cublasIaminEx`|10.1| | | | | | | | | |
 |`cublasIaminEx_64`|12.0| | | | | | | | | |
 |`cublasRotEx`|10.1| | | |`rocblas_rot_ex`|4.1.0| | | | |
-|`cublasRotEx_64`|12.0| | | | | | | | | |
+|`cublasRotEx_64`|12.0| | | |`rocblas_rot_ex_64`|6.1.0| | | | |
 |`cublasRotgEx`|10.1| | | | | | | | | |
 |`cublasRotmEx`|10.1| | | | | | | | | |
 |`cublasRotmEx_64`|12.0| | | | | | | | | |
 |`cublasRotmgEx`|10.1| | | | | | | | | |
 |`cublasScalEx`|8.0| | | |`rocblas_scal_ex`|4.0.0| | | | |
-|`cublasScalEx_64`|12.0| | | | | | | | | |
+|`cublasScalEx_64`|12.0| | | |`rocblas_scal_ex_64`|6.1.0| | | | |
 |`cublasSdgmm`| | | | |`rocblas_sdgmm`|3.5.0| | | | |
 |`cublasSdgmm_64`|12.0| | | | | | | | | |
 |`cublasSgeam`| | | | |`rocblas_sgeam`|1.6.4| | | | |
