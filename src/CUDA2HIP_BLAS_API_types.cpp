@@ -73,12 +73,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP {
   {"CUBLAS_ATOMICS_ALLOWED",         {"HIPBLAS_ATOMICS_ALLOWED",         "rocblas_atomics_allowed",               CONV_NUMERIC_LITERAL, API_BLAS, 2}},
 
   // Blas Math mode/tensor operation
-  {"cublasMath_t",                                     {"hipblasMath_t",                                     "rocblas_math_mode",         CONV_TYPE, API_BLAS, 2}},
-  {"CUBLAS_DEFAULT_MATH",                              {"HIPBLAS_DEFAULT_MATH",                              "rocblas_default_math",      CONV_NUMERIC_LITERAL, API_BLAS, 2}}, // 0
-  {"CUBLAS_TENSOR_OP_MATH",                            {"HIPBLAS_TENSOR_OP_MATH",                            "",                          CONV_NUMERIC_LITERAL, API_BLAS, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED}}, // 1
-  {"CUBLAS_PEDANTIC_MATH",                             {"HIPBLAS_PEDANTIC_MATH",                             "",                          CONV_NUMERIC_LITERAL, API_BLAS, 2, ROC_UNSUPPORTED}}, // 2
-  {"CUBLAS_TF32_TENSOR_OP_MATH",                       {"HIPBLAS_TF32_TENSOR_OP_MATH",                       "",                          CONV_NUMERIC_LITERAL, API_BLAS, 2, ROC_UNSUPPORTED}}, // 3
-  {"CUBLAS_MATH_DISALLOW_REDUCED_PRECISION_REDUCTION", {"HIPBLAS_MATH_DISALLOW_REDUCED_PRECISION_REDUCTION", "",                          CONV_NUMERIC_LITERAL, API_BLAS, 2, ROC_UNSUPPORTED}}, // 16
+  {"cublasMath_t",                                     {"hipblasMath_t",                                     "rocblas_math_mode",         CONV_TYPE, API_BLAS, 2, HIP_EXPERIMENTAL}},
+  {"CUBLAS_DEFAULT_MATH",                              {"HIPBLAS_DEFAULT_MATH",                              "rocblas_default_math",      CONV_NUMERIC_LITERAL, API_BLAS, 2, HIP_EXPERIMENTAL}}, // 0
+  {"CUBLAS_TENSOR_OP_MATH",                            {"HIPBLAS_TENSOR_OP_MATH",                            "",                          CONV_NUMERIC_LITERAL, API_BLAS, 2, HIP_EXPERIMENTAL | ROC_UNSUPPORTED | CUDA_DEPRECATED}}, // 1
+  {"CUBLAS_PEDANTIC_MATH",                             {"HIPBLAS_PEDANTIC_MATH",                             "",                          CONV_NUMERIC_LITERAL, API_BLAS, 2, HIP_EXPERIMENTAL | ROC_UNSUPPORTED}}, // 2
+  {"CUBLAS_TF32_TENSOR_OP_MATH",                       {"HIPBLAS_TF32_TENSOR_OP_MATH",                       "",                          CONV_NUMERIC_LITERAL, API_BLAS, 2, HIP_EXPERIMENTAL | ROC_UNSUPPORTED}}, // 3
+  {"CUBLAS_MATH_DISALLOW_REDUCED_PRECISION_REDUCTION", {"HIPBLAS_MATH_DISALLOW_REDUCED_PRECISION_REDUCTION", "",                          CONV_NUMERIC_LITERAL, API_BLAS, 2, HIP_EXPERIMENTAL | ROC_UNSUPPORTED}}, // 16
 
   // Blass different GEMM algorithms
   {"cublasGemmAlgo_t",               {"hipblasGemmAlgo_t",               "rocblas_gemm_algo",                     CONV_TYPE, API_BLAS, 2}},
@@ -363,12 +363,12 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_TYPE_NAME_VER_MAP {
   {"HIPBLAS_COMPUTE_64F_PEDANTIC",                     {HIP_6000, HIP_0,    HIP_0,  }},
   {"HIPBLAS_COMPUTE_32I",                              {HIP_6000, HIP_0,    HIP_0,  }},
   {"HIPBLAS_COMPUTE_32I_PEDANTIC",                     {HIP_6000, HIP_0,    HIP_0,  }},
-  {"hipblasMath_t",                                    {HIP_6010, HIP_0,    HIP_0,  }},
-  {"HIPBLAS_DEFAULT_MATH",                             {HIP_6010, HIP_0,    HIP_0,  }},
-  {"HIPBLAS_TENSOR_OP_MATH",                           {HIP_6010, HIP_0,    HIP_0,  }},
-  {"HIPBLAS_PEDANTIC_MATH",                            {HIP_6010, HIP_0,    HIP_0,  }},
-  {"HIPBLAS_TF32_TENSOR_OP_MATH",                      {HIP_6010, HIP_0,    HIP_0,  }},
-  {"HIPBLAS_MATH_DISALLOW_REDUCED_PRECISION_REDUCTION",{HIP_6010, HIP_0,    HIP_0,  }},
+  {"hipblasMath_t",                                    {HIP_6010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"HIPBLAS_DEFAULT_MATH",                             {HIP_6010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"HIPBLAS_TENSOR_OP_MATH",                           {HIP_6010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"HIPBLAS_PEDANTIC_MATH",                            {HIP_6010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"HIPBLAS_TF32_TENSOR_OP_MATH",                      {HIP_6010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"HIPBLAS_MATH_DISALLOW_REDUCED_PRECISION_REDUCTION",{HIP_6010, HIP_0,    HIP_0,  HIP_LATEST}},
 
   {"rocblas_handle",                                   {HIP_1050, HIP_0,    HIP_0   }},
   {"_rocblas_handle",                                  {HIP_1050, HIP_0,    HIP_0   }},
