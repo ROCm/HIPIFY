@@ -1502,7 +1502,9 @@ sub rocSubstitutions {
     subst("cublasIzamin_v2", "rocblas_izamin", "library");
     subst("cublasIzamin_v2_64", "rocblas_izamin_64", "library");
     subst("cublasNrm2Ex", "rocblas_nrm2_ex", "library");
+    subst("cublasNrm2Ex_64", "rocblas_nrm2_ex_64", "library");
     subst("cublasRotEx", "rocblas_rot_ex", "library");
+    subst("cublasRotEx_64", "rocblas_rot_ex_64", "library");
     subst("cublasSasum", "rocblas_sasum", "library");
     subst("cublasSasum_64", "rocblas_sasum_64", "library");
     subst("cublasSasum_v2", "rocblas_sasum", "library");
@@ -1512,6 +1514,7 @@ sub rocSubstitutions {
     subst("cublasSaxpy_v2", "rocblas_saxpy", "library");
     subst("cublasSaxpy_v2_64", "rocblas_saxpy_64", "library");
     subst("cublasScalEx", "rocblas_scal_ex", "library");
+    subst("cublasScalEx_64", "rocblas_scal_ex_64", "library");
     subst("cublasScasum", "rocblas_scasum", "library");
     subst("cublasScasum_64", "rocblas_scasum_64", "library");
     subst("cublasScasum_v2", "rocblas_scasum", "library");
@@ -11150,13 +11153,10 @@ sub warnRocOnlyUnsupportedFunctions {
         "cublasSetLoggerCallback",
         "cublasSetKernelStream",
         "cublasSdgmm_64",
-        "cublasScalEx_64",
         "cublasRotmgEx",
         "cublasRotmEx_64",
         "cublasRotmEx",
         "cublasRotgEx",
-        "cublasRotEx_64",
-        "cublasNrm2Ex_64",
         "cublasMigrateComputeType",
         "cublasLoggerConfigure",
         "cublasLogCallback",
