@@ -41,7 +41,7 @@
 |`CUSPARSE_HYB_PARTITION_USER`| |10.2| |11.0|`rocsparse_hyb_partition_user`|1.9.0| | | | |
 |`CUSPARSE_INDEX_16U`|10.1| | | |`rocsparse_indextype_u16`|4.1.0| | | | |
 |`CUSPARSE_INDEX_32I`|10.1| | | |`rocsparse_indextype_i32`|4.1.0| | | | |
-|`CUSPARSE_INDEX_64I`|10.2| | | |`rocsparse_indextype_i64`|4.1.0| | | | |
+|`CUSPARSE_INDEX_64I`|10.1| | | |`rocsparse_indextype_i64`|4.1.0| | | | |
 |`CUSPARSE_INDEX_BASE_ONE`| | | | |`rocsparse_index_base_one`|1.9.0| | | | |
 |`CUSPARSE_INDEX_BASE_ZERO`| | | | |`rocsparse_index_base_zero`|1.9.0| | | | |
 |`CUSPARSE_MATRIX_TYPE_GENERAL`| | | | |`rocsparse_matrix_type_general`|1.9.0| | | | |
@@ -456,7 +456,7 @@
 |`cusparseScsrgemm`| |10.2| |11.0| | | | | | |
 |`cusparseScsrgemm2`| |11.0| |12.0|`rocsparse_scsrgemm`|2.8.0| | | | |
 |`cusparseScsrgemm2_bufferSizeExt`| |11.0| |12.0|`rocsparse_scsrgemm_buffer_size`|2.8.0| | | | |
-|`cusparseXcsrgeam2Nnz`|10.0| | | | | | | | | |
+|`cusparseXcsrgeam2Nnz`|10.0| | | |`rocsparse_csrgeam_nnz`|3.5.0| | | | |
 |`cusparseXcsrgeamNnz`| |10.2| |11.0|`rocsparse_csrgeam_nnz`|3.5.0| | | | |
 |`cusparseXcsrgemm2Nnz`| |11.0| |12.0|`rocsparse_csrgemm_nnz`|2.8.0| | | | |
 |`cusparseXcsrgemmNnz`| |10.2| |11.0| | | | | | |
