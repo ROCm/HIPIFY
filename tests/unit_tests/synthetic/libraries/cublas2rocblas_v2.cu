@@ -8,6 +8,11 @@
 #include "cublas_v2.h"
 // CHECK-NOT: #include "rocblas.h"
 
+#if defined(_WIN32) && CUDDA_VERSION < 9000
+  typedef signed   __int64 int64_t;
+  typedef unsigned __int64 uint64_t;
+#endif
+
 int main() {
   printf("16.v2. cuBLAS API to hipBLAS API synthetic test\n");
 
