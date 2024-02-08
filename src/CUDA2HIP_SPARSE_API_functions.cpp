@@ -840,7 +840,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   // NTOE: Additional calculations are needed after calling rocsparse_spsm
   {"cusparseSpSM_bufferSize",                           {"hipsparseSpSM_bufferSize",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
   {"cusparseSpSM_analysis",                             {"hipsparseSpSM_analysis",                             "rocsparse_spsm",                                                   CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseSpSM_solve",                                {"hipsparseSpSM_solve",                                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
+  {"cusparseSpSM_solve",                                {"hipsparseSpSM_solve",                                "rocsparse_spsm",                                                   CONV_LIB_FUNC, API_SPARSE, 15}},
 
   // Sparse Matrix Multiplication (SpGEMM) Structure Reuse
   {"cusparseSpGEMMreuse_workEstimation",                {"hipsparseSpGEMMreuse_workEstimation",                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},

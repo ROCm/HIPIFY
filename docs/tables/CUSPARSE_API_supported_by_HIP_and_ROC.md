@@ -897,7 +897,7 @@
 |`cusparseSpSM_bufferSize`|11.3| |12.0| |`hipsparseSpSM_bufferSize`|4.5.0| |6.0.0| | | | | | | | |
 |`cusparseSpSM_createDescr`|11.3| | | |`hipsparseSpSM_createDescr`|4.5.0| | | | | | | | | | |
 |`cusparseSpSM_destroyDescr`|11.3| | | |`hipsparseSpSM_destroyDescr`|4.5.0| | | | | | | | | | |
-|`cusparseSpSM_solve`|11.3| |12.0| |`hipsparseSpSM_solve`|4.5.0| |6.0.0| | | | | | | | |
+|`cusparseSpSM_solve`|11.3| |12.0| |`hipsparseSpSM_solve`|4.5.0| |6.0.0| | |`rocsparse_spsm`|4.5.0| |6.0.0| | |
 |`cusparseSpSV_analysis`|11.3| |12.0| |`hipsparseSpSV_analysis`|4.5.0| |6.0.0| | | | | | | | |
 |`cusparseSpSV_bufferSize`|11.3| |12.0| |`hipsparseSpSV_bufferSize`|4.5.0| |6.0.0| | | | | | | | |
 |`cusparseSpSV_createDescr`|11.3| | | |`hipsparseSpSV_createDescr`|4.5.0| | | | | | | | | | |
