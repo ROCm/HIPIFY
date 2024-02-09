@@ -487,8 +487,9 @@ namespace perl {
     set<string> ReinterpretFunctions1;
     set<string> RemoveArgFunctions3;
     for (auto f : FuncArgCasts) {
-      auto castStruct = f.second;
-      for (auto c : castStruct.castMap) {
+      auto castStructs = f.second;
+      for (auto cc : castStructs) {
+        for (auto c : cc.castMap) {
         switch (c.first) {
           case 0:
             switch (c.second.castType) {
@@ -531,6 +532,7 @@ namespace perl {
             break;
           default: break;
         }
+      }
       }
     }
     set<string>& funcSet = DeviceSymbolFunctions0;

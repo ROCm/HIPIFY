@@ -82,7 +82,7 @@ namespace hipify {
 }
 
 extern std::string getCastType(hipify::CastTypes c);
-extern std::map<std::string, hipify::ArgCastStruct> FuncArgCasts;
+extern std::map<std::string, std::vector<hipify::ArgCastStruct>> FuncArgCasts;
 
 extern std::map<std::string, hipify::FuncOverloadsStruct> FuncOverloads;
 
