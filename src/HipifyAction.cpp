@@ -3051,7 +3051,12 @@ public:
                           clang::OptionalFileEntryRef file,
 #endif
                           StringRef search_path, StringRef relative_path,
-                          const clang::Module *imported
+#if LLVM_VERSION_MAJOR < 19
+                          const clang::Module *SuggestedModule
+#else
+                          const clang::Module *SuggestedModule,
+                          bool ModuleImported
+#endif
 #if LLVM_VERSION_MAJOR > 6
                         , clang::SrcMgr::CharacteristicKind FileType
 #endif
@@ -3061,7 +3066,7 @@ public:
 #else
     auto f = &file->getFileEntry();
 #endif
-    hipifyAction.InclusionDirective(hash_loc, include_token, file_name, is_angled, filename_range, f, search_path, relative_path, imported);
+    hipifyAction.InclusionDirective(hash_loc, include_token, file_name, is_angled, filename_range, f, search_path, relative_path, SuggestedModule);
   }
 
   void PragmaDirective(clang::SourceLocation Loc, clang::PragmaIntroducerKind Introducer) override {
