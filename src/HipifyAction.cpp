@@ -212,6 +212,7 @@ const std::string sCusparseSpMM_bufferSize = "cusparseSpMM_bufferSize";
 const std::string sCusparseSpSM_analysis = "cusparseSpSM_analysis";
 const std::string sCusparseSpSM_solve = "cusparseSpSM_solve";
 const std::string sCusparseXcsrgeam2Nnz = "cusparseXcsrgeam2Nnz";
+const std::string sCudaMallocHost = "cudaMallocHost";
 
 // CUDA_OVERLOADED
 const std::string sCudaEventCreate = "cudaEventCreate";
@@ -269,6 +270,13 @@ std::map<std::string, hipify::FuncOverloadsStruct> FuncOverloads {
 };
 
 std::map<std::string, ArgCastStruct> FuncArgCasts {
+  {sCudaMallocHost,
+    {
+      {
+        {2, {e_add_const_argument, cw_None, "hipHostMallocDefault"}}
+      }
+    }
+  },
   {sCudaMemcpyToSymbol,
     {
       {
@@ -2574,7 +2582,8 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
             sCusparseSpMM_bufferSize,
             sCusparseSpSM_analysis,
             sCusparseSpSM_solve,
-            sCusparseXcsrgeam2Nnz
+            sCusparseXcsrgeam2Nnz,
+            sCudaMallocHost
           )
         )
       )
