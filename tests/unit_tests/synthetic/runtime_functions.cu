@@ -496,7 +496,7 @@ int main() {
 
   // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMallocHost(void **ptr, size_t size);
   // HIP: hipError_t hipHostMalloc(void** ptr, size_t size, unsigned int flags);
-  // CHECK: result = hipHostMalloc(&deviceptr, bytes);
+  // CHECK: result = hipHostMalloc(&deviceptr, bytes, hipHostMallocDefault);
   result = cudaMallocHost(&deviceptr, bytes);
 
   // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaMallocManaged(void **devPtr, size_t size, unsigned int flags = cudaMemAttachGlobal);
