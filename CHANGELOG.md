@@ -3,6 +3,22 @@
 Documentation for HIPIFY is available at
 [https://rocmdocs.amd.com/projects/HIPIFY/en/latest/](https://rocmdocs.amd.com/projects/HIPIFY/en/latest/).
 
+## HIPIFY for ROCm 6.1.0
+
+### Additions
+
+* CUDA 12.3.2 support
+* cuDNN 8.9.7 support
+* LLVM 17.0.6 support
+* Full `hipSOLVER` support
+* Full `rocSPARSE` support
+* New options:
+  * `--amap` to hipify as much as possible, ignoring '--default-preprocessor' behavior
+
+### Fixes
+
+* Do not rewrite tokens in code blocks skipped by Preprocessor (under the '--default-preprocessor' option)
+
 ## HIPIFY for ROCm 6.0.2
 
 ### Fixes
