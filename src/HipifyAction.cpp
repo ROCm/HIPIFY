@@ -210,7 +210,9 @@ const std::string sCusparseDenseToSparse_bufferSize = "cusparseDenseToSparse_buf
 const std::string sCusparseDenseToSparse_analysis = "cusparseDenseToSparse_analysis";
 const std::string sCusparseSpMM_bufferSize = "cusparseSpMM_bufferSize";
 const std::string sCusparseSpSM_analysis = "cusparseSpSM_analysis";
+const std::string sCusparseSpSM_solve = "cusparseSpSM_solve";
 const std::string sCusparseXcsrgeam2Nnz = "cusparseXcsrgeam2Nnz";
+const std::string sCudaMallocHost = "cudaMallocHost";
 
 // CUDA_OVERLOADED
 const std::string sCudaEventCreate = "cudaEventCreate";
@@ -267,1440 +269,1783 @@ std::map<std::string, hipify::FuncOverloadsStruct> FuncOverloads {
   },
 };
 
-std::map<std::string, ArgCastStruct> FuncArgCasts {
+std::map<std::string, std::vector<ArgCastStruct>> FuncArgCasts {
+  {sCudaMallocHost,
+    {
+      {
+        {
+          {2, {e_add_const_argument, cw_None, "hipHostMallocDefault"}}
+        }
+      }
+    }
+  },
   {sCudaMemcpyToSymbol,
     {
       {
-        {0, {e_HIP_SYMBOL, cw_None}}
+        {
+          {0, {e_HIP_SYMBOL, cw_None}}
+        }
       }
     }
   },
   {sCudaMemcpyToSymbolAsync,
     {
       {
-        {0, {e_HIP_SYMBOL, cw_None}}
+        {
+          {0, {e_HIP_SYMBOL, cw_None}}
+        }
       }
     }
   },
   {sCudaGetSymbolSize,
     {
       {
-        {1, {e_HIP_SYMBOL, cw_None}}
+        {
+          {1, {e_HIP_SYMBOL, cw_None}}
+        }
       }
     }
   },
   {sCudaGetSymbolAddress,
     {
       {
-        {1, {e_HIP_SYMBOL, cw_None}}
+        {
+          {1, {e_HIP_SYMBOL, cw_None}}
+        }
       }
     }
   },
   {sCudaMemcpyFromSymbol,
     {
       {
-        {1, {e_HIP_SYMBOL, cw_None}}
+        {
+          {1, {e_HIP_SYMBOL, cw_None}}
+        }
       }
     }
   },
   {sCudaMemcpyFromSymbolAsync,
     {
       {
-        {1, {e_HIP_SYMBOL, cw_None}}
+        {
+          {1, {e_HIP_SYMBOL, cw_None}}
+        }
       }
     }
   },
   {sCudaGraphAddMemcpyNodeToSymbol,
     {
       {
-        {4, {e_HIP_SYMBOL, cw_None}}
+        {
+          {4, {e_HIP_SYMBOL, cw_None}}
+        }
       }
     }
   },
   {sCudaGraphAddMemcpyNodeFromSymbol,
     {
       {
-        {5, {e_HIP_SYMBOL, cw_None}}
+        {
+          {5, {e_HIP_SYMBOL, cw_None}}
+        }
       }
     }
   },
   {sCudaGraphMemcpyNodeSetParamsToSymbol,
     {
       {
-        {1, {e_HIP_SYMBOL, cw_None}}
+        {
+          {1, {e_HIP_SYMBOL, cw_None}}
+        }
       }
     }
   },
   {sCudaGraphMemcpyNodeSetParamsFromSymbol,
     {
       {
-        {2, {e_HIP_SYMBOL, cw_None}}
+        {
+          {2, {e_HIP_SYMBOL, cw_None}}
+        }
       }
     }
   },
   {sCudaGraphExecMemcpyNodeSetParamsToSymbol,
     {
       {
-        {2, {e_HIP_SYMBOL, cw_None}}
+        {
+          {2, {e_HIP_SYMBOL, cw_None}}
+        }
       }
     }
   },
   {sCudaGraphExecMemcpyNodeSetParamsFromSymbol,
     {
       {
-        {3, {e_HIP_SYMBOL, cw_None}}
+        {
+          {3, {e_HIP_SYMBOL, cw_None}}
+        }
       }
     }
   },
   {sCudaGetTextureReference,
     {
       {
-        {1, {e_HIP_SYMBOL, cw_None}}
+        {
+          {1, {e_HIP_SYMBOL, cw_None}}
+        }
       }
     }
   },
   {sCuOccupancyMaxPotentialBlockSize,
     {
       {
-        {3, {e_remove_argument, cw_DataLoss}}
+        {
+          {3, {e_remove_argument, cw_DataLoss}}
+        }
       }
     }
   },
   {sCuOccupancyMaxPotentialBlockSizeWithFlags,
     {
       {
-        {3, {e_remove_argument, cw_DataLoss}}
+        {
+          {3, {e_remove_argument, cw_DataLoss}}
+        }
       }
     }
   },
   {sCudnnGetConvolutionForwardWorkspaceSize,
     {
       {
-        {1, {e_move_argument, cw_None, "", 2}},
-        {2, {e_move_argument, cw_None, "", 1}},
-        {5, {e_remove_argument, cw_None}}
-      },
-      true,
-      true
+        {
+          {1, {e_move_argument, cw_None, "", 2}},
+          {2, {e_move_argument, cw_None, "", 1}},
+          {5, {e_remove_argument, cw_None}}
+        },
+        true,
+        true
+      }
     }
   },
   {sCudnnGetConvolutionBackwardDataWorkspaceSize,
     {
       {
-        {1, {e_move_argument, cw_None, "", 2}},
-        {2, {e_move_argument, cw_None, "", 1}},
-        {5, {e_remove_argument, cw_None}}
-      },
-      true,
-      true
+        {
+          {1, {e_move_argument, cw_None, "", 2}},
+          {2, {e_move_argument, cw_None, "", 1}},
+          {5, {e_remove_argument, cw_None}}
+        },
+        true,
+        true
+      }
     }
   },
   {sCudnnFindConvolutionForwardAlgorithmEx,
     {
       {
-        {13, {e_add_const_argument, cw_None, "true"}}
-      },
-      true,
-      true
+        {
+          {13, {e_add_const_argument, cw_None, "true"}}
+        },
+        true,
+        true
+      }
     }
   },
   {sCudnnSetPooling2dDescriptor,
     {
       {
-        {2, {e_remove_argument, cw_None}}
-      },
-      true,
-      true
+        {
+          {2, {e_remove_argument, cw_None}}
+        },
+        true,
+        true
+      }
     }
   },
   {sCudnnGetPooling2dDescriptor,
     {
       {
-        {2, {e_remove_argument, cw_None}}
-      },
-      true,
-      true
+        {
+          {2, {e_remove_argument, cw_None}}
+        },
+        true,
+        true
+      }
     }
   },
   {sCudnnSetPoolingNdDescriptor,
     {
       {
-        {2, {e_remove_argument, cw_None}}
-      },
-      true,
-      true
+        {
+          {2, {e_remove_argument, cw_None}}
+        },
+        true,
+        true
+      }
     }
   },
   {sCudnnGetPoolingNdDescriptor,
     {
       {
-        {3, {e_remove_argument, cw_None}}
-      },
-      true,
-      true
+        {
+          {3, {e_remove_argument, cw_None}}
+        },
+        true,
+        true
+      }
     }
   },
   {sCudnnSetLRNDescriptor,
     {
       {
-        {1, {e_add_const_argument, cw_None, "miopenLRNCrossChannel"}}
-      },
-      true,
-      true
+        {
+          {1, {e_add_const_argument, cw_None, "miopenLRNCrossChannel"}}
+        },
+        true,
+        true
+      }
     }
   },
   {sCudnnGetRNNDescriptor_v6,
     {
       {
-        {0, {e_remove_argument, cw_None}}
-      },
-      true,
-      true
+        {
+          {0, {e_remove_argument, cw_None}}
+        },
+        true,
+        true
+      }
     }
   },
   {sCudnnSetRNNDescriptor_v6,
     {
       {
-        {0, {e_remove_argument, cw_None}}
-      },
-      true,
-      true
+        {
+          {0, {e_remove_argument, cw_None}}
+        },
+        true,
+        true
+      }
     }
   },
   {sCudnnSoftmaxForward,
     {
       {
-        {1, {e_move_argument, cw_None, "", 9, 2}},
-      },
-      true,
-      true
+        {
+          {1, {e_move_argument, cw_None, "", 9, 2}},
+        },
+        true,
+        true
+      }
     }
   },
   {sCudnnSoftmaxBackward,
     {
       {
-        {1, {e_move_argument, cw_None, "", 11, 2}},
-      },
-      true,
-      true
+        {
+          {1, {e_move_argument, cw_None, "", 11, 2}},
+        },
+        true,
+        true
+      }
     }
   },
   {sCudnnConvolutionForward,
     {
       {
-        {8, {e_move_argument, cw_None, "", 13, 2}},
-      },
-      true,
-      true
+        {
+          {8, {e_move_argument, cw_None, "", 13, 2}},
+        },
+        true,
+        true
+      }
     }
   },
   {sCudnnConvolutionBackwardData,
     {
       {
-        {2, {e_move_argument, cw_None, "", 4, 2}},
-        {4, {e_move_argument, cw_None, "", 2, 2}},
-        {8, {e_move_argument, cw_None, "", 13, 2}},
-      },
-      true,
-      true
+        {
+          {2, {e_move_argument, cw_None, "", 4, 2}},
+          {4, {e_move_argument, cw_None, "", 2, 2}},
+          {8, {e_move_argument, cw_None, "", 13, 2}},
+        },
+        true,
+        true
+      }
     }
   },
   {sCudnnRNNBackwardWeights,
     {
       {
-        {9, {e_move_argument, cw_None, "", 11, 2}},
-        {11, {e_move_argument, cw_None, "", 9, 2}},
-      },
-      true,
-      true
+        {
+          {9, {e_move_argument, cw_None, "", 11, 2}},
+          {11, {e_move_argument, cw_None, "", 9, 2}},
+        },
+        true,
+        true
+      }
     }
   },
   {sCusparseZgpsvInterleavedBatch,
     {
       {
-        {9, {e_add_var_argument, cw_None, "", 10}}
-      },
-      true,
-      false
+        {
+          {9, {e_add_var_argument, cw_None, "", 10}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseCgpsvInterleavedBatch,
     {
       {
-        {9, {e_add_var_argument, cw_None, "", 10}}
-      },
-      true,
-      false
+        {
+          {9, {e_add_var_argument, cw_None, "", 10}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseDgpsvInterleavedBatch,
     {
       {
-        {9, {e_add_var_argument, cw_None, "", 10}}
-      },
-      true,
-      false
+        {
+          {9, {e_add_var_argument, cw_None, "", 10}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseSgpsvInterleavedBatch,
     {
       {
-        {9, {e_add_var_argument, cw_None, "", 10}}
-      },
-      true,
-      false
+        {
+          {9, {e_add_var_argument, cw_None, "", 10}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseZgpsvInterleavedBatch_bufferSizeExt,
     {
       {
-        {9, {e_add_var_argument, cw_None, "", 10}}
-      },
-      true,
-      false
+        {
+          {9, {e_add_var_argument, cw_None, "", 10}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseCgpsvInterleavedBatch_bufferSizeExt,
     {
       {
-        {9, {e_add_var_argument, cw_None, "", 10}}
-      },
-      true,
-      false
+        {
+          {9, {e_add_var_argument, cw_None, "", 10}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseDgpsvInterleavedBatch_bufferSizeExt,
     {
       {
-        {9, {e_add_var_argument, cw_None, "", 10}}
-      },
-      true,
-      false
+        {
+          {9, {e_add_var_argument, cw_None, "", 10}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseSgpsvInterleavedBatch_bufferSizeExt,
     {
       {
-        {9, {e_add_var_argument, cw_None, "", 10}}
-      },
-      true,
-      false
+        {
+          {9, {e_add_var_argument, cw_None, "", 10}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseZgtsvInterleavedBatch,
     {
       {
-        {7, {e_add_var_argument, cw_None, "", 8}}
-      },
-      true,
-      false
+        {
+          {7, {e_add_var_argument, cw_None, "", 8}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseCgtsvInterleavedBatch,
     {
       {
-        {7, {e_add_var_argument, cw_None, "", 8}}
-      },
-      true,
-      false
+        {
+          {7, {e_add_var_argument, cw_None, "", 8}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseDgtsvInterleavedBatch,
     {
       {
-        {7, {e_add_var_argument, cw_None, "", 8}}
-      },
-      true,
-      false
+        {
+          {7, {e_add_var_argument, cw_None, "", 8}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseSgtsvInterleavedBatch,
     {
       {
-        {7, {e_add_var_argument, cw_None, "", 8}}
-      },
-      true,
-      false
+        {
+          {7, {e_add_var_argument, cw_None, "", 8}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseZgtsvInterleavedBatch_bufferSizeExt,
     {
       {
-        {7, {e_add_var_argument, cw_None, "", 8}}
-      },
-      true,
-      false
+        {
+          {7, {e_add_var_argument, cw_None, "", 8}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseCgtsvInterleavedBatch_bufferSizeExt,
     {
       {
-        {7, {e_add_var_argument, cw_None, "", 8}}
-      },
-      true,
-      false
+        {
+          {7, {e_add_var_argument, cw_None, "", 8}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseDgtsvInterleavedBatch_bufferSizeExt,
     {
       {
-        {7, {e_add_var_argument, cw_None, "", 8}}
-      },
-      true,
-      false
+        {
+          {7, {e_add_var_argument, cw_None, "", 8}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseSgtsvInterleavedBatch_bufferSizeExt,
     {
       {
-        {7, {e_add_var_argument, cw_None, "", 8}}
-      },
-      true,
-      false
+        {
+          {7, {e_add_var_argument, cw_None, "", 8}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseZcsrilu02,
     {
       {
-        {8, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {8, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseCcsrilu02,
     {
       {
-        {8, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {8, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseDcsrilu02,
     {
       {
-        {8, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {8, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseScsrilu02,
     {
       {
-        {8, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {8, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseZcsrilu02_analysis,
     {
       {
-        {8, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
-        {9, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {8, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+          {9, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseCcsrilu02_analysis,
     {
       {
-        {8, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
-        {9, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {8, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+          {9, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseDcsrilu02_analysis,
     {
       {
-        {8, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
-        {9, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {8, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+          {9, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseScsrilu02_analysis,
     {
       {
-        {8, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
-        {9, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {8, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+          {9, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseZcsric02_analysis,
     {
       {
-        {8, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
-        {9, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {8, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+          {9, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseCcsric02_analysis,
     {
       {
-        {8, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
-        {9, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {8, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+          {9, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseDcsric02_analysis,
     {
       {
-        {8, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
-        {9, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {8, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+          {9, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseScsric02_analysis,
     {
       {
-        {8, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
-        {9, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {8, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+          {9, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseZcsric02_bufferSize,
     {
       {
-        {8, {e_reinterpret_cast_size_t, cw_None}}
-      },
-      true,
-      false
+        {
+          {8, {e_reinterpret_cast_size_t, cw_None}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseCcsric02_bufferSize,
     {
       {
-        {8, {e_reinterpret_cast_size_t, cw_None}}
-      },
-      true,
-      false
+        {
+          {8, {e_reinterpret_cast_size_t, cw_None}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseDcsric02_bufferSize,
     {
       {
-        {8, {e_reinterpret_cast_size_t, cw_None}}
-      },
-      true,
-      false
+        {
+          {8, {e_reinterpret_cast_size_t, cw_None}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseScsric02_bufferSize,
     {
       {
-        {8, {e_reinterpret_cast_size_t, cw_None}}
-      },
-      true,
-      false
+        {
+          {8, {e_reinterpret_cast_size_t, cw_None}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseZbsrilu02,
     {
       {
-        {10, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {10, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseCbsrilu02,
     {
       {
-        {10, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {10, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseDbsrilu02,
     {
       {
-        {10, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {10, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseSbsrilu02,
     {
       {
-        {10, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {10, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseZbsrilu02_analysis,
     {
       {
-        {10, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
-        {11, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {10, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+          {11, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseCbsrilu02_analysis,
     {
       {
-        {10, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
-        {11, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {10, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+          {11, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseDbsrilu02_analysis,
     {
       {
-        {10, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
-        {11, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {10, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+          {11, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseSbsrilu02_analysis,
     {
       {
-        {10, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
-        {11, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {10, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+          {11, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseZbsric02,
     {
       {
-        {10, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {10, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseCbsric02,
     {
       {
-        {10, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {10, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseDbsric02,
     {
       {
-        {10, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {10, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseSbsric02,
     {
       {
-        {10, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {10, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseZbsric02_analysis,
     {
       {
-        {10, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
-        {11, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {10, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+          {11, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseCbsric02_analysis,
     {
       {
-        {10, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
-        {11, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {10, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+          {11, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseDbsric02_analysis,
     {
       {
-        {10, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
-        {11, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {10, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+          {11, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseSbsric02_analysis,
     {
       {
-        {10, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
-        {11, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {10, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+          {11, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseZbsric02_bufferSize,
     {
       {
-        {10, {e_reinterpret_cast_size_t, cw_None}}
-      },
-      true,
-      false
+        {
+          {10, {e_reinterpret_cast_size_t, cw_None}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseCbsric02_bufferSize,
     {
       {
-        {10, {e_reinterpret_cast_size_t, cw_None}}
-      },
-      true,
-      false
+        {
+          {10, {e_reinterpret_cast_size_t, cw_None}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseDbsric02_bufferSize,
     {
       {
-        {10, {e_reinterpret_cast_size_t, cw_None}}
-      },
-      true,
-      false
+        {
+          {10, {e_reinterpret_cast_size_t, cw_None}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseSbsric02_bufferSize,
     {
       {
-        {10, {e_reinterpret_cast_size_t, cw_None}}
-      },
-      true,
-      false
+        {
+          {10, {e_reinterpret_cast_size_t, cw_None}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseZbsrsm2_bufferSize,
     {
       {
-        {13, {e_reinterpret_cast_size_t, cw_None}}
-      },
-      true,
-      false
+        {
+          {13, {e_reinterpret_cast_size_t, cw_None}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseCbsrsm2_bufferSize,
     {
       {
-        {13, {e_reinterpret_cast_size_t, cw_None}}
-      },
-      true,
-      false
+        {
+          {13, {e_reinterpret_cast_size_t, cw_None}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseDbsrsm2_bufferSize,
     {
       {
-        {13, {e_reinterpret_cast_size_t, cw_None}}
-      },
-      true,
-      false
+        {
+          {13, {e_reinterpret_cast_size_t, cw_None}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseSbsrsm2_bufferSize,
     {
       {
-        {13, {e_reinterpret_cast_size_t, cw_None}}
-      },
-      true,
-      false
+        {
+          {13, {e_reinterpret_cast_size_t, cw_None}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseZcsrsm2_solve,
     {
       {
-        {15, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {15, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseCcsrsm2_solve,
     {
       {
-        {15, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {15, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseDcsrsm2_solve,
     {
       {
-        {15, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {15, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseScsrsm2_solve,
     {
       {
-        {15, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {15, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseZcsrsm2_analysis,
     {
       {
-        {15, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
-        {16, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {15, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+          {16, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseCcsrsm2_analysis,
     {
       {
-        {15, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
-        {16, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {15, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+          {16, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseDcsrsm2_analysis,
     {
       {
-        {15, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
-        {16, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {15, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+          {16, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseScsrsm2_analysis,
     {
       {
-        {15, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
-        {16, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {15, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+          {16, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseScsrsm2_bufferSizeExt,
     {
       {
-        {15, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {15, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseDcsrsm2_bufferSizeExt,
     {
       {
-        {15, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {15, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseCcsrsm2_bufferSizeExt,
     {
       {
-        {15, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {15, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseZcsrsm2_bufferSizeExt,
     {
       {
-        {15, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {15, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseZgemvi_bufferSize,
     {
       {
-        {5, {e_reinterpret_cast_size_t, cw_None}}
-      },
-      true,
-      false
+        {
+          {5, {e_reinterpret_cast_size_t, cw_None}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseCgemvi_bufferSize,
     {
       {
-        {5, {e_reinterpret_cast_size_t, cw_None}}
-      },
-      true,
-      false
+        {
+          {5, {e_reinterpret_cast_size_t, cw_None}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseDgemvi_bufferSize,
     {
       {
-        {5, {e_reinterpret_cast_size_t, cw_None}}
-      },
-      true,
-      false
+        {
+          {5, {e_reinterpret_cast_size_t, cw_None}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseSgemvi_bufferSize,
     {
       {
-        {5, {e_reinterpret_cast_size_t, cw_None}}
-      },
-      true,
-      false
+        {
+          {5, {e_reinterpret_cast_size_t, cw_None}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseZcsrsv2_solve,
     {
       {
-        {12, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {12, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseCcsrsv2_solve,
     {
       {
-        {12, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {12, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseDcsrsv2_solve,
     {
       {
-        {12, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {12, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseScsrsv2_solve,
     {
       {
-        {12, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {12, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseZcsrsv2_analysis,
     {
       {
-        {9, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
-        {10, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {9, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+          {10, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseCcsrsv2_analysis,
     {
       {
-        {9, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
-        {10, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {9, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+          {10, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseDcsrsv2_analysis,
     {
       {
-        {9, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
-        {10, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {9, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+          {10, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseScsrsv2_analysis,
     {
       {
-        {9, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
-        {10, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {9, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+          {10, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseZcsrmv,
     {
       {
-        {10, {e_add_const_argument, cw_None, "nullptr"}}
-      },
-      true,
-      false
+        {
+          {10, {e_add_const_argument, cw_None, "nullptr"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseCcsrmv,
     {
       {
-        {10, {e_add_const_argument, cw_None, "nullptr"}}
-      },
-      true,
-      false
+        {
+          {10, {e_add_const_argument, cw_None, "nullptr"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseDcsrmv,
     {
       {
-        {10, {e_add_const_argument, cw_None, "nullptr"}}
-      },
-      true,
-      false
+        {
+          {10, {e_add_const_argument, cw_None, "nullptr"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseScsrmv,
     {
       {
-        {10, {e_add_const_argument, cw_None, "nullptr"}}
-      },
-      true,
-      false
+        {
+          {10, {e_add_const_argument, cw_None, "nullptr"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseZbsrsv2_solve,
     {
       {
-        {14, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {14, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseCbsrsv2_solve,
     {
       {
-        {14, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {14, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseDbsrsv2_solve,
     {
       {
-        {14, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {14, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseSbsrsv2_solve,
     {
       {
-        {14, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {14, {e_replace_argument_with_const, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseZbsrsv2_analysis,
     {
       {
-        {11, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
-        {12, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {11, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+          {12, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseCbsrsv2_analysis,
     {
       {
-        {11, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
-        {12, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {11, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+          {12, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseDbsrsv2_analysis,
     {
       {
-        {11, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
-        {12, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {11, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+          {12, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseSbsrsv2_analysis,
     {
       {
-        {11, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
-        {12, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
-      },
-      true,
-      false
+        {
+          {11, {e_replace_argument_with_const, cw_None, "rocsparse_analysis_policy_force"}},
+          {12, {e_add_const_argument, cw_None, "rocsparse_solve_policy_auto"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseZcsrmm,
     {
       {
-        {2, {e_add_const_argument, cw_None, "rocsparse_operation_none"}}
-      },
-      true,
-      false
+        {
+          {2, {e_add_const_argument, cw_None, "rocsparse_operation_none"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseCcsrmm,
     {
       {
-        {2, {e_add_const_argument, cw_None, "rocsparse_operation_none"}}
-      },
-      true,
-      false
+        {
+          {2, {e_add_const_argument, cw_None, "rocsparse_operation_none"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseDcsrmm,
     {
       {
-        {2, {e_add_const_argument, cw_None, "rocsparse_operation_none"}}
-      },
-      true,
-      false
+        {
+          {2, {e_add_const_argument, cw_None, "rocsparse_operation_none"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseScsrmm,
     {
       {
-        {2, {e_add_const_argument, cw_None, "rocsparse_operation_none"}}
-      },
-      true,
-      false
+        {
+          {2, {e_add_const_argument, cw_None, "rocsparse_operation_none"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseZcsrgeam2,
     {
       {
-        {19, {e_remove_argument, cw_None}}
-      },
-      true,
-      false
+        {
+          {19, {e_remove_argument, cw_None}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseCcsrgeam2,
     {
       {
-        {19, {e_remove_argument, cw_None}}
-      },
-      true,
-      false
+        {
+          {19, {e_remove_argument, cw_None}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseDcsrgeam2,
     {
       {
-        {19, {e_remove_argument, cw_None}}
-      },
-      true,
-      false
+        {
+          {19, {e_remove_argument, cw_None}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseScsrgeam2,
     {
       {
-        {19, {e_remove_argument, cw_None}}
-      },
-      true,
-      false
+        {
+          {19, {e_remove_argument, cw_None}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseZbsrsv2_bufferSize,
     {
       {
-        {11, {e_reinterpret_cast_size_t, cw_None}}
-      },
-      true,
-      false
+        {
+          {11, {e_reinterpret_cast_size_t, cw_None}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseCbsrsv2_bufferSize,
     {
       {
-        {11, {e_reinterpret_cast_size_t, cw_None}}
-      },
-      true,
-      false
+        {
+          {11, {e_reinterpret_cast_size_t, cw_None}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseDbsrsv2_bufferSize,
     {
       {
-        {11, {e_reinterpret_cast_size_t, cw_None}}
-      },
-      true,
-      false
+        {
+          {11, {e_reinterpret_cast_size_t, cw_None}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseSbsrsv2_bufferSize,
     {
       {
-        {11, {e_reinterpret_cast_size_t, cw_None}}
-      },
-      true,
-      false
+        {
+          {11, {e_reinterpret_cast_size_t, cw_None}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseZcsrsv2_bufferSize,
     {
       {
-        {9, {e_reinterpret_cast_size_t, cw_None}}
-      },
-      true,
-      false
+        {
+          {9, {e_reinterpret_cast_size_t, cw_None}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseCcsrsv2_bufferSize,
     {
       {
-        {9, {e_reinterpret_cast_size_t, cw_None}}
-      },
-      true,
-      false
+        {
+          {9, {e_reinterpret_cast_size_t, cw_None}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseDcsrsv2_bufferSize,
     {
       {
-        {9, {e_reinterpret_cast_size_t, cw_None}}
-      },
-      true,
-      false
+        {
+          {9, {e_reinterpret_cast_size_t, cw_None}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseScsrsv2_bufferSize,
     {
       {
-        {9, {e_reinterpret_cast_size_t, cw_None}}
-      },
-      true,
-      false
+        {
+          {9, {e_reinterpret_cast_size_t, cw_None}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseZcsrgemm2,
     {
       {
-        {1, {e_add_const_argument, cw_None, "rocsparse_operation_none, rocsparse_operation_none"}}
-      },
-      true,
-      false
+        {
+          {1, {e_add_const_argument, cw_None, "rocsparse_operation_none, rocsparse_operation_none"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseCcsrgemm2,
     {
       {
-        {1, {e_add_const_argument, cw_None, "rocsparse_operation_none, rocsparse_operation_none"}}
-      },
-      true,
-      false
+        {
+          {1, {e_add_const_argument, cw_None, "rocsparse_operation_none, rocsparse_operation_none"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseDcsrgemm2,
     {
       {
-        {1, {e_add_const_argument, cw_None, "rocsparse_operation_none, rocsparse_operation_none"}}
-      },
-      true,
-      false
+        {
+          {1, {e_add_const_argument, cw_None, "rocsparse_operation_none, rocsparse_operation_none"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseScsrgemm2,
     {
       {
-        {1, {e_add_const_argument, cw_None, "rocsparse_operation_none, rocsparse_operation_none"}}
-      },
-      true,
-      false
+        {
+          {1, {e_add_const_argument, cw_None, "rocsparse_operation_none, rocsparse_operation_none"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseZcsrilu02_bufferSize,
     {
       {
-        {8, {e_reinterpret_cast_size_t, cw_None}}
-      },
-      true,
-      false
+        {
+          {8, {e_reinterpret_cast_size_t, cw_None}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseCcsrilu02_bufferSize,
     {
       {
-        {8, {e_reinterpret_cast_size_t, cw_None}}
-      },
-      true,
-      false
+        {
+          {8, {e_reinterpret_cast_size_t, cw_None}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseDcsrilu02_bufferSize,
     {
       {
-        {8, {e_reinterpret_cast_size_t, cw_None}}
-      },
-      true,
-      false
+        {
+          {8, {e_reinterpret_cast_size_t, cw_None}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseScsrilu02_bufferSize,
     {
       {
-        {8, {e_reinterpret_cast_size_t, cw_None}}
-      },
-      true,
-      false
+        {
+          {8, {e_reinterpret_cast_size_t, cw_None}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseZbsrilu02_bufferSize,
     {
       {
-        {10, {e_reinterpret_cast_size_t, cw_None}}
-      },
-      true,
-      false
+        {
+          {10, {e_reinterpret_cast_size_t, cw_None}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseCbsrilu02_bufferSize,
     {
       {
-        {10, {e_reinterpret_cast_size_t, cw_None}}
-      },
-      true,
-      false
+        {
+          {10, {e_reinterpret_cast_size_t, cw_None}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseDbsrilu02_bufferSize,
     {
       {
-        {10, {e_reinterpret_cast_size_t, cw_None}}
-      },
-      true,
-      false
+        {
+          {10, {e_reinterpret_cast_size_t, cw_None}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseSbsrilu02_bufferSize,
     {
       {
-        {10, {e_reinterpret_cast_size_t, cw_None}}
-      },
-      true,
-      false
+        {
+          {10, {e_reinterpret_cast_size_t, cw_None}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseCsr2cscEx2_bufferSize,
     {
       {
-        {4, {e_remove_argument, cw_None}},
-        {7, {e_remove_argument, cw_None}},
-        {8, {e_remove_argument, cw_None}},
-        {9, {e_remove_argument, cw_None}},
-        {10, {e_remove_argument, cw_None}},
-        {12, {e_remove_argument, cw_None}},
-        {13, {e_remove_argument, cw_None}}
-      },
-      true,
-      false
+        {
+          {4, {e_remove_argument, cw_None}},
+          {7, {e_remove_argument, cw_None}},
+          {8, {e_remove_argument, cw_None}},
+          {9, {e_remove_argument, cw_None}},
+          {10, {e_remove_argument, cw_None}},
+          {12, {e_remove_argument, cw_None}},
+          {13, {e_remove_argument, cw_None}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseSparseToDense,
     {
       {
-        {4, {e_add_const_argument, cw_None, "nullptr"}}
-      },
-      true,
-      false
+        {
+          {4, {e_add_const_argument, cw_None, "nullptr"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseSparseToDense_bufferSize,
     {
       {
-        {5, {e_add_const_argument, cw_None, "nullptr"}}
-      },
-      true,
-      false
+        {
+          {5, {e_add_const_argument, cw_None, "nullptr"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseDenseToSparse_bufferSize,
     {
       {
-        {5, {e_add_const_argument, cw_None, "nullptr"}}
-      },
-      true,
-      false
+        {
+          {5, {e_add_const_argument, cw_None, "nullptr"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseDenseToSparse_analysis,
     {
       {
-        {4, {e_add_const_argument, cw_None, "nullptr"}}
-      },
-      true,
-      false
+        {
+          {4, {e_add_const_argument, cw_None, "nullptr"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseSpMM_bufferSize,
     {
       {
-        {10, {e_add_const_argument, cw_None, "rocsparse_spmm_stage_compute"}},
-        {12, {e_add_const_argument, cw_None, "nullptr"}}
-      },
-      true,
-      false
+        {
+          {10, {e_add_const_argument, cw_None, "rocsparse_spmm_stage_compute"}},
+          {12, {e_add_const_argument, cw_None, "nullptr"}}
+        },
+        true,
+        false
+      }
     }
   },
   {sCusparseSpSM_analysis,
     {
       {
-        {9, {e_replace_argument_with_const, cw_None, "rocsparse_spsm_stage_compute"}},
-        {10, {e_add_const_argument, cw_None, "nullptr"}}
+        {
+          {9, {e_replace_argument_with_const, cw_None, "rocsparse_spsm_stage_compute"}},
+          {10, {e_add_const_argument, cw_None, "nullptr"}}
+        },
+        true,
+        false
+      }
+    }
+  },
+  {sCusparseSpSM_solve,
+    {
+      {
+        {
+          {9, {e_replace_argument_with_const, cw_None, "rocsparse_spsm_stage_compute"}},
+          {10, {e_add_const_argument, cw_None, "nullptr"}},
+          {11, {e_add_const_argument, cw_None, "nullptr"}},
+        },
+        true,
+        false
       },
-      true,
-      false
+      {
+        {
+          {10, {e_add_const_argument, cw_None, "nullptr"}}
+        }
+      }
     }
   },
   {sCusparseXcsrgeam2Nnz,
     {
       {
-        {14, {e_remove_argument, cw_None}}
-      },
-      true,
-      false
+        {
+          {14, {e_remove_argument, cw_None}}
+        },
+        true,
+        false
+      }
     }
   },
 };
@@ -2155,126 +2500,128 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
     std::string sName = funcDcl->getDeclName().getAsString();
     auto it = FuncArgCasts.find(sName);
     if (it == FuncArgCasts.end()) return false;
-    auto castStruct = it->second;
-    if (castStruct.isToMIOpen != TranslateToMIOpen || castStruct.isToRoc != TranslateToRoc) return false;
-    clang::LangOptions DefaultLangOptions;
-    for (auto c : castStruct.castMap) {
-      size_t length = 0;
-      unsigned int argNum = c.first;
-      clang::SmallString<40> XStr;
-      llvm::raw_svector_ostream OS(XStr);
-      auto *SM = Result.SourceManager;
-      clang::SourceRange sr, replacementRange;
-      clang::SourceLocation s, e;
-      if (argNum < call->getNumArgs()) {
-        sr = call->getArg(argNum)->getSourceRange();
-        replacementRange = getWriteRange(*SM, { sr.getBegin(), sr.getEnd() });
-        s = replacementRange.getBegin();
-        e = replacementRange.getEnd();
-      } else {
-        s = e = call->getEndLoc();
-      }
-      switch (c.second.castType) {
-        case e_remove_argument:
-        {
-          OS << "";
-          if (argNum < call->getNumArgs() - 1) {
-            e = call->getArg(argNum + 1)->getBeginLoc();
-          }
-          else {
-            e = call->getEndLoc();
-            if (call->getNumArgs() > 1) {
-              auto prevComma = clang::Lexer::findNextToken(call->getArg(argNum - 1)->getSourceRange().getEnd(), *SM, DefaultLangOptions);
-              if (!prevComma)
-                s = call->getEndLoc();
-              s = prevComma->getLocation();
-            }
-          }
-          length = SM->getCharacterData(e) - SM->getCharacterData(s);
-          break;
-        }
-        case e_move_argument:
-        {
-          std::string sArg;
-          clang::SmallString<40> dst_XStr;
-          llvm::raw_svector_ostream dst_OS(dst_XStr);
-          if (c.second.numberToMoveOrCopy > 1) {
-            if ((argNum + c.second.numberToMoveOrCopy - 1) >= call->getNumArgs())
-              continue;
-            sr = call->getArg(argNum + c.second.numberToMoveOrCopy - 1)->getSourceRange();
-            sr.setBegin(call->getArg(argNum)->getBeginLoc());
-          }
-          sArg = readSourceText(*SM, sr).str();
-          if (c.second.moveOrCopyTo < call->getNumArgs())
-            dst_OS << sArg << ", ";
-          else
-            dst_OS << ", " << sArg;
-          clang::SourceLocation dst_s;
-          if (c.second.moveOrCopyTo < call->getNumArgs())
-            dst_s = call->getArg(c.second.moveOrCopyTo)->getBeginLoc();
-          else
-            dst_s = call->getEndLoc();
-          ct::Replacement dst_Rep(*SM, dst_s, 0, dst_OS.str());
-          clang::FullSourceLoc dst_fullSL(dst_s, *SM);
-          insertReplacement(dst_Rep, dst_fullSL);
-          OS << "";
-          if (argNum < call->getNumArgs())
-            e = call->getArg(argNum + c.second.numberToMoveOrCopy)->getBeginLoc();
-          else
-            e = call->getEndLoc();
-          length = SM->getCharacterData(e) - SM->getCharacterData(s);
-          break;
-        }
-        case e_add_const_argument:
-        {
-          if (argNum < call->getNumArgs())
-            OS << c.second.constValToAddOrReplace << ", ";
-          else
-            OS << ", " << c.second.constValToAddOrReplace;
-          break;
-        }
-        case e_add_var_argument:
-        {
-          if (argNum >= call->getNumArgs())
-            continue;
+    auto castStructs = it->second;
+    for (auto cc : castStructs) {
+      if (cc.isToMIOpen != TranslateToMIOpen || cc.isToRoc != TranslateToRoc) continue;
+      clang::LangOptions DefaultLangOptions;
+      for (auto c : cc.castMap) {
+        size_t length = 0;
+        unsigned int argNum = c.first;
+        clang::SmallString<40> XStr;
+        llvm::raw_svector_ostream OS(XStr);
+        auto *SM = Result.SourceManager;
+        clang::SourceRange sr, replacementRange;
+        clang::SourceLocation s, e;
+        if (argNum < call->getNumArgs()) {
           sr = call->getArg(argNum)->getSourceRange();
-          sr.setBegin(call->getArg(argNum)->getBeginLoc());
-          std::string sArg = readSourceText(*SM, sr).str();
-          if (c.second.moveOrCopyTo < call->getNumArgs()) {
-            OS << sArg << ", ";
-            s = call->getArg(c.second.moveOrCopyTo)->getBeginLoc();
-          }
-          else {
-            OS << ", " << sArg;
-            s = call->getEndLoc();
-          }
-          break;
+          replacementRange = getWriteRange(*SM, { sr.getBegin(), sr.getEnd() });
+          s = replacementRange.getBegin();
+          e = replacementRange.getEnd();
+        } else {
+          s = e = call->getEndLoc();
         }
-        case e_replace_argument_with_const:
-        {
-          if (argNum >= call->getNumArgs())
+        switch (c.second.castType) {
+          case e_remove_argument:
+          {
+            OS << "";
+            if (argNum < call->getNumArgs() - 1) {
+              e = call->getArg(argNum + 1)->getBeginLoc();
+            }
+            else {
+              e = call->getEndLoc();
+              if (call->getNumArgs() > 1) {
+                auto prevComma = clang::Lexer::findNextToken(call->getArg(argNum - 1)->getSourceRange().getEnd(), *SM, DefaultLangOptions);
+                if (!prevComma)
+                  s = call->getEndLoc();
+                s = prevComma->getLocation();
+              }
+            }
+            length = SM->getCharacterData(e) - SM->getCharacterData(s);
             break;
-          OS << c.second.constValToAddOrReplace;
-          length = SM->getCharacterData(clang::Lexer::getLocForEndOfToken(e, 0, *SM, DefaultLangOptions)) - SM->getCharacterData(s);
-          break;
+          }
+          case e_move_argument:
+          {
+            std::string sArg;
+            clang::SmallString<40> dst_XStr;
+            llvm::raw_svector_ostream dst_OS(dst_XStr);
+            if (c.second.numberToMoveOrCopy > 1) {
+              if ((argNum + c.second.numberToMoveOrCopy - 1) >= call->getNumArgs())
+                continue;
+              sr = call->getArg(argNum + c.second.numberToMoveOrCopy - 1)->getSourceRange();
+              sr.setBegin(call->getArg(argNum)->getBeginLoc());
+            }
+            sArg = readSourceText(*SM, sr).str();
+            if (c.second.moveOrCopyTo < call->getNumArgs())
+              dst_OS << sArg << ", ";
+            else
+              dst_OS << ", " << sArg;
+            clang::SourceLocation dst_s;
+            if (c.second.moveOrCopyTo < call->getNumArgs())
+              dst_s = call->getArg(c.second.moveOrCopyTo)->getBeginLoc();
+            else
+              dst_s = call->getEndLoc();
+            ct::Replacement dst_Rep(*SM, dst_s, 0, dst_OS.str());
+            clang::FullSourceLoc dst_fullSL(dst_s, *SM);
+            insertReplacement(dst_Rep, dst_fullSL);
+            OS << "";
+            if (argNum < call->getNumArgs())
+              e = call->getArg(argNum + c.second.numberToMoveOrCopy)->getBeginLoc();
+            else
+              e = call->getEndLoc();
+            length = SM->getCharacterData(e) - SM->getCharacterData(s);
+            break;
+          }
+          case e_add_const_argument:
+          {
+            if (argNum < call->getNumArgs())
+              OS << c.second.constValToAddOrReplace << ", ";
+            else
+              OS << ", " << c.second.constValToAddOrReplace;
+            break;
+          }
+          case e_add_var_argument:
+          {
+            if (argNum >= call->getNumArgs())
+              continue;
+            sr = call->getArg(argNum)->getSourceRange();
+            sr.setBegin(call->getArg(argNum)->getBeginLoc());
+            std::string sArg = readSourceText(*SM, sr).str();
+            if (c.second.moveOrCopyTo < call->getNumArgs()) {
+              OS << sArg << ", ";
+              s = call->getArg(c.second.moveOrCopyTo)->getBeginLoc();
+            }
+            else {
+              OS << ", " << sArg;
+              s = call->getEndLoc();
+            }
+            break;
+          }
+          case e_replace_argument_with_const:
+          {
+            if (argNum >= call->getNumArgs())
+              break;
+            OS << c.second.constValToAddOrReplace;
+            length = SM->getCharacterData(clang::Lexer::getLocForEndOfToken(e, 0, *SM, DefaultLangOptions)) - SM->getCharacterData(s);
+            break;
+          }
+          default:
+            OS << getCastType(c.second.castType) << "(" << readSourceText(*SM, sr) << ")";
+            length = SM->getCharacterData(clang::Lexer::getLocForEndOfToken(e, 0, *SM, DefaultLangOptions)) - SM->getCharacterData(s);
+            break;
         }
-        default:
-          OS << getCastType(c.second.castType) << "(" << readSourceText(*SM, sr) << ")";
-          length = SM->getCharacterData(clang::Lexer::getLocForEndOfToken(e, 0, *SM, DefaultLangOptions)) - SM->getCharacterData(s);
-          break;
-      }
-      ct::Replacement Rep(*SM, s, length, OS.str());
-      clang::FullSourceLoc fullSL(s, *SM);
-      insertReplacement(Rep, fullSL);
-      switch (c.second.castWarn) {
-        case cw_DataLoss: {
-          clang::DiagnosticsEngine &DE = getCompilerInstance().getDiagnostics();
-          const auto ID = DE.getCustomDiagID(clang::DiagnosticsEngine::Warning, "Possible data loss in %0 argument of '%1'.");
-          DE.Report(fullSL, ID) << argNum+1 << sName;
-          break;
+        ct::Replacement Rep(*SM, s, length, OS.str());
+        clang::FullSourceLoc fullSL(s, *SM);
+        insertReplacement(Rep, fullSL);
+        switch (c.second.castWarn) {
+          case cw_DataLoss: {
+            clang::DiagnosticsEngine &DE = getCompilerInstance().getDiagnostics();
+            const auto ID = DE.getCustomDiagID(clang::DiagnosticsEngine::Warning, "Possible data loss in %0 argument of '%1'.");
+            DE.Report(fullSL, ID) << argNum+1 << sName;
+            break;
+          }
+          case cw_None:
+          default: break;
         }
-        case cw_None:
-        default: break;
       }
     }
     return true;
@@ -2561,7 +2908,9 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
             sCusparseDenseToSparse_analysis,
             sCusparseSpMM_bufferSize,
             sCusparseSpSM_analysis,
-            sCusparseXcsrgeam2Nnz
+            sCusparseSpSM_solve,
+            sCusparseXcsrgeam2Nnz,
+            sCudaMallocHost
           )
         )
       )
@@ -2702,7 +3051,12 @@ public:
                           clang::OptionalFileEntryRef file,
 #endif
                           StringRef search_path, StringRef relative_path,
-                          const clang::Module *imported
+#if LLVM_VERSION_MAJOR < 19
+                          const clang::Module *SuggestedModule
+#else
+                          const clang::Module *SuggestedModule,
+                          bool ModuleImported
+#endif
 #if LLVM_VERSION_MAJOR > 6
                         , clang::SrcMgr::CharacteristicKind FileType
 #endif
@@ -2712,7 +3066,7 @@ public:
 #else
     auto f = &file->getFileEntry();
 #endif
-    hipifyAction.InclusionDirective(hash_loc, include_token, file_name, is_angled, filename_range, f, search_path, relative_path, imported);
+    hipifyAction.InclusionDirective(hash_loc, include_token, file_name, is_angled, filename_range, f, search_path, relative_path, SuggestedModule);
   }
 
   void PragmaDirective(clang::SourceLocation Loc, clang::PragmaIntroducerKind Introducer) override {

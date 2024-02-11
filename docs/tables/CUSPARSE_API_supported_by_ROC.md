@@ -897,7 +897,7 @@
 |`cusparseSpSM_bufferSize`|11.3| |12.0| | | | | | | |
 |`cusparseSpSM_createDescr`|11.3| | | | | | | | | |
 |`cusparseSpSM_destroyDescr`|11.3| | | | | | | | | |
-|`cusparseSpSM_solve`|11.3| |12.0| | | | | | | |
+|`cusparseSpSM_solve`|11.3| |12.0| |`rocsparse_spsm`|4.5.0| |6.0.0| | |
 |`cusparseSpSV_analysis`|11.3| |12.0| | | | | | | |
 |`cusparseSpSV_bufferSize`|11.3| |12.0| | | | | | | |
 |`cusparseSpSV_createDescr`|11.3| | | | | | | | | |
