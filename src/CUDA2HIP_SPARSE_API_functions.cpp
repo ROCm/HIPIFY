@@ -826,7 +826,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
 
   // Sparse Matrix * Matrix Multiplication
   // TODO: hipification cusparseSpMM into rocsparse_spmm needs additional variable declared and allocated
-  {"cusparseSpMM",                                      {"hipsparseSpMM",                                      "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
+  {"cusparseSpMM",                                      {"hipsparseSpMM",                                      "rocsparse_spmm",                                                   CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseSpMM_bufferSize",                           {"hipsparseSpMM_bufferSize",                           "rocsparse_spmm",                                                   CONV_LIB_FUNC, API_SPARSE, 15}},
   // TODO: hipification cusparseSpMM_preprocess into rocsparse_spmm needs additional variable declared and allocated
   {"cusparseSpMM_preprocess",                           {"hipsparseSpMM_preprocess",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
