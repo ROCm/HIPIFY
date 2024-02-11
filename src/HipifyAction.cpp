@@ -213,6 +213,7 @@ const std::string sCusparseSpSM_analysis = "cusparseSpSM_analysis";
 const std::string sCusparseSpSM_solve = "cusparseSpSM_solve";
 const std::string sCusparseXcsrgeam2Nnz = "cusparseXcsrgeam2Nnz";
 const std::string sCudaMallocHost = "cudaMallocHost";
+const std::string sCusparseSpMM = "cusparseSpMM";
 
 // CUDA_OVERLOADED
 const std::string sCudaEventCreate = "cudaEventCreate";
@@ -2048,6 +2049,17 @@ std::map<std::string, std::vector<ArgCastStruct>> FuncArgCasts {
       }
     }
   },
+  {sCusparseSpMM,
+    {
+      {
+        {
+          {10, {e_add_const_argument, cw_None, "rocsparse_spmm_stage_compute, nullptr"}},
+        },
+        true,
+        false
+      }
+    }
+  },
 };
 
 void HipifyAction::RewriteString(StringRef s, clang::SourceLocation start) {
@@ -2910,7 +2922,8 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
             sCusparseSpSM_analysis,
             sCusparseSpSM_solve,
             sCusparseXcsrgeam2Nnz,
-            sCudaMallocHost
+            sCudaMallocHost,
+            sCusparseSpMM
           )
         )
       )

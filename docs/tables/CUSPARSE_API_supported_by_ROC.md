@@ -874,7 +874,7 @@
 |`cusparseSpGEMMreuse_copy`|11.3| |12.0| | | | | | | |
 |`cusparseSpGEMMreuse_nnz`|11.3| |12.0| | | | | | | |
 |`cusparseSpGEMMreuse_workEstimation`|11.3| |12.0| | | | | | | |
-|`cusparseSpMM`|10.1| |12.0| | | | | | | |
+|`cusparseSpMM`|10.1| |12.0| |`rocsparse_spmm`|4.2.0| |6.0.0| | |
 |`cusparseSpMMOp`|11.5| | | | | | | | | |
 |`cusparseSpMMOp_createPlan`|11.5| | | | | | | | | |
 |`cusparseSpMMOp_destroyPlan`|11.5| | | | | | | | | |
