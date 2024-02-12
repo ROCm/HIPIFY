@@ -853,8 +853,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   {"cusparseConstrainedGeMM_bufferSize",                {"hipsparseConstrainedGeMM_bufferSize",                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
 
   // Sparse Vector * Vector Operations
-  // NOTE: rocsparse_spvv has one additional argument: size_t* buffer_size, thus cusparseSpVV is still ROC_UNSUPPORTED
-  {"cusparseSpVV",                                      {"hipsparseSpVV",                                      "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
+  {"cusparseSpVV",                                      {"hipsparseSpVV",                                      "rocsparse_spvv",                                                   CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseSpVV_bufferSize",                           {"hipsparseSpVV_bufferSize",                           "rocsparse_spvv",                                                   CONV_LIB_FUNC, API_SPARSE, 15}},
 
   {"cusparseAxpby",                                     {"hipsparseAxpby",                                     "rocsparse_axpby",                                                  CONV_LIB_FUNC, API_SPARSE, 15}},
