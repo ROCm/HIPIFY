@@ -859,9 +859,9 @@
 |`cusparseDnVecSetValues`|10.2| | | |`rocsparse_dnvec_set_values`|4.1.0| | | | |
 |`cusparseGather`|11.0| |12.0| |`rocsparse_gather`|4.1.0| |6.0.0| | |
 |`cusparseRot`|11.0|12.2| | |`rocsparse_rot`|4.1.0| | | | |
-|`cusparseSDDMM`|11.2| |12.0| |`rocsparse_sddmm`|4.3.0| | | | |
-|`cusparseSDDMM_bufferSize`|11.2| |12.0| |`rocsparse_sddmm_buffer_size`|4.3.0| | | | |
-|`cusparseSDDMM_preprocess`|11.2| |12.0| |`rocsparse_sddmm_preprocess`|4.3.0| | | | |
+|`cusparseSDDMM`|11.2| |12.0| |`rocsparse_sddmm`|4.3.0| |6.0.0| | |
+|`cusparseSDDMM_bufferSize`|11.2| |12.0| |`rocsparse_sddmm_buffer_size`|4.3.0| |6.0.0| | |
+|`cusparseSDDMM_preprocess`|11.2| |12.0| |`rocsparse_sddmm_preprocess`|4.3.0| |6.0.0| | |
 |`cusparseScatter`|11.0| |12.0| |`rocsparse_scatter`|4.1.0| |6.0.0| | |
 |`cusparseSpGEMM_compute`|11.0| |12.0| | | | | | | |
 |`cusparseSpGEMM_copy`|11.0| |12.0| | | | | | | |

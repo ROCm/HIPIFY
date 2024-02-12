@@ -2540,6 +2540,9 @@ const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_SPARSE_FUNCTION_CHANG
   {"rocsparse_scatter",                                  {HIP_6000}},
   {"rocsparse_gather",                                   {HIP_6000}},
   {"rocsparse_axpby",                                    {HIP_6000}},
+  {"rocsparse_sddmm",                                    {HIP_6000}},
+  {"rocsparse_sddmm_buffer_size",                        {HIP_6000}},
+  {"rocsparse_sddmm_preprocess",                         {HIP_6000}},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_SPARSE_API_SECTION_MAP {
