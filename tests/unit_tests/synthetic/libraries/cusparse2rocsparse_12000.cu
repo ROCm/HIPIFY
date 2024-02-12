@@ -134,6 +134,14 @@ int main() {
 #endif
 
 #if CUDA_VERSION >= 12000
+  // CHECK: rocsparse_spsv_alg spSVAlg_t;
+  // CHECK-NEXT: rocsparse_spsv_alg SPSV_ALG_DEFAULT = rocsparse_spsv_alg_default;
+  cusparseSpSVAlg_t spSVAlg_t;
+  cusparseSpSVAlg_t SPSV_ALG_DEFAULT = CUSPARSE_SPSV_ALG_DEFAULT;
+
+  // TODO: remove decalration of cusparseSpSVDescr_t, as it is not mirroved and not used in rocSPARSE
+  cusparseSpSVDescr_t spSVDescr;
+
   // CHECK: rocsparse_const_spmat_descr constSpMatDescr = nullptr;
   // CHECK-NEXT: rocsparse_const_spmat_descr constSpMatDescrB = nullptr;
   cusparseConstSpMatDescr_t constSpMatDescr = nullptr;
@@ -229,6 +237,11 @@ int main() {
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_sddmm(rocsparse_handle handle, rocsparse_operation opA, rocsparse_operation opB, const void* alpha, rocsparse_const_dnmat_descr A, rocsparse_const_dnmat_descr B, const void* beta, rocsparse_spmat_descr C, rocsparse_datatype compute_type, rocsparse_sddmm_alg alg, void* temp_buffer);
   // CHECK: status_t = rocsparse_sddmm(handle_t, opA, opB, alpha, constDnMatDescr, constDnMatDescrB, beta, spmatC, dataType, sDDMMAlg_t, tempBuffer);
   status_t = cusparseSDDMM(handle_t, opA, opB, alpha, constDnMatDescr, constDnMatDescrB, beta, spmatC, dataType, sDDMMAlg_t, tempBuffer);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpSV_bufferSize(cusparseHandle_t handle, cusparseOperation_t opA, const void* alpha, cusparseConstSpMatDescr_t matA, cusparseConstDnVecDescr_t vecX, cusparseDnVecDescr_t vecY, cudaDataType computeType, cusparseSpSVAlg_t alg, cusparseSpSVDescr_t spsvDescr, size_t* bufferSize);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_spsv(rocsparse_handle handle, rocsparse_operation trans, const void* alpha, rocsparse_const_spmat_descr mat, rocsparse_const_dnvec_descr x, const rocsparse_dnvec_descr y, rocsparse_datatype compute_type, rocsparse_spsv_alg alg, rocsparse_spsv_stage stage, size_t* buffer_size, void* temp_buffer);
+  // CHECK: status_t = rocsparse_spsv(handle_t, opA, alpha, constSpMatDescr, constDnVecDescr, vecY, dataType, spSVAlg_t, rocsparse_spsv_stage_buffer_size, &bufferSize, nullptr);
+  status_t = cusparseSpSV_bufferSize(handle_t, opA, alpha, constSpMatDescr, constDnVecDescr, vecY, dataType, spSVAlg_t, spSVDescr, &bufferSize);
 #endif
 
   return 0;

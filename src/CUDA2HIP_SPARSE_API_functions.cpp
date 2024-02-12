@@ -819,7 +819,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   // Sparse Triangular Vector Solve
   {"cusparseSpSV_createDescr",                          {"hipsparseSpSV_createDescr",                          "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
   {"cusparseSpSV_destroyDescr",                         {"hipsparseSpSV_destroyDescr",                         "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
-  {"cusparseSpSV_bufferSize",                           {"hipsparseSpSV_bufferSize",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
+  {"cusparseSpSV_bufferSize",                           {"hipsparseSpSV_bufferSize",                           "rocsparse_spsv",                                                   CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseSpSV_analysis",                             {"hipsparseSpSV_analysis",                             "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
   {"cusparseSpSV_solve",                                {"hipsparseSpSV_solve",                                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
   {"cusparseSpSV_updateMatrix",                         {"hipsparseSpSV_updateMatrix",                         "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
@@ -2429,6 +2429,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_FUNCTION_VER_MAP {
   {"rocsparse_spmm",                                     {HIP_4020, HIP_0,    HIP_0   }},
   {"rocsparse_spsm",                                     {HIP_4050, HIP_0,    HIP_0   }},
   {"rocsparse_spvv",                                     {HIP_4010, HIP_0,    HIP_0   }},
+  {"rocsparse_spsv",                                     {HIP_4050, HIP_0,    HIP_0   }},
 };
 
 const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_SPARSE_FUNCTION_CHANGED_VER_MAP {
@@ -2543,6 +2544,7 @@ const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_SPARSE_FUNCTION_CHANG
   {"rocsparse_sddmm",                                    {HIP_6000}},
   {"rocsparse_sddmm_buffer_size",                        {HIP_6000}},
   {"rocsparse_sddmm_preprocess",                         {HIP_6000}},
+  {"rocsparse_spsv",                                     {HIP_6000}},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_SPARSE_API_SECTION_MAP {
