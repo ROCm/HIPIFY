@@ -71,6 +71,7 @@ int main() {
   void *tempBuffer = nullptr;
   void *alpha = nullptr;
   void *beta = nullptr;
+  void* result = nullptr;
 
   // TODO: should be rocsparse_double_complex
   // TODO: add to TypeOverloads cuDoubleComplex -> rocsparse_double_complex under a new option --sparse
@@ -128,6 +129,12 @@ int main() {
   cusparseConstDnMatDescr_t constDnMatDescr = nullptr;
   cusparseConstDnMatDescr_t constDnMatDescrB = nullptr;
 
+  // CHECK: rocsparse_const_spvec_descr constSpVecDescr = nullptr;
+  cusparseConstSpVecDescr_t constSpVecDescr = nullptr;
+
+  // CHECK: rocsparse_const_dnvec_descr constDnVecDescr = nullptr;
+  cusparseConstDnVecDescr_t constDnVecDescr = nullptr;
+
   // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSparseToDense(cusparseHandle_t handle, cusparseConstSpMatDescr_t matA, cusparseDnMatDescr_t matB, cusparseSparseToDenseAlg_t alg, void* externalBuffer);
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_sparse_to_dense(rocsparse_handle handle, rocsparse_const_spmat_descr mat_A, rocsparse_dnmat_descr mat_B, rocsparse_sparse_to_dense_alg alg, size_t* buffer_size, void* temp_buffer);
   // CHECK: status_t = rocsparse_sparse_to_dense(handle_t, constSpMatDescr, dnmatB, sparseToDenseAlg_t, nullptr, tempBuffer);
@@ -167,6 +174,11 @@ int main() {
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_spmm(rocsparse_handle handle, rocsparse_operation trans_A, rocsparse_operation trans_B, const void* alpha, rocsparse_const_spmat_descr mat_A, rocsparse_const_dnmat_descr mat_B, const void* beta, const rocsparse_dnmat_descr mat_C, rocsparse_datatype compute_type, rocsparse_spmm_alg alg, rocsparse_spmm_stage stage, size_t* buffer_size, void* temp_buffer);
   // CHECK: status_t = rocsparse_spmm(handle_t, opA, opB, alpha, constSpMatDescr, constDnMatDescr, beta, dnmatC, dataType, spMMAlg_t, rocsparse_spmm_stage_compute, nullptr, tempBuffer);
   status_t = cusparseSpMM(handle_t, opA, opB, alpha, constSpMatDescr, constDnMatDescr, beta, dnmatC, dataType, spMMAlg_t, tempBuffer);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpVV_bufferSize(cusparseHandle_t handle, cusparseOperation_t opX, cusparseConstSpVecDescr_t vecX, cusparseConstDnVecDescr_t vecY, const void* result, cudaDataType computeType, size_t* bufferSize);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_spvv(rocsparse_handle handle, rocsparse_operation trans, rocsparse_const_spvec_descr x, rocsparse_const_dnvec_descr y, void* result, rocsparse_datatype compute_type, size_t* buffer_size, void* temp_buffer);
+  // CHECK: status_t = rocsparse_spvv(handle_t, opX, constSpVecDescr, constDnVecDescr, result, dataType, &bufferSize, nullptr);
+  status_t = cusparseSpVV_bufferSize(handle_t, opX, constSpVecDescr, constDnVecDescr, result, dataType, &bufferSize);
 #endif
 
   return 0;

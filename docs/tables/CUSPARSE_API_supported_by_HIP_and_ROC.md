@@ -905,7 +905,7 @@
 |`cusparseSpSV_solve`|11.3| |12.0| |`hipsparseSpSV_solve`|4.5.0| |6.0.0| | | | | | | | |
 |`cusparseSpSV_updateMatrix`|12.1| | | | | | | | | | | | | | | |
 |`cusparseSpVV`|10.2| |12.0| |`hipsparseSpVV`|4.1.0| |6.0.0| | | | | | | | |
-|`cusparseSpVV_bufferSize`|10.2| |12.0| |`hipsparseSpVV_bufferSize`|4.1.0| |6.0.0| | | | | | | | |
+|`cusparseSpVV_bufferSize`|10.2| |12.0| |`hipsparseSpVV_bufferSize`|4.1.0| |6.0.0| | |`rocsparse_spvv`|4.1.0| |6.0.0| | |
 |`cusparseSpVecGet`|10.2| | | |`hipsparseSpVecGet`|4.1.0| | | | |`rocsparse_spvec_get`|4.1.0| | | | |
 |`cusparseSpVecGetIndexBase`|10.2| |12.0| |`hipsparseSpVecGetIndexBase`|4.1.0| |6.0.0| | |`rocsparse_spvec_get_index_base`|4.1.0| |6.0.0| | |
 |`cusparseSpVecGetValues`|10.2| | | |`hipsparseSpVecGetValues`|4.1.0| | | | |`rocsparse_spvec_get_values`|4.1.0| | | | |

@@ -855,7 +855,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   // Sparse Vector * Vector Operations
   // NOTE: rocsparse_spvv has one additional argument: size_t* buffer_size, thus cusparseSpVV is still ROC_UNSUPPORTED
   {"cusparseSpVV",                                      {"hipsparseSpVV",                                      "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
-  {"cusparseSpVV_bufferSize",                           {"hipsparseSpVV_bufferSize",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
+  {"cusparseSpVV_bufferSize",                           {"hipsparseSpVV_bufferSize",                           "rocsparse_spvv",                                                   CONV_LIB_FUNC, API_SPARSE, 15}},
 
   {"cusparseAxpby",                                     {"hipsparseAxpby",                                     "rocsparse_axpby",                                                  CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseGather",                                    {"hipsparseGather",                                    "rocsparse_gather",                                                 CONV_LIB_FUNC, API_SPARSE, 15}},
@@ -2431,6 +2431,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_FUNCTION_VER_MAP {
   {"rocsparse_dense_to_sparse",                          {HIP_4010, HIP_0,    HIP_0   }},
   {"rocsparse_spmm",                                     {HIP_4020, HIP_0,    HIP_0   }},
   {"rocsparse_spsm",                                     {HIP_4050, HIP_0,    HIP_0   }},
+  {"rocsparse_spvv",                                     {HIP_4010, HIP_0,    HIP_0   }},
 };
 
 const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_SPARSE_FUNCTION_CHANGED_VER_MAP {
@@ -2537,6 +2538,7 @@ const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_SPARSE_FUNCTION_CHANG
   {"rocsparse_dense_to_sparse",                          {HIP_6000}},
   {"rocsparse_spmm",                                     {HIP_6000}},
   {"rocsparse_spsm",                                     {HIP_6000}},
+  {"rocsparse_spvv",                                     {HIP_6000}},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_SPARSE_API_SECTION_MAP {
