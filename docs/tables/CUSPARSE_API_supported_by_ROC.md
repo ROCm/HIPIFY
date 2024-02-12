@@ -880,8 +880,8 @@
 |`cusparseSpMMOp_destroyPlan`|11.5| | | | | | | | | |
 |`cusparseSpMM_bufferSize`|10.1| |12.0| |`rocsparse_spmm`|4.2.0| |6.0.0| | |
 |`cusparseSpMM_preprocess`|11.2| |12.0| | | | | | | |
-|`cusparseSpMV`|10.2| |12.0| |`rocsparse_spmv`|4.1.0| | | | |
-|`cusparseSpMV_bufferSize`|10.2| |12.0| | | | | | | |
+|`cusparseSpMV`|10.1| |12.0| |`rocsparse_spmv`|4.1.0| |6.0.0| | |
+|`cusparseSpMV_bufferSize`|10.1| |12.0| |`rocsparse_spmv`|4.1.0| |6.0.0| | |
 |`cusparseSpMatGetAttribute`|11.3| |12.0| |`rocsparse_spmat_get_attribute`|4.5.0| |6.0.0| | |
 |`cusparseSpMatGetFormat`|10.1| |12.0| |`rocsparse_spmat_get_format`|4.1.0| |6.0.0| | |
 |`cusparseSpMatGetIndexBase`|10.1| |12.0| |`rocsparse_spmat_get_index_base`|4.1.0| |6.0.0| | |
@@ -904,8 +904,8 @@
 |`cusparseSpSV_destroyDescr`|11.3| | | | | | | | | |
 |`cusparseSpSV_solve`|11.3| |12.0| | | | | | | |
 |`cusparseSpSV_updateMatrix`|12.1| | | | | | | | | |
-|`cusparseSpVV`|10.2| |12.0| | | | | | | |
-|`cusparseSpVV_bufferSize`|10.2| |12.0| |`rocsparse_spvv`|4.1.0| |6.0.0| | |
+|`cusparseSpVV`|10.1| |12.0| | | | | | | |
+|`cusparseSpVV_bufferSize`|10.1| |12.0| |`rocsparse_spvv`|4.1.0| |6.0.0| | |
 |`cusparseSpVecGet`|10.2| | | |`rocsparse_spvec_get`|4.1.0| | | | |
 |`cusparseSpVecGetIndexBase`|10.2| |12.0| |`rocsparse_spvec_get_index_base`|4.1.0| |6.0.0| | |
 |`cusparseSpVecGetValues`|10.2| | | |`rocsparse_spvec_get_values`|4.1.0| | | | |

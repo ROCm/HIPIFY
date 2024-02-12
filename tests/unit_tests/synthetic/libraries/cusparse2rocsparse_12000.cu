@@ -89,7 +89,7 @@ int main() {
   cudaDataType dataType;
 #endif
 
-#if (CUDA_VERSION >= 10010 && CUDA_VERSION < 11000 && !defined(_WIN32)) || CUDA_VERSION >= 11000
+#if (CUDA_VERSION >= 10010 && CUSPARSE_VERSION >= 10200 && CUDA_VERSION < 11000 && !defined(_WIN32)) || CUDA_VERSION >= 11000
   // CHECK: rocsparse_spmat_descr spMatDescr_t, spmatA, spmatB, spmatC;
   cusparseSpMatDescr_t spMatDescr_t, spmatA, spmatB, spmatC;
 
@@ -98,6 +98,14 @@ int main() {
 
   // CHECK: rocsparse_spmm_alg spMMAlg_t;
   cusparseSpMMAlg_t spMMAlg_t;
+
+  // CHECK: _rocsparse_dnvec_descr *dnVecDescr = nullptr;
+  // CHECK-NEXT: rocsparse_dnvec_descr dnVecDescr_t, vecX, vecY;
+  cusparseDnVecDescr *dnVecDescr = nullptr;
+  cusparseDnVecDescr_t dnVecDescr_t, vecX, vecY;
+
+  // CHECK: rocsparse_spmv_alg spMVAlg_t;
+  cusparseSpMVAlg_t spMVAlg_t;
 #endif
 
 #if CUDA_VERSION >= 11010 && CUSPARSE_VERSION >= 11300
@@ -179,6 +187,16 @@ int main() {
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_spvv(rocsparse_handle handle, rocsparse_operation trans, rocsparse_const_spvec_descr x, rocsparse_const_dnvec_descr y, void* result, rocsparse_datatype compute_type, size_t* buffer_size, void* temp_buffer);
   // CHECK: status_t = rocsparse_spvv(handle_t, opX, constSpVecDescr, constDnVecDescr, result, dataType, &bufferSize, nullptr);
   status_t = cusparseSpVV_bufferSize(handle_t, opX, constSpVecDescr, constDnVecDescr, result, dataType, &bufferSize);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpMV(cusparseHandle_t handle, cusparseOperation_t opA, const void* alpha, cusparseConstSpMatDescr_t matA, cusparseConstDnVecDescr_t vecX, const void* beta, cusparseDnVecDescr_t vecY, cudaDataType computeType, cusparseSpMVAlg_t alg, void* externalBuffer);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_spmv(rocsparse_handle handle, rocsparse_operation trans, const void* alpha, rocsparse_const_spmat_descr mat, rocsparse_const_dnvec_descr x, const void* beta, const rocsparse_dnvec_descr y, rocsparse_datatype compute_type, rocsparse_spmv_alg alg, rocsparse_spmv_stage stage, size_t* buffer_size, void* temp_buffer);
+  // CHECK: status_t = rocsparse_spmv(handle_t, opA, alpha, constSpMatDescr, constDnVecDescr, beta, vecY, dataType, spMVAlg_t, rocsparse_spmv_stage_compute, tempBuffer);
+  status_t = cusparseSpMV(handle_t, opA, alpha, constSpMatDescr, constDnVecDescr, beta, vecY, dataType, spMVAlg_t, tempBuffer);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpMV_bufferSize(cusparseHandle_t handle, cusparseOperation_t opA, const void* alpha, cusparseConstSpMatDescr_t matA, cusparseConstDnVecDescr_t vecX, const void* beta, cusparseDnVecDescr_t vecY, cudaDataType computeType, cusparseSpMVAlg_t alg, size_t* bufferSize);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_spmv(rocsparse_handle handle, rocsparse_operation trans, const void* alpha, rocsparse_const_spmat_descr mat, rocsparse_const_dnvec_descr x, const void* beta, const rocsparse_dnvec_descr y, rocsparse_datatype compute_type, rocsparse_spmv_alg alg, rocsparse_spmv_stage stage, size_t* buffer_size, void* temp_buffer);
+  // CHECK: status_t = rocsparse_spmv(handle_t, opA, alpha, constSpMatDescr, constDnVecDescr, beta, vecY, dataType, spMVAlg_t, rocsparse_spmv_stage_buffer_size, &bufferSize, nullptr);
+  status_t = cusparseSpMV_bufferSize(handle_t, opA, alpha, constSpMatDescr, constDnVecDescr, beta, vecY, dataType, spMVAlg_t, &bufferSize);
 #endif
 
   return 0;

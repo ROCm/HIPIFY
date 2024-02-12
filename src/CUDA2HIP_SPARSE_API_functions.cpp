@@ -864,7 +864,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
 
   // Sparse Matrix * Vector Multiplication
   {"cusparseSpMV",                                      {"hipsparseSpMV",                                      "rocsparse_spmv",                                                   CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseSpMV_bufferSize",                           {"hipsparseSpMV_bufferSize",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
+  {"cusparseSpMV_bufferSize",                           {"hipsparseSpMV_bufferSize",                           "rocsparse_spmv",                                                   CONV_LIB_FUNC, API_SPARSE, 15}},
 
   {"cusparseSparseToDense",                             {"hipsparseSparseToDense",                             "rocsparse_sparse_to_dense",                                        CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseSparseToDense_bufferSize",                  {"hipsparseSparseToDense_bufferSize",                  "rocsparse_sparse_to_dense",                                        CONV_LIB_FUNC, API_SPARSE, 15}},
@@ -1164,12 +1164,12 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SPARSE_FUNCTION_VER_MAP {
   {"cusparseDnVecGet",                                  {CUDA_102, CUDA_0,   CUDA_0  }},
   {"cusparseDnVecGetValues",                            {CUDA_102, CUDA_0,   CUDA_0  }},
   {"cusparseDnVecSetValues",                            {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusparseSpMM",                                      {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusparseSpMM_bufferSize",                           {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusparseSpVV",                                      {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusparseSpVV_bufferSize",                           {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusparseSpMV",                                      {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusparseSpMV_bufferSize",                           {CUDA_102, CUDA_0,   CUDA_0  }},
+  {"cusparseSpMM",                                      {CUDA_101, CUDA_0,   CUDA_0  }},  // A: CUDA_VERSION 10010 C: CUSPARSE_VERSION 12000
+  {"cusparseSpMM_bufferSize",                           {CUDA_101, CUDA_0,   CUDA_0  }},  // A: CUDA_VERSION 10010 C: CUSPARSE_VERSION 12000
+  {"cusparseSpVV",                                      {CUDA_101, CUDA_0,   CUDA_0  }},  // A: CUSPARSE_VERSION 10200 C: CUSPARSE_VERSION 12000
+  {"cusparseSpVV_bufferSize",                           {CUDA_101, CUDA_0,   CUDA_0  }},  // A: CUSPARSE_VERSION 10200 C: CUSPARSE_VERSION 12000
+  {"cusparseSpMV",                                      {CUDA_101, CUDA_0,   CUDA_0  }},  // A: CUSPARSE_VERSION 10200 C: CUSPARSE_VERSION 12000
+  {"cusparseSpMV_bufferSize",                           {CUDA_101, CUDA_0,   CUDA_0  }},  // A: CUSPARSE_VERSION 10200 C: CUSPARSE_VERSION 12000
   {"cusparseSaxpyi",                                    {CUDA_0,   CUDA_110, CUDA_120}},
   {"cusparseDaxpyi",                                    {CUDA_0,   CUDA_110, CUDA_120}},
   {"cusparseCaxpyi",                                    {CUDA_0,   CUDA_110, CUDA_120}},
@@ -2539,6 +2539,7 @@ const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_SPARSE_FUNCTION_CHANG
   {"rocsparse_spmm",                                     {HIP_6000}},
   {"rocsparse_spsm",                                     {HIP_6000}},
   {"rocsparse_spvv",                                     {HIP_6000}},
+  {"rocsparse_spmv",                                     {HIP_6000}},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_SPARSE_API_SECTION_MAP {
