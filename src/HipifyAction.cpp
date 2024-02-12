@@ -219,6 +219,7 @@ const std::string sCusparseSpVV_bufferSize = "cusparseSpVV_bufferSize";
 const std::string sCusparseSpMV = "cusparseSpMV";
 const std::string sCusparseSpMV_bufferSize = "cusparseSpMV_bufferSize";
 const std::string sCusparseSpMM_preprocess = "cusparseSpMM_preprocess";
+const std::string sCusparseSpSV_bufferSize = "cusparseSpSV_bufferSize";
 
 // CUDA_OVERLOADED
 const std::string sCudaEventCreate = "cudaEventCreate";
@@ -2121,6 +2122,18 @@ std::map<std::string, std::vector<ArgCastStruct>> FuncArgCasts {
       }
     }
   },
+  {sCusparseSpSV_bufferSize,
+    {
+      {
+        {
+          {8, {e_replace_argument_with_const, cw_None, "rocsparse_spsv_stage_buffer_size"}},
+          {10, {e_add_const_argument, cw_None, "nullptr"}},
+        },
+        true,
+        false
+      }
+    }
+  },
 };
 
 void HipifyAction::RewriteString(StringRef s, clang::SourceLocation start) {
@@ -2989,7 +3002,8 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
             sCusparseSpVV_bufferSize,
             sCusparseSpMV,
             sCusparseSpMV_bufferSize,
-            sCusparseSpMM_preprocess
+            sCusparseSpMM_preprocess,
+            sCusparseSpSV_bufferSize
           )
         )
       )
