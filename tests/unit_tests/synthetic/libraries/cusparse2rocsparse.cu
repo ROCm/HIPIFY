@@ -2093,21 +2093,6 @@ int main() {
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_rot(rocsparse_handle handle, const void* c, const void* s, rocsparse_spvec_descr x, rocsparse_dnvec_descr y);
   // CHECK: status_t = rocsparse_rot(handle_t, c_coeff, s_coeff, spVecDescr_t, vecY);
   status_t = cusparseRot(handle_t, c_coeff, s_coeff, spVecDescr_t, vecY);
-
-  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseScatter(cusparseHandle_t handle, cusparseConstSpVecDescr_t vecX, cusparseDnVecDescr_t vecY);
-  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_scatter(rocsparse_handle handle, const rocsparse_spvec_descr x, rocsparse_dnvec_descr y);
-  // CHECK: status_t = rocsparse_scatter(handle_t, spVecDescr_t, vecY);
-  status_t = cusparseScatter(handle_t, spVecDescr_t, vecY);
-
-  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseGather(cusparseHandle_t handle, cusparseConstDnVecDescr_t vecY, cusparseSpVecDescr_t vecX);
-  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_gather(rocsparse_handle handle, const rocsparse_dnvec_descr y, rocsparse_spvec_descr x);
-  // CHECK: status_t = rocsparse_gather(handle_t, vecY, spVecDescr_t);
-  status_t = cusparseGather(handle_t, vecY, spVecDescr_t);
-
-  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseAxpby(cusparseHandle_t handle, const void* alpha, cusparseConstSpVecDescr_t vecX, const void* beta, cusparseDnVecDescr_t vecY);
-  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_axpby(rocsparse_handle handle, const void* alpha, const rocsparse_spvec_descr x, const void* beta, rocsparse_dnvec_descr y);
-  // CHECK: status_t = rocsparse_axpby(handle_t, alpha, spVecDescr_t, beta, vecY);
-  status_t = cusparseAxpby(handle_t, alpha, spVecDescr_t, beta, vecY);
 #endif
 
 #if CUDA_VERSION >= 11010 && CUSPARSE_VERSION >= 11300
@@ -2629,6 +2614,21 @@ int main() {
   // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_dnmat_get_strided_batch(rocsparse_const_dnmat_descr descr, int* batch_count, int64_t* batch_stride);
   // CHECK: status_t = rocsparse_dnmat_get_strided_batch(constDnMatDescr, &batchCount, &batchStride);
   status_t = cusparseDnMatGetStridedBatch(constDnMatDescr, &batchCount, &batchStride);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseScatter(cusparseHandle_t handle, cusparseConstSpVecDescr_t vecX, cusparseDnVecDescr_t vecY);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_scatter(rocsparse_handle handle, rocsparse_const_spvec_descr x, rocsparse_dnvec_descr y);
+  // CHECK: status_t = rocsparse_scatter(handle_t, constSpVecDescr, vecY);
+  status_t = cusparseScatter(handle_t, constSpVecDescr, vecY);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseGather(cusparseHandle_t handle, cusparseConstDnVecDescr_t vecY, cusparseSpVecDescr_t vecX);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_gather(rocsparse_handle handle, rocsparse_const_dnvec_descr y, rocsparse_spvec_descr x);
+  // CHECK: status_t = rocsparse_gather(handle_t, constDnVecDescr, spVecDescr_t);
+  status_t = cusparseGather(handle_t, constDnVecDescr, spVecDescr_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseAxpby(cusparseHandle_t handle, const void* alpha, cusparseConstSpVecDescr_t vecX, const void* beta, cusparseDnVecDescr_t vecY);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_axpby(rocsparse_handle handle, const void* alpha, rocsparse_const_spvec_descr x, const void* beta, rocsparse_dnvec_descr y);
+  // CHECK: status_t = rocsparse_axpby(handle_t, alpha, constSpVecDescr, beta, vecY);
+  status_t = cusparseAxpby(handle_t, alpha, constSpVecDescr, beta, vecY);
 #endif
 
 #if CUDA_VERSION >= 12010 && CUSPARSE_VERSION >= 12100
