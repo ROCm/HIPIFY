@@ -825,11 +825,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
   {"cusparseSpSV_updateMatrix",                         {"hipsparseSpSV_updateMatrix",                         "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
 
   // Sparse Matrix * Matrix Multiplication
-  // TODO: hipification cusparseSpMM into rocsparse_spmm needs additional variable declared and allocated
   {"cusparseSpMM",                                      {"hipsparseSpMM",                                      "rocsparse_spmm",                                                   CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseSpMM_bufferSize",                           {"hipsparseSpMM_bufferSize",                           "rocsparse_spmm",                                                   CONV_LIB_FUNC, API_SPARSE, 15}},
-  // TODO: hipification cusparseSpMM_preprocess into rocsparse_spmm needs additional variable declared and allocated
-  {"cusparseSpMM_preprocess",                           {"hipsparseSpMM_preprocess",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
+  {"cusparseSpMM_preprocess",                           {"hipsparseSpMM_preprocess",                           "rocsparse_spmm",                                                   CONV_LIB_FUNC, API_SPARSE, 15}},
   {"cusparseSpMMOp",                                    {"hipsparseSpMMOp",                                    "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
   {"cusparseSpMMOp_createPlan",                         {"hipsparseSpMMOp_createPlan",                         "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
   {"cusparseSpMMOp_destroyPlan",                        {"hipsparseSpMMOp_destroyPlan",                        "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
@@ -2539,6 +2537,9 @@ const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_SPARSE_FUNCTION_CHANG
   {"rocsparse_spsm",                                     {HIP_6000}},
   {"rocsparse_spvv",                                     {HIP_6000}},
   {"rocsparse_spmv",                                     {HIP_6000}},
+  {"rocsparse_scatter",                                  {HIP_6000}},
+  {"rocsparse_gather",                                   {HIP_6000}},
+  {"rocsparse_axpby",                                    {HIP_6000}},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_SPARSE_API_SECTION_MAP {
