@@ -612,7 +612,7 @@
 |`cudaChannelFormatKindUnsignedNormalized8X1`|11.5| | | | | | | | | |
 |`cudaChannelFormatKindUnsignedNormalized8X2`|11.5| | | | | | | | | |
 |`cudaChannelFormatKindUnsignedNormalized8X4`|11.5| | | | | | | | | |
-|`cudaChildGraphNodeParams`|12.2| | | | | | | | | |
+|`cudaChildGraphNodeParams`|12.2| | | |`hipChildGraphNodeParams`|6.1.0| | | |6.1.0|
 |`cudaClusterSchedulingPolicy`|11.8| | | | | | | | | |
 |`cudaClusterSchedulingPolicyDefault`|11.8| | | | | | | | | |
 |`cudaClusterSchedulingPolicyLoadBalancing`|11.8| | | | | | | | | |
@@ -1029,10 +1029,10 @@
 |`cudaEventInterprocess`| | | | |`hipEventInterprocess`|1.6.0| | | | |
 |`cudaEventRecordDefault`|11.1| | | | | | | | | |
 |`cudaEventRecordExternal`|11.1| | | | | | | | | |
-|`cudaEventRecordNodeParams`|12.2| | | | | | | | | |
+|`cudaEventRecordNodeParams`|12.2| | | |`hipEventRecordNodeParams`|6.1.0| | | |6.1.0|
 |`cudaEventWaitDefault`|11.1| | | | | | | | | |
 |`cudaEventWaitExternal`| | | | | | | | | | |
-|`cudaEventWaitNodeParams`|12.2| | | | | | | | | |
+|`cudaEventWaitNodeParams`|12.2| | | |`hipEventWaitNodeParams`|6.1.0| | | |6.1.0|
 |`cudaEvent_t`| | | | |`hipEvent_t`|1.6.0| | | | |
 |`cudaExtent`| | | | |`hipExtent`|1.7.0| | | | |
 |`cudaExternalMemoryBufferDesc`|10.0| | | |`hipExternalMemoryBufferDesc`|4.3.0| | | | |
@@ -1074,9 +1074,9 @@
 |`cudaExternalSemaphore_t`|10.0| | | |`hipExternalSemaphore_t`|4.4.0| | | | |
 |`cudaFilterModeLinear`| | | | |`hipFilterModeLinear`|1.7.0| | | | |
 |`cudaFilterModePoint`| | | | |`hipFilterModePoint`|1.6.0| | | | |
-|`cudaFlushGPUDirectRDMAWritesOptionHost`|11.3| | | | | | | | | |
-|`cudaFlushGPUDirectRDMAWritesOptionMemOps`|11.3| | | | | | | | | |
-|`cudaFlushGPUDirectRDMAWritesOptions`|11.3| | | | | | | | | |
+|`cudaFlushGPUDirectRDMAWritesOptionHost`|11.3| | | |`hipFlushGPUDirectRDMAWritesOptionHost`|6.1.0| | | |6.1.0|
+|`cudaFlushGPUDirectRDMAWritesOptionMemOps`|11.3| | | |`hipFlushGPUDirectRDMAWritesOptionMemOps`|6.1.0| | | |6.1.0|
+|`cudaFlushGPUDirectRDMAWritesOptions`|11.3| | | |`hipFlushGPUDirectRDMAWritesOptions`|6.1.0| | | |6.1.0|
 |`cudaFlushGPUDirectRDMAWritesScope`|11.3| | | | | | | | | |
 |`cudaFlushGPUDirectRDMAWritesTarget`|11.3| | | | | | | | | |
 |`cudaFlushGPUDirectRDMAWritesTargetCurrentDevice`|11.3| | | | | | | | | |
@@ -1109,10 +1109,10 @@
 |`cudaGLMapFlagsNone`| | | | | | | | | | |
 |`cudaGLMapFlagsReadOnly`| | | | | | | | | | |
 |`cudaGLMapFlagsWriteDiscard`| | | | | | | | | | |
-|`cudaGPUDirectRDMAWritesOrdering`|11.3| | | | | | | | | |
-|`cudaGPUDirectRDMAWritesOrderingAllDevices`|11.3| | | | | | | | | |
-|`cudaGPUDirectRDMAWritesOrderingNone`|11.3| | | | | | | | | |
-|`cudaGPUDirectRDMAWritesOrderingOwner`|11.3| | | | | | | | | |
+|`cudaGPUDirectRDMAWritesOrdering`|11.3| | | |`hipGPUDirectRDMAWritesOrdering`|6.1.0| | | |6.1.0|
+|`cudaGPUDirectRDMAWritesOrderingAllDevices`|11.3| | | |`hipGPUDirectRDMAWritesOrderingAllDevices`|6.1.0| | | |6.1.0|
+|`cudaGPUDirectRDMAWritesOrderingNone`|11.3| | | |`hipGPUDirectRDMAWritesOrderingNone`|6.1.0| | | |6.1.0|
+|`cudaGPUDirectRDMAWritesOrderingOwner`|11.3| | | |`hipGPUDirectRDMAWritesOrderingOwner`|6.1.0| | | |6.1.0|
 |`cudaGetDriverEntryPointFlags`|11.3| | | | | | | | | |
 |`cudaGraphCondAssignDefault`|12.3| | | | | | | | | |
 |`cudaGraphCondTypeIf`|12.3| | | | | | | | | |
@@ -1151,19 +1151,19 @@
 |`cudaGraphExecUpdateResultInfo_st`|12.0| | | | | | | | | |
 |`cudaGraphExecUpdateSuccess`|10.2| | | |`hipGraphExecUpdateSuccess`|4.3.0| | | | |
 |`cudaGraphExec_t`|10.0| | | |`hipGraphExec_t`|4.3.0| | | | |
-|`cudaGraphInstantiateError`|12.0| | | | | | | | | |
+|`cudaGraphInstantiateError`|12.0| | | |`hipGraphInstantiateError`|6.1.0| | | |6.1.0|
 |`cudaGraphInstantiateFlagAutoFreeOnLaunch`|11.4| | | |`hipGraphInstantiateFlagAutoFreeOnLaunch`|5.2.0| | | | |
 |`cudaGraphInstantiateFlagDeviceLaunch`|12.0| | | |`hipGraphInstantiateFlagDeviceLaunch`|5.6.0| | | | |
 |`cudaGraphInstantiateFlagUpload`|12.0| | | |`hipGraphInstantiateFlagUpload`|5.6.0| | | | |
 |`cudaGraphInstantiateFlagUseNodePriority`|11.7| | | |`hipGraphInstantiateFlagUseNodePriority`|5.6.0| | | | |
 |`cudaGraphInstantiateFlags`|11.4| | | |`hipGraphInstantiateFlags`|5.2.0| | | | |
-|`cudaGraphInstantiateInvalidStructure`|12.0| | | | | | | | | |
-|`cudaGraphInstantiateMultipleDevicesNotSupported`|12.0| | | | | | | | | |
-|`cudaGraphInstantiateNodeOperationNotSupported`|12.0| | | | | | | | | |
-|`cudaGraphInstantiateParams`|12.0| | | | | | | | | |
-|`cudaGraphInstantiateParams_st`|12.0| | | | | | | | | |
-|`cudaGraphInstantiateResult`|12.0| | | | | | | | | |
-|`cudaGraphInstantiateSuccess`|12.0| | | | | | | | | |
+|`cudaGraphInstantiateInvalidStructure`|12.0| | | |`hipGraphInstantiateInvalidStructure`|6.1.0| | | |6.1.0|
+|`cudaGraphInstantiateMultipleDevicesNotSupported`|12.0| | | |`hipGraphInstantiateMultipleDevicesNotSupported`|6.1.0| | | |6.1.0|
+|`cudaGraphInstantiateNodeOperationNotSupported`|12.0| | | |`hipGraphInstantiateNodeOperationNotSupported`|6.1.0| | | |6.1.0|
+|`cudaGraphInstantiateParams`|12.0| | | |`hipGraphInstantiateParams`|6.1.0| | | |6.1.0|
+|`cudaGraphInstantiateParams_st`|12.0| | | |`hipGraphInstantiateParams`|6.1.0| | | |6.1.0|
+|`cudaGraphInstantiateResult`|12.0| | | |`hipGraphInstantiateResult`|6.1.0| | | |6.1.0|
+|`cudaGraphInstantiateSuccess`|12.0| | | |`hipGraphInstantiateSuccess`|6.1.0| | | |6.1.0|
 |`cudaGraphKernelNodePortDefault`|12.3| | | | | | | | | |
 |`cudaGraphKernelNodePortLaunchCompletion`|12.3| | | | | | | | | |
 |`cudaGraphKernelNodePortProgrammatic`|12.3| | | | | | | | | |
@@ -1172,7 +1172,7 @@
 |`cudaGraphMemAttrUsedMemCurrent`|11.4| | | |`hipGraphMemAttrUsedMemCurrent`|5.3.0| | | | |
 |`cudaGraphMemAttrUsedMemHigh`|11.4| | | |`hipGraphMemAttrUsedMemHigh`|5.3.0| | | | |
 |`cudaGraphMemAttributeType`|11.4| | | |`hipGraphMemAttributeType`|5.3.0| | | | |
-|`cudaGraphNodeParams`|12.2| | | | | | | | | |
+|`cudaGraphNodeParams`|12.2| | | |`hipGraphNodeParams`|6.1.0| | | |6.1.0|
 |`cudaGraphNodeType`|10.0| | | |`hipGraphNodeType`|4.3.0| | | | |
 |`cudaGraphNodeTypeConditional`|12.3| | | |`hipGraphNodeTypeConditional`| | | | | |
 |`cudaGraphNodeTypeCount`|10.0| | | |`hipGraphNodeTypeCount`|4.3.0| | | | |
@@ -1297,7 +1297,7 @@
 |`cudaMemAttachSingle`| | | | |`hipMemAttachSingle`|3.7.0| | | | |
 |`cudaMemFabricHandle_st`|12.3| | | | | | | | | |
 |`cudaMemFabricHandle_t`|12.3| | | | | | | | | |
-|`cudaMemFreeNodeParams`|12.2| | | | | | | | | |
+|`cudaMemFreeNodeParams`|12.2| | | |`hipMemFreeNodeParams`|6.1.0| | | |6.1.0|
 |`cudaMemHandleTypeNone`|11.2| | | |`hipMemHandleTypeNone`|5.2.0| | | | |
 |`cudaMemHandleTypePosixFileDescriptor`|11.2| | | |`hipMemHandleTypePosixFileDescriptor`|5.2.0| | | | |
 |`cudaMemHandleTypeWin32`|11.2| | | |`hipMemHandleTypeWin32`|5.2.0| | | | |
@@ -1338,7 +1338,7 @@
 |`cudaMemcpyHostToDevice`| | | | |`hipMemcpyHostToDevice`|1.5.0| | | | |
 |`cudaMemcpyHostToHost`| | | | |`hipMemcpyHostToHost`|1.5.0| | | | |
 |`cudaMemcpyKind`| | | | |`hipMemcpyKind`|1.5.0| | | | |
-|`cudaMemcpyNodeParams`|12.2| | | | | | | | | |
+|`cudaMemcpyNodeParams`|12.2| | | |`hipMemcpyNodeParams`|6.1.0| | | |6.1.0|
 |`cudaMemoryAdvise`|8.0| | | |`hipMemoryAdvise`|3.7.0| | | | |
 |`cudaMemoryType`| | | | |`hipMemoryType`|1.6.0| | | | |
 |`cudaMemoryTypeDevice`| | | | |`hipMemoryTypeDevice`|1.6.0| | | | |

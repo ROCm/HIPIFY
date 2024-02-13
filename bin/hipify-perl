@@ -1084,6 +1084,27 @@ my %experimental_funcs = (
     "cusolverSpDcsrlsvcholHost" => "6.1.0",
     "cusolverSpDcsrlsvchol" => "6.1.0",
     "cusolverSpCreate" => "6.1.0",
+    "cudaMemcpyNodeParams" => "6.1.0",
+    "cudaMemFreeNodeParams" => "6.1.0",
+    "cudaGraphNodeParams" => "6.1.0",
+    "cudaGraphInstantiateSuccess" => "6.1.0",
+    "cudaGraphInstantiateResult" => "6.1.0",
+    "cudaGraphInstantiateParams_st" => "6.1.0",
+    "cudaGraphInstantiateParams" => "6.1.0",
+    "cudaGraphInstantiateNodeOperationNotSupported" => "6.1.0",
+    "cudaGraphInstantiateMultipleDevicesNotSupported" => "6.1.0",
+    "cudaGraphInstantiateInvalidStructure" => "6.1.0",
+    "cudaGraphInstantiateError" => "6.1.0",
+    "cudaGPUDirectRDMAWritesOrderingOwner" => "6.1.0",
+    "cudaGPUDirectRDMAWritesOrderingNone" => "6.1.0",
+    "cudaGPUDirectRDMAWritesOrderingAllDevices" => "6.1.0",
+    "cudaGPUDirectRDMAWritesOrdering" => "6.1.0",
+    "cudaFlushGPUDirectRDMAWritesOptions" => "6.1.0",
+    "cudaFlushGPUDirectRDMAWritesOptionMemOps" => "6.1.0",
+    "cudaFlushGPUDirectRDMAWritesOptionHost" => "6.1.0",
+    "cudaEventWaitNodeParams" => "6.1.0",
+    "cudaEventRecordNodeParams" => "6.1.0",
+    "cudaChildGraphNodeParams" => "6.1.0",
     "cublasZswap_64" => "6.1.0",
     "cublasZscal_64" => "6.1.0",
     "cublasZrot_64" => "6.1.0",
@@ -1135,7 +1156,42 @@ my %experimental_funcs = (
     "cublasCdotc_64" => "6.1.0",
     "cublasCcopy_64" => "6.1.0",
     "cublasCaxpy_64" => "6.1.0",
+    "CUgraphNodeParams_st" => "6.1.0",
+    "CUgraphNodeParams" => "6.1.0",
+    "CUgraphInstantiateResult_enum" => "6.1.0",
+    "CUgraphInstantiateResult" => "6.1.0",
+    "CUflushGPUDirectRDMAWritesOptions_enum" => "6.1.0",
+    "CUflushGPUDirectRDMAWritesOptions" => "6.1.0",
+    "CUdriverProcAddressQueryResult_enum" => "6.1.0",
+    "CUdriverProcAddressQueryResult" => "6.1.0",
+    "CU_GPU_DIRECT_RDMA_WRITES_ORDERING_OWNER" => "6.1.0",
+    "CU_GPU_DIRECT_RDMA_WRITES_ORDERING_NONE" => "6.1.0",
+    "CU_GPU_DIRECT_RDMA_WRITES_ORDERING_ALL_DEVICES" => "6.1.0",
+    "CU_GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT" => "6.1.0",
+    "CU_GET_PROC_ADDRESS_SYMBOL_NOT_FOUND" => "6.1.0",
+    "CU_GET_PROC_ADDRESS_SUCCESS" => "6.1.0",
+    "CU_FLUSH_GPU_DIRECT_RDMA_WRITES_OPTION_MEMOPS" => "6.1.0",
+    "CU_FLUSH_GPU_DIRECT_RDMA_WRITES_OPTION_HOST" => "6.1.0",
     "CUSOLVER_STATUS_MATRIX_TYPE_NOT_SUPPORTED" => "6.1.0",
+    "CUGPUDirectRDMAWritesOrdering_enum" => "6.1.0",
+    "CUGPUDirectRDMAWritesOrdering" => "6.1.0",
+    "CUDA_MEM_FREE_NODE_PARAMS_st" => "6.1.0",
+    "CUDA_MEM_FREE_NODE_PARAMS" => "6.1.0",
+    "CUDA_MEMCPY_NODE_PARAMS_st" => "6.1.0",
+    "CUDA_MEMCPY_NODE_PARAMS" => "6.1.0",
+    "CUDA_GRAPH_INSTANTIATE_SUCCESS" => "6.1.0",
+    "CUDA_GRAPH_INSTANTIATE_PARAMS_st" => "6.1.0",
+    "CUDA_GRAPH_INSTANTIATE_PARAMS" => "6.1.0",
+    "CUDA_GRAPH_INSTANTIATE_NODE_OPERATION_NOT_SUPPORTED" => "6.1.0",
+    "CUDA_GRAPH_INSTANTIATE_MULTIPLE_CTXS_NOT_SUPPORTED" => "6.1.0",
+    "CUDA_GRAPH_INSTANTIATE_INVALID_STRUCTURE" => "6.1.0",
+    "CUDA_GRAPH_INSTANTIATE_ERROR" => "6.1.0",
+    "CUDA_EVENT_WAIT_NODE_PARAMS_st" => "6.1.0",
+    "CUDA_EVENT_WAIT_NODE_PARAMS" => "6.1.0",
+    "CUDA_EVENT_RECORD_NODE_PARAMS_st" => "6.1.0",
+    "CUDA_EVENT_RECORD_NODE_PARAMS" => "6.1.0",
+    "CUDA_CHILD_GRAPH_NODE_PARAMS_st" => "6.1.0",
+    "CUDA_CHILD_GRAPH_NODE_PARAMS" => "6.1.0",
     "CUBLAS_TF32_TENSOR_OP_MATH" => "6.1.0",
     "CUBLAS_TENSOR_OP_MATH" => "6.1.0",
     "CUBLAS_PEDANTIC_MATH" => "6.1.0",
@@ -1341,14 +1397,70 @@ sub experimentalSubstitutions {
     subst("cusolverSpScsrlsvchol", "hipsolverSpScsrlsvchol", "library");
     subst("cusolverSpScsrlsvcholHost", "hipsolverSpScsrlsvcholHost", "library");
     subst("cusolverSpSetStream", "hipsolverSpSetStream", "library");
+    subst("CUDA_CHILD_GRAPH_NODE_PARAMS", "hipChildGraphNodeParams", "type");
+    subst("CUDA_CHILD_GRAPH_NODE_PARAMS_st", "hipChildGraphNodeParams", "type");
+    subst("CUDA_EVENT_RECORD_NODE_PARAMS", "hipEventRecordNodeParams", "type");
+    subst("CUDA_EVENT_RECORD_NODE_PARAMS_st", "hipEventRecordNodeParams", "type");
+    subst("CUDA_EVENT_WAIT_NODE_PARAMS", "hipEventWaitNodeParams", "type");
+    subst("CUDA_EVENT_WAIT_NODE_PARAMS_st", "hipEventWaitNodeParams", "type");
+    subst("CUDA_GRAPH_INSTANTIATE_PARAMS", "hipGraphInstantiateParams", "type");
+    subst("CUDA_GRAPH_INSTANTIATE_PARAMS_st", "hipGraphInstantiateParams", "type");
+    subst("CUDA_MEMCPY_NODE_PARAMS", "hipMemcpyNodeParams", "type");
+    subst("CUDA_MEMCPY_NODE_PARAMS_st", "hipMemcpyNodeParams", "type");
+    subst("CUDA_MEM_FREE_NODE_PARAMS", "hipMemFreeNodeParams", "type");
+    subst("CUDA_MEM_FREE_NODE_PARAMS_st", "hipMemFreeNodeParams", "type");
+    subst("CUGPUDirectRDMAWritesOrdering", "hipGPUDirectRDMAWritesOrdering", "type");
+    subst("CUGPUDirectRDMAWritesOrdering_enum", "hipGPUDirectRDMAWritesOrdering", "type");
+    subst("CUdriverProcAddressQueryResult", "hipDriverProcAddressQueryResult", "type");
+    subst("CUdriverProcAddressQueryResult_enum", "hipDriverProcAddressQueryResult", "type");
+    subst("CUflushGPUDirectRDMAWritesOptions", "hipFlushGPUDirectRDMAWritesOptions", "type");
+    subst("CUflushGPUDirectRDMAWritesOptions_enum", "hipFlushGPUDirectRDMAWritesOptions", "type");
+    subst("CUgraphInstantiateResult", "hipGraphInstantiateResult", "type");
+    subst("CUgraphInstantiateResult_enum", "hipGraphInstantiateResult", "type");
+    subst("CUgraphNodeParams", "hipGraphNodeParams", "type");
+    subst("CUgraphNodeParams_st", "hipGraphNodeParams", "type");
     subst("cublasMath_t", "hipblasMath_t", "type");
+    subst("cudaChildGraphNodeParams", "hipChildGraphNodeParams", "type");
+    subst("cudaEventRecordNodeParams", "hipEventRecordNodeParams", "type");
+    subst("cudaEventWaitNodeParams", "hipEventWaitNodeParams", "type");
+    subst("cudaFlushGPUDirectRDMAWritesOptions", "hipFlushGPUDirectRDMAWritesOptions", "type");
+    subst("cudaGPUDirectRDMAWritesOrdering", "hipGPUDirectRDMAWritesOrdering", "type");
+    subst("cudaGraphInstantiateParams", "hipGraphInstantiateParams", "type");
+    subst("cudaGraphInstantiateParams_st", "hipGraphInstantiateParams", "type");
+    subst("cudaGraphInstantiateResult", "hipGraphInstantiateResult", "type");
+    subst("cudaGraphNodeParams", "hipGraphNodeParams", "type");
+    subst("cudaMemFreeNodeParams", "hipMemFreeNodeParams", "type");
+    subst("cudaMemcpyNodeParams", "hipMemcpyNodeParams", "type");
     subst("cusolverSpHandle_t", "hipsolverSpHandle_t", "type");
     subst("CUBLAS_DEFAULT_MATH", "HIPBLAS_DEFAULT_MATH", "numeric_literal");
     subst("CUBLAS_MATH_DISALLOW_REDUCED_PRECISION_REDUCTION", "HIPBLAS_MATH_DISALLOW_REDUCED_PRECISION_REDUCTION", "numeric_literal");
     subst("CUBLAS_PEDANTIC_MATH", "HIPBLAS_PEDANTIC_MATH", "numeric_literal");
     subst("CUBLAS_TENSOR_OP_MATH", "HIPBLAS_TENSOR_OP_MATH", "numeric_literal");
     subst("CUBLAS_TF32_TENSOR_OP_MATH", "HIPBLAS_TF32_TENSOR_OP_MATH", "numeric_literal");
+    subst("CUDA_GRAPH_INSTANTIATE_ERROR", "hipGraphInstantiateError", "numeric_literal");
+    subst("CUDA_GRAPH_INSTANTIATE_INVALID_STRUCTURE", "hipGraphInstantiateInvalidStructure", "numeric_literal");
+    subst("CUDA_GRAPH_INSTANTIATE_MULTIPLE_CTXS_NOT_SUPPORTED", "hipGraphInstantiateMultipleDevicesNotSupported", "numeric_literal");
+    subst("CUDA_GRAPH_INSTANTIATE_NODE_OPERATION_NOT_SUPPORTED", "hipGraphInstantiateNodeOperationNotSupported", "numeric_literal");
+    subst("CUDA_GRAPH_INSTANTIATE_SUCCESS", "hipGraphInstantiateSuccess", "numeric_literal");
     subst("CUSOLVER_STATUS_MATRIX_TYPE_NOT_SUPPORTED", "HIPSOLVER_STATUS_MATRIX_TYPE_NOT_SUPPORTED", "numeric_literal");
+    subst("CU_FLUSH_GPU_DIRECT_RDMA_WRITES_OPTION_HOST", "hipFlushGPUDirectRDMAWritesOptionHost", "numeric_literal");
+    subst("CU_FLUSH_GPU_DIRECT_RDMA_WRITES_OPTION_MEMOPS", "hipFlushGPUDirectRDMAWritesOptionMemOps", "numeric_literal");
+    subst("CU_GET_PROC_ADDRESS_SUCCESS", "HIP_GET_PROC_ADDRESS_SUCCESS", "numeric_literal");
+    subst("CU_GET_PROC_ADDRESS_SYMBOL_NOT_FOUND", "HIP_GET_PROC_ADDRESS_SYMBOL_NOT_FOUND", "numeric_literal");
+    subst("CU_GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT", "HIP_GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT", "numeric_literal");
+    subst("CU_GPU_DIRECT_RDMA_WRITES_ORDERING_ALL_DEVICES", "hipGPUDirectRDMAWritesOrderingAllDevices", "numeric_literal");
+    subst("CU_GPU_DIRECT_RDMA_WRITES_ORDERING_NONE", "hipGPUDirectRDMAWritesOrderingNone", "numeric_literal");
+    subst("CU_GPU_DIRECT_RDMA_WRITES_ORDERING_OWNER", "hipGPUDirectRDMAWritesOrderingOwner", "numeric_literal");
+    subst("cudaFlushGPUDirectRDMAWritesOptionHost", "hipFlushGPUDirectRDMAWritesOptionHost", "numeric_literal");
+    subst("cudaFlushGPUDirectRDMAWritesOptionMemOps", "hipFlushGPUDirectRDMAWritesOptionMemOps", "numeric_literal");
+    subst("cudaGPUDirectRDMAWritesOrderingAllDevices", "hipGPUDirectRDMAWritesOrderingAllDevices", "numeric_literal");
+    subst("cudaGPUDirectRDMAWritesOrderingNone", "hipGPUDirectRDMAWritesOrderingNone", "numeric_literal");
+    subst("cudaGPUDirectRDMAWritesOrderingOwner", "hipGPUDirectRDMAWritesOrderingOwner", "numeric_literal");
+    subst("cudaGraphInstantiateError", "hipGraphInstantiateError", "numeric_literal");
+    subst("cudaGraphInstantiateInvalidStructure", "hipGraphInstantiateInvalidStructure", "numeric_literal");
+    subst("cudaGraphInstantiateMultipleDevicesNotSupported", "hipGraphInstantiateMultipleDevicesNotSupported", "numeric_literal");
+    subst("cudaGraphInstantiateNodeOperationNotSupported", "hipGraphInstantiateNodeOperationNotSupported", "numeric_literal");
+    subst("cudaGraphInstantiateSuccess", "hipGraphInstantiateSuccess", "numeric_literal");
 }
 
 sub rocSubstitutions {
@@ -8488,7 +8600,6 @@ sub warnUnsupportedFunctions {
         "cudaMemsetParamsV2",
         "cudaMemoryTypeUnregistered",
         "cudaMemcpyToArrayAsync",
-        "cudaMemcpyNodeParams",
         "cudaMemcpyFromArrayAsync",
         "cudaMemcpyArrayToArray",
         "cudaMemcpy3DPeerParms",
@@ -8503,7 +8614,6 @@ sub warnUnsupportedFunctions {
         "cudaMemLocationTypeHostNumaCurrent",
         "cudaMemLocationTypeHostNuma",
         "cudaMemLocationTypeHost",
-        "cudaMemFreeNodeParams",
         "cudaMemFabricHandle_t",
         "cudaMemFabricHandle_st",
         "cudaMemAllocNodeParamsV2",
@@ -8571,21 +8681,12 @@ sub warnUnsupportedFunctions {
         "cudaGraphicsCubeFace",
         "cudaGraphRemoveDependencies_v2",
         "cudaGraphNodeSetParams",
-        "cudaGraphNodeParams",
         "cudaGraphNodeGetDependentNodes_v2",
         "cudaGraphNodeGetDependencies_v2",
         "cudaGraphKernelNodePortProgrammatic",
         "cudaGraphKernelNodePortLaunchCompletion",
         "cudaGraphKernelNodePortDefault",
         "cudaGraphInstantiateWithParams",
-        "cudaGraphInstantiateSuccess",
-        "cudaGraphInstantiateResult",
-        "cudaGraphInstantiateParams_st",
-        "cudaGraphInstantiateParams",
-        "cudaGraphInstantiateNodeOperationNotSupported",
-        "cudaGraphInstantiateMultipleDevicesNotSupported",
-        "cudaGraphInstantiateInvalidStructure",
-        "cudaGraphInstantiateError",
         "cudaGraphGetEdges_v2",
         "cudaGraphExecUpdateResultInfo_st",
         "cudaGraphExecUpdateResultInfo",
@@ -8618,10 +8719,6 @@ sub warnUnsupportedFunctions {
         "cudaGetFuncBySymbol",
         "cudaGetDriverEntryPointFlags",
         "cudaGetDriverEntryPoint",
-        "cudaGPUDirectRDMAWritesOrderingOwner",
-        "cudaGPUDirectRDMAWritesOrderingNone",
-        "cudaGPUDirectRDMAWritesOrderingAllDevices",
-        "cudaGPUDirectRDMAWritesOrdering",
         "cudaGLUnregisterBufferObject",
         "cudaGLUnmapBufferObjectAsync",
         "cudaGLUnmapBufferObject",
@@ -8648,9 +8745,6 @@ sub warnUnsupportedFunctions {
         "cudaFlushGPUDirectRDMAWritesTargetCurrentDevice",
         "cudaFlushGPUDirectRDMAWritesTarget",
         "cudaFlushGPUDirectRDMAWritesScope",
-        "cudaFlushGPUDirectRDMAWritesOptions",
-        "cudaFlushGPUDirectRDMAWritesOptionMemOps",
-        "cudaFlushGPUDirectRDMAWritesOptionHost",
         "cudaExternalSemaphoreWaitSkipNvSciBufMemSync",
         "cudaExternalSemaphoreSignalSkipNvSciBufMemSync",
         "cudaExternalSemaphoreHandleTypeTimelineSemaphoreWin32",
@@ -8662,11 +8756,9 @@ sub warnUnsupportedFunctions {
         "cudaExternalMemoryMipmappedArrayDesc",
         "cudaExternalMemoryHandleTypeNvSciBuf",
         "cudaExternalMemoryGetMappedMipmappedArray",
-        "cudaEventWaitNodeParams",
         "cudaEventWaitExternal",
         "cudaEventWaitDefault",
         "cudaEventRecordWithFlags",
-        "cudaEventRecordNodeParams",
         "cudaEventRecordExternal",
         "cudaEventRecordDefault",
         "cudaEventCreateFromEGLSync",
@@ -8938,7 +9030,6 @@ sub warnUnsupportedFunctions {
         "cudaClusterSchedulingPolicyLoadBalancing",
         "cudaClusterSchedulingPolicyDefault",
         "cudaClusterSchedulingPolicy",
-        "cudaChildGraphNodeParams",
         "cudaChannelFormatKindUnsignedNormalized8X4",
         "cudaChannelFormatKindUnsignedNormalized8X2",
         "cudaChannelFormatKindUnsignedNormalized8X1",
@@ -9306,10 +9397,6 @@ sub warnUnsupportedFunctions {
         "CUipcMem_flags",
         "CUgraphicsMapResourceFlags_enum",
         "CUgraphicsMapResourceFlags",
-        "CUgraphNodeParams_st",
-        "CUgraphNodeParams",
-        "CUgraphInstantiateResult_enum",
-        "CUgraphInstantiateResult",
         "CUgraphExecUpdateResultInfo_v1",
         "CUgraphExecUpdateResultInfo_st",
         "CUgraphExecUpdateResultInfo",
@@ -9324,8 +9411,6 @@ sub warnUnsupportedFunctions {
         "CUflushGPUDirectRDMAWritesTarget",
         "CUflushGPUDirectRDMAWritesScope_enum",
         "CUflushGPUDirectRDMAWritesScope",
-        "CUflushGPUDirectRDMAWritesOptions_enum",
-        "CUflushGPUDirectRDMAWritesOptions",
         "CUexternalSemaphore_st",
         "CUexternalMemory_st",
         "CUextSemaphore_st",
@@ -9356,8 +9441,6 @@ sub warnUnsupportedFunctions {
         "CUeglColorFormat",
         "CUdriverProcAddress_flags_enum",
         "CUdriverProcAddress_flags",
-        "CUdriverProcAddressQueryResult_enum",
-        "CUdriverProcAddressQueryResult",
         "CUdevprop_v1",
         "CUdevprop_st",
         "CUdevprop",
@@ -9559,15 +9642,9 @@ sub warnUnsupportedFunctions {
         "CU_GRAPHICS_MAP_RESOURCE_FLAGS_WRITE_DISCARD",
         "CU_GRAPHICS_MAP_RESOURCE_FLAGS_READ_ONLY",
         "CU_GRAPHICS_MAP_RESOURCE_FLAGS_NONE",
-        "CU_GPU_DIRECT_RDMA_WRITES_ORDERING_OWNER",
-        "CU_GPU_DIRECT_RDMA_WRITES_ORDERING_NONE",
-        "CU_GPU_DIRECT_RDMA_WRITES_ORDERING_ALL_DEVICES",
         "CU_GL_MAP_RESOURCE_FLAGS_WRITE_DISCARD",
         "CU_GL_MAP_RESOURCE_FLAGS_READ_ONLY",
         "CU_GL_MAP_RESOURCE_FLAGS_NONE",
-        "CU_GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT",
-        "CU_GET_PROC_ADDRESS_SYMBOL_NOT_FOUND",
-        "CU_GET_PROC_ADDRESS_SUCCESS",
         "CU_GET_PROC_ADDRESS_PER_THREAD_DEFAULT_STREAM",
         "CU_GET_PROC_ADDRESS_LEGACY_STREAM",
         "CU_GET_PROC_ADDRESS_DEFAULT",
@@ -9580,8 +9657,6 @@ sub warnUnsupportedFunctions {
         "CU_FLUSH_GPU_DIRECT_RDMA_WRITES_TO_OWNER",
         "CU_FLUSH_GPU_DIRECT_RDMA_WRITES_TO_ALL_DEVICES",
         "CU_FLUSH_GPU_DIRECT_RDMA_WRITES_TARGET_CURRENT_CTX",
-        "CU_FLUSH_GPU_DIRECT_RDMA_WRITES_OPTION_MEMOPS",
-        "CU_FLUSH_GPU_DIRECT_RDMA_WRITES_OPTION_HOST",
         "CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_TIMELINE_SEMAPHORE_WIN32",
         "CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_TIMELINE_SEMAPHORE_FD",
         "CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_NVSCISYNC",
@@ -9878,8 +9953,6 @@ sub warnUnsupportedFunctions {
         "CURAND_CHOOSE_BEST",
         "CURAND_BINARY_SEARCH",
         "CURAND_3RD",
-        "CUGPUDirectRDMAWritesOrdering_enum",
-        "CUGPUDirectRDMAWritesOrdering",
         "CUGLmap_flags_enum",
         "CUGLmap_flags",
         "CUFFT_XT_FORMAT_OUTPUT",
@@ -10483,14 +10556,10 @@ sub warnUnsupportedFunctions {
         "CUDA_POINTER_ATTRIBUTE_ACCESS_FLAGS",
         "CUDA_NVSCISYNC_ATTR_WAIT",
         "CUDA_NVSCISYNC_ATTR_SIGNAL",
-        "CUDA_MEM_FREE_NODE_PARAMS_st",
-        "CUDA_MEM_FREE_NODE_PARAMS",
         "CUDA_MEM_ALLOC_NODE_PARAMS_v2_st",
         "CUDA_MEM_ALLOC_NODE_PARAMS_v2",
         "CUDA_MEMSET_NODE_PARAMS_v2_st",
         "CUDA_MEMSET_NODE_PARAMS_v2",
-        "CUDA_MEMCPY_NODE_PARAMS_st",
-        "CUDA_MEMCPY_NODE_PARAMS",
         "CUDA_MEMCPY3D_PEER_v1",
         "CUDA_MEMCPY3D_PEER_st",
         "CUDA_MEMCPY3D_PEER",
@@ -10500,22 +10569,11 @@ sub warnUnsupportedFunctions {
         "CUDA_KERNEL_NODE_PARAMS_v2",
         "CUDA_HOST_NODE_PARAMS_v2_st",
         "CUDA_HOST_NODE_PARAMS_v2",
-        "CUDA_GRAPH_INSTANTIATE_SUCCESS",
-        "CUDA_GRAPH_INSTANTIATE_PARAMS_st",
-        "CUDA_GRAPH_INSTANTIATE_PARAMS",
-        "CUDA_GRAPH_INSTANTIATE_NODE_OPERATION_NOT_SUPPORTED",
-        "CUDA_GRAPH_INSTANTIATE_MULTIPLE_CTXS_NOT_SUPPORTED",
-        "CUDA_GRAPH_INSTANTIATE_INVALID_STRUCTURE",
-        "CUDA_GRAPH_INSTANTIATE_ERROR",
         "CUDA_EXTERNAL_SEMAPHORE_WAIT_SKIP_NVSCIBUF_MEMSYNC",
         "CUDA_EXTERNAL_SEMAPHORE_SIGNAL_SKIP_NVSCIBUF_MEMSYNC",
         "CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC_v1",
         "CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC_st",
         "CUDA_EXTERNAL_MEMORY_MIPMAPPED_ARRAY_DESC",
-        "CUDA_EVENT_WAIT_NODE_PARAMS_st",
-        "CUDA_EVENT_WAIT_NODE_PARAMS",
-        "CUDA_EVENT_RECORD_NODE_PARAMS_st",
-        "CUDA_EVENT_RECORD_NODE_PARAMS",
         "CUDA_ERROR_UNSUPPORTED_PTX_VERSION",
         "CUDA_ERROR_UNSUPPORTED_EXEC_AFFINITY",
         "CUDA_ERROR_UNSUPPORTED_DEVSIDE_SYNC",
@@ -10550,8 +10608,6 @@ sub warnUnsupportedFunctions {
         "CUDA_ERROR_CDP_NOT_SUPPORTED",
         "CUDA_EGL_MAX_PLANES",
         "CUDA_CONDITIONAL_NODE_PARAMS",
-        "CUDA_CHILD_GRAPH_NODE_PARAMS_st",
-        "CUDA_CHILD_GRAPH_NODE_PARAMS",
         "CUDA_CB",
         "CUDA_BATCH_MEM_OP_NODE_PARAMS_v2_st",
         "CUDA_BATCH_MEM_OP_NODE_PARAMS_v2",
