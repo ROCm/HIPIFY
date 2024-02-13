@@ -1076,6 +1076,8 @@ my %removed_funcs = (
 );
 
 my %experimental_funcs = (
+    "cusparseCscGet" => "6.1.0",
+    "cusparseConstCscGet" => "6.1.0",
     "cusolverSpSetStream" => "6.1.0",
     "cusolverSpScsrlsvcholHost" => "6.1.0",
     "cusolverSpScsrlsvchol" => "6.1.0",
@@ -1465,6 +1467,8 @@ sub experimentalSubstitutions {
     subst("cusolverSpScsrlsvchol", "hipsolverSpScsrlsvchol", "library");
     subst("cusolverSpScsrlsvcholHost", "hipsolverSpScsrlsvcholHost", "library");
     subst("cusolverSpSetStream", "hipsolverSpSetStream", "library");
+    subst("cusparseConstCscGet", "hipsparseConstCscGet", "library");
+    subst("cusparseCscGet", "hipsparseCscGet", "library");
     subst("CUDA_CHILD_GRAPH_NODE_PARAMS", "hipChildGraphNodeParams", "type");
     subst("CUDA_CHILD_GRAPH_NODE_PARAMS_st", "hipChildGraphNodeParams", "type");
     subst("CUDA_EVENT_RECORD_NODE_PARAMS", "hipEventRecordNodeParams", "type");
@@ -7898,7 +7902,6 @@ sub warnUnsupportedFunctions {
         "cusparseCsrmvEx",
         "cusparseCsrilu0Ex",
         "cusparseCsr2cscEx",
-        "cusparseCscGet",
         "cusparseCreateSolveAnalysisInfo",
         "cusparseCreateSlicedEll",
         "cusparseCreateConstSlicedEll",
@@ -7907,7 +7910,6 @@ sub warnUnsupportedFunctions {
         "cusparseContext",
         "cusparseConstrainedGeMM_bufferSize",
         "cusparseConstrainedGeMM",
-        "cusparseConstCscGet",
         "cusparseColorInfo",
         "cusparseColorAlg_t",
         "cusparseChybsv_solve",

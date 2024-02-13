@@ -204,6 +204,7 @@ int main() {
   const void** const cooRowInd_const = const_cast<const void**>(&cooRowInd);
   int icooRowInd = 0;
   void *cscRowInd = nullptr;
+  const void** const cscRowInd_const = const_cast<const void**>(&cscRowInd);
   void *csrColInd = nullptr;
   const void** const csrColInd_const = const_cast<const void**>(&csrColInd);
   void *cooColInd = nullptr;
@@ -215,11 +216,13 @@ int main() {
   void *csrValues = nullptr;
   const void** const csrValues_const = const_cast<const void**>(&csrValues);
   void *cscValues = nullptr;
+  const void** const cscValues_const = const_cast<const void**>(&cscValues);
   void *ellValue = nullptr;
   const void** const ellValue_const = const_cast<const void**>(&ellValue);
   void *csrRowOffsets = nullptr;
   const void** const csrRowOffsets_const = const_cast<const void**>(&csrRowOffsets);
   void *cscColOffsets = nullptr;
+  const void** const cscColOffsets_const = const_cast<const void**>(&cscColOffsets);
   void *cooRows = nullptr;
   int icooRows = 0;
   void *cooColumns = nullptr;
@@ -2798,6 +2801,13 @@ int main() {
 #endif
 #endif
 
+#if CUDA_VERSION >= 11070
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCscGet(cusparseSpMatDescr_t spMatDescr, int64_t* rows, int64_t* cols, int64_t* nnz, void** cscColOffsets, void** cscRowInd, void** cscValues, cusparseIndexType_t* cscColOffsetsType, cusparseIndexType_t* cscRowIndType, cusparseIndexBase_t* idxBase, cudaDataType* valueType);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseCscGet(const hipsparseSpMatDescr_t spMatDescr, int64_t* rows, int64_t* cols, int64_t* nnz, void** cscColOffsets, void** cscRowInd, void** cscValues, hipsparseIndexType_t* cscColOffsetsType, hipsparseIndexType_t* cscRowIndType, hipsparseIndexBase_t* idxBase, hipDataType* valueType);
+  // CHECK: status_t = hipsparseCscGet(spmatA, &rows, &cols, &nnz, &cscColOffsets, &cscRowInd, &cscValues, &cscColOffsetsType, &cscRowIndType, &indexBase_t, &dataType);
+  status_t = cusparseCscGet(spmatA, &rows, &cols, &nnz, &cscColOffsets, &cscRowInd, &cscValues, &cscColOffsetsType, &cscRowIndType, &indexBase_t, &dataType);
+#endif
+
 #if CUDA_VERSION < 12000
   // CUDA: CUSPARSE_DEPRECATED(cusparseSparseToDense) cusparseStatus_t CUSPARSEAPI cusparseZcsc2dense(cusparseHandle_t handle, int m, int n, const cusparseMatDescr_t descrA, const cuDoubleComplex* cscSortedValA, const int* cscSortedRowIndA, const int* cscSortedColPtrA, cuDoubleComplex* A, int lda);
   // HIP: DEPRECATED_CUDA_11000("The routine will be removed in CUDA 12") HIPSPARSE_EXPORT hipsparseStatus_t hipsparseZcsc2dense(hipsparseHandle_t handle, int m, int n, const hipsparseMatDescr_t descr, const hipDoubleComplex* csc_val, const int* csc_row_ind, const int* csc_col_ptr, hipDoubleComplex* A, int ld);
@@ -3376,6 +3386,11 @@ int main() {
   // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseConstDnVecGetValues(hipsparseConstDnVecDescr_t dnVecDescr, const void** values);
   // CHECK: status_t = hipsparseConstDnVecGetValues(constDnVecDescr, values_const);
   status_t = cusparseConstDnVecGetValues(constDnVecDescr, values_const);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseConstCscGet(cusparseConstSpMatDescr_t spMatDescr, int64_t* rows, int64_t* cols, int64_t* nnz, const void** cscColOffsets, const void** cscRowInd, const void** cscValues, cusparseIndexType_t* cscColOffsetsType, cusparseIndexType_t* cscRowIndType, cusparseIndexBase_t* idxBase, cudaDataType* valueType);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseConstCscGet(hipsparseConstSpMatDescr_t spMatDescr, int64_t* rows, int64_t* cols, int64_t* nnz, const void** cscColOffsets, const void** cscRowInd, const void** cscValues, hipsparseIndexType_t* cscColOffsetsType, hipsparseIndexType_t* cscRowIndType, hipsparseIndexBase_t* idxBase, hipDataType* valueType);
+  // CHECK: status_t = hipsparseConstCscGet(constSpMatDescr, &rows, &cols, &nnz, cscColOffsets_const, cscRowInd_const, cscValues_const, &cscColOffsetsType, &cscRowIndType, &indexBase_t, &dataType);
+  status_t = cusparseConstCscGet(constSpMatDescr, &rows, &cols, &nnz, cscColOffsets_const, cscRowInd_const, cscValues_const, &cscColOffsetsType, &cscRowIndType, &indexBase_t, &dataType);
 #endif
 
   return 0;
