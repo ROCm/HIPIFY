@@ -803,7 +803,7 @@
 |`cusparseBsrSetStridedBatch`|12.1| | | | | | | | | | | | | | | |
 |`cusparseConstBlockedEllGet`|12.0| | | |`hipsparseConstBlockedEllGet`|6.0.0| | | | |`rocsparse_const_bell_get`|6.0.0| | | | |
 |`cusparseConstCooGet`|12.0| | | |`hipsparseConstCooGet`|6.0.0| | | | |`rocsparse_const_coo_get`|6.0.0| | | | |
-|`cusparseConstCscGet`|12.0| | | | | | | | | |`rocsparse_const_csc_get`|6.0.0| | | | |
+|`cusparseConstCscGet`|12.0| | | |`hipsparseConstCscGet`|6.1.0| | | |6.1.0|`rocsparse_const_csc_get`|6.0.0| | | | |
 |`cusparseConstCsrGet`|12.0| | | |`hipsparseConstCsrGet`|6.0.0| | | | |`rocsparse_const_csr_get`|6.0.0| | | | |
 |`cusparseConstDnMatGet`|12.0| | | |`hipsparseConstDnMatGet`|6.0.0| | | | |`rocsparse_const_dnmat_get`|6.0.0| | | | |
 |`cusparseConstDnMatGetValues`|12.0| | | |`hipsparseConstDnMatGetValues`|6.0.0| | | | |`rocsparse_const_dnmat_get_values`|6.0.0| | | | |
@@ -837,7 +837,7 @@
 |`cusparseCreateDnVec`|10.2| | | |`hipsparseCreateDnVec`|4.1.0| | | | |`rocsparse_create_dnvec_descr`|4.1.0| | | | |
 |`cusparseCreateSlicedEll`|12.1| | | | | | | | | | | | | | | |
 |`cusparseCreateSpVec`|10.2| | | |`hipsparseCreateSpVec`|4.1.0| | | | |`rocsparse_create_spvec_descr`|4.1.0| | | | |
-|`cusparseCscGet`|11.7| | | | | | | | | | | | | | | |
+|`cusparseCscGet`|11.7| | | |`hipsparseCscGet`|6.1.0| | | |6.1.0| | | | | | |
 |`cusparseCscSetPointers`|11.1| | | |`hipsparseCscSetPointers`|4.2.0| | | | |`rocsparse_csc_set_pointers`|4.1.0| | | | |
 |`cusparseCsrGet`|10.2| | | |`hipsparseCsrGet`|4.1.0| | | | |`rocsparse_csr_get`|4.1.0| | | | |
 |`cusparseCsrSetPointers`|11.0| | | |`hipsparseCsrSetPointers`|4.1.0| | | | |`rocsparse_csr_set_pointers`|4.1.0| | | | |
