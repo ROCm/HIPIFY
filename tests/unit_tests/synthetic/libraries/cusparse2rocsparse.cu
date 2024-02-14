@@ -1656,11 +1656,11 @@ int main() {
   status_t = cusparseDestroyPruneInfo(prune_info);
 #endif
 
-#if (CUDA_VERSION >= 10010 && CUDA_VERSION < 11000 && !defined(_WIN32)) || CUDA_VERSION >= 11000
+#if (CUDA_VERSION >= 10010 && CUSPARSE_VERSION >= 10200 && CUDA_VERSION < 11000 && !defined(_WIN32)) || CUDA_VERSION >= 11000
   // CHECK: _rocsparse_spmat_descr *spMatDescr = nullptr;
-  // CHECK-NEXT: rocsparse_spmat_descr spMatDescr_t, matC;
+  // CHECK-NEXT: rocsparse_spmat_descr spMatDescr_t, matC, spmatA, spmatB, spmatC;
   cusparseSpMatDescr *spMatDescr = nullptr;
-  cusparseSpMatDescr_t spMatDescr_t, matC;
+  cusparseSpMatDescr_t spMatDescr_t, matC, spmatA, spmatB, spmatC;
 
   // CHECK: _rocsparse_dnmat_descr *dnMatDescr = nullptr;
   // CHECK-NEXT: rocsparse_dnmat_descr dnMatDescr_t, matA, matB;
@@ -2131,6 +2131,13 @@ int main() {
   // CHECK-NEXT: rocsparse_spsm_alg SPSM_ALG_DEFAULT = rocsparse_spsm_alg_default;
   cusparseSpSMAlg_t spSMAlg_t;
   cusparseSpSMAlg_t SPSM_ALG_DEFAULT = CUSPARSE_SPSM_ALG_DEFAULT;
+#endif
+
+#if CUDA_VERSION >= 11070
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCscGet(cusparseSpMatDescr_t spMatDescr, int64_t* rows, int64_t* cols, int64_t* nnz, void** cscColOffsets, void** cscRowInd, void** cscValues, cusparseIndexType_t* cscColOffsetsType, cusparseIndexType_t* cscRowIndType, cusparseIndexBase_t* idxBase, cudaDataType* valueType);
+  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_csc_get(const rocsparse_spmat_descr descr, int64_t* rows, int64_t* cols, int64_t* nnz, void** csc_col_ptr, void** csc_row_ind, void** csc_val, rocsparse_indextype* col_ptr_type, rocsparse_indextype* row_ind_type, rocsparse_index_base* idx_base, rocsparse_datatype* data_type);
+  // CHECK: status_t = rocsparse_csc_get(spmatA, &rows, &cols, &nnz, &cscColOffsets, &cscRowInd, &cscValues, &cscColOffsetsType, &cscRowIndType, &indexBase_t, &dataType);
+  status_t = cusparseCscGet(spmatA, &rows, &cols, &nnz, &cscColOffsets, &cscRowInd, &cscValues, &cscColOffsetsType, &cscRowIndType, &indexBase_t, &dataType);
 #endif
 
 #if CUDA_VERSION < 12000
