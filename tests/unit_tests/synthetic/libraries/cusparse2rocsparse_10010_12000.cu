@@ -47,6 +47,8 @@ int main() {
   void *pcscVal = nullptr;
   void *alpha = nullptr;
   void *beta = nullptr;
+  void *tempBuffer = nullptr;
+  void* result = nullptr;
 
   // CHECK: rocsparse_operation opA, opB, opX;
   cusparseOperation_t opA, opB, opX;
@@ -57,7 +59,7 @@ int main() {
   cudaDataType dataType;
 #endif
 
-#if CUDA_VERSION >= 10010
+#if CUDA_VERSION >= 10010 && CUSPARSE_VERSION >= 10200
   // TODO: cusparseCsr2CscAlg_t has no analogue in rocSPARSE. The deletion of declaration and usage is needed to be implemented
   cusparseCsr2CscAlg_t Csr2CscAlg_t;
 
@@ -71,12 +73,15 @@ int main() {
   // CHECK: rocsparse_spmm_alg spMMAlg_t;
   cusparseSpMMAlg_t spMMAlg_t;
 
-#if CUDA_VERSION < 12000
-  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpMM_bufferSize(cusparseHandle_t handle, cusparseOperation_t opA, cusparseOperation_t opB, const void* alpha, const cusparseSpMatDescr_t matA, const cusparseDnMatDescr_t matB, const void* beta, cusparseDnMatDescr_t matC, cudaDataType computeType, cusparseSpMMAlg_t alg, size_t* bufferSize);
-  // ROC: ROCSPARSE_EXPORT rocsparse_status rocsparse_spmm(rocsparse_handle handle, rocsparse_operation trans_A, rocsparse_operation trans_B, const void* alpha, const rocsparse_spmat_descr mat_A, const rocsparse_dnmat_descr mat_B, const void* beta, const rocsparse_dnmat_descr mat_C, rocsparse_datatype compute_type, rocsparse_spmm_alg alg, rocsparse_spmm_stage stage, size_t* buffer_size, void* temp_buffer);
-  // CHECK: status_t = rocsparse_spmm(handle_t, opA, opB, alpha, spmatA, dnmatB, beta, dnmatC, dataType, spMMAlg_t, rocsparse_spmm_stage_compute, &bufferSize, nullptr);
-  status_t = cusparseSpMM_bufferSize(handle_t, opA, opB, alpha, spmatA, dnmatB, beta, dnmatC, dataType, spMMAlg_t, &bufferSize);
-#endif
+  // CHECK: _rocsparse_spvec_descr *spVecDescr = nullptr;
+  // CHECK-NEXT: rocsparse_spvec_descr spVecDescr_t;
+  cusparseSpVecDescr *spVecDescr = nullptr;
+  cusparseSpVecDescr_t spVecDescr_t;
+
+  // CHECK: _rocsparse_dnvec_descr *dnVecDescr = nullptr;
+  // CHECK-NEXT: rocsparse_dnvec_descr dnVecDescr_t, vecX, vecY;
+  cusparseDnVecDescr *dnVecDescr = nullptr;
+  cusparseDnVecDescr_t dnVecDescr_t, vecX, vecY;
 #endif
 #endif
 

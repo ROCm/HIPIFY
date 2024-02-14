@@ -213,6 +213,13 @@ const std::string sCusparseSpSM_analysis = "cusparseSpSM_analysis";
 const std::string sCusparseSpSM_solve = "cusparseSpSM_solve";
 const std::string sCusparseXcsrgeam2Nnz = "cusparseXcsrgeam2Nnz";
 const std::string sCudaMallocHost = "cudaMallocHost";
+const std::string sCusparseSpMM = "cusparseSpMM";
+const std::string sCusparseSpVV = "cusparseSpVV";
+const std::string sCusparseSpVV_bufferSize = "cusparseSpVV_bufferSize";
+const std::string sCusparseSpMV = "cusparseSpMV";
+const std::string sCusparseSpMV_bufferSize = "cusparseSpMV_bufferSize";
+const std::string sCusparseSpMM_preprocess = "cusparseSpMM_preprocess";
+const std::string sCusparseSpSV_bufferSize = "cusparseSpSV_bufferSize";
 
 // CUDA_OVERLOADED
 const std::string sCudaEventCreate = "cudaEventCreate";
@@ -2048,6 +2055,85 @@ std::map<std::string, std::vector<ArgCastStruct>> FuncArgCasts {
       }
     }
   },
+  {sCusparseSpMM,
+    {
+      {
+        {
+          {10, {e_add_const_argument, cw_None, "rocsparse_spmm_stage_compute, nullptr"}},
+        },
+        true,
+        false
+      }
+    }
+  },
+  {sCusparseSpVV_bufferSize,
+    {
+      {
+        {
+          {7, {e_add_const_argument, cw_None, "nullptr"}},
+        },
+        true,
+        false
+      }
+    }
+  },
+  {sCusparseSpVV,
+    {
+      {
+        {
+          {6, {e_add_const_argument, cw_None, "nullptr"}}
+        },
+        true,
+        false
+      }
+    }
+  },
+  {sCusparseSpMV_bufferSize,
+    {
+      {
+        {
+          {9, {e_add_const_argument, cw_None, "rocsparse_spmv_stage_buffer_size"}},
+          {11, {e_add_const_argument, cw_None, "nullptr"}},
+        },
+        true,
+        false
+      }
+    }
+  },
+  {sCusparseSpMV,
+    {
+      {
+        {
+          {9, {e_add_const_argument, cw_None, "rocsparse_spmv_stage_compute"}}
+        },
+        true,
+        false
+      }
+    }
+  },
+  {sCusparseSpMM_preprocess,
+    {
+      {
+        {
+          {10, {e_add_const_argument, cw_None, "rocsparse_spmm_stage_preprocess, nullptr"}},
+        },
+        true,
+        false
+      }
+    }
+  },
+  {sCusparseSpSV_bufferSize,
+    {
+      {
+        {
+          {8, {e_replace_argument_with_const, cw_None, "rocsparse_spsv_stage_buffer_size"}},
+          {10, {e_add_const_argument, cw_None, "nullptr"}},
+        },
+        true,
+        false
+      }
+    }
+  },
 };
 
 void HipifyAction::RewriteString(StringRef s, clang::SourceLocation start) {
@@ -2906,11 +2992,18 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
             sCusparseSparseToDense_bufferSize,
             sCusparseDenseToSparse_bufferSize,
             sCusparseDenseToSparse_analysis,
+            sCusparseSpMM,
             sCusparseSpMM_bufferSize,
             sCusparseSpSM_analysis,
             sCusparseSpSM_solve,
             sCusparseXcsrgeam2Nnz,
-            sCudaMallocHost
+            sCudaMallocHost,
+            sCusparseSpVV,
+            sCusparseSpVV_bufferSize,
+            sCusparseSpMV,
+            sCusparseSpMV_bufferSize,
+            sCusparseSpMM_preprocess,
+            sCusparseSpSV_bufferSize
           )
         )
       )
