@@ -2237,6 +2237,7 @@ sub rocSubstitutions {
     subst("cusparseCreateMatDescr", "rocsparse_create_mat_descr", "library");
     subst("cusparseCreatePruneInfo", "rocsparse_create_mat_info", "library");
     subst("cusparseCreateSpVec", "rocsparse_create_spvec_descr", "library");
+    subst("cusparseCscGet", "rocsparse_csc_get", "library");
     subst("cusparseCscSetPointers", "rocsparse_csc_set_pointers", "library");
     subst("cusparseCsctr", "rocsparse_csctr", "library");
     subst("cusparseCsr2cscEx2_bufferSize", "rocsparse_csr2csc_buffer_size", "library");
