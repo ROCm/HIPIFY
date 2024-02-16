@@ -12,7 +12,7 @@
 # (this is useful for testing improvements to the hipify-perl toolset).
 
 SCRIPT_DIR="$(dirname "$(realpath "$0")")"
-PRIV_SCRIPT_DIR="$SCRIPT_DIR/../../libexec/hipify"
+PRIV_SCRIPT_DIR="$SCRIPT_DIR/../libexec/hipify"
 SEARCH_DIR=$1
 shift
 $SCRIPT_DIR/hipify-perl -inplace -print-stats "$@" `$PRIV_SCRIPT_DIR/findcode.sh $SEARCH_DIR`
