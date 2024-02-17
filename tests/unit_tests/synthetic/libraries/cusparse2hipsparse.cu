@@ -1373,6 +1373,26 @@ int main() {
   // CHECK: status_t = hipsparseScsru2csr_bufferSizeExt(handle_t, m, n, innz, &fbsrSortedVal, &bsrSortedRowPtr, &bsrSortedColInd, csru2_info, &bufferSize);
   status_t = cusparseScsru2csr_bufferSizeExt(handle_t, m, n, innz, &fbsrSortedVal, &bsrSortedRowPtr, &bsrSortedColInd, csru2_info, &bufferSize);
 
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseZcsr2csru(cusparseHandle_t handle, int m, int n, int nnz, const cusparseMatDescr_t descrA, cuDoubleComplex* csrVal, const int* csrRowPtr, int* csrColInd, csru2csrInfo_t info, void* pBuffer);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseZcsr2csru(hipsparseHandle_t handle, int m, int n, int nnz, const hipsparseMatDescr_t descrA, hipDoubleComplex* csrVal, const int* csrRowPtr, int* csrColInd, csru2csrInfo_t info, void* pBuffer);
+  // CHECK: status_t = hipsparseZcsr2csru(handle_t, m, n, innz, matDescr_A, &dComplexbsrSortedVal, &bsrSortedRowPtr, &bsrSortedColInd, csru2_info, pBuffer);
+  status_t = cusparseZcsr2csru(handle_t, m, n, innz, matDescr_A, &dComplexbsrSortedVal, &bsrSortedRowPtr, &bsrSortedColInd, csru2_info, pBuffer);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseCcsr2csru(cusparseHandle_t handle, int m, int n, int nnz, const cusparseMatDescr_t descrA, cuComplex* csrVal, const int* csrRowPtr, int* csrColInd, csru2csrInfo_t info, void* pBuffer);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseCcsr2csru(hipsparseHandle_t handle, int m, int n, int nnz, const hipsparseMatDescr_t descrA, hipComplex* csrVal, const int* csrRowPtr, int* csrColInd, csru2csrInfo_t info, void* pBuffer);
+  // CHECK: status_t = hipsparseCcsr2csru(handle_t, m, n, innz, matDescr_A, &complexbsrSortedVal, &bsrSortedRowPtr, &bsrSortedColInd, csru2_info, pBuffer);
+  status_t = cusparseCcsr2csru(handle_t, m, n, innz, matDescr_A, &complexbsrSortedVal, &bsrSortedRowPtr, &bsrSortedColInd, csru2_info, pBuffer);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseDcsr2csru(cusparseHandle_t handle, int m, int n, int nnz, const cusparseMatDescr_t descrA, double* csrVal, const int* csrRowPtr, int* csrColInd, csru2csrInfo_t info, void* pBuffer);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseDcsr2csru(hipsparseHandle_t handle, int m, int n, int nnz, const hipsparseMatDescr_t descrA, double* csrVal, const int* csrRowPtr, int* csrColInd, csru2csrInfo_t info, void* pBuffer);
+  // CHECK: status_t = hipsparseDcsr2csru(handle_t, m, n, innz, matDescr_A, &dbsrSortedVal, &bsrSortedRowPtr, &bsrSortedColInd, csru2_info, pBuffer);
+  status_t = cusparseDcsr2csru(handle_t, m, n, innz, matDescr_A, &dbsrSortedVal, &bsrSortedRowPtr, &bsrSortedColInd, csru2_info, pBuffer);
+
+  // CUDA: CUSPARSE_DEPRECATED cusparseStatus_t CUSPARSEAPI cusparseScsr2csru(cusparseHandle_t handle, int m, int n, int nnz, const cusparseMatDescr_t descrA, float* csrVal, const int* csrRowPtr, int* csrColInd, csru2csrInfo_t info, void* pBuffer);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseScsr2csru(hipsparseHandle_t handle, int m, int n, int nnz, const hipsparseMatDescr_t descrA, float* csrVal, const int* csrRowPtr, int* csrColInd, csru2csrInfo_t info, void* pBuffer);
+  // CHECK: status_t = hipsparseScsr2csru(handle_t, m, n, innz, matDescr_A, &fbsrSortedVal, &bsrSortedRowPtr, &bsrSortedColInd, csru2_info, pBuffer);
+  status_t = cusparseScsr2csru(handle_t, m, n, innz, matDescr_A, &fbsrSortedVal, &bsrSortedRowPtr, &bsrSortedColInd, csru2_info, pBuffer);
+
 #if CUDA_VERSION >= 7050
   // CUDA: cusparseStatus_t CUSPARSEAPI cusparseZgemvi(cusparseHandle_t handle, cusparseOperation_t transA, int m, int n, const cuDoubleComplex* alpha, const cuDoubleComplex* A, int lda, int nnz, const cuDoubleComplex* xVal, const int* xInd, const cuDoubleComplex* beta, cuDoubleComplex* y, cusparseIndexBase_t idxBase, void* pBuffer);
   // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseZgemvi(hipsparseHandle_t handle, hipsparseOperation_t transA, int m, int n, const hipDoubleComplex* alpha, const hipDoubleComplex* A, int lda, int nnz, const hipDoubleComplex* x, const int* xInd, const hipDoubleComplex* beta, hipDoubleComplex* y, hipsparseIndexBase_t idxBase, void* pBuffer);
