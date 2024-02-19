@@ -2597,6 +2597,16 @@ int main() {
   // CHECK: status_t = hipsparseCsrSetPointers(spMatDescr_t, csrRowOffsets, csrColInd, csrValues);
   status_t = cusparseCsrSetPointers(spMatDescr_t, csrRowOffsets, csrColInd, csrValues);
 
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpGEMM_createDescr(cusparseSpGEMMDescr_t* descr);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpGEMM_createDescr(hipsparseSpGEMMDescr_t* descr);
+  // CHECK: status_t = hipsparseSpGEMM_createDescr(&spGEMMDescr);
+  status_t = cusparseSpGEMM_createDescr(&spGEMMDescr);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpGEMM_destroyDescr(cusparseSpGEMMDescr_t descr);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpGEMM_destroyDescr(hipsparseSpGEMMDescr_t descr);
+  // CHECK: status_t = hipsparseSpGEMM_destroyDescr(spGEMMDescr);
+  status_t = cusparseSpGEMM_destroyDescr(spGEMMDescr);
+
 #if CUDA_VERSION < 12000
   // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpMatGetSize(cusparseSpMatDescr_t spMatDescr, int64_t* rows, int64_t* cols, int64_t* nnz);
   // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpMatGetSize(hipsparseSpMatDescr_t spMatDescr, int64_t* rows, int64_t* cols, int64_t* nnz);
@@ -2797,6 +2807,16 @@ int main() {
   // CHECK: hipsparseSpSVDescr_t spSVDescr;
   cusparseSpSVDescr_t spSVDescr;
 
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpSV_createDescr(cusparseSpSVDescr_t* descr);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpSV_createDescr(hipsparseSpSVDescr_t* descr);
+  // CHECK: status_t = hipsparseSpSV_createDescr(&spSVDescr);
+  status_t = cusparseSpSV_createDescr(&spSVDescr);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpSV_destroyDescr(cusparseSpSVDescr_t descr);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpSV_destroyDescr(hipsparseSpSVDescr_t descr);
+  // CHECK: status_t = hipsparseSpSV_destroyDescr(spSVDescr);
+  status_t = cusparseSpSV_destroyDescr(spSVDescr);
+
 #if CUDA_VERSION < 12000
   // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpMatGetAttribute(cusparseSpMatDescr_t spMatDescr, cusparseSpMatAttribute_t attribute, void* data, size_t dataSize);
   // HIP: hipsparseStatus_t hipsparseSpMatGetAttribute(hipsparseSpMatDescr_t spMatDescr, hipsparseSpMatAttribute_t attribute, void* data, size_t dataSize);
@@ -2838,6 +2858,16 @@ int main() {
   // CHECK-NEXT: hipsparseSpGEMMAlg_t SPGEMM_CSR_ALG_NONDETERMINITIC = HIPSPARSE_SPGEMM_CSR_ALG_NONDETERMINISTIC;
   cusparseSpGEMMAlg_t SPGEMM_CSR_ALG_DETERMINITIC = CUSPARSE_SPGEMM_CSR_ALG_DETERMINITIC;
   cusparseSpGEMMAlg_t SPGEMM_CSR_ALG_NONDETERMINITIC = CUSPARSE_SPGEMM_CSR_ALG_NONDETERMINITIC;
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpSM_createDescr(cusparseSpSMDescr_t* descr);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpSM_createDescr(hipsparseSpSMDescr_t* descr);
+  // CHECK: status_t = hipsparseSpSM_createDescr(&spSMDescr);
+  status_t = cusparseSpSM_createDescr(&spSMDescr);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpSM_destroyDescr(cusparseSpSMDescr_t descr);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpSM_destroyDescr(hipsparseSpSMDescr_t descr);
+  // CHECK: status_t = hipsparseSpSM_destroyDescr(spSMDescr);
+  status_t = cusparseSpSM_destroyDescr(spSMDescr);
 
 #if CUDA_VERSION < 11000
   // CUDA: CUSPARSE_DEPRECATED_HINT(cusparseXcsrgemm2) cusparseStatus_t CUSPARSEAPI cusparseZcsrgemm(cusparseHandle_t handle, cusparseOperation_t transA, cusparseOperation_t transB, int m, int n, int k, const cusparseMatDescr_t descrA, int nnzA, const cuDoubleComplex* csrSortedValA, const int* csrSortedRowPtrA, const int* csrSortedColIndA, const cusparseMatDescr_t descrB, int nnzB, const cuDoubleComplex* csrSortedValB, const int* csrSortedRowPtrB, const int* csrSortedColIndB, const cusparseMatDescr_t descrC, cuDoubleComplex* csrSortedValC, const int* csrSortedRowPtrC, int* csrSortedColIndC);
