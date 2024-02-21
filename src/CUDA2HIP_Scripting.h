@@ -22,6 +22,10 @@ THE SOFTWARE.
 
 #pragma once
 
+#include <map>
+#include <vector>
+#include <string>
+
 namespace hipify {
 
   enum CastTypes {
