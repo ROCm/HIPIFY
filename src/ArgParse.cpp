@@ -247,6 +247,7 @@ const std::vector<std::string> hipifyOptions {
   std::string(Versions.ArgStr),
   std::string(NoUndocumented.ArgStr),
   std::string(NoWarningsUndocumented.ArgStr),
+  std::string(HipifyAMAP.ArgStr),
 };
 
 const std::vector<std::string> hipifyOptionsWithTwoArgs {

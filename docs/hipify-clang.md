@@ -426,7 +426,7 @@ CMake 3.16.8, GNU C/C++ 9.2, Python 2.7.
 
 Recommended build system requirements:
 
-CMake 3.28.1, GNU C/C++ 13.2, Python 3.11.6.
+CMake 3.28.3, GNU C/C++ 13.2, Python 3.12.2.
 
 Here is an example of building `hipify-clang` with testing support on `Ubuntu 23.10.01`:
 
@@ -470,7 +470,7 @@ cmake
 --    - Binary path        : /usr/llvm/17.0.6/dist/bin
 -- Linker detection: GNU ld
 -- ---- The below configuring for hipify-clang testing only ----
--- Found Python: /usr/bin/python3.11 (found version "3.11.6") found components: Interpreter 
+-- Found Python: /usr/bin/python3.12 (found version "3.12.2") found components: Interpreter 
 -- Found lit: /usr/local/bin/lit
 -- Found FileCheck: /GIT/LLVM/trunk/dist/FileCheck
 -- Initial CUDA to configure:
@@ -506,7 +506,7 @@ LLVM 17.0.6 - will be used for testing
 x86_64 - Platform architecture
 Linux 6.5.0-15-generic - Platform OS
 64 - hipify-clang binary bitness
-64 - python 3.11.6 binary bitness
+64 - python 3.12.2 binary bitness
 ===============================================================
 -- Testing: 102 tests, 12 threads --
 Testing Time: 6.70s
@@ -532,8 +532,8 @@ Total Discovered Tests: 102
 | 14.0.0 - 14.0.6 | 7.0 - 11.7.1 | 8.0.5  - 8.4.1 | 2017.15.9.57*, 2019.16.11.17, 2022.17.2.6 | 3.24.0          | 3.10.6        |
 | 15.0.0 - 15.0.7 | 7.0 - 11.8.0 | 8.0.5  - 8.8.1 | 2019.16.11.25, 2022.17.5.2                | 3.26.0          | 3.11.2        |
 | 16.0.0 - 16.0.6 | 7.0 - 12.2.2 | 8.0.5  - 8.9.5 | 2019.16.11.29, 2022.17.7.1                | 3.27.3          | 3.11.4        |
-| 17.0.1** 17.0.6 | 7.0 - 12.3.2 | 8.0.5  - 8.9.7 | 2019.16.11.32, 2022.17.8.3                | 3.28.1          | 3.12.1        |
-| 19.0.0git       | 7.0 - 12.3.2 | 8.0.5  - 8.9.7 | 2019.16.11.32, 2022.17.8.3                | 3.28.1          | 3.12.1        |
+| 17.0.1** 17.0.6 | 7.0 - 12.3.2 | 8.0.5  - 8.9.7 | 2019.16.11.34, 2022.17.9.0                | 3.28.3          | 3.12.2        |
+| 19.0.0git       | 7.0 - 12.3.2 | 8.0.5  - 8.9.7 | 2019.16.11.34, 2022.17.9.0                | 3.28.3          | 3.12.2        |
 
 `*` LLVM 14.x.x is the latest major release supporting Visual Studio 2017.
 To build LLVM 14.x.x correctly by Visual Studio 2017, `-DLLVM_FORCE_USE_OLD_TOOLCHAIN=ON` should be added to a corresponding CMake command line.
@@ -586,7 +586,7 @@ cmake
 --    - LLVM Include path  : D:/LLVM/17.0.6/dist/include
 --    - Binary path        : D:/LLVM/17.0.6/dist/bin
 -- ---- The below configuring for hipify-clang testing only ----
--- Found Python: C:/Users/TT/AppData/Local/Programs/Python/Python312/python.exe (found version "3.12.0") found components: Interpreter
+-- Found Python: C:/Users/TT/AppData/Local/Programs/Python/Python312/python.exe (found version "3.12.2") found components: Interpreter
 -- Found lit: C:/Users/TT/AppData/Local/Programs/Python/Python312/Scripts/lit.exe
 -- Found FileCheck: D:/LLVM/17.0.6/dist/bin/FileCheck.exe
 -- Initial CUDA to configure:

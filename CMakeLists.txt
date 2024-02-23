@@ -139,7 +139,7 @@ if (NOT HIPIFY_CLANG_TESTS_ONLY)
 
   if(MSVC)
     target_link_libraries(hipify-clang PRIVATE version)
-    target_compile_options(hipify-clang PRIVATE ${STD} /Od /GR- /EHs- /EHc-)
+    target_compile_options(hipify-clang PRIVATE ${STD} /Od /GR- /EHs- /EHc- /MP)
     if((LLVM_PACKAGE_VERSION VERSION_EQUAL "18.0.0" OR LLVM_PACKAGE_VERSION VERSION_GREATER "18.0.0") AND MSVC_VERSION VERSION_GREATER "1919")
       target_compile_options(hipify-clang PRIVATE /Zc:preprocessor)
     endif()

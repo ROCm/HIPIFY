@@ -1193,13 +1193,13 @@ int main() {
   result = cuGraphLaunch(graphExec, stream);
 
   // CUDA: CUresult CUDAAPI cuGraphMemcpyNodeGetParams(CUgraphNode hNode, CUDA_MEMCPY3D *nodeParams);
-  // HIP: hipError_t hipGraphMemcpyNodeGetParams(hipGraphNode_t node, hipMemcpy3DParms* pNodeParams);
-  // CHECK: result = hipGraphMemcpyNodeGetParams(graphNode, &MEMCPY3D);
+  // HIP: hipError_t hipDrvGraphMemcpyNodeGetParams(hipGraphNode_t node, hipMemcpy3DParms* pNodeParams);
+  // CHECK: result = hipDrvGraphMemcpyNodeGetParams(graphNode, &MEMCPY3D);
   result = cuGraphMemcpyNodeGetParams(graphNode, &MEMCPY3D);
 
   // CUDA: CUresult CUDAAPI cuGraphMemcpyNodeSetParams(CUgraphNode hNode, const CUDA_MEMCPY3D *nodeParams);
-  // HIP: hipError_t hipGraphMemcpyNodeSetParams(hipGraphNode_t node, const hipMemcpy3DParms* pNodeParams);
-  // CHECK: result = hipGraphMemcpyNodeSetParams(graphNode, &MEMCPY3D);
+  // HIP: hipError_t hipDrvGraphMemcpyNodeSetParams(hipGraphNode_t node, const hipMemcpy3DParms* pNodeParams);
+  // CHECK: result = hipDrvGraphMemcpyNodeSetParams(graphNode, &MEMCPY3D);
   result = cuGraphMemcpyNodeSetParams(graphNode, &MEMCPY3D);
 
   // CUDA: CUresult CUDAAPI cuGraphMemsetNodeGetParams(CUgraphNode hNode, CUDA_MEMSET_NODE_PARAMS *nodeParams);
@@ -1746,8 +1746,8 @@ int main() {
   result = cuGraphMemAllocNodeGetParams(graphNode, &MEM_ALLOC_NODE_PARAMS);
 
   // CUDA: CUresult CUDAAPI cuGraphAddMemFreeNode(CUgraphNode *phGraphNode, CUgraph hGraph, const CUgraphNode *dependencies, size_t numDependencies, CUdeviceptr dptr);
-  // HIP: hipError_t hipGraphAddMemFreeNode(hipGraphNode_t* pGraphNode, hipGraph_t graph, const hipGraphNode_t* pDependencies, size_t numDependencies, void* dev_ptr);
-  // CHECK: result = hipGraphAddMemFreeNode(&graphNode, graph, &graphNode2, bytes, deviceptr);
+  // HIP: hipError_t hipDrvGraphAddMemFreeNode(hipGraphNode_t* pGraphNode, hipGraph_t graph, const hipGraphNode_t* pDependencies, size_t numDependencies, void* dev_ptr);
+  // CHECK: result = hipDrvGraphAddMemFreeNode(&graphNode, graph, &graphNode2, bytes, deviceptr);
   result = cuGraphAddMemFreeNode(&graphNode, graph, &graphNode2, bytes, deviceptr);
 
   // CUDA: CUresult CUDAAPI cuGraphMemFreeNodeGetParams(CUgraphNode hNode, CUdeviceptr *dptr_out);

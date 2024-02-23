@@ -189,12 +189,34 @@ int main() {
   surfaceReference surfaceRef;
 #endif
 
+#if CUDA_VERSION >= 12000
+  // CHECK: hipGraphInstantiateParams GRAPH_INSTANTIATE_PARAMS_st;
+  // CHECK-NEXT: hipGraphInstantiateParams GRAPH_INSTANTIATE_PARAMS;
+  cudaGraphInstantiateParams_st GRAPH_INSTANTIATE_PARAMS_st;
+  cudaGraphInstantiateParams GRAPH_INSTANTIATE_PARAMS;
+#endif
+
 #if CUDA_VERSION >= 12020
   // CHECK: hipExternalSemaphoreSignalNodeParams ExternalSemaphoreSignalNodeParams_v2;
   cudaExternalSemaphoreSignalNodeParamsV2 ExternalSemaphoreSignalNodeParams_v2;
 
   // CHECK: hipExternalSemaphoreWaitNodeParams ExternalSemaphoreWaitNodeParams_v2;
   cudaExternalSemaphoreWaitNodeParamsV2 ExternalSemaphoreWaitNodeParams_v2;
+
+  // CHECK: hipMemFreeNodeParams MemFreeNodeParams;
+  cudaMemFreeNodeParams MemFreeNodeParams;
+
+  // CHECK: hipChildGraphNodeParams ChildGraphNodeParams;
+  cudaChildGraphNodeParams ChildGraphNodeParams;
+
+  // CHECK: hipEventRecordNodeParams EventRecordNodeParams;
+  cudaEventRecordNodeParams EventRecordNodeParams;
+
+  // CHECK: hipEventWaitNodeParams EventWaitNodeParams;
+  cudaEventWaitNodeParams EventWaitNodeParams;
+
+  // CHECK: hipGraphNodeParams *GraphNodeParams = nullptr
+  cudaGraphNodeParams *GraphNodeParams = nullptr;
 #endif
 
   return 0;
