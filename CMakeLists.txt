@@ -193,6 +193,9 @@ if (NOT HIPIFY_CLANG_TESTS_ONLY)
       PATTERN "complex"
       PATTERN "new"
       PATTERN "ppc_wrappers" EXCLUDE
+      PATTERN "omp-tools.h" EXCLUDE
+      PATTERN "omp.h" EXCLUDE
+      PATTERN "ompt.h" EXCLUDE
       PATTERN "openmp_wrappers" EXCLUDE)
   endif()
 

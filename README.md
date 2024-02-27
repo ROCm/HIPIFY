@@ -10,6 +10,8 @@ HIPIFY is a set of tools that you can use to automatically translate CUDA source
 * [hipify-clang](./docs/hipify-clang.md#hipify-clang)
   * [Dependencies](./docs/hipify-clang.md#hipify-clang-dependencies)
   * [Usage](./docs/hipify-clang.md#hipify-clang-usage)
+    * [JSON Compilation Database](./docs/hipify-clang.md#hipify-clang-using-json-compilation-database)
+    * [Hipification Statistics](./docs/hipify-clang.md#hipify-clang-hipification-statistics)
   * [Building](./docs/hipify-clang.md#hipify-clang-building)
   * [Testing](./docs/hipify-clang.md#hipify-clang-testing)
     * [Linux](./docs/hipify-clang.md#hipify-clang-linux-testing)
