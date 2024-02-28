@@ -35,6 +35,7 @@ extern cl::opt<std::string> OutputPythonMapDir;
 extern cl::opt<std::string> OutputDir;
 extern cl::opt<std::string> TemporaryDir;
 extern cl::opt<std::string> CudaPath;
+extern cl::opt<std::string> ClangResourceDir;
 extern cl::list<std::string> IncludeDirs;
 extern cl::list<std::string> MacroNames;
 extern cl::opt<bool> Inplace;
