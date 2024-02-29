@@ -13,11 +13,15 @@ Documentation for HIPIFY is available at
 * Full `hipSOLVER` support
 * Full `rocSPARSE` support
 * New options:
-  * `--amap` to hipify as much as possible, ignoring '--default-preprocessor' behavior
+  * `--amap` to hipify as much as possible, ignoring `--default-preprocessor` behavior
+  * `--clang-resource-directory` to specify the clang resource path - the path to the parent folder for the `include` folder,
+    containing `__clang_cuda_runtime_wrapper.h` and other header files used during hipification process
 
 ### Fixes
 
-* Do not rewrite tokens in code blocks skipped by Preprocessor (under the '--default-preprocessor' option)
+* Code blocks skipped by the Preprocessor are not hipified anymore under the `--default-preprocessor` option
+* Clang resource files used during hipification are being searched now and can also be specified
+  by the `--clang-resource-directory` option
 
 ## HIPIFY for ROCm 6.0.2
 
@@ -53,7 +57,7 @@ Documentation for HIPIFY is available at
   * In separate files: `hipify-clang --md --doc-format=full --doc-roc=separate`
   * In one file: `hipify-clang --md --doc-format=full --doc-roc=joint`
 * New options:
-  * `--use-hip-data-types` (Use 'hipDataType' instead of 'hipblasDatatype_t' or 'rocblas_datatype')
+  * `--use-hip-data-types` (Use `hipDataType` instead of `hipblasDatatype_t` or `rocblas_datatype`)
   * `--doc-roc=\<value\>` (ROC documentation generation: `skip` (default), `separate`, and `joint`; the
     `--md` or `--csv` option must be included)
 
