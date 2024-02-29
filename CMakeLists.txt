@@ -333,16 +333,20 @@ if(HIPIFY_CLANG_TESTS OR HIPIFY_CLANG_TESTS_ONLY)
     ${CMAKE_CURRENT_BINARY_DIR}/tests/lit.site.cfg
     @ONLY)
 
+  if(NOT LIT_ARGS)
+    set(LIT_ARGS -v)
+  endif()
+
   if(HIPIFY_CLANG_TESTS_ONLY)
     add_lit_testsuite(test-hipify "Running HIPIFY regression tests"
       ${CMAKE_CURRENT_LIST_DIR}/tests
       PARAMS site_config=${CMAKE_CURRENT_BINARY_DIR}/tests/lit.site.cfg
-      ARGS -v)
+      ARGS ${LIT_ARGS})
   else()
     add_lit_testsuite(test-hipify "Running HIPIFY regression tests"
       ${CMAKE_CURRENT_LIST_DIR}/tests
       PARAMS site_config=${CMAKE_CURRENT_BINARY_DIR}/tests/lit.site.cfg
-      ARGS -v
+      ARGS ${LIT_ARGS}
       DEPENDS hipify-clang)
   endif()
 
