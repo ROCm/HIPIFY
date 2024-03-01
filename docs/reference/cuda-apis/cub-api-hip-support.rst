@@ -1,6 +1,15 @@
-# CUB API supported by HIP
+.. meta::
+  :description: CUDA APIs that are supported by ROCm and HIP
+  :keywords: HIP, HIPIFY, CUDA, ROCm, API, documentation
 
-## **1. CUB Data types**
+***************************************************************************
+CUB data types supported by HIP
+***************************************************************************
+\*A - Added; D - Deprecated; C - Changed; R - Removed; E - Experimental
+
+.. csv-table::
+  :header: "CUDA API", "HIP equivalent API"
+
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
