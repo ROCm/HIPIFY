@@ -200,8 +200,7 @@ After applying all the matchers, the output `HIP` source is produced.
 
 In most cases, you can get a suitable version of `LLVM+clang` with your package manager.
 
-Failing that or having multiple versions of `LLVM`, you can [download a release archive](http://releases.llvm.org/), build or install it, and set
-[CMAKE_PREFIX_PATH](https://cmake.org/cmake/help/latest/variable/CMAKE_PREFIX_PATH.html) so `CMake` can find it; for instance: `-DCMAKE_PREFIX_PATH=D:\LLVM\17.0.6\dist`
+Failing that or having multiple versions of `LLVM`, you can [download a release archive](http://releases.llvm.org/), build or install it, and set [CMAKE_PREFIX_PATH](https://cmake.org/cmake/help/latest/variable/CMAKE_PREFIX_PATH.html) so `CMake` can find it; for instance: `-DCMAKE_PREFIX_PATH=D:\LLVM\17.0.6\dist`
 
 ## <a name="hipify-clang-usage"></a>hipify-clang: usage
 
@@ -219,10 +218,16 @@ For example:
 ./hipify-clang cpp17.cu --cuda-path=/usr/local/cuda-12.3 -- -std=c++17
 ```
 
-hipify-clang also supports the hipification of multiple files that might be specified in a single command line with absolute or relative paths, for instance:
+`hipify-clang` also supports the hipification of multiple files that might be specified in a single command line with absolute or relative paths, for instance:
 
 ```bash
 ./hipify-clang cpp17.cu ../../square.cu /home/user/cuda/intro.cu --cuda-path=/usr/local/cuda-12.3 -- -std=c++17
+```
+
+To use a specific version of `LLVM` during hipification, the `hipify-clang` option `--clang-resource-directory=` must be specified to point to the clang resource directory - the parent directory for the `include` folder that contains `__clang_cuda_runtime_wrapper.h` and other header files used during the hipification process, for instance:
+
+```bash
+./hipify-clang square.cu --cuda-path=/usr/local/cuda-12.3 --clang-resource-directory=/usr/llvm/17.0.6/dist/lib/clang/19
 ```
 
 The [Clang manual for compiling CUDA](https://llvm.org/docs/CompileCudaWithLLVM.html#compiling-cuda-code) may be useful.
@@ -316,6 +321,8 @@ For a list of `hipify-clang` options, run `hipify-clang --help`.
 
 ## <a name="hipify-clang-building"></a>hipify-clang: building
 
+Once the `HIPIFY` repository is cloned (`git clone https://github.com/ROCm/HIPIFY.git`), the following commands must be run from the `HIPIFY` root folder.
+
 ```bash
 cd .. \
 mkdir build dist \
@@ -327,6 +334,12 @@ cmake \
  ../hipify
 
 make -j install
+```
+
+Having not found or multiple `LLVM` instances, the root folder with `LLVM` distributive must be specified in the `CMake` command line to build `hipify-clang`, for example:
+
+```bash
+-DCMAKE_PREFIX_PATH=/usr/llvm/17.0.6/dist
 ```
 
 On Windows, the following option should be specified for `CMake` in the first place: `-G "Visual Studio 17 2022"`; the generated `hipify-clang.sln` should be built by `Visual Studio 17 2022` instead of `Make.`
