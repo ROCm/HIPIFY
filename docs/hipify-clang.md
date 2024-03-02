@@ -13,7 +13,7 @@ After applying all the matchers, the output `HIP` source is produced.
 
 **Disadvantages:**
 
-1. The main advantage is also the main disadvantage: the input `CUDA` code should be correct; incorrect code wouldn't be translated to `HIP`.
+1. Ensure the input `CUDA` code is correct; incorrect code will not be translated to `HIP`.
 2. `CUDA` should be installed and provided in case of multiple installations by `--cuda-path` option.
 3. All the includes and defines should be provided to transform code successfully.
 
@@ -427,7 +427,7 @@ Run `Visual Studio 17 2022`, open the generated `LLVM.sln`, build all, build pro
 
 3. Ensure [`CUDA`](https://developer.nvidia.com/cuda-toolkit-archive) of minimum version 7.0 is installed.
 
-* Having multiple `CUDA` installations to choose a particular version the `DCUDA_TOOLKIT_ROOT_DIR` option should be specified:
+* Having multiple `CUDA` installations to choose a particular version, the `DCUDA_TOOLKIT_ROOT_DIR` option must be specified:
 
   * ***Linux***: `-DCUDA_TOOLKIT_ROOT_DIR=/usr/include`
 
