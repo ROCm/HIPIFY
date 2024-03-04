@@ -984,16 +984,16 @@
 |`cudnnGetProperty`|6.0.0| | | | | | | | | | | | | | | |
 |`cudnnGetRNNBackwardDataAlgorithmMaxCount`|7.1.3|8.0.2| | | | | | | | | | | | | | |
 |`cudnnGetRNNBackwardWeightsAlgorithmMaxCount`|7.1.3|8.0.2| | | | | | | | | | | | | | |
-|`cudnnGetRNNBiasMode`|7.5.0|8.0.1| | | | | | | | | | | | | | |
+|`cudnnGetRNNBiasMode`|7.5.0|8.0.1| |9.0.0| | | | | | | | | | | | |
 |`cudnnGetRNNDataDescriptor`|7.2.1| | | | | | | | | | | | | | | |
 |`cudnnGetRNNDescriptor`|7.0.5|7.6.5| |8.0.1|`hipdnnGetRNNDescriptor`| | | | | |`miopenGetRNNDescriptor_V2`| | | | | |
-|`cudnnGetRNNDescriptor_v6`|8.0.1|8.0.1| | | | | | | | |`miopenGetRNNDescriptor_V2`| | | | | |
+|`cudnnGetRNNDescriptor_v6`|8.0.1|8.0.1| |9.0.0| | | | | | |`miopenGetRNNDescriptor_V2`| | | | | |
 |`cudnnGetRNNDescriptor_v8`|8.0.1| | | | | | | | | | | | | | | |
 |`cudnnGetRNNForwardInferenceAlgorithmMaxCount`|7.1.3|8.0.2| | | | | | | | | | | | | | |
 |`cudnnGetRNNForwardTrainingAlgorithmMaxCount`|7.1.3|8.0.2| | | | | | | | | | | | | | |
 |`cudnnGetRNNLinLayerBiasParams`|5.0.0|8.0.1| | |`hipdnnGetRNNLinLayerBiasParams`| | | | | | | | | | | |
 |`cudnnGetRNNLinLayerMatrixParams`|5.0.0|8.0.1| | |`hipdnnGetRNNLinLayerMatrixParams`| | | | | | | | | | | |
-|`cudnnGetRNNMatrixMathType`|7.1.3|8.0.1| | | | | | | | | | | | | | |
+|`cudnnGetRNNMatrixMathType`|7.1.3|8.0.1| |9.0.0| | | | | | | | | | | | |
 |`cudnnGetRNNPaddingMode`|7.2.1|8.0.1| | | | | | | | | | | | | | |
 |`cudnnGetRNNParamsSize`|5.0.0|8.0.1| | |`hipdnnGetRNNParamsSize`| | | | | |`miopenGetRNNParamsSize`| | | | | |
 |`cudnnGetRNNProjectionLayers`|7.1.3|8.0.1| | | | | | | | | | | | | | |
@@ -1040,10 +1040,12 @@
 |`cudnnRNNForwardInferenceEx`|7.2.1|8.0.1| | | | | | | | | | | | | | |
 |`cudnnRNNForwardTraining`|5.0.0|8.0.1| | |`hipdnnRNNForwardTraining`| | | | | |`miopenRNNForwardTraining`| | | | | |
 |`cudnnRNNForwardTrainingEx`|7.2.1|8.0.1| | | | | | | | | | | | | | |
-|`cudnnRNNGetClip`|7.2.1|8.0.1| | | | | | | | | | | | | | |
+|`cudnnRNNGetClip`|7.2.1|8.0.1| |9.0.0| | | | | | | | | | | | |
 |`cudnnRNNGetClip_v8`|8.0.1| | | | | | | | | | | | | | | |
-|`cudnnRNNSetClip`|7.2.1|8.0.1| | | | | | | | | | | | | | |
+|`cudnnRNNGetClip_v9`|9.0.0| | | | | | | | | | | | | | | |
+|`cudnnRNNSetClip`|7.2.1|8.0.1| |9.0.0| | | | | | | | | | | | |
 |`cudnnRNNSetClip_v8`|8.0.1| | | | | | | | | | | | | | | |
+|`cudnnRNNSetClip_v9`|9.0.0| | | | | | | | | | | | | | | |
 |`cudnnReduceTensor`|6.0.0| | | |`hipdnnReduceTensor`| | | | | |`miopenReduceTensor`| | | | | |
 |`cudnnReorderFilterAndBias`|7.6.0| | | | | | | | | | | | | | | |
 |`cudnnRestoreAlgorithm`|7.1.3|8.0.2| | | | | | | | | | | | | | |
@@ -1075,13 +1077,13 @@
 |`cudnnSetPooling2dDescriptor`|2.0.0| | | |`hipdnnSetPooling2dDescriptor`| | | | | |`miopenSet2dPoolingDescriptor`| | | | | |
 |`cudnnSetPoolingNdDescriptor`|2.0.0| | | |`hipdnnSetPoolingNdDescriptor`| | | | | |`miopenSetNdPoolingDescriptor`| | | | | |
 |`cudnnSetRNNAlgorithmDescriptor`|7.1.3|8.0.2| | | | | | | | | | | | | | |
-|`cudnnSetRNNBiasMode`|7.5.0|8.0.1| | | | | | | | | | | | | | |
+|`cudnnSetRNNBiasMode`|7.5.0|8.0.1| |9.0.0| | | | | | | | | | | | |
 |`cudnnSetRNNDataDescriptor`|7.2.1| | | | | | | | | | | | | | | |
 |`cudnnSetRNNDescriptor`|5.0.0|7.6.5| |8.0.1|`hipdnnSetRNNDescriptor`| | | | | | | | | | | |
 |`cudnnSetRNNDescriptor_v5`|7.0.5|7.6.5| |8.0.1|`hipdnnSetRNNDescriptor_v5`| | | | | | | | | | | |
-|`cudnnSetRNNDescriptor_v6`|6.0.0|8.0.1| | |`hipdnnSetRNNDescriptor_v6`| | | | | |`miopenSetRNNDescriptor_V2`| | | | | |
+|`cudnnSetRNNDescriptor_v6`|6.0.0|8.0.1| |9.0.0|`hipdnnSetRNNDescriptor_v6`| | | | | |`miopenSetRNNDescriptor_V2`| | | | | |
 |`cudnnSetRNNDescriptor_v8`|8.0.1| | | | | | | | | | | | | | | |
-|`cudnnSetRNNMatrixMathType`|7.0.5|8.0.1| | | | | | | | | | | | | | |
+|`cudnnSetRNNMatrixMathType`|7.0.5|8.0.1| |9.0.0| | | | | | | | | | | | |
 |`cudnnSetRNNPaddingMode`|7.2.1|8.0.1| | | | | | | | | | | | | | |
 |`cudnnSetRNNProjectionLayers`|7.1.3|8.0.1| | | | | | | | | | | | | | |
 |`cudnnSetReduceTensorDescriptor`|6.0.0| | | |`hipdnnSetReduceTensorDescriptor`| | | | | |`miopenSetReduceTensorDescriptor`| | | | | |
