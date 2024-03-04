@@ -647,21 +647,23 @@ int main() {
   int hiddenSize = 0;
   int layer = 0;
 
-  // TODO [#837]: Insert miopenRNNBiasMode_t* biasMode in the hipified miopenGetRNNDescriptor_V2 after miopenRNNMode_t* rnnMode: will need variable declaration
-  // CUDA: CUDNN_DEPRECATED cudnnStatus_t CUDNNWINAPI cudnnGetRNNDescriptor_v6(cudnnHandle_t handle, cudnnRNNDescriptor_t rnnDesc, int* hiddenSize, int* numLayers, cudnnDropoutDescriptor_t* dropoutDesc, cudnnRNNInputMode_t* inputMode, cudnnDirectionMode_t* direction, cudnnRNNMode_t* cellMode, cudnnRNNAlgo_t* algo, cudnnDataType_t* mathPrec);
-  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenGetRNNDescriptor_V2(miopenRNNDescriptor_t rnnDesc, int* hiddenSize, int* layer, miopenDropoutDescriptor_t* dropoutDesc, miopenRNNInputMode_t* inputMode, miopenRNNDirectionMode_t* dirMode, miopenRNNMode_t* rnnMode, miopenRNNBiasMode_t* biasMode, miopenRNNAlgo_t* algoMode, miopenDataType_t* dataType);
-  // CHECK: status = miopenGetRNNDescriptor_V2(RNNDescriptor, &hiddenSize, &layer, &DropoutDescriptor, &RNNInputMode, &DirectionMode, &RNNMode, &RNNAlgo, &dataType);
-  status = cudnnGetRNNDescriptor_v6(handle, RNNDescriptor, &hiddenSize, &layer, &DropoutDescriptor, &RNNInputMode, &DirectionMode, &RNNMode, &RNNAlgo, &dataType);
-
   // NOTE: cudnnSetRNNDescriptor - removed after cuDNN 7.6.5
   // NOTE: cudnnSetRNNDescriptor_v5 - removed after cuDNN 7.6.5
   // TODO: add cudnnSetRNNDescriptor -> miopenSetRNNDescriptor_V2 mapping after implementing cuDNN versioning in tests
 
+#if CUDNN_MAJOR < 9
   // TODO [#837]: Insert miopenRNNBiasMode_t biasMode in the hipified miopenSetRNNDescriptor_V2 after miopenRNNMode_t rnnMode: will need variable declaration
   // CUDA: CUDNN_DEPRECATED cudnnStatus_t CUDNNWINAPI cudnnSetRNNDescriptor_v6(cudnnHandle_t handle, cudnnRNNDescriptor_t rnnDesc, const int hiddenSize, const int numLayers, cudnnDropoutDescriptor_t dropoutDesc, cudnnRNNInputMode_t inputMode, cudnnDirectionMode_t direction, cudnnRNNMode_t cellMode, cudnnRNNAlgo_t algo, cudnnDataType_t mathPrec);
   // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenSetRNNDescriptor_V2(miopenRNNDescriptor_t rnnDesc, const int hsize, const int nlayers, miopenDropoutDescriptor_t dropoutDesc, miopenRNNInputMode_t inMode, miopenRNNDirectionMode_t direction, miopenRNNMode_t rnnMode, miopenRNNBiasMode_t biasMode, miopenRNNAlgo_t algo, miopenDataType_t dataType);
   // CHECK: status = miopenSetRNNDescriptor_V2(RNNDescriptor, hiddenSize, layer, DropoutDescriptor, RNNInputMode, DirectionMode, RNNMode, RNNAlgo, dataType);
   status = cudnnSetRNNDescriptor_v6(handle, RNNDescriptor, hiddenSize, layer, DropoutDescriptor, RNNInputMode, DirectionMode, RNNMode, RNNAlgo, dataType);
+
+  // TODO [#837]: Insert miopenRNNBiasMode_t* biasMode in the hipified miopenGetRNNDescriptor_V2 after miopenRNNMode_t* rnnMode: will need variable declaration
+  // CUDA: CUDNN_DEPRECATED cudnnStatus_t CUDNNWINAPI cudnnGetRNNDescriptor_v6(cudnnHandle_t handle, cudnnRNNDescriptor_t rnnDesc, int* hiddenSize, int* numLayers, cudnnDropoutDescriptor_t* dropoutDesc, cudnnRNNInputMode_t* inputMode, cudnnDirectionMode_t* direction, cudnnRNNMode_t* cellMode, cudnnRNNAlgo_t* algo, cudnnDataType_t* mathPrec);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenGetRNNDescriptor_V2(miopenRNNDescriptor_t rnnDesc, int* hiddenSize, int* layer, miopenDropoutDescriptor_t* dropoutDesc, miopenRNNInputMode_t* inputMode, miopenRNNDirectionMode_t* dirMode, miopenRNNMode_t* rnnMode, miopenRNNBiasMode_t* biasMode, miopenRNNAlgo_t* algoMode, miopenDataType_t* dataType);
+  // CHECK: status = miopenGetRNNDescriptor_V2(RNNDescriptor, &hiddenSize, &layer, &DropoutDescriptor, &RNNInputMode, &DirectionMode, &RNNMode, &RNNAlgo, &dataType);
+  status = cudnnGetRNNDescriptor_v6(handle, RNNDescriptor, &hiddenSize, &layer, &DropoutDescriptor, &RNNInputMode, &DirectionMode, &RNNMode, &RNNAlgo, &dataType);
+#endif
 
   int seqLength = 0;
 
