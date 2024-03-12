@@ -37,8 +37,6 @@ else()
   find_package(Clang REQUIRED CONFIG PATHS ${CMAKE_PREFIX_PATH})
   find_package(LLVM REQUIRED CONFIG PATHS ${CMAKE_PREFIX_PATH})
 
-  set(HIPIFY_INSTALL_CLANG_HEADERS "ON")
-
   message(STATUS "Found LLVM ${LLVM_PACKAGE_VERSION}:")
   message(STATUS "   - CMake module path  : ${LLVM_CMAKE_DIR}")
   message(STATUS "   - Clang include path : ${CLANG_INCLUDE_DIRS}")
