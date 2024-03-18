@@ -21,7 +21,7 @@ After applying all the matchers, the output `HIP` source is produced.
 
 `hipify-clang` requires:
 
-1. [**LLVM+clang**](http://releases.llvm.org) of at least version [4.0.0](http://releases.llvm.org/download.html#4.0.0); the latest stable and recommended release: [**17.0.6**](https://github.com/llvm/llvm-project/releases/tag/llvmorg-17.0.6).
+1. [**LLVM+clang**](http://releases.llvm.org) of at least version [4.0.0](http://releases.llvm.org/download.html#4.0.0); the latest stable and recommended release: [**18.1.0**](https://github.com/llvm/llvm-project/releases/tag/llvmorg-18.1.0).
 
 2. [**CUDA**](https://developer.nvidia.com/cuda-downloads) of at least version [7.0](https://developer.nvidia.com/cuda-toolkit-70), the latest supported version is [**12.3.2**](https://developer.nvidia.com/cuda-downloads).
 
@@ -179,7 +179,8 @@ After applying all the matchers, the output `HIP` source is produced.
                            <a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-17.0.3">17.0.3</a>,<br>
                            <a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-17.0.4">17.0.4</a>,
                            <a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-17.0.5">17.0.5</a>,
-                           <a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-17.0.6"><b>17.0.6</b></a></td>
+                           <a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-17.0.6">17.0.6</a>,<br>
+                           <a href="https://github.com/llvm/llvm-project/releases/tag/llvmorg-18.1.0"><b>18.1.0</b></a></td>
       <td bgcolor="eefaeb"><a href="https://developer.nvidia.com/cuda-downloads"><b>12.3.2</b></a></td>
       <td colspan=2 bgcolor="eefaeb"><font color="green"><b>LATEST STABLE CONFIG</b></font></td>
     </tr>
@@ -200,7 +201,7 @@ After applying all the matchers, the output `HIP` source is produced.
 
 In most cases, you can get a suitable version of `LLVM+clang` with your package manager.
 
-Failing that or having multiple versions of `LLVM`, you can [download a release archive](http://releases.llvm.org/), build or install it, and set [CMAKE_PREFIX_PATH](https://cmake.org/cmake/help/latest/variable/CMAKE_PREFIX_PATH.html) so `CMake` can find it; for instance: `-DCMAKE_PREFIX_PATH=D:\LLVM\17.0.6\dist`
+Failing that or having multiple versions of `LLVM`, you can [download a release archive](http://releases.llvm.org/), build or install it, and set [CMAKE_PREFIX_PATH](https://cmake.org/cmake/help/latest/variable/CMAKE_PREFIX_PATH.html) so `CMake` can find it; for instance: `-DCMAKE_PREFIX_PATH=D:\LLVM\18.1.0\dist`
 
 ## <a name="hipify-clang-usage"></a>hipify-clang: usage
 
@@ -227,7 +228,7 @@ For example:
 To use a specific version of `LLVM` during hipification, the `hipify-clang` option `--clang-resource-directory=` must be specified to point to the clang resource directory - the parent directory for the `include` folder that contains `__clang_cuda_runtime_wrapper.h` and other header files used during the hipification process, for instance:
 
 ```bash
-./hipify-clang square.cu --cuda-path=/usr/local/cuda-12.3 --clang-resource-directory=/usr/llvm/17.0.6/dist/lib/clang/19
+./hipify-clang square.cu --cuda-path=/usr/local/cuda-12.3 --clang-resource-directory=/usr/llvm/18.1.0/dist/lib/clang/18
 ```
 
 The [Clang manual for compiling CUDA](https://llvm.org/docs/CompileCudaWithLLVM.html#compiling-cuda-code) may be useful.
@@ -339,7 +340,7 @@ make -j install
 Having not found or multiple `LLVM` instances, the root folder with `LLVM` distributive must be specified in the `CMake` command line to build `hipify-clang`, for example:
 
 ```bash
--DCMAKE_PREFIX_PATH=/usr/llvm/17.0.6/dist
+-DCMAKE_PREFIX_PATH=/usr/llvm/18.1.0/dist
 ```
 
 On Windows, the following option should be specified for `CMake` in the first place: `-G "Visual Studio 17 2022"`; the generated `hipify-clang.sln` should be built by `Visual Studio 17 2022` instead of `Make.`
@@ -399,7 +400,7 @@ Run `Visual Studio 16 2019`, open the generated `LLVM.sln`, build all, and build
 
 **LLVM >= 10.0.0:**
 
-1. download [`LLVM project`](https://github.com/llvm/llvm-project/releases/tag/llvmorg-17.0.6) sources;
+1. download [`LLVM project`](https://github.com/llvm/llvm-project/releases/tag/llvmorg-18.1.0) sources;
 2. build [`LLVM project`](http://llvm.org/docs/CMake.html):
 
 ```bash
@@ -470,9 +471,9 @@ Run `Visual Studio 17 2022`, open the generated `LLVM.sln`, build all, build pro
 
 * Install `lit` into `python`:
 
-  * ***Linux***: `python /usr/llvm/17.0.6/llvm-project/llvm/utils/lit/setup.py install`
+  * ***Linux***: `python /usr/llvm/18.1.0/llvm-project/llvm/utils/lit/setup.py install`
 
-  * ***Windows***: `python D:/LLVM/17.0.6/llvm-project/llvm/utils/lit/setup.py install`
+  * ***Windows***: `python D:/LLVM/18.1.0/llvm-project/llvm/utils/lit/setup.py install`
 
     In case of errors, similar to `ModuleNotFoundError: No module named 'setuptools'`, upgrade the `setuptools` package:
 
@@ -480,15 +481,15 @@ Run `Visual Studio 17 2022`, open the generated `LLVM.sln`, build all, build pro
 
 * Starting with LLVM 6.0.1 path to `llvm-lit` python script should be specified by the `LLVM_EXTERNAL_LIT` option:
 
-  * ***Linux***: `-DLLVM_EXTERNAL_LIT=/usr/llvm/17.0.6/build/bin/llvm-lit`
+  * ***Linux***: `-DLLVM_EXTERNAL_LIT=/usr/llvm/18.1.0/build/bin/llvm-lit`
 
-  * ***Windows***: `-DLLVM_EXTERNAL_LIT=D:/LLVM/17.0.6/build/Release/bin/llvm-lit.py`
+  * ***Windows***: `-DLLVM_EXTERNAL_LIT=D:/LLVM/18.1.0/build/Release/bin/llvm-lit.py`
 
 * `FileCheck`:
 
-  * ***Linux***: copy from `/usr/llvm/17.0.6/build/bin/` to `CMAKE_INSTALL_PREFIX/dist/bin`
+  * ***Linux***: copy from `/usr/llvm/18.1.0/build/bin/` to `CMAKE_INSTALL_PREFIX/dist/bin`
 
-  * ***Windows***: copy from `D:/LLVM/17.0.6/build/Release/bin` to `CMAKE_INSTALL_PREFIX/dist/bin`
+  * ***Windows***: copy from `D:/LLVM/18.1.0/build/Release/bin` to `CMAKE_INSTALL_PREFIX/dist/bin`
 
   * Or specify the path to `FileCheck` in `CMAKE_INSTALL_PREFIX` option
 
@@ -510,9 +511,9 @@ Ubuntu 14: LLVM 4.0.0 - 7.1.0, CUDA 7.0 - 9.0, cuDNN 5.0.5 - 7.6.5
 
 Ubuntu 16-19: LLVM 8.0.0 - 14.0.6, CUDA 7.0 - 10.2, cuDNN 5.1.10 - 8.0.5
 
-Ubuntu 20-21: LLVM 9.0.0 - 17.0.6, CUDA 7.0 - 12.3.2, cuDNN 5.1.10 - 8.9.7
+Ubuntu 20-21: LLVM 9.0.0 - 18.1.0, CUDA 7.0 - 12.3.2, cuDNN 5.1.10 - 8.9.7
 
-Ubuntu 22-23: LLVM 13.0.0 - 17.0.6, CUDA 7.0 - 12.3.2, cuDNN 8.0.5 - 8.9.7
+Ubuntu 22-23: LLVM 13.0.0 - 18.1.0, CUDA 7.0 - 12.3.2, cuDNN 8.0.5 - 8.9.7
 
 Minimum build system requirements for the above configurations:
 
@@ -529,11 +530,11 @@ cmake
  -DHIPIFY_CLANG_TESTS=ON \
  -DCMAKE_BUILD_TYPE=Release \
  -DCMAKE_INSTALL_PREFIX=../dist \
- -DCMAKE_PREFIX_PATH=/usr/llvm/17.0.6/dist \
+ -DCMAKE_PREFIX_PATH=/usr/llvm/18.1.0/dist \
  -DCUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-12.3.2 \
  -DCUDA_DNN_ROOT_DIR=/usr/local/cudnn-8.9.7 \
  -DCUDA_CUB_ROOT_DIR=/usr/local/cub-2.1.0 \
- -DLLVM_EXTERNAL_LIT=/usr/llvm/17.0.6/build/bin/llvm-lit \
+ -DLLVM_EXTERNAL_LIT=/usr/llvm/18.1.0/build/bin/llvm-lit \
  ../hipify
 ```
 
@@ -557,11 +558,11 @@ cmake
 --    - Test  hipify-clang : ON
 --    - Is part of HIP SDK : OFF
 -- Found ZLIB: /usr/lib/x86_64-linux-gnu/libz.so (found version "1.2.13")
--- Found LLVM 17.0.6:
---    - CMake module path  : /usr/llvm/17.0.6/dist/lib/cmake/llvm
---    - Clang include path : /usr/llvm/17.0.6/dist/include
---    - LLVM Include path  : /usr/llvm/17.0.6/dist/include
---    - Binary path        : /usr/llvm/17.0.6/dist/bin
+-- Found LLVM 18.1.0:
+--    - CMake module path  : /usr/llvm/18.1.0/dist/lib/cmake/llvm
+--    - Clang include path : /usr/llvm/18.1.0/dist/include
+--    - LLVM Include path  : /usr/llvm/18.1.0/dist/include
+--    - Binary path        : /usr/llvm/18.1.0/dist/bin
 -- Linker detection: GNU ld
 -- ---- The below configuring for hipify-clang testing only ----
 -- Found Python: /usr/bin/python3.12 (found version "3.12.2") found components: Interpreter 
@@ -596,7 +597,7 @@ make test-hipify
 Running HIPify regression tests
 ===============================================================
 CUDA 12.3.107 - will be used for testing
-LLVM 17.0.6 - will be used for testing
+LLVM 18.1.0 - will be used for testing
 x86_64 - Platform architecture
 Linux 6.5.0-15-generic - Platform OS
 64 - hipify-clang binary bitness
@@ -613,27 +614,29 @@ Total Discovered Tests: 102
 
 *Tested configurations:*
 
-|      **LLVM**   | **CUDA**     |   **cuDNN**    |        **Visual Studio**                  |    **CMake**    |  **Python**   |
-|----------------:|-------------:|---------------:|------------------------------------------:|----------------:|--------------:|
-| 4.0.0 - 5.0.2   | 7.0 - 8.0    | 5.1.10 - 7.1.4 | 2015.14.0, 2017.15.5.2                    | 3.5.1  - 3.18.0 | 3.6.4 - 3.8.5 |
-| 6.0.0 - 6.0.1   | 7.0 - 9.0    | 7.0.5  - 7.6.5 | 2015.14.0, 2017.15.5.5                    | 3.6.0  - 3.18.0 | 3.7.2 - 3.8.5 |
-| 7.0.0 - 7.1.0   | 7.0 - 9.2    | 7.6.5          | 2017.15.9.11                              | 3.13.3 - 3.18.0 | 3.7.3 - 3.8.5 |
-| 8.0.0 - 8.0.1   | 7.0 - 10.0   | 7.6.5          | 2017.15.9.15                              | 3.14.2 - 3.18.0 | 3.7.4 - 3.8.5 |
-| 9.0.0 - 9.0.1   | 7.0 - 10.1   | 7.6.5          | 2017.15.9.20, 2019.16.4.5                 | 3.16.4 - 3.18.0 | 3.8.0 - 3.8.5 |
-| 10.0.0 - 11.0.0 | 7.0 - 11.1   | 7.6.5  - 8.0.5 | 2017.15.9.30, 2019.16.8.3                 | 3.19.2          | 3.9.1         |
-| 11.0.1 - 11.1.0 | 7.0 - 11.2.2 | 7.6.5  - 8.0.5 | 2017.15.9.31, 2019.16.8.4                 | 3.19.3          | 3.9.2         |
-| 12.0.0 - 13.0.1 | 7.0 - 11.5.1 | 7.6.5  - 8.3.2 | 2017.15.9.43, 2019.16.11.9                | 3.22.2          | 3.10.2        |
-| 14.0.0 - 14.0.6 | 7.0 - 11.7.1 | 8.0.5  - 8.4.1 | 2017.15.9.57*, 2019.16.11.17, 2022.17.2.6 | 3.24.0          | 3.10.6        |
-| 15.0.0 - 15.0.7 | 7.0 - 11.8.0 | 8.0.5  - 8.8.1 | 2019.16.11.25, 2022.17.5.2                | 3.26.0          | 3.11.2        |
-| 16.0.0 - 16.0.6 | 7.0 - 12.2.2 | 8.0.5  - 8.9.5 | 2019.16.11.29, 2022.17.7.1                | 3.27.3          | 3.11.4        |
-| 17.0.1** 17.0.6 | 7.0 - 12.3.2 | 8.0.5  - 8.9.7 | 2019.16.11.34, 2022.17.9.0                | 3.28.3          | 3.12.2        |
-| 19.0.0git       | 7.0 - 12.3.2 | 8.0.5  - 8.9.7 | 2019.16.11.34, 2022.17.9.0                | 3.28.3          | 3.12.2        |
+|        **LLVM**      | **CUDA**     |   **cuDNN**    |        **Visual Studio**                  |    **CMake**    |  **Python**   |
+|---------------------:|-------------:|---------------:|------------------------------------------:|----------------:|--------------:|
+| 4.0.0 - 5.0.2        | 7.0 - 8.0    | 5.1.10 - 7.1.4 | 2015.14.0, 2017.15.5.2                    | 3.5.1  - 3.18.0 | 3.6.4 - 3.8.5 |
+| 6.0.0 - 6.0.1        | 7.0 - 9.0    | 7.0.5  - 7.6.5 | 2015.14.0, 2017.15.5.5                    | 3.6.0  - 3.18.0 | 3.7.2 - 3.8.5 |
+| 7.0.0 - 7.1.0        | 7.0 - 9.2    | 7.6.5          | 2017.15.9.11                              | 3.13.3 - 3.18.0 | 3.7.3 - 3.8.5 |
+| 8.0.0 - 8.0.1        | 7.0 - 10.0   | 7.6.5          | 2017.15.9.15                              | 3.14.2 - 3.18.0 | 3.7.4 - 3.8.5 |
+| 9.0.0 - 9.0.1        | 7.0 - 10.1   | 7.6.5          | 2017.15.9.20, 2019.16.4.5                 | 3.16.4 - 3.18.0 | 3.8.0 - 3.8.5 |
+| 10.0.0 - 11.0.0      | 7.0 - 11.1   | 7.6.5  - 8.0.5 | 2017.15.9.30, 2019.16.8.3                 | 3.19.2          | 3.9.1         |
+| 11.0.1 - 11.1.0      | 7.0 - 11.2.2 | 7.6.5  - 8.0.5 | 2017.15.9.31, 2019.16.8.4                 | 3.19.3          | 3.9.2         |
+| 12.0.0 - 13.0.1      | 7.0 - 11.5.1 | 7.6.5  - 8.3.2 | 2017.15.9.43, 2019.16.11.9                | 3.22.2          | 3.10.2        |
+| 14.0.0 - 14.0.6      | 7.0 - 11.7.1 | 8.0.5  - 8.4.1 | 2017.15.9.57*, 2019.16.11.17, 2022.17.2.6 | 3.24.0          | 3.10.6        |
+| 15.0.0 - 15.0.7      | 7.0 - 11.8.0 | 8.0.5  - 8.8.1 | 2019.16.11.25, 2022.17.5.2                | 3.26.0          | 3.11.2        |
+| 16.0.0 - 16.0.6      | 7.0 - 12.2.2 | 8.0.5  - 8.9.5 | 2019.16.11.29, 2022.17.7.1                | 3.27.3          | 3.11.4        |
+| 17.0.1** - 18.1.0*** | 7.0 - 12.3.2 | 8.0.5  - 8.9.7 | 2019.16.11.34, 2022.17.9.0                | 3.28.3          | 3.12.2        |
+| 19.0.0git            | 7.0 - 12.3.2 | 8.0.5  - 8.9.7 | 2019.16.11.34, 2022.17.9.0                | 3.28.3          | 3.12.2        |
 
-`*` LLVM 14.x.x is the latest major release supporting Visual Studio 2017.
-To build LLVM 14.x.x correctly by Visual Studio 2017, `-DLLVM_FORCE_USE_OLD_TOOLCHAIN=ON` should be added to a corresponding `CMake` command line.
-LLVM < 14.x.x can be built correctly by Visual Studio 2017 without the `LLVM_FORCE_USE_OLD_TOOLCHAIN` option.
-
-`**` Note that LLVM 17.0.0 was withdrawn due to an issue, please use 17.0.1 or newer instead.
+<pre>
+  * LLVM 14.x.x is the latest major release supporting Visual Studio 2017.
+    To build LLVM 14.x.x correctly by Visual Studio 2017, -DLLVM_FORCE_USE_OLD_TOOLCHAIN=ON should be added to a corresponding CMake command line.
+    LLVM < 14.x.x can be built correctly by Visual Studio 2017 without the LLVM_FORCE_USE_OLD_TOOLCHAIN option.
+ ** Note that LLVM 17.0.0 was withdrawn due to an issue; please use 17.0.1 or newer instead.
+*** Note that LLVM 18.0.0 has never been released; please use 18.1.0 or newer instead.
+</pre>
 
 *Building with testing support by `Visual Studio 17 2022` on `Windows 10`:*
 
@@ -645,12 +648,12 @@ cmake
  -DHIPIFY_CLANG_TESTS=ON \
  -DCMAKE_BUILD_TYPE=Release \
  -DCMAKE_INSTALL_PREFIX=../dist \
- -DCMAKE_PREFIX_PATH=D:/LLVM/17.0.6/dist \
+ -DCMAKE_PREFIX_PATH=D:/LLVM/18.1.0/dist \
  -DCUDA_TOOLKIT_ROOT_DIR="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.3" \
  -DCUDA_SDK_ROOT_DIR="C:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.3" \
  -DCUDA_DNN_ROOT_DIR=D:/CUDA/cuDNN/8.9.7 \
  -DCUDA_CUB_ROOT_DIR=D:/CUDA/CUB/cub-2.1.0 \
- -DLLVM_EXTERNAL_LIT=D:/LLVM/17.0.6/build/Release/bin/llvm-lit.py \
+ -DLLVM_EXTERNAL_LIT=D:/LLVM/18.1.0/build/Release/bin/llvm-lit.py \
  ../hipify
 ```
 
@@ -674,15 +677,15 @@ cmake
 --    - Build hipify-clang : ON
 --    - Test  hipify-clang : ON
 --    - Is part of HIP SDK : OFF
--- Found LLVM 17.0.6:
---    - CMake module path  : D:/LLVM/17.0.6/dist/lib/cmake/llvm
---    - Clang include path : D:/LLVM/17.0.6/dist/include
---    - LLVM Include path  : D:/LLVM/17.0.6/dist/include
---    - Binary path        : D:/LLVM/17.0.6/dist/bin
+-- Found LLVM 18.1.0:
+--    - CMake module path  : D:/LLVM/18.1.0/dist/lib/cmake/llvm
+--    - Clang include path : D:/LLVM/18.1.0/dist/include
+--    - LLVM Include path  : D:/LLVM/18.1.0/dist/include
+--    - Binary path        : D:/LLVM/18.1.0/dist/bin
 -- ---- The below configuring for hipify-clang testing only ----
 -- Found Python: C:/Users/TT/AppData/Local/Programs/Python/Python312/python.exe (found version "3.12.2") found components: Interpreter
 -- Found lit: C:/Users/TT/AppData/Local/Programs/Python/Python312/Scripts/lit.exe
--- Found FileCheck: D:/LLVM/17.0.6/dist/bin/FileCheck.exe
+-- Found FileCheck: D:/LLVM/18.1.0/dist/bin/FileCheck.exe
 -- Initial CUDA to configure:
 --    - CUDA Toolkit path  : C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.3
 --    - CUDA Samples path  : C:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.3
