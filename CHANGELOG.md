@@ -3,6 +3,20 @@
 Documentation for HIPIFY is available at
 [https://rocmdocs.amd.com/projects/HIPIFY/en/latest/](https://rocmdocs.amd.com/projects/HIPIFY/en/latest/).
 
+## HIPIFY for ROCm 6.1.1
+
+### Additions
+
+* LLVM 18.1.1 support
+* cuDNN 9.0.0 support
+* New options:
+  * `--clang-resource-directory` to specify the clang resource path - the path to the parent folder for the `include` folder that
+    contains `__clang_cuda_runtime_wrapper.h` and other header files used during the hipification process
+
+### Fixes
+
+* Clang resource files used during hipification are now searchable and also can be specified by the `--clang-resource-directory` option
+
 ## HIPIFY for ROCm 6.1.0
 
 ### Additions
@@ -14,13 +28,10 @@ Documentation for HIPIFY is available at
 * Full `rocSPARSE` support
 * New options:
   * `--amap` to hipify as much as possible, ignoring `--default-preprocessor` behavior
-  * `--clang-resource-directory` to specify the clang resource path - the path to the parent folder for the `include` folder that
-    contains `__clang_cuda_runtime_wrapper.h` and other header files used during the hipification process
 
 ### Fixes
 
 * Code blocks skipped by the Preprocessor are not hipified anymore under the `--default-preprocessor` option
-* Clang resource files used during hipification are now searchable and also can be specified by the `--clang-resource-directory` option
 
 ## HIPIFY for ROCm 6.0.2
 

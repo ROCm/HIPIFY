@@ -704,8 +704,8 @@
 |`cudnnAlgorithmStruct`|7.1.3| | | | | | | | | | | | | | | |
 |`cudnnAlgorithmUnionStruct`|8.2.0| | | | | | | | | | | | | | | |
 |`cudnnAlgorithm_t`|7.1.3| | | | | | | | | | | | | | | |
-|`cudnnAttnDescriptor_t`|7.5.0| | | | | | | | | | | | | | | |
-|`cudnnAttnQueryMap_t`|7.5.0| | | | | | | | | | | | | | | |
+|`cudnnAttnDescriptor_t`|7.5.0|9.0.0| | | | | | | | | | | | | | |
+|`cudnnAttnQueryMap_t`|7.5.0| | |9.0.0| | | | | | | | | | | | |
 |`cudnnAttnStruct`|7.5.0| | | | | | | | | | | | | | | |
 |`cudnnBackendAttributeName_t`|8.0.1| | | | | | | | | | | | | | | |
 |`cudnnBackendAttributeType_t`|8.0.1| | | | | | | | | | | | | | | |
@@ -811,7 +811,7 @@
 |`cudnnRuntimeTag_t`|7.0.5| | | | | | | | | | | | | | | |
 |`cudnnSamplerType_t`|5.0.0| | | | | | | | | | | | | | | |
 |`cudnnSeqDataAxis_t`|7.5.0| | | | | | | | | | | | | | | |
-|`cudnnSeqDataDescriptor_t`|7.5.0| | | | | | | | | | | | | | | |
+|`cudnnSeqDataDescriptor_t`|7.5.0|9.0.0| | | | | | | | | | | | | | |
 |`cudnnSeqDataStruct`|7.5.0| | | | | | | | | | | | | | | |
 |`cudnnSeverity_t`|7.1.3| | | | | | | | | | | | | | | |
 |`cudnnSignalMode_t`|8.5.0| | | | | | | | | | | | | | | |
@@ -836,8 +836,9 @@
 |`cudnnActivationBackward`|1.0.0| | | |`hipdnnActivationBackward`| | | | | |`miopenActivationBackward`| | | | | |
 |`cudnnActivationForward`|1.0.0| | | |`hipdnnActivationForward`| | | | | |`miopenActivationForward`| | | | | |
 |`cudnnAddTensor`|2.0.0| | | |`hipdnnAddTensor`| | | | | | | | | | | |
-|`cudnnAdvInferVersionCheck`|8.0.1| | | | | | | | | | | | | | | |
-|`cudnnAdvTrainVersionCheck`|8.0.1| | | | | | | | | | | | | | | |
+|`cudnnAdvInferVersionCheck`|8.0.1| | |9.0.0| | | | | | | | | | | | |
+|`cudnnAdvTrainVersionCheck`|8.0.1| | |9.0.0| | | | | | | | | | | | |
+|`cudnnAdvVersionCheck`|9.0.0| | | | | | | | | | | | | | | |
 |`cudnnBackendCreateDescriptor`|8.0.1| | | | | | | | | | | | | | | |
 |`cudnnBackendDestroyDescriptor`|8.0.1| | | | | | | | | | | | | | | |
 |`cudnnBackendExecute`|8.0.1| | | | | | | | | | | | | | | |
@@ -865,7 +866,7 @@
 |`cudnnCreateActivationDescriptor`|4.0.0| | | |`hipdnnCreateActivationDescriptor`| | | | | |`miopenCreateActivationDescriptor`| | | | | |
 |`cudnnCreateAlgorithmDescriptor`|7.1.3|8.0.2| | | | | | | | | | | | | | |
 |`cudnnCreateAlgorithmPerformance`|7.1.3|8.0.2| | | | | | | | | | | | | | |
-|`cudnnCreateAttnDescriptor`|7.5.0| | | | | | | | | | | | | | | |
+|`cudnnCreateAttnDescriptor`|7.5.0|9.0.0| | | | | | | | | | | | | | |
 |`cudnnCreateCTCLossDescriptor`|7.0.5| | | | | | | | | |`miopenCreateCTCLossDescriptor`| | | | | |
 |`cudnnCreateConvolutionDescriptor`|1.0.0| | | |`hipdnnCreateConvolutionDescriptor`| | | | | |`miopenCreateConvolutionDescriptor`| | | | | |
 |`cudnnCreateDropoutDescriptor`|5.0.0| | | |`hipdnnCreateDropoutDescriptor`| | | | | |`miopenCreateDropoutDescriptor`| | | | | |
@@ -875,12 +876,12 @@
 |`cudnnCreateFusedOpsVariantParamPack`|7.6.0| | | | | | | | | | | | | | | |
 |`cudnnCreateLRNDescriptor`|3.0.0| | | |`hipdnnCreateLRNDescriptor`| | | | | |`miopenCreateLRNDescriptor`| | | | | |
 |`cudnnCreateOpTensorDescriptor`|5.0.0| | | |`hipdnnCreateOpTensorDescriptor`| | | | | | | | | | | |
-|`cudnnCreatePersistentRNNPlan`|6.0.0|8.0.1| | |`hipdnnCreatePersistentRNNPlan`| | | | | | | | | | | |
+|`cudnnCreatePersistentRNNPlan`|6.0.0|8.0.1| |9.0.0|`hipdnnCreatePersistentRNNPlan`| | | | | | | | | | | |
 |`cudnnCreatePoolingDescriptor`|1.0.0| | | |`hipdnnCreatePoolingDescriptor`| | | | | |`miopenCreatePoolingDescriptor`| | | | | |
 |`cudnnCreateRNNDataDescriptor`|7.2.1| | | | | | | | | | | | | | | |
 |`cudnnCreateRNNDescriptor`|5.0.0| | | |`hipdnnCreateRNNDescriptor`| | | | | |`miopenCreateRNNDescriptor`| | | | | |
 |`cudnnCreateReduceTensorDescriptor`|6.0.0| | | |`hipdnnCreateReduceTensorDescriptor`| | | | | |`miopenCreateReduceTensorDescriptor`| | | | | |
-|`cudnnCreateSeqDataDescriptor`|7.5.0| | | | | | | | | | | | | | | |
+|`cudnnCreateSeqDataDescriptor`|7.5.0|9.0.0| | | | | | | | | | | | | | |
 |`cudnnCreateSpatialTransformerDescriptor`|5.0.0| | | | | | | | | | | | | | | |
 |`cudnnCreateTensorDescriptor`|2.0.0| | | |`hipdnnCreateTensorDescriptor`| | | | | |`miopenCreateTensorDescriptor`| | | | | |
 |`cudnnCreateTensorTransformDescriptor`|7.5.0| | | | | | | | | | | | | | | |
@@ -890,7 +891,7 @@
 |`cudnnDestroyActivationDescriptor`|4.0.0| | | |`hipdnnDestroyActivationDescriptor`| | | | | |`miopenDestroyActivationDescriptor`| | | | | |
 |`cudnnDestroyAlgorithmDescriptor`|7.1.3|8.0.2| | | | | | | | | | | | | | |
 |`cudnnDestroyAlgorithmPerformance`|7.1.3|8.0.2| | | | | | | | | | | | | | |
-|`cudnnDestroyAttnDescriptor`|7.5.0| | | | | | | | | | | | | | | |
+|`cudnnDestroyAttnDescriptor`|7.5.0|9.0.0| | | | | | | | | | | | | | |
 |`cudnnDestroyCTCLossDescriptor`|7.0.5| | | | | | | | | |`miopenDestroyCTCLossDescriptor`| | | | | |
 |`cudnnDestroyConvolutionDescriptor`|1.0.0| | | |`hipdnnDestroyConvolutionDescriptor`| | | | | |`miopenDestroyConvolutionDescriptor`| | | | | |
 |`cudnnDestroyDropoutDescriptor`|5.0.0| | | |`hipdnnDestroyDropoutDescriptor`| | | | | |`miopenDestroyDropoutDescriptor`| | | | | |
@@ -900,12 +901,12 @@
 |`cudnnDestroyFusedOpsVariantParamPack`|7.6.0| | | | | | | | | | | | | | | |
 |`cudnnDestroyLRNDescriptor`|3.0.0| | | |`hipdnnDestroyLRNDescriptor`| | | | | |`miopenDestroyLRNDescriptor`| | | | | |
 |`cudnnDestroyOpTensorDescriptor`|5.0.0| | | |`hipdnnDestroyOpTensorDescriptor`| | | | | | | | | | | |
-|`cudnnDestroyPersistentRNNPlan`|6.0.0|8.0.1| | |`hipdnnDestroyPersistentRNNPlan`| | | | | | | | | | | |
+|`cudnnDestroyPersistentRNNPlan`|6.0.0|8.0.1| |9.0.0|`hipdnnDestroyPersistentRNNPlan`| | | | | | | | | | | |
 |`cudnnDestroyPoolingDescriptor`|1.0.0| | | |`hipdnnDestroyPoolingDescriptor`| | | | | |`miopenDestroyPoolingDescriptor`| | | | | |
 |`cudnnDestroyRNNDataDescriptor`|7.2.1| | | | | | | | | | | | | | | |
 |`cudnnDestroyRNNDescriptor`|5.0.0| | | |`hipdnnDestroyRNNDescriptor`| | | | | |`miopenDestroyRNNDescriptor`| | | | | |
 |`cudnnDestroyReduceTensorDescriptor`|6.0.0| | | |`hipdnnDestroyReduceTensorDescriptor`| | | | | |`miopenDestroyReduceTensorDescriptor`| | | | | |
-|`cudnnDestroySeqDataDescriptor`|7.5.0| | | | | | | | | | | | | | | |
+|`cudnnDestroySeqDataDescriptor`|7.5.0|9.0.0| | | | | | | | | | | | | | |
 |`cudnnDestroySpatialTransformerDescriptor`|5.0.0| | | | | | | | | | | | | | | |
 |`cudnnDestroyTensorDescriptor`|2.0.0| | | |`hipdnnDestroyTensorDescriptor`| | | | | |`miopenDestroyTensorDescriptor`| | | | | |
 |`cudnnDestroyTensorTransformDescriptor`|7.5.0| | | | | | | | | | | | | | | |
@@ -921,23 +922,24 @@
 |`cudnnFindConvolutionBackwardFilterAlgorithmEx`|5.0.0| | | |`hipdnnFindConvolutionBackwardFilterAlgorithmEx`| | | | | | | | | | | |
 |`cudnnFindConvolutionForwardAlgorithm`|3.0.0| | | |`hipdnnFindConvolutionForwardAlgorithm`| | | | | | | | | | | |
 |`cudnnFindConvolutionForwardAlgorithmEx`|5.0.0| | | |`hipdnnFindConvolutionForwardAlgorithmEx`| | | | | |`miopenFindConvolutionForwardAlgorithm`| | | | | |
-|`cudnnFindRNNBackwardDataAlgorithmEx`|7.1.3|8.0.2| | | | | | | | | | | | | | |
-|`cudnnFindRNNBackwardWeightsAlgorithmEx`|7.1.3|8.0.2| | | | | | | | | | | | | | |
-|`cudnnFindRNNForwardInferenceAlgorithmEx`|7.1.3|8.0.2| | | | | | | | | | | | | | |
-|`cudnnFindRNNForwardTrainingAlgorithmEx`|7.1.3|8.0.2| | | | | | | | | | | | | | |
+|`cudnnFindRNNBackwardDataAlgorithmEx`|7.1.3|8.0.2| |9.0.0| | | | | | | | | | | | |
+|`cudnnFindRNNBackwardWeightsAlgorithmEx`|7.1.3|8.0.2| |9.0.0| | | | | | | | | | | | |
+|`cudnnFindRNNForwardInferenceAlgorithmEx`|7.1.3|8.0.2| |9.0.0| | | | | | | | | | | | |
+|`cudnnFindRNNForwardTrainingAlgorithmEx`|7.1.3|8.0.2| |9.0.0| | | | | | | | | | | | |
 |`cudnnFusedOpsExecute`|7.6.0| | | | | | | | | | | | | | | |
 |`cudnnGetActivationDescriptor`|4.0.0| | | |`hipdnnGetActivationDescriptor`| | | | | | | | | | | |
 |`cudnnGetActivationDescriptorSwishBeta`|8.2.0| | | | | | | | | | | | | | | |
 |`cudnnGetAlgorithmDescriptor`|7.1.3|8.0.2| | | | | | | | | | | | | | |
 |`cudnnGetAlgorithmPerformance`|7.1.3|8.0.2| | | | | | | | | | | | | | |
 |`cudnnGetAlgorithmSpaceSize`|7.1.3|8.0.2| | | | | | | | | | | | | | |
-|`cudnnGetAttnDescriptor`|7.5.0| | | | | | | | | | | | | | | |
+|`cudnnGetAttnDescriptor`|7.5.0|9.0.0| | | | | | | | | | | | | | |
 |`cudnnGetBatchNormalizationBackwardExWorkspaceSize`|7.4.1| | | | | | | | | | | | | | | |
 |`cudnnGetBatchNormalizationForwardTrainingExWorkspaceSize`|7.4.1| | | | | | | | | | | | | | | |
 |`cudnnGetBatchNormalizationTrainingExReserveSpaceSize`|7.4.1| | | | | | | | | | | | | | | |
-|`cudnnGetCTCLossDescriptor`|7.0.5| | | | | | | | | |`miopenGetCTCLossDescriptor`| | | | | |
-|`cudnnGetCTCLossDescriptorEx`|7.5.0| | | | | | | | | | | | | | | |
-|`cudnnGetCTCLossDescriptor_v8`|8.0.1| | | | | | | | | | | | | | | |
+|`cudnnGetCTCLossDescriptor`|7.0.5|9.0.0| | | | | | | | |`miopenGetCTCLossDescriptor`| | | | | |
+|`cudnnGetCTCLossDescriptorEx`|7.5.0|9.0.0| | | | | | | | | | | | | | |
+|`cudnnGetCTCLossDescriptor_v8`|8.0.1|9.0.0| | | | | | | | | | | | | | |
+|`cudnnGetCTCLossDescriptor_v9`|9.0.0| | | | | | | | | | | | | | | |
 |`cudnnGetCTCLossWorkspaceSize`|7.0.5| | | | | | | | | |`miopenGetCTCLossWorkspaceSize`| | | | | |
 |`cudnnGetCTCLossWorkspaceSize_v8`|8.0.1| | | | | | | | | | | | | | | |
 |`cudnnGetCallback`|7.1.3| | | | | | | | | | | | | | | |
@@ -971,8 +973,8 @@
 |`cudnnGetFusedOpsVariantParamPackAttribute`|7.6.0| | | | | | | | | | | | | | | |
 |`cudnnGetLRNDescriptor`|3.0.0| | | |`hipdnnGetLRNDescriptor`| | | | | |`miopenGetLRNDescriptor`| | | | | |
 |`cudnnGetMaxDeviceVersion`|8.6.0| | | | | | | | | | | | | | | |
-|`cudnnGetMultiHeadAttnBuffers`|7.5.0| | | | | | | | | | | | | | | |
-|`cudnnGetMultiHeadAttnWeights`|7.5.0| | | | | | | | | | | | | | | |
+|`cudnnGetMultiHeadAttnBuffers`|7.5.0|9.0.0| | | | | | | | | | | | | | |
+|`cudnnGetMultiHeadAttnWeights`|7.5.0|9.0.0| | | | | | | | | | | | | | |
 |`cudnnGetNormalizationBackwardWorkspaceSize`|8.0.1| | | | | | | | | | | | | | | |
 |`cudnnGetNormalizationForwardTrainingWorkspaceSize`|8.0.1| | | | | | | | | | | | | | | |
 |`cudnnGetNormalizationTrainingReserveSpaceSize`|8.0.1| | | | | | | | | | | | | | | |
@@ -982,30 +984,30 @@
 |`cudnnGetPoolingNdDescriptor`|2.0.0| | | | | | | | | |`miopenGetNdPoolingDescriptor`| | | | | |
 |`cudnnGetPoolingNdForwardOutputDim`|2.0.0| | | | | | | | | |`miopenGetPoolingNdForwardOutputDim`| | | | | |
 |`cudnnGetProperty`|6.0.0| | | | | | | | | | | | | | | |
-|`cudnnGetRNNBackwardDataAlgorithmMaxCount`|7.1.3|8.0.2| | | | | | | | | | | | | | |
-|`cudnnGetRNNBackwardWeightsAlgorithmMaxCount`|7.1.3|8.0.2| | | | | | | | | | | | | | |
-|`cudnnGetRNNBiasMode`|7.5.0|8.0.1| | | | | | | | | | | | | | |
+|`cudnnGetRNNBackwardDataAlgorithmMaxCount`|7.1.3|8.0.2| |9.0.0| | | | | | | | | | | | |
+|`cudnnGetRNNBackwardWeightsAlgorithmMaxCount`|7.1.3|8.0.2| |9.0.0| | | | | | | | | | | | |
+|`cudnnGetRNNBiasMode`|7.5.0|8.0.1| |9.0.0| | | | | | | | | | | | |
 |`cudnnGetRNNDataDescriptor`|7.2.1| | | | | | | | | | | | | | | |
 |`cudnnGetRNNDescriptor`|7.0.5|7.6.5| |8.0.1|`hipdnnGetRNNDescriptor`| | | | | |`miopenGetRNNDescriptor_V2`| | | | | |
-|`cudnnGetRNNDescriptor_v6`|8.0.1|8.0.1| | | | | | | | |`miopenGetRNNDescriptor_V2`| | | | | |
+|`cudnnGetRNNDescriptor_v6`|8.0.1|8.0.1| |9.0.0| | | | | | |`miopenGetRNNDescriptor_V2`| | | | | |
 |`cudnnGetRNNDescriptor_v8`|8.0.1| | | | | | | | | | | | | | | |
-|`cudnnGetRNNForwardInferenceAlgorithmMaxCount`|7.1.3|8.0.2| | | | | | | | | | | | | | |
-|`cudnnGetRNNForwardTrainingAlgorithmMaxCount`|7.1.3|8.0.2| | | | | | | | | | | | | | |
-|`cudnnGetRNNLinLayerBiasParams`|5.0.0|8.0.1| | |`hipdnnGetRNNLinLayerBiasParams`| | | | | | | | | | | |
-|`cudnnGetRNNLinLayerMatrixParams`|5.0.0|8.0.1| | |`hipdnnGetRNNLinLayerMatrixParams`| | | | | | | | | | | |
-|`cudnnGetRNNMatrixMathType`|7.1.3|8.0.1| | | | | | | | | | | | | | |
-|`cudnnGetRNNPaddingMode`|7.2.1|8.0.1| | | | | | | | | | | | | | |
-|`cudnnGetRNNParamsSize`|5.0.0|8.0.1| | |`hipdnnGetRNNParamsSize`| | | | | |`miopenGetRNNParamsSize`| | | | | |
-|`cudnnGetRNNProjectionLayers`|7.1.3|8.0.1| | | | | | | | | | | | | | |
+|`cudnnGetRNNForwardInferenceAlgorithmMaxCount`|7.1.3|8.0.2| |9.0.0| | | | | | | | | | | | |
+|`cudnnGetRNNForwardTrainingAlgorithmMaxCount`|7.1.3|8.0.2| |9.0.0| | | | | | | | | | | | |
+|`cudnnGetRNNLinLayerBiasParams`|5.0.0|8.0.1| |9.0.0|`hipdnnGetRNNLinLayerBiasParams`| | | | | | | | | | | |
+|`cudnnGetRNNLinLayerMatrixParams`|5.0.0|8.0.1| |9.0.0|`hipdnnGetRNNLinLayerMatrixParams`| | | | | | | | | | | |
+|`cudnnGetRNNMatrixMathType`|7.1.3|8.0.1| |9.0.0| | | | | | | | | | | | |
+|`cudnnGetRNNPaddingMode`|7.2.1|8.0.1| |9.0.0| | | | | | | | | | | | |
+|`cudnnGetRNNParamsSize`|5.0.0|8.0.1| |9.0.0|`hipdnnGetRNNParamsSize`| | | | | |`miopenGetRNNParamsSize`| | | | | |
+|`cudnnGetRNNProjectionLayers`|7.1.3|8.0.1| |9.0.0| | | | | | | | | | | | |
 |`cudnnGetRNNTempSpaceSizes`|8.0.1| | | | | | | | | | | | | | | |
-|`cudnnGetRNNTrainingReserveSize`|5.0.0|8.0.1| | |`hipdnnGetRNNTrainingReserveSize`| | | | | |`miopenGetRNNTrainingReserveSize`| | | | | |
+|`cudnnGetRNNTrainingReserveSize`|5.0.0|8.0.1| |9.0.0|`hipdnnGetRNNTrainingReserveSize`| | | | | |`miopenGetRNNTrainingReserveSize`| | | | | |
 |`cudnnGetRNNWeightParams`|8.0.1| | | | | | | | | | | | | | | |
 |`cudnnGetRNNWeightSpaceSize`|8.0.1| | | | | | | | | | | | | | | |
-|`cudnnGetRNNWorkspaceSize`|5.0.0|8.0.1| | |`hipdnnGetRNNWorkspaceSize`| | | | | |`miopenGetRNNWorkspaceSize`| | | | | |
+|`cudnnGetRNNWorkspaceSize`|5.0.0|8.0.1| |9.0.0|`hipdnnGetRNNWorkspaceSize`| | | | | |`miopenGetRNNWorkspaceSize`| | | | | |
 |`cudnnGetReduceTensorDescriptor`|6.0.0| | | |`hipdnnGetReduceTensorDescriptor`| | | | | |`miopenGetReduceTensorDescriptor`| | | | | |
 |`cudnnGetReductionIndicesSize`|6.0.0| | | | | | | | | |`miopenGetReductionIndicesSize`| | | | | |
 |`cudnnGetReductionWorkspaceSize`|6.0.0| | | |`hipdnnGetReductionWorkspaceSize`| | | | | |`miopenGetReductionWorkspaceSize`| | | | | |
-|`cudnnGetSeqDataDescriptor`|7.5.0| | | | | | | | | | | | | | | |
+|`cudnnGetSeqDataDescriptor`|7.5.0|9.0.0| | | | | | | | | | | | | | |
 |`cudnnGetStream`|1.0.0| | | |`hipdnnGetStream`| | | | | |`miopenGetStream`| | | | | |
 |`cudnnGetTensor4dDescriptor`|1.0.0| | | |`hipdnnGetTensor4dDescriptor`| | | | | |`miopenGet4dTensorDescriptor`| | | | | |
 |`cudnnGetTensorNdDescriptor`|2.0.0| | | |`hipdnnGetTensorNdDescriptor`| | | | | | | | | | | |
@@ -1017,9 +1019,9 @@
 |`cudnnLRNCrossChannelBackward`|3.0.0| | | |`hipdnnLRNCrossChannelBackward`| | | | | | | | | | | |
 |`cudnnLRNCrossChannelForward`|3.0.0| | | |`hipdnnLRNCrossChannelForward`| | | | | | | | | | | |
 |`cudnnMakeFusedOpsPlan`|7.6.0| | | | | | | | | | | | | | | |
-|`cudnnMultiHeadAttnBackwardData`|7.5.0| | | | | | | | | | | | | | | |
-|`cudnnMultiHeadAttnBackwardWeights`|7.5.0| | | | | | | | | | | | | | | |
-|`cudnnMultiHeadAttnForward`|7.5.0| | | | | | | | | | | | | | | |
+|`cudnnMultiHeadAttnBackwardData`|7.5.0|9.0.0| | | | | | | | | | | | | | |
+|`cudnnMultiHeadAttnBackwardWeights`|7.5.0|9.0.0| | | | | | | | | | | | | | |
+|`cudnnMultiHeadAttnForward`|7.5.0|9.0.0| | | | | | | | | | | | | | |
 |`cudnnNormalizationBackward`|8.0.1| | | | | | | | | | | | | | | |
 |`cudnnNormalizationForwardInference`|8.0.1| | | | | | | | | | | | | | | |
 |`cudnnNormalizationForwardTraining`|8.0.1| | | | | | | | | | | | | | | |
@@ -1029,21 +1031,23 @@
 |`cudnnPoolingBackward`|1.0.0| | | |`hipdnnPoolingBackward`| | | | | | | | | | | |
 |`cudnnPoolingForward`|1.0.0| | | |`hipdnnPoolingForward`| | | | | | | | | | | |
 |`cudnnQueryRuntimeError`|7.0.5| | | | | | | | | | | | | | | |
-|`cudnnRNNBackwardData`|5.0.0|8.0.2| | |`hipdnnRNNBackwardData`| | | | | |`miopenRNNBackwardData`| | | | | |
-|`cudnnRNNBackwardDataEx`|7.2.1|8.0.2| | | | | | | | | | | | | | |
+|`cudnnRNNBackwardData`|5.0.0|8.0.2| |9.0.0|`hipdnnRNNBackwardData`| | | | | |`miopenRNNBackwardData`| | | | | |
+|`cudnnRNNBackwardDataEx`|7.2.1|8.0.2| |9.0.0| | | | | | | | | | | | |
 |`cudnnRNNBackwardData_v8`|8.0.2| | | | | | | | | | | | | | | |
-|`cudnnRNNBackwardWeights`|5.0.0|8.0.2| | |`hipdnnRNNBackwardWeights`| | | | | |`miopenRNNBackwardWeights`| | | | | |
-|`cudnnRNNBackwardWeightsEx`|7.2.1|8.0.2| | | | | | | | | | | | | | |
+|`cudnnRNNBackwardWeights`|5.0.0|8.0.2| |9.0.0|`hipdnnRNNBackwardWeights`| | | | | |`miopenRNNBackwardWeights`| | | | | |
+|`cudnnRNNBackwardWeightsEx`|7.2.1|8.0.2| |9.0.0| | | | | | | | | | | | |
 |`cudnnRNNBackwardWeights_v8`|8.0.2| | | | | | | | | | | | | | | |
 |`cudnnRNNForward`|8.0.1| | | | | | | | | | | | | | | |
-|`cudnnRNNForwardInference`|5.0.0|8.0.1| | |`hipdnnRNNForwardInference`| | | | | |`miopenRNNForwardInference`| | | | | |
-|`cudnnRNNForwardInferenceEx`|7.2.1|8.0.1| | | | | | | | | | | | | | |
-|`cudnnRNNForwardTraining`|5.0.0|8.0.1| | |`hipdnnRNNForwardTraining`| | | | | |`miopenRNNForwardTraining`| | | | | |
-|`cudnnRNNForwardTrainingEx`|7.2.1|8.0.1| | | | | | | | | | | | | | |
-|`cudnnRNNGetClip`|7.2.1|8.0.1| | | | | | | | | | | | | | |
+|`cudnnRNNForwardInference`|5.0.0|8.0.1| |9.0.0|`hipdnnRNNForwardInference`| | | | | |`miopenRNNForwardInference`| | | | | |
+|`cudnnRNNForwardInferenceEx`|7.2.1|8.0.1| |9.0.0| | | | | | | | | | | | |
+|`cudnnRNNForwardTraining`|5.0.0|8.0.1| |9.0.0|`hipdnnRNNForwardTraining`| | | | | |`miopenRNNForwardTraining`| | | | | |
+|`cudnnRNNForwardTrainingEx`|7.2.1|8.0.1| |9.0.0| | | | | | | | | | | | |
+|`cudnnRNNGetClip`|7.2.1|8.0.1| |9.0.0| | | | | | | | | | | | |
 |`cudnnRNNGetClip_v8`|8.0.1| | | | | | | | | | | | | | | |
-|`cudnnRNNSetClip`|7.2.1|8.0.1| | | | | | | | | | | | | | |
+|`cudnnRNNGetClip_v9`|9.0.0| | | | | | | | | | | | | | | |
+|`cudnnRNNSetClip`|7.2.1|8.0.1| |9.0.0| | | | | | | | | | | | |
 |`cudnnRNNSetClip_v8`|8.0.1| | | | | | | | | | | | | | | |
+|`cudnnRNNSetClip_v9`|9.0.0| | | | | | | | | | | | | | | |
 |`cudnnReduceTensor`|6.0.0| | | |`hipdnnReduceTensor`| | | | | |`miopenReduceTensor`| | | | | |
 |`cudnnReorderFilterAndBias`|7.6.0| | | | | | | | | | | | | | | |
 |`cudnnRestoreAlgorithm`|7.1.3|8.0.2| | | | | | | | | | | | | | |
@@ -1054,10 +1058,11 @@
 |`cudnnSetActivationDescriptorSwishBeta`|8.2.0| | | | | | | | | | | | | | | |
 |`cudnnSetAlgorithmDescriptor`|7.1.3|8.0.2| | | | | | | | | | | | | | |
 |`cudnnSetAlgorithmPerformance`|7.1.3|8.0.2| | | | | | | | | | | | | | |
-|`cudnnSetAttnDescriptor`|7.5.0| | | | | | | | | | | | | | | |
-|`cudnnSetCTCLossDescriptor`|7.0.5| | | | | | | | | |`miopenSetCTCLossDescriptor`| | | | | |
-|`cudnnSetCTCLossDescriptorEx`|7.6.0| | | | | | | | | | | | | | | |
-|`cudnnSetCTCLossDescriptor_v8`|8.0.1| | | | | | | | | | | | | | | |
+|`cudnnSetAttnDescriptor`|7.5.0|9.0.0| | | | | | | | | | | | | | |
+|`cudnnSetCTCLossDescriptor`|7.0.5|9.0.0| | | | | | | | |`miopenSetCTCLossDescriptor`| | | | | |
+|`cudnnSetCTCLossDescriptorEx`|7.6.0|9.0.0| | | | | | | | | | | | | | |
+|`cudnnSetCTCLossDescriptor_v8`|8.0.1|9.0.0| | | | | | | | | | | | | | |
+|`cudnnSetCTCLossDescriptor_v9`|9.0.0| | | | | | | | | | | | | | | |
 |`cudnnSetCallback`|7.1.3| | | | | | | | | | | | | | | |
 |`cudnnSetConvolution2dDescriptor`|2.0.0| | | |`hipdnnSetConvolution2dDescriptor`| | | | | | | | | | | |
 |`cudnnSetConvolutionGroupCount`|7.0.5| | | |`hipdnnSetConvolutionGroupCount`| | | | | |`miopenSetConvolutionGroupCount`| | | | | |
@@ -1071,21 +1076,21 @@
 |`cudnnSetFusedOpsVariantParamPackAttribute`|7.6.0| | | | | | | | | | | | | | | |
 |`cudnnSetLRNDescriptor`|3.0.0| | | |`hipdnnSetLRNDescriptor`| | | | | |`miopenSetLRNDescriptor`| | | | | |
 |`cudnnSetOpTensorDescriptor`|5.0.0| | | |`hipdnnSetOpTensorDescriptor`| | | | | | | | | | | |
-|`cudnnSetPersistentRNNPlan`|6.0.0|8.0.1| | |`hipdnnSetPersistentRNNPlan`| | | | | | | | | | | |
+|`cudnnSetPersistentRNNPlan`|6.0.0|8.0.1| |9.0.0|`hipdnnSetPersistentRNNPlan`| | | | | | | | | | | |
 |`cudnnSetPooling2dDescriptor`|2.0.0| | | |`hipdnnSetPooling2dDescriptor`| | | | | |`miopenSet2dPoolingDescriptor`| | | | | |
 |`cudnnSetPoolingNdDescriptor`|2.0.0| | | |`hipdnnSetPoolingNdDescriptor`| | | | | |`miopenSetNdPoolingDescriptor`| | | | | |
-|`cudnnSetRNNAlgorithmDescriptor`|7.1.3|8.0.2| | | | | | | | | | | | | | |
-|`cudnnSetRNNBiasMode`|7.5.0|8.0.1| | | | | | | | | | | | | | |
+|`cudnnSetRNNAlgorithmDescriptor`|7.1.3|8.0.2| |9.0.0| | | | | | | | | | | | |
+|`cudnnSetRNNBiasMode`|7.5.0|8.0.1| |9.0.0| | | | | | | | | | | | |
 |`cudnnSetRNNDataDescriptor`|7.2.1| | | | | | | | | | | | | | | |
 |`cudnnSetRNNDescriptor`|5.0.0|7.6.5| |8.0.1|`hipdnnSetRNNDescriptor`| | | | | | | | | | | |
 |`cudnnSetRNNDescriptor_v5`|7.0.5|7.6.5| |8.0.1|`hipdnnSetRNNDescriptor_v5`| | | | | | | | | | | |
-|`cudnnSetRNNDescriptor_v6`|6.0.0|8.0.1| | |`hipdnnSetRNNDescriptor_v6`| | | | | |`miopenSetRNNDescriptor_V2`| | | | | |
+|`cudnnSetRNNDescriptor_v6`|6.0.0|8.0.1| |9.0.0|`hipdnnSetRNNDescriptor_v6`| | | | | |`miopenSetRNNDescriptor_V2`| | | | | |
 |`cudnnSetRNNDescriptor_v8`|8.0.1| | | | | | | | | | | | | | | |
-|`cudnnSetRNNMatrixMathType`|7.0.5|8.0.1| | | | | | | | | | | | | | |
-|`cudnnSetRNNPaddingMode`|7.2.1|8.0.1| | | | | | | | | | | | | | |
-|`cudnnSetRNNProjectionLayers`|7.1.3|8.0.1| | | | | | | | | | | | | | |
+|`cudnnSetRNNMatrixMathType`|7.0.5|8.0.1| |9.0.0| | | | | | | | | | | | |
+|`cudnnSetRNNPaddingMode`|7.2.1|8.0.1| |9.0.0| | | | | | | | | | | | |
+|`cudnnSetRNNProjectionLayers`|7.1.3|8.0.1| |9.0.0| | | | | | | | | | | | |
 |`cudnnSetReduceTensorDescriptor`|6.0.0| | | |`hipdnnSetReduceTensorDescriptor`| | | | | |`miopenSetReduceTensorDescriptor`| | | | | |
-|`cudnnSetSeqDataDescriptor`|7.5.0| | | | | | | | | | | | | | | |
+|`cudnnSetSeqDataDescriptor`|7.5.0|9.0.0| | | | | | | | | | | | | | |
 |`cudnnSetSpatialTransformerNdDescriptor`|5.0.0| | | | | | | | | | | | | | | |
 |`cudnnSetStream`|1.0.0| | | |`hipdnnSetStream`| | | | | |`miopenSetStream`| | | | | |
 |`cudnnSetTensor`|2.0.0| | | |`hipdnnSetTensor`| | | | | |`miopenSetTensor`| | | | | |
