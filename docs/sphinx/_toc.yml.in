@@ -5,23 +5,50 @@ defaults:
 root: index
 subtrees:
 - entries:
-  - file: hipify-clang
-  - file: hipify-perl
-  - file: supported_apis
-    subtrees: 
+  - file: what-is-hipify.rst
+
+- caption: How to
+  entries:
+  - file: how-to/hipify-clang.md
+    title: Use hipify-clang
+  - file: how-to/hipify-perl.md
+    title: Use hipify-perl
+  - url: https://github.com/ROCm/hipify_torch
+    title: Use hipify_torch
+
+- caption: Reference
+  entries:
+  - file: reference/supported-apis.rst
+    title: Supported CUDA APIs
+    subtrees:
       - entries:
-        - file: tables/CUDA_Runtime_API_functions_supported_by_HIP
-        - file: tables/CUDA_Driver_API_functions_supported_by_HIP
-        - file: tables/cuComplex_API_supported_by_HIP
-        - file: tables/CUDA_Device_API_supported_by_HIP
-        - file: tables/CUDA_RTC_API_supported_by_HIP
-        - file: tables/CUBLAS_API_supported_by_HIP
-        - file: tables/CURAND_API_supported_by_HIP
-        - file: tables/CUDNN_API_supported_by_HIP
-        - file: tables/CUFFT_API_supported_by_HIP
-        - file: tables/CUSPARSE_API_supported_by_HIP
-        - file: tables/CUSOLVER_API_supported_by_HIP
-        - file: tables/CUB_API_supported_by_HIP
+        - file: reference/cuda-apis/cublas-api-hip-roc-support.md
+          title: BLAS
+        - file: reference/cuda-apis/cucomplex-api-hip-support.md
+          title: Complex
+        - file: reference/cuda-apis/cub-api-hip-support.md
+          title: CUB
+        - file: reference/cuda-apis/cuda-device-api-hip-support.md
+          title: CUDA
+        - file: reference/cuda-apis/cudnn-api-hip-miopen-support.md
+          title: DNN
+        - file: reference/cuda-apis/cuda-driver-api-hip-support.md
+          title: Driver
+        - file: reference/cuda-apis/cufft-api-hip-support.md
+          title: FFT
+        - file: reference/cuda-apis/curand-api-hip-support.md
+          title: RAND
+        - file: reference/cuda-apis/cuda-rtc-api-hip-support.md
+          title: RTC
+        - file: reference/cuda-apis/cuda-runtime-api-hip-support.md
+          title: Runtime
+        - file: reference/cuda-apis/cusolver-api-hip-roc-support.md
+          title: SOLVER
+        - file: reference/cuda-apis/cusparse-api-hip-roc-support.md
+          title: SPARSE
+
 - caption: About
   entries:
-  - file: license
+  - file: license.md
+
+

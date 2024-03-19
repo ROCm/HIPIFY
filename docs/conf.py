@@ -7,13 +7,13 @@
 from rocm_docs import ROCmDocs
 
 # for PDF output on Read the Docs
-project = "HIPIFY Documentation"
+project = "HIPIFY documentation"
 author = "Advanced Micro Devices, Inc."
 copyright = "Copyright (c) 2023 Advanced Micro Devices, Inc. All rights reserved."
 
 external_toc_path = "./sphinx/_toc.yml"
 
-docs_core = ROCmDocs("HIPIFY Documentation")
+docs_core = ROCmDocs("HIPIFY documentation")
 docs_core.setup()
 
 external_projects_current_project = "hipify"
