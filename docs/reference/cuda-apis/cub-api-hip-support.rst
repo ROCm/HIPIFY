@@ -7,6 +7,8 @@ CUB data types supported by HIP
 ***************************************************************************
 \*A - Added; D - Deprecated; C - Changed; R - Removed; E - Experimental
 
+The following table shows the CUDA data types that have HIP equivalents.
+
 .. csv-table::
   :header: "CUDA API", "HIP equivalent API"
 

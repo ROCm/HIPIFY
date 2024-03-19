@@ -6,12 +6,12 @@
 HIPIFY documentation
 ***************************************************************************
 
-Welcome to the HIPIFY docs home page! To learn more about HIPIFY, refer to the
-:doc:`What is HIPIFY? <what-is-hipify>` page.
+Welcome to the HIPIFY docs home page! To learn more about HIPIFY, see
+:doc:`What is HIPIFY? <what-is-hipify>`
 
 Our documentation is organized into the following categories:
 
-.. grid:: 1
+.. grid:: 1 2 2 2
   :gutter: 3
 
   ..  grid-item-card:: How to
@@ -20,24 +20,10 @@ Our documentation is organized into the following categories:
     * :doc:`Use hipify-clang <./how-to/hipify-perl>`
     * `Use hipify_torch <https://github.com/ROCm/hipify_torch>`_
 
-  .. grid-item-card::  :doc:`Supported APIs <supported-apis>`
+  .. grid-item-card::  Reference
 
     * :doc:`Supported CUDA APIs <reference/supported-apis>`
 
-        :doc:`BLAS <./reference/cuda-apis/cublas-api-hip-roc-support>`"
-        :doc:`Complex <./reference/cuda-apis/cucomplex-api-hip-support>`"
-        :doc:`CUB <./reference/cuda-apis/cub-api-hip-support>`"
-        :doc:`Device <./reference/cuda-apis/cuda-device-api-hip-support>`"
-        :doc:`DNN <./reference/cuda-apis/cudnn-api-hip-miopen-support>`, "
-        :doc:`Driver <./reference/cuda-apis/cuda-driver-api-hip-support>`"
-        :doc:`FFT <./reference/cuda-apis/cufft-api-hip-support>`"
-        :doc:`RTC <./reference/cuda-apis/cuda-rtc-api-hip-support>`"
-        :doc:`RAND <./reference/cuda-apis/curand-api-hip-support>`"
-        :doc:`Runtime <./reference/cuda-apis/cuda-runtime-api-hip-support>`"
-        :doc:`SOLVER <./reference/cuda-apis/cusolver-api-hip-roc-support>`"
-        :doc:`SPARSE <./reference/cuda-apis/cusparse-api-hip-roc-support>`"
-
-To contribute to the documentation refer to
-`Contributing to ROCm <https://rocm.docs.amd.com/en/latest/contribute/index.html>`_.
+To contribute to the documentation refer to :doc:`Contributing to ROCm <rocm:contributing>`.
 
 You can find licensing information on the :doc:`License <./license>` page.

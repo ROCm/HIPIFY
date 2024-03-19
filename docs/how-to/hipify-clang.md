@@ -314,7 +314,7 @@ hipify-clang intro.cu -cuda-path="C:/Program Files/NVIDIA GPU Computing Toolkit/
 
 The generated file with statistics is `intro.cu.csv`:
 
-![image](pics/csv_statistics.png)
+![image](../data/how-to/csv_statistics.png)
 
 In the case of multiple source files, the statistics will be provided per file and in total.
 

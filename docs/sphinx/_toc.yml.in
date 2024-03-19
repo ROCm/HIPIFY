@@ -13,7 +13,8 @@ subtrees:
     title: Use hipify-clang
   - file: how-to/hipify-perl.md
     title: Use hipify-perl
-
+  - url: https://github.com/ROCm/hipify_torch
+    title: Use hipify_torch
 
 - caption: Reference
   entries:
