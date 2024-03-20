@@ -281,7 +281,7 @@
 |`CUDNN_BN_FINALIZE_STATISTICS_INFERENCE`|8.1.0| | | | | | | | | |
 |`CUDNN_BN_FINALIZE_STATISTICS_TRAINING`|8.1.0| | | | | | | | | |
 |`CUDNN_BN_MIN_EPSILON`|4.0.0| | | | | | | | | |
-|`CUDNN_CONVOLUTION`|1.0.0| | | | | | | | | |
+|`CUDNN_CONVOLUTION`|1.0.0|9.0.0| | | | | | | | |
 |`CUDNN_CONVOLUTION_BWD_DATA_ALGO_0`|3.0.0| | | |`miopenConvolutionBwdDataAlgoGEMM`| | | | | |
 |`CUDNN_CONVOLUTION_BWD_DATA_ALGO_1`|3.0.0| | | |`miopenConvolutionBwdDataAlgoDirect`| | | | | |
 |`CUDNN_CONVOLUTION_BWD_DATA_ALGO_COUNT`|6.0.0| | | | | | | | | |
@@ -315,7 +315,7 @@
 |`CUDNN_CONVOLUTION_FWD_NO_WORKSPACE`|2.0.0|7.6.5| |8.0.1| | | | | | |
 |`CUDNN_CONVOLUTION_FWD_PREFER_FASTEST`|2.0.0|7.6.5| |8.0.1| | | | | | |
 |`CUDNN_CONVOLUTION_FWD_SPECIFY_WORKSPACE_LIMIT`|2.0.0|7.6.5| |8.0.1| | | | | | |
-|`CUDNN_CROSS_CORRELATION`|1.0.0| | | | | | | | | |
+|`CUDNN_CROSS_CORRELATION`|1.0.0|9.0.0| | | | | | | | |
 |`CUDNN_CTC_LOSS_ALGO_DETERMINISTIC`|7.0.5| | | |`MIOPEN_CTC_LOSS_ALGO_DETERMINISTIC`| | | | | |
 |`CUDNN_CTC_LOSS_ALGO_NON_DETERMINISTIC`|7.0.5| | | | | | | | | |
 |`CUDNN_DATA_BFLOAT16`|8.1.0| | | |`miopenBFloat16`| | | | | |
@@ -727,20 +727,20 @@
 |`cudnnCTCLossStruct`|7.0.5| | | | | | | | | |
 |`cudnnCallback_t`|7.1.3| | | | | | | | | |
 |`cudnnContext`|1.0.0| | | | | | | | | |
-|`cudnnConvolutionBwdDataAlgoPerfStruct`|8.2.0| | | |`miopenConvAlgoPerf_t`| | | | | |
-|`cudnnConvolutionBwdDataAlgoPerf_t`|3.0.0| | | |`miopenConvAlgoPerf_t`| | | | | |
+|`cudnnConvolutionBwdDataAlgoPerfStruct`|8.2.0|9.0.0| | |`miopenConvAlgoPerf_t`| | | | | |
+|`cudnnConvolutionBwdDataAlgoPerf_t`|3.0.0|9.0.0| | |`miopenConvAlgoPerf_t`| | | | | |
 |`cudnnConvolutionBwdDataAlgo_t`|3.0.0| | | |`miopenConvBwdDataAlgorithm_t`| | | | | |
 |`cudnnConvolutionBwdDataPreference_t`|3.0.0|7.6.5| |8.0.1| | | | | | |
 |`cudnnConvolutionBwdFilterAlgoPerfStruct`|8.2.0| | | | | | | | | |
 |`cudnnConvolutionBwdFilterAlgoPerf_t`|3.0.0| | | | | | | | | |
 |`cudnnConvolutionBwdFilterAlgo_t`|3.0.0| | | | | | | | | |
 |`cudnnConvolutionBwdFilterPreference_t`|3.0.0|7.6.5| |8.0.1| | | | | | |
-|`cudnnConvolutionDescriptor_t`|1.0.0| | | |`miopenConvolutionDescriptor_t`| | | | | |
+|`cudnnConvolutionDescriptor_t`|1.0.0|9.0.0| | |`miopenConvolutionDescriptor_t`| | | | | |
 |`cudnnConvolutionFwdAlgoPerfStruct`|8.2.0| | | |`miopenConvAlgoPerf_t`| | | | | |
-|`cudnnConvolutionFwdAlgoPerf_t`|3.0.0| | | |`miopenConvAlgoPerf_t`| | | | | |
+|`cudnnConvolutionFwdAlgoPerf_t`|3.0.0|9.0.0| | |`miopenConvAlgoPerf_t`| | | | | |
 |`cudnnConvolutionFwdAlgo_t`|2.0.0| | | |`miopenConvFwdAlgorithm_t`| | | | | |
 |`cudnnConvolutionFwdPreference_t`|2.0.0|7.6.5| |8.0.1| | | | | | |
-|`cudnnConvolutionMode_t`|1.0.0| | | |`miopenConvolutionMode_t`| | | | | |
+|`cudnnConvolutionMode_t`|1.0.0|9.0.0| | |`miopenConvolutionMode_t`| | | | | |
 |`cudnnConvolutionStruct`|1.0.0| | | | | | | | | |
 |`cudnnDataType_t`|1.0.0| | | |`miopenDataType_t`| | | | | |
 |`cudnnDebugStruct`|8.2.0| | | | | | | | | |
@@ -805,7 +805,7 @@
 |`cudnnReduceTensorIndices_t`|6.0.0| | | |`miopenReduceTensorIndices_t`| | | | | |
 |`cudnnReduceTensorOp_t`|6.0.0| | | |`miopenReduceTensorOp_t`| | | | | |
 |`cudnnReduceTensorStruct`|6.0.0| | | | | | | | | |
-|`cudnnReorderType_t`|7.6.0| | | | | | | | | |
+|`cudnnReorderType_t`|7.6.0|9.0.0| | | | | | | | |
 |`cudnnResampleMode_t`|8.3.0| | | | | | | | | |
 |`cudnnRngDistribution_t`|8.7.0| | | | | | | | | |
 |`cudnnRuntimeTag_t`|7.0.5| | | | | | | | | |
@@ -859,8 +859,8 @@
 |`cudnnConvolutionBackwardBias`|1.0.0| | | |`miopenConvolutionBackwardBias`| | | | | |
 |`cudnnConvolutionBackwardData`|1.0.0| | | |`miopenConvolutionBackwardData`| | | | | |
 |`cudnnConvolutionBackwardFilter`|1.0.0| | | | | | | | | |
-|`cudnnConvolutionBiasActivationForward`|6.0.0| | | |`miopenConvolutionBiasActivationForward`| | | | | |
-|`cudnnConvolutionForward`|1.0.0| | | |`miopenConvolutionForward`| | | | | |
+|`cudnnConvolutionBiasActivationForward`|6.0.0|9.0.0| | |`miopenConvolutionBiasActivationForward`| | | | | |
+|`cudnnConvolutionForward`|1.0.0|9.0.0| | |`miopenConvolutionForward`| | | | | |
 |`cudnnCopyAlgorithmDescriptor`|7.1.3|8.0.2| | | | | | | | |
 |`cudnnCreate`|1.0.0| | | |`miopenCreate`| | | | | |
 |`cudnnCreateActivationDescriptor`|4.0.0| | | |`miopenCreateActivationDescriptor`| | | | | |
@@ -868,7 +868,7 @@
 |`cudnnCreateAlgorithmPerformance`|7.1.3|8.0.2| | | | | | | | |
 |`cudnnCreateAttnDescriptor`|7.5.0|9.0.0| | | | | | | | |
 |`cudnnCreateCTCLossDescriptor`|7.0.5| | | |`miopenCreateCTCLossDescriptor`| | | | | |
-|`cudnnCreateConvolutionDescriptor`|1.0.0| | | |`miopenCreateConvolutionDescriptor`| | | | | |
+|`cudnnCreateConvolutionDescriptor`|1.0.0|9.0.0| | |`miopenCreateConvolutionDescriptor`| | | | | |
 |`cudnnCreateDropoutDescriptor`|5.0.0| | | |`miopenCreateDropoutDescriptor`| | | | | |
 |`cudnnCreateFilterDescriptor`|1.0.0| | | | | | | | | |
 |`cudnnCreateFusedOpsConstParamPack`|7.6.0| | | | | | | | | |
@@ -893,7 +893,7 @@
 |`cudnnDestroyAlgorithmPerformance`|7.1.3|8.0.2| | | | | | | | |
 |`cudnnDestroyAttnDescriptor`|7.5.0|9.0.0| | | | | | | | |
 |`cudnnDestroyCTCLossDescriptor`|7.0.5| | | |`miopenDestroyCTCLossDescriptor`| | | | | |
-|`cudnnDestroyConvolutionDescriptor`|1.0.0| | | |`miopenDestroyConvolutionDescriptor`| | | | | |
+|`cudnnDestroyConvolutionDescriptor`|1.0.0|9.0.0| | |`miopenDestroyConvolutionDescriptor`| | | | | |
 |`cudnnDestroyDropoutDescriptor`|5.0.0| | | |`miopenDestroyDropoutDescriptor`| | | | | |
 |`cudnnDestroyFilterDescriptor`|1.0.0| | | | | | | | | |
 |`cudnnDestroyFusedOpsConstParamPack`|7.6.0| | | | | | | | | |
@@ -920,8 +920,8 @@
 |`cudnnFindConvolutionBackwardDataAlgorithmEx`|5.0.0| | | | | | | | | |
 |`cudnnFindConvolutionBackwardFilterAlgorithm`|3.0.0| | | | | | | | | |
 |`cudnnFindConvolutionBackwardFilterAlgorithmEx`|5.0.0| | | | | | | | | |
-|`cudnnFindConvolutionForwardAlgorithm`|3.0.0| | | | | | | | | |
-|`cudnnFindConvolutionForwardAlgorithmEx`|5.0.0| | | |`miopenFindConvolutionForwardAlgorithm`| | | | | |
+|`cudnnFindConvolutionForwardAlgorithm`|3.0.0|9.0.0| | | | | | | | |
+|`cudnnFindConvolutionForwardAlgorithmEx`|5.0.0|9.0.0| | |`miopenFindConvolutionForwardAlgorithm`| | | | | |
 |`cudnnFindRNNBackwardDataAlgorithmEx`|7.1.3|8.0.2| |9.0.0| | | | | | |
 |`cudnnFindRNNBackwardWeightsAlgorithmEx`|7.1.3|8.0.2| |9.0.0| | | | | | |
 |`cudnnFindRNNForwardInferenceAlgorithmEx`|7.1.3|8.0.2| |9.0.0| | | | | | |
@@ -943,8 +943,8 @@
 |`cudnnGetCTCLossWorkspaceSize`|7.0.5| | | |`miopenGetCTCLossWorkspaceSize`| | | | | |
 |`cudnnGetCTCLossWorkspaceSize_v8`|8.0.1| | | | | | | | | |
 |`cudnnGetCallback`|7.1.3| | | | | | | | | |
-|`cudnnGetConvolution2dDescriptor`|2.0.0| | | | | | | | | |
-|`cudnnGetConvolution2dForwardOutputDim`|2.0.0| | | |`miopenGetConvolutionForwardOutputDim`| | | | | |
+|`cudnnGetConvolution2dDescriptor`|2.0.0|9.0.0| | | | | | | | |
+|`cudnnGetConvolution2dForwardOutputDim`|2.0.0|9.0.0| | |`miopenGetConvolutionForwardOutputDim`| | | | | |
 |`cudnnGetConvolutionBackwardDataAlgorithm`|3.0.0|7.6.5| |8.0.1| | | | | | |
 |`cudnnGetConvolutionBackwardDataAlgorithmMaxCount`|7.0.5| | | | | | | | | |
 |`cudnnGetConvolutionBackwardDataAlgorithm_v7`|7.0.5| | | | | | | | | |
@@ -954,14 +954,14 @@
 |`cudnnGetConvolutionBackwardFilterAlgorithm_v7`|7.0.5| | | | | | | | | |
 |`cudnnGetConvolutionBackwardFilterWorkspaceSize`|3.0.0| | | | | | | | | |
 |`cudnnGetConvolutionForwardAlgorithm`|2.0.0|7.6.5| |8.0.1| | | | | | |
-|`cudnnGetConvolutionForwardAlgorithmMaxCount`|7.0.5| | | | | | | | | |
-|`cudnnGetConvolutionForwardAlgorithm_v7`|7.0.5| | | | | | | | | |
-|`cudnnGetConvolutionForwardWorkspaceSize`|2.0.0| | | |`miopenConvolutionForwardGetWorkSpaceSize`| | | | | |
-|`cudnnGetConvolutionGroupCount`|7.0.5| | | | | | | | | |
-|`cudnnGetConvolutionMathType`|7.0.5| | | | | | | | | |
-|`cudnnGetConvolutionNdDescriptor`|2.0.0| | | | | | | | | |
-|`cudnnGetConvolutionNdForwardOutputDim`|2.0.0| | | | | | | | | |
-|`cudnnGetConvolutionReorderType`|7.6.0| | | | | | | | | |
+|`cudnnGetConvolutionForwardAlgorithmMaxCount`|7.0.5|9.0.0| | | | | | | | |
+|`cudnnGetConvolutionForwardAlgorithm_v7`|7.0.5|9.0.0| | | | | | | | |
+|`cudnnGetConvolutionForwardWorkspaceSize`|2.0.0|9.0.0| | |`miopenConvolutionForwardGetWorkSpaceSize`| | | | | |
+|`cudnnGetConvolutionGroupCount`|7.0.5|9.0.0| | | | | | | | |
+|`cudnnGetConvolutionMathType`|7.0.5|9.0.0| | | | | | | | |
+|`cudnnGetConvolutionNdDescriptor`|2.0.0|9.0.0| | | | | | | | |
+|`cudnnGetConvolutionNdForwardOutputDim`|2.0.0|9.0.0| | | | | | | | |
+|`cudnnGetConvolutionReorderType`|7.6.0|9.0.0| | | | | | | | |
 |`cudnnGetCudartVersion`|6.0.0| | | | | | | | | |
 |`cudnnGetDropoutDescriptor`|7.0.5| | | |`miopenGetDropoutDescriptor`| | | | | |
 |`cudnnGetErrorString`|2.0.0| | | |`miopenGetErrorString`| | | | | |
@@ -1014,7 +1014,7 @@
 |`cudnnGetTensorSizeInBytes`|6.0.0| | | | | | | | | |
 |`cudnnGetTensorTransformDescriptor`|7.5.0| | | | | | | | | |
 |`cudnnGetVersion`|2.0.0| | | | | | | | | |
-|`cudnnIm2Col`|2.0.0| | | | | | | | | |
+|`cudnnIm2Col`|2.0.0|9.0.0| | | | | | | | |
 |`cudnnInitTransformDest`|7.5.0| | | | | | | | | |
 |`cudnnLRNCrossChannelBackward`|3.0.0| | | | | | | | | |
 |`cudnnLRNCrossChannelForward`|3.0.0| | | | | | | | | |
@@ -1049,7 +1049,7 @@
 |`cudnnRNNSetClip_v8`|8.0.1| | | | | | | | | |
 |`cudnnRNNSetClip_v9`|9.0.0| | | | | | | | | |
 |`cudnnReduceTensor`|6.0.0| | | |`miopenReduceTensor`| | | | | |
-|`cudnnReorderFilterAndBias`|7.6.0| | | | | | | | | |
+|`cudnnReorderFilterAndBias`|7.6.0|9.0.0| | | | | | | | |
 |`cudnnRestoreAlgorithm`|7.1.3|8.0.2| | | | | | | | |
 |`cudnnRestoreDropoutDescriptor`|7.0.5| | | |`miopenRestoreDropoutDescriptor`| | | | | |
 |`cudnnSaveAlgorithm`|7.1.3|8.0.2| | | | | | | | |
@@ -1064,11 +1064,11 @@
 |`cudnnSetCTCLossDescriptor_v8`|8.0.1|9.0.0| | | | | | | | |
 |`cudnnSetCTCLossDescriptor_v9`|9.0.0| | | | | | | | | |
 |`cudnnSetCallback`|7.1.3| | | | | | | | | |
-|`cudnnSetConvolution2dDescriptor`|2.0.0| | | | | | | | | |
-|`cudnnSetConvolutionGroupCount`|7.0.5| | | |`miopenSetConvolutionGroupCount`| | | | | |
-|`cudnnSetConvolutionMathType`|7.0.5| | | | | | | | | |
-|`cudnnSetConvolutionNdDescriptor`|2.0.0| | | | | | | | | |
-|`cudnnSetConvolutionReorderType`|7.6.0| | | | | | | | | |
+|`cudnnSetConvolution2dDescriptor`|2.0.0|9.0.0| | | | | | | | |
+|`cudnnSetConvolutionGroupCount`|7.0.5|9.0.0| | |`miopenSetConvolutionGroupCount`| | | | | |
+|`cudnnSetConvolutionMathType`|7.0.5|9.0.0| | | | | | | | |
+|`cudnnSetConvolutionNdDescriptor`|2.0.0|9.0.0| | | | | | | | |
+|`cudnnSetConvolutionReorderType`|7.6.0|9.0.0| | | | | | | | |
 |`cudnnSetDropoutDescriptor`|5.0.0| | | |`miopenSetDropoutDescriptor`| | | | | |
 |`cudnnSetFilter4dDescriptor`|2.0.0| | | | | | | | | |
 |`cudnnSetFilterNdDescriptor`|2.0.0| | | | | | | | | |
