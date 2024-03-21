@@ -262,7 +262,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"cudnnLossNormalizationMode_t",                                   {"hipdnnLossNormalizationMode_t",                                   "",                                                                CONV_TYPE, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_LOSS_NORMALIZATION_NONE",                                  {"HIPDNN_LOSS_NORMALIZATION_NONE",                                  "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 0
   {"CUDNN_LOSS_NORMALIZATION_SOFTMAX",                               {"HIPDNN_LOSS_NORMALIZATION_SOFTMAX",                               "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 1
-  {"cudnnFusedOps_t",                                                {"hipdnnFusedOps_t",                                                "",                                                                CONV_TYPE, API_DNN, 1, UNSUPPORTED}},
+  {"cudnnFusedOps_t",                                                {"hipdnnFusedOps_t",                                                "",                                                                CONV_TYPE, API_DNN, 1, UNSUPPORTED | CUDA_DEPRECATED}},
   {"CUDNN_FUSED_SCALE_BIAS_ACTIVATION_CONV_BNSTATS",                 {"HIPDNN_FUSED_SCALE_BIAS_ACTIVATION_CONV_BNSTATS",                 "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 0
   {"CUDNN_FUSED_SCALE_BIAS_ACTIVATION_WGRAD",                        {"HIPDNN_FUSED_SCALE_BIAS_ACTIVATION_WGRAD",                        "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 1
   {"CUDNN_FUSED_BN_FINALIZE_STATISTICS_TRAINING",                    {"HIPDNN_FUSED_BN_FINALIZE_STATISTICS_TRAINING",                    "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 2
@@ -270,7 +270,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"CUDNN_FUSED_CONV_SCALE_BIAS_ADD_ACTIVATION",                     {"HIPDNN_FUSED_CONV_SCALE_BIAS_ADD_ACTIVATION",                     "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 4
   {"CUDNN_FUSED_SCALE_BIAS_ADD_ACTIVATION_GEN_BITMASK",              {"HIPDNN_FUSED_SCALE_BIAS_ADD_ACTIVATION_GEN_BITMASK",              "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 5
   {"CUDNN_FUSED_DACTIVATION_FORK_DBATCHNORM",                        {"HIPDNN_FUSED_DACTIVATION_FORK_DBATCHNORM",                        "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 6
-  {"cudnnFusedOpsConstParamLabel_t",                                 {"hipdnnFusedOpsConstParamLabel_t",                                 "",                                                                CONV_TYPE, API_DNN, 1, UNSUPPORTED}},
+  {"cudnnFusedOpsConstParamLabel_t",                                 {"hipdnnFusedOpsConstParamLabel_t",                                 "",                                                                CONV_TYPE, API_DNN, 1, UNSUPPORTED | CUDA_DEPRECATED}},
   {"CUDNN_PARAM_XDESC",                                              {"HIPDNN_PARAM_XDESC",                                              "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 0
   {"CUDNN_PARAM_XDATA_PLACEHOLDER",                                  {"HIPDNN_PARAM_XDATA_PLACEHOLDER",                                  "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 1
   {"CUDNN_PARAM_BN_MODE",                                            {"HIPDNN_PARAM_BN_MODE",                                            "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 2
@@ -310,11 +310,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"CUDNN_PARAM_DZDATA_PLACEHOLDER",                                 {"HIPDNN_PARAM_DZDATA_PLACEHOLDER",                                 "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 36
   {"CUDNN_PARAM_BN_DSCALE_PLACEHOLDER",                              {"HIPDNN_PARAM_BN_DSCALE_PLACEHOLDER",                              "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 37
   {"CUDNN_PARAM_BN_DBIAS_PLACEHOLDER",                               {"HIPDNN_PARAM_BN_DBIAS_PLACEHOLDER",                               "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 38
-  {"cudnnFusedOpsPointerPlaceHolder_t",                              {"hipdnnFusedOpsPointerPlaceHolder_t",                              "",                                                                CONV_TYPE, API_DNN, 1, UNSUPPORTED}},
+  {"cudnnFusedOpsPointerPlaceHolder_t",                              {"hipdnnFusedOpsPointerPlaceHolder_t",                              "",                                                                CONV_TYPE, API_DNN, 1, UNSUPPORTED | CUDA_DEPRECATED}},
   {"CUDNN_PTR_NULL",                                                 {"HIPDNN_PTR_NULL",                                                 "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 0
   {"CUDNN_PTR_ELEM_ALIGNED",                                         {"HIPDNN_PTR_ELEM_ALIGNED",                                         "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 1
   {"CUDNN_PTR_16B_ALIGNED",                                          {"HIPDNN_PTR_16B_ALIGNED",                                          "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 2
-  {"cudnnFusedOpsVariantParamLabel_t",                               {"hipdnnFusedOpsVariantParamLabel_t",                               "",                                                                CONV_TYPE, API_DNN, 1, UNSUPPORTED}},
+  {"cudnnFusedOpsVariantParamLabel_t",                               {"hipdnnFusedOpsVariantParamLabel_t",                               "",                                                                CONV_TYPE, API_DNN, 1, UNSUPPORTED | CUDA_DEPRECATED}},
   {"CUDNN_PTR_XDATA",                                                {"HIPDNN_PTR_XDATA",                                                "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 0
   {"CUDNN_PTR_BN_EQSCALE",                                           {"HIPDNN_PTR_BN_EQSCALE",                                           "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 1
   {"CUDNN_PTR_BN_EQBIAS",                                            {"HIPDNN_PTR_BN_EQBIAS",                                            "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 2
@@ -818,7 +818,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"cudnnTensorTransformDescriptor_t",                               {"hipdnnTensorTransformDescriptor_t",                               "",                                                                CONV_TYPE, API_DNN, 1, UNSUPPORTED}},
   {"cudnnConvolutionFwdAlgoPerf_t",                                  {"hipdnnConvolutionFwdAlgoPerf_t",                                  "miopenConvAlgoPerf_t",                                            CONV_TYPE, API_DNN, 1, CUDA_DEPRECATED}},
   {"cudnnConvolutionFwdAlgoPerfStruct",                              {"hipdnnConvolutionFwdAlgoPerf_t",                                  "miopenConvAlgoPerf_t",                                            CONV_TYPE, API_DNN, 1}},
-  {"cudnnConvolutionBwdFilterAlgoPerf_t",                            {"hipdnnConvolutionBwdFilterAlgoPerf_t",                            "",                                                                CONV_TYPE, API_DNN, 1, ROC_UNSUPPORTED}},
+  {"cudnnConvolutionBwdFilterAlgoPerf_t",                            {"hipdnnConvolutionBwdFilterAlgoPerf_t",                            "",                                                                CONV_TYPE, API_DNN, 1, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
   {"cudnnConvolutionBwdFilterAlgoPerfStruct",                        {"hipdnnConvolutionBwdFilterAlgoPerf_t",                            "",                                                                CONV_TYPE, API_DNN, 1, ROC_UNSUPPORTED}},
   {"cudnnConvolutionBwdDataAlgoPerf_t",                              {"hipdnnConvolutionBwdDataAlgoPerf_t",                              "miopenConvAlgoPerf_t",                                            CONV_TYPE, API_DNN, 1, CUDA_DEPRECATED}},
   {"cudnnConvolutionBwdDataAlgoPerfStruct",                          {"hipdnnConvolutionBwdDataAlgoPerf_t",                              "miopenConvAlgoPerf_t",                                            CONV_TYPE, API_DNN, 1, CUDA_DEPRECATED}},
@@ -843,12 +843,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"cudnnSeqDataDescriptor_t",                                       {"hipdnnSeqDataDescriptor_t",                                       "",                                                                CONV_TYPE, API_DNN, 1, UNSUPPORTED | CUDA_DEPRECATED}},
   {"cudnnAttnStruct",                                                {"hipdnnAttnStruct",                                                "",                                                                CONV_TYPE, API_DNN, 1, UNSUPPORTED}},
   {"cudnnAttnDescriptor_t",                                          {"hipdnnAttnDescriptor_t",                                          "",                                                                CONV_TYPE, API_DNN, 1, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnFusedOpsConstParamStruct",                                  {"hipdnnFusedOpsConstParamStruct",                                  "",                                                                CONV_TYPE, API_DNN, 1, UNSUPPORTED}},
-  {"cudnnFusedOpsConstParamPack_t",                                  {"hipdnnFusedOpsConstParamPack_t",                                  "",                                                                CONV_TYPE, API_DNN, 1, UNSUPPORTED}},
-  {"cudnnFusedOpsVariantParamStruct",                                {"hipdnnFusedOpsVariantParamStruct",                                "",                                                                CONV_TYPE, API_DNN, 1, UNSUPPORTED}},
-  {"cudnnFusedOpsVariantParamPack_t",                                {"hipdnnFusedOpsVariantParamPack_t",                                "",                                                                CONV_TYPE, API_DNN, 1, UNSUPPORTED}},
-  {"cudnnFusedOpsPlanStruct",                                        {"hipdnnFusedOpsPlanStruct",                                        "",                                                                CONV_TYPE, API_DNN, 1, UNSUPPORTED}},
-  {"cudnnFusedOpsPlan_t",                                            {"hipdnnFusedOpsPlan_t",                                            "",                                                                CONV_TYPE, API_DNN, 1, UNSUPPORTED}},
+  {"cudnnFusedOpsConstParamStruct",                                  {"hipdnnFusedOpsConstParamStruct",                                  "",                                                                CONV_TYPE, API_DNN, 1, UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cudnnFusedOpsConstParamPack_t",                                  {"hipdnnFusedOpsConstParamPack_t",                                  "",                                                                CONV_TYPE, API_DNN, 1, UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cudnnFusedOpsVariantParamStruct",                                {"hipdnnFusedOpsVariantParamStruct",                                "",                                                                CONV_TYPE, API_DNN, 1, UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cudnnFusedOpsVariantParamPack_t",                                {"hipdnnFusedOpsVariantParamPack_t",                                "",                                                                CONV_TYPE, API_DNN, 1, UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cudnnFusedOpsPlanStruct",                                        {"hipdnnFusedOpsPlanStruct",                                        "",                                                                CONV_TYPE, API_DNN, 1, UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cudnnFusedOpsPlan_t",                                            {"hipdnnFusedOpsPlan_t",                                            "",                                                                CONV_TYPE, API_DNN, 1, UNSUPPORTED | CUDA_DEPRECATED}},
   {"cudnnBackendDescriptor_t",                                       {"hipdnnBackendDescriptor_t",                                       "",                                                                CONV_TYPE, API_DNN, 1, UNSUPPORTED}},
   {"libraryPropertyType",                                            {"hipdnnLibraryPropertyType",                                       "",                                                                CONV_TYPE, API_DNN, 1, UNSUPPORTED}},
   {"libraryPropertyType_t",                                          {"hipdnnLibraryPropertyType_t",                                     "",                                                                CONV_TYPE, API_DNN, 1, UNSUPPORTED}},
@@ -1136,7 +1136,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_TYPE_NAME_VER_MAP {
   {"CUDNN_CROSS_CORRELATION",                                        {CUDNN_10,  CUDNN_900,CUDA_0  }},
   {"cudnnConvolutionStruct",                                         {CUDNN_10,  CUDA_0,   CUDA_0  }},
   {"cudnnConvolutionDescriptor_t",                                   {CUDNN_10,  CUDNN_900,CUDA_0  }},
-  {"cudnnConvolutionBwdFilterAlgoPerf_t",                            {CUDNN_30,  CUDA_0,   CUDA_0  }},
+  {"cudnnConvolutionBwdFilterAlgoPerf_t",                            {CUDNN_30,  CUDNN_900,CUDA_0  }},
   {"cudnnContext",                                                   {CUDNN_10,  CUDA_0,   CUDA_0  }},
   {"cudnnHandle_t",                                                  {CUDNN_10,  CUDA_0,   CUDA_0  }},
   {"cudnnStatus_t",                                                  {CUDNN_10,  CUDA_0,   CUDA_0  }},
@@ -1345,13 +1345,13 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_TYPE_NAME_VER_MAP {
   {"CUDNN_CONVOLUTION_FWD_PREFER_FASTEST",                           {CUDNN_20,  CUDNN_765,CUDNN_801}},
   {"CUDNN_CONVOLUTION_FWD_SPECIFY_WORKSPACE_LIMIT",                  {CUDNN_20,  CUDNN_765,CUDNN_801}},
   {"cudnnConvolutionBwdDataAlgoPerf_t",                              {CUDNN_30,  CUDNN_900,CUDA_0  }},
-  {"cudnnFusedOpsConstParamStruct",                                  {CUDNN_760, CUDA_0,   CUDA_0  }},
-  {"cudnnFusedOpsConstParamPack_t",                                  {CUDNN_760, CUDA_0,   CUDA_0  }},
-  {"cudnnFusedOpsVariantParamStruct",                                {CUDNN_760, CUDA_0,   CUDA_0  }},
-  {"cudnnFusedOpsVariantParamPack_t",                                {CUDNN_760, CUDA_0,   CUDA_0  }},
-  {"cudnnFusedOpsPlanStruct",                                        {CUDNN_760, CUDA_0,   CUDA_0  }},
-  {"cudnnFusedOpsPlan_t",                                            {CUDNN_760, CUDA_0,   CUDA_0  }},
-  {"cudnnFusedOps_t",                                                {CUDNN_760, CUDA_0,   CUDA_0  }},
+  {"cudnnFusedOpsConstParamStruct",                                  {CUDNN_760, CUDNN_900,CUDA_0  }},
+  {"cudnnFusedOpsConstParamPack_t",                                  {CUDNN_760, CUDNN_900,CUDA_0  }},
+  {"cudnnFusedOpsVariantParamStruct",                                {CUDNN_760, CUDNN_900,CUDA_0  }},
+  {"cudnnFusedOpsVariantParamPack_t",                                {CUDNN_760, CUDNN_900,CUDA_0  }},
+  {"cudnnFusedOpsPlanStruct",                                        {CUDNN_760, CUDNN_900,CUDA_0  }},
+  {"cudnnFusedOpsPlan_t",                                            {CUDNN_760, CUDNN_900,CUDA_0  }},
+  {"cudnnFusedOps_t",                                                {CUDNN_760, CUDNN_900,CUDA_0  }},
   {"CUDNN_FUSED_SCALE_BIAS_ACTIVATION_CONV_BNSTATS",                 {CUDNN_760, CUDA_0,   CUDA_0  }},
   {"CUDNN_FUSED_SCALE_BIAS_ACTIVATION_WGRAD",                        {CUDNN_760, CUDA_0,   CUDA_0  }},
   {"CUDNN_FUSED_BN_FINALIZE_STATISTICS_TRAINING",                    {CUDNN_760, CUDA_0,   CUDA_0  }},
@@ -1359,7 +1359,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_TYPE_NAME_VER_MAP {
   {"CUDNN_FUSED_CONV_SCALE_BIAS_ADD_ACTIVATION",                     {CUDNN_760, CUDA_0,   CUDA_0  }},
   {"CUDNN_FUSED_SCALE_BIAS_ADD_ACTIVATION_GEN_BITMASK",              {CUDNN_760, CUDA_0,   CUDA_0  }},
   {"CUDNN_FUSED_DACTIVATION_FORK_DBATCHNORM",                        {CUDNN_760, CUDA_0,   CUDA_0  }},
-  {"cudnnFusedOpsConstParamLabel_t",                                 {CUDNN_760, CUDA_0,   CUDA_0  }},
+  {"cudnnFusedOpsConstParamLabel_t",                                 {CUDNN_760, CUDNN_900,CUDA_0  }},
   {"CUDNN_PARAM_XDESC",                                              {CUDNN_760, CUDA_0,   CUDA_0  }},
   {"CUDNN_PARAM_XDATA_PLACEHOLDER",                                  {CUDNN_760, CUDA_0,   CUDA_0  }},
   {"CUDNN_PARAM_BN_MODE",                                            {CUDNN_760, CUDA_0,   CUDA_0  }},
@@ -1399,11 +1399,11 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_TYPE_NAME_VER_MAP {
   {"CUDNN_PARAM_DZDATA_PLACEHOLDER",                                 {CUDNN_760, CUDA_0,   CUDA_0  }},
   {"CUDNN_PARAM_BN_DSCALE_PLACEHOLDER",                              {CUDNN_760, CUDA_0,   CUDA_0  }},
   {"CUDNN_PARAM_BN_DBIAS_PLACEHOLDER",                               {CUDNN_760, CUDA_0,   CUDA_0  }},
-  {"cudnnFusedOpsPointerPlaceHolder_t",                              {CUDNN_760, CUDA_0,   CUDA_0  }},
+  {"cudnnFusedOpsPointerPlaceHolder_t",                              {CUDNN_760, CUDNN_900,CUDA_0  }},
   {"CUDNN_PTR_NULL",                                                 {CUDNN_760, CUDA_0,   CUDA_0  }},
   {"CUDNN_PTR_ELEM_ALIGNED",                                         {CUDNN_760, CUDA_0,   CUDA_0  }},
   {"CUDNN_PTR_16B_ALIGNED",                                          {CUDNN_760, CUDA_0,   CUDA_0  }},
-  {"cudnnFusedOpsVariantParamLabel_t",                               {CUDNN_760, CUDA_0,   CUDA_0  }},
+  {"cudnnFusedOpsVariantParamLabel_t",                               {CUDNN_760, CUDNN_900,CUDA_0  }},
   {"CUDNN_PTR_XDATA",                                                {CUDNN_760, CUDA_0,   CUDA_0  }},
   {"CUDNN_PTR_BN_EQSCALE",                                           {CUDNN_760, CUDA_0,   CUDA_0  }},
   {"CUDNN_PTR_BN_EQBIAS",                                            {CUDNN_760, CUDA_0,   CUDA_0  }},

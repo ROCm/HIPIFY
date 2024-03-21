@@ -732,7 +732,7 @@
 |`cudnnConvolutionBwdDataAlgo_t`|3.0.0| | | |`hipdnnConvolutionBwdDataAlgo_t`| | | | | |`miopenConvBwdDataAlgorithm_t`| | | | | |
 |`cudnnConvolutionBwdDataPreference_t`|3.0.0|7.6.5| |8.0.1|`hipdnnConvolutionBwdDataPreference_t`| | | | | | | | | | | |
 |`cudnnConvolutionBwdFilterAlgoPerfStruct`|8.2.0| | | |`hipdnnConvolutionBwdFilterAlgoPerf_t`| | | | | | | | | | | |
-|`cudnnConvolutionBwdFilterAlgoPerf_t`|3.0.0| | | |`hipdnnConvolutionBwdFilterAlgoPerf_t`| | | | | | | | | | | |
+|`cudnnConvolutionBwdFilterAlgoPerf_t`|3.0.0|9.0.0| | |`hipdnnConvolutionBwdFilterAlgoPerf_t`| | | | | | | | | | | |
 |`cudnnConvolutionBwdFilterAlgo_t`|3.0.0| | | |`hipdnnConvolutionBwdFilterAlgo_t`| | | | | | | | | | | |
 |`cudnnConvolutionBwdFilterPreference_t`|3.0.0|7.6.5| |8.0.1|`hipdnnConvolutionBwdFilterPreference_t`| | | | | | | | | | | |
 |`cudnnConvolutionDescriptor_t`|1.0.0|9.0.0| | |`hipdnnConvolutionDescriptor_t`| | | | | |`miopenConvolutionDescriptor_t`| | | | | |
@@ -757,16 +757,16 @@
 |`cudnnForwardMode_t`|8.0.1| | | | | | | | | | | | | | | |
 |`cudnnFractionStruct`|8.5.0| | | | | | | | | | | | | | | |
 |`cudnnFraction_t`|8.5.0| | | | | | | | | | | | | | | |
-|`cudnnFusedOpsConstParamLabel_t`|7.6.0| | | | | | | | | | | | | | | |
-|`cudnnFusedOpsConstParamPack_t`|7.6.0| | | | | | | | | | | | | | | |
-|`cudnnFusedOpsConstParamStruct`|7.6.0| | | | | | | | | | | | | | | |
-|`cudnnFusedOpsPlanStruct`|7.6.0| | | | | | | | | | | | | | | |
-|`cudnnFusedOpsPlan_t`|7.6.0| | | | | | | | | | | | | | | |
-|`cudnnFusedOpsPointerPlaceHolder_t`|7.6.0| | | | | | | | | | | | | | | |
-|`cudnnFusedOpsVariantParamLabel_t`|7.6.0| | | | | | | | | | | | | | | |
-|`cudnnFusedOpsVariantParamPack_t`|7.6.0| | | | | | | | | | | | | | | |
-|`cudnnFusedOpsVariantParamStruct`|7.6.0| | | | | | | | | | | | | | | |
-|`cudnnFusedOps_t`|7.6.0| | | | | | | | | | | | | | | |
+|`cudnnFusedOpsConstParamLabel_t`|7.6.0|9.0.0| | | | | | | | | | | | | | |
+|`cudnnFusedOpsConstParamPack_t`|7.6.0|9.0.0| | | | | | | | | | | | | | |
+|`cudnnFusedOpsConstParamStruct`|7.6.0|9.0.0| | | | | | | | | | | | | | |
+|`cudnnFusedOpsPlanStruct`|7.6.0|9.0.0| | | | | | | | | | | | | | |
+|`cudnnFusedOpsPlan_t`|7.6.0|9.0.0| | | | | | | | | | | | | | |
+|`cudnnFusedOpsPointerPlaceHolder_t`|7.6.0|9.0.0| | | | | | | | | | | | | | |
+|`cudnnFusedOpsVariantParamLabel_t`|7.6.0|9.0.0| | | | | | | | | | | | | | |
+|`cudnnFusedOpsVariantParamPack_t`|7.6.0|9.0.0| | | | | | | | | | | | | | |
+|`cudnnFusedOpsVariantParamStruct`|7.6.0|9.0.0| | | | | | | | | | | | | | |
+|`cudnnFusedOps_t`|7.6.0|9.0.0| | | | | | | | | | | | | | |
 |`cudnnGenStatsMode_t`|8.0.1| | | | | | | | | | | | | | | |
 |`cudnnHandle_t`|1.0.0| | | |`hipdnnHandle_t`| | | | | |`miopenHandle_t`| | | | | |
 |`cudnnIndicesType_t`|6.0.0| | | |`hipdnnIndicesType_t`| | | | | |`miopenIndicesType_t`| | | | | |
@@ -856,9 +856,9 @@
 |`cudnnCTCLoss_v8`|8.0.1| | | | | | | | | | | | | | | |
 |`cudnnCnnInferVersionCheck`|8.0.2| | | | | | | | | | | | | | | |
 |`cudnnCnnTrainVersionCheck`|8.0.2| | | | | | | | | | | | | | | |
-|`cudnnConvolutionBackwardBias`|1.0.0| | | |`hipdnnConvolutionBackwardBias`| | | | | |`miopenConvolutionBackwardBias`| | | | | |
-|`cudnnConvolutionBackwardData`|1.0.0| | | |`hipdnnConvolutionBackwardData`| | | | | |`miopenConvolutionBackwardData`| | | | | |
-|`cudnnConvolutionBackwardFilter`|1.0.0| | | |`hipdnnConvolutionBackwardFilter`| | | | | | | | | | | |
+|`cudnnConvolutionBackwardBias`|1.0.0|9.0.0| | |`hipdnnConvolutionBackwardBias`| | | | | |`miopenConvolutionBackwardBias`| | | | | |
+|`cudnnConvolutionBackwardData`|1.0.0|9.0.0| | |`hipdnnConvolutionBackwardData`| | | | | |`miopenConvolutionBackwardData`| | | | | |
+|`cudnnConvolutionBackwardFilter`|1.0.0|9.0.0| | |`hipdnnConvolutionBackwardFilter`| | | | | | | | | | | |
 |`cudnnConvolutionBiasActivationForward`|6.0.0|9.0.0| | | | | | | | |`miopenConvolutionBiasActivationForward`| | | | | |
 |`cudnnConvolutionForward`|1.0.0|9.0.0| | |`hipdnnConvolutionForward`| | | | | |`miopenConvolutionForward`| | | | | |
 |`cudnnCopyAlgorithmDescriptor`|7.1.3|8.0.2| | | | | | | | | | | | | | |
@@ -871,9 +871,9 @@
 |`cudnnCreateConvolutionDescriptor`|1.0.0|9.0.0| | |`hipdnnCreateConvolutionDescriptor`| | | | | |`miopenCreateConvolutionDescriptor`| | | | | |
 |`cudnnCreateDropoutDescriptor`|5.0.0| | | |`hipdnnCreateDropoutDescriptor`| | | | | |`miopenCreateDropoutDescriptor`| | | | | |
 |`cudnnCreateFilterDescriptor`|1.0.0| | | |`hipdnnCreateFilterDescriptor`| | | | | | | | | | | |
-|`cudnnCreateFusedOpsConstParamPack`|7.6.0| | | | | | | | | | | | | | | |
-|`cudnnCreateFusedOpsPlan`|7.6.0| | | | | | | | | | | | | | | |
-|`cudnnCreateFusedOpsVariantParamPack`|7.6.0| | | | | | | | | | | | | | | |
+|`cudnnCreateFusedOpsConstParamPack`|7.6.0|9.0.0| | | | | | | | | | | | | | |
+|`cudnnCreateFusedOpsPlan`|7.6.0|9.0.0| | | | | | | | | | | | | | |
+|`cudnnCreateFusedOpsVariantParamPack`|7.6.0|9.0.0| | | | | | | | | | | | | | |
 |`cudnnCreateLRNDescriptor`|3.0.0| | | |`hipdnnCreateLRNDescriptor`| | | | | |`miopenCreateLRNDescriptor`| | | | | |
 |`cudnnCreateOpTensorDescriptor`|5.0.0| | | |`hipdnnCreateOpTensorDescriptor`| | | | | | | | | | | |
 |`cudnnCreatePersistentRNNPlan`|6.0.0|8.0.1| |9.0.0|`hipdnnCreatePersistentRNNPlan`| | | | | | | | | | | |
@@ -896,9 +896,9 @@
 |`cudnnDestroyConvolutionDescriptor`|1.0.0|9.0.0| | |`hipdnnDestroyConvolutionDescriptor`| | | | | |`miopenDestroyConvolutionDescriptor`| | | | | |
 |`cudnnDestroyDropoutDescriptor`|5.0.0| | | |`hipdnnDestroyDropoutDescriptor`| | | | | |`miopenDestroyDropoutDescriptor`| | | | | |
 |`cudnnDestroyFilterDescriptor`|1.0.0| | | |`hipdnnDestroyFilterDescriptor`| | | | | | | | | | | |
-|`cudnnDestroyFusedOpsConstParamPack`|7.6.0| | | | | | | | | | | | | | | |
-|`cudnnDestroyFusedOpsPlan`|7.6.0| | | | | | | | | | | | | | | |
-|`cudnnDestroyFusedOpsVariantParamPack`|7.6.0| | | | | | | | | | | | | | | |
+|`cudnnDestroyFusedOpsConstParamPack`|7.6.0|9.0.0| | | | | | | | | | | | | | |
+|`cudnnDestroyFusedOpsPlan`|7.6.0|9.0.0| | | | | | | | | | | | | | |
+|`cudnnDestroyFusedOpsVariantParamPack`|7.6.0|9.0.0| | | | | | | | | | | | | | |
 |`cudnnDestroyLRNDescriptor`|3.0.0| | | |`hipdnnDestroyLRNDescriptor`| | | | | |`miopenDestroyLRNDescriptor`| | | | | |
 |`cudnnDestroyOpTensorDescriptor`|5.0.0| | | |`hipdnnDestroyOpTensorDescriptor`| | | | | | | | | | | |
 |`cudnnDestroyPersistentRNNPlan`|6.0.0|8.0.1| |9.0.0|`hipdnnDestroyPersistentRNNPlan`| | | | | | | | | | | |
@@ -916,17 +916,17 @@
 |`cudnnDropoutForward`|5.0.0| | | | | | | | | |`miopenDropoutForward`| | | | | |
 |`cudnnDropoutGetReserveSpaceSize`|5.0.0| | | | | | | | | |`miopenDropoutGetReserveSpaceSize`| | | | | |
 |`cudnnDropoutGetStatesSize`|5.0.0| | | |`hipdnnDropoutGetStatesSize`| | | | | |`miopenDropoutGetStatesSize`| | | | | |
-|`cudnnFindConvolutionBackwardDataAlgorithm`|3.0.0| | | |`hipdnnFindConvolutionBackwardDataAlgorithm`| | | | | | | | | | | |
-|`cudnnFindConvolutionBackwardDataAlgorithmEx`|5.0.0| | | |`hipdnnFindConvolutionBackwardDataAlgorithmEx`| | | | | | | | | | | |
-|`cudnnFindConvolutionBackwardFilterAlgorithm`|3.0.0| | | |`hipdnnFindConvolutionBackwardFilterAlgorithm`| | | | | | | | | | | |
-|`cudnnFindConvolutionBackwardFilterAlgorithmEx`|5.0.0| | | |`hipdnnFindConvolutionBackwardFilterAlgorithmEx`| | | | | | | | | | | |
+|`cudnnFindConvolutionBackwardDataAlgorithm`|3.0.0|9.0.0| | |`hipdnnFindConvolutionBackwardDataAlgorithm`| | | | | | | | | | | |
+|`cudnnFindConvolutionBackwardDataAlgorithmEx`|5.0.0|9.0.0| | |`hipdnnFindConvolutionBackwardDataAlgorithmEx`| | | | | | | | | | | |
+|`cudnnFindConvolutionBackwardFilterAlgorithm`|3.0.0|9.0.0| | |`hipdnnFindConvolutionBackwardFilterAlgorithm`| | | | | | | | | | | |
+|`cudnnFindConvolutionBackwardFilterAlgorithmEx`|5.0.0|9.0.0| | |`hipdnnFindConvolutionBackwardFilterAlgorithmEx`| | | | | | | | | | | |
 |`cudnnFindConvolutionForwardAlgorithm`|3.0.0|9.0.0| | |`hipdnnFindConvolutionForwardAlgorithm`| | | | | | | | | | | |
 |`cudnnFindConvolutionForwardAlgorithmEx`|5.0.0|9.0.0| | |`hipdnnFindConvolutionForwardAlgorithmEx`| | | | | |`miopenFindConvolutionForwardAlgorithm`| | | | | |
 |`cudnnFindRNNBackwardDataAlgorithmEx`|7.1.3|8.0.2| |9.0.0| | | | | | | | | | | | |
 |`cudnnFindRNNBackwardWeightsAlgorithmEx`|7.1.3|8.0.2| |9.0.0| | | | | | | | | | | | |
 |`cudnnFindRNNForwardInferenceAlgorithmEx`|7.1.3|8.0.2| |9.0.0| | | | | | | | | | | | |
 |`cudnnFindRNNForwardTrainingAlgorithmEx`|7.1.3|8.0.2| |9.0.0| | | | | | | | | | | | |
-|`cudnnFusedOpsExecute`|7.6.0| | | | | | | | | | | | | | | |
+|`cudnnFusedOpsExecute`|7.6.0|9.0.0| | | | | | | | | | | | | | |
 |`cudnnGetActivationDescriptor`|4.0.0| | | |`hipdnnGetActivationDescriptor`| | | | | | | | | | | |
 |`cudnnGetActivationDescriptorSwishBeta`|8.2.0| | | | | | | | | | | | | | | |
 |`cudnnGetAlgorithmDescriptor`|7.1.3|8.0.2| | | | | | | | | | | | | | |
@@ -946,13 +946,13 @@
 |`cudnnGetConvolution2dDescriptor`|2.0.0|9.0.0| | |`hipdnnGetConvolution2dDescriptor`| | | | | | | | | | | |
 |`cudnnGetConvolution2dForwardOutputDim`|2.0.0|9.0.0| | |`hipdnnGetConvolution2dForwardOutputDim`| | | | | |`miopenGetConvolutionForwardOutputDim`| | | | | |
 |`cudnnGetConvolutionBackwardDataAlgorithm`|3.0.0|7.6.5| |8.0.1|`hipdnnGetConvolutionBackwardDataAlgorithm`| | | | | | | | | | | |
-|`cudnnGetConvolutionBackwardDataAlgorithmMaxCount`|7.0.5| | | | | | | | | | | | | | | |
-|`cudnnGetConvolutionBackwardDataAlgorithm_v7`|7.0.5| | | | | | | | | | | | | | | |
-|`cudnnGetConvolutionBackwardDataWorkspaceSize`|3.0.0| | | |`hipdnnGetConvolutionBackwardDataWorkspaceSize`| | | | | |`miopenConvolutionBackwardDataGetWorkSpaceSize`| | | | | |
+|`cudnnGetConvolutionBackwardDataAlgorithmMaxCount`|7.0.5|9.0.0| | | | | | | | | | | | | | |
+|`cudnnGetConvolutionBackwardDataAlgorithm_v7`|7.0.5|9.0.0| | | | | | | | | | | | | | |
+|`cudnnGetConvolutionBackwardDataWorkspaceSize`|3.0.0|9.0.0| | |`hipdnnGetConvolutionBackwardDataWorkspaceSize`| | | | | |`miopenConvolutionBackwardDataGetWorkSpaceSize`| | | | | |
 |`cudnnGetConvolutionBackwardFilterAlgorithm`|3.0.0|7.6.5| |8.0.1|`hipdnnGetConvolutionBackwardFilterAlgorithm`| | | | | | | | | | | |
 |`cudnnGetConvolutionBackwardFilterAlgorithmMaxCount`|7.0.5| | | | | | | | | | | | | | | |
-|`cudnnGetConvolutionBackwardFilterAlgorithm_v7`|7.0.5| | | | | | | | | | | | | | | |
-|`cudnnGetConvolutionBackwardFilterWorkspaceSize`|3.0.0| | | |`hipdnnGetConvolutionBackwardFilterWorkspaceSize`| | | | | | | | | | | |
+|`cudnnGetConvolutionBackwardFilterAlgorithm_v7`|7.0.5|9.0.0| | | | | | | | | | | | | | |
+|`cudnnGetConvolutionBackwardFilterWorkspaceSize`|3.0.0|9.0.0| | |`hipdnnGetConvolutionBackwardFilterWorkspaceSize`| | | | | | | | | | | |
 |`cudnnGetConvolutionForwardAlgorithm`|2.0.0|7.6.5| |8.0.1|`hipdnnGetConvolutionForwardAlgorithm`| | | | | | | | | | | |
 |`cudnnGetConvolutionForwardAlgorithmMaxCount`|7.0.5|9.0.0| | | | | | | | | | | | | | |
 |`cudnnGetConvolutionForwardAlgorithm_v7`|7.0.5|9.0.0| | | | | | | | | | | | | | |
@@ -968,9 +968,9 @@
 |`cudnnGetFilter4dDescriptor`|2.0.0| | | |`hipdnnGetFilter4dDescriptor`| | | | | | | | | | | |
 |`cudnnGetFilterNdDescriptor`|2.0.0| | | |`hipdnnGetFilterNdDescriptor`| | | | | | | | | | | |
 |`cudnnGetFilterSizeInBytes`|7.6.0| | | | | | | | | | | | | | | |
-|`cudnnGetFoldedConvBackwardDataDescriptors`|7.6.0| | | | | | | | | | | | | | | |
-|`cudnnGetFusedOpsConstParamPackAttribute`|7.6.0| | | | | | | | | | | | | | | |
-|`cudnnGetFusedOpsVariantParamPackAttribute`|7.6.0| | | | | | | | | | | | | | | |
+|`cudnnGetFoldedConvBackwardDataDescriptors`|7.6.0|9.0.0| | | | | | | | | | | | | | |
+|`cudnnGetFusedOpsConstParamPackAttribute`|7.6.0|9.0.0| | | | | | | | | | | | | | |
+|`cudnnGetFusedOpsVariantParamPackAttribute`|7.6.0|9.0.0| | | | | | | | | | | | | | |
 |`cudnnGetLRNDescriptor`|3.0.0| | | |`hipdnnGetLRNDescriptor`| | | | | |`miopenGetLRNDescriptor`| | | | | |
 |`cudnnGetMaxDeviceVersion`|8.6.0| | | | | | | | | | | | | | | |
 |`cudnnGetMultiHeadAttnBuffers`|7.5.0|9.0.0| | | | | | | | | | | | | | |
@@ -1018,7 +1018,7 @@
 |`cudnnInitTransformDest`|7.5.0| | | | | | | | | | | | | | | |
 |`cudnnLRNCrossChannelBackward`|3.0.0| | | |`hipdnnLRNCrossChannelBackward`| | | | | | | | | | | |
 |`cudnnLRNCrossChannelForward`|3.0.0| | | |`hipdnnLRNCrossChannelForward`| | | | | | | | | | | |
-|`cudnnMakeFusedOpsPlan`|7.6.0| | | | | | | | | | | | | | | |
+|`cudnnMakeFusedOpsPlan`|7.6.0|9.0.0| | | | | | | | | | | | | | |
 |`cudnnMultiHeadAttnBackwardData`|7.5.0|9.0.0| | | | | | | | | | | | | | |
 |`cudnnMultiHeadAttnBackwardWeights`|7.5.0|9.0.0| | | | | | | | | | | | | | |
 |`cudnnMultiHeadAttnForward`|7.5.0|9.0.0| | | | | | | | | | | | | | |
@@ -1072,8 +1072,8 @@
 |`cudnnSetDropoutDescriptor`|5.0.0| | | |`hipdnnSetDropoutDescriptor`| | | | | |`miopenSetDropoutDescriptor`| | | | | |
 |`cudnnSetFilter4dDescriptor`|2.0.0| | | |`hipdnnSetFilter4dDescriptor`| | | | | | | | | | | |
 |`cudnnSetFilterNdDescriptor`|2.0.0| | | |`hipdnnSetFilterNdDescriptor`| | | | | | | | | | | |
-|`cudnnSetFusedOpsConstParamPackAttribute`|7.6.0| | | | | | | | | | | | | | | |
-|`cudnnSetFusedOpsVariantParamPackAttribute`|7.6.0| | | | | | | | | | | | | | | |
+|`cudnnSetFusedOpsConstParamPackAttribute`|7.6.0|9.0.0| | | | | | | | | | | | | | |
+|`cudnnSetFusedOpsVariantParamPackAttribute`|7.6.0|9.0.0| | | | | | | | | | | | | | |
 |`cudnnSetLRNDescriptor`|3.0.0| | | |`hipdnnSetLRNDescriptor`| | | | | |`miopenSetLRNDescriptor`| | | | | |
 |`cudnnSetOpTensorDescriptor`|5.0.0| | | |`hipdnnSetOpTensorDescriptor`| | | | | | | | | | | |
 |`cudnnSetPersistentRNNPlan`|6.0.0|8.0.1| |9.0.0|`hipdnnSetPersistentRNNPlan`| | | | | | | | | | | |
