@@ -45,57 +45,57 @@ Dependencies
     - Latest supported CUDA version
     - Windows
     - Linux
-  * - | `3.8.0 <http://releases.llvm.org/download.html#3.8.0>`_:sup:`1`
-      | `3.8.1 <http://releases.llvm.org/download.html#3.8.1>`_ :sup:`1`
-      | `3.9.0 <http://releases.llvm.org/download.html#3.9.0>`_ :sup:`1`
-      | `3.9.1 <http://releases.llvm.org/download.html#3.9.1>`_ :sup:`1`
+  * - `3.8.0 <http://releases.llvm.org/download.html#3.8.0>`_:sup:`1`,
+      `3.8.1 <http://releases.llvm.org/download.html#3.8.1>`_:sup:`1`,
+      `3.9.0 <http://releases.llvm.org/download.html#3.9.0>`_:sup:`1`,
+      `3.9.1 <http://releases.llvm.org/download.html#3.9.1>`_:sup:`1`
     - `7.5 <https://developer.nvidia.com/cuda-75-downloads-archive>`_
     - \+
     - \+
-  * - | `4.0.0 <http://releases.llvm.org/download.html#4.0.0>`_
-      | `4.0.1 <http://releases.llvm.org/download.html#4.0.1>`_
-      | `5.0.0 <http://releases.llvm.org/download.html#5.0.0>`_
-      | `5.0.1 <http://releases.llvm.org/download.html#5.0.1>`_
-      | `5.0.2 <http://releases.llvm.org/download.html#5.0.2>`_
+  * - `4.0.0 <http://releases.llvm.org/download.html#4.0.0>`_,
+      `4.0.1 <http://releases.llvm.org/download.html#4.0.1>`_,
+      `5.0.0 <http://releases.llvm.org/download.html#5.0.0>`_,
+      `5.0.1 <http://releases.llvm.org/download.html#5.0.1>`_,
+      `5.0.2 <http://releases.llvm.org/download.html#5.0.2>`_
     - `8.0 <https://developer.nvidia.com/cuda-80-ga2-download-archive>`_
     - \+
     - \+
-  * - | `6.0.0 <http://releases.llvm.org/download.html#6.0.0>`_
-      | `6.0.1 <http://releases.llvm.org/download.html#6.0.1>`_
+  * - `6.0.0 <http://releases.llvm.org/download.html#6.0.0>`_,
+      `6.0.1 <http://releases.llvm.org/download.html#6.0.1>`_
     - `9.0 <https://developer.nvidia.com/cuda-90-download-archive>`_
     - \+
     - \+
-  * - | `7.0.0 <http://releases.llvm.org/download.html#7.0.0>`_
-      | `7.0.1 <http://releases.llvm.org/download.html#7.0.1>`_
-      | `7.1.0 <http://releases.llvm.org/download.html#7.1.0>`_
+  * - `7.0.0 <http://releases.llvm.org/download.html#7.0.0>`_,
+      `7.0.1 <http://releases.llvm.org/download.html#7.0.1>`_,
+      `7.1.0 <http://releases.llvm.org/download.html#7.1.0>`_
     - `9.2 <https://developer.nvidia.com/cuda-92-download-archive>`_
     - | works only with patch (Clang bug `38811 <https://bugs.llvm.org/show_bug.cgi?id=38811>`_)
       | :download:`patch for 7.0.0 <./data/patches/patch_for_clang_7.0.0_bug_38811.zip>`:sup:`2`
       | :download:`patch for 7.0.1 <./data/patches/patch_for_clang_7.0.1_bug_38811.zip>`:sup:`2`
       | :download:`patch for 7.1.0 <./data/patches/patch_for_clang_7.1.0_bug_38811.zip>`:sup:`2`
     - not working (Clang bug `36384 <https://bugs.llvm.org/show_bug.cgi?id=36384">`_)
-  * - | `8.0.0 <http://releases.llvm.org/download.html#8.0.0>`_
-      | `8.0.1 <http://releases.llvm.org/download.html#8.0.1>`_
+  * - `8.0.0 <http://releases.llvm.org/download.html#8.0.0>`_,
+      `8.0.1 <http://releases.llvm.org/download.html#8.0.1>`_
     - `10.0 <https://developer.nvidia.com/cuda-10.0-download-archive>`_
     - | works only with patch (Clang bug `38811 <https://bugs.llvm.org/show_bug.cgi?id=38811>`_)
       | :download:`patch for 8.0.0 <./data/patches/patch_for_clang_8.0.0_bug_38811.zip>`:sup:`2`
       | :download:`patch for 8.0.1 <./data/patches/patch_for_clang_8.0.1_bug_38811.zip>`:sup:`2`
     - \+
-  * - | `9.0.0 <http://releases.llvm.org/download.html#9.0.0>`_
-      | `9.0.1 <http://releases.llvm.org/download.html#9.0.1>`_
+  * - `9.0.0 <http://releases.llvm.org/download.html#9.0.0>`_,
+      `9.0.1 <http://releases.llvm.org/download.html#9.0.1>`_
     - `10.1 <https://developer.nvidia.com/cuda-10.1-download-archive-update2>`_
     - \+
     - \+
-  * - | `10.0.0 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-10.0.0>`_
-      | `10.0.1 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-10.0.1>`_
+  * - `10.0.0 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-10.0.0>`_,
+      `10.0.1 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-10.0.1>`_
     - `11.0.0 <https://developer.nvidia.com/cuda-11.0-download-archive>`_
     - \+
     - \+
-  * - | `10.0.0 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-10.0.0>`_
-      | `10.0.1 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-10.0.1>`_
-    - | `11.0.1 <https://developer.nvidia.com/cuda-11-0-1-download-archive>`_
-      | `11.1.0 <https://developer.nvidia.com/cuda-11.1.0-download-archive>`_
-      | `11.1.1 <https://developer.nvidia.com/cuda-11.1.1-download-archive>`_
+  * - `10.0.0 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-10.0.0>`_,
+      `10.0.1 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-10.0.1>`_
+    - `11.0.1 <https://developer.nvidia.com/cuda-11-0-1-download-archive>`_,
+      `11.1.0 <https://developer.nvidia.com/cuda-11.1.0-download-archive>`_,
+      `11.1.1 <https://developer.nvidia.com/cuda-11.1.1-download-archive>`_
     - | works only with patch (Clang bug `47332 <https://bugs.llvm.org/show_bug.cgi?id=47332>`_)
       | :download:`patch for 10.0.0 <./data/patches/patch_for_clang_10.0.0_bug_47332.zip>`:sup:`3`
       | :download:`patch for 10.0.1 <./data/patches/patch_for_clang_10.0.1_bug_47332.zip>`:sup:`3`
@@ -107,30 +107,30 @@ Dependencies
     - \+
     - \+
   * - `11.0.0 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-11.0.0>`_
-    - | `11.0.1 <https://developer.nvidia.com/cuda-11-0-1-download-archive>`_
-      | `11.1.0 <https://developer.nvidia.com/cuda-11.1.0-download-archive>`_
-      | `11.1.1 <https://developer.nvidia.com/cuda-11.1.1-download-archive>`_
+    - `11.0.1 <https://developer.nvidia.com/cuda-11-0-1-download-archive>`_,
+      `11.1.0 <https://developer.nvidia.com/cuda-11.1.0-download-archive>`_,
+      `11.1.1 <https://developer.nvidia.com/cuda-11.1.1-download-archive>`_
     - | works only with patch (Clang bug `47332 <https://bugs.llvm.org/show_bug.cgi?id=47332>`_)
       | :download:`patch for 11.0.0 <./data/patches/patch_for_clang_11.0.0_bug_47332.zip>`:sup:`3`
     - | works only with patch (Clang bug `47332 <https://bugs.llvm.org/show_bug.cgi?id=47332>`_)
       | :download:`patch for 11.0.0 <./data/patches/patch_for_clang_11.0.0_bug_47332.zip>`:sup:`3`
-  * - | `11.0.1 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-11.0.1>`_
-      | `11.1.0 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-11.1.0>`_
+  * - `11.0.1 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-11.0.1>`_,
+      `11.1.0 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-11.1.0>`_
     - `11.2.2 <https://developer.nvidia.com/cuda-11-2-2-download-archive>`_
     - \+
     - \+
-  * - | `12.0.0 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-12.0.0>`_
-      | `12.0.1 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-12.0.1>`_
-      | `13.0.0 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-13.0.0>`_
-      | `13.0.1 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-13.0.1>`_
+  * - `12.0.0 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-12.0.0>`_,
+      `12.0.1 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-12.0.1>`_,
+      `13.0.0 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-13.0.0>`_,
+      `13.0.1 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-13.0.1>`_
     - `11.5.1 <https://developer.nvidia.com/cuda-11-5-1-download-archive>`_
     - \+
     - \+
-  * - | `14.0.0 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-14.0.0>`_
-      | `14.0.1 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-14.0.1>`_
-      | `14.0.2 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-14.0.2>`_
-      | `14.0.3 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-14.0.3>`_
-      | `14.0.4 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-14.0.4>`_
+  * - `14.0.0 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-14.0.0>`_,
+      `14.0.1 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-14.0.1>`_,
+      `14.0.2 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-14.0.2>`_,
+      `14.0.3 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-14.0.3>`_,
+      `14.0.4 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-14.0.4>`_
     - `11.7.1 <https://developer.nvidia.com/cuda-11-7-1-download-archive>`_
     - | works only with patch (Clang bug `54609 <https://github.com/llvm/llvm-project/issues/54609>`_)
       | :download:`patch for 14.0.0 <./data/patches/patch_for_clang_14.0.0_bug_54609.zip>`:sup:`2`
@@ -139,40 +139,40 @@ Dependencies
       | :download:`patch for 14.0.3 <./data/patches/patch_for_clang_14.0.3_bug_54609.zip>`:sup:`2`
       | :download:`patch for 14.0.4 <./data/patches/patch_for_clang_14.0.4_bug_54609.zip>`:sup:`2`
     - \+
-  * - | `14.0.5 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-14.0.5>`_
-      | `14.0.6 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-14.0.6>`_
-      | `15.0.0 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-15.0.0>`_
-      | `15.0.1 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-15.0.1>`_
-      | `15.0.2 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-15.0.2>`_
-      | `15.0.3 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-15.0.3>`_
-      | `15.0.4 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-15.0.4>`_
-      | `15.0.5 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-15.0.5>`_
-      | `15.0.6 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-15.0.6>`_
-      | `15.0.7 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-15.0.7>`_
+  * - `14.0.5 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-14.0.5>`_,
+      `14.0.6 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-14.0.6>`_,
+      `15.0.0 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-15.0.0>`_,
+      `15.0.1 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-15.0.1>`_,
+      `15.0.2 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-15.0.2>`_,
+      `15.0.3 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-15.0.3>`_,
+      `15.0.4 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-15.0.4>`_,
+      `15.0.5 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-15.0.5>`_,
+      `15.0.6 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-15.0.6>`_,
+      `15.0.7 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-15.0.7>`_
     - `11.8.0 <https://developer.nvidia.com/cuda-11-8-0-download-archive>`_
     - \+
     - \+
-  * - | `16.0.0 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-16.0.0>`_
-      | `16.0.1 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-16.0.1>`_
-      | `16.0.2 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-16.0.2>`_
-      | `16.0.3 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-16.0.3>`_
-      | `16.0.4 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-16.0.4>`_
-      | `16.0.5 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-16.0.5>`_
-      | `16.0.6 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-16.0.6>`_
+  * - `16.0.0 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-16.0.0>`_,
+      `16.0.1 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-16.0.1>`_,
+      `16.0.2 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-16.0.2>`_,
+      `16.0.3 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-16.0.3>`_,
+      `16.0.4 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-16.0.4>`_,
+      `16.0.5 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-16.0.5>`_,
+      `16.0.6 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-16.0.6>`_
     - `12.2.2 <https://developer.nvidia.com/cuda-12-2-2-download-archive>`_
     - \+
     - \+
-  * - | `17.0.1 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-17.0.1>`_
-      | `17.0.2 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-17.0.2>`_
-      | `17.0.3 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-17.0.3>`_
-      | `17.0.4 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-17.0.4>`_
-      | `17.0.5 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-17.0.5>`_
-      | `17.0.6 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-17.0.6>`_
-      | `18.1.0 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-18.1.0>`_
-      | `18.1.1 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-18.1.>`_
-    - `12.3.2 <https://developer.nvidia.com/cuda-downloads>`_
-    - LATEST STABLE CONFIG
-    - LATEST STABLE CONFIG
+  * - `17.0.1 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-17.0.1>`_,
+      `17.0.2 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-17.0.2>`_,
+      `17.0.3 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-17.0.3>`_,
+      `17.0.4 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-17.0.4>`_,
+      `17.0.5 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-17.0.5>`_,
+      `*17.0.6* <https://github.com/llvm/llvm-project/releases/tag/llvmorg-17.0.6>`_,
+      `18.1.0 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-18.1.0>`_,
+      `18.1.1 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-18.1.>`_
+    - `*12.3.2* <https://developer.nvidia.com/cuda-downloads>`_
+    - **LATEST STABLE CONFIG**
+    - **LATEST STABLE CONFIG**
   * - `19.0.0 git <https://github.com/llvm/llvm-project>`_
     - `12.3.2 <https://developer.nvidia.com/cuda-downloads>`_
     - \+
