@@ -38,21 +38,46 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
 
   // cuDNN enums
   {"cudnnStatus_t",                                                  {"hipdnnStatus_t",                                                  "miopenStatus_t",                                                  CONV_TYPE, API_DNN, 1}},
-  {"CUDNN_STATUS_SUCCESS",                                           {"HIPDNN_STATUS_SUCCESS",                                           "miopenStatusSuccess",                                             CONV_NUMERIC_LITERAL, API_DNN, 1}},    //  0
-  {"CUDNN_STATUS_NOT_INITIALIZED",                                   {"HIPDNN_STATUS_NOT_INITIALIZED",                                   "miopenStatusNotInitialized",                                      CONV_NUMERIC_LITERAL, API_DNN, 1}},    //  1
-  {"CUDNN_STATUS_ALLOC_FAILED",                                      {"HIPDNN_STATUS_ALLOC_FAILED",                                      "miopenStatusAllocFailed",                                         CONV_NUMERIC_LITERAL, API_DNN, 1}},    //  2    //  4
-  {"CUDNN_STATUS_BAD_PARAM",                                         {"HIPDNN_STATUS_BAD_PARAM",                                         "miopenStatusBadParm",                                             CONV_NUMERIC_LITERAL, API_DNN, 1}},    //  3
-  {"CUDNN_STATUS_INTERNAL_ERROR",                                    {"HIPDNN_STATUS_INTERNAL_ERROR",                                    "miopenStatusInternalError",                                       CONV_NUMERIC_LITERAL, API_DNN, 1}},    //  4    //  5
-  {"CUDNN_STATUS_INVALID_VALUE",                                     {"HIPDNN_STATUS_INVALID_VALUE",                                     "miopenStatusInvalidValue",                                        CONV_NUMERIC_LITERAL, API_DNN, 1}},    //  5    //  2
-  {"CUDNN_STATUS_ARCH_MISMATCH",                                     {"HIPDNN_STATUS_ARCH_MISMATCH",                                     "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, ROC_UNSUPPORTED}},    //  6
-  {"CUDNN_STATUS_MAPPING_ERROR",                                     {"HIPDNN_STATUS_MAPPING_ERROR",                                     "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, ROC_UNSUPPORTED}},    //  7
-  {"CUDNN_STATUS_EXECUTION_FAILED",                                  {"HIPDNN_STATUS_EXECUTION_FAILED",                                  "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, ROC_UNSUPPORTED}},    //  8
-  {"CUDNN_STATUS_NOT_SUPPORTED",                                     {"HIPDNN_STATUS_NOT_SUPPORTED",                                     "miopenStatusUnsupportedOp",                                       CONV_NUMERIC_LITERAL, API_DNN, 1}},    //  9    //  8
-  {"CUDNN_STATUS_LICENSE_ERROR",                                     {"HIPDNN_STATUS_LICENSE_ERROR",                                     "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, ROC_UNSUPPORTED}},    // 10
-  {"CUDNN_STATUS_RUNTIME_PREREQUISITE_MISSING",                      {"HIPDNN_STATUS_RUNTIME_PREREQUISITE_MISSING",                      "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, ROC_UNSUPPORTED}},    // 11
-  {"CUDNN_STATUS_RUNTIME_IN_PROGRESS",                               {"HIPDNN_STATUS_RUNTIME_IN_PROGRESS",                               "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 12
-  {"CUDNN_STATUS_RUNTIME_FP_OVERFLOW",                               {"HIPDNN_STATUS_RUNTIME_FP_OVERFLOW",                               "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 13
-  {"CUDNN_STATUS_VERSION_MISMATCH",                                  {"HIPDNN_STATUS_VERSION_MISMATCH",                                  "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 14
+  {"CUDNN_STATUS_SUCCESS",                                           {"HIPDNN_STATUS_SUCCESS",                                           "miopenStatusSuccess",                                             CONV_NUMERIC_LITERAL, API_DNN, 1}},
+  {"CUDNN_STATUS_NOT_INITIALIZED",                                   {"HIPDNN_STATUS_NOT_INITIALIZED",                                   "miopenStatusNotInitialized",                                      CONV_NUMERIC_LITERAL, API_DNN, 1}},
+  {"CUDNN_STATUS_ALLOC_FAILED",                                      {"HIPDNN_STATUS_ALLOC_FAILED",                                      "miopenStatusAllocFailed",                                         CONV_NUMERIC_LITERAL, API_DNN, 1, CUDA_DEPRECATED}},
+  {"CUDNN_STATUS_BAD_PARAM",                                         {"HIPDNN_STATUS_BAD_PARAM",                                         "miopenStatusBadParm",                                             CONV_NUMERIC_LITERAL, API_DNN, 1}},
+  {"CUDNN_STATUS_INTERNAL_ERROR",                                    {"HIPDNN_STATUS_INTERNAL_ERROR",                                    "miopenStatusInternalError",                                       CONV_NUMERIC_LITERAL, API_DNN, 1}},
+  {"CUDNN_STATUS_INVALID_VALUE",                                     {"HIPDNN_STATUS_INVALID_VALUE",                                     "miopenStatusInvalidValue",                                        CONV_NUMERIC_LITERAL, API_DNN, 1, CUDA_DEPRECATED}},
+  {"CUDNN_STATUS_ARCH_MISMATCH",                                     {"HIPDNN_STATUS_ARCH_MISMATCH",                                     "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"CUDNN_STATUS_MAPPING_ERROR",                                     {"HIPDNN_STATUS_MAPPING_ERROR",                                     "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"CUDNN_STATUS_EXECUTION_FAILED",                                  {"HIPDNN_STATUS_EXECUTION_FAILED",                                  "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, ROC_UNSUPPORTED}},
+  {"CUDNN_STATUS_NOT_SUPPORTED",                                     {"HIPDNN_STATUS_NOT_SUPPORTED",                                     "miopenStatusUnsupportedOp",                                       CONV_NUMERIC_LITERAL, API_DNN, 1}},
+  {"CUDNN_STATUS_LICENSE_ERROR",                                     {"HIPDNN_STATUS_LICENSE_ERROR",                                     "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, ROC_UNSUPPORTED}},
+  {"CUDNN_STATUS_RUNTIME_PREREQUISITE_MISSING",                      {"HIPDNN_STATUS_RUNTIME_PREREQUISITE_MISSING",                      "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"CUDNN_STATUS_RUNTIME_IN_PROGRESS",                               {"HIPDNN_STATUS_RUNTIME_IN_PROGRESS",                               "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_STATUS_RUNTIME_FP_OVERFLOW",                               {"HIPDNN_STATUS_RUNTIME_FP_OVERFLOW",                               "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_STATUS_VERSION_MISMATCH",                                  {"HIPDNN_STATUS_VERSION_MISMATCH",                                  "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED | CUDA_DEPRECATED}},
+  {"CUDNN_STATUS_SUBLIBRARY_VERSION_MISMATCH",                       {"HIPDNN_STATUS_SUBLIBRARY_VERSION_MISMATCH",                       "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_STATUS_SERIALIZATION_VERSION_MISMATCH",                    {"HIPDNN_STATUS_SERIALIZATION_VERSION_MISMATCH",                    "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_STATUS_DEPRECATED",                                        {"HIPDNN_STATUS_DEPRECATED",                                        "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_STATUS_BAD_PARAM_NULL_POINTER",                            {"HIPDNN_STATUS_BAD_PARAM_NULL_POINTER",                            "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_STATUS_BAD_PARAM_MISALIGNED_POINTER",                      {"HIPDNN_STATUS_BAD_PARAM_MISALIGNED_POINTER",                      "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_STATUS_BAD_PARAM_NOT_FINALIZED",                           {"HIPDNN_STATUS_BAD_PARAM_NOT_FINALIZED",                           "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_STATUS_BAD_PARAM_OUT_OF_BOUND",                            {"HIPDNN_STATUS_BAD_PARAM_OUT_OF_BOUND",                            "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_STATUS_BAD_PARAM_SIZE_INSUFFICIENT",                       {"HIPDNN_STATUS_BAD_PARAM_SIZE_INSUFFICIENT",                       "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_STATUS_BAD_PARAM_STREAM_MISMATCH",                         {"HIPDNN_STATUS_BAD_PARAM_STREAM_MISMATCH",                         "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_STATUS_BAD_PARAM_SHAPE_MISMATCH",                          {"HIPDNN_STATUS_BAD_PARAM_SHAPE_MISMATCH",                          "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_STATUS_BAD_PARAM_DUPLICATED_ENTRIES",                      {"HIPDNN_STATUS_BAD_PARAM_DUPLICATED_ENTRIES",                      "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_STATUS_BAD_PARAM_ATTRIBUTE_TYPE",                          {"HIPDNN_STATUS_BAD_PARAM_ATTRIBUTE_TYPE",                          "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_STATUS_NOT_SUPPORTED_GRAPH_PATTERN",                       {"HIPDNN_STATUS_NOT_SUPPORTED_GRAPH_PATTERN",                       "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_STATUS_NOT_SUPPORTED_SHAPE",                               {"HIPDNN_STATUS_NOT_SUPPORTED_SHAPE",                               "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_STATUS_NOT_SUPPORTED_DATA_TYPE",                           {"HIPDNN_STATUS_NOT_SUPPORTED_DATA_TYPE",                           "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_STATUS_NOT_SUPPORTED_LAYOUT",                              {"HIPDNN_STATUS_NOT_SUPPORTED_LAYOUT",                              "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_STATUS_NOT_SUPPORTED_INCOMPATIBLE_CUDA_DRIVER",            {"HIPDNN_STATUS_NOT_SUPPORTED_INCOMPATIBLE_CUDA_DRIVER",            "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_STATUS_NOT_SUPPORTED_INCOMPATIBLE_CUDART",                 {"HIPDNN_STATUS_NOT_SUPPORTED_INCOMPATIBLE_CUDART",                 "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_STATUS_NOT_SUPPORTED_ARCH_MISMATCH",                       {"HIPDNN_STATUS_NOT_SUPPORTED_ARCH_MISMATCH",                       "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_STATUS_NOT_SUPPORTED_RUNTIME_PREREQUISITE_MISSING",        {"HIPDNN_STATUS_NOT_SUPPORTED_RUNTIME_PREREQUISITE_MISSING",        "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_STATUS_NOT_SUPPORTED_SUBLIBRARY_UNAVAILABLE",              {"HIPDNN_STATUS_NOT_SUPPORTED_SUBLIBRARY_UNAVAILABLE",              "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_STATUS_NOT_SUPPORTED_SHARED_MEMORY_INSUFFICIENT",          {"HIPDNN_STATUS_NOT_SUPPORTED_SHARED_MEMORY_INSUFFICIENT",          "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_STATUS_NOT_SUPPORTED_PADDING",                             {"HIPDNN_STATUS_NOT_SUPPORTED_PADDING",                             "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_STATUS_NOT_SUPPORTED_BAD_LAUNCH_PARAM",                    {"HIPDNN_STATUS_NOT_SUPPORTED_BAD_LAUNCH_PARAM",                    "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+
   {"cudnnRuntimeTag_t",                                              {"hipdnnRuntimeTag_t",                                              "",                                                                CONV_TYPE, API_DNN, 1, UNSUPPORTED}},
   {"cudnnConvolutionMode_t",                                         {"hipdnnConvolutionMode_t",                                         "miopenConvolutionMode_t",                                         CONV_TYPE, API_DNN, 1, CUDA_DEPRECATED}},
   {"CUDNN_CONVOLUTION",                                              {"HIPDNN_CONVOLUTION",                                              "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, ROC_UNSUPPORTED | CUDA_DEPRECATED}},    // 0
@@ -1142,19 +1167,19 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_TYPE_NAME_VER_MAP {
   {"cudnnStatus_t",                                                  {CUDNN_10,  CUDA_0,   CUDA_0  }},
   {"CUDNN_STATUS_SUCCESS",                                           {CUDNN_10,  CUDA_0,   CUDA_0  }},
   {"CUDNN_STATUS_NOT_INITIALIZED",                                   {CUDNN_10,  CUDA_0,   CUDA_0  }},
-  {"CUDNN_STATUS_ALLOC_FAILED",                                      {CUDNN_10,  CUDA_0,   CUDA_0  }},
+  {"CUDNN_STATUS_ALLOC_FAILED",                                      {CUDNN_10,  CUDNN_900,CUDA_0  }},
   {"CUDNN_STATUS_BAD_PARAM",                                         {CUDNN_10,  CUDA_0,   CUDA_0  }},
   {"CUDNN_STATUS_INTERNAL_ERROR",                                    {CUDNN_10,  CUDA_0,   CUDA_0  }},
-  {"CUDNN_STATUS_INVALID_VALUE",                                     {CUDNN_10,  CUDA_0,   CUDA_0  }},
-  {"CUDNN_STATUS_ARCH_MISMATCH",                                     {CUDNN_10,  CUDA_0,   CUDA_0  }},
-  {"CUDNN_STATUS_MAPPING_ERROR",                                     {CUDNN_10,  CUDA_0,   CUDA_0  }},
+  {"CUDNN_STATUS_INVALID_VALUE",                                     {CUDNN_10,  CUDNN_900,CUDA_0  }},
+  {"CUDNN_STATUS_ARCH_MISMATCH",                                     {CUDNN_10,  CUDNN_900,CUDA_0  }},
+  {"CUDNN_STATUS_MAPPING_ERROR",                                     {CUDNN_10,  CUDNN_900,CUDA_0  }},
   {"CUDNN_STATUS_EXECUTION_FAILED",                                  {CUDNN_10,  CUDA_0,   CUDA_0  }},
   {"CUDNN_STATUS_NOT_SUPPORTED",                                     {CUDNN_10,  CUDA_0,   CUDA_0  }},
   {"CUDNN_STATUS_LICENSE_ERROR",                                     {CUDNN_10,  CUDA_0,   CUDA_0  }},
-  {"CUDNN_STATUS_RUNTIME_PREREQUISITE_MISSING",                      {CUDNN_60,  CUDA_0,   CUDA_0  }},
+  {"CUDNN_STATUS_RUNTIME_PREREQUISITE_MISSING",                      {CUDNN_60,  CUDNN_900,CUDA_0  }},
   {"CUDNN_STATUS_RUNTIME_IN_PROGRESS",                               {CUDNN_705, CUDA_0,   CUDA_0  }},
   {"CUDNN_STATUS_RUNTIME_FP_OVERFLOW",                               {CUDNN_705, CUDA_0,   CUDA_0  }},
-  {"CUDNN_STATUS_VERSION_MISMATCH",                                  {CUDNN_801, CUDA_0,   CUDA_0  }},
+  {"CUDNN_STATUS_VERSION_MISMATCH",                                  {CUDNN_801, CUDNN_900,CUDA_0  }},
   {"cudnnRuntimeTag_t",                                              {CUDNN_705, CUDA_0,   CUDA_0  }},
   {"cudnnErrQueryMode_t",                                            {CUDNN_705, CUDA_0,   CUDA_0  }},
   {"CUDNN_ERRQUERY_RAWCODE",                                         {CUDNN_705, CUDA_0,   CUDA_0  }},
@@ -1495,6 +1520,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_TYPE_NAME_VER_MAP {
   {"cudnnBackendBehaviorNote_t",                                     {CUDNN_820, CUDA_0,   CUDA_0  }},
   {"CUDNN_BEHAVIOR_NOTE_RUNTIME_COMPILATION",                        {CUDNN_820, CUDA_0,   CUDA_0  }},
   {"CUDNN_BEHAVIOR_NOTE_TYPE_COUNT",                                 {CUDNN_820, CUDA_0,   CUDA_0  }},
+  {"CUDNN_BACKEND_OPERATION_BN_BWD_WEIGHTS_DESCRIPTOR",              {CUDNN_820, CUDA_0,   CUDA_0  }},
   {"CUDNN_DATA_BOOLEAN",                                             {CUDNN_830, CUDA_0,   CUDA_0  }},
   {"CUDNN_POINTWISE_ADD_SQUARE",                                     {CUDNN_830, CUDA_0,   CUDA_0  }},
   {"CUDNN_POINTWISE_DIV",                                            {CUDNN_830, CUDA_0,   CUDA_0  }},
@@ -1683,6 +1709,30 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_TYPE_NAME_VER_MAP {
   {"CUDNN_KNOB_TYPE_TILE_COLS",                                      {CUDNN_895, CUDA_0,   CUDA_0  }},
   {"CUDNN_KNOB_TYPE_LOAD_SIZE",                                      {CUDNN_895, CUDA_0,   CUDA_0  }},
   {"CUDNN_RMS_NORM",                                                 {CUDNN_896, CUDA_0,   CUDA_0  }},
+  {"CUDNN_STATUS_SUBLIBRARY_VERSION_MISMATCH",                       {CUDNN_900, CUDA_0,   CUDA_0  }},
+  {"CUDNN_STATUS_SERIALIZATION_VERSION_MISMATCH",                    {CUDNN_900, CUDA_0,   CUDA_0  }},
+  {"CUDNN_STATUS_DEPRECATED",                                        {CUDNN_900, CUDA_0,   CUDA_0  }},
+  {"CUDNN_STATUS_BAD_PARAM_NULL_POINTER",                            {CUDNN_900, CUDA_0,   CUDA_0  }},
+  {"CUDNN_STATUS_BAD_PARAM_MISALIGNED_POINTER",                      {CUDNN_900, CUDA_0,   CUDA_0  }},
+  {"CUDNN_STATUS_BAD_PARAM_NOT_FINALIZED",                           {CUDNN_900, CUDA_0,   CUDA_0  }},
+  {"CUDNN_STATUS_BAD_PARAM_OUT_OF_BOUND",                            {CUDNN_900, CUDA_0,   CUDA_0  }},
+  {"CUDNN_STATUS_BAD_PARAM_SIZE_INSUFFICIENT",                       {CUDNN_900, CUDA_0,   CUDA_0  }},
+  {"CUDNN_STATUS_BAD_PARAM_STREAM_MISMATCH",                         {CUDNN_900, CUDA_0,   CUDA_0  }},
+  {"CUDNN_STATUS_BAD_PARAM_SHAPE_MISMATCH",                          {CUDNN_900, CUDA_0,   CUDA_0  }},
+  {"CUDNN_STATUS_BAD_PARAM_DUPLICATED_ENTRIES",                      {CUDNN_900, CUDA_0,   CUDA_0  }},
+  {"CUDNN_STATUS_BAD_PARAM_ATTRIBUTE_TYPE",                          {CUDNN_900, CUDA_0,   CUDA_0  }},
+  {"CUDNN_STATUS_NOT_SUPPORTED_GRAPH_PATTERN",                       {CUDNN_900, CUDA_0,   CUDA_0  }},
+  {"CUDNN_STATUS_NOT_SUPPORTED_SHAPE",                               {CUDNN_900, CUDA_0,   CUDA_0  }},
+  {"CUDNN_STATUS_NOT_SUPPORTED_DATA_TYPE",                           {CUDNN_900, CUDA_0,   CUDA_0  }},
+  {"CUDNN_STATUS_NOT_SUPPORTED_LAYOUT",                              {CUDNN_900, CUDA_0,   CUDA_0  }},
+  {"CUDNN_STATUS_NOT_SUPPORTED_INCOMPATIBLE_CUDA_DRIVER",            {CUDNN_900, CUDA_0,   CUDA_0  }},
+  {"CUDNN_STATUS_NOT_SUPPORTED_INCOMPATIBLE_CUDART",                 {CUDNN_900, CUDA_0,   CUDA_0  }},
+  {"CUDNN_STATUS_NOT_SUPPORTED_ARCH_MISMATCH",                       {CUDNN_900, CUDA_0,   CUDA_0  }},
+  {"CUDNN_STATUS_NOT_SUPPORTED_RUNTIME_PREREQUISITE_MISSING",        {CUDNN_900, CUDA_0,   CUDA_0  }},
+  {"CUDNN_STATUS_NOT_SUPPORTED_SUBLIBRARY_UNAVAILABLE",              {CUDNN_900, CUDA_0,   CUDA_0  }},
+  {"CUDNN_STATUS_NOT_SUPPORTED_SHARED_MEMORY_INSUFFICIENT",          {CUDNN_900, CUDA_0,   CUDA_0  }},
+  {"CUDNN_STATUS_NOT_SUPPORTED_PADDING",                             {CUDNN_900, CUDA_0,   CUDA_0  }},
+  {"CUDNN_STATUS_NOT_SUPPORTED_BAD_LAUNCH_PARAM",                    {CUDNN_900, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_DNN_TYPE_NAME_VER_MAP {
