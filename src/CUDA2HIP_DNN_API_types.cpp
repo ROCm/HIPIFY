@@ -34,7 +34,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"CUDNN_SEV_ERROR_EN",                                             {"HIPDNN_SEV_ERROR_EN",                                             "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_SEV_WARNING_EN",                                           {"HIPDNN_SEV_WARNING_EN",                                           "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_SEV_INFO_EN",                                              {"HIPDNN_SEV_INFO_EN",                                              "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
-  {"CUDNN_SEQDATA_DIM_COUNT",                                        {"HIPDNN_SEQDATA_DIM_COUNT",                                        "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 4
+  {"CUDNN_SEQDATA_DIM_COUNT",                                        {"HIPDNN_SEQDATA_DIM_COUNT",                                        "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_STATUS_FULL_ERROR_CODE",                                   {"HIPDNN_STATUS_FULL_ERROR_CODE",                                   "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_STATUS_CATEGORY",                                          {"HIPDNN_STATUS_CATEGORY",                                          "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_STATUS_SPECIFIC_ERROR",                                    {"HIPDNN_STATUS_SPECIFIC_ERROR",                                    "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
 
   // cuDNN enums
   {"cudnnStatus_t",                                                  {"hipdnnStatus_t",                                                  "miopenStatus_t",                                                  CONV_TYPE, API_DNN, 1}},
@@ -77,6 +80,16 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"CUDNN_STATUS_NOT_SUPPORTED_SHARED_MEMORY_INSUFFICIENT",          {"HIPDNN_STATUS_NOT_SUPPORTED_SHARED_MEMORY_INSUFFICIENT",          "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_STATUS_NOT_SUPPORTED_PADDING",                             {"HIPDNN_STATUS_NOT_SUPPORTED_PADDING",                             "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_STATUS_NOT_SUPPORTED_BAD_LAUNCH_PARAM",                    {"HIPDNN_STATUS_NOT_SUPPORTED_BAD_LAUNCH_PARAM",                    "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_STATUS_INTERNAL_ERROR_COMPILATION_FAILED",                 {"HIPDNN_STATUS_INTERNAL_ERROR_COMPILATION_FAILED",                 "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_STATUS_INTERNAL_ERROR_UNEXPECTED_VALUE",                   {"HIPDNN_STATUS_INTERNAL_ERROR_UNEXPECTED_VALUE",                   "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_STATUS_INTERNAL_ERROR_HOST_ALLOCATION_FAILED",             {"HIPDNN_STATUS_INTERNAL_ERROR_HOST_ALLOCATION_FAILED",             "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_STATUS_INTERNAL_ERROR_DEVICE_ALLOCATION_FAILED",           {"HIPDNN_STATUS_INTERNAL_ERROR_DEVICE_ALLOCATION_FAILED",           "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_STATUS_INTERNAL_ERROR_BAD_LAUNCH_PARAM",                   {"HIPDNN_STATUS_INTERNAL_ERROR_BAD_LAUNCH_PARAM",                   "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_STATUS_INTERNAL_ERROR_TEXTURE_CREATION_FAILED",            {"HIPDNN_STATUS_INTERNAL_ERROR_TEXTURE_CREATION_FAILED",            "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_STATUS_EXECUTION_FAILED_CUDA_DRIVER",                      {"HIPDNN_STATUS_EXECUTION_FAILED_CUDA_DRIVER",                      "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_STATUS_EXECUTION_FAILED_CUBLAS",                           {"HIPDNN_STATUS_EXECUTION_FAILED_CUBLAS",                           "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_STATUS_EXECUTION_FAILED_CUDART",                           {"HIPDNN_STATUS_EXECUTION_FAILED_CUDART",                           "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_STATUS_EXECUTION_FAILED_CURAND",                           {"HIPDNN_STATUS_EXECUTION_FAILED_CURAND",                           "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
 
   {"cudnnRuntimeTag_t",                                              {"hipdnnRuntimeTag_t",                                              "",                                                                CONV_TYPE, API_DNN, 1, UNSUPPORTED}},
   {"cudnnConvolutionMode_t",                                         {"hipdnnConvolutionMode_t",                                         "miopenConvolutionMode_t",                                         CONV_TYPE, API_DNN, 1, CUDA_DEPRECATED}},
@@ -1733,6 +1746,19 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_TYPE_NAME_VER_MAP {
   {"CUDNN_STATUS_NOT_SUPPORTED_SHARED_MEMORY_INSUFFICIENT",          {CUDNN_900, CUDA_0,   CUDA_0  }},
   {"CUDNN_STATUS_NOT_SUPPORTED_PADDING",                             {CUDNN_900, CUDA_0,   CUDA_0  }},
   {"CUDNN_STATUS_NOT_SUPPORTED_BAD_LAUNCH_PARAM",                    {CUDNN_900, CUDA_0,   CUDA_0  }},
+  {"CUDNN_STATUS_INTERNAL_ERROR_COMPILATION_FAILED",                 {CUDNN_900, CUDA_0,   CUDA_0  }},
+  {"CUDNN_STATUS_INTERNAL_ERROR_UNEXPECTED_VALUE",                   {CUDNN_900, CUDA_0,   CUDA_0  }},
+  {"CUDNN_STATUS_INTERNAL_ERROR_HOST_ALLOCATION_FAILED",             {CUDNN_900, CUDA_0,   CUDA_0  }},
+  {"CUDNN_STATUS_INTERNAL_ERROR_DEVICE_ALLOCATION_FAILED",           {CUDNN_900, CUDA_0,   CUDA_0  }},
+  {"CUDNN_STATUS_INTERNAL_ERROR_BAD_LAUNCH_PARAM",                   {CUDNN_900, CUDA_0,   CUDA_0  }},
+  {"CUDNN_STATUS_INTERNAL_ERROR_TEXTURE_CREATION_FAILED",            {CUDNN_900, CUDA_0,   CUDA_0  }},
+  {"CUDNN_STATUS_EXECUTION_FAILED_CUDA_DRIVER",                      {CUDNN_900, CUDA_0,   CUDA_0  }},
+  {"CUDNN_STATUS_EXECUTION_FAILED_CUBLAS",                           {CUDNN_900, CUDA_0,   CUDA_0  }},
+  {"CUDNN_STATUS_EXECUTION_FAILED_CUDART",                           {CUDNN_900, CUDA_0,   CUDA_0  }},
+  {"CUDNN_STATUS_EXECUTION_FAILED_CURAND",                           {CUDNN_900, CUDA_0,   CUDA_0  }},
+  {"CUDNN_STATUS_FULL_ERROR_CODE",                                   {CUDNN_900, CUDA_0,   CUDA_0  }},
+  {"CUDNN_STATUS_CATEGORY",                                          {CUDNN_900, CUDA_0,   CUDA_0  }},
+  {"CUDNN_STATUS_SPECIFIC_ERROR",                                    {CUDNN_900, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_DNN_TYPE_NAME_VER_MAP {
