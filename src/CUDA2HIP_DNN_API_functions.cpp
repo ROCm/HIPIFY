@@ -29,9 +29,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_FUNCTION_MAP {
   {"cudnnGetVersion",                                          {"hipdnnGetVersion",                                          "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED}},
   {"cudnnGetCudartVersion",                                    {"hipdnnGetCudartVersion",                                    "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
   {"cudnnGetMaxDeviceVersion",                                 {"hipdnnGetMaxDeviceVersion",                                 "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
-  {"cudnnQueryRuntimeError",                                   {"hipdnnQueryRuntimeError",                                   "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
+  {"cudnnQueryRuntimeError",                                   {"hipdnnQueryRuntimeError",                                   "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
   {"cudnnGetProperty",                                         {"hipdnnGetProperty",                                         "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
   {"cudnnGetErrorString",                                      {"hipdnnGetErrorString",                                      "miopenGetErrorString",                                               CONV_LIB_FUNC, API_DNN, 2}},
+  {"cudnnGetLastErrorString",                                  {"hipdnnGetLastErrorString",                                  "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
   {"cudnnIm2Col",                                              {"hipdnnIm2Col",                                              "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
   {"cudnnCreate",                                              {"hipdnnCreate",                                              "miopenCreate",                                                       CONV_LIB_FUNC, API_DNN, 2}},
   {"cudnnDestroy",                                             {"hipdnnDestroy",                                             "miopenDestroy",                                                      CONV_LIB_FUNC, API_DNN, 2}},
@@ -488,7 +489,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_FUNCTION_VER_MAP {
   {"cudnnGetVersion",                                          {CUDNN_20,  CUDA_0,    CUDA_0   }},
   {"cudnnGetCudartVersion",                                    {CUDNN_60,  CUDA_0,    CUDA_0   }},
   {"cudnnGetErrorString",                                      {CUDNN_20,  CUDA_0,    CUDA_0   }},
-  {"cudnnQueryRuntimeError",                                   {CUDNN_705, CUDA_0,    CUDA_0   }},
+  {"cudnnQueryRuntimeError",                                   {CUDNN_705, CUDNN_900, CUDA_0   }},
   {"cudnnGetProperty",                                         {CUDNN_60,  CUDA_0,    CUDA_0   }},
   {"cudnnCreate",                                              {CUDNN_10,  CUDA_0,    CUDA_0   }},
   {"cudnnDestroy",                                             {CUDNN_10,  CUDA_0,    CUDA_0   }},
@@ -621,6 +622,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_FUNCTION_VER_MAP {
   {"cudnnAdvVersionCheck",                                     {CUDNN_900, CUDA_0,    CUDA_0}},
   {"cudnnSetCTCLossDescriptor_v9",                             {CUDNN_900, CUDA_0,    CUDA_0}},
   {"cudnnGetCTCLossDescriptor_v9",                             {CUDNN_900, CUDA_0,    CUDA_0}},
+  {"cudnnGetLastErrorString",                                  {CUDNN_900, CUDA_0,    CUDA_0}},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_DNN_FUNCTION_VER_MAP {

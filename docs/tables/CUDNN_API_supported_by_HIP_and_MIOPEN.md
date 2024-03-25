@@ -8,13 +8,13 @@
 |`CUDNN_32BIT_INDICES`|6.0.0| | | |`HIPDNN_32BIT_INDICES`| | | | | |`MIOPEN_32BIT_INDICES`| | | | | |
 |`CUDNN_64BIT_INDICES`|6.0.0| | | |`HIPDNN_64BIT_INDICES`| | | | | |`MIOPEN_64BIT_INDICES`| | | | | |
 |`CUDNN_8BIT_INDICES`|6.0.0| | | |`HIPDNN_8BIT_INDICES`| | | | | |`MIOPEN_8BIT_INDICES`| | | | | |
-|`CUDNN_ACTIVATION_CLIPPED_RELU`|4.0.0| | | |`HIPDNN_ACTIVATION_CLIPPED_RELU`| | | | | |`miopenActivationCLIPPEDRELU`| | | | | |
-|`CUDNN_ACTIVATION_ELU`|6.0.0| | | |`HIPDNN_ACTIVATION_ELU`| | | | | |`miopenActivationELU`| | | | | |
-|`CUDNN_ACTIVATION_IDENTITY`|7.1.3| | | |`HIPDNN_ACTIVATION_PATHTRU`| | | | | |`miopenActivationPASTHRU`| | | | | |
-|`CUDNN_ACTIVATION_RELU`|1.0.0| | | |`HIPDNN_ACTIVATION_RELU`| | | | | |`miopenActivationRELU`| | | | | |
-|`CUDNN_ACTIVATION_SIGMOID`|1.0.0| | | |`HIPDNN_ACTIVATION_SIGMOID`| | | | | | | | | | | |
-|`CUDNN_ACTIVATION_SWISH`|8.2.0| | | |`HIPDNN_ACTIVATION_SWISH`| | | | | | | | | | | |
-|`CUDNN_ACTIVATION_TANH`|1.0.0| | | |`HIPDNN_ACTIVATION_TANH`| | | | | |`miopenActivationTANH`| | | | | |
+|`CUDNN_ACTIVATION_CLIPPED_RELU`|4.0.0|9.0.0| | |`HIPDNN_ACTIVATION_CLIPPED_RELU`| | | | | |`miopenActivationCLIPPEDRELU`| | | | | |
+|`CUDNN_ACTIVATION_ELU`|6.0.0|9.0.0| | |`HIPDNN_ACTIVATION_ELU`| | | | | |`miopenActivationELU`| | | | | |
+|`CUDNN_ACTIVATION_IDENTITY`|7.1.3|9.0.0| | |`HIPDNN_ACTIVATION_PATHTRU`| | | | | |`miopenActivationPASTHRU`| | | | | |
+|`CUDNN_ACTIVATION_RELU`|1.0.0|9.0.0| | |`HIPDNN_ACTIVATION_RELU`| | | | | |`miopenActivationRELU`| | | | | |
+|`CUDNN_ACTIVATION_SIGMOID`|1.0.0|9.0.0| | |`HIPDNN_ACTIVATION_SIGMOID`| | | | | | | | | | | |
+|`CUDNN_ACTIVATION_SWISH`|8.2.0|9.0.0| | |`HIPDNN_ACTIVATION_SWISH`| | | | | | | | | | | |
+|`CUDNN_ACTIVATION_TANH`|1.0.0|9.0.0| | |`HIPDNN_ACTIVATION_TANH`| | | | | |`miopenActivationTANH`| | | | | |
 |`CUDNN_ATTN_DISABLE_PROJ_BIASES`|7.6.3| | | | | | | | | | | | | | | |
 |`CUDNN_ATTN_ENABLE_PROJ_BIASES`|7.6.3| | | | | | | | | | | | | | | |
 |`CUDNN_ATTN_QUERYMAP_ALL_TO_ONE`|7.5.0| | | | | | | | | | | | | | | |
@@ -329,10 +329,10 @@
 |`CUDNN_DATA_INT32`|6.0.0| | | |`HIPDNN_DATA_INT32`| | | | | |`miopenInt32`| | | | | |
 |`CUDNN_DATA_INT64`|8.1.0| | | | | | | | | | | | | | | |
 |`CUDNN_DATA_INT8`|6.0.0| | | |`HIPDNN_DATA_INT8`| | | | | |`miopenInt8`| | | | | |
-|`CUDNN_DATA_INT8x32`|7.2.1| | | | | | | | | | | | | | | |
-|`CUDNN_DATA_INT8x4`|6.0.0| | | |`HIPDNN_DATA_INT8x4`| | | | | |`miopenInt8x4`| | | | | |
+|`CUDNN_DATA_INT8x32`|7.2.1|9.0.0| | | | | | | | | | | | | | |
+|`CUDNN_DATA_INT8x4`|6.0.0|9.0.0| | |`HIPDNN_DATA_INT8x4`| | | | | |`miopenInt8x4`| | | | | |
 |`CUDNN_DATA_UINT8`|7.1.3| | | | | | | | | | | | | | | |
-|`CUDNN_DATA_UINT8x4`|7.1.3| | | | | | | | | | | | | | | |
+|`CUDNN_DATA_UINT8x4`|7.1.3|9.0.0| | | | | | | | | | | | | | |
 |`CUDNN_DEFAULT_MATH`|7.0.5| | | |`HIPDNN_DEFAULT_MATH`| | | | | | | | | | | |
 |`CUDNN_DEFAULT_REORDER`|7.6.0| | | | | | | | | | | | | | | |
 |`CUDNN_DETERMINISTIC`|6.0.0| | | | | | | | | | | | | | | |
@@ -433,7 +433,7 @@
 |`CUDNN_NORM_OPS_NORM_ADD_ACTIVATION`|8.0.1| | | | | | | | | | | | | | | |
 |`CUDNN_NORM_PER_ACTIVATION`|8.0.1| | | | | | | | | | | | | | | |
 |`CUDNN_NORM_PER_CHANNEL`|8.0.1| | | | | | | | | | | | | | | |
-|`CUDNN_NOT_PROPAGATE_NAN`|4.0.0| | | |`HIPDNN_NOT_PROPAGATE_NAN`| | | | | |`MIOPEN_NOT_PROPAGATE_NAN`| | | | | |
+|`CUDNN_NOT_PROPAGATE_NAN`|4.0.0|9.0.0| | |`HIPDNN_NOT_PROPAGATE_NAN`| | | | | |`MIOPEN_NOT_PROPAGATE_NAN`| | | | | |
 |`CUDNN_NO_REORDER`|7.6.0| | | | | | | | | | | | | | | |
 |`CUDNN_NUMERICAL_NOTE_DOWN_CONVERT_INPUTS`|8.0.1| | | | | | | | | | | | | | | |
 |`CUDNN_NUMERICAL_NOTE_FFT`|8.0.1| | | | | | | | | | | | | | | |
@@ -544,7 +544,7 @@
 |`CUDNN_POOLING_AVERAGE_COUNT_INCLUDE_PADDING`|2.0.0| | | |`HIPDNN_POOLING_AVERAGE_COUNT_INCLUDE_PADDING`| | | | | | | | | | | |
 |`CUDNN_POOLING_MAX`|1.0.0| | | |`HIPDNN_POOLING_MAX`| | | | | |`miopenPoolingMax`| | | | | |
 |`CUDNN_POOLING_MAX_DETERMINISTIC`|6.0.0| | | |`HIPDNN_POOLING_MAX_DETERMINISTIC`| | | | | | | | | | | |
-|`CUDNN_PROPAGATE_NAN`|4.0.0| | | |`HIPDNN_PROPAGATE_NAN`| | | | | |`MIOPEN_PROPAGATE_NAN`| | | | | |
+|`CUDNN_PROPAGATE_NAN`|4.0.0|9.0.0| | |`HIPDNN_PROPAGATE_NAN`| | | | | |`MIOPEN_PROPAGATE_NAN`| | | | | |
 |`CUDNN_PTR_16B_ALIGNED`|7.6.0| | | | | | | | | | | | | | | |
 |`CUDNN_PTR_ACTIVATION_BITMASK`|7.6.0| | | | | | | | | | | | | | | |
 |`CUDNN_PTR_BN_BIAS`|7.6.0| | | | | | | | | | | | | | | |
@@ -572,16 +572,16 @@
 |`CUDNN_PTR_YSQSUM`|7.6.0| | | | | | | | | | | | | | | |
 |`CUDNN_PTR_YSUM`|7.6.0| | | | | | | | | | | | | | | |
 |`CUDNN_PTR_ZDATA`|7.6.0| | | | | | | | | | | | | | | |
-|`CUDNN_REDUCE_TENSOR_ADD`|6.0.0| | | |`HIPDNN_REDUCE_TENSOR_ADD`| | | | | |`MIOPEN_REDUCE_TENSOR_ADD`| | | | | |
-|`CUDNN_REDUCE_TENSOR_AMAX`|6.0.0| | | |`HIPDNN_REDUCE_TENSOR_AMAX`| | | | | |`MIOPEN_REDUCE_TENSOR_AMAX`| | | | | |
-|`CUDNN_REDUCE_TENSOR_AVG`|6.0.0| | | |`HIPDNN_REDUCE_TENSOR_AVG`| | | | | |`MIOPEN_REDUCE_TENSOR_AVG`| | | | | |
+|`CUDNN_REDUCE_TENSOR_ADD`|6.0.0|9.0.0| | |`HIPDNN_REDUCE_TENSOR_ADD`| | | | | |`MIOPEN_REDUCE_TENSOR_ADD`| | | | | |
+|`CUDNN_REDUCE_TENSOR_AMAX`|6.0.0|9.0.0| | |`HIPDNN_REDUCE_TENSOR_AMAX`| | | | | |`MIOPEN_REDUCE_TENSOR_AMAX`| | | | | |
+|`CUDNN_REDUCE_TENSOR_AVG`|6.0.0|9.0.0| | |`HIPDNN_REDUCE_TENSOR_AVG`| | | | | |`MIOPEN_REDUCE_TENSOR_AVG`| | | | | |
 |`CUDNN_REDUCE_TENSOR_FLATTENED_INDICES`|6.0.0| | | |`HIPDNN_REDUCE_TENSOR_FLATTENED_INDICES`| | | | | |`MIOPEN_REDUCE_TENSOR_FLATTENED_INDICES`| | | | | |
-|`CUDNN_REDUCE_TENSOR_MAX`|6.0.0| | | |`HIPDNN_REDUCE_TENSOR_MAX`| | | | | |`MIOPEN_REDUCE_TENSOR_MAX`| | | | | |
-|`CUDNN_REDUCE_TENSOR_MIN`|6.0.0| | | |`HIPDNN_REDUCE_TENSOR_MIN`| | | | | |`MIOPEN_REDUCE_TENSOR_MIN`| | | | | |
-|`CUDNN_REDUCE_TENSOR_MUL`|6.0.0| | | |`HIPDNN_REDUCE_TENSOR_MUL`| | | | | |`MIOPEN_REDUCE_TENSOR_MUL`| | | | | |
-|`CUDNN_REDUCE_TENSOR_MUL_NO_ZEROS`|7.0.5| | | |`HIPDNN_REDUCE_TENSOR_MUL_NO_ZEROS`| | | | | | | | | | | |
-|`CUDNN_REDUCE_TENSOR_NORM1`|6.0.0| | | |`HIPDNN_REDUCE_TENSOR_NORM1`| | | | | |`MIOPEN_REDUCE_TENSOR_NORM1`| | | | | |
-|`CUDNN_REDUCE_TENSOR_NORM2`|6.0.0| | | |`HIPDNN_REDUCE_TENSOR_NORM2`| | | | | |`MIOPEN_REDUCE_TENSOR_NORM2`| | | | | |
+|`CUDNN_REDUCE_TENSOR_MAX`|6.0.0|9.0.0| | |`HIPDNN_REDUCE_TENSOR_MAX`| | | | | |`MIOPEN_REDUCE_TENSOR_MAX`| | | | | |
+|`CUDNN_REDUCE_TENSOR_MIN`|6.0.0|9.0.0| | |`HIPDNN_REDUCE_TENSOR_MIN`| | | | | |`MIOPEN_REDUCE_TENSOR_MIN`| | | | | |
+|`CUDNN_REDUCE_TENSOR_MUL`|6.0.0|9.0.0| | |`HIPDNN_REDUCE_TENSOR_MUL`| | | | | |`MIOPEN_REDUCE_TENSOR_MUL`| | | | | |
+|`CUDNN_REDUCE_TENSOR_MUL_NO_ZEROS`|7.0.5|9.0.0| | |`HIPDNN_REDUCE_TENSOR_MUL_NO_ZEROS`| | | | | | | | | | | |
+|`CUDNN_REDUCE_TENSOR_NORM1`|6.0.0|9.0.0| | |`HIPDNN_REDUCE_TENSOR_NORM1`| | | | | |`MIOPEN_REDUCE_TENSOR_NORM1`| | | | | |
+|`CUDNN_REDUCE_TENSOR_NORM2`|6.0.0|9.0.0| | |`HIPDNN_REDUCE_TENSOR_NORM2`| | | | | |`MIOPEN_REDUCE_TENSOR_NORM2`| | | | | |
 |`CUDNN_REDUCE_TENSOR_NO_INDICES`|6.0.0| | | |`HIPDNN_REDUCE_TENSOR_NO_INDICES`| | | | | |`MIOPEN_REDUCE_TENSOR_NO_INDICES`| | | | | |
 |`CUDNN_RESAMPLE_AVGPOOL`|8.3.0| | | | | | | | | | | | | | | |
 |`CUDNN_RESAMPLE_AVGPOOL_EXCLUDE_PADDING`|8.6.0| | | | | | | | | | | | | | | |
@@ -733,7 +733,7 @@
 |`CUDNN_WGRAD_MODE_SET`|7.5.0| | | | | | | | | | | | | | | |
 |`CUDNN_ZERO_PAD`|8.3.0| | | | | | | | | | | | | | | |
 |`cudnnActivationDescriptor_t`|4.0.0| | | |`hipdnnActivationDescriptor_t`| | | | | |`miopenActivationDescriptor_t`| | | | | |
-|`cudnnActivationMode_t`|1.0.0| | | |`hipdnnActivationMode_t`| | | | | |`miopenActivationMode_t`| | | | | |
+|`cudnnActivationMode_t`|1.0.0|9.0.0| | |`hipdnnActivationMode_t`| | | | | |`miopenActivationMode_t`| | | | | |
 |`cudnnActivationStruct`|4.0.0| | | | | | | | | | | | | | | |
 |`cudnnAlgorithmDescriptor_t`|7.1.3| | | | | | | | | | | | | | | |
 |`cudnnAlgorithmPerformanceStruct`|7.1.3| | | | | | | | | | | | | | | |
@@ -840,12 +840,12 @@
 |`cudnnRNNStruct`|5.0.0| | | | | | | | | | | | | | | |
 |`cudnnReduceTensorDescriptor_t`|6.0.0| | | |`hipdnnReduceTensorDescriptor_t`| | | | | |`miopenReduceTensorDescriptor_t`| | | | | |
 |`cudnnReduceTensorIndices_t`|6.0.0| | | |`hipdnnReduceTensorIndices_t`| | | | | |`miopenReduceTensorIndices_t`| | | | | |
-|`cudnnReduceTensorOp_t`|6.0.0| | | |`hipdnnReduceTensorOp_t`| | | | | |`miopenReduceTensorOp_t`| | | | | |
+|`cudnnReduceTensorOp_t`|6.0.0|9.0.0| | |`hipdnnReduceTensorOp_t`| | | | | |`miopenReduceTensorOp_t`| | | | | |
 |`cudnnReduceTensorStruct`|6.0.0| | | | | | | | | | | | | | | |
 |`cudnnReorderType_t`|7.6.0|9.0.0| | | | | | | | | | | | | | |
 |`cudnnResampleMode_t`|8.3.0| | | | | | | | | | | | | | | |
 |`cudnnRngDistribution_t`|8.7.0| | | | | | | | | | | | | | | |
-|`cudnnRuntimeTag_t`|7.0.5| | | | | | | | | | | | | | | |
+|`cudnnRuntimeTag_t`|7.0.5|9.0.0| | | | | | | | | | | | | | |
 |`cudnnSamplerType_t`|5.0.0| | | | | | | | | | | | | | | |
 |`cudnnSeqDataAxis_t`|7.5.0| | | | | | | | | | | | | | | |
 |`cudnnSeqDataDescriptor_t`|7.5.0|9.0.0| | | | | | | | | | | | | | |
@@ -1009,6 +1009,7 @@
 |`cudnnGetFusedOpsConstParamPackAttribute`|7.6.0|9.0.0| | | | | | | | | | | | | | |
 |`cudnnGetFusedOpsVariantParamPackAttribute`|7.6.0|9.0.0| | | | | | | | | | | | | | |
 |`cudnnGetLRNDescriptor`|3.0.0| | | |`hipdnnGetLRNDescriptor`| | | | | |`miopenGetLRNDescriptor`| | | | | |
+|`cudnnGetLastErrorString`|9.0.0| | | | | | | | | | | | | | | |
 |`cudnnGetMaxDeviceVersion`|8.6.0| | | | | | | | | | | | | | | |
 |`cudnnGetMultiHeadAttnBuffers`|7.5.0|9.0.0| | | | | | | | | | | | | | |
 |`cudnnGetMultiHeadAttnWeights`|7.5.0|9.0.0| | | | | | | | | | | | | | |
@@ -1067,7 +1068,7 @@
 |`cudnnOpsTrainVersionCheck`|8.0.1| | | | | | | | | | | | | | | |
 |`cudnnPoolingBackward`|1.0.0| | | |`hipdnnPoolingBackward`| | | | | | | | | | | |
 |`cudnnPoolingForward`|1.0.0| | | |`hipdnnPoolingForward`| | | | | | | | | | | |
-|`cudnnQueryRuntimeError`|7.0.5| | | | | | | | | | | | | | | |
+|`cudnnQueryRuntimeError`|7.0.5|9.0.0| | | | | | | | | | | | | | |
 |`cudnnRNNBackwardData`|5.0.0|8.0.2| |9.0.0|`hipdnnRNNBackwardData`| | | | | |`miopenRNNBackwardData`| | | | | |
 |`cudnnRNNBackwardDataEx`|7.2.1|8.0.2| |9.0.0| | | | | | | | | | | | |
 |`cudnnRNNBackwardData_v8`|8.0.2| | | | | | | | | | | | | | | |
