@@ -47,6 +47,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_FUNCTION_MAP {
   {"cudnnCnnTrainVersionCheck",                                {"hipdnnCnnTrainVersionCheck",                                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
   {"cudnnOpsInferVersionCheck",                                {"hipdnnOpsInferVersionCheck",                                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
   {"cudnnOpsTrainVersionCheck",                                {"hipdnnOpsTrainVersionCheck",                                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
+  {"cudnnGraphVersionCheck",                                   {"hipdnnGraphVersionCheck",                                "",                                                                      CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
 
   // cuDNN Tensor functions
   {"cudnnCreateTensorDescriptor",                              {"hipdnnCreateTensorDescriptor",                              "miopenCreateTensorDescriptor",                                       CONV_LIB_FUNC, API_DNN, 2}},
@@ -623,6 +624,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_FUNCTION_VER_MAP {
   {"cudnnSetCTCLossDescriptor_v9",                             {CUDNN_900, CUDA_0,    CUDA_0}},
   {"cudnnGetCTCLossDescriptor_v9",                             {CUDNN_900, CUDA_0,    CUDA_0}},
   {"cudnnGetLastErrorString",                                  {CUDNN_900, CUDA_0,    CUDA_0}},
+  {"cudnnGraphVersionCheck",                                   {CUDNN_900, CUDA_0,    CUDA_0}},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_DNN_FUNCTION_VER_MAP {

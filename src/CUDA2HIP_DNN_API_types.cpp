@@ -295,8 +295,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"CUDNN_WGRAD_MODE_ADD",                                           {"HIPDNN_WGRAD_MODE_ADD",                                           "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 0
   {"CUDNN_WGRAD_MODE_SET",                                           {"HIPDNN_WGRAD_MODE_SET",                                           "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 1
   {"cudnnReorderType_t",                                             {"hipdnnReorderType_t",                                             "",                                                                CONV_TYPE, API_DNN, 1, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"CUDNN_DEFAULT_REORDER",                                          {"HIPDNN_DEFAULT_REORDER",                                          "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 0
-  {"CUDNN_NO_REORDER",                                               {"HIPDNN_NO_REORDER",                                               "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 1
+  {"CUDNN_DEFAULT_REORDER",                                          {"HIPDNN_DEFAULT_REORDER",                                          "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED | CUDA_DEPRECATED}},    // 0
+  {"CUDNN_NO_REORDER",                                               {"HIPDNN_NO_REORDER",                                               "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED | CUDA_DEPRECATED}},    // 1
   {"cudnnLossNormalizationMode_t",                                   {"hipdnnLossNormalizationMode_t",                                   "",                                                                CONV_TYPE, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_LOSS_NORMALIZATION_NONE",                                  {"HIPDNN_LOSS_NORMALIZATION_NONE",                                  "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 0
   {"CUDNN_LOSS_NORMALIZATION_SOFTMAX",                               {"HIPDNN_LOSS_NORMALIZATION_SOFTMAX",                               "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 1
@@ -560,7 +560,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"CUDNN_ATTR_OPERATION_MATMUL_BDESC",                              {"HIPDNN_ATTR_OPERATION_MATMUL_BDESC",                              "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 1521
   {"CUDNN_ATTR_OPERATION_MATMUL_CDESC",                              {"HIPDNN_ATTR_OPERATION_MATMUL_CDESC",                              "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 1522
   {"CUDNN_ATTR_OPERATION_MATMUL_DESC",                               {"HIPDNN_ATTR_OPERATION_MATMUL_DESC",                               "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 1523
-  {"CUDNN_ATTR_OPERATION_MATMUL_IRREGULARLY_STRIDED_BATCH_COUNT",    {"HIPDNN_ATTR_OPERATION_MATMUL_IRREGULARLY_STRIDED_BATCH_COUNT",    "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 1524
+  {"CUDNN_ATTR_OPERATION_MATMUL_IRREGULARLY_STRIDED_BATCH_COUNT",    {"HIPDNN_ATTR_OPERATION_MATMUL_IRREGULARLY_STRIDED_BATCH_COUNT",    "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED | CUDA_DEPRECATED}},    // 1524
   {"CUDNN_ATTR_OPERATION_MATMUL_GEMM_M_OVERRIDE_DESC",               {"HIPDNN_ATTR_OPERATION_MATMUL_GEMM_M_OVERRIDE_DESC",               "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 1525
   {"CUDNN_ATTR_OPERATION_MATMUL_GEMM_N_OVERRIDE_DESC",               {"HIPDNN_ATTR_OPERATION_MATMUL_GEMM_N_OVERRIDE_DESC",               "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 1526
   {"CUDNN_ATTR_OPERATION_MATMUL_GEMM_K_OVERRIDE_DESC",               {"HIPDNN_ATTR_OPERATION_MATMUL_GEMM_K_OVERRIDE_DESC",               "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 1527
@@ -592,14 +592,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"CUDNN_ATTR_OPERATION_RESAMPLE_FWD_XDESC",                        {"HIPDNN_ATTR_OPERATION_RESAMPLE_FWD_XDESC",                        "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 1710
   {"CUDNN_ATTR_OPERATION_RESAMPLE_FWD_YDESC",                        {"HIPDNN_ATTR_OPERATION_RESAMPLE_FWD_YDESC",                        "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 1711
   {"CUDNN_ATTR_OPERATION_RESAMPLE_FWD_IDXDESC",                      {"HIPDNN_ATTR_OPERATION_RESAMPLE_FWD_IDXDESC",                      "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 1712
-  {"CUDNN_ATTR_OPERATION_RESAMPLE_FWD_ALPHA",                        {"HIPDNN_ATTR_OPERATION_RESAMPLE_FWD_ALPHA",                        "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 1713
-  {"CUDNN_ATTR_OPERATION_RESAMPLE_FWD_BETA",                         {"HIPDNN_ATTR_OPERATION_RESAMPLE_FWD_BETA",                         "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 1714
+  {"CUDNN_ATTR_OPERATION_RESAMPLE_FWD_ALPHA",                        {"HIPDNN_ATTR_OPERATION_RESAMPLE_FWD_ALPHA",                        "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED | CUDA_DEPRECATED}},    // 1713
+  {"CUDNN_ATTR_OPERATION_RESAMPLE_FWD_BETA",                         {"HIPDNN_ATTR_OPERATION_RESAMPLE_FWD_BETA",                         "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED | CUDA_DEPRECATED}},    // 1714
   {"CUDNN_ATTR_OPERATION_RESAMPLE_FWD_DESC",                         {"HIPDNN_ATTR_OPERATION_RESAMPLE_FWD_DESC",                         "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 1716
   {"CUDNN_ATTR_OPERATION_RESAMPLE_BWD_DXDESC",                       {"HIPDNN_ATTR_OPERATION_RESAMPLE_BWD_DXDESC",                       "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 1720
   {"CUDNN_ATTR_OPERATION_RESAMPLE_BWD_DYDESC",                       {"HIPDNN_ATTR_OPERATION_RESAMPLE_BWD_DYDESC",                       "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 1721
   {"CUDNN_ATTR_OPERATION_RESAMPLE_BWD_IDXDESC",                      {"HIPDNN_ATTR_OPERATION_RESAMPLE_BWD_IDXDESC",                      "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 1722
-  {"CUDNN_ATTR_OPERATION_RESAMPLE_BWD_ALPHA",                        {"HIPDNN_ATTR_OPERATION_RESAMPLE_BWD_ALPHA",                        "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 1723
-  {"CUDNN_ATTR_OPERATION_RESAMPLE_BWD_BETA",                         {"HIPDNN_ATTR_OPERATION_RESAMPLE_BWD_BETA",                         "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 1724
+  {"CUDNN_ATTR_OPERATION_RESAMPLE_BWD_ALPHA",                        {"HIPDNN_ATTR_OPERATION_RESAMPLE_BWD_ALPHA",                        "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED | CUDA_DEPRECATED}},    // 1723
+  {"CUDNN_ATTR_OPERATION_RESAMPLE_BWD_BETA",                         {"HIPDNN_ATTR_OPERATION_RESAMPLE_BWD_BETA",                         "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED | CUDA_DEPRECATED}},    // 1724
   {"CUDNN_ATTR_OPERATION_RESAMPLE_BWD_DESC",                         {"HIPDNN_ATTR_OPERATION_RESAMPLE_BWD_DESC",                         "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 1725
   {"CUDNN_ATTR_OPERATION_RESAMPLE_BWD_XDESC",                        {"HIPDNN_ATTR_OPERATION_RESAMPLE_BWD_XDESC",                        "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 1726
   {"CUDNN_ATTR_OPERATION_RESAMPLE_BWD_YDESC",                        {"HIPDNN_ATTR_OPERATION_RESAMPLE_BWD_YDESC",                        "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 1727
@@ -661,7 +661,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"CUDNN_TYPE_CONVOLUTION_MODE",                                    {"HIPDNN_TYPE_CONVOLUTION_MODE",                                    "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_TYPE_HEUR_MODE",                                           {"HIPDNN_TYPE_HEUR_MODE",                                           "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_TYPE_KNOB_TYPE",                                           {"HIPDNN_TYPE_KNOB_TYPE",                                           "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
-  {"CUDNN_TYPE_NAN_PROPOGATION",                                     {"HIPDNN_TYPE_NAN_PROPOGATION",                                     "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_TYPE_NAN_PROPOGATION",                                     {"HIPDNN_TYPE_NAN_PROPOGATION",                                     "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED | CUDA_DEPRECATED}},
   {"CUDNN_TYPE_NUMERICAL_NOTE",                                      {"HIPDNN_TYPE_NUMERICAL_NOTE",                                      "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_TYPE_LAYOUT_TYPE",                                         {"HIPDNN_TYPE_LAYOUT_TYPE",                                         "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_TYPE_ATTRIB_NAME",                                         {"HIPDNN_TYPE_ATTRIB_NAME",                                         "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
@@ -734,39 +734,39 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"CUDNN_LAYOUT_TYPE_PREFERRED_PAD8CK",                             {"HIPDNN_LAYOUT_TYPE_PREFERRED_PAD8CK",                             "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_LAYOUT_TYPE_COUNT",                                        {"HIPDNN_LAYOUT_TYPE_COUNT",                                        "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
   {"cudnnBackendKnobType_t",                                         {"hipdnnBackendKnobType_t",                                         "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
-  {"CUDNN_KNOB_TYPE_SPLIT_K",                                        {"HIPDNN_KNOB_TYPE_SPLIT_K",                                        "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_KNOB_TYPE_SPLIT_K",                                        {"HIPDNN_KNOB_TYPE_SPLIT_K",                                        "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED | CUDA_DEPRECATED}},
   {"CUDNN_KNOB_TYPE_SWIZZLE",                                        {"HIPDNN_KNOB_TYPE_SWIZZLE",                                        "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_KNOB_TYPE_TILE_SIZE",                                      {"HIPDNN_KNOB_TYPE_TILE_SIZE",                                      "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
-  {"CUDNN_KNOB_TYPE_USE_TEX",                                        {"HIPDNN_KNOB_TYPE_USE_TEX",                                        "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_KNOB_TYPE_USE_TEX",                                        {"HIPDNN_KNOB_TYPE_USE_TEX",                                        "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED | CUDA_DEPRECATED}},
   {"CUDNN_KNOB_TYPE_EDGE",                                           {"HIPDNN_KNOB_TYPE_EDGE",                                           "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
-  {"CUDNN_KNOB_TYPE_KBLOCK",                                         {"HIPDNN_KNOB_TYPE_KBLOCK",                                         "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
-  {"CUDNN_KNOB_TYPE_LDGA",                                           {"HIPDNN_KNOB_TYPE_LDGA",                                           "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
-  {"CUDNN_KNOB_TYPE_LDGB",                                           {"HIPDNN_KNOB_TYPE_LDGB",                                           "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
-  {"CUDNN_KNOB_TYPE_CHUNK_K",                                        {"HIPDNN_KNOB_TYPE_CHUNK_K",                                        "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
-  {"CUDNN_KNOB_TYPE_SPLIT_H",                                        {"HIPDNN_KNOB_TYPE_SPLIT_H",                                        "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
-  {"CUDNN_KNOB_TYPE_WINO_TILE",                                      {"HIPDNN_KNOB_TYPE_WINO_TILE",                                      "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_KNOB_TYPE_KBLOCK",                                         {"HIPDNN_KNOB_TYPE_KBLOCK",                                         "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED | CUDA_DEPRECATED}},
+  {"CUDNN_KNOB_TYPE_LDGA",                                           {"HIPDNN_KNOB_TYPE_LDGA",                                           "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED | CUDA_DEPRECATED}},
+  {"CUDNN_KNOB_TYPE_LDGB",                                           {"HIPDNN_KNOB_TYPE_LDGB",                                           "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED | CUDA_DEPRECATED}},
+  {"CUDNN_KNOB_TYPE_CHUNK_K",                                        {"HIPDNN_KNOB_TYPE_CHUNK_K",                                        "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED | CUDA_DEPRECATED}},
+  {"CUDNN_KNOB_TYPE_SPLIT_H",                                        {"HIPDNN_KNOB_TYPE_SPLIT_H",                                        "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED | CUDA_DEPRECATED}},
+  {"CUDNN_KNOB_TYPE_WINO_TILE",                                      {"HIPDNN_KNOB_TYPE_WINO_TILE",                                      "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED | CUDA_DEPRECATED}},
   {"CUDNN_KNOB_TYPE_MULTIPLY",                                       {"HIPDNN_KNOB_TYPE_MULTIPLY",                                       "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_KNOB_TYPE_SPLIT_K_BUF",                                    {"HIPDNN_KNOB_TYPE_SPLIT_K_BUF",                                    "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_KNOB_TYPE_TILEK",                                          {"HIPDNN_KNOB_TYPE_TILEK",                                          "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_KNOB_TYPE_STAGES",                                         {"HIPDNN_KNOB_TYPE_STAGES",                                         "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_KNOB_TYPE_REDUCTION_MODE",                                 {"HIPDNN_KNOB_TYPE_REDUCTION_MODE",                                 "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
-  {"CUDNN_KNOB_TYPE_CTA_SPLIT_K_MODE",                               {"HIPDNN_KNOB_TYPE_CTA_SPLIT_K_MODE",                               "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_KNOB_TYPE_CTA_SPLIT_K_MODE",                               {"HIPDNN_KNOB_TYPE_CTA_SPLIT_K_MODE",                               "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED | CUDA_DEPRECATED}},
   {"CUDNN_KNOB_TYPE_SPLIT_K_SLC",                                    {"HIPDNN_KNOB_TYPE_SPLIT_K_SLC",                                    "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
-  {"CUDNN_KNOB_TYPE_IDX_MODE",                                       {"HIPDNN_KNOB_TYPE_IDX_MODE",                                       "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
-  {"CUDNN_KNOB_TYPE_SLICED",                                         {"HIPDNN_KNOB_TYPE_SLICED",                                         "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
-  {"CUDNN_KNOB_TYPE_SPLIT_RS",                                       {"HIPDNN_KNOB_TYPE_SPLIT_RS",                                       "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
-  {"CUDNN_KNOB_TYPE_SINGLEBUFFER",                                   {"HIPDNN_KNOB_TYPE_SINGLEBUFFER",                                   "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
-  {"CUDNN_KNOB_TYPE_LDGC",                                           {"HIPDNN_KNOB_TYPE_LDGC",                                           "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_KNOB_TYPE_IDX_MODE",                                       {"HIPDNN_KNOB_TYPE_IDX_MODE",                                       "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED | CUDA_DEPRECATED}},
+  {"CUDNN_KNOB_TYPE_SLICED",                                         {"HIPDNN_KNOB_TYPE_SLICED",                                         "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED | CUDA_DEPRECATED}},
+  {"CUDNN_KNOB_TYPE_SPLIT_RS",                                       {"HIPDNN_KNOB_TYPE_SPLIT_RS",                                       "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED | CUDA_DEPRECATED}},
+  {"CUDNN_KNOB_TYPE_SINGLEBUFFER",                                   {"HIPDNN_KNOB_TYPE_SINGLEBUFFER",                                   "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED | CUDA_DEPRECATED}},
+  {"CUDNN_KNOB_TYPE_LDGC",                                           {"HIPDNN_KNOB_TYPE_LDGC",                                           "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED | CUDA_DEPRECATED}},
   {"CUDNN_KNOB_TYPE_SPECFILT",                                       {"HIPDNN_KNOB_TYPE_SPECFILT",                                       "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_KNOB_TYPE_KERNEL_CFG",                                     {"HIPDNN_KNOB_TYPE_KERNEL_CFG",                                     "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_KNOB_TYPE_WORKSPACE",                                      {"HIPDNN_KNOB_TYPE_WORKSPACE",                                      "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
-  {"CUDNN_KNOB_TYPE_TILE_CGA",                                       {"HIPDNN_KNOB_TYPE_TILE_CGA",                                       "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_KNOB_TYPE_TILE_CGA",                                       {"HIPDNN_KNOB_TYPE_TILE_CGA",                                       "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED | CUDA_DEPRECATED}},
   {"CUDNN_KNOB_TYPE_TILE_CGA_M",                                     {"HIPDNN_KNOB_TYPE_TILE_CGA_M",                                     "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_KNOB_TYPE_TILE_CGA_N",                                     {"HIPDNN_KNOB_TYPE_TILE_CGA_N",                                     "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_KNOB_TYPE_BLOCK_SIZE",                                     {"HIPDNN_KNOB_TYPE_BLOCK_SIZE",                                     "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_KNOB_TYPE_OCCUPANCY",                                      {"HIPDNN_KNOB_TYPE_OCCUPANCY",                                      "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_KNOB_TYPE_ARRAY_SIZE_PER_THREAD",                          {"HIPDNN_KNOB_TYPE_ARRAY_SIZE_PER_THREAD",                          "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
-  {"CUDNN_KNOB_TYPE_NUM_C_PER_BLOCK",                                {"HIPDNN_KNOB_TYPE_NUM_C_PER_BLOCK",                                "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_KNOB_TYPE_NUM_C_PER_BLOCK",                                {"HIPDNN_KNOB_TYPE_NUM_C_PER_BLOCK",                                "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED | CUDA_DEPRECATED}},
   {"CUDNN_KNOB_TYPE_SPLIT_COLS",                                     {"HIPDNN_KNOB_TYPE_SPLIT_COLS",                                     "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_KNOB_TYPE_TILE_ROWS",                                      {"HIPDNN_KNOB_TYPE_TILE_ROWS",                                      "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_KNOB_TYPE_TILE_COLS",                                      {"HIPDNN_KNOB_TYPE_TILE_COLS",                                      "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
@@ -1070,7 +1070,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_TYPE_NAME_VER_MAP {
   {"CUDNN_ATTR_OPERATION_MATMUL_BDESC",                              {CUDNN_810, CUDA_0,   CUDA_0  }},
   {"CUDNN_ATTR_OPERATION_MATMUL_CDESC",                              {CUDNN_810, CUDA_0,   CUDA_0  }},
   {"CUDNN_ATTR_OPERATION_MATMUL_DESC",                               {CUDNN_810, CUDA_0,   CUDA_0  }},
-  {"CUDNN_ATTR_OPERATION_MATMUL_IRREGULARLY_STRIDED_BATCH_COUNT",    {CUDNN_810, CUDA_0,   CUDA_0  }},
+  {"CUDNN_ATTR_OPERATION_MATMUL_IRREGULARLY_STRIDED_BATCH_COUNT",    {CUDNN_810, CUDNN_900,CUDA_0  }},
   {"CUDNN_ATTR_REDUCTION_OPERATOR",                                  {CUDNN_810, CUDA_0,   CUDA_0  }},
   {"CUDNN_ATTR_REDUCTION_COMP_TYPE",                                 {CUDNN_810, CUDA_0,   CUDA_0  }},
   {"CUDNN_ATTR_OPERATION_REDUCTION_XDESC",                           {CUDNN_810, CUDA_0,   CUDA_0  }},
@@ -1087,7 +1087,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_TYPE_NAME_VER_MAP {
   {"CUDNN_TYPE_CONVOLUTION_MODE",                                    {CUDNN_801, CUDA_0,   CUDA_0  }},
   {"CUDNN_TYPE_HEUR_MODE",                                           {CUDNN_801, CUDA_0,   CUDA_0  }},
   {"CUDNN_TYPE_KNOB_TYPE",                                           {CUDNN_801, CUDA_0,   CUDA_0  }},
-  {"CUDNN_TYPE_NAN_PROPOGATION",                                     {CUDNN_801, CUDA_0,   CUDA_0  }},
+  {"CUDNN_TYPE_NAN_PROPOGATION",                                     {CUDNN_801, CUDNN_900,CUDA_0  }},
   {"CUDNN_TYPE_NUMERICAL_NOTE",                                      {CUDNN_801, CUDA_0,   CUDA_0  }},
   {"CUDNN_TYPE_LAYOUT_TYPE",                                         {CUDNN_802, CUDA_0,   CUDA_0  }},
   {"CUDNN_TYPE_ATTRIB_NAME",                                         {CUDNN_801, CUDA_0,   CUDA_0  }},
@@ -1135,29 +1135,29 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_TYPE_NAME_VER_MAP {
   {"CUDNN_LAYOUT_TYPE_PREFERRED_PAD8CK",                             {CUDNN_802, CUDA_0,   CUDA_0  }},
   {"CUDNN_LAYOUT_TYPE_COUNT",                                        {CUDNN_802, CUDA_0,   CUDA_0  }},
   {"cudnnBackendKnobType_t",                                         {CUDNN_801, CUDA_0,   CUDA_0  }},
-  {"CUDNN_KNOB_TYPE_SPLIT_K",                                        {CUDNN_801, CUDA_0,   CUDA_0  }},
+  {"CUDNN_KNOB_TYPE_SPLIT_K",                                        {CUDNN_801, CUDNN_900,CUDA_0  }},
   {"CUDNN_KNOB_TYPE_SWIZZLE",                                        {CUDNN_801, CUDA_0,   CUDA_0  }},
   {"CUDNN_KNOB_TYPE_TILE_SIZE",                                      {CUDNN_801, CUDA_0,   CUDA_0  }},
-  {"CUDNN_KNOB_TYPE_USE_TEX",                                        {CUDNN_801, CUDA_0,   CUDA_0  }},
+  {"CUDNN_KNOB_TYPE_USE_TEX",                                        {CUDNN_801, CUDNN_900,CUDA_0  }},
   {"CUDNN_KNOB_TYPE_EDGE",                                           {CUDNN_801, CUDA_0,   CUDA_0  }},
-  {"CUDNN_KNOB_TYPE_KBLOCK",                                         {CUDNN_801, CUDA_0,   CUDA_0  }},
-  {"CUDNN_KNOB_TYPE_LDGA",                                           {CUDNN_801, CUDA_0,   CUDA_0  }},
-  {"CUDNN_KNOB_TYPE_LDGB",                                           {CUDNN_801, CUDA_0,   CUDA_0  }},
-  {"CUDNN_KNOB_TYPE_CHUNK_K",                                        {CUDNN_801, CUDA_0,   CUDA_0  }},
-  {"CUDNN_KNOB_TYPE_SPLIT_H",                                        {CUDNN_801, CUDA_0,   CUDA_0  }},
-  {"CUDNN_KNOB_TYPE_WINO_TILE",                                      {CUDNN_801, CUDA_0,   CUDA_0  }},
+  {"CUDNN_KNOB_TYPE_KBLOCK",                                         {CUDNN_801, CUDNN_900,CUDA_0  }},
+  {"CUDNN_KNOB_TYPE_LDGA",                                           {CUDNN_801, CUDNN_900,CUDA_0  }},
+  {"CUDNN_KNOB_TYPE_LDGB",                                           {CUDNN_801, CUDNN_900,CUDA_0  }},
+  {"CUDNN_KNOB_TYPE_CHUNK_K",                                        {CUDNN_801, CUDNN_900,CUDA_0  }},
+  {"CUDNN_KNOB_TYPE_SPLIT_H",                                        {CUDNN_801, CUDNN_900,CUDA_0  }},
+  {"CUDNN_KNOB_TYPE_WINO_TILE",                                      {CUDNN_801, CUDNN_900,CUDA_0  }},
   {"CUDNN_KNOB_TYPE_MULTIPLY",                                       {CUDNN_801, CUDA_0,   CUDA_0  }},
   {"CUDNN_KNOB_TYPE_SPLIT_K_BUF",                                    {CUDNN_801, CUDA_0,   CUDA_0  }},
   {"CUDNN_KNOB_TYPE_TILEK",                                          {CUDNN_801, CUDA_0,   CUDA_0  }},
   {"CUDNN_KNOB_TYPE_STAGES",                                         {CUDNN_801, CUDA_0,   CUDA_0  }},
   {"CUDNN_KNOB_TYPE_REDUCTION_MODE",                                 {CUDNN_801, CUDA_0,   CUDA_0  }},
-  {"CUDNN_KNOB_TYPE_CTA_SPLIT_K_MODE",                               {CUDNN_801, CUDA_0,   CUDA_0  }},
+  {"CUDNN_KNOB_TYPE_CTA_SPLIT_K_MODE",                               {CUDNN_801, CUDNN_900,CUDA_0  }},
   {"CUDNN_KNOB_TYPE_SPLIT_K_SLC",                                    {CUDNN_801, CUDA_0,   CUDA_0  }},
-  {"CUDNN_KNOB_TYPE_IDX_MODE",                                       {CUDNN_801, CUDA_0,   CUDA_0  }},
-  {"CUDNN_KNOB_TYPE_SLICED",                                         {CUDNN_801, CUDA_0,   CUDA_0  }},
-  {"CUDNN_KNOB_TYPE_SPLIT_RS",                                       {CUDNN_801, CUDA_0,   CUDA_0  }},
-  {"CUDNN_KNOB_TYPE_SINGLEBUFFER",                                   {CUDNN_801, CUDA_0,   CUDA_0  }},
-  {"CUDNN_KNOB_TYPE_LDGC",                                           {CUDNN_801, CUDA_0,   CUDA_0  }},
+  {"CUDNN_KNOB_TYPE_IDX_MODE",                                       {CUDNN_801, CUDNN_900,CUDA_0  }},
+  {"CUDNN_KNOB_TYPE_SLICED",                                         {CUDNN_801, CUDNN_900,CUDA_0  }},
+  {"CUDNN_KNOB_TYPE_SPLIT_RS",                                       {CUDNN_801, CUDNN_900,CUDA_0  }},
+  {"CUDNN_KNOB_TYPE_SINGLEBUFFER",                                   {CUDNN_801, CUDNN_900,CUDA_0  }},
+  {"CUDNN_KNOB_TYPE_LDGC",                                           {CUDNN_801, CUDNN_900,CUDA_0  }},
   {"CUDNN_KNOB_TYPE_SPECFILT",                                       {CUDNN_801, CUDA_0,   CUDA_0  }},
   {"CUDNN_KNOB_TYPE_KERNEL_CFG",                                     {CUDNN_810, CUDA_0,   CUDA_0  }},
   {"CUDNN_KNOB_TYPE_COUNTS",                                         {CUDNN_801, CUDA_0,   CUDA_0  }},
@@ -1167,8 +1167,8 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_TYPE_NAME_VER_MAP {
   {"CUDNN_HEUR_MODES_COUNT",                                         {CUDNN_801, CUDA_0,   CUDA_0  }},
   {"cudnnConvolutionFwdAlgoPerf_t",                                  {CUDNN_30,  CUDNN_900,CUDA_0  }},
   {"cudnnReorderType_t",                                             {CUDNN_760, CUDNN_900,CUDA_0  }},
-  {"CUDNN_DEFAULT_REORDER",                                          {CUDNN_760, CUDA_0,   CUDA_0  }},
-  {"CUDNN_NO_REORDER",                                               {CUDNN_760, CUDA_0,   CUDA_0  }},
+  {"CUDNN_DEFAULT_REORDER",                                          {CUDNN_760, CUDNN_900,CUDA_0  }},
+  {"CUDNN_NO_REORDER",                                               {CUDNN_760, CUDNN_900,CUDA_0  }},
   {"cudnnConvolutionMode_t",                                         {CUDNN_10,  CUDNN_900,CUDA_0  }},
   {"CUDNN_CONVOLUTION",                                              {CUDNN_10,  CUDNN_900,CUDA_0  }},
   {"CUDNN_CROSS_CORRELATION",                                        {CUDNN_10,  CUDNN_900,CUDA_0  }},
@@ -1591,14 +1591,14 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_TYPE_NAME_VER_MAP {
   {"CUDNN_ATTR_OPERATION_RESAMPLE_FWD_XDESC",                        {CUDNN_830, CUDA_0,   CUDA_0  }},
   {"CUDNN_ATTR_OPERATION_RESAMPLE_FWD_YDESC",                        {CUDNN_830, CUDA_0,   CUDA_0  }},
   {"CUDNN_ATTR_OPERATION_RESAMPLE_FWD_IDXDESC",                      {CUDNN_830, CUDA_0,   CUDA_0  }},
-  {"CUDNN_ATTR_OPERATION_RESAMPLE_FWD_ALPHA",                        {CUDNN_830, CUDA_0,   CUDA_0  }},
-  {"CUDNN_ATTR_OPERATION_RESAMPLE_FWD_BETA",                         {CUDNN_830, CUDA_0,   CUDA_0  }},
+  {"CUDNN_ATTR_OPERATION_RESAMPLE_FWD_ALPHA",                        {CUDNN_830, CUDNN_900,CUDA_0  }},
+  {"CUDNN_ATTR_OPERATION_RESAMPLE_FWD_BETA",                         {CUDNN_830, CUDNN_900,CUDA_0  }},
   {"CUDNN_ATTR_OPERATION_RESAMPLE_FWD_DESC",                         {CUDNN_830, CUDA_0,   CUDA_0  }},
   {"CUDNN_ATTR_OPERATION_RESAMPLE_BWD_DXDESC",                       {CUDNN_830, CUDA_0,   CUDA_0  }},
   {"CUDNN_ATTR_OPERATION_RESAMPLE_BWD_DYDESC",                       {CUDNN_830, CUDA_0,   CUDA_0  }},
   {"CUDNN_ATTR_OPERATION_RESAMPLE_BWD_IDXDESC",                      {CUDNN_830, CUDA_0,   CUDA_0  }},
-  {"CUDNN_ATTR_OPERATION_RESAMPLE_BWD_ALPHA",                        {CUDNN_830, CUDA_0,   CUDA_0  }},
-  {"CUDNN_ATTR_OPERATION_RESAMPLE_BWD_BETA",                         {CUDNN_830, CUDA_0,   CUDA_0  }},
+  {"CUDNN_ATTR_OPERATION_RESAMPLE_BWD_ALPHA",                        {CUDNN_830, CUDNN_900,CUDA_0  }},
+  {"CUDNN_ATTR_OPERATION_RESAMPLE_BWD_BETA",                         {CUDNN_830, CUDNN_900,CUDA_0  }},
   {"CUDNN_ATTR_OPERATION_RESAMPLE_BWD_DESC",                         {CUDNN_830, CUDA_0,   CUDA_0  }},
   {"CUDNN_ATTR_OPERATION_CONCAT_AXIS",                               {CUDNN_850, CUDA_0,   CUDA_0  }},
   {"CUDNN_ATTR_OPERATION_CONCAT_INPUT_DESCS",                        {CUDNN_850, CUDA_0,   CUDA_0  }},
@@ -1676,7 +1676,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_TYPE_NAME_VER_MAP {
   {"CUDNN_NORM_FWD_TRAINING",                                        {CUDNN_850, CUDA_0,   CUDA_0  }},
   {"CUDNN_RESAMPLE_AVGPOOL_INCLUDE_PADDING",                         {CUDNN_860, CUDA_0,   CUDA_0  }},
   {"CUDNN_RESAMPLE_AVGPOOL_EXCLUDE_PADDING",                         {CUDNN_860, CUDA_0,   CUDA_0  }},
-  {"CUDNN_KNOB_TYPE_TILE_CGA",                                       {CUDNN_860, CUDA_0,   CUDA_0  }},
+  {"CUDNN_KNOB_TYPE_TILE_CGA",                                       {CUDNN_860, CUDNN_900,CUDA_0  }},
   {"CUDNN_KNOB_TYPE_TILE_CGA_M",                                     {CUDNN_860, CUDA_0,   CUDA_0  }},
   {"CUDNN_KNOB_TYPE_TILE_CGA_N",                                     {CUDNN_860, CUDA_0,   CUDA_0  }},
   {"CUDNN_DATA_FP8_E4M3",                                            {CUDNN_860, CUDA_0,   CUDA_0  }},
@@ -1714,7 +1714,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_TYPE_NAME_VER_MAP {
   {"CUDNN_ATTR_MATMUL_PADDING_VALUE",                                {CUDNN_890, CUDA_0,   CUDA_0  }},
   {"CUDNN_KNOB_TYPE_OCCUPANCY",                                      {CUDNN_890, CUDA_0,   CUDA_0  }},
   {"CUDNN_KNOB_TYPE_ARRAY_SIZE_PER_THREAD",                          {CUDNN_890, CUDA_0,   CUDA_0  }},
-  {"CUDNN_KNOB_TYPE_NUM_C_PER_BLOCK",                                {CUDNN_890, CUDA_0,   CUDA_0  }},
+  {"CUDNN_KNOB_TYPE_NUM_C_PER_BLOCK",                                {CUDNN_890, CUDNN_900,CUDA_0  }},
   {"CUDNN_ATTR_ENGINEHEUR_SM_COUNT_TARGET",                          {CUDNN_895, CUDA_0,   CUDA_0  }},
   {"CUDNN_ATTR_ENGINE_SM_COUNT_TARGET",                              {CUDNN_895, CUDA_0,   CUDA_0  }},
   {"CUDNN_KNOB_TYPE_SPLIT_COLS",                                     {CUDNN_895, CUDA_0,   CUDA_0  }},
