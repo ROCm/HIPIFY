@@ -219,18 +219,18 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"CUDNN_REDUCE_TENSOR_NORM1",                                      {"HIPDNN_REDUCE_TENSOR_NORM1",                                      "MIOPEN_REDUCE_TENSOR_NORM1",                                      CONV_NUMERIC_LITERAL, API_DNN, 1, CUDA_DEPRECATED}},    // 6
   {"CUDNN_REDUCE_TENSOR_NORM2",                                      {"HIPDNN_REDUCE_TENSOR_NORM2",                                      "MIOPEN_REDUCE_TENSOR_NORM2",                                      CONV_NUMERIC_LITERAL, API_DNN, 1, CUDA_DEPRECATED}},    // 7
   {"CUDNN_REDUCE_TENSOR_MUL_NO_ZEROS",                               {"HIPDNN_REDUCE_TENSOR_MUL_NO_ZEROS",                               "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, ROC_UNSUPPORTED | CUDA_DEPRECATED}},    // 8
-  {"cudnnReduceTensorIndices_t",                                     {"hipdnnReduceTensorIndices_t",                                     "miopenReduceTensorIndices_t",                                     CONV_TYPE, API_DNN, 1}},
-  {"CUDNN_REDUCE_TENSOR_NO_INDICES",                                 {"HIPDNN_REDUCE_TENSOR_NO_INDICES",                                 "MIOPEN_REDUCE_TENSOR_NO_INDICES",                                 CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 0
-  {"CUDNN_REDUCE_TENSOR_FLATTENED_INDICES",                          {"HIPDNN_REDUCE_TENSOR_FLATTENED_INDICES",                          "MIOPEN_REDUCE_TENSOR_FLATTENED_INDICES",                          CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 1
+  {"cudnnReduceTensorIndices_t",                                     {"hipdnnReduceTensorIndices_t",                                     "miopenReduceTensorIndices_t",                                     CONV_TYPE, API_DNN, 1, CUDA_DEPRECATED}},
+  {"CUDNN_REDUCE_TENSOR_NO_INDICES",                                 {"HIPDNN_REDUCE_TENSOR_NO_INDICES",                                 "MIOPEN_REDUCE_TENSOR_NO_INDICES",                                 CONV_NUMERIC_LITERAL, API_DNN, 1, CUDA_DEPRECATED}},    // 0
+  {"CUDNN_REDUCE_TENSOR_FLATTENED_INDICES",                          {"HIPDNN_REDUCE_TENSOR_FLATTENED_INDICES",                          "MIOPEN_REDUCE_TENSOR_FLATTENED_INDICES",                          CONV_NUMERIC_LITERAL, API_DNN, 1, CUDA_DEPRECATED}},    // 1
   {"cudnnConvolutionBwdDataPreference_t",                            {"hipdnnConvolutionBwdDataPreference_t",                            "",                                                                CONV_TYPE, API_DNN, 1, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
   {"CUDNN_CONVOLUTION_BWD_DATA_NO_WORKSPACE",                        {"HIPDNN_CONVOLUTION_BWD_DATA_NO_WORKSPACE",                        "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},    // 0
   {"CUDNN_CONVOLUTION_BWD_DATA_PREFER_FASTEST",                      {"HIPDNN_CONVOLUTION_BWD_DATA_PREFER_FASTEST",                      "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},    // 1
   {"CUDNN_CONVOLUTION_BWD_DATA_SPECIFY_WORKSPACE_LIMIT",             {"HIPDNN_CONVOLUTION_BWD_DATA_SPECIFY_WORKSPACE_LIMIT",             "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},    // 2
-  {"cudnnIndicesType_t",                                             {"hipdnnIndicesType_t",                                             "miopenIndicesType_t",                                             CONV_TYPE, API_DNN, 1}},
-  {"CUDNN_32BIT_INDICES",                                            {"HIPDNN_32BIT_INDICES",                                            "MIOPEN_32BIT_INDICES",                                            CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 0
-  {"CUDNN_64BIT_INDICES",                                            {"HIPDNN_64BIT_INDICES",                                            "MIOPEN_64BIT_INDICES",                                            CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 1
-  {"CUDNN_16BIT_INDICES",                                            {"HIPDNN_16BIT_INDICES",                                            "MIOPEN_16BIT_INDICES",                                            CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 2
-  {"CUDNN_8BIT_INDICES",                                             {"HIPDNN_8BIT_INDICES",                                             "MIOPEN_8BIT_INDICES",                                             CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 3
+  {"cudnnIndicesType_t",                                             {"hipdnnIndicesType_t",                                             "miopenIndicesType_t",                                             CONV_TYPE, API_DNN, 1, CUDA_DEPRECATED}},
+  {"CUDNN_32BIT_INDICES",                                            {"HIPDNN_32BIT_INDICES",                                            "MIOPEN_32BIT_INDICES",                                            CONV_NUMERIC_LITERAL, API_DNN, 1, CUDA_DEPRECATED}},    // 0
+  {"CUDNN_64BIT_INDICES",                                            {"HIPDNN_64BIT_INDICES",                                            "MIOPEN_64BIT_INDICES",                                            CONV_NUMERIC_LITERAL, API_DNN, 1, CUDA_DEPRECATED}},    // 1
+  {"CUDNN_16BIT_INDICES",                                            {"HIPDNN_16BIT_INDICES",                                            "MIOPEN_16BIT_INDICES",                                            CONV_NUMERIC_LITERAL, API_DNN, 1, CUDA_DEPRECATED}},    // 2
+  {"CUDNN_8BIT_INDICES",                                             {"HIPDNN_8BIT_INDICES",                                             "MIOPEN_8BIT_INDICES",                                             CONV_NUMERIC_LITERAL, API_DNN, 1, CUDA_DEPRECATED}},    // 3
   {"cudnnSoftmaxAlgorithm_t",                                        {"hipdnnSoftmaxAlgorithm_t",                                        "miopenSoftmaxAlgorithm_t",                                        CONV_TYPE, API_DNN, 1}},
   {"CUDNN_SOFTMAX_FAST",                                             {"HIPDNN_SOFTMAX_FAST",                                             "MIOPEN_SOFTMAX_FAST",                                             CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 0
   {"CUDNN_SOFTMAX_ACCURATE",                                         {"HIPDNN_SOFTMAX_ACCURATE",                                         "MIOPEN_SOFTMAX_ACCURATE",                                         CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 1
@@ -1269,14 +1269,14 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_TYPE_NAME_VER_MAP {
   {"CUDNN_REDUCE_TENSOR_NORM1",                                      {CUDNN_60,  CUDNN_900,CUDA_0  }},
   {"CUDNN_REDUCE_TENSOR_NORM2",                                      {CUDNN_60,  CUDNN_900,CUDA_0  }},
   {"CUDNN_REDUCE_TENSOR_MUL_NO_ZEROS",                               {CUDNN_705, CUDNN_900,CUDA_0  }},
-  {"cudnnReduceTensorIndices_t",                                     {CUDNN_60,  CUDA_0,   CUDA_0  }},
-  {"CUDNN_REDUCE_TENSOR_NO_INDICES",                                 {CUDNN_60,  CUDA_0,   CUDA_0  }},
-  {"CUDNN_REDUCE_TENSOR_FLATTENED_INDICES",                          {CUDNN_60,  CUDA_0,   CUDA_0  }},
-  {"cudnnIndicesType_t",                                             {CUDNN_60,  CUDA_0,   CUDA_0  }},
-  {"CUDNN_32BIT_INDICES",                                            {CUDNN_60,  CUDA_0,   CUDA_0  }},
-  {"CUDNN_64BIT_INDICES",                                            {CUDNN_60,  CUDA_0,   CUDA_0  }},
-  {"CUDNN_16BIT_INDICES",                                            {CUDNN_60,  CUDA_0,   CUDA_0  }},
-  {"CUDNN_8BIT_INDICES",                                             {CUDNN_60,  CUDA_0,   CUDA_0  }},
+  {"cudnnReduceTensorIndices_t",                                     {CUDNN_60,  CUDNN_900,CUDA_0  }},
+  {"CUDNN_REDUCE_TENSOR_NO_INDICES",                                 {CUDNN_60,  CUDNN_900,CUDA_0  }},
+  {"CUDNN_REDUCE_TENSOR_FLATTENED_INDICES",                          {CUDNN_60,  CUDNN_900,CUDA_0  }},
+  {"cudnnIndicesType_t",                                             {CUDNN_60,  CUDNN_900,CUDA_0  }},
+  {"CUDNN_32BIT_INDICES",                                            {CUDNN_60,  CUDNN_900,CUDA_0  }},
+  {"CUDNN_64BIT_INDICES",                                            {CUDNN_60,  CUDNN_900,CUDA_0  }},
+  {"CUDNN_16BIT_INDICES",                                            {CUDNN_60,  CUDNN_900,CUDA_0  }},
+  {"CUDNN_8BIT_INDICES",                                             {CUDNN_60,  CUDNN_900,CUDA_0  }},
   {"cudnnSoftmaxAlgorithm_t",                                        {CUDNN_10,  CUDA_0,   CUDA_0  }},
   {"CUDNN_SOFTMAX_FAST",                                             {CUDNN_10,  CUDA_0,   CUDA_0  }},
   {"CUDNN_SOFTMAX_ACCURATE",                                         {CUDNN_10,  CUDA_0,   CUDA_0  }},
