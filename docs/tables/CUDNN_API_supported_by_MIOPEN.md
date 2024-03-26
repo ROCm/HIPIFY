@@ -126,7 +126,7 @@
 |`CUDNN_ATTR_OPERATION_MATMUL_GEMM_K_OVERRIDE_DESC`|8.7.0| | | | | | | | | |
 |`CUDNN_ATTR_OPERATION_MATMUL_GEMM_M_OVERRIDE_DESC`|8.7.0| | | | | | | | | |
 |`CUDNN_ATTR_OPERATION_MATMUL_GEMM_N_OVERRIDE_DESC`|8.7.0| | | | | | | | | |
-|`CUDNN_ATTR_OPERATION_MATMUL_IRREGULARLY_STRIDED_BATCH_COUNT`|8.1.0| | | | | | | | | |
+|`CUDNN_ATTR_OPERATION_MATMUL_IRREGULARLY_STRIDED_BATCH_COUNT`|8.1.0|9.0.0| | | | | | | | |
 |`CUDNN_ATTR_OPERATION_NORM_BWD_DBIAS_DESC`|8.5.0| | | | | | | | | |
 |`CUDNN_ATTR_OPERATION_NORM_BWD_DSCALE_DESC`|8.5.0| | | | | | | | | |
 |`CUDNN_ATTR_OPERATION_NORM_BWD_DXDESC`|8.5.0| | | | | | | | | |
@@ -165,16 +165,16 @@
 |`CUDNN_ATTR_OPERATION_REDUCTION_DESC`|8.1.0| | | | | | | | | |
 |`CUDNN_ATTR_OPERATION_REDUCTION_XDESC`|8.1.0| | | | | | | | | |
 |`CUDNN_ATTR_OPERATION_REDUCTION_YDESC`|8.1.0| | | | | | | | | |
-|`CUDNN_ATTR_OPERATION_RESAMPLE_BWD_ALPHA`|8.3.0| | | | | | | | | |
-|`CUDNN_ATTR_OPERATION_RESAMPLE_BWD_BETA`|8.3.0| | | | | | | | | |
+|`CUDNN_ATTR_OPERATION_RESAMPLE_BWD_ALPHA`|8.3.0|9.0.0| | | | | | | | |
+|`CUDNN_ATTR_OPERATION_RESAMPLE_BWD_BETA`|8.3.0|9.0.0| | | | | | | | |
 |`CUDNN_ATTR_OPERATION_RESAMPLE_BWD_DESC`|8.3.0| | | | | | | | | |
 |`CUDNN_ATTR_OPERATION_RESAMPLE_BWD_DXDESC`|8.3.0| | | | | | | | | |
 |`CUDNN_ATTR_OPERATION_RESAMPLE_BWD_DYDESC`|8.3.0| | | | | | | | | |
 |`CUDNN_ATTR_OPERATION_RESAMPLE_BWD_IDXDESC`|8.3.0| | | | | | | | | |
 |`CUDNN_ATTR_OPERATION_RESAMPLE_BWD_XDESC`|8.7.0| | | | | | | | | |
 |`CUDNN_ATTR_OPERATION_RESAMPLE_BWD_YDESC`|8.7.0| | | | | | | | | |
-|`CUDNN_ATTR_OPERATION_RESAMPLE_FWD_ALPHA`|8.3.0| | | | | | | | | |
-|`CUDNN_ATTR_OPERATION_RESAMPLE_FWD_BETA`|8.3.0| | | | | | | | | |
+|`CUDNN_ATTR_OPERATION_RESAMPLE_FWD_ALPHA`|8.3.0|9.0.0| | | | | | | | |
+|`CUDNN_ATTR_OPERATION_RESAMPLE_FWD_BETA`|8.3.0|9.0.0| | | | | | | | |
 |`CUDNN_ATTR_OPERATION_RESAMPLE_FWD_DESC`|8.3.0| | | | | | | | | |
 |`CUDNN_ATTR_OPERATION_RESAMPLE_FWD_IDXDESC`|8.3.0| | | | | | | | | |
 |`CUDNN_ATTR_OPERATION_RESAMPLE_FWD_XDESC`|8.3.0| | | | | | | | | |
@@ -334,7 +334,7 @@
 |`CUDNN_DATA_UINT8`|7.1.3| | | | | | | | | |
 |`CUDNN_DATA_UINT8x4`|7.1.3|9.0.0| | | | | | | | |
 |`CUDNN_DEFAULT_MATH`|7.0.5| | | | | | | | | |
-|`CUDNN_DEFAULT_REORDER`|7.6.0| | | | | | | | | |
+|`CUDNN_DEFAULT_REORDER`|7.6.0|9.0.0| | | | | | | | |
 |`CUDNN_DETERMINISTIC`|6.0.0| | | | | | | | | |
 |`CUDNN_DIM_MAX`|4.0.0| | | | | | | | | |
 |`CUDNN_DIVNORM_PRECOMPUTED_MEANS`|3.0.0| | | | | | | | | |
@@ -363,41 +363,41 @@
 |`CUDNN_INSTANCE_NORM`|8.5.0| | | | | | | | | |
 |`CUDNN_KNOB_TYPE_ARRAY_SIZE_PER_THREAD`|8.9.0| | | | | | | | | |
 |`CUDNN_KNOB_TYPE_BLOCK_SIZE`|8.8.0| | | | | | | | | |
-|`CUDNN_KNOB_TYPE_CHUNK_K`|8.0.1| | | | | | | | | |
+|`CUDNN_KNOB_TYPE_CHUNK_K`|8.0.1|9.0.0| | | | | | | | |
 |`CUDNN_KNOB_TYPE_COUNTS`|8.0.1| | | | | | | | | |
-|`CUDNN_KNOB_TYPE_CTA_SPLIT_K_MODE`|8.0.1| | | | | | | | | |
+|`CUDNN_KNOB_TYPE_CTA_SPLIT_K_MODE`|8.0.1|9.0.0| | | | | | | | |
 |`CUDNN_KNOB_TYPE_EDGE`|8.0.1| | | | | | | | | |
-|`CUDNN_KNOB_TYPE_IDX_MODE`|8.0.1| | | | | | | | | |
-|`CUDNN_KNOB_TYPE_KBLOCK`|8.0.1| | | | | | | | | |
+|`CUDNN_KNOB_TYPE_IDX_MODE`|8.0.1|9.0.0| | | | | | | | |
+|`CUDNN_KNOB_TYPE_KBLOCK`|8.0.1|9.0.0| | | | | | | | |
 |`CUDNN_KNOB_TYPE_KERNEL_CFG`|8.1.0| | | | | | | | | |
-|`CUDNN_KNOB_TYPE_LDGA`|8.0.1| | | | | | | | | |
-|`CUDNN_KNOB_TYPE_LDGB`|8.0.1| | | | | | | | | |
-|`CUDNN_KNOB_TYPE_LDGC`|8.0.1| | | | | | | | | |
+|`CUDNN_KNOB_TYPE_LDGA`|8.0.1|9.0.0| | | | | | | | |
+|`CUDNN_KNOB_TYPE_LDGB`|8.0.1|9.0.0| | | | | | | | |
+|`CUDNN_KNOB_TYPE_LDGC`|8.0.1|9.0.0| | | | | | | | |
 |`CUDNN_KNOB_TYPE_LOAD_SIZE`|8.9.5| | | | | | | | | |
 |`CUDNN_KNOB_TYPE_MULTIPLY`|8.0.1| | | | | | | | | |
-|`CUDNN_KNOB_TYPE_NUM_C_PER_BLOCK`|8.9.0| | | | | | | | | |
+|`CUDNN_KNOB_TYPE_NUM_C_PER_BLOCK`|8.9.0|9.0.0| | | | | | | | |
 |`CUDNN_KNOB_TYPE_OCCUPANCY`|8.9.0| | | | | | | | | |
 |`CUDNN_KNOB_TYPE_REDUCTION_MODE`|8.0.1| | | | | | | | | |
-|`CUDNN_KNOB_TYPE_SINGLEBUFFER`|8.0.1| | | | | | | | | |
-|`CUDNN_KNOB_TYPE_SLICED`|8.0.1| | | | | | | | | |
+|`CUDNN_KNOB_TYPE_SINGLEBUFFER`|8.0.1|9.0.0| | | | | | | | |
+|`CUDNN_KNOB_TYPE_SLICED`|8.0.1|9.0.0| | | | | | | | |
 |`CUDNN_KNOB_TYPE_SPECFILT`|8.0.1| | | | | | | | | |
 |`CUDNN_KNOB_TYPE_SPLIT_COLS`|8.9.5| | | | | | | | | |
-|`CUDNN_KNOB_TYPE_SPLIT_H`|8.0.1| | | | | | | | | |
-|`CUDNN_KNOB_TYPE_SPLIT_K`|8.0.1| | | | | | | | | |
+|`CUDNN_KNOB_TYPE_SPLIT_H`|8.0.1|9.0.0| | | | | | | | |
+|`CUDNN_KNOB_TYPE_SPLIT_K`|8.0.1|9.0.0| | | | | | | | |
 |`CUDNN_KNOB_TYPE_SPLIT_K_BUF`|8.0.1| | | | | | | | | |
 |`CUDNN_KNOB_TYPE_SPLIT_K_SLC`|8.0.1| | | | | | | | | |
-|`CUDNN_KNOB_TYPE_SPLIT_RS`|8.0.1| | | | | | | | | |
+|`CUDNN_KNOB_TYPE_SPLIT_RS`|8.0.1|9.0.0| | | | | | | | |
 |`CUDNN_KNOB_TYPE_STAGES`|8.0.1| | | | | | | | | |
 |`CUDNN_KNOB_TYPE_SWIZZLE`|8.0.1| | | | | | | | | |
 |`CUDNN_KNOB_TYPE_TILEK`|8.0.1| | | | | | | | | |
-|`CUDNN_KNOB_TYPE_TILE_CGA`|8.6.0| | | | | | | | | |
+|`CUDNN_KNOB_TYPE_TILE_CGA`|8.6.0|9.0.0| | | | | | | | |
 |`CUDNN_KNOB_TYPE_TILE_CGA_M`|8.6.0| | | | | | | | | |
 |`CUDNN_KNOB_TYPE_TILE_CGA_N`|8.6.0| | | | | | | | | |
 |`CUDNN_KNOB_TYPE_TILE_COLS`|8.9.5| | | | | | | | | |
 |`CUDNN_KNOB_TYPE_TILE_ROWS`|8.9.5| | | | | | | | | |
 |`CUDNN_KNOB_TYPE_TILE_SIZE`|8.0.1| | | | | | | | | |
-|`CUDNN_KNOB_TYPE_USE_TEX`|8.0.1| | | | | | | | | |
-|`CUDNN_KNOB_TYPE_WINO_TILE`|8.0.1| | | | | | | | | |
+|`CUDNN_KNOB_TYPE_USE_TEX`|8.0.1|9.0.0| | | | | | | | |
+|`CUDNN_KNOB_TYPE_WINO_TILE`|8.0.1|9.0.0| | | | | | | | |
 |`CUDNN_KNOB_TYPE_WORKSPACE`|8.4.0| | | | | | | | | |
 |`CUDNN_LAYER_NORM`|8.5.0| | | | | | | | | |
 |`CUDNN_LAYOUT_TYPE_COUNT`|8.0.2| | | | | | | | | |
@@ -434,7 +434,7 @@
 |`CUDNN_NORM_PER_ACTIVATION`|8.0.1| | | | | | | | | |
 |`CUDNN_NORM_PER_CHANNEL`|8.0.1| | | | | | | | | |
 |`CUDNN_NOT_PROPAGATE_NAN`|4.0.0|9.0.0| | |`MIOPEN_NOT_PROPAGATE_NAN`| | | | | |
-|`CUDNN_NO_REORDER`|7.6.0| | | | | | | | | |
+|`CUDNN_NO_REORDER`|7.6.0|9.0.0| | | | | | | | |
 |`CUDNN_NUMERICAL_NOTE_DOWN_CONVERT_INPUTS`|8.0.1| | | | | | | | | |
 |`CUDNN_NUMERICAL_NOTE_FFT`|8.0.1| | | | | | | | | |
 |`CUDNN_NUMERICAL_NOTE_NONDETERMINISTIC`|8.0.1| | | | | | | | | |
@@ -716,7 +716,7 @@
 |`CUDNN_TYPE_INT64`|8.0.1| | | | | | | | | |
 |`CUDNN_TYPE_KNOB_TYPE`|8.0.1| | | | | | | | | |
 |`CUDNN_TYPE_LAYOUT_TYPE`|8.0.2| | | | | | | | | |
-|`CUDNN_TYPE_NAN_PROPOGATION`|8.0.1| | | | | | | | | |
+|`CUDNN_TYPE_NAN_PROPOGATION`|8.0.1|9.0.0| | | | | | | | |
 |`CUDNN_TYPE_NORM_FWD_PHASE`|8.5.0| | | | | | | | | |
 |`CUDNN_TYPE_NORM_MODE`|8.5.0| | | | | | | | | |
 |`CUDNN_TYPE_NUMERICAL_NOTE`|8.0.1| | | | | | | | | |
@@ -1052,6 +1052,7 @@
 |`cudnnGetTensorSizeInBytes`|6.0.0| | | | | | | | | |
 |`cudnnGetTensorTransformDescriptor`|7.5.0| | | | | | | | | |
 |`cudnnGetVersion`|2.0.0| | | | | | | | | |
+|`cudnnGraphVersionCheck`|9.0.0| | | | | | | | | |
 |`cudnnIm2Col`|2.0.0|9.0.0| | | | | | | | |
 |`cudnnInitTransformDest`|7.5.0| | | | | | | | | |
 |`cudnnLRNCrossChannelBackward`|3.0.0| | | | | | | | | |
