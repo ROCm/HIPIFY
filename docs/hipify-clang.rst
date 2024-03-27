@@ -167,10 +167,10 @@ Dependencies
       `17.0.3 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-17.0.3>`_,
       `17.0.4 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-17.0.4>`_,
       `17.0.5 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-17.0.5>`_,
-      `17.0.6 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-17.0.6>`_**,
+      `17.0.6 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-17.0.6>`_\*\*,
       `18.1.0 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-18.1.0>`_,
       `18.1.1 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-18.1.>`_
-    - `12.3.2 <https://developer.nvidia.com/cuda-downloads>`_**
+    - `12.3.2 <https://developer.nvidia.com/cuda-downloads>`_\*\*
     - **LATEST STABLE CONFIG**
     - **LATEST STABLE CONFIG**
   * - `19.0.0 git <https://github.com/llvm/llvm-project>`_
@@ -186,7 +186,7 @@ will be overwritten. You don't need to rebuild ``LLVM``.
 :sup:`3` Download the patch and unpack it into your ``LLVM source directory``; the ``Cuda.cpp`` file will
 be overwritten. You'll need to rebuild ``LLVM``.
 
-** represents the latest supported (and recommended) configuration.
+\*\* represents the latest supported (and recommended) configuration.
 
 In most cases, you can get a suitable version of ``LLVM+clang`` with your package manager.
 
