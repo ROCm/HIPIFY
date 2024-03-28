@@ -32,7 +32,7 @@ Dependencies
 
 * `LLVM+clang <http://releases.llvm.org>`_ of at least version
   `4.0.0 <http://releases.llvm.org/download.html#4.0.0>`_; the latest stable and recommended release:
-  `17.0.6 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-17.0.6>`_.
+  `18.1.1 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-18.1.1>`_.
 
 * `CUDA <https://developer.nvidia.com/cuda-downloads>`_ of at least version
   `7.0 <https://developer.nvidia.com/cuda-toolkit-70>`_, the latest supported version is
