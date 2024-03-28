@@ -167,7 +167,7 @@ Dependencies
       `17.0.3 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-17.0.3>`_,
       `17.0.4 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-17.0.4>`_,
       `17.0.5 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-17.0.5>`_,
-      `17.0.6 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-17.0.6>`_\*\*,
+      `17.0.6 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-17.0.6>`_`:sup:`4`,
       `18.1.0 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-18.1.0>`_,
       `18.1.1 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-18.1.1>`_,
       `18.1.2 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-18.1.2>`:sup:`4`
