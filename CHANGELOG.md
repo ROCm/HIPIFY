@@ -3,6 +3,42 @@
 Documentation for HIPIFY is available at
 [https://rocmdocs.amd.com/projects/HIPIFY/en/latest/](https://rocmdocs.amd.com/projects/HIPIFY/en/latest/).
 
+## HIPIFY for ROCm 6.1.1
+
+### Additions
+
+* LLVM 18.1.1 support
+* cuDNN 9.0.0 support
+* New options:
+  * `--clang-resource-directory` to specify the clang resource path - the path to the parent folder for the `include` folder that
+    contains `__clang_cuda_runtime_wrapper.h` and other header files used during the hipification process
+
+### Fixes
+
+* Clang resource files used during hipification are now searchable and also can be specified by the `--clang-resource-directory` option
+
+## HIPIFY for ROCm 6.1.0
+
+### Additions
+
+* CUDA 12.3.2 support
+* cuDNN 8.9.7 support
+* LLVM 17.0.6 support
+* Full `hipSOLVER` support
+* Full `rocSPARSE` support
+* New options:
+  * `--amap` to hipify as much as possible, ignoring `--default-preprocessor` behavior
+
+### Fixes
+
+* Code blocks skipped by the Preprocessor are not hipified anymore under the `--default-preprocessor` option
+
+## HIPIFY for ROCm 6.0.2
+
+### Fixes
+
+* Use the new locations of header files of some HIP and ROCm libraries (`hipRAND`, `hipFFT`, `rocSOLVER`)
+
 ## HIPIFY for ROCm 6.0.0
 
 ### Additions
@@ -31,7 +67,7 @@ Documentation for HIPIFY is available at
   * In separate files: `hipify-clang --md --doc-format=full --doc-roc=separate`
   * In one file: `hipify-clang --md --doc-format=full --doc-roc=joint`
 * New options:
-  * `--use-hip-data-types` (Use 'hipDataType' instead of 'hipblasDatatype_t' or 'rocblas_datatype')
+  * `--use-hip-data-types` (Use `hipDataType` instead of `hipblasDatatype_t` or `rocblas_datatype`)
   * `--doc-roc=\<value\>` (ROC documentation generation: `skip` (default), `separate`, and `joint`; the
     `--md` or `--csv` option must be included)
 

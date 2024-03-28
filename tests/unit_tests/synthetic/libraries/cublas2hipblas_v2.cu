@@ -8,6 +8,11 @@
 #include "cublas_v2.h"
 // CHECK-NOT: #include "hipblas.h"
 
+#if defined(_WIN32) && CUDA_VERSION < 9000
+  typedef signed   __int64 int64_t;
+  typedef unsigned __int64 uint64_t;
+#endif
+
 int main() {
   printf("14.v2. cuBLAS API to hipBLAS API synthetic test\n");
 
@@ -221,6 +226,7 @@ int main() {
   float fd1 = 0;
   float fd2 = 0;
   float fresult = 0;
+  float fparam = 0;
 
   float** fAarray = 0;
   const float** const fAarray_const = const_cast<const float**>(fAarray);
@@ -243,6 +249,7 @@ int main() {
   double dd1 = 0;
   double dd2 = 0;
   double dresult = 0;
+  double dparam = 0;
 
   double** dAarray = 0;
   const double** const dAarray_const = const_cast<const double**>(dAarray);
@@ -271,10 +278,10 @@ int main() {
   blasStatus = cublasDnrm2(blasHandle, n, &dx, incx, &dresult);
   blasStatus = cublasDnrm2_v2(blasHandle, n, &dx, incx, &dresult);
 
-  // CHECK: hipComplex complex, complexa, complexA, complexB, complexC, complexx, complexy, complexs, complexb;
-  cuComplex complex, complexa, complexA, complexB, complexC, complexx, complexy, complexs, complexb;
-  // CHECK: hipDoubleComplex dcomplex, dcomplexa, dcomplexA, dcomplexB, dcomplexC, dcomplexx, dcomplexy, dcomplexs, dcomplexb;
-  cuDoubleComplex dcomplex, dcomplexa, dcomplexA, dcomplexB, dcomplexC, dcomplexx, dcomplexy, dcomplexs, dcomplexb;
+  // CHECK: hipComplex complex, complexa, complexA, complexB, complexC, complexx, complexy, complexs, complexb, complexresult;
+  cuComplex complex, complexa, complexA, complexB, complexC, complexx, complexy, complexs, complexb, complexresult;
+  // CHECK: hipDoubleComplex dcomplex, dcomplexa, dcomplexA, dcomplexB, dcomplexC, dcomplexx, dcomplexy, dcomplexs, dcomplexb, dcomplexresult;
+  cuDoubleComplex dcomplex, dcomplexa, dcomplexA, dcomplexB, dcomplexC, dcomplexx, dcomplexy, dcomplexs, dcomplexb, dcomplexresult;
 
   // CHECK: hipComplex** complexAarray = 0;
   // CHECK: const hipComplex** const complexAarray_const = const_cast<const hipComplex**>(complexAarray);
@@ -1866,6 +1873,314 @@ int main() {
   // CHECK-NEXT: blasStatus = hipblasIzamax_v2_64(blasHandle, n_64, &dcomplexx, incx_64, &res_64);
   blasStatus = cublasIzamax_64(blasHandle, n_64, &dcomplexx, incx_64, &res_64);
   blasStatus = cublasIzamax_v2_64(blasHandle, n_64, &dcomplexx, incx_64, &res_64);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasIsamin_v2_64(cublasHandle_t handle, int64_t n, const float* x, int64_t incx, int64_t* result);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasIsamin_64(hipblasHandle_t handle, int64_t n, const float* x, int64_t incx, int64_t* result);
+  // CHECK: blasStatus = hipblasIsamin_64(blasHandle, n_64, &fx, incx_64, &res_64);
+  // CHECK-NEXT: blasStatus = hipblasIsamin_64(blasHandle, n_64, &fx, incx_64, &res_64);
+  blasStatus = cublasIsamin_64(blasHandle, n_64, &fx, incx_64, &res_64);
+  blasStatus = cublasIsamin_v2_64(blasHandle, n_64, &fx, incx_64, &res_64);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasIdamin_v2_64(cublasHandle_t handle, int64_t n, const double* x, int64_t incx, int64_t* result);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasIdamin_64(hipblasHandle_t handle, int64_t n, const double* x, int64_t incx, int64_t* result);
+  // CHECK: blasStatus = hipblasIdamin_64(blasHandle, n_64, &dx, incx_64, &res_64);
+  // CHECK-NEXT: blasStatus = hipblasIdamin_64(blasHandle, n_64, &dx, incx_64, &res_64);
+  blasStatus = cublasIdamin_64(blasHandle, n_64, &dx, incx_64, &res_64);
+  blasStatus = cublasIdamin_v2_64(blasHandle, n_64, &dx, incx_64, &res_64);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasIcamin_v2_64(cublasHandle_t handle, int64_t n, const cuComplex* x, int64_t incx, int64_t* result);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasIcamin_v2_64(hipblasHandle_t handle, int64_t n, const hipComplex* x, int64_t incx, int64_t* result);
+  // CHECK: blasStatus = hipblasIcamin_v2_64(blasHandle, n_64, &complexx, incx_64, &res_64);
+  // CHECK-NEXT: blasStatus = hipblasIcamin_v2_64(blasHandle, n_64, &complexx, incx_64, &res_64);
+  blasStatus = cublasIcamin_64(blasHandle, n_64, &complexx, incx_64, &res_64);
+  blasStatus = cublasIcamin_v2_64(blasHandle, n_64, &complexx, incx_64, &res_64);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasIzamin_v2_64(cublasHandle_t handle, int64_t n, const cuDoubleComplex* x, int64_t incx, int64_t* result);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasIzamin_v2_64(hipblasHandle_t handle, int64_t n, const hipDoubleComplex* x, int64_t incx, int64_t* result);
+  // CHECK: blasStatus = hipblasIzamin_v2_64(blasHandle, n_64, &dcomplexx, incx_64, &res_64);
+  // CHECK-NEXT: blasStatus = hipblasIzamin_v2_64(blasHandle, n_64, &dcomplexx, incx_64, &res_64);
+  blasStatus = cublasIzamin_64(blasHandle, n_64, &dcomplexx, incx_64, &res_64);
+  blasStatus = cublasIzamin_v2_64(blasHandle, n_64, &dcomplexx, incx_64, &res_64);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasSasum_v2_64(cublasHandle_t handle, int64_t n, const float* x, int64_t incx, float* result);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasSasum_64(hipblasHandle_t handle, int64_t n, const float* x, int64_t incx, float* result);
+  // CHECK: blasStatus = hipblasSasum_64(blasHandle, n_64, &fx, incx_64, &fresult);
+  // CHECK-NEXT: blasStatus = hipblasSasum_64(blasHandle, n_64, &fx, incx_64, &fresult);
+  blasStatus = cublasSasum_64(blasHandle, n_64, &fx, incx_64, &fresult);
+  blasStatus = cublasSasum_v2_64(blasHandle, n_64, &fx, incx_64, &fresult);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasDasum_v2_64(cublasHandle_t handle, int64_t n, const double* x, int64_t incx, double* result);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasDasum_64(hipblasHandle_t handle, int64_t n, const double* x, int64_t incx, double* result);
+  // CHECK: blasStatus = hipblasDasum_64(blasHandle, n_64, &dx, incx_64, &dresult);
+  // CHECK-NEXT: blasStatus = hipblasDasum_64(blasHandle, n_64, &dx, incx_64, &dresult);
+  blasStatus = cublasDasum_64(blasHandle, n_64, &dx, incx_64, &dresult);
+  blasStatus = cublasDasum_v2_64(blasHandle, n_64, &dx, incx_64, &dresult);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasScasum_v2_64(cublasHandle_t handle, int64_t n, const cuComplex* x, int64_t incx, float* result);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasScasum_v2_64(hipblasHandle_t handle, int64_t n, const hipComplex* x, int64_t incx, float* result);
+  // CHECK: blasStatus = hipblasScasum_v2_64(blasHandle, n_64, &complexx, incx_64, &fresult);
+  // CHECK-NEXT: blasStatus = hipblasScasum_v2_64(blasHandle, n_64, &complexx, incx_64, &fresult);
+  blasStatus = cublasScasum_64(blasHandle, n_64, &complexx, incx_64, &fresult);
+  blasStatus = cublasScasum_v2_64(blasHandle, n_64, &complexx, incx_64, &fresult);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasDzasum_v2_64(cublasHandle_t handle, int64_t n, const cuDoubleComplex* x, int64_t incx, double* result);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasDzasum_v2_64(hipblasHandle_t handle, int64_t n, const hipDoubleComplex* x, int64_t incx, double* result);
+  // CHECK: blasStatus = hipblasDzasum_v2_64(blasHandle, n_64, &dcomplexx, incx_64, &dresult);
+  // CHECK-NEXT: blasStatus = hipblasDzasum_v2_64(blasHandle, n_64, &dcomplexx, incx_64, &dresult);
+  blasStatus = cublasDzasum_64(blasHandle, n_64, &dcomplexx, incx_64, &dresult);
+  blasStatus = cublasDzasum_v2_64(blasHandle, n_64, &dcomplexx, incx_64, &dresult);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasSaxpy_v2_64(cublasHandle_t handle, int64_t n, const float* alpha, const float* x, int64_t incx, float* y, int64_t incy);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasSaxpy_64(hipblasHandle_t handle, int64_t n, const float* alpha, const float* x, int64_t incx, float* y, int64_t incy);
+  // CHECK: blasStatus = hipblasSaxpy_64(blasHandle, n_64, &fa, &fx, incx_64, &fy, incy_64);
+  // CHECK-NEXT: blasStatus = hipblasSaxpy_64(blasHandle, n_64, &fa, &fx, incx_64, &fy, incy_64);
+  blasStatus = cublasSaxpy_64(blasHandle, n_64, &fa, &fx, incx_64, &fy, incy_64);
+  blasStatus = cublasSaxpy_v2_64(blasHandle, n_64, &fa, &fx, incx_64, &fy, incy_64);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasDaxpy_v2_64(cublasHandle_t handle, int64_t n, const double* alpha, const double* x, int64_t incx, double* y, int64_t incy);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasDaxpy_64(hipblasHandle_t handle, int64_t n, const double* alpha, const double* x, int64_t incx, double* y, int64_t incy);
+  // CHECK: blasStatus = hipblasDaxpy_64(blasHandle, n_64, &da, &dx, incx_64, &dy, incy_64);
+  // CHECK-NEXT: blasStatus = hipblasDaxpy_64(blasHandle, n_64, &da, &dx, incx_64, &dy, incy_64);
+  blasStatus = cublasDaxpy_64(blasHandle, n_64, &da, &dx, incx_64, &dy, incy_64);
+  blasStatus = cublasDaxpy_v2_64(blasHandle, n_64, &da, &dx, incx_64, &dy, incy_64);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasCaxpy_v2_64(cublasHandle_t handle, int64_t n, const cuComplex* alpha, const cuComplex* x, int64_t incx, cuComplex* y, int64_t incy);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasCaxpy_v2_64(hipblasHandle_t handle, int64_t n, const hipComplex* alpha, const hipComplex* x, int64_t incx, hipComplex* y, int64_t incy);
+  // CHECK: blasStatus = hipblasCaxpy_v2_64(blasHandle, n_64, &complexa, &complexx, incx_64, &complexy, incy_64);
+  // CHECK-NEXT: blasStatus = hipblasCaxpy_v2_64(blasHandle, n_64, &complexa, &complexx, incx_64, &complexy, incy_64);
+  blasStatus = cublasCaxpy_64(blasHandle, n_64, &complexa, &complexx, incx_64, &complexy, incy_64);
+  blasStatus = cublasCaxpy_v2_64(blasHandle, n_64, &complexa, &complexx, incx_64, &complexy, incy_64);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasZaxpy_v2_64(cublasHandle_t handle, int64_t n, const cuDoubleComplex* alpha, const cuDoubleComplex* x, int64_t incx, cuDoubleComplex* y, int64_t incy);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasZaxpy_v2_64(hipblasHandle_t handle, int64_t n, const hipDoubleComplex* alpha, const hipDoubleComplex* x, int64_t incx, hipDoubleComplex* y, int64_t incy);
+  // CHECK: blasStatus = hipblasZaxpy_v2_64(blasHandle, n_64, &dcomplexa, &dcomplexx, incx_64, &dcomplexy, incy_64);
+  // CHECK-NEXT: blasStatus = hipblasZaxpy_v2_64(blasHandle, n_64, &dcomplexa, &dcomplexx, incx_64, &dcomplexy, incy_64);
+  blasStatus = cublasZaxpy_64(blasHandle, n_64, &dcomplexa, &dcomplexx, incx_64, &dcomplexy, incy_64);
+  blasStatus = cublasZaxpy_v2_64(blasHandle, n_64, &dcomplexa, &dcomplexx, incx_64, &dcomplexy, incy_64);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasScopy_v2_64(cublasHandle_t handle, int64_t n, const float* x, int64_t incx, float* y, int64_t incy);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasScopy_64(hipblasHandle_t handle, int64_t n, const float* x, int64_t incx, float* y, int64_t incy);
+  // CHECK: blasStatus = hipblasScopy_64(blasHandle, n_64, &fx, incx_64, &fy, incy_64);
+  // CHECK-NEXT: blasStatus = hipblasScopy_64(blasHandle, n_64, &fx, incx_64, &fy, incy_64);
+  blasStatus = cublasScopy_64(blasHandle, n_64, &fx, incx_64, &fy, incy_64);
+  blasStatus = cublasScopy_v2_64(blasHandle, n_64, &fx, incx_64, &fy, incy_64);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasDcopy_v2_64(cublasHandle_t handle, int64_t n, const double* x, int64_t incx, double* y, int64_t incy);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasDcopy_64(hipblasHandle_t handle, int64_t n, const double* x, int64_t incx, double* y, int64_t incy);
+  // CHECK: blasStatus = hipblasDcopy_64(blasHandle, n_64, &dx, incx_64, &dy, incy_64);
+  // CHECK-NEXT: blasStatus = hipblasDcopy_64(blasHandle, n_64, &dx, incx_64, &dy, incy_64);
+  blasStatus = cublasDcopy_64(blasHandle, n_64, &dx, incx_64, &dy, incy_64);
+  blasStatus = cublasDcopy_v2_64(blasHandle, n_64, &dx, incx_64, &dy, incy_64);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasCcopy_v2_64(cublasHandle_t handle, int64_t n, const cuComplex* x, int64_t incx, cuComplex* y, int64_t incy);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasCcopy_v2_64(hipblasHandle_t handle, int64_t n, const hipComplex* x, int64_t incx, hipComplex* y, int64_t incy);
+  // CHECK: blasStatus = hipblasCcopy_v2_64(blasHandle, n_64, &complexx, incx_64, &complexy, incy_64);
+  // CHECK-NEXT: blasStatus = hipblasCcopy_v2_64(blasHandle, n_64, &complexx, incx_64, &complexy, incy_64);
+  blasStatus = cublasCcopy_64(blasHandle, n_64, &complexx, incx_64, &complexy, incy_64);
+  blasStatus = cublasCcopy_v2_64(blasHandle, n_64, &complexx, incx_64, &complexy, incy_64);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasZcopy_v2_64(cublasHandle_t handle, int64_t n, const cuDoubleComplex* x, int64_t incx, cuDoubleComplex* y, int64_t incy);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasZcopy_v2_64(hipblasHandle_t handle, int64_t n, const hipDoubleComplex* x, int64_t incx, hipDoubleComplex* y, int64_t incy);
+  // CHECK: blasStatus = hipblasZcopy_v2_64(blasHandle, n_64, &dcomplexx, incx_64, &dcomplexy, incy_64);
+  // CHECK-NEXT: blasStatus = hipblasZcopy_v2_64(blasHandle, n_64, &dcomplexx, incx_64, &dcomplexy, incy_64);
+  blasStatus = cublasZcopy_64(blasHandle, n_64, &dcomplexx, incx_64, &dcomplexy, incy_64);
+  blasStatus = cublasZcopy_v2_64(blasHandle, n_64, &dcomplexx, incx_64, &dcomplexy, incy_64);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasSdot_v2_64(cublasHandle_t handle, int64_t n, const float* x, int64_t incx, const float* y, int64_t incy, float* result);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasSdot_64(hipblasHandle_t handle, int64_t n, const float* x, int64_t incx, const float* y, int64_t incy, float* result);
+  // CHECK: blasStatus = hipblasSdot_64(blasHandle, n_64, &fx, incx_64, &fy, incy_64, &fresult);
+  // CHECK-NEXT: blasStatus = hipblasSdot_64(blasHandle, n_64, &fx, incx_64, &fy, incy_64, &fresult);
+  blasStatus = cublasSdot_64(blasHandle, n_64, &fx, incx_64, &fy, incy_64, &fresult);
+  blasStatus = cublasSdot_v2_64(blasHandle, n_64, &fx, incx_64, &fy, incy_64, &fresult);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasDdot_v2_64(cublasHandle_t handle, int64_t n, const double* x, int64_t incx, const double* y, int64_t incy, double* result);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasDdot_64(hipblasHandle_t handle, int64_t n, const double* x, int64_t incx, const double* y, int64_t incy, double* result);
+  // CHECK: blasStatus = hipblasDdot_64(blasHandle, n_64, &dx, incx_64, &dy, incy_64, &dresult);
+  // CHECK-NEXT: blasStatus = hipblasDdot_64(blasHandle, n_64, &dx, incx_64, &dy, incy_64, &dresult);
+  blasStatus = cublasDdot_64(blasHandle, n_64, &dx, incx_64, &dy, incy_64, &dresult);
+  blasStatus = cublasDdot_v2_64(blasHandle, n_64, &dx, incx_64, &dy, incy_64, &dresult);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasCdotc_v2_64(cublasHandle_t handle, int64_t n, const cuComplex* x, int64_t incx, const cuComplex* y, int64_t incy, cuComplex* result);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasCdotc_v2_64(hipblasHandle_t handle, int64_t n, const hipComplex* x, int64_t incx, const hipComplex* y, int64_t incy, hipComplex* result);
+  // CHECK: blasStatus = hipblasCdotc_v2_64(blasHandle, n_64, &complexx, incx_64, &complexy, incy_64, &complexresult);
+  // CHECK-NEXT: blasStatus = hipblasCdotc_v2_64(blasHandle, n_64, &complexx, incx_64, &complexy, incy_64, &complexresult);
+  blasStatus = cublasCdotc_64(blasHandle, n_64, &complexx, incx_64, &complexy, incy_64, &complexresult);
+  blasStatus = cublasCdotc_v2_64(blasHandle, n_64, &complexx, incx_64, &complexy, incy_64, &complexresult);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasCdotu_v2_64(cublasHandle_t handle, int64_t n, const cuComplex* x, int64_t incx, const cuComplex* y, int64_t incy, cuComplex* result);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasCdotu_v2_64(hipblasHandle_t handle, int64_t n, const hipComplex* x, int64_t incx, const hipComplex* y, int64_t incy, hipComplex* result);
+  // CHECK: blasStatus = hipblasCdotu_v2_64(blasHandle, n_64, &complexx, incx_64, &complexy, incy_64, &complexresult);
+  // CHECK-NEXT: blasStatus = hipblasCdotu_v2_64(blasHandle, n_64, &complexx, incx_64, &complexy, incy_64, &complexresult);
+  blasStatus = cublasCdotu_64(blasHandle, n_64, &complexx, incx_64, &complexy, incy_64, &complexresult);
+  blasStatus = cublasCdotu_v2_64(blasHandle, n_64, &complexx, incx_64, &complexy, incy_64, &complexresult);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasZdotc_v2_64(cublasHandle_t handle, int64_t n, const cuDoubleComplex* x, int64_t incx, const cuDoubleComplex* y, int64_t incy, cuDoubleComplex* result);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasZdotc_v2_64(hipblasHandle_t handle, int64_t n, const hipDoubleComplex* x, int64_t incx, const hipDoubleComplex* y, int64_t incy, hipDoubleComplex* result);
+  // CHECK: blasStatus = hipblasZdotc_v2_64(blasHandle, n_64, &dcomplexx, incx_64, &dcomplexy, incy_64, &dcomplexresult);
+  // CHECK-NEXT: blasStatus = hipblasZdotc_v2_64(blasHandle, n_64, &dcomplexx, incx_64, &dcomplexy, incy_64, &dcomplexresult);
+  blasStatus = cublasZdotc_64(blasHandle, n_64, &dcomplexx, incx_64, &dcomplexy, incy_64, &dcomplexresult);
+  blasStatus = cublasZdotc_v2_64(blasHandle, n_64, &dcomplexx, incx_64, &dcomplexy, incy_64, &dcomplexresult);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasZdotu_v2_64(cublasHandle_t handle, int64_t n, const cuDoubleComplex* x, int64_t incx, const cuDoubleComplex* y, int64_t incy, cuDoubleComplex* result);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasZdotu_v2_64(hipblasHandle_t handle, int64_t n, const hipDoubleComplex* x, int64_t incx, const hipDoubleComplex* y, int64_t incy, hipDoubleComplex* result);
+  // CHECK: blasStatus = hipblasZdotu_v2_64(blasHandle, n_64, &dcomplexx, incx_64, &dcomplexy, incy_64, &dcomplexresult);
+  // CHECK-NEXT: blasStatus = hipblasZdotu_v2_64(blasHandle, n_64, &dcomplexx, incx_64, &dcomplexy, incy_64, &dcomplexresult);
+  blasStatus = cublasZdotu_64(blasHandle, n_64, &dcomplexx, incx_64, &dcomplexy, incy_64, &dcomplexresult);
+  blasStatus = cublasZdotu_v2_64(blasHandle, n_64, &dcomplexx, incx_64, &dcomplexy, incy_64, &dcomplexresult);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasSnrm2_v2_64(cublasHandle_t handle, int64_t n, const float* x, int64_t incx, float* result);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasSnrm2_64(hipblasHandle_t handle, int64_t n, const float* x, int64_t incx, float* result);
+  // CHECK: blasStatus = hipblasSnrm2_64(blasHandle, n_64, &fx, incx_64, &fresult);
+  // CHECK-NEXT: blasStatus = hipblasSnrm2_64(blasHandle, n_64, &fx, incx_64, &fresult);
+  blasStatus = cublasSnrm2_64(blasHandle, n_64, &fx, incx_64, &fresult);
+  blasStatus = cublasSnrm2_v2_64(blasHandle, n_64, &fx, incx_64, &fresult);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasDnrm2_v2_64(cublasHandle_t handle, int64_t n, const double* x, int64_t incx, double* result);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasDnrm2_64(hipblasHandle_t handle, int64_t n, const double* x, int64_t incx, double* result);
+  // CHECK: blasStatus = hipblasDnrm2_64(blasHandle, n_64, &dx, incx_64, &dresult);
+  // CHECK-NEXT: blasStatus = hipblasDnrm2_64(blasHandle, n_64, &dx, incx_64, &dresult);
+  blasStatus = cublasDnrm2_64(blasHandle, n_64, &dx, incx_64, &dresult);
+  blasStatus = cublasDnrm2_v2_64(blasHandle, n_64, &dx, incx_64, &dresult);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasScnrm2_v2_64(cublasHandle_t handle, int64_t n, const cuComplex* x, int64_t incx, float* result);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasScnrm2_v2_64(hipblasHandle_t handle, int64_t n, const hipComplex* x, int64_t incx, float* result);
+  // CHECK: blasStatus = hipblasScnrm2_v2_64(blasHandle, n_64, &complexx, incx_64, &fresult);
+  // CHECK-NEXT: blasStatus = hipblasScnrm2_v2_64(blasHandle, n_64, &complexx, incx_64, &fresult);
+  blasStatus = cublasScnrm2_64(blasHandle, n_64, &complexx, incx_64, &fresult);
+  blasStatus = cublasScnrm2_v2_64(blasHandle, n_64, &complexx, incx_64, &fresult);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasDznrm2_v2_64(cublasHandle_t handle, int64_t n, const cuDoubleComplex* x, int64_t incx, double* result);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasDznrm2_v2_64(hipblasHandle_t handle, int64_t n, const hipDoubleComplex* x, int64_t incx, double* result);
+  // CHECK: blasStatus = hipblasDznrm2_v2_64(blasHandle, n_64, &dcomplexx, incx_64, &dresult);
+  // CHECK-NEXT: blasStatus = hipblasDznrm2_v2_64(blasHandle, n_64, &dcomplexx, incx_64, &dresult);
+  blasStatus = cublasDznrm2_64(blasHandle, n_64, &dcomplexx, incx_64, &dresult);
+  blasStatus = cublasDznrm2_v2_64(blasHandle, n_64, &dcomplexx, incx_64, &dresult);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasSrot_v2_64(cublasHandle_t handle, int64_t n, float* x, int64_t incx, float* y, int64_t incy, const float* c, const float* s);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasSrot_64(hipblasHandle_t handle, int64_t n,float* x, int64_t incx, float* y, int64_t incy, const float* c, const float* s);
+  // CHECK: blasStatus = hipblasSrot_64(blasHandle, n_64, &fx, incx_64, &fy, incy_64, &fc, &fs);
+  // CHECK-NEXT: blasStatus = hipblasSrot_64(blasHandle, n_64, &fx, incx_64, &fy, incy_64, &fc, &fs);
+  blasStatus = cublasSrot_64(blasHandle, n_64, &fx, incx_64, &fy, incy_64, &fc, &fs);
+  blasStatus = cublasSrot_v2_64(blasHandle, n_64, &fx, incx_64, &fy, incy_64, &fc, &fs);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasDrot_v2_64(cublasHandle_t handle, int64_t n, double* x, int64_t incx, double* y, int64_t incy, const double* c, const double* s);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasDrot_64(hipblasHandle_t handle, int64_t n, double* x, int64_t incx, double* y, int64_t incy, const double* c, const double* s);
+  // CHECK: blasStatus = hipblasDrot_64(blasHandle, n_64, &dx, incx_64, &dy, incy_64, &dc, &ds);
+  // CHECK-NEXT: blasStatus = hipblasDrot_64(blasHandle, n_64, &dx, incx_64, &dy, incy_64, &dc, &ds);
+  blasStatus = cublasDrot_64(blasHandle, n_64, &dx, incx_64, &dy, incy_64, &dc, &ds);
+  blasStatus = cublasDrot_v2_64(blasHandle, n_64, &dx, incx_64, &dy, incy_64, &dc, &ds);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasCrot_v2_64(cublasHandle_t handle, int64_t n, cuComplex* x, int64_t incx, cuComplex* y, int64_t incy, const float* c, const cuComplex* s);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasCrot_v2_64(hipblasHandle_t handle, int64_t n, hipComplex* x, int64_t incx, hipComplex* y, int64_t incy, const float* c, const hipComplex* s);
+  // CHECK: blasStatus = hipblasCrot_v2_64(blasHandle, n_64, &complexx, incx_64, &complexy, incy_64, &fc, &complexs);
+  // CHECK-NEXT: blasStatus = hipblasCrot_v2_64(blasHandle, n_64, &complexx, incx_64, &complexy, incy_64, &fc, &complexs);
+  blasStatus = cublasCrot_64(blasHandle, n_64, &complexx, incx_64, &complexy, incy_64, &fc, &complexs);
+  blasStatus = cublasCrot_v2_64(blasHandle, n_64, &complexx, incx_64, &complexy, incy_64, &fc, &complexs);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasCsrot_v2_64(cublasHandle_t handle, int64_t n, cuComplex* x, int64_t incx, cuComplex* y, int64_t incy, const float* c, const float* s);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasCsrot_v2_64(hipblasHandle_t handle, int64_t n, hipComplex* x, int64_t incx, hipComplex* y, int64_t incy, const float* c, const float* s);
+  // CHECK: blasStatus = hipblasCsrot_v2_64(blasHandle, n_64, &complexx, incx_64, &complexy, incy_64, &fc, &fs);
+  // CHECK-NEXT: blasStatus = hipblasCsrot_v2_64(blasHandle, n_64, &complexx, incx_64, &complexy, incy_64, &fc, &fs);
+  blasStatus = cublasCsrot_64(blasHandle, n_64, &complexx, incx_64, &complexy, incy_64, &fc, &fs);
+  blasStatus = cublasCsrot_v2_64(blasHandle, n_64, &complexx, incx_64, &complexy, incy_64, &fc, &fs);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasZrot_v2_64(cublasHandle_t handle, int64_t n, cuDoubleComplex* x, int64_t incx, cuDoubleComplex* y, int64_t incy, const double* c, const cuDoubleComplex* s);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasZrot_v2_64(hipblasHandle_t handle, int64_t n, hipDoubleComplex* x, int64_t incx, hipDoubleComplex* y, int64_t incy, const double* c, const hipDoubleComplex* s);
+  // CHECK: blasStatus = hipblasZrot_v2_64(blasHandle, n_64, &dcomplexx, incx_64, &dcomplexy, incy_64, &dc, &dcomplexs);
+  // CHECK-NEXT: blasStatus = hipblasZrot_v2_64(blasHandle, n_64, &dcomplexx, incx_64, &dcomplexy, incy_64, &dc, &dcomplexs);
+  blasStatus = cublasZrot_64(blasHandle, n_64, &dcomplexx, incx_64, &dcomplexy, incy_64, &dc, &dcomplexs);
+  blasStatus = cublasZrot_v2_64(blasHandle, n_64, &dcomplexx, incx_64, &dcomplexy, incy_64, &dc, &dcomplexs);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasZdrot_v2_64(cublasHandle_t handle, int64_t n, cuDoubleComplex* x, int64_t incx, cuDoubleComplex* y, int64_t incy, const double* c, const double* s);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasZdrot_v2_64(hipblasHandle_t handle, int64_t n, hipDoubleComplex* x, int64_t incx, hipDoubleComplex* y, int64_t incy, const double* c, const double* s);
+  // CHECK: blasStatus = hipblasZdrot_v2_64(blasHandle, n_64, &dcomplexx, incx_64, &dcomplexy, incy_64, &dc, &ds);
+  // CHECK-NEXT: blasStatus = hipblasZdrot_v2_64(blasHandle, n_64, &dcomplexx, incx_64, &dcomplexy, incy_64, &dc, &ds);
+  blasStatus = cublasZdrot_64(blasHandle, n_64, &dcomplexx, incx_64, &dcomplexy, incy_64, &dc, &ds);
+  blasStatus = cublasZdrot_v2_64(blasHandle, n_64, &dcomplexx, incx_64, &dcomplexy, incy_64, &dc, &ds);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasSrotm_v2_64(cublasHandle_t handle, int64_t n, float* x, int64_t incx, float* y, int64_t incy, const float* param);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasSrotm_64(hipblasHandle_t handle, int64_t n, float* x, int64_t incx, float* y, int64_t incy, const float* param);
+  // CHECK: blasStatus = hipblasSrotm_64(blasHandle, n_64, &fx, incx_64, &fy, incy_64, &fparam);
+  // CHECK-NEXT: blasStatus = hipblasSrotm_64(blasHandle, n_64, &fx, incx_64, &fy, incy_64, &fparam);
+  blasStatus = cublasSrotm_64(blasHandle, n_64, &fx, incx_64, &fy, incy_64, &fparam);
+  blasStatus = cublasSrotm_v2_64(blasHandle, n_64, &fx, incx_64, &fy, incy_64, &fparam);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasDrotm_v2_64(cublasHandle_t handle, int64_t n, double* x, int64_t incx, double* y, int64_t incy, const double* param);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasDrotm_64(hipblasHandle_t handle, int64_t n, double* x, int64_t incx, double* y, int64_t incy, const double* param);
+  // CHECK: blasStatus = hipblasDrotm_64(blasHandle, n_64, &dx, incx_64, &dy, incy_64, &dparam);
+  // CHECK-NEXT: blasStatus = hipblasDrotm_64(blasHandle, n_64, &dx, incx_64, &dy, incy_64, &dparam);
+  blasStatus = cublasDrotm_64(blasHandle, n_64, &dx, incx_64, &dy, incy_64, &dparam);
+  blasStatus = cublasDrotm_v2_64(blasHandle, n_64, &dx, incx_64, &dy, incy_64, &dparam);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasSscal_v2_64(cublasHandle_t handle, int64_t n, const float* alpha, float* x, int64_t incx);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasSscal_64(hipblasHandle_t handle, int64_t n, const float* alpha, float* x, int64_t incx);
+  // CHECK: blasStatus = hipblasSscal_64(blasHandle, n_64, &fa, &fx, incx_64);
+  // CHECK-NEXT: blasStatus = hipblasSscal_64(blasHandle, n_64, &fa, &fx, incx_64);
+  blasStatus = cublasSscal_64(blasHandle, n_64, &fa, &fx, incx_64);
+  blasStatus = cublasSscal_v2_64(blasHandle, n_64, &fa, &fx, incx_64);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasDscal_v2_64(cublasHandle_t handle, int64_t n, const double* alpha, double* x, int64_t incx);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasDscal_64(hipblasHandle_t handle, int64_t n, const double* alpha, double* x, int64_t incx);
+  // CHECK: blasStatus = hipblasDscal_64(blasHandle, n_64, &da, &dx, incx_64);
+  // CHECK-NEXT: blasStatus = hipblasDscal_64(blasHandle, n_64, &da, &dx, incx_64);
+  blasStatus = cublasDscal_64(blasHandle, n_64, &da, &dx, incx_64);
+  blasStatus = cublasDscal_v2_64(blasHandle, n_64, &da, &dx, incx_64);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasCscal_v2_64(cublasHandle_t handle, int64_t n, const cuComplex* alpha, cuComplex* x, int64_t incx);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasCscal_v2_64(hipblasHandle_t handle, int64_t n, const hipComplex* alpha, hipComplex* x, int64_t incx);
+  // CHECK: blasStatus = hipblasCscal_v2_64(blasHandle, n_64, &complexa, &complexx, incx_64);
+  // CHECK-NEXT: blasStatus = hipblasCscal_v2_64(blasHandle, n_64, &complexa, &complexx, incx_64);
+  blasStatus = cublasCscal_64(blasHandle, n_64, &complexa, &complexx, incx_64);
+  blasStatus = cublasCscal_v2_64(blasHandle, n_64, &complexa, &complexx, incx_64);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasCsscal_v2_64(cublasHandle_t handle, int64_t n, const float* alpha, cuComplex* x, int64_t incx);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasCsscal_v2_64(hipblasHandle_t handle, int64_t n, const float* alpha, hipComplex* x, int64_t incx);
+  // CHECK: blasStatus = hipblasCsscal_v2_64(blasHandle, n_64, &fa, &complexx, incx_64);
+  // CHECK-NEXT: blasStatus = hipblasCsscal_v2_64(blasHandle, n_64, &fa, &complexx, incx_64);
+  blasStatus = cublasCsscal_64(blasHandle, n_64, &fa, &complexx, incx_64);
+  blasStatus = cublasCsscal_v2_64(blasHandle, n_64, &fa, &complexx, incx_64);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasZscal_v2_64(cublasHandle_t handle, int64_t n, const cuDoubleComplex* alpha, cuDoubleComplex* x, int64_t incx);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasZscal_v2_64(hipblasHandle_t handle, int64_t n, const hipDoubleComplex* alpha, hipDoubleComplex* x, int64_t incx);
+  // CHECK: blasStatus = hipblasZscal_v2_64(blasHandle, n_64, &dcomplexa, &dcomplexx, incx_64);
+  // CHECK-NEXT: blasStatus = hipblasZscal_v2_64(blasHandle, n_64, &dcomplexa, &dcomplexx, incx_64);
+  blasStatus = cublasZscal_64(blasHandle, n_64, &dcomplexa, &dcomplexx, incx_64);
+  blasStatus = cublasZscal_v2_64(blasHandle, n_64, &dcomplexa, &dcomplexx, incx_64);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasZdscal_v2_64(cublasHandle_t handle, int64_t n, const double* alpha, cuDoubleComplex* x, int64_t incx);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasZdscal_v2_64(hipblasHandle_t handle, int64_t n, const double* alpha, hipDoubleComplex* x, int64_t incx);
+  // CHECK: blasStatus = hipblasZdscal_v2_64(blasHandle, n_64, &da, &dcomplexx, incx_64);
+  // CHECK-NEXT: blasStatus = hipblasZdscal_v2_64(blasHandle, n_64, &da, &dcomplexx, incx_64);
+  blasStatus = cublasZdscal_64(blasHandle, n_64, &da, &dcomplexx, incx_64);
+  blasStatus = cublasZdscal_v2_64(blasHandle, n_64, &da, &dcomplexx, incx_64);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasSswap_v2_64(cublasHandle_t handle, int64_t n, float* x, int64_t incx, float* y, int64_t incy);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasSswap_64(hipblasHandle_t handle, int64_t n, float* x, int64_t incx, float* y, int64_t incy);
+  // CHECK: blasStatus = hipblasSswap_64(blasHandle, n_64, &fx, incx_64, &fy, incy_64);
+  // CHECK-NEXT: blasStatus = hipblasSswap_64(blasHandle, n_64, &fx, incx_64, &fy, incy_64);
+  blasStatus = cublasSswap_64(blasHandle, n_64, &fx, incx_64, &fy, incy_64);
+  blasStatus = cublasSswap_v2_64(blasHandle, n_64, &fx, incx_64, &fy, incy_64);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasDswap_v2_64(cublasHandle_t handle, int64_t n, double* x, int64_t incx, double* y, int64_t incy);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasDswap_64(hipblasHandle_t handle, int64_t n, double* x, int64_t incx, double* y, int64_t incy);
+  // CHECK: blasStatus = hipblasDswap_64(blasHandle, n_64, &dx, incx_64, &dy, incy_64);
+  // CHECK-NEXT: blasStatus = hipblasDswap_64(blasHandle, n_64, &dx, incx_64, &dy, incy_64);
+  blasStatus = cublasDswap_64(blasHandle, n_64, &dx, incx_64, &dy, incy_64);
+  blasStatus = cublasDswap_v2_64(blasHandle, n_64, &dx, incx_64, &dy, incy_64);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasCswap_v2_64(cublasHandle_t handle, int64_t n, cuComplex* x, int64_t incx, cuComplex* y, int64_t incy);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasCswap_v2_64(hipblasHandle_t handle, int64_t n, hipComplex* x, int64_t incx, hipComplex* y, int64_t incy);
+  // CHECK: blasStatus = hipblasCswap_v2_64(blasHandle, n_64, &complexx, incx_64, &complexy, incy_64);
+  // CHECK-NEXT: blasStatus = hipblasCswap_v2_64(blasHandle, n_64, &complexx, incx_64, &complexy, incy_64);
+  blasStatus = cublasCswap_64(blasHandle, n_64, &complexx, incx_64, &complexy, incy_64);
+  blasStatus = cublasCswap_v2_64(blasHandle, n_64, &complexx, incx_64, &complexy, incy_64);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasZswap_v2_64(cublasHandle_t handle, int64_t n, cuDoubleComplex* x, int64_t incx, cuDoubleComplex* y, int64_t incy);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasZswap_v2_64(hipblasHandle_t handle, int64_t n, hipDoubleComplex* x, int64_t incx, hipDoubleComplex* y, int64_t incy);
+  // CHECK: blasStatus = hipblasZswap_v2_64(blasHandle, n_64, &dcomplexx, incx_64, &dcomplexy, incy_64);
+  // CHECK-NEXT: blasStatus = hipblasZswap_v2_64(blasHandle, n_64, &dcomplexx, incx_64, &dcomplexy, incy_64);
+  blasStatus = cublasZswap_64(blasHandle, n_64, &dcomplexx, incx_64, &dcomplexy, incy_64);
+  blasStatus = cublasZswap_v2_64(blasHandle, n_64, &dcomplexx, incx_64, &dcomplexy, incy_64);
 #endif
 
   return 0;

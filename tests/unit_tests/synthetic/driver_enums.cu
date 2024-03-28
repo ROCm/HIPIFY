@@ -6,6 +6,8 @@
 #if defined(_WIN32)
   #include "windows.h"
   #include <GL/glew.h>
+#elif CUDA_VERSION <= 10000
+  #include <GL/glew.h>
 #endif
 #include "cudaGL.h"
 
@@ -1068,6 +1070,26 @@ int main() {
   cudaGraphDebugDotFlags GRAPH_DEBUG_DOT_FLAGS_EXT_SEMAS_WAIT_NODE_PARAMS = cudaGraphDebugDotFlagsExtSemasWaitNodeParams;
   cudaGraphDebugDotFlags GRAPH_DEBUG_DOT_FLAGS_KERNEL_NODE_ATTRIBUTES = cudaGraphDebugDotFlagsKernelNodeAttributes;
   cudaGraphDebugDotFlags GRAPH_DEBUG_DOT_FLAGS_HANDLES = cudaGraphDebugDotFlagsHandles;
+
+  // CHECK: hipFlushGPUDirectRDMAWritesOptions flushGPUDirectRDMAWritesOptions;
+  // CHECK-NEXT: hipFlushGPUDirectRDMAWritesOptions flushGPUDirectRDMAWritesOptions_enum;
+  // CHECK-NEXT: hipFlushGPUDirectRDMAWritesOptions FLUSH_GPU_DIRECT_RDMA_WRITES_OPTION_HOST = hipFlushGPUDirectRDMAWritesOptionHost;
+  // CHECK-NEXT: hipFlushGPUDirectRDMAWritesOptions FLUSH_GPU_DIRECT_RDMA_WRITES_OPTION_MEMOPS = hipFlushGPUDirectRDMAWritesOptionMemOps;
+  CUflushGPUDirectRDMAWritesOptions flushGPUDirectRDMAWritesOptions;
+  CUflushGPUDirectRDMAWritesOptions_enum flushGPUDirectRDMAWritesOptions_enum;
+  CUflushGPUDirectRDMAWritesOptions FLUSH_GPU_DIRECT_RDMA_WRITES_OPTION_HOST = CU_FLUSH_GPU_DIRECT_RDMA_WRITES_OPTION_HOST;
+  CUflushGPUDirectRDMAWritesOptions FLUSH_GPU_DIRECT_RDMA_WRITES_OPTION_MEMOPS = CU_FLUSH_GPU_DIRECT_RDMA_WRITES_OPTION_MEMOPS;
+
+  // CHECK: hipGPUDirectRDMAWritesOrdering GPUDirectRDMAWritesOrdering;
+  // CHECK-NEXT: hipGPUDirectRDMAWritesOrdering GPUDirectRDMAWritesOrdering_enum;
+  // CHECK-NEXT: hipGPUDirectRDMAWritesOrdering GPU_DIRECT_RDMA_WRITES_ORDERING_NONE = hipGPUDirectRDMAWritesOrderingNone;
+  // CHECK-NEXT: hipGPUDirectRDMAWritesOrdering GPU_DIRECT_RDMA_WRITES_ORDERING_OWNER = hipGPUDirectRDMAWritesOrderingOwner;
+  // CHECK-NEXT: hipGPUDirectRDMAWritesOrdering GPU_DIRECT_RDMA_WRITES_ORDERING_ALL_DEVICES = hipGPUDirectRDMAWritesOrderingAllDevices;
+  CUGPUDirectRDMAWritesOrdering GPUDirectRDMAWritesOrdering;
+  CUGPUDirectRDMAWritesOrdering_enum GPUDirectRDMAWritesOrdering_enum;
+  CUGPUDirectRDMAWritesOrdering GPU_DIRECT_RDMA_WRITES_ORDERING_NONE = CU_GPU_DIRECT_RDMA_WRITES_ORDERING_NONE;
+  CUGPUDirectRDMAWritesOrdering GPU_DIRECT_RDMA_WRITES_ORDERING_OWNER = CU_GPU_DIRECT_RDMA_WRITES_ORDERING_OWNER;
+  CUGPUDirectRDMAWritesOrdering GPU_DIRECT_RDMA_WRITES_ORDERING_ALL_DEVICES = CU_GPU_DIRECT_RDMA_WRITES_ORDERING_ALL_DEVICES;
 #endif
 
 #if CUDA_VERSION >= 11040
@@ -1110,6 +1132,32 @@ int main() {
   // CHECK-NEXT: hipGraphInstantiateFlags GRAPH_INSTANTIATE_FLAG_DEVICE_LAUNCH = hipGraphInstantiateFlagDeviceLaunch;
   CUgraphInstantiate_flags GRAPH_INSTANTIATE_FLAG_UPLOAD = CUDA_GRAPH_INSTANTIATE_FLAG_UPLOAD;
   CUgraphInstantiate_flags GRAPH_INSTANTIATE_FLAG_DEVICE_LAUNCH = CUDA_GRAPH_INSTANTIATE_FLAG_DEVICE_LAUNCH;
+
+  // CHECK: hipGraphInstantiateResult graphInstantiateResult;
+  // CHECK-NEXT: hipGraphInstantiateResult graphInstantiateResult_enum;
+  // CHECK-NEXT: hipGraphInstantiateResult GRAPH_INSTANTIATE_SUCCESS = hipGraphInstantiateSuccess;
+  // CHECK-NEXT: hipGraphInstantiateResult GRAPH_INSTANTIATE_ERROR = hipGraphInstantiateError;
+  // CHECK-NEXT: hipGraphInstantiateResult GRAPH_INSTANTIATE_INVALID_STRUCTURE = hipGraphInstantiateInvalidStructure;
+  // CHECK-NEXT: hipGraphInstantiateResult GRAPH_INSTANTIATE_NODE_OPERATION_NOT_SUPPORTED = hipGraphInstantiateNodeOperationNotSupported;
+  // CHECK-NEXT: hipGraphInstantiateResult GRAPH_INSTANTIATE_MULTIPLE_CTXS_NOT_SUPPORTED = hipGraphInstantiateMultipleDevicesNotSupported;
+  CUgraphInstantiateResult graphInstantiateResult;
+  CUgraphInstantiateResult_enum graphInstantiateResult_enum;
+  CUgraphInstantiateResult GRAPH_INSTANTIATE_SUCCESS = CUDA_GRAPH_INSTANTIATE_SUCCESS;
+  CUgraphInstantiateResult GRAPH_INSTANTIATE_ERROR = CUDA_GRAPH_INSTANTIATE_ERROR;
+  CUgraphInstantiateResult GRAPH_INSTANTIATE_INVALID_STRUCTURE = CUDA_GRAPH_INSTANTIATE_INVALID_STRUCTURE;
+  CUgraphInstantiateResult GRAPH_INSTANTIATE_NODE_OPERATION_NOT_SUPPORTED = CUDA_GRAPH_INSTANTIATE_NODE_OPERATION_NOT_SUPPORTED;
+  CUgraphInstantiateResult GRAPH_INSTANTIATE_MULTIPLE_CTXS_NOT_SUPPORTED = CUDA_GRAPH_INSTANTIATE_MULTIPLE_CTXS_NOT_SUPPORTED;
+
+  // CHECK: hipDriverProcAddressQueryResult driverProcAddressQueryResult;
+  // CHECK-NEXT:hipDriverProcAddressQueryResult driverProcAddressQueryResult_enum;
+  // CHECK-NEXT:hipDriverProcAddressQueryResult GET_PROC_ADDRESS_SUCCESS = HIP_GET_PROC_ADDRESS_SUCCESS;
+  // CHECK-NEXT:hipDriverProcAddressQueryResult GET_PROC_ADDRESS_SYMBOL_NOT_FOUND = HIP_GET_PROC_ADDRESS_SYMBOL_NOT_FOUND;
+  // CHECK-NEXT:hipDriverProcAddressQueryResult GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT = HIP_GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT;
+  CUdriverProcAddressQueryResult driverProcAddressQueryResult;
+  CUdriverProcAddressQueryResult_enum driverProcAddressQueryResult_enum;
+  CUdriverProcAddressQueryResult GET_PROC_ADDRESS_SUCCESS = CU_GET_PROC_ADDRESS_SUCCESS;
+  CUdriverProcAddressQueryResult GET_PROC_ADDRESS_SYMBOL_NOT_FOUND = CU_GET_PROC_ADDRESS_SYMBOL_NOT_FOUND;
+  CUdriverProcAddressQueryResult GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT = CU_GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT;
 #endif
 
   return 0;

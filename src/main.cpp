@@ -46,6 +46,9 @@ THE SOFTWARE.
 #include "llvm/Support/Path.h"
 #endif
 
+#define STRINGIFY(x) #x
+#define STRINGIFY_EXPANDED(x) STRINGIFY(x)
+
 constexpr auto DEBUG_TYPE = "cuda2hip";
 
 namespace ct = clang::tooling;
@@ -102,7 +105,71 @@ void sortInputFiles(int argc, const char **argv, std::vector<std::string> &files
   files.assign(sortedFiles.begin(), sortedFiles.end());
 }
 
-void appendArgumentsAdjusters(ct::RefactoringTool &Tool, const std::string &sSourceAbsPath, const char *hipify_exe) {
+bool checkLLVM(std::string& path_to_check) {
+  const std::string file_name_to_check = "__clang_cuda_runtime_wrapper.h";
+  const std::string file_name_to_check_2 = "algorithm";
+  const std::string cuda_wrappers_dir = "cuda_wrappers";
+  std::string fileToCheck = path_to_check + "/" + file_name_to_check;
+  bool bExist = llvm::sys::fs::exists(llvm::Twine(fileToCheck.c_str()));
+  if (bExist) {
+    fileToCheck = path_to_check + "/" + cuda_wrappers_dir + "/" + file_name_to_check_2;
+    bExist = llvm::sys::fs::exists(llvm::Twine(fileToCheck.c_str()));
+  }
+  return bExist;
+}
+
+bool setLLVM(ct::RefactoringTool& Tool, const char* hipify_exe) {
+  static int Dummy;
+  std::string hipify = llvm::sys::fs::getMainExecutable(hipify_exe, (void*)&Dummy);
+  std::string hipify_parent_path = std::string(llvm::sys::path::parent_path(hipify));
+  std::string clang_ver = STRINGIFY_EXPANDED(LIB_CLANG_RES);
+  std::string clang_res_path, clang_inc_path, fileToCheck;
+  const std::string include_dir = "include";
+  bool bExist = false;
+  // 1. --clang-resource-dir is specified
+  if (!ClangResourceDir.empty()) {
+    clang_res_path = ClangResourceDir;
+    clang_inc_path = clang_res_path + "/" + include_dir;
+    bExist = checkLLVM(clang_inc_path);
+  }
+  // 2. Check for ROCm LLVM
+  if (!bExist) {
+#if defined(_WIN32)
+    // HIP SDK for Windows
+    clang_res_path = hipify_parent_path + "/../lib/clang/" + clang_ver;
+#else
+    // ROCm Linux
+    clang_res_path = hipify_parent_path + "/../lib/llvm/lib/clang/" + clang_ver;
+#endif
+    clang_inc_path = clang_res_path + "/" + include_dir;
+    bExist = checkLLVM(clang_inc_path);
+  }
+#ifndef _WIN32
+  if (!bExist) {
+    // 2.1. ROCm Linux: hipify-clang standalone package
+    clang_res_path = hipify_parent_path + "/../" + include_dir + "/hipify";
+    clang_inc_path = clang_res_path + "/" + include_dir;
+    bExist = checkLLVM(clang_inc_path);
+  }
+#endif
+  // 3. Check for clang include copied by cmake install
+  if (!bExist) {
+    clang_res_path = hipify_parent_path;
+    clang_inc_path = clang_res_path + "/" + include_dir;
+    bExist = checkLLVM(clang_inc_path);
+  }
+  if (bExist) {
+    std::string sRes = "-resource-dir=" + clang_res_path;
+    Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster(sRes.c_str(), ct::ArgumentInsertPosition::BEGIN));
+  }
+  return bExist;
+}
+
+bool appendArgumentsAdjusters(ct::RefactoringTool &Tool, const std::string &sSourceAbsPath, const char *hipify_exe) {
+  if (!setLLVM(Tool, hipify_exe)) {
+    llvm::errs() << "\n" << sHipify << sError << "LLVM to work with not found. Hipification is impossible. Exiting. To provide hipify-clang with LLVM to work with, please specify the `--clang-resource-directory` option." << "\n";
+    return false;
+  }
   if (!IncludeDirs.empty()) {
     for (std::string s : IncludeDirs) {
       Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster(s.c_str(), ct::ArgumentInsertPosition::BEGIN));
@@ -115,37 +182,9 @@ void appendArgumentsAdjusters(ct::RefactoringTool &Tool, const std::string &sSou
       Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-D", ct::ArgumentInsertPosition::BEGIN));
     }
   }
-  static int Dummy;
-  std::string hipify = llvm::sys::fs::getMainExecutable(hipify_exe, (void *)&Dummy);
-  std::string hipify_parent_path = std::string(llvm::sys::path::parent_path(hipify));
-  // Includes for clang's CUDA wrappers for using by old packaged hipify-clang
-  std::string clang_inc_path_old = hipify_parent_path + "/include";
-  Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster(clang_inc_path_old.c_str(), ct::ArgumentInsertPosition::BEGIN));
-  Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-Xclang", ct::ArgumentInsertPosition::BEGIN));
-  Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-internal-isystem", ct::ArgumentInsertPosition::BEGIN));
-  Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-Xclang", ct::ArgumentInsertPosition::BEGIN));
-  clang_inc_path_old.append("/cuda_wrappers");
-  Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster(clang_inc_path_old.c_str(), ct::ArgumentInsertPosition::BEGIN));
-  Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-Xclang", ct::ArgumentInsertPosition::BEGIN));
-  Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-internal-isystem", ct::ArgumentInsertPosition::BEGIN));
-  Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-Xclang", ct::ArgumentInsertPosition::BEGIN));
-  // Includes for clang's CUDA wrappers for using by new packaged hipify-clang
-  std::string clang_inc_path_new = hipify_parent_path + "/../include/hipify";
-  Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster(clang_inc_path_new.c_str(), ct::ArgumentInsertPosition::BEGIN));
-  Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-Xclang", ct::ArgumentInsertPosition::BEGIN));
-  Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-internal-isystem", ct::ArgumentInsertPosition::BEGIN));
-  Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-Xclang", ct::ArgumentInsertPosition::BEGIN));
-  clang_inc_path_new.append("/cuda_wrappers");
-  Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster(clang_inc_path_new.c_str(), ct::ArgumentInsertPosition::BEGIN));
-  Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-Xclang", ct::ArgumentInsertPosition::BEGIN));
-  Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-internal-isystem", ct::ArgumentInsertPosition::BEGIN));
-  Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-Xclang", ct::ArgumentInsertPosition::BEGIN));
   // Standard c++14 by default
   Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-std=c++14", ct::ArgumentInsertPosition::BEGIN));
   std::string sInclude = "-I" + sys::path::parent_path(sSourceAbsPath).str();
-#if defined(HIPIFY_CLANG_RES)
-  Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-resource-dir=" HIPIFY_CLANG_RES, ct::ArgumentInsertPosition::BEGIN));
-#endif
   Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster(sInclude.c_str(), ct::ArgumentInsertPosition::BEGIN));
   Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-fno-delayed-template-parsing", ct::ArgumentInsertPosition::BEGIN));
   if (llcompat::pragma_once_outside_header()) {
@@ -167,6 +206,7 @@ void appendArgumentsAdjusters(ct::RefactoringTool &Tool, const std::string &sSou
     Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-v", ct::ArgumentInsertPosition::END));
   }
   Tool.appendArgumentsAdjuster(ct::getClangSyntaxOnlyAdjuster());
+  return true;
 }
 
 bool generatePython() {
@@ -386,7 +426,10 @@ int main(int argc, const char **argv) {
     ct::RefactoringTool Tool((bCompilationDatabase ? *compilationDatabase.get() : OptionsParser.getCompilations()), std::string(tmpFile.c_str()));
     ct::Replacements &replacementsToUse = llcompat::getReplacements(Tool, tmpFile.c_str());
     ReplacementsFrontendActionFactory<HipifyAction> actionFactory(&replacementsToUse);
-    appendArgumentsAdjusters(Tool, sSourceAbsPath, argv[0]);
+    if (!appendArgumentsAdjusters(Tool, sSourceAbsPath, argv[0])) {
+      Result = 1;
+      break;
+    }
     Statistics &currentStat = Statistics::current();
     // Hipify _all_ the things!
     if (Tool.runAndSave(&actionFactory)) {

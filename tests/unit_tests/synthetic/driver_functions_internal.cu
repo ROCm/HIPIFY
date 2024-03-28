@@ -7,6 +7,8 @@
 #if defined(_WIN32)
   #include "windows.h"
   #include <GL/glew.h>
+#elif CUDA_VERSION <= 10000
+  #include <GL/glew.h>
 #endif
 #include "cudaGL.h"
 

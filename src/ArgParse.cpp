@@ -221,6 +221,12 @@ cl::opt<bool> UseHipDataType("use-hip-data-types",
   cl::init(false),
   cl::cat(ToolTemplateCategory));
 
+cl::opt<std::string> ClangResourceDir("clang-resource-directory",
+  cl::desc("The clang resource path - the path to the parent folder for the 'include' folder, containing '__clang_cuda_runtime_wrapper.h' and other header files used on runtime"),
+  cl::value_desc("directory"),
+  cl::ZeroOrMore,
+  cl::cat(ToolTemplateCategory));
+
 cl::extrahelp CommonHelp(ct::CommonOptionsParser::HelpMessage);
 
 const std::vector<std::string> hipifyOptions {
@@ -247,6 +253,8 @@ const std::vector<std::string> hipifyOptions {
   std::string(Versions.ArgStr),
   std::string(NoUndocumented.ArgStr),
   std::string(NoWarningsUndocumented.ArgStr),
+  std::string(HipifyAMAP.ArgStr),
+  std::string(ClangResourceDir.ArgStr),
 };
 
 const std::vector<std::string> hipifyOptionsWithTwoArgs {
