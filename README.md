@@ -3,28 +3,6 @@
 HIPIFY is a set of tools that you can use to automatically translate CUDA source code into portable
 [HIP](https://github.com/ROCm/HIP) C++.
 
-## Table of contents
-
-<!-- toc -->
-
-* [hipify-clang](./docs/hipify-clang.md#hipify-clang)
-  * [Dependencies](./docs/hipify-clang.md#hipify-clang-dependencies)
-  * [Usage](./docs/hipify-clang.md#hipify-clang-usage)
-    * [JSON Compilation Database](./docs/hipify-clang.md#hipify-clang-using-json-compilation-database)
-    * [Hipification Statistics](./docs/hipify-clang.md#hipify-clang-hipification-statistics)
-  * [Building](./docs/hipify-clang.md#hipify-clang-building)
-  * [Testing](./docs/hipify-clang.md#hipify-clang-testing)
-    * [Linux](./docs/hipify-clang.md#hipify-clang-linux-testing)
-    * [Windows](./docs/hipify-clang.md#hipify-clang-windows-testing)
-* [hipify-perl](./docs/hipify-perl.md#hipify-perl)
-  * [Usage](./docs/hipify-perl.md#hipify-perl-usage)
-  * [Building](./docs/hipify-perl.md#hipify-perl-building)
-* Related: [hipify_torch](https://github.com/ROCmSoftwarePlatform/hipify_torch)
-* [Supported CUDA APIs](./docs/supported_apis.md#supported-cuda-apis)
-* [Documentation](#documentation)
-
-<!-- tocstop -->
-
 ## Documentation
 
 Documentation for HIPIFY is available at

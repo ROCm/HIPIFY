@@ -2,7 +2,7 @@
 
 hipify-clang and hipify-perl are tools to translate CUDA source code into portable HIP C++ automatically.
 
-* [hipify-clang](hipify-clang.md)
+* [hipify-clang](hipify-clang.rst)
 * [hipify-perl](hipify-perl.md)
 * [Supported CUDA APIs](supported_apis.md)
 
