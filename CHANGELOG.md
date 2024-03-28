@@ -7,7 +7,7 @@ Documentation for HIPIFY is available at
 
 ### Additions
 
-* LLVM 18.1.1 support
+* LLVM 18.1.2 support
 * cuDNN 9.0.0 support
 * New options:
   * `--clang-resource-directory` to specify the clang resource path - the path to the parent folder for the `include` folder that
