@@ -2,7 +2,7 @@
 hipify-clang
 **************************************************************************
 
-``hipify-clang`` is a clang-based tool for translating CUDA sources into HIP sources.
+``hipify-clang`` is a Clang-based tool for translating CUDA sources into HIP sources.
 
 It translates CUDA source into an abstract syntax tree (AST), which is traversed by transformation
 matchers. After applying all the matchers, the output HIP source is produced.
@@ -30,7 +30,7 @@ Dependencies
 
 ``hipify-clang`` requires:
 
-* `LLVM+clang <http://releases.llvm.org>`_ of at least version
+* `LLVM+Clang <http://releases.llvm.org>`_ of at least version
   `4.0.0 <http://releases.llvm.org/download.html#4.0.0>`_; the latest stable and recommended release:
   `18.1.2 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-18.1.2>`_.
 
@@ -167,11 +167,11 @@ Dependencies
       `17.0.3 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-17.0.3>`_,
       `17.0.4 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-17.0.4>`_,
       `17.0.5 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-17.0.5>`_,
-      `17.0.6 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-17.0.6>`_\*\*,
+      `17.0.6 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-17.0.6>`_,
       `18.1.0 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-18.1.0>`_,
       `18.1.1 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-18.1.1>`_,
-      `18.1.2 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-18.1.2>`:sup:`4`
-    - `12.3.2 <https://developer.nvidia.com/cuda-downloads>`:sup:`4`
+      `18.1.2 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-18.1.2>`_:sup:`4`
+    - `12.3.2 <https://developer.nvidia.com/cuda-downloads>`_:sup:`4`
     - **LATEST STABLE CONFIG**
     - **LATEST STABLE CONFIG**
   * - `19.0.0 git <https://github.com/llvm/llvm-project>`_
@@ -187,9 +187,9 @@ will be overwritten. You don't need to rebuild ``LLVM``.
 :sup:`3` Download the patch and unpack it into your ``LLVM source directory``; the ``Cuda.cpp`` file will
 be overwritten. You'll need to rebuild ``LLVM``.
 
-:sup:`4` represents the latest supported (and recommended) configuration.
+:sup:`4` Represents the latest supported and recommended configuration.
 
-In most cases, you can get a suitable version of ``LLVM+clang`` with your package manager.
+In most cases, you can get a suitable version of ``LLVM+Clang`` with your package manager.
 
 Failing that or having multiple versions of `LLVM`, you can
 `download a release archive <http://releases.llvm.org/>`_, build or install it, and set
@@ -200,7 +200,7 @@ Usage
 ============================================================
 
 To process a file, ``hipify-clang`` needs access to the same headers that would be required to compile it
-with ``clang``. For example:
+with ``Clang``. For example:
 
 .. code:: shell
 
@@ -371,13 +371,13 @@ specified in the CMake command line to build ``hipify-clang``. For example:
 
 On Windows, the following option should be specified for CMake in the first place:
 ``-G "Visual Studio 17 2022"``. The generated ``hipify-clang.sln`` should be built by
-``Visual Studio 17 2022`` instead of ``make``. See :ref:`Windows testing <windows-test>` for the
+``Visual Studio 17 2022`` instead of ``Make``. See :ref:`Windows testing` for the
 supported tools for building.
 
-Debug build type ``-DCMAKE_BUILD_TYPE=Debug`` is supported and tested. ``LLVM+clang``
+Debug build type ``-DCMAKE_BUILD_TYPE=Debug`` is supported and tested. ``LLVM+Clang``
 should be built in ``debug`` mode.
 
-64-bit build mode (``-Thost=x64`` on Windows) is also supported. ``LLVM+clang`` should be built in
+64-bit build mode (``-Thost=x64`` on Windows) is also supported. ``LLVM+Clang`` should be built in
 64-bit mode.
 
 You can find the binary at ``./dist/hipify-clang`` or at the folder specified by the
@@ -389,7 +389,7 @@ Testing hipify-clang
 ``hipify-clang`` has unit tests using LLVM
 `lit <https://llvm.org/docs/CommandGuide/lit.html>`_/`FileCheck <https://llvm.org/docs/CommandGuide/FileCheck.html>`_.
 
-``LLVM+clang`` should be built from sources, as pre-built binaries are not exhaustive for testing. Before
+``LLVM+Clang`` should be built from sources, as pre-built binaries are not exhaustive for testing. Before
 building, ensure that the
 `software required for building <https://releases.llvm.org/11.0.0/docs/GettingStarted.html#software>`_
 is of an appropriate version.
@@ -399,7 +399,7 @@ LLVM <= 9.0.1
 
 1. Download `LLVM <https://github.com/llvm/llvm-project/releases/download/llvmorg-9.0.1/llvm-9.0.1.src.tar.xz>`_ \+ `Clang <https://github.com/llvm/llvm-project/releases/download/llvmorg-9.0.1/clang-9.0.1.src.tar.xz>`_ sources
 
-2. Build `LLVM+clang <http://releases.llvm.org/9.0.0/docs/CMake.html>`_:
+2. Build `LLVM+Clang <http://releases.llvm.org/9.0.0/docs/CMake.html>`_:
 
    .. code:: bash
 
@@ -540,7 +540,7 @@ LLVM >= 10.0.0
 
 7. Ensure ``lit`` and ``FileCheck`` are installed; these are distributed with LLVM.
 
-   * Install ``lit`` into ``python``:
+   * Install ``lit`` into ``Python``:
 
      **Linux**:
 
@@ -707,31 +707,102 @@ The corresponding successful output is:
   Total Discovered Tests: 102
     Passed: 102 (100.00%)
 
-.. _windows-test:
+.. _Windows testing:
 
 Windows testing
 =====================================================
 
 Tested configurations:
 
-.. csv-table::
-  :header: "LLVM", "CUDA", "cuDNN", "Visual Studio", "CMake", "Python"
+.. list-table::
+  :header-rows: 1
 
-  "4.0.0 - 5.0.2", "7.0 - 8.0", "5.1.10 - 7.1.4", "2015.14.0, 2017.15.5.2", "3.5.1  - 3.18.0", "3.6.4 - 3.8.5"
-  "6.0.0 - 6.0.1", "7.0 - 9.0", "7.0.5  - 7.6.5", "2015.14.0, 2017.15.5.5", "3.6.0  - 3.18.0", "3.7.2 - 3.8.5"
-  "7.0.0 - 7.1.0 ", "7.0 - 9.2", "7.6.5", "2017.15.9.11", "3.13.3 - 3.18.0", "3.7.3 - 3.8.5"
-  "8.0.0 - 8.0.1", "7.0 - 10.0", "7.6.5", "2017.15.9.15", "3.14.2 - 3.18.0", "3.7.4 - 3.8.5"
-  "9.0.0 - 9.0.1", "7.0 - 10.1", "7.6.5", "2017.15.9.20, 2019.16.4.5", "3.16.4 - 3.18.0", "3.8.0 - 3.8.5"
-  "10.0.0 - 11.0.0", "7.0 - 11.1", "7.6.5  - 8.0.5", "2017.15.9.30, 2019.16.8.3", "3.19.2", "3.9.1"
-  "11.0.1 - 11.1.0", "7.0 - 11.2.2", "7.6.5  - 8.0.5", "2017.15.9.31, 2019.16.8.4", "3.19.3", "3.9.2"
-  "12.0.0 - 13.0.1", "7.0 - 11.5.1", "7.6.5  - 8.3.2", "2017.15.9.43, 2019.16.11.9", "3.22.2", "3.10.2"
-  "14.0.0 - 14.0.6", "7.0 - 11.7.1", "8.0.5  - 8.4.1", "2017.15.9.57:sup:`1`, 2019.16.11.17, 2022.17.2.6", "3.24.0", "3.10.6"
-  "15.0.0 - 15.0.7", "7.0 - 11.8.0", "8.0.5  - 8.8.1", "2019.16.11.25, 2022.17.5.2", "3.26.0", "3.11.2"
-  "16.0.0 - 16.0.6", "7.0 - 12.2.2", "8.0.5  - 8.9.5", "2019.16.11.29, 2022.17.7.1", "3.27.3", "3.11.4"
-  "17.0.1:sup:`2` - 18.1.2:sup:`3`", "7.0 - 12.3.2", "8.0.5  - 8.9.7", "2019.16.11.34, 2022.17.9.0", "3.28.3", "3.12.2"
-  "19.0.0 git", "7.0 - 12.3.2", "8.0.5  - 8.9.7", "2019.16.11.34, 2022.17.9.0", "3.28.3", "3.12.2"
+  * - LLVM
+    - CUDA
+    - cuDNN
+    - Visual Studio
+    - CMake
+    - Python
+  * - ``4.0.0 - 5.0.2``
+    - ``7.0 - 8.0``
+    - ``5.1.10 - 7.1.4``
+    - ``2015.14.0, 2017.15.5.2``
+    - ``3.5.1  - 3.18.0``
+    - ``3.6.4 - 3.8.5``
+  * - ``6.0.0 - 6.0.1``
+    - ``7.0 - 9.0``
+    - ``7.0.5  - 7.6.5``
+    - ``2015.14.0, 2017.15.5.5``
+    - ``3.6.0  - 3.18.0``
+    - ``3.7.2 - 3.8.5``
+  * - ``7.0.0 - 7.1.0``
+    - ``7.0 - 9.2``
+    - ``7.0.5  - 7.6.5``
+    - ``2017.15.9.11``
+    - ``3.13.3 - 3.18.0``
+    - ``3.7.3 - 3.8.5``
+  * - ``8.0.0 - 8.0.1``
+    - ``7.0 - 10.0``
+    - ``7.6.5``
+    - ``2017.15.9.15``
+    - ``3.14.2 - 3.18.0``
+    - ``3.7.4 - 3.8.5``
+  * - ``9.0.0 - 9.0.1``
+    - ``7.0 - 10.1``
+    - ``7.6.5``
+    - ``2017.15.9.20, 2019.16.4.5``
+    - ``3.16.4 - 3.18.0``
+    - ``3.8.0 - 3.8.5``
+  * - ``10.0.0 - 11.0.0``
+    - ``7.0 - 11.1``
+    - ``7.6.5  - 8.0.5``
+    - ``2017.15.9.30, 2019.16.8.3``
+    - ``3.19.2``
+    - ``3.9.1``
+  * - ``11.0.1 - 11.1.0``
+    - ``7.0 - 11.2.2``
+    - ``7.6.5  - 8.0.5``
+    - ``2017.15.9.31, 2019.16.8.4``
+    - ``3.19.3``
+    - ``3.9.2``
+  * - ``12.0.0 - 13.0.1``
+    - ``7.0 - 11.5.1``
+    - ``7.6.5  - 8.3.2``
+    - ``2017.15.9.43, 2019.16.11.9``
+    - ``3.22.2``
+    - ``3.10.2``
+  * - ``14.0.0 - 14.0.6``
+    - ``7.0 - 11.7.1``
+    - ``8.0.5  - 8.4.1``
+    - ``2017.15.9.57,``:sup:`5` ``2019.16.11.17, 2022.17.2.6``
+    - ``3.24.0``
+    - ``3.10.6``
+  * - ``15.0.0 - 15.0.7``
+    - ``7.0 - 11.8.0``
+    - ``8.0.5  - 8.8.1``
+    - ``2019.16.11.25, 2022.17.5.2``
+    - ``3.26.0``
+    - ``3.11.2``
+  * - ``16.0.0 - 16.0.6``
+    - ``7.0 - 12.2.2``
+    - ``8.0.5  - 8.9.5``
+    - ``2019.16.11.29, 2022.17.7.1``
+    - ``3.27.3``
+    - ``3.11.4``
+  * - ``17.0.1``:sup:`6` - ``18.1.2``:sup:`7`
+    - ``7.0 - 12.3.2``
+    - ``8.0.5  - 8.9.7``
+    - ``2019.16.11.34, 2022.17.9.0``
+    - ``3.28.3``
+    - ``3.12.2``
+  * - ``19.0.0git``
+    - ``7.0 - 12.3.2``
+    - ``8.0.5  - 8.9.7``
+    - ``2019.16.11.34, 2022.17.9.0``
+    - ``3.28.3``
+    - ``3.12.2``
 
-:sup:`1` LLVM 14.x.x is the latest major release supporting Visual Studio 2017.
+:sup:`5` LLVM 14.x.x is the latest major release supporting Visual Studio 2017.
 
 To build LLVM 14.x.x correctly by Visual Studio 2017, ``-DLLVM_FORCE_USE_OLD_TOOLCHAIN=ON``
 should be added to a corresponding CMake command line.
@@ -739,9 +810,9 @@ should be added to a corresponding CMake command line.
 LLVM \< 14.x.x can be built correctly by Visual Studio 2017 without the
 ``LLVM_FORCE_USE_OLD_TOOLCHAIN`` option.
 
-:sup:`2` Note that LLVM 17.0.0 was withdrawn due to an issue; please use 17.0.1 or newer instead.
+:sup:`6` Note that LLVM 17.0.0 was withdrawn due to an issue; please use 17.0.1 or newer instead.
 
-:sup:`3` Note that LLVM 18.0.0 has never been released; please use 18.1.0 or newer instead.
+:sup:`7` Note that LLVM 18.0.0 has never been released; please use 18.1.0 or newer instead.
 
 Building with testing support by ``Visual Studio 17 2022`` on ``Windows 10``:
 
