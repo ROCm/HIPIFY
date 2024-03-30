@@ -792,14 +792,14 @@ Tested configurations:
   * - ``17.0.1``:sup:`6` - ``18.1.2``:sup:`7`
     - ``7.0 - 12.3.2``
     - ``8.0.5  - 8.9.7``
-    - ``2019.16.11.34, 2022.17.9.0``
-    - ``3.28.3``
+    - ``2019.16.11.34, 2022.17.9.5``
+    - ``3.29.0``
     - ``3.12.2``
   * - ``19.0.0git``
     - ``7.0 - 12.3.2``
     - ``8.0.5  - 8.9.7``
-    - ``2019.16.11.34, 2022.17.9.0``
-    - ``3.28.3``
+    - ``2019.16.11.34, 2022.17.9.5``
+    - ``3.29.0``
     - ``3.12.2``
 
 :sup:`5` LLVM 14.x.x is the latest major release supporting Visual Studio 2017.
@@ -814,7 +814,7 @@ LLVM \< 14.x.x can be built correctly by Visual Studio 2017 without the
 
 :sup:`7` Note that LLVM 18.0.0 has never been released; please use 18.1.0 or newer instead.
 
-Building with testing support by ``Visual Studio 17 2022`` on ``Windows 10``:
+Building with testing support by ``Visual Studio 17 2022`` on ``Windows 11``:
 
 .. code:: shell
 
@@ -837,17 +837,17 @@ The corresponding successful output is:
 
 .. code:: shell
 
-  -- Selecting Windows SDK version 10.0.22621.0 to target Windows 10.0.19045.
-  -- The C compiler identification is MSVC 19.37.32824.0
-  -- The CXX compiler identification is MSVC 19.37.32824.0
+  -- Selecting Windows SDK version 10.0.22621.0 to target Windows 10.0.22631.
+  -- The C compiler identification is MSVC 19.39.33523.0
+  -- The CXX compiler identification is MSVC 19.39.33523.0
   -- Detecting C compiler ABI info
   -- Detecting C compiler ABI info - done
-  -- Check for working C compiler: C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.37.32822/bin/Hostx64/x64/cl.exe - skipped
+  -- Check for working C compiler: C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.39.33519/bin/Hostx64/x64/cl.exe - skipped
   -- Detecting C compile features
   -- Detecting C compile features - done
   -- Detecting CXX compiler ABI info
   -- Detecting CXX compiler ABI info - done
-  -- Check for working CXX compiler: C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.37.32822/bin/Hostx64/x64/cl.exe - skipped
+  -- Check for working CXX compiler: C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.39.33519/bin/Hostx64/x64/cl.exe - skipped
   -- Detecting CXX compile features
   -- Detecting CXX compile features - done
   -- HIPIFY config:
@@ -868,7 +868,7 @@ The corresponding successful output is:
   --    - CUDA Samples path  : C:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.3
   --    - cuDNN path         : D:/CUDA/cuDNN/8.9.7
   --    - CUB path           : D:/CUDA/CUB/cub-2.1.0
-  -- Found CUDAToolkit: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.3/include (found version "12.3.52")
+  -- Found CUDAToolkit: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.3/include (found version "12.3.107")
   -- Found CUDA config:
   --    - CUDA Toolkit path  : C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.3
   --    - CUDA Samples path  : C:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.3
