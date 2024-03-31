@@ -266,12 +266,12 @@
 |`CUDNN_BACKEND_RNG_DESCRIPTOR`|8.7.0| | | | | | | | | |
 |`CUDNN_BACKEND_TENSOR_DESCRIPTOR`|8.0.1| | | | | | | | | |
 |`CUDNN_BACKEND_VARIANT_PACK_DESCRIPTOR`|8.0.1| | | | | | | | | |
-|`CUDNN_BATCHNORM_OPS_BN`|7.4.1| | | | | | | | | |
-|`CUDNN_BATCHNORM_OPS_BN_ACTIVATION`|7.4.1| | | | | | | | | |
-|`CUDNN_BATCHNORM_OPS_BN_ADD_ACTIVATION`|7.4.1| | | | | | | | | |
-|`CUDNN_BATCHNORM_PER_ACTIVATION`|4.0.0| | | |`HIPDNN_BATCHNORM_PER_ACTIVATION`| | | | | |
-|`CUDNN_BATCHNORM_SPATIAL`|4.0.0| | | |`HIPDNN_BATCHNORM_SPATIAL`| | | | | |
-|`CUDNN_BATCHNORM_SPATIAL_PERSISTENT`|7.0.5| | | |`HIPDNN_BATCHNORM_SPATIAL_PERSISTENT`| | | | | |
+|`CUDNN_BATCHNORM_OPS_BN`|7.4.1|9.0.0| | | | | | | | |
+|`CUDNN_BATCHNORM_OPS_BN_ACTIVATION`|7.4.1|9.0.0| | | | | | | | |
+|`CUDNN_BATCHNORM_OPS_BN_ADD_ACTIVATION`|7.4.1|9.0.0| | | | | | | | |
+|`CUDNN_BATCHNORM_PER_ACTIVATION`|4.0.0|9.0.0| | |`HIPDNN_BATCHNORM_PER_ACTIVATION`| | | | | |
+|`CUDNN_BATCHNORM_SPATIAL`|4.0.0|9.0.0| | |`HIPDNN_BATCHNORM_SPATIAL`| | | | | |
+|`CUDNN_BATCHNORM_SPATIAL_PERSISTENT`|7.0.5|9.0.0| | |`HIPDNN_BATCHNORM_SPATIAL_PERSISTENT`| | | | | |
 |`CUDNN_BATCH_NORM`|8.5.0| | | | | | | | | |
 |`CUDNN_BEHAVIOR_NOTE_REQUIRES_BIAS_INT8x32_REORDER`|8.3.0| | | | | | | | | |
 |`CUDNN_BEHAVIOR_NOTE_REQUIRES_FILTER_INT8x32_REORDER`|8.3.0| | | | | | | | | |
@@ -424,15 +424,15 @@
 |`CUDNN_MH_ATTN_V_WEIGHTS`|7.5.0| | | | | | | | | |
 |`CUDNN_NEG_INF_PAD`|8.3.0| | | | | | | | | |
 |`CUDNN_NON_DETERMINISTIC`|6.0.0| | | | | | | | | |
-|`CUDNN_NORM_ALGO_PERSIST`|8.0.1| | | | | | | | | |
-|`CUDNN_NORM_ALGO_STANDARD`|8.0.1| | | | | | | | | |
+|`CUDNN_NORM_ALGO_PERSIST`|8.0.1|9.0.0| | | | | | | | |
+|`CUDNN_NORM_ALGO_STANDARD`|8.0.1|9.0.0| | | | | | | | |
 |`CUDNN_NORM_FWD_INFERENCE`|8.5.0| | | | | | | | | |
 |`CUDNN_NORM_FWD_TRAINING`|8.5.0| | | | | | | | | |
-|`CUDNN_NORM_OPS_NORM`|8.0.1| | | | | | | | | |
-|`CUDNN_NORM_OPS_NORM_ACTIVATION`|8.0.1| | | | | | | | | |
-|`CUDNN_NORM_OPS_NORM_ADD_ACTIVATION`|8.0.1| | | | | | | | | |
-|`CUDNN_NORM_PER_ACTIVATION`|8.0.1| | | | | | | | | |
-|`CUDNN_NORM_PER_CHANNEL`|8.0.1| | | | | | | | | |
+|`CUDNN_NORM_OPS_NORM`|8.0.1|9.0.0| | | | | | | | |
+|`CUDNN_NORM_OPS_NORM_ACTIVATION`|8.0.1|9.0.0| | | | | | | | |
+|`CUDNN_NORM_OPS_NORM_ADD_ACTIVATION`|8.0.1|9.0.0| | | | | | | | |
+|`CUDNN_NORM_PER_ACTIVATION`|8.0.1|9.0.0| | | | | | | | |
+|`CUDNN_NORM_PER_CHANNEL`|8.0.1|9.0.0| | | | | | | | |
 |`CUDNN_NOT_PROPAGATE_NAN`|4.0.0|9.0.0| | |`HIPDNN_NOT_PROPAGATE_NAN`| | | | | |
 |`CUDNN_NO_REORDER`|7.6.0|9.0.0| | | | | | | | |
 |`CUDNN_NUMERICAL_NOTE_DOWN_CONVERT_INPUTS`|8.0.1| | | | | | | | | |
@@ -735,12 +735,12 @@
 |`cudnnActivationDescriptor_t`|4.0.0| | | |`hipdnnActivationDescriptor_t`| | | | | |
 |`cudnnActivationMode_t`|1.0.0|9.0.0| | |`hipdnnActivationMode_t`| | | | | |
 |`cudnnActivationStruct`|4.0.0| | | | | | | | | |
-|`cudnnAlgorithmDescriptor_t`|7.1.3| | | | | | | | | |
-|`cudnnAlgorithmPerformanceStruct`|7.1.3| | | | | | | | | |
-|`cudnnAlgorithmPerformance_t`|7.1.3| | | | | | | | | |
-|`cudnnAlgorithmStruct`|7.1.3| | | | | | | | | |
-|`cudnnAlgorithmUnionStruct`|8.2.0| | | | | | | | | |
-|`cudnnAlgorithm_t`|7.1.3| | | | | | | | | |
+|`cudnnAlgorithmDescriptor_t`|7.1.3| | |9.0.0| | | | | | |
+|`cudnnAlgorithmPerformanceStruct`|7.1.3| | |9.0.0| | | | | | |
+|`cudnnAlgorithmPerformance_t`|7.1.3| | |9.0.0| | | | | | |
+|`cudnnAlgorithmStruct`|7.1.3| | |9.0.0| | | | | | |
+|`cudnnAlgorithmUnionStruct`|8.2.0| | |9.0.0| | | | | | |
+|`cudnnAlgorithm_t`|7.1.3| | |9.0.0| | | | | | |
 |`cudnnAttnDescriptor_t`|7.5.0|9.0.0| | | | | | | | |
 |`cudnnAttnQueryMap_t`|7.5.0| | |9.0.0| | | | | | |
 |`cudnnAttnStruct`|7.5.0| | | | | | | | | |
@@ -756,8 +756,8 @@
 |`cudnnBackendNormMode_t`|8.5.0| | | | | | | | | |
 |`cudnnBackendNumericalNote_t`|8.0.1| | | | | | | | | |
 |`cudnnBackendTensorReordering_t`|8.3.0| | | | | | | | | |
-|`cudnnBatchNormMode_t`|4.0.0| | | |`hipdnnBatchNormMode_t`| | | | | |
-|`cudnnBatchNormOps_t`|7.4.1| | | | | | | | | |
+|`cudnnBatchNormMode_t`|4.0.0|9.0.0| | |`hipdnnBatchNormMode_t`| | | | | |
+|`cudnnBatchNormOps_t`|7.4.1|9.0.0| | | | | | | | |
 |`cudnnBnFinalizeStatsMode_t`|8.1.0| | | | | | | | | |
 |`cudnnCTCLossAlgo_t`|7.0.5| | | | | | | | | |
 |`cudnnCTCLossDescriptor_t`|7.0.5| | | | | | | | | |
@@ -814,9 +814,9 @@
 |`cudnnMathType_t`|7.0.5| | | |`hipdnnMathType_t`| | | | | |
 |`cudnnMultiHeadAttnWeightKind_t`|7.5.0| | | | | | | | | |
 |`cudnnNanPropagation_t`|4.0.0| | | |`hipdnnNanPropagation_t`| | | | | |
-|`cudnnNormAlgo_t`|8.0.1| | | | | | | | | |
-|`cudnnNormMode_t`|8.0.1| | | | | | | | | |
-|`cudnnNormOps_t`|8.0.1| | | | | | | | | |
+|`cudnnNormAlgo_t`|8.0.1|9.0.0| | | | | | | | |
+|`cudnnNormMode_t`|8.0.1|9.0.0| | | | | | | | |
+|`cudnnNormOps_t`|8.0.1|9.0.0| | | | | | | | |
 |`cudnnOpTensorDescriptor_t`|5.0.0| | | |`hipdnnOpTensorDescriptor_t`| | | | | |
 |`cudnnOpTensorOp_t`|5.0.0| | | |`hipdnnOpTensorOp_t`| | | | | |
 |`cudnnOpTensorStruct`|5.0.0| | | | | | | | | |
@@ -885,7 +885,7 @@
 |`cudnnBackendSetAttribute`|8.0.1| | | | | | | | | |
 |`cudnnBatchNormalizationBackward`|4.0.0|9.0.0| | |`hipdnnBatchNormalizationBackward`| | | | | |
 |`cudnnBatchNormalizationBackwardEx`|7.4.1|9.0.0| | | | | | | | |
-|`cudnnBatchNormalizationForwardInference`|4.0.0| | | |`hipdnnBatchNormalizationForwardInference`| | | | | |
+|`cudnnBatchNormalizationForwardInference`|4.0.0|9.0.0| | |`hipdnnBatchNormalizationForwardInference`| | | | | |
 |`cudnnBatchNormalizationForwardTraining`|4.0.0|9.0.0| | |`hipdnnBatchNormalizationForwardTraining`| | | | | |
 |`cudnnBatchNormalizationForwardTrainingEx`|7.4.1|9.0.0| | | | | | | | |
 |`cudnnBuildRNNDynamic`|8.0.1| | | | | | | | | |
@@ -922,8 +922,8 @@
 |`cudnnCreateSpatialTransformerDescriptor`|5.0.0| | | | | | | | | |
 |`cudnnCreateTensorDescriptor`|2.0.0| | | |`hipdnnCreateTensorDescriptor`| | | | | |
 |`cudnnCreateTensorTransformDescriptor`|7.5.0|9.0.0| | | | | | | | |
-|`cudnnDeriveBNTensorDescriptor`|4.0.0| | | |`hipdnnDeriveBNTensorDescriptor`| | | | | |
-|`cudnnDeriveNormTensorDescriptor`|8.0.1| | | | | | | | | |
+|`cudnnDeriveBNTensorDescriptor`|4.0.0|9.0.0| | |`hipdnnDeriveBNTensorDescriptor`| | | | | |
+|`cudnnDeriveNormTensorDescriptor`|8.0.1|9.0.0| | | | | | | | |
 |`cudnnDestroy`|1.0.0| | | |`hipdnnDestroy`| | | | | |
 |`cudnnDestroyActivationDescriptor`|4.0.0| | | |`hipdnnDestroyActivationDescriptor`| | | | | |
 |`cudnnDestroyAlgorithmDescriptor`|7.1.3|8.0.2| |9.0.0| | | | | | |
@@ -1062,7 +1062,7 @@
 |`cudnnMultiHeadAttnBackwardWeights`|7.5.0|9.0.0| | | | | | | | |
 |`cudnnMultiHeadAttnForward`|7.5.0|9.0.0| | | | | | | | |
 |`cudnnNormalizationBackward`|8.0.1|9.0.0| | | | | | | | |
-|`cudnnNormalizationForwardInference`|8.0.1| | | | | | | | | |
+|`cudnnNormalizationForwardInference`|8.0.1|9.0.0| | | | | | | | |
 |`cudnnNormalizationForwardTraining`|8.0.1|9.0.0| | | | | | | | |
 |`cudnnOpTensor`|5.0.0|9.0.0| | |`hipdnnOpTensor`| | | | | |
 |`cudnnOpsInferVersionCheck`|8.0.1| | | | | | | | | |
