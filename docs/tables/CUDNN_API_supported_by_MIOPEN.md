@@ -540,10 +540,10 @@
 |`CUDNN_POINTWISE_TAN`|8.3.0| | | | | | | | | |
 |`CUDNN_POINTWISE_TANH_BWD`|8.1.0| | | | | | | | | |
 |`CUDNN_POINTWISE_TANH_FWD`|8.0.1| | | | | | | | | |
-|`CUDNN_POOLING_AVERAGE_COUNT_EXCLUDE_PADDING`|2.0.0| | | | | | | | | |
-|`CUDNN_POOLING_AVERAGE_COUNT_INCLUDE_PADDING`|2.0.0| | | | | | | | | |
-|`CUDNN_POOLING_MAX`|1.0.0| | | |`miopenPoolingMax`| | | | | |
-|`CUDNN_POOLING_MAX_DETERMINISTIC`|6.0.0| | | | | | | | | |
+|`CUDNN_POOLING_AVERAGE_COUNT_EXCLUDE_PADDING`|2.0.0|9.0.0| | | | | | | | |
+|`CUDNN_POOLING_AVERAGE_COUNT_INCLUDE_PADDING`|2.0.0|9.0.0| | | | | | | | |
+|`CUDNN_POOLING_MAX`|1.0.0|9.0.0| | |`miopenPoolingMax`| | | | | |
+|`CUDNN_POOLING_MAX_DETERMINISTIC`|6.0.0|9.0.0| | | | | | | | |
 |`CUDNN_PROPAGATE_NAN`|4.0.0|9.0.0| | |`MIOPEN_PROPAGATE_NAN`| | | | | |
 |`CUDNN_PTR_16B_ALIGNED`|7.6.0| | | | | | | | | |
 |`CUDNN_PTR_ACTIVATION_BITMASK`|7.6.0| | | | | | | | | |
@@ -825,7 +825,7 @@
 |`cudnnPersistentRNNPlan_t`|6.0.0| | | | | | | | | |
 |`cudnnPointwiseMode_t`|8.0.1| | | | | | | | | |
 |`cudnnPoolingDescriptor_t`|1.0.0| | | |`miopenPoolingDescriptor_t`| | | | | |
-|`cudnnPoolingMode_t`|1.0.0| | | |`miopenPoolingMode_t`| | | | | |
+|`cudnnPoolingMode_t`|1.0.0|9.0.0| | |`miopenPoolingMode_t`| | | | | |
 |`cudnnPoolingStruct`|1.0.0| | | | | | | | | |
 |`cudnnRNNAlgo_t`|6.0.0| | | |`miopenRNNAlgo_t`| | | | | |
 |`cudnnRNNBiasMode_t`|7.5.0| | | |`miopenRNNBiasMode_t`| | | | | |
@@ -871,7 +871,7 @@
 |**CUDA**|**A**|**D**|**C**|**R**|**MIOPEN**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
 |`cudnnActivationBackward`|1.0.0|9.0.0| | |`miopenActivationBackward`| | | | | |
-|`cudnnActivationForward`|1.0.0| | | |`miopenActivationForward`| | | | | |
+|`cudnnActivationForward`|1.0.0|9.0.0| | |`miopenActivationForward`| | | | | |
 |`cudnnAddTensor`|2.0.0|9.0.0| | | | | | | | |
 |`cudnnAdvInferVersionCheck`|8.0.1| | |9.0.0| | | | | | |
 |`cudnnAdvTrainVersionCheck`|8.0.1| | |9.0.0| | | | | | |
@@ -900,21 +900,21 @@
 |`cudnnConvolutionForward`|1.0.0|9.0.0| | |`miopenConvolutionForward`| | | | | |
 |`cudnnCopyAlgorithmDescriptor`|7.1.3|8.0.2| |9.0.0| | | | | | |
 |`cudnnCreate`|1.0.0| | | |`miopenCreate`| | | | | |
-|`cudnnCreateActivationDescriptor`|4.0.0| | | |`miopenCreateActivationDescriptor`| | | | | |
+|`cudnnCreateActivationDescriptor`|4.0.0|9.0.0| | |`miopenCreateActivationDescriptor`| | | | | |
 |`cudnnCreateAlgorithmDescriptor`|7.1.3|8.0.2| |9.0.0| | | | | | |
 |`cudnnCreateAlgorithmPerformance`|7.1.3|8.0.2| |9.0.0| | | | | | |
 |`cudnnCreateAttnDescriptor`|7.5.0|9.0.0| | | | | | | | |
 |`cudnnCreateCTCLossDescriptor`|7.0.5| | | |`miopenCreateCTCLossDescriptor`| | | | | |
 |`cudnnCreateConvolutionDescriptor`|1.0.0|9.0.0| | |`miopenCreateConvolutionDescriptor`| | | | | |
 |`cudnnCreateDropoutDescriptor`|5.0.0| | | |`miopenCreateDropoutDescriptor`| | | | | |
-|`cudnnCreateFilterDescriptor`|1.0.0| | | | | | | | | |
+|`cudnnCreateFilterDescriptor`|1.0.0|9.0.0| | | | | | | | |
 |`cudnnCreateFusedOpsConstParamPack`|7.6.0|9.0.0| | | | | | | | |
 |`cudnnCreateFusedOpsPlan`|7.6.0|9.0.0| | | | | | | | |
 |`cudnnCreateFusedOpsVariantParamPack`|7.6.0|9.0.0| | | | | | | | |
 |`cudnnCreateLRNDescriptor`|3.0.0| | | |`miopenCreateLRNDescriptor`| | | | | |
 |`cudnnCreateOpTensorDescriptor`|5.0.0|9.0.0| | | | | | | | |
 |`cudnnCreatePersistentRNNPlan`|6.0.0|8.0.1| |9.0.0| | | | | | |
-|`cudnnCreatePoolingDescriptor`|1.0.0| | | |`miopenCreatePoolingDescriptor`| | | | | |
+|`cudnnCreatePoolingDescriptor`|1.0.0|9.0.0| | |`miopenCreatePoolingDescriptor`| | | | | |
 |`cudnnCreateRNNDataDescriptor`|7.2.1| | | | | | | | | |
 |`cudnnCreateRNNDescriptor`|5.0.0| | | |`miopenCreateRNNDescriptor`| | | | | |
 |`cudnnCreateReduceTensorDescriptor`|6.0.0|9.0.0| | |`miopenCreateReduceTensorDescriptor`| | | | | |
@@ -925,21 +925,21 @@
 |`cudnnDeriveBNTensorDescriptor`|4.0.0|9.0.0| | |`miopenDeriveBNTensorDescriptor`| | | | | |
 |`cudnnDeriveNormTensorDescriptor`|8.0.1|9.0.0| | | | | | | | |
 |`cudnnDestroy`|1.0.0| | | |`miopenDestroy`| | | | | |
-|`cudnnDestroyActivationDescriptor`|4.0.0| | | |`miopenDestroyActivationDescriptor`| | | | | |
+|`cudnnDestroyActivationDescriptor`|4.0.0|9.0.0| | |`miopenDestroyActivationDescriptor`| | | | | |
 |`cudnnDestroyAlgorithmDescriptor`|7.1.3|8.0.2| |9.0.0| | | | | | |
 |`cudnnDestroyAlgorithmPerformance`|7.1.3|8.0.2| |9.0.0| | | | | | |
 |`cudnnDestroyAttnDescriptor`|7.5.0|9.0.0| | | | | | | | |
 |`cudnnDestroyCTCLossDescriptor`|7.0.5| | | |`miopenDestroyCTCLossDescriptor`| | | | | |
 |`cudnnDestroyConvolutionDescriptor`|1.0.0|9.0.0| | |`miopenDestroyConvolutionDescriptor`| | | | | |
 |`cudnnDestroyDropoutDescriptor`|5.0.0| | | |`miopenDestroyDropoutDescriptor`| | | | | |
-|`cudnnDestroyFilterDescriptor`|1.0.0| | | | | | | | | |
+|`cudnnDestroyFilterDescriptor`|1.0.0|9.0.0| | | | | | | | |
 |`cudnnDestroyFusedOpsConstParamPack`|7.6.0|9.0.0| | | | | | | | |
 |`cudnnDestroyFusedOpsPlan`|7.6.0|9.0.0| | | | | | | | |
 |`cudnnDestroyFusedOpsVariantParamPack`|7.6.0|9.0.0| | | | | | | | |
 |`cudnnDestroyLRNDescriptor`|3.0.0| | | |`miopenDestroyLRNDescriptor`| | | | | |
 |`cudnnDestroyOpTensorDescriptor`|5.0.0|9.0.0| | | | | | | | |
 |`cudnnDestroyPersistentRNNPlan`|6.0.0|8.0.1| |9.0.0| | | | | | |
-|`cudnnDestroyPoolingDescriptor`|1.0.0| | | |`miopenDestroyPoolingDescriptor`| | | | | |
+|`cudnnDestroyPoolingDescriptor`|1.0.0|9.0.0| | |`miopenDestroyPoolingDescriptor`| | | | | |
 |`cudnnDestroyRNNDataDescriptor`|7.2.1| | | | | | | | | |
 |`cudnnDestroyRNNDescriptor`|5.0.0| | | |`miopenDestroyRNNDescriptor`| | | | | |
 |`cudnnDestroyReduceTensorDescriptor`|6.0.0|9.0.0| | |`miopenDestroyReduceTensorDescriptor`| | | | | |
@@ -964,8 +964,8 @@
 |`cudnnFindRNNForwardInferenceAlgorithmEx`|7.1.3|8.0.2| |9.0.0| | | | | | |
 |`cudnnFindRNNForwardTrainingAlgorithmEx`|7.1.3|8.0.2| |9.0.0| | | | | | |
 |`cudnnFusedOpsExecute`|7.6.0|9.0.0| | | | | | | | |
-|`cudnnGetActivationDescriptor`|4.0.0| | | | | | | | | |
-|`cudnnGetActivationDescriptorSwishBeta`|8.2.0| | | | | | | | | |
+|`cudnnGetActivationDescriptor`|4.0.0|9.0.0| | | | | | | | |
+|`cudnnGetActivationDescriptorSwishBeta`|8.2.0|9.0.0| | | | | | | | |
 |`cudnnGetAlgorithmDescriptor`|7.1.3|8.0.2| |9.0.0| | | | | | |
 |`cudnnGetAlgorithmPerformance`|7.1.3|8.0.2| |9.0.0| | | | | | |
 |`cudnnGetAlgorithmSpaceSize`|7.1.3|8.0.2| |9.0.0| | | | | | |
@@ -1002,9 +1002,9 @@
 |`cudnnGetCudartVersion`|6.0.0| | | | | | | | | |
 |`cudnnGetDropoutDescriptor`|7.0.5| | | |`miopenGetDropoutDescriptor`| | | | | |
 |`cudnnGetErrorString`|2.0.0| | | |`miopenGetErrorString`| | | | | |
-|`cudnnGetFilter4dDescriptor`|2.0.0| | | | | | | | | |
-|`cudnnGetFilterNdDescriptor`|2.0.0| | | | | | | | | |
-|`cudnnGetFilterSizeInBytes`|7.6.0| | | | | | | | | |
+|`cudnnGetFilter4dDescriptor`|2.0.0|9.0.0| | | | | | | | |
+|`cudnnGetFilterNdDescriptor`|2.0.0|9.0.0| | | | | | | | |
+|`cudnnGetFilterSizeInBytes`|7.6.0|9.0.0| | | | | | | | |
 |`cudnnGetFoldedConvBackwardDataDescriptors`|7.6.0|9.0.0| | | | | | | | |
 |`cudnnGetFusedOpsConstParamPackAttribute`|7.6.0|9.0.0| | | | | | | | |
 |`cudnnGetFusedOpsVariantParamPackAttribute`|7.6.0|9.0.0| | | | | | | | |
@@ -1017,10 +1017,10 @@
 |`cudnnGetNormalizationForwardTrainingWorkspaceSize`|8.0.1|9.0.0| | | | | | | | |
 |`cudnnGetNormalizationTrainingReserveSpaceSize`|8.0.1|9.0.0| | | | | | | | |
 |`cudnnGetOpTensorDescriptor`|5.0.0|9.0.0| | | | | | | | |
-|`cudnnGetPooling2dDescriptor`|2.0.0| | | |`miopenGet2dPoolingDescriptor`| | | | | |
-|`cudnnGetPooling2dForwardOutputDim`|2.0.0| | | |`miopenGetPoolingForwardOutputDim`| | | | | |
-|`cudnnGetPoolingNdDescriptor`|2.0.0| | | |`miopenGetNdPoolingDescriptor`| | | | | |
-|`cudnnGetPoolingNdForwardOutputDim`|2.0.0| | | |`miopenGetPoolingNdForwardOutputDim`| | | | | |
+|`cudnnGetPooling2dDescriptor`|2.0.0|9.0.0| | |`miopenGet2dPoolingDescriptor`| | | | | |
+|`cudnnGetPooling2dForwardOutputDim`|2.0.0|9.0.0| | |`miopenGetPoolingForwardOutputDim`| | | | | |
+|`cudnnGetPoolingNdDescriptor`|2.0.0|9.0.0| | |`miopenGetNdPoolingDescriptor`| | | | | |
+|`cudnnGetPoolingNdForwardOutputDim`|2.0.0|9.0.0| | |`miopenGetPoolingNdForwardOutputDim`| | | | | |
 |`cudnnGetProperty`|6.0.0| | | | | | | | | |
 |`cudnnGetRNNBackwardDataAlgorithmMaxCount`|7.1.3|8.0.2| |9.0.0| | | | | | |
 |`cudnnGetRNNBackwardWeightsAlgorithmMaxCount`|7.1.3|8.0.2| |9.0.0| | | | | | |
@@ -1069,7 +1069,7 @@
 |`cudnnOpsTrainVersionCheck`|8.0.1| | |9.0.0| | | | | | |
 |`cudnnOpsVersionCheck`|9.0.0| | | | | | | | | |
 |`cudnnPoolingBackward`|1.0.0|9.0.0| | | | | | | | |
-|`cudnnPoolingForward`|1.0.0| | | | | | | | | |
+|`cudnnPoolingForward`|1.0.0|9.0.0| | | | | | | | |
 |`cudnnQueryRuntimeError`|7.0.5|9.0.0| | | | | | | | |
 |`cudnnRNNBackwardData`|5.0.0|8.0.2| |9.0.0|`miopenRNNBackwardData`| | | | | |
 |`cudnnRNNBackwardDataEx`|7.2.1|8.0.2| |9.0.0| | | | | | |
@@ -1094,8 +1094,8 @@
 |`cudnnRestoreDropoutDescriptor`|7.0.5| | | |`miopenRestoreDropoutDescriptor`| | | | | |
 |`cudnnSaveAlgorithm`|7.1.3|8.0.2| |9.0.0| | | | | | |
 |`cudnnScaleTensor`|2.0.0| | | |`miopenScaleTensor`| | | | | |
-|`cudnnSetActivationDescriptor`|4.0.0| | | | | | | | | |
-|`cudnnSetActivationDescriptorSwishBeta`|8.2.0| | | | | | | | | |
+|`cudnnSetActivationDescriptor`|4.0.0|9.0.0| | | | | | | | |
+|`cudnnSetActivationDescriptorSwishBeta`|8.2.0|9.0.0| | | | | | | | |
 |`cudnnSetAlgorithmDescriptor`|7.1.3|8.0.2| |9.0.0| | | | | | |
 |`cudnnSetAlgorithmPerformance`|7.1.3|8.0.2| |9.0.0| | | | | | |
 |`cudnnSetAttnDescriptor`|7.5.0|9.0.0| | | | | | | | |
@@ -1110,15 +1110,15 @@
 |`cudnnSetConvolutionNdDescriptor`|2.0.0|9.0.0| | | | | | | | |
 |`cudnnSetConvolutionReorderType`|7.6.0|9.0.0| | | | | | | | |
 |`cudnnSetDropoutDescriptor`|5.0.0| | | |`miopenSetDropoutDescriptor`| | | | | |
-|`cudnnSetFilter4dDescriptor`|2.0.0| | | | | | | | | |
-|`cudnnSetFilterNdDescriptor`|2.0.0| | | | | | | | | |
+|`cudnnSetFilter4dDescriptor`|2.0.0|9.0.0| | | | | | | | |
+|`cudnnSetFilterNdDescriptor`|2.0.0|9.0.0| | | | | | | | |
 |`cudnnSetFusedOpsConstParamPackAttribute`|7.6.0|9.0.0| | | | | | | | |
 |`cudnnSetFusedOpsVariantParamPackAttribute`|7.6.0|9.0.0| | | | | | | | |
 |`cudnnSetLRNDescriptor`|3.0.0| | | |`miopenSetLRNDescriptor`| | | | | |
 |`cudnnSetOpTensorDescriptor`|5.0.0|9.0.0| | | | | | | | |
 |`cudnnSetPersistentRNNPlan`|6.0.0|8.0.1| |9.0.0| | | | | | |
-|`cudnnSetPooling2dDescriptor`|2.0.0| | | |`miopenSet2dPoolingDescriptor`| | | | | |
-|`cudnnSetPoolingNdDescriptor`|2.0.0| | | |`miopenSetNdPoolingDescriptor`| | | | | |
+|`cudnnSetPooling2dDescriptor`|2.0.0|9.0.0| | |`miopenSet2dPoolingDescriptor`| | | | | |
+|`cudnnSetPoolingNdDescriptor`|2.0.0|9.0.0| | |`miopenSetNdPoolingDescriptor`| | | | | |
 |`cudnnSetRNNAlgorithmDescriptor`|7.1.3|8.0.2| |9.0.0| | | | | | |
 |`cudnnSetRNNBiasMode`|7.5.0|8.0.1| |9.0.0| | | | | | |
 |`cudnnSetRNNDataDescriptor`|7.2.1| | | | | | | | | |
@@ -1145,7 +1145,7 @@
 |`cudnnSpatialTfGridGeneratorForward`|5.0.0| | | | | | | | | |
 |`cudnnSpatialTfSamplerBackward`|5.0.0| | | | | | | | | |
 |`cudnnSpatialTfSamplerForward`|5.0.0| | | | | | | | | |
-|`cudnnTransformFilter`|7.6.0| | | | | | | | | |
+|`cudnnTransformFilter`|7.6.0|9.0.0| | | | | | | | |
 |`cudnnTransformTensor`|2.0.0|9.0.0| | |`miopenTransformTensor`| | | | | |
 |`cudnnTransformTensorEx`|7.5.0|9.0.0| | | | | | | | |
 
