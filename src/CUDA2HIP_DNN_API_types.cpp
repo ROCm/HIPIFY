@@ -238,11 +238,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"cudnnSoftmaxMode_t",                                             {"hipdnnSoftmaxMode_t",                                             "miopenSoftmaxMode_t",                                             CONV_TYPE, API_DNN, 1}},
   {"CUDNN_SOFTMAX_MODE_INSTANCE",                                    {"HIPDNN_SOFTMAX_MODE_INSTANCE",                                    "MIOPEN_SOFTMAX_MODE_INSTANCE",                                    CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 0
   {"CUDNN_SOFTMAX_MODE_CHANNEL",                                     {"HIPDNN_SOFTMAX_MODE_CHANNEL",                                     "MIOPEN_SOFTMAX_MODE_CHANNEL",                                     CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 1
-  {"cudnnPoolingMode_t",                                             {"hipdnnPoolingMode_t",                                             "miopenPoolingMode_t",                                             CONV_TYPE, API_DNN, 1}},
-  {"CUDNN_POOLING_MAX",                                              {"HIPDNN_POOLING_MAX",                                              "miopenPoolingMax",                                                CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 0
-  {"CUDNN_POOLING_AVERAGE_COUNT_INCLUDE_PADDING",                    {"HIPDNN_POOLING_AVERAGE_COUNT_INCLUDE_PADDING",                    "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, ROC_UNSUPPORTED}},    // 1
-  {"CUDNN_POOLING_AVERAGE_COUNT_EXCLUDE_PADDING",                    {"HIPDNN_POOLING_AVERAGE_COUNT_EXCLUDE_PADDING",                    "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, ROC_UNSUPPORTED}},    // 2
-  {"CUDNN_POOLING_MAX_DETERMINISTIC",                                {"HIPDNN_POOLING_MAX_DETERMINISTIC",                                "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, ROC_UNSUPPORTED}},    // 3
+  {"cudnnPoolingMode_t",                                             {"hipdnnPoolingMode_t",                                             "miopenPoolingMode_t",                                             CONV_TYPE, API_DNN, 1, CUDA_DEPRECATED}},
+  {"CUDNN_POOLING_MAX",                                              {"HIPDNN_POOLING_MAX",                                              "miopenPoolingMax",                                                CONV_NUMERIC_LITERAL, API_DNN, 1, CUDA_DEPRECATED}},    // 0
+  {"CUDNN_POOLING_AVERAGE_COUNT_INCLUDE_PADDING",                    {"HIPDNN_POOLING_AVERAGE_COUNT_INCLUDE_PADDING",                    "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, ROC_UNSUPPORTED | CUDA_DEPRECATED}},    // 1
+  {"CUDNN_POOLING_AVERAGE_COUNT_EXCLUDE_PADDING",                    {"HIPDNN_POOLING_AVERAGE_COUNT_EXCLUDE_PADDING",                    "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, ROC_UNSUPPORTED | CUDA_DEPRECATED}},    // 2
+  {"CUDNN_POOLING_MAX_DETERMINISTIC",                                {"HIPDNN_POOLING_MAX_DETERMINISTIC",                                "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, ROC_UNSUPPORTED | CUDA_DEPRECATED}},    // 3
   {"cudnnActivationMode_t",                                          {"hipdnnActivationMode_t",                                          "miopenActivationMode_t",                                          CONV_TYPE, API_DNN, 1, CUDA_DEPRECATED}},
   {"CUDNN_ACTIVATION_SIGMOID",                                       {"HIPDNN_ACTIVATION_SIGMOID",                                       "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, ROC_UNSUPPORTED | CUDA_DEPRECATED}},    // 0
   {"CUDNN_ACTIVATION_RELU",                                          {"HIPDNN_ACTIVATION_RELU",                                          "miopenActivationRELU",                                            CONV_NUMERIC_LITERAL, API_DNN, 1, CUDA_DEPRECATED}},    // 1
@@ -1284,11 +1284,11 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_TYPE_NAME_VER_MAP {
   {"cudnnSoftmaxMode_t",                                             {CUDNN_10,  CUDA_0,   CUDA_0  }},
   {"CUDNN_SOFTMAX_MODE_INSTANCE",                                    {CUDNN_10,  CUDA_0,   CUDA_0  }},
   {"CUDNN_SOFTMAX_MODE_CHANNEL",                                     {CUDNN_10,  CUDA_0,   CUDA_0  }},
-  {"cudnnPoolingMode_t",                                             {CUDNN_10,  CUDA_0,   CUDA_0  }},
-  {"CUDNN_POOLING_MAX",                                              {CUDNN_10,  CUDA_0,   CUDA_0  }},
-  {"CUDNN_POOLING_AVERAGE_COUNT_INCLUDE_PADDING",                    {CUDNN_20,  CUDA_0,   CUDA_0  }},
-  {"CUDNN_POOLING_AVERAGE_COUNT_EXCLUDE_PADDING",                    {CUDNN_20,  CUDA_0,   CUDA_0  }},
-  {"CUDNN_POOLING_MAX_DETERMINISTIC",                                {CUDNN_60,  CUDA_0,   CUDA_0  }},
+  {"cudnnPoolingMode_t",                                             {CUDNN_10,  CUDNN_900,CUDA_0  }},
+  {"CUDNN_POOLING_MAX",                                              {CUDNN_10,  CUDNN_900,CUDA_0  }},
+  {"CUDNN_POOLING_AVERAGE_COUNT_INCLUDE_PADDING",                    {CUDNN_20,  CUDNN_900,CUDA_0  }},
+  {"CUDNN_POOLING_AVERAGE_COUNT_EXCLUDE_PADDING",                    {CUDNN_20,  CUDNN_900,CUDA_0  }},
+  {"CUDNN_POOLING_MAX_DETERMINISTIC",                                {CUDNN_60,  CUDNN_900,CUDA_0  }},
   {"cudnnActivationMode_t",                                          {CUDNN_10,  CUDNN_900,CUDA_0  }},
   {"CUDNN_ACTIVATION_SIGMOID",                                       {CUDNN_10,  CUDNN_900,CUDA_0  }},
   {"CUDNN_ACTIVATION_RELU",                                          {CUDNN_10,  CUDNN_900,CUDA_0  }},
