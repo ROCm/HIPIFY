@@ -84,7 +84,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_FUNCTION_MAP {
   {"cudnnGetReductionWorkspaceSize",                           {"hipdnnGetReductionWorkspaceSize",                           "miopenGetReductionWorkspaceSize",                                    CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED}},
   {"cudnnReduceTensor",                                        {"hipdnnReduceTensor",                                        "miopenReduceTensor",                                                 CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED}},
   {"cudnnSetTensor",                                           {"hipdnnSetTensor",                                           "miopenSetTensor",                                                    CONV_LIB_FUNC, API_DNN, 2}},
-  {"cudnnScaleTensor",                                         {"hipdnnScaleTensor",                                         "miopenScaleTensor",                                                  CONV_LIB_FUNC, API_DNN, 2}},
+  {"cudnnScaleTensor",                                         {"hipdnnScaleTensor",                                         "miopenScaleTensor",                                                  CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED}},
   {"cudnnDeriveNormTensorDescriptor",                          {"hipdnnDeriveNormTensorDescriptor",                          "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
 
   // cuDNN Filter functions
@@ -527,7 +527,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_FUNCTION_VER_MAP {
   {"cudnnGetReductionWorkspaceSize",                           {CUDNN_60,  CUDNN_900, CUDA_0   }},
   {"cudnnReduceTensor",                                        {CUDNN_60,  CUDNN_900, CUDA_0   }},
   {"cudnnSetTensor",                                           {CUDNN_20,  CUDA_0,    CUDA_0   }},
-  {"cudnnScaleTensor",                                         {CUDNN_20,  CUDA_0,    CUDA_0   }},
+  {"cudnnScaleTensor",                                         {CUDNN_20,  CUDNN_900, CUDA_0   }},
   {"cudnnCreateFilterDescriptor",                              {CUDNN_10,  CUDNN_900, CUDA_0   }},
   {"cudnnSetFilter4dDescriptor",                               {CUDNN_20,  CUDNN_900, CUDA_0   }},
   {"cudnnGetFilter4dDescriptor",                               {CUDNN_20,  CUDNN_900, CUDA_0   }},
