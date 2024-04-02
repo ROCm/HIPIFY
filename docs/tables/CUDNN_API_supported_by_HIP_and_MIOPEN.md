@@ -732,9 +732,9 @@
 |`CUDNN_WGRAD_MODE_ADD`|7.5.0| | | | | | | | | | | | | | | |
 |`CUDNN_WGRAD_MODE_SET`|7.5.0| | | | | | | | | | | | | | | |
 |`CUDNN_ZERO_PAD`|8.3.0| | | | | | | | | | | | | | | |
-|`cudnnActivationDescriptor_t`|4.0.0| | | |`hipdnnActivationDescriptor_t`| | | | | |`miopenActivationDescriptor_t`| | | | | |
+|`cudnnActivationDescriptor_t`|4.0.0|9.0.0| | |`hipdnnActivationDescriptor_t`| | | | | |`miopenActivationDescriptor_t`| | | | | |
 |`cudnnActivationMode_t`|1.0.0|9.0.0| | |`hipdnnActivationMode_t`| | | | | |`miopenActivationMode_t`| | | | | |
-|`cudnnActivationStruct`|4.0.0| | | | | | | | | | | | | | | |
+|`cudnnActivationStruct`|4.0.0|9.0.0| | | | | | | | | | | | | | |
 |`cudnnAlgorithmDescriptor_t`|7.1.3| | |9.0.0| | | | | | | | | | | | |
 |`cudnnAlgorithmPerformanceStruct`|7.1.3| | |9.0.0| | | | | | | | | | | | |
 |`cudnnAlgorithmPerformance_t`|7.1.3| | |9.0.0| | | | | | | | | | | | |
@@ -789,7 +789,7 @@
 |`cudnnDropoutStruct`|5.0.0| | | | | | | | | | | | | | | |
 |`cudnnErrQueryMode_t`|7.0.5| | | | | | | | | | | | | | | |
 |`cudnnFilterDescriptor_t`|1.0.0| | | |`hipdnnFilterDescriptor_t`| | | | | |`miopenTensorDescriptor_t`| | | | | |
-|`cudnnFilterStruct`|1.0.0| | | | | | | | | | | | | | | |
+|`cudnnFilterStruct`|1.0.0|9.0.0| | | | | | | | | | | | | | |
 |`cudnnFoldingDirection_t`|7.5.0| | | | | | | | | | | | | | | |
 |`cudnnForwardMode_t`|8.0.1| | | | | | | | | | | | | | | |
 |`cudnnFractionStruct`|8.5.0| | | | | | | | | | | | | | | |
@@ -817,16 +817,16 @@
 |`cudnnNormAlgo_t`|8.0.1|9.0.0| | | | | | | | | | | | | | |
 |`cudnnNormMode_t`|8.0.1|9.0.0| | | | | | | | | | | | | | |
 |`cudnnNormOps_t`|8.0.1|9.0.0| | | | | | | | | | | | | | |
-|`cudnnOpTensorDescriptor_t`|5.0.0| | | |`hipdnnOpTensorDescriptor_t`| | | | | | | | | | | |
+|`cudnnOpTensorDescriptor_t`|5.0.0|9.0.0| | |`hipdnnOpTensorDescriptor_t`| | | | | | | | | | | |
 |`cudnnOpTensorOp_t`|5.0.0| | | |`hipdnnOpTensorOp_t`| | | | | |`miopenTensorOp_t`| | | | | |
-|`cudnnOpTensorStruct`|5.0.0| | | | | | | | | | | | | | | |
+|`cudnnOpTensorStruct`|5.0.0|9.0.0| | | | | | | | | | | | | | |
 |`cudnnPaddingMode_t`|8.3.0| | | | | | | | | | | | | | | |
 |`cudnnPersistentRNNPlan`|6.0.0| | | | | | | | | | | | | | | |
 |`cudnnPersistentRNNPlan_t`|6.0.0| | | |`hipdnnPersistentRNNPlan_t`| | | | | | | | | | | |
 |`cudnnPointwiseMode_t`|8.0.1| | | | | | | | | | | | | | | |
-|`cudnnPoolingDescriptor_t`|1.0.0| | | |`hipdnnPoolingDescriptor_t`| | | | | |`miopenPoolingDescriptor_t`| | | | | |
+|`cudnnPoolingDescriptor_t`|1.0.0|9.0.0| | |`hipdnnPoolingDescriptor_t`| | | | | |`miopenPoolingDescriptor_t`| | | | | |
 |`cudnnPoolingMode_t`|1.0.0|9.0.0| | |`hipdnnPoolingMode_t`| | | | | |`miopenPoolingMode_t`| | | | | |
-|`cudnnPoolingStruct`|1.0.0| | | | | | | | | | | | | | | |
+|`cudnnPoolingStruct`|1.0.0|9.0.0| | | | | | | | | | | | | | |
 |`cudnnRNNAlgo_t`|6.0.0| | | |`hipdnnRNNAlgo_t`| | | | | |`miopenRNNAlgo_t`| | | | | |
 |`cudnnRNNBiasMode_t`|7.5.0| | | |`hipdnnRNNBiasMode_t`| | | | | |`miopenRNNBiasMode_t`| | | | | |
 |`cudnnRNNClipMode_t`|7.2.1| | | | | | | | | | | | | | | |
@@ -838,10 +838,10 @@
 |`cudnnRNNMode_t`|5.0.0| | | |`hipdnnRNNMode_t`| | | | | |`miopenRNNMode_t`| | | | | |
 |`cudnnRNNPaddingMode_t`|7.2.1| | | | | | | | | | | | | | | |
 |`cudnnRNNStruct`|5.0.0| | | | | | | | | | | | | | | |
-|`cudnnReduceTensorDescriptor_t`|6.0.0| | | |`hipdnnReduceTensorDescriptor_t`| | | | | |`miopenReduceTensorDescriptor_t`| | | | | |
+|`cudnnReduceTensorDescriptor_t`|6.0.0|9.0.0| | |`hipdnnReduceTensorDescriptor_t`| | | | | |`miopenReduceTensorDescriptor_t`| | | | | |
 |`cudnnReduceTensorIndices_t`|6.0.0|9.0.0| | |`hipdnnReduceTensorIndices_t`| | | | | |`miopenReduceTensorIndices_t`| | | | | |
 |`cudnnReduceTensorOp_t`|6.0.0|9.0.0| | |`hipdnnReduceTensorOp_t`| | | | | |`miopenReduceTensorOp_t`| | | | | |
-|`cudnnReduceTensorStruct`|6.0.0| | | | | | | | | | | | | | | |
+|`cudnnReduceTensorStruct`|6.0.0|9.0.0| | | | | | | | | | | | | | |
 |`cudnnReorderType_t`|7.6.0|9.0.0| | | | | | | | | | | | | | |
 |`cudnnResampleMode_t`|8.3.0| | | | | | | | | | | | | | | |
 |`cudnnRngDistribution_t`|8.7.0| | | | | | | | | | | | | | | |
@@ -860,11 +860,11 @@
 |`cudnnTensorDescriptor_t`|2.0.0| | | |`hipdnnTensorDescriptor_t`| | | | | |`miopenTensorDescriptor_t`| | | | | |
 |`cudnnTensorFormat_t`|1.0.0| | | |`hipdnnTensorFormat_t`| | | | | | | | | | | |
 |`cudnnTensorStruct`|2.0.0| | | | | | | | | | | | | | | |
-|`cudnnTensorTransformDescriptor_t`|7.5.0| | | | | | | | | | | | | | | |
-|`cudnnTensorTransformStruct`|7.5.0| | | | | | | | | | | | | | | |
+|`cudnnTensorTransformDescriptor_t`|7.5.0|9.0.0| | | | | | | | | | | | | | |
+|`cudnnTensorTransformStruct`|7.5.0|9.0.0| | | | | | | | | | | | | | |
 |`cudnnWgradMode_t`|7.5.0| | | | | | | | | | | | | | | |
 |`libraryPropertyType`|6.0.0| | | | | | | | | | | | | | | |
-|`libraryPropertyType_t`|6.0.0| | | | | | | | | | | | | | | |
+|`libraryPropertyType_t`|6.0.0| | |9.0.0| | | | | | | | | | | | |
 
 ## **2. CUDNN Functions**
 
@@ -1093,7 +1093,7 @@
 |`cudnnRestoreAlgorithm`|7.1.3|8.0.2| |9.0.0| | | | | | | | | | | | |
 |`cudnnRestoreDropoutDescriptor`|7.0.5| | | | | | | | | |`miopenRestoreDropoutDescriptor`| | | | | |
 |`cudnnSaveAlgorithm`|7.1.3|8.0.2| |9.0.0| | | | | | | | | | | | |
-|`cudnnScaleTensor`|2.0.0| | | |`hipdnnScaleTensor`| | | | | |`miopenScaleTensor`| | | | | |
+|`cudnnScaleTensor`|2.0.0|9.0.0| | |`hipdnnScaleTensor`| | | | | |`miopenScaleTensor`| | | | | |
 |`cudnnSetActivationDescriptor`|4.0.0|9.0.0| | |`hipdnnSetActivationDescriptor`| | | | | | | | | | | |
 |`cudnnSetActivationDescriptorSwishBeta`|8.2.0|9.0.0| | | | | | | | | | | | | | |
 |`cudnnSetAlgorithmDescriptor`|7.1.3|8.0.2| |9.0.0| | | | | | | | | | | | |
