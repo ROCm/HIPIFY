@@ -24,6 +24,14 @@ if sys.platform in ['win32']:
 else:
     config.cuda_sdk_root = config.cuda_root
 
+config.cudnn_version_major = int("0")
+if config.cuda_dnn_root and config.cuda_dnn_root != "OFF":
+    cudnn_ver_file = config.cuda_dnn_root + '/include/cudnn_version.h';
+    if os.path.isfile(cudnn_ver_file):
+        with open(cudnn_ver_file) as f:
+            if 'CUDNN_MAJOR 9' in f.read():
+                config.cudnn_version_major = int("9")
+
 # Support substitution of the tools and libs dirs with user parameters. This is
 # used when we can't determine the tool dir at configuration time.
 try:

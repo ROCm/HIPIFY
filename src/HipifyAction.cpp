@@ -2276,7 +2276,7 @@ clang::SourceRange getWriteRange(clang::SourceManager &SM, const clang::SourceRa
   // If the range is contained within a macro, update the macro definition.
   // Otherwise, use the file location and hope for the best.
   if (!SM.isMacroBodyExpansion(begin) || !SM.isMacroBodyExpansion(end)) {
-    return {SM.getExpansionLoc(begin), SM.getExpansionLoc(end)};
+    return {SM.getFileLoc(begin), SM.getFileLoc(end)};
   }
   return {SM.getSpellingLoc(begin), SM.getSpellingLoc(end)};
 }
