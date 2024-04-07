@@ -433,6 +433,16 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaGraphEdgeData
   {"CUgraphEdgeData",                                                  {"hipGraphEdgeData",                                         "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
+  //
+  {"CUgraphDeviceUpdatableNode_st",                                    {"hipGraphDeviceUpdatableNode",                              "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CUgraphDeviceNode",                                                {"hipGraphDeviceNode",                                       "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+
+  //
+  {"CUasyncNotificationInfo_st",                                       {"hipAsyncNotificationInfo",                                 "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CUasyncNotificationInfo",                                          {"hipAsyncNotificationInfo",                                 "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+
   // 2. Unions
 
   {"CUstreamBatchMemOpParams",                                         {"hipStreamBatchMemOpParams",                                "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
@@ -1361,6 +1371,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_JIT_OPTIMIZE_UNUSED_DEVICE_VARIABLES",                          {"hipJitOptimizeUnusedDeviceVariables",                      "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   {"CU_JIT_POSITION_INDEPENDENT_CODE",                                 {"hipJitPositionIndependentCode",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   {"CU_JIT_MIN_CTA_PER_SM",                                            {"hipJitMinCtaPerSm",                                        "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CU_JIT_MAX_THREADS_PER_BLOCK",                                     {"hipJitMaxThreadsPerBlock",                                 "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CU_JIT_OVERRIDE_DIRECTIVE_VALUES",                                 {"hipJitOverrideDerectiveValues",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   {"CU_JIT_NUM_OPTIONS",                                               {"HIPRTC_JIT_NUM_OPTIONS",                                   "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}},
 
   // no analogue
@@ -1809,6 +1821,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUDA_ERROR_EXTERNAL_DEVICE",                                       {"hipErrorExternalDevice",                                   "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 911
   // cudaErrorInvalidClusterSize
   {"CUDA_ERROR_INVALID_CLUSTER_SIZE",                                  {"hipErrorInvalidClusterSize",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 912
+  //
+  {"CUDA_ERROR_FUNCTION_NOT_LOADED",                                   {"hipErrorFunctionNotLoaded",                                "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 913
+  //
+  {"CUDA_ERROR_INVALID_RESOURCE_TYPE",                                 {"hipErrorInvalidResourceType",                              "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 914
+  //
+  {"CUDA_ERROR_INVALID_RESOURCE_CONFIGURATION",                        {"hipErrorInvalidResourceConfiguration",                     "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 915
   // cudaErrorUnknown
   {"CUDA_ERROR_UNKNOWN",                                               {"hipErrorUnknown",                                          "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}}, // 999
 
@@ -2092,6 +2110,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_KERNEL_NODE_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP",                     {"hipKernelNodeAttributeMemSyncDomainMap",                   "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   // cudaKernelNodeAttributeMemSyncDomain
   {"CU_KERNEL_NODE_ATTRIBUTE_MEM_SYNC_DOMAIN",                         {"hipKernelNodeAttributeMemSyncDomain",                      "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CU_KERNEL_NODE_ATTRIBUTE_DEVICE_UPDATABLE_KERNEL_NODE",            {"hipKernelNodeAttributeDeviceUpdatableKernelMode",          "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   // cudaStreamAttrID
   {"CUstreamAttrID",                                                   {"hipStreamAttrID",                                          "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
@@ -2415,6 +2435,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaLaunchAttributeLaunchCompletionEvent
   {"CU_LAUNCH_ATTRIBUTE_LAUNCH_COMPLETION_EVENT",                      {"hipLaunchAttributeLaunchCompletionEvent",                  "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   //
+  {"CU_LAUNCH_ATTRIBUTE_DEVICE_UPDATABLE_KERNEL_NODE",                 {"hipLaunchAttributeDeviceUpdatableKernelMode",              "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
   {"CU_LAUNCH_ATTRIBUTE_MAX",                                          {"hipLaunchAttributeMax",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   // cudaGraphInstantiateResult
@@ -2595,6 +2617,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaGraphDependencyTypeProgrammatic
   {"CU_GRAPH_DEPENDENCY_TYPE_PROGRAMMATIC",                            {"hipGraphDependencyTypeProgrammatic",                       "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
+  //
+  {"CUasyncNotificationType",                                          {"hipAsyncNotificationType",                                 "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CUasyncNotificationType_enum",                                     {"hipAsyncNotificationType",                                 "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // CUasyncNotificationType enum values
+  //
+  {"CU_ASYNC_NOTIFICATION_TYPE_OVER_BUDGET",                           {"HIP_ASYNC_NOTIFICATION_TYPE_OVER_BUDGET",                  "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+
   // 4. Typedefs
 
   // no analogue
@@ -2633,6 +2663,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
 
   // cudaGraphConditionalHandle
   {"CUgraphConditionalHandle",                                         {"hipGraphConditionalHandle",                                "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+
+  //
+  {"CUasyncCallback",                                                  {"hipAsyncCallback",                                         "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   // 5. Defines
 
@@ -3613,6 +3646,21 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_TYPE_NAME_VER_MAP {
   {"CUDA_ERROR_ILLEGAL_STATE",                                         {CUDA_123, CUDA_0,   CUDA_0  }},
   {"CU_MEM_HANDLE_TYPE_FABRIC",                                        {CUDA_123, CUDA_0,   CUDA_0  }},
   {"CU_GRAPH_DEBUG_DOT_FLAGS_CONDITIONAL_NODE_PARAMS",                 {CUDA_123, CUDA_0,   CUDA_0  }},
+  {"CUgraphDeviceUpdatableNode_st",                                    {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"CUgraphDeviceNode",                                                {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"CUasyncNotificationType",                                          {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"CUasyncNotificationType_enum",                                     {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"CU_ASYNC_NOTIFICATION_TYPE_OVER_BUDGET",                           {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"CUasyncNotificationInfo_st",                                       {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"CUasyncNotificationInfo",                                          {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"CUasyncCallback",                                                  {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"CU_JIT_MAX_THREADS_PER_BLOCK",                                     {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"CU_JIT_OVERRIDE_DIRECTIVE_VALUES",                                 {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"CU_LAUNCH_ATTRIBUTE_DEVICE_UPDATABLE_KERNEL_NODE",                 {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"CU_KERNEL_NODE_ATTRIBUTE_DEVICE_UPDATABLE_KERNEL_NODE",            {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"CUDA_ERROR_FUNCTION_NOT_LOADED",                                   {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"CUDA_ERROR_INVALID_RESOURCE_TYPE",                                 {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"CUDA_ERROR_INVALID_RESOURCE_CONFIGURATION",                        {CUDA_124, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {

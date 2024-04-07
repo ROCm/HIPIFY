@@ -57,6 +57,7 @@
 |`CUDA_ERROR_ECC_UNCORRECTABLE`| | | | |`hipErrorECCNotCorrectable`|1.6.0| | | | |
 |`CUDA_ERROR_EXTERNAL_DEVICE`|11.4| | | | | | | | | |
 |`CUDA_ERROR_FILE_NOT_FOUND`| | | | |`hipErrorFileNotFound`|1.6.0| | | | |
+|`CUDA_ERROR_FUNCTION_NOT_LOADED`|12.4| | | | | | | | | |
 |`CUDA_ERROR_GRAPH_EXEC_UPDATE_FAILURE`|10.2| | | |`hipErrorGraphExecUpdateFailure`|5.0.0| | | | |
 |`CUDA_ERROR_HARDWARE_STACK_ERROR`| | | | | | | | | | |
 |`CUDA_ERROR_HOST_MEMORY_ALREADY_REGISTERED`| | | | |`hipErrorHostMemoryAlreadyRegistered`|1.6.0| | | | |
@@ -73,6 +74,8 @@
 |`CUDA_ERROR_INVALID_IMAGE`| | | | |`hipErrorInvalidImage`|1.6.0| | | | |
 |`CUDA_ERROR_INVALID_PC`| | | | | | | | | | |
 |`CUDA_ERROR_INVALID_PTX`| | | | |`hipErrorInvalidKernelFile`|1.6.0| | | | |
+|`CUDA_ERROR_INVALID_RESOURCE_CONFIGURATION`|12.4| | | | | | | | | |
+|`CUDA_ERROR_INVALID_RESOURCE_TYPE`|12.4| | | | | | | | | |
 |`CUDA_ERROR_INVALID_SOURCE`| | | | |`hipErrorInvalidSource`|1.6.0| | | | |
 |`CUDA_ERROR_INVALID_VALUE`| | | | |`hipErrorInvalidValue`|1.6.0| | | | |
 |`CUDA_ERROR_JIT_COMPILATION_DISABLED`|11.2| | | | | | | | | |
@@ -285,6 +288,7 @@
 |`CU_ARRAY_SPARSE_PROPERTIES_SINGLE_MIPTAIL`|11.1| | | | | | | | | |
 |`CU_ARRAY_SPARSE_SUBRESOURCE_TYPE_MIPTAIL`|11.1| | | |`hipArraySparseSubresourceTypeMiptail`|5.2.0| | | | |
 |`CU_ARRAY_SPARSE_SUBRESOURCE_TYPE_SPARSE_LEVEL`|11.1| | | |`hipArraySparseSubresourceTypeSparseLevel`|5.2.0| | | | |
+|`CU_ASYNC_NOTIFICATION_TYPE_OVER_BUDGET`|12.4| | | | | | | | | |
 |`CU_CLUSTER_SCHEDULING_POLICY_DEFAULT`|11.8| | | | | | | | | |
 |`CU_CLUSTER_SCHEDULING_POLICY_LOAD_BALANCING`|11.8| | | | | | | | | |
 |`CU_CLUSTER_SCHEDULING_POLICY_SPREAD`|11.8| | | | | | | | | |
@@ -730,12 +734,14 @@
 |`CU_JIT_LOG_VERBOSE`| | | | |`HIPRTC_JIT_LOG_VERBOSE`|1.6.0| | | | |
 |`CU_JIT_LTO`|11.4|12.0| | | | | | | | |
 |`CU_JIT_MAX_REGISTERS`| | | | |`HIPRTC_JIT_MAX_REGISTERS`|1.6.0| | | | |
+|`CU_JIT_MAX_THREADS_PER_BLOCK`|12.4| | | | | | | | | |
 |`CU_JIT_MIN_CTA_PER_SM`|12.3| | | | | | | | | |
 |`CU_JIT_NEW_SM3X_OPT`| | | | |`HIPRTC_JIT_NEW_SM3X_OPT`|1.6.0| | | | |
 |`CU_JIT_NUM_INPUT_TYPES`| | | | |`HIPRTC_JIT_NUM_LEGACY_INPUT_TYPES`|5.3.0| | | | |
 |`CU_JIT_NUM_OPTIONS`| | | | |`HIPRTC_JIT_NUM_OPTIONS`|1.6.0| | | | |
 |`CU_JIT_OPTIMIZATION_LEVEL`| | | | |`HIPRTC_JIT_OPTIMIZATION_LEVEL`|1.6.0| | | | |
 |`CU_JIT_OPTIMIZE_UNUSED_DEVICE_VARIABLES`|11.7|12.0| | | | | | | | |
+|`CU_JIT_OVERRIDE_DIRECTIVE_VALUES`|12.4| | | | | | | | | |
 |`CU_JIT_POSITION_INDEPENDENT_CODE`|12.0| | | | | | | | | |
 |`CU_JIT_PREC_DIV`|11.4|12.0| | | | | | | | |
 |`CU_JIT_PREC_SQRT`|11.4|12.0| | | | | | | | |
@@ -751,6 +757,7 @@
 |`CU_KERNEL_NODE_ATTRIBUTE_CLUSTER_DIMENSION`|11.8| | | | | | | | | |
 |`CU_KERNEL_NODE_ATTRIBUTE_CLUSTER_SCHEDULING_POLICY_PREFERENCE`|11.8| | | | | | | | | |
 |`CU_KERNEL_NODE_ATTRIBUTE_COOPERATIVE`|11.0| | | |`hipKernelNodeAttributeCooperative`|5.2.0| | | | |
+|`CU_KERNEL_NODE_ATTRIBUTE_DEVICE_UPDATABLE_KERNEL_NODE`|12.4| | | | | | | | | |
 |`CU_KERNEL_NODE_ATTRIBUTE_MEM_SYNC_DOMAIN`|12.0| | | | | | | | | |
 |`CU_KERNEL_NODE_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP`|12.0| | | | | | | | | |
 |`CU_KERNEL_NODE_ATTRIBUTE_PRIORITY`|11.7| | | | | | | | | |
@@ -758,6 +765,7 @@
 |`CU_LAUNCH_ATTRIBUTE_CLUSTER_DIMENSION`|11.8| | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_CLUSTER_SCHEDULING_POLICY_PREFERENCE`|11.8| | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_COOPERATIVE`|11.8| | | | | | | | | |
+|`CU_LAUNCH_ATTRIBUTE_DEVICE_UPDATABLE_KERNEL_NODE`|12.4| | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_IGNORE`|11.8| | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_LAUNCH_COMPLETION_EVENT`|12.3| | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_MAX`|12.1| | | | | | | | | |
@@ -1045,6 +1053,11 @@
 |`CUarray_format`| | | | |`hipArray_Format`|1.7.0| | | | |
 |`CUarray_format_enum`| | | | |`hipArray_Format`|1.7.0| | | | |
 |`CUarray_st`| | | | |`hipArray`|1.7.0| | | | |
+|`CUasyncCallback`|12.4| | | | | | | | | |
+|`CUasyncNotificationInfo`|12.4| | | | | | | | | |
+|`CUasyncNotificationInfo_st`|12.4| | | | | | | | | |
+|`CUasyncNotificationType`|12.4| | | | | | | | | |
+|`CUasyncNotificationType_enum`|12.4| | | | | | | | | |
 |`CUclusterSchedulingPolicy`|11.8| | | | | | | | | |
 |`CUclusterSchedulingPolicy_enum`|11.8| | | | | | | | | |
 |`CUcomputemode`| | | | |`hipComputeMode`|1.9.0| | | | |
@@ -1143,6 +1156,8 @@
 |`CUgraphDebugDot_flags_enum`|11.3| | | |`hipGraphDebugDotFlags`|5.5.0| | | | |
 |`CUgraphDependencyType`|12.3| | | | | | | | | |
 |`CUgraphDependencyType_enum`|12.3| | | | | | | | | |
+|`CUgraphDeviceNode`|12.4| | | | | | | | | |
+|`CUgraphDeviceUpdatableNode_st`|12.4| | | | | | | | | |
 |`CUgraphEdgeData`|12.3| | | | | | | | | |
 |`CUgraphEdgeData_st`|12.3| | | | | | | | | |
 |`CUgraphExec`|10.0| | | |`hipGraphExec_t`|4.3.0| | | | |
