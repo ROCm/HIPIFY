@@ -2625,6 +2625,18 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   //
   {"CU_ASYNC_NOTIFICATION_TYPE_OVER_BUDGET",                           {"HIP_ASYNC_NOTIFICATION_TYPE_OVER_BUDGET",                  "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
+  //
+  {"CUfunctionLoadingState",                                          {"hipFunctionLoadingState",                                   "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CUfunctionLoadingState_enum",                                     {"hipFunctionLoadingState",                                   "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // CUfunctionLoadingState enum values
+  //
+  {"CU_FUNCTION_LOADING_STATE_UNLOADED",                              {"HIP_FUNCTION_LOADING_STATE_UNLOADED",                       "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CU_FUNCTION_LOADING_STATE_LOADED",                                {"HIP_FUNCTION_LOADING_STATE_LOADED",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CU_FUNCTION_LOADING_STATE_MAX",                                   {"HIP_FUNCTION_LOADING_STATE_MAX",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+
   // 4. Typedefs
 
   // no analogue
@@ -3661,6 +3673,11 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_TYPE_NAME_VER_MAP {
   {"CUDA_ERROR_FUNCTION_NOT_LOADED",                                   {CUDA_124, CUDA_0,   CUDA_0  }},
   {"CUDA_ERROR_INVALID_RESOURCE_TYPE",                                 {CUDA_124, CUDA_0,   CUDA_0  }},
   {"CUDA_ERROR_INVALID_RESOURCE_CONFIGURATION",                        {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"CUfunctionLoadingState",                                           {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"CUfunctionLoadingState_enum",                                      {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"CU_FUNCTION_LOADING_STATE_UNLOADED",                               {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"CU_FUNCTION_LOADING_STATE_LOADED",                                 {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"CU_FUNCTION_LOADING_STATE_MAX",                                    {CUDA_124, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {
