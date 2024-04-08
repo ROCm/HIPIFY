@@ -609,6 +609,9 @@
 |`CU_FLUSH_GPU_DIRECT_RDMA_WRITES_TARGET_CURRENT_CTX`|11.3| | | | | | | | | |
 |`CU_FLUSH_GPU_DIRECT_RDMA_WRITES_TO_ALL_DEVICES`|11.3| | | | | | | | | |
 |`CU_FLUSH_GPU_DIRECT_RDMA_WRITES_TO_OWNER`|11.3| | | | | | | | | |
+|`CU_FUNCTION_LOADING_STATE_LOADED`|12.4| | | | | | | | | |
+|`CU_FUNCTION_LOADING_STATE_MAX`|12.4| | | | | | | | | |
+|`CU_FUNCTION_LOADING_STATE_UNLOADED`|12.4| | | | | | | | | |
 |`CU_FUNC_ATTRIBUTE_BINARY_VERSION`| | | | |`HIP_FUNC_ATTRIBUTE_BINARY_VERSION`|2.8.0| | | | |
 |`CU_FUNC_ATTRIBUTE_CACHE_MODE_CA`| | | | |`HIP_FUNC_ATTRIBUTE_CACHE_MODE_CA`|2.8.0| | | | |
 |`CU_FUNC_ATTRIBUTE_CLUSTER_SCHEDULING_POLICY_PREFERENCE`|11.8| | | | | | | | | |
@@ -1146,6 +1149,8 @@
 |`CUfunc_cache_enum`| | | | |`hipFuncCache_t`|1.6.0| | | | |
 |`CUfunc_st`| | | | |`ihipModuleSymbol_t`|1.6.0| | | | |
 |`CUfunction`| | | | |`hipFunction_t`|1.6.0| | | | |
+|`CUfunctionLoadingState`|12.4| | | | | | | | | |
+|`CUfunctionLoadingState_enum`|12.4| | | | | | | | | |
 |`CUfunction_attribute`| | | | |`hipFunction_attribute`|2.8.0| | | | |
 |`CUfunction_attribute_enum`| | | | |`hipFunction_attribute`|2.8.0| | | | |
 |`CUgraph`|10.0| | | |`hipGraph_t`|4.3.0| | | | |
@@ -1460,7 +1465,7 @@
 |`cuCtxGetFlags`| | | | |`hipCtxGetFlags`|1.9.0|1.9.0| | | |
 |`cuCtxGetId`|12.0| | | | | | | | | |
 |`cuCtxGetLimit`| | | | |`hipDeviceGetLimit`|1.6.0| | | | |
-|`cuCtxGetSharedMemConfig`| | | | |`hipCtxGetSharedMemConfig`|1.9.0|1.9.0| | | |
+|`cuCtxGetSharedMemConfig`| | | |12.4|`hipCtxGetSharedMemConfig`|1.9.0|1.9.0| | | |
 |`cuCtxGetStreamPriorityRange`| | | | |`hipDeviceGetStreamPriorityRange`|2.0.0| | | | |
 |`cuCtxPopCurrent`| | | | |`hipCtxPopCurrent`|1.6.0|1.9.0| | | |
 |`cuCtxPopCurrent_v2`| | | | |`hipCtxPopCurrent`|1.6.0|1.9.0| | | |
@@ -1471,7 +1476,7 @@
 |`cuCtxSetCurrent`| | | | |`hipCtxSetCurrent`|1.6.0|1.9.0| | | |
 |`cuCtxSetFlags`|12.1| | | | | | | | | |
 |`cuCtxSetLimit`| | | | |`hipDeviceSetLimit`|5.3.0| | | | |
-|`cuCtxSetSharedMemConfig`| | | | |`hipCtxSetSharedMemConfig`|1.9.0|1.9.0| | | |
+|`cuCtxSetSharedMemConfig`| | | |12.4|`hipCtxSetSharedMemConfig`|1.9.0|1.9.0| | | |
 |`cuCtxSynchronize`| | | | |`hipCtxSynchronize`|1.9.0|1.9.0| | | |
 
 ## **9. Context Management [DEPRECATED]**
@@ -1493,7 +1498,9 @@
 |`cuLinkCreate`| | | | |`hiprtcLinkCreate`|5.3.0| | | | |
 |`cuLinkCreate_v2`| | | | |`hiprtcLinkCreate`|5.3.0| | | | |
 |`cuLinkDestroy`| | | | |`hiprtcLinkDestroy`|5.3.0| | | | |
+|`cuModuleEnumerateFunctions`|12.4| | | | | | | | | |
 |`cuModuleGetFunction`| | | | |`hipModuleGetFunction`|1.6.0| | | | |
+|`cuModuleGetFunctionCount`|12.4| | | | | | | | | |
 |`cuModuleGetGlobal`| | | | |`hipModuleGetGlobal`|1.6.0| | | | |
 |`cuModuleGetGlobal_v2`| | | | |`hipModuleGetGlobal`|1.6.0| | | | |
 |`cuModuleGetLoadingMode`|11.7| | | | | | | | | |
@@ -1517,10 +1524,13 @@
 |`cuKernelGetAttribute`|12.0| | | | | | | | | |
 |`cuKernelGetFunction`|12.0| | | | | | | | | |
 |`cuKernelGetName`|12.3| | | | | | | | | |
+|`cuKernelGetParamInfo`|12.4| | | | | | | | | |
 |`cuKernelSetAttribute`|12.0| | | | | | | | | |
 |`cuKernelSetCacheConfig`|12.0| | | | | | | | | |
+|`cuLibraryEnumerateKernels`|12.4| | | | | | | | | |
 |`cuLibraryGetGlobal`|12.0| | | | | | | | | |
 |`cuLibraryGetKernel`|12.0| | | | | | | | | |
+|`cuLibraryGetKernelCount`|12.4| | | | | | | | | |
 |`cuLibraryGetManaged`|12.0| | | | | | | | | |
 |`cuLibraryGetModule`|12.0| | | | | | | | | |
 |`cuLibraryGetUnifiedFunction`|12.0| | | | | | | | | |
@@ -1546,6 +1556,8 @@
 |`cuArrayGetSparseProperties`|11.1| | | | | | | | | |
 |`cuDeviceGetByPCIBusId`| | | | |`hipDeviceGetByPCIBusId`|1.6.0| | | | |
 |`cuDeviceGetPCIBusId`| | | | |`hipDeviceGetPCIBusId`|1.6.0| | | | |
+|`cuDeviceRegisterAsyncNotification`|12.4| | | | | | | | | |
+|`cuDeviceUnregisterAsyncNotification`|12.4| | | | | | | | | |
 |`cuIpcCloseMemHandle`| | | | |`hipIpcCloseMemHandle`|1.6.0| | | | |
 |`cuIpcGetEventHandle`| | | | |`hipIpcGetEventHandle`|1.6.0| | | | |
 |`cuIpcGetMemHandle`| | | | |`hipIpcGetMemHandle`|1.6.0| | | | |
@@ -1782,9 +1794,12 @@
 |`cuFuncGetAttribute`| | | | |`hipFuncGetAttribute`|2.8.0| | | | |
 |`cuFuncGetModule`|11.0| | | | | | | | | |
 |`cuFuncGetName`|12.3| | | | | | | | | |
+|`cuFuncGetParamInfo`|12.4| | | | | | | | | |
+|`cuFuncIsLoaded`|12.4| | | | | | | | | |
+|`cuFuncLoad`|12.4| | | | | | | | | |
 |`cuFuncSetAttribute`|9.0| | | | | | | | | |
 |`cuFuncSetCacheConfig`| | | | | | | | | | |
-|`cuFuncSetSharedMemConfig`| | | | | | | | | | |
+|`cuFuncSetSharedMemConfig`| | | |12.4| | | | | | |
 |`cuLaunchCooperativeKernel`|9.0| | | |`hipModuleLaunchCooperativeKernel`|5.5.0| | | | |
 |`cuLaunchCooperativeKernelMultiDevice`|9.0|11.3| | |`hipModuleLaunchCooperativeKernelMultiDevice`|5.5.0| | | | |
 |`cuLaunchHostFunc`|10.0| | | |`hipLaunchHostFunc`|5.2.0| | | | |

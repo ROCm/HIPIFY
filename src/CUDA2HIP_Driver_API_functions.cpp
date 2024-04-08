@@ -113,7 +113,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuCtxGetLimit",                                        {"hipDeviceGetLimit",                                       "", CONV_CONTEXT, API_DRIVER, SEC::CONTEXT}},
   // cudaDeviceGetSharedMemConfig
   // TODO: rename to hipDeviceGetSharedMemConfig
-  {"cuCtxGetSharedMemConfig",                              {"hipCtxGetSharedMemConfig",                                "", CONV_CONTEXT, API_DRIVER, SEC::CONTEXT, HIP_DEPRECATED}},
+  {"cuCtxGetSharedMemConfig",                              {"hipCtxGetSharedMemConfig",                                "", CONV_CONTEXT, API_DRIVER, SEC::CONTEXT, HIP_DEPRECATED | CUDA_DEPRECATED}},
   // cudaDeviceGetStreamPriorityRange
   {"cuCtxGetStreamPriorityRange",                          {"hipDeviceGetStreamPriorityRange",                         "", CONV_CONTEXT, API_DRIVER, SEC::CONTEXT}},
   {"cuCtxPopCurrent",                                      {"hipCtxPopCurrent",                                        "", CONV_CONTEXT, API_DRIVER, SEC::CONTEXT, HIP_DEPRECATED}},
@@ -128,7 +128,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuCtxSetLimit",                                        {"hipDeviceSetLimit",                                       "", CONV_CONTEXT, API_DRIVER, SEC::CONTEXT}},
   // cudaDeviceSetSharedMemConfig
   // TODO: rename to hipDeviceSetSharedMemConfig
-  {"cuCtxSetSharedMemConfig",                              {"hipCtxSetSharedMemConfig",                                "", CONV_CONTEXT, API_DRIVER, SEC::CONTEXT, HIP_DEPRECATED}},
+  {"cuCtxSetSharedMemConfig",                              {"hipCtxSetSharedMemConfig",                                "", CONV_CONTEXT, API_DRIVER, SEC::CONTEXT, HIP_DEPRECATED | CUDA_DEPRECATED}},
   // cudaDeviceSynchronize
   // TODO: rename to hipDeviceSynchronize
   {"cuCtxSynchronize",                                     {"hipCtxSynchronize",                                       "", CONV_CONTEXT, API_DRIVER, SEC::CONTEXT, HIP_DEPRECATED}},
@@ -161,6 +161,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuModuleLoadFatBinary",                                {"hipModuleLoadFatBinary",                                  "", CONV_MODULE, API_DRIVER, SEC::MODULE, HIP_UNSUPPORTED}},
   {"cuModuleUnload",                                       {"hipModuleUnload",                                         "", CONV_MODULE, API_DRIVER, SEC::MODULE}},
   {"cuModuleGetLoadingMode",                               {"hipModuleGetLoadingMode",                                 "", CONV_MODULE, API_DRIVER, SEC::MODULE, HIP_UNSUPPORTED}},
+  {"cuModuleGetFunctionCount",                             {"hipModuleGetFunctionCount",                               "", CONV_MODULE, API_DRIVER, SEC::MODULE, HIP_UNSUPPORTED}},
+  {"cuModuleEnumerateFunctions",                           {"hipModuleEnumerateFunctions",                             "", CONV_MODULE, API_DRIVER, SEC::MODULE, HIP_UNSUPPORTED}},
 
   // 11. Module Management [DEPRECATED]
   {"cuModuleGetSurfRef",                                   {"hipModuleGetSurfRef",                                     "", CONV_MODULE, API_DRIVER, SEC::MODULE_DEPRECATED, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
@@ -180,6 +182,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuKernelSetAttribute",                                 {"hipKernelSetAttribute",                                   "", CONV_LIBRARY, API_DRIVER, SEC::LIBRARY, HIP_UNSUPPORTED}},
   {"cuKernelSetCacheConfig",                               {"hipKernelSetCacheConfig",                                 "", CONV_LIBRARY, API_DRIVER, SEC::LIBRARY, HIP_UNSUPPORTED}},
   {"cuKernelGetName",                                      {"hipKernelGetName",                                        "", CONV_LIBRARY, API_DRIVER, SEC::LIBRARY, HIP_UNSUPPORTED}},
+  {"cuLibraryGetKernelCount",                              {"hipLibraryGetKernelCount",                                "", CONV_LIBRARY, API_DRIVER, SEC::LIBRARY, HIP_UNSUPPORTED}},
+  {"cuLibraryEnumerateKernels",                            {"hipLibraryEnumerateKernels",                              "", CONV_LIBRARY, API_DRIVER, SEC::LIBRARY, HIP_UNSUPPORTED}},
+  {"cuKernelGetParamInfo",                                 {"hipKernelGetParamInfo",                                   "", CONV_LIBRARY, API_DRIVER, SEC::LIBRARY, HIP_UNSUPPORTED}},
 
   // 13. Memory Management
   // no analogue
@@ -367,6 +372,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuArrayGetPlane",                                      {"hipArrayGetPlane",                                        "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_UNSUPPORTED}},
   //
   {"cuMemGetHandleForAddressRange",                        {"hipMemGetHandleForAddressRange",                          "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_UNSUPPORTED}},
+  //
+  {"cuDeviceRegisterAsyncNotification",                    {"hipDeviceRegisterAsyncNotification",                      "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_UNSUPPORTED}},
+  //
+  {"cuDeviceUnregisterAsyncNotification",                  {"hipDeviceUnregisterAsyncNotification",                    "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_UNSUPPORTED}},
 
   // 14. Virtual Memory Management
   // no analogue
@@ -581,7 +590,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuFuncSetCacheConfig",                                 {"hipFuncSetCacheConfig_",                                  "", CONV_EXECUTION, API_DRIVER, SEC::EXECUTION, HIP_UNSUPPORTED}},
   // no analogue
   // NOTE: Not equal to cudaFuncSetSharedMemConfig due to different signatures
-  {"cuFuncSetSharedMemConfig",                             {"hipFuncSetSharedMemConfig_",                              "", CONV_EXECUTION, API_DRIVER, SEC::EXECUTION, HIP_UNSUPPORTED}},
+  {"cuFuncSetSharedMemConfig",                             {"hipFuncSetSharedMemConfig_",                              "", CONV_EXECUTION, API_DRIVER, SEC::EXECUTION, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   // no analogue
   // NOTE: Not equal to cudaLaunchCooperativeKernel due to different signatures
   {"cuLaunchCooperativeKernel",                            {"hipModuleLaunchCooperativeKernel",                        "", CONV_EXECUTION, API_DRIVER, SEC::EXECUTION}},
@@ -598,6 +607,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuLaunchKernelEx",                                     {"hipLaunchKernelEx",                                       "", CONV_EXECUTION, API_DRIVER, SEC::EXECUTION, HIP_UNSUPPORTED}},
   // cudaFuncGetName
   {"cuFuncGetName",                                        {"hipFuncGetName",                                          "", CONV_EXECUTION, API_DRIVER, SEC::EXECUTION, HIP_UNSUPPORTED}},
+  //
+  {"cuFuncGetParamInfo",                                   {"hipFuncGetParamInfo",                                     "", CONV_EXECUTION, API_DRIVER, SEC::EXECUTION, HIP_UNSUPPORTED}},
+  //
+  {"cuFuncIsLoaded",                                       {"hipFuncIsLoaded",                                         "", CONV_EXECUTION, API_DRIVER, SEC::EXECUTION, HIP_UNSUPPORTED}},
+  //
+  {"cuFuncLoad",                                           {"hipFuncLoad",                                             "", CONV_EXECUTION, API_DRIVER, SEC::EXECUTION, HIP_UNSUPPORTED}},
 
   // 23. Execution Control [DEPRECATED]
   // no analogue
@@ -1425,6 +1440,19 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_FUNCTION_VER_MAP {
   {"cuGraphAddNode_v2",                                    {CUDA_123, CUDA_0,   CUDA_0  }},
   {"cuGraphConditionalHandleCreate",                       {CUDA_123, CUDA_0,   CUDA_0  }},
   {"cuGraphNodeGetDependentNodes_v2",                      {CUDA_123, CUDA_0,   CUDA_0  }},
+  {"cuCtxGetSharedMemConfig",                              {CUDA_0,   CUDA_0,   CUDA_124}},
+  {"cuCtxSetSharedMemConfig",                              {CUDA_0,   CUDA_0,   CUDA_124}},
+  {"cuModuleGetFunctionCount",                             {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"cuModuleEnumerateFunctions",                           {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"cuLibraryGetKernelCount",                              {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"cuLibraryEnumerateKernels",                            {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"cuKernelGetParamInfo",                                 {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"cuDeviceRegisterAsyncNotification",                    {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"cuDeviceUnregisterAsyncNotification",                  {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"cuFuncSetSharedMemConfig",                             {CUDA_0,   CUDA_0,   CUDA_124}},
+  {"cuFuncGetParamInfo",                                   {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"cuFuncIsLoaded",                                       {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"cuFuncLoad",                                           {CUDA_124, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_FUNCTION_VER_MAP {
