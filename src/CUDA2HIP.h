@@ -215,14 +215,15 @@ namespace driver {
     GRAPHICS = 32,
     DRIVER_ENTRY_POINT = 33,
     COREDUMP = 34,
-    PROFILER_DEPRECATED = 35,
-    PROFILER = 36,
-    OPENGL = 37,
-    D3D9 = 38,
-    D3D10 = 39,
-    D3D11 = 40,
-    VDPAU = 41,
-    EGL = 42,
+    GREEN_CONTEXT = 35,
+    PROFILER_DEPRECATED = 36,
+    PROFILER = 37,
+    OPENGL = 38,
+    D3D9 = 39,
+    D3D10 = 40,
+    D3D11 = 41,
+    VDPAU = 42,
+    EGL = 43,
   };
 }
 

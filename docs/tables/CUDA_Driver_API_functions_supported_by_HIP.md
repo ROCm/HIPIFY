@@ -709,6 +709,7 @@
 |`CU_GRAPH_NODE_TYPE_MEM_FREE`|11.4| | | |`hipGraphNodeTypeMemFree`|5.5.0| | | | |
 |`CU_GRAPH_NODE_TYPE_WAIT_EVENT`|11.1| | | |`hipGraphNodeTypeWaitEvent`|4.3.0| | | | |
 |`CU_GRAPH_USER_OBJECT_MOVE`|11.3| | | |`hipGraphUserObjectMove`|5.3.0| | | | |
+|`CU_GREEN_CTX_DEFAULT_STREAM`|12.4| | | | | | | | | |
 |`CU_IPC_HANDLE_SIZE`| | | | |`HIP_IPC_HANDLE_SIZE`|1.6.0| | | | |
 |`CU_IPC_MEM_LAZY_ENABLE_PEER_ACCESS`| | | | |`hipIpcMemLazyEnablePeerAccess`|1.6.0| | | | |
 |`CU_JIT_CACHE_MODE`| | | | |`HIPRTC_JIT_CACHE_MODE`|1.6.0| | | | |
@@ -1085,6 +1086,8 @@
 |`CUd3d9map_flags_enum`| | | | | | | | | | |
 |`CUd3d9register_flags`| | | | | | | | | | |
 |`CUd3d9register_flags_enum`| | | | | | | | | | |
+|`CUdevResourceDesc`|12.4| | | | | | | | | |
+|`CUdevResourceDesc_st`|12.4| | | | | | | | | |
 |`CUdevice`| | | | |`hipDevice_t`|1.6.0| | | | |
 |`CUdeviceNumaConfig`|12.2| | | | | | | | | |
 |`CUdeviceNumaConfig_enum`|12.2| | | | | | | | | |
@@ -1191,6 +1194,9 @@
 |`CUgraphicsRegisterFlags_enum`| | | | |`hipGraphicsRegisterFlags`|4.4.0| | | | |
 |`CUgraphicsResource`| | | | |`hipGraphicsResource_t`|4.4.0| | | | |
 |`CUgraphicsResource_st`| | | | |`hipGraphicsResource`|4.4.0| | | | |
+|`CUgreenCtx`|12.4| | | | | | | | | |
+|`CUgreenCtxCreate_flags`|12.4| | | | | | | | | |
+|`CUgreenCtx_st`|12.4| | | | | | | | | |
 |`CUhostFn`|10.0| | | |`hipHostFn_t`|4.3.0| | | | |
 |`CUipcEventHandle`| | | | |`hipIpcEventHandle_t`|1.6.0| | | | |
 |`CUipcEventHandle_st`| | | | |`hipIpcEventHandle_st`|3.5.0| | | | |
@@ -2035,20 +2041,24 @@
 |`cuCoredumpSetAttribute`|12.1| | | | | | | | | |
 |`cuCoredumpSetAttributeGlobal`|12.1| | | | | | | | | |
 
-## **35. Profiler Control [DEPRECATED]**
+## **35. Green Contexts**
+
+Unsupported
+
+## **36. Profiler Control [DEPRECATED]**
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
 |`cuProfilerInitialize`| |11.0| | | | | | | | |
 
-## **36. Profiler Control**
+## **37. Profiler Control**
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
 |`cuProfilerStart`| | | | |`hipProfilerStart`|1.6.0|3.0.0| | | |
 |`cuProfilerStop`| | | | |`hipProfilerStop`|1.6.0|3.0.0| | | |
 
-## **37. OpenGL Interoperability**
+## **38. OpenGL Interoperability**
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
@@ -2066,7 +2076,7 @@
 |`cuGraphicsGLRegisterImage`| | | | |`hipGraphicsGLRegisterImage`|5.1.0| | | | |
 |`cuWGLGetDevice`| | | | | | | | | | |
 
-## **38. Direct3D 9 Interoperability**
+## **39. Direct3D 9 Interoperability**
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
@@ -2087,7 +2097,7 @@
 |`cuD3D9UnregisterResource`| |9.2| | | | | | | | |
 |`cuGraphicsD3D9RegisterResource`| | | | | | | | | | |
 
-## **39. Direct3D 10 Interoperability**
+## **40. Direct3D 10 Interoperability**
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
@@ -2108,7 +2118,7 @@
 |`cuD3D10UnregisterResource`| |9.2| | | | | | | | |
 |`cuGraphicsD3D10RegisterResource`| | | | | | | | | | |
 
-## **40. Direct3D 11 Interoperability**
+## **41. Direct3D 11 Interoperability**
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
@@ -2119,7 +2129,7 @@
 |`cuD3D11GetDirect3DDevice`| |9.2| | | | | | | | |
 |`cuGraphicsD3D11RegisterResource`| | | | | | | | | | |
 
-## **41. VDPAU Interoperability**
+## **42. VDPAU Interoperability**
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
@@ -2128,7 +2138,7 @@
 |`cuVDPAUCtxCreate`| | | | | | | | | | |
 |`cuVDPAUGetDevice`| | | | | | | | | | |
 
-## **42. EGL Interoperability**
+## **43. EGL Interoperability**
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
