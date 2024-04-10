@@ -495,6 +495,9 @@
 |`CU_DEVICE_P2P_ATTRIBUTE_CUDA_ARRAY_ACCESS_SUPPORTED`|10.0| | | |`hipDevP2PAttrHipArrayAccessSupported`|3.8.0| | | | |
 |`CU_DEVICE_P2P_ATTRIBUTE_NATIVE_ATOMIC_SUPPORTED`|8.0| | | |`hipDevP2PAttrNativeAtomicSupported`|3.8.0| | | | |
 |`CU_DEVICE_P2P_ATTRIBUTE_PERFORMANCE_RANK`|8.0| | | |`hipDevP2PAttrPerformanceRank`|3.8.0| | | | |
+|`CU_DEV_RESOURCE_TYPE_INVALID`|12.4| | | | | | | | | |
+|`CU_DEV_RESOURCE_TYPE_MAX`|12.4| | | | | | | | | |
+|`CU_DEV_RESOURCE_TYPE_SM`|12.4| | | | | | | | | |
 |`CU_EGL_COLOR_FORMAT_A`|9.1| | | | | | | | | |
 |`CU_EGL_COLOR_FORMAT_ABGR`|9.1| | | | | | | | | |
 |`CU_EGL_COLOR_FORMAT_ARGB`|9.0| | | | | | | | | |
@@ -1086,8 +1089,13 @@
 |`CUd3d9map_flags_enum`| | | | | | | | | | |
 |`CUd3d9register_flags`| | | | | | | | | | |
 |`CUd3d9register_flags_enum`| | | | | | | | | | |
+|`CUdevResource`|12.4| | | | | | | | | |
 |`CUdevResourceDesc`|12.4| | | | | | | | | |
 |`CUdevResourceDesc_st`|12.4| | | | | | | | | |
+|`CUdevResourceType`|12.4| | | | | | | | | |
+|`CUdevResource_st`|12.4| | | | | | | | | |
+|`CUdevSmResource`|12.4| | | | | | | | | |
+|`CUdevSmResource_st`|12.4| | | | | | | | | |
 |`CUdevice`| | | | |`hipDevice_t`|1.6.0| | | | |
 |`CUdeviceNumaConfig`|12.2| | | | | | | | | |
 |`CUdeviceNumaConfig_enum`|12.2| | | | | | | | | |
@@ -2043,7 +2051,19 @@
 
 ## **35. Green Contexts**
 
-Unsupported
+|**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|
+|:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
+|`cuCtxFromGreenCtx`|12.4| | | | | | | | | |
+|`cuCtxGetDevResource`|12.4| | | | | | | | | |
+|`cuDevResourceGenerateDesc`|12.4| | | | | | | | | |
+|`cuDevSmResourceSplitByCount`|12.4| | | | | | | | | |
+|`cuDeviceGetDevResource`|12.4| | | | | | | | | |
+|`cuGreenCtxCreate`|12.4| | | | | | | | | |
+|`cuGreenCtxDestroy`|12.4| | | | | | | | | |
+|`cuGreenCtxGetDevResource`|12.4| | | | | | | | | |
+|`cuGreenCtxRecordEvent`|12.4| | | | | | | | | |
+|`cuGreenCtxWaitEvent`|12.4| | | | | | | | | |
+|`cuStreamGetGreenCtx`|12.4| | | | | | | | | |
 
 ## **36. Profiler Control [DEPRECATED]**
 

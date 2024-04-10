@@ -453,6 +453,16 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   //
   {"CUdevResourceDesc",                                                {"hipDevResourceDesc",                                       "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
+  //
+  {"CUdevSmResource_st",                                               {"hipDevSmResource",                                         "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CUdevSmResource",                                                  {"hipDevSmResource",                                         "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+
+  //
+  {"CUdevResource_st",                                                 {"hipDevResource",                                           "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CUdevResource",                                                    {"hipDevResource",                                           "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+
   // 2. Unions
 
   {"CUstreamBatchMemOpParams",                                         {"hipStreamBatchMemOpParams",                                "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
@@ -2653,6 +2663,16 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   //
   {"CU_GREEN_CTX_DEFAULT_STREAM",                                     {"HIP_GREEN_CTX_DEFAULT_STREAM",                              "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
+  //
+  {"CUdevResourceType",                                               {"hipDevResourceType",                                        "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // CUdevResourceType enum values
+  //
+  {"CU_DEV_RESOURCE_TYPE_INVALID",                                    {"HIP_DEV_RESOURCE_TYPE_INVALID",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CU_DEV_RESOURCE_TYPE_SM",                                         {"HIP_DEV_RESOURCE_TYPE_SM",                                  "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CU_DEV_RESOURCE_TYPE_MAX",                                        {"HIP_DEV_RESOURCE_TYPE_MAX",                                 "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+
   // 4. Typedefs
 
   // no analogue
@@ -3700,6 +3720,14 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_TYPE_NAME_VER_MAP {
   {"CUdevResourceDesc",                                                {CUDA_124, CUDA_0,   CUDA_0  }},
   {"CUgreenCtxCreate_flags",                                           {CUDA_124, CUDA_0,   CUDA_0  }},
   {"CU_GREEN_CTX_DEFAULT_STREAM",                                      {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"CUdevResourceType",                                                {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"CU_DEV_RESOURCE_TYPE_INVALID",                                     {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"CU_DEV_RESOURCE_TYPE_SM",                                          {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"CU_DEV_RESOURCE_TYPE_MAX",                                         {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"CUdevSmResource_st",                                               {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"CUdevSmResource",                                                  {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"CUdevResource_st",                                                 {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"CUdevResource",                                                    {CUDA_124, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {

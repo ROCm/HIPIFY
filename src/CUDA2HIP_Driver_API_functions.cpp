@@ -959,7 +959,27 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
 
   // 35. Green Contexts
   //
-
+  {"cuGreenCtxCreate",                                     {"hipGreenCtxCreate",                                       "", CONV_COREDUMP, API_DRIVER, SEC::GREEN_CONTEXT, HIP_UNSUPPORTED}},
+  //
+  {"cuGreenCtxDestroy",                                    {"hipGreenCtxDestroy",                                      "", CONV_COREDUMP, API_DRIVER, SEC::GREEN_CONTEXT, HIP_UNSUPPORTED}},
+  //
+  {"cuCtxFromGreenCtx",                                    {"hipCtxFromGreenCtx",                                      "", CONV_COREDUMP, API_DRIVER, SEC::GREEN_CONTEXT, HIP_UNSUPPORTED}},
+  //
+  {"cuDeviceGetDevResource",                               {"hipDeviceGetDevResource",                                 "", CONV_COREDUMP, API_DRIVER, SEC::GREEN_CONTEXT, HIP_UNSUPPORTED}},
+  //
+  {"cuCtxGetDevResource",                                  {"hipCtxGetDevResource",                                    "", CONV_COREDUMP, API_DRIVER, SEC::GREEN_CONTEXT, HIP_UNSUPPORTED}},
+  //
+  {"cuGreenCtxGetDevResource",                             {"hipGreenCtxGetDevResource",                               "", CONV_COREDUMP, API_DRIVER, SEC::GREEN_CONTEXT, HIP_UNSUPPORTED}},
+  //
+  {"cuDevSmResourceSplitByCount",                          {"hipDevSmResourceSplitByCount",                            "", CONV_COREDUMP, API_DRIVER, SEC::GREEN_CONTEXT, HIP_UNSUPPORTED}},
+  //
+  {"cuDevResourceGenerateDesc",                            {"hipDevResourceGenerateDesc",                              "", CONV_COREDUMP, API_DRIVER, SEC::GREEN_CONTEXT, HIP_UNSUPPORTED}},
+  //
+  {"cuGreenCtxRecordEvent",                                {"hipGreenCtxRecordEvent",                                  "", CONV_COREDUMP, API_DRIVER, SEC::GREEN_CONTEXT, HIP_UNSUPPORTED}},
+  //
+  {"cuGreenCtxWaitEvent",                                  {"hipGreenCtxWaitEvent",                                    "", CONV_COREDUMP, API_DRIVER, SEC::GREEN_CONTEXT, HIP_UNSUPPORTED}},
+  //
+  {"cuStreamGetGreenCtx",                                  {"hipStreamGetGreenCtx",                                    "", CONV_COREDUMP, API_DRIVER, SEC::GREEN_CONTEXT, HIP_UNSUPPORTED}},
 
   // 36. Profiler Control [DEPRECATED]
   // cudaProfilerInitialize
@@ -1457,6 +1477,17 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_FUNCTION_VER_MAP {
   {"cuFuncGetParamInfo",                                   {CUDA_124, CUDA_0,   CUDA_0  }},
   {"cuFuncIsLoaded",                                       {CUDA_124, CUDA_0,   CUDA_0  }},
   {"cuFuncLoad",                                           {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"cuGreenCtxCreate",                                     {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"cuGreenCtxDestroy",                                    {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"cuCtxFromGreenCtx",                                    {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"cuDeviceGetDevResource",                               {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"cuCtxGetDevResource",                                  {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"cuGreenCtxGetDevResource",                             {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"cuDevSmResourceSplitByCount",                          {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"cuDevResourceGenerateDesc",                            {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"cuGreenCtxRecordEvent",                                {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"cuGreenCtxWaitEvent",                                  {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"cuStreamGetGreenCtx",                                  {CUDA_124, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_FUNCTION_VER_MAP {
