@@ -88,15 +88,15 @@ const std::map<llvm::StringRef, hipCounter> CUDA_FFT_FUNCTION_MAP {
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_FFT_FUNCTION_VER_MAP {
-  {"cufftMakePlanMany64",                                 {CUDA_75,  CUDA_0, CUDA_0}},
-  {"cufftGetSizeMany64",                                  {CUDA_75,  CUDA_0, CUDA_0}},
-  {"cufftGetProperty",                                    {CUDA_80,  CUDA_0, CUDA_0}},
-  {"cufftXtMakePlanMany",                                 {CUDA_80,  CUDA_0, CUDA_0}},
-  {"cufftXtGetSizeMany",                                  {CUDA_80,  CUDA_0, CUDA_0}},
-  {"cufftXtExec",                                         {CUDA_80,  CUDA_0, CUDA_0}},
-  {"cufftXtExecDescriptor",                               {CUDA_80,  CUDA_0, CUDA_0}},
-  {"cufftXtSetWorkAreaPolicy",                            {CUDA_92,  CUDA_0, CUDA_0}},
-  {"cufftXtSetDistribution",                              {CUDA_118, CUDA_0, CUDA_0}},
+  {"cufftMakePlanMany64",                                 {CUDA_75,  CUDA_0,   CUDA_0  }},
+  {"cufftGetSizeMany64",                                  {CUDA_75,  CUDA_0,   CUDA_0  }},
+  {"cufftGetProperty",                                    {CUDA_80,  CUDA_0,   CUDA_0  }},
+  {"cufftXtMakePlanMany",                                 {CUDA_80,  CUDA_0,   CUDA_0  }},
+  {"cufftXtGetSizeMany",                                  {CUDA_80,  CUDA_0,   CUDA_0  }},
+  {"cufftXtExec",                                         {CUDA_80,  CUDA_0,   CUDA_0  }},
+  {"cufftXtExecDescriptor",                               {CUDA_80,  CUDA_0,   CUDA_0  }},
+  {"cufftXtSetWorkAreaPolicy",                            {CUDA_92,  CUDA_0,   CUDA_0  }},
+  {"cufftXtSetDistribution",                              {CUDA_118, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_FFT_FUNCTION_VER_MAP {

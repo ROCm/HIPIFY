@@ -24,22 +24,22 @@ THE SOFTWARE.
 
 // Maps the names of CUDA RTC API types to the corresponding HIP types
 const std::map<llvm::StringRef, hipCounter> CUDA_RTC_TYPE_NAME_MAP {
-  {"nvrtcResult",                                       {"hiprtcResult",                                        "", CONV_TYPE, API_RTC, 1}},
-  {"NVRTC_SUCCESS",                                     {"HIPRTC_SUCCESS",                                      "", CONV_NUMERIC_LITERAL, API_RTC, 1}}, // 0
-  {"NVRTC_ERROR_OUT_OF_MEMORY",                         {"HIPRTC_ERROR_OUT_OF_MEMORY",                          "", CONV_NUMERIC_LITERAL, API_RTC, 1}}, // 1
-  {"NVRTC_ERROR_PROGRAM_CREATION_FAILURE",              {"HIPRTC_ERROR_PROGRAM_CREATION_FAILURE",               "", CONV_NUMERIC_LITERAL, API_RTC, 1}}, // 2
-  {"NVRTC_ERROR_INVALID_INPUT",                         {"HIPRTC_ERROR_INVALID_INPUT",                          "", CONV_NUMERIC_LITERAL, API_RTC, 1}}, // 3
-  {"NVRTC_ERROR_INVALID_PROGRAM",                       {"HIPRTC_ERROR_INVALID_PROGRAM",                        "", CONV_NUMERIC_LITERAL, API_RTC, 1}}, // 4
-  {"NVRTC_ERROR_INVALID_OPTION",                        {"HIPRTC_ERROR_INVALID_OPTION",                         "", CONV_NUMERIC_LITERAL, API_RTC, 1}}, // 5
-  {"NVRTC_ERROR_COMPILATION",                           {"HIPRTC_ERROR_COMPILATION",                            "", CONV_NUMERIC_LITERAL, API_RTC, 1}}, // 6
-  {"NVRTC_ERROR_BUILTIN_OPERATION_FAILURE",             {"HIPRTC_ERROR_BUILTIN_OPERATION_FAILURE",              "", CONV_NUMERIC_LITERAL, API_RTC, 1}}, // 7
-  {"NVRTC_ERROR_NO_NAME_EXPRESSIONS_AFTER_COMPILATION", {"HIPRTC_ERROR_NO_NAME_EXPRESSIONS_AFTER_COMPILATION",  "", CONV_NUMERIC_LITERAL, API_RTC, 1}}, // 8
-  {"NVRTC_ERROR_NO_LOWERED_NAMES_BEFORE_COMPILATION",   {"HIPRTC_ERROR_NO_LOWERED_NAMES_BEFORE_COMPILATION",    "", CONV_NUMERIC_LITERAL, API_RTC, 1}}, // 9
-  {"NVRTC_ERROR_NAME_EXPRESSION_NOT_VALID",             {"HIPRTC_ERROR_NAME_EXPRESSION_NOT_VALID",              "", CONV_NUMERIC_LITERAL, API_RTC, 1}}, // 10
-  {"NVRTC_ERROR_INTERNAL_ERROR",                        {"HIPRTC_ERROR_INTERNAL_ERROR",                         "", CONV_NUMERIC_LITERAL, API_RTC, 1}}, // 11
-  {"NVRTC_ERROR_TIME_FILE_WRITE_FAILED",                {"HIPRTC_ERROR_TIME_FILE_WRITE_FAILED",                 "", CONV_NUMERIC_LITERAL, API_RTC, 1, HIP_UNSUPPORTED}}, // 12
+  {"nvrtcResult",                                                {"hiprtcResult",                                        "", CONV_TYPE, API_RTC, 1}},
+  {"NVRTC_SUCCESS",                                              {"HIPRTC_SUCCESS",                                      "", CONV_NUMERIC_LITERAL, API_RTC, 1}}, // 0
+  {"NVRTC_ERROR_OUT_OF_MEMORY",                                  {"HIPRTC_ERROR_OUT_OF_MEMORY",                          "", CONV_NUMERIC_LITERAL, API_RTC, 1}}, // 1
+  {"NVRTC_ERROR_PROGRAM_CREATION_FAILURE",                       {"HIPRTC_ERROR_PROGRAM_CREATION_FAILURE",               "", CONV_NUMERIC_LITERAL, API_RTC, 1}}, // 2
+  {"NVRTC_ERROR_INVALID_INPUT",                                  {"HIPRTC_ERROR_INVALID_INPUT",                          "", CONV_NUMERIC_LITERAL, API_RTC, 1}}, // 3
+  {"NVRTC_ERROR_INVALID_PROGRAM",                                {"HIPRTC_ERROR_INVALID_PROGRAM",                        "", CONV_NUMERIC_LITERAL, API_RTC, 1}}, // 4
+  {"NVRTC_ERROR_INVALID_OPTION",                                 {"HIPRTC_ERROR_INVALID_OPTION",                         "", CONV_NUMERIC_LITERAL, API_RTC, 1}}, // 5
+  {"NVRTC_ERROR_COMPILATION",                                    {"HIPRTC_ERROR_COMPILATION",                            "", CONV_NUMERIC_LITERAL, API_RTC, 1}}, // 6
+  {"NVRTC_ERROR_BUILTIN_OPERATION_FAILURE",                      {"HIPRTC_ERROR_BUILTIN_OPERATION_FAILURE",              "", CONV_NUMERIC_LITERAL, API_RTC, 1}}, // 7
+  {"NVRTC_ERROR_NO_NAME_EXPRESSIONS_AFTER_COMPILATION",          {"HIPRTC_ERROR_NO_NAME_EXPRESSIONS_AFTER_COMPILATION",  "", CONV_NUMERIC_LITERAL, API_RTC, 1}}, // 8
+  {"NVRTC_ERROR_NO_LOWERED_NAMES_BEFORE_COMPILATION",            {"HIPRTC_ERROR_NO_LOWERED_NAMES_BEFORE_COMPILATION",    "", CONV_NUMERIC_LITERAL, API_RTC, 1}}, // 9
+  {"NVRTC_ERROR_NAME_EXPRESSION_NOT_VALID",                      {"HIPRTC_ERROR_NAME_EXPRESSION_NOT_VALID",              "", CONV_NUMERIC_LITERAL, API_RTC, 1}}, // 10
+  {"NVRTC_ERROR_INTERNAL_ERROR",                                 {"HIPRTC_ERROR_INTERNAL_ERROR",                         "", CONV_NUMERIC_LITERAL, API_RTC, 1}}, // 11
+  {"NVRTC_ERROR_TIME_FILE_WRITE_FAILED",                         {"HIPRTC_ERROR_TIME_FILE_WRITE_FAILED",                 "", CONV_NUMERIC_LITERAL, API_RTC, 1, HIP_UNSUPPORTED}}, // 12
 
-  {"nvrtcProgram",                                      {"hiprtcProgram",                                       "", CONV_TYPE, API_RTC, 1}},
+  {"nvrtcProgram",                                               {"hiprtcProgram",                                       "", CONV_TYPE, API_RTC, 1}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_RTC_TYPE_NAME_VER_MAP {
