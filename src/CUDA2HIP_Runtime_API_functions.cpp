@@ -806,21 +806,21 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuGraphUpload
   {"cudaGraphUpload",                                         {"hipGraphUpload",                                         "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH}},
   // cuGraphAddExternalSemaphoresSignalNode
-  {"cudaGraphAddExternalSemaphoresSignalNode",                {"hipGraphAddExternalSemaphoresSignalNode",                "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_EXPERIMENTAL}},
+  {"cudaGraphAddExternalSemaphoresSignalNode",                {"hipGraphAddExternalSemaphoresSignalNode",                "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH}},
   // cuGraphExternalSemaphoresSignalNodeGetParams
-  {"cudaGraphExternalSemaphoresSignalNodeGetParams",          {"hipGraphExternalSemaphoresSignalNodeGetParams",          "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_EXPERIMENTAL}},
+  {"cudaGraphExternalSemaphoresSignalNodeGetParams",          {"hipGraphExternalSemaphoresSignalNodeGetParams",          "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH}},
   // cuGraphExternalSemaphoresSignalNodeSetParams
-  {"cudaGraphExternalSemaphoresSignalNodeSetParams",          {"hipGraphExternalSemaphoresSignalNodeSetParams",          "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_EXPERIMENTAL}},
+  {"cudaGraphExternalSemaphoresSignalNodeSetParams",          {"hipGraphExternalSemaphoresSignalNodeSetParams",          "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH}},
   // cuGraphAddExternalSemaphoresWaitNode
-  {"cudaGraphAddExternalSemaphoresWaitNode",                  {"hipGraphAddExternalSemaphoresWaitNode",                  "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_EXPERIMENTAL}},
+  {"cudaGraphAddExternalSemaphoresWaitNode",                  {"hipGraphAddExternalSemaphoresWaitNode",                  "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH}},
   // cuGraphExternalSemaphoresWaitNodeGetParams
-  {"cudaGraphExternalSemaphoresWaitNodeGetParams",            {"hipGraphExternalSemaphoresWaitNodeGetParams",            "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_EXPERIMENTAL}},
+  {"cudaGraphExternalSemaphoresWaitNodeGetParams",            {"hipGraphExternalSemaphoresWaitNodeGetParams",            "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH}},
   // cuGraphExternalSemaphoresWaitNodeSetParams
-  {"cudaGraphExternalSemaphoresWaitNodeSetParams",            {"hipGraphExternalSemaphoresWaitNodeSetParams",            "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_EXPERIMENTAL}},
+  {"cudaGraphExternalSemaphoresWaitNodeSetParams",            {"hipGraphExternalSemaphoresWaitNodeSetParams",            "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH}},
   // cuGraphExecExternalSemaphoresSignalNodeSetParams
-  {"cudaGraphExecExternalSemaphoresSignalNodeSetParams",      {"hipGraphExecExternalSemaphoresSignalNodeSetParams",      "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_EXPERIMENTAL}},
+  {"cudaGraphExecExternalSemaphoresSignalNodeSetParams",      {"hipGraphExecExternalSemaphoresSignalNodeSetParams",      "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH}},
   // cuGraphExecExternalSemaphoresWaitNodeSetParams
-  {"cudaGraphExecExternalSemaphoresWaitNodeSetParams",        {"hipGraphExecExternalSemaphoresWaitNodeSetParams",        "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_EXPERIMENTAL}},
+  {"cudaGraphExecExternalSemaphoresWaitNodeSetParams",        {"hipGraphExecExternalSemaphoresWaitNodeSetParams",        "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH}},
   // cuUserObjectCreate
   {"cudaUserObjectCreate",                                    {"hipUserObjectCreate",                                    "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH}},
   // cuUserObjectRetain
@@ -851,23 +851,23 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuGraphNodeSetEnabled
   {"cudaGraphNodeSetEnabled",                                 {"hipGraphNodeSetEnabled",                                 "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH}},
   // cuGraphInstantiateWithParams
-  {"cudaGraphInstantiateWithParams",                          {"hipGraphInstantiateWithParams",                          "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_EXPERIMENTAL}},
+  {"cudaGraphInstantiateWithParams",                          {"hipGraphInstantiateWithParams",                          "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH}},
   // cuGraphExecGetFlags
-  {"cudaGraphExecGetFlags",                                   {"hipGraphExecGetFlags",                                   "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_EXPERIMENTAL}},
+  {"cudaGraphExecGetFlags",                                   {"hipGraphExecGetFlags",                                   "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH}},
   // cuGraphAddNode
-  {"cudaGraphAddNode",                                        {"hipGraphAddNode",                                        "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_EXPERIMENTAL}},
+  {"cudaGraphAddNode",                                        {"hipGraphAddNode",                                        "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH}},
   // cuGraphAddNode_v2
   {"cudaGraphAddNode_v2",                                     {"hipGraphAddNode_v2",                                     "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_UNSUPPORTED}},
   // cuGraphNodeSetParams
-  {"cudaGraphNodeSetParams",                                  {"hipGraphNodeSetParams",                                  "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_EXPERIMENTAL}},
+  {"cudaGraphNodeSetParams",                                  {"hipGraphNodeSetParams",                                  "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH}},
   // cuGraphExecNodeSetParams
-  {"cudaGraphExecNodeSetParams",                              {"hipGraphExecNodeSetParams",                              "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_EXPERIMENTAL}},
+  {"cudaGraphExecNodeSetParams",                              {"hipGraphExecNodeSetParams",                              "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH}},
   // cuGraphConditionalHandleCreate
   {"cudaGraphConditionalHandleCreate",                        {"hipGraphConditionalHandleCreate",                        "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_UNSUPPORTED}},
 
   // 29. Driver Entry Point Access
   // cuGetProcAddress
-  {"cudaGetDriverEntryPoint",                                 {"hipGetProcAddress",                                      "", CONV_DRIVER_ENTRY_POINT, API_RUNTIME, SEC::DRIVER_ENTRY_POINT, HIP_EXPERIMENTAL}},
+  {"cudaGetDriverEntryPoint",                                 {"hipGetProcAddress",                                      "", CONV_DRIVER_ENTRY_POINT, API_RUNTIME, SEC::DRIVER_ENTRY_POINT}},
 
   // 30. C++ API Routines
   {"cudaGetKernel",                                           {"hipGetKernel",                                           "", CONV_CPP, API_RUNTIME, SEC::CPP, HIP_UNSUPPORTED}},
@@ -1400,19 +1400,19 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP {
   {"hipOccupancyMaxPotentialBlockSizeVariableSMem",           {HIP_5050, HIP_0,    HIP_0   }},
   {"hipOccupancyMaxPotentialBlockSizeVariableSMemWithFlags",  {HIP_5050, HIP_0,    HIP_0   }},
   {"hipArrayGetInfo",                                         {HIP_5060, HIP_0,    HIP_0   }},
-  {"hipGraphAddExternalSemaphoresWaitNode",                   {HIP_6010, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipGraphAddExternalSemaphoresSignalNode",                 {HIP_6010, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipGraphExternalSemaphoresSignalNodeSetParams",           {HIP_6010, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipGraphExternalSemaphoresSignalNodeGetParams",           {HIP_6010, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipGraphExternalSemaphoresWaitNodeGetParams",             {HIP_6010, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipGraphExternalSemaphoresWaitNodeSetParams",             {HIP_6010, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipGraphExecExternalSemaphoresSignalNodeSetParams",       {HIP_6010, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipGraphExecExternalSemaphoresWaitNodeSetParams",         {HIP_6010, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipGraphInstantiateWithParams",                           {HIP_6010, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipGraphAddNode",                                         {HIP_6010, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipGraphExecGetFlags",                                    {HIP_6010, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipGraphNodeSetParams",                                   {HIP_6010, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipGraphExecNodeSetParams",                               {HIP_6010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipGraphAddExternalSemaphoresWaitNode",                   {HIP_6010, HIP_0,    HIP_0   }},
+  {"hipGraphAddExternalSemaphoresSignalNode",                 {HIP_6010, HIP_0,    HIP_0   }},
+  {"hipGraphExternalSemaphoresSignalNodeSetParams",           {HIP_6010, HIP_0,    HIP_0   }},
+  {"hipGraphExternalSemaphoresSignalNodeGetParams",           {HIP_6010, HIP_0,    HIP_0   }},
+  {"hipGraphExternalSemaphoresWaitNodeGetParams",             {HIP_6010, HIP_0,    HIP_0   }},
+  {"hipGraphExternalSemaphoresWaitNodeSetParams",             {HIP_6010, HIP_0,    HIP_0   }},
+  {"hipGraphExecExternalSemaphoresSignalNodeSetParams",       {HIP_6010, HIP_0,    HIP_0   }},
+  {"hipGraphExecExternalSemaphoresWaitNodeSetParams",         {HIP_6010, HIP_0,    HIP_0   }},
+  {"hipGraphInstantiateWithParams",                           {HIP_6010, HIP_0,    HIP_0   }},
+  {"hipGraphAddNode",                                         {HIP_6010, HIP_0,    HIP_0   }},
+  {"hipGraphExecGetFlags",                                    {HIP_6010, HIP_0,    HIP_0   }},
+  {"hipGraphNodeSetParams",                                   {HIP_6010, HIP_0,    HIP_0   }},
+  {"hipGraphExecNodeSetParams",                               {HIP_6010, HIP_0,    HIP_0   }},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_RUNTIME_API_SECTION_MAP {
