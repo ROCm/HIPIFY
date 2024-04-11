@@ -191,7 +191,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // the same - CUstream_st
   {"CUstream_st",                                                      {"ihipStream_t",                                             "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES}},
   // CUstream
-  {"cudaStream_t",                                                     {"hipStream_t",                                              "miopenAcceleratorQueue_t", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, ROC_MIOPEN_ONLY}},
+  {"cudaStream_t",                                                     {"hipStream_t",                      "miopenAcceleratorQueue_t", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, ROC_MIOPEN_ONLY}},
 
   // CUfunction
   {"cudaFunction_t",                                                   {"hipFunction_t",                                            "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES}},

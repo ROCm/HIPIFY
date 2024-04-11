@@ -119,15 +119,15 @@ const std::map<llvm::StringRef, hipCounter> CUDA_FFT_TYPE_NAME_MAP {
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_FFT_TYPE_NAME_VER_MAP {
-  {"CUFFT_NOT_SUPPORTED",                         {CUDA_80,  CUDA_0, CUDA_0}},
-  {"cufftXtWorkAreaPolicy_t",                     {CUDA_92,  CUDA_0, CUDA_0}},
-  {"cufftXtWorkAreaPolicy",                       {CUDA_92,  CUDA_0, CUDA_0}},
-  {"CUFFT_WORKAREA_MINIMAL",                      {CUDA_92,  CUDA_0, CUDA_0}},
-  {"CUFFT_WORKAREA_USER",                         {CUDA_92,  CUDA_0, CUDA_0}},
-  {"CUFFT_XT_FORMAT_DISTRIBUTED_INPUT",           {CUDA_118, CUDA_0, CUDA_0}},
-  {"CUFFT_XT_FORMAT_DISTRIBUTED_OUTPUT",          {CUDA_118, CUDA_0, CUDA_0}},
-  {"cufftBox3d_t",                                {CUDA_118, CUDA_0, CUDA_0}},
-  {"cufftBox3d",                                  {CUDA_118, CUDA_0, CUDA_0}},
+  {"CUFFT_NOT_SUPPORTED",                         {CUDA_80,  CUDA_0,   CUDA_0  }},
+  {"cufftXtWorkAreaPolicy_t",                     {CUDA_92,  CUDA_0,   CUDA_0  }},
+  {"cufftXtWorkAreaPolicy",                       {CUDA_92,  CUDA_0,   CUDA_0  }},
+  {"CUFFT_WORKAREA_MINIMAL",                      {CUDA_92,  CUDA_0,   CUDA_0  }},
+  {"CUFFT_WORKAREA_USER",                         {CUDA_92,  CUDA_0,   CUDA_0  }},
+  {"CUFFT_XT_FORMAT_DISTRIBUTED_INPUT",           {CUDA_118, CUDA_0,   CUDA_0  }},
+  {"CUFFT_XT_FORMAT_DISTRIBUTED_OUTPUT",          {CUDA_118, CUDA_0,   CUDA_0  }},
+  {"cufftBox3d_t",                                {CUDA_118, CUDA_0,   CUDA_0  }},
+  {"cufftBox3d",                                  {CUDA_118, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_FFT_TYPE_NAME_VER_MAP {
