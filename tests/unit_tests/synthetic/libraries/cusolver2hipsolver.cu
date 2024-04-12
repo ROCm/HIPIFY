@@ -1622,6 +1622,21 @@ int main() {
 #endif
 
 #if CUDA_VERSION >= 11000
+  // CHECK: hipsolverAlgMode_t solverAlgMode;
+  // CHECK-NEXT: hipsolverAlgMode_t SOLVER_ALG_0 = HIPSOLVER_ALG_0;
+  // CHECK-NEXT: hipsolverAlgMode_t SOLVER_ALG_1 = HIPSOLVER_ALG_1;
+  cusolverAlgMode_t solverAlgMode;
+  cusolverAlgMode_t SOLVER_ALG_0 = CUSOLVER_ALG_0;
+  cusolverAlgMode_t SOLVER_ALG_1 = CUSOLVER_ALG_1;
+
+  // CHECK: hipsolverDnParams_t solverDnParams;
+  cusolverDnParams_t solverDnParams;
+
+  // CHECK: hipsolverDnFunction_t solverDnFunction;
+  // CHECK-NEXT: hipsolverDnFunction_t SOLVERDN_GETRF = HIPSOLVERDN_GETRF;
+  cusolverDnFunction_t solverDnFunction;
+  cusolverDnFunction_t SOLVERDN_GETRF = CUSOLVERDN_GETRF;
+
   // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnZZgels(cusolverDnHandle_t handle, cusolver_int_t m, cusolver_int_t n, cusolver_int_t nrhs, cuDoubleComplex * dA, cusolver_int_t ldda, cuDoubleComplex * dB, cusolver_int_t lddb, cuDoubleComplex * dX, cusolver_int_t lddx, void * dWorkspace, size_t lwork_bytes, cusolver_int_t * iter, cusolver_int_t * d_info);
   // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnZZgels(hipsolverHandle_t handle, int m, int n, int nrhs, hipDoubleComplex* A, int lda, hipDoubleComplex* B, int ldb, hipDoubleComplex* X, int ldx, void* work, size_t lwork, int* niters, int* devInfo);
   // CHECK: status = hipsolverDnZZgels(handle, lm, ln, lnrhs, &dComplexA, ldda, &dComplexB, lddb, &dComplexX, lddx, &Workspace, lwork_bytes, &iter, &d_info);
@@ -1661,6 +1676,21 @@ int main() {
   // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnSSgels_bufferSize(hipsolverHandle_t handle, int m, int n, int nrhs, float* A, int lda, float* B, int ldb, float* X, int ldx, void* work, size_t* lwork);
   // CHECK: status = hipsolverDnSSgels_bufferSize(handle, lm, ln, lnrhs, &fA, ldda, &fB, lddb, &fX, lddx, &Workspace, &lwork_bytes);
   status = cusolverDnSSgels_bufferSize(handle, lm, ln, lnrhs, &fA, ldda, &fB, lddb, &fX, lddx, &Workspace, &lwork_bytes);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnCreateParams(cusolverDnParams_t *params);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnCreateParams(hipsolverDnParams_t* params);
+  // CHECK: status = hipsolverDnCreateParams(&solverDnParams);
+  status = cusolverDnCreateParams(&solverDnParams);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnDestroyParams(cusolverDnParams_t params);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnDestroyParams(hipsolverDnParams_t params);
+  // CHECK: status = hipsolverDnDestroyParams(solverDnParams);
+  status = cusolverDnDestroyParams(solverDnParams);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnSetAdvOptions(cusolverDnParams_t params, cusolverDnFunction_t function, cusolverAlgMode_t algo);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnSetAdvOptions(hipsolverDnParams_t params, hipsolverDnFunction_t func, hipsolverAlgMode_t alg);
+  // CHECK: status = hipsolverDnSetAdvOptions(solverDnParams, solverDnFunction, solverAlgMode);
+  status = cusolverDnSetAdvOptions(solverDnParams, solverDnFunction, solverAlgMode);
 #endif
 
   return 0;
