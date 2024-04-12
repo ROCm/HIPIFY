@@ -1386,7 +1386,15 @@ my %removed_funcs = (
 );
 
 my %experimental_funcs = (
-
+    "cusolverDnSetAdvOptions" => "6.2.0",
+    "cusolverDnParams_t" => "6.2.0",
+    "cusolverDnFunction_t" => "6.2.0",
+    "cusolverDnDestroyParams" => "6.2.0",
+    "cusolverDnCreateParams" => "6.2.0",
+    "cusolverAlgMode_t" => "6.2.0",
+    "CUSOLVER_ALG_1" => "6.2.0",
+    "CUSOLVER_ALG_0" => "6.2.0",
+    "CUSOLVERDN_GETRF" => "6.2.0"
 );
 
 $print_stats = 1 if $examine;
@@ -1524,6 +1532,15 @@ sub subst {
 }
 
 sub experimentalSubstitutions {
+    subst("cusolverDnCreateParams", "hipsolverDnCreateParams", "library");
+    subst("cusolverDnDestroyParams", "hipsolverDnDestroyParams", "library");
+    subst("cusolverDnSetAdvOptions", "hipsolverDnSetAdvOptions", "library");
+    subst("cusolverAlgMode_t", "hipsolverAlgMode_t", "type");
+    subst("cusolverDnFunction_t", "hipsolverDnFunction_t", "type");
+    subst("cusolverDnParams_t", "hipsolverDnParams_t", "type");
+    subst("CUSOLVERDN_GETRF", "HIPSOLVERDN_GETRF", "numeric_literal");
+    subst("CUSOLVER_ALG_0", "HIPSOLVER_ALG_0", "numeric_literal");
+    subst("CUSOLVER_ALG_1", "HIPSOLVER_ALG_1", "numeric_literal");
 }
 
 sub rocSubstitutions {
@@ -8331,7 +8348,6 @@ sub warnUnsupportedFunctions {
         "cusolverDnSlauum",
         "cusolverDnSlaswp",
         "cusolverDnSetDeterministicMode",
-        "cusolverDnSetAdvOptions",
         "cusolverDnSXgesv_bufferSize",
         "cusolverDnSXgesv",
         "cusolverDnSXgels_bufferSize",
@@ -8347,7 +8363,6 @@ sub warnUnsupportedFunctions {
         "cusolverDnPotrs",
         "cusolverDnPotrf_bufferSize",
         "cusolverDnPotrf",
-        "cusolverDnParams_t",
         "cusolverDnParams",
         "cusolverDnLoggerSetMask",
         "cusolverDnLoggerSetLevel",
@@ -8392,13 +8407,11 @@ sub warnUnsupportedFunctions {
         "cusolverDnGesvd",
         "cusolverDnGeqrf_bufferSize",
         "cusolverDnGeqrf",
-        "cusolverDnFunction_t",
         "cusolverDnDsytri_bufferSize",
         "cusolverDnDsytri",
         "cusolverDnDlauum_bufferSize",
         "cusolverDnDlauum",
         "cusolverDnDlaswp",
-        "cusolverDnDestroyParams",
         "cusolverDnDXgesv_bufferSize",
         "cusolverDnDXgesv",
         "cusolverDnDXgels_bufferSize",
@@ -8417,7 +8430,6 @@ sub warnUnsupportedFunctions {
         "cusolverDnDBgels",
         "cusolverDnCsytri_bufferSize",
         "cusolverDnCsytri",
-        "cusolverDnCreateParams",
         "cusolverDnContext",
         "cusolverDnClauum_bufferSize",
         "cusolverDnClauum",
@@ -8436,7 +8448,6 @@ sub warnUnsupportedFunctions {
         "cusolverDnCEgels",
         "cusolverDirectMode_t",
         "cusolverDeterministicMode_t",
-        "cusolverAlgMode_t",
         "curand_mtgp32_specific",
         "curand_mtgp32_single_specific",
         "curand_mtgp32_single",
@@ -10174,10 +10185,7 @@ sub warnUnsupportedFunctions {
         "CUSOLVER_C_16BF",
         "CUSOLVER_ALLOW_NON_DETERMINISTIC_RESULTS",
         "CUSOLVER_ALG_2",
-        "CUSOLVER_ALG_1",
-        "CUSOLVER_ALG_0",
         "CUSOLVERDN_POTRF",
-        "CUSOLVERDN_GETRF",
         "CURAND_REJECTION",
         "CURAND_POISSON",
         "CURAND_ORDERING_QUASI_DEFAULT",
