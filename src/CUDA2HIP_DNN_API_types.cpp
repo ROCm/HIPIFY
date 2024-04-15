@@ -92,7 +92,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"CUDNN_STATUS_EXECUTION_FAILED_CURAND",                           {"HIPDNN_STATUS_EXECUTION_FAILED_CURAND",                           "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
 
   {"cudnnRuntimeTag_t",                                              {"hipdnnRuntimeTag_t",                                              "",                                                                CONV_TYPE, API_DNN, 1, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnConvolutionMode_t",                                         {"hipdnnConvolutionMode_t",                                         "miopenConvolutionMode_t",                                         CONV_TYPE, API_DNN, 1, CUDA_DEPRECATED}},
+  {"cudnnConvolutionMode_t",                                         {"hipdnnConvolutionMode_t",                                         "miopenConvolutionMode_t",                                         CONV_TYPE, API_DNN, 1}},
   {"CUDNN_CONVOLUTION",                                              {"HIPDNN_CONVOLUTION",                                              "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, ROC_UNSUPPORTED | CUDA_DEPRECATED}},    // 0
   {"CUDNN_CROSS_CORRELATION",                                        {"HIPDNN_CROSS_CORRELATION",                                        "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, ROC_UNSUPPORTED | CUDA_DEPRECATED}},    // 1
   {"cudnnTensorFormat_t",                                            {"hipdnnTensorFormat_t",                                            "",                                                                CONV_TYPE, API_DNN, 1, ROC_UNSUPPORTED}},
@@ -209,7 +209,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"CUDNN_OP_TENSOR_MAX",                                            {"HIPDNN_OP_TENSOR_MAX",                                            "miopenTensorOpMax",                                               CONV_NUMERIC_LITERAL, API_DNN, 1}},    // 3
   {"CUDNN_OP_TENSOR_SQRT",                                           {"HIPDNN_OP_TENSOR_SQRT",                                           "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, ROC_UNSUPPORTED}},    // 4
   {"CUDNN_OP_TENSOR_NOT",                                            {"HIPDNN_OP_TENSOR_NOT",                                            "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 5
-  {"cudnnReduceTensorOp_t",                                          {"hipdnnReduceTensorOp_t",                                          "miopenReduceTensorOp_t",                                          CONV_TYPE, API_DNN, 1, CUDA_DEPRECATED}},
+  {"cudnnReduceTensorOp_t",                                          {"hipdnnReduceTensorOp_t",                                          "miopenReduceTensorOp_t",                                          CONV_TYPE, API_DNN, 1}},
   {"CUDNN_REDUCE_TENSOR_ADD",                                        {"HIPDNN_REDUCE_TENSOR_ADD",                                        "MIOPEN_REDUCE_TENSOR_ADD",                                        CONV_NUMERIC_LITERAL, API_DNN, 1, CUDA_DEPRECATED}},    // 0
   {"CUDNN_REDUCE_TENSOR_MUL",                                        {"HIPDNN_REDUCE_TENSOR_MUL",                                        "MIOPEN_REDUCE_TENSOR_MUL",                                        CONV_NUMERIC_LITERAL, API_DNN, 1, CUDA_DEPRECATED}},    // 1
   {"CUDNN_REDUCE_TENSOR_MIN",                                        {"HIPDNN_REDUCE_TENSOR_MIN",                                        "MIOPEN_REDUCE_TENSOR_MIN",                                        CONV_NUMERIC_LITERAL, API_DNN, 1, CUDA_DEPRECATED}},    // 2
@@ -408,6 +408,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"CUDNN_POINTWISE_ERF",                                            {"HIPDNN_POINTWISE_ERF",                                            "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 20
   {"CUDNN_POINTWISE_IDENTITY",                                       {"HIPDNN_POINTWISE_IDENTITY",                                       "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 21
   {"CUDNN_POINTWISE_RECIPROCAL",                                     {"HIPDNN_POINTWISE_RECIPROCAL",                                     "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 22
+  {"CUDNN_POINTWISE_ATAN2",                                          {"HIPDNN_POINTWISE_ATAN2",                                          "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 23
   {"CUDNN_POINTWISE_RELU_FWD",                                       {"HIPDNN_POINTWISE_RELU_FWD",                                       "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 100
   {"CUDNN_POINTWISE_TANH_FWD",                                       {"HIPDNN_POINTWISE_TANH_FWD",                                       "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 101
   {"CUDNN_POINTWISE_SIGMOID_FWD",                                    {"HIPDNN_POINTWISE_SIGMOID_FWD",                                    "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 102
@@ -726,6 +727,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"CUDNN_NUMERICAL_NOTE_WINOGRAD_TILE_4x4",                         {"HIPDNN_NUMERICAL_NOTE_WINOGRAD_TILE_4x4",                         "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_NUMERICAL_NOTE_WINOGRAD_TILE_6x6",                         {"HIPDNN_NUMERICAL_NOTE_WINOGRAD_TILE_6x6",                         "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_NUMERICAL_NOTE_WINOGRAD_TILE_13x13",                       {"HIPDNN_NUMERICAL_NOTE_WINOGRAD_TILE_13x13",                       "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_NUMERICAL_NOTE_STRICT_NAN_PROP",                           {"HIPDNN_NUMERICAL_NOTE_STRICT_NAN_PROP",                           "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_NUMERICAL_NOTE_TYPE_COUNT",                                {"HIPDNN_NUMERICAL_NOTE_TYPE_COUNT",                                "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
   {"cudnnBackendLayoutType_t",                                       {"hipdnnBackendLayoutType_t",                                       "",                                                                CONV_TYPE, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_LAYOUT_TYPE_PREFERRED_NCHW",                               {"HIPDNN_LAYOUT_TYPE_PREFERRED_NCHW",                               "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
@@ -1169,7 +1171,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_TYPE_NAME_VER_MAP {
   {"cudnnReorderType_t",                                             {CUDNN_760, CUDNN_900, CUDA_0   }},
   {"CUDNN_DEFAULT_REORDER",                                          {CUDNN_760, CUDNN_900, CUDA_0   }},
   {"CUDNN_NO_REORDER",                                               {CUDNN_760, CUDNN_900, CUDA_0   }},
-  {"cudnnConvolutionMode_t",                                         {CUDNN_10,  CUDNN_900, CUDA_0   }},
+  {"cudnnConvolutionMode_t",                                         {CUDNN_10,  CUDA_0,    CUDA_0   }},
   {"CUDNN_CONVOLUTION",                                              {CUDNN_10,  CUDNN_900, CUDA_0   }},
   {"CUDNN_CROSS_CORRELATION",                                        {CUDNN_10,  CUDNN_900, CUDA_0   }},
   {"cudnnConvolutionStruct",                                         {CUDNN_10,  CUDA_0,    CUDA_0   }},
@@ -1257,7 +1259,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_TYPE_NAME_VER_MAP {
   {"CUDNN_OP_TENSOR_MAX",                                            {CUDNN_50,  CUDA_0,    CUDA_0   }},
   {"CUDNN_OP_TENSOR_SQRT",                                           {CUDNN_60,  CUDA_0,    CUDA_0   }},
   {"CUDNN_OP_TENSOR_NOT",                                            {CUDNN_705, CUDA_0,    CUDA_0   }},
-  {"cudnnReduceTensorOp_t",                                          {CUDNN_60,  CUDNN_900, CUDA_0   }},
+  {"cudnnReduceTensorOp_t",                                          {CUDNN_60,  CUDA_0,    CUDA_0   }},
   {"CUDNN_REDUCE_TENSOR_ADD",                                        {CUDNN_60,  CUDNN_900, CUDA_0   }},
   {"CUDNN_REDUCE_TENSOR_MUL",                                        {CUDNN_60,  CUDNN_900, CUDA_0   }},
   {"CUDNN_REDUCE_TENSOR_MIN",                                        {CUDNN_60,  CUDNN_900, CUDA_0   }},
@@ -1757,6 +1759,8 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_TYPE_NAME_VER_MAP {
   {"CUDNN_STATUS_FULL_ERROR_CODE",                                   {CUDNN_900, CUDA_0,    CUDA_0   }},
   {"CUDNN_STATUS_CATEGORY",                                          {CUDNN_900, CUDA_0,    CUDA_0   }},
   {"CUDNN_STATUS_SPECIFIC_ERROR",                                    {CUDNN_900, CUDA_0,    CUDA_0   }},
+  {"CUDNN_POINTWISE_ATAN2",                                          {CUDNN_910, CUDA_0,    CUDA_0   }},
+  {"CUDNN_NUMERICAL_NOTE_STRICT_NAN_PROP",                           {CUDNN_910, CUDA_0,    CUDA_0   }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_DNN_TYPE_NAME_VER_MAP {
