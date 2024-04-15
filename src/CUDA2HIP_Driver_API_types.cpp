@@ -433,14 +433,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaGraphEdgeData
   {"CUgraphEdgeData",                                                  {"hipGraphEdgeData",                                         "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
-  //
+  // CUgraphDeviceUpdatableNode_st
   {"CUgraphDeviceUpdatableNode_st",                                    {"hipGraphDeviceUpdatableNode",                              "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-  //
+  // cudaGraphDeviceNode_t
   {"CUgraphDeviceNode",                                                {"hipGraphDeviceNode",                                       "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
-  //
+  // cudaAsyncNotificationInfo
   {"CUasyncNotificationInfo_st",                                       {"hipAsyncNotificationInfo",                                 "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-  //
+  // cudaAsyncNotificationInfo_t
   {"CUasyncNotificationInfo",                                          {"hipAsyncNotificationInfo",                                 "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   //
@@ -2039,8 +2039,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_MEM_HANDLE_TYPE_WIN32",                                         {"hipMemHandleTypeWin32",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}}, // 0x2
   // cudaMemHandleTypeWin32Kmt
   {"CU_MEM_HANDLE_TYPE_WIN32_KMT",                                     {"hipMemHandleTypeWin32Kmt",                                 "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}}, // 0x4
-  //
-  {"CU_MEM_HANDLE_TYPE_FABRIC",                                        {"hipMemHandleTypeFabric",                                 "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0x8
+  // cudaMemHandleTypeFabric
+  {"CU_MEM_HANDLE_TYPE_FABRIC",                                        {"hipMemHandleTypeFabric",                                   "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0x8
   // no analogue
   {"CU_MEM_HANDLE_TYPE_MAX",                                           {"hipMemHandleTypeMax",                                      "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0x7FFFFFFF
 
@@ -2454,8 +2454,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN",                              {"hipLaunchAttributeMemSyncDomain",                          "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   // cudaLaunchAttributeLaunchCompletionEvent
   {"CU_LAUNCH_ATTRIBUTE_LAUNCH_COMPLETION_EVENT",                      {"hipLaunchAttributeLaunchCompletionEvent",                  "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-  //
-  {"CU_LAUNCH_ATTRIBUTE_DEVICE_UPDATABLE_KERNEL_NODE",                 {"hipLaunchAttributeDeviceUpdatableKernelMode",              "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // cudaLaunchAttributeDeviceUpdatableKernelNode
+  {"CU_LAUNCH_ATTRIBUTE_DEVICE_UPDATABLE_KERNEL_NODE",                 {"hipLaunchAttributeDeviceUpdatableKernelNode",              "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   //
   {"CU_LAUNCH_ATTRIBUTE_MAX",                                          {"hipLaunchAttributeMax",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
@@ -2712,7 +2712,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaGraphConditionalHandle
   {"CUgraphConditionalHandle",                                         {"hipGraphConditionalHandle",                                "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
-  //
+  // cudaAsyncCallbackEntry
+  {"CUasyncCallbackEntry_st",                                          {"hipAsyncCallbackEntry",                                    "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // cudaAsyncCallbackHandle_t
   {"CUasyncCallback",                                                  {"hipAsyncCallback",                                         "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   // 5. Defines
@@ -3728,6 +3730,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_TYPE_NAME_VER_MAP {
   {"CUdevSmResource",                                                  {CUDA_124, CUDA_0,   CUDA_0  }},
   {"CUdevResource_st",                                                 {CUDA_124, CUDA_0,   CUDA_0  }},
   {"CUdevResource",                                                    {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"CUasyncCallbackEntry_st",                                          {CUDA_124, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {
