@@ -571,6 +571,10 @@
 |`cudaArrayTextureGather`| | | | |`hipArrayTextureGather`|1.7.0| | | | |
 |`cudaArray_const_t`| | | | |`hipArray_const_t`|1.6.0| | | | |
 |`cudaArray_t`| | | | |`hipArray_t`|1.7.0| | | | |
+|`cudaAsyncCallbackEntry`|12.4| | | | | | | | | |
+|`cudaAsyncCallbackHandle_t`|12.4| | | | | | | | | |
+|`cudaAsyncNotificationInfo`|12.4| | | | | | | | | |
+|`cudaAsyncNotificationInfo_t`|12.4| | | | | | | | | |
 |`cudaBoundaryModeClamp`| | | | |`hipBoundaryModeClamp`|1.9.0| | | | |
 |`cudaBoundaryModeTrap`| | | | |`hipBoundaryModeTrap`|1.9.0| | | | |
 |`cudaBoundaryModeZero`| | | | |`hipBoundaryModeZero`|1.9.0| | | | |
@@ -1136,6 +1140,7 @@
 |`cudaGraphDependencyTypeDefault`|12.3| | | | | | | | | |
 |`cudaGraphDependencyTypeProgrammatic`|12.3| | | | | | | | | |
 |`cudaGraphDependencyType_enum`|12.3| | | | | | | | | |
+|`cudaGraphDeviceNode_t`|12.4| | | | | | | | | |
 |`cudaGraphEdgeData`|12.3| | | | | | | | | |
 |`cudaGraphEdgeData_st`|12.3| | | | | | | | | |
 |`cudaGraphExecUpdateError`|10.2| | | |`hipGraphExecUpdateError`|4.3.0| | | | |
@@ -1164,9 +1169,15 @@
 |`cudaGraphInstantiateParams_st`|12.0| | | |`hipGraphInstantiateParams`|6.1.0| | | | |
 |`cudaGraphInstantiateResult`|12.0| | | |`hipGraphInstantiateResult`|6.1.0| | | | |
 |`cudaGraphInstantiateSuccess`|12.0| | | |`hipGraphInstantiateSuccess`|6.1.0| | | | |
+|`cudaGraphKernelNodeField`|12.4| | | | | | | | | |
+|`cudaGraphKernelNodeFieldEnabled`|12.4| | | | | | | | | |
+|`cudaGraphKernelNodeFieldGridDim`|12.4| | | | | | | | | |
+|`cudaGraphKernelNodeFieldInvalid`|12.4| | | | | | | | | |
+|`cudaGraphKernelNodeFieldParam`|12.4| | | | | | | | | |
 |`cudaGraphKernelNodePortDefault`|12.3| | | | | | | | | |
 |`cudaGraphKernelNodePortLaunchCompletion`|12.3| | | | | | | | | |
 |`cudaGraphKernelNodePortProgrammatic`|12.3| | | | | | | | | |
+|`cudaGraphKernelNodeUpdate`|12.4| | | | | | | | | |
 |`cudaGraphMemAttrReservedMemCurrent`|11.4| | | |`hipGraphMemAttrReservedMemCurrent`|5.3.0| | | | |
 |`cudaGraphMemAttrReservedMemHigh`|11.4| | | |`hipGraphMemAttrReservedMemHigh`|5.3.0| | | | |
 |`cudaGraphMemAttrUsedMemCurrent`|11.4| | | |`hipGraphMemAttrUsedMemCurrent`|5.3.0| | | | |
@@ -1235,6 +1246,7 @@
 |`cudaKernelNodeAttributeClusterDimension`|11.8| | | | | | | | | |
 |`cudaKernelNodeAttributeClusterSchedulingPolicyPreference`|11.8| | | | | | | | | |
 |`cudaKernelNodeAttributeCooperative`|11.0| | | |`hipKernelNodeAttributeCooperative`|5.2.0| | | | |
+|`cudaKernelNodeAttributeDeviceUpdatableKernelNode`|12.4| | | | | | | | | |
 |`cudaKernelNodeAttributeMemSyncDomain`|12.0| | | | | | | | | |
 |`cudaKernelNodeAttributeMemSyncDomainMap`|12.0| | | | | | | | | |
 |`cudaKernelNodeAttributePriority`|11.7| | | | | | | | | |
@@ -1247,6 +1259,7 @@
 |`cudaLaunchAttributeClusterDimension`|11.8| | | | | | | | | |
 |`cudaLaunchAttributeClusterSchedulingPolicyPreference`|11.8| | | | | | | | | |
 |`cudaLaunchAttributeCooperative`|11.8| | | | | | | | | |
+|`cudaLaunchAttributeDeviceUpdatableKernelNode`|12.4| | | | | | | | | |
 |`cudaLaunchAttributeID`|11.8| | | | | | | | | |
 |`cudaLaunchAttributeIgnore`|11.8| | | | | | | | | |
 |`cudaLaunchAttributeLaunchCompletionEvent`|12.3| | | | | | | | | |
@@ -1298,6 +1311,7 @@
 |`cudaMemFabricHandle_st`|12.3| | | | | | | | | |
 |`cudaMemFabricHandle_t`|12.3| | | | | | | | | |
 |`cudaMemFreeNodeParams`|12.2| | | |`hipMemFreeNodeParams`|6.1.0| | | | |
+|`cudaMemHandleTypeFabric`|12.4| | | | | | | | | |
 |`cudaMemHandleTypeNone`|11.2| | | |`hipMemHandleTypeNone`|5.2.0| | | | |
 |`cudaMemHandleTypePosixFileDescriptor`|11.2| | | |`hipMemHandleTypePosixFileDescriptor`|5.2.0| | | | |
 |`cudaMemHandleTypeWin32`|11.2| | | |`hipMemHandleTypeWin32`|5.2.0| | | | |
@@ -1408,7 +1422,7 @@
 |`cudaSharedMemBankSizeDefault`| | | | |`hipSharedMemBankSizeDefault`|1.6.0| | | | |
 |`cudaSharedMemBankSizeEightByte`| | | | |`hipSharedMemBankSizeEightByte`|1.6.0| | | | |
 |`cudaSharedMemBankSizeFourByte`| | | | |`hipSharedMemBankSizeFourByte`|1.6.0| | | | |
-|`cudaSharedMemConfig`| | | | |`hipSharedMemConfig`|1.6.0| | | | |
+|`cudaSharedMemConfig`| |12.4| | |`hipSharedMemConfig`|1.6.0| | | | |
 |`cudaSharedmemCarveoutDefault`|9.0| | | | | | | | | |
 |`cudaSharedmemCarveoutMaxL1`|9.0| | | | | | | | | |
 |`cudaSharedmemCarveoutMaxShared`|9.0| | | | | | | | | |
