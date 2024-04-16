@@ -161,7 +161,7 @@ if (NOT HIPIFY_CLANG_TESTS_ONLY)
   else()
     set(LIB_CLANG_RES ${LLVM_VERSION_MAJOR}.${LLVM_VERSION_MINOR}.${LLVM_VERSION_PATCH})
   endif()
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${EXTRA_CFLAGS} -DHIPIFY_CLANG_RES=\\\"${LLVM_LIBRARY_DIRS}/clang/${LIB_CLANG_RES}\\\" ${addr_var}")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${EXTRA_CFLAGS} -DLIB_CLANG_RES=${LIB_CLANG_RES} ${addr_var}")
 
   set(INSTALL_PATH_DOC_STRING "hipify-clang Installation Path")
   if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
@@ -193,6 +193,9 @@ if (NOT HIPIFY_CLANG_TESTS_ONLY)
       PATTERN "complex"
       PATTERN "new"
       PATTERN "ppc_wrappers" EXCLUDE
+      PATTERN "omp-tools.h" EXCLUDE
+      PATTERN "omp.h" EXCLUDE
+      PATTERN "ompt.h" EXCLUDE
       PATTERN "openmp_wrappers" EXCLUDE)
   endif()
 
@@ -243,6 +246,8 @@ endif() # if (NOT HIPIFY_CLANG_TESTS_ONLY)
 if(HIPIFY_CLANG_TESTS OR HIPIFY_CLANG_TESTS_ONLY)
 
   message(STATUS "---- The below configuring for hipify-clang testing only ----")
+
+  set (HIPIFY_CLANG_RES "${LLVM_LIBRARY_DIRS}/clang/${LIB_CLANG_RES}")
 
   if(${CMAKE_VERSION} VERSION_LESS "3.27.0")
     find_package(PythonInterp 2.7 REQUIRED)
@@ -342,16 +347,20 @@ if(HIPIFY_CLANG_TESTS OR HIPIFY_CLANG_TESTS_ONLY)
     ${CMAKE_CURRENT_BINARY_DIR}/tests/lit.site.cfg
     @ONLY)
 
+  if(NOT LIT_ARGS)
+    set(LIT_ARGS -v)
+  endif()
+
   if(HIPIFY_CLANG_TESTS_ONLY)
     add_lit_testsuite(test-hipify "Running HIPIFY regression tests"
       ${CMAKE_CURRENT_LIST_DIR}/tests
       PARAMS site_config=${CMAKE_CURRENT_BINARY_DIR}/tests/lit.site.cfg
-      ARGS -v)
+      ARGS ${LIT_ARGS})
   else()
     add_lit_testsuite(test-hipify "Running HIPIFY regression tests"
       ${CMAKE_CURRENT_LIST_DIR}/tests
       PARAMS site_config=${CMAKE_CURRENT_BINARY_DIR}/tests/lit.site.cfg
-      ARGS -v
+      ARGS ${LIT_ARGS}
       DEPENDS hipify-clang)
   endif()
 
