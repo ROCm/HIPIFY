@@ -766,6 +766,8 @@
 |`cublasDgemm`| | | | |`rocblas_dgemm`|1.5.0| | | | |
 |`cublasDgemmBatched`| | | | |`rocblas_dgemm_batched`|3.5.0| | | | |
 |`cublasDgemmBatched_64`|12.0| | | | | | | | | |
+|`cublasDgemmGroupedBatched`|12.4| | | | | | | | | |
+|`cublasDgemmGroupedBatched_64`|12.4| | | | | | | | | |
 |`cublasDgemmStridedBatched`|8.0| | | |`rocblas_dgemm_strided_batched`|1.5.0| | | | |
 |`cublasDgemmStridedBatched_64`|12.0| | | | | | | | | |
 |`cublasDgemm_64`|12.0| | | | | | | | | |
@@ -814,6 +816,8 @@
 |`cublasSgemm`| | | | |`rocblas_sgemm`|1.5.0| | | | |
 |`cublasSgemmBatched`| | | | |`rocblas_sgemm_batched`|3.5.0| | | | |
 |`cublasSgemmBatched_64`|12.0| | | | | | | | | |
+|`cublasSgemmGroupedBatched`|12.4| | | | | | | | | |
+|`cublasSgemmGroupedBatched_64`|12.4| | | | | | | | | |
 |`cublasSgemmStridedBatched`|8.0| | | |`rocblas_sgemm_strided_batched`|1.5.0| | | | |
 |`cublasSgemmStridedBatched_64`|12.0| | | | | | | | | |
 |`cublasSgemm_64`|12.0| | | | | | | | | |
