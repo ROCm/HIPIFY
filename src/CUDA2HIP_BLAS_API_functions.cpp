@@ -410,8 +410,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
   // BATCH GEMM
   {"cublasSgemmBatched",             {"hipblasSgemmBatched",             "rocblas_sgemm_batched",                    CONV_LIB_FUNC, API_BLAS, 7}},
   {"cublasSgemmBatched_64",          {"hipblasSgemmBatched_64",          "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
+  {"cublasSgemmGroupedBatched",      {"hipblasSgemmGroupedBatched",      "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
+  {"cublasSgemmGroupedBatched_64",   {"hipblasSgemmGroupedBatched_64",   "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
   {"cublasDgemmBatched",             {"hipblasDgemmBatched",             "rocblas_dgemm_batched",                    CONV_LIB_FUNC, API_BLAS, 7}},
   {"cublasDgemmBatched_64",          {"hipblasDgemmBatched_64",          "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
+  {"cublasDgemmGroupedBatched",      {"hipblasDgemmGroupedBatched",      "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
+  {"cublasDgemmGroupedBatched_64",   {"hipblasDgemmGroupedBatched_64",   "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
   {"cublasHgemmBatched",             {"hipblasHgemmBatched",             "rocblas_hgemm_batched",                    CONV_LIB_FUNC, API_BLAS, 7}},
   {"cublasHgemmBatched_64",          {"hipblasHgemmBatched_64",          "",                                         CONV_LIB_FUNC, API_BLAS, 7, UNSUPPORTED}},
   {"cublasSgemmStridedBatched",      {"hipblasSgemmStridedBatched",      "rocblas_sgemm_strided_batched",            CONV_LIB_FUNC, API_BLAS, 7}},
@@ -1517,6 +1521,10 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_FUNCTION_VER_MAP {
   {"cublasDdgmm_64",                             {CUDA_120, CUDA_0,   CUDA_0   }},
   {"cublasCdgmm_64",                             {CUDA_120, CUDA_0,   CUDA_0   }},
   {"cublasZdgmm_64",                             {CUDA_120, CUDA_0,   CUDA_0   }},
+  {"cublasSgemmGroupedBatched",                  {CUDA_124, CUDA_0,   CUDA_0   }},
+  {"cublasSgemmGroupedBatched_64",               {CUDA_124, CUDA_0,   CUDA_0   }},
+  {"cublasDgemmGroupedBatched",                  {CUDA_124, CUDA_0,   CUDA_0   }},
+  {"cublasDgemmGroupedBatched_64",               {CUDA_124, CUDA_0,   CUDA_0   }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_FUNCTION_VER_MAP {
