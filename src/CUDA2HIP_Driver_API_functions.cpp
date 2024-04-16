@@ -372,9 +372,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuArrayGetPlane",                                             {"hipArrayGetPlane",                                            "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_UNSUPPORTED}},
   //
   {"cuMemGetHandleForAddressRange",                               {"hipMemGetHandleForAddressRange",                              "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_UNSUPPORTED}},
-  //
+  // cudaDeviceRegisterAsyncNotification
   {"cuDeviceRegisterAsyncNotification",                           {"hipDeviceRegisterAsyncNotification",                          "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_UNSUPPORTED}},
-  //
+  // cudaDeviceUnregisterAsyncNotification
   {"cuDeviceUnregisterAsyncNotification",                         {"hipDeviceUnregisterAsyncNotification",                        "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_UNSUPPORTED}},
 
   // 14. Virtual Memory Management
@@ -607,7 +607,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuLaunchKernelEx",                                            {"hipLaunchKernelEx",                                           "", CONV_EXECUTION, API_DRIVER, SEC::EXECUTION, HIP_UNSUPPORTED}},
   // cudaFuncGetName
   {"cuFuncGetName",                                               {"hipFuncGetName",                                              "", CONV_EXECUTION, API_DRIVER, SEC::EXECUTION, HIP_UNSUPPORTED}},
-  //
+  // cudaFuncGetParamInfo
   {"cuFuncGetParamInfo",                                          {"hipFuncGetParamInfo",                                         "", CONV_EXECUTION, API_DRIVER, SEC::EXECUTION, HIP_UNSUPPORTED}},
   //
   {"cuFuncIsLoaded",                                              {"hipFuncIsLoaded",                                             "", CONV_EXECUTION, API_DRIVER, SEC::EXECUTION, HIP_UNSUPPORTED}},

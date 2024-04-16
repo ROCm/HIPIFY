@@ -2715,6 +2715,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaAsyncCallbackEntry
   {"CUasyncCallbackEntry_st",                                          {"hipAsyncCallbackEntry",                                    "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   // cudaAsyncCallbackHandle_t
+  {"CUasyncCallbackHandle",                                            {"hipAsyncCallbackHandle",                                   "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // cudaAsyncCallback
   {"CUasyncCallback",                                                  {"hipAsyncCallback",                                         "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   // 5. Defines
@@ -3731,6 +3733,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_TYPE_NAME_VER_MAP {
   {"CUdevResource_st",                                                 {CUDA_124, CUDA_0,   CUDA_0  }},
   {"CUdevResource",                                                    {CUDA_124, CUDA_0,   CUDA_0  }},
   {"CUasyncCallbackEntry_st",                                          {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"CUasyncCallbackHandle",                                            {CUDA_124, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {

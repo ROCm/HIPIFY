@@ -15,14 +15,14 @@
 |`cudaDeviceGetNvSciSyncAttributes`|10.2| | | | | | | | | |
 |`cudaDeviceGetP2PAttribute`|8.0| | | |`hipDeviceGetP2PAttribute`|3.8.0| | | | |
 |`cudaDeviceGetPCIBusId`| | | | |`hipDeviceGetPCIBusId`|1.6.0| | | | |
-|`cudaDeviceGetSharedMemConfig`| | | | |`hipDeviceGetSharedMemConfig`|1.6.0| | | | |
+|`cudaDeviceGetSharedMemConfig`| |12.4| | |`hipDeviceGetSharedMemConfig`|1.6.0| | | | |
 |`cudaDeviceGetStreamPriorityRange`| | | | |`hipDeviceGetStreamPriorityRange`|2.0.0| | | | |
 |`cudaDeviceGetTexture1DLinearMaxWidth`|11.1| | | | | | | | | |
 |`cudaDeviceReset`| | | | |`hipDeviceReset`|1.6.0| | | | |
 |`cudaDeviceSetCacheConfig`| | | | |`hipDeviceSetCacheConfig`|1.6.0| | | | |
 |`cudaDeviceSetLimit`| | | | |`hipDeviceSetLimit`|5.3.0| | | | |
 |`cudaDeviceSetMemPool`|11.2| | | |`hipDeviceSetMemPool`|5.2.0| | | | |
-|`cudaDeviceSetSharedMemConfig`| | | | |`hipDeviceSetSharedMemConfig`|1.6.0| | | | |
+|`cudaDeviceSetSharedMemConfig`| |12.4| | |`hipDeviceSetSharedMemConfig`|1.6.0| | | | |
 |`cudaDeviceSynchronize`| | | | |`hipDeviceSynchronize`|1.6.0| | | | |
 |`cudaGetDevice`| | | | |`hipGetDevice`|1.6.0| | | | |
 |`cudaGetDeviceCount`| | | | |`hipGetDeviceCount`|1.6.0| | | | |
@@ -120,9 +120,10 @@
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
 |`cudaFuncGetAttributes`| | | | |`hipFuncGetAttributes`|1.9.0| | | | |
 |`cudaFuncGetName`|12.3| | | | | | | | | |
+|`cudaFuncGetParamInfo`|12.4| | | | | | | | | |
 |`cudaFuncSetAttribute`|9.0| | | |`hipFuncSetAttribute`|3.9.0| | | | |
 |`cudaFuncSetCacheConfig`| | | | |`hipFuncSetCacheConfig`|1.6.0| | | | |
-|`cudaFuncSetSharedMemConfig`| | | | |`hipFuncSetSharedMemConfig`|3.9.0| | | | |
+|`cudaFuncSetSharedMemConfig`| |12.4| | |`hipFuncSetSharedMemConfig`|3.9.0| | | | |
 |`cudaGetParameterBuffer`| | | | | | | | | | |
 |`cudaGetParameterBufferV2`| | | | | | | | | | |
 |`cudaLaunchCooperativeKernel`|9.0| | | |`hipLaunchCooperativeKernel`|2.6.0| | | | |
@@ -155,6 +156,8 @@
 |`cudaArrayGetMemoryRequirements`|11.6| | | | | | | | | |
 |`cudaArrayGetPlane`|11.2| | | | | | | | | |
 |`cudaArrayGetSparseProperties`|11.1| | | | | | | | | |
+|`cudaDeviceRegisterAsyncNotification`|12.4| | | | | | | | | |
+|`cudaDeviceUnregisterAsyncNotification`|12.4| | | | | | | | | |
 |`cudaFree`| | | | |`hipFree`|1.5.0| | | | |
 |`cudaFreeArray`| | | | |`hipFreeArray`|1.6.0| | | | |
 |`cudaFreeHost`| | | | |`hipHostFree`|1.6.0| | | | |
@@ -571,6 +574,7 @@
 |`cudaArrayTextureGather`| | | | |`hipArrayTextureGather`|1.7.0| | | | |
 |`cudaArray_const_t`| | | | |`hipArray_const_t`|1.6.0| | | | |
 |`cudaArray_t`| | | | |`hipArray_t`|1.7.0| | | | |
+|`cudaAsyncCallback`|12.4| | | | | | | | | |
 |`cudaAsyncCallbackEntry`|12.4| | | | | | | | | |
 |`cudaAsyncCallbackHandle_t`|12.4| | | | | | | | | |
 |`cudaAsyncNotificationInfo`|12.4| | | | | | | | | |

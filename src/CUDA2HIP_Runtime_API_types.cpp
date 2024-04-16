@@ -1975,8 +1975,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
 
   // CUasyncCallbackEntry_st
   {"cudaAsyncCallbackEntry",                                           {"hipAsyncCallbackEntry",                                    "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // CUasyncCallbackHandle
+  {"cudaAsyncCallbackHandle_t",                                        {"hipAsyncCallbackHandle",                                   "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   // CUasyncCallback
-  {"cudaAsyncCallbackHandle_t",                                        {"hipAsyncCallback",                                         "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"cudaAsyncCallback",                                                {"hipAsyncCallback",                                         "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   // 5. Defines
 
@@ -2711,6 +2713,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_TYPE_NAME_VER_MAP 
   {"cudaGraphKernelNodeUpdate",                                        {CUDA_124, CUDA_0,   CUDA_0  }},
   {"cudaLaunchAttributeDeviceUpdatableKernelNode",                     {CUDA_124, CUDA_0,   CUDA_0  }},
   {"cudaKernelNodeAttributeDeviceUpdatableKernelNode",                 {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"cudaAsyncCallback",                                                {CUDA_124, CUDA_0,   CUDA_0  }},
   {"cudaAsyncCallbackEntry",                                           {CUDA_124, CUDA_0,   CUDA_0  }},
   {"cudaAsyncCallbackHandle_t",                                        {CUDA_124, CUDA_0,   CUDA_0  }},
   {"cudaAsyncNotificationInfo",                                        {CUDA_124, CUDA_0,   CUDA_0  }},

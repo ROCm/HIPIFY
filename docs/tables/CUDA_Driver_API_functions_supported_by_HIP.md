@@ -1062,6 +1062,7 @@
 |`CUarray_st`| | | | |`hipArray`|1.7.0| | | | |
 |`CUasyncCallback`|12.4| | | | | | | | | |
 |`CUasyncCallbackEntry_st`|12.4| | | | | | | | | |
+|`CUasyncCallbackHandle`|12.4| | | | | | | | | |
 |`CUasyncNotificationInfo`|12.4| | | | | | | | | |
 |`CUasyncNotificationInfo_st`|12.4| | | | | | | | | |
 |`CUasyncNotificationType`|12.4| | | | | | | | | |
