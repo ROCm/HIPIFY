@@ -45,8 +45,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   {"cudaDeviceGetP2PAttribute",                               {"hipDeviceGetP2PAttribute",                               "", CONV_DEVICE, API_RUNTIME, SEC::DEVICE}},
   // cuDeviceGetPCIBusId
   {"cudaDeviceGetPCIBusId",                                   {"hipDeviceGetPCIBusId",                                   "", CONV_DEVICE, API_RUNTIME, SEC::DEVICE}},
-  // cuCtxGetSharedMemConfig
-  {"cudaDeviceGetSharedMemConfig",                            {"hipDeviceGetSharedMemConfig",                            "", CONV_DEVICE, API_RUNTIME, SEC::DEVICE}},
+  // cuCtxGetSharedMemConfig -> hipCtxGetSharedMemConfig
+  {"cudaDeviceGetSharedMemConfig",                            {"hipDeviceGetSharedMemConfig",                            "", CONV_DEVICE, API_RUNTIME, SEC::DEVICE, CUDA_DEPRECATED}},
   // cuCtxGetStreamPriorityRange
   {"cudaDeviceGetStreamPriorityRange",                        {"hipDeviceGetStreamPriorityRange",                        "", CONV_DEVICE, API_RUNTIME, SEC::DEVICE}},
   // no analogue
@@ -55,8 +55,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   {"cudaDeviceSetCacheConfig",                                {"hipDeviceSetCacheConfig",                                "", CONV_DEVICE, API_RUNTIME, SEC::DEVICE}},
   // cuCtxSetLimit
   {"cudaDeviceSetLimit",                                      {"hipDeviceSetLimit",                                      "", CONV_DEVICE, API_RUNTIME, SEC::DEVICE}},
-  // cuCtxSetSharedMemConfig
-  {"cudaDeviceSetSharedMemConfig",                            {"hipDeviceSetSharedMemConfig",                            "", CONV_DEVICE, API_RUNTIME, SEC::DEVICE}},
+  // cuCtxSetSharedMemConfig -> hipCtxSetSharedMemConfig
+  {"cudaDeviceSetSharedMemConfig",                            {"hipDeviceSetSharedMemConfig",                            "", CONV_DEVICE, API_RUNTIME, SEC::DEVICE, CUDA_DEPRECATED}},
   // cuCtxSynchronize
   {"cudaDeviceSynchronize",                                   {"hipDeviceSynchronize",                                   "", CONV_DEVICE, API_RUNTIME, SEC::DEVICE}},
   // cuDeviceGet
@@ -223,7 +223,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   {"cudaFuncSetCacheConfig",                                  {"hipFuncSetCacheConfig",                                  "", CONV_EXECUTION, API_RUNTIME, SEC::EXECUTION}},
   // no analogue
   // NOTE: Not equal to cuFuncSetSharedMemConfig due to different signatures
-  {"cudaFuncSetSharedMemConfig",                              {"hipFuncSetSharedMemConfig",                              "", CONV_EXECUTION, API_RUNTIME, SEC::EXECUTION}},
+  {"cudaFuncSetSharedMemConfig",                              {"hipFuncSetSharedMemConfig",                              "", CONV_EXECUTION, API_RUNTIME, SEC::EXECUTION, CUDA_DEPRECATED}},
   // no analogue
   {"cudaGetParameterBuffer",                                  {"hipGetParameterBuffer",                                  "", CONV_EXECUTION, API_RUNTIME, SEC::EXECUTION, HIP_UNSUPPORTED}},
   // no analogue
@@ -248,6 +248,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   {"cudaLaunchKernelExC",                                     {"hipLaunchKernelExC",                                     "", CONV_EXECUTION, API_RUNTIME, SEC::EXECUTION, HIP_UNSUPPORTED}},
   // cuFuncGetName
   {"cudaFuncGetName",                                         {"hipFuncGetName",                                         "", CONV_EXECUTION, API_RUNTIME, SEC::EXECUTION, HIP_UNSUPPORTED}},
+  // cuFuncGetParamInfo
+  {"cudaFuncGetParamInfo",                                    {"hipFuncGetParamInfo",                                    "", CONV_EXECUTION, API_RUNTIME, SEC::EXECUTION, HIP_UNSUPPORTED}},
 
   // 8. Occupancy
   // cuOccupancyAvailableDynamicSMemPerBlock
@@ -402,6 +404,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   {"cudaArrayGetPlane",                                       {"hipArrayGetPlane",                                       "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_UNSUPPORTED}},
   // cuArrayGetMemoryRequirements
   {"cudaArrayGetMemoryRequirements",                          {"hipArrayGetMemoryRequirements",                          "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_UNSUPPORTED}},
+  // cuDeviceRegisterAsyncNotification
+  {"cudaDeviceRegisterAsyncNotification",                     {"hipDeviceRegisterAsyncNotification",                     "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_UNSUPPORTED}},
+  // cuDeviceUnregisterAsyncNotification
+  {"cudaDeviceUnregisterAsyncNotification",                   {"hipDeviceUnregisterAsyncNotification",                   "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_UNSUPPORTED}},
 
   // 10. Memory Management [DEPRECATED]
   // no analogue
@@ -1155,6 +1161,12 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_FUNCTION_VER_MAP {
   {"cudaGraphRemoveDependencies_v2",                          {CUDA_123, CUDA_0,   CUDA_0  }},
   {"cudaGraphAddNode_v2",                                     {CUDA_123, CUDA_0,   CUDA_0  }},
   {"cudaGraphConditionalHandleCreate",                        {CUDA_123, CUDA_0,   CUDA_0  }},
+  {"cudaDeviceGetSharedMemConfig",                            {CUDA_0,   CUDA_124, CUDA_0  }},
+  {"cudaDeviceSetSharedMemConfig",                            {CUDA_0,   CUDA_124, CUDA_0  }},
+  {"cudaFuncSetSharedMemConfig",                              {CUDA_0,   CUDA_124, CUDA_0  }},
+  {"cudaDeviceRegisterAsyncNotification",                     {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"cudaDeviceUnregisterAsyncNotification",                   {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"cudaFuncGetParamInfo",                                    {CUDA_124, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP {
