@@ -439,6 +439,7 @@
 |`CUDNN_NUMERICAL_NOTE_FFT`|8.0.1| | | | | | | | | |
 |`CUDNN_NUMERICAL_NOTE_NONDETERMINISTIC`|8.0.1| | | | | | | | | |
 |`CUDNN_NUMERICAL_NOTE_REDUCED_PRECISION_REDUCTION`|8.0.1| | | | | | | | | |
+|`CUDNN_NUMERICAL_NOTE_STRICT_NAN_PROP`|9.1.0| | | | | | | | | |
 |`CUDNN_NUMERICAL_NOTE_TENSOR_CORE`|8.0.1| | | | | | | | | |
 |`CUDNN_NUMERICAL_NOTE_TYPE_COUNT`|8.0.1| | | | | | | | | |
 |`CUDNN_NUMERICAL_NOTE_WINOGRAD`|8.0.1| | | | | | | | | |
@@ -493,6 +494,7 @@
 |`CUDNN_POINTWISE_ABS`|8.3.0| | | | | | | | | |
 |`CUDNN_POINTWISE_ADD`|8.0.1| | | | | | | | | |
 |`CUDNN_POINTWISE_ADD_SQUARE`|8.3.0| | | | | | | | | |
+|`CUDNN_POINTWISE_ATAN2`|9.1.0| | | | | | | | | |
 |`CUDNN_POINTWISE_BINARY_SELECT`|8.4.0| | | | | | | | | |
 |`CUDNN_POINTWISE_CEIL`|8.3.0| | | | | | | | | |
 |`CUDNN_POINTWISE_CMP_EQ`|8.3.0| | | | | | | | | |
@@ -777,7 +779,7 @@
 |`cudnnConvolutionFwdAlgoPerf_t`|3.0.0|9.0.0| | |`hipdnnConvolutionFwdAlgoPerf_t`| | | | | |
 |`cudnnConvolutionFwdAlgo_t`|2.0.0| | | |`hipdnnConvolutionFwdAlgo_t`| | | | | |
 |`cudnnConvolutionFwdPreference_t`|2.0.0|7.6.5| |8.0.1|`hipdnnConvolutionFwdPreference_t`| | | | | |
-|`cudnnConvolutionMode_t`|1.0.0|9.0.0| | |`hipdnnConvolutionMode_t`| | | | | |
+|`cudnnConvolutionMode_t`|1.0.0| | | |`hipdnnConvolutionMode_t`| | | | | |
 |`cudnnConvolutionStruct`|1.0.0| | | | | | | | | |
 |`cudnnDataType_t`|1.0.0| | | |`hipdnnDataType_t`| | | | | |
 |`cudnnDebugStruct`|8.2.0| | | | | | | | | |
@@ -840,7 +842,7 @@
 |`cudnnRNNStruct`|5.0.0| | | | | | | | | |
 |`cudnnReduceTensorDescriptor_t`|6.0.0|9.0.0| | |`hipdnnReduceTensorDescriptor_t`| | | | | |
 |`cudnnReduceTensorIndices_t`|6.0.0|9.0.0| | |`hipdnnReduceTensorIndices_t`| | | | | |
-|`cudnnReduceTensorOp_t`|6.0.0|9.0.0| | |`hipdnnReduceTensorOp_t`| | | | | |
+|`cudnnReduceTensorOp_t`|6.0.0| | | |`hipdnnReduceTensorOp_t`| | | | | |
 |`cudnnReduceTensorStruct`|6.0.0|9.0.0| | | | | | | | |
 |`cudnnReorderType_t`|7.6.0|9.0.0| | | | | | | | |
 |`cudnnResampleMode_t`|8.3.0| | | | | | | | | |

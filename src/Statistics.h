@@ -241,7 +241,8 @@ enum cudaVersions {
   CUDA_121 = 12010,
   CUDA_122 = 12020,
   CUDA_123 = 12030,
-  CUDA_LATEST = CUDA_123,
+  CUDA_124 = 12040,
+  CUDA_LATEST = CUDA_124,
   CUDNN_10 = 100,
   CUDNN_20 = 200,
   CUDNN_30 = 300,
@@ -291,7 +292,8 @@ enum cudaVersions {
   CUDNN_896 = 896,
   CUDNN_897 = 897,
   CUDNN_900 = 900,
-  CUDNN_LATEST = CUDNN_900,
+  CUDNN_910 = 910,
+  CUDNN_LATEST = CUDNN_910,
 };
 
 enum hipVersions {
@@ -359,7 +361,9 @@ enum hipVersions {
   HIP_6000 = 6000,
   HIP_6002 = 6002,
   HIP_6010 = 6010,
-  HIP_LATEST = HIP_6010,
+  HIP_6011 = 6011,
+  HIP_6020 = 6020,
+  HIP_LATEST = HIP_6020,
 };
 
 struct cudaAPIversions {
