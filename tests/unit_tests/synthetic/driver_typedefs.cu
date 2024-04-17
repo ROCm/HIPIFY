@@ -30,6 +30,11 @@ int main() {
 #if CUDA_VERSION >= 10000
   // CHECK: hipHostFn_t hostFn;
   CUhostFn hostFn;
+
+  // CHECK: HIP_MEMSET_NODE_PARAMS MEMSET_NODE_PARAMS_st;
+  // CHECK-NEXT: HIP_MEMSET_NODE_PARAMS MEMSET_NODE_PARAMS;
+  CUDA_MEMSET_NODE_PARAMS_st MEMSET_NODE_PARAMS_st;
+  CUDA_MEMSET_NODE_PARAMS MEMSET_NODE_PARAMS;
 #endif
 
 #if CUDA_VERSION >= 11000
@@ -52,6 +57,9 @@ int main() {
 
   // CHECK: hipMemGenericAllocationHandle_t memGenericAllocationHandle_v1;
   CUmemGenericAllocationHandle_v1 memGenericAllocationHandle_v1;
+
+  // CHECK: HIP_MEMSET_NODE_PARAMS MEMSET_NODE_PARAMS_v1;
+  CUDA_MEMSET_NODE_PARAMS_v1 MEMSET_NODE_PARAMS_v1;
 #endif
 
   return 0;

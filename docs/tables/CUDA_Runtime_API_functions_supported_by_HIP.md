@@ -514,7 +514,7 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
-|`cudaGetDriverEntryPoint`|11.3| | | |`hipGetProcAddress`|6.1.0| | | | |
+|`cudaGetDriverEntryPoint`|11.3| | | | | | | | | |
 
 ## **30. C++ API Routines**
 

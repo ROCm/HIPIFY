@@ -110,16 +110,16 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUDA_MEMCPY3D_PEER",                                               {"hip_Memcpy3D_Peer",                                        "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   {"CUDA_MEMCPY3D_PEER_v1",                                            {"hip_Memcpy3D_Peer",                                        "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
-  {"CUDA_MEMCPY_NODE_PARAMS_st",                                       {"hipMemcpyNodeParams",                                        "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES}},
+  {"CUDA_MEMCPY_NODE_PARAMS_st",                                       {"hipMemcpyNodeParams",                                      "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES}},
   // cudaMemcpyNodeParams
-  {"CUDA_MEMCPY_NODE_PARAMS",                                          {"hipMemcpyNodeParams",                                        "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES}},
+  {"CUDA_MEMCPY_NODE_PARAMS",                                          {"hipMemcpyNodeParams",                                      "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES}},
 
-  {"CUDA_MEMSET_NODE_PARAMS_st",                                       {"hipMemsetParams",                                          "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES}},
-  // cudaMemsetParams
-  {"CUDA_MEMSET_NODE_PARAMS",                                          {"hipMemsetParams",                                          "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES}},
-  {"CUDA_MEMSET_NODE_PARAMS_v1",                                       {"hipMemsetParams",                                          "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES}},
+  {"CUDA_MEMSET_NODE_PARAMS_st",                                       {"HIP_MEMSET_NODE_PARAMS",                                   "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES}},
+  //
+  {"CUDA_MEMSET_NODE_PARAMS",                                          {"HIP_MEMSET_NODE_PARAMS",                                   "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES}},
+  {"CUDA_MEMSET_NODE_PARAMS_v1",                                       {"HIP_MEMSET_NODE_PARAMS",                                   "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES}},
   {"CUDA_MEMSET_NODE_PARAMS_v2_st",                                    {"hipMemsetParams_v2",                                       "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-  // cudaMemsetParamsV2
+  //
   {"CUDA_MEMSET_NODE_PARAMS_v2",                                       {"hipMemsetParams_v2",                                       "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   {"CUDA_POINTER_ATTRIBUTE_P2P_TOKENS_st",                             {"HIP_POINTER_ATTRIBUTE_P2P_TOKENS",                         "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
@@ -4182,4 +4182,5 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {
   {"HIP_GET_PROC_ADDRESS_SUCCESS",                                     {HIP_6010, HIP_0,    HIP_0   }},
   {"HIP_GET_PROC_ADDRESS_SYMBOL_NOT_FOUND",                            {HIP_6010, HIP_0,    HIP_0   }},
   {"HIP_GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT",                      {HIP_6010, HIP_0,    HIP_0   }},
+  {"HIP_MEMSET_NODE_PARAMS",                                           {HIP_6010, HIP_0,    HIP_0   }},
 };

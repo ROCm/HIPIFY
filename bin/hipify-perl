@@ -3545,8 +3545,6 @@ sub simpleSubstitutions {
     subst("cudaGraphicsSubResourceGetMappedArray", "hipGraphicsSubResourceGetMappedArray", "graphics");
     subst("cudaGraphicsUnmapResources", "hipGraphicsUnmapResources", "graphics");
     subst("cudaGraphicsUnregisterResource", "hipGraphicsUnregisterResource", "graphics");
-    subst("cuGetProcAddress", "hipGetProcAddress", "driver_entry_point");
-    subst("cudaGetDriverEntryPoint", "hipGetProcAddress", "driver_entry_point");
     subst("cuProfilerStart", "hipProfilerStart", "profiler");
     subst("cuProfilerStop", "hipProfilerStop", "profiler");
     subst("cudaProfilerStart", "hipProfilerStart", "profiler");
@@ -5207,9 +5205,9 @@ sub simpleSubstitutions {
     subst("CUDA_MEMCPY3D_v2", "HIP_MEMCPY3D", "type");
     subst("CUDA_MEMCPY_NODE_PARAMS", "hipMemcpyNodeParams", "type");
     subst("CUDA_MEMCPY_NODE_PARAMS_st", "hipMemcpyNodeParams", "type");
-    subst("CUDA_MEMSET_NODE_PARAMS", "hipMemsetParams", "type");
-    subst("CUDA_MEMSET_NODE_PARAMS_st", "hipMemsetParams", "type");
-    subst("CUDA_MEMSET_NODE_PARAMS_v1", "hipMemsetParams", "type");
+    subst("CUDA_MEMSET_NODE_PARAMS", "HIP_MEMSET_NODE_PARAMS", "type");
+    subst("CUDA_MEMSET_NODE_PARAMS_st", "HIP_MEMSET_NODE_PARAMS", "type");
+    subst("CUDA_MEMSET_NODE_PARAMS_v1", "HIP_MEMSET_NODE_PARAMS", "type");
     subst("CUDA_MEM_ALLOC_NODE_PARAMS", "hipMemAllocNodeParams", "type");
     subst("CUDA_MEM_ALLOC_NODE_PARAMS_st", "hipMemAllocNodeParams", "type");
     subst("CUDA_MEM_ALLOC_NODE_PARAMS_v1", "hipMemAllocNodeParams", "type");
@@ -8938,6 +8936,7 @@ sub warnUnsupportedFunctions {
         "cudaGetKernel",
         "cudaGetFuncBySymbol",
         "cudaGetDriverEntryPointFlags",
+        "cudaGetDriverEntryPoint",
         "cudaGLUnregisterBufferObject",
         "cudaGLUnmapBufferObjectAsync",
         "cudaGLUnmapBufferObject",
@@ -9416,6 +9415,7 @@ sub warnUnsupportedFunctions {
         "cuGraphConditionalHandleCreate",
         "cuGraphAddNode_v2",
         "cuGraphAddDependencies_v2",
+        "cuGetProcAddress",
         "cuGLUnregisterBufferObject",
         "cuGLUnmapBufferObjectAsync",
         "cuGLUnmapBufferObject",
