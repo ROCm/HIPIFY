@@ -211,9 +211,9 @@
 |`CUDA_MEMCPY3D_v2`|11.3| | | |`HIP_MEMCPY3D`|3.2.0| | | | |
 |`CUDA_MEMCPY_NODE_PARAMS`|12.2| | | |`hipMemcpyNodeParams`|6.1.0| | | | |
 |`CUDA_MEMCPY_NODE_PARAMS_st`|12.2| | | |`hipMemcpyNodeParams`|6.1.0| | | | |
-|`CUDA_MEMSET_NODE_PARAMS`|10.0| | | |`hipMemsetParams`|4.3.0| | | | |
-|`CUDA_MEMSET_NODE_PARAMS_st`|10.0| | | |`hipMemsetParams`|4.3.0| | | | |
-|`CUDA_MEMSET_NODE_PARAMS_v1`|11.3| | | |`hipMemsetParams`|4.3.0| | | | |
+|`CUDA_MEMSET_NODE_PARAMS`|10.0| | | |`HIP_MEMSET_NODE_PARAMS`|6.1.0| | | | |
+|`CUDA_MEMSET_NODE_PARAMS_st`|10.0| | | |`HIP_MEMSET_NODE_PARAMS`|6.1.0| | | | |
+|`CUDA_MEMSET_NODE_PARAMS_v1`|11.3| | | |`HIP_MEMSET_NODE_PARAMS`|6.1.0| | | | |
 |`CUDA_MEMSET_NODE_PARAMS_v2`|12.2| | | | | | | | | |
 |`CUDA_MEMSET_NODE_PARAMS_v2_st`|12.2| | | | | | | | | |
 |`CUDA_MEM_ALLOC_NODE_PARAMS`|11.4| | | |`hipMemAllocNodeParams`|5.5.0| | | | |
@@ -2040,7 +2040,7 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
-|`cuGetProcAddress`|11.3| | | |`hipGetProcAddress`|6.1.0| | | | |
+|`cuGetProcAddress`|11.3| | | | | | | | | |
 
 ## **34. Coredump Attributes Control API**
 

@@ -1055,7 +1055,7 @@ int main() {
   // CHECK-NEXT: hipGraphNode_t graphNode, graphNode2;
   // CHECK-NEXT: const hipGraphNode_t *pGraphNode = nullptr;
   // CHECK-NEXT: hipKernelNodeParams KERNEL_NODE_PARAMS;
-  // CHECK-NEXT: hipMemsetParams MEMSET_NODE_PARAMS;
+  // CHECK-NEXT: HIP_MEMSET_NODE_PARAMS MEMSET_NODE_PARAMS;
   // CHECK-NEXT: hipGraphExec_t graphExec;
   // CHECK-NEXT: hipExternalMemory_t externalMemory;
   // CHECK-NEXT: hipExternalSemaphore_t externalSemaphore;
@@ -1703,6 +1703,11 @@ int main() {
   result = cuGraphReleaseUserObject(graph, userObject, count);
 
   // CUDA: CUresult CUDAAPI cuGraphDebugDotPrint(CUgraph hGraph, const char *path, unsigned int flags);
+  // HIP: hipError_t hipGraphDebugDotPrint(hipGraph_t graph, const char* path, unsigned int flags);
+  // CHECK: result = hipGraphDebugDotPrint(graph, name.c_str(), flags);
+  result = cuGraphDebugDotPrint(graph, name.c_str(), flags);
+
+  // CUDA: CUresult CUDAAPI cuGetProcAddress(const char *symbol, void **pfn, int cudaVersion, cuuint64_t flags, CUdriverProcAddressQueryResult *symbolStatus);
   // HIP: hipError_t hipGraphDebugDotPrint(hipGraph_t graph, const char* path, unsigned int flags);
   // CHECK: result = hipGraphDebugDotPrint(graph, name.c_str(), flags);
   result = cuGraphDebugDotPrint(graph, name.c_str(), flags);
