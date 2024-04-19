@@ -1455,14 +1455,14 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
-|`cuDevicePrimaryCtxGetState`| | | | |`hipDevicePrimaryCtxGetState`|1.9.0| | | | |
-|`cuDevicePrimaryCtxRelease`| | | | |`hipDevicePrimaryCtxRelease`|1.9.0| | | | |
-|`cuDevicePrimaryCtxRelease_v2`|11.0| | | |`hipDevicePrimaryCtxRelease`|1.9.0| | | | |
-|`cuDevicePrimaryCtxReset`| | | | |`hipDevicePrimaryCtxReset`|1.9.0| | | | |
-|`cuDevicePrimaryCtxReset_v2`|11.0| | | |`hipDevicePrimaryCtxReset`|1.9.0| | | | |
-|`cuDevicePrimaryCtxRetain`| | | | |`hipDevicePrimaryCtxRetain`|1.9.0| | | | |
-|`cuDevicePrimaryCtxSetFlags`| | | | |`hipDevicePrimaryCtxSetFlags`|1.9.0| | | | |
-|`cuDevicePrimaryCtxSetFlags_v2`|11.0| | | |`hipDevicePrimaryCtxSetFlags`|1.9.0| | | | |
+|`cuDevicePrimaryCtxGetState`| | | | |`hipDevicePrimaryCtxGetState`|1.9.0|6.1.0| | | |
+|`cuDevicePrimaryCtxRelease`| | | | |`hipDevicePrimaryCtxRelease`|1.9.0|6.1.0| | | |
+|`cuDevicePrimaryCtxRelease_v2`|11.0| | | |`hipDevicePrimaryCtxRelease`|1.9.0|6.1.0| | | |
+|`cuDevicePrimaryCtxReset`| | | | |`hipDevicePrimaryCtxReset`|1.9.0|6.1.0| | | |
+|`cuDevicePrimaryCtxReset_v2`|11.0| | | |`hipDevicePrimaryCtxReset`|1.9.0|6.1.0| | | |
+|`cuDevicePrimaryCtxRetain`| | | | |`hipDevicePrimaryCtxRetain`|1.9.0|6.1.0| | | |
+|`cuDevicePrimaryCtxSetFlags`| | | | |`hipDevicePrimaryCtxSetFlags`|1.9.0|6.1.0| | | |
+|`cuDevicePrimaryCtxSetFlags_v2`|11.0| | | |`hipDevicePrimaryCtxSetFlags`|1.9.0|6.1.0| | | |
 
 ## **8. Context Management**
 
