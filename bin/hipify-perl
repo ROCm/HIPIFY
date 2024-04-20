@@ -3487,6 +3487,7 @@ sub simpleSubstitutions {
     subst("cuTexRefGetAddressMode", "hipTexRefGetAddressMode", "texture");
     subst("cuTexRefGetAddress_v2", "hipTexRefGetAddress", "texture");
     subst("cuTexRefGetArray", "hipTexRefGetArray", "texture");
+    subst("cuTexRefGetBorderColor", "hipTexRefGetBorderColor", "texture");
     subst("cuTexRefGetFilterMode", "hipTexRefGetFilterMode", "texture");
     subst("cuTexRefGetFlags", "hipTexRefGetFlags", "texture");
     subst("cuTexRefGetFormat", "hipTexRefGetFormat", "texture");
@@ -9301,7 +9302,6 @@ sub warnUnsupportedFunctions {
         "cuWGLGetDevice",
         "cuVDPAUGetDevice",
         "cuVDPAUCtxCreate",
-        "cuTexRefGetBorderColor",
         "cuTexRefDestroy",
         "cuTexRefCreate",
         "cuTensorMapReplaceAddress",
