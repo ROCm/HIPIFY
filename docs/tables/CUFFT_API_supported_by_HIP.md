@@ -58,6 +58,7 @@
 |`CUFFT_Z2D`| | | | |`HIPFFT_Z2D`|1.7.0| | | | |
 |`CUFFT_Z2Z`| | | | |`HIPFFT_Z2Z`|1.7.0| | | | |
 |`MAX_CUFFT_ERROR`| | | | | | | | | | |
+|`NVFFT_PLAN_PROPERTY_INT64_PATIENT_JIT`|12.4| | | | | | | | | |
 |`cufftBox3d`|11.8| | | | | | | | | |
 |`cufftBox3d_t`|11.8| | | | | | | | | |
 |`cufftCompatibility`| | | | | | | | | | |
@@ -66,6 +67,8 @@
 |`cufftDoubleComplex`| | | | |`hipfftDoubleComplex`|1.7.0| | | | |
 |`cufftDoubleReal`| | | | |`hipfftDoubleReal`|1.7.0| | | | |
 |`cufftHandle`| | | | |`hipfftHandle`|1.7.0| | | | |
+|`cufftProperty`|12.4| | | | | | | | | |
+|`cufftProperty_t`|12.4| | | | | | | | | |
 |`cufftReal`| | | | |`hipfftReal`|1.7.0| | | | |
 |`cufftResult`| | | | |`hipfftResult`|1.7.0| | | | |
 |`cufftResult_t`| | | | |`hipfftResult_t`|1.7.0| | | | |
@@ -108,6 +111,7 @@
 |`cufftExecR2C`| | | | |`hipfftExecR2C`|1.7.0| | | | |
 |`cufftExecZ2D`| | | | |`hipfftExecZ2D`|1.7.0| | | | |
 |`cufftExecZ2Z`| | | | |`hipfftExecZ2Z`|1.7.0| | | | |
+|`cufftGetPlanPropertyInt64`|12.4| | | | | | | | | |
 |`cufftGetProperty`|8.0| | | |`hipfftGetProperty`|2.6.0| | | | |
 |`cufftGetSize`| | | | |`hipfftGetSize`|1.7.0| | | | |
 |`cufftGetSize1d`| | | | |`hipfftGetSize1d`|1.7.0| | | | |
@@ -125,7 +129,9 @@
 |`cufftPlan2d`| | | | |`hipfftPlan2d`|1.7.0| | | | |
 |`cufftPlan3d`| | | | |`hipfftPlan3d`|1.7.0| | | | |
 |`cufftPlanMany`| | | | |`hipfftPlanMany`|1.7.0| | | | |
+|`cufftResetPlanProperty`|12.4| | | | | | | | | |
 |`cufftSetAutoAllocation`| | | | |`hipfftSetAutoAllocation`|1.7.0| | | | |
+|`cufftSetPlanPropertyInt64`|12.4| | | | | | | | | |
 |`cufftSetStream`| | | | |`hipfftSetStream`|1.7.0| | | | |
 |`cufftSetWorkArea`| | | | |`hipfftSetWorkArea`|1.7.0| | | | |
 |`cufftXtClearCallback`| | | | |`hipfftXtClearCallback`|4.3.0| | | | |

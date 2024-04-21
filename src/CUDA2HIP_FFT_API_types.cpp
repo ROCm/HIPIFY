@@ -106,6 +106,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_FFT_TYPE_NAME_MAP {
   {"CUFFT_CB_ST_REAL_DOUBLE",                     {"HIPFFT_CB_ST_REAL_DOUBLE",                     "", CONV_NUMERIC_LITERAL, API_FFT, 1}},  //  0x7
   {"CUFFT_CB_UNDEFINED",                          {"HIPFFT_CB_UNDEFINED",                          "", CONV_NUMERIC_LITERAL, API_FFT, 1}},  //  0x7
 
+  {"cufftProperty_t",                             {"hipfftProperty",                               "", CONV_TYPE, API_FFT, 1, HIP_UNSUPPORTED}},
+  {"cufftProperty",                               {"hipfftProperty",                               "", CONV_TYPE, API_FFT, 1, HIP_UNSUPPORTED}},
+  {"NVFFT_PLAN_PROPERTY_INT64_PATIENT_JIT",       {"HIPFFT_PLAN_PROPERTY_INT64_PATIENT_JIT",       "", CONV_NUMERIC_LITERAL, API_FFT, 1, HIP_UNSUPPORTED}},  //  0x1
+
   // cuFFT types
   {"cufftReal",                                   {"hipfftReal",                                   "", CONV_TYPE, API_FFT, 1}},
   {"cufftDoubleReal",                             {"hipfftDoubleReal",                             "", CONV_TYPE, API_FFT, 1}},
@@ -128,6 +132,9 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_FFT_TYPE_NAME_VER_MAP {
   {"CUFFT_XT_FORMAT_DISTRIBUTED_OUTPUT",          {CUDA_118, CUDA_0,   CUDA_0  }},
   {"cufftBox3d_t",                                {CUDA_118, CUDA_0,   CUDA_0  }},
   {"cufftBox3d",                                  {CUDA_118, CUDA_0,   CUDA_0  }},
+  {"cufftProperty_t",                             {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"cufftProperty",                               {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"NVFFT_PLAN_PROPERTY_INT64_PATIENT_JIT",       {CUDA_124, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_FFT_TYPE_NAME_VER_MAP {
