@@ -442,6 +442,8 @@
 |`cusolverDnXgetrf`|11.1| | | | | | | | | | | | | | | |
 |`cusolverDnXgetrf_bufferSize`|11.1| | | | | | | | | | | | | | | |
 |`cusolverDnXgetrs`|11.1| | | | | | | | | | | | | | | |
+|`cusolverDnXlarft`|12.4| | | | | | | | | | | | | | | |
+|`cusolverDnXlarft_bufferSize`|12.4| | | | | | | | | | | | | | | |
 |`cusolverDnXpotrf`|11.1| | | | | | | | | | | | | | | |
 |`cusolverDnXpotrf_bufferSize`|11.1| | | | | | | | | | | | | | | |
 |`cusolverDnXpotrs`|11.1| | | | | | | | | | | | | | | |
