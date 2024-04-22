@@ -8328,6 +8328,8 @@ sub warnUnsupportedFunctions {
         "cusolverDnXpotrs",
         "cusolverDnXpotrf_bufferSize",
         "cusolverDnXpotrf",
+        "cusolverDnXlarft_bufferSize",
+        "cusolverDnXlarft",
         "cusolverDnXgetrs",
         "cusolverDnXgetrf_bufferSize",
         "cusolverDnXgetrf",
