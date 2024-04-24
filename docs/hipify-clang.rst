@@ -177,7 +177,7 @@ Dependencies
     - **LATEST STABLE CONFIG**
     - **LATEST STABLE CONFIG**
   * - `19.0.0 git <https://github.com/llvm/llvm-project>`_
-    - `12.4.0 <https://developer.nvidia.com/cuda-downloads>`_
+    - `12.4.1 <https://developer.nvidia.com/cuda-downloads>`_
     - \+
     - \+
 
