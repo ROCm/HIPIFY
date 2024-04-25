@@ -85,14 +85,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
 
   // 7. Primary Context Management
   // no analogues
-  {"cuDevicePrimaryCtxGetState",                                  {"hipDevicePrimaryCtxGetState",                                 "", CONV_CONTEXT, API_DRIVER, SEC::PRIMARY_CONTEXT}},
-  {"cuDevicePrimaryCtxRelease",                                   {"hipDevicePrimaryCtxRelease",                                  "", CONV_CONTEXT, API_DRIVER, SEC::PRIMARY_CONTEXT}},
-  {"cuDevicePrimaryCtxRelease_v2",                                {"hipDevicePrimaryCtxRelease",                                  "", CONV_CONTEXT, API_DRIVER, SEC::PRIMARY_CONTEXT}},
-  {"cuDevicePrimaryCtxReset",                                     {"hipDevicePrimaryCtxReset",                                    "", CONV_CONTEXT, API_DRIVER, SEC::PRIMARY_CONTEXT}},
-  {"cuDevicePrimaryCtxReset_v2",                                  {"hipDevicePrimaryCtxReset",                                    "", CONV_CONTEXT, API_DRIVER, SEC::PRIMARY_CONTEXT}},
-  {"cuDevicePrimaryCtxRetain",                                    {"hipDevicePrimaryCtxRetain",                                   "", CONV_CONTEXT, API_DRIVER, SEC::PRIMARY_CONTEXT}},
-  {"cuDevicePrimaryCtxSetFlags",                                  {"hipDevicePrimaryCtxSetFlags",                                 "", CONV_CONTEXT, API_DRIVER, SEC::PRIMARY_CONTEXT}},
-  {"cuDevicePrimaryCtxSetFlags_v2",                               {"hipDevicePrimaryCtxSetFlags",                                 "", CONV_CONTEXT, API_DRIVER, SEC::PRIMARY_CONTEXT}},
+  {"cuDevicePrimaryCtxGetState",                                  {"hipDevicePrimaryCtxGetState",                                 "", CONV_CONTEXT, API_DRIVER, SEC::PRIMARY_CONTEXT, HIP_DEPRECATED}},
+  {"cuDevicePrimaryCtxRelease",                                   {"hipDevicePrimaryCtxRelease",                                  "", CONV_CONTEXT, API_DRIVER, SEC::PRIMARY_CONTEXT, HIP_DEPRECATED}},
+  {"cuDevicePrimaryCtxRelease_v2",                                {"hipDevicePrimaryCtxRelease",                                  "", CONV_CONTEXT, API_DRIVER, SEC::PRIMARY_CONTEXT, HIP_DEPRECATED}},
+  {"cuDevicePrimaryCtxReset",                                     {"hipDevicePrimaryCtxReset",                                    "", CONV_CONTEXT, API_DRIVER, SEC::PRIMARY_CONTEXT, HIP_DEPRECATED}},
+  {"cuDevicePrimaryCtxReset_v2",                                  {"hipDevicePrimaryCtxReset",                                    "", CONV_CONTEXT, API_DRIVER, SEC::PRIMARY_CONTEXT, HIP_DEPRECATED}},
+  {"cuDevicePrimaryCtxRetain",                                    {"hipDevicePrimaryCtxRetain",                                   "", CONV_CONTEXT, API_DRIVER, SEC::PRIMARY_CONTEXT, HIP_DEPRECATED}},
+  {"cuDevicePrimaryCtxSetFlags",                                  {"hipDevicePrimaryCtxSetFlags",                                 "", CONV_CONTEXT, API_DRIVER, SEC::PRIMARY_CONTEXT, HIP_DEPRECATED}},
+  {"cuDevicePrimaryCtxSetFlags_v2",                               {"hipDevicePrimaryCtxSetFlags",                                 "", CONV_CONTEXT, API_DRIVER, SEC::PRIMARY_CONTEXT, HIP_DEPRECATED}},
 
   // 8. Context Management
   // no analogues, except a few
@@ -843,8 +843,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuTexRefGetAddress",                                          {"hipTexRefGetAddress",                                         "", CONV_TEXTURE, API_DRIVER, SEC::TEXTURE_DEPRECATED, DEPRECATED}},
   {"cuTexRefGetAddress_v2",                                       {"hipTexRefGetAddress",                                         "", CONV_TEXTURE, API_DRIVER, SEC::TEXTURE_DEPRECATED, DEPRECATED}},
   {"cuTexRefGetAddressMode",                                      {"hipTexRefGetAddressMode",                                     "", CONV_TEXTURE, API_DRIVER, SEC::TEXTURE_DEPRECATED, DEPRECATED}},
-  {"cuTexRefGetArray",                                            {"hipTexRefGetArray",                                           "", CONV_TEXTURE, API_DRIVER, SEC::TEXTURE_DEPRECATED, CUDA_DEPRECATED | HIP_REMOVED}},
-  {"cuTexRefGetBorderColor",                                      {"hipTexRefGetBorderColor",                                     "", CONV_TEXTURE, API_DRIVER, SEC::TEXTURE_DEPRECATED, CUDA_DEPRECATED | HIP_UNSUPPORTED}},
+  {"cuTexRefGetArray",                                            {"hipTexRefGetArray",                                           "", CONV_TEXTURE, API_DRIVER, SEC::TEXTURE_DEPRECATED, CUDA_DEPRECATED | HIP_DEPRECATED}},
+  {"cuTexRefGetBorderColor",                                      {"hipTexRefGetBorderColor",                                     "", CONV_TEXTURE, API_DRIVER, SEC::TEXTURE_DEPRECATED, CUDA_DEPRECATED | HIP_DEPRECATED}},
   {"cuTexRefGetFilterMode",                                       {"hipTexRefGetFilterMode",                                      "", CONV_TEXTURE, API_DRIVER, SEC::TEXTURE_DEPRECATED, DEPRECATED}},
   {"cuTexRefGetFlags",                                            {"hipTexRefGetFlags",                                           "", CONV_TEXTURE, API_DRIVER, SEC::TEXTURE_DEPRECATED, DEPRECATED}},
   {"cuTexRefGetFormat",                                           {"hipTexRefGetFormat",                                          "", CONV_TEXTURE, API_DRIVER, SEC::TEXTURE_DEPRECATED, DEPRECATED}},
@@ -1497,11 +1497,11 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_FUNCTION_VER_MAP {
   {"hipDeviceGetName",                                            {HIP_1060, HIP_0,    HIP_0   }},
   {"hipDeviceTotalMem",                                           {HIP_1060, HIP_0,    HIP_0   }},
   {"hipDeviceComputeCapability",                                  {HIP_1060, HIP_0,    HIP_0   }},
-  {"hipDevicePrimaryCtxGetState",                                 {HIP_1090, HIP_0,    HIP_0   }},
-  {"hipDevicePrimaryCtxRelease",                                  {HIP_1090, HIP_0,    HIP_0   }},
-  {"hipDevicePrimaryCtxReset",                                    {HIP_1090, HIP_0,    HIP_0   }},
-  {"hipDevicePrimaryCtxRetain",                                   {HIP_1090, HIP_0,    HIP_0   }},
-  {"hipDevicePrimaryCtxSetFlags",                                 {HIP_1090, HIP_0,    HIP_0   }},
+  {"hipDevicePrimaryCtxGetState",                                 {HIP_1090, HIP_6010, HIP_0   }},
+  {"hipDevicePrimaryCtxRelease",                                  {HIP_1090, HIP_6010, HIP_0   }},
+  {"hipDevicePrimaryCtxReset",                                    {HIP_1090, HIP_6010, HIP_0   }},
+  {"hipDevicePrimaryCtxRetain",                                   {HIP_1090, HIP_6010, HIP_0   }},
+  {"hipDevicePrimaryCtxSetFlags",                                 {HIP_1090, HIP_6010, HIP_0   }},
   {"hipCtxCreate",                                                {HIP_1060, HIP_1090, HIP_0   }},
   {"hipCtxDestroy",                                               {HIP_1060, HIP_1090, HIP_0   }},
   {"hipCtxGetApiVersion",                                         {HIP_1090, HIP_1090, HIP_0   }},
@@ -1558,7 +1558,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_FUNCTION_VER_MAP {
   {"hipModuleOccupancyMaxPotentialBlockSizeWithFlags",            {HIP_3050, HIP_0,    HIP_0   }},
   {"hipTexRefGetAddress",                                         {HIP_3000, HIP_4030, HIP_0   }},
   {"hipTexRefGetAddressMode",                                     {HIP_3000, HIP_4030, HIP_0   }},
-  {"hipTexRefGetArray",                                           {HIP_3000, HIP_0,    HIP_4020}},
+  {"hipTexRefGetArray",                                           {HIP_3000, HIP_6010, HIP_0   }},
   {"hipTexRefGetFilterMode",                                      {HIP_3050, HIP_4030, HIP_0   }},
   {"hipTexRefGetFlags",                                           {HIP_3050, HIP_4030, HIP_0   }},
   {"hipTexRefGetFormat",                                          {HIP_3050, HIP_4030, HIP_0   }},
@@ -1643,6 +1643,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_FUNCTION_VER_MAP {
   {"hipDrvGraphAddMemFreeNode",                                   {HIP_6010, HIP_0,    HIP_0   }},
   {"hipDrvGraphExecMemcpyNodeSetParams",                          {HIP_6010, HIP_0,    HIP_0   }},
   {"hipDrvGraphExecMemsetNodeSetParams",                          {HIP_6010, HIP_0,    HIP_0   }},
+  {"hipTexRefGetBorderColor",                                     {HIP_6010, HIP_6010, HIP_0   }},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_DRIVER_API_SECTION_MAP {

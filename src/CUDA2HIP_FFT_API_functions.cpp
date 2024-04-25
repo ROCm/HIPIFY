@@ -85,6 +85,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_FFT_FUNCTION_MAP {
   {"cufftXtExecDescriptor",                               {"hipfftXtExecDescriptor",                               "", CONV_LIB_FUNC, API_FFT, 2, HIP_UNSUPPORTED}},
   {"cufftXtSetWorkAreaPolicy",                            {"hipfftXtSetWorkAreaPolicy",                            "", CONV_LIB_FUNC, API_FFT, 2, HIP_UNSUPPORTED}},
   {"cufftXtSetDistribution",                              {"hipfftXtSetDistribution",                              "", CONV_LIB_FUNC, API_FFT, 2, HIP_UNSUPPORTED}},
+  {"cufftSetPlanPropertyInt64",                           {"hipfftSetPlanPropertyInt64",                           "", CONV_LIB_FUNC, API_FFT, 2, HIP_UNSUPPORTED}},
+  {"cufftGetPlanPropertyInt64",                           {"hipfftGetPlanPropertyInt64",                           "", CONV_LIB_FUNC, API_FFT, 2, HIP_UNSUPPORTED}},
+  {"cufftResetPlanProperty",                              {"hipfftResetPlanProperty",                              "", CONV_LIB_FUNC, API_FFT, 2, HIP_UNSUPPORTED}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_FFT_FUNCTION_VER_MAP {
@@ -97,6 +100,9 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_FFT_FUNCTION_VER_MAP {
   {"cufftXtExecDescriptor",                               {CUDA_80,  CUDA_0,   CUDA_0  }},
   {"cufftXtSetWorkAreaPolicy",                            {CUDA_92,  CUDA_0,   CUDA_0  }},
   {"cufftXtSetDistribution",                              {CUDA_118, CUDA_0,   CUDA_0  }},
+  {"cufftSetPlanPropertyInt64",                           {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"cufftGetPlanPropertyInt64",                           {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"cufftResetPlanProperty",                              {CUDA_124, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_FFT_FUNCTION_VER_MAP {

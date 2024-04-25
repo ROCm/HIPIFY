@@ -244,6 +244,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_TYPE_NAME_MAP {
   {"cusparseSpSMAlg_t",                          {"hipsparseSpSMAlg_t",                         "rocsparse_spsm_alg",                                 CONV_TYPE, API_SPARSE, 4}},
   {"CUSPARSE_SPSM_ALG_DEFAULT",                  {"HIPSPARSE_SPSM_ALG_DEFAULT",                 "rocsparse_spsm_alg_default",                         CONV_NUMERIC_LITERAL, API_SPARSE, 4}},
 
+  {"cusparseSpSMUpdate_t",                       {"hipsparseSpSMUpdate_t",                      "",                                                   CONV_TYPE, API_SPARSE, 4, UNSUPPORTED}},
+  {"CUSPARSE_SPSM_UPDATE_GENERAL",               {"HIPSPARSE_SPSM_UPDATE_GENERAL",              "",                                                   CONV_NUMERIC_LITERAL, API_SPARSE, 4, UNSUPPORTED}},
+  {"CUSPARSE_SPSM_UPDATE_DIAGONAL",              {"HIPSPARSE_SPSM_UPDATE_DIAGONAL",             "",                                                   CONV_NUMERIC_LITERAL, API_SPARSE, 4, UNSUPPORTED}},
+
   {"cusparseSDDMMAlg_t",                         {"hipsparseSDDMMAlg_t",                        "rocsparse_sddmm_alg",                                CONV_TYPE, API_SPARSE, 4}},
   {"CUSPARSE_SDDMM_ALG_DEFAULT",                 {"HIPSPARSE_SDDMM_ALG_DEFAULT",                "rocsparse_sddmm_alg_default",                        CONV_NUMERIC_LITERAL, API_SPARSE, 4}},
 
@@ -417,6 +421,9 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SPARSE_TYPE_NAME_VER_MAP {
   {"cusparseColorAlg_t",                         {CUDA_80,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
   {"CUSPARSE_COLOR_ALG0",                        {CUDA_80,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
   {"CUSPARSE_COLOR_ALG1",                        {CUDA_80,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
+  {"cusparseSpSMUpdate_t",                       {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"CUSPARSE_SPSM_UPDATE_GENERAL",               {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"CUSPARSE_SPSM_UPDATE_DIAGONAL",              {CUDA_124, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_TYPE_NAME_VER_MAP {
