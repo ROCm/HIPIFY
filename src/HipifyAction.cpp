@@ -2734,15 +2734,13 @@ bool HipifyAction::cudaOverloadedHostFuncCall(const mat::MatchFinder::MatchResul
     auto overrideInfo = itNumArgs->second;
     auto counter = overrideInfo.counter;
     // check if SUPPORTED
-    auto* SM = Result.SourceManager;
-    clang::SourceLocation s;
     switch (overrideInfo.overloadType) {
       case ot_arguments_number:
       default:
       {
-        s = call->getBeginLoc();
-        ct::Replacement Rep(*SM, s, name.size(), counter.hipName.str());
-        clang::FullSourceLoc fullSL(s, *SM);
+        clang::SourceRange replacementRange = getWriteRange(*Result.SourceManager, { call->getBeginLoc(), call->getEndLoc() });
+        ct::Replacement Rep(*Result.SourceManager, replacementRange.getBegin(), name.size(), counter.hipName.str());
+        clang::FullSourceLoc fullSL(replacementRange.getBegin(), *Result.SourceManager);
         insertReplacement(Rep, fullSL);
         break;
       }
