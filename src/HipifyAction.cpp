@@ -2765,8 +2765,9 @@ bool HipifyAction::half2Member(const mat::MatchFinder::MatchResult &Result) {
     clang::SmallString<40> XStr;
     llvm::raw_svector_ostream OS(XStr);
     OS << "reinterpret_cast<half&>(" << exprName << ")";
-    ct::Replacement Rep(*Result.SourceManager, sr.getBegin(), exprName.size(), OS.str());
-    clang::FullSourceLoc fullSL(sr.getBegin(), *Result.SourceManager);
+    clang::SourceRange replacementRange = getWriteRange(*Result.SourceManager, sr);
+    ct::Replacement Rep(*Result.SourceManager, replacementRange.getBegin(), exprName.size(), OS.str());
+    clang::FullSourceLoc fullSL(replacementRange.getBegin(), *Result.SourceManager);
     insertReplacement(Rep, fullSL);
     if (!NoWarningsUndocumented) {
       clang::DiagnosticsEngine& DE = getCompilerInstance().getDiagnostics();
@@ -2790,10 +2791,9 @@ bool HipifyAction::dataTypeSelection(const mat::MatchFinder::MatchResult& Result
     const clang::TypeSourceInfo *si = vardecl->getTypeSourceInfo();
     const clang::TypeLoc tloc = si->getTypeLoc();
     const clang::SourceRange sr = tloc.getSourceRange();
-    const clang::SourceLocation sl = sr.getBegin();
-    auto *SM = Result.SourceManager;
-    ct::Replacement Rep(*SM, sl, name.size(), correct_name);
-    clang::FullSourceLoc fullSL(sl, *SM);
+    clang::SourceRange replacementRange = getWriteRange(*Result.SourceManager, sr);
+    ct::Replacement Rep(*Result.SourceManager, replacementRange.getBegin(), name.size(), correct_name);
+    clang::FullSourceLoc fullSL(replacementRange.getBegin(), *Result.SourceManager);
     insertReplacement(Rep, fullSL);
   }
   return false;
