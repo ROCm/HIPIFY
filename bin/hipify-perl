@@ -1398,6 +1398,9 @@ my %removed_funcs = (
 );
 
 my %experimental_funcs = (
+    "cusolverDnXgetrs" => "6.2.0",
+    "cusolverDnXgetrf_bufferSize" => "6.2.0",
+    "cusolverDnXgetrf" => "6.2.0",
     "cusolverDnSetAdvOptions" => "6.2.0",
     "cusolverDnParams_t" => "6.2.0",
     "cusolverDnFunction_t" => "6.2.0",
@@ -1547,6 +1550,9 @@ sub experimentalSubstitutions {
     subst("cusolverDnCreateParams", "hipsolverDnCreateParams", "library");
     subst("cusolverDnDestroyParams", "hipsolverDnDestroyParams", "library");
     subst("cusolverDnSetAdvOptions", "hipsolverDnSetAdvOptions", "library");
+    subst("cusolverDnXgetrf", "hipsolverDnXgetrf", "library");
+    subst("cusolverDnXgetrf_bufferSize", "hipsolverDnXgetrf_bufferSize", "library");
+    subst("cusolverDnXgetrs", "hipsolverDnXgetrs", "library");
     subst("cusolverAlgMode_t", "hipsolverAlgMode_t", "type");
     subst("cusolverDnFunction_t", "hipsolverDnFunction_t", "type");
     subst("cusolverDnParams_t", "hipsolverDnParams_t", "type");
@@ -8343,9 +8349,6 @@ sub warnUnsupportedFunctions {
         "cusolverDnXpotrf",
         "cusolverDnXlarft_bufferSize",
         "cusolverDnXlarft",
-        "cusolverDnXgetrs",
-        "cusolverDnXgetrf_bufferSize",
-        "cusolverDnXgetrf",
         "cusolverDnXgesvdr_bufferSize",
         "cusolverDnXgesvdr",
         "cusolverDnXgesvdp_bufferSize",
