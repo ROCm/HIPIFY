@@ -439,9 +439,9 @@
 |`cusolverDnXgesvdp_bufferSize`|11.1| | | | | | | | | |
 |`cusolverDnXgesvdr`|11.2| | | | | | | | | |
 |`cusolverDnXgesvdr_bufferSize`|11.2| | | | | | | | | |
-|`cusolverDnXgetrf`|11.1| | | | | | | | | |
-|`cusolverDnXgetrf_bufferSize`|11.1| | | | | | | | | |
-|`cusolverDnXgetrs`|11.1| | | | | | | | | |
+|`cusolverDnXgetrf`|11.1| | | |`hipsolverDnXgetrf`|6.2.0| | | |6.2.0|
+|`cusolverDnXgetrf_bufferSize`|11.1| | | |`hipsolverDnXgetrf_bufferSize`|6.2.0| | | |6.2.0|
+|`cusolverDnXgetrs`|11.1| | | |`hipsolverDnXgetrs`|6.2.0| | | |6.2.0|
 |`cusolverDnXlarft`|12.4| | | | | | | | | |
 |`cusolverDnXlarft_bufferSize`|12.4| | | | | | | | | |
 |`cusolverDnXpotrf`|11.1| | | | | | | | | |

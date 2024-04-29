@@ -124,10 +124,23 @@ int main() {
   double *pdh_csrValU = nullptr;
   double dTemp = 0.f;
   void *Workspace = nullptr;
+  void *workOnDevice = nullptr;
+  void *workOnHost = nullptr;
+  void *A = nullptr;
+  void *B = nullptr;
   int *piMp = nullptr;
   int *piMi = nullptr;
   double *pdMx = nullptr;
   size_t lwork_bytes = 0;
+  size_t lworkOnDevice = 0;
+  size_t lworkOnHost = 0;
+
+  int64_t m64 = 0;
+  int64_t n64 = 0;
+  int64_t lda64 = 0;
+  int64_t ldb64 = 0;
+  int64_t devIpiv64 = 0;
+  int64_t nrhs64 = 0;
 
   signed char jobu = 0;
   signed char jobvt = 0;
@@ -147,6 +160,9 @@ int main() {
 
   // CHECK: hipComplex complexA, complexd_A, complexB, complexC, complexD, complexE, complexS, complexU, complexd_U, complexV, complexd_V, complexVT, complexX, complexWorkspace, complexd_Workspace, complexrWork, complexTAU, complexTAUQ, complexTAUP;
   cuComplex complexA, complexd_A, complexB, complexC, complexD, complexE, complexS, complexU, complexd_U, complexV, complexd_V, complexVT, complexX, complexWorkspace, complexd_Workspace, complexrWork, complexTAU, complexTAUQ, complexTAUP;
+
+  // CHECK: hipDataType dataTypeA, dataTypeB, computeType;
+  cudaDataType dataTypeA, dataTypeB, computeType;
 
   // CHECK: hipDoubleComplex** dcomplexAarray = 0;
   // CHECK-NEXT: hipDoubleComplex** dcomplexBarray = 0;
@@ -1693,5 +1709,21 @@ int main() {
   status = cusolverDnSetAdvOptions(solverDnParams, solverDnFunction, solverAlgMode);
 #endif
 
+#if CUDA_VERSION >= 11010
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnXgetrf(cusolverDnHandle_t handle, cusolverDnParams_t params, int64_t m, int64_t n, cudaDataType dataTypeA, void * A, int64_t lda, int64_t * ipiv, cudaDataType computeType, void * bufferOnDevice, size_t workspaceInBytesOnDevice, void * bufferOnHost, size_t workspaceInBytesOnHost, int * info);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnXgetrf(hipsolverDnHandle_t handle, hipsolverDnParams_t params, int64_t m, int64_t n, hipDataType dataTypeA, void* A, int64_t lda, int64_t* devIpiv, hipDataType computeType, void* workOnDevice, size_t lworkOnDevice, void* workOnHost, size_t lworkOnHost, int* devInfo);
+  // CHECK: status = hipsolverDnXgetrf(handle, solverDnParams, m64, n64, dataTypeA, A, lda64, &devIpiv64, computeType, workOnDevice, lworkOnDevice, workOnHost, lworkOnHost, &devInfo);
+  status = cusolverDnXgetrf(handle, solverDnParams, m64, n64, dataTypeA, A, lda64, &devIpiv64, computeType, workOnDevice, lworkOnDevice, workOnHost, lworkOnHost, &devInfo);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnXgetrf_bufferSize(cusolverDnHandle_t handle, cusolverDnParams_t params, int64_t m, int64_t n, cudaDataType dataTypeA, const void * A, int64_t lda, cudaDataType computeType, size_t * workspaceInBytesOnDevice, size_t * workspaceInBytesOnHost);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnXgetrf_bufferSize(hipsolverDnHandle_t handle, hipsolverDnParams_t params, int64_t m, int64_t n, hipDataType dataTypeA, const void* A, int64_t lda, hipDataType computeType, size_t* lworkOnDevice, size_t* lworkOnHost);
+  // CHECK: status = hipsolverDnXgetrf_bufferSize(handle, solverDnParams, m64, n64, dataTypeA, A, lda64, computeType, &lworkOnDevice, &lworkOnDevice);
+  status = cusolverDnXgetrf_bufferSize(handle, solverDnParams, m64, n64, dataTypeA, A, lda64, computeType, &lworkOnDevice, &lworkOnDevice);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnXgetrs(cusolverDnHandle_t handle, cusolverDnParams_t params, cublasOperation_t trans, int64_t n, int64_t nrhs, cudaDataType dataTypeA, const void * A, int64_t lda, const int64_t * ipiv, cudaDataType dataTypeB, void * B, int64_t ldb, int * info);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnXgetrs(hipsolverDnHandle_t handle, hipsolverDnParams_t params, hipsolverOperation_t trans, int64_t n, int64_t nrhs, hipDataType dataTypeA, const void* A, int64_t lda, const int64_t* devIpiv, hipDataType dataTypeB, void* B, int64_t ldb, int* devInfo);
+  // CHECK: status = hipsolverDnXgetrs(handle, solverDnParams, blasOperation, n64, nrhs64, dataTypeA, A, lda64, &devIpiv64, dataTypeB, B, ldb64, &info);
+  status = cusolverDnXgetrs(handle, solverDnParams, blasOperation, n64, nrhs64, dataTypeA, A, lda64, &devIpiv64, dataTypeB, B, ldb64, &info);
+#endif
   return 0;
 }
