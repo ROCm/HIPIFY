@@ -8,6 +8,11 @@
 #include "cusolverRf.h"
 #include "cusolverSp.h"
 
+#if defined(_WIN32) && CUDA_VERSION < 9000
+  typedef signed   __int64 int64_t;
+  typedef unsigned __int64 uint64_t;
+#endif
+
 int main() {
   printf("19. cuSOLVER API to hipSOLVER API synthetic test\n");
 
@@ -160,9 +165,6 @@ int main() {
 
   // CHECK: hipComplex complexA, complexd_A, complexB, complexC, complexD, complexE, complexS, complexU, complexd_U, complexV, complexd_V, complexVT, complexX, complexWorkspace, complexd_Workspace, complexrWork, complexTAU, complexTAUQ, complexTAUP;
   cuComplex complexA, complexd_A, complexB, complexC, complexD, complexE, complexS, complexU, complexd_U, complexV, complexd_V, complexVT, complexX, complexWorkspace, complexd_Workspace, complexrWork, complexTAU, complexTAUQ, complexTAUP;
-
-  // CHECK: hipDataType dataTypeA, dataTypeB, computeType;
-  cudaDataType dataTypeA, dataTypeB, computeType;
 
   // CHECK: hipDoubleComplex** dcomplexAarray = 0;
   // CHECK-NEXT: hipDoubleComplex** dcomplexBarray = 0;
@@ -749,6 +751,9 @@ int main() {
   status = cusolverSpDcsrlsvcholHost(SpHandle_t, m, nnzA, MatDescr_t, &dcsrVal, &icsrRowPtr, &icsrColInd, &dB, dtol, ireorder, &dX, &isingularity);
 
 #if CUDA_VERSION >= 8000
+  // CHECK: hipDataType dataTypeA, dataTypeB, computeType;
+  cudaDataType dataTypeA, dataTypeB, computeType;
+
   // CHECK: hipsolverEigType_t eigType;
   // CHECK-NEXT: hipsolverEigType_t EIG_TYPE_1 = HIPSOLVER_EIG_TYPE_1;
   // CHECK-NEXT: hipsolverEigType_t EIG_TYPE_2 = HIPSOLVER_EIG_TYPE_2;
