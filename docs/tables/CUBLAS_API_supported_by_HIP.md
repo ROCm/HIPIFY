@@ -1,6 +1,6 @@
 # CUBLAS API supported by HIP
 
-## **2. CUBLAS Data types**
+## **1. CUBLAS Data types**
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
@@ -104,7 +104,7 @@
 |`cublasStatus`| | | | |`hipblasStatus_t`|1.8.2| | | | |
 |`cublasStatus_t`| | | | |`hipblasStatus_t`|1.8.2| | | | |
 
-## **3. CUDA Library Data types**
+## **2. CUDA Library Data types**
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
@@ -141,6 +141,13 @@
 |`cublasDataType_t`|7.5| | | |`hipDataType`|5.7.0| | | | |
 |`cudaDataType`|8.0| | | |`hipDataType`|5.7.0| | | | |
 |`cudaDataType_t`|8.0| | | |`hipDataType`|5.7.0| | | | |
+
+## **3. CUBLASLt Data types**
+
+|**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|
+|:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
+|`cublasLtContext`|10.1| | | | | | | | | |
+|`cublasLtHandle_t`|10.1| | | |`hipblasLtHandle_t`|5.5.0| | | | |
 
 ## **4. CUBLAS Helper Function Reference**
 
@@ -1011,6 +1018,10 @@
 |`cublasZtrsmBatched`| | | | |`hipblasZtrsmBatched_v2`|6.0.0| | | | |
 |`cublasZtrsmBatched_64`|12.0| | | | | | | | | |
 |`cublasZtrttp`| | | | | | | | | | |
+
+## **9. BLASLt Function Reference**
+
+Unsupported
 
 
 \*A - Added; D - Deprecated; C - Changed; R - Removed; E - Experimental
