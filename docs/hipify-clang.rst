@@ -15,7 +15,7 @@ matchers. After applying all the matchers, the output HIP source is produced.
 
 **Advantages:**
 
-- ``hipify-clang`` is a translator. Any complex constructs are parsed successfully or else an error is reported.
+- ``hipify-clang`` is a translator. It parses complex constructs successfully or else reports an error.
 - It supports Clang options such as
   `-I <https://clang.llvm.org/docs/ClangCommandLineReference.html#include-path-management>`_,
   `-D <https://clang.llvm.org/docs/ClangCommandLineReference.html#preprocessor-options>`_, and
@@ -49,10 +49,10 @@ Dependencies
     - Latest supported CUDA version
     - Windows
     - Linux
-  * - `3.8.0 <http://releases.llvm.org/download.html#3.8.0>`_:sup:`1`,
-      `3.8.1 <http://releases.llvm.org/download.html#3.8.1>`_:sup:`1`,
-      `3.9.0 <http://releases.llvm.org/download.html#3.9.0>`_:sup:`1`,
-      `3.9.1 <http://releases.llvm.org/download.html#3.9.1>`_:sup:`1`
+  * - `3.8.0 <http://releases.llvm.org/download.html#3.8.0>`_ :sup:`1`,
+      `3.8.1 <http://releases.llvm.org/download.html#3.8.1>`_ :sup:`1`,
+      `3.9.0 <http://releases.llvm.org/download.html#3.9.0>`_ :sup:`1`,
+      `3.9.1 <http://releases.llvm.org/download.html#3.9.1>`_ :sup:`1`
     - `7.5 <https://developer.nvidia.com/cuda-75-downloads-archive>`_
     - ✅
     - ✅
@@ -176,10 +176,10 @@ Dependencies
       `18.1.1 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-18.1.1>`_,
       `18.1.2 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-18.1.2>`_,
       `18.1.3 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-18.1.3>`_,
-      `18.1.4 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-18.1.4>`_:sup:`4`
-    - `12.3.2 <https://developer.nvidia.com/cuda-downloads>`_:sup:`4`
-    - **LATEST STABLE CONFIG**
-    - **LATEST STABLE CONFIG**
+      `18.1.4 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-18.1.4>`_ :sup:`4`
+    - `12.3.2 <https://developer.nvidia.com/cuda-downloads>`_ :sup:`4`
+    - **Latest stable config**
+    - **Latest stable config**
   * - `19.0.0 git <https://github.com/llvm/llvm-project>`_
     - `12.4.1 <https://developer.nvidia.com/cuda-downloads>`_
     - ✅
@@ -192,7 +192,7 @@ Dependencies
 .. |patch for 7.1.0| replace::
   :download:`patch for 7.1.0 <./data/patches/patch_for_clang_7.1.0_bug_38811.zip>`
 .. |patch for 8.0.0| replace::
-  :donwload:`patch for 8.0.0 <./data/patches/patch_for_clang_8.0.0_bug_38811.zip>`
+  :download:`patch for 8.0.0 <./data/patches/patch_for_clang_8.0.0_bug_38811.zip>`
 .. |patch for 8.0.1| replace::
   :download:`patch for 8.0.1 <./data/patches/patch_for_clang_8.0.1_bug_38811.zip>`
 .. |patch for 10.0.0| replace::
@@ -357,7 +357,7 @@ what is not, and the hipification statistics:
     cudaSuccess: 1
     cudaThreadSynchronize: 1
 
-.. code:: cpp
+.. code-block:: cpp
 
   hipify-clang intro.cu -cuda-path="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.3.2" --print-stats-csv
 
@@ -365,6 +365,7 @@ This generates ``intro.cu.csv`` file with statistics:
 
 .. image:: ./data/csv_statistics.png
   :alt: list of stats
+
 
 In case of multiple source files, the statistics are provided per file and in total.
 
@@ -375,7 +376,7 @@ Building hipify-clang
 
 After cloning the HIPIFY repository (``git clone https://github.com/ROCm/HIPIFY.git``), run the following commands from the HIPIFY root folder.
 
-.. code:: bash
+.. code-block:: bash
 
   cd .. \
   mkdir build dist \
@@ -390,7 +391,7 @@ After cloning the HIPIFY repository (``git clone https://github.com/ROCm/HIPIFY.
 
 To ensure LLVM being found or in case of multiple LLVM instances, specify the path to the root folder containing the LLVM distributive:
 
-.. code:: bash
+.. code-block:: bash
 
   -DCMAKE_PREFIX_PATH=/usr/llvm/18.1.4/dist
 
@@ -427,201 +428,201 @@ LLVM <= 9.0.1
 
 2. Build `LLVM+Clang <http://releases.llvm.org/9.0.0/docs/CMake.html>`_:
 
-   .. code:: bash
+.. code-block:: bash
 
-      cd .. \
-      mkdir build dist \
-      cd build
+  cd .. \
+  mkdir build dist \
+  cd build
 
-   **Linux**:
+**Linux**:
 
-   .. code:: bash
+.. code-block:: bash
 
-      cmake \
-        -DCMAKE_INSTALL_PREFIX=../dist \
-        -DLLVM_SOURCE_DIR=../llvm \
-        -DLLVM_TARGETS_TO_BUILD="X86;NVPTX" \
-        -DLLVM_INCLUDE_TESTS=OFF \
-        -DCMAKE_BUILD_TYPE=Release \
-        ../llvm
-      make -j install
+  cmake \
+    -DCMAKE_INSTALL_PREFIX=../dist \
+    -DLLVM_SOURCE_DIR=../llvm \
+    -DLLVM_TARGETS_TO_BUILD="X86;NVPTX" \
+    -DLLVM_INCLUDE_TESTS=OFF \
+    -DCMAKE_BUILD_TYPE=Release \
+    ../llvm
+  make -j install
 
-   **Windows**:
+**Windows**:
 
-   .. code:: shell
+.. code-block:: shell
 
-      cmake \
-        -G "Visual Studio 16 2019" \
-        -A x64 \
-        -Thost=x64 \
-        -DCMAKE_INSTALL_PREFIX=../dist \
-        -DLLVM_SOURCE_DIR=../llvm \
-        -DLLVM_TARGETS_TO_BUILD="NVPTX" \
-        -DLLVM_INCLUDE_TESTS=OFF \
-        -DCMAKE_BUILD_TYPE=Release \
-        ../llvm
+  cmake \
+    -G "Visual Studio 16 2019" \
+    -A x64 \
+    -Thost=x64 \
+    -DCMAKE_INSTALL_PREFIX=../dist \
+    -DLLVM_SOURCE_DIR=../llvm \
+    -DLLVM_TARGETS_TO_BUILD="NVPTX" \
+    -DLLVM_INCLUDE_TESTS=OFF \
+    -DCMAKE_BUILD_TYPE=Release \
+    ../llvm
 
 3. Run ``Visual Studio 16 2019``, open the generated ``LLVM.sln``, build all, and build the ``INSTALL``
    project.
 
 LLVM >= 10.0.0
----------------------------------------------------------------------
+-----------------
 
 1. Download `LLVM project <https://github.com/llvm/llvm-project/releases/tag/llvmorg-18.1.4>`_ sources.
 
 2. Build `LLVM project <http://llvm.org/docs/CMake.html>`_:
 
-   .. code:: bash
+.. code-block:: bash
 
-      cd .. \
-      mkdir build dist \
-      cd build
+  cd .. \
+  mkdir build dist \
+  cd build
 
-   **Linux**:
+**Linux**:
 
-   .. code:: bash
+.. code-block:: bash
 
-      cmake \
-        -DCMAKE_INSTALL_PREFIX=../dist \
-        -DLLVM_TARGETS_TO_BUILD="" \
-        -DLLVM_ENABLE_PROJECTS="clang" \
-        -DLLVM_INCLUDE_TESTS=OFF \
-        -DCMAKE_BUILD_TYPE=Release \
-        ../llvm-project/llvm
-      make -j install
+  cmake \
+    -DCMAKE_INSTALL_PREFIX=../dist \
+    -DLLVM_TARGETS_TO_BUILD="" \
+    -DLLVM_ENABLE_PROJECTS="clang" \
+    -DLLVM_INCLUDE_TESTS=OFF \
+    -DCMAKE_BUILD_TYPE=Release \
+    ../llvm-project/llvm
+  make -j install
 
-   **Windows**:
+**Windows**:
 
-   .. code:: shell
+.. code-block:: shell
 
-      cmake \
-        -G "Visual Studio 17 2022" \
-        -A x64 \
-        -Thost=x64 \
-        -DCMAKE_INSTALL_PREFIX=../dist \
-        -DLLVM_TARGETS_TO_BUILD="" \
-        -DLLVM_ENABLE_PROJECTS="clang" \
-        -DLLVM_INCLUDE_TESTS=OFF \
-        -DCMAKE_BUILD_TYPE=Release \
-        ../llvm-project/llvm
+  cmake \
+    -G "Visual Studio 17 2022" \
+    -A x64 \
+    -Thost=x64 \
+    -DCMAKE_INSTALL_PREFIX=../dist \
+    -DLLVM_TARGETS_TO_BUILD="" \
+    -DLLVM_ENABLE_PROJECTS="clang" \
+    -DLLVM_INCLUDE_TESTS=OFF \
+    -DCMAKE_BUILD_TYPE=Release \
+    ../llvm-project/llvm
 
-   Run ``Visual Studio 17 2022``, open the generated ``LLVM.sln``, build all, build project ``INSTALL``.
+Run ``Visual Studio 17 2022``, open the generated ``LLVM.sln``, build all, build project ``INSTALL``.
 
 3. Install `CUDA <https://developer.nvidia.com/cuda-toolkit-archive>`_ version 7.0 or
    greater.
 
-   * In case of multiple CUDA installations, specify the particular version using ``DCUDA_TOOLKIT_ROOT_DIR`` option:
+  - In case of multiple CUDA installations, specify the particular version using ``DCUDA_TOOLKIT_ROOT_DIR`` option:
 
-     **Linux**:
+  **Linux**:
 
-     .. code:: bash
+  .. code-block:: bash
 
-        -DCUDA_TOOLKIT_ROOT_DIR=/usr/include
+    -DCUDA_TOOLKIT_ROOT_DIR=/usr/include
 
-     **Windows**:
+  **Windows**:
 
-     .. code:: shell
+  .. code-block:: shell
 
-        -DCUDA_TOOLKIT_ROOT_DIR="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.3"
+    -DCUDA_TOOLKIT_ROOT_DIR="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.3"
 
-        -DCUDA_SDK_ROOT_DIR="C:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.3"
+    -DCUDA_SDK_ROOT_DIR="C:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.3"
 
 4. Install `cuDNN <https://developer.nvidia.com/rdp/cudnn-archive>`_ belonging to the version corresponding
    to the CUDA version:
 
-   * To specify the path to `cuDNN <https://developer.nvidia.com/cudnn-downloads>`_, use the ``CUDA_DNN_ROOT_DIR`` option:
+  - To specify the path to `cuDNN <https://developer.nvidia.com/cudnn-downloads>`_, use the ``CUDA_DNN_ROOT_DIR`` option:
 
-     **Linux**:
+  **Linux**:
 
-     .. code:: bash
+  .. code-block:: bash
 
-        -DCUDA_DNN_ROOT_DIR=/usr/include
+    -DCUDA_DNN_ROOT_DIR=/usr/include
 
-     **Windows**:
+  **Windows**:
 
-     .. code:: shell
+  .. code-block:: shell
 
-        -DCUDA_DNN_ROOT_DIR=D:/CUDA/cuDNN/9.1.0
+    -DCUDA_DNN_ROOT_DIR=D:/CUDA/cuDNN/9.1.0
 
 5. Install `CUB <https://github.com/nvidia/cub>`_ belonging to the version corresponding to the CUDA version:
    
-   * To specify the path to CUB, specify using the ``CUDA_CUB_ROOT_DIR`` option:
+  - To specify the path to CUB, specify using the ``CUDA_CUB_ROOT_DIR`` option:
 
-     **Linux**:
+  **Linux**:
 
-     .. code:: bash
+  .. code-block:: bash
 
-        -DCUDA_CUB_ROOT_DIR=/srv/git/CUB
+    -DCUDA_CUB_ROOT_DIR=/srv/git/CUB
 
-     **Windows**:
+  **Windows**:
 
-     .. code:: shell
+  .. code-block:: shell
 
-        -DCUDA_CUB_ROOT_DIR=D:/CUDA/CUB/cub-2.1.0
+    -DCUDA_CUB_ROOT_DIR=D:/CUDA/CUB/cub-2.1.0
 
 6. Install `Python <https://www.python.org/downloads>`_ version 2.7 or greater.
 
 7. Install ``lit`` and ``FileCheck``; these are distributed with LLVM.
 
-   * Install ``lit`` into ``Python``:
+  - Install ``lit`` into ``Python``:
 
-     **Linux**:
+  **Linux**:
 
-     .. code:: bash
+  .. code-block:: bash
 
-        python /usr/llvm/18.1.4/llvm-project/llvm/utils/lit/setup.py install
+    python /usr/llvm/18.1.4/llvm-project/llvm/utils/lit/setup.py install
+      
+  **Windows**:
 
-     **Windows**:
+  .. code-block:: shell
 
-     .. code:: shell
+    python D:/LLVM/18.1.4/llvm-project/llvm/utils/lit/setup.py install
 
-        python D:/LLVM/18.1.4/llvm-project/llvm/utils/lit/setup.py install
+  In case of errors similar to ``ModuleNotFoundError: No module named 'setuptools'``, upgrade the
+  ``setuptools`` package:
 
-     In case of errors similar to ``ModuleNotFoundError: No module named 'setuptools'``, upgrade the
-     ``setuptools`` package:
+  .. code-block:: bash
 
-     .. code:: shell
+    python -m pip install --upgrade pip setuptools
+      
+  - Starting with LLVM 6.0.1, specify the path to the ``llvm-lit`` Python script using the
+    ``LLVM_EXTERNAL_LIT`` option:
 
-        ``python -m pip install --upgrade pip setuptools``
+  **Linux**:
 
-   * Starting with LLVM 6.0.1, specify the path to the ``llvm-lit`` Python script using the
-     ``LLVM_EXTERNAL_LIT`` option:
+  .. code-block:: bash
 
-     **Linux**:
+    -DLLVM_EXTERNAL_LIT=/usr/llvm/18.1.4/build/bin/llvm-lit
 
-     .. code:: bash
+  **Windows**:
 
-        -DLLVM_EXTERNAL_LIT=/usr/llvm/18.1.4/build/bin/llvm-lit
+  .. code-block:: shell
 
-     **Windows**:
+    -DLLVM_EXTERNAL_LIT=D:/LLVM/18.1.4/build/Release/bin/llvm-lit.py
 
-     .. code:: shell
+  - ``FileCheck``:
 
-        -DLLVM_EXTERNAL_LIT=D:/LLVM/18.1.4/build/Release/bin/llvm-lit.py
+  **Linux**:
 
-   * ``FileCheck``:
+  Copy from ``/usr/llvm/18.1.4/build/bin/`` to ``CMAKE_INSTALL_PREFIX/dist/bin``.
 
-     **Linux**:
+  **Windows**:
 
-     Copy from ``/usr/llvm/18.1.4/build/bin/`` to ``CMAKE_INSTALL_PREFIX/dist/bin``.
+  Copy from ``D:/LLVM/18.1.4/build/Release/bin`` to ``CMAKE_INSTALL_PREFIX/dist/bin``.
 
-     **Windows**:
-
-     Copy from ``D:/LLVM/18.1.4/build/Release/bin`` to ``CMAKE_INSTALL_PREFIX/dist/bin``.
-
-     Alternatively, specify the path to ``FileCheck`` in the ``CMAKE_INSTALL_PREFIX`` option.
+  Alternatively, specify the path to ``FileCheck`` in the ``CMAKE_INSTALL_PREFIX`` option.
 
 8. To run OpenGL tests successfully on:
 
-   **Linux**:
+**Linux**:
 
-   Install GL headers.
+Install GL headers.
 
-   On Ubuntu, use: ``sudo apt-get install mesa-common-dev``
+On Ubuntu, use: ``sudo apt-get install mesa-common-dev``
 
-   **Windows**:
+**Windows**:
 
-   No installation required. All the required headers are shipped with the Windows SDK.
+No installation required. All the required headers are shipped with the Windows SDK.
 
 9. Set the ``HIPIFY_CLANG_TESTS`` option to ``ON``: ``-DHIPIFY_CLANG_TESTS=ON``
 
@@ -647,7 +648,7 @@ Recommended build system requirements:
 
 Here's how to build ``hipify-clang`` with testing support on ``Ubuntu 23.10.01``:
 
-.. code:: bash
+.. code-block:: bash
 
   cmake
   -DHIPIFY_CLANG_TESTS=ON \
@@ -662,7 +663,7 @@ Here's how to build ``hipify-clang`` with testing support on ``Ubuntu 23.10.01``
 
 The corresponding successful output is:
 
-.. code:: shell
+.. code-block:: shell
 
   -- The C compiler identification is GNU 13.2.0
   -- The CXX compiler identification is GNU 13.2.0
@@ -709,13 +710,13 @@ The corresponding successful output is:
   -- Generating done (0.0s)
   -- Build files have been written to: /usr/hipify/build
 
-.. code:: shell
+.. code-block:: shell
 
   make test-hipify
 
 The corresponding successful output is:
 
-.. code:: shell
+.. code-block:: shell
 
   Running HIPify regression tests
   ===============================================================
@@ -799,7 +800,7 @@ Tested configurations:
   * - ``14.0.0 - 14.0.6``
     - ``7.0 - 11.7.1``
     - ``8.0.5  - 8.4.1``
-    - ``2017.15.9.57,``:sup:`5` ``2019.16.11.17, 2022.17.2.6``
+    - ``2017.15.9.57,`` :sup:`5` ``2019.16.11.17, 2022.17.2.6``
     - ``3.24.0``
     - ``3.10.6``
   * - ``15.0.0 - 15.0.7``
@@ -814,7 +815,7 @@ Tested configurations:
     - ``2019.16.11.29, 2022.17.7.1``
     - ``3.27.3``
     - ``3.11.4``
-  * - ``17.0.1``:sup:`6` - ``18.1.4``:sup:`7`
+  * - ``17.0.1`` :sup:`6` - ``18.1.4`` :sup:`7`
     - ``7.0 - 12.3.2``
     - ``8.0.5  - 9.1.0``
     - ``2019.16.11.34, 2022.17.9.5``
@@ -841,7 +842,7 @@ You can also build LLVM \< 14.x.x correctly using Visual Studio 2017 without the
 
 Building with testing support using ``Visual Studio 17 2022`` on ``Windows 11``:
 
-.. code:: shell
+.. code-block:: shell
 
   cmake
   -G "Visual Studio 17 2022" \
@@ -860,7 +861,7 @@ Building with testing support using ``Visual Studio 17 2022`` on ``Windows 11``:
 
 The corresponding successful output is:
 
-.. code:: shell
+.. code-block:: shell
 
   -- Selecting Windows SDK version 10.0.22621.0 to target Windows 10.0.22631.
   -- The C compiler identification is MSVC 19.39.33523.0
