@@ -27,8 +27,9 @@ int main() {
   void* image = nullptr;
   std::string name = "str";
   uint32_t u_value = 0;
-  float ms = 0;
-  float ms_2 = 0;
+  float ms = 0.0f;
+  float ms_2 = 0.0f;
+  float fBorderColor = 0.0f;
   int* value = 0;
   int* value_2 = 0;
   GLuint gl_uint = 0;
@@ -973,6 +974,11 @@ int main() {
   // CHECK: result = hipPointerSetAttribute(image, pointer_attribute, deviceptr);
   result = cuPointerSetAttribute(image, pointer_attribute, deviceptr);
 
+  // CUDA: __CUDA_DEPRECATED CUresult CUDAAPI cuTexRefGetArray(CUarray *phArray, CUtexref hTexRef);
+  // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipTexRefGetArray(hipArray_t* pArray, const textureReference* texRef);
+  // CHECK: result = hipTexRefGetArray(&array_, texref);
+  result = cuTexRefGetArray(&array_, texref);
+
 #if CUDA_VERSION >= 8000
   // CHECK: hipMemRangeAttribute MemoryRangeAttribute;
   // CHECK-NEXT: hipMemoryAdvise MemoryAdvise;
@@ -1011,8 +1017,13 @@ int main() {
 
   // CUDA: __CUDA_DEPRECATED CUresult CUDAAPI cuTexRefSetBorderColor(CUtexref hTexRef, float *pBorderColor);
   // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipTexRefSetBorderColor(textureReference* texRef, float* pBorderColor);
-  // CHECK: result = hipTexRefSetBorderColor(texref, &ms);
-  result = cuTexRefSetBorderColor(texref, &ms);
+  // CHECK: result = hipTexRefSetBorderColor(texref, &fBorderColor);
+  result = cuTexRefSetBorderColor(texref, &fBorderColor);
+
+  // CUDA: __CUDA_DEPRECATED CUresult CUDAAPI cuTexRefGetBorderColor(float *pBorderColor, CUtexref hTexRef);
+  // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipTexRefGetBorderColor(float* pBorderColor, const textureReference* texRef);
+  // CHECK: result = hipTexRefGetBorderColor(&fBorderColor, texref);
+  result = cuTexRefGetBorderColor(&fBorderColor, texref);
 
   // CHECK: hipDeviceP2PAttr deviceP2PAttribute;
   CUdevice_P2PAttribute deviceP2PAttribute;
@@ -1055,7 +1066,7 @@ int main() {
   // CHECK-NEXT: hipGraphNode_t graphNode, graphNode2;
   // CHECK-NEXT: const hipGraphNode_t *pGraphNode = nullptr;
   // CHECK-NEXT: hipKernelNodeParams KERNEL_NODE_PARAMS;
-  // CHECK-NEXT: hipMemsetParams MEMSET_NODE_PARAMS;
+  // CHECK-NEXT: HIP_MEMSET_NODE_PARAMS MEMSET_NODE_PARAMS;
   // CHECK-NEXT: hipGraphExec_t graphExec;
   // CHECK-NEXT: hipExternalMemory_t externalMemory;
   // CHECK-NEXT: hipExternalSemaphore_t externalSemaphore;
@@ -1703,6 +1714,11 @@ int main() {
   result = cuGraphReleaseUserObject(graph, userObject, count);
 
   // CUDA: CUresult CUDAAPI cuGraphDebugDotPrint(CUgraph hGraph, const char *path, unsigned int flags);
+  // HIP: hipError_t hipGraphDebugDotPrint(hipGraph_t graph, const char* path, unsigned int flags);
+  // CHECK: result = hipGraphDebugDotPrint(graph, name.c_str(), flags);
+  result = cuGraphDebugDotPrint(graph, name.c_str(), flags);
+
+  // CUDA: CUresult CUDAAPI cuGetProcAddress(const char *symbol, void **pfn, int cudaVersion, cuuint64_t flags, CUdriverProcAddressQueryResult *symbolStatus);
   // HIP: hipError_t hipGraphDebugDotPrint(hipGraph_t graph, const char* path, unsigned int flags);
   // CHECK: result = hipGraphDebugDotPrint(graph, name.c_str(), flags);
   result = cuGraphDebugDotPrint(graph, name.c_str(), flags);

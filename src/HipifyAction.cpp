@@ -2182,7 +2182,7 @@ clang::SourceLocation HipifyAction::GetSubstrLocation(const std::string &str, co
 void HipifyAction::RewriteToken(const clang::Token &t) {
   if (!HipifyAMAP) {
     clang::SourceRange sr(t.getLocation());
-    for (const auto& skipped : SkippedSourceRanges) {
+    for (const auto &skipped : SkippedSourceRanges) {
       if (skipped.fullyContains(sr))
         return;
     }
@@ -2218,7 +2218,7 @@ void HipifyAction::FindAndReplace(StringRef name,
     DE.Report(sl, ID) << found->first;
   }
   // Warn about the unsupported experimental identifier.
-  if (Statistics::isHipExperimental(found->second) &&!Experimental) {
+  if (Statistics::isHipExperimental(found->second) && !Experimental) {
     std::string sWarn;
     Statistics::isToRoc(found->second) ? sWarn = sROC : sWarn = sHIP;
     sWarn = "" + sWarn;
@@ -2447,9 +2447,9 @@ bool HipifyAction::cudaLaunchKernel(const mat::MatchFinder::MatchResult &Result)
   clang::SmallString<40> XStr;
   llvm::raw_svector_ostream OS(XStr);
   clang::LangOptions DefaultLangOptions;
-  auto *SM = Result.SourceManager;
+  auto &SM = *Result.SourceManager;
   clang::SourceRange sr = calleeExpr->getSourceRange();
-  std::string kern = readSourceText(*SM, sr).str();
+  std::string kern = readSourceText(SM, sr).str();
   OS << sHipLaunchKernelGGL << "(";
   if (caleeDecl->isTemplateInstantiation()) {
     OS << sHIP_KERNEL_NAME << "(";
@@ -2473,13 +2473,13 @@ bool HipifyAction::cudaLaunchKernel(const mat::MatchFinder::MatchResult &Result)
   // Next up are the four kernel configuration parameters, the last two of which are optional and default to zero.
   // Copy the two dimensional arguments verbatim.
   for (unsigned int i = 0; i < 2; ++i) {
-    const std::string sArg = readSourceText(*SM, config->getArg(i)->getSourceRange()).str();
+    const std::string sArg = readSourceText(SM, config->getArg(i)->getSourceRange()).str();
     bool bDim3 = std::equal(sDim3.begin(), sDim3.end(), sArg.c_str());
     OS << (bDim3 ? "" : sDim3) << sArg << (bDim3 ? "" : ")") << ", ";
   }
   // The stream/memory arguments default to zero if omitted.
-  OS << stringifyZeroDefaultedArg(*SM, config->getArg(2)) << ", ";
-  OS << stringifyZeroDefaultedArg(*SM, config->getArg(3));
+  OS << stringifyZeroDefaultedArg(SM, config->getArg(2)) << ", ";
+  OS << stringifyZeroDefaultedArg(SM, config->getArg(3));
   // If there are ordinary arguments to the kernel, just copy them verbatim into our new call.
   int numArgs = launchKernel->getNumArgs();
   if (numArgs > 0) {
@@ -2488,21 +2488,21 @@ bool HipifyAction::cudaLaunchKernel(const mat::MatchFinder::MatchResult &Result)
     clang::SourceLocation argStart = llcompat::getBeginLoc(launchKernel->getArg(0));
     // End of the last argument.
     clang::SourceLocation argEnd = llcompat::getEndLoc(launchKernel->getArg(numArgs - 1));
-    OS << readSourceText(*SM, {argStart, argEnd});
+    OS << readSourceText(SM, {argStart, argEnd});
   }
   OS << ")";
   clang::SourceLocation launchKernelExprLocBeg = launchKernel->getExprLoc();
-  clang::SourceLocation launchKernelExprLocEnd = launchKernelExprLocBeg.isMacroID() ? llcompat::getEndOfExpansionRangeForLoc(*SM, launchKernelExprLocBeg) : llcompat::getEndLoc(launchKernel);
+  clang::SourceLocation launchKernelExprLocEnd = launchKernelExprLocBeg.isMacroID() ? llcompat::getEndOfExpansionRangeForLoc(SM, launchKernelExprLocBeg) : llcompat::getEndLoc(launchKernel);
   clang::SourceLocation launchKernelEnd = llcompat::getEndLoc(launchKernel);
-  clang::BeforeThanCompare<clang::SourceLocation> isBefore(*SM);
+  clang::BeforeThanCompare<clang::SourceLocation> isBefore(SM);
   launchKernelExprLocEnd = isBefore(launchKernelEnd, launchKernelExprLocEnd) ? launchKernelExprLocEnd : launchKernelEnd;
-  clang::SourceRange replacementRange = getWriteRange(*SM, {launchKernelExprLocBeg, launchKernelExprLocEnd});
+  clang::SourceRange replacementRange = getWriteRange(SM, {launchKernelExprLocBeg, launchKernelExprLocEnd});
   clang::SourceLocation launchBeg = replacementRange.getBegin();
   clang::SourceLocation launchEnd = replacementRange.getEnd();
   if (isBefore(launchBeg, launchEnd)) {
-    size_t length = SM->getCharacterData(clang::Lexer::getLocForEndOfToken(launchEnd, 0, *SM, DefaultLangOptions)) - SM->getCharacterData(launchBeg);
-    ct::Replacement Rep(*SM, launchBeg, length, OS.str());
-    clang::FullSourceLoc fullSL(launchBeg, *SM);
+    size_t length = SM.getCharacterData(clang::Lexer::getLocForEndOfToken(launchEnd, 0, SM, DefaultLangOptions)) - SM.getCharacterData(launchBeg);
+    ct::Replacement Rep(SM, launchBeg, length, OS.str());
+    clang::FullSourceLoc fullSL(launchBeg, SM);
     insertReplacement(Rep, fullSL);
     hipCounter counter = {sHipLaunchKernelGGL, "", ConvTypes::CONV_KERNEL_LAUNCH, ApiTypes::API_RUNTIME};
     Statistics::current().incrementCounter(counter, sCudaLaunchKernel.str());
@@ -2595,12 +2595,12 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
         unsigned int argNum = c.first;
         clang::SmallString<40> XStr;
         llvm::raw_svector_ostream OS(XStr);
-        auto *SM = Result.SourceManager;
+        auto &SM = *Result.SourceManager;
         clang::SourceRange sr, replacementRange;
         clang::SourceLocation s, e;
         if (argNum < call->getNumArgs()) {
           sr = call->getArg(argNum)->getSourceRange();
-          replacementRange = getWriteRange(*SM, { sr.getBegin(), sr.getEnd() });
+          replacementRange = getWriteRange(SM, { sr.getBegin(), sr.getEnd() });
           s = replacementRange.getBegin();
           e = replacementRange.getEnd();
         } else {
@@ -2616,13 +2616,13 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
             else {
               e = call->getEndLoc();
               if (call->getNumArgs() > 1) {
-                auto prevComma = clang::Lexer::findNextToken(call->getArg(argNum - 1)->getSourceRange().getEnd(), *SM, DefaultLangOptions);
+                auto prevComma = clang::Lexer::findNextToken(call->getArg(argNum - 1)->getSourceRange().getEnd(), SM, DefaultLangOptions);
                 if (!prevComma)
                   s = call->getEndLoc();
                 s = prevComma->getLocation();
               }
             }
-            length = SM->getCharacterData(e) - SM->getCharacterData(s);
+            length = SM.getCharacterData(e) - SM.getCharacterData(s);
             break;
           }
           case e_move_argument:
@@ -2636,7 +2636,7 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
               sr = call->getArg(argNum + c.second.numberToMoveOrCopy - 1)->getSourceRange();
               sr.setBegin(call->getArg(argNum)->getBeginLoc());
             }
-            sArg = readSourceText(*SM, sr).str();
+            sArg = readSourceText(SM, sr).str();
             if (c.second.moveOrCopyTo < call->getNumArgs())
               dst_OS << sArg << ", ";
             else
@@ -2646,15 +2646,15 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
               dst_s = call->getArg(c.second.moveOrCopyTo)->getBeginLoc();
             else
               dst_s = call->getEndLoc();
-            ct::Replacement dst_Rep(*SM, dst_s, 0, dst_OS.str());
-            clang::FullSourceLoc dst_fullSL(dst_s, *SM);
+            ct::Replacement dst_Rep(SM, dst_s, 0, dst_OS.str());
+            clang::FullSourceLoc dst_fullSL(dst_s, SM);
             insertReplacement(dst_Rep, dst_fullSL);
             OS << "";
             if (argNum < call->getNumArgs())
               e = call->getArg(argNum + c.second.numberToMoveOrCopy)->getBeginLoc();
             else
               e = call->getEndLoc();
-            length = SM->getCharacterData(e) - SM->getCharacterData(s);
+            length = SM.getCharacterData(e) - SM.getCharacterData(s);
             break;
           }
           case e_add_const_argument:
@@ -2671,7 +2671,7 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
               continue;
             sr = call->getArg(argNum)->getSourceRange();
             sr.setBegin(call->getArg(argNum)->getBeginLoc());
-            std::string sArg = readSourceText(*SM, sr).str();
+            std::string sArg = readSourceText(SM, sr).str();
             if (c.second.moveOrCopyTo < call->getNumArgs()) {
               OS << sArg << ", ";
               s = call->getArg(c.second.moveOrCopyTo)->getBeginLoc();
@@ -2687,16 +2687,16 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
             if (argNum >= call->getNumArgs())
               break;
             OS << c.second.constValToAddOrReplace;
-            length = SM->getCharacterData(clang::Lexer::getLocForEndOfToken(e, 0, *SM, DefaultLangOptions)) - SM->getCharacterData(s);
+            length = SM.getCharacterData(clang::Lexer::getLocForEndOfToken(e, 0, SM, DefaultLangOptions)) - SM.getCharacterData(s);
             break;
           }
           default:
-            OS << getCastType(c.second.castType) << "(" << readSourceText(*SM, sr) << ")";
-            length = SM->getCharacterData(clang::Lexer::getLocForEndOfToken(e, 0, *SM, DefaultLangOptions)) - SM->getCharacterData(s);
+            OS << getCastType(c.second.castType) << "(" << readSourceText(SM, sr) << ")";
+            length = SM.getCharacterData(clang::Lexer::getLocForEndOfToken(e, 0, SM, DefaultLangOptions)) - SM.getCharacterData(s);
             break;
         }
-        ct::Replacement Rep(*SM, s, length, OS.str());
-        clang::FullSourceLoc fullSL(s, *SM);
+        ct::Replacement Rep(SM, s, length, OS.str());
+        clang::FullSourceLoc fullSL(s, SM);
         insertReplacement(Rep, fullSL);
         switch (c.second.castWarn) {
           case cw_DataLoss: {
@@ -2716,9 +2716,9 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
 }
 
 bool HipifyAction::cudaOverloadedHostFuncCall(const mat::MatchFinder::MatchResult& Result) {
-  if (auto* call = Result.Nodes.getNodeAs<clang::CallExpr>(sCudaOverloadedHostFuncCall)) {
+  if (auto *call = Result.Nodes.getNodeAs<clang::CallExpr>(sCudaOverloadedHostFuncCall)) {
     if (!call->getNumArgs()) return false;
-    auto* funcDcl = call->getDirectCallee();
+    auto *funcDcl = call->getDirectCallee();
     if (!funcDcl) return false;
     std::string name = funcDcl->getDeclName().getAsString();
     const auto found = CUDA_RENAMES_MAP().find(name);
@@ -2734,15 +2734,13 @@ bool HipifyAction::cudaOverloadedHostFuncCall(const mat::MatchFinder::MatchResul
     auto overrideInfo = itNumArgs->second;
     auto counter = overrideInfo.counter;
     // check if SUPPORTED
-    auto* SM = Result.SourceManager;
-    clang::SourceLocation s;
     switch (overrideInfo.overloadType) {
       case ot_arguments_number:
       default:
       {
-        s = call->getBeginLoc();
-        ct::Replacement Rep(*SM, s, name.size(), counter.hipName.str());
-        clang::FullSourceLoc fullSL(s, *SM);
+        clang::SourceRange replacementRange = getWriteRange(*Result.SourceManager, { call->getBeginLoc(), call->getEndLoc() });
+        ct::Replacement Rep(*Result.SourceManager, replacementRange.getBegin(), name.size(), counter.hipName.str());
+        clang::FullSourceLoc fullSL(replacementRange.getBegin(), *Result.SourceManager);
         insertReplacement(Rep, fullSL);
         break;
       }
@@ -2767,8 +2765,9 @@ bool HipifyAction::half2Member(const mat::MatchFinder::MatchResult &Result) {
     clang::SmallString<40> XStr;
     llvm::raw_svector_ostream OS(XStr);
     OS << "reinterpret_cast<half&>(" << exprName << ")";
-    ct::Replacement Rep(*Result.SourceManager, sr.getBegin(), exprName.size(), OS.str());
-    clang::FullSourceLoc fullSL(sr.getBegin(), *Result.SourceManager);
+    clang::SourceRange replacementRange = getWriteRange(*Result.SourceManager, sr);
+    ct::Replacement Rep(*Result.SourceManager, replacementRange.getBegin(), exprName.size(), OS.str());
+    clang::FullSourceLoc fullSL(replacementRange.getBegin(), *Result.SourceManager);
     insertReplacement(Rep, fullSL);
     if (!NoWarningsUndocumented) {
       clang::DiagnosticsEngine& DE = getCompilerInstance().getDiagnostics();
@@ -2780,7 +2779,7 @@ bool HipifyAction::half2Member(const mat::MatchFinder::MatchResult &Result) {
   return false;
 }
 
-bool HipifyAction::dataTypeSelection(const mat::MatchFinder::MatchResult& Result) {
+bool HipifyAction::dataTypeSelection(const mat::MatchFinder::MatchResult &Result) {
   if (auto *vardecl = Result.Nodes.getNodeAs<clang::VarDecl>(sDataTypeSelection)) {
     clang::QualType QT = vardecl->getType();
     std::string name = QT.getAsString();
@@ -2792,10 +2791,9 @@ bool HipifyAction::dataTypeSelection(const mat::MatchFinder::MatchResult& Result
     const clang::TypeSourceInfo *si = vardecl->getTypeSourceInfo();
     const clang::TypeLoc tloc = si->getTypeLoc();
     const clang::SourceRange sr = tloc.getSourceRange();
-    const clang::SourceLocation sl = sr.getBegin();
-    auto *SM = Result.SourceManager;
-    ct::Replacement Rep(*SM, sl, name.size(), correct_name);
-    clang::FullSourceLoc fullSL(sl, *SM);
+    clang::SourceRange replacementRange = getWriteRange(*Result.SourceManager, sr);
+    ct::Replacement Rep(*Result.SourceManager, replacementRange.getBegin(), name.size(), correct_name);
+    clang::FullSourceLoc fullSL(replacementRange.getBegin(), *Result.SourceManager);
     insertReplacement(Rep, fullSL);
   }
   return false;
