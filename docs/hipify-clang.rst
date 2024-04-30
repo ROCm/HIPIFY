@@ -428,39 +428,39 @@ LLVM <= 9.0.1
 
 #. Build `LLVM+Clang <http://releases.llvm.org/9.0.0/docs/CMake.html>`_:
 
-  .. code-block:: bash
+.. code-block:: bash
 
-    cd .. \
-    mkdir build dist \
-    cd build
+  cd .. \
+  mkdir build dist \
+  cd build
 
-  **Linux**:
+**Linux**:
 
-  .. code-block:: bash
+.. code-block:: bash
 
-    cmake \
-      -DCMAKE_INSTALL_PREFIX=../dist \
-      -DLLVM_SOURCE_DIR=../llvm \
-      -DLLVM_TARGETS_TO_BUILD="X86;NVPTX" \
-      -DLLVM_INCLUDE_TESTS=OFF \
-      -DCMAKE_BUILD_TYPE=Release \
-      ../llvm
-    make -j install
+  cmake \
+    -DCMAKE_INSTALL_PREFIX=../dist \
+    -DLLVM_SOURCE_DIR=../llvm \
+    -DLLVM_TARGETS_TO_BUILD="X86;NVPTX" \
+    -DLLVM_INCLUDE_TESTS=OFF \
+    -DCMAKE_BUILD_TYPE=Release \
+    ../llvm
+  make -j install
 
-  **Windows**:
+**Windows**:
 
-  .. code-block:: shell
+.. code-block:: shell
 
-    cmake \
-      -G "Visual Studio 16 2019" \
-      -A x64 \
-      -Thost=x64 \
-      -DCMAKE_INSTALL_PREFIX=../dist \
-      -DLLVM_SOURCE_DIR=../llvm \
-      -DLLVM_TARGETS_TO_BUILD="NVPTX" \
-      -DLLVM_INCLUDE_TESTS=OFF \
-      -DCMAKE_BUILD_TYPE=Release \
-      ../llvm
+  cmake \
+    -G "Visual Studio 16 2019" \
+    -A x64 \
+    -Thost=x64 \
+    -DCMAKE_INSTALL_PREFIX=../dist \
+    -DLLVM_SOURCE_DIR=../llvm \
+    -DLLVM_TARGETS_TO_BUILD="NVPTX" \
+    -DLLVM_INCLUDE_TESTS=OFF \
+    -DCMAKE_BUILD_TYPE=Release \
+    ../llvm
 
 #. Run ``Visual Studio 16 2019``, open the generated ``LLVM.sln``, build all, and build the ``INSTALL``
    project.
@@ -511,17 +511,17 @@ Run ``Visual Studio 17 2022``, open the generated ``LLVM.sln``, build all, build
 #. Install `CUDA <https://developer.nvidia.com/cuda-toolkit-archive>`_ version 7.0 or
    greater.
 
-  * In case of multiple CUDA installations, specify the particular version using ``DCUDA_TOOLKIT_ROOT_DIR`` option:
+   * In case of multiple CUDA installations, specify the particular version using ``DCUDA_TOOLKIT_ROOT_DIR`` option:
 
-  **Linux**:
+   **Linux**:
 
-  .. code-block:: bash
+   .. code-block:: bash
 
     -DCUDA_TOOLKIT_ROOT_DIR=/usr/include
 
-  **Windows**:
+   **Windows**:
 
-  .. code-block:: shell
+   .. code-block:: shell
 
     -DCUDA_TOOLKIT_ROOT_DIR="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.3"
 
@@ -530,33 +530,33 @@ Run ``Visual Studio 17 2022``, open the generated ``LLVM.sln``, build all, build
 #. Install `cuDNN <https://developer.nvidia.com/rdp/cudnn-archive>`_ belonging to the version corresponding
    to the CUDA version:
 
-  * To specify the path to `cuDNN <https://developer.nvidia.com/cudnn-downloads>`_, use the ``CUDA_DNN_ROOT_DIR`` option:
+   * To specify the path to `cuDNN <https://developer.nvidia.com/cudnn-downloads>`_, use the ``CUDA_DNN_ROOT_DIR`` option:
 
-  **Linux**:
+   **Linux**:
 
-  .. code-block:: bash
+   .. code-block:: bash
 
     -DCUDA_DNN_ROOT_DIR=/usr/include
 
-  **Windows**:
+   **Windows**:
 
-  .. code-block:: shell
+   .. code-block:: shell
 
     -DCUDA_DNN_ROOT_DIR=D:/CUDA/cuDNN/9.1.0
 
 #. Install `CUB <https://github.com/nvidia/cub>`_ belonging to the version corresponding to the CUDA version:
    
-  * To specify the path to CUB, specify using the ``CUDA_CUB_ROOT_DIR`` option:
+   * To specify the path to CUB, specify using the ``CUDA_CUB_ROOT_DIR`` option:
 
-  **Linux**:
+   **Linux**:
 
-  .. code-block:: bash
+   .. code-block:: bash
 
     -DCUDA_CUB_ROOT_DIR=/srv/git/CUB
 
-  **Windows**:
+   **Windows**:
 
-  .. code-block:: shell
+   .. code-block:: shell
 
     -DCUDA_CUB_ROOT_DIR=D:/CUDA/CUB/cub-2.1.0
 
@@ -564,53 +564,51 @@ Run ``Visual Studio 17 2022``, open the generated ``LLVM.sln``, build all, build
 
 #. Install ``lit`` and ``FileCheck``; these are distributed with LLVM.
 
-  * Install ``lit`` into ``Python``:
+   * Install ``lit`` into ``Python``:
 
-  **Linux**:
+   **Linux**:
 
-  .. code-block:: bash
+   .. code-block:: bash
 
     python /usr/llvm/18.1.4/llvm-project/llvm/utils/lit/setup.py install
       
-  **Windows**:
+   **Windows**:
 
-  .. code-block:: shell
+   .. code-block:: shell
 
     python D:/LLVM/18.1.4/llvm-project/llvm/utils/lit/setup.py install
 
-  In case of errors similar to ``ModuleNotFoundError: No module named 'setuptools'``, upgrade the
-  ``setuptools`` package:
+   In case of errors similar to ``ModuleNotFoundError: No module named 'setuptools'``, upgrade the ``setuptools`` package:
 
-  .. code-block:: bash
+   .. code-block:: bash
 
     python -m pip install --upgrade pip setuptools
       
-  * Starting with LLVM 6.0.1, specify the path to the ``llvm-lit`` Python script using the
-    ``LLVM_EXTERNAL_LIT`` option:
+   * Starting with LLVM 6.0.1, specify the path to the ``llvm-lit`` Python script using the ``LLVM_EXTERNAL_LIT`` option:
 
-  **Linux**:
+   **Linux**:
 
-  .. code-block:: bash
+   .. code-block:: bash
 
     -DLLVM_EXTERNAL_LIT=/usr/llvm/18.1.4/build/bin/llvm-lit
 
-  **Windows**:
+   **Windows**:
 
-  .. code-block:: shell
+   .. code-block:: shell
 
     -DLLVM_EXTERNAL_LIT=D:/LLVM/18.1.4/build/Release/bin/llvm-lit.py
 
-  * ``FileCheck``:
+   * ``FileCheck``:
 
-  **Linux**:
+   **Linux**:
 
-  Copy from ``/usr/llvm/18.1.4/build/bin/`` to ``CMAKE_INSTALL_PREFIX/dist/bin``.
+   Copy from ``/usr/llvm/18.1.4/build/bin/`` to ``CMAKE_INSTALL_PREFIX/dist/bin``.
 
-  **Windows**:
+   **Windows**:
 
-  Copy from ``D:/LLVM/18.1.4/build/Release/bin`` to ``CMAKE_INSTALL_PREFIX/dist/bin``.
+   Copy from ``D:/LLVM/18.1.4/build/Release/bin`` to ``CMAKE_INSTALL_PREFIX/dist/bin``.
 
-  Alternatively, specify the path to ``FileCheck`` in the ``CMAKE_INSTALL_PREFIX`` option.
+   Alternatively, specify the path to ``FileCheck`` in the ``CMAKE_INSTALL_PREFIX`` option.
 
 #. To run OpenGL tests successfully on:
 
