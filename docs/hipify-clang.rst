@@ -424,94 +424,94 @@ belongs to an appropriate version.
 LLVM <= 9.0.1
 ---------------------------------------------------------------------
 
-1. Download `LLVM <https://github.com/llvm/llvm-project/releases/download/llvmorg-9.0.1/llvm-9.0.1.src.tar.xz>`_ \+ `Clang <https://github.com/llvm/llvm-project/releases/download/llvmorg-9.0.1/clang-9.0.1.src.tar.xz>`_ sources
+#. Download `LLVM <https://github.com/llvm/llvm-project/releases/download/llvmorg-9.0.1/llvm-9.0.1.src.tar.xz>`_ \+ `Clang <https://github.com/llvm/llvm-project/releases/download/llvmorg-9.0.1/clang-9.0.1.src.tar.xz>`_ sources
 
-2. Build `LLVM+Clang <http://releases.llvm.org/9.0.0/docs/CMake.html>`_:
+#. Build `LLVM+Clang <http://releases.llvm.org/9.0.0/docs/CMake.html>`_:
 
-.. code-block:: bash
+  .. code-block:: bash
 
-  cd .. \
-  mkdir build dist \
-  cd build
+    cd .. \
+    mkdir build dist \
+    cd build
 
-**Linux**:
+  **Linux**:
 
-.. code-block:: bash
+  .. code-block:: bash
 
-  cmake \
-    -DCMAKE_INSTALL_PREFIX=../dist \
-    -DLLVM_SOURCE_DIR=../llvm \
-    -DLLVM_TARGETS_TO_BUILD="X86;NVPTX" \
-    -DLLVM_INCLUDE_TESTS=OFF \
-    -DCMAKE_BUILD_TYPE=Release \
-    ../llvm
-  make -j install
+    cmake \
+      -DCMAKE_INSTALL_PREFIX=../dist \
+      -DLLVM_SOURCE_DIR=../llvm \
+      -DLLVM_TARGETS_TO_BUILD="X86;NVPTX" \
+      -DLLVM_INCLUDE_TESTS=OFF \
+      -DCMAKE_BUILD_TYPE=Release \
+      ../llvm
+    make -j install
 
-**Windows**:
+  **Windows**:
 
-.. code-block:: shell
+  .. code-block:: shell
 
-  cmake \
-    -G "Visual Studio 16 2019" \
-    -A x64 \
-    -Thost=x64 \
-    -DCMAKE_INSTALL_PREFIX=../dist \
-    -DLLVM_SOURCE_DIR=../llvm \
-    -DLLVM_TARGETS_TO_BUILD="NVPTX" \
-    -DLLVM_INCLUDE_TESTS=OFF \
-    -DCMAKE_BUILD_TYPE=Release \
-    ../llvm
+    cmake \
+      -G "Visual Studio 16 2019" \
+      -A x64 \
+      -Thost=x64 \
+      -DCMAKE_INSTALL_PREFIX=../dist \
+      -DLLVM_SOURCE_DIR=../llvm \
+      -DLLVM_TARGETS_TO_BUILD="NVPTX" \
+      -DLLVM_INCLUDE_TESTS=OFF \
+      -DCMAKE_BUILD_TYPE=Release \
+      ../llvm
 
-3. Run ``Visual Studio 16 2019``, open the generated ``LLVM.sln``, build all, and build the ``INSTALL``
+#. Run ``Visual Studio 16 2019``, open the generated ``LLVM.sln``, build all, and build the ``INSTALL``
    project.
 
 LLVM >= 10.0.0
 -----------------
 
-1. Download `LLVM project <https://github.com/llvm/llvm-project/releases/tag/llvmorg-18.1.4>`_ sources.
+#. Download `LLVM project <https://github.com/llvm/llvm-project/releases/tag/llvmorg-18.1.4>`_ sources.
 
-2. Build `LLVM project <http://llvm.org/docs/CMake.html>`_:
+#. Build `LLVM project <http://llvm.org/docs/CMake.html>`_:
 
-.. code-block:: bash
+  .. code-block:: bash
 
-  cd .. \
-  mkdir build dist \
-  cd build
+    cd .. \
+    mkdir build dist \
+    cd build
 
-**Linux**:
+  **Linux**:
 
-.. code-block:: bash
+  .. code-block:: bash
 
-  cmake \
-    -DCMAKE_INSTALL_PREFIX=../dist \
-    -DLLVM_TARGETS_TO_BUILD="" \
-    -DLLVM_ENABLE_PROJECTS="clang" \
-    -DLLVM_INCLUDE_TESTS=OFF \
-    -DCMAKE_BUILD_TYPE=Release \
-    ../llvm-project/llvm
-  make -j install
+    cmake \
+      -DCMAKE_INSTALL_PREFIX=../dist \
+      -DLLVM_TARGETS_TO_BUILD="" \
+      -DLLVM_ENABLE_PROJECTS="clang" \
+      -DLLVM_INCLUDE_TESTS=OFF \
+      -DCMAKE_BUILD_TYPE=Release \
+      ../llvm-project/llvm
+    make -j install
 
-**Windows**:
+  **Windows**:
 
-.. code-block:: shell
+  .. code-block:: shell
 
-  cmake \
-    -G "Visual Studio 17 2022" \
-    -A x64 \
-    -Thost=x64 \
-    -DCMAKE_INSTALL_PREFIX=../dist \
-    -DLLVM_TARGETS_TO_BUILD="" \
-    -DLLVM_ENABLE_PROJECTS="clang" \
-    -DLLVM_INCLUDE_TESTS=OFF \
-    -DCMAKE_BUILD_TYPE=Release \
-    ../llvm-project/llvm
+    cmake \
+      -G "Visual Studio 17 2022" \
+      -A x64 \
+      -Thost=x64 \
+      -DCMAKE_INSTALL_PREFIX=../dist \
+      -DLLVM_TARGETS_TO_BUILD="" \
+      -DLLVM_ENABLE_PROJECTS="clang" \
+      -DLLVM_INCLUDE_TESTS=OFF \
+      -DCMAKE_BUILD_TYPE=Release \
+      ../llvm-project/llvm
 
 Run ``Visual Studio 17 2022``, open the generated ``LLVM.sln``, build all, build project ``INSTALL``.
 
-3. Install `CUDA <https://developer.nvidia.com/cuda-toolkit-archive>`_ version 7.0 or
+#. Install `CUDA <https://developer.nvidia.com/cuda-toolkit-archive>`_ version 7.0 or
    greater.
 
-  - In case of multiple CUDA installations, specify the particular version using ``DCUDA_TOOLKIT_ROOT_DIR`` option:
+  * In case of multiple CUDA installations, specify the particular version using ``DCUDA_TOOLKIT_ROOT_DIR`` option:
 
   **Linux**:
 
@@ -527,10 +527,10 @@ Run ``Visual Studio 17 2022``, open the generated ``LLVM.sln``, build all, build
 
     -DCUDA_SDK_ROOT_DIR="C:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.3"
 
-4. Install `cuDNN <https://developer.nvidia.com/rdp/cudnn-archive>`_ belonging to the version corresponding
+#. Install `cuDNN <https://developer.nvidia.com/rdp/cudnn-archive>`_ belonging to the version corresponding
    to the CUDA version:
 
-  - To specify the path to `cuDNN <https://developer.nvidia.com/cudnn-downloads>`_, use the ``CUDA_DNN_ROOT_DIR`` option:
+  * To specify the path to `cuDNN <https://developer.nvidia.com/cudnn-downloads>`_, use the ``CUDA_DNN_ROOT_DIR`` option:
 
   **Linux**:
 
@@ -544,9 +544,9 @@ Run ``Visual Studio 17 2022``, open the generated ``LLVM.sln``, build all, build
 
     -DCUDA_DNN_ROOT_DIR=D:/CUDA/cuDNN/9.1.0
 
-5. Install `CUB <https://github.com/nvidia/cub>`_ belonging to the version corresponding to the CUDA version:
+#. Install `CUB <https://github.com/nvidia/cub>`_ belonging to the version corresponding to the CUDA version:
    
-  - To specify the path to CUB, specify using the ``CUDA_CUB_ROOT_DIR`` option:
+  * To specify the path to CUB, specify using the ``CUDA_CUB_ROOT_DIR`` option:
 
   **Linux**:
 
@@ -560,11 +560,11 @@ Run ``Visual Studio 17 2022``, open the generated ``LLVM.sln``, build all, build
 
     -DCUDA_CUB_ROOT_DIR=D:/CUDA/CUB/cub-2.1.0
 
-6. Install `Python <https://www.python.org/downloads>`_ version 2.7 or greater.
+#. Install `Python <https://www.python.org/downloads>`_ version 2.7 or greater.
 
-7. Install ``lit`` and ``FileCheck``; these are distributed with LLVM.
+#. Install ``lit`` and ``FileCheck``; these are distributed with LLVM.
 
-  - Install ``lit`` into ``Python``:
+  * Install ``lit`` into ``Python``:
 
   **Linux**:
 
@@ -585,7 +585,7 @@ Run ``Visual Studio 17 2022``, open the generated ``LLVM.sln``, build all, build
 
     python -m pip install --upgrade pip setuptools
       
-  - Starting with LLVM 6.0.1, specify the path to the ``llvm-lit`` Python script using the
+  * Starting with LLVM 6.0.1, specify the path to the ``llvm-lit`` Python script using the
     ``LLVM_EXTERNAL_LIT`` option:
 
   **Linux**:
@@ -600,7 +600,7 @@ Run ``Visual Studio 17 2022``, open the generated ``LLVM.sln``, build all, build
 
     -DLLVM_EXTERNAL_LIT=D:/LLVM/18.1.4/build/Release/bin/llvm-lit.py
 
-  - ``FileCheck``:
+  * ``FileCheck``:
 
   **Linux**:
 
@@ -612,7 +612,7 @@ Run ``Visual Studio 17 2022``, open the generated ``LLVM.sln``, build all, build
 
   Alternatively, specify the path to ``FileCheck`` in the ``CMAKE_INSTALL_PREFIX`` option.
 
-8. To run OpenGL tests successfully on:
+#. To run OpenGL tests successfully on:
 
 **Linux**:
 
@@ -624,9 +624,9 @@ On Ubuntu, use: ``sudo apt-get install mesa-common-dev``
 
 No installation required. All the required headers are shipped with the Windows SDK.
 
-9. Set the ``HIPIFY_CLANG_TESTS`` option to ``ON``: ``-DHIPIFY_CLANG_TESTS=ON``
+#. Set the ``HIPIFY_CLANG_TESTS`` option to ``ON``: ``-DHIPIFY_CLANG_TESTS=ON``
 
-10.  Build and run tests.
+#.  Build and run tests.
 
 Linux testing
 ======================================================
