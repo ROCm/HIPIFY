@@ -22,165 +22,174 @@ THE SOFTWARE.
 
 #include "CUDA2HIP.h"
 
+using SEC = blas::BLAS_API_SECTIONS;
+
 // Map of all functions
 const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP {
   // Blas operations
-  {"cublasOperation_t",                                {"hipblasOperation_t",                                "rocblas_operation",                     CONV_TYPE, API_BLAS, 2}},
-  {"CUBLAS_OP_N",                                      {"HIPBLAS_OP_N",                                      "rocblas_operation_none",                CONV_NUMERIC_LITERAL, API_BLAS, 2}},
-  {"CUBLAS_OP_T",                                      {"HIPBLAS_OP_T",                                      "rocblas_operation_transpose",           CONV_NUMERIC_LITERAL, API_BLAS, 2}},
-  {"CUBLAS_OP_C",                                      {"HIPBLAS_OP_C",                                      "rocblas_operation_conjugate_transpose", CONV_NUMERIC_LITERAL, API_BLAS, 2}},
-  {"CUBLAS_OP_HERMITAN",                               {"HIPBLAS_OP_C",                                      "rocblas_operation_conjugate_transpose", CONV_NUMERIC_LITERAL, API_BLAS, 2}},
-  {"CUBLAS_OP_CONJG",                                  {"HIPBLAS_OP_CONJG",                                  "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}},
+  {"cublasOperation_t",                                {"hipblasOperation_t",                                "rocblas_operation",                     CONV_TYPE, API_BLAS, SEC::BLAS_DATA_TYPES}},
+  {"CUBLAS_OP_N",                                      {"HIPBLAS_OP_N",                                      "rocblas_operation_none",                CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES}},
+  {"CUBLAS_OP_T",                                      {"HIPBLAS_OP_T",                                      "rocblas_operation_transpose",           CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES}},
+  {"CUBLAS_OP_C",                                      {"HIPBLAS_OP_C",                                      "rocblas_operation_conjugate_transpose", CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES}},
+  {"CUBLAS_OP_HERMITAN",                               {"HIPBLAS_OP_C",                                      "rocblas_operation_conjugate_transpose", CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES}},
+  {"CUBLAS_OP_CONJG",                                  {"HIPBLAS_OP_CONJG",                                  "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, UNSUPPORTED}},
 
   // Blas statuses
-  {"cublasStatus",                                     {"hipblasStatus_t",                                   "rocblas_status",                        CONV_TYPE, API_BLAS, 2}},
-  {"cublasStatus_t",                                   {"hipblasStatus_t",                                   "rocblas_status",                        CONV_TYPE, API_BLAS, 2}},
-  {"CUBLAS_STATUS_SUCCESS",                            {"HIPBLAS_STATUS_SUCCESS",                            "rocblas_status_success",                CONV_NUMERIC_LITERAL, API_BLAS, 2}},
-  {"CUBLAS_STATUS_NOT_INITIALIZED",                    {"HIPBLAS_STATUS_NOT_INITIALIZED",                    "rocblas_status_invalid_handle",         CONV_NUMERIC_LITERAL, API_BLAS, 2}},
-  {"CUBLAS_STATUS_ALLOC_FAILED",                       {"HIPBLAS_STATUS_ALLOC_FAILED",                       "rocblas_status_not_implemented",        CONV_NUMERIC_LITERAL, API_BLAS, 2}},
-  {"CUBLAS_STATUS_INVALID_VALUE",                      {"HIPBLAS_STATUS_INVALID_VALUE",                      "rocblas_status_invalid_value",          CONV_NUMERIC_LITERAL, API_BLAS, 2}},
-  {"CUBLAS_STATUS_MAPPING_ERROR",                      {"HIPBLAS_STATUS_MAPPING_ERROR",                      "rocblas_status_invalid_size",           CONV_NUMERIC_LITERAL, API_BLAS, 2}},
-  {"CUBLAS_STATUS_EXECUTION_FAILED",                   {"HIPBLAS_STATUS_EXECUTION_FAILED",                   "rocblas_status_memory_error",           CONV_NUMERIC_LITERAL, API_BLAS, 2}},
-  {"CUBLAS_STATUS_INTERNAL_ERROR",                     {"HIPBLAS_STATUS_INTERNAL_ERROR",                     "rocblas_status_internal_error",         CONV_NUMERIC_LITERAL, API_BLAS, 2}},
-  {"CUBLAS_STATUS_NOT_SUPPORTED",                      {"HIPBLAS_STATUS_NOT_SUPPORTED",                      "rocblas_status_perf_degraded",          CONV_NUMERIC_LITERAL, API_BLAS, 2}},
-  {"CUBLAS_STATUS_ARCH_MISMATCH",                      {"HIPBLAS_STATUS_ARCH_MISMATCH",                      "rocblas_status_arch_mismatch",          CONV_NUMERIC_LITERAL, API_BLAS, 2}},
-  {"CUBLAS_STATUS_LICENSE_ERROR",                      {"HIPBLAS_STATUS_UNKNOWN",                            "rocblas_status_not_implemented",        CONV_NUMERIC_LITERAL, API_BLAS, 2, ROC_UNSUPPORTED}},
+  {"cublasStatus",                                     {"hipblasStatus_t",                                   "rocblas_status",                        CONV_TYPE, API_BLAS, SEC::BLAS_DATA_TYPES}},
+  {"cublasStatus_t",                                   {"hipblasStatus_t",                                   "rocblas_status",                        CONV_TYPE, API_BLAS, SEC::BLAS_DATA_TYPES}},
+  {"CUBLAS_STATUS_SUCCESS",                            {"HIPBLAS_STATUS_SUCCESS",                            "rocblas_status_success",                CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES}},
+  {"CUBLAS_STATUS_NOT_INITIALIZED",                    {"HIPBLAS_STATUS_NOT_INITIALIZED",                    "rocblas_status_invalid_handle",         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES}},
+  {"CUBLAS_STATUS_ALLOC_FAILED",                       {"HIPBLAS_STATUS_ALLOC_FAILED",                       "rocblas_status_not_implemented",        CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES}},
+  {"CUBLAS_STATUS_INVALID_VALUE",                      {"HIPBLAS_STATUS_INVALID_VALUE",                      "rocblas_status_invalid_value",          CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES}},
+  {"CUBLAS_STATUS_MAPPING_ERROR",                      {"HIPBLAS_STATUS_MAPPING_ERROR",                      "rocblas_status_invalid_size",           CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES}},
+  {"CUBLAS_STATUS_EXECUTION_FAILED",                   {"HIPBLAS_STATUS_EXECUTION_FAILED",                   "rocblas_status_memory_error",           CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES}},
+  {"CUBLAS_STATUS_INTERNAL_ERROR",                     {"HIPBLAS_STATUS_INTERNAL_ERROR",                     "rocblas_status_internal_error",         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES}},
+  {"CUBLAS_STATUS_NOT_SUPPORTED",                      {"HIPBLAS_STATUS_NOT_SUPPORTED",                      "rocblas_status_perf_degraded",          CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES}},
+  {"CUBLAS_STATUS_ARCH_MISMATCH",                      {"HIPBLAS_STATUS_ARCH_MISMATCH",                      "rocblas_status_arch_mismatch",          CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES}},
+  {"CUBLAS_STATUS_LICENSE_ERROR",                      {"HIPBLAS_STATUS_UNKNOWN",                            "rocblas_status_not_implemented",        CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, ROC_UNSUPPORTED}},
 
   // Blas Fill Modes
-  {"cublasFillMode_t",                                 {"hipblasFillMode_t",                                 "rocblas_fill",                          CONV_TYPE, API_BLAS, 2}},
-  {"CUBLAS_FILL_MODE_LOWER",                           {"HIPBLAS_FILL_MODE_LOWER",                           "rocblas_fill_lower",                    CONV_NUMERIC_LITERAL, API_BLAS, 2}},
-  {"CUBLAS_FILL_MODE_UPPER",                           {"HIPBLAS_FILL_MODE_UPPER",                           "rocblas_fill_upper",                    CONV_NUMERIC_LITERAL, API_BLAS, 2}},
-  {"CUBLAS_FILL_MODE_FULL",                            {"HIPBLAS_FILL_MODE_FULL",                            "rocblas_fill_full",                     CONV_NUMERIC_LITERAL, API_BLAS, 2}},
+  {"cublasFillMode_t",                                 {"hipblasFillMode_t",                                 "rocblas_fill",                          CONV_TYPE, API_BLAS, SEC::BLAS_DATA_TYPES}},
+  {"CUBLAS_FILL_MODE_LOWER",                           {"HIPBLAS_FILL_MODE_LOWER",                           "rocblas_fill_lower",                    CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES}},
+  {"CUBLAS_FILL_MODE_UPPER",                           {"HIPBLAS_FILL_MODE_UPPER",                           "rocblas_fill_upper",                    CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES}},
+  {"CUBLAS_FILL_MODE_FULL",                            {"HIPBLAS_FILL_MODE_FULL",                            "rocblas_fill_full",                     CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES}},
 
   // Blas Diag Types
-  {"cublasDiagType_t",                                 {"hipblasDiagType_t",                                 "rocblas_diagonal",                      CONV_TYPE, API_BLAS, 2}},
-  {"CUBLAS_DIAG_NON_UNIT",                             {"HIPBLAS_DIAG_NON_UNIT",                             "rocblas_diagonal_non_unit",             CONV_NUMERIC_LITERAL, API_BLAS, 2}},
-  {"CUBLAS_DIAG_UNIT",                                 {"HIPBLAS_DIAG_UNIT",                                 "rocblas_diagonal_unit",                 CONV_NUMERIC_LITERAL, API_BLAS, 2}},
+  {"cublasDiagType_t",                                 {"hipblasDiagType_t",                                 "rocblas_diagonal",                      CONV_TYPE, API_BLAS, SEC::BLAS_DATA_TYPES}},
+  {"CUBLAS_DIAG_NON_UNIT",                             {"HIPBLAS_DIAG_NON_UNIT",                             "rocblas_diagonal_non_unit",             CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES}},
+  {"CUBLAS_DIAG_UNIT",                                 {"HIPBLAS_DIAG_UNIT",                                 "rocblas_diagonal_unit",                 CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES}},
 
   // Blas Side Modes
-  {"cublasSideMode_t",                                 {"hipblasSideMode_t",                                 "rocblas_side",                          CONV_TYPE, API_BLAS, 2}},
-  {"CUBLAS_SIDE_LEFT",                                 {"HIPBLAS_SIDE_LEFT",                                 "rocblas_side_left",                     CONV_NUMERIC_LITERAL, API_BLAS, 2}},
-  {"CUBLAS_SIDE_RIGHT",                                {"HIPBLAS_SIDE_RIGHT",                                "rocblas_side_right",                    CONV_NUMERIC_LITERAL, API_BLAS, 2}},
+  {"cublasSideMode_t",                                 {"hipblasSideMode_t",                                 "rocblas_side",                          CONV_TYPE, API_BLAS, SEC::BLAS_DATA_TYPES}},
+  {"CUBLAS_SIDE_LEFT",                                 {"HIPBLAS_SIDE_LEFT",                                 "rocblas_side_left",                     CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES}},
+  {"CUBLAS_SIDE_RIGHT",                                {"HIPBLAS_SIDE_RIGHT",                                "rocblas_side_right",                    CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES}},
 
   // Blas Pointer Modes
-  {"cublasPointerMode_t",                              {"hipblasPointerMode_t",                              "rocblas_pointer_mode",                  CONV_TYPE, API_BLAS, 2}},
-  {"CUBLAS_POINTER_MODE_HOST",                         {"HIPBLAS_POINTER_MODE_HOST",                         "rocblas_pointer_mode_host",             CONV_NUMERIC_LITERAL, API_BLAS, 2}},
-  {"CUBLAS_POINTER_MODE_DEVICE",                       {"HIPBLAS_POINTER_MODE_DEVICE",                       "rocblas_pointer_mode_device",           CONV_NUMERIC_LITERAL, API_BLAS, 2}},
+  {"cublasPointerMode_t",                              {"hipblasPointerMode_t",                              "rocblas_pointer_mode",                  CONV_TYPE, API_BLAS, SEC::BLAS_DATA_TYPES}},
+  {"CUBLAS_POINTER_MODE_HOST",                         {"HIPBLAS_POINTER_MODE_HOST",                         "rocblas_pointer_mode_host",             CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES}},
+  {"CUBLAS_POINTER_MODE_DEVICE",                       {"HIPBLAS_POINTER_MODE_DEVICE",                       "rocblas_pointer_mode_device",           CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES}},
 
   // Blas Atomics Modes
-  {"cublasAtomicsMode_t",                              {"hipblasAtomicsMode_t",                              "rocblas_atomics_mode",                  CONV_TYPE, API_BLAS, 2}},
-  {"CUBLAS_ATOMICS_NOT_ALLOWED",                       {"HIPBLAS_ATOMICS_NOT_ALLOWED",                       "rocblas_atomics_not_allowed",           CONV_NUMERIC_LITERAL, API_BLAS, 2}},
-  {"CUBLAS_ATOMICS_ALLOWED",                           {"HIPBLAS_ATOMICS_ALLOWED",                           "rocblas_atomics_allowed",               CONV_NUMERIC_LITERAL, API_BLAS, 2}},
+  {"cublasAtomicsMode_t",                              {"hipblasAtomicsMode_t",                              "rocblas_atomics_mode",                  CONV_TYPE, API_BLAS, SEC::BLAS_DATA_TYPES}},
+  {"CUBLAS_ATOMICS_NOT_ALLOWED",                       {"HIPBLAS_ATOMICS_NOT_ALLOWED",                       "rocblas_atomics_not_allowed",           CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES}},
+  {"CUBLAS_ATOMICS_ALLOWED",                           {"HIPBLAS_ATOMICS_ALLOWED",                           "rocblas_atomics_allowed",               CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES}},
 
   // Blas Math mode/tensor operation
-  {"cublasMath_t",                                     {"hipblasMath_t",                                     "rocblas_math_mode",                     CONV_TYPE, API_BLAS, 2}},
-  {"CUBLAS_DEFAULT_MATH",                              {"HIPBLAS_DEFAULT_MATH",                              "rocblas_default_math",                  CONV_NUMERIC_LITERAL, API_BLAS, 2}}, // 0
-  {"CUBLAS_TENSOR_OP_MATH",                            {"HIPBLAS_TENSOR_OP_MATH",                            "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED}}, // 1
-  {"CUBLAS_PEDANTIC_MATH",                             {"HIPBLAS_PEDANTIC_MATH",                             "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, ROC_UNSUPPORTED}}, // 2
-  {"CUBLAS_TF32_TENSOR_OP_MATH",                       {"HIPBLAS_TF32_TENSOR_OP_MATH",                       "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, ROC_UNSUPPORTED}}, // 3
-  {"CUBLAS_MATH_DISALLOW_REDUCED_PRECISION_REDUCTION", {"HIPBLAS_MATH_DISALLOW_REDUCED_PRECISION_REDUCTION", "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, ROC_UNSUPPORTED}}, // 16
+  {"cublasMath_t",                                     {"hipblasMath_t",                                     "rocblas_math_mode",                     CONV_TYPE, API_BLAS, SEC::BLAS_DATA_TYPES}},
+  {"CUBLAS_DEFAULT_MATH",                              {"HIPBLAS_DEFAULT_MATH",                              "rocblas_default_math",                  CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES}}, // 0
+  {"CUBLAS_TENSOR_OP_MATH",                            {"HIPBLAS_TENSOR_OP_MATH",                            "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, ROC_UNSUPPORTED | CUDA_DEPRECATED}}, // 1
+  {"CUBLAS_PEDANTIC_MATH",                             {"HIPBLAS_PEDANTIC_MATH",                             "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, ROC_UNSUPPORTED}}, // 2
+  {"CUBLAS_TF32_TENSOR_OP_MATH",                       {"HIPBLAS_TF32_TENSOR_OP_MATH",                       "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, ROC_UNSUPPORTED}}, // 3
+  {"CUBLAS_MATH_DISALLOW_REDUCED_PRECISION_REDUCTION", {"HIPBLAS_MATH_DISALLOW_REDUCED_PRECISION_REDUCTION", "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, ROC_UNSUPPORTED}}, // 16
 
   // Blass different GEMM algorithms
-  {"cublasGemmAlgo_t",                                 {"hipblasGemmAlgo_t",                                 "rocblas_gemm_algo",                     CONV_TYPE, API_BLAS, 2}},
-  {"CUBLAS_GEMM_DFALT",                                {"HIPBLAS_GEMM_DEFAULT",                              "rocblas_gemm_algo_standard",            CONV_NUMERIC_LITERAL, API_BLAS, 2}},  //  -1 // 160 // 0b0000000000
-  {"CUBLAS_GEMM_DEFAULT",                              {"HIPBLAS_GEMM_DEFAULT",                              "rocblas_gemm_algo_standard",            CONV_NUMERIC_LITERAL, API_BLAS, 2}},  //  -1 // 160 // 0b0000000000
-  {"CUBLAS_GEMM_ALGO0",                                {"HIPBLAS_GEMM_ALGO0",                                "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}},  //   0
-  {"CUBLAS_GEMM_ALGO1",                                {"HIPBLAS_GEMM_ALGO1",                                "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}},  //   1
-  {"CUBLAS_GEMM_ALGO2",                                {"HIPBLAS_GEMM_ALGO2",                                "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}},  //   2
-  {"CUBLAS_GEMM_ALGO3",                                {"HIPBLAS_GEMM_ALGO3",                                "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}},  //   3
-  {"CUBLAS_GEMM_ALGO4",                                {"HIPBLAS_GEMM_ALGO4",                                "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}},  //   4
-  {"CUBLAS_GEMM_ALGO5",                                {"HIPBLAS_GEMM_ALGO5",                                "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}},  //   5
-  {"CUBLAS_GEMM_ALGO6",                                {"HIPBLAS_GEMM_ALGO6",                                "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}},  //   6
-  {"CUBLAS_GEMM_ALGO7",                                {"HIPBLAS_GEMM_ALGO7",                                "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}},  //   7
-  {"CUBLAS_GEMM_ALGO8",                                {"HIPBLAS_GEMM_ALGO8",                                "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}},  //   8
-  {"CUBLAS_GEMM_ALGO9",                                {"HIPBLAS_GEMM_ALGO9",                                "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}},  //   9
-  {"CUBLAS_GEMM_ALGO10",                               {"HIPBLAS_GEMM_ALGO10",                               "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}},  //  10
-  {"CUBLAS_GEMM_ALGO11",                               {"HIPBLAS_GEMM_ALGO11",                               "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}},  //  11
-  {"CUBLAS_GEMM_ALGO12",                               {"HIPBLAS_GEMM_ALGO12",                               "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}},  //  12
-  {"CUBLAS_GEMM_ALGO13",                               {"HIPBLAS_GEMM_ALGO13",                               "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}},  //  13
-  {"CUBLAS_GEMM_ALGO14",                               {"HIPBLAS_GEMM_ALGO14",                               "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}},  //  14
-  {"CUBLAS_GEMM_ALGO15",                               {"HIPBLAS_GEMM_ALGO15",                               "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}},  //  15
-  {"CUBLAS_GEMM_ALGO16",                               {"HIPBLAS_GEMM_ALGO16",                               "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}},  //  16
-  {"CUBLAS_GEMM_ALGO17",                               {"HIPBLAS_GEMM_ALGO17",                               "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}},  //  17
-  {"CUBLAS_GEMM_ALGO18",                               {"HIPBLAS_GEMM_ALGO18",                               "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}},  //  18
-  {"CUBLAS_GEMM_ALGO19",                               {"HIPBLAS_GEMM_ALGO19",                               "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}},  //  19
-  {"CUBLAS_GEMM_ALGO20",                               {"HIPBLAS_GEMM_ALGO20",                               "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}},  //  20
-  {"CUBLAS_GEMM_ALGO21",                               {"HIPBLAS_GEMM_ALGO21",                               "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}},  //  21
-  {"CUBLAS_GEMM_ALGO22",                               {"HIPBLAS_GEMM_ALGO22",                               "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}},  //  22
-  {"CUBLAS_GEMM_ALGO23",                               {"HIPBLAS_GEMM_ALGO23",                               "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}},  //  23
-  {"CUBLAS_GEMM_DEFAULT_TENSOR_OP",                    {"HIPBLAS_GEMM_DEFAULT_TENSOR_OP",                    "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}},  //  99
-  {"CUBLAS_GEMM_DFALT_TENSOR_OP",                      {"HIPBLAS_GEMM_DFALT_TENSOR_OP",                      "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}},  //  99
-  {"CUBLAS_GEMM_ALGO0_TENSOR_OP",                      {"HIPBLAS_GEMM_ALGO0_TENSOR_OP",                      "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}},  // 100
-  {"CUBLAS_GEMM_ALGO1_TENSOR_OP",                      {"HIPBLAS_GEMM_ALGO1_TENSOR_OP",                      "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}},  // 101
-  {"CUBLAS_GEMM_ALGO2_TENSOR_OP",                      {"HIPBLAS_GEMM_ALGO2_TENSOR_OP",                      "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}},  // 102
-  {"CUBLAS_GEMM_ALGO3_TENSOR_OP",                      {"HIPBLAS_GEMM_ALGO3_TENSOR_OP",                      "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}},  // 103
-  {"CUBLAS_GEMM_ALGO4_TENSOR_OP",                      {"HIPBLAS_GEMM_ALGO4_TENSOR_OP",                      "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}},  // 104
-  {"CUBLAS_GEMM_ALGO5_TENSOR_OP",                      {"HIPBLAS_GEMM_ALGO5_TENSOR_OP",                      "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}},  // 105
-  {"CUBLAS_GEMM_ALGO6_TENSOR_OP",                      {"HIPBLAS_GEMM_ALGO6_TENSOR_OP",                      "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}},  // 106
-  {"CUBLAS_GEMM_ALGO7_TENSOR_OP",                      {"HIPBLAS_GEMM_ALGO7_TENSOR_OP",                      "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}},  // 107
-  {"CUBLAS_GEMM_ALGO8_TENSOR_OP",                      {"HIPBLAS_GEMM_ALGO8_TENSOR_OP",                      "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}},  // 108
-  {"CUBLAS_GEMM_ALGO9_TENSOR_OP",                      {"HIPBLAS_GEMM_ALGO9_TENSOR_OP",                      "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}},  // 109
-  {"CUBLAS_GEMM_ALGO10_TENSOR_OP",                     {"HIPBLAS_GEMM_ALGO10_TENSOR_OP",                     "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}},  // 110
-  {"CUBLAS_GEMM_ALGO11_TENSOR_OP",                     {"HIPBLAS_GEMM_ALGO11_TENSOR_OP",                     "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}},  // 111
-  {"CUBLAS_GEMM_ALGO12_TENSOR_OP",                     {"HIPBLAS_GEMM_ALGO12_TENSOR_OP",                     "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}},  // 112
-  {"CUBLAS_GEMM_ALGO13_TENSOR_OP",                     {"HIPBLAS_GEMM_ALGO13_TENSOR_OP",                     "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}},  // 113
-  {"CUBLAS_GEMM_ALGO14_TENSOR_OP",                     {"HIPBLAS_GEMM_ALGO14_TENSOR_OP",                     "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}},  // 114
-  {"CUBLAS_GEMM_ALGO15_TENSOR_OP",                     {"HIPBLAS_GEMM_ALGO15_TENSOR_OP",                     "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, UNSUPPORTED}},  // 115
+  {"cublasGemmAlgo_t",                                 {"hipblasGemmAlgo_t",                                 "rocblas_gemm_algo",                     CONV_TYPE, API_BLAS, SEC::BLAS_DATA_TYPES}},
+  {"CUBLAS_GEMM_DFALT",                                {"HIPBLAS_GEMM_DEFAULT",                              "rocblas_gemm_algo_standard",            CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES}},  //  -1 // 160 // 0b0000000000
+  {"CUBLAS_GEMM_DEFAULT",                              {"HIPBLAS_GEMM_DEFAULT",                              "rocblas_gemm_algo_standard",            CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES}},  //  -1 // 160 // 0b0000000000
+  {"CUBLAS_GEMM_ALGO0",                                {"HIPBLAS_GEMM_ALGO0",                                "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, UNSUPPORTED}},  //   0
+  {"CUBLAS_GEMM_ALGO1",                                {"HIPBLAS_GEMM_ALGO1",                                "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, UNSUPPORTED}},  //   1
+  {"CUBLAS_GEMM_ALGO2",                                {"HIPBLAS_GEMM_ALGO2",                                "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, UNSUPPORTED}},  //   2
+  {"CUBLAS_GEMM_ALGO3",                                {"HIPBLAS_GEMM_ALGO3",                                "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, UNSUPPORTED}},  //   3
+  {"CUBLAS_GEMM_ALGO4",                                {"HIPBLAS_GEMM_ALGO4",                                "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, UNSUPPORTED}},  //   4
+  {"CUBLAS_GEMM_ALGO5",                                {"HIPBLAS_GEMM_ALGO5",                                "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, UNSUPPORTED}},  //   5
+  {"CUBLAS_GEMM_ALGO6",                                {"HIPBLAS_GEMM_ALGO6",                                "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, UNSUPPORTED}},  //   6
+  {"CUBLAS_GEMM_ALGO7",                                {"HIPBLAS_GEMM_ALGO7",                                "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, UNSUPPORTED}},  //   7
+  {"CUBLAS_GEMM_ALGO8",                                {"HIPBLAS_GEMM_ALGO8",                                "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, UNSUPPORTED}},  //   8
+  {"CUBLAS_GEMM_ALGO9",                                {"HIPBLAS_GEMM_ALGO9",                                "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, UNSUPPORTED}},  //   9
+  {"CUBLAS_GEMM_ALGO10",                               {"HIPBLAS_GEMM_ALGO10",                               "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, UNSUPPORTED}},  //  10
+  {"CUBLAS_GEMM_ALGO11",                               {"HIPBLAS_GEMM_ALGO11",                               "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, UNSUPPORTED}},  //  11
+  {"CUBLAS_GEMM_ALGO12",                               {"HIPBLAS_GEMM_ALGO12",                               "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, UNSUPPORTED}},  //  12
+  {"CUBLAS_GEMM_ALGO13",                               {"HIPBLAS_GEMM_ALGO13",                               "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, UNSUPPORTED}},  //  13
+  {"CUBLAS_GEMM_ALGO14",                               {"HIPBLAS_GEMM_ALGO14",                               "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, UNSUPPORTED}},  //  14
+  {"CUBLAS_GEMM_ALGO15",                               {"HIPBLAS_GEMM_ALGO15",                               "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, UNSUPPORTED}},  //  15
+  {"CUBLAS_GEMM_ALGO16",                               {"HIPBLAS_GEMM_ALGO16",                               "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, UNSUPPORTED}},  //  16
+  {"CUBLAS_GEMM_ALGO17",                               {"HIPBLAS_GEMM_ALGO17",                               "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, UNSUPPORTED}},  //  17
+  {"CUBLAS_GEMM_ALGO18",                               {"HIPBLAS_GEMM_ALGO18",                               "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, UNSUPPORTED}},  //  18
+  {"CUBLAS_GEMM_ALGO19",                               {"HIPBLAS_GEMM_ALGO19",                               "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, UNSUPPORTED}},  //  19
+  {"CUBLAS_GEMM_ALGO20",                               {"HIPBLAS_GEMM_ALGO20",                               "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, UNSUPPORTED}},  //  20
+  {"CUBLAS_GEMM_ALGO21",                               {"HIPBLAS_GEMM_ALGO21",                               "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, UNSUPPORTED}},  //  21
+  {"CUBLAS_GEMM_ALGO22",                               {"HIPBLAS_GEMM_ALGO22",                               "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, UNSUPPORTED}},  //  22
+  {"CUBLAS_GEMM_ALGO23",                               {"HIPBLAS_GEMM_ALGO23",                               "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, UNSUPPORTED}},  //  23
+  {"CUBLAS_GEMM_DEFAULT_TENSOR_OP",                    {"HIPBLAS_GEMM_DEFAULT_TENSOR_OP",                    "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, UNSUPPORTED}},  //  99
+  {"CUBLAS_GEMM_DFALT_TENSOR_OP",                      {"HIPBLAS_GEMM_DFALT_TENSOR_OP",                      "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, UNSUPPORTED}},  //  99
+  {"CUBLAS_GEMM_ALGO0_TENSOR_OP",                      {"HIPBLAS_GEMM_ALGO0_TENSOR_OP",                      "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, UNSUPPORTED}},  // 100
+  {"CUBLAS_GEMM_ALGO1_TENSOR_OP",                      {"HIPBLAS_GEMM_ALGO1_TENSOR_OP",                      "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, UNSUPPORTED}},  // 101
+  {"CUBLAS_GEMM_ALGO2_TENSOR_OP",                      {"HIPBLAS_GEMM_ALGO2_TENSOR_OP",                      "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, UNSUPPORTED}},  // 102
+  {"CUBLAS_GEMM_ALGO3_TENSOR_OP",                      {"HIPBLAS_GEMM_ALGO3_TENSOR_OP",                      "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, UNSUPPORTED}},  // 103
+  {"CUBLAS_GEMM_ALGO4_TENSOR_OP",                      {"HIPBLAS_GEMM_ALGO4_TENSOR_OP",                      "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, UNSUPPORTED}},  // 104
+  {"CUBLAS_GEMM_ALGO5_TENSOR_OP",                      {"HIPBLAS_GEMM_ALGO5_TENSOR_OP",                      "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, UNSUPPORTED}},  // 105
+  {"CUBLAS_GEMM_ALGO6_TENSOR_OP",                      {"HIPBLAS_GEMM_ALGO6_TENSOR_OP",                      "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, UNSUPPORTED}},  // 106
+  {"CUBLAS_GEMM_ALGO7_TENSOR_OP",                      {"HIPBLAS_GEMM_ALGO7_TENSOR_OP",                      "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, UNSUPPORTED}},  // 107
+  {"CUBLAS_GEMM_ALGO8_TENSOR_OP",                      {"HIPBLAS_GEMM_ALGO8_TENSOR_OP",                      "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, UNSUPPORTED}},  // 108
+  {"CUBLAS_GEMM_ALGO9_TENSOR_OP",                      {"HIPBLAS_GEMM_ALGO9_TENSOR_OP",                      "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, UNSUPPORTED}},  // 109
+  {"CUBLAS_GEMM_ALGO10_TENSOR_OP",                     {"HIPBLAS_GEMM_ALGO10_TENSOR_OP",                     "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, UNSUPPORTED}},  // 110
+  {"CUBLAS_GEMM_ALGO11_TENSOR_OP",                     {"HIPBLAS_GEMM_ALGO11_TENSOR_OP",                     "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, UNSUPPORTED}},  // 111
+  {"CUBLAS_GEMM_ALGO12_TENSOR_OP",                     {"HIPBLAS_GEMM_ALGO12_TENSOR_OP",                     "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, UNSUPPORTED}},  // 112
+  {"CUBLAS_GEMM_ALGO13_TENSOR_OP",                     {"HIPBLAS_GEMM_ALGO13_TENSOR_OP",                     "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, UNSUPPORTED}},  // 113
+  {"CUBLAS_GEMM_ALGO14_TENSOR_OP",                     {"HIPBLAS_GEMM_ALGO14_TENSOR_OP",                     "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, UNSUPPORTED}},  // 114
+  {"CUBLAS_GEMM_ALGO15_TENSOR_OP",                     {"HIPBLAS_GEMM_ALGO15_TENSOR_OP",                     "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, UNSUPPORTED}},  // 115
 
   // CUDA Library Data Types
 
-  {"cublasDataType_t",                                 {"hipDataType",                                       "rocblas_datatype",                      CONV_TYPE, API_BLAS, 3}},
-  {"cudaDataType_t",                                   {"hipDataType",                                       "rocblas_datatype_",                     CONV_TYPE, API_BLAS, 3}},
-  {"cudaDataType",                                     {"hipDataType",                                       "rocblas_datatype",                      CONV_TYPE, API_BLAS, 3}},
-  {"CUDA_R_16F",                                       {"HIP_R_16F",                                         "rocblas_datatype_f16_r",                CONV_NUMERIC_LITERAL, API_BLAS, 3}}, //  2 // 150
-  {"CUDA_C_16F",                                       {"HIP_C_16F",                                         "rocblas_datatype_f16_c",                CONV_NUMERIC_LITERAL, API_BLAS, 3}}, //  6 // 153
-  {"CUDA_R_32F",                                       {"HIP_R_32F",                                         "rocblas_datatype_f32_r",                CONV_NUMERIC_LITERAL, API_BLAS, 3}}, //  0 // 151
-  {"CUDA_C_32F",                                       {"HIP_C_32F",                                         "rocblas_datatype_f32_c",                CONV_NUMERIC_LITERAL, API_BLAS, 3}}, //  4 // 154
-  {"CUDA_R_64F",                                       {"HIP_R_64F",                                         "rocblas_datatype_f64_r",                CONV_NUMERIC_LITERAL, API_BLAS, 3}}, //  1 // 152
-  {"CUDA_C_64F",                                       {"HIP_C_64F",                                         "rocblas_datatype_f64_c",                CONV_NUMERIC_LITERAL, API_BLAS, 3}}, //  5 // 155
-  {"CUDA_R_8I",                                        {"HIP_R_8I",                                          "rocblas_datatype_i8_r",                 CONV_NUMERIC_LITERAL, API_BLAS, 3}}, //  3 // 160
-  {"CUDA_C_8I",                                        {"HIP_C_8I",                                          "rocblas_datatype_i8_c",                 CONV_NUMERIC_LITERAL, API_BLAS, 3}}, //  7 // 164
-  {"CUDA_R_8U",                                        {"HIP_R_8U",                                          "rocblas_datatype_u8_r",                 CONV_NUMERIC_LITERAL, API_BLAS, 3}}, //  8 // 161
-  {"CUDA_C_8U",                                        {"HIP_C_8U",                                          "rocblas_datatype_u8_c",                 CONV_NUMERIC_LITERAL, API_BLAS, 3}}, //  9 // 165
-  {"CUDA_R_32I",                                       {"HIP_R_32I",                                         "rocblas_datatype_i32_r",                CONV_NUMERIC_LITERAL, API_BLAS, 3}}, // 10 // 162
-  {"CUDA_C_32I",                                       {"HIP_C_32I",                                         "rocblas_datatype_i32_c",                CONV_NUMERIC_LITERAL, API_BLAS, 3}}, // 11 // 166
-  {"CUDA_R_32U",                                       {"HIP_R_32U",                                         "rocblas_datatype_u32_r",                CONV_NUMERIC_LITERAL, API_BLAS, 3}}, // 12 // 163
-  {"CUDA_C_32U",                                       {"HIP_C_32U",                                         "rocblas_datatype_u32_c",                CONV_NUMERIC_LITERAL, API_BLAS, 3}}, // 13 // 167
-  {"CUDA_R_16BF",                                      {"HIP_R_16BF",                                        "rocblas_datatype_bf16_r",               CONV_NUMERIC_LITERAL, API_BLAS, 3}}, // 14 // 168
-  {"CUDA_C_16BF",                                      {"HIP_C_16BF",                                        "rocblas_datatype_bf16_c",               CONV_NUMERIC_LITERAL, API_BLAS, 3}}, // 15 // 169
-  {"CUDA_R_4I",                                        {"HIPBLAS_R_4I",                                      "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 3, UNSUPPORTED}}, // 16
-  {"CUDA_C_4I",                                        {"HIPBLAS_C_4I",                                      "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 3, UNSUPPORTED}}, // 17
-  {"CUDA_R_4U",                                        {"HIPBLAS_R_4U",                                      "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 3, UNSUPPORTED}}, // 18
-  {"CUDA_C_4U",                                        {"HIPBLAS_C_4U",                                      "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 3, UNSUPPORTED}}, // 19
-  {"CUDA_R_16I",                                       {"HIPBLAS_R_16I",                                     "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 3, UNSUPPORTED}}, // 20
-  {"CUDA_C_16I",                                       {"HIPBLAS_C_16I",                                     "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 3, UNSUPPORTED}}, // 21
-  {"CUDA_R_16U",                                       {"HIPBLAS_R_16U",                                     "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 3, UNSUPPORTED}}, // 22
-  {"CUDA_C_16U",                                       {"HIPBLAS_C_16U",                                     "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 3, UNSUPPORTED}}, // 23
-  {"CUDA_R_64I",                                       {"HIPBLAS_R_64I",                                     "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 3, UNSUPPORTED}}, // 24
-  {"CUDA_C_64I",                                       {"HIPBLAS_C_64I",                                     "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 3, UNSUPPORTED}}, // 25
-  {"CUDA_R_64U",                                       {"HIPBLAS_R_64U",                                     "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 3, UNSUPPORTED}}, // 26
-  {"CUDA_C_64U",                                       {"HIPBLAS_C_64U",                                     "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 3, UNSUPPORTED}}, // 27
-  {"CUDA_R_8F_E4M3",                                   {"HIPBLAS_R_8F_E4M3",                                 "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 3, UNSUPPORTED}}, // 28
-  {"CUDA_R_8F_E5M2",                                   {"HIPBLAS_R_8F_E5M2",                                 "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 3, UNSUPPORTED}}, // 29
+  {"cublasDataType_t",                                 {"hipDataType",                                       "rocblas_datatype",                      CONV_TYPE, API_BLAS, SEC::CUDA_DATA_TYPES}},
+  {"cudaDataType_t",                                   {"hipDataType",                                       "rocblas_datatype_",                     CONV_TYPE, API_BLAS, SEC::CUDA_DATA_TYPES}},
+  {"cudaDataType",                                     {"hipDataType",                                       "rocblas_datatype",                      CONV_TYPE, API_BLAS, SEC::CUDA_DATA_TYPES}},
+  {"CUDA_R_16F",                                       {"HIP_R_16F",                                         "rocblas_datatype_f16_r",                CONV_NUMERIC_LITERAL, API_BLAS, SEC::CUDA_DATA_TYPES}}, //  2 // 150
+  {"CUDA_C_16F",                                       {"HIP_C_16F",                                         "rocblas_datatype_f16_c",                CONV_NUMERIC_LITERAL, API_BLAS, SEC::CUDA_DATA_TYPES}}, //  6 // 153
+  {"CUDA_R_32F",                                       {"HIP_R_32F",                                         "rocblas_datatype_f32_r",                CONV_NUMERIC_LITERAL, API_BLAS, SEC::CUDA_DATA_TYPES}}, //  0 // 151
+  {"CUDA_C_32F",                                       {"HIP_C_32F",                                         "rocblas_datatype_f32_c",                CONV_NUMERIC_LITERAL, API_BLAS, SEC::CUDA_DATA_TYPES}}, //  4 // 154
+  {"CUDA_R_64F",                                       {"HIP_R_64F",                                         "rocblas_datatype_f64_r",                CONV_NUMERIC_LITERAL, API_BLAS, SEC::CUDA_DATA_TYPES}}, //  1 // 152
+  {"CUDA_C_64F",                                       {"HIP_C_64F",                                         "rocblas_datatype_f64_c",                CONV_NUMERIC_LITERAL, API_BLAS, SEC::CUDA_DATA_TYPES}}, //  5 // 155
+  {"CUDA_R_8I",                                        {"HIP_R_8I",                                          "rocblas_datatype_i8_r",                 CONV_NUMERIC_LITERAL, API_BLAS, SEC::CUDA_DATA_TYPES}}, //  3 // 160
+  {"CUDA_C_8I",                                        {"HIP_C_8I",                                          "rocblas_datatype_i8_c",                 CONV_NUMERIC_LITERAL, API_BLAS, SEC::CUDA_DATA_TYPES}}, //  7 // 164
+  {"CUDA_R_8U",                                        {"HIP_R_8U",                                          "rocblas_datatype_u8_r",                 CONV_NUMERIC_LITERAL, API_BLAS, SEC::CUDA_DATA_TYPES}}, //  8 // 161
+  {"CUDA_C_8U",                                        {"HIP_C_8U",                                          "rocblas_datatype_u8_c",                 CONV_NUMERIC_LITERAL, API_BLAS, SEC::CUDA_DATA_TYPES}}, //  9 // 165
+  {"CUDA_R_32I",                                       {"HIP_R_32I",                                         "rocblas_datatype_i32_r",                CONV_NUMERIC_LITERAL, API_BLAS, SEC::CUDA_DATA_TYPES}}, // 10 // 162
+  {"CUDA_C_32I",                                       {"HIP_C_32I",                                         "rocblas_datatype_i32_c",                CONV_NUMERIC_LITERAL, API_BLAS, SEC::CUDA_DATA_TYPES}}, // 11 // 166
+  {"CUDA_R_32U",                                       {"HIP_R_32U",                                         "rocblas_datatype_u32_r",                CONV_NUMERIC_LITERAL, API_BLAS, SEC::CUDA_DATA_TYPES}}, // 12 // 163
+  {"CUDA_C_32U",                                       {"HIP_C_32U",                                         "rocblas_datatype_u32_c",                CONV_NUMERIC_LITERAL, API_BLAS, SEC::CUDA_DATA_TYPES}}, // 13 // 167
+  {"CUDA_R_16BF",                                      {"HIP_R_16BF",                                        "rocblas_datatype_bf16_r",               CONV_NUMERIC_LITERAL, API_BLAS, SEC::CUDA_DATA_TYPES}}, // 14 // 168
+  {"CUDA_C_16BF",                                      {"HIP_C_16BF",                                        "rocblas_datatype_bf16_c",               CONV_NUMERIC_LITERAL, API_BLAS, SEC::CUDA_DATA_TYPES}}, // 15 // 169
+  {"CUDA_R_4I",                                        {"HIPBLAS_R_4I",                                      "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::CUDA_DATA_TYPES, UNSUPPORTED}}, // 16
+  {"CUDA_C_4I",                                        {"HIPBLAS_C_4I",                                      "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::CUDA_DATA_TYPES, UNSUPPORTED}}, // 17
+  {"CUDA_R_4U",                                        {"HIPBLAS_R_4U",                                      "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::CUDA_DATA_TYPES, UNSUPPORTED}}, // 18
+  {"CUDA_C_4U",                                        {"HIPBLAS_C_4U",                                      "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::CUDA_DATA_TYPES, UNSUPPORTED}}, // 19
+  {"CUDA_R_16I",                                       {"HIPBLAS_R_16I",                                     "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::CUDA_DATA_TYPES, UNSUPPORTED}}, // 20
+  {"CUDA_C_16I",                                       {"HIPBLAS_C_16I",                                     "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::CUDA_DATA_TYPES, UNSUPPORTED}}, // 21
+  {"CUDA_R_16U",                                       {"HIPBLAS_R_16U",                                     "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::CUDA_DATA_TYPES, UNSUPPORTED}}, // 22
+  {"CUDA_C_16U",                                       {"HIPBLAS_C_16U",                                     "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::CUDA_DATA_TYPES, UNSUPPORTED}}, // 23
+  {"CUDA_R_64I",                                       {"HIPBLAS_R_64I",                                     "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::CUDA_DATA_TYPES, UNSUPPORTED}}, // 24
+  {"CUDA_C_64I",                                       {"HIPBLAS_C_64I",                                     "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::CUDA_DATA_TYPES, UNSUPPORTED}}, // 25
+  {"CUDA_R_64U",                                       {"HIPBLAS_R_64U",                                     "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::CUDA_DATA_TYPES, UNSUPPORTED}}, // 26
+  {"CUDA_C_64U",                                       {"HIPBLAS_C_64U",                                     "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::CUDA_DATA_TYPES, UNSUPPORTED}}, // 27
+  {"CUDA_R_8F_E4M3",                                   {"HIPBLAS_R_8F_E4M3",                                 "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::CUDA_DATA_TYPES, UNSUPPORTED}}, // 28
+  {"CUDA_R_8F_E5M2",                                   {"HIPBLAS_R_8F_E5M2",                                 "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::CUDA_DATA_TYPES, UNSUPPORTED}}, // 29
 
   // CUBLAS Data Types
 
-  {"cublasHandle_t",                                   {"hipblasHandle_t",                                   "rocblas_handle",                        CONV_TYPE, API_BLAS, 2}},
+  {"cublasHandle_t",                                   {"hipblasHandle_t",                                   "rocblas_handle",                        CONV_TYPE, API_BLAS, SEC::BLAS_DATA_TYPES}},
   // TODO: dereferencing: typedef struct cublasContext *cublasHandle_t;
-  {"cublasContext",                                    {"hipblasContext",                                    "_rocblas_handle",                       CONV_TYPE, API_BLAS, 2, HIP_UNSUPPORTED}},
+  {"cublasContext",                                    {"hipblasContext",                                    "_rocblas_handle",                       CONV_TYPE, API_BLAS, SEC::BLAS_DATA_TYPES, HIP_UNSUPPORTED}},
 
-  {"cublasComputeType_t",                              {"hipblasComputeType_t",                              "rocblas_computetype",                   CONV_TYPE, API_BLAS, 2}},
-  {"CUBLAS_COMPUTE_16F",                               {"HIPBLAS_COMPUTE_16F",                               "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, ROC_UNSUPPORTED}}, // 64
-  {"CUBLAS_COMPUTE_16F_PEDANTIC",                      {"HIPBLAS_COMPUTE_16F_PEDANTIC",                      "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, ROC_UNSUPPORTED}}, // 65
-  {"CUBLAS_COMPUTE_32F",                               {"HIPBLAS_COMPUTE_32F",                               "rocblas_compute_type_f32",              CONV_NUMERIC_LITERAL, API_BLAS, 2}}, // 68
-  {"CUBLAS_COMPUTE_32F_PEDANTIC",                      {"HIPBLAS_COMPUTE_32F_PEDANTIC",                      "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, ROC_UNSUPPORTED}}, // 69
-  {"CUBLAS_COMPUTE_32F_FAST_16F",                      {"HIPBLAS_COMPUTE_32F_FAST_16F",                      "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, ROC_UNSUPPORTED}}, // 74
-  {"CUBLAS_COMPUTE_32F_FAST_16BF",                     {"HIPBLAS_COMPUTE_32F_FAST_16BF",                     "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, ROC_UNSUPPORTED}}, // 75
-  {"CUBLAS_COMPUTE_32F_FAST_TF32",                     {"HIPBLAS_COMPUTE_32F_FAST_TF32",                     "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, ROC_UNSUPPORTED}}, // 77
-  {"CUBLAS_COMPUTE_64F",                               {"HIPBLAS_COMPUTE_64F",                               "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, ROC_UNSUPPORTED}}, // 70
-  {"CUBLAS_COMPUTE_64F_PEDANTIC",                      {"HIPBLAS_COMPUTE_64F_PEDANTIC",                      "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, ROC_UNSUPPORTED}}, // 71
-  {"CUBLAS_COMPUTE_32I",                               {"HIPBLAS_COMPUTE_32I",                               "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, ROC_UNSUPPORTED}}, // 72
-  {"CUBLAS_COMPUTE_32I_PEDANTIC",                      {"HIPBLAS_COMPUTE_32I_PEDANTIC",                      "",                                      CONV_NUMERIC_LITERAL, API_BLAS, 2, ROC_UNSUPPORTED}}, // 73
+  {"cublasComputeType_t",                              {"hipblasComputeType_t",                              "rocblas_computetype",                   CONV_TYPE, API_BLAS, SEC::BLAS_DATA_TYPES}},
+  {"CUBLAS_COMPUTE_16F",                               {"HIPBLAS_COMPUTE_16F",                               "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, ROC_UNSUPPORTED}}, // 64
+  {"CUBLAS_COMPUTE_16F_PEDANTIC",                      {"HIPBLAS_COMPUTE_16F_PEDANTIC",                      "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, ROC_UNSUPPORTED}}, // 65
+  {"CUBLAS_COMPUTE_32F",                               {"HIPBLAS_COMPUTE_32F",                               "rocblas_compute_type_f32",              CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES}}, // 68
+  {"CUBLAS_COMPUTE_32F_PEDANTIC",                      {"HIPBLAS_COMPUTE_32F_PEDANTIC",                      "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, ROC_UNSUPPORTED}}, // 69
+  {"CUBLAS_COMPUTE_32F_FAST_16F",                      {"HIPBLAS_COMPUTE_32F_FAST_16F",                      "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, ROC_UNSUPPORTED}}, // 74
+  {"CUBLAS_COMPUTE_32F_FAST_16BF",                     {"HIPBLAS_COMPUTE_32F_FAST_16BF",                     "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, ROC_UNSUPPORTED}}, // 75
+  {"CUBLAS_COMPUTE_32F_FAST_TF32",                     {"HIPBLAS_COMPUTE_32F_FAST_TF32",                     "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, ROC_UNSUPPORTED}}, // 77
+  {"CUBLAS_COMPUTE_64F",                               {"HIPBLAS_COMPUTE_64F",                               "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, ROC_UNSUPPORTED}}, // 70
+  {"CUBLAS_COMPUTE_64F_PEDANTIC",                      {"HIPBLAS_COMPUTE_64F_PEDANTIC",                      "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, ROC_UNSUPPORTED}}, // 71
+  {"CUBLAS_COMPUTE_32I",                               {"HIPBLAS_COMPUTE_32I",                               "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, ROC_UNSUPPORTED}}, // 72
+  {"CUBLAS_COMPUTE_32I_PEDANTIC",                      {"HIPBLAS_COMPUTE_32I_PEDANTIC",                      "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, ROC_UNSUPPORTED}}, // 73
+
+  // cuBLASLt Data Types
+
+  {"cublasLtHandle_t",                                 {"hipblasLtHandle_t",                                 "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES}},
+  // TODO: dereferencing: typedef struct cublasLtContext *cublasLtHandle_t;
+  {"cublasLtContext",                                  {"hipblasLtContext",                                  "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, HIP_UNSUPPORTED}},
+
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_TYPE_NAME_VER_MAP {
@@ -281,6 +290,8 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_TYPE_NAME_VER_MAP {
   {"CUDA_C_64U",                                       {CUDA_110, CUDA_0,   CUDA_0  }},
   {"CUDA_R_8F_E4M3",                                   {CUDA_118, CUDA_0,   CUDA_0  }},
   {"CUDA_R_8F_E5M2",                                   {CUDA_118, CUDA_0,   CUDA_0  }},
+  {"cublasLtHandle_t",                                 {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"cublasLtContext",                                  {CUDA_101, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_TYPE_NAME_VER_MAP {
@@ -369,6 +380,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_TYPE_NAME_VER_MAP {
   {"HIPBLAS_PEDANTIC_MATH",                            {HIP_6010, HIP_0,    HIP_0   }},
   {"HIPBLAS_TF32_TENSOR_OP_MATH",                      {HIP_6010, HIP_0,    HIP_0   }},
   {"HIPBLAS_MATH_DISALLOW_REDUCED_PRECISION_REDUCTION",{HIP_6010, HIP_0,    HIP_0   }},
+  {"hipblasLtHandle_t",                                {HIP_5050, HIP_0,    HIP_0   }},
 
   {"rocblas_handle",                                   {HIP_1050, HIP_0,    HIP_0   }},
   {"_rocblas_handle",                                  {HIP_1050, HIP_0,    HIP_0   }},
