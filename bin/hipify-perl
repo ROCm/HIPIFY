@@ -3867,6 +3867,8 @@ sub simpleSubstitutions {
     subst("cublasIzamin_64", "hipblasIzamin_v2_64", "library");
     subst("cublasIzamin_v2", "hipblasIzamin_v2", "library");
     subst("cublasIzamin_v2_64", "hipblasIzamin_v2_64", "library");
+    subst("cublasLtCreate", "hipblasLtCreate", "library");
+    subst("cublasLtDestroy", "hipblasLtDestroy", "library");
     subst("cublasNrm2Ex", "hipblasNrm2Ex_v2", "library");
     subst("cublasRotEx", "hipblasRotEx_v2", "library");
     subst("cublasSasum", "hipblasSasum", "library");
@@ -11207,6 +11209,13 @@ sub warnHipOnlyUnsupportedFunctions {
         "cublasRotEx_64",
         "cublasNrm2Ex_64",
         "cublasMigrateComputeType",
+        "cublasLtHeuristicsCacheSetCapacity",
+        "cublasLtHeuristicsCacheGetCapacity",
+        "cublasLtGetVersion",
+        "cublasLtGetStatusString",
+        "cublasLtGetStatusName",
+        "cublasLtGetProperty",
+        "cublasLtGetCudartVersion",
         "cublasLtContext",
         "cublasLoggerConfigure",
         "cublasLogCallback",
@@ -11635,6 +11644,13 @@ sub warnRocOnlyUnsupportedFunctions {
         "cublasRotmEx",
         "cublasRotgEx",
         "cublasMigrateComputeType",
+        "cublasLtHeuristicsCacheSetCapacity",
+        "cublasLtHeuristicsCacheGetCapacity",
+        "cublasLtGetVersion",
+        "cublasLtGetStatusString",
+        "cublasLtGetStatusName",
+        "cublasLtGetProperty",
+        "cublasLtGetCudartVersion",
         "cublasLoggerConfigure",
         "cublasLogCallback",
         "cublasIaminEx_64",
