@@ -505,7 +505,7 @@ LLVM >= 10.0.0
       -DCMAKE_BUILD_TYPE=Release \
       ../llvm-project/llvm
 
-   Run ``Visual Studio 17 2022``, open the generated ``LLVM.sln``, build all, build project ``INSTALL``.
+   Run ``Visual Studio 17 2022``, open the generated ``LLVM.sln``, build all, and build project ``INSTALL``.
 
 3. Install `CUDA <https://developer.nvidia.com/cuda-toolkit-archive>`_ version 7.0 or
    greater.
