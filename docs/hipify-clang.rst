@@ -424,19 +424,19 @@ belongs to an appropriate version.
 LLVM <= 9.0.1
 ---------------------------------------------------------------------
 
-#. Download `LLVM <https://github.com/llvm/llvm-project/releases/download/llvmorg-9.0.1/llvm-9.0.1.src.tar.xz>`_ \+ `Clang <https://github.com/llvm/llvm-project/releases/download/llvmorg-9.0.1/clang-9.0.1.src.tar.xz>`_ sources
+1. Download `LLVM <https://github.com/llvm/llvm-project/releases/download/llvmorg-9.0.1/llvm-9.0.1.src.tar.xz>`_ \+ `Clang <https://github.com/llvm/llvm-project/releases/download/llvmorg-9.0.1/clang-9.0.1.src.tar.xz>`_ sources
 
-#. Build `LLVM+Clang <http://releases.llvm.org/9.0.0/docs/CMake.html>`_:
+2. Build `LLVM+Clang <http://releases.llvm.org/9.0.0/docs/CMake.html>`_:
 
-  .. code-block:: bash
+   .. code-block:: bash
 
     cd .. \
     mkdir build dist \
     cd build
 
-  **Linux**:
+   **Linux**:
 
-  .. code-block:: bash
+   .. code-block:: bash
 
     cmake \
       -DCMAKE_INSTALL_PREFIX=../dist \
@@ -447,9 +447,9 @@ LLVM <= 9.0.1
       ../llvm
     make -j install
 
-  **Windows**:
+   **Windows**:
 
-  .. code-block:: shell
+   .. code-block:: shell
 
     cmake \
       -G "Visual Studio 16 2019" \
@@ -462,7 +462,7 @@ LLVM <= 9.0.1
       -DCMAKE_BUILD_TYPE=Release \
       ../llvm
 
-#. Run ``Visual Studio 16 2019``, open the generated ``LLVM.sln``, build all, and build the ``INSTALL``
+3. Run ``Visual Studio 16 2019``, open the generated ``LLVM.sln``, build all, and build the ``INSTALL``
    project.
 
 LLVM >= 10.0.0
