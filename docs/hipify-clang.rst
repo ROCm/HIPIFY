@@ -428,39 +428,39 @@ LLVM <= 9.0.1
 
 2. Build `LLVM+Clang <http://releases.llvm.org/9.0.0/docs/CMake.html>`_:
 
-    .. code-block:: bash
+   .. code-block:: bash
 
-      cd .. \
-      mkdir build dist \
-      cd build
+    cd .. \
+    mkdir build dist \
+    cd build
 
-    **Linux**:
+   **Linux**:
 
-    .. code-block:: bash
+   .. code-block:: bash
 
-      cmake \
-        -DCMAKE_INSTALL_PREFIX=../dist \
-        -DLLVM_SOURCE_DIR=../llvm \
-        -DLLVM_TARGETS_TO_BUILD="X86;NVPTX" \
-        -DLLVM_INCLUDE_TESTS=OFF \
-        -DCMAKE_BUILD_TYPE=Release \
-        ../llvm
-      make -j install
+    cmake \
+      -DCMAKE_INSTALL_PREFIX=../dist \
+      -DLLVM_SOURCE_DIR=../llvm \
+      -DLLVM_TARGETS_TO_BUILD="X86;NVPTX" \
+      -DLLVM_INCLUDE_TESTS=OFF \
+      -DCMAKE_BUILD_TYPE=Release \
+      ../llvm
+    make -j install
 
-    **Windows**:
+   **Windows**:
 
-    .. code-block:: shell
+   .. code-block:: shell
 
-      cmake \
-        -G "Visual Studio 16 2019" \
-        -A x64 \
-        -Thost=x64 \
-        -DCMAKE_INSTALL_PREFIX=../dist \
-        -DLLVM_SOURCE_DIR=../llvm \
-        -DLLVM_TARGETS_TO_BUILD="NVPTX" \
-        -DLLVM_INCLUDE_TESTS=OFF \
-        -DCMAKE_BUILD_TYPE=Release \
-        ../llvm
+    cmake \
+      -G "Visual Studio 16 2019" \
+      -A x64 \
+      -Thost=x64 \
+      -DCMAKE_INSTALL_PREFIX=../dist \
+      -DLLVM_SOURCE_DIR=../llvm \
+      -DLLVM_TARGETS_TO_BUILD="NVPTX" \
+      -DLLVM_INCLUDE_TESTS=OFF \
+      -DCMAKE_BUILD_TYPE=Release \
+      ../llvm
 
 3. Run ``Visual Studio 16 2019``, open the generated ``LLVM.sln``, build all, and build the ``INSTALL`` project.
 
