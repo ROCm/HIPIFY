@@ -471,15 +471,15 @@ LLVM >= 10.0.0
 
 2. Build `LLVM project <http://llvm.org/docs/CMake.html>`_:
 
-  .. code-block:: bash
-    
+   .. code-block:: bash
+
     cd .. \
     mkdir build dist \
     cd build
 
-  **Linux**:
+   **Linux**:
 
-  .. code-block:: bash
+   .. code-block:: bash
 
     cmake \
       -DCMAKE_INSTALL_PREFIX=../dist \
@@ -490,9 +490,9 @@ LLVM >= 10.0.0
       ../llvm-project/llvm
     make -j install
 
-  **Windows**:
+   **Windows**:
 
-  .. code-block:: shell
+   .. code-block:: shell
 
     cmake \
       -G "Visual Studio 17 2022" \
@@ -505,59 +505,59 @@ LLVM >= 10.0.0
       -DCMAKE_BUILD_TYPE=Release \
       ../llvm-project/llvm
 
-  Run ``Visual Studio 17 2022``, open the generated ``LLVM.sln``, build all, build project ``INSTALL``.
+   Run ``Visual Studio 17 2022``, open the generated ``LLVM.sln``, build all, build project ``INSTALL``.
 
 3. Install `CUDA <https://developer.nvidia.com/cuda-toolkit-archive>`_ version 7.0 or
    greater.
 
    * In case of multiple CUDA installations, specify the particular version using ``DCUDA_TOOLKIT_ROOT_DIR`` option:
 
-   **Linux**:
+     **Linux**:
 
-   .. code-block:: bash
+     .. code-block:: bash
 
-    -DCUDA_TOOLKIT_ROOT_DIR=/usr/include
+      -DCUDA_TOOLKIT_ROOT_DIR=/usr/include
 
-   **Windows**:
+     **Windows**:
 
-   .. code-block:: shell
+     .. code-block:: shell
 
-    -DCUDA_TOOLKIT_ROOT_DIR="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.3"
+      -DCUDA_TOOLKIT_ROOT_DIR="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.3"
 
-    -DCUDA_SDK_ROOT_DIR="C:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.3"
+      -DCUDA_SDK_ROOT_DIR="C:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.3"
 
 4. Install `cuDNN <https://developer.nvidia.com/rdp/cudnn-archive>`_ belonging to the version corresponding
    to the CUDA version:
 
    * To specify the path to `cuDNN <https://developer.nvidia.com/cudnn-downloads>`_, use the ``CUDA_DNN_ROOT_DIR`` option:
 
-   **Linux**:
+     **Linux**:
 
-   .. code-block:: bash
+     .. code-block:: bash
 
-    -DCUDA_DNN_ROOT_DIR=/usr/include
+      -DCUDA_DNN_ROOT_DIR=/usr/include
 
-   **Windows**:
+     **Windows**:
 
-   .. code-block:: shell
-
-    -DCUDA_DNN_ROOT_DIR=D:/CUDA/cuDNN/9.1.0
+     .. code-block:: shell
+      
+      -DCUDA_DNN_ROOT_DIR=D:/CUDA/cuDNN/9.1.0
 
 5. Install `CUB <https://github.com/nvidia/cub>`_ belonging to the version corresponding to the CUDA version:
    
    * To specify the path to CUB, specify using the ``CUDA_CUB_ROOT_DIR`` option:
 
-   **Linux**:
+     **Linux**:
 
-   .. code-block:: bash
+     .. code-block:: bash
 
-    -DCUDA_CUB_ROOT_DIR=/srv/git/CUB
+      -DCUDA_CUB_ROOT_DIR=/srv/git/CUB
 
-   **Windows**:
+     **Windows**:
 
-   .. code-block:: shell
+     .. code-block:: shell
 
-    -DCUDA_CUB_ROOT_DIR=D:/CUDA/CUB/cub-2.1.0
+      -DCUDA_CUB_ROOT_DIR=D:/CUDA/CUB/cub-2.1.0
 
 6. Install `Python <https://www.python.org/downloads>`_ version 2.7 or greater.
 
@@ -565,65 +565,65 @@ LLVM >= 10.0.0
 
    * Install ``lit`` into ``Python``:
 
-   **Linux**:
+     **Linux**:
 
-   .. code-block:: bash
+     .. code-block:: bash
 
-    python /usr/llvm/18.1.4/llvm-project/llvm/utils/lit/setup.py install
+      python /usr/llvm/18.1.4/llvm-project/llvm/utils/lit/setup.py install
       
-   **Windows**:
+     **Windows**:
 
-   .. code-block:: shell
+     .. code-block:: shell
 
-    python D:/LLVM/18.1.4/llvm-project/llvm/utils/lit/setup.py install
+      python D:/LLVM/18.1.4/llvm-project/llvm/utils/lit/setup.py install
 
-   In case of errors similar to ``ModuleNotFoundError: No module named 'setuptools'``, upgrade the ``setuptools`` package:
+     In case of errors similar to ``ModuleNotFoundError: No module named 'setuptools'``, upgrade the ``setuptools`` package:
 
-   .. code-block:: bash
+     .. code-block:: bash
 
-    python -m pip install --upgrade pip setuptools
+      python -m pip install --upgrade pip setuptools
       
    * Starting with LLVM 6.0.1, specify the path to the ``llvm-lit`` Python script using the ``LLVM_EXTERNAL_LIT`` option:
 
-   **Linux**:
+     **Linux**:
 
-   .. code-block:: bash
+     .. code-block:: bash
 
-    -DLLVM_EXTERNAL_LIT=/usr/llvm/18.1.4/build/bin/llvm-lit
+      -DLLVM_EXTERNAL_LIT=/usr/llvm/18.1.4/build/bin/llvm-lit
 
-   **Windows**:
+     **Windows**:
 
-   .. code-block:: shell
+     .. code-block:: shell
 
-    -DLLVM_EXTERNAL_LIT=D:/LLVM/18.1.4/build/Release/bin/llvm-lit.py
+      -DLLVM_EXTERNAL_LIT=D:/LLVM/18.1.4/build/Release/bin/llvm-lit.py
 
    * ``FileCheck``:
 
-   **Linux**:
+     **Linux**:
 
-   Copy from ``/usr/llvm/18.1.4/build/bin/`` to ``CMAKE_INSTALL_PREFIX/dist/bin``.
+     Copy from ``/usr/llvm/18.1.4/build/bin/`` to ``CMAKE_INSTALL_PREFIX/dist/bin``.
 
-   **Windows**:
+     **Windows**:
 
-   Copy from ``D:/LLVM/18.1.4/build/Release/bin`` to ``CMAKE_INSTALL_PREFIX/dist/bin``.
+     Copy from ``D:/LLVM/18.1.4/build/Release/bin`` to ``CMAKE_INSTALL_PREFIX/dist/bin``.
 
-   Alternatively, specify the path to ``FileCheck`` in the ``CMAKE_INSTALL_PREFIX`` option.
+     Alternatively, specify the path to ``FileCheck`` in the ``CMAKE_INSTALL_PREFIX`` option.
 
 8. To run OpenGL tests successfully on:
 
-**Linux**:
+   **Linux**:
 
-Install GL headers.
+   Install GL headers.
 
-On Ubuntu, use: ``sudo apt-get install mesa-common-dev``
+   On Ubuntu, use: ``sudo apt-get install mesa-common-dev``
 
-**Windows**:
+   **Windows**:
 
-No installation required. All the required headers are shipped with the Windows SDK.
+   No installation required. All the required headers are shipped with the Windows SDK.
 
 9. Set the ``HIPIFY_CLANG_TESTS`` option to ``ON``: ``-DHIPIFY_CLANG_TESTS=ON``
 
-10.  Build and run tests.
+10. Build and run tests.
 
 Linux testing
 ======================================================
