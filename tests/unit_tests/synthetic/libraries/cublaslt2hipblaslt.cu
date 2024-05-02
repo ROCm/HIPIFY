@@ -30,5 +30,10 @@ int main() {
   status = cublasLtDestroy(blasLtHandle);
 #endif
 
+#if CUDA_VERSION >= 11000 && CUBLAS_VERSION >= 11000
+  // CHECK: hipblasLtMatrixLayoutOpaque_t blasLtMatrixLayoutOpaque;
+  cublasLtMatrixLayoutOpaque_t blasLtMatrixLayoutOpaque;
+#endif
+
   return 0;
 }
