@@ -189,6 +189,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP {
   {"cublasLtHandle_t",                                 {"hipblasLtHandle_t",                                 "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES}},
   // TODO: dereferencing: typedef struct cublasLtContext *cublasLtHandle_t;
   {"cublasLtContext",                                  {"hipblasLtContext",                                  "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, HIP_UNSUPPORTED}},
+  // NOTE: hipblasLtMatrixLayoutOpaque_t contains uint64_t data[4], whereas cublasLtMatrixLayoutOpaque_t contains uint64_t data[8]
+  {"cublasLtMatrixLayoutOpaque_t",                     {"hipblasLtMatrixLayoutOpaque_t",                     "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES}},
+  // NOTE: cublasLtMatrixLayoutStruct is the former name for cublasLtMatrixLayoutOpaque_t, that has been alive for 10.1.0 <= CUDA <= 10.2.0
+  {"cublasLtMatrixLayoutStruct",                       {"hipblasLtMatrixLayoutOpaque_t",                     "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES}},
+  {"cublasLtMatrixLayout_t",                           {"hipblasLtMatrixLayout_t",                           "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES}},
 
 };
 
@@ -292,6 +297,9 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_TYPE_NAME_VER_MAP {
   {"CUDA_R_8F_E5M2",                                   {CUDA_118, CUDA_0,   CUDA_0  }},
   {"cublasLtHandle_t",                                 {CUDA_101, CUDA_0,   CUDA_0  }},
   {"cublasLtContext",                                  {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"cublasLtMatrixLayoutOpaque_t",                     {CUDA_110, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 11001, CUBLAS_VERSION 11000, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 0
+  {"cublasLtMatrixLayoutStruct",                       {CUDA_101, CUDA_0,   CUDA_102}},
+  {"cublasLtMatrixLayout_t",                           {CUDA_101, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_TYPE_NAME_VER_MAP {

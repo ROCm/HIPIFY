@@ -1077,6 +1077,19 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
   {"cublasRotmgEx",                  {"hipblasRotmgEx",                  "",                                         CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED}},
   {"cublasSrotmg_v2",                {"hipblasSrotmg",                   "rocblas_srotmg",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
   {"cublasDrotmg_v2",                {"hipblasDrotmg",                   "rocblas_drotmg",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
+
+  // BLASLt functions
+  {"cublasLtCreate",                 {"hipblasLtCreate",                 "",                                         CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT}},
+  {"cublasLtDestroy",                {"hipblasLtDestroy",                "",                                         CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT}},
+  {"cublasLtGetStatusName",          {"hipblasLtGetStatusName",          "",                                         CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
+  {"cublasLtGetStatusString",        {"hipblasLtGetStatusString",        "",                                         CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
+  // TODO: make hipblasLtGetVersion(hipblasLtHandle_t handle, int* version) hipblasLtGetVersion(void)
+  {"cublasLtGetVersion",             {"hipblasLtGetVersion",             "",                                         CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
+  {"cublasLtGetCudartVersion",       {"hipblasLtGetCudartVersion",       "",                                         CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
+  {"cublasLtGetProperty",            {"hipblasLtGetProperty",            "",                                         CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
+  {"cublasLtHeuristicsCacheGetCapacity",     {"hipblasLtHeuristicsCacheGetCapacity",     "",                         CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
+  {"cublasLtHeuristicsCacheSetCapacity",     {"hipblasLtHeuristicsCacheSetCapacity",     "",                         CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
+  {"cublasLtDisableCpuInstructionsSetMask",  {"hipblasLtDisableCpuInstructionsSetMask",  "",                         CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_FUNCTION_VER_MAP {
@@ -1527,6 +1540,16 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_FUNCTION_VER_MAP {
   {"cublasSgemmGroupedBatched_64",               {CUDA_124, CUDA_0,   CUDA_0   }},
   {"cublasDgemmGroupedBatched",                  {CUDA_124, CUDA_0,   CUDA_0   }},
   {"cublasDgemmGroupedBatched_64",               {CUDA_124, CUDA_0,   CUDA_0   }},
+  {"cublasLtCreate",                             {CUDA_101, CUDA_0,   CUDA_0   }},
+  {"cublasLtDestroy",                            {CUDA_101, CUDA_0,   CUDA_0   }},
+  {"cublasLtGetStatusName",                      {CUDA_114, CUDA_0,   CUDA_0   }}, // A: CUDA_VERSION 11042, CUBLAS_VERSION 110601, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 6
+  {"cublasLtGetStatusString",                    {CUDA_114, CUDA_0,   CUDA_0   }}, // A: CUDA_VERSION 11042, CUBLAS_VERSION 110601, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 6
+  {"cublasLtGetVersion",                         {CUDA_101, CUDA_0,   CUDA_0   }},
+  {"cublasLtGetCudartVersion",                   {CUDA_101, CUDA_0,   CUDA_0   }},
+  {"cublasLtGetProperty",                        {CUDA_101, CUDA_0,   CUDA_0   }},
+  {"cublasLtHeuristicsCacheGetCapacity",         {CUDA_118, CUDA_0,   CUDA_0   }},
+  {"cublasLtHeuristicsCacheSetCapacity",         {CUDA_118, CUDA_0,   CUDA_0   }},
+  {"cublasLtDisableCpuInstructionsSetMask",      {CUDA_121, CUDA_0,   CUDA_0   }}, // A: CUDA_VERSION 12011, CUBLAS_VERSION 120103, CUBLAS_VER_MAJOR 12 CUBLAS_VER_MINOR 3
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_FUNCTION_VER_MAP {
@@ -1929,6 +1952,8 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_FUNCTION_VER_MAP {
   {"hipblasDswap_64",                            {HIP_6010, HIP_0,    HIP_0   }},
   {"hipblasCswap_v2_64",                         {HIP_6010, HIP_0,    HIP_0   }},
   {"hipblasZswap_v2_64",                         {HIP_6010, HIP_0,    HIP_0   }},
+  {"hipblasLtCreate",                            {HIP_5050, HIP_0,    HIP_0   }},
+  {"hipblasLtDestroy",                           {HIP_5050, HIP_0,    HIP_0   }},
 
   {"rocblas_status_to_string",                   {HIP_3050, HIP_0,    HIP_0   }},
   {"rocblas_sscal",                              {HIP_1050, HIP_0,    HIP_0   }},

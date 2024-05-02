@@ -3867,6 +3867,8 @@ sub simpleSubstitutions {
     subst("cublasIzamin_64", "hipblasIzamin_v2_64", "library");
     subst("cublasIzamin_v2", "hipblasIzamin_v2", "library");
     subst("cublasIzamin_v2_64", "hipblasIzamin_v2_64", "library");
+    subst("cublasLtCreate", "hipblasLtCreate", "library");
+    subst("cublasLtDestroy", "hipblasLtDestroy", "library");
     subst("cublasNrm2Ex", "hipblasNrm2Ex_v2", "library");
     subst("cublasRotEx", "hipblasRotEx_v2", "library");
     subst("cublasSasum", "hipblasSasum", "library");
@@ -5446,6 +5448,9 @@ sub simpleSubstitutions {
     subst("cublasGemmAlgo_t", "hipblasGemmAlgo_t", "type");
     subst("cublasHandle_t", "hipblasHandle_t", "type");
     subst("cublasLtHandle_t", "hipblasLtHandle_t", "type");
+    subst("cublasLtMatrixLayoutOpaque_t", "hipblasLtMatrixLayoutOpaque_t", "type");
+    subst("cublasLtMatrixLayoutStruct", "hipblasLtMatrixLayoutOpaque_t", "type");
+    subst("cublasLtMatrixLayout_t", "hipblasLtMatrixLayout_t", "type");
     subst("cublasMath_t", "hipblasMath_t", "type");
     subst("cublasOperation_t", "hipblasOperation_t", "type");
     subst("cublasPointerMode_t", "hipblasPointerMode_t", "type");
@@ -11207,6 +11212,14 @@ sub warnHipOnlyUnsupportedFunctions {
         "cublasRotEx_64",
         "cublasNrm2Ex_64",
         "cublasMigrateComputeType",
+        "cublasLtHeuristicsCacheSetCapacity",
+        "cublasLtHeuristicsCacheGetCapacity",
+        "cublasLtGetVersion",
+        "cublasLtGetStatusString",
+        "cublasLtGetStatusName",
+        "cublasLtGetProperty",
+        "cublasLtGetCudartVersion",
+        "cublasLtDisableCpuInstructionsSetMask",
         "cublasLtContext",
         "cublasLoggerConfigure",
         "cublasLogCallback",
@@ -11635,6 +11648,14 @@ sub warnRocOnlyUnsupportedFunctions {
         "cublasRotmEx",
         "cublasRotgEx",
         "cublasMigrateComputeType",
+        "cublasLtHeuristicsCacheSetCapacity",
+        "cublasLtHeuristicsCacheGetCapacity",
+        "cublasLtGetVersion",
+        "cublasLtGetStatusString",
+        "cublasLtGetStatusName",
+        "cublasLtGetProperty",
+        "cublasLtGetCudartVersion",
+        "cublasLtDisableCpuInstructionsSetMask",
         "cublasLoggerConfigure",
         "cublasLogCallback",
         "cublasIaminEx_64",
