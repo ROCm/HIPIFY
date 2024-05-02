@@ -1,6 +1,6 @@
 # CUBLAS API supported by ROC
 
-## **2. CUBLAS Data types**
+## **1. CUBLAS Data types**
 
 |**CUDA**|**A**|**D**|**C**|**R**|**ROC**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
@@ -104,7 +104,7 @@
 |`cublasStatus`| | | | |`rocblas_status`|1.5.0| | | | |
 |`cublasStatus_t`| | | | |`rocblas_status`|1.5.0| | | | |
 
-## **3. CUDA Library Data types**
+## **2. CUDA Library Data types**
 
 |**CUDA**|**A**|**D**|**C**|**R**|**ROC**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
@@ -141,6 +141,13 @@
 |`cublasDataType_t`|7.5| | | |`rocblas_datatype`|1.8.2| | | | |
 |`cudaDataType`|8.0| | | |`rocblas_datatype`|1.8.2| | | | |
 |`cudaDataType_t`|8.0| | | |`rocblas_datatype_`|1.8.2| | | | |
+
+## **3. CUBLASLt Data types**
+
+|**CUDA**|**A**|**D**|**C**|**R**|**ROC**|**A**|**D**|**C**|**R**|**E**|
+|:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
+|`cublasLtContext`|10.1| | | | | | | | | |
+|`cublasLtHandle_t`|10.1| | | | | | | | | |
 
 ## **4. CUBLAS Helper Function Reference**
 
@@ -1011,6 +1018,20 @@
 |`cublasZtrsmBatched`| | | | |`rocblas_ztrsm_batched`|3.5.0| | | | |
 |`cublasZtrsmBatched_64`|12.0| | | | | | | | | |
 |`cublasZtrttp`| | | | | | | | | | |
+
+## **9. BLASLt Function Reference**
+
+|**CUDA**|**A**|**D**|**C**|**R**|**ROC**|**A**|**D**|**C**|**R**|**E**|
+|:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
+|`cublasLtCreate`|10.1| | | | | | | | | |
+|`cublasLtDestroy`|10.1| | | | | | | | | |
+|`cublasLtGetCudartVersion`|10.1| | | | | | | | | |
+|`cublasLtGetProperty`|10.1| | | | | | | | | |
+|`cublasLtGetStatusName`|11.4| | | | | | | | | |
+|`cublasLtGetStatusString`|11.4| | | | | | | | | |
+|`cublasLtGetVersion`|10.1| | | | | | | | | |
+|`cublasLtHeuristicsCacheGetCapacity`|11.8| | | | | | | | | |
+|`cublasLtHeuristicsCacheSetCapacity`|11.8| | | | | | | | | |
 
 
 \*A - Added; D - Deprecated; C - Changed; R - Removed; E - Experimental

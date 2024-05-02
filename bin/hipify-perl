@@ -1398,6 +1398,9 @@ my %removed_funcs = (
 );
 
 my %experimental_funcs = (
+    "cusolverDnXgetrs" => "6.2.0",
+    "cusolverDnXgetrf_bufferSize" => "6.2.0",
+    "cusolverDnXgetrf" => "6.2.0",
     "cusolverDnSetAdvOptions" => "6.2.0",
     "cusolverDnParams_t" => "6.2.0",
     "cusolverDnFunction_t" => "6.2.0",
@@ -1547,6 +1550,9 @@ sub experimentalSubstitutions {
     subst("cusolverDnCreateParams", "hipsolverDnCreateParams", "library");
     subst("cusolverDnDestroyParams", "hipsolverDnDestroyParams", "library");
     subst("cusolverDnSetAdvOptions", "hipsolverDnSetAdvOptions", "library");
+    subst("cusolverDnXgetrf", "hipsolverDnXgetrf", "library");
+    subst("cusolverDnXgetrf_bufferSize", "hipsolverDnXgetrf_bufferSize", "library");
+    subst("cusolverDnXgetrs", "hipsolverDnXgetrs", "library");
     subst("cusolverAlgMode_t", "hipsolverAlgMode_t", "type");
     subst("cusolverDnFunction_t", "hipsolverDnFunction_t", "type");
     subst("cusolverDnParams_t", "hipsolverDnParams_t", "type");
@@ -3861,6 +3867,8 @@ sub simpleSubstitutions {
     subst("cublasIzamin_64", "hipblasIzamin_v2_64", "library");
     subst("cublasIzamin_v2", "hipblasIzamin_v2", "library");
     subst("cublasIzamin_v2_64", "hipblasIzamin_v2_64", "library");
+    subst("cublasLtCreate", "hipblasLtCreate", "library");
+    subst("cublasLtDestroy", "hipblasLtDestroy", "library");
     subst("cublasNrm2Ex", "hipblasNrm2Ex_v2", "library");
     subst("cublasRotEx", "hipblasRotEx_v2", "library");
     subst("cublasSasum", "hipblasSasum", "library");
@@ -5108,6 +5116,7 @@ sub simpleSubstitutions {
     subst("caffe2\/operators\/spatial_batch_norm_op.h", "caffe2\/operators\/hip\/spatial_batch_norm_op_miopen.hip", "include");
     subst("channel_descriptor.h", "hip\/channel_descriptor.h", "include");
     subst("cooperative_groups.h", "hip\/hip_cooperative_groups.h", "include");
+    subst("cublasLt.h", "hipblaslt.h", "include");
     subst("cublas_api.h", "hipblas.h", "include");
     subst("cuda_fp16.h", "hip\/hip_fp16.h", "include");
     subst("cuda_profiler_api.h", "hip\/hip_runtime_api.h", "include");
@@ -5438,6 +5447,7 @@ sub simpleSubstitutions {
     subst("cublasFillMode_t", "hipblasFillMode_t", "type");
     subst("cublasGemmAlgo_t", "hipblasGemmAlgo_t", "type");
     subst("cublasHandle_t", "hipblasHandle_t", "type");
+    subst("cublasLtHandle_t", "hipblasLtHandle_t", "type");
     subst("cublasMath_t", "hipblasMath_t", "type");
     subst("cublasOperation_t", "hipblasOperation_t", "type");
     subst("cublasPointerMode_t", "hipblasPointerMode_t", "type");
@@ -8343,9 +8353,6 @@ sub warnUnsupportedFunctions {
         "cusolverDnXpotrf",
         "cusolverDnXlarft_bufferSize",
         "cusolverDnXlarft",
-        "cusolverDnXgetrs",
-        "cusolverDnXgetrf_bufferSize",
-        "cusolverDnXgetrf",
         "cusolverDnXgesvdr_bufferSize",
         "cusolverDnXgesvdr",
         "cusolverDnXgesvdp_bufferSize",
@@ -11202,6 +11209,14 @@ sub warnHipOnlyUnsupportedFunctions {
         "cublasRotEx_64",
         "cublasNrm2Ex_64",
         "cublasMigrateComputeType",
+        "cublasLtHeuristicsCacheSetCapacity",
+        "cublasLtHeuristicsCacheGetCapacity",
+        "cublasLtGetVersion",
+        "cublasLtGetStatusString",
+        "cublasLtGetStatusName",
+        "cublasLtGetProperty",
+        "cublasLtGetCudartVersion",
+        "cublasLtContext",
         "cublasLoggerConfigure",
         "cublasLogCallback",
         "cublasInit",
@@ -11629,6 +11644,13 @@ sub warnRocOnlyUnsupportedFunctions {
         "cublasRotmEx",
         "cublasRotgEx",
         "cublasMigrateComputeType",
+        "cublasLtHeuristicsCacheSetCapacity",
+        "cublasLtHeuristicsCacheGetCapacity",
+        "cublasLtGetVersion",
+        "cublasLtGetStatusString",
+        "cublasLtGetStatusName",
+        "cublasLtGetProperty",
+        "cublasLtGetCudartVersion",
         "cublasLoggerConfigure",
         "cublasLogCallback",
         "cublasIaminEx_64",

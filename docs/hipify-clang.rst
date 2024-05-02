@@ -637,7 +637,7 @@ On Linux, the following configurations are tested:
 
 Minimum build system requirements for the above configurations:
 
-* CMake 3.16.8, GNU C/C++ 9.2, Python 2.7.
+* CMake 3.16.8, GNU C/C++ 9.2, Python 3.0.
 
 Recommended build system requirements:
 
@@ -815,15 +815,15 @@ Tested configurations:
   * - ``17.0.1`` :sup:`6` - ``18.1.4`` :sup:`7`
     - ``7.0 - 12.3.2``
     - ``8.0.5  - 9.1.0``
-    - ``2019.16.11.34, 2022.17.9.5``
-    - ``3.29.0``
-    - ``3.12.2``
+    - ``2019.16.11.35, 2022.17.9.6``
+    - ``3.29.2``
+    - ``3.12.3``
   * - ``19.0.0git``
-    - ``7.0 - 12.3.2``
+    - ``7.0 - 12.4.1``
     - ``8.0.5  - 9.1.0``
-    - ``2019.16.11.34, 2022.17.9.5``
-    - ``3.29.0``
-    - ``3.12.2``
+    - ``2019.16.11.35, 2022.17.9.6``
+    - ``3.29.2``
+    - ``3.12.3``
 
 :sup:`5` LLVM 14.x.x is the latest major release supporting Visual Studio 2017.
 
