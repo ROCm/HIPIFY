@@ -5448,6 +5448,9 @@ sub simpleSubstitutions {
     subst("cublasGemmAlgo_t", "hipblasGemmAlgo_t", "type");
     subst("cublasHandle_t", "hipblasHandle_t", "type");
     subst("cublasLtHandle_t", "hipblasLtHandle_t", "type");
+    subst("cublasLtMatrixLayoutOpaque_t", "hipblasLtMatrixLayoutOpaque_t", "type");
+    subst("cublasLtMatrixLayoutStruct", "hipblasLtMatrixLayoutOpaque_t", "type");
+    subst("cublasLtMatrixLayout_t", "hipblasLtMatrixLayout_t", "type");
     subst("cublasMath_t", "hipblasMath_t", "type");
     subst("cublasOperation_t", "hipblasOperation_t", "type");
     subst("cublasPointerMode_t", "hipblasPointerMode_t", "type");
@@ -11216,6 +11219,7 @@ sub warnHipOnlyUnsupportedFunctions {
         "cublasLtGetStatusName",
         "cublasLtGetProperty",
         "cublasLtGetCudartVersion",
+        "cublasLtDisableCpuInstructionsSetMask",
         "cublasLtContext",
         "cublasLoggerConfigure",
         "cublasLogCallback",
@@ -11651,6 +11655,7 @@ sub warnRocOnlyUnsupportedFunctions {
         "cublasLtGetStatusName",
         "cublasLtGetProperty",
         "cublasLtGetCudartVersion",
+        "cublasLtDisableCpuInstructionsSetMask",
         "cublasLoggerConfigure",
         "cublasLogCallback",
         "cublasIaminEx_64",

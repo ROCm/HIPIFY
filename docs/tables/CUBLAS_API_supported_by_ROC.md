@@ -148,6 +148,9 @@
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
 |`cublasLtContext`|10.1| | | | | | | | | |
 |`cublasLtHandle_t`|10.1| | | | | | | | | |
+|`cublasLtMatrixLayoutOpaque_t`|11.0| | | | | | | | | |
+|`cublasLtMatrixLayoutStruct`|10.1| | |10.2| | | | | | |
+|`cublasLtMatrixLayout_t`|10.1| | | | | | | | | |
 
 ## **4. CUBLAS Helper Function Reference**
 
@@ -1025,6 +1028,7 @@
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
 |`cublasLtCreate`|10.1| | | | | | | | | |
 |`cublasLtDestroy`|10.1| | | | | | | | | |
+|`cublasLtDisableCpuInstructionsSetMask`|12.1| | | | | | | | | |
 |`cublasLtGetCudartVersion`|10.1| | | | | | | | | |
 |`cublasLtGetProperty`|10.1| | | | | | | | | |
 |`cublasLtGetStatusName`|11.4| | | | | | | | | |
