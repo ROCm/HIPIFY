@@ -15,4 +15,4 @@
 | DNN API         | [HIP DNN API](tables/CUDNN_API_supported_by_HIP.md)                  |       |        |
 | CUB API         | [HIP CUB API](tables/CUB_API_supported_by_HIP.md)                    |       |        |
 
-To generate the above documentation with the actual information about all supported CUDA APIs in Markdown format, run `hipify-clang --md` with or without specifying the output directory (`-o`).
+To generate the above documentation with the information about all supported CUDA APIs in Markdown format, run `hipify-clang --md` with or without specifying the output directory (`-o`).
