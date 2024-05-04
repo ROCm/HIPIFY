@@ -148,9 +148,16 @@
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
 |`cublasLtContext`|10.1| | | | | | | | | | | | | | | |
 |`cublasLtHandle_t`|10.1| | | |`hipblasLtHandle_t`|5.5.0| | | | | | | | | | |
+|`cublasLtMatmulAlgo_t`|10.1| | | |`hipblasLtMatmulAlgo_t`|5.5.0| | | | | | | | | | |
+|`cublasLtMatmulDescOpaque_t`|11.0| | | |`hipblasLtMatmulDescOpaque_t`|5.5.0| | | | | | | | | | |
+|`cublasLtMatmulDesc_t`|10.1| | | |`hipblasLtMatmulDesc_t`|5.5.0| | | | | | | | | | |
+|`cublasLtMatmulPreferenceOpaque_t`|11.0| | | |`hipblasLtMatmulPreferenceOpaque_t`|5.5.0| | | | | | | | | | |
+|`cublasLtMatmulPreference_t`|10.1| | | |`hipblasLtMatmulPreference_t`|5.5.0| | | | | | | | | | |
 |`cublasLtMatrixLayoutOpaque_t`|11.0| | | |`hipblasLtMatrixLayoutOpaque_t`| | | | | | | | | | | |
 |`cublasLtMatrixLayoutStruct`|10.1| | |10.2|`hipblasLtMatrixLayoutOpaque_t`| | | | | | | | | | | |
 |`cublasLtMatrixLayout_t`|10.1| | | |`hipblasLtMatrixLayout_t`| | | | | | | | | | | |
+|`cublasLtMatrixTransformDescOpaque_t`|11.0| | | |`hipblasLtMatrixTransformDescOpaque_t`|6.0.0| | | | | | | | | | |
+|`cublasLtMatrixTransformDesc_t`|10.1| | | |`hipblasLtMatrixTransformDesc_t`|6.0.0| | | | | | | | | | |
 
 ## **4. CUBLAS Helper Function Reference**
 
