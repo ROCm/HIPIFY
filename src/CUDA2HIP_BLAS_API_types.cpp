@@ -194,6 +194,15 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP {
   // NOTE: cublasLtMatrixLayoutStruct is the former name for cublasLtMatrixLayoutOpaque_t, that has been alive for 10.1.0 <= CUDA <= 10.2.0
   {"cublasLtMatrixLayoutStruct",                       {"hipblasLtMatrixLayoutOpaque_t",                     "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES}},
   {"cublasLtMatrixLayout_t",                           {"hipblasLtMatrixLayout_t",                           "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES}},
+  // NOTE: Aren't they compatible?
+  {"cublasLtMatmulAlgo_t",                             {"hipblasLtMatmulAlgo_t",                             "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES}},
+  // NOTE: Aren't they compatible?
+  {"cublasLtMatmulDescOpaque_t",                       {"hipblasLtMatmulDescOpaque_t",                       "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES}},
+  {"cublasLtMatmulDesc_t",                             {"hipblasLtMatmulDesc_t",                             "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES}},
+  {"cublasLtMatrixTransformDescOpaque_t",              {"hipblasLtMatrixTransformDescOpaque_t",              "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES}},
+  {"cublasLtMatrixTransformDesc_t",                    {"hipblasLtMatrixTransformDesc_t",                    "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES}},
+  {"cublasLtMatmulPreferenceOpaque_t",                 {"hipblasLtMatmulPreferenceOpaque_t",                 "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES}},
+  {"cublasLtMatmulPreference_t",                       {"hipblasLtMatmulPreference_t",                       "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES}},
 
 };
 
@@ -300,6 +309,13 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_TYPE_NAME_VER_MAP {
   {"cublasLtMatrixLayoutOpaque_t",                     {CUDA_110, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 11001, CUBLAS_VERSION 11000, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 0
   {"cublasLtMatrixLayoutStruct",                       {CUDA_101, CUDA_0,   CUDA_102}},
   {"cublasLtMatrixLayout_t",                           {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"cublasLtMatmulAlgo_t",                             {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"cublasLtMatmulDescOpaque_t",                       {CUDA_110, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 11001, CUBLAS_VERSION 11000, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 0
+  {"cublasLtMatmulDesc_t",                             {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"cublasLtMatrixTransformDescOpaque_t",              {CUDA_110, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 11001, CUBLAS_VERSION 11000, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 0
+  {"cublasLtMatrixTransformDesc_t",                    {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"cublasLtMatmulPreferenceOpaque_t",                 {CUDA_110, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 11001, CUBLAS_VERSION 11000, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 0
+  {"cublasLtMatmulPreference_t",                       {CUDA_101, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_TYPE_NAME_VER_MAP {
@@ -389,6 +405,13 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_TYPE_NAME_VER_MAP {
   {"HIPBLAS_TF32_TENSOR_OP_MATH",                      {HIP_6010, HIP_0,    HIP_0   }},
   {"HIPBLAS_MATH_DISALLOW_REDUCED_PRECISION_REDUCTION",{HIP_6010, HIP_0,    HIP_0   }},
   {"hipblasLtHandle_t",                                {HIP_5050, HIP_0,    HIP_0   }},
+  {"hipblasLtMatmulAlgo_t",                            {HIP_5050, HIP_0,    HIP_0   }},
+  {"hipblasLtMatmulDescOpaque_t",                      {HIP_5050, HIP_0,    HIP_0   }},
+  {"hipblasLtMatmulDesc_t",                            {HIP_5050, HIP_0,    HIP_0   }},
+  {"hipblasLtMatrixTransformDescOpaque_t",             {HIP_6000, HIP_0,    HIP_0   }},
+  {"hipblasLtMatrixTransformDesc_t",                   {HIP_6000, HIP_0,    HIP_0   }},
+  {"hipblasLtMatmulPreferenceOpaque_t",                {HIP_5050, HIP_0,    HIP_0   }},
+  {"hipblasLtMatmulPreference_t",                      {HIP_5050, HIP_0,    HIP_0   }},
 
   {"rocblas_handle",                                   {HIP_1050, HIP_0,    HIP_0   }},
   {"_rocblas_handle",                                  {HIP_1050, HIP_0,    HIP_0   }},

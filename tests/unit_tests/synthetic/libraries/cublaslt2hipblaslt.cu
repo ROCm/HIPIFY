@@ -19,6 +19,18 @@ int main() {
   const char *const_ch = nullptr;
 
 #if CUDA_VERSION >= 10010
+  // CHECK: hipblasLtMatmulAlgo_t blasLtMatmulAlgo;
+  cublasLtMatmulAlgo_t blasLtMatmulAlgo;
+
+  // CHECK: hipblasLtMatmulDesc_t blasLtMatmulDesc;
+  cublasLtMatmulDesc_t blasLtMatmulDesc;
+
+  // CHECK: hipblasLtMatrixTransformDesc_t blasLtMatrixTransformDesc;
+  cublasLtMatrixTransformDesc_t blasLtMatrixTransformDesc;
+
+  // CHECK: hipblasLtMatmulPreference_t blasLtMatmulPreference;
+  cublasLtMatmulPreference_t blasLtMatmulPreference;
+
   // CUDA: cublasStatus_t CUBLASWINAPI cublasLtCreate(cublasLtHandle_t* lightHandle);
   // HIP: HIPBLASLT_EXPORT hipblasStatus_t hipblasLtCreate(hipblasLtHandle_t* handle);
   // CHECK: status = hipblasLtCreate(&blasLtHandle);
@@ -33,6 +45,15 @@ int main() {
 #if CUDA_VERSION >= 11000 && CUBLAS_VERSION >= 11000
   // CHECK: hipblasLtMatrixLayoutOpaque_t blasLtMatrixLayoutOpaque;
   cublasLtMatrixLayoutOpaque_t blasLtMatrixLayoutOpaque;
+
+  // CHECK: hipblasLtMatmulDescOpaque_t blasLtMatmulDescOpaque;
+  cublasLtMatmulDescOpaque_t blasLtMatmulDescOpaque;
+
+  // CHECK: hipblasLtMatrixTransformDescOpaque_t blasLtMatrixTransformDescOpaque;
+  cublasLtMatrixTransformDescOpaque_t blasLtMatrixTransformDescOpaque;
+
+  // CHECK: hipblasLtMatmulPreferenceOpaque_t blasLtMatmulPreferenceOpaque;
+  cublasLtMatmulPreferenceOpaque_t blasLtMatmulPreferenceOpaque;
 #endif
 
   return 0;

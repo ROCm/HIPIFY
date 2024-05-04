@@ -148,9 +148,16 @@
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
 |`cublasLtContext`|10.1| | | | | | | | | |
 |`cublasLtHandle_t`|10.1| | | | | | | | | |
+|`cublasLtMatmulAlgo_t`|10.1| | | | | | | | | |
+|`cublasLtMatmulDescOpaque_t`|11.0| | | | | | | | | |
+|`cublasLtMatmulDesc_t`|10.1| | | | | | | | | |
+|`cublasLtMatmulPreferenceOpaque_t`|11.0| | | | | | | | | |
+|`cublasLtMatmulPreference_t`|10.1| | | | | | | | | |
 |`cublasLtMatrixLayoutOpaque_t`|11.0| | | | | | | | | |
 |`cublasLtMatrixLayoutStruct`|10.1| | |10.2| | | | | | |
 |`cublasLtMatrixLayout_t`|10.1| | | | | | | | | |
+|`cublasLtMatrixTransformDescOpaque_t`|11.0| | | | | | | | | |
+|`cublasLtMatrixTransformDesc_t`|10.1| | | | | | | | | |
 
 ## **4. CUBLAS Helper Function Reference**
 
