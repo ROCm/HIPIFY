@@ -146,6 +146,43 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**ROC**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
+|`CUBLASLT_MATMUL_TILE_128x128`|10.1| | | | | | | | | |
+|`CUBLASLT_MATMUL_TILE_128x160`|11.3| | | | | | | | | |
+|`CUBLASLT_MATMUL_TILE_128x192`|11.8| | | | | | | | | |
+|`CUBLASLT_MATMUL_TILE_128x256`|10.1| | | | | | | | | |
+|`CUBLASLT_MATMUL_TILE_128x32`|10.1| | | | | | | | | |
+|`CUBLASLT_MATMUL_TILE_128x64`|10.1| | | | | | | | | |
+|`CUBLASLT_MATMUL_TILE_128x96`|11.8| | | | | | | | | |
+|`CUBLASLT_MATMUL_TILE_160x128`|11.3| | | | | | | | | |
+|`CUBLASLT_MATMUL_TILE_16x16`|10.1| | | | | | | | | |
+|`CUBLASLT_MATMUL_TILE_16x32`|10.1| | | | | | | | | |
+|`CUBLASLT_MATMUL_TILE_16x8`|10.1| | | | | | | | | |
+|`CUBLASLT_MATMUL_TILE_192x128`|11.3| | | | | | | | | |
+|`CUBLASLT_MATMUL_TILE_256x128`|10.1| | | | | | | | | |
+|`CUBLASLT_MATMUL_TILE_256x32`|12.1| | | | | | | | | |
+|`CUBLASLT_MATMUL_TILE_256x64`|10.1| | | | | | | | | |
+|`CUBLASLT_MATMUL_TILE_32x128`|10.1| | | | | | | | | |
+|`CUBLASLT_MATMUL_TILE_32x16`|10.1| | | | | | | | | |
+|`CUBLASLT_MATMUL_TILE_32x256`|12.1| | | | | | | | | |
+|`CUBLASLT_MATMUL_TILE_32x32`|10.1| | | | | | | | | |
+|`CUBLASLT_MATMUL_TILE_32x64`|10.1| | | | | | | | | |
+|`CUBLASLT_MATMUL_TILE_32x8`|10.1| | | | | | | | | |
+|`CUBLASLT_MATMUL_TILE_512x64`|10.1| | | | | | | | | |
+|`CUBLASLT_MATMUL_TILE_64x128`|10.1| | | | | | | | | |
+|`CUBLASLT_MATMUL_TILE_64x256`|10.1| | | | | | | | | |
+|`CUBLASLT_MATMUL_TILE_64x32`|10.1| | | | | | | | | |
+|`CUBLASLT_MATMUL_TILE_64x512`|10.1| | | | | | | | | |
+|`CUBLASLT_MATMUL_TILE_64x64`|10.1| | | | | | | | | |
+|`CUBLASLT_MATMUL_TILE_64x8`|10.1| | | | | | | | | |
+|`CUBLASLT_MATMUL_TILE_64x96`|11.3| | | | | | | | | |
+|`CUBLASLT_MATMUL_TILE_8x16`|10.1| | | | | | | | | |
+|`CUBLASLT_MATMUL_TILE_8x32`|10.1| | | | | | | | | |
+|`CUBLASLT_MATMUL_TILE_8x64`|10.1| | | | | | | | | |
+|`CUBLASLT_MATMUL_TILE_8x8`|10.1| | | | | | | | | |
+|`CUBLASLT_MATMUL_TILE_96x128`|11.3| | | | | | | | | |
+|`CUBLASLT_MATMUL_TILE_96x64`|11.3| | | | | | | | | |
+|`CUBLASLT_MATMUL_TILE_END`|10.1| | | | | | | | | |
+|`CUBLASLT_MATMUL_TILE_UNDEFINED`|10.1| | | | | | | | | |
 |`cublasLtContext`|10.1| | | | | | | | | |
 |`cublasLtHandle_t`|10.1| | | | | | | | | |
 |`cublasLtMatmulAlgo_t`|10.1| | | | | | | | | |
@@ -153,6 +190,7 @@
 |`cublasLtMatmulDesc_t`|10.1| | | | | | | | | |
 |`cublasLtMatmulPreferenceOpaque_t`|11.0| | | | | | | | | |
 |`cublasLtMatmulPreference_t`|10.1| | | | | | | | | |
+|`cublasLtMatmulTile_t`|10.1| | | | | | | | | |
 |`cublasLtMatrixLayoutOpaque_t`|11.0| | | | | | | | | |
 |`cublasLtMatrixLayoutStruct`|10.1| | |10.2| | | | | | |
 |`cublasLtMatrixLayout_t`|10.1| | | | | | | | | |

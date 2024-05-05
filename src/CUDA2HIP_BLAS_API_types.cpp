@@ -188,7 +188,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP {
 
   {"cublasLtHandle_t",                                 {"hipblasLtHandle_t",                                 "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES}},
   // TODO: dereferencing: typedef struct cublasLtContext *cublasLtHandle_t;
-  {"cublasLtContext",                                  {"hipblasLtContext",                                  "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, HIP_UNSUPPORTED}},
+  {"cublasLtContext",                                  {"hipblasLtContext",                                  "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
   // NOTE: hipblasLtMatrixLayoutOpaque_t contains uint64_t data[4], whereas cublasLtMatrixLayoutOpaque_t contains uint64_t data[8]
   {"cublasLtMatrixLayoutOpaque_t",                     {"hipblasLtMatrixLayoutOpaque_t",                     "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES}},
   // NOTE: cublasLtMatrixLayoutStruct is the former name for cublasLtMatrixLayoutOpaque_t, that has been alive for 10.1.0 <= CUDA <= 10.2.0
@@ -203,7 +203,44 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP {
   {"cublasLtMatrixTransformDesc_t",                    {"hipblasLtMatrixTransformDesc_t",                    "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES}},
   {"cublasLtMatmulPreferenceOpaque_t",                 {"hipblasLtMatmulPreferenceOpaque_t",                 "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES}},
   {"cublasLtMatmulPreference_t",                       {"hipblasLtMatmulPreference_t",                       "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES}},
-
+  {"cublasLtMatmulTile_t",                             {"hipblasLtMatmulTile_t",                             "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_TILE_UNDEFINED",                   {"HIPBLASLT_MATMUL_TILE_UNDEFINED",                   "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_TILE_8x8",                         {"HIPBLASLT_MATMUL_TILE_8x8",                         "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_TILE_8x16",                        {"HIPBLASLT_MATMUL_TILE_8x16",                        "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_TILE_16x8",                        {"HIPBLASLT_MATMUL_TILE_16x8",                        "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_TILE_8x32",                        {"HIPBLASLT_MATMUL_TILE_8x32",                        "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_TILE_16x16",                       {"HIPBLASLT_MATMUL_TILE_16x16",                       "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_TILE_32x8",                        {"HIPBLASLT_MATMUL_TILE_32x8",                        "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_TILE_8x64",                        {"HIPBLASLT_MATMUL_TILE_8x64",                        "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_TILE_16x32",                       {"HIPBLASLT_MATMUL_TILE_16x32",                       "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_TILE_32x16",                       {"HIPBLASLT_MATMUL_TILE_32x16",                       "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_TILE_64x8",                        {"HIPBLASLT_MATMUL_TILE_64x8",                        "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_TILE_32x32",                       {"HIPBLASLT_MATMUL_TILE_32x32",                       "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_TILE_32x64",                       {"HIPBLASLT_MATMUL_TILE_32x64",                       "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_TILE_64x32",                       {"HIPBLASLT_MATMUL_TILE_64x32",                       "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_TILE_32x128",                      {"HIPBLASLT_MATMUL_TILE_32x128",                      "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_TILE_64x64",                       {"HIPBLASLT_MATMUL_TILE_64x64",                       "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_TILE_128x32",                      {"HIPBLASLT_MATMUL_TILE_128x32",                      "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_TILE_64x128",                      {"HIPBLASLT_MATMUL_TILE_64x128",                      "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_TILE_128x64",                      {"HIPBLASLT_MATMUL_TILE_128x64",                      "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_TILE_64x256",                      {"HIPBLASLT_MATMUL_TILE_64x256",                      "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_TILE_128x128",                     {"HIPBLASLT_MATMUL_TILE_128x128",                     "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_TILE_256x64",                      {"HIPBLASLT_MATMUL_TILE_256x64",                      "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_TILE_64x512",                      {"HIPBLASLT_MATMUL_TILE_64x512",                      "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_TILE_128x256",                     {"HIPBLASLT_MATMUL_TILE_128x256",                     "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_TILE_256x128",                     {"HIPBLASLT_MATMUL_TILE_256x128",                     "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_TILE_512x64",                      {"HIPBLASLT_MATMUL_TILE_512x64",                      "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_TILE_64x96",                       {"HIPBLASLT_MATMUL_TILE_64x96",                       "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_TILE_96x64",                       {"HIPBLASLT_MATMUL_TILE_96x64",                       "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_TILE_96x128",                      {"HIPBLASLT_MATMUL_TILE_96x128",                      "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_TILE_128x160",                     {"HIPBLASLT_MATMUL_TILE_128x160",                     "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_TILE_160x128",                     {"HIPBLASLT_MATMUL_TILE_160x128",                     "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_TILE_192x128",                     {"HIPBLASLT_MATMUL_TILE_192x128",                     "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_TILE_128x192",                     {"HIPBLASLT_MATMUL_TILE_128x192",                     "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_TILE_128x96",                      {"HIPBLASLT_MATMUL_TILE_128x96",                      "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_TILE_32x256",                      {"HIPBLASLT_MATMUL_TILE_32x256",                      "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_TILE_256x32",                      {"HIPBLASLT_MATMUL_TILE_256x32",                      "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_TILE_END",                         {"HIPBLASLT_MATMUL_TILE_END",                         "",                                      CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_TYPE_NAME_VER_MAP {
@@ -316,6 +353,44 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_TYPE_NAME_VER_MAP {
   {"cublasLtMatrixTransformDesc_t",                    {CUDA_101, CUDA_0,   CUDA_0  }},
   {"cublasLtMatmulPreferenceOpaque_t",                 {CUDA_110, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 11001, CUBLAS_VERSION 11000, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 0
   {"cublasLtMatmulPreference_t",                       {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"cublasLtMatmulTile_t",                             {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_MATMUL_TILE_UNDEFINED",                   {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_MATMUL_TILE_8x8",                         {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_MATMUL_TILE_8x16",                        {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_MATMUL_TILE_16x8",                        {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_MATMUL_TILE_8x32",                        {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_MATMUL_TILE_16x16",                       {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_MATMUL_TILE_32x8",                        {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_MATMUL_TILE_8x64",                        {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_MATMUL_TILE_16x32",                       {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_MATMUL_TILE_32x16",                       {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_MATMUL_TILE_64x8",                        {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_MATMUL_TILE_32x32",                       {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_MATMUL_TILE_32x64",                       {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_MATMUL_TILE_64x32",                       {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_MATMUL_TILE_32x128",                      {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_MATMUL_TILE_64x64",                       {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_MATMUL_TILE_128x32",                      {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_MATMUL_TILE_64x128",                      {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_MATMUL_TILE_128x64",                      {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_MATMUL_TILE_64x256",                      {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_MATMUL_TILE_128x128",                     {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_MATMUL_TILE_256x64",                      {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_MATMUL_TILE_64x512",                      {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_MATMUL_TILE_128x256",                     {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_MATMUL_TILE_256x128",                     {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_MATMUL_TILE_512x64",                      {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_MATMUL_TILE_64x96",                       {CUDA_113, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 11031, CUBLAS_VERSION 11501, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 5 CUBLAS_VER_PATCH 1
+  {"CUBLASLT_MATMUL_TILE_96x64",                       {CUDA_113, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 11031, CUBLAS_VERSION 11501, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 5 CUBLAS_VER_PATCH 1
+  {"CUBLASLT_MATMUL_TILE_96x128",                      {CUDA_113, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 11031, CUBLAS_VERSION 11501, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 5 CUBLAS_VER_PATCH 1
+  {"CUBLASLT_MATMUL_TILE_128x160",                     {CUDA_113, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 11031, CUBLAS_VERSION 11501, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 5 CUBLAS_VER_PATCH 1
+  {"CUBLASLT_MATMUL_TILE_160x128",                     {CUDA_113, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 11031, CUBLAS_VERSION 11501, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 5 CUBLAS_VER_PATCH 1
+  {"CUBLASLT_MATMUL_TILE_192x128",                     {CUDA_113, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 11031, CUBLAS_VERSION 11501, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 5 CUBLAS_VER_PATCH 1
+  {"CUBLASLT_MATMUL_TILE_128x192",                     {CUDA_118, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_MATMUL_TILE_128x96",                      {CUDA_118, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_MATMUL_TILE_32x256",                      {CUDA_121, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 12011, CUBLAS_VERSION 120103, CUBLAS_VER_MAJOR 12 CUBLAS_VER_MINOR 1 CUBLAS_VER_PATCH 1
+  {"CUBLASLT_MATMUL_TILE_256x32",                      {CUDA_121, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 12011, CUBLAS_VERSION 120103, CUBLAS_VER_MAJOR 12 CUBLAS_VER_MINOR 1 CUBLAS_VER_PATCH 1
+  {"CUBLASLT_MATMUL_TILE_END",                         {CUDA_101, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_TYPE_NAME_VER_MAP {
