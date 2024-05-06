@@ -146,6 +146,42 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**ROC**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
+|`CUBLASLT_MATMUL_STAGES_128x1`|11.0| | | | | | | | | |
+|`CUBLASLT_MATMUL_STAGES_128x2`|11.0| | | | | | | | | |
+|`CUBLASLT_MATMUL_STAGES_128x3`|11.0| | | | | | | | | |
+|`CUBLASLT_MATMUL_STAGES_128x4`|11.0| | | | | | | | | |
+|`CUBLASLT_MATMUL_STAGES_128x5`|11.0| | | | | | | | | |
+|`CUBLASLT_MATMUL_STAGES_128x6`|11.0| | | | | | | | | |
+|`CUBLASLT_MATMUL_STAGES_128xAUTO`|11.8| | | | | | | | | |
+|`CUBLASLT_MATMUL_STAGES_16x1`|11.0| | | | | | | | | |
+|`CUBLASLT_MATMUL_STAGES_16x10`|11.0| | | | | | | | | |
+|`CUBLASLT_MATMUL_STAGES_16x2`|11.0| | | | | | | | | |
+|`CUBLASLT_MATMUL_STAGES_16x3`|11.0| | | | | | | | | |
+|`CUBLASLT_MATMUL_STAGES_16x4`|11.0| | | | | | | | | |
+|`CUBLASLT_MATMUL_STAGES_16x5`|11.0| | | | | | | | | |
+|`CUBLASLT_MATMUL_STAGES_16x6`|11.0| | | | | | | | | |
+|`CUBLASLT_MATMUL_STAGES_16xAUTO`|11.8| | | | | | | | | |
+|`CUBLASLT_MATMUL_STAGES_32x1`|11.0| | | | | | | | | |
+|`CUBLASLT_MATMUL_STAGES_32x10`|11.0| | | | | | | | | |
+|`CUBLASLT_MATMUL_STAGES_32x2`|11.0| | | | | | | | | |
+|`CUBLASLT_MATMUL_STAGES_32x3`|11.0| | | | | | | | | |
+|`CUBLASLT_MATMUL_STAGES_32x4`|11.0| | | | | | | | | |
+|`CUBLASLT_MATMUL_STAGES_32x5`|11.0| | | | | | | | | |
+|`CUBLASLT_MATMUL_STAGES_32x6`|11.0| | | | | | | | | |
+|`CUBLASLT_MATMUL_STAGES_32xAUTO`|11.8| | | | | | | | | |
+|`CUBLASLT_MATMUL_STAGES_64x1`|11.0| | | | | | | | | |
+|`CUBLASLT_MATMUL_STAGES_64x2`|11.0| | | | | | | | | |
+|`CUBLASLT_MATMUL_STAGES_64x3`|11.0| | | | | | | | | |
+|`CUBLASLT_MATMUL_STAGES_64x4`|11.0| | | | | | | | | |
+|`CUBLASLT_MATMUL_STAGES_64x5`|11.0| | | | | | | | | |
+|`CUBLASLT_MATMUL_STAGES_64x6`|11.0| | | | | | | | | |
+|`CUBLASLT_MATMUL_STAGES_64xAUTO`|11.8| | | | | | | | | |
+|`CUBLASLT_MATMUL_STAGES_8x3`|11.8| | | | | | | | | |
+|`CUBLASLT_MATMUL_STAGES_8x4`|11.0| | | | | | | | | |
+|`CUBLASLT_MATMUL_STAGES_8x5`|11.2| | | | | | | | | |
+|`CUBLASLT_MATMUL_STAGES_8xAUTO`|11.8| | | | | | | | | |
+|`CUBLASLT_MATMUL_STAGES_END`|11.0| | | | | | | | | |
+|`CUBLASLT_MATMUL_STAGES_UNDEFINED`|11.0| | | | | | | | | |
 |`CUBLASLT_MATMUL_TILE_128x128`|10.1| | | | | | | | | |
 |`CUBLASLT_MATMUL_TILE_128x160`|11.3| | | | | | | | | |
 |`CUBLASLT_MATMUL_TILE_128x192`|11.8| | | | | | | | | |
@@ -190,6 +226,7 @@
 |`cublasLtMatmulDesc_t`|10.1| | | | | | | | | |
 |`cublasLtMatmulPreferenceOpaque_t`|11.0| | | | | | | | | |
 |`cublasLtMatmulPreference_t`|10.1| | | | | | | | | |
+|`cublasLtMatmulStages_t`|11.0| | | | | | | | | |
 |`cublasLtMatmulTile_t`|10.1| | | | | | | | | |
 |`cublasLtMatrixLayoutOpaque_t`|11.0| | | | | | | | | |
 |`cublasLtMatrixLayoutStruct`|10.1| | |10.2| | | | | | |
