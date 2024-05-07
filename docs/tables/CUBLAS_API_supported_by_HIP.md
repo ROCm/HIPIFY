@@ -146,6 +146,58 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
+|`CUBLASLT_CLUSTER_SHAPE_10x1x1`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_11x1x1`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_12x1x1`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_13x1x1`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_14x1x1`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_15x1x1`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_16x1x1`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_1x10x1`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_1x11x1`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_1x12x1`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_1x13x1`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_1x14x1`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_1x15x1`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_1x16x1`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_1x1x1`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_1x2x1`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_1x3x1`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_1x4x1`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_1x5x1`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_1x6x1`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_1x7x1`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_1x8x1`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_1x9x1`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_2x1x1`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_2x2x1`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_2x3x1`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_2x4x1`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_2x5x1`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_2x6x1`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_2x7x1`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_2x8x1`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_3x1x1`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_3x2x1`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_3x3x1`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_3x4x1`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_3x5x1`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_4x1x1`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_4x2x1`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_4x3x1`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_4x4x1`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_5x1x1`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_5x2x1`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_5x3x1`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_6x1x1`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_6x2x1`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_7x1x1`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_7x2x1`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_8x1x1`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_8x2x1`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_9x1x1`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_AUTO`|11.8| | | | | | | | | |
+|`CUBLASLT_CLUSTER_SHAPE_END`|11.8| | | | | | | | | |
 |`CUBLASLT_MATMUL_STAGES_128x1`|11.0| | | | | | | | | |
 |`CUBLASLT_MATMUL_STAGES_128x2`|11.0| | | | | | | | | |
 |`CUBLASLT_MATMUL_STAGES_128x3`|11.0| | | | | | | | | |
@@ -219,6 +271,7 @@
 |`CUBLASLT_MATMUL_TILE_96x64`|11.3| | | | | | | | | |
 |`CUBLASLT_MATMUL_TILE_END`|10.1| | | | | | | | | |
 |`CUBLASLT_MATMUL_TILE_UNDEFINED`|10.1| | | | | | | | | |
+|`cublasLtClusterShape_t`|11.8| | | | | | | | | |
 |`cublasLtContext`|10.1| | | | | | | | | |
 |`cublasLtHandle_t`|10.1| | | |`hipblasLtHandle_t`|5.5.0| | | | |
 |`cublasLtMatmulAlgo_t`|10.1| | | |`hipblasLtMatmulAlgo_t`|5.5.0| | | | |
