@@ -7051,6 +7051,22 @@ sub transformHostFunctions {
         $k += s/(?<!\/\/ CHECK: )($func)\s*\(([^,\)]+),([\s]*)([^,\)]+)(,\s*|\))/$func\($2,$3HIP_SYMBOL\($4\)$5/g;
     }
     foreach $func (
+        "hipFuncSetAttribute",
+        "hipFuncSetCacheConfig",
+        "hipFuncSetSharedMemConfig",
+        "hipLaunchCooperativeKernel",
+        "hipLaunchKernel"
+    )
+    {
+        $k += s/(?<!\/\/ CHECK: )($func)\s*\(([^,\)]+),/$func\(reinterpret_cast<const void*>\($2\),/g;
+    }
+    foreach $func (
+        "hipFuncGetAttributes"
+    )
+    {
+        $k += s/(?<!\/\/ CHECK: )($func)\s*\(([^,\)]+),([\s]*)([^,\)]+)(,\s*|\))/$func\($2,$3reinterpret_cast<const void*>\($4\)$5/g;
+    }
+    foreach $func (
         "hipGraphExecMemcpyNodeSetParamsToSymbol",
         "hipGraphMemcpyNodeSetParamsFromSymbol"
     )
