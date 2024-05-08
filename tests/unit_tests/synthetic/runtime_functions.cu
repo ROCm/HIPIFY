@@ -370,22 +370,22 @@ int main() {
 
   // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaFuncGetAttributes(struct cudaFuncAttributes *attr, const void *func);
   // HIP: hipError_t hipFuncGetAttributes(struct hipFuncAttributes* attr, const void* func);
-  // CHECK: result = hipFuncGetAttributes(&FuncAttributes, func);
+  // CHECK: result = hipFuncGetAttributes(&FuncAttributes, reinterpret_cast<const void*>(func));
   result = cudaFuncGetAttributes(&FuncAttributes, func);
 
   // CUDA: extern __host__ cudaError_t CUDARTAPI cudaFuncSetCacheConfig(const void *func, enum cudaFuncCache cacheConfig);
   // HIP: hipError_t hipFuncSetCacheConfig(const void* func, hipFuncCache_t config);
-  // CHECK: result = hipFuncSetCacheConfig(func, FuncCache);
+  // CHECK: result = hipFuncSetCacheConfig(reinterpret_cast<const void*>(func), FuncCache);
   result = cudaFuncSetCacheConfig(func, FuncCache);
 
   // CUDA: extern __host__ cudaError_t CUDARTAPI cudaFuncSetSharedMemConfig(const void *func, enum cudaSharedMemConfig config);
   // HIP: hipError_t hipFuncSetSharedMemConfig(const void* func, hipSharedMemConfig config);
-  // CHECK: result = hipFuncSetSharedMemConfig(func, SharedMemConfig);
+  // CHECK: result = hipFuncSetSharedMemConfig(reinterpret_cast<const void*>(func), SharedMemConfig);
   result = cudaFuncSetSharedMemConfig(func, SharedMemConfig);
 
   // CUDA: extern __host__ cudaError_t CUDARTAPI cudaLaunchKernel(const void *func, dim3 gridDim, dim3 blockDim, void **args, size_t sharedMem, cudaStream_t stream);
   // HIP: hipError_t hipLaunchKernel(const void* function_address, dim3 numBlocks, dim3 dimBlocks, void** args, size_t sharedMemBytes __dparm(0), hipStream_t stream __dparm(0));
-  // CHECK: result = hipLaunchKernel(func, gridDim, blockDim, &image, bytes, stream);
+  // CHECK: result = hipLaunchKernel(reinterpret_cast<const void*>(func), gridDim, blockDim, &image, bytes, stream);
   result = cudaLaunchKernel(func, gridDim, blockDim, &image, bytes, stream);
 
   // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaOccupancyMaxActiveBlocksPerMultiprocessor(int *numBlocks, const void *func, int blockSize, size_t dynamicSMemSize);
@@ -864,12 +864,12 @@ int main() {
 
   // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaFuncSetAttribute(const void *func, enum cudaFuncAttribute attr, int value);
   // HIP: hipError_t hipFuncSetAttribute(const void* func, hipFuncAttribute attr, int value);
-  // CHECK: result = hipFuncSetAttribute(func, FuncAttribute, intVal);
+  // CHECK: result = hipFuncSetAttribute(reinterpret_cast<const void*>(func), FuncAttribute, intVal);
   result = cudaFuncSetAttribute(func, FuncAttribute, intVal);
 
   // CUDA: extern __host__ cudaError_t CUDARTAPI cudaLaunchCooperativeKernel(const void *func, dim3 gridDim, dim3 blockDim, void **args, size_t sharedMem, cudaStream_t stream);
   // HIP: hipError_t hipLaunchCooperativeKernel(const void* f, dim3 gridDim, dim3 blockDimX, void** kernelParams, unsigned int sharedMemBytes, hipStream_t stream);
-  // CHECK: result = hipLaunchCooperativeKernel(func, gridDim, blockDim, &image, flags, stream);
+  // CHECK: result = hipLaunchCooperativeKernel(reinterpret_cast<const void*>(func), gridDim, blockDim, &image, flags, stream);
   result = cudaLaunchCooperativeKernel(func, gridDim, blockDim, &image, flags, stream);
 
   // CUDA: extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaLaunchCooperativeKernelMultiDevice(struct cudaLaunchParams *launchParamsList, unsigned int numDevices, unsigned int flags __dv(0));
