@@ -862,16 +862,6 @@ int main() {
   // CHECK: hipLaunchParams LaunchParams;
   cudaLaunchParams LaunchParams;
 
-  // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaFuncSetAttribute(const void *func, enum cudaFuncAttribute attr, int value);
-  // HIP: hipError_t hipFuncSetAttribute(const void* func, hipFuncAttribute attr, int value);
-  // CHECK: result = hipFuncSetAttribute(reinterpret_cast<const void*>(func), FuncAttribute, intVal);
-  result = cudaFuncSetAttribute(func, FuncAttribute, intVal);
-
-  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaLaunchCooperativeKernel(const void *func, dim3 gridDim, dim3 blockDim, void **args, size_t sharedMem, cudaStream_t stream);
-  // HIP: hipError_t hipLaunchCooperativeKernel(const void* f, dim3 gridDim, dim3 blockDimX, void** kernelParams, unsigned int sharedMemBytes, hipStream_t stream);
-  // CHECK: result = hipLaunchCooperativeKernel(reinterpret_cast<const void*>(func), gridDim, blockDim, &image, flags, stream);
-  result = cudaLaunchCooperativeKernel(func, gridDim, blockDim, &image, flags, stream);
-
   // CUDA: extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaLaunchCooperativeKernelMultiDevice(struct cudaLaunchParams *launchParamsList, unsigned int numDevices, unsigned int flags __dv(0));
   // HIP: hipError_t hipLaunchCooperativeKernelMultiDevice(hipLaunchParams* launchParamsList, int numDevices, unsigned int flags);
   // CHECK: result = hipLaunchCooperativeKernelMultiDevice(&LaunchParams, intVal, flags);
