@@ -3,7 +3,7 @@
 Documentation for HIPIFY is available at
 [https://rocmdocs.amd.com/projects/HIPIFY/en/latest/](https://rocmdocs.amd.com/projects/HIPIFY/en/latest/).
 
-## HIPIFY for ROCm 6.1.1
+## HIPIFY for ROCm 6.1.2
 
 ### Additions
 
