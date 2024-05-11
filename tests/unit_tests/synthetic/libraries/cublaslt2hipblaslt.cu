@@ -40,6 +40,15 @@ int main() {
   // HIP: HIPBLASLT_EXPORT hipblasStatus_t hipblasLtDestroy(const hipblasLtHandle_t handle);
   // CHECK: status = hipblasLtDestroy(blasLtHandle);
   status = cublasLtDestroy(blasLtHandle);
+
+#if CUBLAS_VERSION >= 10200
+  // CHECK: hipblasLtPointerMode_t blasLtPointerMode;
+  // CHECK-NEXT: hipblasLtPointerMode_t BLASLT_POINTER_MODE_HOST = HIPBLASLT_POINTER_MODE_HOST;
+  // CHECK-NEXT: hipblasLtPointerMode_t BLASLT_POINTER_MODE_DEVICE = HIPBLASLT_POINTER_MODE_DEVICE;
+  cublasLtPointerMode_t blasLtPointerMode;
+  cublasLtPointerMode_t BLASLT_POINTER_MODE_HOST = CUBLASLT_POINTER_MODE_HOST;
+  cublasLtPointerMode_t BLASLT_POINTER_MODE_DEVICE = CUBLASLT_POINTER_MODE_DEVICE;
+#endif
 #endif
 
 #if CUDA_VERSION >= 11000 && CUBLAS_VERSION >= 11000
@@ -56,5 +65,9 @@ int main() {
   cublasLtMatmulPreferenceOpaque_t blasLtMatmulPreferenceOpaque;
 #endif
 
+#if CUDA_VERSION >= 11040 && CUBLAS_VERSION >= 11601
+  // CHECK: hipblasLtPointerMode_t BLASLT_POINTER_MODE_ALPHA_DEVICE_VECTOR_BETA_HOST = HIPBLASLT_POINTER_MODE_ALPHA_DEVICE_VECTOR_BETA_HOST;
+  cublasLtPointerMode_t BLASLT_POINTER_MODE_ALPHA_DEVICE_VECTOR_BETA_HOST = CUBLASLT_POINTER_MODE_ALPHA_DEVICE_VECTOR_BETA_HOST;
+#endif
   return 0;
 }

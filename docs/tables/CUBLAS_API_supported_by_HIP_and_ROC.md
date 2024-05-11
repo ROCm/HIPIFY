@@ -198,6 +198,12 @@
 |`CUBLASLT_CLUSTER_SHAPE_9x1x1`|11.8| | | | | | | | | | | | | | | |
 |`CUBLASLT_CLUSTER_SHAPE_AUTO`|11.8| | | | | | | | | | | | | | | |
 |`CUBLASLT_CLUSTER_SHAPE_END`|11.8| | | | | | | | | | | | | | | |
+|`CUBLASLT_MATMUL_INNER_SHAPE_END`|11.8| | | | | | | | | | | | | | | |
+|`CUBLASLT_MATMUL_INNER_SHAPE_MMA16816`|11.8| | | | | | | | | | | | | | | |
+|`CUBLASLT_MATMUL_INNER_SHAPE_MMA1684`|11.8| | | | | | | | | | | | | | | |
+|`CUBLASLT_MATMUL_INNER_SHAPE_MMA1688`|11.8| | | | | | | | | | | | | | | |
+|`CUBLASLT_MATMUL_INNER_SHAPE_MMA884`|11.8| | | | | | | | | | | | | | | |
+|`CUBLASLT_MATMUL_INNER_SHAPE_UNDEFINED`|11.8| | | | | | | | | | | | | | | |
 |`CUBLASLT_MATMUL_STAGES_128x1`|11.0| | | | | | | | | | | | | | | |
 |`CUBLASLT_MATMUL_STAGES_128x2`|11.0| | | | | | | | | | | | | | | |
 |`CUBLASLT_MATMUL_STAGES_128x3`|11.0| | | | | | | | | | | | | | | |
@@ -271,12 +277,18 @@
 |`CUBLASLT_MATMUL_TILE_96x64`|11.3| | | | | | | | | | | | | | | |
 |`CUBLASLT_MATMUL_TILE_END`|10.1| | | | | | | | | | | | | | | |
 |`CUBLASLT_MATMUL_TILE_UNDEFINED`|10.1| | | | | | | | | | | | | | | |
+|`CUBLASLT_POINTER_MODE_ALPHA_DEVICE_VECTOR_BETA_HOST`|11.4| | | |`HIPBLASLT_POINTER_MODE_ALPHA_DEVICE_VECTOR_BETA_HOST`|6.0.0| | | | | | | | | | |
+|`CUBLASLT_POINTER_MODE_ALPHA_DEVICE_VECTOR_BETA_ZERO`|10.1| | | | | | | | | | | | | | | |
+|`CUBLASLT_POINTER_MODE_DEVICE`| | | | |`HIPBLASLT_POINTER_MODE_DEVICE`|6.1.0| | | | | | | | | | |
+|`CUBLASLT_POINTER_MODE_DEVICE_VECTOR`|10.1| | | | | | | | | | | | | | | |
+|`CUBLASLT_POINTER_MODE_HOST`|10.1| | | |`HIPBLASLT_POINTER_MODE_HOST`|6.0.0| | | | | | | | | | |
 |`cublasLtClusterShape_t`|11.8| | | | | | | | | | | | | | | |
 |`cublasLtContext`|10.1| | | | | | | | | | | | | | | |
 |`cublasLtHandle_t`|10.1| | | |`hipblasLtHandle_t`|5.5.0| | | | | | | | | | |
 |`cublasLtMatmulAlgo_t`|10.1| | | |`hipblasLtMatmulAlgo_t`|5.5.0| | | | | | | | | | |
 |`cublasLtMatmulDescOpaque_t`|11.0| | | |`hipblasLtMatmulDescOpaque_t`|5.5.0| | | | | | | | | | |
 |`cublasLtMatmulDesc_t`|10.1| | | |`hipblasLtMatmulDesc_t`|5.5.0| | | | | | | | | | |
+|`cublasLtMatmulInnerShape_t`|11.8| | | | | | | | | | | | | | | |
 |`cublasLtMatmulPreferenceOpaque_t`|11.0| | | |`hipblasLtMatmulPreferenceOpaque_t`|5.5.0| | | | | | | | | | |
 |`cublasLtMatmulPreference_t`|10.1| | | |`hipblasLtMatmulPreference_t`|5.5.0| | | | | | | | | | |
 |`cublasLtMatmulStages_t`|11.0| | | | | | | | | | | | | | | |
@@ -286,6 +298,7 @@
 |`cublasLtMatrixLayout_t`|10.1| | | |`hipblasLtMatrixLayout_t`| | | | | | | | | | | |
 |`cublasLtMatrixTransformDescOpaque_t`|11.0| | | |`hipblasLtMatrixTransformDescOpaque_t`|6.0.0| | | | | | | | | | |
 |`cublasLtMatrixTransformDesc_t`|10.1| | | |`hipblasLtMatrixTransformDesc_t`|6.0.0| | | | | | | | | | |
+|`cublasLtPointerMode_t`|10.1| | | |`hipblasLtPointerMode_t`|6.0.0| | | | | | | | | | |
 
 ## **4. CUBLAS Helper Function Reference**
 
