@@ -331,6 +331,19 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP {
   {"CUBLASLT_CLUSTER_SHAPE_1x14x1",                    {"HIPBLASLT_CLUSTER_SHAPE_1x14x1",                    "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
   {"CUBLASLT_CLUSTER_SHAPE_1x15x1",                    {"HIPBLASLT_CLUSTER_SHAPE_1x15x1",                    "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
   {"CUBLASLT_CLUSTER_SHAPE_END",                       {"HIPBLASLT_CLUSTER_SHAPE_END",                       "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"cublasLtMatmulInnerShape_t",                       {"hipblasLtMatmulInnerShape_t",                       "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_INNER_SHAPE_UNDEFINED",            {"HIPBLASLT_MATMUL_INNER_SHAPE_UNDEFINED",            "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_INNER_SHAPE_MMA884",               {"HIPBLASLT_MATMUL_INNER_SHAPE_MMA884",               "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_INNER_SHAPE_MMA1684",              {"HIPBLASLT_MATMUL_INNER_SHAPE_MMA1684",              "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_INNER_SHAPE_MMA1688",              {"HIPBLASLT_MATMUL_INNER_SHAPE_MMA1688",              "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_INNER_SHAPE_MMA16816",             {"HIPBLASLT_MATMUL_INNER_SHAPE_MMA16816",             "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_INNER_SHAPE_END",                  {"HIPBLASLT_MATMUL_INNER_SHAPE_END",                  "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"cublasLtPointerMode_t",                            {"hipblasLtPointerMode_t",                            "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED}},
+  {"CUBLASLT_POINTER_MODE_HOST",                       {"HIPBLASLT_POINTER_MODE_HOST",                       "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED}},
+  {"CUBLASLT_POINTER_MODE_DEVICE",                     {"HIPBLASLT_POINTER_MODE_DEVICE",                     "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED}},
+  {"CUBLASLT_POINTER_MODE_DEVICE_VECTOR",              {"HIPBLASLT_POINTER_MODE_DEVICE_VECTOR",              "",                                      CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_POINTER_MODE_ALPHA_DEVICE_VECTOR_BETA_ZERO",  {"HIPBLASLT_POINTER_MODE_ALPHA_DEVICE_VECTOR_BETA_ZERO",  "",                              CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_POINTER_MODE_ALPHA_DEVICE_VECTOR_BETA_HOST",  {"HIPBLASLT_POINTER_MODE_ALPHA_DEVICE_VECTOR_BETA_HOST",  "",                              CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_TYPE_NAME_VER_MAP {
@@ -571,6 +584,18 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_TYPE_NAME_VER_MAP {
   {"CUBLASLT_CLUSTER_SHAPE_1x14x1",                    {CUDA_118, CUDA_0,   CUDA_0  }},
   {"CUBLASLT_CLUSTER_SHAPE_1x15x1",                    {CUDA_118, CUDA_0,   CUDA_0  }},
   {"CUBLASLT_CLUSTER_SHAPE_END",                       {CUDA_118, CUDA_0,   CUDA_0  }},
+  {"cublasLtMatmulInnerShape_t",                       {CUDA_118, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_MATMUL_INNER_SHAPE_UNDEFINED",            {CUDA_118, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_MATMUL_INNER_SHAPE_MMA884",               {CUDA_118, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_MATMUL_INNER_SHAPE_MMA1684",              {CUDA_118, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_MATMUL_INNER_SHAPE_MMA1688",              {CUDA_118, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_MATMUL_INNER_SHAPE_MMA16816",             {CUDA_118, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_MATMUL_INNER_SHAPE_END",                  {CUDA_118, CUDA_0,   CUDA_0  }},
+  {"cublasLtPointerMode_t",                            {CUDA_101, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 10101, CUBLAS_VERSION 10020, CUBLAS_VER_MAJOR 10 CUBLAS_VER_MINOR 2
+  {"CUBLASLT_POINTER_MODE_HOST",                       {CUDA_101, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 10101, CUBLAS_VERSION 10020, CUBLAS_VER_MAJOR 10 CUBLAS_VER_MINOR 2
+  {"CUBLASLT_POINTER_MODE_DEVICE_VECTOR",              {CUDA_101, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 10101, CUBLAS_VERSION 10020, CUBLAS_VER_MAJOR 10 CUBLAS_VER_MINOR 2
+  {"CUBLASLT_POINTER_MODE_ALPHA_DEVICE_VECTOR_BETA_ZERO",  {CUDA_101, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 10101, CUBLAS_VERSION 10020, CUBLAS_VER_MAJOR 10 CUBLAS_VER_MINOR 2
+  {"CUBLASLT_POINTER_MODE_ALPHA_DEVICE_VECTOR_BETA_HOST",  {CUDA_114, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 11402, CUBLAS_VERSION 11601, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 6
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_TYPE_NAME_VER_MAP {
@@ -667,6 +692,10 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_TYPE_NAME_VER_MAP {
   {"hipblasLtMatrixTransformDesc_t",                   {HIP_6000, HIP_0,    HIP_0   }},
   {"hipblasLtMatmulPreferenceOpaque_t",                {HIP_5050, HIP_0,    HIP_0   }},
   {"hipblasLtMatmulPreference_t",                      {HIP_5050, HIP_0,    HIP_0   }},
+  {"hipblasLtPointerMode_t",                           {HIP_6000, HIP_0,    HIP_0   }},
+  {"HIPBLASLT_POINTER_MODE_HOST",                      {HIP_6000, HIP_0,    HIP_0   }},
+  {"HIPBLASLT_POINTER_MODE_DEVICE",                    {HIP_6010, HIP_0,    HIP_0   }},
+  {"HIPBLASLT_POINTER_MODE_ALPHA_DEVICE_VECTOR_BETA_HOST",  {HIP_6000, HIP_0,    HIP_0   }},
 
   {"rocblas_handle",                                   {HIP_1050, HIP_0,    HIP_0   }},
   {"_rocblas_handle",                                  {HIP_1050, HIP_0,    HIP_0   }},

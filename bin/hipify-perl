@@ -5722,6 +5722,9 @@ sub simpleSubstitutions {
     subst("syevjInfo_t", "hipsolverSyevjInfo_t", "type");
     subst("texture", "texture", "type");
     subst("textureReference", "textureReference", "type");
+    subst("CUBLASLT_POINTER_MODE_ALPHA_DEVICE_VECTOR_BETA_HOST", "HIPBLASLT_POINTER_MODE_ALPHA_DEVICE_VECTOR_BETA_HOST", "numeric_literal");
+    subst("CUBLASLT_POINTER_MODE_DEVICE", "HIPBLASLT_POINTER_MODE_DEVICE", "numeric_literal");
+    subst("CUBLASLT_POINTER_MODE_HOST", "HIPBLASLT_POINTER_MODE_HOST", "numeric_literal");
     subst("CUBLAS_ATOMICS_ALLOWED", "HIPBLAS_ATOMICS_ALLOWED", "numeric_literal");
     subst("CUBLAS_ATOMICS_NOT_ALLOWED", "HIPBLAS_ATOMICS_NOT_ALLOWED", "numeric_literal");
     subst("CUBLAS_COMPUTE_16F", "HIPBLAS_COMPUTE_16F", "numeric_literal");
@@ -6534,6 +6537,7 @@ sub simpleSubstitutions {
     subst("NVRTC_ERROR_OUT_OF_MEMORY", "HIPRTC_ERROR_OUT_OF_MEMORY", "numeric_literal");
     subst("NVRTC_ERROR_PROGRAM_CREATION_FAILURE", "HIPRTC_ERROR_PROGRAM_CREATION_FAILURE", "numeric_literal");
     subst("NVRTC_SUCCESS", "HIPRTC_SUCCESS", "numeric_literal");
+    subst("cublasLtPointerMode_t", "hipblasLtPointerMode_t", "numeric_literal");
     subst("cudaAccessPropertyNormal", "hipAccessPropertyNormal", "numeric_literal");
     subst("cudaAccessPropertyPersisting", "hipAccessPropertyPersisting", "numeric_literal");
     subst("cudaAccessPropertyStreaming", "hipAccessPropertyStreaming", "numeric_literal");
@@ -11237,6 +11241,7 @@ sub warnHipOnlyUnsupportedFunctions {
         "cublasMigrateComputeType",
         "cublasLtMatmulTile_t",
         "cublasLtMatmulStages_t",
+        "cublasLtMatmulInnerShape_t",
         "cublasLtHeuristicsCacheSetCapacity",
         "cublasLtHeuristicsCacheGetCapacity",
         "cublasLtGetVersion",
@@ -11495,6 +11500,8 @@ sub warnHipOnlyUnsupportedFunctions {
         "CUBLAS_GEMM_ALGO1",
         "CUBLAS_GEMM_ALGO0_TENSOR_OP",
         "CUBLAS_GEMM_ALGO0",
+        "CUBLASLT_POINTER_MODE_DEVICE_VECTOR",
+        "CUBLASLT_POINTER_MODE_ALPHA_DEVICE_VECTOR_BETA_ZERO",
         "CUBLASLT_MATMUL_TILE_UNDEFINED",
         "CUBLASLT_MATMUL_TILE_END",
         "CUBLASLT_MATMUL_TILE_96x64",
@@ -11568,6 +11575,12 @@ sub warnHipOnlyUnsupportedFunctions {
         "CUBLASLT_MATMUL_STAGES_128x3",
         "CUBLASLT_MATMUL_STAGES_128x2",
         "CUBLASLT_MATMUL_STAGES_128x1",
+        "CUBLASLT_MATMUL_INNER_SHAPE_UNDEFINED",
+        "CUBLASLT_MATMUL_INNER_SHAPE_MMA884",
+        "CUBLASLT_MATMUL_INNER_SHAPE_MMA1688",
+        "CUBLASLT_MATMUL_INNER_SHAPE_MMA1684",
+        "CUBLASLT_MATMUL_INNER_SHAPE_MMA16816",
+        "CUBLASLT_MATMUL_INNER_SHAPE_END",
         "CUBLASLT_CLUSTER_SHAPE_END",
         "CUBLASLT_CLUSTER_SHAPE_AUTO",
         "CUBLASLT_CLUSTER_SHAPE_9x1x1",
@@ -11799,8 +11812,10 @@ sub warnRocOnlyUnsupportedFunctions {
         "cublasRotmEx",
         "cublasRotgEx",
         "cublasMigrateComputeType",
+        "cublasLtPointerMode_t",
         "cublasLtMatmulTile_t",
         "cublasLtMatmulStages_t",
+        "cublasLtMatmulInnerShape_t",
         "cublasLtHeuristicsCacheSetCapacity",
         "cublasLtHeuristicsCacheGetCapacity",
         "cublasLtGetVersion",
@@ -12074,6 +12089,10 @@ sub warnRocOnlyUnsupportedFunctions {
         "CUBLAS_COMPUTE_32F_FAST_16BF",
         "CUBLAS_COMPUTE_16F_PEDANTIC",
         "CUBLAS_COMPUTE_16F",
+        "CUBLASLT_POINTER_MODE_HOST",
+        "CUBLASLT_POINTER_MODE_DEVICE_VECTOR",
+        "CUBLASLT_POINTER_MODE_DEVICE",
+        "CUBLASLT_POINTER_MODE_ALPHA_DEVICE_VECTOR_BETA_ZERO",
         "CUBLASLT_MATMUL_TILE_UNDEFINED",
         "CUBLASLT_MATMUL_TILE_END",
         "CUBLASLT_MATMUL_TILE_96x64",
@@ -12147,6 +12166,12 @@ sub warnRocOnlyUnsupportedFunctions {
         "CUBLASLT_MATMUL_STAGES_128x3",
         "CUBLASLT_MATMUL_STAGES_128x2",
         "CUBLASLT_MATMUL_STAGES_128x1",
+        "CUBLASLT_MATMUL_INNER_SHAPE_UNDEFINED",
+        "CUBLASLT_MATMUL_INNER_SHAPE_MMA884",
+        "CUBLASLT_MATMUL_INNER_SHAPE_MMA1688",
+        "CUBLASLT_MATMUL_INNER_SHAPE_MMA1684",
+        "CUBLASLT_MATMUL_INNER_SHAPE_MMA16816",
+        "CUBLASLT_MATMUL_INNER_SHAPE_END",
         "CUBLASLT_CLUSTER_SHAPE_END",
         "CUBLASLT_CLUSTER_SHAPE_AUTO",
         "CUBLASLT_CLUSTER_SHAPE_9x1x1",
