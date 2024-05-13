@@ -7,6 +7,7 @@ include(GNUInstallDirs)
 option(HIPIFY_CLANG_TESTS "Build HIPIFY tests, if lit is installed" OFF)
 option(HIPIFY_CLANG_TESTS_ONLY "Build HIPIFY tests only, if lit is installed and hipify-clang binary is already produced" OFF)
 option(HIPIFY_INCLUDE_IN_HIP_SDK "Include HIPIFY in HIP SDK" OFF)
+option(HIPIFY_INSTALL_CLANG_HEADERS "Include clang headers in HIPIFY installation" ON)
 
 if(HIPIFY_CLANG_TESTS OR HIPIFY_CLANG_TESTS_ONLY)
   set(HIPIFY_TEST "ON")
@@ -24,6 +25,7 @@ message(STATUS "HIPIFY config:")
 message(STATUS "   - Build hipify-clang : ${HIPIFY_BUILD}")
 message(STATUS "   - Test  hipify-clang : ${HIPIFY_TEST}")
 message(STATUS "   - Is part of HIP SDK : ${HIPIFY_INCLUDE_IN_HIP_SDK}")
+message(STATUS "   - Install clang headers : ${HIPIFY_INSTALL_CLANG_HEADERS}")
 
 if(HIPIFY_INCLUDE_IN_HIP_SDK)
   if(NOT WIN32)
@@ -175,28 +177,38 @@ if (NOT HIPIFY_CLANG_TESTS_ONLY)
   install(
     DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin
     DESTINATION .
-    USE_SOURCE_PERMISSIONS
     PATTERN "hipify-perl"
-    PATTERN "*.sh")
+    PATTERN "*.sh"
+    PATTERN "findcode.sh" EXCLUDE
+    PATTERN "finduncodep.sh" EXCLUDE)
+
+  set(HIPIFY_LIBEXEC_INSTALL_PATH "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBEXECDIR}/hipify")
+
+  install(
+    PROGRAMS ${CMAKE_CURRENT_SOURCE_DIR}/bin/findcode.sh
+    PROGRAMS ${CMAKE_CURRENT_SOURCE_DIR}/bin/finduncodep.sh
+    DESTINATION ${CMAKE_INSTALL_LIBEXECDIR}/hipify)
 
   # Headers are already included in HIP SDK, so skip those if including HIPIFY in HIP SDK.
-  if(NOT HIPIFY_INCLUDE_IN_HIP_SDK)
-    # Install all folders under clang/version/ in CMAKE_INSTALL_PREFIX path.
-    install(
-      DIRECTORY ${LLVM_DIR}/../../clang/${LIB_CLANG_RES}/
-      DESTINATION .
-      COMPONENT clang-resource-headers
-      FILES_MATCHING
-      PATTERN "*.h"
-      PATTERN "*.modulemap"
-      PATTERN "algorithm"
-      PATTERN "complex"
-      PATTERN "new"
-      PATTERN "ppc_wrappers" EXCLUDE
-      PATTERN "omp-tools.h" EXCLUDE
-      PATTERN "omp.h" EXCLUDE
-      PATTERN "ompt.h" EXCLUDE
-      PATTERN "openmp_wrappers" EXCLUDE)
+  if( HIPIFY_INSTALL_CLANG_HEADERS)
+    if(NOT HIPIFY_INCLUDE_IN_HIP_SDK)
+      # Install all folders under clang/version/ in CMAKE_INSTALL_PREFIX path.
+      install(
+        DIRECTORY ${LLVM_LIBRARY_DIRS}/clang/${LIB_CLANG_RES}/include/
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/hipify/${CMAKE_INSTALL_INCLUDEDIR}
+        COMPONENT clang-resource-headers
+        FILES_MATCHING
+        PATTERN "*.h"
+        PATTERN "*.modulemap"
+        PATTERN "algorithm"
+        PATTERN "complex"
+        PATTERN "new"
+        PATTERN "ppc_wrappers" EXCLUDE
+        PATTERN "omp-tools.h" EXCLUDE
+        PATTERN "omp.h" EXCLUDE
+        PATTERN "ompt.h" EXCLUDE
+        PATTERN "openmp_wrappers" EXCLUDE)
+    endif()
   endif()
 
   if(UNIX)
