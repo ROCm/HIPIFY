@@ -277,10 +277,25 @@
 |`CUBLASLT_MATMUL_TILE_96x64`|11.3| | | | | | | | | | | | | | | |
 |`CUBLASLT_MATMUL_TILE_END`|10.1| | | | | | | | | | | | | | | |
 |`CUBLASLT_MATMUL_TILE_UNDEFINED`|10.1| | | | | | | | | | | | | | | |
+|`CUBLASLT_NUMERICAL_IMPL_FLAGS_ACCUMULATOR_16F`|11.0| | | | | | | | | | | | | | | |
+|`CUBLASLT_NUMERICAL_IMPL_FLAGS_ACCUMULATOR_32F`|11.0| | | | | | | | | | | | | | | |
+|`CUBLASLT_NUMERICAL_IMPL_FLAGS_ACCUMULATOR_32I`|11.0| | | | | | | | | | | | | | | |
+|`CUBLASLT_NUMERICAL_IMPL_FLAGS_ACCUMULATOR_64F`|11.0| | | | | | | | | | | | | | | |
+|`CUBLASLT_NUMERICAL_IMPL_FLAGS_ACCUMULATOR_TYPE_MASK`|11.0| | | | | | | | | | | | | | | |
 |`CUBLASLT_NUMERICAL_IMPL_FLAGS_DMMA`|11.0| | | | | | | | | | | | | | | |
 |`CUBLASLT_NUMERICAL_IMPL_FLAGS_FMA`|11.0| | | | | | | | | | | | | | | |
+|`CUBLASLT_NUMERICAL_IMPL_FLAGS_GAUSSIAN`|11.0| | | | | | | | | | | | | | | |
 |`CUBLASLT_NUMERICAL_IMPL_FLAGS_HMMA`|11.0| | | | | | | | | | | | | | | |
 |`CUBLASLT_NUMERICAL_IMPL_FLAGS_IMMA`|11.0| | | | | | | | | | | | | | | |
+|`CUBLASLT_NUMERICAL_IMPL_FLAGS_INPUT_16BF`|11.0| | | | | | | | | | | | | | | |
+|`CUBLASLT_NUMERICAL_IMPL_FLAGS_INPUT_16F`|11.0| | | | | | | | | | | | | | | |
+|`CUBLASLT_NUMERICAL_IMPL_FLAGS_INPUT_32F`|11.0| | | | | | | | | | | | | | | |
+|`CUBLASLT_NUMERICAL_IMPL_FLAGS_INPUT_64F`|11.0| | | | | | | | | | | | | | | |
+|`CUBLASLT_NUMERICAL_IMPL_FLAGS_INPUT_8F_E4M3`|11.8| | | | | | | | | | | | | | | |
+|`CUBLASLT_NUMERICAL_IMPL_FLAGS_INPUT_8F_E5M2`|11.8| | | | | | | | | | | | | | | |
+|`CUBLASLT_NUMERICAL_IMPL_FLAGS_INPUT_8I`|11.0| | | | | | | | | | | | | | | |
+|`CUBLASLT_NUMERICAL_IMPL_FLAGS_INPUT_TF32`|11.0| | | | | | | | | | | | | | | |
+|`CUBLASLT_NUMERICAL_IMPL_FLAGS_OP_INPUT_TYPE_MASK`|11.0| | | | | | | | | | | | | | | |
 |`CUBLASLT_NUMERICAL_IMPL_FLAGS_OP_TYPE_MASK`|11.0| | | | | | | | | | | | | | | |
 |`CUBLASLT_NUMERICAL_IMPL_FLAGS_TENSOR_OP_MASK`|11.0| | | | | | | | | | | | | | | |
 |`CUBLASLT_POINTER_MODE_ALPHA_DEVICE_VECTOR_BETA_HOST`|11.4| | | |`HIPBLASLT_POINTER_MODE_ALPHA_DEVICE_VECTOR_BETA_HOST`|6.0.0| | | | | | | | | | |
@@ -309,6 +324,7 @@
 |`cublasLtMatrixLayout_t`|10.1| | | |`hipblasLtMatrixLayout_t`| | | | | | | | | | | |
 |`cublasLtMatrixTransformDescOpaque_t`|11.0| | | |`hipblasLtMatrixTransformDescOpaque_t`|6.0.0| | | | | | | | | | |
 |`cublasLtMatrixTransformDesc_t`|10.1| | | |`hipblasLtMatrixTransformDesc_t`|6.0.0| | | | | | | | | | |
+|`cublasLtNumericalImplFlags_t`|11.0| | | | | | | | | | | | | | | |
 |`cublasLtPointerModeMask_t`|10.1| | | | | | | | | | | | | | | |
 |`cublasLtPointerMode_t`|10.1| | | |`hipblasLtPointerMode_t`|6.0.0| | | | | | | | | | |
 
