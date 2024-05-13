@@ -1297,6 +1297,11 @@ int main() {
   // HIP: hipError_t hipDrvGraphAddMemcpyNode(hipGraphNode_t* phGraphNode, hipGraph_t hGraph, const hipGraphNode_t* dependencies, size_t numDependencies, const HIP_MEMCPY3D* copyParams, hipCtx_t ctx);
   // CHECK: result = hipDrvGraphAddMemcpyNode(&graphNode, graph, &graphNode2, bytes, &MEMCPY3D, context);
   result = cuGraphAddMemcpyNode(&graphNode, graph, &graphNode2, bytes, &MEMCPY3D, context);
+
+  // CUDA: CUresult CUDAAPI cuGraphAddMemsetNode(CUgraphNode *phGraphNode, CUgraph hGraph, const CUgraphNode *dependencies, size_t numDependencies, const CUDA_MEMSET_NODE_PARAMS *memsetParams, CUcontext ctx);
+  // HIP: hipError_t hipDrvGraphAddMemsetNode(hipGraphNode_t* phGraphNode, hipGraph_t hGraph, const hipGraphNode_t* dependencies, size_t numDependencies, const HIP_MEMSET_NODE_PARAMS* memsetParams, hipCtx_t ctx);
+  // CHECK: result = hipDrvGraphAddMemsetNode(&graphNode, graph, &graphNode2, bytes, &MEMSET_NODE_PARAMS, context);
+  result = cuGraphAddMemsetNode(&graphNode, graph, &graphNode2, bytes, &MEMSET_NODE_PARAMS, context);
 #endif
 
 #if CUDA_VERSION >= 10000 && CUDA_VERSION < 12000
@@ -1714,11 +1719,6 @@ int main() {
   result = cuGraphReleaseUserObject(graph, userObject, count);
 
   // CUDA: CUresult CUDAAPI cuGraphDebugDotPrint(CUgraph hGraph, const char *path, unsigned int flags);
-  // HIP: hipError_t hipGraphDebugDotPrint(hipGraph_t graph, const char* path, unsigned int flags);
-  // CHECK: result = hipGraphDebugDotPrint(graph, name.c_str(), flags);
-  result = cuGraphDebugDotPrint(graph, name.c_str(), flags);
-
-  // CUDA: CUresult CUDAAPI cuGetProcAddress(const char *symbol, void **pfn, int cudaVersion, cuuint64_t flags, CUdriverProcAddressQueryResult *symbolStatus);
   // HIP: hipError_t hipGraphDebugDotPrint(hipGraph_t graph, const char* path, unsigned int flags);
   // CHECK: result = hipGraphDebugDotPrint(graph, name.c_str(), flags);
   result = cuGraphDebugDotPrint(graph, name.c_str(), flags);
