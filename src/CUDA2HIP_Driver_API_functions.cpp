@@ -656,6 +656,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   // RUNTIME: cudaError_t CUDARTAPI cudaGraphAddMemcpyNode(cudaGraphNode_t *pGraphNode, cudaGraph_t graph, const cudaGraphNode_t *pDependencies, size_t numDependencies, const struct cudaMemcpy3DParms *pCopyParams);
   {"cuGraphAddMemcpyNode",                                        {"hipDrvGraphAddMemcpyNode",                                    "", CONV_GRAPH, API_DRIVER, SEC::GRAPH}},
   // no analogue
+  // NOTE: Not equal to cudaGraphAddMemsetNode due to different signatures:
+  // DRIVER: CUresult CUDAAPI cuGraphAddMemsetNode(CUgraphNode *phGraphNode, CUgraph hGraph, const CUgraphNode *dependencies, size_t numDependencies, const CUDA_MEMSET_NODE_PARAMS *memsetParams, CUcontext ctx);
+  // RUNTIME: cudaError_t CUDARTAPI cudaGraphAddMemsetNode(cudaGraphNode_t *pGraphNode, cudaGraph_t graph, const cudaGraphNode_t *pDependencies, size_t numDependencies, const struct cudaMemsetParams *pMemsetParams);
   {"cuGraphAddMemsetNode",                                        {"hipDrvGraphAddMemsetNode",                                    "", CONV_GRAPH, API_DRIVER, SEC::GRAPH}},
   // cudaGraphChildGraphNodeGetGraph
   {"cuGraphChildGraphNodeGetGraph",                               {"hipGraphChildGraphNodeGetGraph",                              "", CONV_GRAPH, API_DRIVER, SEC::GRAPH}},
