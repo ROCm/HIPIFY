@@ -3869,6 +3869,8 @@ sub simpleSubstitutions {
     subst("cublasIzamin_v2_64", "hipblasIzamin_v2_64", "library");
     subst("cublasLtCreate", "hipblasLtCreate", "library");
     subst("cublasLtDestroy", "hipblasLtDestroy", "library");
+    subst("cublasLtMatmul", "hipblasLtMatmul", "library");
+    subst("cublasLtMatrixTransform", "hipblasLtMatrixTransform", "library");
     subst("cublasNrm2Ex", "hipblasNrm2Ex_v2", "library");
     subst("cublasRotEx", "hipblasRotEx_v2", "library");
     subst("cublasSasum", "hipblasSasum", "library");
@@ -6900,6 +6902,8 @@ sub simpleSubstitutions {
     subst("cudaSuccess", "hipSuccess", "numeric_literal");
     subst("cudaUserObjectNoDestructorSync", "hipUserObjectNoDestructorSync", "numeric_literal");
     subst("cusolver_int_t", "int", "numeric_literal");
+    subst("CUBLASLT_ORDER_COL", "HIPBLASLT_ORDER_COL", "define");
+    subst("CUBLASLT_ORDER_ROW", "HIPBLASLT_ORDER_ROW", "define");
     subst("CUB_MAX", "CUB_MAX", "define");
     subst("CUB_MIN", "CUB_MIN", "define");
     subst("CUB_NAMESPACE_BEGIN", "BEGIN_HIPCUB_NAMESPACE", "define");
@@ -6940,6 +6944,7 @@ sub simpleSubstitutions {
     subst("_CubLog", "_HipcubLog", "define");
     subst("__CUB_ALIGN_BYTES", "__HIPCUB_ALIGN_BYTES", "define");
     subst("__CUDACC__", "__HIPCC__", "define");
+    subst("cublasLtOrder_t", "hipblasLtOrder_t", "define");
     subst("cudaArrayCubemap", "hipArrayCubemap", "define");
     subst("cudaArrayDefault", "hipArrayDefault", "define");
     subst("cudaArrayLayered", "hipArrayLayered", "define");
@@ -11509,6 +11514,9 @@ sub warnHipOnlyUnsupportedFunctions {
         "CUBLASLT_POINTER_MODE_MASK_ALPHA_DEVICE_VECTOR_BETA_HOST",
         "CUBLASLT_POINTER_MODE_DEVICE_VECTOR",
         "CUBLASLT_POINTER_MODE_ALPHA_DEVICE_VECTOR_BETA_ZERO",
+        "CUBLASLT_ORDER_COL4_4R2_8C",
+        "CUBLASLT_ORDER_COL32_2R_4R4",
+        "CUBLASLT_ORDER_COL32",
         "CUBLASLT_NUMERICAL_IMPL_FLAGS_TENSOR_OP_MASK",
         "CUBLASLT_NUMERICAL_IMPL_FLAGS_OP_TYPE_MASK",
         "CUBLASLT_NUMERICAL_IMPL_FLAGS_OP_INPUT_TYPE_MASK",
@@ -11842,10 +11850,13 @@ sub warnRocOnlyUnsupportedFunctions {
         "cublasMigrateComputeType",
         "cublasLtPointerMode_t",
         "cublasLtPointerModeMask_t",
+        "cublasLtOrder_t",
         "cublasLtNumericalImplFlags_t",
+        "cublasLtMatrixTransform",
         "cublasLtMatmulTile_t",
         "cublasLtMatmulStages_t",
         "cublasLtMatmulInnerShape_t",
+        "cublasLtMatmul",
         "cublasLtHeuristicsCacheSetCapacity",
         "cublasLtHeuristicsCacheGetCapacity",
         "cublasLtGetVersion",
@@ -12128,6 +12139,11 @@ sub warnRocOnlyUnsupportedFunctions {
         "CUBLASLT_POINTER_MODE_DEVICE_VECTOR",
         "CUBLASLT_POINTER_MODE_DEVICE",
         "CUBLASLT_POINTER_MODE_ALPHA_DEVICE_VECTOR_BETA_ZERO",
+        "CUBLASLT_ORDER_ROW",
+        "CUBLASLT_ORDER_COL4_4R2_8C",
+        "CUBLASLT_ORDER_COL32_2R_4R4",
+        "CUBLASLT_ORDER_COL32",
+        "CUBLASLT_ORDER_COL",
         "CUBLASLT_NUMERICAL_IMPL_FLAGS_TENSOR_OP_MASK",
         "CUBLASLT_NUMERICAL_IMPL_FLAGS_OP_TYPE_MASK",
         "CUBLASLT_NUMERICAL_IMPL_FLAGS_OP_INPUT_TYPE_MASK",

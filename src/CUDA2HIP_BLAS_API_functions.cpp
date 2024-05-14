@@ -1090,6 +1090,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
   {"cublasLtHeuristicsCacheGetCapacity",     {"hipblasLtHeuristicsCacheGetCapacity",     "",                         CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
   {"cublasLtHeuristicsCacheSetCapacity",     {"hipblasLtHeuristicsCacheSetCapacity",     "",                         CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
   {"cublasLtDisableCpuInstructionsSetMask",  {"hipblasLtDisableCpuInstructionsSetMask",  "",                         CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
+  {"cublasLtMatmul",                 {"hipblasLtMatmul",                 "",                                         CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
+  {"cublasLtMatrixTransform",        {"hipblasLtMatrixTransform",        "",                                         CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_FUNCTION_VER_MAP {
@@ -1550,6 +1552,8 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_FUNCTION_VER_MAP {
   {"cublasLtHeuristicsCacheGetCapacity",         {CUDA_118, CUDA_0,   CUDA_0   }},
   {"cublasLtHeuristicsCacheSetCapacity",         {CUDA_118, CUDA_0,   CUDA_0   }},
   {"cublasLtDisableCpuInstructionsSetMask",      {CUDA_121, CUDA_0,   CUDA_0   }}, // A: CUDA_VERSION 12011, CUBLAS_VERSION 120103, CUBLAS_VER_MAJOR 12 CUBLAS_VER_MINOR 3
+  {"cublasLtMatmul",                             {CUDA_101, CUDA_0,   CUDA_0   }},
+  {"cublasLtMatrixTransform",                    {CUDA_101, CUDA_0,   CUDA_0   }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_FUNCTION_VER_MAP {
@@ -1954,6 +1958,8 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_FUNCTION_VER_MAP {
   {"hipblasZswap_v2_64",                         {HIP_6010, HIP_0,    HIP_0   }},
   {"hipblasLtCreate",                            {HIP_5050, HIP_0,    HIP_0   }},
   {"hipblasLtDestroy",                           {HIP_5050, HIP_0,    HIP_0   }},
+  {"hipblasLtMatmul",                            {HIP_5050, HIP_0,    HIP_0   }},
+  {"hipblasLtMatrixTransform",                   {HIP_6000, HIP_0,    HIP_0   }},
 
   {"rocblas_status_to_string",                   {HIP_3050, HIP_0,    HIP_0   }},
   {"rocblas_sscal",                              {HIP_1050, HIP_0,    HIP_0   }},

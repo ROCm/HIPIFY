@@ -16,7 +16,19 @@ int main() {
   // CHECK: hipblasStatus_t status;
   cublasStatus_t status;
 
+  // CHECK: hipStream_t stream;
+  cudaStream_t stream;
+
+  void *A = nullptr;
+  void *B = nullptr;
+  void *C = nullptr;
+  void *D = nullptr;
+  void *alpha = nullptr;
+  void *beta = nullptr;
+  void *workspace = nullptr;
   const char *const_ch = nullptr;
+
+  size_t workspaceSizeInBytes = 0;
 
 #if CUDA_VERSION >= 10010
   // CHECK: hipblasLtMatmulAlgo_t blasLtMatmulAlgo;
@@ -31,6 +43,16 @@ int main() {
   // CHECK: hipblasLtMatmulPreference_t blasLtMatmulPreference;
   cublasLtMatmulPreference_t blasLtMatmulPreference;
 
+  // CHECK: hipblasLtMatrixLayout_t blasLtMatrixLayout, Adesc, Bdesc, Cdesc, Ddesc;
+  cublasLtMatrixLayout_t blasLtMatrixLayout, Adesc, Bdesc, Cdesc, Ddesc;
+
+  // CHECK: hipblasLtOrder_t blasLtOrder;
+  // CHECK-NEXT: hipblasLtOrder_t BLASLT_ORDER_COL = HIPBLASLT_ORDER_COL;
+  // CHECK-NEXT: hipblasLtOrder_t BLASLT_ORDER_ROW = HIPBLASLT_ORDER_ROW;
+  cublasLtOrder_t blasLtOrder;
+  cublasLtOrder_t BLASLT_ORDER_COL = CUBLASLT_ORDER_COL;
+  cublasLtOrder_t BLASLT_ORDER_ROW = CUBLASLT_ORDER_ROW;
+
   // CUDA: cublasStatus_t CUBLASWINAPI cublasLtCreate(cublasLtHandle_t* lightHandle);
   // HIP: HIPBLASLT_EXPORT hipblasStatus_t hipblasLtCreate(hipblasLtHandle_t* handle);
   // CHECK: status = hipblasLtCreate(&blasLtHandle);
@@ -41,6 +63,17 @@ int main() {
   // CHECK: status = hipblasLtDestroy(blasLtHandle);
   status = cublasLtDestroy(blasLtHandle);
 
+  // CUDA: cublasStatus_t CUBLASWINAPI cublasLtMatmul(cublasLtHandle_t lightHandle, cublasLtMatmulDesc_t computeDesc, const void* alpha, const void* A, cublasLtMatrixLayout_t Adesc, const void* B, cublasLtMatrixLayout_t Bdesc, const void* beta, const void* C, cublasLtMatrixLayout_t Cdesc, void* D, cublasLtMatrixLayout_t Ddesc, const cublasLtMatmulAlgo_t* algo, void* workspace, size_t workspaceSizeInBytes, cudaStream_t stream);
+  // HIP: HIPBLASLT_EXPORT hipblasStatus_t hipblasLtMatmul(hipblasLtHandle_t handle, hipblasLtMatmulDesc_t matmulDesc, const void* alpha, const void* A, hipblasLtMatrixLayout_t Adesc, const void* B, hipblasLtMatrixLayout_t Bdesc, const void* beta, const void* C, hipblasLtMatrixLayout_t Cdesc, void* D, hipblasLtMatrixLayout_t Ddesc, const hipblasLtMatmulAlgo_t* algo, void* workspace, size_t workspaceSizeInBytes, hipStream_t stream);
+  // CHECK: status = hipblasLtMatmul(blasLtHandle, blasLtMatmulDesc, alpha, A, Adesc, B, Bdesc, beta, C, Cdesc, D, Ddesc, &blasLtMatmulAlgo, workspace, workspaceSizeInBytes, stream);
+  status = cublasLtMatmul(blasLtHandle, blasLtMatmulDesc, alpha, A, Adesc, B, Bdesc, beta, C, Cdesc, D, Ddesc, &blasLtMatmulAlgo, workspace, workspaceSizeInBytes, stream);
+
+  // CUDA: cublasStatus_t CUBLASWINAPI cublasLtMatrixTransform(cublasLtHandle_t lightHandle, cublasLtMatrixTransformDesc_t transformDesc, const void* alpha, const void* A, cublasLtMatrixLayout_t Adesc, const void* beta, const void* B, cublasLtMatrixLayout_t Bdesc, void* C, cublasLtMatrixLayout_t Cdesc, cudaStream_t stream);
+  // HIP: HIPBLASLT_EXPORT hipblasStatus_t hipblasLtMatrixTransform(hipblasLtHandle_t lightHandle, hipblasLtMatrixTransformDesc_t transformDesc, const void* alpha, const void* A, hipblasLtMatrixLayout_t Adesc, const void* beta, const void* B, hipblasLtMatrixLayout_t Bdesc, void* C, hipblasLtMatrixLayout_t Cdesc, hipStream_t stream);
+  // CHECK: status = hipblasLtMatrixTransform(blasLtHandle, blasLtMatrixTransformDesc, alpha, A, Adesc, beta, B, Bdesc, C, Cdesc, stream);
+  status = cublasLtMatrixTransform(blasLtHandle, blasLtMatrixTransformDesc, alpha, A, Adesc, beta, B, Bdesc, C, Cdesc, stream);
+#endif
+
 #if CUBLAS_VERSION >= 10200
   // CHECK: hipblasLtPointerMode_t blasLtPointerMode;
   // CHECK-NEXT: hipblasLtPointerMode_t BLASLT_POINTER_MODE_HOST = HIPBLASLT_POINTER_MODE_HOST;
@@ -48,7 +81,6 @@ int main() {
   cublasLtPointerMode_t blasLtPointerMode;
   cublasLtPointerMode_t BLASLT_POINTER_MODE_HOST = CUBLASLT_POINTER_MODE_HOST;
   cublasLtPointerMode_t BLASLT_POINTER_MODE_DEVICE = CUBLASLT_POINTER_MODE_DEVICE;
-#endif
 #endif
 
 #if CUDA_VERSION >= 11000 && CUBLAS_VERSION >= 11000

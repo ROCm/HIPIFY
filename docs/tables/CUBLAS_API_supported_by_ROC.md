@@ -298,6 +298,11 @@
 |`CUBLASLT_NUMERICAL_IMPL_FLAGS_OP_INPUT_TYPE_MASK`|11.0| | | | | | | | | |
 |`CUBLASLT_NUMERICAL_IMPL_FLAGS_OP_TYPE_MASK`|11.0| | | | | | | | | |
 |`CUBLASLT_NUMERICAL_IMPL_FLAGS_TENSOR_OP_MASK`|11.0| | | | | | | | | |
+|`CUBLASLT_ORDER_COL`|10.1| | | | | | | | | |
+|`CUBLASLT_ORDER_COL32`|10.1| | | | | | | | | |
+|`CUBLASLT_ORDER_COL32_2R_4R4`|11.0| | | | | | | | | |
+|`CUBLASLT_ORDER_COL4_4R2_8C`|10.1| | | | | | | | | |
+|`CUBLASLT_ORDER_ROW`|10.1| | | | | | | | | |
 |`CUBLASLT_POINTER_MODE_ALPHA_DEVICE_VECTOR_BETA_HOST`|11.4| | | | | | | | | |
 |`CUBLASLT_POINTER_MODE_ALPHA_DEVICE_VECTOR_BETA_ZERO`|10.1| | | | | | | | | |
 |`CUBLASLT_POINTER_MODE_DEVICE`| | | | | | | | | | |
@@ -325,6 +330,7 @@
 |`cublasLtMatrixTransformDescOpaque_t`|11.0| | | | | | | | | |
 |`cublasLtMatrixTransformDesc_t`|10.1| | | | | | | | | |
 |`cublasLtNumericalImplFlags_t`|11.0| | | | | | | | | |
+|`cublasLtOrder_t`|10.1| | | | | | | | | |
 |`cublasLtPointerModeMask_t`|10.1| | | | | | | | | |
 |`cublasLtPointerMode_t`|10.1| | | | | | | | | |
 
@@ -1212,6 +1218,8 @@
 |`cublasLtGetVersion`|10.1| | | | | | | | | |
 |`cublasLtHeuristicsCacheGetCapacity`|11.8| | | | | | | | | |
 |`cublasLtHeuristicsCacheSetCapacity`|11.8| | | | | | | | | |
+|`cublasLtMatmul`|10.1| | | | | | | | | |
+|`cublasLtMatrixTransform`|10.1| | | | | | | | | |
 
 
 \*A - Added; D - Deprecated; C - Changed; R - Removed; E - Experimental
