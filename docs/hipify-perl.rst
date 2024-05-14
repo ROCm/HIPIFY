@@ -16,7 +16,7 @@ hipify-perl
 
 - No checks for input source CUDA code for correctness required
 
-- No dependency on third party tools, including CUDA
+- No dependency on third party tools, including NVIDIA CUDA
 
 **Disadvantages:**
 
