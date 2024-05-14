@@ -8,7 +8,7 @@
 hipify-clang
 **************************************************************************
 
-``hipify-clang`` is a Clang-based tool for translating CUDA sources into HIP sources.
+``hipify-clang`` is a Clang-based tool for translating NVIDIA CUDA sources into HIP sources.
 
 It translates CUDA source into an Abstract Syntax Tree (AST), which is traversed by transformation
 matchers. After applying all the matchers, the output HIP source is produced.
