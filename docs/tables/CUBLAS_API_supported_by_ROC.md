@@ -2,7 +2,7 @@
 
 ## **1. CUBLAS Data types**
 
-|**CUDA**|**A**|**D**|**C**|**R**|**ROC**|**A**|**D**|**C**|**R**|**E**|
+|**NVIDIA CUDA**|**A**|**D**|**C**|**R**|**ROC**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
 |`CUBLAS_ATOMICS_ALLOWED`| | | | |`rocblas_atomics_allowed`|3.8.0| | | | |
 |`CUBLAS_ATOMICS_NOT_ALLOWED`| | | | |`rocblas_atomics_not_allowed`|3.8.0| | | | |
