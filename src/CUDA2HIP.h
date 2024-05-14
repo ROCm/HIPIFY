@@ -268,3 +268,17 @@ namespace runtime {
     PROFILER_REMOVED = 37,
   };
 }
+
+namespace blas {
+  enum BLAS_API_SECTIONS {
+    BLAS_DATA_TYPES = 1,
+    CUDA_DATA_TYPES = 2,
+    BLAS_LT_DATA_TYPES = 3,
+    BLAS_HELPER = 4,
+    BLAS_LEVEL_1 = 5,
+    BLAS_LEVEL_2 = 6,
+    BLAS_LEVEL_3 = 7,
+    BLAS_EXT = 8,
+    BLAS_LT = 9,
+  };
+}

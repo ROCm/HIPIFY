@@ -3867,6 +3867,10 @@ sub simpleSubstitutions {
     subst("cublasIzamin_64", "hipblasIzamin_v2_64", "library");
     subst("cublasIzamin_v2", "hipblasIzamin_v2", "library");
     subst("cublasIzamin_v2_64", "hipblasIzamin_v2_64", "library");
+    subst("cublasLtCreate", "hipblasLtCreate", "library");
+    subst("cublasLtDestroy", "hipblasLtDestroy", "library");
+    subst("cublasLtMatmul", "hipblasLtMatmul", "library");
+    subst("cublasLtMatrixTransform", "hipblasLtMatrixTransform", "library");
     subst("cublasNrm2Ex", "hipblasNrm2Ex_v2", "library");
     subst("cublasRotEx", "hipblasRotEx_v2", "library");
     subst("cublasSasum", "hipblasSasum", "library");
@@ -5114,6 +5118,7 @@ sub simpleSubstitutions {
     subst("caffe2\/operators\/spatial_batch_norm_op.h", "caffe2\/operators\/hip\/spatial_batch_norm_op_miopen.hip", "include");
     subst("channel_descriptor.h", "hip\/channel_descriptor.h", "include");
     subst("cooperative_groups.h", "hip\/hip_cooperative_groups.h", "include");
+    subst("cublasLt.h", "hipblaslt.h", "include");
     subst("cublas_api.h", "hipblas.h", "include");
     subst("cuda_fp16.h", "hip\/hip_fp16.h", "include");
     subst("cuda_profiler_api.h", "hip\/hip_runtime_api.h", "include");
@@ -5444,6 +5449,17 @@ sub simpleSubstitutions {
     subst("cublasFillMode_t", "hipblasFillMode_t", "type");
     subst("cublasGemmAlgo_t", "hipblasGemmAlgo_t", "type");
     subst("cublasHandle_t", "hipblasHandle_t", "type");
+    subst("cublasLtHandle_t", "hipblasLtHandle_t", "type");
+    subst("cublasLtMatmulAlgo_t", "hipblasLtMatmulAlgo_t", "type");
+    subst("cublasLtMatmulDescOpaque_t", "hipblasLtMatmulDescOpaque_t", "type");
+    subst("cublasLtMatmulDesc_t", "hipblasLtMatmulDesc_t", "type");
+    subst("cublasLtMatmulPreferenceOpaque_t", "hipblasLtMatmulPreferenceOpaque_t", "type");
+    subst("cublasLtMatmulPreference_t", "hipblasLtMatmulPreference_t", "type");
+    subst("cublasLtMatrixLayoutOpaque_t", "hipblasLtMatrixLayoutOpaque_t", "type");
+    subst("cublasLtMatrixLayoutStruct", "hipblasLtMatrixLayoutOpaque_t", "type");
+    subst("cublasLtMatrixLayout_t", "hipblasLtMatrixLayout_t", "type");
+    subst("cublasLtMatrixTransformDescOpaque_t", "hipblasLtMatrixTransformDescOpaque_t", "type");
+    subst("cublasLtMatrixTransformDesc_t", "hipblasLtMatrixTransformDesc_t", "type");
     subst("cublasMath_t", "hipblasMath_t", "type");
     subst("cublasOperation_t", "hipblasOperation_t", "type");
     subst("cublasPointerMode_t", "hipblasPointerMode_t", "type");
@@ -5708,6 +5724,9 @@ sub simpleSubstitutions {
     subst("syevjInfo_t", "hipsolverSyevjInfo_t", "type");
     subst("texture", "texture", "type");
     subst("textureReference", "textureReference", "type");
+    subst("CUBLASLT_POINTER_MODE_ALPHA_DEVICE_VECTOR_BETA_HOST", "HIPBLASLT_POINTER_MODE_ALPHA_DEVICE_VECTOR_BETA_HOST", "numeric_literal");
+    subst("CUBLASLT_POINTER_MODE_DEVICE", "HIPBLASLT_POINTER_MODE_DEVICE", "numeric_literal");
+    subst("CUBLASLT_POINTER_MODE_HOST", "HIPBLASLT_POINTER_MODE_HOST", "numeric_literal");
     subst("CUBLAS_ATOMICS_ALLOWED", "HIPBLAS_ATOMICS_ALLOWED", "numeric_literal");
     subst("CUBLAS_ATOMICS_NOT_ALLOWED", "HIPBLAS_ATOMICS_NOT_ALLOWED", "numeric_literal");
     subst("CUBLAS_COMPUTE_16F", "HIPBLAS_COMPUTE_16F", "numeric_literal");
@@ -6520,6 +6539,7 @@ sub simpleSubstitutions {
     subst("NVRTC_ERROR_OUT_OF_MEMORY", "HIPRTC_ERROR_OUT_OF_MEMORY", "numeric_literal");
     subst("NVRTC_ERROR_PROGRAM_CREATION_FAILURE", "HIPRTC_ERROR_PROGRAM_CREATION_FAILURE", "numeric_literal");
     subst("NVRTC_SUCCESS", "HIPRTC_SUCCESS", "numeric_literal");
+    subst("cublasLtPointerMode_t", "hipblasLtPointerMode_t", "numeric_literal");
     subst("cudaAccessPropertyNormal", "hipAccessPropertyNormal", "numeric_literal");
     subst("cudaAccessPropertyPersisting", "hipAccessPropertyPersisting", "numeric_literal");
     subst("cudaAccessPropertyStreaming", "hipAccessPropertyStreaming", "numeric_literal");
@@ -6882,6 +6902,8 @@ sub simpleSubstitutions {
     subst("cudaSuccess", "hipSuccess", "numeric_literal");
     subst("cudaUserObjectNoDestructorSync", "hipUserObjectNoDestructorSync", "numeric_literal");
     subst("cusolver_int_t", "int", "numeric_literal");
+    subst("CUBLASLT_ORDER_COL", "HIPBLASLT_ORDER_COL", "define");
+    subst("CUBLASLT_ORDER_ROW", "HIPBLASLT_ORDER_ROW", "define");
     subst("CUB_MAX", "CUB_MAX", "define");
     subst("CUB_MIN", "CUB_MIN", "define");
     subst("CUB_NAMESPACE_BEGIN", "BEGIN_HIPCUB_NAMESPACE", "define");
@@ -6922,6 +6944,7 @@ sub simpleSubstitutions {
     subst("_CubLog", "_HipcubLog", "define");
     subst("__CUB_ALIGN_BYTES", "__HIPCUB_ALIGN_BYTES", "define");
     subst("__CUDACC__", "__HIPCC__", "define");
+    subst("cublasLtOrder_t", "hipblasLtOrder_t", "define");
     subst("cudaArrayCubemap", "hipArrayCubemap", "define");
     subst("cudaArrayDefault", "hipArrayDefault", "define");
     subst("cudaArrayLayered", "hipArrayLayered", "define");
@@ -7035,6 +7058,22 @@ sub transformHostFunctions {
     )
     {
         $k += s/(?<!\/\/ CHECK: )($func)\s*\(([^,\)]+),([\s]*)([^,\)]+)(,\s*|\))/$func\($2,$3HIP_SYMBOL\($4\)$5/g;
+    }
+    foreach $func (
+        "hipFuncSetAttribute",
+        "hipFuncSetCacheConfig",
+        "hipFuncSetSharedMemConfig",
+        "hipLaunchCooperativeKernel",
+        "hipLaunchKernel"
+    )
+    {
+        $k += s/(?<!\/\/ CHECK: )($func)\s*\(([^,\)]+),/$func\(reinterpret_cast<const void*>\($2\),/g;
+    }
+    foreach $func (
+        "hipFuncGetAttributes"
+    )
+    {
+        $k += s/(?<!\/\/ CHECK: )($func)\s*\(([^,\)]+),([\s]*)([^,\)]+)(,\s*|\))/$func\($2,$3reinterpret_cast<const void*>\($4\)$5/g;
     }
     foreach $func (
         "hipGraphExecMemcpyNodeSetParamsToSymbol",
@@ -11205,6 +11244,21 @@ sub warnHipOnlyUnsupportedFunctions {
         "cublasRotEx_64",
         "cublasNrm2Ex_64",
         "cublasMigrateComputeType",
+        "cublasLtPointerModeMask_t",
+        "cublasLtNumericalImplFlags_t",
+        "cublasLtMatmulTile_t",
+        "cublasLtMatmulStages_t",
+        "cublasLtMatmulInnerShape_t",
+        "cublasLtHeuristicsCacheSetCapacity",
+        "cublasLtHeuristicsCacheGetCapacity",
+        "cublasLtGetVersion",
+        "cublasLtGetStatusString",
+        "cublasLtGetStatusName",
+        "cublasLtGetProperty",
+        "cublasLtGetCudartVersion",
+        "cublasLtDisableCpuInstructionsSetMask",
+        "cublasLtContext",
+        "cublasLtClusterShape_t",
         "cublasLoggerConfigure",
         "cublasLogCallback",
         "cublasInit",
@@ -11452,7 +11506,169 @@ sub warnHipOnlyUnsupportedFunctions {
         "CUBLAS_GEMM_ALGO10",
         "CUBLAS_GEMM_ALGO1",
         "CUBLAS_GEMM_ALGO0_TENSOR_OP",
-        "CUBLAS_GEMM_ALGO0"
+        "CUBLAS_GEMM_ALGO0",
+        "CUBLASLT_POINTER_MODE_MASK_HOST",
+        "CUBLASLT_POINTER_MODE_MASK_DEVICE_VECTOR",
+        "CUBLASLT_POINTER_MODE_MASK_DEVICE",
+        "CUBLASLT_POINTER_MODE_MASK_ALPHA_DEVICE_VECTOR_BETA_ZERO",
+        "CUBLASLT_POINTER_MODE_MASK_ALPHA_DEVICE_VECTOR_BETA_HOST",
+        "CUBLASLT_POINTER_MODE_DEVICE_VECTOR",
+        "CUBLASLT_POINTER_MODE_ALPHA_DEVICE_VECTOR_BETA_ZERO",
+        "CUBLASLT_ORDER_COL4_4R2_8C",
+        "CUBLASLT_ORDER_COL32_2R_4R4",
+        "CUBLASLT_ORDER_COL32",
+        "CUBLASLT_NUMERICAL_IMPL_FLAGS_TENSOR_OP_MASK",
+        "CUBLASLT_NUMERICAL_IMPL_FLAGS_OP_TYPE_MASK",
+        "CUBLASLT_NUMERICAL_IMPL_FLAGS_OP_INPUT_TYPE_MASK",
+        "CUBLASLT_NUMERICAL_IMPL_FLAGS_INPUT_TF32",
+        "CUBLASLT_NUMERICAL_IMPL_FLAGS_INPUT_8I",
+        "CUBLASLT_NUMERICAL_IMPL_FLAGS_INPUT_8F_E5M2",
+        "CUBLASLT_NUMERICAL_IMPL_FLAGS_INPUT_8F_E4M3",
+        "CUBLASLT_NUMERICAL_IMPL_FLAGS_INPUT_64F",
+        "CUBLASLT_NUMERICAL_IMPL_FLAGS_INPUT_32F",
+        "CUBLASLT_NUMERICAL_IMPL_FLAGS_INPUT_16F",
+        "CUBLASLT_NUMERICAL_IMPL_FLAGS_INPUT_16BF",
+        "CUBLASLT_NUMERICAL_IMPL_FLAGS_IMMA",
+        "CUBLASLT_NUMERICAL_IMPL_FLAGS_HMMA",
+        "CUBLASLT_NUMERICAL_IMPL_FLAGS_GAUSSIAN",
+        "CUBLASLT_NUMERICAL_IMPL_FLAGS_FMA",
+        "CUBLASLT_NUMERICAL_IMPL_FLAGS_DMMA",
+        "CUBLASLT_NUMERICAL_IMPL_FLAGS_ACCUMULATOR_TYPE_MASK",
+        "CUBLASLT_NUMERICAL_IMPL_FLAGS_ACCUMULATOR_64F",
+        "CUBLASLT_NUMERICAL_IMPL_FLAGS_ACCUMULATOR_32I",
+        "CUBLASLT_NUMERICAL_IMPL_FLAGS_ACCUMULATOR_32F",
+        "CUBLASLT_NUMERICAL_IMPL_FLAGS_ACCUMULATOR_16F",
+        "CUBLASLT_MATMUL_TILE_UNDEFINED",
+        "CUBLASLT_MATMUL_TILE_END",
+        "CUBLASLT_MATMUL_TILE_96x64",
+        "CUBLASLT_MATMUL_TILE_96x128",
+        "CUBLASLT_MATMUL_TILE_8x8",
+        "CUBLASLT_MATMUL_TILE_8x64",
+        "CUBLASLT_MATMUL_TILE_8x32",
+        "CUBLASLT_MATMUL_TILE_8x16",
+        "CUBLASLT_MATMUL_TILE_64x96",
+        "CUBLASLT_MATMUL_TILE_64x8",
+        "CUBLASLT_MATMUL_TILE_64x64",
+        "CUBLASLT_MATMUL_TILE_64x512",
+        "CUBLASLT_MATMUL_TILE_64x32",
+        "CUBLASLT_MATMUL_TILE_64x256",
+        "CUBLASLT_MATMUL_TILE_64x128",
+        "CUBLASLT_MATMUL_TILE_512x64",
+        "CUBLASLT_MATMUL_TILE_32x8",
+        "CUBLASLT_MATMUL_TILE_32x64",
+        "CUBLASLT_MATMUL_TILE_32x32",
+        "CUBLASLT_MATMUL_TILE_32x256",
+        "CUBLASLT_MATMUL_TILE_32x16",
+        "CUBLASLT_MATMUL_TILE_32x128",
+        "CUBLASLT_MATMUL_TILE_256x64",
+        "CUBLASLT_MATMUL_TILE_256x32",
+        "CUBLASLT_MATMUL_TILE_256x128",
+        "CUBLASLT_MATMUL_TILE_192x128",
+        "CUBLASLT_MATMUL_TILE_16x8",
+        "CUBLASLT_MATMUL_TILE_16x32",
+        "CUBLASLT_MATMUL_TILE_16x16",
+        "CUBLASLT_MATMUL_TILE_160x128",
+        "CUBLASLT_MATMUL_TILE_128x96",
+        "CUBLASLT_MATMUL_TILE_128x64",
+        "CUBLASLT_MATMUL_TILE_128x32",
+        "CUBLASLT_MATMUL_TILE_128x256",
+        "CUBLASLT_MATMUL_TILE_128x192",
+        "CUBLASLT_MATMUL_TILE_128x160",
+        "CUBLASLT_MATMUL_TILE_128x128",
+        "CUBLASLT_MATMUL_STAGES_UNDEFINED",
+        "CUBLASLT_MATMUL_STAGES_END",
+        "CUBLASLT_MATMUL_STAGES_8xAUTO",
+        "CUBLASLT_MATMUL_STAGES_8x5",
+        "CUBLASLT_MATMUL_STAGES_8x4",
+        "CUBLASLT_MATMUL_STAGES_8x3",
+        "CUBLASLT_MATMUL_STAGES_64xAUTO",
+        "CUBLASLT_MATMUL_STAGES_64x6",
+        "CUBLASLT_MATMUL_STAGES_64x5",
+        "CUBLASLT_MATMUL_STAGES_64x4",
+        "CUBLASLT_MATMUL_STAGES_64x3",
+        "CUBLASLT_MATMUL_STAGES_64x2",
+        "CUBLASLT_MATMUL_STAGES_64x1",
+        "CUBLASLT_MATMUL_STAGES_32xAUTO",
+        "CUBLASLT_MATMUL_STAGES_32x6",
+        "CUBLASLT_MATMUL_STAGES_32x5",
+        "CUBLASLT_MATMUL_STAGES_32x4",
+        "CUBLASLT_MATMUL_STAGES_32x3",
+        "CUBLASLT_MATMUL_STAGES_32x2",
+        "CUBLASLT_MATMUL_STAGES_32x10",
+        "CUBLASLT_MATMUL_STAGES_32x1",
+        "CUBLASLT_MATMUL_STAGES_16xAUTO",
+        "CUBLASLT_MATMUL_STAGES_16x6",
+        "CUBLASLT_MATMUL_STAGES_16x5",
+        "CUBLASLT_MATMUL_STAGES_16x4",
+        "CUBLASLT_MATMUL_STAGES_16x3",
+        "CUBLASLT_MATMUL_STAGES_16x2",
+        "CUBLASLT_MATMUL_STAGES_16x10",
+        "CUBLASLT_MATMUL_STAGES_16x1",
+        "CUBLASLT_MATMUL_STAGES_128xAUTO",
+        "CUBLASLT_MATMUL_STAGES_128x6",
+        "CUBLASLT_MATMUL_STAGES_128x5",
+        "CUBLASLT_MATMUL_STAGES_128x4",
+        "CUBLASLT_MATMUL_STAGES_128x3",
+        "CUBLASLT_MATMUL_STAGES_128x2",
+        "CUBLASLT_MATMUL_STAGES_128x1",
+        "CUBLASLT_MATMUL_INNER_SHAPE_UNDEFINED",
+        "CUBLASLT_MATMUL_INNER_SHAPE_MMA884",
+        "CUBLASLT_MATMUL_INNER_SHAPE_MMA1688",
+        "CUBLASLT_MATMUL_INNER_SHAPE_MMA1684",
+        "CUBLASLT_MATMUL_INNER_SHAPE_MMA16816",
+        "CUBLASLT_MATMUL_INNER_SHAPE_END",
+        "CUBLASLT_CLUSTER_SHAPE_END",
+        "CUBLASLT_CLUSTER_SHAPE_AUTO",
+        "CUBLASLT_CLUSTER_SHAPE_9x1x1",
+        "CUBLASLT_CLUSTER_SHAPE_8x2x1",
+        "CUBLASLT_CLUSTER_SHAPE_8x1x1",
+        "CUBLASLT_CLUSTER_SHAPE_7x2x1",
+        "CUBLASLT_CLUSTER_SHAPE_7x1x1",
+        "CUBLASLT_CLUSTER_SHAPE_6x2x1",
+        "CUBLASLT_CLUSTER_SHAPE_6x1x1",
+        "CUBLASLT_CLUSTER_SHAPE_5x3x1",
+        "CUBLASLT_CLUSTER_SHAPE_5x2x1",
+        "CUBLASLT_CLUSTER_SHAPE_5x1x1",
+        "CUBLASLT_CLUSTER_SHAPE_4x4x1",
+        "CUBLASLT_CLUSTER_SHAPE_4x3x1",
+        "CUBLASLT_CLUSTER_SHAPE_4x2x1",
+        "CUBLASLT_CLUSTER_SHAPE_4x1x1",
+        "CUBLASLT_CLUSTER_SHAPE_3x5x1",
+        "CUBLASLT_CLUSTER_SHAPE_3x4x1",
+        "CUBLASLT_CLUSTER_SHAPE_3x3x1",
+        "CUBLASLT_CLUSTER_SHAPE_3x2x1",
+        "CUBLASLT_CLUSTER_SHAPE_3x1x1",
+        "CUBLASLT_CLUSTER_SHAPE_2x8x1",
+        "CUBLASLT_CLUSTER_SHAPE_2x7x1",
+        "CUBLASLT_CLUSTER_SHAPE_2x6x1",
+        "CUBLASLT_CLUSTER_SHAPE_2x5x1",
+        "CUBLASLT_CLUSTER_SHAPE_2x4x1",
+        "CUBLASLT_CLUSTER_SHAPE_2x3x1",
+        "CUBLASLT_CLUSTER_SHAPE_2x2x1",
+        "CUBLASLT_CLUSTER_SHAPE_2x1x1",
+        "CUBLASLT_CLUSTER_SHAPE_1x9x1",
+        "CUBLASLT_CLUSTER_SHAPE_1x8x1",
+        "CUBLASLT_CLUSTER_SHAPE_1x7x1",
+        "CUBLASLT_CLUSTER_SHAPE_1x6x1",
+        "CUBLASLT_CLUSTER_SHAPE_1x5x1",
+        "CUBLASLT_CLUSTER_SHAPE_1x4x1",
+        "CUBLASLT_CLUSTER_SHAPE_1x3x1",
+        "CUBLASLT_CLUSTER_SHAPE_1x2x1",
+        "CUBLASLT_CLUSTER_SHAPE_1x1x1",
+        "CUBLASLT_CLUSTER_SHAPE_1x16x1",
+        "CUBLASLT_CLUSTER_SHAPE_1x15x1",
+        "CUBLASLT_CLUSTER_SHAPE_1x14x1",
+        "CUBLASLT_CLUSTER_SHAPE_1x13x1",
+        "CUBLASLT_CLUSTER_SHAPE_1x12x1",
+        "CUBLASLT_CLUSTER_SHAPE_1x11x1",
+        "CUBLASLT_CLUSTER_SHAPE_1x10x1",
+        "CUBLASLT_CLUSTER_SHAPE_16x1x1",
+        "CUBLASLT_CLUSTER_SHAPE_15x1x1",
+        "CUBLASLT_CLUSTER_SHAPE_14x1x1",
+        "CUBLASLT_CLUSTER_SHAPE_13x1x1",
+        "CUBLASLT_CLUSTER_SHAPE_12x1x1",
+        "CUBLASLT_CLUSTER_SHAPE_11x1x1",
+        "CUBLASLT_CLUSTER_SHAPE_10x1x1"
     )
     {
         my $mt = m/($func)/g;
@@ -11632,6 +11848,25 @@ sub warnRocOnlyUnsupportedFunctions {
         "cublasRotmEx",
         "cublasRotgEx",
         "cublasMigrateComputeType",
+        "cublasLtPointerMode_t",
+        "cublasLtPointerModeMask_t",
+        "cublasLtOrder_t",
+        "cublasLtNumericalImplFlags_t",
+        "cublasLtMatrixTransform",
+        "cublasLtMatmulTile_t",
+        "cublasLtMatmulStages_t",
+        "cublasLtMatmulInnerShape_t",
+        "cublasLtMatmul",
+        "cublasLtHeuristicsCacheSetCapacity",
+        "cublasLtHeuristicsCacheGetCapacity",
+        "cublasLtGetVersion",
+        "cublasLtGetStatusString",
+        "cublasLtGetStatusName",
+        "cublasLtGetProperty",
+        "cublasLtGetCudartVersion",
+        "cublasLtDisableCpuInstructionsSetMask",
+        "cublasLtContext",
+        "cublasLtClusterShape_t",
         "cublasLoggerConfigure",
         "cublasLogCallback",
         "cublasIaminEx_64",
@@ -11894,7 +12129,173 @@ sub warnRocOnlyUnsupportedFunctions {
         "CUBLAS_COMPUTE_32F_FAST_16F",
         "CUBLAS_COMPUTE_32F_FAST_16BF",
         "CUBLAS_COMPUTE_16F_PEDANTIC",
-        "CUBLAS_COMPUTE_16F"
+        "CUBLAS_COMPUTE_16F",
+        "CUBLASLT_POINTER_MODE_MASK_HOST",
+        "CUBLASLT_POINTER_MODE_MASK_DEVICE_VECTOR",
+        "CUBLASLT_POINTER_MODE_MASK_DEVICE",
+        "CUBLASLT_POINTER_MODE_MASK_ALPHA_DEVICE_VECTOR_BETA_ZERO",
+        "CUBLASLT_POINTER_MODE_MASK_ALPHA_DEVICE_VECTOR_BETA_HOST",
+        "CUBLASLT_POINTER_MODE_HOST",
+        "CUBLASLT_POINTER_MODE_DEVICE_VECTOR",
+        "CUBLASLT_POINTER_MODE_DEVICE",
+        "CUBLASLT_POINTER_MODE_ALPHA_DEVICE_VECTOR_BETA_ZERO",
+        "CUBLASLT_ORDER_ROW",
+        "CUBLASLT_ORDER_COL4_4R2_8C",
+        "CUBLASLT_ORDER_COL32_2R_4R4",
+        "CUBLASLT_ORDER_COL32",
+        "CUBLASLT_ORDER_COL",
+        "CUBLASLT_NUMERICAL_IMPL_FLAGS_TENSOR_OP_MASK",
+        "CUBLASLT_NUMERICAL_IMPL_FLAGS_OP_TYPE_MASK",
+        "CUBLASLT_NUMERICAL_IMPL_FLAGS_OP_INPUT_TYPE_MASK",
+        "CUBLASLT_NUMERICAL_IMPL_FLAGS_INPUT_TF32",
+        "CUBLASLT_NUMERICAL_IMPL_FLAGS_INPUT_8I",
+        "CUBLASLT_NUMERICAL_IMPL_FLAGS_INPUT_8F_E5M2",
+        "CUBLASLT_NUMERICAL_IMPL_FLAGS_INPUT_8F_E4M3",
+        "CUBLASLT_NUMERICAL_IMPL_FLAGS_INPUT_64F",
+        "CUBLASLT_NUMERICAL_IMPL_FLAGS_INPUT_32F",
+        "CUBLASLT_NUMERICAL_IMPL_FLAGS_INPUT_16F",
+        "CUBLASLT_NUMERICAL_IMPL_FLAGS_INPUT_16BF",
+        "CUBLASLT_NUMERICAL_IMPL_FLAGS_IMMA",
+        "CUBLASLT_NUMERICAL_IMPL_FLAGS_HMMA",
+        "CUBLASLT_NUMERICAL_IMPL_FLAGS_GAUSSIAN",
+        "CUBLASLT_NUMERICAL_IMPL_FLAGS_FMA",
+        "CUBLASLT_NUMERICAL_IMPL_FLAGS_DMMA",
+        "CUBLASLT_NUMERICAL_IMPL_FLAGS_ACCUMULATOR_TYPE_MASK",
+        "CUBLASLT_NUMERICAL_IMPL_FLAGS_ACCUMULATOR_64F",
+        "CUBLASLT_NUMERICAL_IMPL_FLAGS_ACCUMULATOR_32I",
+        "CUBLASLT_NUMERICAL_IMPL_FLAGS_ACCUMULATOR_32F",
+        "CUBLASLT_NUMERICAL_IMPL_FLAGS_ACCUMULATOR_16F",
+        "CUBLASLT_MATMUL_TILE_UNDEFINED",
+        "CUBLASLT_MATMUL_TILE_END",
+        "CUBLASLT_MATMUL_TILE_96x64",
+        "CUBLASLT_MATMUL_TILE_96x128",
+        "CUBLASLT_MATMUL_TILE_8x8",
+        "CUBLASLT_MATMUL_TILE_8x64",
+        "CUBLASLT_MATMUL_TILE_8x32",
+        "CUBLASLT_MATMUL_TILE_8x16",
+        "CUBLASLT_MATMUL_TILE_64x96",
+        "CUBLASLT_MATMUL_TILE_64x8",
+        "CUBLASLT_MATMUL_TILE_64x64",
+        "CUBLASLT_MATMUL_TILE_64x512",
+        "CUBLASLT_MATMUL_TILE_64x32",
+        "CUBLASLT_MATMUL_TILE_64x256",
+        "CUBLASLT_MATMUL_TILE_64x128",
+        "CUBLASLT_MATMUL_TILE_512x64",
+        "CUBLASLT_MATMUL_TILE_32x8",
+        "CUBLASLT_MATMUL_TILE_32x64",
+        "CUBLASLT_MATMUL_TILE_32x32",
+        "CUBLASLT_MATMUL_TILE_32x256",
+        "CUBLASLT_MATMUL_TILE_32x16",
+        "CUBLASLT_MATMUL_TILE_32x128",
+        "CUBLASLT_MATMUL_TILE_256x64",
+        "CUBLASLT_MATMUL_TILE_256x32",
+        "CUBLASLT_MATMUL_TILE_256x128",
+        "CUBLASLT_MATMUL_TILE_192x128",
+        "CUBLASLT_MATMUL_TILE_16x8",
+        "CUBLASLT_MATMUL_TILE_16x32",
+        "CUBLASLT_MATMUL_TILE_16x16",
+        "CUBLASLT_MATMUL_TILE_160x128",
+        "CUBLASLT_MATMUL_TILE_128x96",
+        "CUBLASLT_MATMUL_TILE_128x64",
+        "CUBLASLT_MATMUL_TILE_128x32",
+        "CUBLASLT_MATMUL_TILE_128x256",
+        "CUBLASLT_MATMUL_TILE_128x192",
+        "CUBLASLT_MATMUL_TILE_128x160",
+        "CUBLASLT_MATMUL_TILE_128x128",
+        "CUBLASLT_MATMUL_STAGES_UNDEFINED",
+        "CUBLASLT_MATMUL_STAGES_END",
+        "CUBLASLT_MATMUL_STAGES_8xAUTO",
+        "CUBLASLT_MATMUL_STAGES_8x5",
+        "CUBLASLT_MATMUL_STAGES_8x4",
+        "CUBLASLT_MATMUL_STAGES_8x3",
+        "CUBLASLT_MATMUL_STAGES_64xAUTO",
+        "CUBLASLT_MATMUL_STAGES_64x6",
+        "CUBLASLT_MATMUL_STAGES_64x5",
+        "CUBLASLT_MATMUL_STAGES_64x4",
+        "CUBLASLT_MATMUL_STAGES_64x3",
+        "CUBLASLT_MATMUL_STAGES_64x2",
+        "CUBLASLT_MATMUL_STAGES_64x1",
+        "CUBLASLT_MATMUL_STAGES_32xAUTO",
+        "CUBLASLT_MATMUL_STAGES_32x6",
+        "CUBLASLT_MATMUL_STAGES_32x5",
+        "CUBLASLT_MATMUL_STAGES_32x4",
+        "CUBLASLT_MATMUL_STAGES_32x3",
+        "CUBLASLT_MATMUL_STAGES_32x2",
+        "CUBLASLT_MATMUL_STAGES_32x10",
+        "CUBLASLT_MATMUL_STAGES_32x1",
+        "CUBLASLT_MATMUL_STAGES_16xAUTO",
+        "CUBLASLT_MATMUL_STAGES_16x6",
+        "CUBLASLT_MATMUL_STAGES_16x5",
+        "CUBLASLT_MATMUL_STAGES_16x4",
+        "CUBLASLT_MATMUL_STAGES_16x3",
+        "CUBLASLT_MATMUL_STAGES_16x2",
+        "CUBLASLT_MATMUL_STAGES_16x10",
+        "CUBLASLT_MATMUL_STAGES_16x1",
+        "CUBLASLT_MATMUL_STAGES_128xAUTO",
+        "CUBLASLT_MATMUL_STAGES_128x6",
+        "CUBLASLT_MATMUL_STAGES_128x5",
+        "CUBLASLT_MATMUL_STAGES_128x4",
+        "CUBLASLT_MATMUL_STAGES_128x3",
+        "CUBLASLT_MATMUL_STAGES_128x2",
+        "CUBLASLT_MATMUL_STAGES_128x1",
+        "CUBLASLT_MATMUL_INNER_SHAPE_UNDEFINED",
+        "CUBLASLT_MATMUL_INNER_SHAPE_MMA884",
+        "CUBLASLT_MATMUL_INNER_SHAPE_MMA1688",
+        "CUBLASLT_MATMUL_INNER_SHAPE_MMA1684",
+        "CUBLASLT_MATMUL_INNER_SHAPE_MMA16816",
+        "CUBLASLT_MATMUL_INNER_SHAPE_END",
+        "CUBLASLT_CLUSTER_SHAPE_END",
+        "CUBLASLT_CLUSTER_SHAPE_AUTO",
+        "CUBLASLT_CLUSTER_SHAPE_9x1x1",
+        "CUBLASLT_CLUSTER_SHAPE_8x2x1",
+        "CUBLASLT_CLUSTER_SHAPE_8x1x1",
+        "CUBLASLT_CLUSTER_SHAPE_7x2x1",
+        "CUBLASLT_CLUSTER_SHAPE_7x1x1",
+        "CUBLASLT_CLUSTER_SHAPE_6x2x1",
+        "CUBLASLT_CLUSTER_SHAPE_6x1x1",
+        "CUBLASLT_CLUSTER_SHAPE_5x3x1",
+        "CUBLASLT_CLUSTER_SHAPE_5x2x1",
+        "CUBLASLT_CLUSTER_SHAPE_5x1x1",
+        "CUBLASLT_CLUSTER_SHAPE_4x4x1",
+        "CUBLASLT_CLUSTER_SHAPE_4x3x1",
+        "CUBLASLT_CLUSTER_SHAPE_4x2x1",
+        "CUBLASLT_CLUSTER_SHAPE_4x1x1",
+        "CUBLASLT_CLUSTER_SHAPE_3x5x1",
+        "CUBLASLT_CLUSTER_SHAPE_3x4x1",
+        "CUBLASLT_CLUSTER_SHAPE_3x3x1",
+        "CUBLASLT_CLUSTER_SHAPE_3x2x1",
+        "CUBLASLT_CLUSTER_SHAPE_3x1x1",
+        "CUBLASLT_CLUSTER_SHAPE_2x8x1",
+        "CUBLASLT_CLUSTER_SHAPE_2x7x1",
+        "CUBLASLT_CLUSTER_SHAPE_2x6x1",
+        "CUBLASLT_CLUSTER_SHAPE_2x5x1",
+        "CUBLASLT_CLUSTER_SHAPE_2x4x1",
+        "CUBLASLT_CLUSTER_SHAPE_2x3x1",
+        "CUBLASLT_CLUSTER_SHAPE_2x2x1",
+        "CUBLASLT_CLUSTER_SHAPE_2x1x1",
+        "CUBLASLT_CLUSTER_SHAPE_1x9x1",
+        "CUBLASLT_CLUSTER_SHAPE_1x8x1",
+        "CUBLASLT_CLUSTER_SHAPE_1x7x1",
+        "CUBLASLT_CLUSTER_SHAPE_1x6x1",
+        "CUBLASLT_CLUSTER_SHAPE_1x5x1",
+        "CUBLASLT_CLUSTER_SHAPE_1x4x1",
+        "CUBLASLT_CLUSTER_SHAPE_1x3x1",
+        "CUBLASLT_CLUSTER_SHAPE_1x2x1",
+        "CUBLASLT_CLUSTER_SHAPE_1x1x1",
+        "CUBLASLT_CLUSTER_SHAPE_1x16x1",
+        "CUBLASLT_CLUSTER_SHAPE_1x15x1",
+        "CUBLASLT_CLUSTER_SHAPE_1x14x1",
+        "CUBLASLT_CLUSTER_SHAPE_1x13x1",
+        "CUBLASLT_CLUSTER_SHAPE_1x12x1",
+        "CUBLASLT_CLUSTER_SHAPE_1x11x1",
+        "CUBLASLT_CLUSTER_SHAPE_1x10x1",
+        "CUBLASLT_CLUSTER_SHAPE_16x1x1",
+        "CUBLASLT_CLUSTER_SHAPE_15x1x1",
+        "CUBLASLT_CLUSTER_SHAPE_14x1x1",
+        "CUBLASLT_CLUSTER_SHAPE_13x1x1",
+        "CUBLASLT_CLUSTER_SHAPE_12x1x1",
+        "CUBLASLT_CLUSTER_SHAPE_11x1x1",
+        "CUBLASLT_CLUSTER_SHAPE_10x1x1"
     )
     {
         my $mt = m/($func)/g;

@@ -59,6 +59,12 @@ const std::string sCudaGetSymbolSize = "cudaGetSymbolSize";
 const std::string sCudaGetSymbolAddress = "cudaGetSymbolAddress";
 const std::string sCudaMemcpyFromSymbol = "cudaMemcpyFromSymbol";
 const std::string sCudaMemcpyFromSymbolAsync = "cudaMemcpyFromSymbolAsync";
+const std::string sCudaFuncSetCacheConfig = "cudaFuncSetCacheConfig";
+const std::string sCudaFuncSetSharedMemConfig = "cudaFuncSetSharedMemConfig";
+const std::string sCudaFuncGetAttributes = "cudaFuncGetAttributes";
+const std::string sCudaFuncSetAttribute = "cudaFuncSetAttribute";
+const std::string sCudaLaunchKernelStr = "cudaLaunchKernel";
+const std::string sCudaLaunchCooperativeKernel = "cudaLaunchCooperativeKernel";
 const std::string sCudaGraphAddMemcpyNodeToSymbol = "cudaGraphAddMemcpyNodeToSymbol";
 const std::string sCudaGraphAddMemcpyNodeFromSymbol = "cudaGraphAddMemcpyNodeFromSymbol";
 const std::string sCudaGraphMemcpyNodeSetParamsToSymbol = "cudaGraphMemcpyNodeSetParamsToSymbol";
@@ -277,6 +283,60 @@ std::map<std::string, hipify::FuncOverloadsStruct> FuncOverloads {
 };
 
 std::map<std::string, std::vector<ArgCastStruct>> FuncArgCasts {
+  {sCudaFuncSetCacheConfig,
+    {
+      {
+        {
+          {0, {e_reinterpret_cast, cw_None}}
+        }
+      }
+    }
+  },
+  {sCudaFuncSetSharedMemConfig,
+    {
+      {
+        {
+          {0, {e_reinterpret_cast, cw_None}}
+        }
+      }
+    }
+  },
+  {sCudaFuncGetAttributes,
+    {
+      {
+        {
+          {1, {e_reinterpret_cast, cw_None}}
+        }
+      }
+    }
+  },
+  {sCudaFuncSetAttribute,
+    {
+      {
+        {
+          {0, {e_reinterpret_cast, cw_None}}
+        }
+      }
+    }
+  },
+  {sCudaLaunchKernelStr,
+    {
+      {
+        {
+          {0, {e_reinterpret_cast, cw_None}}
+        }
+      }
+    }
+  },
+  {sCudaLaunchCooperativeKernel,
+    {
+      {
+        {
+          {0, {e_reinterpret_cast, cw_None}}
+        }
+      }
+    }
+  },
   {sCudaMallocHost,
     {
       {
@@ -2835,6 +2895,12 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
       mat::callee(
         mat::functionDecl(
           mat::hasAnyName(
+            sCudaFuncSetCacheConfig,
+            sCudaFuncSetSharedMemConfig,
+            sCudaFuncGetAttributes,
+            sCudaFuncSetAttribute,
+            sCudaLaunchKernelStr,
+            sCudaLaunchCooperativeKernel,
             sCudaGetSymbolAddress,
             sCudaGetSymbolSize,
             sCudaMemcpyFromSymbol,
