@@ -5,10 +5,10 @@
 .. _index:
 
 =====================
-HIPIFY Documentation
+HIPIFY documentation
 =====================
 
-``hipify-clang`` and ``hipify-perl`` are tools that automatically translate CUDA source code into portable HIP C++.
+``hipify-clang`` and ``hipify-perl`` are tools that automatically translate NVIDIA CUDA source code into portable HIP C++.
 
 .. note::
     
