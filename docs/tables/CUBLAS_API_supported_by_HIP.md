@@ -277,6 +277,14 @@
 |`CUBLASLT_MATMUL_TILE_96x64`|11.3| | | | | | | | | |
 |`CUBLASLT_MATMUL_TILE_END`|10.1| | | | | | | | | |
 |`CUBLASLT_MATMUL_TILE_UNDEFINED`|10.1| | | | | | | | | |
+|`CUBLASLT_MATRIX_LAYOUT_BATCH_COUNT`|10.1| | | |`HIPBLASLT_MATRIX_LAYOUT_BATCH_COUNT`|5.5.0| | | | |
+|`CUBLASLT_MATRIX_LAYOUT_COLS`|10.1| | | |`HIPBLASLT_MATRIX_LAYOUT_COLS`|6.0.0| | | | |
+|`CUBLASLT_MATRIX_LAYOUT_LD`|10.1| | | |`HIPBLASLT_MATRIX_LAYOUT_LD`|6.0.0| | | | |
+|`CUBLASLT_MATRIX_LAYOUT_ORDER`|10.1| | | |`HIPBLASLT_MATRIX_LAYOUT_ORDER`|6.0.0| | | | |
+|`CUBLASLT_MATRIX_LAYOUT_PLANE_OFFSET`|10.1| | | | | | | | | |
+|`CUBLASLT_MATRIX_LAYOUT_ROWS`|10.1| | | |`HIPBLASLT_MATRIX_LAYOUT_ROWS`|6.0.0| | | | |
+|`CUBLASLT_MATRIX_LAYOUT_STRIDED_BATCH_OFFSET`|10.1| | | |`HIPBLASLT_MATRIX_LAYOUT_STRIDED_BATCH_OFFSET`|5.5.0| | | | |
+|`CUBLASLT_MATRIX_LAYOUT_TYPE`|10.1| | | |`HIPBLASLT_MATRIX_LAYOUT_TYPE`|6.0.0| | | | |
 |`CUBLASLT_NUMERICAL_IMPL_FLAGS_ACCUMULATOR_16F`|11.0| | | | | | | | | |
 |`CUBLASLT_NUMERICAL_IMPL_FLAGS_ACCUMULATOR_32F`|11.0| | | | | | | | | |
 |`CUBLASLT_NUMERICAL_IMPL_FLAGS_ACCUMULATOR_32I`|11.0| | | | | | | | | |
@@ -324,6 +332,7 @@
 |`cublasLtMatmulPreference_t`|10.1| | | |`hipblasLtMatmulPreference_t`|5.5.0| | | | |
 |`cublasLtMatmulStages_t`|11.0| | | | | | | | | |
 |`cublasLtMatmulTile_t`|10.1| | | | | | | | | |
+|`cublasLtMatrixLayoutAttribute_t`|10.1| | | |`hipblasLtMatrixLayoutAttribute_t`|5.5.0| | | | |
 |`cublasLtMatrixLayoutOpaque_t`|11.0| | | |`hipblasLtMatrixLayoutOpaque_t`| | | | | |
 |`cublasLtMatrixLayoutStruct`|10.1| | |10.2|`hipblasLtMatrixLayoutOpaque_t`| | | | | |
 |`cublasLtMatrixLayout_t`|10.1| | | |`hipblasLtMatrixLayout_t`| | | | | |

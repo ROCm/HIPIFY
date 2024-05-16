@@ -5455,11 +5455,13 @@ sub simpleSubstitutions {
     subst("cublasLtMatmulDesc_t", "hipblasLtMatmulDesc_t", "type");
     subst("cublasLtMatmulPreferenceOpaque_t", "hipblasLtMatmulPreferenceOpaque_t", "type");
     subst("cublasLtMatmulPreference_t", "hipblasLtMatmulPreference_t", "type");
+    subst("cublasLtMatrixLayoutAttribute_t", "hipblasLtMatrixLayoutAttribute_t", "type");
     subst("cublasLtMatrixLayoutOpaque_t", "hipblasLtMatrixLayoutOpaque_t", "type");
     subst("cublasLtMatrixLayoutStruct", "hipblasLtMatrixLayoutOpaque_t", "type");
     subst("cublasLtMatrixLayout_t", "hipblasLtMatrixLayout_t", "type");
     subst("cublasLtMatrixTransformDescOpaque_t", "hipblasLtMatrixTransformDescOpaque_t", "type");
     subst("cublasLtMatrixTransformDesc_t", "hipblasLtMatrixTransformDesc_t", "type");
+    subst("cublasLtPointerMode_t", "hipblasLtPointerMode_t", "type");
     subst("cublasMath_t", "hipblasMath_t", "type");
     subst("cublasOperation_t", "hipblasOperation_t", "type");
     subst("cublasPointerMode_t", "hipblasPointerMode_t", "type");
@@ -5724,6 +5726,15 @@ sub simpleSubstitutions {
     subst("syevjInfo_t", "hipsolverSyevjInfo_t", "type");
     subst("texture", "texture", "type");
     subst("textureReference", "textureReference", "type");
+    subst("CUBLASLT_MATRIX_LAYOUT_BATCH_COUNT", "HIPBLASLT_MATRIX_LAYOUT_BATCH_COUNT", "numeric_literal");
+    subst("CUBLASLT_MATRIX_LAYOUT_COLS", "HIPBLASLT_MATRIX_LAYOUT_COLS", "numeric_literal");
+    subst("CUBLASLT_MATRIX_LAYOUT_LD", "HIPBLASLT_MATRIX_LAYOUT_LD", "numeric_literal");
+    subst("CUBLASLT_MATRIX_LAYOUT_ORDER", "HIPBLASLT_MATRIX_LAYOUT_ORDER", "numeric_literal");
+    subst("CUBLASLT_MATRIX_LAYOUT_ROWS", "HIPBLASLT_MATRIX_LAYOUT_ROWS", "numeric_literal");
+    subst("CUBLASLT_MATRIX_LAYOUT_STRIDED_BATCH_OFFSET", "HIPBLASLT_MATRIX_LAYOUT_STRIDED_BATCH_OFFSET", "numeric_literal");
+    subst("CUBLASLT_MATRIX_LAYOUT_TYPE", "HIPBLASLT_MATRIX_LAYOUT_TYPE", "numeric_literal");
+    subst("CUBLASLT_ORDER_COL", "HIPBLASLT_ORDER_COL", "numeric_literal");
+    subst("CUBLASLT_ORDER_ROW", "HIPBLASLT_ORDER_ROW", "numeric_literal");
     subst("CUBLASLT_POINTER_MODE_ALPHA_DEVICE_VECTOR_BETA_HOST", "HIPBLASLT_POINTER_MODE_ALPHA_DEVICE_VECTOR_BETA_HOST", "numeric_literal");
     subst("CUBLASLT_POINTER_MODE_DEVICE", "HIPBLASLT_POINTER_MODE_DEVICE", "numeric_literal");
     subst("CUBLASLT_POINTER_MODE_HOST", "HIPBLASLT_POINTER_MODE_HOST", "numeric_literal");
@@ -6539,7 +6550,7 @@ sub simpleSubstitutions {
     subst("NVRTC_ERROR_OUT_OF_MEMORY", "HIPRTC_ERROR_OUT_OF_MEMORY", "numeric_literal");
     subst("NVRTC_ERROR_PROGRAM_CREATION_FAILURE", "HIPRTC_ERROR_PROGRAM_CREATION_FAILURE", "numeric_literal");
     subst("NVRTC_SUCCESS", "HIPRTC_SUCCESS", "numeric_literal");
-    subst("cublasLtPointerMode_t", "hipblasLtPointerMode_t", "numeric_literal");
+    subst("cublasLtOrder_t", "hipblasLtOrder_t", "numeric_literal");
     subst("cudaAccessPropertyNormal", "hipAccessPropertyNormal", "numeric_literal");
     subst("cudaAccessPropertyPersisting", "hipAccessPropertyPersisting", "numeric_literal");
     subst("cudaAccessPropertyStreaming", "hipAccessPropertyStreaming", "numeric_literal");
@@ -6902,8 +6913,6 @@ sub simpleSubstitutions {
     subst("cudaSuccess", "hipSuccess", "numeric_literal");
     subst("cudaUserObjectNoDestructorSync", "hipUserObjectNoDestructorSync", "numeric_literal");
     subst("cusolver_int_t", "int", "numeric_literal");
-    subst("CUBLASLT_ORDER_COL", "HIPBLASLT_ORDER_COL", "define");
-    subst("CUBLASLT_ORDER_ROW", "HIPBLASLT_ORDER_ROW", "define");
     subst("CUB_MAX", "CUB_MAX", "define");
     subst("CUB_MIN", "CUB_MIN", "define");
     subst("CUB_NAMESPACE_BEGIN", "BEGIN_HIPCUB_NAMESPACE", "define");
@@ -6944,7 +6953,6 @@ sub simpleSubstitutions {
     subst("_CubLog", "_HipcubLog", "define");
     subst("__CUB_ALIGN_BYTES", "__HIPCUB_ALIGN_BYTES", "define");
     subst("__CUDACC__", "__HIPCC__", "define");
-    subst("cublasLtOrder_t", "hipblasLtOrder_t", "define");
     subst("cudaArrayCubemap", "hipArrayCubemap", "define");
     subst("cudaArrayDefault", "hipArrayDefault", "define");
     subst("cudaArrayLayered", "hipArrayLayered", "define");
@@ -11538,6 +11546,7 @@ sub warnHipOnlyUnsupportedFunctions {
         "CUBLASLT_NUMERICAL_IMPL_FLAGS_ACCUMULATOR_32I",
         "CUBLASLT_NUMERICAL_IMPL_FLAGS_ACCUMULATOR_32F",
         "CUBLASLT_NUMERICAL_IMPL_FLAGS_ACCUMULATOR_16F",
+        "CUBLASLT_MATRIX_LAYOUT_PLANE_OFFSET",
         "CUBLASLT_MATMUL_TILE_UNDEFINED",
         "CUBLASLT_MATMUL_TILE_END",
         "CUBLASLT_MATMUL_TILE_96x64",
@@ -11853,6 +11862,7 @@ sub warnRocOnlyUnsupportedFunctions {
         "cublasLtOrder_t",
         "cublasLtNumericalImplFlags_t",
         "cublasLtMatrixTransform",
+        "cublasLtMatrixLayoutAttribute_t",
         "cublasLtMatmulTile_t",
         "cublasLtMatmulStages_t",
         "cublasLtMatmulInnerShape_t",
@@ -12165,6 +12175,14 @@ sub warnRocOnlyUnsupportedFunctions {
         "CUBLASLT_NUMERICAL_IMPL_FLAGS_ACCUMULATOR_32I",
         "CUBLASLT_NUMERICAL_IMPL_FLAGS_ACCUMULATOR_32F",
         "CUBLASLT_NUMERICAL_IMPL_FLAGS_ACCUMULATOR_16F",
+        "CUBLASLT_MATRIX_LAYOUT_TYPE",
+        "CUBLASLT_MATRIX_LAYOUT_STRIDED_BATCH_OFFSET",
+        "CUBLASLT_MATRIX_LAYOUT_ROWS",
+        "CUBLASLT_MATRIX_LAYOUT_PLANE_OFFSET",
+        "CUBLASLT_MATRIX_LAYOUT_ORDER",
+        "CUBLASLT_MATRIX_LAYOUT_LD",
+        "CUBLASLT_MATRIX_LAYOUT_COLS",
+        "CUBLASLT_MATRIX_LAYOUT_BATCH_COUNT",
         "CUBLASLT_MATMUL_TILE_UNDEFINED",
         "CUBLASLT_MATMUL_TILE_END",
         "CUBLASLT_MATMUL_TILE_96x64",
