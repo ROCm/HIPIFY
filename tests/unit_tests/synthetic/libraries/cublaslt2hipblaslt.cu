@@ -53,6 +53,23 @@ int main() {
   cublasLtOrder_t BLASLT_ORDER_COL = CUBLASLT_ORDER_COL;
   cublasLtOrder_t BLASLT_ORDER_ROW = CUBLASLT_ORDER_ROW;
 
+  // CHECK: hipblasLtMatrixLayoutAttribute_t blasLtMatrixLayoutAttribute;
+  // CHECK-NEXT: hipblasLtMatrixLayoutAttribute_t BLASLT_MATRIX_LAYOUT_TYPE = HIPBLASLT_MATRIX_LAYOUT_TYPE;
+  // CHECK-NEXT: hipblasLtMatrixLayoutAttribute_t BLASLT_MATRIX_LAYOUT_ORDER = HIPBLASLT_MATRIX_LAYOUT_ORDER;
+  // CHECK-NEXT: hipblasLtMatrixLayoutAttribute_t BLASLT_MATRIX_LAYOUT_ROWS = HIPBLASLT_MATRIX_LAYOUT_ROWS;
+  // CHECK-NEXT: hipblasLtMatrixLayoutAttribute_t BLASLT_MATRIX_LAYOUT_COLS = HIPBLASLT_MATRIX_LAYOUT_COLS;
+  // CHECK-NEXT: hipblasLtMatrixLayoutAttribute_t BLASLT_MATRIX_LAYOUT_LD = HIPBLASLT_MATRIX_LAYOUT_LD;
+  // CHECK-NEXT: hipblasLtMatrixLayoutAttribute_t BLASLT_MATRIX_LAYOUT_BATCH_COUNT = HIPBLASLT_MATRIX_LAYOUT_BATCH_COUNT;
+  // CHECK-NEXT: hipblasLtMatrixLayoutAttribute_t BLASLT_MATRIX_LAYOUT_STRIDED_BATCH_OFFSET = HIPBLASLT_MATRIX_LAYOUT_STRIDED_BATCH_OFFSET;
+  cublasLtMatrixLayoutAttribute_t blasLtMatrixLayoutAttribute;
+  cublasLtMatrixLayoutAttribute_t BLASLT_MATRIX_LAYOUT_TYPE = CUBLASLT_MATRIX_LAYOUT_TYPE;
+  cublasLtMatrixLayoutAttribute_t BLASLT_MATRIX_LAYOUT_ORDER = CUBLASLT_MATRIX_LAYOUT_ORDER;
+  cublasLtMatrixLayoutAttribute_t BLASLT_MATRIX_LAYOUT_ROWS = CUBLASLT_MATRIX_LAYOUT_ROWS;
+  cublasLtMatrixLayoutAttribute_t BLASLT_MATRIX_LAYOUT_COLS = CUBLASLT_MATRIX_LAYOUT_COLS;
+  cublasLtMatrixLayoutAttribute_t BLASLT_MATRIX_LAYOUT_LD = CUBLASLT_MATRIX_LAYOUT_LD;
+  cublasLtMatrixLayoutAttribute_t BLASLT_MATRIX_LAYOUT_BATCH_COUNT = CUBLASLT_MATRIX_LAYOUT_BATCH_COUNT;
+  cublasLtMatrixLayoutAttribute_t BLASLT_MATRIX_LAYOUT_STRIDED_BATCH_OFFSET = CUBLASLT_MATRIX_LAYOUT_STRIDED_BATCH_OFFSET;
+
   // CUDA: cublasStatus_t CUBLASWINAPI cublasLtCreate(cublasLtHandle_t* lightHandle);
   // HIP: HIPBLASLT_EXPORT hipblasStatus_t hipblasLtCreate(hipblasLtHandle_t* handle);
   // CHECK: status = hipblasLtCreate(&blasLtHandle);
