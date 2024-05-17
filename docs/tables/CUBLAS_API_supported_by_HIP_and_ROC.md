@@ -1228,6 +1228,11 @@
 |`cublasLtHeuristicsCacheGetCapacity`|11.8| | | | | | | | | | | | | | | |
 |`cublasLtHeuristicsCacheSetCapacity`|11.8| | | | | | | | | | | | | | | |
 |`cublasLtMatmul`|10.1| | | |`hipblasLtMatmul`|5.5.0| | | | | | | | | | |
+|`cublasLtMatrixLayoutCreate`|10.1| | | |`hipblasLtMatrixLayoutCreate`|5.5.0| | | | | | | | | | |
+|`cublasLtMatrixLayoutDestroy`|10.1| | | |`hipblasLtMatrixLayoutDestroy`|5.5.0| | | | | | | | | | |
+|`cublasLtMatrixLayoutGetAttribute`|10.1| | | |`hipblasLtMatrixLayoutGetAttribute`|5.5.0| | | | | | | | | | |
+|`cublasLtMatrixLayoutInit`|11.0| | | | | | | | | | | | | | | |
+|`cublasLtMatrixLayoutSetAttribute`|10.1| | | |`hipblasLtMatrixLayoutSetAttribute`|5.5.0| | | | | | | | | | |
 |`cublasLtMatrixTransform`|10.1| | | |`hipblasLtMatrixTransform`|6.0.0| | | | | | | | | | |
 
 

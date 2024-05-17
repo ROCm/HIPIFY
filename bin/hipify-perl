@@ -3870,6 +3870,10 @@ sub simpleSubstitutions {
     subst("cublasLtCreate", "hipblasLtCreate", "library");
     subst("cublasLtDestroy", "hipblasLtDestroy", "library");
     subst("cublasLtMatmul", "hipblasLtMatmul", "library");
+    subst("cublasLtMatrixLayoutCreate", "hipblasLtMatrixLayoutCreate", "library");
+    subst("cublasLtMatrixLayoutDestroy", "hipblasLtMatrixLayoutDestroy", "library");
+    subst("cublasLtMatrixLayoutGetAttribute", "hipblasLtMatrixLayoutGetAttribute", "library");
+    subst("cublasLtMatrixLayoutSetAttribute", "hipblasLtMatrixLayoutSetAttribute", "library");
     subst("cublasLtMatrixTransform", "hipblasLtMatrixTransform", "library");
     subst("cublasNrm2Ex", "hipblasNrm2Ex_v2", "library");
     subst("cublasRotEx", "hipblasRotEx_v2", "library");
@@ -11254,6 +11258,7 @@ sub warnHipOnlyUnsupportedFunctions {
         "cublasMigrateComputeType",
         "cublasLtPointerModeMask_t",
         "cublasLtNumericalImplFlags_t",
+        "cublasLtMatrixLayoutInit",
         "cublasLtMatmulTile_t",
         "cublasLtMatmulStages_t",
         "cublasLtMatmulInnerShape_t",
@@ -11862,6 +11867,11 @@ sub warnRocOnlyUnsupportedFunctions {
         "cublasLtOrder_t",
         "cublasLtNumericalImplFlags_t",
         "cublasLtMatrixTransform",
+        "cublasLtMatrixLayoutSetAttribute",
+        "cublasLtMatrixLayoutInit",
+        "cublasLtMatrixLayoutGetAttribute",
+        "cublasLtMatrixLayoutDestroy",
+        "cublasLtMatrixLayoutCreate",
         "cublasLtMatrixLayoutAttribute_t",
         "cublasLtMatmulTile_t",
         "cublasLtMatmulStages_t",

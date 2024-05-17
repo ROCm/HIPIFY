@@ -7,6 +7,11 @@
 #include "cublasLt.h"
 // CHECK-NOT: #include "hipblaslt.h"
 
+#if defined(_WIN32) && CUDA_VERSION < 9000
+  typedef signed   __int64 int64_t;
+  typedef unsigned __int64 uint64_t;
+#endif
+
 int main() {
   printf("20. cuBLASLt API to hipBLASLt API synthetic test\n");
 
@@ -26,9 +31,19 @@ int main() {
   void *alpha = nullptr;
   void *beta = nullptr;
   void *workspace = nullptr;
+  void *buf = nullptr;
   const char *const_ch = nullptr;
 
   size_t workspaceSizeInBytes = 0;
+  size_t sizeWritten = 0;
+  uint64_t rows = 0;
+  uint64_t cols = 0;
+  int64_t ld = 0;
+
+#if CUDA_VERSION >= 8000
+  // CHECK: hipDataType dataType, dataTypeA, dataTypeB, computeType;
+  cudaDataType dataType, dataTypeA, dataTypeB, computeType;
+#endif
 
 #if CUDA_VERSION >= 10010
   // CHECK: hipblasLtMatmulAlgo_t blasLtMatmulAlgo;
@@ -89,6 +104,26 @@ int main() {
   // HIP: HIPBLASLT_EXPORT hipblasStatus_t hipblasLtMatrixTransform(hipblasLtHandle_t lightHandle, hipblasLtMatrixTransformDesc_t transformDesc, const void* alpha, const void* A, hipblasLtMatrixLayout_t Adesc, const void* beta, const void* B, hipblasLtMatrixLayout_t Bdesc, void* C, hipblasLtMatrixLayout_t Cdesc, hipStream_t stream);
   // CHECK: status = hipblasLtMatrixTransform(blasLtHandle, blasLtMatrixTransformDesc, alpha, A, Adesc, beta, B, Bdesc, C, Cdesc, stream);
   status = cublasLtMatrixTransform(blasLtHandle, blasLtMatrixTransformDesc, alpha, A, Adesc, beta, B, Bdesc, C, Cdesc, stream);
+
+  // CUDA: cublasStatus_t CUBLASWINAPI cublasLtMatrixLayoutCreate(cublasLtMatrixLayout_t* matLayout, cudaDataType type, uint64_t rows, uint64_t cols, int64_t ld);
+  // HIP: HIPBLASLT_EXPORT hipblasStatus_t hipblasLtMatrixLayoutCreate(hipblasLtMatrixLayout_t* matLayout, hipDataType type, uint64_t rows, uint64_t cols, int64_t ld);
+  // CHECK: status = hipblasLtMatrixLayoutCreate(&blasLtMatrixLayout, dataType, rows, cols, ld);
+  status = cublasLtMatrixLayoutCreate(&blasLtMatrixLayout, dataType, rows, cols, ld);
+
+  // CUDA: cublasStatus_t CUBLASWINAPI cublasLtMatrixLayoutDestroy(cublasLtMatrixLayout_t matLayout);
+  // HIP: HIPBLASLT_EXPORT hipblasStatus_t hipblasLtMatrixLayoutDestroy(const hipblasLtMatrixLayout_t matLayout);
+  // CHECK: status = hipblasLtMatrixLayoutDestroy(blasLtMatrixLayout);
+  status = cublasLtMatrixLayoutDestroy(blasLtMatrixLayout);
+
+  // CUDA: cublasStatus_t CUBLASWINAPI cublasLtMatrixLayoutSetAttribute(cublasLtMatrixLayout_t matLayout, cublasLtMatrixLayoutAttribute_t attr, const void* buf, size_t sizeInBytes);
+  // HIP: HIPBLASLT_EXPORT hipblasStatus_t hipblasLtMatrixLayoutSetAttribute(hipblasLtMatrixLayout_t matLayout, hipblasLtMatrixLayoutAttribute_t attr, const void* buf, size_t sizeInBytes);
+  // CHECK: status = hipblasLtMatrixLayoutSetAttribute(blasLtMatrixLayout, blasLtMatrixLayoutAttribute, buf, workspaceSizeInBytes);
+  status = cublasLtMatrixLayoutSetAttribute(blasLtMatrixLayout, blasLtMatrixLayoutAttribute, buf, workspaceSizeInBytes);
+
+  // CUDA: cublasStatus_t CUBLASWINAPI cublasLtMatrixLayoutGetAttribute(cublasLtMatrixLayout_t matLayout, cublasLtMatrixLayoutAttribute_t attr, void* buf, size_t sizeInBytes, size_t* sizeWritten);
+  // HIP: HIPBLASLT_EXPORT hipblasStatus_t hipblasLtMatrixLayoutGetAttribute(hipblasLtMatrixLayout_t matLayout, hipblasLtMatrixLayoutAttribute_t attr, void* buf, size_t sizeInBytes, size_t* sizeWritten);
+  // CHECK: status = hipblasLtMatrixLayoutGetAttribute(blasLtMatrixLayout, blasLtMatrixLayoutAttribute, buf, workspaceSizeInBytes, &sizeWritten);
+  status = cublasLtMatrixLayoutGetAttribute(blasLtMatrixLayout, blasLtMatrixLayoutAttribute, buf, workspaceSizeInBytes, &sizeWritten);
 #endif
 
 #if CUBLAS_VERSION >= 10200

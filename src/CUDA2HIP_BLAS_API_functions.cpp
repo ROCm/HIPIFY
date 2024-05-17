@@ -1092,6 +1092,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
   {"cublasLtDisableCpuInstructionsSetMask",  {"hipblasLtDisableCpuInstructionsSetMask",  "",                         CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
   {"cublasLtMatmul",                 {"hipblasLtMatmul",                 "",                                         CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
   {"cublasLtMatrixTransform",        {"hipblasLtMatrixTransform",        "",                                         CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
+  {"cublasLtMatrixLayoutInit",       {"hipblasLtMatrixLayoutInit",       "",                                         CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
+  {"cublasLtMatrixLayoutCreate",     {"hipblasLtMatrixLayoutCreate",     "",                                         CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
+  {"cublasLtMatrixLayoutDestroy",    {"hipblasLtMatrixLayoutDestroy",    "",                                         CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
+  {"cublasLtMatrixLayoutSetAttribute",       {"hipblasLtMatrixLayoutSetAttribute",       "",                         CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
+  {"cublasLtMatrixLayoutGetAttribute",       {"hipblasLtMatrixLayoutGetAttribute",       "",                         CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_FUNCTION_VER_MAP {
@@ -1554,6 +1559,11 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_FUNCTION_VER_MAP {
   {"cublasLtDisableCpuInstructionsSetMask",      {CUDA_121, CUDA_0,   CUDA_0   }}, // A: CUDA_VERSION 12011, CUBLAS_VERSION 120103, CUBLAS_VER_MAJOR 12 CUBLAS_VER_MINOR 3
   {"cublasLtMatmul",                             {CUDA_101, CUDA_0,   CUDA_0   }},
   {"cublasLtMatrixTransform",                    {CUDA_101, CUDA_0,   CUDA_0   }},
+  {"cublasLtMatrixLayoutInit",                   {CUDA_110, CUDA_0,   CUDA_0   }}, // A: CUDA_VERSION 11001, CUBLAS_VERSION 11000, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 0
+  {"cublasLtMatrixLayoutCreate",                 {CUDA_101, CUDA_0,   CUDA_0   }},
+  {"cublasLtMatrixLayoutDestroy",                {CUDA_101, CUDA_0,   CUDA_0   }},
+  {"cublasLtMatrixLayoutSetAttribute",           {CUDA_101, CUDA_0,   CUDA_0   }},
+  {"cublasLtMatrixLayoutGetAttribute",           {CUDA_101, CUDA_0,   CUDA_0   }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_FUNCTION_VER_MAP {
@@ -1960,6 +1970,10 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_FUNCTION_VER_MAP {
   {"hipblasLtDestroy",                           {HIP_5050, HIP_0,    HIP_0   }},
   {"hipblasLtMatmul",                            {HIP_5050, HIP_0,    HIP_0   }},
   {"hipblasLtMatrixTransform",                   {HIP_6000, HIP_0,    HIP_0   }},
+  {"hipblasLtMatrixLayoutCreate",                {HIP_5050, HIP_0,    HIP_0   }},
+  {"hipblasLtMatrixLayoutDestroy",               {HIP_5050, HIP_0,    HIP_0   }},
+  {"hipblasLtMatrixLayoutSetAttribute",          {HIP_5050, HIP_0,    HIP_0   }},
+  {"hipblasLtMatrixLayoutGetAttribute",          {HIP_5050, HIP_0,    HIP_0   }},
 
   {"rocblas_status_to_string",                   {HIP_3050, HIP_0,    HIP_0   }},
   {"rocblas_sscal",                              {HIP_1050, HIP_0,    HIP_0   }},
