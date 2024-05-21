@@ -133,6 +133,21 @@ int main() {
   // HIP: HIPBLASLT_EXPORT hipblasStatus_t hipblasLtMatrixLayoutGetAttribute(hipblasLtMatrixLayout_t matLayout, hipblasLtMatrixLayoutAttribute_t attr, void* buf, size_t sizeInBytes, size_t* sizeWritten);
   // CHECK: status = hipblasLtMatrixLayoutGetAttribute(blasLtMatrixLayout, blasLtMatrixLayoutAttribute, buf, workspaceSizeInBytes, &sizeWritten);
   status = cublasLtMatrixLayoutGetAttribute(blasLtMatrixLayout, blasLtMatrixLayoutAttribute, buf, workspaceSizeInBytes, &sizeWritten);
+
+  // CUDA: cublasStatus_t CUBLASWINAPI cublasLtMatmulDescDestroy(cublasLtMatmulDesc_t matmulDesc);
+  // HIP: HIPBLASLT_EXPORT hipblasStatus_t hipblasLtMatmulDescDestroy(const hipblasLtMatmulDesc_t matmulDesc);
+  // CHECK: status = hipblasLtMatmulDescDestroy(blasLtMatmulDesc);
+  status = cublasLtMatmulDescDestroy(blasLtMatmulDesc);
+
+  // CUDA: cublasStatus_t CUBLASWINAPI cublasLtMatmulDescSetAttribute(cublasLtMatmulDesc_t matmulDesc, cublasLtMatmulDescAttributes_t attr, const void* buf, size_t sizeInBytes);
+  // HIP: HIPBLASLT_EXPORT hipblasStatus_t hipblasLtMatmulDescSetAttribute(hipblasLtMatmulDesc_t matmulDesc, hipblasLtMatmulDescAttributes_t attr, const void* buf, size_t sizeInBytes);
+  // CHECK: status = hipblasLtMatmulDescSetAttribute(blasLtMatmulDesc, blasLtMatmulDescAttributes, buf, workspaceSizeInBytes);
+  status = cublasLtMatmulDescSetAttribute(blasLtMatmulDesc, blasLtMatmulDescAttributes, buf, workspaceSizeInBytes);
+
+  // CUDA: cublasStatus_t CUBLASWINAPI cublasLtMatmulDescGetAttribute(cublasLtMatmulDesc_t matmulDesc, cublasLtMatmulDescAttributes_t attr, void* buf, size_t sizeInBytes, size_t* sizeWritten);
+  // HIP: HIPBLASLT_EXPORT hipblasStatus_t hipblasLtMatmulDescGetAttribute(hipblasLtMatmulDesc_t matmulDesc, hipblasLtMatmulDescAttributes_t attr, void* buf, size_t sizeInBytes, size_t* sizeWritten);
+  // CHECK: status = hipblasLtMatmulDescGetAttribute(blasLtMatmulDesc, blasLtMatmulDescAttributes, buf, workspaceSizeInBytes, &sizeWritten);
+  status = cublasLtMatmulDescGetAttribute(blasLtMatmulDesc, blasLtMatmulDescAttributes, buf, workspaceSizeInBytes, &sizeWritten);
 #endif
 
 #if CUBLAS_VERSION >= 10200
@@ -147,6 +162,20 @@ int main() {
   // CHECK-NEXT: hipblasLtMatmulDescAttributes_t BLASLT_MATMUL_DESC_BIAS_POINTER = HIPBLASLT_MATMUL_DESC_BIAS_POINTER;
   cublasLtMatmulDescAttributes_t BLASLT_MATMUL_DESC_EPILOGUE = CUBLASLT_MATMUL_DESC_EPILOGUE;
   cublasLtMatmulDescAttributes_t BLASLT_MATMUL_DESC_BIAS_POINTER = CUBLASLT_MATMUL_DESC_BIAS_POINTER;
+#endif
+
+#if CUDA_VERSION >= 11000
+  // CHECK: hipblasComputeType_t blasComputeType;
+  cublasComputeType_t blasComputeType;
+
+  // [hipBLASLt] TODO: Use hipblasComputeType_t instead of incompatible hipblasLtComputeType_t
+  // [HIPIFY] TODO: For CUDA < 11.0 throw an error cublasLtMatmulDescCreate is not supported by HIP, please use the newer version of cublasLtMatmulDescCreate (>=11.0)
+  // [Reason] The signature change in 11.0.1 from cublasLtMatmulDescCreate(cublasLtMatmulDesc_t *matmulDesc, cudaDataType computeType);
+  // CUDA: cublasStatus_t CUBLASWINAPI cublasLtMatmulDescCreate(cublasLtMatmulDesc_t* matmulDesc, cublasComputeType_t computeType, cudaDataType_t scaleType);
+  // HIP: HIPBLASLT_EXPORT hipblasStatus_t hipblasLtMatmulDescCreate(hipblasLtMatmulDesc_t* matmulDesc, hipblasLtComputeType_t computeType, hipblasDatatype_t scaleType);
+  // CHECK: status = hipblasLtMatmulDescCreate(&blasLtMatmulDesc, blasComputeType, dataType);
+  status = cublasLtMatmulDescCreate(&blasLtMatmulDesc, blasComputeType, dataType);
+
 #endif
 
 #if CUDA_VERSION >= 11000 && CUBLAS_VERSION >= 11000

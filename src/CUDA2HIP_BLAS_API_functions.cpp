@@ -1097,6 +1097,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
   {"cublasLtMatrixLayoutDestroy",    {"hipblasLtMatrixLayoutDestroy",    "",                                         CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
   {"cublasLtMatrixLayoutSetAttribute",       {"hipblasLtMatrixLayoutSetAttribute",       "",                         CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
   {"cublasLtMatrixLayoutGetAttribute",       {"hipblasLtMatrixLayoutGetAttribute",       "",                         CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
+  {"cublasLtMatmulDescInit",                 {"hipblasLtMatmulDescInit",                 "",                         CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
+  // [hipBLASLt] TODO: Use hipblasComputeType_t instead of incompatible hipblasLtComputeType_t
+  // [HIPIFY] TODO: For CUDA < 11.0 throw an error cublasLtMatmulDescCreate is not supported by HIP, please use the newer version of cublasLtMatmulDescCreate (>=11.0)
+  // [Reason] The signature change in 11.0.1 from cublasLtMatmulDescCreate(cublasLtMatmulDesc_t *matmulDesc, cudaDataType computeType);
+  {"cublasLtMatmulDescCreate",               {"hipblasLtMatmulDescCreate",               "",                         CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
+  {"cublasLtMatmulDescDestroy",              {"hipblasLtMatmulDescDestroy",              "",                         CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
+  {"cublasLtMatmulDescSetAttribute",         {"hipblasLtMatmulDescSetAttribute",         "",                         CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
+  {"cublasLtMatmulDescGetAttribute",         {"hipblasLtMatmulDescGetAttribute",         "",                         CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_FUNCTION_VER_MAP {
@@ -1564,6 +1572,11 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_FUNCTION_VER_MAP {
   {"cublasLtMatrixLayoutDestroy",                {CUDA_101, CUDA_0,   CUDA_0   }},
   {"cublasLtMatrixLayoutSetAttribute",           {CUDA_101, CUDA_0,   CUDA_0   }},
   {"cublasLtMatrixLayoutGetAttribute",           {CUDA_101, CUDA_0,   CUDA_0   }},
+  {"cublasLtMatmulDescInit",                     {CUDA_110, CUDA_0,   CUDA_0   }}, // A: CUDA_VERSION 11001, CUBLAS_VERSION 11000, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 0
+  {"cublasLtMatmulDescCreate",                   {CUDA_101, CUDA_0,   CUDA_0   }},
+  {"cublasLtMatmulDescDestroy",                  {CUDA_101, CUDA_0,   CUDA_0   }},
+  {"cublasLtMatmulDescSetAttribute",             {CUDA_101, CUDA_0,   CUDA_0   }},
+  {"cublasLtMatmulDescGetAttribute",             {CUDA_101, CUDA_0,   CUDA_0   }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_FUNCTION_VER_MAP {
@@ -1974,6 +1987,10 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_FUNCTION_VER_MAP {
   {"hipblasLtMatrixLayoutDestroy",               {HIP_5050, HIP_0,    HIP_0   }},
   {"hipblasLtMatrixLayoutSetAttribute",          {HIP_5050, HIP_0,    HIP_0   }},
   {"hipblasLtMatrixLayoutGetAttribute",          {HIP_5050, HIP_0,    HIP_0   }},
+  {"hipblasLtMatmulDescCreate",                  {HIP_5050, HIP_0,    HIP_0   }},
+  {"hipblasLtMatmulDescDestroy",                 {HIP_5050, HIP_0,    HIP_0   }},
+  {"hipblasLtMatmulDescSetAttribute",            {HIP_5050, HIP_0,    HIP_0   }},
+  {"hipblasLtMatmulDescGetAttribute",            {HIP_5050, HIP_0,    HIP_0   }},
 
   {"rocblas_status_to_string",                   {HIP_3050, HIP_0,    HIP_0   }},
   {"rocblas_sscal",                              {HIP_1050, HIP_0,    HIP_0   }},
@@ -2275,6 +2292,10 @@ const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_BLAS_FUNCTION_CHANGED
   {"rocblas_dtrmm",                              {HIP_6000}},
   {"rocblas_ctrmm",                              {HIP_6000}},
   {"rocblas_ztrmm",                              {HIP_6000}},
+};
+
+const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_BLAS_FUNCTION_CHANGED_VER_MAP {
+  {"cublasLtMatmulDescCreate",                   {CUDA_110}},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_BLAS_API_SECTION_MAP {

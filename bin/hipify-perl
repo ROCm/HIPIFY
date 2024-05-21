@@ -3870,6 +3870,10 @@ sub simpleSubstitutions {
     subst("cublasLtCreate", "hipblasLtCreate", "library");
     subst("cublasLtDestroy", "hipblasLtDestroy", "library");
     subst("cublasLtMatmul", "hipblasLtMatmul", "library");
+    subst("cublasLtMatmulDescCreate", "hipblasLtMatmulDescCreate", "library");
+    subst("cublasLtMatmulDescDestroy", "hipblasLtMatmulDescDestroy", "library");
+    subst("cublasLtMatmulDescGetAttribute", "hipblasLtMatmulDescGetAttribute", "library");
+    subst("cublasLtMatmulDescSetAttribute", "hipblasLtMatmulDescSetAttribute", "library");
     subst("cublasLtMatrixLayoutCreate", "hipblasLtMatrixLayoutCreate", "library");
     subst("cublasLtMatrixLayoutDestroy", "hipblasLtMatrixLayoutDestroy", "library");
     subst("cublasLtMatrixLayoutGetAttribute", "hipblasLtMatrixLayoutGetAttribute", "library");
@@ -11277,6 +11281,7 @@ sub warnHipOnlyUnsupportedFunctions {
         "cublasLtMatmulTile_t",
         "cublasLtMatmulStages_t",
         "cublasLtMatmulInnerShape_t",
+        "cublasLtMatmulDescInit",
         "cublasLtHeuristicsCacheSetCapacity",
         "cublasLtHeuristicsCacheGetCapacity",
         "cublasLtGetVersion",
@@ -11906,6 +11911,11 @@ sub warnRocOnlyUnsupportedFunctions {
         "cublasLtMatmulTile_t",
         "cublasLtMatmulStages_t",
         "cublasLtMatmulInnerShape_t",
+        "cublasLtMatmulDescSetAttribute",
+        "cublasLtMatmulDescInit",
+        "cublasLtMatmulDescGetAttribute",
+        "cublasLtMatmulDescDestroy",
+        "cublasLtMatmulDescCreate",
         "cublasLtMatmulDescAttributes_t",
         "cublasLtMatmul",
         "cublasLtHeuristicsCacheSetCapacity",
