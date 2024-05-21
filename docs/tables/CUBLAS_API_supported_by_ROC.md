@@ -1258,6 +1258,11 @@
 |`cublasLtHeuristicsCacheGetCapacity`|11.8| | | | | | | | | |
 |`cublasLtHeuristicsCacheSetCapacity`|11.8| | | | | | | | | |
 |`cublasLtMatmul`|10.1| | | | | | | | | |
+|`cublasLtMatmulDescCreate`|10.1| |11.0| | | | | | | |
+|`cublasLtMatmulDescDestroy`|10.1| | | | | | | | | |
+|`cublasLtMatmulDescGetAttribute`|10.1| | | | | | | | | |
+|`cublasLtMatmulDescInit`|11.0| | | | | | | | | |
+|`cublasLtMatmulDescSetAttribute`|10.1| | | | | | | | | |
 |`cublasLtMatrixLayoutCreate`|10.1| | | | | | | | | |
 |`cublasLtMatrixLayoutDestroy`|10.1| | | | | | | | | |
 |`cublasLtMatrixLayoutGetAttribute`|10.1| | | | | | | | | |
