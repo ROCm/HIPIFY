@@ -417,6 +417,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP {
   {"CUBLASLT_MATMUL_DESC_ATOMIC_SYNC_NUM_CHUNKS_D_COLS",             {"HIPBLASLT_MATMUL_DESC_ATOMIC_SYNC_NUM_CHUNKS_D_COLS",               "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
   {"CUBLASLT_MATMUL_DESC_ATOMIC_SYNC_IN_COUNTERS_POINTER",           {"HIPBLASLT_MATMUL_DESC_ATOMIC_SYNC_IN_COUNTERS_POINTER",             "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
   {"CUBLASLT_MATMUL_DESC_ATOMIC_SYNC_OUT_COUNTERS_POINTER",          {"HIPBLASLT_MATMUL_DESC_ATOMIC_SYNC_OUT_COUNTERS_POINTER",            "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"cublasLtMatrixTransformDescAttributes_t",                        {"hipblasLtMatrixTransformDescAttributes_t",                          "",                                                         CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED}},
+  {"CUBLASLT_MATRIX_TRANSFORM_DESC_SCALE_TYPE",                      {"HIPBLASLT_MATRIX_TRANSFORM_DESC_SCALE_TYPE",                        "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED}},
+  {"CUBLASLT_MATRIX_TRANSFORM_DESC_POINTER_MODE",                    {"HIPBLASLT_MATRIX_TRANSFORM_DESC_POINTER_MODE",                      "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED}},
+  {"CUBLASLT_MATRIX_TRANSFORM_DESC_TRANSA",                          {"HIPBLASLT_MATRIX_TRANSFORM_DESC_TRANSA",                            "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED}},
+  {"CUBLASLT_MATRIX_TRANSFORM_DESC_TRANSB",                          {"HIPBLASLT_MATRIX_TRANSFORM_DESC_TRANSB",                            "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_TYPE_NAME_VER_MAP {
@@ -743,6 +748,11 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_TYPE_NAME_VER_MAP {
   {"CUBLASLT_MATMUL_DESC_ATOMIC_SYNC_NUM_CHUNKS_D_COLS",             {CUDA_122, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 12022, CUBLAS_VERSION 120205, CUBLAS_VER_MAJOR 12 CUBLAS_VER_MINOR 2 CUBLAS_VER_PATCH 5
   {"CUBLASLT_MATMUL_DESC_ATOMIC_SYNC_IN_COUNTERS_POINTER",           {CUDA_122, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 12022, CUBLAS_VERSION 120205, CUBLAS_VER_MAJOR 12 CUBLAS_VER_MINOR 2 CUBLAS_VER_PATCH 5
   {"CUBLASLT_MATMUL_DESC_ATOMIC_SYNC_OUT_COUNTERS_POINTER",          {CUDA_122, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 12022, CUBLAS_VERSION 120205, CUBLAS_VER_MAJOR 12 CUBLAS_VER_MINOR 2 CUBLAS_VER_PATCH 5
+  {"cublasLtMatrixTransformDescAttributes_t",                        {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_MATRIX_TRANSFORM_DESC_SCALE_TYPE",                      {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_MATRIX_TRANSFORM_DESC_POINTER_MODE",                    {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_MATRIX_TRANSFORM_DESC_TRANSA",                          {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_MATRIX_TRANSFORM_DESC_TRANSB",                          {CUDA_101, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_TYPE_NAME_VER_MAP {
@@ -869,6 +879,11 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_TYPE_NAME_VER_MAP {
   {"HIPBLASLT_MATMUL_DESC_D_SCALE_POINTER",                          {HIP_5050, HIP_0,    HIP_0   }},
   {"HIPBLASLT_MATMUL_DESC_EPILOGUE_AUX_SCALE_POINTER",               {HIP_6000, HIP_0,    HIP_0   }},
   {"HIPBLASLT_MATMUL_DESC_BIAS_DATA_TYPE",                           {HIP_5050, HIP_0,    HIP_0   }},
+  {"hipblasLtMatrixTransformDescAttributes_t",                       {HIP_6000, HIP_0,    HIP_0   }},
+  {"HIPBLASLT_MATRIX_TRANSFORM_DESC_SCALE_TYPE",                     {HIP_6000, HIP_0,    HIP_0   }},
+  {"HIPBLASLT_MATRIX_TRANSFORM_DESC_POINTER_MODE",                   {HIP_6000, HIP_0,    HIP_0   }},
+  {"HIPBLASLT_MATRIX_TRANSFORM_DESC_TRANSA",                         {HIP_6000, HIP_0,    HIP_0   }},
+  {"HIPBLASLT_MATRIX_TRANSFORM_DESC_TRANSB",                         {HIP_6000, HIP_0,    HIP_0   }},
 
   {"rocblas_handle",                                                 {HIP_1050, HIP_0,    HIP_0   }},
   {"_rocblas_handle",                                                {HIP_1050, HIP_0,    HIP_0   }},

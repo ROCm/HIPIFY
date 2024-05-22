@@ -94,6 +94,17 @@ int main() {
   cublasLtMatmulDescAttributes_t BLASLT_MATMUL_DESC_TRANSA = CUBLASLT_MATMUL_DESC_TRANSA;
   cublasLtMatmulDescAttributes_t BLASLT_MATMUL_DESC_TRANSB = CUBLASLT_MATMUL_DESC_TRANSB;
 
+  // CHECK: hipblasLtMatrixTransformDescAttributes_t blasLtMatrixTransformDescAttributes;
+  // CHECK-NEXT: hipblasLtMatrixTransformDescAttributes_t BLASLT_MATRIX_TRANSFORM_DESC_SCALE_TYPE = HIPBLASLT_MATRIX_TRANSFORM_DESC_SCALE_TYPE;
+  // CHECK-NEXT: hipblasLtMatrixTransformDescAttributes_t BLASLT_MATRIX_TRANSFORM_DESC_POINTER_MODE = HIPBLASLT_MATRIX_TRANSFORM_DESC_POINTER_MODE;
+  // CHECK-NEXT: hipblasLtMatrixTransformDescAttributes_t BLASLT_MATRIX_TRANSFORM_DESC_TRANSA = HIPBLASLT_MATRIX_TRANSFORM_DESC_TRANSA;
+  // CHECK-NEXT: hipblasLtMatrixTransformDescAttributes_t BLASLT_MATRIX_TRANSFORM_DESC_TRANSB = HIPBLASLT_MATRIX_TRANSFORM_DESC_TRANSB;
+  cublasLtMatrixTransformDescAttributes_t blasLtMatrixTransformDescAttributes;
+  cublasLtMatrixTransformDescAttributes_t BLASLT_MATRIX_TRANSFORM_DESC_SCALE_TYPE = CUBLASLT_MATRIX_TRANSFORM_DESC_SCALE_TYPE;
+  cublasLtMatrixTransformDescAttributes_t BLASLT_MATRIX_TRANSFORM_DESC_POINTER_MODE = CUBLASLT_MATRIX_TRANSFORM_DESC_POINTER_MODE;
+  cublasLtMatrixTransformDescAttributes_t BLASLT_MATRIX_TRANSFORM_DESC_TRANSA = CUBLASLT_MATRIX_TRANSFORM_DESC_TRANSA;
+  cublasLtMatrixTransformDescAttributes_t BLASLT_MATRIX_TRANSFORM_DESC_TRANSB = CUBLASLT_MATRIX_TRANSFORM_DESC_TRANSB;
+
   // CUDA: cublasStatus_t CUBLASWINAPI cublasLtCreate(cublasLtHandle_t* lightHandle);
   // HIP: HIPBLASLT_EXPORT hipblasStatus_t hipblasLtCreate(hipblasLtHandle_t* handle);
   // CHECK: status = hipblasLtCreate(&blasLtHandle);
@@ -148,6 +159,26 @@ int main() {
   // HIP: HIPBLASLT_EXPORT hipblasStatus_t hipblasLtMatmulDescGetAttribute(hipblasLtMatmulDesc_t matmulDesc, hipblasLtMatmulDescAttributes_t attr, void* buf, size_t sizeInBytes, size_t* sizeWritten);
   // CHECK: status = hipblasLtMatmulDescGetAttribute(blasLtMatmulDesc, blasLtMatmulDescAttributes, buf, workspaceSizeInBytes, &sizeWritten);
   status = cublasLtMatmulDescGetAttribute(blasLtMatmulDesc, blasLtMatmulDescAttributes, buf, workspaceSizeInBytes, &sizeWritten);
+
+  // CUDA: cublasStatus_t CUBLASWINAPI cublasLtMatrixTransformDescCreate(cublasLtMatrixTransformDesc_t* transformDesc, cudaDataType scaleType);
+  // HIP: HIPBLASLT_EXPORT hipblasStatus_t hipblasLtMatrixTransformDescCreate(hipblasLtMatrixTransformDesc_t* transformDesc, hipDataType scaleType);
+  // CHECK: status = hipblasLtMatrixTransformDescCreate(&blasLtMatrixTransformDesc, dataType);
+  status = cublasLtMatrixTransformDescCreate(&blasLtMatrixTransformDesc, dataType);
+
+  // CUDA: cublasStatus_t CUBLASWINAPI cublasLtMatrixTransformDescDestroy(cublasLtMatrixTransformDesc_t transformDesc);
+  // HIP: HIPBLASLT_EXPORT hipblasStatus_t hipblasLtMatrixTransformDescDestroy(hipblasLtMatrixTransformDesc_t transformDesc);
+  // CHECK: status = hipblasLtMatrixTransformDescDestroy(blasLtMatrixTransformDesc);
+  status = cublasLtMatrixTransformDescDestroy(blasLtMatrixTransformDesc);
+
+  // CUDA: cublasStatus_t CUBLASWINAPI cublasLtMatrixTransformDescSetAttribute(cublasLtMatrixTransformDesc_t transformDesc, cublasLtMatrixTransformDescAttributes_t attr, const void* buf, size_t sizeInBytes);
+  // HIP: HIPBLASLT_EXPORT hipblasStatus_t hipblasLtMatrixTransformDescSetAttribute( hipblasLtMatrixTransformDesc_t transformDesc, hipblasLtMatrixTransformDescAttributes_t attr, const void* buf, size_t sizeInBytes);
+  // CHECK: status = hipblasLtMatrixTransformDescSetAttribute(blasLtMatrixTransformDesc, blasLtMatrixTransformDescAttributes, buf, workspaceSizeInBytes);
+  status = cublasLtMatrixTransformDescSetAttribute(blasLtMatrixTransformDesc, blasLtMatrixTransformDescAttributes, buf, workspaceSizeInBytes);
+
+  // CUDA: cublasStatus_t CUBLASWINAPI cublasLtMatrixTransformDescGetAttribute(cublasLtMatrixTransformDesc_t transformDesc, cublasLtMatrixTransformDescAttributes_t attr, void* buf, size_t sizeInBytes, size_t* sizeWritten);
+  // HIP: HIPBLASLT_EXPORT hipblasStatus_t hipblasLtMatrixTransformDescGetAttribute(hipblasLtMatrixTransformDesc_t transformDesc, hipblasLtMatrixTransformDescAttributes_t attr, void* buf, size_t sizeInBytes, size_t* sizeWritten);
+  // CHECK: status = hipblasLtMatrixTransformDescGetAttribute(blasLtMatrixTransformDesc, blasLtMatrixTransformDescAttributes, buf, workspaceSizeInBytes, &sizeWritten);
+  status = cublasLtMatrixTransformDescGetAttribute(blasLtMatrixTransformDesc, blasLtMatrixTransformDescAttributes, buf, workspaceSizeInBytes, &sizeWritten);
 #endif
 
 #if CUBLAS_VERSION >= 10200

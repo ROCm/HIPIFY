@@ -314,6 +314,10 @@
 |`CUBLASLT_MATRIX_LAYOUT_ROWS`|10.1| | | | | | | | | |
 |`CUBLASLT_MATRIX_LAYOUT_STRIDED_BATCH_OFFSET`|10.1| | | | | | | | | |
 |`CUBLASLT_MATRIX_LAYOUT_TYPE`|10.1| | | | | | | | | |
+|`CUBLASLT_MATRIX_TRANSFORM_DESC_POINTER_MODE`|10.1| | | | | | | | | |
+|`CUBLASLT_MATRIX_TRANSFORM_DESC_SCALE_TYPE`|10.1| | | | | | | | | |
+|`CUBLASLT_MATRIX_TRANSFORM_DESC_TRANSA`|10.1| | | | | | | | | |
+|`CUBLASLT_MATRIX_TRANSFORM_DESC_TRANSB`|10.1| | | | | | | | | |
 |`CUBLASLT_NUMERICAL_IMPL_FLAGS_ACCUMULATOR_16F`|11.0| | | | | | | | | |
 |`CUBLASLT_NUMERICAL_IMPL_FLAGS_ACCUMULATOR_32F`|11.0| | | | | | | | | |
 |`CUBLASLT_NUMERICAL_IMPL_FLAGS_ACCUMULATOR_32I`|11.0| | | | | | | | | |
@@ -366,6 +370,7 @@
 |`cublasLtMatrixLayoutOpaque_t`|11.0| | | | | | | | | |
 |`cublasLtMatrixLayoutStruct`|10.1| | |10.2| | | | | | |
 |`cublasLtMatrixLayout_t`|10.1| | | | | | | | | |
+|`cublasLtMatrixTransformDescAttributes_t`|10.1| | | | | | | | | |
 |`cublasLtMatrixTransformDescOpaque_t`|11.0| | | | | | | | | |
 |`cublasLtMatrixTransformDesc_t`|10.1| | | | | | | | | |
 |`cublasLtNumericalImplFlags_t`|11.0| | | | | | | | | |
@@ -1269,6 +1274,11 @@
 |`cublasLtMatrixLayoutInit`|11.0| | | | | | | | | |
 |`cublasLtMatrixLayoutSetAttribute`|10.1| | | | | | | | | |
 |`cublasLtMatrixTransform`|10.1| | | | | | | | | |
+|`cublasLtMatrixTransformDescCreate`|10.1| | | | | | | | | |
+|`cublasLtMatrixTransformDescDestroy`|10.1| | | | | | | | | |
+|`cublasLtMatrixTransformDescGetAttribute`|10.1| | | | | | | | | |
+|`cublasLtMatrixTransformDescInit`|11.0| | | | | | | | | |
+|`cublasLtMatrixTransformDescSetAttribute`|10.1| | | | | | | | | |
 
 
 \*A - Added; D - Deprecated; C - Changed; R - Removed; E - Experimental
