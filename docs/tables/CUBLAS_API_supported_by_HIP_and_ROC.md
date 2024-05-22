@@ -314,6 +314,10 @@
 |`CUBLASLT_MATRIX_LAYOUT_ROWS`|10.1| | | |`HIPBLASLT_MATRIX_LAYOUT_ROWS`|6.0.0| | | | | | | | | | |
 |`CUBLASLT_MATRIX_LAYOUT_STRIDED_BATCH_OFFSET`|10.1| | | |`HIPBLASLT_MATRIX_LAYOUT_STRIDED_BATCH_OFFSET`|5.5.0| | | | | | | | | | |
 |`CUBLASLT_MATRIX_LAYOUT_TYPE`|10.1| | | |`HIPBLASLT_MATRIX_LAYOUT_TYPE`|6.0.0| | | | | | | | | | |
+|`CUBLASLT_MATRIX_TRANSFORM_DESC_POINTER_MODE`|10.1| | | |`HIPBLASLT_MATRIX_TRANSFORM_DESC_POINTER_MODE`|6.0.0| | | | | | | | | | |
+|`CUBLASLT_MATRIX_TRANSFORM_DESC_SCALE_TYPE`|10.1| | | |`HIPBLASLT_MATRIX_TRANSFORM_DESC_SCALE_TYPE`|6.0.0| | | | | | | | | | |
+|`CUBLASLT_MATRIX_TRANSFORM_DESC_TRANSA`|10.1| | | |`HIPBLASLT_MATRIX_TRANSFORM_DESC_TRANSA`|6.0.0| | | | | | | | | | |
+|`CUBLASLT_MATRIX_TRANSFORM_DESC_TRANSB`|10.1| | | |`HIPBLASLT_MATRIX_TRANSFORM_DESC_TRANSB`|6.0.0| | | | | | | | | | |
 |`CUBLASLT_NUMERICAL_IMPL_FLAGS_ACCUMULATOR_16F`|11.0| | | | | | | | | | | | | | | |
 |`CUBLASLT_NUMERICAL_IMPL_FLAGS_ACCUMULATOR_32F`|11.0| | | | | | | | | | | | | | | |
 |`CUBLASLT_NUMERICAL_IMPL_FLAGS_ACCUMULATOR_32I`|11.0| | | | | | | | | | | | | | | |
@@ -366,6 +370,7 @@
 |`cublasLtMatrixLayoutOpaque_t`|11.0| | | |`hipblasLtMatrixLayoutOpaque_t`| | | | | | | | | | | |
 |`cublasLtMatrixLayoutStruct`|10.1| | |10.2|`hipblasLtMatrixLayoutOpaque_t`| | | | | | | | | | | |
 |`cublasLtMatrixLayout_t`|10.1| | | |`hipblasLtMatrixLayout_t`| | | | | | | | | | | |
+|`cublasLtMatrixTransformDescAttributes_t`|10.1| | | |`hipblasLtMatrixTransformDescAttributes_t`|6.0.0| | | | | | | | | | |
 |`cublasLtMatrixTransformDescOpaque_t`|11.0| | | |`hipblasLtMatrixTransformDescOpaque_t`|6.0.0| | | | | | | | | | |
 |`cublasLtMatrixTransformDesc_t`|10.1| | | |`hipblasLtMatrixTransformDesc_t`|6.0.0| | | | | | | | | | |
 |`cublasLtNumericalImplFlags_t`|11.0| | | | | | | | | | | | | | | |
@@ -1269,6 +1274,11 @@
 |`cublasLtMatrixLayoutInit`|11.0| | | | | | | | | | | | | | | |
 |`cublasLtMatrixLayoutSetAttribute`|10.1| | | |`hipblasLtMatrixLayoutSetAttribute`|5.5.0| | | | | | | | | | |
 |`cublasLtMatrixTransform`|10.1| | | |`hipblasLtMatrixTransform`|6.0.0| | | | | | | | | | |
+|`cublasLtMatrixTransformDescCreate`|10.1| | | |`hipblasLtMatrixTransformDescCreate`|6.0.0| | | | | | | | | | |
+|`cublasLtMatrixTransformDescDestroy`|10.1| | | |`hipblasLtMatrixTransformDescDestroy`|6.0.0| | | | | | | | | | |
+|`cublasLtMatrixTransformDescGetAttribute`|10.1| | | |`hipblasLtMatrixTransformDescGetAttribute`|6.0.0| | | | | | | | | | |
+|`cublasLtMatrixTransformDescInit`|11.0| | | | | | | | | | | | | | | |
+|`cublasLtMatrixTransformDescSetAttribute`|10.1| | | |`hipblasLtMatrixTransformDescSetAttribute`|6.0.0| | | | | | | | | | |
 
 
 \*A - Added; D - Deprecated; C - Changed; R - Removed; E - Experimental

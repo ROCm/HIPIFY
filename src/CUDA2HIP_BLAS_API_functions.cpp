@@ -1105,6 +1105,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
   {"cublasLtMatmulDescDestroy",              {"hipblasLtMatmulDescDestroy",              "",                         CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
   {"cublasLtMatmulDescSetAttribute",         {"hipblasLtMatmulDescSetAttribute",         "",                         CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
   {"cublasLtMatmulDescGetAttribute",         {"hipblasLtMatmulDescGetAttribute",         "",                         CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
+  {"cublasLtMatrixTransformDescInit",        {"hipblasLtMatrixTransformDescInit",        "",                         CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
+  {"cublasLtMatrixTransformDescCreate",      {"hipblasLtMatrixTransformDescCreate",      "",                         CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
+  {"cublasLtMatrixTransformDescDestroy",     {"hipblasLtMatrixTransformDescDestroy",     "",                         CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
+  {"cublasLtMatrixTransformDescSetAttribute",{"hipblasLtMatrixTransformDescSetAttribute","",                         CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
+  {"cublasLtMatrixTransformDescGetAttribute",{"hipblasLtMatrixTransformDescGetAttribute","",                         CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_FUNCTION_VER_MAP {
@@ -1577,6 +1582,11 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_FUNCTION_VER_MAP {
   {"cublasLtMatmulDescDestroy",                  {CUDA_101, CUDA_0,   CUDA_0   }},
   {"cublasLtMatmulDescSetAttribute",             {CUDA_101, CUDA_0,   CUDA_0   }},
   {"cublasLtMatmulDescGetAttribute",             {CUDA_101, CUDA_0,   CUDA_0   }},
+  {"cublasLtMatrixTransformDescInit",            {CUDA_110, CUDA_0,   CUDA_0   }}, // A: CUDA_VERSION 11001, CUBLAS_VERSION 11000, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 0
+  {"cublasLtMatrixTransformDescCreate",          {CUDA_101, CUDA_0,   CUDA_0   }},
+  {"cublasLtMatrixTransformDescDestroy",         {CUDA_101, CUDA_0,   CUDA_0   }},
+  {"cublasLtMatrixTransformDescSetAttribute",    {CUDA_101, CUDA_0,   CUDA_0   }},
+  {"cublasLtMatrixTransformDescGetAttribute",    {CUDA_101, CUDA_0,   CUDA_0   }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_FUNCTION_VER_MAP {
@@ -1991,6 +2001,10 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_FUNCTION_VER_MAP {
   {"hipblasLtMatmulDescDestroy",                 {HIP_5050, HIP_0,    HIP_0   }},
   {"hipblasLtMatmulDescSetAttribute",            {HIP_5050, HIP_0,    HIP_0   }},
   {"hipblasLtMatmulDescGetAttribute",            {HIP_5050, HIP_0,    HIP_0   }},
+  {"hipblasLtMatrixTransformDescCreate",         {HIP_6000, HIP_0,    HIP_0   }},
+  {"hipblasLtMatrixTransformDescDestroy",        {HIP_6000, HIP_0,    HIP_0   }},
+  {"hipblasLtMatrixTransformDescSetAttribute",   {HIP_6000, HIP_0,    HIP_0   }},
+  {"hipblasLtMatrixTransformDescGetAttribute",   {HIP_6000, HIP_0,    HIP_0   }},
 
   {"rocblas_status_to_string",                   {HIP_3050, HIP_0,    HIP_0   }},
   {"rocblas_sscal",                              {HIP_1050, HIP_0,    HIP_0   }},

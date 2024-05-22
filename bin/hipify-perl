@@ -3879,6 +3879,10 @@ sub simpleSubstitutions {
     subst("cublasLtMatrixLayoutGetAttribute", "hipblasLtMatrixLayoutGetAttribute", "library");
     subst("cublasLtMatrixLayoutSetAttribute", "hipblasLtMatrixLayoutSetAttribute", "library");
     subst("cublasLtMatrixTransform", "hipblasLtMatrixTransform", "library");
+    subst("cublasLtMatrixTransformDescCreate", "hipblasLtMatrixTransformDescCreate", "library");
+    subst("cublasLtMatrixTransformDescDestroy", "hipblasLtMatrixTransformDescDestroy", "library");
+    subst("cublasLtMatrixTransformDescGetAttribute", "hipblasLtMatrixTransformDescGetAttribute", "library");
+    subst("cublasLtMatrixTransformDescSetAttribute", "hipblasLtMatrixTransformDescSetAttribute", "library");
     subst("cublasNrm2Ex", "hipblasNrm2Ex_v2", "library");
     subst("cublasRotEx", "hipblasRotEx_v2", "library");
     subst("cublasSasum", "hipblasSasum", "library");
@@ -5468,6 +5472,7 @@ sub simpleSubstitutions {
     subst("cublasLtMatrixLayoutOpaque_t", "hipblasLtMatrixLayoutOpaque_t", "type");
     subst("cublasLtMatrixLayoutStruct", "hipblasLtMatrixLayoutOpaque_t", "type");
     subst("cublasLtMatrixLayout_t", "hipblasLtMatrixLayout_t", "type");
+    subst("cublasLtMatrixTransformDescAttributes_t", "hipblasLtMatrixTransformDescAttributes_t", "type");
     subst("cublasLtMatrixTransformDescOpaque_t", "hipblasLtMatrixTransformDescOpaque_t", "type");
     subst("cublasLtMatrixTransformDesc_t", "hipblasLtMatrixTransformDesc_t", "type");
     subst("cublasLtPointerMode_t", "hipblasLtPointerMode_t", "type");
@@ -5756,6 +5761,10 @@ sub simpleSubstitutions {
     subst("CUBLASLT_MATRIX_LAYOUT_ROWS", "HIPBLASLT_MATRIX_LAYOUT_ROWS", "numeric_literal");
     subst("CUBLASLT_MATRIX_LAYOUT_STRIDED_BATCH_OFFSET", "HIPBLASLT_MATRIX_LAYOUT_STRIDED_BATCH_OFFSET", "numeric_literal");
     subst("CUBLASLT_MATRIX_LAYOUT_TYPE", "HIPBLASLT_MATRIX_LAYOUT_TYPE", "numeric_literal");
+    subst("CUBLASLT_MATRIX_TRANSFORM_DESC_POINTER_MODE", "HIPBLASLT_MATRIX_TRANSFORM_DESC_POINTER_MODE", "numeric_literal");
+    subst("CUBLASLT_MATRIX_TRANSFORM_DESC_SCALE_TYPE", "HIPBLASLT_MATRIX_TRANSFORM_DESC_SCALE_TYPE", "numeric_literal");
+    subst("CUBLASLT_MATRIX_TRANSFORM_DESC_TRANSA", "HIPBLASLT_MATRIX_TRANSFORM_DESC_TRANSA", "numeric_literal");
+    subst("CUBLASLT_MATRIX_TRANSFORM_DESC_TRANSB", "HIPBLASLT_MATRIX_TRANSFORM_DESC_TRANSB", "numeric_literal");
     subst("CUBLASLT_ORDER_COL", "HIPBLASLT_ORDER_COL", "numeric_literal");
     subst("CUBLASLT_ORDER_ROW", "HIPBLASLT_ORDER_ROW", "numeric_literal");
     subst("CUBLASLT_POINTER_MODE_ALPHA_DEVICE_VECTOR_BETA_HOST", "HIPBLASLT_POINTER_MODE_ALPHA_DEVICE_VECTOR_BETA_HOST", "numeric_literal");
@@ -11277,6 +11286,7 @@ sub warnHipOnlyUnsupportedFunctions {
         "cublasMigrateComputeType",
         "cublasLtPointerModeMask_t",
         "cublasLtNumericalImplFlags_t",
+        "cublasLtMatrixTransformDescInit",
         "cublasLtMatrixLayoutInit",
         "cublasLtMatmulTile_t",
         "cublasLtMatmulStages_t",
@@ -11901,6 +11911,12 @@ sub warnRocOnlyUnsupportedFunctions {
         "cublasLtPointerModeMask_t",
         "cublasLtOrder_t",
         "cublasLtNumericalImplFlags_t",
+        "cublasLtMatrixTransformDescSetAttribute",
+        "cublasLtMatrixTransformDescInit",
+        "cublasLtMatrixTransformDescGetAttribute",
+        "cublasLtMatrixTransformDescDestroy",
+        "cublasLtMatrixTransformDescCreate",
+        "cublasLtMatrixTransformDescAttributes_t",
         "cublasLtMatrixTransform",
         "cublasLtMatrixLayoutSetAttribute",
         "cublasLtMatrixLayoutInit",
@@ -12226,6 +12242,10 @@ sub warnRocOnlyUnsupportedFunctions {
         "CUBLASLT_NUMERICAL_IMPL_FLAGS_ACCUMULATOR_32I",
         "CUBLASLT_NUMERICAL_IMPL_FLAGS_ACCUMULATOR_32F",
         "CUBLASLT_NUMERICAL_IMPL_FLAGS_ACCUMULATOR_16F",
+        "CUBLASLT_MATRIX_TRANSFORM_DESC_TRANSB",
+        "CUBLASLT_MATRIX_TRANSFORM_DESC_TRANSA",
+        "CUBLASLT_MATRIX_TRANSFORM_DESC_SCALE_TYPE",
+        "CUBLASLT_MATRIX_TRANSFORM_DESC_POINTER_MODE",
         "CUBLASLT_MATRIX_LAYOUT_TYPE",
         "CUBLASLT_MATRIX_LAYOUT_STRIDED_BATCH_OFFSET",
         "CUBLASLT_MATRIX_LAYOUT_ROWS",
