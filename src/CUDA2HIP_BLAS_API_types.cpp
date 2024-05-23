@@ -422,6 +422,29 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP {
   {"CUBLASLT_MATRIX_TRANSFORM_DESC_POINTER_MODE",                    {"HIPBLASLT_MATRIX_TRANSFORM_DESC_POINTER_MODE",                      "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED}},
   {"CUBLASLT_MATRIX_TRANSFORM_DESC_TRANSA",                          {"HIPBLASLT_MATRIX_TRANSFORM_DESC_TRANSA",                            "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED}},
   {"CUBLASLT_MATRIX_TRANSFORM_DESC_TRANSB",                          {"HIPBLASLT_MATRIX_TRANSFORM_DESC_TRANSB",                            "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED}},
+  {"cublasLtReductionScheme_t",                                      {"hipblasLtReductionScheme_t",                                        "",                                                         CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_REDUCTION_SCHEME_NONE",                                 {"HIPBLASLT_REDUCTION_SCHEME_NONE",                                   "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_REDUCTION_SCHEME_INPLACE",                              {"HIPBLASLT_REDUCTION_SCHEME_INPLACE",                                "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_REDUCTION_SCHEME_COMPUTE_TYPE",                         {"HIPBLASLT_REDUCTION_SCHEME_COMPUTE_TYPE",                           "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_REDUCTION_SCHEME_OUTPUT_TYPE",                          {"HIPBLASLT_REDUCTION_SCHEME_OUTPUT_TYPE",                            "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_REDUCTION_SCHEME_MASK",                                 {"HIPBLASLT_REDUCTION_SCHEME_MASK",                                   "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"cublasLtEpilogue_t",                                             {"hipblasLtEpilogue_t",                                               "",                                                         CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED}},
+  {"CUBLASLT_EPILOGUE_DEFAULT",                                      {"HIPBLASLT_EPILOGUE_DEFAULT",                                        "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED}},
+  {"CUBLASLT_EPILOGUE_RELU",                                         {"HIPBLASLT_EPILOGUE_RELU",                                           "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED}},
+  {"CUBLASLT_EPILOGUE_RELU_AUX",                                     {"HIPBLASLT_EPILOGUE_RELU_AUX",                                       "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_EPILOGUE_BIAS",                                         {"HIPBLASLT_EPILOGUE_BIAS",                                           "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED}},
+  {"CUBLASLT_EPILOGUE_RELU_BIAS",                                    {"HIPBLASLT_EPILOGUE_RELU_BIAS",                                      "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED}},
+  {"CUBLASLT_EPILOGUE_RELU_AUX_BIAS",                                {"HIPBLASLT_EPILOGUE_RELU_AUX_BIAS",                                  "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_EPILOGUE_DRELU",                                        {"HIPBLASLT_EPILOGUE_DRELU",                                          "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_EPILOGUE_DRELU_BGRAD",                                  {"HIPBLASLT_EPILOGUE_DRELU_BGRAD",                                    "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_EPILOGUE_GELU",                                         {"HIPBLASLT_EPILOGUE_GELU",                                           "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED}},
+  {"CUBLASLT_EPILOGUE_GELU_AUX",                                     {"HIPBLASLT_EPILOGUE_GELU_AUX",                                       "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED}},
+  {"CUBLASLT_EPILOGUE_GELU_BIAS",                                    {"HIPBLASLT_EPILOGUE_GELU_BIAS",                                      "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED}},
+  {"CUBLASLT_EPILOGUE_GELU_AUX_BIAS",                                {"HIPBLASLT_EPILOGUE_GELU_AUX_BIAS",                                  "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED}},
+  {"CUBLASLT_EPILOGUE_DGELU",                                        {"HIPBLASLT_EPILOGUE_DGELU",                                          "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED}},
+  {"CUBLASLT_EPILOGUE_DGELU_BGRAD",                                  {"HIPBLASLT_EPILOGUE_DGELU_BGRAD",                                    "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED}},
+  {"CUBLASLT_EPILOGUE_BGRADA",                                       {"HIPBLASLT_EPILOGUE_BGRADA",                                         "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED}},
+  {"CUBLASLT_EPILOGUE_BGRADB",                                       {"HIPBLASLT_EPILOGUE_BGRADB",                                         "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_TYPE_NAME_VER_MAP {
@@ -753,6 +776,29 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_TYPE_NAME_VER_MAP {
   {"CUBLASLT_MATRIX_TRANSFORM_DESC_POINTER_MODE",                    {CUDA_101, CUDA_0,   CUDA_0  }},
   {"CUBLASLT_MATRIX_TRANSFORM_DESC_TRANSA",                          {CUDA_101, CUDA_0,   CUDA_0  }},
   {"CUBLASLT_MATRIX_TRANSFORM_DESC_TRANSB",                          {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"cublasLtReductionScheme_t",                                      {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_REDUCTION_SCHEME_NONE",                                 {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_REDUCTION_SCHEME_INPLACE",                              {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_REDUCTION_SCHEME_COMPUTE_TYPE",                         {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_REDUCTION_SCHEME_OUTPUT_TYPE",                          {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_REDUCTION_SCHEME_MASK",                                 {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"cublasLtEpilogue_t",                                             {CUDA_101, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 10011, CUBLAS_VERSION 10020, CUBLAS_VER_MAJOR 10 CUBLAS_VER_MINOR 2
+  {"CUBLASLT_EPILOGUE_DEFAULT",                                      {CUDA_101, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 10011, CUBLAS_VERSION 10020, CUBLAS_VER_MAJOR 10 CUBLAS_VER_MINOR 2
+  {"CUBLASLT_EPILOGUE_RELU",                                         {CUDA_101, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 10011, CUBLAS_VERSION 10020, CUBLAS_VER_MAJOR 10 CUBLAS_VER_MINOR 2
+  {"CUBLASLT_EPILOGUE_RELU_AUX",                                     {CUDA_113, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 11031, CUBLAS_VERSION 11501, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 5 CUBLAS_VER_PATCH 1
+  {"CUBLASLT_EPILOGUE_BIAS",                                         {CUDA_101, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 10011, CUBLAS_VERSION 10020, CUBLAS_VER_MAJOR 10 CUBLAS_VER_MINOR 2
+  {"CUBLASLT_EPILOGUE_RELU_BIAS",                                    {CUDA_101, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 10011, CUBLAS_VERSION 10020, CUBLAS_VER_MAJOR 10 CUBLAS_VER_MINOR 2
+  {"CUBLASLT_EPILOGUE_RELU_AUX_BIAS",                                {CUDA_113, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 11031, CUBLAS_VERSION 11501, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 5 CUBLAS_VER_PATCH 1
+  {"CUBLASLT_EPILOGUE_DRELU",                                        {CUDA_116, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_EPILOGUE_DRELU_BGRAD",                                  {CUDA_113, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 11031, CUBLAS_VERSION 11501, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 5 CUBLAS_VER_PATCH 1
+  {"CUBLASLT_EPILOGUE_GELU",                                         {CUDA_113, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 11031, CUBLAS_VERSION 11501, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 5 CUBLAS_VER_PATCH 1
+  {"CUBLASLT_EPILOGUE_GELU_AUX",                                     {CUDA_113, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 11031, CUBLAS_VERSION 11501, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 5 CUBLAS_VER_PATCH 1
+  {"CUBLASLT_EPILOGUE_GELU_BIAS",                                    {CUDA_113, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 11031, CUBLAS_VERSION 11501, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 5 CUBLAS_VER_PATCH 1
+  {"CUBLASLT_EPILOGUE_GELU_AUX_BIAS",                                {CUDA_113, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 11031, CUBLAS_VERSION 11501, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 5 CUBLAS_VER_PATCH 1
+  {"CUBLASLT_EPILOGUE_DGELU",                                        {CUDA_116, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_EPILOGUE_DGELU_BGRAD",                                  {CUDA_113, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 11031, CUBLAS_VERSION 11501, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 5 CUBLAS_VER_PATCH 1
+  {"CUBLASLT_EPILOGUE_BGRADA",                                       {CUDA_114, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 11042, CUBLAS_VERSION 11601, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 6 CUBLAS_VER_PATCH 1
+  {"CUBLASLT_EPILOGUE_BGRADB",                                       {CUDA_114, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 11042, CUBLAS_VERSION 11601, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 6 CUBLAS_VER_PATCH 1
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_TYPE_NAME_VER_MAP {
@@ -884,6 +930,19 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_TYPE_NAME_VER_MAP {
   {"HIPBLASLT_MATRIX_TRANSFORM_DESC_POINTER_MODE",                   {HIP_6000, HIP_0,    HIP_0   }},
   {"HIPBLASLT_MATRIX_TRANSFORM_DESC_TRANSA",                         {HIP_6000, HIP_0,    HIP_0   }},
   {"HIPBLASLT_MATRIX_TRANSFORM_DESC_TRANSB",                         {HIP_6000, HIP_0,    HIP_0   }},
+  {"hipblasLtEpilogue_t",                                            {HIP_5050, HIP_0,    HIP_0   }},
+  {"HIPBLASLT_EPILOGUE_DEFAULT",                                     {HIP_5050, HIP_0,    HIP_0   }},
+  {"HIPBLASLT_EPILOGUE_RELU",                                        {HIP_5050, HIP_0,    HIP_0   }},
+  {"HIPBLASLT_EPILOGUE_BIAS",                                        {HIP_5050, HIP_0,    HIP_0   }},
+  {"HIPBLASLT_EPILOGUE_RELU_BIAS",                                   {HIP_5050, HIP_0,    HIP_0   }},
+  {"HIPBLASLT_EPILOGUE_GELU",                                        {HIP_5050, HIP_0,    HIP_0   }},
+  {"HIPBLASLT_EPILOGUE_GELU_AUX",                                    {HIP_5070, HIP_0,    HIP_0   }},
+  {"HIPBLASLT_EPILOGUE_GELU_BIAS",                                   {HIP_5050, HIP_0,    HIP_0   }},
+  {"HIPBLASLT_EPILOGUE_GELU_AUX_BIAS",                               {HIP_5070, HIP_0,    HIP_0   }},
+  {"HIPBLASLT_EPILOGUE_DGELU",                                       {HIP_5070, HIP_0,    HIP_0   }},
+  {"HIPBLASLT_EPILOGUE_DGELU_BGRAD",                                 {HIP_5070, HIP_0,    HIP_0   }},
+  {"HIPBLASLT_EPILOGUE_BGRADA",                                      {HIP_5070, HIP_0,    HIP_0   }},
+  {"HIPBLASLT_EPILOGUE_BGRADB",                                      {HIP_5070, HIP_0,    HIP_0   }},
 
   {"rocblas_handle",                                                 {HIP_1050, HIP_0,    HIP_0   }},
   {"_rocblas_handle",                                                {HIP_1050, HIP_0,    HIP_0   }},

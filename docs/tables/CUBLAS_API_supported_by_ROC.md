@@ -198,6 +198,22 @@
 |`CUBLASLT_CLUSTER_SHAPE_9x1x1`|11.8| | | | | | | | | |
 |`CUBLASLT_CLUSTER_SHAPE_AUTO`|11.8| | | | | | | | | |
 |`CUBLASLT_CLUSTER_SHAPE_END`|11.8| | | | | | | | | |
+|`CUBLASLT_EPILOGUE_BGRADA`|11.4| | | | | | | | | |
+|`CUBLASLT_EPILOGUE_BGRADB`|11.4| | | | | | | | | |
+|`CUBLASLT_EPILOGUE_BIAS`|10.1| | | | | | | | | |
+|`CUBLASLT_EPILOGUE_DEFAULT`|10.1| | | | | | | | | |
+|`CUBLASLT_EPILOGUE_DGELU`|11.6| | | | | | | | | |
+|`CUBLASLT_EPILOGUE_DGELU_BGRAD`|11.3| | | | | | | | | |
+|`CUBLASLT_EPILOGUE_DRELU`|11.6| | | | | | | | | |
+|`CUBLASLT_EPILOGUE_DRELU_BGRAD`|11.3| | | | | | | | | |
+|`CUBLASLT_EPILOGUE_GELU`|11.3| | | | | | | | | |
+|`CUBLASLT_EPILOGUE_GELU_AUX`|11.3| | | | | | | | | |
+|`CUBLASLT_EPILOGUE_GELU_AUX_BIAS`|11.3| | | | | | | | | |
+|`CUBLASLT_EPILOGUE_GELU_BIAS`|11.3| | | | | | | | | |
+|`CUBLASLT_EPILOGUE_RELU`|10.1| | | | | | | | | |
+|`CUBLASLT_EPILOGUE_RELU_AUX`|11.3| | | | | | | | | |
+|`CUBLASLT_EPILOGUE_RELU_AUX_BIAS`|11.3| | | | | | | | | |
+|`CUBLASLT_EPILOGUE_RELU_BIAS`|10.1| | | | | | | | | |
 |`CUBLASLT_MATMUL_DESC_ALPHA_VECTOR_BATCH_STRIDE`|11.4| | | | | | | | | |
 |`CUBLASLT_MATMUL_DESC_AMAX_D_POINTER`|11.8| | | | | | | | | |
 |`CUBLASLT_MATMUL_DESC_ATOMIC_SYNC_IN_COUNTERS_POINTER`|12.2| | | | | | | | | |
@@ -354,8 +370,14 @@
 |`CUBLASLT_POINTER_MODE_MASK_DEVICE`|10.1| | | | | | | | | |
 |`CUBLASLT_POINTER_MODE_MASK_DEVICE_VECTOR`|10.1| | | | | | | | | |
 |`CUBLASLT_POINTER_MODE_MASK_HOST`|10.1| | | | | | | | | |
+|`CUBLASLT_REDUCTION_SCHEME_COMPUTE_TYPE`|10.1| | | | | | | | | |
+|`CUBLASLT_REDUCTION_SCHEME_INPLACE`|10.1| | | | | | | | | |
+|`CUBLASLT_REDUCTION_SCHEME_MASK`|10.1| | | | | | | | | |
+|`CUBLASLT_REDUCTION_SCHEME_NONE`|10.1| | | | | | | | | |
+|`CUBLASLT_REDUCTION_SCHEME_OUTPUT_TYPE`|10.1| | | | | | | | | |
 |`cublasLtClusterShape_t`|11.8| | | | | | | | | |
 |`cublasLtContext`|10.1| | | | | | | | | |
+|`cublasLtEpilogue_t`|10.1| | | | | | | | | |
 |`cublasLtHandle_t`|10.1| | | | | | | | | |
 |`cublasLtMatmulAlgo_t`|10.1| | | | | | | | | |
 |`cublasLtMatmulDescAttributes_t`|10.1| | | | | | | | | |
@@ -377,6 +399,7 @@
 |`cublasLtOrder_t`|10.1| | | | | | | | | |
 |`cublasLtPointerModeMask_t`|10.1| | | | | | | | | |
 |`cublasLtPointerMode_t`|10.1| | | | | | | | | |
+|`cublasLtReductionScheme_t`|10.1| | | | | | | | | |
 
 ## **4. CUBLAS Helper Function Reference**
 
