@@ -5461,6 +5461,7 @@ sub simpleSubstitutions {
     subst("cublasFillMode_t", "hipblasFillMode_t", "type");
     subst("cublasGemmAlgo_t", "hipblasGemmAlgo_t", "type");
     subst("cublasHandle_t", "hipblasHandle_t", "type");
+    subst("cublasLtEpilogue_t", "hipblasLtEpilogue_t", "type");
     subst("cublasLtHandle_t", "hipblasLtHandle_t", "type");
     subst("cublasLtMatmulAlgo_t", "hipblasLtMatmulAlgo_t", "type");
     subst("cublasLtMatmulDescAttributes_t", "hipblasLtMatmulDescAttributes_t", "type");
@@ -5740,6 +5741,18 @@ sub simpleSubstitutions {
     subst("syevjInfo_t", "hipsolverSyevjInfo_t", "type");
     subst("texture", "texture", "type");
     subst("textureReference", "textureReference", "type");
+    subst("CUBLASLT_EPILOGUE_BGRADA", "HIPBLASLT_EPILOGUE_BGRADA", "numeric_literal");
+    subst("CUBLASLT_EPILOGUE_BGRADB", "HIPBLASLT_EPILOGUE_BGRADB", "numeric_literal");
+    subst("CUBLASLT_EPILOGUE_BIAS", "HIPBLASLT_EPILOGUE_BIAS", "numeric_literal");
+    subst("CUBLASLT_EPILOGUE_DEFAULT", "HIPBLASLT_EPILOGUE_DEFAULT", "numeric_literal");
+    subst("CUBLASLT_EPILOGUE_DGELU", "HIPBLASLT_EPILOGUE_DGELU", "numeric_literal");
+    subst("CUBLASLT_EPILOGUE_DGELU_BGRAD", "HIPBLASLT_EPILOGUE_DGELU_BGRAD", "numeric_literal");
+    subst("CUBLASLT_EPILOGUE_GELU", "HIPBLASLT_EPILOGUE_GELU", "numeric_literal");
+    subst("CUBLASLT_EPILOGUE_GELU_AUX", "HIPBLASLT_EPILOGUE_GELU_AUX", "numeric_literal");
+    subst("CUBLASLT_EPILOGUE_GELU_AUX_BIAS", "HIPBLASLT_EPILOGUE_GELU_AUX_BIAS", "numeric_literal");
+    subst("CUBLASLT_EPILOGUE_GELU_BIAS", "HIPBLASLT_EPILOGUE_GELU_BIAS", "numeric_literal");
+    subst("CUBLASLT_EPILOGUE_RELU", "HIPBLASLT_EPILOGUE_RELU", "numeric_literal");
+    subst("CUBLASLT_EPILOGUE_RELU_BIAS", "HIPBLASLT_EPILOGUE_RELU_BIAS", "numeric_literal");
     subst("CUBLASLT_MATMUL_DESC_A_SCALE_POINTER", "HIPBLASLT_MATMUL_DESC_A_SCALE_POINTER", "numeric_literal");
     subst("CUBLASLT_MATMUL_DESC_BIAS_DATA_TYPE", "HIPBLASLT_MATMUL_DESC_BIAS_DATA_TYPE", "numeric_literal");
     subst("CUBLASLT_MATMUL_DESC_BIAS_POINTER", "HIPBLASLT_MATMUL_DESC_BIAS_POINTER", "numeric_literal");
@@ -11284,6 +11297,7 @@ sub warnHipOnlyUnsupportedFunctions {
         "cublasRotEx_64",
         "cublasNrm2Ex_64",
         "cublasMigrateComputeType",
+        "cublasLtReductionScheme_t",
         "cublasLtPointerModeMask_t",
         "cublasLtNumericalImplFlags_t",
         "cublasLtMatrixTransformDescInit",
@@ -11550,6 +11564,11 @@ sub warnHipOnlyUnsupportedFunctions {
         "CUBLAS_GEMM_ALGO1",
         "CUBLAS_GEMM_ALGO0_TENSOR_OP",
         "CUBLAS_GEMM_ALGO0",
+        "CUBLASLT_REDUCTION_SCHEME_OUTPUT_TYPE",
+        "CUBLASLT_REDUCTION_SCHEME_NONE",
+        "CUBLASLT_REDUCTION_SCHEME_MASK",
+        "CUBLASLT_REDUCTION_SCHEME_INPLACE",
+        "CUBLASLT_REDUCTION_SCHEME_COMPUTE_TYPE",
         "CUBLASLT_POINTER_MODE_MASK_HOST",
         "CUBLASLT_POINTER_MODE_MASK_DEVICE_VECTOR",
         "CUBLASLT_POINTER_MODE_MASK_DEVICE",
@@ -11676,6 +11695,10 @@ sub warnHipOnlyUnsupportedFunctions {
         "CUBLASLT_MATMUL_DESC_ATOMIC_SYNC_IN_COUNTERS_POINTER",
         "CUBLASLT_MATMUL_DESC_AMAX_D_POINTER",
         "CUBLASLT_MATMUL_DESC_ALPHA_VECTOR_BATCH_STRIDE",
+        "CUBLASLT_EPILOGUE_RELU_AUX_BIAS",
+        "CUBLASLT_EPILOGUE_RELU_AUX",
+        "CUBLASLT_EPILOGUE_DRELU_BGRAD",
+        "CUBLASLT_EPILOGUE_DRELU",
         "CUBLASLT_CLUSTER_SHAPE_END",
         "CUBLASLT_CLUSTER_SHAPE_AUTO",
         "CUBLASLT_CLUSTER_SHAPE_9x1x1",
@@ -11907,6 +11930,7 @@ sub warnRocOnlyUnsupportedFunctions {
         "cublasRotmEx",
         "cublasRotgEx",
         "cublasMigrateComputeType",
+        "cublasLtReductionScheme_t",
         "cublasLtPointerMode_t",
         "cublasLtPointerModeMask_t",
         "cublasLtOrder_t",
@@ -11941,6 +11965,7 @@ sub warnRocOnlyUnsupportedFunctions {
         "cublasLtGetStatusName",
         "cublasLtGetProperty",
         "cublasLtGetCudartVersion",
+        "cublasLtEpilogue_t",
         "cublasLtDisableCpuInstructionsSetMask",
         "cublasLtContext",
         "cublasLtClusterShape_t",
@@ -12207,6 +12232,11 @@ sub warnRocOnlyUnsupportedFunctions {
         "CUBLAS_COMPUTE_32F_FAST_16BF",
         "CUBLAS_COMPUTE_16F_PEDANTIC",
         "CUBLAS_COMPUTE_16F",
+        "CUBLASLT_REDUCTION_SCHEME_OUTPUT_TYPE",
+        "CUBLASLT_REDUCTION_SCHEME_NONE",
+        "CUBLASLT_REDUCTION_SCHEME_MASK",
+        "CUBLASLT_REDUCTION_SCHEME_INPLACE",
+        "CUBLASLT_REDUCTION_SCHEME_COMPUTE_TYPE",
         "CUBLASLT_POINTER_MODE_MASK_HOST",
         "CUBLASLT_POINTER_MODE_MASK_DEVICE_VECTOR",
         "CUBLASLT_POINTER_MODE_MASK_DEVICE",
@@ -12362,6 +12392,22 @@ sub warnRocOnlyUnsupportedFunctions {
         "CUBLASLT_MATMUL_DESC_ATOMIC_SYNC_IN_COUNTERS_POINTER",
         "CUBLASLT_MATMUL_DESC_AMAX_D_POINTER",
         "CUBLASLT_MATMUL_DESC_ALPHA_VECTOR_BATCH_STRIDE",
+        "CUBLASLT_EPILOGUE_RELU_BIAS",
+        "CUBLASLT_EPILOGUE_RELU_AUX_BIAS",
+        "CUBLASLT_EPILOGUE_RELU_AUX",
+        "CUBLASLT_EPILOGUE_RELU",
+        "CUBLASLT_EPILOGUE_GELU_BIAS",
+        "CUBLASLT_EPILOGUE_GELU_AUX_BIAS",
+        "CUBLASLT_EPILOGUE_GELU_AUX",
+        "CUBLASLT_EPILOGUE_GELU",
+        "CUBLASLT_EPILOGUE_DRELU_BGRAD",
+        "CUBLASLT_EPILOGUE_DRELU",
+        "CUBLASLT_EPILOGUE_DGELU_BGRAD",
+        "CUBLASLT_EPILOGUE_DGELU",
+        "CUBLASLT_EPILOGUE_DEFAULT",
+        "CUBLASLT_EPILOGUE_BIAS",
+        "CUBLASLT_EPILOGUE_BGRADB",
+        "CUBLASLT_EPILOGUE_BGRADA",
         "CUBLASLT_CLUSTER_SHAPE_END",
         "CUBLASLT_CLUSTER_SHAPE_AUTO",
         "CUBLASLT_CLUSTER_SHAPE_9x1x1",
