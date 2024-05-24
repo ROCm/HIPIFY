@@ -249,6 +249,15 @@
 |`CUBLASLT_MATMUL_INNER_SHAPE_MMA1688`|11.8| | | | | | | | | | | | | | | |
 |`CUBLASLT_MATMUL_INNER_SHAPE_MMA884`|11.8| | | | | | | | | | | | | | | |
 |`CUBLASLT_MATMUL_INNER_SHAPE_UNDEFINED`|11.8| | | | | | | | | | | | | | | |
+|`CUBLASLT_MATMUL_PREF_IMPL_MASK`|11.0| | | | | | | | | | | | | | | |
+|`CUBLASLT_MATMUL_PREF_MAX_WAVES_COUNT`|10.1| | | | | | | | | | | | | | | |
+|`CUBLASLT_MATMUL_PREF_MAX_WORKSPACE_BYTES`|10.1| | | |`HIPBLASLT_MATMUL_PREF_MAX_WORKSPACE_BYTES`|5.5.0| | | | | | | | | | |
+|`CUBLASLT_MATMUL_PREF_MIN_ALIGNMENT_A_BYTES`|10.1| | | | | | | | | | | | | | | |
+|`CUBLASLT_MATMUL_PREF_MIN_ALIGNMENT_B_BYTES`|10.1| | | | | | | | | | | | | | | |
+|`CUBLASLT_MATMUL_PREF_MIN_ALIGNMENT_C_BYTES`|10.1| | | | | | | | | | | | | | | |
+|`CUBLASLT_MATMUL_PREF_MIN_ALIGNMENT_D_BYTES`|10.1| | | | | | | | | | | | | | | |
+|`CUBLASLT_MATMUL_PREF_REDUCTION_SCHEME_MASK`|10.1| | | | | | | | | | | | | | | |
+|`CUBLASLT_MATMUL_PREF_SEARCH_MODE`|10.1| | | |`HIPBLASLT_MATMUL_PREF_SEARCH_MODE`|5.5.0| | | | | | | | | | |
 |`CUBLASLT_MATMUL_STAGES_128x1`|11.0| | | | | | | | | | | | | | | |
 |`CUBLASLT_MATMUL_STAGES_128x2`|11.0| | | | | | | | | | | | | | | |
 |`CUBLASLT_MATMUL_STAGES_128x3`|11.0| | | | | | | | | | | | | | | |
@@ -375,6 +384,12 @@
 |`CUBLASLT_REDUCTION_SCHEME_MASK`|10.1| | | | | | | | | | | | | | | |
 |`CUBLASLT_REDUCTION_SCHEME_NONE`|10.1| | | | | | | | | | | | | | | |
 |`CUBLASLT_REDUCTION_SCHEME_OUTPUT_TYPE`|10.1| | | | | | | | | | | | | | | |
+|`CUBLASLT_SEARCH_BEST_FIT`|10.1| | | | | | | | | | | | | | | |
+|`CUBLASLT_SEARCH_LIMITED_BY_ALGO_ID`|10.1| | | | | | | | | | | | | | | |
+|`CUBLASLT_SEARCH_RESERVED_02`|11.0| | | | | | | | | | | | | | | |
+|`CUBLASLT_SEARCH_RESERVED_03`|11.0| | | | | | | | | | | | | | | |
+|`CUBLASLT_SEARCH_RESERVED_04`|11.0| | | | | | | | | | | | | | | |
+|`CUBLASLT_SEARCH_RESERVED_05`|11.0| | | | | | | | | | | | | | | |
 |`cublasLtClusterShape_t`|11.8| | | | | | | | | | | | | | | |
 |`cublasLtContext`|10.1| | | | | | | | | | | | | | | |
 |`cublasLtEpilogue_t`|10.1| | | |`hipblasLtEpilogue_t`|5.5.0| | | | | | | | | | |
@@ -384,8 +399,10 @@
 |`cublasLtMatmulDescOpaque_t`|11.0| | | |`hipblasLtMatmulDescOpaque_t`|5.5.0| | | | | | | | | | |
 |`cublasLtMatmulDesc_t`|10.1| | | |`hipblasLtMatmulDesc_t`|5.5.0| | | | | | | | | | |
 |`cublasLtMatmulInnerShape_t`|11.8| | | | | | | | | | | | | | | |
+|`cublasLtMatmulPreferenceAttributes_t`|10.1| | | |`hipblasLtMatmulPreferenceAttributes_t`|5.5.0| | | | | | | | | | |
 |`cublasLtMatmulPreferenceOpaque_t`|11.0| | | |`hipblasLtMatmulPreferenceOpaque_t`|5.5.0| | | | | | | | | | |
 |`cublasLtMatmulPreference_t`|10.1| | | |`hipblasLtMatmulPreference_t`|5.5.0| | | | | | | | | | |
+|`cublasLtMatmulSearch_t`|10.1| | | | | | | | | | | | | | | |
 |`cublasLtMatmulStages_t`|11.0| | | | | | | | | | | | | | | |
 |`cublasLtMatmulTile_t`|10.1| | | | | | | | | | | | | | | |
 |`cublasLtMatrixLayoutAttribute_t`|10.1| | | |`hipblasLtMatrixLayoutAttribute_t`|5.5.0| | | | | | | | | | |

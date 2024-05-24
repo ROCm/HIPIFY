@@ -445,6 +445,23 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP {
   {"CUBLASLT_EPILOGUE_DGELU_BGRAD",                                  {"HIPBLASLT_EPILOGUE_DGELU_BGRAD",                                    "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED}},
   {"CUBLASLT_EPILOGUE_BGRADA",                                       {"HIPBLASLT_EPILOGUE_BGRADA",                                         "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED}},
   {"CUBLASLT_EPILOGUE_BGRADB",                                       {"HIPBLASLT_EPILOGUE_BGRADB",                                         "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED}},
+  {"cublasLtMatmulSearch_t",                                         {"hipblasLtMatmulSearch_t",                                           "",                                                         CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_SEARCH_BEST_FIT",                                       {"HIPBLASLT_SEARCH_BEST_FIT",                                         "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_SEARCH_LIMITED_BY_ALGO_ID",                             {"HIPBLASLT_SEARCH_LIMITED_BY_ALGO_ID",                               "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_SEARCH_RESERVED_02",                                    {"HIPBLASLT_SEARCH_RESERVED_02",                                      "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_SEARCH_RESERVED_03",                                    {"HIPBLASLT_SEARCH_RESERVED_03",                                      "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_SEARCH_RESERVED_04",                                    {"HIPBLASLT_SEARCH_RESERVED_04",                                      "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_SEARCH_RESERVED_05",                                    {"HIPBLASLT_SEARCH_RESERVED_05",                                      "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"cublasLtMatmulPreferenceAttributes_t",                           {"hipblasLtMatmulPreferenceAttributes_t",                             "",                                                         CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_PREF_SEARCH_MODE",                               {"HIPBLASLT_MATMUL_PREF_SEARCH_MODE",                                 "",                                                         CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_PREF_MAX_WORKSPACE_BYTES",                       {"HIPBLASLT_MATMUL_PREF_MAX_WORKSPACE_BYTES",                         "",                                                         CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_PREF_REDUCTION_SCHEME_MASK",                     {"HIPBLASLT_MATMUL_PREF_REDUCTION_SCHEME_MASK",                       "",                                                         CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_PREF_MIN_ALIGNMENT_A_BYTES",                     {"HIPBLASLT_MATMUL_PREF_MIN_ALIGNMENT_A_BYTES",                       "",                                                         CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_PREF_MIN_ALIGNMENT_B_BYTES",                     {"HIPBLASLT_MATMUL_PREF_MIN_ALIGNMENT_B_BYTES",                       "",                                                         CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_PREF_MIN_ALIGNMENT_C_BYTES",                     {"HIPBLASLT_MATMUL_PREF_MIN_ALIGNMENT_C_BYTES",                       "",                                                         CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_PREF_MIN_ALIGNMENT_D_BYTES",                     {"HIPBLASLT_MATMUL_PREF_MIN_ALIGNMENT_D_BYTES",                       "",                                                         CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_PREF_MAX_WAVES_COUNT",                           {"HIPBLASLT_MATMUL_PREF_MAX_WAVES_COUNT",                             "",                                                         CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_PREF_IMPL_MASK",                                 {"HIPBLASLT_MATMUL_PREF_IMPL_MASK",                                   "",                                                         CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_TYPE_NAME_VER_MAP {
@@ -799,6 +816,23 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_TYPE_NAME_VER_MAP {
   {"CUBLASLT_EPILOGUE_DGELU_BGRAD",                                  {CUDA_113, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 11031, CUBLAS_VERSION 11501, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 5 CUBLAS_VER_PATCH 1
   {"CUBLASLT_EPILOGUE_BGRADA",                                       {CUDA_114, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 11042, CUBLAS_VERSION 11601, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 6 CUBLAS_VER_PATCH 1
   {"CUBLASLT_EPILOGUE_BGRADB",                                       {CUDA_114, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 11042, CUBLAS_VERSION 11601, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 6 CUBLAS_VER_PATCH 1
+  {"cublasLtMatmulSearch_t",                                         {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_SEARCH_BEST_FIT",                                       {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_SEARCH_LIMITED_BY_ALGO_ID",                             {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_SEARCH_RESERVED_02",                                    {CUDA_110, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 11001, CUBLAS_VERSION 11000, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 0
+  {"CUBLASLT_SEARCH_RESERVED_03",                                    {CUDA_110, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 11001, CUBLAS_VERSION 11000, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 0
+  {"CUBLASLT_SEARCH_RESERVED_04",                                    {CUDA_110, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 11001, CUBLAS_VERSION 11000, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 0
+  {"CUBLASLT_SEARCH_RESERVED_05",                                    {CUDA_110, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 11001, CUBLAS_VERSION 11000, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 0
+  {"cublasLtMatmulPreferenceAttributes_t",                           {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_MATMUL_PREF_SEARCH_MODE",                               {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_MATMUL_PREF_MAX_WORKSPACE_BYTES",                       {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_MATMUL_PREF_REDUCTION_SCHEME_MASK",                     {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_MATMUL_PREF_MIN_ALIGNMENT_A_BYTES",                     {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_MATMUL_PREF_MIN_ALIGNMENT_B_BYTES",                     {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_MATMUL_PREF_MIN_ALIGNMENT_C_BYTES",                     {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_MATMUL_PREF_MIN_ALIGNMENT_D_BYTES",                     {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_MATMUL_PREF_MAX_WAVES_COUNT",                           {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_MATMUL_PREF_IMPL_MASK",                                 {CUDA_110, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 11001, CUBLAS_VERSION 11000, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 0
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_TYPE_NAME_VER_MAP {
@@ -943,6 +977,9 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_TYPE_NAME_VER_MAP {
   {"HIPBLASLT_EPILOGUE_DGELU_BGRAD",                                 {HIP_5070, HIP_0,    HIP_0   }},
   {"HIPBLASLT_EPILOGUE_BGRADA",                                      {HIP_5070, HIP_0,    HIP_0   }},
   {"HIPBLASLT_EPILOGUE_BGRADB",                                      {HIP_5070, HIP_0,    HIP_0   }},
+  {"hipblasLtMatmulPreferenceAttributes_t",                          {HIP_5050, HIP_0,    HIP_0   }},
+  {"HIPBLASLT_MATMUL_PREF_SEARCH_MODE",                              {HIP_5050, HIP_0,    HIP_0   }},
+  {"HIPBLASLT_MATMUL_PREF_MAX_WORKSPACE_BYTES",                      {HIP_5050, HIP_0,    HIP_0   }},
 
   {"rocblas_handle",                                                 {HIP_1050, HIP_0,    HIP_0   }},
   {"_rocblas_handle",                                                {HIP_1050, HIP_0,    HIP_0   }},
