@@ -105,6 +105,13 @@ int main() {
   cublasLtMatrixTransformDescAttributes_t BLASLT_MATRIX_TRANSFORM_DESC_TRANSA = CUBLASLT_MATRIX_TRANSFORM_DESC_TRANSA;
   cublasLtMatrixTransformDescAttributes_t BLASLT_MATRIX_TRANSFORM_DESC_TRANSB = CUBLASLT_MATRIX_TRANSFORM_DESC_TRANSB;
 
+  // CHECK: hipblasLtMatmulPreferenceAttributes_t blasLtMatmulPreferenceAttributes;
+  // CHECK-NEXT: hipblasLtMatmulPreferenceAttributes_t BLASLT_MATMUL_PREF_SEARCH_MODE = HIPBLASLT_MATMUL_PREF_SEARCH_MODE;
+  // CHECK-NEXT: hipblasLtMatmulPreferenceAttributes_t BLASLT_MATMUL_PREF_MAX_WORKSPACE_BYTES = HIPBLASLT_MATMUL_PREF_MAX_WORKSPACE_BYTES;
+  cublasLtMatmulPreferenceAttributes_t blasLtMatmulPreferenceAttributes;
+  cublasLtMatmulPreferenceAttributes_t BLASLT_MATMUL_PREF_SEARCH_MODE = CUBLASLT_MATMUL_PREF_SEARCH_MODE;
+  cublasLtMatmulPreferenceAttributes_t BLASLT_MATMUL_PREF_MAX_WORKSPACE_BYTES = CUBLASLT_MATMUL_PREF_MAX_WORKSPACE_BYTES;
+
   // CUDA: cublasStatus_t CUBLASWINAPI cublasLtCreate(cublasLtHandle_t* lightHandle);
   // HIP: HIPBLASLT_EXPORT hipblasStatus_t hipblasLtCreate(hipblasLtHandle_t* handle);
   // CHECK: status = hipblasLtCreate(&blasLtHandle);
