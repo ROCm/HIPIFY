@@ -155,10 +155,10 @@ int main() {
   long long int strideU = 0;
   long long int strideV = 0;
 
-  float** fAarray = 0;
-  float** fBarray = 0;
-  double** dAarray = 0;
-  double** dBarray = 0;
+  float **fAarray = 0;
+  float **fBarray = 0;
+  double **dAarray = 0;
+  double **dBarray = 0;
 
   // CHECK: hipDoubleComplex dComplexA, dComplexd_A, dComplexB, dComplexC, dComplexD, dComplexE, dComplexS, dComplexU, dComplexd_U, dComplexV, dComplexd_V, dComplexVT, dComplexX, dComplexWorkspace, dComplexd_Workspace, dComplexrWork, dComplexTAU, dComplexTAUQ, dComplexTAUP;
   cuDoubleComplex dComplexA, dComplexd_A, dComplexB, dComplexC, dComplexD, dComplexE, dComplexS, dComplexU, dComplexd_U, dComplexV, dComplexd_V, dComplexVT, dComplexX, dComplexWorkspace, dComplexd_Workspace, dComplexrWork, dComplexTAU, dComplexTAUQ, dComplexTAUP;
@@ -166,15 +166,15 @@ int main() {
   // CHECK: hipComplex complexA, complexd_A, complexB, complexC, complexD, complexE, complexS, complexU, complexd_U, complexV, complexd_V, complexVT, complexX, complexWorkspace, complexd_Workspace, complexrWork, complexTAU, complexTAUQ, complexTAUP;
   cuComplex complexA, complexd_A, complexB, complexC, complexD, complexE, complexS, complexU, complexd_U, complexV, complexd_V, complexVT, complexX, complexWorkspace, complexd_Workspace, complexrWork, complexTAU, complexTAUQ, complexTAUP;
 
-  // CHECK: hipDoubleComplex** dcomplexAarray = 0;
-  // CHECK-NEXT: hipDoubleComplex** dcomplexBarray = 0;
-  cuDoubleComplex** dcomplexAarray = 0;
-  cuDoubleComplex** dcomplexBarray = 0;
+  // CHECK: hipDoubleComplex **dcomplexAarray = 0;
+  // CHECK-NEXT: hipDoubleComplex **dcomplexBarray = 0;
+  cuDoubleComplex **dcomplexAarray = 0;
+  cuDoubleComplex **dcomplexBarray = 0;
 
-  // CHECK: hipComplex** complexAarray = 0;
-  // CHECK-NEXT: hipComplex** complexBarray = 0;
-  cuComplex** complexAarray = 0;
-  cuComplex** complexBarray = 0;
+  // CHECK: hipComplex **complexAarray = 0;
+  // CHECK-NEXT: hipComplex **complexBarray = 0;
+  cuComplex **complexAarray = 0;
+  cuComplex **complexBarray = 0;
 
   // CHECK: hipsolverHandle_t handle;
   cusolverDnHandle_t handle;

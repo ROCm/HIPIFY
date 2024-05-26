@@ -165,7 +165,7 @@ extern const std::map<llvm::StringRef, hipAPIversions> HIP_SOLVER_FUNCTION_VER_M
   * The union of all the above HIP maps.
   *
   */
-const std::map<llvm::StringRef, hipAPIversions>& HIP_VERSIONS_MAP();
+const std::map<llvm::StringRef, hipAPIversions> &HIP_VERSIONS_MAP();
 
 extern const std::map<unsigned int, llvm::StringRef> CUDA_DRIVER_API_SECTION_MAP;
 extern const std::map<unsigned int, llvm::StringRef> CUDA_RUNTIME_API_SECTION_MAP;

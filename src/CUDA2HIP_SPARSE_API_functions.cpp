@@ -1163,12 +1163,12 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SPARSE_FUNCTION_VER_MAP {
   {"cusparseDnVecGet",                                     {CUDA_102, CUDA_0,   CUDA_0  }},
   {"cusparseDnVecGetValues",                               {CUDA_102, CUDA_0,   CUDA_0  }},
   {"cusparseDnVecSetValues",                               {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusparseSpMM",                                         {CUDA_101, CUDA_0,   CUDA_0  }},  // A: CUDA_VERSION 10010 C: CUSPARSE_VERSION 12000
-  {"cusparseSpMM_bufferSize",                              {CUDA_101, CUDA_0,   CUDA_0  }},  // A: CUDA_VERSION 10010 C: CUSPARSE_VERSION 12000
-  {"cusparseSpVV",                                         {CUDA_101, CUDA_0,   CUDA_0  }},  // A: CUSPARSE_VERSION 10200 C: CUSPARSE_VERSION 12000
-  {"cusparseSpVV_bufferSize",                              {CUDA_101, CUDA_0,   CUDA_0  }},  // A: CUSPARSE_VERSION 10200 C: CUSPARSE_VERSION 12000
-  {"cusparseSpMV",                                         {CUDA_101, CUDA_0,   CUDA_0  }},  // A: CUSPARSE_VERSION 10200 C: CUSPARSE_VERSION 12000
-  {"cusparseSpMV_bufferSize",                              {CUDA_101, CUDA_0,   CUDA_0  }},  // A: CUSPARSE_VERSION 10200 C: CUSPARSE_VERSION 12000
+  {"cusparseSpMM",                                         {CUDA_101, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 10010 C: CUSPARSE_VERSION 12000
+  {"cusparseSpMM_bufferSize",                              {CUDA_101, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 10010 C: CUSPARSE_VERSION 12000
+  {"cusparseSpVV",                                         {CUDA_101, CUDA_0,   CUDA_0  }}, // A: CUSPARSE_VERSION 10200 C: CUSPARSE_VERSION 12000
+  {"cusparseSpVV_bufferSize",                              {CUDA_101, CUDA_0,   CUDA_0  }}, // A: CUSPARSE_VERSION 10200 C: CUSPARSE_VERSION 12000
+  {"cusparseSpMV",                                         {CUDA_101, CUDA_0,   CUDA_0  }}, // A: CUSPARSE_VERSION 10200 C: CUSPARSE_VERSION 12000
+  {"cusparseSpMV_bufferSize",                              {CUDA_101, CUDA_0,   CUDA_0  }}, // A: CUSPARSE_VERSION 10200 C: CUSPARSE_VERSION 12000
   {"cusparseSaxpyi",                                       {CUDA_0,   CUDA_110, CUDA_120}},
   {"cusparseDaxpyi",                                       {CUDA_0,   CUDA_110, CUDA_120}},
   {"cusparseCaxpyi",                                       {CUDA_0,   CUDA_110, CUDA_120}},

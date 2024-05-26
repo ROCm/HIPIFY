@@ -99,7 +99,7 @@ clang::SourceLocation getEndOfExpansionRangeForLoc(const clang::SourceManager &S
 
 Memory_Buffer getMemoryBuffer(const clang::SourceManager &SM);
 
-void addTargetIfNeeded(ct::RefactoringTool& Tool);
+void addTargetIfNeeded(ct::RefactoringTool &Tool);
 
 const clang::IdentifierInfo *getControllingMacro(clang::CompilerInstance &CI);
 
