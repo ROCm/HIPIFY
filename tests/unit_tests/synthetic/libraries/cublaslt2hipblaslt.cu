@@ -224,7 +224,6 @@ int main() {
   // HIP: HIPBLASLT_EXPORT hipblasStatus_t hipblasLtMatmulDescCreate(hipblasLtMatmulDesc_t* matmulDesc, hipblasLtComputeType_t computeType, hipblasDatatype_t scaleType);
   // CHECK: status = hipblasLtMatmulDescCreate(&blasLtMatmulDesc, blasComputeType, dataType);
   status = cublasLtMatmulDescCreate(&blasLtMatmulDesc, blasComputeType, dataType);
-
 #endif
 
 #if CUDA_VERSION >= 11000 && CUBLAS_VERSION >= 11000
