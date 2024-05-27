@@ -39,6 +39,8 @@ int main() {
   uint64_t rows = 0;
   uint64_t cols = 0;
   int64_t ld = 0;
+  int requestedAlgoCount = 0;
+  int returnAlgoCount = 0;
 
 #if CUDA_VERSION >= 8000
   // CHECK: hipDataType dataType, dataTypeA, dataTypeB, computeType;
@@ -60,6 +62,11 @@ int main() {
 
   // CHECK: hipblasLtMatrixLayout_t blasLtMatrixLayout, Adesc, Bdesc, Cdesc, Ddesc;
   cublasLtMatrixLayout_t blasLtMatrixLayout, Adesc, Bdesc, Cdesc, Ddesc;
+
+  // CHECK: hipblasLtMatmulHeuristicResult_t blasLtMatmulHeuristicResult;
+  // CHECK-NEXT: hipblasLtMatmulHeuristicResult_t *heuristicResultsArray = nullptr;
+  cublasLtMatmulHeuristicResult_t blasLtMatmulHeuristicResult;
+  cublasLtMatmulHeuristicResult_t *heuristicResultsArray = nullptr;
 
   // CHECK: hipblasLtOrder_t blasLtOrder;
   // CHECK-NEXT: hipblasLtOrder_t BLASLT_ORDER_COL = HIPBLASLT_ORDER_COL;
@@ -186,6 +193,31 @@ int main() {
   // HIP: HIPBLASLT_EXPORT hipblasStatus_t hipblasLtMatrixTransformDescGetAttribute(hipblasLtMatrixTransformDesc_t transformDesc, hipblasLtMatrixTransformDescAttributes_t attr, void* buf, size_t sizeInBytes, size_t* sizeWritten);
   // CHECK: status = hipblasLtMatrixTransformDescGetAttribute(blasLtMatrixTransformDesc, blasLtMatrixTransformDescAttributes, buf, workspaceSizeInBytes, &sizeWritten);
   status = cublasLtMatrixTransformDescGetAttribute(blasLtMatrixTransformDesc, blasLtMatrixTransformDescAttributes, buf, workspaceSizeInBytes, &sizeWritten);
+
+  // CUDA: cublasStatus_t CUBLASWINAPI cublasLtMatmulPreferenceCreate(cublasLtMatmulPreference_t* pref);
+  // HIP: HIPBLASLT_EXPORT hipblasStatus_t hipblasLtMatmulPreferenceCreate(hipblasLtMatmulPreference_t* pref);
+  // CHECK: status = hipblasLtMatmulPreferenceCreate(&blasLtMatmulPreference);
+  status = cublasLtMatmulPreferenceCreate(&blasLtMatmulPreference);
+
+  // CUDA: cublasStatus_t CUBLASWINAPI cublasLtMatmulPreferenceDestroy(cublasLtMatmulPreference_t pref);
+  // HIP: HIPBLASLT_EXPORT hipblasStatus_t hipblasLtMatmulPreferenceDestroy(const hipblasLtMatmulPreference_t pref);
+  // CHECK: status = hipblasLtMatmulPreferenceDestroy(blasLtMatmulPreference);
+  status = cublasLtMatmulPreferenceDestroy(blasLtMatmulPreference);
+
+  // CUDA: cublasStatus_t CUBLASWINAPI cublasLtMatmulPreferenceSetAttribute(cublasLtMatmulPreference_t pref, cublasLtMatmulPreferenceAttributes_t attr, const void* buf, size_t sizeInBytes);
+  // HIP: HIPBLASLT_EXPORT hipblasStatus_t hipblasLtMatmulPreferenceSetAttribute(hipblasLtMatmulPreference_t pref, hipblasLtMatmulPreferenceAttributes_t attr, const void* buf, size_t sizeInBytes);
+  // CHECK: status = hipblasLtMatmulPreferenceSetAttribute(blasLtMatmulPreference, blasLtMatmulPreferenceAttributes, buf, workspaceSizeInBytes);
+  status = cublasLtMatmulPreferenceSetAttribute(blasLtMatmulPreference, blasLtMatmulPreferenceAttributes, buf, workspaceSizeInBytes);
+
+  // CUDA: cublasStatus_t CUBLASWINAPI cublasLtMatmulPreferenceGetAttribute(cublasLtMatmulPreference_t pref, cublasLtMatmulPreferenceAttributes_t attr, void* buf, size_t sizeInBytes, size_t* sizeWritten);
+  // HIP: HIPBLASLT_EXPORT hipblasStatus_t hipblasLtMatmulPreferenceGetAttribute(hipblasLtMatmulPreference_t pref, hipblasLtMatmulPreferenceAttributes_t attr, void* buf, size_t sizeInBytes, size_t* sizeWritten);
+  // CHECK: status = hipblasLtMatmulPreferenceGetAttribute(blasLtMatmulPreference, blasLtMatmulPreferenceAttributes, buf, workspaceSizeInBytes, &sizeWritten);
+  status = cublasLtMatmulPreferenceGetAttribute(blasLtMatmulPreference, blasLtMatmulPreferenceAttributes, buf, workspaceSizeInBytes, &sizeWritten);
+
+  // CUDA: cublasStatus_t CUBLASWINAPI cublasLtMatmulAlgoGetHeuristic(cublasLtHandle_t lightHandle, cublasLtMatmulDesc_t operationDesc, cublasLtMatrixLayout_t Adesc, cublasLtMatrixLayout_t Bdesc, cublasLtMatrixLayout_t Cdesc, cublasLtMatrixLayout_t Ddesc, cublasLtMatmulPreference_t preference, int requestedAlgoCount, cublasLtMatmulHeuristicResult_t heuristicResultsArray[], int* returnAlgoCount);
+  // HIP: HIPBLASLT_EXPORT hipblasStatus_t hipblasLtMatmulAlgoGetHeuristic(hipblasLtHandle_t handle, hipblasLtMatmulDesc_t matmulDesc, hipblasLtMatrixLayout_t Adesc, hipblasLtMatrixLayout_t Bdesc, hipblasLtMatrixLayout_t Cdesc, hipblasLtMatrixLayout_t Ddesc, hipblasLtMatmulPreference_t pref, int requestedAlgoCount, hipblasLtMatmulHeuristicResult_t heuristicResultsArray[], int* returnAlgoCount);
+  // CHECK: status = hipblasLtMatmulAlgoGetHeuristic(blasLtHandle, blasLtMatmulDesc, Adesc, Bdesc, Cdesc, Ddesc, blasLtMatmulPreference, requestedAlgoCount, heuristicResultsArray, &returnAlgoCount);
+  status = cublasLtMatmulAlgoGetHeuristic(blasLtHandle, blasLtMatmulDesc, Adesc, Bdesc, Cdesc, Ddesc, blasLtMatmulPreference, requestedAlgoCount, heuristicResultsArray, &returnAlgoCount);
 #endif
 
 #if CUBLAS_VERSION >= 10200

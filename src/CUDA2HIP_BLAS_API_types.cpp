@@ -462,6 +462,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP {
   {"CUBLASLT_MATMUL_PREF_MIN_ALIGNMENT_D_BYTES",                     {"HIPBLASLT_MATMUL_PREF_MIN_ALIGNMENT_D_BYTES",                       "",                                                         CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
   {"CUBLASLT_MATMUL_PREF_MAX_WAVES_COUNT",                           {"HIPBLASLT_MATMUL_PREF_MAX_WAVES_COUNT",                             "",                                                         CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
   {"CUBLASLT_MATMUL_PREF_IMPL_MASK",                                 {"HIPBLASLT_MATMUL_PREF_IMPL_MASK",                                   "",                                                         CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"cublasLtMatmulHeuristicResult_t",                                {"hipblasLtMatmulHeuristicResult_t",                                  "",                                                         CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_TYPE_NAME_VER_MAP {
@@ -833,6 +834,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_TYPE_NAME_VER_MAP {
   {"CUBLASLT_MATMUL_PREF_MIN_ALIGNMENT_D_BYTES",                     {CUDA_101, CUDA_0,   CUDA_0  }},
   {"CUBLASLT_MATMUL_PREF_MAX_WAVES_COUNT",                           {CUDA_101, CUDA_0,   CUDA_0  }},
   {"CUBLASLT_MATMUL_PREF_IMPL_MASK",                                 {CUDA_110, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 11001, CUBLAS_VERSION 11000, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 0
+  {"cublasLtMatmulHeuristicResult_t",                                {CUDA_101, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_TYPE_NAME_VER_MAP {
@@ -980,6 +982,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_TYPE_NAME_VER_MAP {
   {"hipblasLtMatmulPreferenceAttributes_t",                          {HIP_5050, HIP_0,    HIP_0   }},
   {"HIPBLASLT_MATMUL_PREF_SEARCH_MODE",                              {HIP_5050, HIP_0,    HIP_0   }},
   {"HIPBLASLT_MATMUL_PREF_MAX_WORKSPACE_BYTES",                      {HIP_5050, HIP_0,    HIP_0   }},
+  {"hipblasLtMatmulHeuristicResult_t",                               {HIP_5050, HIP_0,    HIP_0   }},
 
   {"rocblas_handle",                                                 {HIP_1050, HIP_0,    HIP_0   }},
   {"_rocblas_handle",                                                {HIP_1050, HIP_0,    HIP_0   }},

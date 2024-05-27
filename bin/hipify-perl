@@ -3870,10 +3870,15 @@ sub simpleSubstitutions {
     subst("cublasLtCreate", "hipblasLtCreate", "library");
     subst("cublasLtDestroy", "hipblasLtDestroy", "library");
     subst("cublasLtMatmul", "hipblasLtMatmul", "library");
+    subst("cublasLtMatmulAlgoGetHeuristic", "hipblasLtMatmulAlgoGetHeuristic", "library");
     subst("cublasLtMatmulDescCreate", "hipblasLtMatmulDescCreate", "library");
     subst("cublasLtMatmulDescDestroy", "hipblasLtMatmulDescDestroy", "library");
     subst("cublasLtMatmulDescGetAttribute", "hipblasLtMatmulDescGetAttribute", "library");
     subst("cublasLtMatmulDescSetAttribute", "hipblasLtMatmulDescSetAttribute", "library");
+    subst("cublasLtMatmulPreferenceCreate", "hipblasLtMatmulPreferenceCreate", "library");
+    subst("cublasLtMatmulPreferenceDestroy", "hipblasLtMatmulPreferenceDestroy", "library");
+    subst("cublasLtMatmulPreferenceGetAttribute", "hipblasLtMatmulPreferenceGetAttribute", "library");
+    subst("cublasLtMatmulPreferenceSetAttribute", "hipblasLtMatmulPreferenceSetAttribute", "library");
     subst("cublasLtMatrixLayoutCreate", "hipblasLtMatrixLayoutCreate", "library");
     subst("cublasLtMatrixLayoutDestroy", "hipblasLtMatrixLayoutDestroy", "library");
     subst("cublasLtMatrixLayoutGetAttribute", "hipblasLtMatrixLayoutGetAttribute", "library");
@@ -5469,6 +5474,7 @@ sub simpleSubstitutions {
     subst("cublasLtMatmulDescAttributes_t", "hipblasLtMatmulDescAttributes_t", "type");
     subst("cublasLtMatmulDescOpaque_t", "hipblasLtMatmulDescOpaque_t", "type");
     subst("cublasLtMatmulDesc_t", "hipblasLtMatmulDesc_t", "type");
+    subst("cublasLtMatmulHeuristicResult_t", "hipblasLtMatmulHeuristicResult_t", "type");
     subst("cublasLtMatmulPreferenceAttributes_t", "hipblasLtMatmulPreferenceAttributes_t", "type");
     subst("cublasLtMatmulPreferenceOpaque_t", "hipblasLtMatmulPreferenceOpaque_t", "type");
     subst("cublasLtMatmulPreference_t", "hipblasLtMatmulPreference_t", "type");
@@ -11308,6 +11314,7 @@ sub warnHipOnlyUnsupportedFunctions {
         "cublasLtMatmulTile_t",
         "cublasLtMatmulStages_t",
         "cublasLtMatmulSearch_t",
+        "cublasLtMatmulPreferenceInit",
         "cublasLtMatmulInnerShape_t",
         "cublasLtMatmulDescInit",
         "cublasLtHeuristicsCacheSetCapacity",
@@ -11968,14 +11975,21 @@ sub warnRocOnlyUnsupportedFunctions {
         "cublasLtMatmulTile_t",
         "cublasLtMatmulStages_t",
         "cublasLtMatmulSearch_t",
+        "cublasLtMatmulPreferenceSetAttribute",
+        "cublasLtMatmulPreferenceInit",
+        "cublasLtMatmulPreferenceGetAttribute",
+        "cublasLtMatmulPreferenceDestroy",
+        "cublasLtMatmulPreferenceCreate",
         "cublasLtMatmulPreferenceAttributes_t",
         "cublasLtMatmulInnerShape_t",
+        "cublasLtMatmulHeuristicResult_t",
         "cublasLtMatmulDescSetAttribute",
         "cublasLtMatmulDescInit",
         "cublasLtMatmulDescGetAttribute",
         "cublasLtMatmulDescDestroy",
         "cublasLtMatmulDescCreate",
         "cublasLtMatmulDescAttributes_t",
+        "cublasLtMatmulAlgoGetHeuristic",
         "cublasLtMatmul",
         "cublasLtHeuristicsCacheSetCapacity",
         "cublasLtHeuristicsCacheGetCapacity",
