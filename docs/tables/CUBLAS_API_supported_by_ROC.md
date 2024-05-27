@@ -398,6 +398,7 @@
 |`cublasLtMatmulDescAttributes_t`|10.1| | | | | | | | | |
 |`cublasLtMatmulDescOpaque_t`|11.0| | | | | | | | | |
 |`cublasLtMatmulDesc_t`|10.1| | | | | | | | | |
+|`cublasLtMatmulHeuristicResult_t`|10.1| | | | | | | | | |
 |`cublasLtMatmulInnerShape_t`|11.8| | | | | | | | | |
 |`cublasLtMatmulPreferenceAttributes_t`|10.1| | | | | | | | | |
 |`cublasLtMatmulPreferenceOpaque_t`|11.0| | | | | | | | | |
@@ -1303,11 +1304,17 @@
 |`cublasLtHeuristicsCacheGetCapacity`|11.8| | | | | | | | | |
 |`cublasLtHeuristicsCacheSetCapacity`|11.8| | | | | | | | | |
 |`cublasLtMatmul`|10.1| | | | | | | | | |
+|`cublasLtMatmulAlgoGetHeuristic`|10.1| | | | | | | | | |
 |`cublasLtMatmulDescCreate`|10.1| |11.0| | | | | | | |
 |`cublasLtMatmulDescDestroy`|10.1| | | | | | | | | |
 |`cublasLtMatmulDescGetAttribute`|10.1| | | | | | | | | |
 |`cublasLtMatmulDescInit`|11.0| | | | | | | | | |
 |`cublasLtMatmulDescSetAttribute`|10.1| | | | | | | | | |
+|`cublasLtMatmulPreferenceCreate`|10.1| | | | | | | | | |
+|`cublasLtMatmulPreferenceDestroy`|10.1| | | | | | | | | |
+|`cublasLtMatmulPreferenceGetAttribute`|10.1| | | | | | | | | |
+|`cublasLtMatmulPreferenceInit`|11.0| | | | | | | | | |
+|`cublasLtMatmulPreferenceSetAttribute`|10.1| | | | | | | | | |
 |`cublasLtMatrixLayoutCreate`|10.1| | | | | | | | | |
 |`cublasLtMatrixLayoutDestroy`|10.1| | | | | | | | | |
 |`cublasLtMatrixLayoutGetAttribute`|10.1| | | | | | | | | |

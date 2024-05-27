@@ -398,6 +398,7 @@
 |`cublasLtMatmulDescAttributes_t`|10.1| | | |`hipblasLtMatmulDescAttributes_t`|5.5.0| | | | | | | | | | |
 |`cublasLtMatmulDescOpaque_t`|11.0| | | |`hipblasLtMatmulDescOpaque_t`|5.5.0| | | | | | | | | | |
 |`cublasLtMatmulDesc_t`|10.1| | | |`hipblasLtMatmulDesc_t`|5.5.0| | | | | | | | | | |
+|`cublasLtMatmulHeuristicResult_t`|10.1| | | |`hipblasLtMatmulHeuristicResult_t`|5.5.0| | | | | | | | | | |
 |`cublasLtMatmulInnerShape_t`|11.8| | | | | | | | | | | | | | | |
 |`cublasLtMatmulPreferenceAttributes_t`|10.1| | | |`hipblasLtMatmulPreferenceAttributes_t`|5.5.0| | | | | | | | | | |
 |`cublasLtMatmulPreferenceOpaque_t`|11.0| | | |`hipblasLtMatmulPreferenceOpaque_t`|5.5.0| | | | | | | | | | |
@@ -1303,11 +1304,17 @@
 |`cublasLtHeuristicsCacheGetCapacity`|11.8| | | | | | | | | | | | | | | |
 |`cublasLtHeuristicsCacheSetCapacity`|11.8| | | | | | | | | | | | | | | |
 |`cublasLtMatmul`|10.1| | | |`hipblasLtMatmul`|5.5.0| | | | | | | | | | |
+|`cublasLtMatmulAlgoGetHeuristic`|10.1| | | |`hipblasLtMatmulAlgoGetHeuristic`|5.5.0| | | | | | | | | | |
 |`cublasLtMatmulDescCreate`|10.1| |11.0| |`hipblasLtMatmulDescCreate`|5.5.0| | | | | | | | | | |
 |`cublasLtMatmulDescDestroy`|10.1| | | |`hipblasLtMatmulDescDestroy`|5.5.0| | | | | | | | | | |
 |`cublasLtMatmulDescGetAttribute`|10.1| | | |`hipblasLtMatmulDescGetAttribute`|5.5.0| | | | | | | | | | |
 |`cublasLtMatmulDescInit`|11.0| | | | | | | | | | | | | | | |
 |`cublasLtMatmulDescSetAttribute`|10.1| | | |`hipblasLtMatmulDescSetAttribute`|5.5.0| | | | | | | | | | |
+|`cublasLtMatmulPreferenceCreate`|10.1| | | |`hipblasLtMatmulPreferenceCreate`|5.5.0| | | | | | | | | | |
+|`cublasLtMatmulPreferenceDestroy`|10.1| | | |`hipblasLtMatmulPreferenceDestroy`|5.5.0| | | | | | | | | | |
+|`cublasLtMatmulPreferenceGetAttribute`|10.1| | | |`hipblasLtMatmulPreferenceGetAttribute`|5.5.0| | | | | | | | | | |
+|`cublasLtMatmulPreferenceInit`|11.0| | | | | | | | | | | | | | | |
+|`cublasLtMatmulPreferenceSetAttribute`|10.1| | | |`hipblasLtMatmulPreferenceSetAttribute`|5.5.0| | | | | | | | | | |
 |`cublasLtMatrixLayoutCreate`|10.1| | | |`hipblasLtMatrixLayoutCreate`|5.5.0| | | | | | | | | | |
 |`cublasLtMatrixLayoutDestroy`|10.1| | | |`hipblasLtMatrixLayoutDestroy`|5.5.0| | | | | | | | | | |
 |`cublasLtMatrixLayoutGetAttribute`|10.1| | | |`hipblasLtMatrixLayoutGetAttribute`|5.5.0| | | | | | | | | | |

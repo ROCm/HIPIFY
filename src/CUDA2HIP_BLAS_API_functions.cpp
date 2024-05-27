@@ -1110,6 +1110,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
   {"cublasLtMatrixTransformDescDestroy",                   {"hipblasLtMatrixTransformDescDestroy",                       "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
   {"cublasLtMatrixTransformDescSetAttribute",              {"hipblasLtMatrixTransformDescSetAttribute",                  "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
   {"cublasLtMatrixTransformDescGetAttribute",              {"hipblasLtMatrixTransformDescGetAttribute",                  "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
+  {"cublasLtMatmulPreferenceInit",                         {"hipblasLtMatmulPreferenceInit",                             "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
+  {"cublasLtMatmulPreferenceCreate",                       {"hipblasLtMatmulPreferenceCreate",                           "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
+  {"cublasLtMatmulPreferenceDestroy",                      {"hipblasLtMatmulPreferenceDestroy",                          "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
+  {"cublasLtMatmulPreferenceSetAttribute",                 {"hipblasLtMatmulPreferenceSetAttribute",                     "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
+  {"cublasLtMatmulPreferenceGetAttribute",                 {"hipblasLtMatmulPreferenceGetAttribute",                     "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
+  {"cublasLtMatmulAlgoGetHeuristic",                       {"hipblasLtMatmulAlgoGetHeuristic",                           "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_FUNCTION_VER_MAP {
@@ -1587,6 +1593,12 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_FUNCTION_VER_MAP {
   {"cublasLtMatrixTransformDescDestroy",                   {CUDA_101, CUDA_0,   CUDA_0   }},
   {"cublasLtMatrixTransformDescSetAttribute",              {CUDA_101, CUDA_0,   CUDA_0   }},
   {"cublasLtMatrixTransformDescGetAttribute",              {CUDA_101, CUDA_0,   CUDA_0   }},
+  {"cublasLtMatmulPreferenceInit",                         {CUDA_110, CUDA_0,   CUDA_0   }}, // A: CUDA_VERSION 11001, CUBLAS_VERSION 11000, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 0
+  {"cublasLtMatmulPreferenceCreate",                       {CUDA_101, CUDA_0,   CUDA_0   }},
+  {"cublasLtMatmulPreferenceDestroy",                      {CUDA_101, CUDA_0,   CUDA_0   }},
+  {"cublasLtMatmulPreferenceSetAttribute",                 {CUDA_101, CUDA_0,   CUDA_0   }},
+  {"cublasLtMatmulPreferenceGetAttribute",                 {CUDA_101, CUDA_0,   CUDA_0   }},
+  {"cublasLtMatmulAlgoGetHeuristic",                       {CUDA_101, CUDA_0,   CUDA_0   }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_FUNCTION_VER_MAP {
@@ -2005,6 +2017,11 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_FUNCTION_VER_MAP {
   {"hipblasLtMatrixTransformDescDestroy",                  {HIP_6000, HIP_0,    HIP_0   }},
   {"hipblasLtMatrixTransformDescSetAttribute",             {HIP_6000, HIP_0,    HIP_0   }},
   {"hipblasLtMatrixTransformDescGetAttribute",             {HIP_6000, HIP_0,    HIP_0   }},
+  {"hipblasLtMatmulPreferenceCreate",                      {HIP_5050, HIP_0,    HIP_0   }},
+  {"hipblasLtMatmulPreferenceDestroy",                     {HIP_5050, HIP_0,    HIP_0   }},
+  {"hipblasLtMatmulPreferenceSetAttribute",                {HIP_5050, HIP_0,    HIP_0   }},
+  {"hipblasLtMatmulPreferenceGetAttribute",                {HIP_5050, HIP_0,    HIP_0   }},
+  {"hipblasLtMatmulAlgoGetHeuristic",                      {HIP_5050, HIP_0,    HIP_0   }},
 
   {"rocblas_status_to_string",                             {HIP_3050, HIP_0,    HIP_0   }},
   {"rocblas_sscal",                                        {HIP_1050, HIP_0,    HIP_0   }},
