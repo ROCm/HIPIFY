@@ -5181,8 +5181,6 @@ sub simpleSubstitutions {
     subst("nvrtc.h", "hiprtc.h", "include_cuda_main_header");
     subst("cublas_v2.h", "hipblas.h", "include_cuda_main_header_v2");
     subst("cusparse_v2.h", "hipsparse.h", "include_cuda_main_header_v2");
-    subst("CUBLASLT_MATMUL_PREF_MAX_WORKSPACE_BYTES", "HIPBLASLT_MATMUL_PREF_MAX_WORKSPACE_BYTES", "type");
-    subst("CUBLASLT_MATMUL_PREF_SEARCH_MODE", "HIPBLASLT_MATMUL_PREF_SEARCH_MODE", "type");
     subst("CUDAContext", "HIPContext", "type");
     subst("CUDA_ARRAY3D_DESCRIPTOR", "HIP_ARRAY3D_DESCRIPTOR", "type");
     subst("CUDA_ARRAY3D_DESCRIPTOR_st", "HIP_ARRAY3D_DESCRIPTOR", "type");
@@ -5776,6 +5774,8 @@ sub simpleSubstitutions {
     subst("CUBLASLT_MATMUL_DESC_POINTER_MODE", "HIPBLASLT_MATMUL_DESC_POINTER_MODE", "numeric_literal");
     subst("CUBLASLT_MATMUL_DESC_TRANSA", "HIPBLASLT_MATMUL_DESC_TRANSA", "numeric_literal");
     subst("CUBLASLT_MATMUL_DESC_TRANSB", "HIPBLASLT_MATMUL_DESC_TRANSB", "numeric_literal");
+    subst("CUBLASLT_MATMUL_PREF_MAX_WORKSPACE_BYTES", "HIPBLASLT_MATMUL_PREF_MAX_WORKSPACE_BYTES", "numeric_literal");
+    subst("CUBLASLT_MATMUL_PREF_SEARCH_MODE", "HIPBLASLT_MATMUL_PREF_SEARCH_MODE", "numeric_literal");
     subst("CUBLASLT_MATRIX_LAYOUT_BATCH_COUNT", "HIPBLASLT_MATRIX_LAYOUT_BATCH_COUNT", "numeric_literal");
     subst("CUBLASLT_MATRIX_LAYOUT_COLS", "HIPBLASLT_MATRIX_LAYOUT_COLS", "numeric_literal");
     subst("CUBLASLT_MATRIX_LAYOUT_LD", "HIPBLASLT_MATRIX_LAYOUT_LD", "numeric_literal");
@@ -11317,6 +11317,11 @@ sub warnHipOnlyUnsupportedFunctions {
         "cublasLtMatmulPreferenceInit",
         "cublasLtMatmulInnerShape_t",
         "cublasLtMatmulDescInit",
+        "cublasLtMatmulAlgoInit",
+        "cublasLtMatmulAlgoGetIds",
+        "cublasLtMatmulAlgoCheck",
+        "cublasLtMatmulAlgoCapGetAttribute",
+        "cublasLtMatmulAlgoCapAttributes_t",
         "cublasLtHeuristicsCacheSetCapacity",
         "cublasLtHeuristicsCacheGetCapacity",
         "cublasLtGetVersion",
@@ -11774,7 +11779,25 @@ sub warnHipOnlyUnsupportedFunctions {
         "CUBLASLT_CLUSTER_SHAPE_13x1x1",
         "CUBLASLT_CLUSTER_SHAPE_12x1x1",
         "CUBLASLT_CLUSTER_SHAPE_11x1x1",
-        "CUBLASLT_CLUSTER_SHAPE_10x1x1"
+        "CUBLASLT_CLUSTER_SHAPE_10x1x1",
+        "CUBLASLT_ALGO_CAP_UPLO_SUPPORT",
+        "CUBLASLT_ALGO_CAP_TILE_IDS",
+        "CUBLASLT_ALGO_CAP_STRIDED_BATCH_SUPPORT",
+        "CUBLASLT_ALGO_CAP_STAGES_IDS",
+        "CUBLASLT_ALGO_CAP_SPLITK_SUPPORT",
+        "CUBLASLT_ALGO_CAP_REDUCTION_SCHEME_MASK",
+        "CUBLASLT_ALGO_CAP_POINTER_MODE_MASK",
+        "CUBLASLT_ALGO_CAP_OUT_OF_PLACE_RESULT_SUPPORT",
+        "CUBLASLT_ALGO_CAP_NUMERICAL_IMPL_FLAGS",
+        "CUBLASLT_ALGO_CAP_MIN_ALIGNMENT_D_BYTES",
+        "CUBLASLT_ALGO_CAP_MIN_ALIGNMENT_C_BYTES",
+        "CUBLASLT_ALGO_CAP_MIN_ALIGNMENT_B_BYTES",
+        "CUBLASLT_ALGO_CAP_MIN_ALIGNMENT_A_BYTES",
+        "CUBLASLT_ALGO_CAP_LD_NEGATIVE",
+        "CUBLASLT_ALGO_CAP_EPILOGUE_MASK",
+        "CUBLASLT_ALGO_CAP_CUSTOM_OPTION_MAX",
+        "CUBLASLT_ALGO_CAP_CUSTOM_MEMORY_ORDER",
+        "CUBLASLT_ALGO_CAP_CTA_SWIZZLING_SUPPORT"
     )
     {
         my $mt = m/($func)/g;
@@ -11989,7 +12012,12 @@ sub warnRocOnlyUnsupportedFunctions {
         "cublasLtMatmulDescDestroy",
         "cublasLtMatmulDescCreate",
         "cublasLtMatmulDescAttributes_t",
+        "cublasLtMatmulAlgoInit",
+        "cublasLtMatmulAlgoGetIds",
         "cublasLtMatmulAlgoGetHeuristic",
+        "cublasLtMatmulAlgoCheck",
+        "cublasLtMatmulAlgoCapGetAttribute",
+        "cublasLtMatmulAlgoCapAttributes_t",
         "cublasLtMatmul",
         "cublasLtHeuristicsCacheSetCapacity",
         "cublasLtHeuristicsCacheGetCapacity",
@@ -12507,7 +12535,25 @@ sub warnRocOnlyUnsupportedFunctions {
         "CUBLASLT_CLUSTER_SHAPE_13x1x1",
         "CUBLASLT_CLUSTER_SHAPE_12x1x1",
         "CUBLASLT_CLUSTER_SHAPE_11x1x1",
-        "CUBLASLT_CLUSTER_SHAPE_10x1x1"
+        "CUBLASLT_CLUSTER_SHAPE_10x1x1",
+        "CUBLASLT_ALGO_CAP_UPLO_SUPPORT",
+        "CUBLASLT_ALGO_CAP_TILE_IDS",
+        "CUBLASLT_ALGO_CAP_STRIDED_BATCH_SUPPORT",
+        "CUBLASLT_ALGO_CAP_STAGES_IDS",
+        "CUBLASLT_ALGO_CAP_SPLITK_SUPPORT",
+        "CUBLASLT_ALGO_CAP_REDUCTION_SCHEME_MASK",
+        "CUBLASLT_ALGO_CAP_POINTER_MODE_MASK",
+        "CUBLASLT_ALGO_CAP_OUT_OF_PLACE_RESULT_SUPPORT",
+        "CUBLASLT_ALGO_CAP_NUMERICAL_IMPL_FLAGS",
+        "CUBLASLT_ALGO_CAP_MIN_ALIGNMENT_D_BYTES",
+        "CUBLASLT_ALGO_CAP_MIN_ALIGNMENT_C_BYTES",
+        "CUBLASLT_ALGO_CAP_MIN_ALIGNMENT_B_BYTES",
+        "CUBLASLT_ALGO_CAP_MIN_ALIGNMENT_A_BYTES",
+        "CUBLASLT_ALGO_CAP_LD_NEGATIVE",
+        "CUBLASLT_ALGO_CAP_EPILOGUE_MASK",
+        "CUBLASLT_ALGO_CAP_CUSTOM_OPTION_MAX",
+        "CUBLASLT_ALGO_CAP_CUSTOM_MEMORY_ORDER",
+        "CUBLASLT_ALGO_CAP_CTA_SWIZZLING_SUPPORT"
     )
     {
         my $mt = m/($func)/g;

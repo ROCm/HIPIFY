@@ -1116,6 +1116,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
   {"cublasLtMatmulPreferenceSetAttribute",                 {"hipblasLtMatmulPreferenceSetAttribute",                     "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
   {"cublasLtMatmulPreferenceGetAttribute",                 {"hipblasLtMatmulPreferenceGetAttribute",                     "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
   {"cublasLtMatmulAlgoGetHeuristic",                       {"hipblasLtMatmulAlgoGetHeuristic",                           "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
+  {"cublasLtMatmulAlgoGetIds",                             {"hipblasLtMatmulAlgoGetIds",                                 "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
+  {"cublasLtMatmulAlgoInit",                               {"hipblasLtMatmulAlgoInit",                                   "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
+  {"cublasLtMatmulAlgoCheck",                              {"hipblasLtMatmulAlgoCheck",                                  "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
+  {"cublasLtMatmulAlgoCapGetAttribute",                    {"hipblasLtMatmulAlgoCapGetAttribute",                        "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_FUNCTION_VER_MAP {
@@ -1599,6 +1603,10 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_FUNCTION_VER_MAP {
   {"cublasLtMatmulPreferenceSetAttribute",                 {CUDA_101, CUDA_0,   CUDA_0   }},
   {"cublasLtMatmulPreferenceGetAttribute",                 {CUDA_101, CUDA_0,   CUDA_0   }},
   {"cublasLtMatmulAlgoGetHeuristic",                       {CUDA_101, CUDA_0,   CUDA_0   }},
+  {"cublasLtMatmulAlgoGetIds",                             {CUDA_101, CUDA_0,   CUDA_0   }},
+  {"cublasLtMatmulAlgoInit",                               {CUDA_101, CUDA_0,   CUDA_0   }},
+  {"cublasLtMatmulAlgoCheck",                              {CUDA_101, CUDA_0,   CUDA_0   }},
+  {"cublasLtMatmulAlgoCapGetAttribute",                    {CUDA_101, CUDA_0,   CUDA_0   }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_FUNCTION_VER_MAP {

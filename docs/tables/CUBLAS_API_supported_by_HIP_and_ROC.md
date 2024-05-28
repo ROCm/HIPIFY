@@ -146,6 +146,24 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|**ROC**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
+|`CUBLASLT_ALGO_CAP_CTA_SWIZZLING_SUPPORT`|10.1| | | | | | | | | | | | | | | |
+|`CUBLASLT_ALGO_CAP_CUSTOM_MEMORY_ORDER`|10.1| | | | | | | | | | | | | | | |
+|`CUBLASLT_ALGO_CAP_CUSTOM_OPTION_MAX`|10.1| | | | | | | | | | | | | | | |
+|`CUBLASLT_ALGO_CAP_EPILOGUE_MASK`|10.1| | | | | | | | | | | | | | | |
+|`CUBLASLT_ALGO_CAP_LD_NEGATIVE`|11.0| | | | | | | | | | | | | | | |
+|`CUBLASLT_ALGO_CAP_MIN_ALIGNMENT_A_BYTES`|11.0| | | | | | | | | | | | | | | |
+|`CUBLASLT_ALGO_CAP_MIN_ALIGNMENT_B_BYTES`|11.0| | | | | | | | | | | | | | | |
+|`CUBLASLT_ALGO_CAP_MIN_ALIGNMENT_C_BYTES`|11.0| | | | | | | | | | | | | | | |
+|`CUBLASLT_ALGO_CAP_MIN_ALIGNMENT_D_BYTES`|11.0| | | | | | | | | | | | | | | |
+|`CUBLASLT_ALGO_CAP_NUMERICAL_IMPL_FLAGS`|11.0| | | | | | | | | | | | | | | |
+|`CUBLASLT_ALGO_CAP_OUT_OF_PLACE_RESULT_SUPPORT`|10.1| | | | | | | | | | | | | | | |
+|`CUBLASLT_ALGO_CAP_POINTER_MODE_MASK`|10.1| | | | | | | | | | | | | | | |
+|`CUBLASLT_ALGO_CAP_REDUCTION_SCHEME_MASK`|10.1| | | | | | | | | | | | | | | |
+|`CUBLASLT_ALGO_CAP_SPLITK_SUPPORT`|10.1| | | | | | | | | | | | | | | |
+|`CUBLASLT_ALGO_CAP_STAGES_IDS`|11.0| | | | | | | | | | | | | | | |
+|`CUBLASLT_ALGO_CAP_STRIDED_BATCH_SUPPORT`|10.1| | | | | | | | | | | | | | | |
+|`CUBLASLT_ALGO_CAP_TILE_IDS`|10.1| | | | | | | | | | | | | | | |
+|`CUBLASLT_ALGO_CAP_UPLO_SUPPORT`|10.1| | | | | | | | | | | | | | | |
 |`CUBLASLT_CLUSTER_SHAPE_10x1x1`|11.8| | | | | | | | | | | | | | | |
 |`CUBLASLT_CLUSTER_SHAPE_11x1x1`|11.8| | | | | | | | | | | | | | | |
 |`CUBLASLT_CLUSTER_SHAPE_12x1x1`|11.8| | | | | | | | | | | | | | | |
@@ -394,6 +412,7 @@
 |`cublasLtContext`|10.1| | | | | | | | | | | | | | | |
 |`cublasLtEpilogue_t`|10.1| | | |`hipblasLtEpilogue_t`|5.5.0| | | | | | | | | | |
 |`cublasLtHandle_t`|10.1| | | |`hipblasLtHandle_t`|5.5.0| | | | | | | | | | |
+|`cublasLtMatmulAlgoCapAttributes_t`|10.1| | | | | | | | | | | | | | | |
 |`cublasLtMatmulAlgo_t`|10.1| | | |`hipblasLtMatmulAlgo_t`|5.5.0| | | | | | | | | | |
 |`cublasLtMatmulDescAttributes_t`|10.1| | | |`hipblasLtMatmulDescAttributes_t`|5.5.0| | | | | | | | | | |
 |`cublasLtMatmulDescOpaque_t`|11.0| | | |`hipblasLtMatmulDescOpaque_t`|5.5.0| | | | | | | | | | |
@@ -1304,7 +1323,11 @@
 |`cublasLtHeuristicsCacheGetCapacity`|11.8| | | | | | | | | | | | | | | |
 |`cublasLtHeuristicsCacheSetCapacity`|11.8| | | | | | | | | | | | | | | |
 |`cublasLtMatmul`|10.1| | | |`hipblasLtMatmul`|5.5.0| | | | | | | | | | |
+|`cublasLtMatmulAlgoCapGetAttribute`|10.1| | | | | | | | | | | | | | | |
+|`cublasLtMatmulAlgoCheck`|10.1| | | | | | | | | | | | | | | |
 |`cublasLtMatmulAlgoGetHeuristic`|10.1| | | |`hipblasLtMatmulAlgoGetHeuristic`|5.5.0| | | | | | | | | | |
+|`cublasLtMatmulAlgoGetIds`|10.1| | | | | | | | | | | | | | | |
+|`cublasLtMatmulAlgoInit`|10.1| | | | | | | | | | | | | | | |
 |`cublasLtMatmulDescCreate`|10.1| |11.0| |`hipblasLtMatmulDescCreate`|5.5.0| | | | | | | | | | |
 |`cublasLtMatmulDescDestroy`|10.1| | | |`hipblasLtMatmulDescDestroy`|5.5.0| | | | | | | | | | |
 |`cublasLtMatmulDescGetAttribute`|10.1| | | |`hipblasLtMatmulDescGetAttribute`|5.5.0| | | | | | | | | | |
