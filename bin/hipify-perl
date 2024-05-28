@@ -1417,7 +1417,8 @@ my %experimental_funcs = (
     "cublasCgbmv_64" => "6.2.0",
     "CUSOLVER_ALG_1" => "6.2.0",
     "CUSOLVER_ALG_0" => "6.2.0",
-    "CUSOLVERDN_GETRF" => "6.2.0"
+    "CUSOLVERDN_GETRF" => "6.2.0",
+    "CUBLASLT_MATMUL_DESC_AMAX_D_POINTER" => "6.2.0"
 );
 
 $print_stats = 1 if $examine;
@@ -1572,6 +1573,7 @@ sub experimentalSubstitutions {
     subst("cusolverAlgMode_t", "hipsolverAlgMode_t", "type");
     subst("cusolverDnFunction_t", "hipsolverDnFunction_t", "type");
     subst("cusolverDnParams_t", "hipsolverDnParams_t", "type");
+    subst("CUBLASLT_MATMUL_DESC_AMAX_D_POINTER", "HIPBLASLT_MATMUL_DESC_AMAX_D_POINTER", "numeric_literal");
     subst("CUSOLVERDN_GETRF", "HIPSOLVERDN_GETRF", "numeric_literal");
     subst("CUSOLVER_ALG_0", "HIPSOLVER_ALG_0", "numeric_literal");
     subst("CUSOLVER_ALG_1", "HIPSOLVER_ALG_1", "numeric_literal");
@@ -11740,7 +11742,6 @@ sub warnHipOnlyUnsupportedFunctions {
         "CUBLASLT_MATMUL_DESC_ATOMIC_SYNC_NUM_CHUNKS_D_ROWS",
         "CUBLASLT_MATMUL_DESC_ATOMIC_SYNC_NUM_CHUNKS_D_COLS",
         "CUBLASLT_MATMUL_DESC_ATOMIC_SYNC_IN_COUNTERS_POINTER",
-        "CUBLASLT_MATMUL_DESC_AMAX_D_POINTER",
         "CUBLASLT_MATMUL_DESC_ALPHA_VECTOR_BATCH_STRIDE",
         "CUBLASLT_EPILOGUE_RELU_AUX_BIAS",
         "CUBLASLT_EPILOGUE_RELU_AUX",
@@ -12496,7 +12497,6 @@ sub warnRocOnlyUnsupportedFunctions {
         "CUBLASLT_MATMUL_DESC_ATOMIC_SYNC_NUM_CHUNKS_D_ROWS",
         "CUBLASLT_MATMUL_DESC_ATOMIC_SYNC_NUM_CHUNKS_D_COLS",
         "CUBLASLT_MATMUL_DESC_ATOMIC_SYNC_IN_COUNTERS_POINTER",
-        "CUBLASLT_MATMUL_DESC_AMAX_D_POINTER",
         "CUBLASLT_MATMUL_DESC_ALPHA_VECTOR_BATCH_STRIDE",
         "CUBLASLT_EPILOGUE_RELU_BIAS",
         "CUBLASLT_EPILOGUE_RELU_AUX_BIAS",
