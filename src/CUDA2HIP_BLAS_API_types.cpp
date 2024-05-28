@@ -482,6 +482,18 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP {
   {"CUBLASLT_ALGO_CAP_MIN_ALIGNMENT_B_BYTES",                        {"HIPBLASLT_ALGO_CAP_MIN_ALIGNMENT_B_BYTES",                          "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
   {"CUBLASLT_ALGO_CAP_MIN_ALIGNMENT_C_BYTES",                        {"HIPBLASLT_ALGO_CAP_MIN_ALIGNMENT_C_BYTES",                          "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
   {"CUBLASLT_ALGO_CAP_MIN_ALIGNMENT_D_BYTES",                        {"HIPBLASLT_ALGO_CAP_MIN_ALIGNMENT_D_BYTES",                          "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_ALGO_CAP_ATOMIC_SYNC",                                  {"HIPBLASLT_ALGO_CAP_ATOMIC_SYNC",                                    "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"cublasLtMatmulAlgoConfigAttributes_t",                           {"hipblasLtMatmulAlgoConfigAttributes_t",                             "",                                                         CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_ALGO_CONFIG_ID",                                        {"HIPBLASLT_ALGO_CONFIG_ID",                                          "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_ALGO_CONFIG_TILE_ID",                                   {"HIPBLASLT_ALGO_CONFIG_TILE_ID",                                     "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_ALGO_CONFIG_SPLITK_NUM",                                {"HIPBLASLT_ALGO_CONFIG_SPLITK_NUM",                                  "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_ALGO_CONFIG_REDUCTION_SCHEME",                          {"HIPBLASLT_ALGO_CONFIG_REDUCTION_SCHEME",                            "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_ALGO_CONFIG_CTA_SWIZZLING",                             {"HIPBLASLT_ALGO_CONFIG_CTA_SWIZZLING",                               "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_ALGO_CONFIG_CUSTOM_OPTION",                             {"HIPBLASLT_ALGO_CONFIG_CUSTOM_OPTION",                               "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_ALGO_CONFIG_STAGES_ID",                                 {"HIPBLASLT_ALGO_CONFIG_STAGES_ID",                                   "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_ALGO_CONFIG_INNER_SHAPE_ID",                            {"HIPBLASLT_ALGO_CONFIG_INNER_SHAPE_ID",                              "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_ALGO_CONFIG_CLUSTER_SHAPE_ID",                          {"HIPBLASLT_ALGO_CONFIG_CLUSTER_SHAPE_ID",                            "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"cublasLtLoggerCallback_t",                                       {"hipblasLtLoggerCallback_t",                                         "",                                                         CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_TYPE_NAME_VER_MAP {
@@ -874,6 +886,17 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_TYPE_NAME_VER_MAP {
   {"CUBLASLT_ALGO_CAP_MIN_ALIGNMENT_C_BYTES",                        {CUDA_110, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 11001, CUBLAS_VERSION 11000, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 0
   {"CUBLASLT_ALGO_CAP_MIN_ALIGNMENT_D_BYTES",                        {CUDA_110, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 11001, CUBLAS_VERSION 11000, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 0
   {"CUBLASLT_ALGO_CAP_ATOMIC_SYNC",                                  {CUDA_122, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 12022, CUBLAS_VERSION 120205, CUBLAS_VER_MAJOR 12 CUBLAS_VER_MINOR 2 CUBLAS_VER_PATCH 5
+  {"cublasLtMatmulAlgoConfigAttributes_t",                           {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_ALGO_CONFIG_ID",                                        {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_ALGO_CONFIG_TILE_ID",                                   {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_ALGO_CONFIG_SPLITK_NUM",                                {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_ALGO_CONFIG_REDUCTION_SCHEME",                          {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_ALGO_CONFIG_CTA_SWIZZLING",                             {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_ALGO_CONFIG_CUSTOM_OPTION",                             {CUDA_101, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_ALGO_CONFIG_STAGES_ID",                                 {CUDA_110, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 11001, CUBLAS_VERSION 11000, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 0
+  {"CUBLASLT_ALGO_CONFIG_INNER_SHAPE_ID",                            {CUDA_118, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_ALGO_CONFIG_CLUSTER_SHAPE_ID",                          {CUDA_118, CUDA_0,   CUDA_0  }},
+  {"cublasLtLoggerCallback_t",                                       {CUDA_110, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 11003, CUBLAS_VERSION 11200, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 2
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_TYPE_NAME_VER_MAP {

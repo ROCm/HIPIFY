@@ -146,6 +146,7 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
+|`CUBLASLT_ALGO_CAP_ATOMIC_SYNC`|12.2| | | | | | | | | |
 |`CUBLASLT_ALGO_CAP_CTA_SWIZZLING_SUPPORT`|10.1| | | | | | | | | |
 |`CUBLASLT_ALGO_CAP_CUSTOM_MEMORY_ORDER`|10.1| | | | | | | | | |
 |`CUBLASLT_ALGO_CAP_CUSTOM_OPTION_MAX`|10.1| | | | | | | | | |
@@ -164,6 +165,15 @@
 |`CUBLASLT_ALGO_CAP_STRIDED_BATCH_SUPPORT`|10.1| | | | | | | | | |
 |`CUBLASLT_ALGO_CAP_TILE_IDS`|10.1| | | | | | | | | |
 |`CUBLASLT_ALGO_CAP_UPLO_SUPPORT`|10.1| | | | | | | | | |
+|`CUBLASLT_ALGO_CONFIG_CLUSTER_SHAPE_ID`|11.8| | | | | | | | | |
+|`CUBLASLT_ALGO_CONFIG_CTA_SWIZZLING`|10.1| | | | | | | | | |
+|`CUBLASLT_ALGO_CONFIG_CUSTOM_OPTION`|10.1| | | | | | | | | |
+|`CUBLASLT_ALGO_CONFIG_ID`|10.1| | | | | | | | | |
+|`CUBLASLT_ALGO_CONFIG_INNER_SHAPE_ID`|11.8| | | | | | | | | |
+|`CUBLASLT_ALGO_CONFIG_REDUCTION_SCHEME`|10.1| | | | | | | | | |
+|`CUBLASLT_ALGO_CONFIG_SPLITK_NUM`|10.1| | | | | | | | | |
+|`CUBLASLT_ALGO_CONFIG_STAGES_ID`|11.0| | | | | | | | | |
+|`CUBLASLT_ALGO_CONFIG_TILE_ID`|10.1| | | | | | | | | |
 |`CUBLASLT_CLUSTER_SHAPE_10x1x1`|11.8| | | | | | | | | |
 |`CUBLASLT_CLUSTER_SHAPE_11x1x1`|11.8| | | | | | | | | |
 |`CUBLASLT_CLUSTER_SHAPE_12x1x1`|11.8| | | | | | | | | |
@@ -412,7 +422,9 @@
 |`cublasLtContext`|10.1| | | | | | | | | |
 |`cublasLtEpilogue_t`|10.1| | | |`hipblasLtEpilogue_t`|5.5.0| | | | |
 |`cublasLtHandle_t`|10.1| | | |`hipblasLtHandle_t`|5.5.0| | | | |
+|`cublasLtLoggerCallback_t`|11.0| | | | | | | | | |
 |`cublasLtMatmulAlgoCapAttributes_t`|10.1| | | | | | | | | |
+|`cublasLtMatmulAlgoConfigAttributes_t`|10.1| | | | | | | | | |
 |`cublasLtMatmulAlgo_t`|10.1| | | |`hipblasLtMatmulAlgo_t`|5.5.0| | | | |
 |`cublasLtMatmulDescAttributes_t`|10.1| | | |`hipblasLtMatmulDescAttributes_t`|5.5.0| | | | |
 |`cublasLtMatmulDescOpaque_t`|11.0| | | |`hipblasLtMatmulDescOpaque_t`|5.5.0| | | | |
@@ -1322,9 +1334,17 @@
 |`cublasLtGetVersion`|10.1| | | | | | | | | |
 |`cublasLtHeuristicsCacheGetCapacity`|11.8| | | | | | | | | |
 |`cublasLtHeuristicsCacheSetCapacity`|11.8| | | | | | | | | |
+|`cublasLtLoggerForceDisable`|11.0| | | | | | | | | |
+|`cublasLtLoggerOpenFile`|11.0| | | | | | | | | |
+|`cublasLtLoggerSetCallback`|11.0| | | | | | | | | |
+|`cublasLtLoggerSetFile`|11.0| | | | | | | | | |
+|`cublasLtLoggerSetLevel`|11.0| | | | | | | | | |
+|`cublasLtLoggerSetMask`|11.0| | | | | | | | | |
 |`cublasLtMatmul`|10.1| | | |`hipblasLtMatmul`|5.5.0| | | | |
 |`cublasLtMatmulAlgoCapGetAttribute`|10.1| | | | | | | | | |
 |`cublasLtMatmulAlgoCheck`|10.1| | | | | | | | | |
+|`cublasLtMatmulAlgoConfigGetAttribute`|10.1| | | | | | | | | |
+|`cublasLtMatmulAlgoConfigSetAttribute`|10.1| | | | | | | | | |
 |`cublasLtMatmulAlgoGetHeuristic`|10.1| | | |`hipblasLtMatmulAlgoGetHeuristic`|5.5.0| | | | |
 |`cublasLtMatmulAlgoGetIds`|10.1| | | | | | | | | |
 |`cublasLtMatmulAlgoInit`|10.1| | | | | | | | | |

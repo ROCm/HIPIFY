@@ -1120,6 +1120,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
   {"cublasLtMatmulAlgoInit",                               {"hipblasLtMatmulAlgoInit",                                   "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
   {"cublasLtMatmulAlgoCheck",                              {"hipblasLtMatmulAlgoCheck",                                  "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
   {"cublasLtMatmulAlgoCapGetAttribute",                    {"hipblasLtMatmulAlgoCapGetAttribute",                        "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
+  {"cublasLtMatmulAlgoConfigSetAttribute",                 {"hipblasLtMatmulAlgoConfigSetAttribute",                     "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
+  {"cublasLtMatmulAlgoConfigGetAttribute",                 {"hipblasLtMatmulAlgoConfigGetAttribute",                     "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
+  {"cublasLtLoggerSetCallback",                            {"hipblasLtLoggerSetCallback",                                "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
+  {"cublasLtLoggerSetFile",                                {"hipblasLtLoggerSetFile",                                    "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
+  {"cublasLtLoggerOpenFile",                               {"hipblasLtLoggerOpenFile",                                   "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
+  {"cublasLtLoggerSetLevel",                               {"hipblasLtLoggerSetLevel",                                   "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
+  {"cublasLtLoggerSetMask",                                {"hipblasLtLoggerSetMask",                                    "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
+  {"cublasLtLoggerForceDisable",                           {"hipblasLtLoggerForceDisable",                               "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_FUNCTION_VER_MAP {
@@ -1607,6 +1615,14 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_FUNCTION_VER_MAP {
   {"cublasLtMatmulAlgoInit",                               {CUDA_101, CUDA_0,   CUDA_0   }},
   {"cublasLtMatmulAlgoCheck",                              {CUDA_101, CUDA_0,   CUDA_0   }},
   {"cublasLtMatmulAlgoCapGetAttribute",                    {CUDA_101, CUDA_0,   CUDA_0   }},
+  {"cublasLtMatmulAlgoConfigSetAttribute",                 {CUDA_101, CUDA_0,   CUDA_0   }},
+  {"cublasLtMatmulAlgoConfigGetAttribute",                 {CUDA_101, CUDA_0,   CUDA_0   }},
+  {"cublasLtLoggerSetCallback",                            {CUDA_110, CUDA_0,   CUDA_0   }}, // A: CUDA_VERSION 11003, CUBLAS_VERSION 11200, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 2
+  {"cublasLtLoggerSetFile",                                {CUDA_110, CUDA_0,   CUDA_0   }}, // A: CUDA_VERSION 11003, CUBLAS_VERSION 11200, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 2
+  {"cublasLtLoggerOpenFile",                               {CUDA_110, CUDA_0,   CUDA_0   }}, // A: CUDA_VERSION 11003, CUBLAS_VERSION 11200, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 2
+  {"cublasLtLoggerSetLevel",                               {CUDA_110, CUDA_0,   CUDA_0   }}, // A: CUDA_VERSION 11003, CUBLAS_VERSION 11200, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 2
+  {"cublasLtLoggerSetMask",                                {CUDA_110, CUDA_0,   CUDA_0   }}, // A: CUDA_VERSION 11003, CUBLAS_VERSION 11200, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 2
+  {"cublasLtLoggerForceDisable",                           {CUDA_110, CUDA_0,   CUDA_0   }}, // A: CUDA_VERSION 11003, CUBLAS_VERSION 11200, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 2
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_FUNCTION_VER_MAP {
