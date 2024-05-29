@@ -47,7 +47,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RAND_FUNCTION_MAP {
   {"curandGetScrambleConstants64",                  {"hiprandGetScrambleConstants64",                  "", CONV_LIB_FUNC, API_RAND, 2}},
   {"curandGetVersion",                              {"hiprandGetVersion",                              "", CONV_LIB_FUNC, API_RAND, 2}},
   {"curandSetGeneratorOffset",                      {"hiprandSetGeneratorOffset",                      "", CONV_LIB_FUNC, API_RAND, 2}},
-  {"curandSetGeneratorOrdering",                    {"hiprandSetGeneratorOrdering",                    "", CONV_LIB_FUNC, API_RAND, 2, HIP_UNSUPPORTED}},
+  {"curandSetGeneratorOrdering",                    {"hiprandSetGeneratorOrdering",                    "", CONV_LIB_FUNC, API_RAND, 2, HIP_EXPERIMENTAL}},
   {"curandSetPseudoRandomGeneratorSeed",            {"hiprandSetPseudoRandomGeneratorSeed",            "", CONV_LIB_FUNC, API_RAND, 2}},
   {"curandSetQuasiRandomGeneratorDimensions",       {"hiprandSetQuasiRandomGeneratorDimensions",       "", CONV_LIB_FUNC, API_RAND, 2}},
   {"curandSetStream",                               {"hiprandSetStream",                               "", CONV_LIB_FUNC, API_RAND, 2}},
@@ -140,6 +140,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RAND_FUNCTION_VER_MAP {
   {"hiprandGetDirectionVectors64",                  {HIP_6000, HIP_0,    HIP_0   }},
   {"hiprandGetScrambleConstants32",                 {HIP_6000, HIP_0,    HIP_0   }},
   {"hiprandGetScrambleConstants64",                 {HIP_6000, HIP_0,    HIP_0   }},
+  {"hiprandSetGeneratorOrdering",                   {HIP_6020, HIP_0,    HIP_0,  HIP_LATEST}},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_RAND_API_SECTION_MAP {
