@@ -1407,6 +1407,15 @@ my %experimental_funcs = (
     "cusolverDnDestroyParams" => "6.2.0",
     "cusolverDnCreateParams" => "6.2.0",
     "cusolverAlgMode_t" => "6.2.0",
+    "curandStateSobol64_t" => "6.2.0",
+    "curandStateSobol64" => "6.2.0",
+    "curandStateScrambledSobol64_t" => "6.2.0",
+    "curandStateScrambledSobol64" => "6.2.0",
+    "curandStateScrambledSobol32_t" => "6.2.0",
+    "curandStateScrambledSobol32" => "6.2.0",
+    "curandSetGeneratorOrdering" => "6.2.0",
+    "curandOrdering_t" => "6.2.0",
+    "curandOrdering" => "6.2.0",
     "cublasZgbmv_v2_64" => "6.2.0",
     "cublasZgbmv_64" => "6.2.0",
     "cublasSgbmv_v2_64" => "6.2.0",
@@ -1418,6 +1427,12 @@ my %experimental_funcs = (
     "CUSOLVER_ALG_1" => "6.2.0",
     "CUSOLVER_ALG_0" => "6.2.0",
     "CUSOLVERDN_GETRF" => "6.2.0",
+    "CURAND_ORDERING_QUASI_DEFAULT" => "6.2.0",
+    "CURAND_ORDERING_PSEUDO_SEEDED" => "6.2.0",
+    "CURAND_ORDERING_PSEUDO_LEGACY" => "6.2.0",
+    "CURAND_ORDERING_PSEUDO_DYNAMIC" => "6.2.0",
+    "CURAND_ORDERING_PSEUDO_DEFAULT" => "6.2.0",
+    "CURAND_ORDERING_PSEUDO_BEST" => "6.2.0",
     "CUBLASLT_MATMUL_DESC_AMAX_D_POINTER" => "6.2.0"
 );
 
@@ -1564,16 +1579,31 @@ sub experimentalSubstitutions {
     subst("cublasSgbmv_v2_64", "hipblasSgbmv_64", "library");
     subst("cublasZgbmv_64", "hipblasZgbmv_64", "library");
     subst("cublasZgbmv_v2_64", "hipblasZgbmv_64", "library");
+    subst("curandSetGeneratorOrdering", "hiprandSetGeneratorOrdering", "library");
     subst("cusolverDnCreateParams", "hipsolverDnCreateParams", "library");
     subst("cusolverDnDestroyParams", "hipsolverDnDestroyParams", "library");
     subst("cusolverDnSetAdvOptions", "hipsolverDnSetAdvOptions", "library");
     subst("cusolverDnXgetrf", "hipsolverDnXgetrf", "library");
     subst("cusolverDnXgetrf_bufferSize", "hipsolverDnXgetrf_bufferSize", "library");
     subst("cusolverDnXgetrs", "hipsolverDnXgetrs", "library");
+    subst("curandOrdering", "hiprandOrdering", "type");
+    subst("curandOrdering_t", "hiprandOrdering_t", "type");
+    subst("curandStateScrambledSobol32", "hiprandStateScrambledSobol32", "type");
+    subst("curandStateScrambledSobol32_t", "hiprandStateScrambledSobol32_t", "type");
+    subst("curandStateScrambledSobol64", "hiprandStateScrambledSobol64", "type");
+    subst("curandStateScrambledSobol64_t", "hiprandStateScrambledSobol64_t", "type");
+    subst("curandStateSobol64", "hiprandStateSobol64", "type");
+    subst("curandStateSobol64_t", "hiprandStateSobol64_t", "type");
     subst("cusolverAlgMode_t", "hipsolverAlgMode_t", "type");
     subst("cusolverDnFunction_t", "hipsolverDnFunction_t", "type");
     subst("cusolverDnParams_t", "hipsolverDnParams_t", "type");
     subst("CUBLASLT_MATMUL_DESC_AMAX_D_POINTER", "HIPBLASLT_MATMUL_DESC_AMAX_D_POINTER", "numeric_literal");
+    subst("CURAND_ORDERING_PSEUDO_BEST", "HIPRAND_ORDERING_PSEUDO_BEST", "numeric_literal");
+    subst("CURAND_ORDERING_PSEUDO_DEFAULT", "HIPRAND_ORDERING_PSEUDO_DEFAULT", "numeric_literal");
+    subst("CURAND_ORDERING_PSEUDO_DYNAMIC", "HIPRAND_ORDERING_PSEUDO_DYNAMIC", "numeric_literal");
+    subst("CURAND_ORDERING_PSEUDO_LEGACY", "HIPRAND_ORDERING_PSEUDO_LEGACY", "numeric_literal");
+    subst("CURAND_ORDERING_PSEUDO_SEEDED", "HIPRAND_ORDERING_PSEUDO_SEEDED", "numeric_literal");
+    subst("CURAND_ORDERING_QUASI_DEFAULT", "HIPRAND_ORDERING_QUASI_DEFAULT", "numeric_literal");
     subst("CUSOLVERDN_GETRF", "HIPSOLVERDN_GETRF", "numeric_literal");
     subst("CUSOLVER_ALG_0", "HIPSOLVER_ALG_0", "numeric_literal");
     subst("CUSOLVER_ALG_1", "HIPSOLVER_ALG_1", "numeric_literal");
@@ -5700,7 +5730,7 @@ sub simpleSubstitutions {
     subst("curandStateXORWOW", "hiprandStateXORWOW", "type");
     subst("curandStateXORWOW_t", "hiprandStateXORWOW_t", "type");
     subst("curandState_t", "hiprandState_t", "type");
-    subst("curandStatus", "hiprandStatus_t", "type");
+    subst("curandStatus", "hiprandStatus", "type");
     subst("curandStatus_t", "hiprandStatus_t", "type");
     subst("cusolverDnHandle_t", "hipsolverHandle_t", "type");
     subst("cusolverEigMode_t", "hipsolverEigMode_t", "type");
@@ -8590,15 +8620,6 @@ sub warnUnsupportedFunctions {
         "curand_mtgp32_single_specific",
         "curand_mtgp32_single",
         "curand_Philox4x32_10",
-        "curandStateSobol64_t",
-        "curandStateSobol64",
-        "curandStateScrambledSobol64_t",
-        "curandStateScrambledSobol64",
-        "curandStateScrambledSobol32_t",
-        "curandStateScrambledSobol32",
-        "curandSetGeneratorOrdering",
-        "curandOrdering_t",
-        "curandOrdering",
         "curandMethod_t",
         "curandMethod",
         "curandHistogramM2_t",
@@ -10355,12 +10376,6 @@ sub warnUnsupportedFunctions {
         "CUSOLVERDN_POTRF",
         "CURAND_REJECTION",
         "CURAND_POISSON",
-        "CURAND_ORDERING_QUASI_DEFAULT",
-        "CURAND_ORDERING_PSEUDO_SEEDED",
-        "CURAND_ORDERING_PSEUDO_LEGACY",
-        "CURAND_ORDERING_PSEUDO_DYNAMIC",
-        "CURAND_ORDERING_PSEUDO_DEFAULT",
-        "CURAND_ORDERING_PSEUDO_BEST",
         "CURAND_M2",
         "CURAND_M1",
         "CURAND_KNUTH",
