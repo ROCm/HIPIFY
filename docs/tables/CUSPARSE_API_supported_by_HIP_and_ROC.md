@@ -224,33 +224,33 @@
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|**ROC**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
 |`cusparseCopyMatDescr`|8.0| | |12.0|`hipsparseCopyMatDescr`|1.9.2| | | | |`rocsparse_copy_mat_descr`|1.9.0| | | | |
-|`cusparseCreateBsric02Info`| |12.2| | |`hipsparseCreateBsric02Info`|3.8.0|6.1.0| | | |`rocsparse_create_mat_info`|1.9.0| | | | |
-|`cusparseCreateBsrilu02Info`| |12.2| | |`hipsparseCreateBsrilu02Info`|3.9.0|6.1.0| | | |`rocsparse_create_mat_info`|1.9.0| | | | |
-|`cusparseCreateBsrsm2Info`| |12.2| | |`hipsparseCreateBsrsm2Info`|4.5.0|6.1.0| | | |`rocsparse_create_mat_info`|1.9.0| | | | |
-|`cusparseCreateBsrsv2Info`| |12.2| | |`hipsparseCreateBsrsv2Info`|3.6.0|6.1.0| | | |`rocsparse_create_mat_info`|1.9.0| | | | |
-|`cusparseCreateColorInfo`| |12.2| | |`hipsparseCreateColorInfo`|4.5.0|6.1.0| | | |`rocsparse_create_color_info`|4.5.0| | | | |
-|`cusparseCreateCsrgemm2Info`| |11.0| |12.0|`hipsparseCreateCsrgemm2Info`|2.8.0| | | | |`rocsparse_create_mat_info`|1.9.0| | | | |
-|`cusparseCreateCsric02Info`| |12.2| | |`hipsparseCreateCsric02Info`|3.1.0|6.1.0| | | |`rocsparse_create_mat_info`|1.9.0| | | | |
-|`cusparseCreateCsrilu02Info`| |12.2| | |`hipsparseCreateCsrilu02Info`|1.9.2|6.1.0| | | |`rocsparse_create_mat_info`|1.9.0| | | | |
-|`cusparseCreateCsrsm2Info`|9.2|11.3| |12.0|`hipsparseCreateCsrsm2Info`|3.1.0| | | | |`rocsparse_create_mat_info`|1.9.0| | | | |
-|`cusparseCreateCsrsv2Info`| |11.3| |12.0|`hipsparseCreateCsrsv2Info`|1.9.2| | | | |`rocsparse_create_mat_info`|1.9.0| | | | |
-|`cusparseCreateHybMat`| |10.2| |11.0|`hipsparseCreateHybMat`|1.9.2| | | | |`rocsparse_create_hyb_mat`|1.9.0| | | | |
+|`cusparseCreateBsric02Info`| |12.2| | |`hipsparseCreateBsric02Info`|3.8.0|6.2.0| | | |`rocsparse_create_mat_info`|1.9.0| | | | |
+|`cusparseCreateBsrilu02Info`| |12.2| | |`hipsparseCreateBsrilu02Info`|3.9.0|6.2.0| | | |`rocsparse_create_mat_info`|1.9.0| | | | |
+|`cusparseCreateBsrsm2Info`| |12.2| | |`hipsparseCreateBsrsm2Info`|4.5.0|6.2.0| | | |`rocsparse_create_mat_info`|1.9.0| | | | |
+|`cusparseCreateBsrsv2Info`| |12.2| | |`hipsparseCreateBsrsv2Info`|3.6.0|6.2.0| | | |`rocsparse_create_mat_info`|1.9.0| | | | |
+|`cusparseCreateColorInfo`| |12.2| | |`hipsparseCreateColorInfo`|4.5.0|6.2.0| | | |`rocsparse_create_color_info`|4.5.0| | | | |
+|`cusparseCreateCsrgemm2Info`| |11.0| |12.0|`hipsparseCreateCsrgemm2Info`|2.8.0|3.9.0| | | |`rocsparse_create_mat_info`|1.9.0| | | | |
+|`cusparseCreateCsric02Info`| |12.2| | |`hipsparseCreateCsric02Info`|3.1.0|6.2.0| | | |`rocsparse_create_mat_info`|1.9.0| | | | |
+|`cusparseCreateCsrilu02Info`| |12.2| | |`hipsparseCreateCsrilu02Info`|1.9.2|6.2.0| | | |`rocsparse_create_mat_info`|1.9.0| | | | |
+|`cusparseCreateCsrsm2Info`|9.2|11.3| |12.0|`hipsparseCreateCsrsm2Info`|3.1.0|5.6.0| | | |`rocsparse_create_mat_info`|1.9.0| | | | |
+|`cusparseCreateCsrsv2Info`| |11.3| |12.0|`hipsparseCreateCsrsv2Info`|1.9.2|5.6.0| | | |`rocsparse_create_mat_info`|1.9.0| | | | |
+|`cusparseCreateHybMat`| |10.2| |11.0|`hipsparseCreateHybMat`|1.9.2|3.9.0| | | |`rocsparse_create_hyb_mat`|1.9.0| | | | |
 |`cusparseCreateMatDescr`| | | | |`hipsparseCreateMatDescr`|1.9.2| | | | |`rocsparse_create_mat_descr`|1.9.0| | | | |
-|`cusparseCreatePruneInfo`|9.0|12.2| | |`hipsparseCreatePruneInfo`|3.9.0|6.1.0| | | |`rocsparse_create_mat_info`|1.9.0| | | | |
+|`cusparseCreatePruneInfo`|9.0|12.2| | |`hipsparseCreatePruneInfo`|3.9.0|6.2.0| | | |`rocsparse_create_mat_info`|1.9.0| | | | |
 |`cusparseCreateSolveAnalysisInfo`| |10.2| |11.0| | | | | | | | | | | | |
-|`cusparseDestroyBsric02Info`| |12.2| | |`hipsparseDestroyBsric02Info`|3.8.0|6.1.0| | | |`rocsparse_destroy_mat_info`|1.9.0| | | | |
-|`cusparseDestroyBsrilu02Info`| |12.2| | |`hipsparseDestroyBsrilu02Info`|3.9.0|6.1.0| | | |`rocsparse_destroy_mat_info`|1.9.0| | | | |
-|`cusparseDestroyBsrsm2Info`| |12.2| | |`hipsparseDestroyBsrsm2Info`|4.5.0|6.1.0| | | |`rocsparse_destroy_mat_info`|1.9.0| | | | |
-|`cusparseDestroyBsrsv2Info`| |12.2| | |`hipsparseDestroyBsrsv2Info`|3.6.0|6.1.0| | | |`rocsparse_destroy_mat_info`|1.9.0| | | | |
-|`cusparseDestroyColorInfo`| |12.2| | |`hipsparseDestroyColorInfo`|4.5.0|6.1.0| | | |`rocsparse_destroy_color_info`|4.5.0| | | | |
-|`cusparseDestroyCsrgemm2Info`| |11.0| |12.0|`hipsparseDestroyCsrgemm2Info`|2.8.0| | | | |`rocsparse_destroy_mat_info`|1.9.0| | | | |
-|`cusparseDestroyCsric02Info`| |12.2| | |`hipsparseDestroyCsric02Info`|3.1.0|6.1.0| | | |`rocsparse_destroy_mat_info`|1.9.0| | | | |
-|`cusparseDestroyCsrilu02Info`| |12.2| | |`hipsparseDestroyCsrilu02Info`|1.9.2|6.1.0| | | |`rocsparse_destroy_mat_info`|1.9.0| | | | |
-|`cusparseDestroyCsrsm2Info`|9.2|11.3| |12.0|`hipsparseDestroyCsrsm2Info`|3.1.0| | | | |`rocsparse_destroy_mat_info`|1.9.0| | | | |
-|`cusparseDestroyCsrsv2Info`| |11.3| |12.0|`hipsparseDestroyCsrsv2Info`|1.9.2| | | | |`rocsparse_destroy_mat_info`|1.9.0| | | | |
-|`cusparseDestroyHybMat`| |10.2| |11.0|`hipsparseDestroyHybMat`|1.9.2| | | | |`rocsparse_destroy_hyb_mat`|1.9.0| | | | |
+|`cusparseDestroyBsric02Info`| |12.2| | |`hipsparseDestroyBsric02Info`|3.8.0|6.2.0| | | |`rocsparse_destroy_mat_info`|1.9.0| | | | |
+|`cusparseDestroyBsrilu02Info`| |12.2| | |`hipsparseDestroyBsrilu02Info`|3.9.0|6.2.0| | | |`rocsparse_destroy_mat_info`|1.9.0| | | | |
+|`cusparseDestroyBsrsm2Info`| |12.2| | |`hipsparseDestroyBsrsm2Info`|4.5.0|6.2.0| | | |`rocsparse_destroy_mat_info`|1.9.0| | | | |
+|`cusparseDestroyBsrsv2Info`| |12.2| | |`hipsparseDestroyBsrsv2Info`|3.6.0|6.2.0| | | |`rocsparse_destroy_mat_info`|1.9.0| | | | |
+|`cusparseDestroyColorInfo`| |12.2| | |`hipsparseDestroyColorInfo`|4.5.0|6.2.0| | | |`rocsparse_destroy_color_info`|4.5.0| | | | |
+|`cusparseDestroyCsrgemm2Info`| |11.0| |12.0|`hipsparseDestroyCsrgemm2Info`|2.8.0|3.9.0| | | |`rocsparse_destroy_mat_info`|1.9.0| | | | |
+|`cusparseDestroyCsric02Info`| |12.2| | |`hipsparseDestroyCsric02Info`|3.1.0|6.2.0| | | |`rocsparse_destroy_mat_info`|1.9.0| | | | |
+|`cusparseDestroyCsrilu02Info`| |12.2| | |`hipsparseDestroyCsrilu02Info`|1.9.2|6.2.0| | | |`rocsparse_destroy_mat_info`|1.9.0| | | | |
+|`cusparseDestroyCsrsm2Info`|9.2|11.3| |12.0|`hipsparseDestroyCsrsm2Info`|3.1.0|5.6.0| | | |`rocsparse_destroy_mat_info`|1.9.0| | | | |
+|`cusparseDestroyCsrsv2Info`| |11.3| |12.0|`hipsparseDestroyCsrsv2Info`|1.9.2|5.6.0| | | |`rocsparse_destroy_mat_info`|1.9.0| | | | |
+|`cusparseDestroyHybMat`| |10.2| |11.0|`hipsparseDestroyHybMat`|1.9.2|3.9.0| | | |`rocsparse_destroy_hyb_mat`|1.9.0| | | | |
 |`cusparseDestroyMatDescr`| | | | |`hipsparseDestroyMatDescr`|1.9.2| | | | |`rocsparse_destroy_mat_descr`|1.9.0| | | | |
-|`cusparseDestroyPruneInfo`|9.0|12.2| | |`hipsparseDestroyPruneInfo`|3.9.0|6.1.0| | | |`rocsparse_destroy_mat_info`|1.9.0| | | | |
+|`cusparseDestroyPruneInfo`|9.0|12.2| | |`hipsparseDestroyPruneInfo`|3.9.0|6.2.0| | | |`rocsparse_destroy_mat_info`|1.9.0| | | | |
 |`cusparseDestroySolveAnalysisInfo`| |10.2| |11.0| | | | | | | | | | | | |
 |`cusparseGetLevelInfo`| | | |11.0| | | | | | | | | | | | |
 |`cusparseGetMatDiagType`| | | | |`hipsparseGetMatDiagType`|1.9.2| | | | |`rocsparse_get_mat_diag_type`|1.9.0| | | | |
@@ -266,27 +266,27 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|**ROC**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
-|`cusparseCaxpyi`| |11.0| |12.0|`hipsparseCaxpyi`|3.1.0| | | | |`rocsparse_caxpyi`|1.9.0| | | | |
-|`cusparseCdotci`| |10.2| |11.0|`hipsparseCdotci`|3.1.0| | | | |`rocsparse_cdotci`|3.0.0| | | | |
-|`cusparseCdoti`| |10.2| |11.0|`hipsparseCdoti`|3.1.0| | | | |`rocsparse_cdoti`|1.9.0| | | | |
+|`cusparseCaxpyi`| |11.0| |12.0|`hipsparseCaxpyi`|3.1.0|3.9.0| | | |`rocsparse_caxpyi`|1.9.0| | | | |
+|`cusparseCdotci`| |10.2| |11.0|`hipsparseCdotci`|3.1.0|3.9.0| | | |`rocsparse_cdotci`|3.0.0| | | | |
+|`cusparseCdoti`| |10.2| |11.0|`hipsparseCdoti`|3.1.0|3.9.0| | | |`rocsparse_cdoti`|1.9.0| | | | |
 |`cusparseCgthr`| |11.0| |12.0|`hipsparseCgthr`|3.1.0| | | | |`rocsparse_cgthr`|1.9.0| | | | |
 |`cusparseCgthrz`| |11.0| |12.0|`hipsparseCgthrz`|3.1.0| | | | |`rocsparse_cgthrz`|1.9.0| | | | |
 |`cusparseCsctr`| |11.0| |12.0|`hipsparseCsctr`|3.1.0| | | | |`rocsparse_csctr`|1.9.0| | | | |
-|`cusparseDaxpyi`| |11.0| |12.0|`hipsparseDaxpyi`|1.9.2| | | | |`rocsparse_daxpyi`|1.9.0| | | | |
-|`cusparseDdoti`| |10.2| |11.0|`hipsparseDdoti`|1.9.2| | | | |`rocsparse_ddoti`|1.9.0| | | | |
+|`cusparseDaxpyi`| |11.0| |12.0|`hipsparseDaxpyi`|1.9.2|3.9.0| | | |`rocsparse_daxpyi`|1.9.0| | | | |
+|`cusparseDdoti`| |10.2| |11.0|`hipsparseDdoti`|1.9.2|3.9.0| | | |`rocsparse_ddoti`|1.9.0| | | | |
 |`cusparseDgthr`| |11.0| |12.0|`hipsparseDgthr`|1.9.2| | | | |`rocsparse_dgthr`|1.9.0| | | | |
 |`cusparseDgthrz`| |11.0| |12.0|`hipsparseDgthrz`|1.9.2| | | | |`rocsparse_dgthrz`|1.9.0| | | | |
 |`cusparseDroti`| |11.0| |12.0|`hipsparseDroti`|1.9.2| | | | |`rocsparse_droti`|1.9.0| | | | |
 |`cusparseDsctr`| |11.0| |12.0|`hipsparseDsctr`|1.9.2| | | | |`rocsparse_dsctr`|1.9.0| | | | |
-|`cusparseSaxpyi`| |11.0| |12.0|`hipsparseSaxpyi`|1.9.2| | | | |`rocsparse_saxpyi`|1.9.0| | | | |
-|`cusparseSdoti`| |10.2| |11.0|`hipsparseSdoti`|1.9.2| | | | |`rocsparse_sdoti`|1.9.0| | | | |
+|`cusparseSaxpyi`| |11.0| |12.0|`hipsparseSaxpyi`|1.9.2|3.9.0| | | |`rocsparse_saxpyi`|1.9.0| | | | |
+|`cusparseSdoti`| |10.2| |11.0|`hipsparseSdoti`|1.9.2|3.9.0| | | |`rocsparse_sdoti`|1.9.0| | | | |
 |`cusparseSgthr`| |11.0| |12.0|`hipsparseSgthr`|1.9.2| | | | |`rocsparse_sgthr`|1.9.0| | | | |
 |`cusparseSgthrz`| |11.0| |12.0|`hipsparseSgthrz`|1.9.2| | | | |`rocsparse_sgthrz`|1.9.0| | | | |
 |`cusparseSroti`| |11.0| |12.0|`hipsparseSroti`|1.9.2| | | | |`rocsparse_sroti`|1.9.0| | | | |
 |`cusparseSsctr`| |11.0| |12.0|`hipsparseSsctr`|1.9.2| | | | |`rocsparse_ssctr`|1.9.0| | | | |
-|`cusparseZaxpyi`| |11.0| |12.0|`hipsparseZaxpyi`|3.1.0| | | | |`rocsparse_zaxpyi`|1.9.0| | | | |
-|`cusparseZdotci`| |10.2| |11.0|`hipsparseZdotci`|3.1.0| | | | |`rocsparse_zdotci`|3.0.0| | | | |
-|`cusparseZdoti`| |10.2| |11.0|`hipsparseZdoti`|3.1.0| | | | |`rocsparse_zdoti`|1.9.0| | | | |
+|`cusparseZaxpyi`| |11.0| |12.0|`hipsparseZaxpyi`|3.1.0|3.9.0| | | |`rocsparse_zaxpyi`|1.9.0| | | | |
+|`cusparseZdotci`| |10.2| |11.0|`hipsparseZdotci`|3.1.0|3.9.0| | | |`rocsparse_zdotci`|3.0.0| | | | |
+|`cusparseZdoti`| |10.2| |11.0|`hipsparseZdoti`|3.1.0|3.9.0| | | |`rocsparse_zdoti`|1.9.0| | | | |
 |`cusparseZgthr`| |11.0| |12.0|`hipsparseZgthr`|3.1.0| | | | |`rocsparse_zgthr`|1.9.0| | | | |
 |`cusparseZgthrz`| |11.0| |12.0|`hipsparseZgthrz`|3.1.0| | | | |`rocsparse_zgthrz`|1.9.0| | | | |
 |`cusparseZsctr`| |11.0| |12.0|`hipsparseZsctr`|3.1.0| | | | |`rocsparse_zsctr`|1.9.0| | | | |
