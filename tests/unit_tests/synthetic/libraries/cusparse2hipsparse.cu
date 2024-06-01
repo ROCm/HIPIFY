@@ -3213,16 +3213,22 @@ int main() {
   cusparseConstSpVecDescr_t constSpVecDescr = nullptr;
 
   // CHECK: hipsparseConstSpMatDescr_t constSpMatDescr = nullptr;
+  // CHECK-NEXT: hipsparseConstSpMatDescr_t constSpMatDescrA = nullptr;
   // CHECK-NEXT: hipsparseConstSpMatDescr_t constSpMatDescrB = nullptr;
   cusparseConstSpMatDescr_t constSpMatDescr = nullptr;
+  cusparseConstSpMatDescr_t constSpMatDescrA = nullptr;
   cusparseConstSpMatDescr_t constSpMatDescrB = nullptr;
 
   // CHECK: hipsparseConstDnVecDescr_t constDnVecDescr = nullptr;
+  // CHECK-NEXT: hipsparseConstDnVecDescr_t constDnVecDescrX = nullptr;
   cusparseConstDnVecDescr_t constDnVecDescr = nullptr;
+  cusparseConstDnVecDescr_t constDnVecDescrX = nullptr;
 
   // CHECK: hipsparseConstDnMatDescr_t constDnMatDescr = nullptr;
+  // CHECK-NEXT: hipsparseConstDnMatDescr_t constDnMatDescrA = nullptr;
   // CHECK-NEXT: hipsparseConstDnMatDescr_t constDnMatDescrB = nullptr;
   cusparseConstDnMatDescr_t constDnMatDescr = nullptr;
+  cusparseConstDnMatDescr_t constDnMatDescrA = nullptr;
   cusparseConstDnMatDescr_t constDnMatDescrB = nullptr;
 
   // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCreateConstSpVec(cusparseConstSpVecDescr_t* spVecDescr, int64_t size, int64_t nnz, const void* indices, const void* values, cusparseIndexType_t idxType, cusparseIndexBase_t idxBase, cudaDataType valueType);
@@ -3521,5 +3527,11 @@ int main() {
   status_t = cusparseConstCscGet(constSpMatDescr, &rows, &cols, &nnz, cscColOffsets_const, cscRowInd_const, cscValues_const, &cscColOffsetsType, &cscRowIndType, &indexBase_t, &dataType);
 #endif
 
+#if CUDA_VERSION >= 12040
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseSpMV_preprocess(cusparseHandle_t handle, cusparseOperation_t opA, const void* alpha, cusparseConstSpMatDescr_t matA, cusparseConstDnVecDescr_t vecX, const void* beta, cusparseDnVecDescr_t vecY, cudaDataType computeType, cusparseSpMVAlg_t alg, void* externalBuffer);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpMV_preprocess(hipsparseHandle_t handle, hipsparseOperation_t opA, const void* alpha, hipsparseConstSpMatDescr_t matA, hipsparseConstDnVecDescr_t vecX, const void* beta, const hipsparseDnVecDescr_t vecY, hipDataType computeType, hipsparseSpMVAlg_t alg, void* externalBuffer);
+  // CHECK: status_t = hipsparseSpMV_preprocess(handle_t, opA, alpha, constSpMatDescrA, constDnVecDescrX, beta, vecY, dataType, spMVAlg_t, tempBuffer);
+  status_t = cusparseSpMV_preprocess(handle_t, opA, alpha, constSpMatDescrA, constDnVecDescrX, beta, vecY, dataType, spMVAlg_t, tempBuffer);
+#endif
   return 0;
 }
