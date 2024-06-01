@@ -4988,6 +4988,7 @@ sub simpleSubstitutions {
     subst("cusparseSpMM_preprocess", "hipsparseSpMM_preprocess", "library");
     subst("cusparseSpMV", "hipsparseSpMV", "library");
     subst("cusparseSpMV_bufferSize", "hipsparseSpMV_bufferSize", "library");
+    subst("cusparseSpMV_preprocess", "hipsparseSpMV_preprocess", "library");
     subst("cusparseSpMatGetAttribute", "hipsparseSpMatGetAttribute", "library");
     subst("cusparseSpMatGetFormat", "hipsparseSpMatGetFormat", "library");
     subst("cusparseSpMatGetIndexBase", "hipsparseSpMatGetIndexBase", "library");
@@ -8150,7 +8151,6 @@ sub warnUnsupportedFunctions {
         "cusparseSpMatSetNumBatches",
         "cusparseSpMatGetNumBatches",
         "cusparseSpMatDescr",
-        "cusparseSpMV_preprocess",
         "cusparseSpMMOp_destroyPlan",
         "cusparseSpMMOp_createPlan",
         "cusparseSpMMOpPlan_t",
