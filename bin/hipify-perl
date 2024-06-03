@@ -1423,6 +1423,15 @@ my %experimental_funcs = (
     "cudaLaunchAttributeCooperative" => "6.2.0",
     "cudaLaunchAttributeAccessPolicyWindow" => "6.2.0",
     "cudaKernelNodeAttributePriority" => "6.2.0",
+    "cudaGraphKernelNodePortProgrammatic" => "6.2.0",
+    "cudaGraphKernelNodePortLaunchCompletion" => "6.2.0",
+    "cudaGraphKernelNodePortDefault" => "6.2.0",
+    "cudaGraphEdgeData_st" => "6.2.0",
+    "cudaGraphEdgeData" => "6.2.0",
+    "cudaGraphDependencyType_enum" => "6.2.0",
+    "cudaGraphDependencyTypeProgrammatic" => "6.2.0",
+    "cudaGraphDependencyTypeDefault" => "6.2.0",
+    "cudaGraphDependencyType" => "6.2.0",
     "cublasZgbmv_v2_64" => "6.2.0",
     "cublasZgbmv_64" => "6.2.0",
     "cublasSgbmv_v2_64" => "6.2.0",
@@ -1435,6 +1444,10 @@ my %experimental_funcs = (
     "CUlaunchAttributeValue" => "6.2.0",
     "CUlaunchAttributeID_enum" => "6.2.0",
     "CUlaunchAttributeID" => "6.2.0",
+    "CUgraphEdgeData_st" => "6.2.0",
+    "CUgraphEdgeData" => "6.2.0",
+    "CUgraphDependencyType_enum" => "6.2.0",
+    "CUgraphDependencyType" => "6.2.0",
     "CUdriverProcAddressQueryResult_enum" => "6.2.0",
     "CUdriverProcAddressQueryResult" => "6.2.0",
     "CU_STREAM_LEGACY" => "6.2.0",
@@ -1442,6 +1455,11 @@ my %experimental_funcs = (
     "CU_LAUNCH_ATTRIBUTE_COOPERATIVE" => "6.2.0",
     "CU_LAUNCH_ATTRIBUTE_ACCESS_POLICY_WINDOW" => "6.2.0",
     "CU_KERNEL_NODE_ATTRIBUTE_PRIORITY" => "6.2.0",
+    "CU_GRAPH_KERNEL_NODE_PORT_PROGRAMMATIC" => "6.2.0",
+    "CU_GRAPH_KERNEL_NODE_PORT_LAUNCH_ORDER" => "6.2.0",
+    "CU_GRAPH_KERNEL_NODE_PORT_DEFAULT" => "6.2.0",
+    "CU_GRAPH_DEPENDENCY_TYPE_PROGRAMMATIC" => "6.2.0",
+    "CU_GRAPH_DEPENDENCY_TYPE_DEFAULT" => "6.2.0",
     "CU_GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT" => "6.2.0",
     "CU_GET_PROC_ADDRESS_SYMBOL_NOT_FOUND" => "6.2.0",
     "CU_GET_PROC_ADDRESS_SUCCESS" => "6.2.0",
@@ -1609,10 +1627,18 @@ sub experimentalSubstitutions {
     subst("cusolverDnXgetrs", "hipsolverDnXgetrs", "library");
     subst("CUdriverProcAddressQueryResult", "hipDriverProcAddressQueryResult", "type");
     subst("CUdriverProcAddressQueryResult_enum", "hipDriverProcAddressQueryResult", "type");
+    subst("CUgraphDependencyType", "hipGraphDependencyType", "type");
+    subst("CUgraphDependencyType_enum", "hipGraphDependencyType", "type");
+    subst("CUgraphEdgeData", "hipGraphEdgeData", "type");
+    subst("CUgraphEdgeData_st", "hipGraphEdgeData", "type");
     subst("CUlaunchAttributeID", "hipLaunchAttributeID", "type");
     subst("CUlaunchAttributeID_enum", "hipLaunchAttributeID", "type");
     subst("CUlaunchAttributeValue", "hipLaunchAttributeValue", "type");
     subst("CUlaunchAttributeValue_union", "hipLaunchAttributeValue", "type");
+    subst("cudaGraphDependencyType", "hipGraphDependencyType", "type");
+    subst("cudaGraphDependencyType_enum", "hipGraphDependencyType", "type");
+    subst("cudaGraphEdgeData", "hipGraphEdgeData", "type");
+    subst("cudaGraphEdgeData_st", "hipGraphEdgeData", "type");
     subst("cudaLaunchAttributeID", "hipLaunchAttributeID", "type");
     subst("cudaLaunchAttributeValue", "hipLaunchAttributeValue", "type");
     subst("curandOrdering", "hiprandOrdering", "type");
@@ -1639,15 +1665,25 @@ sub experimentalSubstitutions {
     subst("CU_GET_PROC_ADDRESS_SUCCESS", "HIP_GET_PROC_ADDRESS_SUCCESS", "numeric_literal");
     subst("CU_GET_PROC_ADDRESS_SYMBOL_NOT_FOUND", "HIP_GET_PROC_ADDRESS_SYMBOL_NOT_FOUND", "numeric_literal");
     subst("CU_GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT", "HIP_GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT", "numeric_literal");
+    subst("CU_GRAPH_DEPENDENCY_TYPE_DEFAULT", "hipGraphDependencyTypeDefault", "numeric_literal");
+    subst("CU_GRAPH_DEPENDENCY_TYPE_PROGRAMMATIC", "hipGraphDependencyTypeProgrammatic", "numeric_literal");
     subst("CU_KERNEL_NODE_ATTRIBUTE_PRIORITY", "hipKernelNodeAttributePriority", "numeric_literal");
     subst("CU_LAUNCH_ATTRIBUTE_ACCESS_POLICY_WINDOW", "hipLaunchAttributeAccessPolicyWindow", "numeric_literal");
     subst("CU_LAUNCH_ATTRIBUTE_COOPERATIVE", "hipLaunchAttributeCooperative", "numeric_literal");
     subst("CU_LAUNCH_ATTRIBUTE_PRIORITY", "hipLaunchAttributePriority", "numeric_literal");
+    subst("cudaGraphDependencyTypeDefault", "hipGraphDependencyTypeDefault", "numeric_literal");
+    subst("cudaGraphDependencyTypeProgrammatic", "hipGraphDependencyTypeProgrammatic", "numeric_literal");
     subst("cudaKernelNodeAttributePriority", "hipKernelNodeAttributePriority", "numeric_literal");
     subst("cudaLaunchAttributeAccessPolicyWindow", "hipLaunchAttributeAccessPolicyWindow", "numeric_literal");
     subst("cudaLaunchAttributeCooperative", "hipLaunchAttributeCooperative", "numeric_literal");
     subst("cudaLaunchAttributePriority", "hipLaunchAttributePriority", "numeric_literal");
+    subst("CU_GRAPH_KERNEL_NODE_PORT_DEFAULT", "hipGraphKernelNodePortDefault", "define");
+    subst("CU_GRAPH_KERNEL_NODE_PORT_LAUNCH_ORDER", "hipGraphKernelNodePortLaunchCompletion", "define");
+    subst("CU_GRAPH_KERNEL_NODE_PORT_PROGRAMMATIC", "hipGraphKernelNodePortProgrammatic", "define");
     subst("CU_STREAM_LEGACY", "hipStreamLegacy", "define");
+    subst("cudaGraphKernelNodePortDefault", "hipGraphKernelNodePortDefault", "define");
+    subst("cudaGraphKernelNodePortLaunchCompletion", "hipGraphKernelNodePortLaunchCompletion", "define");
+    subst("cudaGraphKernelNodePortProgrammatic", "hipGraphKernelNodePortProgrammatic", "define");
     subst("cudaStreamLegacy", "hipStreamLegacy", "define");
 }
 
@@ -9093,9 +9129,6 @@ sub warnUnsupportedFunctions {
         "cudaGraphNodeGetDependentNodes_v2",
         "cudaGraphNodeGetDependencies_v2",
         "cudaGraphKernelNodeUpdate",
-        "cudaGraphKernelNodePortProgrammatic",
-        "cudaGraphKernelNodePortLaunchCompletion",
-        "cudaGraphKernelNodePortDefault",
         "cudaGraphKernelNodeFieldParam",
         "cudaGraphKernelNodeFieldInvalid",
         "cudaGraphKernelNodeFieldGridDim",
@@ -9105,13 +9138,7 @@ sub warnUnsupportedFunctions {
         "cudaGraphExecUpdateResultInfo_st",
         "cudaGraphExecUpdateResultInfo",
         "cudaGraphExecUpdateErrorAttributesChanged",
-        "cudaGraphEdgeData_st",
-        "cudaGraphEdgeData",
         "cudaGraphDeviceNode_t",
-        "cudaGraphDependencyType_enum",
-        "cudaGraphDependencyTypeProgrammatic",
-        "cudaGraphDependencyTypeDefault",
-        "cudaGraphDependencyType",
         "cudaGraphDebugDotFlagsConditionalNodeParams",
         "cudaGraphConditionalNodeType",
         "cudaGraphConditionalHandleFlags",
@@ -9838,12 +9865,8 @@ sub warnUnsupportedFunctions {
         "CUgraphExecUpdateResultInfo_v1",
         "CUgraphExecUpdateResultInfo_st",
         "CUgraphExecUpdateResultInfo",
-        "CUgraphEdgeData_st",
-        "CUgraphEdgeData",
         "CUgraphDeviceUpdatableNode_st",
         "CUgraphDeviceNode",
-        "CUgraphDependencyType_enum",
-        "CUgraphDependencyType",
         "CUgraphConditionalNodeType_enum",
         "CUgraphConditionalNodeType",
         "CUgraphConditionalHandle",
@@ -10081,12 +10104,7 @@ sub warnUnsupportedFunctions {
         "CU_GREEN_CTX_DEFAULT_STREAM",
         "CU_GRAPH_NODE_TYPE_CONDITIONAL",
         "CU_GRAPH_NODE_TYPE_BATCH_MEM_OP",
-        "CU_GRAPH_KERNEL_NODE_PORT_PROGRAMMATIC",
-        "CU_GRAPH_KERNEL_NODE_PORT_LAUNCH_ORDER",
-        "CU_GRAPH_KERNEL_NODE_PORT_DEFAULT",
         "CU_GRAPH_EXEC_UPDATE_ERROR_ATTRIBUTES_CHANGED",
-        "CU_GRAPH_DEPENDENCY_TYPE_PROGRAMMATIC",
-        "CU_GRAPH_DEPENDENCY_TYPE_DEFAULT",
         "CU_GRAPH_DEBUG_DOT_FLAGS_MEM_FREE_NODE_PARAMS",
         "CU_GRAPH_DEBUG_DOT_FLAGS_MEM_ALLOC_NODE_PARAMS",
         "CU_GRAPH_DEBUG_DOT_FLAGS_EXTRA_TOPO_INFO",

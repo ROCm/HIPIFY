@@ -170,17 +170,17 @@
 |`CUDA_EXT_SEM_WAIT_NODE_PARAMS_v1`|11.3| | | |`hipExternalSemaphoreWaitNodeParams`|6.0.0| | | | |
 |`CUDA_EXT_SEM_WAIT_NODE_PARAMS_v2`|12.2| | | |`hipExternalSemaphoreWaitNodeParams`|6.0.0| | | | |
 |`CUDA_EXT_SEM_WAIT_NODE_PARAMS_v2_st`|12.2| | | |`hipExternalSemaphoreWaitNodeParams`|6.0.0| | | | |
-|`CUDA_GRAPH_INSTANTIATE_ERROR`|12.0| | | |`hipGraphInstantiateError`|6.1.0| | | | |
+|`CUDA_GRAPH_INSTANTIATE_ERROR`|12.0| | | |`hipGraphInstantiateError`|6.2.0| | | |6.2.0|
 |`CUDA_GRAPH_INSTANTIATE_FLAG_AUTO_FREE_ON_LAUNCH`|11.4| | | |`hipGraphInstantiateFlagAutoFreeOnLaunch`|5.2.0| | | | |
 |`CUDA_GRAPH_INSTANTIATE_FLAG_DEVICE_LAUNCH`|12.0| | | |`hipGraphInstantiateFlagDeviceLaunch`|5.6.0| | | | |
 |`CUDA_GRAPH_INSTANTIATE_FLAG_UPLOAD`|12.0| | | |`hipGraphInstantiateFlagUpload`|5.6.0| | | | |
 |`CUDA_GRAPH_INSTANTIATE_FLAG_USE_NODE_PRIORITY`|11.7| | | |`hipGraphInstantiateFlagUseNodePriority`|5.6.0| | | | |
-|`CUDA_GRAPH_INSTANTIATE_INVALID_STRUCTURE`|12.0| | | |`hipGraphInstantiateInvalidStructure`|6.1.0| | | | |
-|`CUDA_GRAPH_INSTANTIATE_MULTIPLE_CTXS_NOT_SUPPORTED`|12.0| | | |`hipGraphInstantiateMultipleDevicesNotSupported`|6.1.0| | | | |
-|`CUDA_GRAPH_INSTANTIATE_NODE_OPERATION_NOT_SUPPORTED`|12.0| | | |`hipGraphInstantiateNodeOperationNotSupported`|6.1.0| | | | |
-|`CUDA_GRAPH_INSTANTIATE_PARAMS`|12.0| | | |`hipGraphInstantiateParams`|6.1.0| | | | |
-|`CUDA_GRAPH_INSTANTIATE_PARAMS_st`|12.0| | | |`hipGraphInstantiateParams`|6.1.0| | | | |
-|`CUDA_GRAPH_INSTANTIATE_SUCCESS`|12.0| | | |`hipGraphInstantiateSuccess`|6.1.0| | | | |
+|`CUDA_GRAPH_INSTANTIATE_INVALID_STRUCTURE`|12.0| | | |`hipGraphInstantiateInvalidStructure`|6.2.0| | | |6.2.0|
+|`CUDA_GRAPH_INSTANTIATE_MULTIPLE_CTXS_NOT_SUPPORTED`|12.0| | | |`hipGraphInstantiateMultipleDevicesNotSupported`|6.2.0| | | |6.2.0|
+|`CUDA_GRAPH_INSTANTIATE_NODE_OPERATION_NOT_SUPPORTED`|12.0| | | |`hipGraphInstantiateNodeOperationNotSupported`|6.2.0| | | |6.2.0|
+|`CUDA_GRAPH_INSTANTIATE_PARAMS`|12.0| | | |`hipGraphInstantiateParams`|6.2.0| | | |6.2.0|
+|`CUDA_GRAPH_INSTANTIATE_PARAMS_st`|12.0| | | |`hipGraphInstantiateParams`|6.2.0| | | |6.2.0|
+|`CUDA_GRAPH_INSTANTIATE_SUCCESS`|12.0| | | |`hipGraphInstantiateSuccess`|6.2.0| | | |6.2.0|
 |`CUDA_HOST_NODE_PARAMS`|10.0| | | |`hipHostNodeParams`|4.3.0| | | | |
 |`CUDA_HOST_NODE_PARAMS_st`|10.0| | | |`hipHostNodeParams`|4.3.0| | | | |
 |`CUDA_HOST_NODE_PARAMS_v1`|11.3| | | |`hipHostNodeParams`|4.3.0| | | | |
@@ -678,8 +678,8 @@
 |`CU_GRAPH_DEBUG_DOT_FLAGS_MEM_FREE_NODE_PARAMS`|11.4| | | | | | | | | |
 |`CU_GRAPH_DEBUG_DOT_FLAGS_RUNTIME_TYPES`|11.3| | | |`hipGraphDebugDotFlagsRuntimeTypes`| | | | | |
 |`CU_GRAPH_DEBUG_DOT_FLAGS_VERBOSE`|11.3| | | |`hipGraphDebugDotFlagsVerbose`|5.5.0| | | | |
-|`CU_GRAPH_DEPENDENCY_TYPE_DEFAULT`|12.3| | | | | | | | | |
-|`CU_GRAPH_DEPENDENCY_TYPE_PROGRAMMATIC`|12.3| | | | | | | | | |
+|`CU_GRAPH_DEPENDENCY_TYPE_DEFAULT`|12.3| | | |`hipGraphDependencyTypeDefault`|6.2.0| | | |6.2.0|
+|`CU_GRAPH_DEPENDENCY_TYPE_PROGRAMMATIC`|12.3| | | |`hipGraphDependencyTypeProgrammatic`|6.2.0| | | |6.2.0|
 |`CU_GRAPH_EXEC_UPDATE_ERROR`|10.2| | | |`hipGraphExecUpdateError`|4.3.0| | | | |
 |`CU_GRAPH_EXEC_UPDATE_ERROR_ATTRIBUTES_CHANGED`|11.6| | | | | | | | | |
 |`CU_GRAPH_EXEC_UPDATE_ERROR_FUNCTION_CHANGED`|10.2| | | |`hipGraphExecUpdateErrorFunctionChanged`|4.3.0| | | | |
@@ -689,9 +689,9 @@
 |`CU_GRAPH_EXEC_UPDATE_ERROR_TOPOLOGY_CHANGED`|10.2| | | |`hipGraphExecUpdateErrorTopologyChanged`|4.3.0| | | | |
 |`CU_GRAPH_EXEC_UPDATE_ERROR_UNSUPPORTED_FUNCTION_CHANGE`|11.2| | | |`hipGraphExecUpdateErrorUnsupportedFunctionChange`|4.3.0| | | | |
 |`CU_GRAPH_EXEC_UPDATE_SUCCESS`|10.2| | | |`hipGraphExecUpdateSuccess`|4.3.0| | | | |
-|`CU_GRAPH_KERNEL_NODE_PORT_DEFAULT`|12.3| | | | | | | | | |
-|`CU_GRAPH_KERNEL_NODE_PORT_LAUNCH_ORDER`|12.3| | | | | | | | | |
-|`CU_GRAPH_KERNEL_NODE_PORT_PROGRAMMATIC`|12.3| | | | | | | | | |
+|`CU_GRAPH_KERNEL_NODE_PORT_DEFAULT`|12.3| | | |`hipGraphKernelNodePortDefault`|6.2.0| | | |6.2.0|
+|`CU_GRAPH_KERNEL_NODE_PORT_LAUNCH_ORDER`|12.3| | | |`hipGraphKernelNodePortLaunchCompletion`|6.2.0| | | |6.2.0|
+|`CU_GRAPH_KERNEL_NODE_PORT_PROGRAMMATIC`|12.3| | | |`hipGraphKernelNodePortProgrammatic`|6.2.0| | | |6.2.0|
 |`CU_GRAPH_MEM_ATTR_RESERVED_MEM_CURRENT`|11.4| | | |`hipGraphMemAttrReservedMemCurrent`|5.3.0| | | | |
 |`CU_GRAPH_MEM_ATTR_RESERVED_MEM_HIGH`|11.4| | | |`hipGraphMemAttrReservedMemHigh`|5.3.0| | | | |
 |`CU_GRAPH_MEM_ATTR_USED_MEM_CURRENT`|11.4| | | |`hipGraphMemAttrUsedMemCurrent`|5.3.0| | | | |
@@ -1172,12 +1172,12 @@
 |`CUgraphConditionalNodeType_enum`|12.3| | | | | | | | | |
 |`CUgraphDebugDot_flags`|11.3| | | |`hipGraphDebugDotFlags`|5.5.0| | | | |
 |`CUgraphDebugDot_flags_enum`|11.3| | | |`hipGraphDebugDotFlags`|5.5.0| | | | |
-|`CUgraphDependencyType`|12.3| | | | | | | | | |
-|`CUgraphDependencyType_enum`|12.3| | | | | | | | | |
+|`CUgraphDependencyType`|12.3| | | |`hipGraphDependencyType`|6.2.0| | | |6.2.0|
+|`CUgraphDependencyType_enum`|12.3| | | |`hipGraphDependencyType`|6.2.0| | | |6.2.0|
 |`CUgraphDeviceNode`|12.4| | | | | | | | | |
 |`CUgraphDeviceUpdatableNode_st`|12.4| | | | | | | | | |
-|`CUgraphEdgeData`|12.3| | | | | | | | | |
-|`CUgraphEdgeData_st`|12.3| | | | | | | | | |
+|`CUgraphEdgeData`|12.3| | | |`hipGraphEdgeData`|6.2.0| | | |6.2.0|
+|`CUgraphEdgeData_st`|12.3| | | |`hipGraphEdgeData`|6.2.0| | | |6.2.0|
 |`CUgraphExec`|10.0| | | |`hipGraphExec_t`|4.3.0| | | | |
 |`CUgraphExecUpdateResult`|10.2| | | |`hipGraphExecUpdateResult`|4.3.0| | | | |
 |`CUgraphExecUpdateResultInfo`|12.0| | | | | | | | | |
@@ -1185,8 +1185,8 @@
 |`CUgraphExecUpdateResultInfo_v1`|12.0| | | | | | | | | |
 |`CUgraphExecUpdateResult_enum`|10.2| | | |`hipGraphExecUpdateResult`|4.3.0| | | | |
 |`CUgraphExec_st`|10.0| | | |`hipGraphExec`|4.3.0| | | | |
-|`CUgraphInstantiateResult`|12.0| | | |`hipGraphInstantiateResult`|6.1.0| | | | |
-|`CUgraphInstantiateResult_enum`|12.0| | | |`hipGraphInstantiateResult`|6.1.0| | | | |
+|`CUgraphInstantiateResult`|12.0| | | |`hipGraphInstantiateResult`|6.2.0| | | |6.2.0|
+|`CUgraphInstantiateResult_enum`|12.0| | | |`hipGraphInstantiateResult`|6.2.0| | | |6.2.0|
 |`CUgraphInstantiate_flags`|11.4| | | |`hipGraphInstantiateFlags`|5.2.0| | | | |
 |`CUgraphInstantiate_flags_enum`|11.4| | | |`hipGraphInstantiateFlags`|5.2.0| | | | |
 |`CUgraphMem_attribute`|11.4| | | |`hipGraphMemAttributeType`|5.3.0| | | | |

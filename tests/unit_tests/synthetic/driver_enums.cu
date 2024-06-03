@@ -1176,5 +1176,16 @@ int main() {
   CUdriverProcAddressQueryResult GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT = CU_GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT;
 #endif
 
+#if CUDA_VERSION >= 12030
+  // CHECK: hipGraphDependencyType graphDependencyType;
+  // CHECK-NEXT: hipGraphDependencyType graphDependencyType_enum;
+  // CHECK-NEXT: hipGraphDependencyType GRAPH_DEPENDENCY_TYPE_DEFAULT = hipGraphDependencyTypeDefault;
+  // CHECK-NEXT: hipGraphDependencyType GRAPH_DEPENDENCY_TYPE_PROGRAMMATIC = hipGraphDependencyTypeProgrammatic;
+  CUgraphDependencyType graphDependencyType;
+  CUgraphDependencyType_enum graphDependencyType_enum;
+  CUgraphDependencyType GRAPH_DEPENDENCY_TYPE_DEFAULT = CU_GRAPH_DEPENDENCY_TYPE_DEFAULT;
+  CUgraphDependencyType GRAPH_DEPENDENCY_TYPE_PROGRAMMATIC = CU_GRAPH_DEPENDENCY_TYPE_PROGRAMMATIC;
+#endif
+
   return 0;
 }
