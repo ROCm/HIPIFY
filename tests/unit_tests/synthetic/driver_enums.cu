@@ -1122,6 +1122,22 @@ int main() {
 #if CUDA_VERSION >= 11070
   // CHECK: hipGraphInstantiateFlags GRAPH_INSTANTIATE_FLAG_USE_NODE_PRIORITY = hipGraphInstantiateFlagUseNodePriority;
   CUgraphInstantiate_flags GRAPH_INSTANTIATE_FLAG_USE_NODE_PRIORITY = CUDA_GRAPH_INSTANTIATE_FLAG_USE_NODE_PRIORITY;
+
+  // CHECK: hipKernelNodeAttrID KernelNodeAttributePriority = hipKernelNodeAttributePriority;
+  CUkernelNodeAttrID KernelNodeAttributePriority = CU_KERNEL_NODE_ATTRIBUTE_PRIORITY;
+#endif
+
+#if CUDA_VERSION >= 11080
+  // CHECK: hipLaunchAttributeID launchAttributeID;
+  // CHECK-NEXT: hipLaunchAttributeID launchAttributeID_enum;
+  // CHECK-NEXT: hipLaunchAttributeID LAUNCH_ATTRIBUTE_ACCESS_POLICY_WINDOW = hipLaunchAttributeAccessPolicyWindow;
+  // CHECK-NEXT: hipLaunchAttributeID LAUNCH_ATTRIBUTE_COOPERATIVE = hipLaunchAttributeCooperative;
+  // CHECK-NEXT: hipLaunchAttributeID LAUNCH_ATTRIBUTE_PRIORITY = hipLaunchAttributePriority;
+  CUlaunchAttributeID launchAttributeID;
+  CUlaunchAttributeID_enum launchAttributeID_enum;
+  CUlaunchAttributeID LAUNCH_ATTRIBUTE_ACCESS_POLICY_WINDOW = CU_LAUNCH_ATTRIBUTE_ACCESS_POLICY_WINDOW;
+  CUlaunchAttributeID LAUNCH_ATTRIBUTE_COOPERATIVE = CU_LAUNCH_ATTRIBUTE_COOPERATIVE;
+  CUlaunchAttributeID LAUNCH_ATTRIBUTE_PRIORITY = CU_LAUNCH_ATTRIBUTE_PRIORITY;
 #endif
 
 #if CUDA_VERSION >= 12000
