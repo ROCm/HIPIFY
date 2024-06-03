@@ -362,5 +362,12 @@ int main() {
   CUgraphNodeParams graphNodeParams;
 #endif
 
+#if CUDA_VERSION >= 12020
+  // CHECK: hipGraphEdgeData graphEdgeData_st;
+  // CHECK-NEXT: hipGraphEdgeData graphEdgeData;
+  CUgraphEdgeData_st graphEdgeData_st;
+  CUgraphEdgeData graphEdgeData;
+#endif
+
   return 0;
 }

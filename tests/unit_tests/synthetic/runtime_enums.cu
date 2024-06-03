@@ -922,5 +922,16 @@ int main() {
   cudaLaunchAttributeID LAUNCH_ATTRIBUTE_PRIORITY = cudaLaunchAttributePriority;
 #endif
 
+#if CUDA_VERSION >= 12030
+  // CHECK: hipGraphDependencyType graphDependencyType;
+  // CHECK-NEXT: hipGraphDependencyType graphDependencyType_enum;
+  // CHECK-NEXT: hipGraphDependencyType GRAPH_DEPENDENCY_TYPE_DEFAULT = hipGraphDependencyTypeDefault;
+  // CHECK-NEXT: hipGraphDependencyType GRAPH_DEPENDENCY_TYPE_PROGRAMMATIC = hipGraphDependencyTypeProgrammatic;
+  cudaGraphDependencyType graphDependencyType;
+  cudaGraphDependencyType_enum graphDependencyType_enum;
+  cudaGraphDependencyType GRAPH_DEPENDENCY_TYPE_DEFAULT = cudaGraphDependencyTypeDefault;
+  cudaGraphDependencyType GRAPH_DEPENDENCY_TYPE_PROGRAMMATIC = cudaGraphDependencyTypeProgrammatic;
+#endif
+
   return 0;
 }
