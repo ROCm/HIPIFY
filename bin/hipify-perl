@@ -1416,6 +1416,13 @@ my %experimental_funcs = (
     "curandSetGeneratorOrdering" => "6.2.0",
     "curandOrdering_t" => "6.2.0",
     "curandOrdering" => "6.2.0",
+    "cudaStreamLegacy" => "6.2.0",
+    "cudaLaunchAttributeValue" => "6.2.0",
+    "cudaLaunchAttributePriority" => "6.2.0",
+    "cudaLaunchAttributeID" => "6.2.0",
+    "cudaLaunchAttributeCooperative" => "6.2.0",
+    "cudaLaunchAttributeAccessPolicyWindow" => "6.2.0",
+    "cudaKernelNodeAttributePriority" => "6.2.0",
     "cublasZgbmv_v2_64" => "6.2.0",
     "cublasZgbmv_64" => "6.2.0",
     "cublasSgbmv_v2_64" => "6.2.0",
@@ -1424,6 +1431,20 @@ my %experimental_funcs = (
     "cublasDgbmv_64" => "6.2.0",
     "cublasCgbmv_v2_64" => "6.2.0",
     "cublasCgbmv_64" => "6.2.0",
+    "CUlaunchAttributeValue_union" => "6.2.0",
+    "CUlaunchAttributeValue" => "6.2.0",
+    "CUlaunchAttributeID_enum" => "6.2.0",
+    "CUlaunchAttributeID" => "6.2.0",
+    "CUdriverProcAddressQueryResult_enum" => "6.2.0",
+    "CUdriverProcAddressQueryResult" => "6.2.0",
+    "CU_STREAM_LEGACY" => "6.2.0",
+    "CU_LAUNCH_ATTRIBUTE_PRIORITY" => "6.2.0",
+    "CU_LAUNCH_ATTRIBUTE_COOPERATIVE" => "6.2.0",
+    "CU_LAUNCH_ATTRIBUTE_ACCESS_POLICY_WINDOW" => "6.2.0",
+    "CU_KERNEL_NODE_ATTRIBUTE_PRIORITY" => "6.2.0",
+    "CU_GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT" => "6.2.0",
+    "CU_GET_PROC_ADDRESS_SYMBOL_NOT_FOUND" => "6.2.0",
+    "CU_GET_PROC_ADDRESS_SUCCESS" => "6.2.0",
     "CUSOLVER_ALG_1" => "6.2.0",
     "CUSOLVER_ALG_0" => "6.2.0",
     "CUSOLVERDN_GETRF" => "6.2.0",
@@ -1586,6 +1607,14 @@ sub experimentalSubstitutions {
     subst("cusolverDnXgetrf", "hipsolverDnXgetrf", "library");
     subst("cusolverDnXgetrf_bufferSize", "hipsolverDnXgetrf_bufferSize", "library");
     subst("cusolverDnXgetrs", "hipsolverDnXgetrs", "library");
+    subst("CUdriverProcAddressQueryResult", "hipDriverProcAddressQueryResult", "type");
+    subst("CUdriverProcAddressQueryResult_enum", "hipDriverProcAddressQueryResult", "type");
+    subst("CUlaunchAttributeID", "hipLaunchAttributeID", "type");
+    subst("CUlaunchAttributeID_enum", "hipLaunchAttributeID", "type");
+    subst("CUlaunchAttributeValue", "hipLaunchAttributeValue", "type");
+    subst("CUlaunchAttributeValue_union", "hipLaunchAttributeValue", "type");
+    subst("cudaLaunchAttributeID", "hipLaunchAttributeID", "type");
+    subst("cudaLaunchAttributeValue", "hipLaunchAttributeValue", "type");
     subst("curandOrdering", "hiprandOrdering", "type");
     subst("curandOrdering_t", "hiprandOrdering_t", "type");
     subst("curandStateScrambledSobol32", "hiprandStateScrambledSobol32", "type");
@@ -1607,6 +1636,19 @@ sub experimentalSubstitutions {
     subst("CUSOLVERDN_GETRF", "HIPSOLVERDN_GETRF", "numeric_literal");
     subst("CUSOLVER_ALG_0", "HIPSOLVER_ALG_0", "numeric_literal");
     subst("CUSOLVER_ALG_1", "HIPSOLVER_ALG_1", "numeric_literal");
+    subst("CU_GET_PROC_ADDRESS_SUCCESS", "HIP_GET_PROC_ADDRESS_SUCCESS", "numeric_literal");
+    subst("CU_GET_PROC_ADDRESS_SYMBOL_NOT_FOUND", "HIP_GET_PROC_ADDRESS_SYMBOL_NOT_FOUND", "numeric_literal");
+    subst("CU_GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT", "HIP_GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT", "numeric_literal");
+    subst("CU_KERNEL_NODE_ATTRIBUTE_PRIORITY", "hipKernelNodeAttributePriority", "numeric_literal");
+    subst("CU_LAUNCH_ATTRIBUTE_ACCESS_POLICY_WINDOW", "hipLaunchAttributeAccessPolicyWindow", "numeric_literal");
+    subst("CU_LAUNCH_ATTRIBUTE_COOPERATIVE", "hipLaunchAttributeCooperative", "numeric_literal");
+    subst("CU_LAUNCH_ATTRIBUTE_PRIORITY", "hipLaunchAttributePriority", "numeric_literal");
+    subst("cudaKernelNodeAttributePriority", "hipKernelNodeAttributePriority", "numeric_literal");
+    subst("cudaLaunchAttributeAccessPolicyWindow", "hipLaunchAttributeAccessPolicyWindow", "numeric_literal");
+    subst("cudaLaunchAttributeCooperative", "hipLaunchAttributeCooperative", "numeric_literal");
+    subst("cudaLaunchAttributePriority", "hipLaunchAttributePriority", "numeric_literal");
+    subst("CU_STREAM_LEGACY", "hipStreamLegacy", "define");
+    subst("cudaStreamLegacy", "hipStreamLegacy", "define");
 }
 
 sub rocSubstitutions {
@@ -5343,8 +5385,6 @@ sub simpleSubstitutions {
     subst("CUdeviceptr", "hipDeviceptr_t", "type");
     subst("CUdeviceptr_v1", "hipDeviceptr_t", "type");
     subst("CUdeviceptr_v2", "hipDeviceptr_t", "type");
-    subst("CUdriverProcAddressQueryResult", "hipDriverProcAddressQueryResult", "type");
-    subst("CUdriverProcAddressQueryResult_enum", "hipDriverProcAddressQueryResult", "type");
     subst("CUevent", "hipEvent_t", "type");
     subst("CUevent_st", "ihipEvent_t", "type");
     subst("CUexternalMemory", "hipExternalMemory_t", "type");
@@ -6435,9 +6475,6 @@ sub simpleSubstitutions {
     subst("CU_FUNC_CACHE_PREFER_L1", "hipFuncCachePreferL1", "numeric_literal");
     subst("CU_FUNC_CACHE_PREFER_NONE", "hipFuncCachePreferNone", "numeric_literal");
     subst("CU_FUNC_CACHE_PREFER_SHARED", "hipFuncCachePreferShared", "numeric_literal");
-    subst("CU_GET_PROC_ADDRESS_SUCCESS", "HIP_GET_PROC_ADDRESS_SUCCESS", "numeric_literal");
-    subst("CU_GET_PROC_ADDRESS_SYMBOL_NOT_FOUND", "HIP_GET_PROC_ADDRESS_SYMBOL_NOT_FOUND", "numeric_literal");
-    subst("CU_GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT", "HIP_GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT", "numeric_literal");
     subst("CU_GL_DEVICE_LIST_ALL", "hipGLDeviceListAll", "numeric_literal");
     subst("CU_GL_DEVICE_LIST_CURRENT_FRAME", "hipGLDeviceListCurrentFrame", "numeric_literal");
     subst("CU_GL_DEVICE_LIST_NEXT_FRAME", "hipGLDeviceListNextFrame", "numeric_literal");
@@ -8946,7 +8983,6 @@ sub warnUnsupportedFunctions {
         "cudaSurfaceFormatMode",
         "cudaStreamUpdateCaptureDependencies_v2",
         "cudaStreamSetAttribute",
-        "cudaStreamLegacy",
         "cudaStreamGetId",
         "cudaStreamGetCaptureInfo_v3",
         "cudaStreamGetAttribute",
@@ -9011,26 +9047,20 @@ sub warnUnsupportedFunctions {
         "cudaLaunchConfig_t",
         "cudaLaunchConfig_st",
         "cudaLaunchAttribute_st",
-        "cudaLaunchAttributeValue",
         "cudaLaunchAttributeSynchronizationPolicy",
         "cudaLaunchAttributeProgrammaticStreamSerialization",
         "cudaLaunchAttributeProgrammaticEvent",
-        "cudaLaunchAttributePriority",
         "cudaLaunchAttributeMemSyncDomainMap",
         "cudaLaunchAttributeMemSyncDomain",
         "cudaLaunchAttributeLaunchCompletionEvent",
         "cudaLaunchAttributeIgnore",
-        "cudaLaunchAttributeID",
         "cudaLaunchAttributeDeviceUpdatableKernelNode",
-        "cudaLaunchAttributeCooperative",
         "cudaLaunchAttributeClusterSchedulingPolicyPreference",
         "cudaLaunchAttributeClusterDimension",
-        "cudaLaunchAttributeAccessPolicyWindow",
         "cudaLaunchAttribute",
         "cudaKeyValuePair",
         "cudaKernel_t",
         "cudaKernelNodeParamsV2",
-        "cudaKernelNodeAttributePriority",
         "cudaKernelNodeAttributeMemSyncDomainMap",
         "cudaKernelNodeAttributeMemSyncDomain",
         "cudaKernelNodeAttributeDeviceUpdatableKernelNode",
@@ -9789,10 +9819,6 @@ sub warnUnsupportedFunctions {
         "CUlaunchConfig_st",
         "CUlaunchConfig",
         "CUlaunchAttribute_st",
-        "CUlaunchAttributeValue_union",
-        "CUlaunchAttributeValue",
-        "CUlaunchAttributeID_enum",
-        "CUlaunchAttributeID",
         "CUlaunchAttribute",
         "CUkernel",
         "CUkern_st",
@@ -9968,7 +9994,6 @@ sub warnUnsupportedFunctions {
         "CU_STREAM_MEM_OP_BARRIER",
         "CU_STREAM_MEMORY_BARRIER_TYPE_SYS",
         "CU_STREAM_MEMORY_BARRIER_TYPE_GPU",
-        "CU_STREAM_LEGACY",
         "CU_STREAM_ATTRIBUTE_SYNCHRONIZATION_POLICY",
         "CU_STREAM_ATTRIBUTE_PRIORITY",
         "CU_STREAM_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP",
@@ -10020,18 +10045,14 @@ sub warnUnsupportedFunctions {
         "CU_LAUNCH_ATTRIBUTE_SYNCHRONIZATION_POLICY",
         "CU_LAUNCH_ATTRIBUTE_PROGRAMMATIC_STREAM_SERIALIZATION",
         "CU_LAUNCH_ATTRIBUTE_PROGRAMMATIC_EVENT",
-        "CU_LAUNCH_ATTRIBUTE_PRIORITY",
         "CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP",
         "CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN",
         "CU_LAUNCH_ATTRIBUTE_MAX",
         "CU_LAUNCH_ATTRIBUTE_LAUNCH_COMPLETION_EVENT",
         "CU_LAUNCH_ATTRIBUTE_IGNORE",
         "CU_LAUNCH_ATTRIBUTE_DEVICE_UPDATABLE_KERNEL_NODE",
-        "CU_LAUNCH_ATTRIBUTE_COOPERATIVE",
         "CU_LAUNCH_ATTRIBUTE_CLUSTER_SCHEDULING_POLICY_PREFERENCE",
         "CU_LAUNCH_ATTRIBUTE_CLUSTER_DIMENSION",
-        "CU_LAUNCH_ATTRIBUTE_ACCESS_POLICY_WINDOW",
-        "CU_KERNEL_NODE_ATTRIBUTE_PRIORITY",
         "CU_KERNEL_NODE_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP",
         "CU_KERNEL_NODE_ATTRIBUTE_MEM_SYNC_DOMAIN",
         "CU_KERNEL_NODE_ATTRIBUTE_DEVICE_UPDATABLE_KERNEL_NODE",

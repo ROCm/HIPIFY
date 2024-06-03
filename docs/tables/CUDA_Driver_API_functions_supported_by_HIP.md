@@ -639,9 +639,9 @@
 |`CU_GET_PROC_ADDRESS_DEFAULT`|11.3| | | | | | | | | |
 |`CU_GET_PROC_ADDRESS_LEGACY_STREAM`|11.3| | | | | | | | | |
 |`CU_GET_PROC_ADDRESS_PER_THREAD_DEFAULT_STREAM`|11.3| | | | | | | | | |
-|`CU_GET_PROC_ADDRESS_SUCCESS`|12.0| | | |`HIP_GET_PROC_ADDRESS_SUCCESS`|6.1.0| | | | |
-|`CU_GET_PROC_ADDRESS_SYMBOL_NOT_FOUND`|12.0| | | |`HIP_GET_PROC_ADDRESS_SYMBOL_NOT_FOUND`|6.1.0| | | | |
-|`CU_GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT`|12.0| | | |`HIP_GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT`|6.1.0| | | | |
+|`CU_GET_PROC_ADDRESS_SUCCESS`|12.0| | | |`HIP_GET_PROC_ADDRESS_SUCCESS`|6.2.0| | | |6.2.0|
+|`CU_GET_PROC_ADDRESS_SYMBOL_NOT_FOUND`|12.0| | | |`HIP_GET_PROC_ADDRESS_SYMBOL_NOT_FOUND`|6.2.0| | | |6.2.0|
+|`CU_GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT`|12.0| | | |`HIP_GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT`|6.2.0| | | |6.2.0|
 |`CU_GL_DEVICE_LIST_ALL`| | | | |`hipGLDeviceListAll`|4.4.0| | | | |
 |`CU_GL_DEVICE_LIST_CURRENT_FRAME`| | | | |`hipGLDeviceListCurrentFrame`|4.4.0| | | | |
 |`CU_GL_DEVICE_LIST_NEXT_FRAME`| | | | |`hipGLDeviceListNextFrame`|4.4.0| | | | |
@@ -767,18 +767,18 @@
 |`CU_KERNEL_NODE_ATTRIBUTE_DEVICE_UPDATABLE_KERNEL_NODE`|12.4| | | | | | | | | |
 |`CU_KERNEL_NODE_ATTRIBUTE_MEM_SYNC_DOMAIN`|12.0| | | | | | | | | |
 |`CU_KERNEL_NODE_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP`|12.0| | | | | | | | | |
-|`CU_KERNEL_NODE_ATTRIBUTE_PRIORITY`|11.7| | | | | | | | | |
-|`CU_LAUNCH_ATTRIBUTE_ACCESS_POLICY_WINDOW`|11.8| | | | | | | | | |
+|`CU_KERNEL_NODE_ATTRIBUTE_PRIORITY`|11.7| | | |`hipKernelNodeAttributePriority`|6.2.0| | | |6.2.0|
+|`CU_LAUNCH_ATTRIBUTE_ACCESS_POLICY_WINDOW`|11.8| | | |`hipLaunchAttributeAccessPolicyWindow`|6.2.0| | | |6.2.0|
 |`CU_LAUNCH_ATTRIBUTE_CLUSTER_DIMENSION`|11.8| | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_CLUSTER_SCHEDULING_POLICY_PREFERENCE`|11.8| | | | | | | | | |
-|`CU_LAUNCH_ATTRIBUTE_COOPERATIVE`|11.8| | | | | | | | | |
+|`CU_LAUNCH_ATTRIBUTE_COOPERATIVE`|11.8| | | |`hipLaunchAttributeCooperative`|6.2.0| | | |6.2.0|
 |`CU_LAUNCH_ATTRIBUTE_DEVICE_UPDATABLE_KERNEL_NODE`|12.4| | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_IGNORE`|11.8| | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_LAUNCH_COMPLETION_EVENT`|12.3| | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_MAX`|12.1| | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN`|12.0| | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP`|12.0| | | | | | | | | |
-|`CU_LAUNCH_ATTRIBUTE_PRIORITY`|11.8| | | | | | | | | |
+|`CU_LAUNCH_ATTRIBUTE_PRIORITY`|11.8| | | |`hipLaunchAttributePriority`|6.2.0| | | |6.2.0|
 |`CU_LAUNCH_ATTRIBUTE_PROGRAMMATIC_EVENT`|11.8| | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_PROGRAMMATIC_STREAM_SERIALIZATION`|11.8| | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_SYNCHRONIZATION_POLICY`|11.8| | | | | | | | | |
@@ -954,7 +954,7 @@
 |`CU_STREAM_CAPTURE_STATUS_INVALIDATED`|10.0| | | |`hipStreamCaptureStatusInvalidated`|4.3.0| | | | |
 |`CU_STREAM_CAPTURE_STATUS_NONE`|10.0| | | |`hipStreamCaptureStatusNone`|4.3.0| | | | |
 |`CU_STREAM_DEFAULT`| | | | |`hipStreamDefault`|1.6.0| | | | |
-|`CU_STREAM_LEGACY`| | | | | | | | | | |
+|`CU_STREAM_LEGACY`| | | | |`hipStreamLegacy`|6.2.0| | | |6.2.0|
 |`CU_STREAM_MEMORY_BARRIER_TYPE_GPU`|11.7| | | | | | | | | |
 |`CU_STREAM_MEMORY_BARRIER_TYPE_SYS`|11.7| | | | | | | | | |
 |`CU_STREAM_MEM_OP_BARRIER`|11.7| | | | | | | | | |
@@ -1112,8 +1112,8 @@
 |`CUdevprop`| | | | | | | | | | |
 |`CUdevprop_st`| | | | | | | | | | |
 |`CUdevprop_v1`|11.3| | | | | | | | | |
-|`CUdriverProcAddressQueryResult`|12.0| | | |`hipDriverProcAddressQueryResult`|6.1.0| | | | |
-|`CUdriverProcAddressQueryResult_enum`|12.0| | | |`hipDriverProcAddressQueryResult`|6.1.0| | | | |
+|`CUdriverProcAddressQueryResult`|12.0| | | |`hipDriverProcAddressQueryResult`|6.2.0| | | |6.2.0|
+|`CUdriverProcAddressQueryResult_enum`|12.0| | | |`hipDriverProcAddressQueryResult`|6.2.0| | | |6.2.0|
 |`CUdriverProcAddress_flags`|11.3| | | | | | | | | |
 |`CUdriverProcAddress_flags_enum`|11.3| | | | | | | | | |
 |`CUeglColorFormat`|9.0| | | | | | | | | |
@@ -1234,10 +1234,10 @@
 |`CUkernelNodeAttrValue_union`|11.0| | |11.8|`hipKernelNodeAttrValue`|5.2.0| | | | |
 |`CUkernelNodeAttrValue_v1`|11.3| | | |`hipKernelNodeAttrValue`|5.2.0| | | | |
 |`CUlaunchAttribute`|11.8| | | | | | | | | |
-|`CUlaunchAttributeID`|11.8| | | | | | | | | |
-|`CUlaunchAttributeID_enum`|11.8| | | | | | | | | |
-|`CUlaunchAttributeValue`|11.8| | | | | | | | | |
-|`CUlaunchAttributeValue_union`|11.8| | | | | | | | | |
+|`CUlaunchAttributeID`|11.8| | | |`hipLaunchAttributeID`|6.2.0| | | |6.2.0|
+|`CUlaunchAttributeID_enum`|11.8| | | |`hipLaunchAttributeID`|6.2.0| | | |6.2.0|
+|`CUlaunchAttributeValue`|11.8| | | |`hipLaunchAttributeValue`|6.2.0| | | |6.2.0|
+|`CUlaunchAttributeValue_union`|11.8| | | |`hipLaunchAttributeValue`|6.2.0| | | |6.2.0|
 |`CUlaunchAttribute_st`|11.8| | | | | | | | | |
 |`CUlaunchConfig`|11.8| | | | | | | | | |
 |`CUlaunchConfig_st`|11.8| | | | | | | | | |

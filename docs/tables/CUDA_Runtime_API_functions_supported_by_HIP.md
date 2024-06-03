@@ -1253,27 +1253,27 @@
 |`cudaKernelNodeAttributeDeviceUpdatableKernelNode`|12.4| | | | | | | | | |
 |`cudaKernelNodeAttributeMemSyncDomain`|12.0| | | | | | | | | |
 |`cudaKernelNodeAttributeMemSyncDomainMap`|12.0| | | | | | | | | |
-|`cudaKernelNodeAttributePriority`|11.7| | | | | | | | | |
+|`cudaKernelNodeAttributePriority`|11.7| | | |`hipKernelNodeAttributePriority`|6.2.0| | | |6.2.0|
 |`cudaKernelNodeParams`|10.0| | | |`hipKernelNodeParams`|4.3.0| | | | |
 |`cudaKernelNodeParamsV2`|12.2| | | | | | | | | |
 |`cudaKernel_t`|12.1| | | | | | | | | |
 |`cudaKeyValuePair`| | | |12.0| | | | | | |
 |`cudaLaunchAttribute`|11.8| | | | | | | | | |
-|`cudaLaunchAttributeAccessPolicyWindow`|11.8| | | | | | | | | |
+|`cudaLaunchAttributeAccessPolicyWindow`|11.8| | | |`hipLaunchAttributeAccessPolicyWindow`|6.2.0| | | |6.2.0|
 |`cudaLaunchAttributeClusterDimension`|11.8| | | | | | | | | |
 |`cudaLaunchAttributeClusterSchedulingPolicyPreference`|11.8| | | | | | | | | |
-|`cudaLaunchAttributeCooperative`|11.8| | | | | | | | | |
+|`cudaLaunchAttributeCooperative`|11.8| | | |`hipLaunchAttributeCooperative`|6.2.0| | | |6.2.0|
 |`cudaLaunchAttributeDeviceUpdatableKernelNode`|12.4| | | | | | | | | |
-|`cudaLaunchAttributeID`|11.8| | | | | | | | | |
+|`cudaLaunchAttributeID`|11.8| | | |`hipLaunchAttributeID`|6.2.0| | | |6.2.0|
 |`cudaLaunchAttributeIgnore`|11.8| | | | | | | | | |
 |`cudaLaunchAttributeLaunchCompletionEvent`|12.3| | | | | | | | | |
 |`cudaLaunchAttributeMemSyncDomain`|12.0| | | | | | | | | |
 |`cudaLaunchAttributeMemSyncDomainMap`|12.0| | | | | | | | | |
-|`cudaLaunchAttributePriority`|11.8| | | | | | | | | |
+|`cudaLaunchAttributePriority`|11.8| | | |`hipLaunchAttributePriority`|6.2.0| | | |6.2.0|
 |`cudaLaunchAttributeProgrammaticEvent`|11.8| | | | | | | | | |
 |`cudaLaunchAttributeProgrammaticStreamSerialization`|11.8| | | | | | | | | |
 |`cudaLaunchAttributeSynchronizationPolicy`|11.8| | | | | | | | | |
-|`cudaLaunchAttributeValue`|11.8| | | | | | | | | |
+|`cudaLaunchAttributeValue`|11.8| | | |`hipLaunchAttributeValue`|6.2.0| | | |6.2.0|
 |`cudaLaunchAttribute_st`|11.8| | | | | | | | | |
 |`cudaLaunchConfig_st`|11.8| | | | | | | | | |
 |`cudaLaunchConfig_t`|11.8| | | | | | | | | |
@@ -1448,7 +1448,7 @@
 |`cudaStreamCaptureStatusInvalidated`|10.0| | | |`hipStreamCaptureStatusInvalidated`|4.3.0| | | | |
 |`cudaStreamCaptureStatusNone`|10.0| | | |`hipStreamCaptureStatusNone`|4.3.0| | | | |
 |`cudaStreamDefault`| | | | |`hipStreamDefault`|1.6.0| | | | |
-|`cudaStreamLegacy`| | | | | | | | | | |
+|`cudaStreamLegacy`|9.0| | | |`hipStreamLegacy`|6.2.0| | | |6.2.0|
 |`cudaStreamNonBlocking`| | | | |`hipStreamNonBlocking`|1.6.0| | | | |
 |`cudaStreamPerThread`| | | | |`hipStreamPerThread`|4.5.0| | | | |
 |`cudaStreamSetCaptureDependencies`|11.3| | | |`hipStreamSetCaptureDependencies`|5.0.0| | | | |

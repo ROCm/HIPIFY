@@ -712,9 +712,11 @@ int main() {
   // CHECK: hipKernelNodeAttrID kernelNodeAttrID;
   // CHECK-NEXT: hipKernelNodeAttrID KernelNodeAttributeAccessPolicyWindow = hipKernelNodeAttributeAccessPolicyWindow;
   // CHECK-NEXT: hipKernelNodeAttrID KernelNodeAttributeCooperative = hipKernelNodeAttributeCooperative;
+  // CHECK-NEXT: hipKernelNodeAttrID KernelNodeAttributePriority = hipKernelNodeAttributePriority;
   cudaKernelNodeAttrID kernelNodeAttrID;
   cudaKernelNodeAttrID KernelNodeAttributeAccessPolicyWindow = cudaKernelNodeAttributeAccessPolicyWindow;
   cudaKernelNodeAttrID KernelNodeAttributeCooperative = cudaKernelNodeAttributeCooperative;
+  cudaKernelNodeAttrID KernelNodeAttributePriority = cudaKernelNodeAttributePriority;
 
   // CHECK: hipAccessProperty accessProperty;
   // CHECK-NEXT: hipAccessProperty AccessPropertyNormal = hipAccessPropertyNormal;
@@ -909,6 +911,15 @@ int main() {
   cudaGraphInstantiateResult GRAPH_INSTANTIATE_INVALID_STRUCTURE = cudaGraphInstantiateInvalidStructure;
   cudaGraphInstantiateResult GRAPH_INSTANTIATE_NODE_OPERATION_NOT_SUPPORTED = cudaGraphInstantiateNodeOperationNotSupported;
   cudaGraphInstantiateResult GRAPH_INSTANTIATE_MULTIPLE_CTXS_NOT_SUPPORTED = cudaGraphInstantiateMultipleDevicesNotSupported;
+
+  // CHECK: hipLaunchAttributeID launchAttributeID;
+  // CHECK-NEXT: hipLaunchAttributeID LAUNCH_ATTRIBUTE_ACCESS_POLICY_WINDOW = hipLaunchAttributeAccessPolicyWindow;
+  // CHECK-NEXT: hipLaunchAttributeID LAUNCH_ATTRIBUTE_COOPERATIVE = hipLaunchAttributeCooperative;
+  // CHECK-NEXT: hipLaunchAttributeID LAUNCH_ATTRIBUTE_PRIORITY = hipLaunchAttributePriority;
+  cudaLaunchAttributeID launchAttributeID;
+  cudaLaunchAttributeID LAUNCH_ATTRIBUTE_ACCESS_POLICY_WINDOW = cudaLaunchAttributeAccessPolicyWindow;
+  cudaLaunchAttributeID LAUNCH_ATTRIBUTE_COOPERATIVE = cudaLaunchAttributeCooperative;
+  cudaLaunchAttributeID LAUNCH_ATTRIBUTE_PRIORITY = cudaLaunchAttributePriority;
 #endif
 
   return 0;

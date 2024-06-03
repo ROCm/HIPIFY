@@ -52,6 +52,9 @@ int main() {
   // CHECK: hipStream_t STREAM_PER_THREAD = hipStreamPerThread;
   CUstream STREAM_PER_THREAD = CU_STREAM_PER_THREAD;
 
+  // CHECK: hipStream_t StreamLegacy = hipStreamLegacy;
+  CUstream StreamLegacy = CU_STREAM_LEGACY;
+
 #if CUDA_VERSION >= 7050
   // CHECK: int MEMHOSTREGISTER_IOMEMORY = hipHostRegisterIoMemory;
   int MEMHOSTREGISTER_IOMEMORY = CU_MEMHOSTREGISTER_IOMEMORY;
