@@ -13,25 +13,36 @@
 #include "cudaGL.h"
 #include "cudaProfiler.h"
 
+#if defined(_WIN32) && CUDA_VERSION < 9000
+  typedef signed   __int64 int64_t;
+  typedef unsigned __int64 uint64_t;
+#endif
+
 int main() {
   printf("09. CUDA Driver API Functions synthetic test\n");
 
   unsigned int flags = 0;
   unsigned int flags_2 = 0;
+  uint64_t flags_64 = 0;
   int dim = 0;
   int count = 0;
   int iBlockSize = 0;
   int iBlockSize_2 = 0;
+  int cudaVersion = 0;
+  // TODO: CUDA2HIP version convertor
+  int hipVersion = 0;
   size_t bytes = 0;
   size_t bytes_2 = 0;
-  void* image = nullptr;
+  void *image = nullptr;
+  void *pfn = nullptr;
   std::string name = "str";
+  std::string symbol = "symbol";
   uint32_t u_value = 0;
   float ms = 0.0f;
   float ms_2 = 0.0f;
   float fBorderColor = 0.0f;
-  int* value = 0;
-  int* value_2 = 0;
+  int *value = 0;
+  int *value_2 = 0;
   GLuint gl_uint = 0;
   GLenum gl_enum = 0;
 #if defined(_WIN32)
@@ -1812,6 +1823,9 @@ int main() {
 #endif
 
 #if CUDA_VERSION >= 12000
+  // CHECK: hipDriverProcAddressQueryResult driverProcAddressQueryResult;
+  CUdriverProcAddressQueryResult driverProcAddressQueryResult;
+
   // TODO: https://github.com/ROCm-Developer-Tools/HIPIFY/issues/782 - Introduce 1-to-N conditional matcher
   //       Implement "conditional" matching in hipify-clang, based on CUDA_VERSION first;
   //       below the transformation cuStreamGetCaptureInfo -> hipStreamGetCaptureInfo_v2 should be applied for CUDA_VERSION >= 12000,
@@ -1831,6 +1845,14 @@ int main() {
   // CUDA < 12000: CUresult CUDAAPI cuGraphInstantiate(CUgraphExec *phGraphExec, CUgraph hGraph, CUgraphNode *phErrorNode, char *logBuffer, size_t bufferSize);
   // CUDA:         CUresult CUDAAPI cuGraphInstantiate(CUgraphExec *phGraphExec, CUgraph hGraph, unsigned long long flags);
   // HIP:
+
+  // CUDA: CUresult CUDAAPI cuGetProcAddress(const char *symbol, void **pfn, int cudaVersion, cuuint64_t flags, CUdriverProcAddressQueryResult *symbolStatus);
+  // CUDA < 12000: CUresult CUDAAPI cuGetProcAddress(const char *symbol, void **pfn, int cudaVersion, cuuint64_t flags);
+  // NOTE: cuGetProcAddress for CUDA < 12000 is not supported by HIP
+  // TODO: detect cuGetProcAddress signature and report warning/error for old (before CUDA 12.0) signature
+  // HIP: hipError_t hipGetProcAddress(const char* symbol, void** pfn, int hipVersion, uint64_t flags, hipDriverProcAddressQueryResult* symbolStatus);
+  // CHECK: result = hipGetProcAddress(symbol.c_str(), &pfn, cudaVersion, flags_64, &driverProcAddressQueryResult);
+  result = cuGetProcAddress(symbol.c_str(), &pfn, cudaVersion, flags_64, &driverProcAddressQueryResult);
 #endif
 
   return 0;

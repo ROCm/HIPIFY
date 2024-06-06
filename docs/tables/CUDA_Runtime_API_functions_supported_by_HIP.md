@@ -514,7 +514,7 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
-|`cudaGetDriverEntryPoint`|11.3| | | | | | | | | |
+|`cudaGetDriverEntryPoint`|11.3| |12.0| |`hipGetProcAddress`|6.2.0| | | |6.2.0|
 
 ## **30. C++ API Routines**
 
@@ -810,10 +810,10 @@
 |`cudaDeviceScheduleSpin`| | | | |`hipDeviceScheduleSpin`|1.6.0| | | | |
 |`cudaDeviceScheduleYield`| | | | |`hipDeviceScheduleYield`|1.6.0| | | | |
 |`cudaDeviceSyncMemops`|12.1| | | | | | | | | |
-|`cudaDriverEntryPointQueryResult`|12.0| | | | | | | | | |
-|`cudaDriverEntryPointSuccess`|12.0| | | | | | | | | |
-|`cudaDriverEntryPointSymbolNotFound`|12.0| | | | | | | | | |
-|`cudaDriverEntryPointVersionNotSufficent`|12.0| | | | | | | | | |
+|`cudaDriverEntryPointQueryResult`|12.0| | | |`hipDriverProcAddressQueryResult`|6.2.0| | | |6.2.0|
+|`cudaDriverEntryPointSuccess`|12.0| | | |`HIP_GET_PROC_ADDRESS_SUCCESS`|6.2.0| | | |6.2.0|
+|`cudaDriverEntryPointSymbolNotFound`|12.0| | | |`HIP_GET_PROC_ADDRESS_SYMBOL_NOT_FOUND`|6.2.0| | | |6.2.0|
+|`cudaDriverEntryPointVersionNotSufficent`|12.0| | | |`HIP_GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT`|6.2.0| | | |6.2.0|
 |`cudaEglColorFormat`|9.1| | | | | | | | | |
 |`cudaEglColorFormatA`|9.1| | | | | | | | | |
 |`cudaEglColorFormatABGR`|9.1| | | | | | | | | |

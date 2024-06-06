@@ -1432,6 +1432,11 @@ my %experimental_funcs = (
     "cudaGraphDependencyTypeProgrammatic" => "6.2.0",
     "cudaGraphDependencyTypeDefault" => "6.2.0",
     "cudaGraphDependencyType" => "6.2.0",
+    "cudaGetDriverEntryPoint" => "6.2.0",
+    "cudaDriverEntryPointVersionNotSufficent" => "6.2.0",
+    "cudaDriverEntryPointSymbolNotFound" => "6.2.0",
+    "cudaDriverEntryPointSuccess" => "6.2.0",
+    "cudaDriverEntryPointQueryResult" => "6.2.0",
     "cublasZgbmv_v2_64" => "6.2.0",
     "cublasZgbmv_64" => "6.2.0",
     "cublasSgbmv_v2_64" => "6.2.0",
@@ -1440,6 +1445,7 @@ my %experimental_funcs = (
     "cublasDgbmv_64" => "6.2.0",
     "cublasCgbmv_v2_64" => "6.2.0",
     "cublasCgbmv_64" => "6.2.0",
+    "cuGetProcAddress" => "6.2.0",
     "CUlaunchAttributeValue_union" => "6.2.0",
     "CUlaunchAttributeValue" => "6.2.0",
     "CUlaunchAttributeID_enum" => "6.2.0",
@@ -1610,6 +1616,8 @@ sub subst {
 }
 
 sub experimentalSubstitutions {
+    subst("cuGetProcAddress", "hipGetProcAddress", "driver_entry_point");
+    subst("cudaGetDriverEntryPoint", "hipGetProcAddress", "driver_entry_point");
     subst("cublasCgbmv_64", "hipblasCgbmv_64", "library");
     subst("cublasCgbmv_v2_64", "hipblasCgbmv_64", "library");
     subst("cublasDgbmv_64", "hipblasDgbmv_64", "library");
@@ -1635,6 +1643,7 @@ sub experimentalSubstitutions {
     subst("CUlaunchAttributeID_enum", "hipLaunchAttributeID", "type");
     subst("CUlaunchAttributeValue", "hipLaunchAttributeValue", "type");
     subst("CUlaunchAttributeValue_union", "hipLaunchAttributeValue", "type");
+    subst("cudaDriverEntryPointQueryResult", "hipDriverProcAddressQueryResult", "type");
     subst("cudaGraphDependencyType", "hipGraphDependencyType", "type");
     subst("cudaGraphDependencyType_enum", "hipGraphDependencyType", "type");
     subst("cudaGraphEdgeData", "hipGraphEdgeData", "type");
@@ -1671,6 +1680,9 @@ sub experimentalSubstitutions {
     subst("CU_LAUNCH_ATTRIBUTE_ACCESS_POLICY_WINDOW", "hipLaunchAttributeAccessPolicyWindow", "numeric_literal");
     subst("CU_LAUNCH_ATTRIBUTE_COOPERATIVE", "hipLaunchAttributeCooperative", "numeric_literal");
     subst("CU_LAUNCH_ATTRIBUTE_PRIORITY", "hipLaunchAttributePriority", "numeric_literal");
+    subst("cudaDriverEntryPointSuccess", "HIP_GET_PROC_ADDRESS_SUCCESS", "numeric_literal");
+    subst("cudaDriverEntryPointSymbolNotFound", "HIP_GET_PROC_ADDRESS_SYMBOL_NOT_FOUND", "numeric_literal");
+    subst("cudaDriverEntryPointVersionNotSufficent", "HIP_GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT", "numeric_literal");
     subst("cudaGraphDependencyTypeDefault", "hipGraphDependencyTypeDefault", "numeric_literal");
     subst("cudaGraphDependencyTypeProgrammatic", "hipGraphDependencyTypeProgrammatic", "numeric_literal");
     subst("cudaKernelNodeAttributePriority", "hipKernelNodeAttributePriority", "numeric_literal");
@@ -9157,7 +9169,6 @@ sub warnUnsupportedFunctions {
         "cudaGetKernel",
         "cudaGetFuncBySymbol",
         "cudaGetDriverEntryPointFlags",
-        "cudaGetDriverEntryPoint",
         "cudaGLUnregisterBufferObject",
         "cudaGLUnmapBufferObjectAsync",
         "cudaGLUnmapBufferObject",
@@ -9356,10 +9367,6 @@ sub warnUnsupportedFunctions {
         "cudaEGLStreamConsumerConnectWithFlags",
         "cudaEGLStreamConsumerConnect",
         "cudaEGLStreamConsumerAcquireFrame",
-        "cudaDriverEntryPointVersionNotSufficent",
-        "cudaDriverEntryPointSymbolNotFound",
-        "cudaDriverEntryPointSuccess",
-        "cudaDriverEntryPointQueryResult",
         "cudaDeviceUnregisterAsyncNotification",
         "cudaDeviceSyncMemops",
         "cudaDeviceRegisterAsyncNotification",
@@ -9635,7 +9642,6 @@ sub warnUnsupportedFunctions {
         "cuGraphConditionalHandleCreate",
         "cuGraphAddNode_v2",
         "cuGraphAddDependencies_v2",
-        "cuGetProcAddress",
         "cuGLUnregisterBufferObject",
         "cuGLUnmapBufferObjectAsync",
         "cuGLUnmapBufferObject",
