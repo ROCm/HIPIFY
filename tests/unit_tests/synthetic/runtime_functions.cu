@@ -41,6 +41,7 @@ int main() {
   float ms = 0;
   void *deviceptr = nullptr;
   void *deviceptr_2 = nullptr;
+  void *symbolptr = nullptr;
   void *image = nullptr;
   void *func = nullptr;
   void *src = nullptr;
@@ -1125,8 +1126,12 @@ int main() {
 #if CUDA_VERSION >= 11000
   // CHECK: hipKernelNodeAttrID kernelNodeAttrID;
   cudaKernelNodeAttrID kernelNodeAttrID;
+
   // CHECK: hipKernelNodeAttrValue kernelNodeAttrValue;
   cudaKernelNodeAttrValue kernelNodeAttrValue;
+
+  // CHECK: hipFunction_t function;
+  cudaFunction_t function;
 
   // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphKernelNodeSetAttribute(cudaGraphNode_t hNode, enum cudaKernelNodeAttrID attr, const union cudaKernelNodeAttrValue* value);
   // HIP: hipError_t hipGraphKernelNodeSetAttribute(hipGraphNode_t hNode, hipKernelNodeAttrID attr, const hipKernelNodeAttrValue* value);
@@ -1227,6 +1232,11 @@ int main() {
   // HIP: hipError_t hipGraphKernelNodeCopyAttributes(hipGraphNode_t hSrc, hipGraphNode_t hDst);
   // CHECK: result = hipGraphKernelNodeCopyAttributes(graphNode, graphNode_2);
   result = cudaGraphKernelNodeCopyAttributes(graphNode, graphNode_2);
+
+  // CUDA: extern __host__ cudaError_t cudaGetFuncBySymbol(cudaFunction_t* functionPtr, const void* symbolPtr);
+  // HIP: hipError_t hipGetFuncBySymbol(hipFunction_t* functionPtr, const void* symbolPtr);
+  // CHECK: result = hipGetFuncBySymbol(&function, symbolptr);
+  result = cudaGetFuncBySymbol(&function, symbolptr);
 #endif
 
 #if CUDA_VERSION >= 11010
@@ -1582,6 +1592,18 @@ int main() {
   // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipUnbindTexture(const textureReference* tex);
   // CHECK: result = hipUnbindTexture(texref);
   result = cudaUnbindTexture(texref);
+#endif
+
+#if CUDA_VERSION >= 12030
+  // CHECK: hipGraphEdgeData graphEdgeData_st;
+  // CHECK-NEXT: hipGraphEdgeData graphEdgeData;
+  cudaGraphEdgeData_st graphEdgeData_st;
+  cudaGraphEdgeData graphEdgeData;
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaStreamBeginCaptureToGraph(cudaStream_t stream, cudaGraph_t graph, const cudaGraphNode_t *dependencies, const cudaGraphEdgeData *dependencyData, size_t numDependencies, enum cudaStreamCaptureMode mode);
+  // HIP: hipError_t hipStreamBeginCaptureToGraph(hipStream_t stream, hipGraph_t graph, const hipGraphNode_t* dependencies, const hipGraphEdgeData* dependencyData, size_t numDependencies, hipStreamCaptureMode mode);
+  // CHECK: result = hipStreamBeginCaptureToGraph(stream, Graph_t, &graphNode_2, &graphEdgeData, bytes, streamCaptureMode);
+  result = cudaStreamBeginCaptureToGraph(stream, Graph_t, &graphNode_2, &graphEdgeData, bytes, streamCaptureMode);
 #endif
 
   return 0;

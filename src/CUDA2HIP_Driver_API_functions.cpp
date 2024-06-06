@@ -469,7 +469,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuStreamBeginCapture_v2",                                     {"hipStreamBeginCapture",                                       "", CONV_STREAM, API_DRIVER, SEC::STREAM}},
   {"cuStreamBeginCapture_ptsz",                                   {"hipStreamBeginCapture_ptsz",                                  "", CONV_STREAM, API_DRIVER, SEC::STREAM, HIP_UNSUPPORTED}},
   // cudaStreamBeginCaptureToGraph
-  {"cuStreamBeginCaptureToGraph",                                 {"hipStreamBeginCaptureToGraph",                                "", CONV_STREAM, API_DRIVER, SEC::STREAM, HIP_UNSUPPORTED}},
+  {"cuStreamBeginCaptureToGraph",                                 {"hipStreamBeginCaptureToGraph",                                "", CONV_STREAM, API_DRIVER, SEC::STREAM, HIP_EXPERIMENTAL}},
   // cudaStreamCopyAttributes
   {"cuStreamCopyAttributes",                                      {"hipStreamCopyAttributes",                                     "", CONV_STREAM, API_DRIVER, SEC::STREAM, HIP_UNSUPPORTED}},
   // cudaStreamCreateWithFlags

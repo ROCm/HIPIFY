@@ -66,7 +66,7 @@
 |`cudaStreamAddCallback`| | | | |`hipStreamAddCallback`|1.6.0| | | | |
 |`cudaStreamAttachMemAsync`| | | | |`hipStreamAttachMemAsync`|3.7.0| | | | |
 |`cudaStreamBeginCapture`|10.0| | | |`hipStreamBeginCapture`|4.3.0| | | | |
-|`cudaStreamBeginCaptureToGraph`|12.3| | | | | | | | | |
+|`cudaStreamBeginCaptureToGraph`|12.3| | | |`hipStreamBeginCaptureToGraph`|6.2.0| | | |6.2.0|
 |`cudaStreamCopyAttributes`|11.0| | | | | | | | | |
 |`cudaStreamCreate`| | | | |`hipStreamCreate`|1.6.0| | | | |
 |`cudaStreamCreateWithFlags`| | | | |`hipStreamCreateWithFlags`|1.6.0| | | | |
@@ -435,7 +435,7 @@
 |`cudaGraphAddMemcpyNodeFromSymbol`|11.1| | | |`hipGraphAddMemcpyNodeFromSymbol`|5.0.0| | | | |
 |`cudaGraphAddMemcpyNodeToSymbol`|11.1| | | |`hipGraphAddMemcpyNodeToSymbol`|5.0.0| | | | |
 |`cudaGraphAddMemsetNode`|10.0| | | |`hipGraphAddMemsetNode`|4.3.0| | | | |
-|`cudaGraphAddNode`|12.2| | | |`hipGraphAddNode`|6.1.0| | | | |
+|`cudaGraphAddNode`|12.2| | | |`hipGraphAddNode`|6.2.0| | | |6.2.0|
 |`cudaGraphAddNode_v2`|12.3| | | | | | | | | |
 |`cudaGraphChildGraphNodeGetGraph`|10.0| | | |`hipGraphChildGraphNodeGetGraph`|5.0.0| | | | |
 |`cudaGraphClone`|10.0| | | |`hipGraphClone`|5.0.0| | | | |
@@ -476,7 +476,7 @@
 |`cudaGraphHostNodeSetParams`|10.0| | | |`hipGraphHostNodeSetParams`|5.0.0| | | | |
 |`cudaGraphInstantiate`|10.0| | | |`hipGraphInstantiate`|4.3.0| | | | |
 |`cudaGraphInstantiateWithFlags`|11.4| | | |`hipGraphInstantiateWithFlags`|5.0.0| | | | |
-|`cudaGraphInstantiateWithParams`|12.0| | | |`hipGraphInstantiateWithParams`|6.1.0| | | | |
+|`cudaGraphInstantiateWithParams`|12.0| | | |`hipGraphInstantiateWithParams`|6.2.0| | | |6.2.0|
 |`cudaGraphKernelNodeCopyAttributes`|11.0| | | |`hipGraphKernelNodeCopyAttributes`|5.5.0| | | | |
 |`cudaGraphKernelNodeGetAttribute`|11.0| | | |`hipGraphKernelNodeGetAttribute`|5.2.0| | | | |
 |`cudaGraphKernelNodeGetParams`|11.0| | | |`hipGraphKernelNodeGetParams`|4.5.0| | | | |
@@ -526,7 +526,7 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
-|`cudaGetFuncBySymbol`|11.0| | | | | | | | | |
+|`cudaGetFuncBySymbol`|11.0| | | |`hipGetFuncBySymbol`|6.2.0| | | |6.2.0|
 
 ## **32. Profiler Control**
 

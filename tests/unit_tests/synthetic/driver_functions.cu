@@ -1826,6 +1826,11 @@ int main() {
   // CHECK: hipDriverProcAddressQueryResult driverProcAddressQueryResult;
   CUdriverProcAddressQueryResult driverProcAddressQueryResult;
 
+  // CHECK: hipGraphInstantiateParams GRAPH_INSTANTIATE_PARAMS_st;
+  // CHECK-NEXT: hipGraphInstantiateParams GRAPH_INSTANTIATE_PARAMS;
+  CUDA_GRAPH_INSTANTIATE_PARAMS_st GRAPH_INSTANTIATE_PARAMS_st;
+  CUDA_GRAPH_INSTANTIATE_PARAMS GRAPH_INSTANTIATE_PARAMS;
+
   // TODO: https://github.com/ROCm-Developer-Tools/HIPIFY/issues/782 - Introduce 1-to-N conditional matcher
   //       Implement "conditional" matching in hipify-clang, based on CUDA_VERSION first;
   //       below the transformation cuStreamGetCaptureInfo -> hipStreamGetCaptureInfo_v2 should be applied for CUDA_VERSION >= 12000,
@@ -1853,6 +1858,23 @@ int main() {
   // HIP: hipError_t hipGetProcAddress(const char* symbol, void** pfn, int hipVersion, uint64_t flags, hipDriverProcAddressQueryResult* symbolStatus);
   // CHECK: result = hipGetProcAddress(symbol.c_str(), &pfn, cudaVersion, flags_64, &driverProcAddressQueryResult);
   result = cuGetProcAddress(symbol.c_str(), &pfn, cudaVersion, flags_64, &driverProcAddressQueryResult);
+
+  // CUDA: CUresult CUDAAPI cuGraphInstantiateWithParams(CUgraphExec *phGraphExec, CUgraph hGraph, CUDA_GRAPH_INSTANTIATE_PARAMS *instantiateParams);
+  // HIP: hipError_t hipGraphInstantiateWithParams(hipGraphExec_t* pGraphExec, hipGraph_t graph, hipGraphInstantiateParams *instantiateParams);
+  // CHECK: result = hipGraphInstantiateWithParams(&graphExec, graph, &GRAPH_INSTANTIATE_PARAMS);
+  result = cuGraphInstantiateWithParams(&graphExec, graph, &GRAPH_INSTANTIATE_PARAMS);
+#endif
+
+#if CUDA_VERSION >= 12030
+  // CHECK: hipGraphEdgeData graphEdgeData_st;
+  // CHECK-NEXT: hipGraphEdgeData graphEdgeData;
+  CUgraphEdgeData_st graphEdgeData_st;
+  CUgraphEdgeData graphEdgeData;
+
+  // CUDA: CUresult CUDAAPI cuStreamBeginCaptureToGraph(CUstream hStream, CUgraph hGraph, const CUgraphNode *dependencies, const CUgraphEdgeData *dependencyData, size_t numDependencies, CUstreamCaptureMode mode);
+  // HIP: hipError_t hipStreamBeginCaptureToGraph(hipStream_t stream, hipGraph_t graph, const hipGraphNode_t* dependencies, const hipGraphEdgeData* dependencyData, size_t numDependencies, hipStreamCaptureMode mode);
+  // CHECK: result = hipStreamBeginCaptureToGraph(stream, graph, &graphNode2, &graphEdgeData, bytes, streamCaptureMode);
+  result = cuStreamBeginCaptureToGraph(stream, graph, &graphNode2, &graphEdgeData, bytes, streamCaptureMode);
 #endif
 
   return 0;

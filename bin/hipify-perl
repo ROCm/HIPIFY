@@ -1417,6 +1417,7 @@ my %experimental_funcs = (
     "curandOrdering_t" => "6.2.0",
     "curandOrdering" => "6.2.0",
     "cudaStreamLegacy" => "6.2.0",
+    "cudaStreamBeginCaptureToGraph" => "6.2.0",
     "cudaLaunchAttributeValue" => "6.2.0",
     "cudaLaunchAttributePriority" => "6.2.0",
     "cudaLaunchAttributeID" => "6.2.0",
@@ -1432,6 +1433,7 @@ my %experimental_funcs = (
     "cudaGraphDependencyTypeProgrammatic" => "6.2.0",
     "cudaGraphDependencyTypeDefault" => "6.2.0",
     "cudaGraphDependencyType" => "6.2.0",
+    "cudaGetFuncBySymbol" => "6.2.0",
     "cudaGetDriverEntryPoint" => "6.2.0",
     "cudaDriverEntryPointVersionNotSufficent" => "6.2.0",
     "cudaDriverEntryPointSymbolNotFound" => "6.2.0",
@@ -1445,6 +1447,7 @@ my %experimental_funcs = (
     "cublasDgbmv_64" => "6.2.0",
     "cublasCgbmv_v2_64" => "6.2.0",
     "cublasCgbmv_64" => "6.2.0",
+    "cuStreamBeginCaptureToGraph" => "6.2.0",
     "cuGetProcAddress" => "6.2.0",
     "CUlaunchAttributeValue_union" => "6.2.0",
     "CUlaunchAttributeValue" => "6.2.0",
@@ -1616,8 +1619,11 @@ sub subst {
 }
 
 sub experimentalSubstitutions {
+    subst("cuStreamBeginCaptureToGraph", "hipStreamBeginCaptureToGraph", "stream");
+    subst("cudaStreamBeginCaptureToGraph", "hipStreamBeginCaptureToGraph", "stream");
     subst("cuGetProcAddress", "hipGetProcAddress", "driver_entry_point");
     subst("cudaGetDriverEntryPoint", "hipGetProcAddress", "driver_entry_point");
+    subst("cudaGetFuncBySymbol", "hipGetFuncBySymbol", "driver_interact");
     subst("cublasCgbmv_64", "hipblasCgbmv_64", "library");
     subst("cublasCgbmv_v2_64", "hipblasCgbmv_64", "library");
     subst("cublasDgbmv_64", "hipblasDgbmv_64", "library");
@@ -9035,7 +9041,6 @@ sub warnUnsupportedFunctions {
         "cudaStreamGetCaptureInfo_v3",
         "cudaStreamGetAttribute",
         "cudaStreamCopyAttributes",
-        "cudaStreamBeginCaptureToGraph",
         "cudaStreamAttributeSynchronizationPolicy",
         "cudaStreamAttributePriority",
         "cudaStreamAttributeMemSyncDomainMap",
@@ -9167,7 +9172,6 @@ sub warnUnsupportedFunctions {
         "cudaGetParameterBufferV2",
         "cudaGetParameterBuffer",
         "cudaGetKernel",
-        "cudaGetFuncBySymbol",
         "cudaGetDriverEntryPointFlags",
         "cudaGLUnregisterBufferObject",
         "cudaGLUnmapBufferObjectAsync",
@@ -9548,7 +9552,6 @@ sub warnUnsupportedFunctions {
         "cuStreamGetAttribute",
         "cuStreamCopyAttributes",
         "cuStreamBeginCapture_ptsz",
-        "cuStreamBeginCaptureToGraph",
         "cuStreamBatchMemOp_v2",
         "cuStreamBatchMemOp",
         "cuProfilerInitialize",
