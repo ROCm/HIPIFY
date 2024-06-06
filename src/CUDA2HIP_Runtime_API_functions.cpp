@@ -873,7 +873,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
 
   // 29. Driver Entry Point Access
   // cuGetProcAddress
-  {"cudaGetDriverEntryPoint",                                 {"hipGetProcAddress",                                      "", CONV_DRIVER_ENTRY_POINT, API_RUNTIME, SEC::DRIVER_ENTRY_POINT, HIP_UNSUPPORTED}},
+  {"cudaGetDriverEntryPoint",                                 {"hipGetProcAddress",                                      "", CONV_DRIVER_ENTRY_POINT, API_RUNTIME, SEC::DRIVER_ENTRY_POINT, HIP_EXPERIMENTAL}},
 
   // 30. C++ API Routines
   {"cudaGetKernel",                                           {"hipGetKernel",                                           "", CONV_CPP, API_RUNTIME, SEC::CPP, HIP_UNSUPPORTED}},
@@ -1425,6 +1425,11 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP {
   {"hipGraphExecGetFlags",                                    {HIP_6010, HIP_0,    HIP_0   }},
   {"hipGraphNodeSetParams",                                   {HIP_6010, HIP_0,    HIP_0   }},
   {"hipGraphExecNodeSetParams",                               {HIP_6010, HIP_0,    HIP_0   }},
+  {"hipGetProcAddress",                                       {HIP_6020, HIP_0,    HIP_0,  HIP_LATEST}},
+};
+
+const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_RUNTIME_FUNCTION_CHANGED_VER_MAP {
+  {"cudaGetDriverEntryPoint",                                 {CUDA_120}},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_RUNTIME_API_SECTION_MAP {

@@ -2483,12 +2483,15 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaLaunchMemSyncDomainRemote
   {"CU_LAUNCH_MEM_SYNC_DOMAIN_REMOTE",                                 {"hipLaunchMemSyncDomainRemote",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
-  // no RUNTIME analogues
+  // cudaDriverEntryPointQueryResult
   {"CUdriverProcAddressQueryResult",                                   {"hipDriverProcAddressQueryResult",                          "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
   {"CUdriverProcAddressQueryResult_enum",                              {"hipDriverProcAddressQueryResult",                          "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
   // CUdriverProcAddressQueryResult enum values
+  // cudaDriverEntryPointSuccess
   {"CU_GET_PROC_ADDRESS_SUCCESS",                                      {"HIP_GET_PROC_ADDRESS_SUCCESS",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
+  // cudaDriverEntryPointSymbolNotFound
   {"CU_GET_PROC_ADDRESS_SYMBOL_NOT_FOUND",                             {"HIP_GET_PROC_ADDRESS_SYMBOL_NOT_FOUND",                    "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
+  // cudaDriverEntryPointVersionNotSufficent
   {"CU_GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT",                       {"HIP_GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT",              "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
 
   //

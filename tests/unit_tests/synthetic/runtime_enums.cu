@@ -920,6 +920,15 @@ int main() {
   cudaLaunchAttributeID LAUNCH_ATTRIBUTE_ACCESS_POLICY_WINDOW = cudaLaunchAttributeAccessPolicyWindow;
   cudaLaunchAttributeID LAUNCH_ATTRIBUTE_COOPERATIVE = cudaLaunchAttributeCooperative;
   cudaLaunchAttributeID LAUNCH_ATTRIBUTE_PRIORITY = cudaLaunchAttributePriority;
+
+  // CHECK: hipDriverProcAddressQueryResult driverProcAddressQueryResult;
+  // CHECK-NEXT:hipDriverProcAddressQueryResult GET_PROC_ADDRESS_SUCCESS = HIP_GET_PROC_ADDRESS_SUCCESS;
+  // CHECK-NEXT:hipDriverProcAddressQueryResult GET_PROC_ADDRESS_SYMBOL_NOT_FOUND = HIP_GET_PROC_ADDRESS_SYMBOL_NOT_FOUND;
+  // CHECK-NEXT:hipDriverProcAddressQueryResult GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT = HIP_GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT;
+  cudaDriverEntryPointQueryResult driverProcAddressQueryResult;
+  cudaDriverEntryPointQueryResult GET_PROC_ADDRESS_SUCCESS = cudaDriverEntryPointSuccess;
+  cudaDriverEntryPointQueryResult GET_PROC_ADDRESS_SYMBOL_NOT_FOUND = cudaDriverEntryPointSymbolNotFound;
+  cudaDriverEntryPointQueryResult GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT = cudaDriverEntryPointVersionNotSufficent;
 #endif
 
 #if CUDA_VERSION >= 12030

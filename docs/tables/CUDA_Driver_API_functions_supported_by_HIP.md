@@ -2040,7 +2040,7 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
-|`cuGetProcAddress`|11.3| | | | | | | | | |
+|`cuGetProcAddress`|11.3| |12.0| |`hipGetProcAddress`|6.2.0| | | |6.2.0|
 
 ## **34. Coredump Attributes Control API**
 

@@ -13,6 +13,11 @@
 // CHECK: #include "hip/hip_runtime_api.h"
 #include "cuda_profiler_api.h"
 
+#if defined(_WIN32) && CUDA_VERSION < 9000
+  typedef signed   __int64 int64_t;
+  typedef unsigned __int64 uint64_t;
+#endif
+
 int main() {
   printf("12. CUDA Runtime API Functions synthetic test\n");
 
@@ -34,19 +39,19 @@ int main() {
   unsigned int levels = 0;
   unsigned int count = 0;
   float ms = 0;
-  void* deviceptr = nullptr;
-  void* deviceptr_2 = nullptr;
-  void* image = nullptr;
-  void* func = nullptr;
-  void* src = nullptr;
-  void* dst = nullptr;
-  char* ch = nullptr;
-  const char* const_ch = nullptr;
+  void *deviceptr = nullptr;
+  void *deviceptr_2 = nullptr;
+  void *image = nullptr;
+  void *func = nullptr;
+  void *src = nullptr;
+  void *dst = nullptr;
+  char *ch = nullptr;
+  const char *const_ch = nullptr;
   dim3 gridDim;
   dim3 blockDim;
   GLuint gl_uint = 0;
   GLenum gl_enum = 0;
-  struct textureReference* texref = nullptr;
+  struct textureReference *texref = nullptr;
   std::string name = "str";
 
 #if defined(_WIN32)
@@ -77,17 +82,17 @@ int main() {
   // CHECK: hipChannelFormatDesc ChannelFormatDesc;
   cudaChannelFormatDesc ChannelFormatDesc;
 
-  // CHECK: hipMipmappedArray* MipmappedArray;
+  // CHECK: hipMipmappedArray *MipmappedArray;
   // CHECK-NEXT: hipMipmappedArray_t MipmappedArray_t;
   // CHECK-NEXT: hipMipmappedArray_const_t MipmappedArray_const_t;
-  cudaMipmappedArray* MipmappedArray;
+  cudaMipmappedArray *MipmappedArray;
   cudaMipmappedArray_t MipmappedArray_t;
   cudaMipmappedArray_const_t MipmappedArray_const_t;
 
-  // CHECK: hipArray* Array;
+  // CHECK: hipArray *Array;
   // CHECK-NEXT: hipArray_t Array_t;
   // CHECK-NEXT: hipArray_const_t Array_const_t;
-  cudaArray* Array;
+  cudaArray *Array;
   cudaArray_t Array_t;
   cudaArray_const_t Array_const_t;
 

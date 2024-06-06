@@ -22,6 +22,7 @@ THE SOFTWARE.
 
 #include <algorithm>
 #include <set>
+#include <string>
 #include "HipifyAction.h"
 #include "CUDA2HIP_Scripting.h"
 #include "clang/Basic/SourceLocation.h"
@@ -44,6 +45,7 @@ const std::string sHIP_KERNEL_NAME = "HIP_KERNEL_NAME";
 std::string sHIP_SYMBOL = "HIP_SYMBOL";
 std::string s_reinterpret_cast = "reinterpret_cast<const void*>";
 std::string s_reinterpret_cast_size_t = "reinterpret_cast<size_t*>";
+std::string s_static_cast_uint64_t = "static_cast<uint64_t>";
 std::string s_int32_t = "int32_t";
 std::string s_int64_t = "int64_t";
 const std::string sHipLaunchKernelGGL = "hipLaunchKernelGGL";
@@ -226,6 +228,7 @@ const std::string sCusparseSpMV = "cusparseSpMV";
 const std::string sCusparseSpMV_bufferSize = "cusparseSpMV_bufferSize";
 const std::string sCusparseSpMM_preprocess = "cusparseSpMM_preprocess";
 const std::string sCusparseSpSV_bufferSize = "cusparseSpSV_bufferSize";
+const std::string sCudaGetDriverEntryPoint = "cudaGetDriverEntryPoint";
 
 // CUDA_OVERLOADED
 const std::string sCudaEventCreate = "cudaEventCreate";
@@ -246,6 +249,7 @@ std::string getCastType(hipify::CastTypes c) {
     case e_HIP_SYMBOL: return sHIP_SYMBOL;
     case e_reinterpret_cast: return s_reinterpret_cast;
     case e_reinterpret_cast_size_t: return s_reinterpret_cast_size_t;
+    case e_static_cast_uint64_t: return s_static_cast_uint64_t;
     case e_int32_t: return s_int32_t;
     case e_int64_t: return s_int64_t;
     case e_remove_argument: return "";
@@ -283,6 +287,15 @@ std::map<std::string, hipify::FuncOverloadsStruct> FuncOverloads {
 };
 
 std::map<std::string, std::vector<ArgCastStruct>> FuncArgCasts {
+  {sCudaGetDriverEntryPoint,
+    {
+      {
+        {
+          {2, {e_add_const_argument, cw_None, std::to_string(int(HIP_LATEST / 10))}}
+        }
+      }
+    }
+  },
   {sCudaFuncSetCacheConfig,
     {
       {
@@ -3067,7 +3080,8 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
             sCusparseSpMV,
             sCusparseSpMV_bufferSize,
             sCusparseSpMM_preprocess,
-            sCusparseSpSV_bufferSize
+            sCusparseSpSV_bufferSize,
+            sCudaGetDriverEntryPoint
           )
         )
       )

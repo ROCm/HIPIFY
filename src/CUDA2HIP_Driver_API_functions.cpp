@@ -948,7 +948,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
 
   // 33. Driver Entry Point Access
   // cudaGetDriverEntryPoint
-  {"cuGetProcAddress",                                            {"hipGetProcAddress",                                           "", CONV_DRIVER_ENTRY_POINT, API_DRIVER, SEC::DRIVER_ENTRY_POINT, HIP_UNSUPPORTED}},
+  {"cuGetProcAddress",                                            {"hipGetProcAddress",                                           "", CONV_DRIVER_ENTRY_POINT, API_DRIVER, SEC::DRIVER_ENTRY_POINT, HIP_EXPERIMENTAL}},
 
   // 34. Coredump Attributes Control API
   //
@@ -1647,6 +1647,10 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_FUNCTION_VER_MAP {
   {"hipDrvGraphExecMemcpyNodeSetParams",                          {HIP_6010, HIP_0,    HIP_0   }},
   {"hipDrvGraphExecMemsetNodeSetParams",                          {HIP_6010, HIP_0,    HIP_0   }},
   {"hipTexRefGetBorderColor",                                     {HIP_6010, HIP_6010, HIP_0   }},
+};
+
+const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_DRIVER_FUNCTION_CHANGED_VER_MAP {
+  {"cuGetProcAddress",                                            {CUDA_120}},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_DRIVER_API_SECTION_MAP {
