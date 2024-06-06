@@ -219,7 +219,7 @@ int main() {
   cudaGraphNodeParams *GraphNodeParams = nullptr;
 #endif
 
-#if CUDA_VERSION >= 12020
+#if CUDA_VERSION >= 12030
   // CHECK: hipGraphEdgeData graphEdgeData_st;
   // CHECK-NEXT: hipGraphEdgeData graphEdgeData;
   cudaGraphEdgeData_st graphEdgeData_st;
