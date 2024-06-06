@@ -712,11 +712,9 @@ int main() {
   // CHECK: hipKernelNodeAttrID kernelNodeAttrID;
   // CHECK-NEXT: hipKernelNodeAttrID KernelNodeAttributeAccessPolicyWindow = hipKernelNodeAttributeAccessPolicyWindow;
   // CHECK-NEXT: hipKernelNodeAttrID KernelNodeAttributeCooperative = hipKernelNodeAttributeCooperative;
-  // CHECK-NEXT: hipKernelNodeAttrID KernelNodeAttributePriority = hipKernelNodeAttributePriority;
   cudaKernelNodeAttrID kernelNodeAttrID;
   cudaKernelNodeAttrID KernelNodeAttributeAccessPolicyWindow = cudaKernelNodeAttributeAccessPolicyWindow;
   cudaKernelNodeAttrID KernelNodeAttributeCooperative = cudaKernelNodeAttributeCooperative;
-  cudaKernelNodeAttrID KernelNodeAttributePriority = cudaKernelNodeAttributePriority;
 
   // CHECK: hipAccessProperty accessProperty;
   // CHECK-NEXT: hipAccessProperty AccessPropertyNormal = hipAccessPropertyNormal;
@@ -891,6 +889,9 @@ int main() {
 #if CUDA_VERSION >= 11070
   // CHECK: hipGraphInstantiateFlags GraphInstantiateFlagUseNodePriority = hipGraphInstantiateFlagUseNodePriority;
   cudaGraphInstantiateFlags GraphInstantiateFlagUseNodePriority = cudaGraphInstantiateFlagUseNodePriority;
+
+  // CHECK: hipKernelNodeAttrID KernelNodeAttributePriority = hipKernelNodeAttributePriority;
+  cudaKernelNodeAttrID KernelNodeAttributePriority = cudaKernelNodeAttributePriority;
 #endif
 
 #if CUDA_VERSION >= 12000
