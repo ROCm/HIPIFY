@@ -1424,15 +1424,20 @@ my %experimental_funcs = (
     "cudaLaunchAttributeCooperative" => "6.2.0",
     "cudaLaunchAttributeAccessPolicyWindow" => "6.2.0",
     "cudaKernelNodeAttributePriority" => "6.2.0",
+    "cudaGraphNodeSetParams" => "6.2.0",
     "cudaGraphKernelNodePortProgrammatic" => "6.2.0",
     "cudaGraphKernelNodePortLaunchCompletion" => "6.2.0",
     "cudaGraphKernelNodePortDefault" => "6.2.0",
+    "cudaGraphInstantiateWithParams" => "6.2.0",
+    "cudaGraphExecNodeSetParams" => "6.2.0",
+    "cudaGraphExecGetFlags" => "6.2.0",
     "cudaGraphEdgeData_st" => "6.2.0",
     "cudaGraphEdgeData" => "6.2.0",
     "cudaGraphDependencyType_enum" => "6.2.0",
     "cudaGraphDependencyTypeProgrammatic" => "6.2.0",
     "cudaGraphDependencyTypeDefault" => "6.2.0",
     "cudaGraphDependencyType" => "6.2.0",
+    "cudaGraphAddNode" => "6.2.0",
     "cudaGetFuncBySymbol" => "6.2.0",
     "cudaGetDriverEntryPoint" => "6.2.0",
     "cudaDriverEntryPointVersionNotSufficent" => "6.2.0",
@@ -1448,6 +1453,15 @@ my %experimental_funcs = (
     "cublasCgbmv_v2_64" => "6.2.0",
     "cublasCgbmv_64" => "6.2.0",
     "cuStreamBeginCaptureToGraph" => "6.2.0",
+    "cuGraphNodeSetParams" => "6.2.0",
+    "cuGraphMemcpyNodeSetParams" => "6.2.0",
+    "cuGraphMemcpyNodeGetParams" => "6.2.0",
+    "cuGraphInstantiateWithParams" => "6.2.0",
+    "cuGraphExecNodeSetParams" => "6.2.0",
+    "cuGraphExecMemcpyNodeSetParams" => "6.2.0",
+    "cuGraphExecGetFlags" => "6.2.0",
+    "cuGraphAddNode" => "6.2.0",
+    "cuGraphAddMemFreeNode" => "6.2.0",
     "cuGetProcAddress" => "6.2.0",
     "CUlaunchAttributeValue_union" => "6.2.0",
     "CUlaunchAttributeValue" => "6.2.0",
@@ -1621,6 +1635,20 @@ sub subst {
 sub experimentalSubstitutions {
     subst("cuStreamBeginCaptureToGraph", "hipStreamBeginCaptureToGraph", "stream");
     subst("cudaStreamBeginCaptureToGraph", "hipStreamBeginCaptureToGraph", "stream");
+    subst("cuGraphAddMemFreeNode", "hipDrvGraphAddMemFreeNode", "graph");
+    subst("cuGraphAddNode", "hipGraphAddNode", "graph");
+    subst("cuGraphExecGetFlags", "hipGraphExecGetFlags", "graph");
+    subst("cuGraphExecMemcpyNodeSetParams", "hipDrvGraphExecMemcpyNodeSetParams", "graph");
+    subst("cuGraphExecNodeSetParams", "hipGraphExecNodeSetParams", "graph");
+    subst("cuGraphInstantiateWithParams", "hipGraphInstantiateWithParams", "graph");
+    subst("cuGraphMemcpyNodeGetParams", "hipDrvGraphMemcpyNodeGetParams", "graph");
+    subst("cuGraphMemcpyNodeSetParams", "hipDrvGraphMemcpyNodeSetParams", "graph");
+    subst("cuGraphNodeSetParams", "hipGraphNodeSetParams", "graph");
+    subst("cudaGraphAddNode", "hipGraphAddNode", "graph");
+    subst("cudaGraphExecGetFlags", "hipGraphExecGetFlags", "graph");
+    subst("cudaGraphExecNodeSetParams", "hipGraphExecNodeSetParams", "graph");
+    subst("cudaGraphInstantiateWithParams", "hipGraphInstantiateWithParams", "graph");
+    subst("cudaGraphNodeSetParams", "hipGraphNodeSetParams", "graph");
     subst("cuGetProcAddress", "hipGetProcAddress", "driver_entry_point");
     subst("cudaGetDriverEntryPoint", "hipGetProcAddress", "driver_entry_point");
     subst("cudaGetFuncBySymbol", "hipGetFuncBySymbol", "driver_interact");
@@ -3472,10 +3500,8 @@ sub simpleSubstitutions {
     subst("cuGraphAddHostNode", "hipGraphAddHostNode", "graph");
     subst("cuGraphAddKernelNode", "hipGraphAddKernelNode", "graph");
     subst("cuGraphAddMemAllocNode", "hipGraphAddMemAllocNode", "graph");
-    subst("cuGraphAddMemFreeNode", "hipDrvGraphAddMemFreeNode", "graph");
     subst("cuGraphAddMemcpyNode", "hipDrvGraphAddMemcpyNode", "graph");
     subst("cuGraphAddMemsetNode", "hipDrvGraphAddMemsetNode", "graph");
-    subst("cuGraphAddNode", "hipGraphAddNode", "graph");
     subst("cuGraphBatchMemOpNodeGetParams", "hipGraphBatchMemOpNodeGetParams", "graph");
     subst("cuGraphBatchMemOpNodeSetParams", "hipGraphBatchMemOpNodeSetParams", "graph");
     subst("cuGraphChildGraphNodeGetGraph", "hipGraphChildGraphNodeGetGraph", "graph");
@@ -3495,12 +3521,8 @@ sub simpleSubstitutions {
     subst("cuGraphExecEventWaitNodeSetEvent", "hipGraphExecEventWaitNodeSetEvent", "graph");
     subst("cuGraphExecExternalSemaphoresSignalNodeSetParams", "hipGraphExecExternalSemaphoresSignalNodeSetParams", "graph");
     subst("cuGraphExecExternalSemaphoresWaitNodeSetParams", "hipGraphExecExternalSemaphoresWaitNodeSetParams", "graph");
-    subst("cuGraphExecGetFlags", "hipGraphExecGetFlags", "graph");
     subst("cuGraphExecHostNodeSetParams", "hipGraphExecHostNodeSetParams", "graph");
     subst("cuGraphExecKernelNodeSetParams", "hipGraphExecKernelNodeSetParams", "graph");
-    subst("cuGraphExecMemcpyNodeSetParams", "hipDrvGraphExecMemcpyNodeSetParams", "graph");
-    subst("cuGraphExecMemsetNodeSetParams", "hipDrvGraphExecMemsetNodeSetParams", "graph");
-    subst("cuGraphExecNodeSetParams", "hipGraphExecNodeSetParams", "graph");
     subst("cuGraphExecUpdate", "hipGraphExecUpdate", "graph");
     subst("cuGraphExternalSemaphoresSignalNodeGetParams", "hipGraphExternalSemaphoresSignalNodeGetParams", "graph");
     subst("cuGraphExternalSemaphoresSignalNodeSetParams", "hipGraphExternalSemaphoresSignalNodeSetParams", "graph");
@@ -3513,7 +3535,6 @@ sub simpleSubstitutions {
     subst("cuGraphHostNodeSetParams", "hipGraphHostNodeSetParams", "graph");
     subst("cuGraphInstantiate", "hipGraphInstantiate", "graph");
     subst("cuGraphInstantiateWithFlags", "hipGraphInstantiateWithFlags", "graph");
-    subst("cuGraphInstantiateWithParams", "hipGraphInstantiateWithParams", "graph");
     subst("cuGraphInstantiate_v2", "hipGraphInstantiate", "graph");
     subst("cuGraphKernelNodeCopyAttributes", "hipGraphKernelNodeCopyAttributes", "graph");
     subst("cuGraphKernelNodeGetAttribute", "hipGraphKernelNodeGetAttribute", "graph");
@@ -3523,8 +3544,6 @@ sub simpleSubstitutions {
     subst("cuGraphLaunch", "hipGraphLaunch", "graph");
     subst("cuGraphMemAllocNodeGetParams", "hipGraphMemAllocNodeGetParams", "graph");
     subst("cuGraphMemFreeNodeGetParams", "hipGraphMemFreeNodeGetParams", "graph");
-    subst("cuGraphMemcpyNodeGetParams", "hipDrvGraphMemcpyNodeGetParams", "graph");
-    subst("cuGraphMemcpyNodeSetParams", "hipDrvGraphMemcpyNodeSetParams", "graph");
     subst("cuGraphMemsetNodeGetParams", "hipGraphMemsetNodeGetParams", "graph");
     subst("cuGraphMemsetNodeSetParams", "hipGraphMemsetNodeSetParams", "graph");
     subst("cuGraphNodeFindInClone", "hipGraphNodeFindInClone", "graph");
@@ -3533,7 +3552,6 @@ sub simpleSubstitutions {
     subst("cuGraphNodeGetEnabled", "hipGraphNodeGetEnabled", "graph");
     subst("cuGraphNodeGetType", "hipGraphNodeGetType", "graph");
     subst("cuGraphNodeSetEnabled", "hipGraphNodeSetEnabled", "graph");
-    subst("cuGraphNodeSetParams", "hipGraphNodeSetParams", "graph");
     subst("cuGraphReleaseUserObject", "hipGraphReleaseUserObject", "graph");
     subst("cuGraphRemoveDependencies", "hipGraphRemoveDependencies", "graph");
     subst("cuGraphRetainUserObject", "hipGraphRetainUserObject", "graph");
@@ -3560,7 +3578,6 @@ sub simpleSubstitutions {
     subst("cudaGraphAddMemcpyNodeFromSymbol", "hipGraphAddMemcpyNodeFromSymbol", "graph");
     subst("cudaGraphAddMemcpyNodeToSymbol", "hipGraphAddMemcpyNodeToSymbol", "graph");
     subst("cudaGraphAddMemsetNode", "hipGraphAddMemsetNode", "graph");
-    subst("cudaGraphAddNode", "hipGraphAddNode", "graph");
     subst("cudaGraphChildGraphNodeGetGraph", "hipGraphChildGraphNodeGetGraph", "graph");
     subst("cudaGraphClone", "hipGraphClone", "graph");
     subst("cudaGraphCreate", "hipGraphCreate", "graph");
@@ -3577,7 +3594,6 @@ sub simpleSubstitutions {
     subst("cudaGraphExecEventWaitNodeSetEvent", "hipGraphExecEventWaitNodeSetEvent", "graph");
     subst("cudaGraphExecExternalSemaphoresSignalNodeSetParams", "hipGraphExecExternalSemaphoresSignalNodeSetParams", "graph");
     subst("cudaGraphExecExternalSemaphoresWaitNodeSetParams", "hipGraphExecExternalSemaphoresWaitNodeSetParams", "graph");
-    subst("cudaGraphExecGetFlags", "hipGraphExecGetFlags", "graph");
     subst("cudaGraphExecHostNodeSetParams", "hipGraphExecHostNodeSetParams", "graph");
     subst("cudaGraphExecKernelNodeSetParams", "hipGraphExecKernelNodeSetParams", "graph");
     subst("cudaGraphExecMemcpyNodeSetParams", "hipGraphExecMemcpyNodeSetParams", "graph");
@@ -3585,7 +3601,6 @@ sub simpleSubstitutions {
     subst("cudaGraphExecMemcpyNodeSetParamsFromSymbol", "hipGraphExecMemcpyNodeSetParamsFromSymbol", "graph");
     subst("cudaGraphExecMemcpyNodeSetParamsToSymbol", "hipGraphExecMemcpyNodeSetParamsToSymbol", "graph");
     subst("cudaGraphExecMemsetNodeSetParams", "hipGraphExecMemsetNodeSetParams", "graph");
-    subst("cudaGraphExecNodeSetParams", "hipGraphExecNodeSetParams", "graph");
     subst("cudaGraphExecUpdate", "hipGraphExecUpdate", "graph");
     subst("cudaGraphExternalSemaphoresSignalNodeGetParams", "hipGraphExternalSemaphoresSignalNodeGetParams", "graph");
     subst("cudaGraphExternalSemaphoresSignalNodeSetParams", "hipGraphExternalSemaphoresSignalNodeSetParams", "graph");
@@ -3598,7 +3613,6 @@ sub simpleSubstitutions {
     subst("cudaGraphHostNodeSetParams", "hipGraphHostNodeSetParams", "graph");
     subst("cudaGraphInstantiate", "hipGraphInstantiate", "graph");
     subst("cudaGraphInstantiateWithFlags", "hipGraphInstantiateWithFlags", "graph");
-    subst("cudaGraphInstantiateWithParams", "hipGraphInstantiateWithParams", "graph");
     subst("cudaGraphKernelNodeCopyAttributes", "hipGraphKernelNodeCopyAttributes", "graph");
     subst("cudaGraphKernelNodeGetAttribute", "hipGraphKernelNodeGetAttribute", "graph");
     subst("cudaGraphKernelNodeGetParams", "hipGraphKernelNodeGetParams", "graph");
@@ -3620,7 +3634,6 @@ sub simpleSubstitutions {
     subst("cudaGraphNodeGetEnabled", "hipGraphNodeGetEnabled", "graph");
     subst("cudaGraphNodeGetType", "hipGraphNodeGetType", "graph");
     subst("cudaGraphNodeSetEnabled", "hipGraphNodeSetEnabled", "graph");
-    subst("cudaGraphNodeSetParams", "hipGraphNodeSetParams", "graph");
     subst("cudaGraphReleaseUserObject", "hipGraphReleaseUserObject", "graph");
     subst("cudaGraphRemoveDependencies", "hipGraphRemoveDependencies", "graph");
     subst("cudaGraphRetainUserObject", "hipGraphRetainUserObject", "graph");
