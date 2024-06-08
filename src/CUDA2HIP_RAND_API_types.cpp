@@ -25,7 +25,7 @@ THE SOFTWARE.
 // Map of all functions
 const std::map<llvm::StringRef, hipCounter> CUDA_RAND_TYPE_NAME_MAP {
   // RAND Host types
-  {"curandStatus",                                  {"hiprandStatus_t",                                "", CONV_TYPE, API_RAND, 1}},
+  {"curandStatus",                                  {"hiprandStatus",                                  "", CONV_TYPE, API_RAND, 1}},
   {"curandStatus_t",                                {"hiprandStatus_t",                                "", CONV_TYPE, API_RAND, 1}},
   {"curandRngType",                                 {"hiprandRngType_t",                               "", CONV_TYPE, API_RAND, 1}},
   {"curandRngType_t",                               {"hiprandRngType_t",                               "", CONV_TYPE, API_RAND, 1}},
@@ -33,8 +33,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RAND_TYPE_NAME_MAP {
   {"curandGenerator_t",                             {"hiprandGenerator_t",                             "", CONV_TYPE, API_RAND, 1}},
   {"curandDirectionVectorSet",                      {"hiprandDirectionVectorSet_t",                    "", CONV_TYPE, API_RAND, 1}},
   {"curandDirectionVectorSet_t",                    {"hiprandDirectionVectorSet_t",                    "", CONV_TYPE, API_RAND, 1}},
-  {"curandOrdering",                                {"hiprandOrdering_t",                              "", CONV_TYPE, API_RAND, 1, HIP_UNSUPPORTED}},
-  {"curandOrdering_t",                              {"hiprandOrdering_t",                              "", CONV_TYPE, API_RAND, 1, HIP_UNSUPPORTED}},
+  {"curandOrdering",                                {"hiprandOrdering",                                "", CONV_TYPE, API_RAND, 1, HIP_EXPERIMENTAL}},
+  {"curandOrdering_t",                              {"hiprandOrdering_t",                              "", CONV_TYPE, API_RAND, 1, HIP_EXPERIMENTAL}},
   {"curandDistribution_st",                         {"hiprandDistribution_st",                         "", CONV_TYPE, API_RAND, 1, HIP_UNSUPPORTED}},
   {"curandHistogramM2V_st",                         {"hiprandHistogramM2V_st",                         "", CONV_TYPE, API_RAND, 1, HIP_UNSUPPORTED}},
   {"curandDistribution_t",                          {"hiprandDistribution_t",                          "", CONV_TYPE, API_RAND, 1, HIP_UNSUPPORTED}},
@@ -57,12 +57,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RAND_TYPE_NAME_MAP {
   // RAND types for Device functions
   {"curandStateMtgp32",                             {"hiprandStateMtgp32",                             "", CONV_TYPE, API_RAND, 1}},
   {"curandStateMtgp32_t",                           {"hiprandStateMtgp32_t",                           "", CONV_TYPE, API_RAND, 1}},
-  {"curandStateScrambledSobol64",                   {"hiprandStateScrambledSobol64",                   "", CONV_TYPE, API_RAND, 1, HIP_UNSUPPORTED}},
-  {"curandStateScrambledSobol64_t",                 {"hiprandStateScrambledSobol64_t",                 "", CONV_TYPE, API_RAND, 1, HIP_UNSUPPORTED}},
-  {"curandStateSobol64",                            {"hiprandStateSobol64",                            "", CONV_TYPE, API_RAND, 1, HIP_UNSUPPORTED}},
-  {"curandStateSobol64_t",                          {"hiprandStateSobol64_t",                          "", CONV_TYPE, API_RAND, 1, HIP_UNSUPPORTED}},
-  {"curandStateScrambledSobol32",                   {"hiprandStateScrambledSobol32",                   "", CONV_TYPE, API_RAND, 1, HIP_UNSUPPORTED}},
-  {"curandStateScrambledSobol32_t",                 {"hiprandStateScrambledSobol32_t",                 "", CONV_TYPE, API_RAND, 1, HIP_UNSUPPORTED}},
+  {"curandStateScrambledSobol64",                   {"hiprandStateScrambledSobol64",                   "", CONV_TYPE, API_RAND, 1, HIP_EXPERIMENTAL}},
+  {"curandStateScrambledSobol64_t",                 {"hiprandStateScrambledSobol64_t",                 "", CONV_TYPE, API_RAND, 1, HIP_EXPERIMENTAL}},
+  {"curandStateSobol64",                            {"hiprandStateSobol64",                            "", CONV_TYPE, API_RAND, 1, HIP_EXPERIMENTAL}},
+  {"curandStateSobol64_t",                          {"hiprandStateSobol64_t",                          "", CONV_TYPE, API_RAND, 1, HIP_EXPERIMENTAL}},
+  {"curandStateScrambledSobol32",                   {"hiprandStateScrambledSobol32",                   "", CONV_TYPE, API_RAND, 1, HIP_EXPERIMENTAL}},
+  {"curandStateScrambledSobol32_t",                 {"hiprandStateScrambledSobol32_t",                 "", CONV_TYPE, API_RAND, 1, HIP_EXPERIMENTAL}},
   {"curandStateSobol32",                            {"hiprandStateSobol32",                            "", CONV_TYPE, API_RAND, 1}},
   {"curandStateSobol32_t",                          {"hiprandStateSobol32_t",                          "", CONV_TYPE, API_RAND, 1}},
   {"curandStateMRG32k3a",                           {"hiprandStateMRG32k3a",                           "", CONV_TYPE, API_RAND, 1}},
@@ -104,12 +104,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RAND_TYPE_NAME_MAP {
   {"CURAND_RNG_QUASI_SCRAMBLED_SOBOL64",            {"HIPRAND_RNG_QUASI_SCRAMBLED_SOBOL64",            "", CONV_NUMERIC_LITERAL, API_RAND, 1}},
 
   // RAND ordering of results in memory (enum curandOrdering)
-  {"CURAND_ORDERING_PSEUDO_BEST",                   {"HIPRAND_ORDERING_PSEUDO_BEST",                   "", CONV_NUMERIC_LITERAL, API_RAND, 1, HIP_UNSUPPORTED}},
-  {"CURAND_ORDERING_PSEUDO_DEFAULT",                {"HIPRAND_ORDERING_PSEUDO_DEFAULT",                "", CONV_NUMERIC_LITERAL, API_RAND, 1, HIP_UNSUPPORTED}},
-  {"CURAND_ORDERING_PSEUDO_SEEDED",                 {"HIPRAND_ORDERING_PSEUDO_SEEDED",                 "", CONV_NUMERIC_LITERAL, API_RAND, 1, HIP_UNSUPPORTED}},
-  {"CURAND_ORDERING_PSEUDO_LEGACY",                 {"HIPRAND_ORDERING_PSEUDO_LEGACY",                 "", CONV_NUMERIC_LITERAL, API_RAND, 1, HIP_UNSUPPORTED}},
-  {"CURAND_ORDERING_PSEUDO_DYNAMIC",                {"HIPRAND_ORDERING_PSEUDO_DYNAMIC",                "", CONV_NUMERIC_LITERAL, API_RAND, 1, HIP_UNSUPPORTED}},
-  {"CURAND_ORDERING_QUASI_DEFAULT",                 {"HIPRAND_ORDERING_QUASI_DEFAULT",                 "", CONV_NUMERIC_LITERAL, API_RAND, 1, HIP_UNSUPPORTED}},
+  {"CURAND_ORDERING_PSEUDO_BEST",                   {"HIPRAND_ORDERING_PSEUDO_BEST",                   "", CONV_NUMERIC_LITERAL, API_RAND, 1, HIP_EXPERIMENTAL}},
+  {"CURAND_ORDERING_PSEUDO_DEFAULT",                {"HIPRAND_ORDERING_PSEUDO_DEFAULT",                "", CONV_NUMERIC_LITERAL, API_RAND, 1, HIP_EXPERIMENTAL}},
+  {"CURAND_ORDERING_PSEUDO_SEEDED",                 {"HIPRAND_ORDERING_PSEUDO_SEEDED",                 "", CONV_NUMERIC_LITERAL, API_RAND, 1, HIP_EXPERIMENTAL}},
+  {"CURAND_ORDERING_PSEUDO_LEGACY",                 {"HIPRAND_ORDERING_PSEUDO_LEGACY",                 "", CONV_NUMERIC_LITERAL, API_RAND, 1, HIP_EXPERIMENTAL}},
+  {"CURAND_ORDERING_PSEUDO_DYNAMIC",                {"HIPRAND_ORDERING_PSEUDO_DYNAMIC",                "", CONV_NUMERIC_LITERAL, API_RAND, 1, HIP_EXPERIMENTAL}},
+  {"CURAND_ORDERING_QUASI_DEFAULT",                 {"HIPRAND_ORDERING_QUASI_DEFAULT",                 "", CONV_NUMERIC_LITERAL, API_RAND, 1, HIP_EXPERIMENTAL}},
 
   // RAND choice of direction vector set (enum curandDirectionVectorSet)
   {"CURAND_DIRECTION_VECTORS_32_JOEKUO6",           {"HIPRAND_DIRECTION_VECTORS_32_JOEKUO6",           "", CONV_NUMERIC_LITERAL, API_RAND, 1}},
@@ -135,11 +135,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RAND_TYPE_NAME_MAP {
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_RAND_TYPE_NAME_VER_MAP {
-  {"CURAND_ORDERING_PSEUDO_LEGACY",                 {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"CURAND_ORDERING_PSEUDO_DYNAMIC",                {CUDA_115, CUDA_0,   CUDA_0  }},
+  {"CURAND_ORDERING_PSEUDO_LEGACY",                 {CUDA_110, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 11001, CURAND_VERSION 10200, CURAND_VER_MAJOR 10 CURAND_VER_MINOR 2 CURAND_VER_PATCH 0
+  {"CURAND_ORDERING_PSEUDO_DYNAMIC",                {CUDA_115, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 11052, CURAND_VERSION 10207, CURAND_VER_MAJOR 10 CURAND_VER_MINOR 2 CURAND_VER_PATCH 7
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_RAND_TYPE_NAME_VER_MAP {
+  {"hiprandStatus",                                 {HIP_1050, HIP_0,    HIP_0   }},
   {"hiprandStatus_t",                               {HIP_1050, HIP_0,    HIP_0   }},
   {"hiprandRngType_t",                              {HIP_1050, HIP_0,    HIP_0   }},
   {"hiprandGenerator_st",                           {HIP_1050, HIP_0,    HIP_0   }},
@@ -189,4 +190,18 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RAND_TYPE_NAME_VER_MAP {
   {"HIPRAND_SCRAMBLED_DIRECTION_VECTORS_32_JOEKUO6",{HIP_6000, HIP_0,    HIP_0   }},
   {"HIPRAND_DIRECTION_VECTORS_64_JOEKUO6",          {HIP_6000, HIP_0,    HIP_0   }},
   {"HIPRAND_SCRAMBLED_DIRECTION_VECTORS_64_JOEKUO6",{HIP_6000, HIP_0,    HIP_0   }},
+  {"hiprandOrdering",                               {HIP_6020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hiprandOrdering_t",                             {HIP_6020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"HIPRAND_ORDERING_PSEUDO_BEST",                  {HIP_6020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"HIPRAND_ORDERING_PSEUDO_DEFAULT",               {HIP_6020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"HIPRAND_ORDERING_PSEUDO_SEEDED",                {HIP_6020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"HIPRAND_ORDERING_PSEUDO_LEGACY",                {HIP_6020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"HIPRAND_ORDERING_PSEUDO_DYNAMIC",               {HIP_6020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"HIPRAND_ORDERING_QUASI_DEFAULT",                {HIP_6020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hiprandStateScrambledSobol32",                  {HIP_6020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hiprandStateScrambledSobol32_t",                {HIP_6020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hiprandStateScrambledSobol64",                  {HIP_6020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hiprandStateScrambledSobol64_t",                {HIP_6020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hiprandStateSobol64",                           {HIP_6020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hiprandStateSobol64_t",                         {HIP_6020, HIP_0,    HIP_0,  HIP_LATEST}},
 };

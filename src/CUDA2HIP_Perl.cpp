@@ -321,7 +321,7 @@ namespace perl {
     }
   }
 
-  void generateSubstFunction(unique_ptr<ostream>& streamPtr) {
+  void generateSubstFunction(unique_ptr<ostream> &streamPtr) {
     *streamPtr.get() << endl << sub << sSubst << " {" << endl;
     *streamPtr.get() << tab << my << "$a = shift();" << endl;
     *streamPtr.get() << tab << my << "$b = shift();" << endl;
@@ -535,7 +535,7 @@ namespace perl {
       }
       }
     }
-    set<string>& funcSet = DeviceSymbolFunctions0;
+    set<string> &funcSet = DeviceSymbolFunctions0;
     for (int i = 0; i < 9; ++i) {
       switch (i) {
         default: funcSet = DeviceSymbolFunctions0; break;

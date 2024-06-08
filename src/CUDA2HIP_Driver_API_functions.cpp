@@ -469,7 +469,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuStreamBeginCapture_v2",                                     {"hipStreamBeginCapture",                                       "", CONV_STREAM, API_DRIVER, SEC::STREAM}},
   {"cuStreamBeginCapture_ptsz",                                   {"hipStreamBeginCapture_ptsz",                                  "", CONV_STREAM, API_DRIVER, SEC::STREAM, HIP_UNSUPPORTED}},
   // cudaStreamBeginCaptureToGraph
-  {"cuStreamBeginCaptureToGraph",                                 {"hipStreamBeginCaptureToGraph",                                "", CONV_STREAM, API_DRIVER, SEC::STREAM, HIP_UNSUPPORTED}},
+  {"cuStreamBeginCaptureToGraph",                                 {"hipStreamBeginCaptureToGraph",                                "", CONV_STREAM, API_DRIVER, SEC::STREAM, HIP_EXPERIMENTAL}},
   // cudaStreamCopyAttributes
   {"cuStreamCopyAttributes",                                      {"hipStreamCopyAttributes",                                     "", CONV_STREAM, API_DRIVER, SEC::STREAM, HIP_UNSUPPORTED}},
   // cudaStreamCreateWithFlags
@@ -703,10 +703,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuGraphKernelNodeSetParams",                                  {"hipGraphKernelNodeSetParams",                                 "", CONV_GRAPH, API_DRIVER, SEC::GRAPH}},
   // cudaGraphLaunch
   {"cuGraphLaunch",                                               {"hipGraphLaunch",                                              "", CONV_GRAPH, API_DRIVER, SEC::GRAPH}},
-  // cudaGraphMemcpyNodeGetParams (?)
-  {"cuGraphMemcpyNodeGetParams",                                  {"hipDrvGraphMemcpyNodeGetParams",                              "", CONV_GRAPH, API_DRIVER, SEC::GRAPH}},
-  // cudaGraphMemcpyNodeSetParams (?)
-  {"cuGraphMemcpyNodeSetParams",                                  {"hipDrvGraphMemcpyNodeSetParams",                              "", CONV_GRAPH, API_DRIVER, SEC::GRAPH}},
+  // NOTE: cudaGraphMemcpyNodeGetParams has a different signature
+  {"cuGraphMemcpyNodeGetParams",                                  {"hipDrvGraphMemcpyNodeGetParams",                              "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_EXPERIMENTAL}},
+  // NOTE: cudaGraphMemcpyNodeSetParams has a different signature
+  {"cuGraphMemcpyNodeSetParams",                                  {"hipDrvGraphMemcpyNodeSetParams",                              "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_EXPERIMENTAL}},
   // cudaGraphMemsetNodeGetParams
   {"cuGraphMemsetNodeGetParams",                                  {"hipGraphMemsetNodeGetParams",                                 "", CONV_GRAPH, API_DRIVER, SEC::GRAPH}},
   // cudaGraphMemsetNodeSetParams
@@ -732,9 +732,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   // cudaGraphRemoveDependencies_v2
   {"cuGraphRemoveDependencies_v2",                                {"hipGraphRemoveDependencies_v2",                               "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_UNSUPPORTED}},
   // no analogue
-  {"cuGraphExecMemcpyNodeSetParams",                              {"hipDrvGraphExecMemcpyNodeSetParams",                          "", CONV_GRAPH, API_DRIVER, SEC::GRAPH}},
-  // no analogue
-  {"cuGraphExecMemsetNodeSetParams",                              {"hipDrvGraphExecMemsetNodeSetParams",                          "", CONV_GRAPH, API_DRIVER, SEC::GRAPH}},
+  {"cuGraphExecMemcpyNodeSetParams",                              {"hipDrvGraphExecMemcpyNodeSetParams",                          "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_EXPERIMENTAL}},
   // cudaGraphExecHostNodeSetParams
   {"cuGraphExecHostNodeSetParams",                                {"hipGraphExecHostNodeSetParams",                               "", CONV_GRAPH, API_DRIVER, SEC::GRAPH}},
   // TODO: take into account the new signature since 12.0
@@ -791,7 +789,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   // cudaGraphMemAllocNodeGetParams
   {"cuGraphMemAllocNodeGetParams",                                {"hipGraphMemAllocNodeGetParams",                               "", CONV_GRAPH, API_DRIVER, SEC::GRAPH}},
   // no analogue
-  {"cuGraphAddMemFreeNode",                                       {"hipDrvGraphAddMemFreeNode",                                   "", CONV_GRAPH, API_DRIVER, SEC::GRAPH}},
+  {"cuGraphAddMemFreeNode",                                       {"hipDrvGraphAddMemFreeNode",                                   "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_EXPERIMENTAL}},
   // cudaGraphMemFreeNodeGetParams
   {"cuGraphMemFreeNodeGetParams",                                 {"hipGraphMemFreeNodeGetParams",                                "", CONV_GRAPH, API_DRIVER, SEC::GRAPH}},
   // cudaDeviceGraphMemTrim
@@ -811,17 +809,17 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   //
   {"cuGraphExecBatchMemOpNodeSetParams",                          {"hipGraphExecBatchMemOpNodeSetParams",                         "", CONV_GRAPH, API_DRIVER, SEC::GRAPH}},
   // cudaGraphInstantiateWithParams
-  {"cuGraphInstantiateWithParams",                                {"hipGraphInstantiateWithParams",                               "", CONV_GRAPH, API_DRIVER, SEC::GRAPH}},
+  {"cuGraphInstantiateWithParams",                                {"hipGraphInstantiateWithParams",                               "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_EXPERIMENTAL}},
   // cudaGraphExecGetFlags
-  {"cuGraphExecGetFlags",                                         {"hipGraphExecGetFlags",                                        "", CONV_GRAPH, API_DRIVER, SEC::GRAPH}},
+  {"cuGraphExecGetFlags",                                         {"hipGraphExecGetFlags",                                        "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_EXPERIMENTAL}},
   // cudaGraphAddNode
-  {"cuGraphAddNode",                                              {"hipGraphAddNode",                                             "", CONV_GRAPH, API_DRIVER, SEC::GRAPH}},
+  {"cuGraphAddNode",                                              {"hipGraphAddNode",                                             "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_EXPERIMENTAL}},
   // cudaGraphAddNode_v2
   {"cuGraphAddNode_v2",                                           {"hipGraphAddNode_v2",                                          "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_UNSUPPORTED}},
   // cudaGraphNodeSetParams
-  {"cuGraphNodeSetParams",                                        {"hipGraphNodeSetParams",                                       "", CONV_GRAPH, API_DRIVER, SEC::GRAPH}},
+  {"cuGraphNodeSetParams",                                        {"hipGraphNodeSetParams",                                       "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_EXPERIMENTAL}},
   // cudaGraphExecNodeSetParams
-  {"cuGraphExecNodeSetParams",                                    {"hipGraphExecNodeSetParams",                                   "", CONV_GRAPH, API_DRIVER, SEC::GRAPH}},
+  {"cuGraphExecNodeSetParams",                                    {"hipGraphExecNodeSetParams",                                   "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_EXPERIMENTAL}},
   // cudaGraphConditionalHandleCreate
   {"cuGraphConditionalHandleCreate",                              {"hipGraphConditionalHandleCreate",                             "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_UNSUPPORTED}},
 
@@ -948,7 +946,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
 
   // 33. Driver Entry Point Access
   // cudaGetDriverEntryPoint
-  {"cuGetProcAddress",                                            {"hipGetProcAddress",                                           "", CONV_DRIVER_ENTRY_POINT, API_DRIVER, SEC::DRIVER_ENTRY_POINT, HIP_UNSUPPORTED}},
+  {"cuGetProcAddress",                                            {"hipGetProcAddress",                                           "", CONV_DRIVER_ENTRY_POINT, API_DRIVER, SEC::DRIVER_ENTRY_POINT, HIP_EXPERIMENTAL}},
 
   // 34. Coredump Attributes Control API
   //
@@ -1640,13 +1638,16 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_FUNCTION_VER_MAP {
   {"hipArrayGetDescriptor",                                       {HIP_5060, HIP_0,    HIP_0   }},
   {"hipArray3DGetDescriptor",                                     {HIP_5060, HIP_0,    HIP_0   }},
   {"hipDrvGraphAddMemcpyNode",                                    {HIP_6000, HIP_0,    HIP_0   }},
-  {"hipDrvGraphMemcpyNodeGetParams",                              {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipDrvGraphMemcpyNodeSetParams",                              {HIP_6010, HIP_0,    HIP_0   }},
+  {"hipDrvGraphMemcpyNodeGetParams",                              {HIP_6020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipDrvGraphMemcpyNodeSetParams",                              {HIP_6020, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipDrvGraphAddMemsetNode",                                    {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipDrvGraphAddMemFreeNode",                                   {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipDrvGraphExecMemcpyNodeSetParams",                          {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipDrvGraphExecMemsetNodeSetParams",                          {HIP_6010, HIP_0,    HIP_0   }},
+  {"hipDrvGraphAddMemFreeNode",                                   {HIP_6020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipDrvGraphExecMemcpyNodeSetParams",                          {HIP_6020, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipTexRefGetBorderColor",                                     {HIP_6010, HIP_6010, HIP_0   }},
+};
+
+const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_DRIVER_FUNCTION_CHANGED_VER_MAP {
+  {"cuGetProcAddress",                                            {CUDA_120}},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_DRIVER_API_SECTION_MAP {

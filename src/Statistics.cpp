@@ -370,7 +370,7 @@ bool Statistics::isToRoc(const hipCounter &counter) {
           ((TranslateToRoc && !TranslateToMIOpen && !isRocMiopenOnly(counter)) || TranslateToMIOpen);
 }
 
-bool Statistics::isHipExperimental(const hipCounter& counter) {
+bool Statistics::isHipExperimental(const hipCounter &counter) {
   return HIP_EXPERIMENTAL == (counter.supportDegree & HIP_EXPERIMENTAL);
 }
 
@@ -434,19 +434,19 @@ bool Statistics::isRemoved(const hipCounter &counter) {
          ROC_REMOVED == (counter.supportDegree & ROC_REMOVED));
 }
 
-bool Statistics::isHipSupportedV2Only(const hipCounter& counter) {
+bool Statistics::isHipSupportedV2Only(const hipCounter &counter) {
   return HIP_SUPPORTED_V2_ONLY == (counter.supportDegree & HIP_SUPPORTED_V2_ONLY);
 }
 
-bool Statistics::isRocMiopenOnly(const hipCounter& counter) {
+bool Statistics::isRocMiopenOnly(const hipCounter &counter) {
   return ROC_MIOPEN_ONLY == (counter.supportDegree & ROC_MIOPEN_ONLY);
 }
 
-bool Statistics::isCudaOverloaded(const hipCounter& counter) {
+bool Statistics::isCudaOverloaded(const hipCounter &counter) {
   return CUDA_OVERLOADED == (counter.supportDegree & CUDA_OVERLOADED);
 }
 
-std::string Statistics::getCudaVersion(const cudaVersions& ver) {
+std::string Statistics::getCudaVersion(const cudaVersions &ver) {
   switch (ver) {
     case CUDA_0:
     default:       return "";
@@ -543,7 +543,7 @@ std::string Statistics::getCudaVersion(const cudaVersions& ver) {
   return "";
 }
 
-std::string Statistics::getHipVersion(const hipVersions& ver) {
+std::string Statistics::getHipVersion(const hipVersions &ver) {
   switch (ver) {
     case HIP_0:
     default:       return "";

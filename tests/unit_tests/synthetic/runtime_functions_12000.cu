@@ -17,6 +17,14 @@ int main() {
   // CHECK: hipGraph_t Graph_t;
   cudaGraph_t Graph_t;
 
+  void *pfn = nullptr;
+  std::string symbol = "symbol";
+
+#if defined(_WIN32) && CUDA_VERSION < 9000
+  typedef signed   __int64 int64_t;
+  typedef unsigned __int64 uint64_t;
+#endif
+
 #if defined(_WIN32)
   unsigned long long ull = 0;
 #else
@@ -28,6 +36,18 @@ int main() {
   // HIP: hipError_t hipGraphInstantiateWithFlags(hipGraphExec_t* pGraphExec, hipGraph_t graph, unsigned long long flags);
   // CHECK: result = hipGraphInstantiateWithFlags(&GraphExec_t, Graph_t, ull);
   result = cudaGraphInstantiate(&GraphExec_t, Graph_t, ull);
+
+  // CHECK: hipDriverProcAddressQueryResult driverProcAddressQueryResult;
+  cudaDriverEntryPointQueryResult driverProcAddressQueryResult;
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGetDriverEntryPoint(const char *symbol, void **funcPtr, unsigned long long flags, enum cudaDriverEntryPointQueryResult *driverStatus = NULL);
+  // CUDA < 12000: extern __host__ cudaError_t CUDARTAPI cudaGetDriverEntryPoint(const char *symbol, void **funcPtr, unsigned long long flags);
+  // NOTE: cudaGetDriverEntryPoint for CUDA < 12000 is not supported by HIP
+  // TODO: detect cudaGetDriverEntryPoint signature and report warning/error for old (before CUDA 12.0) signature
+  // HIP: hipError_t hipGetProcAddress(const char* symbol, void** pfn, int hipVersion, uint64_t flags, hipDriverProcAddressQueryResult* symbolStatus);
+  // TODO: add an explicit static_cast<uint64_t> for ull
+  // CHECK: result = hipGetProcAddress(symbol.c_str(), &pfn, 602, ull, &driverProcAddressQueryResult);
+  result = cudaGetDriverEntryPoint(symbol.c_str(), &pfn, ull, &driverProcAddressQueryResult);
 #endif
 
   return 0;

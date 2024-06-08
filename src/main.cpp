@@ -105,7 +105,7 @@ void sortInputFiles(int argc, const char **argv, std::vector<std::string> &files
   files.assign(sortedFiles.begin(), sortedFiles.end());
 }
 
-bool checkLLVM(std::string& path_to_check) {
+bool checkLLVM(std::string &path_to_check) {
   const std::string file_name_to_check = "__clang_cuda_runtime_wrapper.h";
   const std::string file_name_to_check_2 = "algorithm";
   const std::string cuda_wrappers_dir = "cuda_wrappers";
@@ -118,7 +118,7 @@ bool checkLLVM(std::string& path_to_check) {
   return bExist;
 }
 
-bool setLLVM(ct::RefactoringTool& Tool, const char* hipify_exe) {
+bool setLLVM(ct::RefactoringTool &Tool, const char *hipify_exe) {
   static int Dummy;
   std::string hipify = llvm::sys::fs::getMainExecutable(hipify_exe, (void*)&Dummy);
   std::string hipify_parent_path = std::string(llvm::sys::path::parent_path(hipify));

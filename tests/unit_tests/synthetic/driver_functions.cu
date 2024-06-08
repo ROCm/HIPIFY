@@ -13,25 +13,36 @@
 #include "cudaGL.h"
 #include "cudaProfiler.h"
 
+#if defined(_WIN32) && CUDA_VERSION < 9000
+  typedef signed   __int64 int64_t;
+  typedef unsigned __int64 uint64_t;
+#endif
+
 int main() {
   printf("09. CUDA Driver API Functions synthetic test\n");
 
   unsigned int flags = 0;
   unsigned int flags_2 = 0;
+  uint64_t flags_64 = 0;
   int dim = 0;
   int count = 0;
   int iBlockSize = 0;
   int iBlockSize_2 = 0;
+  int cudaVersion = 0;
+  // TODO: CUDA2HIP version convertor
+  int hipVersion = 0;
   size_t bytes = 0;
   size_t bytes_2 = 0;
-  void* image = nullptr;
+  void *image = nullptr;
+  void *pfn = nullptr;
   std::string name = "str";
+  std::string symbol = "symbol";
   uint32_t u_value = 0;
   float ms = 0.0f;
   float ms_2 = 0.0f;
   float fBorderColor = 0.0f;
-  int* value = 0;
-  int* value_2 = 0;
+  int *value = 0;
+  int *value_2 = 0;
   GLuint gl_uint = 0;
   GLenum gl_enum = 0;
 #if defined(_WIN32)
@@ -1424,6 +1435,11 @@ int main() {
   // HIP: hipError_t hipMemUnmap(void* ptr, size_t size);
   // CHECK: result = hipMemUnmap(deviceptr, bytes);
   result = cuMemUnmap(deviceptr, bytes);
+
+  // CUDA: CUresult CUDAAPI cuGraphExecMemcpyNodeSetParams(CUgraphExec hGraphExec, CUgraphNode hNode, const CUDA_MEMCPY3D *copyParams, CUcontext ctx);
+  // HIP: hipError_t hipDrvGraphExecMemcpyNodeSetParams(hipGraphExec_t hGraphExec, hipGraphNode_t hNode, const HIP_MEMCPY3D* copyParams, hipCtx_t ctx);
+  // CHECK: result = hipDrvGraphExecMemcpyNodeSetParams(graphExec, graphNode, &MEMCPY3D, context);
+  result = cuGraphExecMemcpyNodeSetParams(graphExec, graphNode, &MEMCPY3D, context);
 #endif
 
 #if CUDA_VERSION >= 10020 && CUDA_VERSION < 12000
@@ -1812,6 +1828,14 @@ int main() {
 #endif
 
 #if CUDA_VERSION >= 12000
+  // CHECK: hipDriverProcAddressQueryResult driverProcAddressQueryResult;
+  CUdriverProcAddressQueryResult driverProcAddressQueryResult;
+
+  // CHECK: hipGraphInstantiateParams GRAPH_INSTANTIATE_PARAMS_st;
+  // CHECK-NEXT: hipGraphInstantiateParams GRAPH_INSTANTIATE_PARAMS;
+  CUDA_GRAPH_INSTANTIATE_PARAMS_st GRAPH_INSTANTIATE_PARAMS_st;
+  CUDA_GRAPH_INSTANTIATE_PARAMS GRAPH_INSTANTIATE_PARAMS;
+
   // TODO: https://github.com/ROCm-Developer-Tools/HIPIFY/issues/782 - Introduce 1-to-N conditional matcher
   //       Implement "conditional" matching in hipify-clang, based on CUDA_VERSION first;
   //       below the transformation cuStreamGetCaptureInfo -> hipStreamGetCaptureInfo_v2 should be applied for CUDA_VERSION >= 12000,
@@ -1831,6 +1855,56 @@ int main() {
   // CUDA < 12000: CUresult CUDAAPI cuGraphInstantiate(CUgraphExec *phGraphExec, CUgraph hGraph, CUgraphNode *phErrorNode, char *logBuffer, size_t bufferSize);
   // CUDA:         CUresult CUDAAPI cuGraphInstantiate(CUgraphExec *phGraphExec, CUgraph hGraph, unsigned long long flags);
   // HIP:
+
+  // CUDA: CUresult CUDAAPI cuGetProcAddress(const char *symbol, void **pfn, int cudaVersion, cuuint64_t flags, CUdriverProcAddressQueryResult *symbolStatus);
+  // CUDA < 12000: CUresult CUDAAPI cuGetProcAddress(const char *symbol, void **pfn, int cudaVersion, cuuint64_t flags);
+  // NOTE: cuGetProcAddress for CUDA < 12000 is not supported by HIP
+  // TODO: detect cuGetProcAddress signature and report warning/error for old (before CUDA 12.0) signature
+  // HIP: hipError_t hipGetProcAddress(const char* symbol, void** pfn, int hipVersion, uint64_t flags, hipDriverProcAddressQueryResult* symbolStatus);
+  // CHECK: result = hipGetProcAddress(symbol.c_str(), &pfn, cudaVersion, flags_64, &driverProcAddressQueryResult);
+  result = cuGetProcAddress(symbol.c_str(), &pfn, cudaVersion, flags_64, &driverProcAddressQueryResult);
+
+  // CUDA: CUresult CUDAAPI cuGraphInstantiateWithParams(CUgraphExec *phGraphExec, CUgraph hGraph, CUDA_GRAPH_INSTANTIATE_PARAMS *instantiateParams);
+  // HIP: hipError_t hipGraphInstantiateWithParams(hipGraphExec_t* pGraphExec, hipGraph_t graph, hipGraphInstantiateParams *instantiateParams);
+  // CHECK: result = hipGraphInstantiateWithParams(&graphExec, graph, &GRAPH_INSTANTIATE_PARAMS);
+  result = cuGraphInstantiateWithParams(&graphExec, graph, &GRAPH_INSTANTIATE_PARAMS);
+
+  // CUDA: CUresult CUDAAPI cuGraphExecGetFlags(CUgraphExec hGraphExec, cuuint64_t *flags);
+  // HIP: hipError_t hipGraphExecGetFlags(hipGraphExec_t graphExec, unsigned long long* flags);
+  // CHECK: result = hipGraphExecGetFlags(graphExec, &ull);
+  result = cuGraphExecGetFlags(graphExec, &ull);
+#endif
+
+#if CUDA_VERSION >= 12020
+  // CHECK: hipGraphNodeParams graphNodeParams;
+  CUgraphNodeParams graphNodeParams;
+
+  // CUDA: CUresult CUDAAPI cuGraphAddNode(CUgraphNode *phGraphNode, CUgraph hGraph, const CUgraphNode *dependencies, size_t numDependencies, CUgraphNodeParams *nodeParams);
+  // HIP: hipError_t hipGraphAddNode(hipGraphNode_t *pGraphNode, hipGraph_t graph, const hipGraphNode_t *pDependencies, size_t numDependencies, hipGraphNodeParams *nodeParams);
+  // CHECK: result = hipGraphAddNode(&graphNode, graph, &graphNode2, bytes, &graphNodeParams);
+  result = cuGraphAddNode(&graphNode, graph, &graphNode2, bytes, &graphNodeParams);
+
+  // CUDA: CUresult CUDAAPI cuGraphNodeSetParams(CUgraphNode hNode, CUgraphNodeParams *nodeParams);
+  // HIP: hipError_t hipGraphNodeSetParams(hipGraphNode_t node, hipGraphNodeParams *nodeParams);
+  // CHECK: result = hipGraphNodeSetParams(graphNode, &graphNodeParams);
+  result = cuGraphNodeSetParams(graphNode, &graphNodeParams);
+
+  // CUDA: CUresult CUDAAPI cuGraphExecNodeSetParams(CUgraphExec hGraphExec, CUgraphNode hNode, CUgraphNodeParams *nodeParams);
+  // HIP: hipError_t hipGraphExecNodeSetParams(hipGraphExec_t graphExec, hipGraphNode_t node, hipGraphNodeParams* nodeParams);
+  // CHECK: result = hipGraphExecNodeSetParams(graphExec, graphNode, &graphNodeParams);
+  result = cuGraphExecNodeSetParams(graphExec, graphNode, &graphNodeParams);
+#endif
+
+#if CUDA_VERSION >= 12030
+  // CHECK: hipGraphEdgeData graphEdgeData_st;
+  // CHECK-NEXT: hipGraphEdgeData graphEdgeData;
+  CUgraphEdgeData_st graphEdgeData_st;
+  CUgraphEdgeData graphEdgeData;
+
+  // CUDA: CUresult CUDAAPI cuStreamBeginCaptureToGraph(CUstream hStream, CUgraph hGraph, const CUgraphNode *dependencies, const CUgraphEdgeData *dependencyData, size_t numDependencies, CUstreamCaptureMode mode);
+  // HIP: hipError_t hipStreamBeginCaptureToGraph(hipStream_t stream, hipGraph_t graph, const hipGraphNode_t* dependencies, const hipGraphEdgeData* dependencyData, size_t numDependencies, hipStreamCaptureMode mode);
+  // CHECK: result = hipStreamBeginCaptureToGraph(stream, graph, &graphNode2, &graphEdgeData, bytes, streamCaptureMode);
+  result = cuStreamBeginCaptureToGraph(stream, graph, &graphNode2, &graphEdgeData, bytes, streamCaptureMode);
 #endif
 
   return 0;

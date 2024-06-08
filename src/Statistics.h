@@ -412,7 +412,7 @@ public:
   // Add the counters from `other` onto the counters of this object.
   void add(const StatCounter &other);
   int getConvSum();
-  void print(std::ostream* csv, llvm::raw_ostream* printOut, const std::string &prefix);
+  void print(std::ostream *csv, llvm::raw_ostream *printOut, const std::string &prefix);
 };
 
 /**
@@ -448,13 +448,13 @@ public:
     * @param printOut Pointer to an output stream to print human-readable textual stats to. If null, no
     *                 such stats are produced.
     */
-  void print(std::ostream* csv, llvm::raw_ostream* printOut, bool skipHeader = false);
+  void print(std::ostream *csv, llvm::raw_ostream *printOut, bool skipHeader = false);
   // Print aggregated statistics for all registered counters.
-  static void printAggregate(std::ostream *csv, llvm::raw_ostream* printOut);
+  static void printAggregate(std::ostream *csv, llvm::raw_ostream *printOut);
   // The Statistics for each input file.
   static std::map<std::string, Statistics> stats;
   // The Statistics objects for the currently-being-processed input file.
-  static Statistics* currentStatistics;
+  static Statistics *currentStatistics;
   // Aggregate statistics over all entries in `stats` and return the resulting Statistics object.
   static Statistics getAggregate();
   /**
@@ -477,29 +477,29 @@ public:
   // Check whether the counter is ROC_UNSUPPORTED or not.
   static bool isRocUnsupported(const hipCounter &counter);
   // Check whether the counter is ROC_UNSUPPORTED/HIP_UNSUPPORTED/UNSUPPORTED or not.
-  static bool isUnsupported(const hipCounter& counter);
+  static bool isUnsupported(const hipCounter &counter);
   // Check whether the counter is CUDA_DEPRECATED or not.
-  static bool isCudaDeprecated(const hipCounter& counter);
+  static bool isCudaDeprecated(const hipCounter &counter);
   // Check whether the counter is HIP_DEPRECATED or not.
-  static bool isHipDeprecated(const hipCounter& counter);
+  static bool isHipDeprecated(const hipCounter &counter);
   // Check whether the counter is ROC_DEPRECATED or not.
-  static bool isRocDeprecated(const hipCounter& counter);
+  static bool isRocDeprecated(const hipCounter &counter);
   // Check whether the counter is DEPRECATED or not.
-  static bool isDeprecated(const hipCounter& counter);
+  static bool isDeprecated(const hipCounter &counter);
   // Check whether the counter is CUDA_REMOVED or not.
-  static bool isCudaRemoved(const hipCounter& counter);
+  static bool isCudaRemoved(const hipCounter &counter);
   // Check whether the counter is HIP_REMOVED or not.
-  static bool isHipRemoved(const hipCounter& counter);
+  static bool isHipRemoved(const hipCounter &counter);
   // Check whether the counter is ROC_REMOVED or not.
-  static bool isRocRemoved(const hipCounter& counter);
+  static bool isRocRemoved(const hipCounter &counter);
   // Check whether the counter is REMOVED or not.
-  static bool isRemoved(const hipCounter& counter);
+  static bool isRemoved(const hipCounter &counter);
   // Check whether the counter is HIP_SUPPORTED_V2_ONLY or not.
-  static bool isHipSupportedV2Only(const hipCounter& counter);
+  static bool isHipSupportedV2Only(const hipCounter &counter);
   // Check whether the counter is ROC_MIOPEN_ONLY or not.
-  static bool isRocMiopenOnly(const hipCounter& counter);
+  static bool isRocMiopenOnly(const hipCounter &counter);
   // Check whether the counter is CUDA_OVERLOADED or not.
-  static bool isCudaOverloaded(const hipCounter& counter);
+  static bool isCudaOverloaded(const hipCounter &counter);
   // Get string CUDA version.
   static std::string getCudaVersion(const cudaVersions &ver);
   // Get string HIP version.

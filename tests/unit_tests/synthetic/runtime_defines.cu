@@ -107,6 +107,9 @@ int main() {
   // CHECK-NEXT: int CooperativeLaunchMultiDeviceNoPostSync = hipCooperativeLaunchMultiDeviceNoPostSync;
   int CooperativeLaunchMultiDeviceNoPreSync = cudaCooperativeLaunchMultiDeviceNoPreSync;
   int CooperativeLaunchMultiDeviceNoPostSync = cudaCooperativeLaunchMultiDeviceNoPostSync;
+
+  // CHECK: hipStream_t StreamLegacy = hipStreamLegacy;
+  cudaStream_t StreamLegacy = cudaStreamLegacy;
 #endif
 
 #if CUDA_VERSION >= 10000
@@ -117,6 +120,17 @@ int main() {
 #if CUDA_VERSION >= 11010
   // CHECK: int HostRegisterReadOnly = hipHostRegisterReadOnly;
   int HostRegisterReadOnly = cudaHostRegisterReadOnly;
+#endif
+
+#if CUDA_VERSION >= 12030
+  // CHECK: int GRAPH_KERNEL_NODE_PORT_DEFAULT = hipGraphKernelNodePortDefault;
+  int GRAPH_KERNEL_NODE_PORT_DEFAULT = cudaGraphKernelNodePortDefault;
+
+  // CHECK: int GRAPH_KERNEL_NODE_PORT_LAUNCH_ORDER = hipGraphKernelNodePortLaunchCompletion;
+  int GRAPH_KERNEL_NODE_PORT_LAUNCH_ORDER = cudaGraphKernelNodePortLaunchCompletion;
+
+  // CHECK: int GRAPH_KERNEL_NODE_PORT_PROGRAMMATIC = hipGraphKernelNodePortProgrammatic;
+  int GRAPH_KERNEL_NODE_PORT_PROGRAMMATIC = cudaGraphKernelNodePortProgrammatic;
 #endif
 
   return 0;

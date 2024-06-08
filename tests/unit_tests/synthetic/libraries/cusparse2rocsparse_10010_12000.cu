@@ -1,4 +1,4 @@
-// RUN: %run_test hipify "%s" "%t" %hipify_args 4 --skip-excluded-preprocessor-conditional-blocks --experimental --roc --use-hip-data-types %clang_args -ferror-limit=500
+// RUN: %run_test hipify "%s" "%t" %hipify_args 5 --skip-excluded-preprocessor-conditional-blocks --experimental --roc --use-hip-data-types --amap %clang_args -ferror-limit=500
 
 // CHECK: #include <hip/hip_runtime.h>
 #include <cuda_runtime.h>
@@ -59,19 +59,11 @@ int main() {
   cudaDataType dataType;
 #endif
 
-#if CUDA_VERSION >= 10010 && CUSPARSE_VERSION >= 10200
+#if CUDA_VERSION >= 10010
+
+#if (CUSPARSE_VER_MAJOR == 10 && CUSPARSE_VER_MINOR == 2) || CUSPARSE_VERSION >= 10300
   // TODO: cusparseCsr2CscAlg_t has no analogue in rocSPARSE. The deletion of declaration and usage is needed to be implemented
   cusparseCsr2CscAlg_t Csr2CscAlg_t;
-
-#if (CUDA_VERSION < 11000 && !defined(_WIN32)) || CUDA_VERSION >= 11000
-  // CHECK: rocsparse_spmat_descr spMatDescr_t, spmatA, spmatB, spmatC;
-  cusparseSpMatDescr_t spMatDescr_t, spmatA, spmatB, spmatC;
-
-  // CHECK: rocsparse_dnmat_descr dnMatDescr_t, dnmatA, dnmatB, dnmatC;
-  cusparseDnMatDescr_t dnMatDescr_t, dnmatA, dnmatB, dnmatC;
-
-  // CHECK: rocsparse_spmm_alg spMMAlg_t;
-  cusparseSpMMAlg_t spMMAlg_t;
 
   // CHECK: _rocsparse_spvec_descr *spVecDescr = nullptr;
   // CHECK-NEXT: rocsparse_spvec_descr spVecDescr_t;
@@ -83,6 +75,18 @@ int main() {
   cusparseDnVecDescr *dnVecDescr = nullptr;
   cusparseDnVecDescr_t dnVecDescr_t, vecX, vecY;
 #endif
+
+#if (CUDA_VERSION < 11000 && !defined(_WIN32)) || CUDA_VERSION >= 11000
+  // CHECK: rocsparse_spmat_descr spMatDescr_t, spmatA, spmatB, spmatC;
+  cusparseSpMatDescr_t spMatDescr_t, spmatA, spmatB, spmatC;
+
+  // CHECK: rocsparse_dnmat_descr dnMatDescr_t, dnmatA, dnmatB, dnmatC;
+  cusparseDnMatDescr_t dnMatDescr_t, dnmatA, dnmatB, dnmatC;
+
+  // CHECK: rocsparse_spmm_alg spMMAlg_t;
+  cusparseSpMMAlg_t spMMAlg_t;
+#endif
+
 #endif
 
   return 0;
