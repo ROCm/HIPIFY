@@ -543,7 +543,7 @@ LLVM >= 10.0.0
 
      .. code-block:: shell
       
-      -DCUDA_DNN_ROOT_DIR=D:/CUDA/cuDNN/9.1.1
+      -DCUDA_DNN_ROOT_DIR=D:/CUDA/cuDNN/9.2.0
 
 5. Install `CUB <https://github.com/nvidia/cub>`_ belonging to the version corresponding to the CUDA version:
    
@@ -634,8 +634,8 @@ On Linux, the following configurations are tested:
 
 * Ubuntu 14: LLVM 4.0.0 - 7.1.0, CUDA 7.0 - 9.0, cuDNN 5.0.5 - 7.6.5
 * Ubuntu 16-19: LLVM 8.0.0 - 14.0.6, CUDA 7.0 - 10.2, cuDNN 5.1.10 - 8.0.5
-* Ubuntu 20-21: LLVM 9.0.0 - 18.1.6, CUDA 7.0 - 12.3.2, cuDNN 5.1.10 - 9.1.1
-* Ubuntu 22-23: LLVM 13.0.0 - 18.1.6, CUDA 7.0 - 12.3.2, cuDNN 8.0.5 - 9.1.1
+* Ubuntu 20-21: LLVM 9.0.0 - 18.1.6, CUDA 7.0 - 12.3.2, cuDNN 5.1.10 - 9.2.0
+* Ubuntu 22-23: LLVM 13.0.0 - 18.1.6, CUDA 7.0 - 12.3.2, cuDNN 8.0.5 - 9.2.0
 
 Minimum build system requirements for the above configurations:
 
@@ -655,7 +655,7 @@ Here's how to build ``hipify-clang`` with testing support on ``Ubuntu 23.10.01``
   -DCMAKE_INSTALL_PREFIX=../dist \
   -DCMAKE_PREFIX_PATH=/usr/llvm/18.1.6/dist \
   -DCUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-12.3.2 \
-  -DCUDA_DNN_ROOT_DIR=/usr/local/cudnn-9.1.1 \
+  -DCUDA_DNN_ROOT_DIR=/usr/local/cudnn-9.2.0 \
   -DCUDA_CUB_ROOT_DIR=/usr/local/cub-2.1.0 \
   -DLLVM_EXTERNAL_LIT=/usr/llvm/18.1.6/build/bin/llvm-lit \
   ../hipify
@@ -694,7 +694,7 @@ The corresponding successful output is:
   -- Initial CUDA to configure:
   --    - CUDA Toolkit path  : /usr/local/cuda-12.3.2
   --    - CUDA Samples path  : OFF
-  --    - cuDNN path         : /usr/local/cudnn-9.1.1
+  --    - cuDNN path         : /usr/local/cudnn-9.2.0
   --    - CUB path           : /usr/local/cub-2.1.0
   -- Found CUDAToolkit: /usr/local/cuda-12.3.2/targets/x86_64-linux/include (found version "12.3.107")
   -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
@@ -703,7 +703,7 @@ The corresponding successful output is:
   -- Found CUDA config:
   --    - CUDA Toolkit path  : /usr/local/cuda-12.3.2
   --    - CUDA Samples path  : OFF
-  --    - cuDNN path         : /usr/local/cudnn-9.1.1
+  --    - cuDNN path         : /usr/local/cudnn-9.2.0
   --    - CUB path           : /usr/local/cub-2.1.0
   -- Configuring done (0.5s)
   -- Generating done (0.0s)
@@ -816,13 +816,13 @@ Tested configurations:
     - ``3.11.4``
   * - ``17.0.1`` :sup:`6` - ``18.1.6`` :sup:`7`
     - ``7.0 - 12.3.2``
-    - ``8.0.5  - 9.1.1``
+    - ``8.0.5  - 9.2.0``
     - ``2019.16.11.35, 2022.17.9.6``
     - ``3.29.3``
     - ``3.12.3``
   * - ``19.0.0git``
     - ``7.0 - 12.4.1``
-    - ``8.0.5  - 9.1.1``
+    - ``8.0.5  - 9.2.0``
     - ``2019.16.11.35, 2022.17.9.6``
     - ``3.29.3``
     - ``3.12.3``
@@ -853,7 +853,7 @@ Building with testing support using ``Visual Studio 17 2022`` on ``Windows 11``:
   -DCMAKE_PREFIX_PATH=D:/LLVM/18.1.6/dist \
   -DCUDA_TOOLKIT_ROOT_DIR="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.3" \
   -DCUDA_SDK_ROOT_DIR="C:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.3" \
-  -DCUDA_DNN_ROOT_DIR=D:/CUDA/cuDNN/9.1.1 \
+  -DCUDA_DNN_ROOT_DIR=D:/CUDA/cuDNN/9.2.0 \
   -DCUDA_CUB_ROOT_DIR=D:/CUDA/CUB/cub-2.1.0 \
   -DLLVM_EXTERNAL_LIT=D:/LLVM/18.1.6/build/Release/bin/llvm-lit.py \
   ../hipify
@@ -891,13 +891,13 @@ The corresponding successful output is:
   -- Initial CUDA to configure:
   --    - CUDA Toolkit path  : C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.3
   --    - CUDA Samples path  : C:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.3
-  --    - cuDNN path         : D:/CUDA/cuDNN/9.1.1
+  --    - cuDNN path         : D:/CUDA/cuDNN/9.2.0
   --    - CUB path           : D:/CUDA/CUB/cub-2.1.0
   -- Found CUDAToolkit: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.3/include (found version "12.3.107")
   -- Found CUDA config:
   --    - CUDA Toolkit path  : C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.3
   --    - CUDA Samples path  : C:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.3
-  --    - cuDNN path         : D:/CUDA/cuDNN/9.1.1
+  --    - cuDNN path         : D:/CUDA/cuDNN/9.2.0
   --    - CUB path           : D:/CUDA/CUB/cub-2.1.0
   -- Configuring done (1.4s)
   -- Generating done (0.1s)

@@ -55,6 +55,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"CUDNN_STATUS_RUNTIME_PREREQUISITE_MISSING",                      {"HIPDNN_STATUS_RUNTIME_PREREQUISITE_MISSING",                      "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
   {"CUDNN_STATUS_RUNTIME_IN_PROGRESS",                               {"HIPDNN_STATUS_RUNTIME_IN_PROGRESS",                               "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_STATUS_RUNTIME_FP_OVERFLOW",                               {"HIPDNN_STATUS_RUNTIME_FP_OVERFLOW",                               "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_STATUS_SUBLIBRARY_LOADING_FAILED",                         {"HIPDNN_STATUS_SUBLIBRARY_LOADING_FAILED",                         "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_STATUS_VERSION_MISMATCH",                                  {"HIPDNN_STATUS_VERSION_MISMATCH",                                  "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED | CUDA_DEPRECATED}},
   {"CUDNN_STATUS_SUBLIBRARY_VERSION_MISMATCH",                       {"HIPDNN_STATUS_SUBLIBRARY_VERSION_MISMATCH",                       "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_STATUS_SERIALIZATION_VERSION_MISMATCH",                    {"HIPDNN_STATUS_SERIALIZATION_VERSION_MISMATCH",                    "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
@@ -463,6 +464,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"CUDNN_ATTR_ENGINECFG_ENGINE",                                    {"HIPDNN_ATTR_ENGINECFG_ENGINE",                                    "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 300
   {"CUDNN_ATTR_ENGINECFG_INTERMEDIATE_INFO",                         {"HIPDNN_ATTR_ENGINECFG_INTERMEDIATE_INFO",                         "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 301
   {"CUDNN_ATTR_ENGINECFG_KNOB_CHOICES",                              {"HIPDNN_ATTR_ENGINECFG_KNOB_CHOICES",                              "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 302
+  {"CUDNN_ATTR_ENGINECFG_WORKSPACE_SIZE",                            {"HIPDNN_ATTR_ENGINECFG_WORKSPACE_SIZE",                            "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 303
+  {"CUDNN_ATTR_ENGINECFG_SHARED_MEMORY_USED",                        {"HIPDNN_ATTR_ENGINECFG_SHARED_MEMORY_USED",                        "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 304
   {"CUDNN_ATTR_EXECUTION_PLAN_HANDLE",                               {"HIPDNN_ATTR_EXECUTION_PLAN_HANDLE",                               "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 400
   {"CUDNN_ATTR_EXECUTION_PLAN_ENGINE_CONFIG",                        {"HIPDNN_ATTR_EXECUTION_PLAN_ENGINE_CONFIG",                        "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 401
   {"CUDNN_ATTR_EXECUTION_PLAN_WORKSPACE_SIZE",                       {"HIPDNN_ATTR_EXECUTION_PLAN_WORKSPACE_SIZE",                       "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 402
@@ -1761,6 +1764,9 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_TYPE_NAME_VER_MAP {
   {"CUDNN_STATUS_SPECIFIC_ERROR",                                    {CUDNN_900, CUDA_0,    CUDA_0   }},
   {"CUDNN_POINTWISE_ATAN2",                                          {CUDNN_910, CUDA_0,    CUDA_0   }},
   {"CUDNN_NUMERICAL_NOTE_STRICT_NAN_PROP",                           {CUDNN_910, CUDA_0,    CUDA_0   }},
+  {"CUDNN_STATUS_SUBLIBRARY_LOADING_FAILED",                         {CUDNN_920, CUDA_0,    CUDA_0   }},
+  {"CUDNN_ATTR_ENGINECFG_WORKSPACE_SIZE",                            {CUDNN_920, CUDA_0,    CUDA_0   }},
+  {"CUDNN_ATTR_ENGINECFG_SHARED_MEMORY_USED",                        {CUDNN_920, CUDA_0,    CUDA_0   }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_DNN_TYPE_NAME_VER_MAP {
