@@ -643,7 +643,7 @@ Minimum build system requirements for the above configurations:
 
 Recommended build system requirements:
 
-* CMake 3.28.3, GNU C/C++ 13.2, Python 3.12.3.
+* CMake 3.29.3, GNU C/C++ 13.2, Python 3.12.4.
 
 Here's how to build ``hipify-clang`` with testing support on ``Ubuntu 23.10.01``:
 
@@ -688,7 +688,7 @@ The corresponding successful output is:
   --    - Binary path        : /usr/llvm/18.1.6/dist/bin
   -- Linker detection: GNU ld
   -- ---- The below configuring for hipify-clang testing only ----
-  -- Found Python: /usr/bin/python3.12 (found version "3.12.3") found components: Interpreter 
+  -- Found Python: /usr/bin/python3.12 (found version "3.12.4") found components: Interpreter 
   -- Found lit: /usr/local/bin/lit
   -- Found FileCheck: /GIT/LLVM/trunk/dist/FileCheck
   -- Initial CUDA to configure:
@@ -724,7 +724,7 @@ The corresponding successful output is:
   x86_64 - Platform architecture
   Linux 6.5.0-15-generic - Platform OS
   64 - hipify-clang binary bitness
-  64 - python 3.12.3 binary bitness
+  64 - python 3.12.4 binary bitness
   ===============================================================
   -- Testing: 106 tests, 12 threads --
   Testing Time: 6.91s
@@ -817,15 +817,15 @@ Tested configurations:
   * - ``17.0.1`` :sup:`6` - ``18.1.6`` :sup:`7`
     - ``7.0 - 12.3.2``
     - ``8.0.5  - 9.2.0``
-    - ``2019.16.11.35, 2022.17.9.6``
+    - ``2019.16.11.36, 2022.17.10.1``
     - ``3.29.3``
-    - ``3.12.3``
+    - ``3.12.4``
   * - ``19.0.0git``
     - ``7.0 - 12.4.1``
     - ``8.0.5  - 9.2.0``
-    - ``2019.16.11.35, 2022.17.9.6``
+    - ``2019.16.11.36, 2022.17.10.1``
     - ``3.29.3``
-    - ``3.12.3``
+    - ``3.12.4``
 
 :sup:`5` LLVM 14.x.x is the latest major release supporting Visual Studio 2017.
 
@@ -885,7 +885,7 @@ The corresponding successful output is:
   --    - LLVM Include path  : D:/LLVM/18.1.6/dist/include
   --    - Binary path        : D:/LLVM/18.1.6/dist/bin
   -- ---- The below configuring for hipify-clang testing only ----
-  -- Found Python: C:/Users/TT/AppData/Local/Programs/Python/Python312/python.exe (found version "3.12.3") found components: Interpreter
+  -- Found Python: C:/Users/TT/AppData/Local/Programs/Python/Python312/python.exe (found version "3.12.4") found components: Interpreter
   -- Found lit: C:/Users/TT/AppData/Local/Programs/Python/Python312/Scripts/lit.exe
   -- Found FileCheck: D:/LLVM/18.1.6/dist/bin/FileCheck.exe
   -- Initial CUDA to configure:
