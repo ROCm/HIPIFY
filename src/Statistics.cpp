@@ -489,6 +489,7 @@ std::string Statistics::getCudaVersion(const cudaVersions &ver) {
     case CUDA_122: return "12.2";
     case CUDA_123: return "12.3";
     case CUDA_124: return "12.4";
+    case CUDA_125: return "12.5";
     case CUDNN_10: return "1.0.0";
     case CUDNN_20: return "2.0.0";
     case CUDNN_30: return "3.0.0";
