@@ -558,6 +558,20 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_AD_FORMAT_BC6H_SF16",                                           {"HIP_AD_FORMAT_BC6H_SF16",                                  "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0x9c
   {"CU_AD_FORMAT_BC7_UNORM",                                           {"HIP_AD_FORMAT_BC7_UNORM",                                  "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0x9d
   {"CU_AD_FORMAT_BC7_UNORM_SRGB",                                      {"HIP_AD_FORMAT_BC7_UNORM_SRGB",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0x9e
+  {"CU_AD_FORMAT_P010",                                                {"HIP_AD_FORMAT_P010",                                       "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0x9f
+  {"CU_AD_FORMAT_P016",                                                {"HIP_AD_FORMAT_P016",                                       "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0xa1
+  {"CU_AD_FORMAT_NV16",                                                {"HIP_AD_FORMAT_NV16",                                       "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0xa2
+  {"CU_AD_FORMAT_P210",                                                {"HIP_AD_FORMAT_P210",                                       "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0xa3
+  {"CU_AD_FORMAT_P216",                                                {"HIP_AD_FORMAT_P216",                                       "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0xa4
+  {"CU_AD_FORMAT_YUY2",                                                {"HIP_AD_FORMAT_YUY2",                                       "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0xa5
+  {"CU_AD_FORMAT_Y210",                                                {"HIP_AD_FORMAT_Y210",                                       "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0xa6
+  {"CU_AD_FORMAT_Y216",                                                {"HIP_AD_FORMAT_Y216",                                       "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0xa7
+  {"CU_AD_FORMAT_AYUV",                                                {"HIP_AD_FORMAT_AYUV",                                       "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0xa8
+  {"CU_AD_FORMAT_Y410",                                                {"HIP_AD_FORMAT_Y410",                                       "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0xa9
+  {"CU_AD_FORMAT_Y416",                                                {"HIP_AD_FORMAT_Y416",                                       "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0xb1
+  {"CU_AD_FORMAT_Y444_PLANAR8",                                        {"HIP_AD_FORMAT_Y444_PLANAR8",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0xb2
+  {"CU_AD_FORMAT_Y444_PLANAR10",                                       {"HIP_AD_FORMAT_Y444_PLANAR10",                              "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0xb3
+  {"CU_AD_FORMAT_MAX",                                                 {"HIP_AD_FORMAT_MAX",                                        "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0x7FFFFFFF
 
   // cudaComputeMode
   {"CUcomputemode",                                                    {"hipComputeMode",                                           "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES}},
@@ -933,6 +947,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_DEVICE_ATTRIBUTE_MPS_ENABLED",                                  {"hipDeviceAttributeMpsEnables",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 133
   // cudaDevAttrHostNumaId
   {"CU_DEVICE_ATTRIBUTE_HOST_NUMA_ID",                                 {"hipDeviceAttributeHostNumaId",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 134
+  //
+  {"CU_DEVICE_ATTRIBUTE_D3D12_CIG_SUPPORTED",                          {"hipDeviceAttributeD3D12CigSupported",                      "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 135
   // cudaDevAttrMax
   {"CU_DEVICE_ATTRIBUTE_MAX",                                          {"hipDeviceAttributeMax",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
@@ -1461,6 +1477,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_LIMIT_MAX_L2_FETCH_GRANULARITY",                                {"hipLimitMaxL2FetchGranularity",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0x05
   // cudaLimitPersistingL2CacheSize
   {"CU_LIMIT_PERSISTING_L2_CACHE_SIZE",                                {"hipLimitPersistingL2CacheSize",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0x06
+  //
+  {"CU_LIMIT_SHMEM_SIZE",                                              {"hipLimitShmemSize",                                        "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0x07
+  //
+  {"CU_LIMIT_CIG_ENABLED",                                             {"hipLimitCigEnabled",                                       "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0x08
+  //
+  {"CU_LIMIT_CIG_SHMEM_FALLBACK_ENABLED",                              {"hipLimitCigShmemFallbackEnabled",                          "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0x09
   // no analogue
   {"CU_LIMIT_MAX",                                                     {"hipLimitMax",                                              "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
@@ -3734,6 +3756,24 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_TYPE_NAME_VER_MAP {
   {"CUdevResource",                                                    {CUDA_124, CUDA_0,   CUDA_0  }},
   {"CUasyncCallbackEntry_st",                                          {CUDA_124, CUDA_0,   CUDA_0  }},
   {"CUasyncCallbackHandle",                                            {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"CU_AD_FORMAT_P010",                                                {CUDA_125, CUDA_0,   CUDA_0  }},
+  {"CU_AD_FORMAT_P016",                                                {CUDA_125, CUDA_0,   CUDA_0  }},
+  {"CU_AD_FORMAT_NV16",                                                {CUDA_125, CUDA_0,   CUDA_0  }},
+  {"CU_AD_FORMAT_P210",                                                {CUDA_125, CUDA_0,   CUDA_0  }},
+  {"CU_AD_FORMAT_P216",                                                {CUDA_125, CUDA_0,   CUDA_0  }},
+  {"CU_AD_FORMAT_YUY2",                                                {CUDA_125, CUDA_0,   CUDA_0  }},
+  {"CU_AD_FORMAT_Y210",                                                {CUDA_125, CUDA_0,   CUDA_0  }},
+  {"CU_AD_FORMAT_Y216",                                                {CUDA_125, CUDA_0,   CUDA_0  }},
+  {"CU_AD_FORMAT_AYUV",                                                {CUDA_125, CUDA_0,   CUDA_0  }},
+  {"CU_AD_FORMAT_Y410",                                                {CUDA_125, CUDA_0,   CUDA_0  }},
+  {"CU_AD_FORMAT_Y416",                                                {CUDA_125, CUDA_0,   CUDA_0  }},
+  {"CU_AD_FORMAT_Y444_PLANAR8",                                        {CUDA_125, CUDA_0,   CUDA_0  }},
+  {"CU_AD_FORMAT_Y444_PLANAR10",                                       {CUDA_125, CUDA_0,   CUDA_0  }},
+  {"CU_AD_FORMAT_MAX",                                                 {CUDA_125, CUDA_0,   CUDA_0  }},
+  {"CU_DEVICE_ATTRIBUTE_D3D12_CIG_SUPPORTED",                          {CUDA_125, CUDA_0,   CUDA_0  }},
+  {"CU_LIMIT_SHMEM_SIZE",                                              {CUDA_125, CUDA_0,   CUDA_0  }},
+  {"CU_LIMIT_CIG_ENABLED",                                             {CUDA_125, CUDA_0,   CUDA_0  }},
+  {"CU_LIMIT_CIG_SHMEM_FALLBACK_ENABLED",                              {CUDA_125, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {

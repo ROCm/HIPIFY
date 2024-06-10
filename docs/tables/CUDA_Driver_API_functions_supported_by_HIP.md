@@ -250,6 +250,7 @@
 |`CU_ACCESS_PROPERTY_NORMAL`|11.0| | | |`hipAccessPropertyNormal`|5.2.0| | | | |
 |`CU_ACCESS_PROPERTY_PERSISTING`|11.0| | | |`hipAccessPropertyPersisting`|5.2.0| | | | |
 |`CU_ACCESS_PROPERTY_STREAMING`|11.0| | | |`hipAccessPropertyStreaming`|5.2.0| | | | |
+|`CU_AD_FORMAT_AYUV`|12.5| | | | | | | | | |
 |`CU_AD_FORMAT_BC1_UNORM`|11.5| | | | | | | | | |
 |`CU_AD_FORMAT_BC1_UNORM_SRGB`|11.5| | | | | | | | | |
 |`CU_AD_FORMAT_BC2_UNORM`|11.5| | | | | | | | | |
@@ -266,7 +267,13 @@
 |`CU_AD_FORMAT_BC7_UNORM_SRGB`|11.5| | | | | | | | | |
 |`CU_AD_FORMAT_FLOAT`| | | | |`HIP_AD_FORMAT_FLOAT`|1.7.0| | | | |
 |`CU_AD_FORMAT_HALF`| | | | |`HIP_AD_FORMAT_HALF`|1.7.0| | | | |
+|`CU_AD_FORMAT_MAX`|12.5| | | | | | | | | |
 |`CU_AD_FORMAT_NV12`|11.2| | | | | | | | | |
+|`CU_AD_FORMAT_NV16`|12.5| | | | | | | | | |
+|`CU_AD_FORMAT_P010`|12.5| | | | | | | | | |
+|`CU_AD_FORMAT_P016`|12.5| | | | | | | | | |
+|`CU_AD_FORMAT_P210`|12.5| | | | | | | | | |
+|`CU_AD_FORMAT_P216`|12.5| | | | | | | | | |
 |`CU_AD_FORMAT_SIGNED_INT16`| | | | |`HIP_AD_FORMAT_SIGNED_INT16`|1.7.0| | | | |
 |`CU_AD_FORMAT_SIGNED_INT32`| | | | |`HIP_AD_FORMAT_SIGNED_INT32`|1.7.0| | | | |
 |`CU_AD_FORMAT_SIGNED_INT8`| | | | |`HIP_AD_FORMAT_SIGNED_INT8`|1.7.0| | | | |
@@ -285,6 +292,13 @@
 |`CU_AD_FORMAT_UNSIGNED_INT16`| | | | |`HIP_AD_FORMAT_UNSIGNED_INT16`|1.7.0| | | | |
 |`CU_AD_FORMAT_UNSIGNED_INT32`| | | | |`HIP_AD_FORMAT_UNSIGNED_INT32`|1.7.0| | | | |
 |`CU_AD_FORMAT_UNSIGNED_INT8`| | | | |`HIP_AD_FORMAT_UNSIGNED_INT8`|1.7.0| | | | |
+|`CU_AD_FORMAT_Y210`|12.5| | | | | | | | | |
+|`CU_AD_FORMAT_Y216`|12.5| | | | | | | | | |
+|`CU_AD_FORMAT_Y410`|12.5| | | | | | | | | |
+|`CU_AD_FORMAT_Y416`|12.5| | | | | | | | | |
+|`CU_AD_FORMAT_Y444_PLANAR10`|12.5| | | | | | | | | |
+|`CU_AD_FORMAT_Y444_PLANAR8`|12.5| | | | | | | | | |
+|`CU_AD_FORMAT_YUY2`|12.5| | | | | | | | | |
 |`CU_ARRAY_SPARSE_PROPERTIES_SINGLE_MIPTAIL`|11.1| | | | | | | | | |
 |`CU_ARRAY_SPARSE_SUBRESOURCE_TYPE_MIPTAIL`|11.1| | | |`hipArraySparseSubresourceTypeMiptail`|5.2.0| | | | |
 |`CU_ARRAY_SPARSE_SUBRESOURCE_TYPE_SPARSE_LEVEL`|11.1| | | |`hipArraySparseSubresourceTypeSparseLevel`|5.2.0| | | | |
@@ -364,6 +378,7 @@
 |`CU_DEVICE_ATTRIBUTE_CONCURRENT_MANAGED_ACCESS`|8.0| | | |`hipDeviceAttributeConcurrentManagedAccess`|3.10.0| | | | |
 |`CU_DEVICE_ATTRIBUTE_COOPERATIVE_LAUNCH`|9.0| | | |`hipDeviceAttributeCooperativeLaunch`|2.6.0| | | | |
 |`CU_DEVICE_ATTRIBUTE_COOPERATIVE_MULTI_DEVICE_LAUNCH`|9.0| | | |`hipDeviceAttributeCooperativeMultiDeviceLaunch`|2.6.0| | | | |
+|`CU_DEVICE_ATTRIBUTE_D3D12_CIG_SUPPORTED`|12.5| | | | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_DEFERRED_MAPPING_CUDA_ARRAY_SUPPORTED`|11.6| | | | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_DIRECT_MANAGED_MEM_ACCESS_FROM_HOST`|9.2| | | |`hipDeviceAttributeDirectManagedMemAccessFromHost`|3.10.0| | | | |
 |`CU_DEVICE_ATTRIBUTE_DMA_BUF_SUPPORTED`|11.7| | | | | | | | | |
@@ -793,6 +808,8 @@
 |`CU_LIBRARY_BINARY_IS_PRESERVED`|12.0| | | | | | | | | |
 |`CU_LIBRARY_HOST_UNIVERSAL_FUNCTION_AND_DATA_TABLE`|12.0| | | | | | | | | |
 |`CU_LIBRARY_NUM_OPTIONS`|12.0| | | | | | | | | |
+|`CU_LIMIT_CIG_ENABLED`|12.5| | | | | | | | | |
+|`CU_LIMIT_CIG_SHMEM_FALLBACK_ENABLED`|12.5| | | | | | | | | |
 |`CU_LIMIT_DEV_RUNTIME_PENDING_LAUNCH_COUNT`| | | | | | | | | | |
 |`CU_LIMIT_DEV_RUNTIME_SYNC_DEPTH`| | | | | | | | | | |
 |`CU_LIMIT_MALLOC_HEAP_SIZE`| | | | |`hipLimitMallocHeapSize`|1.6.0| | | | |
@@ -800,6 +817,7 @@
 |`CU_LIMIT_MAX_L2_FETCH_GRANULARITY`|10.0| | | | | | | | | |
 |`CU_LIMIT_PERSISTING_L2_CACHE_SIZE`|11.0| | | | | | | | | |
 |`CU_LIMIT_PRINTF_FIFO_SIZE`| | | | |`hipLimitPrintfFifoSize`|4.5.0| | | | |
+|`CU_LIMIT_SHMEM_SIZE`|12.5| | | | | | | | | |
 |`CU_LIMIT_STACK_SIZE`| | | | |`hipLimitStackSize`|5.3.0| | | | |
 |`CU_MEMHOSTALLOC_DEVICEMAP`| | | | |`hipHostMallocMapped`|1.6.0| | | | |
 |`CU_MEMHOSTALLOC_PORTABLE`| | | | |`hipHostMallocPortable`|1.6.0| | | | |
