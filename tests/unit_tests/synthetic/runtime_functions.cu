@@ -1597,8 +1597,8 @@ int main() {
 #if CUDA_VERSION >= 12000
   // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphExecGetFlags(cudaGraphExec_t graphExec, unsigned long long *flags);
   // HIP: hipError_t hipGraphExecGetFlags(hipGraphExec_t graphExec, unsigned long long* flags);
-  // CHECK: result = hipGraphExecGetFlags(GraphExec_t, &ull);
-  result = cudaGraphExecGetFlags(GraphExec_t, &ull);
+  // CHECK: result = hipGraphExecGetFlags(GraphExec_t, &ull_2);
+  result = cudaGraphExecGetFlags(GraphExec_t, &ull_2);
 #endif
 
 #if CUDA_VERSION >= 12020
