@@ -307,6 +307,10 @@ if(HIPIFY_CLANG_TESTS OR HIPIFY_CLANG_TESTS_ONLY)
     endif()
   endif()
 
+  if(CUDA_CUB_ROOT_DIR MATCHES "OFF" AND CUDA_VERSION VERSION_GREATER "10.0")
+    set(CUDA_CUB_ROOT_DIR "${CUDA_TOOLKIT_ROOT_DIR}/include/cub")
+  endif()
+
   message(STATUS "Found CUDA config:")
   message(STATUS "   - CUDA Toolkit path  : ${CUDA_TOOLKIT_ROOT_DIR}")
   message(STATUS "   - CUDA Samples path  : ${CUDA_SDK_ROOT_DIR}")
