@@ -463,6 +463,16 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   //
   {"CUdevResource",                                                    {"hipDevResource",                                           "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
+  //
+  {"CUctxCigParam_st",                                                 {"hipCtxCigParam",                                           "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CUctxCigParam",                                                    {"hipCtxCigParam",                                           "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+
+  //
+  {"CUctxCreateParams_st",                                             {"hipCtxCreateParams",                                       "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CUctxCreateParams",                                                {"hipCtxCreateParams",                                       "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+
   // 2. Unions
 
   {"CUstreamBatchMemOpParams",                                         {"hipStreamBatchMemOpParams",                                "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
@@ -2154,6 +2164,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_KERNEL_NODE_ATTRIBUTE_MEM_SYNC_DOMAIN",                         {"hipKernelNodeAttributeMemSyncDomain",                      "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   //
   {"CU_KERNEL_NODE_ATTRIBUTE_DEVICE_UPDATABLE_KERNEL_NODE",            {"hipKernelNodeAttributeDeviceUpdatableKernelMode",          "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CU_KERNEL_NODE_ATTRIBUTE_PREFERRED_SHARED_MEMORY_CARVEOUT",        {"hipKernelNodeAttributePreferredSharedMemoryCarveout",      "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   // cudaStreamAttrID
   {"CUstreamAttrID",                                                   {"hipStreamAttrID",                                          "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
@@ -2479,6 +2491,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaLaunchAttributeDeviceUpdatableKernelNode
   {"CU_LAUNCH_ATTRIBUTE_DEVICE_UPDATABLE_KERNEL_NODE",                 {"hipLaunchAttributeDeviceUpdatableKernelNode",              "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   //
+  {"CU_LAUNCH_ATTRIBUTE_PREFERRED_SHARED_MEMORY_CARVEOUT",             {"hipLaunchAttributePrefferedSharedMemoryCarveout",          "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
   {"CU_LAUNCH_ATTRIBUTE_MAX",                                          {"hipLaunchAttributeMax",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   // cudaGraphInstantiateResult
@@ -2695,6 +2709,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   //
   {"CU_DEV_RESOURCE_TYPE_MAX",                                        {"HIP_DEV_RESOURCE_TYPE_MAX",                                 "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
+  //
+  {"CUcigDataType",                                                   {"hipCigDataType",                                            "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CUcigDataType_enum",                                              {"hipCigDataType",                                            "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // CUcigDataType enum values
+  //
+  {"CIG_DATA_TYPE_D3D12_COMMAND_QUEUE",                               {"HIP_CIG_DATA_TYPE_D3D12_COMMAND_QUEUE",                     "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+
   // 4. Typedefs
 
   // no analogue
@@ -2839,6 +2861,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_GRAPH_KERNEL_NODE_PORT_PROGRAMMATIC",                           {"hipGraphKernelNodePortProgrammatic",                       "", CONV_DEFINE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}}, // 1
   // cudaGraphKernelNodePortLaunchCompletion
   {"CU_GRAPH_KERNEL_NODE_PORT_LAUNCH_ORDER",                           {"hipGraphKernelNodePortLaunchCompletion",                   "", CONV_DEFINE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}}, // 2
+  //
+  {"CUDA_ARRAY3D_VIDEO_ENCODE_DECODE",                                 {"HIP_ARRAY3D_VIDEO_ENCODE_DECODE",                          "", CONV_DEFINE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 2
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_TYPE_NAME_VER_MAP {
@@ -3774,6 +3798,16 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_TYPE_NAME_VER_MAP {
   {"CU_LIMIT_SHMEM_SIZE",                                              {CUDA_125, CUDA_0,   CUDA_0  }},
   {"CU_LIMIT_CIG_ENABLED",                                             {CUDA_125, CUDA_0,   CUDA_0  }},
   {"CU_LIMIT_CIG_SHMEM_FALLBACK_ENABLED",                              {CUDA_125, CUDA_0,   CUDA_0  }},
+  {"CU_LAUNCH_ATTRIBUTE_PREFERRED_SHARED_MEMORY_CARVEOUT",             {CUDA_125, CUDA_0,   CUDA_0  }},
+  {"CU_KERNEL_NODE_ATTRIBUTE_PREFERRED_SHARED_MEMORY_CARVEOUT",        {CUDA_125, CUDA_0,   CUDA_0  }},
+  {"CUcigDataType",                                                    {CUDA_125, CUDA_0,   CUDA_0  }},
+  {"CUcigDataType_enum",                                               {CUDA_125, CUDA_0,   CUDA_0  }},
+  {"CIG_DATA_TYPE_D3D12_COMMAND_QUEUE",                                {CUDA_125, CUDA_0,   CUDA_0  }},
+  {"CUctxCigParam_st",                                                 {CUDA_125, CUDA_0,   CUDA_0  }},
+  {"CUctxCigParam",                                                    {CUDA_125, CUDA_0,   CUDA_0  }},
+  {"CUctxCreateParams_st",                                             {CUDA_125, CUDA_0,   CUDA_0  }},
+  {"CUctxCreateParams",                                                {CUDA_125, CUDA_0,   CUDA_0  }},
+  {"CUDA_ARRAY3D_VIDEO_ENCODE_DECODE",                                 {CUDA_125, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {
