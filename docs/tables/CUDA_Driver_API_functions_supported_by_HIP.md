@@ -4,6 +4,7 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
+|`CIG_DATA_TYPE_D3D12_COMMAND_QUEUE`|12.5| | | | | | | | | |
 |`CUDA_ARRAY3D_2DARRAY`| |5.0| | | | | | | | |
 |`CUDA_ARRAY3D_COLOR_ATTACHMENT`|10.0| | | | | | | | | |
 |`CUDA_ARRAY3D_CUBEMAP`| | | | |`hipArrayCubemap`|1.7.0| | | | |
@@ -16,6 +17,7 @@
 |`CUDA_ARRAY3D_SPARSE`|11.1| | | | | | | | | |
 |`CUDA_ARRAY3D_SURFACE_LDST`| | | | |`hipArraySurfaceLoadStore`|1.7.0| | | | |
 |`CUDA_ARRAY3D_TEXTURE_GATHER`| | | | |`hipArrayTextureGather`|1.7.0| | | | |
+|`CUDA_ARRAY3D_VIDEO_ENCODE_DECODE`|12.5| | | | | | | | | |
 |`CUDA_ARRAY_DESCRIPTOR`| | | | |`HIP_ARRAY_DESCRIPTOR`|1.7.0| | | | |
 |`CUDA_ARRAY_DESCRIPTOR_st`| | | | |`HIP_ARRAY_DESCRIPTOR`|1.7.0| | | | |
 |`CUDA_ARRAY_DESCRIPTOR_v1`| | | | |`HIP_ARRAY_DESCRIPTOR`|1.7.0| | | | |
@@ -782,6 +784,7 @@
 |`CU_KERNEL_NODE_ATTRIBUTE_DEVICE_UPDATABLE_KERNEL_NODE`|12.4| | | | | | | | | |
 |`CU_KERNEL_NODE_ATTRIBUTE_MEM_SYNC_DOMAIN`|12.0| | | | | | | | | |
 |`CU_KERNEL_NODE_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP`|12.0| | | | | | | | | |
+|`CU_KERNEL_NODE_ATTRIBUTE_PREFERRED_SHARED_MEMORY_CARVEOUT`|12.5| | | | | | | | | |
 |`CU_KERNEL_NODE_ATTRIBUTE_PRIORITY`|11.7| | | |`hipKernelNodeAttributePriority`|6.2.0| | | |6.2.0|
 |`CU_LAUNCH_ATTRIBUTE_ACCESS_POLICY_WINDOW`|11.8| | | |`hipLaunchAttributeAccessPolicyWindow`|6.2.0| | | |6.2.0|
 |`CU_LAUNCH_ATTRIBUTE_CLUSTER_DIMENSION`|11.8| | | | | | | | | |
@@ -793,6 +796,7 @@
 |`CU_LAUNCH_ATTRIBUTE_MAX`|12.1| | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN`|12.0| | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP`|12.0| | | | | | | | | |
+|`CU_LAUNCH_ATTRIBUTE_PREFERRED_SHARED_MEMORY_CARVEOUT`|12.5| | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_PRIORITY`|11.8| | | |`hipLaunchAttributePriority`|6.2.0| | | |6.2.0|
 |`CU_LAUNCH_ATTRIBUTE_PROGRAMMATIC_EVENT`|11.8| | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_PROGRAMMATIC_STREAM_SERIALIZATION`|11.8| | | | | | | | | |
@@ -1085,6 +1089,8 @@
 |`CUasyncNotificationInfo_st`|12.4| | | | | | | | | |
 |`CUasyncNotificationType`|12.4| | | | | | | | | |
 |`CUasyncNotificationType_enum`|12.4| | | | | | | | | |
+|`CUcigDataType`|12.5| | | | | | | | | |
+|`CUcigDataType_enum`|12.5| | | | | | | | | |
 |`CUclusterSchedulingPolicy`|11.8| | | | | | | | | |
 |`CUclusterSchedulingPolicy_enum`|11.8| | | | | | | | | |
 |`CUcomputemode`| | | | |`hipComputeMode`|1.9.0| | | | |
@@ -1092,6 +1098,10 @@
 |`CUcontext`| | | | |`hipCtx_t`|1.6.0| | | | |
 |`CUcoredumpSettings`|12.1| | | | | | | | | |
 |`CUcoredumpSettings_enum`|12.1| | | | | | | | | |
+|`CUctxCigParam`|12.5| | | | | | | | | |
+|`CUctxCigParam_st`|12.5| | | | | | | | | |
+|`CUctxCreateParams`|12.5| | | | | | | | | |
+|`CUctxCreateParams_st`|12.5| | | | | | | | | |
 |`CUctx_flags`| | | | | | | | | | |
 |`CUctx_flags_enum`| | | | | | | | | | |
 |`CUctx_st`| | | | |`ihipCtx_t`|1.6.0| | | | |
@@ -1489,6 +1499,7 @@
 |`cuCtxCreate`| | | | |`hipCtxCreate`|1.6.0|1.9.0| | | |
 |`cuCtxCreate_v2`| | | | |`hipCtxCreate`|1.6.0|1.9.0| | | |
 |`cuCtxCreate_v3`|11.4| | | | | | | | | |
+|`cuCtxCreate_v4`|12.5| | | | | | | | | |
 |`cuCtxDestroy`| | | | |`hipCtxDestroy`|1.6.0|1.9.0| | | |
 |`cuCtxDestroy_v2`| | | | |`hipCtxDestroy`|1.6.0|1.9.0| | | |
 |`cuCtxGetApiVersion`| | | | |`hipCtxGetApiVersion`|1.9.0|1.9.0| | | |
@@ -1512,6 +1523,7 @@
 |`cuCtxSetLimit`| | | | |`hipDeviceSetLimit`|5.3.0| | | | |
 |`cuCtxSetSharedMemConfig`| | | |12.4|`hipCtxSetSharedMemConfig`|1.9.0|1.9.0| | | |
 |`cuCtxSynchronize`| | | | |`hipCtxSynchronize`|1.9.0|1.9.0| | | |
+|`cuCtxWaitEvent`|12.5| | | | | | | | | |
 
 ## **9. Context Management [DEPRECATED]**
 
@@ -1557,6 +1569,7 @@
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
 |`cuKernelGetAttribute`|12.0| | | | | | | | | |
 |`cuKernelGetFunction`|12.0| | | | | | | | | |
+|`cuKernelGetLibrary`|12.5| | | | | | | | | |
 |`cuKernelGetName`|12.3| | | | | | | | | |
 |`cuKernelGetParamInfo`|12.4| | | | | | | | | |
 |`cuKernelSetAttribute`|12.0| | | | | | | | | |
@@ -1768,6 +1781,7 @@
 |`cuStreamGetCaptureInfo_v2`|11.3| | | |`hipStreamGetCaptureInfo_v2`|5.0.0| | | | |
 |`cuStreamGetCaptureInfo_v3`|12.3| | | | | | | | | |
 |`cuStreamGetCtx`|9.2| | | | | | | | | |
+|`cuStreamGetCtx_v2`|12.5| | | | | | | | | |
 |`cuStreamGetFlags`| | | | |`hipStreamGetFlags`|1.6.0| | | | |
 |`cuStreamGetId`|12.0| | | | | | | | | |
 |`cuStreamGetPriority`| | | | |`hipStreamGetPriority`|2.0.0| | | | |

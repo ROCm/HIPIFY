@@ -99,6 +99,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuCtxCreate",                                                 {"hipCtxCreate",                                                "", CONV_CONTEXT, API_DRIVER, SEC::CONTEXT, HIP_DEPRECATED}},
   {"cuCtxCreate_v2",                                              {"hipCtxCreate",                                                "", CONV_CONTEXT, API_DRIVER, SEC::CONTEXT, HIP_DEPRECATED}},
   {"cuCtxCreate_v3",                                              {"hipCtxCreate_v3",                                             "", CONV_CONTEXT, API_DRIVER, SEC::CONTEXT, HIP_UNSUPPORTED}},
+  {"cuCtxCreate_v4",                                              {"hipCtxCreate_v4",                                             "", CONV_CONTEXT, API_DRIVER, SEC::CONTEXT, HIP_UNSUPPORTED}},
   {"cuCtxDestroy",                                                {"hipCtxDestroy",                                               "", CONV_CONTEXT, API_DRIVER, SEC::CONTEXT, HIP_DEPRECATED}},
   {"cuCtxDestroy_v2",                                             {"hipCtxDestroy",                                               "", CONV_CONTEXT, API_DRIVER, SEC::CONTEXT, HIP_DEPRECATED}},
   {"cuCtxGetApiVersion",                                          {"hipCtxGetApiVersion",                                         "", CONV_CONTEXT, API_DRIVER, SEC::CONTEXT, HIP_DEPRECATED}},
@@ -136,6 +137,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuCtxGetExecAffinity",                                        {"hipCtxGetExecAffinity",                                       "", CONV_CONTEXT, API_DRIVER, SEC::CONTEXT, HIP_UNSUPPORTED}},
   //
   {"cuCtxGetId",                                                  {"hipCtxGetId",                                                 "", CONV_CONTEXT, API_DRIVER, SEC::CONTEXT, HIP_UNSUPPORTED}},
+  //
+  {"cuCtxWaitEvent",                                              {"hipCtxWaitEvent",                                             "", CONV_CONTEXT, API_DRIVER, SEC::CONTEXT, HIP_UNSUPPORTED}},
 
   // 9. Context Management [DEPRECATED]
   // no analogues
@@ -185,6 +188,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuLibraryGetKernelCount",                                     {"hipLibraryGetKernelCount",                                    "", CONV_LIBRARY, API_DRIVER, SEC::LIBRARY, HIP_UNSUPPORTED}},
   {"cuLibraryEnumerateKernels",                                   {"hipLibraryEnumerateKernels",                                  "", CONV_LIBRARY, API_DRIVER, SEC::LIBRARY, HIP_UNSUPPORTED}},
   {"cuKernelGetParamInfo",                                        {"hipKernelGetParamInfo",                                       "", CONV_LIBRARY, API_DRIVER, SEC::LIBRARY, HIP_UNSUPPORTED}},
+  {"cuKernelGetLibrary",                                          {"hipKernelGetLibrary",                                         "", CONV_LIBRARY, API_DRIVER, SEC::LIBRARY, HIP_UNSUPPORTED}},
 
   // 13. Memory Management
   // no analogue
@@ -494,6 +498,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuStreamUpdateCaptureDependencies_v2",                        {"hipStreamUpdateCaptureDependencies_v2",                       "", CONV_STREAM, API_DRIVER, SEC::STREAM, HIP_UNSUPPORTED}},
   // no analogue
   {"cuStreamGetCtx",                                              {"hipStreamGetContext",                                         "", CONV_STREAM, API_DRIVER, SEC::STREAM, HIP_UNSUPPORTED}},
+  // no analogue
+  {"cuStreamGetCtx_v2",                                           {"hipStreamGetContext_v2",                                      "", CONV_STREAM, API_DRIVER, SEC::STREAM, HIP_UNSUPPORTED}},
   // cudaStreamGetFlags
   {"cuStreamGetFlags",                                            {"hipStreamGetFlags",                                           "", CONV_STREAM, API_DRIVER, SEC::STREAM}},
   // cudaStreamGetPriority
@@ -1489,6 +1495,10 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_FUNCTION_VER_MAP {
   {"cuGreenCtxRecordEvent",                                       {CUDA_124, CUDA_0,   CUDA_0  }},
   {"cuGreenCtxWaitEvent",                                         {CUDA_124, CUDA_0,   CUDA_0  }},
   {"cuStreamGetGreenCtx",                                         {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"cuCtxCreate_v4",                                              {CUDA_125, CUDA_0,   CUDA_0  }},
+  {"cuCtxWaitEvent",                                              {CUDA_125, CUDA_0,   CUDA_0  }},
+  {"cuKernelGetLibrary",                                          {CUDA_125, CUDA_0,   CUDA_0  }},
+  {"cuStreamGetCtx_v2",                                           {CUDA_125, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_FUNCTION_VER_MAP {
