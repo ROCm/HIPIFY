@@ -167,6 +167,7 @@ int main() {
   int ku = 0;
   int64_t ku_64 = 0;
   int batchCount = 0;
+  int64_t batchCount_64 = 0;
   int P = 0;
   int info = 0;
   void* image = nullptr;
@@ -237,6 +238,10 @@ int main() {
   const float** const fAarray_const = const_cast<const float**>(fAarray);
   float** fBarray = nullptr;
   const float** const fBarray_const = const_cast<const float**>(fBarray);
+  float** fXarray = nullptr;
+  const float** const fXarray_const = const_cast<const float**>(fXarray);
+  float** fYarray = nullptr;
+  const float** const fYarray_const = const_cast<const float**>(fYarray);
   float** fCarray = nullptr;
   float** fTauarray = nullptr;
 
@@ -260,6 +265,10 @@ int main() {
   const double** const dAarray_const = const_cast<const double**>(dAarray);
   double** dBarray = nullptr;
   const double** const dBarray_const = const_cast<const double**>(dBarray);
+  double** dXarray = nullptr;
+  const double** const dXarray_const = const_cast<const double**>(dXarray);
+  double** dYarray = nullptr;
+  const double** const dYarray_const = const_cast<const double**>(dYarray);
   double** dCarray = nullptr;
   double** dTauarray = nullptr;
 
@@ -291,26 +300,42 @@ int main() {
   // CHECK: hipComplex** complexAarray = 0;
   // CHECK: const hipComplex** const complexAarray_const = const_cast<const hipComplex**>(complexAarray);
   // CHECK-NEXT: hipComplex** complexBarray = 0;
-  // CHECK: const hipComplex** const complexBarray_const = const_cast<const hipComplex**>(complexBarray);
+  // CHECK-NEXT: const hipComplex** const complexBarray_const = const_cast<const hipComplex**>(complexBarray);
+  // CHECK-NEXT: hipComplex** complexXarray = 0;
+  // CHECK-NEXT: const hipComplex** const complexXarray_const = const_cast<const hipComplex**>(complexXarray);
+  // CHECK-NEXT: hipComplex** complexYarray = 0;
+  // CHECK-NEXT: const hipComplex** const complexYarray_const = const_cast<const hipComplex**>(complexYarray);
   // CHECK-NEXT: hipComplex** complexCarray = 0;
   // CHECK-NEXT: hipComplex** complexTauarray = 0;
   cuComplex** complexAarray = 0;
   const cuComplex** const complexAarray_const = const_cast<const cuComplex**>(complexAarray);
   cuComplex** complexBarray = 0;
   const cuComplex** const complexBarray_const = const_cast<const cuComplex**>(complexBarray);
+  cuComplex** complexXarray = 0;
+  const cuComplex** const complexXarray_const = const_cast<const cuComplex**>(complexXarray);
+  cuComplex** complexYarray = 0;
+  const cuComplex** const complexYarray_const = const_cast<const cuComplex**>(complexYarray);
   cuComplex** complexCarray = 0;
   cuComplex** complexTauarray = 0;
 
   // CHECK: hipDoubleComplex** dcomplexAarray = 0;
   // CHECK: const hipDoubleComplex** const dcomplexAarray_const = const_cast<const hipDoubleComplex**>(dcomplexAarray);
   // CHECK-NEXT: hipDoubleComplex** dcomplexBarray = 0;
-  // CHECK: const hipDoubleComplex** const dcomplexBarray_const = const_cast<const hipDoubleComplex**>(dcomplexBarray);
+  // CHECK-NEXT: const hipDoubleComplex** const dcomplexBarray_const = const_cast<const hipDoubleComplex**>(dcomplexBarray);
+  // CHECK-NEXT: hipDoubleComplex** dcomplexXarray = 0;
+  // CHECK-NEXT: const hipDoubleComplex** const dcomplexXarray_const = const_cast<const hipDoubleComplex**>(dcomplexXarray);
+  // CHECK-NEXT: hipDoubleComplex** dcomplexYarray = 0;
+  // CHECK-NEXT: const hipDoubleComplex** const dcomplexYarray_const = const_cast<const hipDoubleComplex**>(dcomplexYarray);
   // CHECK-NEXT: hipDoubleComplex** dcomplexCarray = 0;
   // CHECK-NEXT: hipDoubleComplex** dcomplexTauarray = 0;
   cuDoubleComplex** dcomplexAarray = 0;
   const cuDoubleComplex** const dcomplexAarray_const = const_cast<const cuDoubleComplex**>(dcomplexAarray);
   cuDoubleComplex** dcomplexBarray = 0;
   const cuDoubleComplex** const dcomplexBarray_const = const_cast<const cuDoubleComplex**>(dcomplexBarray);
+  cuDoubleComplex** dcomplexXarray = 0;
+  const cuDoubleComplex** const dcomplexXarray_const = const_cast<const cuDoubleComplex**>(dcomplexXarray);
+  cuDoubleComplex** dcomplexYarray = 0;
+  const cuDoubleComplex** const dcomplexYarray_const = const_cast<const cuDoubleComplex**>(dcomplexYarray);
   cuDoubleComplex** dcomplexCarray = 0;
   cuDoubleComplex** dcomplexTauarray = 0;
 
@@ -2244,6 +2269,26 @@ int main() {
   // CHECK-NEXT: blasStatus = hipblasZgemv_v2_64(blasHandle, blasOperation, m_64, n_64, &dcomplexa, &dcomplexA, lda_64, &dcomplexx, incx_64, &dcomplexb, &dcomplexy, incy_64);
   blasStatus = cublasZgemv_64(blasHandle, blasOperation, m_64, n_64, &dcomplexa, &dcomplexA, lda_64, &dcomplexx, incx_64, &dcomplexb, &dcomplexy, incy_64);
   blasStatus = cublasZgemv_v2_64(blasHandle, blasOperation, m_64, n_64, &dcomplexa, &dcomplexA, lda_64, &dcomplexx, incx_64, &dcomplexb, &dcomplexy, incy_64);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasSgemvBatched_64(cublasHandle_t handle, cublasOperation_t trans, int64_t m, int64_t n, const float* alpha, const float* const Aarray[], int64_t lda, const float* const xarray[], int64_t incx, const float* beta, float* const yarray[], int64_t incy, int64_t batchCount);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasSgemvBatched_64(hipblasHandle_t handle, hipblasOperation_t trans, int64_t m, int64_t n, const float* alpha, const float* const AP[], int64_t lda, const float* const x[], int64_t incx, const float* beta, float* const y[], int64_t incy, int64_t batchCount);
+  // CHECK: blasStatus = hipblasSgemvBatched_64(blasHandle, blasOperation, m_64, n_64, &fa, fAarray_const, lda_64, fXarray_const, incx_64, &fb, fYarray, incy_64, batchCount_64);
+  blasStatus = cublasSgemvBatched_64(blasHandle, blasOperation, m_64, n_64, &fa, fAarray_const, lda_64, fXarray_const, incx_64, &fb, fYarray, incy_64, batchCount_64);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasDgemvBatched_64(cublasHandle_t handle, cublasOperation_t trans, int64_t m, int64_t n, const double* alpha, const double* const Aarray[], int64_t lda, const double* const xarray[], int64_t incx, const double* beta, double* const yarray[], int64_t incy, int64_t batchCount);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasDgemvBatched_64(hipblasHandle_t handle, hipblasOperation_t trans, int64_t m, int64_t n, const double* alpha, const double* const AP[], int64_t lda, const double* const x[], int64_t incx, const double* beta, double* const y[], int64_t incy, int64_t batchCount);
+  // CHECK: blasStatus = hipblasDgemvBatched_64(blasHandle, blasOperation, m_64, n_64, &da, dAarray_const, lda_64, dXarray_const, incx_64, &db, dYarray, incy_64, batchCount_64);
+  blasStatus = cublasDgemvBatched_64(blasHandle, blasOperation, m_64, n_64, &da, dAarray_const, lda_64, dXarray_const, incx_64, &db, dYarray, incy_64, batchCount_64);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasCgemvBatched_64(cublasHandle_t handle, cublasOperation_t trans, int64_t m, int64_t n, const cuComplex* alpha, const cuComplex* const Aarray[], int64_t lda, const cuComplex* const xarray[], int64_t incx, const cuComplex* beta, cuComplex* const yarray[], int64_t incy, int64_t batchCount);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasCgemvBatched_v2_64(hipblasHandle_t handle, hipblasOperation_t trans, int64_t m, int64_t n, const hipComplex* alpha, const hipComplex* const AP[], int64_t lda, const hipComplex* const x[], int64_t incx, const hipComplex* beta, hipComplex* const y[], int64_t incy, int64_t batchCount);
+  // CHECK: blasStatus = hipblasCgemvBatched_v2_64(blasHandle, blasOperation, m_64, n_64, &complexa, complexAarray_const, lda_64, complexXarray_const, incx_64, &complexb, complexYarray, incy_64, batchCount_64);
+  blasStatus = cublasCgemvBatched_64(blasHandle, blasOperation, m_64, n_64, &complexa, complexAarray_const, lda_64, complexXarray_const, incx_64, &complexb, complexYarray, incy_64, batchCount_64);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasZgemvBatched_64(cublasHandle_t handle, cublasOperation_t trans, int64_t m, int64_t n, const cuDoubleComplex* alpha, const cuDoubleComplex* const Aarray[], int64_t lda, const cuDoubleComplex* const xarray[], int64_t incx, const cuDoubleComplex* beta, cuDoubleComplex* const yarray[], int64_t incy, int64_t batchCount);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasZgemvBatched_v2_64(hipblasHandle_t handle, hipblasOperation_t trans, int64_t m, int64_t n, const hipDoubleComplex* alpha, const hipDoubleComplex* const AP[], int64_t lda, const hipDoubleComplex* const x[], int64_t incx, const hipDoubleComplex* beta, hipDoubleComplex* const y[], int64_t incy, int64_t batchCount);
+  // CHECK: blasStatus = hipblasZgemvBatched_v2_64(blasHandle, blasOperation, m_64, n_64, &dcomplexa, dcomplexAarray_const, lda_64, dcomplexXarray_const, incx_64, &dcomplexb, dcomplexYarray, incy_64, batchCount_64);
+  blasStatus = cublasZgemvBatched_64(blasHandle, blasOperation, m_64, n_64, &dcomplexa, dcomplexAarray_const, lda_64, dcomplexXarray_const, incx_64, &dcomplexb, dcomplexYarray, incy_64, batchCount_64);
 #endif
 
   return 0;
