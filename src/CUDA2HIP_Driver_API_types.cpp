@@ -2643,7 +2643,37 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   //
   {"CU_COREDUMP_PIPE",                                                 {"HIP_COREDUMP_PIPE",                                        "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   //
+  {"CU_COREDUMP_GENERATION_FLAGS",                                     {"HIP_COREDUMP_GENERATION_FLAGS",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
   {"CU_COREDUMP_MAX",                                                  {"HIP_COREDUMP_MAX",                                         "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+
+  //
+  {"CUCoredumpGenerationFlags",                                        {"hipCoredumpGenerationFlags",                               "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // CUCoredumpGenerationFlags enum values
+  //
+  {"CU_COREDUMP_DEFAULT_FLAGS",                                        {"HIP_COREDUMP_DEFAULT_FLAGS",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CU_COREDUMP_SKIP_NONRELOCATED_ELF_IMAGES",                         {"HIP_COREDUMP_SKIP_NONRELOCATED_ELF_IMAGES",                "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CU_COREDUMP_LIGHTWEIGHT",                                          {"HIP_COREDUMP_LIGHTWEIGHT",                                 "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CU_COREDUMP_SKIP_GLOBAL_MEMORY",                                   {"HIP_COREDUMP_SKIP_GLOBAL_MEMORY",                          "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CU_COREDUMP_SKIP_SHARED_MEMORY",                                   {"HIP_COREDUMP_SKIP_SHARED_MEMORY",                          "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CU_COREDUMP_SKIP_LOCAL_MEMORY",                                    {"HIP_COREDUMP_SKIP_LOCAL_MEMORY",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CU_COREDUMP_SKIP_ABORT",                                           {"HIP_COREDUMP_SKIP_ABORT",                                  "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CU_COREDUMP_LIGHTWEIGHT_FLAGS",                                    {"HIP_COREDUMP_LIGHTWEIGHT_FLAGS",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+
+  //
+  {"CUdevSmResourceSplit_flags",                                       {"hipDevSmResourceSplit_flags",                              "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // CUdevSmResourceSplit_flags enum values
+  //
+  {"CU_DEV_SM_RESOURCE_SPLIT_IGNORE_SM_COSCHEDULING",                  {"HIP_DEV_SM_RESOURCE_SPLIT_IGNORE_SM_COSCHEDULING",         "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CU_DEV_SM_RESOURCE_SPLIT_MAX_POTENTIAL_CLUSTER_SIZE",              {"HIP_DEV_SM_RESOURCE_SPLIT_MAX_POTENTIAL_CLUSTER_SIZE",     "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   // cudaDeviceNumaConfig
   {"CUdeviceNumaConfig",                                               {"hipDeviceNumaConfig",                                      "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
@@ -3808,6 +3838,19 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_TYPE_NAME_VER_MAP {
   {"CUctxCreateParams_st",                                             {CUDA_125, CUDA_0,   CUDA_0  }},
   {"CUctxCreateParams",                                                {CUDA_125, CUDA_0,   CUDA_0  }},
   {"CUDA_ARRAY3D_VIDEO_ENCODE_DECODE",                                 {CUDA_125, CUDA_0,   CUDA_0  }},
+  {"CU_COREDUMP_GENERATION_FLAGS",                                     {CUDA_125, CUDA_0,   CUDA_0  }},
+  {"CUCoredumpGenerationFlags",                                        {CUDA_125, CUDA_0,   CUDA_0  }},
+  {"CU_COREDUMP_DEFAULT_FLAGS",                                        {CUDA_125, CUDA_0,   CUDA_0  }},
+  {"CU_COREDUMP_SKIP_NONRELOCATED_ELF_IMAGES",                         {CUDA_125, CUDA_0,   CUDA_0  }},
+  {"CU_COREDUMP_LIGHTWEIGHT",                                          {CUDA_125, CUDA_0,   CUDA_0  }},
+  {"CU_COREDUMP_SKIP_GLOBAL_MEMORY",                                   {CUDA_125, CUDA_0,   CUDA_0  }},
+  {"CU_COREDUMP_SKIP_SHARED_MEMORY",                                   {CUDA_125, CUDA_0,   CUDA_0  }},
+  {"CU_COREDUMP_SKIP_LOCAL_MEMORY",                                    {CUDA_125, CUDA_0,   CUDA_0  }},
+  {"CU_COREDUMP_SKIP_ABORT",                                           {CUDA_125, CUDA_0,   CUDA_0  }},
+  {"CU_COREDUMP_LIGHTWEIGHT_FLAGS",                                    {CUDA_125, CUDA_0,   CUDA_0  }},
+  {"CUdevSmResourceSplit_flags",                                       {CUDA_125, CUDA_0,   CUDA_0  }},
+  {"CU_DEV_SM_RESOURCE_SPLIT_IGNORE_SM_COSCHEDULING",                  {CUDA_125, CUDA_0,   CUDA_0  }},
+  {"CU_DEV_SM_RESOURCE_SPLIT_MAX_POTENTIAL_CLUSTER_SIZE",              {CUDA_125, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {

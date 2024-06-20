@@ -987,6 +987,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuGreenCtxWaitEvent",                                         {"hipGreenCtxWaitEvent",                                        "", CONV_COREDUMP, API_DRIVER, SEC::GREEN_CONTEXT, HIP_UNSUPPORTED}},
   //
   {"cuStreamGetGreenCtx",                                         {"hipStreamGetGreenCtx",                                        "", CONV_COREDUMP, API_DRIVER, SEC::GREEN_CONTEXT, HIP_UNSUPPORTED}},
+  //
+  {"cuGreenCtxStreamCreate",                                      {"hipGreenCtxStreamCreate",                                     "", CONV_COREDUMP, API_DRIVER, SEC::GREEN_CONTEXT, HIP_UNSUPPORTED}},
 
   // 36. Profiler Control [DEPRECATED]
   // cudaProfilerInitialize
@@ -1499,6 +1501,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_FUNCTION_VER_MAP {
   {"cuCtxWaitEvent",                                              {CUDA_125, CUDA_0,   CUDA_0  }},
   {"cuKernelGetLibrary",                                          {CUDA_125, CUDA_0,   CUDA_0  }},
   {"cuStreamGetCtx_v2",                                           {CUDA_125, CUDA_0,   CUDA_0  }},
+  {"cuGreenCtxStreamCreate",                                      {CUDA_125, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_FUNCTION_VER_MAP {

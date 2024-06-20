@@ -5,6 +5,7 @@
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
 |`CIG_DATA_TYPE_D3D12_COMMAND_QUEUE`|12.5| | | | | | | | | |
+|`CUCoredumpGenerationFlags`|12.5| | | | | | | | | |
 |`CUDA_ARRAY3D_2DARRAY`| |5.0| | | | | | | | |
 |`CUDA_ARRAY3D_COLOR_ATTACHMENT`|10.0| | | | | | | | | |
 |`CUDA_ARRAY3D_CUBEMAP`| | | | |`hipArrayCubemap`|1.7.0| | | | |
@@ -313,12 +314,20 @@
 |`CU_COMPUTEMODE_EXCLUSIVE_PROCESS`| | | | |`hipComputeModeExclusiveProcess`|2.0.0| | | | |
 |`CU_COMPUTEMODE_PROHIBITED`| | | | |`hipComputeModeProhibited`|1.9.0| | | | |
 |`CU_COMPUTE_ACCELERATED_TARGET_BASE`|12.0| | | | | | | | | |
+|`CU_COREDUMP_DEFAULT_FLAGS`|12.5| | | | | | | | | |
 |`CU_COREDUMP_ENABLE_ON_EXCEPTION`|12.1| | | | | | | | | |
 |`CU_COREDUMP_ENABLE_USER_TRIGGER`|12.1| | | | | | | | | |
 |`CU_COREDUMP_FILE`|12.1| | | | | | | | | |
+|`CU_COREDUMP_GENERATION_FLAGS`|12.5| | | | | | | | | |
 |`CU_COREDUMP_LIGHTWEIGHT`|12.1| | | | | | | | | |
+|`CU_COREDUMP_LIGHTWEIGHT_FLAGS`|12.5| | | | | | | | | |
 |`CU_COREDUMP_MAX`|12.1| | | | | | | | | |
 |`CU_COREDUMP_PIPE`|12.1| | | | | | | | | |
+|`CU_COREDUMP_SKIP_ABORT`|12.5| | | | | | | | | |
+|`CU_COREDUMP_SKIP_GLOBAL_MEMORY`|12.5| | | | | | | | | |
+|`CU_COREDUMP_SKIP_LOCAL_MEMORY`|12.5| | | | | | | | | |
+|`CU_COREDUMP_SKIP_NONRELOCATED_ELF_IMAGES`|12.5| | | | | | | | | |
+|`CU_COREDUMP_SKIP_SHARED_MEMORY`|12.5| | | | | | | | | |
 |`CU_COREDUMP_TRIGGER_HOST`|12.1| | | | | | | | | |
 |`CU_CTX_BLOCKING_SYNC`| |4.0| | |`hipDeviceScheduleBlockingSync`|1.6.0| | | | |
 |`CU_CTX_COREDUMP_ENABLE`|12.1| | | | | | | | | |
@@ -515,6 +524,8 @@
 |`CU_DEV_RESOURCE_TYPE_INVALID`|12.4| | | | | | | | | |
 |`CU_DEV_RESOURCE_TYPE_MAX`|12.4| | | | | | | | | |
 |`CU_DEV_RESOURCE_TYPE_SM`|12.4| | | | | | | | | |
+|`CU_DEV_SM_RESOURCE_SPLIT_IGNORE_SM_COSCHEDULING`|12.5| | | | | | | | | |
+|`CU_DEV_SM_RESOURCE_SPLIT_MAX_POTENTIAL_CLUSTER_SIZE`|12.5| | | | | | | | | |
 |`CU_EGL_COLOR_FORMAT_A`|9.1| | | | | | | | | |
 |`CU_EGL_COLOR_FORMAT_ABGR`|9.1| | | | | | | | | |
 |`CU_EGL_COLOR_FORMAT_ARGB`|9.0| | | | | | | | | |
@@ -1125,6 +1136,7 @@
 |`CUdevResourceType`|12.4| | | | | | | | | |
 |`CUdevResource_st`|12.4| | | | | | | | | |
 |`CUdevSmResource`|12.4| | | | | | | | | |
+|`CUdevSmResourceSplit_flags`|12.5| | | | | | | | | |
 |`CUdevSmResource_st`|12.4| | | | | | | | | |
 |`CUdevice`| | | | |`hipDevice_t`|1.6.0| | | | |
 |`CUdeviceNumaConfig`|12.2| | | | | | | | | |
@@ -2095,6 +2107,7 @@
 |`cuGreenCtxDestroy`|12.4| | | | | | | | | |
 |`cuGreenCtxGetDevResource`|12.4| | | | | | | | | |
 |`cuGreenCtxRecordEvent`|12.4| | | | | | | | | |
+|`cuGreenCtxStreamCreate`|12.5| | | | | | | | | |
 |`cuGreenCtxWaitEvent`|12.4| | | | | | | | | |
 |`cuStreamGetGreenCtx`|12.4| | | | | | | | | |
 
