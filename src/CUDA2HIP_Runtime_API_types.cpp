@@ -666,6 +666,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaDevAttrMpsEnabled",                                            {"hipDeviceAttributeMpsEnables",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 133
   // CU_DEVICE_ATTRIBUTE_HOST_NUMA_ID
   {"cudaDevAttrHostNumaId",                                            {"hipDeviceAttributeHostNumaId",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 134
+  // CU_DEVICE_ATTRIBUTE_D3D12_CIG_SUPPORTED
+  {"cudaDevAttrD3D12CigSupported",                                     {"hipDeviceAttributeD3D12CigSupported",                      "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 135
   // CU_DEVICE_ATTRIBUTE_MAX
   {"cudaDevAttrMax",                                                   {"hipDeviceAttributeMax",                                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
@@ -1877,6 +1879,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaLaunchAttributeLaunchCompletionEvent",                         {"hipLaunchAttributeLaunchCompletionEvent",                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   // CU_LAUNCH_ATTRIBUTE_DEVICE_UPDATABLE_KERNEL_NODE
   {"cudaLaunchAttributeDeviceUpdatableKernelNode",                     {"hipLaunchAttributeDeviceUpdatableKernelNode",              "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // CU_LAUNCH_ATTRIBUTE_PREFERRED_SHARED_MEMORY_CARVEOUT
+  {"cudaLaunchAttributePreferredSharedMemoryCarveout",                 {"hipLaunchAttributePreferredSharedMemoryCarveout",          "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   // CUgraphInstantiateResult
   {"cudaGraphInstantiateResult",                                       {"hipGraphInstantiateResult",                                "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES}},
@@ -2125,6 +2129,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaKernelNodeAttributeMemSyncDomainMap",                          {"hipKernelNodeAttributeMemSyncDomainMap",                   "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // cudaLaunchAttributeMemSyncDomainMap
   // CU_KERNEL_NODE_ATTRIBUTE_MEM_SYNC_DOMAIN
   {"cudaKernelNodeAttributeMemSyncDomain",                             {"hipKernelNodeAttributeMemSyncDomain",                      "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // cudaLaunchAttributeMemSyncDomain
+  // CU_KERNEL_NODE_ATTRIBUTE_MEM_SYNC_DOMAIN
+  {"cudaKernelNodeAttributePreferredSharedMemoryCarveout",             {"hipKernelNodeAttributePreferredSharedMemoryCarveout",      "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // cudaLaunchAttributePreferredSharedMemoryCarveout
   //
   {"cudaInitDeviceFlagsAreValid",                                      {"hipInitDeviceFlagsAreValid",                               "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0x01
   // CUstreamAttrID
@@ -2145,7 +2151,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaGraphKernelNodePortProgrammatic",                              {"hipGraphKernelNodePortProgrammatic",                       "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}}, // 1
   // CU_GRAPH_KERNEL_NODE_PORT_LAUNCH_ORDER
   {"cudaGraphKernelNodePortLaunchCompletion",                          {"hipGraphKernelNodePortLaunchCompletion",                   "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}}, // 2
-  //
+  // CU_KERNEL_NODE_ATTRIBUTE_DEVICE_UPDATABLE_KERNEL_NODE
   {"cudaKernelNodeAttributeDeviceUpdatableKernelNode",                 {"hipKernelNodeAttributeDeviceUpdatableKernelNode",          "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 };
 
@@ -2722,6 +2728,9 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_TYPE_NAME_VER_MAP 
   {"cudaAsyncNotificationInfo",                                        {CUDA_124, CUDA_0,   CUDA_0  }},
   {"cudaAsyncNotificationInfo_t",                                      {CUDA_124, CUDA_0,   CUDA_0  }},
   {"cudaStreamLegacy",                                                 {CUDA_90,  CUDA_0,   CUDA_0  }},
+  {"cudaDevAttrD3D12CigSupported",                                     {CUDA_125, CUDA_0,   CUDA_0  }},
+  {"cudaLaunchAttributePreferredSharedMemoryCarveout",                 {CUDA_125, CUDA_0,   CUDA_0  }},
+  {"cudaKernelNodeAttributePreferredSharedMemoryCarveout",             {CUDA_125, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {
