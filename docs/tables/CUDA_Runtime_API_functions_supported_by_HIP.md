@@ -515,6 +515,7 @@
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
 |`cudaGetDriverEntryPoint`|11.3| |12.0| |`hipGetProcAddress`|6.2.0| | | |6.2.0|
+|`cudaGetDriverEntryPointByVersion`|12.5| | | | | | | | | |
 
 ## **30. C++ API Routines**
 
@@ -674,6 +675,7 @@
 |`cudaDevAttrConcurrentManagedAccess`|8.0| | | |`hipDeviceAttributeConcurrentManagedAccess`|3.10.0| | | | |
 |`cudaDevAttrCooperativeLaunch`|9.0| | | |`hipDeviceAttributeCooperativeLaunch`|2.6.0| | | | |
 |`cudaDevAttrCooperativeMultiDeviceLaunch`|9.0| | | |`hipDeviceAttributeCooperativeMultiDeviceLaunch`|2.6.0| | | | |
+|`cudaDevAttrD3D12CigSupported`|12.5| | | | | | | | | |
 |`cudaDevAttrDeferredMappingCudaArraySupported`|11.6| | | | | | | | | |
 |`cudaDevAttrDirectManagedMemAccessFromHost`|9.2| | | |`hipDeviceAttributeDirectManagedMemAccessFromHost`|3.10.0| | | | |
 |`cudaDevAttrEccEnabled`| | | | |`hipDeviceAttributeEccEnabled`|2.10.0| | | | |
@@ -1253,6 +1255,7 @@
 |`cudaKernelNodeAttributeDeviceUpdatableKernelNode`|12.4| | | | | | | | | |
 |`cudaKernelNodeAttributeMemSyncDomain`|12.0| | | | | | | | | |
 |`cudaKernelNodeAttributeMemSyncDomainMap`|12.0| | | | | | | | | |
+|`cudaKernelNodeAttributePreferredSharedMemoryCarveout`|12.5| | | | | | | | | |
 |`cudaKernelNodeAttributePriority`|11.7| | | |`hipKernelNodeAttributePriority`|6.2.0| | | |6.2.0|
 |`cudaKernelNodeParams`|10.0| | | |`hipKernelNodeParams`|4.3.0| | | | |
 |`cudaKernelNodeParamsV2`|12.2| | | | | | | | | |
@@ -1269,6 +1272,7 @@
 |`cudaLaunchAttributeLaunchCompletionEvent`|12.3| | | | | | | | | |
 |`cudaLaunchAttributeMemSyncDomain`|12.0| | | | | | | | | |
 |`cudaLaunchAttributeMemSyncDomainMap`|12.0| | | | | | | | | |
+|`cudaLaunchAttributePreferredSharedMemoryCarveout`|12.5| | | | | | | | | |
 |`cudaLaunchAttributePriority`|11.8| | | |`hipLaunchAttributePriority`|6.2.0| | | |6.2.0|
 |`cudaLaunchAttributeProgrammaticEvent`|11.8| | | | | | | | | |
 |`cudaLaunchAttributeProgrammaticStreamSerialization`|11.8| | | | | | | | | |
