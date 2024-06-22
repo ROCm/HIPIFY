@@ -438,6 +438,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
   {"cublasZgemmStridedBatched_64",                         {"hipblasZgemmStridedBatched_64",                             "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, UNSUPPORTED}},
   {"cublasHgemmStridedBatched",                            {"hipblasHgemmStridedBatched",                                "rocblas_hgemm_strided_batched",                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
   {"cublasHgemmStridedBatched_64",                         {"hipblasHgemmStridedBatched_64",                             "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, UNSUPPORTED}},
+  {"cublasGemmGroupedBatchedEx",                           {"hipblasGemmGroupedBatchedEx",                               "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, UNSUPPORTED}},
+  {"cublasGemmGroupedBatchedEx_64",                        {"hipblasGemmGroupedBatchedEx_64",                            "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, UNSUPPORTED}},
 
   // BATCH GEMV
   {"cublasSgemvBatched",                                   {"hipblasSgemvBatched",                                       "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, UNSUPPORTED}},
@@ -1623,6 +1625,8 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_FUNCTION_VER_MAP {
   {"cublasLtLoggerSetLevel",                               {CUDA_110, CUDA_0,   CUDA_0   }}, // A: CUDA_VERSION 11003, CUBLAS_VERSION 11200, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 2
   {"cublasLtLoggerSetMask",                                {CUDA_110, CUDA_0,   CUDA_0   }}, // A: CUDA_VERSION 11003, CUBLAS_VERSION 11200, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 2
   {"cublasLtLoggerForceDisable",                           {CUDA_110, CUDA_0,   CUDA_0   }}, // A: CUDA_VERSION 11003, CUBLAS_VERSION 11200, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 2
+  {"cublasGemmGroupedBatchedEx",                           {CUDA_125, CUDA_0,   CUDA_0   }},
+  {"cublasGemmGroupedBatchedEx_64",                        {CUDA_125, CUDA_0,   CUDA_0   }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_FUNCTION_VER_MAP {

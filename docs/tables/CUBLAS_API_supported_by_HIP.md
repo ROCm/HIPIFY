@@ -1107,6 +1107,8 @@
 |`cublasDtrsm_64`|12.0| | | | | | | | | |
 |`cublasDtrsm_v2`| | | | |`hipblasDtrsm`|1.8.2| | | | |
 |`cublasDtrsm_v2_64`|12.0| | | | | | | | | |
+|`cublasGemmGroupedBatchedEx`|12.5| | | | | | | | | |
+|`cublasGemmGroupedBatchedEx_64`|12.5| | | | | | | | | |
 |`cublasHSHgemvBatched`|11.6| | | | | | | | | |
 |`cublasHSHgemvBatched_64`|12.0| | | | | | | | | |
 |`cublasHSHgemvStridedBatched`|11.6| | | | | | | | | |
