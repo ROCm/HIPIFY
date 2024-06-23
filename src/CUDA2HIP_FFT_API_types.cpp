@@ -109,6 +109,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_FFT_TYPE_NAME_MAP {
   {"cufftProperty_t",                             {"hipfftProperty",                               "", CONV_TYPE, API_FFT, 1, HIP_UNSUPPORTED}},
   {"cufftProperty",                               {"hipfftProperty",                               "", CONV_TYPE, API_FFT, 1, HIP_UNSUPPORTED}},
   {"NVFFT_PLAN_PROPERTY_INT64_PATIENT_JIT",       {"HIPFFT_PLAN_PROPERTY_INT64_PATIENT_JIT",       "", CONV_NUMERIC_LITERAL, API_FFT, 1, HIP_UNSUPPORTED}},  //  0x1
+  {"NVFFT_PLAN_PROPERTY_INT64_MAX_NUM_HOST_THREADS",       {"HIPFFT_PLAN_PROPERTY_INT64_MAX_NUM_HOST_THREADS",       "", CONV_NUMERIC_LITERAL, API_FFT, 1, HIP_UNSUPPORTED}},  //  0x2
 
   // cuFFT types
   {"cufftReal",                                   {"hipfftReal",                                   "", CONV_TYPE, API_FFT, 1}},
@@ -135,6 +136,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_FFT_TYPE_NAME_VER_MAP {
   {"cufftProperty_t",                             {CUDA_124, CUDA_0,   CUDA_0  }},
   {"cufftProperty",                               {CUDA_124, CUDA_0,   CUDA_0  }},
   {"NVFFT_PLAN_PROPERTY_INT64_PATIENT_JIT",       {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"NVFFT_PLAN_PROPERTY_INT64_MAX_NUM_HOST_THREADS",  {CUDA_125, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_FFT_TYPE_NAME_VER_MAP {
