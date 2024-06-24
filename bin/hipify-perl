@@ -3921,6 +3921,7 @@ sub simpleSubstitutions {
     subst("cublasDgemmStridedBatched", "hipblasDgemmStridedBatched", "library");
     subst("cublasDgemm_v2", "hipblasDgemm", "library");
     subst("cublasDgemv", "hipblasDgemv", "library");
+    subst("cublasDgemvBatched", "hipblasDgemvBatched", "library");
     subst("cublasDgemvStridedBatched", "hipblasDgemvStridedBatched", "library");
     subst("cublasDgemv_v2", "hipblasDgemv", "library");
     subst("cublasDgeqrfBatched", "hipblasDgeqrfBatched", "library");
@@ -4117,6 +4118,7 @@ sub simpleSubstitutions {
     subst("cublasSgemmStridedBatched", "hipblasSgemmStridedBatched", "library");
     subst("cublasSgemm_v2", "hipblasSgemm", "library");
     subst("cublasSgemv", "hipblasSgemv", "library");
+    subst("cublasSgemvBatched", "hipblasSgemvBatched", "library");
     subst("cublasSgemvStridedBatched", "hipblasSgemvStridedBatched", "library");
     subst("cublasSgemv_v2", "hipblasSgemv", "library");
     subst("cublasSgeqrfBatched", "hipblasSgeqrfBatched", "library");
@@ -11442,7 +11444,6 @@ sub warnHipOnlyUnsupportedFunctions {
         "cublasSger_v2_64",
         "cublasSger_64",
         "cublasSgemvStridedBatched_64",
-        "cublasSgemvBatched",
         "cublasSgemm_v2_64",
         "cublasSgemm_64",
         "cublasSgemmStridedBatched_64",
@@ -11587,7 +11588,6 @@ sub warnHipOnlyUnsupportedFunctions {
         "cublasDger_v2_64",
         "cublasDger_64",
         "cublasDgemvStridedBatched_64",
-        "cublasDgemvBatched",
         "cublasDgemm_v2_64",
         "cublasDgemm_64",
         "cublasDgemmStridedBatched_64",
