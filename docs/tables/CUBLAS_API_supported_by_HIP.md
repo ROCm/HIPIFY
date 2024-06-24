@@ -1081,7 +1081,7 @@
 |`cublasDgemm_64`|12.0| | | | | | | | | |
 |`cublasDgemm_v2`| | | | |`hipblasDgemm`|1.8.2| | | | |
 |`cublasDgemm_v2_64`|12.0| | | | | | | | | |
-|`cublasDgemvBatched`|11.6| | | | | | | | | |
+|`cublasDgemvBatched`|11.6| | | |`hipblasDgemvBatched`|3.0.0| | | | |
 |`cublasDgemvBatched_64`|12.0| | | |`hipblasDgemvBatched_64`|6.2.0| | | |6.2.0|
 |`cublasDgemvStridedBatched`|11.6| | | |`hipblasDgemvStridedBatched`|3.0.0| | | | |
 |`cublasDgemvStridedBatched_64`|12.0| | | | | | | | | |
@@ -1133,7 +1133,7 @@
 |`cublasSgemm_64`|12.0| | | | | | | | | |
 |`cublasSgemm_v2`| | | | |`hipblasSgemm`|1.8.2| | | | |
 |`cublasSgemm_v2_64`|12.0| | | | | | | | | |
-|`cublasSgemvBatched`|11.6| | | | | | | | | |
+|`cublasSgemvBatched`|11.6| | | |`hipblasSgemvBatched`|1.6.0| | | | |
 |`cublasSgemvBatched_64`|12.0| | | |`hipblasSgemvBatched_64`|6.2.0| | | |6.2.0|
 |`cublasSgemvStridedBatched`|11.6| | | |`hipblasSgemvStridedBatched`|3.0.0| | | | |
 |`cublasSgemvStridedBatched_64`|12.0| | | | | | | | | |
