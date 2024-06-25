@@ -23,79 +23,81 @@ THE SOFTWARE.
 #include "CUDA2HIP.h"
 
 // Maps CUDA header names to HIP header names
-const std::map <llvm::StringRef, hipCounter> CUDA_INCLUDE_MAP {
-  // CUDA includes
-  {"cuda.h",                                                {"hip/hip_runtime.h",                                     "", CONV_INCLUDE_CUDA_MAIN_H,    API_DRIVER, 0}},
-  {"cuda_runtime.h",                                        {"hip/hip_runtime.h",                                     "", CONV_INCLUDE_CUDA_MAIN_H,    API_RUNTIME, 0}},
-  {"cuda_runtime_api.h",                                    {"hip/hip_runtime_api.h",                                 "", CONV_INCLUDE,                API_RUNTIME, 0}},
-  {"channel_descriptor.h",                                  {"hip/channel_descriptor.h",                              "", CONV_INCLUDE,                API_RUNTIME, 0}},
-  {"device_functions.h",                                    {"hip/device_functions.h",                                "", CONV_INCLUDE,                API_RUNTIME, 0}},
-  {"driver_types.h",                                        {"hip/driver_types.h",                                    "", CONV_INCLUDE,                API_RUNTIME, 0}},
-  {"cuda_fp16.h",                                           {"hip/hip_fp16.h",                                        "", CONV_INCLUDE,                API_RUNTIME, 0}},
-  {"cuda_texture_types.h",                                  {"hip/hip_texture_types.h",                               "", CONV_INCLUDE,                API_RUNTIME, 0}},
-  {"texture_fetch_functions.h",                             {"",                                                      "", CONV_INCLUDE,                API_RUNTIME, 0}},
-  {"vector_types.h",                                        {"hip/hip_vector_types.h",                                "", CONV_INCLUDE,                API_RUNTIME, 0}},
-  {"cuda_profiler_api.h",                                   {"hip/hip_runtime_api.h",                                 "", CONV_INCLUDE,                API_RUNTIME, 0}},
-  {"cooperative_groups.h",                                  {"hip/hip_cooperative_groups.h",                          "", CONV_INCLUDE,                API_RUNTIME, 0}},
-  {"library_types.h",                                       {"hip/library_types.h",                                   "", CONV_INCLUDE,                API_RUNTIME, 0}},
-  // cuComplex includes
-  {"cuComplex.h",                                           {"hip/hip_complex.h",                                     "", CONV_INCLUDE_CUDA_MAIN_H,    API_COMPLEX, 0}},
-  // cuBLAS includes
-  {"cublas.h",                                              {"hipblas.h",                                    "rocblas.h", CONV_INCLUDE_CUDA_MAIN_H,    API_BLAS, 0}},
-  {"cublas_v2.h",                                           {"hipblas.h",                                    "rocblas.h", CONV_INCLUDE_CUDA_MAIN_V2_H, API_BLAS, 0}},
-  {"cublas_api.h",                                          {"hipblas.h",                                    "rocblas.h", CONV_INCLUDE,                API_BLAS, 0}},
-  {"cublasLt.h",                                            {"hipblaslt.h",                                           "", CONV_INCLUDE,                API_BLAS, 0}},
-  // cuRAND includes
-  {"curand.h",                                              {"hiprand/hiprand.h",                                     "", CONV_INCLUDE_CUDA_MAIN_H,    API_RAND, 0}},
-  {"curand_kernel.h",                                       {"hiprand/hiprand_kernel.h",                              "", CONV_INCLUDE,                API_RAND, 0}},
-  {"curand_discrete.h",                                     {"hiprand/hiprand_kernel.h",                              "", CONV_INCLUDE,                API_RAND, 0}},
-  {"curand_discrete2.h",                                    {"hiprand/hiprand_kernel.h",                              "", CONV_INCLUDE,                API_RAND, 0}},
-  {"curand_globals.h",                                      {"hiprand/hiprand_kernel.h",                              "", CONV_INCLUDE,                API_RAND, 0}},
-  {"curand_lognormal.h",                                    {"hiprand/hiprand_kernel.h",                              "", CONV_INCLUDE,                API_RAND, 0}},
-  {"curand_mrg32k3a.h",                                     {"hiprand/hiprand_kernel.h",                              "", CONV_INCLUDE,                API_RAND, 0}},
-  {"curand_mtgp32.h",                                       {"hiprand/hiprand_kernel.h",                              "", CONV_INCLUDE,                API_RAND, 0}},
-  {"curand_mtgp32_host.h",                                  {"hiprand/hiprand_mtgp32_host.h",                         "", CONV_INCLUDE,                API_RAND, 0}},
-  {"curand_mtgp32_kernel.h",                                {"hiprand/hiprand_kernel.h",                              "", CONV_INCLUDE,                API_RAND, 0}},
-  {"curand_mtgp32dc_p_11213.h",                             {"rocrand_mtgp32_11213.h",                                "", CONV_INCLUDE,                API_RAND, 0}},
-  {"curand_normal.h",                                       {"hiprand/hiprand_kernel.h",                              "", CONV_INCLUDE,                API_RAND, 0}},
-  {"curand_normal_static.h",                                {"hiprand/hiprand_kernel.h",                              "", CONV_INCLUDE,                API_RAND, 0}},
-  {"curand_philox4x32_x.h",                                 {"hiprand/hiprand_kernel.h",                              "", CONV_INCLUDE,                API_RAND, 0}},
-  {"curand_poisson.h",                                      {"hiprand/hiprand_kernel.h",                              "", CONV_INCLUDE,                API_RAND, 0}},
-  {"curand_precalc.h",                                      {"hiprand/hiprand_kernel.h",                              "", CONV_INCLUDE,                API_RAND, 0}},
-  {"curand_uniform.h",                                      {"hiprand/hiprand_kernel.h",                              "", CONV_INCLUDE,                API_RAND, 0}},
-  // cuDNN includes
-  {"cudnn.h",                                               {"hipDNN.h",                               "miopen/miopen.h", CONV_INCLUDE_CUDA_MAIN_H,    API_DNN, 0}},
-  // cuFFT includes
-  {"cufft.h",                                               {"hipfft/hipfft.h",                                       "", CONV_INCLUDE_CUDA_MAIN_H,    API_FFT, 0}},
-  {"cufftXt.h",                                             {"hipfft/hipfftXt.h",                                     "", CONV_INCLUDE,                API_FFT, 0}},
-  // cuSPARSE includes
-  {"cusparse.h",                                            {"hipsparse.h",                                "rocsparse.h", CONV_INCLUDE_CUDA_MAIN_H,    API_SPARSE, 0}},
-  {"cusparse_v2.h",                                         {"hipsparse.h",                                "rocsparse.h", CONV_INCLUDE_CUDA_MAIN_V2_H, API_SPARSE, 0}},
-  // cuSOLVER includes
-  {"cusolverDn.h",                                          {"hipsolver.h",                      "rocsolver/rocsolver.h", CONV_INCLUDE_CUDA_MAIN_H,    API_SOLVER, 0}},
-  {"cusolverMg.h",                                          {"hipsolver.h",                      "rocsolver/rocsolver.h", CONV_INCLUDE_CUDA_MAIN_H,    API_SOLVER, 0}},
-  {"cusolverRf.h",                                          {"hipsolver.h",                      "rocsolver/rocsolver.h", CONV_INCLUDE_CUDA_MAIN_H,    API_SOLVER, 0}},
-  {"cusolverSp.h",                                          {"hipsolver.h",                      "rocsolver/rocsolver.h", CONV_INCLUDE_CUDA_MAIN_H,    API_SOLVER, 0}},
-  {"cusolverSp_LOWLEVEL_PREVIEW.h",                         {"hipsolver.h",                      "rocsolver/rocsolver.h", CONV_INCLUDE_CUDA_MAIN_H,    API_SOLVER, 0}},
-  {"cusolver_common.h",                                     {"hipsolver.h",                      "rocsolver/rocsolver.h", CONV_INCLUDE_CUDA_MAIN_H,    API_SOLVER, 0}},
-  // CUB includes
-  {"cub/cub.cuh",                                           {"hipcub/hipcub.hpp",                                     "", CONV_INCLUDE_CUDA_MAIN_H,    API_CUB, 0}},
-  // CAFFE2 includes
-  {"caffe2/core/common_gpu.h",                              {"caffe2/core/hip/common_gpu.h",                          "", CONV_INCLUDE,                API_CAFFE2, 0, UNSUPPORTED}},
-  {"caffe2/core/context_gpu.h",                             {"caffe2/core/hip/context_gpu.h",                         "", CONV_INCLUDE,                API_CAFFE2, 0, UNSUPPORTED}},
-  {"caffe2/operators/operator_fallback_gpu.h",              {"",                                                      "", CONV_INCLUDE,                API_CAFFE2, 0, UNSUPPORTED}},
-  {"caffe2/operators/spatial_batch_norm_op.h",              {"caffe2/operators/hip/spatial_batch_norm_op_miopen.hip", "", CONV_INCLUDE,                API_CAFFE2, 0}},
-  {"caffe2/operators/generate_proposals_op_util_nms_gpu.h", {"",                                                      "", CONV_INCLUDE,                API_CAFFE2, 0, UNSUPPORTED}},
-  {"caffe2/operators/max_pool_with_index_gpu.h",            {"",                                                      "", CONV_INCLUDE,                API_CAFFE2, 0, UNSUPPORTED}},
-  {"caffe2/operators/rnn/recurrent_network_executor_gpu.h", {"",                                                      "", CONV_INCLUDE,                API_CAFFE2, 0, UNSUPPORTED}},
-  {"caffe2/utils/math/reduce.cuh",                          {"caffe2/utils/math/hip/reduce.cuh",                      "", CONV_INCLUDE,                API_CAFFE2, 0, UNSUPPORTED}},
-  {"caffe2/operators/gather_op.cuh",                        {"caffe2/operators/math/gather_op.cuh",                   "", CONV_INCLUDE,                API_CAFFE2, 0, UNSUPPORTED}},
-  {"caffe2/core/common_cudnn.h",                            {"caffe2/core/hip/common_miopen.h",                       "", CONV_INCLUDE,                API_CAFFE2, 0}},
-  // RTC includes
-  {"nvrtc.h",                                               {"hiprtc.h",                                              "", CONV_INCLUDE_CUDA_MAIN_H, API_RTC, 0}},
+const std::map<llvm::StringRef, hipCounter> CUDA_INCLUDE_MAP{
+    // CUDA includes
+    {"cuda.h", {"hip/hip_runtime.h", "", CONV_INCLUDE_CUDA_MAIN_H, API_DRIVER, 0}},
+    {"cuda_runtime.h", {"hip/hip_runtime.h", "", CONV_INCLUDE_CUDA_MAIN_H, API_RUNTIME, 0}},
+    {"cuda_runtime_api.h", {"hip/hip_runtime_api.h", "", CONV_INCLUDE, API_RUNTIME, 0}},
+    {"channel_descriptor.h", {"hip/channel_descriptor.h", "", CONV_INCLUDE, API_RUNTIME, 0}},
+    {"device_functions.h", {"hip/device_functions.h", "", CONV_INCLUDE, API_RUNTIME, 0}},
+    {"driver_types.h", {"hip/driver_types.h", "", CONV_INCLUDE, API_RUNTIME, 0}},
+    {"cuda_fp16.h", {"hip/hip_fp16.h", "", CONV_INCLUDE, API_RUNTIME, 0}},
+    {"cuda_texture_types.h", {"hip/hip_texture_types.h", "", CONV_INCLUDE, API_RUNTIME, 0}},
+    {"texture_fetch_functions.h", {"", "", CONV_INCLUDE, API_RUNTIME, 0}},
+    {"vector_types.h", {"hip/hip_vector_types.h", "", CONV_INCLUDE, API_RUNTIME, 0}},
+    {"cuda_profiler_api.h", {"hip/hip_runtime_api.h", "", CONV_INCLUDE, API_RUNTIME, 0}},
+    {"cooperative_groups.h", {"hip/hip_cooperative_groups.h", "", CONV_INCLUDE, API_RUNTIME, 0}},
+    {"library_types.h", {"hip/library_types.h", "", CONV_INCLUDE, API_RUNTIME, 0}},
+    {"math_constants.h", {"hip/math_constants.h", "", CONV_INCLUDE, API_RUNTIME, 0}},
+    // cuComplex includes
+    {"cuComplex.h", {"hip/hip_complex.h", "", CONV_INCLUDE_CUDA_MAIN_H, API_COMPLEX, 0}},
+    // cuBLAS includes
+    {"cublas.h", {"hipblas.h", "rocblas.h", CONV_INCLUDE_CUDA_MAIN_H, API_BLAS, 0}},
+    {"cublas_v2.h", {"hipblas.h", "rocblas.h", CONV_INCLUDE_CUDA_MAIN_V2_H, API_BLAS, 0}},
+    {"cublas_api.h", {"hipblas.h", "rocblas.h", CONV_INCLUDE, API_BLAS, 0}},
+    {"cublasLt.h", {"hipblaslt.h", "", CONV_INCLUDE, API_BLAS, 0}},
+    // cuRAND includes
+    {"curand.h", {"hiprand/hiprand.h", "", CONV_INCLUDE_CUDA_MAIN_H, API_RAND, 0}},
+    {"curand_kernel.h", {"hiprand/hiprand_kernel.h", "", CONV_INCLUDE, API_RAND, 0}},
+    {"curand_discrete.h", {"hiprand/hiprand_kernel.h", "", CONV_INCLUDE, API_RAND, 0}},
+    {"curand_discrete2.h", {"hiprand/hiprand_kernel.h", "", CONV_INCLUDE, API_RAND, 0}},
+    {"curand_globals.h", {"hiprand/hiprand_kernel.h", "", CONV_INCLUDE, API_RAND, 0}},
+    {"curand_lognormal.h", {"hiprand/hiprand_kernel.h", "", CONV_INCLUDE, API_RAND, 0}},
+    {"curand_mrg32k3a.h", {"hiprand/hiprand_kernel.h", "", CONV_INCLUDE, API_RAND, 0}},
+    {"curand_mtgp32.h", {"hiprand/hiprand_kernel.h", "", CONV_INCLUDE, API_RAND, 0}},
+    {"curand_mtgp32_host.h", {"hiprand/hiprand_mtgp32_host.h", "", CONV_INCLUDE, API_RAND, 0}},
+    {"curand_mtgp32_kernel.h", {"hiprand/hiprand_kernel.h", "", CONV_INCLUDE, API_RAND, 0}},
+    {"curand_mtgp32dc_p_11213.h", {"rocrand_mtgp32_11213.h", "", CONV_INCLUDE, API_RAND, 0}},
+    {"curand_normal.h", {"hiprand/hiprand_kernel.h", "", CONV_INCLUDE, API_RAND, 0}},
+    {"curand_normal_static.h", {"hiprand/hiprand_kernel.h", "", CONV_INCLUDE, API_RAND, 0}},
+    {"curand_philox4x32_x.h", {"hiprand/hiprand_kernel.h", "", CONV_INCLUDE, API_RAND, 0}},
+    {"curand_poisson.h", {"hiprand/hiprand_kernel.h", "", CONV_INCLUDE, API_RAND, 0}},
+    {"curand_precalc.h", {"hiprand/hiprand_kernel.h", "", CONV_INCLUDE, API_RAND, 0}},
+    {"curand_uniform.h", {"hiprand/hiprand_kernel.h", "", CONV_INCLUDE, API_RAND, 0}},
+    // cuDNN includes
+    {"cudnn.h", {"hipDNN.h", "miopen/miopen.h", CONV_INCLUDE_CUDA_MAIN_H, API_DNN, 0}},
+    // cuFFT includes
+    {"cufft.h", {"hipfft/hipfft.h", "", CONV_INCLUDE_CUDA_MAIN_H, API_FFT, 0}},
+    {"cufftXt.h", {"hipfft/hipfftXt.h", "", CONV_INCLUDE, API_FFT, 0}},
+    // cuSPARSE includes
+    {"cusparse.h", {"hipsparse.h", "rocsparse.h", CONV_INCLUDE_CUDA_MAIN_H, API_SPARSE, 0}},
+    {"cusparse_v2.h", {"hipsparse.h", "rocsparse.h", CONV_INCLUDE_CUDA_MAIN_V2_H, API_SPARSE, 0}},
+    // cuSOLVER includes
+    {"cusolverDn.h", {"hipsolver.h", "rocsolver/rocsolver.h", CONV_INCLUDE_CUDA_MAIN_H, API_SOLVER, 0}},
+    {"cusolverMg.h", {"hipsolver.h", "rocsolver/rocsolver.h", CONV_INCLUDE_CUDA_MAIN_H, API_SOLVER, 0}},
+    {"cusolverRf.h", {"hipsolver.h", "rocsolver/rocsolver.h", CONV_INCLUDE_CUDA_MAIN_H, API_SOLVER, 0}},
+    {"cusolverSp.h", {"hipsolver.h", "rocsolver/rocsolver.h", CONV_INCLUDE_CUDA_MAIN_H, API_SOLVER, 0}},
+    {"cusolverSp_LOWLEVEL_PREVIEW.h", {"hipsolver.h", "rocsolver/rocsolver.h", CONV_INCLUDE_CUDA_MAIN_H, API_SOLVER, 0}},
+    {"cusolver_common.h", {"hipsolver.h", "rocsolver/rocsolver.h", CONV_INCLUDE_CUDA_MAIN_H, API_SOLVER, 0}},
+    // CUB includes
+    {"cub/cub.cuh", {"hipcub/hipcub.hpp", "", CONV_INCLUDE_CUDA_MAIN_H, API_CUB, 0}},
+    // CAFFE2 includes
+    {"caffe2/core/common_gpu.h", {"caffe2/core/hip/common_gpu.h", "", CONV_INCLUDE, API_CAFFE2, 0, UNSUPPORTED}},
+    {"caffe2/core/context_gpu.h", {"caffe2/core/hip/context_gpu.h", "", CONV_INCLUDE, API_CAFFE2, 0, UNSUPPORTED}},
+    {"caffe2/operators/operator_fallback_gpu.h", {"", "", CONV_INCLUDE, API_CAFFE2, 0, UNSUPPORTED}},
+    {"caffe2/operators/spatial_batch_norm_op.h", {"caffe2/operators/hip/spatial_batch_norm_op_miopen.hip", "", CONV_INCLUDE, API_CAFFE2, 0}},
+    {"caffe2/operators/generate_proposals_op_util_nms_gpu.h", {"", "", CONV_INCLUDE, API_CAFFE2, 0, UNSUPPORTED}},
+    {"caffe2/operators/max_pool_with_index_gpu.h", {"", "", CONV_INCLUDE, API_CAFFE2, 0, UNSUPPORTED}},
+    {"caffe2/operators/rnn/recurrent_network_executor_gpu.h", {"", "", CONV_INCLUDE, API_CAFFE2, 0, UNSUPPORTED}},
+    {"caffe2/utils/math/reduce.cuh", {"caffe2/utils/math/hip/reduce.cuh", "", CONV_INCLUDE, API_CAFFE2, 0, UNSUPPORTED}},
+    {"caffe2/operators/gather_op.cuh", {"caffe2/operators/math/gather_op.cuh", "", CONV_INCLUDE, API_CAFFE2, 0, UNSUPPORTED}},
+    {"caffe2/core/common_cudnn.h", {"caffe2/core/hip/common_miopen.h", "", CONV_INCLUDE, API_CAFFE2, 0}},
+    // RTC includes
+    {"nvrtc.h", {"hiprtc.h", "", CONV_INCLUDE_CUDA_MAIN_H, API_RTC, 0}},
 };
 
-const std::map<llvm::StringRef, hipCounter> &CUDA_RENAMES_MAP() {
+const std::map<llvm::StringRef, hipCounter> &CUDA_RENAMES_MAP()
+{
   static std::map<llvm::StringRef, hipCounter> ret;
   if (!ret.empty())
     return ret;
@@ -128,7 +130,8 @@ const std::map<llvm::StringRef, hipCounter> &CUDA_RENAMES_MAP() {
   return ret;
 };
 
-const std::map<llvm::StringRef, cudaAPIversions> &CUDA_VERSIONS_MAP() {
+const std::map<llvm::StringRef, cudaAPIversions> &CUDA_VERSIONS_MAP()
+{
   static std::map<llvm::StringRef, cudaAPIversions> ret;
   if (!ret.empty())
     return ret;
@@ -162,7 +165,8 @@ const std::map<llvm::StringRef, cudaAPIversions> &CUDA_VERSIONS_MAP() {
   return ret;
 }
 
-const std::map<llvm::StringRef, hipAPIversions> &HIP_VERSIONS_MAP() {
+const std::map<llvm::StringRef, hipAPIversions> &HIP_VERSIONS_MAP()
+{
   static std::map<llvm::StringRef, hipAPIversions> ret;
   if (!ret.empty())
     return ret;
