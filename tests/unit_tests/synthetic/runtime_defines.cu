@@ -1,8 +1,70 @@
 // RUN: %run_test hipify "%s" "%t" %hipify_args 3 --amap --skip-excluded-preprocessor-conditional-blocks --experimental %clang_args -D__CUDA_API_VERSION_INTERNAL
 
-// CHECK: #include <hip/hip_runtime.h>
+// CHECK: #include <hip/hip_runtime_api.h>
+// CHECK-NEXT: #include <hip/device_functions.h>
+// CHECK-NEXT: #include <hip/hip_math_constants.h>
 #include <cuda_runtime_api.h>
+#include <device_functions.h>
+#include <math_constants.h>
 #include <stdio.h>
+
+  __global__ __constant__ int INF_F;
+  __global__ __constant__ int NAN_F;
+  __global__ __constant__ int MIN_DENORM_F;
+  __global__ __constant__ int MAX_NORMAL_F;
+  __global__ __constant__ int NEG_ZERO_F;
+  __global__ __constant__ int ZERO_F;
+  __global__ __constant__ int ONE_F;
+  __global__ __constant__ int SQRT_HALF_F;
+  __global__ __constant__ int SQRT_HALF_HI_F;
+  __global__ __constant__ int SQRT_HALF_LO_F;
+  __global__ __constant__ int SQRT_TWO_F;
+  __global__ __constant__ int THIRD_F;
+  __global__ __constant__ int PIO4_F;
+  __global__ __constant__ int PIO2_F;
+  __global__ __constant__ int _3PIO4_F;
+  __global__ __constant__ int _2_OVER_PI_F;
+  __global__ __constant__ int SQRT_2_OVER_PI_F;
+  __global__ __constant__ int PI_F;
+
+__global__ void init() {
+  // CHECK: INF_F = HIP_INF_F;
+  // CHECK-NEXT: NAN_F = HIP_NAN_F;
+  // CHECK-NEXT: MIN_DENORM_F = HIP_MIN_DENORM_F;
+  // CHECK-NEXT: MAX_NORMAL_F = HIP_MAX_NORMAL_F;
+  // CHECK-NEXT: NEG_ZERO_F = HIP_NEG_ZERO_F;
+  // CHECK-NEXT: ZERO_F = HIP_ZERO_F;
+  // CHECK-NEXT: ONE_F = HIP_ONE_F;
+  // CHECK-NEXT: SQRT_HALF_F = HIP_SQRT_HALF_F;
+  // CHECK-NEXT: SQRT_HALF_HI_F = HIP_SQRT_HALF_HI_F;
+  // CHECK-NEXT: SQRT_HALF_LO_F = HIP_SQRT_HALF_LO_F;
+  // CHECK-NEXT: SQRT_TWO_F = HIP_SQRT_TWO_F;
+  // CHECK-NEXT: THIRD_F = HIP_THIRD_F;
+  // CHECK-NEXT: PIO4_F = HIP_PIO4_F;
+  // CHECK-NEXT: PIO2_F = HIP_PIO2_F;
+  // CHECK-NEXT: _3PIO4_F = HIP_3PIO4_F;
+  // CHECK-NEXT: _2_OVER_PI_F = HIP_2_OVER_PI_F;
+  // CHECK-NEXT: SQRT_2_OVER_PI_F = HIP_SQRT_2_OVER_PI_F;
+  // CHECK-NEXT: PI_F = HIP_PI_F;
+  INF_F = CUDART_INF_F;
+  NAN_F = CUDART_NAN_F;
+  MIN_DENORM_F = CUDART_MIN_DENORM_F;
+  MAX_NORMAL_F = CUDART_MAX_NORMAL_F;
+  NEG_ZERO_F = CUDART_NEG_ZERO_F;
+  ZERO_F = CUDART_ZERO_F;
+  ONE_F = CUDART_ONE_F;
+  SQRT_HALF_F = CUDART_SQRT_HALF_F;
+  SQRT_HALF_HI_F = CUDART_SQRT_HALF_HI_F;
+  SQRT_HALF_LO_F = CUDART_SQRT_HALF_LO_F;
+  SQRT_TWO_F = CUDART_SQRT_TWO_F;
+  THIRD_F = CUDART_THIRD_F;
+  PIO4_F = CUDART_PIO4_F;
+  PIO2_F = CUDART_PIO2_F;
+  _3PIO4_F = CUDART_3PIO4_F;
+  _2_OVER_PI_F = CUDART_2_OVER_PI_F;
+  SQRT_2_OVER_PI_F = CUDART_SQRT_2_OVER_PI_F;
+  PI_F = CUDART_PI_F;
+}
 
 int main() {
   printf("08. CUDA Runtime API Defines synthetic test\n");

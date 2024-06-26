@@ -550,6 +550,24 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
+|`CUDART_2_OVER_PI_F`| | | | |`HIP_2_OVER_PI_F`|5.3.0| | | | |
+|`CUDART_3PIO4_F`| | | | |`HIP_3PIO4_F`|5.3.0| | | | |
+|`CUDART_INF_F`| | | | |`HIP_INF_F`|5.3.0| | | | |
+|`CUDART_MAX_NORMAL_F`| | | | |`HIP_MAX_NORMAL_F`|5.3.0| | | | |
+|`CUDART_MIN_DENORM_F`| | | | |`HIP_MIN_DENORM_F`|5.3.0| | | | |
+|`CUDART_NAN_F`| | | | |`HIP_NAN_F`|5.3.0| | | | |
+|`CUDART_NEG_ZERO_F`| | | | |`HIP_NEG_ZERO_F`|5.3.0| | | | |
+|`CUDART_ONE_F`| | | | |`HIP_ONE_F`|5.3.0| | | | |
+|`CUDART_PIO2_F`| | | | |`HIP_PIO2_F`|5.3.0| | | | |
+|`CUDART_PIO4_F`| | | | |`HIP_PIO4_F`|5.3.0| | | | |
+|`CUDART_PI_F`| | | | |`HIP_PI_F`|5.3.0| | | | |
+|`CUDART_SQRT_2_OVER_PI_F`| | | | |`HIP_SQRT_2_OVER_PI_F`|5.3.0| | | | |
+|`CUDART_SQRT_HALF_F`| | | | |`HIP_SQRT_HALF_F`|5.3.0| | | | |
+|`CUDART_SQRT_HALF_HI_F`| | | | |`HIP_SQRT_HALF_HI_F`|5.3.0| | | | |
+|`CUDART_SQRT_HALF_LO_F`| | | | |`HIP_SQRT_HALF_LO_F`|5.3.0| | | | |
+|`CUDART_SQRT_TWO_F`| | | | |`HIP_SQRT_TWO_F`|5.3.0| | | | |
+|`CUDART_THIRD_F`| | | | |`HIP_THIRD_F`|5.3.0| | | | |
+|`CUDART_ZERO_F`| | | | |`HIP_ZERO_F`|5.3.0| | | | |
 |`CUDA_EGL_MAX_PLANES`|9.1| | | | | | | | | |
 |`CUDA_IPC_HANDLE_SIZE`| | | | |`HIP_IPC_HANDLE_SIZE`|1.6.0| | | | |
 |`CUeglStreamConnection_st`|9.1| | | | | | | | | |

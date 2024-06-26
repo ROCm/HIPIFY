@@ -2153,6 +2153,25 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaGraphKernelNodePortLaunchCompletion",                          {"hipGraphKernelNodePortLaunchCompletion",                   "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}}, // 2
   // CU_KERNEL_NODE_ATTRIBUTE_DEVICE_UPDATABLE_KERNEL_NODE
   {"cudaKernelNodeAttributeDeviceUpdatableKernelNode",                 {"hipKernelNodeAttributeDeviceUpdatableKernelNode",          "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+
+  {"CUDART_INF_F",                                                     {"HIP_INF_F",                                                "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES}},
+  {"CUDART_NAN_F",                                                     {"HIP_NAN_F",                                                "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES}},
+  {"CUDART_MIN_DENORM_F",                                              {"HIP_MIN_DENORM_F",                                         "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES}},
+  {"CUDART_MAX_NORMAL_F",                                              {"HIP_MAX_NORMAL_F",                                         "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES}},
+  {"CUDART_NEG_ZERO_F",                                                {"HIP_NEG_ZERO_F",                                           "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES}},
+  {"CUDART_ZERO_F",                                                    {"HIP_ZERO_F",                                               "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES}},
+  {"CUDART_ONE_F",                                                     {"HIP_ONE_F",                                                "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES}},
+  {"CUDART_SQRT_HALF_F",                                               {"HIP_SQRT_HALF_F",                                          "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES}},
+  {"CUDART_SQRT_HALF_HI_F",                                            {"HIP_SQRT_HALF_HI_F",                                       "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES}},
+  {"CUDART_SQRT_HALF_LO_F",                                            {"HIP_SQRT_HALF_LO_F",                                       "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES}},
+  {"CUDART_SQRT_TWO_F",                                                {"HIP_SQRT_TWO_F",                                           "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES}},
+  {"CUDART_THIRD_F",                                                   {"HIP_THIRD_F",                                              "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES}},
+  {"CUDART_PIO4_F",                                                    {"HIP_PIO4_F",                                               "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES}},
+  {"CUDART_PIO2_F",                                                    {"HIP_PIO2_F",                                               "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES}},
+  {"CUDART_3PIO4_F",                                                   {"HIP_3PIO4_F",                                              "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES}},
+  {"CUDART_2_OVER_PI_F",                                               {"HIP_2_OVER_PI_F",                                          "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES}},
+  {"CUDART_SQRT_2_OVER_PI_F",                                          {"HIP_SQRT_2_OVER_PI_F",                                     "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES}},
+  {"CUDART_PI_F",                                                      {"HIP_PI_F",                                                 "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_TYPE_NAME_VER_MAP {
@@ -3002,4 +3021,22 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {
   {"hipGraphDependencyTypeDefault",                                    {HIP_6020, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipGraphDependencyTypeProgrammatic",                               {HIP_6020, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipGraphEdgeData",                                                 {HIP_6020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"HIP_INF_F",                                                        {HIP_5030, HIP_0,    HIP_0   }},
+  {"HIP_NAN_F",                                                        {HIP_5030, HIP_0,    HIP_0   }},
+  {"HIP_MIN_DENORM_F",                                                 {HIP_5030, HIP_0,    HIP_0   }},
+  {"HIP_MAX_NORMAL_F",                                                 {HIP_5030, HIP_0,    HIP_0   }},
+  {"HIP_NEG_ZERO_F",                                                   {HIP_5030, HIP_0,    HIP_0   }},
+  {"HIP_ZERO_F",                                                       {HIP_5030, HIP_0,    HIP_0   }},
+  {"HIP_ONE_F",                                                        {HIP_5030, HIP_0,    HIP_0   }},
+  {"HIP_SQRT_HALF_F",                                                  {HIP_5030, HIP_0,    HIP_0   }},
+  {"HIP_SQRT_HALF_HI_F",                                               {HIP_5030, HIP_0,    HIP_0   }},
+  {"HIP_SQRT_HALF_LO_F",                                               {HIP_5030, HIP_0,    HIP_0   }},
+  {"HIP_SQRT_TWO_F",                                                   {HIP_5030, HIP_0,    HIP_0   }},
+  {"HIP_THIRD_F",                                                      {HIP_5030, HIP_0,    HIP_0   }},
+  {"HIP_PIO4_F",                                                       {HIP_5030, HIP_0,    HIP_0   }},
+  {"HIP_PIO2_F",                                                       {HIP_5030, HIP_0,    HIP_0   }},
+  {"HIP_3PIO4_F",                                                      {HIP_5030, HIP_0,    HIP_0   }},
+  {"HIP_2_OVER_PI_F",                                                  {HIP_5030, HIP_0,    HIP_0   }},
+  {"HIP_SQRT_2_OVER_PI_F",                                             {HIP_5030, HIP_0,    HIP_0   }},
+  {"HIP_PI_F",                                                         {HIP_5030, HIP_0,    HIP_0   }},
 };
