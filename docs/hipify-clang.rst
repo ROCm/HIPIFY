@@ -547,9 +547,10 @@ LLVM >= 10.0.0
       
       -DCUDA_DNN_ROOT_DIR=D:/CUDA/cuDNN/9.2.0
 
-5. Install `CUB <https://github.com/nvidia/cub>`_ belonging to the version corresponding to the CUDA version:
-   
-   * To specify the path to CUB, specify using the ``CUDA_CUB_ROOT_DIR`` option:
+5. [Optional] Install `CUB 1.9.8 <https://github.com/NVIDIA/cub/releases/tag/1.9.8>`_ for ``CUDA < 11.0`` only;
+   for ``CUDA >= 11.0``, the CUB shipped with CUDA will be used for testing.
+
+   * To specify the path to CUB, use the ``CUDA_CUB_ROOT_DIR`` option (only for ``CUDA < 11.0``):
 
      **Linux**:
 
@@ -561,7 +562,7 @@ LLVM >= 10.0.0
 
      .. code-block:: shell
 
-      -DCUDA_CUB_ROOT_DIR=D:/CUDA/CUB/cub-2.1.0
+      -DCUDA_CUB_ROOT_DIR=D:/CUDA/CUB
 
 6. Install `Python <https://www.python.org/downloads>`_ version 2.7 or greater.
 
@@ -658,7 +659,6 @@ Here's how to build ``hipify-clang`` with testing support on ``Ubuntu 23.10.01``
   -DCMAKE_PREFIX_PATH=/usr/llvm/18.1.8/dist \
   -DCUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-12.3.2 \
   -DCUDA_DNN_ROOT_DIR=/usr/local/cudnn-9.2.0 \
-  -DCUDA_CUB_ROOT_DIR=/usr/local/cub-2.1.0 \
   -DLLVM_EXTERNAL_LIT=/usr/llvm/18.1.8/build/bin/llvm-lit \
   ../hipify
 
@@ -695,9 +695,9 @@ The corresponding successful output is:
   -- Found FileCheck: /GIT/LLVM/trunk/dist/FileCheck
   -- Initial CUDA to configure:
   --    - CUDA Toolkit path  : /usr/local/cuda-12.3.2
-  --    - CUDA Samples path  : OFF
+  --    - CUDA Samples path  :
   --    - cuDNN path         : /usr/local/cudnn-9.2.0
-  --    - CUB path           : /usr/local/cub-2.1.0
+  --    - CUB path           :
   -- Found CUDAToolkit: /usr/local/cuda-12.3.2/targets/x86_64-linux/include (found version "12.3.107")
   -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
   -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
@@ -706,7 +706,7 @@ The corresponding successful output is:
   --    - CUDA Toolkit path  : /usr/local/cuda-12.3.2
   --    - CUDA Samples path  : OFF
   --    - cuDNN path         : /usr/local/cudnn-9.2.0
-  --    - CUB path           : /usr/local/cub-2.1.0
+  --    - CUB path           : /usr/local/cuda-12.3.2/include/cub
   -- Configuring done (0.5s)
   -- Generating done (0.0s)
   -- Build files have been written to: /usr/hipify/build
@@ -856,7 +856,6 @@ Building with testing support using ``Visual Studio 17 2022`` on ``Windows 11``:
   -DCUDA_TOOLKIT_ROOT_DIR="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.3" \
   -DCUDA_SDK_ROOT_DIR="C:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.3" \
   -DCUDA_DNN_ROOT_DIR=D:/CUDA/cuDNN/9.2.0 \
-  -DCUDA_CUB_ROOT_DIR=D:/CUDA/CUB/cub-2.1.0 \
   -DLLVM_EXTERNAL_LIT=D:/LLVM/18.1.8/build/Release/bin/llvm-lit.py \
   ../hipify
 
@@ -894,13 +893,13 @@ The corresponding successful output is:
   --    - CUDA Toolkit path  : C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.3
   --    - CUDA Samples path  : C:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.3
   --    - cuDNN path         : D:/CUDA/cuDNN/9.2.0
-  --    - CUB path           : D:/CUDA/CUB/cub-2.1.0
+  --    - CUB path           :
   -- Found CUDAToolkit: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.3/include (found version "12.3.107")
   -- Found CUDA config:
   --    - CUDA Toolkit path  : C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.3
   --    - CUDA Samples path  : C:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.3
   --    - cuDNN path         : D:/CUDA/cuDNN/9.2.0
-  --    - CUB path           : D:/CUDA/CUB/cub-2.1.0
+  --    - CUB path           : C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.3/include/cub
   -- Configuring done (1.4s)
   -- Generating done (0.1s)
   -- Build files have been written to: D:/HIPIFY/build
