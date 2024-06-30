@@ -3824,11 +3824,15 @@ sub simpleSubstitutions {
     subst("cublasCgetriBatched", "hipblasCgetriBatched_v2", "library");
     subst("cublasCgetrsBatched", "hipblasCgetrsBatched_v2", "library");
     subst("cublasChbmv", "hipblasChbmv_v2", "library");
+    subst("cublasChbmv_64", "hipblasChbmv_v2_64", "library");
     subst("cublasChbmv_v2", "hipblasChbmv_v2", "library");
+    subst("cublasChbmv_v2_64", "hipblasChbmv_v2_64", "library");
     subst("cublasChemm", "hipblasChemm_v2", "library");
     subst("cublasChemm_v2", "hipblasChemm_v2", "library");
     subst("cublasChemv", "hipblasChemv_v2", "library");
+    subst("cublasChemv_64", "hipblasChemv_v2_64", "library");
     subst("cublasChemv_v2", "hipblasChemv_v2", "library");
+    subst("cublasChemv_v2_64", "hipblasChemv_v2_64", "library");
     subst("cublasCher", "hipblasCher_v2", "library");
     subst("cublasCher2", "hipblasCher2_v2", "library");
     subst("cublasCher2_v2", "hipblasCher2_v2", "library");
@@ -4251,11 +4255,15 @@ sub simpleSubstitutions {
     subst("cublasZgetriBatched", "hipblasZgetriBatched_v2", "library");
     subst("cublasZgetrsBatched", "hipblasZgetrsBatched_v2", "library");
     subst("cublasZhbmv", "hipblasZhbmv_v2", "library");
+    subst("cublasZhbmv_64", "hipblasZhbmv_v2_64", "library");
     subst("cublasZhbmv_v2", "hipblasZhbmv_v2", "library");
+    subst("cublasZhbmv_v2_64", "hipblasZhbmv_v2_64", "library");
     subst("cublasZhemm", "hipblasZhemm_v2", "library");
     subst("cublasZhemm_v2", "hipblasZhemm_v2", "library");
     subst("cublasZhemv", "hipblasZhemv_v2", "library");
+    subst("cublasZhemv_64", "hipblasZhemv_v2_64", "library");
     subst("cublasZhemv_v2", "hipblasZhemv_v2", "library");
+    subst("cublasZhemv_v2_64", "hipblasZhemv_v2_64", "library");
     subst("cublasZher", "hipblasZher_v2", "library");
     subst("cublasZher2", "hipblasZher2_v2", "library");
     subst("cublasZher2_v2", "hipblasZher2_v2", "library");
@@ -11403,12 +11411,8 @@ sub warnHipOnlyUnsupportedFunctions {
         "cublasZher2k_64",
         "cublasZher2_v2_64",
         "cublasZher2_64",
-        "cublasZhemv_v2_64",
-        "cublasZhemv_64",
         "cublasZhemm_v2_64",
         "cublasZhemm_64",
-        "cublasZhbmv_v2_64",
-        "cublasZhbmv_64",
         "cublasZgemm_v2_64",
         "cublasZgemm_64",
         "cublasZgemmStridedBatched_64",
@@ -11679,12 +11683,8 @@ sub warnHipOnlyUnsupportedFunctions {
         "cublasCher2k_64",
         "cublasCher2_v2_64",
         "cublasCher2_64",
-        "cublasChemv_v2_64",
-        "cublasChemv_64",
         "cublasChemm_v2_64",
         "cublasChemm_64",
-        "cublasChbmv_v2_64",
-        "cublasChbmv_64",
         "cublasCgemm_v2_64",
         "cublasCgemm_64",
         "cublasCgemmStridedBatched_64",
