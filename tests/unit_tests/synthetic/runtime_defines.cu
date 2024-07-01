@@ -26,6 +26,23 @@
   __global__ __constant__ int _2_OVER_PI_F;
   __global__ __constant__ int SQRT_2_OVER_PI_F;
   __global__ __constant__ int PI_F;
+  __global__ __constant__ int L2E_F;
+  __global__ __constant__ int L2T_F;
+  __global__ __constant__ int LG2_F;
+  __global__ __constant__ int LGE_F;
+  __global__ __constant__ int LN2_F;
+  __global__ __constant__ int LNT_F;
+  __global__ __constant__ int LNPI_F;
+  __global__ __constant__ int TWO_TO_M126_F;
+  __global__ __constant__ int TWO_TO_126_F;
+  __global__ __constant__ int NORM_HUGE_F;
+  __global__ __constant__ int TWO_TO_23_F;
+  __global__ __constant__ int TWO_TO_24_F;
+  __global__ __constant__ int TWO_TO_31_F;
+  __global__ __constant__ int TWO_TO_32_F;
+  __global__ __constant__ int REMQUO_BITS_F;
+  __global__ __constant__ int REMQUO_MASK_F;
+  __global__ __constant__ int TRIG_PLOSS_F;
 
 __global__ void init() {
   // CHECK: INF_F = HIP_INF_F;
@@ -46,6 +63,23 @@ __global__ void init() {
   // CHECK-NEXT: _2_OVER_PI_F = HIP_2_OVER_PI_F;
   // CHECK-NEXT: SQRT_2_OVER_PI_F = HIP_SQRT_2_OVER_PI_F;
   // CHECK-NEXT: PI_F = HIP_PI_F;
+  // CHECK-NEXT: L2E_F = HIP_L2E_F;
+  // CHECK-NEXT: L2T_F = HIP_L2T_F;
+  // CHECK-NEXT: LG2_F = HIP_LG2_F;
+  // CHECK-NEXT: LGE_F = HIP_LGE_F;
+  // CHECK-NEXT: LN2_F = HIP_LN2_F;
+  // CHECK-NEXT: LNT_F = HIP_LNT_F;
+  // CHECK-NEXT: LNPI_F = HIP_LNPI_F;
+  // CHECK-NEXT: TWO_TO_M126_F = HIP_TWO_TO_M126_F;
+  // CHECK-NEXT: TWO_TO_126_F = HIP_TWO_TO_126_F;
+  // CHECK-NEXT: NORM_HUGE_F = HIP_NORM_HUGE_F;
+  // CHECK-NEXT: TWO_TO_23_F = HIP_TWO_TO_23_F;
+  // CHECK-NEXT: TWO_TO_24_F = HIP_TWO_TO_24_F;
+  // CHECK-NEXT: TWO_TO_31_F = HIP_TWO_TO_31_F;
+  // CHECK-NEXT: TWO_TO_32_F = HIP_TWO_TO_32_F;
+  // CHECK-NEXT: REMQUO_BITS_F = HIP_REMQUO_BITS_F;
+  // CHECK-NEXT: REMQUO_MASK_F = HIP_REMQUO_MASK_F;
+  // CHECK-NEXT: TRIG_PLOSS_F = HIP_TRIG_PLOSS_F;
   INF_F = CUDART_INF_F;
   NAN_F = CUDART_NAN_F;
   MIN_DENORM_F = CUDART_MIN_DENORM_F;
@@ -64,6 +98,23 @@ __global__ void init() {
   _2_OVER_PI_F = CUDART_2_OVER_PI_F;
   SQRT_2_OVER_PI_F = CUDART_SQRT_2_OVER_PI_F;
   PI_F = CUDART_PI_F;
+  L2E_F = CUDART_L2E_F;
+  L2T_F = CUDART_L2T_F;
+  LG2_F = CUDART_LG2_F;
+  LGE_F = CUDART_LGE_F;
+  LN2_F = CUDART_LN2_F;
+  LNT_F = CUDART_LNT_F;
+  LNPI_F = CUDART_LNPI_F;
+  TWO_TO_M126_F = CUDART_TWO_TO_M126_F;
+  TWO_TO_126_F = CUDART_TWO_TO_126_F;
+  NORM_HUGE_F = CUDART_NORM_HUGE_F;
+  TWO_TO_23_F = CUDART_TWO_TO_23_F;
+  TWO_TO_24_F = CUDART_TWO_TO_24_F;
+  TWO_TO_31_F = CUDART_TWO_TO_31_F;
+  TWO_TO_32_F = CUDART_TWO_TO_32_F;
+  REMQUO_BITS_F = CUDART_REMQUO_BITS_F;
+  REMQUO_MASK_F = CUDART_REMQUO_MASK_F;
+  TRIG_PLOSS_F = CUDART_TRIG_PLOSS_F;
 }
 
 int main() {
