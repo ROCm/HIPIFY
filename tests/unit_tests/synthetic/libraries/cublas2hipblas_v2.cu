@@ -2404,6 +2404,34 @@ int main() {
   // CHECK-NEXT: blasStatus = hipblasZhemv_v2_64(blasHandle, blasFillMode, n_64, &dcomplexa, &dcomplexA, lda_64, &dcomplexx, incx_64, &dcomplexb, &dcomplexy, incy_64);
   blasStatus = cublasZhemv_64(blasHandle, blasFillMode, n_64, &dcomplexa, &dcomplexA, lda_64, &dcomplexx, incx_64, &dcomplexb, &dcomplexy, incy_64);
   blasStatus = cublasZhemv_v2_64(blasHandle, blasFillMode, n_64, &dcomplexa, &dcomplexA, lda_64, &dcomplexx, incx_64, &dcomplexb, &dcomplexy, incy_64);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasCher_v2_64(cublasHandle_t handle, cublasFillMode_t uplo, int64_t n, const float* alpha, const cuComplex* x, int64_t incx, cuComplex* A, int64_t lda);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasCher_v2_64(hipblasHandle_t handle, hipblasFillMode_t uplo, int64_t n, const float* alpha, const hipComplex* x, int64_t incx, hipComplex* AP, int64_t lda);
+  // CHECK: blasStatus = hipblasCher_v2_64(blasHandle, blasFillMode, n_64, &fa, &complexx, incx_64, &complexA, lda_64);
+  // CHECK-NEXT: blasStatus = hipblasCher_v2_64(blasHandle, blasFillMode, n_64, &fa, &complexx, incx_64, &complexA, lda_64);
+  blasStatus = cublasCher_64(blasHandle, blasFillMode, n_64, &fa, &complexx, incx_64, &complexA, lda_64);
+  blasStatus = cublasCher_v2_64(blasHandle, blasFillMode, n_64, &fa, &complexx, incx_64, &complexA, lda_64);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasZher_v2_64(cublasHandle_t handle, cublasFillMode_t uplo, int64_t n, const double* alpha, const cuDoubleComplex* x, int64_t incx, cuDoubleComplex* A, int64_t lda);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasZher_v2_64(hipblasHandle_t handle, hipblasFillMode_t uplo, int64_t n, const double* alpha, const hipDoubleComplex* x, int64_t incx, hipDoubleComplex* AP, int64_t lda);
+  // CHECK: blasStatus = hipblasZher_v2_64(blasHandle, blasFillMode, n_64, &da, &dcomplexx, incx_64, &dcomplexA, lda_64);
+  // CHECK-NEXT: blasStatus = hipblasZher_v2_64(blasHandle, blasFillMode, n_64, &da, &dcomplexx, incx_64, &dcomplexA, lda_64);
+  blasStatus = cublasZher_64(blasHandle, blasFillMode, n_64, &da, &dcomplexx, incx_64, &dcomplexA, lda_64);
+  blasStatus = cublasZher_v2_64(blasHandle, blasFillMode, n_64, &da, &dcomplexx, incx_64, &dcomplexA, lda_64);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasCher2_v2_64(cublasHandle_t handle, cublasFillMode_t uplo, int64_t n, const cuComplex* alpha, const cuComplex* x, int64_t incx, const cuComplex* y, int64_t incy, cuComplex* A, int64_t lda);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasCher2_v2_64(hipblasHandle_t handle, hipblasFillMode_t uplo, int64_t n, const hipComplex* alpha, const hipComplex* x, int64_t incx, const hipComplex* y, int64_t incy, hipComplex* AP, int64_t lda);
+  // CHECK: blasStatus = hipblasCher2_v2_64(blasHandle, blasFillMode, n_64, &complexa, &complexx, incx_64, &complexy, incy_64, &complexA, lda_64);
+  // CHECK-NEXT: blasStatus = hipblasCher2_v2_64(blasHandle, blasFillMode, n_64, &complexa, &complexx, incx_64, &complexy, incy_64, &complexA, lda_64);
+  blasStatus = cublasCher2_64(blasHandle, blasFillMode, n_64, &complexa, &complexx, incx_64, &complexy, incy_64, &complexA, lda_64);
+  blasStatus = cublasCher2_v2_64(blasHandle, blasFillMode, n_64, &complexa, &complexx, incx_64, &complexy, incy_64, &complexA, lda_64);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasZher2_v2_64(cublasHandle_t handle, cublasFillMode_t uplo, int64_t n, const cuDoubleComplex* alpha, const cuDoubleComplex* x, int64_t incx, const cuDoubleComplex* y, int64_t incy, cuDoubleComplex* A, int64_t lda);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasZher2_v2_64(hipblasHandle_t handle, hipblasFillMode_t uplo, int64_t n, const hipDoubleComplex* alpha, const hipDoubleComplex* x, int64_t incx, const hipDoubleComplex* y, int64_t incy, hipDoubleComplex* AP, int64_t lda);
+  // CHECK: blasStatus = hipblasZher2_v2_64(blasHandle, blasFillMode, n_64, &dcomplexa, &dcomplexx, incx_64, &dcomplexy, incy_64, &dcomplexA, lda_64);
+  // CHECK-NEXT: blasStatus = hipblasZher2_v2_64(blasHandle, blasFillMode, n_64, &dcomplexa, &dcomplexx, incx_64, &dcomplexy, incy_64, &dcomplexA, lda_64);
+  blasStatus = cublasZher2_64(blasHandle, blasFillMode, n_64, &dcomplexa, &dcomplexx, incx_64, &dcomplexy, incy_64, &dcomplexA, lda_64);
+  blasStatus = cublasZher2_v2_64(blasHandle, blasFillMode, n_64, &dcomplexa, &dcomplexx, incx_64, &dcomplexy, incy_64, &dcomplexA, lda_64);
 #endif
 
   return 0;
