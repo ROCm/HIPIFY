@@ -3847,11 +3847,15 @@ sub simpleSubstitutions {
     subst("cublasCherk_v2", "hipblasCherk_v2", "library");
     subst("cublasCherkx", "hipblasCherkx_v2", "library");
     subst("cublasChpmv", "hipblasChpmv_v2", "library");
+    subst("cublasChpmv_64", "hipblasChpmv_v2_64", "library");
     subst("cublasChpmv_v2", "hipblasChpmv_v2", "library");
+    subst("cublasChpmv_v2_64", "hipblasChpmv_v2_64", "library");
     subst("cublasChpr", "hipblasChpr_v2", "library");
     subst("cublasChpr2", "hipblasChpr2_v2", "library");
     subst("cublasChpr2_v2", "hipblasChpr2_v2", "library");
+    subst("cublasChpr_64", "hipblasChpr_v2_64", "library");
     subst("cublasChpr_v2", "hipblasChpr_v2", "library");
+    subst("cublasChpr_v2_64", "hipblasChpr_v2_64", "library");
     subst("cublasCreate", "hipblasCreate", "library");
     subst("cublasCreate_v2", "hipblasCreate", "library");
     subst("cublasCrot", "hipblasCrot_v2", "library");
@@ -4282,11 +4286,15 @@ sub simpleSubstitutions {
     subst("cublasZherk_v2", "hipblasZherk_v2", "library");
     subst("cublasZherkx", "hipblasZherkx_v2", "library");
     subst("cublasZhpmv", "hipblasZhpmv_v2", "library");
+    subst("cublasZhpmv_64", "hipblasZhpmv_v2_64", "library");
     subst("cublasZhpmv_v2", "hipblasZhpmv_v2", "library");
+    subst("cublasZhpmv_v2_64", "hipblasZhpmv_v2_64", "library");
     subst("cublasZhpr", "hipblasZhpr_v2", "library");
     subst("cublasZhpr2", "hipblasZhpr2_v2", "library");
     subst("cublasZhpr2_v2", "hipblasZhpr2_v2", "library");
+    subst("cublasZhpr_64", "hipblasZhpr_v2_64", "library");
     subst("cublasZhpr_v2", "hipblasZhpr_v2", "library");
+    subst("cublasZhpr_v2_64", "hipblasZhpr_v2_64", "library");
     subst("cublasZrot", "hipblasZrot_v2", "library");
     subst("cublasZrot_64", "hipblasZrot_v2_64", "library");
     subst("cublasZrot_v2", "hipblasZrot_v2", "library");
@@ -11439,12 +11447,8 @@ sub warnHipOnlyUnsupportedFunctions {
         "cublasZsymm_v2_64",
         "cublasZsymm_64",
         "cublasZmatinvBatched",
-        "cublasZhpr_v2_64",
-        "cublasZhpr_64",
         "cublasZhpr2_v2_64",
         "cublasZhpr2_64",
-        "cublasZhpmv_v2_64",
-        "cublasZhpmv_64",
         "cublasZherkx_64",
         "cublasZherk_v2_64",
         "cublasZherk_64",
@@ -11703,12 +11707,8 @@ sub warnHipOnlyUnsupportedFunctions {
         "cublasCopyEx",
         "cublasContext",
         "cublasCmatinvBatched",
-        "cublasChpr_v2_64",
-        "cublasChpr_64",
         "cublasChpr2_v2_64",
         "cublasChpr2_64",
-        "cublasChpmv_v2_64",
-        "cublasChpmv_64",
         "cublasCherkx_64",
         "cublasCherk_v2_64",
         "cublasCherk_64",
