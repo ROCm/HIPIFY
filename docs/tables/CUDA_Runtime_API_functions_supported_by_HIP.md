@@ -550,13 +550,22 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
+|`CUDART_2_OVER_PI`| | | | |`HIP_2_OVER_PI`|5.7.0| | | | |
 |`CUDART_2_OVER_PI_F`| | | | |`HIP_2_OVER_PI_F`|5.3.0| | | | |
+|`CUDART_3PIO4`| | | | |`HIP_3PIO4`|5.7.0| | | | |
 |`CUDART_3PIO4_F`| | | | |`HIP_3PIO4_F`|5.3.0| | | | |
 |`CUDART_INF`| | | | |`HIP_INF`|5.7.0| | | | |
 |`CUDART_INF_F`| | | | |`HIP_INF_F`|5.3.0| | | | |
+|`CUDART_L2E`| | | | |`HIP_L2E`|5.7.0| | | | |
 |`CUDART_L2E_F`| | | | |`HIP_L2E_F`|5.3.0| | | | |
+|`CUDART_L2E_HI`| | | | |`HIP_L2E_HI`|5.7.0| | | | |
+|`CUDART_L2E_LO`| | | | |`HIP_L2E_LO`|5.7.0| | | | |
+|`CUDART_L2T`| | | | |`HIP_L2T`|5.7.0| | | | |
 |`CUDART_L2T_F`| | | | |`HIP_L2T_F`|5.3.0| | | | |
+|`CUDART_LG2`| | | | |`HIP_LG2`|5.7.0| | | | |
 |`CUDART_LG2_F`| | | | |`HIP_LG2_F`|5.3.0| | | | |
+|`CUDART_LG2_HI`| | | | |`HIP_LG2_HI`|5.7.0| | | | |
+|`CUDART_LG2_LO`| | | | |`HIP_LG2_LO`|5.7.0| | | | |
 |`CUDART_LGE_F`| | | | |`HIP_LGE_F`|5.3.0| | | | |
 |`CUDART_LN2_F`| | | | |`HIP_LN2_F`|5.3.0| | | | |
 |`CUDART_LNPI_F`| | | | |`HIP_LNPI_F`|5.3.0| | | | |
@@ -571,6 +580,7 @@
 |`CUDART_NORM_HUGE_F`| | | | |`HIP_NORM_HUGE_F`|5.3.0| | | | |
 |`CUDART_ONE`| | | | |`HIP_ONE`|5.7.0| | | | |
 |`CUDART_ONE_F`| | | | |`HIP_ONE_F`|5.3.0| | | | |
+|`CUDART_PI`| | | | |`HIP_PI`|5.7.0| | | | |
 |`CUDART_PIO2`| | | | |`HIP_PIO2`|5.7.0| | | | |
 |`CUDART_PIO2_F`| | | | |`HIP_PIO2_F`|5.3.0| | | | |
 |`CUDART_PIO2_HI`| | | | |`HIP_PIO2_HI`|5.7.0| | | | |
@@ -580,8 +590,14 @@
 |`CUDART_PIO4_HI`| | | | |`HIP_PIO4_HI`|5.7.0| | | | |
 |`CUDART_PIO4_LO`| | | | |`HIP_PIO4_LO`|5.7.0| | | | |
 |`CUDART_PI_F`| | | | |`HIP_PI_F`|5.3.0| | | | |
+|`CUDART_PI_HI`| | | | |`HIP_PI_HI`|5.7.0| | | | |
+|`CUDART_PI_LO`| | | | |`HIP_PI_LO`|5.7.0| | | | |
 |`CUDART_REMQUO_BITS_F`| | | | |`HIP_REMQUO_BITS_F`|5.3.0| | | | |
 |`CUDART_REMQUO_MASK_F`| | | | |`HIP_REMQUO_MASK_F`|5.3.0| | | | |
+|`CUDART_SQRT_2OPI`| | | | |`HIP_SQRT_2OPI`|5.7.0| | | | |
+|`CUDART_SQRT_2PI`| | | | |`HIP_SQRT_2PI`|5.7.0| | | | |
+|`CUDART_SQRT_2PI_HI`| | | | |`HIP_SQRT_2PI_HI`|5.7.0| | | | |
+|`CUDART_SQRT_2PI_LO`| | | | |`HIP_SQRT_2PI_LO`|5.7.0| | | | |
 |`CUDART_SQRT_2_OVER_PI_F`| | | | |`HIP_SQRT_2_OVER_PI_F`|5.3.0| | | | |
 |`CUDART_SQRT_HALF`| | | | |`HIP_SQRT_HALF`|5.7.0| | | | |
 |`CUDART_SQRT_HALF_F`| | | | |`HIP_SQRT_HALF_F`|5.3.0| | | | |
@@ -589,6 +605,9 @@
 |`CUDART_SQRT_HALF_HI_F`| | | | |`HIP_SQRT_HALF_HI_F`|5.3.0| | | | |
 |`CUDART_SQRT_HALF_LO`| | | | |`HIP_SQRT_HALF_LO`|5.7.0| | | | |
 |`CUDART_SQRT_HALF_LO_F`| | | | |`HIP_SQRT_HALF_LO_F`|5.3.0| | | | |
+|`CUDART_SQRT_PIO2`| | | | |`HIP_SQRT_PIO2`|5.7.0| | | | |
+|`CUDART_SQRT_PIO2_HI`| | | | |`HIP_SQRT_PIO2_HI`|5.7.0| | | | |
+|`CUDART_SQRT_PIO2_LO`| | | | |`HIP_SQRT_PIO2_LO`|5.7.0| | | | |
 |`CUDART_SQRT_TWO`| | | | |`HIP_SQRT_TWO`|5.7.0| | | | |
 |`CUDART_SQRT_TWO_F`| | | | |`HIP_SQRT_TWO_F`|5.3.0| | | | |
 |`CUDART_THIRD`| | | | |`HIP_THIRD`|5.7.0| | | | |

@@ -61,6 +61,25 @@
   __global__ __constant__ double PIO2;
   __global__ __constant__ double PIO2_HI;
   __global__ __constant__ double PIO2_LO;
+  __global__ __constant__ double _3PIO4;
+  __global__ __constant__ double _2_OVER_PI;
+  __global__ __constant__ double _PI;
+  __global__ __constant__ double PI_HI;
+  __global__ __constant__ double PI_LO;
+  __global__ __constant__ double SQRT_2PI;
+  __global__ __constant__ double SQRT_2PI_HI;
+  __global__ __constant__ double SQRT_2PI_LO;
+  __global__ __constant__ double SQRT_PIO2;
+  __global__ __constant__ double SQRT_PIO2_HI;
+  __global__ __constant__ double SQRT_PIO2_LO;
+  __global__ __constant__ double SQRT_2OPI;
+  __global__ __constant__ double L2E;
+  __global__ __constant__ double L2E_HI;
+  __global__ __constant__ double L2E_LO;
+  __global__ __constant__ double L2T;
+  __global__ __constant__ double LG2;
+  __global__ __constant__ double LG2_HI;
+  __global__ __constant__ double LG2_LO;
 
 __global__ void init() {
   // CHECK: INF_F = HIP_INF_F;
@@ -116,6 +135,25 @@ __global__ void init() {
   // CHECK-NEXT: PIO2 = HIP_PIO2;
   // CHECK-NEXT: PIO2_HI = HIP_PIO2_HI;
   // CHECK-NEXT: PIO2_LO = HIP_PIO2_LO;
+  // CHECK-NEXT: _3PIO4 = HIP_3PIO4;
+  // CHECK-NEXT: _2_OVER_PI = HIP_2_OVER_PI;
+  // CHECK-NEXT: _PI = HIP_PI;
+  // CHECK-NEXT: PI_HI = HIP_PI_HI;
+  // CHECK-NEXT: PI_LO = HIP_PI_LO;
+  // CHECK-NEXT: SQRT_2PI = HIP_SQRT_2PI;
+  // CHECK-NEXT: SQRT_2PI_HI = HIP_SQRT_2PI_HI;
+  // CHECK-NEXT: SQRT_2PI_LO = HIP_SQRT_2PI_LO;
+  // CHECK-NEXT: SQRT_PIO2 = HIP_SQRT_PIO2;
+  // CHECK-NEXT: SQRT_PIO2_HI = HIP_SQRT_PIO2_HI;
+  // CHECK-NEXT: SQRT_PIO2_LO = HIP_SQRT_PIO2_LO;
+  // CHECK-NEXT: SQRT_2OPI = HIP_SQRT_2OPI;
+  // CHECK-NEXT: L2E = HIP_L2E;
+  // CHECK-NEXT: L2E_HI = HIP_L2E_HI;
+  // CHECK-NEXT: L2E_LO = HIP_L2E_LO;
+  // CHECK-NEXT: L2T = HIP_L2T;
+  // CHECK-NEXT: LG2 = HIP_LG2;
+  // CHECK-NEXT: LG2_HI = HIP_LG2_HI;
+  // CHECK-NEXT: LG2_LO = HIP_LG2_LO;
   INF_F = CUDART_INF_F;
   NAN_F = CUDART_NAN_F;
   MIN_DENORM_F = CUDART_MIN_DENORM_F;
@@ -169,6 +207,25 @@ __global__ void init() {
   PIO2 = CUDART_PIO2;
   PIO2_HI = CUDART_PIO2_HI;
   PIO2_LO = CUDART_PIO2_LO;
+  _3PIO4 = CUDART_3PIO4;
+  _2_OVER_PI = CUDART_2_OVER_PI;
+  _PI = CUDART_PI;
+  PI_HI = CUDART_PI_HI;
+  PI_LO = CUDART_PI_LO;
+  SQRT_2PI = CUDART_SQRT_2PI;
+  SQRT_2PI_HI = CUDART_SQRT_2PI_HI;
+  SQRT_2PI_LO = CUDART_SQRT_2PI_LO;
+  SQRT_PIO2 = CUDART_SQRT_PIO2;
+  SQRT_PIO2_HI = CUDART_SQRT_PIO2_HI;
+  SQRT_PIO2_LO = CUDART_SQRT_PIO2_LO;
+  SQRT_2OPI = CUDART_SQRT_2OPI;
+  L2E = CUDART_L2E;
+  L2E_HI = CUDART_L2E_HI;
+  L2E_LO = CUDART_L2E_LO;
+  L2T = CUDART_L2T;
+  LG2 = CUDART_LG2;
+  LG2_HI = CUDART_LG2_HI;
+  LG2_LO = CUDART_LG2_LO;
 }
 
 int main() {
