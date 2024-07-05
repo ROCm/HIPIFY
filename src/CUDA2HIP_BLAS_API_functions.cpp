@@ -316,9 +316,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
 
   // SBMV/HBMV
   {"cublasSsbmv",                                          {"hipblasSsbmv",                                              "rocblas_ssbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasSsbmv_64",                                       {"hipblasSsbmv_64",                                           "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, UNSUPPORTED}},
+  {"cublasSsbmv_64",                                       {"hipblasSsbmv_64",                                           "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, ROC_UNSUPPORTED}},
   {"cublasDsbmv",                                          {"hipblasDsbmv",                                              "rocblas_dsbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasDsbmv_64",                                       {"hipblasDsbmv_64",                                           "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, UNSUPPORTED}},
+  {"cublasDsbmv_64",                                       {"hipblasDsbmv_64",                                           "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, ROC_UNSUPPORTED}},
   {"cublasChbmv",                                          {"hipblasChbmv_v2",                                           "rocblas_chbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
   {"cublasChbmv_64",                                       {"hipblasChbmv_v2_64",                                        "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, ROC_UNSUPPORTED}},
   {"cublasZhbmv",                                          {"hipblasZhbmv_v2",                                           "rocblas_zhbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
@@ -392,9 +392,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
   {"cublasDspr2",                                          {"hipblasDspr2",                                              "rocblas_dspr2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
   {"cublasDspr2_64",                                       {"hipblasDspr2_64",                                           "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, UNSUPPORTED}},
   {"cublasChpr2",                                          {"hipblasChpr2_v2",                                           "rocblas_chpr2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasChpr2_64",                                       {"hipblasChpr2_64",                                           "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, UNSUPPORTED}},
+  {"cublasChpr2_64",                                       {"hipblasChpr2_v2_64",                                        "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, ROC_UNSUPPORTED}},
   {"cublasZhpr2",                                          {"hipblasZhpr2_v2",                                           "rocblas_zhpr2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasZhpr2_64",                                       {"hipblasZhpr2_64",                                           "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, UNSUPPORTED}},
+  {"cublasZhpr2_64",                                       {"hipblasZhpr2_v2_64",                                        "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, ROC_UNSUPPORTED}},
 
   // Blas3 (v1) Routines
   // GEMM
@@ -734,9 +734,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
 
   // SBMV/HBMV
   {"cublasSsbmv_v2",                                       {"hipblasSsbmv",                                              "rocblas_ssbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasSsbmv_v2_64",                                    {"hipblasSsbmv_64",                                           "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, UNSUPPORTED}},
+  {"cublasSsbmv_v2_64",                                    {"hipblasSsbmv_64",                                           "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, ROC_UNSUPPORTED}},
   {"cublasDsbmv_v2",                                       {"hipblasDsbmv",                                              "rocblas_dsbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasDsbmv_v2_64",                                    {"hipblasDsbmv_64",                                           "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, UNSUPPORTED}},
+  {"cublasDsbmv_v2_64",                                    {"hipblasDsbmv_64",                                           "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, ROC_UNSUPPORTED}},
   {"cublasChbmv_v2",                                       {"hipblasChbmv_v2",                                           "rocblas_chbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
   {"cublasChbmv_v2_64",                                    {"hipblasChbmv_v2_64",                                        "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, ROC_UNSUPPORTED}},
   {"cublasZhbmv_v2",                                       {"hipblasZhbmv_v2",                                           "rocblas_zhbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
@@ -810,9 +810,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
   {"cublasDspr2_v2",                                       {"hipblasDspr2",                                              "rocblas_dspr2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
   {"cublasDspr2_v2_64",                                    {"hipblasDspr2_64",                                           "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, UNSUPPORTED}},
   {"cublasChpr2_v2",                                       {"hipblasChpr2_v2",                                           "rocblas_chpr2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasChpr2_v2_64",                                    {"hipblasChpr2_64",                                           "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, UNSUPPORTED}},
+  {"cublasChpr2_v2_64",                                    {"hipblasChpr2_v2_64",                                        "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, ROC_UNSUPPORTED}},
   {"cublasZhpr2_v2",                                       {"hipblasZhpr2_v2",                                           "rocblas_zhpr2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZhpr2_v2_64",                                    {"hipblasZhpr2_64",                                           "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, UNSUPPORTED}},
+  {"cublasZhpr2_v2_64",                                    {"hipblasZhpr2_v2_64",                                        "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, ROC_UNSUPPORTED}},
 
   // Blas3 (v2) Routines
   // GEMM
@@ -2092,6 +2092,10 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_FUNCTION_VER_MAP {
   {"hipblasZhpmv_v2_64",                                   {HIP_6020, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipblasChpr_v2_64",                                    {HIP_6020, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipblasZhpr_v2_64",                                    {HIP_6020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipblasChpr2_v2_64",                                   {HIP_6020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipblasZhpr2_v2_64",                                   {HIP_6020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipblasSsbmv_64",                                      {HIP_6020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipblasDsbmv_64",                                      {HIP_6020, HIP_0,    HIP_0,  HIP_LATEST}},
 
   {"rocblas_status_to_string",                             {HIP_3050, HIP_0,    HIP_0   }},
   {"rocblas_sscal",                                        {HIP_1050, HIP_0,    HIP_0   }},
