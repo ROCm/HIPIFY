@@ -819,17 +819,17 @@
 |`cublasDsbmv_v2`| | | | |`hipblasDsbmv`|3.5.0| | | | |
 |`cublasDsbmv_v2_64`|12.0| | | |`hipblasDsbmv_64`|6.2.0| | | |6.2.0|
 |`cublasDspmv`| | | | |`hipblasDspmv`|3.5.0| | | | |
-|`cublasDspmv_64`|12.0| | | | | | | | | |
+|`cublasDspmv_64`|12.0| | | |`hipblasDspmv_64`|6.2.0| | | |6.2.0|
 |`cublasDspmv_v2`| | | | |`hipblasDspmv`|3.5.0| | | | |
-|`cublasDspmv_v2_64`|12.0| | | | | | | | | |
+|`cublasDspmv_v2_64`|12.0| | | |`hipblasDspmv_64`|6.2.0| | | |6.2.0|
 |`cublasDspr`| | | | |`hipblasDspr`|3.5.0| | | | |
 |`cublasDspr2`| | | | |`hipblasDspr2`|3.5.0| | | | |
 |`cublasDspr2_64`|12.0| | | | | | | | | |
 |`cublasDspr2_v2`| | | | |`hipblasDspr2`|3.5.0| | | | |
 |`cublasDspr2_v2_64`|12.0| | | | | | | | | |
-|`cublasDspr_64`|12.0| | | | | | | | | |
+|`cublasDspr_64`|12.0| | | |`hipblasDspr_64`|6.2.0| | | |6.2.0|
 |`cublasDspr_v2`| | | | |`hipblasDspr`|3.5.0| | | | |
-|`cublasDspr_v2_64`|12.0| | | | | | | | | |
+|`cublasDspr_v2_64`|12.0| | | |`hipblasDspr_64`|6.2.0| | | |6.2.0|
 |`cublasDsymv`| | | | |`hipblasDsymv`|3.5.0| | | | |
 |`cublasDsymv_64`|12.0| | | | | | | | | |
 |`cublasDsymv_v2`| | | | |`hipblasDsymv`|3.5.0| | | | |
@@ -883,17 +883,17 @@
 |`cublasSsbmv_v2`| | | | |`hipblasSsbmv`|3.5.0| | | | |
 |`cublasSsbmv_v2_64`|12.0| | | |`hipblasSsbmv_64`|6.2.0| | | |6.2.0|
 |`cublasSspmv`| | | | |`hipblasSspmv`|3.5.0| | | | |
-|`cublasSspmv_64`|12.0| | | | | | | | | |
+|`cublasSspmv_64`|12.0| | | |`hipblasSspmv_64`|6.2.0| | | |6.2.0|
 |`cublasSspmv_v2`| | | | |`hipblasSspmv`|3.5.0| | | | |
-|`cublasSspmv_v2_64`|12.0| | | | | | | | | |
+|`cublasSspmv_v2_64`|12.0| | | |`hipblasSspmv_64`|6.2.0| | | |6.2.0|
 |`cublasSspr`| | | | |`hipblasSspr`|3.5.0| | | | |
 |`cublasSspr2`| | | | |`hipblasSspr2`|3.5.0| | | | |
 |`cublasSspr2_64`|12.0| | | | | | | | | |
 |`cublasSspr2_v2`| | | | |`hipblasSspr2`|3.5.0| | | | |
 |`cublasSspr2_v2_64`|12.0| | | | | | | | | |
-|`cublasSspr_64`|12.0| | | | | | | | | |
+|`cublasSspr_64`|12.0| | | |`hipblasSspr_64`|6.2.0| | | |6.2.0|
 |`cublasSspr_v2`| | | | |`hipblasSspr`|3.5.0| | | | |
-|`cublasSspr_v2_64`|12.0| | | | | | | | | |
+|`cublasSspr_v2_64`|12.0| | | |`hipblasSspr_64`|6.2.0| | | |6.2.0|
 |`cublasSsymv`| | | | |`hipblasSsymv`|3.5.0| | | | |
 |`cublasSsymv_64`|12.0| | | | | | | | | |
 |`cublasSsymv_v2`| | | | |`hipblasSsymv`|3.5.0| | | | |
