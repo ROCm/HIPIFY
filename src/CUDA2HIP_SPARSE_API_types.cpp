@@ -209,6 +209,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_TYPE_NAME_MAP {
   {"CUSPARSE_SPMM_CSR_ALG2",                     {"HIPSPARSE_SPMM_CSR_ALG2",                    "rocsparse_spmm_alg_csr_row_split",                   CONV_NUMERIC_LITERAL, API_SPARSE, 4}},
   {"CUSPARSE_SPMM_CSR_ALG3",                     {"HIPSPARSE_SPMM_CSR_ALG3",                    "rocsparse_spmm_alg_csr_merge",                       CONV_NUMERIC_LITERAL, API_SPARSE, 4}},
   {"CUSPARSE_SPMM_BLOCKED_ELL_ALG1",             {"HIPSPARSE_SPMM_BLOCKED_ELL_ALG1",            "rocsparse_spmm_alg_bell",                            CONV_NUMERIC_LITERAL, API_SPARSE, 4}},
+  {"CUSPARSE_SPMM_BSR_ALG1",                     {"HIPSPARSE_SPMM_BSR_ALG1",                    "rocsparse_spmm_alg_bell",                            CONV_NUMERIC_LITERAL, API_SPARSE, 4, UNSUPPORTED}},
   {"CUSPARSE_SPMMA_PREPROCESS",                  {"HIPSPARSE_SPMMA_PREPROCESS",                 "",                                                   CONV_NUMERIC_LITERAL, API_SPARSE, 4, CUDA_REMOVED | UNSUPPORTED}},
   {"CUSPARSE_SPMMA_ALG1",                        {"HIPSPARSE_SPMMA_ALG1",                       "",                                                   CONV_NUMERIC_LITERAL, API_SPARSE, 4, CUDA_REMOVED | UNSUPPORTED}},
   {"CUSPARSE_SPMMA_ALG2",                        {"HIPSPARSE_SPMMA_ALG2",                       "",                                                   CONV_NUMERIC_LITERAL, API_SPARSE, 4, CUDA_REMOVED | UNSUPPORTED}},
@@ -424,6 +425,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SPARSE_TYPE_NAME_VER_MAP {
   {"cusparseSpSMUpdate_t",                       {CUDA_124, CUDA_0,   CUDA_0  }},
   {"CUSPARSE_SPSM_UPDATE_GENERAL",               {CUDA_124, CUDA_0,   CUDA_0  }},
   {"CUSPARSE_SPSM_UPDATE_DIAGONAL",              {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"CUSPARSE_SPMM_BSR_ALG1",                     {CUDA_125, CUDA_0,   CUDA_0  }}, // CUSPARSE_VERSION 12501
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_TYPE_NAME_VER_MAP {
