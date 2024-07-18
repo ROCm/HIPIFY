@@ -3906,7 +3906,9 @@ sub simpleSubstitutions {
     subst("cublasCtbmv_v2", "hipblasCtbmv_v2", "library");
     subst("cublasCtbmv_v2_64", "hipblasCtbmv_v2_64", "library");
     subst("cublasCtbsv", "hipblasCtbsv_v2", "library");
+    subst("cublasCtbsv_64", "hipblasCtbsv_v2_64", "library");
     subst("cublasCtbsv_v2", "hipblasCtbsv_v2", "library");
+    subst("cublasCtbsv_v2_64", "hipblasCtbsv_v2_64", "library");
     subst("cublasCtpmv", "hipblasCtpmv_v2", "library");
     subst("cublasCtpmv_v2", "hipblasCtpmv_v2", "library");
     subst("cublasCtpsv", "hipblasCtpsv_v2", "library");
@@ -4026,7 +4028,9 @@ sub simpleSubstitutions {
     subst("cublasDtbmv_v2", "hipblasDtbmv", "library");
     subst("cublasDtbmv_v2_64", "hipblasDtbmv_64", "library");
     subst("cublasDtbsv", "hipblasDtbsv", "library");
+    subst("cublasDtbsv_64", "hipblasDtbsv_64", "library");
     subst("cublasDtbsv_v2", "hipblasDtbsv", "library");
+    subst("cublasDtbsv_v2_64", "hipblasDtbsv_64", "library");
     subst("cublasDtpmv", "hipblasDtpmv", "library");
     subst("cublasDtpmv_v2", "hipblasDtpmv", "library");
     subst("cublasDtpsv", "hipblasDtpsv", "library");
@@ -4240,7 +4244,9 @@ sub simpleSubstitutions {
     subst("cublasStbmv_v2", "hipblasStbmv", "library");
     subst("cublasStbmv_v2_64", "hipblasStbmv_64", "library");
     subst("cublasStbsv", "hipblasStbsv", "library");
+    subst("cublasStbsv_64", "hipblasStbsv_64", "library");
     subst("cublasStbsv_v2", "hipblasStbsv", "library");
+    subst("cublasStbsv_v2_64", "hipblasStbsv_64", "library");
     subst("cublasStpmv", "hipblasStpmv", "library");
     subst("cublasStpmv_v2", "hipblasStpmv", "library");
     subst("cublasStpsv", "hipblasStpsv", "library");
@@ -4377,7 +4383,9 @@ sub simpleSubstitutions {
     subst("cublasZtbmv_v2", "hipblasZtbmv_v2", "library");
     subst("cublasZtbmv_v2_64", "hipblasZtbmv_v2_64", "library");
     subst("cublasZtbsv", "hipblasZtbsv_v2", "library");
+    subst("cublasZtbsv_64", "hipblasZtbsv_v2_64", "library");
     subst("cublasZtbsv_v2", "hipblasZtbsv_v2", "library");
+    subst("cublasZtbsv_v2_64", "hipblasZtbsv_v2_64", "library");
     subst("cublasZtpmv", "hipblasZtpmv_v2", "library");
     subst("cublasZtpmv_v2", "hipblasZtpmv_v2", "library");
     subst("cublasZtpsv", "hipblasZtpsv_v2", "library");
@@ -11524,8 +11532,6 @@ sub warnHipOnlyUnsupportedFunctions {
         "cublasZtpsv_64",
         "cublasZtpmv_v2_64",
         "cublasZtpmv_64",
-        "cublasZtbsv_v2_64",
-        "cublasZtbsv_64",
         "cublasZsyrkx_64",
         "cublasZsyrk_v2_64",
         "cublasZsyrk_64",
@@ -11576,8 +11582,6 @@ sub warnHipOnlyUnsupportedFunctions {
         "cublasStpsv_64",
         "cublasStpmv_v2_64",
         "cublasStpmv_64",
-        "cublasStbsv_v2_64",
-        "cublasStbsv_64",
         "cublasSsyrkx_64",
         "cublasSsyrk_v2_64",
         "cublasSsyrk_64",
@@ -11700,8 +11704,6 @@ sub warnHipOnlyUnsupportedFunctions {
         "cublasDtpsv_64",
         "cublasDtpmv_v2_64",
         "cublasDtpmv_64",
-        "cublasDtbsv_v2_64",
-        "cublasDtbsv_64",
         "cublasDsyrkx_64",
         "cublasDsyrk_v2_64",
         "cublasDsyrk_64",
@@ -11735,8 +11737,6 @@ sub warnHipOnlyUnsupportedFunctions {
         "cublasCtpsv_64",
         "cublasCtpmv_v2_64",
         "cublasCtpmv_64",
-        "cublasCtbsv_v2_64",
-        "cublasCtbsv_64",
         "cublasCsyrkx_64",
         "cublasCsyrk_v2_64",
         "cublasCsyrk_64",
