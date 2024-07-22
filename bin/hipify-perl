@@ -1444,6 +1444,8 @@ my %experimental_funcs = (
     "cudaDriverEntryPointSymbolNotFound" => "6.2.0",
     "cudaDriverEntryPointSuccess" => "6.2.0",
     "cudaDriverEntryPointQueryResult" => "6.2.0",
+    "cublasZtrsv_v2_64" => "6.2.0",
+    "cublasZtrsv_64" => "6.2.0",
     "cublasZtrmv_v2_64" => "6.2.0",
     "cublasZtrmv_64" => "6.2.0",
     "cublasZtpsv_v2_64" => "6.2.0",
@@ -1457,6 +1459,8 @@ my %experimental_funcs = (
     "cublasZgemvBatched_64" => "6.2.0",
     "cublasZgbmv_v2_64" => "6.2.0",
     "cublasZgbmv_64" => "6.2.0",
+    "cublasStrsv_v2_64" => "6.2.0",
+    "cublasStrsv_64" => "6.2.0",
     "cublasStrmv_v2_64" => "6.2.0",
     "cublasStrmv_64" => "6.2.0",
     "cublasStpsv_v2_64" => "6.2.0",
@@ -1470,6 +1474,8 @@ my %experimental_funcs = (
     "cublasSgemvBatched_64" => "6.2.0",
     "cublasSgbmv_v2_64" => "6.2.0",
     "cublasSgbmv_64" => "6.2.0",
+    "cublasDtrsv_v2_64" => "6.2.0",
+    "cublasDtrsv_64" => "6.2.0",
     "cublasDtrmv_v2_64" => "6.2.0",
     "cublasDtrmv_64" => "6.2.0",
     "cublasDtpsv_v2_64" => "6.2.0",
@@ -1483,6 +1489,8 @@ my %experimental_funcs = (
     "cublasDgemvBatched_64" => "6.2.0",
     "cublasDgbmv_v2_64" => "6.2.0",
     "cublasDgbmv_64" => "6.2.0",
+    "cublasCtrsv_v2_64" => "6.2.0",
+    "cublasCtrsv_64" => "6.2.0",
     "cublasCtrmv_v2_64" => "6.2.0",
     "cublasCtrmv_64" => "6.2.0",
     "cublasCtpsv_v2_64" => "6.2.0",
@@ -1709,6 +1717,8 @@ sub experimentalSubstitutions {
     subst("cublasCtpsv_v2_64", "hipblasCtpsv_v2_64", "library");
     subst("cublasCtrmv_64", "hipblasCtrmv_v2_64", "library");
     subst("cublasCtrmv_v2_64", "hipblasCtrmv_v2_64", "library");
+    subst("cublasCtrsv_64", "hipblasCtrsv_v2_64", "library");
+    subst("cublasCtrsv_v2_64", "hipblasCtrsv_v2_64", "library");
     subst("cublasDgbmv_64", "hipblasDgbmv_64", "library");
     subst("cublasDgbmv_v2_64", "hipblasDgbmv_64", "library");
     subst("cublasDgemvBatched_64", "hipblasDgemvBatched_64", "library");
@@ -1722,6 +1732,8 @@ sub experimentalSubstitutions {
     subst("cublasDtpsv_v2_64", "hipblasDtpsv_64", "library");
     subst("cublasDtrmv_64", "hipblasDtrmv_64", "library");
     subst("cublasDtrmv_v2_64", "hipblasDtrmv_64", "library");
+    subst("cublasDtrsv_64", "hipblasDtrsv_64", "library");
+    subst("cublasDtrsv_v2_64", "hipblasDtrsv_64", "library");
     subst("cublasSgbmv_64", "hipblasSgbmv_64", "library");
     subst("cublasSgbmv_v2_64", "hipblasSgbmv_64", "library");
     subst("cublasSgemvBatched_64", "hipblasSgemvBatched_64", "library");
@@ -1735,6 +1747,8 @@ sub experimentalSubstitutions {
     subst("cublasStpsv_v2_64", "hipblasStpsv_64", "library");
     subst("cublasStrmv_64", "hipblasStrmv_64", "library");
     subst("cublasStrmv_v2_64", "hipblasStrmv_64", "library");
+    subst("cublasStrsv_64", "hipblasStrsv_64", "library");
+    subst("cublasStrsv_v2_64", "hipblasStrsv_64", "library");
     subst("cublasZgbmv_64", "hipblasZgbmv_v2_64", "library");
     subst("cublasZgbmv_v2_64", "hipblasZgbmv_v2_64", "library");
     subst("cublasZgemvBatched_64", "hipblasZgemvBatched_v2_64", "library");
@@ -1748,6 +1762,8 @@ sub experimentalSubstitutions {
     subst("cublasZtpsv_v2_64", "hipblasZtpsv_v2_64", "library");
     subst("cublasZtrmv_64", "hipblasZtrmv_v2_64", "library");
     subst("cublasZtrmv_v2_64", "hipblasZtrmv_v2_64", "library");
+    subst("cublasZtrsv_64", "hipblasZtrsv_v2_64", "library");
+    subst("cublasZtrsv_v2_64", "hipblasZtrsv_v2_64", "library");
     subst("curandSetGeneratorOrdering", "hiprandSetGeneratorOrdering", "library");
     subst("cusolverDnCreateParams", "hipsolverDnCreateParams", "library");
     subst("cusolverDnDestroyParams", "hipsolverDnDestroyParams", "library");
@@ -11574,8 +11590,6 @@ sub warnHipOnlyUnsupportedFunctions {
     my $k = 0;
     foreach $func (
         "cublasZtrttp",
-        "cublasZtrsv_v2_64",
-        "cublasZtrsv_64",
         "cublasZtrsm_v2_64",
         "cublasZtrsm_64",
         "cublasZtrsmBatched_64",
@@ -11618,8 +11632,6 @@ sub warnHipOnlyUnsupportedFunctions {
         "cublasSwapEx_64",
         "cublasSwapEx",
         "cublasStrttp",
-        "cublasStrsv_v2_64",
-        "cublasStrsv_64",
         "cublasStrsm_v2_64",
         "cublasStrsm_64",
         "cublasStrsmBatched_64",
@@ -11734,8 +11746,6 @@ sub warnHipOnlyUnsupportedFunctions {
         "cublasGemmBatchedEx_64",
         "cublasFree",
         "cublasDtrttp",
-        "cublasDtrsv_v2_64",
-        "cublasDtrsv_64",
         "cublasDtrsm_v2_64",
         "cublasDtrsm_64",
         "cublasDtrsmBatched_64",
@@ -11761,8 +11771,6 @@ sub warnHipOnlyUnsupportedFunctions {
         "cublasDgeam_64",
         "cublasDdgmm_64",
         "cublasCtrttp",
-        "cublasCtrsv_v2_64",
-        "cublasCtrsv_64",
         "cublasCtrsm_v2_64",
         "cublasCtrsm_64",
         "cublasCtrsmBatched_64",
