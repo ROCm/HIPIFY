@@ -1263,9 +1263,9 @@
 |`cublasDgetrsBatched`| | | | |`hipblasDgetrsBatched`|3.5.0| | | | |
 |`cublasDmatinvBatched`| | | | | | | | | | |
 |`cublasDotEx`|8.0| | | |`hipblasDotEx_v2`|6.0.0| | | | |
-|`cublasDotEx_64`|12.0| | | | | | | | | |
+|`cublasDotEx_64`|12.0| | | |`hipblasDotEx_v2_64`|6.2.0| | | |6.2.0|
 |`cublasDotcEx`|8.0| | | |`hipblasDotcEx_v2`|6.0.0| | | | |
-|`cublasDotcEx_64`|12.0| | | | | | | | | |
+|`cublasDotcEx_64`|12.0| | | |`hipblasDotcEx_v2_64`|6.2.0| | | |6.2.0|
 |`cublasDtpttr`| | | | | | | | | | |
 |`cublasDtrsmBatched`| | | | |`hipblasDtrsmBatched`|3.2.0| | | | |
 |`cublasDtrsmBatched_64`|12.0| | | | | | | | | |
