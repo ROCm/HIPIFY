@@ -1538,6 +1538,8 @@ my %experimental_funcs = (
     "cublasDspmv_64" => "6.2.0",
     "cublasDsbmv_v2_64" => "6.2.0",
     "cublasDsbmv_64" => "6.2.0",
+    "cublasDotcEx_64" => "6.2.0",
+    "cublasDotEx_64" => "6.2.0",
     "cublasDger_v2_64" => "6.2.0",
     "cublasDger_64" => "6.2.0",
     "cublasDgemv_v2_64" => "6.2.0",
@@ -1832,6 +1834,8 @@ sub experimentalSubstitutions {
     subst("cublasDgemv_v2_64", "hipblasDgemv_64", "library");
     subst("cublasDger_64", "hipblasDger_64", "library");
     subst("cublasDger_v2_64", "hipblasDger_64", "library");
+    subst("cublasDotEx_64", "hipblasDotEx_v2_64", "library");
+    subst("cublasDotcEx_64", "hipblasDotcEx_v2_64", "library");
     subst("cublasDsbmv_64", "hipblasDsbmv_64", "library");
     subst("cublasDsbmv_v2_64", "hipblasDsbmv_64", "library");
     subst("cublasDspmv_64", "hipblasDspmv_64", "library");
@@ -11841,8 +11845,6 @@ sub warnHipOnlyUnsupportedFunctions {
         "cublasDsyr2k_64",
         "cublasDsymm_v2_64",
         "cublasDsymm_64",
-        "cublasDotcEx_64",
-        "cublasDotEx_64",
         "cublasDmatinvBatched",
         "cublasDgemm_v2_64",
         "cublasDgemm_64",
