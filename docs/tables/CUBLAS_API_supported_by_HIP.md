@@ -630,7 +630,7 @@
 |`cublasIzamin_v2`| | | | |`hipblasIzamin_v2`|6.0.0| | | | |
 |`cublasIzamin_v2_64`|12.0| | | |`hipblasIzamin_v2_64`|6.1.0| | | | |
 |`cublasNrm2Ex`|8.0| | | |`hipblasNrm2Ex_v2`|6.0.0| | | | |
-|`cublasNrm2Ex_64`|12.0| | | | | | | | | |
+|`cublasNrm2Ex_64`|12.0| | | |`hipblasNrm2Ex_v2_64`|6.2.0| | | |6.2.0|
 |`cublasSasum`| | | | |`hipblasSasum`|1.8.2| | | | |
 |`cublasSasum_64`|12.0| | | |`hipblasSasum_64`|6.1.0| | | | |
 |`cublasSasum_v2`| | | | |`hipblasSasum`|1.8.2| | | | |
@@ -1281,13 +1281,13 @@
 |`cublasIaminEx`|10.1| | | | | | | | | |
 |`cublasIaminEx_64`|12.0| | | | | | | | | |
 |`cublasRotEx`|10.1| | | |`hipblasRotEx_v2`|6.0.0| | | | |
-|`cublasRotEx_64`|12.0| | | | | | | | | |
+|`cublasRotEx_64`|12.0| | | |`hipblasRotEx_v2_64`|6.2.0| | | |6.2.0|
 |`cublasRotgEx`|10.1| | | | | | | | | |
 |`cublasRotmEx`|10.1| | | | | | | | | |
 |`cublasRotmEx_64`|12.0| | | | | | | | | |
 |`cublasRotmgEx`|10.1| | | | | | | | | |
 |`cublasScalEx`|8.0| | | |`hipblasScalEx_v2`|6.0.0| | | | |
-|`cublasScalEx_64`|12.0| | | | | | | | | |
+|`cublasScalEx_64`|12.0| | | |`hipblasScalEx_v2_64`|6.2.0| | | |6.2.0|
 |`cublasSdgmm`| | | | |`hipblasSdgmm`|3.6.0| | | | |
 |`cublasSdgmm_64`|12.0| | | | | | | | | |
 |`cublasSgeam`| | | | |`hipblasSgeam`|1.8.2| | | | |

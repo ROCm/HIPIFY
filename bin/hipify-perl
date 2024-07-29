@@ -1514,6 +1514,9 @@ my %experimental_funcs = (
     "cublasSgemvBatched_64" => "6.2.0",
     "cublasSgbmv_v2_64" => "6.2.0",
     "cublasSgbmv_64" => "6.2.0",
+    "cublasScalEx_64" => "6.2.0",
+    "cublasRotEx_64" => "6.2.0",
+    "cublasNrm2Ex_64" => "6.2.0",
     "cublasDtrsv_v2_64" => "6.2.0",
     "cublasDtrsv_64" => "6.2.0",
     "cublasDtrmv_v2_64" => "6.2.0",
@@ -1860,6 +1863,9 @@ sub experimentalSubstitutions {
     subst("cublasDtrmv_v2_64", "hipblasDtrmv_64", "library");
     subst("cublasDtrsv_64", "hipblasDtrsv_64", "library");
     subst("cublasDtrsv_v2_64", "hipblasDtrsv_64", "library");
+    subst("cublasNrm2Ex_64", "hipblasNrm2Ex_v2_64", "library");
+    subst("cublasRotEx_64", "hipblasRotEx_v2_64", "library");
+    subst("cublasScalEx_64", "hipblasScalEx_v2_64", "library");
     subst("cublasSgbmv_64", "hipblasSgbmv_64", "library");
     subst("cublasSgbmv_v2_64", "hipblasSgbmv_64", "library");
     subst("cublasSgemvBatched_64", "hipblasSgemvBatched_64", "library");
@@ -11750,13 +11756,10 @@ sub warnHipOnlyUnsupportedFunctions {
         "cublasSetLoggerCallback",
         "cublasSetKernelStream",
         "cublasSdgmm_64",
-        "cublasScalEx_64",
         "cublasRotmgEx",
         "cublasRotmEx_64",
         "cublasRotmEx",
         "cublasRotgEx",
-        "cublasRotEx_64",
-        "cublasNrm2Ex_64",
         "cublasMigrateComputeType",
         "cublasLtReductionScheme_t",
         "cublasLtPointerModeMask_t",

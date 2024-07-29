@@ -2795,6 +2795,21 @@ int main() {
   // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasDotcEx_v2_64(hipblasHandle_t handle, int64_t n, const void* x, hipDataType xType, int64_t incx, const void* y, hipDataType yType, int64_t incy, void* result, hipDataType resultType, hipDataType executionType);
   // CHECK: blasStatus = hipblasDotcEx_v2_64(blasHandle, n_64, xptr, Xtype, incx_64, yptr, Ytype, incy_64, image, DataType, Executiontype);
   blasStatus = cublasDotcEx_64(blasHandle, n_64, xptr, Xtype, incx_64, yptr, Ytype, incy_64, image, DataType, Executiontype);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasNrm2Ex_64(cublasHandle_t handle, int64_t n, const void* x, cudaDataType xType, int64_t incx, void* result, cudaDataType resultType, cudaDataType executionType);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasNrm2Ex_v2_64(hipblasHandle_t handle, int64_t n, const void* x, hipDataType xType, int64_t incx, void* result, hipDataType resultType, hipDataType executionType);
+  // CHECK: blasStatus = hipblasNrm2Ex_v2_64(blasHandle, n_64, xptr, Xtype, incx_64, image, DataType, Executiontype);
+  blasStatus = cublasNrm2Ex_64(blasHandle, n_64, xptr, Xtype, incx_64, image, DataType, Executiontype);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasRotEx_64(cublasHandle_t handle, int64_t n, void* x, cudaDataType xType, int64_t incx, void* y, cudaDataType yType, int64_t incy, const void* c, const void* s, cudaDataType csType, cudaDataType executiontype);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasRotEx_v2_64(hipblasHandle_t handle, int64_t n, void* x, hipDataType xType, int64_t incx, void* y, hipDataType yType, int64_t incy, const void* c, const void* s, hipDataType csType, hipDataType executionType);
+  // CHECK: blasStatus = hipblasRotEx_v2_64(blasHandle, n_64, xptr, Xtype, incx_64, yptr, Ytype, incy_64, cptr, sptr, CStype, Executiontype);
+  blasStatus = cublasRotEx_64(blasHandle, n_64, xptr, Xtype, incx_64, yptr, Ytype, incy_64, cptr, sptr, CStype, Executiontype);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasScalEx_64(cublasHandle_t handle, int64_t n, const void* alpha, cudaDataType alphaType, void* x, cudaDataType xType, int64_t incx, cudaDataType executionType);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasScalEx_v2_64(hipblasHandle_t handle, int64_t n, const void* alpha, hipDataType alphaType, void* x, hipDataType xType, int64_t incx, hipDataType executionType);
+  // CHECK: blasStatus = hipblasScalEx_v2_64(blasHandle, n_64, aptr, Atype, xptr, Xtype, incx_64, Executiontype);
+  blasStatus = cublasScalEx_64(blasHandle, n_64, aptr, Atype, xptr, Xtype, incx_64, Executiontype);
 #endif
 
   return 0;
