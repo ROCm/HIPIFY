@@ -3,6 +3,16 @@
 Documentation for HIPIFY is available at
 [https://rocmdocs.amd.com/projects/HIPIFY/en/latest/](https://rocmdocs.amd.com/projects/HIPIFY/en/latest/).
 
+## HIPIFY for ROCm 6.2.1
+
+### Additions
+
+* CUDA 12.5.1 support
+* cuDNN 9.2.1 support
+* LLVM 18.1.8 support
+* `hipBLAS` 64-bit APIs support
+* Support for Math Constants `math_constants.h`
+
 ## HIPIFY for ROCm 6.2.0
 
 ### Additions
