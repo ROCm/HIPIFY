@@ -58,6 +58,7 @@
 |`CUFFT_Z2D`| | | | |`HIPFFT_Z2D`|1.7.0| | | | |
 |`CUFFT_Z2Z`| | | | |`HIPFFT_Z2Z`|1.7.0| | | | |
 |`MAX_CUFFT_ERROR`| | | | | | | | | | |
+|`NVFFT_PLAN_PROPERTY_INT64_MAX_NUM_HOST_THREADS`|12.5| | | | | | | | | |
 |`NVFFT_PLAN_PROPERTY_INT64_PATIENT_JIT`|12.4| | | | | | | | | |
 |`cufftBox3d`|11.8| | | | | | | | | |
 |`cufftBox3d_t`|11.8| | | | | | | | | |
