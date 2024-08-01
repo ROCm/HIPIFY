@@ -78,6 +78,7 @@
 |`CUSPARSE_SPMMA_PREPROCESS`|11.1| | |11.2| | | | | | |
 |`CUSPARSE_SPMM_ALG_DEFAULT`|11.0| | | |`rocsparse_spmm_alg_default`|4.2.0| | | | |
 |`CUSPARSE_SPMM_BLOCKED_ELL_ALG1`|11.2| | | |`rocsparse_spmm_alg_bell`|4.5.0| | | | |
+|`CUSPARSE_SPMM_BSR_ALG1`|12.5| | | | | | | | | |
 |`CUSPARSE_SPMM_COO_ALG1`|11.0| | | |`rocsparse_spmm_alg_coo_segmented`|4.2.0| | | | |
 |`CUSPARSE_SPMM_COO_ALG2`|11.0| | | |`rocsparse_spmm_alg_coo_atomic`|4.2.0| | | | |
 |`CUSPARSE_SPMM_COO_ALG3`|11.0| | | |`rocsparse_spmm_alg_coo_segmented_atomic`|4.5.0| | | | |
