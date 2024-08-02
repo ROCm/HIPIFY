@@ -110,17 +110,17 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_CUB_TYPE_NAME_VER_MAP {
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_CUB_TYPE_NAME_VER_MAP {
-  {"HIPCUB_STDERR",                          {HIP_2050, HIP_0,    HIP_0   }},
-  {"HipcubDebug",                            {HIP_2050, HIP_0,    HIP_0   }},
-  {"_HipcubLog",                             {HIP_2050, HIP_0,    HIP_0   }},
-  {"HIPCUB_RUNTIME_FUNCTION",                {HIP_2050, HIP_0,    HIP_0   }},
-  {"HIPCUB_WARP_THREADS",                    {HIP_2050, HIP_0,    HIP_0   }},
-  {"HIPCUB_ARCH",                            {HIP_2050, HIP_0,    HIP_0   }},
-  {"BEGIN_HIPCUB_NAMESPACE",                 {HIP_2050, HIP_0,    HIP_0   }},
-  {"END_HIPCUB_NAMESPACE",                   {HIP_2050, HIP_0,    HIP_0   }},
-  {"CUB_MAX",                                {HIP_4050, HIP_0,    HIP_0   }},
-  {"CUB_MIN",                                {HIP_4050, HIP_0,    HIP_0   }},
-  {"__HIPCUB_ALIGN_BYTES",                   {HIP_4050, HIP_0,    HIP_0   }},
+  {"HIPCUB_STDERR",                            {HIP_2050, HIP_0,    HIP_0   }},
+  {"HipcubDebug",                              {HIP_2050, HIP_0,    HIP_0   }},
+  {"_HipcubLog",                               {HIP_2050, HIP_0,    HIP_0   }},
+  {"HIPCUB_RUNTIME_FUNCTION",                  {HIP_2050, HIP_0,    HIP_0   }},
+  {"HIPCUB_WARP_THREADS",                      {HIP_2050, HIP_0,    HIP_0   }},
+  {"HIPCUB_ARCH",                              {HIP_2050, HIP_0,    HIP_0   }},
+  {"BEGIN_HIPCUB_NAMESPACE",                   {HIP_2050, HIP_0,    HIP_0   }},
+  {"END_HIPCUB_NAMESPACE",                     {HIP_2050, HIP_0,    HIP_0   }},
+  {"CUB_MAX",                                  {HIP_4050, HIP_0,    HIP_0   }},
+  {"CUB_MIN",                                  {HIP_4050, HIP_0,    HIP_0   }},
+  {"__HIPCUB_ALIGN_BYTES",                     {HIP_4050, HIP_0,    HIP_0   }},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_CUB_API_SECTION_MAP {

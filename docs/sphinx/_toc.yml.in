@@ -4,24 +4,27 @@ defaults:
   numbered: False
 root: index
 subtrees:
-- entries:
+- caption: Conceptual
+  entries:
   - file: hipify-clang
   - file: hipify-perl
+- caption: API reference
+  entries:
   - file: supported_apis
-    subtrees: 
-      - entries:
-        - file: tables/CUDA_Runtime_API_functions_supported_by_HIP
-        - file: tables/CUDA_Driver_API_functions_supported_by_HIP
-        - file: tables/cuComplex_API_supported_by_HIP
-        - file: tables/CUDA_Device_API_supported_by_HIP
-        - file: tables/CUDA_RTC_API_supported_by_HIP
-        - file: tables/CUBLAS_API_supported_by_HIP
-        - file: tables/CURAND_API_supported_by_HIP
-        - file: tables/CUDNN_API_supported_by_HIP
-        - file: tables/CUFFT_API_supported_by_HIP
-        - file: tables/CUSPARSE_API_supported_by_HIP
-        - file: tables/CUSOLVER_API_supported_by_HIP
-        - file: tables/CUB_API_supported_by_HIP
+    subtrees:
+    - entries:
+      - file: tables/CUDA_Runtime_API_functions_supported_by_HIP     
+      - file: tables/CUDA_Driver_API_functions_supported_by_HIP
+      - file: tables/cuComplex_API_supported_by_HIP
+      - file: tables/CUDA_Device_API_supported_by_HIP
+      - file: tables/CUDA_RTC_API_supported_by_HIP
+      - file: tables/CUBLAS_API_supported_by_HIP
+      - file: tables/CUSPARSE_API_supported_by_HIP
+      - file: tables/CUSOLVER_API_supported_by_HIP
+      - file: tables/CURAND_API_supported_by_HIP      
+      - file: tables/CUFFT_API_supported_by_HIP
+      - file: tables/CUDNN_API_supported_by_HIP     
+      - file: tables/CUB_API_supported_by_HIP
 - caption: About
   entries:
   - file: license

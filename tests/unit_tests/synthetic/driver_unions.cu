@@ -22,5 +22,10 @@ int main() {
   CUkernelNodeAttrValue_v1 kernelNodeAttrValue_v1;
 #endif
 
+#if CUDA_VERSION >= 11080
+  // CHECK: hipLaunchAttributeValue LaunchAttributeValue;
+  cudaLaunchAttributeValue LaunchAttributeValue;
+#endif
+
   return 0;
 }

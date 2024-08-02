@@ -889,6 +889,9 @@ int main() {
 #if CUDA_VERSION >= 11070
   // CHECK: hipGraphInstantiateFlags GraphInstantiateFlagUseNodePriority = hipGraphInstantiateFlagUseNodePriority;
   cudaGraphInstantiateFlags GraphInstantiateFlagUseNodePriority = cudaGraphInstantiateFlagUseNodePriority;
+
+  // CHECK: hipKernelNodeAttrID KernelNodeAttributePriority = hipKernelNodeAttributePriority;
+  cudaKernelNodeAttrID KernelNodeAttributePriority = cudaKernelNodeAttributePriority;
 #endif
 
 #if CUDA_VERSION >= 12000
@@ -909,6 +912,35 @@ int main() {
   cudaGraphInstantiateResult GRAPH_INSTANTIATE_INVALID_STRUCTURE = cudaGraphInstantiateInvalidStructure;
   cudaGraphInstantiateResult GRAPH_INSTANTIATE_NODE_OPERATION_NOT_SUPPORTED = cudaGraphInstantiateNodeOperationNotSupported;
   cudaGraphInstantiateResult GRAPH_INSTANTIATE_MULTIPLE_CTXS_NOT_SUPPORTED = cudaGraphInstantiateMultipleDevicesNotSupported;
+
+  // CHECK: hipLaunchAttributeID launchAttributeID;
+  // CHECK-NEXT: hipLaunchAttributeID LAUNCH_ATTRIBUTE_ACCESS_POLICY_WINDOW = hipLaunchAttributeAccessPolicyWindow;
+  // CHECK-NEXT: hipLaunchAttributeID LAUNCH_ATTRIBUTE_COOPERATIVE = hipLaunchAttributeCooperative;
+  // CHECK-NEXT: hipLaunchAttributeID LAUNCH_ATTRIBUTE_PRIORITY = hipLaunchAttributePriority;
+  cudaLaunchAttributeID launchAttributeID;
+  cudaLaunchAttributeID LAUNCH_ATTRIBUTE_ACCESS_POLICY_WINDOW = cudaLaunchAttributeAccessPolicyWindow;
+  cudaLaunchAttributeID LAUNCH_ATTRIBUTE_COOPERATIVE = cudaLaunchAttributeCooperative;
+  cudaLaunchAttributeID LAUNCH_ATTRIBUTE_PRIORITY = cudaLaunchAttributePriority;
+
+  // CHECK: hipDriverProcAddressQueryResult driverProcAddressQueryResult;
+  // CHECK-NEXT:hipDriverProcAddressQueryResult GET_PROC_ADDRESS_SUCCESS = HIP_GET_PROC_ADDRESS_SUCCESS;
+  // CHECK-NEXT:hipDriverProcAddressQueryResult GET_PROC_ADDRESS_SYMBOL_NOT_FOUND = HIP_GET_PROC_ADDRESS_SYMBOL_NOT_FOUND;
+  // CHECK-NEXT:hipDriverProcAddressQueryResult GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT = HIP_GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT;
+  cudaDriverEntryPointQueryResult driverProcAddressQueryResult;
+  cudaDriverEntryPointQueryResult GET_PROC_ADDRESS_SUCCESS = cudaDriverEntryPointSuccess;
+  cudaDriverEntryPointQueryResult GET_PROC_ADDRESS_SYMBOL_NOT_FOUND = cudaDriverEntryPointSymbolNotFound;
+  cudaDriverEntryPointQueryResult GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT = cudaDriverEntryPointVersionNotSufficent;
+#endif
+
+#if CUDA_VERSION >= 12030
+  // CHECK: hipGraphDependencyType graphDependencyType;
+  // CHECK-NEXT: hipGraphDependencyType graphDependencyType_enum;
+  // CHECK-NEXT: hipGraphDependencyType GRAPH_DEPENDENCY_TYPE_DEFAULT = hipGraphDependencyTypeDefault;
+  // CHECK-NEXT: hipGraphDependencyType GRAPH_DEPENDENCY_TYPE_PROGRAMMATIC = hipGraphDependencyTypeProgrammatic;
+  cudaGraphDependencyType graphDependencyType;
+  cudaGraphDependencyType_enum graphDependencyType_enum;
+  cudaGraphDependencyType GRAPH_DEPENDENCY_TYPE_DEFAULT = cudaGraphDependencyTypeDefault;
+  cudaGraphDependencyType GRAPH_DEPENDENCY_TYPE_PROGRAMMATIC = cudaGraphDependencyTypeProgrammatic;
 #endif
 
   return 0;

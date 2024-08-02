@@ -370,7 +370,7 @@ bool Statistics::isToRoc(const hipCounter &counter) {
           ((TranslateToRoc && !TranslateToMIOpen && !isRocMiopenOnly(counter)) || TranslateToMIOpen);
 }
 
-bool Statistics::isHipExperimental(const hipCounter& counter) {
+bool Statistics::isHipExperimental(const hipCounter &counter) {
   return HIP_EXPERIMENTAL == (counter.supportDegree & HIP_EXPERIMENTAL);
 }
 
@@ -434,19 +434,19 @@ bool Statistics::isRemoved(const hipCounter &counter) {
          ROC_REMOVED == (counter.supportDegree & ROC_REMOVED));
 }
 
-bool Statistics::isHipSupportedV2Only(const hipCounter& counter) {
+bool Statistics::isHipSupportedV2Only(const hipCounter &counter) {
   return HIP_SUPPORTED_V2_ONLY == (counter.supportDegree & HIP_SUPPORTED_V2_ONLY);
 }
 
-bool Statistics::isRocMiopenOnly(const hipCounter& counter) {
+bool Statistics::isRocMiopenOnly(const hipCounter &counter) {
   return ROC_MIOPEN_ONLY == (counter.supportDegree & ROC_MIOPEN_ONLY);
 }
 
-bool Statistics::isCudaOverloaded(const hipCounter& counter) {
+bool Statistics::isCudaOverloaded(const hipCounter &counter) {
   return CUDA_OVERLOADED == (counter.supportDegree & CUDA_OVERLOADED);
 }
 
-std::string Statistics::getCudaVersion(const cudaVersions& ver) {
+std::string Statistics::getCudaVersion(const cudaVersions &ver) {
   switch (ver) {
     case CUDA_0:
     default:       return "";
@@ -488,6 +488,7 @@ std::string Statistics::getCudaVersion(const cudaVersions& ver) {
     case CUDA_121: return "12.1";
     case CUDA_122: return "12.2";
     case CUDA_123: return "12.3";
+    case CUDA_124: return "12.4";
     case CUDNN_10: return "1.0.0";
     case CUDNN_20: return "2.0.0";
     case CUDNN_30: return "3.0.0";
@@ -537,11 +538,12 @@ std::string Statistics::getCudaVersion(const cudaVersions& ver) {
     case CUDNN_896: return "8.9.6";
     case CUDNN_897: return "8.9.7";
     case CUDNN_900: return "9.0.0";
+    case CUDNN_910: return "9.1.0";
   }
   return "";
 }
 
-std::string Statistics::getHipVersion(const hipVersions& ver) {
+std::string Statistics::getHipVersion(const hipVersions &ver) {
   switch (ver) {
     case HIP_0:
     default:       return "";
@@ -608,6 +610,8 @@ std::string Statistics::getHipVersion(const hipVersions& ver) {
     case HIP_6000: return "6.0.0";
     case HIP_6002: return "6.0.2";
     case HIP_6010: return "6.1.0";
+    case HIP_6011: return "6.1.1";
+    case HIP_6020: return "6.2.0";
   }
   return "";
 }

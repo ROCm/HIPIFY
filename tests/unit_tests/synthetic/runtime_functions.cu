@@ -13,6 +13,11 @@
 // CHECK: #include "hip/hip_runtime_api.h"
 #include "cuda_profiler_api.h"
 
+#if defined(_WIN32) && CUDA_VERSION < 9000
+  typedef signed   __int64 int64_t;
+  typedef unsigned __int64 uint64_t;
+#endif
+
 int main() {
   printf("12. CUDA Runtime API Functions synthetic test\n");
 
@@ -34,19 +39,20 @@ int main() {
   unsigned int levels = 0;
   unsigned int count = 0;
   float ms = 0;
-  void* deviceptr = nullptr;
-  void* deviceptr_2 = nullptr;
-  void* image = nullptr;
-  void* func = nullptr;
-  void* src = nullptr;
-  void* dst = nullptr;
-  char* ch = nullptr;
-  const char* const_ch = nullptr;
+  void *deviceptr = nullptr;
+  void *deviceptr_2 = nullptr;
+  void *symbolptr = nullptr;
+  void *image = nullptr;
+  void *func = nullptr;
+  void *src = nullptr;
+  void *dst = nullptr;
+  char *ch = nullptr;
+  const char *const_ch = nullptr;
   dim3 gridDim;
   dim3 blockDim;
   GLuint gl_uint = 0;
   GLenum gl_enum = 0;
-  struct textureReference* texref = nullptr;
+  struct textureReference *texref = nullptr;
   std::string name = "str";
 
 #if defined(_WIN32)
@@ -77,17 +83,17 @@ int main() {
   // CHECK: hipChannelFormatDesc ChannelFormatDesc;
   cudaChannelFormatDesc ChannelFormatDesc;
 
-  // CHECK: hipMipmappedArray* MipmappedArray;
+  // CHECK: hipMipmappedArray *MipmappedArray;
   // CHECK-NEXT: hipMipmappedArray_t MipmappedArray_t;
   // CHECK-NEXT: hipMipmappedArray_const_t MipmappedArray_const_t;
-  cudaMipmappedArray* MipmappedArray;
+  cudaMipmappedArray *MipmappedArray;
   cudaMipmappedArray_t MipmappedArray_t;
   cudaMipmappedArray_const_t MipmappedArray_const_t;
 
-  // CHECK: hipArray* Array;
+  // CHECK: hipArray *Array;
   // CHECK-NEXT: hipArray_t Array_t;
   // CHECK-NEXT: hipArray_const_t Array_const_t;
-  cudaArray* Array;
+  cudaArray *Array;
   cudaArray_t Array_t;
   cudaArray_const_t Array_const_t;
 
@@ -370,22 +376,22 @@ int main() {
 
   // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaFuncGetAttributes(struct cudaFuncAttributes *attr, const void *func);
   // HIP: hipError_t hipFuncGetAttributes(struct hipFuncAttributes* attr, const void* func);
-  // CHECK: result = hipFuncGetAttributes(&FuncAttributes, func);
+  // CHECK: result = hipFuncGetAttributes(&FuncAttributes, reinterpret_cast<const void*>(func));
   result = cudaFuncGetAttributes(&FuncAttributes, func);
 
   // CUDA: extern __host__ cudaError_t CUDARTAPI cudaFuncSetCacheConfig(const void *func, enum cudaFuncCache cacheConfig);
   // HIP: hipError_t hipFuncSetCacheConfig(const void* func, hipFuncCache_t config);
-  // CHECK: result = hipFuncSetCacheConfig(func, FuncCache);
+  // CHECK: result = hipFuncSetCacheConfig(reinterpret_cast<const void*>(func), FuncCache);
   result = cudaFuncSetCacheConfig(func, FuncCache);
 
   // CUDA: extern __host__ cudaError_t CUDARTAPI cudaFuncSetSharedMemConfig(const void *func, enum cudaSharedMemConfig config);
   // HIP: hipError_t hipFuncSetSharedMemConfig(const void* func, hipSharedMemConfig config);
-  // CHECK: result = hipFuncSetSharedMemConfig(func, SharedMemConfig);
+  // CHECK: result = hipFuncSetSharedMemConfig(reinterpret_cast<const void*>(func), SharedMemConfig);
   result = cudaFuncSetSharedMemConfig(func, SharedMemConfig);
 
   // CUDA: extern __host__ cudaError_t CUDARTAPI cudaLaunchKernel(const void *func, dim3 gridDim, dim3 blockDim, void **args, size_t sharedMem, cudaStream_t stream);
   // HIP: hipError_t hipLaunchKernel(const void* function_address, dim3 numBlocks, dim3 dimBlocks, void** args, size_t sharedMemBytes __dparm(0), hipStream_t stream __dparm(0));
-  // CHECK: result = hipLaunchKernel(func, gridDim, blockDim, &image, bytes, stream);
+  // CHECK: result = hipLaunchKernel(reinterpret_cast<const void*>(func), gridDim, blockDim, &image, bytes, stream);
   result = cudaLaunchKernel(func, gridDim, blockDim, &image, bytes, stream);
 
   // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaOccupancyMaxActiveBlocksPerMultiprocessor(int *numBlocks, const void *func, int blockSize, size_t dynamicSMemSize);
@@ -862,16 +868,6 @@ int main() {
   // CHECK: hipLaunchParams LaunchParams;
   cudaLaunchParams LaunchParams;
 
-  // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaFuncSetAttribute(const void *func, enum cudaFuncAttribute attr, int value);
-  // HIP: hipError_t hipFuncSetAttribute(const void* func, hipFuncAttribute attr, int value);
-  // CHECK: result = hipFuncSetAttribute(func, FuncAttribute, intVal);
-  result = cudaFuncSetAttribute(func, FuncAttribute, intVal);
-
-  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaLaunchCooperativeKernel(const void *func, dim3 gridDim, dim3 blockDim, void **args, size_t sharedMem, cudaStream_t stream);
-  // HIP: hipError_t hipLaunchCooperativeKernel(const void* f, dim3 gridDim, dim3 blockDimX, void** kernelParams, unsigned int sharedMemBytes, hipStream_t stream);
-  // CHECK: result = hipLaunchCooperativeKernel(func, gridDim, blockDim, &image, flags, stream);
-  result = cudaLaunchCooperativeKernel(func, gridDim, blockDim, &image, flags, stream);
-
   // CUDA: extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaLaunchCooperativeKernelMultiDevice(struct cudaLaunchParams *launchParamsList, unsigned int numDevices, unsigned int flags __dv(0));
   // HIP: hipError_t hipLaunchCooperativeKernelMultiDevice(hipLaunchParams* launchParamsList, int numDevices, unsigned int flags);
   // CHECK: result = hipLaunchCooperativeKernelMultiDevice(&LaunchParams, intVal, flags);
@@ -1130,8 +1126,12 @@ int main() {
 #if CUDA_VERSION >= 11000
   // CHECK: hipKernelNodeAttrID kernelNodeAttrID;
   cudaKernelNodeAttrID kernelNodeAttrID;
+
   // CHECK: hipKernelNodeAttrValue kernelNodeAttrValue;
   cudaKernelNodeAttrValue kernelNodeAttrValue;
+
+  // CHECK: hipFunction_t function;
+  cudaFunction_t function;
 
   // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphKernelNodeSetAttribute(cudaGraphNode_t hNode, enum cudaKernelNodeAttrID attr, const union cudaKernelNodeAttrValue* value);
   // HIP: hipError_t hipGraphKernelNodeSetAttribute(hipGraphNode_t hNode, hipKernelNodeAttrID attr, const hipKernelNodeAttrValue* value);
@@ -1232,6 +1232,11 @@ int main() {
   // HIP: hipError_t hipGraphKernelNodeCopyAttributes(hipGraphNode_t hSrc, hipGraphNode_t hDst);
   // CHECK: result = hipGraphKernelNodeCopyAttributes(graphNode, graphNode_2);
   result = cudaGraphKernelNodeCopyAttributes(graphNode, graphNode_2);
+
+  // CUDA: extern __host__ cudaError_t cudaGetFuncBySymbol(cudaFunction_t* functionPtr, const void* symbolPtr);
+  // HIP: hipError_t hipGetFuncBySymbol(hipFunction_t* functionPtr, const void* symbolPtr);
+  // CHECK: result = hipGetFuncBySymbol(&function, symbolptr);
+  result = cudaGetFuncBySymbol(&function, symbolptr);
 #endif
 
 #if CUDA_VERSION >= 11010
@@ -1587,6 +1592,45 @@ int main() {
   // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipUnbindTexture(const textureReference* tex);
   // CHECK: result = hipUnbindTexture(texref);
   result = cudaUnbindTexture(texref);
+#endif
+
+#if CUDA_VERSION >= 12000
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphExecGetFlags(cudaGraphExec_t graphExec, unsigned long long *flags);
+  // HIP: hipError_t hipGraphExecGetFlags(hipGraphExec_t graphExec, unsigned long long* flags);
+  // CHECK: result = hipGraphExecGetFlags(GraphExec_t, &ull_2);
+  result = cudaGraphExecGetFlags(GraphExec_t, &ull_2);
+#endif
+
+#if CUDA_VERSION >= 12020
+  // CHECK: hipGraphNodeParams *graphNodeParams = nullptr;
+  cudaGraphNodeParams *graphNodeParams = nullptr;
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphAddNode(cudaGraphNode_t *pGraphNode, cudaGraph_t graph, const cudaGraphNode_t *pDependencies, size_t numDependencies, struct cudaGraphNodeParams *nodeParams);
+  // HIP: hipError_t hipGraphAddNode(hipGraphNode_t *pGraphNode, hipGraph_t graph, const hipGraphNode_t *pDependencies, size_t numDependencies, hipGraphNodeParams *nodeParams);
+  // CHECK: result = hipGraphAddNode(&graphNode, Graph_t, &graphNode_2, bytes, graphNodeParams);
+  result = cudaGraphAddNode(&graphNode, Graph_t, &graphNode_2, bytes, graphNodeParams);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphNodeSetParams(cudaGraphNode_t node, struct cudaGraphNodeParams *nodeParams);
+  // HIP: hipError_t hipGraphNodeSetParams(hipGraphNode_t node, hipGraphNodeParams *nodeParams);
+  // CHECK: result = hipGraphNodeSetParams(graphNode, graphNodeParams);
+  result = cudaGraphNodeSetParams(graphNode, graphNodeParams);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphExecNodeSetParams(cudaGraphExec_t graphExec, cudaGraphNode_t node, struct cudaGraphNodeParams *nodeParams);
+  // HIP: hipError_t hipGraphExecNodeSetParams(hipGraphExec_t graphExec, hipGraphNode_t node, hipGraphNodeParams* nodeParams);
+  // CHECK: result = hipGraphExecNodeSetParams(GraphExec_t, graphNode, graphNodeParams);
+  result = cudaGraphExecNodeSetParams(GraphExec_t, graphNode, graphNodeParams);
+#endif
+
+#if CUDA_VERSION >= 12030
+  // CHECK: hipGraphEdgeData graphEdgeData_st;
+  // CHECK-NEXT: hipGraphEdgeData graphEdgeData;
+  cudaGraphEdgeData_st graphEdgeData_st;
+  cudaGraphEdgeData graphEdgeData;
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaStreamBeginCaptureToGraph(cudaStream_t stream, cudaGraph_t graph, const cudaGraphNode_t *dependencies, const cudaGraphEdgeData *dependencyData, size_t numDependencies, enum cudaStreamCaptureMode mode);
+  // HIP: hipError_t hipStreamBeginCaptureToGraph(hipStream_t stream, hipGraph_t graph, const hipGraphNode_t* dependencies, const hipGraphEdgeData* dependencyData, size_t numDependencies, hipStreamCaptureMode mode);
+  // CHECK: result = hipStreamBeginCaptureToGraph(stream, Graph_t, &graphNode_2, &graphEdgeData, bytes, streamCaptureMode);
+  result = cudaStreamBeginCaptureToGraph(stream, Graph_t, &graphNode_2, &graphEdgeData, bytes, streamCaptureMode);
 #endif
 
   return 0;

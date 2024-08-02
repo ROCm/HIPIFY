@@ -131,13 +131,16 @@ const std::map<llvm::StringRef, cudaAPIversions> &CUDA_VERSIONS_MAP();
 
 extern const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP;
 extern const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_FUNCTION_VER_MAP;
+extern const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_DRIVER_FUNCTION_CHANGED_VER_MAP;
 extern const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP;
 extern const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP;
+extern const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_RUNTIME_FUNCTION_CHANGED_VER_MAP;
 extern const std::map<llvm::StringRef, hipAPIversions> HIP_COMPLEX_TYPE_NAME_VER_MAP;
 extern const std::map<llvm::StringRef, hipAPIversions> HIP_COMPLEX_FUNCTION_VER_MAP;
 extern const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_TYPE_NAME_VER_MAP;
 extern const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_FUNCTION_VER_MAP;
 extern const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_BLAS_FUNCTION_CHANGED_VER_MAP;
+extern const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_BLAS_FUNCTION_CHANGED_VER_MAP;
 extern const std::map<llvm::StringRef, hipAPIversions> HIP_RAND_TYPE_NAME_VER_MAP;
 extern const std::map<llvm::StringRef, hipAPIversions> HIP_RAND_FUNCTION_VER_MAP;
 extern const std::map<llvm::StringRef, hipAPIversions> HIP_DNN_TYPE_NAME_VER_MAP;
@@ -164,7 +167,7 @@ extern const std::map<llvm::StringRef, hipAPIversions> HIP_SOLVER_FUNCTION_VER_M
   * The union of all the above HIP maps.
   *
   */
-const std::map<llvm::StringRef, hipAPIversions>& HIP_VERSIONS_MAP();
+const std::map<llvm::StringRef, hipAPIversions> &HIP_VERSIONS_MAP();
 
 extern const std::map<unsigned int, llvm::StringRef> CUDA_DRIVER_API_SECTION_MAP;
 extern const std::map<unsigned int, llvm::StringRef> CUDA_RUNTIME_API_SECTION_MAP;
@@ -215,14 +218,15 @@ namespace driver {
     GRAPHICS = 32,
     DRIVER_ENTRY_POINT = 33,
     COREDUMP = 34,
-    PROFILER_DEPRECATED = 35,
-    PROFILER = 36,
-    OPENGL = 37,
-    D3D9 = 38,
-    D3D10 = 39,
-    D3D11 = 40,
-    VDPAU = 41,
-    EGL = 42,
+    GREEN_CONTEXT = 35,
+    PROFILER_DEPRECATED = 36,
+    PROFILER = 37,
+    OPENGL = 38,
+    D3D9 = 39,
+    D3D10 = 40,
+    D3D11 = 41,
+    VDPAU = 42,
+    EGL = 43,
   };
 }
 
@@ -265,5 +269,19 @@ namespace runtime {
     TEXTURE_REMOVED = 35,
     SURFACE_REMOVED = 36,
     PROFILER_REMOVED = 37,
+  };
+}
+
+namespace blas {
+  enum BLAS_API_SECTIONS {
+    BLAS_DATA_TYPES = 1,
+    CUDA_DATA_TYPES = 2,
+    BLAS_LT_DATA_TYPES = 3,
+    BLAS_HELPER = 4,
+    BLAS_LEVEL_1 = 5,
+    BLAS_LEVEL_2 = 6,
+    BLAS_LEVEL_3 = 7,
+    BLAS_EXT = 8,
+    BLAS_LT = 9,
   };
 }

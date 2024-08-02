@@ -477,6 +477,7 @@ namespace doc {
       const typeMap &getTypes() const override { return CUDA_DRIVER_TYPE_NAME_MAP; }
       const versionMap &getFunctionVersions() const override { return CUDA_DRIVER_FUNCTION_VER_MAP; }
       const hipVersionMap &getHipFunctionVersions() const override { return HIP_DRIVER_FUNCTION_VER_MAP; }
+      const cudaChangedVersionMap &getCudaChangedFunctionVersions() const override { return CUDA_DRIVER_FUNCTION_CHANGED_VER_MAP; }
       const versionMap &getTypeVersions() const override { return CUDA_DRIVER_TYPE_NAME_VER_MAP; }
       const hipVersionMap &getHipTypeVersions() const override { return HIP_DRIVER_TYPE_NAME_VER_MAP; }
       const string &getName() const override { return sCUDA_DRIVER; }
@@ -506,6 +507,7 @@ namespace doc {
       const typeMap &getTypes() const override { return CUDA_RUNTIME_TYPE_NAME_MAP; }
       const versionMap &getFunctionVersions() const override { return CUDA_RUNTIME_FUNCTION_VER_MAP; }
       const hipVersionMap &getHipFunctionVersions() const override { return HIP_RUNTIME_FUNCTION_VER_MAP; }
+      const cudaChangedVersionMap& getCudaChangedFunctionVersions() const override { return CUDA_RUNTIME_FUNCTION_CHANGED_VER_MAP; }
       const versionMap &getTypeVersions() const override { return CUDA_RUNTIME_TYPE_NAME_VER_MAP; }
       const hipVersionMap &getHipTypeVersions() const override { return HIP_RUNTIME_TYPE_NAME_VER_MAP; }
       const string &getName() const override { return sCUDA_RUNTIME; }
@@ -559,6 +561,7 @@ namespace doc {
       const versionMap &getFunctionVersions() const override { return CUDA_BLAS_FUNCTION_VER_MAP; }
       const hipVersionMap &getHipFunctionVersions() const override { return HIP_BLAS_FUNCTION_VER_MAP; }
       const hipChangedVersionMap &getHipChangedFunctionVersions() const override { return HIP_BLAS_FUNCTION_CHANGED_VER_MAP; }
+      const cudaChangedVersionMap &getCudaChangedFunctionVersions() const override { return CUDA_BLAS_FUNCTION_CHANGED_VER_MAP; }
       const versionMap &getTypeVersions() const override { return CUDA_BLAS_TYPE_NAME_VER_MAP; }
       const hipVersionMap &getHipTypeVersions() const override { return HIP_BLAS_TYPE_NAME_VER_MAP; }
       const string &getName() const override { return sCUBLAS; }
@@ -592,20 +595,20 @@ namespace doc {
 
   class SOLVER : public DOC {
   public:
-    SOLVER(const string& outDir) : DOC(outDir) { hasROC = true; }
+    SOLVER(const string &outDir) : DOC(outDir) { hasROC = true; }
     virtual ~SOLVER() {}
   protected:
-    const sectionMap& getSections() const override { return CUDA_SOLVER_API_SECTION_MAP; }
-    const functionMap& getFunctions() const override { return CUDA_SOLVER_FUNCTION_MAP; }
-    const typeMap& getTypes() const override { return CUDA_SOLVER_TYPE_NAME_MAP; }
-    const versionMap& getFunctionVersions() const override { return CUDA_SOLVER_FUNCTION_VER_MAP; }
-    const hipVersionMap& getHipFunctionVersions() const override { return HIP_SOLVER_FUNCTION_VER_MAP; }
-    const versionMap& getTypeVersions() const override { return CUDA_SOLVER_TYPE_NAME_VER_MAP; }
-    const hipVersionMap& getHipTypeVersions() const override { return HIP_SOLVER_TYPE_NAME_VER_MAP; }
-    const string& getName() const override { return sCUSOLVER; }
-    const string& getSecondAPI() const override { return sROC; }
-    const string& getJointAPI() const override { return sHIPandROC; }
-    const string& getFileName(docType format) const override {
+    const sectionMap &getSections() const override { return CUDA_SOLVER_API_SECTION_MAP; }
+    const functionMap &getFunctions() const override { return CUDA_SOLVER_FUNCTION_MAP; }
+    const typeMap &getTypes() const override { return CUDA_SOLVER_TYPE_NAME_MAP; }
+    const versionMap &getFunctionVersions() const override { return CUDA_SOLVER_FUNCTION_VER_MAP; }
+    const hipVersionMap &getHipFunctionVersions() const override { return HIP_SOLVER_FUNCTION_VER_MAP; }
+    const versionMap &getTypeVersions() const override { return CUDA_SOLVER_TYPE_NAME_VER_MAP; }
+    const hipVersionMap &getHipTypeVersions() const override { return HIP_SOLVER_TYPE_NAME_VER_MAP; }
+    const string &getName() const override { return sCUSOLVER; }
+    const string &getSecondAPI() const override { return sROC; }
+    const string &getJointAPI() const override { return sHIPandROC; }
+    const string &getFileName(docType format) const override {
       switch (format) {
       case none:
       default: return sEmpty;
@@ -617,11 +620,11 @@ namespace doc {
 
   class ROCSOLVER : public SOLVER {
   public:
-    ROCSOLVER(const string& outDir) : SOLVER(outDir) { hasROC = false; isROC = true; }
+    ROCSOLVER(const string &outDir) : SOLVER(outDir) { hasROC = false; isROC = true; }
     virtual ~ROCSOLVER() {}
   protected:
-    const string& getAPI() const override { return sROC; }
-    const string& getFileName(docType format) const override {
+    const string &getAPI() const override { return sROC; }
+    const string &getFileName(docType format) const override {
       switch (format) {
       case none:
       default: return sEmpty;

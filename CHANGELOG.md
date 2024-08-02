@@ -3,12 +3,26 @@
 Documentation for HIPIFY is available at
 [https://rocmdocs.amd.com/projects/HIPIFY/en/latest/](https://rocmdocs.amd.com/projects/HIPIFY/en/latest/).
 
-## HIPIFY for ROCm 6.1.1
+## HIPIFY for ROCm 6.2.0
 
 ### Additions
 
-* LLVM 18.1.2 support
+* CUDA 12.4.1 support
+* cuDNN 9.1.1 support
+* LLVM 18.1.6 support
+* Full `hipBLASLt` support
+
+### Fixes
+
+* Apply `reinterpret_cast` for an explicit conversion between `pointer-to-function` and `pointer-to-object`;
+  affected functions: `hipFuncGetAttributes`, `hipFuncSetAttribute`, `hipFuncSetCacheConfig`, `hipFuncSetSharedMemConfig`, `hipLaunchKernel`, and `hipLaunchCooperativeKernel`
+
+## HIPIFY for ROCm 6.1.2
+
+### Additions
+
 * cuDNN 9.0.0 support
+* LLVM 18.1.2 support
 * New options:
   * `--clang-resource-directory` to specify the clang resource path - the path to the parent folder for the `include` folder that
     contains `__clang_cuda_runtime_wrapper.h` and other header files used during the hipification process
