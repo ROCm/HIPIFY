@@ -1658,16 +1658,16 @@
 |`cuMemcpy3DPeerAsync`| | | | | | | | | | |
 |`cuMemcpy3D_v2`| | | | |`hipDrvMemcpy3D`|3.5.0| | | | |
 |`cuMemcpyAsync`| | | | | | | | | | |
-|`cuMemcpyAtoA`| | | | | | | | | | |
-|`cuMemcpyAtoA_v2`| | | | | | | | | | |
-|`cuMemcpyAtoD`| | | | | | | | | | |
-|`cuMemcpyAtoD_v2`| | | | | | | | | | |
+|`cuMemcpyAtoA`| | | | |`hipMemcpyAtoA`|6.2.0| | | |6.2.0|
+|`cuMemcpyAtoA_v2`| | | | |`hipMemcpyAtoA`|6.2.0| | | |6.2.0|
+|`cuMemcpyAtoD`| | | | |`hipMemcpyAtoD`|6.2.0| | | |6.2.0|
+|`cuMemcpyAtoD_v2`| | | | |`hipMemcpyAtoD`|6.2.0| | | |6.2.0|
 |`cuMemcpyAtoH`| | | | |`hipMemcpyAtoH`|1.9.0| | | | |
-|`cuMemcpyAtoHAsync`| | | | | | | | | | |
-|`cuMemcpyAtoHAsync_v2`| | | | | | | | | | |
+|`cuMemcpyAtoHAsync`| | | | |`hipMemcpyAtoHAsync`|6.2.0| | | |6.2.0|
+|`cuMemcpyAtoHAsync_v2`| | | | |`hipMemcpyAtoHAsync`|6.2.0| | | |6.2.0|
 |`cuMemcpyAtoH_v2`| | | | |`hipMemcpyAtoH`|1.9.0| | | | |
-|`cuMemcpyDtoA`| | | | | | | | | | |
-|`cuMemcpyDtoA_v2`| | | | | | | | | | |
+|`cuMemcpyDtoA`| | | | |`hipMemcpyDtoA`|6.2.0| | | |6.2.0|
+|`cuMemcpyDtoA_v2`| | | | |`hipMemcpyDtoA`|6.2.0| | | |6.2.0|
 |`cuMemcpyDtoD`| | | | |`hipMemcpyDtoD`|1.6.0| | | | |
 |`cuMemcpyDtoDAsync`| | | | |`hipMemcpyDtoDAsync`|1.6.0| | | | |
 |`cuMemcpyDtoDAsync_v2`| | | | |`hipMemcpyDtoDAsync`|1.6.0| | | | |
@@ -1677,8 +1677,8 @@
 |`cuMemcpyDtoHAsync_v2`| | | | |`hipMemcpyDtoHAsync`|1.6.0| | | | |
 |`cuMemcpyDtoH_v2`| | | | |`hipMemcpyDtoH`|1.6.0| | | | |
 |`cuMemcpyHtoA`| | | | |`hipMemcpyHtoA`|1.9.0| | | | |
-|`cuMemcpyHtoAAsync`| | | | | | | | | | |
-|`cuMemcpyHtoAAsync_v2`| | | | | | | | | | |
+|`cuMemcpyHtoAAsync`| | | | |`hipMemcpyHtoAAsync`|6.2.0| | | |6.2.0|
+|`cuMemcpyHtoAAsync_v2`| | | | |`hipMemcpyHtoAAsync`|6.2.0| | | |6.2.0|
 |`cuMemcpyHtoA_v2`| | | | |`hipMemcpyHtoA`|1.9.0| | | | |
 |`cuMemcpyHtoD`| | | | |`hipMemcpyHtoD`|1.6.0| | | | |
 |`cuMemcpyHtoDAsync`| | | | |`hipMemcpyHtoDAsync`|1.6.0| | | | |

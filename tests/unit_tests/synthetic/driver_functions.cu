@@ -64,6 +64,7 @@ int main() {
   // CHECK-NEXT: hipTexRef texref;
   // CHECK-NEXT: hipJitOption jit_option;
   // CHECK-NEXT: hipArray_t array_;
+  // CHECK-NEXT: hipArray_t array_dst;
   // CHECK-NEXT: HIP_ARRAY3D_DESCRIPTOR ARRAY3D_DESCRIPTOR;
   // CHECK-NEXT: HIP_ARRAY_DESCRIPTOR ARRAY_DESCRIPTOR;
   // CHECK-NEXT: hipIpcEventHandle_t ipcEventHandle;
@@ -93,6 +94,7 @@ int main() {
   CUtexref texref;
   CUjit_option jit_option;
   CUarray array_;
+  CUarray array_dst;
   CUDA_ARRAY3D_DESCRIPTOR ARRAY3D_DESCRIPTOR;
   CUDA_ARRAY_DESCRIPTOR ARRAY_DESCRIPTOR;
   CUipcEventHandle ipcEventHandle;
@@ -436,6 +438,7 @@ int main() {
 
   void* dsthost = nullptr;
   size_t offset = 0;
+  size_t offset_dst = 0;
   // CUDA: CUresult CUDAAPI cuMemcpyAtoH(void *dstHost, CUarray srcArray, size_t srcOffset, size_t ByteCount);
   // HIP: hipError_t hipMemcpyAtoH(void* dst, hipArray* srcArray, size_t srcOffset, size_t count);
   // CHECK: result = hipMemcpyAtoH(dsthost, array_, offset, bytes);
@@ -989,6 +992,13 @@ int main() {
   // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipTexRefGetArray(hipArray_t* pArray, const textureReference* texRef);
   // CHECK: result = hipTexRefGetArray(&array_, texref);
   result = cuTexRefGetArray(&array_, texref);
+
+  // CUDA:CUresult CUDAAPI cuMemcpyAtoA_v2(CUarray dstArray, size_t dstOffset, CUarray srcArray, size_t srcOffset, size_t ByteCount);
+  // HIP: hipError_t hipMemcpyAtoA(hipArray_t dstArray, size_t dstOffset, hipArray_t srcArray, size_t srcOffset, size_t ByteCount);
+  // CHECK: result = hipMemcpyAtoA(array_dst, offset_dst, array_, offset, bytes);
+  // CHECK-NEXT: result = hipMemcpyAtoA(array_dst, offset_dst, array_, offset, bytes);
+  result = cuMemcpyAtoA(array_dst, offset_dst, array_, offset, bytes);
+  result = cuMemcpyAtoA_v2(array_dst, offset_dst, array_, offset, bytes);
 
 #if CUDA_VERSION >= 8000
   // CHECK: hipMemRangeAttribute MemoryRangeAttribute;

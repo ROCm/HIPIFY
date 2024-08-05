@@ -34,7 +34,7 @@
 |`cudaIpcOpenMemHandle`| | | | |`hipIpcOpenMemHandle`|1.6.0| | | | |
 |`cudaSetDevice`| | | | |`hipSetDevice`|1.6.0| | | | |
 |`cudaSetDeviceFlags`| | | | |`hipSetDeviceFlags`|1.6.0| | | | |
-|`cudaSetValidDevices`| | | | | | | | | | |
+|`cudaSetValidDevices`| | | | |`hipSetValidDevices`|6.2.0| | | |6.2.0|
 
 ## **2. Device Management [DEPRECATED]**
 
@@ -197,7 +197,7 @@
 |`cudaMemRangeGetAttributes`|8.0| | | |`hipMemRangeGetAttributes`|3.7.0| | | | |
 |`cudaMemcpy`| | | | |`hipMemcpy`|1.5.0| | | | |
 |`cudaMemcpy2D`| | | | |`hipMemcpy2D`|1.6.0| | | | |
-|`cudaMemcpy2DArrayToArray`| | | | | | | | | | |
+|`cudaMemcpy2DArrayToArray`| | | | |`hipMemcpy2DArrayToArray`|6.2.0| | | |6.2.0|
 |`cudaMemcpy2DAsync`| | | | |`hipMemcpy2DAsync`|1.6.0| | | | |
 |`cudaMemcpy2DFromArray`| | | | |`hipMemcpy2DFromArray`|3.0.0| | | | |
 |`cudaMemcpy2DFromArrayAsync`| | | | |`hipMemcpy2DFromArrayAsync`|3.0.0| | | | |

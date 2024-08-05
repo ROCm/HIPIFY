@@ -1418,6 +1418,8 @@ my %experimental_funcs = (
     "curandOrdering" => "6.2.0",
     "cudaStreamLegacy" => "6.2.0",
     "cudaStreamBeginCaptureToGraph" => "6.2.0",
+    "cudaSetValidDevices" => "6.2.0",
+    "cudaMemcpy2DArrayToArray" => "6.2.0",
     "cudaLaunchAttributeValue" => "6.2.0",
     "cudaLaunchAttributePriority" => "6.2.0",
     "cudaLaunchAttributeID" => "6.2.0",
@@ -1603,6 +1605,16 @@ my %experimental_funcs = (
     "cublasCgbmv_64" => "6.2.0",
     "cublasAxpyEx_64" => "6.2.0",
     "cuStreamBeginCaptureToGraph" => "6.2.0",
+    "cuMemcpyHtoAAsync_v2" => "6.2.0",
+    "cuMemcpyHtoAAsync" => "6.2.0",
+    "cuMemcpyDtoA_v2" => "6.2.0",
+    "cuMemcpyDtoA" => "6.2.0",
+    "cuMemcpyAtoHAsync_v2" => "6.2.0",
+    "cuMemcpyAtoHAsync" => "6.2.0",
+    "cuMemcpyAtoD_v2" => "6.2.0",
+    "cuMemcpyAtoD" => "6.2.0",
+    "cuMemcpyAtoA_v2" => "6.2.0",
+    "cuMemcpyAtoA" => "6.2.0",
     "cuGraphNodeSetParams" => "6.2.0",
     "cuGraphMemcpyNodeSetParams" => "6.2.0",
     "cuGraphMemcpyNodeGetParams" => "6.2.0",
@@ -1783,6 +1795,18 @@ sub subst {
 }
 
 sub experimentalSubstitutions {
+    subst("cudaSetValidDevices", "hipSetValidDevices", "device");
+    subst("cuMemcpyAtoA", "hipMemcpyAtoA", "memory");
+    subst("cuMemcpyAtoA_v2", "hipMemcpyAtoA", "memory");
+    subst("cuMemcpyAtoD", "hipMemcpyAtoD", "memory");
+    subst("cuMemcpyAtoD_v2", "hipMemcpyAtoD", "memory");
+    subst("cuMemcpyAtoHAsync", "hipMemcpyAtoHAsync", "memory");
+    subst("cuMemcpyAtoHAsync_v2", "hipMemcpyAtoHAsync", "memory");
+    subst("cuMemcpyDtoA", "hipMemcpyDtoA", "memory");
+    subst("cuMemcpyDtoA_v2", "hipMemcpyDtoA", "memory");
+    subst("cuMemcpyHtoAAsync", "hipMemcpyHtoAAsync", "memory");
+    subst("cuMemcpyHtoAAsync_v2", "hipMemcpyHtoAAsync", "memory");
+    subst("cudaMemcpy2DArrayToArray", "hipMemcpy2DArrayToArray", "memory");
     subst("cuStreamBeginCaptureToGraph", "hipStreamBeginCaptureToGraph", "stream");
     subst("cudaStreamBeginCaptureToGraph", "hipStreamBeginCaptureToGraph", "stream");
     subst("cuGraphAddMemFreeNode", "hipDrvGraphAddMemFreeNode", "graph");
@@ -9465,7 +9489,6 @@ sub warnUnsupportedFunctions {
         "cudaSharedmemCarveoutMaxL1",
         "cudaSharedmemCarveoutDefault",
         "cudaSharedCarveout",
-        "cudaSetValidDevices",
         "cudaSetDoubleForHost",
         "cudaSetDoubleForDevice",
         "cudaProfilerInitialize",
@@ -9484,7 +9507,6 @@ sub warnUnsupportedFunctions {
         "cudaMemcpy3DPeerParms",
         "cudaMemcpy3DPeerAsync",
         "cudaMemcpy3DPeer",
-        "cudaMemcpy2DArrayToArray",
         "cudaMemRangeAttributePreferredLocationType",
         "cudaMemRangeAttributePreferredLocationId",
         "cudaMemRangeAttributeLastPrefetchLocationType",
@@ -10004,16 +10026,6 @@ sub warnUnsupportedFunctions {
         "cuMemsetD2D16",
         "cuMemcpyPeerAsync",
         "cuMemcpyPeer",
-        "cuMemcpyHtoAAsync_v2",
-        "cuMemcpyHtoAAsync",
-        "cuMemcpyDtoA_v2",
-        "cuMemcpyDtoA",
-        "cuMemcpyAtoHAsync_v2",
-        "cuMemcpyAtoHAsync",
-        "cuMemcpyAtoD_v2",
-        "cuMemcpyAtoD",
-        "cuMemcpyAtoA_v2",
-        "cuMemcpyAtoA",
         "cuMemcpyAsync",
         "cuMemcpy3DPeerAsync",
         "cuMemcpy3DPeer",
