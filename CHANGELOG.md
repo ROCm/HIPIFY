@@ -3,6 +3,17 @@
 Documentation for HIPIFY is available at
 [https://rocmdocs.amd.com/projects/HIPIFY/en/latest/](https://rocmdocs.amd.com/projects/HIPIFY/en/latest/).
 
+## HIPIFY for ROCm 6.2.2
+
+### Additions
+
+* cuDNN 9.3.0 support
+
+### Fixes
+
+* Removed some post HIP 6.2 APIs from support
+* Added hipification support for HIP functions `hipSetValidDevices`, `hipMemcpy2DArrayToArray`, `hipMemcpyAtoA`, `hipMemcpyAtoD`, `hipMemcpyAtoA`, `hipMemcpyAtoHAsync`, and `hipMemcpyHtoAAsync`
+
 ## HIPIFY for ROCm 6.2.1
 
 ### Additions
