@@ -432,7 +432,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_FUNCTION_VER_MAP {
   {"cudnnAdvTrainVersionCheck",                                {CUDNN_801, CUDA_0,    CUDNN_900}},
   {"cudnnBackendCreateDescriptor",                             {CUDNN_801, CUDA_0,    CUDA_0   }},
   {"cudnnBackendDestroyDescriptor",                            {CUDNN_801, CUDA_0,    CUDA_0   }},
-  {"cudnnBackendInitialize",                                   {CUDNN_801, CUDA_0,    CUDA_0   }},
+  {"cudnnBackendInitialize",                                   {CUDNN_801, CUDNN_930, CUDA_0   }},
   {"cudnnBackendFinalize",                                     {CUDNN_801, CUDA_0,    CUDA_0   }},
   {"cudnnBackendSetAttribute",                                 {CUDNN_801, CUDA_0,    CUDA_0   }},
   {"cudnnBackendGetAttribute",                                 {CUDNN_801, CUDA_0,    CUDA_0   }},
