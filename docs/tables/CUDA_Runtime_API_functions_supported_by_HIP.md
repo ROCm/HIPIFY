@@ -464,7 +464,7 @@
 |`cudaGraphExecEventWaitNodeSetEvent`|11.1| | | |`hipGraphExecEventWaitNodeSetEvent`|5.0.0| | | | |
 |`cudaGraphExecExternalSemaphoresSignalNodeSetParams`|11.2| | | |`hipGraphExecExternalSemaphoresSignalNodeSetParams`|5.7.0| | | | |
 |`cudaGraphExecExternalSemaphoresWaitNodeSetParams`|11.2| | | |`hipGraphExecExternalSemaphoresWaitNodeSetParams`|5.7.0| | | | |
-|`cudaGraphExecGetFlags`|12.0| | | |`hipGraphExecGetFlags`|6.2.0| | | |6.2.0|
+|`cudaGraphExecGetFlags`|12.0| | | | | | | | | |
 |`cudaGraphExecHostNodeSetParams`|11.0| | | |`hipGraphExecHostNodeSetParams`|5.0.0| | | | |
 |`cudaGraphExecKernelNodeSetParams`|11.0| | | |`hipGraphExecKernelNodeSetParams`|4.5.0| | | | |
 |`cudaGraphExecMemcpyNodeSetParams`|11.0| | | |`hipGraphExecMemcpyNodeSetParams`|5.0.0| | | | |
@@ -472,7 +472,7 @@
 |`cudaGraphExecMemcpyNodeSetParamsFromSymbol`|11.1| | | |`hipGraphExecMemcpyNodeSetParamsFromSymbol`|5.0.0| | | | |
 |`cudaGraphExecMemcpyNodeSetParamsToSymbol`|11.1| | | |`hipGraphExecMemcpyNodeSetParamsToSymbol`|5.0.0| | | | |
 |`cudaGraphExecMemsetNodeSetParams`|11.0| | | |`hipGraphExecMemsetNodeSetParams`|5.0.0| | | | |
-|`cudaGraphExecNodeSetParams`|12.2| | | |`hipGraphExecNodeSetParams`|6.2.0| | | |6.2.0|
+|`cudaGraphExecNodeSetParams`|12.2| | | | | | | | | |
 |`cudaGraphExecUpdate`|11.0| | | |`hipGraphExecUpdate`|5.0.0| | | | |
 |`cudaGraphExternalSemaphoresSignalNodeGetParams`|11.2| | | |`hipGraphExternalSemaphoresSignalNodeGetParams`|5.7.0| | | | |
 |`cudaGraphExternalSemaphoresSignalNodeSetParams`|11.2| | | |`hipGraphExternalSemaphoresSignalNodeSetParams`|5.7.0| | | | |
@@ -510,7 +510,7 @@
 |`cudaGraphNodeGetEnabled`|11.6| | | |`hipGraphNodeGetEnabled`|5.5.0| | | | |
 |`cudaGraphNodeGetType`|11.0| | | |`hipGraphNodeGetType`|5.0.0| | | | |
 |`cudaGraphNodeSetEnabled`|11.6| | | |`hipGraphNodeSetEnabled`|5.5.0| | | | |
-|`cudaGraphNodeSetParams`|12.2| | | |`hipGraphNodeSetParams`|6.2.0| | | |6.2.0|
+|`cudaGraphNodeSetParams`|12.2| | | | | | | | | |
 |`cudaGraphReleaseUserObject`|11.3| | | |`hipGraphReleaseUserObject`|5.3.0| | | | |
 |`cudaGraphRemoveDependencies`|11.0| | | |`hipGraphRemoveDependencies`|5.0.0| | | | |
 |`cudaGraphRemoveDependencies_v2`|12.3| | | | | | | | | |
