@@ -993,12 +993,40 @@ int main() {
   // CHECK: result = hipTexRefGetArray(&array_, texref);
   result = cuTexRefGetArray(&array_, texref);
 
-  // CUDA:CUresult CUDAAPI cuMemcpyAtoA_v2(CUarray dstArray, size_t dstOffset, CUarray srcArray, size_t srcOffset, size_t ByteCount);
+  // CUDA: CUresult CUDAAPI cuMemcpyAtoA_v2(CUarray dstArray, size_t dstOffset, CUarray srcArray, size_t srcOffset, size_t ByteCount);
   // HIP: hipError_t hipMemcpyAtoA(hipArray_t dstArray, size_t dstOffset, hipArray_t srcArray, size_t srcOffset, size_t ByteCount);
   // CHECK: result = hipMemcpyAtoA(array_dst, offset_dst, array_, offset, bytes);
   // CHECK-NEXT: result = hipMemcpyAtoA(array_dst, offset_dst, array_, offset, bytes);
   result = cuMemcpyAtoA(array_dst, offset_dst, array_, offset, bytes);
   result = cuMemcpyAtoA_v2(array_dst, offset_dst, array_, offset, bytes);
+
+  // CUDA: CUresult CUDAAPI cuMemcpyAtoD_v2(CUdeviceptr dstDevice, CUarray srcArray, size_t srcOffset, size_t ByteCount);
+  // HIP: hipError_t hipMemcpyAtoD(hipDeviceptr_t dstDevice, hipArray_t srcArray, size_t srcOffset, size_t ByteCount);
+  // CHECK: result = hipMemcpyAtoD(deviceptr, array_, offset, bytes);
+  // CHECK-NEXT: result = hipMemcpyAtoD(deviceptr, array_, offset, bytes);
+  result = cuMemcpyAtoD(deviceptr, array_, offset, bytes);
+  result = cuMemcpyAtoD_v2(deviceptr, array_, offset, bytes);
+
+  // CUDA: CUresult CUDAAPI cuMemcpyDtoA_v2(CUarray dstArray, size_t dstOffset, CUdeviceptr srcDevice, size_t ByteCount);
+  // HIP: hipError_t hipMemcpyDtoA(hipArray_t dstArray, size_t dstOffset, hipDeviceptr_t srcDevice, size_t ByteCount);
+  // CHECK: result = hipMemcpyDtoA(array_, offset, deviceptr, bytes);
+  // CHECK-NEXT: result = hipMemcpyDtoA(array_, offset, deviceptr, bytes);
+  result = cuMemcpyDtoA(array_, offset, deviceptr, bytes);
+  result = cuMemcpyDtoA_v2(array_, offset, deviceptr, bytes);
+
+  // CUDA: CUresult CUDAAPI cuMemcpyAtoHAsync_v2(void *dstHost, CUarray srcArray, size_t srcOffset, size_t ByteCount, CUstream hStream);
+  // HIP: hipError_t hipMemcpyAtoHAsync(void* dstHost, hipArray_t srcArray, size_t srcOffset, size_t ByteCount, hipStream_t stream);
+  // CHECK: result = hipMemcpyAtoHAsync(dsthost, array_, offset, bytes, stream);
+  // CHECK-NEXT: result = hipMemcpyAtoHAsync(dsthost, array_, offset, bytes, stream);
+  result = cuMemcpyAtoHAsync(dsthost, array_, offset, bytes, stream);
+  result = cuMemcpyAtoHAsync_v2(dsthost, array_, offset, bytes, stream);
+
+  // CUDA: CUresult CUDAAPI cuMemcpyHtoAAsync_v2(CUarray dstArray, size_t dstOffset, const void *srcHost, size_t ByteCount, CUstream hStream);
+  // HIP: hipError_t hipMemcpyHtoAAsync(hipArray_t dstArray, size_t dstOffset, const void* srcHost, size_t ByteCount, hipStream_t stream);
+  // CHECK: result = hipMemcpyHtoAAsync(array_, offset, dsthost, bytes, stream);
+  // CHECK-NEXT: result = hipMemcpyHtoAAsync(array_, offset, dsthost, bytes, stream);
+  result = cuMemcpyHtoAAsync(array_, offset, dsthost, bytes, stream);
+  result = cuMemcpyHtoAAsync_v2(array_, offset, dsthost, bytes, stream);
 
 #if CUDA_VERSION >= 8000
   // CHECK: hipMemRangeAttribute MemoryRangeAttribute;

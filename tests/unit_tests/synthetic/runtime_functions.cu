@@ -25,7 +25,9 @@ int main() {
   size_t width = 0;
   size_t height = 0;
   size_t wOffset = 0;
+  size_t wOffset_src = 0;
   size_t hOffset = 0;
+  size_t hOffset_src = 0;
   size_t pitch = 0;
   size_t pitch_2 = 0;
   int device = 0;
@@ -824,6 +826,16 @@ int main() {
   // TODO
   // CUDA: template<typename UnaryFunction, class T> static __inline__ __host__ CUDART_DEVICE cudaError_t cudaOccupancyMaxPotentialBlockSizeVariableSMemWithFlags(int* minGridSize, int* blockSize, T func, UnaryFunction blockSizeToDynamicSMemSize, int blockSizeLimit = 0, unsigned int flags = 0);
   // HIP:  template<typename UnaryFunction, class T> static hipError_t __host__ inline hipOccupancyMaxPotentialBlockSizeVariableSMemWithFlags(int* min_grid_size, int* block_size, T func, UnaryFunction block_size_to_dynamic_smem_size, int block_size_limit = 0, unsigned int flags = 0);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaSetValidDevices(int *device_arr, int len);
+  // HIP: hipError_t hipSetValidDevices(int* device_arr, int len);
+  // CHECK: result = hipSetValidDevices(&device, intVal);
+  result = cudaSetValidDevices(&device, intVal);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMemcpy2DArrayToArray(cudaArray_t dst, size_t wOffsetDst, size_t hOffsetDst, cudaArray_const_t src, size_t wOffsetSrc, size_t hOffsetSrc, size_t width, size_t height, enum cudaMemcpyKind kind __dv(cudaMemcpyDeviceToDevice));
+  // HIP: hipError_t hipMemcpy2DArrayToArray(hipArray_t dst, size_t wOffsetDst, size_t hOffsetDst, hipArray_const_t src, size_t wOffsetSrc, size_t hOffsetSrc, size_t width, size_t height, hipMemcpyKind kind);
+  // CHECK: result = hipMemcpy2DArrayToArray(Array_t, wOffset, hOffset, Array_const_t, wOffset_src, hOffset_src, width, height, MemcpyKind);
+  result = cudaMemcpy2DArrayToArray(Array_t, wOffset, hOffset, Array_const_t, wOffset_src, hOffset_src, width, height, MemcpyKind);
 
 #if CUDA_VERSION >= 8000
   // CHECK: hipDeviceP2PAttr DeviceP2PAttr;
