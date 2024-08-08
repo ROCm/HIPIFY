@@ -886,7 +886,7 @@
 |`cudnnBackendExecute`|8.0.1| | | | | | | | | | | | | | | |
 |`cudnnBackendFinalize`|8.0.1| | | | | | | | | | | | | | | |
 |`cudnnBackendGetAttribute`|8.0.1| | | | | | | | | | | | | | | |
-|`cudnnBackendInitialize`|8.0.1| | | | | | | | | | | | | | | |
+|`cudnnBackendInitialize`|8.0.1|9.3.0| | | | | | | | | | | | | | |
 |`cudnnBackendSetAttribute`|8.0.1| | | | | | | | | | | | | | | |
 |`cudnnBatchNormalizationBackward`|4.0.0|9.0.0| | |`hipdnnBatchNormalizationBackward`| | | | | |`miopenBatchNormalizationBackward`| | | | | |
 |`cudnnBatchNormalizationBackwardEx`|7.4.1|9.0.0| | | | | | | | | | | | | | |
