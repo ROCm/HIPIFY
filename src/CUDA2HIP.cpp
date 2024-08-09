@@ -27,6 +27,7 @@ const std::map <llvm::StringRef, hipCounter> CUDA_INCLUDE_MAP {
   // CUDA includes
   {"cuda.h",                                                {"hip/hip_runtime.h",                                     "", CONV_INCLUDE_CUDA_MAIN_H,    API_DRIVER, 0}},
   {"cuda_runtime.h",                                        {"hip/hip_runtime.h",                                     "", CONV_INCLUDE_CUDA_MAIN_H,    API_RUNTIME, 0}},
+  {"device_launch_parameters.h",                            {"",                                                      "", CONV_INCLUDE,                API_RUNTIME, 0}},
   {"cuda_runtime_api.h",                                    {"hip/hip_runtime_api.h",                                 "", CONV_INCLUDE,                API_RUNTIME, 0}},
   {"channel_descriptor.h",                                  {"hip/channel_descriptor.h",                              "", CONV_INCLUDE,                API_RUNTIME, 0}},
   {"device_functions.h",                                    {"hip/device_functions.h",                                "", CONV_INCLUDE,                API_RUNTIME, 0}},

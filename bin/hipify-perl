@@ -5635,6 +5635,7 @@ sub simpleSubstitutions {
     subst("cublas.h", "hipblas.h", "include_cuda_main_header");
     subst("cuda.h", "hip\/hip_runtime.h", "include_cuda_main_header");
     subst("cuda_runtime.h", "hip\/hip_runtime.h", "include_cuda_main_header");
+    subst("device_launch_parameters.h", "", "include");
     subst("cudnn.h", "hipDNN.h", "include_cuda_main_header");
     subst("cufft.h", "hipfft\/hipfft.h", "include_cuda_main_header");
     subst("curand.h", "hiprand\/hiprand.h", "include_cuda_main_header");
