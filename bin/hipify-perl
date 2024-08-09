@@ -1418,19 +1418,18 @@ my %experimental_funcs = (
     "curandOrdering" => "6.2.0",
     "cudaStreamLegacy" => "6.2.0",
     "cudaStreamBeginCaptureToGraph" => "6.2.0",
+    "cudaSetValidDevices" => "6.2.0",
+    "cudaMemcpy2DArrayToArray" => "6.2.0",
     "cudaLaunchAttributeValue" => "6.2.0",
     "cudaLaunchAttributePriority" => "6.2.0",
     "cudaLaunchAttributeID" => "6.2.0",
     "cudaLaunchAttributeCooperative" => "6.2.0",
     "cudaLaunchAttributeAccessPolicyWindow" => "6.2.0",
     "cudaKernelNodeAttributePriority" => "6.2.0",
-    "cudaGraphNodeSetParams" => "6.2.0",
     "cudaGraphKernelNodePortProgrammatic" => "6.2.0",
     "cudaGraphKernelNodePortLaunchCompletion" => "6.2.0",
     "cudaGraphKernelNodePortDefault" => "6.2.0",
     "cudaGraphInstantiateWithParams" => "6.2.0",
-    "cudaGraphExecNodeSetParams" => "6.2.0",
-    "cudaGraphExecGetFlags" => "6.2.0",
     "cudaGraphEdgeData_st" => "6.2.0",
     "cudaGraphEdgeData" => "6.2.0",
     "cudaGraphDependencyType_enum" => "6.2.0",
@@ -1603,15 +1602,18 @@ my %experimental_funcs = (
     "cublasCgbmv_64" => "6.2.0",
     "cublasAxpyEx_64" => "6.2.0",
     "cuStreamBeginCaptureToGraph" => "6.2.0",
-    "cuGraphNodeSetParams" => "6.2.0",
-    "cuGraphMemcpyNodeSetParams" => "6.2.0",
-    "cuGraphMemcpyNodeGetParams" => "6.2.0",
+    "cuMemcpyHtoAAsync_v2" => "6.2.0",
+    "cuMemcpyHtoAAsync" => "6.2.0",
+    "cuMemcpyDtoA_v2" => "6.2.0",
+    "cuMemcpyDtoA" => "6.2.0",
+    "cuMemcpyAtoHAsync_v2" => "6.2.0",
+    "cuMemcpyAtoHAsync" => "6.2.0",
+    "cuMemcpyAtoD_v2" => "6.2.0",
+    "cuMemcpyAtoD" => "6.2.0",
+    "cuMemcpyAtoA_v2" => "6.2.0",
+    "cuMemcpyAtoA" => "6.2.0",
     "cuGraphInstantiateWithParams" => "6.2.0",
-    "cuGraphExecNodeSetParams" => "6.2.0",
-    "cuGraphExecMemcpyNodeSetParams" => "6.2.0",
-    "cuGraphExecGetFlags" => "6.2.0",
     "cuGraphAddNode" => "6.2.0",
-    "cuGraphAddMemFreeNode" => "6.2.0",
     "cuGetProcAddress" => "6.2.0",
     "CUlaunchAttributeValue_union" => "6.2.0",
     "CUlaunchAttributeValue" => "6.2.0",
@@ -1783,22 +1785,24 @@ sub subst {
 }
 
 sub experimentalSubstitutions {
+    subst("cudaSetValidDevices", "hipSetValidDevices", "device");
+    subst("cuMemcpyAtoA", "hipMemcpyAtoA", "memory");
+    subst("cuMemcpyAtoA_v2", "hipMemcpyAtoA", "memory");
+    subst("cuMemcpyAtoD", "hipMemcpyAtoD", "memory");
+    subst("cuMemcpyAtoD_v2", "hipMemcpyAtoD", "memory");
+    subst("cuMemcpyAtoHAsync", "hipMemcpyAtoHAsync", "memory");
+    subst("cuMemcpyAtoHAsync_v2", "hipMemcpyAtoHAsync", "memory");
+    subst("cuMemcpyDtoA", "hipMemcpyDtoA", "memory");
+    subst("cuMemcpyDtoA_v2", "hipMemcpyDtoA", "memory");
+    subst("cuMemcpyHtoAAsync", "hipMemcpyHtoAAsync", "memory");
+    subst("cuMemcpyHtoAAsync_v2", "hipMemcpyHtoAAsync", "memory");
+    subst("cudaMemcpy2DArrayToArray", "hipMemcpy2DArrayToArray", "memory");
     subst("cuStreamBeginCaptureToGraph", "hipStreamBeginCaptureToGraph", "stream");
     subst("cudaStreamBeginCaptureToGraph", "hipStreamBeginCaptureToGraph", "stream");
-    subst("cuGraphAddMemFreeNode", "hipDrvGraphAddMemFreeNode", "graph");
     subst("cuGraphAddNode", "hipGraphAddNode", "graph");
-    subst("cuGraphExecGetFlags", "hipGraphExecGetFlags", "graph");
-    subst("cuGraphExecMemcpyNodeSetParams", "hipDrvGraphExecMemcpyNodeSetParams", "graph");
-    subst("cuGraphExecNodeSetParams", "hipGraphExecNodeSetParams", "graph");
     subst("cuGraphInstantiateWithParams", "hipGraphInstantiateWithParams", "graph");
-    subst("cuGraphMemcpyNodeGetParams", "hipDrvGraphMemcpyNodeGetParams", "graph");
-    subst("cuGraphMemcpyNodeSetParams", "hipDrvGraphMemcpyNodeSetParams", "graph");
-    subst("cuGraphNodeSetParams", "hipGraphNodeSetParams", "graph");
     subst("cudaGraphAddNode", "hipGraphAddNode", "graph");
-    subst("cudaGraphExecGetFlags", "hipGraphExecGetFlags", "graph");
-    subst("cudaGraphExecNodeSetParams", "hipGraphExecNodeSetParams", "graph");
     subst("cudaGraphInstantiateWithParams", "hipGraphInstantiateWithParams", "graph");
-    subst("cudaGraphNodeSetParams", "hipGraphNodeSetParams", "graph");
     subst("cuGetProcAddress", "hipGetProcAddress", "driver_entry_point");
     subst("cudaGetDriverEntryPoint", "hipGetProcAddress", "driver_entry_point");
     subst("cudaGetFuncBySymbol", "hipGetFuncBySymbol", "driver_interact");
@@ -9465,7 +9469,6 @@ sub warnUnsupportedFunctions {
         "cudaSharedmemCarveoutMaxL1",
         "cudaSharedmemCarveoutDefault",
         "cudaSharedCarveout",
-        "cudaSetValidDevices",
         "cudaSetDoubleForHost",
         "cudaSetDoubleForDevice",
         "cudaProfilerInitialize",
@@ -9484,7 +9487,6 @@ sub warnUnsupportedFunctions {
         "cudaMemcpy3DPeerParms",
         "cudaMemcpy3DPeerAsync",
         "cudaMemcpy3DPeer",
-        "cudaMemcpy2DArrayToArray",
         "cudaMemRangeAttributePreferredLocationType",
         "cudaMemRangeAttributePreferredLocationId",
         "cudaMemRangeAttributeLastPrefetchLocationType",
@@ -9558,6 +9560,7 @@ sub warnUnsupportedFunctions {
         "cudaGraphicsCubeFaceNegativeX",
         "cudaGraphicsCubeFace",
         "cudaGraphRemoveDependencies_v2",
+        "cudaGraphNodeSetParams",
         "cudaGraphNodeGetDependentNodes_v2",
         "cudaGraphNodeGetDependencies_v2",
         "cudaGraphKernelNodeUpdate",
@@ -9570,6 +9573,8 @@ sub warnUnsupportedFunctions {
         "cudaGraphExecUpdateResultInfo_st",
         "cudaGraphExecUpdateResultInfo",
         "cudaGraphExecUpdateErrorAttributesChanged",
+        "cudaGraphExecNodeSetParams",
+        "cudaGraphExecGetFlags",
         "cudaGraphDeviceNode_t",
         "cudaGraphDebugDotFlagsConditionalNodeParams",
         "cudaGraphConditionalNodeType",
@@ -10004,16 +10009,6 @@ sub warnUnsupportedFunctions {
         "cuMemsetD2D16",
         "cuMemcpyPeerAsync",
         "cuMemcpyPeer",
-        "cuMemcpyHtoAAsync_v2",
-        "cuMemcpyHtoAAsync",
-        "cuMemcpyDtoA_v2",
-        "cuMemcpyDtoA",
-        "cuMemcpyAtoHAsync_v2",
-        "cuMemcpyAtoHAsync",
-        "cuMemcpyAtoD_v2",
-        "cuMemcpyAtoD",
-        "cuMemcpyAtoA_v2",
-        "cuMemcpyAtoA",
         "cuMemcpyAsync",
         "cuMemcpy3DPeerAsync",
         "cuMemcpy3DPeer",
@@ -10059,11 +10054,18 @@ sub warnUnsupportedFunctions {
         "cuGraphicsD3D11RegisterResource",
         "cuGraphicsD3D10RegisterResource",
         "cuGraphRemoveDependencies_v2",
+        "cuGraphNodeSetParams",
         "cuGraphNodeGetDependentNodes_v2",
         "cuGraphNodeGetDependencies_v2",
+        "cuGraphMemcpyNodeSetParams",
+        "cuGraphMemcpyNodeGetParams",
         "cuGraphGetEdges_v2",
+        "cuGraphExecNodeSetParams",
+        "cuGraphExecMemcpyNodeSetParams",
+        "cuGraphExecGetFlags",
         "cuGraphConditionalHandleCreate",
         "cuGraphAddNode_v2",
+        "cuGraphAddMemFreeNode",
         "cuGraphAddDependencies_v2",
         "cuGLUnregisterBufferObject",
         "cuGLUnmapBufferObjectAsync",

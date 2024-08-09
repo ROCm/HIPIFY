@@ -64,6 +64,7 @@ int main() {
   // CHECK-NEXT: hipTexRef texref;
   // CHECK-NEXT: hipJitOption jit_option;
   // CHECK-NEXT: hipArray_t array_;
+  // CHECK-NEXT: hipArray_t array_dst;
   // CHECK-NEXT: HIP_ARRAY3D_DESCRIPTOR ARRAY3D_DESCRIPTOR;
   // CHECK-NEXT: HIP_ARRAY_DESCRIPTOR ARRAY_DESCRIPTOR;
   // CHECK-NEXT: hipIpcEventHandle_t ipcEventHandle;
@@ -93,6 +94,7 @@ int main() {
   CUtexref texref;
   CUjit_option jit_option;
   CUarray array_;
+  CUarray array_dst;
   CUDA_ARRAY3D_DESCRIPTOR ARRAY3D_DESCRIPTOR;
   CUDA_ARRAY_DESCRIPTOR ARRAY_DESCRIPTOR;
   CUipcEventHandle ipcEventHandle;
@@ -436,6 +438,7 @@ int main() {
 
   void* dsthost = nullptr;
   size_t offset = 0;
+  size_t offset_dst = 0;
   // CUDA: CUresult CUDAAPI cuMemcpyAtoH(void *dstHost, CUarray srcArray, size_t srcOffset, size_t ByteCount);
   // HIP: hipError_t hipMemcpyAtoH(void* dst, hipArray* srcArray, size_t srcOffset, size_t count);
   // CHECK: result = hipMemcpyAtoH(dsthost, array_, offset, bytes);
@@ -990,6 +993,41 @@ int main() {
   // CHECK: result = hipTexRefGetArray(&array_, texref);
   result = cuTexRefGetArray(&array_, texref);
 
+  // CUDA: CUresult CUDAAPI cuMemcpyAtoA_v2(CUarray dstArray, size_t dstOffset, CUarray srcArray, size_t srcOffset, size_t ByteCount);
+  // HIP: hipError_t hipMemcpyAtoA(hipArray_t dstArray, size_t dstOffset, hipArray_t srcArray, size_t srcOffset, size_t ByteCount);
+  // CHECK: result = hipMemcpyAtoA(array_dst, offset_dst, array_, offset, bytes);
+  // CHECK-NEXT: result = hipMemcpyAtoA(array_dst, offset_dst, array_, offset, bytes);
+  result = cuMemcpyAtoA(array_dst, offset_dst, array_, offset, bytes);
+  result = cuMemcpyAtoA_v2(array_dst, offset_dst, array_, offset, bytes);
+
+  // CUDA: CUresult CUDAAPI cuMemcpyAtoD_v2(CUdeviceptr dstDevice, CUarray srcArray, size_t srcOffset, size_t ByteCount);
+  // HIP: hipError_t hipMemcpyAtoD(hipDeviceptr_t dstDevice, hipArray_t srcArray, size_t srcOffset, size_t ByteCount);
+  // CHECK: result = hipMemcpyAtoD(deviceptr, array_, offset, bytes);
+  // CHECK-NEXT: result = hipMemcpyAtoD(deviceptr, array_, offset, bytes);
+  result = cuMemcpyAtoD(deviceptr, array_, offset, bytes);
+  result = cuMemcpyAtoD_v2(deviceptr, array_, offset, bytes);
+
+  // CUDA: CUresult CUDAAPI cuMemcpyDtoA_v2(CUarray dstArray, size_t dstOffset, CUdeviceptr srcDevice, size_t ByteCount);
+  // HIP: hipError_t hipMemcpyDtoA(hipArray_t dstArray, size_t dstOffset, hipDeviceptr_t srcDevice, size_t ByteCount);
+  // CHECK: result = hipMemcpyDtoA(array_, offset, deviceptr, bytes);
+  // CHECK-NEXT: result = hipMemcpyDtoA(array_, offset, deviceptr, bytes);
+  result = cuMemcpyDtoA(array_, offset, deviceptr, bytes);
+  result = cuMemcpyDtoA_v2(array_, offset, deviceptr, bytes);
+
+  // CUDA: CUresult CUDAAPI cuMemcpyAtoHAsync_v2(void *dstHost, CUarray srcArray, size_t srcOffset, size_t ByteCount, CUstream hStream);
+  // HIP: hipError_t hipMemcpyAtoHAsync(void* dstHost, hipArray_t srcArray, size_t srcOffset, size_t ByteCount, hipStream_t stream);
+  // CHECK: result = hipMemcpyAtoHAsync(dsthost, array_, offset, bytes, stream);
+  // CHECK-NEXT: result = hipMemcpyAtoHAsync(dsthost, array_, offset, bytes, stream);
+  result = cuMemcpyAtoHAsync(dsthost, array_, offset, bytes, stream);
+  result = cuMemcpyAtoHAsync_v2(dsthost, array_, offset, bytes, stream);
+
+  // CUDA: CUresult CUDAAPI cuMemcpyHtoAAsync_v2(CUarray dstArray, size_t dstOffset, const void *srcHost, size_t ByteCount, CUstream hStream);
+  // HIP: hipError_t hipMemcpyHtoAAsync(hipArray_t dstArray, size_t dstOffset, const void* srcHost, size_t ByteCount, hipStream_t stream);
+  // CHECK: result = hipMemcpyHtoAAsync(array_, offset, dsthost, bytes, stream);
+  // CHECK-NEXT: result = hipMemcpyHtoAAsync(array_, offset, dsthost, bytes, stream);
+  result = cuMemcpyHtoAAsync(array_, offset, dsthost, bytes, stream);
+  result = cuMemcpyHtoAAsync_v2(array_, offset, dsthost, bytes, stream);
+
 #if CUDA_VERSION >= 8000
   // CHECK: hipMemRangeAttribute MemoryRangeAttribute;
   // CHECK-NEXT: hipMemoryAdvise MemoryAdvise;
@@ -1214,16 +1252,6 @@ int main() {
   // CHECK: result = hipGraphLaunch(graphExec, stream);
   result = cuGraphLaunch(graphExec, stream);
 
-  // CUDA: CUresult CUDAAPI cuGraphMemcpyNodeGetParams(CUgraphNode hNode, CUDA_MEMCPY3D *nodeParams);
-  // HIP: hipError_t hipDrvGraphMemcpyNodeGetParams(hipGraphNode_t node, hipMemcpy3DParms* pNodeParams);
-  // CHECK: result = hipDrvGraphMemcpyNodeGetParams(graphNode, &MEMCPY3D);
-  result = cuGraphMemcpyNodeGetParams(graphNode, &MEMCPY3D);
-
-  // CUDA: CUresult CUDAAPI cuGraphMemcpyNodeSetParams(CUgraphNode hNode, const CUDA_MEMCPY3D *nodeParams);
-  // HIP: hipError_t hipDrvGraphMemcpyNodeSetParams(hipGraphNode_t node, const hipMemcpy3DParms* pNodeParams);
-  // CHECK: result = hipDrvGraphMemcpyNodeSetParams(graphNode, &MEMCPY3D);
-  result = cuGraphMemcpyNodeSetParams(graphNode, &MEMCPY3D);
-
   // CUDA: CUresult CUDAAPI cuGraphMemsetNodeGetParams(CUgraphNode hNode, CUDA_MEMSET_NODE_PARAMS *nodeParams);
   // HIP: hipError_t hipGraphMemsetNodeGetParams(hipGraphNode_t node, hipMemsetParams* pNodeParams);
   // CHECK: result = hipGraphMemsetNodeGetParams(graphNode, &MEMSET_NODE_PARAMS);
@@ -1435,11 +1463,6 @@ int main() {
   // HIP: hipError_t hipMemUnmap(void* ptr, size_t size);
   // CHECK: result = hipMemUnmap(deviceptr, bytes);
   result = cuMemUnmap(deviceptr, bytes);
-
-  // CUDA: CUresult CUDAAPI cuGraphExecMemcpyNodeSetParams(CUgraphExec hGraphExec, CUgraphNode hNode, const CUDA_MEMCPY3D *copyParams, CUcontext ctx);
-  // HIP: hipError_t hipDrvGraphExecMemcpyNodeSetParams(hipGraphExec_t hGraphExec, hipGraphNode_t hNode, const HIP_MEMCPY3D* copyParams, hipCtx_t ctx);
-  // CHECK: result = hipDrvGraphExecMemcpyNodeSetParams(graphExec, graphNode, &MEMCPY3D, context);
-  result = cuGraphExecMemcpyNodeSetParams(graphExec, graphNode, &MEMCPY3D, context);
 #endif
 
 #if CUDA_VERSION >= 10020 && CUDA_VERSION < 12000
@@ -1777,11 +1800,6 @@ int main() {
   // CHECK: result = hipGraphMemAllocNodeGetParams(graphNode, &MEM_ALLOC_NODE_PARAMS);
   result = cuGraphMemAllocNodeGetParams(graphNode, &MEM_ALLOC_NODE_PARAMS);
 
-  // CUDA: CUresult CUDAAPI cuGraphAddMemFreeNode(CUgraphNode *phGraphNode, CUgraph hGraph, const CUgraphNode *dependencies, size_t numDependencies, CUdeviceptr dptr);
-  // HIP: hipError_t hipDrvGraphAddMemFreeNode(hipGraphNode_t* pGraphNode, hipGraph_t graph, const hipGraphNode_t* pDependencies, size_t numDependencies, void* dev_ptr);
-  // CHECK: result = hipDrvGraphAddMemFreeNode(&graphNode, graph, &graphNode2, bytes, deviceptr);
-  result = cuGraphAddMemFreeNode(&graphNode, graph, &graphNode2, bytes, deviceptr);
-
   // CUDA: CUresult CUDAAPI cuGraphMemFreeNodeGetParams(CUgraphNode hNode, CUdeviceptr *dptr_out);
   // HIP: hipError_t hipGraphMemFreeNodeGetParams(hipGraphNode_t node, void* dev_ptr);
   // CHECK: result = hipGraphMemFreeNodeGetParams(graphNode, &deviceptr);
@@ -1868,11 +1886,6 @@ int main() {
   // HIP: hipError_t hipGraphInstantiateWithParams(hipGraphExec_t* pGraphExec, hipGraph_t graph, hipGraphInstantiateParams *instantiateParams);
   // CHECK: result = hipGraphInstantiateWithParams(&graphExec, graph, &GRAPH_INSTANTIATE_PARAMS);
   result = cuGraphInstantiateWithParams(&graphExec, graph, &GRAPH_INSTANTIATE_PARAMS);
-
-  // CUDA: CUresult CUDAAPI cuGraphExecGetFlags(CUgraphExec hGraphExec, cuuint64_t *flags);
-  // HIP: hipError_t hipGraphExecGetFlags(hipGraphExec_t graphExec, unsigned long long* flags);
-  // CHECK: result = hipGraphExecGetFlags(graphExec, &ull);
-  result = cuGraphExecGetFlags(graphExec, &ull);
 #endif
 
 #if CUDA_VERSION >= 12020
@@ -1883,16 +1896,6 @@ int main() {
   // HIP: hipError_t hipGraphAddNode(hipGraphNode_t *pGraphNode, hipGraph_t graph, const hipGraphNode_t *pDependencies, size_t numDependencies, hipGraphNodeParams *nodeParams);
   // CHECK: result = hipGraphAddNode(&graphNode, graph, &graphNode2, bytes, &graphNodeParams);
   result = cuGraphAddNode(&graphNode, graph, &graphNode2, bytes, &graphNodeParams);
-
-  // CUDA: CUresult CUDAAPI cuGraphNodeSetParams(CUgraphNode hNode, CUgraphNodeParams *nodeParams);
-  // HIP: hipError_t hipGraphNodeSetParams(hipGraphNode_t node, hipGraphNodeParams *nodeParams);
-  // CHECK: result = hipGraphNodeSetParams(graphNode, &graphNodeParams);
-  result = cuGraphNodeSetParams(graphNode, &graphNodeParams);
-
-  // CUDA: CUresult CUDAAPI cuGraphExecNodeSetParams(CUgraphExec hGraphExec, CUgraphNode hNode, CUgraphNodeParams *nodeParams);
-  // HIP: hipError_t hipGraphExecNodeSetParams(hipGraphExec_t graphExec, hipGraphNode_t node, hipGraphNodeParams* nodeParams);
-  // CHECK: result = hipGraphExecNodeSetParams(graphExec, graphNode, &graphNodeParams);
-  result = cuGraphExecNodeSetParams(graphExec, graphNode, &graphNodeParams);
 #endif
 
 #if CUDA_VERSION >= 12030
