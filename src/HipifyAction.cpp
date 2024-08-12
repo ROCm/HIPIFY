@@ -354,7 +354,7 @@ std::map<std::string, std::vector<ArgCastStruct>> FuncArgCasts {
     {
       {
         {
-          {2, {e_add_const_argument, cw_None, "hipHostMallocDefault"}}
+          {3, {e_add_const_argument, cw_None, "hipHostMallocDefault"}}
         }
       }
     }
@@ -2736,6 +2736,8 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
               OS << c.second.constValToAddOrReplace << ", ";
             else
               OS << ", " << c.second.constValToAddOrReplace;
+            clang::SourceRange replacementRange = getWriteRange(*Result.SourceManager, { s, s });
+            s = replacementRange.getBegin();
             break;
           }
           case e_add_var_argument:
