@@ -5625,6 +5625,7 @@ sub simpleSubstitutions {
     subst("curand_precalc.h", "hiprand\/hiprand_kernel.h", "include");
     subst("curand_uniform.h", "hiprand\/hiprand_kernel.h", "include");
     subst("device_functions.h", "hip\/device_functions.h", "include");
+    subst("device_launch_parameters.h", "", "include");
     subst("driver_types.h", "hip\/driver_types.h", "include");
     subst("library_types.h", "hip\/library_types.h", "include");
     subst("math_constants.h", "hip\/hip_math_constants.h", "include");
@@ -5635,7 +5636,6 @@ sub simpleSubstitutions {
     subst("cublas.h", "hipblas.h", "include_cuda_main_header");
     subst("cuda.h", "hip\/hip_runtime.h", "include_cuda_main_header");
     subst("cuda_runtime.h", "hip\/hip_runtime.h", "include_cuda_main_header");
-    subst("device_launch_parameters.h", "", "include");
     subst("cudnn.h", "hipDNN.h", "include_cuda_main_header");
     subst("cufft.h", "hipfft\/hipfft.h", "include_cuda_main_header");
     subst("curand.h", "hiprand\/hiprand.h", "include_cuda_main_header");
