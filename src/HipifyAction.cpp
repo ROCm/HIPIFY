@@ -354,7 +354,7 @@ std::map<std::string, std::vector<ArgCastStruct>> FuncArgCasts {
     {
       {
         {
-          {2, {e_add_const_argument, cw_None, "hipHostMallocDefault"}}
+          {3, {e_add_const_argument, cw_None, "hipHostMallocDefault"}}
         }
       }
     }
@@ -2660,6 +2660,7 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
     auto it = FuncArgCasts.find(sName);
     if (it == FuncArgCasts.end()) return false;
     auto castStructs = it->second;
+    auto &SM = *Result.SourceManager;
     for (auto cc : castStructs) {
       if (cc.isToMIOpen != TranslateToMIOpen || cc.isToRoc != TranslateToRoc) continue;
       clang::LangOptions DefaultLangOptions;
@@ -2668,17 +2669,17 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
         unsigned int argNum = c.first;
         clang::SmallString<40> XStr;
         llvm::raw_svector_ostream OS(XStr);
-        auto &SM = *Result.SourceManager;
         clang::SourceRange sr, replacementRange;
         clang::SourceLocation s, e;
         if (argNum < call->getNumArgs()) {
           sr = call->getArg(argNum)->getSourceRange();
           replacementRange = getWriteRange(SM, { sr.getBegin(), sr.getEnd() });
-          s = replacementRange.getBegin();
-          e = replacementRange.getEnd();
         } else {
           s = e = call->getEndLoc();
+          replacementRange = getWriteRange(SM, { s, e });
         }
+        s = replacementRange.getBegin();
+        e = replacementRange.getEnd();
         switch (c.second.castType) {
           case e_remove_argument:
           {
@@ -2695,6 +2696,8 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
                 s = prevComma->getLocation();
               }
             }
+            replacementRange = getWriteRange(SM, { s, e });
+            e = replacementRange.getEnd();
             length = SM.getCharacterData(e) - SM.getCharacterData(s);
             break;
           }
@@ -2727,6 +2730,8 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
               e = call->getArg(argNum + c.second.numberToMoveOrCopy)->getBeginLoc();
             else
               e = call->getEndLoc();
+            replacementRange = getWriteRange(SM, { s, e });
+            e = replacementRange.getEnd();
             length = SM.getCharacterData(e) - SM.getCharacterData(s);
             break;
           }

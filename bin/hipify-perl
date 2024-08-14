@@ -5625,6 +5625,7 @@ sub simpleSubstitutions {
     subst("curand_precalc.h", "hiprand\/hiprand_kernel.h", "include");
     subst("curand_uniform.h", "hiprand\/hiprand_kernel.h", "include");
     subst("device_functions.h", "hip\/device_functions.h", "include");
+    subst("device_launch_parameters.h", "", "include");
     subst("driver_types.h", "hip\/driver_types.h", "include");
     subst("library_types.h", "hip\/library_types.h", "include");
     subst("math_constants.h", "hip\/hip_math_constants.h", "include");
