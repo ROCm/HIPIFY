@@ -13,6 +13,7 @@ Documentation for HIPIFY is available at
 
 * Removed some post HIP 6.2 APIs from support
 * Added hipification support for HIP functions `hipSetValidDevices`, `hipMemcpy2DArrayToArray`, `hipMemcpyAtoA`, `hipMemcpyAtoD`, `hipMemcpyAtoA`, `hipMemcpyAtoHAsync`, and `hipMemcpyHtoAAsync`
+* Fixed an issue with `Skipped some replacements` when hipification didn't occur at all
 
 ## HIPIFY for ROCm 6.2.1
 
