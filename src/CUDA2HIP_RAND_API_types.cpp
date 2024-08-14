@@ -25,8 +25,8 @@ THE SOFTWARE.
 // Map of all functions
 const std::map<llvm::StringRef, hipCounter> CUDA_RAND_TYPE_NAME_MAP {
   // RAND Host types
-  {"curandStatus",                                  {"hiprandStatus",                                  "", CONV_TYPE, API_RAND, 1}},
-  {"curandStatus_t",                                {"hiprandStatus_t",                                "", CONV_TYPE, API_RAND, 1}},
+  {"curandStatus",                                  {"hiprandStatus",                                  "rocrand_status",                                                  CONV_TYPE, API_RAND, 1}},
+  {"curandStatus_t",                                {"hiprandStatus_t",                                "rocrand_status",                                                  CONV_TYPE, API_RAND, 1}},
   {"curandRngType",                                 {"hiprandRngType_t",                               "", CONV_TYPE, API_RAND, 1}},
   {"curandRngType_t",                               {"hiprandRngType_t",                               "", CONV_TYPE, API_RAND, 1}},
   {"curandGenerator_st",                            {"hiprandGenerator_st",                            "", CONV_TYPE, API_RAND, 1}},
@@ -204,4 +204,6 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RAND_TYPE_NAME_VER_MAP {
   {"hiprandStateScrambledSobol64_t",                {HIP_6020, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hiprandStateSobol64",                           {HIP_6020, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hiprandStateSobol64_t",                         {HIP_6020, HIP_0,    HIP_0,  HIP_LATEST}},
+
+  {"rocrand_status",                                {HIP_1051, HIP_0,    HIP_0   }},
 };

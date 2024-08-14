@@ -87,6 +87,11 @@ namespace doc {
   const string sRAND = "CURAND_API_supported_by_HIP";
   const string sRAND_md = sRAND + md_ext;
   const string sRAND_csv = sRAND + csv_ext;
+  const string sRAND_and_ROC_md = sRAND + sandROC + md_ext;
+  const string sRAND_and_ROC_csv = sRAND + sandROC + csv_ext;
+  const string sROCRAND = "CURAND_API_supported_by_ROC";
+  const string sROCRAND_md = sROCRAND + md_ext;
+  const string sROCRAND_csv = sROCRAND + csv_ext;
   const string sCURAND = "CURAND";
 
   const string sandMIOPEN = "_and_MIOPEN";
@@ -636,7 +641,7 @@ namespace doc {
 
   class RAND: public DOC {
     public:
-      RAND(const string &outDir): DOC(outDir) {}
+      RAND(const string &outDir): DOC(outDir) { hasROC = true; }
       virtual ~RAND() {}
     protected:
       const sectionMap &getSections() const override { return CUDA_RAND_API_SECTION_MAP; }
@@ -648,12 +653,28 @@ namespace doc {
       const hipVersionMap &getHipTypeVersions() const override { return HIP_RAND_TYPE_NAME_VER_MAP; }
       const string &getName() const override { return sCURAND; }
       const string &getFileName(docType format) const override {
-        switch (format) {
+          switch (format) {
           case none:
           default: return sEmpty;
-          case md: return sRAND_md;
-          case csv: return sRAND_csv;
-        }
+          case md: return roc == joint ? sRAND_and_ROC_md : sRAND_md;
+          case csv: return roc == joint ? sRAND_and_ROC_csv : sRAND_csv;
+          }
+      }
+  };
+
+  class ROCRAND : public RAND {
+  public:
+      ROCRAND(const string& outDir) : RAND(outDir) { hasROC = false; isROC = true; }
+      virtual ~ROCRAND() {}
+  protected:
+      const string& getAPI() const override { return sROC; }
+      const string& getFileName(docType format) const override {
+          switch (format) {
+          case none:
+          default: return sEmpty;
+          case md: return sROCRAND_md;
+          case csv: return sROCRAND_csv;
+          }
       }
   };
 
@@ -878,14 +899,16 @@ namespace doc {
     ROCSOLVER rocsolver(sOut);
     MIOPEN miopen(sOut);
     ROCSPARSE rocsparse(sOut);
+    RAND rand(sOut);
+    docs.addDoc(&rand);
+    ROCRAND rocrand(sOut);
     if (docRoc == separate) {
       docs.addDoc(&rocblas);
+      docs.addDoc(&rocrand);
       docs.addDoc(&miopen);
       docs.addDoc(&rocsparse);
       docs.addDoc(&rocsolver);
     }
-    RAND rand(sOut);
-    docs.addDoc(&rand);
     DNN dnn(sOut);
     docs.addDoc(&dnn);
     FFT fft(sOut);

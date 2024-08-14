@@ -3176,6 +3176,8 @@ sub rocSubstitutions {
     subst("cudnnSoftmaxMode_t", "miopenSoftmaxMode_t", "type");
     subst("cudnnStatus_t", "miopenStatus_t", "type");
     subst("cudnnTensorDescriptor_t", "miopenTensorDescriptor_t", "type");
+    subst("curandStatus", "rocrand_status", "type");
+    subst("curandStatus_t", "rocrand_status", "type");
     subst("cusolverDnHandle_t", "rocblas_handle", "type");
     subst("cusolverEigMode_t", "rocblas_evect", "type");
     subst("cusolverEigRange_t", "rocblas_erange", "type");
