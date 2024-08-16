@@ -5619,7 +5619,7 @@ sub simpleSubstitutions {
     subst("curand_mtgp32.h", "hiprand\/hiprand_kernel.h", "include");
     subst("curand_mtgp32_host.h", "hiprand\/hiprand_mtgp32_host.h", "include");
     subst("curand_mtgp32_kernel.h", "hiprand\/hiprand_kernel.h", "include");
-    subst("curand_mtgp32dc_p_11213.h", "rocrand_mtgp32_11213.h", "include");
+    subst("curand_mtgp32dc_p_11213.h", "rocrand\/rocrand_mtgp32_11213.h", "include");
     subst("curand_normal.h", "hiprand\/hiprand_kernel.h", "include");
     subst("curand_normal_static.h", "hiprand\/hiprand_kernel.h", "include");
     subst("curand_philox4x32_x.h", "hiprand\/hiprand_kernel.h", "include");
