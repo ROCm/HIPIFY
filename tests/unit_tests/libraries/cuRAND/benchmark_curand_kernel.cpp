@@ -39,7 +39,7 @@
 #include <curand_kernel.h>
 // CHECK: #include <hiprand/hiprand_mtgp32_host.h>
 #include <curand_mtgp32_host.h>
-// CHECK: #include <rocrand_mtgp32_11213.h>
+// CHECK: #include <rocrand/rocrand_mtgp32_11213.h>
 #include <curand_mtgp32dc_p_11213.h>
 
 // CHECK: if ((x) != hipSuccess) {
