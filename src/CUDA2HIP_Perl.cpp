@@ -373,15 +373,16 @@ namespace perl {
     bool bTranslateToRoc = TranslateToRoc;
     TranslateToRoc = true;
     for (int i = 0; i < NUM_CONV_TYPES; ++i) {
-      if (i == CONV_INCLUDE_CUDA_MAIN_H || i == CONV_INCLUDE_CUDA_MAIN_V2_H) {
+      if (i == CONV_INCLUDE_CUDA_MAIN_H || i == CONV_INCLUDE_CUDA_MAIN_V2_H || i == CONV_INCLUDE) {
         for (auto &ma : CUDA_INCLUDE_MAP) {
           if (i == ma.second.type) {
+            if (!Statistics::isToRoc(ma.second)) continue;
+            string sROC = ma.second.rocName.str();
+            if (sROC.empty()) continue;
             string sCUDA = ma.first.str();
-            if (sCUDA != "cublas.h" && sCUDA != "cublas_v2.h") continue;
-            string sHIP = ma.second.rocName.str();
             sCUDA = regex_replace(sCUDA, regex("/"), "\\/");
-            sHIP = regex_replace(sHIP, regex("/"), "\\/");
-            *streamPtr.get() << tab << "subst(\"" << sCUDA << "\", \"" << sHIP << "\", \"" << counterNames[ma.second.type] << "\");" << endl;
+            sROC = regex_replace(sROC, regex("/"), "\\/");
+            *streamPtr.get() << tab << "subst(\"" << sCUDA << "\", \"" << sROC << "\", \"" << counterNames[ma.second.type] << "\");" << endl;
           }
         }
       } else {
