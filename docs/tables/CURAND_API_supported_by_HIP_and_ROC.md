@@ -40,19 +40,19 @@
 |`CURAND_RNG_TEST`| | | | |`HIPRAND_RNG_TEST`|1.5.0| | | | | | | | | | |
 |`CURAND_SCRAMBLED_DIRECTION_VECTORS_32_JOEKUO6`| | | | |`HIPRAND_SCRAMBLED_DIRECTION_VECTORS_32_JOEKUO6`|6.0.0| | | | | | | | | | |
 |`CURAND_SCRAMBLED_DIRECTION_VECTORS_64_JOEKUO6`| | | | |`HIPRAND_SCRAMBLED_DIRECTION_VECTORS_64_JOEKUO6`|6.0.0| | | | | | | | | | |
-|`CURAND_STATUS_ALLOCATION_FAILED`| | | | |`HIPRAND_STATUS_ALLOCATION_FAILED`|1.5.0| | | | | | | | | | |
+|`CURAND_STATUS_ALLOCATION_FAILED`| | | | |`HIPRAND_STATUS_ALLOCATION_FAILED`|1.5.0| | | | |`ROCRAND_STATUS_ALLOCATION_FAILED`|1.5.0| | | | |
 |`CURAND_STATUS_ARCH_MISMATCH`| | | | |`HIPRAND_STATUS_ARCH_MISMATCH`|1.5.0| | | | | | | | | | |
-|`CURAND_STATUS_DOUBLE_PRECISION_REQUIRED`| | | | |`HIPRAND_STATUS_DOUBLE_PRECISION_REQUIRED`|1.5.0| | | | | | | | | | |
+|`CURAND_STATUS_DOUBLE_PRECISION_REQUIRED`| | | | |`HIPRAND_STATUS_DOUBLE_PRECISION_REQUIRED`|1.5.0| | | | |`ROCRAND_STATUS_DOUBLE_PRECISION_REQUIRED`|1.5.0| | | | |
 |`CURAND_STATUS_INITIALIZATION_FAILED`| | | | |`HIPRAND_STATUS_INITIALIZATION_FAILED`|1.5.0| | | | | | | | | | |
-|`CURAND_STATUS_INTERNAL_ERROR`| | | | |`HIPRAND_STATUS_INTERNAL_ERROR`|1.5.0| | | | | | | | | | |
-|`CURAND_STATUS_LAUNCH_FAILURE`| | | | |`HIPRAND_STATUS_LAUNCH_FAILURE`|1.5.0| | | | | | | | | | |
-|`CURAND_STATUS_LENGTH_NOT_MULTIPLE`| | | | |`HIPRAND_STATUS_LENGTH_NOT_MULTIPLE`|1.5.0| | | | | | | | | | |
-|`CURAND_STATUS_NOT_INITIALIZED`| | | | |`HIPRAND_STATUS_NOT_INITIALIZED`|1.5.0| | | | | | | | | | |
-|`CURAND_STATUS_OUT_OF_RANGE`| | | | |`HIPRAND_STATUS_OUT_OF_RANGE`|1.5.0| | | | | | | | | | |
+|`CURAND_STATUS_INTERNAL_ERROR`| | | | |`HIPRAND_STATUS_INTERNAL_ERROR`|1.5.0| | | | |`ROCRAND_STATUS_INTERNAL_ERROR`|1.5.0| | | | |
+|`CURAND_STATUS_LAUNCH_FAILURE`| | | | |`HIPRAND_STATUS_LAUNCH_FAILURE`|1.5.0| | | | |`ROCRAND_STATUS_LAUNCH_FAILURE`|1.5.0| | | | |
+|`CURAND_STATUS_LENGTH_NOT_MULTIPLE`| | | | |`HIPRAND_STATUS_LENGTH_NOT_MULTIPLE`|1.5.0| | | | |`ROCRAND_STATUS_LENGTH_NOT_MULTIPLE`|1.5.0| | | | |
+|`CURAND_STATUS_NOT_INITIALIZED`| | | | |`HIPRAND_STATUS_NOT_INITIALIZED`|1.5.0| | | | |`ROCRAND_STATUS_NOT_CREATED`|1.5.0| | | | |
+|`CURAND_STATUS_OUT_OF_RANGE`| | | | |`HIPRAND_STATUS_OUT_OF_RANGE`|1.5.0| | | | |`ROCRAND_STATUS_OUT_OF_RANGE`|1.5.0| | | | |
 |`CURAND_STATUS_PREEXISTING_FAILURE`| | | | |`HIPRAND_STATUS_PREEXISTING_FAILURE`|1.5.0| | | | | | | | | | |
-|`CURAND_STATUS_SUCCESS`| | | | |`HIPRAND_STATUS_SUCCESS`|1.5.0| | | | | | | | | | |
-|`CURAND_STATUS_TYPE_ERROR`| | | | |`HIPRAND_STATUS_TYPE_ERROR`|1.5.0| | | | | | | | | | |
-|`CURAND_STATUS_VERSION_MISMATCH`| | | | |`HIPRAND_STATUS_VERSION_MISMATCH`|1.5.0| | | | | | | | | | |
+|`CURAND_STATUS_SUCCESS`| | | | |`HIPRAND_STATUS_SUCCESS`|1.5.0| | | | |`ROCRAND_STATUS_SUCCESS`|1.5.0| | | | |
+|`CURAND_STATUS_TYPE_ERROR`| | | | |`HIPRAND_STATUS_TYPE_ERROR`|1.5.0| | | | |`ROCRAND_STATUS_TYPE_ERROR`|1.5.0| | | | |
+|`CURAND_STATUS_VERSION_MISMATCH`| | | | |`HIPRAND_STATUS_VERSION_MISMATCH`|1.5.0| | | | |`ROCRAND_STATUS_VERSION_MISMATCH`|1.5.0| | | | |
 |`curandDirectionVectorSet`| | | | |`hiprandDirectionVectorSet_t`|6.0.0| | | | | | | | | | |
 |`curandDirectionVectorSet_t`| | | | |`hiprandDirectionVectorSet_t`|6.0.0| | | | | | | | | | |
 |`curandDirectionVectors32_t`| | | | |`hiprandDirectionVectors32_t`|1.5.0| | | | | | | | | | |
@@ -97,8 +97,8 @@
 |`curandStateXORWOW`| | | | |`hiprandStateXORWOW`|1.8.0| | | | | | | | | | |
 |`curandStateXORWOW_t`| | | | |`hiprandStateXORWOW_t`|1.5.0| | | | | | | | | | |
 |`curandState_t`| | | | |`hiprandState_t`|1.5.0| | | | | | | | | | |
-|`curandStatus`| | | | |`hiprandStatus`|1.5.0| | | | |`rocrand_status`|1.5.1| | | | |
-|`curandStatus_t`| | | | |`hiprandStatus_t`|1.5.0| | | | |`rocrand_status`|1.5.1| | | | |
+|`curandStatus`| | | | |`hiprandStatus`|1.5.0| | | | |`rocrand_status`|1.5.0| | | | |
+|`curandStatus_t`| | | | |`hiprandStatus_t`|1.5.0| | | | |`rocrand_status`|1.5.0| | | | |
 
 ## **2. Host API Functions**
 

@@ -25,8 +25,8 @@ THE SOFTWARE.
 // Map of all functions
 const std::map<llvm::StringRef, hipCounter> CUDA_RAND_TYPE_NAME_MAP {
   // RAND Host types
-  {"curandStatus",                                  {"hiprandStatus",                                  "rocrand_status",                                                  CONV_TYPE, API_RAND, 1}},
-  {"curandStatus_t",                                {"hiprandStatus_t",                                "rocrand_status",                                                  CONV_TYPE, API_RAND, 1}},
+  {"curandStatus",                                  {"hiprandStatus",                                  "rocrand_status",                                                 CONV_TYPE, API_RAND, 1}},
+  {"curandStatus_t",                                {"hiprandStatus_t",                                "rocrand_status",                                                 CONV_TYPE, API_RAND, 1}},
   {"curandRngType",                                 {"hiprandRngType_t",                               "", CONV_TYPE, API_RAND, 1}},
   {"curandRngType_t",                               {"hiprandRngType_t",                               "", CONV_TYPE, API_RAND, 1}},
   {"curandGenerator_st",                            {"hiprandGenerator_st",                            "", CONV_TYPE, API_RAND, 1}},
@@ -75,19 +75,19 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RAND_TYPE_NAME_MAP {
   {"curandState_t",                                 {"hiprandState_t",                                 "", CONV_TYPE, API_RAND, 1}},
 
   // RAND function call status types (enum curandStatus)
-  {"CURAND_STATUS_SUCCESS",                         {"HIPRAND_STATUS_SUCCESS",                         "", CONV_NUMERIC_LITERAL, API_RAND, 1}},
-  {"CURAND_STATUS_VERSION_MISMATCH",                {"HIPRAND_STATUS_VERSION_MISMATCH",                "", CONV_NUMERIC_LITERAL, API_RAND, 1}},
-  {"CURAND_STATUS_NOT_INITIALIZED",                 {"HIPRAND_STATUS_NOT_INITIALIZED",                 "", CONV_NUMERIC_LITERAL, API_RAND, 1}},
-  {"CURAND_STATUS_ALLOCATION_FAILED",               {"HIPRAND_STATUS_ALLOCATION_FAILED",               "", CONV_NUMERIC_LITERAL, API_RAND, 1}},
-  {"CURAND_STATUS_TYPE_ERROR",                      {"HIPRAND_STATUS_TYPE_ERROR",                      "", CONV_NUMERIC_LITERAL, API_RAND, 1}},
-  {"CURAND_STATUS_OUT_OF_RANGE",                    {"HIPRAND_STATUS_OUT_OF_RANGE",                    "", CONV_NUMERIC_LITERAL, API_RAND, 1}},
-  {"CURAND_STATUS_LENGTH_NOT_MULTIPLE",             {"HIPRAND_STATUS_LENGTH_NOT_MULTIPLE",             "", CONV_NUMERIC_LITERAL, API_RAND, 1}},
-  {"CURAND_STATUS_DOUBLE_PRECISION_REQUIRED",       {"HIPRAND_STATUS_DOUBLE_PRECISION_REQUIRED",       "", CONV_NUMERIC_LITERAL, API_RAND, 1}},
-  {"CURAND_STATUS_LAUNCH_FAILURE",                  {"HIPRAND_STATUS_LAUNCH_FAILURE",                  "", CONV_NUMERIC_LITERAL, API_RAND, 1}},
-  {"CURAND_STATUS_PREEXISTING_FAILURE",             {"HIPRAND_STATUS_PREEXISTING_FAILURE",             "", CONV_NUMERIC_LITERAL, API_RAND, 1}},
-  {"CURAND_STATUS_INITIALIZATION_FAILED",           {"HIPRAND_STATUS_INITIALIZATION_FAILED",           "", CONV_NUMERIC_LITERAL, API_RAND, 1}},
-  {"CURAND_STATUS_ARCH_MISMATCH",                   {"HIPRAND_STATUS_ARCH_MISMATCH",                   "", CONV_NUMERIC_LITERAL, API_RAND, 1}},
-  {"CURAND_STATUS_INTERNAL_ERROR",                  {"HIPRAND_STATUS_INTERNAL_ERROR",                  "", CONV_NUMERIC_LITERAL, API_RAND, 1}},
+  {"CURAND_STATUS_SUCCESS",                         {"HIPRAND_STATUS_SUCCESS",                         "ROCRAND_STATUS_SUCCESS",                                         CONV_NUMERIC_LITERAL, API_RAND, 1}},
+  {"CURAND_STATUS_VERSION_MISMATCH",                {"HIPRAND_STATUS_VERSION_MISMATCH",                "ROCRAND_STATUS_VERSION_MISMATCH",                                CONV_NUMERIC_LITERAL, API_RAND, 1}},
+  {"CURAND_STATUS_NOT_INITIALIZED",                 {"HIPRAND_STATUS_NOT_INITIALIZED",                 "ROCRAND_STATUS_NOT_CREATED",                                     CONV_NUMERIC_LITERAL, API_RAND, 1}},
+  {"CURAND_STATUS_ALLOCATION_FAILED",               {"HIPRAND_STATUS_ALLOCATION_FAILED",               "ROCRAND_STATUS_ALLOCATION_FAILED",                               CONV_NUMERIC_LITERAL, API_RAND, 1}},
+  {"CURAND_STATUS_TYPE_ERROR",                      {"HIPRAND_STATUS_TYPE_ERROR",                      "ROCRAND_STATUS_TYPE_ERROR",                                      CONV_NUMERIC_LITERAL, API_RAND, 1}},
+  {"CURAND_STATUS_OUT_OF_RANGE",                    {"HIPRAND_STATUS_OUT_OF_RANGE",                    "ROCRAND_STATUS_OUT_OF_RANGE",                                    CONV_NUMERIC_LITERAL, API_RAND, 1}},
+  {"CURAND_STATUS_LENGTH_NOT_MULTIPLE",             {"HIPRAND_STATUS_LENGTH_NOT_MULTIPLE",             "ROCRAND_STATUS_LENGTH_NOT_MULTIPLE",                             CONV_NUMERIC_LITERAL, API_RAND, 1}},
+  {"CURAND_STATUS_DOUBLE_PRECISION_REQUIRED",       {"HIPRAND_STATUS_DOUBLE_PRECISION_REQUIRED",       "ROCRAND_STATUS_DOUBLE_PRECISION_REQUIRED",                       CONV_NUMERIC_LITERAL, API_RAND, 1}},
+  {"CURAND_STATUS_LAUNCH_FAILURE",                  {"HIPRAND_STATUS_LAUNCH_FAILURE",                  "ROCRAND_STATUS_LAUNCH_FAILURE",                                  CONV_NUMERIC_LITERAL, API_RAND, 1}},
+  {"CURAND_STATUS_PREEXISTING_FAILURE",             {"HIPRAND_STATUS_PREEXISTING_FAILURE",             "",                                                               CONV_NUMERIC_LITERAL, API_RAND, 1, ROC_UNSUPPORTED}},
+  {"CURAND_STATUS_INITIALIZATION_FAILED",           {"HIPRAND_STATUS_INITIALIZATION_FAILED",           "",                                                               CONV_NUMERIC_LITERAL, API_RAND, 1, ROC_UNSUPPORTED}},
+  {"CURAND_STATUS_ARCH_MISMATCH",                   {"HIPRAND_STATUS_ARCH_MISMATCH",                   "",                                                               CONV_NUMERIC_LITERAL, API_RAND, 1, ROC_UNSUPPORTED}},
+  {"CURAND_STATUS_INTERNAL_ERROR",                  {"HIPRAND_STATUS_INTERNAL_ERROR",                  "ROCRAND_STATUS_INTERNAL_ERROR",                                  CONV_NUMERIC_LITERAL, API_RAND, 1}},
 
   // RAND generator types (enum curandRngType)
   {"CURAND_RNG_TEST",                               {"HIPRAND_RNG_TEST",                               "", CONV_NUMERIC_LITERAL, API_RAND, 1}},
@@ -205,5 +205,15 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RAND_TYPE_NAME_VER_MAP {
   {"hiprandStateSobol64",                           {HIP_6020, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hiprandStateSobol64_t",                         {HIP_6020, HIP_0,    HIP_0,  HIP_LATEST}},
 
-  {"rocrand_status",                                {HIP_1051, HIP_0,    HIP_0   }},
+  {"rocrand_status",                                {HIP_1050, HIP_0,    HIP_0   }},
+  {"ROCRAND_STATUS_SUCCESS",                        {HIP_1050, HIP_0,    HIP_0   }},
+  {"ROCRAND_STATUS_VERSION_MISMATCH",               {HIP_1050, HIP_0,    HIP_0   }},
+  {"ROCRAND_STATUS_NOT_CREATED",                    {HIP_1050, HIP_0,    HIP_0   }},
+  {"ROCRAND_STATUS_ALLOCATION_FAILED",              {HIP_1050, HIP_0,    HIP_0   }},
+  {"ROCRAND_STATUS_TYPE_ERROR",                     {HIP_1050, HIP_0,    HIP_0   }},
+  {"ROCRAND_STATUS_OUT_OF_RANGE",                   {HIP_1050, HIP_0,    HIP_0   }},
+  {"ROCRAND_STATUS_LENGTH_NOT_MULTIPLE",            {HIP_1050, HIP_0,    HIP_0   }},
+  {"ROCRAND_STATUS_DOUBLE_PRECISION_REQUIRED",      {HIP_1050, HIP_0,    HIP_0   }},
+  {"ROCRAND_STATUS_LAUNCH_FAILURE",                 {HIP_1050, HIP_0,    HIP_0   }},
+  {"ROCRAND_STATUS_INTERNAL_ERROR",                 {HIP_1050, HIP_0,    HIP_0   }},
 };

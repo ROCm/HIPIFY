@@ -40,19 +40,19 @@
 |`CURAND_RNG_TEST`| | | | | | | | | | |
 |`CURAND_SCRAMBLED_DIRECTION_VECTORS_32_JOEKUO6`| | | | | | | | | | |
 |`CURAND_SCRAMBLED_DIRECTION_VECTORS_64_JOEKUO6`| | | | | | | | | | |
-|`CURAND_STATUS_ALLOCATION_FAILED`| | | | | | | | | | |
+|`CURAND_STATUS_ALLOCATION_FAILED`| | | | |`ROCRAND_STATUS_ALLOCATION_FAILED`|1.5.0| | | | |
 |`CURAND_STATUS_ARCH_MISMATCH`| | | | | | | | | | |
-|`CURAND_STATUS_DOUBLE_PRECISION_REQUIRED`| | | | | | | | | | |
+|`CURAND_STATUS_DOUBLE_PRECISION_REQUIRED`| | | | |`ROCRAND_STATUS_DOUBLE_PRECISION_REQUIRED`|1.5.0| | | | |
 |`CURAND_STATUS_INITIALIZATION_FAILED`| | | | | | | | | | |
-|`CURAND_STATUS_INTERNAL_ERROR`| | | | | | | | | | |
-|`CURAND_STATUS_LAUNCH_FAILURE`| | | | | | | | | | |
-|`CURAND_STATUS_LENGTH_NOT_MULTIPLE`| | | | | | | | | | |
-|`CURAND_STATUS_NOT_INITIALIZED`| | | | | | | | | | |
-|`CURAND_STATUS_OUT_OF_RANGE`| | | | | | | | | | |
+|`CURAND_STATUS_INTERNAL_ERROR`| | | | |`ROCRAND_STATUS_INTERNAL_ERROR`|1.5.0| | | | |
+|`CURAND_STATUS_LAUNCH_FAILURE`| | | | |`ROCRAND_STATUS_LAUNCH_FAILURE`|1.5.0| | | | |
+|`CURAND_STATUS_LENGTH_NOT_MULTIPLE`| | | | |`ROCRAND_STATUS_LENGTH_NOT_MULTIPLE`|1.5.0| | | | |
+|`CURAND_STATUS_NOT_INITIALIZED`| | | | |`ROCRAND_STATUS_NOT_CREATED`|1.5.0| | | | |
+|`CURAND_STATUS_OUT_OF_RANGE`| | | | |`ROCRAND_STATUS_OUT_OF_RANGE`|1.5.0| | | | |
 |`CURAND_STATUS_PREEXISTING_FAILURE`| | | | | | | | | | |
-|`CURAND_STATUS_SUCCESS`| | | | | | | | | | |
-|`CURAND_STATUS_TYPE_ERROR`| | | | | | | | | | |
-|`CURAND_STATUS_VERSION_MISMATCH`| | | | | | | | | | |
+|`CURAND_STATUS_SUCCESS`| | | | |`ROCRAND_STATUS_SUCCESS`|1.5.0| | | | |
+|`CURAND_STATUS_TYPE_ERROR`| | | | |`ROCRAND_STATUS_TYPE_ERROR`|1.5.0| | | | |
+|`CURAND_STATUS_VERSION_MISMATCH`| | | | |`ROCRAND_STATUS_VERSION_MISMATCH`|1.5.0| | | | |
 |`curandDirectionVectorSet`| | | | | | | | | | |
 |`curandDirectionVectorSet_t`| | | | | | | | | | |
 |`curandDirectionVectors32_t`| | | | | | | | | | |
@@ -97,8 +97,8 @@
 |`curandStateXORWOW`| | | | | | | | | | |
 |`curandStateXORWOW_t`| | | | | | | | | | |
 |`curandState_t`| | | | | | | | | | |
-|`curandStatus`| | | | |`rocrand_status`|1.5.1| | | | |
-|`curandStatus_t`| | | | |`rocrand_status`|1.5.1| | | | |
+|`curandStatus`| | | | |`rocrand_status`|1.5.0| | | | |
+|`curandStatus_t`| | | | |`rocrand_status`|1.5.0| | | | |
 
 ## **2. Host API Functions**
 

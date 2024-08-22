@@ -1,0 +1,39 @@
+// RUN: %run_test hipify "%s" "%t" %hipify_args 2 --experimental --roc %clang_args
+
+// CHECK: #include <hip/hip_runtime.h>
+#include <cuda_runtime.h>
+#include <stdio.h>
+// CHECK: #include "rocrand/rocrand.h"
+#include "curand.h"
+// CHECK-NOT: #include "rocrand/rocrand.h"
+
+int main() {
+  printf("21.1. cuRAND API to rocRAND API synthetic test\n");
+
+  // CHECK: rocrand_status randStatus;
+  // CHECK-NEXT: rocrand_status randStatus_t;
+  // CHECK-NEXT: rocrand_status STATUS_SUCCESS = ROCRAND_STATUS_SUCCESS;
+  // CHECK-NEXT: rocrand_status STATUS_VERSION_MISMATCH = ROCRAND_STATUS_VERSION_MISMATCH;
+  // CHECK-NEXT: rocrand_status STATUS_NOT_INITIALIZED = ROCRAND_STATUS_NOT_CREATED;
+  // CHECK-NEXT: rocrand_status STATUS_ALLOCATION_FAILED = ROCRAND_STATUS_ALLOCATION_FAILED;
+  // CHECK-NEXT: rocrand_status STATUS_TYPE_ERROR = ROCRAND_STATUS_TYPE_ERROR;
+  // CHECK-NEXT: rocrand_status STATUS_OUT_OF_RANGE = ROCRAND_STATUS_OUT_OF_RANGE;
+  // CHECK-NEXT: rocrand_status STATUS_LENGTH_NOT_MULTIPLE = ROCRAND_STATUS_LENGTH_NOT_MULTIPLE;
+  // CHECK-NEXT: rocrand_status STATUS_DOUBLE_PRECISION_REQUIRED = ROCRAND_STATUS_DOUBLE_PRECISION_REQUIRED;
+  // CHECK-NEXT: rocrand_status STATUS_LAUNCH_FAILURE = ROCRAND_STATUS_LAUNCH_FAILURE;
+  // CHECK-NEXT: rocrand_status STATUS_INTERNAL_ERROR = ROCRAND_STATUS_INTERNAL_ERROR;
+  curandStatus randStatus;
+  curandStatus_t randStatus_t;
+  curandStatus_t STATUS_SUCCESS = CURAND_STATUS_SUCCESS;
+  curandStatus_t STATUS_VERSION_MISMATCH = CURAND_STATUS_VERSION_MISMATCH;
+  curandStatus_t STATUS_NOT_INITIALIZED = CURAND_STATUS_NOT_INITIALIZED;
+  curandStatus_t STATUS_ALLOCATION_FAILED = CURAND_STATUS_ALLOCATION_FAILED;
+  curandStatus_t STATUS_TYPE_ERROR = CURAND_STATUS_TYPE_ERROR;
+  curandStatus_t STATUS_OUT_OF_RANGE = CURAND_STATUS_OUT_OF_RANGE;
+  curandStatus_t STATUS_LENGTH_NOT_MULTIPLE = CURAND_STATUS_LENGTH_NOT_MULTIPLE;
+  curandStatus_t STATUS_DOUBLE_PRECISION_REQUIRED = CURAND_STATUS_DOUBLE_PRECISION_REQUIRED;
+  curandStatus_t STATUS_LAUNCH_FAILURE = CURAND_STATUS_LAUNCH_FAILURE;
+  curandStatus_t STATUS_INTERNAL_ERROR = CURAND_STATUS_INTERNAL_ERROR;
+
+  return 0;
+}
