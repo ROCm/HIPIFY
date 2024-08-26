@@ -703,36 +703,36 @@
 |`CUDNN_TENSOR_REORDERING_NONE`|8.3.0| | | | | | | | | |
 |`CUDNN_TRANSFORM_FOLD`|7.5.0| | | | | | | | | |
 |`CUDNN_TRANSFORM_UNFOLD`|7.5.0| | | | | | | | | |
-|`CUDNN_TYPE_ATTRIB_NAME`|8.0.1| | | | | | | | | |
-|`CUDNN_TYPE_BACKEND_DESCRIPTOR`|8.0.1| | | | | | | | | |
-|`CUDNN_TYPE_BEHAVIOR_NOTE`|8.2.0| | | | | | | | | |
-|`CUDNN_TYPE_BN_FINALIZE_STATS_MODE`|8.1.0| | | | | | | | | |
-|`CUDNN_TYPE_BOOLEAN`|8.0.1| | | | | | | | | |
-|`CUDNN_TYPE_CHAR`|8.4.0| | | | | | | | | |
-|`CUDNN_TYPE_CONVOLUTION_MODE`|8.0.1| | | | | | | | | |
-|`CUDNN_TYPE_DATA_TYPE`|8.0.1| | | | | | | | | |
-|`CUDNN_TYPE_DOUBLE`|8.0.1| | | | | | | | | |
-|`CUDNN_TYPE_FLOAT`|8.0.1| | | | | | | | | |
-|`CUDNN_TYPE_FRACTION`|8.5.0| | | | | | | | | |
-|`CUDNN_TYPE_GENSTATS_MODE`|8.0.1| | | | | | | | | |
-|`CUDNN_TYPE_HANDLE`|8.0.1| | | | | | | | | |
-|`CUDNN_TYPE_HEUR_MODE`|8.0.1| | | | | | | | | |
-|`CUDNN_TYPE_INT32`|8.3.0| | | | | | | | | |
-|`CUDNN_TYPE_INT64`|8.0.1| | | | | | | | | |
-|`CUDNN_TYPE_KNOB_TYPE`|8.0.1| | | | | | | | | |
-|`CUDNN_TYPE_LAYOUT_TYPE`|8.0.2| | | | | | | | | |
-|`CUDNN_TYPE_NAN_PROPOGATION`|8.0.1|9.0.0| | | | | | | | |
-|`CUDNN_TYPE_NORM_FWD_PHASE`|8.5.0| | | | | | | | | |
-|`CUDNN_TYPE_NORM_MODE`|8.5.0| | | | | | | | | |
-|`CUDNN_TYPE_NUMERICAL_NOTE`|8.0.1| | | | | | | | | |
-|`CUDNN_TYPE_PADDING_MODE`|8.3.0| | | | | | | | | |
-|`CUDNN_TYPE_POINTWISE_MODE`|8.0.1| | | | | | | | | |
-|`CUDNN_TYPE_REDUCTION_OPERATOR_TYPE`|8.1.0| | | | | | | | | |
-|`CUDNN_TYPE_RESAMPLE_MODE`|8.3.0| | | | | | | | | |
-|`CUDNN_TYPE_RNG_DISTRIBUTION`|8.7.0| | | | | | | | | |
-|`CUDNN_TYPE_SIGNAL_MODE`|8.5.0| | | | | | | | | |
-|`CUDNN_TYPE_TENSOR_REORDERING_MODE`|8.3.0| | | | | | | | | |
-|`CUDNN_TYPE_VOID_PTR`|8.0.1| | | | | | | | | |
+|`CUDNN_TYPE_ATTRIB_NAME`|8.0.1| | | |`MIOPEN_TYPE_ATTRIB_NAME`| | | | | |
+|`CUDNN_TYPE_BACKEND_DESCRIPTOR`|8.0.1| | | |`MIOPEN_TYPE_BACKEND_DESCRIPTOR`| | | | | |
+|`CUDNN_TYPE_BEHAVIOR_NOTE`|8.2.0| | | |`MIOPEN_TYPE_BEHAVIOR_NOTE`| | | | | |
+|`CUDNN_TYPE_BN_FINALIZE_STATS_MODE`|8.1.0| | | |`MIOPEN_TYPE_BN_FINALIZE_STATS_MODE`| | | | | |
+|`CUDNN_TYPE_BOOLEAN`|8.0.1| | | |`MIOPEN_TYPE_BOOLEAN`| | | | | |
+|`CUDNN_TYPE_CHAR`|8.4.0| | | |`MIOPEN_TYPE_CHAR`| | | | | |
+|`CUDNN_TYPE_CONVOLUTION_MODE`|8.0.1| | | |`MIOPEN_TYPE_CONVOLUTION_MODE`| | | | | |
+|`CUDNN_TYPE_DATA_TYPE`|8.0.1| | | |`MIOPEN_TYPE_DATA_TYPE`| | | | | |
+|`CUDNN_TYPE_DOUBLE`|8.0.1| | | |`MIOPEN_TYPE_DOUBLE`| | | | | |
+|`CUDNN_TYPE_FLOAT`|8.0.1| | | |`MIOPEN_TYPE_FLOAT`| | | | | |
+|`CUDNN_TYPE_FRACTION`|8.5.0| | | |`MIOPEN_TYPE_FRACTION`| | | | | |
+|`CUDNN_TYPE_GENSTATS_MODE`|8.0.1| | | |`MIOPEN_TYPE_GENSTATS_MODE`| | | | | |
+|`CUDNN_TYPE_HANDLE`|8.0.1| | | |`MIOPEN_TYPE_HANDLE`| | | | | |
+|`CUDNN_TYPE_HEUR_MODE`|8.0.1| | | |`MIOPEN_TYPE_HEUR_MODE`| | | | | |
+|`CUDNN_TYPE_INT32`|8.3.0| | | |`MIOPEN_TYPE_INT32`| | | | | |
+|`CUDNN_TYPE_INT64`|8.0.1| | | |`MIOPEN_TYPE_INT64`| | | | | |
+|`CUDNN_TYPE_KNOB_TYPE`|8.0.1| | | |`MIOPEN_TYPE_KNOB_TYPE`| | | | | |
+|`CUDNN_TYPE_LAYOUT_TYPE`|8.0.2| | | |`MIOPEN_TYPE_LAYOUT_TYPE`| | | | | |
+|`CUDNN_TYPE_NAN_PROPOGATION`|8.0.1|9.0.0| | |`MIOPEN_TYPE_NAN_PROPOGATION`| | | | | |
+|`CUDNN_TYPE_NORM_FWD_PHASE`|8.5.0| | | |`MIOPEN_TYPE_NORM_FWD_PHASE`| | | | | |
+|`CUDNN_TYPE_NORM_MODE`|8.5.0| | | |`MIOPEN_TYPE_NORM_MODE`| | | | | |
+|`CUDNN_TYPE_NUMERICAL_NOTE`|8.0.1| | | |`MIOPEN_TYPE_NUMERICAL_NOTE`| | | | | |
+|`CUDNN_TYPE_PADDING_MODE`|8.3.0| | | |`MIOPEN_TYPE_PADDING_MODE`| | | | | |
+|`CUDNN_TYPE_POINTWISE_MODE`|8.0.1| | | |`MIOPEN_TYPE_POINTWISE_MODE`| | | | | |
+|`CUDNN_TYPE_REDUCTION_OPERATOR_TYPE`|8.1.0| | | |`MIOPEN_TYPE_REDUCTION_OPERATOR_TYPE`| | | | | |
+|`CUDNN_TYPE_RESAMPLE_MODE`|8.3.0| | | |`MIOPEN_TYPE_RESAMPLE_MODE`| | | | | |
+|`CUDNN_TYPE_RNG_DISTRIBUTION`|8.7.0| | | |`MIOPEN_TYPE_RNG_DISTRIBUTION`| | | | | |
+|`CUDNN_TYPE_SIGNAL_MODE`|8.5.0| | | |`MIOPEN_TYPE_SIGNAL_MODE`| | | | | |
+|`CUDNN_TYPE_TENSOR_REORDERING_MODE`|8.3.0| | | |`MIOPEN_TYPE_TENSOR_REORDERING_MODE`| | | | | |
+|`CUDNN_TYPE_VOID_PTR`|8.0.1| | | |`MIOPEN_TYPE_VOID_PTR`| | | | | |
 |`CUDNN_UNIDIRECTIONAL`|5.0.0| | | |`miopenRNNunidirection`| | | | | |
 |`CUDNN_WGRAD_MODE_ADD`|7.5.0| | | | | | | | | |
 |`CUDNN_WGRAD_MODE_SET`|7.5.0| | | | | | | | | |
@@ -750,7 +750,7 @@
 |`cudnnAttnQueryMap_t`|7.5.0| | |9.0.0| | | | | | |
 |`cudnnAttnStruct`|7.5.0| | | | | | | | | |
 |`cudnnBackendAttributeName_t`|8.0.1| | | | | | | | | |
-|`cudnnBackendAttributeType_t`|8.0.1| | | | | | | | | |
+|`cudnnBackendAttributeType_t`|8.0.1| | | |`miopenBackendAttributeType_t`| | | | | |
 |`cudnnBackendBehaviorNote_t`|8.2.0| | | | | | | | | |
 |`cudnnBackendDescriptorType_t`|8.0.1| | | |`miopenBackendDescriptorType_t`| | | | | |
 |`cudnnBackendDescriptor_t`|8.0.1| | | | | | | | | |
