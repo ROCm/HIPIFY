@@ -1,6 +1,7 @@
 // RUN: %run_test hipify "%s" "%t" %hipify_args %clang_args
 
 // CHECK: #include <hip/hip_runtime.h>
+#include <stdio.h>
 
 template <typename T>
 void check(T result, char const *const func, const char *const file, int const line) {
