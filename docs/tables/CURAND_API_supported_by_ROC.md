@@ -26,17 +26,17 @@
 |`CURAND_ORDERING_QUASI_DEFAULT`| | | | | | | | | | |
 |`CURAND_POISSON`| | | | | | | | | | |
 |`CURAND_REJECTION`| | | | | | | | | | |
-|`CURAND_RNG_PSEUDO_DEFAULT`| | | | | | | | | | |
-|`CURAND_RNG_PSEUDO_MRG32K3A`| | | | | | | | | | |
-|`CURAND_RNG_PSEUDO_MT19937`| | | | | | | | | | |
-|`CURAND_RNG_PSEUDO_MTGP32`| | | | | | | | | | |
-|`CURAND_RNG_PSEUDO_PHILOX4_32_10`| | | | | | | | | | |
-|`CURAND_RNG_PSEUDO_XORWOW`| | | | | | | | | | |
-|`CURAND_RNG_QUASI_DEFAULT`| | | | | | | | | | |
-|`CURAND_RNG_QUASI_SCRAMBLED_SOBOL32`| | | | | | | | | | |
-|`CURAND_RNG_QUASI_SCRAMBLED_SOBOL64`| | | | | | | | | | |
-|`CURAND_RNG_QUASI_SOBOL32`| | | | | | | | | | |
-|`CURAND_RNG_QUASI_SOBOL64`| | | | | | | | | | |
+|`CURAND_RNG_PSEUDO_DEFAULT`| | | | |`ROCRAND_RNG_PSEUDO_DEFAULT`|1.5.0| | | | |
+|`CURAND_RNG_PSEUDO_MRG32K3A`| | | | |`ROCRAND_RNG_PSEUDO_MRG32K3A`|1.5.0| | | | |
+|`CURAND_RNG_PSEUDO_MT19937`| | | | |`ROCRAND_RNG_PSEUDO_MT19937`|5.5.0| | | | |
+|`CURAND_RNG_PSEUDO_MTGP32`| | | | |`ROCRAND_RNG_PSEUDO_MTGP32`|1.5.0| | | | |
+|`CURAND_RNG_PSEUDO_PHILOX4_32_10`| | | | |`ROCRAND_RNG_PSEUDO_PHILOX4_32_10`|1.5.0| | | | |
+|`CURAND_RNG_PSEUDO_XORWOW`| | | | |`ROCRAND_RNG_PSEUDO_XORWOW`|1.5.0| | | | |
+|`CURAND_RNG_QUASI_DEFAULT`| | | | |`ROCRAND_RNG_QUASI_DEFAULT`|1.5.0| | | | |
+|`CURAND_RNG_QUASI_SCRAMBLED_SOBOL32`| | | | |`ROCRAND_RNG_QUASI_SCRAMBLED_SOBOL32`|5.4.0| | | | |
+|`CURAND_RNG_QUASI_SCRAMBLED_SOBOL64`| | | | |`ROCRAND_RNG_QUASI_SCRAMBLED_SOBOL64`|5.4.0| | | | |
+|`CURAND_RNG_QUASI_SOBOL32`| | | | |`ROCRAND_RNG_QUASI_SOBOL32`|1.5.0| | | | |
+|`CURAND_RNG_QUASI_SOBOL64`| | | | |`ROCRAND_RNG_QUASI_SOBOL64`|4.5.0| | | | |
 |`CURAND_RNG_TEST`| | | | | | | | | | |
 |`CURAND_SCRAMBLED_DIRECTION_VECTORS_32_JOEKUO6`| | | | | | | | | | |
 |`CURAND_SCRAMBLED_DIRECTION_VECTORS_64_JOEKUO6`| | | | | | | | | | |
@@ -77,8 +77,8 @@
 |`curandMethod_t`| | | | | | | | | | |
 |`curandOrdering`| | | | | | | | | | |
 |`curandOrdering_t`| | | | | | | | | | |
-|`curandRngType`| | | | | | | | | | |
-|`curandRngType_t`| | | | | | | | | | |
+|`curandRngType`| | | | |`rocrand_rng_type`|1.5.0| | | | |
+|`curandRngType_t`| | | | |`rocrand_rng_type`|1.5.0| | | | |
 |`curandState`| | | | | | | | | | |
 |`curandStateMRG32k3a`| | | | | | | | | | |
 |`curandStateMRG32k3a_t`| | | | | | | | | | |

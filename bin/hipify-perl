@@ -3206,6 +3206,8 @@ sub rocSubstitutions {
     subst("cudnnStatus_t", "miopenStatus_t", "type");
     subst("cudnnTensorDescriptor_t", "miopenTensorDescriptor_t", "type");
     subst("cudnnTensorFormat_t", "miopenTensorLayout_t", "type");
+    subst("curandRngType", "rocrand_rng_type", "type");
+    subst("curandRngType_t", "rocrand_rng_type", "type");
     subst("curandStatus", "rocrand_status", "type");
     subst("curandStatus_t", "rocrand_status", "type");
     subst("cusolverDnHandle_t", "rocblas_handle", "type");
@@ -3436,6 +3438,17 @@ sub rocSubstitutions {
     subst("CUDNN_TYPE_TENSOR_REORDERING_MODE", "MIOPEN_TYPE_TENSOR_REORDERING_MODE", "numeric_literal");
     subst("CUDNN_TYPE_VOID_PTR", "MIOPEN_TYPE_VOID_PTR", "numeric_literal");
     subst("CUDNN_UNIDIRECTIONAL", "miopenRNNunidirection", "numeric_literal");
+    subst("CURAND_RNG_PSEUDO_DEFAULT", "ROCRAND_RNG_PSEUDO_DEFAULT", "numeric_literal");
+    subst("CURAND_RNG_PSEUDO_MRG32K3A", "ROCRAND_RNG_PSEUDO_MRG32K3A", "numeric_literal");
+    subst("CURAND_RNG_PSEUDO_MT19937", "ROCRAND_RNG_PSEUDO_MT19937", "numeric_literal");
+    subst("CURAND_RNG_PSEUDO_MTGP32", "ROCRAND_RNG_PSEUDO_MTGP32", "numeric_literal");
+    subst("CURAND_RNG_PSEUDO_PHILOX4_32_10", "ROCRAND_RNG_PSEUDO_PHILOX4_32_10", "numeric_literal");
+    subst("CURAND_RNG_PSEUDO_XORWOW", "ROCRAND_RNG_PSEUDO_XORWOW", "numeric_literal");
+    subst("CURAND_RNG_QUASI_DEFAULT", "ROCRAND_RNG_QUASI_DEFAULT", "numeric_literal");
+    subst("CURAND_RNG_QUASI_SCRAMBLED_SOBOL32", "ROCRAND_RNG_QUASI_SCRAMBLED_SOBOL32", "numeric_literal");
+    subst("CURAND_RNG_QUASI_SCRAMBLED_SOBOL64", "ROCRAND_RNG_QUASI_SCRAMBLED_SOBOL64", "numeric_literal");
+    subst("CURAND_RNG_QUASI_SOBOL32", "ROCRAND_RNG_QUASI_SOBOL32", "numeric_literal");
+    subst("CURAND_RNG_QUASI_SOBOL64", "ROCRAND_RNG_QUASI_SOBOL64", "numeric_literal");
     subst("CURAND_STATUS_ALLOCATION_FAILED", "ROCRAND_STATUS_ALLOCATION_FAILED", "numeric_literal");
     subst("CURAND_STATUS_DOUBLE_PRECISION_REQUIRED", "ROCRAND_STATUS_DOUBLE_PRECISION_REQUIRED", "numeric_literal");
     subst("CURAND_STATUS_INTERNAL_ERROR", "ROCRAND_STATUS_INTERNAL_ERROR", "numeric_literal");
