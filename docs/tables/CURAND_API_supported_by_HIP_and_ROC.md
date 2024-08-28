@@ -26,17 +26,17 @@
 |`CURAND_ORDERING_QUASI_DEFAULT`| | | | |`HIPRAND_ORDERING_QUASI_DEFAULT`|6.2.0| | | |6.2.0| | | | | | |
 |`CURAND_POISSON`| | | | | | | | | | | | | | | | |
 |`CURAND_REJECTION`| | | | | | | | | | | | | | | | |
-|`CURAND_RNG_PSEUDO_DEFAULT`| | | | |`HIPRAND_RNG_PSEUDO_DEFAULT`|1.5.0| | | | | | | | | | |
-|`CURAND_RNG_PSEUDO_MRG32K3A`| | | | |`HIPRAND_RNG_PSEUDO_MRG32K3A`|1.5.0| | | | | | | | | | |
-|`CURAND_RNG_PSEUDO_MT19937`| | | | |`HIPRAND_RNG_PSEUDO_MT19937`|1.5.0| | | | | | | | | | |
-|`CURAND_RNG_PSEUDO_MTGP32`| | | | |`HIPRAND_RNG_PSEUDO_MTGP32`|1.5.0| | | | | | | | | | |
-|`CURAND_RNG_PSEUDO_PHILOX4_32_10`| | | | |`HIPRAND_RNG_PSEUDO_PHILOX4_32_10`|1.5.0| | | | | | | | | | |
-|`CURAND_RNG_PSEUDO_XORWOW`| | | | |`HIPRAND_RNG_PSEUDO_XORWOW`|1.5.0| | | | | | | | | | |
-|`CURAND_RNG_QUASI_DEFAULT`| | | | |`HIPRAND_RNG_QUASI_DEFAULT`|1.5.0| | | | | | | | | | |
-|`CURAND_RNG_QUASI_SCRAMBLED_SOBOL32`| | | | |`HIPRAND_RNG_QUASI_SCRAMBLED_SOBOL32`|1.5.0| | | | | | | | | | |
-|`CURAND_RNG_QUASI_SCRAMBLED_SOBOL64`| | | | |`HIPRAND_RNG_QUASI_SCRAMBLED_SOBOL64`|1.5.0| | | | | | | | | | |
-|`CURAND_RNG_QUASI_SOBOL32`| | | | |`HIPRAND_RNG_QUASI_SOBOL32`|1.5.0| | | | | | | | | | |
-|`CURAND_RNG_QUASI_SOBOL64`| | | | |`HIPRAND_RNG_QUASI_SOBOL64`|1.5.0| | | | | | | | | | |
+|`CURAND_RNG_PSEUDO_DEFAULT`| | | | |`HIPRAND_RNG_PSEUDO_DEFAULT`|1.5.0| | | | |`ROCRAND_RNG_PSEUDO_DEFAULT`|1.5.0| | | | |
+|`CURAND_RNG_PSEUDO_MRG32K3A`| | | | |`HIPRAND_RNG_PSEUDO_MRG32K3A`|1.5.0| | | | |`ROCRAND_RNG_PSEUDO_MRG32K3A`|1.5.0| | | | |
+|`CURAND_RNG_PSEUDO_MT19937`| | | | |`HIPRAND_RNG_PSEUDO_MT19937`|1.5.0| | | | |`ROCRAND_RNG_PSEUDO_MT19937`|5.5.0| | | | |
+|`CURAND_RNG_PSEUDO_MTGP32`| | | | |`HIPRAND_RNG_PSEUDO_MTGP32`|1.5.0| | | | |`ROCRAND_RNG_PSEUDO_MTGP32`|1.5.0| | | | |
+|`CURAND_RNG_PSEUDO_PHILOX4_32_10`| | | | |`HIPRAND_RNG_PSEUDO_PHILOX4_32_10`|1.5.0| | | | |`ROCRAND_RNG_PSEUDO_PHILOX4_32_10`|1.5.0| | | | |
+|`CURAND_RNG_PSEUDO_XORWOW`| | | | |`HIPRAND_RNG_PSEUDO_XORWOW`|1.5.0| | | | |`ROCRAND_RNG_PSEUDO_XORWOW`|1.5.0| | | | |
+|`CURAND_RNG_QUASI_DEFAULT`| | | | |`HIPRAND_RNG_QUASI_DEFAULT`|1.5.0| | | | |`ROCRAND_RNG_QUASI_DEFAULT`|1.5.0| | | | |
+|`CURAND_RNG_QUASI_SCRAMBLED_SOBOL32`| | | | |`HIPRAND_RNG_QUASI_SCRAMBLED_SOBOL32`|1.5.0| | | | |`ROCRAND_RNG_QUASI_SCRAMBLED_SOBOL32`|5.4.0| | | | |
+|`CURAND_RNG_QUASI_SCRAMBLED_SOBOL64`| | | | |`HIPRAND_RNG_QUASI_SCRAMBLED_SOBOL64`|1.5.0| | | | |`ROCRAND_RNG_QUASI_SCRAMBLED_SOBOL64`|5.4.0| | | | |
+|`CURAND_RNG_QUASI_SOBOL32`| | | | |`HIPRAND_RNG_QUASI_SOBOL32`|1.5.0| | | | |`ROCRAND_RNG_QUASI_SOBOL32`|1.5.0| | | | |
+|`CURAND_RNG_QUASI_SOBOL64`| | | | |`HIPRAND_RNG_QUASI_SOBOL64`|1.5.0| | | | |`ROCRAND_RNG_QUASI_SOBOL64`|4.5.0| | | | |
 |`CURAND_RNG_TEST`| | | | |`HIPRAND_RNG_TEST`|1.5.0| | | | | | | | | | |
 |`CURAND_SCRAMBLED_DIRECTION_VECTORS_32_JOEKUO6`| | | | |`HIPRAND_SCRAMBLED_DIRECTION_VECTORS_32_JOEKUO6`|6.0.0| | | | | | | | | | |
 |`CURAND_SCRAMBLED_DIRECTION_VECTORS_64_JOEKUO6`| | | | |`HIPRAND_SCRAMBLED_DIRECTION_VECTORS_64_JOEKUO6`|6.0.0| | | | | | | | | | |
@@ -77,8 +77,8 @@
 |`curandMethod_t`| | | | | | | | | | | | | | | | |
 |`curandOrdering`| | | | |`hiprandOrdering`|6.2.0| | | |6.2.0| | | | | | |
 |`curandOrdering_t`| | | | |`hiprandOrdering_t`|6.2.0| | | |6.2.0| | | | | | |
-|`curandRngType`| | | | |`hiprandRngType_t`|1.5.0| | | | | | | | | | |
-|`curandRngType_t`| | | | |`hiprandRngType_t`|1.5.0| | | | | | | | | | |
+|`curandRngType`| | | | |`hiprandRngType_t`|1.5.0| | | | |`rocrand_rng_type`|1.5.0| | | | |
+|`curandRngType_t`| | | | |`hiprandRngType_t`|1.5.0| | | | |`rocrand_rng_type`|1.5.0| | | | |
 |`curandState`| | | | |`hiprandState`|1.8.0| | | | | | | | | | |
 |`curandStateMRG32k3a`| | | | |`hiprandStateMRG32k3a`|1.8.0| | | | | | | | | | |
 |`curandStateMRG32k3a_t`| | | | |`hiprandStateMRG32k3a_t`|1.5.0| | | | | | | | | | |
