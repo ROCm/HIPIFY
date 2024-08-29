@@ -6248,6 +6248,7 @@ sub simpleSubstitutions {
     subst("curandDirectionVectorSet", "hiprandDirectionVectorSet_t", "type");
     subst("curandDirectionVectorSet_t", "hiprandDirectionVectorSet_t", "type");
     subst("curandDirectionVectors32_t", "hiprandDirectionVectors32_t", "type");
+    subst("curandDirectionVectors64_t", "hiprandDirectionVectors64_t", "type");
     subst("curandDiscreteDistribution_st", "hiprandDiscreteDistribution_st", "type");
     subst("curandDiscreteDistribution_t", "hiprandDiscreteDistribution_t", "type");
     subst("curandGenerator_st", "hiprandGenerator_st", "type");
@@ -9263,7 +9264,6 @@ sub warnUnsupportedFunctions {
         "curandDistributionShift_st",
         "curandDistributionM2Shift_t",
         "curandDistributionM2Shift_st",
-        "curandDirectionVectors64_t",
         "cufftXtWorkAreaPolicy_t",
         "cufftXtWorkAreaPolicy",
         "cufftXtSubFormat_t",
