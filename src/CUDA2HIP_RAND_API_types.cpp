@@ -81,7 +81,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RAND_TYPE_NAME_MAP {
   {"curandMethod",                                  {"hiprandMethod_t",                                "", CONV_TYPE, API_RAND, 1, HIP_UNSUPPORTED}},
   {"curandMethod_t",                                {"hiprandMethod_t",                                "", CONV_TYPE, API_RAND, 1, HIP_UNSUPPORTED}},
   {"curandDirectionVectors32_t",                    {"hiprandDirectionVectors32_t",                    "", CONV_TYPE, API_RAND, 1}},
-  {"curandDirectionVectors64_t",                    {"hiprandDirectionVectors64_t",                    "", CONV_TYPE, API_RAND, 1, HIP_UNSUPPORTED}},
+  {"curandDirectionVectors64_t",                    {"hiprandDirectionVectors64_t",                    "", CONV_TYPE, API_RAND, 1, ROC_UNSUPPORTED}},
 
   // RAND types for Device functions
   {"curandStateMtgp32",                             {"hiprandStateMtgp32",                             "", CONV_TYPE, API_RAND, 1}},
@@ -190,6 +190,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RAND_TYPE_NAME_VER_MAP {
   {"HIPRAND_SCRAMBLED_DIRECTION_VECTORS_32_JOEKUO6",{HIP_6000, HIP_0,    HIP_0   }},
   {"HIPRAND_DIRECTION_VECTORS_64_JOEKUO6",          {HIP_6000, HIP_0,    HIP_0   }},
   {"HIPRAND_SCRAMBLED_DIRECTION_VECTORS_64_JOEKUO6",{HIP_6000, HIP_0,    HIP_0   }},
+  {"hiprandDirectionVectors64_t",                   {HIP_6000, HIP_0,    HIP_0   }},
   {"hiprandOrdering",                               {HIP_6020, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hiprandOrdering_t",                             {HIP_6020, HIP_0,    HIP_0,  HIP_LATEST}},
   {"HIPRAND_ORDERING_PSEUDO_BEST",                  {HIP_6020, HIP_0,    HIP_0,  HIP_LATEST}},

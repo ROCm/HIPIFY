@@ -56,7 +56,7 @@
 |`curandDirectionVectorSet`| | | | |`hiprandDirectionVectorSet_t`|6.0.0| | | | |
 |`curandDirectionVectorSet_t`| | | | |`hiprandDirectionVectorSet_t`|6.0.0| | | | |
 |`curandDirectionVectors32_t`| | | | |`hiprandDirectionVectors32_t`|1.5.0| | | | |
-|`curandDirectionVectors64_t`| | | | | | | | | | |
+|`curandDirectionVectors64_t`| | | | |`hiprandDirectionVectors64_t`|6.0.0| | | | |
 |`curandDiscreteDistribution_st`| | | | |`hiprandDiscreteDistribution_st`|1.5.0| | | | |
 |`curandDiscreteDistribution_t`| | | | |`hiprandDiscreteDistribution_t`|1.5.0| | | | |
 |`curandDistributionM2Shift_st`| | | | | | | | | | |

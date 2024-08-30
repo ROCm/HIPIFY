@@ -111,10 +111,27 @@ int main() {
   curandStateScrambledSobol32 randStateScrambledSobol32;
   curandStateScrambledSobol32_t randStateScrambledSobol32_t;
 
+  // CHECK: hiprandDirectionVectors32_t directions32;
+  // CHECK-NEXT: hiprandDirectionVectors64_t directions64;
+  // CHECK-NEXT: hiprandDirectionVectors64_t *pDirections64 = nullptr;
+  curandDirectionVectors32_t directions32;
+  curandDirectionVectors64_t directions64;
+  curandDirectionVectors64_t *pDirections64 = nullptr;
+
+  // CHECK: hiprandDirectionVectorSet_t directionVectorSet;
+  // CHECK-NEXT: hiprandDirectionVectorSet_t directionVectorSet_t;
+  curandDirectionVectorSet directionVectorSet;
+  curandDirectionVectorSet_t directionVectorSet_t;
+
   // CUDA: curandStatus_t CURANDAPI curandSetGeneratorOrdering(curandGenerator_t generator, curandOrdering_t order);
   // HIP: hiprandStatus_t HIPRANDAPI hiprandSetGeneratorOrdering(hiprandGenerator_t generator, hiprandOrdering_t order);
   // CHECK: status = hiprandSetGeneratorOrdering(randGenerator, randOrdering_t);
   status = curandSetGeneratorOrdering(randGenerator, randOrdering_t);
+
+  // CUDA: curandStatus_t CURANDAPI curandGetDirectionVectors64(curandDirectionVectors64_t *vectors[], curandDirectionVectorSet_t set);
+  // HIP: hiprandStatus_t HIPRANDAPI hiprandGetDirectionVectors64(hiprandDirectionVectors64_t** vectors, hiprandDirectionVectorSet_t set);
+  // CHECK: status = hiprandGetDirectionVectors64(&pDirections64, directionVectorSet_t);
+  status = curandGetDirectionVectors64(&pDirections64, directionVectorSet_t);
 
 #if CUDA_VERSION >= 11000 && CURAND_VERSION >= 10200
   // CHECK: hiprandOrdering_t RAND_ORDERING_PSEUDO_LEGACY = HIPRAND_ORDERING_PSEUDO_LEGACY;
