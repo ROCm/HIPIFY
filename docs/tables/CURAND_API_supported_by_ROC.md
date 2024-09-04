@@ -18,12 +18,12 @@
 |`CURAND_KNUTH`| | | | | | | | | | |
 |`CURAND_M1`| | | | | | | | | | |
 |`CURAND_M2`| | | | | | | | | | |
-|`CURAND_ORDERING_PSEUDO_BEST`| | | | | | | | | | |
-|`CURAND_ORDERING_PSEUDO_DEFAULT`| | | | | | | | | | |
-|`CURAND_ORDERING_PSEUDO_DYNAMIC`|11.5| | | | | | | | | |
-|`CURAND_ORDERING_PSEUDO_LEGACY`|11.0| | | | | | | | | |
-|`CURAND_ORDERING_PSEUDO_SEEDED`| | | | | | | | | | |
-|`CURAND_ORDERING_QUASI_DEFAULT`| | | | | | | | | | |
+|`CURAND_ORDERING_PSEUDO_BEST`| | | | |`ROCRAND_ORDERING_PSEUDO_BEST`|5.5.0| | | | |
+|`CURAND_ORDERING_PSEUDO_DEFAULT`| | | | |`ROCRAND_ORDERING_PSEUDO_DEFAULT`|5.5.0| | | | |
+|`CURAND_ORDERING_PSEUDO_DYNAMIC`|11.5| | | |`ROCRAND_ORDERING_PSEUDO_DYNAMIC`|5.5.0| | | | |
+|`CURAND_ORDERING_PSEUDO_LEGACY`|11.0| | | |`ROCRAND_ORDERING_PSEUDO_LEGACY`|5.5.0| | | | |
+|`CURAND_ORDERING_PSEUDO_SEEDED`| | | | |`ROCRAND_ORDERING_PSEUDO_SEEDED`|5.5.0| | | | |
+|`CURAND_ORDERING_QUASI_DEFAULT`| | | | |`ROCRAND_ORDERING_QUASI_DEFAULT`|5.5.0| | | | |
 |`CURAND_POISSON`| | | | | | | | | | |
 |`CURAND_REJECTION`| | | | | | | | | | |
 |`CURAND_RNG_PSEUDO_DEFAULT`| | | | |`ROCRAND_RNG_PSEUDO_DEFAULT`|1.5.0| | | | |
@@ -75,8 +75,8 @@
 |`curandHistogramM2_t`| | | | | | | | | | |
 |`curandMethod`| | | | | | | | | | |
 |`curandMethod_t`| | | | | | | | | | |
-|`curandOrdering`| | | | | | | | | | |
-|`curandOrdering_t`| | | | | | | | | | |
+|`curandOrdering`| | | | |`rocrand_ordering`|5.5.0| | | | |
+|`curandOrdering_t`| | | | |`rocrand_ordering`|5.5.0| | | | |
 |`curandRngType`| | | | |`rocrand_rng_type`|1.5.0| | | | |
 |`curandRngType_t`| | | | |`rocrand_rng_type`|1.5.0| | | | |
 |`curandState`| | | | | | | | | | |

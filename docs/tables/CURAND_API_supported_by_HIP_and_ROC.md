@@ -18,12 +18,12 @@
 |`CURAND_KNUTH`| | | | | | | | | | | | | | | | |
 |`CURAND_M1`| | | | | | | | | | | | | | | | |
 |`CURAND_M2`| | | | | | | | | | | | | | | | |
-|`CURAND_ORDERING_PSEUDO_BEST`| | | | |`HIPRAND_ORDERING_PSEUDO_BEST`|6.2.0| | | |6.2.0| | | | | | |
-|`CURAND_ORDERING_PSEUDO_DEFAULT`| | | | |`HIPRAND_ORDERING_PSEUDO_DEFAULT`|6.2.0| | | |6.2.0| | | | | | |
-|`CURAND_ORDERING_PSEUDO_DYNAMIC`|11.5| | | |`HIPRAND_ORDERING_PSEUDO_DYNAMIC`|6.2.0| | | |6.2.0| | | | | | |
-|`CURAND_ORDERING_PSEUDO_LEGACY`|11.0| | | |`HIPRAND_ORDERING_PSEUDO_LEGACY`|6.2.0| | | |6.2.0| | | | | | |
-|`CURAND_ORDERING_PSEUDO_SEEDED`| | | | |`HIPRAND_ORDERING_PSEUDO_SEEDED`|6.2.0| | | |6.2.0| | | | | | |
-|`CURAND_ORDERING_QUASI_DEFAULT`| | | | |`HIPRAND_ORDERING_QUASI_DEFAULT`|6.2.0| | | |6.2.0| | | | | | |
+|`CURAND_ORDERING_PSEUDO_BEST`| | | | |`HIPRAND_ORDERING_PSEUDO_BEST`|6.2.0| | | |6.2.0|`ROCRAND_ORDERING_PSEUDO_BEST`|5.5.0| | | | |
+|`CURAND_ORDERING_PSEUDO_DEFAULT`| | | | |`HIPRAND_ORDERING_PSEUDO_DEFAULT`|6.2.0| | | |6.2.0|`ROCRAND_ORDERING_PSEUDO_DEFAULT`|5.5.0| | | | |
+|`CURAND_ORDERING_PSEUDO_DYNAMIC`|11.5| | | |`HIPRAND_ORDERING_PSEUDO_DYNAMIC`|6.2.0| | | |6.2.0|`ROCRAND_ORDERING_PSEUDO_DYNAMIC`|5.5.0| | | | |
+|`CURAND_ORDERING_PSEUDO_LEGACY`|11.0| | | |`HIPRAND_ORDERING_PSEUDO_LEGACY`|6.2.0| | | |6.2.0|`ROCRAND_ORDERING_PSEUDO_LEGACY`|5.5.0| | | | |
+|`CURAND_ORDERING_PSEUDO_SEEDED`| | | | |`HIPRAND_ORDERING_PSEUDO_SEEDED`|6.2.0| | | |6.2.0|`ROCRAND_ORDERING_PSEUDO_SEEDED`|5.5.0| | | | |
+|`CURAND_ORDERING_QUASI_DEFAULT`| | | | |`HIPRAND_ORDERING_QUASI_DEFAULT`|6.2.0| | | |6.2.0|`ROCRAND_ORDERING_QUASI_DEFAULT`|5.5.0| | | | |
 |`CURAND_POISSON`| | | | | | | | | | | | | | | | |
 |`CURAND_REJECTION`| | | | | | | | | | | | | | | | |
 |`CURAND_RNG_PSEUDO_DEFAULT`| | | | |`HIPRAND_RNG_PSEUDO_DEFAULT`|1.5.0| | | | |`ROCRAND_RNG_PSEUDO_DEFAULT`|1.5.0| | | | |
@@ -75,8 +75,8 @@
 |`curandHistogramM2_t`| | | | | | | | | | | | | | | | |
 |`curandMethod`| | | | | | | | | | | | | | | | |
 |`curandMethod_t`| | | | | | | | | | | | | | | | |
-|`curandOrdering`| | | | |`hiprandOrdering`|6.2.0| | | |6.2.0| | | | | | |
-|`curandOrdering_t`| | | | |`hiprandOrdering_t`|6.2.0| | | |6.2.0| | | | | | |
+|`curandOrdering`| | | | |`hiprandOrdering`|6.2.0| | | |6.2.0|`rocrand_ordering`|5.5.0| | | | |
+|`curandOrdering_t`| | | | |`hiprandOrdering_t`|6.2.0| | | |6.2.0|`rocrand_ordering`|5.5.0| | | | |
 |`curandRngType`| | | | |`hiprandRngType_t`|1.5.0| | | | |`rocrand_rng_type`|1.5.0| | | | |
 |`curandRngType_t`| | | | |`hiprandRngType_t`|1.5.0| | | | |`rocrand_rng_type`|1.5.0| | | | |
 |`curandState`| | | | |`hiprandState`|1.8.0| | | | | | | | | | |

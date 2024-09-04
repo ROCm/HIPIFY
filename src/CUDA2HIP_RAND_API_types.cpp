@@ -58,12 +58,20 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RAND_TYPE_NAME_MAP {
   {"CURAND_RNG_QUASI_SOBOL64",                      {"HIPRAND_RNG_QUASI_SOBOL64",                      "ROCRAND_RNG_QUASI_SOBOL64",                                      CONV_NUMERIC_LITERAL, API_RAND, 1}},
   {"CURAND_RNG_QUASI_SCRAMBLED_SOBOL64",            {"HIPRAND_RNG_QUASI_SCRAMBLED_SOBOL64",            "ROCRAND_RNG_QUASI_SCRAMBLED_SOBOL64",                            CONV_NUMERIC_LITERAL, API_RAND, 1}},
 
+  {"curandOrdering",                                {"hiprandOrdering",                                "rocrand_ordering",                                               CONV_TYPE, API_RAND, 1, HIP_EXPERIMENTAL}},
+  {"curandOrdering_t",                              {"hiprandOrdering_t",                              "rocrand_ordering",                                               CONV_TYPE, API_RAND, 1, HIP_EXPERIMENTAL}},
+  // RAND ordering of results in memory (enum curandOrdering)
+  {"CURAND_ORDERING_PSEUDO_BEST",                   {"HIPRAND_ORDERING_PSEUDO_BEST",                   "ROCRAND_ORDERING_PSEUDO_BEST",                                   CONV_NUMERIC_LITERAL, API_RAND, 1, HIP_EXPERIMENTAL}},
+  {"CURAND_ORDERING_PSEUDO_DEFAULT",                {"HIPRAND_ORDERING_PSEUDO_DEFAULT",                "ROCRAND_ORDERING_PSEUDO_DEFAULT",                                CONV_NUMERIC_LITERAL, API_RAND, 1, HIP_EXPERIMENTAL}},
+  {"CURAND_ORDERING_PSEUDO_SEEDED",                 {"HIPRAND_ORDERING_PSEUDO_SEEDED",                 "ROCRAND_ORDERING_PSEUDO_SEEDED",                                 CONV_NUMERIC_LITERAL, API_RAND, 1, HIP_EXPERIMENTAL}},
+  {"CURAND_ORDERING_PSEUDO_LEGACY",                 {"HIPRAND_ORDERING_PSEUDO_LEGACY",                 "ROCRAND_ORDERING_PSEUDO_LEGACY",                                 CONV_NUMERIC_LITERAL, API_RAND, 1, HIP_EXPERIMENTAL}},
+  {"CURAND_ORDERING_PSEUDO_DYNAMIC",                {"HIPRAND_ORDERING_PSEUDO_DYNAMIC",                "ROCRAND_ORDERING_PSEUDO_DYNAMIC",                                CONV_NUMERIC_LITERAL, API_RAND, 1, HIP_EXPERIMENTAL}},
+  {"CURAND_ORDERING_QUASI_DEFAULT",                 {"HIPRAND_ORDERING_QUASI_DEFAULT",                 "ROCRAND_ORDERING_QUASI_DEFAULT",                                 CONV_NUMERIC_LITERAL, API_RAND, 1, HIP_EXPERIMENTAL}},
+
   {"curandGenerator_st",                            {"hiprandGenerator_st",                            "", CONV_TYPE, API_RAND, 1}},
   {"curandGenerator_t",                             {"hiprandGenerator_t",                             "", CONV_TYPE, API_RAND, 1}},
   {"curandDirectionVectorSet",                      {"hiprandDirectionVectorSet_t",                    "", CONV_TYPE, API_RAND, 1}},
   {"curandDirectionVectorSet_t",                    {"hiprandDirectionVectorSet_t",                    "", CONV_TYPE, API_RAND, 1}},
-  {"curandOrdering",                                {"hiprandOrdering",                                "", CONV_TYPE, API_RAND, 1, HIP_EXPERIMENTAL}},
-  {"curandOrdering_t",                              {"hiprandOrdering_t",                              "", CONV_TYPE, API_RAND, 1, HIP_EXPERIMENTAL}},
   {"curandDistribution_st",                         {"hiprandDistribution_st",                         "", CONV_TYPE, API_RAND, 1, HIP_UNSUPPORTED}},
   {"curandHistogramM2V_st",                         {"hiprandHistogramM2V_st",                         "", CONV_TYPE, API_RAND, 1, HIP_UNSUPPORTED}},
   {"curandDistribution_t",                          {"hiprandDistribution_t",                          "", CONV_TYPE, API_RAND, 1, HIP_UNSUPPORTED}},
@@ -102,14 +110,6 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RAND_TYPE_NAME_MAP {
   {"curandStateXORWOW_t",                           {"hiprandStateXORWOW_t",                           "", CONV_TYPE, API_RAND, 1}},
   {"curandState",                                   {"hiprandState",                                   "", CONV_TYPE, API_RAND, 1}},
   {"curandState_t",                                 {"hiprandState_t",                                 "", CONV_TYPE, API_RAND, 1}},
-
-  // RAND ordering of results in memory (enum curandOrdering)
-  {"CURAND_ORDERING_PSEUDO_BEST",                   {"HIPRAND_ORDERING_PSEUDO_BEST",                   "", CONV_NUMERIC_LITERAL, API_RAND, 1, HIP_EXPERIMENTAL}},
-  {"CURAND_ORDERING_PSEUDO_DEFAULT",                {"HIPRAND_ORDERING_PSEUDO_DEFAULT",                "", CONV_NUMERIC_LITERAL, API_RAND, 1, HIP_EXPERIMENTAL}},
-  {"CURAND_ORDERING_PSEUDO_SEEDED",                 {"HIPRAND_ORDERING_PSEUDO_SEEDED",                 "", CONV_NUMERIC_LITERAL, API_RAND, 1, HIP_EXPERIMENTAL}},
-  {"CURAND_ORDERING_PSEUDO_LEGACY",                 {"HIPRAND_ORDERING_PSEUDO_LEGACY",                 "", CONV_NUMERIC_LITERAL, API_RAND, 1, HIP_EXPERIMENTAL}},
-  {"CURAND_ORDERING_PSEUDO_DYNAMIC",                {"HIPRAND_ORDERING_PSEUDO_DYNAMIC",                "", CONV_NUMERIC_LITERAL, API_RAND, 1, HIP_EXPERIMENTAL}},
-  {"CURAND_ORDERING_QUASI_DEFAULT",                 {"HIPRAND_ORDERING_QUASI_DEFAULT",                 "", CONV_NUMERIC_LITERAL, API_RAND, 1, HIP_EXPERIMENTAL}},
 
   // RAND choice of direction vector set (enum curandDirectionVectorSet)
   {"CURAND_DIRECTION_VECTORS_32_JOEKUO6",           {"HIPRAND_DIRECTION_VECTORS_32_JOEKUO6",           "", CONV_NUMERIC_LITERAL, API_RAND, 1}},
@@ -229,4 +229,11 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RAND_TYPE_NAME_VER_MAP {
   {"ROCRAND_RNG_QUASI_SCRAMBLED_SOBOL32",           {HIP_5040, HIP_0,    HIP_0   }},
   {"ROCRAND_RNG_QUASI_SOBOL64",                     {HIP_4050, HIP_0,    HIP_0   }},
   {"ROCRAND_RNG_QUASI_SCRAMBLED_SOBOL64",           {HIP_5040, HIP_0,    HIP_0   }},
+  {"rocrand_ordering",                              {HIP_5050, HIP_0,    HIP_0   }},
+  {"ROCRAND_ORDERING_PSEUDO_BEST",                  {HIP_5050, HIP_0,    HIP_0   }},
+  {"ROCRAND_ORDERING_PSEUDO_DEFAULT",               {HIP_5050, HIP_0,    HIP_0   }},
+  {"ROCRAND_ORDERING_PSEUDO_SEEDED",                {HIP_5050, HIP_0,    HIP_0   }},
+  {"ROCRAND_ORDERING_PSEUDO_LEGACY",                {HIP_5050, HIP_0,    HIP_0   }},
+  {"ROCRAND_ORDERING_PSEUDO_DYNAMIC",               {HIP_5050, HIP_0,    HIP_0   }},
+  {"ROCRAND_ORDERING_QUASI_DEFAULT",                {HIP_5050, HIP_0,    HIP_0   }},
 };
