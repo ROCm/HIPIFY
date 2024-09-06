@@ -9,6 +9,8 @@ option(HIPIFY_CLANG_TESTS_ONLY "Build HIPIFY tests only, if lit is installed and
 option(HIPIFY_INCLUDE_IN_HIP_SDK "Include HIPIFY in HIP SDK" OFF)
 option(HIPIFY_INSTALL_CLANG_HEADERS "Include clang headers in HIPIFY installation" ON)
 
+set(CPACK_SET_DESTDIR ON CACHE BOOL "Installer package will install hipify to CMAKE_INSTALL_PREFIX instead of CPACK_PACKAGING_INSTALL_PREFIX")
+
 if(HIPIFY_CLANG_TESTS OR HIPIFY_CLANG_TESTS_ONLY)
   set(HIPIFY_TEST "ON")
 else()
