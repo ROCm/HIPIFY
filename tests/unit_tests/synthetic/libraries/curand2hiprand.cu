@@ -1,4 +1,4 @@
-// RUN: %run_test hipify "%s" "%t" %hipify_args 3 --amap --skip-excluded-preprocessor-conditional-blocks --experimental %clang_args -D__CUDA_API_VERSION_INTERNAL -ferror-limit=500
+// RUN: %run_test hipify "%s" "%t" %hipify_args 3 --amap --default-preprocessor --experimental %clang_args -D__CUDA_API_VERSION_INTERNAL -ferror-limit=500
 
 // CHECK: #include <hip/hip_runtime.h>
 #include <cuda_runtime.h>
