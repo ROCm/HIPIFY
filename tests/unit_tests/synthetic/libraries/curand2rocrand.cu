@@ -1,4 +1,4 @@
-// RUN: %run_test hipify "%s" "%t" %hipify_args 2 --experimental --roc %clang_args
+// RUN: %run_test hipify "%s" "%t" %hipify_args 4 --amap --default-preprocessor --experimental --roc %clang_args
 
 // CHECK: #include <hip/hip_runtime.h>
 #include <cuda_runtime.h>
