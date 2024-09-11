@@ -3207,6 +3207,10 @@ sub rocSubstitutions {
     subst("cudnnStatus_t", "miopenStatus_t", "type");
     subst("cudnnTensorDescriptor_t", "miopenTensorDescriptor_t", "type");
     subst("cudnnTensorFormat_t", "miopenTensorLayout_t", "type");
+    subst("curandDirectionVectorSet", "rocrand_direction_vector_set", "type");
+    subst("curandDirectionVectorSet_t", "rocrand_direction_vector_set", "type");
+    subst("curandGenerator_st", "rocrand_generator_base_type", "type");
+    subst("curandGenerator_t", "rocrand_generator", "type");
     subst("curandOrdering", "rocrand_ordering", "type");
     subst("curandOrdering_t", "rocrand_ordering", "type");
     subst("curandRngType", "rocrand_rng_type", "type");
@@ -3653,6 +3657,8 @@ sub rocSubstitutions {
     subst("CUDNN_TYPE_TENSOR_REORDERING_MODE", "MIOPEN_TYPE_TENSOR_REORDERING_MODE", "numeric_literal");
     subst("CUDNN_TYPE_VOID_PTR", "MIOPEN_TYPE_VOID_PTR", "numeric_literal");
     subst("CUDNN_UNIDIRECTIONAL", "miopenRNNunidirection", "numeric_literal");
+    subst("CURAND_DIRECTION_VECTORS_32_JOEKUO6", "ROCRAND_DIRECTION_VECTORS_32_JOEKUO6", "numeric_literal");
+    subst("CURAND_DIRECTION_VECTORS_64_JOEKUO6", "ROCRAND_DIRECTION_VECTORS_64_JOEKUO6", "numeric_literal");
     subst("CURAND_ORDERING_PSEUDO_BEST", "ROCRAND_ORDERING_PSEUDO_BEST", "numeric_literal");
     subst("CURAND_ORDERING_PSEUDO_DEFAULT", "ROCRAND_ORDERING_PSEUDO_DEFAULT", "numeric_literal");
     subst("CURAND_ORDERING_PSEUDO_DYNAMIC", "ROCRAND_ORDERING_PSEUDO_DYNAMIC", "numeric_literal");
@@ -3670,6 +3676,8 @@ sub rocSubstitutions {
     subst("CURAND_RNG_QUASI_SCRAMBLED_SOBOL64", "ROCRAND_RNG_QUASI_SCRAMBLED_SOBOL64", "numeric_literal");
     subst("CURAND_RNG_QUASI_SOBOL32", "ROCRAND_RNG_QUASI_SOBOL32", "numeric_literal");
     subst("CURAND_RNG_QUASI_SOBOL64", "ROCRAND_RNG_QUASI_SOBOL64", "numeric_literal");
+    subst("CURAND_SCRAMBLED_DIRECTION_VECTORS_32_JOEKUO6", "ROCRAND_SCRAMBLED_DIRECTION_VECTORS_32_JOEKUO6", "numeric_literal");
+    subst("CURAND_SCRAMBLED_DIRECTION_VECTORS_64_JOEKUO6", "ROCRAND_SCRAMBLED_DIRECTION_VECTORS_64_JOEKUO6", "numeric_literal");
     subst("CURAND_STATUS_ALLOCATION_FAILED", "ROCRAND_STATUS_ALLOCATION_FAILED", "numeric_literal");
     subst("CURAND_STATUS_DOUBLE_PRECISION_REQUIRED", "ROCRAND_STATUS_DOUBLE_PRECISION_REQUIRED", "numeric_literal");
     subst("CURAND_STATUS_INTERNAL_ERROR", "ROCRAND_STATUS_INTERNAL_ERROR", "numeric_literal");

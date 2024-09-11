@@ -9,8 +9,8 @@
 |`CURAND_CHOOSE_BEST`| | | | | | | | | | | | | | | | |
 |`CURAND_DEFINITION`| | | | | | | | | | | | | | | | |
 |`CURAND_DEVICE_API`| | | | | | | | | | | | | | | | |
-|`CURAND_DIRECTION_VECTORS_32_JOEKUO6`| | | | |`HIPRAND_DIRECTION_VECTORS_32_JOEKUO6`|6.0.0| | | | | | | | | | |
-|`CURAND_DIRECTION_VECTORS_64_JOEKUO6`| | | | |`HIPRAND_DIRECTION_VECTORS_64_JOEKUO6`|6.0.0| | | | | | | | | | |
+|`CURAND_DIRECTION_VECTORS_32_JOEKUO6`| | | | |`HIPRAND_DIRECTION_VECTORS_32_JOEKUO6`|6.0.0| | | | |`ROCRAND_DIRECTION_VECTORS_32_JOEKUO6`|6.0.0| | | | |
+|`CURAND_DIRECTION_VECTORS_64_JOEKUO6`| | | | |`HIPRAND_DIRECTION_VECTORS_64_JOEKUO6`|6.0.0| | | | |`ROCRAND_DIRECTION_VECTORS_64_JOEKUO6`|6.0.0| | | | |
 |`CURAND_DISCRETE_GAUSS`| | | | | | | | | | | | | | | | |
 |`CURAND_FAST_REJECTION`| | | | | | | | | | | | | | | | |
 |`CURAND_HITR`| | | | | | | | | | | | | | | | |
@@ -38,8 +38,8 @@
 |`CURAND_RNG_QUASI_SOBOL32`| | | | |`HIPRAND_RNG_QUASI_SOBOL32`|1.5.0| | | | |`ROCRAND_RNG_QUASI_SOBOL32`|1.5.0| | | | |
 |`CURAND_RNG_QUASI_SOBOL64`| | | | |`HIPRAND_RNG_QUASI_SOBOL64`|1.5.0| | | | |`ROCRAND_RNG_QUASI_SOBOL64`|4.5.0| | | | |
 |`CURAND_RNG_TEST`| | | | |`HIPRAND_RNG_TEST`|1.5.0| | | | | | | | | | |
-|`CURAND_SCRAMBLED_DIRECTION_VECTORS_32_JOEKUO6`| | | | |`HIPRAND_SCRAMBLED_DIRECTION_VECTORS_32_JOEKUO6`|6.0.0| | | | | | | | | | |
-|`CURAND_SCRAMBLED_DIRECTION_VECTORS_64_JOEKUO6`| | | | |`HIPRAND_SCRAMBLED_DIRECTION_VECTORS_64_JOEKUO6`|6.0.0| | | | | | | | | | |
+|`CURAND_SCRAMBLED_DIRECTION_VECTORS_32_JOEKUO6`| | | | |`HIPRAND_SCRAMBLED_DIRECTION_VECTORS_32_JOEKUO6`|6.0.0| | | | |`ROCRAND_SCRAMBLED_DIRECTION_VECTORS_32_JOEKUO6`|6.0.0| | | | |
+|`CURAND_SCRAMBLED_DIRECTION_VECTORS_64_JOEKUO6`| | | | |`HIPRAND_SCRAMBLED_DIRECTION_VECTORS_64_JOEKUO6`|6.0.0| | | | |`ROCRAND_SCRAMBLED_DIRECTION_VECTORS_64_JOEKUO6`|6.0.0| | | | |
 |`CURAND_STATUS_ALLOCATION_FAILED`| | | | |`HIPRAND_STATUS_ALLOCATION_FAILED`|1.5.0| | | | |`ROCRAND_STATUS_ALLOCATION_FAILED`|1.5.0| | | | |
 |`CURAND_STATUS_ARCH_MISMATCH`| | | | |`HIPRAND_STATUS_ARCH_MISMATCH`|1.5.0| | | | | | | | | | |
 |`CURAND_STATUS_DOUBLE_PRECISION_REQUIRED`| | | | |`HIPRAND_STATUS_DOUBLE_PRECISION_REQUIRED`|1.5.0| | | | |`ROCRAND_STATUS_DOUBLE_PRECISION_REQUIRED`|1.5.0| | | | |
@@ -53,8 +53,8 @@
 |`CURAND_STATUS_SUCCESS`| | | | |`HIPRAND_STATUS_SUCCESS`|1.5.0| | | | |`ROCRAND_STATUS_SUCCESS`|1.5.0| | | | |
 |`CURAND_STATUS_TYPE_ERROR`| | | | |`HIPRAND_STATUS_TYPE_ERROR`|1.5.0| | | | |`ROCRAND_STATUS_TYPE_ERROR`|1.5.0| | | | |
 |`CURAND_STATUS_VERSION_MISMATCH`| | | | |`HIPRAND_STATUS_VERSION_MISMATCH`|1.5.0| | | | |`ROCRAND_STATUS_VERSION_MISMATCH`|1.5.0| | | | |
-|`curandDirectionVectorSet`| | | | |`hiprandDirectionVectorSet_t`|6.0.0| | | | | | | | | | |
-|`curandDirectionVectorSet_t`| | | | |`hiprandDirectionVectorSet_t`|6.0.0| | | | | | | | | | |
+|`curandDirectionVectorSet`| | | | |`hiprandDirectionVectorSet_t`|6.0.0| | | | |`rocrand_direction_vector_set`|6.0.0| | | | |
+|`curandDirectionVectorSet_t`| | | | |`hiprandDirectionVectorSet_t`|6.0.0| | | | |`rocrand_direction_vector_set`|6.0.0| | | | |
 |`curandDirectionVectors32_t`| | | | |`hiprandDirectionVectors32_t`|1.5.0| | | | | | | | | | |
 |`curandDirectionVectors64_t`| | | | |`hiprandDirectionVectors64_t`|6.0.0| | | | | | | | | | |
 |`curandDiscreteDistribution_st`| | | | |`hiprandDiscreteDistribution_st`|1.5.0| | | | | | | | | | |
@@ -65,8 +65,8 @@
 |`curandDistributionShift_t`| | | | | | | | | | | | | | | | |
 |`curandDistribution_st`| | | | | | | | | | | | | | | | |
 |`curandDistribution_t`| | | | | | | | | | | | | | | | |
-|`curandGenerator_st`| | | | |`hiprandGenerator_st`|1.5.0| | | | | | | | | | |
-|`curandGenerator_t`| | | | |`hiprandGenerator_t`|1.5.0| | | | | | | | | | |
+|`curandGenerator_st`| | | | |`hiprandGenerator_st`|1.5.0| | | | |`rocrand_generator_base_type`|1.5.0| | | | |
+|`curandGenerator_t`| | | | |`hiprandGenerator_t`|1.5.0| | | | |`rocrand_generator`|1.5.0| | | | |
 |`curandHistogramM2K_st`| | | | | | | | | | | | | | | | |
 |`curandHistogramM2K_t`| | | | | | | | | | | | | | | | |
 |`curandHistogramM2V_st`| | | | | | | | | | | | | | | | |
