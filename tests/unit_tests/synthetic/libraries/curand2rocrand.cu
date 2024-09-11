@@ -74,6 +74,24 @@ int main() {
   curandOrdering_t RAND_ORDERING_PSEUDO_SEEDED = CURAND_ORDERING_PSEUDO_SEEDED;
   curandOrdering_t RAND_ORDERING_QUASI_DEFAULT = CURAND_ORDERING_QUASI_DEFAULT;
 
+  // CHECK: rocrand_direction_vector_set directionVectorSet;
+  // CHECK-NEXT: rocrand_direction_vector_set directionVectorSet_t;
+  // CHECK-NEXT: rocrand_direction_vector_set DIRECTION_VECTORS_32_JOEKUO6 = ROCRAND_DIRECTION_VECTORS_32_JOEKUO6;
+  // CHECK-NEXT: rocrand_direction_vector_set SCRAMBLED_DIRECTION_VECTORS_32_JOEKUO6 = ROCRAND_SCRAMBLED_DIRECTION_VECTORS_32_JOEKUO6;
+  // CHECK-NEXT: rocrand_direction_vector_set DIRECTION_VECTORS_64_JOEKUO6 = ROCRAND_DIRECTION_VECTORS_64_JOEKUO6;
+  // CHECK-NEXT: rocrand_direction_vector_set SCRAMBLED_DIRECTION_VECTORS_64_JOEKUO6 = ROCRAND_SCRAMBLED_DIRECTION_VECTORS_64_JOEKUO6;
+  curandDirectionVectorSet directionVectorSet;
+  curandDirectionVectorSet_t directionVectorSet_t;
+  curandDirectionVectorSet_t DIRECTION_VECTORS_32_JOEKUO6 = CURAND_DIRECTION_VECTORS_32_JOEKUO6;
+  curandDirectionVectorSet_t SCRAMBLED_DIRECTION_VECTORS_32_JOEKUO6 = CURAND_SCRAMBLED_DIRECTION_VECTORS_32_JOEKUO6;
+  curandDirectionVectorSet_t DIRECTION_VECTORS_64_JOEKUO6 = CURAND_DIRECTION_VECTORS_64_JOEKUO6;
+  curandDirectionVectorSet_t SCRAMBLED_DIRECTION_VECTORS_64_JOEKUO6 = CURAND_SCRAMBLED_DIRECTION_VECTORS_64_JOEKUO6;
+
+  // CHECK: rocrand_generator_base_type *randGenerator_st = nullptr;
+  // CHECK-NEXT: rocrand_generator randGenerator;
+  curandGenerator_st *randGenerator_st = nullptr;
+  curandGenerator_t randGenerator;
+
 #if CUDA_VERSION >= 11000 && CURAND_VERSION >= 10200
   // CHECK: rocrand_ordering RAND_ORDERING_PSEUDO_LEGACY = ROCRAND_ORDERING_PSEUDO_LEGACY;
   curandOrdering_t RAND_ORDERING_PSEUDO_LEGACY = CURAND_ORDERING_PSEUDO_LEGACY;

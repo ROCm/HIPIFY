@@ -120,8 +120,16 @@ int main() {
 
   // CHECK: hiprandDirectionVectorSet_t directionVectorSet;
   // CHECK-NEXT: hiprandDirectionVectorSet_t directionVectorSet_t;
+  // CHECK-NEXT: hiprandDirectionVectorSet_t DIRECTION_VECTORS_32_JOEKUO6 = HIPRAND_DIRECTION_VECTORS_32_JOEKUO6;
+  // CHECK-NEXT: hiprandDirectionVectorSet_t SCRAMBLED_DIRECTION_VECTORS_32_JOEKUO6 = HIPRAND_SCRAMBLED_DIRECTION_VECTORS_32_JOEKUO6;
+  // CHECK-NEXT: hiprandDirectionVectorSet_t DIRECTION_VECTORS_64_JOEKUO6 = HIPRAND_DIRECTION_VECTORS_64_JOEKUO6;
+  // CHECK-NEXT: hiprandDirectionVectorSet_t SCRAMBLED_DIRECTION_VECTORS_64_JOEKUO6 = HIPRAND_SCRAMBLED_DIRECTION_VECTORS_64_JOEKUO6;
   curandDirectionVectorSet directionVectorSet;
   curandDirectionVectorSet_t directionVectorSet_t;
+  curandDirectionVectorSet_t DIRECTION_VECTORS_32_JOEKUO6 = CURAND_DIRECTION_VECTORS_32_JOEKUO6;
+  curandDirectionVectorSet_t SCRAMBLED_DIRECTION_VECTORS_32_JOEKUO6 = CURAND_SCRAMBLED_DIRECTION_VECTORS_32_JOEKUO6;
+  curandDirectionVectorSet_t DIRECTION_VECTORS_64_JOEKUO6 = CURAND_DIRECTION_VECTORS_64_JOEKUO6;
+  curandDirectionVectorSet_t SCRAMBLED_DIRECTION_VECTORS_64_JOEKUO6 = CURAND_SCRAMBLED_DIRECTION_VECTORS_64_JOEKUO6;
 
   // CUDA: curandStatus_t CURANDAPI curandSetGeneratorOrdering(curandGenerator_t generator, curandOrdering_t order);
   // HIP: hiprandStatus_t HIPRANDAPI hiprandSetGeneratorOrdering(hiprandGenerator_t generator, hiprandOrdering_t order);

@@ -9,8 +9,8 @@
 |`CURAND_CHOOSE_BEST`| | | | | | | | | | |
 |`CURAND_DEFINITION`| | | | | | | | | | |
 |`CURAND_DEVICE_API`| | | | | | | | | | |
-|`CURAND_DIRECTION_VECTORS_32_JOEKUO6`| | | | | | | | | | |
-|`CURAND_DIRECTION_VECTORS_64_JOEKUO6`| | | | | | | | | | |
+|`CURAND_DIRECTION_VECTORS_32_JOEKUO6`| | | | |`ROCRAND_DIRECTION_VECTORS_32_JOEKUO6`|6.0.0| | | | |
+|`CURAND_DIRECTION_VECTORS_64_JOEKUO6`| | | | |`ROCRAND_DIRECTION_VECTORS_64_JOEKUO6`|6.0.0| | | | |
 |`CURAND_DISCRETE_GAUSS`| | | | | | | | | | |
 |`CURAND_FAST_REJECTION`| | | | | | | | | | |
 |`CURAND_HITR`| | | | | | | | | | |
@@ -38,8 +38,8 @@
 |`CURAND_RNG_QUASI_SOBOL32`| | | | |`ROCRAND_RNG_QUASI_SOBOL32`|1.5.0| | | | |
 |`CURAND_RNG_QUASI_SOBOL64`| | | | |`ROCRAND_RNG_QUASI_SOBOL64`|4.5.0| | | | |
 |`CURAND_RNG_TEST`| | | | | | | | | | |
-|`CURAND_SCRAMBLED_DIRECTION_VECTORS_32_JOEKUO6`| | | | | | | | | | |
-|`CURAND_SCRAMBLED_DIRECTION_VECTORS_64_JOEKUO6`| | | | | | | | | | |
+|`CURAND_SCRAMBLED_DIRECTION_VECTORS_32_JOEKUO6`| | | | |`ROCRAND_SCRAMBLED_DIRECTION_VECTORS_32_JOEKUO6`|6.0.0| | | | |
+|`CURAND_SCRAMBLED_DIRECTION_VECTORS_64_JOEKUO6`| | | | |`ROCRAND_SCRAMBLED_DIRECTION_VECTORS_64_JOEKUO6`|6.0.0| | | | |
 |`CURAND_STATUS_ALLOCATION_FAILED`| | | | |`ROCRAND_STATUS_ALLOCATION_FAILED`|1.5.0| | | | |
 |`CURAND_STATUS_ARCH_MISMATCH`| | | | | | | | | | |
 |`CURAND_STATUS_DOUBLE_PRECISION_REQUIRED`| | | | |`ROCRAND_STATUS_DOUBLE_PRECISION_REQUIRED`|1.5.0| | | | |
@@ -53,8 +53,8 @@
 |`CURAND_STATUS_SUCCESS`| | | | |`ROCRAND_STATUS_SUCCESS`|1.5.0| | | | |
 |`CURAND_STATUS_TYPE_ERROR`| | | | |`ROCRAND_STATUS_TYPE_ERROR`|1.5.0| | | | |
 |`CURAND_STATUS_VERSION_MISMATCH`| | | | |`ROCRAND_STATUS_VERSION_MISMATCH`|1.5.0| | | | |
-|`curandDirectionVectorSet`| | | | | | | | | | |
-|`curandDirectionVectorSet_t`| | | | | | | | | | |
+|`curandDirectionVectorSet`| | | | |`rocrand_direction_vector_set`|6.0.0| | | | |
+|`curandDirectionVectorSet_t`| | | | |`rocrand_direction_vector_set`|6.0.0| | | | |
 |`curandDirectionVectors32_t`| | | | | | | | | | |
 |`curandDirectionVectors64_t`| | | | | | | | | | |
 |`curandDiscreteDistribution_st`| | | | | | | | | | |
@@ -65,8 +65,8 @@
 |`curandDistributionShift_t`| | | | | | | | | | |
 |`curandDistribution_st`| | | | | | | | | | |
 |`curandDistribution_t`| | | | | | | | | | |
-|`curandGenerator_st`| | | | | | | | | | |
-|`curandGenerator_t`| | | | | | | | | | |
+|`curandGenerator_st`| | | | |`rocrand_generator_base_type`|1.5.0| | | | |
+|`curandGenerator_t`| | | | |`rocrand_generator`|1.5.0| | | | |
 |`curandHistogramM2K_st`| | | | | | | | | | |
 |`curandHistogramM2K_t`| | | | | | | | | | |
 |`curandHistogramM2V_st`| | | | | | | | | | |
