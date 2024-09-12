@@ -947,16 +947,7 @@ my %deprecated_funcs = (
     "CUDNN_STATUS_ARCH_MISMATCH" => "9.0.0",
     "CUDNN_STATUS_ALLOC_FAILED" => "9.0.0",
     "CUDNN_REDUCE_TENSOR_NO_INDICES" => "9.0.0",
-    "CUDNN_REDUCE_TENSOR_NORM2" => "9.0.0",
-    "CUDNN_REDUCE_TENSOR_NORM1" => "9.0.0",
-    "CUDNN_REDUCE_TENSOR_MUL_NO_ZEROS" => "9.0.0",
-    "CUDNN_REDUCE_TENSOR_MUL" => "9.0.0",
-    "CUDNN_REDUCE_TENSOR_MIN" => "9.0.0",
-    "CUDNN_REDUCE_TENSOR_MAX" => "9.0.0",
     "CUDNN_REDUCE_TENSOR_FLATTENED_INDICES" => "9.0.0",
-    "CUDNN_REDUCE_TENSOR_AVG" => "9.0.0",
-    "CUDNN_REDUCE_TENSOR_AMAX" => "9.0.0",
-    "CUDNN_REDUCE_TENSOR_ADD" => "9.0.0",
     "CUDNN_PROPAGATE_NAN" => "9.0.0",
     "CUDNN_POOLING_MAX_DETERMINISTIC" => "9.0.0",
     "CUDNN_POOLING_MAX" => "9.0.0",
@@ -3174,6 +3165,7 @@ sub rocSubstitutions {
     subst("cudnnBatchNormMode_t", "miopenBatchNormMode_t", "type");
     subst("cudnnCTCLossAlgo_t", "miopenCTCLossAlgo_t", "type");
     subst("cudnnCTCLossDescriptor_t", "miopenCTCLossDescriptor_t", "type");
+    subst("cudnnContext", "miopenHandle", "type");
     subst("cudnnConvolutionBwdDataAlgoPerfStruct", "miopenConvAlgoPerf_t", "type");
     subst("cudnnConvolutionBwdDataAlgoPerf_t", "miopenConvAlgoPerf_t", "type");
     subst("cudnnConvolutionBwdDataAlgo_t", "miopenConvBwdDataAlgorithm_t", "type");
@@ -3581,6 +3573,7 @@ sub rocSubstitutions {
     subst("CUDNN_DATA_FLOAT", "miopenFloat", "numeric_literal");
     subst("CUDNN_DATA_HALF", "miopenHalf", "numeric_literal");
     subst("CUDNN_DATA_INT32", "miopenInt32", "numeric_literal");
+    subst("CUDNN_DATA_INT64", "miopenInt64", "numeric_literal");
     subst("CUDNN_DATA_INT8", "miopenInt8", "numeric_literal");
     subst("CUDNN_DATA_INT8x4", "miopenInt8x4", "numeric_literal");
     subst("CUDNN_GRU", "miopenGRU", "numeric_literal");
@@ -3624,6 +3617,7 @@ sub rocSubstitutions {
     subst("CUDNN_STATUS_NOT_INITIALIZED", "miopenStatusNotInitialized", "numeric_literal");
     subst("CUDNN_STATUS_NOT_SUPPORTED", "miopenStatusUnsupportedOp", "numeric_literal");
     subst("CUDNN_STATUS_SUCCESS", "miopenStatusSuccess", "numeric_literal");
+    subst("CUDNN_STATUS_VERSION_MISMATCH", "miopenStatusVersionMismatch", "numeric_literal");
     subst("CUDNN_TENSOR_NCHW", "miopenTensorNCHW", "numeric_literal");
     subst("CUDNN_TENSOR_NHWC", "miopenTensorNHWC", "numeric_literal");
     subst("CUDNN_TYPE_ATTRIB_NAME", "MIOPEN_TYPE_ATTRIB_NAME", "numeric_literal");
@@ -9752,6 +9746,7 @@ sub warnUnsupportedFunctions {
         "cudnnCTCLossDescriptor_t",
         "cudnnCTCLossAlgo_t",
         "cudnnCTCLoss",
+        "cudnnCTCGradMode_t",
         "cudnnBuildRNNDynamic",
         "cudnnBnFinalizeStatsMode_t",
         "cudnnBatchNormalizationForwardTrainingEx",
@@ -11624,6 +11619,8 @@ sub warnUnsupportedFunctions {
         "CUDNN_DATA_FAST_FLOAT_FOR_FP8",
         "CUDNN_DATA_BOOLEAN",
         "CUDNN_DATA_BFLOAT16",
+        "CUDNN_CTC_ZERO_OOB_GRADIENTS",
+        "CUDNN_CTC_SKIP_OOB_GRADIENTS",
         "CUDNN_CTC_LOSS_ALGO_NON_DETERMINISTIC",
         "CUDNN_CTC_LOSS_ALGO_DETERMINISTIC",
         "CUDNN_BN_FINALIZE_STATISTICS_TRAINING",

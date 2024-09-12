@@ -329,6 +329,8 @@
 |`CUDNN_CROSS_CORRELATION`|1.0.0|9.0.0| | | | | | | | |
 |`CUDNN_CTC_LOSS_ALGO_DETERMINISTIC`|7.0.5| | | |`MIOPEN_CTC_LOSS_ALGO_DETERMINISTIC`| | | | | |
 |`CUDNN_CTC_LOSS_ALGO_NON_DETERMINISTIC`|7.0.5| | | | | | | | | |
+|`CUDNN_CTC_SKIP_OOB_GRADIENTS`|9.0.0| | | | | | | | | |
+|`CUDNN_CTC_ZERO_OOB_GRADIENTS`|9.0.0| | | | | | | | | |
 |`CUDNN_DATA_BFLOAT16`|8.1.0| | | |`miopenBFloat16`| | | | | |
 |`CUDNN_DATA_BOOLEAN`|8.3.0| | | | | | | | | |
 |`CUDNN_DATA_DOUBLE`|1.0.0| | | |`miopenDouble`| | | | | |
@@ -338,7 +340,7 @@
 |`CUDNN_DATA_FP8_E5M2`|8.6.0| | | | | | | | | |
 |`CUDNN_DATA_HALF`|3.0.0| | | |`miopenHalf`| | | | | |
 |`CUDNN_DATA_INT32`|6.0.0| | | |`miopenInt32`| | | | | |
-|`CUDNN_DATA_INT64`|8.1.0| | | | | | | | | |
+|`CUDNN_DATA_INT64`|8.1.0| | | |`miopenInt64`| | | | | |
 |`CUDNN_DATA_INT8`|6.0.0| | | |`miopenInt8`| | | | | |
 |`CUDNN_DATA_INT8x32`|7.2.1|9.0.0| | | | | | | | |
 |`CUDNN_DATA_INT8x4`|6.0.0|9.0.0| | |`miopenInt8x4`| | | | | |
@@ -585,16 +587,16 @@
 |`CUDNN_PTR_YSQSUM`|7.6.0| | | | | | | | | |
 |`CUDNN_PTR_YSUM`|7.6.0| | | | | | | | | |
 |`CUDNN_PTR_ZDATA`|7.6.0| | | | | | | | | |
-|`CUDNN_REDUCE_TENSOR_ADD`|6.0.0|9.0.0| | |`MIOPEN_REDUCE_TENSOR_ADD`| | | | | |
-|`CUDNN_REDUCE_TENSOR_AMAX`|6.0.0|9.0.0| | |`MIOPEN_REDUCE_TENSOR_AMAX`| | | | | |
-|`CUDNN_REDUCE_TENSOR_AVG`|6.0.0|9.0.0| | |`MIOPEN_REDUCE_TENSOR_AVG`| | | | | |
+|`CUDNN_REDUCE_TENSOR_ADD`|6.0.0| | | |`MIOPEN_REDUCE_TENSOR_ADD`| | | | | |
+|`CUDNN_REDUCE_TENSOR_AMAX`|6.0.0| | | |`MIOPEN_REDUCE_TENSOR_AMAX`| | | | | |
+|`CUDNN_REDUCE_TENSOR_AVG`|6.0.0| | | |`MIOPEN_REDUCE_TENSOR_AVG`| | | | | |
 |`CUDNN_REDUCE_TENSOR_FLATTENED_INDICES`|6.0.0|9.0.0| | |`MIOPEN_REDUCE_TENSOR_FLATTENED_INDICES`| | | | | |
-|`CUDNN_REDUCE_TENSOR_MAX`|6.0.0|9.0.0| | |`MIOPEN_REDUCE_TENSOR_MAX`| | | | | |
-|`CUDNN_REDUCE_TENSOR_MIN`|6.0.0|9.0.0| | |`MIOPEN_REDUCE_TENSOR_MIN`| | | | | |
-|`CUDNN_REDUCE_TENSOR_MUL`|6.0.0|9.0.0| | |`MIOPEN_REDUCE_TENSOR_MUL`| | | | | |
-|`CUDNN_REDUCE_TENSOR_MUL_NO_ZEROS`|7.0.5|9.0.0| | | | | | | | |
-|`CUDNN_REDUCE_TENSOR_NORM1`|6.0.0|9.0.0| | |`MIOPEN_REDUCE_TENSOR_NORM1`| | | | | |
-|`CUDNN_REDUCE_TENSOR_NORM2`|6.0.0|9.0.0| | |`MIOPEN_REDUCE_TENSOR_NORM2`| | | | | |
+|`CUDNN_REDUCE_TENSOR_MAX`|6.0.0| | | |`MIOPEN_REDUCE_TENSOR_MAX`| | | | | |
+|`CUDNN_REDUCE_TENSOR_MIN`|6.0.0| | | |`MIOPEN_REDUCE_TENSOR_MIN`| | | | | |
+|`CUDNN_REDUCE_TENSOR_MUL`|6.0.0| | | |`MIOPEN_REDUCE_TENSOR_MUL`| | | | | |
+|`CUDNN_REDUCE_TENSOR_MUL_NO_ZEROS`|7.0.5| | | | | | | | | |
+|`CUDNN_REDUCE_TENSOR_NORM1`|6.0.0| | | |`MIOPEN_REDUCE_TENSOR_NORM1`| | | | | |
+|`CUDNN_REDUCE_TENSOR_NORM2`|6.0.0| | | |`MIOPEN_REDUCE_TENSOR_NORM2`| | | | | |
 |`CUDNN_REDUCE_TENSOR_NO_INDICES`|6.0.0|9.0.0| | |`MIOPEN_REDUCE_TENSOR_NO_INDICES`| | | | | |
 |`CUDNN_RESAMPLE_AVGPOOL`|8.3.0| | | | | | | | | |
 |`CUDNN_RESAMPLE_AVGPOOL_EXCLUDE_PADDING`|8.6.0| | | | | | | | | |
@@ -701,7 +703,7 @@
 |`CUDNN_STATUS_SUBLIBRARY_LOADING_FAILED`|9.2.0| | | | | | | | | |
 |`CUDNN_STATUS_SUBLIBRARY_VERSION_MISMATCH`|9.0.0| | | | | | | | | |
 |`CUDNN_STATUS_SUCCESS`|1.0.0| | | |`miopenStatusSuccess`| | | | | |
-|`CUDNN_STATUS_VERSION_MISMATCH`|8.0.1|9.0.0| | | | | | | | |
+|`CUDNN_STATUS_VERSION_MISMATCH`|8.0.1|9.0.0| | |`miopenStatusVersionMismatch`| | | | | |
 |`CUDNN_TENSOR_NCHW`|1.0.0| | | |`miopenTensorNCHW`| | | | | |
 |`CUDNN_TENSOR_NCHW_VECT_C`|6.0.0| | | | | | | | | |
 |`CUDNN_TENSOR_NHWC`|1.0.0| | | |`miopenTensorNHWC`| | | | | |
@@ -773,11 +775,12 @@
 |`cudnnBatchNormMode_t`|4.0.0|9.0.0| | |`miopenBatchNormMode_t`| | | | | |
 |`cudnnBatchNormOps_t`|7.4.1|9.0.0| | | | | | | | |
 |`cudnnBnFinalizeStatsMode_t`|8.1.0| | | | | | | | | |
+|`cudnnCTCGradMode_t`|9.0.0| | | | | | | | | |
 |`cudnnCTCLossAlgo_t`|7.0.5| | | |`miopenCTCLossAlgo_t`| | | | | |
 |`cudnnCTCLossDescriptor_t`|7.0.5| | | |`miopenCTCLossDescriptor_t`| | | | | |
 |`cudnnCTCLossStruct`|7.0.5| | | | | | | | | |
 |`cudnnCallback_t`|7.1.3| | | | | | | | | |
-|`cudnnContext`|1.0.0| | | | | | | | | |
+|`cudnnContext`|1.0.0| | | |`miopenHandle`| | | | | |
 |`cudnnConvolutionBwdDataAlgoPerfStruct`|8.2.0|9.0.0| | |`miopenConvAlgoPerf_t`| | | | | |
 |`cudnnConvolutionBwdDataAlgoPerf_t`|3.0.0|9.0.0| | |`miopenConvAlgoPerf_t`| | | | | |
 |`cudnnConvolutionBwdDataAlgo_t`|3.0.0| | | |`miopenConvBwdDataAlgorithm_t`| | | | | |
