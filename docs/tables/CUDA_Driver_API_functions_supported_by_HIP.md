@@ -324,6 +324,7 @@
 |`CU_COREDUMP_MAX`|12.1| | | | | | | | | |
 |`CU_COREDUMP_PIPE`|12.1| | | | | | | | | |
 |`CU_COREDUMP_SKIP_ABORT`|12.5| | | | | | | | | |
+|`CU_COREDUMP_SKIP_CONSTBANK_MEMORY`|12.6| | | | | | | | | |
 |`CU_COREDUMP_SKIP_GLOBAL_MEMORY`|12.5| | | | | | | | | |
 |`CU_COREDUMP_SKIP_LOCAL_MEMORY`|12.5| | | | | | | | | |
 |`CU_COREDUMP_SKIP_NONRELOCATED_ELF_IMAGES`|12.5| | | | | | | | | |
