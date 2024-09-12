@@ -329,6 +329,8 @@
 |`CUDNN_CROSS_CORRELATION`|1.0.0|9.0.0| | |`HIPDNN_CROSS_CORRELATION`| | | | | |
 |`CUDNN_CTC_LOSS_ALGO_DETERMINISTIC`|7.0.5| | | | | | | | | |
 |`CUDNN_CTC_LOSS_ALGO_NON_DETERMINISTIC`|7.0.5| | | | | | | | | |
+|`CUDNN_CTC_SKIP_OOB_GRADIENTS`|9.0.0| | | | | | | | | |
+|`CUDNN_CTC_ZERO_OOB_GRADIENTS`|9.0.0| | | | | | | | | |
 |`CUDNN_DATA_BFLOAT16`|8.1.0| | | | | | | | | |
 |`CUDNN_DATA_BOOLEAN`|8.3.0| | | | | | | | | |
 |`CUDNN_DATA_DOUBLE`|1.0.0| | | |`HIPDNN_DATA_DOUBLE`| | | | | |
@@ -585,16 +587,16 @@
 |`CUDNN_PTR_YSQSUM`|7.6.0| | | | | | | | | |
 |`CUDNN_PTR_YSUM`|7.6.0| | | | | | | | | |
 |`CUDNN_PTR_ZDATA`|7.6.0| | | | | | | | | |
-|`CUDNN_REDUCE_TENSOR_ADD`|6.0.0|9.0.0| | |`HIPDNN_REDUCE_TENSOR_ADD`| | | | | |
-|`CUDNN_REDUCE_TENSOR_AMAX`|6.0.0|9.0.0| | |`HIPDNN_REDUCE_TENSOR_AMAX`| | | | | |
-|`CUDNN_REDUCE_TENSOR_AVG`|6.0.0|9.0.0| | |`HIPDNN_REDUCE_TENSOR_AVG`| | | | | |
+|`CUDNN_REDUCE_TENSOR_ADD`|6.0.0| | | |`HIPDNN_REDUCE_TENSOR_ADD`| | | | | |
+|`CUDNN_REDUCE_TENSOR_AMAX`|6.0.0| | | |`HIPDNN_REDUCE_TENSOR_AMAX`| | | | | |
+|`CUDNN_REDUCE_TENSOR_AVG`|6.0.0| | | |`HIPDNN_REDUCE_TENSOR_AVG`| | | | | |
 |`CUDNN_REDUCE_TENSOR_FLATTENED_INDICES`|6.0.0|9.0.0| | |`HIPDNN_REDUCE_TENSOR_FLATTENED_INDICES`| | | | | |
-|`CUDNN_REDUCE_TENSOR_MAX`|6.0.0|9.0.0| | |`HIPDNN_REDUCE_TENSOR_MAX`| | | | | |
-|`CUDNN_REDUCE_TENSOR_MIN`|6.0.0|9.0.0| | |`HIPDNN_REDUCE_TENSOR_MIN`| | | | | |
-|`CUDNN_REDUCE_TENSOR_MUL`|6.0.0|9.0.0| | |`HIPDNN_REDUCE_TENSOR_MUL`| | | | | |
-|`CUDNN_REDUCE_TENSOR_MUL_NO_ZEROS`|7.0.5|9.0.0| | |`HIPDNN_REDUCE_TENSOR_MUL_NO_ZEROS`| | | | | |
-|`CUDNN_REDUCE_TENSOR_NORM1`|6.0.0|9.0.0| | |`HIPDNN_REDUCE_TENSOR_NORM1`| | | | | |
-|`CUDNN_REDUCE_TENSOR_NORM2`|6.0.0|9.0.0| | |`HIPDNN_REDUCE_TENSOR_NORM2`| | | | | |
+|`CUDNN_REDUCE_TENSOR_MAX`|6.0.0| | | |`HIPDNN_REDUCE_TENSOR_MAX`| | | | | |
+|`CUDNN_REDUCE_TENSOR_MIN`|6.0.0| | | |`HIPDNN_REDUCE_TENSOR_MIN`| | | | | |
+|`CUDNN_REDUCE_TENSOR_MUL`|6.0.0| | | |`HIPDNN_REDUCE_TENSOR_MUL`| | | | | |
+|`CUDNN_REDUCE_TENSOR_MUL_NO_ZEROS`|7.0.5| | | |`HIPDNN_REDUCE_TENSOR_MUL_NO_ZEROS`| | | | | |
+|`CUDNN_REDUCE_TENSOR_NORM1`|6.0.0| | | |`HIPDNN_REDUCE_TENSOR_NORM1`| | | | | |
+|`CUDNN_REDUCE_TENSOR_NORM2`|6.0.0| | | |`HIPDNN_REDUCE_TENSOR_NORM2`| | | | | |
 |`CUDNN_REDUCE_TENSOR_NO_INDICES`|6.0.0|9.0.0| | |`HIPDNN_REDUCE_TENSOR_NO_INDICES`| | | | | |
 |`CUDNN_RESAMPLE_AVGPOOL`|8.3.0| | | | | | | | | |
 |`CUDNN_RESAMPLE_AVGPOOL_EXCLUDE_PADDING`|8.6.0| | | | | | | | | |
@@ -773,6 +775,7 @@
 |`cudnnBatchNormMode_t`|4.0.0|9.0.0| | |`hipdnnBatchNormMode_t`| | | | | |
 |`cudnnBatchNormOps_t`|7.4.1|9.0.0| | | | | | | | |
 |`cudnnBnFinalizeStatsMode_t`|8.1.0| | | | | | | | | |
+|`cudnnCTCGradMode_t`|9.0.0| | | | | | | | | |
 |`cudnnCTCLossAlgo_t`|7.0.5| | | | | | | | | |
 |`cudnnCTCLossDescriptor_t`|7.0.5| | | | | | | | | |
 |`cudnnCTCLossStruct`|7.0.5| | | | | | | | | |

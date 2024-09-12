@@ -29,7 +29,9 @@ int main() {
   // CHECK: miopenStatus_t status;
   cudnnStatus_t status;
 
-  // CHECK: miopenHandle_t handle;
+  // CHECK: miopenHandle *context = nullptr;
+  // CHECK-NEXT: miopenHandle_t handle;
+  cudnnContext *context = nullptr;
   cudnnHandle_t handle;
 
   // CUDA: cudnnStatus_t CUDNNWINAPI cudnnCreate(cudnnHandle_t *handle);
@@ -98,7 +100,6 @@ int main() {
   // CHECK-NEXT: miopenDataType_t DATA_INT8 = miopenInt8;
   // CHECK-NEXT: miopenDataType_t DATA_INT32 = miopenInt32;
   // CHECK-NEXT: miopenDataType_t DATA_INT8x4 = miopenInt8x4;
-  // CHECK-NEXT: miopenDataType_t DATA_BFLOAT16 = miopenBFloat16;
   cudnnDataType_t dataType;
   cudnnDataType_t DATA_FLOAT = CUDNN_DATA_FLOAT;
   cudnnDataType_t DATA_DOUBLE = CUDNN_DATA_DOUBLE;
@@ -106,7 +107,6 @@ int main() {
   cudnnDataType_t DATA_INT8 = CUDNN_DATA_INT8;
   cudnnDataType_t DATA_INT32 = CUDNN_DATA_INT32;
   cudnnDataType_t DATA_INT8x4 = CUDNN_DATA_INT8x4;
-  cudnnDataType_t DATA_BFLOAT16 = CUDNN_DATA_BFLOAT16;
 
   // CHECK: miopenRNNMode_t RNNMode;
   // CHECK-NEXT: miopenRNNMode_t RNN_RELU = miopenRNNRELU;
@@ -176,15 +176,9 @@ int main() {
   // CHECK: miopenActivationMode_t activationMode;
   // CHECK-NEXT: miopenActivationMode_t ACTIVATION_RELU = miopenActivationRELU;
   // CHECK-NEXT: miopenActivationMode_t ACTIVATION_TANH = miopenActivationTANH;
-  // CHECK-NEXT: miopenActivationMode_t ACTIVATION_CLIPPED_RELU = miopenActivationCLIPPEDRELU;
-  // CHECK-NEXT: miopenActivationMode_t ACTIVATION_ELU = miopenActivationELU;
-  // CHECK-NEXT: miopenActivationMode_t ACTIVATION_IDENTITY = miopenActivationPASTHRU;
   cudnnActivationMode_t activationMode;
   cudnnActivationMode_t ACTIVATION_RELU = CUDNN_ACTIVATION_RELU;
   cudnnActivationMode_t ACTIVATION_TANH = CUDNN_ACTIVATION_TANH;
-  cudnnActivationMode_t ACTIVATION_CLIPPED_RELU = CUDNN_ACTIVATION_CLIPPED_RELU;
-  cudnnActivationMode_t ACTIVATION_ELU = CUDNN_ACTIVATION_ELU;
-  cudnnActivationMode_t ACTIVATION_IDENTITY = CUDNN_ACTIVATION_IDENTITY;
 
   // CHECK: miopenSoftmaxAlgorithm_t softmaxAlgorithm;
   // CHECK-NEXT: miopenSoftmaxAlgorithm_t SOFTMAX_FAST = MIOPEN_SOFTMAX_FAST;
@@ -202,25 +196,6 @@ int main() {
   cudnnSoftmaxMode_t SOFTMAX_MODE_INSTANCE = CUDNN_SOFTMAX_MODE_INSTANCE;
   cudnnSoftmaxMode_t SOFTMAX_MODE_CHANNEL = CUDNN_SOFTMAX_MODE_CHANNEL;
 
-  // CHECK: miopenReduceTensorOp_t reduceTensorOp;
-  // CHECK-NEXT: miopenReduceTensorOp_t REDUCE_TENSOR_ADD = MIOPEN_REDUCE_TENSOR_ADD;
-  // CHECK-NEXT: miopenReduceTensorOp_t REDUCE_TENSOR_MUL = MIOPEN_REDUCE_TENSOR_MUL;
-  // CHECK-NEXT: miopenReduceTensorOp_t REDUCE_TENSOR_MIN = MIOPEN_REDUCE_TENSOR_MIN;
-  // CHECK-NEXT: miopenReduceTensorOp_t REDUCE_TENSOR_MAX = MIOPEN_REDUCE_TENSOR_MAX;
-  // CHECK-NEXT: miopenReduceTensorOp_t REDUCE_TENSOR_AMAX = MIOPEN_REDUCE_TENSOR_AMAX;
-  // CHECK-NEXT: miopenReduceTensorOp_t REDUCE_TENSOR_AVG = MIOPEN_REDUCE_TENSOR_AVG;
-  // CHECK-NEXT: miopenReduceTensorOp_t REDUCE_TENSOR_NORM1 = MIOPEN_REDUCE_TENSOR_NORM1;
-  // CHECK-NEXT: miopenReduceTensorOp_t REDUCE_TENSOR_NORM2 = MIOPEN_REDUCE_TENSOR_NORM2;
-  cudnnReduceTensorOp_t reduceTensorOp;
-  cudnnReduceTensorOp_t REDUCE_TENSOR_ADD = CUDNN_REDUCE_TENSOR_ADD;
-  cudnnReduceTensorOp_t REDUCE_TENSOR_MUL = CUDNN_REDUCE_TENSOR_MUL;
-  cudnnReduceTensorOp_t REDUCE_TENSOR_MIN = CUDNN_REDUCE_TENSOR_MIN;
-  cudnnReduceTensorOp_t REDUCE_TENSOR_MAX = CUDNN_REDUCE_TENSOR_MAX;
-  cudnnReduceTensorOp_t REDUCE_TENSOR_AMAX = CUDNN_REDUCE_TENSOR_AMAX;
-  cudnnReduceTensorOp_t REDUCE_TENSOR_AVG = CUDNN_REDUCE_TENSOR_AVG;
-  cudnnReduceTensorOp_t REDUCE_TENSOR_NORM1 = CUDNN_REDUCE_TENSOR_NORM1;
-  cudnnReduceTensorOp_t REDUCE_TENSOR_NORM2 = CUDNN_REDUCE_TENSOR_NORM2;
-
   // CHECK: miopenConvFwdAlgorithm_t convolutionFwdAlgo;
   // CHECK-NEXT: miopenConvFwdAlgorithm_t CONVOLUTION_FWD_ALGO_IMPLICIT_GEMM = miopenConvolutionFwdAlgoImplicitGEMM;
   // CHECK-NEXT: miopenConvFwdAlgorithm_t CONVOLUTION_FWD_ALGO_GEMM = miopenConvolutionFwdAlgoGEMM;
@@ -233,13 +208,6 @@ int main() {
   cudnnConvolutionFwdAlgo_t CONVOLUTION_FWD_ALGO_DIRECT = CUDNN_CONVOLUTION_FWD_ALGO_DIRECT;
   cudnnConvolutionFwdAlgo_t CONVOLUTION_FWD_ALGO_FFT = CUDNN_CONVOLUTION_FWD_ALGO_FFT;
   cudnnConvolutionFwdAlgo_t CONVOLUTION_FWD_ALGO_WINOGRAD = CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD;
-
-  // CHECK: miopenNanPropagation_t nanPropagation_t;
-  // CHECK-NEXT: miopenNanPropagation_t NOT_PROPAGATE_NAN = MIOPEN_NOT_PROPAGATE_NAN;
-  // CHECK-NEXT: miopenNanPropagation_t PROPAGATE_NAN = MIOPEN_PROPAGATE_NAN;
-  cudnnNanPropagation_t nanPropagation_t;
-  cudnnNanPropagation_t NOT_PROPAGATE_NAN = CUDNN_NOT_PROPAGATE_NAN;
-  cudnnNanPropagation_t PROPAGATE_NAN = CUDNN_PROPAGATE_NAN;
 
   // CHECK: miopenReduceTensorIndices_t reduceTensorIndices;
   // CHECK-NEXT: miopenReduceTensorIndices_t REDUCE_TENSOR_NO_INDICES = MIOPEN_REDUCE_TENSOR_NO_INDICES;
@@ -797,16 +765,6 @@ int main() {
   // CHECK: status = miopenDestroyReduceTensorDescriptor(ReduceTensorDescriptor);
   status = cudnnDestroyReduceTensorDescriptor(ReduceTensorDescriptor);
 
-  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnSetReduceTensorDescriptor(cudnnReduceTensorDescriptor_t reduceTensorDesc, cudnnReduceTensorOp_t reduceTensorOp, cudnnDataType_t reduceTensorCompType, cudnnNanPropagation_t reduceTensorNanOpt, cudnnReduceTensorIndices_t reduceTensorIndices, cudnnIndicesType_t reduceTensorIndicesType);
-  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenSetReduceTensorDescriptor(miopenReduceTensorDescriptor_t reduceTensorDesc, miopenReduceTensorOp_t reduceTensorOp, miopenDataType_t reduceTensorCompType, miopenNanPropagation_t reduceTensorNanOpt, miopenReduceTensorIndices_t reduceTensorIndices, miopenIndicesType_t reduceTensorIndicesType);
-  // CHECK: status = miopenSetReduceTensorDescriptor(ReduceTensorDescriptor, reduceTensorOp, dataType, nanPropagation_t, reduceTensorIndices, indicesType);
-  status = cudnnSetReduceTensorDescriptor(ReduceTensorDescriptor, reduceTensorOp, dataType, nanPropagation_t, reduceTensorIndices, indicesType);
-
-  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnGetReduceTensorDescriptor(const cudnnReduceTensorDescriptor_t reduceTensorDesc, cudnnReduceTensorOp_t* reduceTensorOp, cudnnDataType_t* reduceTensorCompType, cudnnNanPropagation_t* reduceTensorNanOpt, cudnnReduceTensorIndices_t* reduceTensorIndices, cudnnIndicesType_t* reduceTensorIndicesType);
-  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenGetReduceTensorDescriptor(const miopenReduceTensorDescriptor_t reduceTensorDesc, miopenReduceTensorOp_t* reduceTensorOp, miopenDataType_t* reduceTensorCompType, miopenNanPropagation_t* reduceTensorNanOpt, miopenReduceTensorIndices_t* reduceTensorIndices, miopenIndicesType_t* reduceTensorIndicesType);
-  // CHECK: status = miopenGetReduceTensorDescriptor(ReduceTensorDescriptor, &reduceTensorOp, &dataType, &nanPropagation_t, &reduceTensorIndices, &indicesType);
-  status = cudnnGetReduceTensorDescriptor(ReduceTensorDescriptor, &reduceTensorOp, &dataType, &nanPropagation_t, &reduceTensorIndices, &indicesType);
-
   // CUDA: cudnnStatus_t CUDNNWINAPI cudnnGetReductionIndicesSize(cudnnHandle_t handle, const cudnnReduceTensorDescriptor_t reduceTensorDesc, const cudnnTensorDescriptor_t aDesc, const cudnnTensorDescriptor_t cDesc, size_t* sizeInBytes);
   // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenGetReductionIndicesSize(miopenHandle_t handle, const miopenReduceTensorDescriptor_t reduceTensorDesc, const miopenTensorDescriptor_t aDesc, const miopenTensorDescriptor_t cDesc, size_t* sizeInBytes);
   // CHECK: status = miopenGetReductionIndicesSize(handle, ReduceTensorDescriptor, aD, cD, &workSpaceSizeInBytes);
@@ -822,7 +780,66 @@ int main() {
   // CHECK: status = miopenReduceTensor(handle, ReduceTensorDescriptor, indices, indicesSizeInBytes, workSpace, workSpaceSizeInBytes, alpha, aD, A, beta, cD, C);
   status = cudnnReduceTensor(handle, ReduceTensorDescriptor, indices, indicesSizeInBytes, workSpace, workSpaceSizeInBytes, alpha, aD, A, beta, cD, C);
 
+#if CUDNN_VERSION >= 3008
+  // CHECK: miopenDataType_t DATA_BFLOAT16 = miopenBFloat16;
+  cudnnDataType_t DATA_BFLOAT16 = CUDNN_DATA_BFLOAT16;
+#endif
+
+#if CUDNN_VERSION >= 4008
+  // CHECK: miopenNanPropagation_t nanPropagation_t;
+  // CHECK-NEXT: miopenNanPropagation_t NOT_PROPAGATE_NAN = MIOPEN_NOT_PROPAGATE_NAN;
+  // CHECK-NEXT: miopenNanPropagation_t PROPAGATE_NAN = MIOPEN_PROPAGATE_NAN;
+  cudnnNanPropagation_t nanPropagation_t;
+  cudnnNanPropagation_t NOT_PROPAGATE_NAN = CUDNN_NOT_PROPAGATE_NAN;
+  cudnnNanPropagation_t PROPAGATE_NAN = CUDNN_PROPAGATE_NAN;
+
+  // CHECK: miopenActivationMode_t ACTIVATION_CLIPPED_RELU = miopenActivationCLIPPEDRELU;
+  cudnnActivationMode_t ACTIVATION_CLIPPED_RELU = CUDNN_ACTIVATION_CLIPPED_RELU;
+#endif
+
+#if CUDNN_VERSION >= 6021
+  // CHECK: miopenReduceTensorOp_t reduceTensorOp;
+  // CHECK-NEXT: miopenReduceTensorOp_t REDUCE_TENSOR_ADD = MIOPEN_REDUCE_TENSOR_ADD;
+  // CHECK-NEXT: miopenReduceTensorOp_t REDUCE_TENSOR_MUL = MIOPEN_REDUCE_TENSOR_MUL;
+  // CHECK-NEXT: miopenReduceTensorOp_t REDUCE_TENSOR_MIN = MIOPEN_REDUCE_TENSOR_MIN;
+  // CHECK-NEXT: miopenReduceTensorOp_t REDUCE_TENSOR_MAX = MIOPEN_REDUCE_TENSOR_MAX;
+  // CHECK-NEXT: miopenReduceTensorOp_t REDUCE_TENSOR_AMAX = MIOPEN_REDUCE_TENSOR_AMAX;
+  // CHECK-NEXT: miopenReduceTensorOp_t REDUCE_TENSOR_AVG = MIOPEN_REDUCE_TENSOR_AVG;
+  // CHECK-NEXT: miopenReduceTensorOp_t REDUCE_TENSOR_NORM1 = MIOPEN_REDUCE_TENSOR_NORM1;
+  // CHECK-NEXT: miopenReduceTensorOp_t REDUCE_TENSOR_NORM2 = MIOPEN_REDUCE_TENSOR_NORM2;
+  cudnnReduceTensorOp_t reduceTensorOp;
+  cudnnReduceTensorOp_t REDUCE_TENSOR_ADD = CUDNN_REDUCE_TENSOR_ADD;
+  cudnnReduceTensorOp_t REDUCE_TENSOR_MUL = CUDNN_REDUCE_TENSOR_MUL;
+  cudnnReduceTensorOp_t REDUCE_TENSOR_MIN = CUDNN_REDUCE_TENSOR_MIN;
+  cudnnReduceTensorOp_t REDUCE_TENSOR_MAX = CUDNN_REDUCE_TENSOR_MAX;
+  cudnnReduceTensorOp_t REDUCE_TENSOR_AMAX = CUDNN_REDUCE_TENSOR_AMAX;
+  cudnnReduceTensorOp_t REDUCE_TENSOR_AVG = CUDNN_REDUCE_TENSOR_AVG;
+  cudnnReduceTensorOp_t REDUCE_TENSOR_NORM1 = CUDNN_REDUCE_TENSOR_NORM1;
+  cudnnReduceTensorOp_t REDUCE_TENSOR_NORM2 = CUDNN_REDUCE_TENSOR_NORM2;
+
+  // CHECK: miopenActivationMode_t ACTIVATION_ELU = miopenActivationELU;
+  cudnnActivationMode_t ACTIVATION_ELU = CUDNN_ACTIVATION_ELU;
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnSetReduceTensorDescriptor(cudnnReduceTensorDescriptor_t reduceTensorDesc, cudnnReduceTensorOp_t reduceTensorOp, cudnnDataType_t reduceTensorCompType, cudnnNanPropagation_t reduceTensorNanOpt, cudnnReduceTensorIndices_t reduceTensorIndices, cudnnIndicesType_t reduceTensorIndicesType);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenSetReduceTensorDescriptor(miopenReduceTensorDescriptor_t reduceTensorDesc, miopenReduceTensorOp_t reduceTensorOp, miopenDataType_t reduceTensorCompType, miopenNanPropagation_t reduceTensorNanOpt, miopenReduceTensorIndices_t reduceTensorIndices, miopenIndicesType_t reduceTensorIndicesType);
+  // CHECK: status = miopenSetReduceTensorDescriptor(ReduceTensorDescriptor, reduceTensorOp, dataType, nanPropagation_t, reduceTensorIndices, indicesType);
+  status = cudnnSetReduceTensorDescriptor(ReduceTensorDescriptor, reduceTensorOp, dataType, nanPropagation_t, reduceTensorIndices, indicesType);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnGetReduceTensorDescriptor(const cudnnReduceTensorDescriptor_t reduceTensorDesc, cudnnReduceTensorOp_t* reduceTensorOp, cudnnDataType_t* reduceTensorCompType, cudnnNanPropagation_t* reduceTensorNanOpt, cudnnReduceTensorIndices_t* reduceTensorIndices, cudnnIndicesType_t* reduceTensorIndicesType);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenGetReduceTensorDescriptor(const miopenReduceTensorDescriptor_t reduceTensorDesc, miopenReduceTensorOp_t* reduceTensorOp, miopenDataType_t* reduceTensorCompType, miopenNanPropagation_t* reduceTensorNanOpt, miopenReduceTensorIndices_t* reduceTensorIndices, miopenIndicesType_t* reduceTensorIndicesType);
+  // CHECK: status = miopenGetReduceTensorDescriptor(ReduceTensorDescriptor, &reduceTensorOp, &dataType, &nanPropagation_t, &reduceTensorIndices, &indicesType);
+  status = cudnnGetReduceTensorDescriptor(ReduceTensorDescriptor, &reduceTensorOp, &dataType, &nanPropagation_t, &reduceTensorIndices, &indicesType);
+#endif
+
+#if CUDNN_VERSION >= 7103
+  // CHECK: miopenActivationMode_t ACTIVATION_IDENTITY = miopenActivationPASTHRU;
+  cudnnActivationMode_t ACTIVATION_IDENTITY = CUDNN_ACTIVATION_IDENTITY;
+#endif
+
 #if CUDNN_VERSION >= 8001
+  // CHECK: miopenStatus_t STATUS_VERSION_MISMATCH = miopenStatusVersionMismatch;
+  cudnnStatus_t STATUS_VERSION_MISMATCH = CUDNN_STATUS_VERSION_MISMATCH;
+
   // CHECK: miopenBackendDescriptorType_t backendDescriptorType_t;
   // CHECK-NEXT: miopenBackendDescriptorType_t BACKEND_POINTWISE_DESCRIPTOR = MIOPEN_BACKEND_POINTWISE_DESCRIPTOR;
   // CHECK-NEXT: miopenBackendDescriptorType_t BACKEND_CONVOLUTION_DESCRIPTOR = MIOPEN_BACKEND_CONVOLUTION_DESCRIPTOR;
@@ -1076,6 +1093,9 @@ int main() {
 #endif
 
 #if CUDNN_VERSION >= 8100
+  // CHECK: miopenDataType_t DATA_INT64 = miopenInt64;
+  cudnnDataType_t DATA_INT64 = CUDNN_DATA_INT64;
+
   // CHECK: miopenBackendDescriptorType_t BACKEND_MATMUL_DESCRIPTOR = MIOPEN_BACKEND_MATMUL_DESCRIPTOR;
   // CHECK-NEXT: miopenBackendDescriptorType_t BACKEND_OPERATION_MATMUL_DESCRIPTOR = MIOPEN_BACKEND_OPERATION_MATMUL_DESCRIPTOR;
   // CHECK-NEXT: miopenBackendDescriptorType_t BACKEND_REDUCTION_DESCRIPTOR = MIOPEN_BACKEND_REDUCTION_DESCRIPTOR;
