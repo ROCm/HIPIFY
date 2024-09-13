@@ -180,12 +180,18 @@ if (NOT HIPIFY_CLANG_TESTS_ONLY)
     PATTERN "hipify-perl"
     PATTERN "*.sh"
     PATTERN "findcode.sh" EXCLUDE
+    PATTERN "findcode_headers.sh" EXCLUDE
+    PATTERN "findcode_sources.sh" EXCLUDE
+    PATTERN "findcode_custom.sh" EXCLUDE
     PATTERN "finduncodep.sh" EXCLUDE)
 
   set(HIPIFY_LIBEXEC_INSTALL_PATH "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBEXECDIR}/hipify")
 
   install(
     PROGRAMS ${CMAKE_CURRENT_SOURCE_DIR}/bin/findcode.sh
+    PROGRAMS ${CMAKE_CURRENT_SOURCE_DIR}/bin/findcode_headers.sh
+    PROGRAMS ${CMAKE_CURRENT_SOURCE_DIR}/bin/findcode_sources.sh
+    PROGRAMS ${CMAKE_CURRENT_SOURCE_DIR}/bin/findcode_custom.sh
     PROGRAMS ${CMAKE_CURRENT_SOURCE_DIR}/bin/finduncodep.sh
     DESTINATION ${CMAKE_INSTALL_LIBEXECDIR}/hipify)
 

@@ -17,6 +17,9 @@ case "$1" in
     rm -f @ROCMBINDIR@/hipexamine-perl.sh
     rm -f @ROCMBINDIR@/hipexamine.sh
     rm -f @ROCMBINDIR@/findcode.sh
+    rm -f @ROCMBINDIR@/findcode_headers.sh
+    rm -f @ROCMBINDIR@/findcode_sources.sh
+    rm -f @ROCMBINDIR@/findcode_custom.sh
     rm -f @ROCMBINDIR@/finduncodep.sh
     rmdir --ignore-fail-on-non-empty @ROCMBINDIR@
   ;;
