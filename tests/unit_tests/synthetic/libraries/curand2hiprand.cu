@@ -18,6 +18,9 @@
 int main() {
   printf("21. cuRAND API to hipRAND API synthetic test\n");
 
+  unsigned int *outputPtr = nullptr;
+  size_t num = 0;
+
   // CHECK: hiprandStatus randStatus;
   // CHECK-NEXT: hiprandStatus_t status;
   // CHECK-NEXT: hiprandStatus_t STATUS_SUCCESS = HIPRAND_STATUS_SUCCESS;
@@ -131,6 +134,21 @@ int main() {
   curandDirectionVectorSet_t DIRECTION_VECTORS_64_JOEKUO6 = CURAND_DIRECTION_VECTORS_64_JOEKUO6;
   curandDirectionVectorSet_t SCRAMBLED_DIRECTION_VECTORS_64_JOEKUO6 = CURAND_SCRAMBLED_DIRECTION_VECTORS_64_JOEKUO6;
 
+  // CUDA: curandStatus_t CURANDAPI curandCreateGenerator(curandGenerator_t *generator, curandRngType_t rng_type);
+  // HIP: hiprandStatus_t HIPRANDAPI hiprandCreateGenerator(hiprandGenerator_t* generator, hiprandRngType_t rng_type)
+  // CHECK: status = hiprandCreateGenerator(&randGenerator, randRngType_t);
+  status = curandCreateGenerator(&randGenerator, randRngType_t);
+
+  // CUDA: curandStatus_t CURANDAPI curandDestroyGenerator(curandGenerator_t generator);
+  // HIP: hiprandStatus_t HIPRANDAPI hiprandDestroyGenerator(hiprandGenerator_t generator);
+  // CHECK: status = hiprandDestroyGenerator(randGenerator);
+  status = curandDestroyGenerator(randGenerator);
+
+  // CUDA: curandStatus_t CURANDAPI curandCreateGeneratorHost(curandGenerator_t *generator, curandRngType_t rng_type);
+  // HIP: hiprandStatus_t HIPRANDAPI hiprandCreateGeneratorHost(hiprandGenerator_t * generator, hiprandRngType_t rng_type);
+  // CHECK: status = hiprandCreateGeneratorHost(&randGenerator, randRngType_t);
+  status = curandCreateGeneratorHost(&randGenerator, randRngType_t);
+
   // CUDA: curandStatus_t CURANDAPI curandSetGeneratorOrdering(curandGenerator_t generator, curandOrdering_t order);
   // HIP: hiprandStatus_t HIPRANDAPI hiprandSetGeneratorOrdering(hiprandGenerator_t generator, hiprandOrdering_t order);
   // CHECK: status = hiprandSetGeneratorOrdering(randGenerator, randOrdering_t);
@@ -140,6 +158,11 @@ int main() {
   // HIP: hiprandStatus_t HIPRANDAPI hiprandGetDirectionVectors64(hiprandDirectionVectors64_t** vectors, hiprandDirectionVectorSet_t set);
   // CHECK: status = hiprandGetDirectionVectors64(&pDirections64, directionVectorSet_t);
   status = curandGetDirectionVectors64(&pDirections64, directionVectorSet_t);
+
+  // CUDA: curandStatus_t CURANDAPI curandGenerate(curandGenerator_t generator, unsigned int *outputPtr, size_t num);
+  // HIP: hiprandStatus_t HIPRANDAPI hiprandGenerate(hiprandGenerator_t generator, unsigned int * output_data, size_t n);
+  // CHECK: status = hiprandGenerate(randGenerator, outputPtr, num);
+  status = curandGenerate(randGenerator, outputPtr, num);
 
 #if CUDA_VERSION >= 11000 && CURAND_VERSION >= 10200
   // CHECK: hiprandOrdering_t RAND_ORDERING_PSEUDO_LEGACY = HIPRAND_ORDERING_PSEUDO_LEGACY;

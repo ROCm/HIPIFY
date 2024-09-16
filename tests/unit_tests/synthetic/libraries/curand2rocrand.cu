@@ -10,8 +10,11 @@
 int main() {
   printf("21.1. cuRAND API to rocRAND API synthetic test\n");
 
+  unsigned int *outputPtr = nullptr;
+  size_t num = 0;
+
   // CHECK: rocrand_status randStatus;
-  // CHECK-NEXT: rocrand_status randStatus_t;
+  // CHECK-NEXT: rocrand_status status;
   // CHECK-NEXT: rocrand_status STATUS_SUCCESS = ROCRAND_STATUS_SUCCESS;
   // CHECK-NEXT: rocrand_status STATUS_VERSION_MISMATCH = ROCRAND_STATUS_VERSION_MISMATCH;
   // CHECK-NEXT: rocrand_status STATUS_NOT_INITIALIZED = ROCRAND_STATUS_NOT_CREATED;
@@ -23,7 +26,7 @@ int main() {
   // CHECK-NEXT: rocrand_status STATUS_LAUNCH_FAILURE = ROCRAND_STATUS_LAUNCH_FAILURE;
   // CHECK-NEXT: rocrand_status STATUS_INTERNAL_ERROR = ROCRAND_STATUS_INTERNAL_ERROR;
   curandStatus randStatus;
-  curandStatus_t randStatus_t;
+  curandStatus_t status;
   curandStatus_t STATUS_SUCCESS = CURAND_STATUS_SUCCESS;
   curandStatus_t STATUS_VERSION_MISMATCH = CURAND_STATUS_VERSION_MISMATCH;
   curandStatus_t STATUS_NOT_INITIALIZED = CURAND_STATUS_NOT_INITIALIZED;
@@ -91,6 +94,26 @@ int main() {
   // CHECK-NEXT: rocrand_generator randGenerator;
   curandGenerator_st *randGenerator_st = nullptr;
   curandGenerator_t randGenerator;
+
+  // CUDA: curandStatus_t CURANDAPI curandCreateGenerator(curandGenerator_t *generator, curandRngType_t rng_type);
+  // ROC: rocrand_status ROCRANDAPI rocrand_create_generator(rocrand_generator * generator, rocrand_rng_type rng_type);
+  // CHECK: status = rocrand_create_generator(&randGenerator, randRngType_t);
+  status = curandCreateGenerator(&randGenerator, randRngType_t);
+
+  // CUDA: curandStatus_t CURANDAPI curandDestroyGenerator(curandGenerator_t generator);
+  // ROC: rocrand_status ROCRANDAPI rocrand_destroy_generator(rocrand_generator generator);
+  // CHECK: status = rocrand_destroy_generator(randGenerator);
+  status = curandDestroyGenerator(randGenerator);
+
+  // CUDA: curandStatus_t CURANDAPI curandCreateGeneratorHost(curandGenerator_t *generator, curandRngType_t rng_type);
+  // ROC: rocrand_status ROCRANDAPI rocrand_create_generator_host_blocking(rocrand_generator* generator, rocrand_rng_type rng_type);
+  // CHECK: status = rocrand_create_generator_host_blocking(&randGenerator, randRngType_t);
+  status = curandCreateGeneratorHost(&randGenerator, randRngType_t);
+
+  // CUDA: curandStatus_t CURANDAPI curandGenerate(curandGenerator_t generator, unsigned int *outputPtr, size_t num);
+  // ROC: rocrand_status ROCRANDAPI rocrand_generate(rocrand_generator generator, unsigned int * output_data, size_t n);
+  // CHECK: status = rocrand_generate(randGenerator, outputPtr, num);
+  status = curandGenerate(randGenerator, outputPtr, num);
 
 #if CUDA_VERSION >= 11000 && CURAND_VERSION >= 10200
   // CHECK: rocrand_ordering RAND_ORDERING_PSEUDO_LEGACY = ROCRAND_ORDERING_PSEUDO_LEGACY;

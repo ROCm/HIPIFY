@@ -104,12 +104,12 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|**ROC**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
-|`curandCreateGenerator`| | | | |`hiprandCreateGenerator`|1.5.0| | | | | | | | | | |
-|`curandCreateGeneratorHost`| | | | |`hiprandCreateGeneratorHost`|1.5.0| | | | | | | | | | |
+|`curandCreateGenerator`| | | | |`hiprandCreateGenerator`|1.5.0| | | | |`rocrand_create_generator`|1.5.0| | | | |
+|`curandCreateGeneratorHost`| | | | |`hiprandCreateGeneratorHost`|1.5.0| | | | |`rocrand_create_generator_host_blocking`|6.2.0| | | |6.2.0|
 |`curandCreatePoissonDistribution`| | | | |`hiprandCreatePoissonDistribution`|1.5.0| | | | | | | | | | |
 |`curandDestroyDistribution`| | | | |`hiprandDestroyDistribution`|1.5.0| | | | | | | | | | |
-|`curandDestroyGenerator`| | | | |`hiprandDestroyGenerator`|1.5.0| | | | | | | | | | |
-|`curandGenerate`| | | | |`hiprandGenerate`|1.5.0| | | | | | | | | | |
+|`curandDestroyGenerator`| | | | |`hiprandDestroyGenerator`|1.5.0| | | | |`rocrand_destroy_generator`|1.5.0| | | |6.2.0|
+|`curandGenerate`| | | | |`hiprandGenerate`|1.5.0| | | | |`rocrand_generate`|1.5.0| | | |6.2.0|
 |`curandGenerateLogNormal`| | | | |`hiprandGenerateLogNormal`|1.5.0| | | | | | | | | | |
 |`curandGenerateLogNormalDouble`| | | | |`hiprandGenerateLogNormalDouble`|1.5.0| | | | | | | | | | |
 |`curandGenerateLongLong`| | | | | | | | | | | | | | | | |

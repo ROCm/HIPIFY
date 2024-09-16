@@ -2598,6 +2598,10 @@ sub rocSubstitutions {
     subst("cudnnSoftmaxBackward", "miopenSoftmaxBackward_V2", "library");
     subst("cudnnSoftmaxForward", "miopenSoftmaxForward_V2", "library");
     subst("cudnnTransformTensor", "miopenTransformTensor", "library");
+    subst("curandCreateGenerator", "rocrand_create_generator", "library");
+    subst("curandCreateGeneratorHost", "rocrand_create_generator_host_blocking", "library");
+    subst("curandDestroyGenerator", "rocrand_destroy_generator", "library");
+    subst("curandGenerate", "rocrand_generate", "library");
     subst("cusolverDnCpotrf", "rocsolver_cpotrf", "library");
     subst("cusolverDnCreate", "rocblas_create_handle", "library");
     subst("cusolverDnDestroy", "rocblas_destroy_handle", "library");

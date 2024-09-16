@@ -104,12 +104,12 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**ROC**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
-|`curandCreateGenerator`| | | | | | | | | | |
-|`curandCreateGeneratorHost`| | | | | | | | | | |
+|`curandCreateGenerator`| | | | |`rocrand_create_generator`|1.5.0| | | | |
+|`curandCreateGeneratorHost`| | | | |`rocrand_create_generator_host_blocking`|6.2.0| | | |6.2.0|
 |`curandCreatePoissonDistribution`| | | | | | | | | | |
 |`curandDestroyDistribution`| | | | | | | | | | |
-|`curandDestroyGenerator`| | | | | | | | | | |
-|`curandGenerate`| | | | | | | | | | |
+|`curandDestroyGenerator`| | | | |`rocrand_destroy_generator`|1.5.0| | | |6.2.0|
+|`curandGenerate`| | | | |`rocrand_generate`|1.5.0| | | |6.2.0|
 |`curandGenerateLogNormal`| | | | | | | | | | |
 |`curandGenerateLogNormalDouble`| | | | | | | | | | |
 |`curandGenerateLongLong`| | | | | | | | | | |
