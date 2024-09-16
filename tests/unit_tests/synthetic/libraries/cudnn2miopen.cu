@@ -29,7 +29,9 @@ int main() {
   // CHECK: miopenStatus_t status;
   cudnnStatus_t status;
 
-  // CHECK: miopenHandle_t handle;
+  // CHECK: miopenHandle *context = nullptr;
+  // CHECK-NEXT: miopenHandle_t handle;
+  cudnnContext *context = nullptr;
   cudnnHandle_t handle;
 
   // CUDA: cudnnStatus_t CUDNNWINAPI cudnnCreate(cudnnHandle_t *handle);
@@ -98,7 +100,6 @@ int main() {
   // CHECK-NEXT: miopenDataType_t DATA_INT8 = miopenInt8;
   // CHECK-NEXT: miopenDataType_t DATA_INT32 = miopenInt32;
   // CHECK-NEXT: miopenDataType_t DATA_INT8x4 = miopenInt8x4;
-  // CHECK-NEXT: miopenDataType_t DATA_BFLOAT16 = miopenBFloat16;
   cudnnDataType_t dataType;
   cudnnDataType_t DATA_FLOAT = CUDNN_DATA_FLOAT;
   cudnnDataType_t DATA_DOUBLE = CUDNN_DATA_DOUBLE;
@@ -106,7 +107,6 @@ int main() {
   cudnnDataType_t DATA_INT8 = CUDNN_DATA_INT8;
   cudnnDataType_t DATA_INT32 = CUDNN_DATA_INT32;
   cudnnDataType_t DATA_INT8x4 = CUDNN_DATA_INT8x4;
-  cudnnDataType_t DATA_BFLOAT16 = CUDNN_DATA_BFLOAT16;
 
   // CHECK: miopenRNNMode_t RNNMode;
   // CHECK-NEXT: miopenRNNMode_t RNN_RELU = miopenRNNRELU;
@@ -176,15 +176,9 @@ int main() {
   // CHECK: miopenActivationMode_t activationMode;
   // CHECK-NEXT: miopenActivationMode_t ACTIVATION_RELU = miopenActivationRELU;
   // CHECK-NEXT: miopenActivationMode_t ACTIVATION_TANH = miopenActivationTANH;
-  // CHECK-NEXT: miopenActivationMode_t ACTIVATION_CLIPPED_RELU = miopenActivationCLIPPEDRELU;
-  // CHECK-NEXT: miopenActivationMode_t ACTIVATION_ELU = miopenActivationELU;
-  // CHECK-NEXT: miopenActivationMode_t ACTIVATION_IDENTITY = miopenActivationPASTHRU;
   cudnnActivationMode_t activationMode;
   cudnnActivationMode_t ACTIVATION_RELU = CUDNN_ACTIVATION_RELU;
   cudnnActivationMode_t ACTIVATION_TANH = CUDNN_ACTIVATION_TANH;
-  cudnnActivationMode_t ACTIVATION_CLIPPED_RELU = CUDNN_ACTIVATION_CLIPPED_RELU;
-  cudnnActivationMode_t ACTIVATION_ELU = CUDNN_ACTIVATION_ELU;
-  cudnnActivationMode_t ACTIVATION_IDENTITY = CUDNN_ACTIVATION_IDENTITY;
 
   // CHECK: miopenSoftmaxAlgorithm_t softmaxAlgorithm;
   // CHECK-NEXT: miopenSoftmaxAlgorithm_t SOFTMAX_FAST = MIOPEN_SOFTMAX_FAST;
@@ -202,25 +196,6 @@ int main() {
   cudnnSoftmaxMode_t SOFTMAX_MODE_INSTANCE = CUDNN_SOFTMAX_MODE_INSTANCE;
   cudnnSoftmaxMode_t SOFTMAX_MODE_CHANNEL = CUDNN_SOFTMAX_MODE_CHANNEL;
 
-  // CHECK: miopenReduceTensorOp_t reduceTensorOp;
-  // CHECK-NEXT: miopenReduceTensorOp_t REDUCE_TENSOR_ADD = MIOPEN_REDUCE_TENSOR_ADD;
-  // CHECK-NEXT: miopenReduceTensorOp_t REDUCE_TENSOR_MUL = MIOPEN_REDUCE_TENSOR_MUL;
-  // CHECK-NEXT: miopenReduceTensorOp_t REDUCE_TENSOR_MIN = MIOPEN_REDUCE_TENSOR_MIN;
-  // CHECK-NEXT: miopenReduceTensorOp_t REDUCE_TENSOR_MAX = MIOPEN_REDUCE_TENSOR_MAX;
-  // CHECK-NEXT: miopenReduceTensorOp_t REDUCE_TENSOR_AMAX = MIOPEN_REDUCE_TENSOR_AMAX;
-  // CHECK-NEXT: miopenReduceTensorOp_t REDUCE_TENSOR_AVG = MIOPEN_REDUCE_TENSOR_AVG;
-  // CHECK-NEXT: miopenReduceTensorOp_t REDUCE_TENSOR_NORM1 = MIOPEN_REDUCE_TENSOR_NORM1;
-  // CHECK-NEXT: miopenReduceTensorOp_t REDUCE_TENSOR_NORM2 = MIOPEN_REDUCE_TENSOR_NORM2;
-  cudnnReduceTensorOp_t reduceTensorOp;
-  cudnnReduceTensorOp_t REDUCE_TENSOR_ADD = CUDNN_REDUCE_TENSOR_ADD;
-  cudnnReduceTensorOp_t REDUCE_TENSOR_MUL = CUDNN_REDUCE_TENSOR_MUL;
-  cudnnReduceTensorOp_t REDUCE_TENSOR_MIN = CUDNN_REDUCE_TENSOR_MIN;
-  cudnnReduceTensorOp_t REDUCE_TENSOR_MAX = CUDNN_REDUCE_TENSOR_MAX;
-  cudnnReduceTensorOp_t REDUCE_TENSOR_AMAX = CUDNN_REDUCE_TENSOR_AMAX;
-  cudnnReduceTensorOp_t REDUCE_TENSOR_AVG = CUDNN_REDUCE_TENSOR_AVG;
-  cudnnReduceTensorOp_t REDUCE_TENSOR_NORM1 = CUDNN_REDUCE_TENSOR_NORM1;
-  cudnnReduceTensorOp_t REDUCE_TENSOR_NORM2 = CUDNN_REDUCE_TENSOR_NORM2;
-
   // CHECK: miopenConvFwdAlgorithm_t convolutionFwdAlgo;
   // CHECK-NEXT: miopenConvFwdAlgorithm_t CONVOLUTION_FWD_ALGO_IMPLICIT_GEMM = miopenConvolutionFwdAlgoImplicitGEMM;
   // CHECK-NEXT: miopenConvFwdAlgorithm_t CONVOLUTION_FWD_ALGO_GEMM = miopenConvolutionFwdAlgoGEMM;
@@ -233,13 +208,6 @@ int main() {
   cudnnConvolutionFwdAlgo_t CONVOLUTION_FWD_ALGO_DIRECT = CUDNN_CONVOLUTION_FWD_ALGO_DIRECT;
   cudnnConvolutionFwdAlgo_t CONVOLUTION_FWD_ALGO_FFT = CUDNN_CONVOLUTION_FWD_ALGO_FFT;
   cudnnConvolutionFwdAlgo_t CONVOLUTION_FWD_ALGO_WINOGRAD = CUDNN_CONVOLUTION_FWD_ALGO_WINOGRAD;
-
-  // CHECK: miopenNanPropagation_t nanPropagation_t;
-  // CHECK-NEXT: miopenNanPropagation_t NOT_PROPAGATE_NAN = MIOPEN_NOT_PROPAGATE_NAN;
-  // CHECK-NEXT: miopenNanPropagation_t PROPAGATE_NAN = MIOPEN_PROPAGATE_NAN;
-  cudnnNanPropagation_t nanPropagation_t;
-  cudnnNanPropagation_t NOT_PROPAGATE_NAN = CUDNN_NOT_PROPAGATE_NAN;
-  cudnnNanPropagation_t PROPAGATE_NAN = CUDNN_PROPAGATE_NAN;
 
   // CHECK: miopenReduceTensorIndices_t reduceTensorIndices;
   // CHECK-NEXT: miopenReduceTensorIndices_t REDUCE_TENSOR_NO_INDICES = MIOPEN_REDUCE_TENSOR_NO_INDICES;
@@ -291,6 +259,13 @@ int main() {
   // CHECK-NEXT: miopenCTCLossAlgo_t CTC_LOSS_ALGO_DETERMINISTIC = MIOPEN_CTC_LOSS_ALGO_DETERMINISTIC;
   cudnnCTCLossAlgo_t CTCLossAlgo;
   cudnnCTCLossAlgo_t CTC_LOSS_ALGO_DETERMINISTIC = CUDNN_CTC_LOSS_ALGO_DETERMINISTIC;
+
+  // CHECK: miopenTensorLayout_t tensorFormat;
+  // CHECK-NEXT: miopenTensorLayout_t TENSOR_NCHW = miopenTensorNCHW;
+  // CHECK-NEXT: miopenTensorLayout_t TENSOR_NHWC = miopenTensorNHWC;
+  cudnnTensorFormat_t tensorFormat;
+  cudnnTensorFormat_t TENSOR_NCHW = CUDNN_TENSOR_NCHW;
+  cudnnTensorFormat_t TENSOR_NHWC = CUDNN_TENSOR_NHWC;
 
   // CUDA: cudnnStatus_t CUDNNWINAPI cudnnCreateTensorDescriptor(cudnnTensorDescriptor_t* tensorDesc);
   // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenCreateTensorDescriptor(miopenTensorDescriptor_t* tensorDesc);
@@ -790,16 +765,6 @@ int main() {
   // CHECK: status = miopenDestroyReduceTensorDescriptor(ReduceTensorDescriptor);
   status = cudnnDestroyReduceTensorDescriptor(ReduceTensorDescriptor);
 
-  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnSetReduceTensorDescriptor(cudnnReduceTensorDescriptor_t reduceTensorDesc, cudnnReduceTensorOp_t reduceTensorOp, cudnnDataType_t reduceTensorCompType, cudnnNanPropagation_t reduceTensorNanOpt, cudnnReduceTensorIndices_t reduceTensorIndices, cudnnIndicesType_t reduceTensorIndicesType);
-  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenSetReduceTensorDescriptor(miopenReduceTensorDescriptor_t reduceTensorDesc, miopenReduceTensorOp_t reduceTensorOp, miopenDataType_t reduceTensorCompType, miopenNanPropagation_t reduceTensorNanOpt, miopenReduceTensorIndices_t reduceTensorIndices, miopenIndicesType_t reduceTensorIndicesType);
-  // CHECK: status = miopenSetReduceTensorDescriptor(ReduceTensorDescriptor, reduceTensorOp, dataType, nanPropagation_t, reduceTensorIndices, indicesType);
-  status = cudnnSetReduceTensorDescriptor(ReduceTensorDescriptor, reduceTensorOp, dataType, nanPropagation_t, reduceTensorIndices, indicesType);
-
-  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnGetReduceTensorDescriptor(const cudnnReduceTensorDescriptor_t reduceTensorDesc, cudnnReduceTensorOp_t* reduceTensorOp, cudnnDataType_t* reduceTensorCompType, cudnnNanPropagation_t* reduceTensorNanOpt, cudnnReduceTensorIndices_t* reduceTensorIndices, cudnnIndicesType_t* reduceTensorIndicesType);
-  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenGetReduceTensorDescriptor(const miopenReduceTensorDescriptor_t reduceTensorDesc, miopenReduceTensorOp_t* reduceTensorOp, miopenDataType_t* reduceTensorCompType, miopenNanPropagation_t* reduceTensorNanOpt, miopenReduceTensorIndices_t* reduceTensorIndices, miopenIndicesType_t* reduceTensorIndicesType);
-  // CHECK: status = miopenGetReduceTensorDescriptor(ReduceTensorDescriptor, &reduceTensorOp, &dataType, &nanPropagation_t, &reduceTensorIndices, &indicesType);
-  status = cudnnGetReduceTensorDescriptor(ReduceTensorDescriptor, &reduceTensorOp, &dataType, &nanPropagation_t, &reduceTensorIndices, &indicesType);
-
   // CUDA: cudnnStatus_t CUDNNWINAPI cudnnGetReductionIndicesSize(cudnnHandle_t handle, const cudnnReduceTensorDescriptor_t reduceTensorDesc, const cudnnTensorDescriptor_t aDesc, const cudnnTensorDescriptor_t cDesc, size_t* sizeInBytes);
   // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenGetReductionIndicesSize(miopenHandle_t handle, const miopenReduceTensorDescriptor_t reduceTensorDesc, const miopenTensorDescriptor_t aDesc, const miopenTensorDescriptor_t cDesc, size_t* sizeInBytes);
   // CHECK: status = miopenGetReductionIndicesSize(handle, ReduceTensorDescriptor, aD, cD, &workSpaceSizeInBytes);
@@ -814,6 +779,666 @@ int main() {
   // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenReduceTensor(miopenHandle_t handle, const miopenReduceTensorDescriptor_t reduceTensorDesc, void* indices, size_t indicesSizeInBytes, void* workspace, size_t workspaceSizeInBytes, const void* alpha, const miopenTensorDescriptor_t aDesc, const void* A, const void* beta, const miopenTensorDescriptor_t cDesc, void* C);
   // CHECK: status = miopenReduceTensor(handle, ReduceTensorDescriptor, indices, indicesSizeInBytes, workSpace, workSpaceSizeInBytes, alpha, aD, A, beta, cD, C);
   status = cudnnReduceTensor(handle, ReduceTensorDescriptor, indices, indicesSizeInBytes, workSpace, workSpaceSizeInBytes, alpha, aD, A, beta, cD, C);
+
+#if CUDNN_VERSION >= 3008
+  // CHECK: miopenDataType_t DATA_BFLOAT16 = miopenBFloat16;
+  cudnnDataType_t DATA_BFLOAT16 = CUDNN_DATA_BFLOAT16;
+#endif
+
+#if CUDNN_VERSION >= 4008
+  // CHECK: miopenNanPropagation_t nanPropagation_t;
+  // CHECK-NEXT: miopenNanPropagation_t NOT_PROPAGATE_NAN = MIOPEN_NOT_PROPAGATE_NAN;
+  // CHECK-NEXT: miopenNanPropagation_t PROPAGATE_NAN = MIOPEN_PROPAGATE_NAN;
+  cudnnNanPropagation_t nanPropagation_t;
+  cudnnNanPropagation_t NOT_PROPAGATE_NAN = CUDNN_NOT_PROPAGATE_NAN;
+  cudnnNanPropagation_t PROPAGATE_NAN = CUDNN_PROPAGATE_NAN;
+
+  // CHECK: miopenActivationMode_t ACTIVATION_CLIPPED_RELU = miopenActivationCLIPPEDRELU;
+  cudnnActivationMode_t ACTIVATION_CLIPPED_RELU = CUDNN_ACTIVATION_CLIPPED_RELU;
+#endif
+
+#if CUDNN_VERSION >= 6021
+  // CHECK: miopenReduceTensorOp_t reduceTensorOp;
+  // CHECK-NEXT: miopenReduceTensorOp_t REDUCE_TENSOR_ADD = MIOPEN_REDUCE_TENSOR_ADD;
+  // CHECK-NEXT: miopenReduceTensorOp_t REDUCE_TENSOR_MUL = MIOPEN_REDUCE_TENSOR_MUL;
+  // CHECK-NEXT: miopenReduceTensorOp_t REDUCE_TENSOR_MIN = MIOPEN_REDUCE_TENSOR_MIN;
+  // CHECK-NEXT: miopenReduceTensorOp_t REDUCE_TENSOR_MAX = MIOPEN_REDUCE_TENSOR_MAX;
+  // CHECK-NEXT: miopenReduceTensorOp_t REDUCE_TENSOR_AMAX = MIOPEN_REDUCE_TENSOR_AMAX;
+  // CHECK-NEXT: miopenReduceTensorOp_t REDUCE_TENSOR_AVG = MIOPEN_REDUCE_TENSOR_AVG;
+  // CHECK-NEXT: miopenReduceTensorOp_t REDUCE_TENSOR_NORM1 = MIOPEN_REDUCE_TENSOR_NORM1;
+  // CHECK-NEXT: miopenReduceTensorOp_t REDUCE_TENSOR_NORM2 = MIOPEN_REDUCE_TENSOR_NORM2;
+  cudnnReduceTensorOp_t reduceTensorOp;
+  cudnnReduceTensorOp_t REDUCE_TENSOR_ADD = CUDNN_REDUCE_TENSOR_ADD;
+  cudnnReduceTensorOp_t REDUCE_TENSOR_MUL = CUDNN_REDUCE_TENSOR_MUL;
+  cudnnReduceTensorOp_t REDUCE_TENSOR_MIN = CUDNN_REDUCE_TENSOR_MIN;
+  cudnnReduceTensorOp_t REDUCE_TENSOR_MAX = CUDNN_REDUCE_TENSOR_MAX;
+  cudnnReduceTensorOp_t REDUCE_TENSOR_AMAX = CUDNN_REDUCE_TENSOR_AMAX;
+  cudnnReduceTensorOp_t REDUCE_TENSOR_AVG = CUDNN_REDUCE_TENSOR_AVG;
+  cudnnReduceTensorOp_t REDUCE_TENSOR_NORM1 = CUDNN_REDUCE_TENSOR_NORM1;
+  cudnnReduceTensorOp_t REDUCE_TENSOR_NORM2 = CUDNN_REDUCE_TENSOR_NORM2;
+
+  // CHECK: miopenActivationMode_t ACTIVATION_ELU = miopenActivationELU;
+  cudnnActivationMode_t ACTIVATION_ELU = CUDNN_ACTIVATION_ELU;
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnSetReduceTensorDescriptor(cudnnReduceTensorDescriptor_t reduceTensorDesc, cudnnReduceTensorOp_t reduceTensorOp, cudnnDataType_t reduceTensorCompType, cudnnNanPropagation_t reduceTensorNanOpt, cudnnReduceTensorIndices_t reduceTensorIndices, cudnnIndicesType_t reduceTensorIndicesType);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenSetReduceTensorDescriptor(miopenReduceTensorDescriptor_t reduceTensorDesc, miopenReduceTensorOp_t reduceTensorOp, miopenDataType_t reduceTensorCompType, miopenNanPropagation_t reduceTensorNanOpt, miopenReduceTensorIndices_t reduceTensorIndices, miopenIndicesType_t reduceTensorIndicesType);
+  // CHECK: status = miopenSetReduceTensorDescriptor(ReduceTensorDescriptor, reduceTensorOp, dataType, nanPropagation_t, reduceTensorIndices, indicesType);
+  status = cudnnSetReduceTensorDescriptor(ReduceTensorDescriptor, reduceTensorOp, dataType, nanPropagation_t, reduceTensorIndices, indicesType);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnGetReduceTensorDescriptor(const cudnnReduceTensorDescriptor_t reduceTensorDesc, cudnnReduceTensorOp_t* reduceTensorOp, cudnnDataType_t* reduceTensorCompType, cudnnNanPropagation_t* reduceTensorNanOpt, cudnnReduceTensorIndices_t* reduceTensorIndices, cudnnIndicesType_t* reduceTensorIndicesType);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenGetReduceTensorDescriptor(const miopenReduceTensorDescriptor_t reduceTensorDesc, miopenReduceTensorOp_t* reduceTensorOp, miopenDataType_t* reduceTensorCompType, miopenNanPropagation_t* reduceTensorNanOpt, miopenReduceTensorIndices_t* reduceTensorIndices, miopenIndicesType_t* reduceTensorIndicesType);
+  // CHECK: status = miopenGetReduceTensorDescriptor(ReduceTensorDescriptor, &reduceTensorOp, &dataType, &nanPropagation_t, &reduceTensorIndices, &indicesType);
+  status = cudnnGetReduceTensorDescriptor(ReduceTensorDescriptor, &reduceTensorOp, &dataType, &nanPropagation_t, &reduceTensorIndices, &indicesType);
+#endif
+
+#if CUDNN_VERSION >= 7103
+  // CHECK: miopenActivationMode_t ACTIVATION_IDENTITY = miopenActivationPASTHRU;
+  cudnnActivationMode_t ACTIVATION_IDENTITY = CUDNN_ACTIVATION_IDENTITY;
+#endif
+
+#if CUDNN_VERSION >= 8001
+  // CHECK: miopenStatus_t STATUS_VERSION_MISMATCH = miopenStatusVersionMismatch;
+  cudnnStatus_t STATUS_VERSION_MISMATCH = CUDNN_STATUS_VERSION_MISMATCH;
+
+  // CHECK: miopenBackendDescriptorType_t backendDescriptorType_t;
+  // CHECK-NEXT: miopenBackendDescriptorType_t BACKEND_POINTWISE_DESCRIPTOR = MIOPEN_BACKEND_POINTWISE_DESCRIPTOR;
+  // CHECK-NEXT: miopenBackendDescriptorType_t BACKEND_CONVOLUTION_DESCRIPTOR = MIOPEN_BACKEND_CONVOLUTION_DESCRIPTOR;
+  // CHECK-NEXT: miopenBackendDescriptorType_t BACKEND_ENGINE_DESCRIPTOR = MIOPEN_BACKEND_ENGINE_DESCRIPTOR;
+  // CHECK-NEXT: miopenBackendDescriptorType_t BACKEND_ENGINECFG_DESCRIPTOR = MIOPEN_BACKEND_ENGINECFG_DESCRIPTOR;
+  // CHECK-NEXT: miopenBackendDescriptorType_t BACKEND_ENGINEHEUR_DESCRIPTOR = MIOPEN_BACKEND_ENGINEHEUR_DESCRIPTOR;
+  // CHECK-NEXT: miopenBackendDescriptorType_t BACKEND_EXECUTION_PLAN_DESCRIPTOR = MIOPEN_BACKEND_EXECUTION_PLAN_DESCRIPTOR;
+  // CHECK-NEXT: miopenBackendDescriptorType_t BACKEND_INTERMEDIATE_INFO_DESCRIPTOR = MIOPEN_BACKEND_INTERMEDIATE_INFO_DESCRIPTOR;
+  // CHECK-NEXT: miopenBackendDescriptorType_t BACKEND_KNOB_CHOICE_DESCRIPTOR = MIOPEN_BACKEND_KNOB_CHOICE_DESCRIPTOR;
+  // CHECK-NEXT: miopenBackendDescriptorType_t BACKEND_KNOB_INFO_DESCRIPTOR = MIOPEN_BACKEND_KNOB_INFO_DESCRIPTOR;
+  // CHECK-NEXT: miopenBackendDescriptorType_t BACKEND_LAYOUT_INFO_DESCRIPTOR = MIOPEN_BACKEND_LAYOUT_INFO_DESCRIPTOR;
+  // CHECK-NEXT: miopenBackendDescriptorType_t BACKEND_OPERATION_CONVOLUTION_FORWARD_DESCRIPTOR = MIOPEN_BACKEND_OPERATION_CONVOLUTION_FORWARD_DESCRIPTOR;
+  // CHECK-NEXT: miopenBackendDescriptorType_t BACKEND_OPERATION_CONVOLUTION_BACKWARD_FILTER_DESCRIPTOR = MIOPEN_BACKEND_OPERATION_CONVOLUTION_BACKWARD_FILTER_DESCRIPTOR;
+  // CHECK-NEXT: miopenBackendDescriptorType_t BACKEND_OPERATION_CONVOLUTION_BACKWARD_DATA_DESCRIPTOR = MIOPEN_BACKEND_OPERATION_CONVOLUTION_BACKWARD_DATA_DESCRIPTOR;
+  // CHECK-NEXT: miopenBackendDescriptorType_t BACKEND_OPERATION_POINTWISE_DESCRIPTOR = MIOPEN_BACKEND_OPERATION_POINTWISE_DESCRIPTOR;
+  // CHECK-NEXT: miopenBackendDescriptorType_t BACKEND_OPERATION_GEN_STATS_DESCRIPTOR = MIOPEN_BACKEND_OPERATION_GEN_STATS_DESCRIPTOR;
+  // CHECK-NEXT: miopenBackendDescriptorType_t BACKEND_OPERATIONGRAPH_DESCRIPTOR = MIOPEN_BACKEND_OPERATIONGRAPH_DESCRIPTOR;
+  // CHECK-NEXT: miopenBackendDescriptorType_t BACKEND_VARIANT_PACK_DESCRIPTOR = MIOPEN_BACKEND_VARIANT_PACK_DESCRIPTOR;
+  // CHECK-NEXT: miopenBackendDescriptorType_t BACKEND_TENSOR_DESCRIPTOR = MIOPEN_BACKEND_TENSOR_DESCRIPTOR;
+  cudnnBackendDescriptorType_t backendDescriptorType_t;
+  cudnnBackendDescriptorType_t BACKEND_POINTWISE_DESCRIPTOR = CUDNN_BACKEND_POINTWISE_DESCRIPTOR;
+  cudnnBackendDescriptorType_t BACKEND_CONVOLUTION_DESCRIPTOR = CUDNN_BACKEND_CONVOLUTION_DESCRIPTOR;
+  cudnnBackendDescriptorType_t BACKEND_ENGINE_DESCRIPTOR = CUDNN_BACKEND_ENGINE_DESCRIPTOR;
+  cudnnBackendDescriptorType_t BACKEND_ENGINECFG_DESCRIPTOR = CUDNN_BACKEND_ENGINECFG_DESCRIPTOR;
+  cudnnBackendDescriptorType_t BACKEND_ENGINEHEUR_DESCRIPTOR = CUDNN_BACKEND_ENGINEHEUR_DESCRIPTOR;
+  cudnnBackendDescriptorType_t BACKEND_EXECUTION_PLAN_DESCRIPTOR = CUDNN_BACKEND_EXECUTION_PLAN_DESCRIPTOR;
+  cudnnBackendDescriptorType_t BACKEND_INTERMEDIATE_INFO_DESCRIPTOR = CUDNN_BACKEND_INTERMEDIATE_INFO_DESCRIPTOR;
+  cudnnBackendDescriptorType_t BACKEND_KNOB_CHOICE_DESCRIPTOR = CUDNN_BACKEND_KNOB_CHOICE_DESCRIPTOR;
+  cudnnBackendDescriptorType_t BACKEND_KNOB_INFO_DESCRIPTOR = CUDNN_BACKEND_KNOB_INFO_DESCRIPTOR;
+  cudnnBackendDescriptorType_t BACKEND_LAYOUT_INFO_DESCRIPTOR = CUDNN_BACKEND_LAYOUT_INFO_DESCRIPTOR;
+  cudnnBackendDescriptorType_t BACKEND_OPERATION_CONVOLUTION_FORWARD_DESCRIPTOR = CUDNN_BACKEND_OPERATION_CONVOLUTION_FORWARD_DESCRIPTOR;
+  cudnnBackendDescriptorType_t BACKEND_OPERATION_CONVOLUTION_BACKWARD_FILTER_DESCRIPTOR = CUDNN_BACKEND_OPERATION_CONVOLUTION_BACKWARD_FILTER_DESCRIPTOR;
+  cudnnBackendDescriptorType_t BACKEND_OPERATION_CONVOLUTION_BACKWARD_DATA_DESCRIPTOR = CUDNN_BACKEND_OPERATION_CONVOLUTION_BACKWARD_DATA_DESCRIPTOR;
+  cudnnBackendDescriptorType_t BACKEND_OPERATION_POINTWISE_DESCRIPTOR = CUDNN_BACKEND_OPERATION_POINTWISE_DESCRIPTOR;
+  cudnnBackendDescriptorType_t BACKEND_OPERATION_GEN_STATS_DESCRIPTOR = CUDNN_BACKEND_OPERATION_GEN_STATS_DESCRIPTOR;
+  cudnnBackendDescriptorType_t BACKEND_OPERATIONGRAPH_DESCRIPTOR = CUDNN_BACKEND_OPERATIONGRAPH_DESCRIPTOR;
+  cudnnBackendDescriptorType_t BACKEND_VARIANT_PACK_DESCRIPTOR = CUDNN_BACKEND_VARIANT_PACK_DESCRIPTOR;
+  cudnnBackendDescriptorType_t BACKEND_TENSOR_DESCRIPTOR = CUDNN_BACKEND_TENSOR_DESCRIPTOR;
+
+  // CHECK: miopenBackendAttributeType_t backendAttributeType_t;
+  // CHECK-NEXT: miopenBackendAttributeType_t TYPE_HANDLE = MIOPEN_TYPE_HANDLE;
+  // CHECK-NEXT: miopenBackendAttributeType_t TYPE_DATA_TYPE = MIOPEN_TYPE_DATA_TYPE;
+  // CHECK-NEXT: miopenBackendAttributeType_t TYPE_BOOLEAN = MIOPEN_TYPE_BOOLEAN;
+  // CHECK-NEXT: miopenBackendAttributeType_t TYPE_INT64 = MIOPEN_TYPE_INT64;
+  // CHECK-NEXT: miopenBackendAttributeType_t TYPE_FLOAT = MIOPEN_TYPE_FLOAT;
+  // CHECK-NEXT: miopenBackendAttributeType_t TYPE_DOUBLE = MIOPEN_TYPE_DOUBLE;
+  // CHECK-NEXT: miopenBackendAttributeType_t TYPE_VOID_PTR = MIOPEN_TYPE_VOID_PTR;
+  // CHECK-NEXT: miopenBackendAttributeType_t TYPE_CONVOLUTION_MODE = MIOPEN_TYPE_CONVOLUTION_MODE;
+  // CHECK-NEXT: miopenBackendAttributeType_t TYPE_HEUR_MODE = MIOPEN_TYPE_HEUR_MODE;
+  // CHECK-NEXT: miopenBackendAttributeType_t TYPE_KNOB_TYPE = MIOPEN_TYPE_KNOB_TYPE;
+  // CHECK-NEXT: miopenBackendAttributeType_t TYPE_NAN_PROPOGATION = MIOPEN_TYPE_NAN_PROPOGATION;
+  // CHECK-NEXT: miopenBackendAttributeType_t TYPE_NUMERICAL_NOTE = MIOPEN_TYPE_NUMERICAL_NOTE;
+  // CHECK-NEXT: miopenBackendAttributeType_t TYPE_ATTRIB_NAME = MIOPEN_TYPE_ATTRIB_NAME;
+  // CHECK-NEXT: miopenBackendAttributeType_t TYPE_POINTWISE_MODE = MIOPEN_TYPE_POINTWISE_MODE;
+  // CHECK-NEXT: miopenBackendAttributeType_t TYPE_BACKEND_DESCRIPTOR = MIOPEN_TYPE_BACKEND_DESCRIPTOR;
+  // CHECK-NEXT: miopenBackendAttributeType_t TYPE_GENSTATS_MODE = MIOPEN_TYPE_GENSTATS_MODE;
+  cudnnBackendAttributeType_t backendAttributeType_t;
+  cudnnBackendAttributeType_t TYPE_HANDLE = CUDNN_TYPE_HANDLE;
+  cudnnBackendAttributeType_t TYPE_DATA_TYPE = CUDNN_TYPE_DATA_TYPE;
+  cudnnBackendAttributeType_t TYPE_BOOLEAN = CUDNN_TYPE_BOOLEAN;
+  cudnnBackendAttributeType_t TYPE_INT64 = CUDNN_TYPE_INT64;
+  cudnnBackendAttributeType_t TYPE_FLOAT = CUDNN_TYPE_FLOAT;
+  cudnnBackendAttributeType_t TYPE_DOUBLE = CUDNN_TYPE_DOUBLE;
+  cudnnBackendAttributeType_t TYPE_VOID_PTR = CUDNN_TYPE_VOID_PTR;
+  cudnnBackendAttributeType_t TYPE_CONVOLUTION_MODE = CUDNN_TYPE_CONVOLUTION_MODE;
+  cudnnBackendAttributeType_t TYPE_HEUR_MODE = CUDNN_TYPE_HEUR_MODE;
+  cudnnBackendAttributeType_t TYPE_KNOB_TYPE = CUDNN_TYPE_KNOB_TYPE;
+  cudnnBackendAttributeType_t TYPE_NAN_PROPOGATION = CUDNN_TYPE_NAN_PROPOGATION;
+  cudnnBackendAttributeType_t TYPE_NUMERICAL_NOTE = CUDNN_TYPE_NUMERICAL_NOTE;
+  cudnnBackendAttributeType_t TYPE_ATTRIB_NAME = CUDNN_TYPE_ATTRIB_NAME;
+  cudnnBackendAttributeType_t TYPE_POINTWISE_MODE = CUDNN_TYPE_POINTWISE_MODE;
+  cudnnBackendAttributeType_t TYPE_BACKEND_DESCRIPTOR = CUDNN_TYPE_BACKEND_DESCRIPTOR;
+  cudnnBackendAttributeType_t TYPE_GENSTATS_MODE = CUDNN_TYPE_GENSTATS_MODE;
+
+  // CHECK: miopenBackendAttributeName_t backendAttributeName_t;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_POINTWISE_MODE = MIOPEN_ATTR_POINTWISE_MODE;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_POINTWISE_MATH_PREC = MIOPEN_ATTR_POINTWISE_MATH_PREC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_POINTWISE_NAN_PROPAGATION = MIOPEN_ATTR_POINTWISE_NAN_PROPAGATION;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_POINTWISE_RELU_LOWER_CLIP = MIOPEN_ATTR_POINTWISE_RELU_LOWER_CLIP;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_POINTWISE_RELU_UPPER_CLIP = MIOPEN_ATTR_POINTWISE_RELU_UPPER_CLIP;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_CONVOLUTION_COMP_TYPE = MIOPEN_ATTR_CONVOLUTION_COMP_TYPE;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_CONVOLUTION_DILATIONS = MIOPEN_ATTR_CONVOLUTION_DILATIONS;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_CONVOLUTION_FILTER_STRIDES = MIOPEN_ATTR_CONVOLUTION_FILTER_STRIDES;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_CONVOLUTION_POST_PADDINGS = MIOPEN_ATTR_CONVOLUTION_POST_PADDINGS;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_CONVOLUTION_PRE_PADDINGS = MIOPEN_ATTR_CONVOLUTION_PRE_PADDINGS;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_CONVOLUTION_SPATIAL_DIMS = MIOPEN_ATTR_CONVOLUTION_SPATIAL_DIMS;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_ENGINEHEUR_MODE = MIOPEN_ATTR_ENGINEHEUR_MODE;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_ENGINEHEUR_OPERATION_GRAPH = MIOPEN_ATTR_ENGINEHEUR_OPERATION_GRAPH;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_ENGINEHEUR_RESULTS = MIOPEN_ATTR_ENGINEHEUR_RESULTS;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_ENGINECFG_ENGINE = MIOPEN_ATTR_ENGINECFG_ENGINE;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_ENGINECFG_INTERMEDIATE_INFO = MIOPEN_ATTR_ENGINECFG_INTERMEDIATE_INFO;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_ENGINECFG_KNOB_CHOICES = MIOPEN_ATTR_ENGINECFG_KNOB_CHOICES;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_EXECUTION_PLAN_HANDLE = MIOPEN_ATTR_EXECUTION_PLAN_HANDLE;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_EXECUTION_PLAN_ENGINE_CONFIG = MIOPEN_ATTR_EXECUTION_PLAN_ENGINE_CONFIG;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_EXECUTION_PLAN_WORKSPACE_SIZE = MIOPEN_ATTR_EXECUTION_PLAN_WORKSPACE_SIZE;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_INTERMEDIATE_INFO_SIZE = MIOPEN_ATTR_INTERMEDIATE_INFO_SIZE;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_KNOB_CHOICE_KNOB_TYPE = MIOPEN_ATTR_KNOB_CHOICE_KNOB_TYPE;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_KNOB_CHOICE_KNOB_VALUE = MIOPEN_ATTR_KNOB_CHOICE_KNOB_VALUE;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_CONVOLUTION_FORWARD_ALPHA = MIOPEN_ATTR_OPERATION_CONVOLUTION_FORWARD_ALPHA;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_CONVOLUTION_FORWARD_BETA = MIOPEN_ATTR_OPERATION_CONVOLUTION_FORWARD_BETA;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_CONVOLUTION_FORWARD_CONV_DESC = MIOPEN_ATTR_OPERATION_CONVOLUTION_FORWARD_CONV_DESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_CONVOLUTION_FORWARD_W = MIOPEN_ATTR_OPERATION_CONVOLUTION_FORWARD_W;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_CONVOLUTION_FORWARD_X = MIOPEN_ATTR_OPERATION_CONVOLUTION_FORWARD_X;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_CONVOLUTION_FORWARD_Y = MIOPEN_ATTR_OPERATION_CONVOLUTION_FORWARD_Y;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_CONVOLUTION_BWD_DATA_ALPHA = MIOPEN_ATTR_OPERATION_CONVOLUTION_BWD_DATA_ALPHA;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_CONVOLUTION_BWD_DATA_BETA = MIOPEN_ATTR_OPERATION_CONVOLUTION_BWD_DATA_BETA;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_CONVOLUTION_BWD_DATA_CONV_DESC = MIOPEN_ATTR_OPERATION_CONVOLUTION_BWD_DATA_CONV_DESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_CONVOLUTION_BWD_DATA_W = MIOPEN_ATTR_OPERATION_CONVOLUTION_BWD_DATA_W;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_CONVOLUTION_BWD_DATA_DX = MIOPEN_ATTR_OPERATION_CONVOLUTION_BWD_DATA_DX;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_CONVOLUTION_BWD_DATA_DY = MIOPEN_ATTR_OPERATION_CONVOLUTION_BWD_DATA_DY;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_CONVOLUTION_BWD_FILTER_ALPHA = MIOPEN_ATTR_OPERATION_CONVOLUTION_BWD_FILTER_ALPHA;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_CONVOLUTION_BWD_FILTER_BETA = MIOPEN_ATTR_OPERATION_CONVOLUTION_BWD_FILTER_BETA;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_CONVOLUTION_BWD_FILTER_CONV_DESC = MIOPEN_ATTR_OPERATION_CONVOLUTION_BWD_FILTER_CONV_DESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_CONVOLUTION_BWD_FILTER_DW = MIOPEN_ATTR_OPERATION_CONVOLUTION_BWD_FILTER_DW;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_CONVOLUTION_BWD_FILTER_X = MIOPEN_ATTR_OPERATION_CONVOLUTION_BWD_FILTER_X;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_CONVOLUTION_BWD_FILTER_DY = MIOPEN_ATTR_OPERATION_CONVOLUTION_BWD_FILTER_DY;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_POINTWISE_PW_DESCRIPTOR = MIOPEN_ATTR_OPERATION_POINTWISE_PW_DESCRIPTOR;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_POINTWISE_XDESC = MIOPEN_ATTR_OPERATION_POINTWISE_XDESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_POINTWISE_BDESC = MIOPEN_ATTR_OPERATION_POINTWISE_BDESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_POINTWISE_YDESC = MIOPEN_ATTR_OPERATION_POINTWISE_YDESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_POINTWISE_ALPHA1 = MIOPEN_ATTR_OPERATION_POINTWISE_ALPHA1;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_POINTWISE_ALPHA2 = MIOPEN_ATTR_OPERATION_POINTWISE_ALPHA2;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_GENSTATS_MODE = MIOPEN_ATTR_OPERATION_GENSTATS_MODE;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_GENSTATS_MATH_PREC = MIOPEN_ATTR_OPERATION_GENSTATS_MATH_PREC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_GENSTATS_XDESC = MIOPEN_ATTR_OPERATION_GENSTATS_XDESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_GENSTATS_SUMDESC = MIOPEN_ATTR_OPERATION_GENSTATS_SUMDESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_GENSTATS_SQSUMDESC = MIOPEN_ATTR_OPERATION_GENSTATS_SQSUMDESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATIONGRAPH_HANDLE = MIOPEN_ATTR_OPERATIONGRAPH_HANDLE;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATIONGRAPH_OPS = MIOPEN_ATTR_OPERATIONGRAPH_OPS;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATIONGRAPH_ENGINE_GLOBAL_COUNT = MIOPEN_ATTR_OPERATIONGRAPH_ENGINE_GLOBAL_COUNT;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_TENSOR_BYTE_ALIGNMENT = MIOPEN_ATTR_TENSOR_BYTE_ALIGNMENT;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_TENSOR_DATA_TYPE = MIOPEN_ATTR_TENSOR_DATA_TYPE;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_TENSOR_DIMENSIONS = MIOPEN_ATTR_TENSOR_DIMENSIONS;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_TENSOR_STRIDES = MIOPEN_ATTR_TENSOR_STRIDES;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_TENSOR_VECTOR_COUNT = MIOPEN_ATTR_TENSOR_VECTOR_COUNT;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_TENSOR_VECTORIZED_DIMENSION = MIOPEN_ATTR_TENSOR_VECTORIZED_DIMENSION;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_TENSOR_UNIQUE_ID = MIOPEN_ATTR_TENSOR_UNIQUE_ID;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_TENSOR_IS_VIRTUAL = MIOPEN_ATTR_TENSOR_IS_VIRTUAL;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_VARIANT_PACK_UNIQUE_IDS = MIOPEN_ATTR_VARIANT_PACK_UNIQUE_IDS;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_VARIANT_PACK_DATA_POINTERS = MIOPEN_ATTR_VARIANT_PACK_DATA_POINTERS;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_VARIANT_PACK_INTERMEDIATES = MIOPEN_ATTR_VARIANT_PACK_INTERMEDIATES;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_VARIANT_PACK_WORKSPACE = MIOPEN_ATTR_VARIANT_PACK_WORKSPACE;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_KNOB_INFO_TYPE = MIOPEN_ATTR_KNOB_INFO_TYPE;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_KNOB_INFO_MAXIMUM_VALUE = MIOPEN_ATTR_KNOB_INFO_MAXIMUM_VALUE;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_KNOB_INFO_MINIMUM_VALUE = MIOPEN_ATTR_KNOB_INFO_MINIMUM_VALUE;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_KNOB_INFO_STRIDE = MIOPEN_ATTR_KNOB_INFO_STRIDE;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_ENGINE_OPERATION_GRAPH = MIOPEN_ATTR_ENGINE_OPERATION_GRAPH;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_ENGINE_GLOBAL_INDEX = MIOPEN_ATTR_ENGINE_GLOBAL_INDEX;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_ENGINE_NUMERICAL_NOTE = MIOPEN_ATTR_ENGINE_NUMERICAL_NOTE;
+  cudnnBackendAttributeName_t backendAttributeName_t;
+  cudnnBackendAttributeName_t ATTR_POINTWISE_MODE = CUDNN_ATTR_POINTWISE_MODE;
+  cudnnBackendAttributeName_t ATTR_POINTWISE_MATH_PREC = CUDNN_ATTR_POINTWISE_MATH_PREC;
+  cudnnBackendAttributeName_t ATTR_POINTWISE_NAN_PROPAGATION = CUDNN_ATTR_POINTWISE_NAN_PROPAGATION;
+  cudnnBackendAttributeName_t ATTR_POINTWISE_RELU_LOWER_CLIP = CUDNN_ATTR_POINTWISE_RELU_LOWER_CLIP;
+  cudnnBackendAttributeName_t ATTR_POINTWISE_RELU_UPPER_CLIP = CUDNN_ATTR_POINTWISE_RELU_UPPER_CLIP;
+  cudnnBackendAttributeName_t ATTR_CONVOLUTION_COMP_TYPE = CUDNN_ATTR_CONVOLUTION_COMP_TYPE;
+  cudnnBackendAttributeName_t ATTR_CONVOLUTION_DILATIONS = CUDNN_ATTR_CONVOLUTION_DILATIONS;
+  cudnnBackendAttributeName_t ATTR_CONVOLUTION_FILTER_STRIDES = CUDNN_ATTR_CONVOLUTION_FILTER_STRIDES;
+  cudnnBackendAttributeName_t ATTR_CONVOLUTION_POST_PADDINGS = CUDNN_ATTR_CONVOLUTION_POST_PADDINGS;
+  cudnnBackendAttributeName_t ATTR_CONVOLUTION_PRE_PADDINGS = CUDNN_ATTR_CONVOLUTION_PRE_PADDINGS;
+  cudnnBackendAttributeName_t ATTR_CONVOLUTION_SPATIAL_DIMS = CUDNN_ATTR_CONVOLUTION_SPATIAL_DIMS;
+  cudnnBackendAttributeName_t ATTR_ENGINEHEUR_MODE = CUDNN_ATTR_ENGINEHEUR_MODE;
+  cudnnBackendAttributeName_t ATTR_ENGINEHEUR_OPERATION_GRAPH = CUDNN_ATTR_ENGINEHEUR_OPERATION_GRAPH;
+  cudnnBackendAttributeName_t ATTR_ENGINEHEUR_RESULTS = CUDNN_ATTR_ENGINEHEUR_RESULTS;
+  cudnnBackendAttributeName_t ATTR_ENGINECFG_ENGINE = CUDNN_ATTR_ENGINECFG_ENGINE;
+  cudnnBackendAttributeName_t ATTR_ENGINECFG_INTERMEDIATE_INFO = CUDNN_ATTR_ENGINECFG_INTERMEDIATE_INFO;
+  cudnnBackendAttributeName_t ATTR_ENGINECFG_KNOB_CHOICES = CUDNN_ATTR_ENGINECFG_KNOB_CHOICES;
+  cudnnBackendAttributeName_t ATTR_EXECUTION_PLAN_HANDLE = CUDNN_ATTR_EXECUTION_PLAN_HANDLE;
+  cudnnBackendAttributeName_t ATTR_EXECUTION_PLAN_ENGINE_CONFIG = CUDNN_ATTR_EXECUTION_PLAN_ENGINE_CONFIG;
+  cudnnBackendAttributeName_t ATTR_EXECUTION_PLAN_WORKSPACE_SIZE = CUDNN_ATTR_EXECUTION_PLAN_WORKSPACE_SIZE;
+  cudnnBackendAttributeName_t ATTR_INTERMEDIATE_INFO_SIZE = CUDNN_ATTR_INTERMEDIATE_INFO_SIZE;
+  cudnnBackendAttributeName_t ATTR_KNOB_CHOICE_KNOB_TYPE = CUDNN_ATTR_KNOB_CHOICE_KNOB_TYPE;
+  cudnnBackendAttributeName_t ATTR_KNOB_CHOICE_KNOB_VALUE = CUDNN_ATTR_KNOB_CHOICE_KNOB_VALUE;
+  cudnnBackendAttributeName_t ATTR_OPERATION_CONVOLUTION_FORWARD_ALPHA = CUDNN_ATTR_OPERATION_CONVOLUTION_FORWARD_ALPHA;
+  cudnnBackendAttributeName_t ATTR_OPERATION_CONVOLUTION_FORWARD_BETA = CUDNN_ATTR_OPERATION_CONVOLUTION_FORWARD_BETA;
+  cudnnBackendAttributeName_t ATTR_OPERATION_CONVOLUTION_FORWARD_CONV_DESC = CUDNN_ATTR_OPERATION_CONVOLUTION_FORWARD_CONV_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_CONVOLUTION_FORWARD_W = CUDNN_ATTR_OPERATION_CONVOLUTION_FORWARD_W;
+  cudnnBackendAttributeName_t ATTR_OPERATION_CONVOLUTION_FORWARD_X = CUDNN_ATTR_OPERATION_CONVOLUTION_FORWARD_X;
+  cudnnBackendAttributeName_t ATTR_OPERATION_CONVOLUTION_FORWARD_Y = CUDNN_ATTR_OPERATION_CONVOLUTION_FORWARD_Y;
+  cudnnBackendAttributeName_t ATTR_OPERATION_CONVOLUTION_BWD_DATA_ALPHA = CUDNN_ATTR_OPERATION_CONVOLUTION_BWD_DATA_ALPHA;
+  cudnnBackendAttributeName_t ATTR_OPERATION_CONVOLUTION_BWD_DATA_BETA = CUDNN_ATTR_OPERATION_CONVOLUTION_BWD_DATA_BETA;
+  cudnnBackendAttributeName_t ATTR_OPERATION_CONVOLUTION_BWD_DATA_CONV_DESC = CUDNN_ATTR_OPERATION_CONVOLUTION_BWD_DATA_CONV_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_CONVOLUTION_BWD_DATA_W = CUDNN_ATTR_OPERATION_CONVOLUTION_BWD_DATA_W;
+  cudnnBackendAttributeName_t ATTR_OPERATION_CONVOLUTION_BWD_DATA_DX = CUDNN_ATTR_OPERATION_CONVOLUTION_BWD_DATA_DX;
+  cudnnBackendAttributeName_t ATTR_OPERATION_CONVOLUTION_BWD_DATA_DY = CUDNN_ATTR_OPERATION_CONVOLUTION_BWD_DATA_DY;
+  cudnnBackendAttributeName_t ATTR_OPERATION_CONVOLUTION_BWD_FILTER_ALPHA = CUDNN_ATTR_OPERATION_CONVOLUTION_BWD_FILTER_ALPHA;
+  cudnnBackendAttributeName_t ATTR_OPERATION_CONVOLUTION_BWD_FILTER_BETA = CUDNN_ATTR_OPERATION_CONVOLUTION_BWD_FILTER_BETA;
+  cudnnBackendAttributeName_t ATTR_OPERATION_CONVOLUTION_BWD_FILTER_CONV_DESC = CUDNN_ATTR_OPERATION_CONVOLUTION_BWD_FILTER_CONV_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_CONVOLUTION_BWD_FILTER_DW = CUDNN_ATTR_OPERATION_CONVOLUTION_BWD_FILTER_DW;
+  cudnnBackendAttributeName_t ATTR_OPERATION_CONVOLUTION_BWD_FILTER_X = CUDNN_ATTR_OPERATION_CONVOLUTION_BWD_FILTER_X;
+  cudnnBackendAttributeName_t ATTR_OPERATION_CONVOLUTION_BWD_FILTER_DY = CUDNN_ATTR_OPERATION_CONVOLUTION_BWD_FILTER_DY;
+  cudnnBackendAttributeName_t ATTR_OPERATION_POINTWISE_PW_DESCRIPTOR = CUDNN_ATTR_OPERATION_POINTWISE_PW_DESCRIPTOR;
+  cudnnBackendAttributeName_t ATTR_OPERATION_POINTWISE_XDESC = CUDNN_ATTR_OPERATION_POINTWISE_XDESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_POINTWISE_BDESC = CUDNN_ATTR_OPERATION_POINTWISE_BDESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_POINTWISE_YDESC = CUDNN_ATTR_OPERATION_POINTWISE_YDESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_POINTWISE_ALPHA1 = CUDNN_ATTR_OPERATION_POINTWISE_ALPHA1;
+  cudnnBackendAttributeName_t ATTR_OPERATION_POINTWISE_ALPHA2 = CUDNN_ATTR_OPERATION_POINTWISE_ALPHA2;
+  cudnnBackendAttributeName_t ATTR_OPERATION_GENSTATS_MODE = CUDNN_ATTR_OPERATION_GENSTATS_MODE;
+  cudnnBackendAttributeName_t ATTR_OPERATION_GENSTATS_MATH_PREC = CUDNN_ATTR_OPERATION_GENSTATS_MATH_PREC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_GENSTATS_XDESC = CUDNN_ATTR_OPERATION_GENSTATS_XDESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_GENSTATS_SUMDESC = CUDNN_ATTR_OPERATION_GENSTATS_SUMDESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_GENSTATS_SQSUMDESC = CUDNN_ATTR_OPERATION_GENSTATS_SQSUMDESC;
+  cudnnBackendAttributeName_t ATTR_OPERATIONGRAPH_HANDLE = CUDNN_ATTR_OPERATIONGRAPH_HANDLE;
+  cudnnBackendAttributeName_t ATTR_OPERATIONGRAPH_OPS = CUDNN_ATTR_OPERATIONGRAPH_OPS;
+  cudnnBackendAttributeName_t ATTR_OPERATIONGRAPH_ENGINE_GLOBAL_COUNT = CUDNN_ATTR_OPERATIONGRAPH_ENGINE_GLOBAL_COUNT;
+  cudnnBackendAttributeName_t ATTR_TENSOR_BYTE_ALIGNMENT = CUDNN_ATTR_TENSOR_BYTE_ALIGNMENT;
+  cudnnBackendAttributeName_t ATTR_TENSOR_DATA_TYPE = CUDNN_ATTR_TENSOR_DATA_TYPE;
+  cudnnBackendAttributeName_t ATTR_TENSOR_DIMENSIONS = CUDNN_ATTR_TENSOR_DIMENSIONS;
+  cudnnBackendAttributeName_t ATTR_TENSOR_STRIDES = CUDNN_ATTR_TENSOR_STRIDES;
+  cudnnBackendAttributeName_t ATTR_TENSOR_VECTOR_COUNT = CUDNN_ATTR_TENSOR_VECTOR_COUNT;
+  cudnnBackendAttributeName_t ATTR_TENSOR_VECTORIZED_DIMENSION = CUDNN_ATTR_TENSOR_VECTORIZED_DIMENSION;
+  cudnnBackendAttributeName_t ATTR_TENSOR_UNIQUE_ID = CUDNN_ATTR_TENSOR_UNIQUE_ID;
+  cudnnBackendAttributeName_t ATTR_TENSOR_IS_VIRTUAL = CUDNN_ATTR_TENSOR_IS_VIRTUAL;
+  cudnnBackendAttributeName_t ATTR_VARIANT_PACK_UNIQUE_IDS = CUDNN_ATTR_VARIANT_PACK_UNIQUE_IDS;
+  cudnnBackendAttributeName_t ATTR_VARIANT_PACK_DATA_POINTERS = CUDNN_ATTR_VARIANT_PACK_DATA_POINTERS;
+  cudnnBackendAttributeName_t ATTR_VARIANT_PACK_INTERMEDIATES = CUDNN_ATTR_VARIANT_PACK_INTERMEDIATES;
+  cudnnBackendAttributeName_t ATTR_VARIANT_PACK_WORKSPACE = CUDNN_ATTR_VARIANT_PACK_WORKSPACE;
+  cudnnBackendAttributeName_t ATTR_KNOB_INFO_TYPE = CUDNN_ATTR_KNOB_INFO_TYPE;
+  cudnnBackendAttributeName_t ATTR_KNOB_INFO_MAXIMUM_VALUE = CUDNN_ATTR_KNOB_INFO_MAXIMUM_VALUE;
+  cudnnBackendAttributeName_t ATTR_KNOB_INFO_MINIMUM_VALUE = CUDNN_ATTR_KNOB_INFO_MINIMUM_VALUE;
+  cudnnBackendAttributeName_t ATTR_KNOB_INFO_STRIDE = CUDNN_ATTR_KNOB_INFO_STRIDE;
+  cudnnBackendAttributeName_t ATTR_ENGINE_OPERATION_GRAPH = CUDNN_ATTR_ENGINE_OPERATION_GRAPH;
+  cudnnBackendAttributeName_t ATTR_ENGINE_GLOBAL_INDEX = CUDNN_ATTR_ENGINE_GLOBAL_INDEX;
+  cudnnBackendAttributeName_t ATTR_ENGINE_NUMERICAL_NOTE = CUDNN_ATTR_ENGINE_NUMERICAL_NOTE;
+#endif
+
+#if CUDNN_VERSION >= 8002
+  // CHECK: miopenBackendAttributeType_t TYPE_LAYOUT_TYPE = MIOPEN_TYPE_LAYOUT_TYPE;
+  cudnnBackendAttributeType_t TYPE_LAYOUT_TYPE = CUDNN_TYPE_LAYOUT_TYPE;
+
+  // CHECK: miopenBackendAttributeName_t ATTR_CONVOLUTION_CONV_MODE = MIOPEN_ATTR_CONVOLUTION_CONV_MODE;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_EXECUTION_PLAN_COMPUTED_INTERMEDIATE_UIDS = MIOPEN_ATTR_EXECUTION_PLAN_COMPUTED_INTERMEDIATE_UIDS;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_EXECUTION_PLAN_RUN_ONLY_INTERMEDIATE_UIDS = MIOPEN_ATTR_EXECUTION_PLAN_RUN_ONLY_INTERMEDIATE_UIDS;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_INTERMEDIATE_INFO_UNIQUE_ID = MIOPEN_ATTR_INTERMEDIATE_INFO_UNIQUE_ID;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_INTERMEDIATE_INFO_DEPENDENT_DATA_UIDS = MIOPEN_ATTR_INTERMEDIATE_INFO_DEPENDENT_DATA_UIDS;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_INTERMEDIATE_INFO_DEPENDENT_ATTRIBUTES = MIOPEN_ATTR_INTERMEDIATE_INFO_DEPENDENT_ATTRIBUTES;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_LAYOUT_INFO_TENSOR_UID = MIOPEN_ATTR_LAYOUT_INFO_TENSOR_UID;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_LAYOUT_INFO_TYPES = MIOPEN_ATTR_LAYOUT_INFO_TYPES;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_ENGINE_KNOB_INFO = MIOPEN_ATTR_ENGINE_KNOB_INFO;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_ENGINE_LAYOUT_INFO = MIOPEN_ATTR_ENGINE_LAYOUT_INFO;
+  cudnnBackendAttributeName_t ATTR_CONVOLUTION_CONV_MODE = CUDNN_ATTR_CONVOLUTION_CONV_MODE;
+  cudnnBackendAttributeName_t ATTR_EXECUTION_PLAN_COMPUTED_INTERMEDIATE_UIDS = CUDNN_ATTR_EXECUTION_PLAN_COMPUTED_INTERMEDIATE_UIDS;
+  cudnnBackendAttributeName_t ATTR_EXECUTION_PLAN_RUN_ONLY_INTERMEDIATE_UIDS = CUDNN_ATTR_EXECUTION_PLAN_RUN_ONLY_INTERMEDIATE_UIDS;
+  cudnnBackendAttributeName_t ATTR_INTERMEDIATE_INFO_UNIQUE_ID = CUDNN_ATTR_INTERMEDIATE_INFO_UNIQUE_ID;
+  cudnnBackendAttributeName_t ATTR_INTERMEDIATE_INFO_DEPENDENT_DATA_UIDS = CUDNN_ATTR_INTERMEDIATE_INFO_DEPENDENT_DATA_UIDS;
+  cudnnBackendAttributeName_t ATTR_INTERMEDIATE_INFO_DEPENDENT_ATTRIBUTES = CUDNN_ATTR_INTERMEDIATE_INFO_DEPENDENT_ATTRIBUTES;
+  cudnnBackendAttributeName_t ATTR_LAYOUT_INFO_TENSOR_UID = CUDNN_ATTR_LAYOUT_INFO_TENSOR_UID;
+  cudnnBackendAttributeName_t ATTR_LAYOUT_INFO_TYPES = CUDNN_ATTR_LAYOUT_INFO_TYPES;
+  cudnnBackendAttributeName_t ATTR_ENGINE_KNOB_INFO = CUDNN_ATTR_ENGINE_KNOB_INFO;
+  cudnnBackendAttributeName_t ATTR_ENGINE_LAYOUT_INFO = CUDNN_ATTR_ENGINE_LAYOUT_INFO;
+#endif
+
+#if CUDNN_VERSION >= 8100
+  // CHECK: miopenDataType_t DATA_INT64 = miopenInt64;
+  cudnnDataType_t DATA_INT64 = CUDNN_DATA_INT64;
+
+  // CHECK: miopenBackendDescriptorType_t BACKEND_MATMUL_DESCRIPTOR = MIOPEN_BACKEND_MATMUL_DESCRIPTOR;
+  // CHECK-NEXT: miopenBackendDescriptorType_t BACKEND_OPERATION_MATMUL_DESCRIPTOR = MIOPEN_BACKEND_OPERATION_MATMUL_DESCRIPTOR;
+  // CHECK-NEXT: miopenBackendDescriptorType_t BACKEND_REDUCTION_DESCRIPTOR = MIOPEN_BACKEND_REDUCTION_DESCRIPTOR;
+  // CHECK-NEXT: miopenBackendDescriptorType_t BACKEND_OPERATION_REDUCTION_DESCRIPTOR = MIOPEN_BACKEND_OPERATION_REDUCTION_DESCRIPTOR;
+  cudnnBackendDescriptorType_t BACKEND_MATMUL_DESCRIPTOR = CUDNN_BACKEND_MATMUL_DESCRIPTOR;
+  cudnnBackendDescriptorType_t BACKEND_OPERATION_MATMUL_DESCRIPTOR = CUDNN_BACKEND_OPERATION_MATMUL_DESCRIPTOR;
+  cudnnBackendDescriptorType_t BACKEND_REDUCTION_DESCRIPTOR = CUDNN_BACKEND_REDUCTION_DESCRIPTOR;
+  cudnnBackendDescriptorType_t BACKEND_OPERATION_REDUCTION_DESCRIPTOR = CUDNN_BACKEND_OPERATION_REDUCTION_DESCRIPTOR;
+
+  // CHECK: miopenBackendAttributeType_t TYPE_BN_FINALIZE_STATS_MODE = MIOPEN_TYPE_BN_FINALIZE_STATS_MODE;
+  // CHECK-NEXT: miopenBackendAttributeType_t TYPE_REDUCTION_OPERATOR_TYPE = MIOPEN_TYPE_REDUCTION_OPERATOR_TYPE;
+  cudnnBackendAttributeType_t TYPE_BN_FINALIZE_STATS_MODE = CUDNN_TYPE_BN_FINALIZE_STATS_MODE;
+  cudnnBackendAttributeType_t TYPE_REDUCTION_OPERATOR_TYPE = CUDNN_TYPE_REDUCTION_OPERATOR_TYPE;
+
+  // CHECK: miopenBackendAttributeName_t ATTR_POINTWISE_RELU_LOWER_CLIP_SLOPE = MIOPEN_ATTR_POINTWISE_RELU_LOWER_CLIP_SLOPE;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_POINTWISE_ELU_ALPHA = MIOPEN_ATTR_POINTWISE_ELU_ALPHA;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_POINTWISE_SOFTPLUS_BETA = MIOPEN_ATTR_POINTWISE_SOFTPLUS_BETA;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_POINTWISE_SWISH_BETA = MIOPEN_ATTR_POINTWISE_SWISH_BETA;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_POINTWISE_DXDESC = MIOPEN_ATTR_OPERATION_POINTWISE_DXDESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_POINTWISE_DYDESC = MIOPEN_ATTR_OPERATION_POINTWISE_DYDESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_BN_FINALIZE_STATS_MODE = MIOPEN_ATTR_OPERATION_BN_FINALIZE_STATS_MODE;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_BN_FINALIZE_MATH_PREC = MIOPEN_ATTR_OPERATION_BN_FINALIZE_MATH_PREC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_BN_FINALIZE_Y_SUM_DESC = MIOPEN_ATTR_OPERATION_BN_FINALIZE_Y_SUM_DESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_BN_FINALIZE_Y_SQ_SUM_DESC = MIOPEN_ATTR_OPERATION_BN_FINALIZE_Y_SQ_SUM_DESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_BN_FINALIZE_SCALE_DESC = MIOPEN_ATTR_OPERATION_BN_FINALIZE_SCALE_DESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_BN_FINALIZE_BIAS_DESC = MIOPEN_ATTR_OPERATION_BN_FINALIZE_BIAS_DESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_BN_FINALIZE_PREV_RUNNING_MEAN_DESC = MIOPEN_ATTR_OPERATION_BN_FINALIZE_PREV_RUNNING_MEAN_DESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_BN_FINALIZE_PREV_RUNNING_VAR_DESC = MIOPEN_ATTR_OPERATION_BN_FINALIZE_PREV_RUNNING_VAR_DESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_BN_FINALIZE_UPDATED_RUNNING_MEAN_DESC = MIOPEN_ATTR_OPERATION_BN_FINALIZE_UPDATED_RUNNING_MEAN_DESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_BN_FINALIZE_UPDATED_RUNNING_VAR_DESC = MIOPEN_ATTR_OPERATION_BN_FINALIZE_UPDATED_RUNNING_VAR_DESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_BN_FINALIZE_SAVED_MEAN_DESC = MIOPEN_ATTR_OPERATION_BN_FINALIZE_SAVED_MEAN_DESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_BN_FINALIZE_SAVED_INV_STD_DESC = MIOPEN_ATTR_OPERATION_BN_FINALIZE_SAVED_INV_STD_DESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_BN_FINALIZE_EQ_SCALE_DESC = MIOPEN_ATTR_OPERATION_BN_FINALIZE_EQ_SCALE_DESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_BN_FINALIZE_EQ_BIAS_DESC = MIOPEN_ATTR_OPERATION_BN_FINALIZE_EQ_BIAS_DESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_BN_FINALIZE_ACCUM_COUNT_DESC = MIOPEN_ATTR_OPERATION_BN_FINALIZE_ACCUM_COUNT_DESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_BN_FINALIZE_EPSILON_DESC = MIOPEN_ATTR_OPERATION_BN_FINALIZE_EPSILON_DESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_BN_FINALIZE_EXP_AVERATE_FACTOR_DESC = MIOPEN_ATTR_OPERATION_BN_FINALIZE_EXP_AVERATE_FACTOR_DESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_TENSOR_IS_BY_VALUE = MIOPEN_ATTR_TENSOR_IS_BY_VALUE;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_MATMUL_COMP_TYPE = MIOPEN_ATTR_MATMUL_COMP_TYPE;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_MATMUL_ADESC = MIOPEN_ATTR_OPERATION_MATMUL_ADESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_MATMUL_BDESC = MIOPEN_ATTR_OPERATION_MATMUL_BDESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_MATMUL_CDESC = MIOPEN_ATTR_OPERATION_MATMUL_CDESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_MATMUL_DESC = MIOPEN_ATTR_OPERATION_MATMUL_DESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_MATMUL_IRREGULARLY_STRIDED_BATCH_COUNT = MIOPEN_ATTR_OPERATION_MATMUL_IRREGULARLY_STRIDED_BATCH_COUNT;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_REDUCTION_OPERATOR = MIOPEN_ATTR_REDUCTION_OPERATOR;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_REDUCTION_COMP_TYPE = MIOPEN_ATTR_REDUCTION_COMP_TYPE;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_REDUCTION_XDESC = MIOPEN_ATTR_OPERATION_REDUCTION_XDESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_REDUCTION_YDESC = MIOPEN_ATTR_OPERATION_REDUCTION_YDESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_REDUCTION_DESC = MIOPEN_ATTR_OPERATION_REDUCTION_DESC;
+  cudnnBackendAttributeName_t ATTR_POINTWISE_RELU_LOWER_CLIP_SLOPE = CUDNN_ATTR_POINTWISE_RELU_LOWER_CLIP_SLOPE;
+  cudnnBackendAttributeName_t ATTR_POINTWISE_ELU_ALPHA = CUDNN_ATTR_POINTWISE_ELU_ALPHA;
+  cudnnBackendAttributeName_t ATTR_POINTWISE_SOFTPLUS_BETA = CUDNN_ATTR_POINTWISE_SOFTPLUS_BETA;
+  cudnnBackendAttributeName_t ATTR_POINTWISE_SWISH_BETA = CUDNN_ATTR_POINTWISE_SWISH_BETA;
+  cudnnBackendAttributeName_t ATTR_OPERATION_POINTWISE_DXDESC = CUDNN_ATTR_OPERATION_POINTWISE_DXDESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_POINTWISE_DYDESC = CUDNN_ATTR_OPERATION_POINTWISE_DYDESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_BN_FINALIZE_STATS_MODE = CUDNN_ATTR_OPERATION_BN_FINALIZE_STATS_MODE;
+  cudnnBackendAttributeName_t ATTR_OPERATION_BN_FINALIZE_MATH_PREC = CUDNN_ATTR_OPERATION_BN_FINALIZE_MATH_PREC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_BN_FINALIZE_Y_SUM_DESC = CUDNN_ATTR_OPERATION_BN_FINALIZE_Y_SUM_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_BN_FINALIZE_Y_SQ_SUM_DESC = CUDNN_ATTR_OPERATION_BN_FINALIZE_Y_SQ_SUM_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_BN_FINALIZE_SCALE_DESC = CUDNN_ATTR_OPERATION_BN_FINALIZE_SCALE_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_BN_FINALIZE_BIAS_DESC = CUDNN_ATTR_OPERATION_BN_FINALIZE_BIAS_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_BN_FINALIZE_PREV_RUNNING_MEAN_DESC = CUDNN_ATTR_OPERATION_BN_FINALIZE_PREV_RUNNING_MEAN_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_BN_FINALIZE_PREV_RUNNING_VAR_DESC = CUDNN_ATTR_OPERATION_BN_FINALIZE_PREV_RUNNING_VAR_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_BN_FINALIZE_UPDATED_RUNNING_MEAN_DESC = CUDNN_ATTR_OPERATION_BN_FINALIZE_UPDATED_RUNNING_MEAN_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_BN_FINALIZE_UPDATED_RUNNING_VAR_DESC = CUDNN_ATTR_OPERATION_BN_FINALIZE_UPDATED_RUNNING_VAR_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_BN_FINALIZE_SAVED_MEAN_DESC = CUDNN_ATTR_OPERATION_BN_FINALIZE_SAVED_MEAN_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_BN_FINALIZE_SAVED_INV_STD_DESC = CUDNN_ATTR_OPERATION_BN_FINALIZE_SAVED_INV_STD_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_BN_FINALIZE_EQ_SCALE_DESC = CUDNN_ATTR_OPERATION_BN_FINALIZE_EQ_SCALE_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_BN_FINALIZE_EQ_BIAS_DESC = CUDNN_ATTR_OPERATION_BN_FINALIZE_EQ_BIAS_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_BN_FINALIZE_ACCUM_COUNT_DESC = CUDNN_ATTR_OPERATION_BN_FINALIZE_ACCUM_COUNT_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_BN_FINALIZE_EPSILON_DESC = CUDNN_ATTR_OPERATION_BN_FINALIZE_EPSILON_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_BN_FINALIZE_EXP_AVERATE_FACTOR_DESC = CUDNN_ATTR_OPERATION_BN_FINALIZE_EXP_AVERATE_FACTOR_DESC;
+  cudnnBackendAttributeName_t ATTR_TENSOR_IS_BY_VALUE = CUDNN_ATTR_TENSOR_IS_BY_VALUE;
+  cudnnBackendAttributeName_t ATTR_MATMUL_COMP_TYPE = CUDNN_ATTR_MATMUL_COMP_TYPE;
+  cudnnBackendAttributeName_t ATTR_OPERATION_MATMUL_ADESC = CUDNN_ATTR_OPERATION_MATMUL_ADESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_MATMUL_BDESC = CUDNN_ATTR_OPERATION_MATMUL_BDESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_MATMUL_CDESC = CUDNN_ATTR_OPERATION_MATMUL_CDESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_MATMUL_DESC = CUDNN_ATTR_OPERATION_MATMUL_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_MATMUL_IRREGULARLY_STRIDED_BATCH_COUNT = CUDNN_ATTR_OPERATION_MATMUL_IRREGULARLY_STRIDED_BATCH_COUNT;
+  cudnnBackendAttributeName_t ATTR_REDUCTION_OPERATOR = CUDNN_ATTR_REDUCTION_OPERATOR;
+  cudnnBackendAttributeName_t ATTR_REDUCTION_COMP_TYPE = CUDNN_ATTR_REDUCTION_COMP_TYPE;
+  cudnnBackendAttributeName_t ATTR_OPERATION_REDUCTION_XDESC = CUDNN_ATTR_OPERATION_REDUCTION_XDESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_REDUCTION_YDESC = CUDNN_ATTR_OPERATION_REDUCTION_YDESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_REDUCTION_DESC = CUDNN_ATTR_OPERATION_REDUCTION_DESC;
+#endif
+
+#if CUDNN_VERSION >= 8200
+  // CHECK: miopenBackendAttributeType_t TYPE_BEHAVIOR_NOTE = MIOPEN_TYPE_BEHAVIOR_NOTE;
+  cudnnBackendAttributeType_t TYPE_BEHAVIOR_NOTE = CUDNN_TYPE_BEHAVIOR_NOTE;
+
+  // CHECK: miopenBackendAttributeName_t ATTR_ENGINE_BEHAVIOR_NOTE = MIOPEN_ATTR_ENGINE_BEHAVIOR_NOTE;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_BN_BWD_WEIGHTS_MATH_PREC = MIOPEN_ATTR_OPERATION_BN_BWD_WEIGHTS_MATH_PREC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_BN_BWD_WEIGHTS_MEAN_DESC = MIOPEN_ATTR_OPERATION_BN_BWD_WEIGHTS_MEAN_DESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_BN_BWD_WEIGHTS_INVSTD_DESC = MIOPEN_ATTR_OPERATION_BN_BWD_WEIGHTS_INVSTD_DESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_BN_BWD_WEIGHTS_BN_SCALE_DESC = MIOPEN_ATTR_OPERATION_BN_BWD_WEIGHTS_BN_SCALE_DESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_BN_BWD_WEIGHTS_X_DESC = MIOPEN_ATTR_OPERATION_BN_BWD_WEIGHTS_X_DESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_BN_BWD_WEIGHTS_DY_DESC = MIOPEN_ATTR_OPERATION_BN_BWD_WEIGHTS_DY_DESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_BN_BWD_WEIGHTS_DBN_SCALE_DESC = MIOPEN_ATTR_OPERATION_BN_BWD_WEIGHTS_DBN_SCALE_DESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_BN_BWD_WEIGHTS_DBN_BIAS_DESC = MIOPEN_ATTR_OPERATION_BN_BWD_WEIGHTS_DBN_BIAS_DESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_BN_BWD_WEIGHTS_EQ_DY_SCALE_DESC = MIOPEN_ATTR_OPERATION_BN_BWD_WEIGHTS_EQ_DY_SCALE_DESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_BN_BWD_WEIGHTS_EQ_X_SCALE_DESC = MIOPEN_ATTR_OPERATION_BN_BWD_WEIGHTS_EQ_X_SCALE_DESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_BN_BWD_WEIGHTS_EQ_BIAS = MIOPEN_ATTR_OPERATION_BN_BWD_WEIGHTS_EQ_BIAS;
+  cudnnBackendAttributeName_t ATTR_ENGINE_BEHAVIOR_NOTE = CUDNN_ATTR_ENGINE_BEHAVIOR_NOTE;
+  cudnnBackendAttributeName_t ATTR_OPERATION_BN_BWD_WEIGHTS_MATH_PREC = CUDNN_ATTR_OPERATION_BN_BWD_WEIGHTS_MATH_PREC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_BN_BWD_WEIGHTS_MEAN_DESC = CUDNN_ATTR_OPERATION_BN_BWD_WEIGHTS_MEAN_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_BN_BWD_WEIGHTS_INVSTD_DESC = CUDNN_ATTR_OPERATION_BN_BWD_WEIGHTS_INVSTD_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_BN_BWD_WEIGHTS_BN_SCALE_DESC = CUDNN_ATTR_OPERATION_BN_BWD_WEIGHTS_BN_SCALE_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_BN_BWD_WEIGHTS_X_DESC = CUDNN_ATTR_OPERATION_BN_BWD_WEIGHTS_X_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_BN_BWD_WEIGHTS_DY_DESC = CUDNN_ATTR_OPERATION_BN_BWD_WEIGHTS_DY_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_BN_BWD_WEIGHTS_DBN_SCALE_DESC = CUDNN_ATTR_OPERATION_BN_BWD_WEIGHTS_DBN_SCALE_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_BN_BWD_WEIGHTS_DBN_BIAS_DESC = CUDNN_ATTR_OPERATION_BN_BWD_WEIGHTS_DBN_BIAS_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_BN_BWD_WEIGHTS_EQ_DY_SCALE_DESC = CUDNN_ATTR_OPERATION_BN_BWD_WEIGHTS_EQ_DY_SCALE_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_BN_BWD_WEIGHTS_EQ_X_SCALE_DESC = CUDNN_ATTR_OPERATION_BN_BWD_WEIGHTS_EQ_X_SCALE_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_BN_BWD_WEIGHTS_EQ_BIAS = CUDNN_ATTR_OPERATION_BN_BWD_WEIGHTS_EQ_BIAS;
+#endif
+
+#if CUDNN_VERSION >= 8300
+  // CHECK: miopenBackendDescriptorType_t BACKEND_RESAMPLE_DESCRIPTOR = MIOPEN_BACKEND_RESAMPLE_DESCRIPTOR;
+  // CHECK-NEXT: miopenBackendDescriptorType_t BACKEND_OPERATION_RESAMPLE_FWD_DESCRIPTOR = MIOPEN_BACKEND_OPERATION_RESAMPLE_FWD_DESCRIPTOR;
+  // CHECK-NEXT: miopenBackendDescriptorType_t BACKEND_OPERATION_RESAMPLE_BWD_DESCRIPTOR = MIOPEN_BACKEND_OPERATION_RESAMPLE_BWD_DESCRIPTOR;
+  cudnnBackendDescriptorType_t BACKEND_RESAMPLE_DESCRIPTOR = CUDNN_BACKEND_RESAMPLE_DESCRIPTOR;
+  cudnnBackendDescriptorType_t BACKEND_OPERATION_RESAMPLE_FWD_DESCRIPTOR = CUDNN_BACKEND_OPERATION_RESAMPLE_FWD_DESCRIPTOR;
+  cudnnBackendDescriptorType_t BACKEND_OPERATION_RESAMPLE_BWD_DESCRIPTOR = CUDNN_BACKEND_OPERATION_RESAMPLE_BWD_DESCRIPTOR;
+
+  // CHECK: miopenBackendAttributeType_t TYPE_TENSOR_REORDERING_MODE = MIOPEN_TYPE_TENSOR_REORDERING_MODE;
+  // CHECK-NEXT: miopenBackendAttributeType_t TYPE_RESAMPLE_MODE = MIOPEN_TYPE_RESAMPLE_MODE;
+  // CHECK-NEXT: miopenBackendAttributeType_t TYPE_PADDING_MODE = MIOPEN_TYPE_PADDING_MODE;
+  // CHECK-NEXT: miopenBackendAttributeType_t TYPE_INT32 = MIOPEN_TYPE_INT32;
+  cudnnBackendAttributeType_t TYPE_TENSOR_REORDERING_MODE = CUDNN_TYPE_TENSOR_REORDERING_MODE;
+  cudnnBackendAttributeType_t TYPE_RESAMPLE_MODE = CUDNN_TYPE_RESAMPLE_MODE;
+  cudnnBackendAttributeType_t TYPE_PADDING_MODE = CUDNN_TYPE_PADDING_MODE;
+  cudnnBackendAttributeType_t TYPE_INT32 = CUDNN_TYPE_INT32;
+
+  // CHECK: miopenBackendAttributeName_t ATTR_OPERATION_POINTWISE_TDESC = MIOPEN_ATTR_OPERATION_POINTWISE_TDESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_TENSOR_REORDERING_MODE = MIOPEN_ATTR_TENSOR_REORDERING_MODE;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_RESAMPLE_MODE = MIOPEN_ATTR_RESAMPLE_MODE;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_RESAMPLE_COMP_TYPE = MIOPEN_ATTR_RESAMPLE_COMP_TYPE;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_RESAMPLE_SPATIAL_DIMS = MIOPEN_ATTR_RESAMPLE_SPATIAL_DIMS;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_RESAMPLE_POST_PADDINGS = MIOPEN_ATTR_RESAMPLE_POST_PADDINGS;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_RESAMPLE_PRE_PADDINGS = MIOPEN_ATTR_RESAMPLE_PRE_PADDINGS;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_RESAMPLE_STRIDES = MIOPEN_ATTR_RESAMPLE_STRIDES;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_RESAMPLE_WINDOW_DIMS = MIOPEN_ATTR_RESAMPLE_WINDOW_DIMS;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_RESAMPLE_NAN_PROPAGATION = MIOPEN_ATTR_RESAMPLE_NAN_PROPAGATION;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_RESAMPLE_PADDING_MODE = MIOPEN_ATTR_RESAMPLE_PADDING_MODE;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_RESAMPLE_FWD_XDESC = MIOPEN_ATTR_OPERATION_RESAMPLE_FWD_XDESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_RESAMPLE_FWD_YDESC = MIOPEN_ATTR_OPERATION_RESAMPLE_FWD_YDESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_RESAMPLE_FWD_IDXDESC = MIOPEN_ATTR_OPERATION_RESAMPLE_FWD_IDXDESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_RESAMPLE_FWD_ALPHA = MIOPEN_ATTR_OPERATION_RESAMPLE_FWD_ALPHA;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_RESAMPLE_FWD_BETA = MIOPEN_ATTR_OPERATION_RESAMPLE_FWD_BETA;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_RESAMPLE_FWD_DESC = MIOPEN_ATTR_OPERATION_RESAMPLE_FWD_DESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_RESAMPLE_BWD_DXDESC = MIOPEN_ATTR_OPERATION_RESAMPLE_BWD_DXDESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_RESAMPLE_BWD_DYDESC = MIOPEN_ATTR_OPERATION_RESAMPLE_BWD_DYDESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_RESAMPLE_BWD_IDXDESC = MIOPEN_ATTR_OPERATION_RESAMPLE_BWD_IDXDESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_RESAMPLE_BWD_ALPHA = MIOPEN_ATTR_OPERATION_RESAMPLE_BWD_ALPHA;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_RESAMPLE_BWD_BETA = MIOPEN_ATTR_OPERATION_RESAMPLE_BWD_BETA;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_RESAMPLE_BWD_DESC = MIOPEN_ATTR_OPERATION_RESAMPLE_BWD_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_POINTWISE_TDESC = CUDNN_ATTR_OPERATION_POINTWISE_TDESC;
+  cudnnBackendAttributeName_t ATTR_TENSOR_REORDERING_MODE = CUDNN_ATTR_TENSOR_REORDERING_MODE;
+  cudnnBackendAttributeName_t ATTR_RESAMPLE_MODE = CUDNN_ATTR_RESAMPLE_MODE;
+  cudnnBackendAttributeName_t ATTR_RESAMPLE_COMP_TYPE = CUDNN_ATTR_RESAMPLE_COMP_TYPE;
+  cudnnBackendAttributeName_t ATTR_RESAMPLE_SPATIAL_DIMS = CUDNN_ATTR_RESAMPLE_SPATIAL_DIMS;
+  cudnnBackendAttributeName_t ATTR_RESAMPLE_POST_PADDINGS = CUDNN_ATTR_RESAMPLE_POST_PADDINGS;
+  cudnnBackendAttributeName_t ATTR_RESAMPLE_PRE_PADDINGS = CUDNN_ATTR_RESAMPLE_PRE_PADDINGS;
+  cudnnBackendAttributeName_t ATTR_RESAMPLE_STRIDES = CUDNN_ATTR_RESAMPLE_STRIDES;
+  cudnnBackendAttributeName_t ATTR_RESAMPLE_WINDOW_DIMS = CUDNN_ATTR_RESAMPLE_WINDOW_DIMS;
+  cudnnBackendAttributeName_t ATTR_RESAMPLE_NAN_PROPAGATION = CUDNN_ATTR_RESAMPLE_NAN_PROPAGATION;
+  cudnnBackendAttributeName_t ATTR_RESAMPLE_PADDING_MODE = CUDNN_ATTR_RESAMPLE_PADDING_MODE;
+  cudnnBackendAttributeName_t ATTR_OPERATION_RESAMPLE_FWD_XDESC = CUDNN_ATTR_OPERATION_RESAMPLE_FWD_XDESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_RESAMPLE_FWD_YDESC = CUDNN_ATTR_OPERATION_RESAMPLE_FWD_YDESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_RESAMPLE_FWD_IDXDESC = CUDNN_ATTR_OPERATION_RESAMPLE_FWD_IDXDESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_RESAMPLE_FWD_ALPHA = CUDNN_ATTR_OPERATION_RESAMPLE_FWD_ALPHA;
+  cudnnBackendAttributeName_t ATTR_OPERATION_RESAMPLE_FWD_BETA = CUDNN_ATTR_OPERATION_RESAMPLE_FWD_BETA;
+  cudnnBackendAttributeName_t ATTR_OPERATION_RESAMPLE_FWD_DESC = CUDNN_ATTR_OPERATION_RESAMPLE_FWD_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_RESAMPLE_BWD_DXDESC = CUDNN_ATTR_OPERATION_RESAMPLE_BWD_DXDESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_RESAMPLE_BWD_DYDESC = CUDNN_ATTR_OPERATION_RESAMPLE_BWD_DYDESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_RESAMPLE_BWD_IDXDESC = CUDNN_ATTR_OPERATION_RESAMPLE_BWD_IDXDESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_RESAMPLE_BWD_ALPHA = CUDNN_ATTR_OPERATION_RESAMPLE_BWD_ALPHA;
+  cudnnBackendAttributeName_t ATTR_OPERATION_RESAMPLE_BWD_BETA = CUDNN_ATTR_OPERATION_RESAMPLE_BWD_BETA;
+  cudnnBackendAttributeName_t ATTR_OPERATION_RESAMPLE_BWD_DESC = CUDNN_ATTR_OPERATION_RESAMPLE_BWD_DESC;
+#endif
+
+#if CUDNN_VERSION >= 8400
+  // CHECK: miopenBackendAttributeType_t TYPE_CHAR = MIOPEN_TYPE_CHAR;
+  cudnnBackendAttributeType_t TYPE_CHAR = CUDNN_TYPE_CHAR;
+
+  // CHECK: miopenBackendAttributeName_t ATTR_POINTWISE_AXIS = MIOPEN_ATTR_POINTWISE_AXIS;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_EXECUTION_PLAN_JSON_REPRESENTATION = MIOPEN_ATTR_EXECUTION_PLAN_JSON_REPRESENTATION;
+  cudnnBackendAttributeName_t ATTR_POINTWISE_AXIS = CUDNN_ATTR_POINTWISE_AXIS;
+  cudnnBackendAttributeName_t ATTR_EXECUTION_PLAN_JSON_REPRESENTATION = CUDNN_ATTR_EXECUTION_PLAN_JSON_REPRESENTATION;
+#endif
+
+#if CUDNN_VERSION >= 8500
+  // CHECK: miopenBackendDescriptorType_t BACKEND_OPERATION_CONCAT_DESCRIPTOR = MIOPEN_BACKEND_OPERATION_CONCAT_DESCRIPTOR;
+  // CHECK-NEXT: miopenBackendDescriptorType_t BACKEND_OPERATION_SIGNAL_DESCRIPTOR = MIOPEN_BACKEND_OPERATION_SIGNAL_DESCRIPTOR;
+  // CHECK-NEXT: miopenBackendDescriptorType_t BACKEND_OPERATION_NORM_FORWARD_DESCRIPTOR = MIOPEN_BACKEND_OPERATION_NORM_FORWARD_DESCRIPTOR;
+  // CHECK-NEXT: miopenBackendDescriptorType_t BACKEND_OPERATION_NORM_BACKWARD_DESCRIPTOR = MIOPEN_BACKEND_OPERATION_NORM_BACKWARD_DESCRIPTOR;
+  cudnnBackendDescriptorType_t BACKEND_OPERATION_CONCAT_DESCRIPTOR = CUDNN_BACKEND_OPERATION_CONCAT_DESCRIPTOR;
+  cudnnBackendDescriptorType_t BACKEND_OPERATION_SIGNAL_DESCRIPTOR = CUDNN_BACKEND_OPERATION_SIGNAL_DESCRIPTOR;
+  cudnnBackendDescriptorType_t BACKEND_OPERATION_NORM_FORWARD_DESCRIPTOR = CUDNN_BACKEND_OPERATION_NORM_FORWARD_DESCRIPTOR;
+  cudnnBackendDescriptorType_t BACKEND_OPERATION_NORM_BACKWARD_DESCRIPTOR = CUDNN_BACKEND_OPERATION_NORM_BACKWARD_DESCRIPTOR;
+
+  // CHECK: miopenBackendAttributeType_t TYPE_SIGNAL_MODE = MIOPEN_TYPE_SIGNAL_MODE;
+  // CHECK-NEXT: miopenBackendAttributeType_t TYPE_FRACTION = MIOPEN_TYPE_FRACTION;
+  // CHECK-NEXT: miopenBackendAttributeType_t TYPE_NORM_MODE = MIOPEN_TYPE_NORM_MODE;
+  // CHECK-NEXT: miopenBackendAttributeType_t TYPE_NORM_FWD_PHASE = MIOPEN_TYPE_NORM_FWD_PHASE;
+  cudnnBackendAttributeType_t TYPE_SIGNAL_MODE = CUDNN_TYPE_SIGNAL_MODE;
+  cudnnBackendAttributeType_t TYPE_FRACTION = CUDNN_TYPE_FRACTION;
+  cudnnBackendAttributeType_t TYPE_NORM_MODE = CUDNN_TYPE_NORM_MODE;
+  cudnnBackendAttributeType_t TYPE_NORM_FWD_PHASE = CUDNN_TYPE_NORM_FWD_PHASE;
+
+  // CHECK: miopenBackendAttributeName_t ATTR_OPERATION_CONCAT_AXIS = MIOPEN_ATTR_OPERATION_CONCAT_AXIS;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_CONCAT_INPUT_DESCS = MIOPEN_ATTR_OPERATION_CONCAT_INPUT_DESCS;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_CONCAT_INPLACE_INDEX = MIOPEN_ATTR_OPERATION_CONCAT_INPLACE_INDEX;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_CONCAT_OUTPUT_DESC = MIOPEN_ATTR_OPERATION_CONCAT_OUTPUT_DESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_SIGNAL_MODE = MIOPEN_ATTR_OPERATION_SIGNAL_MODE;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_SIGNAL_FLAGDESC = MIOPEN_ATTR_OPERATION_SIGNAL_FLAGDESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_SIGNAL_VALUE = MIOPEN_ATTR_OPERATION_SIGNAL_VALUE;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_SIGNAL_XDESC = MIOPEN_ATTR_OPERATION_SIGNAL_XDESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_SIGNAL_YDESC = MIOPEN_ATTR_OPERATION_SIGNAL_YDESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_NORM_FWD_MODE = MIOPEN_ATTR_OPERATION_NORM_FWD_MODE;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_NORM_FWD_PHASE = MIOPEN_ATTR_OPERATION_NORM_FWD_PHASE;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_NORM_FWD_XDESC = MIOPEN_ATTR_OPERATION_NORM_FWD_XDESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_NORM_FWD_MEAN_DESC = MIOPEN_ATTR_OPERATION_NORM_FWD_MEAN_DESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_NORM_FWD_INV_VARIANCE_DESC = MIOPEN_ATTR_OPERATION_NORM_FWD_INV_VARIANCE_DESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_NORM_FWD_SCALE_DESC = MIOPEN_ATTR_OPERATION_NORM_FWD_SCALE_DESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_NORM_FWD_BIAS_DESC = MIOPEN_ATTR_OPERATION_NORM_FWD_BIAS_DESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_NORM_FWD_EPSILON_DESC = MIOPEN_ATTR_OPERATION_NORM_FWD_EPSILON_DESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_NORM_FWD_EXP_AVG_FACTOR_DESC = MIOPEN_ATTR_OPERATION_NORM_FWD_EXP_AVG_FACTOR_DESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_NORM_FWD_INPUT_RUNNING_MEAN_DESC = MIOPEN_ATTR_OPERATION_NORM_FWD_INPUT_RUNNING_MEAN_DESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_NORM_FWD_INPUT_RUNNING_VAR_DESC = MIOPEN_ATTR_OPERATION_NORM_FWD_INPUT_RUNNING_VAR_DESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_NORM_FWD_OUTPUT_RUNNING_MEAN_DESC = MIOPEN_ATTR_OPERATION_NORM_FWD_OUTPUT_RUNNING_MEAN_DESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_NORM_FWD_OUTPUT_RUNNING_VAR_DESC = MIOPEN_ATTR_OPERATION_NORM_FWD_OUTPUT_RUNNING_VAR_DESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_NORM_FWD_YDESC = MIOPEN_ATTR_OPERATION_NORM_FWD_YDESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_NORM_FWD_PEER_STAT_DESCS = MIOPEN_ATTR_OPERATION_NORM_FWD_PEER_STAT_DESCS;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_NORM_BWD_MODE = MIOPEN_ATTR_OPERATION_NORM_BWD_MODE;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_NORM_BWD_XDESC = MIOPEN_ATTR_OPERATION_NORM_BWD_XDESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_NORM_BWD_MEAN_DESC = MIOPEN_ATTR_OPERATION_NORM_BWD_MEAN_DESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_NORM_BWD_INV_VARIANCE_DESC = MIOPEN_ATTR_OPERATION_NORM_BWD_INV_VARIANCE_DESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_NORM_BWD_DYDESC = MIOPEN_ATTR_OPERATION_NORM_BWD_DYDESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_NORM_BWD_SCALE_DESC = MIOPEN_ATTR_OPERATION_NORM_BWD_SCALE_DESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_NORM_BWD_EPSILON_DESC = MIOPEN_ATTR_OPERATION_NORM_BWD_EPSILON_DESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_NORM_BWD_DSCALE_DESC = MIOPEN_ATTR_OPERATION_NORM_BWD_DSCALE_DESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_NORM_BWD_DBIAS_DESC = MIOPEN_ATTR_OPERATION_NORM_BWD_DBIAS_DESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_NORM_BWD_DXDESC = MIOPEN_ATTR_OPERATION_NORM_BWD_DXDESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_NORM_BWD_PEER_STAT_DESCS = MIOPEN_ATTR_OPERATION_NORM_BWD_PEER_STAT_DESCS;
+  cudnnBackendAttributeName_t ATTR_OPERATION_CONCAT_AXIS = CUDNN_ATTR_OPERATION_CONCAT_AXIS;
+  cudnnBackendAttributeName_t ATTR_OPERATION_CONCAT_INPUT_DESCS = CUDNN_ATTR_OPERATION_CONCAT_INPUT_DESCS;
+  cudnnBackendAttributeName_t ATTR_OPERATION_CONCAT_INPLACE_INDEX = CUDNN_ATTR_OPERATION_CONCAT_INPLACE_INDEX;
+  cudnnBackendAttributeName_t ATTR_OPERATION_CONCAT_OUTPUT_DESC = CUDNN_ATTR_OPERATION_CONCAT_OUTPUT_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_SIGNAL_MODE = CUDNN_ATTR_OPERATION_SIGNAL_MODE;
+  cudnnBackendAttributeName_t ATTR_OPERATION_SIGNAL_FLAGDESC = CUDNN_ATTR_OPERATION_SIGNAL_FLAGDESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_SIGNAL_VALUE = CUDNN_ATTR_OPERATION_SIGNAL_VALUE;
+  cudnnBackendAttributeName_t ATTR_OPERATION_SIGNAL_XDESC = CUDNN_ATTR_OPERATION_SIGNAL_XDESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_SIGNAL_YDESC = CUDNN_ATTR_OPERATION_SIGNAL_YDESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_NORM_FWD_MODE = CUDNN_ATTR_OPERATION_NORM_FWD_MODE;
+  cudnnBackendAttributeName_t ATTR_OPERATION_NORM_FWD_PHASE = CUDNN_ATTR_OPERATION_NORM_FWD_PHASE;
+  cudnnBackendAttributeName_t ATTR_OPERATION_NORM_FWD_XDESC = CUDNN_ATTR_OPERATION_NORM_FWD_XDESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_NORM_FWD_MEAN_DESC = CUDNN_ATTR_OPERATION_NORM_FWD_MEAN_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_NORM_FWD_INV_VARIANCE_DESC = CUDNN_ATTR_OPERATION_NORM_FWD_INV_VARIANCE_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_NORM_FWD_SCALE_DESC = CUDNN_ATTR_OPERATION_NORM_FWD_SCALE_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_NORM_FWD_BIAS_DESC = CUDNN_ATTR_OPERATION_NORM_FWD_BIAS_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_NORM_FWD_EPSILON_DESC = CUDNN_ATTR_OPERATION_NORM_FWD_EPSILON_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_NORM_FWD_EXP_AVG_FACTOR_DESC = CUDNN_ATTR_OPERATION_NORM_FWD_EXP_AVG_FACTOR_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_NORM_FWD_INPUT_RUNNING_MEAN_DESC = CUDNN_ATTR_OPERATION_NORM_FWD_INPUT_RUNNING_MEAN_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_NORM_FWD_INPUT_RUNNING_VAR_DESC = CUDNN_ATTR_OPERATION_NORM_FWD_INPUT_RUNNING_VAR_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_NORM_FWD_OUTPUT_RUNNING_MEAN_DESC = CUDNN_ATTR_OPERATION_NORM_FWD_OUTPUT_RUNNING_MEAN_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_NORM_FWD_OUTPUT_RUNNING_VAR_DESC = CUDNN_ATTR_OPERATION_NORM_FWD_OUTPUT_RUNNING_VAR_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_NORM_FWD_YDESC = CUDNN_ATTR_OPERATION_NORM_FWD_YDESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_NORM_FWD_PEER_STAT_DESCS = CUDNN_ATTR_OPERATION_NORM_FWD_PEER_STAT_DESCS;
+  cudnnBackendAttributeName_t ATTR_OPERATION_NORM_BWD_MODE = CUDNN_ATTR_OPERATION_NORM_BWD_MODE;
+  cudnnBackendAttributeName_t ATTR_OPERATION_NORM_BWD_XDESC = CUDNN_ATTR_OPERATION_NORM_BWD_XDESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_NORM_BWD_MEAN_DESC = CUDNN_ATTR_OPERATION_NORM_BWD_MEAN_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_NORM_BWD_INV_VARIANCE_DESC = CUDNN_ATTR_OPERATION_NORM_BWD_INV_VARIANCE_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_NORM_BWD_DYDESC = CUDNN_ATTR_OPERATION_NORM_BWD_DYDESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_NORM_BWD_SCALE_DESC = CUDNN_ATTR_OPERATION_NORM_BWD_SCALE_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_NORM_BWD_EPSILON_DESC = CUDNN_ATTR_OPERATION_NORM_BWD_EPSILON_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_NORM_BWD_DSCALE_DESC = CUDNN_ATTR_OPERATION_NORM_BWD_DSCALE_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_NORM_BWD_DBIAS_DESC = CUDNN_ATTR_OPERATION_NORM_BWD_DBIAS_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_NORM_BWD_DXDESC = CUDNN_ATTR_OPERATION_NORM_BWD_DXDESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_NORM_BWD_PEER_STAT_DESCS = CUDNN_ATTR_OPERATION_NORM_BWD_PEER_STAT_DESCS;
+#endif
+
+#if CUDNN_VERSION >= 8700
+  // CHECK: miopenBackendDescriptorType_t BACKEND_RNG_DESCRIPTOR = MIOPEN_BACKEND_RNG_DESCRIPTOR;
+  // CHECK-NEXT: miopenBackendDescriptorType_t BACKEND_OPERATION_RNG_DESCRIPTOR = MIOPEN_BACKEND_OPERATION_RNG_DESCRIPTOR;
+  cudnnBackendDescriptorType_t BACKEND_RNG_DESCRIPTOR = CUDNN_BACKEND_RNG_DESCRIPTOR;
+  cudnnBackendDescriptorType_t BACKEND_OPERATION_RNG_DESCRIPTOR = CUDNN_BACKEND_OPERATION_RNG_DESCRIPTOR;
+
+  // CHECK: miopenBackendAttributeType_t TYPE_RNG_DISTRIBUTION = MIOPEN_TYPE_RNG_DISTRIBUTION;
+  cudnnBackendAttributeType_t TYPE_RNG_DISTRIBUTION = CUDNN_TYPE_RNG_DISTRIBUTION;
+
+  // CHECK: miopenBackendAttributeName_t ATTR_OPERATION_MATMUL_GEMM_M_OVERRIDE_DESC = MIOPEN_ATTR_OPERATION_MATMUL_GEMM_M_OVERRIDE_DESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_MATMUL_GEMM_N_OVERRIDE_DESC = MIOPEN_ATTR_OPERATION_MATMUL_GEMM_N_OVERRIDE_DESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_MATMUL_GEMM_K_OVERRIDE_DESC = MIOPEN_ATTR_OPERATION_MATMUL_GEMM_K_OVERRIDE_DESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_RESAMPLE_BWD_XDESC = MIOPEN_ATTR_OPERATION_RESAMPLE_BWD_XDESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_RESAMPLE_BWD_YDESC = MIOPEN_ATTR_OPERATION_RESAMPLE_BWD_YDESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_RESHAPE_XDESC = MIOPEN_ATTR_OPERATION_RESHAPE_XDESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_RESHAPE_YDESC = MIOPEN_ATTR_OPERATION_RESHAPE_YDESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_RNG_DISTRIBUTION = MIOPEN_ATTR_RNG_DISTRIBUTION;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_RNG_NORMAL_DIST_MEAN = MIOPEN_ATTR_RNG_NORMAL_DIST_MEAN;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_RNG_NORMAL_DIST_STANDARD_DEVIATION = MIOPEN_ATTR_RNG_NORMAL_DIST_STANDARD_DEVIATION;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_RNG_UNIFORM_DIST_MAXIMUM = MIOPEN_ATTR_RNG_UNIFORM_DIST_MAXIMUM;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_RNG_UNIFORM_DIST_MINIMUM = MIOPEN_ATTR_RNG_UNIFORM_DIST_MINIMUM;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_RNG_BERNOULLI_DIST_PROBABILITY = MIOPEN_ATTR_RNG_BERNOULLI_DIST_PROBABILITY;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_RNG_YDESC = MIOPEN_ATTR_OPERATION_RNG_YDESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_RNG_SEED = MIOPEN_ATTR_OPERATION_RNG_SEED;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_OPERATION_RNG_DESC = MIOPEN_ATTR_OPERATION_RNG_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_MATMUL_GEMM_M_OVERRIDE_DESC = CUDNN_ATTR_OPERATION_MATMUL_GEMM_M_OVERRIDE_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_MATMUL_GEMM_N_OVERRIDE_DESC = CUDNN_ATTR_OPERATION_MATMUL_GEMM_N_OVERRIDE_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_MATMUL_GEMM_K_OVERRIDE_DESC = CUDNN_ATTR_OPERATION_MATMUL_GEMM_K_OVERRIDE_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_RESAMPLE_BWD_XDESC = CUDNN_ATTR_OPERATION_RESAMPLE_BWD_XDESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_RESAMPLE_BWD_YDESC = CUDNN_ATTR_OPERATION_RESAMPLE_BWD_YDESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_RESHAPE_XDESC = CUDNN_ATTR_OPERATION_RESHAPE_XDESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_RESHAPE_YDESC = CUDNN_ATTR_OPERATION_RESHAPE_YDESC;
+  cudnnBackendAttributeName_t ATTR_RNG_DISTRIBUTION = CUDNN_ATTR_RNG_DISTRIBUTION;
+  cudnnBackendAttributeName_t ATTR_RNG_NORMAL_DIST_MEAN = CUDNN_ATTR_RNG_NORMAL_DIST_MEAN;
+  cudnnBackendAttributeName_t ATTR_RNG_NORMAL_DIST_STANDARD_DEVIATION = CUDNN_ATTR_RNG_NORMAL_DIST_STANDARD_DEVIATION;
+  cudnnBackendAttributeName_t ATTR_RNG_UNIFORM_DIST_MAXIMUM = CUDNN_ATTR_RNG_UNIFORM_DIST_MAXIMUM;
+  cudnnBackendAttributeName_t ATTR_RNG_UNIFORM_DIST_MINIMUM = CUDNN_ATTR_RNG_UNIFORM_DIST_MINIMUM;
+  cudnnBackendAttributeName_t ATTR_RNG_BERNOULLI_DIST_PROBABILITY = CUDNN_ATTR_RNG_BERNOULLI_DIST_PROBABILITY;
+  cudnnBackendAttributeName_t ATTR_OPERATION_RNG_YDESC = CUDNN_ATTR_OPERATION_RNG_YDESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_RNG_SEED = CUDNN_ATTR_OPERATION_RNG_SEED;
+  cudnnBackendAttributeName_t ATTR_OPERATION_RNG_DESC = CUDNN_ATTR_OPERATION_RNG_DESC;
+#endif
+
+#if CUDNN_VERSION >= 8800
+  // CHECK: miopenBackendAttributeName_t ATTR_OPERATION_RNG_OFFSET_DESC = MIOPEN_ATTR_OPERATION_RNG_OFFSET_DESC;
+  cudnnBackendAttributeName_t ATTR_OPERATION_RNG_OFFSET_DESC = CUDNN_ATTR_OPERATION_RNG_OFFSET_DESC;
+#endif
+
+#if CUDNN_VERSION >= 8900
+  // CHECK: miopenBackendAttributeName_t ATTR_TENSOR_RAGGED_OFFSET_DESC = MIOPEN_ATTR_TENSOR_RAGGED_OFFSET_DESC;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_MATMUL_PADDING_VALUE = MIOPEN_ATTR_MATMUL_PADDING_VALUE;
+  cudnnBackendAttributeName_t ATTR_TENSOR_RAGGED_OFFSET_DESC = CUDNN_ATTR_TENSOR_RAGGED_OFFSET_DESC;
+  cudnnBackendAttributeName_t ATTR_MATMUL_PADDING_VALUE = CUDNN_ATTR_MATMUL_PADDING_VALUE;
+#endif
+
+#if CUDNN_VERSION >= 8905
+  // CHECK: miopenBackendAttributeName_t ATTR_ENGINEHEUR_SM_COUNT_TARGET = MIOPEN_ATTR_ENGINEHEUR_SM_COUNT_TARGET;
+  // CHECK-NEXT: miopenBackendAttributeName_t ATTR_ENGINE_SM_COUNT_TARGET = MIOPEN_ATTR_ENGINE_SM_COUNT_TARGET;
+  cudnnBackendAttributeName_t ATTR_ENGINEHEUR_SM_COUNT_TARGET = CUDNN_ATTR_ENGINEHEUR_SM_COUNT_TARGET;
+  cudnnBackendAttributeName_t ATTR_ENGINE_SM_COUNT_TARGET = CUDNN_ATTR_ENGINE_SM_COUNT_TARGET;
+#endif
 
   return 0;
 }

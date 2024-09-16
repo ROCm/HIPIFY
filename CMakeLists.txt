@@ -9,6 +9,10 @@ option(HIPIFY_CLANG_TESTS_ONLY "Build HIPIFY tests only, if lit is installed and
 option(HIPIFY_INCLUDE_IN_HIP_SDK "Include HIPIFY in HIP SDK" OFF)
 option(HIPIFY_INSTALL_CLANG_HEADERS "Include clang headers in HIPIFY installation" ON)
 
+if(NOT WIN32)
+  set(CPACK_SET_DESTDIR ON CACHE BOOL "Installer package will install hipify to CMAKE_INSTALL_PREFIX instead of CPACK_PACKAGING_INSTALL_PREFIX")
+endif()
+
 if(HIPIFY_CLANG_TESTS OR HIPIFY_CLANG_TESTS_ONLY)
   set(HIPIFY_TEST "ON")
 else()
@@ -180,12 +184,18 @@ if (NOT HIPIFY_CLANG_TESTS_ONLY)
     PATTERN "hipify-perl"
     PATTERN "*.sh"
     PATTERN "findcode.sh" EXCLUDE
+    PATTERN "findcode_headers.sh" EXCLUDE
+    PATTERN "findcode_sources.sh" EXCLUDE
+    PATTERN "findcode_custom.sh" EXCLUDE
     PATTERN "finduncodep.sh" EXCLUDE)
 
   set(HIPIFY_LIBEXEC_INSTALL_PATH "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBEXECDIR}/hipify")
 
   install(
     PROGRAMS ${CMAKE_CURRENT_SOURCE_DIR}/bin/findcode.sh
+    PROGRAMS ${CMAKE_CURRENT_SOURCE_DIR}/bin/findcode_headers.sh
+    PROGRAMS ${CMAKE_CURRENT_SOURCE_DIR}/bin/findcode_sources.sh
+    PROGRAMS ${CMAKE_CURRENT_SOURCE_DIR}/bin/findcode_custom.sh
     PROGRAMS ${CMAKE_CURRENT_SOURCE_DIR}/bin/finduncodep.sh
     DESTINATION ${CMAKE_INSTALL_LIBEXECDIR}/hipify)
 

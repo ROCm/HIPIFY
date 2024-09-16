@@ -51,6 +51,9 @@ std::string s_int64_t = "int64_t";
 const std::string sHipLaunchKernelGGL = "hipLaunchKernelGGL";
 const std::string sDim3 = "dim3(";
 const std::string s_hiprand_kernel_h = "hiprand/hiprand_kernel.h";
+const std::string s_rocrand_discrete_t = "rocrand/rocrand_discrete.h";
+const std::string s_rocrand_mtgp32_t = "rocrand/rocrand_mtgp32.h";
+const std::string s_rocrand_normal_t = "rocrand/rocrand_normal.h";
 const std::string s_hiprand_h = "hiprand/hiprand.h";
 const std::string sOnce = "once";
 const std::string s_string_literal = "[string literal]";
@@ -2383,15 +2386,18 @@ bool HipifyAction::Exclude(const hipCounter &hipToken) {
           insertedBLASHeader = true;
           return false;
         case API_RAND:
-          if (hipToken.hipName == s_hiprand_kernel_h) {
-            if (insertedRAND_kernelHeader) return true;
-            insertedRAND_kernelHeader = true;
-            return false;
-          } else if (hipToken.hipName == s_hiprand_h) {
-            if (insertedRANDHeader) return true;
-            insertedRANDHeader = true;
-            return false;
+          if (!Statistics::isToRoc(hipToken)) {
+            if (hipToken.hipName == s_hiprand_kernel_h) {
+              if (insertedRAND_kernelHeader) return true;
+              insertedRAND_kernelHeader = true;
+              return false;
+            } else if (hipToken.hipName == s_hiprand_h) {
+              if (insertedRANDHeader) return true;
+              insertedRANDHeader = true;
+              return false;
+            }
           }
+          return false;
         case API_DNN:
           if (insertedDNNHeader) return true;
           insertedDNNHeader = true;
@@ -2436,9 +2442,23 @@ bool HipifyAction::Exclude(const hipCounter &hipToken) {
       if (hipToken.hipName.empty()) return true;
       switch (hipToken.apiType) {
         case API_RAND:
-          if (hipToken.hipName == s_hiprand_kernel_h) {
-            if (insertedRAND_kernelHeader) return true;
-            insertedRAND_kernelHeader = true;
+          if (Statistics::isToRoc(hipToken)) {
+            if (hipToken.rocName == s_rocrand_discrete_t) {
+              if (insertedRocRAND_discreteHeader) return true;
+              insertedRocRAND_discreteHeader = true;
+            } else if (hipToken.rocName == s_rocrand_mtgp32_t) {
+              if (insertedRocRAND_mtgp32Header) return true;
+              insertedRocRAND_mtgp32Header = true;
+            } else if (hipToken.rocName == s_rocrand_normal_t) {
+              if (insertedRocRAND_normalHeader) return true;
+              insertedRocRAND_normalHeader = true;
+            }
+          }
+          else {
+            if (hipToken.hipName == s_hiprand_kernel_h) {
+              if (insertedRAND_kernelHeader) return true;
+              insertedRAND_kernelHeader = true;
+            }
           }
           return false;
         default:

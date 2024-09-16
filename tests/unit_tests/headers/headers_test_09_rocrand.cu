@@ -1,4 +1,4 @@
-// RUN: %run_test hipify "%s" "%t" %hipify_args %clang_args
+// RUN: %run_test hipify "%s" "%t" %hipify_args 1 --roc %clang_args
 
 // CHECK: #include <hip/hip_runtime.h>
 // CHECK: #include <memory>
@@ -11,25 +11,36 @@
 // CHECK: #include "hip/device_functions.h"
 // CHECK: #include "hip/driver_types.h"
 // CHECK: #include "hip/hip_complex.h"
-// CHECK: #include "hip/hip_fp16.h"
 // CHECK: #include "hip/hip_texture_types.h"
 // CHECK: #include "hip/hip_vector_types.h"
 
 // CHECK: #include <iostream>
 
-// CHECK: #include "hipblas.h"
-// CHECK-NOT: #include "cublas.h"
-// CHECK-NOT: #include "cublas_v2.h"
-
 // CHECK: #include <stdio.h>
 
-// CHECK: #include "hiprand/hiprand.h"
-// CHECK: #include "hiprand/hiprand_kernel.h"
+// CHECK: #include "rocrand/rocrand.h"
+// CHECK: #include "rocrand/rocrand_kernel.h"
 
 // CHECK: #include <algorithm>
 
-// CHECK-NOT: #include "hiprand/hiprand.h"
-// CHECK-NOT: #include "hiprand/hiprand_kernel.h"
+// CHECK: #include "rocrand/rocrand_discrete.h"
+// CHECK: #include "rocrand/rocrand_common.h"
+// CHECK: #include "rocrand/rocrand_log_normal.h"
+// CHECK: #include "rocrand/rocrand_mrg32k3a.h"
+// CHECK: #include "rocrand/rocrand_mtgp32.h"
+// CHECK: #include "rocrand/rocrand_mtgp32_11213.h"
+// CHECK: #include "rocrand/rocrand_normal.h"
+// CHECK: #include "rocrand/rocrand_philox4x32_10.h"
+// CHECK: #include "rocrand/rocrand_poisson.h"
+// CHECK: #include "rocrand/rocrand_xorwow_precomputed.h"
+// CHECK: #include "rocrand/rocrand_uniform.h"
+
+// CHECK-NOT: #include "rocrand/rocrand.h"
+// CHECK-NOT: #include "rocrand/rocrand_kernel.h"
+// CHECK-NOT: #include "rocrand/rocrand_discrete.h"
+// CHECK-NOT: #include "rocrand/rocrand_mtgp32.h"
+// CHECK-NOT: #include "rocrand/rocrand_normal.h"
+
 // CHECK-NOT: #include "curand_discrete.h"
 // CHECK-NOT: #include "curand_discrete2.h"
 // CHECK-NOT: #include "curand_globals.h"
@@ -46,13 +57,10 @@
 // CHECK-NOT: #include "curand_precalc.h"
 // CHECK-NOT: #include "curand_uniform.h"
 
-// CHECK: #include "hiprand/hiprand_mtgp32_host.h"
-// CHECK: #include "rocrand/rocrand_mtgp32_11213.h"
-
 // CHECK: #include <string>
 
 // CHECK: #include "hipfft/hipfft.h"
-// CHECK: #include "hipsparse.h"
+// CHECK: #include "rocsparse.h"
 
 #include <cuda.h>
 // CHECK-NOT: #include <hip/hip_runtime.h>
@@ -67,15 +75,10 @@
 #include "device_functions.h"
 #include "driver_types.h"
 #include "cuComplex.h"
-#include "cuda_fp16.h"
 #include "cuda_texture_types.h"
 #include "vector_types.h"
 
 #include <iostream>
-
-#include "cublas.h"
-#include "cublas_v2.h"
-// CHECK-NOT: #include "hipblas.h"
 
 #include <stdio.h>
 

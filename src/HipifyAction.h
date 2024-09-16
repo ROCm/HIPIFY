@@ -53,6 +53,9 @@ private:
   bool insertedBLASHeader_V2 = false;
   bool insertedRANDHeader = false;
   bool insertedRAND_kernelHeader = false;
+  bool insertedRocRAND_discreteHeader = false;
+  bool insertedRocRAND_mtgp32Header = false;
+  bool insertedRocRAND_normalHeader = false;
   bool insertedDNNHeader = false;
   bool insertedFFTHeader = false;
   bool insertedSPARSEHeader = false;

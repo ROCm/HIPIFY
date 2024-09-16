@@ -46,7 +46,7 @@
 // CHECK-NOT: #include "curand_uniform.h"
 
 // CHECK: #include "hiprand/hiprand_mtgp32_host.h"
-// CHECK: #include "rocrand_mtgp32_11213.h"
+// CHECK: #include "rocrand/rocrand_mtgp32_11213.h"
 
 // CHECK: #include <string>
 

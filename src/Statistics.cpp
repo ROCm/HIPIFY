@@ -366,7 +366,7 @@ void Statistics::setActive(const std::string &name) {
 
 bool Statistics::isToRoc(const hipCounter &counter) {
   return (counter.apiType == API_BLAS || counter.apiType == API_DNN || counter.apiType == API_SPARSE || counter.apiType == API_SOLVER ||
-          counter.apiType == API_RUNTIME || counter.apiType == API_COMPLEX) &&
+          counter.apiType == API_RUNTIME || counter.apiType == API_COMPLEX || counter.apiType == API_RAND) &&
           ((TranslateToRoc && !TranslateToMIOpen && !isRocMiopenOnly(counter)) || TranslateToMIOpen);
 }
 
@@ -490,6 +490,7 @@ std::string Statistics::getCudaVersion(const cudaVersions &ver) {
     case CUDA_123: return "12.3";
     case CUDA_124: return "12.4";
     case CUDA_125: return "12.5";
+    case CUDA_126: return "12.6";
     case CUDNN_10: return "1.0.0";
     case CUDNN_20: return "2.0.0";
     case CUDNN_30: return "3.0.0";
@@ -542,6 +543,7 @@ std::string Statistics::getCudaVersion(const cudaVersions &ver) {
     case CUDNN_910: return "9.1.0";
     case CUDNN_920: return "9.2.0";
     case CUDNN_930: return "9.3.0";
+    case CUDNN_940: return "9.4.0";
   }
   return "";
 }

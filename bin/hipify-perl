@@ -947,16 +947,7 @@ my %deprecated_funcs = (
     "CUDNN_STATUS_ARCH_MISMATCH" => "9.0.0",
     "CUDNN_STATUS_ALLOC_FAILED" => "9.0.0",
     "CUDNN_REDUCE_TENSOR_NO_INDICES" => "9.0.0",
-    "CUDNN_REDUCE_TENSOR_NORM2" => "9.0.0",
-    "CUDNN_REDUCE_TENSOR_NORM1" => "9.0.0",
-    "CUDNN_REDUCE_TENSOR_MUL_NO_ZEROS" => "9.0.0",
-    "CUDNN_REDUCE_TENSOR_MUL" => "9.0.0",
-    "CUDNN_REDUCE_TENSOR_MIN" => "9.0.0",
-    "CUDNN_REDUCE_TENSOR_MAX" => "9.0.0",
     "CUDNN_REDUCE_TENSOR_FLATTENED_INDICES" => "9.0.0",
-    "CUDNN_REDUCE_TENSOR_AVG" => "9.0.0",
-    "CUDNN_REDUCE_TENSOR_AMAX" => "9.0.0",
-    "CUDNN_REDUCE_TENSOR_ADD" => "9.0.0",
     "CUDNN_PROPAGATE_NAN" => "9.0.0",
     "CUDNN_POOLING_MAX_DETERMINISTIC" => "9.0.0",
     "CUDNN_POOLING_MAX" => "9.0.0",
@@ -3100,8 +3091,35 @@ sub rocSubstitutions {
     subst("cusparseZsctr", "rocsparse_zsctr", "library");
     subst("__half", "rocblas_half", "device_type");
     subst("__nv_bfloat16", "rocblas_bfloat16", "device_type");
+    subst("cublas_api.h", "rocblas.h", "include");
+    subst("curand_discrete.h", "rocrand\/rocrand_discrete.h", "include");
+    subst("curand_discrete2.h", "rocrand\/rocrand_discrete.h", "include");
+    subst("curand_globals.h", "rocrand\/rocrand_common.h", "include");
+    subst("curand_kernel.h", "rocrand\/rocrand_kernel.h", "include");
+    subst("curand_lognormal.h", "rocrand\/rocrand_log_normal.h", "include");
+    subst("curand_mrg32k3a.h", "rocrand\/rocrand_mrg32k3a.h", "include");
+    subst("curand_mtgp32.h", "rocrand\/rocrand_mtgp32.h", "include");
+    subst("curand_mtgp32_host.h", "rocrand\/rocrand_mtgp32.h", "include");
+    subst("curand_mtgp32_kernel.h", "rocrand\/rocrand_mtgp32.h", "include");
+    subst("curand_mtgp32dc_p_11213.h", "rocrand\/rocrand_mtgp32_11213.h", "include");
+    subst("curand_normal.h", "rocrand\/rocrand_normal.h", "include");
+    subst("curand_normal_static.h", "rocrand\/rocrand_normal.h", "include");
+    subst("curand_philox4x32_x.h", "rocrand\/rocrand_philox4x32_10.h", "include");
+    subst("curand_poisson.h", "rocrand\/rocrand_poisson.h", "include");
+    subst("curand_precalc.h", "rocrand\/rocrand_xorwow_precomputed.h", "include");
+    subst("curand_uniform.h", "rocrand\/rocrand_uniform.h", "include");
     subst("cublas.h", "rocblas.h", "include_cuda_main_header");
+    subst("cudnn.h", "miopen\/miopen.h", "include_cuda_main_header");
+    subst("curand.h", "rocrand\/rocrand.h", "include_cuda_main_header");
+    subst("cusolverDn.h", "rocsolver\/rocsolver.h", "include_cuda_main_header");
+    subst("cusolverMg.h", "rocsolver\/rocsolver.h", "include_cuda_main_header");
+    subst("cusolverRf.h", "rocsolver\/rocsolver.h", "include_cuda_main_header");
+    subst("cusolverSp.h", "rocsolver\/rocsolver.h", "include_cuda_main_header");
+    subst("cusolverSp_LOWLEVEL_PREVIEW.h", "rocsolver\/rocsolver.h", "include_cuda_main_header");
+    subst("cusolver_common.h", "rocsolver\/rocsolver.h", "include_cuda_main_header");
+    subst("cusparse.h", "rocsparse.h", "include_cuda_main_header");
     subst("cublas_v2.h", "rocblas.h", "include_cuda_main_header_v2");
+    subst("cusparse_v2.h", "rocsparse.h", "include_cuda_main_header_v2");
     subst("bsric02Info", "_rocsparse_mat_info", "type");
     subst("bsric02Info_t", "rocsparse_mat_info", "type");
     subst("bsrilu02Info", "_rocsparse_mat_info", "type");
@@ -3141,9 +3159,13 @@ sub rocSubstitutions {
     subst("cudaDataType_t", "rocblas_datatype_", "type");
     subst("cudnnActivationDescriptor_t", "miopenActivationDescriptor_t", "type");
     subst("cudnnActivationMode_t", "miopenActivationMode_t", "type");
+    subst("cudnnBackendAttributeName_t", "miopenBackendAttributeName_t", "type");
+    subst("cudnnBackendAttributeType_t", "miopenBackendAttributeType_t", "type");
+    subst("cudnnBackendDescriptorType_t", "miopenBackendDescriptorType_t", "type");
     subst("cudnnBatchNormMode_t", "miopenBatchNormMode_t", "type");
     subst("cudnnCTCLossAlgo_t", "miopenCTCLossAlgo_t", "type");
     subst("cudnnCTCLossDescriptor_t", "miopenCTCLossDescriptor_t", "type");
+    subst("cudnnContext", "miopenHandle", "type");
     subst("cudnnConvolutionBwdDataAlgoPerfStruct", "miopenConvAlgoPerf_t", "type");
     subst("cudnnConvolutionBwdDataAlgoPerf_t", "miopenConvAlgoPerf_t", "type");
     subst("cudnnConvolutionBwdDataAlgo_t", "miopenConvBwdDataAlgorithm_t", "type");
@@ -3176,6 +3198,17 @@ sub rocSubstitutions {
     subst("cudnnSoftmaxMode_t", "miopenSoftmaxMode_t", "type");
     subst("cudnnStatus_t", "miopenStatus_t", "type");
     subst("cudnnTensorDescriptor_t", "miopenTensorDescriptor_t", "type");
+    subst("cudnnTensorFormat_t", "miopenTensorLayout_t", "type");
+    subst("curandDirectionVectorSet", "rocrand_direction_vector_set", "type");
+    subst("curandDirectionVectorSet_t", "rocrand_direction_vector_set", "type");
+    subst("curandGenerator_st", "rocrand_generator_base_type", "type");
+    subst("curandGenerator_t", "rocrand_generator", "type");
+    subst("curandOrdering", "rocrand_ordering", "type");
+    subst("curandOrdering_t", "rocrand_ordering", "type");
+    subst("curandRngType", "rocrand_rng_type", "type");
+    subst("curandRngType_t", "rocrand_rng_type", "type");
+    subst("curandStatus", "rocrand_status", "type");
+    subst("curandStatus_t", "rocrand_status", "type");
     subst("cusolverDnHandle_t", "rocblas_handle", "type");
     subst("cusolverEigMode_t", "rocblas_evect", "type");
     subst("cusolverEigRange_t", "rocblas_erange", "type");
@@ -3279,6 +3312,249 @@ sub rocSubstitutions {
     subst("CUDNN_ACTIVATION_IDENTITY", "miopenActivationPASTHRU", "numeric_literal");
     subst("CUDNN_ACTIVATION_RELU", "miopenActivationRELU", "numeric_literal");
     subst("CUDNN_ACTIVATION_TANH", "miopenActivationTANH", "numeric_literal");
+    subst("CUDNN_ATTR_CONVOLUTION_COMP_TYPE", "MIOPEN_ATTR_CONVOLUTION_COMP_TYPE", "numeric_literal");
+    subst("CUDNN_ATTR_CONVOLUTION_CONV_MODE", "MIOPEN_ATTR_CONVOLUTION_CONV_MODE", "numeric_literal");
+    subst("CUDNN_ATTR_CONVOLUTION_DILATIONS", "MIOPEN_ATTR_CONVOLUTION_DILATIONS", "numeric_literal");
+    subst("CUDNN_ATTR_CONVOLUTION_FILTER_STRIDES", "MIOPEN_ATTR_CONVOLUTION_FILTER_STRIDES", "numeric_literal");
+    subst("CUDNN_ATTR_CONVOLUTION_POST_PADDINGS", "MIOPEN_ATTR_CONVOLUTION_POST_PADDINGS", "numeric_literal");
+    subst("CUDNN_ATTR_CONVOLUTION_PRE_PADDINGS", "MIOPEN_ATTR_CONVOLUTION_PRE_PADDINGS", "numeric_literal");
+    subst("CUDNN_ATTR_CONVOLUTION_SPATIAL_DIMS", "MIOPEN_ATTR_CONVOLUTION_SPATIAL_DIMS", "numeric_literal");
+    subst("CUDNN_ATTR_ENGINECFG_ENGINE", "MIOPEN_ATTR_ENGINECFG_ENGINE", "numeric_literal");
+    subst("CUDNN_ATTR_ENGINECFG_INTERMEDIATE_INFO", "MIOPEN_ATTR_ENGINECFG_INTERMEDIATE_INFO", "numeric_literal");
+    subst("CUDNN_ATTR_ENGINECFG_KNOB_CHOICES", "MIOPEN_ATTR_ENGINECFG_KNOB_CHOICES", "numeric_literal");
+    subst("CUDNN_ATTR_ENGINEHEUR_MODE", "MIOPEN_ATTR_ENGINEHEUR_MODE", "numeric_literal");
+    subst("CUDNN_ATTR_ENGINEHEUR_OPERATION_GRAPH", "MIOPEN_ATTR_ENGINEHEUR_OPERATION_GRAPH", "numeric_literal");
+    subst("CUDNN_ATTR_ENGINEHEUR_RESULTS", "MIOPEN_ATTR_ENGINEHEUR_RESULTS", "numeric_literal");
+    subst("CUDNN_ATTR_ENGINEHEUR_SM_COUNT_TARGET", "MIOPEN_ATTR_ENGINEHEUR_SM_COUNT_TARGET", "numeric_literal");
+    subst("CUDNN_ATTR_ENGINE_BEHAVIOR_NOTE", "MIOPEN_ATTR_ENGINE_BEHAVIOR_NOTE", "numeric_literal");
+    subst("CUDNN_ATTR_ENGINE_GLOBAL_INDEX", "MIOPEN_ATTR_ENGINE_GLOBAL_INDEX", "numeric_literal");
+    subst("CUDNN_ATTR_ENGINE_KNOB_INFO", "MIOPEN_ATTR_ENGINE_KNOB_INFO", "numeric_literal");
+    subst("CUDNN_ATTR_ENGINE_LAYOUT_INFO", "MIOPEN_ATTR_ENGINE_LAYOUT_INFO", "numeric_literal");
+    subst("CUDNN_ATTR_ENGINE_NUMERICAL_NOTE", "MIOPEN_ATTR_ENGINE_NUMERICAL_NOTE", "numeric_literal");
+    subst("CUDNN_ATTR_ENGINE_OPERATION_GRAPH", "MIOPEN_ATTR_ENGINE_OPERATION_GRAPH", "numeric_literal");
+    subst("CUDNN_ATTR_ENGINE_SM_COUNT_TARGET", "MIOPEN_ATTR_ENGINE_SM_COUNT_TARGET", "numeric_literal");
+    subst("CUDNN_ATTR_EXECUTION_PLAN_COMPUTED_INTERMEDIATE_UIDS", "MIOPEN_ATTR_EXECUTION_PLAN_COMPUTED_INTERMEDIATE_UIDS", "numeric_literal");
+    subst("CUDNN_ATTR_EXECUTION_PLAN_ENGINE_CONFIG", "MIOPEN_ATTR_EXECUTION_PLAN_ENGINE_CONFIG", "numeric_literal");
+    subst("CUDNN_ATTR_EXECUTION_PLAN_HANDLE", "MIOPEN_ATTR_EXECUTION_PLAN_HANDLE", "numeric_literal");
+    subst("CUDNN_ATTR_EXECUTION_PLAN_JSON_REPRESENTATION", "MIOPEN_ATTR_EXECUTION_PLAN_JSON_REPRESENTATION", "numeric_literal");
+    subst("CUDNN_ATTR_EXECUTION_PLAN_RUN_ONLY_INTERMEDIATE_UIDS", "MIOPEN_ATTR_EXECUTION_PLAN_RUN_ONLY_INTERMEDIATE_UIDS", "numeric_literal");
+    subst("CUDNN_ATTR_EXECUTION_PLAN_WORKSPACE_SIZE", "MIOPEN_ATTR_EXECUTION_PLAN_WORKSPACE_SIZE", "numeric_literal");
+    subst("CUDNN_ATTR_INTERMEDIATE_INFO_DEPENDENT_ATTRIBUTES", "MIOPEN_ATTR_INTERMEDIATE_INFO_DEPENDENT_ATTRIBUTES", "numeric_literal");
+    subst("CUDNN_ATTR_INTERMEDIATE_INFO_DEPENDENT_DATA_UIDS", "MIOPEN_ATTR_INTERMEDIATE_INFO_DEPENDENT_DATA_UIDS", "numeric_literal");
+    subst("CUDNN_ATTR_INTERMEDIATE_INFO_SIZE", "MIOPEN_ATTR_INTERMEDIATE_INFO_SIZE", "numeric_literal");
+    subst("CUDNN_ATTR_INTERMEDIATE_INFO_UNIQUE_ID", "MIOPEN_ATTR_INTERMEDIATE_INFO_UNIQUE_ID", "numeric_literal");
+    subst("CUDNN_ATTR_KNOB_CHOICE_KNOB_TYPE", "MIOPEN_ATTR_KNOB_CHOICE_KNOB_TYPE", "numeric_literal");
+    subst("CUDNN_ATTR_KNOB_CHOICE_KNOB_VALUE", "MIOPEN_ATTR_KNOB_CHOICE_KNOB_VALUE", "numeric_literal");
+    subst("CUDNN_ATTR_KNOB_INFO_MAXIMUM_VALUE", "MIOPEN_ATTR_KNOB_INFO_MAXIMUM_VALUE", "numeric_literal");
+    subst("CUDNN_ATTR_KNOB_INFO_MINIMUM_VALUE", "MIOPEN_ATTR_KNOB_INFO_MINIMUM_VALUE", "numeric_literal");
+    subst("CUDNN_ATTR_KNOB_INFO_STRIDE", "MIOPEN_ATTR_KNOB_INFO_STRIDE", "numeric_literal");
+    subst("CUDNN_ATTR_KNOB_INFO_TYPE", "MIOPEN_ATTR_KNOB_INFO_TYPE", "numeric_literal");
+    subst("CUDNN_ATTR_LAYOUT_INFO_TENSOR_UID", "MIOPEN_ATTR_LAYOUT_INFO_TENSOR_UID", "numeric_literal");
+    subst("CUDNN_ATTR_LAYOUT_INFO_TYPES", "MIOPEN_ATTR_LAYOUT_INFO_TYPES", "numeric_literal");
+    subst("CUDNN_ATTR_MATMUL_COMP_TYPE", "MIOPEN_ATTR_MATMUL_COMP_TYPE", "numeric_literal");
+    subst("CUDNN_ATTR_MATMUL_PADDING_VALUE", "MIOPEN_ATTR_MATMUL_PADDING_VALUE", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATIONGRAPH_ENGINE_GLOBAL_COUNT", "MIOPEN_ATTR_OPERATIONGRAPH_ENGINE_GLOBAL_COUNT", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATIONGRAPH_HANDLE", "MIOPEN_ATTR_OPERATIONGRAPH_HANDLE", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATIONGRAPH_OPS", "MIOPEN_ATTR_OPERATIONGRAPH_OPS", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_BN_BWD_WEIGHTS_BN_SCALE_DESC", "MIOPEN_ATTR_OPERATION_BN_BWD_WEIGHTS_BN_SCALE_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_BN_BWD_WEIGHTS_DBN_BIAS_DESC", "MIOPEN_ATTR_OPERATION_BN_BWD_WEIGHTS_DBN_BIAS_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_BN_BWD_WEIGHTS_DBN_SCALE_DESC", "MIOPEN_ATTR_OPERATION_BN_BWD_WEIGHTS_DBN_SCALE_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_BN_BWD_WEIGHTS_DY_DESC", "MIOPEN_ATTR_OPERATION_BN_BWD_WEIGHTS_DY_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_BN_BWD_WEIGHTS_EQ_BIAS", "MIOPEN_ATTR_OPERATION_BN_BWD_WEIGHTS_EQ_BIAS", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_BN_BWD_WEIGHTS_EQ_DY_SCALE_DESC", "MIOPEN_ATTR_OPERATION_BN_BWD_WEIGHTS_EQ_DY_SCALE_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_BN_BWD_WEIGHTS_EQ_X_SCALE_DESC", "MIOPEN_ATTR_OPERATION_BN_BWD_WEIGHTS_EQ_X_SCALE_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_BN_BWD_WEIGHTS_INVSTD_DESC", "MIOPEN_ATTR_OPERATION_BN_BWD_WEIGHTS_INVSTD_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_BN_BWD_WEIGHTS_MATH_PREC", "MIOPEN_ATTR_OPERATION_BN_BWD_WEIGHTS_MATH_PREC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_BN_BWD_WEIGHTS_MEAN_DESC", "MIOPEN_ATTR_OPERATION_BN_BWD_WEIGHTS_MEAN_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_BN_BWD_WEIGHTS_X_DESC", "MIOPEN_ATTR_OPERATION_BN_BWD_WEIGHTS_X_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_BN_FINALIZE_ACCUM_COUNT_DESC", "MIOPEN_ATTR_OPERATION_BN_FINALIZE_ACCUM_COUNT_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_BN_FINALIZE_BIAS_DESC", "MIOPEN_ATTR_OPERATION_BN_FINALIZE_BIAS_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_BN_FINALIZE_EPSILON_DESC", "MIOPEN_ATTR_OPERATION_BN_FINALIZE_EPSILON_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_BN_FINALIZE_EQ_BIAS_DESC", "MIOPEN_ATTR_OPERATION_BN_FINALIZE_EQ_BIAS_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_BN_FINALIZE_EQ_SCALE_DESC", "MIOPEN_ATTR_OPERATION_BN_FINALIZE_EQ_SCALE_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_BN_FINALIZE_EXP_AVERATE_FACTOR_DESC", "MIOPEN_ATTR_OPERATION_BN_FINALIZE_EXP_AVERATE_FACTOR_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_BN_FINALIZE_MATH_PREC", "MIOPEN_ATTR_OPERATION_BN_FINALIZE_MATH_PREC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_BN_FINALIZE_PREV_RUNNING_MEAN_DESC", "MIOPEN_ATTR_OPERATION_BN_FINALIZE_PREV_RUNNING_MEAN_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_BN_FINALIZE_PREV_RUNNING_VAR_DESC", "MIOPEN_ATTR_OPERATION_BN_FINALIZE_PREV_RUNNING_VAR_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_BN_FINALIZE_SAVED_INV_STD_DESC", "MIOPEN_ATTR_OPERATION_BN_FINALIZE_SAVED_INV_STD_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_BN_FINALIZE_SAVED_MEAN_DESC", "MIOPEN_ATTR_OPERATION_BN_FINALIZE_SAVED_MEAN_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_BN_FINALIZE_SCALE_DESC", "MIOPEN_ATTR_OPERATION_BN_FINALIZE_SCALE_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_BN_FINALIZE_STATS_MODE", "MIOPEN_ATTR_OPERATION_BN_FINALIZE_STATS_MODE", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_BN_FINALIZE_UPDATED_RUNNING_MEAN_DESC", "MIOPEN_ATTR_OPERATION_BN_FINALIZE_UPDATED_RUNNING_MEAN_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_BN_FINALIZE_UPDATED_RUNNING_VAR_DESC", "MIOPEN_ATTR_OPERATION_BN_FINALIZE_UPDATED_RUNNING_VAR_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_BN_FINALIZE_Y_SQ_SUM_DESC", "MIOPEN_ATTR_OPERATION_BN_FINALIZE_Y_SQ_SUM_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_BN_FINALIZE_Y_SUM_DESC", "MIOPEN_ATTR_OPERATION_BN_FINALIZE_Y_SUM_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_CONCAT_AXIS", "MIOPEN_ATTR_OPERATION_CONCAT_AXIS", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_CONCAT_INPLACE_INDEX", "MIOPEN_ATTR_OPERATION_CONCAT_INPLACE_INDEX", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_CONCAT_INPUT_DESCS", "MIOPEN_ATTR_OPERATION_CONCAT_INPUT_DESCS", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_CONCAT_OUTPUT_DESC", "MIOPEN_ATTR_OPERATION_CONCAT_OUTPUT_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_CONVOLUTION_BWD_DATA_ALPHA", "MIOPEN_ATTR_OPERATION_CONVOLUTION_BWD_DATA_ALPHA", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_CONVOLUTION_BWD_DATA_BETA", "MIOPEN_ATTR_OPERATION_CONVOLUTION_BWD_DATA_BETA", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_CONVOLUTION_BWD_DATA_CONV_DESC", "MIOPEN_ATTR_OPERATION_CONVOLUTION_BWD_DATA_CONV_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_CONVOLUTION_BWD_DATA_DX", "MIOPEN_ATTR_OPERATION_CONVOLUTION_BWD_DATA_DX", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_CONVOLUTION_BWD_DATA_DY", "MIOPEN_ATTR_OPERATION_CONVOLUTION_BWD_DATA_DY", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_CONVOLUTION_BWD_DATA_W", "MIOPEN_ATTR_OPERATION_CONVOLUTION_BWD_DATA_W", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_CONVOLUTION_BWD_FILTER_ALPHA", "MIOPEN_ATTR_OPERATION_CONVOLUTION_BWD_FILTER_ALPHA", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_CONVOLUTION_BWD_FILTER_BETA", "MIOPEN_ATTR_OPERATION_CONVOLUTION_BWD_FILTER_BETA", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_CONVOLUTION_BWD_FILTER_CONV_DESC", "MIOPEN_ATTR_OPERATION_CONVOLUTION_BWD_FILTER_CONV_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_CONVOLUTION_BWD_FILTER_DW", "MIOPEN_ATTR_OPERATION_CONVOLUTION_BWD_FILTER_DW", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_CONVOLUTION_BWD_FILTER_DY", "MIOPEN_ATTR_OPERATION_CONVOLUTION_BWD_FILTER_DY", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_CONVOLUTION_BWD_FILTER_X", "MIOPEN_ATTR_OPERATION_CONVOLUTION_BWD_FILTER_X", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_CONVOLUTION_FORWARD_ALPHA", "MIOPEN_ATTR_OPERATION_CONVOLUTION_FORWARD_ALPHA", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_CONVOLUTION_FORWARD_BETA", "MIOPEN_ATTR_OPERATION_CONVOLUTION_FORWARD_BETA", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_CONVOLUTION_FORWARD_CONV_DESC", "MIOPEN_ATTR_OPERATION_CONVOLUTION_FORWARD_CONV_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_CONVOLUTION_FORWARD_W", "MIOPEN_ATTR_OPERATION_CONVOLUTION_FORWARD_W", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_CONVOLUTION_FORWARD_X", "MIOPEN_ATTR_OPERATION_CONVOLUTION_FORWARD_X", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_CONVOLUTION_FORWARD_Y", "MIOPEN_ATTR_OPERATION_CONVOLUTION_FORWARD_Y", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_GENSTATS_MATH_PREC", "MIOPEN_ATTR_OPERATION_GENSTATS_MATH_PREC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_GENSTATS_MODE", "MIOPEN_ATTR_OPERATION_GENSTATS_MODE", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_GENSTATS_SQSUMDESC", "MIOPEN_ATTR_OPERATION_GENSTATS_SQSUMDESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_GENSTATS_SUMDESC", "MIOPEN_ATTR_OPERATION_GENSTATS_SUMDESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_GENSTATS_XDESC", "MIOPEN_ATTR_OPERATION_GENSTATS_XDESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_MATMUL_ADESC", "MIOPEN_ATTR_OPERATION_MATMUL_ADESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_MATMUL_BDESC", "MIOPEN_ATTR_OPERATION_MATMUL_BDESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_MATMUL_CDESC", "MIOPEN_ATTR_OPERATION_MATMUL_CDESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_MATMUL_DESC", "MIOPEN_ATTR_OPERATION_MATMUL_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_MATMUL_GEMM_K_OVERRIDE_DESC", "MIOPEN_ATTR_OPERATION_MATMUL_GEMM_K_OVERRIDE_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_MATMUL_GEMM_M_OVERRIDE_DESC", "MIOPEN_ATTR_OPERATION_MATMUL_GEMM_M_OVERRIDE_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_MATMUL_GEMM_N_OVERRIDE_DESC", "MIOPEN_ATTR_OPERATION_MATMUL_GEMM_N_OVERRIDE_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_MATMUL_IRREGULARLY_STRIDED_BATCH_COUNT", "MIOPEN_ATTR_OPERATION_MATMUL_IRREGULARLY_STRIDED_BATCH_COUNT", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_NORM_BWD_DBIAS_DESC", "MIOPEN_ATTR_OPERATION_NORM_BWD_DBIAS_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_NORM_BWD_DSCALE_DESC", "MIOPEN_ATTR_OPERATION_NORM_BWD_DSCALE_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_NORM_BWD_DXDESC", "MIOPEN_ATTR_OPERATION_NORM_BWD_DXDESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_NORM_BWD_DYDESC", "MIOPEN_ATTR_OPERATION_NORM_BWD_DYDESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_NORM_BWD_EPSILON_DESC", "MIOPEN_ATTR_OPERATION_NORM_BWD_EPSILON_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_NORM_BWD_INV_VARIANCE_DESC", "MIOPEN_ATTR_OPERATION_NORM_BWD_INV_VARIANCE_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_NORM_BWD_MEAN_DESC", "MIOPEN_ATTR_OPERATION_NORM_BWD_MEAN_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_NORM_BWD_MODE", "MIOPEN_ATTR_OPERATION_NORM_BWD_MODE", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_NORM_BWD_PEER_STAT_DESCS", "MIOPEN_ATTR_OPERATION_NORM_BWD_PEER_STAT_DESCS", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_NORM_BWD_SCALE_DESC", "MIOPEN_ATTR_OPERATION_NORM_BWD_SCALE_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_NORM_BWD_XDESC", "MIOPEN_ATTR_OPERATION_NORM_BWD_XDESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_NORM_FWD_BIAS_DESC", "MIOPEN_ATTR_OPERATION_NORM_FWD_BIAS_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_NORM_FWD_EPSILON_DESC", "MIOPEN_ATTR_OPERATION_NORM_FWD_EPSILON_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_NORM_FWD_EXP_AVG_FACTOR_DESC", "MIOPEN_ATTR_OPERATION_NORM_FWD_EXP_AVG_FACTOR_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_NORM_FWD_INPUT_RUNNING_MEAN_DESC", "MIOPEN_ATTR_OPERATION_NORM_FWD_INPUT_RUNNING_MEAN_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_NORM_FWD_INPUT_RUNNING_VAR_DESC", "MIOPEN_ATTR_OPERATION_NORM_FWD_INPUT_RUNNING_VAR_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_NORM_FWD_INV_VARIANCE_DESC", "MIOPEN_ATTR_OPERATION_NORM_FWD_INV_VARIANCE_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_NORM_FWD_MEAN_DESC", "MIOPEN_ATTR_OPERATION_NORM_FWD_MEAN_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_NORM_FWD_MODE", "MIOPEN_ATTR_OPERATION_NORM_FWD_MODE", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_NORM_FWD_OUTPUT_RUNNING_MEAN_DESC", "MIOPEN_ATTR_OPERATION_NORM_FWD_OUTPUT_RUNNING_MEAN_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_NORM_FWD_OUTPUT_RUNNING_VAR_DESC", "MIOPEN_ATTR_OPERATION_NORM_FWD_OUTPUT_RUNNING_VAR_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_NORM_FWD_PEER_STAT_DESCS", "MIOPEN_ATTR_OPERATION_NORM_FWD_PEER_STAT_DESCS", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_NORM_FWD_PHASE", "MIOPEN_ATTR_OPERATION_NORM_FWD_PHASE", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_NORM_FWD_SCALE_DESC", "MIOPEN_ATTR_OPERATION_NORM_FWD_SCALE_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_NORM_FWD_XDESC", "MIOPEN_ATTR_OPERATION_NORM_FWD_XDESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_NORM_FWD_YDESC", "MIOPEN_ATTR_OPERATION_NORM_FWD_YDESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_POINTWISE_ALPHA1", "MIOPEN_ATTR_OPERATION_POINTWISE_ALPHA1", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_POINTWISE_ALPHA2", "MIOPEN_ATTR_OPERATION_POINTWISE_ALPHA2", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_POINTWISE_BDESC", "MIOPEN_ATTR_OPERATION_POINTWISE_BDESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_POINTWISE_DXDESC", "MIOPEN_ATTR_OPERATION_POINTWISE_DXDESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_POINTWISE_DYDESC", "MIOPEN_ATTR_OPERATION_POINTWISE_DYDESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_POINTWISE_PW_DESCRIPTOR", "MIOPEN_ATTR_OPERATION_POINTWISE_PW_DESCRIPTOR", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_POINTWISE_TDESC", "MIOPEN_ATTR_OPERATION_POINTWISE_TDESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_POINTWISE_XDESC", "MIOPEN_ATTR_OPERATION_POINTWISE_XDESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_POINTWISE_YDESC", "MIOPEN_ATTR_OPERATION_POINTWISE_YDESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_REDUCTION_DESC", "MIOPEN_ATTR_OPERATION_REDUCTION_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_REDUCTION_XDESC", "MIOPEN_ATTR_OPERATION_REDUCTION_XDESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_REDUCTION_YDESC", "MIOPEN_ATTR_OPERATION_REDUCTION_YDESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_RESAMPLE_BWD_ALPHA", "MIOPEN_ATTR_OPERATION_RESAMPLE_BWD_ALPHA", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_RESAMPLE_BWD_BETA", "MIOPEN_ATTR_OPERATION_RESAMPLE_BWD_BETA", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_RESAMPLE_BWD_DESC", "MIOPEN_ATTR_OPERATION_RESAMPLE_BWD_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_RESAMPLE_BWD_DXDESC", "MIOPEN_ATTR_OPERATION_RESAMPLE_BWD_DXDESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_RESAMPLE_BWD_DYDESC", "MIOPEN_ATTR_OPERATION_RESAMPLE_BWD_DYDESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_RESAMPLE_BWD_IDXDESC", "MIOPEN_ATTR_OPERATION_RESAMPLE_BWD_IDXDESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_RESAMPLE_BWD_XDESC", "MIOPEN_ATTR_OPERATION_RESAMPLE_BWD_XDESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_RESAMPLE_BWD_YDESC", "MIOPEN_ATTR_OPERATION_RESAMPLE_BWD_YDESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_RESAMPLE_FWD_ALPHA", "MIOPEN_ATTR_OPERATION_RESAMPLE_FWD_ALPHA", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_RESAMPLE_FWD_BETA", "MIOPEN_ATTR_OPERATION_RESAMPLE_FWD_BETA", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_RESAMPLE_FWD_DESC", "MIOPEN_ATTR_OPERATION_RESAMPLE_FWD_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_RESAMPLE_FWD_IDXDESC", "MIOPEN_ATTR_OPERATION_RESAMPLE_FWD_IDXDESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_RESAMPLE_FWD_XDESC", "MIOPEN_ATTR_OPERATION_RESAMPLE_FWD_XDESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_RESAMPLE_FWD_YDESC", "MIOPEN_ATTR_OPERATION_RESAMPLE_FWD_YDESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_RESHAPE_XDESC", "MIOPEN_ATTR_OPERATION_RESHAPE_XDESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_RESHAPE_YDESC", "MIOPEN_ATTR_OPERATION_RESHAPE_YDESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_RNG_DESC", "MIOPEN_ATTR_OPERATION_RNG_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_RNG_OFFSET_DESC", "MIOPEN_ATTR_OPERATION_RNG_OFFSET_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_RNG_SEED", "MIOPEN_ATTR_OPERATION_RNG_SEED", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_RNG_YDESC", "MIOPEN_ATTR_OPERATION_RNG_YDESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_SIGNAL_FLAGDESC", "MIOPEN_ATTR_OPERATION_SIGNAL_FLAGDESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_SIGNAL_MODE", "MIOPEN_ATTR_OPERATION_SIGNAL_MODE", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_SIGNAL_VALUE", "MIOPEN_ATTR_OPERATION_SIGNAL_VALUE", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_SIGNAL_XDESC", "MIOPEN_ATTR_OPERATION_SIGNAL_XDESC", "numeric_literal");
+    subst("CUDNN_ATTR_OPERATION_SIGNAL_YDESC", "MIOPEN_ATTR_OPERATION_SIGNAL_YDESC", "numeric_literal");
+    subst("CUDNN_ATTR_POINTWISE_AXIS", "MIOPEN_ATTR_POINTWISE_AXIS", "numeric_literal");
+    subst("CUDNN_ATTR_POINTWISE_ELU_ALPHA", "MIOPEN_ATTR_POINTWISE_ELU_ALPHA", "numeric_literal");
+    subst("CUDNN_ATTR_POINTWISE_MATH_PREC", "MIOPEN_ATTR_POINTWISE_MATH_PREC", "numeric_literal");
+    subst("CUDNN_ATTR_POINTWISE_MODE", "MIOPEN_ATTR_POINTWISE_MODE", "numeric_literal");
+    subst("CUDNN_ATTR_POINTWISE_NAN_PROPAGATION", "MIOPEN_ATTR_POINTWISE_NAN_PROPAGATION", "numeric_literal");
+    subst("CUDNN_ATTR_POINTWISE_RELU_LOWER_CLIP", "MIOPEN_ATTR_POINTWISE_RELU_LOWER_CLIP", "numeric_literal");
+    subst("CUDNN_ATTR_POINTWISE_RELU_LOWER_CLIP_SLOPE", "MIOPEN_ATTR_POINTWISE_RELU_LOWER_CLIP_SLOPE", "numeric_literal");
+    subst("CUDNN_ATTR_POINTWISE_RELU_UPPER_CLIP", "MIOPEN_ATTR_POINTWISE_RELU_UPPER_CLIP", "numeric_literal");
+    subst("CUDNN_ATTR_POINTWISE_SOFTPLUS_BETA", "MIOPEN_ATTR_POINTWISE_SOFTPLUS_BETA", "numeric_literal");
+    subst("CUDNN_ATTR_POINTWISE_SWISH_BETA", "MIOPEN_ATTR_POINTWISE_SWISH_BETA", "numeric_literal");
+    subst("CUDNN_ATTR_REDUCTION_COMP_TYPE", "MIOPEN_ATTR_REDUCTION_COMP_TYPE", "numeric_literal");
+    subst("CUDNN_ATTR_REDUCTION_OPERATOR", "MIOPEN_ATTR_REDUCTION_OPERATOR", "numeric_literal");
+    subst("CUDNN_ATTR_RESAMPLE_COMP_TYPE", "MIOPEN_ATTR_RESAMPLE_COMP_TYPE", "numeric_literal");
+    subst("CUDNN_ATTR_RESAMPLE_MODE", "MIOPEN_ATTR_RESAMPLE_MODE", "numeric_literal");
+    subst("CUDNN_ATTR_RESAMPLE_NAN_PROPAGATION", "MIOPEN_ATTR_RESAMPLE_NAN_PROPAGATION", "numeric_literal");
+    subst("CUDNN_ATTR_RESAMPLE_PADDING_MODE", "MIOPEN_ATTR_RESAMPLE_PADDING_MODE", "numeric_literal");
+    subst("CUDNN_ATTR_RESAMPLE_POST_PADDINGS", "MIOPEN_ATTR_RESAMPLE_POST_PADDINGS", "numeric_literal");
+    subst("CUDNN_ATTR_RESAMPLE_PRE_PADDINGS", "MIOPEN_ATTR_RESAMPLE_PRE_PADDINGS", "numeric_literal");
+    subst("CUDNN_ATTR_RESAMPLE_SPATIAL_DIMS", "MIOPEN_ATTR_RESAMPLE_SPATIAL_DIMS", "numeric_literal");
+    subst("CUDNN_ATTR_RESAMPLE_STRIDES", "MIOPEN_ATTR_RESAMPLE_STRIDES", "numeric_literal");
+    subst("CUDNN_ATTR_RESAMPLE_WINDOW_DIMS", "MIOPEN_ATTR_RESAMPLE_WINDOW_DIMS", "numeric_literal");
+    subst("CUDNN_ATTR_RNG_BERNOULLI_DIST_PROBABILITY", "MIOPEN_ATTR_RNG_BERNOULLI_DIST_PROBABILITY", "numeric_literal");
+    subst("CUDNN_ATTR_RNG_DISTRIBUTION", "MIOPEN_ATTR_RNG_DISTRIBUTION", "numeric_literal");
+    subst("CUDNN_ATTR_RNG_NORMAL_DIST_MEAN", "MIOPEN_ATTR_RNG_NORMAL_DIST_MEAN", "numeric_literal");
+    subst("CUDNN_ATTR_RNG_NORMAL_DIST_STANDARD_DEVIATION", "MIOPEN_ATTR_RNG_NORMAL_DIST_STANDARD_DEVIATION", "numeric_literal");
+    subst("CUDNN_ATTR_RNG_UNIFORM_DIST_MAXIMUM", "MIOPEN_ATTR_RNG_UNIFORM_DIST_MAXIMUM", "numeric_literal");
+    subst("CUDNN_ATTR_RNG_UNIFORM_DIST_MINIMUM", "MIOPEN_ATTR_RNG_UNIFORM_DIST_MINIMUM", "numeric_literal");
+    subst("CUDNN_ATTR_TENSOR_BYTE_ALIGNMENT", "MIOPEN_ATTR_TENSOR_BYTE_ALIGNMENT", "numeric_literal");
+    subst("CUDNN_ATTR_TENSOR_DATA_TYPE", "MIOPEN_ATTR_TENSOR_DATA_TYPE", "numeric_literal");
+    subst("CUDNN_ATTR_TENSOR_DIMENSIONS", "MIOPEN_ATTR_TENSOR_DIMENSIONS", "numeric_literal");
+    subst("CUDNN_ATTR_TENSOR_IS_BY_VALUE", "MIOPEN_ATTR_TENSOR_IS_BY_VALUE", "numeric_literal");
+    subst("CUDNN_ATTR_TENSOR_IS_VIRTUAL", "MIOPEN_ATTR_TENSOR_IS_VIRTUAL", "numeric_literal");
+    subst("CUDNN_ATTR_TENSOR_RAGGED_OFFSET_DESC", "MIOPEN_ATTR_TENSOR_RAGGED_OFFSET_DESC", "numeric_literal");
+    subst("CUDNN_ATTR_TENSOR_REORDERING_MODE", "MIOPEN_ATTR_TENSOR_REORDERING_MODE", "numeric_literal");
+    subst("CUDNN_ATTR_TENSOR_STRIDES", "MIOPEN_ATTR_TENSOR_STRIDES", "numeric_literal");
+    subst("CUDNN_ATTR_TENSOR_UNIQUE_ID", "MIOPEN_ATTR_TENSOR_UNIQUE_ID", "numeric_literal");
+    subst("CUDNN_ATTR_TENSOR_VECTORIZED_DIMENSION", "MIOPEN_ATTR_TENSOR_VECTORIZED_DIMENSION", "numeric_literal");
+    subst("CUDNN_ATTR_TENSOR_VECTOR_COUNT", "MIOPEN_ATTR_TENSOR_VECTOR_COUNT", "numeric_literal");
+    subst("CUDNN_ATTR_VARIANT_PACK_DATA_POINTERS", "MIOPEN_ATTR_VARIANT_PACK_DATA_POINTERS", "numeric_literal");
+    subst("CUDNN_ATTR_VARIANT_PACK_INTERMEDIATES", "MIOPEN_ATTR_VARIANT_PACK_INTERMEDIATES", "numeric_literal");
+    subst("CUDNN_ATTR_VARIANT_PACK_UNIQUE_IDS", "MIOPEN_ATTR_VARIANT_PACK_UNIQUE_IDS", "numeric_literal");
+    subst("CUDNN_ATTR_VARIANT_PACK_WORKSPACE", "MIOPEN_ATTR_VARIANT_PACK_WORKSPACE", "numeric_literal");
+    subst("CUDNN_BACKEND_CONVOLUTION_DESCRIPTOR", "MIOPEN_BACKEND_CONVOLUTION_DESCRIPTOR", "numeric_literal");
+    subst("CUDNN_BACKEND_ENGINECFG_DESCRIPTOR", "MIOPEN_BACKEND_ENGINECFG_DESCRIPTOR", "numeric_literal");
+    subst("CUDNN_BACKEND_ENGINEHEUR_DESCRIPTOR", "MIOPEN_BACKEND_ENGINEHEUR_DESCRIPTOR", "numeric_literal");
+    subst("CUDNN_BACKEND_ENGINE_DESCRIPTOR", "MIOPEN_BACKEND_ENGINE_DESCRIPTOR", "numeric_literal");
+    subst("CUDNN_BACKEND_EXECUTION_PLAN_DESCRIPTOR", "MIOPEN_BACKEND_EXECUTION_PLAN_DESCRIPTOR", "numeric_literal");
+    subst("CUDNN_BACKEND_INTERMEDIATE_INFO_DESCRIPTOR", "MIOPEN_BACKEND_INTERMEDIATE_INFO_DESCRIPTOR", "numeric_literal");
+    subst("CUDNN_BACKEND_KNOB_CHOICE_DESCRIPTOR", "MIOPEN_BACKEND_KNOB_CHOICE_DESCRIPTOR", "numeric_literal");
+    subst("CUDNN_BACKEND_KNOB_INFO_DESCRIPTOR", "MIOPEN_BACKEND_KNOB_INFO_DESCRIPTOR", "numeric_literal");
+    subst("CUDNN_BACKEND_LAYOUT_INFO_DESCRIPTOR", "MIOPEN_BACKEND_LAYOUT_INFO_DESCRIPTOR", "numeric_literal");
+    subst("CUDNN_BACKEND_MATMUL_DESCRIPTOR", "MIOPEN_BACKEND_MATMUL_DESCRIPTOR", "numeric_literal");
+    subst("CUDNN_BACKEND_OPERATIONGRAPH_DESCRIPTOR", "MIOPEN_BACKEND_OPERATIONGRAPH_DESCRIPTOR", "numeric_literal");
+    subst("CUDNN_BACKEND_OPERATION_CONCAT_DESCRIPTOR", "MIOPEN_BACKEND_OPERATION_CONCAT_DESCRIPTOR", "numeric_literal");
+    subst("CUDNN_BACKEND_OPERATION_CONVOLUTION_BACKWARD_DATA_DESCRIPTOR", "MIOPEN_BACKEND_OPERATION_CONVOLUTION_BACKWARD_DATA_DESCRIPTOR", "numeric_literal");
+    subst("CUDNN_BACKEND_OPERATION_CONVOLUTION_BACKWARD_FILTER_DESCRIPTOR", "MIOPEN_BACKEND_OPERATION_CONVOLUTION_BACKWARD_FILTER_DESCRIPTOR", "numeric_literal");
+    subst("CUDNN_BACKEND_OPERATION_CONVOLUTION_FORWARD_DESCRIPTOR", "MIOPEN_BACKEND_OPERATION_CONVOLUTION_FORWARD_DESCRIPTOR", "numeric_literal");
+    subst("CUDNN_BACKEND_OPERATION_GEN_STATS_DESCRIPTOR", "MIOPEN_BACKEND_OPERATION_GEN_STATS_DESCRIPTOR", "numeric_literal");
+    subst("CUDNN_BACKEND_OPERATION_MATMUL_DESCRIPTOR", "MIOPEN_BACKEND_OPERATION_MATMUL_DESCRIPTOR", "numeric_literal");
+    subst("CUDNN_BACKEND_OPERATION_NORM_BACKWARD_DESCRIPTOR", "MIOPEN_BACKEND_OPERATION_NORM_BACKWARD_DESCRIPTOR", "numeric_literal");
+    subst("CUDNN_BACKEND_OPERATION_NORM_FORWARD_DESCRIPTOR", "MIOPEN_BACKEND_OPERATION_NORM_FORWARD_DESCRIPTOR", "numeric_literal");
+    subst("CUDNN_BACKEND_OPERATION_POINTWISE_DESCRIPTOR", "MIOPEN_BACKEND_OPERATION_POINTWISE_DESCRIPTOR", "numeric_literal");
+    subst("CUDNN_BACKEND_OPERATION_REDUCTION_DESCRIPTOR", "MIOPEN_BACKEND_OPERATION_REDUCTION_DESCRIPTOR", "numeric_literal");
+    subst("CUDNN_BACKEND_OPERATION_RESAMPLE_BWD_DESCRIPTOR", "MIOPEN_BACKEND_OPERATION_RESAMPLE_BWD_DESCRIPTOR", "numeric_literal");
+    subst("CUDNN_BACKEND_OPERATION_RESAMPLE_FWD_DESCRIPTOR", "MIOPEN_BACKEND_OPERATION_RESAMPLE_FWD_DESCRIPTOR", "numeric_literal");
+    subst("CUDNN_BACKEND_OPERATION_RNG_DESCRIPTOR", "MIOPEN_BACKEND_OPERATION_RNG_DESCRIPTOR", "numeric_literal");
+    subst("CUDNN_BACKEND_OPERATION_SIGNAL_DESCRIPTOR", "MIOPEN_BACKEND_OPERATION_SIGNAL_DESCRIPTOR", "numeric_literal");
+    subst("CUDNN_BACKEND_POINTWISE_DESCRIPTOR", "MIOPEN_BACKEND_POINTWISE_DESCRIPTOR", "numeric_literal");
+    subst("CUDNN_BACKEND_REDUCTION_DESCRIPTOR", "MIOPEN_BACKEND_REDUCTION_DESCRIPTOR", "numeric_literal");
+    subst("CUDNN_BACKEND_RESAMPLE_DESCRIPTOR", "MIOPEN_BACKEND_RESAMPLE_DESCRIPTOR", "numeric_literal");
+    subst("CUDNN_BACKEND_RNG_DESCRIPTOR", "MIOPEN_BACKEND_RNG_DESCRIPTOR", "numeric_literal");
+    subst("CUDNN_BACKEND_TENSOR_DESCRIPTOR", "MIOPEN_BACKEND_TENSOR_DESCRIPTOR", "numeric_literal");
+    subst("CUDNN_BACKEND_VARIANT_PACK_DESCRIPTOR", "MIOPEN_BACKEND_VARIANT_PACK_DESCRIPTOR", "numeric_literal");
     subst("CUDNN_BATCHNORM_PER_ACTIVATION", "miopenBNPerActivation", "numeric_literal");
     subst("CUDNN_BATCHNORM_SPATIAL", "miopenBNSpatial", "numeric_literal");
     subst("CUDNN_BIDIRECTIONAL", "miopenRNNbidirection", "numeric_literal");
@@ -3297,6 +3573,7 @@ sub rocSubstitutions {
     subst("CUDNN_DATA_FLOAT", "miopenFloat", "numeric_literal");
     subst("CUDNN_DATA_HALF", "miopenHalf", "numeric_literal");
     subst("CUDNN_DATA_INT32", "miopenInt32", "numeric_literal");
+    subst("CUDNN_DATA_INT64", "miopenInt64", "numeric_literal");
     subst("CUDNN_DATA_INT8", "miopenInt8", "numeric_literal");
     subst("CUDNN_DATA_INT8x4", "miopenInt8x4", "numeric_literal");
     subst("CUDNN_GRU", "miopenGRU", "numeric_literal");
@@ -3340,7 +3617,71 @@ sub rocSubstitutions {
     subst("CUDNN_STATUS_NOT_INITIALIZED", "miopenStatusNotInitialized", "numeric_literal");
     subst("CUDNN_STATUS_NOT_SUPPORTED", "miopenStatusUnsupportedOp", "numeric_literal");
     subst("CUDNN_STATUS_SUCCESS", "miopenStatusSuccess", "numeric_literal");
+    subst("CUDNN_STATUS_VERSION_MISMATCH", "miopenStatusVersionMismatch", "numeric_literal");
+    subst("CUDNN_TENSOR_NCHW", "miopenTensorNCHW", "numeric_literal");
+    subst("CUDNN_TENSOR_NHWC", "miopenTensorNHWC", "numeric_literal");
+    subst("CUDNN_TYPE_ATTRIB_NAME", "MIOPEN_TYPE_ATTRIB_NAME", "numeric_literal");
+    subst("CUDNN_TYPE_BACKEND_DESCRIPTOR", "MIOPEN_TYPE_BACKEND_DESCRIPTOR", "numeric_literal");
+    subst("CUDNN_TYPE_BEHAVIOR_NOTE", "MIOPEN_TYPE_BEHAVIOR_NOTE", "numeric_literal");
+    subst("CUDNN_TYPE_BN_FINALIZE_STATS_MODE", "MIOPEN_TYPE_BN_FINALIZE_STATS_MODE", "numeric_literal");
+    subst("CUDNN_TYPE_BOOLEAN", "MIOPEN_TYPE_BOOLEAN", "numeric_literal");
+    subst("CUDNN_TYPE_CHAR", "MIOPEN_TYPE_CHAR", "numeric_literal");
+    subst("CUDNN_TYPE_CONVOLUTION_MODE", "MIOPEN_TYPE_CONVOLUTION_MODE", "numeric_literal");
+    subst("CUDNN_TYPE_DATA_TYPE", "MIOPEN_TYPE_DATA_TYPE", "numeric_literal");
+    subst("CUDNN_TYPE_DOUBLE", "MIOPEN_TYPE_DOUBLE", "numeric_literal");
+    subst("CUDNN_TYPE_FLOAT", "MIOPEN_TYPE_FLOAT", "numeric_literal");
+    subst("CUDNN_TYPE_FRACTION", "MIOPEN_TYPE_FRACTION", "numeric_literal");
+    subst("CUDNN_TYPE_GENSTATS_MODE", "MIOPEN_TYPE_GENSTATS_MODE", "numeric_literal");
+    subst("CUDNN_TYPE_HANDLE", "MIOPEN_TYPE_HANDLE", "numeric_literal");
+    subst("CUDNN_TYPE_HEUR_MODE", "MIOPEN_TYPE_HEUR_MODE", "numeric_literal");
+    subst("CUDNN_TYPE_INT32", "MIOPEN_TYPE_INT32", "numeric_literal");
+    subst("CUDNN_TYPE_INT64", "MIOPEN_TYPE_INT64", "numeric_literal");
+    subst("CUDNN_TYPE_KNOB_TYPE", "MIOPEN_TYPE_KNOB_TYPE", "numeric_literal");
+    subst("CUDNN_TYPE_LAYOUT_TYPE", "MIOPEN_TYPE_LAYOUT_TYPE", "numeric_literal");
+    subst("CUDNN_TYPE_NAN_PROPOGATION", "MIOPEN_TYPE_NAN_PROPOGATION", "numeric_literal");
+    subst("CUDNN_TYPE_NORM_FWD_PHASE", "MIOPEN_TYPE_NORM_FWD_PHASE", "numeric_literal");
+    subst("CUDNN_TYPE_NORM_MODE", "MIOPEN_TYPE_NORM_MODE", "numeric_literal");
+    subst("CUDNN_TYPE_NUMERICAL_NOTE", "MIOPEN_TYPE_NUMERICAL_NOTE", "numeric_literal");
+    subst("CUDNN_TYPE_PADDING_MODE", "MIOPEN_TYPE_PADDING_MODE", "numeric_literal");
+    subst("CUDNN_TYPE_POINTWISE_MODE", "MIOPEN_TYPE_POINTWISE_MODE", "numeric_literal");
+    subst("CUDNN_TYPE_REDUCTION_OPERATOR_TYPE", "MIOPEN_TYPE_REDUCTION_OPERATOR_TYPE", "numeric_literal");
+    subst("CUDNN_TYPE_RESAMPLE_MODE", "MIOPEN_TYPE_RESAMPLE_MODE", "numeric_literal");
+    subst("CUDNN_TYPE_RNG_DISTRIBUTION", "MIOPEN_TYPE_RNG_DISTRIBUTION", "numeric_literal");
+    subst("CUDNN_TYPE_SIGNAL_MODE", "MIOPEN_TYPE_SIGNAL_MODE", "numeric_literal");
+    subst("CUDNN_TYPE_TENSOR_REORDERING_MODE", "MIOPEN_TYPE_TENSOR_REORDERING_MODE", "numeric_literal");
+    subst("CUDNN_TYPE_VOID_PTR", "MIOPEN_TYPE_VOID_PTR", "numeric_literal");
     subst("CUDNN_UNIDIRECTIONAL", "miopenRNNunidirection", "numeric_literal");
+    subst("CURAND_DIRECTION_VECTORS_32_JOEKUO6", "ROCRAND_DIRECTION_VECTORS_32_JOEKUO6", "numeric_literal");
+    subst("CURAND_DIRECTION_VECTORS_64_JOEKUO6", "ROCRAND_DIRECTION_VECTORS_64_JOEKUO6", "numeric_literal");
+    subst("CURAND_ORDERING_PSEUDO_BEST", "ROCRAND_ORDERING_PSEUDO_BEST", "numeric_literal");
+    subst("CURAND_ORDERING_PSEUDO_DEFAULT", "ROCRAND_ORDERING_PSEUDO_DEFAULT", "numeric_literal");
+    subst("CURAND_ORDERING_PSEUDO_DYNAMIC", "ROCRAND_ORDERING_PSEUDO_DYNAMIC", "numeric_literal");
+    subst("CURAND_ORDERING_PSEUDO_LEGACY", "ROCRAND_ORDERING_PSEUDO_LEGACY", "numeric_literal");
+    subst("CURAND_ORDERING_PSEUDO_SEEDED", "ROCRAND_ORDERING_PSEUDO_SEEDED", "numeric_literal");
+    subst("CURAND_ORDERING_QUASI_DEFAULT", "ROCRAND_ORDERING_QUASI_DEFAULT", "numeric_literal");
+    subst("CURAND_RNG_PSEUDO_DEFAULT", "ROCRAND_RNG_PSEUDO_DEFAULT", "numeric_literal");
+    subst("CURAND_RNG_PSEUDO_MRG32K3A", "ROCRAND_RNG_PSEUDO_MRG32K3A", "numeric_literal");
+    subst("CURAND_RNG_PSEUDO_MT19937", "ROCRAND_RNG_PSEUDO_MT19937", "numeric_literal");
+    subst("CURAND_RNG_PSEUDO_MTGP32", "ROCRAND_RNG_PSEUDO_MTGP32", "numeric_literal");
+    subst("CURAND_RNG_PSEUDO_PHILOX4_32_10", "ROCRAND_RNG_PSEUDO_PHILOX4_32_10", "numeric_literal");
+    subst("CURAND_RNG_PSEUDO_XORWOW", "ROCRAND_RNG_PSEUDO_XORWOW", "numeric_literal");
+    subst("CURAND_RNG_QUASI_DEFAULT", "ROCRAND_RNG_QUASI_DEFAULT", "numeric_literal");
+    subst("CURAND_RNG_QUASI_SCRAMBLED_SOBOL32", "ROCRAND_RNG_QUASI_SCRAMBLED_SOBOL32", "numeric_literal");
+    subst("CURAND_RNG_QUASI_SCRAMBLED_SOBOL64", "ROCRAND_RNG_QUASI_SCRAMBLED_SOBOL64", "numeric_literal");
+    subst("CURAND_RNG_QUASI_SOBOL32", "ROCRAND_RNG_QUASI_SOBOL32", "numeric_literal");
+    subst("CURAND_RNG_QUASI_SOBOL64", "ROCRAND_RNG_QUASI_SOBOL64", "numeric_literal");
+    subst("CURAND_SCRAMBLED_DIRECTION_VECTORS_32_JOEKUO6", "ROCRAND_SCRAMBLED_DIRECTION_VECTORS_32_JOEKUO6", "numeric_literal");
+    subst("CURAND_SCRAMBLED_DIRECTION_VECTORS_64_JOEKUO6", "ROCRAND_SCRAMBLED_DIRECTION_VECTORS_64_JOEKUO6", "numeric_literal");
+    subst("CURAND_STATUS_ALLOCATION_FAILED", "ROCRAND_STATUS_ALLOCATION_FAILED", "numeric_literal");
+    subst("CURAND_STATUS_DOUBLE_PRECISION_REQUIRED", "ROCRAND_STATUS_DOUBLE_PRECISION_REQUIRED", "numeric_literal");
+    subst("CURAND_STATUS_INTERNAL_ERROR", "ROCRAND_STATUS_INTERNAL_ERROR", "numeric_literal");
+    subst("CURAND_STATUS_LAUNCH_FAILURE", "ROCRAND_STATUS_LAUNCH_FAILURE", "numeric_literal");
+    subst("CURAND_STATUS_LENGTH_NOT_MULTIPLE", "ROCRAND_STATUS_LENGTH_NOT_MULTIPLE", "numeric_literal");
+    subst("CURAND_STATUS_NOT_INITIALIZED", "ROCRAND_STATUS_NOT_CREATED", "numeric_literal");
+    subst("CURAND_STATUS_OUT_OF_RANGE", "ROCRAND_STATUS_OUT_OF_RANGE", "numeric_literal");
+    subst("CURAND_STATUS_SUCCESS", "ROCRAND_STATUS_SUCCESS", "numeric_literal");
+    subst("CURAND_STATUS_TYPE_ERROR", "ROCRAND_STATUS_TYPE_ERROR", "numeric_literal");
+    subst("CURAND_STATUS_VERSION_MISMATCH", "ROCRAND_STATUS_VERSION_MISMATCH", "numeric_literal");
     subst("CUSOLVER_EIG_MODE_NOVECTOR", "rocblas_evect_none", "numeric_literal");
     subst("CUSOLVER_EIG_MODE_VECTOR", "rocblas_evect_original", "numeric_literal");
     subst("CUSOLVER_EIG_RANGE_ALL", "rocblas_erange_all", "numeric_literal");
@@ -5617,7 +5958,7 @@ sub simpleSubstitutions {
     subst("curand_mtgp32.h", "hiprand\/hiprand_kernel.h", "include");
     subst("curand_mtgp32_host.h", "hiprand\/hiprand_mtgp32_host.h", "include");
     subst("curand_mtgp32_kernel.h", "hiprand\/hiprand_kernel.h", "include");
-    subst("curand_mtgp32dc_p_11213.h", "rocrand_mtgp32_11213.h", "include");
+    subst("curand_mtgp32dc_p_11213.h", "rocrand\/rocrand_mtgp32_11213.h", "include");
     subst("curand_normal.h", "hiprand\/hiprand_kernel.h", "include");
     subst("curand_normal_static.h", "hiprand\/hiprand_kernel.h", "include");
     subst("curand_philox4x32_x.h", "hiprand\/hiprand_kernel.h", "include");
@@ -6130,6 +6471,7 @@ sub simpleSubstitutions {
     subst("curandDirectionVectorSet", "hiprandDirectionVectorSet_t", "type");
     subst("curandDirectionVectorSet_t", "hiprandDirectionVectorSet_t", "type");
     subst("curandDirectionVectors32_t", "hiprandDirectionVectors32_t", "type");
+    subst("curandDirectionVectors64_t", "hiprandDirectionVectors64_t", "type");
     subst("curandDiscreteDistribution_st", "hiprandDiscreteDistribution_st", "type");
     subst("curandDiscreteDistribution_t", "hiprandDiscreteDistribution_t", "type");
     subst("curandGenerator_st", "hiprandGenerator_st", "type");
@@ -9145,7 +9487,6 @@ sub warnUnsupportedFunctions {
         "curandDistributionShift_st",
         "curandDistributionM2Shift_t",
         "curandDistributionM2Shift_st",
-        "curandDirectionVectors64_t",
         "cufftXtWorkAreaPolicy_t",
         "cufftXtWorkAreaPolicy",
         "cufftXtSubFormat_t",
@@ -9405,6 +9746,7 @@ sub warnUnsupportedFunctions {
         "cudnnCTCLossDescriptor_t",
         "cudnnCTCLossAlgo_t",
         "cudnnCTCLoss",
+        "cudnnCTCGradMode_t",
         "cudnnBuildRNNDynamic",
         "cudnnBnFinalizeStatsMode_t",
         "cudnnBatchNormalizationForwardTrainingEx",
@@ -9675,6 +10017,8 @@ sub warnUnsupportedFunctions {
         "cudaErrorInvalidTextureBinding",
         "cudaErrorInvalidTexture",
         "cudaErrorInvalidSurface",
+        "cudaErrorInvalidResourceType",
+        "cudaErrorInvalidResourceConfiguration",
         "cudaErrorInvalidPc",
         "cudaErrorInvalidNormSetting",
         "cudaErrorInvalidHostPointer",
@@ -9685,6 +10029,7 @@ sub warnUnsupportedFunctions {
         "cudaErrorIncompatibleDriverContext",
         "cudaErrorIllegalInstruction",
         "cudaErrorHardwareStackError",
+        "cudaErrorFunctionNotLoaded",
         "cudaErrorExternalDevice",
         "cudaErrorDuplicateVariableName",
         "cudaErrorDuplicateTextureName",
@@ -10762,6 +11107,7 @@ sub warnUnsupportedFunctions {
         "CU_COREDUMP_SKIP_NONRELOCATED_ELF_IMAGES",
         "CU_COREDUMP_SKIP_LOCAL_MEMORY",
         "CU_COREDUMP_SKIP_GLOBAL_MEMORY",
+        "CU_COREDUMP_SKIP_CONSTBANK_MEMORY",
         "CU_COREDUMP_SKIP_ABORT",
         "CU_COREDUMP_PIPE",
         "CU_COREDUMP_MAX",
@@ -11273,6 +11619,8 @@ sub warnUnsupportedFunctions {
         "CUDNN_DATA_FAST_FLOAT_FOR_FP8",
         "CUDNN_DATA_BOOLEAN",
         "CUDNN_DATA_BFLOAT16",
+        "CUDNN_CTC_ZERO_OOB_GRADIENTS",
+        "CUDNN_CTC_SKIP_OOB_GRADIENTS",
         "CUDNN_CTC_LOSS_ALGO_NON_DETERMINISTIC",
         "CUDNN_CTC_LOSS_ALGO_DETERMINISTIC",
         "CUDNN_BN_FINALIZE_STATISTICS_TRAINING",
@@ -11298,6 +11646,7 @@ sub warnUnsupportedFunctions {
         "CUDNN_BACKEND_OPERATION_RESAMPLE_BWD_DESCRIPTOR",
         "CUDNN_BACKEND_OPERATION_REDUCTION_DESCRIPTOR",
         "CUDNN_BACKEND_OPERATION_POINTWISE_DESCRIPTOR",
+        "CUDNN_BACKEND_OPERATION_PAGED_CACHE_LOAD_DESCRIPTOR",
         "CUDNN_BACKEND_OPERATION_NORM_FORWARD_DESCRIPTOR",
         "CUDNN_BACKEND_OPERATION_NORM_BACKWARD_DESCRIPTOR",
         "CUDNN_BACKEND_OPERATION_MATMUL_DESCRIPTOR",
@@ -11313,6 +11662,7 @@ sub warnUnsupportedFunctions {
         "CUDNN_BACKEND_LAYOUT_INFO_DESCRIPTOR",
         "CUDNN_BACKEND_KNOB_INFO_DESCRIPTOR",
         "CUDNN_BACKEND_KNOB_CHOICE_DESCRIPTOR",
+        "CUDNN_BACKEND_KERNEL_CACHE_DESCRIPTOR",
         "CUDNN_BACKEND_INTERMEDIATE_INFO_DESCRIPTOR",
         "CUDNN_BACKEND_EXECUTION_PLAN_DESCRIPTOR",
         "CUDNN_BACKEND_ENGINE_DESCRIPTOR",
@@ -11398,6 +11748,10 @@ sub warnUnsupportedFunctions {
         "CUDNN_ATTR_OPERATION_POINTWISE_BDESC",
         "CUDNN_ATTR_OPERATION_POINTWISE_ALPHA2",
         "CUDNN_ATTR_OPERATION_POINTWISE_ALPHA1",
+        "CUDNN_ATTR_OPERATION_PAGED_CACHE_LOAD_YDESC",
+        "CUDNN_ATTR_OPERATION_PAGED_CACHE_LOAD_SEQUENCE_DESC",
+        "CUDNN_ATTR_OPERATION_PAGED_CACHE_LOAD_PAGE_TABLE_DESC",
+        "CUDNN_ATTR_OPERATION_PAGED_CACHE_LOAD_CONTAINER_DESC",
         "CUDNN_ATTR_OPERATION_NORM_FWD_YDESC",
         "CUDNN_ATTR_OPERATION_NORM_FWD_XDESC",
         "CUDNN_ATTR_OPERATION_NORM_FWD_SCALE_DESC",
@@ -11488,6 +11842,7 @@ sub warnUnsupportedFunctions {
         "CUDNN_ATTR_OPERATION_BN_BWD_WEIGHTS_DBN_BIAS_DESC",
         "CUDNN_ATTR_OPERATION_BN_BWD_WEIGHTS_BN_SCALE_DESC",
         "CUDNN_ATTR_OPERATIONGRAPH_OPS",
+        "CUDNN_ATTR_OPERATIONGRAPH_IS_DYNAMIC_SHAPE_ENABLED",
         "CUDNN_ATTR_OPERATIONGRAPH_HANDLE",
         "CUDNN_ATTR_OPERATIONGRAPH_ENGINE_GLOBAL_COUNT",
         "CUDNN_ATTR_MATMUL_PADDING_VALUE",
@@ -11500,12 +11855,14 @@ sub warnUnsupportedFunctions {
         "CUDNN_ATTR_KNOB_INFO_MAXIMUM_VALUE",
         "CUDNN_ATTR_KNOB_CHOICE_KNOB_VALUE",
         "CUDNN_ATTR_KNOB_CHOICE_KNOB_TYPE",
+        "CUDNN_ATTR_KERNEL_CACHE_IS_ENGINECFG_KERNEL_CACHED",
         "CUDNN_ATTR_INTERMEDIATE_INFO_UNIQUE_ID",
         "CUDNN_ATTR_INTERMEDIATE_INFO_SIZE",
         "CUDNN_ATTR_INTERMEDIATE_INFO_DEPENDENT_DATA_UIDS",
         "CUDNN_ATTR_INTERMEDIATE_INFO_DEPENDENT_ATTRIBUTES",
         "CUDNN_ATTR_EXECUTION_PLAN_WORKSPACE_SIZE",
         "CUDNN_ATTR_EXECUTION_PLAN_RUN_ONLY_INTERMEDIATE_UIDS",
+        "CUDNN_ATTR_EXECUTION_PLAN_KERNEL_CACHE",
         "CUDNN_ATTR_EXECUTION_PLAN_JSON_REPRESENTATION",
         "CUDNN_ATTR_EXECUTION_PLAN_HANDLE",
         "CUDNN_ATTR_EXECUTION_PLAN_ENGINE_CONFIG",

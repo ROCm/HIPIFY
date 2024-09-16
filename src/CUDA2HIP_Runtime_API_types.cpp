@@ -1119,6 +1119,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaErrorExternalDevice",                                          {"hipErrorExternalDevice",                                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 911
   // CUDA_ERROR_INVALID_CLUSTER_SIZE
   {"cudaErrorInvalidClusterSize",                                      {"hipErrorInvalidClusterSize",                               "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 912
+  // CUDA_ERROR_FUNCTION_NOT_LOADED
+  {"cudaErrorFunctionNotLoaded",                                       {"hipErrorFunctionNotLoaded",                                "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 913
+  // CUDA_ERROR_INVALID_RESOURCE_TYPE
+  {"cudaErrorInvalidResourceType",                                     {"hipErrorInvalidResourceType",                              "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 914
+  // CUDA_ERROR_INVALID_RESOURCE_CONFIGURATION
+  {"cudaErrorInvalidResourceConfiguration",                            {"hipErrorInvalidResourceConfiguration",                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 915
   // CUDA_ERROR_UNKNOWN
   {"cudaErrorUnknown",                                                 {"hipErrorUnknown",                                          "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}}, // 999
   // Deprecated since CUDA 4.1
@@ -2827,6 +2833,9 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_TYPE_NAME_VER_MAP 
   {"cudaDevAttrD3D12CigSupported",                                     {CUDA_125, CUDA_0,   CUDA_0  }},
   {"cudaLaunchAttributePreferredSharedMemoryCarveout",                 {CUDA_125, CUDA_0,   CUDA_0  }},
   {"cudaKernelNodeAttributePreferredSharedMemoryCarveout",             {CUDA_125, CUDA_0,   CUDA_0  }},
+  {"cudaErrorFunctionNotLoaded",                                       {CUDA_126, CUDA_0,   CUDA_0  }},
+  {"cudaErrorInvalidResourceType",                                     {CUDA_126, CUDA_0,   CUDA_0  }},
+  {"cudaErrorInvalidResourceConfiguration",                            {CUDA_126, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {

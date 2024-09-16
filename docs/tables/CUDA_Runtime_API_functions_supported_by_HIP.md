@@ -1033,6 +1033,7 @@
 |`cudaErrorECCUncorrectable`| | | | |`hipErrorECCNotCorrectable`|1.6.0| | | | |
 |`cudaErrorExternalDevice`| | | | | | | | | | |
 |`cudaErrorFileNotFound`|10.1| | | |`hipErrorFileNotFound`|1.6.0| | | | |
+|`cudaErrorFunctionNotLoaded`|12.6| | | | | | | | | |
 |`cudaErrorGraphExecUpdateFailure`|10.2| | | |`hipErrorGraphExecUpdateFailure`|5.0.0| | | | |
 |`cudaErrorHardwareStackError`| | | | | | | | | | |
 |`cudaErrorHostMemoryAlreadyRegistered`| | | | |`hipErrorHostMemoryAlreadyRegistered`|1.6.0| | | | |
@@ -1059,7 +1060,9 @@
 |`cudaErrorInvalidPc`| | | | | | | | | | |
 |`cudaErrorInvalidPitchValue`| | | | |`hipErrorInvalidPitchValue`|4.2.0| | | | |
 |`cudaErrorInvalidPtx`| | | | |`hipErrorInvalidKernelFile`|1.6.0| | | | |
+|`cudaErrorInvalidResourceConfiguration`|12.6| | | | | | | | | |
 |`cudaErrorInvalidResourceHandle`| | | | |`hipErrorInvalidHandle`|1.6.0| | | | |
+|`cudaErrorInvalidResourceType`|12.6| | | | | | | | | |
 |`cudaErrorInvalidSource`|10.1| | | |`hipErrorInvalidSource`|1.6.0| | | | |
 |`cudaErrorInvalidSurface`| | | | | | | | | | |
 |`cudaErrorInvalidSymbol`| | | | |`hipErrorInvalidSymbol`|1.6.0| | | | |
