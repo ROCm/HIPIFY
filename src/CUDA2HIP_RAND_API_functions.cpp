@@ -25,12 +25,12 @@ THE SOFTWARE.
 // Map of all functions
 const std::map<llvm::StringRef, hipCounter> CUDA_RAND_FUNCTION_MAP {
   // RAND Host functions
-  {"curandCreateGenerator",                         {"hiprandCreateGenerator",                         "", CONV_LIB_FUNC, API_RAND, 2}},
-  {"curandCreateGeneratorHost",                     {"hiprandCreateGeneratorHost",                     "", CONV_LIB_FUNC, API_RAND, 2}},
+  {"curandCreateGenerator",                         {"hiprandCreateGenerator",                         "rocrand_create_generator",                                   CONV_LIB_FUNC, API_RAND, 2}},
+  {"curandCreateGeneratorHost",                     {"hiprandCreateGeneratorHost",                     "rocrand_create_generator_host_blocking",                     CONV_LIB_FUNC, API_RAND, 2}},
   {"curandCreatePoissonDistribution",               {"hiprandCreatePoissonDistribution",               "", CONV_LIB_FUNC, API_RAND, 2}},
   {"curandDestroyDistribution",                     {"hiprandDestroyDistribution",                     "", CONV_LIB_FUNC, API_RAND, 2}},
-  {"curandDestroyGenerator",                        {"hiprandDestroyGenerator",                        "", CONV_LIB_FUNC, API_RAND, 2}},
-  {"curandGenerate",                                {"hiprandGenerate",                                "", CONV_LIB_FUNC, API_RAND, 2}},
+  {"curandDestroyGenerator",                        {"hiprandDestroyGenerator",                        "rocrand_destroy_generator",                                  CONV_LIB_FUNC, API_RAND, 2}},
+  {"curandGenerate",                                {"hiprandGenerate",                                "rocrand_generate",                                           CONV_LIB_FUNC, API_RAND, 2}},
   {"curandGenerateLogNormal",                       {"hiprandGenerateLogNormal",                       "", CONV_LIB_FUNC, API_RAND, 2}},
   {"curandGenerateLogNormalDouble",                 {"hiprandGenerateLogNormalDouble",                 "", CONV_LIB_FUNC, API_RAND, 2}},
   {"curandGenerateLongLong",                        {"hiprandGenerateLongLong",                        "", CONV_LIB_FUNC, API_RAND, 2, HIP_UNSUPPORTED}},
@@ -141,6 +141,11 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RAND_FUNCTION_VER_MAP {
   {"hiprandGetScrambleConstants32",                 {HIP_6000, HIP_0,    HIP_0   }},
   {"hiprandGetScrambleConstants64",                 {HIP_6000, HIP_0,    HIP_0   }},
   {"hiprandSetGeneratorOrdering",                   {HIP_6020, HIP_0,    HIP_0,  HIP_LATEST}},
+
+  {"rocrand_create_generator",                      {HIP_1050, HIP_0,    HIP_0,  }},
+  {"rocrand_create_generator_host_blocking",        {HIP_6020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"rocrand_destroy_generator",                     {HIP_1050, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"rocrand_generate",                              {HIP_1050, HIP_0,    HIP_0,  HIP_LATEST}},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_RAND_API_SECTION_MAP {
