@@ -264,20 +264,20 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuMemcpyAsync",                                               {"hipMemcpyAsync_",                                             "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_UNSUPPORTED}},
   // no analogue
   // NOTE: Not equal to cudaMemcpyArrayToArray due to different signatures
-  {"cuMemcpyAtoA",                                                {"hipMemcpyAtoA",                                               "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_EXPERIMENTAL}},
-  {"cuMemcpyAtoA_v2",                                             {"hipMemcpyAtoA",                                               "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_EXPERIMENTAL}},
+  {"cuMemcpyAtoA",                                                {"hipMemcpyAtoA",                                               "", CONV_MEMORY, API_DRIVER, SEC::MEMORY}},
+  {"cuMemcpyAtoA_v2",                                             {"hipMemcpyAtoA",                                               "", CONV_MEMORY, API_DRIVER, SEC::MEMORY}},
   // no analogue
-  {"cuMemcpyAtoD",                                                {"hipMemcpyAtoD",                                               "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_EXPERIMENTAL}},
-  {"cuMemcpyAtoD_v2",                                             {"hipMemcpyAtoD",                                               "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_EXPERIMENTAL}},
+  {"cuMemcpyAtoD",                                                {"hipMemcpyAtoD",                                               "", CONV_MEMORY, API_DRIVER, SEC::MEMORY}},
+  {"cuMemcpyAtoD_v2",                                             {"hipMemcpyAtoD",                                               "", CONV_MEMORY, API_DRIVER, SEC::MEMORY}},
   // no analogue
   {"cuMemcpyAtoH",                                                {"hipMemcpyAtoH",                                               "", CONV_MEMORY, API_DRIVER, SEC::MEMORY}},
   {"cuMemcpyAtoH_v2",                                             {"hipMemcpyAtoH",                                               "", CONV_MEMORY, API_DRIVER, SEC::MEMORY}},
   // no analogue
-  {"cuMemcpyAtoHAsync",                                           {"hipMemcpyAtoHAsync",                                          "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_EXPERIMENTAL}},
-  {"cuMemcpyAtoHAsync_v2",                                        {"hipMemcpyAtoHAsync",                                          "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_EXPERIMENTAL}},
+  {"cuMemcpyAtoHAsync",                                           {"hipMemcpyAtoHAsync",                                          "", CONV_MEMORY, API_DRIVER, SEC::MEMORY}},
+  {"cuMemcpyAtoHAsync_v2",                                        {"hipMemcpyAtoHAsync",                                          "", CONV_MEMORY, API_DRIVER, SEC::MEMORY}},
   // no analogue
-  {"cuMemcpyDtoA",                                                {"hipMemcpyDtoA",                                               "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_EXPERIMENTAL}},
-  {"cuMemcpyDtoA_v2",                                             {"hipMemcpyDtoA",                                               "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_EXPERIMENTAL}},
+  {"cuMemcpyDtoA",                                                {"hipMemcpyDtoA",                                               "", CONV_MEMORY, API_DRIVER, SEC::MEMORY}},
+  {"cuMemcpyDtoA_v2",                                             {"hipMemcpyDtoA",                                               "", CONV_MEMORY, API_DRIVER, SEC::MEMORY}},
   // no analogue
   {"cuMemcpyDtoD",                                                {"hipMemcpyDtoD",                                               "", CONV_MEMORY, API_DRIVER, SEC::MEMORY}},
   {"cuMemcpyDtoD_v2",                                             {"hipMemcpyDtoD",                                               "", CONV_MEMORY, API_DRIVER, SEC::MEMORY}},
@@ -294,8 +294,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuMemcpyHtoA",                                                {"hipMemcpyHtoA",                                               "", CONV_MEMORY, API_DRIVER, SEC::MEMORY}},
   {"cuMemcpyHtoA_v2",                                             {"hipMemcpyHtoA",                                               "", CONV_MEMORY, API_DRIVER, SEC::MEMORY}},
   // no analogue
-  {"cuMemcpyHtoAAsync",                                           {"hipMemcpyHtoAAsync",                                          "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_EXPERIMENTAL}},
-  {"cuMemcpyHtoAAsync_v2",                                        {"hipMemcpyHtoAAsync",                                          "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_EXPERIMENTAL}},
+  {"cuMemcpyHtoAAsync",                                           {"hipMemcpyHtoAAsync",                                          "", CONV_MEMORY, API_DRIVER, SEC::MEMORY}},
+  {"cuMemcpyHtoAAsync_v2",                                        {"hipMemcpyHtoAAsync",                                          "", CONV_MEMORY, API_DRIVER, SEC::MEMORY}},
   // no analogue
   {"cuMemcpyHtoD",                                                {"hipMemcpyHtoD",                                               "", CONV_MEMORY, API_DRIVER, SEC::MEMORY}},
   {"cuMemcpyHtoD_v2",                                             {"hipMemcpyHtoD",                                               "", CONV_MEMORY, API_DRIVER, SEC::MEMORY}},
@@ -473,7 +473,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuStreamBeginCapture_v2",                                     {"hipStreamBeginCapture",                                       "", CONV_STREAM, API_DRIVER, SEC::STREAM}},
   {"cuStreamBeginCapture_ptsz",                                   {"hipStreamBeginCapture_ptsz",                                  "", CONV_STREAM, API_DRIVER, SEC::STREAM, HIP_UNSUPPORTED}},
   // cudaStreamBeginCaptureToGraph
-  {"cuStreamBeginCaptureToGraph",                                 {"hipStreamBeginCaptureToGraph",                                "", CONV_STREAM, API_DRIVER, SEC::STREAM, HIP_EXPERIMENTAL}},
+  {"cuStreamBeginCaptureToGraph",                                 {"hipStreamBeginCaptureToGraph",                                "", CONV_STREAM, API_DRIVER, SEC::STREAM}},
   // cudaStreamCopyAttributes
   {"cuStreamCopyAttributes",                                      {"hipStreamCopyAttributes",                                     "", CONV_STREAM, API_DRIVER, SEC::STREAM, HIP_UNSUPPORTED}},
   // cudaStreamCreateWithFlags
@@ -815,11 +815,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   //
   {"cuGraphExecBatchMemOpNodeSetParams",                          {"hipGraphExecBatchMemOpNodeSetParams",                         "", CONV_GRAPH, API_DRIVER, SEC::GRAPH}},
   // cudaGraphInstantiateWithParams
-  {"cuGraphInstantiateWithParams",                                {"hipGraphInstantiateWithParams",                               "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_EXPERIMENTAL}},
+  {"cuGraphInstantiateWithParams",                                {"hipGraphInstantiateWithParams",                               "", CONV_GRAPH, API_DRIVER, SEC::GRAPH}},
   // cudaGraphExecGetFlags
   {"cuGraphExecGetFlags",                                         {"hipGraphExecGetFlags",                                        "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_UNSUPPORTED}},
   // cudaGraphAddNode
-  {"cuGraphAddNode",                                              {"hipGraphAddNode",                                             "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_EXPERIMENTAL}},
+  {"cuGraphAddNode",                                              {"hipGraphAddNode",                                             "", CONV_GRAPH, API_DRIVER, SEC::GRAPH}},
   // cudaGraphAddNode_v2
   {"cuGraphAddNode_v2",                                           {"hipGraphAddNode_v2",                                          "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_UNSUPPORTED}},
   // cudaGraphNodeSetParams
@@ -952,7 +952,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
 
   // 33. Driver Entry Point Access
   // cudaGetDriverEntryPoint
-  {"cuGetProcAddress",                                            {"hipGetProcAddress",                                           "", CONV_DRIVER_ENTRY_POINT, API_DRIVER, SEC::DRIVER_ENTRY_POINT, HIP_EXPERIMENTAL}},
+  {"cuGetProcAddress",                                            {"hipGetProcAddress",                                           "", CONV_DRIVER_ENTRY_POINT, API_DRIVER, SEC::DRIVER_ENTRY_POINT}},
 
   // 34. Coredump Attributes Control API
   //
@@ -1653,11 +1653,11 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_FUNCTION_VER_MAP {
   {"hipDrvGraphAddMemcpyNode",                                    {HIP_6000, HIP_0,    HIP_0   }},
   {"hipDrvGraphAddMemsetNode",                                    {HIP_6010, HIP_0,    HIP_0   }},
   {"hipTexRefGetBorderColor",                                     {HIP_6010, HIP_6010, HIP_0   }},
-  {"hipMemcpyAtoD",                                               {HIP_6020, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipMemcpyDtoA",                                               {HIP_6020, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipMemcpyAtoA",                                               {HIP_6020, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipMemcpyAtoHAsync",                                          {HIP_6020, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipMemcpyHtoAAsync",                                          {HIP_6020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemcpyAtoD",                                               {HIP_6020, HIP_0,    HIP_0,  }},
+  {"hipMemcpyDtoA",                                               {HIP_6020, HIP_0,    HIP_0,  }},
+  {"hipMemcpyAtoA",                                               {HIP_6020, HIP_0,    HIP_0,  }},
+  {"hipMemcpyAtoHAsync",                                          {HIP_6020, HIP_0,    HIP_0,  }},
+  {"hipMemcpyHtoAAsync",                                          {HIP_6020, HIP_0,    HIP_0,  }},
 };
 
 const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_DRIVER_FUNCTION_CHANGED_VER_MAP {

@@ -1,4 +1,4 @@
-// RUN: %run_test hipify "%s" "%t" %hipify_args 1 --hip-kernel-execution-syntax %clang_args
+// RUN: %run_test hipify "%s" "%t" %hipify_args 2 --experimental --hip-kernel-execution-syntax %clang_args
 
 // Copyright (c) 2017 Advanced Micro Devices, Inc. All rights reserved.
 //
@@ -400,9 +400,8 @@ void run_benchmarks(const cli::Parser& parser,
 {
     if (distribution == "uniform-uint")
     {
-        // curandStateSobol64_t and curandStateScrambledSobol64_t are yet unsupported by HIP
-        // CHECK-NOT: if (!std::is_same<GeneratorState, hiprandStateSobol64_t>::value &&
-        // CHECK-NOT: !std::is_same<GeneratorState, hiprandStateScrambledSobol64_t>::value)
+        // CHECK: if (!std::is_same<GeneratorState, hiprandStateSobol64_t>::value &&
+        // CHECK-NEXT: !std::is_same<GeneratorState, hiprandStateScrambledSobol64_t>::value)
         if (!std::is_same<GeneratorState, curandStateSobol64_t>::value &&
             !std::is_same<GeneratorState, curandStateScrambledSobol64_t>::value)
         {
@@ -416,9 +415,8 @@ void run_benchmarks(const cli::Parser& parser,
     }
     if (distribution == "uniform-long-long")
     {
-        // curandStateSobol64_t and curandStateScrambledSobol64_t are yet unsupported by HIP
-        // CHECK-NOT: if (!std::is_same<GeneratorState, hiprandStateSobol64_t>::value &&
-        // CHECK-NOT: !std::is_same<GeneratorState, hiprandStateScrambledSobol64_t>::value)
+        // CHECK: if (std::is_same<GeneratorState, hiprandStateSobol64_t>::value ||
+        // CHECK-NEXT: std::is_same<GeneratorState, hiprandStateScrambledSobol64_t>::value)
         if (std::is_same<GeneratorState, curandStateSobol64_t>::value ||
             std::is_same<GeneratorState, curandStateScrambledSobol64_t>::value)
         {

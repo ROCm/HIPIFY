@@ -407,7 +407,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP {
   {"CUBLASLT_MATMUL_DESC_B_SCALE_POINTER",                           {"HIPBLASLT_MATMUL_DESC_B_SCALE_POINTER",                             "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED}},
   {"CUBLASLT_MATMUL_DESC_C_SCALE_POINTER",                           {"HIPBLASLT_MATMUL_DESC_C_SCALE_POINTER",                             "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED}},
   {"CUBLASLT_MATMUL_DESC_D_SCALE_POINTER",                           {"HIPBLASLT_MATMUL_DESC_D_SCALE_POINTER",                             "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED}},
-  {"CUBLASLT_MATMUL_DESC_AMAX_D_POINTER",                            {"HIPBLASLT_MATMUL_DESC_AMAX_D_POINTER",                              "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, HIP_EXPERIMENTAL}},
+  {"CUBLASLT_MATMUL_DESC_AMAX_D_POINTER",                            {"HIPBLASLT_MATMUL_DESC_AMAX_D_POINTER",                              "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES}},
   {"CUBLASLT_MATMUL_DESC_EPILOGUE_AUX_DATA_TYPE",                    {"HIPBLASLT_MATMUL_DESC_EPILOGUE_AUX_DATA_TYPE",                      "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
   {"CUBLASLT_MATMUL_DESC_EPILOGUE_AUX_SCALE_POINTER",                {"HIPBLASLT_MATMUL_DESC_EPILOGUE_AUX_SCALE_POINTER",                  "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED}},
   {"CUBLASLT_MATMUL_DESC_EPILOGUE_AUX_AMAX_POINTER",                 {"HIPBLASLT_MATMUL_DESC_EPILOGUE_AUX_AMAX_POINTER",                   "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
@@ -1045,7 +1045,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_TYPE_NAME_VER_MAP {
   {"HIPBLASLT_MATMUL_PREF_SEARCH_MODE",                              {HIP_5050, HIP_0,    HIP_0   }},
   {"HIPBLASLT_MATMUL_PREF_MAX_WORKSPACE_BYTES",                      {HIP_5050, HIP_0,    HIP_0   }},
   {"hipblasLtMatmulHeuristicResult_t",                               {HIP_5050, HIP_0,    HIP_0   }},
-  {"HIPBLASLT_MATMUL_DESC_AMAX_D_POINTER",                           {HIP_6020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"HIPBLASLT_MATMUL_DESC_AMAX_D_POINTER",                           {HIP_6020, HIP_0,    HIP_0,  }},
 
   {"rocblas_handle",                                                 {HIP_1050, HIP_0,    HIP_0   }},
   {"_rocblas_handle",                                                {HIP_1050, HIP_0,    HIP_0   }},
