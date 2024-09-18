@@ -34,7 +34,7 @@
 |`cudaIpcOpenMemHandle`| | | | |`hipIpcOpenMemHandle`|1.6.0| | | | |
 |`cudaSetDevice`| | | | |`hipSetDevice`|1.6.0| | | | |
 |`cudaSetDeviceFlags`| | | | |`hipSetDeviceFlags`|1.6.0| | | | |
-|`cudaSetValidDevices`| | | | |`hipSetValidDevices`|6.2.0| | | |6.2.0|
+|`cudaSetValidDevices`| | | | |`hipSetValidDevices`|6.2.0| | | | |
 
 ## **2. Device Management [DEPRECATED]**
 
@@ -71,7 +71,7 @@
 |`cudaStreamAddCallback`| | | | |`hipStreamAddCallback`|1.6.0| | | | |
 |`cudaStreamAttachMemAsync`| | | | |`hipStreamAttachMemAsync`|3.7.0| | | | |
 |`cudaStreamBeginCapture`|10.0| | | |`hipStreamBeginCapture`|4.3.0| | | | |
-|`cudaStreamBeginCaptureToGraph`|12.3| | | |`hipStreamBeginCaptureToGraph`|6.2.0| | | |6.2.0|
+|`cudaStreamBeginCaptureToGraph`|12.3| | | |`hipStreamBeginCaptureToGraph`|6.2.0| | | | |
 |`cudaStreamCopyAttributes`|11.0| | | | | | | | | |
 |`cudaStreamCreate`| | | | |`hipStreamCreate`|1.6.0| | | | |
 |`cudaStreamCreateWithFlags`| | | | |`hipStreamCreateWithFlags`|1.6.0| | | | |
@@ -197,7 +197,7 @@
 |`cudaMemRangeGetAttributes`|8.0| | | |`hipMemRangeGetAttributes`|3.7.0| | | | |
 |`cudaMemcpy`| | | | |`hipMemcpy`|1.5.0| | | | |
 |`cudaMemcpy2D`| | | | |`hipMemcpy2D`|1.6.0| | | | |
-|`cudaMemcpy2DArrayToArray`| | | | |`hipMemcpy2DArrayToArray`|6.2.0| | | |6.2.0|
+|`cudaMemcpy2DArrayToArray`| | | | |`hipMemcpy2DArrayToArray`|6.2.0| | | | |
 |`cudaMemcpy2DAsync`| | | | |`hipMemcpy2DAsync`|1.6.0| | | | |
 |`cudaMemcpy2DFromArray`| | | | |`hipMemcpy2DFromArray`|3.0.0| | | | |
 |`cudaMemcpy2DFromArrayAsync`| | | | |`hipMemcpy2DFromArrayAsync`|3.0.0| | | | |
@@ -445,7 +445,7 @@
 |`cudaGraphAddMemcpyNodeFromSymbol`|11.1| | | |`hipGraphAddMemcpyNodeFromSymbol`|5.0.0| | | | |
 |`cudaGraphAddMemcpyNodeToSymbol`|11.1| | | |`hipGraphAddMemcpyNodeToSymbol`|5.0.0| | | | |
 |`cudaGraphAddMemsetNode`|10.0| | | |`hipGraphAddMemsetNode`|4.3.0| | | | |
-|`cudaGraphAddNode`|12.2| | | |`hipGraphAddNode`|6.2.0| | | |6.2.0|
+|`cudaGraphAddNode`|12.2| | | |`hipGraphAddNode`|6.2.0| | | | |
 |`cudaGraphAddNode_v2`|12.3| | | | | | | | | |
 |`cudaGraphChildGraphNodeGetGraph`|10.0| | | |`hipGraphChildGraphNodeGetGraph`|5.0.0| | | | |
 |`cudaGraphClone`|10.0| | | |`hipGraphClone`|5.0.0| | | | |
@@ -486,7 +486,7 @@
 |`cudaGraphHostNodeSetParams`|10.0| | | |`hipGraphHostNodeSetParams`|5.0.0| | | | |
 |`cudaGraphInstantiate`|10.0| | | |`hipGraphInstantiate`|4.3.0| | | | |
 |`cudaGraphInstantiateWithFlags`|11.4| | | |`hipGraphInstantiateWithFlags`|5.0.0| | | | |
-|`cudaGraphInstantiateWithParams`|12.0| | | |`hipGraphInstantiateWithParams`|6.2.0| | | |6.2.0|
+|`cudaGraphInstantiateWithParams`|12.0| | | |`hipGraphInstantiateWithParams`|6.2.0| | | | |
 |`cudaGraphKernelNodeCopyAttributes`|11.0| | | |`hipGraphKernelNodeCopyAttributes`|5.5.0| | | | |
 |`cudaGraphKernelNodeGetAttribute`|11.0| | | |`hipGraphKernelNodeGetAttribute`|5.2.0| | | | |
 |`cudaGraphKernelNodeGetParams`|11.0| | | |`hipGraphKernelNodeGetParams`|4.5.0| | | | |
@@ -524,7 +524,7 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
-|`cudaGetDriverEntryPoint`|11.3| |12.0| |`hipGetProcAddress`|6.2.0| | | |6.2.0|
+|`cudaGetDriverEntryPoint`|11.3| |12.0| |`hipGetProcAddress`|6.2.0| | | | |
 |`cudaGetDriverEntryPointByVersion`|12.5| | | | | | | | | |
 
 ## **32. C++ API Routines**
@@ -537,7 +537,7 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
-|`cudaGetFuncBySymbol`|11.0| | | |`hipGetFuncBySymbol`|6.2.0| | | |6.2.0|
+|`cudaGetFuncBySymbol`|11.0| | | |`hipGetFuncBySymbol`|6.2.0| | | | |
 
 ## **34. Profiler Control**
 
@@ -917,10 +917,10 @@
 |`cudaDeviceScheduleSpin`| | | | |`hipDeviceScheduleSpin`|1.6.0| | | | |
 |`cudaDeviceScheduleYield`| | | | |`hipDeviceScheduleYield`|1.6.0| | | | |
 |`cudaDeviceSyncMemops`|12.1| | | | | | | | | |
-|`cudaDriverEntryPointQueryResult`|12.0| | | |`hipDriverProcAddressQueryResult`|6.2.0| | | |6.2.0|
-|`cudaDriverEntryPointSuccess`|12.0| | | |`HIP_GET_PROC_ADDRESS_SUCCESS`|6.2.0| | | |6.2.0|
-|`cudaDriverEntryPointSymbolNotFound`|12.0| | | |`HIP_GET_PROC_ADDRESS_SYMBOL_NOT_FOUND`|6.2.0| | | |6.2.0|
-|`cudaDriverEntryPointVersionNotSufficent`|12.0| | | |`HIP_GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT`|6.2.0| | | |6.2.0|
+|`cudaDriverEntryPointQueryResult`|12.0| | | |`hipDriverProcAddressQueryResult`|6.2.0| | | | |
+|`cudaDriverEntryPointSuccess`|12.0| | | |`HIP_GET_PROC_ADDRESS_SUCCESS`|6.2.0| | | | |
+|`cudaDriverEntryPointSymbolNotFound`|12.0| | | |`HIP_GET_PROC_ADDRESS_SYMBOL_NOT_FOUND`|6.2.0| | | | |
+|`cudaDriverEntryPointVersionNotSufficent`|12.0| | | |`HIP_GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT`|6.2.0| | | | |
 |`cudaEglColorFormat`|9.1| | | | | | | | | |
 |`cudaEglColorFormatA`|9.1| | | | | | | | | |
 |`cudaEglColorFormatABGR`|9.1| | | | | | | | | |
@@ -1250,13 +1250,13 @@
 |`cudaGraphDebugDotFlagsMemcpyNodeParams`|11.3| | | |`hipGraphDebugDotFlagsMemcpyNodeParams`|5.5.0| | | | |
 |`cudaGraphDebugDotFlagsMemsetNodeParams`|11.3| | | |`hipGraphDebugDotFlagsMemsetNodeParams`|5.5.0| | | | |
 |`cudaGraphDebugDotFlagsVerbose`|11.3| | | |`hipGraphDebugDotFlagsVerbose`|5.5.0| | | | |
-|`cudaGraphDependencyType`|12.3| | | |`hipGraphDependencyType`|6.2.0| | | |6.2.0|
-|`cudaGraphDependencyTypeDefault`|12.3| | | |`hipGraphDependencyTypeDefault`|6.2.0| | | |6.2.0|
-|`cudaGraphDependencyTypeProgrammatic`|12.3| | | |`hipGraphDependencyTypeProgrammatic`|6.2.0| | | |6.2.0|
-|`cudaGraphDependencyType_enum`|12.3| | | |`hipGraphDependencyType`|6.2.0| | | |6.2.0|
+|`cudaGraphDependencyType`|12.3| | | |`hipGraphDependencyType`|6.2.0| | | | |
+|`cudaGraphDependencyTypeDefault`|12.3| | | |`hipGraphDependencyTypeDefault`|6.2.0| | | | |
+|`cudaGraphDependencyTypeProgrammatic`|12.3| | | |`hipGraphDependencyTypeProgrammatic`|6.2.0| | | | |
+|`cudaGraphDependencyType_enum`|12.3| | | |`hipGraphDependencyType`|6.2.0| | | | |
 |`cudaGraphDeviceNode_t`|12.4| | | | | | | | | |
-|`cudaGraphEdgeData`|12.3| | | |`hipGraphEdgeData`|6.2.0| | | |6.2.0|
-|`cudaGraphEdgeData_st`|12.3| | | |`hipGraphEdgeData`|6.2.0| | | |6.2.0|
+|`cudaGraphEdgeData`|12.3| | | |`hipGraphEdgeData`|6.2.0| | | | |
+|`cudaGraphEdgeData_st`|12.3| | | |`hipGraphEdgeData`|6.2.0| | | | |
 |`cudaGraphExecUpdateError`|10.2| | | |`hipGraphExecUpdateError`|4.3.0| | | | |
 |`cudaGraphExecUpdateErrorAttributesChanged`|11.6| | | | | | | | | |
 |`cudaGraphExecUpdateErrorFunctionChanged`|10.2| | | |`hipGraphExecUpdateErrorFunctionChanged`|4.3.0| | | | |
@@ -1270,27 +1270,27 @@
 |`cudaGraphExecUpdateResultInfo_st`|12.0| | | | | | | | | |
 |`cudaGraphExecUpdateSuccess`|10.2| | | |`hipGraphExecUpdateSuccess`|4.3.0| | | | |
 |`cudaGraphExec_t`|10.0| | | |`hipGraphExec_t`|4.3.0| | | | |
-|`cudaGraphInstantiateError`|12.0| | | |`hipGraphInstantiateError`|6.2.0| | | |6.2.0|
+|`cudaGraphInstantiateError`|12.0| | | |`hipGraphInstantiateError`|6.2.0| | | | |
 |`cudaGraphInstantiateFlagAutoFreeOnLaunch`|11.4| | | |`hipGraphInstantiateFlagAutoFreeOnLaunch`|5.2.0| | | | |
 |`cudaGraphInstantiateFlagDeviceLaunch`|12.0| | | |`hipGraphInstantiateFlagDeviceLaunch`|5.6.0| | | | |
 |`cudaGraphInstantiateFlagUpload`|12.0| | | |`hipGraphInstantiateFlagUpload`|5.6.0| | | | |
 |`cudaGraphInstantiateFlagUseNodePriority`|11.7| | | |`hipGraphInstantiateFlagUseNodePriority`|5.6.0| | | | |
 |`cudaGraphInstantiateFlags`|11.4| | | |`hipGraphInstantiateFlags`|5.2.0| | | | |
-|`cudaGraphInstantiateInvalidStructure`|12.0| | | |`hipGraphInstantiateInvalidStructure`|6.2.0| | | |6.2.0|
-|`cudaGraphInstantiateMultipleDevicesNotSupported`|12.0| | | |`hipGraphInstantiateMultipleDevicesNotSupported`|6.2.0| | | |6.2.0|
-|`cudaGraphInstantiateNodeOperationNotSupported`|12.0| | | |`hipGraphInstantiateNodeOperationNotSupported`|6.2.0| | | |6.2.0|
-|`cudaGraphInstantiateParams`|12.0| | | |`hipGraphInstantiateParams`|6.2.0| | | |6.2.0|
-|`cudaGraphInstantiateParams_st`|12.0| | | |`hipGraphInstantiateParams`|6.2.0| | | |6.2.0|
-|`cudaGraphInstantiateResult`|12.0| | | |`hipGraphInstantiateResult`|6.2.0| | | |6.2.0|
-|`cudaGraphInstantiateSuccess`|12.0| | | |`hipGraphInstantiateSuccess`|6.2.0| | | |6.2.0|
+|`cudaGraphInstantiateInvalidStructure`|12.0| | | |`hipGraphInstantiateInvalidStructure`|6.2.0| | | | |
+|`cudaGraphInstantiateMultipleDevicesNotSupported`|12.0| | | |`hipGraphInstantiateMultipleDevicesNotSupported`|6.2.0| | | | |
+|`cudaGraphInstantiateNodeOperationNotSupported`|12.0| | | |`hipGraphInstantiateNodeOperationNotSupported`|6.2.0| | | | |
+|`cudaGraphInstantiateParams`|12.0| | | |`hipGraphInstantiateParams`|6.2.0| | | | |
+|`cudaGraphInstantiateParams_st`|12.0| | | |`hipGraphInstantiateParams`|6.2.0| | | | |
+|`cudaGraphInstantiateResult`|12.0| | | |`hipGraphInstantiateResult`|6.2.0| | | | |
+|`cudaGraphInstantiateSuccess`|12.0| | | |`hipGraphInstantiateSuccess`|6.2.0| | | | |
 |`cudaGraphKernelNodeField`|12.4| | | | | | | | | |
 |`cudaGraphKernelNodeFieldEnabled`|12.4| | | | | | | | | |
 |`cudaGraphKernelNodeFieldGridDim`|12.4| | | | | | | | | |
 |`cudaGraphKernelNodeFieldInvalid`|12.4| | | | | | | | | |
 |`cudaGraphKernelNodeFieldParam`|12.4| | | | | | | | | |
-|`cudaGraphKernelNodePortDefault`|12.3| | | |`hipGraphKernelNodePortDefault`|6.2.0| | | |6.2.0|
-|`cudaGraphKernelNodePortLaunchCompletion`|12.3| | | |`hipGraphKernelNodePortLaunchCompletion`|6.2.0| | | |6.2.0|
-|`cudaGraphKernelNodePortProgrammatic`|12.3| | | |`hipGraphKernelNodePortProgrammatic`|6.2.0| | | |6.2.0|
+|`cudaGraphKernelNodePortDefault`|12.3| | | |`hipGraphKernelNodePortDefault`|6.2.0| | | | |
+|`cudaGraphKernelNodePortLaunchCompletion`|12.3| | | |`hipGraphKernelNodePortLaunchCompletion`|6.2.0| | | | |
+|`cudaGraphKernelNodePortProgrammatic`|12.3| | | |`hipGraphKernelNodePortProgrammatic`|6.2.0| | | | |
 |`cudaGraphKernelNodeUpdate`|12.4| | | | | | | | | |
 |`cudaGraphMemAttrReservedMemCurrent`|11.4| | | |`hipGraphMemAttrReservedMemCurrent`|5.3.0| | | | |
 |`cudaGraphMemAttrReservedMemHigh`|11.4| | | |`hipGraphMemAttrReservedMemHigh`|5.3.0| | | | |
@@ -1364,28 +1364,28 @@
 |`cudaKernelNodeAttributeMemSyncDomain`|12.0| | | | | | | | | |
 |`cudaKernelNodeAttributeMemSyncDomainMap`|12.0| | | | | | | | | |
 |`cudaKernelNodeAttributePreferredSharedMemoryCarveout`|12.5| | | | | | | | | |
-|`cudaKernelNodeAttributePriority`|11.7| | | |`hipKernelNodeAttributePriority`|6.2.0| | | |6.2.0|
+|`cudaKernelNodeAttributePriority`|11.7| | | |`hipKernelNodeAttributePriority`|6.2.0| | | | |
 |`cudaKernelNodeParams`|10.0| | | |`hipKernelNodeParams`|4.3.0| | | | |
 |`cudaKernelNodeParamsV2`|12.2| | | | | | | | | |
 |`cudaKernel_t`|12.1| | | | | | | | | |
 |`cudaKeyValuePair`| | | |12.0| | | | | | |
 |`cudaLaunchAttribute`|11.8| | | | | | | | | |
-|`cudaLaunchAttributeAccessPolicyWindow`|11.8| | | |`hipLaunchAttributeAccessPolicyWindow`|6.2.0| | | |6.2.0|
+|`cudaLaunchAttributeAccessPolicyWindow`|11.8| | | |`hipLaunchAttributeAccessPolicyWindow`|6.2.0| | | | |
 |`cudaLaunchAttributeClusterDimension`|11.8| | | | | | | | | |
 |`cudaLaunchAttributeClusterSchedulingPolicyPreference`|11.8| | | | | | | | | |
-|`cudaLaunchAttributeCooperative`|11.8| | | |`hipLaunchAttributeCooperative`|6.2.0| | | |6.2.0|
+|`cudaLaunchAttributeCooperative`|11.8| | | |`hipLaunchAttributeCooperative`|6.2.0| | | | |
 |`cudaLaunchAttributeDeviceUpdatableKernelNode`|12.4| | | | | | | | | |
-|`cudaLaunchAttributeID`|11.8| | | |`hipLaunchAttributeID`|6.2.0| | | |6.2.0|
+|`cudaLaunchAttributeID`|11.8| | | |`hipLaunchAttributeID`|6.2.0| | | | |
 |`cudaLaunchAttributeIgnore`|11.8| | | | | | | | | |
 |`cudaLaunchAttributeLaunchCompletionEvent`|12.3| | | | | | | | | |
 |`cudaLaunchAttributeMemSyncDomain`|12.0| | | | | | | | | |
 |`cudaLaunchAttributeMemSyncDomainMap`|12.0| | | | | | | | | |
 |`cudaLaunchAttributePreferredSharedMemoryCarveout`|12.5| | | | | | | | | |
-|`cudaLaunchAttributePriority`|11.8| | | |`hipLaunchAttributePriority`|6.2.0| | | |6.2.0|
+|`cudaLaunchAttributePriority`|11.8| | | |`hipLaunchAttributePriority`|6.2.0| | | | |
 |`cudaLaunchAttributeProgrammaticEvent`|11.8| | | | | | | | | |
 |`cudaLaunchAttributeProgrammaticStreamSerialization`|11.8| | | | | | | | | |
 |`cudaLaunchAttributeSynchronizationPolicy`|11.8| | | | | | | | | |
-|`cudaLaunchAttributeValue`|11.8| | | |`hipLaunchAttributeValue`|6.2.0| | | |6.2.0|
+|`cudaLaunchAttributeValue`|11.8| | | |`hipLaunchAttributeValue`|6.2.0| | | | |
 |`cudaLaunchAttribute_st`|11.8| | | | | | | | | |
 |`cudaLaunchConfig_st`|11.8| | | | | | | | | |
 |`cudaLaunchConfig_t`|11.8| | | | | | | | | |
@@ -1560,7 +1560,7 @@
 |`cudaStreamCaptureStatusInvalidated`|10.0| | | |`hipStreamCaptureStatusInvalidated`|4.3.0| | | | |
 |`cudaStreamCaptureStatusNone`|10.0| | | |`hipStreamCaptureStatusNone`|4.3.0| | | | |
 |`cudaStreamDefault`| | | | |`hipStreamDefault`|1.6.0| | | | |
-|`cudaStreamLegacy`|9.0| | | |`hipStreamLegacy`|6.2.0| | | |6.2.0|
+|`cudaStreamLegacy`|9.0| | | |`hipStreamLegacy`|6.2.0| | | | |
 |`cudaStreamNonBlocking`| | | | |`hipStreamNonBlocking`|1.6.0| | | | |
 |`cudaStreamPerThread`| | | | |`hipStreamPerThread`|4.5.0| | | | |
 |`cudaStreamSetCaptureDependencies`|11.3| | | |`hipStreamSetCaptureDependencies`|5.0.0| | | | |
