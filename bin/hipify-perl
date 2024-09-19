@@ -2022,6 +2022,12 @@ sub rocSubstitutions {
     subst("cublasZtrsv_v2", "rocblas_ztrsv", "library");
     subst("cudnnActivationBackward", "miopenActivationBackward", "library");
     subst("cudnnActivationForward", "miopenActivationForward", "library");
+    subst("cudnnBackendCreateDescriptor", "miopenBackendCreateDescriptor", "library");
+    subst("cudnnBackendDestroyDescriptor", "miopenBackendDestroyDescriptor", "library");
+    subst("cudnnBackendExecute", "miopenBackendExecute", "library");
+    subst("cudnnBackendFinalize", "miopenBackendFinalize", "library");
+    subst("cudnnBackendGetAttribute", "miopenBackendGetAttribute", "library");
+    subst("cudnnBackendSetAttribute", "miopenBackendSetAttribute", "library");
     subst("cudnnBatchNormalizationBackward", "miopenBatchNormalizationBackward", "library");
     subst("cudnnBatchNormalizationForwardInference", "miopenBatchNormalizationForwardInference", "library");
     subst("cudnnBatchNormalizationForwardTraining", "miopenBatchNormalizationForwardTraining", "library");
@@ -2668,6 +2674,7 @@ sub rocSubstitutions {
     subst("cudnnBackendAttributeType_t", "miopenBackendAttributeType_t", "type");
     subst("cudnnBackendDescriptorType_t", "miopenBackendDescriptorType_t", "type");
     subst("cudnnBackendDescriptor_t", "miopenBackendDescriptor_t", "type");
+    subst("cudnnBackendHeurMode_t", "miopenBackendHeurMode_t", "type");
     subst("cudnnBatchNormMode_t", "miopenBatchNormMode_t", "type");
     subst("cudnnCTCLossAlgo_t", "miopenCTCLossAlgo_t", "type");
     subst("cudnnCTCLossDescriptor_t", "miopenCTCLossDescriptor_t", "type");
@@ -2701,6 +2708,7 @@ sub rocSubstitutions {
     subst("cudnnReduceTensorDescriptor_t", "miopenReduceTensorDescriptor_t", "type");
     subst("cudnnReduceTensorIndices_t", "miopenReduceTensorIndices_t", "type");
     subst("cudnnReduceTensorOp_t", "miopenReduceTensorOp_t", "type");
+    subst("cudnnRngDistribution_t", "miopenRngDistribution_t", "type");
     subst("cudnnSoftmaxAlgorithm_t", "miopenSoftmaxAlgorithm_t", "type");
     subst("cudnnSoftmaxMode_t", "miopenSoftmaxMode_t", "type");
     subst("cudnnStatus_t", "miopenStatus_t", "type");
@@ -3086,6 +3094,11 @@ sub rocSubstitutions {
     subst("CUDNN_DATA_INT8", "miopenInt8", "numeric_literal");
     subst("CUDNN_DATA_INT8x4", "miopenInt8x4", "numeric_literal");
     subst("CUDNN_GRU", "miopenGRU", "numeric_literal");
+    subst("CUDNN_HEUR_MODES_COUNT", "MIOPEN_HEUR_MODES_COUNT", "numeric_literal");
+    subst("CUDNN_HEUR_MODE_A", "MIOPEN_HEUR_MODE_A", "numeric_literal");
+    subst("CUDNN_HEUR_MODE_B", "MIOPEN_HEUR_MODE_B", "numeric_literal");
+    subst("CUDNN_HEUR_MODE_FALLBACK", "MIOPEN_HEUR_MODE_FALLBACK", "numeric_literal");
+    subst("CUDNN_HEUR_MODE_INSTANT", "MIOPEN_HEUR_MODE_INSTANT", "numeric_literal");
     subst("CUDNN_LINEAR_INPUT", "miopenRNNlinear", "numeric_literal");
     subst("CUDNN_LRN_CROSS_CHANNEL_DIM1", "miopenLRNCrossChannel", "numeric_literal");
     subst("CUDNN_LSTM", "miopenLSTM", "numeric_literal");
@@ -3156,6 +3169,9 @@ sub rocSubstitutions {
     subst("CUDNN_REDUCE_TENSOR_NORM1", "MIOPEN_REDUCE_TENSOR_NORM1", "numeric_literal");
     subst("CUDNN_REDUCE_TENSOR_NORM2", "MIOPEN_REDUCE_TENSOR_NORM2", "numeric_literal");
     subst("CUDNN_REDUCE_TENSOR_NO_INDICES", "MIOPEN_REDUCE_TENSOR_NO_INDICES", "numeric_literal");
+    subst("CUDNN_RNG_DISTRIBUTION_BERNOULLI", "MIOPEN_RNG_DISTRIBUTION_BERNOULLI", "numeric_literal");
+    subst("CUDNN_RNG_DISTRIBUTION_NORMAL", "MIOPEN_RNG_DISTRIBUTION_NORMAL", "numeric_literal");
+    subst("CUDNN_RNG_DISTRIBUTION_UNIFORM", "MIOPEN_RNG_DISTRIBUTION_UNIFORM", "numeric_literal");
     subst("CUDNN_RNN_ALGO_STANDARD", "miopenRNNdefault", "numeric_literal");
     subst("CUDNN_RNN_DOUBLE_BIAS", "miopenRNNwithBias", "numeric_literal");
     subst("CUDNN_RNN_NO_BIAS", "miopenRNNNoBias", "numeric_literal");

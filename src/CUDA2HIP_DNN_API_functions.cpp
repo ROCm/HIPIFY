@@ -339,13 +339,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_FUNCTION_MAP {
   {"cudnnFusedOpsExecute",                                     {"hipdnnFusedOpsExecute",                                     "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
 
   // cuDNN Backend
-  {"cudnnBackendCreateDescriptor",                             {"hipdnnBackendCreateDescriptor",                             "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
-  {"cudnnBackendDestroyDescriptor",                            {"hipdnnBackendDestroyDescriptor",                            "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
-  {"cudnnBackendInitialize",                                   {"hipdnnBackendInitialize",                                   "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
-  {"cudnnBackendFinalize",                                     {"hipdnnBackendFinalize",                                     "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
-  {"cudnnBackendSetAttribute",                                 {"hipdnnBackendSetAttribute",                                 "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
-  {"cudnnBackendGetAttribute",                                 {"hipdnnBackendGetAttribute",                                 "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
-  {"cudnnBackendExecute",                                      {"hipdnnBackendExecute",                                      "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
+  {"cudnnBackendCreateDescriptor",                             {"hipdnnBackendCreateDescriptor",                             "miopenBackendCreateDescriptor",                                      CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
+  {"cudnnBackendDestroyDescriptor",                            {"hipdnnBackendDestroyDescriptor",                            "miopenBackendDestroyDescriptor",                                     CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
+  // NOTE: cudnnBackendInitialize and miopenBackendInitialize have different signatures
+  {"cudnnBackendInitialize",                                   {"hipdnnBackendInitialize",                                   "miopenBackendInitialize",                                            CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
+  {"cudnnBackendFinalize",                                     {"hipdnnBackendFinalize",                                     "miopenBackendFinalize",                                              CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
+  {"cudnnBackendSetAttribute",                                 {"hipdnnBackendSetAttribute",                                 "miopenBackendSetAttribute",                                          CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
+  {"cudnnBackendGetAttribute",                                 {"hipdnnBackendGetAttribute",                                 "miopenBackendGetAttribute",                                          CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
+  {"cudnnBackendExecute",                                      {"hipdnnBackendExecute",                                      "miopenBackendExecute",                                               CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_FUNCTION_VER_MAP {
