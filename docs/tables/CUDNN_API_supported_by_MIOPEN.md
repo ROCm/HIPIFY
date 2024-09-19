@@ -368,11 +368,11 @@
 |`CUDNN_GENSTATS_SUM_SQSUM`|8.0.1| | | | | | | | | |
 |`CUDNN_GROUP_NORM`|8.5.0| | | | | | | | | |
 |`CUDNN_GRU`|5.0.0| | | |`miopenGRU`| | | | | |
-|`CUDNN_HEUR_MODES_COUNT`|8.0.1| | | | | | | | | |
-|`CUDNN_HEUR_MODE_A`|8.3.0| | | | | | | | | |
-|`CUDNN_HEUR_MODE_B`|8.0.1| | | | | | | | | |
-|`CUDNN_HEUR_MODE_FALLBACK`|8.3.0| | | | | | | | | |
-|`CUDNN_HEUR_MODE_INSTANT`|8.0.1| | | | | | | | | |
+|`CUDNN_HEUR_MODES_COUNT`|8.0.1| | | |`MIOPEN_HEUR_MODES_COUNT`| | | | | |
+|`CUDNN_HEUR_MODE_A`|8.3.0| | | |`MIOPEN_HEUR_MODE_A`| | | | | |
+|`CUDNN_HEUR_MODE_B`|8.0.1| | | |`MIOPEN_HEUR_MODE_B`| | | | | |
+|`CUDNN_HEUR_MODE_FALLBACK`|8.3.0| | | |`MIOPEN_HEUR_MODE_FALLBACK`| | | | | |
+|`CUDNN_HEUR_MODE_INSTANT`|8.0.1| | | |`MIOPEN_HEUR_MODE_INSTANT`| | | | | |
 |`CUDNN_INSTANCE_NORM`|8.5.0| | | | | | | | | |
 |`CUDNN_KNOB_TYPE_ARRAY_SIZE_PER_THREAD`|8.9.0| | | | | | | | | |
 |`CUDNN_KNOB_TYPE_BLOCK_SIZE`|8.8.0| | | | | | | | | |
@@ -605,9 +605,9 @@
 |`CUDNN_RESAMPLE_MAXPOOL`|8.3.0| | | | | | | | | |
 |`CUDNN_RESAMPLE_NEAREST`|8.3.0| | | | | | | | | |
 |`CUDNN_RMS_NORM`|8.9.6| | | | | | | | | |
-|`CUDNN_RNG_DISTRIBUTION_BERNOULLI`|8.7.0| | | | | | | | | |
-|`CUDNN_RNG_DISTRIBUTION_NORMAL`|8.7.0| | | | | | | | | |
-|`CUDNN_RNG_DISTRIBUTION_UNIFORM`|8.7.0| | | | | | | | | |
+|`CUDNN_RNG_DISTRIBUTION_BERNOULLI`|8.7.0| | | |`MIOPEN_RNG_DISTRIBUTION_BERNOULLI`| | | | | |
+|`CUDNN_RNG_DISTRIBUTION_NORMAL`|8.7.0| | | |`MIOPEN_RNG_DISTRIBUTION_NORMAL`| | | | | |
+|`CUDNN_RNG_DISTRIBUTION_UNIFORM`|8.7.0| | | |`MIOPEN_RNG_DISTRIBUTION_UNIFORM`| | | | | |
 |`CUDNN_RNN_ALGO_COUNT`|7.1.3| | | | | | | | | |
 |`CUDNN_RNN_ALGO_PERSIST_DYNAMIC`|6.0.0| | | | | | | | | |
 |`CUDNN_RNN_ALGO_PERSIST_STATIC`|6.0.0| | | | | | | | | |
@@ -765,7 +765,7 @@
 |`cudnnBackendBehaviorNote_t`|8.2.0| | | | | | | | | |
 |`cudnnBackendDescriptorType_t`|8.0.1| | | |`miopenBackendDescriptorType_t`| | | | | |
 |`cudnnBackendDescriptor_t`|8.0.1| | | |`miopenBackendDescriptor_t`| | | | | |
-|`cudnnBackendHeurMode_t`|8.0.1| | | | | | | | | |
+|`cudnnBackendHeurMode_t`|8.0.1| | | |`miopenBackendHeurMode_t`| | | | | |
 |`cudnnBackendKnobType_t`|8.0.1| | | | | | | | | |
 |`cudnnBackendLayoutType_t`|8.0.1| | | | | | | | | |
 |`cudnnBackendNormFwdPhase_t`|8.5.0| | | | | | | | | |
@@ -861,7 +861,7 @@
 |`cudnnReduceTensorStruct`|6.0.0|9.0.0| | | | | | | | |
 |`cudnnReorderType_t`|7.6.0|9.0.0| | | | | | | | |
 |`cudnnResampleMode_t`|8.3.0| | | | | | | | | |
-|`cudnnRngDistribution_t`|8.7.0| | | | | | | | | |
+|`cudnnRngDistribution_t`|8.7.0| | | |`miopenRngDistribution_t`| | | | | |
 |`cudnnRuntimeTag_t`|7.0.5|9.0.0| | | | | | | | |
 |`cudnnSamplerType_t`|5.0.0| | | | | | | | | |
 |`cudnnSeqDataAxis_t`|7.5.0| | | | | | | | | |
@@ -893,13 +893,13 @@
 |`cudnnAdvInferVersionCheck`|8.0.1| | |9.0.0| | | | | | |
 |`cudnnAdvTrainVersionCheck`|8.0.1| | |9.0.0| | | | | | |
 |`cudnnAdvVersionCheck`|9.0.0| | | | | | | | | |
-|`cudnnBackendCreateDescriptor`|8.0.1| | | | | | | | | |
-|`cudnnBackendDestroyDescriptor`|8.0.1| | | | | | | | | |
-|`cudnnBackendExecute`|8.0.1| | | | | | | | | |
-|`cudnnBackendFinalize`|8.0.1| | | | | | | | | |
-|`cudnnBackendGetAttribute`|8.0.1| | | | | | | | | |
+|`cudnnBackendCreateDescriptor`|8.0.1| | | |`miopenBackendCreateDescriptor`| | | | | |
+|`cudnnBackendDestroyDescriptor`|8.0.1| | | |`miopenBackendDestroyDescriptor`| | | | | |
+|`cudnnBackendExecute`|8.0.1| | | |`miopenBackendExecute`| | | | | |
+|`cudnnBackendFinalize`|8.0.1| | | |`miopenBackendFinalize`| | | | | |
+|`cudnnBackendGetAttribute`|8.0.1| | | |`miopenBackendGetAttribute`| | | | | |
 |`cudnnBackendInitialize`|8.0.1|9.3.0| | | | | | | | |
-|`cudnnBackendSetAttribute`|8.0.1| | | | | | | | | |
+|`cudnnBackendSetAttribute`|8.0.1| | | |`miopenBackendSetAttribute`| | | | | |
 |`cudnnBatchNormalizationBackward`|4.0.0|9.0.0| | |`miopenBatchNormalizationBackward`| | | | | |
 |`cudnnBatchNormalizationBackwardEx`|7.4.1|9.0.0| | | | | | | | |
 |`cudnnBatchNormalizationForwardInference`|4.0.0|9.0.0| | |`miopenBatchNormalizationForwardInference`| | | | | |
