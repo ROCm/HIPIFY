@@ -153,8 +153,10 @@ int main() {
   int64_t n_64 = 0;
   int nrhs = 0;
   int m = 0;
+  int64_t m_64 = 0;
   int num = 0;
   int lda = 0;
+  int64_t lda_64 = 0;
   int ldb = 0;
   int ldc = 0;
   int res = 0;
@@ -165,7 +167,9 @@ int main() {
   int64_t incy_64 = 0;
   int k = 0;
   int kl = 0;
+  int64_t kl_64 = 0;
   int ku = 0;
+  int64_t ku_64 = 0;
   int batchCount = 0;
   void *image = nullptr;
   void *image_2 = nullptr;
@@ -240,6 +244,7 @@ int main() {
 
   float fa = 0;
   float fA = 0;
+  float fAP = 0.0f;
   float fb = 0;
   float fB = 0;
   float fx = 0;
@@ -2302,6 +2307,34 @@ int main() {
   // ROC: ROCBLAS_EXPORT rocblas_status rocblas_scal_ex_64(rocblas_handle handle, int64_t n, const void* alpha, rocblas_datatype alpha_type, void* x, rocblas_datatype x_type, int64_t incx, rocblas_datatype execution_type);
   // CHECK: blasStatus = rocblas_scal_ex_64(blasHandle, n_64, valpha, alpha_type, vx, x_type, incx_64, execution_type);
   blasStatus = cublasScalEx_64(blasHandle, n_64, valpha, alpha_type, vx, x_type, incx_64, execution_type);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasSgbmv_v2_64(cublasHandle_t handle, cublasOperation_t trans, int64_t m, int64_t n, int64_t kl, int64_t ku, const float* alpha, const float* A, int64_t lda, const float* x, int64_t incx, const float* beta, float* y, int64_t incy);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_sgbmv_64(rocblas_handle handle, rocblas_operation trans, int64_t m, int64_t n, int64_t kl, int64_t ku, const float* alpha, const float* A, int64_t lda, const float* x, int64_t incx, const float* beta, float* y, int64_t incy);
+  // CHECK: blasStatus = rocblas_sgbmv_64(blasHandle, blasOperation, m_64, n_64, kl_64, ku_64, &fa, &fAP, lda_64, &fx, incx_64, &fb, &fy, incy_64);
+  // CHECK-NEXT: blasStatus = rocblas_sgbmv_64(blasHandle, blasOperation, m_64, n_64, kl_64, ku_64, &fa, &fAP, lda_64, &fx, incx_64, &fb, &fy, incy_64);
+  blasStatus = cublasSgbmv_64(blasHandle, blasOperation, m_64, n_64, kl_64, ku_64, &fa, &fAP, lda_64, &fx, incx_64, &fb, &fy, incy_64);
+  blasStatus = cublasSgbmv_v2_64(blasHandle, blasOperation, m_64, n_64, kl_64, ku_64, &fa, &fAP, lda_64, &fx, incx_64, &fb, &fy, incy_64);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasDgbmv_v2_64(cublasHandle_t handle, cublasOperation_t trans, int64_t m, int64_t n, int64_t kl, int64_t ku, const double* alpha, const double* A, int64_t lda, const double* x, int64_t incx, const double* beta, double* y, int64_t incy);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_dgbmv_64(rocblas_handle handle, rocblas_operation trans, int64_t m, int64_t n, int64_t kl, int64_t ku, const double* alpha, const double* A, int64_t lda, const double* x, int64_t incx, const double* beta, double* y, int64_t incy);
+  // CHECK: blasStatus = rocblas_dgbmv_64(blasHandle, blasOperation, m_64, n_64, kl_64, ku_64, &da, &dA, lda_64, &dx, incx_64, &db, &dy, incy_64);
+  // CHECK-NEXT: blasStatus = rocblas_dgbmv_64(blasHandle, blasOperation, m_64, n_64, kl_64, ku_64, &da, &dA, lda_64, &dx, incx_64, &db, &dy, incy_64);
+  blasStatus = cublasDgbmv_64(blasHandle, blasOperation, m_64, n_64, kl_64, ku_64, &da, &dA, lda_64, &dx, incx_64, &db, &dy, incy_64);
+  blasStatus = cublasDgbmv_v2_64(blasHandle, blasOperation, m_64, n_64, kl_64, ku_64, &da, &dA, lda_64, &dx, incx_64, &db, &dy, incy_64);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasCgbmv_v2_64(cublasHandle_t handle, cublasOperation_t trans, int64_t m, int64_t n, int64_t kl, int64_t ku, const cuComplex* alpha, const cuComplex* A, int64_t lda, const cuComplex* x, int64_t incx, const cuComplex* beta, cuComplex* y, int64_t incy);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_cgbmv_64(rocblas_handle handle, rocblas_operation trans, int64_t m, int64_t n, int64_t kl, int64_t ku, const rocblas_float_complex* alpha, const rocblas_float_complex* A, int64_t lda, const rocblas_float_complex* x, int64_t incx, const rocblas_float_complex* beta, rocblas_float_complex* y, int64_t incy);
+  // CHECK: blasStatus = rocblas_cgbmv_64(blasHandle, blasOperation, m_64, n_64, kl_64, ku_64, &complexa, &complexA, lda_64, &complexx, incx_64, &complexb, &complexy, incy_64);
+  // CHECK-NEXT: blasStatus = rocblas_cgbmv_64(blasHandle, blasOperation, m_64, n_64, kl_64, ku_64, &complexa, &complexA, lda_64, &complexx, incx_64, &complexb, &complexy, incy_64);
+  blasStatus = cublasCgbmv_64(blasHandle, blasOperation, m_64, n_64, kl_64, ku_64, &complexa, &complexA, lda_64, &complexx, incx_64, &complexb, &complexy, incy_64);
+  blasStatus = cublasCgbmv_v2_64(blasHandle, blasOperation, m_64, n_64, kl_64, ku_64, &complexa, &complexA, lda_64, &complexx, incx_64, &complexb, &complexy, incy_64);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasZgbmv_v2_64(cublasHandle_t handle, cublasOperation_t trans, int64_t m, int64_t n, int64_t kl, int64_t ku, const cuDoubleComplex* alpha, const cuDoubleComplex* A, int64_t lda, const cuDoubleComplex* x, int64_t incx, const cuDoubleComplex* beta, cuDoubleComplex* y, int64_t incy);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_zgbmv_64(rocblas_handle handle, rocblas_operation trans, int64_t m, int64_t n, int64_t kl, int64_t ku, const rocblas_double_complex* alpha, const rocblas_double_complex* A, int64_t lda, const rocblas_double_complex* x, int64_t incx, const rocblas_double_complex* beta, rocblas_double_complex* y, int64_t incy);
+  // CHECK: blasStatus = rocblas_zgbmv_64(blasHandle, blasOperation, m_64, n_64, kl_64, ku_64, &dcomplexa, &dcomplexA, lda_64, &dcomplexx, incx_64, &dcomplexb, &dcomplexy, incy_64);
+  // CHECK-NEXT: blasStatus = rocblas_zgbmv_64(blasHandle, blasOperation, m_64, n_64, kl_64, ku_64, &dcomplexa, &dcomplexA, lda_64, &dcomplexx, incx_64, &dcomplexb, &dcomplexy, incy_64);
+  blasStatus = cublasZgbmv_64(blasHandle, blasOperation, m_64, n_64, kl_64, ku_64, &dcomplexa, &dcomplexA, lda_64, &dcomplexx, incx_64, &dcomplexb, &dcomplexy, incy_64);
+  blasStatus = cublasZgbmv_v2_64(blasHandle, blasOperation, m_64, n_64, kl_64, ku_64, &dcomplexa, &dcomplexA, lda_64, &dcomplexx, incx_64, &dcomplexb, &dcomplexy, incy_64);
 #endif
 
   return 0;
