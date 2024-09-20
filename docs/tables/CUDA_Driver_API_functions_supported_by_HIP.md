@@ -4,6 +4,8 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
+|`CIG_DATA_TYPE_D3D12_COMMAND_QUEUE`|12.5| | | | | | | | | |
+|`CUCoredumpGenerationFlags`|12.5| | | | | | | | | |
 |`CUDA_ARRAY3D_2DARRAY`| |5.0| | | | | | | | |
 |`CUDA_ARRAY3D_COLOR_ATTACHMENT`|10.0| | | | | | | | | |
 |`CUDA_ARRAY3D_CUBEMAP`| | | | |`hipArrayCubemap`|1.7.0| | | | |
@@ -16,6 +18,7 @@
 |`CUDA_ARRAY3D_SPARSE`|11.1| | | | | | | | | |
 |`CUDA_ARRAY3D_SURFACE_LDST`| | | | |`hipArraySurfaceLoadStore`|1.7.0| | | | |
 |`CUDA_ARRAY3D_TEXTURE_GATHER`| | | | |`hipArrayTextureGather`|1.7.0| | | | |
+|`CUDA_ARRAY3D_VIDEO_ENCODE_DECODE`|12.5| | | | | | | | | |
 |`CUDA_ARRAY_DESCRIPTOR`| | | | |`HIP_ARRAY_DESCRIPTOR`|1.7.0| | | | |
 |`CUDA_ARRAY_DESCRIPTOR_st`| | | | |`HIP_ARRAY_DESCRIPTOR`|1.7.0| | | | |
 |`CUDA_ARRAY_DESCRIPTOR_v1`| | | | |`HIP_ARRAY_DESCRIPTOR`|1.7.0| | | | |
@@ -250,6 +253,7 @@
 |`CU_ACCESS_PROPERTY_NORMAL`|11.0| | | |`hipAccessPropertyNormal`|5.2.0| | | | |
 |`CU_ACCESS_PROPERTY_PERSISTING`|11.0| | | |`hipAccessPropertyPersisting`|5.2.0| | | | |
 |`CU_ACCESS_PROPERTY_STREAMING`|11.0| | | |`hipAccessPropertyStreaming`|5.2.0| | | | |
+|`CU_AD_FORMAT_AYUV`|12.5| | | | | | | | | |
 |`CU_AD_FORMAT_BC1_UNORM`|11.5| | | | | | | | | |
 |`CU_AD_FORMAT_BC1_UNORM_SRGB`|11.5| | | | | | | | | |
 |`CU_AD_FORMAT_BC2_UNORM`|11.5| | | | | | | | | |
@@ -266,7 +270,13 @@
 |`CU_AD_FORMAT_BC7_UNORM_SRGB`|11.5| | | | | | | | | |
 |`CU_AD_FORMAT_FLOAT`| | | | |`HIP_AD_FORMAT_FLOAT`|1.7.0| | | | |
 |`CU_AD_FORMAT_HALF`| | | | |`HIP_AD_FORMAT_HALF`|1.7.0| | | | |
+|`CU_AD_FORMAT_MAX`|12.5| | | | | | | | | |
 |`CU_AD_FORMAT_NV12`|11.2| | | | | | | | | |
+|`CU_AD_FORMAT_NV16`|12.5| | | | | | | | | |
+|`CU_AD_FORMAT_P010`|12.5| | | | | | | | | |
+|`CU_AD_FORMAT_P016`|12.5| | | | | | | | | |
+|`CU_AD_FORMAT_P210`|12.5| | | | | | | | | |
+|`CU_AD_FORMAT_P216`|12.5| | | | | | | | | |
 |`CU_AD_FORMAT_SIGNED_INT16`| | | | |`HIP_AD_FORMAT_SIGNED_INT16`|1.7.0| | | | |
 |`CU_AD_FORMAT_SIGNED_INT32`| | | | |`HIP_AD_FORMAT_SIGNED_INT32`|1.7.0| | | | |
 |`CU_AD_FORMAT_SIGNED_INT8`| | | | |`HIP_AD_FORMAT_SIGNED_INT8`|1.7.0| | | | |
@@ -285,6 +295,13 @@
 |`CU_AD_FORMAT_UNSIGNED_INT16`| | | | |`HIP_AD_FORMAT_UNSIGNED_INT16`|1.7.0| | | | |
 |`CU_AD_FORMAT_UNSIGNED_INT32`| | | | |`HIP_AD_FORMAT_UNSIGNED_INT32`|1.7.0| | | | |
 |`CU_AD_FORMAT_UNSIGNED_INT8`| | | | |`HIP_AD_FORMAT_UNSIGNED_INT8`|1.7.0| | | | |
+|`CU_AD_FORMAT_Y210`|12.5| | | | | | | | | |
+|`CU_AD_FORMAT_Y216`|12.5| | | | | | | | | |
+|`CU_AD_FORMAT_Y410`|12.5| | | | | | | | | |
+|`CU_AD_FORMAT_Y416`|12.5| | | | | | | | | |
+|`CU_AD_FORMAT_Y444_PLANAR10`|12.5| | | | | | | | | |
+|`CU_AD_FORMAT_Y444_PLANAR8`|12.5| | | | | | | | | |
+|`CU_AD_FORMAT_YUY2`|12.5| | | | | | | | | |
 |`CU_ARRAY_SPARSE_PROPERTIES_SINGLE_MIPTAIL`|11.1| | | | | | | | | |
 |`CU_ARRAY_SPARSE_SUBRESOURCE_TYPE_MIPTAIL`|11.1| | | |`hipArraySparseSubresourceTypeMiptail`|5.2.0| | | | |
 |`CU_ARRAY_SPARSE_SUBRESOURCE_TYPE_SPARSE_LEVEL`|11.1| | | |`hipArraySparseSubresourceTypeSparseLevel`|5.2.0| | | | |
@@ -297,12 +314,20 @@
 |`CU_COMPUTEMODE_EXCLUSIVE_PROCESS`| | | | |`hipComputeModeExclusiveProcess`|2.0.0| | | | |
 |`CU_COMPUTEMODE_PROHIBITED`| | | | |`hipComputeModeProhibited`|1.9.0| | | | |
 |`CU_COMPUTE_ACCELERATED_TARGET_BASE`|12.0| | | | | | | | | |
+|`CU_COREDUMP_DEFAULT_FLAGS`|12.5| | | | | | | | | |
 |`CU_COREDUMP_ENABLE_ON_EXCEPTION`|12.1| | | | | | | | | |
 |`CU_COREDUMP_ENABLE_USER_TRIGGER`|12.1| | | | | | | | | |
 |`CU_COREDUMP_FILE`|12.1| | | | | | | | | |
+|`CU_COREDUMP_GENERATION_FLAGS`|12.5| | | | | | | | | |
 |`CU_COREDUMP_LIGHTWEIGHT`|12.1| | | | | | | | | |
+|`CU_COREDUMP_LIGHTWEIGHT_FLAGS`|12.5| | | | | | | | | |
 |`CU_COREDUMP_MAX`|12.1| | | | | | | | | |
 |`CU_COREDUMP_PIPE`|12.1| | | | | | | | | |
+|`CU_COREDUMP_SKIP_ABORT`|12.5| | | | | | | | | |
+|`CU_COREDUMP_SKIP_GLOBAL_MEMORY`|12.5| | | | | | | | | |
+|`CU_COREDUMP_SKIP_LOCAL_MEMORY`|12.5| | | | | | | | | |
+|`CU_COREDUMP_SKIP_NONRELOCATED_ELF_IMAGES`|12.5| | | | | | | | | |
+|`CU_COREDUMP_SKIP_SHARED_MEMORY`|12.5| | | | | | | | | |
 |`CU_COREDUMP_TRIGGER_HOST`|12.1| | | | | | | | | |
 |`CU_CTX_BLOCKING_SYNC`| |4.0| | |`hipDeviceScheduleBlockingSync`|1.6.0| | | | |
 |`CU_CTX_COREDUMP_ENABLE`|12.1| | | | | | | | | |
@@ -364,6 +389,7 @@
 |`CU_DEVICE_ATTRIBUTE_CONCURRENT_MANAGED_ACCESS`|8.0| | | |`hipDeviceAttributeConcurrentManagedAccess`|3.10.0| | | | |
 |`CU_DEVICE_ATTRIBUTE_COOPERATIVE_LAUNCH`|9.0| | | |`hipDeviceAttributeCooperativeLaunch`|2.6.0| | | | |
 |`CU_DEVICE_ATTRIBUTE_COOPERATIVE_MULTI_DEVICE_LAUNCH`|9.0| | | |`hipDeviceAttributeCooperativeMultiDeviceLaunch`|2.6.0| | | | |
+|`CU_DEVICE_ATTRIBUTE_D3D12_CIG_SUPPORTED`|12.5| | | | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_DEFERRED_MAPPING_CUDA_ARRAY_SUPPORTED`|11.6| | | | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_DIRECT_MANAGED_MEM_ACCESS_FROM_HOST`|9.2| | | |`hipDeviceAttributeDirectManagedMemAccessFromHost`|3.10.0| | | | |
 |`CU_DEVICE_ATTRIBUTE_DMA_BUF_SUPPORTED`|11.7| | | | | | | | | |
@@ -498,6 +524,8 @@
 |`CU_DEV_RESOURCE_TYPE_INVALID`|12.4| | | | | | | | | |
 |`CU_DEV_RESOURCE_TYPE_MAX`|12.4| | | | | | | | | |
 |`CU_DEV_RESOURCE_TYPE_SM`|12.4| | | | | | | | | |
+|`CU_DEV_SM_RESOURCE_SPLIT_IGNORE_SM_COSCHEDULING`|12.5| | | | | | | | | |
+|`CU_DEV_SM_RESOURCE_SPLIT_MAX_POTENTIAL_CLUSTER_SIZE`|12.5| | | | | | | | | |
 |`CU_EGL_COLOR_FORMAT_A`|9.1| | | | | | | | | |
 |`CU_EGL_COLOR_FORMAT_ABGR`|9.1| | | | | | | | | |
 |`CU_EGL_COLOR_FORMAT_ARGB`|9.0| | | | | | | | | |
@@ -767,6 +795,7 @@
 |`CU_KERNEL_NODE_ATTRIBUTE_DEVICE_UPDATABLE_KERNEL_NODE`|12.4| | | | | | | | | |
 |`CU_KERNEL_NODE_ATTRIBUTE_MEM_SYNC_DOMAIN`|12.0| | | | | | | | | |
 |`CU_KERNEL_NODE_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP`|12.0| | | | | | | | | |
+|`CU_KERNEL_NODE_ATTRIBUTE_PREFERRED_SHARED_MEMORY_CARVEOUT`|12.5| | | | | | | | | |
 |`CU_KERNEL_NODE_ATTRIBUTE_PRIORITY`|11.7| | | |`hipKernelNodeAttributePriority`|6.2.0| | | |6.2.0|
 |`CU_LAUNCH_ATTRIBUTE_ACCESS_POLICY_WINDOW`|11.8| | | |`hipLaunchAttributeAccessPolicyWindow`|6.2.0| | | |6.2.0|
 |`CU_LAUNCH_ATTRIBUTE_CLUSTER_DIMENSION`|11.8| | | | | | | | | |
@@ -778,6 +807,7 @@
 |`CU_LAUNCH_ATTRIBUTE_MAX`|12.1| | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN`|12.0| | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP`|12.0| | | | | | | | | |
+|`CU_LAUNCH_ATTRIBUTE_PREFERRED_SHARED_MEMORY_CARVEOUT`|12.5| | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_PRIORITY`|11.8| | | |`hipLaunchAttributePriority`|6.2.0| | | |6.2.0|
 |`CU_LAUNCH_ATTRIBUTE_PROGRAMMATIC_EVENT`|11.8| | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_PROGRAMMATIC_STREAM_SERIALIZATION`|11.8| | | | | | | | | |
@@ -793,6 +823,8 @@
 |`CU_LIBRARY_BINARY_IS_PRESERVED`|12.0| | | | | | | | | |
 |`CU_LIBRARY_HOST_UNIVERSAL_FUNCTION_AND_DATA_TABLE`|12.0| | | | | | | | | |
 |`CU_LIBRARY_NUM_OPTIONS`|12.0| | | | | | | | | |
+|`CU_LIMIT_CIG_ENABLED`|12.5| | | | | | | | | |
+|`CU_LIMIT_CIG_SHMEM_FALLBACK_ENABLED`|12.5| | | | | | | | | |
 |`CU_LIMIT_DEV_RUNTIME_PENDING_LAUNCH_COUNT`| | | | | | | | | | |
 |`CU_LIMIT_DEV_RUNTIME_SYNC_DEPTH`| | | | | | | | | | |
 |`CU_LIMIT_MALLOC_HEAP_SIZE`| | | | |`hipLimitMallocHeapSize`|1.6.0| | | | |
@@ -800,6 +832,7 @@
 |`CU_LIMIT_MAX_L2_FETCH_GRANULARITY`|10.0| | | | | | | | | |
 |`CU_LIMIT_PERSISTING_L2_CACHE_SIZE`|11.0| | | | | | | | | |
 |`CU_LIMIT_PRINTF_FIFO_SIZE`| | | | |`hipLimitPrintfFifoSize`|4.5.0| | | | |
+|`CU_LIMIT_SHMEM_SIZE`|12.5| | | | | | | | | |
 |`CU_LIMIT_STACK_SIZE`| | | | |`hipLimitStackSize`|5.3.0| | | | |
 |`CU_MEMHOSTALLOC_DEVICEMAP`| | | | |`hipHostMallocMapped`|1.6.0| | | | |
 |`CU_MEMHOSTALLOC_PORTABLE`| | | | |`hipHostMallocPortable`|1.6.0| | | | |
@@ -1067,6 +1100,8 @@
 |`CUasyncNotificationInfo_st`|12.4| | | | | | | | | |
 |`CUasyncNotificationType`|12.4| | | | | | | | | |
 |`CUasyncNotificationType_enum`|12.4| | | | | | | | | |
+|`CUcigDataType`|12.5| | | | | | | | | |
+|`CUcigDataType_enum`|12.5| | | | | | | | | |
 |`CUclusterSchedulingPolicy`|11.8| | | | | | | | | |
 |`CUclusterSchedulingPolicy_enum`|11.8| | | | | | | | | |
 |`CUcomputemode`| | | | |`hipComputeMode`|1.9.0| | | | |
@@ -1074,6 +1109,10 @@
 |`CUcontext`| | | | |`hipCtx_t`|1.6.0| | | | |
 |`CUcoredumpSettings`|12.1| | | | | | | | | |
 |`CUcoredumpSettings_enum`|12.1| | | | | | | | | |
+|`CUctxCigParam`|12.5| | | | | | | | | |
+|`CUctxCigParam_st`|12.5| | | | | | | | | |
+|`CUctxCreateParams`|12.5| | | | | | | | | |
+|`CUctxCreateParams_st`|12.5| | | | | | | | | |
 |`CUctx_flags`| | | | | | | | | | |
 |`CUctx_flags_enum`| | | | | | | | | | |
 |`CUctx_st`| | | | |`ihipCtx_t`|1.6.0| | | | |
@@ -1097,6 +1136,7 @@
 |`CUdevResourceType`|12.4| | | | | | | | | |
 |`CUdevResource_st`|12.4| | | | | | | | | |
 |`CUdevSmResource`|12.4| | | | | | | | | |
+|`CUdevSmResourceSplit_flags`|12.5| | | | | | | | | |
 |`CUdevSmResource_st`|12.4| | | | | | | | | |
 |`CUdevice`| | | | |`hipDevice_t`|1.6.0| | | | |
 |`CUdeviceNumaConfig`|12.2| | | | | | | | | |
@@ -1471,6 +1511,7 @@
 |`cuCtxCreate`| | | | |`hipCtxCreate`|1.6.0|1.9.0| | | |
 |`cuCtxCreate_v2`| | | | |`hipCtxCreate`|1.6.0|1.9.0| | | |
 |`cuCtxCreate_v3`|11.4| | | | | | | | | |
+|`cuCtxCreate_v4`|12.5| | | | | | | | | |
 |`cuCtxDestroy`| | | | |`hipCtxDestroy`|1.6.0|1.9.0| | | |
 |`cuCtxDestroy_v2`| | | | |`hipCtxDestroy`|1.6.0|1.9.0| | | |
 |`cuCtxGetApiVersion`| | | | |`hipCtxGetApiVersion`|1.9.0|1.9.0| | | |
@@ -1494,6 +1535,7 @@
 |`cuCtxSetLimit`| | | | |`hipDeviceSetLimit`|5.3.0| | | | |
 |`cuCtxSetSharedMemConfig`| | | |12.4|`hipCtxSetSharedMemConfig`|1.9.0|1.9.0| | | |
 |`cuCtxSynchronize`| | | | |`hipCtxSynchronize`|1.9.0|1.9.0| | | |
+|`cuCtxWaitEvent`|12.5| | | | | | | | | |
 
 ## **9. Context Management [DEPRECATED]**
 
@@ -1539,6 +1581,7 @@
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
 |`cuKernelGetAttribute`|12.0| | | | | | | | | |
 |`cuKernelGetFunction`|12.0| | | | | | | | | |
+|`cuKernelGetLibrary`|12.5| | | | | | | | | |
 |`cuKernelGetName`|12.3| | | | | | | | | |
 |`cuKernelGetParamInfo`|12.4| | | | | | | | | |
 |`cuKernelSetAttribute`|12.0| | | | | | | | | |
@@ -1750,6 +1793,7 @@
 |`cuStreamGetCaptureInfo_v2`|11.3| | | |`hipStreamGetCaptureInfo_v2`|5.0.0| | | | |
 |`cuStreamGetCaptureInfo_v3`|12.3| | | | | | | | | |
 |`cuStreamGetCtx`|9.2| | | | | | | | | |
+|`cuStreamGetCtx_v2`|12.5| | | | | | | | | |
 |`cuStreamGetFlags`| | | | |`hipStreamGetFlags`|1.6.0| | | | |
 |`cuStreamGetId`|12.0| | | | | | | | | |
 |`cuStreamGetPriority`| | | | |`hipStreamGetPriority`|2.0.0| | | | |
@@ -2063,6 +2107,7 @@
 |`cuGreenCtxDestroy`|12.4| | | | | | | | | |
 |`cuGreenCtxGetDevResource`|12.4| | | | | | | | | |
 |`cuGreenCtxRecordEvent`|12.4| | | | | | | | | |
+|`cuGreenCtxStreamCreate`|12.5| | | | | | | | | |
 |`cuGreenCtxWaitEvent`|12.4| | | | | | | | | |
 |`cuStreamGetGreenCtx`|12.4| | | | | | | | | |
 

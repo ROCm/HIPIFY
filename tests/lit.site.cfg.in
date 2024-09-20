@@ -9,6 +9,7 @@ config.llvm_version_major = int("@LLVM_VERSION_MAJOR@")
 config.llvm_tools_dir = "@LLVM_TOOLS_BINARY_DIR@"
 config.obj_root = "@CMAKE_CURRENT_BINARY_DIR@"
 config.cuda_root = "@CUDA_TOOLKIT_ROOT_DIR@"
+config.cuda_sdk_root = "@CUDA_SDK_ROOT_DIR@"
 config.cuda_dnn_root = "@CUDA_DNN_ROOT_DIR@"
 config.cuda_cub_root = "@CUDA_CUB_ROOT_DIR@"
 config.cuda_version_major = int("@CUDA_VERSION_MAJOR@")
@@ -17,12 +18,9 @@ config.cuda_version_full = "@CUDA_VERSION_FULL@"
 config.cuda_version = "@CUDA_VERSION@"
 config.clang_resource_dir = "@HIPIFY_CLANG_RES@"
 if sys.platform in ['win32']:
-    config.cuda_sdk_root = "@CUDA_SDK_ROOT_DIR@"
     config.build_type = "@CMAKE_BUILD_TYPE@"
     if not config.build_type:
         config.build_type = "Debug"
-else:
-    config.cuda_sdk_root = config.cuda_root
 
 config.cudnn_version_major = int("0")
 if config.cuda_dnn_root and config.cuda_dnn_root != "OFF":
