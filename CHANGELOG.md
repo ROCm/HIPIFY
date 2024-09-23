@@ -15,15 +15,15 @@ Documentation for HIPIFY is available at
 * Added hipification support for HIP functions `hipSetValidDevices`, `hipMemcpy2DArrayToArray`, `hipMemcpyAtoA`, `hipMemcpyAtoD`, `hipMemcpyAtoA`, `hipMemcpyAtoHAsync`, and `hipMemcpyHtoAAsync`
 * Fixed an issue with `Skipped some replacements` when hipification didn't occur at all
 
-## HIPIFY for ROCm 6.2.1
+## HIPIFY 18.0.0 for ROCm 6.2.1
 
-### Additions
+### Changes
 
-* CUDA 12.5.1 support
-* cuDNN 9.2.1 support
-* LLVM 18.1.8 support
-* `hipBLAS` 64-bit APIs support
-* Support for Math Constants `math_constants.h`
+* Added CUDA 12.5.1 support
+* Added cuDNN 9.2.1 support
+* Added LLVM 18.1.8 support
+* Added `hipBLAS` 64-bit APIs support
+* Added Support for math constants `math_constants.h`
 
 ## HIPIFY for ROCm 6.2.0
 
