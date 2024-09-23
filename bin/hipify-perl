@@ -2117,6 +2117,12 @@ sub rocSubstitutions {
     subst("curandCreateGeneratorHost", "rocrand_create_generator_host_blocking", "library");
     subst("curandDestroyGenerator", "rocrand_destroy_generator", "library");
     subst("curandGenerate", "rocrand_generate", "library");
+    subst("curandGenerateLogNormal", "rocrand_generate_log_normal", "library");
+    subst("curandGenerateLongLong", "rocrand_generate_long_long", "library");
+    subst("curandGenerateNormal", "rocrand_generate_normal", "library");
+    subst("curandGenerateNormalDouble", "rocrand_generate_normal_double", "library");
+    subst("curandGenerateUniform", "rocrand_generate_uniform", "library");
+    subst("curandGenerateUniformDouble", "rocrand_generate_uniform_double", "library");
     subst("cusolverDnCpotrf", "rocsolver_cpotrf", "library");
     subst("cusolverDnCreate", "rocblas_create_handle", "library");
     subst("cusolverDnDestroy", "rocblas_destroy_handle", "library");
@@ -4839,6 +4845,7 @@ sub simpleSubstitutions {
     subst("curandGenerate", "hiprandGenerate", "library");
     subst("curandGenerateLogNormal", "hiprandGenerateLogNormal", "library");
     subst("curandGenerateLogNormalDouble", "hiprandGenerateLogNormalDouble", "library");
+    subst("curandGenerateLongLong", "hiprandGenerateLongLong", "library");
     subst("curandGenerateNormal", "hiprandGenerateNormal", "library");
     subst("curandGenerateNormalDouble", "hiprandGenerateNormalDouble", "library");
     subst("curandGeneratePoisson", "hiprandGeneratePoisson", "library");
@@ -9313,7 +9320,6 @@ sub warnUnsupportedFunctions {
         "curandHistogramM2K_t",
         "curandHistogramM2K_st",
         "curandGetProperty",
-        "curandGenerateLongLong",
         "curandDistribution_t",
         "curandDistribution_st",
         "curandDistributionShift_t",

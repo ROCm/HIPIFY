@@ -110,15 +110,15 @@
 |`curandDestroyDistribution`| | | | | | | | | | |
 |`curandDestroyGenerator`| | | | |`rocrand_destroy_generator`|1.5.0| | | | |
 |`curandGenerate`| | | | |`rocrand_generate`|1.5.0| | | | |
-|`curandGenerateLogNormal`| | | | | | | | | | |
+|`curandGenerateLogNormal`| | | | |`rocrand_generate_log_normal`|1.5.0| | | | |
 |`curandGenerateLogNormalDouble`| | | | | | | | | | |
-|`curandGenerateLongLong`| | | | | | | | | | |
-|`curandGenerateNormal`| | | | | | | | | | |
-|`curandGenerateNormalDouble`| | | | | | | | | | |
+|`curandGenerateLongLong`| | | | |`rocrand_generate_long_long`|5.4.0| | | | |
+|`curandGenerateNormal`| | | | |`rocrand_generate_normal`|1.5.0| | | | |
+|`curandGenerateNormalDouble`| | | | |`rocrand_generate_normal_double`|1.5.0| | | | |
 |`curandGeneratePoisson`| | | | | | | | | | |
 |`curandGenerateSeeds`| | | | | | | | | | |
-|`curandGenerateUniform`| | | | | | | | | | |
-|`curandGenerateUniformDouble`| | | | | | | | | | |
+|`curandGenerateUniform`| | | | |`rocrand_generate_uniform`|1.5.0| | | | |
+|`curandGenerateUniformDouble`| | | | |`rocrand_generate_uniform_double`|1.5.0| | | | |
 |`curandGetDirectionVectors32`| | | | | | | | | | |
 |`curandGetDirectionVectors64`| | | | | | | | | | |
 |`curandGetProperty`|8.0| | | | | | | | | |
