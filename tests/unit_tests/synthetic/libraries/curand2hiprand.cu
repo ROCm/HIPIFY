@@ -19,7 +19,17 @@ int main() {
   printf("21. cuRAND API to hipRAND API synthetic test\n");
 
   unsigned int *outputPtr = nullptr;
+  float *outputPtrFloat = nullptr;
+  double *outputPtrDouble = nullptr;
   size_t num = 0;
+  float mean = 0.f;
+  float stddev = 0.f;
+
+#if defined(_WIN32)
+  unsigned long long *outputPtrUll = nullptr;
+#else
+  unsigned long *outputPtrUll = nullptr;
+#endif
 
   // CHECK: hiprandStatus randStatus;
   // CHECK-NEXT: hiprandStatus_t status;
@@ -163,6 +173,36 @@ int main() {
   // HIP: hiprandStatus_t HIPRANDAPI hiprandGenerate(hiprandGenerator_t generator, unsigned int * output_data, size_t n);
   // CHECK: status = hiprandGenerate(randGenerator, outputPtr, num);
   status = curandGenerate(randGenerator, outputPtr, num);
+
+  // CUDA: curandStatus_t CURANDAPI curandGenerateLogNormal(curandGenerator_t generator, float *outputPtr, size_t n, float mean, float stddev);
+  // HIP: hiprandStatus_t HIPRANDAPI hiprandGenerateLogNormal(hiprandGenerator_t generator, float * output_data, size_t n, float mean, float stddev);
+  // CHECK: status = hiprandGenerateLogNormal(randGenerator, outputPtrFloat, num, mean, stddev);
+  status = curandGenerateLogNormal(randGenerator, outputPtrFloat, num, mean, stddev);
+
+  // CUDA: curandStatus_t CURANDAPI curandGenerateLongLong(curandGenerator_t generator, unsigned long long *outputPtr, size_t num);
+  // HIP: hiprandStatus_t HIPRANDAPI hiprandGenerateLongLong(hiprandGenerator_t generator, unsigned long long* output_data, size_t n);
+  // CHECK: status = hiprandGenerateLongLong(randGenerator, outputPtrUll, num);
+  status = curandGenerateLongLong(randGenerator, outputPtrUll, num);
+
+  // CUDA: curandStatus_t CURANDAPI curandGenerateNormal(curandGenerator_t generator, float *outputPtr, size_t n, float mean, float stddev);
+  // HIP: hiprandStatus_t HIPRANDAPI hiprandGenerateNormal(hiprandGenerator_t generator, float * output_data, size_t n, float mean, float stddev);
+  // CHECK: status = hiprandGenerateNormal(randGenerator, outputPtrFloat, num, mean, stddev);
+  status = curandGenerateNormal(randGenerator, outputPtrFloat, num, mean, stddev);
+
+  // CUDA: curandStatus_t CURANDAPI curandGenerateNormalDouble(curandGenerator_t generator, double *outputPtr, size_t n, double mean, double stddev);
+  // HIP: hiprandStatus_t HIPRANDAPI hiprandGenerateNormalDouble(hiprandGenerator_t generator, double * output_data, size_t n, double mean, double stddev);
+  // CHECK: status = hiprandGenerateNormalDouble(randGenerator, outputPtrDouble, num, mean, stddev);
+  status = curandGenerateNormalDouble(randGenerator, outputPtrDouble, num, mean, stddev);
+
+  // CUDA: curandStatus_t CURANDAPI curandGenerateUniform(curandGenerator_t generator, float *outputPtr, size_t num);
+  // HIP: hiprandStatus_t HIPRANDAPI hiprandGenerateUniform(hiprandGenerator_t generator, float * output_data, size_t n);
+  // CHECK: status = hiprandGenerateUniform(randGenerator, outputPtrFloat, num);
+  status = curandGenerateUniform(randGenerator, outputPtrFloat, num);
+
+  // CUDA: curandStatus_t CURANDAPI curandGenerateUniformDouble(curandGenerator_t generator, double *outputPtr, size_t num);
+  // HIP: hiprandStatus_t HIPRANDAPI hiprandGenerateUniformDouble(hiprandGenerator_t generator, double * output_data, size_t n);
+  // CHECK: status = hiprandGenerateUniformDouble(randGenerator, outputPtrDouble, num);
+  status = curandGenerateUniformDouble(randGenerator, outputPtrDouble, num);
 
 #if CUDA_VERSION >= 11000 && CURAND_VERSION >= 10200
   // CHECK: hiprandOrdering_t RAND_ORDERING_PSEUDO_LEGACY = HIPRAND_ORDERING_PSEUDO_LEGACY;

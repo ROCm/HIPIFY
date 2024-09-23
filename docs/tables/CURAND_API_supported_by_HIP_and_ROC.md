@@ -110,15 +110,15 @@
 |`curandDestroyDistribution`| | | | |`hiprandDestroyDistribution`|1.5.0| | | | | | | | | | |
 |`curandDestroyGenerator`| | | | |`hiprandDestroyGenerator`|1.5.0| | | | |`rocrand_destroy_generator`|1.5.0| | | | |
 |`curandGenerate`| | | | |`hiprandGenerate`|1.5.0| | | | |`rocrand_generate`|1.5.0| | | | |
-|`curandGenerateLogNormal`| | | | |`hiprandGenerateLogNormal`|1.5.0| | | | | | | | | | |
+|`curandGenerateLogNormal`| | | | |`hiprandGenerateLogNormal`|1.5.0| | | | |`rocrand_generate_log_normal`|1.5.0| | | | |
 |`curandGenerateLogNormalDouble`| | | | |`hiprandGenerateLogNormalDouble`|1.5.0| | | | | | | | | | |
-|`curandGenerateLongLong`| | | | | | | | | | | | | | | | |
-|`curandGenerateNormal`| | | | |`hiprandGenerateNormal`|1.5.0| | | | | | | | | | |
-|`curandGenerateNormalDouble`| | | | |`hiprandGenerateNormalDouble`|1.5.0| | | | | | | | | | |
+|`curandGenerateLongLong`| | | | |`hiprandGenerateLongLong`|5.5.0| | | | |`rocrand_generate_long_long`|5.4.0| | | | |
+|`curandGenerateNormal`| | | | |`hiprandGenerateNormal`|1.5.0| | | | |`rocrand_generate_normal`|1.5.0| | | | |
+|`curandGenerateNormalDouble`| | | | |`hiprandGenerateNormalDouble`|1.5.0| | | | |`rocrand_generate_normal_double`|1.5.0| | | | |
 |`curandGeneratePoisson`| | | | |`hiprandGeneratePoisson`|1.5.0| | | | | | | | | | |
 |`curandGenerateSeeds`| | | | |`hiprandGenerateSeeds`|1.5.0| | | | | | | | | | |
-|`curandGenerateUniform`| | | | |`hiprandGenerateUniform`|1.5.0| | | | | | | | | | |
-|`curandGenerateUniformDouble`| | | | |`hiprandGenerateUniformDouble`|1.5.0| | | | | | | | | | |
+|`curandGenerateUniform`| | | | |`hiprandGenerateUniform`|1.5.0| | | | |`rocrand_generate_uniform`|1.5.0| | | | |
+|`curandGenerateUniformDouble`| | | | |`hiprandGenerateUniformDouble`|1.5.0| | | | |`rocrand_generate_uniform_double`|1.5.0| | | | |
 |`curandGetDirectionVectors32`| | | | |`hiprandGetDirectionVectors32`|6.0.0| | | | | | | | | | |
 |`curandGetDirectionVectors64`| | | | |`hiprandGetDirectionVectors64`|6.0.0| | | | | | | | | | |
 |`curandGetProperty`|8.0| | | | | | | | | | | | | | | |

@@ -74,13 +74,13 @@ void run_benchmark(const cli::Parser& parser, const rng_type_t rng_type,
     CUDA_CALL(cudaMalloc((void**)&data, size * sizeof(T)));
 
     // CHECK: hiprandGenerator_t generator;
-    // CHECK: CURAND_CALL(hiprandCreateGenerator(&generator, rng_type));
+    // CHECK-NEXT: CURAND_CALL(hiprandCreateGenerator(&generator, rng_type));
     curandGenerator_t generator;
     CURAND_CALL(curandCreateGenerator(&generator, rng_type));
 
     const size_t dimensions = parser.get<size_t>("dimensions");
     // CHECK: hiprandStatus_t status = hiprandSetQuasiRandomGeneratorDimensions(generator, dimensions);
-    // CHECK: if (status != HIPRAND_STATUS_TYPE_ERROR)
+    // CHECK-NEXT: if (status != HIPRAND_STATUS_TYPE_ERROR)
     curandStatus_t status = curandSetQuasiRandomGeneratorDimensions(generator, dimensions);
     if (status != CURAND_STATUS_TYPE_ERROR)  // If the RNG is not quasi-random
     {
@@ -113,7 +113,7 @@ void run_benchmark(const cli::Parser& parser, const rng_type_t rng_type,
               << " ms, Time (all) = " << std::setw(8) << elapsed.count() << " ms, Size = " << size
               << std::endl;
     // CHECK: CURAND_CALL(hiprandDestroyGenerator(generator));
-    // CHECK: CUDA_CALL(hipFree(data));
+    // CHECK-NEXT: CUDA_CALL(hipFree(data));
     CURAND_CALL(curandDestroyGenerator(generator));
     CUDA_CALL(cudaFree(data));
 }
@@ -122,7 +122,7 @@ void run_benchmarks(const cli::Parser& parser, const rng_type_t rng_type,
                     const std::string& distribution) {
     if (distribution == "uniform-uint") {
         // CHECK: if (rng_type != HIPRAND_RNG_QUASI_SOBOL64 &&
-        // CHECK: rng_type != HIPRAND_RNG_QUASI_SCRAMBLED_SOBOL64) {
+        // CHECK-NEXT: rng_type != HIPRAND_RNG_QUASI_SCRAMBLED_SOBOL64) {
         if (rng_type != CURAND_RNG_QUASI_SOBOL64 &&
             rng_type != CURAND_RNG_QUASI_SCRAMBLED_SOBOL64) {
             run_benchmark<unsigned int>(
@@ -136,15 +136,14 @@ void run_benchmarks(const cli::Parser& parser, const rng_type_t rng_type,
     }
     if (distribution == "uniform-long-long") {
         // CHECK: if (rng_type == HIPRAND_RNG_QUASI_SOBOL64 ||
-        // CHECK: rng_type == HIPRAND_RNG_QUASI_SCRAMBLED_SOBOL64)
+        // CHECK-NEXT: rng_type == HIPRAND_RNG_QUASI_SCRAMBLED_SOBOL64)
         if (rng_type == CURAND_RNG_QUASI_SOBOL64 ||
             rng_type == CURAND_RNG_QUASI_SCRAMBLED_SOBOL64) {
             run_benchmark<unsigned long long>(
                 parser, rng_type,
                 // CHECK: [](hiprandGenerator_t gen, unsigned long long* data, size_t size) {
                 [](curandGenerator_t gen, unsigned long long* data, size_t size) {
-                    // curandGenerateLongLong is yet unsupported by HIP
-                    // CHECK-NOT: return hiprandGenerateLongLong(gen, data, size);
+                    // CHECK: return hiprandGenerateLongLong(gen, data, size);
                     return curandGenerateLongLong(gen, data, size);
                 });
         }
@@ -152,7 +151,7 @@ void run_benchmarks(const cli::Parser& parser, const rng_type_t rng_type,
     if (distribution == "uniform-float") {
         run_benchmark<float>(parser, rng_type,
                              // CHECK: [](hiprandGenerator_t gen, float* data, size_t size) {
-                             // CHECK: return hiprandGenerateUniform(gen, data, size);
+                             // CHECK-NEXT: return hiprandGenerateUniform(gen, data, size);
                              [](curandGenerator_t gen, float* data, size_t size) {
                                  return curandGenerateUniform(gen, data, size);
                              });
@@ -160,7 +159,7 @@ void run_benchmarks(const cli::Parser& parser, const rng_type_t rng_type,
     if (distribution == "uniform-double") {
         run_benchmark<double>(parser, rng_type,
                               // CHECK: [](hiprandGenerator_t gen, double* data, size_t size) {
-                              // CHECK: return hiprandGenerateUniformDouble(gen, data, size);
+                              // CHECK-NEXT: return hiprandGenerateUniformDouble(gen, data, size);
                               [](curandGenerator_t gen, double* data, size_t size) {
                                   return curandGenerateUniformDouble(gen, data, size);
                               });
@@ -168,7 +167,7 @@ void run_benchmarks(const cli::Parser& parser, const rng_type_t rng_type,
     if (distribution == "normal-float") {
         run_benchmark<float>(parser, rng_type,
                              // CHECK: [](hiprandGenerator_t gen, float* data, size_t size) {
-                             // CHECK: return hiprandGenerateNormal(gen, data, size, 0.0f, 1.0f);
+                             // CHECK-NEXT: return hiprandGenerateNormal(gen, data, size, 0.0f, 1.0f);
                              [](curandGenerator_t gen, float* data, size_t size) {
                                  return curandGenerateNormal(gen, data, size, 0.0f, 1.0f);
                              });
@@ -177,7 +176,7 @@ void run_benchmarks(const cli::Parser& parser, const rng_type_t rng_type,
         run_benchmark<double>(
             parser, rng_type,
             // CHECK: [](hiprandGenerator_t gen, double* data, size_t size) {
-            // CHECK: return hiprandGenerateNormalDouble(gen, data, size, 0.0, 1.0);
+            // CHECK-NEXT: return hiprandGenerateNormalDouble(gen, data, size, 0.0, 1.0);
             [](curandGenerator_t gen, double* data, size_t size) {
                 return curandGenerateNormalDouble(gen, data, size, 0.0, 1.0);
             });
@@ -185,7 +184,7 @@ void run_benchmarks(const cli::Parser& parser, const rng_type_t rng_type,
     if (distribution == "log-normal-float") {
         run_benchmark<float>(parser, rng_type,
                              // CHECK: [](hiprandGenerator_t gen, float* data, size_t size) {
-                             // CHECK: return hiprandGenerateLogNormal(gen, data, size, 0.0f, 1.0f);
+                             // CHECK-NEXT: return hiprandGenerateLogNormal(gen, data, size, 0.0f, 1.0f);
                              [](curandGenerator_t gen, float* data, size_t size) {
                                  return curandGenerateLogNormal(gen, data, size, 0.0f, 1.0f);
                              });
@@ -194,7 +193,7 @@ void run_benchmarks(const cli::Parser& parser, const rng_type_t rng_type,
         run_benchmark<double>(
             parser, rng_type,
             // CHECK: [](hiprandGenerator_t gen, double* data, size_t size) {
-            // CHECK: return hiprandGenerateLogNormalDouble(gen, data, size, 0.0, 1.0);
+            // CHECK-NEXT: return hiprandGenerateLogNormalDouble(gen, data, size, 0.0, 1.0);
             [](curandGenerator_t gen, double* data, size_t size) {
                 return curandGenerateLogNormalDouble(gen, data, size, 0.0, 1.0);
             });
@@ -207,7 +206,7 @@ void run_benchmarks(const cli::Parser& parser, const rng_type_t rng_type,
             run_benchmark<unsigned int>(
                 parser, rng_type,
                 // CHECK: [lambda](hiprandGenerator_t gen, unsigned int* data, size_t size) {
-                // CHECK: return hiprandGeneratePoisson(gen, data, size, lambda);
+                // CHECK-NEXT: return hiprandGeneratePoisson(gen, data, size, lambda);
                 [lambda](curandGenerator_t gen, unsigned int* data, size_t size) {
                     return curandGeneratePoisson(gen, data, size, lambda);
                 });
@@ -219,9 +218,9 @@ const std::vector<std::string> all_engines = {
     "xorwow", "mrg32k3a", "mtgp32",
     // "mt19937",
     "philox", "sobol32",
-    // "scrambled_sobol32",
-    // "sobol64",
-    // "scrambled_sobol64",
+    "scrambled_sobol32",
+    "sobol64",
+    "scrambled_sobol64",
 };
 
 const std::vector<std::string> all_distributions = {
@@ -287,8 +286,8 @@ int main(int argc, char* argv[]) {
     CUDA_CALL(cudaRuntimeGetVersion(&runtime_version));
     int device_id;
     // CHECK: CUDA_CALL(hipGetDevice(&device_id));
-    // CHECK: hipDeviceProp_t props;
-    // CHECK: CUDA_CALL(hipGetDeviceProperties(&props, device_id));
+    // CHECK-NEXT: hipDeviceProp_t props;
+    // CHECK-NEXT: CUDA_CALL(hipGetDeviceProperties(&props, device_id));
     CUDA_CALL(cudaGetDevice(&device_id));
     cudaDeviceProp props;
     CUDA_CALL(cudaGetDeviceProperties(&props, device_id));

@@ -112,7 +112,7 @@
 |`curandGenerate`| | | | |`hiprandGenerate`|1.5.0| | | | |
 |`curandGenerateLogNormal`| | | | |`hiprandGenerateLogNormal`|1.5.0| | | | |
 |`curandGenerateLogNormalDouble`| | | | |`hiprandGenerateLogNormalDouble`|1.5.0| | | | |
-|`curandGenerateLongLong`| | | | | | | | | | |
+|`curandGenerateLongLong`| | | | |`hiprandGenerateLongLong`|5.5.0| | | | |
 |`curandGenerateNormal`| | | | |`hiprandGenerateNormal`|1.5.0| | | | |
 |`curandGenerateNormalDouble`| | | | |`hiprandGenerateNormalDouble`|1.5.0| | | | |
 |`curandGeneratePoisson`| | | | |`hiprandGeneratePoisson`|1.5.0| | | | |
