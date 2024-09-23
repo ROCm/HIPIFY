@@ -4,17 +4,17 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|**MIOPEN**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
-|`CUDNN_16BIT_INDICES`|6.0.0|9.0.0| | |`HIPDNN_16BIT_INDICES`| | | | | |`MIOPEN_16BIT_INDICES`| | | | | |
-|`CUDNN_32BIT_INDICES`|6.0.0|9.0.0| | |`HIPDNN_32BIT_INDICES`| | | | | |`MIOPEN_32BIT_INDICES`| | | | | |
-|`CUDNN_64BIT_INDICES`|6.0.0|9.0.0| | |`HIPDNN_64BIT_INDICES`| | | | | |`MIOPEN_64BIT_INDICES`| | | | | |
-|`CUDNN_8BIT_INDICES`|6.0.0|9.0.0| | |`HIPDNN_8BIT_INDICES`| | | | | |`MIOPEN_8BIT_INDICES`| | | | | |
-|`CUDNN_ACTIVATION_CLIPPED_RELU`|4.0.0|9.0.0| | |`HIPDNN_ACTIVATION_CLIPPED_RELU`| | | | | |`miopenActivationCLIPPEDRELU`| | | | | |
-|`CUDNN_ACTIVATION_ELU`|6.0.0|9.0.0| | |`HIPDNN_ACTIVATION_ELU`| | | | | |`miopenActivationELU`| | | | | |
-|`CUDNN_ACTIVATION_IDENTITY`|7.1.3|9.0.0| | |`HIPDNN_ACTIVATION_PATHTRU`| | | | | |`miopenActivationPASTHRU`| | | | | |
-|`CUDNN_ACTIVATION_RELU`|1.0.0|9.0.0| | |`HIPDNN_ACTIVATION_RELU`| | | | | |`miopenActivationRELU`| | | | | |
+|`CUDNN_16BIT_INDICES`|6.0.0|9.0.0| | |`HIPDNN_16BIT_INDICES`| | | | | |`MIOPEN_16BIT_INDICES`|3.9.0| | | | |
+|`CUDNN_32BIT_INDICES`|6.0.0|9.0.0| | |`HIPDNN_32BIT_INDICES`| | | | | |`MIOPEN_32BIT_INDICES`|3.9.0| | | | |
+|`CUDNN_64BIT_INDICES`|6.0.0|9.0.0| | |`HIPDNN_64BIT_INDICES`| | | | | |`MIOPEN_64BIT_INDICES`|3.9.0| | | | |
+|`CUDNN_8BIT_INDICES`|6.0.0|9.0.0| | |`HIPDNN_8BIT_INDICES`| | | | | |`MIOPEN_8BIT_INDICES`|3.9.0| | | | |
+|`CUDNN_ACTIVATION_CLIPPED_RELU`|4.0.0|9.0.0| | |`HIPDNN_ACTIVATION_CLIPPED_RELU`| | | | | |`miopenActivationCLIPPEDRELU`|2.1.0| | | | |
+|`CUDNN_ACTIVATION_ELU`|6.0.0|9.0.0| | |`HIPDNN_ACTIVATION_ELU`| | | | | |`miopenActivationELU`|2.1.0| | | | |
+|`CUDNN_ACTIVATION_IDENTITY`|7.1.3|9.0.0| | |`HIPDNN_ACTIVATION_PATHTRU`| | | | | |`miopenActivationPASTHRU`|2.1.0| | | | |
+|`CUDNN_ACTIVATION_RELU`|1.0.0|9.0.0| | |`HIPDNN_ACTIVATION_RELU`| | | | | |`miopenActivationRELU`|2.1.0| | | | |
 |`CUDNN_ACTIVATION_SIGMOID`|1.0.0|9.0.0| | |`HIPDNN_ACTIVATION_SIGMOID`| | | | | | | | | | | |
 |`CUDNN_ACTIVATION_SWISH`|8.2.0|9.0.0| | |`HIPDNN_ACTIVATION_SWISH`| | | | | | | | | | | |
-|`CUDNN_ACTIVATION_TANH`|1.0.0|9.0.0| | |`HIPDNN_ACTIVATION_TANH`| | | | | |`miopenActivationTANH`| | | | | |
+|`CUDNN_ACTIVATION_TANH`|1.0.0|9.0.0| | |`HIPDNN_ACTIVATION_TANH`| | | | | |`miopenActivationTANH`|2.1.0| | | | |
 |`CUDNN_ATTN_DISABLE_PROJ_BIASES`|7.6.3| | | | | | | | | | | | | | | |
 |`CUDNN_ATTN_ENABLE_PROJ_BIASES`|7.6.3| | | | | | | | | | | | | | | |
 |`CUDNN_ATTN_QUERYMAP_ALL_TO_ONE`|7.5.0| | | | | | | | | | | | | | | |
@@ -280,8 +280,8 @@
 |`CUDNN_BATCHNORM_OPS_BN`|7.4.1|9.0.0| | | | | | | | | | | | | | |
 |`CUDNN_BATCHNORM_OPS_BN_ACTIVATION`|7.4.1|9.0.0| | | | | | | | | | | | | | |
 |`CUDNN_BATCHNORM_OPS_BN_ADD_ACTIVATION`|7.4.1|9.0.0| | | | | | | | | | | | | | |
-|`CUDNN_BATCHNORM_PER_ACTIVATION`|4.0.0|9.0.0| | |`HIPDNN_BATCHNORM_PER_ACTIVATION`| | | | | |`miopenBNPerActivation`| | | | | |
-|`CUDNN_BATCHNORM_SPATIAL`|4.0.0|9.0.0| | |`HIPDNN_BATCHNORM_SPATIAL`| | | | | |`miopenBNSpatial`| | | | | |
+|`CUDNN_BATCHNORM_PER_ACTIVATION`|4.0.0|9.0.0| | |`HIPDNN_BATCHNORM_PER_ACTIVATION`| | | | | |`miopenBNPerActivation`|2.1.0| | | | |
+|`CUDNN_BATCHNORM_SPATIAL`|4.0.0|9.0.0| | |`HIPDNN_BATCHNORM_SPATIAL`| | | | | |`miopenBNSpatial`|2.1.0| | | | |
 |`CUDNN_BATCHNORM_SPATIAL_PERSISTENT`|7.0.5|9.0.0| | |`HIPDNN_BATCHNORM_SPATIAL_PERSISTENT`| | | | | | | | | | | |
 |`CUDNN_BATCH_NORM`|8.5.0| | | | | | | | | | | | | | | |
 |`CUDNN_BEHAVIOR_NOTE_REQUIRES_BIAS_INT8x32_REORDER`|8.3.0| | | | | | | | | | | | | | | |
@@ -504,60 +504,60 @@
 |`CUDNN_PARAM_YSUM_PLACEHOLDER`|7.6.0| | | | | | | | | | | | | | | |
 |`CUDNN_PARAM_ZDATA_PLACEHOLDER`|7.6.0| | | | | | | | | | | | | | | |
 |`CUDNN_PARAM_ZDESC`|7.6.0| | | | | | | | | | | | | | | |
-|`CUDNN_POINTWISE_ABS`|8.3.0| | | | | | | | | |`MIOPEN_POINTWISE_ABS`| | | | | |
-|`CUDNN_POINTWISE_ADD`|8.0.1| | | | | | | | | |`MIOPEN_POINTWISE_ADD`| | | | | |
-|`CUDNN_POINTWISE_ADD_SQUARE`|8.3.0| | | | | | | | | |`MIOPEN_POINTWISE_ADD_SQUARE`| | | | | |
+|`CUDNN_POINTWISE_ABS`|8.3.0| | | | | | | | | |`MIOPEN_POINTWISE_ABS`|6.2.0| | | | |
+|`CUDNN_POINTWISE_ADD`|8.0.1| | | | | | | | | |`MIOPEN_POINTWISE_ADD`|6.2.0| | | | |
+|`CUDNN_POINTWISE_ADD_SQUARE`|8.3.0| | | | | | | | | |`MIOPEN_POINTWISE_ADD_SQUARE`|6.2.0| | | | |
 |`CUDNN_POINTWISE_ATAN2`|9.1.0| | | | | | | | | | | | | | | |
-|`CUDNN_POINTWISE_BINARY_SELECT`|8.4.0| | | | | | | | | |`MIOPEN_POINTWISE_BINARY_SELECT`| | | | | |
-|`CUDNN_POINTWISE_CEIL`|8.3.0| | | | | | | | | |`MIOPEN_POINTWISE_CEIL`| | | | | |
-|`CUDNN_POINTWISE_CMP_EQ`|8.3.0| | | | | | | | | |`MIOPEN_POINTWISE_CMP_EQ`| | | | | |
-|`CUDNN_POINTWISE_CMP_GE`|8.3.0| | | | | | | | | |`MIOPEN_POINTWISE_CMP_GE`| | | | | |
-|`CUDNN_POINTWISE_CMP_GT`|8.3.0| | | | | | | | | |`MIOPEN_POINTWISE_CMP_GT`| | | | | |
-|`CUDNN_POINTWISE_CMP_LE`|8.3.0| | | | | | | | | |`MIOPEN_POINTWISE_CMP_LE`| | | | | |
-|`CUDNN_POINTWISE_CMP_LT`|8.3.0| | | | | | | | | |`MIOPEN_POINTWISE_CMP_LT`| | | | | |
-|`CUDNN_POINTWISE_CMP_NEQ`|8.3.0| | | | | | | | | |`MIOPEN_POINTWISE_CMP_NEQ`| | | | | |
-|`CUDNN_POINTWISE_COS`|8.3.0| | | | | | | | | |`MIOPEN_POINTWISE_COS`| | | | | |
-|`CUDNN_POINTWISE_DIV`|8.3.0| | | | | | | | | |`MIOPEN_POINTWISE_DIV`| | | | | |
-|`CUDNN_POINTWISE_ELU_BWD`|8.1.0| | | | | | | | | |`MIOPEN_POINTWISE_ELU_BWD`| | | | | |
-|`CUDNN_POINTWISE_ELU_FWD`|8.0.1| | | | | | | | | |`MIOPEN_POINTWISE_ELU_FWD`| | | | | |
-|`CUDNN_POINTWISE_ERF`|8.5.0| | | | | | | | | |`MIOPEN_POINTWISE_ERF`| | | | | |
-|`CUDNN_POINTWISE_EXP`|8.3.0| | | | | | | | | |`MIOPEN_POINTWISE_EXP`| | | | | |
-|`CUDNN_POINTWISE_FLOOR`|8.3.0| | | | | | | | | |`MIOPEN_POINTWISE_FLOOR`| | | | | |
-|`CUDNN_POINTWISE_GELU_APPROX_TANH_BWD`|8.5.0| | | | | | | | | |`MIOPEN_POINTWISE_GELU_APPROX_TANH_BWD`| | | | | |
-|`CUDNN_POINTWISE_GELU_APPROX_TANH_FWD`|8.5.0| | | | | | | | | |`MIOPEN_POINTWISE_GELU_APPROX_TANH_FWD`| | | | | |
-|`CUDNN_POINTWISE_GELU_BWD`|8.1.0| | | | | | | | | |`MIOPEN_POINTWISE_GELU_BWD`| | | | | |
-|`CUDNN_POINTWISE_GELU_FWD`|8.1.0| | | | | | | | | |`MIOPEN_POINTWISE_GELU_FWD`| | | | | |
-|`CUDNN_POINTWISE_GEN_INDEX`|8.4.0| | | | | | | | | |`MIOPEN_POINTWISE_GEN_INDEX`| | | | | |
-|`CUDNN_POINTWISE_IDENTITY`|8.5.0| | | | | | | | | |`MIOPEN_POINTWISE_IDENTITY`| | | | | |
-|`CUDNN_POINTWISE_LOG`|8.3.0| | | | | | | | | |`MIOPEN_POINTWISE_LOG`| | | | | |
-|`CUDNN_POINTWISE_LOGICAL_AND`|8.3.0| | | | | | | | | |`MIOPEN_POINTWISE_LOGICAL_AND`| | | | | |
-|`CUDNN_POINTWISE_LOGICAL_NOT`|8.3.0| | | | | | | | | |`MIOPEN_POINTWISE_LOGICAL_NOT`| | | | | |
-|`CUDNN_POINTWISE_LOGICAL_OR`|8.3.0| | | | | | | | | |`MIOPEN_POINTWISE_LOGICAL_OR`| | | | | |
-|`CUDNN_POINTWISE_MAX`|8.0.1| | | | | | | | | |`MIOPEN_POINTWISE_MAX`| | | | | |
-|`CUDNN_POINTWISE_MIN`|8.0.1| | | | | | | | | |`MIOPEN_POINTWISE_MIN`| | | | | |
-|`CUDNN_POINTWISE_MOD`|8.3.0| | | | | | | | | |`MIOPEN_POINTWISE_MOD`| | | | | |
-|`CUDNN_POINTWISE_MUL`|8.0.1| | | | | | | | | |`MIOPEN_POINTWISE_MUL`| | | | | |
-|`CUDNN_POINTWISE_NEG`|8.3.0| | | | | | | | | |`MIOPEN_POINTWISE_NEG`| | | | | |
-|`CUDNN_POINTWISE_POW`|8.3.0| | | | | | | | | |`MIOPEN_POINTWISE_POW`| | | | | |
-|`CUDNN_POINTWISE_RECIPROCAL`|8.9.0| | | | | | | | | |`MIOPEN_POINTWISE_RECIPROCAL`| | | | | |
-|`CUDNN_POINTWISE_RELU_BWD`|8.1.0| | | | | | | | | |`MIOPEN_POINTWISE_RELU_BWD`| | | | | |
-|`CUDNN_POINTWISE_RELU_FWD`|8.0.1| | | | | | | | | |`MIOPEN_POINTWISE_RELU_FWD`| | | | | |
-|`CUDNN_POINTWISE_RSQRT`|8.3.0| | | | | | | | | |`MIOPEN_POINTWISE_RSQRT`| | | | | |
-|`CUDNN_POINTWISE_SIGMOID_BWD`|8.1.0| | | | | | | | | |`MIOPEN_POINTWISE_SIGMOID_BWD`| | | | | |
-|`CUDNN_POINTWISE_SIGMOID_FWD`|8.0.1| | | | | | | | | |`MIOPEN_POINTWISE_SIGMOID_FWD`| | | | | |
-|`CUDNN_POINTWISE_SIN`|8.3.0| | | | | | | | | |`MIOPEN_POINTWISE_SIN`| | | | | |
-|`CUDNN_POINTWISE_SOFTPLUS_BWD`|8.1.0| | | | | | | | | |`MIOPEN_POINTWISE_SOFTPLUS_BWD`| | | | | |
-|`CUDNN_POINTWISE_SOFTPLUS_FWD`|8.1.0| | | | | | | | | |`MIOPEN_POINTWISE_SOFTPLUS_FWD`| | | | | |
-|`CUDNN_POINTWISE_SQRT`|8.0.1| | | | | | | | | |`MIOPEN_POINTWISE_SQRT`| | | | | |
-|`CUDNN_POINTWISE_SUB`|8.3.0| | | | | | | | | |`MIOPEN_POINTWISE_SUB`| | | | | |
-|`CUDNN_POINTWISE_SWISH_BWD`|8.1.0| | | | | | | | | |`MIOPEN_POINTWISE_SWISH_BWD`| | | | | |
-|`CUDNN_POINTWISE_SWISH_FWD`|8.1.0| | | | | | | | | |`MIOPEN_POINTWISE_SWISH_FWD`| | | | | |
-|`CUDNN_POINTWISE_TAN`|8.3.0| | | | | | | | | |`MIOPEN_POINTWISE_TAN`| | | | | |
-|`CUDNN_POINTWISE_TANH_BWD`|8.1.0| | | | | | | | | |`MIOPEN_POINTWISE_TANH_BWD`| | | | | |
-|`CUDNN_POINTWISE_TANH_FWD`|8.0.1| | | | | | | | | |`MIOPEN_POINTWISE_TANH_FWD`| | | | | |
+|`CUDNN_POINTWISE_BINARY_SELECT`|8.4.0| | | | | | | | | |`MIOPEN_POINTWISE_BINARY_SELECT`|6.2.0| | | | |
+|`CUDNN_POINTWISE_CEIL`|8.3.0| | | | | | | | | |`MIOPEN_POINTWISE_CEIL`|6.2.0| | | | |
+|`CUDNN_POINTWISE_CMP_EQ`|8.3.0| | | | | | | | | |`MIOPEN_POINTWISE_CMP_EQ`|6.2.0| | | | |
+|`CUDNN_POINTWISE_CMP_GE`|8.3.0| | | | | | | | | |`MIOPEN_POINTWISE_CMP_GE`|6.2.0| | | | |
+|`CUDNN_POINTWISE_CMP_GT`|8.3.0| | | | | | | | | |`MIOPEN_POINTWISE_CMP_GT`|6.2.0| | | | |
+|`CUDNN_POINTWISE_CMP_LE`|8.3.0| | | | | | | | | |`MIOPEN_POINTWISE_CMP_LE`|6.2.0| | | | |
+|`CUDNN_POINTWISE_CMP_LT`|8.3.0| | | | | | | | | |`MIOPEN_POINTWISE_CMP_LT`|6.2.0| | | | |
+|`CUDNN_POINTWISE_CMP_NEQ`|8.3.0| | | | | | | | | |`MIOPEN_POINTWISE_CMP_NEQ`|6.2.0| | | | |
+|`CUDNN_POINTWISE_COS`|8.3.0| | | | | | | | | |`MIOPEN_POINTWISE_COS`|6.2.0| | | | |
+|`CUDNN_POINTWISE_DIV`|8.3.0| | | | | | | | | |`MIOPEN_POINTWISE_DIV`|6.2.0| | | | |
+|`CUDNN_POINTWISE_ELU_BWD`|8.1.0| | | | | | | | | |`MIOPEN_POINTWISE_ELU_BWD`|6.2.0| | | | |
+|`CUDNN_POINTWISE_ELU_FWD`|8.0.1| | | | | | | | | |`MIOPEN_POINTWISE_ELU_FWD`|6.2.0| | | | |
+|`CUDNN_POINTWISE_ERF`|8.5.0| | | | | | | | | |`MIOPEN_POINTWISE_ERF`|6.2.0| | | | |
+|`CUDNN_POINTWISE_EXP`|8.3.0| | | | | | | | | |`MIOPEN_POINTWISE_EXP`|6.2.0| | | | |
+|`CUDNN_POINTWISE_FLOOR`|8.3.0| | | | | | | | | |`MIOPEN_POINTWISE_FLOOR`|6.2.0| | | | |
+|`CUDNN_POINTWISE_GELU_APPROX_TANH_BWD`|8.5.0| | | | | | | | | |`MIOPEN_POINTWISE_GELU_APPROX_TANH_BWD`|6.2.0| | | | |
+|`CUDNN_POINTWISE_GELU_APPROX_TANH_FWD`|8.5.0| | | | | | | | | |`MIOPEN_POINTWISE_GELU_APPROX_TANH_FWD`|6.2.0| | | | |
+|`CUDNN_POINTWISE_GELU_BWD`|8.1.0| | | | | | | | | |`MIOPEN_POINTWISE_GELU_BWD`|6.2.0| | | | |
+|`CUDNN_POINTWISE_GELU_FWD`|8.1.0| | | | | | | | | |`MIOPEN_POINTWISE_GELU_FWD`|6.2.0| | | | |
+|`CUDNN_POINTWISE_GEN_INDEX`|8.4.0| | | | | | | | | |`MIOPEN_POINTWISE_GEN_INDEX`|6.2.0| | | | |
+|`CUDNN_POINTWISE_IDENTITY`|8.5.0| | | | | | | | | |`MIOPEN_POINTWISE_IDENTITY`|6.2.0| | | | |
+|`CUDNN_POINTWISE_LOG`|8.3.0| | | | | | | | | |`MIOPEN_POINTWISE_LOG`|6.2.0| | | | |
+|`CUDNN_POINTWISE_LOGICAL_AND`|8.3.0| | | | | | | | | |`MIOPEN_POINTWISE_LOGICAL_AND`|6.2.0| | | | |
+|`CUDNN_POINTWISE_LOGICAL_NOT`|8.3.0| | | | | | | | | |`MIOPEN_POINTWISE_LOGICAL_NOT`|6.2.0| | | | |
+|`CUDNN_POINTWISE_LOGICAL_OR`|8.3.0| | | | | | | | | |`MIOPEN_POINTWISE_LOGICAL_OR`|6.2.0| | | | |
+|`CUDNN_POINTWISE_MAX`|8.0.1| | | | | | | | | |`MIOPEN_POINTWISE_MAX`|6.2.0| | | | |
+|`CUDNN_POINTWISE_MIN`|8.0.1| | | | | | | | | |`MIOPEN_POINTWISE_MIN`|6.2.0| | | | |
+|`CUDNN_POINTWISE_MOD`|8.3.0| | | | | | | | | |`MIOPEN_POINTWISE_MOD`|6.2.0| | | | |
+|`CUDNN_POINTWISE_MUL`|8.0.1| | | | | | | | | |`MIOPEN_POINTWISE_MUL`|6.2.0| | | | |
+|`CUDNN_POINTWISE_NEG`|8.3.0| | | | | | | | | |`MIOPEN_POINTWISE_NEG`|6.2.0| | | | |
+|`CUDNN_POINTWISE_POW`|8.3.0| | | | | | | | | |`MIOPEN_POINTWISE_POW`|6.2.0| | | | |
+|`CUDNN_POINTWISE_RECIPROCAL`|8.9.0| | | | | | | | | |`MIOPEN_POINTWISE_RECIPROCAL`|6.2.0| | | | |
+|`CUDNN_POINTWISE_RELU_BWD`|8.1.0| | | | | | | | | |`MIOPEN_POINTWISE_RELU_BWD`|6.2.0| | | | |
+|`CUDNN_POINTWISE_RELU_FWD`|8.0.1| | | | | | | | | |`MIOPEN_POINTWISE_RELU_FWD`|6.2.0| | | | |
+|`CUDNN_POINTWISE_RSQRT`|8.3.0| | | | | | | | | |`MIOPEN_POINTWISE_RSQRT`|6.2.0| | | | |
+|`CUDNN_POINTWISE_SIGMOID_BWD`|8.1.0| | | | | | | | | |`MIOPEN_POINTWISE_SIGMOID_BWD`|6.2.0| | | | |
+|`CUDNN_POINTWISE_SIGMOID_FWD`|8.0.1| | | | | | | | | |`MIOPEN_POINTWISE_SIGMOID_FWD`|6.2.0| | | | |
+|`CUDNN_POINTWISE_SIN`|8.3.0| | | | | | | | | |`MIOPEN_POINTWISE_SIN`|6.2.0| | | | |
+|`CUDNN_POINTWISE_SOFTPLUS_BWD`|8.1.0| | | | | | | | | |`MIOPEN_POINTWISE_SOFTPLUS_BWD`|6.2.0| | | | |
+|`CUDNN_POINTWISE_SOFTPLUS_FWD`|8.1.0| | | | | | | | | |`MIOPEN_POINTWISE_SOFTPLUS_FWD`|6.2.0| | | | |
+|`CUDNN_POINTWISE_SQRT`|8.0.1| | | | | | | | | |`MIOPEN_POINTWISE_SQRT`|6.2.0| | | | |
+|`CUDNN_POINTWISE_SUB`|8.3.0| | | | | | | | | |`MIOPEN_POINTWISE_SUB`|6.2.0| | | | |
+|`CUDNN_POINTWISE_SWISH_BWD`|8.1.0| | | | | | | | | |`MIOPEN_POINTWISE_SWISH_BWD`|6.2.0| | | | |
+|`CUDNN_POINTWISE_SWISH_FWD`|8.1.0| | | | | | | | | |`MIOPEN_POINTWISE_SWISH_FWD`|6.2.0| | | | |
+|`CUDNN_POINTWISE_TAN`|8.3.0| | | | | | | | | |`MIOPEN_POINTWISE_TAN`|6.2.0| | | | |
+|`CUDNN_POINTWISE_TANH_BWD`|8.1.0| | | | | | | | | |`MIOPEN_POINTWISE_TANH_BWD`|6.2.0| | | | |
+|`CUDNN_POINTWISE_TANH_FWD`|8.0.1| | | | | | | | | |`MIOPEN_POINTWISE_TANH_FWD`|6.2.0| | | | |
 |`CUDNN_POOLING_AVERAGE_COUNT_EXCLUDE_PADDING`|2.0.0|9.0.0| | |`HIPDNN_POOLING_AVERAGE_COUNT_EXCLUDE_PADDING`| | | | | | | | | | | |
 |`CUDNN_POOLING_AVERAGE_COUNT_INCLUDE_PADDING`|2.0.0|9.0.0| | |`HIPDNN_POOLING_AVERAGE_COUNT_INCLUDE_PADDING`| | | | | | | | | | | |
-|`CUDNN_POOLING_MAX`|1.0.0|9.0.0| | |`HIPDNN_POOLING_MAX`| | | | | |`miopenPoolingMax`| | | | | |
+|`CUDNN_POOLING_MAX`|1.0.0|9.0.0| | |`HIPDNN_POOLING_MAX`| | | | | |`miopenPoolingMax`|2.1.0| | | | |
 |`CUDNN_POOLING_MAX_DETERMINISTIC`|6.0.0|9.0.0| | |`HIPDNN_POOLING_MAX_DETERMINISTIC`| | | | | | | | | | | |
 |`CUDNN_PROPAGATE_NAN`|4.0.0|9.0.0| | |`HIPDNN_PROPAGATE_NAN`| | | | | |`MIOPEN_PROPAGATE_NAN`|3.9.0| | | | |
 |`CUDNN_PTR_16B_ALIGNED`|7.6.0| | | | | | | | | | | | | | | |
@@ -587,17 +587,17 @@
 |`CUDNN_PTR_YSQSUM`|7.6.0| | | | | | | | | | | | | | | |
 |`CUDNN_PTR_YSUM`|7.6.0| | | | | | | | | | | | | | | |
 |`CUDNN_PTR_ZDATA`|7.6.0| | | | | | | | | | | | | | | |
-|`CUDNN_REDUCE_TENSOR_ADD`|6.0.0| | | |`HIPDNN_REDUCE_TENSOR_ADD`| | | | | |`MIOPEN_REDUCE_TENSOR_ADD`| | | | | |
-|`CUDNN_REDUCE_TENSOR_AMAX`|6.0.0| | | |`HIPDNN_REDUCE_TENSOR_AMAX`| | | | | |`MIOPEN_REDUCE_TENSOR_AMAX`| | | | | |
-|`CUDNN_REDUCE_TENSOR_AVG`|6.0.0| | | |`HIPDNN_REDUCE_TENSOR_AVG`| | | | | |`MIOPEN_REDUCE_TENSOR_AVG`| | | | | |
-|`CUDNN_REDUCE_TENSOR_FLATTENED_INDICES`|6.0.0|9.0.0| | |`HIPDNN_REDUCE_TENSOR_FLATTENED_INDICES`| | | | | |`MIOPEN_REDUCE_TENSOR_FLATTENED_INDICES`| | | | | |
-|`CUDNN_REDUCE_TENSOR_MAX`|6.0.0| | | |`HIPDNN_REDUCE_TENSOR_MAX`| | | | | |`MIOPEN_REDUCE_TENSOR_MAX`| | | | | |
-|`CUDNN_REDUCE_TENSOR_MIN`|6.0.0| | | |`HIPDNN_REDUCE_TENSOR_MIN`| | | | | |`MIOPEN_REDUCE_TENSOR_MIN`| | | | | |
-|`CUDNN_REDUCE_TENSOR_MUL`|6.0.0| | | |`HIPDNN_REDUCE_TENSOR_MUL`| | | | | |`MIOPEN_REDUCE_TENSOR_MUL`| | | | | |
+|`CUDNN_REDUCE_TENSOR_ADD`|6.0.0| | | |`HIPDNN_REDUCE_TENSOR_ADD`| | | | | |`MIOPEN_REDUCE_TENSOR_ADD`|3.9.0| | | | |
+|`CUDNN_REDUCE_TENSOR_AMAX`|6.0.0| | | |`HIPDNN_REDUCE_TENSOR_AMAX`| | | | | |`MIOPEN_REDUCE_TENSOR_AMAX`|3.9.0| | | | |
+|`CUDNN_REDUCE_TENSOR_AVG`|6.0.0| | | |`HIPDNN_REDUCE_TENSOR_AVG`| | | | | |`MIOPEN_REDUCE_TENSOR_AVG`|3.9.0| | | | |
+|`CUDNN_REDUCE_TENSOR_FLATTENED_INDICES`|6.0.0|9.0.0| | |`HIPDNN_REDUCE_TENSOR_FLATTENED_INDICES`| | | | | |`MIOPEN_REDUCE_TENSOR_FLATTENED_INDICES`|3.9.0| | | | |
+|`CUDNN_REDUCE_TENSOR_MAX`|6.0.0| | | |`HIPDNN_REDUCE_TENSOR_MAX`| | | | | |`MIOPEN_REDUCE_TENSOR_MAX`|3.9.0| | | | |
+|`CUDNN_REDUCE_TENSOR_MIN`|6.0.0| | | |`HIPDNN_REDUCE_TENSOR_MIN`| | | | | |`MIOPEN_REDUCE_TENSOR_MIN`|3.9.0| | | | |
+|`CUDNN_REDUCE_TENSOR_MUL`|6.0.0| | | |`HIPDNN_REDUCE_TENSOR_MUL`| | | | | |`MIOPEN_REDUCE_TENSOR_MUL`|3.9.0| | | | |
 |`CUDNN_REDUCE_TENSOR_MUL_NO_ZEROS`|7.0.5| | | |`HIPDNN_REDUCE_TENSOR_MUL_NO_ZEROS`| | | | | | | | | | | |
-|`CUDNN_REDUCE_TENSOR_NORM1`|6.0.0| | | |`HIPDNN_REDUCE_TENSOR_NORM1`| | | | | |`MIOPEN_REDUCE_TENSOR_NORM1`| | | | | |
-|`CUDNN_REDUCE_TENSOR_NORM2`|6.0.0| | | |`HIPDNN_REDUCE_TENSOR_NORM2`| | | | | |`MIOPEN_REDUCE_TENSOR_NORM2`| | | | | |
-|`CUDNN_REDUCE_TENSOR_NO_INDICES`|6.0.0|9.0.0| | |`HIPDNN_REDUCE_TENSOR_NO_INDICES`| | | | | |`MIOPEN_REDUCE_TENSOR_NO_INDICES`| | | | | |
+|`CUDNN_REDUCE_TENSOR_NORM1`|6.0.0| | | |`HIPDNN_REDUCE_TENSOR_NORM1`| | | | | |`MIOPEN_REDUCE_TENSOR_NORM1`|3.9.0| | | | |
+|`CUDNN_REDUCE_TENSOR_NORM2`|6.0.0| | | |`HIPDNN_REDUCE_TENSOR_NORM2`| | | | | |`MIOPEN_REDUCE_TENSOR_NORM2`|3.9.0| | | | |
+|`CUDNN_REDUCE_TENSOR_NO_INDICES`|6.0.0|9.0.0| | |`HIPDNN_REDUCE_TENSOR_NO_INDICES`| | | | | |`MIOPEN_REDUCE_TENSOR_NO_INDICES`|3.9.0| | | | |
 |`CUDNN_RESAMPLE_AVGPOOL`|8.3.0| | | | | | | | | | | | | | | |
 |`CUDNN_RESAMPLE_AVGPOOL_EXCLUDE_PADDING`|8.6.0| | | | | | | | | | | | | | | |
 |`CUDNN_RESAMPLE_AVGPOOL_INCLUDE_PADDING`|8.6.0| | | | | | | | | | | | | | | |
@@ -646,11 +646,11 @@
 |`CUDNN_SIGNAL_SET`|8.5.0| | | | | | | | | | | | | | | |
 |`CUDNN_SIGNAL_WAIT`|8.5.0| | | | | | | | | | | | | | | |
 |`CUDNN_SKIP_INPUT`|5.0.0| | | |`HIPDNN_SKIP_INPUT`| | | | | |`miopenRNNskip`|2.1.0| | | | |
-|`CUDNN_SOFTMAX_ACCURATE`|1.0.0| | | |`HIPDNN_SOFTMAX_ACCURATE`| | | | | |`MIOPEN_SOFTMAX_ACCURATE`| | | | | |
-|`CUDNN_SOFTMAX_FAST`|1.0.0| | | |`HIPDNN_SOFTMAX_FAST`| | | | | |`MIOPEN_SOFTMAX_FAST`| | | | | |
-|`CUDNN_SOFTMAX_LOG`|3.0.0| | | |`HIPDNN_SOFTMAX_LOG`| | | | | |`MIOPEN_SOFTMAX_LOG`| | | | | |
-|`CUDNN_SOFTMAX_MODE_CHANNEL`|1.0.0| | | |`HIPDNN_SOFTMAX_MODE_CHANNEL`| | | | | |`MIOPEN_SOFTMAX_MODE_CHANNEL`| | | | | |
-|`CUDNN_SOFTMAX_MODE_INSTANCE`|1.0.0| | | |`HIPDNN_SOFTMAX_MODE_INSTANCE`| | | | | |`MIOPEN_SOFTMAX_MODE_INSTANCE`| | | | | |
+|`CUDNN_SOFTMAX_ACCURATE`|1.0.0| | | |`HIPDNN_SOFTMAX_ACCURATE`| | | | | |`MIOPEN_SOFTMAX_ACCURATE`|2.6.0| | | | |
+|`CUDNN_SOFTMAX_FAST`|1.0.0| | | |`HIPDNN_SOFTMAX_FAST`| | | | | |`MIOPEN_SOFTMAX_FAST`|2.6.0| | | | |
+|`CUDNN_SOFTMAX_LOG`|3.0.0| | | |`HIPDNN_SOFTMAX_LOG`| | | | | |`MIOPEN_SOFTMAX_LOG`|2.6.0| | | | |
+|`CUDNN_SOFTMAX_MODE_CHANNEL`|1.0.0| | | |`HIPDNN_SOFTMAX_MODE_CHANNEL`| | | | | |`MIOPEN_SOFTMAX_MODE_CHANNEL`|2.6.0| | | | |
+|`CUDNN_SOFTMAX_MODE_INSTANCE`|1.0.0| | | |`HIPDNN_SOFTMAX_MODE_INSTANCE`| | | | | |`MIOPEN_SOFTMAX_MODE_INSTANCE`|2.6.0| | | | |
 |`CUDNN_STATUS_ALLOC_FAILED`|1.0.0|9.0.0| | |`HIPDNN_STATUS_ALLOC_FAILED`| | | | | |`miopenStatusAllocFailed`|2.1.0| | | | |
 |`CUDNN_STATUS_ARCH_MISMATCH`|1.0.0|9.0.0| | |`HIPDNN_STATUS_ARCH_MISMATCH`| | | | | | | | | | | |
 |`CUDNN_STATUS_BAD_PARAM`|1.0.0| | | |`HIPDNN_STATUS_BAD_PARAM`| | | | | |`miopenStatusBadParm`|2.1.0| | | | |
@@ -749,7 +749,7 @@
 |`CUDNN_WGRAD_MODE_SET`|7.5.0| | | | | | | | | | | | | | | |
 |`CUDNN_ZERO_PAD`|8.3.0| | | | | | | | | | | | | | | |
 |`cudnnActivationDescriptor_t`|4.0.0|9.0.0| | |`hipdnnActivationDescriptor_t`| | | | | |`miopenActivationDescriptor_t`| | | | | |
-|`cudnnActivationMode_t`|1.0.0|9.0.0| | |`hipdnnActivationMode_t`| | | | | |`miopenActivationMode_t`| | | | | |
+|`cudnnActivationMode_t`|1.0.0|9.0.0| | |`hipdnnActivationMode_t`| | | | | |`miopenActivationMode_t`|2.1.0| | | | |
 |`cudnnActivationStruct`|4.0.0|9.0.0| | | | | | | | | | | | | | |
 |`cudnnAlgorithmDescriptor_t`|7.1.3| | |9.0.0| | | | | | | | | | | | |
 |`cudnnAlgorithmPerformanceStruct`|7.1.3| | |9.0.0| | | | | | | | | | | | |
@@ -772,7 +772,7 @@
 |`cudnnBackendNormMode_t`|8.5.0| | | | | | | | | | | | | | | |
 |`cudnnBackendNumericalNote_t`|8.0.1| | | | | | | | | | | | | | | |
 |`cudnnBackendTensorReordering_t`|8.3.0| | | | | | | | | | | | | | | |
-|`cudnnBatchNormMode_t`|4.0.0|9.0.0| | |`hipdnnBatchNormMode_t`| | | | | |`miopenBatchNormMode_t`| | | | | |
+|`cudnnBatchNormMode_t`|4.0.0|9.0.0| | |`hipdnnBatchNormMode_t`| | | | | |`miopenBatchNormMode_t`|2.1.0| | | | |
 |`cudnnBatchNormOps_t`|7.4.1|9.0.0| | | | | | | | | | | | | | |
 |`cudnnBnFinalizeStatsMode_t`|8.1.0| | | | | | | | | | | | | | | |
 |`cudnnCTCGradMode_t`|9.0.0| | | | | | | | | | | | | | | |
@@ -823,7 +823,7 @@
 |`cudnnFusedOps_t`|7.6.0|9.0.0| | | | | | | | | | | | | | |
 |`cudnnGenStatsMode_t`|8.0.1| | | | | | | | | | | | | | | |
 |`cudnnHandle_t`|1.0.0| | | |`hipdnnHandle_t`| | | | | |`miopenHandle_t`| | | | | |
-|`cudnnIndicesType_t`|6.0.0|9.0.0| | |`hipdnnIndicesType_t`| | | | | |`miopenIndicesType_t`| | | | | |
+|`cudnnIndicesType_t`|6.0.0|9.0.0| | |`hipdnnIndicesType_t`| | | | | |`miopenIndicesType_t`|3.9.0| | | | |
 |`cudnnLRNDescriptor_t`|3.0.0| | | |`hipdnnLRNDescriptor_t`| | | | | |`miopenLRNDescriptor_t`| | | | | |
 |`cudnnLRNMode_t`|3.0.0| | | |`hipdnnLRNMode_t`| | | | | |`miopenLRNMode_t`|2.1.0| | | | |
 |`cudnnLRNStruct`|3.0.0| | | | | | | | | | | | | | | |
@@ -840,9 +840,9 @@
 |`cudnnPaddingMode_t`|8.3.0| | | | | | | | | | | | | | | |
 |`cudnnPersistentRNNPlan`|6.0.0| | | | | | | | | | | | | | | |
 |`cudnnPersistentRNNPlan_t`|6.0.0| | | |`hipdnnPersistentRNNPlan_t`| | | | | | | | | | | |
-|`cudnnPointwiseMode_t`|8.0.1| | | | | | | | | |`miopenPointwiseMode_t`| | | | | |
+|`cudnnPointwiseMode_t`|8.0.1| | | | | | | | | |`miopenPointwiseMode_t`|6.2.0| | | | |
 |`cudnnPoolingDescriptor_t`|1.0.0|9.0.0| | |`hipdnnPoolingDescriptor_t`| | | | | |`miopenPoolingDescriptor_t`| | | | | |
-|`cudnnPoolingMode_t`|1.0.0|9.0.0| | |`hipdnnPoolingMode_t`| | | | | |`miopenPoolingMode_t`| | | | | |
+|`cudnnPoolingMode_t`|1.0.0|9.0.0| | |`hipdnnPoolingMode_t`| | | | | |`miopenPoolingMode_t`|2.1.0| | | | |
 |`cudnnPoolingStruct`|1.0.0|9.0.0| | | | | | | | | | | | | | |
 |`cudnnRNNAlgo_t`|6.0.0| | | |`hipdnnRNNAlgo_t`| | | | | |`miopenRNNAlgo_t`|2.1.0| | | | |
 |`cudnnRNNBiasMode_t`|7.5.0| | | |`hipdnnRNNBiasMode_t`| | | | | |`miopenRNNBiasMode_t`|2.1.0| | | | |
@@ -856,8 +856,8 @@
 |`cudnnRNNPaddingMode_t`|7.2.1| | | | | | | | | | | | | | | |
 |`cudnnRNNStruct`|5.0.0| | | | | | | | | | | | | | | |
 |`cudnnReduceTensorDescriptor_t`|6.0.0|9.0.0| | |`hipdnnReduceTensorDescriptor_t`| | | | | |`miopenReduceTensorDescriptor_t`| | | | | |
-|`cudnnReduceTensorIndices_t`|6.0.0|9.0.0| | |`hipdnnReduceTensorIndices_t`| | | | | |`miopenReduceTensorIndices_t`| | | | | |
-|`cudnnReduceTensorOp_t`|6.0.0| | | |`hipdnnReduceTensorOp_t`| | | | | |`miopenReduceTensorOp_t`| | | | | |
+|`cudnnReduceTensorIndices_t`|6.0.0|9.0.0| | |`hipdnnReduceTensorIndices_t`| | | | | |`miopenReduceTensorIndices_t`|3.9.0| | | | |
+|`cudnnReduceTensorOp_t`|6.0.0| | | |`hipdnnReduceTensorOp_t`| | | | | |`miopenReduceTensorOp_t`|3.9.0| | | | |
 |`cudnnReduceTensorStruct`|6.0.0|9.0.0| | | | | | | | | | | | | | |
 |`cudnnReorderType_t`|7.6.0|9.0.0| | | | | | | | | | | | | | |
 |`cudnnResampleMode_t`|8.3.0| | | | | | | | | | | | | | | |
@@ -869,8 +869,8 @@
 |`cudnnSeqDataStruct`|7.5.0| | | | | | | | | | | | | | | |
 |`cudnnSeverity_t`|7.1.3| | | | | | | | | | | | | | | |
 |`cudnnSignalMode_t`|8.5.0| | | | | | | | | | | | | | | |
-|`cudnnSoftmaxAlgorithm_t`|1.0.0| | | |`hipdnnSoftmaxAlgorithm_t`| | | | | |`miopenSoftmaxAlgorithm_t`| | | | | |
-|`cudnnSoftmaxMode_t`|1.0.0| | | |`hipdnnSoftmaxMode_t`| | | | | |`miopenSoftmaxMode_t`| | | | | |
+|`cudnnSoftmaxAlgorithm_t`|1.0.0| | | |`hipdnnSoftmaxAlgorithm_t`| | | | | |`miopenSoftmaxAlgorithm_t`|2.6.0| | | | |
+|`cudnnSoftmaxMode_t`|1.0.0| | | |`hipdnnSoftmaxMode_t`| | | | | |`miopenSoftmaxMode_t`|2.6.0| | | | |
 |`cudnnSpatialTransformerDescriptor_t`|5.0.0| | | | | | | | | | | | | | | |
 |`cudnnSpatialTransformerStruct`|5.0.0| | | | | | | | | | | | | | | |
 |`cudnnStatus_t`|1.0.0| | | |`hipdnnStatus_t`| | | | | |`miopenStatus_t`|2.1.0| | | | |
