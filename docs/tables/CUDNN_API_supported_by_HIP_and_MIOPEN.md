@@ -368,11 +368,11 @@
 |`CUDNN_GENSTATS_SUM_SQSUM`|8.0.1| | | | | | | | | | | | | | | |
 |`CUDNN_GROUP_NORM`|8.5.0| | | | | | | | | | | | | | | |
 |`CUDNN_GRU`|5.0.0| | | |`HIPDNN_GRU`| | | | | |`miopenGRU`|2.1.0| | | | |
-|`CUDNN_HEUR_MODES_COUNT`|8.0.1| | | | | | | | | |`MIOPEN_HEUR_MODES_COUNT`| | | | | |
-|`CUDNN_HEUR_MODE_A`|8.3.0| | | | | | | | | |`MIOPEN_HEUR_MODE_A`| | | | | |
-|`CUDNN_HEUR_MODE_B`|8.0.1| | | | | | | | | |`MIOPEN_HEUR_MODE_B`| | | | | |
-|`CUDNN_HEUR_MODE_FALLBACK`|8.3.0| | | | | | | | | |`MIOPEN_HEUR_MODE_FALLBACK`| | | | | |
-|`CUDNN_HEUR_MODE_INSTANT`|8.0.1| | | | | | | | | |`MIOPEN_HEUR_MODE_INSTANT`| | | | | |
+|`CUDNN_HEUR_MODES_COUNT`|8.0.1| | | | | | | | | |`MIOPEN_HEUR_MODES_COUNT`|6.2.0| | | | |
+|`CUDNN_HEUR_MODE_A`|8.3.0| | | | | | | | | |`MIOPEN_HEUR_MODE_A`|6.2.0| | | | |
+|`CUDNN_HEUR_MODE_B`|8.0.1| | | | | | | | | |`MIOPEN_HEUR_MODE_B`|6.2.0| | | | |
+|`CUDNN_HEUR_MODE_FALLBACK`|8.3.0| | | | | | | | | |`MIOPEN_HEUR_MODE_FALLBACK`|6.2.0| | | | |
+|`CUDNN_HEUR_MODE_INSTANT`|8.0.1| | | | | | | | | |`MIOPEN_HEUR_MODE_INSTANT`|6.2.0| | | | |
 |`CUDNN_INSTANCE_NORM`|8.5.0| | | | | | | | | | | | | | | |
 |`CUDNN_KNOB_TYPE_ARRAY_SIZE_PER_THREAD`|8.9.0| | | | | | | | | | | | | | | |
 |`CUDNN_KNOB_TYPE_BLOCK_SIZE`|8.8.0| | | | | | | | | | | | | | | |
@@ -605,9 +605,9 @@
 |`CUDNN_RESAMPLE_MAXPOOL`|8.3.0| | | | | | | | | | | | | | | |
 |`CUDNN_RESAMPLE_NEAREST`|8.3.0| | | | | | | | | | | | | | | |
 |`CUDNN_RMS_NORM`|8.9.6| | | | | | | | | | | | | | | |
-|`CUDNN_RNG_DISTRIBUTION_BERNOULLI`|8.7.0| | | | | | | | | |`MIOPEN_RNG_DISTRIBUTION_BERNOULLI`| | | | | |
-|`CUDNN_RNG_DISTRIBUTION_NORMAL`|8.7.0| | | | | | | | | |`MIOPEN_RNG_DISTRIBUTION_NORMAL`| | | | | |
-|`CUDNN_RNG_DISTRIBUTION_UNIFORM`|8.7.0| | | | | | | | | |`MIOPEN_RNG_DISTRIBUTION_UNIFORM`| | | | | |
+|`CUDNN_RNG_DISTRIBUTION_BERNOULLI`|8.7.0| | | | | | | | | |`MIOPEN_RNG_DISTRIBUTION_BERNOULLI`|6.2.0| | | | |
+|`CUDNN_RNG_DISTRIBUTION_NORMAL`|8.7.0| | | | | | | | | |`MIOPEN_RNG_DISTRIBUTION_NORMAL`|6.2.0| | | | |
+|`CUDNN_RNG_DISTRIBUTION_UNIFORM`|8.7.0| | | | | | | | | |`MIOPEN_RNG_DISTRIBUTION_UNIFORM`|6.2.0| | | | |
 |`CUDNN_RNN_ALGO_COUNT`|7.1.3| | | | | | | | | | | | | | | |
 |`CUDNN_RNN_ALGO_PERSIST_DYNAMIC`|6.0.0| | | |`HIPDNN_RNN_ALGO_PERSIST_DYNAMIC`| | | | | | | | | | | |
 |`CUDNN_RNN_ALGO_PERSIST_STATIC`|6.0.0| | | |`HIPDNN_RNN_ALGO_PERSIST_STATIC`| | | | | | | | | | | |
@@ -748,7 +748,7 @@
 |`CUDNN_WGRAD_MODE_ADD`|7.5.0| | | | | | | | | | | | | | | |
 |`CUDNN_WGRAD_MODE_SET`|7.5.0| | | | | | | | | | | | | | | |
 |`CUDNN_ZERO_PAD`|8.3.0| | | | | | | | | | | | | | | |
-|`cudnnActivationDescriptor_t`|4.0.0|9.0.0| | |`hipdnnActivationDescriptor_t`| | | | | |`miopenActivationDescriptor_t`| | | | | |
+|`cudnnActivationDescriptor_t`|4.0.0|9.0.0| | |`hipdnnActivationDescriptor_t`| | | | | |`miopenActivationDescriptor_t`|2.1.0| | | | |
 |`cudnnActivationMode_t`|1.0.0|9.0.0| | |`hipdnnActivationMode_t`| | | | | |`miopenActivationMode_t`|2.1.0| | | | |
 |`cudnnActivationStruct`|4.0.0|9.0.0| | | | | | | | | | | | | | |
 |`cudnnAlgorithmDescriptor_t`|7.1.3| | |9.0.0| | | | | | | | | | | | |
@@ -764,8 +764,8 @@
 |`cudnnBackendAttributeType_t`|8.0.1| | | | | | | | | |`miopenBackendAttributeType_t`| | | | | |
 |`cudnnBackendBehaviorNote_t`|8.2.0| | | | | | | | | | | | | | | |
 |`cudnnBackendDescriptorType_t`|8.0.1| | | | | | | | | |`miopenBackendDescriptorType_t`|6.2.0| | | | |
-|`cudnnBackendDescriptor_t`|8.0.1| | | | | | | | | |`miopenBackendDescriptor_t`| | | | | |
-|`cudnnBackendHeurMode_t`|8.0.1| | | | | | | | | |`miopenBackendHeurMode_t`| | | | | |
+|`cudnnBackendDescriptor_t`|8.0.1| | | | | | | | | |`miopenBackendDescriptor_t`|6.2.0| | | | |
+|`cudnnBackendHeurMode_t`|8.0.1| | | | | | | | | |`miopenBackendHeurMode_t`|6.2.0| | | | |
 |`cudnnBackendKnobType_t`|8.0.1| | | | | | | | | | | | | | | |
 |`cudnnBackendLayoutType_t`|8.0.1| | | | | | | | | | | | | | | |
 |`cudnnBackendNormFwdPhase_t`|8.5.0| | | | | | | | | | | | | | | |
@@ -777,21 +777,21 @@
 |`cudnnBnFinalizeStatsMode_t`|8.1.0| | | | | | | | | | | | | | | |
 |`cudnnCTCGradMode_t`|9.0.0| | | | | | | | | | | | | | | |
 |`cudnnCTCLossAlgo_t`|7.0.5| | | | | | | | | |`miopenCTCLossAlgo_t`|2.6.0| | | | |
-|`cudnnCTCLossDescriptor_t`|7.0.5| | | | | | | | | |`miopenCTCLossDescriptor_t`| | | | | |
+|`cudnnCTCLossDescriptor_t`|7.0.5| | | | | | | | | |`miopenCTCLossDescriptor_t`|2.6.0| | | | |
 |`cudnnCTCLossStruct`|7.0.5| | | | | | | | | | | | | | | |
 |`cudnnCallback_t`|7.1.3| | | | | | | | | | | | | | | |
-|`cudnnContext`|1.0.0| | | | | | | | | |`miopenHandle`| | | | | |
-|`cudnnConvolutionBwdDataAlgoPerfStruct`|8.2.0|9.0.0| | |`hipdnnConvolutionBwdDataAlgoPerf_t`| | | | | |`miopenConvAlgoPerf_t`| | | | | |
-|`cudnnConvolutionBwdDataAlgoPerf_t`|3.0.0|9.0.0| | |`hipdnnConvolutionBwdDataAlgoPerf_t`| | | | | |`miopenConvAlgoPerf_t`| | | | | |
+|`cudnnContext`|1.0.0| | | | | | | | | |`miopenHandle`|2.1.0| | | | |
+|`cudnnConvolutionBwdDataAlgoPerfStruct`|8.2.0|9.0.0| | |`hipdnnConvolutionBwdDataAlgoPerf_t`| | | | | |`miopenConvAlgoPerf_t`|2.1.0| | | | |
+|`cudnnConvolutionBwdDataAlgoPerf_t`|3.0.0|9.0.0| | |`hipdnnConvolutionBwdDataAlgoPerf_t`| | | | | |`miopenConvAlgoPerf_t`|2.1.0| | | | |
 |`cudnnConvolutionBwdDataAlgo_t`|3.0.0| | | |`hipdnnConvolutionBwdDataAlgo_t`| | | | | |`miopenConvBwdDataAlgorithm_t`|2.1.0| | | | |
 |`cudnnConvolutionBwdDataPreference_t`|3.0.0|7.6.5| |8.0.1|`hipdnnConvolutionBwdDataPreference_t`| | | | | | | | | | | |
 |`cudnnConvolutionBwdFilterAlgoPerfStruct`|8.2.0| | | |`hipdnnConvolutionBwdFilterAlgoPerf_t`| | | | | | | | | | | |
 |`cudnnConvolutionBwdFilterAlgoPerf_t`|3.0.0|9.0.0| | |`hipdnnConvolutionBwdFilterAlgoPerf_t`| | | | | | | | | | | |
 |`cudnnConvolutionBwdFilterAlgo_t`|3.0.0| | | |`hipdnnConvolutionBwdFilterAlgo_t`| | | | | | | | | | | |
 |`cudnnConvolutionBwdFilterPreference_t`|3.0.0|7.6.5| |8.0.1|`hipdnnConvolutionBwdFilterPreference_t`| | | | | | | | | | | |
-|`cudnnConvolutionDescriptor_t`|1.0.0|9.0.0| | |`hipdnnConvolutionDescriptor_t`| | | | | |`miopenConvolutionDescriptor_t`| | | | | |
-|`cudnnConvolutionFwdAlgoPerfStruct`|8.2.0| | | |`hipdnnConvolutionFwdAlgoPerf_t`| | | | | |`miopenConvAlgoPerf_t`| | | | | |
-|`cudnnConvolutionFwdAlgoPerf_t`|3.0.0|9.0.0| | |`hipdnnConvolutionFwdAlgoPerf_t`| | | | | |`miopenConvAlgoPerf_t`| | | | | |
+|`cudnnConvolutionDescriptor_t`|1.0.0|9.0.0| | |`hipdnnConvolutionDescriptor_t`| | | | | |`miopenConvolutionDescriptor_t`|2.1.0| | | | |
+|`cudnnConvolutionFwdAlgoPerfStruct`|8.2.0| | | |`hipdnnConvolutionFwdAlgoPerf_t`| | | | | |`miopenConvAlgoPerf_t`|2.1.0| | | | |
+|`cudnnConvolutionFwdAlgoPerf_t`|3.0.0|9.0.0| | |`hipdnnConvolutionFwdAlgoPerf_t`| | | | | |`miopenConvAlgoPerf_t`|2.1.0| | | | |
 |`cudnnConvolutionFwdAlgo_t`|2.0.0| | | |`hipdnnConvolutionFwdAlgo_t`| | | | | |`miopenConvFwdAlgorithm_t`|2.1.0| | | | |
 |`cudnnConvolutionFwdPreference_t`|2.0.0|7.6.5| |8.0.1|`hipdnnConvolutionFwdPreference_t`| | | | | | | | | | | |
 |`cudnnConvolutionMode_t`|1.0.0| | | |`hipdnnConvolutionMode_t`| | | | | |`miopenConvolutionMode_t`|2.1.0| | | | |
@@ -802,10 +802,10 @@
 |`cudnnDeterminism_t`|6.0.0| | | | | | | | | | | | | | | |
 |`cudnnDirectionMode_t`|5.0.0| | | |`hipdnnDirectionMode_t`| | | | | |`miopenRNNDirectionMode_t`|2.1.0| | | | |
 |`cudnnDivNormMode_t`|3.0.0| | | | | | | | | | | | | | | |
-|`cudnnDropoutDescriptor_t`|5.0.0| | | |`hipdnnDropoutDescriptor_t`| | | | | |`miopenDropoutDescriptor_t`| | | | | |
+|`cudnnDropoutDescriptor_t`|5.0.0| | | |`hipdnnDropoutDescriptor_t`| | | | | |`miopenDropoutDescriptor_t`|2.8.0| | | | |
 |`cudnnDropoutStruct`|5.0.0| | | | | | | | | | | | | | | |
 |`cudnnErrQueryMode_t`|7.0.5| | | | | | | | | | | | | | | |
-|`cudnnFilterDescriptor_t`|1.0.0| | | |`hipdnnFilterDescriptor_t`| | | | | |`miopenTensorDescriptor_t`| | | | | |
+|`cudnnFilterDescriptor_t`|1.0.0| | | |`hipdnnFilterDescriptor_t`| | | | | |`miopenTensorDescriptor_t`|2.1.0| | | | |
 |`cudnnFilterStruct`|1.0.0|9.0.0| | | | | | | | | | | | | | |
 |`cudnnFoldingDirection_t`|7.5.0| | | | | | | | | | | | | | | |
 |`cudnnForwardMode_t`|8.0.1| | | | | | | | | | | | | | | |
@@ -822,9 +822,9 @@
 |`cudnnFusedOpsVariantParamStruct`|7.6.0|9.0.0| | | | | | | | | | | | | | |
 |`cudnnFusedOps_t`|7.6.0|9.0.0| | | | | | | | | | | | | | |
 |`cudnnGenStatsMode_t`|8.0.1| | | | | | | | | | | | | | | |
-|`cudnnHandle_t`|1.0.0| | | |`hipdnnHandle_t`| | | | | |`miopenHandle_t`| | | | | |
+|`cudnnHandle_t`|1.0.0| | | |`hipdnnHandle_t`| | | | | |`miopenHandle_t`|2.1.0| | | | |
 |`cudnnIndicesType_t`|6.0.0|9.0.0| | |`hipdnnIndicesType_t`| | | | | |`miopenIndicesType_t`|3.9.0| | | | |
-|`cudnnLRNDescriptor_t`|3.0.0| | | |`hipdnnLRNDescriptor_t`| | | | | |`miopenLRNDescriptor_t`| | | | | |
+|`cudnnLRNDescriptor_t`|3.0.0| | | |`hipdnnLRNDescriptor_t`| | | | | |`miopenLRNDescriptor_t`|2.1.0| | | | |
 |`cudnnLRNMode_t`|3.0.0| | | |`hipdnnLRNMode_t`| | | | | |`miopenLRNMode_t`|2.1.0| | | | |
 |`cudnnLRNStruct`|3.0.0| | | | | | | | | | | | | | | |
 |`cudnnLossNormalizationMode_t`|7.6.0| | | | | | | | | | | | | | | |
@@ -841,7 +841,7 @@
 |`cudnnPersistentRNNPlan`|6.0.0| | | | | | | | | | | | | | | |
 |`cudnnPersistentRNNPlan_t`|6.0.0| | | |`hipdnnPersistentRNNPlan_t`| | | | | | | | | | | |
 |`cudnnPointwiseMode_t`|8.0.1| | | | | | | | | |`miopenPointwiseMode_t`|6.2.0| | | | |
-|`cudnnPoolingDescriptor_t`|1.0.0|9.0.0| | |`hipdnnPoolingDescriptor_t`| | | | | |`miopenPoolingDescriptor_t`| | | | | |
+|`cudnnPoolingDescriptor_t`|1.0.0|9.0.0| | |`hipdnnPoolingDescriptor_t`| | | | | |`miopenPoolingDescriptor_t`|2.1.0| | | | |
 |`cudnnPoolingMode_t`|1.0.0|9.0.0| | |`hipdnnPoolingMode_t`| | | | | |`miopenPoolingMode_t`|2.1.0| | | | |
 |`cudnnPoolingStruct`|1.0.0|9.0.0| | | | | | | | | | | | | | |
 |`cudnnRNNAlgo_t`|6.0.0| | | |`hipdnnRNNAlgo_t`| | | | | |`miopenRNNAlgo_t`|2.1.0| | | | |
@@ -850,18 +850,18 @@
 |`cudnnRNNDataDescriptor_t`|7.2.1| | | | | | | | | | | | | | | |
 |`cudnnRNNDataLayout_t`|7.2.1| | | | | | | | | | | | | | | |
 |`cudnnRNNDataStruct`|7.2.1| | | | | | | | | | | | | | | |
-|`cudnnRNNDescriptor_t`|5.0.0| | | |`hipdnnRNNDescriptor_t`| | | | | |`miopenRNNDescriptor_t`| | | | | |
+|`cudnnRNNDescriptor_t`|5.0.0| | | |`hipdnnRNNDescriptor_t`| | | | | |`miopenRNNDescriptor_t`|2.1.0| | | | |
 |`cudnnRNNInputMode_t`|5.0.0| | | |`hipdnnRNNInputMode_t`| | | | | |`miopenRNNInputMode_t`|2.1.0| | | | |
 |`cudnnRNNMode_t`|5.0.0| | | |`hipdnnRNNMode_t`| | | | | |`miopenRNNMode_t`|2.1.0| | | | |
 |`cudnnRNNPaddingMode_t`|7.2.1| | | | | | | | | | | | | | | |
 |`cudnnRNNStruct`|5.0.0| | | | | | | | | | | | | | | |
-|`cudnnReduceTensorDescriptor_t`|6.0.0|9.0.0| | |`hipdnnReduceTensorDescriptor_t`| | | | | |`miopenReduceTensorDescriptor_t`| | | | | |
+|`cudnnReduceTensorDescriptor_t`|6.0.0|9.0.0| | |`hipdnnReduceTensorDescriptor_t`| | | | | |`miopenReduceTensorDescriptor_t`|3.9.0| | | | |
 |`cudnnReduceTensorIndices_t`|6.0.0|9.0.0| | |`hipdnnReduceTensorIndices_t`| | | | | |`miopenReduceTensorIndices_t`|3.9.0| | | | |
 |`cudnnReduceTensorOp_t`|6.0.0| | | |`hipdnnReduceTensorOp_t`| | | | | |`miopenReduceTensorOp_t`|3.9.0| | | | |
 |`cudnnReduceTensorStruct`|6.0.0|9.0.0| | | | | | | | | | | | | | |
 |`cudnnReorderType_t`|7.6.0|9.0.0| | | | | | | | | | | | | | |
 |`cudnnResampleMode_t`|8.3.0| | | | | | | | | | | | | | | |
-|`cudnnRngDistribution_t`|8.7.0| | | | | | | | | |`miopenRngDistribution_t`| | | | | |
+|`cudnnRngDistribution_t`|8.7.0| | | | | | | | | |`miopenRngDistribution_t`|6.2.0| | | | |
 |`cudnnRuntimeTag_t`|7.0.5|9.0.0| | | | | | | | | | | | | | |
 |`cudnnSamplerType_t`|5.0.0| | | | | | | | | | | | | | | |
 |`cudnnSeqDataAxis_t`|7.5.0| | | | | | | | | | | | | | | |
@@ -874,7 +874,7 @@
 |`cudnnSpatialTransformerDescriptor_t`|5.0.0| | | | | | | | | | | | | | | |
 |`cudnnSpatialTransformerStruct`|5.0.0| | | | | | | | | | | | | | | |
 |`cudnnStatus_t`|1.0.0| | | |`hipdnnStatus_t`| | | | | |`miopenStatus_t`|2.1.0| | | | |
-|`cudnnTensorDescriptor_t`|2.0.0| | | |`hipdnnTensorDescriptor_t`| | | | | |`miopenTensorDescriptor_t`| | | | | |
+|`cudnnTensorDescriptor_t`|2.0.0| | | |`hipdnnTensorDescriptor_t`| | | | | |`miopenTensorDescriptor_t`|2.1.0| | | | |
 |`cudnnTensorFormat_t`|1.0.0| | | |`hipdnnTensorFormat_t`| | | | | |`miopenTensorLayout_t`|5.3.0| | | | |
 |`cudnnTensorStruct`|2.0.0| | | | | | | | | | | | | | | |
 |`cudnnTensorTransformDescriptor_t`|7.5.0|9.0.0| | | | | | | | | | | | | | |
