@@ -2136,11 +2136,17 @@ sub rocSubstitutions {
     subst("curandDestroyGenerator", "rocrand_destroy_generator", "library");
     subst("curandGenerate", "rocrand_generate", "library");
     subst("curandGenerateLogNormal", "rocrand_generate_log_normal", "library");
+    subst("curandGenerateLogNormalDouble", "rocrand_generate_log_normal_double", "library");
     subst("curandGenerateLongLong", "rocrand_generate_long_long", "library");
     subst("curandGenerateNormal", "rocrand_generate_normal", "library");
     subst("curandGenerateNormalDouble", "rocrand_generate_normal_double", "library");
+    subst("curandGeneratePoisson", "rocrand_generate_poisson", "library");
+    subst("curandGenerateSeeds", "rocrand_initialize_generator", "library");
     subst("curandGenerateUniform", "rocrand_generate_uniform", "library");
     subst("curandGenerateUniformDouble", "rocrand_generate_uniform_double", "library");
+    subst("curandSetGeneratorOffset", "rocrand_set_offset", "library");
+    subst("curandSetPseudoRandomGeneratorSeed", "rocrand_set_seed", "library");
+    subst("curandSetStream", "rocrand_set_stream", "library");
     subst("cusolverDnCpotrf", "rocsolver_cpotrf", "library");
     subst("cusolverDnCreate", "rocblas_create_handle", "library");
     subst("cusolverDnDestroy", "rocblas_destroy_handle", "library");

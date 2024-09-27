@@ -13,15 +13,17 @@ int main() {
   unsigned int *outputPtr = nullptr;
   float *outputPtrFloat = nullptr;
   double *outputPtrDouble = nullptr;
+  unsigned long long *outputPtrUll = nullptr;
+  unsigned long long offset = 0;
   size_t num = 0;
   float mean = 0.f;
+  double dmean = 0.f;
   float stddev = 0.f;
+  double dstddev = 0.f;
+  double dlambda = 0.f;
 
-#if defined(_WIN32)
-  unsigned long long *outputPtrUll = nullptr;
-#else
-  unsigned long *outputPtrUll = nullptr;
-#endif
+  // CHECK: hipStream_t stream;
+  cudaStream_t stream;
 
   // CHECK: rocrand_status randStatus;
   // CHECK-NEXT: rocrand_status status;
@@ -141,8 +143,8 @@ int main() {
 
   // CUDA: curandStatus_t CURANDAPI curandGenerateNormalDouble(curandGenerator_t generator, double *outputPtr, size_t n, double mean, double stddev);
   // ROC: rocrand_status ROCRANDAPI rocrand_generate_normal_double(rocrand_generator generator, double * output_data, size_t n, double mean, double stddev);
-  // CHECK: status = rocrand_generate_normal_double(randGenerator, outputPtrDouble, num, mean, stddev);
-  status = curandGenerateNormalDouble(randGenerator, outputPtrDouble, num, mean, stddev);
+  // CHECK: status = rocrand_generate_normal_double(randGenerator, outputPtrDouble, num, dmean, dstddev);
+  status = curandGenerateNormalDouble(randGenerator, outputPtrDouble, num, dmean, dstddev);
 
   // CUDA: curandStatus_t CURANDAPI curandGenerateUniform(curandGenerator_t generator, float *outputPtr, size_t num);
   // ROC: rocrand_status ROCRANDAPI rocrand_generate_uniform(rocrand_generator generator, float * output_data, size_t n);
@@ -153,6 +155,36 @@ int main() {
   // ROC: rocrand_status ROCRANDAPI rocrand_generate_uniform_double(rocrand_generator generator, double * output_data, size_t n);
   // CHECK: status = rocrand_generate_uniform_double(randGenerator, outputPtrDouble, num);
   status = curandGenerateUniformDouble(randGenerator, outputPtrDouble, num);
+
+  // CUDA: curandStatus_t CURANDAPI curandGenerateLogNormalDouble(curandGenerator_t generator, double *outputPtr, size_t n, double mean, double stddev);
+  // ROC: rocrand_status ROCRANDAPI rocrand_generate_log_normal_double(rocrand_generator generator, double * output_data, size_t n, double mean, double stddev);
+  // CHECK: status = rocrand_generate_log_normal_double(randGenerator, outputPtrDouble, num, dmean, dstddev);
+  status = curandGenerateLogNormalDouble(randGenerator, outputPtrDouble, num, dmean, dstddev);
+
+  // CUDA: curandStatus_t CURANDAPI curandGeneratePoisson(curandGenerator_t generator, unsigned int *outputPtr, size_t n, double lambda);
+  // ROC: rocrand_status ROCRANDAPI rocrand_generate_poisson(rocrand_generator generator, unsigned int * output_data, size_t n, double lambda);
+  // CHECK: status = rocrand_generate_poisson(randGenerator, outputPtr, num, dlambda);
+  status = curandGeneratePoisson(randGenerator, outputPtr, num, dlambda);
+
+  // CUDA: curandStatus_t CURANDAPI curandGenerateSeeds(curandGenerator_t generator);
+  // ROC: rocrand_status ROCRANDAPI rocrand_initialize_generator(rocrand_generator generator);
+  // CHECK: status = rocrand_initialize_generator(randGenerator);
+  status = curandGenerateSeeds(randGenerator);
+
+  // CUDA: curandStatus_t CURANDAPI curandSetGeneratorOffset(curandGenerator_t generator, unsigned long long offset);
+  // ROC: rocrand_status ROCRANDAPI rocrand_set_offset(rocrand_generator generator, unsigned long long offset);
+  // CHECK: status = rocrand_set_offset(randGenerator, offset);
+  status = curandSetGeneratorOffset(randGenerator, offset);
+
+  // CUDA: curandStatus_t CURANDAPI curandSetPseudoRandomGeneratorSeed(curandGenerator_t generator, unsigned long long seed);
+  // ROC: rocrand_status ROCRANDAPI rocrand_set_seed(rocrand_generator generator, unsigned long long seed);
+  // CHECK: status = rocrand_set_seed(randGenerator, offset);
+  status = curandSetPseudoRandomGeneratorSeed(randGenerator, offset);
+
+  // CUDA: curandStatus_t CURANDAPI curandSetStream(curandGenerator_t generator, cudaStream_t stream);
+  // ROC: rocrand_status ROCRANDAPI rocrand_set_stream(rocrand_generator generator, hipStream_t stream);
+  // CHECK: status = rocrand_set_stream(randGenerator, stream);
+  status = curandSetStream(randGenerator, stream);
 
 #if CUDA_VERSION >= 11000 && CURAND_VERSION >= 10200
   // CHECK: rocrand_ordering RAND_ORDERING_PSEUDO_LEGACY = ROCRAND_ORDERING_PSEUDO_LEGACY;
