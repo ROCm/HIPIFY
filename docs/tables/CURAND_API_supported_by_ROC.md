@@ -111,12 +111,12 @@
 |`curandDestroyGenerator`| | | | |`rocrand_destroy_generator`|1.5.0| | | | |
 |`curandGenerate`| | | | |`rocrand_generate`|1.5.0| | | | |
 |`curandGenerateLogNormal`| | | | |`rocrand_generate_log_normal`|1.5.0| | | | |
-|`curandGenerateLogNormalDouble`| | | | | | | | | | |
+|`curandGenerateLogNormalDouble`| | | | |`rocrand_generate_log_normal_double`|1.5.0| | | | |
 |`curandGenerateLongLong`| | | | |`rocrand_generate_long_long`|5.4.0| | | | |
 |`curandGenerateNormal`| | | | |`rocrand_generate_normal`|1.5.0| | | | |
 |`curandGenerateNormalDouble`| | | | |`rocrand_generate_normal_double`|1.5.0| | | | |
-|`curandGeneratePoisson`| | | | | | | | | | |
-|`curandGenerateSeeds`| | | | | | | | | | |
+|`curandGeneratePoisson`| | | | |`rocrand_generate_poisson`|1.5.0| | | | |
+|`curandGenerateSeeds`| | | | |`rocrand_initialize_generator`|1.5.0| | | | |
 |`curandGenerateUniform`| | | | |`rocrand_generate_uniform`|1.5.0| | | | |
 |`curandGenerateUniformDouble`| | | | |`rocrand_generate_uniform_double`|1.5.0| | | | |
 |`curandGetDirectionVectors32`| | | | | | | | | | |
@@ -127,11 +127,11 @@
 |`curandGetVersion`| | | | | | | | | | |
 |`curandMakeMTGP32Constants`| | | | | | | | | | |
 |`curandMakeMTGP32KernelState`| | | | | | | | | | |
-|`curandSetGeneratorOffset`| | | | | | | | | | |
+|`curandSetGeneratorOffset`| | | | |`rocrand_set_offset`|1.5.0| | | | |
 |`curandSetGeneratorOrdering`| | | | | | | | | | |
-|`curandSetPseudoRandomGeneratorSeed`| | | | | | | | | | |
+|`curandSetPseudoRandomGeneratorSeed`| | | | |`rocrand_set_seed`|1.5.0| | | | |
 |`curandSetQuasiRandomGeneratorDimensions`| | | | | | | | | | |
-|`curandSetStream`| | | | | | | | | | |
+|`curandSetStream`| | | | |`rocrand_set_stream`|1.5.0| | | | |
 
 ## **3. Device API Functions**
 

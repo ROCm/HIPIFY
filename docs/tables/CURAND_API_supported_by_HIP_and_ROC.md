@@ -111,12 +111,12 @@
 |`curandDestroyGenerator`| | | | |`hiprandDestroyGenerator`|1.5.0| | | | |`rocrand_destroy_generator`|1.5.0| | | | |
 |`curandGenerate`| | | | |`hiprandGenerate`|1.5.0| | | | |`rocrand_generate`|1.5.0| | | | |
 |`curandGenerateLogNormal`| | | | |`hiprandGenerateLogNormal`|1.5.0| | | | |`rocrand_generate_log_normal`|1.5.0| | | | |
-|`curandGenerateLogNormalDouble`| | | | |`hiprandGenerateLogNormalDouble`|1.5.0| | | | | | | | | | |
+|`curandGenerateLogNormalDouble`| | | | |`hiprandGenerateLogNormalDouble`|1.5.0| | | | |`rocrand_generate_log_normal_double`|1.5.0| | | | |
 |`curandGenerateLongLong`| | | | |`hiprandGenerateLongLong`|5.5.0| | | | |`rocrand_generate_long_long`|5.4.0| | | | |
 |`curandGenerateNormal`| | | | |`hiprandGenerateNormal`|1.5.0| | | | |`rocrand_generate_normal`|1.5.0| | | | |
 |`curandGenerateNormalDouble`| | | | |`hiprandGenerateNormalDouble`|1.5.0| | | | |`rocrand_generate_normal_double`|1.5.0| | | | |
-|`curandGeneratePoisson`| | | | |`hiprandGeneratePoisson`|1.5.0| | | | | | | | | | |
-|`curandGenerateSeeds`| | | | |`hiprandGenerateSeeds`|1.5.0| | | | | | | | | | |
+|`curandGeneratePoisson`| | | | |`hiprandGeneratePoisson`|1.5.0| | | | |`rocrand_generate_poisson`|1.5.0| | | | |
+|`curandGenerateSeeds`| | | | |`hiprandGenerateSeeds`|1.5.0| | | | |`rocrand_initialize_generator`|1.5.0| | | | |
 |`curandGenerateUniform`| | | | |`hiprandGenerateUniform`|1.5.0| | | | |`rocrand_generate_uniform`|1.5.0| | | | |
 |`curandGenerateUniformDouble`| | | | |`hiprandGenerateUniformDouble`|1.5.0| | | | |`rocrand_generate_uniform_double`|1.5.0| | | | |
 |`curandGetDirectionVectors32`| | | | |`hiprandGetDirectionVectors32`|6.0.0| | | | | | | | | | |
@@ -127,11 +127,11 @@
 |`curandGetVersion`| | | | |`hiprandGetVersion`|1.5.0| | | | | | | | | | |
 |`curandMakeMTGP32Constants`| | | | |`hiprandMakeMTGP32Constants`|1.5.0| | | | | | | | | | |
 |`curandMakeMTGP32KernelState`| | | | |`hiprandMakeMTGP32KernelState`|1.5.0| | | | | | | | | | |
-|`curandSetGeneratorOffset`| | | | |`hiprandSetGeneratorOffset`|1.5.0| | | | | | | | | | |
+|`curandSetGeneratorOffset`| | | | |`hiprandSetGeneratorOffset`|1.5.0| | | | |`rocrand_set_offset`|1.5.0| | | | |
 |`curandSetGeneratorOrdering`| | | | |`hiprandSetGeneratorOrdering`|6.2.0| | | | | | | | | | |
-|`curandSetPseudoRandomGeneratorSeed`| | | | |`hiprandSetPseudoRandomGeneratorSeed`|1.5.0| | | | | | | | | | |
+|`curandSetPseudoRandomGeneratorSeed`| | | | |`hiprandSetPseudoRandomGeneratorSeed`|1.5.0| | | | |`rocrand_set_seed`|1.5.0| | | | |
 |`curandSetQuasiRandomGeneratorDimensions`| | | | |`hiprandSetQuasiRandomGeneratorDimensions`|1.5.0| | | | | | | | | | |
-|`curandSetStream`| | | | |`hiprandSetStream`|1.5.0| | | | | | | | | | |
+|`curandSetStream`| | | | |`hiprandSetStream`|1.5.0| | | | |`rocrand_set_stream`|1.5.0| | | | |
 
 ## **3. Device API Functions**
 
