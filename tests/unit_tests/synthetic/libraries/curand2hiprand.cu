@@ -18,6 +18,21 @@
 int main() {
   printf("21. cuRAND API to hipRAND API synthetic test\n");
 
+  unsigned int *outputPtr = nullptr;
+  float *outputPtrFloat = nullptr;
+  double *outputPtrDouble = nullptr;
+  unsigned long long *outputPtrUll = nullptr;
+  unsigned long long offset = 0;
+  size_t num = 0;
+  float mean = 0.f;
+  double dmean = 0.f;
+  float stddev = 0.f;
+  double dstddev = 0.f;
+  double dlambda = 0.f;
+
+  // CHECK: hipStream_t stream;
+  cudaStream_t stream;
+
   // CHECK: hiprandStatus randStatus;
   // CHECK-NEXT: hiprandStatus_t status;
   // CHECK-NEXT: hiprandStatus_t STATUS_SUCCESS = HIPRAND_STATUS_SUCCESS;
@@ -131,6 +146,21 @@ int main() {
   curandDirectionVectorSet_t DIRECTION_VECTORS_64_JOEKUO6 = CURAND_DIRECTION_VECTORS_64_JOEKUO6;
   curandDirectionVectorSet_t SCRAMBLED_DIRECTION_VECTORS_64_JOEKUO6 = CURAND_SCRAMBLED_DIRECTION_VECTORS_64_JOEKUO6;
 
+  // CUDA: curandStatus_t CURANDAPI curandCreateGenerator(curandGenerator_t *generator, curandRngType_t rng_type);
+  // HIP: hiprandStatus_t HIPRANDAPI hiprandCreateGenerator(hiprandGenerator_t* generator, hiprandRngType_t rng_type)
+  // CHECK: status = hiprandCreateGenerator(&randGenerator, randRngType_t);
+  status = curandCreateGenerator(&randGenerator, randRngType_t);
+
+  // CUDA: curandStatus_t CURANDAPI curandDestroyGenerator(curandGenerator_t generator);
+  // HIP: hiprandStatus_t HIPRANDAPI hiprandDestroyGenerator(hiprandGenerator_t generator);
+  // CHECK: status = hiprandDestroyGenerator(randGenerator);
+  status = curandDestroyGenerator(randGenerator);
+
+  // CUDA: curandStatus_t CURANDAPI curandCreateGeneratorHost(curandGenerator_t *generator, curandRngType_t rng_type);
+  // HIP: hiprandStatus_t HIPRANDAPI hiprandCreateGeneratorHost(hiprandGenerator_t * generator, hiprandRngType_t rng_type);
+  // CHECK: status = hiprandCreateGeneratorHost(&randGenerator, randRngType_t);
+  status = curandCreateGeneratorHost(&randGenerator, randRngType_t);
+
   // CUDA: curandStatus_t CURANDAPI curandSetGeneratorOrdering(curandGenerator_t generator, curandOrdering_t order);
   // HIP: hiprandStatus_t HIPRANDAPI hiprandSetGeneratorOrdering(hiprandGenerator_t generator, hiprandOrdering_t order);
   // CHECK: status = hiprandSetGeneratorOrdering(randGenerator, randOrdering_t);
@@ -140,6 +170,71 @@ int main() {
   // HIP: hiprandStatus_t HIPRANDAPI hiprandGetDirectionVectors64(hiprandDirectionVectors64_t** vectors, hiprandDirectionVectorSet_t set);
   // CHECK: status = hiprandGetDirectionVectors64(&pDirections64, directionVectorSet_t);
   status = curandGetDirectionVectors64(&pDirections64, directionVectorSet_t);
+
+  // CUDA: curandStatus_t CURANDAPI curandGenerate(curandGenerator_t generator, unsigned int *outputPtr, size_t num);
+  // HIP: hiprandStatus_t HIPRANDAPI hiprandGenerate(hiprandGenerator_t generator, unsigned int * output_data, size_t n);
+  // CHECK: status = hiprandGenerate(randGenerator, outputPtr, num);
+  status = curandGenerate(randGenerator, outputPtr, num);
+
+  // CUDA: curandStatus_t CURANDAPI curandGenerateLogNormal(curandGenerator_t generator, float *outputPtr, size_t n, float mean, float stddev);
+  // HIP: hiprandStatus_t HIPRANDAPI hiprandGenerateLogNormal(hiprandGenerator_t generator, float * output_data, size_t n, float mean, float stddev);
+  // CHECK: status = hiprandGenerateLogNormal(randGenerator, outputPtrFloat, num, mean, stddev);
+  status = curandGenerateLogNormal(randGenerator, outputPtrFloat, num, mean, stddev);
+
+  // CUDA: curandStatus_t CURANDAPI curandGenerateLongLong(curandGenerator_t generator, unsigned long long *outputPtr, size_t num);
+  // HIP: hiprandStatus_t HIPRANDAPI hiprandGenerateLongLong(hiprandGenerator_t generator, unsigned long long* output_data, size_t n);
+  // CHECK: status = hiprandGenerateLongLong(randGenerator, outputPtrUll, num);
+  status = curandGenerateLongLong(randGenerator, outputPtrUll, num);
+
+  // CUDA: curandStatus_t CURANDAPI curandGenerateNormal(curandGenerator_t generator, float *outputPtr, size_t n, float mean, float stddev);
+  // HIP: hiprandStatus_t HIPRANDAPI hiprandGenerateNormal(hiprandGenerator_t generator, float * output_data, size_t n, float mean, float stddev);
+  // CHECK: status = hiprandGenerateNormal(randGenerator, outputPtrFloat, num, mean, stddev);
+  status = curandGenerateNormal(randGenerator, outputPtrFloat, num, mean, stddev);
+
+  // CUDA: curandStatus_t CURANDAPI curandGenerateNormalDouble(curandGenerator_t generator, double *outputPtr, size_t n, double mean, double stddev);
+  // HIP: hiprandStatus_t HIPRANDAPI hiprandGenerateNormalDouble(hiprandGenerator_t generator, double * output_data, size_t n, double mean, double stddev);
+  // CHECK: status = hiprandGenerateNormalDouble(randGenerator, outputPtrDouble, num, dmean, dstddev);
+  status = curandGenerateNormalDouble(randGenerator, outputPtrDouble, num, dmean, dstddev);
+
+  // CUDA: curandStatus_t CURANDAPI curandGenerateUniform(curandGenerator_t generator, float *outputPtr, size_t num);
+  // HIP: hiprandStatus_t HIPRANDAPI hiprandGenerateUniform(hiprandGenerator_t generator, float * output_data, size_t n);
+  // CHECK: status = hiprandGenerateUniform(randGenerator, outputPtrFloat, num);
+  status = curandGenerateUniform(randGenerator, outputPtrFloat, num);
+
+  // CUDA: curandStatus_t CURANDAPI curandGenerateUniformDouble(curandGenerator_t generator, double *outputPtr, size_t num);
+  // HIP: hiprandStatus_t HIPRANDAPI hiprandGenerateUniformDouble(hiprandGenerator_t generator, double * output_data, size_t n);
+  // CHECK: status = hiprandGenerateUniformDouble(randGenerator, outputPtrDouble, num);
+  status = curandGenerateUniformDouble(randGenerator, outputPtrDouble, num);
+
+  // CUDA: curandStatus_t CURANDAPI curandGenerateLogNormalDouble(curandGenerator_t generator, double *outputPtr, size_t n, double mean, double stddev);
+  // HIP: hiprandStatus_t HIPRANDAPI hiprandGenerateLogNormalDouble(hiprandGenerator_t generator, double * output_data, size_t n, double mean, double stddev);
+  // CHECK: status = hiprandGenerateLogNormalDouble(randGenerator, outputPtrDouble, num, dmean, dstddev);
+  status = curandGenerateLogNormalDouble(randGenerator, outputPtrDouble, num, dmean, dstddev);
+
+  // CUDA: curandStatus_t CURANDAPI curandGeneratePoisson(curandGenerator_t generator, unsigned int *outputPtr, size_t n, double lambda);
+  // HIP: hiprandStatus_t HIPRANDAPI hiprandGeneratePoisson(hiprandGenerator_t generator, unsigned int * output_data, size_t n, double lambda);
+  // CHECK: status = hiprandGeneratePoisson(randGenerator, outputPtr, num, dlambda);
+  status = curandGeneratePoisson(randGenerator, outputPtr, num, dlambda);
+
+  // CUDA: curandStatus_t CURANDAPI curandGenerateSeeds(curandGenerator_t generator);
+  // HIP: hiprandStatus_t HIPRANDAPI hiprandGenerateSeeds(hiprandGenerator_t generator);
+  // CHECK: status = hiprandGenerateSeeds(randGenerator);
+  status = curandGenerateSeeds(randGenerator);
+
+  // CUDA: curandStatus_t CURANDAPI curandSetGeneratorOffset(curandGenerator_t generator, unsigned long long offset);
+  // HIP: hiprandStatus_t HIPRANDAPI hiprandSetGeneratorOffset(hiprandGenerator_t generator, unsigned long long offset);
+  // CHECK: status = hiprandSetGeneratorOffset(randGenerator, offset);
+  status = curandSetGeneratorOffset(randGenerator, offset);
+
+  // CUDA: curandStatus_t CURANDAPI curandSetPseudoRandomGeneratorSeed(curandGenerator_t generator, unsigned long long seed);
+  // HIP: hiprandStatus_t HIPRANDAPI hiprandSetPseudoRandomGeneratorSeed(hiprandGenerator_t generator, unsigned long long seed);
+  // CHECK: status = hiprandSetPseudoRandomGeneratorSeed(randGenerator, offset);
+  status = curandSetPseudoRandomGeneratorSeed(randGenerator, offset);
+
+  // CUDA: curandStatus_t CURANDAPI curandSetStream(curandGenerator_t generator, cudaStream_t stream);
+  // HIP: hiprandStatus_t HIPRANDAPI hiprandSetStream(hiprandGenerator_t generator, hipStream_t stream);
+  // CHECK: status = hiprandSetStream(randGenerator, stream);
+  status = curandSetStream(randGenerator, stream);
 
 #if CUDA_VERSION >= 11000 && CURAND_VERSION >= 10200
   // CHECK: hiprandOrdering_t RAND_ORDERING_PSEUDO_LEGACY = HIPRAND_ORDERING_PSEUDO_LEGACY;

@@ -6,6 +6,11 @@
 // CHECK: #include "miopen/miopen.h"
 #include "cudnn.h"
 
+#if defined(_WIN32) && CUDA_VERSION < 9000
+  typedef signed   __int64 int64_t;
+  typedef unsigned __int64 uint64_t;
+#endif
+
 int main() {
   printf("15. cuDNN API to MIOpen API synthetic test\n");
 
@@ -131,7 +136,11 @@ int main() {
   cudnnOpTensorOp_t OP_TENSOR_MAX = CUDNN_OP_TENSOR_MAX;
 
   // CHECK: miopenConvolutionMode_t convolutionMode;
+  // CHECK-NEXT: miopenConvolutionMode_t CONVOLUTION = miopenConvolution;
+  // CHECK-NEXT: miopenConvolutionMode_t CROSS_CORRELATION = miopenConvolution;
   cudnnConvolutionMode_t convolutionMode;
+  cudnnConvolutionMode_t CONVOLUTION = CUDNN_CONVOLUTION;
+  cudnnConvolutionMode_t CROSS_CORRELATION = CUDNN_CROSS_CORRELATION;
 
   // CHECK: miopenPoolingMode_t poolingMode;
   // CHECK-NEXT: miopenPoolingMode_t POOLING_MAX = miopenPoolingMax;
@@ -284,6 +293,9 @@ int main() {
   int cStride = 0;
   int hStride = 0;
   int wStride = 0;
+  int64_t elementCount = 0;
+  int64_t requestedElementCount = 0;
+  void *arrayOfElements = nullptr;
 
   // CUDA: cudnnStatus_t CUDNNWINAPI cudnnSetTensor4dDescriptorEx(cudnnTensorDescriptor_t tensorDesc, cudnnDataType_t dataType, int n, int c, int h, int w, int nStride, int cStride, int hStride, int wStride);
   // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenSet4dTensorDescriptorEx(miopenTensorDescriptor_t tensorDesc, miopenDataType_t dataType, int n, int c, int h, int w, int nStride, int cStride, int hStride, int wStride);
@@ -1064,6 +1076,69 @@ int main() {
   cudnnBackendAttributeName_t ATTR_ENGINE_OPERATION_GRAPH = CUDNN_ATTR_ENGINE_OPERATION_GRAPH;
   cudnnBackendAttributeName_t ATTR_ENGINE_GLOBAL_INDEX = CUDNN_ATTR_ENGINE_GLOBAL_INDEX;
   cudnnBackendAttributeName_t ATTR_ENGINE_NUMERICAL_NOTE = CUDNN_ATTR_ENGINE_NUMERICAL_NOTE;
+
+  // CHECK: miopenPointwiseMode_t pointwiseMode_t;
+  // CHECK-NEXT: miopenPointwiseMode_t POINTWISE_ADD = MIOPEN_POINTWISE_ADD;
+  // CHECK-NEXT: miopenPointwiseMode_t POINTWISE_MUL = MIOPEN_POINTWISE_MUL;
+  // CHECK-NEXT: miopenPointwiseMode_t POINTWISE_MIN = MIOPEN_POINTWISE_MIN;
+  // CHECK-NEXT: miopenPointwiseMode_t POINTWISE_MAX = MIOPEN_POINTWISE_MAX;
+  // CHECK-NEXT: miopenPointwiseMode_t POINTWISE_SQRT = MIOPEN_POINTWISE_SQRT;
+  // CHECK-NEXT: miopenPointwiseMode_t POINTWISE_RELU_FWD = MIOPEN_POINTWISE_RELU_FWD;
+  // CHECK-NEXT: miopenPointwiseMode_t POINTWISE_TANH_FWD = MIOPEN_POINTWISE_TANH_FWD;
+  // CHECK-NEXT: miopenPointwiseMode_t POINTWISE_SIGMOID_FWD = MIOPEN_POINTWISE_SIGMOID_FWD;
+  // CHECK-NEXT: miopenPointwiseMode_t POINTWISE_ELU_FWD = MIOPEN_POINTWISE_ELU_FWD;
+  cudnnPointwiseMode_t pointwiseMode_t;
+  cudnnPointwiseMode_t POINTWISE_ADD = CUDNN_POINTWISE_ADD;
+  cudnnPointwiseMode_t POINTWISE_MUL = CUDNN_POINTWISE_MUL;
+  cudnnPointwiseMode_t POINTWISE_MIN = CUDNN_POINTWISE_MIN;
+  cudnnPointwiseMode_t POINTWISE_MAX = CUDNN_POINTWISE_MAX;
+  cudnnPointwiseMode_t POINTWISE_SQRT = CUDNN_POINTWISE_SQRT;
+  cudnnPointwiseMode_t POINTWISE_RELU_FWD = CUDNN_POINTWISE_RELU_FWD;
+  cudnnPointwiseMode_t POINTWISE_TANH_FWD = CUDNN_POINTWISE_TANH_FWD;
+  cudnnPointwiseMode_t POINTWISE_SIGMOID_FWD = CUDNN_POINTWISE_SIGMOID_FWD;
+  cudnnPointwiseMode_t POINTWISE_ELU_FWD = CUDNN_POINTWISE_ELU_FWD;
+
+  // CHECK: miopenBackendDescriptor_t backendDescriptor_t, backendDescriptor_2;
+  cudnnBackendDescriptor_t backendDescriptor_t, backendDescriptor_2;
+
+  // CHECK: miopenBackendHeurMode_t backendHeurMode;
+  // CHECK-NEXT: miopenBackendHeurMode_t HEUR_MODE_INSTANT = MIOPEN_HEUR_MODE_INSTANT;
+  // CHECK-NEXT: miopenBackendHeurMode_t HEUR_MODE_B = MIOPEN_HEUR_MODE_B;
+  // CHECK-NEXT: miopenBackendHeurMode_t HEUR_MODES_COUNT = MIOPEN_HEUR_MODES_COUNT;
+  cudnnBackendHeurMode_t backendHeurMode;
+  cudnnBackendHeurMode_t HEUR_MODE_INSTANT = CUDNN_HEUR_MODE_INSTANT;
+  cudnnBackendHeurMode_t HEUR_MODE_B = CUDNN_HEUR_MODE_B;
+  cudnnBackendHeurMode_t HEUR_MODES_COUNT = CUDNN_HEUR_MODES_COUNT;
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnBackendCreateDescriptor(cudnnBackendDescriptorType_t descriptorType, cudnnBackendDescriptor_t *descriptor);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenBackendCreateDescriptor(miopenBackendDescriptorType_t descriptorType, miopenBackendDescriptor_t* descriptor);
+  // CHECK: status = miopenBackendCreateDescriptor(backendDescriptorType_t, &backendDescriptor_t);
+  status = cudnnBackendCreateDescriptor(backendDescriptorType_t, &backendDescriptor_t);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnBackendDestroyDescriptor(cudnnBackendDescriptor_t descriptor);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenBackendDestroyDescriptor(miopenBackendDescriptor_t descriptor);
+  // CHECK: status = miopenBackendDestroyDescriptor(backendDescriptor_t);
+  status = cudnnBackendDestroyDescriptor(backendDescriptor_t);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnBackendFinalize(cudnnBackendDescriptor_t descriptor);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenBackendFinalize(miopenBackendDescriptor_t descriptor);
+  // CHECK: status = miopenBackendFinalize(backendDescriptor_t);
+  status = cudnnBackendFinalize(backendDescriptor_t);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnBackendSetAttribute(cudnnBackendDescriptor_t descriptor, cudnnBackendAttributeName_t attributeName, cudnnBackendAttributeType_t attributeType, int64_t elementCount, const void *arrayOfElements);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenBackendSetAttribute(miopenBackendDescriptor_t descriptor, miopenBackendAttributeName_t attributeName, miopenBackendAttributeType_t attributeType, int64_t elementCount, void* arrayOfElements);
+  // CHECK: status = miopenBackendSetAttribute(backendDescriptor_t, backendAttributeName_t, backendAttributeType_t, elementCount, arrayOfElements);
+  status = cudnnBackendSetAttribute(backendDescriptor_t, backendAttributeName_t, backendAttributeType_t, elementCount, arrayOfElements);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnBackendGetAttribute(cudnnBackendDescriptor_t const descriptor, cudnnBackendAttributeName_t attributeName, cudnnBackendAttributeType_t attributeType, int64_t requestedElementCount, int64_t *elementCount, void *arrayOfElements);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenBackendGetAttribute(miopenBackendDescriptor_t descriptor, miopenBackendAttributeName_t attributeName, miopenBackendAttributeType_t attributeType, int64_t requestedElementCount, int64_t* elementCount, void* arrayOfElements);
+  // CHECK: status = miopenBackendGetAttribute(backendDescriptor_t, backendAttributeName_t, backendAttributeType_t, requestedElementCount, &elementCount, arrayOfElements);
+  status = cudnnBackendGetAttribute(backendDescriptor_t, backendAttributeName_t, backendAttributeType_t, requestedElementCount, &elementCount, arrayOfElements);
+
+  // CUDA: cudnnStatus_t CUDNNWINAPI cudnnBackendExecute(cudnnHandle_t handle, cudnnBackendDescriptor_t executionPlan, cudnnBackendDescriptor_t variantPack);
+  // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenBackendExecute(miopenHandle_t handle, miopenBackendDescriptor_t executionPlan, miopenBackendDescriptor_t variantPack);
+  // CHECK: status = miopenBackendExecute(handle, backendDescriptor_t, backendDescriptor_2);
+  status = cudnnBackendExecute(handle, backendDescriptor_t, backendDescriptor_2);
 #endif
 
 #if CUDNN_VERSION >= 8002
@@ -1180,6 +1255,27 @@ int main() {
   cudnnBackendAttributeName_t ATTR_OPERATION_REDUCTION_XDESC = CUDNN_ATTR_OPERATION_REDUCTION_XDESC;
   cudnnBackendAttributeName_t ATTR_OPERATION_REDUCTION_YDESC = CUDNN_ATTR_OPERATION_REDUCTION_YDESC;
   cudnnBackendAttributeName_t ATTR_OPERATION_REDUCTION_DESC = CUDNN_ATTR_OPERATION_REDUCTION_DESC;
+
+  // CHECK: miopenPointwiseMode_t POINTWISE_GELU_FWD = MIOPEN_POINTWISE_GELU_FWD;
+  // CHECK-NEXT: miopenPointwiseMode_t POINTWISE_SOFTPLUS_FWD = MIOPEN_POINTWISE_SOFTPLUS_FWD;
+  // CHECK-NEXT: miopenPointwiseMode_t POINTWISE_SWISH_FWD = MIOPEN_POINTWISE_SWISH_FWD;
+  // CHECK-NEXT: miopenPointwiseMode_t POINTWISE_RELU_BWD = MIOPEN_POINTWISE_RELU_BWD;
+  // CHECK-NEXT: miopenPointwiseMode_t POINTWISE_TANH_BWD = MIOPEN_POINTWISE_TANH_BWD;
+  // CHECK-NEXT: miopenPointwiseMode_t POINTWISE_SIGMOID_BWD = MIOPEN_POINTWISE_SIGMOID_BWD;
+  // CHECK-NEXT: miopenPointwiseMode_t POINTWISE_ELU_BWD = MIOPEN_POINTWISE_ELU_BWD;
+  // CHECK-NEXT: miopenPointwiseMode_t POINTWISE_GELU_BWD = MIOPEN_POINTWISE_GELU_BWD;
+  // CHECK-NEXT: miopenPointwiseMode_t POINTWISE_SOFTPLUS_BWD = MIOPEN_POINTWISE_SOFTPLUS_BWD;
+  // CHECK-NEXT: miopenPointwiseMode_t POINTWISE_SWISH_BWD = MIOPEN_POINTWISE_SWISH_BWD;
+  cudnnPointwiseMode_t POINTWISE_GELU_FWD = CUDNN_POINTWISE_GELU_FWD;
+  cudnnPointwiseMode_t POINTWISE_SOFTPLUS_FWD = CUDNN_POINTWISE_SOFTPLUS_FWD;
+  cudnnPointwiseMode_t POINTWISE_SWISH_FWD = CUDNN_POINTWISE_SWISH_FWD;
+  cudnnPointwiseMode_t POINTWISE_RELU_BWD = CUDNN_POINTWISE_RELU_BWD;
+  cudnnPointwiseMode_t POINTWISE_TANH_BWD = CUDNN_POINTWISE_TANH_BWD;
+  cudnnPointwiseMode_t POINTWISE_SIGMOID_BWD = CUDNN_POINTWISE_SIGMOID_BWD;
+  cudnnPointwiseMode_t POINTWISE_ELU_BWD = CUDNN_POINTWISE_ELU_BWD;
+  cudnnPointwiseMode_t POINTWISE_GELU_BWD = CUDNN_POINTWISE_GELU_BWD;
+  cudnnPointwiseMode_t POINTWISE_SOFTPLUS_BWD = CUDNN_POINTWISE_SOFTPLUS_BWD;
+  cudnnPointwiseMode_t POINTWISE_SWISH_BWD = CUDNN_POINTWISE_SWISH_BWD;
 #endif
 
 #if CUDNN_VERSION >= 8200
@@ -1275,6 +1371,60 @@ int main() {
   cudnnBackendAttributeName_t ATTR_OPERATION_RESAMPLE_BWD_ALPHA = CUDNN_ATTR_OPERATION_RESAMPLE_BWD_ALPHA;
   cudnnBackendAttributeName_t ATTR_OPERATION_RESAMPLE_BWD_BETA = CUDNN_ATTR_OPERATION_RESAMPLE_BWD_BETA;
   cudnnBackendAttributeName_t ATTR_OPERATION_RESAMPLE_BWD_DESC = CUDNN_ATTR_OPERATION_RESAMPLE_BWD_DESC;
+
+  // CHECK: miopenPointwiseMode_t POINTWISE_ADD_SQUARE = MIOPEN_POINTWISE_ADD_SQUARE;
+  // CHECK-NEXT: miopenPointwiseMode_t POINTWISE_DIV = MIOPEN_POINTWISE_DIV;
+  // CHECK-NEXT: miopenPointwiseMode_t POINTWISE_MOD = MIOPEN_POINTWISE_MOD;
+  // CHECK-NEXT: miopenPointwiseMode_t POINTWISE_POW = MIOPEN_POINTWISE_POW;
+  // CHECK-NEXT: miopenPointwiseMode_t POINTWISE_SUB = MIOPEN_POINTWISE_SUB;
+  // CHECK-NEXT: miopenPointwiseMode_t POINTWISE_ABS = MIOPEN_POINTWISE_ABS;
+  // CHECK-NEXT: miopenPointwiseMode_t POINTWISE_CEIL = MIOPEN_POINTWISE_CEIL;
+  // CHECK-NEXT: miopenPointwiseMode_t POINTWISE_COS = MIOPEN_POINTWISE_COS;
+  // CHECK-NEXT: miopenPointwiseMode_t POINTWISE_EXP = MIOPEN_POINTWISE_EXP;
+  // CHECK-NEXT: miopenPointwiseMode_t POINTWISE_FLOOR = MIOPEN_POINTWISE_FLOOR;
+  // CHECK-NEXT: miopenPointwiseMode_t POINTWISE_LOG = MIOPEN_POINTWISE_LOG;
+  // CHECK-NEXT: miopenPointwiseMode_t POINTWISE_NEG = MIOPEN_POINTWISE_NEG;
+  // CHECK-NEXT: miopenPointwiseMode_t POINTWISE_RSQRT = MIOPEN_POINTWISE_RSQRT;
+  // CHECK-NEXT: miopenPointwiseMode_t POINTWISE_SIN = MIOPEN_POINTWISE_SIN;
+  // CHECK-NEXT: miopenPointwiseMode_t POINTWISE_TAN = MIOPEN_POINTWISE_TAN;
+  // CHECK-NEXT: miopenPointwiseMode_t POINTWISE_CMP_EQ = MIOPEN_POINTWISE_CMP_EQ;
+  // CHECK-NEXT: miopenPointwiseMode_t POINTWISE_CMP_NEQ = MIOPEN_POINTWISE_CMP_NEQ;
+  // CHECK-NEXT: miopenPointwiseMode_t POINTWISE_CMP_GT = MIOPEN_POINTWISE_CMP_GT;
+  // CHECK-NEXT: miopenPointwiseMode_t POINTWISE_CMP_GE = MIOPEN_POINTWISE_CMP_GE;
+  // CHECK-NEXT: miopenPointwiseMode_t POINTWISE_CMP_LT = MIOPEN_POINTWISE_CMP_LT;
+  // CHECK-NEXT: miopenPointwiseMode_t POINTWISE_CMP_LE = MIOPEN_POINTWISE_CMP_LE;
+  // CHECK-NEXT: miopenPointwiseMode_t POINTWISE_LOGICAL_AND = MIOPEN_POINTWISE_LOGICAL_AND;
+  // CHECK-NEXT: miopenPointwiseMode_t POINTWISE_LOGICAL_OR = MIOPEN_POINTWISE_LOGICAL_OR;
+  // CHECK-NEXT: miopenPointwiseMode_t POINTWISE_LOGICAL_NOT = MIOPEN_POINTWISE_LOGICAL_NOT;
+  cudnnPointwiseMode_t POINTWISE_ADD_SQUARE = CUDNN_POINTWISE_ADD_SQUARE;
+  cudnnPointwiseMode_t POINTWISE_DIV = CUDNN_POINTWISE_DIV;
+  cudnnPointwiseMode_t POINTWISE_MOD = CUDNN_POINTWISE_MOD;
+  cudnnPointwiseMode_t POINTWISE_POW = CUDNN_POINTWISE_POW;
+  cudnnPointwiseMode_t POINTWISE_SUB = CUDNN_POINTWISE_SUB;
+  cudnnPointwiseMode_t POINTWISE_ABS = CUDNN_POINTWISE_ABS;
+  cudnnPointwiseMode_t POINTWISE_CEIL = CUDNN_POINTWISE_CEIL;
+  cudnnPointwiseMode_t POINTWISE_COS = CUDNN_POINTWISE_COS;
+  cudnnPointwiseMode_t POINTWISE_EXP = CUDNN_POINTWISE_EXP;
+  cudnnPointwiseMode_t POINTWISE_FLOOR = CUDNN_POINTWISE_FLOOR;
+  cudnnPointwiseMode_t POINTWISE_LOG = CUDNN_POINTWISE_LOG;
+  cudnnPointwiseMode_t POINTWISE_NEG = CUDNN_POINTWISE_NEG;
+  cudnnPointwiseMode_t POINTWISE_RSQRT = CUDNN_POINTWISE_RSQRT;
+  cudnnPointwiseMode_t POINTWISE_SIN = CUDNN_POINTWISE_SIN;
+  cudnnPointwiseMode_t POINTWISE_TAN = CUDNN_POINTWISE_TAN;
+  cudnnPointwiseMode_t POINTWISE_CMP_EQ = CUDNN_POINTWISE_CMP_EQ;
+  cudnnPointwiseMode_t POINTWISE_CMP_NEQ = CUDNN_POINTWISE_CMP_NEQ;
+  cudnnPointwiseMode_t POINTWISE_CMP_GT = CUDNN_POINTWISE_CMP_GT;
+  cudnnPointwiseMode_t POINTWISE_CMP_GE = CUDNN_POINTWISE_CMP_GE;
+  cudnnPointwiseMode_t POINTWISE_CMP_LT = CUDNN_POINTWISE_CMP_LT;
+  cudnnPointwiseMode_t POINTWISE_CMP_LE = CUDNN_POINTWISE_CMP_LE;
+  cudnnPointwiseMode_t POINTWISE_LOGICAL_AND = CUDNN_POINTWISE_LOGICAL_AND;
+  cudnnPointwiseMode_t POINTWISE_LOGICAL_OR = CUDNN_POINTWISE_LOGICAL_OR;
+  cudnnPointwiseMode_t POINTWISE_LOGICAL_NOT = CUDNN_POINTWISE_LOGICAL_NOT;
+
+  // CHECK: miopenBackendHeurMode_t HEUR_MODE_FALLBACK = MIOPEN_HEUR_MODE_FALLBACK;
+  // CHECK: miopenBackendHeurMode_t HEUR_MODE_A = MIOPEN_HEUR_MODE_A;
+  cudnnBackendHeurMode_t HEUR_MODE_FALLBACK = CUDNN_HEUR_MODE_FALLBACK;
+  cudnnBackendHeurMode_t HEUR_MODE_A = CUDNN_HEUR_MODE_A;
 #endif
 
 #if CUDNN_VERSION >= 8400
@@ -1285,6 +1435,11 @@ int main() {
   // CHECK-NEXT: miopenBackendAttributeName_t ATTR_EXECUTION_PLAN_JSON_REPRESENTATION = MIOPEN_ATTR_EXECUTION_PLAN_JSON_REPRESENTATION;
   cudnnBackendAttributeName_t ATTR_POINTWISE_AXIS = CUDNN_ATTR_POINTWISE_AXIS;
   cudnnBackendAttributeName_t ATTR_EXECUTION_PLAN_JSON_REPRESENTATION = CUDNN_ATTR_EXECUTION_PLAN_JSON_REPRESENTATION;
+
+  // CHECK: miopenPointwiseMode_t POINTWISE_GEN_INDEX = MIOPEN_POINTWISE_GEN_INDEX;
+  // CHECK-NEXT: miopenPointwiseMode_t POINTWISE_BINARY_SELECT = MIOPEN_POINTWISE_BINARY_SELECT;
+  cudnnPointwiseMode_t POINTWISE_GEN_INDEX = CUDNN_POINTWISE_GEN_INDEX;
+  cudnnPointwiseMode_t POINTWISE_BINARY_SELECT = CUDNN_POINTWISE_BINARY_SELECT;
 #endif
 
 #if CUDNN_VERSION >= 8500
@@ -1376,6 +1531,15 @@ int main() {
   cudnnBackendAttributeName_t ATTR_OPERATION_NORM_BWD_DBIAS_DESC = CUDNN_ATTR_OPERATION_NORM_BWD_DBIAS_DESC;
   cudnnBackendAttributeName_t ATTR_OPERATION_NORM_BWD_DXDESC = CUDNN_ATTR_OPERATION_NORM_BWD_DXDESC;
   cudnnBackendAttributeName_t ATTR_OPERATION_NORM_BWD_PEER_STAT_DESCS = CUDNN_ATTR_OPERATION_NORM_BWD_PEER_STAT_DESCS;
+
+  // CHECK: miopenPointwiseMode_t POINTWISE_ERF = MIOPEN_POINTWISE_ERF;
+  // CHECK-NEXT: miopenPointwiseMode_t POINTWISE_IDENTITY = MIOPEN_POINTWISE_IDENTITY;
+  // CHECK-NEXT: miopenPointwiseMode_t POINTWISE_GELU_APPROX_TANH_FWD = MIOPEN_POINTWISE_GELU_APPROX_TANH_FWD;
+  // CHECK-NEXT: miopenPointwiseMode_t POINTWISE_GELU_APPROX_TANH_BWD = MIOPEN_POINTWISE_GELU_APPROX_TANH_BWD;
+  cudnnPointwiseMode_t POINTWISE_ERF = CUDNN_POINTWISE_ERF;
+  cudnnPointwiseMode_t POINTWISE_IDENTITY = CUDNN_POINTWISE_IDENTITY;
+  cudnnPointwiseMode_t POINTWISE_GELU_APPROX_TANH_FWD = CUDNN_POINTWISE_GELU_APPROX_TANH_FWD;
+  cudnnPointwiseMode_t POINTWISE_GELU_APPROX_TANH_BWD = CUDNN_POINTWISE_GELU_APPROX_TANH_BWD;
 #endif
 
 #if CUDNN_VERSION >= 8700
@@ -1419,6 +1583,15 @@ int main() {
   cudnnBackendAttributeName_t ATTR_OPERATION_RNG_YDESC = CUDNN_ATTR_OPERATION_RNG_YDESC;
   cudnnBackendAttributeName_t ATTR_OPERATION_RNG_SEED = CUDNN_ATTR_OPERATION_RNG_SEED;
   cudnnBackendAttributeName_t ATTR_OPERATION_RNG_DESC = CUDNN_ATTR_OPERATION_RNG_DESC;
+
+  // CHECK: miopenRngDistribution_t rngDistribution_t;
+  // CHECK-NEXT: miopenRngDistribution_t RNG_DISTRIBUTION_BERNOULLI = MIOPEN_RNG_DISTRIBUTION_BERNOULLI;
+  // CHECK-NEXT: miopenRngDistribution_t RNG_DISTRIBUTION_UNIFORM = MIOPEN_RNG_DISTRIBUTION_UNIFORM;
+  // CHECK-NEXT: miopenRngDistribution_t RNG_DISTRIBUTION_NORMAL = MIOPEN_RNG_DISTRIBUTION_NORMAL;
+  cudnnRngDistribution_t rngDistribution_t;
+  cudnnRngDistribution_t RNG_DISTRIBUTION_BERNOULLI = CUDNN_RNG_DISTRIBUTION_BERNOULLI;
+  cudnnRngDistribution_t RNG_DISTRIBUTION_UNIFORM = CUDNN_RNG_DISTRIBUTION_UNIFORM;
+  cudnnRngDistribution_t RNG_DISTRIBUTION_NORMAL = CUDNN_RNG_DISTRIBUTION_NORMAL;
 #endif
 
 #if CUDNN_VERSION >= 8800
@@ -1431,6 +1604,9 @@ int main() {
   // CHECK-NEXT: miopenBackendAttributeName_t ATTR_MATMUL_PADDING_VALUE = MIOPEN_ATTR_MATMUL_PADDING_VALUE;
   cudnnBackendAttributeName_t ATTR_TENSOR_RAGGED_OFFSET_DESC = CUDNN_ATTR_TENSOR_RAGGED_OFFSET_DESC;
   cudnnBackendAttributeName_t ATTR_MATMUL_PADDING_VALUE = CUDNN_ATTR_MATMUL_PADDING_VALUE;
+
+  // CHECK: miopenPointwiseMode_t POINTWISE_RECIPROCAL = MIOPEN_POINTWISE_RECIPROCAL;
+  cudnnPointwiseMode_t POINTWISE_RECIPROCAL = CUDNN_POINTWISE_RECIPROCAL;
 #endif
 
 #if CUDNN_VERSION >= 8905
