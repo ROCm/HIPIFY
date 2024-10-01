@@ -11,10 +11,14 @@ int main() {
   printf("21.1. cuRAND API to rocRAND API synthetic test\n");
 
   unsigned int *outputPtr = nullptr;
+  unsigned int *constants = nullptr;
+  unsigned long long *constantsLL = nullptr;
   float *outputPtrFloat = nullptr;
   double *outputPtrDouble = nullptr;
+  unsigned int num_dimensions = 0;
   unsigned long long *outputPtrUll = nullptr;
   unsigned long long offset = 0;
+  int version = 0;
   size_t num = 0;
   float mean = 0.f;
   double dmean = 0.f;
@@ -106,6 +110,11 @@ int main() {
   curandGenerator_st *randGenerator_st = nullptr;
   curandGenerator_t randGenerator;
 
+  // CHECK: rocrand_discrete_distribution_st *discreteDistribution_st = nullptr;
+  // CHECK: rocrand_discrete_distribution discreteDistribution_t = nullptr;
+  curandDiscreteDistribution_st *discreteDistribution_st = nullptr;
+  curandDiscreteDistribution_t discreteDistribution_t = nullptr;
+
   // CUDA: curandStatus_t CURANDAPI curandCreateGenerator(curandGenerator_t *generator, curandRngType_t rng_type);
   // ROC: rocrand_status ROCRANDAPI rocrand_create_generator(rocrand_generator * generator, rocrand_rng_type rng_type);
   // CHECK: status = rocrand_create_generator(&randGenerator, randRngType_t);
@@ -185,6 +194,41 @@ int main() {
   // ROC: rocrand_status ROCRANDAPI rocrand_set_stream(rocrand_generator generator, hipStream_t stream);
   // CHECK: status = rocrand_set_stream(randGenerator, stream);
   status = curandSetStream(randGenerator, stream);
+
+  // CUDA: curandStatus_t CURANDAPI curandCreatePoissonDistribution(double lambda, curandDiscreteDistribution_t *discrete_distribution);
+  // ROC: rocrand_status ROCRANDAPI rocrand_create_poisson_distribution(double lambda, rocrand_discrete_distribution * discrete_distribution);
+  // CHECK: status = rocrand_create_poisson_distribution(dlambda, &discreteDistribution_t);
+  status = curandCreatePoissonDistribution(dlambda, &discreteDistribution_t);
+
+  // CUDA: curandStatus_t CURANDAPI curandDestroyDistribution(curandDiscreteDistribution_t discrete_distribution);
+  // ROC: rocrand_status ROCRANDAPI rocrand_destroy_discrete_distribution(rocrand_discrete_distribution discrete_distribution);
+  // CHECK: status = rocrand_destroy_discrete_distribution(discreteDistribution_t);
+  status = curandDestroyDistribution(discreteDistribution_t);
+
+  // CUDA: curandStatus_t CURANDAPI curandGetScrambleConstants32(unsigned int * * constants);
+  // ROC: rocrand_status ROCRANDAPI rocrand_get_scramble_constants32(const unsigned int** constants);
+  // CHECK: status = rocrand_get_scramble_constants32(&constants);
+  status = curandGetScrambleConstants32(&constants);
+
+  // CUDA: curandStatus_t CURANDAPI curandGetScrambleConstants64(unsigned long long * * constants);
+  // ROC: rocrand_status ROCRANDAPI rocrand_get_scramble_constants64(const unsigned long long** constants);
+  // CHECK: status = rocrand_get_scramble_constants64(&constantsLL);
+  status = curandGetScrambleConstants64(&constantsLL);
+
+  // CUDA: curandStatus_t CURANDAPI curandGetVersion(int *version);
+  // ROC: rocrand_status ROCRANDAPI rocrand_get_version(int * version);
+  // CHECK: status = rocrand_get_version(&version);
+  status = curandGetVersion(&version);
+
+  // CUDA: curandStatus_t CURANDAPI curandSetGeneratorOrdering(curandGenerator_t generator, curandOrdering_t order);
+  // ROC: rocrand_status ROCRANDAPI rocrand_set_ordering(rocrand_generator generator, rocrand_ordering order);
+  // CHECK: status = rocrand_set_ordering(randGenerator, randOrdering);
+  status = curandSetGeneratorOrdering(randGenerator, randOrdering);
+
+  // CUDA: curandStatus_t CURANDAPI curandSetQuasiRandomGeneratorDimensions(curandGenerator_t generator, unsigned int num_dimensions);
+  // ROC: rocrand_status ROCRANDAPI rocrand_set_quasi_random_generator_dimensions(rocrand_generator generator, unsigned int dimensions);
+  // CHECK: status = rocrand_set_quasi_random_generator_dimensions(randGenerator, num_dimensions);
+  status = curandSetQuasiRandomGeneratorDimensions(randGenerator, num_dimensions);
 
 #if CUDA_VERSION >= 11000 && CURAND_VERSION >= 10200
   // CHECK: rocrand_ordering RAND_ORDERING_PSEUDO_LEGACY = ROCRAND_ORDERING_PSEUDO_LEGACY;
