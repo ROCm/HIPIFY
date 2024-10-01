@@ -57,8 +57,8 @@
 |`curandDirectionVectorSet_t`| | | | |`rocrand_direction_vector_set`|6.0.0| | | | |
 |`curandDirectionVectors32_t`| | | | | | | | | | |
 |`curandDirectionVectors64_t`| | | | | | | | | | |
-|`curandDiscreteDistribution_st`| | | | | | | | | | |
-|`curandDiscreteDistribution_t`| | | | | | | | | | |
+|`curandDiscreteDistribution_st`| | | | |`rocrand_discrete_distribution_st`|1.5.0| | | | |
+|`curandDiscreteDistribution_t`| | | | |`rocrand_discrete_distribution`|1.5.0| | | | |
 |`curandDistributionM2Shift_st`| | | | | | | | | | |
 |`curandDistributionM2Shift_t`| | | | | | | | | | |
 |`curandDistributionShift_st`| | | | | | | | | | |
@@ -106,8 +106,8 @@
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
 |`curandCreateGenerator`| | | | |`rocrand_create_generator`|1.5.0| | | | |
 |`curandCreateGeneratorHost`| | | | |`rocrand_create_generator_host_blocking`|6.2.0| | | | |
-|`curandCreatePoissonDistribution`| | | | | | | | | | |
-|`curandDestroyDistribution`| | | | | | | | | | |
+|`curandCreatePoissonDistribution`| | | | |`rocrand_create_poisson_distribution`|1.5.0| | | | |
+|`curandDestroyDistribution`| | | | |`rocrand_destroy_discrete_distribution`|1.5.0| | | | |
 |`curandDestroyGenerator`| | | | |`rocrand_destroy_generator`|1.5.0| | | | |
 |`curandGenerate`| | | | |`rocrand_generate`|1.5.0| | | | |
 |`curandGenerateLogNormal`| | | | |`rocrand_generate_log_normal`|1.5.0| | | | |
@@ -119,18 +119,18 @@
 |`curandGenerateSeeds`| | | | |`rocrand_initialize_generator`|1.5.0| | | | |
 |`curandGenerateUniform`| | | | |`rocrand_generate_uniform`|1.5.0| | | | |
 |`curandGenerateUniformDouble`| | | | |`rocrand_generate_uniform_double`|1.5.0| | | | |
-|`curandGetDirectionVectors32`| | | | | | | | | | |
-|`curandGetDirectionVectors64`| | | | | | | | | | |
+|`curandGetDirectionVectors32`| | | | |`rocrand_get_direction_vectors32`|6.0.0| | | | |
+|`curandGetDirectionVectors64`| | | | |`rocrand_get_direction_vectors64`|6.0.0| | | | |
 |`curandGetProperty`|8.0| | | | | | | | | |
-|`curandGetScrambleConstants32`| | | | | | | | | | |
-|`curandGetScrambleConstants64`| | | | | | | | | | |
-|`curandGetVersion`| | | | | | | | | | |
-|`curandMakeMTGP32Constants`| | | | | | | | | | |
-|`curandMakeMTGP32KernelState`| | | | | | | | | | |
+|`curandGetScrambleConstants32`| | | | |`rocrand_get_scramble_constants32`|6.0.0| | | | |
+|`curandGetScrambleConstants64`| | | | |`rocrand_get_scramble_constants64`|6.0.0| | | | |
+|`curandGetVersion`| | | | |`rocrand_get_version`|1.5.0| | | | |
+|`curandMakeMTGP32Constants`| | | | |`rocrand_make_constant`|1.5.0| | | | |
+|`curandMakeMTGP32KernelState`| | | | |`rocrand_make_state_mtgp32`|1.5.0| | | | |
 |`curandSetGeneratorOffset`| | | | |`rocrand_set_offset`|1.5.0| | | | |
-|`curandSetGeneratorOrdering`| | | | | | | | | | |
+|`curandSetGeneratorOrdering`| | | | |`rocrand_set_ordering`|5.5.0| | | | |
 |`curandSetPseudoRandomGeneratorSeed`| | | | |`rocrand_set_seed`|1.5.0| | | | |
-|`curandSetQuasiRandomGeneratorDimensions`| | | | | | | | | | |
+|`curandSetQuasiRandomGeneratorDimensions`| | | | |`rocrand_set_quasi_random_generator_dimensions`|1.5.0| | | | |
 |`curandSetStream`| | | | |`rocrand_set_stream`|1.5.0| | | | |
 
 ## **3. Device API Functions**

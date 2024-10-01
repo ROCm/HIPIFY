@@ -94,8 +94,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RAND_TYPE_NAME_MAP {
   {"curandHistogramM2_t",                           {"hiprandHistogramM2_t",                           "", CONV_TYPE, API_RAND, 1, HIP_UNSUPPORTED}},
   {"curandHistogramM2K_st",                         {"hiprandHistogramM2K_st",                         "", CONV_TYPE, API_RAND, 1, HIP_UNSUPPORTED}},
   {"curandHistogramM2K_t",                          {"hiprandHistogramM2K_t",                          "", CONV_TYPE, API_RAND, 1, HIP_UNSUPPORTED}},
-  {"curandDiscreteDistribution_st",                 {"hiprandDiscreteDistribution_st",                 "", CONV_TYPE, API_RAND, 1}},
-  {"curandDiscreteDistribution_t",                  {"hiprandDiscreteDistribution_t",                  "", CONV_TYPE, API_RAND, 1}},
+  {"curandDiscreteDistribution_st",                 {"hiprandDiscreteDistribution_st",                 "rocrand_discrete_distribution_st",                              CONV_TYPE, API_RAND, 1}},
+  {"curandDiscreteDistribution_t",                  {"hiprandDiscreteDistribution_t",                  "rocrand_discrete_distribution",                                 CONV_TYPE, API_RAND, 1}},
   {"curandMethod",                                  {"hiprandMethod_t",                                "", CONV_TYPE, API_RAND, 1, HIP_UNSUPPORTED}},
   {"curandMethod_t",                                {"hiprandMethod_t",                                "", CONV_TYPE, API_RAND, 1, HIP_UNSUPPORTED}},
   {"curandDirectionVectors32_t",                    {"hiprandDirectionVectors32_t",                    "", CONV_TYPE, API_RAND, 1}},
@@ -247,4 +247,6 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RAND_TYPE_NAME_VER_MAP {
   {"ROCRAND_SCRAMBLED_DIRECTION_VECTORS_64_JOEKUO6",{HIP_6000, HIP_0,    HIP_0   }},
   {"rocrand_generator_base_type",                   {HIP_1050, HIP_0,    HIP_0   }},
   {"rocrand_generator",                             {HIP_1050, HIP_0,    HIP_0   }},
+  {"rocrand_discrete_distribution_st",              {HIP_1050, HIP_0,    HIP_0   }},
+  {"rocrand_discrete_distribution",                 {HIP_1050, HIP_0,    HIP_0   }},
 };

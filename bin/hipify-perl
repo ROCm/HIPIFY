@@ -2143,6 +2143,8 @@ sub rocSubstitutions {
     subst("cudnnTransformTensor", "miopenTransformTensor", "library");
     subst("curandCreateGenerator", "rocrand_create_generator", "library");
     subst("curandCreateGeneratorHost", "rocrand_create_generator_host_blocking", "library");
+    subst("curandCreatePoissonDistribution", "rocrand_create_poisson_distribution", "library");
+    subst("curandDestroyDistribution", "rocrand_destroy_discrete_distribution", "library");
     subst("curandDestroyGenerator", "rocrand_destroy_generator", "library");
     subst("curandGenerate", "rocrand_generate", "library");
     subst("curandGenerateLogNormal", "rocrand_generate_log_normal", "library");
@@ -2154,8 +2156,17 @@ sub rocSubstitutions {
     subst("curandGenerateSeeds", "rocrand_initialize_generator", "library");
     subst("curandGenerateUniform", "rocrand_generate_uniform", "library");
     subst("curandGenerateUniformDouble", "rocrand_generate_uniform_double", "library");
+    subst("curandGetDirectionVectors32", "rocrand_get_direction_vectors32", "library");
+    subst("curandGetDirectionVectors64", "rocrand_get_direction_vectors64", "library");
+    subst("curandGetScrambleConstants32", "rocrand_get_scramble_constants32", "library");
+    subst("curandGetScrambleConstants64", "rocrand_get_scramble_constants64", "library");
+    subst("curandGetVersion", "rocrand_get_version", "library");
+    subst("curandMakeMTGP32Constants", "rocrand_make_constant", "library");
+    subst("curandMakeMTGP32KernelState", "rocrand_make_state_mtgp32", "library");
     subst("curandSetGeneratorOffset", "rocrand_set_offset", "library");
+    subst("curandSetGeneratorOrdering", "rocrand_set_ordering", "library");
     subst("curandSetPseudoRandomGeneratorSeed", "rocrand_set_seed", "library");
+    subst("curandSetQuasiRandomGeneratorDimensions", "rocrand_set_quasi_random_generator_dimensions", "library");
     subst("curandSetStream", "rocrand_set_stream", "library");
     subst("cusolverDnCpotrf", "rocsolver_cpotrf", "library");
     subst("cusolverDnCreate", "rocblas_create_handle", "library");
@@ -2764,6 +2775,8 @@ sub rocSubstitutions {
     subst("cudnnTensorFormat_t", "miopenTensorLayout_t", "type");
     subst("curandDirectionVectorSet", "rocrand_direction_vector_set", "type");
     subst("curandDirectionVectorSet_t", "rocrand_direction_vector_set", "type");
+    subst("curandDiscreteDistribution_st", "rocrand_discrete_distribution_st", "type");
+    subst("curandDiscreteDistribution_t", "rocrand_discrete_distribution", "type");
     subst("curandGenerator_st", "rocrand_generator_base_type", "type");
     subst("curandGenerator_t", "rocrand_generator", "type");
     subst("curandOrdering", "rocrand_ordering", "type");
