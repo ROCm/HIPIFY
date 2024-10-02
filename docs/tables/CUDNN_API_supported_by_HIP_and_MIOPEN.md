@@ -12,7 +12,7 @@
 |`CUDNN_ACTIVATION_ELU`|6.0.0|9.0.0| | |`HIPDNN_ACTIVATION_ELU`| | | | | |`miopenActivationELU`|2.1.0| | | | |
 |`CUDNN_ACTIVATION_IDENTITY`|7.1.3|9.0.0| | |`HIPDNN_ACTIVATION_PATHTRU`| | | | | |`miopenActivationPASTHRU`|2.1.0| | | | |
 |`CUDNN_ACTIVATION_RELU`|1.0.0|9.0.0| | |`HIPDNN_ACTIVATION_RELU`| | | | | |`miopenActivationRELU`|2.1.0| | | | |
-|`CUDNN_ACTIVATION_SIGMOID`|1.0.0|9.0.0| | |`HIPDNN_ACTIVATION_SIGMOID`| | | | | | | | | | | |
+|`CUDNN_ACTIVATION_SIGMOID`|1.0.0|9.0.0| | |`HIPDNN_ACTIVATION_SIGMOID`| | | | | |`miopenActivationLOGISTIC`|2.1.0| | | | |
 |`CUDNN_ACTIVATION_SWISH`|8.2.0|9.0.0| | |`HIPDNN_ACTIVATION_SWISH`| | | | | | | | | | | |
 |`CUDNN_ACTIVATION_TANH`|1.0.0|9.0.0| | |`HIPDNN_ACTIVATION_TANH`| | | | | |`miopenActivationTANH`|2.1.0| | | | |
 |`CUDNN_ATTN_DISABLE_PROJ_BIASES`|7.6.3| | | | | | | | | | | | | | | |
@@ -295,7 +295,7 @@
 |`CUDNN_CONVOLUTION`|1.0.0|9.0.0| | |`HIPDNN_CONVOLUTION`| | | | | |`miopenConvolution`|2.1.0| | | | |
 |`CUDNN_CONVOLUTION_BWD_DATA_ALGO_0`|3.0.0| | | |`HIPDNN_CONVOLUTION_BWD_DATA_ALGO_0`| | | | | |`miopenConvolutionBwdDataAlgoGEMM`|2.1.0| | | | |
 |`CUDNN_CONVOLUTION_BWD_DATA_ALGO_1`|3.0.0| | | |`HIPDNN_CONVOLUTION_BWD_DATA_ALGO_1`| | | | | |`miopenConvolutionBwdDataAlgoDirect`|2.1.0| | | | |
-|`CUDNN_CONVOLUTION_BWD_DATA_ALGO_COUNT`|6.0.0| | | |`HIPDNN_CONVOLUTION_BWD_DATA_ALGO_TRANSPOSE_GEMM`| | | | | | | | | | | |
+|`CUDNN_CONVOLUTION_BWD_DATA_ALGO_COUNT`|6.0.0| | | |`HIPDNN_CONVOLUTION_BWD_DATA_ALGO_TRANSPOSE_GEMM`| | | | | |`miopenTransposeBwdDataAlgoGEMM`|2.1.0| | | | |
 |`CUDNN_CONVOLUTION_BWD_DATA_ALGO_FFT`|3.0.0| | | |`HIPDNN_CONVOLUTION_BWD_DATA_ALGO_FFT`| | | | | |`miopenConvolutionBwdDataAlgoFFT`|2.1.0| | | | |
 |`CUDNN_CONVOLUTION_BWD_DATA_ALGO_FFT_TILING`|4.0.0| | | |`HIPDNN_CONVOLUTION_BWD_DATA_ALGO_FFT_TILING`| | | | | | | | | | | |
 |`CUDNN_CONVOLUTION_BWD_DATA_ALGO_WINOGRAD`|5.0.0| | | |`HIPDNN_CONVOLUTION_BWD_DATA_ALGO_WINOGRAD`| | | | | |`miopenConvolutionBwdDataAlgoWinograd`|2.1.0| | | | |
@@ -336,8 +336,8 @@
 |`CUDNN_DATA_DOUBLE`|1.0.0| | | |`HIPDNN_DATA_DOUBLE`| | | | | |`miopenDouble`|4.5.0| | | | |
 |`CUDNN_DATA_FAST_FLOAT_FOR_FP8`|8.7.0| | | | | | | | | | | | | | | |
 |`CUDNN_DATA_FLOAT`|1.0.0| | | |`HIPDNN_DATA_FLOAT`| | | | | |`miopenFloat`|2.1.0| | | | |
-|`CUDNN_DATA_FP8_E4M3`|8.6.0| | | | | | | | | | | | | | | |
-|`CUDNN_DATA_FP8_E5M2`|8.6.0| | | | | | | | | | | | | | | |
+|`CUDNN_DATA_FP8_E4M3`|8.6.0| | | | | | | | | |`miopenFloat8`|6.0.0| | | | |
+|`CUDNN_DATA_FP8_E5M2`|8.6.0| | | | | | | | | |`miopenBFloat8`|6.0.0| | | | |
 |`CUDNN_DATA_HALF`|3.0.0| | | |`HIPDNN_DATA_HALF`| | | | | |`miopenHalf`|2.1.0| | | | |
 |`CUDNN_DATA_INT32`|6.0.0| | | |`HIPDNN_DATA_INT32`| | | | | |`miopenInt32`|2.1.0| | | | |
 |`CUDNN_DATA_INT64`|8.1.0| | | | | | | | | |`miopenInt64`|6.2.0| | | | |
@@ -351,7 +351,7 @@
 |`CUDNN_DETERMINISTIC`|6.0.0| | | | | | | | | | | | | | | |
 |`CUDNN_DIM_MAX`|4.0.0| | | | | | | | | | | | | | | |
 |`CUDNN_DIVNORM_PRECOMPUTED_MEANS`|3.0.0| | | | | | | | | | | | | | | |
-|`CUDNN_EDGE_VAL_PAD`|8.3.0| | | | | | | | | | | | | | | |
+|`CUDNN_EDGE_VAL_PAD`|8.3.0| | | | | | | | | |`miopenPaddingValid`|2.1.0| | | | |
 |`CUDNN_ERRQUERY_BLOCKING`|7.0.5| | | | | | | | | | | | | | | |
 |`CUDNN_ERRQUERY_NONBLOCKING`|7.0.5| | | | | | | | | | | | | | | |
 |`CUDNN_ERRQUERY_RAWCODE`|7.0.5| | | | | | | | | | | | | | | |
@@ -363,8 +363,8 @@
 |`CUDNN_FUSED_SCALE_BIAS_ACTIVATION_CONV_BNSTATS`|7.6.0| | | | | | | | | | | | | | | |
 |`CUDNN_FUSED_SCALE_BIAS_ACTIVATION_WGRAD`|7.6.0| | | | | | | | | | | | | | | |
 |`CUDNN_FUSED_SCALE_BIAS_ADD_ACTIVATION_GEN_BITMASK`|7.6.0| | | | | | | | | | | | | | | |
-|`CUDNN_FWD_MODE_INFERENCE`|8.0.1| | | | | | | | | | | | | | | |
-|`CUDNN_FWD_MODE_TRAINING`|8.0.1| | | | | | | | | | | | | | | |
+|`CUDNN_FWD_MODE_INFERENCE`|8.0.1| | | | | | | | | |`miopenRNNInference`|6.0.0| | | | |
+|`CUDNN_FWD_MODE_TRAINING`|8.0.1| | | | | | | | | |`miopenRNNTraining`|6.0.0| | | | |
 |`CUDNN_GENSTATS_SUM_SQSUM`|8.0.1| | | | | | | | | | | | | | | |
 |`CUDNN_GROUP_NORM`|8.5.0| | | | | | | | | | | | | | | |
 |`CUDNN_GRU`|5.0.0| | | |`HIPDNN_GRU`| | | | | |`miopenGRU`|2.1.0| | | | |
@@ -435,7 +435,7 @@
 |`CUDNN_MH_ATTN_Q_WEIGHTS`|7.5.0| | | | | | | | | | | | | | | |
 |`CUDNN_MH_ATTN_V_BIASES`|7.6.3| | | | | | | | | | | | | | | |
 |`CUDNN_MH_ATTN_V_WEIGHTS`|7.5.0| | | | | | | | | | | | | | | |
-|`CUDNN_NEG_INF_PAD`|8.3.0| | | | | | | | | | | | | | | |
+|`CUDNN_NEG_INF_PAD`|8.3.0| | | | | | | | | |`miopenPaddingSame`|2.1.0| | | | |
 |`CUDNN_NON_DETERMINISTIC`|6.0.0| | | | | | | | | | | | | | | |
 |`CUDNN_NORM_ALGO_PERSIST`|8.0.1|9.0.0| | | | | | | | | | | | | | |
 |`CUDNN_NORM_ALGO_STANDARD`|8.0.1|9.0.0| | | | | | | | | | | | | | |
@@ -555,8 +555,8 @@
 |`CUDNN_POINTWISE_TAN`|8.3.0| | | | | | | | | |`MIOPEN_POINTWISE_TAN`|6.2.0| | | | |
 |`CUDNN_POINTWISE_TANH_BWD`|8.1.0| | | | | | | | | |`MIOPEN_POINTWISE_TANH_BWD`|6.2.0| | | | |
 |`CUDNN_POINTWISE_TANH_FWD`|8.0.1| | | | | | | | | |`MIOPEN_POINTWISE_TANH_FWD`|6.2.0| | | | |
-|`CUDNN_POOLING_AVERAGE_COUNT_EXCLUDE_PADDING`|2.0.0|9.0.0| | |`HIPDNN_POOLING_AVERAGE_COUNT_EXCLUDE_PADDING`| | | | | | | | | | | |
-|`CUDNN_POOLING_AVERAGE_COUNT_INCLUDE_PADDING`|2.0.0|9.0.0| | |`HIPDNN_POOLING_AVERAGE_COUNT_INCLUDE_PADDING`| | | | | | | | | | | |
+|`CUDNN_POOLING_AVERAGE_COUNT_EXCLUDE_PADDING`|2.0.0|9.0.0| | |`HIPDNN_POOLING_AVERAGE_COUNT_EXCLUDE_PADDING`| | | | | |`miopenPoolingAverage`|2.1.0| | | | |
+|`CUDNN_POOLING_AVERAGE_COUNT_INCLUDE_PADDING`|2.0.0|9.0.0| | |`HIPDNN_POOLING_AVERAGE_COUNT_INCLUDE_PADDING`| | | | | |`miopenPoolingAverageInclusive`|2.1.0| | | | |
 |`CUDNN_POOLING_MAX`|1.0.0|9.0.0| | |`HIPDNN_POOLING_MAX`| | | | | |`miopenPoolingMax`|2.1.0| | | | |
 |`CUDNN_POOLING_MAX_DETERMINISTIC`|6.0.0|9.0.0| | |`HIPDNN_POOLING_MAX_DETERMINISTIC`| | | | | | | | | | | |
 |`CUDNN_PROPAGATE_NAN`|4.0.0|9.0.0| | |`HIPDNN_PROPAGATE_NAN`| | | | | |`MIOPEN_PROPAGATE_NAN`|3.9.0| | | | |
@@ -620,8 +620,8 @@
 |`CUDNN_RNN_DATA_LAYOUT_SEQ_MAJOR_UNPACKED`|7.2.1| | | | | | | | | | | | | | | |
 |`CUDNN_RNN_DOUBLE_BIAS`|7.5.0| | | |`HIPDNN_RNN_WITH_BIAS`| | | | | |`miopenRNNwithBias`|2.1.0| | | | |
 |`CUDNN_RNN_NO_BIAS`|7.5.0| | | |`HIPDNN_RNN_NO_BIAS`| | | | | |`miopenRNNNoBias`|2.1.0| | | | |
-|`CUDNN_RNN_PADDED_IO_DISABLED`|7.2.1| | | | | | | | | | | | | | | |
-|`CUDNN_RNN_PADDED_IO_ENABLED`|7.2.1| | | | | | | | | | | | | | | |
+|`CUDNN_RNN_PADDED_IO_DISABLED`|7.2.1|8.0.1| |9.0.0| | | | | | |`miopenRNNIONotPadded`|6.0.0| | | | |
+|`CUDNN_RNN_PADDED_IO_ENABLED`|7.2.1|8.0.1| |9.0.0| | | | | | |`miopenRNNIOWithPadding`|6.0.0| | | | |
 |`CUDNN_RNN_RELU`|5.0.0| | | |`HIPDNN_RNN_RELU`| | | | | |`miopenRNNRELU`|2.1.0| | | | |
 |`CUDNN_RNN_SINGLE_INP_BIAS`|7.5.0| | | |`HIPDNN_RNN_WITH_BIAS`| | | | | |`miopenRNNwithBias`|2.1.0| | | | |
 |`CUDNN_RNN_SINGLE_REC_BIAS`|7.5.0| | | |`HIPDNN_RNN_WITH_BIAS`| | | | | |`miopenRNNwithBias`|2.1.0| | | | |
@@ -747,7 +747,7 @@
 |`CUDNN_UNIDIRECTIONAL`|5.0.0| | | |`HIPDNN_UNIDIRECTIONAL`| | | | | |`miopenRNNunidirection`|2.1.0| | | | |
 |`CUDNN_WGRAD_MODE_ADD`|7.5.0| | | | | | | | | | | | | | | |
 |`CUDNN_WGRAD_MODE_SET`|7.5.0| | | | | | | | | | | | | | | |
-|`CUDNN_ZERO_PAD`|8.3.0| | | | | | | | | | | | | | | |
+|`CUDNN_ZERO_PAD`|8.3.0| | | | | | | | | |`miopenPaddingDefault`|2.1.0| | | | |
 |`cudnnActivationDescriptor_t`|4.0.0|9.0.0| | |`hipdnnActivationDescriptor_t`| | | | | |`miopenActivationDescriptor_t`|2.1.0| | | | |
 |`cudnnActivationMode_t`|1.0.0|9.0.0| | |`hipdnnActivationMode_t`| | | | | |`miopenActivationMode_t`|2.1.0| | | | |
 |`cudnnActivationStruct`|4.0.0|9.0.0| | | | | | | | | | | | | | |
@@ -808,7 +808,7 @@
 |`cudnnFilterDescriptor_t`|1.0.0| | | |`hipdnnFilterDescriptor_t`| | | | | |`miopenTensorDescriptor_t`|2.1.0| | | | |
 |`cudnnFilterStruct`|1.0.0|9.0.0| | | | | | | | | | | | | | |
 |`cudnnFoldingDirection_t`|7.5.0| | | | | | | | | | | | | | | |
-|`cudnnForwardMode_t`|8.0.1| | | | | | | | | | | | | | | |
+|`cudnnForwardMode_t`|8.0.1| | | | | | | | | |`miopenRNNFWDMode_t`|6.0.0| | | | |
 |`cudnnFractionStruct`|8.5.0| | | | | | | | | | | | | | | |
 |`cudnnFraction_t`|8.5.0| | | | | | | | | | | | | | | |
 |`cudnnFusedOpsConstParamLabel_t`|7.6.0|9.0.0| | | | | | | | | | | | | | |
@@ -837,7 +837,7 @@
 |`cudnnOpTensorDescriptor_t`|5.0.0|9.0.0| | |`hipdnnOpTensorDescriptor_t`| | | | | | | | | | | |
 |`cudnnOpTensorOp_t`|5.0.0| | | |`hipdnnOpTensorOp_t`| | | | | |`miopenTensorOp_t`|2.1.0| | | | |
 |`cudnnOpTensorStruct`|5.0.0|9.0.0| | | | | | | | | | | | | | |
-|`cudnnPaddingMode_t`|8.3.0| | | | | | | | | | | | | | | |
+|`cudnnPaddingMode_t`|8.3.0| | | | | | | | | |`miopenPaddingMode_t`|2.1.0| | | | |
 |`cudnnPersistentRNNPlan`|6.0.0| | | | | | | | | | | | | | | |
 |`cudnnPersistentRNNPlan_t`|6.0.0| | | |`hipdnnPersistentRNNPlan_t`| | | | | | | | | | | |
 |`cudnnPointwiseMode_t`|8.0.1| | | | | | | | | |`miopenPointwiseMode_t`|6.2.0| | | | |
@@ -853,7 +853,7 @@
 |`cudnnRNNDescriptor_t`|5.0.0| | | |`hipdnnRNNDescriptor_t`| | | | | |`miopenRNNDescriptor_t`|2.1.0| | | | |
 |`cudnnRNNInputMode_t`|5.0.0| | | |`hipdnnRNNInputMode_t`| | | | | |`miopenRNNInputMode_t`|2.1.0| | | | |
 |`cudnnRNNMode_t`|5.0.0| | | |`hipdnnRNNMode_t`| | | | | |`miopenRNNMode_t`|2.1.0| | | | |
-|`cudnnRNNPaddingMode_t`|7.2.1| | | | | | | | | | | | | | | |
+|`cudnnRNNPaddingMode_t`|7.2.1|8.0.1| |9.0.0| | | | | | |`miopenRNNPaddingMode_t`|6.0.0| | | | |
 |`cudnnRNNStruct`|5.0.0| | | | | | | | | | | | | | | |
 |`cudnnReduceTensorDescriptor_t`|6.0.0|9.0.0| | |`hipdnnReduceTensorDescriptor_t`| | | | | |`miopenReduceTensorDescriptor_t`|3.9.0| | | | |
 |`cudnnReduceTensorIndices_t`|6.0.0|9.0.0| | |`hipdnnReduceTensorIndices_t`| | | | | |`miopenReduceTensorIndices_t`|3.9.0| | | | |
