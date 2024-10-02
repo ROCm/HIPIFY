@@ -166,6 +166,7 @@ int main() {
   int incy = 0;
   int64_t incy_64 = 0;
   int k = 0;
+  int64_t k_64 = 0;
   int kl = 0;
   int64_t kl_64 = 0;
   int ku = 0;
@@ -2530,6 +2531,34 @@ int main() {
   // ROC: ROCBLAS_EXPORT rocblas_status rocblas_tssgemv_strided_batched_64(rocblas_handle handle, rocblas_operation transA, int64_t m, int64_t n, const float* alpha, const rocblas_bfloat16* A, int64_t lda, rocblas_stride strideA, const rocblas_bfloat16* x, int64_t incx, rocblas_stride stridex, const float* beta, float* y, int64_t incy, rocblas_stride stridey, int64_t batch_count);
   // CHECK: blasStatus = rocblas_tssgemv_strided_batched_64(blasHandle, blasOperation, m_64, n_64, &fa, bf16A, lda_64, strideA, bf16X, incx_64, strideX, &fb, &fy, incy_64, strideY, batchCount_64);
   blasStatus = cublasTSSgemvStridedBatched_64(blasHandle, blasOperation, m_64, n_64, &fa, bf16A, lda_64, strideA, bf16X, incx_64, strideX, &fb, &fy, incy_64, strideY, batchCount_64);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasSsbmv_v2_64(cublasHandle_t handle, cublasFillMode_t uplo, int64_t n, int64_t k, const float* alpha, const float* A, int64_t lda, const float* x, int64_t incx, const float* beta, float* y, int64_t incy);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_ssbmv_64(rocblas_handle handle, rocblas_fill uplo, int64_t n, int64_t k, const float* alpha, const float* A, int64_t lda, const float* x, int64_t incx, const float* beta, float* y, int64_t incy);
+  // CHECK: blasStatus = rocblas_ssbmv_64(blasHandle, blasFillMode, n_64, k_64, &fa, &fA, lda_64, &fx, incx_64, &fb, &fy, incy_64);
+  // CHECK-NEXT: blasStatus = rocblas_ssbmv_64(blasHandle, blasFillMode, n_64, k_64, &fa, &fA, lda_64, &fx, incx_64, &fb, &fy, incy_64);
+  blasStatus = cublasSsbmv_64(blasHandle, blasFillMode, n_64, k_64, &fa, &fA, lda_64, &fx, incx_64, &fb, &fy, incy_64);
+  blasStatus = cublasSsbmv_v2_64(blasHandle, blasFillMode, n_64, k_64, &fa, &fA, lda_64, &fx, incx_64, &fb, &fy, incy_64);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasDsbmv_v2_64(cublasHandle_t handle, cublasFillMode_t uplo, int64_t n, int64_t k, const double* alpha, const double* A, int64_t lda, const double* x, int64_t incx, const double* beta, double* y, int64_t incy);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_dsbmv_64(rocblas_handle handle, rocblas_fill uplo, int64_t n, int64_t k, const double* alpha, const double* A, int64_t lda, const double* x, int64_t incx, const double* beta, double* y, int64_t incy);
+  // CHECK: blasStatus = rocblas_dsbmv_64(blasHandle, blasFillMode, n_64, k_64, &da, &dA, lda_64, &dx, incx_64, &db, &dy, incy_64);
+  // CHECK-NEXT: blasStatus = rocblas_dsbmv_64(blasHandle, blasFillMode, n_64, k_64, &da, &dA, lda_64, &dx, incx_64, &db, &dy, incy_64);
+  blasStatus = cublasDsbmv_64(blasHandle, blasFillMode, n_64, k_64, &da, &dA, lda_64, &dx, incx_64, &db, &dy, incy_64);
+  blasStatus = cublasDsbmv_v2_64(blasHandle, blasFillMode, n_64, k_64, &da, &dA, lda_64, &dx, incx_64, &db, &dy, incy_64);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasChbmv_v2_64(cublasHandle_t handle, cublasFillMode_t uplo, int64_t n, int64_t k, const cuComplex* alpha, const cuComplex* A, int64_t lda, const cuComplex* x, int64_t incx, const cuComplex* beta, cuComplex* y, int64_t incy);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_chbmv_64(rocblas_handle handle, rocblas_fill uplo, int64_t n, int64_t k, const rocblas_float_complex* alpha, const rocblas_float_complex* A, int64_t lda, const rocblas_float_complex* x, int64_t incx, const rocblas_float_complex* beta, rocblas_float_complex* y, int64_t incy);
+  // CHECK: blasStatus = rocblas_chbmv_64(blasHandle, blasFillMode, n_64, k_64, &complexa, &complexA, lda_64, &complexx, incx_64, &complexb, &complexy, incy_64);
+  // CHECK-NEXT: blasStatus = rocblas_chbmv_64(blasHandle, blasFillMode, n_64, k_64, &complexa, &complexA, lda_64, &complexx, incx_64, &complexb, &complexy, incy_64);
+  blasStatus = cublasChbmv_64(blasHandle, blasFillMode, n_64, k_64, &complexa, &complexA, lda_64, &complexx, incx_64, &complexb, &complexy, incy_64);
+  blasStatus = cublasChbmv_v2_64(blasHandle, blasFillMode, n_64, k_64, &complexa, &complexA, lda_64, &complexx, incx_64, &complexb, &complexy, incy_64);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasZhbmv_v2_64(cublasHandle_t handle, cublasFillMode_t uplo, int64_t n, int64_t k, const cuDoubleComplex* alpha, const cuDoubleComplex* A, int64_t lda, const cuDoubleComplex* x, int64_t incx, const cuDoubleComplex* beta, cuDoubleComplex* y, int64_t incy);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_zhbmv_64(rocblas_handle handle, rocblas_fill uplo, int64_t n, int64_t k, const rocblas_double_complex* alpha, const rocblas_double_complex* A, int64_t lda, const rocblas_double_complex* x, int64_t incx, const rocblas_double_complex* beta, rocblas_double_complex* y, int64_t incy);
+  // CHECK: blasStatus = rocblas_zhbmv_64(blasHandle, blasFillMode, n_64, k_64, &dcomplexa, &dcomplexA, lda_64, &dcomplexx, incx_64, &dcomplexb, &dcomplexy, incy_64);
+  // CHECK-NEXT: blasStatus = rocblas_zhbmv_64(blasHandle, blasFillMode, n_64, k_64, &dcomplexa, &dcomplexA, lda_64, &dcomplexx, incx_64, &dcomplexb, &dcomplexy, incy_64);
+  blasStatus = cublasZhbmv_64(blasHandle, blasFillMode, n_64, k_64, &dcomplexa, &dcomplexA, lda_64, &dcomplexx, incx_64, &dcomplexb, &dcomplexy, incy_64);
+  blasStatus = cublasZhbmv_v2_64(blasHandle, blasFillMode, n_64, k_64, &dcomplexa, &dcomplexA, lda_64, &dcomplexx, incx_64, &dcomplexb, &dcomplexy, incy_64);
 #endif
 
   return 0;
