@@ -1255,6 +1255,7 @@ my %removed_funcs = (
     "cudnnSaveAlgorithm" => "9.0.0",
     "cudnnRestoreAlgorithm" => "9.0.0",
     "cudnnRNNSetClip" => "9.0.0",
+    "cudnnRNNPaddingMode_t" => "9.0.0",
     "cudnnRNNGetClip" => "9.0.0",
     "cudnnRNNForwardTrainingEx" => "9.0.0",
     "cudnnRNNForwardTraining" => "9.0.0",
@@ -1375,6 +1376,8 @@ my %removed_funcs = (
     "CUSPARSE_ALG_MERGE_PATH" => "12.0",
     "CUSPARSE_ALG1" => "11.0",
     "CUSPARSE_ALG0" => "11.0",
+    "CUDNN_RNN_PADDED_IO_ENABLED" => "9.0.0",
+    "CUDNN_RNN_PADDED_IO_DISABLED" => "9.0.0",
     "CUDNN_CONVOLUTION_FWD_SPECIFY_WORKSPACE_LIMIT" => "8.0.1",
     "CUDNN_CONVOLUTION_FWD_PREFER_FASTEST" => "8.0.1",
     "CUDNN_CONVOLUTION_FWD_NO_WORKSPACE" => "8.0.1",
@@ -2764,6 +2767,7 @@ sub rocSubstitutions {
     subst("cudnnLRNMode_t", "miopenLRNMode_t", "type");
     subst("cudnnNanPropagation_t", "miopenNanPropagation_t", "type");
     subst("cudnnOpTensorOp_t", "miopenTensorOp_t", "type");
+    subst("cudnnPaddingMode_t", "miopenPaddingMode_t", "type");
     subst("cudnnPointwiseMode_t", "miopenPointwiseMode_t", "type");
     subst("cudnnPoolingDescriptor_t", "miopenPoolingDescriptor_t", "type");
     subst("cudnnPoolingMode_t", "miopenPoolingMode_t", "type");
@@ -2772,6 +2776,7 @@ sub rocSubstitutions {
     subst("cudnnRNNDescriptor_t", "miopenRNNDescriptor_t", "type");
     subst("cudnnRNNInputMode_t", "miopenRNNInputMode_t", "type");
     subst("cudnnRNNMode_t", "miopenRNNMode_t", "type");
+    subst("cudnnRNNPaddingMode_t", "miopenRNNPaddingMode_t", "type");
     subst("cudnnReduceTensorDescriptor_t", "miopenReduceTensorDescriptor_t", "type");
     subst("cudnnReduceTensorIndices_t", "miopenReduceTensorIndices_t", "type");
     subst("cudnnReduceTensorOp_t", "miopenReduceTensorOp_t", "type");
@@ -2895,6 +2900,7 @@ sub rocSubstitutions {
     subst("CUDNN_ACTIVATION_ELU", "miopenActivationELU", "numeric_literal");
     subst("CUDNN_ACTIVATION_IDENTITY", "miopenActivationPASTHRU", "numeric_literal");
     subst("CUDNN_ACTIVATION_RELU", "miopenActivationRELU", "numeric_literal");
+    subst("CUDNN_ACTIVATION_SIGMOID", "miopenActivationLOGISTIC", "numeric_literal");
     subst("CUDNN_ACTIVATION_TANH", "miopenActivationTANH", "numeric_literal");
     subst("CUDNN_ATTR_CONVOLUTION_COMP_TYPE", "MIOPEN_ATTR_CONVOLUTION_COMP_TYPE", "numeric_literal");
     subst("CUDNN_ATTR_CONVOLUTION_CONV_MODE", "MIOPEN_ATTR_CONVOLUTION_CONV_MODE", "numeric_literal");
@@ -3145,6 +3151,7 @@ sub rocSubstitutions {
     subst("CUDNN_CONVOLUTION", "miopenConvolution", "numeric_literal");
     subst("CUDNN_CONVOLUTION_BWD_DATA_ALGO_0", "miopenConvolutionBwdDataAlgoGEMM", "numeric_literal");
     subst("CUDNN_CONVOLUTION_BWD_DATA_ALGO_1", "miopenConvolutionBwdDataAlgoDirect", "numeric_literal");
+    subst("CUDNN_CONVOLUTION_BWD_DATA_ALGO_COUNT", "miopenTransposeBwdDataAlgoGEMM", "numeric_literal");
     subst("CUDNN_CONVOLUTION_BWD_DATA_ALGO_FFT", "miopenConvolutionBwdDataAlgoFFT", "numeric_literal");
     subst("CUDNN_CONVOLUTION_BWD_DATA_ALGO_WINOGRAD", "miopenConvolutionBwdDataAlgoWinograd", "numeric_literal");
     subst("CUDNN_CONVOLUTION_FWD_ALGO_DIRECT", "miopenConvolutionFwdAlgoDirect", "numeric_literal");
@@ -3157,11 +3164,16 @@ sub rocSubstitutions {
     subst("CUDNN_DATA_BFLOAT16", "miopenBFloat16", "numeric_literal");
     subst("CUDNN_DATA_DOUBLE", "miopenDouble", "numeric_literal");
     subst("CUDNN_DATA_FLOAT", "miopenFloat", "numeric_literal");
+    subst("CUDNN_DATA_FP8_E4M3", "miopenFloat8", "numeric_literal");
+    subst("CUDNN_DATA_FP8_E5M2", "miopenBFloat8", "numeric_literal");
     subst("CUDNN_DATA_HALF", "miopenHalf", "numeric_literal");
     subst("CUDNN_DATA_INT32", "miopenInt32", "numeric_literal");
     subst("CUDNN_DATA_INT64", "miopenInt64", "numeric_literal");
     subst("CUDNN_DATA_INT8", "miopenInt8", "numeric_literal");
     subst("CUDNN_DATA_INT8x4", "miopenInt8x4", "numeric_literal");
+    subst("CUDNN_EDGE_VAL_PAD", "miopenPaddingValid", "numeric_literal");
+    subst("CUDNN_FWD_MODE_INFERENCE", "miopenRNNInference", "numeric_literal");
+    subst("CUDNN_FWD_MODE_TRAINING", "miopenRNNTraining", "numeric_literal");
     subst("CUDNN_GRU", "miopenGRU", "numeric_literal");
     subst("CUDNN_HEUR_MODES_COUNT", "MIOPEN_HEUR_MODES_COUNT", "numeric_literal");
     subst("CUDNN_HEUR_MODE_A", "MIOPEN_HEUR_MODE_A", "numeric_literal");
@@ -3171,6 +3183,7 @@ sub rocSubstitutions {
     subst("CUDNN_LINEAR_INPUT", "miopenRNNlinear", "numeric_literal");
     subst("CUDNN_LRN_CROSS_CHANNEL_DIM1", "miopenLRNCrossChannel", "numeric_literal");
     subst("CUDNN_LSTM", "miopenLSTM", "numeric_literal");
+    subst("CUDNN_NEG_INF_PAD", "miopenPaddingSame", "numeric_literal");
     subst("CUDNN_NOT_PROPAGATE_NAN", "MIOPEN_NOT_PROPAGATE_NAN", "numeric_literal");
     subst("CUDNN_OP_TENSOR_ADD", "miopenTensorOpAdd", "numeric_literal");
     subst("CUDNN_OP_TENSOR_MAX", "miopenTensorOpMax", "numeric_literal");
@@ -3226,6 +3239,8 @@ sub rocSubstitutions {
     subst("CUDNN_POINTWISE_TAN", "MIOPEN_POINTWISE_TAN", "numeric_literal");
     subst("CUDNN_POINTWISE_TANH_BWD", "MIOPEN_POINTWISE_TANH_BWD", "numeric_literal");
     subst("CUDNN_POINTWISE_TANH_FWD", "MIOPEN_POINTWISE_TANH_FWD", "numeric_literal");
+    subst("CUDNN_POOLING_AVERAGE_COUNT_EXCLUDE_PADDING", "miopenPoolingAverage", "numeric_literal");
+    subst("CUDNN_POOLING_AVERAGE_COUNT_INCLUDE_PADDING", "miopenPoolingAverageInclusive", "numeric_literal");
     subst("CUDNN_POOLING_MAX", "miopenPoolingMax", "numeric_literal");
     subst("CUDNN_PROPAGATE_NAN", "MIOPEN_PROPAGATE_NAN", "numeric_literal");
     subst("CUDNN_REDUCE_TENSOR_ADD", "MIOPEN_REDUCE_TENSOR_ADD", "numeric_literal");
@@ -3244,6 +3259,8 @@ sub rocSubstitutions {
     subst("CUDNN_RNN_ALGO_STANDARD", "miopenRNNdefault", "numeric_literal");
     subst("CUDNN_RNN_DOUBLE_BIAS", "miopenRNNwithBias", "numeric_literal");
     subst("CUDNN_RNN_NO_BIAS", "miopenRNNNoBias", "numeric_literal");
+    subst("CUDNN_RNN_PADDED_IO_DISABLED", "miopenRNNIONotPadded", "numeric_literal");
+    subst("CUDNN_RNN_PADDED_IO_ENABLED", "miopenRNNIOWithPadding", "numeric_literal");
     subst("CUDNN_RNN_RELU", "miopenRNNRELU", "numeric_literal");
     subst("CUDNN_RNN_SINGLE_INP_BIAS", "miopenRNNwithBias", "numeric_literal");
     subst("CUDNN_RNN_SINGLE_REC_BIAS", "miopenRNNwithBias", "numeric_literal");
@@ -3295,6 +3312,7 @@ sub rocSubstitutions {
     subst("CUDNN_TYPE_TENSOR_REORDERING_MODE", "MIOPEN_TYPE_TENSOR_REORDERING_MODE", "numeric_literal");
     subst("CUDNN_TYPE_VOID_PTR", "MIOPEN_TYPE_VOID_PTR", "numeric_literal");
     subst("CUDNN_UNIDIRECTIONAL", "miopenRNNunidirection", "numeric_literal");
+    subst("CUDNN_ZERO_PAD", "miopenPaddingDefault", "numeric_literal");
     subst("CURAND_DIRECTION_VECTORS_32_JOEKUO6", "ROCRAND_DIRECTION_VECTORS_32_JOEKUO6", "numeric_literal");
     subst("CURAND_DIRECTION_VECTORS_64_JOEKUO6", "ROCRAND_DIRECTION_VECTORS_64_JOEKUO6", "numeric_literal");
     subst("CURAND_ORDERING_PSEUDO_BEST", "ROCRAND_ORDERING_PSEUDO_BEST", "numeric_literal");
@@ -3410,6 +3428,7 @@ sub rocSubstitutions {
     subst("CUSPARSE_STATUS_NOT_SUPPORTED", "rocsparse_status_not_implemented", "numeric_literal");
     subst("CUSPARSE_STATUS_SUCCESS", "rocsparse_status_success", "numeric_literal");
     subst("CUSPARSE_STATUS_ZERO_PIVOT", "rocsparse_status_zero_pivot", "numeric_literal");
+    subst("cudnnForwardMode_t", "miopenRNNFWDMode_t", "numeric_literal");
     subst("cusolver_int_t", "rocblas_int", "numeric_literal");
 }
 

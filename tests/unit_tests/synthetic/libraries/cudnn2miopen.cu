@@ -185,9 +185,11 @@ int main() {
   // CHECK: miopenActivationMode_t activationMode;
   // CHECK-NEXT: miopenActivationMode_t ACTIVATION_RELU = miopenActivationRELU;
   // CHECK-NEXT: miopenActivationMode_t ACTIVATION_TANH = miopenActivationTANH;
+  // CHECK-NEXT: miopenActivationMode_t ACTIVATION_SIGMOID = miopenActivationLOGISTIC;
   cudnnActivationMode_t activationMode;
   cudnnActivationMode_t ACTIVATION_RELU = CUDNN_ACTIVATION_RELU;
   cudnnActivationMode_t ACTIVATION_TANH = CUDNN_ACTIVATION_TANH;
+  cudnnActivationMode_t ACTIVATION_SIGMOID = CUDNN_ACTIVATION_SIGMOID;
 
   // CHECK: miopenSoftmaxAlgorithm_t softmaxAlgorithm;
   // CHECK-NEXT: miopenSoftmaxAlgorithm_t SOFTMAX_FAST = MIOPEN_SOFTMAX_FAST;
@@ -792,6 +794,13 @@ int main() {
   // CHECK: status = miopenReduceTensor(handle, ReduceTensorDescriptor, indices, indicesSizeInBytes, workSpace, workSpaceSizeInBytes, alpha, aD, A, beta, cD, C);
   status = cudnnReduceTensor(handle, ReduceTensorDescriptor, indices, indicesSizeInBytes, workSpace, workSpaceSizeInBytes, alpha, aD, A, beta, cD, C);
 
+#if CUDNN_VERSION >= 2000
+  // CHECK: miopenPoolingMode_t POOLING_AVERAGE_COUNT_INCLUDE_PADDING = miopenPoolingAverageInclusive;
+  // CHECK-NEXT: miopenPoolingMode_t POOLING_AVERAGE_COUNT_EXCLUDE_PADDING = miopenPoolingAverage;
+  cudnnPoolingMode_t POOLING_AVERAGE_COUNT_INCLUDE_PADDING = CUDNN_POOLING_AVERAGE_COUNT_INCLUDE_PADDING;
+  cudnnPoolingMode_t POOLING_AVERAGE_COUNT_EXCLUDE_PADDING = CUDNN_POOLING_AVERAGE_COUNT_EXCLUDE_PADDING;
+#endif
+
 #if CUDNN_VERSION >= 3008
   // CHECK: miopenDataType_t DATA_BFLOAT16 = miopenBFloat16;
   cudnnDataType_t DATA_BFLOAT16 = CUDNN_DATA_BFLOAT16;
@@ -832,6 +841,9 @@ int main() {
   // CHECK: miopenActivationMode_t ACTIVATION_ELU = miopenActivationELU;
   cudnnActivationMode_t ACTIVATION_ELU = CUDNN_ACTIVATION_ELU;
 
+  // CHECK: miopenConvBwdDataAlgorithm_t CONVOLUTION_BWD_DATA_ALGO_COUNT = miopenTransposeBwdDataAlgoGEMM;
+  cudnnConvolutionBwdDataAlgo_t CONVOLUTION_BWD_DATA_ALGO_COUNT = CUDNN_CONVOLUTION_BWD_DATA_ALGO_COUNT;
+
   // CUDA: cudnnStatus_t CUDNNWINAPI cudnnSetReduceTensorDescriptor(cudnnReduceTensorDescriptor_t reduceTensorDesc, cudnnReduceTensorOp_t reduceTensorOp, cudnnDataType_t reduceTensorCompType, cudnnNanPropagation_t reduceTensorNanOpt, cudnnReduceTensorIndices_t reduceTensorIndices, cudnnIndicesType_t reduceTensorIndicesType);
   // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenSetReduceTensorDescriptor(miopenReduceTensorDescriptor_t reduceTensorDesc, miopenReduceTensorOp_t reduceTensorOp, miopenDataType_t reduceTensorCompType, miopenNanPropagation_t reduceTensorNanOpt, miopenReduceTensorIndices_t reduceTensorIndices, miopenIndicesType_t reduceTensorIndicesType);
   // CHECK: status = miopenSetReduceTensorDescriptor(ReduceTensorDescriptor, reduceTensorOp, dataType, nanPropagation_t, reduceTensorIndices, indicesType);
@@ -846,6 +858,15 @@ int main() {
 #if CUDNN_VERSION >= 7103
   // CHECK: miopenActivationMode_t ACTIVATION_IDENTITY = miopenActivationPASTHRU;
   cudnnActivationMode_t ACTIVATION_IDENTITY = CUDNN_ACTIVATION_IDENTITY;
+#endif
+
+#if CUDNN_VERSION >= 7201 && CUDNN_VERSION <= 8907
+  // CHECK: miopenRNNPaddingMode_t RNNPaddingMode_t;
+  // CHECK-NEXT: miopenRNNPaddingMode_t RNN_PADDED_IO_DISABLED = miopenRNNIONotPadded;
+  // CHECK-NEXT: miopenRNNPaddingMode_t RNN_PADDED_IO_ENABLED = miopenRNNIOWithPadding;
+  cudnnRNNPaddingMode_t RNNPaddingMode_t;
+  cudnnRNNPaddingMode_t RNN_PADDED_IO_DISABLED = CUDNN_RNN_PADDED_IO_DISABLED;
+  cudnnRNNPaddingMode_t RNN_PADDED_IO_ENABLED = CUDNN_RNN_PADDED_IO_ENABLED;
 #endif
 
 #if CUDNN_VERSION >= 8001
@@ -1109,6 +1130,13 @@ int main() {
   cudnnBackendHeurMode_t HEUR_MODE_INSTANT = CUDNN_HEUR_MODE_INSTANT;
   cudnnBackendHeurMode_t HEUR_MODE_B = CUDNN_HEUR_MODE_B;
   cudnnBackendHeurMode_t HEUR_MODES_COUNT = CUDNN_HEUR_MODES_COUNT;
+
+  // CHECK: miopenRNNFWDMode_t RNNFWDMode_t;
+  // CHECK-NEXT: miopenRNNFWDMode_t FWD_MODE_INFERENCE = miopenRNNInference;
+  // CHECK-NEXT: miopenRNNFWDMode_t FWD_MODE_TRAINING = miopenRNNTraining;
+  cudnnForwardMode_t RNNFWDMode_t;
+  cudnnForwardMode_t FWD_MODE_INFERENCE = CUDNN_FWD_MODE_INFERENCE;
+  cudnnForwardMode_t FWD_MODE_TRAINING = CUDNN_FWD_MODE_TRAINING;
 
   // CUDA: cudnnStatus_t CUDNNWINAPI cudnnBackendCreateDescriptor(cudnnBackendDescriptorType_t descriptorType, cudnnBackendDescriptor_t *descriptor);
   // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenBackendCreateDescriptor(miopenBackendDescriptorType_t descriptorType, miopenBackendDescriptor_t* descriptor);
@@ -1425,6 +1453,15 @@ int main() {
   // CHECK: miopenBackendHeurMode_t HEUR_MODE_A = MIOPEN_HEUR_MODE_A;
   cudnnBackendHeurMode_t HEUR_MODE_FALLBACK = CUDNN_HEUR_MODE_FALLBACK;
   cudnnBackendHeurMode_t HEUR_MODE_A = CUDNN_HEUR_MODE_A;
+
+  // CHECK: miopenPaddingMode_t PaddingMode_t;
+  // CHECK-NEXT: miopenPaddingMode_t ZERO_PAD = miopenPaddingDefault;
+  // CHECK-NEXT: miopenPaddingMode_t NEG_INF_PAD = miopenPaddingSame;
+  // CHECK-NEXT: miopenPaddingMode_t EDGE_VAL_PAD = miopenPaddingValid;
+  cudnnPaddingMode_t PaddingMode_t;
+  cudnnPaddingMode_t ZERO_PAD = CUDNN_ZERO_PAD;
+  cudnnPaddingMode_t NEG_INF_PAD = CUDNN_NEG_INF_PAD;
+  cudnnPaddingMode_t EDGE_VAL_PAD = CUDNN_EDGE_VAL_PAD;
 #endif
 
 #if CUDNN_VERSION >= 8400
@@ -1540,6 +1577,13 @@ int main() {
   cudnnPointwiseMode_t POINTWISE_IDENTITY = CUDNN_POINTWISE_IDENTITY;
   cudnnPointwiseMode_t POINTWISE_GELU_APPROX_TANH_FWD = CUDNN_POINTWISE_GELU_APPROX_TANH_FWD;
   cudnnPointwiseMode_t POINTWISE_GELU_APPROX_TANH_BWD = CUDNN_POINTWISE_GELU_APPROX_TANH_BWD;
+#endif
+
+#if CUDNN_VERSION >= 8600
+  // CHECK: miopenDataType_t DATA_FP8_E4M3 = miopenFloat8;
+  // CHECK-NEXT: miopenDataType_t DATA_FP8_E5M2 = miopenBFloat8;
+  cudnnDataType_t DATA_FP8_E4M3 = CUDNN_DATA_FP8_E4M3;
+  cudnnDataType_t DATA_FP8_E5M2 = CUDNN_DATA_FP8_E5M2;
 #endif
 
 #if CUDNN_VERSION >= 8700

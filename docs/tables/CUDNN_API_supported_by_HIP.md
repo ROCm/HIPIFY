@@ -620,8 +620,8 @@
 |`CUDNN_RNN_DATA_LAYOUT_SEQ_MAJOR_UNPACKED`|7.2.1| | | | | | | | | |
 |`CUDNN_RNN_DOUBLE_BIAS`|7.5.0| | | |`HIPDNN_RNN_WITH_BIAS`| | | | | |
 |`CUDNN_RNN_NO_BIAS`|7.5.0| | | |`HIPDNN_RNN_NO_BIAS`| | | | | |
-|`CUDNN_RNN_PADDED_IO_DISABLED`|7.2.1| | | | | | | | | |
-|`CUDNN_RNN_PADDED_IO_ENABLED`|7.2.1| | | | | | | | | |
+|`CUDNN_RNN_PADDED_IO_DISABLED`|7.2.1|8.0.1| |9.0.0| | | | | | |
+|`CUDNN_RNN_PADDED_IO_ENABLED`|7.2.1|8.0.1| |9.0.0| | | | | | |
 |`CUDNN_RNN_RELU`|5.0.0| | | |`HIPDNN_RNN_RELU`| | | | | |
 |`CUDNN_RNN_SINGLE_INP_BIAS`|7.5.0| | | |`HIPDNN_RNN_WITH_BIAS`| | | | | |
 |`CUDNN_RNN_SINGLE_REC_BIAS`|7.5.0| | | |`HIPDNN_RNN_WITH_BIAS`| | | | | |
@@ -853,7 +853,7 @@
 |`cudnnRNNDescriptor_t`|5.0.0| | | |`hipdnnRNNDescriptor_t`| | | | | |
 |`cudnnRNNInputMode_t`|5.0.0| | | |`hipdnnRNNInputMode_t`| | | | | |
 |`cudnnRNNMode_t`|5.0.0| | | |`hipdnnRNNMode_t`| | | | | |
-|`cudnnRNNPaddingMode_t`|7.2.1| | | | | | | | | |
+|`cudnnRNNPaddingMode_t`|7.2.1|8.0.1| |9.0.0| | | | | | |
 |`cudnnRNNStruct`|5.0.0| | | | | | | | | |
 |`cudnnReduceTensorDescriptor_t`|6.0.0|9.0.0| | |`hipdnnReduceTensorDescriptor_t`| | | | | |
 |`cudnnReduceTensorIndices_t`|6.0.0|9.0.0| | |`hipdnnReduceTensorIndices_t`| | | | | |
