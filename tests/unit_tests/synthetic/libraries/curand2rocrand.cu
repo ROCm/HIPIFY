@@ -4,8 +4,11 @@
 #include <cuda_runtime.h>
 #include <stdio.h>
 // CHECK: #include "rocrand/rocrand.h"
+// CHECK-NEXT: #include "rocrand/rocrand_kernel.h"
 #include "curand.h"
+#include "curand_kernel.h"
 // CHECK-NOT: #include "rocrand/rocrand.h"
+// CHECK-NOT: #include "rocrand/rocrand_kernel.h"
 
 int main() {
   printf("21.1. cuRAND API to rocRAND API synthetic test\n");
@@ -110,10 +113,45 @@ int main() {
   curandGenerator_st *randGenerator_st = nullptr;
   curandGenerator_t randGenerator;
 
+  // CHECK: rocrand_device::sobol64_engine<false> randStateSobol64;
+  // CHECK-NEXT: rocrand_state_sobol64 randStateSobol64_t;
+  curandStateSobol64 randStateSobol64;
+  curandStateSobol64_t randStateSobol64_t;
+
+  // CHECK: rocrand_device::scrambled_sobol64_engine<false> randStateScrambledSobol64;
+  // CHECK-NEXT: rocrand_state_scrambled_sobol64 randStateScrambledSobol64_t;
+  curandStateScrambledSobol64 randStateScrambledSobol64;
+  curandStateScrambledSobol64_t randStateScrambledSobol64_t;
+
+  // CHECK: rocrand_device::sobol32_engine<false> randStateSobol32;
+  // CHECK-NEXT: rocrand_state_sobol32 randStateSobol32_t;
+  curandStateSobol32 randStateSobol32;
+  curandStateSobol32_t randStateSobol32_t;
+
+  // CHECK: rocrand_device::scrambled_sobol32_engine<false> randStateScrambledSobol32;
+  // CHECK-NEXT: rocrand_state_scrambled_sobol32 randStateScrambledSobol32_t;
+  curandStateScrambledSobol32 randStateScrambledSobol32;
+  curandStateScrambledSobol32_t randStateScrambledSobol32_t;
+
   // CHECK: rocrand_discrete_distribution_st *discreteDistribution_st = nullptr;
-  // CHECK: rocrand_discrete_distribution discreteDistribution_t = nullptr;
+  // CHECK-NEXT: rocrand_discrete_distribution discreteDistribution_t = nullptr;
   curandDiscreteDistribution_st *discreteDistribution_st = nullptr;
   curandDiscreteDistribution_t discreteDistribution_t = nullptr;
+
+  // CHECK: rocrand_device::mtgp32_engine stateMtgp32;
+  // CHECK-NEXT: rocrand_state_mtgp32 stateMtgp32_t;
+  curandStateMtgp32 stateMtgp32;
+  curandStateMtgp32_t stateMtgp32_t;
+
+  // CHECK: rocrand_device::mrg32k3a_engine stateMRG32k3a;
+  // CHECK-NEXT: rocrand_state_mrg32k3a stateMRG32k3a_t;
+  curandStateMRG32k3a stateMRG32k3a;
+  curandStateMRG32k3a_t stateMRG32k3a_t;
+
+  // CHECK: rocrand_device::philox4x32_10_engine statePhilox4_32_10;
+  // CHECK-NEXT: rocrand_state_philox4x32_10 statePhilox4_32_10_t;
+  curandStatePhilox4_32_10 statePhilox4_32_10;
+  curandStatePhilox4_32_10_t statePhilox4_32_10_t;
 
   // CUDA: curandStatus_t CURANDAPI curandCreateGenerator(curandGenerator_t *generator, curandRngType_t rng_type);
   // ROC: rocrand_status ROCRANDAPI rocrand_create_generator(rocrand_generator * generator, rocrand_rng_type rng_type);

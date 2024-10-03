@@ -80,20 +80,20 @@
 |`curandRngType`| | | | |`hiprandRngType_t`|1.5.0| | | | |`rocrand_rng_type`|1.5.0| | | | |
 |`curandRngType_t`| | | | |`hiprandRngType_t`|1.5.0| | | | |`rocrand_rng_type`|1.5.0| | | | |
 |`curandState`| | | | |`hiprandState`|1.8.0| | | | | | | | | | |
-|`curandStateMRG32k3a`| | | | |`hiprandStateMRG32k3a`|1.8.0| | | | | | | | | | |
-|`curandStateMRG32k3a_t`| | | | |`hiprandStateMRG32k3a_t`|1.5.0| | | | | | | | | | |
-|`curandStateMtgp32`| | | | |`hiprandStateMtgp32`|1.8.0| | | | | | | | | | |
-|`curandStateMtgp32_t`| | | | |`hiprandStateMtgp32_t`|1.5.0| | | | | | | | | | |
-|`curandStatePhilox4_32_10`| | | | |`hiprandStatePhilox4_32_10`|1.8.0| | | | | | | | | | |
-|`curandStatePhilox4_32_10_t`| | | | |`hiprandStatePhilox4_32_10_t`|1.8.0| | | | | | | | | | |
-|`curandStateScrambledSobol32`| | | | |`hiprandStateScrambledSobol32`|6.2.0| | | | | | | | | | |
-|`curandStateScrambledSobol32_t`| | | | |`hiprandStateScrambledSobol32_t`|6.2.0| | | | | | | | | | |
-|`curandStateScrambledSobol64`| | | | |`hiprandStateScrambledSobol64`|6.2.0| | | | | | | | | | |
-|`curandStateScrambledSobol64_t`| | | | |`hiprandStateScrambledSobol64_t`|6.2.0| | | | | | | | | | |
-|`curandStateSobol32`| | | | |`hiprandStateSobol32`|1.8.0| | | | | | | | | | |
-|`curandStateSobol32_t`| | | | |`hiprandStateSobol32_t`|1.5.0| | | | | | | | | | |
-|`curandStateSobol64`| | | | |`hiprandStateSobol64`|6.2.0| | | | | | | | | | |
-|`curandStateSobol64_t`| | | | |`hiprandStateSobol64_t`|6.2.0| | | | | | | | | | |
+|`curandStateMRG32k3a`| | | | |`hiprandStateMRG32k3a`|1.8.0| | | | |`rocrand_device::mrg32k3a_engine`|1.5.0| | | | |
+|`curandStateMRG32k3a_t`| | | | |`hiprandStateMRG32k3a_t`|1.5.0| | | | |`rocrand_state_mrg32k3a`|1.5.0| | | | |
+|`curandStateMtgp32`| | | | |`hiprandStateMtgp32`|1.8.0| | | | |`rocrand_device::mtgp32_engine`|1.5.0| | | | |
+|`curandStateMtgp32_t`| | | | |`hiprandStateMtgp32_t`|1.5.0| | | | |`rocrand_state_mtgp32`|1.5.0| | | | |
+|`curandStatePhilox4_32_10`| | | | |`hiprandStatePhilox4_32_10`|1.8.0| | | | |`rocrand_device::philox4x32_10_engine`|1.5.0| | | | |
+|`curandStatePhilox4_32_10_t`| | | | |`hiprandStatePhilox4_32_10_t`|1.8.0| | | | |`rocrand_state_philox4x32_10`|1.5.0| | | | |
+|`curandStateScrambledSobol32`| | | | |`hiprandStateScrambledSobol32`|6.2.0| | | | |`rocrand_device::scrambled_sobol32_engine<false>`|5.4.0| | | | |
+|`curandStateScrambledSobol32_t`| | | | |`hiprandStateScrambledSobol32_t`|6.2.0| | | | |`rocrand_state_scrambled_sobol32`|5.4.0| | | | |
+|`curandStateScrambledSobol64`| | | | |`hiprandStateScrambledSobol64`|6.2.0| | | | |`rocrand_device::scrambled_sobol64_engine<false>`|5.4.0| | | | |
+|`curandStateScrambledSobol64_t`| | | | |`hiprandStateScrambledSobol64_t`|6.2.0| | | | |`rocrand_state_scrambled_sobol64`|5.4.0| | | | |
+|`curandStateSobol32`| | | | |`hiprandStateSobol32`|1.8.0| | | | |`rocrand_device::sobol32_engine<false>`|1.5.0| | | | |
+|`curandStateSobol32_t`| | | | |`hiprandStateSobol32_t`|1.5.0| | | | |`rocrand_state_sobol32`|1.5.0| | | | |
+|`curandStateSobol64`| | | | |`hiprandStateSobol64`|6.2.0| | | | |`rocrand_device::sobol64_engine<false>`|4.5.0| | | | |
+|`curandStateSobol64_t`| | | | |`hiprandStateSobol64_t`|6.2.0| | | | |`rocrand_state_sobol64`|4.5.0| | | | |
 |`curandStateXORWOW`| | | | |`hiprandStateXORWOW`|1.8.0| | | | | | | | | | |
 |`curandStateXORWOW_t`| | | | |`hiprandStateXORWOW_t`|1.5.0| | | | | | | | | | |
 |`curandState_t`| | | | |`hiprandState_t`|1.5.0| | | | | | | | | | |
