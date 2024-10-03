@@ -125,6 +125,11 @@ int main() {
   curandStateScrambledSobol64 randStateScrambledSobol64;
   curandStateScrambledSobol64_t randStateScrambledSobol64_t;
 
+  // CHECK: hiprandStateSobol32 randStateSobol32;
+  // CHECK-NEXT: hiprandStateSobol32_t randStateSobol32_t;
+  curandStateSobol32 randStateSobol32;
+  curandStateSobol32_t randStateSobol32_t;
+
   // CHECK: hiprandStateScrambledSobol32 randStateScrambledSobol32;
   // CHECK-NEXT: hiprandStateScrambledSobol32_t randStateScrambledSobol32_t;
   curandStateScrambledSobol32 randStateScrambledSobol32;
@@ -141,6 +146,21 @@ int main() {
   // CHECK: hiprandDiscreteDistribution_t discreteDistribution_t = nullptr;
   curandDiscreteDistribution_st *discreteDistribution_st = nullptr;
   curandDiscreteDistribution_t discreteDistribution_t = nullptr;
+
+  // CHECK: hiprandStateMtgp32 stateMtgp32;
+  // CHECK-NEXT: hiprandStateMtgp32_t stateMtgp32_t;
+  curandStateMtgp32 stateMtgp32;
+  curandStateMtgp32_t stateMtgp32_t;
+
+  // CHECK: hiprandStateMRG32k3a stateMRG32k3a;
+  // CHECK-NEXT: hiprandStateMRG32k3a_t stateMRG32k3a_t;
+  curandStateMRG32k3a stateMRG32k3a;
+  curandStateMRG32k3a_t stateMRG32k3a_t;
+
+  // CHECK: hiprandStatePhilox4_32_10 statePhilox4_32_10;
+  // CHECK-NEXT: hiprandStatePhilox4_32_10_t statePhilox4_32_10_t;
+  curandStatePhilox4_32_10 statePhilox4_32_10;
+  curandStatePhilox4_32_10_t statePhilox4_32_10_t;
 
   // CHECK: hiprandDirectionVectorSet_t directionVectorSet;
   // CHECK-NEXT: hiprandDirectionVectorSet_t directionVectorSet_t;

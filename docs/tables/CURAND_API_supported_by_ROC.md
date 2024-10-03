@@ -80,20 +80,20 @@
 |`curandRngType`| | | | |`rocrand_rng_type`|1.5.0| | | | |
 |`curandRngType_t`| | | | |`rocrand_rng_type`|1.5.0| | | | |
 |`curandState`| | | | | | | | | | |
-|`curandStateMRG32k3a`| | | | | | | | | | |
-|`curandStateMRG32k3a_t`| | | | | | | | | | |
-|`curandStateMtgp32`| | | | | | | | | | |
-|`curandStateMtgp32_t`| | | | | | | | | | |
-|`curandStatePhilox4_32_10`| | | | | | | | | | |
-|`curandStatePhilox4_32_10_t`| | | | | | | | | | |
-|`curandStateScrambledSobol32`| | | | | | | | | | |
-|`curandStateScrambledSobol32_t`| | | | | | | | | | |
-|`curandStateScrambledSobol64`| | | | | | | | | | |
-|`curandStateScrambledSobol64_t`| | | | | | | | | | |
-|`curandStateSobol32`| | | | | | | | | | |
-|`curandStateSobol32_t`| | | | | | | | | | |
-|`curandStateSobol64`| | | | | | | | | | |
-|`curandStateSobol64_t`| | | | | | | | | | |
+|`curandStateMRG32k3a`| | | | |`rocrand_device::mrg32k3a_engine`|1.5.0| | | | |
+|`curandStateMRG32k3a_t`| | | | |`rocrand_state_mrg32k3a`|1.5.0| | | | |
+|`curandStateMtgp32`| | | | |`rocrand_device::mtgp32_engine`|1.5.0| | | | |
+|`curandStateMtgp32_t`| | | | |`rocrand_state_mtgp32`|1.5.0| | | | |
+|`curandStatePhilox4_32_10`| | | | |`rocrand_device::philox4x32_10_engine`|1.5.0| | | | |
+|`curandStatePhilox4_32_10_t`| | | | |`rocrand_state_philox4x32_10`|1.5.0| | | | |
+|`curandStateScrambledSobol32`| | | | |`rocrand_device::scrambled_sobol32_engine<false>`|5.4.0| | | | |
+|`curandStateScrambledSobol32_t`| | | | |`rocrand_state_scrambled_sobol32`|5.4.0| | | | |
+|`curandStateScrambledSobol64`| | | | |`rocrand_device::scrambled_sobol64_engine<false>`|5.4.0| | | | |
+|`curandStateScrambledSobol64_t`| | | | |`rocrand_state_scrambled_sobol64`|5.4.0| | | | |
+|`curandStateSobol32`| | | | |`rocrand_device::sobol32_engine<false>`|1.5.0| | | | |
+|`curandStateSobol32_t`| | | | |`rocrand_state_sobol32`|1.5.0| | | | |
+|`curandStateSobol64`| | | | |`rocrand_device::sobol64_engine<false>`|4.5.0| | | | |
+|`curandStateSobol64_t`| | | | |`rocrand_state_sobol64`|4.5.0| | | | |
 |`curandStateXORWOW`| | | | | | | | | | |
 |`curandStateXORWOW_t`| | | | | | | | | | |
 |`curandState_t`| | | | | | | | | | |
