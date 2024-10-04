@@ -138,33 +138,33 @@
 |**CUDA**|**A**|**D**|**C**|**R**|**ROC**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
 |`__curand_umul`|11.5| | | | | | | | | |
-|`curand`| | | | | | | | | | |
+|`curand`| | | | |`rocrand`|1.5.0| | | | |
 |`curand_Philox4x32_10`| | | | | | | | | | |
-|`curand_discrete`| | | | | | | | | | |
-|`curand_discrete4`| | | | | | | | | | |
-|`curand_init`| | | | | | | | | | |
-|`curand_log_normal`| | | | | | | | | | |
-|`curand_log_normal2`| | | | | | | | | | |
-|`curand_log_normal2_double`| | | | | | | | | | |
-|`curand_log_normal4`| | | | | | | | | | |
-|`curand_log_normal4_double`| | | | | | | | | | |
-|`curand_log_normal_double`| | | | | | | | | | |
+|`curand_discrete`| | | | |`rocrand_discrete`|1.5.0| | | | |
+|`curand_discrete4`| | | | |`rocrand_discrete4`|1.5.0| | | | |
+|`curand_init`| | | | |`rocrand_init`|1.5.0| | | | |
+|`curand_log_normal`| | | | |`rocrand_log_normal`|1.5.0| | | | |
+|`curand_log_normal2`| | | | |`rocrand_log_normal2`|1.5.0| | | | |
+|`curand_log_normal2_double`| | | | |`rocrand_log_normal_double2`|1.5.0| | | | |
+|`curand_log_normal4`| | | | |`rocrand_log_normal4`|1.5.0| | | | |
+|`curand_log_normal4_double`| | | | |`rocrand_log_normal_double4`|1.5.0| | | | |
+|`curand_log_normal_double`| | | | |`rocrand_log_normal_double`|1.5.0| | | | |
 |`curand_mtgp32_single`| | | | | | | | | | |
 |`curand_mtgp32_single_specific`| | | | | | | | | | |
 |`curand_mtgp32_specific`| | | | | | | | | | |
-|`curand_normal`| | | | | | | | | | |
-|`curand_normal2`| | | | | | | | | | |
-|`curand_normal2_double`| | | | | | | | | | |
-|`curand_normal4`| | | | | | | | | | |
-|`curand_normal4_double`| | | | | | | | | | |
-|`curand_normal_double`| | | | | | | | | | |
-|`curand_poisson`| | | | | | | | | | |
-|`curand_poisson4`| | | | | | | | | | |
-|`curand_uniform`| | | | | | | | | | |
-|`curand_uniform2_double`| | | | | | | | | | |
-|`curand_uniform4`| | | | | | | | | | |
-|`curand_uniform4_double`| | | | | | | | | | |
-|`curand_uniform_double`| | | | | | | | | | |
+|`curand_normal`| | | | |`rocrand_normal`|1.5.0| | | | |
+|`curand_normal2`| | | | |`rocrand_normal2`|1.5.0| | | | |
+|`curand_normal2_double`| | | | |`rocrand_normal_double2`|1.5.0| | | | |
+|`curand_normal4`| | | | |`rocrand_normal4`|1.5.0| | | | |
+|`curand_normal4_double`| | | | |`rocrand_normal_double4`|1.5.0| | | | |
+|`curand_normal_double`| | | | |`rocrand_normal_double`|1.5.0| | | | |
+|`curand_poisson`| | | | |`rocrand_poisson`|1.5.0| | | | |
+|`curand_poisson4`| | | | |`rocrand_poisson4`|1.5.0| | | | |
+|`curand_uniform`| | | | |`rocrand_uniform`|1.5.0| | | | |
+|`curand_uniform2_double`| | | | |`rocrand_uniform_double2`|1.5.0| | | | |
+|`curand_uniform4`| | | | |`rocrand_uniform4`|1.5.0| | | | |
+|`curand_uniform4_double`| | | | |`rocrand_uniform_double4`|1.5.0| | | | |
+|`curand_uniform_double`| | | | |`rocrand_uniform_double`|1.5.0| | | | |
 
 
 \*A - Added; D - Deprecated; C - Changed; R - Removed; E - Experimental

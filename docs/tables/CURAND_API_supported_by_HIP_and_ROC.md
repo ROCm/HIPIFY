@@ -138,33 +138,33 @@
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|**ROC**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
 |`__curand_umul`|11.5| | | | | | | | | | | | | | | |
-|`curand`| | | | |`hiprand`|1.5.0| | | | | | | | | | |
+|`curand`| | | | |`hiprand`|1.5.0| | | | |`rocrand`|1.5.0| | | | |
 |`curand_Philox4x32_10`| | | | | | | | | | | | | | | | |
-|`curand_discrete`| | | | |`hiprand_discrete`|1.5.0| | | | | | | | | | |
-|`curand_discrete4`| | | | |`hiprand_discrete4`|1.5.0| | | | | | | | | | |
-|`curand_init`| | | | |`hiprand_init`|1.5.0| | | | | | | | | | |
-|`curand_log_normal`| | | | |`hiprand_log_normal`|1.5.0| | | | | | | | | | |
-|`curand_log_normal2`| | | | |`hiprand_log_normal2`|1.5.0| | | | | | | | | | |
-|`curand_log_normal2_double`| | | | |`hiprand_log_normal2_double`|1.5.0| | | | | | | | | | |
-|`curand_log_normal4`| | | | |`hiprand_log_normal4`|1.5.0| | | | | | | | | | |
-|`curand_log_normal4_double`| | | | |`hiprand_log_normal4_double`|1.5.0| | | | | | | | | | |
-|`curand_log_normal_double`| | | | |`hiprand_log_normal_double`|1.5.0| | | | | | | | | | |
+|`curand_discrete`| | | | |`hiprand_discrete`|1.5.0| | | | |`rocrand_discrete`|1.5.0| | | | |
+|`curand_discrete4`| | | | |`hiprand_discrete4`|1.5.0| | | | |`rocrand_discrete4`|1.5.0| | | | |
+|`curand_init`| | | | |`hiprand_init`|1.5.0| | | | |`rocrand_init`|1.5.0| | | | |
+|`curand_log_normal`| | | | |`hiprand_log_normal`|1.5.0| | | | |`rocrand_log_normal`|1.5.0| | | | |
+|`curand_log_normal2`| | | | |`hiprand_log_normal2`|1.5.0| | | | |`rocrand_log_normal2`|1.5.0| | | | |
+|`curand_log_normal2_double`| | | | |`hiprand_log_normal2_double`|1.5.0| | | | |`rocrand_log_normal_double2`|1.5.0| | | | |
+|`curand_log_normal4`| | | | |`hiprand_log_normal4`|1.5.0| | | | |`rocrand_log_normal4`|1.5.0| | | | |
+|`curand_log_normal4_double`| | | | |`hiprand_log_normal4_double`|1.5.0| | | | |`rocrand_log_normal_double4`|1.5.0| | | | |
+|`curand_log_normal_double`| | | | |`hiprand_log_normal_double`|1.5.0| | | | |`rocrand_log_normal_double`|1.5.0| | | | |
 |`curand_mtgp32_single`| | | | | | | | | | | | | | | | |
 |`curand_mtgp32_single_specific`| | | | | | | | | | | | | | | | |
 |`curand_mtgp32_specific`| | | | | | | | | | | | | | | | |
-|`curand_normal`| | | | |`hiprand_normal`|1.5.0| | | | | | | | | | |
-|`curand_normal2`| | | | |`hiprand_normal2`|1.5.0| | | | | | | | | | |
-|`curand_normal2_double`| | | | |`hiprand_normal2_double`|1.5.0| | | | | | | | | | |
-|`curand_normal4`| | | | |`hiprand_normal4`|1.5.0| | | | | | | | | | |
-|`curand_normal4_double`| | | | |`hiprand_normal4_double`|1.5.0| | | | | | | | | | |
-|`curand_normal_double`| | | | |`hiprand_normal_double`|1.5.0| | | | | | | | | | |
-|`curand_poisson`| | | | |`hiprand_poisson`|1.5.0| | | | | | | | | | |
-|`curand_poisson4`| | | | |`hiprand_poisson4`|1.5.0| | | | | | | | | | |
-|`curand_uniform`| | | | |`hiprand_uniform`|1.5.0| | | | | | | | | | |
-|`curand_uniform2_double`| | | | |`hiprand_uniform2_double`|1.5.0| | | | | | | | | | |
-|`curand_uniform4`| | | | |`hiprand_uniform4`|1.5.0| | | | | | | | | | |
-|`curand_uniform4_double`| | | | |`hiprand_uniform4_double`|1.5.0| | | | | | | | | | |
-|`curand_uniform_double`| | | | |`hiprand_uniform_double`|1.5.0| | | | | | | | | | |
+|`curand_normal`| | | | |`hiprand_normal`|1.5.0| | | | |`rocrand_normal`|1.5.0| | | | |
+|`curand_normal2`| | | | |`hiprand_normal2`|1.5.0| | | | |`rocrand_normal2`|1.5.0| | | | |
+|`curand_normal2_double`| | | | |`hiprand_normal2_double`|1.5.0| | | | |`rocrand_normal_double2`|1.5.0| | | | |
+|`curand_normal4`| | | | |`hiprand_normal4`|1.5.0| | | | |`rocrand_normal4`|1.5.0| | | | |
+|`curand_normal4_double`| | | | |`hiprand_normal4_double`|1.5.0| | | | |`rocrand_normal_double4`|1.5.0| | | | |
+|`curand_normal_double`| | | | |`hiprand_normal_double`|1.5.0| | | | |`rocrand_normal_double`|1.5.0| | | | |
+|`curand_poisson`| | | | |`hiprand_poisson`|1.5.0| | | | |`rocrand_poisson`|1.5.0| | | | |
+|`curand_poisson4`| | | | |`hiprand_poisson4`|1.5.0| | | | |`rocrand_poisson4`|1.5.0| | | | |
+|`curand_uniform`| | | | |`hiprand_uniform`|1.5.0| | | | |`rocrand_uniform`|1.5.0| | | | |
+|`curand_uniform2_double`| | | | |`hiprand_uniform2_double`|1.5.0| | | | |`rocrand_uniform_double2`|1.5.0| | | | |
+|`curand_uniform4`| | | | |`hiprand_uniform4`|1.5.0| | | | |`rocrand_uniform4`|1.5.0| | | | |
+|`curand_uniform4_double`| | | | |`hiprand_uniform4_double`|1.5.0| | | | |`rocrand_uniform_double4`|1.5.0| | | | |
+|`curand_uniform_double`| | | | |`hiprand_uniform_double`|1.5.0| | | | |`rocrand_uniform_double`|1.5.0| | | | |
 
 
 \*A - Added; D - Deprecated; C - Changed; R - Removed; E - Experimental
