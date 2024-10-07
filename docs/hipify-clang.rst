@@ -646,7 +646,7 @@ Minimum build system requirements for the above configurations:
 
 Recommended build system requirements:
 
-* CMake 3.30.2, GNU C/C++ 13.2, Python 3.12.5.
+* CMake 3.30.4, GNU C/C++ 13.2, Python 3.12.7.
 
 Here's how to build ``hipify-clang`` with testing support on ``Ubuntu 23.10.01``:
 
@@ -690,7 +690,7 @@ The corresponding successful output is:
   --    - Binary path        : /usr/llvm/19.1.0/dist/bin
   -- Linker detection: GNU ld
   -- ---- The below configuring for hipify-clang testing only ----
-  -- Found Python: /usr/bin/python3.12 (found version "3.12.5") found components: Interpreter 
+  -- Found Python: /usr/bin/python3.12 (found version "3.12.7") found components: Interpreter 
   -- Found lit: /usr/local/bin/lit
   -- Found FileCheck: /GIT/LLVM/trunk/dist/FileCheck
   -- Initial CUDA to configure:
@@ -726,7 +726,7 @@ The corresponding successful output is:
   x86_64 - Platform architecture
   Linux 6.5.0-15-generic - Platform OS
   64 - hipify-clang binary bitness
-  64 - python 3.12.5 binary bitness
+  64 - python 3.12.7 binary bitness
   ===============================================================
   -- Testing: 106 tests, 12 threads --
   Testing Time: 6.91s
@@ -819,15 +819,15 @@ Tested configurations:
   * - ``17.0.1`` :sup:`6` - ``18.1.8`` :sup:`7`
     - ``7.0 - 12.3.2``
     - ``8.0.5  - 9.4.0``
-    - ``2019.16.11.38, 2022.17.10.5``
-    - ``3.30.0``
-    - ``3.12.5``
+    - ``2019.16.11.40, 2022.17.11.4``
+    - ``3.30.4``
+    - ``3.12.7``
   * - ``19.1.0``
     - ``7.0 - 12.6.1``
     - ``8.0.5  - 9.4.0``
-    - ``2019.16.11.38, 2022.17.10.5``
-    - ``3.30.0``
-    - ``3.12.5``
+    - ``2019.16.11.40, 2022.17.11.4``
+    - ``3.30.4``
+    - ``3.12.7``
 
 :sup:`5` LLVM 14.x.x is the latest major release supporting Visual Studio 2017.
 
@@ -864,16 +864,16 @@ The corresponding successful output is:
 .. code-block:: shell
 
   -- Selecting Windows SDK version 10.0.22621.0 to target Windows 10.0.22631.
-  -- The C compiler identification is MSVC 19.39.33523.0
-  -- The CXX compiler identification is MSVC 19.39.33523.0
+  -- The C compiler identification is MSVC 19.41.34120.0
+  -- The CXX compiler identification is MSVC 19.41.34120.0
   -- Detecting C compiler ABI info
   -- Detecting C compiler ABI info - done
-  -- Check for working C compiler: C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.39.33519/bin/Hostx64/x64/cl.exe - skipped
+  -- Check for working C compiler: C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.41.34120/bin/Hostx64/x64/cl.exe - skipped
   -- Detecting C compile features
   -- Detecting C compile features - done
   -- Detecting CXX compiler ABI info
   -- Detecting CXX compiler ABI info - done
-  -- Check for working CXX compiler: C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.39.33519/bin/Hostx64/x64/cl.exe - skipped
+  -- Check for working CXX compiler: C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.41.34120/bin/Hostx64/x64/cl.exe - skipped
   -- Detecting CXX compile features
   -- Detecting CXX compile features - done
   -- HIPIFY config:
@@ -886,7 +886,7 @@ The corresponding successful output is:
   --    - LLVM Include path  : D:/LLVM/19.1.0/dist/include
   --    - Binary path        : D:/LLVM/19.1.0/dist/bin
   -- ---- The below configuring for hipify-clang testing only ----
-  -- Found Python: C:/Users/TT/AppData/Local/Programs/Python/Python312/python.exe (found version "3.12.5") found components: Interpreter
+  -- Found Python: C:/Users/TT/AppData/Local/Programs/Python/Python312/python.exe (found version "3.12.7") found components: Interpreter
   -- Found lit: C:/Users/TT/AppData/Local/Programs/Python/Python312/Scripts/lit.exe
   -- Found FileCheck: D:/LLVM/19.1.0/dist/bin/FileCheck.exe
   -- Initial CUDA to configure:
@@ -897,10 +897,10 @@ The corresponding successful output is:
   -- Found CUDAToolkit: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.6/include (found version "12.6.68")
   -- Found CUDA config:
   --    - CUDA Toolkit path  : C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.6
-  --    - CUDA Samples path  : C:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.6
+  --    - CUDA Samples path  : C:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.5
   --    - cuDNN path         : D:/CUDA/cuDNN/9.4.0
   --    - CUB path           : C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.6/include/cub
-  -- Configuring done (1.4s)
+  -- Configuring done (2.1s)
   -- Generating done (0.1s)
   -- Build files have been written to: D:/HIPIFY/build
 
