@@ -760,9 +760,9 @@
 |`cublasChpmv_v2_64`|12.0| | | |`hipblasChpmv_v2_64`|6.2.0| | | | |`rocblas_chpmv_64`|6.2.0| | | | |
 |`cublasChpr`| | | | |`hipblasChpr_v2`|6.0.0| | | | |`rocblas_chpr`|3.5.0| | | | |
 |`cublasChpr2`| | | | |`hipblasChpr2_v2`|6.0.0| | | | |`rocblas_chpr2`|3.5.0| | | | |
-|`cublasChpr2_64`|12.0| | | |`hipblasChpr2_v2_64`|6.2.0| | | | | | | | | | |
+|`cublasChpr2_64`|12.0| | | |`hipblasChpr2_v2_64`|6.2.0| | | | |`rocblas_chpr2_64`|6.2.0| | | | |
 |`cublasChpr2_v2`| | | | |`hipblasChpr2_v2`|6.0.0| | | | |`rocblas_chpr2`|3.5.0| | | | |
-|`cublasChpr2_v2_64`|12.0| | | |`hipblasChpr2_v2_64`|6.2.0| | | | | | | | | | |
+|`cublasChpr2_v2_64`|12.0| | | |`hipblasChpr2_v2_64`|6.2.0| | | | |`rocblas_chpr2_64`|6.2.0| | | | |
 |`cublasChpr_64`|12.0| | | |`hipblasChpr_v2_64`|6.2.0| | | | |`rocblas_chpr_64`|6.2.0| | | | |
 |`cublasChpr_v2`| | | | |`hipblasChpr_v2`|6.0.0| | | | |`rocblas_chpr`|3.5.0| | | | |
 |`cublasChpr_v2_64`|12.0| | | |`hipblasChpr_v2_64`|6.2.0| | | | |`rocblas_chpr_64`|6.2.0| | | | |
@@ -824,9 +824,9 @@
 |`cublasDspmv_v2_64`|12.0| | | |`hipblasDspmv_64`|6.2.0| | | | |`rocblas_dspmv_64`|6.2.0| | | | |
 |`cublasDspr`| | | | |`hipblasDspr`|3.5.0| | | | |`rocblas_dspr`|3.5.0| | | | |
 |`cublasDspr2`| | | | |`hipblasDspr2`|3.5.0| | | | |`rocblas_dspr2`|3.5.0| | | | |
-|`cublasDspr2_64`|12.0| | | |`hipblasDspr2_64`|6.2.0| | | | | | | | | | |
+|`cublasDspr2_64`|12.0| | | |`hipblasDspr2_64`|6.2.0| | | | |`rocblas_dspr2_64`|6.2.0| | | | |
 |`cublasDspr2_v2`| | | | |`hipblasDspr2`|3.5.0| | | | |`rocblas_dspr2`|3.5.0| | | | |
-|`cublasDspr2_v2_64`|12.0| | | |`hipblasDspr2_64`|6.2.0| | | | | | | | | | |
+|`cublasDspr2_v2_64`|12.0| | | |`hipblasDspr2_64`|6.2.0| | | | |`rocblas_dspr2_64`|6.2.0| | | | |
 |`cublasDspr_64`|12.0| | | |`hipblasDspr_64`|6.2.0| | | | |`rocblas_dspr_64`|6.2.0| | | | |
 |`cublasDspr_v2`| | | | |`hipblasDspr`|3.5.0| | | | |`rocblas_dspr`|3.5.0| | | | |
 |`cublasDspr_v2_64`|12.0| | | |`hipblasDspr_64`|6.2.0| | | | |`rocblas_dspr_64`|6.2.0| | | | |
@@ -888,9 +888,9 @@
 |`cublasSspmv_v2_64`|12.0| | | |`hipblasSspmv_64`|6.2.0| | | | |`rocblas_sspmv_64`|6.2.0| | | | |
 |`cublasSspr`| | | | |`hipblasSspr`|3.5.0| | | | |`rocblas_sspr`|3.5.0| | | | |
 |`cublasSspr2`| | | | |`hipblasSspr2`|3.5.0| | | | |`rocblas_sspr2`|3.5.0| | | | |
-|`cublasSspr2_64`|12.0| | | |`hipblasSspr2_64`|6.2.0| | | | | | | | | | |
+|`cublasSspr2_64`|12.0| | | |`hipblasSspr2_64`|6.2.0| | | | |`rocblas_sspr2_64`|6.2.0| | | | |
 |`cublasSspr2_v2`| | | | |`hipblasSspr2`|3.5.0| | | | |`rocblas_sspr2`|3.5.0| | | | |
-|`cublasSspr2_v2_64`|12.0| | | |`hipblasSspr2_64`|6.2.0| | | | | | | | | | |
+|`cublasSspr2_v2_64`|12.0| | | |`hipblasSspr2_64`|6.2.0| | | | |`rocblas_sspr2_64`|6.2.0| | | | |
 |`cublasSspr_64`|12.0| | | |`hipblasSspr_64`|6.2.0| | | | |`rocblas_sspr_64`|6.2.0| | | | |
 |`cublasSspr_v2`| | | | |`hipblasSspr`|3.5.0| | | | |`rocblas_sspr`|3.5.0| | | | |
 |`cublasSspr_v2_64`|12.0| | | |`hipblasSspr_64`|6.2.0| | | | |`rocblas_sspr_64`|6.2.0| | | | |
@@ -968,9 +968,9 @@
 |`cublasZhpmv_v2_64`|12.0| | | |`hipblasZhpmv_v2_64`|6.2.0| | | | |`rocblas_zhpmv_64`|6.2.0| | | | |
 |`cublasZhpr`| | | | |`hipblasZhpr_v2`|6.0.0| | | | |`rocblas_zhpr`|3.5.0| | | | |
 |`cublasZhpr2`| | | | |`hipblasZhpr2_v2`|6.0.0| | | | |`rocblas_zhpr2`|3.5.0| | | | |
-|`cublasZhpr2_64`|12.0| | | |`hipblasZhpr2_v2_64`|6.2.0| | | | | | | | | | |
+|`cublasZhpr2_64`|12.0| | | |`hipblasZhpr2_v2_64`|6.2.0| | | | |`rocblas_zhpr2_64`|6.2.0| | | | |
 |`cublasZhpr2_v2`| | | | |`hipblasZhpr2_v2`|6.0.0| | | | |`rocblas_zhpr2`|3.5.0| | | | |
-|`cublasZhpr2_v2_64`|12.0| | | |`hipblasZhpr2_v2_64`|6.2.0| | | | | | | | | | |
+|`cublasZhpr2_v2_64`|12.0| | | |`hipblasZhpr2_v2_64`|6.2.0| | | | |`rocblas_zhpr2_64`|6.2.0| | | | |
 |`cublasZhpr_64`|12.0| | | |`hipblasZhpr_v2_64`|6.2.0| | | | |`rocblas_zhpr_64`|6.2.0| | | | |
 |`cublasZhpr_v2`| | | | |`hipblasZhpr_v2`|6.0.0| | | | |`rocblas_zhpr`|3.5.0| | | | |
 |`cublasZhpr_v2_64`|12.0| | | |`hipblasZhpr_v2_64`|6.2.0| | | | |`rocblas_zhpr_64`|6.2.0| | | | |
