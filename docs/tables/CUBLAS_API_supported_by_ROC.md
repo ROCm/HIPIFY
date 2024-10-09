@@ -779,9 +779,9 @@
 |`cublasCsyr_v2`| | | | |`rocblas_csyr`|1.7.1| | | | |
 |`cublasCsyr_v2_64`|12.0| | | |`rocblas_csyr_64`|6.2.0| | | | |
 |`cublasCtbmv`| | | | |`rocblas_ctbmv`|3.5.0| | | | |
-|`cublasCtbmv_64`|12.0| | | | | | | | | |
+|`cublasCtbmv_64`|12.0| | | |`rocblas_ctbmv_64`|6.2.0| | | | |
 |`cublasCtbmv_v2`| | | | |`rocblas_ctbmv`|3.5.0| | | | |
-|`cublasCtbmv_v2_64`|12.0| | | | | | | | | |
+|`cublasCtbmv_v2_64`|12.0| | | |`rocblas_ctbmv_64`|6.2.0| | | | |
 |`cublasCtbsv`| | | | |`rocblas_ctbsv`|3.5.0| | | | |
 |`cublasCtbsv_64`|12.0| | | | | | | | | |
 |`cublasCtbsv_v2`| | | | |`rocblas_ctbsv`|3.5.0| | | | |
@@ -843,9 +843,9 @@
 |`cublasDsyr_v2`| | | | |`rocblas_dsyr`|1.7.1| | | | |
 |`cublasDsyr_v2_64`|12.0| | | |`rocblas_dsyr_64`|6.2.0| | | | |
 |`cublasDtbmv`| | | | |`rocblas_dtbmv`|3.5.0| | | | |
-|`cublasDtbmv_64`|12.0| | | | | | | | | |
+|`cublasDtbmv_64`|12.0| | | |`rocblas_dtbmv_64`|6.2.0| | | | |
 |`cublasDtbmv_v2`| | | | |`rocblas_dtbmv`|3.5.0| | | | |
-|`cublasDtbmv_v2_64`|12.0| | | | | | | | | |
+|`cublasDtbmv_v2_64`|12.0| | | |`rocblas_dtbmv_64`|6.2.0| | | | |
 |`cublasDtbsv`| | | | |`rocblas_dtbsv`|3.5.0| | | | |
 |`cublasDtbsv_64`|12.0| | | | | | | | | |
 |`cublasDtbsv_v2`| | | | |`rocblas_dtbsv`|3.5.0| | | | |
@@ -907,9 +907,9 @@
 |`cublasSsyr_v2`| | | | |`rocblas_ssyr`|1.7.1| | | | |
 |`cublasSsyr_v2_64`|12.0| | | |`rocblas_ssyr_64`|6.2.0| | | | |
 |`cublasStbmv`| | | | |`rocblas_stbmv`|3.5.0| | | | |
-|`cublasStbmv_64`|12.0| | | | | | | | | |
+|`cublasStbmv_64`|12.0| | | |`rocblas_stbmv_64`|6.2.0| | | | |
 |`cublasStbmv_v2`| | | | |`rocblas_stbmv`|3.5.0| | | | |
-|`cublasStbmv_v2_64`|12.0| | | | | | | | | |
+|`cublasStbmv_v2_64`|12.0| | | |`rocblas_stbmv_64`|6.2.0| | | | |
 |`cublasStbsv`| | | | |`rocblas_stbsv`|3.5.0| | | | |
 |`cublasStbsv_64`|12.0| | | | | | | | | |
 |`cublasStbsv_v2`| | | | |`rocblas_stbsv`|3.5.0| | | | |
@@ -987,9 +987,9 @@
 |`cublasZsyr_v2`| | | | |`rocblas_zsyr`|1.7.1| | | | |
 |`cublasZsyr_v2_64`|12.0| | | |`rocblas_zsyr_64`|6.2.0| | | | |
 |`cublasZtbmv`| | | | |`rocblas_ztbmv`|3.5.0| | | | |
-|`cublasZtbmv_64`|12.0| | | | | | | | | |
+|`cublasZtbmv_64`|12.0| | | |`rocblas_ztbmv_64`|6.2.0| | | | |
 |`cublasZtbmv_v2`| | | | |`rocblas_ztbmv`|3.5.0| | | | |
-|`cublasZtbmv_v2_64`|12.0| | | | | | | | | |
+|`cublasZtbmv_v2_64`|12.0| | | |`rocblas_ztbmv_64`|6.2.0| | | | |
 |`cublasZtbsv`| | | | |`rocblas_ztbsv`|3.5.0| | | | |
 |`cublasZtbsv_64`|12.0| | | | | | | | | |
 |`cublasZtbsv_v2`| | | | |`rocblas_ztbsv`|3.5.0| | | | |
