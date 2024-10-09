@@ -347,6 +347,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_FUNCTION_MAP {
   {"cudnnBackendSetAttribute",                                 {"hipdnnBackendSetAttribute",                                 "miopenBackendSetAttribute",                                          CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
   {"cudnnBackendGetAttribute",                                 {"hipdnnBackendGetAttribute",                                 "miopenBackendGetAttribute",                                          CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
   {"cudnnBackendExecute",                                      {"hipdnnBackendExecute",                                      "miopenBackendExecute",                                               CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
+  {"cudnnBackendPopulateCudaGraph",                            {"hipdnnBackendPopulateCudaGraph",                            "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
+  {"cudnnBackendUpdateCudaGraph",                              {"hipdnnBackendUpdateCudaGraph",                              "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_FUNCTION_VER_MAP {
@@ -628,6 +630,8 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_FUNCTION_VER_MAP {
   {"cudnnGetLastErrorString",                                  {CUDNN_900, CUDA_0,    CUDA_0   }},
   {"cudnnGraphVersionCheck",                                   {CUDNN_900, CUDA_0,    CUDA_0   }},
   {"cudnnOpsVersionCheck",                                     {CUDNN_900, CUDA_0,    CUDA_0   }},
+  {"cudnnBackendPopulateCudaGraph",                            {CUDNN_950, CUDA_0,    CUDA_0   }},
+  {"cudnnBackendUpdateCudaGraph",                              {CUDNN_950, CUDA_0,    CUDA_0   }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_DNN_FUNCTION_VER_MAP {

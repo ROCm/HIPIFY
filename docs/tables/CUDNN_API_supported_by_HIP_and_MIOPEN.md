@@ -55,6 +55,7 @@
 |`CUDNN_ATTR_INTERMEDIATE_INFO_SIZE`|8.0.1| | | | | | | | | |`MIOPEN_ATTR_INTERMEDIATE_INFO_SIZE`|6.2.0| | | | |
 |`CUDNN_ATTR_INTERMEDIATE_INFO_UNIQUE_ID`|8.0.2| | | | | | | | | |`MIOPEN_ATTR_INTERMEDIATE_INFO_UNIQUE_ID`|6.2.0| | | | |
 |`CUDNN_ATTR_KERNEL_CACHE_IS_ENGINECFG_KERNEL_CACHED`|9.4.0| | | | | | | | | | | | | | | |
+|`CUDNN_ATTR_KERNEL_CACHE_OPERATION_GRAPH`|9.5.0| | | | | | | | | | | | | | | |
 |`CUDNN_ATTR_KNOB_CHOICE_KNOB_TYPE`|8.0.1| | | | | | | | | |`MIOPEN_ATTR_KNOB_CHOICE_KNOB_TYPE`|6.2.0| | | | |
 |`CUDNN_ATTR_KNOB_CHOICE_KNOB_VALUE`|8.0.1| | | | | | | | | |`MIOPEN_ATTR_KNOB_CHOICE_KNOB_VALUE`|6.2.0| | | | |
 |`CUDNN_ATTR_KNOB_INFO_MAXIMUM_VALUE`|8.0.1| | | | | | | | | |`MIOPEN_ATTR_KNOB_INFO_MAXIMUM_VALUE`|6.2.0| | | | |
@@ -287,6 +288,7 @@
 |`CUDNN_BEHAVIOR_NOTE_REQUIRES_BIAS_INT8x32_REORDER`|8.3.0| | | | | | | | | | | | | | | |
 |`CUDNN_BEHAVIOR_NOTE_REQUIRES_FILTER_INT8x32_REORDER`|8.3.0| | | | | | | | | | | | | | | |
 |`CUDNN_BEHAVIOR_NOTE_RUNTIME_COMPILATION`|8.2.0| | | | | | | | | | | | | | | |
+|`CUDNN_BEHAVIOR_NOTE_SUPPORTS_CUDA_GRAPH_NATIVE_API`|9.5.0| | | | | | | | | | | | | | | |
 |`CUDNN_BEHAVIOR_NOTE_TYPE_COUNT`|8.2.0| | | | | | | | | | | | | | | |
 |`CUDNN_BIDIRECTIONAL`|5.0.0| | | |`HIPDNN_BIDIRECTIONAL`| | | | | |`miopenRNNbidirection`|2.1.0| | | | |
 |`CUDNN_BN_FINALIZE_STATISTICS_INFERENCE`|8.1.0| | | | | | | | | | | | | | | |
@@ -655,6 +657,7 @@
 |`CUDNN_STATUS_ARCH_MISMATCH`|1.0.0|9.0.0| | |`HIPDNN_STATUS_ARCH_MISMATCH`| | | | | | | | | | | |
 |`CUDNN_STATUS_BAD_PARAM`|1.0.0| | | |`HIPDNN_STATUS_BAD_PARAM`| | | | | |`miopenStatusBadParm`|2.1.0| | | | |
 |`CUDNN_STATUS_BAD_PARAM_ATTRIBUTE_TYPE`|9.0.0| | | | | | | | | | | | | | | |
+|`CUDNN_STATUS_BAD_PARAM_CUDA_GRAPH_MISMATCH`|9.5.0| | | | | | | | | | | | | | | |
 |`CUDNN_STATUS_BAD_PARAM_DUPLICATED_ENTRIES`|9.0.0| | | | | | | | | | | | | | | |
 |`CUDNN_STATUS_BAD_PARAM_MISALIGNED_POINTER`|9.0.0| | | | | | | | | | | | | | | |
 |`CUDNN_STATUS_BAD_PARAM_NOT_FINALIZED`|9.0.0| | | | | | | | | | | | | | | |
@@ -685,6 +688,7 @@
 |`CUDNN_STATUS_NOT_SUPPORTED`|1.0.0| | | |`HIPDNN_STATUS_NOT_SUPPORTED`| | | | | |`miopenStatusUnsupportedOp`|2.1.0| | | | |
 |`CUDNN_STATUS_NOT_SUPPORTED_ARCH_MISMATCH`|9.0.0| | | | | | | | | | | | | | | |
 |`CUDNN_STATUS_NOT_SUPPORTED_BAD_LAUNCH_PARAM`|9.0.0| | | | | | | | | | | | | | | |
+|`CUDNN_STATUS_NOT_SUPPORTED_CUDA_GRAPH_NATIVE_API`|9.5.0| | | | | | | | | | | | | | | |
 |`CUDNN_STATUS_NOT_SUPPORTED_DATA_TYPE`|9.0.0| | | | | | | | | | | | | | | |
 |`CUDNN_STATUS_NOT_SUPPORTED_GRAPH_PATTERN`|9.0.0| | | | | | | | | | | | | | | |
 |`CUDNN_STATUS_NOT_SUPPORTED_INCOMPATIBLE_CUDART`|9.0.0| | | | | | | | | | | | | | | |
@@ -899,7 +903,9 @@
 |`cudnnBackendFinalize`|8.0.1| | | | | | | | | |`miopenBackendFinalize`|6.2.0| | | | |
 |`cudnnBackendGetAttribute`|8.0.1| | | | | | | | | |`miopenBackendGetAttribute`|6.2.0| | | | |
 |`cudnnBackendInitialize`|8.0.1|9.3.0| | | | | | | | | | | | | | |
+|`cudnnBackendPopulateCudaGraph`|9.5.0| | | | | | | | | | | | | | | |
 |`cudnnBackendSetAttribute`|8.0.1| | | | | | | | | |`miopenBackendSetAttribute`|6.2.0| | | | |
+|`cudnnBackendUpdateCudaGraph`|9.5.0| | | | | | | | | | | | | | | |
 |`cudnnBatchNormalizationBackward`|4.0.0|9.0.0| | |`hipdnnBatchNormalizationBackward`| | | | | |`miopenBatchNormalizationBackward`|2.1.0| | | | |
 |`cudnnBatchNormalizationBackwardEx`|7.4.1|9.0.0| | | | | | | | | | | | | | |
 |`cudnnBatchNormalizationForwardInference`|4.0.0|9.0.0| | |`hipdnnBatchNormalizationForwardInference`| | | | | |`miopenBatchNormalizationForwardInference`|2.1.0| | | | |
