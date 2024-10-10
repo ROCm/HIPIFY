@@ -1392,7 +1392,13 @@ my %removed_funcs = (
 );
 
 my %experimental_funcs = (
-
+    "cusolverDnXpotrs" => "6.3.0",
+    "cusolverDnXpotrf_bufferSize" => "6.3.0",
+    "cusolverDnXpotrf" => "6.3.0",
+    "cusolverDnXgeqrf_bufferSize" => "6.3.0",
+    "cusolverDnXgeqrf" => "6.3.0",
+    "cusolverDnSetDeterministicMode" => "6.3.0",
+    "cusolverDnGetDeterministicMode" => "6.3.0"
 );
 
 $print_stats = 1 if $examine;
@@ -1530,6 +1536,13 @@ sub subst {
 }
 
 sub experimentalSubstitutions {
+    subst("cusolverDnGetDeterministicMode", "hipsolverDnGetDeterministicMode", "library");
+    subst("cusolverDnSetDeterministicMode", "hipsolverDnSetDeterministicMode", "library");
+    subst("cusolverDnXgeqrf", "hipsolverDnXgeqrf", "library");
+    subst("cusolverDnXgeqrf_bufferSize", "hipsolverDnXgeqrf_bufferSize", "library");
+    subst("cusolverDnXpotrf", "hipsolverDnXpotrf", "library");
+    subst("cusolverDnXpotrf_bufferSize", "hipsolverDnXpotrf_bufferSize", "library");
+    subst("cusolverDnXpotrs", "hipsolverDnXpotrs", "library");
 }
 
 sub rocSubstitutions {
@@ -9387,9 +9400,6 @@ sub warnUnsupportedFunctions {
         "cusolverDnXsyevdx",
         "cusolverDnXsyevd_bufferSize",
         "cusolverDnXsyevd",
-        "cusolverDnXpotrs",
-        "cusolverDnXpotrf_bufferSize",
-        "cusolverDnXpotrf",
         "cusolverDnXlarft_bufferSize",
         "cusolverDnXlarft",
         "cusolverDnXgesvdr_bufferSize",
@@ -9398,8 +9408,6 @@ sub warnUnsupportedFunctions {
         "cusolverDnXgesvdp",
         "cusolverDnXgesvd_bufferSize",
         "cusolverDnXgesvd",
-        "cusolverDnXgeqrf_bufferSize",
-        "cusolverDnXgeqrf",
         "cusolverDnSyevdx_bufferSize",
         "cusolverDnSyevdx",
         "cusolverDnSyevd_bufferSize",
@@ -9409,7 +9417,6 @@ sub warnUnsupportedFunctions {
         "cusolverDnSlauum_bufferSize",
         "cusolverDnSlauum",
         "cusolverDnSlaswp",
-        "cusolverDnSetDeterministicMode",
         "cusolverDnSXgesv_bufferSize",
         "cusolverDnSXgesv",
         "cusolverDnSXgels_bufferSize",
@@ -9464,7 +9471,6 @@ sub warnUnsupportedFunctions {
         "cusolverDnGetrs",
         "cusolverDnGetrf_bufferSize",
         "cusolverDnGetrf",
-        "cusolverDnGetDeterministicMode",
         "cusolverDnGesvd_bufferSize",
         "cusolverDnGesvd",
         "cusolverDnGeqrf_bufferSize",
@@ -13276,7 +13282,7 @@ if ($help) {
     print STDERR "$USAGE\n";
 }
 if ($version) {
-    print STDERR "HIP version 6.2.0\n";
+    print STDERR "HIP version 6.3.0\n";
 }
 while (@ARGV) {
     $fileName=shift (@ARGV);
