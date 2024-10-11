@@ -6510,6 +6510,7 @@ sub simpleSubstitutions {
     subst("curandStatus", "hiprandStatus", "type");
     subst("curandStatus_t", "hiprandStatus_t", "type");
     subst("cusolverAlgMode_t", "hipsolverAlgMode_t", "type");
+    subst("cusolverDeterministicMode_t", "hipsolverDeterministicMode_t", "type");
     subst("cusolverDnFunction_t", "hipsolverDnFunction_t", "type");
     subst("cusolverDnHandle_t", "hipsolverHandle_t", "type");
     subst("cusolverDnParams_t", "hipsolverDnParams_t", "type");
@@ -6955,6 +6956,8 @@ sub simpleSubstitutions {
     subst("CUSOLVERRF_UNIT_DIAGONAL_STORED_U", "HIPSOLVERRF_UNIT_DIAGONAL_STORED_U", "numeric_literal");
     subst("CUSOLVER_ALG_0", "HIPSOLVER_ALG_0", "numeric_literal");
     subst("CUSOLVER_ALG_1", "HIPSOLVER_ALG_1", "numeric_literal");
+    subst("CUSOLVER_ALLOW_NON_DETERMINISTIC_RESULTS", "HIPSOLVER_ALLOW_NON_DETERMINISTIC_RESULTS", "numeric_literal");
+    subst("CUSOLVER_DETERMINISTIC_RESULTS", "HIPSOLVER_DETERMINISTIC_RESULTS", "numeric_literal");
     subst("CUSOLVER_EIG_MODE_NOVECTOR", "HIPSOLVER_EIG_MODE_NOVECTOR", "numeric_literal");
     subst("CUSOLVER_EIG_MODE_VECTOR", "HIPSOLVER_EIG_MODE_VECTOR", "numeric_literal");
     subst("CUSOLVER_EIG_RANGE_ALL", "HIPSOLVER_EIG_RANGE_ALL", "numeric_literal");
@@ -9515,7 +9518,6 @@ sub warnUnsupportedFunctions {
         "cusolverDnCEgels_bufferSize",
         "cusolverDnCEgels",
         "cusolverDirectMode_t",
-        "cusolverDeterministicMode_t",
         "curand_mtgp32_specific",
         "curand_mtgp32_single_specific",
         "curand_mtgp32_single",
@@ -11270,7 +11272,6 @@ sub warnUnsupportedFunctions {
         "CUSOLVER_IRS_REFINE_CLASSICAL",
         "CUSOLVER_INF_NORM",
         "CUSOLVER_FRO_NORM",
-        "CUSOLVER_DETERMINISTIC_RESULTS",
         "CUSOLVER_C_TF32",
         "CUSOLVER_C_AP",
         "CUSOLVER_C_8U",
@@ -11279,7 +11280,6 @@ sub warnUnsupportedFunctions {
         "CUSOLVER_C_32F",
         "CUSOLVER_C_16F",
         "CUSOLVER_C_16BF",
-        "CUSOLVER_ALLOW_NON_DETERMINISTIC_RESULTS",
         "CUSOLVER_ALG_2",
         "CUSOLVERDN_POTRF",
         "CURAND_REJECTION",
