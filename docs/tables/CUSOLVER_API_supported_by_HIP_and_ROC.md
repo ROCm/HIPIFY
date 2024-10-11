@@ -31,7 +31,7 @@
 |`CUSOLVER_ALG_0`|11.0| | | |`HIPSOLVER_ALG_0`|6.2.0| | | | | | | | | | |
 |`CUSOLVER_ALG_1`|11.0| | | |`HIPSOLVER_ALG_1`|6.2.0| | | | | | | | | | |
 |`CUSOLVER_ALG_2`|11.5| | | | | | | | | | | | | | | |
-|`CUSOLVER_ALLOW_NON_DETERMINISTIC_RESULTS`|12.2| | | | | | | | | | | | | | | |
+|`CUSOLVER_ALLOW_NON_DETERMINISTIC_RESULTS`|12.2| | | |`HIPSOLVER_ALLOW_NON_DETERMINISTIC_RESULTS`|6.3.0| | | | | | | | | | |
 |`CUSOLVER_C_16BF`|11.0| | | | | | | | | | | | | | | |
 |`CUSOLVER_C_16F`|11.0| | | | | | | | | | | | | | | |
 |`CUSOLVER_C_32F`|11.0| | | | | | | | | | | | | | | |
@@ -40,7 +40,7 @@
 |`CUSOLVER_C_8U`|11.0| | | | | | | | | | | | | | | |
 |`CUSOLVER_C_AP`|11.0| | | | | | | | | | | | | | | |
 |`CUSOLVER_C_TF32`|11.0| | | | | | | | | | | | | | | |
-|`CUSOLVER_DETERMINISTIC_RESULTS`|12.2| | | | | | | | | | | | | | | |
+|`CUSOLVER_DETERMINISTIC_RESULTS`|12.2| | | |`HIPSOLVER_DETERMINISTIC_RESULTS`|6.3.0| | | | | | | | | | |
 |`CUSOLVER_EIG_MODE_NOVECTOR`|8.0| | | |`HIPSOLVER_EIG_MODE_NOVECTOR`|4.5.0| | | | |`rocblas_evect_none`|4.1.0| | | | |
 |`CUSOLVER_EIG_MODE_VECTOR`|8.0| | | |`HIPSOLVER_EIG_MODE_VECTOR`|4.5.0| | | | |`rocblas_evect_original`|4.1.0| | | | |
 |`CUSOLVER_EIG_RANGE_ALL`|10.1| | | |`HIPSOLVER_EIG_RANGE_ALL`|5.3.0| | | | |`rocblas_erange_all`|5.2.0| | | | |
@@ -109,7 +109,7 @@
 |`cudaLibMgGrid_t`|10.1| | | | | | | | | | | | | | | |
 |`cudaLibMgMatrixDesc_t`|10.1| | | | | | | | | | | | | | | |
 |`cusolverAlgMode_t`|11.0| | | |`hipsolverAlgMode_t`|6.2.0| | | | | | | | | | |
-|`cusolverDeterministicMode_t`|12.2| | | | | | | | | | | | | | | |
+|`cusolverDeterministicMode_t`|12.2| | | |`hipsolverDeterministicMode_t`|6.3.0| | | | | | | | | | |
 |`cusolverDirectMode_t`|11.0| | | | | | | | | | | | | | | |
 |`cusolverDnContext`| | | | | | | | | | | | | | | | |
 |`cusolverDnFunction_t`|11.0| | | |`hipsolverDnFunction_t`|6.2.0| | | | | | | | | | |
