@@ -1606,6 +1606,13 @@ int main() {
   result = cudaUnbindTexture(texref);
 #endif
 
+#if CUDA_VERSION >= 12000
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphExecGetFlags(cudaGraphExec_t graphExec, unsigned long long *flags);
+  // HIP: hipError_t hipGraphExecGetFlags(hipGraphExec_t graphExec, unsigned long long* flags);
+  // CHECK: result = hipGraphExecGetFlags(GraphExec_t, &ull_2);
+  result = cudaGraphExecGetFlags(GraphExec_t, &ull_2);
+#endif
+
 #if CUDA_VERSION >= 12020
   // CHECK: hipGraphNodeParams *graphNodeParams = nullptr;
   cudaGraphNodeParams *graphNodeParams = nullptr;
@@ -1614,6 +1621,16 @@ int main() {
   // HIP: hipError_t hipGraphAddNode(hipGraphNode_t *pGraphNode, hipGraph_t graph, const hipGraphNode_t *pDependencies, size_t numDependencies, hipGraphNodeParams *nodeParams);
   // CHECK: result = hipGraphAddNode(&graphNode, Graph_t, &graphNode_2, bytes, graphNodeParams);
   result = cudaGraphAddNode(&graphNode, Graph_t, &graphNode_2, bytes, graphNodeParams);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphNodeSetParams(cudaGraphNode_t node, struct cudaGraphNodeParams *nodeParams);
+  // HIP: hipError_t hipGraphNodeSetParams(hipGraphNode_t node, hipGraphNodeParams *nodeParams);
+  // CHECK: result = hipGraphNodeSetParams(graphNode, graphNodeParams);
+  result = cudaGraphNodeSetParams(graphNode, graphNodeParams);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphExecNodeSetParams(cudaGraphExec_t graphExec, cudaGraphNode_t node, struct cudaGraphNodeParams *nodeParams);
+  // HIP: hipError_t hipGraphExecNodeSetParams(hipGraphExec_t graphExec, hipGraphNode_t node, hipGraphNodeParams* nodeParams);
+  // CHECK: result = hipGraphExecNodeSetParams(GraphExec_t, graphNode, graphNodeParams);
+  result = cudaGraphExecNodeSetParams(GraphExec_t, graphNode, graphNodeParams);
 #endif
 
 #if CUDA_VERSION >= 12030
