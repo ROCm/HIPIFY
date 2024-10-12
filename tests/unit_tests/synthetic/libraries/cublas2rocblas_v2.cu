@@ -2881,6 +2881,34 @@ int main() {
   // CHECK-NEXT: blasStatus = rocblas_ztbsv_64(blasHandle, blasFillMode, blasOperation, blasDiagType, n_64, k_64, &dcomplexA, lda_64, &dcomplexx, incx_64);
   blasStatus = cublasZtbsv_64(blasHandle, blasFillMode, blasOperation, blasDiagType, n_64, k_64, &dcomplexA, lda_64, &dcomplexx, incx_64);
   blasStatus = cublasZtbsv_v2_64(blasHandle, blasFillMode, blasOperation, blasDiagType, n_64, k_64, &dcomplexA, lda_64, &dcomplexx, incx_64);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasStrsv_v2_64(cublasHandle_t handle, cublasFillMode_t uplo, cublasOperation_t trans, cublasDiagType_t diag, int64_t n, const float* A, int64_t lda, float* x, int64_t incx);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_strsv_64(rocblas_handle handle, rocblas_fill uplo, rocblas_operation transA, rocblas_diagonal diag, int64_t n, const float* A, int64_t lda, float* x, int64_t incx);
+  // CHECK: blasStatus = rocblas_strsv_64(blasHandle, blasFillMode, blasOperation, blasDiagType, n_64, &fA, lda_64, &fx, incx_64);
+  // CHECK-NEXT: blasStatus = rocblas_strsv_64(blasHandle, blasFillMode, blasOperation, blasDiagType, n_64, &fA, lda_64, &fx, incx_64);
+  blasStatus = cublasStrsv_64(blasHandle, blasFillMode, blasOperation, blasDiagType, n_64, &fA, lda_64, &fx, incx_64);
+  blasStatus = cublasStrsv_v2_64(blasHandle, blasFillMode, blasOperation, blasDiagType, n_64, &fA, lda_64, &fx, incx_64);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasDtrsv_v2_64(cublasHandle_t handle, cublasFillMode_t uplo, cublasOperation_t trans, cublasDiagType_t diag, int64_t n, const double* A, int64_t lda, double* x, int64_t incx);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_dtrsv_64(rocblas_handle handle, rocblas_fill uplo, rocblas_operation transA, rocblas_diagonal diag, int64_t n, const double* A, int64_t lda, double* x, int64_t incx);
+  // CHECK: blasStatus = rocblas_dtrsv_64(blasHandle, blasFillMode, blasOperation, blasDiagType, n_64, &dA, lda_64, &dx, incx_64);
+  // CHECK-NEXT: blasStatus = rocblas_dtrsv_64(blasHandle, blasFillMode, blasOperation, blasDiagType, n_64, &dA, lda_64, &dx, incx_64);
+  blasStatus = cublasDtrsv_64(blasHandle, blasFillMode, blasOperation, blasDiagType, n_64, &dA, lda_64, &dx, incx_64);
+  blasStatus = cublasDtrsv_v2_64(blasHandle, blasFillMode, blasOperation, blasDiagType, n_64, &dA, lda_64, &dx, incx_64);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasCtrsv_v2_64(cublasHandle_t handle, cublasFillMode_t uplo, cublasOperation_t trans, cublasDiagType_t diag, int64_t n, const cuComplex* A, int64_t lda, cuComplex* x, int64_t incx);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_ctrsv_64(rocblas_handle handle, rocblas_fill uplo, rocblas_operation transA, rocblas_diagonal diag, int64_t n, const rocblas_float_complex* A, int64_t lda, rocblas_float_complex* x, int64_t incx);
+  // CHECK: blasStatus = rocblas_ctrsv_64(blasHandle, blasFillMode, blasOperation, blasDiagType, n_64, &complexA, lda_64, &complexx, incx_64);
+  // CHECK-NEXT: blasStatus = rocblas_ctrsv_64(blasHandle, blasFillMode, blasOperation, blasDiagType, n_64, &complexA, lda_64, &complexx, incx_64);
+  blasStatus = cublasCtrsv_64(blasHandle, blasFillMode, blasOperation, blasDiagType, n_64, &complexA, lda_64, &complexx, incx_64);
+  blasStatus = cublasCtrsv_v2_64(blasHandle, blasFillMode, blasOperation, blasDiagType, n_64, &complexA, lda_64, &complexx, incx_64);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasZtrsv_v2_64(cublasHandle_t handle, cublasFillMode_t uplo, cublasOperation_t trans, cublasDiagType_t diag, int64_t n, const cuDoubleComplex* A, int64_t lda, cuDoubleComplex* x, int64_t incx);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_ztrsv_64(rocblas_handle handle, rocblas_fill uplo, rocblas_operation transA, rocblas_diagonal diag, int64_t n, const rocblas_double_complex* A, int64_t lda, rocblas_double_complex* x, int64_t incx);
+  // CHECK: blasStatus = rocblas_ztrsv_64(blasHandle, blasFillMode, blasOperation, blasDiagType, n_64, &dcomplexA, lda_64, &dcomplexx, incx_64);
+  // CHECK-NEXT: blasStatus = rocblas_ztrsv_64(blasHandle, blasFillMode, blasOperation, blasDiagType, n_64, &dcomplexA, lda_64, &dcomplexx, incx_64);
+  blasStatus = cublasZtrsv_64(blasHandle, blasFillMode, blasOperation, blasDiagType, n_64, &dcomplexA, lda_64, &dcomplexx, incx_64);
+  blasStatus = cublasZtrsv_v2_64(blasHandle, blasFillMode, blasOperation, blasDiagType, n_64, &dcomplexA, lda_64, &dcomplexx, incx_64);
 #endif
 
   return 0;

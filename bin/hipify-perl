@@ -1710,7 +1710,9 @@ sub rocSubstitutions {
     subst("cublasCtrsmBatched", "rocblas_ctrsm_batched", "library");
     subst("cublasCtrsm_v2", "rocblas_ctrsm", "library");
     subst("cublasCtrsv", "rocblas_ctrsv", "library");
+    subst("cublasCtrsv_64", "rocblas_ctrsv_64", "library");
     subst("cublasCtrsv_v2", "rocblas_ctrsv", "library");
+    subst("cublasCtrsv_v2_64", "rocblas_ctrsv_64", "library");
     subst("cublasDasum", "rocblas_dasum", "library");
     subst("cublasDasum_64", "rocblas_dasum_64", "library");
     subst("cublasDasum_v2", "rocblas_dasum", "library");
@@ -1836,7 +1838,9 @@ sub rocSubstitutions {
     subst("cublasDtrsmBatched", "rocblas_dtrsm_batched", "library");
     subst("cublasDtrsm_v2", "rocblas_dtrsm", "library");
     subst("cublasDtrsv", "rocblas_dtrsv", "library");
+    subst("cublasDtrsv_64", "rocblas_dtrsv_64", "library");
     subst("cublasDtrsv_v2", "rocblas_dtrsv", "library");
+    subst("cublasDtrsv_v2_64", "rocblas_dtrsv_64", "library");
     subst("cublasDzasum", "rocblas_dzasum", "library");
     subst("cublasDzasum_64", "rocblas_dzasum_64", "library");
     subst("cublasDzasum_v2", "rocblas_dzasum", "library");
@@ -2046,7 +2050,9 @@ sub rocSubstitutions {
     subst("cublasStrsmBatched", "rocblas_strsm_batched", "library");
     subst("cublasStrsm_v2", "rocblas_strsm", "library");
     subst("cublasStrsv", "rocblas_strsv", "library");
+    subst("cublasStrsv_64", "rocblas_strsv_64", "library");
     subst("cublasStrsv_v2", "rocblas_strsv", "library");
+    subst("cublasStrsv_v2_64", "rocblas_strsv_64", "library");
     subst("cublasTSSgemvBatched", "rocblas_tssgemv_batched", "library");
     subst("cublasTSSgemvBatched_64", "rocblas_tssgemv_batched_64", "library");
     subst("cublasTSSgemvStridedBatched", "rocblas_tssgemv_strided_batched", "library");
@@ -2193,7 +2199,9 @@ sub rocSubstitutions {
     subst("cublasZtrsmBatched", "rocblas_ztrsm_batched", "library");
     subst("cublasZtrsm_v2", "rocblas_ztrsm", "library");
     subst("cublasZtrsv", "rocblas_ztrsv", "library");
+    subst("cublasZtrsv_64", "rocblas_ztrsv_64", "library");
     subst("cublasZtrsv_v2", "rocblas_ztrsv", "library");
+    subst("cublasZtrsv_v2_64", "rocblas_ztrsv_64", "library");
     subst("cudnnActivationBackward", "miopenActivationBackward", "library");
     subst("cudnnActivationForward", "miopenActivationForward", "library");
     subst("cudnnBackendCreateDescriptor", "miopenBackendCreateDescriptor", "library");
@@ -12647,8 +12655,6 @@ sub warnRocOnlyUnsupportedFunctions {
     my $k = 0;
     foreach $func (
         "cublasZtrttp",
-        "cublasZtrsv_v2_64",
-        "cublasZtrsv_64",
         "cublasZtrsm_v2_64",
         "cublasZtrsm_64",
         "cublasZtrsmBatched_64",
@@ -12694,8 +12700,6 @@ sub warnRocOnlyUnsupportedFunctions {
         "cublasSwapEx_64",
         "cublasSwapEx",
         "cublasStrttp",
-        "cublasStrsv_v2_64",
-        "cublasStrsv_64",
         "cublasStrsm_v2_64",
         "cublasStrsm_64",
         "cublasStrsmBatched_64",
@@ -12833,8 +12837,6 @@ sub warnRocOnlyUnsupportedFunctions {
         "cublasGemmBatchedEx_64",
         "cublasFree",
         "cublasDtrttp",
-        "cublasDtrsv_v2_64",
-        "cublasDtrsv_64",
         "cublasDtrsm_v2_64",
         "cublasDtrsm_64",
         "cublasDtrsmBatched_64",
@@ -12867,8 +12869,6 @@ sub warnRocOnlyUnsupportedFunctions {
         "cublasDgeam_64",
         "cublasDdgmm_64",
         "cublasCtrttp",
-        "cublasCtrsv_v2_64",
-        "cublasCtrsv_64",
         "cublasCtrsm_v2_64",
         "cublasCtrsm_64",
         "cublasCtrsmBatched_64",
