@@ -1398,7 +1398,18 @@ my %experimental_funcs = (
     "cusolverDnXgeqrf_bufferSize" => "6.3.0",
     "cusolverDnXgeqrf" => "6.3.0",
     "cusolverDnSetDeterministicMode" => "6.3.0",
-    "cusolverDnGetDeterministicMode" => "6.3.0"
+    "cusolverDnGetDeterministicMode" => "6.3.0",
+    "cudaGraphNodeSetParams" => "6.3.0",
+    "cudaGraphExecNodeSetParams" => "6.3.0",
+    "cudaGraphExecGetFlags" => "6.3.0",
+    "cuGraphNodeSetParams" => "6.3.0",
+    "cuGraphMemcpyNodeSetParams" => "6.3.0",
+    "cuGraphMemcpyNodeGetParams" => "6.3.0",
+    "cuGraphExecNodeSetParams" => "6.3.0",
+    "cuGraphExecMemsetNodeSetParams" => "6.3.0",
+    "cuGraphExecMemcpyNodeSetParams" => "6.3.0",
+    "cuGraphExecGetFlags" => "6.3.0",
+    "cuGraphAddMemFreeNode" => "6.3.0"
 );
 
 $print_stats = 1 if $examine;
@@ -1536,6 +1547,17 @@ sub subst {
 }
 
 sub experimentalSubstitutions {
+    subst("cuGraphAddMemFreeNode", "hipDrvGraphAddMemFreeNode", "graph");
+    subst("cuGraphExecGetFlags", "hipGraphExecGetFlags", "graph");
+    subst("cuGraphExecMemcpyNodeSetParams", "hipDrvGraphExecMemcpyNodeSetParams", "graph");
+    subst("cuGraphExecMemsetNodeSetParams", "hipDrvGraphExecMemsetNodeSetParams", "graph");
+    subst("cuGraphExecNodeSetParams", "hipGraphExecNodeSetParams", "graph");
+    subst("cuGraphMemcpyNodeGetParams", "hipDrvGraphMemcpyNodeGetParams", "graph");
+    subst("cuGraphMemcpyNodeSetParams", "hipDrvGraphMemcpyNodeSetParams", "graph");
+    subst("cuGraphNodeSetParams", "hipGraphNodeSetParams", "graph");
+    subst("cudaGraphExecGetFlags", "hipGraphExecGetFlags", "graph");
+    subst("cudaGraphExecNodeSetParams", "hipGraphExecNodeSetParams", "graph");
+    subst("cudaGraphNodeSetParams", "hipGraphNodeSetParams", "graph");
     subst("cusolverDnGetDeterministicMode", "hipsolverDnGetDeterministicMode", "library");
     subst("cusolverDnSetDeterministicMode", "hipsolverDnSetDeterministicMode", "library");
     subst("cusolverDnXgeqrf", "hipsolverDnXgeqrf", "library");
@@ -9955,7 +9977,6 @@ sub warnUnsupportedFunctions {
         "cudaGraphicsCubeFaceNegativeX",
         "cudaGraphicsCubeFace",
         "cudaGraphRemoveDependencies_v2",
-        "cudaGraphNodeSetParams",
         "cudaGraphNodeGetDependentNodes_v2",
         "cudaGraphNodeGetDependencies_v2",
         "cudaGraphKernelNodeUpdate",
@@ -9968,8 +9989,6 @@ sub warnUnsupportedFunctions {
         "cudaGraphExecUpdateResultInfo_st",
         "cudaGraphExecUpdateResultInfo",
         "cudaGraphExecUpdateErrorAttributesChanged",
-        "cudaGraphExecNodeSetParams",
-        "cudaGraphExecGetFlags",
         "cudaGraphDeviceNode_t",
         "cudaGraphDebugDotFlagsConditionalNodeParams",
         "cudaGraphConditionalNodeType",
@@ -10452,18 +10471,11 @@ sub warnUnsupportedFunctions {
         "cuGraphicsD3D11RegisterResource",
         "cuGraphicsD3D10RegisterResource",
         "cuGraphRemoveDependencies_v2",
-        "cuGraphNodeSetParams",
         "cuGraphNodeGetDependentNodes_v2",
         "cuGraphNodeGetDependencies_v2",
-        "cuGraphMemcpyNodeSetParams",
-        "cuGraphMemcpyNodeGetParams",
         "cuGraphGetEdges_v2",
-        "cuGraphExecNodeSetParams",
-        "cuGraphExecMemcpyNodeSetParams",
-        "cuGraphExecGetFlags",
         "cuGraphConditionalHandleCreate",
         "cuGraphAddNode_v2",
-        "cuGraphAddMemFreeNode",
         "cuGraphAddDependencies_v2",
         "cuGLUnregisterBufferObject",
         "cuGLUnmapBufferObjectAsync",

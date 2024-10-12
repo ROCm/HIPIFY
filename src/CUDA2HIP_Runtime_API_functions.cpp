@@ -863,15 +863,15 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuGraphInstantiateWithParams
   {"cudaGraphInstantiateWithParams",                          {"hipGraphInstantiateWithParams",                          "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH}},
   // cuGraphExecGetFlags
-  {"cudaGraphExecGetFlags",                                   {"hipGraphExecGetFlags",                                   "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_UNSUPPORTED}},
+  {"cudaGraphExecGetFlags",                                   {"hipGraphExecGetFlags",                                   "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_EXPERIMENTAL}},
   // cuGraphAddNode
   {"cudaGraphAddNode",                                        {"hipGraphAddNode",                                        "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH}},
   // cuGraphAddNode_v2
   {"cudaGraphAddNode_v2",                                     {"hipGraphAddNode_v2",                                     "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_UNSUPPORTED}},
   // cuGraphNodeSetParams
-  {"cudaGraphNodeSetParams",                                  {"hipGraphNodeSetParams",                                  "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_UNSUPPORTED}},
+  {"cudaGraphNodeSetParams",                                  {"hipGraphNodeSetParams",                                  "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_EXPERIMENTAL}},
   // cuGraphExecNodeSetParams
-  {"cudaGraphExecNodeSetParams",                              {"hipGraphExecNodeSetParams",                              "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_UNSUPPORTED}},
+  {"cudaGraphExecNodeSetParams",                              {"hipGraphExecNodeSetParams",                              "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_EXPERIMENTAL}},
   // cuGraphConditionalHandleCreate
   {"cudaGraphConditionalHandleCreate",                        {"hipGraphConditionalHandleCreate",                        "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_UNSUPPORTED}},
 
@@ -1434,6 +1434,9 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP {
   {"hipStreamBeginCaptureToGraph",                            {HIP_6020, HIP_0,    HIP_0,  }},
   {"hipSetValidDevices",                                      {HIP_6020, HIP_0,    HIP_0,  }},
   {"hipMemcpy2DArrayToArray",                                 {HIP_6020, HIP_0,    HIP_0,  }},
+  {"hipGraphExecGetFlags",                                    {HIP_6030, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipGraphNodeSetParams",                                   {HIP_6030, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipGraphExecNodeSetParams",                               {HIP_6030, HIP_0,    HIP_0,  HIP_LATEST}},
 };
 
 const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_RUNTIME_FUNCTION_CHANGED_VER_MAP {
