@@ -46,7 +46,7 @@ int main() {
   // TODO: detect cudaGetDriverEntryPoint signature and report warning/error for old (before CUDA 12.0) signature
   // HIP: hipError_t hipGetProcAddress(const char* symbol, void** pfn, int hipVersion, uint64_t flags, hipDriverProcAddressQueryResult* symbolStatus);
   // TODO: add an explicit static_cast<uint64_t> for ull
-  // CHECK: result = hipGetProcAddress(symbol.c_str(), &pfn, 602, ull, &driverProcAddressQueryResult);
+  // CHECK: result = hipGetProcAddress(symbol.c_str(), &pfn, 603, ull, &driverProcAddressQueryResult);
   result = cudaGetDriverEntryPoint(symbol.c_str(), &pfn, ull, &driverProcAddressQueryResult);
 #endif
 

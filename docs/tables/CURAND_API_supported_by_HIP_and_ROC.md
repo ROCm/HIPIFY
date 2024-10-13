@@ -57,8 +57,8 @@
 |`curandDirectionVectorSet_t`| | | | |`hiprandDirectionVectorSet_t`|6.0.0| | | | |`rocrand_direction_vector_set`|6.0.0| | | | |
 |`curandDirectionVectors32_t`| | | | |`hiprandDirectionVectors32_t`|1.5.0| | | | | | | | | | |
 |`curandDirectionVectors64_t`| | | | |`hiprandDirectionVectors64_t`|6.0.0| | | | | | | | | | |
-|`curandDiscreteDistribution_st`| | | | |`hiprandDiscreteDistribution_st`|1.5.0| | | | | | | | | | |
-|`curandDiscreteDistribution_t`| | | | |`hiprandDiscreteDistribution_t`|1.5.0| | | | | | | | | | |
+|`curandDiscreteDistribution_st`| | | | |`hiprandDiscreteDistribution_st`|1.5.0| | | | |`rocrand_discrete_distribution_st`|1.5.0| | | | |
+|`curandDiscreteDistribution_t`| | | | |`hiprandDiscreteDistribution_t`|1.5.0| | | | |`rocrand_discrete_distribution`|1.5.0| | | | |
 |`curandDistributionM2Shift_st`| | | | | | | | | | | | | | | | |
 |`curandDistributionM2Shift_t`| | | | | | | | | | | | | | | | |
 |`curandDistributionShift_st`| | | | | | | | | | | | | | | | |
@@ -80,20 +80,20 @@
 |`curandRngType`| | | | |`hiprandRngType_t`|1.5.0| | | | |`rocrand_rng_type`|1.5.0| | | | |
 |`curandRngType_t`| | | | |`hiprandRngType_t`|1.5.0| | | | |`rocrand_rng_type`|1.5.0| | | | |
 |`curandState`| | | | |`hiprandState`|1.8.0| | | | | | | | | | |
-|`curandStateMRG32k3a`| | | | |`hiprandStateMRG32k3a`|1.8.0| | | | | | | | | | |
-|`curandStateMRG32k3a_t`| | | | |`hiprandStateMRG32k3a_t`|1.5.0| | | | | | | | | | |
-|`curandStateMtgp32`| | | | |`hiprandStateMtgp32`|1.8.0| | | | | | | | | | |
-|`curandStateMtgp32_t`| | | | |`hiprandStateMtgp32_t`|1.5.0| | | | | | | | | | |
-|`curandStatePhilox4_32_10`| | | | |`hiprandStatePhilox4_32_10`|1.8.0| | | | | | | | | | |
-|`curandStatePhilox4_32_10_t`| | | | |`hiprandStatePhilox4_32_10_t`|1.8.0| | | | | | | | | | |
-|`curandStateScrambledSobol32`| | | | |`hiprandStateScrambledSobol32`|6.2.0| | | | | | | | | | |
-|`curandStateScrambledSobol32_t`| | | | |`hiprandStateScrambledSobol32_t`|6.2.0| | | | | | | | | | |
-|`curandStateScrambledSobol64`| | | | |`hiprandStateScrambledSobol64`|6.2.0| | | | | | | | | | |
-|`curandStateScrambledSobol64_t`| | | | |`hiprandStateScrambledSobol64_t`|6.2.0| | | | | | | | | | |
-|`curandStateSobol32`| | | | |`hiprandStateSobol32`|1.8.0| | | | | | | | | | |
-|`curandStateSobol32_t`| | | | |`hiprandStateSobol32_t`|1.5.0| | | | | | | | | | |
-|`curandStateSobol64`| | | | |`hiprandStateSobol64`|6.2.0| | | | | | | | | | |
-|`curandStateSobol64_t`| | | | |`hiprandStateSobol64_t`|6.2.0| | | | | | | | | | |
+|`curandStateMRG32k3a`| | | | |`hiprandStateMRG32k3a`|1.8.0| | | | |`rocrand_device::mrg32k3a_engine`|1.5.0| | | | |
+|`curandStateMRG32k3a_t`| | | | |`hiprandStateMRG32k3a_t`|1.5.0| | | | |`rocrand_state_mrg32k3a`|1.5.0| | | | |
+|`curandStateMtgp32`| | | | |`hiprandStateMtgp32`|1.8.0| | | | |`rocrand_device::mtgp32_engine`|1.5.0| | | | |
+|`curandStateMtgp32_t`| | | | |`hiprandStateMtgp32_t`|1.5.0| | | | |`rocrand_state_mtgp32`|1.5.0| | | | |
+|`curandStatePhilox4_32_10`| | | | |`hiprandStatePhilox4_32_10`|1.8.0| | | | |`rocrand_device::philox4x32_10_engine`|1.5.0| | | | |
+|`curandStatePhilox4_32_10_t`| | | | |`hiprandStatePhilox4_32_10_t`|1.8.0| | | | |`rocrand_state_philox4x32_10`|1.5.0| | | | |
+|`curandStateScrambledSobol32`| | | | |`hiprandStateScrambledSobol32`|6.2.0| | | | |`rocrand_device::scrambled_sobol32_engine<false>`|5.4.0| | | | |
+|`curandStateScrambledSobol32_t`| | | | |`hiprandStateScrambledSobol32_t`|6.2.0| | | | |`rocrand_state_scrambled_sobol32`|5.4.0| | | | |
+|`curandStateScrambledSobol64`| | | | |`hiprandStateScrambledSobol64`|6.2.0| | | | |`rocrand_device::scrambled_sobol64_engine<false>`|5.4.0| | | | |
+|`curandStateScrambledSobol64_t`| | | | |`hiprandStateScrambledSobol64_t`|6.2.0| | | | |`rocrand_state_scrambled_sobol64`|5.4.0| | | | |
+|`curandStateSobol32`| | | | |`hiprandStateSobol32`|1.8.0| | | | |`rocrand_device::sobol32_engine<false>`|1.5.0| | | | |
+|`curandStateSobol32_t`| | | | |`hiprandStateSobol32_t`|1.5.0| | | | |`rocrand_state_sobol32`|1.5.0| | | | |
+|`curandStateSobol64`| | | | |`hiprandStateSobol64`|6.2.0| | | | |`rocrand_device::sobol64_engine<false>`|4.5.0| | | | |
+|`curandStateSobol64_t`| | | | |`hiprandStateSobol64_t`|6.2.0| | | | |`rocrand_state_sobol64`|4.5.0| | | | |
 |`curandStateXORWOW`| | | | |`hiprandStateXORWOW`|1.8.0| | | | | | | | | | |
 |`curandStateXORWOW_t`| | | | |`hiprandStateXORWOW_t`|1.5.0| | | | | | | | | | |
 |`curandState_t`| | | | |`hiprandState_t`|1.5.0| | | | | | | | | | |
@@ -106,8 +106,8 @@
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
 |`curandCreateGenerator`| | | | |`hiprandCreateGenerator`|1.5.0| | | | |`rocrand_create_generator`|1.5.0| | | | |
 |`curandCreateGeneratorHost`| | | | |`hiprandCreateGeneratorHost`|1.5.0| | | | |`rocrand_create_generator_host_blocking`|6.2.0| | | | |
-|`curandCreatePoissonDistribution`| | | | |`hiprandCreatePoissonDistribution`|1.5.0| | | | | | | | | | |
-|`curandDestroyDistribution`| | | | |`hiprandDestroyDistribution`|1.5.0| | | | | | | | | | |
+|`curandCreatePoissonDistribution`| | | | |`hiprandCreatePoissonDistribution`|1.5.0| | | | |`rocrand_create_poisson_distribution`|1.5.0| | | | |
+|`curandDestroyDistribution`| | | | |`hiprandDestroyDistribution`|1.5.0| | | | |`rocrand_destroy_discrete_distribution`|1.5.0| | | | |
 |`curandDestroyGenerator`| | | | |`hiprandDestroyGenerator`|1.5.0| | | | |`rocrand_destroy_generator`|1.5.0| | | | |
 |`curandGenerate`| | | | |`hiprandGenerate`|1.5.0| | | | |`rocrand_generate`|1.5.0| | | | |
 |`curandGenerateLogNormal`| | | | |`hiprandGenerateLogNormal`|1.5.0| | | | |`rocrand_generate_log_normal`|1.5.0| | | | |
@@ -119,18 +119,18 @@
 |`curandGenerateSeeds`| | | | |`hiprandGenerateSeeds`|1.5.0| | | | |`rocrand_initialize_generator`|1.5.0| | | | |
 |`curandGenerateUniform`| | | | |`hiprandGenerateUniform`|1.5.0| | | | |`rocrand_generate_uniform`|1.5.0| | | | |
 |`curandGenerateUniformDouble`| | | | |`hiprandGenerateUniformDouble`|1.5.0| | | | |`rocrand_generate_uniform_double`|1.5.0| | | | |
-|`curandGetDirectionVectors32`| | | | |`hiprandGetDirectionVectors32`|6.0.0| | | | | | | | | | |
-|`curandGetDirectionVectors64`| | | | |`hiprandGetDirectionVectors64`|6.0.0| | | | | | | | | | |
+|`curandGetDirectionVectors32`| | | | |`hiprandGetDirectionVectors32`|6.0.0| | | | |`rocrand_get_direction_vectors32`|6.0.0| | | | |
+|`curandGetDirectionVectors64`| | | | |`hiprandGetDirectionVectors64`|6.0.0| | | | |`rocrand_get_direction_vectors64`|6.0.0| | | | |
 |`curandGetProperty`|8.0| | | | | | | | | | | | | | | |
-|`curandGetScrambleConstants32`| | | | |`hiprandGetScrambleConstants32`|6.0.0| | | | | | | | | | |
-|`curandGetScrambleConstants64`| | | | |`hiprandGetScrambleConstants64`|6.0.0| | | | | | | | | | |
-|`curandGetVersion`| | | | |`hiprandGetVersion`|1.5.0| | | | | | | | | | |
-|`curandMakeMTGP32Constants`| | | | |`hiprandMakeMTGP32Constants`|1.5.0| | | | | | | | | | |
-|`curandMakeMTGP32KernelState`| | | | |`hiprandMakeMTGP32KernelState`|1.5.0| | | | | | | | | | |
+|`curandGetScrambleConstants32`| | | | |`hiprandGetScrambleConstants32`|6.0.0| | | | |`rocrand_get_scramble_constants32`|6.0.0| | | | |
+|`curandGetScrambleConstants64`| | | | |`hiprandGetScrambleConstants64`|6.0.0| | | | |`rocrand_get_scramble_constants64`|6.0.0| | | | |
+|`curandGetVersion`| | | | |`hiprandGetVersion`|1.5.0| | | | |`rocrand_get_version`|1.5.0| | | | |
+|`curandMakeMTGP32Constants`| | | | |`hiprandMakeMTGP32Constants`|1.5.0| | | | |`rocrand_make_constant`|1.5.0| | | | |
+|`curandMakeMTGP32KernelState`| | | | |`hiprandMakeMTGP32KernelState`|1.5.0| | | | |`rocrand_make_state_mtgp32`|1.5.0| | | | |
 |`curandSetGeneratorOffset`| | | | |`hiprandSetGeneratorOffset`|1.5.0| | | | |`rocrand_set_offset`|1.5.0| | | | |
-|`curandSetGeneratorOrdering`| | | | |`hiprandSetGeneratorOrdering`|6.2.0| | | | | | | | | | |
+|`curandSetGeneratorOrdering`| | | | |`hiprandSetGeneratorOrdering`|6.2.0| | | | |`rocrand_set_ordering`|5.5.0| | | | |
 |`curandSetPseudoRandomGeneratorSeed`| | | | |`hiprandSetPseudoRandomGeneratorSeed`|1.5.0| | | | |`rocrand_set_seed`|1.5.0| | | | |
-|`curandSetQuasiRandomGeneratorDimensions`| | | | |`hiprandSetQuasiRandomGeneratorDimensions`|1.5.0| | | | | | | | | | |
+|`curandSetQuasiRandomGeneratorDimensions`| | | | |`hiprandSetQuasiRandomGeneratorDimensions`|1.5.0| | | | |`rocrand_set_quasi_random_generator_dimensions`|1.5.0| | | | |
 |`curandSetStream`| | | | |`hiprandSetStream`|1.5.0| | | | |`rocrand_set_stream`|1.5.0| | | | |
 
 ## **3. Device API Functions**
@@ -138,33 +138,33 @@
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|**ROC**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
 |`__curand_umul`|11.5| | | | | | | | | | | | | | | |
-|`curand`| | | | |`hiprand`|1.5.0| | | | | | | | | | |
+|`curand`| | | | |`hiprand`|1.5.0| | | | |`rocrand`|1.5.0| | | | |
 |`curand_Philox4x32_10`| | | | | | | | | | | | | | | | |
-|`curand_discrete`| | | | |`hiprand_discrete`|1.5.0| | | | | | | | | | |
-|`curand_discrete4`| | | | |`hiprand_discrete4`|1.5.0| | | | | | | | | | |
-|`curand_init`| | | | |`hiprand_init`|1.5.0| | | | | | | | | | |
-|`curand_log_normal`| | | | |`hiprand_log_normal`|1.5.0| | | | | | | | | | |
-|`curand_log_normal2`| | | | |`hiprand_log_normal2`|1.5.0| | | | | | | | | | |
-|`curand_log_normal2_double`| | | | |`hiprand_log_normal2_double`|1.5.0| | | | | | | | | | |
-|`curand_log_normal4`| | | | |`hiprand_log_normal4`|1.5.0| | | | | | | | | | |
-|`curand_log_normal4_double`| | | | |`hiprand_log_normal4_double`|1.5.0| | | | | | | | | | |
-|`curand_log_normal_double`| | | | |`hiprand_log_normal_double`|1.5.0| | | | | | | | | | |
+|`curand_discrete`| | | | |`hiprand_discrete`|1.5.0| | | | |`rocrand_discrete`|1.5.0| | | | |
+|`curand_discrete4`| | | | |`hiprand_discrete4`|1.5.0| | | | |`rocrand_discrete4`|1.5.0| | | | |
+|`curand_init`| | | | |`hiprand_init`|1.5.0| | | | |`rocrand_init`|1.5.0| | | | |
+|`curand_log_normal`| | | | |`hiprand_log_normal`|1.5.0| | | | |`rocrand_log_normal`|1.5.0| | | | |
+|`curand_log_normal2`| | | | |`hiprand_log_normal2`|1.5.0| | | | |`rocrand_log_normal2`|1.5.0| | | | |
+|`curand_log_normal2_double`| | | | |`hiprand_log_normal2_double`|1.5.0| | | | |`rocrand_log_normal_double2`|1.5.0| | | | |
+|`curand_log_normal4`| | | | |`hiprand_log_normal4`|1.5.0| | | | |`rocrand_log_normal4`|1.5.0| | | | |
+|`curand_log_normal4_double`| | | | |`hiprand_log_normal4_double`|1.5.0| | | | |`rocrand_log_normal_double4`|1.5.0| | | | |
+|`curand_log_normal_double`| | | | |`hiprand_log_normal_double`|1.5.0| | | | |`rocrand_log_normal_double`|1.5.0| | | | |
 |`curand_mtgp32_single`| | | | | | | | | | | | | | | | |
 |`curand_mtgp32_single_specific`| | | | | | | | | | | | | | | | |
 |`curand_mtgp32_specific`| | | | | | | | | | | | | | | | |
-|`curand_normal`| | | | |`hiprand_normal`|1.5.0| | | | | | | | | | |
-|`curand_normal2`| | | | |`hiprand_normal2`|1.5.0| | | | | | | | | | |
-|`curand_normal2_double`| | | | |`hiprand_normal2_double`|1.5.0| | | | | | | | | | |
-|`curand_normal4`| | | | |`hiprand_normal4`|1.5.0| | | | | | | | | | |
-|`curand_normal4_double`| | | | |`hiprand_normal4_double`|1.5.0| | | | | | | | | | |
-|`curand_normal_double`| | | | |`hiprand_normal_double`|1.5.0| | | | | | | | | | |
-|`curand_poisson`| | | | |`hiprand_poisson`|1.5.0| | | | | | | | | | |
-|`curand_poisson4`| | | | |`hiprand_poisson4`|1.5.0| | | | | | | | | | |
-|`curand_uniform`| | | | |`hiprand_uniform`|1.5.0| | | | | | | | | | |
-|`curand_uniform2_double`| | | | |`hiprand_uniform2_double`|1.5.0| | | | | | | | | | |
-|`curand_uniform4`| | | | |`hiprand_uniform4`|1.5.0| | | | | | | | | | |
-|`curand_uniform4_double`| | | | |`hiprand_uniform4_double`|1.5.0| | | | | | | | | | |
-|`curand_uniform_double`| | | | |`hiprand_uniform_double`|1.5.0| | | | | | | | | | |
+|`curand_normal`| | | | |`hiprand_normal`|1.5.0| | | | |`rocrand_normal`|1.5.0| | | | |
+|`curand_normal2`| | | | |`hiprand_normal2`|1.5.0| | | | |`rocrand_normal2`|1.5.0| | | | |
+|`curand_normal2_double`| | | | |`hiprand_normal2_double`|1.5.0| | | | |`rocrand_normal_double2`|1.5.0| | | | |
+|`curand_normal4`| | | | |`hiprand_normal4`|1.5.0| | | | |`rocrand_normal4`|1.5.0| | | | |
+|`curand_normal4_double`| | | | |`hiprand_normal4_double`|1.5.0| | | | |`rocrand_normal_double4`|1.5.0| | | | |
+|`curand_normal_double`| | | | |`hiprand_normal_double`|1.5.0| | | | |`rocrand_normal_double`|1.5.0| | | | |
+|`curand_poisson`| | | | |`hiprand_poisson`|1.5.0| | | | |`rocrand_poisson`|1.5.0| | | | |
+|`curand_poisson4`| | | | |`hiprand_poisson4`|1.5.0| | | | |`rocrand_poisson4`|1.5.0| | | | |
+|`curand_uniform`| | | | |`hiprand_uniform`|1.5.0| | | | |`rocrand_uniform`|1.5.0| | | | |
+|`curand_uniform2_double`| | | | |`hiprand_uniform2_double`|1.5.0| | | | |`rocrand_uniform_double2`|1.5.0| | | | |
+|`curand_uniform4`| | | | |`hiprand_uniform4`|1.5.0| | | | |`rocrand_uniform4`|1.5.0| | | | |
+|`curand_uniform4_double`| | | | |`hiprand_uniform4_double`|1.5.0| | | | |`rocrand_uniform_double4`|1.5.0| | | | |
+|`curand_uniform_double`| | | | |`hiprand_uniform_double`|1.5.0| | | | |`rocrand_uniform_double`|1.5.0| | | | |
 
 
 \*A - Added; D - Deprecated; C - Changed; R - Removed; E - Experimental

@@ -1651,6 +1651,10 @@ int main() {
   __half* hc = 0;
   // CHECK: __half* hC = 0;
   __half* hC = 0;
+  // CHECK: __half* hx = 0;
+  __half* hx = 0;
+  // CHECK: __half* hy = 0;
+  __half* hy = 0;
 
   // CHECK: __half** hAarray = 0;
   __half** hAarray = 0;
@@ -1848,16 +1852,24 @@ int main() {
   cublasDataType_t R_16BF = CUDA_R_16BF;
   cublasDataType_t C_16BF = CUDA_C_16BF;
 
+  // CHECK: hip_bfloat16* bf16A = nullptr;
+  __nv_bfloat16* bf16A = nullptr;
   // CHECK: hip_bfloat16** bf16Aarray = 0;
   __nv_bfloat16** bf16Aarray = 0;
   // CHECK: const hip_bfloat16** const bf16Aarray_const = const_cast<const hip_bfloat16**>(bf16Aarray);
   const __nv_bfloat16** const bf16Aarray_const = const_cast<const __nv_bfloat16**>(bf16Aarray);
+  // CHECK: hip_bfloat16* bf16X = nullptr;
+  __nv_bfloat16* bf16X = nullptr;
   // CHECK: hip_bfloat16** bf16xarray = 0;
   __nv_bfloat16** bf16xarray = 0;
-  // CHECK: const hip_bfloat16** const bf16xarray_const = const_cast<const hip_bfloat16**>(bf16xarray_const);
-  const __nv_bfloat16** const bf16xarray_const = const_cast<const __nv_bfloat16**>(bf16xarray_const);
+  // CHECK: const hip_bfloat16** const bf16xarray_const = const_cast<const hip_bfloat16**>(bf16xarray);
+  const __nv_bfloat16** const bf16xarray_const = const_cast<const __nv_bfloat16**>(bf16xarray);
+  // CHECK: hip_bfloat16* bf16Y = nullptr;
+  __nv_bfloat16* bf16Y = nullptr;
   // CHECK: hip_bfloat16** bf16yarray = 0;
   __nv_bfloat16** bf16yarray = 0;
+  // CHECK: const hip_bfloat16** const bf16yarray_const = const_cast<const hip_bfloat16**>(bf16yarray);
+  const __nv_bfloat16** const bf16yarray_const = const_cast<const __nv_bfloat16**>(bf16yarray);
 
   // CHECK: hipblasComputeType_t blasComputeType;
   cublasComputeType_t blasComputeType;
@@ -2315,23 +2327,23 @@ int main() {
 
   // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasSgemvStridedBatched_64(cublasHandle_t handle, cublasOperation_t trans, int64_t m, int64_t n, const float* alpha, const float* A, int64_t lda, long long int strideA, const float* x, int64_t incx, long long int stridex, const float* beta, float* y, int64_t incy, long long int stridey, int64_t batchCount);
   // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasSgemvStridedBatched_64(hipblasHandle_t handle, hipblasOperation_t transA, int64_t m, int64_t n, const float* alpha, const float* AP, int64_t lda, hipblasStride strideA, const float* x, int64_t incx, hipblasStride stridex, const float* beta, float* y, int64_t incy, hipblasStride stridey, int64_t batchCount);
-  // CHECK: blasStatus = hipblasSgemvStridedBatched_64(blasHandle, blasOperation, m_64, n_64, &fa, &fA, lda_64, strideA, &fx, incx_64, strideX, &fb, &fy, incy_64, strideY, batchCount);
-  blasStatus = cublasSgemvStridedBatched_64(blasHandle, blasOperation, m_64, n_64, &fa, &fA, lda_64, strideA, &fx, incx_64, strideX, &fb, &fy, incy_64, strideY, batchCount);
+  // CHECK: blasStatus = hipblasSgemvStridedBatched_64(blasHandle, blasOperation, m_64, n_64, &fa, &fA, lda_64, strideA, &fx, incx_64, strideX, &fb, &fy, incy_64, strideY, batchCount_64);
+  blasStatus = cublasSgemvStridedBatched_64(blasHandle, blasOperation, m_64, n_64, &fa, &fA, lda_64, strideA, &fx, incx_64, strideX, &fb, &fy, incy_64, strideY, batchCount_64);
 
   // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasDgemvStridedBatched_64(cublasHandle_t handle, cublasOperation_t trans, int64_t m, int64_t n, const double* alpha, const double* A, int64_t lda, long long int strideA, const double* x, int64_t incx, long long int stridex, const double* beta, double* y, int64_t incy, long long int stridey, int64_t batchCount);
   // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasDgemvStridedBatched_64(hipblasHandle_t handle, hipblasOperation_t transA, int64_t m, int64_t n, const double* alpha, const double* AP, int64_t lda, hipblasStride strideA, const double* x, int64_t incx, hipblasStride stridex, const double* beta, double* y, int64_t incy, hipblasStride stridey, int64_t batchCount);
-  // CHECK: blasStatus = hipblasDgemvStridedBatched_64(blasHandle, blasOperation, m_64, n_64, &da, &dA, lda_64, strideA, &dx, incx_64, strideX, &db, &dy, incy_64, strideY, batchCount);
-  blasStatus = cublasDgemvStridedBatched_64(blasHandle, blasOperation, m_64, n_64, &da, &dA, lda_64, strideA, &dx, incx_64, strideX, &db, &dy, incy_64, strideY, batchCount);
+  // CHECK: blasStatus = hipblasDgemvStridedBatched_64(blasHandle, blasOperation, m_64, n_64, &da, &dA, lda_64, strideA, &dx, incx_64, strideX, &db, &dy, incy_64, strideY, batchCount_64);
+  blasStatus = cublasDgemvStridedBatched_64(blasHandle, blasOperation, m_64, n_64, &da, &dA, lda_64, strideA, &dx, incx_64, strideX, &db, &dy, incy_64, strideY, batchCount_64);
 
   // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasCgemvStridedBatched_64(cublasHandle_t handle, cublasOperation_t trans, int64_t m, int64_t n, const cuComplex* alpha, const cuComplex* A, int64_t lda, long long int strideA, const cuComplex* x, int64_t incx, long long int stridex, const cuComplex* beta, cuComplex* y, int64_t incy, long long int stridey, int64_t batchCount);
   // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasCgemvStridedBatched_v2_64(hipblasHandle_t handle, hipblasOperation_t transA, int64_t m, int64_t n,const hipComplex* alpha, const hipComplex* AP, int64_t lda,hipblasStride strideA, const hipComplex* x, int64_t incx, hipblasStride stridex, const hipComplex* beta, hipComplex* y, int64_t incy, hipblasStride stridey, int64_t batchCount);
-  // CHECK: blasStatus = hipblasCgemvStridedBatched_v2_64(blasHandle, blasOperation, m_64, n_64, &complexa, &complexA, lda_64, strideA, &complexx, incx_64, strideX, &complexb, &complexy, incy_64, strideY, batchCount);
-  blasStatus = cublasCgemvStridedBatched_64(blasHandle, blasOperation, m_64, n_64, &complexa, &complexA, lda_64, strideA, &complexx, incx_64, strideX, &complexb, &complexy, incy_64, strideY, batchCount);
+  // CHECK: blasStatus = hipblasCgemvStridedBatched_v2_64(blasHandle, blasOperation, m_64, n_64, &complexa, &complexA, lda_64, strideA, &complexx, incx_64, strideX, &complexb, &complexy, incy_64, strideY, batchCount_64);
+  blasStatus = cublasCgemvStridedBatched_64(blasHandle, blasOperation, m_64, n_64, &complexa, &complexA, lda_64, strideA, &complexx, incx_64, strideX, &complexb, &complexy, incy_64, strideY, batchCount_64);
 
   // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasZgemvStridedBatched_64(cublasHandle_t handle, cublasOperation_t trans, int64_t m, int64_t n, const cuDoubleComplex* alpha, const cuDoubleComplex* A, int64_t lda, long long int strideA, const cuDoubleComplex* x, int64_t incx, long long int stridex, const cuDoubleComplex* beta, cuDoubleComplex* y, int64_t incy, long long int stridey, int64_t batchCount);
   // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasZgemvStridedBatched_v2_64(hipblasHandle_t handle, hipblasOperation_t transA, int64_t m, int64_t n, const hipDoubleComplex* alpha, const hipDoubleComplex* AP, int64_t lda, hipblasStride strideA, const hipDoubleComplex* x, int64_t incx, hipblasStride stridex, const hipDoubleComplex* beta, hipDoubleComplex* y, int64_t incy, hipblasStride stridey, int64_t batchCount);
-  // CHECK: blasStatus = hipblasZgemvStridedBatched_v2_64(blasHandle, blasOperation, m_64, n_64, &dcomplexa, &dcomplexA, lda_64, strideA, &dcomplexx, incx_64, strideX, &dcomplexb, &dcomplexy, incy_64, strideY, batchCount);
-  blasStatus = cublasZgemvStridedBatched_64(blasHandle, blasOperation, m_64, n_64, &dcomplexa, &dcomplexA, lda_64, strideA, &dcomplexx, incx_64, strideX, &dcomplexb, &dcomplexy, incy_64, strideY, batchCount);
+  // CHECK: blasStatus = hipblasZgemvStridedBatched_v2_64(blasHandle, blasOperation, m_64, n_64, &dcomplexa, &dcomplexA, lda_64, strideA, &dcomplexx, incx_64, strideX, &dcomplexb, &dcomplexy, incy_64, strideY, batchCount_64);
+  blasStatus = cublasZgemvStridedBatched_64(blasHandle, blasOperation, m_64, n_64, &dcomplexa, &dcomplexA, lda_64, strideA, &dcomplexx, incx_64, strideX, &dcomplexb, &dcomplexy, incy_64, strideY, batchCount_64);
 
   // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasSger_v2_64(cublasHandle_t handle, int64_t m, int64_t n, const float* alpha, const float* x, int64_t incx, const float* y, int64_t incy, float* A, int64_t lda);
   // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasSger_64(hipblasHandle_t handle, int64_t m, int64_t n, const float* alpha, const float* x, int64_t incx, const float* y, int64_t incy, float* AP, int64_t lda);

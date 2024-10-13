@@ -3,7 +3,27 @@
 Documentation for HIPIFY is available at
 [https://rocmdocs.amd.com/projects/HIPIFY/en/latest/](https://rocmdocs.amd.com/projects/HIPIFY/en/latest/).
 
-## HIPIFY for ROCm 6.2.2
+## HIPIFY for ROCm 6.3.0
+
+### Additions
+
+* CUDA 12.6.1 support
+* cuDNN 9.5.0 support
+* LLVM 19.1.1 support
+* `rocBLAS` 64-bit APIs support
+* Initial support for direct hipification of `cuDNN` into `MIOpen` under the `--roc` option
+* Initial support for direct hipification of `cuRAND` into `rocRAND` under the `--roc` option
+* [#1650] Added a filtering ability for the supplementary hipification scripts
+
+### Fixes
+
+* Correct `roc` header files support
+
+### Known issues
+
+* [#1617] Support for `fp8` data types
+
+## HIPIFY for ROCm 6.2.4
 
 ### Additions
 

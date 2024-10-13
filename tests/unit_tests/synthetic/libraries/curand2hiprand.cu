@@ -19,10 +19,14 @@ int main() {
   printf("21. cuRAND API to hipRAND API synthetic test\n");
 
   unsigned int *outputPtr = nullptr;
+  unsigned int *constants = nullptr;
+  unsigned long long *constantsLL = nullptr;
   float *outputPtrFloat = nullptr;
   double *outputPtrDouble = nullptr;
+  unsigned int num_dimensions = 0;
   unsigned long long *outputPtrUll = nullptr;
   unsigned long long offset = 0;
+  int version = 0;
   size_t num = 0;
   float mean = 0.f;
   double dmean = 0.f;
@@ -121,6 +125,11 @@ int main() {
   curandStateScrambledSobol64 randStateScrambledSobol64;
   curandStateScrambledSobol64_t randStateScrambledSobol64_t;
 
+  // CHECK: hiprandStateSobol32 randStateSobol32;
+  // CHECK-NEXT: hiprandStateSobol32_t randStateSobol32_t;
+  curandStateSobol32 randStateSobol32;
+  curandStateSobol32_t randStateSobol32_t;
+
   // CHECK: hiprandStateScrambledSobol32 randStateScrambledSobol32;
   // CHECK-NEXT: hiprandStateScrambledSobol32_t randStateScrambledSobol32_t;
   curandStateScrambledSobol32 randStateScrambledSobol32;
@@ -132,6 +141,26 @@ int main() {
   curandDirectionVectors32_t directions32;
   curandDirectionVectors64_t directions64;
   curandDirectionVectors64_t *pDirections64 = nullptr;
+
+  // CHECK: hiprandDiscreteDistribution_st *discreteDistribution_st = nullptr;
+  // CHECK: hiprandDiscreteDistribution_t discreteDistribution_t = nullptr;
+  curandDiscreteDistribution_st *discreteDistribution_st = nullptr;
+  curandDiscreteDistribution_t discreteDistribution_t = nullptr;
+
+  // CHECK: hiprandStateMtgp32 stateMtgp32;
+  // CHECK-NEXT: hiprandStateMtgp32_t stateMtgp32_t;
+  curandStateMtgp32 stateMtgp32;
+  curandStateMtgp32_t stateMtgp32_t;
+
+  // CHECK: hiprandStateMRG32k3a stateMRG32k3a;
+  // CHECK-NEXT: hiprandStateMRG32k3a_t stateMRG32k3a_t;
+  curandStateMRG32k3a stateMRG32k3a;
+  curandStateMRG32k3a_t stateMRG32k3a_t;
+
+  // CHECK: hiprandStatePhilox4_32_10 statePhilox4_32_10;
+  // CHECK-NEXT: hiprandStatePhilox4_32_10_t statePhilox4_32_10_t;
+  curandStatePhilox4_32_10 statePhilox4_32_10;
+  curandStatePhilox4_32_10_t statePhilox4_32_10_t;
 
   // CHECK: hiprandDirectionVectorSet_t directionVectorSet;
   // CHECK-NEXT: hiprandDirectionVectorSet_t directionVectorSet_t;
@@ -235,6 +264,36 @@ int main() {
   // HIP: hiprandStatus_t HIPRANDAPI hiprandSetStream(hiprandGenerator_t generator, hipStream_t stream);
   // CHECK: status = hiprandSetStream(randGenerator, stream);
   status = curandSetStream(randGenerator, stream);
+
+  // CUDA: curandStatus_t CURANDAPI curandCreatePoissonDistribution(double lambda, curandDiscreteDistribution_t *discrete_distribution);
+  // HIP: hiprandStatus_t HIPRANDAPI hiprandCreatePoissonDistribution(double lambda, hiprandDiscreteDistribution_t * discrete_distribution);
+  // CHECK: status = hiprandCreatePoissonDistribution(dlambda, &discreteDistribution_t);
+  status = curandCreatePoissonDistribution(dlambda, &discreteDistribution_t);
+
+  // CUDA: curandStatus_t CURANDAPI curandDestroyDistribution(curandDiscreteDistribution_t discrete_distribution);
+  // HIP: hiprandStatus_t HIPRANDAPI hiprandDestroyDistribution(hiprandDiscreteDistribution_t discrete_distribution);
+  // CHECK: status = hiprandDestroyDistribution(discreteDistribution_t);
+  status = curandDestroyDistribution(discreteDistribution_t);
+
+  // CUDA: curandStatus_t CURANDAPI curandGetScrambleConstants32(unsigned int * * constants);
+  // HIP: hiprandStatus_t HIPRANDAPI hiprandGetScrambleConstants32(const unsigned int** constants);
+  // CHECK: status = hiprandGetScrambleConstants32(&constants);
+  status = curandGetScrambleConstants32(&constants);
+
+  // CUDA: curandStatus_t CURANDAPI curandGetScrambleConstants64(unsigned long long * * constants);
+  // HIP: hiprandStatus_t HIPRANDAPI hiprandGetScrambleConstants64(const unsigned long long** constants);
+  // CHECK: status = hiprandGetScrambleConstants64(&constantsLL);
+  status = curandGetScrambleConstants64(&constantsLL);
+
+  // CUDA: curandStatus_t CURANDAPI curandGetVersion(int *version);
+  // HIP: hiprandStatus_t HIPRANDAPI hiprandGetVersion(int * version);
+  // CHECK: status = hiprandGetVersion(&version);
+  status = curandGetVersion(&version);
+
+  // CUDA: curandStatus_t CURANDAPI curandSetQuasiRandomGeneratorDimensions(curandGenerator_t generator, unsigned int num_dimensions);
+  // HIP: hiprandStatus_t HIPRANDAPI hiprandSetQuasiRandomGeneratorDimensions(hiprandGenerator_t generator, unsigned int dimensions);
+  // CHECK: status = hiprandSetQuasiRandomGeneratorDimensions(randGenerator, num_dimensions);
+  status = curandSetQuasiRandomGeneratorDimensions(randGenerator, num_dimensions);
 
 #if CUDA_VERSION >= 11000 && CURAND_VERSION >= 10200
   // CHECK: hiprandOrdering_t RAND_ORDERING_PSEUDO_LEGACY = HIPRAND_ORDERING_PSEUDO_LEGACY;
