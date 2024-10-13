@@ -1068,9 +1068,9 @@
 |`cublasCtrmm_v2`| | | | |`hipblasCtrmm_v2`|6.0.0| | | | |`rocblas_ctrmm`|3.5.0| |6.0.0| | |
 |`cublasCtrmm_v2_64`|12.0| | | | | | | | | | | | | | | |
 |`cublasCtrsm`| | | | |`hipblasCtrsm_v2`|6.0.0| | | | |`rocblas_ctrsm`|3.5.0| | | | |
-|`cublasCtrsm_64`|12.0| | | | | | | | | | | | | | | |
+|`cublasCtrsm_64`|12.0| | | | | | | | | |`rocblas_ctrsm_64`|6.2.0| | | | |
 |`cublasCtrsm_v2`| | | | |`hipblasCtrsm_v2`|6.0.0| | | | |`rocblas_ctrsm`|3.5.0| | | | |
-|`cublasCtrsm_v2_64`|12.0| | | | | | | | | | | | | | | |
+|`cublasCtrsm_v2_64`|12.0| | | | | | | | | |`rocblas_ctrsm_64`|6.2.0| | | | |
 |`cublasDgemm`| | | | |`hipblasDgemm`|1.8.2| | | | |`rocblas_dgemm`|1.5.0| | | | |
 |`cublasDgemmBatched`| | | | |`hipblasDgemmBatched`|1.8.2| | | | |`rocblas_dgemm_batched`|3.5.0| | | | |
 |`cublasDgemmBatched_64`|12.0| | | | | | | | | | | | | | | |
@@ -1104,9 +1104,9 @@
 |`cublasDtrmm_v2`| | | | |`hipblasDtrmm`|3.2.0| |6.0.0| | |`rocblas_dtrmm`|3.5.0| |6.0.0| | |
 |`cublasDtrmm_v2_64`|12.0| | | | | | | | | | | | | | | |
 |`cublasDtrsm`| | | | |`hipblasDtrsm`|1.8.2| | | | |`rocblas_dtrsm`|1.5.0| | | | |
-|`cublasDtrsm_64`|12.0| | | | | | | | | | | | | | | |
+|`cublasDtrsm_64`|12.0| | | | | | | | | |`rocblas_dtrsm_64`|6.2.0| | | | |
 |`cublasDtrsm_v2`| | | | |`hipblasDtrsm`|1.8.2| | | | |`rocblas_dtrsm`|1.5.0| | | | |
-|`cublasDtrsm_v2_64`|12.0| | | | | | | | | | | | | | | |
+|`cublasDtrsm_v2_64`|12.0| | | | | | | | | |`rocblas_dtrsm_64`|6.2.0| | | | |
 |`cublasGemmGroupedBatchedEx`|12.5| | | | | | | | | | | | | | | |
 |`cublasGemmGroupedBatchedEx_64`|12.5| | | | | | | | | | | | | | | |
 |`cublasHSHgemvBatched`|11.6| | | | | | | | | |`rocblas_hshgemv_batched`|6.0.0| | | | |
@@ -1156,9 +1156,9 @@
 |`cublasStrmm_v2`| | | | |`hipblasStrmm`|3.2.0| |6.0.0| | |`rocblas_strmm`|3.5.0| |6.0.0| | |
 |`cublasStrmm_v2_64`|12.0| | | | | | | | | | | | | | | |
 |`cublasStrsm`| | | | |`hipblasStrsm`|1.8.2| | | | |`rocblas_strsm`|1.5.0| | | | |
-|`cublasStrsm_64`|12.0| | | | | | | | | | | | | | | |
+|`cublasStrsm_64`|12.0| | | | | | | | | |`rocblas_strsm_64`|6.2.0| | | | |
 |`cublasStrsm_v2`| | | | |`hipblasStrsm`|1.8.2| | | | |`rocblas_strsm`|1.5.0| | | | |
-|`cublasStrsm_v2_64`|12.0| | | | | | | | | | | | | | | |
+|`cublasStrsm_v2_64`|12.0| | | | | | | | | |`rocblas_strsm_64`|6.2.0| | | | |
 |`cublasTSSgemvBatched`|11.6| | | | | | | | | |`rocblas_tssgemv_batched`|6.0.0| | | | |
 |`cublasTSSgemvBatched_64`|12.0| | | | | | | | | |`rocblas_tssgemv_batched_64`|6.2.0| | | | |
 |`cublasTSSgemvStridedBatched`|11.6| | | | | | | | | |`rocblas_tssgemv_strided_batched`|6.0.0| | | | |
@@ -1214,9 +1214,9 @@
 |`cublasZtrmm_v2`| | | | |`hipblasZtrmm_v2`|6.0.0| | | | |`rocblas_ztrmm`|3.5.0| |6.0.0| | |
 |`cublasZtrmm_v2_64`|12.0| | | | | | | | | | | | | | | |
 |`cublasZtrsm`| | | | |`hipblasZtrsm_v2`|6.0.0| | | | |`rocblas_ztrsm`|3.5.0| | | | |
-|`cublasZtrsm_64`|12.0| | | | | | | | | | | | | | | |
+|`cublasZtrsm_64`|12.0| | | | | | | | | |`rocblas_ztrsm_64`|6.2.0| | | | |
 |`cublasZtrsm_v2`| | | | |`hipblasZtrsm_v2`|6.0.0| | | | |`rocblas_ztrsm`|3.5.0| | | | |
-|`cublasZtrsm_v2_64`|12.0| | | | | | | | | | | | | | | |
+|`cublasZtrsm_v2_64`|12.0| | | | | | | | | |`rocblas_ztrsm_64`|6.2.0| | | | |
 
 ## **8. BLAS-like Extension**
 
