@@ -1250,7 +1250,7 @@
 |`cublasCsyrkEx_64`|12.0| | | | | | | | | |
 |`cublasCtpttr`| | | | | | | | | | |
 |`cublasCtrsmBatched`| | | | |`rocblas_ctrsm_batched`|3.5.0| | | | |
-|`cublasCtrsmBatched_64`|12.0| | | | | | | | | |
+|`cublasCtrsmBatched_64`|12.0| | | |`rocblas_ctrsm_batched_64`|6.2.0| | | | |
 |`cublasCtrttp`| | | | | | | | | | |
 |`cublasDdgmm`| | | | |`rocblas_ddgmm`|3.5.0| | | | |
 |`cublasDdgmm_64`|12.0| | | | | | | | | |
@@ -1268,7 +1268,7 @@
 |`cublasDotcEx_64`|12.0| | | |`rocblas_dotc_ex_64`|6.1.0| | | | |
 |`cublasDtpttr`| | | | | | | | | | |
 |`cublasDtrsmBatched`| | | | |`rocblas_dtrsm_batched`|3.5.0| | | | |
-|`cublasDtrsmBatched_64`|12.0| | | | | | | | | |
+|`cublasDtrsmBatched_64`|12.0| | | |`rocblas_dtrsm_batched_64`|6.2.0| | | | |
 |`cublasDtrttp`| | | | | | | | | | |
 |`cublasGemmBatchedEx`|9.1| | | |`rocblas_gemm_batched_ex`|3.5.0| | | | |
 |`cublasGemmBatchedEx_64`|12.0| | | | | | | | | |
@@ -1302,7 +1302,7 @@
 |`cublasSmatinvBatched`| | | | | | | | | | |
 |`cublasStpttr`| | | | | | | | | | |
 |`cublasStrsmBatched`| | | | |`rocblas_strsm_batched`|3.5.0| | | | |
-|`cublasStrsmBatched_64`|12.0| | | | | | | | | |
+|`cublasStrsmBatched_64`|12.0| | | |`rocblas_strsm_batched_64`|6.2.0| | | | |
 |`cublasStrttp`| | | | | | | | | | |
 |`cublasSwapEx`|10.1| | | | | | | | | |
 |`cublasSwapEx_64`|12.0| | | | | | | | | |
@@ -1319,7 +1319,7 @@
 |`cublasZmatinvBatched`| | | | | | | | | | |
 |`cublasZtpttr`| | | | | | | | | | |
 |`cublasZtrsmBatched`| | | | |`rocblas_ztrsm_batched`|3.5.0| | | | |
-|`cublasZtrsmBatched_64`|12.0| | | | | | | | | |
+|`cublasZtrsmBatched_64`|12.0| | | |`rocblas_ztrsm_batched_64`|6.2.0| | | | |
 |`cublasZtrttp`| | | | | | | | | | |
 
 ## **9. BLASLt Function Reference**

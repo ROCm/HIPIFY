@@ -590,13 +590,13 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
 
   // TRSM - Batched Triangular Solver
   {"cublasStrsmBatched",                                   {"hipblasStrsmBatched",                                       "rocblas_strsm_batched",                              CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT}},
-  {"cublasStrsmBatched_64",                                {"hipblasStrsmBatched_64",                                    "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED}},
+  {"cublasStrsmBatched_64",                                {"hipblasStrsmBatched_64",                                    "rocblas_strsm_batched_64",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, HIP_UNSUPPORTED}},
   {"cublasDtrsmBatched",                                   {"hipblasDtrsmBatched",                                       "rocblas_dtrsm_batched",                              CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT}},
-  {"cublasDtrsmBatched_64",                                {"hipblasDtrsmBatched_64",                                    "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED}},
+  {"cublasDtrsmBatched_64",                                {"hipblasDtrsmBatched_64",                                    "rocblas_dtrsm_batched_64",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, HIP_UNSUPPORTED}},
   {"cublasCtrsmBatched",                                   {"hipblasCtrsmBatched_v2",                                    "rocblas_ctrsm_batched",                              CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT}},
-  {"cublasCtrsmBatched_64",                                {"hipblasCtrsmBatched_64",                                    "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED}},
+  {"cublasCtrsmBatched_64",                                {"hipblasCtrsmBatched_64",                                    "rocblas_ctrsm_batched_64",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, HIP_UNSUPPORTED}},
   {"cublasZtrsmBatched",                                   {"hipblasZtrsmBatched_v2",                                    "rocblas_ztrsm_batched",                              CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT}},
-  {"cublasZtrsmBatched_64",                                {"hipblasZtrsmBatched_64",                                    "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED}},
+  {"cublasZtrsmBatched_64",                                {"hipblasZtrsmBatched_64",                                    "rocblas_ztrsm_batched_64",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, HIP_UNSUPPORTED}},
 
   // MATINV - Batched
   {"cublasSmatinvBatched",                                 {"hipblasSmatinvBatched",                                     "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED}},
@@ -2407,6 +2407,10 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_FUNCTION_VER_MAP {
   {"rocblas_dtrsm_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
   {"rocblas_ctrsm_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
   {"rocblas_ztrsm_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
+  {"rocblas_strsm_batched_64",                             {HIP_6020, HIP_0,    HIP_0   }},
+  {"rocblas_dtrsm_batched_64",                             {HIP_6020, HIP_0,    HIP_0   }},
+  {"rocblas_ctrsm_batched_64",                             {HIP_6020, HIP_0,    HIP_0   }},
+  {"rocblas_ztrsm_batched_64",                             {HIP_6020, HIP_0,    HIP_0   }},
 };
 
 const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_BLAS_FUNCTION_CHANGED_VER_MAP {
