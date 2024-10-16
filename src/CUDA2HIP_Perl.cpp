@@ -597,7 +597,7 @@ namespace perl {
     for (auto ma = CUDA_RENAMES_MAP().rbegin(); ma != CUDA_RENAMES_MAP().rend(); ++ma) {
       TranslateToRoc = false;
       if (Statistics::isUnsupported(ma->second)) {
-        if (ma->second.apiType == API_BLAS) {
+        if (ma->second.apiType == API_BLAS || ma->second.apiType == API_SPARSE || ma->second.apiType == API_RAND || ma->second.apiType == API_DNN) {
           sHipUnsupported << (countHipOnlyUnsupported ? ",\n" : "") << tab_2 << "\"" << ma->first.str() << "\"";
           countHipOnlyUnsupported++;
         } else {
@@ -607,7 +607,7 @@ namespace perl {
       }
       TranslateToRoc = true;
       if (Statistics::isUnsupported(ma->second)) {
-        if (ma->second.apiType == API_BLAS) {
+        if (ma->second.apiType == API_BLAS || ma->second.apiType == API_SPARSE || ma->second.apiType == API_RAND || ma->second.apiType == API_DNN) {
           sRocUnsupported << (countRocOnlyUnsupported ? ",\n" : "") << tab_2 << "\"" << ma->first.str() << "\"";
           countRocOnlyUnsupported++;
         }
