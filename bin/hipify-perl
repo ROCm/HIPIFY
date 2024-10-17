@@ -9034,7 +9034,7 @@ sub warnUnsupportedDeviceFunctions {
         my $mt = m/\b($func)\b\s*\(\s*.*\s*\)/g;
         if ($mt && !$mt_namespace) {
             $k += $mt;
-            print STDERR "  warning: $fileName:$line_num: unsupported device function \"$func\": $_\n";
+            print STDERR "  $fileName:$line_num: warning: unsupported device function \"$func\": $_\n";
         }
     }
     return $k;
@@ -9048,7 +9048,7 @@ sub warnExperimentalFunctions {
         my $mt = m/($func)/g;
         if ($mt) {
             $k += $mt;
-            print STDERR "  warning: $fileName:$line_num: experimental identifier \"$func\" in HIP $val\n";
+            print STDERR "  $fileName:$line_num: warning: experimental ROCm HIP identifier: $func $val\n";
         }
     }
     return $k;
@@ -9067,7 +9067,7 @@ sub warnDeprecatedFunctions {
             if (index(lc($func),lc($cudnn)) == 0) {
                 $cuda = $cudnn;
             }
-            print STDERR "  warning: $fileName:$line_num: deprecated identifier \"$func\" since $cuda $val\n";
+            print STDERR "  $fileName:$line_num: warning: deprecated CUDA identifier: $func since $cuda $val\n";
         }
     }
     return $k;
@@ -9086,7 +9086,7 @@ sub warnRemovedFunctions {
             if (index(lc($func),lc($cudnn)) == 0) {
                 $cuda = $cudnn;
             }
-            print STDERR "  warning: $fileName:$line_num: removed identifier \"$func\" since $cuda $val\n";
+            print STDERR "  $fileName:$line_num: warning: removed CUDA identifier: $func since $cuda $val\n";
         }
     }
     return $k;
@@ -11065,7 +11065,7 @@ sub warnUnsupportedFunctions {
         my $mt = m/($func)/g;
         if ($mt) {
             $k += $mt;
-            print STDERR "  warning: $fileName:$line_num: unsupported identifier \"$func\"\n";
+            print STDERR "  $fileName:$line_num: warning: unsupported ROCm HIP identifier: $func\n";
         }
     }
     return $k;
@@ -12685,7 +12685,7 @@ sub warnHipOnlyUnsupportedFunctions {
         my $mt = m/($func)/g;
         if ($mt) {
             $k += $mt;
-            print STDERR "  warning: $fileName:$line_num: unsupported identifier \"$func\"\n";
+            print STDERR "  $fileName:$line_num: warning: unsupported HIP identifier: $func\n";
         }
     }
     return $k;
@@ -14173,7 +14173,7 @@ sub warnRocOnlyUnsupportedFunctions {
         my $mt = m/($func)/g;
         if ($mt) {
             $k += $mt;
-            print STDERR "  warning: $fileName:$line_num: unsupported by ROC identifier \"$func\"\n";
+            print STDERR "  $fileName:$line_num: warning: unsupported ROC identifier: $func\n";
         }
     }
     return $k;

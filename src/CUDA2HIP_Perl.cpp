@@ -91,7 +91,7 @@ namespace perl {
   const string printf = "printf STDERR ";
   const string no_warns = "no warnings qw/uninitialized/;";
   const string hipify_perl = "hipify-perl";
-  const string warning = "warning: $fileName:$line_num: ";
+  const string warning = "$fileName:$line_num: warning: ";
   const string warningsPlus = "$warnings += $s;";
   const string sWarnExperimentalFunctions = "warnExperimentalFunctions";
   const string sWarnDeprecatedFunctions = "warnDeprecatedFunctions";
@@ -635,12 +635,12 @@ namespace perl {
     sRocUnsupported << sCommon.str();
     sCommon.str(std::string());
     sCommon << tab_2 << "}\n" << tab << "}\n" << tab << return_k << "}" << endl;
-    sExperimental << tab_3 << print << "\"  "  << warning << "experimental identifier \\\"$func\\\" in HIP $val\\n\";" << endl << sCommon.str();
-    sDeprecated << tab_3 << print << "\"  "  << warning << "deprecated identifier \\\"$func\\\" since $cuda $val\\n\";" << endl << sCommon.str();
-    sRemoved << tab_3 << print << "\"  "  << warning << "removed identifier \\\"$func\\\" since $cuda $val\\n\";" << endl << sCommon.str();
-    sUnsupported << tab_3 << print << "\"  "  << warning << "unsupported identifier \\\"$func\\\"\\n\";" << endl << sCommon.str();
-    sHipUnsupported << tab_3 << print << "\"  "  << warning << "unsupported identifier \\\"$func\\\"\\n\";" << endl << sCommon.str();
-    sRocUnsupported << tab_3 << print << "\"  "  << warning << "unsupported by ROC identifier \\\"$func\\\"\\n\";" << endl << sCommon.str();
+    sExperimental << tab_3 << print << "\"  "  << warning << "experimental ROCm HIP identifier: $func $val\\n\";" << endl << sCommon.str();
+    sDeprecated << tab_3 << print << "\"  "  << warning << "deprecated CUDA identifier: $func since $cuda $val\\n\";" << endl << sCommon.str();
+    sRemoved << tab_3 << print << "\"  "  << warning << "removed CUDA identifier: $func since $cuda $val\\n\";" << endl << sCommon.str();
+    sUnsupported << tab_3 << print << "\"  "  << warning << "unsupported ROCm HIP identifier: $func\\n\";" << endl << sCommon.str();
+    sHipUnsupported << tab_3 << print << "\"  "  << warning << "unsupported HIP identifier: $func\\n\";" << endl << sCommon.str();
+    sRocUnsupported << tab_3 << print << "\"  "  << warning << "unsupported ROC identifier: $func\\n\";" << endl << sCommon.str();
     *streamPtr.get() << sExperimental.str();
     *streamPtr.get() << sDeprecated.str();
     *streamPtr.get() << sRemoved.str();
