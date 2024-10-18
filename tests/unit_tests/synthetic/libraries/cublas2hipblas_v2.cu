@@ -154,7 +154,9 @@ int main() {
   int lda = 0;
   int64_t lda_64 = 0;
   int ldb = 0;
+  int64_t ldb_64 = 0;
   int ldc = 0;
+  int64_t ldc_64 = 0;
   int res = 0;
   int64_t res_64 = 0;
   int incx = 0;
@@ -2826,61 +2828,61 @@ int main() {
 
   // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasSgemm_v2_64(cublasHandle_t handle, cublasOperation_t transa, cublasOperation_t transb, int64_t m, int64_t n, int64_t k, const float* alpha, const float* A, int64_t lda, const float* B, int64_t ldb, const float* beta, float* C, int64_t ldc);
   // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasSgemm_64(hipblasHandle_t handle, hipblasOperation_t transA, hipblasOperation_t transB, int64_t m, int64_t n, int64_t k, const float* alpha, const float* AP, int64_t lda, const float* BP, int64_t ldb, const float* beta, float* CP, int64_t ldc);
-  // CHECK: blasStatus = hipblasSgemm_64(blasHandle, transa, transb, m, n, k, &fa, &fA, lda, &fB, ldb, &fb, &fC, ldc);
-  // CHECK-NEXT: blasStatus = hipblasSgemm_64(blasHandle, transa, transb, m, n, k, &fa, &fA, lda, &fB, ldb, &fb, &fC, ldc);
-  blasStatus = cublasSgemm_64(blasHandle, transa, transb, m, n, k, &fa, &fA, lda, &fB, ldb, &fb, &fC, ldc);
-  blasStatus = cublasSgemm_v2_64(blasHandle, transa, transb, m, n, k, &fa, &fA, lda, &fB, ldb, &fb, &fC, ldc);
+  // CHECK: blasStatus = hipblasSgemm_64(blasHandle, transa, transb, m_64, n_64, k_64, &fa, &fA, lda_64, &fB, ldb_64, &fb, &fC, ldc_64);
+  // CHECK-NEXT: blasStatus = hipblasSgemm_64(blasHandle, transa, transb, m_64, n_64, k_64, &fa, &fA, lda_64, &fB, ldb_64, &fb, &fC, ldc_64);
+  blasStatus = cublasSgemm_64(blasHandle, transa, transb, m_64, n_64, k_64, &fa, &fA, lda_64, &fB, ldb_64, &fb, &fC, ldc_64);
+  blasStatus = cublasSgemm_v2_64(blasHandle, transa, transb, m_64, n_64, k_64, &fa, &fA, lda_64, &fB, ldb_64, &fb, &fC, ldc_64);
 
   // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasDgemm_v2_64(cublasHandle_t handle, cublasOperation_t transa, cublasOperation_t transb, int64_t m, int64_t n, int64_t k, const double* alpha, const double* A, int64_t lda, const double* B, int64_t ldb, const double* beta, double* C, int64_t ldc);
   // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasDgemm_64(hipblasHandle_t handle, hipblasOperation_t transA, hipblasOperation_t transB, int64_t m, int64_t n, int64_t k, const double* alpha, const double* AP, int64_t lda, const double* BP, int64_t ldb, const double* beta, double* CP, int64_t ldc);
-  // CHECK: blasStatus = hipblasDgemm_64(blasHandle, transa, transb, m, n, k, &da, &dA, lda, &dB, ldb, &db, &dC, ldc);
-  // CHECK-NEXT: blasStatus = hipblasDgemm_64(blasHandle, transa, transb, m, n, k, &da, &dA, lda, &dB, ldb, &db, &dC, ldc);
-  blasStatus = cublasDgemm_64(blasHandle, transa, transb, m, n, k, &da, &dA, lda, &dB, ldb, &db, &dC, ldc);
-  blasStatus = cublasDgemm_v2_64(blasHandle, transa, transb, m, n, k, &da, &dA, lda, &dB, ldb, &db, &dC, ldc);
+  // CHECK: blasStatus = hipblasDgemm_64(blasHandle, transa, transb, m_64, n_64, k_64, &da, &dA, lda_64, &dB, ldb_64, &db, &dC, ldc_64);
+  // CHECK-NEXT: blasStatus = hipblasDgemm_64(blasHandle, transa, transb, m_64, n_64, k_64, &da, &dA, lda_64, &dB, ldb_64, &db, &dC, ldc_64);
+  blasStatus = cublasDgemm_64(blasHandle, transa, transb, m_64, n_64, k_64, &da, &dA, lda_64, &dB, ldb_64, &db, &dC, ldc_64);
+  blasStatus = cublasDgemm_v2_64(blasHandle, transa, transb, m_64, n_64, k_64, &da, &dA, lda_64, &dB, ldb_64, &db, &dC, ldc_64);
 
   // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasCgemm_v2_64(cublasHandle_t handle, cublasOperation_t transa, cublasOperation_t transb, int64_t m, int64_t n, int64_t k, const cuComplex* alpha, const cuComplex* A, int64_t lda, const cuComplex* B, int64_t ldb, const cuComplex* beta, cuComplex* C, int64_t ldc);
   // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasCgemm_v2_64(hipblasHandle_t handle, hipblasOperation_t transA, hipblasOperation_t transB, int64_t m, int64_t n, int64_t k, const hipComplex* alpha, const hipComplex* AP, int64_t lda, const hipComplex* BP, int64_t ldb, const hipComplex* beta, hipComplex* CP, int64_t ldc);
-  // CHECK: blasStatus = hipblasCgemm_v2_64(blasHandle, transa, transb, m, n, k, &complexa, &complexA, lda, &complexB, ldb, &complexb, &complexC, ldc);
-  // CHECK-NEXT: blasStatus = hipblasCgemm_v2_64(blasHandle, transa, transb, m, n, k, &complexa, &complexA, lda, &complexB, ldb, &complexb, &complexC, ldc);
-  blasStatus = cublasCgemm_64(blasHandle, transa, transb, m, n, k, &complexa, &complexA, lda, &complexB, ldb, &complexb, &complexC, ldc);
-  blasStatus = cublasCgemm_v2_64(blasHandle, transa, transb, m, n, k, &complexa, &complexA, lda, &complexB, ldb, &complexb, &complexC, ldc);
+  // CHECK: blasStatus = hipblasCgemm_v2_64(blasHandle, transa, transb, m_64, n_64, k_64, &complexa, &complexA, lda_64, &complexB, ldb_64, &complexb, &complexC, ldc_64);
+  // CHECK-NEXT: blasStatus = hipblasCgemm_v2_64(blasHandle, transa, transb, m_64, n_64, k_64, &complexa, &complexA, lda_64, &complexB, ldb_64, &complexb, &complexC, ldc_64);
+  blasStatus = cublasCgemm_64(blasHandle, transa, transb, m_64, n_64, k_64, &complexa, &complexA, lda_64, &complexB, ldb_64, &complexb, &complexC, ldc_64);
+  blasStatus = cublasCgemm_v2_64(blasHandle, transa, transb, m_64, n_64, k_64, &complexa, &complexA, lda_64, &complexB, ldb_64, &complexb, &complexC, ldc_64);
 
   // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasZgemm_v2_64(cublasHandle_t handle, cublasOperation_t transa, cublasOperation_t transb, int64_t m, int64_t n, int64_t k, const cuDoubleComplex* alpha, const cuDoubleComplex* A, int64_t lda, const cuDoubleComplex* B, int64_t ldb, const cuDoubleComplex* beta, cuDoubleComplex* C, int64_t ldc);
   // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasZgemm_v2_64(hipblasHandle_t handle, hipblasOperation_t transA, hipblasOperation_t transB, int64_t m, int64_t n, int64_t k, const hipDoubleComplex* alpha, const hipDoubleComplex* AP, int64_t lda, const hipDoubleComplex* BP, int64_t ldb, const hipDoubleComplex* beta, hipDoubleComplex* CP, int64_t ldc);
-  // CHECK: blasStatus = hipblasZgemm_v2_64(blasHandle, transa, transb, m, n, k, &dcomplexa, &dcomplexA, lda, &dcomplexB, ldb, &dcomplexb, &dcomplexC, ldc);
-  // CHECK-NEXT: blasStatus = hipblasZgemm_v2_64(blasHandle, transa, transb, m, n, k, &dcomplexa, &dcomplexA, lda, &dcomplexB, ldb, &dcomplexb, &dcomplexC, ldc);
-  blasStatus = cublasZgemm_64(blasHandle, transa, transb, m, n, k, &dcomplexa, &dcomplexA, lda, &dcomplexB, ldb, &dcomplexb, &dcomplexC, ldc);
-  blasStatus = cublasZgemm_v2_64(blasHandle, transa, transb, m, n, k, &dcomplexa, &dcomplexA, lda, &dcomplexB, ldb, &dcomplexb, &dcomplexC, ldc);
+  // CHECK: blasStatus = hipblasZgemm_v2_64(blasHandle, transa, transb, m_64, n_64, k_64, &dcomplexa, &dcomplexA, lda_64, &dcomplexB, ldb_64, &dcomplexb, &dcomplexC, ldc_64);
+  // CHECK-NEXT: blasStatus = hipblasZgemm_v2_64(blasHandle, transa, transb, m_64, n_64, k_64, &dcomplexa, &dcomplexA, lda_64, &dcomplexB, ldb_64, &dcomplexb, &dcomplexC, ldc_64);
+  blasStatus = cublasZgemm_64(blasHandle, transa, transb, m_64, n_64, k_64, &dcomplexa, &dcomplexA, lda_64, &dcomplexB, ldb_64, &dcomplexb, &dcomplexC, ldc_64);
+  blasStatus = cublasZgemm_v2_64(blasHandle, transa, transb, m_64, n_64, k_64, &dcomplexa, &dcomplexA, lda_64, &dcomplexB, ldb_64, &dcomplexb, &dcomplexC, ldc_64);
 
   // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasHgemm_64(cublasHandle_t handle, cublasOperation_t transa, cublasOperation_t transb, int64_t m, int64_t n, int64_t k, const __half* alpha, const __half* A, int64_t lda, const __half* B, int64_t ldb, const __half* beta, __half* C, int64_t ldc);
   // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasHgemm_64(hipblasHandle_t handle, hipblasOperation_t transA, hipblasOperation_t transB, int64_t m, int64_t n, int64_t k, const hipblasHalf* alpha, const hipblasHalf* AP, int64_t lda, const hipblasHalf* BP, int64_t ldb, const hipblasHalf* beta, hipblasHalf* CP, int64_t ldc);
-  // CHECK: blasStatus = hipblasHgemm_64(blasHandle, transa, transb, m, n, k, ha, hA, lda, hB, ldb, hb, hC, ldc);
-  blasStatus = cublasHgemm_64(blasHandle, transa, transb, m, n, k, ha, hA, lda, hB, ldb, hb, hC, ldc);
+  // CHECK: blasStatus = hipblasHgemm_64(blasHandle, transa, transb, m_64, n_64, k_64, ha, hA, lda_64, hB, ldb_64, hb, hC, ldc_64);
+  blasStatus = cublasHgemm_64(blasHandle, transa, transb, m_64, n_64, k_64, ha, hA, lda_64, hB, ldb_64, hb, hC, ldc_64);
 
   // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasSgemmBatched_64(cublasHandle_t handle, cublasOperation_t transa, cublasOperation_t transb, int64_t m, int64_t n, int64_t k, const float* alpha, const float* const Aarray[], int64_t lda, const float* const Barray[], int64_t ldb, const float* beta, float* const Carray[], int64_t ldc, int64_t batchCount);
   // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasSgemmBatched_64(hipblasHandle_t handle, hipblasOperation_t transA, hipblasOperation_t transB, int64_t m, int64_t n, int64_t k, const float* alpha, const float* const AP[], int64_t lda, const float* const BP[], int64_t ldb, const float* beta, float* const CP[], int64_t ldc, int64_t batchCount);
-  // CHECK: blasStatus = hipblasSgemmBatched_64(blasHandle, transa, transb, m, n, k, &fa, fAarray_const, lda, fBarray_const, ldb, &fb, fCarray, ldc, batchCount_64);
-  blasStatus = cublasSgemmBatched_64(blasHandle, transa, transb, m, n, k, &fa, fAarray_const, lda, fBarray_const, ldb, &fb, fCarray, ldc, batchCount_64);
+  // CHECK: blasStatus = hipblasSgemmBatched_64(blasHandle, transa, transb, m_64, n_64, k_64, &fa, fAarray_const, lda_64, fBarray_const, ldb_64, &fb, fCarray, ldc_64, batchCount_64);
+  blasStatus = cublasSgemmBatched_64(blasHandle, transa, transb, m_64, n_64, k_64, &fa, fAarray_const, lda_64, fBarray_const, ldb_64, &fb, fCarray, ldc_64, batchCount_64);
 
   // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasDgemmBatched_64(cublasHandle_t handle, cublasOperation_t transa, cublasOperation_t transb, int64_t m, int64_t n, int64_t k, const double* alpha, const double* const Aarray[], int64_t lda, const double* const Barray[], int64_t ldb, const double* beta, double* const Carray[], int64_t ldc, int64_t batchCount);
   // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasDgemmBatched_64(hipblasHandle_t handle, hipblasOperation_t transA, hipblasOperation_t transB, int64_t m, int64_t n, int64_t k, const double* alpha, const double* const AP[], int64_t lda, const double* const BP[], int64_t ldb, const double* beta, double* const CP[], int64_t ldc, int64_t batchCount);
-  // CHECK: blasStatus = hipblasDgemmBatched_64(blasHandle, transa, transb, m, n, k, &da, dAarray_const, lda, dBarray_const, ldb, &db, dCarray, ldc, batchCount_64);
-  blasStatus = cublasDgemmBatched_64(blasHandle, transa, transb, m, n, k, &da, dAarray_const, lda, dBarray_const, ldb, &db, dCarray, ldc, batchCount_64);
+  // CHECK: blasStatus = hipblasDgemmBatched_64(blasHandle, transa, transb, m_64, n_64, k_64, &da, dAarray_const, lda_64, dBarray_const, ldb_64, &db, dCarray, ldc_64, batchCount_64);
+  blasStatus = cublasDgemmBatched_64(blasHandle, transa, transb, m_64, n_64, k_64, &da, dAarray_const, lda_64, dBarray_const, ldb_64, &db, dCarray, ldc_64, batchCount_64);
 
   // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasCgemmBatched_64(cublasHandle_t handle, cublasOperation_t transa, cublasOperation_t transb, int64_t m, int64_t n, int64_t k, const cuComplex* alpha, const cuComplex* const Aarray[], int64_t lda, const cuComplex* const Barray[], int64_t ldb, const cuComplex* beta, cuComplex* const Carray[], int64_t ldc, int64_t batchCount);
   // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasCgemmBatched_v2_64(hipblasHandle_t handle, hipblasOperation_t transA, hipblasOperation_t transB, int64_t m, int64_t n, int64_t k, const hipComplex* alpha, const hipComplex* const AP[], int64_t lda, const hipComplex* const BP[], int64_t ldb, const hipComplex* beta, hipComplex* const CP[], int64_t ldc, int64_t batchCount);
-  // CHECK: blasStatus = hipblasCgemmBatched_v2_64(blasHandle, transa, transb, m, n, k, &complexa, complexAarray_const, lda, complexBarray_const, ldb, &complexb, complexCarray, ldc, batchCount_64);
-  blasStatus = cublasCgemmBatched_64(blasHandle, transa, transb, m, n, k, &complexa, complexAarray_const, lda, complexBarray_const, ldb, &complexb, complexCarray, ldc, batchCount_64);
+  // CHECK: blasStatus = hipblasCgemmBatched_v2_64(blasHandle, transa, transb, m_64, n_64, k_64, &complexa, complexAarray_const, lda_64, complexBarray_const, ldb_64, &complexb, complexCarray, ldc_64, batchCount_64);
+  blasStatus = cublasCgemmBatched_64(blasHandle, transa, transb, m_64, n_64, k_64, &complexa, complexAarray_const, lda_64, complexBarray_const, ldb_64, &complexb, complexCarray, ldc_64, batchCount_64);
 
   // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasZgemmBatched_64(cublasHandle_t handle, cublasOperation_t transa, cublasOperation_t transb, int64_t m, int64_t n, int64_t k, const cuDoubleComplex* alpha, const cuDoubleComplex* const Aarray[], int64_t lda, const cuDoubleComplex* const Barray[], int64_t ldb, const cuDoubleComplex* beta, cuDoubleComplex* const Carray[], int64_t ldc, int64_t batchCount);
   // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasZgemmBatched_v2_64(hipblasHandle_t handle, hipblasOperation_t transA, hipblasOperation_t transB, int64_t m, int64_t n, int64_t k, const hipDoubleComplex* alpha, const hipDoubleComplex* const AP[], int64_t lda, const hipDoubleComplex* const BP[], int64_t ldb, const hipDoubleComplex* beta, hipDoubleComplex* const CP[], int64_t ldc, int64_t batchCount);
-  // CHECK: blasStatus = hipblasZgemmBatched_v2_64(blasHandle, transa, transb, m, n, k, &dcomplexa, dcomplexAarray_const, lda, dcomplexBarray_const, ldb, &dcomplexb, dcomplexCarray, ldc, batchCount_64);
-  blasStatus = cublasZgemmBatched_64(blasHandle, transa, transb, m, n, k, &dcomplexa, dcomplexAarray_const, lda, dcomplexBarray_const, ldb, &dcomplexb, dcomplexCarray, ldc, batchCount_64);
+  // CHECK: blasStatus = hipblasZgemmBatched_v2_64(blasHandle, transa, transb, m_64, n_64, k_64, &dcomplexa, dcomplexAarray_const, lda_64, dcomplexBarray_const, ldb_64, &dcomplexb, dcomplexCarray, ldc_64, batchCount_64);
+  blasStatus = cublasZgemmBatched_64(blasHandle, transa, transb, m_64, n_64, k_64, &dcomplexa, dcomplexAarray_const, lda_64, dcomplexBarray_const, ldb_64, &dcomplexb, dcomplexCarray, ldc_64, batchCount_64);
 
   // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasHgemmBatched_64(cublasHandle_t handle, cublasOperation_t transa, cublasOperation_t transb, int64_t m, int64_t n, int64_t k, const __half* alpha, const __half* const Aarray[], int64_t lda, const __half* const Barray[], int64_t ldb, const __half* beta, __half* const Carray[], int64_t ldc, int64_t batchCount);
   // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasHgemmBatched_64(hipblasHandle_t handle, hipblasOperation_t transA, hipblasOperation_t transB, int64_t m, int64_t n, int64_t k, const hipblasHalf* alpha, const hipblasHalf* const AP[], int64_t lda, const hipblasHalf* const BP[], int64_t ldb, const hipblasHalf* beta, hipblasHalf* const CP[], int64_t ldc, int64_t batchCount);
-  // CHECK: blasStatus = hipblasHgemmBatched_64(blasHandle, transa, transb, m, n, k, ha, hAarray_const, lda, hBarray_const, ldb, hb, hCarray, ldc, batchCount_64);
-  blasStatus = cublasHgemmBatched_64(blasHandle, transa, transb, m, n, k, ha, hAarray_const, lda, hBarray_const, ldb, hb, hCarray, ldc, batchCount_64);
+  // CHECK: blasStatus = hipblasHgemmBatched_64(blasHandle, transa, transb, m_64, n_64, k_64, ha, hAarray_const, lda_64, hBarray_const, ldb_64, hb, hCarray, ldc_64, batchCount_64);
+  blasStatus = cublasHgemmBatched_64(blasHandle, transa, transb, m_64, n_64, k_64, ha, hAarray_const, lda_64, hBarray_const, ldb_64, hb, hCarray, ldc_64, batchCount_64);
 #endif
 
   return 0;
