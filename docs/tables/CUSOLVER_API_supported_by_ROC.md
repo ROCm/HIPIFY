@@ -426,6 +426,8 @@
 |`cusolverDnSyevd_bufferSize`|11.0|11.1| | | | | | | | |
 |`cusolverDnSyevdx`|11.0|11.1| | | | | | | | |
 |`cusolverDnSyevdx_bufferSize`|11.0|11.1| | | | | | | | |
+|`cusolverDnXgeev`|12.6| | | | | | | | | |
+|`cusolverDnXgeev_bufferSize`|12.6| | | | | | | | | |
 |`cusolverDnXgeqrf`|11.1| | | | | | | | | |
 |`cusolverDnXgeqrf_bufferSize`|11.1| | | | | | | | | |
 |`cusolverDnXgesvd`|11.1| | | | | | | | | |
@@ -447,6 +449,8 @@
 |`cusolverDnXpotrf`|11.1| | | | | | | | | |
 |`cusolverDnXpotrf_bufferSize`|11.1| | | | | | | | | |
 |`cusolverDnXpotrs`|11.1| | | | | | | | | |
+|`cusolverDnXsyevBatched`|12.6| | | | | | | | | |
+|`cusolverDnXsyevBatched_bufferSize`|12.6| | | | | | | | | |
 |`cusolverDnXsyevd`|11.1| | | | | | | | | |
 |`cusolverDnXsyevd_bufferSize`|11.1| | | | | | | | | |
 |`cusolverDnXsyevdx`|11.1| | | | | | | | | |

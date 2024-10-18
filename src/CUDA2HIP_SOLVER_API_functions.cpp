@@ -457,11 +457,15 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SOLVER_FUNCTION_MAP {
   {"cusolverDnXpotrs",                                   {"hipsolverDnXpotrs",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
   {"cusolverDnXgeqrf_bufferSize",                        {"hipsolverDnXgeqrf_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
   {"cusolverDnXgeqrf",                                   {"hipsolverDnXgeqrf",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  {"cusolverDnXsyevBatched",                             {"hipsolverDnXsyevBatched",                               "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnXsyevBatched_bufferSize",                  {"hipsolverDnXsyevBatched_bufferSize",                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
   {"cusolverDnXsyevd_bufferSize",                        {"hipsolverDnXsyevd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
   {"cusolverDnXsyevd",                                   {"hipsolverDnXsyevd",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
   {"cusolverDnXsyevdx_bufferSize",                       {"hipsolverDnXsyevdx_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
   {"cusolverDnXsyevdx",                                  {"hipsolverDnXsyevdx",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
   {"cusolverDnXgesvd_bufferSize",                        {"hipsolverDnXgesvd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnXgeev",                                    {"hipsolverDnXgeev",                                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  {"cusolverDnXgeev_bufferSize",                         {"hipsolverDnXgeev_bufferSize",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
   {"cusolverDnXgesvd",                                   {"hipsolverDnXgesvd",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
   {"cusolverDnXgesvdp_bufferSize",                       {"hipsolverDnXgesvdp_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
   {"cusolverDnXgesvdp",                                  {"hipsolverDnXgesvdp",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
@@ -1161,6 +1165,10 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SOLVER_FUNCTION_VER_MAP {
   {"cusolverSpZcsrcholDiag",                             {CUDA_101, CUDA_0,   CUDA_0  }}, // CUSOLVER_VERSION 10200
   {"cusolverDnXlarft",                                   {CUDA_124, CUDA_0,   CUDA_0  }},
   {"cusolverDnXlarft_bufferSize",                        {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"cusolverDnXgeev",                                    {CUDA_126, CUDA_0,   CUDA_0  }}, // CUSOLVER_VERSION 11701
+  {"cusolverDnXgeev_bufferSize",                         {CUDA_126, CUDA_0,   CUDA_0  }}, // CUSOLVER_VERSION 11701
+  {"cusolverDnXsyevBatched",                             {CUDA_126, CUDA_0,   CUDA_0  }}, // CUSOLVER_VERSION 11701
+  {"cusolverDnXsyevBatched_bufferSize",                  {CUDA_126, CUDA_0,   CUDA_0  }}, // CUSOLVER_VERSION 11701
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_SOLVER_FUNCTION_VER_MAP {
