@@ -1647,8 +1647,11 @@ sub rocSubstitutions {
     subst("cublasCher_v2", "rocblas_cher", "library");
     subst("cublasCher_v2_64", "rocblas_cher_64", "library");
     subst("cublasCherk", "rocblas_cherk", "library");
+    subst("cublasCherk_64", "rocblas_cherk_64", "library");
     subst("cublasCherk_v2", "rocblas_cherk", "library");
+    subst("cublasCherk_v2_64", "rocblas_cherk_64", "library");
     subst("cublasCherkx", "rocblas_cherkx", "library");
+    subst("cublasCherkx_64", "rocblas_cherkx_64", "library");
     subst("cublasChpmv", "rocblas_chpmv", "library");
     subst("cublasChpmv_64", "rocblas_chpmv_64", "library");
     subst("cublasChpmv_v2", "rocblas_chpmv", "library");
@@ -2184,8 +2187,11 @@ sub rocSubstitutions {
     subst("cublasZher_v2", "rocblas_zher", "library");
     subst("cublasZher_v2_64", "rocblas_zher_64", "library");
     subst("cublasZherk", "rocblas_zherk", "library");
+    subst("cublasZherk_64", "rocblas_zherk_64", "library");
     subst("cublasZherk_v2", "rocblas_zherk", "library");
+    subst("cublasZherk_v2_64", "rocblas_zherk_64", "library");
     subst("cublasZherkx", "rocblas_zherkx", "library");
+    subst("cublasZherkx_64", "rocblas_zherkx_64", "library");
     subst("cublasZhpmv", "rocblas_zhpmv", "library");
     subst("cublasZhpmv_64", "rocblas_zhpmv_64", "library");
     subst("cublasZhpmv_v2", "rocblas_zhpmv", "library");
@@ -4391,8 +4397,11 @@ sub simpleSubstitutions {
     subst("cublasCher_v2", "hipblasCher_v2", "library");
     subst("cublasCher_v2_64", "hipblasCher_v2_64", "library");
     subst("cublasCherk", "hipblasCherk_v2", "library");
+    subst("cublasCherk_64", "hipblasCherk_v2_64", "library");
     subst("cublasCherk_v2", "hipblasCherk_v2", "library");
+    subst("cublasCherk_v2_64", "hipblasCherk_v2_64", "library");
     subst("cublasCherkx", "hipblasCherkx_v2", "library");
+    subst("cublasCherkx_64", "hipblasCherkx_v2_64", "library");
     subst("cublasChpmv", "hipblasChpmv_v2", "library");
     subst("cublasChpmv_64", "hipblasChpmv_v2_64", "library");
     subst("cublasChpmv_v2", "hipblasChpmv_v2", "library");
@@ -4933,8 +4942,11 @@ sub simpleSubstitutions {
     subst("cublasZher_v2", "hipblasZher_v2", "library");
     subst("cublasZher_v2_64", "hipblasZher_v2_64", "library");
     subst("cublasZherk", "hipblasZherk_v2", "library");
+    subst("cublasZherk_64", "hipblasZherk_v2_64", "library");
     subst("cublasZherk_v2", "hipblasZherk_v2", "library");
+    subst("cublasZherk_v2_64", "hipblasZherk_v2_64", "library");
     subst("cublasZherkx", "hipblasZherkx_v2", "library");
+    subst("cublasZherkx_64", "hipblasZherkx_v2_64", "library");
     subst("cublasZhpmv", "hipblasZhpmv_v2", "library");
     subst("cublasZhpmv_64", "hipblasZhpmv_v2_64", "library");
     subst("cublasZhpmv_v2", "hipblasZhpmv_v2", "library");
@@ -11551,9 +11563,6 @@ sub warnHipOnlyUnsupportedFunctions {
         "cublasZsymm_v2_64",
         "cublasZsymm_64",
         "cublasZmatinvBatched",
-        "cublasZherkx_64",
-        "cublasZherk_v2_64",
-        "cublasZherk_64",
         "cublasZher2k_v2_64",
         "cublasZher2k_64",
         "cublasZhemm_v2_64",
@@ -11719,9 +11728,6 @@ sub warnHipOnlyUnsupportedFunctions {
         "cublasCopyEx",
         "cublasContext",
         "cublasCmatinvBatched",
-        "cublasCherkx_64",
-        "cublasCherk_v2_64",
-        "cublasCherk_64",
         "cublasCherkEx_64",
         "cublasCherkEx",
         "cublasCherk3mEx_64",
@@ -13339,9 +13345,6 @@ sub warnRocOnlyUnsupportedFunctions {
         "cublasZsymm_v2_64",
         "cublasZsymm_64",
         "cublasZmatinvBatched",
-        "cublasZherkx_64",
-        "cublasZherk_v2_64",
-        "cublasZherk_64",
         "cublasZher2k_v2_64",
         "cublasZher2k_64",
         "cublasZhemm_v2_64",
@@ -13521,9 +13524,6 @@ sub warnRocOnlyUnsupportedFunctions {
         "cublasCopyEx_64",
         "cublasCopyEx",
         "cublasCmatinvBatched",
-        "cublasCherkx_64",
-        "cublasCherk_v2_64",
-        "cublasCherk_64",
         "cublasCherkEx_64",
         "cublasCherkEx",
         "cublasCherk3mEx_64",
