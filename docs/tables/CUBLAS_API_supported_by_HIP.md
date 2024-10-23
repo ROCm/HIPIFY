@@ -1150,11 +1150,11 @@
 |`cublasCher2k_v2`| | | | |`hipblasCher2k_v2`|6.0.0| | | | |
 |`cublasCher2k_v2_64`|12.0| | | | | | | | | |
 |`cublasCherk`| | | | |`hipblasCherk_v2`|6.0.0| | | | |
-|`cublasCherk_64`|12.0| | | | | | | | | |
+|`cublasCherk_64`|12.0| | | |`hipblasCherk_v2_64`|6.3.0| | | |6.3.0|
 |`cublasCherk_v2`| | | | |`hipblasCherk_v2`|6.0.0| | | | |
-|`cublasCherk_v2_64`|12.0| | | | | | | | | |
+|`cublasCherk_v2_64`|12.0| | | |`hipblasCherk_v2_64`|6.3.0| | | |6.3.0|
 |`cublasCherkx`| | | | |`hipblasCherkx_v2`|6.0.0| | | | |
-|`cublasCherkx_64`|12.0| | | | | | | | | |
+|`cublasCherkx_64`|12.0| | | |`hipblasCherkx_v2_64`|6.3.0| | | |6.3.0|
 |`cublasCsymm`| | | | |`hipblasCsymm_v2`|6.0.0| | | | |
 |`cublasCsymm_64`|12.0| | | | | | | | | |
 |`cublasCsymm_v2`| | | | |`hipblasCsymm_v2`|6.0.0| | | | |
@@ -1296,11 +1296,11 @@
 |`cublasZher2k_v2`| | | | |`hipblasZher2k_v2`|6.0.0| | | | |
 |`cublasZher2k_v2_64`|12.0| | | | | | | | | |
 |`cublasZherk`| | | | |`hipblasZherk_v2`|6.0.0| | | | |
-|`cublasZherk_64`|12.0| | | | | | | | | |
+|`cublasZherk_64`|12.0| | | |`hipblasZherk_v2_64`|6.3.0| | | |6.3.0|
 |`cublasZherk_v2`| | | | |`hipblasZherk_v2`|6.0.0| | | | |
-|`cublasZherk_v2_64`|12.0| | | | | | | | | |
+|`cublasZherk_v2_64`|12.0| | | |`hipblasZherk_v2_64`|6.3.0| | | |6.3.0|
 |`cublasZherkx`| | | | |`hipblasZherkx_v2`|6.0.0| | | | |
-|`cublasZherkx_64`|12.0| | | | | | | | | |
+|`cublasZherkx_64`|12.0| | | |`hipblasZherkx_v2_64`|6.3.0| | | |6.3.0|
 |`cublasZsymm`| | | | |`hipblasZsymm_v2`|6.0.0| | | | |
 |`cublasZsymm_64`|12.0| | | | | | | | | |
 |`cublasZsymm_v2`| | | | |`hipblasZsymm_v2`|6.0.0| | | | |
