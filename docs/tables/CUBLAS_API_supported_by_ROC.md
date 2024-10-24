@@ -1186,9 +1186,9 @@
 |`cublasChemm_v2`| | | | |`rocblas_chemm`|3.5.0| | | | |
 |`cublasChemm_v2_64`|12.0| | | | | | | | | |
 |`cublasCher2k`| | | | |`rocblas_cher2k`|3.5.0| | | | |
-|`cublasCher2k_64`|12.0| | | | | | | | | |
+|`cublasCher2k_64`|12.0| | | |`rocblas_cher2k_64`|6.3.0| | | |6.3.0|
 |`cublasCher2k_v2`| | | | |`rocblas_cher2k`|3.5.0| | | | |
-|`cublasCher2k_v2_64`|12.0| | | | | | | | | |
+|`cublasCher2k_v2_64`|12.0| | | |`rocblas_cher2k_64`|6.3.0| | | |6.3.0|
 |`cublasCherk`| | | | |`rocblas_cherk`|3.5.0| | | | |
 |`cublasCherk_64`|12.0| | | |`rocblas_cherk_64`|6.3.0| | | |6.3.0|
 |`cublasCherk_v2`| | | | |`rocblas_cherk`|3.5.0| | | | |
@@ -1332,9 +1332,9 @@
 |`cublasZhemm_v2`| | | | |`rocblas_zhemm`|3.5.0| | | | |
 |`cublasZhemm_v2_64`|12.0| | | | | | | | | |
 |`cublasZher2k`| | | | |`rocblas_zher2k`|3.5.0| | | | |
-|`cublasZher2k_64`|12.0| | | | | | | | | |
+|`cublasZher2k_64`|12.0| | | |`rocblas_zher2k_64`|6.3.0| | | |6.3.0|
 |`cublasZher2k_v2`| | | | |`rocblas_zher2k`|3.5.0| | | | |
-|`cublasZher2k_v2_64`|12.0| | | | | | | | | |
+|`cublasZher2k_v2_64`|12.0| | | |`rocblas_zher2k_64`|6.3.0| | | |6.3.0|
 |`cublasZherk`| | | | |`rocblas_zherk`|3.5.0| | | | |
 |`cublasZherk_64`|12.0| | | |`rocblas_zherk_64`|6.3.0| | | |6.3.0|
 |`cublasZherk_v2`| | | | |`rocblas_zherk`|3.5.0| | | | |
