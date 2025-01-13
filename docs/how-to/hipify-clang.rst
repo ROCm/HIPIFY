@@ -236,8 +236,8 @@ In most cases, you can get a suitable version of ``LLVM+Clang`` with your packag
 `CMAKE_PREFIX_PATH <https://cmake.org/cmake/help/latest/variable/CMAKE_PREFIX_PATH.html>`_ so that
 ``CMake`` can find the desired version of ``LLVM``. For example, ``-DCMAKE_PREFIX_PATH=D:\LLVM\19.1.6\dist``.
 
-HIPIFY Use
-==========
+Usage
+=====
 
 To process a file, ``hipify-clang`` needs access to the same headers that are required to compile it
 with ``Clang``:
@@ -308,10 +308,9 @@ demonstrating the ``compile_commands.json`` usage:
   ]
 
 Hipification statistics
-=======================================================
+=======================
 
-The options ``--print-stats`` and ``--print-stats-csv`` provide an overview of what is hipified and
-what is not, and the hipification statistics:
+The options ``--print-stats`` and ``--print-stats-csv`` provide an overview of what is hipified and what is not, as well as the hipification statistics. Use the ``--print-stats`` command to return the statistics as text to the terminal, or the ``--print-stats-csv`` command to create a CSV file to open in a spreadsheet:
 
 .. code:: cpp
 
@@ -391,36 +390,36 @@ For a list of ``hipify-clang`` options, run:
 Output Summary:
 ---------------
 
-  1.	Usage:
+1.	Usage:
 
-    .. code-block:: cpp
+.. code-block:: cpp
 
-      hipify-clang [options] <inputs>
+  hipify-clang [options] <inputs>
 
-  2.	Common Options:
+2.	Common Options:
 
-      * ``-help``: Displays the help message
-      * ``-o <file>``: Specifies the output file for the converted source
-      * ``-I <dir>``: Adds a directory to the include search paths
-      * ``--cuda-path=<path>``: Specifies the path to the CUDA installation
-      * ``--hip-path=<path>``: Specifies the path to the HIP installation (optional; defaults to the ROCm installation path)
-      * ``--extra-arg=<arg>``: Adds extra arguments to the Clang compiler for advanced customization
-      * ``--extra-arg-before=<arg>``: Adds extra arguments before other command-line options
+  * ``--help``: Displays the help message
+  * ``-o <file>``: Specifies the output file for the converted source
+  * ``-I <dir>``: Adds a directory to the include search paths
+  * ``--cuda-path=<path>``: Specifies the path to the CUDA installation
+  * ``--hip-path=<path>``: Specifies the path to the HIP installation (optional; defaults to the ROCm installation path)
+  * ``--extra-arg=<arg>``: Adds extra arguments to the Clang compiler for advanced customization
+  * ``--extra-arg-before=<arg>``: Adds extra arguments before other command-line options
 
-  3.	Preprocessor and Compilation Options:
+3.	Preprocessor and Compilation Options:
 
-      * ``-D<macro>``: Defines macros for the preprocessor
-      * ``-U<macro>``: Undefines macros
-      * ``--save-temps``: Keeps intermediate files generated during processing
+  * ``-D<macro>``: Defines macros for the preprocessor
+  * ``-U<macro>``: Undefines macros
+  * ``--save-temps``: Keeps intermediate files generated during processing
 
-  4.	Diagnostics and Debugging:
+4.	Diagnostics and Debugging:
 
-      * ``-v``: Enables verbose output to provide detailed diagnostic information
-      * ``--version``: Displays the version of HIPIFY-Clang
-      * ``--show-progress``: Displays progress during the translation process
-      * ``--print-stats`` | ``--print-stats-cvs``: Prints statistics about the translation process (e.g., the number of functions or API calls converted) into either text or CSV form
+  * ``-v``: Enables verbose output to provide detailed diagnostic information
+  * ``--version``: Displays the version of HIPIFY-Clang
+  * ``--show-progress``: Displays progress during the translation process
+  * ``--print-stats`` | ``--print-stats-csv``: Prints statistics about the translation process (e.g., the number of functions or API calls converted) into either text or CSV form
 
-  5.	Include and Exclude Rules:
+5.	Include and Exclude Rules:
 
-      * ``--exclude-path=<path>``: Specifies paths to exclude from translation
-      * ``--include-path=<path>``: Specifies paths to include during translation explicitly
+  * ``--exclude-path=<path>``: Specifies paths to exclude from translation
+  * ``--include-path=<path>``: Specifies paths to include during translation explicitly

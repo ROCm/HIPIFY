@@ -23,19 +23,14 @@ Using hipify-perl
 - Inability or difficulty in implementing the following constructs:
 
     - Macros expansion
-
     - Namespaces:
 
-        - Redefinition of CUDA entities in user namespaces
-
-        - Using directive
+      - Redefinition of CUDA entities in user namespaces
+      - Using directive
 
     - Templates (some cases)
-
     - Device or host function calls differentiation
-
     - Correct injection of header files
-
     - Parsing complicated argument lists
 
 Example
@@ -49,7 +44,8 @@ Convert a simple CUDA file (``square.cu``) to HIP using ``hipify-perl``:
 
 This command translates the input file and writes the result to ``square.cu.hip``.
 
-For advanced translation needs use ``hipify-clang`` as it is more comprehensive and accurate. 
+.. note:: 
+    For advanced translation needs use ``hipify-clang`` as it is more comprehensive and accurate. 
 
 
 hipify-perl command
@@ -65,37 +61,37 @@ Run the Perl script with the ``--help`` flag to display its usage and options:
 Output Summary:
 ---------------
 
-    1.	Usage:
-    
-        .. code-block:: cpp
+1.	Usage:
 
-            hipify-perl [options] <input_file> [output_file]
+.. code-block:: cpp
 
-        * <input_file>: The CUDA source file to be translated
-        * [output_file]: Optional. The name of the output file. If not specified, the modified code is printed to the console
+    hipify-perl [options] <input_file> [output_file]
 
-    2.	Options:
+  * <input_file>: The CUDA source file to be translated
+  * [output_file]: Optional. The name of the output file. If not specified, the modified code is printed to the console
 
-        * ``--help``: Displays the help message.
-        * ``--quiet``: Suppresses non-critical messages and warnings during the translation process.
-        * ``--print-stats``: Prints a summary of the translation statistics, such as the number of API calls replaced.
-        * ``--cuda-path=<path>``: Specifies the path to the CUDA installation (used to resolve header paths, if needed).
-        * ``--hip-path=<path>``: Specifies the HIP installation path (optional; defaults to the ROCm installation path).
+2.	Options:
 
-    4.	Translation Scope:
+  * ``--help``: Displays the help message.
+  * ``--quiet``: Suppresses non-critical messages and warnings during the translation process.
+  * ``--print-stats``: Prints a summary of the translation statistics, such as the number of API calls replaced.
+  * ``--cuda-path=<path>``: Specifies the path to the CUDA installation (used to resolve header paths, if needed).
+  * ``--hip-path=<path>``: Specifies the HIP installation path (optional; defaults to the ROCm installation path).
 
-        * The Perl script focuses on basic translation tasks: 
+4.	Translation Scope:
 
-            - Replacing CUDA runtime API calls (e.g., cudaMalloc → hipMalloc).
-            - Adjusting kernel launch syntax (e.g., <<<blocks, threads>>>).
-            - Replacing CUDA-specific constants and macros with HIP equivalents.
+  * The Perl script focuses on basic translation tasks: 
 
-        * It does not support advanced syntax transformations, such as handling device-specific intrinsics or complex template-based CUDA code.
+    - Replacing CUDA runtime API calls (e.g., cudaMalloc → hipMalloc).
+    - Adjusting kernel launch syntax (e.g., <<<blocks, threads>>>).
+    - Replacing CUDA-specific constants and macros with HIP equivalents.
 
-    5.	Diagnostics:
+  * It does not support advanced syntax transformations, such as handling device-specific intrinsics or complex template-based CUDA code.
 
-        * The script typically outputs a summary of what was replaced, unless the ``--quiet`` option is used.
+5.	Diagnostics:
 
-    6.	Limitations:
+  * The script typically outputs a summary of what was replaced, unless the ``--quiet`` option is used.
 
-        * The help text often notes that the script does not handle complex code structures or full compliance with the HIP API.
+6.	Limitations:
+
+  * The help text often notes that the script does not handle complex code structures or full compliance with the HIP API.
