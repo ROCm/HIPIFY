@@ -1,5 +1,8 @@
 # CUSPARSE API supported by ROC
 
+**Note:** In the tables that follow the columns marked `A`, `D`, `C`, `R`, and `E` mean the following:
+A - Added; D - Deprecated; C - Changed; R - Removed; E - Experimental
+
 ## **4. CUSPARSE Types References**
 
 |**CUDA**|**A**|**D**|**C**|**R**|**ROC**|**A**|**D**|**C**|**R**|**E**|

@@ -1,5 +1,8 @@
 # CURAND API supported by 
 
+**Note:** In the tables that follow the columns marked `A`, `D`, `C`, `R`, and `E` mean the following:
+A - Added; D - Deprecated; C - Changed; R - Removed; E - Experimental
+
 ## **1. CURAND Data types**
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|**ROC**|**A**|**D**|**C**|**R**|**E**|

@@ -8,27 +8,39 @@
 HIPIFY documentation
 =====================
 
-``hipify-clang`` and ``hipify-perl`` are tools that automatically translate NVIDIA CUDA source code into portable HIP C++.
+HIPIFY is a ROCm tool to help developers migrate GPU programming from NVIDIA's CUDA language to AMD's HIP C++ programming language for use on AMD GPUs. HIPIFY includes two tools offering different levels of capability: 
+
+•	``hipify-clang``: A clang-based tool that parses CUDA code and converts it to HIP code. It handles syntax changes, API calls, and kernel launch differences.
+•	``hipify-perl``: A simpler tool generated from hipify-clang that replaces CUDA API calls with HIP equivalents for basic code translation needs. hipify-perl is useful for simple CUDA programs, but offers less error detection when running into issues during translation. 
+
+HIPIFY does not automatically convert all CUDA code into HIP code seamlessly. While it is a powerful tool for translating CUDA code to HIP, there are some limitations and areas where manual intervention is often required. HIPIFY can automatically convert many CUDA  runtime API calls, kernel launch syntax, standard CUDA library functions where there is a HIP library equivalent, specific keywords like __global__ and __device__. However, HIP is not a complete replacement for CUDA, and HIPIFY cannot automatically translate all code. CUDA libraries, or third-party libraries that have no HIP equivalent cannot be translated. In addition, code which is optimized for performance on NVIDIA GPUs might require additional rework to optimize performance on AMD GPUs. 
+
+After migrating code through HIPIFY, you should perform a code review to ensure functional correctness, replace any unsupported libraries or constructs with HIP or ROCm features. Debug and test the new HIP program, and optimize the performance on the target AMD GPUs. HIPIFY automates much of the translation work, but achieving a fully functional and optimized HIP implementation often requires manual intervention. The scope of effort depends on the complexity of the code and its dependencies.
 
 .. note::
     
-    `hipify_torch <https://github.com/ROCm/hipify_torch>`_ is a related tool that also translates CUDA source code into portable HIP C++. It was initially developed as part of the PyTorch project to cater to the project's unique requirements but was found to be useful for PyTorch-related projects and thus was released as an independent utility.
+    `hipify_torch <https://github.com/ROCm/hipify_torch>`_ is a related tool that also translates CUDA source code into portable HIP C++. It was initially developed as part of the PyTorch project to cater to the project's unique requirements but was found to be useful for PyTorch-related projects and was released as an independent utility.
 
-You can access HIPIFY code on our `GitHub repository <https://github.com/ROCm/HIPIFY>`_.
+HIPIFY is open-source and freely available as part of the ROCm ecosystem. You can find the HIPIFY code on AMD's `GitHub HIPIFY repository <https://github.com/ROCm/HIPIFY>`_.
 
 The documentation is structured as follows:
 
 .. grid:: 2
   :gutter: 3
 
-  .. grid-item-card:: Conceptual
+  .. grid-item-card:: Building
 
-    * :ref:`hipify-clang`
-    * :ref:`hipify-perl`
+    * :ref:`build-hipify-clang`
+    * :ref:`build-hipify-perl`
+    
+  .. grid-item-card:: How to
+
+    * :doc:`Use hipify-clang <./how-to/hipify-clang>`
+    * :doc:`Use hipify-perl <./how-to/hipify-perl>`
     
   .. grid-item-card:: API reference
 
-    * :doc:`Supported APIs <supported_apis>`
+    * :doc:`Supported APIs <./reference/supported_apis>`
      
 To contribute to the documentation, refer to
 `Contributing to ROCm  <https://rocm.docs.amd.com/en/latest/contribute/contributing.html>`_.
