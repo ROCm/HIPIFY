@@ -78,7 +78,7 @@ Output Summary:
   * ``--cuda-path=<path>``: Specifies the path to the CUDA installation (used to resolve header paths, if needed).
   * ``--hip-path=<path>``: Specifies the HIP installation path (optional; defaults to the ROCm installation path).
 
-4.	Translation Scope:
+3.	Translation Scope:
 
   * The Perl script focuses on basic translation tasks: 
 
@@ -88,10 +88,10 @@ Output Summary:
 
   * It does not support advanced syntax transformations, such as handling device-specific intrinsics or complex template-based CUDA code.
 
-5.	Diagnostics:
+4.	Diagnostics:
 
   * The script typically outputs a summary of what was replaced, unless the ``--quiet`` option is used.
 
-6.	Limitations:
+5.	Limitations:
 
   * The help text often notes that the script does not handle complex code structures or full compliance with the HIP API.
