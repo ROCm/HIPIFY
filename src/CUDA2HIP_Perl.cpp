@@ -87,8 +87,10 @@ namespace perl {
   const string unless_ = "unless ";
   const string foreach = "foreach ";
   const string foreach_func = foreach + "$func (\n";
+  const string while_func = while_ + "(my($func) = each %";
   const string print = "print STDERR ";
   const string printf = "printf STDERR ";
+  const string warn = "warn";
   const string no_warns = "no warnings qw/uninitialized/;";
   const string hipify_perl = "hipify-perl";
   const string warning = "$fileName:$line_num: warning: ";
@@ -96,11 +98,16 @@ namespace perl {
   const string sWarnExperimentalFunctions = "warnExperimentalFunctions";
   const string sWarnDeprecatedFunctions = "warnDeprecatedFunctions";
   const string sWarnRemovedFunctions = "warnRemovedFunctions";
-  const string sWarnRocOnlyUnsupportedFunctions = "warnRocOnlyUnsupportedFunctions";
-  const string sWarnMIOpenOnlyUnsupportedFunctions = "warnMIOpenOnlyUnsupportedFunctions";
-  const string sWarnHipOnlyUnsupportedFunctions = "warnHipOnlyUnsupportedFunctions";
-  const string sWarnHipDNNOnlyUnsupportedFunctions = "warnHipDNNOnlyUnsupportedFunctions";
-  const string sWarnUnsupportedDeviceFunctions = "warnUnsupportedDeviceFunctions";
+  const string sRocOnlyUnsupportedFunctions = "RocOnlyUnsupportedFunctions";
+  const string sWarnRocOnlyUnsupportedFunctions = warn + sRocOnlyUnsupportedFunctions;
+  const string sMIOpenOnlyUnsupportedFunctions = "MIOpenOnlyUnsupportedFunctions";
+  const string sWarnMIOpenOnlyUnsupportedFunctions = warn + sMIOpenOnlyUnsupportedFunctions;
+  const string sHipOnlyUnsupportedFunctions = "HipOnlyUnsupportedFunctions";
+  const string sWarnHipOnlyUnsupportedFunctions = warn + sHipOnlyUnsupportedFunctions;
+  const string sHipDNNOnlyUnsupportedFunctions = "HipDNNOnlyUnsupportedFunctions";
+  const string sWarnHipDNNOnlyUnsupportedFunctions = warn + sHipDNNOnlyUnsupportedFunctions;
+  const string sUnsupportedDeviceFunctions = "UnsupportedDeviceFunctions";
+  const string sWarnUnsupportedDeviceFunctions = warn + sUnsupportedDeviceFunctions;
   const string sSimpleSubstitutions = "simpleSubstitutions";
   const string sRocSubstitutions = "rocSubstitutions";
   const string sMIOpenSubstitutions = "MIOpenSubstitutions";
@@ -108,7 +115,9 @@ namespace perl {
   const string sExperimentalSubstitutions = "experimentalSubstitutions";
   const string sTransformKernelLaunch = "transformKernelLaunch";
   const string sTransformCubNamespace = "transformCubNamespace";
-  const string sCountSupportedDeviceFunctions = "countSupportedDeviceFunctions";
+  const string count = "count";
+  const string sSupportedDeviceFunctions = "SupportedDeviceFunctions";
+  const string sCountSupportedDeviceFunctions = count + sSupportedDeviceFunctions;
 
   const string sCudaDevice = "cudaDevice";
   const string sCudaDeviceId = "cudaDeviceId";
@@ -595,17 +604,17 @@ namespace perl {
   }
 
   void generateDeprecatedAndUnsupportedFunctions(unique_ptr<ostream> &streamPtr) {
-    stringstream sDeprecated, sRemoved, sRocUnsupported, sHipUnsupported, sMIOpenUnsupported, sHipDNNUnsupported, sExperimental, sCommon, sCommon1;
+    stringstream sDeprecated, sRemoved, sRocUnsupported, roc_unsupported, sHipUnsupported, hip_unsupported, sMIOpenUnsupported, miopen_unsupported, sHipDNNUnsupported, hipdnn_unsupported, sExperimental, sCommon, sCommon1;
     sCommon << tab << my << "$line_num = shift;" << endl;
     sCommon << tab << my_k << endl;
     string sWhile = "while (my($func, $val) = each ";
     sExperimental << endl << sub << sWarnExperimentalFunctions << " {" << endl << sCommon.str() << tab << sWhile << "%experimental_funcs)" << endl;
     sDeprecated << endl << sub << sWarnDeprecatedFunctions << " {" << endl << sCommon.str() << tab << sWhile << "%deprecated_funcs)" << endl;
     sRemoved << endl << sub << sWarnRemovedFunctions << " {" << endl << sCommon.str() << tab << sWhile << "%removed_funcs)" << endl;
-    sRocUnsupported << endl << sub << sWarnRocOnlyUnsupportedFunctions << " {" << endl << sCommon.str() << tab << foreach_func;
-    sMIOpenUnsupported << endl << sub << sWarnMIOpenOnlyUnsupportedFunctions << " {" << endl << sCommon.str() << tab << foreach_func;
-    sHipUnsupported << endl << sub << sWarnHipOnlyUnsupportedFunctions << " {" << endl << sCommon.str() << tab << foreach_func;
-    sHipDNNUnsupported << endl << sub << sWarnHipDNNOnlyUnsupportedFunctions << " {" << endl << sCommon.str() << tab << foreach_func;
+    sRocUnsupported << endl << sub << sWarnRocOnlyUnsupportedFunctions << " {" << endl << sCommon.str() << tab << while_func << sRocOnlyUnsupportedFunctions << ")\n";
+    sMIOpenUnsupported << endl << sub << sWarnMIOpenOnlyUnsupportedFunctions << " {" << endl << sCommon.str() << tab << while_func << sMIOpenOnlyUnsupportedFunctions << ")\n";
+    sHipUnsupported << endl << sub << sWarnHipOnlyUnsupportedFunctions << " {" << endl << sCommon.str() << tab << while_func << sHipOnlyUnsupportedFunctions << ")\n";
+    sHipDNNUnsupported << endl << sub << sWarnHipDNNOnlyUnsupportedFunctions << " {" << endl << sCommon.str() << tab << while_func << sHipDNNOnlyUnsupportedFunctions << ")\n";
     unsigned countRocOnlyUnsupported = 0, countHipOnlyUnsupported = 0, countMIOpenOnlyUnsupported = 0, countHipDNNOnlyUnsupported = 0;
     bool bTranslateToRoc = TranslateToRoc;
     bool bTranslateToMIOpen = TranslateToMIOpen;
@@ -613,14 +622,14 @@ namespace perl {
       TranslateToRoc = false;
       if (Statistics::isUnsupported(ma->second)) {
         if (ma->second.apiType == API_BLAS || ma->second.apiType == API_SPARSE || ma->second.apiType == API_RAND || ma->second.apiType == API_TENSOR) {
-          sHipUnsupported << (countHipOnlyUnsupported ? ",\n" : "") << tab_2 << "\"" << ma->first.str() << "\"";
+          hip_unsupported << (countHipOnlyUnsupported ? ",\n" : "") << tab << "\"" << ma->first.str() << "\"";
           countHipOnlyUnsupported++;
         }
       }
       TranslateToRoc = true;
       if (Statistics::isUnsupported(ma->second)) {
         if (ma->second.apiType == API_BLAS || ma->second.apiType == API_SPARSE || ma->second.apiType == API_RAND || ma->second.apiType == API_TENSOR) {
-          sRocUnsupported << (countRocOnlyUnsupported ? ",\n" : "") << tab_2 << "\"" << ma->first.str() << "\"";
+          roc_unsupported << (countRocOnlyUnsupported ? ",\n" : "") << tab << "\"" << ma->first.str() << "\"";
           countRocOnlyUnsupported++;
         }
       }
@@ -628,14 +637,14 @@ namespace perl {
       TranslateToMIOpen = true;
       if (Statistics::isUnsupported(ma->second)) {
         if (ma->second.apiType == API_DNN) {
-          sMIOpenUnsupported << (countMIOpenOnlyUnsupported ? ",\n" : "") << tab_2 << "\"" << ma->first.str() << "\"";
+          miopen_unsupported << (countMIOpenOnlyUnsupported ? ",\n" : "") << tab << "\"" << ma->first.str() << "\"";
           countMIOpenOnlyUnsupported++;
         }
       }
       TranslateToMIOpen = false;
       if (Statistics::isUnsupported(ma->second)) {
         if (ma->second.apiType == API_DNN) {
-          sHipDNNUnsupported << (countHipDNNOnlyUnsupported ? ",\n" : "") << tab_2 << "\"" << ma->first.str() << "\"";
+          hipdnn_unsupported << (countHipDNNOnlyUnsupported ? ",\n" : "") << tab << "\"" << ma->first.str() << "\"";
           countHipDNNOnlyUnsupported++;
         }
       }
@@ -643,10 +652,10 @@ namespace perl {
     TranslateToRoc = bTranslateToRoc;
     TranslateToMIOpen = bTranslateToMIOpen;
     sCommon.str(std::string());
-    sHipUnsupported << endl_tab << ")" << endl;
-    sRocUnsupported << endl_tab << ")" << endl;
-    sMIOpenUnsupported << endl_tab << ")" << endl;
-    sHipDNNUnsupported << endl_tab << ")" << endl;
+    hip_unsupported << endl << ");" << endl;
+    roc_unsupported << endl << ");" << endl;
+    miopen_unsupported << endl << ");" << endl;
+    hipdnn_unsupported << endl << ");" << endl;
     sCommon << tab << "{" << endl;
     sCommon << tab_2 << my << "$mt = m/($func)/g;" << endl;
     sCommon << tab_2 << "if ($mt) {" << endl;
@@ -675,9 +684,13 @@ namespace perl {
     *streamPtr.get() << sExperimental.str();
     *streamPtr.get() << sDeprecated.str();
     *streamPtr.get() << sRemoved.str();
+    *streamPtr.get() << "\n@" << sHipOnlyUnsupportedFunctions << " = (\n" << hip_unsupported.str();
     *streamPtr.get() << sHipUnsupported.str();
+    *streamPtr.get() << "\n@" << sRocOnlyUnsupportedFunctions << " = (\n" << roc_unsupported.str();
     *streamPtr.get() << sRocUnsupported.str();
+    *streamPtr.get() << "\n@" << sMIOpenOnlyUnsupportedFunctions << " = (\n" << miopen_unsupported.str();
     *streamPtr.get() << sMIOpenUnsupported.str();
+    *streamPtr.get() << "\n@" << sHipDNNOnlyUnsupportedFunctions << " = (\n" << hipdnn_unsupported.str();
     *streamPtr.get() << sHipDNNUnsupported.str();
   }
 
@@ -688,18 +701,20 @@ namespace perl {
     stringstream sUnsupported;
     for (auto ma = CUDA_DEVICE_FUNCTION_MAP.rbegin(); ma != CUDA_DEVICE_FUNCTION_MAP.rend(); ++ma) {
       bool isUnsupported = Statistics::isUnsupported(ma->second);
-      (isUnsupported ? sUnsupported : sSupported) << ((isUnsupported && countUnsupported) || (!isUnsupported && countSupported) ? ",\n" : "") << tab_2 << "\"" << ma->first.str() << "\"";
+      (isUnsupported ? sUnsupported : sSupported) << ((isUnsupported && countUnsupported) || (!isUnsupported && countSupported) ? ",\n" : "") << tab << "\"" << ma->first.str() << "\"";
       if (isUnsupported) countUnsupported++;
       else countSupported++;
     }
+    stringstream supported;
+    stringstream unsupported;
     stringstream subCountSupported;
     stringstream subWarnUnsupported;
     stringstream subCommon;
-    string sCommon = tab + my_k + "\n" + tab + foreach_func;
-    subCountSupported << endl << sub << sCountSupportedDeviceFunctions << " {" << endl << (countSupported ? sCommon : tab + return_0);
-    subWarnUnsupported << endl << sub << sWarnUnsupportedDeviceFunctions << " {" << endl << (countUnsupported ? tab + my + "$line_num = shift;\n" + sCommon : tab + return_0);
-    if (countSupported) subCountSupported << sSupported.str() << endl_tab << ")" << endl;
-    if (countUnsupported) subWarnUnsupported << sUnsupported.str() << endl_tab << ")" << endl;
+    string sCommon = tab + my_k + "\n" + tab + while_func;
+    subCountSupported << endl << sub << sCountSupportedDeviceFunctions << " {" << endl << (countSupported ? sCommon + sSupportedDeviceFunctions + ")\n" : tab + return_0);
+    subWarnUnsupported << endl << sub << sWarnUnsupportedDeviceFunctions << " {" << endl << (countUnsupported ? tab + my + "$line_num = shift;\n" + sCommon + sUnsupportedDeviceFunctions + ")\n" : tab + return_0);
+    if (countSupported) supported << sSupported.str() << endl_tab << ");" << endl;
+    if (countUnsupported) unsupported << sUnsupported.str() << endl_tab << ");" << endl;
     if (countSupported || countUnsupported) {
       subCommon << tab << "{" << endl;
       subCommon << tab_2 << "# match device function from the list, except those, which have a namespace prefix (aka somenamespace::umin(...));" << endl;
@@ -719,7 +734,9 @@ namespace perl {
     if (countUnsupported) subWarnUnsupported << sCommon;
     subCountSupported << "}" << endl;
     subWarnUnsupported << "}" << endl;
+    *streamPtr.get() << "\n@" << sSupportedDeviceFunctions << " = (\n" << supported.str();
     *streamPtr.get() << subCountSupported.str();
+    *streamPtr.get() << "\n@" << sUnsupportedDeviceFunctions << " = (\n" << unsupported.str();
     *streamPtr.get() << subWarnUnsupported.str();
   }
 

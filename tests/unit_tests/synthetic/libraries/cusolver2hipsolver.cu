@@ -753,6 +753,16 @@ int main() {
   // CHECK: status = hipsolverSpDcsrlsvcholHost(SpHandle_t, m, nnzA, MatDescr_t, &dcsrVal, &icsrRowPtr, &icsrColInd, &dB, dtol, ireorder, &dX, &isingularity);
   status = cusolverSpDcsrlsvcholHost(SpHandle_t, m, nnzA, MatDescr_t, &dcsrVal, &icsrRowPtr, &icsrColInd, &dB, dtol, ireorder, &dX, &isingularity);
 
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverSpScsrlsvqr(cusolverSpHandle_t handle, int m, int nnz, const cusparseMatDescr_t descrA, const float* csrVal, const int* csrRowPtr, const int* csrColInd, const float* b, float tol, int reorder, float* x, int* singularity);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverSpScsrlsvqr(hipsolverSpHandle_t handle, int n, int nnz, const hipsparseMatDescr_t descrA, const float* csrVal, const int* csrRowPts, const int* csrColInd, const float* b, double tolerance, int reorder, float* x, int* singularity);
+  // CHECK: status = hipsolverSpScsrlsvqr(SpHandle_t, m, nnzA, MatDescr_t, &fcsrVal, &icsrRowPtr, &icsrColInd, &fB, ftol, ireorder, &fX, &isingularity);
+  status = cusolverSpScsrlsvqr(SpHandle_t, m, nnzA, MatDescr_t, &fcsrVal, &icsrRowPtr, &icsrColInd, &fB, ftol, ireorder, &fX, &isingularity);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverSpDcsrlsvqr(cusolverSpHandle_t handle, int m, int nnz, const cusparseMatDescr_t descrA, const double* csrVal, const int* csrRowPtr, const int* csrColInd, const double* b, double tol, int reorder, double* x, int* singularity);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverSpDcsrlsvqr(hipsolverSpHandle_t handle, int n, int nnz, const hipsparseMatDescr_t descrA, const double* csrVal, const int* csrRowPts, const int* csrColInd, const double* b, double tolerance, int reorder, double* x, int* singularity);
+  // CHECK: status = hipsolverSpDcsrlsvqr(SpHandle_t, m, nnzA, MatDescr_t, &dcsrVal, &icsrRowPtr, &icsrColInd, &dB, dtol, ireorder, &dX, &isingularity);
+  status = cusolverSpDcsrlsvqr(SpHandle_t, m, nnzA, MatDescr_t, &dcsrVal, &icsrRowPtr, &icsrColInd, &dB, dtol, ireorder, &dX, &isingularity);
+
 #if CUDA_VERSION >= 8000
   // CHECK: hipDataType dataTypeA, dataTypeB, dataTypeTau, computeType;
   cudaDataType dataTypeA, dataTypeB, dataTypeTau, computeType;

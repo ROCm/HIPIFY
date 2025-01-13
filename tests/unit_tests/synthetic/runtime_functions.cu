@@ -1321,6 +1321,11 @@ int main() {
   // HIP: hipError_t hipEventRecordWithFlags(hipEvent_t event, hipStream_t stream __dparm(0), unsigned int flags __dparm(0));
   // CHECK: result = hipEventRecordWithFlags(Event_t, stream, flags);
   result = cudaEventRecordWithFlags(Event_t, stream, flags);
+
+  // TODO [LRT]: make hipDeviceGetTexture1DLinearMaxWidth compatible with cudaDeviceGetTexture1DLinearMaxWidth
+  // CUDA:extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaDeviceGetTexture1DLinearMaxWidth(size_t *maxWidthInElements, const struct cudaChannelFormatDesc *fmtDesc, int device);
+  // HIP: hipError_t hipDeviceGetTexture1DLinearMaxWidth(hipMemPool_t* mem_pool, int device);
+  result = cudaDeviceGetTexture1DLinearMaxWidth(&bytes, &ChannelFormatDesc, device);
 #endif
 
 #if CUDA_VERSION >= 11020

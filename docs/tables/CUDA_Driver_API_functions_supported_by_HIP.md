@@ -1480,7 +1480,7 @@ A - Added; D - Deprecated; C - Changed; R - Removed; E - Experimental
 |`cuDeviceGetMemPool`|11.2| | | |`hipDeviceGetMemPool`|5.2.0| | | | |
 |`cuDeviceGetName`| | | | |`hipDeviceGetName`|1.6.0| | | | |
 |`cuDeviceGetNvSciSyncAttributes`|10.2| | | | | | | | | |
-|`cuDeviceGetTexture1DLinearMaxWidth`|11.1| | | | | | | | | |
+|`cuDeviceGetTexture1DLinearMaxWidth`|11.1| | | |`hipDeviceGetTexture1DLinearMaxWidth`|6.4.0| | | |6.4.0|
 |`cuDeviceGetUuid`|9.2| | | |`hipDeviceGetUuid`|5.2.0| | | | |
 |`cuDeviceGetUuid_v2`|11.4| | | |`hipDeviceGetUuid`|5.2.0| | | | |
 |`cuDeviceSetMemPool`|11.2| | | |`hipDeviceSetMemPool`|5.2.0| | | | |
