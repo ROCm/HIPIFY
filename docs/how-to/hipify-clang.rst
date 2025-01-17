@@ -239,6 +239,9 @@ In most cases, you can get a suitable version of ``LLVM+Clang`` with your packag
 Usage
 =====
 
+.. note::
+  For additional details on the following ``hipify-clang`` command options, see :ref:`hipify_clang-command`
+
 To process a file, ``hipify-clang`` needs access to the same headers that are required to compile it
 with ``Clang``:
 
@@ -271,22 +274,25 @@ header files used during the hipification process:
 
 For more information, refer to the `Clang manual for compiling CUDA <https://llvm.org/docs/CompileCudaWithLLVM.html#compiling-cuda-code>`_.
 
+.. _hipify-json:
+
 Using JSON compilation database
 ===============================
 
-For some hipification automation (starting from Clang 8.0.0), you can also provide a
+For some hipification automation (starting from Clang 8.0.0), you can provide a
 `Compilation Database in JSON format <https://clang.llvm.org/docs/JSONCompilationDatabase.html>`_
 in the ``compile_commands.json`` file:
 
 .. code:: bash
 
-  -p <folder containing compile_commands.json> or
+  -p <folder containing compile_commands.json> 
+  - or -
   -p=<folder containing compile_commands.json>
 
 You can provide the compilation database in the ``compile_commands.json`` file or generate using
 Clang based on CMake. You can specify multiple source files as well.
 
-To provide Clang options, use ``compile_commands.json`` file, whereas to provide ``hipify-clang`` options, use ``hipify-clang`` command line.
+To provide Clang options, use ``compile_commands.json`` file, whereas to provide ``hipify-clang`` options, use the ``hipify-clang`` command line.
 
 .. note::
 
@@ -307,10 +313,18 @@ demonstrating the ``compile_commands.json`` usage:
     }
   ]
 
+.. _hipify-stats:
+
 Hipification statistics
 =======================
 
-The options ``--print-stats`` and ``--print-stats-csv`` provide an overview of what is hipified and what is not, as well as the hipification statistics. Use the ``--print-stats`` command to return the statistics as text to the terminal, or the ``--print-stats-csv`` command to create a CSV file to open in a spreadsheet:
+The options ``--print-stats`` and ``--print-stats-csv`` provide an overview of what is hipified and what is not, as well as the hipification statistics. Use the ``--print-stats`` command to return the statistics as text to the terminal, or the ``--print-stats-csv`` command to create a CSV file to open in a spreadsheet. 
+
+.. note::
+  When multiple source files are specified on the command-line, the statistics are provided per file and in total.
+
+Print statistics
+----------------
 
 .. code:: cpp
 
@@ -367,6 +381,9 @@ The options ``--print-stats`` and ``--print-stats-csv`` provide an overview of w
     cudaSuccess: 1
     cudaThreadSynchronize: 1
 
+Print CSV statistics
+--------------------
+
 .. code-block:: cpp
 
   hipify-clang intro.cu -cuda-path="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.6" --print-stats-csv
@@ -375,51 +392,3 @@ This generates ``intro.cu.csv`` file with statistics:
 
 .. image:: ../data/csv_statistics.png
   :alt: list of stats
-
-In case of multiple source files, the statistics are provided per file and in total.
-
-hipify-clang command
-====================
-
-For a list of ``hipify-clang`` options, run: 
-
-.. code-block:: cpp
-
-  hipify-clang --help
-
-Output Summary:
----------------
-
-1.	Usage:
-
-.. code-block:: cpp
-
-  hipify-clang [options] <inputs>
-
-2.	Common Options:
-
-  * ``--help``: Displays the help message
-  * ``-o <file>``: Specifies the output file for the converted source
-  * ``-I <dir>``: Adds a directory to the include search paths
-  * ``--cuda-path=<path>``: Specifies the path to the CUDA installation
-  * ``--hip-path=<path>``: Specifies the path to the HIP installation (optional; defaults to the ROCm installation path)
-  * ``--extra-arg=<arg>``: Adds extra arguments to the Clang compiler for advanced customization
-  * ``--extra-arg-before=<arg>``: Adds extra arguments before other command-line options
-
-3.	Preprocessor and Compilation Options:
-
-  * ``-D<macro>``: Defines macros for the preprocessor
-  * ``-U<macro>``: Undefines macros
-  * ``--save-temps``: Keeps intermediate files generated during processing
-
-4.	Diagnostics and Debugging:
-
-  * ``-v``: Enables verbose output to provide detailed diagnostic information
-  * ``--version``: Displays the version of HIPIFY-Clang
-  * ``--show-progress``: Displays progress during the translation process
-  * ``--print-stats`` | ``--print-stats-csv``: Prints statistics about the translation process (e.g., the number of functions or API calls converted) into either text or CSV form
-
-5.	Include and Exclude Rules:
-
-  * ``--exclude-path=<path>``: Specifies paths to exclude from translation
-  * ``--include-path=<path>``: Specifies paths to include during translation explicitly

@@ -16,6 +16,8 @@ subtrees:
     title: Use hipify-perl
 - caption: API reference
   entries:
+  - file: reference/hipify-clang-cmd
+  - file: reference/hipify-perl-cmd
   - file: reference/supported_apis
     subtrees:
     - entries:
