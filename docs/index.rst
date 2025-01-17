@@ -15,7 +15,7 @@ HIPIFY is a ROCm tool to help developers migrate GPU programming from NVIDIA's C
 
 .. note::
     
-    `hipify_torch <https://github.com/ROCm/hipify_torch>`_ is a related tool that also translates CUDA source code into portable HIP C++. It was initially developed as part of the PyTorch project to cater to the project's unique requirements but was found to be useful for PyTorch-related projects and was released as an independent utility.
+    `hipify_torch <https://github.com/ROCm/hipify_torch>`_ is a related tool that also translates CUDA source code into portable HIP C++. It was developed as part of the PyTorch project to cater to the project's unique requirements, was found to be useful for PyTorch-related projects, and released as an independent utility.
 
 HIPIFY does not automatically convert all CUDA code into HIP code seamlessly. While it is a powerful tool for translating CUDA code to HIP, there are some limitations and areas where manual intervention is often required. HIPIFY can automatically convert many CUDA  runtime API calls, kernel launch syntax, standard CUDA library functions where there is a HIP library equivalent, specific keywords like __global__ and __device__. However, HIP is not a complete replacement for CUDA, and HIPIFY cannot automatically translate all code. CUDA libraries, or third-party libraries that have no HIP equivalent cannot be translated. In addition, code which is optimized for performance on NVIDIA GPUs might require additional rework to optimize performance on AMD GPUs. 
 

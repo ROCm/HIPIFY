@@ -17,15 +17,15 @@ For a list of ``hipify-clang`` options, run:
 Output:
 =======
 
-USAGE:
-------
+Usage
+-----
 
 .. code-block:: cpp
 
   hipify-clang [options] <source0> [... <sourceN>]
 
-OPTIONS:
---------
+Options
+-------
 
 .. # COMMENT: The following lines define a break for use in the table below. 
 .. |br| raw:: html 
@@ -111,7 +111,7 @@ OPTIONS:
       - Don't write any translated output to stdout
 
     * - ``--no-undocumented-features``                      
-      - Do not rely on undocumented features in code transformation
+      - Don't rely on undocumented features in code transformation
 
     * - ``--no-warnings-on-undocumented-features``          
       - Suppress warnings on undocumented features in code transformation
@@ -153,7 +153,7 @@ OPTIONS:
       - Save temporary files
 
     * - ``--skip-excluded-preprocessor-\`` |br| ``conditional-blocks`` 
-      - Enable default preprocessor behavior by skipping undefined conditional blocks
+      - Enable default preprocessor behavior by skipping undefined conditional blocks. This has the same effect as ``--default-preprocessor``
 
     * - ``--temp-dir=<directory>``                          
       - Temporary directory
@@ -172,6 +172,9 @@ OPTIONS:
 
     * - ``<source0> ...`` 
       - Specify the file paths and names of one or more source files. These paths are looked up in the compile command database. If the path of a file is absolute, it needs to point into CMake's source tree. If the path is relative, the current working directory needs to be in the CMake source tree and the file must be in a subdirectory of the current working directory. ``./`` prefixes in the relative files will be automatically removed, but the rest of a relative path must be a suffix of a path in the compile command database
+
+Option uses:
+------------
 
 1.	Common Options:
 

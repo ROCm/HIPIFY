@@ -15,7 +15,7 @@ matchers. After applying all the matchers, the output HIP source is produced.
 
 **Advantages:**
 
-- ``hipify-clang`` is a translator. It parses complex constructs successfully or else reports an error.
+- ``hipify-clang`` is a translator. It parses complex constructs successfully or reports an error.
 - It supports Clang options such as
   `-I <https://clang.llvm.org/docs/ClangCommandLineReference.html#include-path-management>`_,
   `-D <https://clang.llvm.org/docs/ClangCommandLineReference.html#preprocessor-options>`_, and
@@ -27,7 +27,7 @@ matchers. After applying all the matchers, the output HIP source is produced.
 **Disadvantages:**
 
 - You must ensure that the input CUDA code is correct as incorrect code can't be translated to HIP.
-- You must install CUDA and in case of multiple installations, specify using ``--cuda-path`` option.
+- You must install CUDA, and in case of multiple installations specify the needed version using ``--cuda-path`` option.
 - You must provide all the ``includes`` and ``defines`` to successfully translate the code.
 
 Release Dependencies
@@ -35,7 +35,7 @@ Release Dependencies
 
 ``hipify-clang`` requires:
 
-* `CUDA <https://developer.nvidia.com/cuda-downloads>`_ the latest supported version is
+* `CUDA <https://developer.nvidia.com/cuda-downloads>`_, the latest supported version is
   `12.6.3 <https://developer.nvidia.com/cuda-downloads>`_, but requires at least version
   `7.0 <https://developer.nvidia.com/cuda-toolkit-70>`_.
 
@@ -50,14 +50,14 @@ Release Dependencies
     - supported LLVM release versions
     - Windows
     - Linux
-  * - `12.6.3 <https://developer.nvidia.com/cuda-downloads>`_:sup:`4`
+  * - `12.6.3 <https://developer.nvidia.com/cuda-downloads>`_:sup:`1`
     - `19.1.0 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-19.1.0>`_,
       `19.1.1 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-19.1.1>`_,
       `19.1.2 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-19.1.2>`_,
       `19.1.3 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-19.1.3>`_,
       `19.1.4 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-19.1.4>`_,
       `19.1.5 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-19.1.5>`_,
-      `19.1.6 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-19.1.6>`_:sup:`4`
+      `19.1.6 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-19.1.6>`_:sup:`1`
     - ✅
     - ✅
   * - `12.3.2 <https://developer.nvidia.com/cuda-12-3-2-download-archive>`_ 
@@ -189,10 +189,10 @@ Release Dependencies
     - ✅
     - ✅
   * - `7.5 <https://developer.nvidia.com/cuda-75-downloads-archive>`_
-    - `3.8.0 <http://releases.llvm.org/download.html#3.8.0>`_ :sup:`1`,
-      `3.8.1 <http://releases.llvm.org/download.html#3.8.1>`_ :sup:`1`,
-      `3.9.0 <http://releases.llvm.org/download.html#3.9.0>`_ :sup:`1`,
-      `3.9.1 <http://releases.llvm.org/download.html#3.9.1>`_ :sup:`1`
+    - `3.8.0 <http://releases.llvm.org/download.html#3.8.0>`_ :sup:`4`,
+      `3.8.1 <http://releases.llvm.org/download.html#3.8.1>`_ :sup:`4`,
+      `3.9.0 <http://releases.llvm.org/download.html#3.9.0>`_ :sup:`4`,
+      `3.9.1 <http://releases.llvm.org/download.html#3.9.1>`_ :sup:`4`
     - ✅
     - ✅
 

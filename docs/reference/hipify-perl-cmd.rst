@@ -17,15 +17,15 @@ For a list of ``hipify-perl`` options, run:
 Output:
 =======
 
-USAGE:
-------
+Usage
+-----
 
 .. code-block:: cpp
 
   hipify-perl [options] <source0> [... <sourceN>]
 
-OPTIONS:
---------
+Options
+-------
 
 .. # COMMENT: The following lines define a break for use in the table below. 
 .. |br| raw:: html 
