@@ -181,6 +181,7 @@ if (NOT HIPIFY_CLANG_TESTS_ONLY)
   install(
     DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin
     DESTINATION .
+    USE_SOURCE_PERMISSIONS
     PATTERN "hipify-perl"
     PATTERN "*.sh"
     PATTERN "findcode.sh" EXCLUDE
