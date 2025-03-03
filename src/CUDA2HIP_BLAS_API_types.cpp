@@ -2241,7 +2241,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_TYPE_NAME_VER_MAP {
   {"HIPBLASLT_MATMUL_PREF_SEARCH_MODE",                              {HIP_5050, HIP_0,    HIP_0   }},
   {"HIPBLASLT_MATMUL_PREF_MAX_WORKSPACE_BYTES",                      {HIP_5050, HIP_0,    HIP_0   }},
   {"hipblasLtMatmulHeuristicResult_t",                               {HIP_5050, HIP_0,    HIP_0   }},
-  {"HIPBLASLT_MATMUL_DESC_AMAX_D_POINTER",                           {HIP_6020, HIP_0,    HIP_0,  }},
+  {"HIPBLASLT_MATMUL_DESC_AMAX_D_POINTER",                           {HIP_6020, HIP_0,    HIP_0   }},
 
   {"rocblas_handle",                                                 {HIP_1050, HIP_0,    HIP_0   }},
   {"_rocblas_handle",                                                {HIP_1050, HIP_0,    HIP_0   }},

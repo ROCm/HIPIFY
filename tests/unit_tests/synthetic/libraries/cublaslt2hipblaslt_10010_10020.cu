@@ -8,7 +8,7 @@
 // CHECK-NOT: #include "hipblaslt.h"
 
 int main() {
-  printf("20.1. cuBLASLt API to hipBLASLt API synthetic test\n");
+  printf("21.10010.10020. cuBLASLt API to hipBLASLt API synthetic test\n");
 
 #if CUDA_VERSION >= 10010 && CUDA_VERSION <= 10020
   // CHECK: hipblasLtMatrixLayoutOpaque_t blasLtMatrixLayoutOpaque;

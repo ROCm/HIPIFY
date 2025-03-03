@@ -145,7 +145,8 @@ const char *apiNames[NUM_API_TYPES] = {
   "cuSOLVER API",
   "CUB API",
   "CAFFE2 API",
-  "RTC API"
+  "RTC API",
+  "TENSOR API"
 };
 
 const char *apiTypes[NUM_API_TYPES] = {
@@ -160,7 +161,8 @@ const char *apiTypes[NUM_API_TYPES] = {
   "API_SPARSE",
   "API_SOLVER",
   "API_CAFFE2",
-  "API_RTC"
+  "API_RTC",
+  "API_TENSOR"
 };
 
 namespace {
@@ -365,9 +367,13 @@ void Statistics::setActive(const std::string &name) {
 }
 
 bool Statistics::isToRoc(const hipCounter &counter) {
-  return (counter.apiType == API_BLAS || counter.apiType == API_DNN || counter.apiType == API_SPARSE || counter.apiType == API_SOLVER ||
-          counter.apiType == API_RUNTIME || counter.apiType == API_COMPLEX || counter.apiType == API_RAND) &&
-          ((TranslateToRoc && !TranslateToMIOpen) || TranslateToMIOpen);
+  return ((counter.apiType == API_BLAS || counter.apiType == API_DNN || counter.apiType == API_SPARSE || counter.apiType == API_SOLVER ||
+           counter.apiType == API_RUNTIME || counter.apiType == API_COMPLEX || counter.apiType == API_RAND) && TranslateToRoc) || 
+           isToMIOpen(counter);
+}
+
+bool Statistics::isToMIOpen(const hipCounter &counter) {
+  return counter.apiType == API_DNN && TranslateToMIOpen;
 }
 
 bool Statistics::isHipExperimental(const hipCounter &counter) {
@@ -487,6 +493,7 @@ std::string Statistics::getCudaVersion(const cudaVersions &ver) {
     case CUDA_124: return "12.4";
     case CUDA_125: return "12.5";
     case CUDA_126: return "12.6";
+    case CUDA_128: return "12.8";
     case CUDNN_10: return "1.0.0";
     case CUDNN_20: return "2.0.0";
     case CUDNN_30: return "3.0.0";
@@ -541,6 +548,27 @@ std::string Statistics::getCudaVersion(const cudaVersions &ver) {
     case CUDNN_930: return "9.3.0";
     case CUDNN_940: return "9.4.0";
     case CUDNN_950: return "9.5.0";
+    case CUDNN_960: return "9.6.0";
+    case CUDNN_970: return "9.7.0";
+    case CUTENSOR_1010: return "1.0.1.0";
+    case CUTENSOR_1100: return "1.1.0.0";
+    case CUTENSOR_1200: return "1.2.0.0";
+    case CUTENSOR_1210: return "1.2.1.0";
+    case CUTENSOR_1220: return "1.2.2.0";
+    case CUTENSOR_1300: return "1.3.0.0";
+    case CUTENSOR_1310: return "1.3.1.0";
+    case CUTENSOR_1320: return "1.3.2.0";
+    case CUTENSOR_1330: return "1.3.3.0";
+    case CUTENSOR_1400: return "1.4.0.0";
+    case CUTENSOR_1500: return "1.5.0.0";
+    case CUTENSOR_1600: return "1.6.0.0";
+    case CUTENSOR_1610: return "1.6.1.0";
+    case CUTENSOR_1620: return "1.6.2.0";
+    case CUTENSOR_1700: return "1.7.0.0";
+    case CUTENSOR_2000: return "2.0.0.0";
+    case CUTENSOR_2010: return "2.0.1.0";
+    case CUTENSOR_2020: return "2.0.2.0";
+    case CUTENSOR_2021: return "2.0.2.1";
   }
   return "";
 }
@@ -615,6 +643,7 @@ std::string Statistics::getHipVersion(const hipVersions &ver) {
     case HIP_6011: return "6.1.1";
     case HIP_6020: return "6.2.0";
     case HIP_6030: return "6.3.0";
+    case HIP_6040: return "6.4.0";
   }
   return "";
 }

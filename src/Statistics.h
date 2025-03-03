@@ -178,6 +178,7 @@ enum ApiTypes {
   API_CUB,
   API_CAFFE2,
   API_RTC,
+  API_TENSOR,
   API_LAST
 };
 constexpr int NUM_API_TYPES = (int) ApiTypes::API_LAST;
@@ -243,7 +244,8 @@ enum cudaVersions {
   CUDA_124 = 12040,
   CUDA_125 = 12050,
   CUDA_126 = 12060,
-  CUDA_LATEST = CUDA_126,
+  CUDA_128 = 12080,
+  CUDA_LATEST = CUDA_128,
   CUDNN_10 = 100,
   CUDNN_20 = 200,
   CUDNN_30 = 300,
@@ -298,7 +300,29 @@ enum cudaVersions {
   CUDNN_930 = 930,
   CUDNN_940 = 940,
   CUDNN_950 = 950,
-  CUDNN_LATEST = CUDNN_950,
+  CUDNN_960 = 960,
+  CUDNN_970 = 970,
+  CUDNN_LATEST = CUDNN_970,
+  CUTENSOR_1010 = 100010,
+  CUTENSOR_1100 = 100100,
+  CUTENSOR_1200 = 100200,
+  CUTENSOR_1210 = 100210,
+  CUTENSOR_1220 = 100220,
+  CUTENSOR_1300 = 100300,
+  CUTENSOR_1310 = 100310,
+  CUTENSOR_1320 = 100320,
+  CUTENSOR_1330 = 100330,
+  CUTENSOR_1400 = 100400,
+  CUTENSOR_1500 = 100500,
+  CUTENSOR_1600 = 100600,
+  CUTENSOR_1610 = 100610,
+  CUTENSOR_1620 = 100620,
+  CUTENSOR_1700 = 100700,
+  CUTENSOR_2000 = 200000,
+  CUTENSOR_2010 = 200010,
+  CUTENSOR_2020 = 200020,
+  CUTENSOR_2021 = 200021,
+  CUTENSOR_LATEST = CUTENSOR_2021,
 };
 
 enum hipVersions {
@@ -369,7 +393,8 @@ enum hipVersions {
   HIP_6011 = 6011,
   HIP_6020 = 6020,
   HIP_6030 = 6030,
-  HIP_LATEST = HIP_6030,
+  HIP_6040 = 6040,
+  HIP_LATEST = HIP_6040,
 };
 
 struct cudaAPIversions {
@@ -476,6 +501,8 @@ public:
   static void setActive(const std::string &name);
   // Check the counter and option TranslateToRoc whether it should be translated to Roc or not.
   static bool isToRoc(const hipCounter &counter);
+  // Check the counter and option TranslateToMIOpen whether it should be translated to MIOpen or not.
+  static bool isToMIOpen(const hipCounter& counter);
   // Check whether the counter is HIP_EXPERIMENTAL or not.
   static bool isHipExperimental(const hipCounter &counter);
   // Check whether the counter is HIP_UNSUPPORTED or not.

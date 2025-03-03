@@ -7,7 +7,7 @@
 #include "cudnn.h"
 
 int main() {
-  printf("15.1. cuDNN API to MIOpen API synthetic test\n");
+  printf("15.before.9000. cuDNN API to MIOpen API synthetic test\n");
 
   // CHECK: miopenStatus_t status;
   cudnnStatus_t status;

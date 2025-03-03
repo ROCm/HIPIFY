@@ -88,4 +88,3 @@ std::string getAbsoluteDirectoryPath(const std::string &sDir, std::error_code &E
   }
   return dirAbsPath.c_str();
 }
-

@@ -135,6 +135,11 @@ namespace doc {
   const string sCUB_csv = sCUB + csv_ext;
   const string sCUCUB = "CUB";
 
+  const string sTENSOR = "CUTENSOR_API_supported_by_HIP";
+  const string sTENSOR_md = sTENSOR + md_ext;
+  const string sTENSOR_csv = sTENSOR + csv_ext;
+  const string sCUTENSOR = "CUTENSOR";
+
   const string sAPI_supported_by = "API supported by ";
   const string sCUDA = "CUDA";
   const string sHIP = "HIP";
@@ -245,6 +250,8 @@ namespace doc {
         for (auto doc : docs) {
           if (doc != (types & doc)) continue;
           *streams[doc].get() << (doc == md ? "# " : "") << getName() << " " << sAPI_supported_by << (isJoint() ? getJointAPI() : getAPI()) << endl << endl;
+          *streams[doc].get() << endl << "**Note\\:** In the tables that follow the columns marked " << (format == full ? "`A`, `D`, `C`, `R`, and `E`" : "`D` and `E`") << " mean the following:";
+          *streams[doc].get() << endl << (format == full ? "**A** - Added; **D** - Deprecated; **C** - Changed; **R** - Removed; **E** - Experimental" : "**D** - Deprecated; **E** - Experimental") << endl << endl;
           unsigned int compact_only_cur_sec_num = 1;
           for (auto &s : getSections()) {
             const functionMap &ftMap = isTypeSection(s.first, getSections()) ? getTypes() : getFunctions();
@@ -418,7 +425,6 @@ namespace doc {
               *streams[doc].get() << rows.str() << endl;
             }
           }
-          *streams[doc].get() << endl << (doc == md ? "\\" : "") << (format == full ? "*A - Added; D - Deprecated; C - Changed; R - Removed; E - Experimental" : "*D - Deprecated; E - Experimental");
         }
         return true;
       }
@@ -795,6 +801,7 @@ namespace doc {
       const typeMap &getTypes() const override { return CUDA_DEVICE_TYPE_NAME_MAP; }
       const versionMap &getFunctionVersions() const override { return CUDA_DEVICE_FUNCTION_VER_MAP; }
       const hipVersionMap &getHipFunctionVersions() const override { return HIP_DEVICE_FUNCTION_VER_MAP; }
+      const cudaChangedVersionMap &getCudaChangedFunctionVersions() const override { return CUDA_DEVICE_FUNCTION_CHANGED_VER_MAP; }
       const versionMap &getTypeVersions() const override { return CUDA_DEVICE_TYPE_NAME_VER_MAP; }
       const hipVersionMap &getHipTypeVersions() const override { return HIP_DEVICE_TYPE_NAME_VER_MAP; }
       const string &getName() const override { return sCUDEVICE; }
@@ -851,6 +858,29 @@ namespace doc {
           default: return sEmpty;
           case md: return sCUB_md;
           case csv: return sCUB_csv;
+        }
+      }
+  };
+
+   class TENSOR : public DOC {
+    public:
+      TENSOR(const string &outDir): DOC(outDir) {}
+      virtual ~TENSOR() {}
+    protected:
+      const sectionMap &getSections() const override { return CUDA_TENSOR_API_SECTION_MAP; }
+      const functionMap &getFunctions() const override { return CUDA_TENSOR_FUNCTION_MAP; }
+      const typeMap &getTypes() const override { return CUDA_TENSOR_TYPE_NAME_MAP; }
+      const versionMap &getFunctionVersions() const override { return CUDA_TENSOR_FUNCTION_VER_MAP; }
+      const hipVersionMap &getHipFunctionVersions() const override { return HIP_TENSOR_FUNCTION_VER_MAP; }
+      const versionMap &getTypeVersions() const override { return CUDA_TENSOR_TYPE_NAME_VER_MAP; }
+      const hipVersionMap &getHipTypeVersions() const override { return HIP_TENSOR_TYPE_NAME_VER_MAP; }
+      const string &getName() const override { return sCUTENSOR; }
+      const string &getFileName(docType format) const override {
+        switch (format) {
+          case none:
+          default: return sEmpty;
+          case md: return sTENSOR_md;
+          case csv: return sTENSOR_csv;
         }
       }
   };
@@ -921,6 +951,8 @@ namespace doc {
     docs.addDoc(&rtc);
     CUB cub(sOut);
     docs.addDoc(&cub);
+    TENSOR tensor(sOut);
+    docs.addDoc(&tensor);
     return docs.generate();
   }
 

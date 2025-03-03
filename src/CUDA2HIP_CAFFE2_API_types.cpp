@@ -38,4 +38,3 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_CAFFE2_TYPE_NAME_VER_MAP {
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_CAFFE2_TYPE_NAME_VER_MAP {
 };
-

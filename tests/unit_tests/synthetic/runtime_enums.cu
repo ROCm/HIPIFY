@@ -240,6 +240,8 @@ int main() {
   // CHECK-NEXT: hipError_t ErrorHostMemoryNotRegistered = hipErrorHostMemoryNotRegistered;
   // CHECK-NEXT: hipError_t ErrorLaunchFailure = hipErrorLaunchFailure;
   // CHECK-NEXT: hipError_t ErrorNotSupported = hipErrorNotSupported;
+  // CHECK-NEXT: hipError_t ErrorInvalidTexture = hipErrorInvalidTexture;
+  // CHECK-NEXT: hipError_t ErrorInvalidChannelDescriptor = hipErrorInvalidChannelDescriptor;
   cudaError Error;
   cudaError_t Error_t;
   cudaError_t Success = cudaSuccess;
@@ -288,6 +290,8 @@ int main() {
   cudaError_t ErrorHostMemoryNotRegistered = cudaErrorHostMemoryNotRegistered;
   cudaError_t ErrorLaunchFailure = cudaErrorLaunchFailure;
   cudaError_t ErrorNotSupported = cudaErrorNotSupported;
+  cudaError_t ErrorInvalidTexture = cudaErrorInvalidTexture;
+  cudaError_t ErrorInvalidChannelDescriptor = cudaErrorInvalidChannelDescriptor;
 
   // CHECK: hipError_t ErrorUnknown = hipErrorUnknown;
   cudaError_t ErrorUnknown = cudaErrorUnknown;

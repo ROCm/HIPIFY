@@ -4,27 +4,49 @@ defaults:
   numbered: False
 root: index
 subtrees:
-- caption: Conceptual
+- caption: Building
   entries:
-  - file: hipify-clang
-  - file: hipify-perl
+  - file: building/building-hipify
+  - file: building/build-hipify-perl
+- caption: How to
+  entries:
+  - file: how-to/hipify-clang
+    title: Use hipify-clang
+  - file: how-to/hipify-perl
+    title: Use hipify-perl
 - caption: API reference
   entries:
-  - file: supported_apis
+  - file: reference/hipify-clang-cmd
+  - file: reference/hipify-perl-cmd
+  - file: reference/supported_apis
     subtrees:
     - entries:
-      - file: tables/CUDA_Runtime_API_functions_supported_by_HIP     
-      - file: tables/CUDA_Driver_API_functions_supported_by_HIP
-      - file: tables/cuComplex_API_supported_by_HIP
-      - file: tables/CUDA_Device_API_supported_by_HIP
-      - file: tables/CUDA_RTC_API_supported_by_HIP
-      - file: tables/CUBLAS_API_supported_by_HIP
-      - file: tables/CUSPARSE_API_supported_by_HIP
-      - file: tables/CUSOLVER_API_supported_by_HIP
-      - file: tables/CURAND_API_supported_by_HIP      
-      - file: tables/CUFFT_API_supported_by_HIP
-      - file: tables/CUDNN_API_supported_by_HIP     
-      - file: tables/CUB_API_supported_by_HIP
+      - file: reference/tables/CUDA_Runtime_API_functions_supported_by_HIP     
+        title: CUDA Runtime functions
+      - file: reference/tables/CUDA_Driver_API_functions_supported_by_HIP
+        title: CUDA Driver functions
+      - file: reference/tables/cuComplex_API_supported_by_HIP
+        title: cuComplex API
+      - file: reference/tables/CUDA_Device_API_supported_by_HIP
+        title: CUDA Device API
+      - file: reference/tables/CUDA_RTC_API_supported_by_HIP
+        title: CUDA RTC API
+      - file: reference/tables/CUBLAS_API_supported_by_HIP
+        title: cuBLAS API
+      - file: reference/tables/CUSPARSE_API_supported_by_HIP
+        title: cuSPARSE
+      - file: reference/tables/CUSOLVER_API_supported_by_HIP
+        title: cuSOLVER API
+      - file: reference/tables/CURAND_API_supported_by_HIP      
+        title: cuRAND API
+      - file: reference/tables/CUFFT_API_supported_by_HIP
+        title: cuFFT API
+      - file: reference/tables/CUDNN_API_supported_by_HIP     
+        title: cuDNN API
+      - file: reference/tables/CUTENSOR_API_supported_by_HIP     
+        title: cuTENSOR API
+      - file: reference/tables/CUB_API_supported_by_HIP
+        title: CUB API
 - caption: About
   entries:
   - file: license

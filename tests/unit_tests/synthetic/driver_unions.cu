@@ -7,6 +7,13 @@
 int main() {
   printf("10. CUDA Driver API Unions synthetic test\n");
 
+#if CUDA_VERSION >= 8000
+  // CHECK: hipStreamBatchMemOpParams streamBatchMemOpParams;
+  // CHECK-NEXT: hipStreamBatchMemOpParams_union streamBatchMemOpParams_union;
+  CUstreamBatchMemOpParams streamBatchMemOpParams;
+  CUstreamBatchMemOpParams_union streamBatchMemOpParams_union;
+#endif
+
 #if CUDA_VERSION >= 11000
   // CHECK: hipKernelNodeAttrValue kernelNodeAttrValue;
   CUkernelNodeAttrValue kernelNodeAttrValue;

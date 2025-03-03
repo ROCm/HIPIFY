@@ -24,7 +24,6 @@ THE SOFTWARE.
 
 // Map of all functions
 const std::map<llvm::StringRef, hipCounter> CUDA_DNN_FUNCTION_MAP {
-
   // NOTE: MIOPEN_EXPORT miopenStatus_t miopenGetVersion(size_t* major, size_t* minor, size_t* patch) and size_t CUDNNWINAPI cudnnGetVersion(void) have different signatures
   {"cudnnGetVersion",                                          {"hipdnnGetVersion",                                          "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED}},
   {"cudnnGetCudartVersion",                                    {"hipdnnGetCudartVersion",                                    "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},

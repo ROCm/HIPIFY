@@ -16,7 +16,7 @@
 #endif
 
 int main() {
-  printf("21. cuRAND API to hipRAND API synthetic test\n");
+  printf("22. cuRAND API to hipRAND API synthetic test\n");
 
   unsigned int *outputPtr = nullptr;
   unsigned int *constants = nullptr;

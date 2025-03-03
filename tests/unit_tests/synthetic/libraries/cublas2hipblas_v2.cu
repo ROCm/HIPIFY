@@ -1864,23 +1864,23 @@ int main() {
   cublasDataType_t R_16BF = CUDA_R_16BF;
   cublasDataType_t C_16BF = CUDA_C_16BF;
 
-  // CHECK: hip_bfloat16* bf16A = nullptr;
+  // CHECK: __hip_bfloat16* bf16A = nullptr;
   __nv_bfloat16* bf16A = nullptr;
-  // CHECK: hip_bfloat16** bf16Aarray = 0;
+  // CHECK: __hip_bfloat16** bf16Aarray = 0;
   __nv_bfloat16** bf16Aarray = 0;
-  // CHECK: const hip_bfloat16** const bf16Aarray_const = const_cast<const hip_bfloat16**>(bf16Aarray);
+  // CHECK: const __hip_bfloat16** const bf16Aarray_const = const_cast<const __hip_bfloat16**>(bf16Aarray);
   const __nv_bfloat16** const bf16Aarray_const = const_cast<const __nv_bfloat16**>(bf16Aarray);
-  // CHECK: hip_bfloat16* bf16X = nullptr;
+  // CHECK: __hip_bfloat16* bf16X = nullptr;
   __nv_bfloat16* bf16X = nullptr;
-  // CHECK: hip_bfloat16** bf16xarray = 0;
+  // CHECK: __hip_bfloat16** bf16xarray = 0;
   __nv_bfloat16** bf16xarray = 0;
-  // CHECK: const hip_bfloat16** const bf16xarray_const = const_cast<const hip_bfloat16**>(bf16xarray);
+  // CHECK: const __hip_bfloat16** const bf16xarray_const = const_cast<const __hip_bfloat16**>(bf16xarray);
   const __nv_bfloat16** const bf16xarray_const = const_cast<const __nv_bfloat16**>(bf16xarray);
-  // CHECK: hip_bfloat16* bf16Y = nullptr;
+  // CHECK: __hip_bfloat16* bf16Y = nullptr;
   __nv_bfloat16* bf16Y = nullptr;
-  // CHECK: hip_bfloat16** bf16yarray = 0;
+  // CHECK: __hip_bfloat16** bf16yarray = 0;
   __nv_bfloat16** bf16yarray = 0;
-  // CHECK: const hip_bfloat16** const bf16yarray_const = const_cast<const hip_bfloat16**>(bf16yarray);
+  // CHECK: const __hip_bfloat16** const bf16yarray_const = const_cast<const __hip_bfloat16**>(bf16yarray);
   const __nv_bfloat16** const bf16yarray_const = const_cast<const __nv_bfloat16**>(bf16yarray);
 
   // CHECK: hipblasComputeType_t blasComputeType;

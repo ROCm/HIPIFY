@@ -1679,15 +1679,15 @@ int main() {
   cublasMath_t BLAS_TF32_TENSOR_OP_MATH = CUBLAS_TF32_TENSOR_OP_MATH;
   cublasMath_t BLAS_MATH_DISALLOW_REDUCED_PRECISION_REDUCTION = CUBLAS_MATH_DISALLOW_REDUCED_PRECISION_REDUCTION;
 
-  // CHECK: hip_bfloat16** bf16Aarray = 0;
+  // CHECK: __hip_bfloat16** bf16Aarray = 0;
   __nv_bfloat16** bf16Aarray = 0;
-  // CHECK: const hip_bfloat16** const bf16Aarray_const = const_cast<const hip_bfloat16**>(bf16Aarray);
+  // CHECK: const __hip_bfloat16** const bf16Aarray_const = const_cast<const __hip_bfloat16**>(bf16Aarray);
   const __nv_bfloat16** const bf16Aarray_const = const_cast<const __nv_bfloat16**>(bf16Aarray);
-  // CHECK: hip_bfloat16** bf16xarray = 0;
+  // CHECK: __hip_bfloat16** bf16xarray = 0;
   __nv_bfloat16** bf16xarray = 0;
-  // CHECK: const hip_bfloat16** const bf16xarray_const = const_cast<const hip_bfloat16**>(bf16xarray_const);
+  // CHECK: const __hip_bfloat16** const bf16xarray_const = const_cast<const __hip_bfloat16**>(bf16xarray_const);
   const __nv_bfloat16** const bf16xarray_const = const_cast<const __nv_bfloat16**>(bf16xarray_const);
-  // CHECK: hip_bfloat16** bf16yarray = 0;
+  // CHECK: __hip_bfloat16** bf16yarray = 0;
   __nv_bfloat16** bf16yarray = 0;
 
   // CHECK: hipblasComputeType_t blasComputeType;

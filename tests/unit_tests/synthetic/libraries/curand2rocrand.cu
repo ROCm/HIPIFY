@@ -11,7 +11,7 @@
 // CHECK-NOT: #include "rocrand/rocrand_kernel.h"
 
 int main() {
-  printf("21.1. cuRAND API to rocRAND API synthetic test\n");
+  printf("23. cuRAND API to rocRAND API synthetic test\n");
 
   unsigned int *outputPtr = nullptr;
   unsigned int *constants = nullptr;

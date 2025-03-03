@@ -687,6 +687,17 @@ int main() {
   int STREAM_WAIT_VALUE_GEQ = CU_STREAM_WAIT_VALUE_GEQ;
   int STREAM_WAIT_VALUE_EQ = CU_STREAM_WAIT_VALUE_EQ;
   int STREAM_WAIT_VALUE_AND = CU_STREAM_WAIT_VALUE_AND;
+
+  // CHECK: hipStreamBatchMemOpType streamBatchMemOpType;
+  // CHECK-NEXT: hipStreamBatchMemOpType streamBatchMemOpType_enum;
+  // CHECK-NEXT: hipStreamBatchMemOpType STREAM_MEM_OP_WAIT_VALUE_32 = hipStreamMemOpWaitValue32;
+  // CHECK-NEXT: hipStreamBatchMemOpType STREAM_MEM_OP_WRITE_VALUE_32 = hipStreamMemOpWriteValue32;
+  // CHECK-NEXT: hipStreamBatchMemOpType STREAM_MEM_OP_FLUSH_REMOTE_WRITES = hipStreamMemOpFlushRemoteWrites;
+  CUstreamBatchMemOpType streamBatchMemOpType;
+  CUstreamBatchMemOpType_enum streamBatchMemOpType_enum;
+  CUstreamBatchMemOpType STREAM_MEM_OP_WAIT_VALUE_32 = CU_STREAM_MEM_OP_WAIT_VALUE_32;
+  CUstreamBatchMemOpType STREAM_MEM_OP_WRITE_VALUE_32 = CU_STREAM_MEM_OP_WRITE_VALUE_32;
+  CUstreamBatchMemOpType STREAM_MEM_OP_FLUSH_REMOTE_WRITES = CU_STREAM_MEM_OP_FLUSH_REMOTE_WRITES;
 #endif
 
 #if CUDA_VERSION >= 9000
@@ -707,6 +718,11 @@ int main() {
 
   // CHECK: int STREAM_WAIT_VALUE_NOR = hipStreamWaitValueNor;
   int STREAM_WAIT_VALUE_NOR = CU_STREAM_WAIT_VALUE_NOR;
+
+  // CHECK: hipStreamBatchMemOpType STREAM_MEM_OP_WAIT_VALUE_64 = hipStreamMemOpWaitValue64;
+  // CHECK-NEXT: hipStreamBatchMemOpType STREAM_MEM_OP_WRITE_VALUE_64 = hipStreamMemOpWriteValue64;
+  CUstreamBatchMemOpType STREAM_MEM_OP_WAIT_VALUE_64 = CU_STREAM_MEM_OP_WAIT_VALUE_64;
+  CUstreamBatchMemOpType STREAM_MEM_OP_WRITE_VALUE_64 = CU_STREAM_MEM_OP_WRITE_VALUE_64;
 #endif
 
 #if CUDA_VERSION >= 9000 && CUDA_VERSION < 12000
@@ -1125,6 +1141,12 @@ int main() {
 
   // CHECK: hipKernelNodeAttrID KernelNodeAttributePriority = hipKernelNodeAttributePriority;
   CUkernelNodeAttrID KernelNodeAttributePriority = CU_KERNEL_NODE_ATTRIBUTE_PRIORITY;
+
+  // CHECK: hipGraphNodeType GRAPH_NODE_TYPE_BATCH_MEM_OP = hipGraphNodeTypeBatchMemOp;
+  CUgraphNodeType GRAPH_NODE_TYPE_BATCH_MEM_OP = CU_GRAPH_NODE_TYPE_BATCH_MEM_OP;
+
+  // CHECK: hipStreamBatchMemOpType STREAM_MEM_OP_BARRIER = hipStreamMemOpBarrier;
+  CUstreamBatchMemOpType STREAM_MEM_OP_BARRIER = CU_STREAM_MEM_OP_BARRIER;
 #endif
 
 #if CUDA_VERSION >= 11080

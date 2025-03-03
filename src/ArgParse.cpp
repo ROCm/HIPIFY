@@ -214,7 +214,7 @@ cl::opt<bool> Versions("versions",
   cl::value_desc("versions"),
   cl::cat(ToolTemplateCategory));
 
-// NOTE: A temporary solution; to remove after fixing https://github.com/ROCmSoftwarePlatform/hipBLAS/issues/366
+// NOTE: A temporary solution; to remove after fixing https://github.com/ROCm/hipBLAS/issues/366
 cl::opt<bool> UseHipDataType("use-hip-data-types",
   cl::desc("Use 'hipDataType' instead of 'hipblasDatatype_t' or 'rocblas_datatype'"),
   cl::value_desc("use-hip-data-types"),

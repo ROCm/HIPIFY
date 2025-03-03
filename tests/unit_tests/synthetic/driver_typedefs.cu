@@ -60,6 +60,9 @@ int main() {
 
   // CHECK: HIP_MEMSET_NODE_PARAMS MEMSET_NODE_PARAMS_v1;
   CUDA_MEMSET_NODE_PARAMS_v1 MEMSET_NODE_PARAMS_v1;
+
+  // CHECK: hipStreamBatchMemOpParams streamBatchMemOpParams_v1;
+  CUstreamBatchMemOpParams_v1 streamBatchMemOpParams_v1;
 #endif
 
   return 0;

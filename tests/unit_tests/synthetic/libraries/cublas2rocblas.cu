@@ -157,7 +157,7 @@ int main() {
   void* image = nullptr;
   void* image_2 = nullptr;
 
-  // https://github.com/ROCmSoftwarePlatform/rocBLAS/issues/1281
+  // https://github.com/ROCm/rocBLAS/issues/1281
   // TODO: Apply the chosen typecasting of int to rocblas_int arguments
 
   /*

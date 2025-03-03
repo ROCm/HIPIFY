@@ -15,7 +15,7 @@
 #endif
 
 int main() {
-  printf("17.1. cuSPARSE API to hipSPARSE API synthetic test\n");
+  printf("17.12000. cuSPARSE API to hipSPARSE API synthetic test\n");
 
   // CHECK: hipsparseStatus_t status_t;
   cusparseStatus_t status_t;

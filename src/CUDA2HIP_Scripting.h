@@ -32,6 +32,7 @@ namespace hipify {
     e_HIP_SYMBOL,
     e_reinterpret_cast,
     e_reinterpret_cast_size_t,
+    e_const_cast_char_pp,
     e_static_cast_uint64_t,
     e_int32_t,
     e_int64_t,

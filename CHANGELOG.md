@@ -3,6 +3,28 @@
 Documentation for HIPIFY is available at
 [https://rocmdocs.amd.com/projects/HIPIFY/en/latest/](https://rocmdocs.amd.com/projects/HIPIFY/en/latest/).
 
+## HIPIFY for ROCm 6.4.0
+
+### Added
+
+* CUDA 12.6.3 support
+* cuDNN 9.7.0 support
+* cuTENSOR 2.0.2.1 support
+* LLVM 19.1.7 support
+* Full support for direct hipification of `cuRAND` into `rocRAND` under the `--roc` option
+* [#1617](https://github.com/ROCm/HIPIFY/issues/1617) Support for `fp8` math device/host API
+
+### Resolved issues
+
+* `MIOpen` support in hipify-perl under the `-miopen` option
+* Use `const_cast<const char**>` for the last arguments in the `hiprtcCreateProgram` and `hiprtcCompileProgram` function calls, as in CUDA, they are of the `const char* const*` type
+* [#1769](https://github.com/ROCm/HIPIFY/issues/1769) Support for `fp16` device/host API
+* [#1800](https://github.com/ROCm/HIPIFY/issues/1800) Fix instructions on building LLVM for HIPIFY on Linux
+
+### Known issues
+
+* [#833](https://github.com/ROCm/HIPIFY/issues/833) `hipify-clang` build failure against LLVM 15-18 on `Ubuntu`, `CentOS`, and `Fedora`
+
 ## HIPIFY for ROCm 6.3.1
 
 ### Added
@@ -27,7 +49,7 @@ Documentation for HIPIFY is available at
 * `rocBLAS` 64-bit APIs support
 * Initial support for direct hipification of `cuDNN` into `MIOpen` under the `--roc` option
 * Initial support for direct hipification of `cuRAND` into `rocRAND` under the `--roc` option
-* [#1650] Added a filtering ability for the supplementary hipification scripts
+* [#1650](https://github.com/ROCm/HIPIFY/pull/1650) Added a filtering ability for the supplementary hipification scripts
 
 ### Resolved issues
 
@@ -35,7 +57,7 @@ Documentation for HIPIFY is available at
 
 ### Known issues
 
-* [#1617] Support for `fp8` data types
+* [#1617](https://github.com/ROCm/HIPIFY/issues/1617) Support for `fp8` data types
 
 ## HIPIFY for ROCm 6.2.4
 
@@ -122,8 +144,8 @@ Documentation for HIPIFY is available at
 
 ### Known issues
 
-* [#837] Added a new function to call transformation type "additional non-const arg"
-* [#1014] Added a new function to call transformation type "replace argument with a const"
+* [#837](https://github.com/ROCm/HIPIFY/issues/837) Added a new function to call transformation type "additional non-const arg"
+* [#1014](https://github.com/ROCm/HIPIFY/issues/1014) Added a new function to call transformation type "replace argument with a const"
 
 ## HIPIFY for ROCm 5.7.0
 
@@ -143,8 +165,8 @@ Documentation for HIPIFY is available at
 
 ### Known issues
 
-* [#822] Added a new function to call transformation type "additional const by value arg"
-* [#830] Added a new function to call transformation type "move arg from place X to place Y"
+* [#822](https://github.com/ROCm/HIPIFY/issues/822) Added a new function to call transformation type "additional const by value arg"
+* [#830](https://github.com/ROCm/HIPIFY/issues/830) Added a new function to call transformation type "move arg from place X to place Y"
 
 ## HIPIFY for ROCm 5.6.0
 

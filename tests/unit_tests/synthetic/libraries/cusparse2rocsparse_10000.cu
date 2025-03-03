@@ -10,7 +10,7 @@
 // CHECK-NOT: #include "rocsparse.h"
 
 int main() {
-  printf("18.1. cuSPARSE API to rocSPARSE API synthetic test\n");
+  printf("18.10000. cuSPARSE API to rocSPARSE API synthetic test\n");
 
   // CHECK: _rocsparse_handle *handle = nullptr;
   // CHECK-NEXT: rocsparse_handle handle_t;

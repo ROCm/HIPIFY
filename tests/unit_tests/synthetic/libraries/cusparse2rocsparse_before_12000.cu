@@ -10,7 +10,7 @@
 // CHECK-NOT: #include "rocsparse.h"
 
 int main() {
-  printf("18.1. cuSPARSE API to rocSPARSE API synthetic test\n");
+  printf("18.before.12000. cuSPARSE API to rocSPARSE API synthetic test\n");
 
   // CHECK: rocsparse_status status_t;
   cusparseStatus_t status_t;

@@ -13,7 +13,7 @@
 #endif
 
 int main() {
-  printf("20. cuBLASLt API to hipBLASLt API synthetic test\n");
+  printf("21. cuBLASLt API to hipBLASLt API synthetic test\n");
 
   // CHECK: hipblasLtHandle_t blasLtHandle;
   cublasLtHandle_t blasLtHandle;
