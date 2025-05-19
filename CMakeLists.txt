@@ -51,6 +51,34 @@ endif()
 list(APPEND CMAKE_MODULE_PATH ${LLVM_CMAKE_DIR})
 include(AddLLVM)
 
+# ROCM version from hipify sources
+# Maintain a record of the HIP latest version in CMakeLists.txt as well
+set(HIP_VERSION_MAJOR_DEFAULT 6)
+set(HIP_VERSION_MINOR_DEFAULT 4)
+set(HIP_VERSION_PATCH_DEFAULT 0)
+
+# Check if rocm is installed and grab rocm version if installed, else use the default values set above
+set(ROCM_VERSION_FILE /opt/rocm/share/hip/version)
+if(EXISTS "${ROCM_VERSION_FILE}")
+  file(READ "${ROCM_VERSION_FILE}" CONTENTS)
+  # Extract HIP_VERSION_MAJOR, HIP_VERSION_MINOR and HIP_VERSION_PATCH
+  string(REGEX MATCH "HIP_VERSION_MAJOR\\s*=\\s*([^\n\r]+)" _major_match "${CONTENTS}")
+  set(ROCM_VERSION_MAJOR "${CMAKE_MATCH_1}")
+  string(REGEX MATCH "HIP_VERSION_MINOR\\s*=\\s*([^\n\r]+)" _minor_match "${CONTENTS}")
+  set(ROCM_VERSION_MINOR "${CMAKE_MATCH_1}")
+  string(REGEX MATCH "HIP_VERSION_PATCH\\s*=\\s*([^\n\r]+)" _patch_match "${CONTENTS}")
+  set(ROCM_VERSION_PATCH "${CMAKE_MATCH_1}")
+else()
+  message(STATUS "ROCM not installed; grab the default rocm versiom from HIPIFY sources")
+  set(ROCM_VERSION_MAJOR "${HIP_VERSION_MAJOR_DEFAULT}")
+  set(ROCM_VERSION_MINOR "${HIP_VERSION_MINOR_DEFAULT}")
+  set(ROCM_VERSION_PATCH "${HIP_VERSION_PATCH_DEFAULT}")
+endif()
+# Display the ROCM version
+message(STATUS "ROCM_VERSION_MAJOR = ${ROCM_VERSION_MAJOR}")
+message(STATUS "ROCM_VERSION_MINOR = ${ROCM_VERSION_MINOR}")
+message(STATUS "ROCM_VERSION_PATCH = ${ROCM_VERSION_PATCH}")
+
 if (NOT HIPIFY_CLANG_TESTS_ONLY)
   if(MSVC AND MSVC_VERSION VERSION_LESS "1900")
     message(SEND_ERROR "hipify-clang could be built by Visual Studio 14 2015 or higher.")
