@@ -57,6 +57,7 @@
 |`CUDA_ERROR_ALREADY_MAPPED`| | | | |`hipErrorAlreadyMapped`|1.6.0| | | | |
 |`CUDA_ERROR_ARRAY_IS_MAPPED`| | | | |`hipErrorArrayIsMapped`|1.6.0| | | | |
 |`CUDA_ERROR_ASSERT`| | | | |`hipErrorAssert`|1.9.0| | | | |
+|`CUDA_ERROR_CALL_REQUIRES_NEWER_DRIVER`|13.0| | | | | | | | | |
 |`CUDA_ERROR_CAPTURED_EVENT`|10.0| | | |`hipErrorCapturedEvent`|4.3.0| | | | |
 |`CUDA_ERROR_CDP_NOT_SUPPORTED`|12.0| | | | | | | | | |
 |`CUDA_ERROR_CDP_VERSION_MISMATCH`|12.0| | | | | | | | | |
@@ -327,6 +328,20 @@
 |`CU_ARRAY_SPARSE_SUBRESOURCE_TYPE_MIPTAIL`|11.1| | | |`hipArraySparseSubresourceTypeMiptail`|5.2.0| | | | |
 |`CU_ARRAY_SPARSE_SUBRESOURCE_TYPE_SPARSE_LEVEL`|11.1| | | |`hipArraySparseSubresourceTypeSparseLevel`|5.2.0| | | | |
 |`CU_ASYNC_NOTIFICATION_TYPE_OVER_BUDGET`|12.4| | | | | | | | | |
+|`CU_ATOMIC_OPERATION_AND`|13.0| | | | | | | | | |
+|`CU_ATOMIC_OPERATION_CAS`|13.0| | | | | | | | | |
+|`CU_ATOMIC_OPERATION_EXCHANGE`|13.0| | | | | | | | | |
+|`CU_ATOMIC_OPERATION_FLOAT_ADD`|13.0| | | | | | | | | |
+|`CU_ATOMIC_OPERATION_FLOAT_MAX`|13.0| | | | | | | | | |
+|`CU_ATOMIC_OPERATION_FLOAT_MIN`|13.0| | | | | | | | | |
+|`CU_ATOMIC_OPERATION_INTEGER_ADD`|13.0| | | | | | | | | |
+|`CU_ATOMIC_OPERATION_INTEGER_DECREMENT`|13.0| | | | | | | | | |
+|`CU_ATOMIC_OPERATION_INTEGER_INCREMENT`|13.0| | | | | | | | | |
+|`CU_ATOMIC_OPERATION_INTEGER_MAX`|13.0| | | | | | | | | |
+|`CU_ATOMIC_OPERATION_INTEGER_MIN`|13.0| | | | | | | | | |
+|`CU_ATOMIC_OPERATION_MAX`|13.0| | | | | | | | | |
+|`CU_ATOMIC_OPERATION_OR`|13.0| | | | | | | | | |
+|`CU_ATOMIC_OPERATION_XOR`|13.0| | | | | | | | | |
 |`CU_CLUSTER_SCHEDULING_POLICY_DEFAULT`|11.8| | | | | | | | | |
 |`CU_CLUSTER_SCHEDULING_POLICY_LOAD_BALANCING`|11.8| | | | | | | | | |
 |`CU_CLUSTER_SCHEDULING_POLICY_SPREAD`|11.8| | | | | | | | | |
@@ -555,6 +570,7 @@
 |`CU_DEVICE_P2P_ATTRIBUTE_ARRAY_ACCESS_ACCESS_SUPPORTED`|9.2|10.0| |10.1|`hipDevP2PAttrHipArrayAccessSupported`|3.8.0| | | | |
 |`CU_DEVICE_P2P_ATTRIBUTE_CUDA_ARRAY_ACCESS_SUPPORTED`|10.0| | | |`hipDevP2PAttrHipArrayAccessSupported`|3.8.0| | | | |
 |`CU_DEVICE_P2P_ATTRIBUTE_NATIVE_ATOMIC_SUPPORTED`|8.0| | | |`hipDevP2PAttrNativeAtomicSupported`|3.8.0| | | | |
+|`CU_DEVICE_P2P_ATTRIBUTE_ONLY_PARTIAL_NATIVE_ATOMIC_SUPPORTED`|13.0| | | |`hipDevP2PAttrOnlyPartialNativeAtomicSupported`| | | | | |
 |`CU_DEVICE_P2P_ATTRIBUTE_PERFORMANCE_RANK`|8.0| | | |`hipDevP2PAttrPerformanceRank`|3.8.0| | | | |
 |`CU_DEV_RESOURCE_TYPE_INVALID`|12.4| | | | | | | | | |
 |`CU_DEV_RESOURCE_TYPE_MAX`|12.4| | | | | | | | | |
@@ -847,6 +863,7 @@
 |`CU_LAUNCH_ATTRIBUTE_MAX`|12.1| | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN`|12.0| | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP`|12.0| | | | | | | | | |
+|`CU_LAUNCH_ATTRIBUTE_NVLINK_UTIL_CENTRIC_SCHEDULING`|13.0| | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_PREFERRED_CLUSTER_DIMENSION`|12.8| | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_PREFERRED_SHARED_MEMORY_CARVEOUT`|12.5| | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_PRIORITY`|11.8| | | |`hipLaunchAttributePriority`|6.2.0| | | | |
@@ -1192,6 +1209,8 @@
 |`CUasyncNotificationInfo_st`|12.4| | | | | | | | | |
 |`CUasyncNotificationType`|12.4| | | | | | | | | |
 |`CUasyncNotificationType_enum`|12.4| | | | | | | | | |
+|`CUatomicOperation`|13.0| | | | | | | | | |
+|`CUatomicOperation_enum`|13.0| | | | | | | | | |
 |`CUcheckpointCheckpointArgs`|12.8| | | | | | | | | |
 |`CUcheckpointCheckpointArgs_st`|12.8| | | | | | | | | |
 |`CUcheckpointLockArgs`|12.8| | | | | | | | | |
