@@ -8771,6 +8771,7 @@ sub simpleSubstitutions {
     subst("CU_MEM_HANDLE_TYPE_WIN32_KMT", "hipMemHandleTypeWin32Kmt", "numeric_literal");
     subst("CU_MEM_LOCATION_TYPE_DEVICE", "hipMemLocationTypeDevice", "numeric_literal");
     subst("CU_MEM_LOCATION_TYPE_INVALID", "hipMemLocationTypeInvalid", "numeric_literal");
+    subst("CU_MEM_LOCATION_TYPE_NONE", "hipMemLocationTypeInvalid", "numeric_literal");
     subst("CU_MEM_OPERATION_TYPE_MAP", "hipMemOperationTypeMap", "numeric_literal");
     subst("CU_MEM_OPERATION_TYPE_UNMAP", "hipMemOperationTypeUnmap", "numeric_literal");
     subst("CU_MEM_RANGE_ATTRIBUTE_ACCESSED_BY", "hipMemRangeAttributeAccessedBy", "numeric_literal");
@@ -12421,9 +12422,13 @@ sub warnRemovedFunctions {
     "CUcheckpointRestoreArgs",
     "CUcheckpointLockArgs_st",
     "CUcheckpointLockArgs",
+    "CUcheckpointGpuPair_st",
+    "CUcheckpointGpuPair",
     "CUcheckpointCheckpointArgs_st",
     "CUcheckpointCheckpointArgs",
     "CUatomicOperation_enum",
+    "CUatomicOperationCapability_enum",
+    "CUatomicOperationCapability",
     "CUatomicOperation",
     "CUasyncNotificationType_enum",
     "CUasyncNotificationType",
@@ -12567,6 +12572,7 @@ sub warnRemovedFunctions {
     "CU_MEM_DECOMPRESS_ALGORITHM_DEFLATE",
     "CU_MEM_CREATE_USAGE_TILE_POOL",
     "CU_MEM_CREATE_USAGE_HW_DECOMPRESS",
+    "CU_MEM_ALLOCATION_TYPE_MANAGED",
     "CU_MEM_ACCESS_FLAGS_PROT_MAX",
     "CU_MEMCPY_SRC_ACCESS_ORDER_STREAM",
     "CU_MEMCPY_SRC_ACCESS_ORDER_MAX",
@@ -12669,6 +12675,7 @@ sub warnRemovedFunctions {
     "CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D11_KEYED_MUTEX",
     "CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D11_FENCE",
     "CU_EXTERNAL_MEMORY_HANDLE_TYPE_NVSCIBUF",
+    "CU_EXTERNAL_MEMORY_HANDLE_TYPE_DMABUF_FD",
     "CU_EXEC_AFFINITY_TYPE_SM_COUNT",
     "CU_EXEC_AFFINITY_TYPE_MAX",
     "CU_EVENT_WAIT_EXTERNAL",
@@ -12883,6 +12890,13 @@ sub warnRemovedFunctions {
     "CU_ATOMIC_OPERATION_EXCHANGE",
     "CU_ATOMIC_OPERATION_CAS",
     "CU_ATOMIC_OPERATION_AND",
+    "CU_ATOMIC_CAPABILITY_VECTOR_32x4",
+    "CU_ATOMIC_CAPABILITY_UNSIGNED",
+    "CU_ATOMIC_CAPABILITY_SIGNED",
+    "CU_ATOMIC_CAPABILITY_SCALAR_64",
+    "CU_ATOMIC_CAPABILITY_SCALAR_32",
+    "CU_ATOMIC_CAPABILITY_SCALAR_128",
+    "CU_ATOMIC_CAPABILITY_REDUCTION",
     "CU_ASYNC_NOTIFICATION_TYPE_OVER_BUDGET",
     "CU_ARRAY_SPARSE_PROPERTIES_SINGLE_MIPTAIL",
     "CU_AD_FORMAT_YUY2",
