@@ -328,6 +328,13 @@
 |`CU_ARRAY_SPARSE_SUBRESOURCE_TYPE_MIPTAIL`|11.1| | | |`hipArraySparseSubresourceTypeMiptail`|5.2.0| | | | |
 |`CU_ARRAY_SPARSE_SUBRESOURCE_TYPE_SPARSE_LEVEL`|11.1| | | |`hipArraySparseSubresourceTypeSparseLevel`|5.2.0| | | | |
 |`CU_ASYNC_NOTIFICATION_TYPE_OVER_BUDGET`|12.4| | | | | | | | | |
+|`CU_ATOMIC_CAPABILITY_REDUCTION`|13.0| | | | | | | | | |
+|`CU_ATOMIC_CAPABILITY_SCALAR_128`|13.0| | | | | | | | | |
+|`CU_ATOMIC_CAPABILITY_SCALAR_32`|13.0| | | | | | | | | |
+|`CU_ATOMIC_CAPABILITY_SCALAR_64`|13.0| | | | | | | | | |
+|`CU_ATOMIC_CAPABILITY_SIGNED`|13.0| | | | | | | | | |
+|`CU_ATOMIC_CAPABILITY_UNSIGNED`|13.0| | | | | | | | | |
+|`CU_ATOMIC_CAPABILITY_VECTOR_32x4`|13.0| | | | | | | | | |
 |`CU_ATOMIC_OPERATION_AND`|13.0| | | | | | | | | |
 |`CU_ATOMIC_OPERATION_CAS`|13.0| | | | | | | | | |
 |`CU_ATOMIC_OPERATION_EXCHANGE`|13.0| | | | | | | | | |
@@ -672,6 +679,7 @@
 |`CU_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_RESOURCE_KMT`|10.2| | | |`hipExternalMemoryHandleTypeD3D11ResourceKmt`|4.3.0| | | | |
 |`CU_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP`|10.0| | | |`hipExternalMemoryHandleTypeD3D12Heap`|4.3.0| | | | |
 |`CU_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE`|10.0| | | |`hipExternalMemoryHandleTypeD3D12Resource`|4.3.0| | | | |
+|`CU_EXTERNAL_MEMORY_HANDLE_TYPE_DMABUF_FD`|13.0| | | | | | | | | |
 |`CU_EXTERNAL_MEMORY_HANDLE_TYPE_NVSCIBUF`|10.2| | | | | | | | | |
 |`CU_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD`|10.0| | | |`hipExternalMemoryHandleTypeOpaqueFd`|4.3.0| | | | |
 |`CU_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32`|10.0| | | |`hipExternalMemoryHandleTypeOpaqueWin32`|4.3.0| | | | |
@@ -935,6 +943,7 @@
 |`CU_MEM_ADVISE_UNSET_PREFERRED_LOCATION`|8.0| | | |`hipMemAdviseUnsetPreferredLocation`|3.7.0| | | | |
 |`CU_MEM_ADVISE_UNSET_READ_MOSTLY`|8.0| | | |`hipMemAdviseUnsetReadMostly`|3.7.0| | | | |
 |`CU_MEM_ALLOCATION_TYPE_INVALID`|10.2| | | |`hipMemAllocationTypeInvalid`|5.2.0| | | | |
+|`CU_MEM_ALLOCATION_TYPE_MANAGED`|13.0| | | | | | | | | |
 |`CU_MEM_ALLOCATION_TYPE_MAX`|10.2| | | |`hipMemAllocationTypeMax`|5.2.0| | | | |
 |`CU_MEM_ALLOCATION_TYPE_PINNED`|10.2| | | |`hipMemAllocationTypePinned`|5.2.0| | | | |
 |`CU_MEM_ALLOC_GRANULARITY_MINIMUM`|10.2| | | |`hipMemAllocationGranularityMinimum`|5.2.0| | | | |
@@ -961,6 +970,7 @@
 |`CU_MEM_LOCATION_TYPE_HOST_NUMA_CURRENT`|12.2| | | | | | | | | |
 |`CU_MEM_LOCATION_TYPE_INVALID`|10.2| | | |`hipMemLocationTypeInvalid`|5.2.0| | | | |
 |`CU_MEM_LOCATION_TYPE_MAX`|10.2| | | | | | | | | |
+|`CU_MEM_LOCATION_TYPE_NONE`|13.0| | | |`hipMemLocationTypeInvalid`|5.2.0| | | | |
 |`CU_MEM_OPERATION_TYPE_MAP`|11.1| | | |`hipMemOperationTypeMap`|5.2.0| | | | |
 |`CU_MEM_OPERATION_TYPE_UNMAP`|11.1| | | |`hipMemOperationTypeUnmap`|5.2.0| | | | |
 |`CU_MEM_POOL_CREATE_USAGE_HW_DECOMPRESS`|12.8| | | | | | | | | |
@@ -1210,9 +1220,13 @@
 |`CUasyncNotificationType`|12.4| | | | | | | | | |
 |`CUasyncNotificationType_enum`|12.4| | | | | | | | | |
 |`CUatomicOperation`|13.0| | | | | | | | | |
+|`CUatomicOperationCapability`|13.0| | | | | | | | | |
+|`CUatomicOperationCapability_enum`|13.0| | | | | | | | | |
 |`CUatomicOperation_enum`|13.0| | | | | | | | | |
 |`CUcheckpointCheckpointArgs`|12.8| | | | | | | | | |
 |`CUcheckpointCheckpointArgs_st`|12.8| | | | | | | | | |
+|`CUcheckpointGpuPair`|13.0| | | | | | | | | |
+|`CUcheckpointGpuPair_st`|13.0| | | | | | | | | |
 |`CUcheckpointLockArgs`|12.8| | | | | | | | | |
 |`CUcheckpointLockArgs_st`|12.8| | | | | | | | | |
 |`CUcheckpointRestoreArgs`|12.8| | | | | | | | | |
