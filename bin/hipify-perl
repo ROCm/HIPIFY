@@ -4233,8 +4233,6 @@ sub simpleSubstitutions {
     subst("cudaSetDevice", "hipSetDevice", "device");
     subst("cudaSetDeviceFlags", "hipSetDeviceFlags", "device");
     subst("cudaSetValidDevices", "hipSetValidDevices", "device");
-    subst("cuCtxCreate", "hipCtxCreate", "context");
-    subst("cuCtxCreate_v2", "hipCtxCreate", "context");
     subst("cuCtxDestroy", "hipCtxDestroy", "context");
     subst("cuCtxDestroy_v2", "hipCtxDestroy", "context");
     subst("cuCtxGetApiVersion", "hipCtxGetApiVersion", "context");
@@ -4578,7 +4576,6 @@ sub simpleSubstitutions {
     subst("cuGraphAddMemFreeNode", "hipDrvGraphAddMemFreeNode", "graph");
     subst("cuGraphAddMemcpyNode", "hipDrvGraphAddMemcpyNode", "graph");
     subst("cuGraphAddMemsetNode", "hipDrvGraphAddMemsetNode", "graph");
-    subst("cuGraphAddNode", "hipGraphAddNode", "graph");
     subst("cuGraphBatchMemOpNodeGetParams", "hipGraphBatchMemOpNodeGetParams", "graph");
     subst("cuGraphBatchMemOpNodeSetParams", "hipGraphBatchMemOpNodeSetParams", "graph");
     subst("cuGraphChildGraphNodeGetGraph", "hipGraphChildGraphNodeGetGraph", "graph");
@@ -12037,7 +12034,10 @@ sub warnRemovedFunctions {
     "cuMemcpy3DPeer",
     "cuMemcpy3DBatchAsync",
     "cuMemcpy",
+    "cuMemSetMemPool",
     "cuMemPrefetchAsync_v2",
+    "cuMemGetMemPool",
+    "cuMemGetDefaultMemPool",
     "cuMemBatchDecompressAsync",
     "cuMemAdvise_v2",
     "cuLogsUnregisterCallback",
@@ -12087,6 +12087,7 @@ sub warnRemovedFunctions {
     "cuGraphGetEdges_v2",
     "cuGraphConditionalHandleCreate",
     "cuGraphAddNode_v2",
+    "cuGraphAddNode",
     "cuGraphAddDependencies_v2",
     "cuGLUnregisterBufferObject",
     "cuGLUnmapBufferObjectAsync",
@@ -12125,6 +12126,7 @@ sub warnRemovedFunctions {
     "cuDeviceGetProperties",
     "cuDeviceGetNvSciSyncAttributes",
     "cuDeviceGetLuid",
+    "cuDeviceGetHostAtomicCapabilities",
     "cuDeviceGetExecAffinitySupport",
     "cuDeviceGetDevResource",
     "cuDevSmResourceSplitByCount",
@@ -12165,15 +12167,19 @@ sub warnRemovedFunctions {
     "cuD3D10CtxCreateOnDevice",
     "cuD3D10CtxCreate",
     "cuCtxWaitEvent",
+    "cuCtxSynchronize_v2",
     "cuCtxSetFlags",
     "cuCtxResetPersistingL2Cache",
     "cuCtxGetId",
     "cuCtxGetExecAffinity",
+    "cuCtxGetDevice_v2",
     "cuCtxGetDevResource",
     "cuCtxFromGreenCtx",
     "cuCtxDetach",
     "cuCtxCreate_v4",
     "cuCtxCreate_v3",
+    "cuCtxCreate_v2",
+    "cuCtxCreate",
     "cuCtxAttach",
     "cuCoredumpSetAttributeGlobal",
     "cuCoredumpSetAttribute",
