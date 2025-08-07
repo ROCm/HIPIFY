@@ -1641,6 +1641,7 @@
 |`cuDeviceGetCount`| | | | |`hipGetDeviceCount`|1.6.0| | | | |
 |`cuDeviceGetDefaultMemPool`|11.2| | | |`hipDeviceGetDefaultMemPool`|5.2.0| | | | |
 |`cuDeviceGetExecAffinitySupport`|11.4| | | | | | | | | |
+|`cuDeviceGetHostAtomicCapabilities`|13.0| | | | | | | | | |
 |`cuDeviceGetLuid`|10.0| | | | | | | | | |
 |`cuDeviceGetMemPool`|11.2| | | |`hipDeviceGetMemPool`|5.2.0| | | | |
 |`cuDeviceGetName`| | | | |`hipDeviceGetName`|1.6.0| | | | |
@@ -1677,8 +1678,8 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
-|`cuCtxCreate`| | | | |`hipCtxCreate`|1.6.0|1.9.0| | | |
-|`cuCtxCreate_v2`| | | | |`hipCtxCreate`|1.6.0|1.9.0| | | |
+|`cuCtxCreate`| | |13.0| | | | | | | |
+|`cuCtxCreate_v2`| | | | | | | | | | |
 |`cuCtxCreate_v3`|11.4| | | | | | | | | |
 |`cuCtxCreate_v4`|12.5| | | | | | | | | |
 |`cuCtxDestroy`| | | | |`hipCtxDestroy`|1.6.0|1.9.0| | | |
@@ -1687,6 +1688,7 @@
 |`cuCtxGetCacheConfig`| | | | |`hipCtxGetCacheConfig`|1.9.0|1.9.0| | | |
 |`cuCtxGetCurrent`| | | | |`hipCtxGetCurrent`|1.6.0|1.9.0| | | |
 |`cuCtxGetDevice`| | | | |`hipCtxGetDevice`|1.6.0|1.9.0| | | |
+|`cuCtxGetDevice_v2`|13.0| | | | | | | | | |
 |`cuCtxGetExecAffinity`|11.4| | | | | | | | | |
 |`cuCtxGetFlags`| | | | |`hipCtxGetFlags`|1.9.0|1.9.0| | | |
 |`cuCtxGetId`|12.0| | | | | | | | | |
@@ -1704,6 +1706,7 @@
 |`cuCtxSetLimit`| | | | |`hipDeviceSetLimit`|5.3.0| | | | |
 |`cuCtxSetSharedMemConfig`| | | |12.4|`hipCtxSetSharedMemConfig`|1.9.0|1.9.0| | | |
 |`cuCtxSynchronize`| | | | |`hipCtxSynchronize`|1.9.0|1.9.0| | | |
+|`cuCtxSynchronize_v2`|13.0| | | | | | | | | |
 |`cuCtxWaitEvent`|12.5| | | | | | | | | |
 
 ## **9. Context Management [DEPRECATED]**
@@ -1824,7 +1827,7 @@
 |`cuMemcpy3D`| | | | |`hipDrvMemcpy3D`|3.5.0| | | | |
 |`cuMemcpy3DAsync`| | | | |`hipDrvMemcpy3DAsync`|3.5.0| | | | |
 |`cuMemcpy3DAsync_v2`| | | | |`hipDrvMemcpy3DAsync`|3.5.0| | | | |
-|`cuMemcpy3DBatchAsync`|12.8| | | | | | | | | |
+|`cuMemcpy3DBatchAsync`|12.8| |13.0| | | | | | | |
 |`cuMemcpy3DPeer`| | | | | | | | | | |
 |`cuMemcpy3DPeerAsync`| | | | | | | | | | |
 |`cuMemcpy3D_v2`| | | | |`hipDrvMemcpy3D`|3.5.0| | | | |
@@ -1837,7 +1840,7 @@
 |`cuMemcpyAtoHAsync`| | | | |`hipMemcpyAtoHAsync`|6.2.0| | | | |
 |`cuMemcpyAtoHAsync_v2`| | | | |`hipMemcpyAtoHAsync`|6.2.0| | | | |
 |`cuMemcpyAtoH_v2`| | | | |`hipMemcpyAtoH`|1.9.0| | | | |
-|`cuMemcpyBatchAsync`|12.8| | | | | | | | | |
+|`cuMemcpyBatchAsync`|12.8| |13.0| | | | | | | |
 |`cuMemcpyDtoA`| | | | |`hipMemcpyDtoA`|6.2.0| | | | |
 |`cuMemcpyDtoA_v2`| | | | |`hipMemcpyDtoA`|6.2.0| | | | |
 |`cuMemcpyDtoD`| | | | |`hipMemcpyDtoD`|1.6.0| | | | |
@@ -1907,6 +1910,8 @@
 |`cuMemAllocAsync`|11.2| | | |`hipMallocAsync`|5.2.0| | | | |
 |`cuMemAllocFromPoolAsync`|11.2| | | |`hipMallocFromPoolAsync`|5.2.0| | | | |
 |`cuMemFreeAsync`|11.2| | | |`hipFreeAsync`|5.2.0| | | | |
+|`cuMemGetDefaultMemPool`|13.0| | | | | | | | | |
+|`cuMemGetMemPool`|13.0| | | | | | | | | |
 |`cuMemPoolCreate`|11.2| | | |`hipMemPoolCreate`|5.2.0| | | | |
 |`cuMemPoolDestroy`|11.2| | | |`hipMemPoolDestroy`|5.2.0| | | | |
 |`cuMemPoolExportPointer`|11.2| | | |`hipMemPoolExportPointer`|5.2.0| | | | |
@@ -1918,6 +1923,7 @@
 |`cuMemPoolSetAccess`|11.2| | | |`hipMemPoolSetAccess`|5.2.0| | | | |
 |`cuMemPoolSetAttribute`|11.2| | | |`hipMemPoolSetAttribute`|5.2.0| | | | |
 |`cuMemPoolTrimTo`|11.2| | | |`hipMemPoolTrimTo`|5.2.0| | | | |
+|`cuMemSetMemPool`|13.0| | | | | | | | | |
 
 ## **16. Multicast Object Management**
 
@@ -2077,7 +2083,7 @@
 |`cuGraphAddMemFreeNode`|11.4| | | |`hipDrvGraphAddMemFreeNode`|6.3.0| | | | |
 |`cuGraphAddMemcpyNode`|10.0| | | |`hipDrvGraphAddMemcpyNode`|6.0.0| | | | |
 |`cuGraphAddMemsetNode`|10.0| | | |`hipDrvGraphAddMemsetNode`|6.1.0| |7.0.0| | |
-|`cuGraphAddNode`|12.2| | | |`hipGraphAddNode`|6.2.0| | | | |
+|`cuGraphAddNode`|12.2| |13.0| | | | | | | |
 |`cuGraphAddNode_v2`|12.3| | | | | | | | | |
 |`cuGraphBatchMemOpNodeGetParams`|11.7| | | |`hipGraphBatchMemOpNodeGetParams`|6.4.0| | | | |
 |`cuGraphBatchMemOpNodeSetParams`|11.7| | | |`hipGraphBatchMemOpNodeSetParams`|6.4.0| | | | |
