@@ -1039,6 +1039,7 @@ int main() {
   CUmem_range_attribute MemoryRangeAttribute;
   CUmem_advise MemoryAdvise;
 
+#if CUDA_VERSION < 13000
   // CUDA: CUresult CUDAAPI cuMemAdvise(CUdeviceptr devPtr, size_t count, CUmem_advise advice, CUdevice device);
   // HIP: hipError_t hipMemAdvise(const void* dev_ptr, size_t count, hipMemoryAdvise advice, int device);
   // CHECK: result = hipMemAdvise(deviceptr, bytes, MemoryAdvise, device);
@@ -1048,6 +1049,7 @@ int main() {
   // HIP: hipError_t hipMemPrefetchAsync(const void* dev_ptr, size_t count, int device, hipStream_t stream __dparm(0));
   // CHECK: result = hipMemPrefetchAsync(deviceptr, bytes, device, stream);
   result = cuMemPrefetchAsync(deviceptr, bytes, device, stream);
+#endif
 
   // CUDA: CUresult CUDAAPI cuMemRangeGetAttribute(void *data, size_t dataSize, CUmem_range_attribute attribute, CUdeviceptr devPtr, size_t count);
   // HIP: hipError_t hipMemRangeGetAttribute(void* data, size_t data_size, hipMemRangeAttribute attribute, const void* dev_ptr, size_t count);

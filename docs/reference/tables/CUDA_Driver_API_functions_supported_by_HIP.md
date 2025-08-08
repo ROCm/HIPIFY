@@ -1940,10 +1940,13 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
-|`cuMemAdvise`|8.0| | | |`hipMemAdvise`|3.7.0| | | | |
+|`cuMemAdvise`|8.0| |13.0| | | | | | | |
 |`cuMemAdvise_v2`|12.2| | | | | | | | | |
-|`cuMemPrefetchAsync`|8.0| | | |`hipMemPrefetchAsync`|3.7.0| | | | |
+|`cuMemDiscardAndPrefetchBatchAsync`|13.0| | | | | | | | | |
+|`cuMemDiscardBatchAsync`|13.0| | | | | | | | | |
+|`cuMemPrefetchAsync`|8.0| |13.0| | | | | | | |
 |`cuMemPrefetchAsync_v2`|12.2| | | | | | | | | |
+|`cuMemPrefetchBatchAsync`|13.0| | | | | | | | | |
 |`cuMemRangeGetAttribute`|8.0| | | |`hipMemRangeGetAttribute`|3.7.0| | | | |
 |`cuMemRangeGetAttributes`|8.0| | | |`hipMemRangeGetAttributes`|3.7.0| | | | |
 |`cuPointerGetAttribute`| | | | |`hipPointerGetAttribute`|5.0.0| | | | |

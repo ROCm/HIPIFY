@@ -474,12 +474,16 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
 
   // 17. Unified Addressing
   // cudaMemAdvise
-  {"cuMemAdvise",                                                 {"hipMemAdvise",                                                "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED}},
+  // TODO: report unsupported only for CUDA >= 13000
+  {"cuMemAdvise",                                                 {"hipMemAdvise",                                                "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED, HIP_UNSUPPORTED}},
   // cudaMemAdvise_v2
+  // TODO: report unsupported only for CUDA >= 13000
   {"cuMemAdvise_v2",                                              {"hipMemAdvise_v2",                                             "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED, HIP_UNSUPPORTED}},
   // cudaMemPrefetchAsync
-  {"cuMemPrefetchAsync",                                          {"hipMemPrefetchAsync",                                         "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED}},
+  // TODO: report unsupported only for CUDA >= 13000
+  {"cuMemPrefetchAsync",                                          {"hipMemPrefetchAsync",                                         "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED, HIP_UNSUPPORTED}},
   // cudaMemPrefetchAsync_v2
+  // TODO: report unsupported only for CUDA >= 13000
   {"cuMemPrefetchAsync_v2",                                       {"hipMemPrefetchAsync_v2",                                      "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED, HIP_UNSUPPORTED}},
   // cudaMemRangeGetAttribute
   {"cuMemRangeGetAttribute",                                      {"hipMemRangeGetAttribute",                                     "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED}},
@@ -492,6 +496,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuPointerGetAttributes",                                      {"hipDrvPointerGetAttributes",                                  "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED}},
   // no analogue
   {"cuPointerSetAttribute",                                       {"hipPointerSetAttribute",                                      "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED}},
+  //
+  {"cuMemPrefetchBatchAsync",                                     {"hipMemPrefetchBatchAsync",                                    "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED, HIP_UNSUPPORTED}},
+  //
+  {"cuMemDiscardBatchAsync",                                      {"hipMemDiscardBatchAsync",                                     "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED, HIP_UNSUPPORTED}},
+  //
+  {"cuMemDiscardAndPrefetchBatchAsync",                           {"hipMemDiscardAndPrefetchBatchAsync",                          "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED, HIP_UNSUPPORTED}},
 
   // 18. Stream Management
   // cudaStreamAddCallback
@@ -1590,6 +1600,9 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_FUNCTION_VER_MAP {
   {"cuMemGetDefaultMemPool",                                      {CUDA_130, CUDA_0,   CUDA_0  }},
   {"cuMemGetMemPool",                                             {CUDA_130, CUDA_0,   CUDA_0  }},
   {"cuMemSetMemPool",                                             {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cuMemPrefetchBatchAsync",                                     {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cuMemDiscardBatchAsync",                                      {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cuMemDiscardAndPrefetchBatchAsync",                           {CUDA_130, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_FUNCTION_VER_MAP {
@@ -1768,6 +1781,8 @@ const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_DRIVER_FUNCTION_CHA
   {"cuCtxCreate",                                                 {CUDA_130}},
   {"cuMemcpyBatchAsync",                                          {CUDA_130}},
   {"cuMemcpy3DBatchAsync",                                        {CUDA_130}},
+  {"cuMemPrefetchAsync",                                          {CUDA_130}},
+  {"cuMemAdvise",                                                 {CUDA_130}},
 };
 
 const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_DRIVER_FUNCTION_CHANGED_VER_MAP {
