@@ -4457,8 +4457,6 @@ sub simpleSubstitutions {
     subst("cuMemPoolSetAccess", "hipMemPoolSetAccess", "ordered_memory");
     subst("cuMemPoolSetAttribute", "hipMemPoolSetAttribute", "ordered_memory");
     subst("cuMemPoolTrimTo", "hipMemPoolTrimTo", "ordered_memory");
-    subst("cuMemAdvise", "hipMemAdvise", "unified");
-    subst("cuMemPrefetchAsync", "hipMemPrefetchAsync", "unified");
     subst("cuMemRangeGetAttribute", "hipMemRangeGetAttribute", "unified");
     subst("cuMemRangeGetAttributes", "hipMemRangeGetAttributes", "unified");
     subst("cuPointerGetAttribute", "hipPointerGetAttribute", "unified");
@@ -12035,11 +12033,16 @@ sub warnRemovedFunctions {
     "cuMemcpy3DBatchAsync",
     "cuMemcpy",
     "cuMemSetMemPool",
+    "cuMemPrefetchBatchAsync",
     "cuMemPrefetchAsync_v2",
+    "cuMemPrefetchAsync",
     "cuMemGetMemPool",
     "cuMemGetDefaultMemPool",
+    "cuMemDiscardBatchAsync",
+    "cuMemDiscardAndPrefetchBatchAsync",
     "cuMemBatchDecompressAsync",
     "cuMemAdvise_v2",
+    "cuMemAdvise",
     "cuLogsUnregisterCallback",
     "cuLogsRegisterCallback",
     "cuLogsDumpToMemory",
