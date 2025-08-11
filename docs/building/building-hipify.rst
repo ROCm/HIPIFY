@@ -148,7 +148,7 @@ LLVM >= 10.0.0
 
      .. code-block:: shell
 
-      -DCUDA_DNN_ROOT_DIR=D:/CUDA/cuDNN/9.11.0
+      -DCUDA_DNN_ROOT_DIR=D:/CUDA/cuDNN/9.12.0
 
 6. [Optional] Install `CUB 1.9.8 <https://github.com/NVIDIA/cub/releases/tag/1.9.8>`_ for ``CUDA < 11.0`` only;
    for ``CUDA >= 11.0``, the CUB shipped with CUDA will be used for testing.
@@ -281,8 +281,8 @@ Linux testing
 
 On Linux, the following configurations are tested:
 
-* Ubuntu 22-23: LLVM 13.0.0 - 20.1.8, CUDA 7.0 - 12.8.1, cuDNN 8.0.5 - 9.11.0, cuTensor 1.0.1.0 - 2.2.0.0
-* Ubuntu 20-21: LLVM 9.0.0 - 20.1.8, CUDA 7.0 - 12.8.1, cuDNN 5.1.10 - 9.11.0, cuTensor 1.0.1.0 - 2.2.0.0
+* Ubuntu 22-23: LLVM 13.0.0 - 20.1.8, CUDA 7.0 - 12.8.1, cuDNN 8.0.5 - 9.12.0, cuTensor 1.0.1.0 - 2.2.0.0
+* Ubuntu 20-21: LLVM 9.0.0 - 20.1.8, CUDA 7.0 - 12.8.1, cuDNN 5.1.10 - 9.12.0, cuTensor 1.0.1.0 - 2.2.0.0
 * Ubuntu 16-19: LLVM 8.0.0 - 14.0.6, CUDA 7.0 - 10.2, cuDNN 5.1.10 - 8.0.5
 * Ubuntu 14: LLVM 4.0.0 - 7.1.0, CUDA 7.0 - 9.0, cuDNN 5.0.5 - 7.6.5
 
@@ -304,7 +304,7 @@ Here's how to build ``hipify-clang`` with testing support on ``Ubuntu 23.10.01``
   -DCMAKE_INSTALL_PREFIX=../dist \
   -DCMAKE_PREFIX_PATH=/usr/llvm/20.1.8/dist \
   -DCUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-12.8.1 \
-  -DCUDA_DNN_ROOT_DIR=/usr/local/cudnn-9.11.0 \
+  -DCUDA_DNN_ROOT_DIR=/usr/local/cudnn-9.12.0 \
   -DCUDA_TENSOR_ROOT_DIR=/usr/local/cutensor-2.2.0.0 \
   -DLLVM_EXTERNAL_LIT=/usr/llvm/20.1.8/build/bin/llvm-lit \
   ../hipify
@@ -344,7 +344,7 @@ The corresponding successful output is:
   -- Initial CUDA to configure:
   --    - CUDA Toolkit path     : /usr/local/cuda-12.8.1
   --    - CUDA Samples path     :
-  --    - cuDNN path            : /usr/local/cudnn-9.11.0
+  --    - cuDNN path            : /usr/local/cudnn-9.12.0
   --    - cuTENSOR path         : /usr/local/cuTensor/2.2.0.0
   --    - CUB path              :
   -- Found CUDAToolkit: /usr/local/cuda-12.8.1/targets/x86_64-linux/include (found version "12.8.93")
@@ -354,7 +354,7 @@ The corresponding successful output is:
   -- Found CUDA config:
   --    - CUDA Toolkit path     : /usr/local/cuda-12.8.1
   --    - CUDA Samples path     : OFF
-  --    - cuDNN path            : /usr/local/cudnn-9.11.0
+  --    - cuDNN path            : /usr/local/cudnn-9.12.0
   --    - CUB path              : /usr/local/cuda-12.8.1/include/cub
   --    - cuTENSOR path         : /usr/local/cuTensor/2.2.0.0
   -- Configuring done (0.6s)
@@ -468,13 +468,13 @@ Tested configurations:
     - ``3.11.4``
   * - ``17.0.1`` :sup:`6` - ``18.1.8`` :sup:`7`
     - ``7.0 - 12.3.2``
-    - ``8.0.5  - 9.11.0``
+    - ``8.0.5  - 9.12.0``
     - ``2019.16.11.48, 2022.17.14.5``
     - ``4.0.3``
     - ``3.13.5``
   * - ``19.1.0 - 20.1.8``
     - ``7.0 - 12.8.1``
-    - ``8.0.5  - 9.11.0``
+    - ``8.0.5  - 9.12.0``
     - ``2019.16.11.48, 2022.17.14.5``
     - ``4.0.3``
     - ``3.13.5``
@@ -505,7 +505,7 @@ Building with testing support using ``Visual Studio 17 2022`` on ``Windows 11``:
   -DCMAKE_PREFIX_PATH=D:/LLVM/20.1.8/dist \
   -DCUDA_TOOLKIT_ROOT_DIR="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.8" \
   -DCUDA_SDK_ROOT_DIR="C:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.8" \
-  -DCUDA_DNN_ROOT_DIR=D:/CUDA/cuDNN/9.11.0 \
+  -DCUDA_DNN_ROOT_DIR=D:/CUDA/cuDNN/9.12.0 \
   -DCUDA_TENSOR_ROOT_DIR=D:/CUDA/cuTensor/2.2.0.0 \
   -DLLVM_EXTERNAL_LIT=D:/LLVM/20.1.8/build/Release/bin/llvm-lit.py \
   ../hipify
@@ -544,14 +544,14 @@ The corresponding successful output is:
   -- Initial CUDA to configure:
   --    - CUDA Toolkit path     : C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.8
   --    - CUDA Samples path     : C:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.8
-  --    - cuDNN path            : D:/CUDA/cuDNN/9.11.0
+  --    - cuDNN path            : D:/CUDA/cuDNN/9.12.0
   --    - cuTENSOR path         : D:/CUDA/cuTensor/2.2.0.0
   --    - CUB path              :
   -- Found CUDAToolkit: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.8/include (found version "12.8.93")
   -- Found CUDA config:
   --    - CUDA Toolkit path     : C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.8
   --    - CUDA Samples path     : C:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.8
-  --    - cuDNN path            : D:/CUDA/cuDNN/9.11.0
+  --    - cuDNN path            : D:/CUDA/cuDNN/9.12.0
   --    - cuTENSOR path         : D:/CUDA/cuTensor/2.2.0.0
   --    - CUB path              : C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.8/include/cub
   -- Configuring done (4.4s)
