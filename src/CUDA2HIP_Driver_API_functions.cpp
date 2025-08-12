@@ -528,12 +528,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   // cudaStreamGetAttribute
   {"cuStreamGetAttribute",                                        {"hipStreamGetAttribute",                                       "", CONV_STREAM, API_DRIVER, SEC::STREAM, HIP_UNSUPPORTED}},
   // cudaStreamGetCaptureInfo
-  {"cuStreamGetCaptureInfo",                                      {"hipStreamGetCaptureInfo",                                     "", CONV_STREAM, API_DRIVER, SEC::STREAM}},
+  // TODO: report unsupported only for CUDA >= 13000
+  {"cuStreamGetCaptureInfo",                                      {"hipStreamGetCaptureInfo",                                     "", CONV_STREAM, API_DRIVER, SEC::STREAM, HIP_UNSUPPORTED}},
   {"cuStreamGetCaptureInfo_v2",                                   {"hipStreamGetCaptureInfo_v2",                                  "", CONV_STREAM, API_DRIVER, SEC::STREAM}},
   // cudaStreamGetCaptureInfo_v3
   {"cuStreamGetCaptureInfo_v3",                                   {"hipStreamGetCaptureInfo_v3",                                  "", CONV_STREAM, API_DRIVER, SEC::STREAM, HIP_UNSUPPORTED}},
   // cudaStreamUpdateCaptureDependencies
-  {"cuStreamUpdateCaptureDependencies",                           {"hipStreamUpdateCaptureDependencies",                          "", CONV_STREAM, API_DRIVER, SEC::STREAM}},
+  // TODO: report unsupported only for CUDA >= 13000
+  {"cuStreamUpdateCaptureDependencies",                           {"hipStreamUpdateCaptureDependencies",                          "", CONV_STREAM, API_DRIVER, SEC::STREAM, HIP_UNSUPPORTED}},
   // cudaStreamUpdateCaptureDependencies_v2
   {"cuStreamUpdateCaptureDependencies_v2",                        {"hipStreamUpdateCaptureDependencies_v2",                       "", CONV_STREAM, API_DRIVER, SEC::STREAM, HIP_UNSUPPORTED}},
   // no analogue
@@ -570,7 +572,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   // cudaEventElapsedTime
   {"cuEventElapsedTime",                                          {"hipEventElapsedTime",                                         "", CONV_EVENT, API_DRIVER, SEC::EVENT}},
   //
-  {"cuEventElapsedTime_v2",                                       {"hipEventElapsedTime_v2",                                      "", CONV_EVENT, API_DRIVER, SEC::EVENT, HIP_UNSUPPORTED}},
+  {"cuEventElapsedTime_v2",                                       {"hipEventElapsedTime",                                         "", CONV_EVENT, API_DRIVER, SEC::EVENT}},
   // cudaEventQuery
   {"cuEventQuery",                                                {"hipEventQuery",                                               "", CONV_EVENT, API_DRIVER, SEC::EVENT}},
   // cudaEventRecord
@@ -725,7 +727,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   // cudaGraphExecDestroy
   {"cuGraphExecDestroy",                                          {"hipGraphExecDestroy",                                         "", CONV_GRAPH, API_DRIVER, SEC::GRAPH}},
   // cudaGraphGetEdges
-  {"cuGraphGetEdges",                                             {"hipGraphGetEdges",                                            "", CONV_GRAPH, API_DRIVER, SEC::GRAPH}},
+  // TODO: report unsupported only for CUDA >= 13000
+  {"cuGraphGetEdges",                                             {"hipGraphGetEdges",                                            "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_UNSUPPORTED}},
   // cudaGraphGetEdges_v2
   {"cuGraphGetEdges_v2",                                          {"hipGraphGetEdges_v2",                                         "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_UNSUPPORTED}},
   // cudaGraphGetNodes
@@ -764,11 +767,13 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   // cudaGraphNodeFindInClone
   {"cuGraphNodeFindInClone",                                      {"hipGraphNodeFindInClone",                                     "", CONV_GRAPH, API_DRIVER, SEC::GRAPH}},
   // cudaGraphNodeGetDependencies
-  {"cuGraphNodeGetDependencies",                                  {"hipGraphNodeGetDependencies",                                 "", CONV_GRAPH, API_DRIVER, SEC::GRAPH}},
+  // TODO: report unsupported only for CUDA >= 13000
+  {"cuGraphNodeGetDependencies",                                  {"hipGraphNodeGetDependencies",                                 "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_UNSUPPORTED}},
   // cudaGraphNodeGetDependencies_v2
   {"cuGraphNodeGetDependencies_v2",                               {"hipGraphNodeGetDependencies_v2",                              "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_UNSUPPORTED}},
   // cudaGraphNodeGetDependentNodes
-  {"cuGraphNodeGetDependentNodes",                                {"hipGraphNodeGetDependentNodes",                               "", CONV_GRAPH, API_DRIVER, SEC::GRAPH}},
+  // TODO: report unsupported only for CUDA >= 13000
+  {"cuGraphNodeGetDependentNodes",                                {"hipGraphNodeGetDependentNodes",                               "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_UNSUPPORTED}},
   // cudaGraphNodeGetDependentNodes_v2
   {"cuGraphNodeGetDependentNodes_v2",                             {"hipGraphNodeGetDependentNodes_v2",                            "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_UNSUPPORTED}},
   // cudaGraphNodeGetEnabled
@@ -1783,6 +1788,11 @@ const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_DRIVER_FUNCTION_CHA
   {"cuMemcpy3DBatchAsync",                                        {CUDA_130}},
   {"cuMemPrefetchAsync",                                          {CUDA_130}},
   {"cuMemAdvise",                                                 {CUDA_130}},
+  {"cuStreamGetCaptureInfo",                                      {CUDA_130}},
+  {"cuStreamUpdateCaptureDependencies",                           {CUDA_130}},
+  {"cuGraphGetEdges",                                             {CUDA_130}},
+  {"cuGraphNodeGetDependencies",                                  {CUDA_130}},
+  {"cuGraphNodeGetDependentNodes",                                {CUDA_130}},
 };
 
 const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_DRIVER_FUNCTION_CHANGED_VER_MAP {
