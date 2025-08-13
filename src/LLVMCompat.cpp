@@ -196,12 +196,17 @@ std::string getNamespaceDeclName(const clang::NestedNameSpecifier *NNS) {
   std::string sEmpty = "";
   if (!NNS) return sEmpty;
 #if LLVM_VERSION_MAJOR >= 22
-  const clang::NamespaceBaseDecl *nsd = NNS->getAsNamespace();
+  if (NNS->getKind() == clang::NestedNameSpecifier::Kind::Namespace) {
+    if (const auto *ND = dyn_cast<clang::NamespaceDecl>(NNS->getAsNamespaceAndPrefix().Namespace)) {
+      return ND->getDeclName().getAsString();
+    }
+  }
 #else
   const clang::NamespaceDecl *nsd = NNS->getAsNamespace();
-#endif
   if (!nsd) return sEmpty;
   return nsd->getDeclName().getAsString();
+#endif
+  return sEmpty;
 }
 
 } // namespace llcompat
