@@ -2073,7 +2073,7 @@
 |`cuDeviceSetGraphMemAttribute`|11.4| | | |`hipDeviceSetGraphMemAttribute`|5.3.0| | | | |
 |`cuGraphAddBatchMemOpNode`|11.7| | | |`hipGraphAddBatchMemOpNode`|6.4.0| | | | |
 |`cuGraphAddChildGraphNode`|10.0| | | |`hipGraphAddChildGraphNode`|5.0.0| | | | |
-|`cuGraphAddDependencies`|10.0| | | |`hipGraphAddDependencies`|4.5.0| | | | |
+|`cuGraphAddDependencies`|10.0| |13.0| | | | | | | |
 |`cuGraphAddDependencies_v2`|12.3| | | | | | | | | |
 |`cuGraphAddEmptyNode`|10.0| | | |`hipGraphAddEmptyNode`|4.5.0| | | | |
 |`cuGraphAddEventRecordNode`|11.1| | | |`hipGraphAddEventRecordNode`|5.0.0| | | | |
@@ -2151,7 +2151,7 @@
 |`cuGraphNodeSetEnabled`|11.6| | | |`hipGraphNodeSetEnabled`|5.5.0| | | | |
 |`cuGraphNodeSetParams`|12.2| | | |`hipGraphNodeSetParams`|6.3.0| | | | |
 |`cuGraphReleaseUserObject`|11.3| | | |`hipGraphReleaseUserObject`|5.3.0| | | | |
-|`cuGraphRemoveDependencies`|10.0| | | |`hipGraphRemoveDependencies`|5.0.0| | | | |
+|`cuGraphRemoveDependencies`|10.0| |13.0| | | | | | | |
 |`cuGraphRemoveDependencies_v2`|12.3| | | | | | | | | |
 |`cuGraphRetainUserObject`|11.3| | | |`hipGraphRetainUserObject`|5.3.0| | | | |
 |`cuGraphUpload`|11.1| | | |`hipGraphUpload`|5.3.0| | | | |
@@ -2248,6 +2248,7 @@
 |`cuCtxDisablePeerAccess`| | | | |`hipCtxDisablePeerAccess`|1.6.0|1.9.0| | | |
 |`cuCtxEnablePeerAccess`| | | | |`hipCtxEnablePeerAccess`|1.6.0|1.9.0| | | |
 |`cuDeviceCanAccessPeer`| | | | |`hipDeviceCanAccessPeer`|1.9.0| | | | |
+|`cuDeviceGetP2PAtomicCapabilities`|13.0| | | | | | | | | |
 |`cuDeviceGetP2PAttribute`|8.0| | | |`hipDeviceGetP2PAttribute`|3.8.0| | | | |
 
 ## **32. Graphics Interoperability**
@@ -2291,6 +2292,7 @@
 |`cuGreenCtxCreate`|12.4| | | | | | | | | |
 |`cuGreenCtxDestroy`|12.4| | | | | | | | | |
 |`cuGreenCtxGetDevResource`|12.4| | | | | | | | | |
+|`cuGreenCtxGetId`|13.0| | | | | | | | | |
 |`cuGreenCtxRecordEvent`|12.4| | | | | | | | | |
 |`cuGreenCtxStreamCreate`|12.5| | | | | | | | | |
 |`cuGreenCtxWaitEvent`|12.4| | | | | | | | | |

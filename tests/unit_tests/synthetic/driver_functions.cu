@@ -1212,10 +1212,32 @@ int main() {
   // CHECK: result = hipWaitExternalSemaphoresAsync(&externalSemaphore, &EXTERNAL_SEMAPHORE_WAIT_PARAMS, flags, stream);
   result = cuWaitExternalSemaphoresAsync(&externalSemaphore, &EXTERNAL_SEMAPHORE_WAIT_PARAMS, flags, stream);
 
+#if CUDA_VERSION < 13000
   // CUDA: CUresult CUDAAPI cuGraphAddDependencies(CUgraph hGraph, const CUgraphNode *from, const CUgraphNode *to, size_t numDependencies);
   // HIP: hipError_t hipGraphAddDependencies(hipGraph_t graph, const hipGraphNode_t* from, const hipGraphNode_t* to, size_t numDependencies);
   // CHECK: result = hipGraphAddDependencies(graph, &graphNode, &graphNode2, bytes);
   result = cuGraphAddDependencies(graph, &graphNode, &graphNode2, bytes);
+
+  // CUDA: CUresult CUDAAPI cuGraphRemoveDependencies(CUgraph hGraph, const CUgraphNode *from, const CUgraphNode *to, size_t numDependencies);
+  // HIP: hipError_t hipGraphRemoveDependencies(hipGraph_t graph, const hipGraphNode_t* from, const hipGraphNode_t* to, size_t numDependencies);
+  // CHECK: result = hipGraphRemoveDependencies(graph, &graphNode, &graphNode2, bytes);
+  result = cuGraphRemoveDependencies(graph, &graphNode, &graphNode2, bytes);
+
+  // CUDA: CUresult CUDAAPI cuGraphGetEdges(CUgraph hGraph, CUgraphNode *from, CUgraphNode *to, size_t *numEdges);
+  // HIP: hipError_t hipGraphGetEdges(hipGraph_t graph, hipGraphNode_t* from, hipGraphNode_t* to, size_t* numEdges);
+  // CHECK: result = hipGraphGetEdges(graph, &graphNode, &graphNode2, &bytes);
+  result = cuGraphGetEdges(graph, &graphNode, &graphNode2, &bytes);
+
+  // CUDA: CUresult CUDAAPI cuGraphNodeGetDependencies(CUgraphNode hNode, CUgraphNode *dependencies, size_t *numDependencies);
+  // HIP: hipError_t hipGraphNodeGetDependencies(hipGraphNode_t node, hipGraphNode_t* pDependencies, size_t* pNumDependencies);
+  // CHECK: result = hipGraphNodeGetDependencies(graphNode, &graphNode2, &bytes);
+  result = cuGraphNodeGetDependencies(graphNode, &graphNode2, &bytes);
+
+  // CUDA: CUresult CUDAAPI cuGraphNodeGetDependentNodes(CUgraphNode hNode, CUgraphNode *dependentNodes, size_t *numDependentNodes);
+  // HIP: hipError_t hipGraphNodeGetDependentNodes(hipGraphNode_t node, hipGraphNode_t* pDependentNodes, size_t* pNumDependentNodes);
+  // CHECK: result = hipGraphNodeGetDependentNodes(graphNode, &graphNode2, &bytes);
+  result = cuGraphNodeGetDependentNodes(graphNode, &graphNode2, &bytes);
+#endif
 
   // CUDA: CUresult CUDAAPI cuGraphAddEmptyNode(CUgraphNode *phGraphNode, CUgraph hGraph, const CUgraphNode *dependencies, size_t numDependencies);
   // HIP: hipError_t hipGraphAddEmptyNode(hipGraphNode_t* pGraphNode, hipGraph_t graph, const hipGraphNode_t* pDependencies, size_t numDependencies);
@@ -1286,28 +1308,6 @@ int main() {
   // HIP: hipError_t hipGraphMemsetNodeSetParams(hipGraphNode_t node, const hipMemsetParams* pNodeParams);
   // CHECK: result = hipGraphMemsetNodeSetParams(graphNode, &MEMSET_NODE_PARAMS);
   result = cuGraphMemsetNodeSetParams(graphNode, &MEMSET_NODE_PARAMS);
-
-#if CUDA_VERSION < 13000
-  // CUDA: CUresult CUDAAPI cuGraphGetEdges(CUgraph hGraph, CUgraphNode *from, CUgraphNode *to, size_t *numEdges);
-  // HIP: hipError_t hipGraphGetEdges(hipGraph_t graph, hipGraphNode_t* from, hipGraphNode_t* to, size_t* numEdges);
-  // CHECK: result = hipGraphGetEdges(graph, &graphNode, &graphNode2, &bytes);
-  result = cuGraphGetEdges(graph, &graphNode, &graphNode2, &bytes);
-
-  // CUDA: CUresult CUDAAPI cuGraphNodeGetDependencies(CUgraphNode hNode, CUgraphNode *dependencies, size_t *numDependencies);
-  // HIP: hipError_t hipGraphNodeGetDependencies(hipGraphNode_t node, hipGraphNode_t* pDependencies, size_t* pNumDependencies);
-  // CHECK: result = hipGraphNodeGetDependencies(graphNode, &graphNode2, &bytes);
-  result = cuGraphNodeGetDependencies(graphNode, &graphNode2, &bytes);
-
-  // CUDA: CUresult CUDAAPI cuGraphNodeGetDependentNodes(CUgraphNode hNode, CUgraphNode *dependentNodes, size_t *numDependentNodes);
-  // HIP: hipError_t hipGraphNodeGetDependentNodes(hipGraphNode_t node, hipGraphNode_t* pDependentNodes, size_t* pNumDependentNodes);
-  // CHECK: result = hipGraphNodeGetDependentNodes(graphNode, &graphNode2, &bytes);
-  result = cuGraphNodeGetDependentNodes(graphNode, &graphNode2, &bytes);
-#endif
-
-  // CUDA: CUresult CUDAAPI cuGraphRemoveDependencies(CUgraph hGraph, const CUgraphNode *from, const CUgraphNode *to, size_t numDependencies);
-  // HIP: hipError_t hipGraphRemoveDependencies(hipGraph_t graph, const hipGraphNode_t* from, const hipGraphNode_t* to, size_t numDependencies);
-  // CHECK: result = hipGraphRemoveDependencies(graph, &graphNode, &graphNode2, bytes);
-  result = cuGraphRemoveDependencies(graph, &graphNode, &graphNode2, bytes);
 
   // CUDA: CUresult CUDAAPI cuGraphNodeGetType(CUgraphNode hNode, CUgraphNodeType *type);
   // HIP: hipError_t hipGraphNodeGetType(hipGraphNode_t node, hipGraphNodeType* pType);

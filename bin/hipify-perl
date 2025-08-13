@@ -4561,7 +4561,6 @@ sub simpleSubstitutions {
     subst("cuDeviceSetGraphMemAttribute", "hipDeviceSetGraphMemAttribute", "graph");
     subst("cuGraphAddBatchMemOpNode", "hipGraphAddBatchMemOpNode", "graph");
     subst("cuGraphAddChildGraphNode", "hipGraphAddChildGraphNode", "graph");
-    subst("cuGraphAddDependencies", "hipGraphAddDependencies", "graph");
     subst("cuGraphAddEmptyNode", "hipGraphAddEmptyNode", "graph");
     subst("cuGraphAddEventRecordNode", "hipGraphAddEventRecordNode", "graph");
     subst("cuGraphAddEventWaitNode", "hipGraphAddEventWaitNode", "graph");
@@ -4629,7 +4628,6 @@ sub simpleSubstitutions {
     subst("cuGraphNodeSetEnabled", "hipGraphNodeSetEnabled", "graph");
     subst("cuGraphNodeSetParams", "hipGraphNodeSetParams", "graph");
     subst("cuGraphReleaseUserObject", "hipGraphReleaseUserObject", "graph");
-    subst("cuGraphRemoveDependencies", "hipGraphRemoveDependencies", "graph");
     subst("cuGraphRetainUserObject", "hipGraphRetainUserObject", "graph");
     subst("cuGraphUpload", "hipGraphUpload", "graph");
     subst("cuUserObjectCreate", "hipUserObjectCreate", "graph");
@@ -12069,6 +12067,7 @@ sub warnRemovedFunctions {
     "cuGreenCtxWaitEvent",
     "cuGreenCtxStreamCreate",
     "cuGreenCtxRecordEvent",
+    "cuGreenCtxGetId",
     "cuGreenCtxGetDevResource",
     "cuGreenCtxDestroy",
     "cuGreenCtxCreate",
@@ -12083,6 +12082,7 @@ sub warnRemovedFunctions {
     "cuGraphicsD3D11RegisterResource",
     "cuGraphicsD3D10RegisterResource",
     "cuGraphRemoveDependencies_v2",
+    "cuGraphRemoveDependencies",
     "cuGraphNodeGetDependentNodes_v2",
     "cuGraphNodeGetDependentNodes",
     "cuGraphNodeGetDependencies_v2",
@@ -12093,6 +12093,7 @@ sub warnRemovedFunctions {
     "cuGraphAddNode_v2",
     "cuGraphAddNode",
     "cuGraphAddDependencies_v2",
+    "cuGraphAddDependencies",
     "cuGLUnregisterBufferObject",
     "cuGLUnmapBufferObjectAsync",
     "cuGLUnmapBufferObject",
@@ -12127,6 +12128,7 @@ sub warnRemovedFunctions {
     "cuDeviceUnregisterAsyncNotification",
     "cuDeviceRegisterAsyncNotification",
     "cuDeviceGetProperties",
+    "cuDeviceGetP2PAtomicCapabilities",
     "cuDeviceGetNvSciSyncAttributes",
     "cuDeviceGetLuid",
     "cuDeviceGetHostAtomicCapabilities",
