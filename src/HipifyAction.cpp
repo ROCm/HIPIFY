@@ -2628,12 +2628,7 @@ bool HipifyAction::cudaDeviceFuncCall(const mat::MatchFinder::MatchResult &Resul
 
 bool HipifyAction::cubNamespacePrefix(const mat::MatchFinder::MatchResult &Result) {
   if (auto *decl = Result.Nodes.getNodeAs<clang::TypedefNameDecl>(sCubNamespacePrefix)) {
-    clang::QualType QT = decl->getUnderlyingType();
-    auto *t = QT.getTypePtr();
-    if (!t) return false;
-    const clang::ElaboratedType *et = t->getAs<clang::ElaboratedType>();
-    if (!et) return false;
-    std::string name = llcompat::getNamespaceDeclName(et->getQualifier());
+    std::string name = llcompat::getNamespaceDeclName(decl->getUnderlyingType());
     if (name.empty()) return false;
     const clang::TypeSourceInfo *si = decl->getTypeSourceInfo();
     const clang::TypeLoc tloc = si->getTypeLoc();
@@ -2656,18 +2651,15 @@ bool HipifyAction::cubUsingNamespaceDecl(const mat::MatchFinder::MatchResult &Re
 
 bool HipifyAction::cubFunctionTemplateDecl(const mat::MatchFinder::MatchResult &Result) {
   if (auto *decl = Result.Nodes.getNodeAs<clang::FunctionTemplateDecl>(sCubFunctionTemplateDecl)) {
-    auto *Tparams = decl->getTemplateParameters();
+    const auto *Tparams = decl->getTemplateParameters();
     bool ret = false;
     for (size_t I = 0; I < Tparams->size(); ++I) {
-      const clang::ValueDecl *valueDecl = dyn_cast<clang::ValueDecl>(Tparams->getParam(I));
+      const clang::NamedDecl *Param = Tparams->getParam(I);
+      if (!Param->getIdentifier()) continue;
+      const clang::ValueDecl *valueDecl = dyn_cast<clang::ValueDecl>(Param);
       if (!valueDecl) continue;
-      clang::QualType QT = valueDecl->getType();
-      auto *t = QT.getTypePtr();
-      if (!t) continue;
-      const clang::ElaboratedType *et = t->getAs<clang::ElaboratedType>();
-      if (!et) continue;
-      std::string name = llcompat::getNamespaceDeclName(et->getQualifier());
-      if (name.empty()) return false;
+      std::string name = llcompat::getNamespaceDeclName(valueDecl->getType());
+      if (name.empty()) ret = false;
       const clang::SourceRange sr = valueDecl->getSourceRange();
       FindAndReplace(name, GetSubstrLocation(name, sr), CUDA_CUB_NAMESPACE_MAP);
       ret = true;
@@ -3154,18 +3146,22 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
     mat::typedefDecl(
       mat::isExpansionInMainFile(),
       mat::hasType(
+#if LLVM_VERSION_MAJOR < 22
         mat::elaboratedType(
+#endif
           mat::hasQualifier(
             mat::specifiesNamespace(
               mat::hasName(sCub)
             )
           )
+#if LLVM_VERSION_MAJOR < 22
         )
-       )
+#endif
+      )
     ).bind(sCubNamespacePrefix),
     this
   );
-  // TODO: Maybe worth to make it more concrete based on final cubFunctionTemplateDecl
+  // TODO: Maybe worth making it more concrete based on the final cubFunctionTemplateDecl
   Finder->addMatcher(
     mat::functionTemplateDecl(
       mat::isExpansionInMainFile()

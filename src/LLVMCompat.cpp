@@ -192,16 +192,22 @@ const clang::IdentifierInfo *getControllingMacro(clang::CompilerInstance &CI) {
 #endif
 }
 
-std::string getNamespaceDeclName(const clang::NestedNameSpecifier *NNS) {
+std::string getNamespaceDeclName(const clang::QualType &QT) {
   std::string sEmpty = "";
-  if (!NNS) return sEmpty;
+  auto *t = QT.getTypePtr();
+  if (!t) return sEmpty;
 #if LLVM_VERSION_MAJOR >= 22
-  if (NNS->getKind() == clang::NestedNameSpecifier::Kind::Namespace) {
-    if (const auto *ND = dyn_cast<clang::NamespaceDecl>(NNS->getAsNamespaceAndPrefix().Namespace)) {
+  const auto NNS = t->getPrefix();
+  if (NNS.getKind() == clang::NestedNameSpecifier::Kind::Namespace) {
+    if (const auto *ND = dyn_cast<clang::NamespaceDecl>(NNS.getAsNamespaceAndPrefix().Namespace)) {
       return ND->getDeclName().getAsString();
     }
   }
 #else
+  const clang::ElaboratedType *et = t->getAs<clang::ElaboratedType>();
+  if (!et) return sEmpty;
+  auto *NNS = et->getQualifier();
+  if (!NNS) return sEmpty;
   const clang::NamespaceDecl *nsd = NNS->getAsNamespace();
   if (!nsd) return sEmpty;
   return nsd->getDeclName().getAsString();
