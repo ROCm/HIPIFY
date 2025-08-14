@@ -190,11 +190,12 @@ int main() {
   // CHECK: result = hipDevicePrimaryCtxSetFlags(device, flags);
   result = cuDevicePrimaryCtxSetFlags(device, flags);
 
+  // [TODO][#2062] Rename all DO-NOT-CHECK back
 #if CUDA_VERSION < 13000
   // CUDA: CUresult CUDAAPI cuCtxCreate(CUcontext *pctx, unsigned int flags, CUdevice dev);
   // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipCtxCreate(hipCtx_t *ctx, unsigned int flags, hipDevice_t device);
-  // CHECK: result = hipCtxCreate(&context, flags, device);
-  // CHECK-NEXT: result = hipCtxCreate(&context, flags, device);
+  // DO-NOT-CHECK: result = hipCtxCreate(&context, flags, device);
+  // DO-NOT-CHECK-NEXT: result = hipCtxCreate(&context, flags, device);
   result = cuCtxCreate(&context, flags, device);
   result = cuCtxCreate_v2(&context, flags, device);
 #endif
@@ -1039,15 +1040,16 @@ int main() {
   CUmem_range_attribute MemoryRangeAttribute;
   CUmem_advise MemoryAdvise;
 
+  // [TODO][#2062] Rename all DO-NOT-CHECK back
 #if CUDA_VERSION < 13000
   // CUDA: CUresult CUDAAPI cuMemAdvise(CUdeviceptr devPtr, size_t count, CUmem_advise advice, CUdevice device);
   // HIP: hipError_t hipMemAdvise(const void* dev_ptr, size_t count, hipMemoryAdvise advice, int device);
-  // CHECK: result = hipMemAdvise(deviceptr, bytes, MemoryAdvise, device);
+  // DO-NOT-CHECK: result = hipMemAdvise(deviceptr, bytes, MemoryAdvise, device);
   result = cuMemAdvise(deviceptr, bytes, MemoryAdvise, device);
 
   // CUDA: CUresult CUDAAPI cuMemPrefetchAsync(CUdeviceptr devPtr, size_t count, CUdevice dstDevice, CUstream hStream);
   // HIP: hipError_t hipMemPrefetchAsync(const void* dev_ptr, size_t count, int device, hipStream_t stream __dparm(0));
-  // CHECK: result = hipMemPrefetchAsync(deviceptr, bytes, device, stream);
+  // DO-NOT-CHECK: result = hipMemPrefetchAsync(deviceptr, bytes, device, stream);
   result = cuMemPrefetchAsync(deviceptr, bytes, device, stream);
 #endif
 
@@ -1212,30 +1214,31 @@ int main() {
   // CHECK: result = hipWaitExternalSemaphoresAsync(&externalSemaphore, &EXTERNAL_SEMAPHORE_WAIT_PARAMS, flags, stream);
   result = cuWaitExternalSemaphoresAsync(&externalSemaphore, &EXTERNAL_SEMAPHORE_WAIT_PARAMS, flags, stream);
 
+  // [TODO][#2062] Rename all DO-NOT-CHECK back
 #if CUDA_VERSION < 13000
   // CUDA: CUresult CUDAAPI cuGraphAddDependencies(CUgraph hGraph, const CUgraphNode *from, const CUgraphNode *to, size_t numDependencies);
   // HIP: hipError_t hipGraphAddDependencies(hipGraph_t graph, const hipGraphNode_t* from, const hipGraphNode_t* to, size_t numDependencies);
-  // CHECK: result = hipGraphAddDependencies(graph, &graphNode, &graphNode2, bytes);
+  // DO-NOT-CHECK: result = hipGraphAddDependencies(graph, &graphNode, &graphNode2, bytes);
   result = cuGraphAddDependencies(graph, &graphNode, &graphNode2, bytes);
 
   // CUDA: CUresult CUDAAPI cuGraphRemoveDependencies(CUgraph hGraph, const CUgraphNode *from, const CUgraphNode *to, size_t numDependencies);
   // HIP: hipError_t hipGraphRemoveDependencies(hipGraph_t graph, const hipGraphNode_t* from, const hipGraphNode_t* to, size_t numDependencies);
-  // CHECK: result = hipGraphRemoveDependencies(graph, &graphNode, &graphNode2, bytes);
+  // DO-NOT-CHECK: result = hipGraphRemoveDependencies(graph, &graphNode, &graphNode2, bytes);
   result = cuGraphRemoveDependencies(graph, &graphNode, &graphNode2, bytes);
 
   // CUDA: CUresult CUDAAPI cuGraphGetEdges(CUgraph hGraph, CUgraphNode *from, CUgraphNode *to, size_t *numEdges);
   // HIP: hipError_t hipGraphGetEdges(hipGraph_t graph, hipGraphNode_t* from, hipGraphNode_t* to, size_t* numEdges);
-  // CHECK: result = hipGraphGetEdges(graph, &graphNode, &graphNode2, &bytes);
+  // DO-NOT-CHECK: result = hipGraphGetEdges(graph, &graphNode, &graphNode2, &bytes);
   result = cuGraphGetEdges(graph, &graphNode, &graphNode2, &bytes);
 
   // CUDA: CUresult CUDAAPI cuGraphNodeGetDependencies(CUgraphNode hNode, CUgraphNode *dependencies, size_t *numDependencies);
   // HIP: hipError_t hipGraphNodeGetDependencies(hipGraphNode_t node, hipGraphNode_t* pDependencies, size_t* pNumDependencies);
-  // CHECK: result = hipGraphNodeGetDependencies(graphNode, &graphNode2, &bytes);
+  // DO-NOT-CHECK: result = hipGraphNodeGetDependencies(graphNode, &graphNode2, &bytes);
   result = cuGraphNodeGetDependencies(graphNode, &graphNode2, &bytes);
 
   // CUDA: CUresult CUDAAPI cuGraphNodeGetDependentNodes(CUgraphNode hNode, CUgraphNode *dependentNodes, size_t *numDependentNodes);
   // HIP: hipError_t hipGraphNodeGetDependentNodes(hipGraphNode_t node, hipGraphNode_t* pDependentNodes, size_t* pNumDependentNodes);
-  // CHECK: result = hipGraphNodeGetDependentNodes(graphNode, &graphNode2, &bytes);
+  // DO-NOT-CHECK: result = hipGraphNodeGetDependentNodes(graphNode, &graphNode2, &bytes);
   result = cuGraphNodeGetDependentNodes(graphNode, &graphNode2, &bytes);
 #endif
 
@@ -1399,10 +1402,11 @@ int main() {
   result = cuGraphExecKernelNodeSetParams(graphExec, graphNode, &KERNEL_NODE_PARAMS);
 #endif
 
+  // [TODO][#2062] Rename all DO-NOT-CHECK back
 #if CUDA_VERSION >= 10010 && CUDA_VERSION < 12000
   // CUDA: CUresult CUDAAPI cuStreamGetCaptureInfo(CUstream hStream, CUstreamCaptureStatus *captureStatus_out, cuuint64_t *id_out);
   // HIP: hipError_t hipStreamGetCaptureInfo(hipStream_t stream, hipStreamCaptureStatus* pCaptureStatus, unsigned long long* pId);
-  // CHECK: result = hipStreamGetCaptureInfo(stream, &streamCaptureStatus, &ull);
+  // DO-NOT-CHECK: result = hipStreamGetCaptureInfo(stream, &streamCaptureStatus, &ull);
   result = cuStreamGetCaptureInfo(stream, &streamCaptureStatus, &ull);
 #endif
 
@@ -1765,11 +1769,11 @@ int main() {
 #endif
 
 #if CUDA_VERSION >= 11030
-
+  // [TODO][#2062] Rename all DO-NOT-CHECK back
 #if CUDA_VERSION < 13000
   // CUDA: CUresult CUDAAPI cuStreamUpdateCaptureDependencies(CUstream hStream, CUgraphNode *dependencies, size_t numDependencies, unsigned int flags);
   // HIP: hipError_t hipStreamUpdateCaptureDependencies(hipStream_t stream, hipGraphNode_t* dependencies, size_t numDependencies, unsigned int flags __dparm(0));
-  // CHECK: result = hipStreamUpdateCaptureDependencies(stream, &graphNode, bytes, flags);
+  // DO-NOT-CHECK: result = hipStreamUpdateCaptureDependencies(stream, &graphNode, bytes, flags);
   result = cuStreamUpdateCaptureDependencies(stream, &graphNode, bytes, flags);
 #endif
 
@@ -1859,8 +1863,9 @@ int main() {
   CUDA_MEM_ALLOC_NODE_PARAMS_st MEM_ALLOC_NODE_PARAMS_st;
 #endif
 
+  // [TODO][#2062] Rename all DO-NOT-CHECK back
 #if CUDA_VERSION < 13000
-  // CUDA: CUresult CUDAAPI cuDeviceGetUuid_v2(CUuuid *uuid, CUdevice dev);
+  // DO-NOT-CUDA: CUresult CUDAAPI cuDeviceGetUuid_v2(CUuuid *uuid, CUdevice dev);
   // HIP: hipError_t hipDeviceGetUuid(hipUUID* uuid, hipDevice_t device);
   // CHECK: result = hipDeviceGetUuid(&uuid, device);
   result = cuDeviceGetUuid_v2(&uuid, device);
@@ -1962,8 +1967,9 @@ int main() {
   CUDA_GRAPH_INSTANTIATE_PARAMS_st GRAPH_INSTANTIATE_PARAMS_st;
   CUDA_GRAPH_INSTANTIATE_PARAMS GRAPH_INSTANTIATE_PARAMS;
 
+  // [TODO][#2062] Rename all DO-NOT-CHECK back
 #if CUDA_VERSION < 13000
-  // TODO: https://github.com/ROCm/HIPIFY/issues/782 - Introduce 1-to-N conditional matcher
+  // TODO: [#782] Introduce 1-to-N conditional matcher
   //       Implement "conditional" matching in hipify-clang, based on CUDA_VERSION first;
   //       below the transformation cuStreamGetCaptureInfo -> hipStreamGetCaptureInfo_v2 should be applied for CUDA_VERSION >= 12000,
   //       otherwise, cuStreamGetCaptureInfo -> hipStreamGetCaptureInfo should be applied
@@ -2007,10 +2013,11 @@ int main() {
   // CHECK: hipGraphNodeParams graphNodeParams;
   CUgraphNodeParams graphNodeParams;
 
+  // [TODO][#2062] Rename all DO-NOT-CHECK back
 #if CUDA_VERSION < 13000
   // CUDA: CUresult CUDAAPI cuGraphAddNode(CUgraphNode *phGraphNode, CUgraph hGraph, const CUgraphNode *dependencies, size_t numDependencies, CUgraphNodeParams *nodeParams);
   // HIP: hipError_t hipGraphAddNode(hipGraphNode_t *pGraphNode, hipGraph_t graph, const hipGraphNode_t *pDependencies, size_t numDependencies, hipGraphNodeParams *nodeParams);
-  // CHECK: result = hipGraphAddNode(&graphNode, graph, &graphNode2, bytes, &graphNodeParams);
+  // DO-NOT-CHECK: result = hipGraphAddNode(&graphNode, graph, &graphNode2, bytes, &graphNodeParams);
   result = cuGraphAddNode(&graphNode, graph, &graphNode2, bytes, &graphNodeParams);
 #endif
 
