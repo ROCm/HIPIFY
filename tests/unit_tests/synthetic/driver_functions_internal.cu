@@ -36,20 +36,22 @@ int main() {
   // CHECK: hipError_t result = hipTexRefSetAddress2D(texref, &ARRAY_DESCRIPTOR, deviceptr, bytes);
   CUresult result = cuTexRefSetAddress2D_v2(texref, &ARRAY_DESCRIPTOR, deviceptr, bytes);
 
+  // [TODO][#2062] Rename all DO-NOT-CHECK back
 #if CUDA_VERSION >= 10000
-  // CHECK: hipStreamCaptureStatus streamCaptureStatus;
-  // CHECK-NEXT: hipGraph_t graph;
-  // CHECK-NEXT: const hipGraphNode_t *pGraphNode = nullptr;
+  // DO-NOT-CHECK: hipStreamCaptureStatus streamCaptureStatus;
+  // DO-NOT-CHECK-NEXT: hipGraph_t graph;
+  // DO-NOT-CHECK-NEXT: const hipGraphNode_t *pGraphNode = nullptr;
   CUstreamCaptureStatus streamCaptureStatus;
   CUgraph graph;
   const CUgraphNode *pGraphNode = nullptr;
 #endif
 
+  // [TODO][#2062] Rename all DO-NOT-CHECK back
 #if CUDA_VERSION >= 11030
   // CUDA < 12000: CUresult CUDAAPI cuStreamGetCaptureInfo(CUstream hStream, CUstreamCaptureStatus *captureStatus_out, cuuint64_t *id_out);
   // CUDA:         CUresult CUDAAPI cuStreamGetCaptureInfo_v2(CUstream hStream, CUstreamCaptureStatus *captureStatus_out, cuuint64_t *id_out, CUgraph *graph_out, const CUgraphNode **dependencies_out, size_t *numDependencies_out);
   // HIP: hipError_t hipStreamGetCaptureInfo_v2(hipStream_t stream, hipStreamCaptureStatus* captureStatus_out, unsigned long long* id_out __dparm(0), hipGraph_t* graph_out __dparm(0), const hipGraphNode_t** dependencies_out __dparm(0), size_t* numDependencies_out __dparm(0));
-  // CHECK: result = hipStreamGetCaptureInfo_v2(stream, &streamCaptureStatus, &ull, &graph, &pGraphNode, &bytes);
+  // DO-NOT-CHECK: result = hipStreamGetCaptureInfo_v2(stream, &streamCaptureStatus, &ull, &graph, &pGraphNode, &bytes);
   result = cuStreamGetCaptureInfo_v2(stream, &streamCaptureStatus, &ull, &graph, &pGraphNode, &bytes);
 #endif
 
