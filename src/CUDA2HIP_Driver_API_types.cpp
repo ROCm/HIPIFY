@@ -488,6 +488,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   //
   {"CUcheckpointRestoreArgs",                                          {"hipCheckpointRestoreArgs",                                 "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
+  //
+  {"CUcheckpointGpuPair_st",                                           {"hipCheckpointGpuPair",                                     "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CUcheckpointGpuPair",                                              {"hipCheckpointGpuPair",                                     "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+
   // cudaMemcpyAttributes
   {"CUmemcpyAttributes_st",                                            {"hipMemcpyAttributes",                                      "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   // cudaMemcpyAttributes
@@ -1033,6 +1038,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_DEVICE_ATTRIBUTE_HOST_NUMA_MEMORY_POOLS_SUPPORTED",             {"hipDeviceAttributeHostNumaMemoryPoolsSupported",           "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 142
   // cudaDevAttrHostNumaMultinodeIpcSupported
   {"CU_DEVICE_ATTRIBUTE_HOST_NUMA_MULTINODE_IPC_SUPPORTED",            {"hipDeviceAttributeHostNumaMultinodeIpcSupported",          "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 143
+  //
+  {"CU_DEVICE_ATTRIBUTE_HOST_MEMORY_POOLS_SUPPORTED",                  {"hipDeviceAttributeHostMemoryPoolsSupported",               "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 144
+  //
+  {"CU_DEVICE_ATTRIBUTE_HOST_VIRTUAL_MEMORY_MANAGEMENT_SUPPORTED",     {"hipDeviceAttributeHostVirtualMemoryManagementSupported",   "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 145
+  //
+  {"CU_DEVICE_ATTRIBUTE_HOST_ALLOC_DMA_BUF_SUPPORTED",                 {"hipDeviceAttributeHostHostAllocDmaBufSupported",           "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 146
+  //
+  {"CU_DEVICE_ATTRIBUTE_ONLY_PARTIAL_HOST_NATIVE_ATOMIC_SUPPORTED",    {"hipDeviceAttributeOnlyPartialHostNativeAtomicSupported",   "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 147
   // cudaDevAttrMax
   {"CU_DEVICE_ATTRIBUTE_MAX",                                          {"hipDeviceAttributeMax",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
@@ -1053,6 +1066,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_DEVICE_P2P_ATTRIBUTE_ARRAY_ACCESS_ACCESS_SUPPORTED",            {"hipDevP2PAttrHipArrayAccessSupported",                     "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, CUDA_DEPRECATED | CUDA_REMOVED}}, // 0x04
   // cudaDevP2PAttrCudaArrayAccessSupported = 4
   {"CU_DEVICE_P2P_ATTRIBUTE_CUDA_ARRAY_ACCESS_SUPPORTED",              {"hipDevP2PAttrHipArrayAccessSupported",                     "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}}, // 0x04
+  //
+  {"CU_DEVICE_P2P_ATTRIBUTE_ONLY_PARTIAL_NATIVE_ATOMIC_SUPPORTED",     {"hipDevP2PAttrOnlyPartialNativeAtomicSupported",            "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}}, // 0x05
 
   // cudaEGL.h - presented only on Linux in nvidia-cuda-dev package
   // cudaEglColorFormat
@@ -1257,6 +1272,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_RESOURCE_KMT",                {"hipExternalMemoryHandleTypeD3D11ResourceKmt",              "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}}, // 7
   // cudaExternalMemoryHandleTypeNvSciBuf
   {"CU_EXTERNAL_MEMORY_HANDLE_TYPE_NVSCIBUF",                          {"hipExternalMemoryHandleTypeNvSciBuf",                      "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 8
+  //
+  {"CU_EXTERNAL_MEMORY_HANDLE_TYPE_DMABUF_FD",                         {"hipExternalMemoryHandleTypeDmaBufFd",                      "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 9
 
   // cudaExternalSemaphoreHandleType
   {"CUexternalSemaphoreHandleType",                                    {"hipExternalSemaphoreHandleType",                           "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES}},
@@ -1532,6 +1549,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaJitOverrideDirectiveValues
   {"CU_JIT_OVERRIDE_DIRECTIVE_VALUES",                                 {"hipJitOptionOverrideDirectiveValues",                      "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}}, // 33
   //
+  {"CU_JIT_SPLIT_COMPILE",                                             {"hipJitOptionSplitCompile",                                 "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 33
+  //
   {"CU_JIT_NUM_OPTIONS",                                               {"hipJitOptionNumOptions",                                   "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}},
 
   // no analogue
@@ -1572,12 +1591,15 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_TARGET_COMPUTE_100",                                            {"hipJitTargetCompute100",                                   "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 100
   {"CU_TARGET_COMPUTE_100A",                                           {"hipJitTargetCompute100a",                                  "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // CU_COMPUTE_ACCELERATED_TARGET_BASE + CU_TARGET_COMPUTE_100
   {"CU_TARGET_COMPUTE_100F",                                           {"hipJitTargetCompute100f",                                  "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // CU_COMPUTE_FAMILY_TARGET_BASE + CU_TARGET_COMPUTE_100
-  {"CU_TARGET_COMPUTE_101",                                            {"hipJitTargetCompute101",                                   "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 101
-  {"CU_TARGET_COMPUTE_101A",                                           {"hipJitTargetCompute101a",                                  "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // CU_COMPUTE_ACCELERATED_TARGET_BASE + CU_TARGET_COMPUTE_101
-  {"CU_TARGET_COMPUTE_101F",                                           {"hipJitTargetCompute101f",                                  "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // CU_COMPUTE_FAMILY_TARGET_BASE + CU_TARGET_COMPUTE_101
+  {"CU_TARGET_COMPUTE_101",                                            {"hipJitTargetCompute101",                                   "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED | CUDA_REMOVED}}, // 101
+  {"CU_TARGET_COMPUTE_101A",                                           {"hipJitTargetCompute101a",                                  "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED | CUDA_REMOVED}}, // CU_COMPUTE_ACCELERATED_TARGET_BASE + CU_TARGET_COMPUTE_101
+  {"CU_TARGET_COMPUTE_101F",                                           {"hipJitTargetCompute101f",                                  "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED | CUDA_REMOVED}}, // CU_COMPUTE_FAMILY_TARGET_BASE + CU_TARGET_COMPUTE_101
   {"CU_TARGET_COMPUTE_103",                                            {"hipJitTargetCompute103",                                   "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 103
   {"CU_TARGET_COMPUTE_103A",                                           {"hipJitTargetCompute103a",                                  "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // CU_COMPUTE_ACCELERATED_TARGET_BASE + CU_TARGET_COMPUTE_103
   {"CU_TARGET_COMPUTE_103F",                                           {"hipJitTargetCompute103f",                                  "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // CU_COMPUTE_FAMILY_TARGET_BASE + CU_TARGET_COMPUTE_103
+  {"CU_TARGET_COMPUTE_110",                                            {"hipJitTargetCompute110",                                   "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 110
+  {"CU_TARGET_COMPUTE_110A",                                           {"hipJitTargetCompute110A",                                  "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 110A
+  {"CU_TARGET_COMPUTE_110F",                                           {"hipJitTargetCompute110F",                                  "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 110F
   {"CU_TARGET_COMPUTE_120",                                            {"hipJitTargetCompute120",                                   "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 120
   {"CU_TARGET_COMPUTE_120A",                                           {"hipJitTargetCompute120a",                                  "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // CU_COMPUTE_ACCELERATED_TARGET_BASE + CU_TARGET_COMPUTE_120
   {"CU_TARGET_COMPUTE_120F",                                           {"hipJitTargetCompute120f",                                  "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // CU_COMPUTE_FAMILY_TARGET_BASE + CU_TARGET_COMPUTE_120
@@ -1835,6 +1857,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUDA_ERROR_PROFILER_ALREADY_STOPPED",                              {"hipErrorProfilerAlreadyStopped",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, CUDA_DEPRECATED}}, // 8
   // cudaErrorStubLibrary
   {"CUDA_ERROR_STUB_LIBRARY",                                          {"hipErrorStubLibrary",                                      "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 34
+  //
+  {"CUDA_ERROR_CALL_REQUIRES_NEWER_DRIVER",                            {"hipErrorCallRequiresNewerDriver",                          "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 36
   //
   {"CUDA_ERROR_DEVICE_UNAVAILABLE",                                    {"hipErrorDeviceUnavailable",                                "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 46
   // cudaErrorNoDevice
@@ -2230,6 +2254,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // CUmemLocationType enum values
   // cudaMemLocationTypeInvalid
   {"CU_MEM_LOCATION_TYPE_INVALID",                                     {"hipMemLocationTypeInvalid",                                "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}}, // 0x0
+  //
+  {"CU_MEM_LOCATION_TYPE_NONE",                                        {"hipMemLocationTypeInvalid",                                "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}}, // 0x0
   // cudaMemLocationTypeDevice
   {"CU_MEM_LOCATION_TYPE_DEVICE",                                      {"hipMemLocationTypeDevice",                                 "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}}, // 0x1
   // cudaMemLocationTypeHost
@@ -2249,6 +2275,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_MEM_ALLOCATION_TYPE_INVALID",                                   {"hipMemAllocationTypeInvalid",                              "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}}, // 0x0
   // cudaMemAllocationTypePinned
   {"CU_MEM_ALLOCATION_TYPE_PINNED",                                    {"hipMemAllocationTypePinned",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}}, // 0x1
+  //
+  {"CU_MEM_ALLOCATION_TYPE_MANAGED",                                   {"hipMemAllocationTypeManaged",                              "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0x2
   // cudaMemAllocationTypeMax
   {"CU_MEM_ALLOCATION_TYPE_MAX",                                       {"hipMemAllocationTypeMax",                                  "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}}, // 0x7FFFFFFF
 
@@ -2632,6 +2660,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaLaunchAttributePreferredSharedMemoryCarveout
   {"CU_LAUNCH_ATTRIBUTE_PREFERRED_SHARED_MEMORY_CARVEOUT",             {"hipLaunchAttributePreferredSharedMemoryCarveout",          "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   //
+  {"CU_LAUNCH_ATTRIBUTE_NVLINK_UTIL_CENTRIC_SCHEDULING",               {"hipLaunchAttributeNvlinkUtilCentricScheduling",            "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
   {"CU_LAUNCH_ATTRIBUTE_MAX",                                          {"hipLaunchAttributeMax",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   // cudaGraphInstantiateResult
@@ -3010,6 +3040,60 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_LOG_LEVEL_ERROR",                                               {"HIP_LOG_LEVEL_ERROR",                                      "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   //
   {"CU_LOG_LEVEL_WARNING",                                             {"HIP_LOG_LEVEL_WARNING",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+
+  //
+  {"CUatomicOperation",                                                {"hipAtomicOperation",                                       "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CUatomicOperation_enum",                                           {"hipAtomicOperation",                                       "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // CUatomicOperation enum values
+  //
+  {"CU_ATOMIC_OPERATION_INTEGER_ADD",                                  {"HIP_ATOMIC_OPERATION_INTEGER_ADD",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CU_ATOMIC_OPERATION_INTEGER_MIN",                                  {"HIP_ATOMIC_OPERATION_INTEGER_MIN",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CU_ATOMIC_OPERATION_INTEGER_MAX",                                  {"HIP_ATOMIC_OPERATION_INTEGER_MAX",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CU_ATOMIC_OPERATION_INTEGER_INCREMENT",                            {"HIP_ATOMIC_OPERATION_INTEGER_INCREMENT",                   "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CU_ATOMIC_OPERATION_INTEGER_DECREMENT",                            {"HIP_ATOMIC_OPERATION_INTEGER_DECREMENT",                   "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CU_ATOMIC_OPERATION_AND",                                          {"HIP_ATOMIC_OPERATION_AND",                                 "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CU_ATOMIC_OPERATION_OR",                                           {"HIP_ATOMIC_OPERATION_OR",                                  "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CU_ATOMIC_OPERATION_XOR",                                          {"HIP_ATOMIC_OPERATION_XOR",                                 "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CU_ATOMIC_OPERATION_EXCHANGE",                                     {"HIP_ATOMIC_OPERATION_EXCHANGE",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CU_ATOMIC_OPERATION_CAS",                                          {"HIP_ATOMIC_OPERATION_CAS",                                 "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CU_ATOMIC_OPERATION_FLOAT_ADD",                                    {"HIP_ATOMIC_OPERATION_FLOAT_ADD",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CU_ATOMIC_OPERATION_FLOAT_MIN",                                    {"HIP_ATOMIC_OPERATION_FLOAT_MIN",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CU_ATOMIC_OPERATION_FLOAT_MAX",                                    {"HIP_ATOMIC_OPERATION_FLOAT_MAX",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CU_ATOMIC_OPERATION_MAX",                                          {"HIP_ATOMIC_OPERATION_MAX",                                 "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+
+  //
+  {"CUatomicOperationCapability",                                      {"hipAtomicOperationCapability",                             "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CUatomicOperationCapability_enum",                                 {"hipAtomicOperationCapability",                             "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // CUatomicOperationCapability enum values
+  //
+  {"CU_ATOMIC_CAPABILITY_SIGNED",                                      {"HIP_ATOMIC_CAPABILITY_SIGNED",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CU_ATOMIC_CAPABILITY_UNSIGNED",                                    {"HIP_ATOMIC_CAPABILITY_UNSIGNED",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CU_ATOMIC_CAPABILITY_REDUCTION",                                   {"HIP_ATOMIC_CAPABILITY_REDUCTION",                          "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CU_ATOMIC_CAPABILITY_SCALAR_32",                                   {"HIP_ATOMIC_CAPABILITY_SCALAR_32",                          "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CU_ATOMIC_CAPABILITY_SCALAR_64",                                   {"HIP_ATOMIC_CAPABILITY_SCALAR_64",                          "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CU_ATOMIC_CAPABILITY_SCALAR_128",                                  {"HIP_ATOMIC_CAPABILITY_SCALAR_128",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CU_ATOMIC_CAPABILITY_VECTOR_32x4",                                 {"HIP_ATOMIC_CAPABILITY_VECTOR_32x4",                        "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   // 4. Typedefs
 
@@ -4154,10 +4238,10 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_TYPE_NAME_VER_MAP {
   {"CU_DEVICE_ATTRIBUTE_HOST_NUMA_MULTINODE_IPC_SUPPORTED",            {CUDA_128, CUDA_0,   CUDA_0  }},
   {"CU_POINTER_ATTRIBUTE_IS_HW_DECOMPRESS_CAPABLE",                    {CUDA_128, CUDA_0,   CUDA_0  }},
   {"CU_TARGET_COMPUTE_100",                                            {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"CU_TARGET_COMPUTE_101",                                            {CUDA_128, CUDA_0,   CUDA_0  }},
+  {"CU_TARGET_COMPUTE_101",                                            {CUDA_128, CUDA_0,   CUDA_130}},
   {"CU_TARGET_COMPUTE_120",                                            {CUDA_128, CUDA_0,   CUDA_0  }},
   {"CU_TARGET_COMPUTE_100A",                                           {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"CU_TARGET_COMPUTE_101A",                                           {CUDA_128, CUDA_0,   CUDA_0  }},
+  {"CU_TARGET_COMPUTE_101A",                                           {CUDA_128, CUDA_0,   CUDA_130}},
   {"CU_TARGET_COMPUTE_120A",                                           {CUDA_128, CUDA_0,   CUDA_0  }},
   {"CU_GRAPH_COND_TYPE_SWITCH",                                        {CUDA_128, CUDA_0,   CUDA_0  }},
   {"CUDA_GRAPH_INSTANTIATE_CONDITIONAL_HANDLE_UNUSED",                 {CUDA_128, CUDA_0,   CUDA_0  }},
@@ -4243,7 +4327,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_TYPE_NAME_VER_MAP {
   {"CU_DEVICE_ATTRIBUTE_HOST_NUMA_MEMORY_POOLS_SUPPORTED",             {CUDA_129, CUDA_0,   CUDA_0  }},
   {"CU_COMPUTE_FAMILY_TARGET_BASE",                                    {CUDA_129, CUDA_0,   CUDA_0  }},
   {"CU_TARGET_COMPUTE_100F",                                           {CUDA_129, CUDA_0,   CUDA_0  }},
-  {"CU_TARGET_COMPUTE_101F",                                           {CUDA_129, CUDA_0,   CUDA_0  }},
+  {"CU_TARGET_COMPUTE_101F",                                           {CUDA_129, CUDA_0,   CUDA_130}},
   {"CU_TARGET_COMPUTE_103",                                            {CUDA_129, CUDA_0,   CUDA_0  }},
   {"CU_TARGET_COMPUTE_103A",                                           {CUDA_129, CUDA_0,   CUDA_0  }},
   {"CU_TARGET_COMPUTE_103F",                                           {CUDA_129, CUDA_0,   CUDA_0  }},
@@ -4266,6 +4350,47 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_TYPE_NAME_VER_MAP {
   {"CUlogsCallbackHandle",                                             {CUDA_129, CUDA_0,   CUDA_0  }},
   {"CUlogsCallback",                                                   {CUDA_129, CUDA_0,   CUDA_0  }},
   {"CUlogIterator",                                                    {CUDA_129, CUDA_0,   CUDA_0  }},
+  {"CU_DEVICE_ATTRIBUTE_HOST_MEMORY_POOLS_SUPPORTED",                  {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CU_DEVICE_ATTRIBUTE_HOST_VIRTUAL_MEMORY_MANAGEMENT_SUPPORTED",     {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CU_DEVICE_ATTRIBUTE_HOST_ALLOC_DMA_BUF_SUPPORTED",                 {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CU_DEVICE_ATTRIBUTE_ONLY_PARTIAL_HOST_NATIVE_ATOMIC_SUPPORTED",    {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CU_JIT_SPLIT_COMPILE",                                             {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CU_TARGET_COMPUTE_110",                                            {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CU_TARGET_COMPUTE_110A",                                           {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CU_TARGET_COMPUTE_110F",                                           {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CU_LAUNCH_ATTRIBUTE_NVLINK_UTIL_CENTRIC_SCHEDULING",               {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CUDA_ERROR_CALL_REQUIRES_NEWER_DRIVER",                            {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CU_DEVICE_P2P_ATTRIBUTE_ONLY_PARTIAL_NATIVE_ATOMIC_SUPPORTED",     {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CUatomicOperation",                                                {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CUatomicOperation_enum",                                           {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CU_ATOMIC_OPERATION_INTEGER_ADD",                                  {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CU_ATOMIC_OPERATION_INTEGER_MIN",                                  {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CU_ATOMIC_OPERATION_INTEGER_MAX",                                  {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CU_ATOMIC_OPERATION_INTEGER_INCREMENT",                            {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CU_ATOMIC_OPERATION_INTEGER_DECREMENT",                            {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CU_ATOMIC_OPERATION_AND",                                          {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CU_ATOMIC_OPERATION_OR",                                           {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CU_ATOMIC_OPERATION_XOR",                                          {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CU_ATOMIC_OPERATION_EXCHANGE",                                     {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CU_ATOMIC_OPERATION_CAS",                                          {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CU_ATOMIC_OPERATION_FLOAT_ADD",                                    {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CU_ATOMIC_OPERATION_FLOAT_MIN",                                    {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CU_ATOMIC_OPERATION_FLOAT_MAX",                                    {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CU_ATOMIC_OPERATION_MAX",                                          {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CUatomicOperationCapability",                                      {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CUatomicOperationCapability_enum",                                 {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CU_ATOMIC_CAPABILITY_SIGNED",                                      {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CU_ATOMIC_CAPABILITY_UNSIGNED",                                    {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CU_ATOMIC_CAPABILITY_REDUCTION",                                   {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CU_ATOMIC_CAPABILITY_SCALAR_32",                                   {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CU_ATOMIC_CAPABILITY_SCALAR_64",                                   {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CU_ATOMIC_CAPABILITY_SCALAR_128",                                  {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CU_ATOMIC_CAPABILITY_VECTOR_32x4",                                 {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CU_EXTERNAL_MEMORY_HANDLE_TYPE_DMABUF_FD",                         {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CU_MEM_LOCATION_TYPE_NONE",                                        {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CU_MEM_ALLOCATION_TYPE_MANAGED",                                   {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CUcheckpointGpuPair_st",                                           {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CUcheckpointGpuPair",                                              {CUDA_130, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {

@@ -1470,6 +1470,9 @@ my %removed_funcs = (
     "CU_TARGET_COMPUTE_13" => "9.0",
     "CU_TARGET_COMPUTE_12" => "9.0",
     "CU_TARGET_COMPUTE_11" => "9.0",
+    "CU_TARGET_COMPUTE_101F" => "13.0",
+    "CU_TARGET_COMPUTE_101A" => "13.0",
+    "CU_TARGET_COMPUTE_101" => "13.0",
     "CU_TARGET_COMPUTE_10" => "9.0",
     "CU_GRAPH_NODE_TYPE_COUNT" => "11.0",
     "CU_DEVICE_P2P_ATTRIBUTE_ARRAY_ACCESS_ACCESS_SUPPORTED" => "10.1",
@@ -4230,8 +4233,6 @@ sub simpleSubstitutions {
     subst("cudaSetDevice", "hipSetDevice", "device");
     subst("cudaSetDeviceFlags", "hipSetDeviceFlags", "device");
     subst("cudaSetValidDevices", "hipSetValidDevices", "device");
-    subst("cuCtxCreate", "hipCtxCreate", "context");
-    subst("cuCtxCreate_v2", "hipCtxCreate", "context");
     subst("cuCtxDestroy", "hipCtxDestroy", "context");
     subst("cuCtxDestroy_v2", "hipCtxDestroy", "context");
     subst("cuCtxGetApiVersion", "hipCtxGetApiVersion", "context");
@@ -4456,8 +4457,6 @@ sub simpleSubstitutions {
     subst("cuMemPoolSetAccess", "hipMemPoolSetAccess", "ordered_memory");
     subst("cuMemPoolSetAttribute", "hipMemPoolSetAttribute", "ordered_memory");
     subst("cuMemPoolTrimTo", "hipMemPoolTrimTo", "ordered_memory");
-    subst("cuMemAdvise", "hipMemAdvise", "unified");
-    subst("cuMemPrefetchAsync", "hipMemPrefetchAsync", "unified");
     subst("cuMemRangeGetAttribute", "hipMemRangeGetAttribute", "unified");
     subst("cuMemRangeGetAttributes", "hipMemRangeGetAttributes", "unified");
     subst("cuPointerGetAttribute", "hipPointerGetAttribute", "unified");
@@ -4474,14 +4473,12 @@ sub simpleSubstitutions {
     subst("cuStreamDestroy", "hipStreamDestroy", "stream");
     subst("cuStreamDestroy_v2", "hipStreamDestroy", "stream");
     subst("cuStreamEndCapture", "hipStreamEndCapture", "stream");
-    subst("cuStreamGetCaptureInfo", "hipStreamGetCaptureInfo", "stream");
     subst("cuStreamGetCaptureInfo_v2", "hipStreamGetCaptureInfo_v2", "stream");
     subst("cuStreamGetFlags", "hipStreamGetFlags", "stream");
     subst("cuStreamGetPriority", "hipStreamGetPriority", "stream");
     subst("cuStreamIsCapturing", "hipStreamIsCapturing", "stream");
     subst("cuStreamQuery", "hipStreamQuery", "stream");
     subst("cuStreamSynchronize", "hipStreamSynchronize", "stream");
-    subst("cuStreamUpdateCaptureDependencies", "hipStreamUpdateCaptureDependencies", "stream");
     subst("cuStreamWaitEvent", "hipStreamWaitEvent", "stream");
     subst("cuThreadExchangeStreamCaptureMode", "hipThreadExchangeStreamCaptureMode", "stream");
     subst("cudaStreamAddCallback", "hipStreamAddCallback", "stream");
@@ -4506,6 +4503,7 @@ sub simpleSubstitutions {
     subst("cuEventDestroy", "hipEventDestroy", "event");
     subst("cuEventDestroy_v2", "hipEventDestroy", "event");
     subst("cuEventElapsedTime", "hipEventElapsedTime", "event");
+    subst("cuEventElapsedTime_v2", "hipEventElapsedTime", "event");
     subst("cuEventQuery", "hipEventQuery", "event");
     subst("cuEventRecord", "hipEventRecord", "event");
     subst("cuEventRecordWithFlags", "hipEventRecordWithFlags", "event");
@@ -4563,7 +4561,6 @@ sub simpleSubstitutions {
     subst("cuDeviceSetGraphMemAttribute", "hipDeviceSetGraphMemAttribute", "graph");
     subst("cuGraphAddBatchMemOpNode", "hipGraphAddBatchMemOpNode", "graph");
     subst("cuGraphAddChildGraphNode", "hipGraphAddChildGraphNode", "graph");
-    subst("cuGraphAddDependencies", "hipGraphAddDependencies", "graph");
     subst("cuGraphAddEmptyNode", "hipGraphAddEmptyNode", "graph");
     subst("cuGraphAddEventRecordNode", "hipGraphAddEventRecordNode", "graph");
     subst("cuGraphAddEventWaitNode", "hipGraphAddEventWaitNode", "graph");
@@ -4575,7 +4572,6 @@ sub simpleSubstitutions {
     subst("cuGraphAddMemFreeNode", "hipDrvGraphAddMemFreeNode", "graph");
     subst("cuGraphAddMemcpyNode", "hipDrvGraphAddMemcpyNode", "graph");
     subst("cuGraphAddMemsetNode", "hipDrvGraphAddMemsetNode", "graph");
-    subst("cuGraphAddNode", "hipGraphAddNode", "graph");
     subst("cuGraphBatchMemOpNodeGetParams", "hipGraphBatchMemOpNodeGetParams", "graph");
     subst("cuGraphBatchMemOpNodeSetParams", "hipGraphBatchMemOpNodeSetParams", "graph");
     subst("cuGraphChildGraphNodeGetGraph", "hipGraphChildGraphNodeGetGraph", "graph");
@@ -4606,7 +4602,6 @@ sub simpleSubstitutions {
     subst("cuGraphExternalSemaphoresSignalNodeSetParams", "hipGraphExternalSemaphoresSignalNodeSetParams", "graph");
     subst("cuGraphExternalSemaphoresWaitNodeGetParams", "hipGraphExternalSemaphoresWaitNodeGetParams", "graph");
     subst("cuGraphExternalSemaphoresWaitNodeSetParams", "hipGraphExternalSemaphoresWaitNodeSetParams", "graph");
-    subst("cuGraphGetEdges", "hipGraphGetEdges", "graph");
     subst("cuGraphGetNodes", "hipGraphGetNodes", "graph");
     subst("cuGraphGetRootNodes", "hipGraphGetRootNodes", "graph");
     subst("cuGraphHostNodeGetParams", "hipGraphHostNodeGetParams", "graph");
@@ -4628,14 +4623,11 @@ sub simpleSubstitutions {
     subst("cuGraphMemsetNodeGetParams", "hipGraphMemsetNodeGetParams", "graph");
     subst("cuGraphMemsetNodeSetParams", "hipGraphMemsetNodeSetParams", "graph");
     subst("cuGraphNodeFindInClone", "hipGraphNodeFindInClone", "graph");
-    subst("cuGraphNodeGetDependencies", "hipGraphNodeGetDependencies", "graph");
-    subst("cuGraphNodeGetDependentNodes", "hipGraphNodeGetDependentNodes", "graph");
     subst("cuGraphNodeGetEnabled", "hipGraphNodeGetEnabled", "graph");
     subst("cuGraphNodeGetType", "hipGraphNodeGetType", "graph");
     subst("cuGraphNodeSetEnabled", "hipGraphNodeSetEnabled", "graph");
     subst("cuGraphNodeSetParams", "hipGraphNodeSetParams", "graph");
     subst("cuGraphReleaseUserObject", "hipGraphReleaseUserObject", "graph");
-    subst("cuGraphRemoveDependencies", "hipGraphRemoveDependencies", "graph");
     subst("cuGraphRetainUserObject", "hipGraphRetainUserObject", "graph");
     subst("cuGraphUpload", "hipGraphUpload", "graph");
     subst("cuUserObjectCreate", "hipUserObjectCreate", "graph");
@@ -8595,6 +8587,7 @@ sub simpleSubstitutions {
     subst("CU_DEVICE_P2P_ATTRIBUTE_ARRAY_ACCESS_ACCESS_SUPPORTED", "hipDevP2PAttrHipArrayAccessSupported", "numeric_literal");
     subst("CU_DEVICE_P2P_ATTRIBUTE_CUDA_ARRAY_ACCESS_SUPPORTED", "hipDevP2PAttrHipArrayAccessSupported", "numeric_literal");
     subst("CU_DEVICE_P2P_ATTRIBUTE_NATIVE_ATOMIC_SUPPORTED", "hipDevP2PAttrNativeAtomicSupported", "numeric_literal");
+    subst("CU_DEVICE_P2P_ATTRIBUTE_ONLY_PARTIAL_NATIVE_ATOMIC_SUPPORTED", "hipDevP2PAttrOnlyPartialNativeAtomicSupported", "numeric_literal");
     subst("CU_DEVICE_P2P_ATTRIBUTE_PERFORMANCE_RANK", "hipDevP2PAttrPerformanceRank", "numeric_literal");
     subst("CU_EVENT_BLOCKING_SYNC", "hipEventBlockingSync", "numeric_literal");
     subst("CU_EVENT_DEFAULT", "hipEventDefault", "numeric_literal");
@@ -8767,6 +8760,7 @@ sub simpleSubstitutions {
     subst("CU_MEM_HANDLE_TYPE_WIN32_KMT", "hipMemHandleTypeWin32Kmt", "numeric_literal");
     subst("CU_MEM_LOCATION_TYPE_DEVICE", "hipMemLocationTypeDevice", "numeric_literal");
     subst("CU_MEM_LOCATION_TYPE_INVALID", "hipMemLocationTypeInvalid", "numeric_literal");
+    subst("CU_MEM_LOCATION_TYPE_NONE", "hipMemLocationTypeInvalid", "numeric_literal");
     subst("CU_MEM_OPERATION_TYPE_MAP", "hipMemOperationTypeMap", "numeric_literal");
     subst("CU_MEM_OPERATION_TYPE_UNMAP", "hipMemOperationTypeUnmap", "numeric_literal");
     subst("CU_MEM_RANGE_ATTRIBUTE_ACCESSED_BY", "hipMemRangeAttributeAccessedBy", "numeric_literal");
@@ -11984,6 +11978,7 @@ sub warnRemovedFunctions {
     "cuSurfObjectDestroy",
     "cuSurfObjectCreate",
     "cuStreamUpdateCaptureDependencies_v2",
+    "cuStreamUpdateCaptureDependencies",
     "cuStreamSetAttribute",
     "cuStreamGetId",
     "cuStreamGetGreenCtx",
@@ -11991,6 +11986,7 @@ sub warnRemovedFunctions {
     "cuStreamGetCtx_v2",
     "cuStreamGetCtx",
     "cuStreamGetCaptureInfo_v3",
+    "cuStreamGetCaptureInfo",
     "cuStreamGetAttribute",
     "cuStreamCopyAttributes",
     "cuStreamBeginCapture_ptsz",
@@ -12032,9 +12028,17 @@ sub warnRemovedFunctions {
     "cuMemcpy3DPeer",
     "cuMemcpy3DBatchAsync",
     "cuMemcpy",
+    "cuMemSetMemPool",
+    "cuMemPrefetchBatchAsync",
     "cuMemPrefetchAsync_v2",
+    "cuMemPrefetchAsync",
+    "cuMemGetMemPool",
+    "cuMemGetDefaultMemPool",
+    "cuMemDiscardBatchAsync",
+    "cuMemDiscardAndPrefetchBatchAsync",
     "cuMemBatchDecompressAsync",
     "cuMemAdvise_v2",
+    "cuMemAdvise",
     "cuLogsUnregisterCallback",
     "cuLogsRegisterCallback",
     "cuLogsDumpToMemory",
@@ -12063,6 +12067,7 @@ sub warnRemovedFunctions {
     "cuGreenCtxWaitEvent",
     "cuGreenCtxStreamCreate",
     "cuGreenCtxRecordEvent",
+    "cuGreenCtxGetId",
     "cuGreenCtxGetDevResource",
     "cuGreenCtxDestroy",
     "cuGreenCtxCreate",
@@ -12077,12 +12082,18 @@ sub warnRemovedFunctions {
     "cuGraphicsD3D11RegisterResource",
     "cuGraphicsD3D10RegisterResource",
     "cuGraphRemoveDependencies_v2",
+    "cuGraphRemoveDependencies",
     "cuGraphNodeGetDependentNodes_v2",
+    "cuGraphNodeGetDependentNodes",
     "cuGraphNodeGetDependencies_v2",
+    "cuGraphNodeGetDependencies",
     "cuGraphGetEdges_v2",
+    "cuGraphGetEdges",
     "cuGraphConditionalHandleCreate",
     "cuGraphAddNode_v2",
+    "cuGraphAddNode",
     "cuGraphAddDependencies_v2",
+    "cuGraphAddDependencies",
     "cuGLUnregisterBufferObject",
     "cuGLUnmapBufferObjectAsync",
     "cuGLUnmapBufferObject",
@@ -12104,7 +12115,6 @@ sub warnRemovedFunctions {
     "cuFuncGetModule",
     "cuFlushGPUDirectRDMAWrites",
     "cuExternalMemoryGetMappedMipmappedArray",
-    "cuEventElapsedTime_v2",
     "cuEventCreateFromEGLSync",
     "cuEGLStreamProducerReturnFrame",
     "cuEGLStreamProducerPresentFrame",
@@ -12118,8 +12128,10 @@ sub warnRemovedFunctions {
     "cuDeviceUnregisterAsyncNotification",
     "cuDeviceRegisterAsyncNotification",
     "cuDeviceGetProperties",
+    "cuDeviceGetP2PAtomicCapabilities",
     "cuDeviceGetNvSciSyncAttributes",
     "cuDeviceGetLuid",
+    "cuDeviceGetHostAtomicCapabilities",
     "cuDeviceGetExecAffinitySupport",
     "cuDeviceGetDevResource",
     "cuDevSmResourceSplitByCount",
@@ -12160,15 +12172,19 @@ sub warnRemovedFunctions {
     "cuD3D10CtxCreateOnDevice",
     "cuD3D10CtxCreate",
     "cuCtxWaitEvent",
+    "cuCtxSynchronize_v2",
     "cuCtxSetFlags",
     "cuCtxResetPersistingL2Cache",
     "cuCtxGetId",
     "cuCtxGetExecAffinity",
+    "cuCtxGetDevice_v2",
     "cuCtxGetDevResource",
     "cuCtxFromGreenCtx",
     "cuCtxDetach",
     "cuCtxCreate_v4",
     "cuCtxCreate_v3",
+    "cuCtxCreate_v2",
+    "cuCtxCreate",
     "cuCtxAttach",
     "cuCoredumpSetAttributeGlobal",
     "cuCoredumpSetAttribute",
@@ -12417,8 +12433,14 @@ sub warnRemovedFunctions {
     "CUcheckpointRestoreArgs",
     "CUcheckpointLockArgs_st",
     "CUcheckpointLockArgs",
+    "CUcheckpointGpuPair_st",
+    "CUcheckpointGpuPair",
     "CUcheckpointCheckpointArgs_st",
     "CUcheckpointCheckpointArgs",
+    "CUatomicOperation_enum",
+    "CUatomicOperationCapability_enum",
+    "CUatomicOperationCapability",
+    "CUatomicOperation",
     "CUasyncNotificationType_enum",
     "CUasyncNotificationType",
     "CUasyncNotificationInfo_st",
@@ -12495,6 +12517,9 @@ sub warnRemovedFunctions {
     "CU_TARGET_COMPUTE_120A",
     "CU_TARGET_COMPUTE_120",
     "CU_TARGET_COMPUTE_12",
+    "CU_TARGET_COMPUTE_110F",
+    "CU_TARGET_COMPUTE_110A",
+    "CU_TARGET_COMPUTE_110",
     "CU_TARGET_COMPUTE_11",
     "CU_TARGET_COMPUTE_103F",
     "CU_TARGET_COMPUTE_103A",
@@ -12558,6 +12583,7 @@ sub warnRemovedFunctions {
     "CU_MEM_DECOMPRESS_ALGORITHM_DEFLATE",
     "CU_MEM_CREATE_USAGE_TILE_POOL",
     "CU_MEM_CREATE_USAGE_HW_DECOMPRESS",
+    "CU_MEM_ALLOCATION_TYPE_MANAGED",
     "CU_MEM_ACCESS_FLAGS_PROT_MAX",
     "CU_MEMCPY_SRC_ACCESS_ORDER_STREAM",
     "CU_MEMCPY_SRC_ACCESS_ORDER_MAX",
@@ -12593,6 +12619,7 @@ sub warnRemovedFunctions {
     "CU_LAUNCH_ATTRIBUTE_PROGRAMMATIC_EVENT",
     "CU_LAUNCH_ATTRIBUTE_PREFERRED_SHARED_MEMORY_CARVEOUT",
     "CU_LAUNCH_ATTRIBUTE_PREFERRED_CLUSTER_DIMENSION",
+    "CU_LAUNCH_ATTRIBUTE_NVLINK_UTIL_CENTRIC_SCHEDULING",
     "CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP",
     "CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN",
     "CU_LAUNCH_ATTRIBUTE_MAX",
@@ -12608,6 +12635,7 @@ sub warnRemovedFunctions {
     "CU_KERNEL_NODE_ATTRIBUTE_DEVICE_UPDATABLE_KERNEL_NODE",
     "CU_KERNEL_NODE_ATTRIBUTE_CLUSTER_SCHEDULING_POLICY_PREFERENCE",
     "CU_KERNEL_NODE_ATTRIBUTE_CLUSTER_DIMENSION",
+    "CU_JIT_SPLIT_COMPILE",
     "CU_JIT_REFERENCED_VARIABLE_NAMES",
     "CU_JIT_REFERENCED_VARIABLE_COUNT",
     "CU_JIT_REFERENCED_KERNEL_NAMES",
@@ -12658,6 +12686,7 @@ sub warnRemovedFunctions {
     "CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D11_KEYED_MUTEX",
     "CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D11_FENCE",
     "CU_EXTERNAL_MEMORY_HANDLE_TYPE_NVSCIBUF",
+    "CU_EXTERNAL_MEMORY_HANDLE_TYPE_DMABUF_FD",
     "CU_EXEC_AFFINITY_TYPE_SM_COUNT",
     "CU_EXEC_AFFINITY_TYPE_MAX",
     "CU_EVENT_WAIT_EXTERNAL",
@@ -12758,6 +12787,7 @@ sub warnRemovedFunctions {
     "CU_DEVICE_ATTRIBUTE_SPARSE_CUDA_ARRAY_SUPPORTED",
     "CU_DEVICE_ATTRIBUTE_RESERVED_SHARED_MEMORY_PER_BLOCK",
     "CU_DEVICE_ATTRIBUTE_READ_ONLY_HOST_REGISTER_SUPPORTED",
+    "CU_DEVICE_ATTRIBUTE_ONLY_PARTIAL_HOST_NATIVE_ATOMIC_SUPPORTED",
     "CU_DEVICE_ATTRIBUTE_NUMA_ID",
     "CU_DEVICE_ATTRIBUTE_NUMA_CONFIG",
     "CU_DEVICE_ATTRIBUTE_MULTICAST_SUPPORTED",
@@ -12777,10 +12807,13 @@ sub warnRemovedFunctions {
     "CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE1D_LAYERED_LAYERS",
     "CU_DEVICE_ATTRIBUTE_MAX",
     "CU_DEVICE_ATTRIBUTE_IPC_EVENT_SUPPORTED",
+    "CU_DEVICE_ATTRIBUTE_HOST_VIRTUAL_MEMORY_MANAGEMENT_SUPPORTED",
     "CU_DEVICE_ATTRIBUTE_HOST_NUMA_VIRTUAL_MEMORY_MANAGEMENT_SUPPORTED",
     "CU_DEVICE_ATTRIBUTE_HOST_NUMA_MULTINODE_IPC_SUPPORTED",
     "CU_DEVICE_ATTRIBUTE_HOST_NUMA_MEMORY_POOLS_SUPPORTED",
     "CU_DEVICE_ATTRIBUTE_HOST_NUMA_ID",
+    "CU_DEVICE_ATTRIBUTE_HOST_MEMORY_POOLS_SUPPORTED",
+    "CU_DEVICE_ATTRIBUTE_HOST_ALLOC_DMA_BUF_SUPPORTED",
     "CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_WIN32_KMT_HANDLE_SUPPORTED",
     "CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_WIN32_HANDLE_SUPPORTED",
     "CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_POSIX_FILE_DESCRIPTOR_SUPPORTED",
@@ -12854,6 +12887,27 @@ sub warnRemovedFunctions {
     "CU_CLUSTER_SCHEDULING_POLICY_SPREAD",
     "CU_CLUSTER_SCHEDULING_POLICY_LOAD_BALANCING",
     "CU_CLUSTER_SCHEDULING_POLICY_DEFAULT",
+    "CU_ATOMIC_OPERATION_XOR",
+    "CU_ATOMIC_OPERATION_OR",
+    "CU_ATOMIC_OPERATION_MAX",
+    "CU_ATOMIC_OPERATION_INTEGER_MIN",
+    "CU_ATOMIC_OPERATION_INTEGER_MAX",
+    "CU_ATOMIC_OPERATION_INTEGER_INCREMENT",
+    "CU_ATOMIC_OPERATION_INTEGER_DECREMENT",
+    "CU_ATOMIC_OPERATION_INTEGER_ADD",
+    "CU_ATOMIC_OPERATION_FLOAT_MIN",
+    "CU_ATOMIC_OPERATION_FLOAT_MAX",
+    "CU_ATOMIC_OPERATION_FLOAT_ADD",
+    "CU_ATOMIC_OPERATION_EXCHANGE",
+    "CU_ATOMIC_OPERATION_CAS",
+    "CU_ATOMIC_OPERATION_AND",
+    "CU_ATOMIC_CAPABILITY_VECTOR_32x4",
+    "CU_ATOMIC_CAPABILITY_UNSIGNED",
+    "CU_ATOMIC_CAPABILITY_SIGNED",
+    "CU_ATOMIC_CAPABILITY_SCALAR_64",
+    "CU_ATOMIC_CAPABILITY_SCALAR_32",
+    "CU_ATOMIC_CAPABILITY_SCALAR_128",
+    "CU_ATOMIC_CAPABILITY_REDUCTION",
     "CU_ASYNC_NOTIFICATION_TYPE_OVER_BUDGET",
     "CU_ARRAY_SPARSE_PROPERTIES_SINGLE_MIPTAIL",
     "CU_AD_FORMAT_YUY2",
@@ -13089,6 +13143,7 @@ sub warnRemovedFunctions {
     "CUDA_ERROR_COMPAT_NOT_SUPPORTED_ON_DEVICE",
     "CUDA_ERROR_CDP_VERSION_MISMATCH",
     "CUDA_ERROR_CDP_NOT_SUPPORTED",
+    "CUDA_ERROR_CALL_REQUIRES_NEWER_DRIVER",
     "CUDA_EGL_MAX_PLANES",
     "CUDA_CONDITIONAL_NODE_PARAMS",
     "CUDA_CB",
