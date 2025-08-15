@@ -103,6 +103,6 @@ void addTargetIfNeeded(ct::RefactoringTool &Tool);
 
 const clang::IdentifierInfo *getControllingMacro(clang::CompilerInstance &CI);
 
-std::string getNamespaceDeclName(const clang::NestedNameSpecifier *NNS);
+std::string getNamespaceDeclName(const clang::QualType &QT);
 
 } // namespace llcompat
