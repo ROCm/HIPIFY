@@ -189,7 +189,7 @@ bool appendArgumentsAdjusters(ct::RefactoringTool &Tool, const std::string &sSou
     }
   }
   // Standard c++14 by default
-  Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-std=c++14", ct::ArgumentInsertPosition::BEGIN));
+  Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-std=c++17", ct::ArgumentInsertPosition::BEGIN));
   std::string sInclude = "-I" + sys::path::parent_path(sSourceAbsPath).str();
   Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster(sInclude.c_str(), ct::ArgumentInsertPosition::BEGIN));
   Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-fno-delayed-template-parsing", ct::ArgumentInsertPosition::BEGIN));
