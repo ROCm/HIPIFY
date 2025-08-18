@@ -188,8 +188,8 @@ bool appendArgumentsAdjusters(ct::RefactoringTool &Tool, const std::string &sSou
       Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-D", ct::ArgumentInsertPosition::BEGIN));
     }
   }
-  // Standard c++14 by default
-  Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-std=c++14", ct::ArgumentInsertPosition::BEGIN));
+  // Standard c++ to use in hipification by default
+  llcompat::setStdCPP(Tool);
   std::string sInclude = "-I" + sys::path::parent_path(sSourceAbsPath).str();
   Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster(sInclude.c_str(), ct::ArgumentInsertPosition::BEGIN));
   Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-fno-delayed-template-parsing", ct::ArgumentInsertPosition::BEGIN));

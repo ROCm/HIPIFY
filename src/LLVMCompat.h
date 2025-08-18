@@ -105,4 +105,7 @@ const clang::IdentifierInfo *getControllingMacro(clang::CompilerInstance &CI);
 
 std::string getNamespaceDeclName(const clang::QualType &QT);
 
+// Sets an appropriate -std=c++XX if needed based on the LLVM version used for building hipify-clang itself
+void setStdCPP(ct::RefactoringTool &Tool);
+
 } // namespace llcompat
