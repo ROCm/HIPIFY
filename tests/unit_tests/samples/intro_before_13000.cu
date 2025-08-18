@@ -39,9 +39,11 @@
 
 
 inline void cErrorCheck(const char *file, int line) {
+// CHECK: hipDeviceSynchronize();
 // CHECK: hipError_t err = hipGetLastError();
 // CHECK: if (err != hipSuccess) {
 // CHECK: printf("Error: %s\n", hipGetErrorString(err));
+  cudaThreadSynchronize();
   cudaError_t err = cudaGetLastError();
   if (err != cudaSuccess) {
     printf("Error: %s\n", cudaGetErrorString(err));

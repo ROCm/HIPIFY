@@ -3,13 +3,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include "inc.h"
 // CHECK: #include <hip/hip_runtime.h>
 #include <cuda.h>
-
-#define K_THREADS 64
-#define K_INDEX() ((gridDim.x * blockIdx.y + blockIdx.x) * blockDim.x + threadIdx.x)
-#define RND() ((rand() & 0x7FFF) / float(0x8000))
-#define ERRORCHECK() cErrorCheck(__FILE__, __LINE__)
 
 // CHECK: hipEvent_t t##_start, t##_end;            \
 // CHECK: hipEventCreate(&t##_start);               \

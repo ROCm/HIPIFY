@@ -236,10 +236,17 @@ int main() {
   // CHECK: result = hipSetDeviceFlags(flags);
   result = cudaSetDeviceFlags(flags);
 
+#if CUDA_VERSION < 13000
   // CUDA: extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaThreadExit(void);
   // HIP: hipError_t hipDeviceReset(void);
   // CHECK: result = hipDeviceReset();
   result = cudaThreadExit();
+
+  // CUDA: extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaThreadSynchronize(void);
+  // HIP: hipError_t hipError_t hipDeviceSynchronize(void);
+  // CHECK: result = hipDeviceSynchronize();
+  result = cudaThreadSynchronize();
+#endif
 
   // CUDA: extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaThreadGetCacheConfig(enum cudaFuncCache *pCacheConfig);
   // HIP: hipError_t hipDeviceGetCacheConfig(hipFuncCache_t* cacheConfig);
@@ -250,11 +257,6 @@ int main() {
   // HIP: hipError_t hipError_t hipDeviceSetCacheConfig(hipFuncCache_t cacheConfig);
   // CHECK: result = hipDeviceSetCacheConfig(FuncCache);
   result = cudaThreadSetCacheConfig(FuncCache);
-
-  // CUDA: extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaThreadSynchronize(void);
-  // HIP: hipError_t hipError_t hipDeviceSynchronize(void);
-  // CHECK: result = hipDeviceSynchronize();
-  result = cudaThreadSynchronize();
 
   // CUDA: extern __host__ __cudart_builtin__ const char* CUDARTAPI cudaGetErrorName(cudaError_t error);
   // HIP: const char* hipGetErrorName(hipError_t hip_error);
