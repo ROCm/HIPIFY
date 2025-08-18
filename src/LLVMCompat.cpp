@@ -215,4 +215,17 @@ std::string getNamespaceDeclName(const clang::QualType &QT) {
   return sEmpty;
 }
 
+void setStdCPP(ct::RefactoringTool &Tool) {
+  std::string stdcpp;
+#if LLVM_VERSION_MAJOR > 5
+#if LLVM_VERSION_MAJOR < 16
+  stdcpp = "-std=c++14";
+#else
+  stdcpp = "-std=c++17";
+#endif
+#endif
+  if (!stdcpp.empty())
+    Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster(stdcpp.c_str(), ct::ArgumentInsertPosition::BEGIN));
+}
+
 } // namespace llcompat
