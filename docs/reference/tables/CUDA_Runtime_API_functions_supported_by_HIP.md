@@ -57,12 +57,12 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
-|`cudaThreadExit`| |10.0| | |`hipDeviceReset`|1.6.0| | | | |
+|`cudaThreadExit`| |10.0| |13.0|`hipDeviceReset`|1.6.0| | | | |
 |`cudaThreadGetCacheConfig`| |10.0| | |`hipDeviceGetCacheConfig`|1.6.0| | | | |
 |`cudaThreadGetLimit`| |10.0| | | | | | | | |
 |`cudaThreadSetCacheConfig`| |10.0| | |`hipDeviceSetCacheConfig`|1.6.0| | | | |
 |`cudaThreadSetLimit`| |10.0| | | | | | | | |
-|`cudaThreadSynchronize`| |10.0| | |`hipDeviceSynchronize`|1.6.0| | | | |
+|`cudaThreadSynchronize`| |10.0| |13.0|`hipDeviceSynchronize`|1.6.0| | | | |
 
 ## **4. Error Handling**
 

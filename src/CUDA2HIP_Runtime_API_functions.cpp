@@ -100,7 +100,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
 
   // 3. Thread Management [DEPRECATED]
   // no analogue
-  {"cudaThreadExit",                                          {"hipDeviceReset",                                         "", CONV_THREAD, API_RUNTIME, SEC::THREAD_DEPRECATED, CUDA_DEPRECATED}},
+  {"cudaThreadExit",                                          {"hipDeviceReset",                                         "", CONV_THREAD, API_RUNTIME, SEC::THREAD_DEPRECATED, CUDA_DEPRECATED | CUDA_REMOVED}},
   // no analogue
   {"cudaThreadGetCacheConfig",                                {"hipDeviceGetCacheConfig",                                "", CONV_THREAD, API_RUNTIME, SEC::THREAD_DEPRECATED, CUDA_DEPRECATED}},
   // no analogue
@@ -110,7 +110,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // no analogue
   {"cudaThreadSetLimit",                                      {"hipThreadSetLimit",                                      "", CONV_THREAD, API_RUNTIME, SEC::THREAD_DEPRECATED, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   // cuCtxSynchronize
-  {"cudaThreadSynchronize",                                   {"hipDeviceSynchronize",                                   "", CONV_THREAD, API_RUNTIME, SEC::THREAD_DEPRECATED, CUDA_DEPRECATED}},
+  {"cudaThreadSynchronize",                                   {"hipDeviceSynchronize",                                   "", CONV_THREAD, API_RUNTIME, SEC::THREAD_DEPRECATED, CUDA_DEPRECATED | CUDA_REMOVED}},
 
   // 4. Error Handling
   // no analogue
@@ -969,12 +969,12 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_FUNCTION_VER_MAP {
   {"cudaDeviceGetNvSciSyncAttributes",                        {CUDA_102, CUDA_0,   CUDA_0  }},
   {"cudaDeviceGetP2PAttribute",                               {CUDA_80,  CUDA_0,   CUDA_0  }},
   {"cudaCtxResetPersistingL2Cache",                           {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cudaThreadExit",                                          {CUDA_0,   CUDA_100, CUDA_0  }},
+  {"cudaThreadExit",                                          {CUDA_0,   CUDA_100, CUDA_130}},
   {"cudaThreadGetCacheConfig",                                {CUDA_0,   CUDA_100, CUDA_0  }},
   {"cudaThreadGetLimit",                                      {CUDA_0,   CUDA_100, CUDA_0  }},
   {"cudaThreadSetCacheConfig",                                {CUDA_0,   CUDA_100, CUDA_0  }},
   {"cudaThreadSetLimit",                                      {CUDA_0,   CUDA_100, CUDA_0  }},
-  {"cudaThreadSynchronize",                                   {CUDA_0,   CUDA_100, CUDA_0  }},
+  {"cudaThreadSynchronize",                                   {CUDA_0,   CUDA_100, CUDA_130}},
   {"cudaStreamBeginCapture",                                  {CUDA_100, CUDA_0,   CUDA_0  }},
   {"cudaStreamCopyAttributes",                                {CUDA_110, CUDA_0,   CUDA_0  }},
   {"cudaStreamEndCapture",                                    {CUDA_100, CUDA_0,   CUDA_0  }},
