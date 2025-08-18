@@ -98,21 +98,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuCtxSetSharedMemConfig -> hipCtxSetSharedMemConfig
   {"cudaDeviceSetSharedMemConfig",                            {"hipDeviceSetSharedMemConfig",                            "", CONV_DEVICE, API_RUNTIME, SEC::DEVICE_DEPRECATED, CUDA_DEPRECATED}},
 
-  // 3. Thread Management [DEPRECATED]
-  // no analogue
-  {"cudaThreadExit",                                          {"hipDeviceReset",                                         "", CONV_THREAD, API_RUNTIME, SEC::THREAD_DEPRECATED, CUDA_DEPRECATED | CUDA_REMOVED}},
-  // no analogue
-  {"cudaThreadGetCacheConfig",                                {"hipDeviceGetCacheConfig",                                "", CONV_THREAD, API_RUNTIME, SEC::THREAD_DEPRECATED, CUDA_DEPRECATED}},
-  // no analogue
-  {"cudaThreadGetLimit",                                      {"hipThreadGetLimit",                                      "", CONV_THREAD, API_RUNTIME, SEC::THREAD_DEPRECATED, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
-  // no analogue
-  {"cudaThreadSetCacheConfig",                                {"hipDeviceSetCacheConfig",                                "", CONV_THREAD, API_RUNTIME, SEC::THREAD_DEPRECATED, CUDA_DEPRECATED}},
-  // no analogue
-  {"cudaThreadSetLimit",                                      {"hipThreadSetLimit",                                      "", CONV_THREAD, API_RUNTIME, SEC::THREAD_DEPRECATED, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
-  // cuCtxSynchronize
-  {"cudaThreadSynchronize",                                   {"hipDeviceSynchronize",                                   "", CONV_THREAD, API_RUNTIME, SEC::THREAD_DEPRECATED, CUDA_DEPRECATED | CUDA_REMOVED}},
-
-  // 4. Error Handling
+  // 3. Error Handling
   // no analogue
   // NOTE: cudaGetErrorName and cuGetErrorName have different signatures
   {"cudaGetErrorName",                                        {"hipGetErrorName",                                        "", CONV_ERROR, API_RUNTIME, SEC::ERROR}},
@@ -124,7 +110,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // no analogue
   {"cudaPeekAtLastError",                                     {"hipPeekAtLastError",                                     "", CONV_ERROR, API_RUNTIME, SEC::ERROR}},
 
-  // 5. Stream Management
+  // 4. Stream Management
   // cuStreamAddCallback
   {"cudaStreamAddCallback",                                   {"hipStreamAddCallback",                                   "", CONV_STREAM, API_RUNTIME, SEC::STREAM}},
   // cuCtxResetPersistingL2Cache
@@ -179,7 +165,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuStreamGetDevice
   {"cudaStreamGetDevice",                                     {"hipStreamGetDevice",                                     "", CONV_STREAM, API_RUNTIME, SEC::STREAM, HIP_UNSUPPORTED}},
 
-  // 6. Event Management
+  // 5. Event Management
   // no analogue
   // NOTE: Not equal to cuEventCreate due to different signatures
   {"cudaEventCreate",                                         {"hipEventCreate",                                         "", CONV_EVENT, API_RUNTIME, SEC::EVENT, CUDA_OVERLOADED}},
@@ -200,7 +186,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuEventRecordWithFlags
   {"cudaEventRecordWithFlags",                                {"hipEventRecordWithFlags",                                "", CONV_EVENT, API_RUNTIME, SEC::EVENT}},
 
-  // 7. External Resource Interoperability
+  // 6. External Resource Interoperability
   // cuDestroyExternalMemory
   {"cudaDestroyExternalMemory",                               {"hipDestroyExternalMemory",                               "", CONV_EXTERNAL_RES, API_RUNTIME, SEC::EXTERNAL_RES}},
   // cuDestroyExternalSemaphore
@@ -218,7 +204,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuWaitExternalSemaphoresAsync
   {"cudaWaitExternalSemaphoresAsync",                         {"hipWaitExternalSemaphoresAsync",                         "", CONV_EXTERNAL_RES, API_RUNTIME, SEC::EXTERNAL_RES}},
 
-  // 8. Execution Control
+  // 7. Execution Control
   // no analogue
   {"cudaFuncGetAttributes",                                   {"hipFuncGetAttributes",                                   "", CONV_EXECUTION, API_RUNTIME, SEC::EXECUTION}},
   // no analogue
@@ -254,12 +240,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuFuncGetParamInfo
   {"cudaFuncGetParamInfo",                                    {"hipFuncGetParamInfo",                                    "", CONV_EXECUTION, API_RUNTIME, SEC::EXECUTION, HIP_UNSUPPORTED}},
 
-  // 9. Execution Control [DEPRECATED]
+  // 8. Execution Control [DEPRECATED]
   // no analogue
   // NOTE: Not equal to cuFuncSetSharedMemConfig due to different signatures
   { "cudaFuncSetSharedMemConfig",                              {"hipFuncSetSharedMemConfig",                              "", CONV_EXECUTION, API_RUNTIME, SEC::EXECUTION_DEPRECATED, CUDA_DEPRECATED} },
 
-  // 10. Occupancy
+  // 9. Occupancy
   // cuOccupancyAvailableDynamicSMemPerBlock
   {"cudaOccupancyAvailableDynamicSMemPerBlock",               {"hipOccupancyAvailableDynamicSMemPerBlock",               "", CONV_OCCUPANCY, API_RUNTIME, SEC::OCCUPANCY, HIP_UNSUPPORTED}},
   // cuOccupancyMaxActiveBlocksPerMultiprocessor
@@ -279,7 +265,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuOccupancyMaxActiveClusters
   {"cudaOccupancyMaxActiveClusters",                          {"hipOccupancyMaxActiveClusters",                          "", CONV_OCCUPANCY, API_RUNTIME, SEC::OCCUPANCY, HIP_UNSUPPORTED}},
 
-  // 11. Memory Management
+  // 10. Memory Management
   // no analogue
   {"cudaArrayGetInfo",                                        {"hipArrayGetInfo",                                        "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY}},
   // cuMemFree
@@ -421,7 +407,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuDeviceUnregisterAsyncNotification
   {"cudaDeviceUnregisterAsyncNotification",                   {"hipDeviceUnregisterAsyncNotification",                   "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_UNSUPPORTED}},
 
-  // 12. Memory Management [DEPRECATED]
+  // 11. Memory Management [DEPRECATED]
   // no analogue
   // NOTE: Not equal to cuMemcpyAtoA due to different signatures
   {"cudaMemcpyArrayToArray",                                  {"hipMemcpyArrayToArray",                                  "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY_DEPRECATED, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
@@ -434,7 +420,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // no analogue
   {"cudaMemcpyToArrayAsync",                                  {"hipMemcpyToArrayAsync",                                  "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY_DEPRECATED, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
 
-  // 13. Stream Ordered Memory Allocator
+  // 12. Stream Ordered Memory Allocator
 
   // cuMemAllocAsync
   {"cudaMallocAsync",                                         {"hipMallocAsync",                                         "", CONV_MEMORY, API_RUNTIME, SEC::ORDERED_MEMORY}},
@@ -465,12 +451,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuMemPoolImportPointer
   {"cudaMemPoolImportPointer",                                {"hipMemPoolImportPointer",                                "", CONV_MEMORY, API_RUNTIME, SEC::ORDERED_MEMORY}},
 
-  // 14 Unified Addressing
+  // 13. Unified Addressing
   // no analogue
   // NOTE: Not equal to cuPointerGetAttributes due to different signatures
   {"cudaPointerGetAttributes",                                {"hipPointerGetAttributes",                                "", CONV_UNIFIED, API_RUNTIME, SEC::UNIFIED}},
 
-  // 15. Peer Device Memory Access
+  // 14. Peer Device Memory Access
   // cuDeviceCanAccessPeer
   {"cudaDeviceCanAccessPeer",                                 {"hipDeviceCanAccessPeer",                                 "", CONV_PEER, API_RUNTIME, SEC::PEER}},
   // no analogue
@@ -480,7 +466,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // NOTE: Not equal to cuCtxEnablePeerAccess due to different signatures
   {"cudaDeviceEnablePeerAccess",                              {"hipDeviceEnablePeerAccess",                              "", CONV_PEER, API_RUNTIME, SEC::PEER}},
 
-  // 16. OpenGL Interoperability
+  // 15. OpenGL Interoperability
   // cuGLGetDevices
   {"cudaGLGetDevices",                                        {"hipGLGetDevices",                                        "", CONV_OPENGL, API_RUNTIME, SEC::OPENGL}},
   // cuGraphicsGLRegisterBuffer
@@ -490,7 +476,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuWGLGetDevice
   {"cudaWGLGetDevice",                                        {"hipWGLGetDevice",                                        "", CONV_OPENGL, API_RUNTIME, SEC::OPENGL, HIP_UNSUPPORTED}},
 
-  // 17. OpenGL Interoperability [DEPRECATED]
+  // 16. OpenGL Interoperability [DEPRECATED]
   // no analogue
   // NOTE: Not equal to cuGLMapBufferObject due to different signatures
   {"cudaGLMapBufferObject",                                   {"hipGLMapBufferObject",                                   "", CONV_OPENGL, API_RUNTIME, SEC::OPENGL_DEPRECATED, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
@@ -510,7 +496,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuGLUnregisterBufferObject
   {"cudaGLUnregisterBufferObject",                            {"hipGLUnregisterBufferObject",                            "", CONV_OPENGL, API_RUNTIME, SEC::OPENGL_DEPRECATED, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
 
-  // 18. Direct3D 9 Interoperability
+  // 17. Direct3D 9 Interoperability
   // cuD3D9GetDevice
   {"cudaD3D9GetDevice",                                       {"hipD3D9GetDevice",                                       "", CONV_D3D9, API_RUNTIME, SEC::D3D9, HIP_UNSUPPORTED}},
   // cuD3D9GetDevices
@@ -522,7 +508,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuGraphicsD3D9RegisterResource
   {"cudaGraphicsD3D9RegisterResource",                        {"hipGraphicsD3D9RegisterResource",                        "", CONV_D3D9, API_RUNTIME, SEC::D3D9, HIP_UNSUPPORTED}},
 
-  // 19. Direct3D 9 Interoperability[DEPRECATED]
+  // 18. Direct3D 9 Interoperability[DEPRECATED]
   // cuD3D9MapResources
   {"cudaD3D9MapResources",                                    {"hipD3D9MapResources",                                    "", CONV_D3D9, API_RUNTIME, SEC::D3D9_DEPRECATED, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   // cuD3D9RegisterResource
@@ -545,7 +531,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuD3D9UnregisterResource
   {"cudaD3D9UnregisterResource",                              {"hipD3D9UnregisterResource",                              "", CONV_D3D9, API_RUNTIME, SEC::D3D9_DEPRECATED, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
 
-  // 20. Direct3D 10 Interoperability
+  // 19. Direct3D 10 Interoperability
   // cuD3D10GetDevice
   {"cudaD3D10GetDevice",                                      {"hipD3D10GetDevice",                                      "", CONV_D3D10, API_RUNTIME, SEC::D3D10, HIP_UNSUPPORTED}},
   // cuD3D10GetDevices
@@ -553,7 +539,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuGraphicsD3D10RegisterResource
   {"cudaGraphicsD3D10RegisterResource",                       {"hipGraphicsD3D10RegisterResource",                       "", CONV_D3D10, API_RUNTIME, SEC::D3D10, HIP_UNSUPPORTED}},
 
-  // 21. Direct3D 10 Interoperability [DEPRECATED]
+  // 20. Direct3D 10 Interoperability [DEPRECATED]
   // cuD3D10GetDirect3DDevice
   {"cudaD3D10GetDirect3DDevice",                              {"hipD3D10GetDirect3DDevice",                              "", CONV_D3D10, API_RUNTIME, SEC::D3D10_DEPRECATED, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   // cuD3D10MapResources
@@ -579,7 +565,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuD3D10UnregisterResource
   {"cudaD3D10UnregisterResource",                             {"hipD3D10UnregisterResource",                             "", CONV_D3D10, API_RUNTIME, SEC::D3D10_DEPRECATED, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
 
-  // 22. Direct3D 11 Interoperability
+  // 21. Direct3D 11 Interoperability
   // cuD3D11GetDevice
   {"cudaD3D11GetDevice",                                      {"hipD3D11GetDevice",                                      "", CONV_D3D11, API_RUNTIME, SEC::D3D11, HIP_UNSUPPORTED}},
   // cuD3D11GetDevices
@@ -587,13 +573,13 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuGraphicsD3D11RegisterResource
   {"cudaGraphicsD3D11RegisterResource",                       {"hipGraphicsD3D11RegisterResource",                       "", CONV_D3D11, API_RUNTIME, SEC::D3D11, HIP_UNSUPPORTED}},
 
-  // 23. Direct3D 11 Interoperability [DEPRECATED]
+  // 22. Direct3D 11 Interoperability [DEPRECATED]
   // cuD3D11GetDirect3DDevice
   {"cudaD3D11GetDirect3DDevice",                              {"hipD3D11GetDirect3DDevice",                              "", CONV_D3D11, API_RUNTIME, SEC::D3D11_DEPRECATED, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
   // no analogue
   {"cudaD3D11SetDirect3DDevice",                              {"hipD3D11SetDirect3DDevice",                              "", CONV_D3D11, API_RUNTIME, SEC::D3D11_DEPRECATED, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
 
-  // 24. VDPAU Interoperability
+  // 23. VDPAU Interoperability
   // cuGraphicsVDPAURegisterOutputSurface
   {"cudaGraphicsVDPAURegisterOutputSurface",                  {"hipGraphicsVDPAURegisterOutputSurface",                  "", CONV_VDPAU, API_RUNTIME, SEC::VDPAU, HIP_UNSUPPORTED}},
   // cuGraphicsVDPAURegisterVideoSurface
@@ -603,7 +589,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // no analogue
   {"cudaVDPAUSetVDPAUDevice",                                 {"hipVDPAUSetDevice",                                      "", CONV_VDPAU, API_RUNTIME, SEC::VDPAU, HIP_UNSUPPORTED}},
 
-  // 25. EGL Interoperability
+  // 24. EGL Interoperability
   // cuEGLStreamConsumerAcquireFrame
   {"cudaEGLStreamConsumerAcquireFrame",                       {"hipEGLStreamConsumerAcquireFrame",                       "", CONV_EGL, API_RUNTIME, SEC::EGL, HIP_UNSUPPORTED}},
   // cuEGLStreamConsumerConnect
@@ -629,7 +615,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuGraphicsResourceGetMappedEglFrame
   {"cudaGraphicsResourceGetMappedEglFrame",                   {"hipGraphicsResourceGetMappedEglFrame",                   "", CONV_EGL, API_RUNTIME, SEC::EGL, HIP_UNSUPPORTED}},
 
-  // 26. Graphics Interoperability
+  // 25. Graphics Interoperability
   // cuGraphicsMapResources
   {"cudaGraphicsMapResources",                                {"hipGraphicsMapResources",                                "", CONV_GRAPHICS, API_RUNTIME, SEC::GRAPHICS}},
   // cuGraphicsResourceGetMappedMipmappedArray
@@ -645,7 +631,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuGraphicsUnregisterResource
   {"cudaGraphicsUnregisterResource",                          {"hipGraphicsUnregisterResource",                          "", CONV_GRAPHICS, API_RUNTIME, SEC::GRAPHICS}},
 
-  // 27. Texture Object Management
+  // 26. Texture Object Management
   // no analogue
   // NOTE: Not equal to cuTexObjectCreate due to different signatures
   {"cudaCreateTextureObject",                                 {"hipCreateTextureObject",                                 "", CONV_TEXTURE, API_RUNTIME, SEC::TEXTURE}},
@@ -668,7 +654,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // no analogue
   {"cudaGetChannelDesc",                                      {"hipGetChannelDesc",                                      "", CONV_TEXTURE, API_RUNTIME, SEC::TEXTURE}},
 
-  // 28. Surface Object Management
+  // 27. Surface Object Management
   // no analogue
   // NOTE: Not equal to cuSurfObjectCreate due to different signatures
   {"cudaCreateSurfaceObject",                                 {"hipCreateSurfaceObject",                                 "", CONV_SURFACE, API_RUNTIME, SEC::SURFACE}},
@@ -678,11 +664,13 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // NOTE: Not equal to cuSurfObjectGetResourceDesc due to different signatures
   {"cudaGetSurfaceObjectResourceDesc",                        {"hipGetSurfaceObjectResourceDesc",                        "", CONV_SURFACE, API_RUNTIME, SEC::SURFACE, HIP_UNSUPPORTED}},
 
-  // 29. Version Management
+  // 28. Version Management
   // cuDriverGetVersion
   {"cudaDriverGetVersion",                                    {"hipDriverGetVersion",                                    "", CONV_VERSION, API_RUNTIME, SEC::VERSION}},
   // no analogue
   {"cudaRuntimeGetVersion",                                   {"hipRuntimeGetVersion",                                   "", CONV_VERSION, API_RUNTIME, SEC::VERSION}},
+
+  // 29. TODO: Version Management
 
   // 30. Graph Management
   // cuGraphAddChildGraphNode
@@ -963,6 +951,21 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // 40. Profiler Control [REMOVED]
   // cuProfilerInitialize
   {"cudaProfilerInitialize",                                  {"hipProfilerInitialize",                                  "", CONV_PROFILER, API_RUNTIME, SEC::PROFILER_REMOVED, HIP_UNSUPPORTED | CUDA_REMOVED}},
+
+  // 41. Thread Management [REMOVED]
+  // no analogue
+  {"cudaThreadExit",                                          {"hipDeviceReset",                                         "", CONV_THREAD, API_RUNTIME, SEC::THREAD_REMOVED, CUDA_DEPRECATED | CUDA_REMOVED}},
+  // no analogue
+  {"cudaThreadGetCacheConfig",                                {"hipDeviceGetCacheConfig",                                "", CONV_THREAD, API_RUNTIME, SEC::THREAD_REMOVED, CUDA_DEPRECATED | CUDA_REMOVED}},
+  // no analogue
+  {"cudaThreadGetLimit",                                      {"hipThreadGetLimit",                                      "", CONV_THREAD, API_RUNTIME, SEC::THREAD_REMOVED, HIP_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
+  // no analogue
+  {"cudaThreadSetCacheConfig",                                {"hipDeviceSetCacheConfig",                                "", CONV_THREAD, API_RUNTIME, SEC::THREAD_REMOVED, CUDA_DEPRECATED | CUDA_REMOVED}},
+  // no analogue
+  {"cudaThreadSetLimit",                                      {"hipThreadSetLimit",                                      "", CONV_THREAD, API_RUNTIME, SEC::THREAD_REMOVED, HIP_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
+  // cuCtxSynchronize
+  {"cudaThreadSynchronize",                                   {"hipDeviceSynchronize",                                   "", CONV_THREAD, API_RUNTIME, SEC::THREAD_REMOVED, CUDA_DEPRECATED | CUDA_REMOVED}},
+
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_FUNCTION_VER_MAP {
@@ -970,10 +973,10 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_FUNCTION_VER_MAP {
   {"cudaDeviceGetP2PAttribute",                               {CUDA_80,  CUDA_0,   CUDA_0  }},
   {"cudaCtxResetPersistingL2Cache",                           {CUDA_110, CUDA_0,   CUDA_0  }},
   {"cudaThreadExit",                                          {CUDA_0,   CUDA_100, CUDA_130}},
-  {"cudaThreadGetCacheConfig",                                {CUDA_0,   CUDA_100, CUDA_0  }},
-  {"cudaThreadGetLimit",                                      {CUDA_0,   CUDA_100, CUDA_0  }},
-  {"cudaThreadSetCacheConfig",                                {CUDA_0,   CUDA_100, CUDA_0  }},
-  {"cudaThreadSetLimit",                                      {CUDA_0,   CUDA_100, CUDA_0  }},
+  {"cudaThreadGetCacheConfig",                                {CUDA_0,   CUDA_100, CUDA_130}},
+  {"cudaThreadGetLimit",                                      {CUDA_0,   CUDA_100, CUDA_130}},
+  {"cudaThreadSetCacheConfig",                                {CUDA_0,   CUDA_100, CUDA_130}},
+  {"cudaThreadSetLimit",                                      {CUDA_0,   CUDA_100, CUDA_130}},
   {"cudaThreadSynchronize",                                   {CUDA_0,   CUDA_100, CUDA_130}},
   {"cudaStreamBeginCapture",                                  {CUDA_100, CUDA_0,   CUDA_0  }},
   {"cudaStreamCopyAttributes",                                {CUDA_110, CUDA_0,   CUDA_0  }},
@@ -1491,7 +1494,6 @@ const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_RUNTIME_FUNCTION_CH
 const std::map<unsigned int, llvm::StringRef> CUDA_RUNTIME_API_SECTION_MAP {
   {SEC::DEVICE, "Device Management"},
   {SEC::DEVICE_DEPRECATED, "Device Management [DEPRECATED]"},
-  {SEC::THREAD_DEPRECATED, "Thread Management [DEPRECATED]"},
   {SEC::ERROR, "Error Handling"},
   {SEC::STREAM, "Stream Management"},
   {SEC::EVENT, "Event Management"},
@@ -1529,4 +1531,5 @@ const std::map<unsigned int, llvm::StringRef> CUDA_RUNTIME_API_SECTION_MAP {
   {SEC::TEXTURE_REMOVED, "Texture Reference Management [REMOVED]"},
   {SEC::SURFACE_REMOVED, "Surface Reference Management [REMOVED]"},
   {SEC::PROFILER_REMOVED, "Profiler Control [REMOVED]"},
+  {SEC::THREAD_REMOVED, "Thread Management [REMOVED]"},
 };
