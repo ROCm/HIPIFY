@@ -8,283 +8,142 @@
 Building hipify-clang
 **************************************************************************
 
-After cloning the HIPIFY repository (``git clone https://github.com/ROCm/HIPIFY.git``), run the following commands from the HIPIFY root folder.
+Please refer to - :ref:`Linux <linux-instructions>` or :ref:`Windows <windows-instructions>` as appropriate for your platform.
+
+.. _linux-instructions:
+
+**************************************************************************
+Linux Instructions
+**************************************************************************
+
+Building LLVM
+~~~~~~~~~~~~~~
 
 .. code-block:: bash
-
-  cd .. \
-  mkdir build dist \
+  
+  # Create a root directory for building LLVM, Clang and HIPIFY 
+  export ROOT_DIR=$(pwd)
+  
+  # If you would like to clone LLVM with the full git history, remove the `--depth 1` option.
+  git clone --depth 1 https://github.com/llvm/llvm-project.git
+  
+  mkdir build dist
   cd build
 
   cmake \
-  -DCMAKE_INSTALL_PREFIX=../dist \
-  -DCMAKE_BUILD_TYPE=Release \
-  ../hipify
+    -DCMAKE_INSTALL_PREFIX=../dist \
+    -DLLVM_TARGETS_TO_BUILD="X86" \
+    -DLLVM_ENABLE_PROJECTS="clang" \
+    -DLLVM_INCLUDE_TESTS=OFF \
+    -DCMAKE_BUILD_TYPE=Release \
+    ../llvm-project/llvm
+  make -j install
+
+Building HIPIFY
+~~~~~~~~~~~~~~~
+
+.. code-block:: bash
+  
+  cd $ROOT_DIR
+
+  git clone https://github.com/ROCm/HIPIFY.git
+  
+  cd build
+
+  # To ensure LLVM is found, or in the case of multiple LLVM instances, 
+  # specify the path to the root folder containing the LLVM distribution.
+  cmake \
+    -DCMAKE_INSTALL_PREFIX=../dist \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_PREFIX_PATH=$ROOT_DIR/dist \
+    ../hipify
 
   make -j install
 
-To ensure LLVM is found, or in case of multiple LLVM instances, specify the path to the root folder containing the LLVM distribution:
+.. note::
+  We also support the debug build type ``-DCMAKE_BUILD_TYPE=Debug``. Please build ``LLVM+Clang`` in ``debug`` mode to enable the same.
 
-.. code-block:: bash
-
-  -DCMAKE_PREFIX_PATH=/usr/llvm/20.1.8/dist
-
-On Windows, specify the following option for CMake:
-``-G "Visual Studio 17 2022"``
-
-Build the generated ``hipify-clang.sln`` using ``Visual Studio 17 2022`` instead of ``Make``. See :ref:`Windows testing` for the
-supported tools for building.
-
-As debug build type ``-DCMAKE_BUILD_TYPE=Debug`` is supported and tested, it is recommended to build ``LLVM+Clang``
-in ``debug`` mode.
-
-Also, 64-bit build mode (``-Thost=x64`` on Windows) is supported, hence it is recommended to build ``LLVM+Clang`` in
-64-bit mode.
-
-You can find the binary at ``./dist/hipify-clang`` or at the folder specified by the
-``-DCMAKE_INSTALL_PREFIX`` option.
+You can find the binary at ``./dist/hipify-clang`` or at the folder specified by the ``-DCMAKE_INSTALL_PREFIX`` option.
 
 Testing hipify-clang
-================================================
+~~~~~~~~~~~~~~~~~~~~
 
 ``hipify-clang`` is equipped with unit tests using LLVM
 `lit <https://llvm.org/docs/CommandGuide/lit.html>`_ or `FileCheck <https://llvm.org/docs/CommandGuide/FileCheck.html>`_.
 
-Build ``LLVM+Clang`` from sources, as prebuilt binaries are not exhaustive for testing. Before
-building, ensure that the
-`software required for building <https://releases.llvm.org/11.0.0/docs/GettingStarted.html#software>`_
+We recommend that you build ``LLVM+Clang`` from sources, as prebuilt binaries are not exhaustive for testing.
+Before building, ensure that the `software required for building <https://llvm.org/docs/GettingStarted.html#software>`_ 
 belongs to an appropriate version.
 
-LLVM >= 10.0.0
------------------
+- Install `CUDA <https://developer.nvidia.com/cuda-toolkit-archive>`_ version 7.0 or greater.
 
-1. Download `LLVM project <https://github.com/llvm/llvm-project/releases/tag/llvmorg-20.1.8>`_ sources.
+  In case of multiple CUDA installations, specify the particular version using ``DCUDA_TOOLKIT_ROOT_DIR`` option:
+  
+  .. code-block:: bash
+  
+    -DCUDA_TOOLKIT_ROOT_DIR=/usr/include
 
-2. Build `LLVM project <http://llvm.org/docs/CMake.html>`_:
+- [Optional] Install `cuTensor <https://developer.nvidia.com/cutensor-downloads>`_:
 
-   .. code-block:: bash
+  To specify the path to `cuTensor <https://developer.nvidia.com/cutensor-downloads>`_, use the ``CUDA_TENSOR_ROOT_DIR`` option:
 
-    cd .. \
-    mkdir build dist \
-    cd build
+  .. code-block:: bash
 
-   **Linux**:
+   -DCUDA_TENSOR_ROOT_DIR=/usr/include
 
-   .. code-block:: bash
+- [Optional] Install `cuDNN <https://developer.nvidia.com/rdp/cudnn-archive>`_ belonging to the version corresponding to the CUDA version:
 
-    cmake \
-      -DCMAKE_INSTALL_PREFIX=../dist \
-      -DLLVM_TARGETS_TO_BUILD="X86" \
-      -DLLVM_ENABLE_PROJECTS="clang" \
-      -DLLVM_INCLUDE_TESTS=OFF \
-      -DCMAKE_BUILD_TYPE=Release \
-      ../llvm-project/llvm
-    make -j install
+  To specify the path to `cuDNN <https://developer.nvidia.com/cudnn-downloads>`_, use the ``CUDA_DNN_ROOT_DIR`` option:
 
-   **Windows**:
+  .. code-block:: bash
 
-   .. code-block:: shell
+   -DCUDA_DNN_ROOT_DIR=/usr/include
 
-    cmake \
-      -G "Visual Studio 17 2022" \
-      -A x64 \
-      -Thost=x64 \
-      -DCMAKE_INSTALL_PREFIX=../dist \
-      -DLLVM_TARGETS_TO_BUILD="" \
-      -DLLVM_ENABLE_PROJECTS="clang" \
-      -DLLVM_INCLUDE_TESTS=OFF \
-      -DCMAKE_BUILD_TYPE=Release \
-      ../llvm-project/llvm
+- [Optional] Install `CUB 1.9.8 <https://github.com/NVIDIA/cub/releases/tag/1.9.8>`_ for ``CUDA < 11.0`` only; for ``CUDA >= 11.0``, the CUB shipped with CUDA will be used for testing.
 
-   Run ``Visual Studio 17 2022``, open the generated ``LLVM.sln``, build all, and build project ``INSTALL``.
+  To specify the path to CUB, use the ``CUDA_CUB_ROOT_DIR`` option (only for ``CUDA < 11.0``):
 
-3. Install `CUDA <https://developer.nvidia.com/cuda-toolkit-archive>`_ version 7.0 or
-   greater.
+  .. code-block:: bash
 
-   * In case of multiple CUDA installations, specify the particular version using ``DCUDA_TOOLKIT_ROOT_DIR`` option:
+   -DCUDA_CUB_ROOT_DIR=/srv/git/CUB
 
-     **Linux**:
+- Install `Python <https://www.python.org/downloads>`_ version 3.0 or greater.
 
-     .. code-block:: bash
+- Install ``lit`` and ``FileCheck``; these are distributed with LLVM.
 
-      -DCUDA_TOOLKIT_ROOT_DIR=/usr/include
+  ``lit``:
 
-     **Windows**:
+  .. code-block:: bash
 
-     .. code-block:: shell
-
-      -DCUDA_TOOLKIT_ROOT_DIR="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.8"
-
-      -DCUDA_SDK_ROOT_DIR="C:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.8"
-
-4. [Optional] Install `cuTensor <https://developer.nvidia.com/cutensor-downloads>`_:
-
-   * To specify the path to `cuTensor <https://developer.nvidia.com/cutensor-downloads>`_, use the ``CUDA_TENSOR_ROOT_DIR`` option:
-
-     **Linux**:
-
-     .. code-block:: bash
-
-      -DCUDA_TENSOR_ROOT_DIR=/usr/include
-
-     **Windows**:
-
-     .. code-block:: shell
-
-      -DCUDA_TENSOR_ROOT_DIR=D:/CUDA/cuTensor/2.2.0.0
-
-5. [Optional] Install `cuDNN <https://developer.nvidia.com/rdp/cudnn-archive>`_ belonging to the version corresponding
-   to the CUDA version:
-
-   * To specify the path to `cuDNN <https://developer.nvidia.com/cudnn-downloads>`_, use the ``CUDA_DNN_ROOT_DIR`` option:
-
-     **Linux**:
-
-     .. code-block:: bash
-
-      -DCUDA_DNN_ROOT_DIR=/usr/include
-
-     **Windows**:
-
-     .. code-block:: shell
-
-      -DCUDA_DNN_ROOT_DIR=D:/CUDA/cuDNN/9.12.0
-
-6. [Optional] Install `CUB 1.9.8 <https://github.com/NVIDIA/cub/releases/tag/1.9.8>`_ for ``CUDA < 11.0`` only;
-   for ``CUDA >= 11.0``, the CUB shipped with CUDA will be used for testing.
-
-   * To specify the path to CUB, use the ``CUDA_CUB_ROOT_DIR`` option (only for ``CUDA < 11.0``):
-
-     **Linux**:
-
-     .. code-block:: bash
-
-      -DCUDA_CUB_ROOT_DIR=/srv/git/CUB
-
-     **Windows**:
-
-     .. code-block:: shell
-
-      -DCUDA_CUB_ROOT_DIR=D:/CUDA/CUB
-
-7. Install `Python <https://www.python.org/downloads>`_ version 3.0 or greater.
-
-8. Install ``lit`` and ``FileCheck``; these are distributed with LLVM.
-
-   * Install ``lit`` into ``Python``:
-
-     **Linux**:
-
-     .. code-block:: bash
-
-      python /usr/llvm/20.1.8/llvm-project/llvm/utils/lit/setup.py install
+   python $(ROOT_DIR)/llvm-project/llvm/utils/lit/setup.py install
       
-     **Windows**:
+  Starting with LLVM 6.0.1, specify the path to the ``llvm-lit`` Python script using the ``LLVM_EXTERNAL_LIT`` option:
 
-     .. code-block:: shell
+  .. code-block:: bash
 
-      python D:/LLVM/20.1.8/llvm-project/llvm/utils/lit/setup.py install
+   -DLLVM_EXTERNAL_LIT=$ROOT_DIR/build/bin/llvm-lit
 
-     In case of errors similar to ``ModuleNotFoundError: No module named 'setuptools'``, upgrade the ``setuptools`` package:
+  ``FileCheck``:
 
-     .. code-block:: bash
+  Copy from ``$ROOT_DIR/build/bin/`` to ``CMAKE_INSTALL_PREFIX/dist/bin``.
 
-      python -m pip install --upgrade pip setuptools
-      
-   * Starting with LLVM 6.0.1, specify the path to the ``llvm-lit`` Python script using the ``LLVM_EXTERNAL_LIT`` option:
+- To run OpenGL tests successfully, you need to install OpenGL headers and libraries.
 
-     **Linux**:
+  On Ubuntu, use: ``sudo apt-get install mesa-common-dev``
 
-     .. code-block:: bash
+- Set the ``HIPIFY_CLANG_TESTS`` option to ``ON``: ``-DHIPIFY_CLANG_TESTS=ON``.
 
-      -DLLVM_EXTERNAL_LIT=/usr/llvm/20.1.8/build/bin/llvm-lit
-
-     **Windows**:
-
-     .. code-block:: shell
-
-      -DLLVM_EXTERNAL_LIT=D:/LLVM/20.1.8/build/Release/bin/llvm-lit.py
-
-   * ``FileCheck``:
-
-     **Linux**:
-
-     Copy from ``/usr/llvm/20.1.8/build/bin/`` to ``CMAKE_INSTALL_PREFIX/dist/bin``.
-
-     **Windows**:
-
-     Copy from ``D:/LLVM/20.1.8/build/Release/bin`` to ``CMAKE_INSTALL_PREFIX/dist/bin``.
-
-     Alternatively, specify the path to ``FileCheck`` in the ``CMAKE_INSTALL_PREFIX`` option.
-
-9. To run OpenGL tests successfully on:
-
-   **Linux**:
-
-   Install GL headers.
-
-   On Ubuntu, use: ``sudo apt-get install mesa-common-dev``
-
-   **Windows**:
-
-   No installation required. All the required headers are shipped with the Windows SDK.
-
-10. Set the ``HIPIFY_CLANG_TESTS`` option to ``ON``: ``-DHIPIFY_CLANG_TESTS=ON``
-
-11. Build and run tests.
-
-LLVM <= 9.0.1
----------------------------------------------------------------------
-
-1. Download `LLVM <https://github.com/llvm/llvm-project/releases/download/llvmorg-9.0.1/llvm-9.0.1.src.tar.xz>`_ \+ `Clang <https://github.com/llvm/llvm-project/releases/download/llvmorg-9.0.1/clang-9.0.1.src.tar.xz>`_ sources
-
-2. Build `LLVM+Clang <http://releases.llvm.org/9.0.0/docs/CMake.html>`_:
-
-   .. code-block:: bash
-
-    cd .. \
-    mkdir build dist \
-    cd build
-
-   **Linux**:
-
-   .. code-block:: bash
-
-    cmake \
-      -DCMAKE_INSTALL_PREFIX=../dist \
-      -DLLVM_SOURCE_DIR=../llvm \
-      -DLLVM_TARGETS_TO_BUILD="X86" \
-      -DLLVM_INCLUDE_TESTS=OFF \
-      -DCMAKE_BUILD_TYPE=Release \
-      ../llvm
-    make -j install
-
-   **Windows**:
-
-   .. code-block:: shell
-
-    cmake \
-      -G "Visual Studio 16 2019" \
-      -A x64 \
-      -Thost=x64 \
-      -DCMAKE_INSTALL_PREFIX=../dist \
-      -DLLVM_SOURCE_DIR=../llvm \
-      -DLLVM_TARGETS_TO_BUILD="" \
-      -DLLVM_INCLUDE_TESTS=OFF \
-      -DCMAKE_BUILD_TYPE=Release \
-      ../llvm
-
-3. Run ``Visual Studio 16 2019``, open the generated ``LLVM.sln``, build all, and build the ``INSTALL`` project.
+- Build and run tests.
 
 Linux testing
-======================================================
+=============
 
 On Linux, the following configurations are tested:
 
-* Ubuntu 22-24: LLVM 13.0.0 - 20.1.8, CUDA 7.0 - 12.8.1, cuDNN 8.0.5 - 9.12.0,  cuTensor 1.0.1.0 - 2.2.0.0
-* Ubuntu 20-21: LLVM 9.0.0  - 20.1.8, CUDA 7.0 - 12.8.1, cuDNN 5.1.10 - 9.12.0, cuTensor 1.0.1.0 - 2.2.0.0
-* Ubuntu 16-19: LLVM 8.0.0  - 14.0.6, CUDA 7.0 - 10.2,   cuDNN 5.1.10 - 8.0.5
-* Ubuntu 14:    LLVM 4.0.0  - 7.1.0,  CUDA 7.0 - 9.0,    cuDNN 5.0.5 - 7.6.5
+* Ubuntu 22-24: LLVM 13.0.0 - 20.1.8, CUDA 7.0 - 12.8.1, cuDNN 8.0.5 - 9.12.0, cuTensor 1.0.1.0 - 2.2.0.0
+* Ubuntu 20-21: LLVM 9.0.0 - 20.1.8, CUDA 7.0 - 12.8.1, cuDNN 5.1.10 - 9.12.0, cuTensor 1.0.1.0 - 2.2.0.0
+* Ubuntu 16-19: LLVM 8.0.0 - 14.0.6, CUDA 7.0 - 10.2, cuDNN 5.1.10 - 8.0.5
+* Ubuntu 14: LLVM 4.0.0 - 7.1.0, CUDA 7.0 - 9.0, cuDNN 5.0.5 - 7.6.5
 
 Minimum build system requirements for the above configurations:
 
@@ -297,19 +156,21 @@ Recommended build system requirements:
 Here's how to build ``hipify-clang`` with testing support on ``Ubuntu 24.04.02``:
 
 .. code-block:: bash
+  
+  cd $ROOT_DIR/build
 
-  cmake
-  -DHIPIFY_CLANG_TESTS=ON \
-  -DCMAKE_BUILD_TYPE=Release \
-  -DCMAKE_INSTALL_PREFIX=../dist \
-  -DCMAKE_PREFIX_PATH=/usr/llvm/20.1.8/dist \
-  -DCUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-12.8.1 \
-  -DCUDA_DNN_ROOT_DIR=/usr/local/cudnn-9.12.0 \
-  -DCUDA_TENSOR_ROOT_DIR=/usr/local/cutensor-2.2.0.0 \
-  -DLLVM_EXTERNAL_LIT=/usr/llvm/20.1.8/build/bin/llvm-lit \
-  ../hipify
+  cmake \
+    -DHIPIFY_CLANG_TESTS=ON \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=../dist \
+    -DCMAKE_PREFIX_PATH=$ROOT_DIR/dist \
+    -DCUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-12.8.1 \
+    -DCUDA_DNN_ROOT_DIR=/usr/local/cudnn-9.12.0 \
+    -DCUDA_TENSOR_ROOT_DIR=/usr/local/cutensor-2.2.0.0 \
+    -DLLVM_EXTERNAL_LIT=$ROOT_DIR/build/bin/llvm-lit \
+    ../hipify
 
-The corresponding successful output is:
+The corresponding successful output is (assuming ROOT_DIR is ``/usr/llvm/20.1.8``):
 
 .. code-block:: shell
 
@@ -384,10 +245,144 @@ The corresponding successful output is:
   Total Discovered Tests: 106
     Passed: 106 (100.00%)
 
-.. _Windows testing:
+.. _windows-instructions:
+
+**************************************************************************
+Windows Instructions
+**************************************************************************
+
+(Recommended) Building LLVM >= 10.0.0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: bash
+  
+  # Assuming commands are being run in Windows CMD. 
+  # Use "$env:ROOT_DIR = (Get-Location).Path" to set the environment variable for PowerShell and use $env:ROOT_DIR to access it.
+  set ROOT_DIR=%cd%
+  
+  # If you would like to clone LLVM with the full git history, remove the `--depth 1` option.
+  git clone --depth 1 https://github.com/llvm/llvm-project.git
+  mkdir build dist
+  cd build
+
+  cmake -G "Visual Studio 17 2022" -A x64 -Thost=x64 -DCMAKE_INSTALL_PREFIX=../dist -DLLVM_TARGETS_TO_BUILD="" -DLLVM_ENABLE_PROJECTS="clang" -DLLVM_INCLUDE_TESTS=OFF -DCMAKE_BUILD_TYPE=Release ../llvm-project/llvm
+
+  # Run Visual Studio 17 2022, open the generated LLVM.sln, build all, and build project "INSTALL".
+  # Alternatively, you can build using "msbuild INSTALL.vcxproj /m" using the developer command prompt.
+
+Building LLVM <= 9.0.1
+~~~~~~~~~~~~~~~~~~~~~~
+
+Download older `LLVM <https://github.com/llvm/llvm-project/releases/download/llvmorg-9.0.1/llvm-9.0.1.src.tar.xz>`_ \+ `Clang <https://github.com/llvm/llvm-project/releases/download/llvmorg-9.0.1/clang-9.0.1.src.tar.xz>`_ sources.
+
+.. code-block:: bash
+  
+  set ROOT_DIR=%cd%
+
+  mkdir build dist
+  cd build
+
+  cmake -G "Visual Studio 16 2019" -A x64 -Thost=x64 -DCMAKE_INSTALL_PREFIX=../dist -DLLVM_TARGETS_TO_BUILD="" -DLLVM_ENABLE_PROJECTS="clang" -DLLVM_INCLUDE_TESTS=OFF -DCMAKE_BUILD_TYPE=Release ../llvm-project/llvm
+
+  # Run Visual Studio 16 2019, open the generated "LLVM.sln", build all, and build the "INSTALL" project.
+
+Building HIPIFY
+~~~~~~~~~~~~~~~
+
+.. code-block:: bash
+
+  cd %ROOT_DIR%
+
+  git clone https://github.com/ROCm/HIPIFY.git
+  
+  cd build
+
+  # To ensure LLVM is found, or in the case of multiple LLVM instances, 
+  # specify the path to the root folder containing the LLVM distribution.
+  cmake -G "Visual Studio 17 2022" -A x64 -Thost=x64 -DCMAKE_PREFIX_PATH="../dist" -DCMAKE_INSTALL_PREFIX="../dist" -DCMAKE_BUILD_TYPE=Release ../hipify
+
+  # Run Visual Studio 17 2022, open the generated LLVM.sln, build all, and build project "INSTALL".
+  # Alternatively, you can build using "msbuild INSTALL.vcxproj /m" using the developer command prompt.
+
+.. note::
+  We also support the debug build type ``-DCMAKE_BUILD_TYPE=Debug``. Please build ``LLVM+Clang`` in ``debug`` mode to enable the same.
+  
+  We support 64-bit build mode (``-Thost=x64``). Please build ``LLVM+Clang`` in 64-bit mode.
+
+You can find the binary at ``./dist/bin/hipify-clang`` or at the folder specified by the ``-DCMAKE_INSTALL_PREFIX`` option.
+
+Testing hipify-clang
+~~~~~~~~~~~~~~~~~~~~
+
+``hipify-clang`` is equipped with unit tests using LLVM
+`lit <https://llvm.org/docs/CommandGuide/lit.html>`_ or `FileCheck <https://llvm.org/docs/CommandGuide/FileCheck.html>`_.
+
+We recommend that you build ``LLVM+Clang`` from sources, as prebuilt binaries are not exhaustive for testing.
+
+- Install `CUDA <https://developer.nvidia.com/cuda-toolkit-archive>`_ version 7.0 or greater.
+
+  In case of multiple CUDA installations, specify the particular version using ``DCUDA_TOOLKIT_ROOT_DIR`` option:
+  
+  .. code-block:: bash
+  
+    -DCUDA_TOOLKIT_ROOT_DIR="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.8"
+
+    -DCUDA_SDK_ROOT_DIR="C:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.8"
+
+- [Optional] Install `cuTensor <https://developer.nvidia.com/cutensor-downloads>`_:
+
+  To specify the path to `cuTensor <https://developer.nvidia.com/cutensor-downloads>`_, use the ``CUDA_TENSOR_ROOT_DIR`` option:
+
+  .. code-block:: bash
+
+   -DCUDA_TENSOR_ROOT_DIR=D:/CUDA/cuTensor/2.2.0.0
+
+- [Optional] Install `cuDNN <https://developer.nvidia.com/rdp/cudnn-archive>`_ belonging to the version corresponding to the CUDA version:
+
+  To specify the path to `cuDNN <https://developer.nvidia.com/cudnn-downloads>`_, use the ``CUDA_DNN_ROOT_DIR`` option:
+
+  .. code-block:: bash
+
+   -DCUDA_DNN_ROOT_DIR=D:/CUDA/cuDNN/9.12.0
+
+- [Optional] Install `CUB 1.9.8 <https://github.com/NVIDIA/cub/releases/tag/1.9.8>`_ for ``CUDA < 11.0`` only; for ``CUDA >= 11.0``, the CUB shipped with CUDA will be used for testing.
+
+  To specify the path to CUB, use the ``CUDA_CUB_ROOT_DIR`` option (only for ``CUDA < 11.0``):
+
+  .. code-block:: bash
+
+   -DCUDA_CUB_ROOT_DIR=D:/CUDA/CUB
+
+- Install `Python <https://www.python.org/downloads>`_ version 3.0 or greater.
+
+- Install ``lit`` and ``FileCheck``; these are distributed with LLVM.
+
+  ``lit``:
+
+  .. code-block:: bash
+
+   python %ROOT_DIR%/llvm-project/llvm/utils/lit/setup.py install
+      
+  Starting with LLVM 6.0.1, specify the path to the ``llvm-lit`` Python script using the ``LLVM_EXTERNAL_LIT`` option:
+
+  .. code-block:: bash
+
+   -DLLVM_EXTERNAL_LIT=%ROOT_DIR%/llvm-project/llvm/utils/lit/llvm-lit.py
+
+  ``FileCheck``:
+
+  Copy from ``%ROOT_DIR%/llvm-project/llvm/utils/FileCheck`` to ``CMAKE_INSTALL_PREFIX/dist/bin``.
+
+- To run OpenGL tests successfully, you need to install OpenGL headers and libraries.
+
+  No installation required. All the required headers are shipped with the Windows SDK.
+
+- Set the ``HIPIFY_CLANG_TESTS`` option to ``ON``: ``-DHIPIFY_CLANG_TESTS=ON``.
+
+- Build and run tests.
 
 Windows testing
-=====================================================
+===============
 
 Tested configurations:
 
@@ -495,22 +490,22 @@ Building with testing support using ``Visual Studio 17 2022`` on ``Windows 11``:
 
 .. code-block:: shell
 
-  cmake
+  cmake \
   -G "Visual Studio 17 2022" \
   -A x64 \
   -Thost=x64 \
   -DHIPIFY_CLANG_TESTS=ON \
   -DCMAKE_BUILD_TYPE=Release \
   -DCMAKE_INSTALL_PREFIX=../dist \
-  -DCMAKE_PREFIX_PATH=D:/LLVM/20.1.8/dist \
+  -DCMAKE_PREFIX_PATH=%ROOT_DIR%/dist \
   -DCUDA_TOOLKIT_ROOT_DIR="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.8" \
   -DCUDA_SDK_ROOT_DIR="C:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.8" \
   -DCUDA_DNN_ROOT_DIR=D:/CUDA/cuDNN/9.12.0 \
   -DCUDA_TENSOR_ROOT_DIR=D:/CUDA/cuTensor/2.2.0.0 \
-  -DLLVM_EXTERNAL_LIT=D:/LLVM/20.1.8/build/Release/bin/llvm-lit.py \
+  -DLLVM_EXTERNAL_LIT=%ROOT_DIR%/build/Release/bin/llvm-lit.py \
   ../hipify
 
-The corresponding successful output is:
+The corresponding successful output is (assuming %ROOT_DIR% is ``D:/LLVM/20.1.8``):
 
 .. code-block:: shell
 
@@ -557,5 +552,3 @@ The corresponding successful output is:
   -- Configuring done (4.4s)
   -- Generating done (0.1s)
   -- Build files have been written to: D:/HIPIFY/build
-
-Run ``Visual Studio 17 2022``, open the generated ``hipify-clang.sln``, and build the project ``test-hipify``.
