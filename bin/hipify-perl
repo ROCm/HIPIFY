@@ -1443,12 +1443,9 @@ my %removed_funcs = (
     "cudaThreadGetCacheConfig" => "13.0",
     "cudaThreadExit" => "13.0",
     "cudaSetupArgument" => "10.1",
-    "cudaSetDoubleForHost" => "13.0",
-    "cudaSetDoubleForDevice" => "13.0",
     "cudaProfilerInitialize" => "12.0",
     "cudaOutputMode_t" => "12.0",
     "cudaOutputMode" => "12.0",
-    "cudaLaunchCooperativeKernelMultiDevice" => "13.0",
     "cudaLaunch" => "10.1",
     "cudaKeyValuePair" => "12.0",
     "cudaGetTextureReference" => "12.0",
@@ -4499,11 +4496,13 @@ sub simpleSubstitutions {
     subst("cudaStreamCreateWithPriority", "hipStreamCreateWithPriority", "stream");
     subst("cudaStreamDestroy", "hipStreamDestroy", "stream");
     subst("cudaStreamEndCapture", "hipStreamEndCapture", "stream");
+    subst("cudaStreamGetCaptureInfo", "hipStreamGetCaptureInfo", "stream");
     subst("cudaStreamGetFlags", "hipStreamGetFlags", "stream");
     subst("cudaStreamGetPriority", "hipStreamGetPriority", "stream");
     subst("cudaStreamIsCapturing", "hipStreamIsCapturing", "stream");
     subst("cudaStreamQuery", "hipStreamQuery", "stream");
     subst("cudaStreamSynchronize", "hipStreamSynchronize", "stream");
+    subst("cudaStreamUpdateCaptureDependencies", "hipStreamUpdateCaptureDependencies", "stream");
     subst("cudaStreamWaitEvent", "hipStreamWaitEvent", "stream");
     subst("cudaThreadExchangeStreamCaptureMode", "hipThreadExchangeStreamCaptureMode", "stream");
     subst("cuEventCreate", "hipEventCreateWithFlags", "event");
@@ -11241,12 +11240,10 @@ sub warnRemovedFunctions {
     "cudaSyncPolicyAuto",
     "cudaSurfaceFormatMode",
     "cudaStreamUpdateCaptureDependencies_v2",
-    "cudaStreamUpdateCaptureDependencies",
     "cudaStreamSetAttribute",
     "cudaStreamGetId",
     "cudaStreamGetDevice",
     "cudaStreamGetCaptureInfo_v3",
-    "cudaStreamGetCaptureInfo",
     "cudaStreamGetAttribute",
     "cudaStreamCopyAttributes",
     "cudaStreamAttributeSynchronizationPolicy",
@@ -11675,9 +11672,7 @@ sub warnRemovedFunctions {
     "cudaDeviceNumaConfigNone",
     "cudaDeviceNumaConfig",
     "cudaDeviceMask",
-    "cudaDeviceGetP2PAtomicCapabilities",
     "cudaDeviceGetNvSciSyncAttributes",
-    "cudaDeviceGetHostAtomicCapabilities",
     "cudaDeviceFlushGPUDirectRDMAWrites",
     "cudaDevAttrVulkanCigSupported",
     "cudaDevAttrTimelineSemaphoreInteropSupported",

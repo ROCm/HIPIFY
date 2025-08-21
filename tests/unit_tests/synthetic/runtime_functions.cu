@@ -883,12 +883,10 @@ int main() {
   // CHECK: hipLaunchParams LaunchParams;
   cudaLaunchParams LaunchParams;
 
-#if CUDA_VERSION < 13000
   // CUDA: extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaLaunchCooperativeKernelMultiDevice(struct cudaLaunchParams *launchParamsList, unsigned int numDevices, unsigned int flags __dv(0));
   // HIP: hipError_t hipLaunchCooperativeKernelMultiDevice(hipLaunchParams* launchParamsList, int numDevices, unsigned int flags);
   // CHECK: result = hipLaunchCooperativeKernelMultiDevice(&LaunchParams, intVal, flags);
   result = cudaLaunchCooperativeKernelMultiDevice(&LaunchParams, intVal, flags);
-#endif
 #endif
 
 #if CUDA_VERSION <= 10000
@@ -1124,13 +1122,10 @@ int main() {
   // CHECK: result = hipThreadExchangeStreamCaptureMode(&streamCaptureMode);
   result = cudaThreadExchangeStreamCaptureMode(&streamCaptureMode);
 
-  // [TODO][#2062] Rename all DO-NOT-CHECK back
-#if CUDA_VERSION < 13000
   // CUDA: extern __host__ cudaError_t CUDARTAPI cudaStreamGetCaptureInfo(cudaStream_t stream, enum cudaStreamCaptureStatus *pCaptureStatus, unsigned long long *pId);
   // HIP: hipError_t hipStreamGetCaptureInfo(hipStream_t stream, hipStreamCaptureStatus* pCaptureStatus, unsigned long long* pId);
-  // DO-NOT-CHECK: result = hipStreamGetCaptureInfo(stream, &StreamCaptureStatus, &ull_2);
+  // CHECK: result = hipStreamGetCaptureInfo(stream, &StreamCaptureStatus, &ull_2);
   result = cudaStreamGetCaptureInfo(stream, &StreamCaptureStatus, &ull_2);
-#endif
 
   // CUDA: extern __host__ cudaError_t CUDARTAPI cudaThreadExchangeStreamCaptureMode(enum cudaStreamCaptureMode *mode);
   // HIP: hipError_t hipThreadExchangeStreamCaptureMode(hipStreamCaptureMode* mode);
@@ -1521,13 +1516,10 @@ int main() {
   // CHECK: result = hipGraphDebugDotPrint(Graph_t, name.c_str(), flags);
   result = cudaGraphDebugDotPrint(Graph_t, name.c_str(), flags);
 
-  // [TODO][#2062] Rename all DO-NOT-CHECK back
-#if CUDA_VERSION < 13000
   // CUDA: extern __host__ cudaError_t CUDARTAPI cudaStreamUpdateCaptureDependencies(cudaStream_t stream, cudaGraphNode_t *dependencies, size_t numDependencies, unsigned int flags __dv(0));
   // HIP: hipError_t hipStreamUpdateCaptureDependencies(hipStream_t stream, hipGraphNode_t* dependencies, size_t numDependencies, unsigned int flags __dparm(0));
-  // DO-NOT-CHECK: result = hipStreamUpdateCaptureDependencies(stream, &graphNode, bytes, flags);
+  // CHECK: result = hipStreamUpdateCaptureDependencies(stream, &graphNode, bytes, flags);
   result = cudaStreamUpdateCaptureDependencies(stream, &graphNode, bytes, flags);
-#endif
 #endif
 
 #if CUDA_VERSION >= 11040

@@ -20,11 +20,9 @@
 |`cudaDeviceGetByPCIBusId`| | | | |`hipDeviceGetByPCIBusId`|1.6.0| | | | |
 |`cudaDeviceGetCacheConfig`| | | | |`hipDeviceGetCacheConfig`|1.6.0| | | | |
 |`cudaDeviceGetDefaultMemPool`|11.2| | | |`hipDeviceGetDefaultMemPool`|5.2.0| | | | |
-|`cudaDeviceGetHostAtomicCapabilities`|13.0| | | | | | | | | |
 |`cudaDeviceGetLimit`| | | | |`hipDeviceGetLimit`|1.6.0| | | | |
 |`cudaDeviceGetMemPool`|11.2| | | |`hipDeviceGetMemPool`|5.2.0| | | | |
 |`cudaDeviceGetNvSciSyncAttributes`|10.2| | | | | | | | | |
-|`cudaDeviceGetP2PAtomicCapabilities`|13.0| | | | | | | | | |
 |`cudaDeviceGetP2PAttribute`|8.0| | | |`hipDeviceGetP2PAttribute`|3.8.0| | | | |
 |`cudaDeviceGetPCIBusId`| | | | |`hipDeviceGetPCIBusId`|1.6.0| | | | |
 |`cudaDeviceGetStreamPriorityRange`| | | | |`hipDeviceGetStreamPriorityRange`|2.0.0| | | | |
@@ -80,7 +78,7 @@
 |`cudaStreamDestroy`| | | | |`hipStreamDestroy`|1.6.0| | | | |
 |`cudaStreamEndCapture`|10.0| | | |`hipStreamEndCapture`|4.3.0| | | | |
 |`cudaStreamGetAttribute`|11.0| | | | | | | | | |
-|`cudaStreamGetCaptureInfo`|10.1| |13.0| | | | | | | |
+|`cudaStreamGetCaptureInfo`|10.1| | | |`hipStreamGetCaptureInfo`|5.0.0| | | | |
 |`cudaStreamGetCaptureInfo_v3`|12.3| | | | | | | | | |
 |`cudaStreamGetDevice`|12.8| | | | | | | | | |
 |`cudaStreamGetFlags`| | | | |`hipStreamGetFlags`|1.6.0| | | | |
@@ -90,7 +88,7 @@
 |`cudaStreamQuery`| | | | |`hipStreamQuery`|1.6.0| | | | |
 |`cudaStreamSetAttribute`|11.0| | | | | | | | | |
 |`cudaStreamSynchronize`| | | | |`hipStreamSynchronize`|1.6.0| | | | |
-|`cudaStreamUpdateCaptureDependencies`|11.3| |13.0| | | | | | | |
+|`cudaStreamUpdateCaptureDependencies`|11.3| | | |`hipStreamUpdateCaptureDependencies`|5.0.0| | | | |
 |`cudaStreamUpdateCaptureDependencies_v2`|12.3| | | | | | | | | |
 |`cudaStreamWaitEvent`| | | | |`hipStreamWaitEvent`|1.6.0| | | | |
 |`cudaThreadExchangeStreamCaptureMode`|10.1| | | |`hipThreadExchangeStreamCaptureMode`|5.2.0| | | | |
@@ -134,12 +132,12 @@
 |`cudaGetParameterBuffer`| | | | | | | | | | |
 |`cudaGetParameterBufferV2`| | | | | | | | | | |
 |`cudaLaunchCooperativeKernel`|9.0| | | |`hipLaunchCooperativeKernel`|2.6.0| | | | |
-|`cudaLaunchCooperativeKernelMultiDevice`|9.0|11.3| |13.0|`hipLaunchCooperativeKernelMultiDevice`|2.6.0| | | | |
+|`cudaLaunchCooperativeKernelMultiDevice`|9.0|11.3| | |`hipLaunchCooperativeKernelMultiDevice`|2.6.0| | | | |
 |`cudaLaunchHostFunc`|10.0| | | |`hipLaunchHostFunc`|5.2.0| | | | |
 |`cudaLaunchKernel`| | | | |`hipLaunchKernel`|1.6.0| | | | |
 |`cudaLaunchKernelExC`|11.8| | | |`hipLaunchKernelExC`|7.0.0| | | |7.0.0|
-|`cudaSetDoubleForDevice`| |10.0| |13.0| | | | | | |
-|`cudaSetDoubleForHost`| |10.0| |13.0| | | | | | |
+|`cudaSetDoubleForDevice`| |10.0| | | | | | | | |
+|`cudaSetDoubleForHost`| |10.0| | | | | | | | |
 
 ## **8. Execution Control [DEPRECATED]**
 
