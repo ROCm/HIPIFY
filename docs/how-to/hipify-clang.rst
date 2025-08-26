@@ -36,12 +36,12 @@ Release Dependencies
 ``hipify-clang`` requires:
 
 * `CUDA <https://developer.nvidia.com/cuda-downloads>`_, the latest supported version is
-  `12.8.1 <https://developer.nvidia.com/cuda-12-8-1-download-archive>`_, but requires at least version
+  `12.9.1 <https://developer.nvidia.com/cuda-12-9-1-download-archive>`_, but requires at least version
   `7.0 <https://developer.nvidia.com/cuda-toolkit-70>`_.
 
 * `LLVM+Clang <http://releases.llvm.org>`_ version is determined at least partially by 
   the CUDA version you are using, as shown in the table below. The recommended Clang release 
-  is the latest stable release `20.1.8 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-20.1.8>`_, 
+  is the latest stable release `21.1.0 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-21.1.0>`_, 
   or at least version `4.0.0 <http://releases.llvm.org/download.html#4.0.0>`_.
 
 .. list-table::
@@ -50,11 +50,11 @@ Release Dependencies
     - supported LLVM release versions
     - Windows
     - Linux
-  * - `12.9.0 <https://developer.nvidia.com/cuda-downloads>`_
-    - `21.0.0git <https://github.com/llvm/llvm-project>`_
+  * - `12.9.1 <https://developer.nvidia.com/cuda-12-9-1-download-archive>`_:sup:`1`
+    - `21.1.0 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-21.1.0>`_:sup:`1`
     - ✅
     - ✅
-  * - `12.8.1 <https://developer.nvidia.com/cuda-12-8-1-download-archive>`_:sup:`1`
+  * - `12.8.1 <https://developer.nvidia.com/cuda-12-8-1-download-archive>`_
     - `20.1.0 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-20.1.0>`_,
       `20.1.1 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-20.1.1>`_,
       `20.1.2 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-20.1.2>`_,
@@ -63,7 +63,7 @@ Release Dependencies
       `20.1.5 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-20.1.5>`_,
       `20.1.6 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-20.1.6>`_,
       `20.1.7 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-20.1.7>`_,
-      `20.1.8 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-20.1.8>`_:sup:`1`
+      `20.1.8 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-20.1.8>`_
     - ✅
     - ✅
   * - `12.6.3 <https://developer.nvidia.com/cuda-12-6-3-download-archive>`_
@@ -251,7 +251,7 @@ Release Dependencies
 In most cases, you can get a suitable version of ``LLVM+Clang`` with your package manager. However, you can also
 `download a release archive <http://releases.llvm.org/>`_ and build or install it. In case of multiple versions of ``LLVM`` installed, set
 `CMAKE_PREFIX_PATH <https://cmake.org/cmake/help/latest/variable/CMAKE_PREFIX_PATH.html>`_ so that
-``CMake`` can find the desired version of ``LLVM``. For example, ``-DCMAKE_PREFIX_PATH=D:\LLVM\20.1.8\dist``.
+``CMake`` can find the desired version of ``LLVM``. For example, ``-DCMAKE_PREFIX_PATH=D:\LLVM\21.1.0\dist``.
 
 Usage
 =====
@@ -264,21 +264,21 @@ with ``Clang``:
 
 .. code:: shell
 
-  ./hipify-clang square.cu --cuda-path=/usr/local/cuda-12.8 -I /usr/local/cuda-12.8/samples/common/inc
+  ./hipify-clang square.cu --cuda-path=/usr/local/cuda-12.9 -I /usr/local/cuda-12.9/samples/common/inc
 
 ``hipify-clang`` arguments are supplied first, followed by a separator ``--`` and the arguments to be
 passed to Clang for compiling the input file:
 
 .. code:: shell
 
-  ./hipify-clang cpp17.cu --cuda-path=/usr/local/cuda-12.8 -- -std=c++17
+  ./hipify-clang cpp17.cu --cuda-path=/usr/local/cuda-12.9 -- -std=c++17
 
 ``hipify-clang`` also supports the hipification of multiple files that can be specified in a single
 command with absolute or relative paths:
 
 .. code:: shell
 
-  ./hipify-clang cpp17.cu ../../square.cu /home/user/cuda/intro.cu --cuda-path=/usr/local/cuda-12.8 -- -std=c++17
+  ./hipify-clang cpp17.cu ../../square.cu /home/user/cuda/intro.cu --cuda-path=/usr/local/cuda-12.9 -- -std=c++17
 
 To use a specific version of LLVM during hipification, specify the ``hipify-clang`` option
 ``--clang-resource-directory=`` to point to the Clang resource directory, which is the
@@ -287,7 +287,7 @@ header files used during the hipification process:
 
 .. code:: shell
 
-  ./hipify-clang square.cu --cuda-path=/usr/local/cuda-12.8 --clang-resource-directory=/usr/llvm/20.1.8/dist/lib/clang/20
+  ./hipify-clang square.cu --cuda-path=/usr/local/cuda-12.9 --clang-resource-directory=/usr/llvm/21.1.0/dist/lib/clang/21
 
 For more information, refer to the `Clang manual for compiling CUDA <https://llvm.org/docs/CompileCudaWithLLVM.html#compiling-cuda-code>`_.
 
@@ -345,7 +345,7 @@ Print statistics
 
 .. code:: cpp
 
-  hipify-clang intro.cu -cuda-path="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.8" --print-stats
+  hipify-clang intro.cu -cuda-path="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.9" --print-stats
 
 .. code:: cpp
 
@@ -403,7 +403,7 @@ Print CSV statistics
 
 .. code-block:: cpp
 
-  hipify-clang intro.cu -cuda-path="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.8" --print-stats-csv
+  hipify-clang intro.cu -cuda-path="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.9" --print-stats-csv
 
 This generates ``intro.cu.csv`` file with statistics:
 
