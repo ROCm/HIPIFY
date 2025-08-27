@@ -2,7 +2,7 @@
    :description: Tools to automatically translate CUDA source code into portable HIP C++
    :keywords: HIPIFY, ROCm, library, tool, CUDA, CUDA2HIP, hipify-clang, hipify-perl
 
-.. _hipify_perl-command:
+.. _hipify-perl-cmd:
 
 **************************************************************************
 hipify-perl command
