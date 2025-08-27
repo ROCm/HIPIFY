@@ -12,13 +12,13 @@ Building LLVM
 ~~~~~~~~~~~~~~
 
 .. code-block:: bash
-  
+
   # Create a root directory for building LLVM, Clang and HIPIFY 
   export ROOT_DIR=$(pwd)
-  
+
   # If you would like to clone LLVM with the full git history, remove the `--depth 1` option.
   git clone --depth 1 https://github.com/llvm/llvm-project.git
-  
+
   mkdir build dist
   cd build
 
@@ -33,18 +33,18 @@ Building LLVM
 
 .. note::
   If LLVM and Clang are built in ``Debug`` mode (with ``-DCMAKE_BUILD_TYPE=Debug``), please build ``HIPIFY`` in ``Debug`` mode as well.
-  
+
   We support 64-bit build mode (``-Thost=x64``). Please build LLVM and Clang in 64-bit mode.
 
 Building HIPIFY
 ~~~~~~~~~~~~~~~
 
 .. code-block:: bash
-  
+
   cd $ROOT_DIR
 
   git clone https://github.com/ROCm/HIPIFY.git
-  
+
   cd build
 
   # To ensure LLVM is found, or in the case of multiple LLVM instances, 
@@ -72,9 +72,9 @@ belongs to an appropriate version.
 - Install `CUDA <https://developer.nvidia.com/cuda-toolkit-archive>`_ version 7.0 or greater.
 
   In case of multiple CUDA installations, specify the particular version using ``DCUDA_TOOLKIT_ROOT_DIR`` option:
-  
+
   .. code-block:: bash
-  
+
     -DCUDA_TOOLKIT_ROOT_DIR=/usr/include
 
 - [Optional] Install `cuTensor <https://developer.nvidia.com/cutensor-downloads>`_:
@@ -110,7 +110,7 @@ belongs to an appropriate version.
   .. code-block:: bash
 
    python $(ROOT_DIR)/llvm-project/llvm/utils/lit/setup.py install
-      
+
   Starting with LLVM 6.0.1, specify the path to the ``llvm-lit`` Python script using the ``LLVM_EXTERNAL_LIT`` option:
 
   .. code-block:: bash
@@ -150,7 +150,7 @@ Recommended build system requirements:
 Here's how to build ``hipify-clang`` with testing support on ``Ubuntu 24.04.02``:
 
 .. code-block:: bash
-  
+
   cd $ROOT_DIR/build
 
   cmake \
