@@ -257,7 +257,7 @@ Usage
 =====
 
 .. note::
-  For additional details on the following ``hipify-clang`` command options, see :ref:`hipify_clang-command`
+  For additional details on the following ``hipify-clang`` command options, see :ref:`hipify-clang-command`
 
 To process a file, ``hipify-clang`` needs access to the same headers that are required to compile it
 with ``Clang``:

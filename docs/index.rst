@@ -30,20 +30,21 @@ The documentation is structured as follows:
 
   .. grid-item-card:: Building
 
-    * :ref:`build-hipify-clang`
+    * :ref:`build-hipify-clang-linux`
+    * :ref:`build-hipify-clang-windows`
     * :ref:`build-hipify-perl`
-    
+
   .. grid-item-card:: How to
 
     * :doc:`Use hipify-clang <./how-to/hipify-clang>`
     * :doc:`Use hipify-perl <./how-to/hipify-perl>`
-    
+
   .. grid-item-card:: API reference
 
-    * :ref:`hipify_clang-command`
-    * :ref:`hipify_perl-command`
+    * :ref:`hipify-clang-cmd`
+    * :ref:`hipify-perl-cmd`
     * :doc:`Supported APIs <./reference/supported_apis>`
-     
+
 To contribute to the documentation, refer to
 `Contributing to ROCm  <https://rocm.docs.amd.com/en/latest/contribute/contributing.html>`_.
 
