@@ -214,31 +214,31 @@ Release Dependencies
     - ✅
 
 .. |patch for 7.0.0| replace::
-  :download:`patch for 7.0.0 <./data/patches/patch_for_clang_7.0.0_bug_38811.zip>`
+  :download:`patch for 7.0.0 <../data/patches/patch_for_clang_7.0.0_bug_38811.zip>`
 .. |patch for 7.0.1| replace::
-  :download:`patch for 7.0.1 <./data/patches/patch_for_clang_7.0.1_bug_38811.zip>`
+  :download:`patch for 7.0.1 <../data/patches/patch_for_clang_7.0.1_bug_38811.zip>`
 .. |patch for 7.1.0| replace::
-  :download:`patch for 7.1.0 <./data/patches/patch_for_clang_7.1.0_bug_38811.zip>`
+  :download:`patch for 7.1.0 <../data/patches/patch_for_clang_7.1.0_bug_38811.zip>`
 .. |patch for 8.0.0| replace::
-  :download:`patch for 8.0.0 <./data/patches/patch_for_clang_8.0.0_bug_38811.zip>`
+  :download:`patch for 8.0.0 <../data/patches/patch_for_clang_8.0.0_bug_38811.zip>`
 .. |patch for 8.0.1| replace::
-  :download:`patch for 8.0.1 <./data/patches/patch_for_clang_8.0.1_bug_38811.zip>`
+  :download:`patch for 8.0.1 <../data/patches/patch_for_clang_8.0.1_bug_38811.zip>`
 .. |patch for 10.0.0| replace::
-  :download:`patch for 10.0.0 <./data/patches/patch_for_clang_10.0.0_bug_47332.zip>`
+  :download:`patch for 10.0.0 <../data/patches/patch_for_clang_10.0.0_bug_47332.zip>`
 .. |patch for 10.0.1| replace::
-  :download:`patch for 10.0.1 <./data/patches/patch_for_clang_10.0.1_bug_47332.zip>`
+  :download:`patch for 10.0.1 <../data/patches/patch_for_clang_10.0.1_bug_47332.zip>`
 .. |patch for 11.0.0| replace::
-  :download:`patch for 11.0.0 <./data/patches/patch_for_clang_11.0.0_bug_47332.zip>`
+  :download:`patch for 11.0.0 <../data/patches/patch_for_clang_11.0.0_bug_47332.zip>`
 .. |patch for 14.0.0| replace::
-  :download:`patch for 14.0.0 <./data/patches/patch_for_clang_14.0.0_bug_54609.zip>`
+  :download:`patch for 14.0.0 <../data/patches/patch_for_clang_14.0.0_bug_54609.zip>`
 .. |patch for 14.0.1| replace::
-  :download:`patch for 14.0.1 <./data/patches/patch_for_clang_14.0.1_bug_54609.zip>`
+  :download:`patch for 14.0.1 <../data/patches/patch_for_clang_14.0.1_bug_54609.zip>`
 .. |patch for 14.0.2| replace::
-  :download:`patch for 14.0.2 <./data/patches/patch_for_clang_14.0.2_bug_54609.zip>`
+  :download:`patch for 14.0.2 <../data/patches/patch_for_clang_14.0.2_bug_54609.zip>`
 .. |patch for 14.0.3| replace::
-  :download:`patch for 14.0.3 <./data/patches/patch_for_clang_14.0.3_bug_54609.zip>`
+  :download:`patch for 14.0.3 <../data/patches/patch_for_clang_14.0.3_bug_54609.zip>`
 .. |patch for 14.0.4| replace::
-  :download:`patch for 14.0.4 <./data/patches/patch_for_clang_14.0.4_bug_54609.zip>`
+  :download:`patch for 14.0.4 <../data/patches/patch_for_clang_14.0.4_bug_54609.zip>`
 
 :sup:`1` Represents the latest supported and recommended configuration.
 
