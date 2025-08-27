@@ -22,7 +22,7 @@ subtrees:
   - file: reference/supported_apis
     subtrees:
     - caption: HIP
-    - entries:
+      entries:
       - file: reference/tables/CUDA_Runtime_API_functions_supported_by_HIP
         title: CUDA Runtime API
       - file: reference/tables/CUDA_Driver_API_functions_supported_by_HIP
@@ -48,7 +48,7 @@ subtrees:
       - file: reference/tables/CUB_API_supported_by_HIP
         title: CUB API
     - caption: ROC
-    - entries:
+      entries:
       - file: reference/tables/CUBLAS_API_supported_by_ROC
         title: cuBLAS API
       - file: reference/tables/CUSPARSE_API_supported_by_ROC
@@ -58,7 +58,7 @@ subtrees:
       - file: reference/tables/CUDNN_API_supported_by_ROC
         title: cuDNN API
     - caption: HIP and ROC
-    - entries:
+      entries:
       - file: reference/tables/CUBLAS_API_supported_by_HIP_and_ROC
         title: cuBLAS API
       - file: reference/tables/CUSPARSE_API_supported_by_HIP_and_ROC
