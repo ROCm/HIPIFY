@@ -12,11 +12,11 @@ Building LLVM >= 10.0.0 (Recommended)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: bash
-  
+
   # Assuming commands are being run in Windows CMD. 
   # Use "$env:ROOT_DIR = (Get-Location).Path" to set the environment variable for PowerShell and use $env:ROOT_DIR to access it.
   set ROOT_DIR=%cd%
-  
+
   # If you would like to clone LLVM with the full git history, remove the `--depth 1` option.
   git clone --depth 1 https://github.com/llvm/llvm-project.git
   mkdir build dist
@@ -29,16 +29,16 @@ Building LLVM >= 10.0.0 (Recommended)
 
 .. note::
   If LLVM and Clang are built in ``Debug`` mode (with ``-DCMAKE_BUILD_TYPE=Debug``), please build ``HIPIFY`` in ``Debug`` mode as well.
-  
+
   We support 64-bit build mode (``-Thost=x64``). Please build LLVM and Clang in 64-bit mode.
 
-Building LLVM <= 9.0.1
+Building LLVM < 10.0.0
 ~~~~~~~~~~~~~~~~~~~~~~
 
 Download older `LLVM <https://github.com/llvm/llvm-project/releases/download/llvmorg-9.0.1/llvm-9.0.1.src.tar.xz>`_ \+ `Clang <https://github.com/llvm/llvm-project/releases/download/llvmorg-9.0.1/clang-9.0.1.src.tar.xz>`_ sources.
 
 .. code-block:: bash
-  
+
   set ROOT_DIR=%cd%
 
   mkdir build dist
@@ -56,7 +56,7 @@ Building HIPIFY
   cd %ROOT_DIR%
 
   git clone https://github.com/ROCm/HIPIFY.git
-  
+
   cd build
 
   # To ensure LLVM is found, or in the case of multiple LLVM instances, 
@@ -79,9 +79,9 @@ We recommend that you build ``LLVM+Clang`` from sources, as prebuilt binaries ar
 - Install `CUDA <https://developer.nvidia.com/cuda-toolkit-archive>`_ version 7.0 or greater.
 
   In case of multiple CUDA installations, specify the particular version using ``DCUDA_TOOLKIT_ROOT_DIR`` option:
-  
+
   .. code-block:: bash
-  
+
     -DCUDA_TOOLKIT_ROOT_DIR="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.9"
 
     -DCUDA_SDK_ROOT_DIR="C:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.9"
@@ -119,7 +119,7 @@ We recommend that you build ``LLVM+Clang`` from sources, as prebuilt binaries ar
   .. code-block:: bash
 
    python %ROOT_DIR%/llvm-project/llvm/utils/lit/setup.py install
-      
+
   Starting with LLVM 6.0.1, specify the path to the ``llvm-lit`` Python script using the ``LLVM_EXTERNAL_LIT`` option:
 
   .. code-block:: bash
