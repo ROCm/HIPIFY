@@ -30,9 +30,9 @@ The documentation is structured as follows:
 
   .. grid-item-card:: Building
 
-    * :ref:`build-hipify-clang-linux`
-    * :ref:`build-hipify-clang-windows`
-    * :ref:`build-hipify-perl`
+    * :doc:`Building hipify-clang on Linux <./building/build-hipify-clang-linux>`
+    * :doc:`Building hipify-clang on Windows <./building/build-hipify-clang-windows>`
+    * :doc:`Building hipify-perl <./building/build-hipify-perl>`
 
   .. grid-item-card:: How to
 
@@ -41,8 +41,8 @@ The documentation is structured as follows:
 
   .. grid-item-card:: API reference
 
-    * :ref:`hipify-clang-cmd`
-    * :ref:`hipify-perl-cmd`
+    * :doc:`hipify-clang commands <./reference/hipify-clang-cmd>`
+    * :doc:`hipify-perl commands <./reference/hipify-perl-cmd>`
     * :doc:`Supported APIs <./reference/supported_apis>`
 
 To contribute to the documentation, refer to

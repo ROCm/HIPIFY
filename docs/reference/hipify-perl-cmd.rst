@@ -5,7 +5,7 @@
 .. _hipify-perl-cmd:
 
 **************************************************************************
-hipify-perl command
+hipify-perl commands
 **************************************************************************
 
 For a list of ``hipify-perl`` options, run:
