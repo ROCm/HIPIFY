@@ -5,7 +5,7 @@
 .. _hipify-clang-cmd:
 
 **************************************************************************
-hipify-clang command
+hipify-clang commands
 **************************************************************************
 
 For a list of ``hipify-clang`` options, run:
