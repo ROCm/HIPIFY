@@ -55,7 +55,7 @@ subtrees:
         title: cuSPARSE API
       - file: reference/tables/CURAND_API_supported_by_ROC
         title: cuRAND API
-      - file: reference/tables/CUDNN_API_supported_by_ROC
+      - file: reference/tables/CUDNN_API_supported_by_MIOPEN
         title: cuDNN API
     - caption: HIP and ROC
       entries:
