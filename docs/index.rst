@@ -44,6 +44,9 @@ The documentation is structured as follows:
     * :doc:`hipify-clang commands <./reference/hipify-clang-cmd>`
     * :doc:`hipify-perl commands <./reference/hipify-perl-cmd>`
     * :doc:`Supported APIs <./reference/supported_apis>`
+    * :doc:`HIP supported APIs <./reference/hip_supported_apis>`
+    * :doc:`ROC supported APIs <./reference/roc_supported_apis>`
+    * :doc:`HIP and ROC supported APIs <./reference/hip_roc_supported_apis>`
 
 To contribute to the documentation, refer to
 `Contributing to ROCm  <https://rocm.docs.amd.com/en/latest/contribute/contributing.html>`_.
