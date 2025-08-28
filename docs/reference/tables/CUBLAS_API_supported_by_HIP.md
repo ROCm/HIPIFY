@@ -1,7 +1,7 @@
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="NVIDIA CUDA APIs supported by HIPIFY">
-    <meta name="keywords" content="HIPIFY, HIP, ROCm, NVIDIA, CUDA, CUDA2HIP, hipification, hipify-clang, hipify-perl, BLAS, cuBLAS, hipBLAS">
+    <meta name="description" content="CUDA APIs supported by HIPIFY">
+    <meta name="keywords" content="HIPIFY, HIP, ROCm, CUDA, CUDA2HIP, hipification, hipify-clang, hipify-perl, BLAS, cuBLAS, hipBLAS">
 </head>
 
 # CUBLAS API supported by HIP
