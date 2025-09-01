@@ -214,8 +214,8 @@ namespace doc {
       virtual void writeHeadMeta(const docType doc) {
           *streams[doc].get() << "<head>" << endl_tab;
           *streams[doc].get() << "<meta charset=\"UTF-8\">" << endl_tab;
-          *streams[doc].get() << "<meta name=\"description\" content=\"NVIDIA CUDA APIs supported by HIPIFY\">" << endl_tab;
-          *streams[doc].get() << "<meta name=\"keywords\" content=\"HIPIFY, HIP, ROCm, NVIDIA, CUDA, CUDA2HIP, hipification, hipify-clang, hipify-perl, " << writeAdditionalMetaKeywords() << "\">" << endl;
+          *streams[doc].get() << "<meta name=\"description\" content=\"CUDA APIs supported by HIPIFY\">" << endl_tab;
+          *streams[doc].get() << "<meta name=\"keywords\" content=\"HIPIFY, HIP, ROCm, CUDA, CUDA2HIP, hipification, hipify-clang, hipify-perl, " << writeAdditionalMetaKeywords() << "\">" << endl;
           *streams[doc].get() << "</head>" << endl_2;
       }
 
