@@ -11,6 +11,7 @@
 // CHECK: #include "hip/device_functions.h"
 // CHECK: #include "hip/driver_types.h"
 // CHECK: #include "hip/hip_complex.h"
+// CHECK: #include "hip/hip_texture_types.h"
 // CHECK: #include "hip/hip_vector_types.h"
 
 // CHECK: #include <iostream>
@@ -74,6 +75,9 @@
 #include "device_functions.h"
 #include "driver_types.h"
 #include "cuComplex.h"
+#if CUDA_VERSION < 13000
+#include "cuda_texture_types.h"
+#endif
 #include "vector_types.h"
 
 #include <iostream>
