@@ -42,6 +42,8 @@ THE SOFTWARE.
 #include "clang/Driver/Tool.h"
 #include "clang/Frontend/TextDiagnosticPrinter.h"
 
+#include "ImplicitHeader.h"
+
 #if LLVM_VERSION_MAJOR < 8
 #include "llvm/Support/Path.h"
 #endif
@@ -428,6 +430,8 @@ int main(int argc, const char **argv) {
     }
     // Initialise the statistics counters for this file.
     Statistics::setActive(src);
+    // Checks the local headers first and operates on them.
+    hipifyLocalHeaders(sSourceAbsPath, compilationDatabase.get(), &OptionsParser, argv[0], false);
     // RefactoringTool operates on the file in-place. Giving it the output path is no good,
     // because that'll break relative includes, and we don't want to overwrite the input file.
     // So what we do is operate on a copy, which we then move to the output.
