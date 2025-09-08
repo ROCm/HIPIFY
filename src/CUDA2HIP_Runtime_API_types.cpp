@@ -2239,6 +2239,24 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   //
   {"cudaAtomicOperationFloatMax",                                      {"hipAtomicOperationFloatMax",                               "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
+  //
+  {"cudaAtomicOperationCapability",                                    {"hipAtomicOperationCapability",                             "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // cudaAtomicOperationCapability enum values
+  //
+  {"cudaAtomicCapabilitySigned",                                       {"hipAtomicCapabilitySigned",                                "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"cudaAtomicCapabilityUnsigned",                                     {"hipAtomicCapabilityUnsigned",                              "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"cudaAtomicCapabilityReduction",                                    {"hipAtomicCapabilityReduction",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"cudaAtomicCapabilityScalar32",                                     {"hipAtomicCapabilityScalar32",                              "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"cudaAtomicCapabilityScalar64",                                     {"hipAtomicCapabilityScalar64",                              "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"cudaAtomicCapabilityScalar128",                                    {"hipAtomicCapabilityScalar128",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"cudaAtomicCapabilityVector32x4",                                   {"hipAtomicCapabilityVector32x4",                            "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+
   // 4. Typedefs
 
   // CUhostFn
@@ -3244,6 +3262,14 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_TYPE_NAME_VER_MAP 
   {"cudaAtomicOperationFloatAdd",                                      {CUDA_130, CUDA_0,   CUDA_0  }},
   {"cudaAtomicOperationFloatMin",                                      {CUDA_130, CUDA_0,   CUDA_0  }},
   {"cudaAtomicOperationFloatMax",                                      {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaAtomicOperationCapability",                                    {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaAtomicCapabilitySigned",                                       {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaAtomicCapabilityUnsigned",                                     {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaAtomicCapabilityReduction",                                    {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaAtomicCapabilityScalar32",                                     {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaAtomicCapabilityScalar64",                                     {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaAtomicCapabilityScalar128",                                    {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaAtomicCapabilityVector32x4",                                   {CUDA_130, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {
