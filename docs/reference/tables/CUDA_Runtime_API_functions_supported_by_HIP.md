@@ -758,8 +758,8 @@
 |`cudaComputeModeExclusiveProcess`| | | | |`hipComputeModeExclusiveProcess`|2.0.0| | | | |
 |`cudaComputeModeProhibited`| | | | |`hipComputeModeProhibited`|1.9.0| | | | |
 |`cudaConditionalNodeParams`|12.3| | | | | | | | | |
-|`cudaCooperativeLaunchMultiDeviceNoPostSync`|9.0| | | |`hipCooperativeLaunchMultiDeviceNoPostSync`|3.2.0| | | | |
-|`cudaCooperativeLaunchMultiDeviceNoPreSync`|9.0| | | |`hipCooperativeLaunchMultiDeviceNoPreSync`|3.2.0| | | | |
+|`cudaCooperativeLaunchMultiDeviceNoPostSync`|9.0| | |13.0|`hipCooperativeLaunchMultiDeviceNoPostSync`|3.2.0| | | | |
+|`cudaCooperativeLaunchMultiDeviceNoPreSync`|9.0| | |13.0|`hipCooperativeLaunchMultiDeviceNoPreSync`|3.2.0| | | | |
 |`cudaCpuDeviceId`|8.0| | | |`hipCpuDeviceId`|3.7.0| | | | |
 |`cudaD3D10DeviceList`| | | | | | | | | | |
 |`cudaD3D10DeviceListAll`| | | | | | | | | | |
@@ -800,7 +800,7 @@
 |`cudaDevAttrConcurrentKernels`| | | | |`hipDeviceAttributeConcurrentKernels`|1.6.0| | | | |
 |`cudaDevAttrConcurrentManagedAccess`|8.0| | | |`hipDeviceAttributeConcurrentManagedAccess`|3.10.0| | | | |
 |`cudaDevAttrCooperativeLaunch`|9.0| | | |`hipDeviceAttributeCooperativeLaunch`|2.6.0| | | | |
-|`cudaDevAttrCooperativeMultiDeviceLaunch`|9.0| | | |`hipDeviceAttributeCooperativeMultiDeviceLaunch`|2.6.0| | | | |
+|`cudaDevAttrCooperativeMultiDeviceLaunch`|9.0|11.4| |13.0|`hipDeviceAttributeCooperativeMultiDeviceLaunch`|2.6.0| | | | |
 |`cudaDevAttrD3D12CigSupported`|12.5| | | | | | | | | |
 |`cudaDevAttrDeferredMappingCudaArraySupported`|11.6| | | | | | | | | |
 |`cudaDevAttrDirectManagedMemAccessFromHost`|9.2| | | |`hipDeviceAttributeDirectManagedMemAccessFromHost`|3.10.0| | | | |
@@ -813,6 +813,7 @@
 |`cudaDevAttrGpuOverlap`| | | | |`hipDeviceAttributeAsyncEngineCount`|4.3.0| | | | |
 |`cudaDevAttrGpuPciDeviceId`|12.8| | | | | | | | | |
 |`cudaDevAttrGpuPciSubsystemId`|12.8| | | | | | | | | |
+|`cudaDevAttrHostMemoryPoolsSupported`|13.0| | | | | | | | | |
 |`cudaDevAttrHostNativeAtomicSupported`|8.0| | | |`hipDeviceAttributeHostNativeAtomicSupported`|4.3.0| | | | |
 |`cudaDevAttrHostNumaId`|12.2| | | | | | | | | |
 |`cudaDevAttrHostNumaMemoryPoolsSupported`|12.9| | | | | | | | | |
@@ -884,7 +885,7 @@
 |`cudaDevAttrMaxTextureCubemapWidth`| | | | |`hipDeviceAttributeMaxTextureCubemap`|4.3.0| | | | |
 |`cudaDevAttrMaxThreadsPerBlock`| | | | |`hipDeviceAttributeMaxThreadsPerBlock`|1.6.0| | | | |
 |`cudaDevAttrMaxThreadsPerMultiProcessor`| | | | |`hipDeviceAttributeMaxThreadsPerMultiProcessor`|1.6.0| | | | |
-|`cudaDevAttrMaxTimelineSemaphoreInteropSupported`|11.2|11.5| | | | | | | | |
+|`cudaDevAttrMaxTimelineSemaphoreInteropSupported`|11.2|11.5| |13.0| | | | | | |
 |`cudaDevAttrMemSyncDomainCount`|12.0| | | | | | | | | |
 |`cudaDevAttrMemoryClockRate`| | | | |`hipDeviceAttributeMemoryClockRate`|1.6.0| | | | |
 |`cudaDevAttrMemoryPoolSupportedHandleTypes`|11.3| | | | | | | | | |
@@ -894,6 +895,7 @@
 |`cudaDevAttrMultiProcessorCount`| | | | |`hipDeviceAttributeMultiprocessorCount`|1.6.0| | | | |
 |`cudaDevAttrNumaConfig`|12.2| | | | | | | | | |
 |`cudaDevAttrNumaId`|12.2| | | | | | | | | |
+|`cudaDevAttrOnlyPartialHostNativeAtomicSupported`|13.0| | | | | | | | | |
 |`cudaDevAttrPageableMemoryAccess`|8.0| | | |`hipDeviceAttributePageableMemoryAccess`|3.10.0| | | | |
 |`cudaDevAttrPageableMemoryAccessUsesHostPageTables`|9.2| | | |`hipDeviceAttributePageableMemoryAccessUsesHostPageTables`|3.10.0| | | | |
 |`cudaDevAttrPciBusId`| | | | |`hipDeviceAttributePciBusId`|1.6.0| | | | |
@@ -907,9 +909,11 @@
 |`cudaDevAttrReserved129`|12.1| | | | | | | | | |
 |`cudaDevAttrReserved132`|12.1| | | | | | | | | |
 |`cudaDevAttrReserved141`|12.9| | | | | | | | | |
+|`cudaDevAttrReserved145`|13.0| | | | | | | | | |
 |`cudaDevAttrReserved92`|9.0| | | | | | | | | |
 |`cudaDevAttrReserved93`|9.0| | | | | | | | | |
 |`cudaDevAttrReserved94`|9.0| | | |`hipDeviceAttributeCanUseStreamWaitValue`|4.3.0| | | | |
+|`cudaDevAttrReserved96`|13.0| | | |`hipDeviceAttributeCooperativeMultiDeviceLaunch`|2.6.0| | | | |
 |`cudaDevAttrReservedSharedMemoryPerBlock`|11.0| | | | | | | | | |
 |`cudaDevAttrSingleToDoublePrecisionPerfRatio`|8.0| | | |`hipDeviceAttributeSingleToDoublePrecisionPerfRatio`|4.3.0| | | | |
 |`cudaDevAttrSparseCudaArraySupported`|11.1| | | | | | | | | |
@@ -1525,6 +1529,7 @@
 |`cudaMemAllocationHandleType`|11.2| | | |`hipMemAllocationHandleType`|5.2.0| | | | |
 |`cudaMemAllocationType`|11.2| | | |`hipMemAllocationType`|5.2.0| | | | |
 |`cudaMemAllocationTypeInvalid`|11.2| | | |`hipMemAllocationTypeInvalid`|5.2.0| | | | |
+|`cudaMemAllocationTypeManaged`|13.0| | | | | | | | | |
 |`cudaMemAllocationTypeMax`|11.2| | | |`hipMemAllocationTypeMax`|5.2.0| | | | |
 |`cudaMemAllocationTypePinned`|11.2| | | |`hipMemAllocationTypePinned`|5.2.0| | | | |
 |`cudaMemAttachGlobal`| | | | |`hipMemAttachGlobal`|2.5.0| | | | |
@@ -1545,6 +1550,7 @@
 |`cudaMemLocationTypeHostNuma`|12.2| | | | | | | | | |
 |`cudaMemLocationTypeHostNumaCurrent`|12.2| | | | | | | | | |
 |`cudaMemLocationTypeInvalid`|11.2| | | |`hipMemLocationTypeInvalid`|5.2.0| | | | |
+|`cudaMemLocationTypeNone`|13.0| | | |`hipMemLocationTypeInvalid`|5.2.0| | | | |
 |`cudaMemPoolAttr`|11.2| | | |`hipMemPoolAttr`|5.2.0| | | | |
 |`cudaMemPoolAttrReleaseThreshold`|11.2| | | |`hipMemPoolAttrReleaseThreshold`|5.2.0| | | | |
 |`cudaMemPoolAttrReservedMemCurrent`|11.3| | | |`hipMemPoolAttrReservedMemCurrent`|5.2.0| | | | |

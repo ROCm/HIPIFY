@@ -538,12 +538,17 @@ int main() {
 #if CUDA_VERSION >= 9000
   // CHECK: hipDeviceAttribute_t DevAttrReserved94 = hipDeviceAttributeCanUseStreamWaitValue;
   // CHECK-NEXT: hipDeviceAttribute_t DevAttrCooperativeLaunch = hipDeviceAttributeCooperativeLaunch;
-  // CHECK-NEXT: hipDeviceAttribute_t DevAttrCooperativeMultiDeviceLaunch = hipDeviceAttributeCooperativeMultiDeviceLaunch;
   // CHECK-NEXT: hipDeviceAttribute_t DevAttrMaxSharedMemoryPerBlockOptin = hipDeviceAttributeSharedMemPerBlockOptin;
   cudaDeviceAttr DevAttrReserved94 = cudaDevAttrReserved94;
   cudaDeviceAttr DevAttrCooperativeLaunch = cudaDevAttrCooperativeLaunch;
-  cudaDeviceAttr DevAttrCooperativeMultiDeviceLaunch = cudaDevAttrCooperativeMultiDeviceLaunch;
   cudaDeviceAttr DevAttrMaxSharedMemoryPerBlockOptin = cudaDevAttrMaxSharedMemoryPerBlockOptin;
+#if CUDA_VERSION < 13000
+  // CHECK: hipDeviceAttribute_t DevAttrCooperativeMultiDeviceLaunch = hipDeviceAttributeCooperativeMultiDeviceLaunch;
+  cudaDeviceAttr DevAttrCooperativeMultiDeviceLaunch = cudaDevAttrCooperativeMultiDeviceLaunch;
+#elif CUDA_VERSION >= 13000
+  // CHECK: hipDeviceAttribute_t DevAttrReserved96 = hipDeviceAttributeCooperativeMultiDeviceLaunch;
+  cudaDeviceAttr DevAttrReserved96 = cudaDevAttrReserved96;
+#endif
 
   // CHECK: hipError_t ErrorCooperativeLaunchTooLarge = hipErrorCooperativeLaunchTooLarge;
   cudaError_t ErrorCooperativeLaunchTooLarge = cudaErrorCooperativeLaunchTooLarge;
@@ -766,6 +771,11 @@ int main() {
   cudaMemLocationType memLocationType;
   cudaMemLocationType MemLocationTypeInvalid = cudaMemLocationTypeInvalid;
   cudaMemLocationType MemLocationTypeDevice = cudaMemLocationTypeDevice;
+
+#if CUDA_VERSION >= 13000
+  // CHECK: hipMemLocationType MemLocationTypeNone = hipMemLocationTypeInvalid;
+  cudaMemLocationType MemLocationTypeNone = cudaMemLocationTypeNone;
+#endif
 
   // CHECK: hipMemAccessFlags MemAccessFlags;
   // CHECK-NEXT: hipMemAccessFlags MemAccessFlagsProtNone = hipMemAccessFlagsProtNone;
