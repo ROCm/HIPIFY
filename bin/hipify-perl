@@ -898,6 +898,7 @@ my %deprecated_funcs = (
     "cudaDeviceSetSharedMemConfig" => "12.4",
     "cudaDeviceGetSharedMemConfig" => "12.4",
     "cudaDevAttrMaxTimelineSemaphoreInteropSupported" => "11.5",
+    "cudaDevAttrCooperativeMultiDeviceLaunch" => "11.4",
     "cudaD3D9UnregisterResource" => "10.0",
     "cudaD3D9UnmapResources" => "10.0",
     "cudaD3D9ResourceSetMapFlags" => "10.0",
@@ -1456,7 +1457,11 @@ my %removed_funcs = (
     "cudaGetTextureAlignmentOffset" => "12.0",
     "cudaGetSurfaceReference" => "12.0",
     "cudaDevicePropDontCare" => "12.0",
+    "cudaDevAttrMaxTimelineSemaphoreInteropSupported" => "13.0",
+    "cudaDevAttrCooperativeMultiDeviceLaunch" => "13.0",
     "cudaCreateTextureObject_v2" => "12.0",
+    "cudaCooperativeLaunchMultiDeviceNoPreSync" => "13.0",
+    "cudaCooperativeLaunchMultiDeviceNoPostSync" => "13.0",
     "cudaConfigureCall" => "10.1",
     "cudaCSV" => "12.0",
     "cudaBindTextureToMipmappedArray" => "12.0",
@@ -8982,6 +8987,7 @@ sub simpleSubstitutions {
     subst("cudaDevAttrPciDeviceId", "hipDeviceAttributePciDeviceId", "numeric_literal");
     subst("cudaDevAttrPciDomainId", "hipDeviceAttributePciDomainId", "numeric_literal");
     subst("cudaDevAttrReserved94", "hipDeviceAttributeCanUseStreamWaitValue", "numeric_literal");
+    subst("cudaDevAttrReserved96", "hipDeviceAttributeCooperativeMultiDeviceLaunch", "numeric_literal");
     subst("cudaDevAttrSingleToDoublePrecisionPerfRatio", "hipDeviceAttributeSingleToDoublePrecisionPerfRatio", "numeric_literal");
     subst("cudaDevAttrStreamPrioritiesSupported", "hipDeviceAttributeStreamPrioritiesSupported", "numeric_literal");
     subst("cudaDevAttrSurfaceAlignment", "hipDeviceAttributeSurfaceAlignment", "numeric_literal");
@@ -9195,6 +9201,7 @@ sub simpleSubstitutions {
     subst("cudaMemHandleTypeWin32Kmt", "hipMemHandleTypeWin32Kmt", "numeric_literal");
     subst("cudaMemLocationTypeDevice", "hipMemLocationTypeDevice", "numeric_literal");
     subst("cudaMemLocationTypeInvalid", "hipMemLocationTypeInvalid", "numeric_literal");
+    subst("cudaMemLocationTypeNone", "hipMemLocationTypeInvalid", "numeric_literal");
     subst("cudaMemPoolAttrReleaseThreshold", "hipMemPoolAttrReleaseThreshold", "numeric_literal");
     subst("cudaMemPoolAttrReservedMemCurrent", "hipMemPoolAttrReservedMemCurrent", "numeric_literal");
     subst("cudaMemPoolAttrReservedMemHigh", "hipMemPoolAttrReservedMemHigh", "numeric_literal");
@@ -11312,6 +11319,7 @@ sub warnRemovedFunctions {
     "cudaMemHandleTypeFabric",
     "cudaMemFabricHandle_t",
     "cudaMemFabricHandle_st",
+    "cudaMemAllocationTypeManaged",
     "cudaMemAllocNodeParamsV2",
     "cudaMemAdvise_v2",
     "cudaLimitPersistingL2CacheSize",
@@ -11686,6 +11694,7 @@ sub warnRemovedFunctions {
     "cudaDevAttrReservedSharedMemoryPerBlock",
     "cudaDevAttrReserved93",
     "cudaDevAttrReserved92",
+    "cudaDevAttrReserved145",
     "cudaDevAttrReserved141",
     "cudaDevAttrReserved132",
     "cudaDevAttrReserved129",
@@ -11694,6 +11703,7 @@ sub warnRemovedFunctions {
     "cudaDevAttrReserved124",
     "cudaDevAttrReserved123",
     "cudaDevAttrReserved122",
+    "cudaDevAttrOnlyPartialHostNativeAtomicSupported",
     "cudaDevAttrNumaId",
     "cudaDevAttrNumaConfig",
     "cudaDevAttrMpsEnabled",
@@ -11714,6 +11724,7 @@ sub warnRemovedFunctions {
     "cudaDevAttrHostNumaMultinodeIpcSupported",
     "cudaDevAttrHostNumaMemoryPoolsSupported",
     "cudaDevAttrHostNumaId",
+    "cudaDevAttrHostMemoryPoolsSupported",
     "cudaDevAttrGpuPciSubsystemId",
     "cudaDevAttrGpuPciDeviceId",
     "cudaDevAttrGPUDirectRDMAWritesOrdering",
