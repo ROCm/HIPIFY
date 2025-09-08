@@ -705,6 +705,20 @@
 |`cudaAsyncCallbackHandle_t`|12.4| | | | | | | | | |
 |`cudaAsyncNotificationInfo`|12.4| | | | | | | | | |
 |`cudaAsyncNotificationInfo_t`|12.4| | | | | | | | | |
+|`cudaAtomicOperation`|13.0| | | | | | | | | |
+|`cudaAtomicOperationAnd`|13.0| | | | | | | | | |
+|`cudaAtomicOperationCAS`|13.0| | | | | | | | | |
+|`cudaAtomicOperationExchange`|13.0| | | | | | | | | |
+|`cudaAtomicOperationFloatAdd`|13.0| | | | | | | | | |
+|`cudaAtomicOperationFloatMax`|13.0| | | | | | | | | |
+|`cudaAtomicOperationFloatMin`|13.0| | | | | | | | | |
+|`cudaAtomicOperationIntegerAdd`|13.0| | | | | | | | | |
+|`cudaAtomicOperationIntegerDecrement`|13.0| | | | | | | | | |
+|`cudaAtomicOperationIntegerIncrement`|13.0| | | | | | | | | |
+|`cudaAtomicOperationIntegerMax`|13.0| | | | | | | | | |
+|`cudaAtomicOperationIntegerMin`|13.0| | | | | | | | | |
+|`cudaAtomicOperationOr`|13.0| | | | | | | | | |
+|`cudaAtomicOperationXOR`|13.0| | | | | | | | | |
 |`cudaBoundaryModeClamp`| | | | |`hipBoundaryModeClamp`|1.9.0| | | | |
 |`cudaBoundaryModeTrap`| | | | |`hipBoundaryModeTrap`|1.9.0| | | | |
 |`cudaBoundaryModeZero`| | | | |`hipBoundaryModeZero`|1.9.0| | | | |
@@ -930,6 +944,7 @@
 |`cudaDevP2PAttrAccessSupported`|8.0| | | |`hipDevP2PAttrAccessSupported`|3.8.0| | | | |
 |`cudaDevP2PAttrCudaArrayAccessSupported`|9.2| | | |`hipDevP2PAttrHipArrayAccessSupported`|3.8.0| | | | |
 |`cudaDevP2PAttrNativeAtomicSupported`|8.0| | | |`hipDevP2PAttrNativeAtomicSupported`|3.8.0| | | | |
+|`cudaDevP2PAttrOnlyPartialNativeAtomicSupported`|13.0| | | | | | | | | |
 |`cudaDevP2PAttrPerformanceRank`|8.0| | | |`hipDevP2PAttrPerformanceRank`|3.8.0| | | | |
 |`cudaDeviceAttr`| | | | |`hipDeviceAttribute_t`|1.6.0| | | | |
 |`cudaDeviceBlockingSync`| | | | |`hipDeviceScheduleBlockingSync`|1.6.0| | | | |
