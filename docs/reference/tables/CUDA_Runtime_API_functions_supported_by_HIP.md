@@ -705,9 +705,17 @@
 |`cudaAsyncCallbackHandle_t`|12.4| | | | | | | | | |
 |`cudaAsyncNotificationInfo`|12.4| | | | | | | | | |
 |`cudaAsyncNotificationInfo_t`|12.4| | | | | | | | | |
+|`cudaAtomicCapabilityReduction`|13.0| | | | | | | | | |
+|`cudaAtomicCapabilityScalar128`|13.0| | | | | | | | | |
+|`cudaAtomicCapabilityScalar32`|13.0| | | | | | | | | |
+|`cudaAtomicCapabilityScalar64`|13.0| | | | | | | | | |
+|`cudaAtomicCapabilitySigned`|13.0| | | | | | | | | |
+|`cudaAtomicCapabilityUnsigned`|13.0| | | | | | | | | |
+|`cudaAtomicCapabilityVector32x4`|13.0| | | | | | | | | |
 |`cudaAtomicOperation`|13.0| | | | | | | | | |
 |`cudaAtomicOperationAnd`|13.0| | | | | | | | | |
 |`cudaAtomicOperationCAS`|13.0| | | | | | | | | |
+|`cudaAtomicOperationCapability`|13.0| | | | | | | | | |
 |`cudaAtomicOperationExchange`|13.0| | | | | | | | | |
 |`cudaAtomicOperationFloatAdd`|13.0| | | | | | | | | |
 |`cudaAtomicOperationFloatMax`|13.0| | | | | | | | | |
