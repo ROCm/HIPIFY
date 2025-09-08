@@ -721,6 +721,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaDevP2PAttrNativeAtomicSupported",                              {"hipDevP2PAttrNativeAtomicSupported",                       "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}}, // 3
   // CU_DEVICE_P2P_ATTRIBUTE_CUDA_ARRAY_ACCESS_SUPPORTED = 0x04
   {"cudaDevP2PAttrCudaArrayAccessSupported",                           {"hipDevP2PAttrHipArrayAccessSupported",                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}}, // 4
+  //
+  {"cudaDevP2PAttrOnlyPartialNativeAtomicSupported",                   {"hipDevP2PAttrOnlyPartialNativeAtomicSupported",            "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 5
 
   // cudaEGL.h - presented only on Linux in nvidia-cuda-dev package
   // CUeglColorFormat
@@ -2207,6 +2209,36 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CU_GRAPH_CHILD_GRAPH_OWNERSHIP_MOVE
   {"cudaGraphChildGraphOwnershipMove",                                 {"hipGraphChildGraphOwnershipMove",                          "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
+  //
+  {"cudaAtomicOperation",                                              {"hipAtomicOperation",                                       "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // cudaAtomicOperation enum values
+  //
+  {"cudaAtomicOperationIntegerAdd",                                    {"hipAtomicOperationIntegerAdd",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"cudaAtomicOperationIntegerMin",                                    {"hipAtomicOperationIntegerMin",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"cudaAtomicOperationIntegerMax",                                    {"hipAtomicOperationIntegerMax",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"cudaAtomicOperationIntegerIncrement",                              {"hipAtomicOperationIntegerIncrement",                       "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"cudaAtomicOperationIntegerDecrement",                              {"hipAtomicOperationIntegerDecrement",                       "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"cudaAtomicOperationAnd",                                           {"hipAtomicOperationAnd",                                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"cudaAtomicOperationOr",                                            {"hipAtomicOperationOr",                                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"cudaAtomicOperationXOR",                                           {"hipAtomicOperationXOR",                                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"cudaAtomicOperationExchange",                                      {"hipAtomicOperationExchange",                               "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"cudaAtomicOperationCAS",                                           {"hipAtomicOperationCAS",                                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"cudaAtomicOperationFloatAdd",                                      {"hipAtomicOperationFloatAdd",                               "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"cudaAtomicOperationFloatMin",                                      {"hipAtomicOperationFloatMin",                               "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"cudaAtomicOperationFloatMax",                                      {"hipAtomicOperationFloatMax",                               "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+
   // 4. Typedefs
 
   // CUhostFn
@@ -3197,6 +3229,21 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_TYPE_NAME_VER_MAP 
   {"cudaDevAttrOnlyPartialHostNativeAtomicSupported",                  {CUDA_130, CUDA_0,   CUDA_0  }},
   {"cudaMemLocationTypeNone",                                          {CUDA_130, CUDA_0,   CUDA_0  }},
   {"cudaMemAllocationTypeManaged",                                     {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaDevP2PAttrOnlyPartialNativeAtomicSupported",                   {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaAtomicOperation",                                              {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaAtomicOperationIntegerAdd",                                    {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaAtomicOperationIntegerMin",                                    {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaAtomicOperationIntegerMax",                                    {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaAtomicOperationIntegerIncrement",                              {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaAtomicOperationIntegerDecrement",                              {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaAtomicOperationAnd",                                           {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaAtomicOperationOr",                                            {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaAtomicOperationXOR",                                           {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaAtomicOperationExchange",                                      {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaAtomicOperationCAS",                                           {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaAtomicOperationFloatAdd",                                      {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaAtomicOperationFloatMin",                                      {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaAtomicOperationFloatMax",                                      {CUDA_130, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {
