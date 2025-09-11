@@ -19,17 +19,17 @@ babel==2.17.0
     # via
     #   pydata-sphinx-theme
     #   sphinx
-beautifulsoup4==4.13.4
+beautifulsoup4==4.13.5
     # via pydata-sphinx-theme
 breathe==4.36.0
     # via rocm-docs-core
 certifi==2025.8.3
     # via requests
-cffi==1.17.1
+cffi==2.0.0
     # via
     #   cryptography
     #   pynacl
-charset-normalizer==3.4.2
+charset-normalizer==3.4.3
     # via requests
 click==8.2.1
     # via
@@ -43,11 +43,11 @@ comm==0.2.3
     # via ipykernel
 contourpy==1.3.2
     # via matplotlib
-cryptography==45.0.5
+cryptography==45.0.7
     # via pyjwt
 cycler==0.12.1
     # via matplotlib
-debugpy==1.8.15
+debugpy==1.8.16
     # via ipykernel
 decorator==5.2.1
     # via ipython
@@ -60,19 +60,19 @@ doxysphinx==3.3.12
     # via rocm-docs-core
 exceptiongroup==1.3.0
     # via ipython
-executing==2.2.0
+executing==2.2.1
     # via stack-data
-fastjsonschema==2.21.1
+fastjsonschema==2.21.2
     # via
     #   nbformat
     #   rocm-docs-core
-fonttools==4.59.0
+fonttools==4.59.2
     # via matplotlib
 gitdb==4.0.12
     # via gitpython
 gitpython==3.1.45
     # via rocm-docs-core
-greenlet==3.2.3
+greenlet==3.2.4
     # via sqlalchemy
 idna==3.10
     # via requests
@@ -96,7 +96,7 @@ jinja2==3.1.6
     #   sphinx
 jsonschema==4.25.1
     # via nbformat
-jsonschema-specifications==2025.4.1
+jsonschema-specifications==2025.9.1
     # via jsonschema
 jupyter-cache==1.0.1
     # via myst-nb
@@ -122,7 +122,7 @@ markdown-it-py==3.0.0
     #   myst-parser
 markupsafe==3.0.2
     # via jinja2
-matplotlib==3.10.5
+matplotlib==3.10.6
     # via doxysphinx
 matplotlib-inline==0.1.7
     # via
@@ -175,13 +175,13 @@ ptyprocess==0.7.0
     # via pexpect
 pure-eval==0.2.3
     # via stack-data
-pycparser==2.22
+pycparser==2.23
     # via cffi
 pydata-sphinx-theme==0.16.1
     # via
     #   rocm-docs-core
     #   sphinx-book-theme
-pygithub==2.7.0
+pygithub==2.8.1
     # via rocm-docs-core
 pygments==2.19.2
     # via
@@ -194,7 +194,7 @@ pyjson5==1.6.9
     # via doxysphinx
 pyjwt[crypto]==2.10.1
     # via pygithub
-pynacl==1.5.0
+pynacl==1.6.0
     # via pygithub
 pyparsing==3.2.3
     # via
@@ -211,7 +211,7 @@ pyyaml==6.0.2
     #   myst-parser
     #   rocm-docs-core
     #   sphinx-external-toc
-pyzmq==27.0.2
+pyzmq==27.1.0
     # via
     #   ipykernel
     #   jupyter-client
