@@ -667,6 +667,8 @@
 |`CUDART_ZERO_F`| | | | |`HIP_ZERO_F`|5.3.0| | | | |
 |`CUDA_EGL_MAX_PLANES`|9.1| | | | | | | | | |
 |`CUDA_IPC_HANDLE_SIZE`| | | | |`HIP_IPC_HANDLE_SIZE`|1.6.0| | | | |
+|`CUDAlogLevel`|13.0| | | | | | | | | |
+|`CUDAlogLevel_enum`|13.0| | | | | | | | | |
 |`CUeglStreamConnection_st`|9.1| | | | | | | | | |
 |`CUevent_st`| | | | |`ihipEvent_t`|1.6.0| | | | |
 |`CUexternalMemory_st`|10.0| | | | | | | | | |
@@ -675,6 +677,7 @@
 |`CUgraphNode_st`|10.0| | | |`hipGraphNode`|4.3.0| | | | |
 |`CUgraph_st`|10.0| | | |`ihipGraph`|4.3.0| | | | |
 |`CUkern_st`|12.1| | | | | | | | | |
+|`CUlogsCallbackEntry_st`|13.0| | | | | | | | | |
 |`CUstream_st`| | | | |`ihipStream_t`|1.5.0| | | | |
 |`CUuuid_st`| | | | |`hipUUID_t`|5.2.0| | | | |
 |`cudaAccessPolicyWindow`|11.0| | | |`hipAccessPolicyWindow`|5.2.0| | | | |
@@ -1281,13 +1284,13 @@
 |`cudaExternalSemaphoreHandleTypeTimelineSemaphoreWin32`|11.2| | | | | | | | | |
 |`cudaExternalSemaphoreSignalNodeParams`|11.2| | | |`hipExternalSemaphoreSignalNodeParams`|6.0.0| | | | |
 |`cudaExternalSemaphoreSignalNodeParamsV2`|12.2| | | |`hipExternalSemaphoreSignalNodeParams`|6.0.0| | | | |
-|`cudaExternalSemaphoreSignalParams`|10.0| | | |`hipExternalSemaphoreSignalParams`|4.4.0| | | | |
-|`cudaExternalSemaphoreSignalParams_v1`|11.2| | | |`hipExternalSemaphoreSignalParams`|4.4.0| | | | |
+|`cudaExternalSemaphoreSignalParams`|10.0| |13.0| |`hipExternalSemaphoreSignalParams`|4.4.0| | | | |
+|`cudaExternalSemaphoreSignalParams_v1`|11.2|11.2| |11.3|`hipExternalSemaphoreSignalParams`|4.4.0| | | | |
 |`cudaExternalSemaphoreSignalSkipNvSciBufMemSync`|10.2| | | | | | | | | |
 |`cudaExternalSemaphoreWaitNodeParams`|11.2| | | |`hipExternalSemaphoreWaitNodeParams`|6.0.0| | | | |
 |`cudaExternalSemaphoreWaitNodeParamsV2`|12.2| | | |`hipExternalSemaphoreWaitNodeParams`|6.0.0| | | | |
-|`cudaExternalSemaphoreWaitParams`|10.0| | | |`hipExternalSemaphoreWaitParams`|4.4.0| | | | |
-|`cudaExternalSemaphoreWaitParams_v1`|11.2| | | |`hipExternalSemaphoreWaitParams`|4.4.0| | | | |
+|`cudaExternalSemaphoreWaitParams`|10.0| |13.0| |`hipExternalSemaphoreWaitParams`|4.4.0| | | | |
+|`cudaExternalSemaphoreWaitParams_v1`|11.2|11.2| |11.3|`hipExternalSemaphoreWaitParams`|4.4.0| | | | |
 |`cudaExternalSemaphoreWaitSkipNvSciBufMemSync`|10.2| | | | | | | | | |
 |`cudaExternalSemaphore_t`|10.0| | | |`hipExternalSemaphore_t`|4.4.0| | | | |
 |`cudaFilterModeLinear`| | | | |`hipFilterModeLinear`|1.7.0| | | | |
@@ -1491,6 +1494,7 @@
 |`cudaKernelNodeAttributeDeviceUpdatableKernelNode`|12.4| | | | | | | | | |
 |`cudaKernelNodeAttributeMemSyncDomain`|12.0| | | | | | | | | |
 |`cudaKernelNodeAttributeMemSyncDomainMap`|12.0| | | | | | | | | |
+|`cudaKernelNodeAttributeNvlinkUtilCentricScheduling`|13.0| | | | | | | | | |
 |`cudaKernelNodeAttributePreferredSharedMemoryCarveout`|12.5| | | | | | | | | |
 |`cudaKernelNodeAttributePriority`|11.7| | | |`hipKernelNodeAttributePriority`|6.2.0| | | | |
 |`cudaKernelNodeParams`|10.0| | | |`hipKernelNodeParams`|4.3.0| | | | |
@@ -1508,13 +1512,14 @@
 |`cudaLaunchAttributeLaunchCompletionEvent`|12.3| | | | | | | | | |
 |`cudaLaunchAttributeMemSyncDomain`|12.0| | | | | | | | | |
 |`cudaLaunchAttributeMemSyncDomainMap`|12.0| | | | | | | | | |
+|`cudaLaunchAttributeNvlinkUtilCentricScheduling`|13.0| | | | | | | | | |
 |`cudaLaunchAttributePreferredClusterDimension`|12.8| | | | | | | | | |
 |`cudaLaunchAttributePreferredSharedMemoryCarveout`|12.5| | | | | | | | | |
 |`cudaLaunchAttributePriority`|11.8| | | |`hipLaunchAttributePriority`|6.2.0| | | | |
 |`cudaLaunchAttributeProgrammaticEvent`|11.8| | | | | | | | | |
 |`cudaLaunchAttributeProgrammaticStreamSerialization`|11.8| | | | | | | | | |
 |`cudaLaunchAttributeSynchronizationPolicy`|11.8| | | | | | | | | |
-|`cudaLaunchAttributeValue`|11.8| | | |`hipLaunchAttributeValue`|6.2.0| | | | |
+|`cudaLaunchAttributeValue`|11.8| |13.0| |`hipLaunchAttributeValue`|6.2.0| | | | |
 |`cudaLaunchAttribute_st`|11.8| | | |`hipLaunchAttribute_st`|7.0.0| | | |7.0.0|
 |`cudaLaunchConfig_st`|11.8| | | |`hipLaunchConfig_st`|7.0.0| | | |7.0.0|
 |`cudaLaunchConfig_t`|11.8| | | |`hipLaunchConfig_t`|7.0.0| | | |7.0.0|
@@ -1523,7 +1528,7 @@
 |`cudaLaunchMemSyncDomainMap`|12.0| | | | | | | | | |
 |`cudaLaunchMemSyncDomainMap_st`|12.0| | | | | | | | | |
 |`cudaLaunchMemSyncDomainRemote`|12.0| | | | | | | | | |
-|`cudaLaunchParams`|9.0| | | |`hipLaunchParams`|2.6.0| | | | |
+|`cudaLaunchParams`|9.0| | |13.0|`hipLaunchParams`|2.6.0| | | | |
 |`cudaLibraryBinaryIsPreserved`|12.8| | | | | | | | | |
 |`cudaLibraryHostUniversalFunctionAndDataTable`|12.8| | | | | | | | | |
 |`cudaLibraryOption`|12.8| | | | | | | | | |
@@ -1536,6 +1541,10 @@
 |`cudaLimitPersistingL2CacheSize`|11.0| | | | | | | | | |
 |`cudaLimitPrintfFifoSize`| | | | |`hipLimitPrintfFifoSize`|4.5.0| | | | |
 |`cudaLimitStackSize`| | | | |`hipLimitStackSize`|5.3.0| | | | |
+|`cudaLogIterator`|13.0| | | | | | | | | |
+|`cudaLogLevelError`|13.0| | | | | | | | | |
+|`cudaLogLevelWarning`|13.0| | | | | | | | | |
+|`cudaLogsCallbackHandle`|13.0| | | | | | | | | |
 |`cudaMemAccessDesc`|11.2| | | |`hipMemAccessDesc`|5.2.0| | | | |
 |`cudaMemAccessFlags`|11.2| | | |`hipMemAccessFlags`|5.2.0| | | | |
 |`cudaMemAccessFlagsProtNone`|11.2| | | |`hipMemAccessFlagsProtNone`|5.2.0| | | | |
