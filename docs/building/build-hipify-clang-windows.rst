@@ -222,20 +222,20 @@ Tested configurations:
     - ``7.0 - 12.3.2``
     - ``8.0.5  - 9.13.0``
     - ``2019.16.11.50, 2022.17.14.12``
-    - ``4.1.0``
+    - ``4.1.1``
     - ``3.13.6``
   * - ``19.1.0 - 20.1.8``
     - ``7.0 - 12.8.1``
     - ``8.0.5  - 9.13.0``
-    - ``2019.16.11.50, 2022.17.14.12``
-    - ``4.1.0``
-    - ``3.13.6``
+    - ``2019.16.11.51, 2022.17.14.14``
+    - ``4.1.1``
+    - ``3.13.7``
   * - ``21.1.0 - 21.1.1``
     - ``7.0 - 12.9.1``
     - ``8.0.5  - 9.13.0``
-    - ``2019.16.11.50, 2022.17.14.12``
-    - ``4.1.0``
-    - ``3.13.6``
+    - ``2019.16.11.51, 2022.17.14.14``
+    - ``4.1.1``
+    - ``3.13.7``
 
 :sup:`5` LLVM 14.x.x is the latest major release supporting Visual Studio 2017.
 
@@ -272,20 +272,19 @@ The corresponding successful output is (assuming %ROOT_DIR% is ``D:/LLVM/21.1.1`
 
 .. code-block:: shell
 
-  -- Selecting Windows SDK version 10.0.22621.0 to target Windows 10.0.22631.
-  -- The C compiler identification is MSVC 19.42.34435.0
-  -- The CXX compiler identification is MSVC 19.42.34435.0
-  -- Detecting C compiler ABI info
-  -- Detecting C compiler ABI info - done
-  -- Check for working C compiler: C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/cl.exe - skipped
-  -- Detecting C compile features
-  -- Detecting C compile features - done
-  -- Detecting CXX compiler ABI info
-  -- Detecting CXX compiler ABI info - done
-  -- Check for working CXX compiler: C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/cl.exe - skipped
-  -- Detecting CXX compile features
-  -- Detecting CXX compile features - done
-  -- HIPIFY config:
+-- The C compiler identification is MSVC 19.44.35216.0
+-- The CXX compiler identification is MSVC 19.44.35216.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/cl.exe - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/cl.exe - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- HIPIFY config:
   --    - Build hipify-clang    : ON
   --    - Test hipify-clang     : ON
   --    - Is part of HIP SDK    : OFF
