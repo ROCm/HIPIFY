@@ -58,11 +58,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
 
   // CUDA_EXTERNAL_SEMAPHORE_SIGNAL_PARAMS
   {"cudaExternalSemaphoreSignalParams",                                {"hipExternalSemaphoreSignalParams",                         "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES}},
-  {"cudaExternalSemaphoreSignalParams_v1",                             {"hipExternalSemaphoreSignalParams",                         "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES}},
+  {"cudaExternalSemaphoreSignalParams_v1",                             {"hipExternalSemaphoreSignalParams",                         "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, CUDA_DEPRECATED | CUDA_REMOVED}},
 
   // CUDA_EXTERNAL_SEMAPHORE_WAIT_PARAMS
   {"cudaExternalSemaphoreWaitParams",                                  {"hipExternalSemaphoreWaitParams",                           "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES}},
-  {"cudaExternalSemaphoreWaitParams_v1",                               {"hipExternalSemaphoreWaitParams",                           "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES}},
+  {"cudaExternalSemaphoreWaitParams_v1",                               {"hipExternalSemaphoreWaitParams",                           "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, CUDA_DEPRECATED | CUDA_REMOVED}},
 
   // no analogue
   {"cudaFuncAttributes",                                               {"hipFuncAttributes",                                        "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES}},
@@ -89,7 +89,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
 
   // no analogue
   // CUDA_LAUNCH_PARAMS struct differs
-  {"cudaLaunchParams",                                                 {"hipLaunchParams",                                          "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES}},
+  {"cudaLaunchParams",                                                 {"hipLaunchParams",                                          "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, CUDA_REMOVED}},
 
   // no analogue
   // NOTE: HIP struct is bigger and contains cudaMemcpy3DParms only in the beginning
@@ -2026,6 +2026,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaLaunchAttributeDeviceUpdatableKernelNode",                     {"hipLaunchAttributeDeviceUpdatableKernelNode",              "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   // CU_LAUNCH_ATTRIBUTE_PREFERRED_SHARED_MEMORY_CARVEOUT
   {"cudaLaunchAttributePreferredSharedMemoryCarveout",                 {"hipLaunchAttributePreferredSharedMemoryCarveout",          "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"cudaLaunchAttributeNvlinkUtilCentricScheduling",                   {"hipLaunchAttributeNvlinkUtilCentricScheduling",            "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   // CUgraphInstantiateResult
   {"cudaGraphInstantiateResult",                                       {"hipGraphInstantiateResult",                                "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES}},
@@ -2135,6 +2137,15 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   //
   {"cudaMemcpyOperandTypeMax",                                         {"hipMemcpyOperandTypeMax",                                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
+  //
+  {"CUDAlogLevel",                                                     {"hipLogLevel",                                              "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CUDAlogLevel_enum",                                                {"hipLogLevel",                                              "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // CUDAlogLevel enum values
+  //
+  {"cudaLogLevelError",                                                {"hipLogLevelError",                                         "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"cudaLogLevelWarning",                                              {"hipLogLevelWarning",                                       "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   // NOTE: HIP doesn't have JIT; this dummy enum is used for syntactical compatibility
   // CUjit_option
@@ -2289,6 +2300,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaAsyncCallbackHandle_t",                                        {"hipAsyncCallbackHandle",                                   "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   // CUasyncCallback
   {"cudaAsyncCallback",                                                {"hipAsyncCallback",                                         "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+
+  //
+  {"cudaLogsCallbackHandle",                                           {"hipLogsCallbackHandle",                                    "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CUlogsCallbackEntry_st",                                           {"hipLogsCallbackEntry_st",                                  "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   // 5. Defines
 
@@ -2456,6 +2472,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaGraphKernelNodePortLaunchCompletion",                          {"hipGraphKernelNodePortLaunchCompletion",                   "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES}}, // 2
   // CU_KERNEL_NODE_ATTRIBUTE_DEVICE_UPDATABLE_KERNEL_NODE
   {"cudaKernelNodeAttributeDeviceUpdatableKernelNode",                 {"hipKernelNodeAttributeDeviceUpdatableKernelNode",          "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"cudaKernelNodeAttributeNvlinkUtilCentricScheduling",               {"hipLaunchAttributeNvlinkUtilCentricScheduling",            "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"cudaLogIterator",                                                  {"hipLogIterator",                                           "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   {"CUDART_INF_F",                                                     {"HIP_INF_F",                                                "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES}},
   {"CUDART_NAN_F",                                                     {"HIP_NAN_F",                                                "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES}},
@@ -2569,7 +2589,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_TYPE_NAME_VER_MAP 
   {"cudaExternalSemaphoreWaitParams",                                  {CUDA_100, CUDA_0,   CUDA_0  }},
   {"cudaHostNodeParams",                                               {CUDA_100, CUDA_0,   CUDA_0  }},
   {"cudaKernelNodeParams",                                             {CUDA_100, CUDA_0,   CUDA_0  }},
-  {"cudaLaunchParams",                                                 {CUDA_90,  CUDA_0,   CUDA_0  }},
+  {"cudaLaunchParams",                                                 {CUDA_90,  CUDA_0,   CUDA_130}},
   {"cudaMemsetParams",                                                 {CUDA_100, CUDA_0,   CUDA_0  }},
   {"CUexternalMemory_st",                                              {CUDA_100, CUDA_0,   CUDA_0  }},
   {"cudaExternalMemory_t",                                             {CUDA_100, CUDA_0,   CUDA_0  }},
@@ -2879,8 +2899,8 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_TYPE_NAME_VER_MAP 
   {"cudaMemPoolPtrExportData",                                         {CUDA_112, CUDA_0,   CUDA_0  }},
   {"cudaExternalSemaphoreHandleTypeTimelineSemaphoreFd",               {CUDA_112, CUDA_0,   CUDA_0  }},
   {"cudaExternalSemaphoreHandleTypeTimelineSemaphoreWin32",            {CUDA_112, CUDA_0,   CUDA_0  }},
-  {"cudaExternalSemaphoreSignalParams_v1",                             {CUDA_112, CUDA_0,   CUDA_0  }},
-  {"cudaExternalSemaphoreWaitParams_v1",                               {CUDA_112, CUDA_0,   CUDA_0  }},
+  {"cudaExternalSemaphoreSignalParams_v1",                             {CUDA_112, CUDA_112, CUDA_113}},
+  {"cudaExternalSemaphoreWaitParams_v1",                               {CUDA_112, CUDA_112, CUDA_113}},
   {"cudaMemPool_t",                                                    {CUDA_112, CUDA_0,   CUDA_0  }},
   {"cudaExternalSemaphoreSignalNodeParams",                            {CUDA_112, CUDA_0,   CUDA_0  }},
   {"cudaExternalSemaphoreWaitNodeParams",                              {CUDA_112, CUDA_0,   CUDA_0  }},
@@ -3270,6 +3290,21 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_TYPE_NAME_VER_MAP 
   {"cudaAtomicCapabilityScalar64",                                     {CUDA_130, CUDA_0,   CUDA_0  }},
   {"cudaAtomicCapabilityScalar128",                                    {CUDA_130, CUDA_0,   CUDA_0  }},
   {"cudaAtomicCapabilityVector32x4",                                   {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaLaunchAttributeNvlinkUtilCentricScheduling",                   {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CUDAlogLevel",                                                     {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CUDAlogLevel_enum",                                                {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaLogLevelError",                                                {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaLogLevelWarning",                                              {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaLogsCallbackHandle",                                           {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CUlogsCallbackEntry_st",                                           {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaKernelNodeAttributeNvlinkUtilCentricScheduling",               {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaLogIterator",                                                  {CUDA_130, CUDA_0,   CUDA_0  }},
+};
+
+const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_RUNTIME_TYPE_CHANGED_VER_MAP {
+  {"cudaExternalSemaphoreSignalParams",                                {CUDA_130}},
+  {"cudaExternalSemaphoreWaitParams",                                  {CUDA_130}},
+  {"cudaLaunchAttributeValue",                                         {CUDA_130}},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {

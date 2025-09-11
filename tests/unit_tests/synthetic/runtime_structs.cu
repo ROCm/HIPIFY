@@ -85,7 +85,7 @@ int main() {
   // CHECK: hipUUID_t uuid_st;
   CUuuid_st uuid_st;
 
-#if CUDA_VERSION >= 9000
+#if CUDA_VERSION >= 9000 && CUDA_VERSION < 13000
   // CHECK: hipLaunchParams LaunchParams;
   cudaLaunchParams LaunchParams;
 #endif
@@ -146,12 +146,13 @@ int main() {
 #endif
 
 #if CUDA_VERSION >= 11020
+#if CUDA_VERSION < 11030
   // CHECK: hipExternalSemaphoreSignalParams ExternalSemaphoreSignalParams_v1;
   cudaExternalSemaphoreSignalParams_v1 ExternalSemaphoreSignalParams_v1;
 
   // CHECK: hipExternalSemaphoreWaitParams ExternalSemaphoreWaitParams_v1;
   cudaExternalSemaphoreWaitParams_v1 ExternalSemaphoreWaitParams_v1;
-
+#endif
   // CHECK: hipMemPool_t memPool_t;
   cudaMemPool_t memPool_t;
 
