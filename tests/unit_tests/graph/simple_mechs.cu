@@ -14,23 +14,23 @@ typedef struct {
 } node_t;
 
 typedef struct {
-  node_t* vector_table[NUM_NODES];
+  node_t *vector_table[NUM_NODES];
   node_t nodes[NUM_NODES];
 } graph_control_t;
 
-float* host_in_p;
-float* host_out_p;
-graph_control_t* host_gc_p;
-float* dev_in_p;
-float* dev_out_p;
-graph_control_t* dev_gc_p;
+float *host_in_p = nullptr;
+float *host_out_p = nullptr;
+graph_control_t *host_gc_p = nullptr;
+float *dev_in_p = nullptr;
+float *dev_out_p = nullptr;
+graph_control_t *dev_gc_p = nullptr;
 int global_index[NUM_NODES] = {0};
 
 // CHECK: hipGraph_t graph;
 // CHECK-NEXT: hipGraphExec_t graphExec;
-// CHECK-NEXT : hipGraphExec_t instance;
-// CHECK-NEXT : hipStream_t stream;
-// CHECK-NEXT : hipGraphNode_t node[NUM_NODES] = { 0 };
+// CHECK-NEXT: hipGraphExec_t instance;
+// CHECK-NEXT: hipStream_t stream;
+// CHECK-NEXT: hipGraphNode_t node[NUM_NODES] = { 0 };
 cudaGraph_t graph;
 cudaGraphExec_t graphExec;
 cudaGraphExec_t instance;
@@ -38,18 +38,19 @@ cudaStream_t stream;
 cudaGraphNode_t node[NUM_NODES] = { 0 };
 
 __global__
-void add(const void* index,
-         const graph_control_t* gc_p,
+void add(const void *index,
+         const graph_control_t *gc_p,
          const float *a,
-         float* b) {
-  int node_index = (long)index;
-  float adder;
+         float *b) {
+  const int *node_index_p = static_cast<const int*>(index);
+  int node_index = *node_index_p;
+  float adder = 0.0f;
   int i = threadIdx.x;
-  node_t* node_p =  gc_p->vector_table[node_index];
+  node_t *node_p =  gc_p->vector_table[node_index];
   node_index = node_p->index;
   adder = node_p->adder;
   if (i == node_index) {
-    for (int j = 0; j < 100; j++)
+    for (int j = 0; j < 100; ++j)
       b[i] = a[i] + adder + node_index;
   }
 }
@@ -58,9 +59,9 @@ void init(void) {
   int i = 0;
   // CHECK: hipStreamCreate(&stream);
   cudaStreamCreate(&stream);
-  host_in_p = (float*) malloc(sizeof(float) * WORK_BUFFER_SIZE);
-  host_out_p = (float*) malloc(sizeof(float) * WORK_BUFFER_SIZE);
-  host_gc_p = (graph_control_t*) malloc(sizeof(graph_control_t));
+  host_in_p = (float*)malloc(sizeof(float)*WORK_BUFFER_SIZE);
+  host_out_p = (float*)malloc(sizeof(float)*WORK_BUFFER_SIZE);
+  host_gc_p = (graph_control_t*)malloc(sizeof(graph_control_t));
   for (i = 0; i < WORK_BUFFER_SIZE; ++i) {
     host_in_p[i] = 1;
   }
@@ -89,7 +90,7 @@ void init(void) {
       but since that is not the point here, lets skip that.
   */
   for (i = 0; i < NUM_NODES; ++i) {
-    void* kargs[] = { &global_index[i],
+    void *kargs[] = { &global_index[i],
                       &dev_gc_p,
                       &dev_in_p,
                       &dev_out_p };
@@ -108,7 +109,7 @@ void init(void) {
                                &params))
       printf("Failed to create kernel node\n");
   }
-  for (i = 0; i < (NUM_NODES - 1 ); ++i)
+  for (i = 0; i < (NUM_NODES - 1); ++i)
     // CHECK: hipGraphAddDependencies(graph,
     cudaGraphAddDependencies(graph,
                               &node[i],
@@ -122,10 +123,10 @@ void init(void) {
                         0);
   /* Same input for dataplane every frame */
   // CHECK: hipMemcpy(dev_in_p,
+  // CHECK-NEXT: hipMemcpyHostToDevice);
   cudaMemcpy(dev_in_p,
              host_in_p,
              WORK_BUFFER_SIZE,
-  // CHECK: hipMemcpyHostToDevice);
              cudaMemcpyHostToDevice);
 }
 
@@ -161,20 +162,20 @@ int main (void) {
     }
     /* One copy for all data needed to execute one frame, queued in same stream as the rest */
     // CHECK: hipMemcpyAsync(dev_gc_p,
+    // CHECK-NEXT: hipMemcpyHostToDevice,
     cudaMemcpyAsync(dev_gc_p,
                     host_gc_p,
                     sizeof(graph_control_t),
-    // CHECK: hipMemcpyHostToDevice,
                     cudaMemcpyHostToDevice,
                     stream);
     /* Kick graph */
     graph_launch();
     /*  One read-out for all data produced this frame, queued in same stream as the rest.   */
     // CHECK: hipMemcpyAsync(host_out_p,
+    // CHECK-NEXT: hipMemcpyDeviceToHost,
     cudaMemcpyAsync(host_out_p,
                         dev_out_p,
                         WORK_BUFFER_SIZE,
-    // CHECK: hipMemcpyDeviceToHost,
                         cudaMemcpyDeviceToHost,
                         stream);
 
