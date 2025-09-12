@@ -319,7 +319,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // NOTE: Not equal to cuMemAllocPitch due to different signatures
   {"cudaMallocPitch",                                         {"hipMallocPitch",                                         "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY}},
   // cuMemAdvise
-  {"cudaMemAdvise",                                           {"hipMemAdvise",                                           "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY}},
+  // TODO: report unsupported only for CUDA >= 13000
+  {"cudaMemAdvise",                                           {"hipMemAdvise",                                           "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_UNSUPPORTED}},
   // cuMemAdvise_v2
   {"cudaMemAdvise_v2",                                        {"hipMemAdvise_v2",                                        "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_UNSUPPORTED}},
   // no analogue
@@ -377,7 +378,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuMemGetInfo
   {"cudaMemGetInfo",                                          {"hipMemGetInfo",                                          "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY}},
   // cuMemPrefetchAsync
-  {"cudaMemPrefetchAsync",                                    {"hipMemPrefetchAsync",                                    "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY}},
+  // TODO: report unsupported only for CUDA >= 13000
+  {"cudaMemPrefetchAsync",                                    {"hipMemPrefetchAsync",                                    "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_UNSUPPORTED}},
   // cuMemPrefetchAsync_v2
   {"cudaMemPrefetchAsync_v2",                                 {"hipMemPrefetchAsync_v2",                                 "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_UNSUPPORTED}},
   // cuMemRangeGetAttribute
@@ -412,6 +414,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   {"cudaDeviceRegisterAsyncNotification",                     {"hipDeviceRegisterAsyncNotification",                     "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_UNSUPPORTED}},
   // cuDeviceUnregisterAsyncNotification
   {"cudaDeviceUnregisterAsyncNotification",                   {"hipDeviceUnregisterAsyncNotification",                   "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_UNSUPPORTED}},
+  //
+  {"cudaMemDiscardBatchAsync",                                {"hipMemDiscardBatchAsync",                                "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_UNSUPPORTED}},
+  //
+  {"cudaMemDiscardAndPrefetchBatchAsync",                     {"hipMemDiscardAndPrefetchBatchAsync",                     "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_UNSUPPORTED}},
 
   // 11. Memory Management [DEPRECATED]
   // no analogue
@@ -456,6 +462,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   {"cudaMemPoolExportPointer",                                {"hipMemPoolExportPointer",                                "", CONV_MEMORY, API_RUNTIME, SEC::ORDERED_MEMORY}},
   // cuMemPoolImportPointer
   {"cudaMemPoolImportPointer",                                {"hipMemPoolImportPointer",                                "", CONV_MEMORY, API_RUNTIME, SEC::ORDERED_MEMORY}},
+  //
+  {"cudaMemGetDefaultMemPool",                                {"hipMemGetDefaultMemPool",                                "", CONV_MEMORY, API_RUNTIME, SEC::ORDERED_MEMORY, HIP_UNSUPPORTED}},
+  //
+  {"cudaMemGetMemPool",                                       {"hipMemGetMemPool",                                       "", CONV_MEMORY, API_RUNTIME, SEC::ORDERED_MEMORY, HIP_UNSUPPORTED}},
+  //
+  {"cudaMemSetMemPool",                                       {"hipMemSetMemPool",                                       "", CONV_MEMORY, API_RUNTIME, SEC::ORDERED_MEMORY, HIP_UNSUPPORTED}},
 
   // 13. Unified Addressing
   // no analogue
@@ -1229,6 +1241,11 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_FUNCTION_VER_MAP {
   {"cudaLibraryEnumerateKernels",                             {CUDA_128, CUDA_0,   CUDA_0  }},
   {"cudaDeviceGetHostAtomicCapabilities",                     {CUDA_130, CUDA_0,   CUDA_0  }},
   {"cudaDeviceGetP2PAtomicCapabilities",                      {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaMemDiscardBatchAsync",                                {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaMemDiscardAndPrefetchBatchAsync",                     {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaMemGetDefaultMemPool",                                {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaMemGetMemPool",                                       {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaMemSetMemPool",                                       {CUDA_130, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP {
@@ -1501,6 +1518,8 @@ const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_RUNTIME_FUNCTION_CH
   {"cudaStreamUpdateCaptureDependencies",                     {CUDA_130}},
   {"cudaMemcpyBatchAsync",                                    {CUDA_130}},
   {"cudaMemcpy3DBatchAsync",                                  {CUDA_130}},
+  {"cudaMemPrefetchAsync",                                    {CUDA_130}},
+  {"cudaMemAdvise",                                           {CUDA_130}},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_RUNTIME_API_SECTION_MAP {

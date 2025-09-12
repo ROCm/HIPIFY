@@ -852,6 +852,7 @@ int main() {
   // CHECK: result = hipDeviceGetP2PAttribute(&intVal, DeviceP2PAttr, device, deviceId);
   result = cudaDeviceGetP2PAttribute(&intVal, DeviceP2PAttr, device, deviceId);
 
+#if CUDA_VERSION < 13000
   // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMemAdvise(const void *devPtr, size_t count, enum cudaMemoryAdvise advice, int device);
   // HIP: hipError_t hipMemAdvise(const void* dev_ptr, size_t count, hipMemoryAdvise advice, int device);
   // CHECK: result = hipMemAdvise(deviceptr, bytes, MemoryAdvise, device);
@@ -861,7 +862,7 @@ int main() {
   // HIP: hipError_t hipMemPrefetchAsync(const void* dev_ptr, size_t count, int device, hipStream_t stream __dparm(0));
   // CHECK: result = hipMemPrefetchAsync(deviceptr, bytes, device, stream);
   result = cudaMemPrefetchAsync(deviceptr, bytes, device, stream);
-
+#endif
   // CHECK: hipMemRangeAttribute MemRangeAttribute;
   cudaMemRangeAttribute MemRangeAttribute;
 

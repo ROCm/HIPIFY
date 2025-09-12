@@ -191,10 +191,12 @@
 |`cudaMallocManaged`| | | | |`hipMallocManaged`|2.5.0| | | | |
 |`cudaMallocMipmappedArray`| | | | |`hipMallocMipmappedArray`|3.5.0| | | | |
 |`cudaMallocPitch`| | | | |`hipMallocPitch`|1.6.0| | | | |
-|`cudaMemAdvise`|8.0| | | |`hipMemAdvise`|3.7.0| | | | |
+|`cudaMemAdvise`|8.0| |13.0| | | | | | | |
 |`cudaMemAdvise_v2`|12.2| | | | | | | | | |
+|`cudaMemDiscardAndPrefetchBatchAsync`|13.0| | | | | | | | | |
+|`cudaMemDiscardBatchAsync`|13.0| | | | | | | | | |
 |`cudaMemGetInfo`| | | | |`hipMemGetInfo`|1.6.0| | | | |
-|`cudaMemPrefetchAsync`|8.0| | | |`hipMemPrefetchAsync`|3.7.0| | | | |
+|`cudaMemPrefetchAsync`|8.0| |13.0| | | | | | | |
 |`cudaMemPrefetchAsync_v2`|12.2| | | | | | | | | |
 |`cudaMemRangeGetAttribute`|8.0| | | |`hipMemRangeGetAttribute`|3.7.0| | | | |
 |`cudaMemRangeGetAttributes`|8.0| | | |`hipMemRangeGetAttributes`|3.7.0| | | | |
@@ -246,6 +248,8 @@
 |`cudaFreeAsync`|11.2| | | |`hipFreeAsync`|5.2.0| | | | |
 |`cudaMallocAsync`|11.2| | | |`hipMallocAsync`|5.2.0| | | | |
 |`cudaMallocFromPoolAsync`|11.2| | | |`hipMallocFromPoolAsync`|5.2.0| | | | |
+|`cudaMemGetDefaultMemPool`|13.0| | | | | | | | | |
+|`cudaMemGetMemPool`|13.0| | | | | | | | | |
 |`cudaMemPoolCreate`|11.2| | | |`hipMemPoolCreate`|5.2.0| | | | |
 |`cudaMemPoolDestroy`|11.2| | | |`hipMemPoolDestroy`|5.2.0| | | | |
 |`cudaMemPoolExportPointer`|11.2| | | |`hipMemPoolExportPointer`|5.2.0| | | | |
@@ -257,6 +261,7 @@
 |`cudaMemPoolSetAccess`|11.2| | | |`hipMemPoolSetAccess`|5.2.0| | | | |
 |`cudaMemPoolSetAttribute`|11.2| | | |`hipMemPoolSetAttribute`|5.2.0| | | | |
 |`cudaMemPoolTrimTo`|11.2| | | |`hipMemPoolTrimTo`|5.2.0| | | | |
+|`cudaMemSetMemPool`|13.0| | | | | | | | | |
 
 ## **13. Unified Addressing**
 

@@ -4404,7 +4404,6 @@ sub simpleSubstitutions {
     subst("cudaMallocManaged", "hipMallocManaged", "memory");
     subst("cudaMallocMipmappedArray", "hipMallocMipmappedArray", "memory");
     subst("cudaMallocPitch", "hipMallocPitch", "memory");
-    subst("cudaMemAdvise", "hipMemAdvise", "memory");
     subst("cudaMemGetInfo", "hipMemGetInfo", "memory");
     subst("cudaMemPoolCreate", "hipMemPoolCreate", "memory");
     subst("cudaMemPoolDestroy", "hipMemPoolDestroy", "memory");
@@ -4417,7 +4416,6 @@ sub simpleSubstitutions {
     subst("cudaMemPoolSetAccess", "hipMemPoolSetAccess", "memory");
     subst("cudaMemPoolSetAttribute", "hipMemPoolSetAttribute", "memory");
     subst("cudaMemPoolTrimTo", "hipMemPoolTrimTo", "memory");
-    subst("cudaMemPrefetchAsync", "hipMemPrefetchAsync", "memory");
     subst("cudaMemRangeGetAttribute", "hipMemRangeGetAttribute", "memory");
     subst("cudaMemRangeGetAttributes", "hipMemRangeGetAttributes", "memory");
     subst("cudaMemcpy", "hipMemcpy", "memory");
@@ -11312,21 +11310,28 @@ sub warnRemovedFunctions {
     "cudaMemcpy3DOperand",
     "cudaMemcpy3DBatchOp",
     "cudaMemcpy3DBatchAsync",
+    "cudaMemSetMemPool",
     "cudaMemRangeAttributePreferredLocationType",
     "cudaMemRangeAttributePreferredLocationId",
     "cudaMemRangeAttributeLastPrefetchLocationType",
     "cudaMemRangeAttributeLastPrefetchLocationId",
     "cudaMemPrefetchAsync_v2",
+    "cudaMemPrefetchAsync",
     "cudaMemPoolCreateUsageHwDecompress",
     "cudaMemLocationTypeHostNumaCurrent",
     "cudaMemLocationTypeHostNuma",
     "cudaMemLocationTypeHost",
     "cudaMemHandleTypeFabric",
+    "cudaMemGetMemPool",
+    "cudaMemGetDefaultMemPool",
     "cudaMemFabricHandle_t",
     "cudaMemFabricHandle_st",
+    "cudaMemDiscardBatchAsync",
+    "cudaMemDiscardAndPrefetchBatchAsync",
     "cudaMemAllocationTypeManaged",
     "cudaMemAllocNodeParamsV2",
     "cudaMemAdvise_v2",
+    "cudaMemAdvise",
     "cudaLogsCallbackHandle",
     "cudaLogLevelWarning",
     "cudaLogLevelError",
