@@ -852,15 +852,16 @@ int main() {
   // CHECK: result = hipDeviceGetP2PAttribute(&intVal, DeviceP2PAttr, device, deviceId);
   result = cudaDeviceGetP2PAttribute(&intVal, DeviceP2PAttr, device, deviceId);
 
+  // [TODO][#2062] Rename all DO-NOT-CHECK back
 #if CUDA_VERSION < 13000
   // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMemAdvise(const void *devPtr, size_t count, enum cudaMemoryAdvise advice, int device);
   // HIP: hipError_t hipMemAdvise(const void* dev_ptr, size_t count, hipMemoryAdvise advice, int device);
-  // CHECK: result = hipMemAdvise(deviceptr, bytes, MemoryAdvise, device);
+  // DO-NOT-CHECK: result = hipMemAdvise(deviceptr, bytes, MemoryAdvise, device);
   result = cudaMemAdvise(deviceptr, bytes, MemoryAdvise, device);
 
   // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMemPrefetchAsync(const void *devPtr, size_t count, int dstDevice, cudaStream_t stream __dv(0));
   // HIP: hipError_t hipMemPrefetchAsync(const void* dev_ptr, size_t count, int device, hipStream_t stream __dparm(0));
-  // CHECK: result = hipMemPrefetchAsync(deviceptr, bytes, device, stream);
+  // DO-NOT-CHECK: result = hipMemPrefetchAsync(deviceptr, bytes, device, stream);
   result = cudaMemPrefetchAsync(deviceptr, bytes, device, stream);
 #endif
   // CHECK: hipMemRangeAttribute MemRangeAttribute;
@@ -881,10 +882,10 @@ int main() {
   // CHECK: hipFuncAttribute FuncAttribute;
   cudaFuncAttribute FuncAttribute;
 
+#if CUDA_VERSION < 13000
   // CHECK: hipLaunchParams LaunchParams;
   cudaLaunchParams LaunchParams;
 
-#if CUDA_VERSION < 13000
   // CUDA: extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaLaunchCooperativeKernelMultiDevice(struct cudaLaunchParams *launchParamsList, unsigned int numDevices, unsigned int flags __dv(0));
   // HIP: hipError_t hipLaunchCooperativeKernelMultiDevice(hipLaunchParams* launchParamsList, int numDevices, unsigned int flags);
   // CHECK: result = hipLaunchCooperativeKernelMultiDevice(&LaunchParams, intVal, flags);
@@ -1003,11 +1004,17 @@ int main() {
   // CHECK: result = hipGraphAddChildGraphNode(&graphNode, Graph_t, &graphNode_2, bytes, Graph_t_2);
   result = cudaGraphAddChildGraphNode(&graphNode, Graph_t, &graphNode_2, bytes, Graph_t_2);
 
+  // [TODO][#2062] Rename all DO-NOT-CHECK back
 #if CUDA_VERSION < 13000
   // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphAddDependencies(cudaGraph_t graph, const cudaGraphNode_t *from, const cudaGraphNode_t *to, size_t numDependencies);
   // HIP: hipError_t hipGraphAddDependencies(hipGraph_t graph, const hipGraphNode_t* from, const hipGraphNode_t* to, size_t numDependencies);
-  // CHECK: result = hipGraphAddDependencies(Graph_t, &graphNode, &graphNode_2, bytes);
+  // DO-NOT-CHECK: result = hipGraphAddDependencies(Graph_t, &graphNode, &graphNode_2, bytes);
   result = cudaGraphAddDependencies(Graph_t, &graphNode, &graphNode_2, bytes);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphGetEdges(cudaGraph_t graph, cudaGraphNode_t *from, cudaGraphNode_t *to, size_t *numEdges);
+  // HIP: hipError_t hipGraphGetEdges(hipGraph_t graph, hipGraphNode_t* from, hipGraphNode_t* to, size_t* numEdges);
+  // DO-NOT-CHECK: result = hipGraphGetEdges(Graph_t, &graphNode, &graphNode_2, &bytes);
+  result = cudaGraphGetEdges(Graph_t, &graphNode, &graphNode_2, &bytes);
 #endif
 
   // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphAddEmptyNode(cudaGraphNode_t *pGraphNode, cudaGraph_t graph, const cudaGraphNode_t *pDependencies, size_t numDependencies);
@@ -1076,13 +1083,6 @@ int main() {
   // HIP: hipError_t hipGraphExecDestroy(hipGraphExec_t graphExec);
   // CHECK: result = hipGraphExecDestroy(GraphExec_t);
   result = cudaGraphExecDestroy(GraphExec_t);
-
-#if CUDA_VERSION < 13000
-  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphGetEdges(cudaGraph_t graph, cudaGraphNode_t *from, cudaGraphNode_t *to, size_t *numEdges);
-  // HIP: hipError_t hipGraphGetEdges(hipGraph_t graph, hipGraphNode_t* from, hipGraphNode_t* to, size_t* numEdges);
-  // CHECK: result = hipGraphGetEdges(Graph_t, &graphNode, &graphNode_2, &bytes);
-  result = cudaGraphGetEdges(Graph_t, &graphNode, &graphNode_2, &bytes);
-#endif
 
   // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphGetNodes(cudaGraph_t graph, cudaGraphNode_t *nodes, size_t *numNodes);
   // HIP: hipError_t hipGraphGetNodes(hipGraph_t graph, hipGraphNode_t* nodes, size_t* numNodes);
@@ -1233,32 +1233,33 @@ int main() {
   // CHECK: result = hipGraphNodeFindInClone(&graphNode, graphNode_2, Graph_t);
   result = cudaGraphNodeFindInClone(&graphNode, graphNode_2, Graph_t);
 
+  // [TODO][#2062] Rename all DO-NOT-CHECK back
 #if CUDA_VERSION < 13000
   // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphNodeGetDependencies(cudaGraphNode_t node, cudaGraphNode_t *pDependencies, size_t *pNumDependencies);
   // HIP: hipError_t hipGraphNodeGetDependencies(hipGraphNode_t node, hipGraphNode_t* pDependencies, size_t* pNumDependencies);
-  // CHECK: result = hipGraphNodeGetDependencies(graphNode, &graphNode_2, &bytes);
+  // DO-NOT-CHECK: result = hipGraphNodeGetDependencies(graphNode, &graphNode_2, &bytes);
   result = cudaGraphNodeGetDependencies(graphNode, &graphNode_2, &bytes);
 
   // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphNodeGetDependentNodes(cudaGraphNode_t node, cudaGraphNode_t *pDependentNodes, size_t *pNumDependentNodes);
   // HIP: hipError_t hipGraphNodeGetDependentNodes(hipGraphNode_t node, hipGraphNode_t* pDependentNodes, size_t* pNumDependentNodes);
-  // CHECK: result = hipGraphNodeGetDependentNodes(graphNode, &graphNode_2, &bytes);
+  // DO-NOT-CHECK: result = hipGraphNodeGetDependentNodes(graphNode, &graphNode_2, &bytes);
   result = cudaGraphNodeGetDependentNodes(graphNode, &graphNode_2, &bytes);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphKernelNodeCopyAttributes(cudaGraphNode_t hSrc, cudaGraphNode_t hDst);
+  // HIP: hipError_t hipGraphKernelNodeCopyAttributes(hipGraphNode_t hSrc, hipGraphNode_t hDst);
+  // DO-NOT-CHECK: result = hipGraphKernelNodeCopyAttributes(graphNode, graphNode_2);
+  result = cudaGraphKernelNodeCopyAttributes(graphNode, graphNode_2);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphRemoveDependencies(cudaGraph_t graph, const cudaGraphNode_t *from, const cudaGraphNode_t *to, size_t numDependencies);
+  // HIP: hipError_t hipGraphRemoveDependencies(hipGraph_t graph, const hipGraphNode_t* from, const hipGraphNode_t* to, size_t numDependencies);
+  // DO-NOT-CHECK: result = hipGraphRemoveDependencies(Graph_t, &graphNode, &graphNode, bytes);
+  result = cudaGraphRemoveDependencies(Graph_t, &graphNode, &graphNode, bytes);
 #endif
 
   // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphNodeGetType(cudaGraphNode_t node, enum cudaGraphNodeType *pType);
   // HIP: hipError_t hipGraphNodeGetType(hipGraphNode_t node, hipGraphNodeType* pType);
   // CHECK: result = hipGraphNodeGetType(graphNode, &GraphNodeType);
   result = cudaGraphNodeGetType(graphNode, &GraphNodeType);
-
-  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphRemoveDependencies(cudaGraph_t graph, const cudaGraphNode_t *from, const cudaGraphNode_t *to, size_t numDependencies);
-  // HIP: hipError_t hipGraphRemoveDependencies(hipGraph_t graph, const hipGraphNode_t* from, const hipGraphNode_t* to, size_t numDependencies);
-  // CHECK: result = hipGraphRemoveDependencies(Graph_t, &graphNode, &graphNode, bytes);
-  result = cudaGraphRemoveDependencies(Graph_t, &graphNode, &graphNode, bytes);
-
-  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphKernelNodeCopyAttributes(cudaGraphNode_t hSrc, cudaGraphNode_t hDst);
-  // HIP: hipError_t hipGraphKernelNodeCopyAttributes(hipGraphNode_t hSrc, hipGraphNode_t hDst);
-  // CHECK: result = hipGraphKernelNodeCopyAttributes(graphNode, graphNode_2);
-  result = cudaGraphKernelNodeCopyAttributes(graphNode, graphNode_2);
 
   // CUDA: extern __host__ cudaError_t cudaGetFuncBySymbol(cudaFunction_t* functionPtr, const void* symbolPtr);
   // HIP: hipError_t hipGetFuncBySymbol(hipFunction_t* functionPtr, const void* symbolPtr);
@@ -1657,10 +1658,13 @@ int main() {
   // CHECK: hipGraphNodeParams *graphNodeParams = nullptr;
   cudaGraphNodeParams *graphNodeParams = nullptr;
 
+  // [TODO][#2062] Rename all DO-NOT-CHECK back
+#if CUDA_VERSION < 13000
   // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphAddNode(cudaGraphNode_t *pGraphNode, cudaGraph_t graph, const cudaGraphNode_t *pDependencies, size_t numDependencies, struct cudaGraphNodeParams *nodeParams);
   // HIP: hipError_t hipGraphAddNode(hipGraphNode_t *pGraphNode, hipGraph_t graph, const hipGraphNode_t *pDependencies, size_t numDependencies, hipGraphNodeParams *nodeParams);
-  // CHECK: result = hipGraphAddNode(&graphNode, Graph_t, &graphNode_2, bytes, graphNodeParams);
+  // DO-NOT-CHECK: result = hipGraphAddNode(&graphNode, Graph_t, &graphNode_2, bytes, graphNodeParams);
   result = cudaGraphAddNode(&graphNode, Graph_t, &graphNode_2, bytes, graphNodeParams);
+#endif
 
   // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphNodeSetParams(cudaGraphNode_t node, struct cudaGraphNodeParams *nodeParams);
   // HIP: hipError_t hipGraphNodeSetParams(hipGraphNode_t node, hipGraphNodeParams *nodeParams);

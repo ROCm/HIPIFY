@@ -465,7 +465,7 @@
 |`cudaGraphAddMemcpyNodeFromSymbol`|11.1| | | |`hipGraphAddMemcpyNodeFromSymbol`|5.0.0| | | | |
 |`cudaGraphAddMemcpyNodeToSymbol`|11.1| | | |`hipGraphAddMemcpyNodeToSymbol`|5.0.0| | | | |
 |`cudaGraphAddMemsetNode`|10.0| | | |`hipGraphAddMemsetNode`|4.3.0| | | | |
-|`cudaGraphAddNode`|12.2| | | |`hipGraphAddNode`|6.2.0| | | | |
+|`cudaGraphAddNode`|12.2| |13.0| | | | | | | |
 |`cudaGraphAddNode_v2`|12.3| | | | | | | | | |
 |`cudaGraphChildGraphNodeGetGraph`|10.0| | | |`hipGraphChildGraphNodeGetGraph`|5.0.0| | | | |
 |`cudaGraphClone`|10.0| | | |`hipGraphClone`|5.0.0| | | | |
@@ -532,7 +532,7 @@
 |`cudaGraphNodeSetEnabled`|11.6| | | |`hipGraphNodeSetEnabled`|5.5.0| | | | |
 |`cudaGraphNodeSetParams`|12.2| | | |`hipGraphNodeSetParams`|6.3.0| | | | |
 |`cudaGraphReleaseUserObject`|11.3| | | |`hipGraphReleaseUserObject`|5.3.0| | | | |
-|`cudaGraphRemoveDependencies`|11.0| | | |`hipGraphRemoveDependencies`|5.0.0| | | | |
+|`cudaGraphRemoveDependencies`|11.0| |13.0| | | | | | | |
 |`cudaGraphRemoveDependencies_v2`|12.3| | | | | | | | | |
 |`cudaGraphRetainUserObject`|11.3| | | |`hipGraphRetainUserObject`|5.3.0| | | | |
 |`cudaGraphUpload`|11.1| | | |`hipGraphUpload`|5.3.0| | | | |
@@ -544,7 +544,7 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
-|`cudaGetDriverEntryPoint`|11.3| |12.0| |`hipGetProcAddress`|6.2.0| | | | |
+|`cudaGetDriverEntryPoint`|11.3|13.0|12.0| |`hipGetProcAddress`|6.2.0| | | | |
 |`cudaGetDriverEntryPointByVersion`|12.5| | | | | | | | | |
 
 ## **32. Library Management**

@@ -872,6 +872,7 @@ my %deprecated_funcs = (
     "cudaMemcpyFromArray" => "10.1",
     "cudaMemcpyArrayToArray" => "10.1",
     "cudaLaunchCooperativeKernelMultiDevice" => "11.3",
+    "cudaGetDriverEntryPoint" => "13.0",
     "cudaGLUnregisterBufferObject" => "10.0",
     "cudaGLUnmapBufferObjectAsync" => "10.0",
     "cudaGLUnmapBufferObject" => "10.0",
@@ -4666,7 +4667,6 @@ sub simpleSubstitutions {
     subst("cudaGraphAddMemcpyNodeFromSymbol", "hipGraphAddMemcpyNodeFromSymbol", "graph");
     subst("cudaGraphAddMemcpyNodeToSymbol", "hipGraphAddMemcpyNodeToSymbol", "graph");
     subst("cudaGraphAddMemsetNode", "hipGraphAddMemsetNode", "graph");
-    subst("cudaGraphAddNode", "hipGraphAddNode", "graph");
     subst("cudaGraphChildGraphNodeGetGraph", "hipGraphChildGraphNodeGetGraph", "graph");
     subst("cudaGraphClone", "hipGraphClone", "graph");
     subst("cudaGraphCreate", "hipGraphCreate", "graph");
@@ -4725,7 +4725,6 @@ sub simpleSubstitutions {
     subst("cudaGraphNodeSetEnabled", "hipGraphNodeSetEnabled", "graph");
     subst("cudaGraphNodeSetParams", "hipGraphNodeSetParams", "graph");
     subst("cudaGraphReleaseUserObject", "hipGraphReleaseUserObject", "graph");
-    subst("cudaGraphRemoveDependencies", "hipGraphRemoveDependencies", "graph");
     subst("cudaGraphRetainUserObject", "hipGraphRetainUserObject", "graph");
     subst("cudaGraphUpload", "hipGraphUpload", "graph");
     subst("cudaUserObjectCreate", "hipUserObjectCreate", "graph");
@@ -11415,6 +11414,7 @@ sub warnRemovedFunctions {
     "cudaGraphicsCubeFaceNegativeX",
     "cudaGraphicsCubeFace",
     "cudaGraphRemoveDependencies_v2",
+    "cudaGraphRemoveDependencies",
     "cudaGraphNodeGetDependentNodes_v2",
     "cudaGraphNodeGetDependentNodes",
     "cudaGraphNodeGetDependencies_v2",
@@ -11445,6 +11445,7 @@ sub warnRemovedFunctions {
     "cudaGraphChildGraphOwnershipClone",
     "cudaGraphChildGraphNodeOwnership",
     "cudaGraphAddNode_v2",
+    "cudaGraphAddNode",
     "cudaGraphAddDependencies_v2",
     "cudaGraphAddDependencies",
     "cudaGetTextureObjectTextureDesc_v2",
