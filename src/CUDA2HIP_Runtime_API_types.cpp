@@ -2306,6 +2306,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   //
   {"CUlogsCallbackEntry_st",                                           {"hipLogsCallbackEntry_st",                                  "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
+  //
+  {"cudaLogsCallback_t",                                               {"hipLogsCallback_t",                                        "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+
   // 5. Defines
 
   // no analogue
@@ -3299,6 +3302,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_TYPE_NAME_VER_MAP 
   {"CUlogsCallbackEntry_st",                                           {CUDA_130, CUDA_0,   CUDA_0  }},
   {"cudaKernelNodeAttributeNvlinkUtilCentricScheduling",               {CUDA_130, CUDA_0,   CUDA_0  }},
   {"cudaLogIterator",                                                  {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaLogsCallback_t",                                               {CUDA_130, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_RUNTIME_TYPE_CHANGED_VER_MAP {
