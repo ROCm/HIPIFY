@@ -802,7 +802,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuGraphNodeGetType
   {"cudaGraphNodeGetType",                                    {"hipGraphNodeGetType",                                    "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH}},
   // cuGraphRemoveDependencies
-  {"cudaGraphRemoveDependencies",                             {"hipGraphRemoveDependencies",                             "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH}},
+  // TODO: report unsupported only for CUDA >= 13000
+  {"cudaGraphRemoveDependencies",                             {"hipGraphRemoveDependencies",                             "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_UNSUPPORTED}},
   // cuGraphRemoveDependencies_v2
   {"cudaGraphRemoveDependencies_v2",                          {"hipGraphRemoveDependencies_v2",                          "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_UNSUPPORTED}},
   // no analogue
@@ -893,7 +894,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuGraphExecGetFlags
   {"cudaGraphExecGetFlags",                                   {"hipGraphExecGetFlags",                                   "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH}},
   // cuGraphAddNode
-  {"cudaGraphAddNode",                                        {"hipGraphAddNode",                                        "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH}},
+  // TODO: report unsupported only for CUDA >= 13000
+  {"cudaGraphAddNode",                                        {"hipGraphAddNode",                                        "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_UNSUPPORTED}},
   // cuGraphAddNode_v2
   {"cudaGraphAddNode_v2",                                     {"hipGraphAddNode_v2",                                     "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_UNSUPPORTED}},
   // cuGraphNodeSetParams
@@ -905,7 +907,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
 
   // 31. Driver Entry Point Access
   // cuGetProcAddress
-  {"cudaGetDriverEntryPoint",                                 {"hipGetProcAddress",                                      "", CONV_DRIVER_ENTRY_POINT, API_RUNTIME, SEC::DRIVER_ENTRY_POINT}},
+  {"cudaGetDriverEntryPoint",                                 {"hipGetProcAddress",                                      "", CONV_DRIVER_ENTRY_POINT, API_RUNTIME, SEC::DRIVER_ENTRY_POINT, CUDA_DEPRECATED}},
   //
   {"cudaGetDriverEntryPointByVersion",                        {"hipGetDriverEntryPointByVersion",                        "", CONV_DRIVER_ENTRY_POINT, API_RUNTIME, SEC::DRIVER_ENTRY_POINT, HIP_UNSUPPORTED}},
 
@@ -1193,7 +1195,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_FUNCTION_VER_MAP {
   {"cudaUserObjectRelease",                                   {CUDA_113, CUDA_0,   CUDA_0  }},
   {"cudaGraphRetainUserObject",                               {CUDA_113, CUDA_0,   CUDA_0  }},
   {"cudaGraphReleaseUserObject",                              {CUDA_113, CUDA_0,   CUDA_0  }},
-  {"cudaGetDriverEntryPoint",                                 {CUDA_113, CUDA_0,   CUDA_0  }},
+  {"cudaGetDriverEntryPoint",                                 {CUDA_113, CUDA_130, CUDA_0  }},
   {"cudaGraphAddMemAllocNode",                                {CUDA_114, CUDA_0,   CUDA_0  }},
   {"cudaGraphMemAllocNodeGetParams",                          {CUDA_114, CUDA_0,   CUDA_0  }},
   {"cudaGraphAddMemFreeNode",                                 {CUDA_114, CUDA_0,   CUDA_0  }},
@@ -1543,6 +1545,8 @@ const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_RUNTIME_FUNCTION_CH
   {"cudaGraphNodeGetDependencies",                            {CUDA_130}},
   {"cudaGraphNodeGetDependentNodes",                          {CUDA_130}},
   {"cudaGraphAddDependencies",                                {CUDA_130}},
+  {"cudaGraphRemoveDependencies",                             {CUDA_130}},
+  {"cudaGraphAddNode",                                        {CUDA_130}},
   // [IMP] Changed semantics: Dst <-> Src
   {"cudaGraphKernelNodeCopyAttributes",                       {CUDA_130}},
 };
