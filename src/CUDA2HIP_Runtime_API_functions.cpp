@@ -688,7 +688,17 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // no analogue
   {"cudaRuntimeGetVersion",                                   {"hipRuntimeGetVersion",                                   "", CONV_VERSION, API_RUNTIME, SEC::VERSION}},
 
-  // 29. TODO: Version Management
+  // 29. Log Management Functions
+  //
+  {"cudaLogsRegisterCallback",                                {"hipLogsRegisterCallback",                                "", CONV_ERROR_LOG, API_RUNTIME, SEC::ERROR_LOG, HIP_UNSUPPORTED}},
+  //
+  {"cudaLogsUnregisterCallback",                              {"hipLogsUnregisterCallback",                              "", CONV_ERROR_LOG, API_RUNTIME, SEC::ERROR_LOG, HIP_UNSUPPORTED}},
+  //
+  {"cudaLogsCurrent",                                         {"hipLogsCurrent",                                         "", CONV_ERROR_LOG, API_RUNTIME, SEC::ERROR_LOG, HIP_UNSUPPORTED}},
+  //
+  {"cudaLogsDumpToFile",                                      {"hipLogsDumpToFile",                                      "", CONV_ERROR_LOG, API_RUNTIME, SEC::ERROR_LOG, HIP_UNSUPPORTED}},
+  //
+  {"cudaLogsDumpToMemory",                                    {"hipLogsDumpToMemory",                                    "", CONV_ERROR_LOG, API_RUNTIME, SEC::ERROR_LOG, HIP_UNSUPPORTED}},
 
   // 30. Graph Management
   // cuGraphAddChildGraphNode
@@ -1246,6 +1256,11 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_FUNCTION_VER_MAP {
   {"cudaMemGetDefaultMemPool",                                {CUDA_130, CUDA_0,   CUDA_0  }},
   {"cudaMemGetMemPool",                                       {CUDA_130, CUDA_0,   CUDA_0  }},
   {"cudaMemSetMemPool",                                       {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaLogsRegisterCallback",                                {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaLogsUnregisterCallback",                              {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaLogsCurrent",                                         {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaLogsDumpToFile",                                      {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaLogsDumpToMemory",                                    {CUDA_130, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP {
@@ -1551,6 +1566,7 @@ const std::map<unsigned int, llvm::StringRef> CUDA_RUNTIME_API_SECTION_MAP {
   {SEC::TEXTURE, "Texture Object Management"},
   {SEC::SURFACE, "Surface Object Management"},
   {SEC::VERSION, "Version Management"},
+  {SEC::ERROR_LOG, "Error Log Management"},
   {SEC::GRAPH, "Graph Management"},
   {SEC::DRIVER_ENTRY_POINT, "Driver Entry Point Access"},
   {SEC::LIBRARY, "Library Management"},

@@ -431,6 +431,16 @@
 |`cudaDriverGetVersion`| | | | |`hipDriverGetVersion`|1.6.0| | | | |
 |`cudaRuntimeGetVersion`| | | | |`hipRuntimeGetVersion`|1.6.0| | | | |
 
+## **29. Error Log Management**
+
+|**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|
+|:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
+|`cudaLogsCurrent`|13.0| | | | | | | | | |
+|`cudaLogsDumpToFile`|13.0| | | | | | | | | |
+|`cudaLogsDumpToMemory`|13.0| | | | | | | | | |
+|`cudaLogsRegisterCallback`|13.0| | | | | | | | | |
+|`cudaLogsUnregisterCallback`|13.0| | | | | | | | | |
+
 ## **30. Graph Management**
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|
@@ -1550,6 +1560,7 @@
 |`cudaLogLevelError`|13.0| | | | | | | | | |
 |`cudaLogLevelWarning`|13.0| | | | | | | | | |
 |`cudaLogsCallbackHandle`|13.0| | | | | | | | | |
+|`cudaLogsCallback_t`|13.0| | | | | | | | | |
 |`cudaMemAccessDesc`|11.2| | | |`hipMemAccessDesc`|5.2.0| | | | |
 |`cudaMemAccessFlags`|11.2| | | |`hipMemAccessFlags`|5.2.0| | | | |
 |`cudaMemAccessFlagsProtNone`|11.2| | | |`hipMemAccessFlagsProtNone`|5.2.0| | | | |
