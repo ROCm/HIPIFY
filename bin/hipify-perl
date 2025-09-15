@@ -4652,7 +4652,6 @@ sub simpleSubstitutions {
     subst("cudaDeviceGraphMemTrim", "hipDeviceGraphMemTrim", "graph");
     subst("cudaDeviceSetGraphMemAttribute", "hipDeviceSetGraphMemAttribute", "graph");
     subst("cudaGraphAddChildGraphNode", "hipGraphAddChildGraphNode", "graph");
-    subst("cudaGraphAddDependencies", "hipGraphAddDependencies", "graph");
     subst("cudaGraphAddEmptyNode", "hipGraphAddEmptyNode", "graph");
     subst("cudaGraphAddEventRecordNode", "hipGraphAddEventRecordNode", "graph");
     subst("cudaGraphAddEventWaitNode", "hipGraphAddEventWaitNode", "graph");
@@ -4698,7 +4697,6 @@ sub simpleSubstitutions {
     subst("cudaGraphExternalSemaphoresSignalNodeSetParams", "hipGraphExternalSemaphoresSignalNodeSetParams", "graph");
     subst("cudaGraphExternalSemaphoresWaitNodeGetParams", "hipGraphExternalSemaphoresWaitNodeGetParams", "graph");
     subst("cudaGraphExternalSemaphoresWaitNodeSetParams", "hipGraphExternalSemaphoresWaitNodeSetParams", "graph");
-    subst("cudaGraphGetEdges", "hipGraphGetEdges", "graph");
     subst("cudaGraphGetNodes", "hipGraphGetNodes", "graph");
     subst("cudaGraphGetRootNodes", "hipGraphGetRootNodes", "graph");
     subst("cudaGraphHostNodeGetParams", "hipGraphHostNodeGetParams", "graph");
@@ -4722,8 +4720,6 @@ sub simpleSubstitutions {
     subst("cudaGraphMemsetNodeGetParams", "hipGraphMemsetNodeGetParams", "graph");
     subst("cudaGraphMemsetNodeSetParams", "hipGraphMemsetNodeSetParams", "graph");
     subst("cudaGraphNodeFindInClone", "hipGraphNodeFindInClone", "graph");
-    subst("cudaGraphNodeGetDependencies", "hipGraphNodeGetDependencies", "graph");
-    subst("cudaGraphNodeGetDependentNodes", "hipGraphNodeGetDependentNodes", "graph");
     subst("cudaGraphNodeGetEnabled", "hipGraphNodeGetEnabled", "graph");
     subst("cudaGraphNodeGetType", "hipGraphNodeGetType", "graph");
     subst("cudaGraphNodeSetEnabled", "hipGraphNodeSetEnabled", "graph");
@@ -11420,7 +11416,9 @@ sub warnRemovedFunctions {
     "cudaGraphicsCubeFace",
     "cudaGraphRemoveDependencies_v2",
     "cudaGraphNodeGetDependentNodes_v2",
+    "cudaGraphNodeGetDependentNodes",
     "cudaGraphNodeGetDependencies_v2",
+    "cudaGraphNodeGetDependencies",
     "cudaGraphKernelNodeUpdate",
     "cudaGraphKernelNodeFieldParam",
     "cudaGraphKernelNodeFieldInvalid",
@@ -11429,6 +11427,7 @@ sub warnRemovedFunctions {
     "cudaGraphKernelNodeField",
     "cudaGraphInstantiateConditionalHandleUnused",
     "cudaGraphGetEdges_v2",
+    "cudaGraphGetEdges",
     "cudaGraphExecUpdateResultInfo_st",
     "cudaGraphExecUpdateResultInfo",
     "cudaGraphExecUpdateErrorAttributesChanged",
@@ -11447,6 +11446,7 @@ sub warnRemovedFunctions {
     "cudaGraphChildGraphNodeOwnership",
     "cudaGraphAddNode_v2",
     "cudaGraphAddDependencies_v2",
+    "cudaGraphAddDependencies",
     "cudaGetTextureObjectTextureDesc_v2",
     "cudaGetSurfaceReference",
     "cudaGetSurfaceObjectResourceDesc",

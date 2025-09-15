@@ -1003,10 +1003,12 @@ int main() {
   // CHECK: result = hipGraphAddChildGraphNode(&graphNode, Graph_t, &graphNode_2, bytes, Graph_t_2);
   result = cudaGraphAddChildGraphNode(&graphNode, Graph_t, &graphNode_2, bytes, Graph_t_2);
 
+#if CUDA_VERSION < 13000
   // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphAddDependencies(cudaGraph_t graph, const cudaGraphNode_t *from, const cudaGraphNode_t *to, size_t numDependencies);
   // HIP: hipError_t hipGraphAddDependencies(hipGraph_t graph, const hipGraphNode_t* from, const hipGraphNode_t* to, size_t numDependencies);
   // CHECK: result = hipGraphAddDependencies(Graph_t, &graphNode, &graphNode_2, bytes);
   result = cudaGraphAddDependencies(Graph_t, &graphNode, &graphNode_2, bytes);
+#endif
 
   // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphAddEmptyNode(cudaGraphNode_t *pGraphNode, cudaGraph_t graph, const cudaGraphNode_t *pDependencies, size_t numDependencies);
   // HIP: hipError_t hipGraphAddEmptyNode(hipGraphNode_t* pGraphNode, hipGraph_t graph, const hipGraphNode_t* pDependencies, size_t numDependencies);
@@ -1075,10 +1077,12 @@ int main() {
   // CHECK: result = hipGraphExecDestroy(GraphExec_t);
   result = cudaGraphExecDestroy(GraphExec_t);
 
+#if CUDA_VERSION < 13000
   // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphGetEdges(cudaGraph_t graph, cudaGraphNode_t *from, cudaGraphNode_t *to, size_t *numEdges);
   // HIP: hipError_t hipGraphGetEdges(hipGraph_t graph, hipGraphNode_t* from, hipGraphNode_t* to, size_t* numEdges);
   // CHECK: result = hipGraphGetEdges(Graph_t, &graphNode, &graphNode_2, &bytes);
   result = cudaGraphGetEdges(Graph_t, &graphNode, &graphNode_2, &bytes);
+#endif
 
   // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphGetNodes(cudaGraph_t graph, cudaGraphNode_t *nodes, size_t *numNodes);
   // HIP: hipError_t hipGraphGetNodes(hipGraph_t graph, hipGraphNode_t* nodes, size_t* numNodes);
@@ -1229,6 +1233,7 @@ int main() {
   // CHECK: result = hipGraphNodeFindInClone(&graphNode, graphNode_2, Graph_t);
   result = cudaGraphNodeFindInClone(&graphNode, graphNode_2, Graph_t);
 
+#if CUDA_VERSION < 13000
   // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphNodeGetDependencies(cudaGraphNode_t node, cudaGraphNode_t *pDependencies, size_t *pNumDependencies);
   // HIP: hipError_t hipGraphNodeGetDependencies(hipGraphNode_t node, hipGraphNode_t* pDependencies, size_t* pNumDependencies);
   // CHECK: result = hipGraphNodeGetDependencies(graphNode, &graphNode_2, &bytes);
@@ -1238,6 +1243,7 @@ int main() {
   // HIP: hipError_t hipGraphNodeGetDependentNodes(hipGraphNode_t node, hipGraphNode_t* pDependentNodes, size_t* pNumDependentNodes);
   // CHECK: result = hipGraphNodeGetDependentNodes(graphNode, &graphNode_2, &bytes);
   result = cudaGraphNodeGetDependentNodes(graphNode, &graphNode_2, &bytes);
+#endif
 
   // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGraphNodeGetType(cudaGraphNode_t node, enum cudaGraphNodeType *pType);
   // HIP: hipError_t hipGraphNodeGetType(hipGraphNode_t node, hipGraphNodeType* pType);

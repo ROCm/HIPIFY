@@ -1,4 +1,4 @@
-// RUN: %run_test hipify "%s" "%t" %hipify_args 1 --experimental %clang_args
+// RUN: %run_test hipify "%s" "%t" %hipify_args 3 --experimental --amap --skip-excluded-preprocessor-conditional-blocks %clang_args
 
 // CHECK: #include <hip/hip_runtime.h>
 #include <stdio.h>
@@ -110,11 +110,14 @@ void init(void) {
       printf("Failed to create kernel node\n");
   }
   for (i = 0; i < (NUM_NODES - 1); ++i)
-    // CHECK: hipGraphAddDependencies(graph,
+ // [TODO][#2062] Rename all DO-NOT-CHECK back
+#if CUDA_VERSION < 13000
+    // DO-NOT-CHECK: hipGraphAddDependencies(graph,
     cudaGraphAddDependencies(graph,
                               &node[i],
                               &node[i+1],
                               1);
+#endif
   // CHECK: hipGraphInstantiate(&graphExec,
   cudaGraphInstantiate(&graphExec,
                         graph,
@@ -123,10 +126,10 @@ void init(void) {
                         0);
   /* Same input for dataplane every frame */
   // CHECK: hipMemcpy(dev_in_p,
-  // CHECK-NEXT: hipMemcpyHostToDevice);
   cudaMemcpy(dev_in_p,
              host_in_p,
              WORK_BUFFER_SIZE,
+  // CHECK: hipMemcpyHostToDevice);
              cudaMemcpyHostToDevice);
 }
 
@@ -162,20 +165,20 @@ int main (void) {
     }
     /* One copy for all data needed to execute one frame, queued in same stream as the rest */
     // CHECK: hipMemcpyAsync(dev_gc_p,
-    // CHECK-NEXT: hipMemcpyHostToDevice,
     cudaMemcpyAsync(dev_gc_p,
                     host_gc_p,
                     sizeof(graph_control_t),
+    // CHECK: hipMemcpyHostToDevice,
                     cudaMemcpyHostToDevice,
                     stream);
     /* Kick graph */
     graph_launch();
     /*  One read-out for all data produced this frame, queued in same stream as the rest.   */
     // CHECK: hipMemcpyAsync(host_out_p,
-    // CHECK-NEXT: hipMemcpyDeviceToHost,
     cudaMemcpyAsync(host_out_p,
                         dev_out_p,
                         WORK_BUFFER_SIZE,
+    // CHECK: hipMemcpyDeviceToHost,
                         cudaMemcpyDeviceToHost,
                         stream);
 
