@@ -451,11 +451,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuMemPoolExportPointer",                                      {"hipMemPoolExportPointer",                                     "", CONV_ORDERED_MEMORY, API_DRIVER, SEC::ORDERED_MEMORY}},
   // cudaMemPoolImportPointer
   {"cuMemPoolImportPointer",                                      {"hipMemPoolImportPointer",                                     "", CONV_ORDERED_MEMORY, API_DRIVER, SEC::ORDERED_MEMORY}},
-  //
+  // cudaMemGetDefaultMemPool
   {"cuMemGetDefaultMemPool",                                      {"hipMemGetDefaultMemPool",                                     "", CONV_ORDERED_MEMORY, API_DRIVER, SEC::ORDERED_MEMORY, HIP_UNSUPPORTED}},
-  //
+  // cudaMemGetMemPool
   {"cuMemGetMemPool",                                             {"hipMemGetMemPool",                                            "", CONV_ORDERED_MEMORY, API_DRIVER, SEC::ORDERED_MEMORY, HIP_UNSUPPORTED}},
-  //
+  // cudaMemSetMemPool
   {"cuMemSetMemPool",                                             {"hipMemSetMemPool",                                            "", CONV_ORDERED_MEMORY, API_DRIVER, SEC::ORDERED_MEMORY, HIP_UNSUPPORTED}},
 
   // 16. Multicast Object Management
@@ -496,11 +496,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuPointerGetAttributes",                                      {"hipDrvPointerGetAttributes",                                  "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED}},
   // no analogue
   {"cuPointerSetAttribute",                                       {"hipPointerSetAttribute",                                      "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED}},
-  //
+  // cudaMemPrefetchBatchAsync
   {"cuMemPrefetchBatchAsync",                                     {"hipMemPrefetchBatchAsync",                                    "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED, HIP_UNSUPPORTED}},
-  //
+  // cudaMemDiscardBatchAsync
   {"cuMemDiscardBatchAsync",                                      {"hipMemDiscardBatchAsync",                                     "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED, HIP_UNSUPPORTED}},
-  //
+  // cudaMemDiscardAndPrefetchBatchAsync
   {"cuMemDiscardAndPrefetchBatchAsync",                           {"hipMemDiscardAndPrefetchBatchAsync",                          "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED, HIP_UNSUPPORTED}},
 
   // 18. Stream Management
@@ -1052,15 +1052,15 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuGreenCtxGetId",                                             {"hipGreenCtxGetId",                                            "", CONV_GREEN_CONTEXT, API_DRIVER, SEC::GREEN_CONTEXT, HIP_UNSUPPORTED}},
 
   // 36. Error Log Management Functions
-  //
+  // cudaLogsRegisterCallback
   {"cuLogsRegisterCallback",                                      {"hipLogsRegisterCallback",                                     "", CONV_ERROR_LOG, API_DRIVER, SEC::ERROR_LOG, HIP_UNSUPPORTED}},
-  //
+  // cudaLogsUnregisterCallback
   {"cuLogsUnregisterCallback",                                    {"hipLogsUnregisterCallback",                                   "", CONV_ERROR_LOG, API_DRIVER, SEC::ERROR_LOG, HIP_UNSUPPORTED}},
-  //
+  // cudaLogsCurrent
   {"cuLogsCurrent",                                               {"hipLogsCurrent",                                              "", CONV_ERROR_LOG, API_DRIVER, SEC::ERROR_LOG, HIP_UNSUPPORTED}},
-  //
+  // cudaLogsDumpToFile
   {"cuLogsDumpToFile",                                            {"hipLogsDumpToFile",                                           "", CONV_ERROR_LOG, API_DRIVER, SEC::ERROR_LOG, HIP_UNSUPPORTED}},
-  //
+  // cudaLogsDumpToMemory
   {"cuLogsDumpToMemory",                                          {"hipLogsDumpToMemory",                                         "", CONV_ERROR_LOG, API_DRIVER, SEC::ERROR_LOG, HIP_UNSUPPORTED}},
 
   // 37. Checkpointing

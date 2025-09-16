@@ -198,6 +198,7 @@
 |`cudaMemGetInfo`| | | | |`hipMemGetInfo`|1.6.0| | | | |
 |`cudaMemPrefetchAsync`|8.0| |13.0| | | | | | | |
 |`cudaMemPrefetchAsync_v2`|12.2| | | | | | | | | |
+|`cudaMemPrefetchBatchAsync`|13.0| | | | | | | | | |
 |`cudaMemRangeGetAttribute`|8.0| | | |`hipMemRangeGetAttribute`|3.7.0| | | | |
 |`cudaMemRangeGetAttributes`|8.0| | | |`hipMemRangeGetAttributes`|3.7.0| | | | |
 |`cudaMemcpy`| | | | |`hipMemcpy`|1.5.0| | | | |

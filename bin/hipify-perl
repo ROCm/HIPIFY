@@ -11310,6 +11310,7 @@ sub warnRemovedFunctions {
     "cudaMemRangeAttributePreferredLocationId",
     "cudaMemRangeAttributeLastPrefetchLocationType",
     "cudaMemRangeAttributeLastPrefetchLocationId",
+    "cudaMemPrefetchBatchAsync",
     "cudaMemPrefetchAsync_v2",
     "cudaMemPrefetchAsync",
     "cudaMemPoolCreateUsageHwDecompress",

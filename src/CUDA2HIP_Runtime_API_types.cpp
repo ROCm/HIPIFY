@@ -1824,7 +1824,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // cudaMemLocationType enum values
   // CU_MEM_LOCATION_TYPE_INVALID
   {"cudaMemLocationTypeInvalid",                                       {"hipMemLocationTypeInvalid",                                "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}}, // 0
-  //
+  // CU_MEM_LOCATION_TYPE_NONE
   {"cudaMemLocationTypeNone",                                          {"hipMemLocationTypeInvalid",                                "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}}, // 0
   // CU_MEM_LOCATION_TYPE_DEVICE
   {"cudaMemLocationTypeDevice",                                        {"hipMemLocationTypeDevice",                                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}}, // 1
@@ -1842,7 +1842,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaMemAllocationTypeInvalid",                                     {"hipMemAllocationTypeInvalid",                              "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}}, // 0x0
   // CU_MEM_ALLOCATION_TYPE_PINNED
   {"cudaMemAllocationTypePinned",                                      {"hipMemAllocationTypePinned",                               "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}}, // 0x1
-  //
+  // CU_MEM_ALLOCATION_TYPE_MANAGED
   {"cudaMemAllocationTypeManaged",                                     {"hipMemAllocationTypeManaged",                              "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0x2
   // CU_MEM_ALLOCATION_TYPE_MAX
   {"cudaMemAllocationTypeMax",                                         {"hipMemAllocationTypeMax",                                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}}, // 0x7FFFFFFF
@@ -2220,34 +2220,34 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CU_GRAPH_CHILD_GRAPH_OWNERSHIP_MOVE
   {"cudaGraphChildGraphOwnershipMove",                                 {"hipGraphChildGraphOwnershipMove",                          "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
-  //
+  // CUatomicOperation
   {"cudaAtomicOperation",                                              {"hipAtomicOperation",                                       "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   // cudaAtomicOperation enum values
-  //
+  // CU_ATOMIC_OPERATION_INTEGER_ADD
   {"cudaAtomicOperationIntegerAdd",                                    {"hipAtomicOperationIntegerAdd",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-  //
+  // CU_ATOMIC_OPERATION_INTEGER_MIN
   {"cudaAtomicOperationIntegerMin",                                    {"hipAtomicOperationIntegerMin",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-  //
+  // CU_ATOMIC_OPERATION_INTEGER_MAX
   {"cudaAtomicOperationIntegerMax",                                    {"hipAtomicOperationIntegerMax",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-  //
+  // CU_ATOMIC_OPERATION_INTEGER_INCREMENT
   {"cudaAtomicOperationIntegerIncrement",                              {"hipAtomicOperationIntegerIncrement",                       "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-  //
+  // CU_ATOMIC_OPERATION_INTEGER_DECREMENT
   {"cudaAtomicOperationIntegerDecrement",                              {"hipAtomicOperationIntegerDecrement",                       "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-  //
+  // CU_ATOMIC_OPERATION_AND
   {"cudaAtomicOperationAnd",                                           {"hipAtomicOperationAnd",                                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-  //
+  // CU_ATOMIC_OPERATION_OR
   {"cudaAtomicOperationOr",                                            {"hipAtomicOperationOr",                                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-  //
+  // CU_ATOMIC_OPERATION_XOR
   {"cudaAtomicOperationXOR",                                           {"hipAtomicOperationXOR",                                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-  //
+  // CU_ATOMIC_OPERATION_EXCHANGE
   {"cudaAtomicOperationExchange",                                      {"hipAtomicOperationExchange",                               "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-  //
+  // CU_ATOMIC_OPERATION_CAS
   {"cudaAtomicOperationCAS",                                           {"hipAtomicOperationCAS",                                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-  //
+  // CU_ATOMIC_OPERATION_FLOAT_ADD
   {"cudaAtomicOperationFloatAdd",                                      {"hipAtomicOperationFloatAdd",                               "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-  //
+  // CU_ATOMIC_OPERATION_FLOAT_MIN
   {"cudaAtomicOperationFloatMin",                                      {"hipAtomicOperationFloatMin",                               "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-  //
+  // CU_ATOMIC_OPERATION_FLOAT_MAX
   {"cudaAtomicOperationFloatMax",                                      {"hipAtomicOperationFloatMax",                               "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   //
@@ -2301,12 +2301,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CUasyncCallback
   {"cudaAsyncCallback",                                                {"hipAsyncCallback",                                         "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
-  //
+  // CUlogsCallbackHandle
   {"cudaLogsCallbackHandle",                                           {"hipLogsCallbackHandle",                                    "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-  //
+  // CUlogsCallbackEntry_st
   {"CUlogsCallbackEntry_st",                                           {"hipLogsCallbackEntry_st",                                  "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
-  //
+  // no analogue
   {"cudaLogsCallback_t",                                               {"hipLogsCallback_t",                                        "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   // 5. Defines
@@ -2475,9 +2475,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaGraphKernelNodePortLaunchCompletion",                          {"hipGraphKernelNodePortLaunchCompletion",                   "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES}}, // 2
   // CU_KERNEL_NODE_ATTRIBUTE_DEVICE_UPDATABLE_KERNEL_NODE
   {"cudaKernelNodeAttributeDeviceUpdatableKernelNode",                 {"hipKernelNodeAttributeDeviceUpdatableKernelNode",          "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-  //
+  // CU_LAUNCH_ATTRIBUTE_NVLINK_UTIL_CENTRIC_SCHEDULING
   {"cudaKernelNodeAttributeNvlinkUtilCentricScheduling",               {"hipLaunchAttributeNvlinkUtilCentricScheduling",            "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-  //
+  // CUlogIterator
   {"cudaLogIterator",                                                  {"hipLogIterator",                                           "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   {"CUDART_INF_F",                                                     {"HIP_INF_F",                                                "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES}},
