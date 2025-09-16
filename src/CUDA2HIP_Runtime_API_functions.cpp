@@ -414,10 +414,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   {"cudaDeviceRegisterAsyncNotification",                     {"hipDeviceRegisterAsyncNotification",                     "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_UNSUPPORTED}},
   // cuDeviceUnregisterAsyncNotification
   {"cudaDeviceUnregisterAsyncNotification",                   {"hipDeviceUnregisterAsyncNotification",                   "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_UNSUPPORTED}},
-  //
+  // cuMemDiscardBatchAsync
   {"cudaMemDiscardBatchAsync",                                {"hipMemDiscardBatchAsync",                                "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_UNSUPPORTED}},
-  //
+  // cuMemDiscardAndPrefetchBatchAsync
   {"cudaMemDiscardAndPrefetchBatchAsync",                     {"hipMemDiscardAndPrefetchBatchAsync",                     "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_UNSUPPORTED}},
+  // cuMemPrefetchBatchAsync
+  {"cudaMemPrefetchBatchAsync",                               {"hipMemPrefetchBatchAsync",                               "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_UNSUPPORTED}},
 
   // 11. Memory Management [DEPRECATED]
   // no analogue
@@ -462,11 +464,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   {"cudaMemPoolExportPointer",                                {"hipMemPoolExportPointer",                                "", CONV_MEMORY, API_RUNTIME, SEC::ORDERED_MEMORY}},
   // cuMemPoolImportPointer
   {"cudaMemPoolImportPointer",                                {"hipMemPoolImportPointer",                                "", CONV_MEMORY, API_RUNTIME, SEC::ORDERED_MEMORY}},
-  //
+  // cuMemGetDefaultMemPool
   {"cudaMemGetDefaultMemPool",                                {"hipMemGetDefaultMemPool",                                "", CONV_MEMORY, API_RUNTIME, SEC::ORDERED_MEMORY, HIP_UNSUPPORTED}},
-  //
+  // cuMemGetMemPool
   {"cudaMemGetMemPool",                                       {"hipMemGetMemPool",                                       "", CONV_MEMORY, API_RUNTIME, SEC::ORDERED_MEMORY, HIP_UNSUPPORTED}},
-  //
+  // cuMemSetMemPool
   {"cudaMemSetMemPool",                                       {"hipMemSetMemPool",                                       "", CONV_MEMORY, API_RUNTIME, SEC::ORDERED_MEMORY, HIP_UNSUPPORTED}},
 
   // 13. Unified Addressing
@@ -689,15 +691,15 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   {"cudaRuntimeGetVersion",                                   {"hipRuntimeGetVersion",                                   "", CONV_VERSION, API_RUNTIME, SEC::VERSION}},
 
   // 29. Log Management Functions
-  //
+  // cuLogsRegisterCallback
   {"cudaLogsRegisterCallback",                                {"hipLogsRegisterCallback",                                "", CONV_ERROR_LOG, API_RUNTIME, SEC::ERROR_LOG, HIP_UNSUPPORTED}},
-  //
+  // cuLogsUnregisterCallback
   {"cudaLogsUnregisterCallback",                              {"hipLogsUnregisterCallback",                              "", CONV_ERROR_LOG, API_RUNTIME, SEC::ERROR_LOG, HIP_UNSUPPORTED}},
-  //
+  // cuLogsCurrent
   {"cudaLogsCurrent",                                         {"hipLogsCurrent",                                         "", CONV_ERROR_LOG, API_RUNTIME, SEC::ERROR_LOG, HIP_UNSUPPORTED}},
-  //
+  // cuLogsDumpToFile
   {"cudaLogsDumpToFile",                                      {"hipLogsDumpToFile",                                      "", CONV_ERROR_LOG, API_RUNTIME, SEC::ERROR_LOG, HIP_UNSUPPORTED}},
-  //
+  // cuLogsDumpToMemory
   {"cudaLogsDumpToMemory",                                    {"hipLogsDumpToMemory",                                    "", CONV_ERROR_LOG, API_RUNTIME, SEC::ERROR_LOG, HIP_UNSUPPORTED}},
 
   // 30. Graph Management
@@ -1259,6 +1261,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_FUNCTION_VER_MAP {
   {"cudaDeviceGetP2PAtomicCapabilities",                      {CUDA_130, CUDA_0,   CUDA_0  }},
   {"cudaMemDiscardBatchAsync",                                {CUDA_130, CUDA_0,   CUDA_0  }},
   {"cudaMemDiscardAndPrefetchBatchAsync",                     {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaMemPrefetchBatchAsync",                               {CUDA_130, CUDA_0,   CUDA_0  }},
   {"cudaMemGetDefaultMemPool",                                {CUDA_130, CUDA_0,   CUDA_0  }},
   {"cudaMemGetMemPool",                                       {CUDA_130, CUDA_0,   CUDA_0  }},
   {"cudaMemSetMemPool",                                       {CUDA_130, CUDA_0,   CUDA_0  }},
