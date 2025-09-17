@@ -577,7 +577,7 @@
 |`CU_DEVICE_P2P_ATTRIBUTE_ARRAY_ACCESS_ACCESS_SUPPORTED`|9.2|10.0| |10.1|`hipDevP2PAttrHipArrayAccessSupported`|3.8.0| | | | |
 |`CU_DEVICE_P2P_ATTRIBUTE_CUDA_ARRAY_ACCESS_SUPPORTED`|10.0| | | |`hipDevP2PAttrHipArrayAccessSupported`|3.8.0| | | | |
 |`CU_DEVICE_P2P_ATTRIBUTE_NATIVE_ATOMIC_SUPPORTED`|8.0| | | |`hipDevP2PAttrNativeAtomicSupported`|3.8.0| | | | |
-|`CU_DEVICE_P2P_ATTRIBUTE_ONLY_PARTIAL_NATIVE_ATOMIC_SUPPORTED`|13.0| | | |`hipDevP2PAttrOnlyPartialNativeAtomicSupported`| | | | | |
+|`CU_DEVICE_P2P_ATTRIBUTE_ONLY_PARTIAL_NATIVE_ATOMIC_SUPPORTED`|13.0| | | | | | | | | |
 |`CU_DEVICE_P2P_ATTRIBUTE_PERFORMANCE_RANK`|8.0| | | |`hipDevP2PAttrPerformanceRank`|3.8.0| | | | |
 |`CU_DEV_RESOURCE_TYPE_INVALID`|12.4| | | | | | | | | |
 |`CU_DEV_RESOURCE_TYPE_MAX`|12.4| | | | | | | | | |
