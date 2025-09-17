@@ -8598,7 +8598,6 @@ sub simpleSubstitutions {
     subst("CU_DEVICE_P2P_ATTRIBUTE_ARRAY_ACCESS_ACCESS_SUPPORTED", "hipDevP2PAttrHipArrayAccessSupported", "numeric_literal");
     subst("CU_DEVICE_P2P_ATTRIBUTE_CUDA_ARRAY_ACCESS_SUPPORTED", "hipDevP2PAttrHipArrayAccessSupported", "numeric_literal");
     subst("CU_DEVICE_P2P_ATTRIBUTE_NATIVE_ATOMIC_SUPPORTED", "hipDevP2PAttrNativeAtomicSupported", "numeric_literal");
-    subst("CU_DEVICE_P2P_ATTRIBUTE_ONLY_PARTIAL_NATIVE_ATOMIC_SUPPORTED", "hipDevP2PAttrOnlyPartialNativeAtomicSupported", "numeric_literal");
     subst("CU_DEVICE_P2P_ATTRIBUTE_PERFORMANCE_RANK", "hipDevP2PAttrPerformanceRank", "numeric_literal");
     subst("CU_EVENT_BLOCKING_SYNC", "hipEventBlockingSync", "numeric_literal");
     subst("CU_EVENT_DEFAULT", "hipEventDefault", "numeric_literal");
@@ -12847,6 +12846,7 @@ sub warnRemovedFunctions {
     "CU_DEV_RESOURCE_TYPE_SM",
     "CU_DEV_RESOURCE_TYPE_MAX",
     "CU_DEV_RESOURCE_TYPE_INVALID",
+    "CU_DEVICE_P2P_ATTRIBUTE_ONLY_PARTIAL_NATIVE_ATOMIC_SUPPORTED",
     "CU_DEVICE_NUMA_CONFIG_NUMA_NODE",
     "CU_DEVICE_NUMA_CONFIG_NONE",
     "CU_DEVICE_ATTRIBUTE_VULKAN_CIG_SUPPORTED",

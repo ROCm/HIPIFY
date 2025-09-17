@@ -1038,14 +1038,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_DEVICE_ATTRIBUTE_HOST_NUMA_MEMORY_POOLS_SUPPORTED",             {"hipDeviceAttributeHostNumaMemoryPoolsSupported",           "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 142
   // cudaDevAttrHostNumaMultinodeIpcSupported
   {"CU_DEVICE_ATTRIBUTE_HOST_NUMA_MULTINODE_IPC_SUPPORTED",            {"hipDeviceAttributeHostNumaMultinodeIpcSupported",          "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 143
-  //
+  // cudaDevAttrHostMemoryPoolsSupported
   {"CU_DEVICE_ATTRIBUTE_HOST_MEMORY_POOLS_SUPPORTED",                  {"hipDeviceAttributeHostMemoryPoolsSupported",               "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 144
   //
   {"CU_DEVICE_ATTRIBUTE_HOST_VIRTUAL_MEMORY_MANAGEMENT_SUPPORTED",     {"hipDeviceAttributeHostVirtualMemoryManagementSupported",   "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 145
   //
   {"CU_DEVICE_ATTRIBUTE_HOST_ALLOC_DMA_BUF_SUPPORTED",                 {"hipDeviceAttributeHostHostAllocDmaBufSupported",           "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 146
-  //
-  {"CU_DEVICE_ATTRIBUTE_ONLY_PARTIAL_HOST_NATIVE_ATOMIC_SUPPORTED",    {"hipDeviceAttributeOnlyPartialHostNativeAtomicSupported",   "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 147
+  // cudaDevAttrOnlyPartialHostNativeAtomicSupported
+  {"CU_DEVICE_ATTRIBUTE_ONLY_PARTIAL_HOST_NATIVE_ATOMIC_SUPPORTED",    {"hipDevAttributeOnlyPartialHostNativeAtomicSupported",      "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 147
   // cudaDevAttrMax
   {"CU_DEVICE_ATTRIBUTE_MAX",                                          {"hipDeviceAttributeMax",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
@@ -1066,8 +1066,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_DEVICE_P2P_ATTRIBUTE_ARRAY_ACCESS_ACCESS_SUPPORTED",            {"hipDevP2PAttrHipArrayAccessSupported",                     "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, CUDA_DEPRECATED | CUDA_REMOVED}}, // 0x04
   // cudaDevP2PAttrCudaArrayAccessSupported = 4
   {"CU_DEVICE_P2P_ATTRIBUTE_CUDA_ARRAY_ACCESS_SUPPORTED",              {"hipDevP2PAttrHipArrayAccessSupported",                     "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}}, // 0x04
-  //
-  {"CU_DEVICE_P2P_ATTRIBUTE_ONLY_PARTIAL_NATIVE_ATOMIC_SUPPORTED",     {"hipDevP2PAttrOnlyPartialNativeAtomicSupported",            "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}}, // 0x05
+  // cudaDevP2PAttrOnlyPartialNativeAtomicSupported
+  {"CU_DEVICE_P2P_ATTRIBUTE_ONLY_PARTIAL_NATIVE_ATOMIC_SUPPORTED",     {"hipDevP2PAttrOnlyPartialNativeAtomicSupported",            "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0x05
 
   // cudaEGL.h - presented only on Linux in nvidia-cuda-dev package
   // cudaEglColorFormat
@@ -1857,9 +1857,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUDA_ERROR_PROFILER_ALREADY_STOPPED",                              {"hipErrorProfilerAlreadyStopped",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, CUDA_DEPRECATED}}, // 8
   // cudaErrorStubLibrary
   {"CUDA_ERROR_STUB_LIBRARY",                                          {"hipErrorStubLibrary",                                      "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 34
-  //
+  // cudaErrorCallRequiresNewerDriver
   {"CUDA_ERROR_CALL_REQUIRES_NEWER_DRIVER",                            {"hipErrorCallRequiresNewerDriver",                          "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 36
-  //
+  // cudaErrorDevicesUnavailable
   {"CUDA_ERROR_DEVICE_UNAVAILABLE",                                    {"hipErrorDeviceUnavailable",                                "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 46
   // cudaErrorNoDevice
   {"CUDA_ERROR_NO_DEVICE",                                             {"hipErrorNoDevice",                                         "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}}, // 100
@@ -3075,25 +3075,25 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // no analogue
   {"CU_ATOMIC_OPERATION_MAX",                                          {"hipAtomicOperationMax",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
-  //
+  // cudaAtomicOperationCapability
   {"CUatomicOperationCapability",                                      {"hipAtomicOperationCapability",                             "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-  //
+  // cudaAtomicOperationCapability
   {"CUatomicOperationCapability_enum",                                 {"hipAtomicOperationCapability",                             "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   // CUatomicOperationCapability enum values
-  //
-  {"CU_ATOMIC_CAPABILITY_SIGNED",                                      {"HIP_ATOMIC_CAPABILITY_SIGNED",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-  //
-  {"CU_ATOMIC_CAPABILITY_UNSIGNED",                                    {"HIP_ATOMIC_CAPABILITY_UNSIGNED",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-  //
-  {"CU_ATOMIC_CAPABILITY_REDUCTION",                                   {"HIP_ATOMIC_CAPABILITY_REDUCTION",                          "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-  //
-  {"CU_ATOMIC_CAPABILITY_SCALAR_32",                                   {"HIP_ATOMIC_CAPABILITY_SCALAR_32",                          "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-  //
-  {"CU_ATOMIC_CAPABILITY_SCALAR_64",                                   {"HIP_ATOMIC_CAPABILITY_SCALAR_64",                          "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-  //
-  {"CU_ATOMIC_CAPABILITY_SCALAR_128",                                  {"HIP_ATOMIC_CAPABILITY_SCALAR_128",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-  //
-  {"CU_ATOMIC_CAPABILITY_VECTOR_32x4",                                 {"HIP_ATOMIC_CAPABILITY_VECTOR_32x4",                        "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // cudaAtomicCapabilitySigned
+  {"CU_ATOMIC_CAPABILITY_SIGNED",                                      {"hipAtomicCapabilitySigned",                                "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // cudaAtomicCapabilityUnsigned
+  {"CU_ATOMIC_CAPABILITY_UNSIGNED",                                    {"hipAtomicCapabilityUnsigned",                              "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // cudaAtomicCapabilityReduction
+  {"CU_ATOMIC_CAPABILITY_REDUCTION",                                   {"hipAtomicCapabilityReduction",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // cudaAtomicCapabilityScalar32
+  {"CU_ATOMIC_CAPABILITY_SCALAR_32",                                   {"hipAtomicCapabilityScalar32",                              "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // cudaAtomicCapabilityScalar64
+  {"CU_ATOMIC_CAPABILITY_SCALAR_64",                                   {"hipAtomicCapabilityScalar64",                              "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // cudaAtomicCapabilityScalar128
+  {"CU_ATOMIC_CAPABILITY_SCALAR_128",                                  {"hipAtomicCapabilityScalar128",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // cudaAtomicCapabilityVector32x4
+  {"CU_ATOMIC_CAPABILITY_VECTOR_32x4",                                 {"hipAtomicCapabilityVector32x4",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   // 4. Typedefs
 
