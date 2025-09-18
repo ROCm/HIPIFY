@@ -1474,8 +1474,8 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SOLVER_FUNCTION_VER_MAP {
   {"hipsolverDnXpotrs",                                  {HIP_6030, HIP_0,    HIP_0   }},
   {"hipsolverSpScsrlsvqr",                               {HIP_6040, HIP_0,    HIP_0   }},
   {"hipsolverSpDcsrlsvqr",                               {HIP_6040, HIP_0,    HIP_0   }},
-  {"hipsolverSpCcsrlsvqr",                               {HIP_7000, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipsolverSpZcsrlsvqr",                               {HIP_7000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipsolverSpCcsrlsvqr",                               {HIP_7000, HIP_0,    HIP_0   }},
+  {"hipsolverSpZcsrlsvqr",                               {HIP_7000, HIP_0,    HIP_0   }},
 
   {"rocsolver_spotrf",                                   {HIP_3020, HIP_0,    HIP_0   }},
   {"rocsolver_dpotrf",                                   {HIP_3020, HIP_0,    HIP_0   }},

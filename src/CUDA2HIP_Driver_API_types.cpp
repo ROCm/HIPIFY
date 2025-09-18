@@ -365,9 +365,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUDA_BATCH_MEM_OP_NODE_PARAMS_v2",                                 {"hipBatchMemOpNodeParams",                                  "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES}},
 
   // cudaLaunchAttribute_st
-  {"CUlaunchAttribute_st",                                             {"hipLaunchAttribute_st",                                    "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
+  {"CUlaunchAttribute_st",                                             {"hipLaunchAttribute_st",                                    "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES}},
   // cudaLaunchAttribute
-  {"CUlaunchAttribute",                                                {"hipLaunchAttribute",                                       "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
+  {"CUlaunchAttribute",                                                {"hipLaunchAttribute",                                       "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES}},
 
   // NOTE: cudaLaunchConfig_st struct differs
   {"CUlaunchConfig_st",                                                {"HIP_LAUNCH_CONFIG_st",                                     "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES}},
@@ -2562,11 +2562,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_STREAM_MEMORY_BARRIER_TYPE_GPU",                                {"HIP_STREAM_MEMORY_BARRIER_TYPE_GPU",                       "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   //
-  {"CUmemRangeHandleType",                                             {"hipMemRangeHandleType",                                    "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
-  {"CUmemRangeHandleType_enum",                                        {"hipMemRangeHandleType",                                    "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
+  {"CUmemRangeHandleType",                                             {"hipMemRangeHandleType",                                    "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES}},
+  {"CUmemRangeHandleType_enum",                                        {"hipMemRangeHandleType",                                    "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES}},
   // CUmemRangeHandleType enum values
-  {"CU_MEM_RANGE_HANDLE_TYPE_DMA_BUF_FD",                              {"hipMemRangeHandleTypeDmaBufFd",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
-  {"CU_MEM_RANGE_HANDLE_TYPE_MAX",                                     {"hipMemRangeHandleTypeMax",                                 "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
+  {"CU_MEM_RANGE_HANDLE_TYPE_DMA_BUF_FD",                              {"hipMemRangeHandleTypeDmaBufFd",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}},
+  {"CU_MEM_RANGE_HANDLE_TYPE_MAX",                                     {"hipMemRangeHandleTypeMax",                                 "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}},
 
   //
   {"CUmoduleLoadingMode",                                              {"hipModuleLoadingMode",                                     "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
@@ -2948,12 +2948,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_TENSOR_MAP_IM2COL_WIDE_MODE_W128",                              {"HIP_TENSOR_MAP_IM2COL_WIDE_MODE_W128",                     "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   //
-  {"CUmemRangeFlags",                                                  {"hipMemRangeFlags",                                         "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
+  {"CUmemRangeFlags",                                                  {"hipMemRangeFlags",                                         "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES}},
   //
-  {"CUmemRangeFlags_enum",                                             {"hipMemRangeFlags",                                         "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
+  {"CUmemRangeFlags_enum",                                             {"hipMemRangeFlags",                                         "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES}},
   // CUmemRangeFlags enum values
   //
-  {"CU_MEM_RANGE_FLAG_DMA_BUF_MAPPING_TYPE_PCIE",                      {"hipMemRangeFlagDmaBufMappingTypePcie",                     "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
+  {"CU_MEM_RANGE_FLAG_DMA_BUF_MAPPING_TYPE_PCIE",                      {"hipMemRangeFlagDmaBufMappingTypePcie",                     "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}},
 
   //
   {"CUprocessState",                                                   {"hipProcessState",                                          "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
@@ -4864,11 +4864,11 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {
   {"hipJitOptionMinCTAPerSM",                                          {HIP_6040, HIP_0,    HIP_0   }},
   {"hipJitOptionMaxThreadsPerBlock",                                   {HIP_6040, HIP_0,    HIP_0   }},
   {"hipJitOptionOverrideDirectiveValues",                              {HIP_6040, HIP_0,    HIP_0   }},
-  {"HIP_LAUNCH_CONFIG_st",                                             {HIP_7000, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"HIP_LAUNCH_CONFIG",                                                {HIP_7000, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipMemRangeHandleType",                                            {HIP_7000, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipMemRangeHandleTypeDmaBufFd",                                    {HIP_7000, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipMemRangeHandleTypeMax",                                         {HIP_7000, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipMemRangeFlags",                                                 {HIP_7000, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipMemRangeFlagDmaBufMappingTypePcie",                             {HIP_7000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"HIP_LAUNCH_CONFIG_st",                                             {HIP_7000, HIP_0,    HIP_0   }},
+  {"HIP_LAUNCH_CONFIG",                                                {HIP_7000, HIP_0,    HIP_0   }},
+  {"hipMemRangeHandleType",                                            {HIP_7000, HIP_0,    HIP_0   }},
+  {"hipMemRangeHandleTypeDmaBufFd",                                    {HIP_7000, HIP_0,    HIP_0   }},
+  {"hipMemRangeHandleTypeMax",                                         {HIP_7000, HIP_0,    HIP_0   }},
+  {"hipMemRangeFlags",                                                 {HIP_7000, HIP_0,    HIP_0   }},
+  {"hipMemRangeFlagDmaBufMappingTypePcie",                             {HIP_7000, HIP_0,    HIP_0   }},
 };

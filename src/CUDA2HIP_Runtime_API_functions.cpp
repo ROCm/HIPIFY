@@ -240,7 +240,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   {"cudaSetDoubleForHost",                                    {"hipSetDoubleForHost",                                    "", CONV_EXECUTION, API_RUNTIME, SEC::EXECUTION, HIP_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
   // no analogue
   // NOTE: Not equal to cuLaunchKernelEx due to different signatures
-  {"cudaLaunchKernelExC",                                     {"hipLaunchKernelExC",                                     "", CONV_EXECUTION, API_RUNTIME, SEC::EXECUTION, HIP_EXPERIMENTAL}},
+  {"cudaLaunchKernelExC",                                     {"hipLaunchKernelExC",                                     "", CONV_EXECUTION, API_RUNTIME, SEC::EXECUTION}},
   // cuFuncGetName
   {"cudaFuncGetName",                                         {"hipFuncGetName",                                         "", CONV_EXECUTION, API_RUNTIME, SEC::EXECUTION, HIP_UNSUPPORTED}},
   // cuFuncGetParamInfo
@@ -1533,7 +1533,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP {
   {"hipGraphExecGetFlags",                                    {HIP_6030, HIP_0,    HIP_0   }},
   {"hipGraphNodeSetParams",                                   {HIP_6030, HIP_0,    HIP_0   }},
   {"hipGraphExecNodeSetParams",                               {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipLaunchKernelExC",                                      {HIP_7000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipLaunchKernelExC",                                      {HIP_7000, HIP_0,    HIP_0   }},
 };
 
 const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_RUNTIME_FUNCTION_CHANGED_VER_MAP {

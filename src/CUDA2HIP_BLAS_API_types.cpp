@@ -166,10 +166,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP {
   {"CUDA_R_8F_E4M3",                                                 {"HIP_R_8F_E4M3",                                                     "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::CUDA_DATA_TYPES, ROC_UNSUPPORTED}}, // 28
   {"CUDA_R_8F_UE4M3",                                                {"HIP_R_8F_E4M3",                                                     "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::CUDA_DATA_TYPES, ROC_UNSUPPORTED}}, // = CUDA_R_8F_E4M3 = 28
   {"CUDA_R_8F_E5M2",                                                 {"HIP_R_8F_E5M2",                                                     "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::CUDA_DATA_TYPES, ROC_UNSUPPORTED}}, // 29
-  {"CUDA_R_8F_UE8M0",                                                {"HIP_R_8F_UE8M0",                                                    "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::CUDA_DATA_TYPES, HIP_EXPERIMENTAL}}, // 30
-  {"CUDA_R_6F_E2M3",                                                 {"HIP_R_6F_E2M3",                                                     "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::CUDA_DATA_TYPES, HIP_EXPERIMENTAL}}, // 31
-  {"CUDA_R_6F_E3M2",                                                 {"HIP_R_6F_E3M2",                                                     "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::CUDA_DATA_TYPES, HIP_EXPERIMENTAL}}, // 32
-  {"CUDA_R_4F_E2M1",                                                 {"HIP_R_4F_E2M1",                                                     "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::CUDA_DATA_TYPES, HIP_EXPERIMENTAL}}, // 33
+  {"CUDA_R_8F_UE8M0",                                                {"HIP_R_8F_UE8M0",                                                    "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::CUDA_DATA_TYPES}}, // 30
+  {"CUDA_R_6F_E2M3",                                                 {"HIP_R_6F_E2M3",                                                     "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::CUDA_DATA_TYPES}}, // 31
+  {"CUDA_R_6F_E3M2",                                                 {"HIP_R_6F_E3M2",                                                     "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::CUDA_DATA_TYPES}}, // 32
+  {"CUDA_R_4F_E2M1",                                                 {"HIP_R_4F_E2M1",                                                     "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::CUDA_DATA_TYPES}}, // 33
 
   // CUBLAS Data Types
 
@@ -1119,14 +1119,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP {
   {"CUBLASLT_ALGO_CONFIG_INNER_SHAPE_ID",                            {"HIPBLASLT_ALGO_CONFIG_INNER_SHAPE_ID",                              "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
   {"CUBLASLT_ALGO_CONFIG_CLUSTER_SHAPE_ID",                          {"HIPBLASLT_ALGO_CONFIG_CLUSTER_SHAPE_ID",                            "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
   {"cublasLtLoggerCallback_t",                                       {"hipblasLtLoggerCallback_t",                                         "",                                                         CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
-  {"cublasLtMatmulMatrixScale_t",                                    {"hipblasLtMatmulMatrixScale_t",                                      "",                                                         CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
-  {"CUBLASLT_MATMUL_MATRIX_SCALE_SCALAR_32F",                        {"HIPBLASLT_MATMUL_MATRIX_SCALE_SCALAR_32F",                          "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
-  {"CUBLASLT_MATMUL_MATRIX_SCALE_VEC16_UE4M3",                       {"HIPBLASLT_MATMUL_MATRIX_SCALE_VEC16_UE4M3",                         "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
-  {"CUBLASLT_MATMUL_MATRIX_SCALE_VEC32_UE8M0",                       {"HIPBLASLT_MATMUL_MATRIX_SCALE_VEC32_UE8M0",                         "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
-  {"CUBLASLT_MATMUL_MATRIX_SCALE_OUTER_VEC_32F",                     {"HIPBLASLT_MATMUL_MATRIX_SCALE_OUTER_VEC_32F",                       "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
-  {"CUBLASLT_MATMUL_MATRIX_SCALE_VEC128_32F",                        {"HIPBLASLT_MATMUL_MATRIX_SCALE_VEC128_32F",                          "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
-  {"CUBLASLT_MATMUL_MATRIX_SCALE_BLK128x128_32F",                    {"HIPBLASLT_MATMUL_MATRIX_SCALE_BLK128x128_32F",                      "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
-  {"CUBLASLT_MATMUL_MATRIX_SCALE_END",                               {"HIPBLASLT_MATMUL_MATRIX_SCALE_END",                                 "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED | HIP_EXPERIMENTAL}},
+  {"cublasLtMatmulMatrixScale_t",                                    {"hipblasLtMatmulMatrixScale_t",                                      "",                                                         CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_MATRIX_SCALE_SCALAR_32F",                        {"HIPBLASLT_MATMUL_MATRIX_SCALE_SCALAR_32F",                          "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_MATRIX_SCALE_VEC16_UE4M3",                       {"HIPBLASLT_MATMUL_MATRIX_SCALE_VEC16_UE4M3",                         "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_MATRIX_SCALE_VEC32_UE8M0",                       {"HIPBLASLT_MATMUL_MATRIX_SCALE_VEC32_UE8M0",                         "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_MATRIX_SCALE_OUTER_VEC_32F",                     {"HIPBLASLT_MATMUL_MATRIX_SCALE_OUTER_VEC_32F",                       "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_MATRIX_SCALE_VEC128_32F",                        {"HIPBLASLT_MATMUL_MATRIX_SCALE_VEC128_32F",                          "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_MATRIX_SCALE_BLK128x128_32F",                    {"HIPBLASLT_MATMUL_MATRIX_SCALE_BLK128x128_32F",                      "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_MATRIX_SCALE_END",                               {"HIPBLASLT_MATMUL_MATRIX_SCALE_END",                                 "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED}},
   {"cublasLtBatchMode_t",                                            {"hipblasLtBatchMode_t",                                              "",                                                         CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
   {"CUBLASLT_BATCH_MODE_STRIDED",                                    {"HIPBLASLT_BATCH_MODE_STRIDED",                                      "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
   {"CUBLASLT_BATCH_MODE_POINTER_ARRAY",                              {"HIPBLASLT_BATCH_MODE_POINTER_ARRAY",                                "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
@@ -2314,21 +2314,21 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_TYPE_NAME_VER_MAP {
   {"HIPBLASLT_MATMUL_PREF_MAX_WORKSPACE_BYTES",                      {HIP_5050, HIP_0,    HIP_0   }},
   {"hipblasLtMatmulHeuristicResult_t",                               {HIP_5050, HIP_0,    HIP_0   }},
   {"HIPBLASLT_MATMUL_DESC_AMAX_D_POINTER",                           {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasLtMatmulMatrixScale_t",                                   {HIP_7000, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"HIPBLASLT_MATMUL_MATRIX_SCALE_SCALAR_32F",                       {HIP_7000, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"HIPBLASLT_MATMUL_MATRIX_SCALE_VEC16_UE4M3",                      {HIP_7000, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"HIPBLASLT_MATMUL_MATRIX_SCALE_VEC32_UE8M0",                      {HIP_7000, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"HIPBLASLT_MATMUL_MATRIX_SCALE_END",                              {HIP_7000, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"HIPBLASLT_MATMUL_DESC_A_SCALE_MODE",                             {HIP_7000, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"HIPBLASLT_MATMUL_DESC_B_SCALE_MODE",                             {HIP_7000, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"HIP_R_8F_UE8M0",                                                 {HIP_7000, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"HIP_R_6F_E2M3",                                                  {HIP_7000, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"HIP_R_6F_E3M2",                                                  {HIP_7000, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"HIP_R_4F_E2M1",                                                  {HIP_7000, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"HIPBLASLT_MATMUL_DESC_EPILOGUE_AUX_DATA_TYPE",                   {HIP_7000, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"HIPBLASLT_MATMUL_MATRIX_SCALE_OUTER_VEC_32F",                    {HIP_7000, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"HIPBLASLT_MATMUL_MATRIX_SCALE_VEC128_32F",                       {HIP_7000, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"HIPBLASLT_MATMUL_MATRIX_SCALE_BLK128x128_32F",                   {HIP_7000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipblasLtMatmulMatrixScale_t",                                   {HIP_7000, HIP_0,    HIP_0   }},
+  {"HIPBLASLT_MATMUL_MATRIX_SCALE_SCALAR_32F",                       {HIP_7000, HIP_0,    HIP_0   }},
+  {"HIPBLASLT_MATMUL_MATRIX_SCALE_VEC16_UE4M3",                      {HIP_7000, HIP_0,    HIP_0   }},
+  {"HIPBLASLT_MATMUL_MATRIX_SCALE_VEC32_UE8M0",                      {HIP_7000, HIP_0,    HIP_0   }},
+  {"HIPBLASLT_MATMUL_MATRIX_SCALE_END",                              {HIP_7000, HIP_0,    HIP_0   }},
+  {"HIPBLASLT_MATMUL_DESC_A_SCALE_MODE",                             {HIP_7000, HIP_0,    HIP_0   }},
+  {"HIPBLASLT_MATMUL_DESC_B_SCALE_MODE",                             {HIP_7000, HIP_0,    HIP_0   }},
+  {"HIP_R_8F_UE8M0",                                                 {HIP_7000, HIP_0,    HIP_0   }},
+  {"HIP_R_6F_E2M3",                                                  {HIP_7000, HIP_0,    HIP_0   }},
+  {"HIP_R_6F_E3M2",                                                  {HIP_7000, HIP_0,    HIP_0   }},
+  {"HIP_R_4F_E2M1",                                                  {HIP_7000, HIP_0,    HIP_0   }},
+  {"HIPBLASLT_MATMUL_DESC_EPILOGUE_AUX_DATA_TYPE",                   {HIP_7000, HIP_0,    HIP_0   }},
+  {"HIPBLASLT_MATMUL_MATRIX_SCALE_OUTER_VEC_32F",                    {HIP_7000, HIP_0,    HIP_0   }},
+  {"HIPBLASLT_MATMUL_MATRIX_SCALE_VEC128_32F",                       {HIP_7000, HIP_0,    HIP_0   }},
+  {"HIPBLASLT_MATMUL_MATRIX_SCALE_BLK128x128_32F",                   {HIP_7000, HIP_0,    HIP_0   }},
 
   {"rocblas_handle",                                                 {HIP_1050, HIP_0,    HIP_0   }},
   {"_rocblas_handle",                                                {HIP_1050, HIP_0,    HIP_0   }},

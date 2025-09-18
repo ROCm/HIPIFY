@@ -1543,188 +1543,7 @@ my %removed_funcs = (
 );
 
 my %experimental_funcs = (
-    "cutensorWriteKernelCacheToFile" => "7.0.0",
-    "cutensorTensorDescriptor" => "7.0.0",
-    "cutensorReduce" => "7.0.0",
-    "cutensorReadKernelCacheFromFile" => "7.0.0",
-    "cutensorPlan_t" => "7.0.0",
-    "cutensorPlanPreference_t" => "7.0.0",
-    "cutensorPlanPreferenceSetAttribute" => "7.0.0",
-    "cutensorPlanPreferenceAttribute_t" => "7.0.0",
-    "cutensorPlanPreference" => "7.0.0",
-    "cutensorPlanGetAttribute" => "7.0.0",
-    "cutensorPlanAttribute_t" => "7.0.0",
-    "cutensorPlan" => "7.0.0",
-    "cutensorPermute" => "7.0.0",
-    "cutensorOperationDescriptor_t" => "7.0.0",
-    "cutensorOperationDescriptorSetAttribute" => "7.0.0",
-    "cutensorOperationDescriptorGetAttribute" => "7.0.0",
-    "cutensorOperationDescriptorAttribute_t" => "7.0.0",
-    "cutensorOperationDescriptor" => "7.0.0",
-    "cutensorJitMode_t" => "7.0.0",
-    "cutensorHandleWritePlanCacheToFile" => "7.0.0",
-    "cutensorHandleResizePlanCache" => "7.0.0",
-    "cutensorHandleReadPlanCacheFromFile" => "7.0.0",
-    "cutensorHandle" => "7.0.0",
-    "cutensorEstimateWorkspaceSize" => "7.0.0",
-    "cutensorElementwiseTrinaryExecute" => "7.0.0",
-    "cutensorElementwiseBinaryExecute" => "7.0.0",
-    "cutensorDestroyTensorDescriptor" => "7.0.0",
-    "cutensorDestroyPlanPreference" => "7.0.0",
-    "cutensorDestroyPlan" => "7.0.0",
-    "cutensorDestroyOperationDescriptor" => "7.0.0",
-    "cutensorDataType_t" => "7.0.0",
-    "cutensorCreateTensorDescriptor" => "7.0.0",
-    "cutensorCreateReduction" => "7.0.0",
-    "cutensorCreatePlanPreference" => "7.0.0",
-    "cutensorCreatePlan" => "7.0.0",
-    "cutensorCreatePermutation" => "7.0.0",
-    "cutensorCreateElementwiseTrinary" => "7.0.0",
-    "cutensorCreateElementwiseBinary" => "7.0.0",
-    "cutensorCreateContraction" => "7.0.0",
-    "cutensorContract" => "7.0.0",
-    "cutensorComputeDescriptor_t" => "7.0.0",
-    "cutensorCacheMode_t" => "7.0.0",
-    "cutensorAutotuneMode_t" => "7.0.0",
-    "cudaRoundZero" => "7.0.0",
-    "cudaRoundPosInf" => "7.0.0",
-    "cudaRoundNearest" => "7.0.0",
-    "cudaRoundMode" => "7.0.0",
-    "cudaRoundMinInf" => "7.0.0",
-    "cudaLaunchKernelExC" => "7.0.0",
-    "cudaLaunchConfig_t" => "7.0.0",
-    "cudaLaunchConfig_st" => "7.0.0",
-    "cudaLaunchAttribute_st" => "7.0.0",
-    "cudaLaunchAttribute" => "7.0.0",
-    "cublasLtMatmulMatrixScale_t" => "7.0.0",
-    "cuMemGetHandleForAddressRange" => "7.0.0",
-    "cuLaunchKernelEx" => "7.0.0",
-    "__nv_fp4x4_storage_t" => "7.0.0",
-    "__nv_fp4x4_e2m1" => "7.0.0",
-    "__nv_fp4x2_storage_t" => "7.0.0",
-    "__nv_fp4x2_e2m1" => "7.0.0",
-    "__nv_fp4_storage_t" => "7.0.0",
-    "__nv_fp4_interpretation_t" => "7.0.0",
-    "__nv_fp4_e2m1" => "7.0.0",
-    "__nv_cvt_halfraw_to_fp4" => "7.0.0",
-    "__nv_cvt_halfraw2_to_fp4x2" => "7.0.0",
-    "__nv_cvt_fp4x2_to_halfraw2" => "7.0.0",
-    "__nv_cvt_fp4_to_halfraw" => "7.0.0",
-    "__nv_cvt_float_to_fp4" => "7.0.0",
-    "__nv_cvt_float2_to_fp4x2" => "7.0.0",
-    "__nv_cvt_double_to_fp4" => "7.0.0",
-    "__nv_cvt_double2_to_fp4x2" => "7.0.0",
-    "__nv_cvt_bfloat16raw_to_fp4" => "7.0.0",
-    "__nv_cvt_bfloat16raw2_to_fp4x2" => "7.0.0",
-    "__NV_E2M1" => "7.0.0",
-    "CUmemRangeHandleType_enum" => "7.0.0",
-    "CUmemRangeHandleType" => "7.0.0",
-    "CUmemRangeFlags_enum" => "7.0.0",
-    "CUmemRangeFlags" => "7.0.0",
-    "CUlaunchAttribute_st" => "7.0.0",
-    "CUlaunchAttribute" => "7.0.0",
-    "CU_MEM_RANGE_HANDLE_TYPE_MAX" => "7.0.0",
-    "CU_MEM_RANGE_HANDLE_TYPE_DMA_BUF_FD" => "7.0.0",
-    "CU_MEM_RANGE_FLAG_DMA_BUF_MAPPING_TYPE_PCIE" => "7.0.0",
-    "CUTENSOR_WORKSPACE_DEFAULT" => "7.0.0",
-    "CUTENSOR_R_8U" => "7.0.0",
-    "CUTENSOR_R_8I" => "7.0.0",
-    "CUTENSOR_R_64U" => "7.0.0",
-    "CUTENSOR_R_64I" => "7.0.0",
-    "CUTENSOR_R_64F" => "7.0.0",
-    "CUTENSOR_R_4U" => "7.0.0",
-    "CUTENSOR_R_4I" => "7.0.0",
-    "CUTENSOR_R_32U" => "7.0.0",
-    "CUTENSOR_R_32I" => "7.0.0",
-    "CUTENSOR_R_32F" => "7.0.0",
-    "CUTENSOR_R_16U" => "7.0.0",
-    "CUTENSOR_R_16I" => "7.0.0",
-    "CUTENSOR_R_16F" => "7.0.0",
-    "CUTENSOR_R_16BF" => "7.0.0",
-    "CUTENSOR_PLAN_REQUIRED_WORKSPACE" => "7.0.0",
-    "CUTENSOR_PLAN_PREFERENCE_KERNEL_RANK" => "7.0.0",
-    "CUTENSOR_PLAN_PREFERENCE_JIT" => "7.0.0",
-    "CUTENSOR_PLAN_PREFERENCE_INCREMENTAL_COUNT" => "7.0.0",
-    "CUTENSOR_PLAN_PREFERENCE_CACHE_MODE" => "7.0.0",
-    "CUTENSOR_PLAN_PREFERENCE_AUTOTUNE_MODE" => "7.0.0",
-    "CUTENSOR_PLAN_PREFERENCE_ALGO" => "7.0.0",
-    "CUTENSOR_OP_TANH" => "7.0.0",
-    "CUTENSOR_OP_TAN" => "7.0.0",
-    "CUTENSOR_OP_SINH" => "7.0.0",
-    "CUTENSOR_OP_SIN" => "7.0.0",
-    "CUTENSOR_OP_SIGMOID" => "7.0.0",
-    "CUTENSOR_OP_RELU" => "7.0.0",
-    "CUTENSOR_OP_RCP" => "7.0.0",
-    "CUTENSOR_OP_NEG" => "7.0.0",
-    "CUTENSOR_OP_LOG" => "7.0.0",
-    "CUTENSOR_OP_FLOOR" => "7.0.0",
-    "CUTENSOR_OP_EXP" => "7.0.0",
-    "CUTENSOR_OP_COSH" => "7.0.0",
-    "CUTENSOR_OP_COS" => "7.0.0",
-    "CUTENSOR_OP_CONJ" => "7.0.0",
-    "CUTENSOR_OP_CEIL" => "7.0.0",
-    "CUTENSOR_OP_ATANH" => "7.0.0",
-    "CUTENSOR_OP_ATAN" => "7.0.0",
-    "CUTENSOR_OP_ASINH" => "7.0.0",
-    "CUTENSOR_OP_ASIN" => "7.0.0",
-    "CUTENSOR_OP_ACOSH" => "7.0.0",
-    "CUTENSOR_OP_ACOS" => "7.0.0",
-    "CUTENSOR_OP_ABS" => "7.0.0",
-    "CUTENSOR_OPERATION_DESCRIPTOR_TAG" => "7.0.0",
-    "CUTENSOR_OPERATION_DESCRIPTOR_SCALAR_TYPE" => "7.0.0",
-    "CUTENSOR_OPERATION_DESCRIPTOR_PADDING_VALUE" => "7.0.0",
-    "CUTENSOR_OPERATION_DESCRIPTOR_PADDING_RIGHT" => "7.0.0",
-    "CUTENSOR_OPERATION_DESCRIPTOR_PADDING_LEFT" => "7.0.0",
-    "CUTENSOR_OPERATION_DESCRIPTOR_MOVED_BYTES" => "7.0.0",
-    "CUTENSOR_OPERATION_DESCRIPTOR_FLOPS" => "7.0.0",
-    "CUTENSOR_JIT_MODE_NONE" => "7.0.0",
-    "CUTENSOR_JIT_MODE_DEFAULT" => "7.0.0",
-    "CUTENSOR_C_8U" => "7.0.0",
-    "CUTENSOR_C_8I" => "7.0.0",
-    "CUTENSOR_C_64U" => "7.0.0",
-    "CUTENSOR_C_64I" => "7.0.0",
-    "CUTENSOR_C_64F" => "7.0.0",
-    "CUTENSOR_C_4U" => "7.0.0",
-    "CUTENSOR_C_4I" => "7.0.0",
-    "CUTENSOR_C_32U" => "7.0.0",
-    "CUTENSOR_C_32I" => "7.0.0",
-    "CUTENSOR_C_32F" => "7.0.0",
-    "CUTENSOR_C_16U" => "7.0.0",
-    "CUTENSOR_C_16I" => "7.0.0",
-    "CUTENSOR_C_16F" => "7.0.0",
-    "CUTENSOR_C_16BF" => "7.0.0",
-    "CUTENSOR_COMPUTE_8U" => "7.0.0",
-    "CUTENSOR_COMPUTE_8I" => "7.0.0",
-    "CUTENSOR_COMPUTE_64F" => "7.0.0",
-    "CUTENSOR_COMPUTE_32U" => "7.0.0",
-    "CUTENSOR_COMPUTE_32I" => "7.0.0",
-    "CUTENSOR_COMPUTE_32F" => "7.0.0",
-    "CUTENSOR_COMPUTE_16F" => "7.0.0",
-    "CUTENSOR_COMPUTE_16BF" => "7.0.0",
-    "CUTENSOR_CACHE_MODE_PEDANTIC" => "7.0.0",
-    "CUTENSOR_CACHE_MODE_NONE" => "7.0.0",
-    "CUTENSOR_AUTOTUNE_NONE" => "7.0.0",
-    "CUTENSOR_AUTOTUNE_MODE_NONE" => "7.0.0",
-    "CUTENSOR_AUTOTUNE_MODE_INCREMENTAL" => "7.0.0",
-    "CUTENSOR_AUTOTUNE_INCREMENTAL" => "7.0.0",
-    "CUDA_R_8F_UE8M0" => "7.0.0",
-    "CUDA_R_6F_E3M2" => "7.0.0",
-    "CUDA_R_6F_E2M3" => "7.0.0",
-    "CUDA_R_4F_E2M1" => "7.0.0",
-    "CUDART_ZERO_FP16" => "7.0.0",
-    "CUDART_ONE_FP16" => "7.0.0",
-    "CUDART_NEG_ZERO_FP16" => "7.0.0",
-    "CUDART_NAN_FP16" => "7.0.0",
-    "CUDART_MIN_DENORM_FP16" => "7.0.0",
-    "CUDART_MAX_NORMAL_FP16" => "7.0.0",
-    "CUDART_INF_FP16" => "7.0.0",
-    "CUBLASLT_MATMUL_MATRIX_SCALE_VEC32_UE8M0" => "7.0.0",
-    "CUBLASLT_MATMUL_MATRIX_SCALE_VEC16_UE4M3" => "7.0.0",
-    "CUBLASLT_MATMUL_MATRIX_SCALE_VEC128_32F" => "7.0.0",
-    "CUBLASLT_MATMUL_MATRIX_SCALE_SCALAR_32F" => "7.0.0",
-    "CUBLASLT_MATMUL_MATRIX_SCALE_OUTER_VEC_32F" => "7.0.0",
-    "CUBLASLT_MATMUL_MATRIX_SCALE_END" => "7.0.0",
-    "CUBLASLT_MATMUL_MATRIX_SCALE_BLK128x128_32F" => "7.0.0"
+
 );
 
 $print_stats = 1 if $examine;
@@ -1862,188 +1681,6 @@ sub subst {
 }
 
 sub experimentalSubstitutions {
-    subst("cuMemGetHandleForAddressRange", "hipMemGetHandleForAddressRange", "memory");
-    subst("cuLaunchKernelEx", "hipDrvLaunchKernelEx", "execution");
-    subst("cudaLaunchKernelExC", "hipLaunchKernelExC", "execution");
-    subst("cutensorContract", "hiptensorContract", "library");
-    subst("cutensorCreateContraction", "hiptensorCreateContraction", "library");
-    subst("cutensorCreateElementwiseBinary", "hiptensorCreateElementwiseBinary", "library");
-    subst("cutensorCreateElementwiseTrinary", "hiptensorCreateElementwiseTrinary", "library");
-    subst("cutensorCreatePermutation", "hiptensorCreatePermutation", "library");
-    subst("cutensorCreatePlan", "hiptensorCreatePlan", "library");
-    subst("cutensorCreatePlanPreference", "hiptensorCreatePlanPreference", "library");
-    subst("cutensorCreateReduction", "hiptensorCreateReduction", "library");
-    subst("cutensorCreateTensorDescriptor", "hiptensorCreateTensorDescriptor", "library");
-    subst("cutensorDestroyOperationDescriptor", "hiptensorDestroyOperationDescriptor", "library");
-    subst("cutensorDestroyPlan", "hiptensorDestroyPlan", "library");
-    subst("cutensorDestroyPlanPreference", "hiptensorDestroyPlanPreference", "library");
-    subst("cutensorDestroyTensorDescriptor", "hiptensorDestroyTensorDescriptor", "library");
-    subst("cutensorElementwiseBinaryExecute", "hiptensorElementwiseBinaryExecute", "library");
-    subst("cutensorElementwiseTrinaryExecute", "hiptensorElementwiseTrinaryExecute", "library");
-    subst("cutensorEstimateWorkspaceSize", "hiptensorEstimateWorkspaceSize", "library");
-    subst("cutensorHandleReadPlanCacheFromFile", "hiptensorHandleReadPlanCacheFromFile", "library");
-    subst("cutensorHandleResizePlanCache", "hiptensorHandleResizePlanCache", "library");
-    subst("cutensorHandleWritePlanCacheToFile", "hiptensorHandleWritePlanCacheToFile", "library");
-    subst("cutensorOperationDescriptorGetAttribute", "hiptensorOperationDescriptorGetAttribute", "library");
-    subst("cutensorOperationDescriptorSetAttribute", "hiptensorOperationDescriptorSetAttribute", "library");
-    subst("cutensorPermute", "hiptensorPermute", "library");
-    subst("cutensorPlanGetAttribute", "hiptensorPlanGetAttribute", "library");
-    subst("cutensorPlanPreferenceSetAttribute", "hiptensorPlanPreferenceSetAttribute", "library");
-    subst("cutensorReadKernelCacheFromFile", "hiptensorReadKernelCacheFromFile", "library");
-    subst("cutensorReduce", "hiptensorReduce", "library");
-    subst("cutensorWriteKernelCacheToFile", "hiptensorWriteKernelCacheToFile", "library");
-    subst("__nv_cvt_bfloat16raw2_to_fp4x2", "__hip_cvt_bfloat16raw2_to_fp4x2", "device_function");
-    subst("__nv_cvt_bfloat16raw_to_fp4", "__hip_cvt_bfloat16raw_to_fp4", "device_function");
-    subst("__nv_cvt_double2_to_fp4x2", "__hip_cvt_double2_to_fp4x2", "device_function");
-    subst("__nv_cvt_double_to_fp4", "__hip_cvt_double_to_fp4", "device_function");
-    subst("__nv_cvt_float2_to_fp4x2", "__hip_cvt_float2_to_fp4x2", "device_function");
-    subst("__nv_cvt_float_to_fp4", "__hip_cvt_float_to_fp4", "device_function");
-    subst("__nv_cvt_fp4_to_halfraw", "__hip_cvt_fp4_to_halfraw", "device_function");
-    subst("__nv_cvt_fp4x2_to_halfraw2", "__hip_cvt_fp4x2_to_halfraw2", "device_function");
-    subst("__nv_cvt_halfraw2_to_fp4x2", "__hip_cvt_halfraw2_to_fp4x2", "device_function");
-    subst("__nv_cvt_halfraw_to_fp4", "__hip_cvt_halfraw_to_fp4", "device_function");
-    subst("CUDART_INF_FP16", "HIPRT_INF_FP16", "device_type");
-    subst("CUDART_MAX_NORMAL_FP16", "HIPRT_MAX_NORMAL_FP16", "device_type");
-    subst("CUDART_MIN_DENORM_FP16", "HIPRT_MIN_DENORM_FP16", "device_type");
-    subst("CUDART_NAN_FP16", "HIPRT_NAN_FP16", "device_type");
-    subst("CUDART_NEG_ZERO_FP16", "HIPRT_NEG_ZERO_FP16", "device_type");
-    subst("CUDART_ONE_FP16", "HIPRT_ONE_FP16", "device_type");
-    subst("CUDART_ZERO_FP16", "HIPRT_ZERO_FP16", "device_type");
-    subst("__nv_fp4_e2m1", "__hip_fp4_e2m1", "device_type");
-    subst("__nv_fp4_interpretation_t", "__hip_fp4_interpretation_t", "device_type");
-    subst("__nv_fp4_storage_t", "__hip_fp4_storage_t", "device_type");
-    subst("__nv_fp4x2_e2m1", "__hip_fp4x2_e2m1", "device_type");
-    subst("__nv_fp4x2_storage_t", "__hip_fp4x2_storage_t", "device_type");
-    subst("__nv_fp4x4_e2m1", "__hip_fp4x4_e2m1", "device_type");
-    subst("__nv_fp4x4_storage_t", "__hip_fp4x4_storage_t", "device_type");
-    subst("cudaRoundMode", "hipRoundMode", "device_type");
-    subst("CUlaunchAttribute", "hipLaunchAttribute", "type");
-    subst("CUlaunchAttribute_st", "hipLaunchAttribute_st", "type");
-    subst("CUmemRangeFlags", "hipMemRangeFlags", "type");
-    subst("CUmemRangeFlags_enum", "hipMemRangeFlags", "type");
-    subst("CUmemRangeHandleType", "hipMemRangeHandleType", "type");
-    subst("CUmemRangeHandleType_enum", "hipMemRangeHandleType", "type");
-    subst("cublasLtMatmulMatrixScale_t", "hipblasLtMatmulMatrixScale_t", "type");
-    subst("cudaLaunchAttribute", "hipLaunchAttribute", "type");
-    subst("cudaLaunchAttribute_st", "hipLaunchAttribute_st", "type");
-    subst("cudaLaunchConfig_st", "hipLaunchConfig_st", "type");
-    subst("cudaLaunchConfig_t", "hipLaunchConfig_t", "type");
-    subst("cutensorAutotuneMode_t", "hiptensorAutotuneMode_t", "type");
-    subst("cutensorCacheMode_t", "hiptensorCacheMode_t", "type");
-    subst("cutensorComputeDescriptor_t", "hiptensorComputeDescriptor_t", "type");
-    subst("cutensorDataType_t", "hiptensorDataType_t", "type");
-    subst("cutensorHandle", "hiptensorHandle", "type");
-    subst("cutensorJitMode_t", "hiptensorJitMode_t", "type");
-    subst("cutensorOperationDescriptor", "hiptensorOperationDescriptor", "type");
-    subst("cutensorOperationDescriptorAttribute_t", "hiptensorOperationDescriptorAttribute_t", "type");
-    subst("cutensorOperationDescriptor_t", "hiptensorOperationDescriptor_t", "type");
-    subst("cutensorPlan", "hiptensorPlan", "type");
-    subst("cutensorPlanAttribute_t", "hiptensorPlanAttribute_t", "type");
-    subst("cutensorPlanPreference", "hiptensorPlanPreference", "type");
-    subst("cutensorPlanPreferenceAttribute_t", "hiptensorPlanPreferenceAttribute_t", "type");
-    subst("cutensorPlanPreference_t", "hiptensorPlanPreference_t", "type");
-    subst("cutensorPlan_t", "hiptensorPlan_t", "type");
-    subst("cutensorTensorDescriptor", "hiptensorTensorDescriptor", "type");
-    subst("CUBLASLT_MATMUL_MATRIX_SCALE_BLK128x128_32F", "HIPBLASLT_MATMUL_MATRIX_SCALE_BLK128x128_32F", "numeric_literal");
-    subst("CUBLASLT_MATMUL_MATRIX_SCALE_END", "HIPBLASLT_MATMUL_MATRIX_SCALE_END", "numeric_literal");
-    subst("CUBLASLT_MATMUL_MATRIX_SCALE_OUTER_VEC_32F", "HIPBLASLT_MATMUL_MATRIX_SCALE_OUTER_VEC_32F", "numeric_literal");
-    subst("CUBLASLT_MATMUL_MATRIX_SCALE_SCALAR_32F", "HIPBLASLT_MATMUL_MATRIX_SCALE_SCALAR_32F", "numeric_literal");
-    subst("CUBLASLT_MATMUL_MATRIX_SCALE_VEC128_32F", "HIPBLASLT_MATMUL_MATRIX_SCALE_VEC128_32F", "numeric_literal");
-    subst("CUBLASLT_MATMUL_MATRIX_SCALE_VEC16_UE4M3", "HIPBLASLT_MATMUL_MATRIX_SCALE_VEC16_UE4M3", "numeric_literal");
-    subst("CUBLASLT_MATMUL_MATRIX_SCALE_VEC32_UE8M0", "HIPBLASLT_MATMUL_MATRIX_SCALE_VEC32_UE8M0", "numeric_literal");
-    subst("CUDA_R_4F_E2M1", "HIP_R_4F_E2M1", "numeric_literal");
-    subst("CUDA_R_6F_E2M3", "HIP_R_6F_E2M3", "numeric_literal");
-    subst("CUDA_R_6F_E3M2", "HIP_R_6F_E3M2", "numeric_literal");
-    subst("CUDA_R_8F_UE8M0", "HIP_R_8F_UE8M0", "numeric_literal");
-    subst("CUTENSOR_AUTOTUNE_INCREMENTAL", "HIPTENSOR_AUTOTUNE_MODE_INCREMENTAL", "numeric_literal");
-    subst("CUTENSOR_AUTOTUNE_MODE_INCREMENTAL", "HIPTENSOR_AUTOTUNE_MODE_INCREMENTAL", "numeric_literal");
-    subst("CUTENSOR_AUTOTUNE_MODE_NONE", "HIPTENSOR_AUTOTUNE_MODE_NONE", "numeric_literal");
-    subst("CUTENSOR_AUTOTUNE_NONE", "HIPTENSOR_AUTOTUNE_MODE_NONE", "numeric_literal");
-    subst("CUTENSOR_CACHE_MODE_NONE", "HIPTENSOR_CACHE_MODE_NONE", "numeric_literal");
-    subst("CUTENSOR_CACHE_MODE_PEDANTIC", "HIPTENSOR_CACHE_MODE_PEDANTIC", "numeric_literal");
-    subst("CUTENSOR_COMPUTE_16BF", "HIPTENSOR_COMPUTE_DESC_16BF", "numeric_literal");
-    subst("CUTENSOR_COMPUTE_16F", "HIPTENSOR_COMPUTE_DESC_16F", "numeric_literal");
-    subst("CUTENSOR_COMPUTE_32F", "HIPTENSOR_COMPUTE_DESC_32F", "numeric_literal");
-    subst("CUTENSOR_COMPUTE_32I", "HIPTENSOR_COMPUTE_DESC_32I", "numeric_literal");
-    subst("CUTENSOR_COMPUTE_32U", "HIPTENSOR_COMPUTE_DESC_32U", "numeric_literal");
-    subst("CUTENSOR_COMPUTE_64F", "HIPTENSOR_COMPUTE_DESC_64F", "numeric_literal");
-    subst("CUTENSOR_COMPUTE_8I", "HIPTENSOR_COMPUTE_DESC_8I", "numeric_literal");
-    subst("CUTENSOR_COMPUTE_8U", "HIPTENSOR_COMPUTE_DESC_8U", "numeric_literal");
-    subst("CUTENSOR_C_16BF", "HIPTENSOR_C_16BF", "numeric_literal");
-    subst("CUTENSOR_C_16F", "HIPTENSOR_C_16F", "numeric_literal");
-    subst("CUTENSOR_C_16I", "HIPTENSOR_C_16I", "numeric_literal");
-    subst("CUTENSOR_C_16U", "HIPTENSOR_C_16U", "numeric_literal");
-    subst("CUTENSOR_C_32F", "HIPTENSOR_C_32F", "numeric_literal");
-    subst("CUTENSOR_C_32I", "HIPTENSOR_C_32I", "numeric_literal");
-    subst("CUTENSOR_C_32U", "HIPTENSOR_C_32U", "numeric_literal");
-    subst("CUTENSOR_C_4I", "HIPTENSOR_C_4I", "numeric_literal");
-    subst("CUTENSOR_C_4U", "HIPTENSOR_C_4U", "numeric_literal");
-    subst("CUTENSOR_C_64F", "HIPTENSOR_C_64F", "numeric_literal");
-    subst("CUTENSOR_C_64I", "HIPTENSOR_C_64I", "numeric_literal");
-    subst("CUTENSOR_C_64U", "HIPTENSOR_C_64U", "numeric_literal");
-    subst("CUTENSOR_C_8I", "HIPTENSOR_C_8I", "numeric_literal");
-    subst("CUTENSOR_C_8U", "HIPTENSOR_C_8U", "numeric_literal");
-    subst("CUTENSOR_JIT_MODE_DEFAULT", "HIPTENSOR_JIT_MODE_DEFAULT", "numeric_literal");
-    subst("CUTENSOR_JIT_MODE_NONE", "HIPTENSOR_JIT_MODE_NONE", "numeric_literal");
-    subst("CUTENSOR_OPERATION_DESCRIPTOR_FLOPS", "HIPTENSOR_OPERATION_DESCRIPTOR_FLOPS", "numeric_literal");
-    subst("CUTENSOR_OPERATION_DESCRIPTOR_MOVED_BYTES", "HIPTENSOR_OPERATION_DESCRIPTOR_MOVED_BYTES", "numeric_literal");
-    subst("CUTENSOR_OPERATION_DESCRIPTOR_PADDING_LEFT", "HIPTENSOR_OPERATION_DESCRIPTOR_PADDING_LEFT", "numeric_literal");
-    subst("CUTENSOR_OPERATION_DESCRIPTOR_PADDING_RIGHT", "HIPTENSOR_OPERATION_DESCRIPTOR_PADDING_RIGHT", "numeric_literal");
-    subst("CUTENSOR_OPERATION_DESCRIPTOR_PADDING_VALUE", "HIPTENSOR_OPERATION_DESCRIPTOR_PADDING_VALUE", "numeric_literal");
-    subst("CUTENSOR_OPERATION_DESCRIPTOR_SCALAR_TYPE", "HIPTENSOR_OPERATION_DESCRIPTOR_SCALAR_TYPE", "numeric_literal");
-    subst("CUTENSOR_OPERATION_DESCRIPTOR_TAG", "HIPTENSOR_OPERATION_DESCRIPTOR_TAG", "numeric_literal");
-    subst("CUTENSOR_OP_ABS", "HIPTENSOR_OP_ABS", "numeric_literal");
-    subst("CUTENSOR_OP_ACOS", "HIPTENSOR_OP_ACOS", "numeric_literal");
-    subst("CUTENSOR_OP_ACOSH", "HIPTENSOR_OP_ACOSH", "numeric_literal");
-    subst("CUTENSOR_OP_ASIN", "HIPTENSOR_OP_ASIN", "numeric_literal");
-    subst("CUTENSOR_OP_ASINH", "HIPTENSOR_OP_ASINH", "numeric_literal");
-    subst("CUTENSOR_OP_ATAN", "HIPTENSOR_OP_ATAN", "numeric_literal");
-    subst("CUTENSOR_OP_ATANH", "HIPTENSOR_OP_ATANH", "numeric_literal");
-    subst("CUTENSOR_OP_CEIL", "HIPTENSOR_OP_CEIL", "numeric_literal");
-    subst("CUTENSOR_OP_CONJ", "HIPTENSOR_OP_CONJ", "numeric_literal");
-    subst("CUTENSOR_OP_COS", "HIPTENSOR_OP_COS", "numeric_literal");
-    subst("CUTENSOR_OP_COSH", "HIPTENSOR_OP_COSH", "numeric_literal");
-    subst("CUTENSOR_OP_EXP", "HIPTENSOR_OP_EXP", "numeric_literal");
-    subst("CUTENSOR_OP_FLOOR", "HIPTENSOR_OP_FLOOR", "numeric_literal");
-    subst("CUTENSOR_OP_LOG", "HIPTENSOR_OP_LOG", "numeric_literal");
-    subst("CUTENSOR_OP_NEG", "HIPTENSOR_OP_NEG", "numeric_literal");
-    subst("CUTENSOR_OP_RCP", "HIPTENSOR_OP_RCP", "numeric_literal");
-    subst("CUTENSOR_OP_RELU", "HIPTENSOR_OP_RELU", "numeric_literal");
-    subst("CUTENSOR_OP_SIGMOID", "HIPTENSOR_OP_SIGMOID", "numeric_literal");
-    subst("CUTENSOR_OP_SIN", "HIPTENSOR_OP_SIN", "numeric_literal");
-    subst("CUTENSOR_OP_SINH", "HIPTENSOR_OP_SINH", "numeric_literal");
-    subst("CUTENSOR_OP_TAN", "HIPTENSOR_OP_TAN", "numeric_literal");
-    subst("CUTENSOR_OP_TANH", "HIPTENSOR_OP_TANH", "numeric_literal");
-    subst("CUTENSOR_PLAN_PREFERENCE_ALGO", "HIPTENSOR_PLAN_PREFERENCE_ALGO", "numeric_literal");
-    subst("CUTENSOR_PLAN_PREFERENCE_AUTOTUNE_MODE", "HIPTENSOR_PLAN_PREFERENCE_AUTOTUNE_MODE", "numeric_literal");
-    subst("CUTENSOR_PLAN_PREFERENCE_CACHE_MODE", "HIPTENSOR_PLAN_PREFERENCE_CACHE_MODE", "numeric_literal");
-    subst("CUTENSOR_PLAN_PREFERENCE_INCREMENTAL_COUNT", "HIPTENSOR_PLAN_PREFERENCE_INCREMENTAL_COUNT", "numeric_literal");
-    subst("CUTENSOR_PLAN_PREFERENCE_JIT", "HIPTENSOR_PLAN_PREFERENCE_JIT", "numeric_literal");
-    subst("CUTENSOR_PLAN_PREFERENCE_KERNEL_RANK", "HIPTENSOR_PLAN_PREFERENCE_KERNEL_RANK", "numeric_literal");
-    subst("CUTENSOR_PLAN_REQUIRED_WORKSPACE", "HIPTENSOR_PLAN_REQUIRED_WORKSPACE", "numeric_literal");
-    subst("CUTENSOR_R_16BF", "HIPTENSOR_R_16BF", "numeric_literal");
-    subst("CUTENSOR_R_16F", "HIPTENSOR_R_16F", "numeric_literal");
-    subst("CUTENSOR_R_16I", "HIPTENSOR_R_16I", "numeric_literal");
-    subst("CUTENSOR_R_16U", "HIPTENSOR_R_16U", "numeric_literal");
-    subst("CUTENSOR_R_32F", "HIPTENSOR_R_32F", "numeric_literal");
-    subst("CUTENSOR_R_32I", "HIPTENSOR_R_32I", "numeric_literal");
-    subst("CUTENSOR_R_32U", "HIPTENSOR_R_32U", "numeric_literal");
-    subst("CUTENSOR_R_4I", "HIPTENSOR_R_4I", "numeric_literal");
-    subst("CUTENSOR_R_4U", "HIPTENSOR_R_4U", "numeric_literal");
-    subst("CUTENSOR_R_64F", "HIPTENSOR_R_64F", "numeric_literal");
-    subst("CUTENSOR_R_64I", "HIPTENSOR_R_64I", "numeric_literal");
-    subst("CUTENSOR_R_64U", "HIPTENSOR_R_64U", "numeric_literal");
-    subst("CUTENSOR_R_8I", "HIPTENSOR_R_8I", "numeric_literal");
-    subst("CUTENSOR_R_8U", "HIPTENSOR_R_8U", "numeric_literal");
-    subst("CUTENSOR_WORKSPACE_DEFAULT", "HIPTENSOR_WORKSPACE_DEFAULT", "numeric_literal");
-    subst("CU_MEM_RANGE_FLAG_DMA_BUF_MAPPING_TYPE_PCIE", "hipMemRangeFlagDmaBufMappingTypePcie", "numeric_literal");
-    subst("CU_MEM_RANGE_HANDLE_TYPE_DMA_BUF_FD", "hipMemRangeHandleTypeDmaBufFd", "numeric_literal");
-    subst("CU_MEM_RANGE_HANDLE_TYPE_MAX", "hipMemRangeHandleTypeMax", "numeric_literal");
-    subst("__NV_E2M1", "__HIP_E2M1", "numeric_literal");
-    subst("cudaRoundMinInf", "hipRoundMinInf", "numeric_literal");
-    subst("cudaRoundNearest", "hipRoundNearest", "numeric_literal");
-    subst("cudaRoundPosInf", "hipRoundPosInf", "numeric_literal");
-    subst("cudaRoundZero", "hipRoundZero", "numeric_literal");
 }
 
 sub rocSubstitutions {
@@ -4324,6 +3961,7 @@ sub simpleSubstitutions {
     subst("cuMemFree_v2", "hipFree", "memory");
     subst("cuMemGetAddressRange", "hipMemGetAddressRange", "memory");
     subst("cuMemGetAddressRange_v2", "hipMemGetAddressRange", "memory");
+    subst("cuMemGetHandleForAddressRange", "hipMemGetHandleForAddressRange", "memory");
     subst("cuMemGetInfo", "hipMemGetInfo", "memory");
     subst("cuMemGetInfo_v2", "hipMemGetInfo", "memory");
     subst("cuMemHostAlloc", "hipHostAlloc", "memory");
@@ -4561,6 +4199,7 @@ sub simpleSubstitutions {
     subst("cuLaunchCooperativeKernelMultiDevice", "hipModuleLaunchCooperativeKernelMultiDevice", "execution");
     subst("cuLaunchHostFunc", "hipLaunchHostFunc", "execution");
     subst("cuLaunchKernel", "hipModuleLaunchKernel", "execution");
+    subst("cuLaunchKernelEx", "hipDrvLaunchKernelEx", "execution");
     subst("cudaConfigureCall", "hipConfigureCall", "execution");
     subst("cudaFuncGetAttributes", "hipFuncGetAttributes", "execution");
     subst("cudaFuncSetAttribute", "hipFuncSetAttribute", "execution");
@@ -4571,6 +4210,7 @@ sub simpleSubstitutions {
     subst("cudaLaunchCooperativeKernelMultiDevice", "hipLaunchCooperativeKernelMultiDevice", "execution");
     subst("cudaLaunchHostFunc", "hipLaunchHostFunc", "execution");
     subst("cudaLaunchKernel", "hipLaunchKernel", "execution");
+    subst("cudaLaunchKernelExC", "hipLaunchKernelExC", "execution");
     subst("cudaSetupArgument", "hipSetupArgument", "execution");
     subst("cuDeviceGetGraphMemAttribute", "hipDeviceGetGraphMemAttribute", "graph");
     subst("cuDeviceGraphMemTrim", "hipDeviceGraphMemTrim", "graph");
@@ -6627,11 +6267,30 @@ sub simpleSubstitutions {
     subst("cusparseZnnz", "hipsparseZnnz", "library");
     subst("cusparseZnnz_compress", "hipsparseZnnz_compress", "library");
     subst("cusparseZsctr", "hipsparseZsctr", "library");
+    subst("cutensorContract", "hiptensorContract", "library");
     subst("cutensorContraction", "hiptensorContraction", "library");
     subst("cutensorCreate", "hiptensorCreate", "library");
+    subst("cutensorCreateContraction", "hiptensorCreateContraction", "library");
+    subst("cutensorCreateElementwiseBinary", "hiptensorCreateElementwiseBinary", "library");
+    subst("cutensorCreateElementwiseTrinary", "hiptensorCreateElementwiseTrinary", "library");
+    subst("cutensorCreatePermutation", "hiptensorCreatePermutation", "library");
+    subst("cutensorCreatePlan", "hiptensorCreatePlan", "library");
+    subst("cutensorCreatePlanPreference", "hiptensorCreatePlanPreference", "library");
+    subst("cutensorCreateReduction", "hiptensorCreateReduction", "library");
+    subst("cutensorCreateTensorDescriptor", "hiptensorCreateTensorDescriptor", "library");
     subst("cutensorDestroy", "hiptensorDestroy", "library");
+    subst("cutensorDestroyOperationDescriptor", "hiptensorDestroyOperationDescriptor", "library");
+    subst("cutensorDestroyPlan", "hiptensorDestroyPlan", "library");
+    subst("cutensorDestroyPlanPreference", "hiptensorDestroyPlanPreference", "library");
+    subst("cutensorDestroyTensorDescriptor", "hiptensorDestroyTensorDescriptor", "library");
+    subst("cutensorElementwiseBinaryExecute", "hiptensorElementwiseBinaryExecute", "library");
+    subst("cutensorElementwiseTrinaryExecute", "hiptensorElementwiseTrinaryExecute", "library");
+    subst("cutensorEstimateWorkspaceSize", "hiptensorEstimateWorkspaceSize", "library");
     subst("cutensorGetCudartVersion", "hiptensorGetHiprtVersion", "library");
     subst("cutensorGetErrorString", "hiptensorGetErrorString", "library");
+    subst("cutensorHandleReadPlanCacheFromFile", "hiptensorHandleReadPlanCacheFromFile", "library");
+    subst("cutensorHandleResizePlanCache", "hiptensorHandleResizePlanCache", "library");
+    subst("cutensorHandleWritePlanCacheToFile", "hiptensorHandleWritePlanCacheToFile", "library");
     subst("cutensorInitTensorDescriptor", "hiptensorInitTensorDescriptor", "library");
     subst("cutensorLoggerForceDisable", "hiptensorLoggerForceDisable", "library");
     subst("cutensorLoggerOpenFile", "hiptensorLoggerOpenFile", "library");
@@ -6639,8 +6298,16 @@ sub simpleSubstitutions {
     subst("cutensorLoggerSetFile", "hiptensorLoggerSetFile", "library");
     subst("cutensorLoggerSetLevel", "hiptensorLoggerSetLevel", "library");
     subst("cutensorLoggerSetMask", "hiptensorLoggerSetMask", "library");
+    subst("cutensorOperationDescriptorGetAttribute", "hiptensorOperationDescriptorGetAttribute", "library");
+    subst("cutensorOperationDescriptorSetAttribute", "hiptensorOperationDescriptorSetAttribute", "library");
     subst("cutensorPermutation", "hiptensorPermutation", "library");
+    subst("cutensorPermute", "hiptensorPermute", "library");
+    subst("cutensorPlanGetAttribute", "hiptensorPlanGetAttribute", "library");
+    subst("cutensorPlanPreferenceSetAttribute", "hiptensorPlanPreferenceSetAttribute", "library");
+    subst("cutensorReadKernelCacheFromFile", "hiptensorReadKernelCacheFromFile", "library");
+    subst("cutensorReduce", "hiptensorReduce", "library");
     subst("cutensorReduction", "hiptensorReduction", "library");
+    subst("cutensorWriteKernelCacheToFile", "hiptensorWriteKernelCacheToFile", "library");
     subst("nvrtcAddNameExpression", "hiprtcAddNameExpression", "library");
     subst("nvrtcCompileProgram", "hiprtcCompileProgram", "library");
     subst("nvrtcCreateProgram", "hiprtcCreateProgram", "library");
@@ -6922,15 +6589,25 @@ sub simpleSubstitutions {
     subst("__mul24", "__mul24", "device_function");
     subst("__mul64hi", "__mul64hi", "device_function");
     subst("__mulhi", "__mulhi", "device_function");
+    subst("__nv_cvt_bfloat16raw2_to_fp4x2", "__hip_cvt_bfloat16raw2_to_fp4x2", "device_function");
     subst("__nv_cvt_bfloat16raw2_to_fp8x2", "__hip_cvt_bfloat16raw2_to_fp8x2", "device_function");
+    subst("__nv_cvt_bfloat16raw_to_fp4", "__hip_cvt_bfloat16raw_to_fp4", "device_function");
     subst("__nv_cvt_bfloat16raw_to_fp8", "__hip_cvt_bfloat16raw_to_fp8", "device_function");
+    subst("__nv_cvt_double2_to_fp4x2", "__hip_cvt_double2_to_fp4x2", "device_function");
     subst("__nv_cvt_double2_to_fp8x2", "__hip_cvt_double2_to_fp8x2", "device_function");
+    subst("__nv_cvt_double_to_fp4", "__hip_cvt_double_to_fp4", "device_function");
     subst("__nv_cvt_double_to_fp8", "__hip_cvt_double_to_fp8", "device_function");
+    subst("__nv_cvt_float2_to_fp4x2", "__hip_cvt_float2_to_fp4x2", "device_function");
     subst("__nv_cvt_float2_to_fp8x2", "__hip_cvt_float2_to_fp8x2", "device_function");
+    subst("__nv_cvt_float_to_fp4", "__hip_cvt_float_to_fp4", "device_function");
     subst("__nv_cvt_float_to_fp8", "__hip_cvt_float_to_fp8", "device_function");
+    subst("__nv_cvt_fp4_to_halfraw", "__hip_cvt_fp4_to_halfraw", "device_function");
+    subst("__nv_cvt_fp4x2_to_halfraw2", "__hip_cvt_fp4x2_to_halfraw2", "device_function");
     subst("__nv_cvt_fp8_to_halfraw", "__hip_cvt_fp8_to_halfraw", "device_function");
     subst("__nv_cvt_fp8x2_to_halfraw2", "__hip_cvt_fp8x2_to_halfraw2", "device_function");
+    subst("__nv_cvt_halfraw2_to_fp4x2", "__hip_cvt_halfraw2_to_fp4x2", "device_function");
     subst("__nv_cvt_halfraw2_to_fp8x2", "__hip_cvt_halfraw2_to_fp8x2", "device_function");
+    subst("__nv_cvt_halfraw_to_fp4", "__hip_cvt_halfraw_to_fp4", "device_function");
     subst("__nv_cvt_halfraw_to_fp8", "__hip_cvt_halfraw_to_fp8", "device_function");
     subst("__popc", "__popc", "device_function");
     subst("__popcll", "__popcll", "device_function");
@@ -7225,6 +6902,13 @@ sub simpleSubstitutions {
     subst("y1f", "y1f", "device_function");
     subst("yn", "yn", "device_function");
     subst("ynf", "ynf", "device_function");
+    subst("CUDART_INF_FP16", "HIPRT_INF_FP16", "device_type");
+    subst("CUDART_MAX_NORMAL_FP16", "HIPRT_MAX_NORMAL_FP16", "device_type");
+    subst("CUDART_MIN_DENORM_FP16", "HIPRT_MIN_DENORM_FP16", "device_type");
+    subst("CUDART_NAN_FP16", "HIPRT_NAN_FP16", "device_type");
+    subst("CUDART_NEG_ZERO_FP16", "HIPRT_NEG_ZERO_FP16", "device_type");
+    subst("CUDART_ONE_FP16", "HIPRT_ONE_FP16", "device_type");
+    subst("CUDART_ZERO_FP16", "HIPRT_ZERO_FP16", "device_type");
     subst("__half", "__half", "device_type");
     subst("__half2", "__half2", "device_type");
     subst("__half2_raw", "__half2_raw", "device_type");
@@ -7233,6 +6917,13 @@ sub simpleSubstitutions {
     subst("__nv_bfloat162", "__hip_bfloat162", "device_type");
     subst("__nv_bfloat162_raw", "__hip_bfloat162_raw", "device_type");
     subst("__nv_bfloat16_raw", "__hip_bfloat16_raw", "device_type");
+    subst("__nv_fp4_e2m1", "__hip_fp4_e2m1", "device_type");
+    subst("__nv_fp4_interpretation_t", "__hip_fp4_interpretation_t", "device_type");
+    subst("__nv_fp4_storage_t", "__hip_fp4_storage_t", "device_type");
+    subst("__nv_fp4x2_e2m1", "__hip_fp4x2_e2m1", "device_type");
+    subst("__nv_fp4x2_storage_t", "__hip_fp4x2_storage_t", "device_type");
+    subst("__nv_fp4x4_e2m1", "__hip_fp4x4_e2m1", "device_type");
+    subst("__nv_fp4x4_storage_t", "__hip_fp4x4_storage_t", "device_type");
     subst("__nv_fp8_e4m3", "__hip_fp8_e4m3_fnuz", "device_type");
     subst("__nv_fp8_e5m2", "__hip_fp8_e5m2_fnuz", "device_type");
     subst("__nv_fp8_interpretation_t", "__hip_fp8_interpretation_t", "device_type");
@@ -7244,6 +6935,7 @@ sub simpleSubstitutions {
     subst("__nv_fp8x4_e5m2", "__hip_fp8x4_e5m2_fnuz", "device_type");
     subst("__nv_fp8x4_storage_t", "__hip_fp8x4_storage_t", "device_type");
     subst("__nv_saturation_t", "__hip_saturation_t", "device_type");
+    subst("cudaRoundMode", "hipRoundMode", "device_type");
     subst("nv_bfloat16", "hip_bfloat16", "device_type");
     subst("caffe2\/core\/common_cudnn.h", "caffe2\/core\/hip\/common_miopen.h", "include");
     subst("caffe2\/operators\/spatial_batch_norm_op.h", "caffe2\/operators\/hip\/spatial_batch_norm_op_miopen.hip", "include");
@@ -7487,10 +7179,12 @@ sub simpleSubstitutions {
     subst("CUkernelNodeAttrValue", "hipKernelNodeAttrValue", "type");
     subst("CUkernelNodeAttrValue_union", "hipKernelNodeAttrValue", "type");
     subst("CUkernelNodeAttrValue_v1", "hipKernelNodeAttrValue", "type");
+    subst("CUlaunchAttribute", "hipLaunchAttribute", "type");
     subst("CUlaunchAttributeID", "hipLaunchAttributeID", "type");
     subst("CUlaunchAttributeID_enum", "hipLaunchAttributeID", "type");
     subst("CUlaunchAttributeValue", "hipLaunchAttributeValue", "type");
     subst("CUlaunchAttributeValue_union", "hipLaunchAttributeValue", "type");
+    subst("CUlaunchAttribute_st", "hipLaunchAttribute_st", "type");
     subst("CUlaunchConfig", "HIP_LAUNCH_CONFIG", "type");
     subst("CUlaunchConfig_st", "HIP_LAUNCH_CONFIG_st", "type");
     subst("CUlimit", "hipLimit_t", "type");
@@ -7531,6 +7225,10 @@ sub simpleSubstitutions {
     subst("CUmemPoolPtrExportData_v1", "hipMemPoolPtrExportData", "type");
     subst("CUmemPool_attribute", "hipMemPoolAttr", "type");
     subst("CUmemPool_attribute_enum", "hipMemPoolAttr", "type");
+    subst("CUmemRangeFlags", "hipMemRangeFlags", "type");
+    subst("CUmemRangeFlags_enum", "hipMemRangeFlags", "type");
+    subst("CUmemRangeHandleType", "hipMemRangeHandleType", "type");
+    subst("CUmemRangeHandleType_enum", "hipMemRangeHandleType", "type");
     subst("CUmem_advise", "hipMemoryAdvise", "type");
     subst("CUmem_advise_enum", "hipMemoryAdvise", "type");
     subst("CUmem_range_attribute", "hipMemRangeAttribute", "type");
@@ -7619,6 +7317,7 @@ sub simpleSubstitutions {
     subst("cublasLtMatmulDescOpaque_t", "hipblasLtMatmulDescOpaque_t", "type");
     subst("cublasLtMatmulDesc_t", "hipblasLtMatmulDesc_t", "type");
     subst("cublasLtMatmulHeuristicResult_t", "hipblasLtMatmulHeuristicResult_t", "type");
+    subst("cublasLtMatmulMatrixScale_t", "hipblasLtMatmulMatrixScale_t", "type");
     subst("cublasLtMatmulPreferenceAttributes_t", "hipblasLtMatmulPreferenceAttributes_t", "type");
     subst("cublasLtMatmulPreferenceOpaque_t", "hipblasLtMatmulPreferenceOpaque_t", "type");
     subst("cublasLtMatmulPreference_t", "hipblasLtMatmulPreference_t", "type");
@@ -7709,8 +7408,12 @@ sub simpleSubstitutions {
     subst("cudaKernelNodeAttrID", "hipKernelNodeAttrID", "type");
     subst("cudaKernelNodeAttrValue", "hipKernelNodeAttrValue", "type");
     subst("cudaKernelNodeParams", "hipKernelNodeParams", "type");
+    subst("cudaLaunchAttribute", "hipLaunchAttribute", "type");
     subst("cudaLaunchAttributeID", "hipLaunchAttributeID", "type");
     subst("cudaLaunchAttributeValue", "hipLaunchAttributeValue", "type");
+    subst("cudaLaunchAttribute_st", "hipLaunchAttribute_st", "type");
+    subst("cudaLaunchConfig_st", "hipLaunchConfig_st", "type");
+    subst("cudaLaunchConfig_t", "hipLaunchConfig_t", "type");
     subst("cudaLaunchParams", "hipLaunchParams", "type");
     subst("cudaLibXtDesc", "hipLibXtDesc", "type");
     subst("cudaLibXtDesc_t", "hipLibXtDesc_t", "type");
@@ -7913,12 +7616,28 @@ sub simpleSubstitutions {
     subst("cusparseSparseToDenseAlg_t", "hipsparseSparseToDenseAlg_t", "type");
     subst("cusparseStatus_t", "hipsparseStatus_t", "type");
     subst("cutensorAlgo_t", "hiptensorAlgo_t", "type");
+    subst("cutensorAutotuneMode_t", "hiptensorAutotuneMode_t", "type");
+    subst("cutensorCacheMode_t", "hiptensorCacheMode_t", "type");
+    subst("cutensorComputeDescriptor_t", "hiptensorComputeDescriptor_t", "type");
     subst("cutensorComputeType_t", "hiptensorComputeDescriptor_t", "type");
     subst("cutensorContractionPlan_t", "hiptensorContractionPlan_t", "type");
+    subst("cutensorDataType_t", "hiptensorDataType_t", "type");
+    subst("cutensorHandle", "hiptensorHandle", "type");
     subst("cutensorHandle_t", "hiptensorHandle_t", "type");
+    subst("cutensorJitMode_t", "hiptensorJitMode_t", "type");
     subst("cutensorLoggerCallback_t", "hiptensorLoggerCallback_t", "type");
+    subst("cutensorOperationDescriptor", "hiptensorOperationDescriptor", "type");
+    subst("cutensorOperationDescriptorAttribute_t", "hiptensorOperationDescriptorAttribute_t", "type");
+    subst("cutensorOperationDescriptor_t", "hiptensorOperationDescriptor_t", "type");
     subst("cutensorOperator_t", "hiptensorOperator_t", "type");
+    subst("cutensorPlan", "hiptensorPlan", "type");
+    subst("cutensorPlanAttribute_t", "hiptensorPlanAttribute_t", "type");
+    subst("cutensorPlanPreference", "hiptensorPlanPreference", "type");
+    subst("cutensorPlanPreferenceAttribute_t", "hiptensorPlanPreferenceAttribute_t", "type");
+    subst("cutensorPlanPreference_t", "hiptensorPlanPreference_t", "type");
+    subst("cutensorPlan_t", "hiptensorPlan_t", "type");
     subst("cutensorStatus_t", "hiptensorStatus_t", "type");
+    subst("cutensorTensorDescriptor", "hiptensorTensorDescriptor", "type");
     subst("cutensorTensorDescriptor_t", "hiptensorTensorDescriptor_t", "type");
     subst("cutensorWorksizePreference_t", "hiptensorWorksizePreference_t", "type");
     subst("gesvdjInfo_t", "hipsolverGesvdjInfo_t", "type");
@@ -7960,6 +7679,13 @@ sub simpleSubstitutions {
     subst("CUBLASLT_MATMUL_DESC_POINTER_MODE", "HIPBLASLT_MATMUL_DESC_POINTER_MODE", "numeric_literal");
     subst("CUBLASLT_MATMUL_DESC_TRANSA", "HIPBLASLT_MATMUL_DESC_TRANSA", "numeric_literal");
     subst("CUBLASLT_MATMUL_DESC_TRANSB", "HIPBLASLT_MATMUL_DESC_TRANSB", "numeric_literal");
+    subst("CUBLASLT_MATMUL_MATRIX_SCALE_BLK128x128_32F", "HIPBLASLT_MATMUL_MATRIX_SCALE_BLK128x128_32F", "numeric_literal");
+    subst("CUBLASLT_MATMUL_MATRIX_SCALE_END", "HIPBLASLT_MATMUL_MATRIX_SCALE_END", "numeric_literal");
+    subst("CUBLASLT_MATMUL_MATRIX_SCALE_OUTER_VEC_32F", "HIPBLASLT_MATMUL_MATRIX_SCALE_OUTER_VEC_32F", "numeric_literal");
+    subst("CUBLASLT_MATMUL_MATRIX_SCALE_SCALAR_32F", "HIPBLASLT_MATMUL_MATRIX_SCALE_SCALAR_32F", "numeric_literal");
+    subst("CUBLASLT_MATMUL_MATRIX_SCALE_VEC128_32F", "HIPBLASLT_MATMUL_MATRIX_SCALE_VEC128_32F", "numeric_literal");
+    subst("CUBLASLT_MATMUL_MATRIX_SCALE_VEC16_UE4M3", "HIPBLASLT_MATMUL_MATRIX_SCALE_VEC16_UE4M3", "numeric_literal");
+    subst("CUBLASLT_MATMUL_MATRIX_SCALE_VEC32_UE8M0", "HIPBLASLT_MATMUL_MATRIX_SCALE_VEC32_UE8M0", "numeric_literal");
     subst("CUBLASLT_MATMUL_PREF_MAX_WORKSPACE_BYTES", "HIPBLASLT_MATMUL_PREF_MAX_WORKSPACE_BYTES", "numeric_literal");
     subst("CUBLASLT_MATMUL_PREF_SEARCH_MODE", "HIPBLASLT_MATMUL_PREF_SEARCH_MODE", "numeric_literal");
     subst("CUBLASLT_MATRIX_LAYOUT_BATCH_COUNT", "HIPBLASLT_MATRIX_LAYOUT_BATCH_COUNT", "numeric_literal");
@@ -8113,14 +7839,18 @@ sub simpleSubstitutions {
     subst("CUDA_R_32F", "HIP_R_32F", "numeric_literal");
     subst("CUDA_R_32I", "HIP_R_32I", "numeric_literal");
     subst("CUDA_R_32U", "HIP_R_32U", "numeric_literal");
+    subst("CUDA_R_4F_E2M1", "HIP_R_4F_E2M1", "numeric_literal");
     subst("CUDA_R_4I", "HIP_R_4I", "numeric_literal");
     subst("CUDA_R_4U", "HIP_R_4U", "numeric_literal");
     subst("CUDA_R_64F", "HIP_R_64F", "numeric_literal");
     subst("CUDA_R_64I", "HIP_R_64I", "numeric_literal");
     subst("CUDA_R_64U", "HIP_R_64U", "numeric_literal");
+    subst("CUDA_R_6F_E2M3", "HIP_R_6F_E2M3", "numeric_literal");
+    subst("CUDA_R_6F_E3M2", "HIP_R_6F_E3M2", "numeric_literal");
     subst("CUDA_R_8F_E4M3", "HIP_R_8F_E4M3", "numeric_literal");
     subst("CUDA_R_8F_E5M2", "HIP_R_8F_E5M2", "numeric_literal");
     subst("CUDA_R_8F_UE4M3", "HIP_R_8F_E4M3", "numeric_literal");
+    subst("CUDA_R_8F_UE8M0", "HIP_R_8F_UE8M0", "numeric_literal");
     subst("CUDA_R_8I", "HIP_R_8I", "numeric_literal");
     subst("CUDA_R_8U", "HIP_R_8U", "numeric_literal");
     subst("CUDA_SUCCESS", "hipSuccess", "numeric_literal");
@@ -8449,13 +8179,93 @@ sub simpleSubstitutions {
     subst("CUSPARSE_STATUS_ZERO_PIVOT", "HIPSPARSE_STATUS_ZERO_PIVOT", "numeric_literal");
     subst("CUTENSOR_ALGO_DEFAULT", "HIPTENSOR_ALGO_DEFAULT", "numeric_literal");
     subst("CUTENSOR_ALGO_DEFAULT_PATIENT", "HIPTENSOR_ALGO_DEFAULT_PATIENT", "numeric_literal");
+    subst("CUTENSOR_AUTOTUNE_INCREMENTAL", "HIPTENSOR_AUTOTUNE_MODE_INCREMENTAL", "numeric_literal");
+    subst("CUTENSOR_AUTOTUNE_MODE_INCREMENTAL", "HIPTENSOR_AUTOTUNE_MODE_INCREMENTAL", "numeric_literal");
+    subst("CUTENSOR_AUTOTUNE_MODE_NONE", "HIPTENSOR_AUTOTUNE_MODE_NONE", "numeric_literal");
+    subst("CUTENSOR_AUTOTUNE_NONE", "HIPTENSOR_AUTOTUNE_MODE_NONE", "numeric_literal");
+    subst("CUTENSOR_CACHE_MODE_NONE", "HIPTENSOR_CACHE_MODE_NONE", "numeric_literal");
+    subst("CUTENSOR_CACHE_MODE_PEDANTIC", "HIPTENSOR_CACHE_MODE_PEDANTIC", "numeric_literal");
+    subst("CUTENSOR_COMPUTE_16BF", "HIPTENSOR_COMPUTE_DESC_16BF", "numeric_literal");
+    subst("CUTENSOR_COMPUTE_16F", "HIPTENSOR_COMPUTE_DESC_16F", "numeric_literal");
+    subst("CUTENSOR_COMPUTE_32F", "HIPTENSOR_COMPUTE_DESC_32F", "numeric_literal");
+    subst("CUTENSOR_COMPUTE_32I", "HIPTENSOR_COMPUTE_DESC_32I", "numeric_literal");
+    subst("CUTENSOR_COMPUTE_32U", "HIPTENSOR_COMPUTE_DESC_32U", "numeric_literal");
+    subst("CUTENSOR_COMPUTE_64F", "HIPTENSOR_COMPUTE_DESC_64F", "numeric_literal");
+    subst("CUTENSOR_COMPUTE_8I", "HIPTENSOR_COMPUTE_DESC_8I", "numeric_literal");
+    subst("CUTENSOR_COMPUTE_8U", "HIPTENSOR_COMPUTE_DESC_8U", "numeric_literal");
+    subst("CUTENSOR_C_16BF", "HIPTENSOR_C_16BF", "numeric_literal");
+    subst("CUTENSOR_C_16F", "HIPTENSOR_C_16F", "numeric_literal");
+    subst("CUTENSOR_C_16I", "HIPTENSOR_C_16I", "numeric_literal");
+    subst("CUTENSOR_C_16U", "HIPTENSOR_C_16U", "numeric_literal");
+    subst("CUTENSOR_C_32F", "HIPTENSOR_C_32F", "numeric_literal");
+    subst("CUTENSOR_C_32I", "HIPTENSOR_C_32I", "numeric_literal");
+    subst("CUTENSOR_C_32U", "HIPTENSOR_C_32U", "numeric_literal");
+    subst("CUTENSOR_C_4I", "HIPTENSOR_C_4I", "numeric_literal");
+    subst("CUTENSOR_C_4U", "HIPTENSOR_C_4U", "numeric_literal");
+    subst("CUTENSOR_C_64F", "HIPTENSOR_C_64F", "numeric_literal");
+    subst("CUTENSOR_C_64I", "HIPTENSOR_C_64I", "numeric_literal");
+    subst("CUTENSOR_C_64U", "HIPTENSOR_C_64U", "numeric_literal");
+    subst("CUTENSOR_C_8I", "HIPTENSOR_C_8I", "numeric_literal");
+    subst("CUTENSOR_C_8U", "HIPTENSOR_C_8U", "numeric_literal");
+    subst("CUTENSOR_JIT_MODE_DEFAULT", "HIPTENSOR_JIT_MODE_DEFAULT", "numeric_literal");
+    subst("CUTENSOR_JIT_MODE_NONE", "HIPTENSOR_JIT_MODE_NONE", "numeric_literal");
+    subst("CUTENSOR_OPERATION_DESCRIPTOR_FLOPS", "HIPTENSOR_OPERATION_DESCRIPTOR_FLOPS", "numeric_literal");
+    subst("CUTENSOR_OPERATION_DESCRIPTOR_MOVED_BYTES", "HIPTENSOR_OPERATION_DESCRIPTOR_MOVED_BYTES", "numeric_literal");
+    subst("CUTENSOR_OPERATION_DESCRIPTOR_PADDING_LEFT", "HIPTENSOR_OPERATION_DESCRIPTOR_PADDING_LEFT", "numeric_literal");
+    subst("CUTENSOR_OPERATION_DESCRIPTOR_PADDING_RIGHT", "HIPTENSOR_OPERATION_DESCRIPTOR_PADDING_RIGHT", "numeric_literal");
+    subst("CUTENSOR_OPERATION_DESCRIPTOR_PADDING_VALUE", "HIPTENSOR_OPERATION_DESCRIPTOR_PADDING_VALUE", "numeric_literal");
+    subst("CUTENSOR_OPERATION_DESCRIPTOR_SCALAR_TYPE", "HIPTENSOR_OPERATION_DESCRIPTOR_SCALAR_TYPE", "numeric_literal");
+    subst("CUTENSOR_OPERATION_DESCRIPTOR_TAG", "HIPTENSOR_OPERATION_DESCRIPTOR_TAG", "numeric_literal");
+    subst("CUTENSOR_OP_ABS", "HIPTENSOR_OP_ABS", "numeric_literal");
+    subst("CUTENSOR_OP_ACOS", "HIPTENSOR_OP_ACOS", "numeric_literal");
+    subst("CUTENSOR_OP_ACOSH", "HIPTENSOR_OP_ACOSH", "numeric_literal");
     subst("CUTENSOR_OP_ADD", "HIPTENSOR_OP_ADD", "numeric_literal");
+    subst("CUTENSOR_OP_ASIN", "HIPTENSOR_OP_ASIN", "numeric_literal");
+    subst("CUTENSOR_OP_ASINH", "HIPTENSOR_OP_ASINH", "numeric_literal");
+    subst("CUTENSOR_OP_ATAN", "HIPTENSOR_OP_ATAN", "numeric_literal");
+    subst("CUTENSOR_OP_ATANH", "HIPTENSOR_OP_ATANH", "numeric_literal");
+    subst("CUTENSOR_OP_CEIL", "HIPTENSOR_OP_CEIL", "numeric_literal");
+    subst("CUTENSOR_OP_CONJ", "HIPTENSOR_OP_CONJ", "numeric_literal");
+    subst("CUTENSOR_OP_COS", "HIPTENSOR_OP_COS", "numeric_literal");
+    subst("CUTENSOR_OP_COSH", "HIPTENSOR_OP_COSH", "numeric_literal");
+    subst("CUTENSOR_OP_EXP", "HIPTENSOR_OP_EXP", "numeric_literal");
+    subst("CUTENSOR_OP_FLOOR", "HIPTENSOR_OP_FLOOR", "numeric_literal");
     subst("CUTENSOR_OP_IDENTITY", "HIPTENSOR_OP_IDENTITY", "numeric_literal");
+    subst("CUTENSOR_OP_LOG", "HIPTENSOR_OP_LOG", "numeric_literal");
     subst("CUTENSOR_OP_MAX", "HIPTENSOR_OP_MAX", "numeric_literal");
     subst("CUTENSOR_OP_MIN", "HIPTENSOR_OP_MIN", "numeric_literal");
     subst("CUTENSOR_OP_MUL", "HIPTENSOR_OP_MUL", "numeric_literal");
+    subst("CUTENSOR_OP_NEG", "HIPTENSOR_OP_NEG", "numeric_literal");
+    subst("CUTENSOR_OP_RCP", "HIPTENSOR_OP_RCP", "numeric_literal");
+    subst("CUTENSOR_OP_RELU", "HIPTENSOR_OP_RELU", "numeric_literal");
+    subst("CUTENSOR_OP_SIGMOID", "HIPTENSOR_OP_SIGMOID", "numeric_literal");
+    subst("CUTENSOR_OP_SIN", "HIPTENSOR_OP_SIN", "numeric_literal");
+    subst("CUTENSOR_OP_SINH", "HIPTENSOR_OP_SINH", "numeric_literal");
     subst("CUTENSOR_OP_SQRT", "HIPTENSOR_OP_SQRT", "numeric_literal");
+    subst("CUTENSOR_OP_TAN", "HIPTENSOR_OP_TAN", "numeric_literal");
+    subst("CUTENSOR_OP_TANH", "HIPTENSOR_OP_TANH", "numeric_literal");
     subst("CUTENSOR_OP_UNKNOWN", "HIPTENSOR_OP_UNKNOWN", "numeric_literal");
+    subst("CUTENSOR_PLAN_PREFERENCE_ALGO", "HIPTENSOR_PLAN_PREFERENCE_ALGO", "numeric_literal");
+    subst("CUTENSOR_PLAN_PREFERENCE_AUTOTUNE_MODE", "HIPTENSOR_PLAN_PREFERENCE_AUTOTUNE_MODE", "numeric_literal");
+    subst("CUTENSOR_PLAN_PREFERENCE_CACHE_MODE", "HIPTENSOR_PLAN_PREFERENCE_CACHE_MODE", "numeric_literal");
+    subst("CUTENSOR_PLAN_PREFERENCE_INCREMENTAL_COUNT", "HIPTENSOR_PLAN_PREFERENCE_INCREMENTAL_COUNT", "numeric_literal");
+    subst("CUTENSOR_PLAN_PREFERENCE_JIT", "HIPTENSOR_PLAN_PREFERENCE_JIT", "numeric_literal");
+    subst("CUTENSOR_PLAN_PREFERENCE_KERNEL_RANK", "HIPTENSOR_PLAN_PREFERENCE_KERNEL_RANK", "numeric_literal");
+    subst("CUTENSOR_PLAN_REQUIRED_WORKSPACE", "HIPTENSOR_PLAN_REQUIRED_WORKSPACE", "numeric_literal");
+    subst("CUTENSOR_R_16BF", "HIPTENSOR_R_16BF", "numeric_literal");
+    subst("CUTENSOR_R_16F", "HIPTENSOR_R_16F", "numeric_literal");
+    subst("CUTENSOR_R_16I", "HIPTENSOR_R_16I", "numeric_literal");
+    subst("CUTENSOR_R_16U", "HIPTENSOR_R_16U", "numeric_literal");
+    subst("CUTENSOR_R_32F", "HIPTENSOR_R_32F", "numeric_literal");
+    subst("CUTENSOR_R_32I", "HIPTENSOR_R_32I", "numeric_literal");
+    subst("CUTENSOR_R_32U", "HIPTENSOR_R_32U", "numeric_literal");
+    subst("CUTENSOR_R_4I", "HIPTENSOR_R_4I", "numeric_literal");
+    subst("CUTENSOR_R_4U", "HIPTENSOR_R_4U", "numeric_literal");
+    subst("CUTENSOR_R_64F", "HIPTENSOR_R_64F", "numeric_literal");
+    subst("CUTENSOR_R_64I", "HIPTENSOR_R_64I", "numeric_literal");
+    subst("CUTENSOR_R_64U", "HIPTENSOR_R_64U", "numeric_literal");
+    subst("CUTENSOR_R_8I", "HIPTENSOR_R_8I", "numeric_literal");
+    subst("CUTENSOR_R_8U", "HIPTENSOR_R_8U", "numeric_literal");
     subst("CUTENSOR_STATUS_ALLOC_FAILED", "HIPTENSOR_STATUS_ALLOC_FAILED", "numeric_literal");
     subst("CUTENSOR_STATUS_ARCH_MISMATCH", "HIPTENSOR_STATUS_ARCH_MISMATCH", "numeric_literal");
     subst("CUTENSOR_STATUS_EXECUTION_FAILED", "HIPTENSOR_STATUS_EXECUTION_FAILED", "numeric_literal");
@@ -8467,6 +8277,7 @@ sub simpleSubstitutions {
     subst("CUTENSOR_STATUS_NOT_INITIALIZED", "HIPTENSOR_STATUS_NOT_INITIALIZED", "numeric_literal");
     subst("CUTENSOR_STATUS_NOT_SUPPORTED", "HIPTENSOR_STATUS_NOT_SUPPORTED", "numeric_literal");
     subst("CUTENSOR_STATUS_SUCCESS", "HIPTENSOR_STATUS_SUCCESS", "numeric_literal");
+    subst("CUTENSOR_WORKSPACE_DEFAULT", "HIPTENSOR_WORKSPACE_DEFAULT", "numeric_literal");
     subst("CUTENSOR_WORKSPACE_MAX", "HIPTENSOR_WORKSPACE_MAX", "numeric_literal");
     subst("CUTENSOR_WORKSPACE_MIN", "HIPTENSOR_WORKSPACE_MIN", "numeric_literal");
     subst("CU_ACCESS_PROPERTY_NORMAL", "hipAccessPropertyNormal", "numeric_literal");
@@ -8777,6 +8588,9 @@ sub simpleSubstitutions {
     subst("CU_MEM_RANGE_ATTRIBUTE_LAST_PREFETCH_LOCATION", "hipMemRangeAttributeLastPrefetchLocation", "numeric_literal");
     subst("CU_MEM_RANGE_ATTRIBUTE_PREFERRED_LOCATION", "hipMemRangeAttributePreferredLocation", "numeric_literal");
     subst("CU_MEM_RANGE_ATTRIBUTE_READ_MOSTLY", "hipMemRangeAttributeReadMostly", "numeric_literal");
+    subst("CU_MEM_RANGE_FLAG_DMA_BUF_MAPPING_TYPE_PCIE", "hipMemRangeFlagDmaBufMappingTypePcie", "numeric_literal");
+    subst("CU_MEM_RANGE_HANDLE_TYPE_DMA_BUF_FD", "hipMemRangeHandleTypeDmaBufFd", "numeric_literal");
+    subst("CU_MEM_RANGE_HANDLE_TYPE_MAX", "hipMemRangeHandleTypeMax", "numeric_literal");
     subst("CU_OCCUPANCY_DEFAULT", "hipOccupancyDefault", "numeric_literal");
     subst("CU_OCCUPANCY_DISABLE_CACHING_OVERRIDE", "hipOccupancyDisableCachingOverride", "numeric_literal");
     subst("CU_POINTER_ATTRIBUTE_ACCESS_FLAGS", "HIP_POINTER_ATTRIBUTE_ACCESS_FLAGS", "numeric_literal");
@@ -8877,6 +8691,7 @@ sub simpleSubstitutions {
     subst("NVRTC_ERROR_OUT_OF_MEMORY", "HIPRTC_ERROR_OUT_OF_MEMORY", "numeric_literal");
     subst("NVRTC_ERROR_PROGRAM_CREATION_FAILURE", "HIPRTC_ERROR_PROGRAM_CREATION_FAILURE", "numeric_literal");
     subst("NVRTC_SUCCESS", "HIPRTC_SUCCESS", "numeric_literal");
+    subst("__NV_E2M1", "__HIP_E2M1", "numeric_literal");
     subst("__NV_E4M3", "__HIP_E4M3_FNUZ", "numeric_literal");
     subst("__NV_E5M2", "__HIP_E5M2_FNUZ", "numeric_literal");
     subst("__NV_NOSAT", "__HIP_NOSAT", "numeric_literal");
@@ -9260,6 +9075,10 @@ sub simpleSubstitutions {
     subst("cudaResourceTypeLinear", "hipResourceTypeLinear", "numeric_literal");
     subst("cudaResourceTypeMipmappedArray", "hipResourceTypeMipmappedArray", "numeric_literal");
     subst("cudaResourceTypePitch2D", "hipResourceTypePitch2D", "numeric_literal");
+    subst("cudaRoundMinInf", "hipRoundMinInf", "numeric_literal");
+    subst("cudaRoundNearest", "hipRoundNearest", "numeric_literal");
+    subst("cudaRoundPosInf", "hipRoundPosInf", "numeric_literal");
+    subst("cudaRoundZero", "hipRoundZero", "numeric_literal");
     subst("cudaSharedMemBankSizeDefault", "hipSharedMemBankSizeDefault", "numeric_literal");
     subst("cudaSharedMemBankSizeEightByte", "hipSharedMemBankSizeEightByte", "numeric_literal");
     subst("cudaSharedMemBankSizeFourByte", "hipSharedMemBankSizeFourByte", "numeric_literal");
