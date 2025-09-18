@@ -285,14 +285,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaLaunchAttributeValue",                                         {"hipLaunchAttributeValue",                                  "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES}},
 
   // CUlaunchAttribute_st
-  {"cudaLaunchAttribute_st",                                           {"hipLaunchAttribute_st",                                    "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
+  {"cudaLaunchAttribute_st",                                           {"hipLaunchAttribute_st",                                    "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES}},
   // CUlaunchAttribute
-  {"cudaLaunchAttribute",                                              {"hipLaunchAttribute",                                       "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
+  {"cudaLaunchAttribute",                                              {"hipLaunchAttribute",                                       "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES}},
 
   // NOTE: CUlaunchConfig_st struct differs
-  {"cudaLaunchConfig_st",                                              {"hipLaunchConfig_st",                                       "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
+  {"cudaLaunchConfig_st",                                              {"hipLaunchConfig_st",                                       "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES}},
   // NOTE: CUlaunchConfig struct differs
-  {"cudaLaunchConfig_t",                                               {"hipLaunchConfig_t",                                        "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
+  {"cudaLaunchConfig_t",                                               {"hipLaunchConfig_t",                                        "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES}},
 
   // CUDA_GRAPH_INSTANTIATE_PARAMS_st
   {"cudaGraphInstantiateParams_st",                                    {"hipGraphInstantiateParams",                                "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES}},
@@ -3679,8 +3679,8 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {
   {"hipErrorInvalidTexture",                                           {HIP_6040, HIP_0,    HIP_0   }},
   {"hipEventRecordDefault",                                            {HIP_6040, HIP_0,    HIP_0   }},
   {"hipEventRecordExternal",                                           {HIP_6040, HIP_0,    HIP_0   }},
-  {"hipLaunchAttribute_st",                                            {HIP_7000, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipLaunchAttribute",                                               {HIP_7000, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipLaunchConfig_st",                                               {HIP_7000, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipLaunchConfig_t",                                                {HIP_7000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipLaunchAttribute_st",                                            {HIP_7000, HIP_0,    HIP_0   }},
+  {"hipLaunchAttribute",                                               {HIP_7000, HIP_0,    HIP_0   }},
+  {"hipLaunchConfig_st",                                               {HIP_7000, HIP_0,    HIP_0   }},
+  {"hipLaunchConfig_t",                                                {HIP_7000, HIP_0,    HIP_0   }},
 };

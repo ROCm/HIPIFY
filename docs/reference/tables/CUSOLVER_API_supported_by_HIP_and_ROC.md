@@ -609,7 +609,7 @@
 |`cusolverSpCcsrlsvchol`| |12.8| | | | | | | | | | | | | | |
 |`cusolverSpCcsrlsvcholHost`| |12.8| | | | | | | | | | | | | | |
 |`cusolverSpCcsrlsvluHost`| |12.8| | | | | | | | | | | | | | |
-|`cusolverSpCcsrlsvqr`| | | | |`hipsolverSpCcsrlsvqr`|7.0.0| | | |7.0.0| | | | | | |
+|`cusolverSpCcsrlsvqr`| | | | |`hipsolverSpCcsrlsvqr`|7.0.0| | | | | | | | | | |
 |`cusolverSpCcsrlsvqrHost`| | | | | | | | | | | | | | | | |
 |`cusolverSpCcsrluBufferInfoHost`|7.5|12.8| | | | | | | | | | | | | | |
 |`cusolverSpCcsrluExtractHost`|7.5|12.8| | | | | | | | | | | | | | |
@@ -745,7 +745,7 @@
 |`cusolverSpZcsrlsvchol`| |12.8| | | | | | | | | | | | | | |
 |`cusolverSpZcsrlsvcholHost`| |12.8| | | | | | | | | | | | | | |
 |`cusolverSpZcsrlsvluHost`| |12.8| | | | | | | | | | | | | | |
-|`cusolverSpZcsrlsvqr`| | | | |`hipsolverSpZcsrlsvqr`|7.0.0| | | |7.0.0| | | | | | |
+|`cusolverSpZcsrlsvqr`| | | | |`hipsolverSpZcsrlsvqr`|7.0.0| | | | | | | | | | |
 |`cusolverSpZcsrlsvqrHost`| | | | | | | | | | | | | | | | |
 |`cusolverSpZcsrluBufferInfoHost`|7.5|12.8| | | | | | | | | | | | | | |
 |`cusolverSpZcsrluExtractHost`|7.5|12.8| | | | | | | | | | | | | | |

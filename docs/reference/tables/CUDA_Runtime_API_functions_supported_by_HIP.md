@@ -137,7 +137,7 @@
 |`cudaLaunchCooperativeKernelMultiDevice`|9.0|11.3| |13.0|`hipLaunchCooperativeKernelMultiDevice`|2.6.0| | | | |
 |`cudaLaunchHostFunc`|10.0| | | |`hipLaunchHostFunc`|5.2.0| | | | |
 |`cudaLaunchKernel`| | | | |`hipLaunchKernel`|1.6.0| | | | |
-|`cudaLaunchKernelExC`|11.8| | | |`hipLaunchKernelExC`|7.0.0| | | |7.0.0|
+|`cudaLaunchKernelExC`|11.8| | | |`hipLaunchKernelExC`|7.0.0| | | | |
 |`cudaSetDoubleForDevice`| |10.0| |13.0| | | | | | |
 |`cudaSetDoubleForHost`| |10.0| |13.0| | | | | | |
 
@@ -1517,7 +1517,7 @@
 |`cudaKernelNodeParamsV2`|12.2| | | | | | | | | |
 |`cudaKernel_t`|12.1| | | | | | | | | |
 |`cudaKeyValuePair`| | | |12.0| | | | | | |
-|`cudaLaunchAttribute`|11.8| | | |`hipLaunchAttribute`|7.0.0| | | |7.0.0|
+|`cudaLaunchAttribute`|11.8| | | |`hipLaunchAttribute`|7.0.0| | | | |
 |`cudaLaunchAttributeAccessPolicyWindow`|11.8| | | |`hipLaunchAttributeAccessPolicyWindow`|6.2.0| | | | |
 |`cudaLaunchAttributeClusterDimension`|11.8| | | | | | | | | |
 |`cudaLaunchAttributeClusterSchedulingPolicyPreference`|11.8| | | | | | | | | |
@@ -1536,9 +1536,9 @@
 |`cudaLaunchAttributeProgrammaticStreamSerialization`|11.8| | | | | | | | | |
 |`cudaLaunchAttributeSynchronizationPolicy`|11.8| | | | | | | | | |
 |`cudaLaunchAttributeValue`|11.8| |13.0| |`hipLaunchAttributeValue`|6.2.0| | | | |
-|`cudaLaunchAttribute_st`|11.8| | | |`hipLaunchAttribute_st`|7.0.0| | | |7.0.0|
-|`cudaLaunchConfig_st`|11.8| | | |`hipLaunchConfig_st`|7.0.0| | | |7.0.0|
-|`cudaLaunchConfig_t`|11.8| | | |`hipLaunchConfig_t`|7.0.0| | | |7.0.0|
+|`cudaLaunchAttribute_st`|11.8| | | |`hipLaunchAttribute_st`|7.0.0| | | | |
+|`cudaLaunchConfig_st`|11.8| | | |`hipLaunchConfig_st`|7.0.0| | | | |
+|`cudaLaunchConfig_t`|11.8| | | |`hipLaunchConfig_t`|7.0.0| | | | |
 |`cudaLaunchMemSyncDomain`|12.0| | | | | | | | | |
 |`cudaLaunchMemSyncDomainDefault`|12.0| | | | | | | | | |
 |`cudaLaunchMemSyncDomainMap`|12.0| | | | | | | | | |
