@@ -30,7 +30,9 @@ THE SOFTWARE.
 #include <list>
 #include <llvm/ADT/StringRef.h>
 #include <llvm/Support/raw_ostream.h>
-
+#if LLVM_VERSION_MAJOR > 3
+#include "clang/Basic/Cuda.h"
+#endif
 namespace chr = std::chrono;
 
 enum ConvTypes {
@@ -253,6 +255,7 @@ enum cudaVersions {
   CUDA_129 = 12090,
   CUDA_130 = 13000,
   CUDA_LATEST = CUDA_129,
+  CUDA_PARTIALLY_SUPPORTED = CUDA_130,
   CUDNN_10 = 100,
   CUDNN_20 = 200,
   CUDNN_30 = 300,
@@ -466,6 +469,7 @@ public:
   * Tracks the statistics for a single input file.
   */
 class Statistics {
+  friend class HipifyAction;
   StatCounter supported;
   StatCounter unsupported;
   std::string fileName;
@@ -476,6 +480,8 @@ class Statistics {
   unsigned totalBytes = 0;
   chr::steady_clock::time_point startTime;
   chr::steady_clock::time_point completionTime;
+  // CUDA Toolkit version provided by clang at runtime and converted to HIPIFY cudaVersions enum.
+  static cudaVersions cudaVersionUsedByClang;
 
 public:
   Statistics(const std::string &name);
@@ -553,4 +559,10 @@ public:
   static std::string getHipVersion(const hipVersions &ver);
   // Set this flag in case of hipification errors.
   bool hasErrors = false;
+#if LLVM_VERSION_MAJOR > 3
+  // Converts CUDA version used by clang to CUDA version HIPIFY type.
+  static cudaVersions convertCudaToolkitVersion(const clang::CudaVersion &ver);
+#endif
+  // Get CUDA version used by clang in HIPIFY CUDA version format.
+  static cudaVersions getCudaVersionUsedByClang() { return cudaVersionUsedByClang; }
 };

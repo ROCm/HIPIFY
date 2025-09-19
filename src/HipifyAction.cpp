@@ -2295,6 +2295,11 @@ void HipifyAction::FindAndReplace(StringRef name,
     return;
   Statistics::current().incrementCounter(found->second, name.str());
   clang::DiagnosticsEngine &DE = getCompilerInstance().getDiagnostics();
+
+  // [ToDo] Remove after final implementing #2073
+  // const auto ID = DE.getCustomDiagID(clang::DiagnosticsEngine::Warning, "'%0' is the CUDA version, used by clang");
+  // DE.Report(sl, ID) << Statistics::getCudaVersion(Statistics::getCudaVersionUsedByClang());
+
   // Warn about the deprecated identifier in CUDA but hipify it.
   if (Statistics::isCudaDeprecated(found->second)) {
     const auto ID = DE.getCustomDiagID(clang::DiagnosticsEngine::Warning, "'%0' is deprecated in CUDA.");
@@ -3292,6 +3297,10 @@ void HipifyAction::ExecuteAction() {
   clang::Preprocessor &PP = getCompilerInstance().getPreprocessor();
   // Register yourself as the preprocessor callback, by proxy.
   PP.addPPCallbacks(std::unique_ptr<PPCallbackProxy>(new PPCallbackProxy(*this)));
+#if LLVM_VERSION_MAJOR > 3
+  Statistics::cudaVersionUsedByClang = Statistics::convertCudaToolkitVersion(clang::ToCudaVersion(PP.getTargetInfo().getSDKVersion()));
+  llvm::errs() << " !!!!!!! CUDA SDK version detected: " << int(clang::ToCudaVersion(PP.getTargetInfo().getSDKVersion())) << "\n";
+#endif
   // Now we're done futzing with the lexer, have the subclass proceeed with Sema and AST matching.
   clang::ASTFrontendAction::ExecuteAction();
   auto &SM = getCompilerInstance().getSourceManager();
