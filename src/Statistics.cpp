@@ -663,5 +663,71 @@ std::string Statistics::getHipVersion(const hipVersions &ver) {
   return "";
 }
 
+#if LLVM_VERSION_MAJOR > 3
+cudaVersions Statistics::convertCudaToolkitVersion(const clang::CudaVersion &ver) {
+  switch (ver) {
+    default:
+    case clang::CudaVersion::UNKNOWN: return CUDA_0;
+    case clang::CudaVersion::CUDA_70: return CUDA_70;
+    case clang::CudaVersion::CUDA_75: return CUDA_75;
+    case clang::CudaVersion::CUDA_80: return CUDA_80;
+#if LLVM_VERSION_MAJOR > 5
+    case clang::CudaVersion::CUDA_90: return CUDA_90;
+#if LLVM_VERSION_MAJOR > 6
+    case clang::CudaVersion::CUDA_91: return CUDA_91;
+    case clang::CudaVersion::CUDA_92: return CUDA_92;
+#if LLVM_VERSION_MAJOR > 7
+    case clang::CudaVersion::CUDA_100: return CUDA_100;
+#if LLVM_VERSION_MAJOR > 8
+    case clang::CudaVersion::CUDA_101: return CUDA_101;
+#if LLVM_VERSION_MAJOR > 9
+    case clang::CudaVersion::CUDA_102: return CUDA_102;
+    case clang::CudaVersion::CUDA_110: return CUDA_110;
+#if LLVM_VERSION_MAJOR > 12
+    case clang::CudaVersion::CUDA_111: return CUDA_111;
+    case clang::CudaVersion::CUDA_112: return CUDA_112;
+#if LLVM_VERSION_MAJOR > 13
+    case clang::CudaVersion::CUDA_113: return CUDA_113;
+    case clang::CudaVersion::CUDA_114: return CUDA_114;
+    case clang::CudaVersion::CUDA_115: return CUDA_115;
+    case clang::CudaVersion::NEW: return CUDA_PARTIALLY_SUPPORTED;
+#if LLVM_VERSION_MAJOR > 15
+    case clang::CudaVersion::CUDA_116: return CUDA_116;
+    case clang::CudaVersion::CUDA_117: return CUDA_117;
+    case clang::CudaVersion::CUDA_118: return CUDA_118;
+#if LLVM_VERSION_MAJOR > 16
+    case clang::CudaVersion::CUDA_120: return CUDA_120;
+    case clang::CudaVersion::CUDA_121: return CUDA_121;
+#if LLVM_VERSION_MAJOR > 17
+    case clang::CudaVersion::CUDA_122: return CUDA_122;
+    case clang::CudaVersion::CUDA_123: return CUDA_123;
+#if LLVM_VERSION_MAJOR > 18
+    case clang::CudaVersion::CUDA_124: return CUDA_124;
+    case clang::CudaVersion::CUDA_125: return CUDA_125;
+#if LLVM_VERSION_MAJOR > 19
+    case clang::CudaVersion::CUDA_126: return CUDA_126;
+    case clang::CudaVersion::CUDA_128: return CUDA_128;
+#if LLVM_VERSION_MAJOR > 21
+    case clang::CudaVersion::CUDA_129: return CUDA_129;
+#endif
+#endif
+#endif
+#endif
+#endif
+#endif
+#endif
+#endif
+#endif
+#endif
+#endif
+#endif
+#endif
+  }
+  return CUDA_0;
+}
+#endif
+
 std::map<std::string, Statistics> Statistics::stats = {};
 Statistics *Statistics::currentStatistics = nullptr;
+cudaVersions Statistics::cudaVersionUsedByClang = CUDA_0;
+
