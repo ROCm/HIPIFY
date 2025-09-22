@@ -78,6 +78,7 @@
 |`CUBLAS_GEMM_ALGO8_TENSOR_OP`|9.2| | | | | | | | | | | | | | | |
 |`CUBLAS_GEMM_ALGO9`|9.0| | | | | | | | | | | | | | | |
 |`CUBLAS_GEMM_ALGO9_TENSOR_OP`|9.2| | | | | | | | | | | | | | | |
+|`CUBLAS_GEMM_AUTOTUNE`|13.0| | | | | | | | | | | | | | | |
 |`CUBLAS_GEMM_DEFAULT`|9.0| | | |`HIPBLAS_GEMM_DEFAULT`|1.8.2| | | | |`rocblas_gemm_algo_standard`|1.8.2| | | | |
 |`CUBLAS_GEMM_DEFAULT_TENSOR_OP`|9.0| | | | | | | | | | | | | | | |
 |`CUBLAS_GEMM_DFALT`|8.0| | | |`HIPBLAS_GEMM_DEFAULT`|1.8.2| | | | |`rocblas_gemm_algo_standard`|1.8.2| | | | |
@@ -167,7 +168,7 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|**ROC**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
-|`CUBLASLT_ALGO_CAP_ATOMIC_SYNC`|12.2| | | | | | | | | | | | | | | |
+|`CUBLASLT_ALGO_CAP_ATOMIC_SYNC`|12.2| | |13.0| | | | | | | | | | | | |
 |`CUBLASLT_ALGO_CAP_CTA_SWIZZLING_SUPPORT`|10.1| | | | | | | | | | | | | | | |
 |`CUBLASLT_ALGO_CAP_CUSTOM_MEMORY_ORDER`|10.1| | | | | | | | | | | | | | | |
 |`CUBLASLT_ALGO_CAP_CUSTOM_OPTION_MAX`|10.1| | | | | | | | | | | | | | | |
@@ -269,10 +270,10 @@
 |`CUBLASLT_EPILOGUE_RELU_BIAS`|10.1| | | |`HIPBLASLT_EPILOGUE_RELU_BIAS`|5.5.0| | | | | | | | | | |
 |`CUBLASLT_MATMUL_DESC_ALPHA_VECTOR_BATCH_STRIDE`|11.4| | | | | | | | | | | | | | | |
 |`CUBLASLT_MATMUL_DESC_AMAX_D_POINTER`|11.8| | | |`HIPBLASLT_MATMUL_DESC_AMAX_D_POINTER`|6.2.0| | | | | | | | | | |
-|`CUBLASLT_MATMUL_DESC_ATOMIC_SYNC_IN_COUNTERS_POINTER`|12.2| | | | | | | | | | | | | | | |
-|`CUBLASLT_MATMUL_DESC_ATOMIC_SYNC_NUM_CHUNKS_D_COLS`|12.2|12.8| | | | | | | | | | | | | | |
-|`CUBLASLT_MATMUL_DESC_ATOMIC_SYNC_NUM_CHUNKS_D_ROWS`|12.2|12.8| | | | | | | | | | | | | | |
-|`CUBLASLT_MATMUL_DESC_ATOMIC_SYNC_OUT_COUNTERS_POINTER`|12.2| | | | | | | | | | | | | | | |
+|`CUBLASLT_MATMUL_DESC_ATOMIC_SYNC_IN_COUNTERS_POINTER`|12.2| | |13.0| | | | | | | | | | | | |
+|`CUBLASLT_MATMUL_DESC_ATOMIC_SYNC_NUM_CHUNKS_D_COLS`|12.2|12.8| |13.0| | | | | | | | | | | | |
+|`CUBLASLT_MATMUL_DESC_ATOMIC_SYNC_NUM_CHUNKS_D_ROWS`|12.2|12.8| |13.0| | | | | | | | | | | | |
+|`CUBLASLT_MATMUL_DESC_ATOMIC_SYNC_OUT_COUNTERS_POINTER`|12.2| | |13.0| | | | | | | | | | | | |
 |`CUBLASLT_MATMUL_DESC_A_SCALE_MODE`|12.8| | | |`HIPBLASLT_MATMUL_DESC_A_SCALE_MODE`|7.0.0| | | | | | | | | | |
 |`CUBLASLT_MATMUL_DESC_A_SCALE_POINTER`|11.8| | | |`HIPBLASLT_MATMUL_DESC_A_SCALE_POINTER`|6.0.0| | | | | | | | | | |
 |`CUBLASLT_MATMUL_DESC_BIAS_BATCH_STRIDE`|11.3| | | | | | | | | | | | | | | |

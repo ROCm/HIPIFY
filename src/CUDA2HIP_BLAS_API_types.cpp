@@ -129,6 +129,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP {
   {"CUBLAS_GEMM_ALGO13_TENSOR_OP",                                   {"HIPBLAS_GEMM_ALGO13_TENSOR_OP",                                     "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, UNSUPPORTED}},  // 113
   {"CUBLAS_GEMM_ALGO14_TENSOR_OP",                                   {"HIPBLAS_GEMM_ALGO14_TENSOR_OP",                                     "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, UNSUPPORTED}},  // 114
   {"CUBLAS_GEMM_ALGO15_TENSOR_OP",                                   {"HIPBLAS_GEMM_ALGO15_TENSOR_OP",                                     "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, UNSUPPORTED}},  // 115
+  {"CUBLAS_GEMM_AUTOTUNE",                                           {"HIPBLAS_GEMM_AUTOTUNE",                                             "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, UNSUPPORTED}},  // 999
 
   // CUDA Library Data Types
 
@@ -1025,10 +1026,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP {
   {"CUBLASLT_MATMUL_DESC_EPILOGUE_AUX_AMAX_POINTER",                 {"HIPBLASLT_MATMUL_DESC_EPILOGUE_AUX_AMAX_POINTER",                   "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
   {"CUBLASLT_MATMUL_DESC_FAST_ACCUM",                                {"HIPBLASLT_MATMUL_DESC_FAST_ACCUM",                                  "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
   {"CUBLASLT_MATMUL_DESC_BIAS_DATA_TYPE",                            {"HIPBLASLT_MATMUL_DESC_BIAS_DATA_TYPE",                              "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED}},
-  {"CUBLASLT_MATMUL_DESC_ATOMIC_SYNC_NUM_CHUNKS_D_ROWS",             {"HIPBLASLT_MATMUL_DESC_ATOMIC_SYNC_NUM_CHUNKS_D_ROWS",               "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"CUBLASLT_MATMUL_DESC_ATOMIC_SYNC_NUM_CHUNKS_D_COLS",             {"HIPBLASLT_MATMUL_DESC_ATOMIC_SYNC_NUM_CHUNKS_D_COLS",               "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"CUBLASLT_MATMUL_DESC_ATOMIC_SYNC_IN_COUNTERS_POINTER",           {"HIPBLASLT_MATMUL_DESC_ATOMIC_SYNC_IN_COUNTERS_POINTER",             "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
-  {"CUBLASLT_MATMUL_DESC_ATOMIC_SYNC_OUT_COUNTERS_POINTER",          {"HIPBLASLT_MATMUL_DESC_ATOMIC_SYNC_OUT_COUNTERS_POINTER",            "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_DESC_ATOMIC_SYNC_NUM_CHUNKS_D_ROWS",             {"HIPBLASLT_MATMUL_DESC_ATOMIC_SYNC_NUM_CHUNKS_D_ROWS",               "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
+  {"CUBLASLT_MATMUL_DESC_ATOMIC_SYNC_NUM_CHUNKS_D_COLS",             {"HIPBLASLT_MATMUL_DESC_ATOMIC_SYNC_NUM_CHUNKS_D_COLS",               "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
+  {"CUBLASLT_MATMUL_DESC_ATOMIC_SYNC_IN_COUNTERS_POINTER",           {"HIPBLASLT_MATMUL_DESC_ATOMIC_SYNC_IN_COUNTERS_POINTER",             "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED | CUDA_REMOVED}},
+  {"CUBLASLT_MATMUL_DESC_ATOMIC_SYNC_OUT_COUNTERS_POINTER",          {"HIPBLASLT_MATMUL_DESC_ATOMIC_SYNC_OUT_COUNTERS_POINTER",            "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED | CUDA_REMOVED}},
   {"CUBLASLT_MATMUL_DESC_A_SCALE_MODE",                              {"HIPBLASLT_MATMUL_DESC_A_SCALE_MODE",                                "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED}},
   {"CUBLASLT_MATMUL_DESC_B_SCALE_MODE",                              {"HIPBLASLT_MATMUL_DESC_B_SCALE_MODE",                                "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED}},
   {"CUBLASLT_MATMUL_DESC_C_SCALE_MODE",                              {"HIPBLASLT_MATMUL_DESC_C_SCALE_MODE",                                "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
@@ -1105,7 +1106,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP {
   {"CUBLASLT_ALGO_CAP_MIN_ALIGNMENT_B_BYTES",                        {"HIPBLASLT_ALGO_CAP_MIN_ALIGNMENT_B_BYTES",                          "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
   {"CUBLASLT_ALGO_CAP_MIN_ALIGNMENT_C_BYTES",                        {"HIPBLASLT_ALGO_CAP_MIN_ALIGNMENT_C_BYTES",                          "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
   {"CUBLASLT_ALGO_CAP_MIN_ALIGNMENT_D_BYTES",                        {"HIPBLASLT_ALGO_CAP_MIN_ALIGNMENT_D_BYTES",                          "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
-  {"CUBLASLT_ALGO_CAP_ATOMIC_SYNC",                                  {"HIPBLASLT_ALGO_CAP_ATOMIC_SYNC",                                    "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_ALGO_CAP_ATOMIC_SYNC",                                  {"HIPBLASLT_ALGO_CAP_ATOMIC_SYNC",                                    "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED | CUDA_REMOVED}},
   {"CUBLASLT_ALGO_CAP_POINTER_ARRAY_BATCH_SUPPORT",                  {"HIPBLASLT_ALGO_CAP_POINTER_ARRAY_BATCH_SUPPORT",                    "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
   {"CUBLASLT_ALGO_CAP_FLOATING_POINT_EMULATION_SUPPORT",             {"HIPBLASLT_ALGO_CAP_FLOATING_POINT_EMULATION_SUPPORT",               "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
   {"cublasLtMatmulAlgoConfigAttributes_t",                           {"hipblasLtMatmulAlgoConfigAttributes_t",                             "",                                                         CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
@@ -1453,10 +1454,10 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_TYPE_NAME_VER_MAP {
   {"CUBLASLT_MATMUL_DESC_EPILOGUE_AUX_AMAX_POINTER",                 {CUDA_118, CUDA_0,   CUDA_0  }},
   {"CUBLASLT_MATMUL_DESC_FAST_ACCUM",                                {CUDA_118, CUDA_0,   CUDA_0  }},
   {"CUBLASLT_MATMUL_DESC_BIAS_DATA_TYPE",                            {CUDA_118, CUDA_0,   CUDA_0  }},
-  {"CUBLASLT_MATMUL_DESC_ATOMIC_SYNC_NUM_CHUNKS_D_ROWS",             {CUDA_122, CUDA_128, CUDA_0  }}, // A: CUDA_VERSION 12022, CUBLAS_VERSION 120205, CUBLAS_VER_MAJOR 12 CUBLAS_VER_MINOR 2 CUBLAS_VER_PATCH 5
-  {"CUBLASLT_MATMUL_DESC_ATOMIC_SYNC_NUM_CHUNKS_D_COLS",             {CUDA_122, CUDA_128, CUDA_0  }}, // A: CUDA_VERSION 12022, CUBLAS_VERSION 120205, CUBLAS_VER_MAJOR 12 CUBLAS_VER_MINOR 2 CUBLAS_VER_PATCH 5
-  {"CUBLASLT_MATMUL_DESC_ATOMIC_SYNC_IN_COUNTERS_POINTER",           {CUDA_122, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 12022, CUBLAS_VERSION 120205, CUBLAS_VER_MAJOR 12 CUBLAS_VER_MINOR 2 CUBLAS_VER_PATCH 5
-  {"CUBLASLT_MATMUL_DESC_ATOMIC_SYNC_OUT_COUNTERS_POINTER",          {CUDA_122, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 12022, CUBLAS_VERSION 120205, CUBLAS_VER_MAJOR 12 CUBLAS_VER_MINOR 2 CUBLAS_VER_PATCH 5
+  {"CUBLASLT_MATMUL_DESC_ATOMIC_SYNC_NUM_CHUNKS_D_ROWS",             {CUDA_122, CUDA_128, CUDA_130}}, // A: CUDA_VERSION 12022, CUBLAS_VERSION 120205, CUBLAS_VER_MAJOR 12 CUBLAS_VER_MINOR 2 CUBLAS_VER_PATCH 5
+  {"CUBLASLT_MATMUL_DESC_ATOMIC_SYNC_NUM_CHUNKS_D_COLS",             {CUDA_122, CUDA_128, CUDA_130}}, // A: CUDA_VERSION 12022, CUBLAS_VERSION 120205, CUBLAS_VER_MAJOR 12 CUBLAS_VER_MINOR 2 CUBLAS_VER_PATCH 5
+  {"CUBLASLT_MATMUL_DESC_ATOMIC_SYNC_IN_COUNTERS_POINTER",           {CUDA_122, CUDA_0,   CUDA_130}}, // A: CUDA_VERSION 12022, CUBLAS_VERSION 120205, CUBLAS_VER_MAJOR 12 CUBLAS_VER_MINOR 2 CUBLAS_VER_PATCH 5
+  {"CUBLASLT_MATMUL_DESC_ATOMIC_SYNC_OUT_COUNTERS_POINTER",          {CUDA_122, CUDA_0,   CUDA_130}}, // A: CUDA_VERSION 12022, CUBLAS_VERSION 120205, CUBLAS_VER_MAJOR 12 CUBLAS_VER_MINOR 2 CUBLAS_VER_PATCH 5
   {"CUBLASLT_MATMUL_DESC_A_SCALE_MODE",                              {CUDA_128, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 12080, CUBLAS_VERSION 120803, CUBLAS_VER_MAJOR 12 CUBLAS_VER_MINOR 8 CUBLAS_VER_PATCH 3
   {"CUBLASLT_MATMUL_DESC_B_SCALE_MODE",                              {CUDA_128, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 12080, CUBLAS_VERSION 120803, CUBLAS_VER_MAJOR 12 CUBLAS_VER_MINOR 8 CUBLAS_VER_PATCH 3
   {"CUBLASLT_MATMUL_DESC_C_SCALE_MODE",                              {CUDA_128, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 12080, CUBLAS_VERSION 120803, CUBLAS_VER_MAJOR 12 CUBLAS_VER_MINOR 8 CUBLAS_VER_PATCH 3
@@ -1529,7 +1530,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_TYPE_NAME_VER_MAP {
   {"CUBLASLT_ALGO_CAP_MIN_ALIGNMENT_B_BYTES",                        {CUDA_110, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 11001, CUBLAS_VERSION 11000, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 0
   {"CUBLASLT_ALGO_CAP_MIN_ALIGNMENT_C_BYTES",                        {CUDA_110, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 11001, CUBLAS_VERSION 11000, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 0
   {"CUBLASLT_ALGO_CAP_MIN_ALIGNMENT_D_BYTES",                        {CUDA_110, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 11001, CUBLAS_VERSION 11000, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 0
-  {"CUBLASLT_ALGO_CAP_ATOMIC_SYNC",                                  {CUDA_122, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 12022, CUBLAS_VERSION 120205, CUBLAS_VER_MAJOR 12 CUBLAS_VER_MINOR 2 CUBLAS_VER_PATCH 5
+  {"CUBLASLT_ALGO_CAP_ATOMIC_SYNC",                                  {CUDA_122, CUDA_0,   CUDA_130}}, // A: CUDA_VERSION 12022, CUBLAS_VERSION 120205, CUBLAS_VER_MAJOR 12 CUBLAS_VER_MINOR 2 CUBLAS_VER_PATCH 5
   {"cublasLtMatmulAlgoConfigAttributes_t",                           {CUDA_101, CUDA_0,   CUDA_0  }},
   {"CUBLASLT_ALGO_CONFIG_ID",                                        {CUDA_101, CUDA_0,   CUDA_0  }},
   {"CUBLASLT_ALGO_CONFIG_TILE_ID",                                   {CUDA_101, CUDA_0,   CUDA_0  }},
@@ -2168,6 +2169,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_TYPE_NAME_VER_MAP {
   {"CUBLASLT_MATRIX_LAYOUT_BATCH_MODE",                              {CUDA_129, CUDA_0,   CUDA_0  }},
   {"CUBLASLT_ALGO_CAP_POINTER_ARRAY_BATCH_SUPPORT",                  {CUDA_129, CUDA_0,   CUDA_0  }},
   {"CUBLASLT_ALGO_CAP_FLOATING_POINT_EMULATION_SUPPORT",             {CUDA_129, CUDA_0,   CUDA_0  }},
+  {"CUBLAS_GEMM_AUTOTUNE",                                           {CUDA_130, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_TYPE_NAME_VER_MAP {
