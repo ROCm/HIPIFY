@@ -2268,6 +2268,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CU_ATOMIC_CAPABILITY_VECTOR_32x4
   {"cudaAtomicCapabilityVector32x4",                                   {"hipAtomicCapabilityVector32x4",                            "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
+  // [ToDo] Move to a separated Library types, common for Runtime, Driver and Libraries APIs
+  {"cudaEmulationStrategy_t",                                          {"hipEmulationStrategy_t",                                   "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"cudaEmulationStrategy",                                            {"hipEmulationStrategy",                                     "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // cudaEmulationStrategy enum values
+  {"CUDA_EMULATION_STRATEGY_DEFAULT",                                  {"HIP_EMULATION_STRATEGY_DEFAULT",                           "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CUDA_EMULATION_STRATEGY_PERFORMANT",                               {"HIP_EMULATION_STRATEGY_PERFORMANT",                        "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CUDA_EMULATION_STRATEGY_EAGER",                                    {"HIP_EMULATION_STRATEGY_EAGER",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+
   // 4. Typedefs
 
   // CUhostFn
@@ -3303,6 +3311,11 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_TYPE_NAME_VER_MAP 
   {"cudaKernelNodeAttributeNvlinkUtilCentricScheduling",               {CUDA_130, CUDA_0,   CUDA_0  }},
   {"cudaLogIterator",                                                  {CUDA_130, CUDA_0,   CUDA_0  }},
   {"cudaLogsCallback_t",                                               {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaEmulationStrategy_t",                                          {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaEmulationStrategy",                                            {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CUDA_EMULATION_STRATEGY_DEFAULT",                                  {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CUDA_EMULATION_STRATEGY_PERFORMANT",                               {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CUDA_EMULATION_STRATEGY_EAGER",                                    {CUDA_130, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_RUNTIME_TYPE_CHANGED_VER_MAP {

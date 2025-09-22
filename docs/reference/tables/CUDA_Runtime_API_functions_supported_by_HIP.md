@@ -682,6 +682,9 @@
 |`CUDART_ZERO`| | | | |`HIP_ZERO`|5.7.0| | | | |
 |`CUDART_ZERO_F`| | | | |`HIP_ZERO_F`|5.3.0| | | | |
 |`CUDA_EGL_MAX_PLANES`|9.1| | | | | | | | | |
+|`CUDA_EMULATION_STRATEGY_DEFAULT`|13.0| | | | | | | | | |
+|`CUDA_EMULATION_STRATEGY_EAGER`|13.0| | | | | | | | | |
+|`CUDA_EMULATION_STRATEGY_PERFORMANT`|13.0| | | | | | | | | |
 |`CUDA_IPC_HANDLE_SIZE`| | | | |`HIP_IPC_HANDLE_SIZE`|1.6.0| | | | |
 |`CUDAlogLevel`|13.0| | | | | | | | | |
 |`CUDAlogLevel_enum`|13.0| | | | | | | | | |
@@ -1122,6 +1125,8 @@
 |`cudaEglResourceLocationSysmem`|9.1| | | | | | | | | |
 |`cudaEglResourceLocationVidmem`|9.1| | | | | | | | | |
 |`cudaEglStreamConnection`|9.1| | | | | | | | | |
+|`cudaEmulationStrategy`|13.0| | | | | | | | | |
+|`cudaEmulationStrategy_t`|13.0| | | | | | | | | |
 |`cudaEnableDefault`|11.3| | | | | | | | | |
 |`cudaEnableLegacyStream`|11.3| | | | | | | | | |
 |`cudaEnablePerThreadDefaultStream`|11.3| | | | | | | | | |
