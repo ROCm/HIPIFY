@@ -43,13 +43,17 @@ const std::map<llvm::StringRef, hipCounter> CUDA_FFT_TYPE_NAME_MAP {
   {"CUFFT_SETUP_FAILED",                              {"HIPFFT_SETUP_FAILED",                              "", CONV_NUMERIC_LITERAL, API_FFT, 1}},  //  0x7  7
   {"CUFFT_INVALID_SIZE",                              {"HIPFFT_INVALID_SIZE",                              "", CONV_NUMERIC_LITERAL, API_FFT, 1}},  //  0x8  8
   {"CUFFT_UNALIGNED_DATA",                            {"HIPFFT_UNALIGNED_DATA",                            "", CONV_NUMERIC_LITERAL, API_FFT, 1}},  //  0x9  9
-  {"CUFFT_INCOMPLETE_PARAMETER_LIST",                 {"HIPFFT_INCOMPLETE_PARAMETER_LIST",                 "", CONV_NUMERIC_LITERAL, API_FFT, 1}},  //  0xA  10
+  {"CUFFT_INCOMPLETE_PARAMETER_LIST",                 {"HIPFFT_INCOMPLETE_PARAMETER_LIST",                 "", CONV_NUMERIC_LITERAL, API_FFT, 1, CUDA_REMOVED}},  //  0xA  10
   {"CUFFT_INVALID_DEVICE",                            {"HIPFFT_INVALID_DEVICE",                            "", CONV_NUMERIC_LITERAL, API_FFT, 1}},  //  0xB  11
-  {"CUFFT_PARSE_ERROR",                               {"HIPFFT_PARSE_ERROR",                               "", CONV_NUMERIC_LITERAL, API_FFT, 1}},  //  0xC  12
+  {"CUFFT_PARSE_ERROR",                               {"HIPFFT_PARSE_ERROR",                               "", CONV_NUMERIC_LITERAL, API_FFT, 1, CUDA_REMOVED}},  //  0xC  12
   {"CUFFT_NO_WORKSPACE",                              {"HIPFFT_NO_WORKSPACE",                              "", CONV_NUMERIC_LITERAL, API_FFT, 1}},  //  0xD  13
   {"CUFFT_NOT_IMPLEMENTED",                           {"HIPFFT_NOT_IMPLEMENTED",                           "", CONV_NUMERIC_LITERAL, API_FFT, 1}},  //  0xE  14
-  {"CUFFT_LICENSE_ERROR",                             {"HIPFFT_LICENSE_ERROR",                             "", CONV_NUMERIC_LITERAL, API_FFT, 1, UNSUPPORTED}},
+  {"CUFFT_LICENSE_ERROR",                             {"HIPFFT_LICENSE_ERROR",                             "", CONV_NUMERIC_LITERAL, API_FFT, 1, UNSUPPORTED | CUDA_REMOVED}},
   {"CUFFT_NOT_SUPPORTED",                             {"HIPFFT_NOT_SUPPORTED",                             "", CONV_NUMERIC_LITERAL, API_FFT, 1}},  //  0x10 16
+  {"CUFFT_MISSING_DEPENDENCY",                        {"HIPFFT_MISSING_DEPENDENCY",                        "", CONV_NUMERIC_LITERAL, API_FFT, 1, UNSUPPORTED}},  //  0x11 17
+  {"CUFFT_NVRTC_FAILURE",                             {"HIPFFT_NVRTC_FAILURE",                             "", CONV_NUMERIC_LITERAL, API_FFT, 1, UNSUPPORTED}},  //  0x12 18
+  {"CUFFT_NVJITLINK_FAILURE",                         {"HIPFFT_NVJITLINK_FAILURE",                         "", CONV_NUMERIC_LITERAL, API_FFT, 1, UNSUPPORTED}},  //  0x13 19
+  {"CUFFT_NVSHMEM_FAILURE",                           {"HIPFFT_NVSHMEM_FAILURE",                           "", CONV_NUMERIC_LITERAL, API_FFT, 1, UNSUPPORTED}},  //  0x14 20
 
   {"cufftType_t",                                     {"hipfftType_t",                                     "", CONV_TYPE, API_FFT, 1}},
   {"cufftType",                                       {"hipfftType",                                       "", CONV_TYPE, API_FFT, 1}},
@@ -139,6 +143,13 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_FFT_TYPE_NAME_VER_MAP {
   {"cufftProperty",                                   {CUDA_124, CUDA_0,   CUDA_0  }},
   {"NVFFT_PLAN_PROPERTY_INT64_PATIENT_JIT",           {CUDA_124, CUDA_0,   CUDA_0  }},
   {"NVFFT_PLAN_PROPERTY_INT64_MAX_NUM_HOST_THREADS",  {CUDA_125, CUDA_0,   CUDA_0  }},
+  {"CUFFT_INCOMPLETE_PARAMETER_LIST",                 {CUDA_0,   CUDA_0,   CUDA_130}},
+  {"CUFFT_PARSE_ERROR",                               {CUDA_0,   CUDA_0,   CUDA_130}},
+  {"CUFFT_LICENSE_ERROR",                             {CUDA_0,   CUDA_0,   CUDA_130}},
+  {"CUFFT_MISSING_DEPENDENCY",                        {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CUFFT_NVRTC_FAILURE",                             {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CUFFT_NVJITLINK_FAILURE",                         {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CUFFT_NVSHMEM_FAILURE",                           {CUDA_130, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_FFT_TYPE_NAME_VER_MAP {
