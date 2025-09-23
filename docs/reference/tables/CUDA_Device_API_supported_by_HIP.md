@@ -810,7 +810,23 @@
 |`lround`| | | | |`lround`|1.6.0| | | | |
 |`lroundf`| | | | |`lroundf`|1.6.0| | | | |
 |`make_bfloat162`|12.2| | | | | | | | | |
+|`make_char1`| | | | |`make_char1`|1.6.0| | | | |
+|`make_char2`| | | | |`make_char2`|1.6.0| | | | |
+|`make_char3`| | | | |`make_char3`|1.6.0| | | | |
+|`make_char4`| | | | |`make_char4`|1.6.0| | | | |
 |`make_half2`|12.2| | | |`make_half2`|4.5.0| | | | |
+|`make_short1`| | | | |`make_short1`|1.6.0| | | | |
+|`make_short2`| | | | |`make_short2`|1.6.0| | | | |
+|`make_short3`| | | | |`make_short3`|1.6.0| | | | |
+|`make_short4`| | | | |`make_short4`|1.6.0| | | | |
+|`make_uchar1`| | | | |`make_uchar1`|1.6.0| | | | |
+|`make_uchar2`| | | | |`make_uchar2`|1.6.0| | | | |
+|`make_uchar3`| | | | |`make_uchar3`|1.6.0| | | | |
+|`make_uchar4`| | | | |`make_uchar4`|1.6.0| | | | |
+|`make_ushort1`| | | | |`make_ushort1`|1.6.0| | | | |
+|`make_ushort2`| | | | |`make_ushort2`|1.6.0| | | | |
+|`make_ushort3`| | | | |`make_ushort3`|1.6.0| | | | |
+|`make_ushort4`| | | | |`make_ushort4`|1.6.0| | | | |
 |`max`| | | | |`max`|1.6.0| | | | |
 |`min`| | | | |`min`|1.6.0| | | | |
 |`modf`| | | | |`modf`|1.9.0| | | | |
@@ -953,6 +969,10 @@
 |`__nv_fp8x4_e8m0`|12.8| | | | | | | | | |
 |`__nv_fp8x4_storage_t`|11.8| | | |`__hip_fp8x4_storage_t`|6.2.0| | | | |
 |`__nv_saturation_t`|11.8| | | |`__hip_saturation_t`|6.2.0| | | | |
+|`char1`| | | | |`char1`|1.6.0| | | | |
+|`char2`| | | | |`char2`|1.6.0| | | | |
+|`char3`| | | | |`char3`|1.6.0| | | | |
+|`char4`| | | | |`char4`|1.6.0| | | | |
 |`cudaRoundMinInf`| | | | |`hipRoundMinInf`|7.0.0| | | | |
 |`cudaRoundMode`| | | | |`hipRoundMode`|7.0.0| | | | |
 |`cudaRoundNearest`| | | | |`hipRoundNearest`|7.0.0| | | | |
@@ -960,4 +980,16 @@
 |`cudaRoundZero`| | | | |`hipRoundZero`|7.0.0| | | | |
 |`nv_bfloat16`|11.0| | | |`hip_bfloat16`|3.5.0| | | | |
 |`nv_bfloat162`|11.0| | | | | | | | | |
+|`short1`| | | | |`short1`|1.6.0| | | | |
+|`short2`| | | | |`short2`|1.6.0| | | | |
+|`short3`| | | | |`short3`|1.6.0| | | | |
+|`short4`| | | | |`short4`|1.6.0| | | | |
+|`uchar1`| | | | |`uchar1`|1.6.0| | | | |
+|`uchar2`| | | | |`uchar2`|1.6.0| | | | |
+|`uchar3`| | | | |`uchar3`|1.6.0| | | | |
+|`uchar4`| | | | |`uchar4`|1.6.0| | | | |
+|`ushort1`| | | | |`ushort1`|1.6.0| | | | |
+|`ushort2`| | | | |`ushort2`|1.6.0| | | | |
+|`ushort3`| | | | |`ushort3`|1.6.0| | | | |
+|`ushort4`| | | | |`ushort4`|1.6.0| | | | |
 

@@ -921,6 +921,24 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DEVICE_FUNCTION_MAP {
   // built-ins
   {"__match_any_sync",                  {"__match_any_sync",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
   {"__match_all_sync",                  {"__match_all_sync",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
+  // vector functions
+  // NOTE: The below all make_ functions are implemented in HIP by DECLOP_MAKE_(ONE|TWO|THREE|FOUR)_COMPONENT preprocessor define (make_##type(...))
+  {"make_char1",                        {"make_char1",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
+  {"make_char2",                        {"make_char2",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
+  {"make_char3",                        {"make_char3",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
+  {"make_char4",                        {"make_char4",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
+  {"make_uchar1",                       {"make_uchar1",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
+  {"make_uchar2",                       {"make_uchar2",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
+  {"make_uchar3",                       {"make_uchar3",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
+  {"make_uchar4",                       {"make_uchar4",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
+  {"make_short1",                       {"make_short1",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
+  {"make_short2",                       {"make_short2",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
+  {"make_short3",                       {"make_short3",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
+  {"make_short4",                       {"make_short4",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
+  {"make_ushort1",                      {"make_ushort1",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
+  {"make_ushort2",                      {"make_ushort2",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
+  {"make_ushort3",                      {"make_ushort3",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
+  {"make_ushort4",                      {"make_ushort4",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_DEVICE_FUNCTION_VER_MAP {
@@ -1703,6 +1721,22 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DEVICE_FUNCTION_VER_MAP {
   {"__hip_cvt_fp4x2_to_halfraw2",       {HIP_7000, HIP_0,    HIP_0   }},
   {"__hip_cvt_halfraw_to_fp4",          {HIP_7000, HIP_0,    HIP_0   }},
   {"__hip_cvt_halfraw2_to_fp4x2",       {HIP_7000, HIP_0,    HIP_0   }},
+  {"make_char1",                        {HIP_1060, HIP_0,    HIP_0   }},
+  {"make_char2",                        {HIP_1060, HIP_0,    HIP_0   }},
+  {"make_char3",                        {HIP_1060, HIP_0,    HIP_0   }},
+  {"make_char4",                        {HIP_1060, HIP_0,    HIP_0   }},
+  {"make_uchar1",                       {HIP_1060, HIP_0,    HIP_0   }},
+  {"make_uchar2",                       {HIP_1060, HIP_0,    HIP_0   }},
+  {"make_uchar3",                       {HIP_1060, HIP_0,    HIP_0   }},
+  {"make_uchar4",                       {HIP_1060, HIP_0,    HIP_0   }},
+  {"make_short1",                       {HIP_1060, HIP_0,    HIP_0   }},
+  {"make_short2",                       {HIP_1060, HIP_0,    HIP_0   }},
+  {"make_short3",                       {HIP_1060, HIP_0,    HIP_0   }},
+  {"make_short4",                       {HIP_1060, HIP_0,    HIP_0   }},
+  {"make_ushort1",                      {HIP_1060, HIP_0,    HIP_0   }},
+  {"make_ushort2",                      {HIP_1060, HIP_0,    HIP_0   }},
+  {"make_ushort3",                      {HIP_1060, HIP_0,    HIP_0   }},
+  {"make_ushort4",                      {HIP_1060, HIP_0,    HIP_0   }},
 };
 
 const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_DEVICE_FUNCTION_CHANGED_VER_MAP {
