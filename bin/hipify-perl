@@ -6836,7 +6836,23 @@ sub simpleSubstitutions {
     subst("lrintf", "lrintf", "device_function");
     subst("lround", "lround", "device_function");
     subst("lroundf", "lroundf", "device_function");
+    subst("make_char1", "make_char1", "device_function");
+    subst("make_char2", "make_char2", "device_function");
+    subst("make_char3", "make_char3", "device_function");
+    subst("make_char4", "make_char4", "device_function");
     subst("make_half2", "make_half2", "device_function");
+    subst("make_short1", "make_short1", "device_function");
+    subst("make_short2", "make_short2", "device_function");
+    subst("make_short3", "make_short3", "device_function");
+    subst("make_short4", "make_short4", "device_function");
+    subst("make_uchar1", "make_uchar1", "device_function");
+    subst("make_uchar2", "make_uchar2", "device_function");
+    subst("make_uchar3", "make_uchar3", "device_function");
+    subst("make_uchar4", "make_uchar4", "device_function");
+    subst("make_ushort1", "make_ushort1", "device_function");
+    subst("make_ushort2", "make_ushort2", "device_function");
+    subst("make_ushort3", "make_ushort3", "device_function");
+    subst("make_ushort4", "make_ushort4", "device_function");
     subst("max", "max", "device_function");
     subst("min", "min", "device_function");
     subst("modf", "modf", "device_function");
@@ -6943,8 +6959,24 @@ sub simpleSubstitutions {
     subst("__nv_fp8x4_e5m2", "__hip_fp8x4_e5m2_fnuz", "device_type");
     subst("__nv_fp8x4_storage_t", "__hip_fp8x4_storage_t", "device_type");
     subst("__nv_saturation_t", "__hip_saturation_t", "device_type");
+    subst("char1", "char1", "device_type");
+    subst("char2", "char2", "device_type");
+    subst("char3", "char3", "device_type");
+    subst("char4", "char4", "device_type");
     subst("cudaRoundMode", "hipRoundMode", "device_type");
     subst("nv_bfloat16", "hip_bfloat16", "device_type");
+    subst("short1", "short1", "device_type");
+    subst("short2", "short2", "device_type");
+    subst("short3", "short3", "device_type");
+    subst("short4", "short4", "device_type");
+    subst("uchar1", "uchar1", "device_type");
+    subst("uchar2", "uchar2", "device_type");
+    subst("uchar3", "uchar3", "device_type");
+    subst("uchar4", "uchar4", "device_type");
+    subst("ushort1", "ushort1", "device_type");
+    subst("ushort2", "ushort2", "device_type");
+    subst("ushort3", "ushort3", "device_type");
+    subst("ushort4", "ushort4", "device_type");
     subst("caffe2\/core\/common_cudnn.h", "caffe2\/core\/hip\/common_miopen.h", "include");
     subst("caffe2\/operators\/spatial_batch_norm_op.h", "caffe2\/operators\/hip\/spatial_batch_norm_op_miopen.hip", "include");
     subst("channel_descriptor.h", "hip\/channel_descriptor.h", "include");
@@ -9486,7 +9518,23 @@ sub transformHostFunctions {
     "modf",
     "min",
     "max",
+    "make_ushort4",
+    "make_ushort3",
+    "make_ushort2",
+    "make_ushort1",
+    "make_uchar4",
+    "make_uchar3",
+    "make_uchar2",
+    "make_uchar1",
+    "make_short4",
+    "make_short3",
+    "make_short2",
+    "make_short1",
     "make_half2",
+    "make_char4",
+    "make_char3",
+    "make_char2",
+    "make_char1",
     "lroundf",
     "lround",
     "lrintf",
@@ -10332,12 +10380,28 @@ sub warnUnsupportedDeviceFunctions {
 }
 
 @SupportedDeviceDataTypes = (
+    "ushort4",
+    "ushort3",
+    "ushort2",
+    "ushort1",
+    "uchar4",
+    "uchar3",
+    "uchar2",
+    "uchar1",
+    "short4",
+    "short3",
+    "short2",
+    "short1",
     "nv_bfloat16",
     "cudaRoundZero",
     "cudaRoundPosInf",
     "cudaRoundNearest",
     "cudaRoundMode",
     "cudaRoundMinInf",
+    "char4",
+    "char3",
+    "char2",
+    "char1",
     "__nv_saturation_t",
     "__nv_fp8x4_storage_t",
     "__nv_fp8x4_e5m2",
