@@ -142,7 +142,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_TENSOR_TYPE_NAME_MAP {
   {"cutensorWorksizePreference_t",                     {"hiptensorWorksizePreference_t",                            "", CONV_TYPE, API_TENSOR, 1}},
   {"CUTENSOR_WORKSPACE_MIN",                           {"HIPTENSOR_WORKSPACE_MIN",                                  "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
   {"CUTENSOR_WORKSPACE_DEFAULT",                       {"HIPTENSOR_WORKSPACE_DEFAULT",                              "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_WORKSPACE_RECOMMENDED",                   {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED}},
+  {"CUTENSOR_WORKSPACE_RECOMMENDED",                   {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED | CUDA_REMOVED}},
   {"CUTENSOR_WORKSPACE_MAX",                           {"HIPTENSOR_WORKSPACE_MAX",                                  "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
 
   {"cutensorOperationDescriptorAttribute_t",           {"hiptensorOperationDescriptorAttribute_t",                  "", CONV_TYPE, API_TENSOR, 1}},
@@ -235,6 +235,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_TENSOR_TYPE_NAME_MAP {
   //       cutensorCreateElementwiseBinary -> hiptensorCreateElementwiseBinary are incorrect
   // TODO: File a corresponding ticket to the Tensor team
   {"cutensorComputeDescriptor_t",                      {"hiptensorComputeDescriptor_t",                             "", CONV_TYPE, API_TENSOR, 1}},
+  {"CUTENSOR_COMPUTE_DESC_16F",                        {"HIPTENSOR_COMPUTE_DESC_16F",                               "", CONV_TYPE, API_TENSOR, 1}},
+  {"CUTENSOR_COMPUTE_DESC_16BF",                       {"HIPTENSOR_COMPUTE_DESC_16BF",                              "", CONV_TYPE, API_TENSOR, 1}},
+  {"CUTENSOR_COMPUTE_DESC_TF32",                       {"HIPTENSOR_COMPUTE_DESC_TF32",                              "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED}},
+  {"CUTENSOR_COMPUTE_DESC_3XTF32",                     {"HIPTENSOR_COMPUTE_DESC_3XTF32",                            "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED}},
+  {"CUTENSOR_COMPUTE_DESC_32F",                        {"HIPTENSOR_COMPUTE_DESC_32F",                               "", CONV_TYPE, API_TENSOR, 1}},
+  {"CUTENSOR_COMPUTE_DESC_64F",                        {"HIPTENSOR_COMPUTE_DESC_64F",                               "", CONV_TYPE, API_TENSOR, 1}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_TENSOR_TYPE_NAME_VER_MAP {
@@ -414,6 +420,12 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_TENSOR_TYPE_NAME_VER_MAP {
   {"cutensorOperationDescriptor",                      {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
   {"cutensorComputeDescriptor_t",                      {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
   {"cutensorComputeDescriptor",                        {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
+  {"CUTENSOR_COMPUTE_DESC_16F",                        {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
+  {"CUTENSOR_COMPUTE_DESC_16BF",                       {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
+  {"CUTENSOR_COMPUTE_DESC_TF32",                       {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
+  {"CUTENSOR_COMPUTE_DESC_3XTF32",                     {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
+  {"CUTENSOR_COMPUTE_DESC_32F",                        {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
+  {"CUTENSOR_COMPUTE_DESC_64F",                        {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_TENSOR_TYPE_NAME_VER_MAP {

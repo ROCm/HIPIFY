@@ -1500,6 +1500,7 @@ my %removed_funcs = (
     "CU_DEVICE_ATTRIBUTE_CAN_USE_STREAM_MEM_OPS" => "12.0",
     "CU_DEVICE_ATTRIBUTE_CAN_USE_64_BIT_STREAM_MEM_OPS_V2" => "12.0",
     "CU_COMPUTEMODE_EXCLUSIVE" => "8.0",
+    "CUTENSOR_WORKSPACE_RECOMMENDED" => "2.0.0.0",
     "CUTENSOR_AUTOTUNE_NONE" => "2.0.0.0",
     "CUTENSOR_AUTOTUNE_INCREMENTAL" => "2.0.0.0",
     "CUSPARSE_SPMMA_PREPROCESS" => "11.2",
@@ -7127,6 +7128,10 @@ sub simpleSubstitutions {
     subst("CUGLDeviceList_enum", "hipGLDeviceList", "type");
     subst("CUGPUDirectRDMAWritesOrdering", "hipGPUDirectRDMAWritesOrdering", "type");
     subst("CUGPUDirectRDMAWritesOrdering_enum", "hipGPUDirectRDMAWritesOrdering", "type");
+    subst("CUTENSOR_COMPUTE_DESC_16BF", "HIPTENSOR_COMPUTE_DESC_16BF", "type");
+    subst("CUTENSOR_COMPUTE_DESC_16F", "HIPTENSOR_COMPUTE_DESC_16F", "type");
+    subst("CUTENSOR_COMPUTE_DESC_32F", "HIPTENSOR_COMPUTE_DESC_32F", "type");
+    subst("CUTENSOR_COMPUTE_DESC_64F", "HIPTENSOR_COMPUTE_DESC_64F", "type");
     subst("CUaccessPolicyWindow", "hipAccessPolicyWindow", "type");
     subst("CUaccessPolicyWindow_st", "hipAccessPolicyWindow", "type");
     subst("CUaccessProperty", "hipAccessProperty", "type");
@@ -12942,6 +12947,8 @@ sub warnRemovedFunctions {
     "CUTENSOR_C_MIN_32F",
     "CUTENSOR_C_MIN_16F",
     "CUTENSOR_COMPUTE_TF32",
+    "CUTENSOR_COMPUTE_DESC_TF32",
+    "CUTENSOR_COMPUTE_DESC_3XTF32",
     "CUTENSOR_COMPUTE_3XTF32",
     "CUTENSOR_ALGO_TTGT",
     "CUTENSOR_ALGO_TGETT",
@@ -14564,6 +14571,8 @@ sub warnHipOnlyUnsupportedFunctions {
     "CUTENSOR_C_MIN_32F",
     "CUTENSOR_C_MIN_16F",
     "CUTENSOR_COMPUTE_TF32",
+    "CUTENSOR_COMPUTE_DESC_TF32",
+    "CUTENSOR_COMPUTE_DESC_3XTF32",
     "CUTENSOR_COMPUTE_3XTF32",
     "CUTENSOR_ALGO_TTGT",
     "CUTENSOR_ALGO_TGETT",
