@@ -41,6 +41,7 @@
 |`CUTENSOR_COMPUTE_DESC_32F`|2.0.0.0| | | |`HIPTENSOR_COMPUTE_DESC_32F`|7.0.0| | | | |
 |`CUTENSOR_COMPUTE_DESC_3XTF32`|2.0.0.0| | | | | | | | | |
 |`CUTENSOR_COMPUTE_DESC_64F`|2.0.0.0| | | |`HIPTENSOR_COMPUTE_DESC_64F`|7.0.0| | | | |
+|`CUTENSOR_COMPUTE_DESC_9X16BF`|2.3.0.0| | | | | | | | | |
 |`CUTENSOR_COMPUTE_DESC_TF32`|2.0.0.0| | | | | | | | | |
 |`CUTENSOR_COMPUTE_TF32`|1.0.1.0| | |2.0.0.0| | | | | | |
 |`CUTENSOR_C_16BF`|2.0.0.0| | | |`HIPTENSOR_C_16BF`|7.0.0| | | | |
@@ -156,6 +157,8 @@
 |`CUTENSOR_WORKSPACE_RECOMMENDED`|1.0.1.0| | |2.0.0.0| | | | | | |
 |`cutensorAlgo_t`|1.0.1.0| | | |`hiptensorAlgo_t`|5.7.0| | | | |
 |`cutensorAutotuneMode_t`|1.2.0.0| |2.0.0.0| |`hiptensorAutotuneMode_t`|7.0.0| | | | |
+|`cutensorBlockSparseTensorDescriptor`|2.3.0.0| | | | | | | | | |
+|`cutensorBlockSparseTensorDescriptor_t`|2.3.0.0| | | | | | | | | |
 |`cutensorCacheMode_t`|1.2.0.0| | | |`hiptensorCacheMode_t`|7.0.0| | | | |
 |`cutensorComputeDescriptor`|2.0.0.0| | | | | | | | | |
 |`cutensorComputeDescriptor_t`|2.0.0.0| | | |`hiptensorComputeDescriptor_t`|7.0.0| | | | |
