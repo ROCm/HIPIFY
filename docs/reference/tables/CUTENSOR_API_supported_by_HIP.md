@@ -205,10 +205,13 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
+|`cutensorBlockSparseContract`|2.3.0.0| | | | | | | | | |
 |`cutensorContract`|2.0.0.0| | | |`hiptensorContract`|7.0.0| | | | |
 |`cutensorContractTrinary`|2.2.0.0| | | | | | | | | |
 |`cutensorContraction`|1.0.1.0| | |2.0.0.0|`hiptensorContraction`|6.1.0| | |7.0.0| |
 |`cutensorCreate`|1.7.0.0| |2.0.0.0| |`hiptensorCreate`|5.7.0| |7.0.0| | |
+|`cutensorCreateBlockSparseContraction`|2.3.0.0| | | | | | | | | |
+|`cutensorCreateBlockSparseTensorDescriptor`|2.3.0.0| | | | | | | | | |
 |`cutensorCreateContraction`|2.0.0.0| | | |`hiptensorCreateContraction`|7.0.0| | | | |
 |`cutensorCreateContractionTrinary`|2.2.0.0| | | | | | | | | |
 |`cutensorCreateElementwiseBinary`|2.0.0.0| | | |`hiptensorCreateElementwiseBinary`|7.0.0| | | | |
@@ -219,6 +222,7 @@
 |`cutensorCreateReduction`|2.0.0.0| | | |`hiptensorCreateReduction`|7.0.0| | | | |
 |`cutensorCreateTensorDescriptor`|2.0.0.0| | | |`hiptensorCreateTensorDescriptor`|7.0.0| | | | |
 |`cutensorDestroy`|1.7.0.0| |2.0.0.0| |`hiptensorDestroy`|5.7.0| |7.0.0| | |
+|`cutensorDestroyBlockSparseTensorDescriptor`|2.3.0.0| | | | | | | | | |
 |`cutensorDestroyOperationDescriptor`|2.0.0.0| | | |`hiptensorDestroyOperationDescriptor`|7.0.0| | | | |
 |`cutensorDestroyPlan`|2.0.0.0| | | |`hiptensorDestroyPlan`|7.0.0| | | | |
 |`cutensorDestroyPlanPreference`|2.0.0.0| | | |`hiptensorDestroyPlanPreference`|7.0.0| | | | |
