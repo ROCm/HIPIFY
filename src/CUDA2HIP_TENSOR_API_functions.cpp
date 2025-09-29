@@ -86,6 +86,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_TENSOR_FUNCTION_MAP {
   {"cutensorMgContraction",                          {"",                                                    "", CONV_LIB_FUNC, API_TENSOR, 2, UNSUPPORTED}},
   {"cutensorCreateContractionTrinary",               {"",                                                    "", CONV_LIB_FUNC, API_TENSOR, 2, UNSUPPORTED}},
   {"cutensorContractTrinary",                        {"",                                                    "", CONV_LIB_FUNC, API_TENSOR, 2, UNSUPPORTED}},
+  {"cutensorCreateBlockSparseTensorDescriptor",      {"",                                                    "", CONV_LIB_FUNC, API_TENSOR, 2, UNSUPPORTED}},
+  {"cutensorDestroyBlockSparseTensorDescriptor",     {"",                                                    "", CONV_LIB_FUNC, API_TENSOR, 2, UNSUPPORTED}},
+  {"cutensorCreateBlockSparseContraction",           {"",                                                    "", CONV_LIB_FUNC, API_TENSOR, 2, UNSUPPORTED}},
+  {"cutensorBlockSparseContract",                    {"",                                                    "", CONV_LIB_FUNC, API_TENSOR, 2, UNSUPPORTED}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_TENSOR_FUNCTION_VER_MAP {
@@ -152,6 +156,10 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_TENSOR_FUNCTION_VER_MAP {
   {"cutensorMgContraction",                          {CUTENSOR_1400, CUDA_0,        CUDA_0        }},
   {"cutensorCreateContractionTrinary",               {CUTENSOR_2200, CUDA_0,        CUDA_0        }},
   {"cutensorContractTrinary",                        {CUTENSOR_2200, CUDA_0,        CUDA_0        }},
+  {"cutensorCreateBlockSparseTensorDescriptor",      {CUTENSOR_2300, CUDA_0,        CUDA_0        }},
+  {"cutensorDestroyBlockSparseTensorDescriptor",     {CUTENSOR_2300, CUDA_0,        CUDA_0        }},
+  {"cutensorCreateBlockSparseContraction",           {CUTENSOR_2300, CUDA_0,        CUDA_0        }},
+  {"cutensorBlockSparseContract",                    {CUTENSOR_2300, CUDA_0,        CUDA_0        }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_TENSOR_FUNCTION_VER_MAP {
