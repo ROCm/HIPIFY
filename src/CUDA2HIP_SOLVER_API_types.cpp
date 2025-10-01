@@ -119,6 +119,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SOLVER_TYPE_NAME_MAP {
   {"cusolverDnFunction_t",                                     {"hipsolverDnFunction_t",                                     "",                                                                 CONV_TYPE, API_SOLVER, 1, ROC_UNSUPPORTED}},
   {"CUSOLVERDN_GETRF",                                         {"HIPSOLVERDN_GETRF",                                         "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED}},
   {"CUSOLVERDN_POTRF",                                         {"HIPSOLVERDN_POTRF",                                         "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
+  {"CUSOLVERDN_SYEVBATCHED",                                   {"HIPSOLVERDN_SYEVBATCHED",                                   "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
   {"cusolverDeterministicMode_t",                              {"hipsolverDeterministicMode_t",                              "",                                                                 CONV_TYPE, API_SOLVER, 1, ROC_UNSUPPORTED}},
   {"CUSOLVER_DETERMINISTIC_RESULTS",                           {"HIPSOLVER_DETERMINISTIC_RESULTS",                           "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED}},
   {"CUSOLVER_ALLOW_NON_DETERMINISTIC_RESULTS",                 {"HIPSOLVER_ALLOW_NON_DETERMINISTIC_RESULTS",                 "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED}},
@@ -167,6 +168,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SOLVER_TYPE_NAME_MAP {
   {"csrcholInfoHost_t",                                        {"hipsolvercsrcholInfoHost_t",                                "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
   {"csrcholInfo",                                              {"hipsolvercsrcholInfo",                                      "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
   {"csrcholInfo_t",                                            {"hipsolvercsrcholInfo_t",                                    "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
+  {"cusolverMathMode_t",                                       {"hipsolverMathMode_t",                                       "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
+  {"CUSOLVER_DEFAULT_MATH",                                    {"HIPSOLVER_DEFAULT_MATH",                                    "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
+  {"CUSOLVER_FP32_EMULATED_BF16X9_MATH",                       {"HIPSOLVER_FP32_EMULATED_BF16X9_MATH",                       "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_SOLVER_TYPE_NAME_VER_MAP {
@@ -270,6 +274,10 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SOLVER_TYPE_NAME_VER_MAP {
   {"csrcholInfoHost_t",                                        {CUDA_75,  CUDA_0,   CUDA_0  }},
   {"csrcholInfo",                                              {CUDA_75,  CUDA_0,   CUDA_0  }},
   {"csrcholInfo_t",                                            {CUDA_75,  CUDA_0,   CUDA_0  }},
+  {"cusolverMathMode_t",                                       {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CUSOLVER_DEFAULT_MATH",                                    {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CUSOLVER_FP32_EMULATED_BF16X9_MATH",                       {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CUSOLVERDN_SYEVBATCHED",                                   {CUDA_130, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_SOLVER_TYPE_NAME_VER_MAP {
