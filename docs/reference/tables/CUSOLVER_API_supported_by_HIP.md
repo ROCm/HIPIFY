@@ -557,24 +557,25 @@
 |`cusolverDnZunmqr_bufferSize`|8.0| | | |`hipsolverDnZunmqr_bufferSize`|5.1.0| | | | |
 |`cusolverDnZunmtr`|8.0| | | |`hipsolverDnZunmtr`|5.1.0| | | | |
 |`cusolverDnZunmtr_bufferSize`|8.0| | | |`hipsolverDnZunmtr_bufferSize`|5.1.0| | | | |
-|`cusolverMgCreate`|10.1| | | | | | | | | |
-|`cusolverMgCreateDeviceGrid`|10.1| | | | | | | | | |
-|`cusolverMgCreateMatrixDesc`|10.1| | | | | | | | | |
-|`cusolverMgDestroy`|10.1| | | | | | | | | |
-|`cusolverMgDestroyGrid`|10.1| | | | | | | | | |
-|`cusolverMgDeviceSelect`|10.1| | | | | | | | | |
-|`cusolverMgGetrf`|10.2| | | | | | | | | |
-|`cusolverMgGetrf_bufferSize`|10.2| | | | | | | | | |
-|`cusolverMgGetrs`|10.2| | | | | | | | | |
-|`cusolverMgGetrs_bufferSize`|10.2| | | | | | | | | |
-|`cusolverMgPotrf`|11.0| | | | | | | | | |
-|`cusolverMgPotrf_bufferSize`|11.0| | | | | | | | | |
-|`cusolverMgPotri`|11.0| | | | | | | | | |
-|`cusolverMgPotri_bufferSize`|11.0| | | | | | | | | |
-|`cusolverMgPotrs`|11.0| | | | | | | | | |
-|`cusolverMgPotrs_bufferSize`|11.0| | | | | | | | | |
-|`cusolverMgSyevd`|10.1| | | | | | | | | |
-|`cusolverMgSyevd_bufferSize`|10.1| | | | | | | | | |
+|`cusolverMgCreate`|10.1|13.0| | | | | | | | |
+|`cusolverMgCreateDeviceGrid`|10.1|13.0| | | | | | | | |
+|`cusolverMgCreateMatrixDesc`|10.1|13.0| | | | | | | | |
+|`cusolverMgDestroy`|10.1|13.0| | | | | | | | |
+|`cusolverMgDestroyGrid`|10.1|13.0| | | | | | | | |
+|`cusolverMgDestroyMatrixDesc`|10.1|13.0| | | | | | | | |
+|`cusolverMgDeviceSelect`|10.1|13.0| | | | | | | | |
+|`cusolverMgGetrf`|10.2|13.0| | | | | | | | |
+|`cusolverMgGetrf_bufferSize`|10.2|13.0| | | | | | | | |
+|`cusolverMgGetrs`|10.2|13.0| | | | | | | | |
+|`cusolverMgGetrs_bufferSize`|10.2|13.0| | | | | | | | |
+|`cusolverMgPotrf`|11.0|13.0| | | | | | | | |
+|`cusolverMgPotrf_bufferSize`|11.0|13.0| | | | | | | | |
+|`cusolverMgPotri`|11.0|13.0| | | | | | | | |
+|`cusolverMgPotri_bufferSize`|11.0|13.0| | | | | | | | |
+|`cusolverMgPotrs`|11.0|13.0| | | | | | | | |
+|`cusolverMgPotrs_bufferSize`|11.0|13.0| | | | | | | | |
+|`cusolverMgSyevd`|10.1|13.0| | | | | | | | |
+|`cusolverMgSyevd_bufferSize`|10.1|13.0| | | | | | | | |
 |`cusolverRfAccessBundledFactorsDevice`| |12.8| | |`hipsolverRfAccessBundledFactorsDevice`|5.6.0| | | | |
 |`cusolverRfAnalyze`| |12.8| | |`hipsolverRfAnalyze`|5.6.0| | | | |
 |`cusolverRfBatchAnalyze`| | | | |`hipsolverRfBatchAnalyze`|5.6.0| | | | |
