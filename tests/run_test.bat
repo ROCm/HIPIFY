@@ -30,7 +30,7 @@ if %NUM% EQU 1 (
   shift
   call set HIPIFY_OPTS=%%5 %%6 %%7 %%8 %%9
 ) else (
-  set clang_args=%%all_args:*%6=%%
+  call set clang_args=%%all_args:*%5=%%
   set NUM=0
 )
 if %NUM% EQU 4 (
