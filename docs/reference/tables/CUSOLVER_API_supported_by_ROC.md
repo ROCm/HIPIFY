@@ -613,13 +613,13 @@
 |`cusolverSpCcsrcholZeroPivotHost`|7.5|12.8| | | | | | | | |
 |`cusolverSpCcsreigsHost`| | | | | | | | | | |
 |`cusolverSpCcsreigvsi`| | | | | | | | | | |
-|`cusolverSpCcsreigvsiHost`| | | | | | | | | | |
-|`cusolverSpCcsrlsqvqrHost`| | | | | | | | | | |
+|`cusolverSpCcsreigvsiHost`| |13.0| | | | | | | | |
+|`cusolverSpCcsrlsqvqrHost`| |13.0| | | | | | | | |
 |`cusolverSpCcsrlsvchol`| |12.8| | | | | | | | |
 |`cusolverSpCcsrlsvcholHost`| |12.8| | | | | | | | |
 |`cusolverSpCcsrlsvluHost`| |12.8| | | | | | | | |
-|`cusolverSpCcsrlsvqr`| | | | | | | | | | |
-|`cusolverSpCcsrlsvqrHost`| | | | | | | | | | |
+|`cusolverSpCcsrlsvqr`| |13.0| | | | | | | | |
+|`cusolverSpCcsrlsvqrHost`| |13.0| | | | | | | | |
 |`cusolverSpCcsrluBufferInfoHost`|7.5|12.8| | | | | | | | |
 |`cusolverSpCcsrluExtractHost`|7.5|12.8| | | | | | | | |
 |`cusolverSpCcsrluFactorHost`|7.5|12.8| | | | | | | | |
@@ -638,7 +638,7 @@
 |`cusolverSpCcsrqrZeroPivotHost`|7.5| | | | | | | | | |
 |`cusolverSpCcsrqrsvBatched`| | | | | | | | | | |
 |`cusolverSpCcsrzfdHost`|9.2| | | | | | | | | |
-|`cusolverSpCreate`| | | | | | | | | | |
+|`cusolverSpCreate`| |13.0| | | | | | | | |
 |`cusolverSpCreateCsrcholInfo`|7.5|12.8| | | | | | | | |
 |`cusolverSpCreateCsrcholInfoHost`|7.5| | | | | | | | | |
 |`cusolverSpCreateCsrluInfoHost`|7.5| | | | | | | | | |
@@ -655,13 +655,13 @@
 |`cusolverSpDcsrcholZeroPivotHost`|7.5|12.8| | | | | | | | |
 |`cusolverSpDcsreigsHost`| | | | | | | | | | |
 |`cusolverSpDcsreigvsi`| | | | | | | | | | |
-|`cusolverSpDcsreigvsiHost`| | | | | | | | | | |
-|`cusolverSpDcsrlsqvqrHost`| | | | | | | | | | |
+|`cusolverSpDcsreigvsiHost`| |13.0| | | | | | | | |
+|`cusolverSpDcsrlsqvqrHost`| |13.0| | | | | | | | |
 |`cusolverSpDcsrlsvchol`| |12.8| | | | | | | | |
 |`cusolverSpDcsrlsvcholHost`| |12.8| | | | | | | | |
 |`cusolverSpDcsrlsvluHost`| |12.8| | | | | | | | |
-|`cusolverSpDcsrlsvqr`| | | | | | | | | | |
-|`cusolverSpDcsrlsvqrHost`| | | | | | | | | | |
+|`cusolverSpDcsrlsvqr`| |13.0| | | | | | | | |
+|`cusolverSpDcsrlsvqrHost`| |13.0| | | | | | | | |
 |`cusolverSpDcsrluBufferInfoHost`|7.5|12.8| | | | | | | | |
 |`cusolverSpDcsrluExtractHost`|7.5|12.8| | | | | | | | |
 |`cusolverSpDcsrluFactorHost`|7.5|12.8| | | | | | | | |
@@ -680,13 +680,13 @@
 |`cusolverSpDcsrqrZeroPivotHost`|7.5| | | | | | | | | |
 |`cusolverSpDcsrqrsvBatched`| | | | | | | | | | |
 |`cusolverSpDcsrzfdHost`|9.2| | | | | | | | | |
-|`cusolverSpDestroy`| | | | | | | | | | |
+|`cusolverSpDestroy`| |13.0| | | | | | | | |
 |`cusolverSpDestroyCsrcholInfo`|7.5|12.8| | | | | | | | |
 |`cusolverSpDestroyCsrcholInfoHost`|7.5| | | | | | | | | |
 |`cusolverSpDestroyCsrluInfoHost`|7.5| | | | | | | | | |
 |`cusolverSpDestroyCsrqrInfo`| | | | | | | | | | |
 |`cusolverSpDestroyCsrqrInfoHost`|7.5| | | | | | | | | |
-|`cusolverSpGetStream`| | | | | | | | | | |
+|`cusolverSpGetStream`| |13.0| | | | | | | | |
 |`cusolverSpScsrcholBufferInfo`|7.5|12.8| | | | | | | | |
 |`cusolverSpScsrcholBufferInfoHost`|7.5|12.8| | | | | | | | |
 |`cusolverSpScsrcholDiag`|10.1|12.8| | | | | | | | |
@@ -698,13 +698,13 @@
 |`cusolverSpScsrcholZeroPivotHost`|7.5|12.8| | | | | | | | |
 |`cusolverSpScsreigsHost`| | | | | | | | | | |
 |`cusolverSpScsreigvsi`| | | | | | | | | | |
-|`cusolverSpScsreigvsiHost`| | | | | | | | | | |
-|`cusolverSpScsrlsqvqrHost`| | | | | | | | | | |
+|`cusolverSpScsreigvsiHost`| |13.0| | | | | | | | |
+|`cusolverSpScsrlsqvqrHost`| |13.0| | | | | | | | |
 |`cusolverSpScsrlsvchol`| |12.8| | | | | | | | |
 |`cusolverSpScsrlsvcholHost`| |12.8| | | | | | | | |
 |`cusolverSpScsrlsvluHost`| |12.8| | | | | | | | |
-|`cusolverSpScsrlsvqr`| | | | | | | | | | |
-|`cusolverSpScsrlsvqrHost`| | | | | | | | | | |
+|`cusolverSpScsrlsvqr`| |13.0| | | | | | | | |
+|`cusolverSpScsrlsvqrHost`| |13.0| | | | | | | | |
 |`cusolverSpScsrluBufferInfoHost`|7.5|12.8| | | | | | | | |
 |`cusolverSpScsrluExtractHost`|7.5|12.8| | | | | | | | |
 |`cusolverSpScsrluFactorHost`|7.5|12.8| | | | | | | | |
@@ -723,10 +723,10 @@
 |`cusolverSpScsrqrZeroPivotHost`|7.5| | | | | | | | | |
 |`cusolverSpScsrqrsvBatched`| | | | | | | | | | |
 |`cusolverSpScsrzfdHost`|9.2| | | | | | | | | |
-|`cusolverSpSetStream`| | | | | | | | | | |
+|`cusolverSpSetStream`| |13.0| | | | | | | | |
 |`cusolverSpXcsrcholAnalysis`|7.5|12.8| | | | | | | | |
 |`cusolverSpXcsrcholAnalysisHost`|7.5|12.8| | | | | | | | |
-|`cusolverSpXcsrissymHost`| | | | | | | | | | |
+|`cusolverSpXcsrissymHost`| |13.0| | | | | | | | |
 |`cusolverSpXcsrluAnalysisHost`|7.5|12.8| | | | | | | | |
 |`cusolverSpXcsrluNnzHost`|7.5|12.8| | | | | | | | |
 |`cusolverSpXcsrmetisndHost`|9.2| | | | | | | | | |
@@ -749,13 +749,13 @@
 |`cusolverSpZcsrcholZeroPivotHost`|7.5|12.8| | | | | | | | |
 |`cusolverSpZcsreigsHost`| | | | | | | | | | |
 |`cusolverSpZcsreigvsi`| | | | | | | | | | |
-|`cusolverSpZcsreigvsiHost`| | | | | | | | | | |
-|`cusolverSpZcsrlsqvqrHost`| | | | | | | | | | |
+|`cusolverSpZcsreigvsiHost`| |13.0| | | | | | | | |
+|`cusolverSpZcsrlsqvqrHost`| |13.0| | | | | | | | |
 |`cusolverSpZcsrlsvchol`| |12.8| | | | | | | | |
 |`cusolverSpZcsrlsvcholHost`| |12.8| | | | | | | | |
 |`cusolverSpZcsrlsvluHost`| |12.8| | | | | | | | |
-|`cusolverSpZcsrlsvqr`| | | | | | | | | | |
-|`cusolverSpZcsrlsvqrHost`| | | | | | | | | | |
+|`cusolverSpZcsrlsvqr`| |13.0| | | | | | | | |
+|`cusolverSpZcsrlsvqrHost`| |13.0| | | | | | | | |
 |`cusolverSpZcsrluBufferInfoHost`|7.5|12.8| | | | | | | | |
 |`cusolverSpZcsrluExtractHost`|7.5|12.8| | | | | | | | |
 |`cusolverSpZcsrluFactorHost`|7.5|12.8| | | | | | | | |
