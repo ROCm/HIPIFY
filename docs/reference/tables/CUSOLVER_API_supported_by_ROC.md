@@ -578,27 +578,27 @@
 |`cusolverMgSyevd_bufferSize`|10.1|13.0| | | | | | | | |
 |`cusolverRfAccessBundledFactorsDevice`| |12.8| | | | | | | | |
 |`cusolverRfAnalyze`| |12.8| | | | | | | | |
-|`cusolverRfBatchAnalyze`| | | | | | | | | | |
-|`cusolverRfBatchRefactor`| | | | | | | | | | |
-|`cusolverRfBatchResetValues`| | | | | | | | | | |
-|`cusolverRfBatchSetupHost`| | | | | | | | | | |
-|`cusolverRfBatchSolve`| | | | | | | | | | |
-|`cusolverRfBatchZeroPivot`| | | | | | | | | | |
-|`cusolverRfCreate`| | | | | | | | | | |
-|`cusolverRfDestroy`| | | | | | | | | | |
+|`cusolverRfBatchAnalyze`| |13.0| | | | | | | | |
+|`cusolverRfBatchRefactor`| |13.0| | | | | | | | |
+|`cusolverRfBatchResetValues`| |13.0| | | | | | | | |
+|`cusolverRfBatchSetupHost`| |13.0| | | | | | | | |
+|`cusolverRfBatchSolve`| |13.0| | | | | | | | |
+|`cusolverRfBatchZeroPivot`| |13.0| | | | | | | | |
+|`cusolverRfCreate`| |13.0| | | | | | | | |
+|`cusolverRfDestroy`| |13.0| | | | | | | | |
 |`cusolverRfExtractBundledFactorsHost`| |12.8| | | | | | | | |
 |`cusolverRfExtractSplitFactorsHost`| |12.8| | | | | | | | |
-|`cusolverRfGetAlgs`| | | | | | | | | | |
-|`cusolverRfGetMatrixFormat`| | | | | | | | | | |
-|`cusolverRfGetNumericBoostReport`| | | | | | | | | | |
-|`cusolverRfGetNumericProperties`| | | | | | | | | | |
-|`cusolverRfGetResetValuesFastMode`| | | | | | | | | | |
+|`cusolverRfGetAlgs`| |13.0| | | | | | | | |
+|`cusolverRfGetMatrixFormat`| |13.0| | | | | | | | |
+|`cusolverRfGetNumericBoostReport`| |13.0| | | | | | | | |
+|`cusolverRfGetNumericProperties`| |13.0| | | | | | | | |
+|`cusolverRfGetResetValuesFastMode`| |13.0| | | | | | | | |
 |`cusolverRfRefactor`| |12.8| | | | | | | | |
 |`cusolverRfResetValues`| |12.8| | | | | | | | |
-|`cusolverRfSetAlgs`| | | | | | | | | | |
-|`cusolverRfSetMatrixFormat`| | | | | | | | | | |
-|`cusolverRfSetNumericProperties`| | | | | | | | | | |
-|`cusolverRfSetResetValuesFastMode`| | | | | | | | | | |
+|`cusolverRfSetAlgs`| |13.0| | | | | | | | |
+|`cusolverRfSetMatrixFormat`| |13.0| | | | | | | | |
+|`cusolverRfSetNumericProperties`| |13.0| | | | | | | | |
+|`cusolverRfSetResetValuesFastMode`| |13.0| | | | | | | | |
 |`cusolverRfSetupDevice`| |12.8| | | | | | | | |
 |`cusolverRfSetupHost`| |12.8| | | | | | | | |
 |`cusolverRfSolve`| |12.8| | | | | | | | |
