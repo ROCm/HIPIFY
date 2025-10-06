@@ -157,7 +157,7 @@
 |`curand_log_normal2`| | | | |`rocrand_log_normal2`|1.5.0| | | | |
 |`curand_log_normal2_double`| | | | |`rocrand_log_normal_double2`|1.5.0| | | | |
 |`curand_log_normal4`| | | | |`rocrand_log_normal4`|1.5.0| | | | |
-|`curand_log_normal4_double`| | | | |`rocrand_log_normal_double4`|1.5.0| | | | |
+|`curand_log_normal4_double`| |13.0| | |`rocrand_log_normal_double4`|1.5.0| | | | |
 |`curand_log_normal_double`| | | | |`rocrand_log_normal_double`|1.5.0| | | | |
 |`curand_mtgp32_single`| | | | | | | | | | |
 |`curand_mtgp32_single_specific`| | | | | | | | | | |
@@ -173,6 +173,6 @@
 |`curand_uniform`| | | | |`rocrand_uniform`|1.5.0| | | | |
 |`curand_uniform2_double`| | | | |`rocrand_uniform_double2`|1.5.0| | | | |
 |`curand_uniform4`| | | | |`rocrand_uniform4`|1.5.0| | | | |
-|`curand_uniform4_double`| | | | |`rocrand_uniform_double4`|1.5.0| | | | |
+|`curand_uniform4_double`| |13.0| | |`rocrand_uniform_double4`|1.5.0| | | | |
 |`curand_uniform_double`| | | | |`rocrand_uniform_double`|1.5.0| | | | |
 
