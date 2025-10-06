@@ -34,3 +34,9 @@ bool hipifyLocalHeaders(const std::string &srcPath,
                         const char *hipify_exe,
                         bool recursive = false);
 
+bool resolveLocalInclude(const std::string &mainSourceAbsPath,
+                         const std::string &includeToken,
+                         std::string &outAbsPath);
+
+bool collectLocalQuotedIncludes(const std::string &mainSourceAbsPath,
+                                std::vector<std::string> &outHeaders);

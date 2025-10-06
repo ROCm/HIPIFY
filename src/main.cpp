@@ -43,6 +43,7 @@ THE SOFTWARE.
 #include "clang/Frontend/TextDiagnosticPrinter.h"
 
 #include "ImplicitHeader.h"
+#include "llvm/Support/CommandLine.h"
 
 #if LLVM_VERSION_MAJOR < 8
 #include "llvm/Support/Path.h"
@@ -54,6 +55,16 @@ THE SOFTWARE.
 constexpr auto DEBUG_TYPE = "cuda2hip";
 
 namespace ct = clang::tooling;
+
+static llvm::cl::opt<bool> OptLocalHeaders(
+  "local-headers",
+  llvm::cl::desc("Enable hipification of quoted local headers (non-recursive)"),
+  llvm::cl::init(false));
+
+static llvm::cl::opt<bool> OptLocalHeadersRecursive(
+  "local-headers-recursive",
+  llvm::cl::desc("Enable hipification of quoted local headers recursively (implies enabling local headers)"),
+  llvm::cl::init(false));
 
 void cleanupHipifyOptions(std::vector<const char*> &args) {
   for (const auto &a : hipifyOptions) {
@@ -430,8 +441,26 @@ int main(int argc, const char **argv) {
     }
     // Initialise the statistics counters for this file.
     Statistics::setActive(src);
-    // Checks the local headers first and operates on them.
-    hipifyLocalHeaders(sSourceAbsPath, compilationDatabase.get(), &OptionsParser, argv[0], false);
+    // Checks the local headers if --local-headers/--local-header-recursive specified.
+    if (OptLocalHeaders || OptLocalHeadersRecursive) {
+      bool doRecursive = OptLocalHeadersRecursive;
+      if (Verbose && OptLocalHeaders && OptLocalHeadersRecursive) {
+        llvm::outs() << sHipify
+                     << "Both --local-headers and --local-headers-recursive specified; running in recursive mode.\n";
+      }
+      if (!hipifyLocalHeaders(sSourceAbsPath,
+                              compilationDatabase.get(),
+                              &OptionsParser,
+                              argv[0],
+                              doRecursive)) {
+        Statistics::current().hasErrors = true;
+        LLVM_DEBUG(llvm::dbgs() << "Local header hipification failed for: " << sSourceAbsPath << "\n");
+        Result = 1;
+      }
+    } else if (Verbose) {
+      llvm::outs() << sHipify
+                   << "Local header hipification disabled (use --local-headers or --local-headers-recursive)\n";
+    }
     // RefactoringTool operates on the file in-place. Giving it the output path is no good,
     // because that'll break relative includes, and we don't want to overwrite the input file.
     // So what we do is operate on a copy, which we then move to the output.
