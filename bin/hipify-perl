@@ -1257,6 +1257,8 @@ my %deprecated_funcs = (
 my %removed_funcs = (
     "texture" => "12.0",
     "surfaceReference" => "12.0",
+    "nvrtcGetNVVMSize" => "13.0",
+    "nvrtcGetNVVM" => "13.0",
     "cusparseZsctr" => "12.0",
     "cusparseZhybsv_solve" => "11.0",
     "cusparseZhybsv_analysis" => "11.0",
@@ -12316,6 +12318,7 @@ sub warnRemovedFunctions {
     "__CUB_LP64__",
     "_CUB_ASM_PTR_SIZE_",
     "_CUB_ASM_PTR_",
+    "NVRTC_ERROR_TIME_TRACE_FILE_WRITE_FAILED",
     "NVRTC_ERROR_TIME_FILE_WRITE_FAILED",
     "NVRTC_ERROR_PCH_CREATE_HEAP_EXHAUSTED",
     "NVRTC_ERROR_PCH_CREATE",

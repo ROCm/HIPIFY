@@ -30,6 +30,7 @@
 |`NVRTC_ERROR_PCH_CREATE_HEAP_EXHAUSTED`|12.8| | | | | | | | | |
 |`NVRTC_ERROR_PROGRAM_CREATION_FAILURE`| | | | |`HIPRTC_ERROR_PROGRAM_CREATION_FAILURE`|2.6.0| | | | |
 |`NVRTC_ERROR_TIME_FILE_WRITE_FAILED`|12.1| | | | | | | | | |
+|`NVRTC_ERROR_TIME_TRACE_FILE_WRITE_FAILED`|13.0| | | | | | | | | |
 |`NVRTC_SUCCESS`| | | | |`HIPRTC_SUCCESS`|2.6.0| | | | |
 |`_nvrtcProgram`| | | | |`_hiprtcProgram`|2.6.0| | | | |
 |`nvrtcProgram`| | | | |`hiprtcProgram`|2.6.0| | | | |
@@ -49,8 +50,8 @@
 |`nvrtcGetLTOIR`|12.0| | | | | | | | | |
 |`nvrtcGetLTOIRSize`|12.0| | | | | | | | | |
 |`nvrtcGetLoweredName`|8.0| | | |`hiprtcGetLoweredName`|2.6.0| | | | |
-|`nvrtcGetNVVM`|11.4|12.0| | | | | | | | |
-|`nvrtcGetNVVMSize`|11.4|12.0| | | | | | | | |
+|`nvrtcGetNVVM`|11.4|12.0| |13.0| | | | | | |
+|`nvrtcGetNVVMSize`|11.4|12.0| |13.0| | | | | | |
 |`nvrtcGetNumSupportedArchs`|11.2| | | | | | | | | |
 |`nvrtcGetOptiXIR`|12.0| | | | | | | | | |
 |`nvrtcGetOptiXIRSize`|12.0| | | | | | | | | |
