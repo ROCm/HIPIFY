@@ -42,6 +42,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RTC_TYPE_NAME_MAP {
   {"NVRTC_ERROR_PCH_CREATE_HEAP_EXHAUSTED",                      {"HIPRTC_ERROR_PCH_CREATE_HEAP_EXHAUSTED",              "", CONV_NUMERIC_LITERAL, API_RTC, 1, UNSUPPORTED}}, // 14
   {"NVRTC_ERROR_PCH_CREATE",                                     {"HIPRTC_ERROR_PCH_CREATE",                             "", CONV_NUMERIC_LITERAL, API_RTC, 1, UNSUPPORTED}}, // 15
   {"NVRTC_ERROR_CANCELLED",                                      {"HIPRTC_ERROR_CANCELLED",                              "", CONV_NUMERIC_LITERAL, API_RTC, 1, UNSUPPORTED}}, // 16
+  {"NVRTC_ERROR_TIME_TRACE_FILE_WRITE_FAILED",                   {"HIPRTC_ERROR_TIME_TRACE_FILE_WRITE_FAILED",           "", CONV_NUMERIC_LITERAL, API_RTC, 1, UNSUPPORTED}}, // 17
 
   {"nvrtcProgram",                                               {"hiprtcProgram",                                       "", CONV_TYPE, API_RTC, 1}},
   {"_nvrtcProgram",                                              {"_hiprtcProgram",                                      "", CONV_TYPE, API_RTC, 1}},
@@ -57,6 +58,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RTC_TYPE_NAME_VER_MAP {
   {"NVRTC_ERROR_PCH_CREATE_HEAP_EXHAUSTED",                      {CUDA_128, CUDA_0,   CUDA_0  }},
   {"NVRTC_ERROR_PCH_CREATE",                                     {CUDA_128, CUDA_0,   CUDA_0  }},
   {"NVRTC_ERROR_CANCELLED",                                      {CUDA_128, CUDA_0,   CUDA_0  }},
+  {"NVRTC_ERROR_TIME_TRACE_FILE_WRITE_FAILED",                   {CUDA_130, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_RTC_TYPE_NAME_VER_MAP {
