@@ -42,7 +42,7 @@ THE SOFTWARE.
 #include "clang/Driver/Tool.h"
 #include "clang/Frontend/TextDiagnosticPrinter.h"
 
-#include "ImplicitHeader.h"
+#include "LocalHeader.h"
 #include "llvm/Support/CommandLine.h"
 
 #if LLVM_VERSION_MAJOR < 8
