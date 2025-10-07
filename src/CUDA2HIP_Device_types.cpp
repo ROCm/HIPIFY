@@ -116,6 +116,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DEVICE_TYPE_NAME_MAP {
   {"uint2",                                {"uint2",                                 "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2}},
   {"uint3",                                {"uint3",                                 "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2}},
   {"uint4",                                {"uint4",                                 "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2}},
+  {"long1",                                {"long1",                                 "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2}},
+  {"long2",                                {"long2",                                 "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2}},
+  {"long3",                                {"long3",                                 "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2}},
+  {"long4",                                {"long4",                                 "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2}},
+  {"ulong1",                               {"ulong1",                                "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2}},
+  {"ulong2",                               {"ulong2",                                "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2}},
+  {"ulong3",                               {"ulong3",                                "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2}},
+  {"ulong4",                               {"ulong4",                                "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_DEVICE_TYPE_NAME_VER_MAP {
@@ -241,6 +249,14 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DEVICE_TYPE_NAME_VER_MAP {
   {"uint2",                                {HIP_1060, HIP_0,    HIP_0   }},
   {"uint3",                                {HIP_1060, HIP_0,    HIP_0   }},
   {"uint4",                                {HIP_1060, HIP_0,    HIP_0   }},
+  {"long1",                                {HIP_1060, HIP_0,    HIP_0   }},
+  {"long2",                                {HIP_1060, HIP_0,    HIP_0   }},
+  {"long3",                                {HIP_1060, HIP_0,    HIP_0   }},
+  {"long4",                                {HIP_1060, HIP_0,    HIP_0   }},
+  {"ulong1",                               {HIP_1060, HIP_0,    HIP_0   }},
+  {"ulong2",                               {HIP_1060, HIP_0,    HIP_0   }},
+  {"ulong3",                               {HIP_1060, HIP_0,    HIP_0   }},
+  {"ulong4",                               {HIP_1060, HIP_0,    HIP_0   }},
 
   {"rocblas_half",                         {HIP_1050, HIP_0,    HIP_0   }},
   {"rocblas_bfloat16",                     {HIP_3050, HIP_0,    HIP_0   }},

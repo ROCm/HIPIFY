@@ -6964,6 +6964,10 @@ sub simpleSubstitutions {
     subst("make_int2", "make_int2", "device_function");
     subst("make_int3", "make_int3", "device_function");
     subst("make_int4", "make_int4", "device_function");
+    subst("make_long1", "make_long1", "device_function");
+    subst("make_long2", "make_long2", "device_function");
+    subst("make_long3", "make_long3", "device_function");
+    subst("make_long4", "make_long4", "device_function");
     subst("make_short1", "make_short1", "device_function");
     subst("make_short2", "make_short2", "device_function");
     subst("make_short3", "make_short3", "device_function");
@@ -6976,6 +6980,10 @@ sub simpleSubstitutions {
     subst("make_uint2", "make_uint2", "device_function");
     subst("make_uint3", "make_uint3", "device_function");
     subst("make_uint4", "make_uint4", "device_function");
+    subst("make_ulong1", "make_ulong1", "device_function");
+    subst("make_ulong2", "make_ulong2", "device_function");
+    subst("make_ulong3", "make_ulong3", "device_function");
+    subst("make_ulong4", "make_ulong4", "device_function");
     subst("make_ushort1", "make_ushort1", "device_function");
     subst("make_ushort2", "make_ushort2", "device_function");
     subst("make_ushort3", "make_ushort3", "device_function");
@@ -7095,6 +7103,10 @@ sub simpleSubstitutions {
     subst("int2", "int2", "device_type");
     subst("int3", "int3", "device_type");
     subst("int4", "int4", "device_type");
+    subst("long1", "long1", "device_type");
+    subst("long2", "long2", "device_type");
+    subst("long3", "long3", "device_type");
+    subst("long4", "long4", "device_type");
     subst("nv_bfloat16", "hip_bfloat16", "device_type");
     subst("short1", "short1", "device_type");
     subst("short2", "short2", "device_type");
@@ -7108,6 +7120,10 @@ sub simpleSubstitutions {
     subst("uint2", "uint2", "device_type");
     subst("uint3", "uint3", "device_type");
     subst("uint4", "uint4", "device_type");
+    subst("ulong1", "ulong1", "device_type");
+    subst("ulong2", "ulong2", "device_type");
+    subst("ulong3", "ulong3", "device_type");
+    subst("ulong4", "ulong4", "device_type");
     subst("ushort1", "ushort1", "device_type");
     subst("ushort2", "ushort2", "device_type");
     subst("ushort3", "ushort3", "device_type");
@@ -9661,6 +9677,10 @@ sub transformHostFunctions {
     "make_ushort3",
     "make_ushort2",
     "make_ushort1",
+    "make_ulong4",
+    "make_ulong3",
+    "make_ulong2",
+    "make_ulong1",
     "make_uint4",
     "make_uint3",
     "make_uint2",
@@ -9673,6 +9693,10 @@ sub transformHostFunctions {
     "make_short3",
     "make_short2",
     "make_short1",
+    "make_long4",
+    "make_long3",
+    "make_long2",
+    "make_long1",
     "make_int4",
     "make_int3",
     "make_int2",
@@ -10531,6 +10555,10 @@ sub warnUnsupportedDeviceFunctions {
     "ushort3",
     "ushort2",
     "ushort1",
+    "ulong4",
+    "ulong3",
+    "ulong2",
+    "ulong1",
     "uint4",
     "uint3",
     "uint2",
@@ -10544,6 +10572,10 @@ sub warnUnsupportedDeviceFunctions {
     "short2",
     "short1",
     "nv_bfloat16",
+    "long4",
+    "long3",
+    "long2",
+    "long1",
     "int4",
     "int3",
     "int2",
