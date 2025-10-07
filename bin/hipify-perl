@@ -6960,6 +6960,10 @@ sub simpleSubstitutions {
     subst("make_char3", "make_char3", "device_function");
     subst("make_char4", "make_char4", "device_function");
     subst("make_half2", "make_half2", "device_function");
+    subst("make_int1", "make_int1", "device_function");
+    subst("make_int2", "make_int2", "device_function");
+    subst("make_int3", "make_int3", "device_function");
+    subst("make_int4", "make_int4", "device_function");
     subst("make_short1", "make_short1", "device_function");
     subst("make_short2", "make_short2", "device_function");
     subst("make_short3", "make_short3", "device_function");
@@ -6968,6 +6972,10 @@ sub simpleSubstitutions {
     subst("make_uchar2", "make_uchar2", "device_function");
     subst("make_uchar3", "make_uchar3", "device_function");
     subst("make_uchar4", "make_uchar4", "device_function");
+    subst("make_uint1", "make_uint1", "device_function");
+    subst("make_uint2", "make_uint2", "device_function");
+    subst("make_uint3", "make_uint3", "device_function");
+    subst("make_uint4", "make_uint4", "device_function");
     subst("make_ushort1", "make_ushort1", "device_function");
     subst("make_ushort2", "make_ushort2", "device_function");
     subst("make_ushort3", "make_ushort3", "device_function");
@@ -7083,6 +7091,10 @@ sub simpleSubstitutions {
     subst("char3", "char3", "device_type");
     subst("char4", "char4", "device_type");
     subst("cudaRoundMode", "hipRoundMode", "device_type");
+    subst("int1", "int1", "device_type");
+    subst("int2", "int2", "device_type");
+    subst("int3", "int3", "device_type");
+    subst("int4", "int4", "device_type");
     subst("nv_bfloat16", "hip_bfloat16", "device_type");
     subst("short1", "short1", "device_type");
     subst("short2", "short2", "device_type");
@@ -7092,6 +7104,10 @@ sub simpleSubstitutions {
     subst("uchar2", "uchar2", "device_type");
     subst("uchar3", "uchar3", "device_type");
     subst("uchar4", "uchar4", "device_type");
+    subst("uint1", "uint1", "device_type");
+    subst("uint2", "uint2", "device_type");
+    subst("uint3", "uint3", "device_type");
+    subst("uint4", "uint4", "device_type");
     subst("ushort1", "ushort1", "device_type");
     subst("ushort2", "ushort2", "device_type");
     subst("ushort3", "ushort3", "device_type");
@@ -9645,6 +9661,10 @@ sub transformHostFunctions {
     "make_ushort3",
     "make_ushort2",
     "make_ushort1",
+    "make_uint4",
+    "make_uint3",
+    "make_uint2",
+    "make_uint1",
     "make_uchar4",
     "make_uchar3",
     "make_uchar2",
@@ -9653,6 +9673,10 @@ sub transformHostFunctions {
     "make_short3",
     "make_short2",
     "make_short1",
+    "make_int4",
+    "make_int3",
+    "make_int2",
+    "make_int1",
     "make_half2",
     "make_char4",
     "make_char3",
@@ -10507,6 +10531,10 @@ sub warnUnsupportedDeviceFunctions {
     "ushort3",
     "ushort2",
     "ushort1",
+    "uint4",
+    "uint3",
+    "uint2",
+    "uint1",
     "uchar4",
     "uchar3",
     "uchar2",
@@ -10516,6 +10544,10 @@ sub warnUnsupportedDeviceFunctions {
     "short2",
     "short1",
     "nv_bfloat16",
+    "int4",
+    "int3",
+    "int2",
+    "int1",
     "cudaRoundZero",
     "cudaRoundPosInf",
     "cudaRoundNearest",
