@@ -819,6 +819,10 @@
 |`make_int2`| | | | |`make_int2`|1.6.0| | | | |
 |`make_int3`| | | | |`make_int3`|1.6.0| | | | |
 |`make_int4`| | | | |`make_int4`|1.6.0| | | | |
+|`make_long1`| | | | |`make_long1`|1.6.0| | | | |
+|`make_long2`| | | | |`make_long2`|1.6.0| | | | |
+|`make_long3`| | | | |`make_long3`|1.6.0| | | | |
+|`make_long4`| | | | |`make_long4`|1.6.0| | | | |
 |`make_short1`| | | | |`make_short1`|1.6.0| | | | |
 |`make_short2`| | | | |`make_short2`|1.6.0| | | | |
 |`make_short3`| | | | |`make_short3`|1.6.0| | | | |
@@ -831,6 +835,10 @@
 |`make_uint2`| | | | |`make_uint2`|1.6.0| | | | |
 |`make_uint3`| | | | |`make_uint3`|1.6.0| | | | |
 |`make_uint4`| | | | |`make_uint4`|1.6.0| | | | |
+|`make_ulong1`| | | | |`make_ulong1`|1.6.0| | | | |
+|`make_ulong2`| | | | |`make_ulong2`|1.6.0| | | | |
+|`make_ulong3`| | | | |`make_ulong3`|1.6.0| | | | |
+|`make_ulong4`| | | | |`make_ulong4`|1.6.0| | | | |
 |`make_ushort1`| | | | |`make_ushort1`|1.6.0| | | | |
 |`make_ushort2`| | | | |`make_ushort2`|1.6.0| | | | |
 |`make_ushort3`| | | | |`make_ushort3`|1.6.0| | | | |
@@ -990,6 +998,10 @@
 |`int2`| | | | |`int2`|1.6.0| | | | |
 |`int3`| | | | |`int3`|1.6.0| | | | |
 |`int4`| | | | |`int4`|1.6.0| | | | |
+|`long1`| | | | |`long1`|1.6.0| | | | |
+|`long2`| | | | |`long2`|1.6.0| | | | |
+|`long3`| | | | |`long3`|1.6.0| | | | |
+|`long4`| | | | |`long4`|1.6.0| | | | |
 |`nv_bfloat16`|11.0| | | |`hip_bfloat16`|3.5.0| | | | |
 |`nv_bfloat162`|11.0| | | | | | | | | |
 |`short1`| | | | |`short1`|1.6.0| | | | |
@@ -1004,6 +1016,10 @@
 |`uint2`| | | | |`uint2`|1.6.0| | | | |
 |`uint3`| | | | |`uint3`|1.6.0| | | | |
 |`uint4`| | | | |`uint4`|1.6.0| | | | |
+|`ulong1`| | | | |`ulong1`|1.6.0| | | | |
+|`ulong2`| | | | |`ulong2`|1.6.0| | | | |
+|`ulong3`| | | | |`ulong3`|1.6.0| | | | |
+|`ulong4`| | | | |`ulong4`|1.6.0| | | | |
 |`ushort1`| | | | |`ushort1`|1.6.0| | | | |
 |`ushort2`| | | | |`ushort2`|1.6.0| | | | |
 |`ushort3`| | | | |`ushort3`|1.6.0| | | | |
