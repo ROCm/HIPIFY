@@ -92,10 +92,12 @@ GetOptions(
 $cuda_kernel_execution_syntax = 1;
 
 my %deprecated_funcs = (
+    "ulong4" => "13.0",
     "pruneInfo_t" => "12.2",
     "pruneInfo" => "12.2",
     "nvrtcGetNVVMSize" => "12.0",
     "nvrtcGetNVVM" => "12.0",
+    "long4" => "13.0",
     "cusparseZsctr" => "11.0",
     "cusparseZnnz_compress" => "12.2",
     "cusparseZhybsv_solve" => "10.2",
@@ -10642,7 +10644,11 @@ sub countSupportedDeviceDataTypes {
 }
 
 @UnsupportedDeviceDataTypes = (
+    "ulong4_32a",
+    "ulong4_16a",
     "nv_bfloat162",
+    "long4_32a",
+    "long4_16a",
     "__nv_fp8x4_e8m0",
     "__nv_fp8x2_e8m0",
     "__nv_fp8_e8m0",
