@@ -119,11 +119,15 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DEVICE_TYPE_NAME_MAP {
   {"long1",                                {"long1",                                 "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2}},
   {"long2",                                {"long2",                                 "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2}},
   {"long3",                                {"long3",                                 "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2}},
-  {"long4",                                {"long4",                                 "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2}},
+  {"long4",                                {"long4",                                 "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2, CUDA_DEPRECATED}},
   {"ulong1",                               {"ulong1",                                "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2}},
   {"ulong2",                               {"ulong2",                                "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2}},
   {"ulong3",                               {"ulong3",                                "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2}},
-  {"ulong4",                               {"ulong4",                                "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2}},
+  {"ulong4",                               {"ulong4",                                "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2, CUDA_DEPRECATED}},
+  {"long4_16a",                            {"long4_16a",                             "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2, UNSUPPORTED}},
+  {"ulong4_16a",                           {"ulong4_16a",                            "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2, UNSUPPORTED}},
+  {"long4_32a",                            {"long4_32a",                             "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2, UNSUPPORTED}},
+  {"ulong4_32a",                           {"ulong4_32a",                            "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2, UNSUPPORTED}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_DEVICE_TYPE_NAME_VER_MAP {
@@ -178,6 +182,12 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DEVICE_TYPE_NAME_VER_MAP {
   {"CUDART_NEG_ZERO_FP16",                 {CUDA_122, CUDA_0,   CUDA_0  }},
   {"CUDART_ONE_FP16",                      {CUDA_122, CUDA_0,   CUDA_0  }},
   {"CUDART_ZERO_FP16",                     {CUDA_122, CUDA_0,   CUDA_0  }},
+  {"long4",                                {CUDA_0,   CUDA_130, CUDA_0  }},
+  {"ulong4",                               {CUDA_0,   CUDA_130, CUDA_0  }},
+  {"long4_16a",                            {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"ulong4_16a",                           {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"long4_32a",                            {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"ulong4_32a",                           {CUDA_130, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_DEVICE_TYPE_NAME_VER_MAP {
