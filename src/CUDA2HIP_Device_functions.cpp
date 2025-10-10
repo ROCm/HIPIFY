@@ -955,6 +955,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DEVICE_FUNCTION_MAP {
   {"make_ulong2",                       {"make_ulong2",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
   {"make_ulong3",                       {"make_ulong3",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
   {"make_ulong4",                       {"make_ulong4",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
+  {"make_float1",                       {"make_float1",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
+  {"make_float2",                       {"make_float2",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
+  {"make_float3",                       {"make_float3",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
+  {"make_float4",                       {"make_float4",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
+  {"make_double1",                      {"make_double1",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
+  {"make_double2",                      {"make_double2",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
+  {"make_double3",                      {"make_double3",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
+  {"make_double4",                      {"make_double4",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_DEVICE_FUNCTION_VER_MAP {
@@ -1769,6 +1777,14 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DEVICE_FUNCTION_VER_MAP {
   {"make_ulong2",                       {HIP_1060, HIP_0,    HIP_0   }},
   {"make_ulong3",                       {HIP_1060, HIP_0,    HIP_0   }},
   {"make_ulong4",                       {HIP_1060, HIP_0,    HIP_0   }},
+  {"make_float1",                       {HIP_1060, HIP_0,    HIP_0   }},
+  {"make_float2",                       {HIP_1060, HIP_0,    HIP_0   }},
+  {"make_float3",                       {HIP_1060, HIP_0,    HIP_0   }},
+  {"make_float4",                       {HIP_1060, HIP_0,    HIP_0   }},
+  {"make_double1",                      {HIP_1060, HIP_0,    HIP_0   }},
+  {"make_double2",                      {HIP_1060, HIP_0,    HIP_0   }},
+  {"make_double3",                      {HIP_1060, HIP_0,    HIP_0   }},
+  {"make_double4",                      {HIP_1060, HIP_0,    HIP_0   }},
 };
 
 const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_DEVICE_FUNCTION_CHANGED_VER_MAP {
