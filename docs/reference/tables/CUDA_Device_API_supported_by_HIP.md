@@ -814,6 +814,14 @@
 |`make_char2`| | | | |`make_char2`|1.6.0| | | | |
 |`make_char3`| | | | |`make_char3`|1.6.0| | | | |
 |`make_char4`| | | | |`make_char4`|1.6.0| | | | |
+|`make_double1`| | | | |`make_double1`|1.6.0| | | | |
+|`make_double2`| | | | |`make_double2`|1.6.0| | | | |
+|`make_double3`| | | | |`make_double3`|1.6.0| | | | |
+|`make_double4`| | | | |`make_double4`|1.6.0| | | | |
+|`make_float1`| | | | |`make_float1`|1.6.0| | | | |
+|`make_float2`| | | | |`make_float2`|1.6.0| | | | |
+|`make_float3`| | | | |`make_float3`|1.6.0| | | | |
+|`make_float4`| | | | |`make_float4`|1.6.0| | | | |
 |`make_half2`|12.2| | | |`make_half2`|4.5.0| | | | |
 |`make_int1`| | | | |`make_int1`|1.6.0| | | | |
 |`make_int2`| | | | |`make_int2`|1.6.0| | | | |
@@ -994,6 +1002,16 @@
 |`cudaRoundNearest`| | | | |`hipRoundNearest`|7.0.0| | | | |
 |`cudaRoundPosInf`| | | | |`hipRoundPosInf`|7.0.0| | | | |
 |`cudaRoundZero`| | | | |`hipRoundZero`|7.0.0| | | | |
+|`double1`| | | | |`double1`|1.6.0| | | | |
+|`double2`| | | | |`double2`|1.6.0| | | | |
+|`double3`| | | | |`double3`|1.6.0| | | | |
+|`double4`| |13.0| | |`double4`|1.6.0| | | | |
+|`double4_16a`|13.0| | | | | | | | | |
+|`double4_32a`|13.0| | | | | | | | | |
+|`float1`| | | | |`float1`|1.6.0| | | | |
+|`float2`| | | | |`float2`|1.6.0| | | | |
+|`float3`| | | | |`float3`|1.6.0| | | | |
+|`float4`| | | | |`float4`|1.6.0| | | | |
 |`int1`| | | | |`int1`|1.6.0| | | | |
 |`int2`| | | | |`int2`|1.6.0| | | | |
 |`int3`| | | | |`int3`|1.6.0| | | | |

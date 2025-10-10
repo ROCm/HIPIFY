@@ -128,6 +128,16 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DEVICE_TYPE_NAME_MAP {
   {"ulong4_16a",                           {"ulong4_16a",                            "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2, UNSUPPORTED}},
   {"long4_32a",                            {"long4_32a",                             "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2, UNSUPPORTED}},
   {"ulong4_32a",                           {"ulong4_32a",                            "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2, UNSUPPORTED}},
+  {"float1",                               {"float1",                                "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2}},
+  {"float2",                               {"float2",                                "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2}},
+  {"float3",                               {"float3",                                "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2}},
+  {"float4",                               {"float4",                                "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2}},
+  {"double1",                              {"double1",                               "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2}},
+  {"double2",                              {"double2",                               "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2}},
+  {"double3",                              {"double3",                               "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2}},
+  {"double4",                              {"double4",                               "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2, CUDA_DEPRECATED}},
+  {"double4_16a",                          {"double4_16a",                           "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2, UNSUPPORTED}},
+  {"double4_32a",                          {"double4_32a",                           "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2, UNSUPPORTED}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_DEVICE_TYPE_NAME_VER_MAP {
@@ -188,6 +198,9 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DEVICE_TYPE_NAME_VER_MAP {
   {"ulong4_16a",                           {CUDA_130, CUDA_0,   CUDA_0  }},
   {"long4_32a",                            {CUDA_130, CUDA_0,   CUDA_0  }},
   {"ulong4_32a",                           {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"double4",                              {CUDA_0,   CUDA_130, CUDA_0  }},
+  {"double4_16a",                          {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"double4_32a",                          {CUDA_130, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_DEVICE_TYPE_NAME_VER_MAP {
@@ -267,6 +280,14 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DEVICE_TYPE_NAME_VER_MAP {
   {"ulong2",                               {HIP_1060, HIP_0,    HIP_0   }},
   {"ulong3",                               {HIP_1060, HIP_0,    HIP_0   }},
   {"ulong4",                               {HIP_1060, HIP_0,    HIP_0   }},
+  {"float1",                               {HIP_1060, HIP_0,    HIP_0   }},
+  {"float2",                               {HIP_1060, HIP_0,    HIP_0   }},
+  {"float3",                               {HIP_1060, HIP_0,    HIP_0   }},
+  {"float4",                               {HIP_1060, HIP_0,    HIP_0   }},
+  {"double1",                              {HIP_1060, HIP_0,    HIP_0   }}, 
+  {"double2",                              {HIP_1060, HIP_0,    HIP_0   }},
+  {"double3",                              {HIP_1060, HIP_0,    HIP_0   }},
+  {"double4",                              {HIP_1060, HIP_0,    HIP_0   }},
 
   {"rocblas_half",                         {HIP_1050, HIP_0,    HIP_0   }},
   {"rocblas_bfloat16",                     {HIP_3050, HIP_0,    HIP_0   }},
