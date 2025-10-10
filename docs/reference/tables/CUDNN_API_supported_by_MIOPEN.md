@@ -241,6 +241,7 @@
 |`CUDNN_ATTR_OPERATION_RNG_OFFSET_DESC`|8.8.0| | | |`MIOPEN_ATTR_OPERATION_RNG_OFFSET_DESC`|6.2.0| | | | |
 |`CUDNN_ATTR_OPERATION_RNG_SEED`|8.7.0| | | |`MIOPEN_ATTR_OPERATION_RNG_SEED`|6.2.0| | | | |
 |`CUDNN_ATTR_OPERATION_RNG_YDESC`|8.7.0| | | |`MIOPEN_ATTR_OPERATION_RNG_YDESC`|6.2.0| | | | |
+|`CUDNN_ATTR_OPERATION_SDPA_FWD_BLOCK_MASK_DESC`|9.14.0| | | | | | | | | |
 |`CUDNN_ATTR_OPERATION_SDPA_FWD_KDESC`|9.13.0| | | | | | | | | |
 |`CUDNN_ATTR_OPERATION_SDPA_FWD_ODESC`|9.13.0| | | | | | | | | |
 |`CUDNN_ATTR_OPERATION_SDPA_FWD_QDESC`|9.13.0| | | | | | | | | |
@@ -394,6 +395,8 @@
 |`CUDNN_CTC_ZERO_OOB_GRADIENTS`|9.0.0| | | | | | | | | |
 |`CUDNN_DATA_BFLOAT16`|8.1.0| | | |`miopenBFloat16`|2.6.0| | | | |
 |`CUDNN_DATA_BOOLEAN`|8.3.0| | | | | | | | | |
+|`CUDNN_DATA_COMPLEX_FP32`|9.14.0| | | | | | | | | |
+|`CUDNN_DATA_COMPLEX_FP64`|9.14.0| | | | | | | | | |
 |`CUDNN_DATA_DOUBLE`|1.0.0| | | |`miopenDouble`|4.5.0| | | | |
 |`CUDNN_DATA_FAST_FLOAT_FOR_FP8`|8.7.0| | | | | | | | | |
 |`CUDNN_DATA_FLOAT`|1.0.0| | | |`miopenFloat`|2.1.0| | | | |
