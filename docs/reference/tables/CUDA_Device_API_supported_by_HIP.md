@@ -817,7 +817,9 @@
 |`make_double1`| | | | |`make_double1`|1.6.0| | | | |
 |`make_double2`| | | | |`make_double2`|1.6.0| | | | |
 |`make_double3`| | | | |`make_double3`|1.6.0| | | | |
-|`make_double4`| | | | |`make_double4`|1.6.0| | | | |
+|`make_double4`| |13.0| | |`make_double4`|1.6.0| | | | |
+|`make_double4_16a`|13.0| | | | | | | | | |
+|`make_double4_32a`|13.0| | | | | | | | | |
 |`make_float1`| | | | |`make_float1`|1.6.0| | | | |
 |`make_float2`| | | | |`make_float2`|1.6.0| | | | |
 |`make_float3`| | | | |`make_float3`|1.6.0| | | | |
@@ -830,7 +832,15 @@
 |`make_long1`| | | | |`make_long1`|1.6.0| | | | |
 |`make_long2`| | | | |`make_long2`|1.6.0| | | | |
 |`make_long3`| | | | |`make_long3`|1.6.0| | | | |
-|`make_long4`| | | | |`make_long4`|1.6.0| | | | |
+|`make_long4`| |13.0| | |`make_long4`|1.6.0| | | | |
+|`make_long4_16a`|13.0| | | | | | | | | |
+|`make_long4_32a`|13.0| | | | | | | | | |
+|`make_longlong1`| | | | |`make_longlong1`|1.6.0| | | | |
+|`make_longlong2`| | | | |`make_longlong2`|1.6.0| | | | |
+|`make_longlong3`| | | | |`make_longlong3`|1.6.0| | | | |
+|`make_longlong4`| |13.0| | |`make_longlong4`|1.6.0| | | | |
+|`make_longlong4_16a`|13.0| | | | | | | | | |
+|`make_longlong4_32a`|13.0| | | | | | | | | |
 |`make_short1`| | | | |`make_short1`|1.6.0| | | | |
 |`make_short2`| | | | |`make_short2`|1.6.0| | | | |
 |`make_short3`| | | | |`make_short3`|1.6.0| | | | |
@@ -846,7 +856,15 @@
 |`make_ulong1`| | | | |`make_ulong1`|1.6.0| | | | |
 |`make_ulong2`| | | | |`make_ulong2`|1.6.0| | | | |
 |`make_ulong3`| | | | |`make_ulong3`|1.6.0| | | | |
-|`make_ulong4`| | | | |`make_ulong4`|1.6.0| | | | |
+|`make_ulong4`| |13.0| | |`make_ulong4`|1.6.0| | | | |
+|`make_ulong4_16a`|13.0| | | | | | | | | |
+|`make_ulong4_32a`|13.0| | | | | | | | | |
+|`make_ulonglong1`| | | | |`make_ulonglong1`|1.6.0| | | | |
+|`make_ulonglong2`| | | | |`make_ulonglong2`|1.6.0| | | | |
+|`make_ulonglong3`| | | | |`make_ulonglong3`|1.6.0| | | | |
+|`make_ulonglong4`| |13.0| | |`make_ulonglong4`|1.6.0| | | | |
+|`make_ulonglong4_16a`|13.0| | | | | | | | | |
+|`make_ulonglong4_32a`|13.0| | | | | | | | | |
 |`make_ushort1`| | | | |`make_ushort1`|1.6.0| | | | |
 |`make_ushort2`| | | | |`make_ushort2`|1.6.0| | | | |
 |`make_ushort3`| | | | |`make_ushort3`|1.6.0| | | | |
@@ -1022,6 +1040,12 @@
 |`long4`| |13.0| | |`long4`|1.6.0| | | | |
 |`long4_16a`|13.0| | | | | | | | | |
 |`long4_32a`|13.0| | | | | | | | | |
+|`longlong1`| | | | |`longlong1`|1.6.0| | | | |
+|`longlong2`| | | | |`longlong2`|1.6.0| | | | |
+|`longlong3`| | | | |`longlong3`|1.6.0| | | | |
+|`longlong4`| |13.0| | |`longlong4`|1.6.0| | | | |
+|`longlong4_16a`|13.0| | | | | | | | | |
+|`longlong4_32a`|13.0| | | | | | | | | |
 |`nv_bfloat16`|11.0| | | |`hip_bfloat16`|3.5.0| | | | |
 |`nv_bfloat162`|11.0| | | | | | | | | |
 |`short1`| | | | |`short1`|1.6.0| | | | |
@@ -1042,6 +1066,12 @@
 |`ulong4`| |13.0| | |`ulong4`|1.6.0| | | | |
 |`ulong4_16a`|13.0| | | | | | | | | |
 |`ulong4_32a`|13.0| | | | | | | | | |
+|`ulonglong1`| | | | |`ulonglong1`|1.6.0| | | | |
+|`ulonglong2`| | | | |`ulonglong2`|1.6.0| | | | |
+|`ulonglong3`| | | | |`ulonglong3`|1.6.0| | | | |
+|`ulonglong4`| |13.0| | |`ulonglong4`|1.6.0| | | | |
+|`ulonglong4_16a`|13.0| | | | | | | | | |
+|`ulonglong4_32a`|13.0| | | | | | | | | |
 |`ushort1`| | | | |`ushort1`|1.6.0| | | | |
 |`ushort2`| | | | |`ushort2`|1.6.0| | | | |
 |`ushort3`| | | | |`ushort3`|1.6.0| | | | |
