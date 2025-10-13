@@ -138,6 +138,18 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DEVICE_TYPE_NAME_MAP {
   {"double4",                              {"double4",                               "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2, CUDA_DEPRECATED}},
   {"double4_16a",                          {"double4_16a",                           "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2, UNSUPPORTED}},
   {"double4_32a",                          {"double4_32a",                           "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2, UNSUPPORTED}},
+  {"longlong1",                            {"longlong1",                             "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2}},
+  {"longlong2",                            {"longlong2",                             "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2}},
+  {"longlong3",                            {"longlong3",                             "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2}},
+  {"longlong4",                            {"longlong4",                             "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2, CUDA_DEPRECATED}},
+  {"longlong4_16a",                        {"longlong4_16a",                         "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2, UNSUPPORTED}},
+  {"longlong4_32a",                        {"longlong4_32a",                         "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2, UNSUPPORTED}},
+  {"ulonglong1",                           {"ulonglong1",                            "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2}},
+  {"ulonglong2",                           {"ulonglong2",                            "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2}},
+  {"ulonglong3",                           {"ulonglong3",                            "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2}},
+  {"ulonglong4",                           {"ulonglong4",                            "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2, CUDA_DEPRECATED}},
+  {"ulonglong4_16a",                       {"ulonglong4_16a",                        "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2, UNSUPPORTED}},
+  {"ulonglong4_32a",                       {"ulonglong4_32a",                        "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2, UNSUPPORTED}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_DEVICE_TYPE_NAME_VER_MAP {
@@ -201,6 +213,12 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DEVICE_TYPE_NAME_VER_MAP {
   {"double4",                              {CUDA_0,   CUDA_130, CUDA_0  }},
   {"double4_16a",                          {CUDA_130, CUDA_0,   CUDA_0  }},
   {"double4_32a",                          {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"longlong4",                            {CUDA_0,   CUDA_130, CUDA_0  }},
+  {"longlong4_16a",                        {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"longlong4_32a",                        {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"ulonglong4",                           {CUDA_0,   CUDA_130, CUDA_0  }},
+  {"ulonglong4_16a",                       {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"ulonglong4_32a",                       {CUDA_130, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_DEVICE_TYPE_NAME_VER_MAP {
@@ -288,6 +306,14 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DEVICE_TYPE_NAME_VER_MAP {
   {"double2",                              {HIP_1060, HIP_0,    HIP_0   }},
   {"double3",                              {HIP_1060, HIP_0,    HIP_0   }},
   {"double4",                              {HIP_1060, HIP_0,    HIP_0   }},
+  {"longlong1",                            {HIP_1060, HIP_0,    HIP_0   }},
+  {"longlong2",                            {HIP_1060, HIP_0,    HIP_0   }},
+  {"longlong3",                            {HIP_1060, HIP_0,    HIP_0   }},
+  {"longlong4",                            {HIP_1060, HIP_0,    HIP_0   }},
+  {"ulonglong1",                           {HIP_1060, HIP_0,    HIP_0   }},
+  {"ulonglong2",                           {HIP_1060, HIP_0,    HIP_0   }},
+  {"ulonglong3",                           {HIP_1060, HIP_0,    HIP_0   }},
+  {"ulonglong4",                           {HIP_1060, HIP_0,    HIP_0   }},
 
   {"rocblas_half",                         {HIP_1050, HIP_0,    HIP_0   }},
   {"rocblas_bfloat16",                     {HIP_3050, HIP_0,    HIP_0   }},

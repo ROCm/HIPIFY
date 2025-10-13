@@ -92,11 +92,18 @@ GetOptions(
 $cuda_kernel_execution_syntax = 1;
 
 my %deprecated_funcs = (
+    "ulonglong4" => "13.0",
     "ulong4" => "13.0",
     "pruneInfo_t" => "12.2",
     "pruneInfo" => "12.2",
     "nvrtcGetNVVMSize" => "12.0",
     "nvrtcGetNVVM" => "12.0",
+    "make_ulonglong4" => "13.0",
+    "make_ulong4" => "13.0",
+    "make_longlong4" => "13.0",
+    "make_long4" => "13.0",
+    "make_double4" => "13.0",
+    "longlong4" => "13.0",
     "long4" => "13.0",
     "double4" => "13.0",
     "cusparseZsctr" => "11.0",
@@ -6979,6 +6986,10 @@ sub simpleSubstitutions {
     subst("make_long2", "make_long2", "device_function");
     subst("make_long3", "make_long3", "device_function");
     subst("make_long4", "make_long4", "device_function");
+    subst("make_longlong1", "make_longlong1", "device_function");
+    subst("make_longlong2", "make_longlong2", "device_function");
+    subst("make_longlong3", "make_longlong3", "device_function");
+    subst("make_longlong4", "make_longlong4", "device_function");
     subst("make_short1", "make_short1", "device_function");
     subst("make_short2", "make_short2", "device_function");
     subst("make_short3", "make_short3", "device_function");
@@ -6995,6 +7006,10 @@ sub simpleSubstitutions {
     subst("make_ulong2", "make_ulong2", "device_function");
     subst("make_ulong3", "make_ulong3", "device_function");
     subst("make_ulong4", "make_ulong4", "device_function");
+    subst("make_ulonglong1", "make_ulonglong1", "device_function");
+    subst("make_ulonglong2", "make_ulonglong2", "device_function");
+    subst("make_ulonglong3", "make_ulonglong3", "device_function");
+    subst("make_ulonglong4", "make_ulonglong4", "device_function");
     subst("make_ushort1", "make_ushort1", "device_function");
     subst("make_ushort2", "make_ushort2", "device_function");
     subst("make_ushort3", "make_ushort3", "device_function");
@@ -7126,6 +7141,10 @@ sub simpleSubstitutions {
     subst("long2", "long2", "device_type");
     subst("long3", "long3", "device_type");
     subst("long4", "long4", "device_type");
+    subst("longlong1", "longlong1", "device_type");
+    subst("longlong2", "longlong2", "device_type");
+    subst("longlong3", "longlong3", "device_type");
+    subst("longlong4", "longlong4", "device_type");
     subst("nv_bfloat16", "hip_bfloat16", "device_type");
     subst("short1", "short1", "device_type");
     subst("short2", "short2", "device_type");
@@ -7143,6 +7162,10 @@ sub simpleSubstitutions {
     subst("ulong2", "ulong2", "device_type");
     subst("ulong3", "ulong3", "device_type");
     subst("ulong4", "ulong4", "device_type");
+    subst("ulonglong1", "ulonglong1", "device_type");
+    subst("ulonglong2", "ulonglong2", "device_type");
+    subst("ulonglong3", "ulonglong3", "device_type");
+    subst("ulonglong4", "ulonglong4", "device_type");
     subst("ushort1", "ushort1", "device_type");
     subst("ushort2", "ushort2", "device_type");
     subst("ushort3", "ushort3", "device_type");
@@ -9696,6 +9719,10 @@ sub transformHostFunctions {
     "make_ushort3",
     "make_ushort2",
     "make_ushort1",
+    "make_ulonglong4",
+    "make_ulonglong3",
+    "make_ulonglong2",
+    "make_ulonglong1",
     "make_ulong4",
     "make_ulong3",
     "make_ulong2",
@@ -9712,6 +9739,10 @@ sub transformHostFunctions {
     "make_short3",
     "make_short2",
     "make_short1",
+    "make_longlong4",
+    "make_longlong3",
+    "make_longlong2",
+    "make_longlong1",
     "make_long4",
     "make_long3",
     "make_long2",
@@ -10246,6 +10277,16 @@ sub countSupportedDeviceFunctions {
     "mulhi",
     "mul64hi",
     "mul24",
+    "make_ulonglong4_32a",
+    "make_ulonglong4_16a",
+    "make_ulong4_32a",
+    "make_ulong4_16a",
+    "make_longlong4_32a",
+    "make_longlong4_16a",
+    "make_long4_32a",
+    "make_long4_16a",
+    "make_double4_32a",
+    "make_double4_16a",
     "make_bfloat162",
     "llmin",
     "llmax",
@@ -10582,6 +10623,10 @@ sub warnUnsupportedDeviceFunctions {
     "ushort3",
     "ushort2",
     "ushort1",
+    "ulonglong4",
+    "ulonglong3",
+    "ulonglong2",
+    "ulonglong1",
     "ulong4",
     "ulong3",
     "ulong2",
@@ -10599,6 +10644,10 @@ sub warnUnsupportedDeviceFunctions {
     "short2",
     "short1",
     "nv_bfloat16",
+    "longlong4",
+    "longlong3",
+    "longlong2",
+    "longlong1",
     "long4",
     "long3",
     "long2",
@@ -10677,9 +10726,13 @@ sub countSupportedDeviceDataTypes {
 }
 
 @UnsupportedDeviceDataTypes = (
+    "ulonglong4_32a",
+    "ulonglong4_16a",
     "ulong4_32a",
     "ulong4_16a",
     "nv_bfloat162",
+    "longlong4_32a",
+    "longlong4_16a",
     "long4_32a",
     "long4_16a",
     "double4_32a",
