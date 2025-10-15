@@ -729,7 +729,26 @@ cudaVersions Statistics::convertCudaToolkitVersion(const clang::CudaVersion &ver
 }
 #endif
 
+void Statistics::setCudaVersion(llvm::StringRef cuda_h_file) {
+  auto StartsWithWords =
+    [](llvm::StringRef l, const llvm::SmallVector<llvm::StringRef, 3> words) -> std::optional<llvm::StringRef> {
+      for (llvm::StringRef word : words) {
+        if (!l.consume_front(word)) return {};
+        l = l.ltrim();
+      }
+      return l;
+  };
+  cuda_h_file = cuda_h_file.ltrim();
+  while (!cuda_h_file.empty()) {
+    if (auto l = StartsWithWords(cuda_h_file.ltrim(), { "#", "define", "CUDA_VERSION" })) {
+      l->consumeInteger(10, Statistics::cudaVersion);
+      return;
+    }
+    cuda_h_file = cuda_h_file.drop_front(cuda_h_file.find_first_of("\n\r")).ltrim();
+  }
+}
+
 std::map<std::string, Statistics> Statistics::stats = {};
 Statistics *Statistics::currentStatistics = nullptr;
 cudaVersions Statistics::cudaVersionUsedByClang = CUDA_0;
-
+unsigned Statistics::cudaVersion = CUDA_0;

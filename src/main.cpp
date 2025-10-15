@@ -39,6 +39,7 @@ THE SOFTWARE.
 #include "clang/Basic/DiagnosticOptions.h"
 #include "clang/Driver/Driver.h"
 #include "clang/Driver/Compilation.h"
+#include "clang/Driver/CudaInstallationDetector.h"
 #include "clang/Driver/Tool.h"
 #include "clang/Frontend/TextDiagnosticPrinter.h"
 
@@ -79,8 +80,17 @@ void cleanupHipifyOptions(std::vector<const char*> &args) {
   }
 }
 
-void sortInputFiles(int argc, const char **argv, std::vector<std::string> &files) {
-  if (files.size() < 2) return;
+void DetectCUDA(const std::unique_ptr<clang::driver::Compilation> &C) {
+  const clang::driver::Driver &driver = C->getDriver();
+  clang::driver::CudaInstallationDetector CudaInstallation(driver, llvm::Triple(driver.getTargetTriple()), C->getArgs());
+  auto& FS = driver.getVFS();
+  if (auto cuda_h_file = FS.getBufferForFile(CudaInstallation.getInstallPath() + "/include/cuda.h"))
+    Statistics::setCudaVersion((*cuda_h_file)->getBuffer());
+  llvm::errs() << "\n" << sHipify << "CUDA Installation Path: " << CudaInstallation.getInstallPath();
+  llvm::errs() << "\n" << sHipify << "CUDA_VERSION: " << Statistics::getCudaVersion() << "\n";
+}
+
+void Init(int argc, const char **argv, std::vector<std::string> &files) {
 #if LLVM_VERSION_MAJOR >= 21
   clang::DiagnosticOptions diagOpts;
   clang::TextDiagnosticPrinter diagClient(llvm::errs(), diagOpts);
@@ -94,6 +104,8 @@ void sortInputFiles(int argc, const char **argv, std::vector<std::string> &files
   std::vector<const char*> Args(argv, argv + argc);
   cleanupHipifyOptions(Args);
   std::unique_ptr<clang::driver::Compilation> C(driver->BuildCompilation(Args));
+  DetectCUDA(C);
+  if (files.size() < 2) return;
   std::vector<std::string> sortedFiles;
   for (const auto &J : C->getJobs()) {
     if (std::string(J.getCreator().getName()) != "clang") continue;
@@ -378,7 +390,7 @@ int main(int argc, const char **argv) {
   if (PrintStats) {
     statPrint = &llvm::errs();
   }
-  sortInputFiles(argc, argv, fileSources);
+  Init(argc, argv, fileSources);
   for (const auto &src : fileSources) {
     // Create a copy of the file to work on. When we're done, we'll move this onto the
     // output (which may mean overwriting the input, if we're in-place).
