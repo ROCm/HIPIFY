@@ -33,6 +33,8 @@ THE SOFTWARE.
 #if LLVM_VERSION_MAJOR > 3
 #include "clang/Basic/Cuda.h"
 #endif
+#include "StringUtils.h"
+
 namespace chr = std::chrono;
 
 enum ConvTypes {
@@ -484,6 +486,7 @@ class Statistics {
   chr::steady_clock::time_point completionTime;
   // CUDA Toolkit version provided by clang at runtime and converted to HIPIFY cudaVersions enum.
   static cudaVersions cudaVersionUsedByClang;
+  static unsigned cudaVersion;
 
 public:
   Statistics(const std::string &name);
@@ -565,6 +568,10 @@ public:
   // Converts CUDA version used by clang to CUDA version HIPIFY type.
   static cudaVersions convertCudaToolkitVersion(const clang::CudaVersion &ver);
 #endif
-  // Get CUDA version used by clang in HIPIFY CUDA version format.
+  // Get CUDA version used by clang in the HIPIFY CUDA version format.
   static cudaVersions getCudaVersionUsedByClang() { return cudaVersionUsedByClang; }
+  // Get actual CUDA version.
+  static unsigned getCudaVersion() { return cudaVersion; }
+  // Detects actual CUDA version based on the provided cuda.h file.
+  static void setCudaVersion(llvm::StringRef cuda_h_file);
 };
