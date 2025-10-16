@@ -888,7 +888,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP {
   {"CUBLASLT_MATMUL_STAGES_32xAUTO",                                 {"HIPBLASLT_MATMUL_STAGES_32xAUTO",                                   "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
   {"CUBLASLT_MATMUL_STAGES_64xAUTO",                                 {"HIPBLASLT_MATMUL_STAGES_64xAUTO",                                   "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
   {"CUBLASLT_MATMUL_STAGES_128xAUTO",                                {"HIPBLASLT_MATMUL_STAGES_128xAUTO",                                  "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
-  {"CUBLASLT_MATMUL_STAGES_256xAUTO",                                {"CUBLASLT_MATMUL_STAGES_256xAUTO",                                   "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_STAGES_256xAUTO",                                {"HIPBLASLT_MATMUL_STAGES_256xAUTO",                                  "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_STAGES_768xAUTO",                                {"HIPBLASLT_MATMUL_STAGES_768xAUTO",                                  "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
   {"CUBLASLT_MATMUL_STAGES_END",                                     {"HIPBLASLT_MATMUL_STAGES_END",                                       "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
   {"cublasLtClusterShape_t",                                         {"hipblasLtClusterShape_t",                                           "",                                                         CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
   {"CUBLASLT_CLUSTER_SHAPE_AUTO",                                    {"HIPBLASLT_CLUSTER_SHAPE_AUTO",                                      "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
@@ -2170,6 +2171,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_TYPE_NAME_VER_MAP {
   {"CUBLASLT_ALGO_CAP_POINTER_ARRAY_BATCH_SUPPORT",                  {CUDA_129, CUDA_0,   CUDA_0  }},
   {"CUBLASLT_ALGO_CAP_FLOATING_POINT_EMULATION_SUPPORT",             {CUDA_129, CUDA_0,   CUDA_0  }},
   {"CUBLAS_GEMM_AUTOTUNE",                                           {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CUBLASLT_MATMUL_STAGES_768xAUTO",                                {CUDA_130, CUDA_0,   CUDA_0  }}, // CUBLAS_VERSION 130002 CUDA 13.0.1
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_TYPE_NAME_VER_MAP {

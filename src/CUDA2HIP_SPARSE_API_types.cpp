@@ -193,6 +193,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_TYPE_NAME_MAP {
   {"CUSPARSE_CSRMV_ALG2",                        {"HIPSPARSE_CSRMV_ALG2",                       "",                                                   CONV_NUMERIC_LITERAL, API_SPARSE, 4, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
   {"CUSPARSE_SPMV_CSR_ALG2",                     {"HIPSPARSE_SPMV_CSR_ALG2",                    "rocsparse_spmv_alg_csr_stream",                      CONV_NUMERIC_LITERAL, API_SPARSE, 4}},
   {"CUSPARSE_SPMV_SELL_ALG1",                    {"HIPSPARSE_SPMV_SELL_ALG1",                   "rocsparse_spmv_alg_ell",                             CONV_NUMERIC_LITERAL, API_SPARSE, 4, HIP_UNSUPPORTED}},
+  {"CUSPARSE_SPMV_BSR_ALG1",                     {"HIPSPARSE_SPMV_BSR_ALG1",                    "",                                                   CONV_NUMERIC_LITERAL, API_SPARSE, 4, UNSUPPORTED}},
 
   {"cusparseSpMMAlg_t",                          {"hipsparseSpMMAlg_t",                         "rocsparse_spmm_alg",                                 CONV_TYPE, API_SPARSE, 4}},
   {"CUSPARSE_MM_ALG_DEFAULT",                    {"HIPSPARSE_MM_ALG_DEFAULT",                   "",                                                   CONV_NUMERIC_LITERAL, API_SPARSE, 4, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
@@ -426,6 +427,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SPARSE_TYPE_NAME_VER_MAP {
   {"CUSPARSE_SPSM_UPDATE_GENERAL",               {CUDA_124, CUDA_0,   CUDA_0  }},
   {"CUSPARSE_SPSM_UPDATE_DIAGONAL",              {CUDA_124, CUDA_0,   CUDA_0  }},
   {"CUSPARSE_SPMM_BSR_ALG1",                     {CUDA_125, CUDA_0,   CUDA_0  }}, // CUSPARSE_VERSION 12501
+  {"CUSPARSE_SPMV_BSR_ALG1",                     {CUDA_130, CUDA_0,   CUDA_0  }}, // CUSPARSE_VERSION 12603 CUDA 13.0.1
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_TYPE_NAME_VER_MAP {
