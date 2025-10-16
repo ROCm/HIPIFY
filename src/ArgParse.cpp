@@ -253,7 +253,6 @@ const std::vector<std::string> hipifyOptions {
   std::string(NoUndocumented.ArgStr),
   std::string(NoWarningsUndocumented.ArgStr),
   std::string(HipifyAMAP.ArgStr),
-  std::string(ClangResourceDir.ArgStr),
   std::string(HipDnnSupport.ArgStr),
 };
 
@@ -263,4 +262,5 @@ const std::vector<std::string> hipifyOptionsWithTwoArgs {
   std::string(OutputPythonMapDir.ArgStr),
   std::string(OutputStatsFilename.ArgStr),
   std::string(TemporaryDir.ArgStr),
+  std::string(ClangResourceDir.ArgStr),
 };
