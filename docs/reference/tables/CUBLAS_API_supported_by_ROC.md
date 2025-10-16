@@ -357,6 +357,7 @@
 |`CUBLASLT_MATMUL_STAGES_64x5`|11.0| | | | | | | | | |
 |`CUBLASLT_MATMUL_STAGES_64x6`|11.0| | | | | | | | | |
 |`CUBLASLT_MATMUL_STAGES_64xAUTO`|11.8| | | | | | | | | |
+|`CUBLASLT_MATMUL_STAGES_768xAUTO`|13.0| | | | | | | | | |
 |`CUBLASLT_MATMUL_STAGES_8x3`|11.8| | | | | | | | | |
 |`CUBLASLT_MATMUL_STAGES_8x4`|11.0| | | | | | | | | |
 |`CUBLASLT_MATMUL_STAGES_8x5`|11.2| | | | | | | | | |

@@ -98,6 +98,7 @@
 |`CUSPARSE_SPMM_CSR_ALG3`|11.2| | | |`HIPSPARSE_SPMM_CSR_ALG3`|4.5.0| | | | |`rocsparse_spmm_alg_csr_merge`|4.5.0| | | | |
 |`CUSPARSE_SPMM_OP_ALG_DEFAULT`|11.5| | | | | | | | | | | | | | | |
 |`CUSPARSE_SPMV_ALG_DEFAULT`|11.2| | | |`HIPSPARSE_SPMV_ALG_DEFAULT`|4.5.0| | | | |`rocsparse_spmv_alg_default`|4.1.0| | | | |
+|`CUSPARSE_SPMV_BSR_ALG1`|13.0| | | | | | | | | | | | | | | |
 |`CUSPARSE_SPMV_COO_ALG1`|11.2| | | |`HIPSPARSE_SPMV_COO_ALG1`|4.5.0| | | | |`rocsparse_spmv_alg_coo`|4.1.0| | | | |
 |`CUSPARSE_SPMV_COO_ALG2`|11.2| | | |`HIPSPARSE_SPMV_COO_ALG2`|4.5.0| | | | |`rocsparse_spmv_alg_coo_atomic`|5.3.0| | | | |
 |`CUSPARSE_SPMV_CSR_ALG1`|11.2| | | |`HIPSPARSE_SPMV_CSR_ALG1`|4.5.0| | | | |`rocsparse_spmv_alg_csr_adaptive`|4.1.0| | | | |
