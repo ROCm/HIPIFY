@@ -97,9 +97,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuDevicePrimaryCtxSetFlags_v2",                               {"hipDevicePrimaryCtxSetFlags",                                 "", CONV_CONTEXT, API_DRIVER, SEC::PRIMARY_CONTEXT, HIP_DEPRECATED}},
 
   // 8. Context Management
- 
-  // TODO: report unsupported only for CUDA >= 13000
-  {"cuCtxCreate",                                                 {"hipCtxCreate",                                                "", CONV_CONTEXT, API_DRIVER, SEC::CONTEXT, HIP_UNSUPPORTED | HIP_DEPRECATED}},
+
+  {"cuCtxCreate",                                                 {"hipCtxCreate",                                                "", CONV_CONTEXT, API_DRIVER, SEC::CONTEXT, HIP_PARTIALLY_SUPPORTED | HIP_DEPRECATED}},
   // TODO: report unsupported only for CUDA >= 13000
   {"cuCtxCreate_v2",                                              {"hipCtxCreate",                                                "", CONV_CONTEXT, API_DRIVER, SEC::CONTEXT, HIP_UNSUPPORTED | HIP_DEPRECATED}},
   {"cuCtxCreate_v3",                                              {"hipCtxCreate_v3",                                             "", CONV_CONTEXT, API_DRIVER, SEC::CONTEXT, HIP_UNSUPPORTED}},
@@ -1809,6 +1808,10 @@ const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_DRIVER_FUNCTION_CHANG
   {"hipCtxGetApiVersion",                                         {HIP_7000}},
   {"hipDrvGraphAddMemsetNode",                                    {HIP_7000}},
   {"hipDrvGraphExecMemsetNodeSetParams",                          {HIP_7000}},
+};
+
+const std::map<llvm::StringRef, cudaAPIUnsupportedVersions> CUDA_DRIVER_FUNCTION_UNSUPPORTED_VER_MAP {
+  {"cuCtxCreate",                                                 {CUDA_130}},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_DRIVER_API_SECTION_MAP {

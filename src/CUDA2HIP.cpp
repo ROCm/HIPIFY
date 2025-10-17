@@ -142,6 +142,14 @@ const std::map<llvm::StringRef, hipCounter> &CUDA_RENAMES_MAP() {
   return ret;
 };
 
+const std::map<llvm::StringRef, cudaAPIUnsupportedVersions> &CUDA_UNSUPPORTED_VER_MAP() {
+  static std::map<llvm::StringRef, cudaAPIUnsupportedVersions> ret;
+  if (!ret.empty())
+    return ret;
+  ret.insert(CUDA_DRIVER_FUNCTION_UNSUPPORTED_VER_MAP.begin(), CUDA_DRIVER_FUNCTION_UNSUPPORTED_VER_MAP.end());
+  return ret;
+};
+
 const std::map<llvm::StringRef, cudaAPIversions> &CUDA_VERSIONS_MAP() {
   static std::map<llvm::StringRef, cudaAPIversions> ret;
   if (!ret.empty())

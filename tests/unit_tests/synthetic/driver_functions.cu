@@ -190,12 +190,12 @@ int main() {
   // CHECK: result = hipDevicePrimaryCtxSetFlags(device, flags);
   result = cuDevicePrimaryCtxSetFlags(device, flags);
 
-  // [TODO][#2062] Rename all DO-NOT-CHECK back
+  // [TODO][#2062] Split into two tests: before 13.0 and after 13.0. Run the below API test only for CUDA versions before 13.0.
 #if CUDA_VERSION < 13000
   // CUDA: CUresult CUDAAPI cuCtxCreate(CUcontext *pctx, unsigned int flags, CUdevice dev);
   // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipCtxCreate(hipCtx_t *ctx, unsigned int flags, hipDevice_t device);
-  // DO-NOT-CHECK: result = hipCtxCreate(&context, flags, device);
-  // DO-NOT-CHECK-NEXT: result = hipCtxCreate(&context, flags, device);
+  // CHECK: result = hipCtxCreate(&context, flags, device);
+  // CHECK-NEXT: result = hipCtxCreate(&context, flags, device);
   result = cuCtxCreate(&context, flags, device);
   result = cuCtxCreate_v2(&context, flags, device);
 #endif

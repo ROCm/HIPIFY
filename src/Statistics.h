@@ -207,7 +207,9 @@ enum SupportDegree {
   REMOVED = 0x400,
   HIP_EXPERIMENTAL = 0x800,
   HIP_SUPPORTED_V2_ONLY = 0x1000,
-  CUDA_OVERLOADED = 0x2000
+  CUDA_OVERLOADED = 0x2000,
+  HIP_PARTIALLY_SUPPORTED = 0x4000,
+  ROC_PARTIALLY_SUPPORTED = 0x8000,
 };
 
 enum cudaVersions {
@@ -435,6 +437,7 @@ struct hipAPIversions {
 
 typedef std::list<hipVersions> hipAPIChangedVersions;
 typedef std::list<cudaVersions> cudaAPIChangedVersions;
+typedef std::list<cudaVersions> cudaAPIUnsupportedVersions;
 
 // The names of various fields in in the statistics reports.
 extern const char *counterNames[NUM_CONV_TYPES];
@@ -529,13 +532,17 @@ public:
   // Check the counter and option TranslateToRoc whether it should be translated to Roc or not.
   static bool isToRoc(const hipCounter &counter);
   // Check the counter and option TranslateToMIOpen whether it should be translated to MIOpen or not.
-  static bool isToMIOpen(const hipCounter& counter);
+  static bool isToMIOpen(const hipCounter &counter);
   // Check whether the counter is HIP_EXPERIMENTAL or not.
   static bool isHipExperimental(const hipCounter &counter);
+  // Check whether the counter is HIP_PARTIALLY_SUPPORTED or not.
+  static bool isHipPartiallySupported(const hipCounter &counter);
   // Check whether the counter is HIP_UNSUPPORTED or not.
   static bool isHipUnsupported(const hipCounter &counter);
   // Check whether the counter is ROC_UNSUPPORTED or not.
   static bool isRocUnsupported(const hipCounter &counter);
+  // Check whether the counter is ROC_PARTIALLY_SUPPORTED or not.
+  static bool isRocPartiallySupported(const hipCounter &counter);
   // Check whether the counter is ROC_UNSUPPORTED/HIP_UNSUPPORTED/UNSUPPORTED or not.
   static bool isUnsupported(const hipCounter &counter);
   // Check whether the counter is CUDA_DEPRECATED or not.
