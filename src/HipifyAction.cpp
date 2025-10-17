@@ -2335,6 +2335,24 @@ void HipifyAction::FindAndReplace(StringRef name,
     DE.Report(sl, ID) << found->first << sWarn;
     return;
   }
+  if (Statistics::isHipPartiallySupported(found->second)) {
+    unsigned ver = Statistics::getCudaVersion();
+    bool bPartiallySupported = false;
+    const auto it = CUDA_UNSUPPORTED_VER_MAP().find(name);
+    if (it != CUDA_UNSUPPORTED_VER_MAP().end()) {
+      for (const auto &v : it->second) {
+        if (v == ver) {
+          bPartiallySupported = true;
+          break;
+        }
+      }
+      if (bPartiallySupported) {
+        const auto ID = DE.getCustomDiagID(clang::DiagnosticsEngine::Warning, "'%0' of CUDA version '%1' is not supported.");
+        DE.Report(sl, ID) << found->first << ver;
+        return;
+      }
+    }
+  }
   if (!bReplace) {
     return;
   }

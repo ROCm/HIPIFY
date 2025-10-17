@@ -384,6 +384,10 @@ bool Statistics::isHipExperimental(const hipCounter &counter) {
   return HIP_EXPERIMENTAL == (counter.supportDegree & HIP_EXPERIMENTAL);
 }
 
+bool Statistics::isHipPartiallySupported(const hipCounter &counter) {
+  return HIP_PARTIALLY_SUPPORTED == (counter.supportDegree & HIP_PARTIALLY_SUPPORTED);
+}
+
 bool Statistics::isHipUnsupported(const hipCounter &counter) {
   return HIP_UNSUPPORTED == (counter.supportDegree & HIP_UNSUPPORTED) ||
     UNSUPPORTED == (counter.supportDegree & UNSUPPORTED);
@@ -394,7 +398,11 @@ bool Statistics::isRocUnsupported(const hipCounter &counter) {
     UNSUPPORTED == (counter.supportDegree & UNSUPPORTED);
 }
 
-bool Statistics::isUnsupported(const hipCounter& counter) {
+bool Statistics::isRocPartiallySupported(const hipCounter &counter) {
+  return ROC_PARTIALLY_SUPPORTED == (counter.supportDegree & ROC_PARTIALLY_SUPPORTED);
+}
+
+bool Statistics::isUnsupported(const hipCounter &counter) {
   if (UNSUPPORTED == (counter.supportDegree & UNSUPPORTED)) return true;
   if (Statistics::isToRoc(counter)) return Statistics::isRocUnsupported(counter);
   else return Statistics::isHipUnsupported(counter);
