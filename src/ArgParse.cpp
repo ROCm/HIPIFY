@@ -226,6 +226,16 @@ cl::opt<bool> HipDnnSupport("hipdnn",
   cl::init(false),
   cl::cat(ToolTemplateCategory));
 
+cl::opt<bool> OptLocalHeaders("local-headers",
+  cl::desc("Enable hipification of quoted local headers (non-recursive)"),
+  cl::init(false),
+  cl::cat(ToolTemplateCategory));
+
+cl::opt<bool> OptLocalHeadersRecursive("local-headers-recursive",
+  cl::desc("Enable hipification of quoted local headers recursively"),
+  cl::init(false),
+  cl::cat(ToolTemplateCategory));
+
 cl::extrahelp CommonHelp(ct::CommonOptionsParser::HelpMessage);
 
 const std::vector<std::string> hipifyOptions {
@@ -255,6 +265,8 @@ const std::vector<std::string> hipifyOptions {
   std::string(HipifyAMAP.ArgStr),
   std::string(ClangResourceDir.ArgStr),
   std::string(HipDnnSupport.ArgStr),
+  std::string(OptLocalHeaders.ArgStr),
+  std::string(OptLocalHeadersRecursive.ArgStr),
 };
 
 const std::vector<std::string> hipifyOptionsWithTwoArgs {

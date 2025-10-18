@@ -43,7 +43,6 @@ THE SOFTWARE.
 #include "clang/Frontend/TextDiagnosticPrinter.h"
 
 #include "LocalHeader.h"
-#include "llvm/Support/CommandLine.h"
 
 #if LLVM_VERSION_MAJOR < 8
 #include "llvm/Support/Path.h"
@@ -55,16 +54,6 @@ THE SOFTWARE.
 constexpr auto DEBUG_TYPE = "cuda2hip";
 
 namespace ct = clang::tooling;
-
-static llvm::cl::opt<bool> OptLocalHeaders(
-  "local-headers",
-  llvm::cl::desc("Enable hipification of quoted local headers (non-recursive)"),
-  llvm::cl::init(false));
-
-static llvm::cl::opt<bool> OptLocalHeadersRecursive(
-  "local-headers-recursive",
-  llvm::cl::desc("Enable hipification of quoted local headers recursively (implies enabling local headers)"),
-  llvm::cl::init(false));
 
 void cleanupHipifyOptions(std::vector<const char*> &args) {
   for (const auto &a : hipifyOptions) {
@@ -225,6 +214,74 @@ bool appendArgumentsAdjusters(ct::RefactoringTool &Tool, const std::string &sSou
     Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-v", ct::ArgumentInsertPosition::END));
   }
   Tool.appendArgumentsAdjuster(ct::getClangSyntaxOnlyAdjuster());
+  return true;
+}
+
+bool hipifySingleSource(const std::string &srcPath,
+                               const std::string &dstPath,
+                               const ct::CompilationDatabase *compDB,
+                               ct::CommonOptionsParser *OptionsParserPtr,
+                               const char *hipify_exe_path,
+                               const std::string &mainContextPath,
+                               bool preserveTemp) {
+  std::error_code EC;
+  SmallString<128> tmpFile;
+  StringRef srcFileName = sys::path::filename(srcPath);
+
+  EC = sys::fs::createTemporaryFile(srcFileName, "hip", tmpFile);
+  if (EC) {
+    llvm::errs() << "\n" << sHipify << sError << "Failed to create temporary file: " << EC.message() << "\n";
+    return false;
+  }
+
+  // Copy source to temp
+  EC = sys::fs::copy_file(srcPath, tmpFile);
+  if (EC) {
+    llvm::errs() << "\n" << sHipify << sError << EC.message() 
+                 << ": while copying " << srcPath << " to " << tmpFile << "\n";
+    if (!SaveTemps && !preserveTemp) sys::fs::remove(tmpFile);
+    return false;
+  }
+
+  // RefactoringTool operates on the file in-place. Giving it the output path is no good,
+  // because that'll break relative includes, and we don't want to overwrite the input file.
+  // So what we do is operate on a copy, which we then move to the output.
+  ct::RefactoringTool Tool((compDB ? *compDB : OptionsParserPtr->getCompilations()),
+                           std::string(tmpFile.c_str()));
+  ct::Replacements &replacementsToUse = llcompat::getReplacements(Tool, tmpFile.c_str());
+  ReplacementsFrontendActionFactory<HipifyAction> actionFactory(&replacementsToUse);
+
+  if (!appendArgumentsAdjusters(Tool, mainContextPath, hipify_exe_path)) {
+    llvm::errs() << "\n" << sHipify << sError 
+                 << "LLVM/resource config failed for: " << srcPath << "\n";
+    if (!SaveTemps && !preserveTemp) sys::fs::remove(tmpFile);
+    return false;
+  }
+
+  // Hipify _all_ the things!
+  if (Tool.runAndSave(&actionFactory)) {
+    llvm::errs() << "\n" << sHipify << sError 
+                 << "Hipifying failed: " << srcPath << "\n";
+    if (!SaveTemps && !preserveTemp) sys::fs::remove(tmpFile);
+    return false;
+  }
+
+  // Copy the tmpfile to the output
+  if (!dstPath.empty()) {
+    EC = sys::fs::copy_file(tmpFile, dstPath);
+    if (EC) {
+      llvm::errs() << "\n" << sHipify << sError << EC.message() 
+                   << ": while copying " << tmpFile << " to " << dstPath << "\n";
+      if (!SaveTemps && !preserveTemp) sys::fs::remove(tmpFile);
+      return false;
+    }
+  }
+
+  // Remove the tmp file without error chec
+  if (!SaveTemps && !preserveTemp) {
+    sys::fs::remove(tmpFile);
+  }
+
   return true;
 }
 
@@ -443,54 +500,29 @@ int main(int argc, const char **argv) {
     Statistics::setActive(src);
     // Checks the local headers if --local-headers/--local-header-recursive specified.
     if (OptLocalHeaders || OptLocalHeadersRecursive) {
-      bool doRecursive = OptLocalHeadersRecursive;
-      if (Verbose && OptLocalHeaders && OptLocalHeadersRecursive) {
-        llvm::outs() << sHipify
-                     << "Both --local-headers and --local-headers-recursive specified; running in recursive mode.\n";
-      }
       if (!hipifyLocalHeaders(sSourceAbsPath,
                               compilationDatabase.get(),
                               &OptionsParser,
                               argv[0],
-                              doRecursive)) {
+                              OptLocalHeadersRecursive)) {
         Statistics::current().hasErrors = true;
         LLVM_DEBUG(llvm::dbgs() << "Local header hipification failed for: " << sSourceAbsPath << "\n");
         Result = 1;
       }
-    } else if (Verbose) {
-      llvm::outs() << sHipify
-                   << "Local header hipification disabled (use --local-headers or --local-headers-recursive)\n";
     }
-    // RefactoringTool operates on the file in-place. Giving it the output path is no good,
-    // because that'll break relative includes, and we don't want to overwrite the input file.
-    // So what we do is operate on a copy, which we then move to the output.
-    ct::RefactoringTool Tool((bCompilationDatabase ? *compilationDatabase.get() : OptionsParser.getCompilations()), std::string(tmpFile.c_str()));
-    ct::Replacements &replacementsToUse = llcompat::getReplacements(Tool, tmpFile.c_str());
-    ReplacementsFrontendActionFactory<HipifyAction> actionFactory(&replacementsToUse);
-    if (!appendArgumentsAdjusters(Tool, sSourceAbsPath, argv[0])) {
+   
+    std::string outputPath = NoOutput ? "" : dst;
+    if (!hipifySingleSource(src, outputPath,
+                            compilationDatabase.get(),
+                            &OptionsParser,
+                            argv[0],
+                            sSourceAbsPath,
+                            false)) {
+      Statistics::current().hasErrors = true;
       Result = 1;
-      break;
+      LLVM_DEBUG(llvm::dbgs() << "Hipification failed for: " << src << "\n");
     }
-    Statistics &currentStat = Statistics::current();
-    // Hipify _all_ the things!
-    if (Tool.runAndSave(&actionFactory)) {
-      currentStat.hasErrors = true;
-      Result = 1;
-      LLVM_DEBUG(llvm::dbgs() << "Skipped some replacements.\n");
-    }
-    // Copy the tmpfile to the output
-    if (!NoOutput && !currentStat.hasErrors) {
-      EC = sys::fs::copy_file(tmpFile, dst);
-      if (EC) {
-        llvm::errs() << "\n" << sHipify << sError << EC.message() << ": while copying " << tmpFile << " to " << dst << "\n";
-        Result = 1;
-        continue;
-      }
-    }
-    // Remove the tmp file without error check
-    if (!SaveTemps) {
-      sys::fs::remove(tmpFile);
-    }
+
     Statistics::current().markCompletion();
     Statistics::current().print(csv.get(), statPrint);
     dst.clear();

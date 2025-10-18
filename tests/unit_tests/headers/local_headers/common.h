@@ -9,13 +9,13 @@
 // CHECK: #include <stdio.h>
 // CHECK: #include <stdlib.h>
 // CHECK: #include <time.h>
-// CHECK: #include "common_1.h"
+// CHECK: #include "mixed.h"
 #include <cuda_runtime.h>
 #include <math.h>
 #include <memory.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "common_1.h"
+#include "mixed.h"
 
 #endif

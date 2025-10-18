@@ -4,5 +4,7 @@
 // CHECK: #include <hip/hip_runtime.h>
 // CHECK-NOT: #include <cuda_runtime.h>
 #include <cuda_runtime.h>
-inline void alloc(void **p){ cudaMalloc(p, 16); }
+inline void alloc(void **p){
+    // CHECK: hipMalloc(p, 16);
+    cudaMalloc(p, 16); }
 #endif

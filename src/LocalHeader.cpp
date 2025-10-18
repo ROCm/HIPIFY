@@ -109,96 +109,6 @@ bool collectLocalQuotedIncludes(const std::string &mainSourceAbsPath,
   return true;
 }
 
-static bool runHipifyOnSingleFile(const std::string &srcPath,
-                                  const std::string &mainSourceAbsPath,
-                                  const ct::CompilationDatabase *compDB,
-                                  ct::CommonOptionsParser *OptionsParserPtr,
-                                  const char *hipify_exe,
-                                  bool overwriteOriginalIfInplace = false) {
-  std::error_code EC;
-
-  SmallString<128> tmpFile;
-  StringRef srcFileName = sys::path::filename(srcPath);
-
-  if (TemporaryDir.empty()) {
-    EC = sys::fs::createTemporaryFile(srcFileName, "hip", tmpFile);
-    if (EC) {
-      errs() << "\n" << sHipify << sError << "Failed to create temporary file: " << EC.message() << "\n";
-      return false;
-    }
-  } else {
-    std::string tmpDirAbs = getAbsoluteDirectoryPath(TemporaryDir, EC);
-    if (EC) {
-      errs() << "\n" << sHipify << sError << "Temporary dir error: " << EC.message() << "\n";
-      return false;
-    }
-    
-    SmallString<256> tmpTemplate(tmpDirAbs);
-    tmpTemplate.push_back('/');
-    tmpTemplate.append(srcFileName);
-    tmpTemplate.append(".XXXXXX.hip");
-    EC = sys::fs::createUniqueFile(tmpTemplate, tmpFile);
-    if (EC) {
-      EC = sys::fs::createTemporaryFile(srcFileName, "hip", tmpFile);
-      if (EC) {
-        errs() << "\n" << sHipify << sError << "Failed to create temporary file: " << EC.message() << "\n";
-        return false;
-      }
-    }
-  }
-
-  EC = sys::fs::copy_file(srcPath, tmpFile);
-  if (EC) {
-    errs() << "\n" << sHipify << sError << EC.message() << ": while copying " << srcPath << " to " << tmpFile << "\n";
-    if (!SaveTemps) sys::fs::remove(tmpFile);
-    return false;
-  }
-
-  // Run RefactoringTool on temp file
-  ct::RefactoringTool Tool((compDB ? *compDB : OptionsParserPtr->getCompilations()), std::string(tmpFile.c_str()));
-  ct::Replacements &replacementsToUse = llcompat::getReplacements(Tool, tmpFile.c_str());
-  ReplacementsFrontendActionFactory<HipifyAction> actionFactory(&replacementsToUse);
-
-  if (!appendArgumentsAdjusters(Tool, mainSourceAbsPath, hipify_exe)) {
-    errs() << "\n" << sHipify << sError << "LLVM/resource config failed for header: " << srcPath << "\n";
-    if (!SaveTemps) sys::fs::remove(tmpFile);
-    return false;
-  }
-
-  if (Tool.runAndSave(&actionFactory)) {
-    errs() << "\n" << sHipify << sError << "Hipifying header failed: " << srcPath << "\n";
-    if (!SaveTemps) sys::fs::remove(tmpFile);
-    return false;
-  }
-
-  SmallString<256> dstHipPath(srcPath);
-  dstHipPath += ".hip";
-  std::string dstHip = std::string(dstHipPath.str());
-
-  EC = sys::fs::copy_file(tmpFile, dstHip);
-  if (EC) {
-    errs() << "\n" << sHipify << sError << EC.message() << ": while copying " << tmpFile << " to " << dstHip << "\n";
-    if (!SaveTemps) sys::fs::remove(tmpFile);
-    return false;
-  }
-
-  // Only overwrite original if explicitly requested (and Inplace is set)
-  if (Inplace && overwriteOriginalIfInplace) {
-    EC = sys::fs::copy_file(tmpFile, srcPath);
-    if (EC) {
-      errs() << "\n" << sHipify << sError << EC.message() << ": while copying " << tmpFile << " to " << srcPath << "\n";
-      if (!SaveTemps) sys::fs::remove(tmpFile);
-      return false;
-    }
-  }
-
-  if (!SaveTemps) {
-    sys::fs::remove(tmpFile);
-  }
-
-  return true;
-}
-
 bool hipifyLocalHeaders(const std::string &mainSourceAbsPath,
                              const ct::CompilationDatabase *compDB,
                              ct::CommonOptionsParser *OptionsParserPtr,
@@ -233,8 +143,10 @@ bool hipifyLocalHeaders(const std::string &mainSourceAbsPath,
       continue;
     }
 
-    bool ok = runHipifyOnSingleFile(hdr, mainSourceAbsPath, compDB,
-                                    OptionsParserPtr, hipify_exe, false);
+    std::string hipOut = hdr + ".hip";
+    bool ok = hipifySingleSource(hdr, hipOut, compDB, OptionsParserPtr,
+                                  hipify_exe, mainSourceAbsPath, false);
+
     if (!ok) {
       errs() << sHipify << sError << "Hipify failed for header: " << hdr << "\n";
       return false;

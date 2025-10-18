@@ -5,5 +5,8 @@
 // CHECK-NOT: #include <cuda_runtime.h>
 #include <cuda_runtime.h>
 inline int mul(int a,int b){ return a*b; }
-inline void s(){ cudaDeviceSynchronize(); }
+inline void s(){ 
+    // CHECK: hipDeviceSynchronize();
+    cudaDeviceSynchronize(); 
+}
 #endif

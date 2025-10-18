@@ -3,10 +3,10 @@
 // CHECK: #include <hip/hip_runtime.h>
 // CHECK-NOT: #include <cuda_runtime.h>
 // CHECK: #include "common.h"
-// CHECK: #include "common_1.h"
-// CHECK: #include "common_2.h"
+// CHECK: #include "single_header.h"
+// CHECK: #include "shared.h"
 #include <cuda_runtime.h>
 
 #include "common.h"
-#include "common_1.h"
-#include "common_2.h"
+#include "single_header.h"
+#include "shared.h"

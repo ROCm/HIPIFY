@@ -5,5 +5,8 @@
 // CHECK: #include <hip/hip_runtime.h>
 // CHECK-NOT: #include <cuda_runtime.h>
 #include <cuda_runtime.h>
-inline void g(){ cudaDeviceSynchronize(); }
+inline void g(){
+    // CHECK: hipDeviceSynchronize();
+    cudaDeviceSynchronize();
+}
 #endif
