@@ -4027,6 +4027,7 @@ sub simpleSubstitutions {
     subst("cudaSetDevice", "hipSetDevice", "device");
     subst("cudaSetDeviceFlags", "hipSetDeviceFlags", "device");
     subst("cudaSetValidDevices", "hipSetValidDevices", "device");
+    subst("cuCtxCreate", "hipCtxCreate", "context");
     subst("cuCtxDestroy", "hipCtxDestroy", "context");
     subst("cuCtxDestroy_v2", "hipCtxDestroy", "context");
     subst("cuCtxGetApiVersion", "hipCtxGetApiVersion", "context");
@@ -12439,7 +12440,6 @@ sub warnRemovedFunctions {
     "cuCtxCreate_v4",
     "cuCtxCreate_v3",
     "cuCtxCreate_v2",
-    "cuCtxCreate",
     "cuCtxAttach",
     "cuCoredumpSetAttributeGlobal",
     "cuCoredumpSetAttribute",

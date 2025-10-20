@@ -41,6 +41,7 @@ namespace doc {
   typedef map<StringRef, hipAPIversions> hipVersionMap;
   typedef map<llvm::StringRef, hipAPIChangedVersions> hipChangedVersionMap;
   typedef map<llvm::StringRef, cudaAPIChangedVersions> cudaChangedVersionMap;
+  typedef map<llvm::StringRef, cudaAPIUnsupportedVersions> cudaUnsupportedVersionMap;
 
   const string tab = "    ";
   const string endl_tab = "\n" + tab;
@@ -155,9 +156,11 @@ namespace doc {
   const string sD = "D";
   const string sC = "C";
   const string sR = "R";
+  const string sU = "U";
   const string sE = "E";
   const hipChangedVersionMap hipChangedVersionMapEmpty = {};
   const cudaChangedVersionMap cudaChangedVersionMapEmpty = {};
+  const cudaUnsupportedVersionMap cudaUnsupportedVersionMapEmpty = {};
 
   enum docType {
     none = 0,
@@ -203,6 +206,7 @@ namespace doc {
       virtual const hipChangedVersionMap &getHipChangedFunctionVersions() const { return hipChangedVersionMapEmpty; };
       virtual const cudaChangedVersionMap &getCudaChangedFunctionVersions() const { return cudaChangedVersionMapEmpty; };
       virtual const cudaChangedVersionMap &getCudaChangedTypeVersions() const { return cudaChangedVersionMapEmpty; };
+      virtual const cudaUnsupportedVersionMap &getCudaUnsupportedFunctionVersions() const { return cudaUnsupportedVersionMapEmpty; };
       virtual const versionMap &getTypeVersions() const = 0;
       virtual const hipVersionMap &getHipTypeVersions() const = 0;
       virtual const string &getAPI() const { return sHIP; }
@@ -266,8 +270,8 @@ namespace doc {
           if (doc != (types & doc)) continue;
           writeHeadMeta(doc);
           *streams[doc].get() << (doc == md ? "# " : "") << getName() << " " << sAPI_supported_by << (isJoint() ? getJointAPI() : getAPI()) << endl << endl;
-          *streams[doc].get() << endl << "**Note\\:** In the tables that follow the columns marked " << (format == full ? "`A`, `D`, `C`, `R`, and `E`" : "`D` and `E`") << " mean the following:";
-          *streams[doc].get() << endl << (format == full ? "**A** - Added; **D** - Deprecated; **C** - Changed; **R** - Removed; **E** - Experimental" : "**D** - Deprecated; **E** - Experimental") << endl << endl;
+          *streams[doc].get() << endl << "**Note\\:** In the tables that follow the columns marked " << (format == full ? "`A`, `D`, `C`, `R`, `U`, and `E`" : "`D` and `E`") << " mean the following:";
+          *streams[doc].get() << endl << (format == full ? "**A** - Added; **D** - Deprecated; **C** - Changed; **R** - Removed; **U** - Unsupported for CUDA version(s); **E** - Experimental" : "**D** - Deprecated; **E** - Experimental") << endl << endl;
           unsigned int compact_only_cur_sec_num = 1;
           for (auto &s : getSections()) {
             bool isType = isTypeSection(s.first, getSections());
@@ -276,6 +280,7 @@ namespace doc {
             const hipVersionMap &hMap = commonHipVersionMap.empty() ? ((isType) ? getHipTypeVersions() : getHipFunctionVersions()) : commonHipVersionMap;
             const hipChangedVersionMap &hChangedMap = getHipChangedFunctionVersions();
             const cudaChangedVersionMap &cudaChangedMap = isType ? getCudaChangedTypeVersions() : getCudaChangedFunctionVersions();
+            const cudaUnsupportedVersionMap &cudaUnsupportedMap = getCudaUnsupportedFunctionVersions();
             functionMap fMap;
             for (auto &f : ftMap) {
               if (f.second.apiSection == s.first) {
@@ -294,7 +299,7 @@ namespace doc {
             string sS = (doc == md) ? "|" : ",";
             stringstream rows;
             for (auto &f : fMap) {
-              string a, d, c, r, ha, hd, hc, hr, he, ra, rd, rc, rr, re, cc;
+              string a, d, c, r, ha, hd, hc, hr, hu, he, ra, rd, rc, rr, re, cc;
               for (auto &v : vMap) {
                 if (v.first == f.first) {
                   a = Statistics::getCudaVersion(v.second.appeared);
@@ -318,6 +323,12 @@ namespace doc {
                 ha = Statistics::getHipVersion(hv->second.appeared);
                 hd = Statistics::getHipVersion(hv->second.deprecated);
                 hr = Statistics::getHipVersion(hv->second.removed);
+                const auto it = cudaUnsupportedMap.find(f.first);
+                if (it != cudaUnsupportedMap.end())
+                  for (const auto &v : it->second)
+                    hu += Statistics::getCudaVersion(v) + " ";
+                if (!hu.empty())
+                  hu.pop_back();
                 he = Statistics::getHipVersion(hv->second.experimental);
               }
               auto hcv = (isROC) ? hChangedMap.find(f.second.rocName) : hChangedMap.find(f.second.hipName);
@@ -379,7 +390,7 @@ namespace doc {
                       break;
                     case full:
                     default:
-                      rows << a << sS << d << sS << c << sS << r << sS << sHip << sS << ha << sS << hd << sS << (isROC ? rc : hc) << sS << hr << sS << he;
+                      rows << a << sS << d << sS << c << sS << r << sS << sHip << sS << ha << sS << hd << sS << (isROC ? rc : hc) << sS << hr << sS << hu << sS << he;
                       if (isJoint())
                         rows << sS << sRoc << sS << ra << sS << rd << sS << rc << sS << rr << sS << re;
                       rows << endl;
@@ -399,7 +410,7 @@ namespace doc {
                     case full:
                     default:
                       rows << (a.empty() ? " " : a) << sS << (d.empty() ? " " : d) << sS << (c.empty() ? " " : c) << sS << (r.empty() ? " " : r) << sS << sHip << sS <<
-                        (ha.empty() ? " " : ha) << sS << (hd.empty() ? " " : hd) << sS << (isROC ? (rc.empty() ? " " : rc) : (hc.empty() ? " " : hc)) << sS << (hr.empty() ? " " : hr) << sS << (he.empty() ? " " : he) << sS;
+                        (ha.empty() ? " " : ha) << sS << (hd.empty() ? " " : hd) << sS << (isROC ? (rc.empty() ? " " : rc) : (hc.empty() ? " " : hc)) << sS << (hr.empty() ? " " : hr) << sS << (hu.empty() ? " " : hu) << sS << (he.empty() ? " " : he) << sS;
                       if (isJoint())
                         rows << sRoc << sS << (ra.empty() ? " " : ra) << sS << (rd.empty() ? " " : rd) << sS << (rc.empty() ? " " : rc) << sS << (rr.empty() ? " " : rr) << sS << (re.empty() ? " " : re) << sS;
                       rows << endl;
@@ -413,13 +424,13 @@ namespace doc {
             section_header << (doc == md ? "## **" : "") << (format != compact ? s.first : compact_only_cur_sec_num) << ". " << string(s.second) << (doc == md ? "**" : "") << endl << endl;
             section << (doc == md ? "|**" : "") << sCUDA << sS << (format == full ? sA : "") << (format == full ? sS : "") <<
               sD << sS << (format == full ? sC : "") << (format == full ? sS : "") << (format == full ? sR : "") << (format == full ? sS : "") << getAPI() << sS << (format == full ? sA : "") << (format == full ? sS : "") <<
-              sD << (format == full ? sS : "") << (format == full ? sC : "") << (format == full ? sS : "") << (format == full ? sR : "") << sS << sE;
+              sD << (format == full ? sS : "") << (format == full ? sC : "") << (format == full ? sS : "") << (format == full ? sR : "") << (format == full ? sS : "") << (format == full ? sU : "") << sS << sE;
             if (isJoint())
               section << sS << getSecondAPI() << sS << (format == full ? sA : "") << (format == full ? sS : "") << sD << (format == full ? sS : "") << (format == full ? sC : "") << (format == full ? sS : "") << (format == full ? sR : "") << sS << sE;
             section << (doc == md ? "**|" : "") << endl;
             if (doc == md) {
               section << "|:--|" << (format == full ? ":-:|" : "") << ":-:|" << (format == full ? ":-:|" : "") << (format == full ? ":-:|" : "") <<
-                ":--|" << (format == full ? ":-:|" : "") << ":-:|" << (format == full ? ":-:|" : "") << (format == full ? ":-:|" : "") << ":-:|";
+                ":--|" << (format == full ? ":-:|" : "") << ":-:|" << (format == full ? ":-:|" : "") << (format == full ? ":-:|" : "")<< (format == full ? ":-:|" : "") << ":-:|";
               if (isJoint())
                 section << ":--|" << (format == full ? ":-:|" : "") << ":-:|" << (format == full ? ":-:|" : "") << (format == full ? ":-:|" : "") << ":-:|";
               section << endl;
@@ -509,6 +520,7 @@ namespace doc {
       const hipVersionMap &getHipFunctionVersions() const override { return HIP_DRIVER_FUNCTION_VER_MAP; }
       const hipChangedVersionMap &getHipChangedFunctionVersions() const override { return HIP_DRIVER_FUNCTION_CHANGED_VER_MAP; }
       const cudaChangedVersionMap &getCudaChangedFunctionVersions() const override { return CUDA_DRIVER_FUNCTION_CHANGED_VER_MAP; }
+      const cudaUnsupportedVersionMap &getCudaUnsupportedFunctionVersions() const override { return CUDA_DRIVER_FUNCTION_UNSUPPORTED_VER_MAP; };
       const versionMap &getTypeVersions() const override { return CUDA_DRIVER_TYPE_NAME_VER_MAP; }
       const hipVersionMap &getHipTypeVersions() const override { return HIP_DRIVER_TYPE_NAME_VER_MAP; }
       const string &getName() const override { return sCUDA_DRIVER; }
