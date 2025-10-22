@@ -4028,6 +4028,7 @@ sub simpleSubstitutions {
     subst("cudaSetDeviceFlags", "hipSetDeviceFlags", "device");
     subst("cudaSetValidDevices", "hipSetValidDevices", "device");
     subst("cuCtxCreate", "hipCtxCreate", "context");
+    subst("cuCtxCreate_v2", "hipCtxCreate", "context");
     subst("cuCtxDestroy", "hipCtxDestroy", "context");
     subst("cuCtxDestroy_v2", "hipCtxDestroy", "context");
     subst("cuCtxGetApiVersion", "hipCtxGetApiVersion", "context");
@@ -4251,6 +4252,8 @@ sub simpleSubstitutions {
     subst("cuMemPoolSetAccess", "hipMemPoolSetAccess", "ordered_memory");
     subst("cuMemPoolSetAttribute", "hipMemPoolSetAttribute", "ordered_memory");
     subst("cuMemPoolTrimTo", "hipMemPoolTrimTo", "ordered_memory");
+    subst("cuMemAdvise", "hipMemAdvise", "unified");
+    subst("cuMemPrefetchAsync", "hipMemPrefetchAsync", "unified");
     subst("cuMemRangeGetAttribute", "hipMemRangeGetAttribute", "unified");
     subst("cuMemRangeGetAttributes", "hipMemRangeGetAttributes", "unified");
     subst("cuPointerGetAttribute", "hipPointerGetAttribute", "unified");
@@ -4267,12 +4270,14 @@ sub simpleSubstitutions {
     subst("cuStreamDestroy", "hipStreamDestroy", "stream");
     subst("cuStreamDestroy_v2", "hipStreamDestroy", "stream");
     subst("cuStreamEndCapture", "hipStreamEndCapture", "stream");
+    subst("cuStreamGetCaptureInfo", "hipStreamGetCaptureInfo", "stream");
     subst("cuStreamGetCaptureInfo_v2", "hipStreamGetCaptureInfo_v2", "stream");
     subst("cuStreamGetFlags", "hipStreamGetFlags", "stream");
     subst("cuStreamGetPriority", "hipStreamGetPriority", "stream");
     subst("cuStreamIsCapturing", "hipStreamIsCapturing", "stream");
     subst("cuStreamQuery", "hipStreamQuery", "stream");
     subst("cuStreamSynchronize", "hipStreamSynchronize", "stream");
+    subst("cuStreamUpdateCaptureDependencies", "hipStreamUpdateCaptureDependencies", "stream");
     subst("cuStreamWaitEvent", "hipStreamWaitEvent", "stream");
     subst("cuThreadExchangeStreamCaptureMode", "hipThreadExchangeStreamCaptureMode", "stream");
     subst("cudaStreamAddCallback", "hipStreamAddCallback", "stream");
@@ -4355,6 +4360,7 @@ sub simpleSubstitutions {
     subst("cuDeviceSetGraphMemAttribute", "hipDeviceSetGraphMemAttribute", "graph");
     subst("cuGraphAddBatchMemOpNode", "hipGraphAddBatchMemOpNode", "graph");
     subst("cuGraphAddChildGraphNode", "hipGraphAddChildGraphNode", "graph");
+    subst("cuGraphAddDependencies", "hipGraphAddDependencies", "graph");
     subst("cuGraphAddEmptyNode", "hipGraphAddEmptyNode", "graph");
     subst("cuGraphAddEventRecordNode", "hipGraphAddEventRecordNode", "graph");
     subst("cuGraphAddEventWaitNode", "hipGraphAddEventWaitNode", "graph");
@@ -4366,6 +4372,7 @@ sub simpleSubstitutions {
     subst("cuGraphAddMemFreeNode", "hipDrvGraphAddMemFreeNode", "graph");
     subst("cuGraphAddMemcpyNode", "hipDrvGraphAddMemcpyNode", "graph");
     subst("cuGraphAddMemsetNode", "hipDrvGraphAddMemsetNode", "graph");
+    subst("cuGraphAddNode", "hipGraphAddNode", "graph");
     subst("cuGraphBatchMemOpNodeGetParams", "hipGraphBatchMemOpNodeGetParams", "graph");
     subst("cuGraphBatchMemOpNodeSetParams", "hipGraphBatchMemOpNodeSetParams", "graph");
     subst("cuGraphChildGraphNodeGetGraph", "hipGraphChildGraphNodeGetGraph", "graph");
@@ -4396,6 +4403,7 @@ sub simpleSubstitutions {
     subst("cuGraphExternalSemaphoresSignalNodeSetParams", "hipGraphExternalSemaphoresSignalNodeSetParams", "graph");
     subst("cuGraphExternalSemaphoresWaitNodeGetParams", "hipGraphExternalSemaphoresWaitNodeGetParams", "graph");
     subst("cuGraphExternalSemaphoresWaitNodeSetParams", "hipGraphExternalSemaphoresWaitNodeSetParams", "graph");
+    subst("cuGraphGetEdges", "hipGraphGetEdges", "graph");
     subst("cuGraphGetNodes", "hipGraphGetNodes", "graph");
     subst("cuGraphGetRootNodes", "hipGraphGetRootNodes", "graph");
     subst("cuGraphHostNodeGetParams", "hipGraphHostNodeGetParams", "graph");
@@ -4417,11 +4425,14 @@ sub simpleSubstitutions {
     subst("cuGraphMemsetNodeGetParams", "hipGraphMemsetNodeGetParams", "graph");
     subst("cuGraphMemsetNodeSetParams", "hipGraphMemsetNodeSetParams", "graph");
     subst("cuGraphNodeFindInClone", "hipGraphNodeFindInClone", "graph");
+    subst("cuGraphNodeGetDependencies", "hipGraphNodeGetDependencies", "graph");
+    subst("cuGraphNodeGetDependentNodes", "hipGraphNodeGetDependentNodes", "graph");
     subst("cuGraphNodeGetEnabled", "hipGraphNodeGetEnabled", "graph");
     subst("cuGraphNodeGetType", "hipGraphNodeGetType", "graph");
     subst("cuGraphNodeSetEnabled", "hipGraphNodeSetEnabled", "graph");
     subst("cuGraphNodeSetParams", "hipGraphNodeSetParams", "graph");
     subst("cuGraphReleaseUserObject", "hipGraphReleaseUserObject", "graph");
+    subst("cuGraphRemoveDependencies", "hipGraphRemoveDependencies", "graph");
     subst("cuGraphRetainUserObject", "hipGraphRetainUserObject", "graph");
     subst("cuGraphUpload", "hipGraphUpload", "graph");
     subst("cuUserObjectCreate", "hipUserObjectCreate", "graph");
@@ -12234,7 +12245,6 @@ sub warnRemovedFunctions {
     "cuSurfObjectDestroy",
     "cuSurfObjectCreate",
     "cuStreamUpdateCaptureDependencies_v2",
-    "cuStreamUpdateCaptureDependencies",
     "cuStreamSetAttribute",
     "cuStreamGetId",
     "cuStreamGetGreenCtx",
@@ -12242,7 +12252,6 @@ sub warnRemovedFunctions {
     "cuStreamGetCtx_v2",
     "cuStreamGetCtx",
     "cuStreamGetCaptureInfo_v3",
-    "cuStreamGetCaptureInfo",
     "cuStreamGetAttribute",
     "cuStreamCopyAttributes",
     "cuStreamBeginCapture_ptsz",
@@ -12287,14 +12296,12 @@ sub warnRemovedFunctions {
     "cuMemSetMemPool",
     "cuMemPrefetchBatchAsync",
     "cuMemPrefetchAsync_v2",
-    "cuMemPrefetchAsync",
     "cuMemGetMemPool",
     "cuMemGetDefaultMemPool",
     "cuMemDiscardBatchAsync",
     "cuMemDiscardAndPrefetchBatchAsync",
     "cuMemBatchDecompressAsync",
     "cuMemAdvise_v2",
-    "cuMemAdvise",
     "cuLogsUnregisterCallback",
     "cuLogsRegisterCallback",
     "cuLogsDumpToMemory",
@@ -12338,18 +12345,12 @@ sub warnRemovedFunctions {
     "cuGraphicsD3D11RegisterResource",
     "cuGraphicsD3D10RegisterResource",
     "cuGraphRemoveDependencies_v2",
-    "cuGraphRemoveDependencies",
     "cuGraphNodeGetDependentNodes_v2",
-    "cuGraphNodeGetDependentNodes",
     "cuGraphNodeGetDependencies_v2",
-    "cuGraphNodeGetDependencies",
     "cuGraphGetEdges_v2",
-    "cuGraphGetEdges",
     "cuGraphConditionalHandleCreate",
     "cuGraphAddNode_v2",
-    "cuGraphAddNode",
     "cuGraphAddDependencies_v2",
-    "cuGraphAddDependencies",
     "cuGLUnregisterBufferObject",
     "cuGLUnmapBufferObjectAsync",
     "cuGLUnmapBufferObject",
@@ -12439,7 +12440,6 @@ sub warnRemovedFunctions {
     "cuCtxDetach",
     "cuCtxCreate_v4",
     "cuCtxCreate_v3",
-    "cuCtxCreate_v2",
     "cuCtxAttach",
     "cuCoredumpSetAttributeGlobal",
     "cuCoredumpSetAttribute",
