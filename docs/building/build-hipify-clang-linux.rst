@@ -145,7 +145,7 @@ Minimum build system requirements for the above configurations:
 
 Recommended build system requirements:
 
-* CMake 4.1.1, GNU C/C++ 13.3, Python 3.13.7.
+* CMake 4.1.1, GNU C/C++ 13.3, Python 3.14.0.
 
 Here's how to build ``hipify-clang`` with testing support on ``Ubuntu 24.04.02``:
 
@@ -193,7 +193,7 @@ The corresponding successful output is (assuming ROOT_DIR is ``/usr/llvm/21.1.4`
   --    - Binary path           : /usr/llvm/21.1.4/dist/bin
   -- Linker detection: GNU ld
   -- ---- The below configuring for hipify-clang testing only ----
-  -- Found Python: /usr/bin/python3.13 (found suitable version "3.13.7", required range is "3.0...3.14") found components: Interpreter
+  -- Found Python: /usr/bin/python3.14 (found suitable version "3.14.0", required range is "3.0...3.15") found components: Interpreter
   -- Found lit: /usr/local/bin/lit
   -- Found FileCheck: /GIT/LLVM/trunk/dist/FileCheck
   -- Initial CUDA to configure:
@@ -231,7 +231,7 @@ The corresponding successful output is:
   x86_64 - Platform architecture
   Linux 6.5.0-15-generic - Platform OS
   64 - hipify-clang binary bitness
-  64 - python 3.13.7 binary bitness
+  64 - python 3.14.0 binary bitness
   ===============================================================
   -- Testing: 106 tests, 12 threads --
   Testing Time: 6.91s
