@@ -235,7 +235,7 @@ Tested configurations:
     - ``8.0.5  - 9.14.0``
     - ``2019.16.11.51, 2022.17.14.14``
     - ``4.1.1``
-    - ``3.13.7``
+    - ``3.14.0``
 
 :sup:`5` LLVM 14.x.x is the latest major release supporting Visual Studio 2017.
 
@@ -295,8 +295,8 @@ The corresponding successful output is (assuming %ROOT_DIR% is ``D:/LLVM/21.1.4`
   --    - LLVM Include path     : D:/LLVM/21.1.4/dist/include
   --    - Binary path           : D:/LLVM/21.1.4/dist/bin
   -- ---- The below configuring for hipify-clang testing only ----
-  -- Found Python: C:/Users/TT/AppData/Local/Programs/Python/Python313/python.exe (found suitable version "3.13.6", required range is "3.0...3.14") found components: Interpreter
-  -- Found lit: C:/Users/TT/AppData/Local/Programs/Python/Python313/Scripts/lit.exe
+  -- Found Python: C:/Users/TT/AppData/Local/Programs/Python/Python314/python.exe (found suitable version "3.14.0", required range is "3.0...3.15") found components: Interpreter
+  -- Found lit: C:/Users/TT/AppData/Local/Programs/Python/Python314/Scripts/lit.exe
   -- Found FileCheck: D:/LLVM/21.1.4/dist/bin/FileCheck.exe
   -- Initial CUDA to configure:
   --    - CUDA Toolkit path     : C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.9
