@@ -39,7 +39,9 @@ THE SOFTWARE.
 #include "clang/Basic/DiagnosticOptions.h"
 #include "clang/Driver/Driver.h"
 #include "clang/Driver/Compilation.h"
+#if LLVM_VERSION_MAJOR >= 22
 #include "clang/Driver/CudaInstallationDetector.h"
+#endif
 #include "clang/Driver/Tool.h"
 #include "clang/Frontend/TextDiagnosticPrinter.h"
 
@@ -83,6 +85,7 @@ void cleanupHipifyOptions(std::vector<const char*> &args) {
 }
 
 void DetectCUDA(const std::unique_ptr<clang::driver::Compilation> &C) {
+#if LLVM_VERSION_MAJOR >= 22
   const clang::driver::Driver &driver = C->getDriver();
   clang::driver::CudaInstallationDetector CudaInstallation(driver, llvm::Triple(driver.getTargetTriple()), C->getArgs());
   auto& FS = driver.getVFS();
@@ -90,6 +93,7 @@ void DetectCUDA(const std::unique_ptr<clang::driver::Compilation> &C) {
     Statistics::setCudaVersion((*cuda_h_file)->getBuffer());
   llvm::errs() << "\n" << sHipify << "CUDA Installation Path: " << CudaInstallation.getInstallPath();
   llvm::errs() << "\n" << sHipify << "CUDA_VERSION: " << Statistics::getCudaVersion() << "\n";
+#endif
 }
 
 void Init(int argc, const char **argv, std::vector<std::string> &files) {
