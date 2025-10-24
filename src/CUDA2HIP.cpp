@@ -147,6 +147,7 @@ const std::map<llvm::StringRef, cudaAPIUnsupportedVersions> &CUDA_UNSUPPORTED_VE
   if (!ret.empty())
     return ret;
   ret.insert(CUDA_DRIVER_FUNCTION_UNSUPPORTED_VER_MAP.begin(), CUDA_DRIVER_FUNCTION_UNSUPPORTED_VER_MAP.end());
+  ret.insert(CUDA_RUNTIME_FUNCTION_UNSUPPORTED_VER_MAP.begin(), CUDA_RUNTIME_FUNCTION_UNSUPPORTED_VER_MAP.end());
   return ret;
 };
 

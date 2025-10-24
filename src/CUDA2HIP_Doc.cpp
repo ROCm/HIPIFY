@@ -554,6 +554,7 @@ namespace doc {
       const hipVersionMap &getHipFunctionVersions() const override { return HIP_RUNTIME_FUNCTION_VER_MAP; }
       const cudaChangedVersionMap &getCudaChangedFunctionVersions() const override { return CUDA_RUNTIME_FUNCTION_CHANGED_VER_MAP; }
       const cudaChangedVersionMap &getCudaChangedTypeVersions() const override { return CUDA_RUNTIME_TYPE_CHANGED_VER_MAP; }
+      const cudaUnsupportedVersionMap &getCudaUnsupportedFunctionVersions() const override { return CUDA_RUNTIME_FUNCTION_UNSUPPORTED_VER_MAP; };
       const versionMap &getTypeVersions() const override { return CUDA_RUNTIME_TYPE_NAME_VER_MAP; }
       const hipVersionMap &getHipTypeVersions() const override { return HIP_RUNTIME_TYPE_NAME_VER_MAP; }
       const string &getName() const override { return sCUDA_RUNTIME; }

@@ -193,6 +193,7 @@ extern const std::map<unsigned int, llvm::StringRef> CUDA_SOLVER_API_SECTION_MAP
 extern const std::map<unsigned int, llvm::StringRef> CUDA_TENSOR_API_SECTION_MAP;
 
 extern const std::map<llvm::StringRef, cudaAPIUnsupportedVersions> CUDA_DRIVER_FUNCTION_UNSUPPORTED_VER_MAP;
+extern const std::map<llvm::StringRef, cudaAPIUnsupportedVersions> CUDA_RUNTIME_FUNCTION_UNSUPPORTED_VER_MAP;
 
 // The union of all the above maps.
 const std::map<llvm::StringRef, cudaAPIUnsupportedVersions> &CUDA_UNSUPPORTED_VER_MAP();

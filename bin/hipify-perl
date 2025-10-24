@@ -4182,6 +4182,7 @@ sub simpleSubstitutions {
     subst("cudaMallocManaged", "hipMallocManaged", "memory");
     subst("cudaMallocMipmappedArray", "hipMallocMipmappedArray", "memory");
     subst("cudaMallocPitch", "hipMallocPitch", "memory");
+    subst("cudaMemAdvise", "hipMemAdvise", "memory");
     subst("cudaMemGetInfo", "hipMemGetInfo", "memory");
     subst("cudaMemPoolCreate", "hipMemPoolCreate", "memory");
     subst("cudaMemPoolDestroy", "hipMemPoolDestroy", "memory");
@@ -4194,6 +4195,7 @@ sub simpleSubstitutions {
     subst("cudaMemPoolSetAccess", "hipMemPoolSetAccess", "memory");
     subst("cudaMemPoolSetAttribute", "hipMemPoolSetAttribute", "memory");
     subst("cudaMemPoolTrimTo", "hipMemPoolTrimTo", "memory");
+    subst("cudaMemPrefetchAsync", "hipMemPrefetchAsync", "memory");
     subst("cudaMemRangeGetAttribute", "hipMemRangeGetAttribute", "memory");
     subst("cudaMemRangeGetAttributes", "hipMemRangeGetAttributes", "memory");
     subst("cudaMemcpy", "hipMemcpy", "memory");
@@ -4289,11 +4291,13 @@ sub simpleSubstitutions {
     subst("cudaStreamCreateWithPriority", "hipStreamCreateWithPriority", "stream");
     subst("cudaStreamDestroy", "hipStreamDestroy", "stream");
     subst("cudaStreamEndCapture", "hipStreamEndCapture", "stream");
+    subst("cudaStreamGetCaptureInfo", "hipStreamGetCaptureInfo", "stream");
     subst("cudaStreamGetFlags", "hipStreamGetFlags", "stream");
     subst("cudaStreamGetPriority", "hipStreamGetPriority", "stream");
     subst("cudaStreamIsCapturing", "hipStreamIsCapturing", "stream");
     subst("cudaStreamQuery", "hipStreamQuery", "stream");
     subst("cudaStreamSynchronize", "hipStreamSynchronize", "stream");
+    subst("cudaStreamUpdateCaptureDependencies", "hipStreamUpdateCaptureDependencies", "stream");
     subst("cudaStreamWaitEvent", "hipStreamWaitEvent", "stream");
     subst("cudaThreadExchangeStreamCaptureMode", "hipThreadExchangeStreamCaptureMode", "stream");
     subst("cuEventCreate", "hipEventCreateWithFlags", "event");
@@ -4442,6 +4446,7 @@ sub simpleSubstitutions {
     subst("cudaDeviceGraphMemTrim", "hipDeviceGraphMemTrim", "graph");
     subst("cudaDeviceSetGraphMemAttribute", "hipDeviceSetGraphMemAttribute", "graph");
     subst("cudaGraphAddChildGraphNode", "hipGraphAddChildGraphNode", "graph");
+    subst("cudaGraphAddDependencies", "hipGraphAddDependencies", "graph");
     subst("cudaGraphAddEmptyNode", "hipGraphAddEmptyNode", "graph");
     subst("cudaGraphAddEventRecordNode", "hipGraphAddEventRecordNode", "graph");
     subst("cudaGraphAddEventWaitNode", "hipGraphAddEventWaitNode", "graph");
@@ -4456,6 +4461,7 @@ sub simpleSubstitutions {
     subst("cudaGraphAddMemcpyNodeFromSymbol", "hipGraphAddMemcpyNodeFromSymbol", "graph");
     subst("cudaGraphAddMemcpyNodeToSymbol", "hipGraphAddMemcpyNodeToSymbol", "graph");
     subst("cudaGraphAddMemsetNode", "hipGraphAddMemsetNode", "graph");
+    subst("cudaGraphAddNode", "hipGraphAddNode", "graph");
     subst("cudaGraphChildGraphNodeGetGraph", "hipGraphChildGraphNodeGetGraph", "graph");
     subst("cudaGraphClone", "hipGraphClone", "graph");
     subst("cudaGraphCreate", "hipGraphCreate", "graph");
@@ -4486,6 +4492,7 @@ sub simpleSubstitutions {
     subst("cudaGraphExternalSemaphoresSignalNodeSetParams", "hipGraphExternalSemaphoresSignalNodeSetParams", "graph");
     subst("cudaGraphExternalSemaphoresWaitNodeGetParams", "hipGraphExternalSemaphoresWaitNodeGetParams", "graph");
     subst("cudaGraphExternalSemaphoresWaitNodeSetParams", "hipGraphExternalSemaphoresWaitNodeSetParams", "graph");
+    subst("cudaGraphGetEdges", "hipGraphGetEdges", "graph");
     subst("cudaGraphGetNodes", "hipGraphGetNodes", "graph");
     subst("cudaGraphGetRootNodes", "hipGraphGetRootNodes", "graph");
     subst("cudaGraphHostNodeGetParams", "hipGraphHostNodeGetParams", "graph");
@@ -4509,11 +4516,14 @@ sub simpleSubstitutions {
     subst("cudaGraphMemsetNodeGetParams", "hipGraphMemsetNodeGetParams", "graph");
     subst("cudaGraphMemsetNodeSetParams", "hipGraphMemsetNodeSetParams", "graph");
     subst("cudaGraphNodeFindInClone", "hipGraphNodeFindInClone", "graph");
+    subst("cudaGraphNodeGetDependencies", "hipGraphNodeGetDependencies", "graph");
+    subst("cudaGraphNodeGetDependentNodes", "hipGraphNodeGetDependentNodes", "graph");
     subst("cudaGraphNodeGetEnabled", "hipGraphNodeGetEnabled", "graph");
     subst("cudaGraphNodeGetType", "hipGraphNodeGetType", "graph");
     subst("cudaGraphNodeSetEnabled", "hipGraphNodeSetEnabled", "graph");
     subst("cudaGraphNodeSetParams", "hipGraphNodeSetParams", "graph");
     subst("cudaGraphReleaseUserObject", "hipGraphReleaseUserObject", "graph");
+    subst("cudaGraphRemoveDependencies", "hipGraphRemoveDependencies", "graph");
     subst("cudaGraphRetainUserObject", "hipGraphRetainUserObject", "graph");
     subst("cudaGraphUpload", "hipGraphUpload", "graph");
     subst("cudaUserObjectCreate", "hipUserObjectCreate", "graph");
@@ -11442,12 +11452,10 @@ sub warnRemovedFunctions {
     "cudaSyncPolicyAuto",
     "cudaSurfaceFormatMode",
     "cudaStreamUpdateCaptureDependencies_v2",
-    "cudaStreamUpdateCaptureDependencies",
     "cudaStreamSetAttribute",
     "cudaStreamGetId",
     "cudaStreamGetDevice",
     "cudaStreamGetCaptureInfo_v3",
-    "cudaStreamGetCaptureInfo",
     "cudaStreamGetAttribute",
     "cudaStreamCopyAttributes",
     "cudaStreamAttributeSynchronizationPolicy",
@@ -11507,7 +11515,6 @@ sub warnRemovedFunctions {
     "cudaMemRangeAttributeLastPrefetchLocationId",
     "cudaMemPrefetchBatchAsync",
     "cudaMemPrefetchAsync_v2",
-    "cudaMemPrefetchAsync",
     "cudaMemPoolCreateUsageHwDecompress",
     "cudaMemLocationTypeHostNumaCurrent",
     "cudaMemLocationTypeHostNuma",
@@ -11522,7 +11529,6 @@ sub warnRemovedFunctions {
     "cudaMemAllocationTypeManaged",
     "cudaMemAllocNodeParamsV2",
     "cudaMemAdvise_v2",
-    "cudaMemAdvise",
     "cudaLogsUnregisterCallback",
     "cudaLogsRegisterCallback",
     "cudaLogsDumpToMemory",
@@ -11610,11 +11616,8 @@ sub warnRemovedFunctions {
     "cudaGraphicsCubeFaceNegativeX",
     "cudaGraphicsCubeFace",
     "cudaGraphRemoveDependencies_v2",
-    "cudaGraphRemoveDependencies",
     "cudaGraphNodeGetDependentNodes_v2",
-    "cudaGraphNodeGetDependentNodes",
     "cudaGraphNodeGetDependencies_v2",
-    "cudaGraphNodeGetDependencies",
     "cudaGraphKernelNodeUpdate",
     "cudaGraphKernelNodeFieldParam",
     "cudaGraphKernelNodeFieldInvalid",
@@ -11623,7 +11626,6 @@ sub warnRemovedFunctions {
     "cudaGraphKernelNodeField",
     "cudaGraphInstantiateConditionalHandleUnused",
     "cudaGraphGetEdges_v2",
-    "cudaGraphGetEdges",
     "cudaGraphExecUpdateResultInfo_st",
     "cudaGraphExecUpdateResultInfo",
     "cudaGraphExecUpdateErrorAttributesChanged",
@@ -11641,9 +11643,7 @@ sub warnRemovedFunctions {
     "cudaGraphChildGraphOwnershipClone",
     "cudaGraphChildGraphNodeOwnership",
     "cudaGraphAddNode_v2",
-    "cudaGraphAddNode",
     "cudaGraphAddDependencies_v2",
-    "cudaGraphAddDependencies",
     "cudaGetTextureObjectTextureDesc_v2",
     "cudaGetSurfaceReference",
     "cudaGetSurfaceObjectResourceDesc",
