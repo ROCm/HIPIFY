@@ -149,13 +149,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuStreamIsCapturing
   {"cudaStreamIsCapturing",                                   {"hipStreamIsCapturing",                                   "", CONV_STREAM, API_RUNTIME, SEC::STREAM}},
   // cuStreamGetCaptureInfo
-  // TODO: report unsupported only for CUDA >= 13000
-  {"cudaStreamGetCaptureInfo",                                {"hipStreamGetCaptureInfo",                                "", CONV_STREAM, API_RUNTIME, SEC::STREAM, HIP_UNSUPPORTED}},
+  {"cudaStreamGetCaptureInfo",                                {"hipStreamGetCaptureInfo",                                "", CONV_STREAM, API_RUNTIME, SEC::STREAM, HIP_PARTIALLY_SUPPORTED}},
   // cuStreamGetCaptureInfo_v3
   {"cudaStreamGetCaptureInfo_v3",                             {"hipStreamGetCaptureInfo_v3",                             "", CONV_STREAM, API_RUNTIME, SEC::STREAM, HIP_UNSUPPORTED}},
   // cuStreamUpdateCaptureDependencies
-  // TODO: report unsupported only for CUDA >= 13000
-  {"cudaStreamUpdateCaptureDependencies",                     {"hipStreamUpdateCaptureDependencies",                     "", CONV_STREAM, API_RUNTIME, SEC::STREAM, HIP_UNSUPPORTED}},
+  {"cudaStreamUpdateCaptureDependencies",                     {"hipStreamUpdateCaptureDependencies",                     "", CONV_STREAM, API_RUNTIME, SEC::STREAM, HIP_PARTIALLY_SUPPORTED}},
   // cuStreamUpdateCaptureDependencies_v2
   {"cudaStreamUpdateCaptureDependencies_v2",                  {"hipStreamUpdateCaptureDependencies_v2",                  "", CONV_STREAM, API_RUNTIME, SEC::STREAM, HIP_UNSUPPORTED}},
   // cuStreamQuery
@@ -319,8 +317,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // NOTE: Not equal to cuMemAllocPitch due to different signatures
   {"cudaMallocPitch",                                         {"hipMallocPitch",                                         "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY}},
   // cuMemAdvise
-  // TODO: report unsupported only for CUDA >= 13000
-  {"cudaMemAdvise",                                           {"hipMemAdvise",                                           "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_UNSUPPORTED}},
+  {"cudaMemAdvise",                                           {"hipMemAdvise",                                           "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_PARTIALLY_SUPPORTED}},
   // cuMemAdvise_v2
   {"cudaMemAdvise_v2",                                        {"hipMemAdvise_v2",                                        "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_UNSUPPORTED}},
   // no analogue
@@ -378,8 +375,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuMemGetInfo
   {"cudaMemGetInfo",                                          {"hipMemGetInfo",                                          "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY}},
   // cuMemPrefetchAsync
-  // TODO: report unsupported only for CUDA >= 13000
-  {"cudaMemPrefetchAsync",                                    {"hipMemPrefetchAsync",                                    "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_UNSUPPORTED}},
+  {"cudaMemPrefetchAsync",                                    {"hipMemPrefetchAsync",                                    "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_PARTIALLY_SUPPORTED}},
   // cuMemPrefetchAsync_v2
   {"cudaMemPrefetchAsync_v2",                                 {"hipMemPrefetchAsync_v2",                                 "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_UNSUPPORTED}},
   // cuMemRangeGetAttribute
@@ -706,8 +702,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuGraphAddChildGraphNode
   {"cudaGraphAddChildGraphNode",                              {"hipGraphAddChildGraphNode",                              "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH}},
   // cuGraphAddDependencies
-  // TODO: report unsupported only for CUDA >= 13000
-  {"cudaGraphAddDependencies",                                {"hipGraphAddDependencies",                                "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_UNSUPPORTED}},
+  {"cudaGraphAddDependencies",                                {"hipGraphAddDependencies",                                "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_PARTIALLY_SUPPORTED}},
   // cuGraphAddDependencies_v2
   {"cudaGraphAddDependencies_v2",                             {"hipGraphAddDependencies_v2",                             "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_UNSUPPORTED}},
   // cuGraphAddEmptyNode
@@ -741,8 +736,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuGraphExecDestroy
   {"cudaGraphExecDestroy",                                    {"hipGraphExecDestroy",                                    "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH}},
   // cuGraphGetEdges
-  // TODO: report unsupported only for CUDA >= 13000
-  {"cudaGraphGetEdges",                                       {"hipGraphGetEdges",                                       "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_UNSUPPORTED}},
+  {"cudaGraphGetEdges",                                       {"hipGraphGetEdges",                                       "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_PARTIALLY_SUPPORTED}},
   // cuGraphGetEdges_v2
   {"cudaGraphGetEdges_v2",                                    {"hipGraphGetEdges_v2",                                    "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_UNSUPPORTED}},
   // cuGraphGetNodes
@@ -790,13 +784,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuGraphNodeFindInClone
   {"cudaGraphNodeFindInClone",                                {"hipGraphNodeFindInClone",                                "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH}},
   // cuGraphNodeGetDependencies
-  // TODO: report unsupported only for CUDA >= 13000
-  {"cudaGraphNodeGetDependencies",                            {"hipGraphNodeGetDependencies",                            "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_UNSUPPORTED}},
+  {"cudaGraphNodeGetDependencies",                            {"hipGraphNodeGetDependencies",                            "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_PARTIALLY_SUPPORTED}},
   // cuGraphNodeGetDependencies_v2
   {"cudaGraphNodeGetDependencies_v2",                         {"hipGraphNodeGetDependencies_v2",                         "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_UNSUPPORTED}},
   // cuGraphNodeGetDependentNodes
-  // TODO: report unsupported only for CUDA >= 13000
-  {"cudaGraphNodeGetDependentNodes",                          {"hipGraphNodeGetDependentNodes",                          "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_UNSUPPORTED}},
+  {"cudaGraphNodeGetDependentNodes",                          {"hipGraphNodeGetDependentNodes",                          "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_PARTIALLY_SUPPORTED}},
   // cuGraphNodeGetDependentNodes_v2
   {"cudaGraphNodeGetDependentNodes_v2",                       {"hipGraphNodeGetDependentNodes_v2",                       "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_UNSUPPORTED}},
   // cuGraphNodeGetEnabled
@@ -804,8 +796,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuGraphNodeGetType
   {"cudaGraphNodeGetType",                                    {"hipGraphNodeGetType",                                    "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH}},
   // cuGraphRemoveDependencies
-  // TODO: report unsupported only for CUDA >= 13000
-  {"cudaGraphRemoveDependencies",                             {"hipGraphRemoveDependencies",                             "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_UNSUPPORTED}},
+  {"cudaGraphRemoveDependencies",                             {"hipGraphRemoveDependencies",                             "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_PARTIALLY_SUPPORTED}},
   // cuGraphRemoveDependencies_v2
   {"cudaGraphRemoveDependencies_v2",                          {"hipGraphRemoveDependencies_v2",                          "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_UNSUPPORTED}},
   // no analogue
@@ -896,8 +887,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuGraphExecGetFlags
   {"cudaGraphExecGetFlags",                                   {"hipGraphExecGetFlags",                                   "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH}},
   // cuGraphAddNode
-  // TODO: report unsupported only for CUDA >= 13000
-  {"cudaGraphAddNode",                                        {"hipGraphAddNode",                                        "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_UNSUPPORTED}},
+  {"cudaGraphAddNode",                                        {"hipGraphAddNode",                                        "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_PARTIALLY_SUPPORTED}},
   // cuGraphAddNode_v2
   {"cudaGraphAddNode_v2",                                     {"hipGraphAddNode_v2",                                     "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_UNSUPPORTED}},
   // cuGraphNodeSetParams
@@ -1552,6 +1542,19 @@ const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_RUNTIME_FUNCTION_CH
   {"cudaGraphAddNode",                                        {CUDA_130}},
   // [IMP] Changed semantics: Dst <-> Src
   {"cudaGraphKernelNodeCopyAttributes",                       {CUDA_130}},
+};
+
+const std::map<llvm::StringRef, cudaAPIUnsupportedVersions> CUDA_RUNTIME_FUNCTION_UNSUPPORTED_VER_MAP {
+  {"cudaStreamGetCaptureInfo",                                {CUDA_130}},
+  {"cudaStreamUpdateCaptureDependencies",                     {CUDA_130}},
+  {"cudaMemAdvise",                                           {CUDA_130}},
+  {"cudaMemPrefetchAsync",                                    {CUDA_130}},
+  {"cudaGraphAddDependencies",                                {CUDA_130}},
+  {"cudaGraphGetEdges",                                       {CUDA_130}},
+  {"cudaGraphNodeGetDependencies",                            {CUDA_130}},
+  {"cudaGraphNodeGetDependentNodes",                          {CUDA_130}},
+  {"cudaGraphRemoveDependencies",                             {CUDA_130}},
+  {"cudaGraphAddNode",                                        {CUDA_130}},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_RUNTIME_API_SECTION_MAP {
