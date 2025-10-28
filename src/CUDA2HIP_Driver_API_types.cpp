@@ -2662,7 +2662,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaKernelNodeAttributeNvlinkUtilCentricScheduling
   {"CU_LAUNCH_ATTRIBUTE_NVLINK_UTIL_CENTRIC_SCHEDULING",               {"hipLaunchAttributeNvlinkUtilCentricScheduling",            "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   // no analogue
-  {"CU_LAUNCH_ATTRIBUTE_MAX",                                          {"hipLaunchAttributeMax",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CU_LAUNCH_ATTRIBUTE_MAX",                                          {"hipLaunchAttributeMax",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}},
 
   // cudaGraphInstantiateResult
   {"CUgraphInstantiateResult",                                         {"hipGraphInstantiateResult",                                "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES}},
@@ -4871,4 +4871,5 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {
   {"hipMemRangeHandleTypeMax",                                         {HIP_7000, HIP_0,    HIP_0   }},
   {"hipMemRangeFlags",                                                 {HIP_7000, HIP_0,    HIP_0   }},
   {"hipMemRangeFlagDmaBufMappingTypePcie",                             {HIP_7000, HIP_0,    HIP_0   }},
+  {"hipLaunchAttributeMax",                                            {HIP_7000, HIP_0,    HIP_0   }},
 };

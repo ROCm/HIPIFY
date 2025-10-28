@@ -3991,7 +3991,6 @@ sub simpleSubstitutions {
     subst("cuDeviceGetDefaultMemPool", "hipDeviceGetDefaultMemPool", "device");
     subst("cuDeviceGetMemPool", "hipDeviceGetMemPool", "device");
     subst("cuDeviceGetName", "hipDeviceGetName", "device");
-    subst("cuDeviceGetTexture1DLinearMaxWidth", "hipDeviceGetTexture1DLinearMaxWidth", "device");
     subst("cuDeviceGetUuid", "hipDeviceGetUuid", "device");
     subst("cuDeviceGetUuid_v2", "hipDeviceGetUuid", "device");
     subst("cuDeviceSetMemPool", "hipDeviceSetMemPool", "device");
@@ -8824,6 +8823,7 @@ sub simpleSubstitutions {
     subst("CU_KERNEL_NODE_ATTRIBUTE_PRIORITY", "hipKernelNodeAttributePriority", "numeric_literal");
     subst("CU_LAUNCH_ATTRIBUTE_ACCESS_POLICY_WINDOW", "hipLaunchAttributeAccessPolicyWindow", "numeric_literal");
     subst("CU_LAUNCH_ATTRIBUTE_COOPERATIVE", "hipLaunchAttributeCooperative", "numeric_literal");
+    subst("CU_LAUNCH_ATTRIBUTE_MAX", "hipLaunchAttributeMax", "numeric_literal");
     subst("CU_LAUNCH_ATTRIBUTE_PRIORITY", "hipLaunchAttributePriority", "numeric_literal");
     subst("CU_LIMIT_MALLOC_HEAP_SIZE", "hipLimitMallocHeapSize", "numeric_literal");
     subst("CU_LIMIT_PRINTF_FIFO_SIZE", "hipLimitPrintfFifoSize", "numeric_literal");
@@ -12413,6 +12413,7 @@ sub warnRemovedFunctions {
     "cuEGLStreamConsumerAcquireFrame",
     "cuDeviceUnregisterAsyncNotification",
     "cuDeviceRegisterAsyncNotification",
+    "cuDeviceGetTexture1DLinearMaxWidth",
     "cuDeviceGetProperties",
     "cuDeviceGetP2PAtomicCapabilities",
     "cuDeviceGetNvSciSyncAttributes",
@@ -12905,7 +12906,6 @@ sub warnRemovedFunctions {
     "CU_LAUNCH_ATTRIBUTE_NVLINK_UTIL_CENTRIC_SCHEDULING",
     "CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP",
     "CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN",
-    "CU_LAUNCH_ATTRIBUTE_MAX",
     "CU_LAUNCH_ATTRIBUTE_LAUNCH_COMPLETION_EVENT",
     "CU_LAUNCH_ATTRIBUTE_IGNORE",
     "CU_LAUNCH_ATTRIBUTE_DEVICE_UPDATABLE_KERNEL_NODE",

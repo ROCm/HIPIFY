@@ -478,14 +478,14 @@ int main() {
   result = cuMemcpyHtoA_v2(array_, offset, dsthost, bytes);
 
   // CUDA: CUresult CUDAAPI cuMemcpyHtoD(CUdeviceptr dstDevice, const void *srcHost, size_t ByteCount);
-  // HIP: hipError_t hipMemcpyHtoD(hipDeviceptr_t dst, void* src, size_t sizeBytes);
+  // HIP: hipError_t hipMemcpyHtoD(hipDeviceptr_t dst, const void* src, size_t sizeBytes);
   // CHECK: result = hipMemcpyHtoD(deviceptr, dsthost, bytes);
   // CHECK-NEXT: result = hipMemcpyHtoD(deviceptr, dsthost, bytes);
   result = cuMemcpyHtoD(deviceptr, dsthost, bytes);
   result = cuMemcpyHtoD_v2(deviceptr, dsthost, bytes);
 
   // CUDA: CUresult CUDAAPI cuMemcpyHtoDAsync(CUdeviceptr dstDevice, const void *srcHost, size_t ByteCount, CUstream hStream);
-  // HIP: hipError_t hipMemcpyHtoDAsync(hipDeviceptr_t dst, void* src, size_t sizeBytes, hipStream_t stream);
+  // HIP: hipError_t hipMemcpyHtoDAsync(hipDeviceptr_t dst, const void* src, size_t sizeBytes, hipStream_t stream);
   // CHECK: result = hipMemcpyHtoDAsync(deviceptr, dsthost, bytes, stream);
   // CHECK-NEXT: result = hipMemcpyHtoDAsync(deviceptr, dsthost, bytes, stream);
   result = cuMemcpyHtoDAsync(deviceptr, dsthost, bytes, stream);

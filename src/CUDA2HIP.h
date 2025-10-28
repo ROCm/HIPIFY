@@ -138,6 +138,7 @@ extern const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_DRIVER_FUNCTIO
 extern const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_DRIVER_FUNCTION_CHANGED_VER_MAP;
 extern const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP;
 extern const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP;
+extern const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_RUNTIME_FUNCTION_CHANGED_VER_MAP;
 extern const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_RUNTIME_FUNCTION_CHANGED_VER_MAP;
 extern const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_RUNTIME_TYPE_CHANGED_VER_MAP;
 extern const std::map<llvm::StringRef, hipAPIversions> HIP_COMPLEX_TYPE_NAME_VER_MAP;

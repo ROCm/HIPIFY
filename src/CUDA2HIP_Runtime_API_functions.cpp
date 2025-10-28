@@ -1524,6 +1524,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP {
   {"hipGraphNodeSetParams",                                   {HIP_6030, HIP_0,    HIP_0   }},
   {"hipGraphExecNodeSetParams",                               {HIP_6030, HIP_0,    HIP_0   }},
   {"hipLaunchKernelExC",                                      {HIP_7000, HIP_0,    HIP_0   }},
+  {"hipDeviceGetTexture1DLinearMaxWidth",                     {HIP_6040, HIP_0,    HIP_0   }},
 };
 
 const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_RUNTIME_FUNCTION_CHANGED_VER_MAP {
@@ -1542,6 +1543,10 @@ const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_RUNTIME_FUNCTION_CH
   {"cudaGraphAddNode",                                        {CUDA_130}},
   // [IMP] Changed semantics: Dst <-> Src
   {"cudaGraphKernelNodeCopyAttributes",                       {CUDA_130}},
+};
+
+const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_RUNTIME_FUNCTION_CHANGED_VER_MAP {
+  {"hipDeviceGetTexture1DLinearMaxWidth",                     {HIP_7000}},
 };
 
 const std::map<llvm::StringRef, cudaAPIUnsupportedVersions> CUDA_RUNTIME_FUNCTION_UNSUPPORTED_VER_MAP {
