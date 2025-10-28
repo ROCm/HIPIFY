@@ -6705,6 +6705,7 @@ sub simpleSubstitutions {
     subst("__hsub2", "__hsub2", "device_function");
     subst("__hsub2_sat", "__hsub2_sat", "device_function");
     subst("__hsub_sat", "__hsub_sat", "device_function");
+    subst("__int2bfloat16_rn", "__int2bfloat16_rn", "device_function");
     subst("__int2double_rn", "__int2double_rn", "device_function");
     subst("__int2float_rd", "__int2float_rd", "device_function");
     subst("__int2float_rn", "__int2float_rn", "device_function");
@@ -6749,28 +6750,41 @@ sub simpleSubstitutions {
     subst("__mul64hi", "__mul64hi", "device_function");
     subst("__mulhi", "__mulhi", "device_function");
     subst("__nv_cvt_bfloat16raw2_to_fp4x2", "__hip_cvt_bfloat16raw2_to_fp4x2", "device_function");
+    subst("__nv_cvt_bfloat16raw2_to_fp6x2", "__hip_cvt_bfloat16raw2_to_fp6x2", "device_function");
     subst("__nv_cvt_bfloat16raw2_to_fp8x2", "__hip_cvt_bfloat16raw2_to_fp8x2", "device_function");
     subst("__nv_cvt_bfloat16raw_to_fp4", "__hip_cvt_bfloat16raw_to_fp4", "device_function");
+    subst("__nv_cvt_bfloat16raw_to_fp6", "__hip_cvt_bfloat16raw_to_fp6", "device_function");
     subst("__nv_cvt_bfloat16raw_to_fp8", "__hip_cvt_bfloat16raw_to_fp8", "device_function");
     subst("__nv_cvt_double2_to_fp4x2", "__hip_cvt_double2_to_fp4x2", "device_function");
+    subst("__nv_cvt_double2_to_fp6x2", "__hip_cvt_double2_to_fp6x2", "device_function");
     subst("__nv_cvt_double2_to_fp8x2", "__hip_cvt_double2_to_fp8x2", "device_function");
     subst("__nv_cvt_double_to_fp4", "__hip_cvt_double_to_fp4", "device_function");
+    subst("__nv_cvt_double_to_fp6", "__hip_cvt_double_to_fp6", "device_function");
     subst("__nv_cvt_double_to_fp8", "__hip_cvt_double_to_fp8", "device_function");
     subst("__nv_cvt_float2_to_fp4x2", "__hip_cvt_float2_to_fp4x2", "device_function");
+    subst("__nv_cvt_float2_to_fp6x2", "__hip_cvt_float2_to_fp6x2", "device_function");
     subst("__nv_cvt_float2_to_fp8x2", "__hip_cvt_float2_to_fp8x2", "device_function");
     subst("__nv_cvt_float_to_fp4", "__hip_cvt_float_to_fp4", "device_function");
+    subst("__nv_cvt_float_to_fp6", "__hip_cvt_float_to_fp6", "device_function");
     subst("__nv_cvt_float_to_fp8", "__hip_cvt_float_to_fp8", "device_function");
     subst("__nv_cvt_fp4_to_halfraw", "__hip_cvt_fp4_to_halfraw", "device_function");
     subst("__nv_cvt_fp4x2_to_halfraw2", "__hip_cvt_fp4x2_to_halfraw2", "device_function");
+    subst("__nv_cvt_fp6_to_halfraw", "__hip_cvt_fp6_to_halfraw", "device_function");
+    subst("__nv_cvt_fp6x2_to_halfraw2", "__hip_cvt_fp6x2_to_halfraw2", "device_function");
     subst("__nv_cvt_fp8_to_halfraw", "__hip_cvt_fp8_to_halfraw", "device_function");
     subst("__nv_cvt_fp8x2_to_halfraw2", "__hip_cvt_fp8x2_to_halfraw2", "device_function");
     subst("__nv_cvt_halfraw2_to_fp4x2", "__hip_cvt_halfraw2_to_fp4x2", "device_function");
+    subst("__nv_cvt_halfraw2_to_fp6x2", "__hip_cvt_halfraw2_to_fp6x2", "device_function");
     subst("__nv_cvt_halfraw2_to_fp8x2", "__hip_cvt_halfraw2_to_fp8x2", "device_function");
     subst("__nv_cvt_halfraw_to_fp4", "__hip_cvt_halfraw_to_fp4", "device_function");
+    subst("__nv_cvt_halfraw_to_fp6", "__hip_cvt_halfraw_to_fp6", "device_function");
     subst("__nv_cvt_halfraw_to_fp8", "__hip_cvt_halfraw_to_fp8", "device_function");
     subst("__popc", "__popc", "device_function");
     subst("__popcll", "__popcll", "device_function");
     subst("__powf", "__powf", "device_function");
+    subst("__reduce_add_sync", "__reduce_add_sync", "device_function");
+    subst("__reduce_max_sync", "__reduce_max_sync", "device_function");
+    subst("__reduce_min_sync", "__reduce_min_sync", "device_function");
     subst("__rhadd", "__rhadd", "device_function");
     subst("__sad", "__sad", "device_function");
     subst("__saturatef", "__saturatef", "device_function");
@@ -7131,6 +7145,16 @@ sub simpleSubstitutions {
     subst("__nv_fp4x2_storage_t", "__hip_fp4x2_storage_t", "device_type");
     subst("__nv_fp4x4_e2m1", "__hip_fp4x4_e2m1", "device_type");
     subst("__nv_fp4x4_storage_t", "__hip_fp4x4_storage_t", "device_type");
+    subst("__nv_fp6_e2m3", "__hip_fp6_e2m3", "device_type");
+    subst("__nv_fp6_e3m2", "__hip_fp6_e3m2", "device_type");
+    subst("__nv_fp6_interpretation_t", "__hip_fp6_interpretation_t", "device_type");
+    subst("__nv_fp6_storage_t", "__hip_fp6_storage_t", "device_type");
+    subst("__nv_fp6x2_e2m3", "__hip_fp6x2_e2m3", "device_type");
+    subst("__nv_fp6x2_e3m2", "__hip_fp6x2_e3m2", "device_type");
+    subst("__nv_fp6x2_storage_t", "__hip_fp6x2_storage_t", "device_type");
+    subst("__nv_fp6x4_e2m3", "__hip_fp6x4_e2m3", "device_type");
+    subst("__nv_fp6x4_e3m2", "__hip_fp6x4_e3m2", "device_type");
+    subst("__nv_fp6x4_storage_t", "__hip_fp6x4_storage_t", "device_type");
     subst("__nv_fp8_e4m3", "__hip_fp8_e4m3_fnuz", "device_type");
     subst("__nv_fp8_e5m2", "__hip_fp8_e5m2_fnuz", "device_type");
     subst("__nv_fp8_interpretation_t", "__hip_fp8_interpretation_t", "device_type");
@@ -8951,6 +8975,8 @@ sub simpleSubstitutions {
     subst("NVRTC_ERROR_PROGRAM_CREATION_FAILURE", "HIPRTC_ERROR_PROGRAM_CREATION_FAILURE", "numeric_literal");
     subst("NVRTC_SUCCESS", "HIPRTC_SUCCESS", "numeric_literal");
     subst("__NV_E2M1", "__HIP_E2M1", "numeric_literal");
+    subst("__NV_E2M3", "__HIP_E2M3", "numeric_literal");
+    subst("__NV_E3M2", "__HIP_E3M2", "numeric_literal");
     subst("__NV_E4M3", "__HIP_E4M3_FNUZ", "numeric_literal");
     subst("__NV_E5M2", "__HIP_E5M2_FNUZ", "numeric_literal");
     subst("__NV_NOSAT", "__HIP_NOSAT", "numeric_literal");
@@ -10002,28 +10028,41 @@ sub transformHostFunctions {
     "__saturatef",
     "__sad",
     "__rhadd",
+    "__reduce_min_sync",
+    "__reduce_max_sync",
+    "__reduce_add_sync",
     "__powf",
     "__popcll",
     "__popc",
     "__nv_cvt_halfraw_to_fp8",
+    "__nv_cvt_halfraw_to_fp6",
     "__nv_cvt_halfraw_to_fp4",
     "__nv_cvt_halfraw2_to_fp8x2",
+    "__nv_cvt_halfraw2_to_fp6x2",
     "__nv_cvt_halfraw2_to_fp4x2",
     "__nv_cvt_fp8x2_to_halfraw2",
     "__nv_cvt_fp8_to_halfraw",
+    "__nv_cvt_fp6x2_to_halfraw2",
+    "__nv_cvt_fp6_to_halfraw",
     "__nv_cvt_fp4x2_to_halfraw2",
     "__nv_cvt_fp4_to_halfraw",
     "__nv_cvt_float_to_fp8",
+    "__nv_cvt_float_to_fp6",
     "__nv_cvt_float_to_fp4",
     "__nv_cvt_float2_to_fp8x2",
+    "__nv_cvt_float2_to_fp6x2",
     "__nv_cvt_float2_to_fp4x2",
     "__nv_cvt_double_to_fp8",
+    "__nv_cvt_double_to_fp6",
     "__nv_cvt_double_to_fp4",
     "__nv_cvt_double2_to_fp8x2",
+    "__nv_cvt_double2_to_fp6x2",
     "__nv_cvt_double2_to_fp4x2",
     "__nv_cvt_bfloat16raw_to_fp8",
+    "__nv_cvt_bfloat16raw_to_fp6",
     "__nv_cvt_bfloat16raw_to_fp4",
     "__nv_cvt_bfloat16raw2_to_fp8x2",
+    "__nv_cvt_bfloat16raw2_to_fp6x2",
     "__nv_cvt_bfloat16raw2_to_fp4x2",
     "__mulhi",
     "__mul64hi",
@@ -10068,6 +10107,7 @@ sub transformHostFunctions {
     "__int2float_rn",
     "__int2float_rd",
     "__int2double_rn",
+    "__int2bfloat16_rn",
     "__hsub_sat",
     "__hsub2_sat",
     "__hsub2",
@@ -10479,23 +10519,13 @@ sub countSupportedDeviceFunctions {
     "__nv_fp128_add",
     "__nv_fp128_acosh",
     "__nv_fp128_acos",
-    "__nv_cvt_halfraw_to_fp6",
-    "__nv_cvt_halfraw2_to_fp6x2",
-    "__nv_cvt_fp6x2_to_halfraw2",
-    "__nv_cvt_fp6_to_halfraw",
-    "__nv_cvt_float_to_fp6",
     "__nv_cvt_float_to_e8m0",
-    "__nv_cvt_float2_to_fp6x2",
     "__nv_cvt_float2_to_e8m0x2",
     "__nv_cvt_e8m0x2_to_bf162raw",
     "__nv_cvt_e8m0_to_bf16raw",
-    "__nv_cvt_double_to_fp6",
     "__nv_cvt_double_to_e8m0",
-    "__nv_cvt_double2_to_fp6x2",
     "__nv_cvt_double2_to_e8m0x2",
-    "__nv_cvt_bfloat16raw_to_fp6",
     "__nv_cvt_bfloat16raw_to_e8m0",
-    "__nv_cvt_bfloat16raw2_to_fp6x2",
     "__nv_cvt_bfloat162raw_to_e8m0x2",
     "__nv_bswap64",
     "__nv_bswap32",
@@ -10514,7 +10544,6 @@ sub countSupportedDeviceFunctions {
     "__isinf",
     "__int2bfloat16_rz",
     "__int2bfloat16_ru",
-    "__int2bfloat16_rn",
     "__int2bfloat16_rd",
     "__hsub_rn",
     "__hsub2_rn",
@@ -10706,6 +10735,16 @@ sub warnUnsupportedDeviceFunctions {
     "__nv_fp8_interpretation_t",
     "__nv_fp8_e5m2",
     "__nv_fp8_e4m3",
+    "__nv_fp6x4_storage_t",
+    "__nv_fp6x4_e3m2",
+    "__nv_fp6x4_e2m3",
+    "__nv_fp6x2_storage_t",
+    "__nv_fp6x2_e3m2",
+    "__nv_fp6x2_e2m3",
+    "__nv_fp6_storage_t",
+    "__nv_fp6_interpretation_t",
+    "__nv_fp6_e3m2",
+    "__nv_fp6_e2m3",
     "__nv_fp4x4_storage_t",
     "__nv_fp4x4_e2m1",
     "__nv_fp4x2_storage_t",
@@ -10725,6 +10764,8 @@ sub warnUnsupportedDeviceFunctions {
     "__NV_NOSAT",
     "__NV_E5M2",
     "__NV_E4M3",
+    "__NV_E3M2",
+    "__NV_E2M3",
     "__NV_E2M1",
     "CUDART_ZERO_FP16",
     "CUDART_ONE_FP16",
@@ -10761,19 +10802,7 @@ sub countSupportedDeviceDataTypes {
     "double4_16a",
     "__nv_fp8x4_e8m0",
     "__nv_fp8x2_e8m0",
-    "__nv_fp8_e8m0",
-    "__nv_fp6x4_storage_t",
-    "__nv_fp6x4_e3m2",
-    "__nv_fp6x4_e2m3",
-    "__nv_fp6x2_storage_t",
-    "__nv_fp6x2_e3m2",
-    "__nv_fp6x2_e2m3",
-    "__nv_fp6_storage_t",
-    "__nv_fp6_interpretation_t",
-    "__nv_fp6_e3m2",
-    "__nv_fp6_e2m3",
-    "__NV_E3M2",
-    "__NV_E2M3"
+    "__nv_fp8_e8m0"
 );
 
 sub warnUnsupportedDeviceDataTypes {
@@ -12471,8 +12500,6 @@ sub warnRemovedFunctions {
     "cl_context_flags_enum",
     "cl_context_flags",
     "__curand_umul",
-    "__NV_E3M2",
-    "__NV_E2M3",
     "__CUB_LP64__",
     "_CUB_ASM_PTR_SIZE_",
     "_CUB_ASM_PTR_",
