@@ -64,7 +64,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuDeviceTotalMem",                                            {"hipDeviceTotalMem",                                           "", CONV_DEVICE, API_DRIVER, SEC::DEVICE}},
   {"cuDeviceTotalMem_v2",                                         {"hipDeviceTotalMem",                                           "", CONV_DEVICE, API_DRIVER, SEC::DEVICE}},
   // NOTE: incompatible with cudaDeviceGetTexture1DLinearMaxWidth
-  {"cuDeviceGetTexture1DLinearMaxWidth",                          {"hipDeviceGetTexture1DLinearMaxWidth",                         "", CONV_DEVICE, API_DRIVER, SEC::DEVICE}},
+  {"cuDeviceGetTexture1DLinearMaxWidth",                          {"hipDeviceGetTexture1DLinearMaxWidth",                         "", CONV_DEVICE, API_DRIVER, SEC::DEVICE, HIP_UNSUPPORTED}},
   // cudaDeviceSetMemPool
   {"cuDeviceSetMemPool",                                          {"hipDeviceSetMemPool",                                         "", CONV_DEVICE, API_DRIVER, SEC::DEVICE}},
   // cudaDeviceGetMemPool
@@ -1769,7 +1769,6 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_FUNCTION_VER_MAP {
   {"hipGraphBatchMemOpNodeSetParams",                             {HIP_6040, HIP_0,    HIP_0   }},
   {"hipGraphExecBatchMemOpNodeSetParams",                         {HIP_6040, HIP_0,    HIP_0   }},
   {"hipEventRecordWithFlags",                                     {HIP_6040, HIP_0,    HIP_0   }},
-  {"hipDeviceGetTexture1DLinearMaxWidth",                         {HIP_6040, HIP_0,    HIP_0   }},
   {"hipDrvLaunchKernelEx",                                        {HIP_7000, HIP_0,    HIP_0   }},
   {"hipMemGetHandleForAddressRange",                              {HIP_7000, HIP_0,    HIP_0   }},
 };
@@ -1795,6 +1794,8 @@ const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_DRIVER_FUNCTION_CHANG
   {"hipCtxGetApiVersion",                                         {HIP_7000}},
   {"hipDrvGraphAddMemsetNode",                                    {HIP_7000}},
   {"hipDrvGraphExecMemsetNodeSetParams",                          {HIP_7000}},
+  {"hipMemcpyHtoD",                                               {HIP_7000}},
+  {"hipMemcpyHtoDAsync",                                          {HIP_7000}},
 };
 
 const std::map<llvm::StringRef, cudaAPIUnsupportedVersions> CUDA_DRIVER_FUNCTION_UNSUPPORTED_VER_MAP {

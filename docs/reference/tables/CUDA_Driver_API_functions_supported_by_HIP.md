@@ -868,7 +868,7 @@
 |`CU_LAUNCH_ATTRIBUTE_DEVICE_UPDATABLE_KERNEL_NODE`|12.4| | | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_IGNORE`|11.8| | | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_LAUNCH_COMPLETION_EVENT`|12.3| | | | | | | | | | |
-|`CU_LAUNCH_ATTRIBUTE_MAX`|12.1| | | | | | | | | | |
+|`CU_LAUNCH_ATTRIBUTE_MAX`|12.1| | | |`hipLaunchAttributeMax`|7.0.0| | | | | |
 |`CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN`|12.0| | | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP`|12.0| | | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_NVLINK_UTIL_CENTRIC_SCHEDULING`|13.0| | | | | | | | | | |
@@ -1646,7 +1646,7 @@
 |`cuDeviceGetMemPool`|11.2| | | |`hipDeviceGetMemPool`|5.2.0| | | | | |
 |`cuDeviceGetName`| | | | |`hipDeviceGetName`|1.6.0| | | | | |
 |`cuDeviceGetNvSciSyncAttributes`|10.2| | | | | | | | | | |
-|`cuDeviceGetTexture1DLinearMaxWidth`|11.1| | | |`hipDeviceGetTexture1DLinearMaxWidth`|6.4.0| | | | | |
+|`cuDeviceGetTexture1DLinearMaxWidth`|11.1| | | | | | | | | | |
 |`cuDeviceGetUuid`|9.2| | | |`hipDeviceGetUuid`|5.2.0| | | | | |
 |`cuDeviceGetUuid_v2`|11.4| | | |`hipDeviceGetUuid`|5.2.0| | | | | |
 |`cuDeviceSetMemPool`|11.2| | | |`hipDeviceSetMemPool`|5.2.0| | | | | |
@@ -1855,10 +1855,10 @@
 |`cuMemcpyHtoAAsync`| | | | |`hipMemcpyHtoAAsync`|6.2.0| | | | | |
 |`cuMemcpyHtoAAsync_v2`| | | | |`hipMemcpyHtoAAsync`|6.2.0| | | | | |
 |`cuMemcpyHtoA_v2`| | | | |`hipMemcpyHtoA`|1.9.0| | | | | |
-|`cuMemcpyHtoD`| | | | |`hipMemcpyHtoD`|1.6.0| | | | | |
-|`cuMemcpyHtoDAsync`| | | | |`hipMemcpyHtoDAsync`|1.6.0| | | | | |
-|`cuMemcpyHtoDAsync_v2`| | | | |`hipMemcpyHtoDAsync`|1.6.0| | | | | |
-|`cuMemcpyHtoD_v2`| | | | |`hipMemcpyHtoD`|1.6.0| | | | | |
+|`cuMemcpyHtoD`| | | | |`hipMemcpyHtoD`|1.6.0| |7.0.0| | | |
+|`cuMemcpyHtoDAsync`| | | | |`hipMemcpyHtoDAsync`|1.6.0| |7.0.0| | | |
+|`cuMemcpyHtoDAsync_v2`| | | | |`hipMemcpyHtoDAsync`|1.6.0| |7.0.0| | | |
+|`cuMemcpyHtoD_v2`| | | | |`hipMemcpyHtoD`|1.6.0| |7.0.0| | | |
 |`cuMemcpyPeer`| | | | | | | | | | | |
 |`cuMemcpyPeerAsync`| | | | | | | | | | | |
 |`cuMemsetD16`| | | | |`hipMemsetD16`|3.0.0| | | | | |

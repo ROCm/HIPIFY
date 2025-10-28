@@ -1249,7 +1249,12 @@ int main() {
   CUdriverProcAddressQueryResult GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT = CU_GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT;
 #endif
 
-#if CUDA_VERSION >= 12030
+#if CUDA_VERSION >= 12010
+  // CHECK: hipLaunchAttributeID LAUNCH_ATTRIBUTE_MAX = hipLaunchAttributeMax;
+  CUlaunchAttributeID LAUNCH_ATTRIBUTE_MAX = CU_LAUNCH_ATTRIBUTE_MAX;
+#endif
+
+#if CUDA_VERSION >= 12030 
   // CHECK: hipGraphDependencyType graphDependencyType;
   // CHECK-NEXT: hipGraphDependencyType graphDependencyType_enum;
   // CHECK-NEXT: hipGraphDependencyType GRAPH_DEPENDENCY_TYPE_DEFAULT = hipGraphDependencyTypeDefault;
