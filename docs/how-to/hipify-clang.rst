@@ -317,7 +317,7 @@ To provide Clang options, use ``compile_commands.json`` file, whereas to provide
   provided before the separator.
 
 Here's an
-`example <https://github.com/ROCm/HIPIFY/blob/amd-staging/tests/unit_tests/compilation_database/compile_commands.json.in>`_
+`example <https://github.com/ROCm/HIPIFY/blob/release/rocm-rel-7.1/tests/unit_tests/compilation_database/compile_commands.json.in>`_
 demonstrating the ``compile_commands.json`` usage:
 
 .. code:: json
