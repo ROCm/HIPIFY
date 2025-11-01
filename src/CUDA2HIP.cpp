@@ -105,6 +105,7 @@ const std::map <llvm::StringRef, hipCounter> CUDA_INCLUDE_MAP {
   {"caffe2/core/common_cudnn.h",                            {"caffe2/core/hip/common_miopen.h",                       "",                                                               CONV_INCLUDE,                API_CAFFE2, 0}},
   // RTC includes
   {"nvrtc.h",                                               {"hip/hiprtc.h",                                          "",                                                               CONV_INCLUDE_CUDA_MAIN_H, API_RTC, 0}},
+  {"cufile.h",                                              {"hipfile.h",                                             "",                                                               CONV_INCLUDE, API_FILE, 0}},
 };
 
 const std::map<llvm::StringRef, hipCounter> &CUDA_RENAMES_MAP() {
@@ -140,6 +141,8 @@ const std::map<llvm::StringRef, hipCounter> &CUDA_RENAMES_MAP() {
   ret.insert(CUDA_SOLVER_FUNCTION_MAP.begin(), CUDA_SOLVER_FUNCTION_MAP.end());
   ret.insert(CUDA_TENSOR_TYPE_NAME_MAP.begin(), CUDA_TENSOR_TYPE_NAME_MAP.end());
   ret.insert(CUDA_TENSOR_FUNCTION_MAP.begin(), CUDA_TENSOR_FUNCTION_MAP.end());
+  ret.insert(CUDA_FILE_TYPE_NAME_MAP.begin(), CUDA_FILE_TYPE_NAME_MAP.end());
+  ret.insert(CUDA_FILE_FUNCTION_MAP.begin(), CUDA_FILE_FUNCTION_MAP.end());
   return ret;
 };
 
@@ -185,6 +188,8 @@ const std::map<llvm::StringRef, cudaAPIversions> &CUDA_VERSIONS_MAP() {
   ret.insert(CUDA_SOLVER_FUNCTION_VER_MAP.begin(), CUDA_SOLVER_FUNCTION_VER_MAP.end());
   ret.insert(CUDA_TENSOR_TYPE_NAME_VER_MAP.begin(), CUDA_TENSOR_TYPE_NAME_VER_MAP.end());
   ret.insert(CUDA_TENSOR_FUNCTION_VER_MAP.begin(), CUDA_TENSOR_FUNCTION_VER_MAP.end());
+  ret.insert(CUDA_FILE_TYPE_NAME_VER_MAP.begin(), CUDA_FILE_TYPE_NAME_VER_MAP.end());
+  ret.insert(CUDA_FILE_FUNCTION_VER_MAP.begin(), CUDA_FILE_FUNCTION_VER_MAP.end());
   return ret;
 }
 
@@ -221,5 +226,7 @@ const std::map<llvm::StringRef, hipAPIversions> &HIP_VERSIONS_MAP() {
   ret.insert(HIP_SOLVER_FUNCTION_VER_MAP.begin(), HIP_SOLVER_FUNCTION_VER_MAP.end());
   ret.insert(HIP_TENSOR_TYPE_NAME_VER_MAP.begin(), HIP_TENSOR_TYPE_NAME_VER_MAP.end());
   ret.insert(HIP_TENSOR_FUNCTION_VER_MAP.begin(), HIP_TENSOR_FUNCTION_VER_MAP.end());
+  ret.insert(HIP_FILE_TYPE_NAME_VER_MAP.begin(), HIP_FILE_TYPE_NAME_VER_MAP.end());
+  ret.insert(HIP_FILE_FUNCTION_VER_MAP.begin(), HIP_FILE_FUNCTION_VER_MAP.end());
   return ret;
 }

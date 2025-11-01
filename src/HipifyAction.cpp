@@ -2452,6 +2452,10 @@ bool HipifyAction::Exclude(const hipCounter &hipToken) {
           if (insertedSOLVERHeader) return true;
           insertedSOLVERHeader = true;
           return false;
+        case API_FILE:
+          if (insertedFILEHeader) return true;
+          insertedFILEHeader = true;
+          return false;
         default:
           return false;
       }

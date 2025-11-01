@@ -188,6 +188,7 @@ enum ApiTypes {
   API_CAFFE2,
   API_RTC,
   API_TENSOR,
+  API_FILE,
   API_LAST
 };
 constexpr int NUM_API_TYPES = (int) ApiTypes::API_LAST;

@@ -150,7 +150,8 @@ const char *apiNames[NUM_API_TYPES] = {
   "CUB API",
   "CAFFE2 API",
   "RTC API",
-  "TENSOR API"
+  "TENSOR API",
+  "cuFile API",
 };
 
 const char *apiTypes[NUM_API_TYPES] = {
@@ -166,7 +167,8 @@ const char *apiTypes[NUM_API_TYPES] = {
   "API_SOLVER",
   "API_CAFFE2",
   "API_RTC",
-  "API_TENSOR"
+  "API_TENSOR",
+  "API_FILE"
 };
 
 namespace {
@@ -372,8 +374,8 @@ void Statistics::setActive(const std::string &name) {
 
 bool Statistics::isToRoc(const hipCounter &counter) {
   return ((counter.apiType == API_BLAS || counter.apiType == API_DNN || counter.apiType == API_SPARSE || counter.apiType == API_SOLVER ||
-           counter.apiType == API_RUNTIME || counter.apiType == API_COMPLEX || counter.apiType == API_RAND) && TranslateToRoc) || 
-           isToMIOpen(counter);
+           counter.apiType == API_RUNTIME || counter.apiType == API_COMPLEX || counter.apiType == API_RAND || counter.apiType == API_FILE)
+          && TranslateToRoc) || isToMIOpen(counter);
 }
 
 bool Statistics::isToMIOpen(const hipCounter &counter) {
