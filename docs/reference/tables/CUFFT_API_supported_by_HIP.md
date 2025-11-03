@@ -71,6 +71,17 @@
 |`CUFFT_XT_FORMAT_OUTPUT`| | | | |`HIPFFT_XT_FORMAT_OUTPUT`|6.0.0| | | | | |
 |`CUFFT_Z2D`| | | | |`HIPFFT_Z2D`|1.7.0| | | | | |
 |`CUFFT_Z2Z`| | | | |`HIPFFT_Z2Z`|1.7.0| | | | | |
+|`FFTW_BACKWARD`| | | | |`FFTW_BACKWARD`|7.1.0| | | | |7.1.0|
+|`FFTW_DESTROY_INPUT`| | | | |`FFTW_DESTROY_INPUT`|7.1.0| | | | |7.1.0|
+|`FFTW_ESTIMATE`| | | | |`FFTW_ESTIMATE`|7.1.0| | | | |7.1.0|
+|`FFTW_EXHAUSTIVE`| | | | |`FFTW_EXHAUSTIVE`|7.1.0| | | | |7.1.0|
+|`FFTW_FORWARD`| | | | |`FFTW_FORWARD`|7.1.0| | | | |7.1.0|
+|`FFTW_INVERSE`| | | | | | | | | | | |
+|`FFTW_MEASURE`| | | | |`FFTW_MEASURE`|7.1.0| | | | |7.1.0|
+|`FFTW_PATIENT`| | | | |`FFTW_PATIENT`|7.1.0| | | | |7.1.0|
+|`FFTW_PRESERVE_INPUT`| | | | |`FFTW_PRESERVE_INPUT`|7.1.0| | | | |7.1.0|
+|`FFTW_UNALIGNED`| | | | |`FFTW_UNALIGNED`|7.1.0| | | | |7.1.0|
+|`FFTW_WISDOM_ONLY`| | | | |`FFTW_WISDOM_ONLY`|7.1.0| | | | |7.1.0|
 |`MAX_CUFFT_ERROR`| | | | | | | | | | | |
 |`NVFFT_PLAN_PROPERTY_INT64_MAX_NUM_HOST_THREADS`|12.5| | | | | | | | | | |
 |`NVFFT_PLAN_PROPERTY_INT64_PATIENT_JIT`|12.4| | | | | | | | | | |
@@ -103,6 +114,14 @@
 |`cufftXtSubFormat_t`| | | | |`hipfftXtSubFormat_t`|6.0.0| | | | | |
 |`cufftXtWorkAreaPolicy`|9.2| | | | | | | | | | |
 |`cufftXtWorkAreaPolicy_t`|9.2| | | | | | | | | | |
+|`fftw_complex`| | | | |`fftw_complex`|7.1.0| | | | |7.1.0|
+|`fftw_iodim`| | | | | | | | | | | |
+|`fftw_iodim64`| | | | | | | | | | | |
+|`fftw_plan`| | | | |`fftw_plan`|7.1.0| | | | |7.1.0|
+|`fftwf_complex`| | | | |`fftwf_complex`|7.1.0| | | | |7.1.0|
+|`fftwf_iodim`| | | | | | | | | | | |
+|`fftwf_iodim64`| | | | | | | | | | | |
+|`fftwf_plan`| | | | |`fftwf_plan`|7.1.0| | | | |7.1.0|
 
 ## **2. CUFFT API functions**
 
