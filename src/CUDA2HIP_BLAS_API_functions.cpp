@@ -76,6 +76,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
   {"cublasGetMatrixAsync",                                 {"hipblasGetMatrixAsync",                                     "rocblas_get_matrix_async",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER}},
   {"cublasGetMatrixAsync_64",                              {"hipblasGetMatrixAsync_64",                                  "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
   {"cublasXerbla",                                         {"hipblasXerbla",                                             "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
+  {"cublasSetWorkspace",                                   {"hipblasSetWorkspace",                                       "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER}},
+  {"cublasSetWorkspace_v2",                                {"hipblasSetWorkspace",                                       "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER}},
 
   // Blas2 (v2) Routines
   {"cublasCreate_v2",                                      {"hipblasCreate",                                             "rocblas_create_handle",                              CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER}},
@@ -1630,6 +1632,8 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_FUNCTION_VER_MAP {
   {"cublasGemmGroupedBatchedEx_64",                        {CUDA_125, CUDA_0,   CUDA_0   }},
   {"cublasGetEmulationStrategy",                           {CUDA_129, CUDA_0,   CUDA_0   }},
   {"cublasSetEmulationStrategy",                           {CUDA_129, CUDA_0,   CUDA_0   }},
+  {"cublasSetWorkspace",                                   {CUDA_110, CUDA_0,   CUDA_0   }}, // A: CUDA_VERSION 11003, CUBLAS_VERSION 11200, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 2
+  {"cublasSetWorkspace_v2",                                {CUDA_110, CUDA_0,   CUDA_0   }}, // A: CUDA_VERSION 11003, CUBLAS_VERSION 11200, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 2
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_FUNCTION_VER_MAP {
@@ -2530,6 +2534,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_FUNCTION_VER_MAP {
   {"rocblas_gemm_ex_64",                                   {HIP_6030, HIP_0,    HIP_0   }},
   {"rocblas_gemm_batched_ex_64",                           {HIP_6030, HIP_0,    HIP_0   }},
   {"rocblas_gemm_strided_batched_ex_64",                   {HIP_6030, HIP_0,    HIP_0   }},
+  {"hipblasSetWorkspace",                                  {HIP_7000, HIP_0,    HIP_0   }},
 };
 
 const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_BLAS_FUNCTION_CHANGED_VER_MAP {
