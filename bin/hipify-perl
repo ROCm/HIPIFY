@@ -1680,7 +1680,8 @@ my %removed_funcs = (
 );
 
 my %experimental_funcs = (
-
+    "CUBLASLT_EPILOGUE_RELU_AUX_BIAS" => "7.1.0",
+    "CUBLASLT_EPILOGUE_RELU_AUX" => "7.1.0"
 );
 
 $print_stats = 1 if $examine;
@@ -1818,6 +1819,8 @@ sub subst {
 }
 
 sub experimentalSubstitutions {
+    subst("CUBLASLT_EPILOGUE_RELU_AUX", "HIPBLASLT_EPILOGUE_RELU_AUX", "numeric_literal");
+    subst("CUBLASLT_EPILOGUE_RELU_AUX_BIAS", "HIPBLASLT_EPILOGUE_RELU_AUX_BIAS", "numeric_literal");
 }
 
 sub rocSubstitutions {
@@ -14322,8 +14325,6 @@ sub warnRemovedFunctions {
     "CUBLASLT_MATMUL_DESC_ATOMIC_SYNC_NUM_CHUNKS_D_COLS",
     "CUBLASLT_MATMUL_DESC_ATOMIC_SYNC_IN_COUNTERS_POINTER",
     "CUBLASLT_MATMUL_DESC_ALPHA_VECTOR_BATCH_STRIDE",
-    "CUBLASLT_EPILOGUE_RELU_AUX_BIAS",
-    "CUBLASLT_EPILOGUE_RELU_AUX",
     "CUBLASLT_EPILOGUE_DRELU_BGRAD",
     "CUBLASLT_EPILOGUE_DRELU",
     "CUBLASLT_CLUSTER_SHAPE_END",
@@ -17631,7 +17632,7 @@ if ($help) {
     print STDERR "$USAGE\n";
 }
 if ($version) {
-    print STDERR "HIP version 7.0.0\n";
+    print STDERR "HIP version 7.1.0\n";
 }
 while (@ARGV) {
     $fileName=shift (@ARGV);
