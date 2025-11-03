@@ -1680,6 +1680,20 @@ my %removed_funcs = (
 );
 
 my %experimental_funcs = (
+    "fftwf_plan" => "7.1.0",
+    "fftwf_complex" => "7.1.0",
+    "fftw_plan" => "7.1.0",
+    "fftw_complex" => "7.1.0",
+    "FFTW_WISDOM_ONLY" => "7.1.0",
+    "FFTW_UNALIGNED" => "7.1.0",
+    "FFTW_PRESERVE_INPUT" => "7.1.0",
+    "FFTW_PATIENT" => "7.1.0",
+    "FFTW_MEASURE" => "7.1.0",
+    "FFTW_FORWARD" => "7.1.0",
+    "FFTW_EXHAUSTIVE" => "7.1.0",
+    "FFTW_ESTIMATE" => "7.1.0",
+    "FFTW_DESTROY_INPUT" => "7.1.0",
+    "FFTW_BACKWARD" => "7.1.0",
     "CUBLASLT_EPILOGUE_RELU_AUX_BIAS" => "7.1.0",
     "CUBLASLT_EPILOGUE_RELU_AUX" => "7.1.0"
 );
@@ -1819,8 +1833,22 @@ sub subst {
 }
 
 sub experimentalSubstitutions {
+    subst("fftw_complex", "fftw_complex", "type");
+    subst("fftw_plan", "fftw_plan", "type");
+    subst("fftwf_complex", "fftwf_complex", "type");
+    subst("fftwf_plan", "fftwf_plan", "type");
     subst("CUBLASLT_EPILOGUE_RELU_AUX", "HIPBLASLT_EPILOGUE_RELU_AUX", "numeric_literal");
     subst("CUBLASLT_EPILOGUE_RELU_AUX_BIAS", "HIPBLASLT_EPILOGUE_RELU_AUX_BIAS", "numeric_literal");
+    subst("FFTW_BACKWARD", "FFTW_BACKWARD", "define");
+    subst("FFTW_DESTROY_INPUT", "FFTW_DESTROY_INPUT", "define");
+    subst("FFTW_ESTIMATE", "FFTW_ESTIMATE", "define");
+    subst("FFTW_EXHAUSTIVE", "FFTW_EXHAUSTIVE", "define");
+    subst("FFTW_FORWARD", "FFTW_FORWARD", "define");
+    subst("FFTW_MEASURE", "FFTW_MEASURE", "define");
+    subst("FFTW_PATIENT", "FFTW_PATIENT", "define");
+    subst("FFTW_PRESERVE_INPUT", "FFTW_PRESERVE_INPUT", "define");
+    subst("FFTW_UNALIGNED", "FFTW_UNALIGNED", "define");
+    subst("FFTW_WISDOM_ONLY", "FFTW_WISDOM_ONLY", "define");
 }
 
 sub rocSubstitutions {
@@ -7234,6 +7262,7 @@ sub simpleSubstitutions {
     subst("cuda_runtime_api.h", "hip\/hip_runtime_api.h", "include");
     subst("cuda_texture_types.h", "hip\/hip_texture_types.h", "include");
     subst("cufftXt.h", "hipfft\/hipfftXt.h", "include");
+    subst("cufftw.h", "hipfft\/hipfftw.h", "include");
     subst("curand_discrete.h", "hiprand\/hiprand_kernel.h", "include");
     subst("curand_discrete2.h", "hiprand\/hiprand_kernel.h", "include");
     subst("curand_globals.h", "hiprand\/hiprand_kernel.h", "include");
@@ -10895,6 +10924,10 @@ sub warnRemovedFunctions {
     "libraryPropertyType_t",
     "libraryPropertyType",
     "gesvdjInfo",
+    "fftwf_iodim64",
+    "fftwf_iodim",
+    "fftw_iodim64",
+    "fftw_iodim",
     "cutensorMgTensorDescriptor_t",
     "cutensorMgTensorDescriptor_s",
     "cutensorMgHostDevice_t",
@@ -12526,6 +12559,7 @@ sub warnRemovedFunctions {
     "NVCL_CTX_SCHED_BLOCKING_SYNC",
     "NVCL_CTX_SCHED_AUTO",
     "MAX_CUFFT_ERROR",
+    "FFTW_INVERSE",
     "CubVector",
     "CubDebugExit",
     "CUtensorMap_st",
