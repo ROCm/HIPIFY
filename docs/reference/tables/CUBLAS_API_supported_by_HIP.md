@@ -1153,6 +1153,8 @@
 |`cublasSetVectorAsync`| | | | |`hipblasSetVectorAsync`|3.7.0| | | | | |
 |`cublasSetVectorAsync_64`|12.0| | | | | | | | | | |
 |`cublasSetVector_64`|12.0| | | | | | | | | | |
+|`cublasSetWorkspace`|11.0| | | |`hipblasSetWorkspace`|7.0.0| | | | | |
+|`cublasSetWorkspace_v2`|11.0| | | |`hipblasSetWorkspace`|7.0.0| | | | | |
 |`cublasShutdown`| | | | | | | | | | | |
 |`cublasXerbla`| | | | | | | | | | | |
 

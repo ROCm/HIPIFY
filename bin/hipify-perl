@@ -5107,6 +5107,8 @@ sub simpleSubstitutions {
     subst("cublasSetStream_v2", "hipblasSetStream", "library");
     subst("cublasSetVector", "hipblasSetVector", "library");
     subst("cublasSetVectorAsync", "hipblasSetVectorAsync", "library");
+    subst("cublasSetWorkspace", "hipblasSetWorkspace", "library");
+    subst("cublasSetWorkspace_v2", "hipblasSetWorkspace", "library");
     subst("cublasSgbmv", "hipblasSgbmv", "library");
     subst("cublasSgbmv_64", "hipblasSgbmv_64", "library");
     subst("cublasSgbmv_v2", "hipblasSgbmv", "library");
