@@ -1682,6 +1682,17 @@ my %removed_funcs = (
 my %experimental_funcs = (
     "fftwf_plan" => "7.1.0",
     "fftwf_complex" => "7.1.0",
+    "fftw_plan_dft_r2c_3d" => "7.1.0",
+    "fftw_plan_dft_r2c_2d" => "7.1.0",
+    "fftw_plan_dft_r2c_1d" => "7.1.0",
+    "fftw_plan_dft_r2c" => "7.1.0",
+    "fftw_plan_dft_c2r_3d" => "7.1.0",
+    "fftw_plan_dft_c2r_2d" => "7.1.0",
+    "fftw_plan_dft_c2r" => "7.1.0",
+    "fftw_plan_dft_3d" => "7.1.0",
+    "fftw_plan_dft_2d" => "7.1.0",
+    "fftw_plan_dft_1d" => "7.1.0",
+    "fftw_plan_dft" => "7.1.0",
     "fftw_plan" => "7.1.0",
     "fftw_complex" => "7.1.0",
     "FFTW_WISDOM_ONLY" => "7.1.0",
@@ -1833,6 +1844,18 @@ sub subst {
 }
 
 sub experimentalSubstitutions {
+    subst("fftw_plan_dft", "fftw_plan_dft", "library");
+    subst("fftw_plan_dft_1d", "fftw_plan_dft_1d", "library");
+    subst("fftw_plan_dft_2d", "fftw_plan_dft_2d", "library");
+    subst("fftw_plan_dft_3d", "fftw_plan_dft_3d", "library");
+    subst("fftw_plan_dft_c2r", "fftw_plan_dft_c2r", "library");
+    subst("fftw_plan_dft_c2r_1d", "fftw_plan_dft_c2r_1d", "library");
+    subst("fftw_plan_dft_c2r_2d", "fftw_plan_dft_c2r_2d", "library");
+    subst("fftw_plan_dft_c2r_3d", "fftw_plan_dft_c2r_3d", "library");
+    subst("fftw_plan_dft_r2c", "fftw_plan_dft_r2c", "library");
+    subst("fftw_plan_dft_r2c_1d", "fftw_plan_dft_r2c_1d", "library");
+    subst("fftw_plan_dft_r2c_2d", "fftw_plan_dft_r2c_2d", "library");
+    subst("fftw_plan_dft_r2c_3d", "fftw_plan_dft_r2c_3d", "library");
     subst("fftw_complex", "fftw_complex", "type");
     subst("fftw_plan", "fftw_plan", "type");
     subst("fftwf_complex", "fftwf_complex", "type");

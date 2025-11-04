@@ -88,6 +88,18 @@ const std::map<llvm::StringRef, hipCounter> CUDA_FFT_FUNCTION_MAP {
   {"cufftSetPlanPropertyInt64",                           {"hipfftSetPlanPropertyInt64",                           "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED}},
   {"cufftGetPlanPropertyInt64",                           {"hipfftGetPlanPropertyInt64",                           "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED}},
   {"cufftResetPlanProperty",                              {"hipfftResetPlanProperty",                              "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED}},
+  {"fftw_plan_dft_1d",                                    {"fftw_plan_dft_1d",                                     "", CONV_LIB_FUNC, API_FFT, 2, HIP_EXPERIMENTAL}},
+  {"fftw_plan_dft_2d",                                    {"fftw_plan_dft_2d",                                     "", CONV_LIB_FUNC, API_FFT, 2, HIP_EXPERIMENTAL}},
+  {"fftw_plan_dft_3d",                                    {"fftw_plan_dft_3d",                                     "", CONV_LIB_FUNC, API_FFT, 2, HIP_EXPERIMENTAL}},
+  {"fftw_plan_dft",                                       {"fftw_plan_dft",                                        "", CONV_LIB_FUNC, API_FFT, 2, HIP_EXPERIMENTAL}},
+  {"fftw_plan_dft_r2c_1d",                                {"fftw_plan_dft_r2c_1d",                                 "", CONV_LIB_FUNC, API_FFT, 2, HIP_EXPERIMENTAL}},
+  {"fftw_plan_dft_r2c_2d",                                {"fftw_plan_dft_r2c_2d",                                 "", CONV_LIB_FUNC, API_FFT, 2, HIP_EXPERIMENTAL}},
+  {"fftw_plan_dft_r2c_3d",                                {"fftw_plan_dft_r2c_3d",                                 "", CONV_LIB_FUNC, API_FFT, 2, HIP_EXPERIMENTAL}},
+  {"fftw_plan_dft_r2c",                                   {"fftw_plan_dft_r2c",                                    "", CONV_LIB_FUNC, API_FFT, 2, HIP_EXPERIMENTAL}},
+  {"fftw_plan_dft_c2r_1d",                                {"fftw_plan_dft_c2r_1d",                                 "", CONV_LIB_FUNC, API_FFT, 2, HIP_EXPERIMENTAL}},
+  {"fftw_plan_dft_c2r_2d",                                {"fftw_plan_dft_c2r_2d",                                 "", CONV_LIB_FUNC, API_FFT, 2, HIP_EXPERIMENTAL}},
+  {"fftw_plan_dft_c2r_3d",                                {"fftw_plan_dft_c2r_3d",                                 "", CONV_LIB_FUNC, API_FFT, 2, HIP_EXPERIMENTAL}},
+  {"fftw_plan_dft_c2r",                                   {"fftw_plan_dft_c2r",                                    "", CONV_LIB_FUNC, API_FFT, 2, HIP_EXPERIMENTAL}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_FFT_FUNCTION_VER_MAP {
@@ -163,6 +175,17 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_FFT_FUNCTION_VER_MAP {
   {"hipfftXtGetSizeMany",                                 {HIP_5060, HIP_0,    HIP_0   }},
   {"hipfftXtExec",                                        {HIP_5060, HIP_0,    HIP_0   }},
   {"hipfftXtExecDescriptor",                              {HIP_6000, HIP_0,    HIP_0   }},
+  {"fftw_plan_dft_1d",                                    {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"fftw_plan_dft_2d",                                    {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"fftw_plan_dft_3d",                                    {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"fftw_plan_dft",                                       {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"fftw_plan_dft_r2c_1d",                                {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"fftw_plan_dft_r2c_2d",                                {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"fftw_plan_dft_r2c_3d",                                {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"fftw_plan_dft_r2c",                                   {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"fftw_plan_dft_c2r_2d",                                {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"fftw_plan_dft_c2r_3d",                                {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"fftw_plan_dft_c2r",                                   {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_FFT_API_SECTION_MAP {

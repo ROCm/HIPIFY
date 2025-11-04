@@ -31,9 +31,9 @@ int main() {
   int W_PRESERVE_INPUT = FFTW_PRESERVE_INPUT;
   int W_UNALIGNED = FFTW_UNALIGNED;
 
-  // CHECK: fftw_complex w_complex;
+  // CHECK: fftw_complex w_complex, w_complex_in, w_complex_out;
   // CHECK-NEXT: fftwf_complex wf_complex;
-  fftw_complex w_complex;
+  fftw_complex w_complex, w_complex_in, w_complex_out;
   fftwf_complex wf_complex;
 
   // CHECK: fftw_plan w_plan = nullptr;
@@ -41,5 +41,75 @@ int main() {
   fftw_plan w_plan = nullptr;
   fftwf_plan twf_plan = nullptr;
 
+  int n = 0;
+  int n0 = 0;
+  int n1 = 0;
+  int n2 = 0;
+  int sign = 0;
+  int rank = 0;
+  unsigned int flags = 0;
+  double d_in = 0.0f;
+  double d_out = 0.0f;
+
+  // CUDA: fftw_plan CUFFTAPI fftw_plan_dft_1d(int n, fftw_complex* in, fftw_complex* out, int sign, unsigned flags);
+  // HIP: HIPFFT_EXPORT fftw_plan fftw_plan_dft_1d(int n, fftw_complex * in, fftw_complex * out, int sign, unsigned flags);
+  // CHECK: w_plan = fftw_plan_dft_1d(n, &w_complex_in, &w_complex_out, sign, flags);
+  w_plan = fftw_plan_dft_1d(n, &w_complex_in, &w_complex_out, sign, flags);
+
+  // CUDA: fftw_plan CUFFTAPI fftw_plan_dft_2d(int n0, int n1, fftw_complex* in, fftw_complex* out, int sign, unsigned flags);
+  // HIP: HIPFFT_EXPORT fftw_plan fftw_plan_dft_2d(int n0, int n1, fftw_complex * in, fftw_complex * out, int sign, unsigned flags);
+  // CHECK: w_plan = fftw_plan_dft_2d(n0, n1, &w_complex_in, &w_complex_out, sign, flags);
+  w_plan = fftw_plan_dft_2d(n0, n1, &w_complex_in, &w_complex_out, sign, flags);
+
+  // CUDA: fftw_plan CUFFTAPI fftw_plan_dft_3d(int n0, int n1, int n2, fftw_complex* in, fftw_complex* out, int sign, unsigned flags);
+  // HIP: HIPFFT_EXPORT fftw_plan fftw_plan_dft_3d(int n0, int n1, int n2, fftw_complex* in, fftw_complex* out, int sign, unsigned flags);
+  // CHECK: w_plan = fftw_plan_dft_3d(n0, n1, n2, &w_complex_in, &w_complex_out, sign, flags);
+  w_plan = fftw_plan_dft_3d(n0, n1, n2, &w_complex_in, &w_complex_out, sign, flags);
+
+  // CUDA: fftw_plan CUFFTAPI fftw_plan_dft(int rank, const int* n, fftw_complex* in, fftw_complex* out, int sign, unsigned flags);
+  // HIP: HIPFFT_EXPORT fftw_plan fftw_plan_dft(int rank, const int* n, fftw_cBomplex* in, fftw_complex* out, int sign, unsigned flags);
+  // CHECK: w_plan = fftw_plan_dft(rank, &n, &w_complex_in, &w_complex_out, sign, flags);
+  w_plan = fftw_plan_dft(rank, &n, &w_complex_in, &w_complex_out, sign, flags);
+
+  // CUDA: fftw_plan CUFFTAPI fftw_plan_dft_r2c_1d(int n, double* in, fftw_complex* out, unsigned flags);
+  // HIP: HIPFFT_EXPORT fftw_plan fftw_plan_dft_r2c_1d(int n, double* in, fftw_complex* out, unsigned flags);
+  // CHECK: w_plan = fftw_plan_dft_r2c_1d(n, &d_in, &w_complex_out, flags);
+  w_plan = fftw_plan_dft_r2c_1d(n, &d_in, &w_complex_out, flags);
+
+  // CUDA: fftw_plan CUFFTAPI fftw_plan_dft_r2c_2d(int n0, int n1, double* in, fftw_complex* out, unsigned flags);
+  // HIP: HIPFFT_EXPORT fftw_plan fftw_plan_dft_r2c_2d(int n0, int n1, double* in, fftw_complex * out, unsigned flags);
+  // CHECK: w_plan = fftw_plan_dft_r2c_2d(n0, n1, &d_in, &w_complex_out, flags);
+  w_plan = fftw_plan_dft_r2c_2d(n0, n1, &d_in, &w_complex_out, flags);
+
+  // CUDA: fftw_plan CUFFTAPI fftw_plan_dft_r2c_3d(int n0, int n1, int n2, double* in, fftw_complex* out, unsigned flags);
+  // HIP: HIPFFT_EXPORT fftw_plan fftw_plan_dft_r2c_3d(int n0, int n1, int n2, double* in, fftw_complex * out, unsigned flags);
+  // CHECK: w_plan = fftw_plan_dft_r2c_3d(n0, n1, n2, &d_in, &w_complex_out, flags);
+  w_plan = fftw_plan_dft_r2c_3d(n0, n1, n2, &d_in, &w_complex_out, flags);
+
+  // CUDA: fftw_plan CUFFTAPI fftw_plan_dft_r2c(int rank, const int* n, double* in, fftw_complex* out, unsigned flags);
+  // HIP: HIPFFT_EXPORT fftw_plan fftw_plan_dft_r2c(int rank, const int* n, double* in, fftw_complex * out, unsigned flags);
+  // CHECK: w_plan = fftw_plan_dft_r2c(rank, &n, &d_in, &w_complex_out, flags);
+  w_plan = fftw_plan_dft_r2c(rank, &n, &d_in, &w_complex_out, flags);
+
+  // CUDA: fftw_plan CUFFTAPI fftw_plan_dft_c2r_1d(int n, fftw_complex* in, double* out, unsigned flags);
+  // HIP: HIPFFT_EXPORT fftw_plan fftw_plan_dft_c2r_1d(int n, fftw_complex* in, double* out, unsigned flags);
+  // CHECK: w_plan = fftw_plan_dft_c2r_1d(n, &w_complex_in, &d_out, flags);
+  w_plan = fftw_plan_dft_c2r_1d(n, &w_complex_in, &d_out, flags);
+
+  // CUDA: fftw_plan CUFFTAPI fftw_plan_dft_c2r_2d(int n0, int n1, fftw_complex* in, double* out, unsigned flags);
+  // HIP: HIPFFT_EXPORT fftw_plan fftw_plan_dft_c2r_2d(int n0, int n1, fftw_complex * in, double* out, unsigned flags);
+  // CHECK: w_plan = fftw_plan_dft_c2r_2d(n0, n1, &w_complex_in, &d_out, flags);
+  w_plan = fftw_plan_dft_c2r_2d(n0, n1, &w_complex_in, &d_out, flags);
+
+  // CUDA: fftw_plan CUFFTAPI fftw_plan_dft_c2r_3d(int n0, int n1, int n2, fftw_complex* in, double* out, unsigned flags);
+  // HIP: HIPFFT_EXPORT fftw_plan fftw_plan_dft_c2r_3d(int n0, int n1, int n2, fftw_complex * in, double* out, unsigned flags);
+  // CHECK: w_plan = fftw_plan_dft_c2r_3d(n0, n1, n2, &w_complex_in, &d_out, flags);
+  w_plan = fftw_plan_dft_c2r_3d(n0, n1, n2, &w_complex_in, &d_out, flags);
+
+  // CUDA: fftw_plan CUFFTAPI fftw_plan_dft_c2r(int rank, const int* n, fftw_complex* in, double* out, unsigned flags);
+  // HIP: HIPFFT_EXPORT fftw_plan fftw_plan_dft_c2r(int rank, const int* n, fftw_complex* in, double* out, unsigned flags);
+  // CHECK: w_plan = fftw_plan_dft_c2r(rank, &n, &w_complex_in, &d_out, flags);
+  w_plan = fftw_plan_dft_c2r(rank, &n, &w_complex_in, &d_out, flags);
+
   return 0;
-} 
+}
