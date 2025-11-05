@@ -1254,7 +1254,16 @@ int main() {
   CUlaunchAttributeID LAUNCH_ATTRIBUTE_MAX = CU_LAUNCH_ATTRIBUTE_MAX;
 #endif
 
-#if CUDA_VERSION >= 12030 
+#if CUDA_VERSION >= 12020
+  // CHECK: hipMemLocationType MEM_LOCATION_TYPE_HOST = hipMemLocationTypeHost;
+  // CHECK-NEXT: hipMemLocationType MEM_LOCATION_TYPE_HOST_NUMA = hipMemLocationTypeHostNuma;
+  // CHECK-NEXT: hipMemLocationType MEM_LOCATION_TYPE_HOST_NUMA_CURRENT = hipMemLocationTypeHostNumaCurrent;
+  CUmemLocationType MEM_LOCATION_TYPE_HOST = CU_MEM_LOCATION_TYPE_HOST;
+  CUmemLocationType MEM_LOCATION_TYPE_HOST_NUMA = CU_MEM_LOCATION_TYPE_HOST_NUMA;
+  CUmemLocationType MEM_LOCATION_TYPE_HOST_NUMA_CURRENT = CU_MEM_LOCATION_TYPE_HOST_NUMA_CURRENT;
+#endif
+
+#if CUDA_VERSION >= 12030
   // CHECK: hipGraphDependencyType graphDependencyType;
   // CHECK-NEXT: hipGraphDependencyType graphDependencyType_enum;
   // CHECK-NEXT: hipGraphDependencyType GRAPH_DEPENDENCY_TYPE_DEFAULT = hipGraphDependencyTypeDefault;
@@ -1284,6 +1293,20 @@ int main() {
   CUmemRangeFlags MemRangeFlags;
   CUmemRangeFlags_enum MemRangeFlags_enum;
   CUmemRangeFlags MEM_RANGE_FLAG_DMA_BUF_MAPPING_TYPE_PCIE = CU_MEM_RANGE_FLAG_DMA_BUF_MAPPING_TYPE_PCIE;
+
+  // CHECK: hipMemcpyFlags MemcpyFlags;
+  // CHECK-NEXT: hipMemcpyFlags memcpyFlags_enum;
+  // CHECK-NEXT: hipMemcpyFlags MemcpyFlagDefault = hipMemcpyFlagDefault;
+  // CHECK-NEXT: hipMemcpyFlags MemcpyFlagPreferOverlapWithCompute = hipMemcpyFlagPreferOverlapWithCompute;
+  CUmemcpyFlags MemcpyFlags;
+  CUmemcpyFlags_enum memcpyFlags_enum;
+  CUmemcpyFlags MemcpyFlagDefault = CU_MEMCPY_FLAG_DEFAULT;
+  CUmemcpyFlags MemcpyFlagPreferOverlapWithCompute = CU_MEMCPY_FLAG_PREFER_OVERLAP_WITH_COMPUTE;
+#endif
+
+#if CUDA_VERSION >= 13000
+  // CHECK: hipMemLocationType MEM_LOCATION_TYPE_NONE = hipMemLocationTypeNone;
+  CUmemLocationType MEM_LOCATION_TYPE_NONE = CU_MEM_LOCATION_TYPE_NONE;
 #endif
 
   return 0;

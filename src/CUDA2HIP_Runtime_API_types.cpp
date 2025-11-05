@@ -1825,15 +1825,15 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CU_MEM_LOCATION_TYPE_INVALID
   {"cudaMemLocationTypeInvalid",                                       {"hipMemLocationTypeInvalid",                                "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}}, // 0
   // CU_MEM_LOCATION_TYPE_NONE
-  {"cudaMemLocationTypeNone",                                          {"hipMemLocationTypeInvalid",                                "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}}, // 0
+  {"cudaMemLocationTypeNone",                                          {"hipMemLocationTypeNone",                                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}}, // 0
   // CU_MEM_LOCATION_TYPE_DEVICE
   {"cudaMemLocationTypeDevice",                                        {"hipMemLocationTypeDevice",                                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}}, // 1
   // CU_MEM_LOCATION_TYPE_HOST
-  {"cudaMemLocationTypeHost",                                          {"hipMemLocationTypeHost",                                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 2
+  {"cudaMemLocationTypeHost",                                          {"hipMemLocationTypeHost",                                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}}, // 2
   // CU_MEM_LOCATION_TYPE_HOST_NUMA
-  {"cudaMemLocationTypeHostNuma",                                      {"hipMemLocationTypeHostNuma",                               "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 3
+  {"cudaMemLocationTypeHostNuma",                                      {"hipMemLocationTypeHostNuma",                               "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}}, // 3
   // CU_MEM_LOCATION_TYPE_HOST_NUMA_CURRENT
-  {"cudaMemLocationTypeHostNumaCurrent",                               {"hipMemLocationTypeHostNumaCurrent",                        "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 4
+  {"cudaMemLocationTypeHostNumaCurrent",                               {"hipMemLocationTypeHostNumaCurrent",                        "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}}, // 4
 
   // CUmemAllocationType
   {"cudaMemAllocationType",                                            {"hipMemAllocationType",                                     "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES}},
@@ -2106,12 +2106,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaGraphKernelNodeFieldEnabled",                                  {"hipGraphKernelNodeFieldEnabled",                           "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   // CUmemcpyFlags
-  {"cudaMemcpyFlags",                                                  {"hipMemcpyFlags",                                           "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"cudaMemcpyFlags",                                                  {"hipMemcpyFlags",                                           "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
   // cudaMemcpyFlags enum values
   // CU_MEMCPY_FLAG_DEFAULT
-  {"cudaMemcpyFlagDefault",                                            {"HIP_MEMCPY_FLAG_DEFAULT",                                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"cudaMemcpyFlagDefault",                                            {"hipMemcpyFlagDefault",                                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
   // CU_MEMCPY_FLAG_PREFER_OVERLAP_WITH_COMPUTE
-  {"cudaMemcpyFlagPreferOverlapWithCompute",                           {"HIP_MEMCPY_FLAG_PREFER_OVERLAP_WITH_COMPUTE",              "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"cudaMemcpyFlagPreferOverlapWithCompute",                           {"hipMemcpyFlagPreferOverlapWithCompute",                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
 
   // CUmemcpySrcAccessOrder
   {"cudaMemcpySrcAccessOrder",                                         {"hipMemcpySrcAccessOrder",                                  "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
@@ -3696,4 +3696,11 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {
   {"hipLaunchAttribute",                                               {HIP_7000, HIP_0,    HIP_0   }},
   {"hipLaunchConfig_st",                                               {HIP_7000, HIP_0,    HIP_0   }},
   {"hipLaunchConfig_t",                                                {HIP_7000, HIP_0,    HIP_0   }},
+  {"hipMemLocationTypeNone",                                           {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemLocationTypeHost",                                           {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemLocationTypeHostNuma",                                       {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemLocationTypeHostNumaCurrent",                                {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemcpyFlags",                                                   {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemcpyFlagDefault",                                             {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemcpyFlagPreferOverlapWithCompute",                            {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
 };
