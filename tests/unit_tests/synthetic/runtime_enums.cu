@@ -772,11 +772,6 @@ int main() {
   cudaMemLocationType MemLocationTypeInvalid = cudaMemLocationTypeInvalid;
   cudaMemLocationType MemLocationTypeDevice = cudaMemLocationTypeDevice;
 
-#if CUDA_VERSION >= 13000
-  // CHECK: hipMemLocationType MemLocationTypeNone = hipMemLocationTypeInvalid;
-  cudaMemLocationType MemLocationTypeNone = cudaMemLocationTypeNone;
-#endif
-
   // CHECK: hipMemAccessFlags MemAccessFlags;
   // CHECK-NEXT: hipMemAccessFlags MemAccessFlagsProtNone = hipMemAccessFlagsProtNone;
   // CHECK-NEXT: hipMemAccessFlags MemAccessFlagsProtRead = hipMemAccessFlagsProtRead;
@@ -951,6 +946,15 @@ int main() {
   cudaDriverEntryPointQueryResult GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT = cudaDriverEntryPointVersionNotSufficent;
 #endif
 
+#if CUDA_VERSION >= 12020
+  // CHECK: hipMemLocationType MemLocationTypeHost = hipMemLocationTypeHost;
+  // CHECK-NEXT: hipMemLocationType MemLocationTypeHostNuma = hipMemLocationTypeHostNuma;
+  // CHECK-NEXT: hipMemLocationType MemLocationTypeHostNumaCurrent = hipMemLocationTypeHostNumaCurrent;
+  cudaMemLocationType MemLocationTypeHost = cudaMemLocationTypeHost;
+  cudaMemLocationType MemLocationTypeHostNuma = cudaMemLocationTypeHostNuma;
+  cudaMemLocationType MemLocationTypeHostNumaCurrent = cudaMemLocationTypeHostNumaCurrent;
+#endif
+
 #if CUDA_VERSION >= 12030
   // CHECK: hipGraphDependencyType graphDependencyType;
   // CHECK-NEXT: hipGraphDependencyType graphDependencyType_enum;
@@ -999,6 +1003,18 @@ int main() {
   cudaJitOption JIT_MIN_CTA_PER_SM = cudaJitMinCtaPerSm;
   cudaJitOption JIT_MAX_THREADS_PER_BLOCK = cudaJitMaxThreadsPerBlock;
   cudaJitOption JIT_OVERRIDE_DIRECTIVE_VALUES = cudaJitOverrideDirectiveValues;
+
+  // CHECK: hipMemcpyFlags MemcpyFlags;
+  // CHECK-NEXT: hipMemcpyFlags MemcpyFlagDefault = hipMemcpyFlagDefault;
+  // CHECK-NEXT: hipMemcpyFlags MemcpyFlagPreferOverlapWithCompute = hipMemcpyFlagPreferOverlapWithCompute;
+  cudaMemcpyFlags MemcpyFlags;
+  cudaMemcpyFlags MemcpyFlagDefault = cudaMemcpyFlagDefault;
+  cudaMemcpyFlags MemcpyFlagPreferOverlapWithCompute = cudaMemcpyFlagPreferOverlapWithCompute;
+#endif
+
+#if CUDA_VERSION >= 13000
+  // CHECK: hipMemLocationType MemLocationTypeNone = hipMemLocationTypeNone;
+  cudaMemLocationType MemLocationTypeNone = cudaMemLocationTypeNone;
 #endif
 
   return 0;

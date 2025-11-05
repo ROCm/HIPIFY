@@ -903,8 +903,8 @@
 |`CU_LIMIT_STACK_SIZE`| | | | |`hipLimitStackSize`|5.3.0| | | | | |
 |`CU_LOG_LEVEL_ERROR`|12.9| | | | | | | | | | |
 |`CU_LOG_LEVEL_WARNING`|12.9| | | | | | | | | | |
-|`CU_MEMCPY_FLAG_DEFAULT`|12.8| | | | | | | | | | |
-|`CU_MEMCPY_FLAG_PREFER_OVERLAP_WITH_COMPUTE`|12.8| | | | | | | | | | |
+|`CU_MEMCPY_FLAG_DEFAULT`|12.8| | | |`hipMemcpyFlagDefault`|7.1.0| | | | |7.1.0|
+|`CU_MEMCPY_FLAG_PREFER_OVERLAP_WITH_COMPUTE`|12.8| | | |`hipMemcpyFlagPreferOverlapWithCompute`|7.1.0| | | | |7.1.0|
 |`CU_MEMCPY_OPERAND_TYPE_ARRAY`|12.8| | | | | | | | | | |
 |`CU_MEMCPY_OPERAND_TYPE_MAX`|12.8| | | | | | | | | | |
 |`CU_MEMCPY_OPERAND_TYPE_POINTER`|12.8| | | | | | | | | | |
@@ -965,12 +965,12 @@
 |`CU_MEM_HANDLE_TYPE_WIN32`|10.2| | | |`hipMemHandleTypeWin32`|5.2.0| | | | | |
 |`CU_MEM_HANDLE_TYPE_WIN32_KMT`|10.2| | | |`hipMemHandleTypeWin32Kmt`|5.2.0| | | | | |
 |`CU_MEM_LOCATION_TYPE_DEVICE`|10.2| | | |`hipMemLocationTypeDevice`|5.2.0| | | | | |
-|`CU_MEM_LOCATION_TYPE_HOST`|12.2| | | | | | | | | | |
-|`CU_MEM_LOCATION_TYPE_HOST_NUMA`|12.2| | | | | | | | | | |
-|`CU_MEM_LOCATION_TYPE_HOST_NUMA_CURRENT`|12.2| | | | | | | | | | |
+|`CU_MEM_LOCATION_TYPE_HOST`|12.2| | | |`hipMemLocationTypeHost`|7.1.0| | | | |7.1.0|
+|`CU_MEM_LOCATION_TYPE_HOST_NUMA`|12.2| | | |`hipMemLocationTypeHostNuma`|7.1.0| | | | |7.1.0|
+|`CU_MEM_LOCATION_TYPE_HOST_NUMA_CURRENT`|12.2| | | |`hipMemLocationTypeHostNumaCurrent`|7.1.0| | | | |7.1.0|
 |`CU_MEM_LOCATION_TYPE_INVALID`|10.2| | | |`hipMemLocationTypeInvalid`|5.2.0| | | | | |
 |`CU_MEM_LOCATION_TYPE_MAX`|10.2| | | | | | | | | | |
-|`CU_MEM_LOCATION_TYPE_NONE`|13.0| | | |`hipMemLocationTypeInvalid`|5.2.0| | | | | |
+|`CU_MEM_LOCATION_TYPE_NONE`|13.0| | | |`hipMemLocationTypeNone`|7.1.0| | | | |7.1.0|
 |`CU_MEM_OPERATION_TYPE_MAP`|11.1| | | |`hipMemOperationTypeMap`|5.2.0| | | | | |
 |`CU_MEM_OPERATION_TYPE_UNMAP`|11.1| | | |`hipMemOperationTypeUnmap`|5.2.0| | | | | |
 |`CU_MEM_POOL_CREATE_USAGE_HW_DECOMPRESS`|12.8| | | | | | | | | | |
@@ -1498,8 +1498,8 @@
 |`CUmemcpyAttributes`|12.8| | | | | | | | | | |
 |`CUmemcpyAttributes_st`|12.8| | | | | | | | | | |
 |`CUmemcpyAttributes_v1`|12.8| | | | | | | | | | |
-|`CUmemcpyFlags`|12.8| | | | | | | | | | |
-|`CUmemcpyFlags_enum`|12.8| | | | | | | | | | |
+|`CUmemcpyFlags`|12.8| | | |`hipMemcpyFlags`|7.1.0| | | | |7.1.0|
+|`CUmemcpyFlags_enum`|12.8| | | |`hipMemcpyFlags`|7.1.0| | | | |7.1.0|
 |`CUmemcpySrcAccessOrder`|12.8| | | | | | | | | | |
 |`CUmemcpySrcAccessOrder_enum`|12.8| | | | | | | | | | |
 |`CUmemoryPool`|11.2| | | |`hipMemPool_t`|5.2.0| | | | | |

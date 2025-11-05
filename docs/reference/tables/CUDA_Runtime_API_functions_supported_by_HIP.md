@@ -1600,11 +1600,11 @@
 |`cudaMemLocation`|11.2| | | |`hipMemLocation`|5.2.0| | | | | |
 |`cudaMemLocationType`|11.2| | | |`hipMemLocationType`|5.2.0| | | | | |
 |`cudaMemLocationTypeDevice`|11.2| | | |`hipMemLocationTypeDevice`|5.2.0| | | | | |
-|`cudaMemLocationTypeHost`|12.2| | | | | | | | | | |
-|`cudaMemLocationTypeHostNuma`|12.2| | | | | | | | | | |
-|`cudaMemLocationTypeHostNumaCurrent`|12.2| | | | | | | | | | |
+|`cudaMemLocationTypeHost`|12.2| | | |`hipMemLocationTypeHost`|7.1.0| | | | |7.1.0|
+|`cudaMemLocationTypeHostNuma`|12.2| | | |`hipMemLocationTypeHostNuma`|7.1.0| | | | |7.1.0|
+|`cudaMemLocationTypeHostNumaCurrent`|12.2| | | |`hipMemLocationTypeHostNumaCurrent`|7.1.0| | | | |7.1.0|
 |`cudaMemLocationTypeInvalid`|11.2| | | |`hipMemLocationTypeInvalid`|5.2.0| | | | | |
-|`cudaMemLocationTypeNone`|13.0| | | |`hipMemLocationTypeInvalid`|5.2.0| | | | | |
+|`cudaMemLocationTypeNone`|13.0| | | |`hipMemLocationTypeNone`|7.1.0| | | | |7.1.0|
 |`cudaMemPoolAttr`|11.2| | | |`hipMemPoolAttr`|5.2.0| | | | | |
 |`cudaMemPoolAttrReleaseThreshold`|11.2| | | |`hipMemPoolAttrReleaseThreshold`|5.2.0| | | | | |
 |`cudaMemPoolAttrReservedMemCurrent`|11.3| | | |`hipMemPoolAttrReservedMemCurrent`|5.2.0| | | | | |
@@ -1636,9 +1636,9 @@
 |`cudaMemcpyDefault`| | | | |`hipMemcpyDefault`|1.5.0| | | | | |
 |`cudaMemcpyDeviceToDevice`| | | | |`hipMemcpyDeviceToDevice`|1.5.0| | | | | |
 |`cudaMemcpyDeviceToHost`| | | | |`hipMemcpyDeviceToHost`|1.5.0| | | | | |
-|`cudaMemcpyFlagDefault`|12.8| | | | | | | | | | |
-|`cudaMemcpyFlagPreferOverlapWithCompute`|12.8| | | | | | | | | | |
-|`cudaMemcpyFlags`|12.8| | | | | | | | | | |
+|`cudaMemcpyFlagDefault`|12.8| | | |`hipMemcpyFlagDefault`|7.1.0| | | | |7.1.0|
+|`cudaMemcpyFlagPreferOverlapWithCompute`|12.8| | | |`hipMemcpyFlagPreferOverlapWithCompute`|7.1.0| | | | |7.1.0|
+|`cudaMemcpyFlags`|12.8| | | |`hipMemcpyFlags`|7.1.0| | | | |7.1.0|
 |`cudaMemcpyHostToDevice`| | | | |`hipMemcpyHostToDevice`|1.5.0| | | | | |
 |`cudaMemcpyHostToHost`| | | | |`hipMemcpyHostToHost`|1.5.0| | | | | |
 |`cudaMemcpyKind`| | | | |`hipMemcpyKind`|1.5.0| | | | | |

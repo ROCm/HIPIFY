@@ -2255,15 +2255,15 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaMemLocationTypeInvalid
   {"CU_MEM_LOCATION_TYPE_INVALID",                                     {"hipMemLocationTypeInvalid",                                "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}}, // 0x0
   // cudaMemLocationTypeNone
-  {"CU_MEM_LOCATION_TYPE_NONE",                                        {"hipMemLocationTypeInvalid",                                "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}}, // 0x0
+  {"CU_MEM_LOCATION_TYPE_NONE",                                        {"hipMemLocationTypeNone",                                   "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}}, // 0x0
   // cudaMemLocationTypeDevice
   {"CU_MEM_LOCATION_TYPE_DEVICE",                                      {"hipMemLocationTypeDevice",                                 "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}}, // 0x1
   // cudaMemLocationTypeHost
-  {"CU_MEM_LOCATION_TYPE_HOST",                                        {"hipMemLocationTypeHost",                                   "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0x2
+  {"CU_MEM_LOCATION_TYPE_HOST",                                        {"hipMemLocationTypeHost",                                   "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}}, // 0x2
   // cudaMemLocationTypeHostNuma
-  {"CU_MEM_LOCATION_TYPE_HOST_NUMA",                                   {"hipMemLocationTypeHostNuma",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0x3
+  {"CU_MEM_LOCATION_TYPE_HOST_NUMA",                                   {"hipMemLocationTypeHostNuma",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}}, // 0x3
   // cudaMemLocationTypeHostNumaCurrent
-  {"CU_MEM_LOCATION_TYPE_HOST_NUMA_CURRENT",                           {"hipMemLocationTypeHostNumaCurrent",                        "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0x4
+  {"CU_MEM_LOCATION_TYPE_HOST_NUMA_CURRENT",                           {"hipMemLocationTypeHostNumaCurrent",                        "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}}, // 0x4
   // no analogue
   {"CU_MEM_LOCATION_TYPE_MAX",                                         {"hipMemLocationTypeMax",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0x7FFFFFFF
 
@@ -2986,14 +2986,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_MEMCPY_SRC_ACCESS_ORDER_MAX",                                   {"HIP_MEMCPY_SRC_ACCESS_ORDER_MAX",                          "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   // cudaMemcpyFlags
-  {"CUmemcpyFlags",                                                    {"hipMemcpyFlags",                                           "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CUmemcpyFlags",                                                    {"hipMemcpyFlags",                                           "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
   //
-  {"CUmemcpyFlags_enum",                                               {"hipMemcpyFlags",                                           "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CUmemcpyFlags_enum",                                               {"hipMemcpyFlags",                                           "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
   // CUmemcpyFlags enum values
   // cudaMemcpyFlagDefault
-  {"CU_MEMCPY_FLAG_DEFAULT",                                           {"HIP_MEMCPY_FLAG_DEFAULT",                                  "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CU_MEMCPY_FLAG_DEFAULT",                                           {"hipMemcpyFlagDefault",                                     "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
   // cudaMemcpyFlagPreferOverlapWithCompute
-  {"CU_MEMCPY_FLAG_PREFER_OVERLAP_WITH_COMPUTE",                       {"HIP_MEMCPY_FLAG_PREFER_OVERLAP_WITH_COMPUTE",              "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CU_MEMCPY_FLAG_PREFER_OVERLAP_WITH_COMPUTE",                       {"hipMemcpyFlagPreferOverlapWithCompute",                    "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
 
   //
   {"CUmemcpy3DOperandType",                                            {"hipMemcpy3DOperandType",                                   "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
