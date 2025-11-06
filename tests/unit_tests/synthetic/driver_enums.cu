@@ -1302,6 +1302,30 @@ int main() {
   CUmemcpyFlags_enum memcpyFlags_enum;
   CUmemcpyFlags MemcpyFlagDefault = CU_MEMCPY_FLAG_DEFAULT;
   CUmemcpyFlags MemcpyFlagPreferOverlapWithCompute = CU_MEMCPY_FLAG_PREFER_OVERLAP_WITH_COMPUTE;
+
+  // CHECK: hipMemcpySrcAccessOrder MemcpySrcAccessOrder;
+  // CHECK-NEXT: hipMemcpySrcAccessOrder MemcpySrcAccessOrderInvalid = hipMemcpySrcAccessOrderInvalid;
+  // CHECK-NEXT: hipMemcpySrcAccessOrder MemcpySrcAccessOrderStream = hipMemcpySrcAccessOrderStream;
+  // CHECK-NEXT: hipMemcpySrcAccessOrder MemcpySrcAccessOrderDuringApiCall = hipMemcpySrcAccessOrderDuringApiCall;
+  // CHECK-NEXT: hipMemcpySrcAccessOrder MemcpySrcAccessOrderAny = hipMemcpySrcAccessOrderAny;
+  // CHECK-NEXT: hipMemcpySrcAccessOrder MemcpySrcAccessOrderMax = hipMemcpySrcAccessOrderMax;
+  CUmemcpySrcAccessOrder MemcpySrcAccessOrder;
+  CUmemcpySrcAccessOrder MemcpySrcAccessOrderInvalid = CU_MEMCPY_SRC_ACCESS_ORDER_INVALID;
+  CUmemcpySrcAccessOrder MemcpySrcAccessOrderStream = CU_MEMCPY_SRC_ACCESS_ORDER_STREAM;
+  CUmemcpySrcAccessOrder MemcpySrcAccessOrderDuringApiCall = CU_MEMCPY_SRC_ACCESS_ORDER_DURING_API_CALL;
+  CUmemcpySrcAccessOrder MemcpySrcAccessOrderAny = CU_MEMCPY_SRC_ACCESS_ORDER_ANY;
+  CUmemcpySrcAccessOrder MemcpySrcAccessOrderMax = CU_MEMCPY_SRC_ACCESS_ORDER_MAX;
+
+  // CHECK: hipMemcpy3DOperandType memcpy3DOperandType;
+  // CHECK-NEXT: hipMemcpy3DOperandType memcpy3DOperandType_enum;
+  // CHECK-NEXT: hipMemcpy3DOperandType MemcpyOperandTypePointer = hipMemcpyOperandTypePointer;
+  // CHECK-NEXT: hipMemcpy3DOperandType MemcpyOperandTypeArray = hipMemcpyOperandTypeArray;
+  // CHECK-NEXT: hipMemcpy3DOperandType MemcpyOperandTypeMax = hipMemcpyOperandTypeMax;
+  CUmemcpy3DOperandType memcpy3DOperandType;
+  CUmemcpy3DOperandType_enum memcpy3DOperandType_enum;
+  CUmemcpy3DOperandType MemcpyOperandTypePointer = CU_MEMCPY_OPERAND_TYPE_POINTER;
+  CUmemcpy3DOperandType MemcpyOperandTypeArray = CU_MEMCPY_OPERAND_TYPE_ARRAY;
+  CUmemcpy3DOperandType MemcpyOperandTypeMax = CU_MEMCPY_OPERAND_TYPE_MAX;
 #endif
 
 #if CUDA_VERSION >= 13000

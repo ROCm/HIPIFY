@@ -494,9 +494,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUcheckpointGpuPair",                                              {"hipCheckpointGpuPair",                                     "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   // cudaMemcpyAttributes
-  {"CUmemcpyAttributes_st",                                            {"hipMemcpyAttributes",                                      "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CUmemcpyAttributes_st",                                            {"hipMemcpyAttributes",                                      "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
   // cudaMemcpyAttributes
-  {"CUmemcpyAttributes",                                               {"hipMemcpyAttributes",                                      "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CUmemcpyAttributes",                                               {"hipMemcpyAttributes",                                      "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
+  // cudaMemcpyAttributes
+  {"CUmemcpyAttributes_v1",                                            {"hipMemcpyAttributes",                                      "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
 
   //
   {"CUcheckpointUnlockArgs_st",                                        {"hipCheckpointUnlockArgs",                                  "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
@@ -504,9 +506,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUcheckpointUnlockArgs",                                           {"hipCheckpointUnlockArgs",                                  "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   // cudaOffset3D
-  {"CUoffset3D_st",                                                    {"hipOffset3D",                                              "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CUoffset3D_st",                                                    {"hipOffset3D",                                              "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
   // cudaOffset3D
-  {"CUoffset3D",                                                       {"hipOffset3D",                                              "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CUoffset3D",                                                       {"hipOffset3D",                                              "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
+  // cudaOffset3D
+  {"CUoffset3D_v1",                                                    {"hipOffset3D",                                              "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
 
   //
   {"CUextent3D_st",                                                    {"hipExtent3D",                                              "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
@@ -514,14 +518,18 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUextent3D",                                                       {"hipExtent3D",                                              "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   // cudaMemcpy3DOperand
-  {"CUmemcpy3DOperand_st",                                             {"hipMemcpy3DOperand",                                       "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CUmemcpy3DOperand_st",                                             {"hipMemcpy3DOperand",                                       "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
   // cudaMemcpy3DOperand
-  {"CUmemcpy3DOperand",                                                {"hipMemcpy3DOperand",                                       "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CUmemcpy3DOperand",                                                {"hipMemcpy3DOperand",                                       "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
+  // cudaMemcpy3DOperand
+  {"CUmemcpy3DOperand_v1",                                             {"hipMemcpy3DOperand",                                       "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
 
   // cudaMemcpy3DBatchOp
-  {"CUDA_MEMCPY3D_BATCH_OP_st",                                        {"HIP_MEMCPY3D_BATCH_OP",                                    "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CUDA_MEMCPY3D_BATCH_OP_st",                                        {"hipMemcpy3DBatchOp",                                       "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
   // cudaMemcpy3DBatchOp
-  {"CUDA_MEMCPY3D_BATCH_OP",                                           {"HIP_MEMCPY3D_BATCH_OP",                                    "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CUDA_MEMCPY3D_BATCH_OP",                                           {"hipMemcpy3DBatchOp",                                       "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
+  // cudaMemcpy3DBatchOp
+  {"CUDA_MEMCPY3D_BATCH_OP_v1",                                        {"hipMemcpy3DBatchOp",                                       "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
 
   //
   {"CUmemDecompressParams_st",                                         {"hipMemDecompressParams",                                   "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
@@ -2970,20 +2978,20 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_PROCESS_STATE_FAILED",                                          {"HIP_PROCESS_STATE_FAILED",                                 "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   // cudaMemcpySrcAccessOrder
-  {"CUmemcpySrcAccessOrder",                                           {"hipMemcpySrcAccessOrder",                                  "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CUmemcpySrcAccessOrder",                                           {"hipMemcpySrcAccessOrder",                                  "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
   //
-  {"CUmemcpySrcAccessOrder_enum",                                      {"hipMemcpySrcAccessOrder",                                  "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CUmemcpySrcAccessOrder_enum",                                      {"hipMemcpySrcAccessOrder",                                  "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
   // CUmemcpySrcAccessOrder enum values
   // cudaMemcpySrcAccessOrderInvalid
-  {"CU_MEMCPY_SRC_ACCESS_ORDER_INVALID",                               {"HIP_MEMCPY_SRC_ACCESS_ORDER_INVALID",                      "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CU_MEMCPY_SRC_ACCESS_ORDER_INVALID",                               {"hipMemcpySrcAccessOrderInvalid",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
   // cudaMemcpySrcAccessOrderStream
-  {"CU_MEMCPY_SRC_ACCESS_ORDER_STREAM",                                {"HIP_MEMCPY_SRC_ACCESS_ORDER_STREAM",                       "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CU_MEMCPY_SRC_ACCESS_ORDER_STREAM",                                {"hipMemcpySrcAccessOrderStream",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
   // cudaMemcpySrcAccessOrderDuringApiCall
-  {"CU_MEMCPY_SRC_ACCESS_ORDER_DURING_API_CALL",                       {"HIP_MEMCPY_SRC_ACCESS_ORDER_DURING_API_CALL",              "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CU_MEMCPY_SRC_ACCESS_ORDER_DURING_API_CALL",                       {"hipMemcpySrcAccessOrderDuringApiCall",                     "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
   // cudaMemcpySrcAccessOrderAny
-  {"CU_MEMCPY_SRC_ACCESS_ORDER_ANY",                                   {"HIP_MEMCPY_SRC_ACCESS_ORDER_ANY",                          "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CU_MEMCPY_SRC_ACCESS_ORDER_ANY",                                   {"hipMemcpySrcAccessOrderAny",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
   // cudaMemcpySrcAccessOrderMax
-  {"CU_MEMCPY_SRC_ACCESS_ORDER_MAX",                                   {"HIP_MEMCPY_SRC_ACCESS_ORDER_MAX",                          "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CU_MEMCPY_SRC_ACCESS_ORDER_MAX",                                   {"hipMemcpySrcAccessOrderMax",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
 
   // cudaMemcpyFlags
   {"CUmemcpyFlags",                                                    {"hipMemcpyFlags",                                           "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
@@ -2995,17 +3003,17 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaMemcpyFlagPreferOverlapWithCompute
   {"CU_MEMCPY_FLAG_PREFER_OVERLAP_WITH_COMPUTE",                       {"hipMemcpyFlagPreferOverlapWithCompute",                    "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
 
+  // cudaMemcpy3DOperandType
+  {"CUmemcpy3DOperandType",                                            {"hipMemcpy3DOperandType",                                   "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
   //
-  {"CUmemcpy3DOperandType",                                            {"hipMemcpy3DOperandType",                                   "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-  //
-  {"CUmemcpy3DOperandType_enum",                                       {"hipMemcpy3DOperandType",                                   "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CUmemcpy3DOperandType_enum",                                       {"hipMemcpy3DOperandType",                                   "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
   // CUmemcpy3DOperandType enum values
-  //
-  {"CU_MEMCPY_OPERAND_TYPE_POINTER",                                   {"HIP_MEMCPY_OPERAND_TYPE_POINTER",                          "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-  //
-  {"CU_MEMCPY_OPERAND_TYPE_ARRAY",                                     {"HIP_MEMCPY_OPERAND_TYPE_ARRAY",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-  //
-  {"CU_MEMCPY_OPERAND_TYPE_MAX",                                       {"HIP_MEMCPY_OPERAND_TYPE_MAX",                              "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // cudaMemcpyOperandTypePointer
+  {"CU_MEMCPY_OPERAND_TYPE_POINTER",                                   {"hipMemcpyOperandTypePointer",                              "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
+  // cudaMemcpyOperandTypeArray
+  {"CU_MEMCPY_OPERAND_TYPE_ARRAY",                                     {"hipMemcpyOperandTypeArray",                                "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
+  // cudaMemcpyOperandTypeMax
+  {"CU_MEMCPY_OPERAND_TYPE_MAX",                                       {"hipMemcpyOperandTypeMax",                                  "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
 
   // cudaGraphChildGraphNodeOwnership
   {"CUgraphChildGraphNodeOwnership",                                   {"hipGraphChildGraphNodeOwnership",                          "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
@@ -3142,19 +3150,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUasyncCallback",                                                  {"hipAsyncCallback",                                         "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   //
-  {"CUmemcpyAttributes_v1",                                            {"hipMemcpyAttributes",                                      "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-
-  //
-  {"CUoffset3D_v1",                                                    {"hipOffset3D",                                              "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-
-  //
   {"CUextent3D_v1",                                                    {"hipExtent3D",                                              "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-
-  //
-  {"CUmemcpy3DOperand_v1",                                             {"hipMemcpy3DOperand",                                       "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-
-  //
-  {"CUDA_MEMCPY3D_BATCH_OP_v1",                                        {"HIP_MEMCPY3D_BATCH_OP",                                    "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   //
   {"CUlogsCallback",                                                   {"hipLogsCallback",                                          "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
