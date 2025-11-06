@@ -85,6 +85,9 @@ int main() {
   // CHECK: hipUUID_t uuid_st;
   CUuuid_st uuid_st;
 
+  // CHECK: hipMemcpy3DPeerParms Memcpy3DPeerParms;
+  cudaMemcpy3DPeerParms Memcpy3DPeerParms;
+
 #if CUDA_VERSION >= 9000 && CUDA_VERSION < 13000
   // CHECK: hipLaunchParams LaunchParams;
   cudaLaunchParams LaunchParams;
@@ -237,6 +240,20 @@ int main() {
   // CHECK-NEXT: hipGraphEdgeData graphEdgeData;
   cudaGraphEdgeData_st graphEdgeData_st;
   cudaGraphEdgeData graphEdgeData;
+#endif
+
+#if CUDA_VERSION >= 12080
+  // CHECK: hipMemcpyAttributes MemcpyAttributes;
+  cudaMemcpyAttributes MemcpyAttributes;
+
+  // CHECK: hipOffset3D Offset3D;
+  cudaOffset3D Offset3D;
+
+  // CHECK: hipMemcpy3DOperand Memcpy3DOperand;
+  cudaMemcpy3DOperand Memcpy3DOperand;
+
+  // CHECK: hipMemcpy3DBatchOp Memcpy3DBatchOp;
+  cudaMemcpy3DBatchOp Memcpy3DBatchOp;
 #endif
 
   return 0;

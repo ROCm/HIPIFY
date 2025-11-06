@@ -400,5 +400,35 @@ int main() {
   CUgraphEdgeData graphEdgeData;
 #endif
 
+#if CUDA_VERSION >= 12080
+  // CHECK: hipMemcpyAttributes memcpyAttributes_st;
+  // CHECK-NEXT: hipMemcpyAttributes memcpyAttributes;
+  // CHECK-NEXT: hipMemcpyAttributes memcpyAttributes_v1;
+  CUmemcpyAttributes_st memcpyAttributes_st;
+  CUmemcpyAttributes memcpyAttributes;
+  CUmemcpyAttributes_v1 memcpyAttributes_v1;
+
+  // CHECK: hipOffset3D offset3D;
+  // CHECK-NEXT: hipOffset3D offset3D_st;
+  // CHECK-NEXT: hipOffset3D offset3D_v1;
+  CUoffset3D offset3D;
+  CUoffset3D_st offset3D_st;
+  CUoffset3D_v1 offset3D_v1;
+
+  // CHECK: hipMemcpy3DOperand memcpy3DOperand;
+  // CHECK-NEXT: hipMemcpy3DOperand memcpy3DOperand_st;
+  // CHECK-NEXT: hipMemcpy3DOperand memcpy3DOperand_v1;
+  CUmemcpy3DOperand memcpy3DOperand;
+  CUmemcpy3DOperand_st memcpy3DOperand_st;
+  CUmemcpy3DOperand_v1  memcpy3DOperand_v1;
+
+  // CHECK: hipMemcpy3DBatchOp Memcpy3DBatchOp;
+  // CHECK-NEXT: hipMemcpy3DBatchOp Memcpy3DBatchOp_st;
+  // CHECK-NEXT: hipMemcpy3DBatchOp Memcpy3DBatchOp_v1;
+  CUDA_MEMCPY3D_BATCH_OP Memcpy3DBatchOp;
+  CUDA_MEMCPY3D_BATCH_OP_st Memcpy3DBatchOp_st;
+  CUDA_MEMCPY3D_BATCH_OP_v1  Memcpy3DBatchOp_v1;
+#endif
+
   return 0;
 }

@@ -1695,9 +1695,24 @@ my %experimental_funcs = (
     "fftw_plan_dft" => "7.1.0",
     "fftw_plan" => "7.1.0",
     "fftw_complex" => "7.1.0",
+    "cudaOffset3D" => "7.1.0",
+    "cudaMemcpySrcAccessOrderStream" => "7.1.0",
+    "cudaMemcpySrcAccessOrderMax" => "7.1.0",
+    "cudaMemcpySrcAccessOrderInvalid" => "7.1.0",
+    "cudaMemcpySrcAccessOrderDuringApiCall" => "7.1.0",
+    "cudaMemcpySrcAccessOrderAny" => "7.1.0",
+    "cudaMemcpySrcAccessOrder" => "7.1.0",
+    "cudaMemcpyOperandTypePointer" => "7.1.0",
+    "cudaMemcpyOperandTypeMax" => "7.1.0",
+    "cudaMemcpyOperandTypeArray" => "7.1.0",
     "cudaMemcpyFlags" => "7.1.0",
     "cudaMemcpyFlagPreferOverlapWithCompute" => "7.1.0",
     "cudaMemcpyFlagDefault" => "7.1.0",
+    "cudaMemcpyAttributes" => "7.1.0",
+    "cudaMemcpy3DPeerParms" => "7.1.0",
+    "cudaMemcpy3DOperandType" => "7.1.0",
+    "cudaMemcpy3DOperand" => "7.1.0",
+    "cudaMemcpy3DBatchOp" => "7.1.0",
     "cudaMemLocationTypeNone" => "7.1.0",
     "cudaMemLocationTypeHostNumaCurrent" => "7.1.0",
     "cudaMemLocationTypeHostNuma" => "7.1.0",
@@ -1712,14 +1727,38 @@ my %experimental_funcs = (
     "FFTW_ESTIMATE" => "7.1.0",
     "FFTW_DESTROY_INPUT" => "7.1.0",
     "FFTW_BACKWARD" => "7.1.0",
+    "CUoffset3D_v1" => "7.1.0",
+    "CUoffset3D_st" => "7.1.0",
+    "CUoffset3D" => "7.1.0",
+    "CUmemcpySrcAccessOrder_enum" => "7.1.0",
+    "CUmemcpySrcAccessOrder" => "7.1.0",
     "CUmemcpyFlags_enum" => "7.1.0",
     "CUmemcpyFlags" => "7.1.0",
+    "CUmemcpyAttributes_v1" => "7.1.0",
+    "CUmemcpyAttributes_st" => "7.1.0",
+    "CUmemcpyAttributes" => "7.1.0",
+    "CUmemcpy3DOperand_v1" => "7.1.0",
+    "CUmemcpy3DOperand_st" => "7.1.0",
+    "CUmemcpy3DOperandType_enum" => "7.1.0",
+    "CUmemcpy3DOperandType" => "7.1.0",
+    "CUmemcpy3DOperand" => "7.1.0",
     "CU_MEM_LOCATION_TYPE_NONE" => "7.1.0",
     "CU_MEM_LOCATION_TYPE_HOST_NUMA_CURRENT" => "7.1.0",
     "CU_MEM_LOCATION_TYPE_HOST_NUMA" => "7.1.0",
     "CU_MEM_LOCATION_TYPE_HOST" => "7.1.0",
+    "CU_MEMCPY_SRC_ACCESS_ORDER_STREAM" => "7.1.0",
+    "CU_MEMCPY_SRC_ACCESS_ORDER_MAX" => "7.1.0",
+    "CU_MEMCPY_SRC_ACCESS_ORDER_INVALID" => "7.1.0",
+    "CU_MEMCPY_SRC_ACCESS_ORDER_DURING_API_CALL" => "7.1.0",
+    "CU_MEMCPY_SRC_ACCESS_ORDER_ANY" => "7.1.0",
+    "CU_MEMCPY_OPERAND_TYPE_POINTER" => "7.1.0",
+    "CU_MEMCPY_OPERAND_TYPE_MAX" => "7.1.0",
+    "CU_MEMCPY_OPERAND_TYPE_ARRAY" => "7.1.0",
     "CU_MEMCPY_FLAG_PREFER_OVERLAP_WITH_COMPUTE" => "7.1.0",
     "CU_MEMCPY_FLAG_DEFAULT" => "7.1.0",
+    "CUDA_MEMCPY3D_BATCH_OP_v1" => "7.1.0",
+    "CUDA_MEMCPY3D_BATCH_OP_st" => "7.1.0",
+    "CUDA_MEMCPY3D_BATCH_OP" => "7.1.0",
     "CUBLASLT_EPILOGUE_RELU_AUX_BIAS" => "7.1.0",
     "CUBLASLT_EPILOGUE_RELU_AUX" => "7.1.0"
 );
@@ -1871,9 +1910,32 @@ sub experimentalSubstitutions {
     subst("fftw_plan_dft_r2c_1d", "fftw_plan_dft_r2c_1d", "library");
     subst("fftw_plan_dft_r2c_2d", "fftw_plan_dft_r2c_2d", "library");
     subst("fftw_plan_dft_r2c_3d", "fftw_plan_dft_r2c_3d", "library");
+    subst("CUDA_MEMCPY3D_BATCH_OP", "hipMemcpy3DBatchOp", "type");
+    subst("CUDA_MEMCPY3D_BATCH_OP_st", "hipMemcpy3DBatchOp", "type");
+    subst("CUDA_MEMCPY3D_BATCH_OP_v1", "hipMemcpy3DBatchOp", "type");
+    subst("CUmemcpy3DOperand", "hipMemcpy3DOperand", "type");
+    subst("CUmemcpy3DOperandType", "hipMemcpy3DOperandType", "type");
+    subst("CUmemcpy3DOperandType_enum", "hipMemcpy3DOperandType", "type");
+    subst("CUmemcpy3DOperand_st", "hipMemcpy3DOperand", "type");
+    subst("CUmemcpy3DOperand_v1", "hipMemcpy3DOperand", "type");
+    subst("CUmemcpyAttributes", "hipMemcpyAttributes", "type");
+    subst("CUmemcpyAttributes_st", "hipMemcpyAttributes", "type");
+    subst("CUmemcpyAttributes_v1", "hipMemcpyAttributes", "type");
     subst("CUmemcpyFlags", "hipMemcpyFlags", "type");
     subst("CUmemcpyFlags_enum", "hipMemcpyFlags", "type");
+    subst("CUmemcpySrcAccessOrder", "hipMemcpySrcAccessOrder", "type");
+    subst("CUmemcpySrcAccessOrder_enum", "hipMemcpySrcAccessOrder", "type");
+    subst("CUoffset3D", "hipOffset3D", "type");
+    subst("CUoffset3D_st", "hipOffset3D", "type");
+    subst("CUoffset3D_v1", "hipOffset3D", "type");
+    subst("cudaMemcpy3DBatchOp", "hipMemcpy3DBatchOp", "type");
+    subst("cudaMemcpy3DOperand", "hipMemcpy3DOperand", "type");
+    subst("cudaMemcpy3DOperandType", "hipMemcpy3DOperandType", "type");
+    subst("cudaMemcpy3DPeerParms", "hipMemcpy3DPeerParms", "type");
+    subst("cudaMemcpyAttributes", "hipMemcpyAttributes", "type");
     subst("cudaMemcpyFlags", "hipMemcpyFlags", "type");
+    subst("cudaMemcpySrcAccessOrder", "hipMemcpySrcAccessOrder", "type");
+    subst("cudaOffset3D", "hipOffset3D", "type");
     subst("fftw_complex", "fftw_complex", "type");
     subst("fftw_plan", "fftw_plan", "type");
     subst("fftwf_complex", "fftwf_complex", "type");
@@ -1882,6 +1944,14 @@ sub experimentalSubstitutions {
     subst("CUBLASLT_EPILOGUE_RELU_AUX_BIAS", "HIPBLASLT_EPILOGUE_RELU_AUX_BIAS", "numeric_literal");
     subst("CU_MEMCPY_FLAG_DEFAULT", "hipMemcpyFlagDefault", "numeric_literal");
     subst("CU_MEMCPY_FLAG_PREFER_OVERLAP_WITH_COMPUTE", "hipMemcpyFlagPreferOverlapWithCompute", "numeric_literal");
+    subst("CU_MEMCPY_OPERAND_TYPE_ARRAY", "hipMemcpyOperandTypeArray", "numeric_literal");
+    subst("CU_MEMCPY_OPERAND_TYPE_MAX", "hipMemcpyOperandTypeMax", "numeric_literal");
+    subst("CU_MEMCPY_OPERAND_TYPE_POINTER", "hipMemcpyOperandTypePointer", "numeric_literal");
+    subst("CU_MEMCPY_SRC_ACCESS_ORDER_ANY", "hipMemcpySrcAccessOrderAny", "numeric_literal");
+    subst("CU_MEMCPY_SRC_ACCESS_ORDER_DURING_API_CALL", "hipMemcpySrcAccessOrderDuringApiCall", "numeric_literal");
+    subst("CU_MEMCPY_SRC_ACCESS_ORDER_INVALID", "hipMemcpySrcAccessOrderInvalid", "numeric_literal");
+    subst("CU_MEMCPY_SRC_ACCESS_ORDER_MAX", "hipMemcpySrcAccessOrderMax", "numeric_literal");
+    subst("CU_MEMCPY_SRC_ACCESS_ORDER_STREAM", "hipMemcpySrcAccessOrderStream", "numeric_literal");
     subst("CU_MEM_LOCATION_TYPE_HOST", "hipMemLocationTypeHost", "numeric_literal");
     subst("CU_MEM_LOCATION_TYPE_HOST_NUMA", "hipMemLocationTypeHostNuma", "numeric_literal");
     subst("CU_MEM_LOCATION_TYPE_HOST_NUMA_CURRENT", "hipMemLocationTypeHostNumaCurrent", "numeric_literal");
@@ -1892,6 +1962,14 @@ sub experimentalSubstitutions {
     subst("cudaMemLocationTypeNone", "hipMemLocationTypeNone", "numeric_literal");
     subst("cudaMemcpyFlagDefault", "hipMemcpyFlagDefault", "numeric_literal");
     subst("cudaMemcpyFlagPreferOverlapWithCompute", "hipMemcpyFlagPreferOverlapWithCompute", "numeric_literal");
+    subst("cudaMemcpyOperandTypeArray", "hipMemcpyOperandTypeArray", "numeric_literal");
+    subst("cudaMemcpyOperandTypeMax", "hipMemcpyOperandTypeMax", "numeric_literal");
+    subst("cudaMemcpyOperandTypePointer", "hipMemcpyOperandTypePointer", "numeric_literal");
+    subst("cudaMemcpySrcAccessOrderAny", "hipMemcpySrcAccessOrderAny", "numeric_literal");
+    subst("cudaMemcpySrcAccessOrderDuringApiCall", "hipMemcpySrcAccessOrderDuringApiCall", "numeric_literal");
+    subst("cudaMemcpySrcAccessOrderInvalid", "hipMemcpySrcAccessOrderInvalid", "numeric_literal");
+    subst("cudaMemcpySrcAccessOrderMax", "hipMemcpySrcAccessOrderMax", "numeric_literal");
+    subst("cudaMemcpySrcAccessOrderStream", "hipMemcpySrcAccessOrderStream", "numeric_literal");
     subst("FFTW_BACKWARD", "FFTW_BACKWARD", "define");
     subst("FFTW_DESTROY_INPUT", "FFTW_DESTROY_INPUT", "define");
     subst("FFTW_ESTIMATE", "FFTW_ESTIMATE", "define");
@@ -11594,7 +11672,6 @@ sub warnRemovedFunctions {
     "cudaPreferBinary",
     "cudaOutputMode_t",
     "cudaOutputMode",
-    "cudaOffset3D",
     "cudaOccupancyMaxPotentialClusterSize",
     "cudaOccupancyMaxActiveClusters",
     "cudaOccupancyAvailableDynamicSMemPerBlock",
@@ -11603,25 +11680,11 @@ sub warnRemovedFunctions {
     "cudaMemsetParamsV2",
     "cudaMemoryTypeUnregistered",
     "cudaMemcpyToArrayAsync",
-    "cudaMemcpySrcAccessOrderStream",
-    "cudaMemcpySrcAccessOrderMax",
-    "cudaMemcpySrcAccessOrderInvalid",
-    "cudaMemcpySrcAccessOrderDuringApiCall",
-    "cudaMemcpySrcAccessOrderAny",
-    "cudaMemcpySrcAccessOrder",
-    "cudaMemcpyOperandTypePointer",
-    "cudaMemcpyOperandTypeMax",
-    "cudaMemcpyOperandTypeArray",
     "cudaMemcpyFromArrayAsync",
     "cudaMemcpyBatchAsync",
-    "cudaMemcpyAttributes",
     "cudaMemcpyArrayToArray",
-    "cudaMemcpy3DPeerParms",
     "cudaMemcpy3DPeerAsync",
     "cudaMemcpy3DPeer",
-    "cudaMemcpy3DOperandType",
-    "cudaMemcpy3DOperand",
-    "cudaMemcpy3DBatchOp",
     "cudaMemcpy3DBatchAsync",
     "cudaMemSetMemPool",
     "cudaMemRangeAttributePreferredLocationType",
@@ -12643,9 +12706,6 @@ sub warnRemovedFunctions {
     "CUshared_carveout",
     "CUprocessState_enum",
     "CUprocessState",
-    "CUoffset3D_v1",
-    "CUoffset3D_st",
-    "CUoffset3D",
     "CUoccupancy_flags_enum",
     "CUoccupancy_flags",
     "CUmulticastObjectProp_v1",
@@ -12655,16 +12715,6 @@ sub warnRemovedFunctions {
     "CUmulticastGranularity_flags",
     "CUmoduleLoadingMode_enum",
     "CUmoduleLoadingMode",
-    "CUmemcpySrcAccessOrder_enum",
-    "CUmemcpySrcAccessOrder",
-    "CUmemcpyAttributes_v1",
-    "CUmemcpyAttributes_st",
-    "CUmemcpyAttributes",
-    "CUmemcpy3DOperand_v1",
-    "CUmemcpy3DOperand_st",
-    "CUmemcpy3DOperandType_enum",
-    "CUmemcpy3DOperandType",
-    "CUmemcpy3DOperand",
     "CUmemFabricHandle_v1",
     "CUmemFabricHandle_st",
     "CUmemFabricHandle",
@@ -12948,14 +12998,6 @@ sub warnRemovedFunctions {
     "CU_MEM_CREATE_USAGE_HW_DECOMPRESS",
     "CU_MEM_ALLOCATION_TYPE_MANAGED",
     "CU_MEM_ACCESS_FLAGS_PROT_MAX",
-    "CU_MEMCPY_SRC_ACCESS_ORDER_STREAM",
-    "CU_MEMCPY_SRC_ACCESS_ORDER_MAX",
-    "CU_MEMCPY_SRC_ACCESS_ORDER_INVALID",
-    "CU_MEMCPY_SRC_ACCESS_ORDER_DURING_API_CALL",
-    "CU_MEMCPY_SRC_ACCESS_ORDER_ANY",
-    "CU_MEMCPY_OPERAND_TYPE_POINTER",
-    "CU_MEMCPY_OPERAND_TYPE_MAX",
-    "CU_MEMCPY_OPERAND_TYPE_ARRAY",
     "CU_LOG_LEVEL_WARNING",
     "CU_LOG_LEVEL_ERROR",
     "CU_LIMIT_SHMEM_SIZE",
@@ -13464,9 +13506,6 @@ sub warnRemovedFunctions {
     "CUDA_MEMCPY3D_PEER_v1",
     "CUDA_MEMCPY3D_PEER_st",
     "CUDA_MEMCPY3D_PEER",
-    "CUDA_MEMCPY3D_BATCH_OP_v1",
-    "CUDA_MEMCPY3D_BATCH_OP_st",
-    "CUDA_MEMCPY3D_BATCH_OP",
     "CUDA_KERNEL_NODE_PARAMS_v3_st",
     "CUDA_KERNEL_NODE_PARAMS_v3",
     "CUDA_KERNEL_NODE_PARAMS_v2_st",

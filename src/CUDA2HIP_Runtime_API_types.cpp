@@ -96,7 +96,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaMemcpy3DParms",                                                {"hipMemcpy3DParms",                                         "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES}},
 
   // no analogue
-  {"cudaMemcpy3DPeerParms",                                            {"hipMemcpy3DPeerParms",                                     "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"cudaMemcpy3DPeerParms",                                            {"hipMemcpy3DPeerParms",                                     "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
 
   //
   {"cudaMemsetParams",                                                 {"hipMemsetParams",                                          "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES}},
@@ -271,7 +271,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaGraphKernelNodeUpdate",                                        {"hipGraphKernelNodeUpdate",                                 "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   // CUmemcpyAttributes
-  {"cudaMemcpyAttributes",                                             {"hipMemcpyAttributes",                                      "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"cudaMemcpyAttributes",                                             {"hipMemcpyAttributes",                                      "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
 
   // 2. Unions
 
@@ -318,13 +318,13 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaAsyncNotificationInfo_t",                                      {"hipAsyncNotificationInfo",                                 "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   // CUoffset3D
-  {"cudaOffset3D",                                                     {"hipOffset3D",                                              "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"cudaOffset3D",                                                     {"hipOffset3D",                                              "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
 
   // CUmemcpy3DOperand
-  {"cudaMemcpy3DOperand",                                              {"hipMemcpy3DOperand",                                       "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"cudaMemcpy3DOperand",                                              {"hipMemcpy3DOperand",                                       "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
 
   // CUDA_MEMCPY3D_BATCH_OP
-  {"cudaMemcpy3DBatchOp",                                              {"HIP_MEMCPY3D_BATCH_OP",                                    "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"cudaMemcpy3DBatchOp",                                              {"hipMemcpy3DBatchOp",                                       "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
 
   // CUlibraryHostUniversalFunctionAndDataTable
   {"cudalibraryHostUniversalFunctionAndDataTable",                     {"hipLibraryHostUniversalFunctionAndDataTable",              "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
@@ -2114,28 +2114,28 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaMemcpyFlagPreferOverlapWithCompute",                           {"hipMemcpyFlagPreferOverlapWithCompute",                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
 
   // CUmemcpySrcAccessOrder
-  {"cudaMemcpySrcAccessOrder",                                         {"hipMemcpySrcAccessOrder",                                  "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"cudaMemcpySrcAccessOrder",                                         {"hipMemcpySrcAccessOrder",                                  "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
   // cudaMemcpySrcAccessOrder enum values
   // CU_MEMCPY_SRC_ACCESS_ORDER_INVALID
-  {"cudaMemcpySrcAccessOrderInvalid",                                  {"HIP_MEMCPY_SRC_ACCESS_ORDER_INVALID",                      "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"cudaMemcpySrcAccessOrderInvalid",                                  {"hipMemcpySrcAccessOrderInvalid",                           "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
   // CU_MEMCPY_SRC_ACCESS_ORDER_STREAM
-  {"cudaMemcpySrcAccessOrderStream",                                   {"HIP_MEMCPY_SRC_ACCESS_ORDER_STREAM",                       "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"cudaMemcpySrcAccessOrderStream",                                   {"hipMemcpySrcAccessOrderStream",                            "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
   // CU_MEMCPY_SRC_ACCESS_ORDER_DURING_API_CALL
-  {"cudaMemcpySrcAccessOrderDuringApiCall",                            {"HIP_MEMCPY_SRC_ACCESS_ORDER_DURING_API_CALL",              "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"cudaMemcpySrcAccessOrderDuringApiCall",                            {"hipMemcpySrcAccessOrderDuringApiCall",                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
   // CU_MEMCPY_SRC_ACCESS_ORDER_ANY
-  {"cudaMemcpySrcAccessOrderAny",                                      {"HIP_MEMCPY_SRC_ACCESS_ORDER_ANY",                          "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"cudaMemcpySrcAccessOrderAny",                                      {"hipMemcpySrcAccessOrderAny",                               "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
   // CU_MEMCPY_SRC_ACCESS_ORDER_MAX
-  {"cudaMemcpySrcAccessOrderMax",                                      {"HIP_MEMCPY_SRC_ACCESS_ORDER_MAX",                          "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"cudaMemcpySrcAccessOrderMax",                                      {"hipMemcpySrcAccessOrderMax",                               "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
 
-  //
-  {"cudaMemcpy3DOperandType",                                          {"hipMemcpy3DOperandType",                                   "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-  // cudaMemcpySrcAccessOrder enum values
-  //
-  {"cudaMemcpyOperandTypePointer",                                     {"hipMemcpyOperandTypePointer",                              "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-  //
-  {"cudaMemcpyOperandTypeArray",                                       {"hipMemcpyOperandTypeArray",                                "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-  //
-  {"cudaMemcpyOperandTypeMax",                                         {"hipMemcpyOperandTypeMax",                                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // CUmemcpy3DOperandType
+  {"cudaMemcpy3DOperandType",                                          {"hipMemcpy3DOperandType",                                   "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
+  // cudaMemcpy3DOperandType enum values
+  // CU_MEMCPY_OPERAND_TYPE_POINTER
+  {"cudaMemcpyOperandTypePointer",                                     {"hipMemcpyOperandTypePointer",                              "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
+  // CU_MEMCPY_OPERAND_TYPE_ARRAY
+  {"cudaMemcpyOperandTypeArray",                                       {"hipMemcpyOperandTypeArray",                                "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
+  // CU_MEMCPY_OPERAND_TYPE_MAX
+  {"cudaMemcpyOperandTypeMax",                                         {"hipMemcpyOperandTypeMax",                                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
 
   //
   {"CUDAlogLevel",                                                     {"hipLogLevel",                                              "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
@@ -3703,4 +3703,19 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {
   {"hipMemcpyFlags",                                                   {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipMemcpyFlagDefault",                                             {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipMemcpyFlagPreferOverlapWithCompute",                            {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemcpySrcAccessOrder",                                          {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemcpySrcAccessOrderInvalid",                                   {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemcpySrcAccessOrderStream",                                    {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemcpySrcAccessOrderDuringApiCall",                             {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemcpySrcAccessOrderAny",                                       {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemcpySrcAccessOrderMax",                                       {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemcpyAttributes",                                              {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemcpy3DOperandType",                                           {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemcpyOperandTypePointer",                                      {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemcpyOperandTypeArray",                                        {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemcpyOperandTypeMax",                                          {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipOffset3D",                                                      {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemcpy3DOperand",                                               {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemcpy3DBatchOp",                                               {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemcpy3DPeerParms",                                             {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
 };

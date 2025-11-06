@@ -1010,6 +1010,28 @@ int main() {
   cudaMemcpyFlags MemcpyFlags;
   cudaMemcpyFlags MemcpyFlagDefault = cudaMemcpyFlagDefault;
   cudaMemcpyFlags MemcpyFlagPreferOverlapWithCompute = cudaMemcpyFlagPreferOverlapWithCompute;
+
+  // CHECK: hipMemcpySrcAccessOrder MemcpySrcAccessOrder;
+  // CHECK-NEXT: hipMemcpySrcAccessOrder MemcpySrcAccessOrderInvalid = hipMemcpySrcAccessOrderInvalid;
+  // CHECK-NEXT: hipMemcpySrcAccessOrder MemcpySrcAccessOrderStream = hipMemcpySrcAccessOrderStream;
+  // CHECK-NEXT: hipMemcpySrcAccessOrder MemcpySrcAccessOrderDuringApiCall = hipMemcpySrcAccessOrderDuringApiCall;
+  // CHECK-NEXT: hipMemcpySrcAccessOrder MemcpySrcAccessOrderAny = hipMemcpySrcAccessOrderAny;
+  // CHECK-NEXT: hipMemcpySrcAccessOrder MemcpySrcAccessOrderMax = hipMemcpySrcAccessOrderMax;
+  cudaMemcpySrcAccessOrder MemcpySrcAccessOrder;
+  cudaMemcpySrcAccessOrder MemcpySrcAccessOrderInvalid = cudaMemcpySrcAccessOrderInvalid;
+  cudaMemcpySrcAccessOrder MemcpySrcAccessOrderStream = cudaMemcpySrcAccessOrderStream;
+  cudaMemcpySrcAccessOrder MemcpySrcAccessOrderDuringApiCall = cudaMemcpySrcAccessOrderDuringApiCall;
+  cudaMemcpySrcAccessOrder MemcpySrcAccessOrderAny = cudaMemcpySrcAccessOrderAny;
+  cudaMemcpySrcAccessOrder MemcpySrcAccessOrderMax = cudaMemcpySrcAccessOrderMax;
+
+  // CHECK: hipMemcpy3DOperandType Memcpy3DOperandType;
+  // CHECK-NEXT: hipMemcpy3DOperandType MemcpyOperandTypePointer = hipMemcpyOperandTypePointer;
+  // CHECK-NEXT: hipMemcpy3DOperandType MemcpyOperandTypeArray = hipMemcpyOperandTypeArray;
+  // CHECK-NEXT: hipMemcpy3DOperandType MemcpyOperandTypeMax = hipMemcpyOperandTypeMax;
+  cudaMemcpy3DOperandType Memcpy3DOperandType;
+  cudaMemcpy3DOperandType MemcpyOperandTypePointer = cudaMemcpyOperandTypePointer;
+  cudaMemcpy3DOperandType MemcpyOperandTypeArray = cudaMemcpyOperandTypeArray;
+  cudaMemcpy3DOperandType MemcpyOperandTypeMax = cudaMemcpyOperandTypeMax;
 #endif
 
 #if CUDA_VERSION >= 13000
