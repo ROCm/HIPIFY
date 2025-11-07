@@ -335,6 +335,11 @@ int main() {
   // CHECK-NEXT: hipGraphInstantiateParams GRAPH_INSTANTIATE_PARAMS;
   CUDA_GRAPH_INSTANTIATE_PARAMS_st GRAPH_INSTANTIATE_PARAMS_st;
   CUDA_GRAPH_INSTANTIATE_PARAMS GRAPH_INSTANTIATE_PARAMS;
+
+  // CHECK: ihipKernel_t *kern_st = nullptr;
+// CHECK-NEXT: hipKernel_t kernel;
+  CUkern_st *kern_st = nullptr;
+  CUkernel kernel;
 #endif
 
 #if CUDA_VERSION >= 12020

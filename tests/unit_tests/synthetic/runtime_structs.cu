@@ -212,6 +212,11 @@ int main() {
   cudaGraphInstantiateParams GRAPH_INSTANTIATE_PARAMS;
 #endif
 
+#if CUDA_VERSION >= 12010
+  // CHECK: hipKernel_t Kernel_t;
+  cudaKernel_t Kernel_t;
+#endif
+
 #if CUDA_VERSION >= 12020
   // CHECK: hipExternalSemaphoreSignalNodeParams ExternalSemaphoreSignalNodeParams_v2;
   cudaExternalSemaphoreSignalNodeParamsV2 ExternalSemaphoreSignalNodeParams_v2;

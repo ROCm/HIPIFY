@@ -871,6 +871,15 @@ int main() {
   cudaGPUDirectRDMAWritesOrdering GPU_DIRECT_RDMA_WRITES_ORDERING_NONE = cudaGPUDirectRDMAWritesOrderingNone;
   cudaGPUDirectRDMAWritesOrdering GPU_DIRECT_RDMA_WRITES_ORDERING_OWNER = cudaGPUDirectRDMAWritesOrderingOwner;
   cudaGPUDirectRDMAWritesOrdering GPU_DIRECT_RDMA_WRITES_ORDERING_ALL_DEVICES = cudaGPUDirectRDMAWritesOrderingAllDevices;
+
+  // NOTE [HIP]: Why these numbers implemented as defines and not as enum values like in CUDA?
+  // TODO [HIP]: Consider changing them to enum values in future HIP releases: enum cudaGetDriverEntryPointFlags -> enum hipGetDriverEntryPointFlags
+  // CHECK: int EnableDefault = hipEnableDefault;
+  // CHECK-NEXT: int EnableLegacyStream = hipEnableLegacyStream;
+  // CHECK-NEXT: int EnablePerThreadDefaultStream = hipEnablePerThreadDefaultStream;
+  int EnableDefault = cudaEnableDefault;
+  int EnableLegacyStream = cudaEnableLegacyStream;
+  int EnablePerThreadDefaultStream = cudaEnablePerThreadDefaultStream;
 #endif
 
 #if CUDA_VERSION >= 11040
@@ -936,10 +945,10 @@ int main() {
   cudaLaunchAttributeID LAUNCH_ATTRIBUTE_COOPERATIVE = cudaLaunchAttributeCooperative;
   cudaLaunchAttributeID LAUNCH_ATTRIBUTE_PRIORITY = cudaLaunchAttributePriority;
 
-  // CHECK: hipDriverProcAddressQueryResult driverProcAddressQueryResult;
-  // CHECK-NEXT:hipDriverProcAddressQueryResult GET_PROC_ADDRESS_SUCCESS = HIP_GET_PROC_ADDRESS_SUCCESS;
-  // CHECK-NEXT:hipDriverProcAddressQueryResult GET_PROC_ADDRESS_SYMBOL_NOT_FOUND = HIP_GET_PROC_ADDRESS_SYMBOL_NOT_FOUND;
-  // CHECK-NEXT:hipDriverProcAddressQueryResult GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT = HIP_GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT;
+  // CHECK: hipDriverEntryPointQueryResult driverProcAddressQueryResult;
+  // CHECK-NEXT:hipDriverEntryPointQueryResult GET_PROC_ADDRESS_SUCCESS = hipDriverEntryPointSuccess;
+  // CHECK-NEXT:hipDriverEntryPointQueryResult GET_PROC_ADDRESS_SYMBOL_NOT_FOUND = hipDriverEntryPointSymbolNotFound;
+  // CHECK-NEXT:hipDriverEntryPointQueryResult GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT = hipDriverEntryPointVersionNotSufficent;
   cudaDriverEntryPointQueryResult driverProcAddressQueryResult;
   cudaDriverEntryPointQueryResult GET_PROC_ADDRESS_SUCCESS = cudaDriverEntryPointSuccess;
   cudaDriverEntryPointQueryResult GET_PROC_ADDRESS_SYMBOL_NOT_FOUND = cudaDriverEntryPointSymbolNotFound;

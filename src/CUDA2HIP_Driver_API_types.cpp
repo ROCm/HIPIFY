@@ -375,14 +375,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUlaunchConfig",                                                   {"HIP_LAUNCH_CONFIG",                                        "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES}},
 
   // CUlib_st
-  {"CUlib_st",                                                         {"hipLibraty",                                               "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CUlib_st",                                                         {"ihipLibrary_t",                                            "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
   // cudaLibrary_t
-  {"CUlibrary",                                                        {"hipLibraty",                                               "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CUlibrary",                                                        {"hipLibrary_t",                                             "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
 
   // the same CUkern_st
-  {"CUkern_st",                                                        {"hipKernel",                                                "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CUkern_st",                                                        {"ihipKernel_t",                                             "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
   // cudaKernel_t
-  {"CUkernel",                                                         {"hipKernel",                                                "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CUkernel",                                                         {"hipKernel_t",                                              "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
 
   // cudaGraphInstantiateParams_st
   {"CUDA_GRAPH_INSTANTIATE_PARAMS_st",                                 {"hipGraphInstantiateParams",                                "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES}},
@@ -2436,11 +2436,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUdriverProcAddress_flags_enum",                                   {"hipDriverProcAddress",                                     "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   // CUdriverProcAddress_flags enum values
   // cudaEnableDefault
-  {"CU_GET_PROC_ADDRESS_DEFAULT",                                      {"hipEnableDefault",                                         "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0
+  {"CU_GET_PROC_ADDRESS_DEFAULT",                                      {"hipEnableDefault",                                         "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}}, // 0
   // cudaEnableLegacyStream
-  {"CU_GET_PROC_ADDRESS_LEGACY_STREAM",                                {"hipEnableLegacyStream",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 1 << 0
+  {"CU_GET_PROC_ADDRESS_LEGACY_STREAM",                                {"hipEnableLegacyStream",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}}, // 1 << 0
   // cudaEnablePerThreadDefaultStream
-  {"CU_GET_PROC_ADDRESS_PER_THREAD_DEFAULT_STREAM",                    {"hipEnablePerThreadDefaultStream",                          "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 1 << 1
+  {"CU_GET_PROC_ADDRESS_PER_THREAD_DEFAULT_STREAM",                    {"hipEnablePerThreadDefaultStream",                          "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}}, // 1 << 1
 
   // cudaFlushGPUDirectRDMAWritesOptions
   {"CUflushGPUDirectRDMAWritesOptions",                                {"hipFlushGPUDirectRDMAWritesOptions",                       "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES}},
@@ -4868,4 +4868,8 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {
   {"hipMemRangeFlags",                                                 {HIP_7000, HIP_0,    HIP_0   }},
   {"hipMemRangeFlagDmaBufMappingTypePcie",                             {HIP_7000, HIP_0,    HIP_0   }},
   {"hipLaunchAttributeMax",                                            {HIP_7000, HIP_0,    HIP_0   }},
+  {"ihipLibrary_t",                                                    {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipLibrary_t",                                                     {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"ihipKernel_t",                                                     {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipKernel_t",                                                      {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
 };

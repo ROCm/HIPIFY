@@ -1134,6 +1134,15 @@ int main() {
   CUGPUDirectRDMAWritesOrdering GPU_DIRECT_RDMA_WRITES_ORDERING_NONE = CU_GPU_DIRECT_RDMA_WRITES_ORDERING_NONE;
   CUGPUDirectRDMAWritesOrdering GPU_DIRECT_RDMA_WRITES_ORDERING_OWNER = CU_GPU_DIRECT_RDMA_WRITES_ORDERING_OWNER;
   CUGPUDirectRDMAWritesOrdering GPU_DIRECT_RDMA_WRITES_ORDERING_ALL_DEVICES = CU_GPU_DIRECT_RDMA_WRITES_ORDERING_ALL_DEVICES;
+
+  // NOTE [HIP]: Why these numbers implemented as defines and not as enum values like in CUDA?
+  // TODO [HIP]: Consider changing them to enum values in future HIP releases: enum cudaGetDriverEntryPointFlags -> enum hipGetDriverEntryPointFlags
+  // CHECK: int EnableDefault = hipEnableDefault;
+  // CHECK-NEXT: int EnableLegacyStream = hipEnableLegacyStream;
+  // CHECK-NEXT: int EnablePerThreadDefaultStream = hipEnablePerThreadDefaultStream;
+  int EnableDefault = CU_GET_PROC_ADDRESS_DEFAULT;
+  int EnableLegacyStream = CU_GET_PROC_ADDRESS_LEGACY_STREAM;
+  int EnablePerThreadDefaultStream = CU_GET_PROC_ADDRESS_PER_THREAD_DEFAULT_STREAM;
 #endif
 
 #if CUDA_VERSION >= 11040
