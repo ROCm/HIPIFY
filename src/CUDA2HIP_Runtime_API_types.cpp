@@ -251,10 +251,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CUlaunchMemSyncDomainMap
   {"cudaLaunchMemSyncDomainMap",                                       {"hipLaunchMemSyncDomainMap",                                "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
-  // the same CUkern_st
-  {"CUkern_st",                                                        {"hipKernel",                                                "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   // CUkernel
-  {"cudaKernel_t",                                                     {"hipKernel",                                                "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"cudaKernel_t",                                                     {"hipKernel_t",                                              "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
 
   // CUDA_MEMCPY_NODE_PARAMS
   {"cudaMemcpyNodeParams",                                             {"hipMemcpyNodeParams",                                      "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES}},
@@ -330,7 +328,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudalibraryHostUniversalFunctionAndDataTable",                     {"hipLibraryHostUniversalFunctionAndDataTable",              "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   // CUlibrary
-  {"cudaLibrary_t",                                                    {"hipLibraty",                                               "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"cudaLibrary_t",                                                    {"hipLibrary_t",                                             "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
 
   // 3. Enums
 
@@ -1927,11 +1925,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaGetDriverEntryPointFlags",                                     {"hipGetDriverEntryPointFlags",                              "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   // cudaGetDriverEntryPointFlags enum values
   // CU_GET_PROC_ADDRESS_DEFAULT
-  {"cudaEnableDefault",                                                {"hipEnableDefault",                                         "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0x0
+  {"cudaEnableDefault",                                                {"hipEnableDefault",                                         "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}}, // 0x0
   // CU_GET_PROC_ADDRESS_LEGACY_STREAM
-  {"cudaEnableLegacyStream",                                           {"hipEnableLegacyStream",                                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0x1
+  {"cudaEnableLegacyStream",                                           {"hipEnableLegacyStream",                                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}}, // 0x1
   // CU_GET_PROC_ADDRESS_PER_THREAD_DEFAULT_STREAM
-  {"cudaEnablePerThreadDefaultStream",                                 {"hipEnablePerThreadDefaultStream",                          "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0x2
+  {"cudaEnablePerThreadDefaultStream",                                 {"hipEnablePerThreadDefaultStream",                          "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}}, // 0x2
 
   // CUgraphDebugDot_flags
   {"cudaGraphDebugDotFlags",                                           {"hipGraphDebugDotFlags",                                    "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES}},
@@ -2046,14 +2044,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaGraphInstantiateConditionalHandleUnused",                      {"hipGraphInstantiateConditionalHandleUnused",               "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   // CUdriverProcAddressQueryResult
-  {"cudaDriverEntryPointQueryResult",                                  {"hipDriverProcAddressQueryResult",                           "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES}},
+  {"cudaDriverEntryPointQueryResult",                                  {"hipDriverEntryPointQueryResult",                           "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
   // cudaDriverEntryPointQueryResult enum values
   // CU_GET_PROC_ADDRESS_SUCCESS
-  {"cudaDriverEntryPointSuccess",                                      {"HIP_GET_PROC_ADDRESS_SUCCESS",                              "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}},
+  {"cudaDriverEntryPointSuccess",                                      {"hipDriverEntryPointSuccess",                               "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
   // CU_GET_PROC_ADDRESS_SYMBOL_NOT_FOUND
-  {"cudaDriverEntryPointSymbolNotFound",                               {"HIP_GET_PROC_ADDRESS_SYMBOL_NOT_FOUND",                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}},
+  {"cudaDriverEntryPointSymbolNotFound",                               {"hipDriverEntryPointSymbolNotFound",                        "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
   // CU_GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT
-  {"cudaDriverEntryPointVersionNotSufficent",                          {"HIP_GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT",               "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}},
+  {"cudaDriverEntryPointVersionNotSufficent",                          {"hipDriverEntryPointVersionNotSufficent",                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
 
   // CUlaunchMemSyncDomain
   {"cudaLaunchMemSyncDomain",                                          {"hipLaunchMemSyncDomain",                                   "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
@@ -3092,7 +3090,6 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_TYPE_NAME_VER_MAP 
   {"cudaDevAttrReserved128",                                           {CUDA_121, CUDA_0,   CUDA_0  }},
   {"cudaDevAttrReserved129",                                           {CUDA_121, CUDA_0,   CUDA_0  }},
   {"cudaDevAttrReserved132",                                           {CUDA_121, CUDA_0,   CUDA_0  }},
-  {"CUkern_st",                                                        {CUDA_121, CUDA_0,   CUDA_0  }},
   {"cudaKernel_t",                                                     {CUDA_121, CUDA_0,   CUDA_0  }},
   {"cudaMemcpyNodeParams",                                             {CUDA_122, CUDA_0,   CUDA_0  }},
   {"cudaMemsetParamsV2",                                               {CUDA_122, CUDA_0,   CUDA_0  }},
@@ -3718,4 +3715,11 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {
   {"hipMemcpy3DOperand",                                               {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipMemcpy3DBatchOp",                                               {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipMemcpy3DPeerParms",                                             {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipDriverEntryPointQueryResult",                                   {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipDriverEntryPointSuccess",                                       {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipDriverEntryPointSymbolNotFound",                                {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipDriverEntryPointVersionNotSufficent",                           {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipEnableDefault",                                                 {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipEnableLegacyStream",                                            {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipEnablePerThreadDefaultStream",                                  {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
 };

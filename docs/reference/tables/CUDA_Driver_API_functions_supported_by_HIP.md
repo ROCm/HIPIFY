@@ -723,9 +723,9 @@
 |`CU_FUNC_CACHE_PREFER_L1`| | | | |`hipFuncCachePreferL1`|1.6.0| | | | | |
 |`CU_FUNC_CACHE_PREFER_NONE`| | | | |`hipFuncCachePreferNone`|1.6.0| | | | | |
 |`CU_FUNC_CACHE_PREFER_SHARED`| | | | |`hipFuncCachePreferShared`|1.6.0| | | | | |
-|`CU_GET_PROC_ADDRESS_DEFAULT`|11.3| | | | | | | | | | |
-|`CU_GET_PROC_ADDRESS_LEGACY_STREAM`|11.3| | | | | | | | | | |
-|`CU_GET_PROC_ADDRESS_PER_THREAD_DEFAULT_STREAM`|11.3| | | | | | | | | | |
+|`CU_GET_PROC_ADDRESS_DEFAULT`|11.3| | | |`hipEnableDefault`|7.1.0| | | | |7.1.0|
+|`CU_GET_PROC_ADDRESS_LEGACY_STREAM`|11.3| | | |`hipEnableLegacyStream`|7.1.0| | | | |7.1.0|
+|`CU_GET_PROC_ADDRESS_PER_THREAD_DEFAULT_STREAM`|11.3| | | |`hipEnablePerThreadDefaultStream`|7.1.0| | | | |7.1.0|
 |`CU_GET_PROC_ADDRESS_SUCCESS`|12.0| | | |`HIP_GET_PROC_ADDRESS_SUCCESS`|6.2.0| | | | | |
 |`CU_GET_PROC_ADDRESS_SYMBOL_NOT_FOUND`|12.0| | | |`HIP_GET_PROC_ADDRESS_SYMBOL_NOT_FOUND`|6.2.0| | | | | |
 |`CU_GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT`|12.0| | | |`HIP_GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT`|6.2.0| | | | | |
@@ -1404,8 +1404,8 @@
 |`CUjit_option_enum`| | | | |`hipJitOption`|1.6.0| | | | | |
 |`CUjit_target`| | | | | | | | | | | |
 |`CUjit_target_enum`| | | | | | | | | | | |
-|`CUkern_st`|12.0| | | | | | | | | | |
-|`CUkernel`|12.0| | | | | | | | | | |
+|`CUkern_st`|12.0| | | |`ihipKernel_t`|7.1.0| | | | |7.1.0|
+|`CUkernel`|12.0| | | |`hipKernel_t`|7.1.0| | | | |7.1.0|
 |`CUkernelNodeAttrID`|11.0| | | |`hipKernelNodeAttrID`|5.2.0| | | | | |
 |`CUkernelNodeAttrID_enum`|11.0| | |11.8|`hipKernelNodeAttrID`|5.2.0| | | | | |
 |`CUkernelNodeAttrValue`|11.0| | | |`hipKernelNodeAttrValue`|5.2.0| | | | | |
@@ -1423,8 +1423,8 @@
 |`CUlaunchMemSyncDomainMap`|12.0| | | | | | | | | | |
 |`CUlaunchMemSyncDomainMap_st`|12.0| | | | | | | | | | |
 |`CUlaunchMemSyncDomain_enum`|12.0| | | | | | | | | | |
-|`CUlib_st`|12.0| | | | | | | | | | |
-|`CUlibrary`|12.0| | | | | | | | | | |
+|`CUlib_st`|12.0| | | |`ihipLibrary_t`|7.1.0| | | | |7.1.0|
+|`CUlibrary`|12.0| | | |`hipLibrary_t`|7.1.0| | | | |7.1.0|
 |`CUlibraryHostUniversalFunctionAndDataTable`|12.0| | | | | | | | | | |
 |`CUlibraryHostUniversalFunctionAndDataTable_st`|12.0| | | | | | | | | | |
 |`CUlibraryOption`|12.0| | | | | | | | | | |

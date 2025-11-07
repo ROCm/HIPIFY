@@ -695,7 +695,6 @@
 |`CUgraphExec_st`|10.0| | | |`hipGraphExec`|4.3.0| | | | | |
 |`CUgraphNode_st`|10.0| | | |`hipGraphNode`|4.3.0| | | | | |
 |`CUgraph_st`|10.0| | | |`ihipGraph`|4.3.0| | | | | |
-|`CUkern_st`|12.1| | | | | | | | | | |
 |`CUlogsCallbackEntry_st`|13.0| | | | | | | | | | |
 |`CUstream_st`| | | | |`ihipStream_t`|1.5.0| | | | | |
 |`CUuuid_st`| | | | |`hipUUID_t`|5.2.0| | | | | |
@@ -993,10 +992,10 @@
 |`cudaDeviceScheduleSpin`| | | | |`hipDeviceScheduleSpin`|1.6.0| | | | | |
 |`cudaDeviceScheduleYield`| | | | |`hipDeviceScheduleYield`|1.6.0| | | | | |
 |`cudaDeviceSyncMemops`|12.1| | | | | | | | | | |
-|`cudaDriverEntryPointQueryResult`|12.0| | | |`hipDriverProcAddressQueryResult`|6.2.0| | | | | |
-|`cudaDriverEntryPointSuccess`|12.0| | | |`HIP_GET_PROC_ADDRESS_SUCCESS`|6.2.0| | | | | |
-|`cudaDriverEntryPointSymbolNotFound`|12.0| | | |`HIP_GET_PROC_ADDRESS_SYMBOL_NOT_FOUND`|6.2.0| | | | | |
-|`cudaDriverEntryPointVersionNotSufficent`|12.0| | | |`HIP_GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT`|6.2.0| | | | | |
+|`cudaDriverEntryPointQueryResult`|12.0| | | |`hipDriverEntryPointQueryResult`|7.1.0| | | | |7.1.0|
+|`cudaDriverEntryPointSuccess`|12.0| | | |`hipDriverEntryPointSuccess`|7.1.0| | | | |7.1.0|
+|`cudaDriverEntryPointSymbolNotFound`|12.0| | | |`hipDriverEntryPointSymbolNotFound`|7.1.0| | | | |7.1.0|
+|`cudaDriverEntryPointVersionNotSufficent`|12.0| | | |`hipDriverEntryPointVersionNotSufficent`|7.1.0| | | | |7.1.0|
 |`cudaEglColorFormat`|9.1| | | | | | | | | | |
 |`cudaEglColorFormatA`|9.1| | | | | | | | | | |
 |`cudaEglColorFormatABGR`|9.1| | | | | | | | | | |
@@ -1127,9 +1126,9 @@
 |`cudaEglStreamConnection`|9.1| | | | | | | | | | |
 |`cudaEmulationStrategy`|13.0| | | | | | | | | | |
 |`cudaEmulationStrategy_t`|13.0| | | | | | | | | | |
-|`cudaEnableDefault`|11.3| | | | | | | | | | |
-|`cudaEnableLegacyStream`|11.3| | | | | | | | | | |
-|`cudaEnablePerThreadDefaultStream`|11.3| | | | | | | | | | |
+|`cudaEnableDefault`|11.3| | | |`hipEnableDefault`|7.1.0| | | | |7.1.0|
+|`cudaEnableLegacyStream`|11.3| | | |`hipEnableLegacyStream`|7.1.0| | | | |7.1.0|
+|`cudaEnablePerThreadDefaultStream`|11.3| | | |`hipEnablePerThreadDefaultStream`|7.1.0| | | | |7.1.0|
 |`cudaError`| | | | |`hipError_t`|1.5.0| | | | | |
 |`cudaErrorAddressOfConstant`| |3.1| | | | | | | | | |
 |`cudaErrorAlreadyAcquired`|10.1| | | |`hipErrorAlreadyAcquired`|1.6.0| | | | | |
@@ -1520,7 +1519,7 @@
 |`cudaKernelNodeAttributePriority`|11.7| | | |`hipKernelNodeAttributePriority`|6.2.0| | | | | |
 |`cudaKernelNodeParams`|10.0| | | |`hipKernelNodeParams`|4.3.0| | | | | |
 |`cudaKernelNodeParamsV2`|12.2| | | | | | | | | | |
-|`cudaKernel_t`|12.1| | | | | | | | | | |
+|`cudaKernel_t`|12.1| | | |`hipKernel_t`|7.1.0| | | | |7.1.0|
 |`cudaKeyValuePair`| | | |12.0| | | | | | | |
 |`cudaLaunchAttribute`|11.8| | | |`hipLaunchAttribute`|7.0.0| | | | | |
 |`cudaLaunchAttributeAccessPolicyWindow`|11.8| | | |`hipLaunchAttributeAccessPolicyWindow`|6.2.0| | | | | |
@@ -1553,7 +1552,7 @@
 |`cudaLibraryBinaryIsPreserved`|12.8| | | | | | | | | | |
 |`cudaLibraryHostUniversalFunctionAndDataTable`|12.8| | | | | | | | | | |
 |`cudaLibraryOption`|12.8| | | | | | | | | | |
-|`cudaLibrary_t`|12.8| | | | | | | | | | |
+|`cudaLibrary_t`|12.8| | | |`hipLibrary_t`|7.1.0| | | | |7.1.0|
 |`cudaLimit`| | | | |`hipLimit_t`|1.6.0| | | | | |
 |`cudaLimitDevRuntimePendingLaunchCount`| | | | | | | | | | | |
 |`cudaLimitDevRuntimeSyncDepth`| | | | | | | | | | | |
