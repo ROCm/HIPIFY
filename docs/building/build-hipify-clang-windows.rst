@@ -308,8 +308,8 @@ The corresponding successful output is (assuming %ROOT_DIR% is ``D:/LLVM/21.1.5`
   -- Found CUDA config:
   --    - CUDA Toolkit path     : C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.9
   --    - CUDA Samples path     : C:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.9
-  --    - cuDNN path            : D:/CUDA/cuDNN/9.14.0
-  --    - cuTENSOR path         : D:/CUDA/cuTensor/2.3.1.0
+  --    - cuDNN path            : D:/CUDA/cuDNN/9.14.0/include
+  --    - cuTENSOR path         : D:/CUDA/cuTensor/2.3.1.0/include
   --    - CUB path              : C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.9/include/cub
   -- Configuring done (4.4s)
   -- Generating done (0.1s)
