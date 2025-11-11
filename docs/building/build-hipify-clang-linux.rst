@@ -209,9 +209,9 @@ The corresponding successful output is (assuming ROOT_DIR is ``/usr/llvm/21.1.5`
   -- Found CUDA config:
   --    - CUDA Toolkit path     : /usr/local/cuda-12.9.1
   --    - CUDA Samples path     : OFF
-  --    - cuDNN path            : /usr/local/cudnn-9.14.0
+  --    - cuDNN path            : /usr/local/cudnn-9.14.0/include
+  --    - cuTENSOR path         : /usr/local/cuTensor/2.3.1.0/include
   --    - CUB path              : /usr/local/cuda-12.9.1/include/cub
-  --    - cuTENSOR path         : /usr/local/cuTensor/2.3.1.0
   -- Configuring done (0.6s)
   -- Generating done (0.0s)
   -- Build files have been written to: /usr/hipify/build
