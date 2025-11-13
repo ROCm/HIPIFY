@@ -1530,24 +1530,24 @@
 |`cudaLaunchAttributeID`|11.8| | | |`hipLaunchAttributeID`|6.2.0| | | | | |
 |`cudaLaunchAttributeIgnore`|11.8| | | | | | | | | | |
 |`cudaLaunchAttributeLaunchCompletionEvent`|12.3| | | | | | | | | | |
-|`cudaLaunchAttributeMemSyncDomain`|12.0| | | | | | | | | | |
-|`cudaLaunchAttributeMemSyncDomainMap`|12.0| | | | | | | | | | |
+|`cudaLaunchAttributeMemSyncDomain`|12.0| | | |`hipLaunchAttributeMemSyncDomain`|7.1.0| | | | |7.1.0|
+|`cudaLaunchAttributeMemSyncDomainMap`|12.0| | | |`hipLaunchAttributeMemSyncDomainMap`|7.1.0| | | | |7.1.0|
 |`cudaLaunchAttributeNvlinkUtilCentricScheduling`|13.0| | | | | | | | | | |
 |`cudaLaunchAttributePreferredClusterDimension`|12.8| | | | | | | | | | |
 |`cudaLaunchAttributePreferredSharedMemoryCarveout`|12.5| | | | | | | | | | |
 |`cudaLaunchAttributePriority`|11.8| | | |`hipLaunchAttributePriority`|6.2.0| | | | | |
 |`cudaLaunchAttributeProgrammaticEvent`|11.8| | | | | | | | | | |
 |`cudaLaunchAttributeProgrammaticStreamSerialization`|11.8| | | | | | | | | | |
-|`cudaLaunchAttributeSynchronizationPolicy`|11.8| | | | | | | | | | |
-|`cudaLaunchAttributeValue`|11.8| |13.0| |`hipLaunchAttributeValue`|6.2.0| | | | | |
+|`cudaLaunchAttributeSynchronizationPolicy`|11.8| | | |`hipLaunchAttributeSynchronizationPolicy`|7.1.0| | | | |7.1.0|
+|`cudaLaunchAttributeValue`|11.8| |13.0| |`hipLaunchAttributeValue`|6.2.0| |7.1.0| | | |
 |`cudaLaunchAttribute_st`|11.8| | | |`hipLaunchAttribute_st`|7.0.0| | | | | |
 |`cudaLaunchConfig_st`|11.8| | | |`hipLaunchConfig_st`|7.0.0| | | | | |
 |`cudaLaunchConfig_t`|11.8| | | |`hipLaunchConfig_t`|7.0.0| | | | | |
-|`cudaLaunchMemSyncDomain`|12.0| | | | | | | | | | |
-|`cudaLaunchMemSyncDomainDefault`|12.0| | | | | | | | | | |
-|`cudaLaunchMemSyncDomainMap`|12.0| | | | | | | | | | |
-|`cudaLaunchMemSyncDomainMap_st`|12.0| | | | | | | | | | |
-|`cudaLaunchMemSyncDomainRemote`|12.0| | | | | | | | | | |
+|`cudaLaunchMemSyncDomain`|12.0| | | |`hipLaunchMemSyncDomain`|7.1.0| | | | |7.1.0|
+|`cudaLaunchMemSyncDomainDefault`|12.0| | | |`hipLaunchMemSyncDomainDefault`|7.1.0| | | | |7.1.0|
+|`cudaLaunchMemSyncDomainMap`|12.0| | | |`hipLaunchMemSyncDomainMap`|7.1.0| | | | |7.1.0|
+|`cudaLaunchMemSyncDomainMap_st`|12.0| | | |`hipLaunchMemSyncDomainMap`|7.1.0| | | | |7.1.0|
+|`cudaLaunchMemSyncDomainRemote`|12.0| | | |`hipLaunchMemSyncDomainRemote`|7.1.0| | | | |7.1.0|
 |`cudaLaunchParams`|9.0| | |13.0|`hipLaunchParams`|2.6.0| | | | | |
 |`cudaLibraryBinaryIsPreserved`|12.8| | | | | | | | | | |
 |`cudaLibraryHostUniversalFunctionAndDataTable`|12.8| | | | | | | | | | |
@@ -1728,13 +1728,13 @@
 |`cudaSharedmemCarveoutMaxL1`|9.0| | | | | | | | | | |
 |`cudaSharedmemCarveoutMaxShared`|9.0| | | | | | | | | | |
 |`cudaStreamAddCaptureDependencies`|11.3| | | |`hipStreamAddCaptureDependencies`|5.0.0| | | | | |
-|`cudaStreamAttrID`|11.0| | | | | | | | | | |
-|`cudaStreamAttrValue`|11.0| | | | | | | | | | |
-|`cudaStreamAttributeAccessPolicyWindow`|11.0| | | | | | | | | | |
-|`cudaStreamAttributeMemSyncDomain`|12.0| | | | | | | | | | |
-|`cudaStreamAttributeMemSyncDomainMap`|12.0| | | | | | | | | | |
-|`cudaStreamAttributePriority`|12.0| | | | | | | | | | |
-|`cudaStreamAttributeSynchronizationPolicy`|11.0| | | | | | | | | | |
+|`cudaStreamAttrID`|11.0| | | |`hipLaunchAttributeID`|6.2.0| | | | | |
+|`cudaStreamAttrValue`|11.0| | | |`hipLaunchAttributeValue`|6.2.0| |7.1.0| | | |
+|`cudaStreamAttributeAccessPolicyWindow`|11.0| | | |`hipLaunchAttributeAccessPolicyWindow`|6.2.0| | | | | |
+|`cudaStreamAttributeMemSyncDomain`|12.0| | | |`hipLaunchAttributeMemSyncDomain`|7.1.0| | | | |7.1.0|
+|`cudaStreamAttributeMemSyncDomainMap`|12.0| | | |`hipLaunchAttributeMemSyncDomainMap`|7.1.0| | | | |7.1.0|
+|`cudaStreamAttributePriority`|12.0| | | |`hipLaunchAttributePriority`|6.2.0| | | | | |
+|`cudaStreamAttributeSynchronizationPolicy`|11.0| | | |`hipLaunchAttributeSynchronizationPolicy`|7.1.0| | | | |7.1.0|
 |`cudaStreamCallback_t`| | | | |`hipStreamCallback_t`|1.6.0| | | | | |
 |`cudaStreamCaptureMode`|10.1| | | |`hipStreamCaptureMode`|4.3.0| | | | | |
 |`cudaStreamCaptureModeGlobal`|10.1| | | |`hipStreamCaptureModeGlobal`|4.3.0| | | | | |
@@ -1755,11 +1755,11 @@
 |`cudaSurfaceBoundaryMode`| | | | |`hipSurfaceBoundaryMode`|1.9.0| | | | | |
 |`cudaSurfaceFormatMode`| | | | | | | | | | | |
 |`cudaSurfaceObject_t`| | | | |`hipSurfaceObject_t`|1.9.0| | | | | |
-|`cudaSyncPolicyAuto`|11.0| | | | | | | | | | |
-|`cudaSyncPolicyBlockingSync`|11.0| | | | | | | | | | |
-|`cudaSyncPolicySpin`|11.0| | | | | | | | | | |
-|`cudaSyncPolicyYield`|11.0| | | | | | | | | | |
-|`cudaSynchronizationPolicy`|11.0| | | | | | | | | | |
+|`cudaSyncPolicyAuto`|11.0| | | |`hipSyncPolicyAuto`|7.1.0| | | | |7.1.0|
+|`cudaSyncPolicyBlockingSync`|11.0| | | |`hipSyncPolicyBlockingSync`|7.1.0| | | | |7.1.0|
+|`cudaSyncPolicySpin`|11.0| | | |`hipSyncPolicySpin`|7.1.0| | | | |7.1.0|
+|`cudaSyncPolicyYield`|11.0| | | |`hipSyncPolicyYield`|7.1.0| | | | |7.1.0|
+|`cudaSynchronizationPolicy`|11.0| | | |`hipSynchronizationPolicy`|7.1.0| | | | |7.1.0|
 |`cudaTextureAddressMode`| | | | |`hipTextureAddressMode`|1.7.0| | | | | |
 |`cudaTextureDesc`| | | | |`hipTextureDesc`|1.7.0| | | | | |
 |`cudaTextureFilterMode`| | | | |`hipTextureFilterMode`|1.6.0| | | | | |

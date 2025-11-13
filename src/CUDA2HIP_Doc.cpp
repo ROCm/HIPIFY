@@ -159,7 +159,7 @@ namespace doc {
   const string sU = "U";
   const string sE = "E";
   const hipChangedVersionMap hipChangedVersionMapEmpty = {};
-  const cudaChangedVersionMap cudaChangedVersionMapEmpty = {};
+    const cudaChangedVersionMap cudaChangedVersionMapEmpty = {};
   const cudaUnsupportedVersionMap cudaUnsupportedVersionMapEmpty = {};
 
   enum docType {
@@ -204,6 +204,7 @@ namespace doc {
       virtual const versionMap &getFunctionVersions() const = 0;
       virtual const hipVersionMap &getHipFunctionVersions() const = 0;
       virtual const hipChangedVersionMap &getHipChangedFunctionVersions() const { return hipChangedVersionMapEmpty; };
+      virtual const hipChangedVersionMap &getHipChangedTypeVersions() const { return hipChangedVersionMapEmpty; };
       virtual const cudaChangedVersionMap &getCudaChangedFunctionVersions() const { return cudaChangedVersionMapEmpty; };
       virtual const cudaChangedVersionMap &getCudaChangedTypeVersions() const { return cudaChangedVersionMapEmpty; };
       virtual const cudaUnsupportedVersionMap &getCudaUnsupportedFunctionVersions() const { return cudaUnsupportedVersionMapEmpty; };
@@ -278,7 +279,7 @@ namespace doc {
             const functionMap &ftMap = isType ? getTypes() : getFunctions();
             const versionMap &vMap = isType ? getTypeVersions() : getFunctionVersions();
             const hipVersionMap &hMap = commonHipVersionMap.empty() ? ((isType) ? getHipTypeVersions() : getHipFunctionVersions()) : commonHipVersionMap;
-            const hipChangedVersionMap &hChangedMap = getHipChangedFunctionVersions();
+            const hipChangedVersionMap &hChangedMap = isType ? getHipChangedTypeVersions() : getHipChangedFunctionVersions();
             const cudaChangedVersionMap &cudaChangedMap = isType ? getCudaChangedTypeVersions() : getCudaChangedFunctionVersions();
             const cudaUnsupportedVersionMap &cudaUnsupportedMap = getCudaUnsupportedFunctionVersions();
             functionMap fMap;
@@ -519,6 +520,7 @@ namespace doc {
       const versionMap &getFunctionVersions() const override { return CUDA_DRIVER_FUNCTION_VER_MAP; }
       const hipVersionMap &getHipFunctionVersions() const override { return HIP_DRIVER_FUNCTION_VER_MAP; }
       const hipChangedVersionMap &getHipChangedFunctionVersions() const override { return HIP_DRIVER_FUNCTION_CHANGED_VER_MAP; }
+      const hipChangedVersionMap &getHipChangedTypeVersions() const override { return HIP_DRIVER_TYPE_CHANGED_VER_MAP; };
       const cudaChangedVersionMap &getCudaChangedFunctionVersions() const override { return CUDA_DRIVER_FUNCTION_CHANGED_VER_MAP; }
       const cudaUnsupportedVersionMap &getCudaUnsupportedFunctionVersions() const override { return CUDA_DRIVER_FUNCTION_UNSUPPORTED_VER_MAP; };
       const versionMap &getTypeVersions() const override { return CUDA_DRIVER_TYPE_NAME_VER_MAP; }
@@ -553,6 +555,7 @@ namespace doc {
       const versionMap &getFunctionVersions() const override { return CUDA_RUNTIME_FUNCTION_VER_MAP; }
       const hipVersionMap &getHipFunctionVersions() const override { return HIP_RUNTIME_FUNCTION_VER_MAP; }
       const hipChangedVersionMap &getHipChangedFunctionVersions() const override { return HIP_RUNTIME_FUNCTION_CHANGED_VER_MAP; }
+      const hipChangedVersionMap &getHipChangedTypeVersions() const override { return HIP_RUNTIME_TYPE_CHANGED_VER_MAP; };
       const cudaChangedVersionMap &getCudaChangedFunctionVersions() const override { return CUDA_RUNTIME_FUNCTION_CHANGED_VER_MAP; }
       const cudaChangedVersionMap &getCudaChangedTypeVersions() const override { return CUDA_RUNTIME_TYPE_CHANGED_VER_MAP; }
       const cudaUnsupportedVersionMap &getCudaUnsupportedFunctionVersions() const override { return CUDA_RUNTIME_FUNCTION_UNSUPPORTED_VER_MAP; };
