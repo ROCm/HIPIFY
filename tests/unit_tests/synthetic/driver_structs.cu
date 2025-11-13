@@ -336,6 +336,11 @@ int main() {
   CUDA_GRAPH_INSTANTIATE_PARAMS_st GRAPH_INSTANTIATE_PARAMS_st;
   CUDA_GRAPH_INSTANTIATE_PARAMS GRAPH_INSTANTIATE_PARAMS;
 
+  // CHECK: hipLaunchMemSyncDomainMap launchMemSyncDomainMap_st;
+  // CHECK-NEXT: hipLaunchMemSyncDomainMap launchMemSyncDomainMap;
+  CUlaunchMemSyncDomainMap_st launchMemSyncDomainMap_st;
+  CUlaunchMemSyncDomainMap launchMemSyncDomainMap;
+
   // CHECK: ihipKernel_t *kern_st = nullptr;
 // CHECK-NEXT: hipKernel_t kernel;
   CUkern_st *kern_st = nullptr;

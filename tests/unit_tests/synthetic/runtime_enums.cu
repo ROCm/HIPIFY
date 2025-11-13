@@ -733,6 +733,24 @@ int main() {
   cudaAccessProperty AccessPropertyNormal = cudaAccessPropertyNormal;
   cudaAccessProperty AccessPropertyStreaming = cudaAccessPropertyStreaming;
   cudaAccessProperty AccessPropertyPersisting = cudaAccessPropertyPersisting;
+
+  // CHECK: hipSynchronizationPolicy synchronizationPolicy;
+  // CHECK-NEXT: hipSynchronizationPolicy SYNC_POLICY_AUTO = hipSyncPolicyAuto;
+  // CHECK-NEXT: hipSynchronizationPolicy SYNC_POLICY_SPIN = hipSyncPolicySpin;
+  // CHECK-NEXT: hipSynchronizationPolicy SYNC_POLICY_YIELD = hipSyncPolicyYield;
+  // CHECK-NEXT: hipSynchronizationPolicy SYNC_POLICY_BLOCKING_SYNC = hipSyncPolicyBlockingSync;
+  cudaSynchronizationPolicy synchronizationPolicy;
+  cudaSynchronizationPolicy SYNC_POLICY_AUTO = cudaSyncPolicyAuto;
+  cudaSynchronizationPolicy SYNC_POLICY_SPIN = cudaSyncPolicySpin;
+  cudaSynchronizationPolicy SYNC_POLICY_YIELD = cudaSyncPolicyYield;
+  cudaSynchronizationPolicy SYNC_POLICY_BLOCKING_SYNC = cudaSyncPolicyBlockingSync;
+
+  // CHECK: hipLaunchAttributeID StreamAttrID;
+  // CHECK-NEXT:hipLaunchAttributeID StreamAttributeAccessPolicyWindow = hipLaunchAttributeAccessPolicyWindow;
+  // CHECK-NEXT:hipLaunchAttributeID StreamAttributeSynchronizationPolicy = hipLaunchAttributeSynchronizationPolicy;
+  cudaStreamAttrID StreamAttrID;
+  cudaStreamAttrID StreamAttributeAccessPolicyWindow = cudaStreamAttributeAccessPolicyWindow;
+  cudaStreamAttrID StreamAttributeSynchronizationPolicy = cudaStreamAttributeSynchronizationPolicy;
 #endif
 
 #if CUDA_VERSION >= 11010
@@ -917,6 +935,11 @@ int main() {
   cudaKernelNodeAttrID KernelNodeAttributePriority = cudaKernelNodeAttributePriority;
 #endif
 
+#if CUDA_VERSION >= 11080
+  // CHECK: hipLaunchAttributeID LaunchAttributeSynchronizationPolicy = hipLaunchAttributeSynchronizationPolicy;
+  cudaLaunchAttributeID LaunchAttributeSynchronizationPolicy = cudaLaunchAttributeSynchronizationPolicy;
+#endif
+
 #if CUDA_VERSION >= 12000
   // CHECK: hipGraphInstantiateFlags GraphInstantiateFlagUpload = hipGraphInstantiateFlagUpload;
   // CHECK-NEXT: hipGraphInstantiateFlags GraphInstantiateFlagDeviceLaunch = hipGraphInstantiateFlagDeviceLaunch;
@@ -953,6 +976,25 @@ int main() {
   cudaDriverEntryPointQueryResult GET_PROC_ADDRESS_SUCCESS = cudaDriverEntryPointSuccess;
   cudaDriverEntryPointQueryResult GET_PROC_ADDRESS_SYMBOL_NOT_FOUND = cudaDriverEntryPointSymbolNotFound;
   cudaDriverEntryPointQueryResult GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT = cudaDriverEntryPointVersionNotSufficent;
+
+  // CHECK: hipLaunchAttributeID LaunchAttributeMemSyncDomainMap = hipLaunchAttributeMemSyncDomainMap;
+  // CHECK-NEXT: hipLaunchAttributeID LaunchAttributeMemSyncDomain = hipLaunchAttributeMemSyncDomain;
+  cudaLaunchAttributeID LaunchAttributeMemSyncDomainMap = cudaLaunchAttributeMemSyncDomainMap;
+  cudaLaunchAttributeID LaunchAttributeMemSyncDomain = cudaLaunchAttributeMemSyncDomain;
+
+  // CHECK: hipLaunchMemSyncDomain LaunchMemSyncDomain;
+  // CHECK-NEXT: hipLaunchMemSyncDomain LaunchMemSyncDomainDefault = hipLaunchMemSyncDomainDefault;
+  // CHECK-NEXT: hipLaunchMemSyncDomain LaunchMemSyncDomainRemote = hipLaunchMemSyncDomainRemote;
+  cudaLaunchMemSyncDomain LaunchMemSyncDomain;
+  cudaLaunchMemSyncDomain LaunchMemSyncDomainDefault = cudaLaunchMemSyncDomainDefault;
+  cudaLaunchMemSyncDomain LaunchMemSyncDomainRemote = cudaLaunchMemSyncDomainRemote;
+
+  // CHECK:hipLaunchAttributeID StreamAttributePriority = hipLaunchAttributePriority;
+  // CHECK-NEXT:hipLaunchAttributeID StreamAttributeMemSyncDomainMap = hipLaunchAttributeMemSyncDomainMap;
+  // CHECK-NEXT:hipLaunchAttributeID StreamAttributeMemSyncDomain = hipLaunchAttributeMemSyncDomain;
+  cudaStreamAttrID StreamAttributePriority = cudaStreamAttributePriority;
+  cudaStreamAttrID StreamAttributeMemSyncDomainMap = cudaStreamAttributeMemSyncDomainMap;
+  cudaStreamAttrID StreamAttributeMemSyncDomain = cudaStreamAttributeMemSyncDomain;
 #endif
 
 #if CUDA_VERSION >= 12020

@@ -390,9 +390,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUDA_GRAPH_INSTANTIATE_PARAMS",                                    {"hipGraphInstantiateParams",                                "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES}},
 
   // cudaLaunchMemSyncDomainMap_st
-  {"CUlaunchMemSyncDomainMap_st",                                      {"hipLaunchMemSyncDomainMap",                                "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CUlaunchMemSyncDomainMap_st",                                      {"hipLaunchMemSyncDomainMap",                                "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
   // cudaLaunchMemSyncDomainMap
-  {"CUlaunchMemSyncDomainMap",                                         {"hipLaunchMemSyncDomainMap",                                "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CUlaunchMemSyncDomainMap",                                         {"hipLaunchMemSyncDomainMap",                                "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
 
   // cudalibraryHostUniversalFunctionAndDataTable
   {"CUlibraryHostUniversalFunctionAndDataTable_st",                    {"hipLibraryHostUniversalFunctionAndDataTable",              "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
@@ -556,9 +556,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUkernelNodeAttrValue_union",                                      {"hipKernelNodeAttrValue",                                   "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, CUDA_REMOVED}},
 
   // cudaStreamAttrValue
-  {"CUstreamAttrValue",                                                {"hipStreamAttrValue",                                       "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-  {"CUstreamAttrValue_v1",                                             {"hipStreamAttrValue",                                       "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-  {"CUstreamAttrValue_union",                                          {"hipStreamAttrValue",                                       "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CUstreamAttrValue",                                                {"hipLaunchAttributeValue",                                  "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES}},
+  {"CUstreamAttrValue_v1",                                             {"hipLaunchAttributeValue",                                  "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES}},
+  {"CUstreamAttrValue_union",                                          {"hipLaunchAttributeValue",                                  "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES}},
 
     // no analogue
   {"CUlinkState_st",                                                   {"ihiprtcLinkState",                                         "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES}},
@@ -2307,17 +2307,17 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_ACCESS_PROPERTY_PERSISTING",                                    {"hipAccessPropertyPersisting",                              "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}}, // 2
 
   // cudaSynchronizationPolicy
-  {"CUsynchronizationPolicy",                                          {"hipSynchronizationPolicy",                                 "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-  {"CUsynchronizationPolicy_enum",                                     {"hipSynchronizationPolicy",                                 "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CUsynchronizationPolicy",                                          {"hipSynchronizationPolicy",                                 "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
+  {"CUsynchronizationPolicy_enum",                                     {"hipSynchronizationPolicy",                                 "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
   // CUsynchronizationPolicy_enum enum values
   // cudaSyncPolicyAuto
-  {"CU_SYNC_POLICY_AUTO",                                              {"hipSyncPolicyAuto",                                        "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 1
+  {"CU_SYNC_POLICY_AUTO",                                              {"hipSyncPolicyAuto",                                        "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}}, // 1
   // cudaSyncPolicySpin
-  {"CU_SYNC_POLICY_SPIN",                                              {"hipSyncPolicySpin",                                        "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 2
+  {"CU_SYNC_POLICY_SPIN",                                              {"hipSyncPolicySpin",                                        "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}}, // 2
   // cudaSyncPolicyYield
-  {"CU_SYNC_POLICY_YIELD",                                             {"hipSyncPolicyYield",                                       "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 3
+  {"CU_SYNC_POLICY_YIELD",                                             {"hipSyncPolicyYield",                                       "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}}, // 3
   // cudaSyncPolicyBlockingSync
-  {"CU_SYNC_POLICY_BLOCKING_SYNC",                                     {"hipSyncPolicyBlockingSync",                                "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 4
+  {"CU_SYNC_POLICY_BLOCKING_SYNC",                                     {"hipSyncPolicyBlockingSync",                                "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}}, // 4
 
   // cudaKernelNodeAttrID
   {"CUkernelNodeAttrID",                                               {"hipKernelNodeAttrID",                                      "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES}},
@@ -2341,19 +2341,19 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_KERNEL_NODE_ATTRIBUTE_PREFERRED_SHARED_MEMORY_CARVEOUT",        {"hipKernelNodeAttributePreferredSharedMemoryCarveout",      "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   // cudaStreamAttrID
-  {"CUstreamAttrID",                                                   {"hipStreamAttrID",                                          "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-  {"CUstreamAttrID_enum",                                              {"hipStreamAttrID",                                          "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED | CUDA_REMOVED}},
+  {"CUstreamAttrID",                                                   {"hipLaunchAttributeID",                                     "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES}},
+  {"CUstreamAttrID_enum",                                              {"hipLaunchAttributeID",                                     "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, CUDA_REMOVED}},
   // CUstreamAttrID_enum enum values
   // cudaStreamAttributeAccessPolicyWindow
-  {"CU_STREAM_ATTRIBUTE_ACCESS_POLICY_WINDOW",                         {"hipStreamAttributeAccessPolicyWindow",                     "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CU_STREAM_ATTRIBUTE_ACCESS_POLICY_WINDOW",                         {"hipLaunchAttributeAccessPolicyWindow",                     "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}},
   // cudaStreamAttributeSynchronizationPolicy
-  {"CU_STREAM_ATTRIBUTE_SYNCHRONIZATION_POLICY",                       {"hipStreamAttributeSynchronizationPolicy",                  "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CU_STREAM_ATTRIBUTE_SYNCHRONIZATION_POLICY",                       {"hipLaunchAttributeSynchronizationPolicy",                  "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
   // cudaStreamAttributePriority
-  {"CU_STREAM_ATTRIBUTE_PRIORITY",                                     {"hipStreamAttributePriority",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CU_STREAM_ATTRIBUTE_PRIORITY",                                     {"hipLaunchAttributePriority",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}},
   // cudaStreamAttributeMemSyncDomainMap
-  {"CU_STREAM_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP",                          {"hipStreamAttributeMemSyncDomainMap",                       "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CU_STREAM_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP",                          {"hipLaunchAttributeMemSyncDomainMap",                       "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
   // cudaStreamAttributeMemSyncDomain
-  {"CU_STREAM_ATTRIBUTE_MEM_SYNC_DOMAIN",                              {"hipStreamAttributeMemSyncDomain",                          "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CU_STREAM_ATTRIBUTE_MEM_SYNC_DOMAIN",                              {"hipLaunchAttributeMemSyncDomain",                          "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
 
   // no analogue
   {"CUevent_record_flags",                                             {"hipEvent_record_flags",                                    "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
@@ -2640,11 +2640,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaLaunchAttributeIgnore
   {"CU_LAUNCH_ATTRIBUTE_IGNORE",                                       {"hipLaunchAttributeIgnore",                                 "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   // cudaLaunchAttributeAccessPolicyWindow
-  {"CU_LAUNCH_ATTRIBUTE_ACCESS_POLICY_WINDOW",                         {"hipLaunchAttributeAccessPolicyWindow",                     "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}},
+  {"CU_LAUNCH_ATTRIBUTE_ACCESS_POLICY_WINDOW",                         {"hipLaunchAttributeAccessPolicyWindow",                     "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
   // cudaLaunchAttributeCooperative
   {"CU_LAUNCH_ATTRIBUTE_COOPERATIVE",                                  {"hipLaunchAttributeCooperative",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}},
   // cudaLaunchAttributeSynchronizationPolicy
-  {"CU_LAUNCH_ATTRIBUTE_SYNCHRONIZATION_POLICY",                       {"hipLaunchAttributeSynchronizationPolicy",                  "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CU_LAUNCH_ATTRIBUTE_SYNCHRONIZATION_POLICY",                       {"hipLaunchAttributeSynchronizationPolicy",                  "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
   // cudaLaunchAttributeClusterDimension
   {"CU_LAUNCH_ATTRIBUTE_CLUSTER_DIMENSION",                            {"hipLaunchAttributeClusterDimension",                       "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   // cudaLaunchAttributeClusterSchedulingPolicyPreference
@@ -2656,9 +2656,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaLaunchAttributePriority
   {"CU_LAUNCH_ATTRIBUTE_PRIORITY",                                     {"hipLaunchAttributePriority",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}},
   // cudaLaunchAttributeMemSyncDomainMap
-  {"CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP",                          {"hipLaunchAttributeMemSyncDomainMap",                       "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP",                          {"hipLaunchAttributeMemSyncDomainMap",                       "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
   // cudaLaunchAttributeMemSyncDomain
-  {"CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN",                              {"hipLaunchAttributeMemSyncDomain",                          "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN",                              {"hipLaunchAttributeMemSyncDomain",                          "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
   // cudaLaunchAttributePreferredClusterDimension
   {"CU_LAUNCH_ATTRIBUTE_PREFERRED_CLUSTER_DIMENSION",                  {"hipLaunchAttributePreferredClusterDimension",              "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   // cudaLaunchAttributeLaunchCompletionEvent
@@ -2690,13 +2690,13 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUDA_GRAPH_INSTANTIATE_CONDITIONAL_HANDLE_UNUSED",                 {"hipGraphInstantiateConditionalHandleUnused",               "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   // cudaLaunchMemSyncDomain
-  {"CUlaunchMemSyncDomain",                                            {"hipLaunchMemSyncDomain",                                   "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
-  {"CUlaunchMemSyncDomain_enum",                                       {"hipLaunchMemSyncDomain",                                   "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CUlaunchMemSyncDomain",                                            {"hipLaunchMemSyncDomain",                                   "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
+  {"CUlaunchMemSyncDomain_enum",                                       {"hipLaunchMemSyncDomain",                                   "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
   // CUlaunchMemSyncDomain enum values
   // cudaLaunchMemSyncDomainDefault
-  {"CU_LAUNCH_MEM_SYNC_DOMAIN_DEFAULT",                                {"hipLaunchMemSyncDomainDefault",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CU_LAUNCH_MEM_SYNC_DOMAIN_DEFAULT",                                {"hipLaunchMemSyncDomainDefault",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
   // cudaLaunchMemSyncDomainRemote
-  {"CU_LAUNCH_MEM_SYNC_DOMAIN_REMOTE",                                 {"hipLaunchMemSyncDomainRemote",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CU_LAUNCH_MEM_SYNC_DOMAIN_REMOTE",                                 {"hipLaunchMemSyncDomainRemote",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
 
   // cudaDriverEntryPointQueryResult
   {"CUdriverProcAddressQueryResult",                                   {"hipDriverProcAddressQueryResult",                          "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES}},
@@ -3314,7 +3314,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_TYPE_NAME_VER_MAP {
   {"CUkernelNodeAttrValue",                                            {CUDA_110, CUDA_0,   CUDA_0  }},
   {"CUkernelNodeAttrValue_union",                                      {CUDA_110, CUDA_0,   CUDA_118}},
   {"CUstreamAttrValue",                                                {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"CUstreamAttrValue_union",                                          {CUDA_110, CUDA_0,   CUDA_0  }},
+  {"CUstreamAttrValue_union",                                          {CUDA_110, CUDA_0,   CUDA_118}},
   {"CU_COMPUTEMODE_EXCLUSIVE",                                         {CUDA_0,   CUDA_0,   CUDA_80 }},
   {"CU_DEVICE_ATTRIBUTE_RESERVED_SHARED_MEMORY_PER_BLOCK",             {CUDA_110, CUDA_0,   CUDA_0  }},
   {"CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_WITH_CUDA_VMM_SUPPORTED",      {CUDA_110, CUDA_0,   CUDA_0  }},
@@ -4872,4 +4872,8 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {
   {"hipLibrary_t",                                                     {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
   {"ihipKernel_t",                                                     {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipKernel_t",                                                      {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+};
+
+const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_DRIVER_TYPE_CHANGED_VER_MAP {
+  {"hipLaunchAttributeValue",                                          {HIP_7010}},
 };

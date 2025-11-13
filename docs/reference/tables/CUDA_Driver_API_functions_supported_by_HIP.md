@@ -869,18 +869,18 @@
 |`CU_LAUNCH_ATTRIBUTE_IGNORE`|11.8| | | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_LAUNCH_COMPLETION_EVENT`|12.3| | | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_MAX`|12.1| | | |`hipLaunchAttributeMax`|7.0.0| | | | | |
-|`CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN`|12.0| | | | | | | | | | |
-|`CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP`|12.0| | | | | | | | | | |
+|`CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN`|12.0| | | |`hipLaunchAttributeMemSyncDomain`|7.1.0| | | | |7.1.0|
+|`CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP`|12.0| | | |`hipLaunchAttributeMemSyncDomainMap`|7.1.0| | | | |7.1.0|
 |`CU_LAUNCH_ATTRIBUTE_NVLINK_UTIL_CENTRIC_SCHEDULING`|13.0| | | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_PREFERRED_CLUSTER_DIMENSION`|12.8| | | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_PREFERRED_SHARED_MEMORY_CARVEOUT`|12.5| | | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_PRIORITY`|11.8| | | |`hipLaunchAttributePriority`|6.2.0| | | | | |
 |`CU_LAUNCH_ATTRIBUTE_PROGRAMMATIC_EVENT`|11.8| | | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_PROGRAMMATIC_STREAM_SERIALIZATION`|11.8| | | | | | | | | | |
-|`CU_LAUNCH_ATTRIBUTE_SYNCHRONIZATION_POLICY`|11.8| | | | | | | | | | |
+|`CU_LAUNCH_ATTRIBUTE_SYNCHRONIZATION_POLICY`|11.8| | | |`hipLaunchAttributeSynchronizationPolicy`|7.1.0| | | | |7.1.0|
 |`CU_LAUNCH_KERNEL_REQUIRED_BLOCK_DIM`|12.9| | | | | | | | | | |
-|`CU_LAUNCH_MEM_SYNC_DOMAIN_DEFAULT`|12.0| | | | | | | | | | |
-|`CU_LAUNCH_MEM_SYNC_DOMAIN_REMOTE`|12.0| | | | | | | | | | |
+|`CU_LAUNCH_MEM_SYNC_DOMAIN_DEFAULT`|12.0| | | |`hipLaunchMemSyncDomainDefault`|7.1.0| | | | |7.1.0|
+|`CU_LAUNCH_MEM_SYNC_DOMAIN_REMOTE`|12.0| | | |`hipLaunchMemSyncDomainRemote`|7.1.0| | | | |7.1.0|
 |`CU_LAUNCH_PARAM_BUFFER_POINTER`| | | | |`HIP_LAUNCH_PARAM_BUFFER_POINTER`|1.6.0| | | | | |
 |`CU_LAUNCH_PARAM_BUFFER_POINTER_AS_INT`|11.7| | | | | | | | | | |
 |`CU_LAUNCH_PARAM_BUFFER_SIZE`| | | | |`HIP_LAUNCH_PARAM_BUFFER_SIZE`|1.6.0| | | | | |
@@ -1068,11 +1068,11 @@
 |`CU_SHARED_MEM_CONFIG_EIGHT_BYTE_BANK_SIZE`| | | | |`hipSharedMemBankSizeEightByte`|1.6.0| | | | | |
 |`CU_SHARED_MEM_CONFIG_FOUR_BYTE_BANK_SIZE`| | | | |`hipSharedMemBankSizeFourByte`|1.6.0| | | | | |
 |`CU_STREAM_ADD_CAPTURE_DEPENDENCIES`|11.3| | | |`hipStreamAddCaptureDependencies`|5.0.0| | | | | |
-|`CU_STREAM_ATTRIBUTE_ACCESS_POLICY_WINDOW`|11.0| | | | | | | | | | |
-|`CU_STREAM_ATTRIBUTE_MEM_SYNC_DOMAIN`|12.0| | | | | | | | | | |
-|`CU_STREAM_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP`|12.0| | | | | | | | | | |
-|`CU_STREAM_ATTRIBUTE_PRIORITY`|12.0| | | | | | | | | | |
-|`CU_STREAM_ATTRIBUTE_SYNCHRONIZATION_POLICY`|11.0| | | | | | | | | | |
+|`CU_STREAM_ATTRIBUTE_ACCESS_POLICY_WINDOW`|11.0| | | |`hipLaunchAttributeAccessPolicyWindow`|6.2.0| | | | | |
+|`CU_STREAM_ATTRIBUTE_MEM_SYNC_DOMAIN`|12.0| | | |`hipLaunchAttributeMemSyncDomain`|7.1.0| | | | |7.1.0|
+|`CU_STREAM_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP`|12.0| | | |`hipLaunchAttributeMemSyncDomainMap`|7.1.0| | | | |7.1.0|
+|`CU_STREAM_ATTRIBUTE_PRIORITY`|12.0| | | |`hipLaunchAttributePriority`|6.2.0| | | | | |
+|`CU_STREAM_ATTRIBUTE_SYNCHRONIZATION_POLICY`|11.0| | | |`hipLaunchAttributeSynchronizationPolicy`|7.1.0| | | | |7.1.0|
 |`CU_STREAM_CAPTURE_MODE_GLOBAL`|10.1| | | |`hipStreamCaptureModeGlobal`|4.3.0| | | | | |
 |`CU_STREAM_CAPTURE_MODE_RELAXED`|10.1| | | |`hipStreamCaptureModeRelaxed`|4.3.0| | | | | |
 |`CU_STREAM_CAPTURE_MODE_THREAD_LOCAL`|10.1| | | |`hipStreamCaptureModeThreadLocal`|4.3.0| | | | | |
@@ -1099,10 +1099,10 @@
 |`CU_STREAM_WAIT_VALUE_NOR`|9.0| | | |`hipStreamWaitValueNor`|4.2.0| | | | | |
 |`CU_STREAM_WRITE_VALUE_DEFAULT`|8.0| | | | | | | | | | |
 |`CU_STREAM_WRITE_VALUE_NO_MEMORY_BARRIER`|8.0| | | | | | | | | | |
-|`CU_SYNC_POLICY_AUTO`|11.0| | | | | | | | | | |
-|`CU_SYNC_POLICY_BLOCKING_SYNC`|11.0| | | | | | | | | | |
-|`CU_SYNC_POLICY_SPIN`|11.0| | | | | | | | | | |
-|`CU_SYNC_POLICY_YIELD`|11.0| | | | | | | | | | |
+|`CU_SYNC_POLICY_AUTO`|11.0| | | |`hipSyncPolicyAuto`|7.1.0| | | | |7.1.0|
+|`CU_SYNC_POLICY_BLOCKING_SYNC`|11.0| | | |`hipSyncPolicyBlockingSync`|7.1.0| | | | |7.1.0|
+|`CU_SYNC_POLICY_SPIN`|11.0| | | |`hipSyncPolicySpin`|7.1.0| | | | |7.1.0|
+|`CU_SYNC_POLICY_YIELD`|11.0| | | |`hipSyncPolicyYield`|7.1.0| | | | |7.1.0|
 |`CU_TARGET_COMPUTE_10`| | | |9.0| | | | | | | |
 |`CU_TARGET_COMPUTE_100`|12.8| | | | | | | | | | |
 |`CU_TARGET_COMPUTE_100A`|12.8| | | | | | | | | | |
@@ -1414,15 +1414,15 @@
 |`CUlaunchAttribute`|11.8| | | |`hipLaunchAttribute`|7.0.0| | | | | |
 |`CUlaunchAttributeID`|11.8| | | |`hipLaunchAttributeID`|6.2.0| | | | | |
 |`CUlaunchAttributeID_enum`|11.8| | | |`hipLaunchAttributeID`|6.2.0| | | | | |
-|`CUlaunchAttributeValue`|11.8| | | |`hipLaunchAttributeValue`|6.2.0| | | | | |
-|`CUlaunchAttributeValue_union`|11.8| | | |`hipLaunchAttributeValue`|6.2.0| | | | | |
+|`CUlaunchAttributeValue`|11.8| | | |`hipLaunchAttributeValue`|6.2.0| |7.1.0| | | |
+|`CUlaunchAttributeValue_union`|11.8| | | |`hipLaunchAttributeValue`|6.2.0| |7.1.0| | | |
 |`CUlaunchAttribute_st`|11.8| | | |`hipLaunchAttribute_st`|7.0.0| | | | | |
 |`CUlaunchConfig`|11.8| | | |`HIP_LAUNCH_CONFIG`|7.0.0| | | | | |
 |`CUlaunchConfig_st`|11.8| | | |`HIP_LAUNCH_CONFIG_st`|7.0.0| | | | | |
-|`CUlaunchMemSyncDomain`|12.0| | | | | | | | | | |
-|`CUlaunchMemSyncDomainMap`|12.0| | | | | | | | | | |
-|`CUlaunchMemSyncDomainMap_st`|12.0| | | | | | | | | | |
-|`CUlaunchMemSyncDomain_enum`|12.0| | | | | | | | | | |
+|`CUlaunchMemSyncDomain`|12.0| | | |`hipLaunchMemSyncDomain`|7.1.0| | | | |7.1.0|
+|`CUlaunchMemSyncDomainMap`|12.0| | | |`hipLaunchMemSyncDomainMap`|7.1.0| | | | |7.1.0|
+|`CUlaunchMemSyncDomainMap_st`|12.0| | | |`hipLaunchMemSyncDomainMap`|7.1.0| | | | |7.1.0|
+|`CUlaunchMemSyncDomain_enum`|12.0| | | |`hipLaunchMemSyncDomain`|7.1.0| | | | |7.1.0|
 |`CUlib_st`|12.0| | | |`ihipLibrary_t`|7.1.0| | | | |7.1.0|
 |`CUlibrary`|12.0| | | |`hipLibrary_t`|7.1.0| | | | |7.1.0|
 |`CUlibraryHostUniversalFunctionAndDataTable`|12.0| | | | | | | | | | |
@@ -1536,11 +1536,11 @@
 |`CUsharedconfig`| | | | |`hipSharedMemConfig`|1.6.0| | | | | |
 |`CUsharedconfig_enum`| | | | |`hipSharedMemConfig`|1.6.0| | | | | |
 |`CUstream`| | | | |`hipStream_t`|1.5.0| | | | | |
-|`CUstreamAttrID`|11.0| | | | | | | | | | |
-|`CUstreamAttrID_enum`|11.0| | |11.8| | | | | | | |
-|`CUstreamAttrValue`|11.0| | | | | | | | | | |
-|`CUstreamAttrValue_union`|11.0| | | | | | | | | | |
-|`CUstreamAttrValue_v1`|11.3| | | | | | | | | | |
+|`CUstreamAttrID`|11.0| | | |`hipLaunchAttributeID`|6.2.0| | | | | |
+|`CUstreamAttrID_enum`|11.0| | |11.8|`hipLaunchAttributeID`|6.2.0| | | | | |
+|`CUstreamAttrValue`|11.0| | | |`hipLaunchAttributeValue`|6.2.0| |7.1.0| | | |
+|`CUstreamAttrValue_union`|11.0| | |11.8|`hipLaunchAttributeValue`|6.2.0| |7.1.0| | | |
+|`CUstreamAttrValue_v1`|11.3| | | |`hipLaunchAttributeValue`|6.2.0| |7.1.0| | | |
 |`CUstreamBatchMemOpParams`|8.0| | | |`hipStreamBatchMemOpParams`|6.4.0| | | | | |
 |`CUstreamBatchMemOpParams_union`|8.0| | | |`hipStreamBatchMemOpParams_union`|6.4.0| | | | | |
 |`CUstreamBatchMemOpParams_v1`|11.3| | | |`hipStreamBatchMemOpParams`|6.4.0| | | | | |
@@ -1567,8 +1567,8 @@
 |`CUsurfObject_v1`|11.3| | | |`hipSurfaceObject_t`|1.9.0| | | | | |
 |`CUsurfref`| | | | | | | | | | | |
 |`CUsurfref_st`| | | | | | | | | | | |
-|`CUsynchronizationPolicy`|11.0| | | | | | | | | | |
-|`CUsynchronizationPolicy_enum`|11.0| | | | | | | | | | |
+|`CUsynchronizationPolicy`|11.0| | | |`hipSynchronizationPolicy`|7.1.0| | | | |7.1.0|
+|`CUsynchronizationPolicy_enum`|11.0| | | |`hipSynchronizationPolicy`|7.1.0| | | | |7.1.0|
 |`CUtensorMap`|12.0| | | | | | | | | | |
 |`CUtensorMapDataType`|12.0| | | | | | | | | | |
 |`CUtensorMapDataType_enum`|12.0| | | | | | | | | | |

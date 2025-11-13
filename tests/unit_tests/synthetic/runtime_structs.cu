@@ -210,6 +210,11 @@ int main() {
   // CHECK-NEXT: hipGraphInstantiateParams GRAPH_INSTANTIATE_PARAMS;
   cudaGraphInstantiateParams_st GRAPH_INSTANTIATE_PARAMS_st;
   cudaGraphInstantiateParams GRAPH_INSTANTIATE_PARAMS;
+
+  // CHECK: hipLaunchMemSyncDomainMap LaunchMemSyncDomainMap_st;
+  // CHECK-NEXT: hipLaunchMemSyncDomainMap LaunchMemSyncDomainMap;
+  cudaLaunchMemSyncDomainMap_st LaunchMemSyncDomainMap_st;
+  cudaLaunchMemSyncDomainMap LaunchMemSyncDomainMap;
 #endif
 
 #if CUDA_VERSION >= 12010

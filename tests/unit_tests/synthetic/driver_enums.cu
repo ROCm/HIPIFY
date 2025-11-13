@@ -978,11 +978,34 @@ int main() {
   CUkernelNodeAttrID kernelNodeAttrID;
   CUkernelNodeAttrID KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW = CU_KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW;
   CUkernelNodeAttrID KERNEL_NODE_ATTRIBUTE_COOPERATIVE = CU_KERNEL_NODE_ATTRIBUTE_COOPERATIVE;
+
+  // CHECK: hipSynchronizationPolicy synchronizationPolicy;
+  // CHECK-NEXT: hipSynchronizationPolicy synchronizationPolicy_enum;
+  // CHECK-NEXT: hipSynchronizationPolicy SYNC_POLICY_AUTO = hipSyncPolicyAuto;
+  // CHECK-NEXT: hipSynchronizationPolicy SYNC_POLICY_SPIN = hipSyncPolicySpin;
+  // CHECK-NEXT: hipSynchronizationPolicy SYNC_POLICY_YIELD = hipSyncPolicyYield;
+  // CHECK-NEXT: hipSynchronizationPolicy SYNC_POLICY_BLOCKING_SYNC = hipSyncPolicyBlockingSync;
+  CUsynchronizationPolicy synchronizationPolicy;
+  CUsynchronizationPolicy_enum synchronizationPolicy_enum;
+  CUsynchronizationPolicy SYNC_POLICY_AUTO = CU_SYNC_POLICY_AUTO;
+  CUsynchronizationPolicy SYNC_POLICY_SPIN = CU_SYNC_POLICY_SPIN;
+  CUsynchronizationPolicy SYNC_POLICY_YIELD = CU_SYNC_POLICY_YIELD;
+  CUsynchronizationPolicy SYNC_POLICY_BLOCKING_SYNC = CU_SYNC_POLICY_BLOCKING_SYNC; 
+
+  // CHECK: hipLaunchAttributeID streamAttrID;
+  // CHECK-NEXT: hipLaunchAttributeID STREAM_ATTRIBUTE_ACCESS_POLICY_WINDOW = hipLaunchAttributeAccessPolicyWindow;
+  // CHECK-NEXT: hipLaunchAttributeID STREAM_ATTRIBUTE_SYNCHRONIZATION_POLICY = hipLaunchAttributeSynchronizationPolicy;
+  CUstreamAttrID streamAttrID;
+  CUstreamAttrID STREAM_ATTRIBUTE_ACCESS_POLICY_WINDOW = CU_STREAM_ATTRIBUTE_ACCESS_POLICY_WINDOW;
+  CUstreamAttrID STREAM_ATTRIBUTE_SYNCHRONIZATION_POLICY = CU_STREAM_ATTRIBUTE_SYNCHRONIZATION_POLICY;
 #endif
 
 #if CUDA_VERSION >= 11000 && CUDA_VERSION < 11080
   // CHECK: hipKernelNodeAttrID kernelNodeAttrID_enum;
   CUkernelNodeAttrID_enum kernelNodeAttrID_enum;
+
+  // CHECK: hipLaunchAttributeID streamAttrID_enum;
+  CUstreamAttrID_enum streamAttrID_enum;
 #endif
 
 #if CUDA_VERSION >= 11010
@@ -1214,11 +1237,13 @@ int main() {
   // CHECK-NEXT: hipLaunchAttributeID launchAttributeID_enum;
   // CHECK-NEXT: hipLaunchAttributeID LAUNCH_ATTRIBUTE_ACCESS_POLICY_WINDOW = hipLaunchAttributeAccessPolicyWindow;
   // CHECK-NEXT: hipLaunchAttributeID LAUNCH_ATTRIBUTE_COOPERATIVE = hipLaunchAttributeCooperative;
+  // CHECK-NEXT: hipLaunchAttributeID LAUNCH_ATTRIBUTE_SYNCHRONIZATION_POLICY = hipLaunchAttributeSynchronizationPolicy;
   // CHECK-NEXT: hipLaunchAttributeID LAUNCH_ATTRIBUTE_PRIORITY = hipLaunchAttributePriority;
   CUlaunchAttributeID launchAttributeID;
   CUlaunchAttributeID_enum launchAttributeID_enum;
   CUlaunchAttributeID LAUNCH_ATTRIBUTE_ACCESS_POLICY_WINDOW = CU_LAUNCH_ATTRIBUTE_ACCESS_POLICY_WINDOW;
   CUlaunchAttributeID LAUNCH_ATTRIBUTE_COOPERATIVE = CU_LAUNCH_ATTRIBUTE_COOPERATIVE;
+  CUlaunchAttributeID LAUNCH_ATTRIBUTE_SYNCHRONIZATION_POLICY = CU_LAUNCH_ATTRIBUTE_SYNCHRONIZATION_POLICY;
   CUlaunchAttributeID LAUNCH_ATTRIBUTE_PRIORITY = CU_LAUNCH_ATTRIBUTE_PRIORITY;
 #endif
 
@@ -1256,6 +1281,27 @@ int main() {
   CUdriverProcAddressQueryResult GET_PROC_ADDRESS_SUCCESS = CU_GET_PROC_ADDRESS_SUCCESS;
   CUdriverProcAddressQueryResult GET_PROC_ADDRESS_SYMBOL_NOT_FOUND = CU_GET_PROC_ADDRESS_SYMBOL_NOT_FOUND;
   CUdriverProcAddressQueryResult GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT = CU_GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT;
+
+  // CHECK: hipLaunchAttributeID STREAM_ATTRIBUTE_PRIORITY = hipLaunchAttributePriority;
+  // CHECK-NEXT: hipLaunchAttributeID STREAM_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP = hipLaunchAttributeMemSyncDomainMap;
+  // CHECK-NEXT: hipLaunchAttributeID STREAM_ATTRIBUTE_MEM_SYNC_DOMAIN = hipLaunchAttributeMemSyncDomain;
+  CUstreamAttrID STREAM_ATTRIBUTE_PRIORITY = CU_STREAM_ATTRIBUTE_PRIORITY;
+  CUstreamAttrID STREAM_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP = CU_STREAM_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP;
+  CUstreamAttrID STREAM_ATTRIBUTE_MEM_SYNC_DOMAIN = CU_STREAM_ATTRIBUTE_MEM_SYNC_DOMAIN;
+
+  // CHECK: hipLaunchAttributeID LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP = hipLaunchAttributeMemSyncDomainMap;
+  // CHECK-NEXT: hipLaunchAttributeID LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN = hipLaunchAttributeMemSyncDomain;
+  CUlaunchAttributeID LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP = CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP;
+  CUlaunchAttributeID LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN = CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN;
+
+  // CHECK: hipLaunchMemSyncDomain launchMemSyncDomain;
+  // CHECK-NEXT: hipLaunchMemSyncDomain launchMemSyncDomain_enum;
+  // CHECK-NEXT: hipLaunchMemSyncDomain LAUNCH_MEM_SYNC_DOMAIN_DEFAULT = hipLaunchMemSyncDomainDefault;
+  // CHECK-NEXT: hipLaunchMemSyncDomain LAUNCH_MEM_SYNC_DOMAIN_REMOTE = hipLaunchMemSyncDomainRemote;
+  CUlaunchMemSyncDomain launchMemSyncDomain;
+  CUlaunchMemSyncDomain_enum launchMemSyncDomain_enum;
+  CUlaunchMemSyncDomain LAUNCH_MEM_SYNC_DOMAIN_DEFAULT = CU_LAUNCH_MEM_SYNC_DOMAIN_DEFAULT;
+  CUlaunchMemSyncDomain LAUNCH_MEM_SYNC_DOMAIN_REMOTE = CU_LAUNCH_MEM_SYNC_DOMAIN_REMOTE;
 #endif
 
 #if CUDA_VERSION >= 12010
