@@ -30,7 +30,9 @@ THE SOFTWARE.
 #include "clang/ASTMatchers/ASTMatchFinder.h"
 #include "clang/ASTMatchers/ASTMatchers.h"
 #include "clang/Lex/HeaderSearch.h"
+#if LLVM_VERSION_MAJOR < 17
 #include "clang/Basic/TargetInfo.h"
+#endif
 #include "LLVMCompat.h"
 #include "CUDA2HIP.h"
 #include "StringUtils.h"
