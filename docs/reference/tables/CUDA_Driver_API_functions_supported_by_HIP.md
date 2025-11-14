@@ -1864,15 +1864,15 @@
 |`cuMemsetD16`| | | | |`hipMemsetD16`|3.0.0| | | | | |
 |`cuMemsetD16Async`| | | | |`hipMemsetD16Async`|3.0.0| | | | | |
 |`cuMemsetD16_v2`| | | | |`hipMemsetD16`|3.0.0| | | | | |
-|`cuMemsetD2D16`| | | | | | | | | | | |
-|`cuMemsetD2D16Async`| | | | | | | | | | | |
-|`cuMemsetD2D16_v2`| | | | | | | | | | | |
-|`cuMemsetD2D32`| | | | | | | | | | | |
-|`cuMemsetD2D32Async`| | | | | | | | | | | |
-|`cuMemsetD2D32_v2`| | | | | | | | | | | |
-|`cuMemsetD2D8`| | | | | | | | | | | |
-|`cuMemsetD2D8Async`| | | | | | | | | | | |
-|`cuMemsetD2D8_v2`| | | | | | | | | | | |
+|`cuMemsetD2D16`| | | | |`hipMemsetD2D16`|7.1.0| | | | |7.1.0|
+|`cuMemsetD2D16Async`| | | | |`hipMemsetD2D16Async`|7.1.0| | | | |7.1.0|
+|`cuMemsetD2D16_v2`| | | | |`hipMemsetD2D16`|7.1.0| | | | |7.1.0|
+|`cuMemsetD2D32`| | | | |`hipMemsetD2D32`|7.1.0| | | | |7.1.0|
+|`cuMemsetD2D32Async`| | | | |`hipMemsetD2D32Async`|7.1.0| | | | |7.1.0|
+|`cuMemsetD2D32_v2`| | | | |`hipMemsetD2D32`|7.1.0| | | | |7.1.0|
+|`cuMemsetD2D8`| | | | |`hipMemsetD2D8`|7.1.0| | | | |7.1.0|
+|`cuMemsetD2D8Async`| | | | |`hipMemsetD2D8Async`|7.1.0| | | | |7.1.0|
+|`cuMemsetD2D8_v2`| | | | |`hipMemsetD2D8`|7.1.0| | | | |7.1.0|
 |`cuMemsetD32`| | | | |`hipMemsetD32`|2.3.0| | | | | |
 |`cuMemsetD32Async`| | | | |`hipMemsetD32Async`|2.3.0| | | | | |
 |`cuMemsetD32_v2`| | | | |`hipMemsetD32`|2.3.0| | | | | |

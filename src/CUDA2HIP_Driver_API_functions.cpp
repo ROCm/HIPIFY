@@ -359,20 +359,20 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   // no analogue
   {"cuMemsetD16Async",                                            {"hipMemsetD16Async",                                           "", CONV_MEMORY, API_DRIVER, SEC::MEMORY}},
   // no analogue
-  {"cuMemsetD2D16",                                               {"hipMemsetD2D16",                                              "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_UNSUPPORTED}},
-  {"cuMemsetD2D16_v2",                                            {"hipMemsetD2D16",                                              "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_UNSUPPORTED}},
+  {"cuMemsetD2D16",                                               {"hipMemsetD2D16",                                              "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_EXPERIMENTAL}},
+  {"cuMemsetD2D16_v2",                                            {"hipMemsetD2D16",                                              "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_EXPERIMENTAL}},
   // no analogue
-  {"cuMemsetD2D16Async",                                          {"hipMemsetD2D16Async",                                         "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_UNSUPPORTED}},
+  {"cuMemsetD2D16Async",                                          {"hipMemsetD2D16Async",                                         "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_EXPERIMENTAL}},
   // no analogue
-  {"cuMemsetD2D32",                                               {"hipMemsetD2D32",                                              "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_UNSUPPORTED}},
-  {"cuMemsetD2D32_v2",                                            {"hipMemsetD2D32",                                              "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_UNSUPPORTED}},
+  {"cuMemsetD2D32",                                               {"hipMemsetD2D32",                                              "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_EXPERIMENTAL}},
+  {"cuMemsetD2D32_v2",                                            {"hipMemsetD2D32",                                              "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_EXPERIMENTAL}},
   // no analogue
-  {"cuMemsetD2D32Async",                                          {"hipMemsetD2D32Async",                                         "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_UNSUPPORTED}},
+  {"cuMemsetD2D32Async",                                          {"hipMemsetD2D32Async",                                         "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_EXPERIMENTAL}},
   // no analogue
-  {"cuMemsetD2D8",                                                {"hipMemsetD2D8",                                               "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_UNSUPPORTED}},
-  {"cuMemsetD2D8_v2",                                             {"hipMemsetD2D8",                                               "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_UNSUPPORTED}},
+  {"cuMemsetD2D8",                                                {"hipMemsetD2D8",                                               "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_EXPERIMENTAL}},
+  {"cuMemsetD2D8_v2",                                             {"hipMemsetD2D8",                                               "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_EXPERIMENTAL}},
   // no analogue
-  {"cuMemsetD2D8Async",                                           {"hipMemsetD2D8Async",                                          "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_UNSUPPORTED}},
+  {"cuMemsetD2D8Async",                                           {"hipMemsetD2D8Async",                                          "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_EXPERIMENTAL}},
   // cudaMemset
   {"cuMemsetD32",                                                 {"hipMemsetD32",                                                "", CONV_MEMORY, API_DRIVER, SEC::MEMORY}},
   {"cuMemsetD32_v2",                                              {"hipMemsetD32",                                                "", CONV_MEMORY, API_DRIVER, SEC::MEMORY}},
@@ -1771,6 +1771,12 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_FUNCTION_VER_MAP {
   {"hipEventRecordWithFlags",                                     {HIP_6040, HIP_0,    HIP_0   }},
   {"hipDrvLaunchKernelEx",                                        {HIP_7000, HIP_0,    HIP_0   }},
   {"hipMemGetHandleForAddressRange",                              {HIP_7000, HIP_0,    HIP_0   }},
+  {"hipMemsetD2D8",                                               {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemsetD2D8Async",                                          {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemsetD2D16",                                              {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemsetD2D16Async",                                         {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemsetD2D32",                                              {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemsetD2D32Async",                                         {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
 };
 
 const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_DRIVER_FUNCTION_CHANGED_VER_MAP {

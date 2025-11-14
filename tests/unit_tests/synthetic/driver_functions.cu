@@ -34,6 +34,7 @@ int main() {
   int hipVersion = 0;
   size_t bytes = 0;
   size_t bytes_2 = 0;
+  size_t dstPitch = 0;
   void *image = nullptr;
   void *pfn = nullptr;
   void *paramsprt = nullptr;
@@ -583,6 +584,46 @@ int main() {
   // HIP: hipError_t hipMemsetD8Async(hipDeviceptr_t dest, unsigned char value, size_t count, hipStream_t stream __dparm(0));
   // CHECK: result = hipMemsetD8Async(deviceptr, uc, bytes, stream);
   result = cuMemsetD8Async(deviceptr, uc, bytes, stream);
+
+  // CUDA: CUresult CUDAAPI cuMemsetD2D8   (CUdeviceptr dstDevice, size_t dstPitch, unsigned char uc, size_t Width, size_t Height);
+  // CUDA: CUresult CUDAAPI cuMemsetD2D8_v2(CUdeviceptr dstDevice, size_t dstPitch, unsigned char uc, size_t Width, size_t Height);
+  // HIP: hipError_t hipMemsetD2D8(hipDeviceptr_t dst, size_t dstPitch, unsigned char value, size_t width, size_t height);
+  // CHECK: result = hipMemsetD2D8(deviceptr, dstPitch, uc, width, height);
+  // CHECK-NEXT: result = hipMemsetD2D8(deviceptr, dstPitch, uc, width, height);
+  result = cuMemsetD2D8(deviceptr, dstPitch, uc, width, height);
+  result = cuMemsetD2D8_v2(deviceptr, dstPitch, uc, width, height);
+
+  // CUDA: CUresult CUDAAPI cuMemsetD2D8Async(CUdeviceptr dstDevice, size_t dstPitch, unsigned char uc, size_t Width, size_t Height, CUstream hStream);
+  // HIP: hipError_t hipMemsetD2D8Async(hipDeviceptr_t dst, size_t dstPitch, unsigned char value, size_t width, size_t height, hipStream_t stream __dparm(0));
+  // CHECK: result = hipMemsetD2D8Async(deviceptr, dstPitch, uc, width, height, stream);
+  result = cuMemsetD2D8Async(deviceptr, dstPitch, uc, width, height, stream);
+
+  // CUDA: CUresult CUDAAPI cuMemsetD2D16   (CUdeviceptr dstDevice, size_t dstPitch, unsigned short us, size_t Width, size_t Height);
+  // CUDA: CUresult CUDAAPI cuMemsetD2D16_v2(CUdeviceptr dstDevice, size_t dstPitch, unsigned short us, size_t Width, size_t Height);
+  // HIP: hipError_t hipMemsetD2D16(hipDeviceptr_t dst, size_t dstPitch, unsigned short value, size_t width, size_t height);
+  // CHECK: result = hipMemsetD2D16(deviceptr, dstPitch, us, width, height);
+  // CHECK-NEXT: result = hipMemsetD2D16(deviceptr, dstPitch, us, width, height);
+  result = cuMemsetD2D16(deviceptr, dstPitch, us, width, height);
+  result = cuMemsetD2D16_v2(deviceptr, dstPitch, us, width, height);
+
+  // CUDA: CUresult CUDAAPI cuMemsetD2D16Async(CUdeviceptr dstDevice, size_t dstPitch, unsigned short us, size_t Width, size_t Height, CUstream hStream);
+  // HIP: hipError_t hipMemsetD2D16Async(hipDeviceptr_t dst, size_t dstPitch, unsigned short value, size_t width, size_t height, hipStream_t stream __dparm(0));
+  // CHECK: result = hipMemsetD2D16Async(deviceptr, dstPitch, us, width, height, stream);
+  result = cuMemsetD2D16Async(deviceptr, dstPitch, us, width, height, stream);
+
+  unsigned int ui = 0;
+  // CUDA: CUresult CUDAAPI cuMemsetD2D32   (CUdeviceptr dstDevice, size_t dstPitch, unsigned int ui, size_t Width, size_t Height);
+  // CUDA: CUresult CUDAAPI cuMemsetD2D32_v2(CUdeviceptr dstDevice, size_t dstPitch, unsigned int ui, size_t Width, size_t Height);
+  // HIP: hipError_t hipMemsetD2D32(hipDeviceptr_t dst, size_t dstPitch, unsigned int value, size_t width, size_t height);
+  // CHECK: result = hipMemsetD2D32(deviceptr, dstPitch, ui, width, height);
+  // CHECK-NEXT: result = hipMemsetD2D32(deviceptr, dstPitch, ui, width, height);
+  result = cuMemsetD2D32(deviceptr, dstPitch, ui, width, height);
+  result = cuMemsetD2D32_v2(deviceptr, dstPitch, ui, width, height);
+
+  // CUDA: CUresult CUDAAPI cuMemsetD2D32Async(CUdeviceptr dstDevice, size_t dstPitch, unsigned int ui, size_t Width, size_t Height, CUstream hStream);
+  // HIP: hipError_t hipMemsetD2D32Async(hipDeviceptr_t dst, size_t dstPitch, unsigned int value, size_t width, size_t height, hipStream_t stream __dparm(0));
+  // CHECK: result = hipMemsetD2D32Async(deviceptr, dstPitch, ui, width, height, stream);
+  result = cuMemsetD2D32Async(deviceptr, dstPitch, ui, width, height, stream);
 
   // CUDA: CUresult CUDAAPI cuMipmappedArrayCreate(CUmipmappedArray *pHandle, const CUDA_ARRAY3D_DESCRIPTOR *pMipmappedArrayDesc, unsigned int numMipmapLevels);
   // HIP: hipError_t hipMipmappedArrayCreate(hipMipmappedArray_t* pHandle, HIP_ARRAY3D_DESCRIPTOR* pMipmappedArrayDesc, unsigned int numMipmapLevels);
