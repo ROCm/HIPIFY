@@ -1217,6 +1217,22 @@ int main() {
   // HIP: hipError_t hipGetFuncBySymbol(hipFunction_t* functionPtr, const void* symbolPtr);
   // CHECK: result = hipGetFuncBySymbol(&function, symbolptr);
   result = cudaGetFuncBySymbol(&function, symbolptr);
+
+  // CHECK: hipLaunchAttributeID StreamAttrID;
+  cudaStreamAttrID StreamAttrID;
+
+  // CHECK: hipLaunchAttributeValue StreamAttrValue;
+  cudaStreamAttrValue StreamAttrValue;
+
+  // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaStreamSetAttribute(cudaStream_t hStream, cudaStreamAttrID attr, const cudaStreamAttrValue* value);
+  // HIP: hipError_t hipStreamSetAttribute(hipStream_t stream, hipStreamAttrID attr, const hipStreamAttrValue* value);
+  // CHECK: result = hipStreamSetAttribute(stream, StreamAttrID, &StreamAttrValue);
+  result = cudaStreamSetAttribute(stream, StreamAttrID, &StreamAttrValue);
+
+  // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaStreamGetAttribute(cudaStream_t hStream, cudaStreamAttrID attr, cudaStreamAttrValue* value_out);
+  // HIP: hipError_t hipStreamGetAttribute(hipStream_t stream, hipStreamAttrID attr, hipStreamAttrValue* value_out);
+  // CHECK: result = hipStreamGetAttribute(stream, StreamAttrID, &StreamAttrValue);
+  result = cudaStreamGetAttribute(stream, StreamAttrID, &StreamAttrValue);
 #endif
 
 #if CUDA_VERSION >= 11010
@@ -1596,6 +1612,11 @@ int main() {
   // HIP: hipError_t hipGraphExecGetFlags(hipGraphExec_t graphExec, unsigned long long* flags);
   // CHECK: result = hipGraphExecGetFlags(GraphExec_t, &ull_2);
   result = cudaGraphExecGetFlags(GraphExec_t, &ull_2);
+
+  // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaStreamGetId(cudaStream_t hStream, unsigned long long *streamId);
+  // HIP: hipError_t hipStreamGetId(hipStream_t stream, unsigned long long* streamId);
+  // CHECK: result = hipStreamGetId(stream, &ull_2);
+  result = cudaStreamGetId(stream, &ull_2);
 #endif
 
 #if CUDA_VERSION >= 12020
