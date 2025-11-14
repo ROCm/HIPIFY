@@ -139,9 +139,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuStreamEndCapture
   {"cudaStreamEndCapture",                                    {"hipStreamEndCapture",                                    "", CONV_STREAM, API_RUNTIME, SEC::STREAM}},
   // cuStreamGetAttribute
-  {"cudaStreamGetAttribute",                                  {"hipStreamGetAttribute",                                  "", CONV_STREAM, API_RUNTIME, SEC::STREAM, HIP_UNSUPPORTED}},
+  {"cudaStreamGetAttribute",                                  {"hipStreamGetAttribute",                                  "", CONV_STREAM, API_RUNTIME, SEC::STREAM, HIP_EXPERIMENTAL}},
   // cuStreamSetAttribute
-  {"cudaStreamSetAttribute",                                  {"hipStreamSetAttribute",                                  "", CONV_STREAM, API_RUNTIME, SEC::STREAM, HIP_UNSUPPORTED}},
+  {"cudaStreamSetAttribute",                                  {"hipStreamSetAttribute",                                  "", CONV_STREAM, API_RUNTIME, SEC::STREAM, HIP_EXPERIMENTAL}},
   // cuStreamGetFlags
   {"cudaStreamGetFlags",                                      {"hipStreamGetFlags",                                      "", CONV_STREAM, API_RUNTIME, SEC::STREAM}},
   // cuStreamGetPriority
@@ -165,7 +165,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuThreadExchangeStreamCaptureMode
   {"cudaThreadExchangeStreamCaptureMode",                     {"hipThreadExchangeStreamCaptureMode",                     "", CONV_STREAM, API_RUNTIME, SEC::STREAM}},
   // cuStreamGetId
-  {"cudaStreamGetId",                                         {"hipStreamGetId",                                         "", CONV_STREAM, API_RUNTIME, SEC::STREAM, HIP_UNSUPPORTED}},
+  {"cudaStreamGetId",                                         {"hipStreamGetId",                                         "", CONV_STREAM, API_RUNTIME, SEC::STREAM, HIP_EXPERIMENTAL}},
   // cuStreamGetDevice
   {"cudaStreamGetDevice",                                     {"hipStreamGetDevice",                                     "", CONV_STREAM, API_RUNTIME, SEC::STREAM, HIP_UNSUPPORTED}},
 
@@ -1525,6 +1525,9 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP {
   {"hipGraphExecNodeSetParams",                               {HIP_6030, HIP_0,    HIP_0   }},
   {"hipLaunchKernelExC",                                      {HIP_7000, HIP_0,    HIP_0   }},
   {"hipDeviceGetTexture1DLinearMaxWidth",                     {HIP_6040, HIP_0,    HIP_0   }},
+  {"hipStreamGetId",                                          {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipStreamSetAttribute",                                   {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipStreamGetAttribute",                                   {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
 };
 
 const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_RUNTIME_FUNCTION_CHANGED_VER_MAP {

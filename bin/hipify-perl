@@ -1700,6 +1700,9 @@ my %experimental_funcs = (
     "cudaSyncPolicySpin" => "7.1.0",
     "cudaSyncPolicyBlockingSync" => "7.1.0",
     "cudaSyncPolicyAuto" => "7.1.0",
+    "cudaStreamSetAttribute" => "7.1.0",
+    "cudaStreamGetId" => "7.1.0",
+    "cudaStreamGetAttribute" => "7.1.0",
     "cudaStreamAttributeSynchronizationPolicy" => "7.1.0",
     "cudaStreamAttributeMemSyncDomainMap" => "7.1.0",
     "cudaStreamAttributeMemSyncDomain" => "7.1.0",
@@ -1742,6 +1745,9 @@ my %experimental_funcs = (
     "cudaDriverEntryPointSymbolNotFound" => "7.1.0",
     "cudaDriverEntryPointSuccess" => "7.1.0",
     "cudaDriverEntryPointQueryResult" => "7.1.0",
+    "cuStreamSetAttribute" => "7.1.0",
+    "cuStreamGetId" => "7.1.0",
+    "cuStreamGetAttribute" => "7.1.0",
     "FFTW_WISDOM_ONLY" => "7.1.0",
     "FFTW_UNALIGNED" => "7.1.0",
     "FFTW_PRESERVE_INPUT" => "7.1.0",
@@ -1949,6 +1955,12 @@ sub subst {
 }
 
 sub experimentalSubstitutions {
+    subst("cuStreamGetAttribute", "hipStreamGetAttribute", "stream");
+    subst("cuStreamGetId", "hipStreamGetId", "stream");
+    subst("cuStreamSetAttribute", "hipStreamSetAttribute", "stream");
+    subst("cudaStreamGetAttribute", "hipStreamGetAttribute", "stream");
+    subst("cudaStreamGetId", "hipStreamGetId", "stream");
+    subst("cudaStreamSetAttribute", "hipStreamSetAttribute", "stream");
     subst("fftw_plan_dft", "fftw_plan_dft", "library");
     subst("fftw_plan_dft_1d", "fftw_plan_dft_1d", "library");
     subst("fftw_plan_dft_2d", "fftw_plan_dft_2d", "library");
@@ -11751,11 +11763,8 @@ sub warnRemovedFunctions {
     "cudaThreadGetLimit",
     "cudaSurfaceFormatMode",
     "cudaStreamUpdateCaptureDependencies_v2",
-    "cudaStreamSetAttribute",
-    "cudaStreamGetId",
     "cudaStreamGetDevice",
     "cudaStreamGetCaptureInfo_v3",
-    "cudaStreamGetAttribute",
     "cudaStreamCopyAttributes",
     "cudaSharedmemCarveoutMaxShared",
     "cudaSharedmemCarveoutMaxL1",
@@ -12503,14 +12512,11 @@ sub warnRemovedFunctions {
     "cuSurfObjectDestroy",
     "cuSurfObjectCreate",
     "cuStreamUpdateCaptureDependencies_v2",
-    "cuStreamSetAttribute",
-    "cuStreamGetId",
     "cuStreamGetGreenCtx",
     "cuStreamGetDevice",
     "cuStreamGetCtx_v2",
     "cuStreamGetCtx",
     "cuStreamGetCaptureInfo_v3",
-    "cuStreamGetAttribute",
     "cuStreamCopyAttributes",
     "cuStreamBeginCapture_ptsz",
     "cuProfilerInitialize",

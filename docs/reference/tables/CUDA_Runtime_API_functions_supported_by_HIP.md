@@ -79,16 +79,16 @@
 |`cudaStreamCreateWithPriority`| | | | |`hipStreamCreateWithPriority`|2.0.0| | | | | |
 |`cudaStreamDestroy`| | | | |`hipStreamDestroy`|1.6.0| | | | | |
 |`cudaStreamEndCapture`|10.0| | | |`hipStreamEndCapture`|4.3.0| | | | | |
-|`cudaStreamGetAttribute`|11.0| | | | | | | | | | |
+|`cudaStreamGetAttribute`|11.0| | | |`hipStreamGetAttribute`|7.1.0| | | | |7.1.0|
 |`cudaStreamGetCaptureInfo`|10.1| |13.0| |`hipStreamGetCaptureInfo`|5.0.0| | | |13.0| |
 |`cudaStreamGetCaptureInfo_v3`|12.3| | | | | | | | | | |
 |`cudaStreamGetDevice`|12.8| | | | | | | | | | |
 |`cudaStreamGetFlags`| | | | |`hipStreamGetFlags`|1.6.0| | | | | |
-|`cudaStreamGetId`|12.0| | | | | | | | | | |
+|`cudaStreamGetId`|12.0| | | |`hipStreamGetId`|7.1.0| | | | |7.1.0|
 |`cudaStreamGetPriority`| | | | |`hipStreamGetPriority`|2.0.0| | | | | |
 |`cudaStreamIsCapturing`|10.0| | | |`hipStreamIsCapturing`|5.0.0| | | | | |
 |`cudaStreamQuery`| | | | |`hipStreamQuery`|1.6.0| | | | | |
-|`cudaStreamSetAttribute`|11.0| | | | | | | | | | |
+|`cudaStreamSetAttribute`|11.0| | | |`hipStreamSetAttribute`|7.1.0| | | | |7.1.0|
 |`cudaStreamSynchronize`| | | | |`hipStreamSynchronize`|1.6.0| | | | | |
 |`cudaStreamUpdateCaptureDependencies`|11.3| |13.0| |`hipStreamUpdateCaptureDependencies`|5.0.0| | | |13.0| |
 |`cudaStreamUpdateCaptureDependencies_v2`|12.3| | | | | | | | | | |

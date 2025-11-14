@@ -1496,6 +1496,22 @@ int main() {
   // HIP: hipError_t hipGraphKernelNodeCopyAttributes(hipGraphNode_t hSrc, hipGraphNode_t hDst);
   // CHECK: result = hipGraphKernelNodeCopyAttributes(graphNode, graphNode2);
   result = cuGraphKernelNodeCopyAttributes(graphNode, graphNode2);
+
+  // CHECK: hipLaunchAttributeID streamAttrID;
+  CUstreamAttrID streamAttrID;
+
+  // CHECK: hipLaunchAttributeValue streamAttrValue;
+  CUstreamAttrValue streamAttrValue;
+
+  // CUDA: CUresult CUDAAPI cuStreamSetAttribute(CUstream hStream, CUstreamAttrID attr, const CUstreamAttrValue* value);
+  // HIP: hipError_t hipStreamSetAttribute(hipStream_t stream, hipStreamAttrID attr, const hipStreamAttrValue* value);
+  // CHECK: result = hipStreamSetAttribute(stream, streamAttrID, &streamAttrValue);
+  result = cuStreamSetAttribute(stream, streamAttrID, &streamAttrValue);
+
+  // CUDA: CUresult CUDAAPI cuStreamGetAttribute(CUstream hStream, CUstreamAttrID attr, CUstreamAttrValue* value_out);
+  // HIP: hipError_t hipStreamGetAttribute(hipStream_t stream, hipStreamAttrID attr, hipStreamAttrValue* value_out);
+  // CHECK: result = hipStreamGetAttribute(stream, streamAttrID, &streamAttrValue);
+  result = cuStreamGetAttribute(stream, streamAttrID, &streamAttrValue);
 #endif
 
 #if CUDA_VERSION >= 11000 && CUDA_VERSION < 12000
@@ -1927,6 +1943,11 @@ int main() {
   // HIP: hipError_t hipGraphExecGetFlags(hipGraphExec_t graphExec, unsigned long long* flags);
   // CHECK: result = hipGraphExecGetFlags(graphExec, &ull);
   result = cuGraphExecGetFlags(graphExec, &ull);
+
+  // CUDA: CUresult CUDAAPI cuStreamGetId(CUstream hStream, unsigned long long *streamId);
+  // HIP: hipError_t hipStreamGetId(hipStream_t stream, unsigned long long* streamId);
+  // CHECK: result = hipStreamGetId(stream, &ull_2);
+  result = cuStreamGetId(stream, &ull_2);
 #endif
 
 #if CUDA_VERSION >= 12020

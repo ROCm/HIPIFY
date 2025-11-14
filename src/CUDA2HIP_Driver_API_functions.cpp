@@ -520,7 +520,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   // cudaStreamEndCapture
   {"cuStreamEndCapture",                                          {"hipStreamEndCapture",                                         "", CONV_STREAM, API_DRIVER, SEC::STREAM}},
   // cudaStreamGetAttribute
-  {"cuStreamGetAttribute",                                        {"hipStreamGetAttribute",                                       "", CONV_STREAM, API_DRIVER, SEC::STREAM, HIP_UNSUPPORTED}},
+  {"cuStreamGetAttribute",                                        {"hipStreamGetAttribute",                                       "", CONV_STREAM, API_DRIVER, SEC::STREAM, HIP_EXPERIMENTAL}},
   // cudaStreamGetCaptureInfo
   {"cuStreamGetCaptureInfo",                                      {"hipStreamGetCaptureInfo",                                     "", CONV_STREAM, API_DRIVER, SEC::STREAM, HIP_PARTIALLY_SUPPORTED}},
   {"cuStreamGetCaptureInfo_v2",                                   {"hipStreamGetCaptureInfo_v2",                                  "", CONV_STREAM, API_DRIVER, SEC::STREAM}},
@@ -543,7 +543,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   // cudaStreamQuery
   {"cuStreamQuery",                                               {"hipStreamQuery",                                              "", CONV_STREAM, API_DRIVER, SEC::STREAM}},
   // cudaStreamSetAttribute
-  {"cuStreamSetAttribute",                                        {"hipStreamSetAttribute",                                       "", CONV_STREAM, API_DRIVER, SEC::STREAM, HIP_UNSUPPORTED}},
+  {"cuStreamSetAttribute",                                        {"hipStreamSetAttribute",                                       "", CONV_STREAM, API_DRIVER, SEC::STREAM, HIP_EXPERIMENTAL}},
   // cudaStreamSynchronize
   {"cuStreamSynchronize",                                         {"hipStreamSynchronize",                                        "", CONV_STREAM, API_DRIVER, SEC::STREAM}},
   // cudaStreamWaitEvent
@@ -551,7 +551,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   // cudaThreadExchangeStreamCaptureMode
   {"cuThreadExchangeStreamCaptureMode",                           {"hipThreadExchangeStreamCaptureMode",                          "", CONV_STREAM, API_DRIVER, SEC::STREAM}},
   // cudaStreamGetId
-  {"cuStreamGetId",                                               {"hipStreamGetId",                                              "", CONV_STREAM, API_DRIVER, SEC::STREAM, HIP_UNSUPPORTED}},
+  {"cuStreamGetId",                                               {"hipStreamGetId",                                              "", CONV_STREAM, API_DRIVER, SEC::STREAM, HIP_EXPERIMENTAL}},
   // cudaStreamGetDevice
   {"cuStreamGetDevice",                                           {"hipStreamGetDevice",                                          "", CONV_STREAM, API_DRIVER, SEC::STREAM, HIP_UNSUPPORTED}},
 

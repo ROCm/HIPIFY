@@ -1969,7 +1969,7 @@
 |`cuStreamDestroy`| | | | |`hipStreamDestroy`|1.6.0| | | | | |
 |`cuStreamDestroy_v2`| | | | |`hipStreamDestroy`|1.6.0| | | | | |
 |`cuStreamEndCapture`|10.0| | | |`hipStreamEndCapture`|4.3.0| | | | | |
-|`cuStreamGetAttribute`|11.0| | | | | | | | | | |
+|`cuStreamGetAttribute`|11.0| | | |`hipStreamGetAttribute`|7.1.0| | | | |7.1.0|
 |`cuStreamGetCaptureInfo`|10.1| |13.0| |`hipStreamGetCaptureInfo`|5.0.0| | | |13.0| |
 |`cuStreamGetCaptureInfo_v2`|11.3| | | |`hipStreamGetCaptureInfo_v2`|5.0.0| | | | | |
 |`cuStreamGetCaptureInfo_v3`|12.3| | | | | | | | | | |
@@ -1977,11 +1977,11 @@
 |`cuStreamGetCtx_v2`|12.5| | | | | | | | | | |
 |`cuStreamGetDevice`|12.8| | | | | | | | | | |
 |`cuStreamGetFlags`| | | | |`hipStreamGetFlags`|1.6.0| | | | | |
-|`cuStreamGetId`|12.0| | | | | | | | | | |
+|`cuStreamGetId`|12.0| | | |`hipStreamGetId`|7.1.0| | | | |7.1.0|
 |`cuStreamGetPriority`| | | | |`hipStreamGetPriority`|2.0.0| | | | | |
 |`cuStreamIsCapturing`|10.0| | | |`hipStreamIsCapturing`|5.0.0| | | | | |
 |`cuStreamQuery`| | | | |`hipStreamQuery`|1.6.0| | | | | |
-|`cuStreamSetAttribute`|11.0| | | | | | | | | | |
+|`cuStreamSetAttribute`|11.0| | | |`hipStreamSetAttribute`|7.1.0| | | | |7.1.0|
 |`cuStreamSynchronize`| | | | |`hipStreamSynchronize`|1.6.0| | | | | |
 |`cuStreamUpdateCaptureDependencies`|11.3| |13.0| |`hipStreamUpdateCaptureDependencies`|5.0.0| | | |13.0| |
 |`cuStreamUpdateCaptureDependencies_v2`|12.3| | | | | | | | | | |
