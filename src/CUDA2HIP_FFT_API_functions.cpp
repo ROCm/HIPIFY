@@ -100,6 +100,17 @@ const std::map<llvm::StringRef, hipCounter> CUDA_FFT_FUNCTION_MAP {
   {"fftw_plan_dft_c2r_2d",                                {"fftw_plan_dft_c2r_2d",                                 "", CONV_LIB_FUNC, API_FFT, 2, HIP_EXPERIMENTAL}},
   {"fftw_plan_dft_c2r_3d",                                {"fftw_plan_dft_c2r_3d",                                 "", CONV_LIB_FUNC, API_FFT, 2, HIP_EXPERIMENTAL}},
   {"fftw_plan_dft_c2r",                                   {"fftw_plan_dft_c2r",                                    "", CONV_LIB_FUNC, API_FFT, 2, HIP_EXPERIMENTAL}},
+  {"fftw_plan_many_dft",                                  {"fftw_plan_many_dft",                                   "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED}},
+  {"fftw_plan_many_dft_r2c",                              {"fftw_plan_many_dft_r2c",                               "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED}},
+  {"fftw_plan_many_dft_c2r",                              {"fftw_plan_many_dft_c2r",                               "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED}},
+  {"fftw_plan_guru_dft",                                  {"fftw_plan_guru_dft",                                   "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED}},
+  {"fftw_plan_guru_dft_r2c",                              {"fftw_plan_guru_dft_r2c",                               "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED}},
+  {"fftw_plan_guru_dft_c2r",                              {"fftw_plan_guru_dft_c2r",                               "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED}},
+  {"fftw_plan_guru64_dft_r2c",                            {"fftw_plan_guru64_dft_r2c",                             "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED}},
+  {"fftw_plan_guru64_dft_c2r",                            {"fftw_plan_guru64_dft_c2r",                             "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED}},
+  {"fftw_execute_dft",                                    {"fftw_execute_dft",                                     "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED}},
+  {"fftw_execute_dft_r2c",                                {"fftw_execute_dft_r2c",                                 "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED}},
+  {"fftw_execute_dft_c2r",                                {"fftw_execute_dft_c2r",                                 "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_FFT_FUNCTION_VER_MAP {
@@ -115,6 +126,9 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_FFT_FUNCTION_VER_MAP {
   {"cufftSetPlanPropertyInt64",                           {CUDA_124, CUDA_0,   CUDA_0  }},
   {"cufftGetPlanPropertyInt64",                           {CUDA_124, CUDA_0,   CUDA_0  }},
   {"cufftResetPlanProperty",                              {CUDA_124, CUDA_0,   CUDA_0  }},
+  {"fftw_plan_guru64_dft",                                {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"fftw_plan_guru64_dft_r2c",                            {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"fftw_plan_guru64_dft_c2r",                            {CUDA_100, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_FFT_FUNCTION_VER_MAP {

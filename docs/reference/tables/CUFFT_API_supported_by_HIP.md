@@ -191,6 +191,9 @@
 |`cufftXtSetGPUs`| | | | |`hipfftXtSetGPUs`|6.0.0| | | | | |
 |`cufftXtSetWorkArea`| | | | | | | | | | | |
 |`cufftXtSetWorkAreaPolicy`|9.2| | | | | | | | | | |
+|`fftw_execute_dft`| | | | | | | | | | | |
+|`fftw_execute_dft_c2r`| | | | | | | | | | | |
+|`fftw_execute_dft_r2c`| | | | | | | | | | | |
 |`fftw_plan_dft`| | | | |`fftw_plan_dft`|7.1.0| | | | |7.1.0|
 |`fftw_plan_dft_1d`| | | | |`fftw_plan_dft_1d`|7.1.0| | | | |7.1.0|
 |`fftw_plan_dft_2d`| | | | |`fftw_plan_dft_2d`|7.1.0| | | | |7.1.0|
@@ -203,4 +206,12 @@
 |`fftw_plan_dft_r2c_1d`| | | | |`fftw_plan_dft_r2c_1d`|7.1.0| | | | |7.1.0|
 |`fftw_plan_dft_r2c_2d`| | | | |`fftw_plan_dft_r2c_2d`|7.1.0| | | | |7.1.0|
 |`fftw_plan_dft_r2c_3d`| | | | |`fftw_plan_dft_r2c_3d`|7.1.0| | | | |7.1.0|
+|`fftw_plan_guru64_dft_c2r`|10.0| | | | | | | | | | |
+|`fftw_plan_guru64_dft_r2c`|10.0| | | | | | | | | | |
+|`fftw_plan_guru_dft`| | | | | | | | | | | |
+|`fftw_plan_guru_dft_c2r`| | | | | | | | | | | |
+|`fftw_plan_guru_dft_r2c`| | | | | | | | | | | |
+|`fftw_plan_many_dft`| | | | | | | | | | | |
+|`fftw_plan_many_dft_c2r`| | | | | | | | | | | |
+|`fftw_plan_many_dft_r2c`| | | | | | | | | | | |
 
