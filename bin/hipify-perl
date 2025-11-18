@@ -1680,6 +1680,18 @@ my %removed_funcs = (
 );
 
 my %experimental_funcs = (
+    "fftwf_plan_dft_r2c_3d" => "7.1.0",
+    "fftwf_plan_dft_r2c_2d" => "7.1.0",
+    "fftwf_plan_dft_r2c_1d" => "7.1.0",
+    "fftwf_plan_dft_r2c" => "7.1.0",
+    "fftwf_plan_dft_c2r_3d" => "7.1.0",
+    "fftwf_plan_dft_c2r_2d" => "7.1.0",
+    "fftwf_plan_dft_c2r_1d" => "7.1.0",
+    "fftwf_plan_dft_c2r" => "7.1.0",
+    "fftwf_plan_dft_3d" => "7.1.0",
+    "fftwf_plan_dft_2d" => "7.1.0",
+    "fftwf_plan_dft_1d" => "7.1.0",
+    "fftwf_plan_dft" => "7.1.0",
     "fftwf_plan" => "7.1.0",
     "fftwf_complex" => "7.1.0",
     "fftw_plan_dft_r2c_3d" => "7.1.0",
@@ -1694,6 +1706,7 @@ my %experimental_funcs = (
     "fftw_plan_dft_1d" => "7.1.0",
     "fftw_plan_dft" => "7.1.0",
     "fftw_plan" => "7.1.0",
+    "fftw_execute" => "7.1.0",
     "fftw_complex" => "7.1.0",
     "cudaSynchronizationPolicy" => "7.1.0",
     "cudaSyncPolicyYield" => "7.1.0",
@@ -1979,6 +1992,7 @@ sub experimentalSubstitutions {
     subst("cudaStreamGetAttribute", "hipStreamGetAttribute", "stream");
     subst("cudaStreamGetId", "hipStreamGetId", "stream");
     subst("cudaStreamSetAttribute", "hipStreamSetAttribute", "stream");
+    subst("fftw_execute", "fftw_execute", "library");
     subst("fftw_plan_dft", "fftw_plan_dft", "library");
     subst("fftw_plan_dft_1d", "fftw_plan_dft_1d", "library");
     subst("fftw_plan_dft_2d", "fftw_plan_dft_2d", "library");
@@ -1991,6 +2005,18 @@ sub experimentalSubstitutions {
     subst("fftw_plan_dft_r2c_1d", "fftw_plan_dft_r2c_1d", "library");
     subst("fftw_plan_dft_r2c_2d", "fftw_plan_dft_r2c_2d", "library");
     subst("fftw_plan_dft_r2c_3d", "fftw_plan_dft_r2c_3d", "library");
+    subst("fftwf_plan_dft", "fftwf_plan_dft", "library");
+    subst("fftwf_plan_dft_1d", "fftwf_plan_dft_1d", "library");
+    subst("fftwf_plan_dft_2d", "fftwf_plan_dft_2d", "library");
+    subst("fftwf_plan_dft_3d", "fftwf_plan_dft_3d", "library");
+    subst("fftwf_plan_dft_c2r", "fftwf_plan_dft_c2r", "library");
+    subst("fftwf_plan_dft_c2r_1d", "fftwf_plan_dft_c2r_1d", "library");
+    subst("fftwf_plan_dft_c2r_2d", "fftwf_plan_dft_c2r_2d", "library");
+    subst("fftwf_plan_dft_c2r_3d", "fftwf_plan_dft_c2r_3d", "library");
+    subst("fftwf_plan_dft_r2c", "fftwf_plan_dft_r2c", "library");
+    subst("fftwf_plan_dft_r2c_1d", "fftwf_plan_dft_r2c_1d", "library");
+    subst("fftwf_plan_dft_r2c_2d", "fftwf_plan_dft_r2c_2d", "library");
+    subst("fftwf_plan_dft_r2c_3d", "fftwf_plan_dft_r2c_3d", "library");
     subst("CUDA_MEMCPY3D_BATCH_OP", "hipMemcpy3DBatchOp", "type");
     subst("CUDA_MEMCPY3D_BATCH_OP_st", "hipMemcpy3DBatchOp", "type");
     subst("CUDA_MEMCPY3D_BATCH_OP_v1", "hipMemcpy3DBatchOp", "type");
