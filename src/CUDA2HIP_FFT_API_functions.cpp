@@ -106,11 +106,28 @@ const std::map<llvm::StringRef, hipCounter> CUDA_FFT_FUNCTION_MAP {
   {"fftw_plan_guru_dft",                                  {"fftw_plan_guru_dft",                                   "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED}},
   {"fftw_plan_guru_dft_r2c",                              {"fftw_plan_guru_dft_r2c",                               "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED}},
   {"fftw_plan_guru_dft_c2r",                              {"fftw_plan_guru_dft_c2r",                               "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED}},
+  {"fftw_plan_guru64_dft",                                {"fftw_plan_guru64_dft",                                 "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED}},
   {"fftw_plan_guru64_dft_r2c",                            {"fftw_plan_guru64_dft_r2c",                             "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED}},
   {"fftw_plan_guru64_dft_c2r",                            {"fftw_plan_guru64_dft_c2r",                             "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED}},
   {"fftw_execute_dft",                                    {"fftw_execute_dft",                                     "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED}},
   {"fftw_execute_dft_r2c",                                {"fftw_execute_dft_r2c",                                 "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED}},
   {"fftw_execute_dft_c2r",                                {"fftw_execute_dft_c2r",                                 "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED}},
+  {"fftwf_plan_many_dft",                                 {"fftwf_plan_many_dft",                                  "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED}},
+  {"fftwf_plan_many_dft_r2c",                             {"fftwf_plan_many_dft_r2c",                              "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED}},
+  {"fftwf_plan_many_dft_c2r",                             {"fftwf_plan_many_dft_c2r",                              "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED}},
+  {"fftwf_plan_guru_dft",                                 {"fftwf_plan_guru_dft",                                  "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED}},
+  {"fftwf_plan_guru_dft_r2c",                             {"fftwf_plan_guru_dft_r2c",                              "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED}},
+  {"fftwf_plan_guru_dft_c2r",                             {"fftwf_plan_guru_dft_c2r",                              "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED}},
+  {"fftwf_plan_guru64_dft",                               {"fftwf_plan_guru64_dft",                                "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED}},
+  {"fftwf_plan_guru64_dft_r2c",                           {"fftwf_plan_guru64_dft_r2c",                            "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED}},
+  {"fftwf_plan_guru64_dft_c2r",                           {"fftwf_plan_guru64_dft_c2r",                            "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED}},
+  {"fftwf_execute_dft",                                   {"fftwf_execute_dft",                                    "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED}},
+  {"fftwf_execute_dft_r2c",                               {"fftwf_execute_dft_r2c",                                "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED}},
+  {"fftwf_execute_dft_c2r",                               {"fftwf_execute_dft_c2r",                                "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED}},
+  {"fftw_export_wisdom_to_file",                          {"fftw_export_wisdom_to_file",                           "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED}},
+  {"fftwf_export_wisdom_to_file",                         {"fftwf_export_wisdom_to_file",                          "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED}},
+  {"fftw_import_wisdom_from_file",                        {"fftw_import_wisdom_from_file",                         "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED}},
+  {"fftwf_import_wisdom_from_file",                       {"fftwf_import_wisdom_from_file",                        "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_FFT_FUNCTION_VER_MAP {
@@ -129,6 +146,9 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_FFT_FUNCTION_VER_MAP {
   {"fftw_plan_guru64_dft",                                {CUDA_100, CUDA_0,   CUDA_0  }},
   {"fftw_plan_guru64_dft_r2c",                            {CUDA_100, CUDA_0,   CUDA_0  }},
   {"fftw_plan_guru64_dft_c2r",                            {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"fftwf_plan_guru64_dft",                               {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"fftwf_plan_guru64_dft_r2c",                           {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"fftwf_plan_guru64_dft_c2r",                           {CUDA_100, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_FFT_FUNCTION_VER_MAP {

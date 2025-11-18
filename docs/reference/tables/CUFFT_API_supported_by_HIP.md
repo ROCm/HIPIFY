@@ -194,6 +194,8 @@
 |`fftw_execute_dft`| | | | | | | | | | | |
 |`fftw_execute_dft_c2r`| | | | | | | | | | | |
 |`fftw_execute_dft_r2c`| | | | | | | | | | | |
+|`fftw_export_wisdom_to_file`| | | | | | | | | | | |
+|`fftw_import_wisdom_from_file`| | | | | | | | | | | |
 |`fftw_plan_dft`| | | | |`fftw_plan_dft`|7.1.0| | | | |7.1.0|
 |`fftw_plan_dft_1d`| | | | |`fftw_plan_dft_1d`|7.1.0| | | | |7.1.0|
 |`fftw_plan_dft_2d`| | | | |`fftw_plan_dft_2d`|7.1.0| | | | |7.1.0|
@@ -206,6 +208,7 @@
 |`fftw_plan_dft_r2c_1d`| | | | |`fftw_plan_dft_r2c_1d`|7.1.0| | | | |7.1.0|
 |`fftw_plan_dft_r2c_2d`| | | | |`fftw_plan_dft_r2c_2d`|7.1.0| | | | |7.1.0|
 |`fftw_plan_dft_r2c_3d`| | | | |`fftw_plan_dft_r2c_3d`|7.1.0| | | | |7.1.0|
+|`fftw_plan_guru64_dft`|10.0| | | | | | | | | | |
 |`fftw_plan_guru64_dft_c2r`|10.0| | | | | | | | | | |
 |`fftw_plan_guru64_dft_r2c`|10.0| | | | | | | | | | |
 |`fftw_plan_guru_dft`| | | | | | | | | | | |
@@ -214,4 +217,18 @@
 |`fftw_plan_many_dft`| | | | | | | | | | | |
 |`fftw_plan_many_dft_c2r`| | | | | | | | | | | |
 |`fftw_plan_many_dft_r2c`| | | | | | | | | | | |
+|`fftwf_execute_dft`| | | | | | | | | | | |
+|`fftwf_execute_dft_c2r`| | | | | | | | | | | |
+|`fftwf_execute_dft_r2c`| | | | | | | | | | | |
+|`fftwf_export_wisdom_to_file`| | | | | | | | | | | |
+|`fftwf_import_wisdom_from_file`| | | | | | | | | | | |
+|`fftwf_plan_guru64_dft`|10.0| | | | | | | | | | |
+|`fftwf_plan_guru64_dft_c2r`|10.0| | | | | | | | | | |
+|`fftwf_plan_guru64_dft_r2c`|10.0| | | | | | | | | | |
+|`fftwf_plan_guru_dft`| | | | | | | | | | | |
+|`fftwf_plan_guru_dft_c2r`| | | | | | | | | | | |
+|`fftwf_plan_guru_dft_r2c`| | | | | | | | | | | |
+|`fftwf_plan_many_dft`| | | | | | | | | | | |
+|`fftwf_plan_many_dft_c2r`| | | | | | | | | | | |
+|`fftwf_plan_many_dft_r2c`| | | | | | | | | | | |
 
