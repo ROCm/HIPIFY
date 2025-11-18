@@ -396,11 +396,12 @@ int main() {
 #endif
 
 #if CUDA_VERSION >= 9000
+#if CUDA_VERSION < 13000
   // CHECK: int CooperativeLaunchMultiDeviceNoPreSync = hipCooperativeLaunchMultiDeviceNoPreSync;
   // CHECK-NEXT: int CooperativeLaunchMultiDeviceNoPostSync = hipCooperativeLaunchMultiDeviceNoPostSync;
   int CooperativeLaunchMultiDeviceNoPreSync = cudaCooperativeLaunchMultiDeviceNoPreSync;
   int CooperativeLaunchMultiDeviceNoPostSync = cudaCooperativeLaunchMultiDeviceNoPostSync;
-
+#endif
   // CHECK: hipStream_t StreamLegacy = hipStreamLegacy;
   cudaStream_t StreamLegacy = cudaStreamLegacy;
 #endif

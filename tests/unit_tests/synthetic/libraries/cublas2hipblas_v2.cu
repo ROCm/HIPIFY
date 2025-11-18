@@ -173,9 +173,11 @@ int main() {
   int64_t batchCount_64 = 0;
   int P = 0;
   int info = 0;
-  void* image = nullptr;
-  void* image_2 = nullptr;
-  void* deviceptr = nullptr;
+  void *image = nullptr;
+  void *image_2 = nullptr;
+  void *deviceptr = nullptr;
+  void *workspace = nullptr;
+  size_t workspaceSizeInBytes = 0;
 
   // CUDA: cublasStatus_t CUBLASWINAPI cublasSetVector(int n, int elemSize, const void* x, int incx, void* devicePtr, int incy);
   // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasSetVector(int n, int elemSize, const void* x, int incx, void* y, int incy);
@@ -1963,6 +1965,15 @@ int main() {
   // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasGemmStridedBatchedEx(hipblasHandle_t handle, hipblasOperation_t transA, hipblasOperation_t transB, int m, int n, int k, const void* alpha, const void* A, hipDataType aType, int lda, hipblasStride strideA, const void* B, hipDataType bType, int ldb, hipblasStride strideB, const void* beta, void* C, hipDataType cType, int ldc, hipblasStride strideC, int batchCount, hipblasComputeType_t computeType, hipblasGemmAlgo_t algo);
   // CHECK: blasStatus = hipblasGemmStridedBatchedEx(blasHandle, transa, transb, m, n, k, aptr, Aptr, Atype, lda, strideA, Bptr, Btype, ldb, strideB, bptr, Cptr, Ctype, ldc, strideC, batchCount, computeType, blasGemmAlgo);
   blasStatus = cublasGemmStridedBatchedEx(blasHandle, transa, transb, m, n, k, aptr, Aptr, Atype, lda, strideA, Bptr, Btype, ldb, strideB, bptr, Cptr, Ctype, ldc, strideC, batchCount, computeType, blasGemmAlgo);
+#endif
+
+#if CUDA_VERSION >= 11000 && CUBLAS_VERSION >= 11200 // CUDA 11.0.3
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasSetWorkspace_v2(cublasHandle_t handle, void* workspace, size_t workspaceSizeInBytes);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasSetWorkspace(hipblasHandle_t handle, void* workspace, size_t workspaceSizeInBytes);
+  // CHECK: blasStatus = hipblasSetWorkspace(blasHandle, workspace, workspaceSizeInBytes);
+  // CHECK-NEXT: blasStatus = hipblasSetWorkspace(blasHandle, workspace, workspaceSizeInBytes);
+  blasStatus = cublasSetWorkspace(blasHandle, workspace, workspaceSizeInBytes);
+  blasStatus = cublasSetWorkspace_v2(blasHandle, workspace, workspaceSizeInBytes);
 #endif
 
 #if CUDA_VERSION > 11060 && CUBLAS_VERSION >= 110902 // CUDA 11.6.2

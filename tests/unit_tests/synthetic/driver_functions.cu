@@ -34,6 +34,7 @@ int main() {
   int hipVersion = 0;
   size_t bytes = 0;
   size_t bytes_2 = 0;
+  size_t dstPitch = 0;
   void *image = nullptr;
   void *pfn = nullptr;
   void *paramsprt = nullptr;
@@ -189,16 +190,6 @@ int main() {
   // HIP: hipError_t hipDevicePrimaryCtxSetFlags(hipDevice_t dev, unsigned int flags);
   // CHECK: result = hipDevicePrimaryCtxSetFlags(device, flags);
   result = cuDevicePrimaryCtxSetFlags(device, flags);
-
-  // [TODO][#2062] Rename all DO-NOT-CHECK back
-#if CUDA_VERSION < 13000
-  // CUDA: CUresult CUDAAPI cuCtxCreate(CUcontext *pctx, unsigned int flags, CUdevice dev);
-  // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipCtxCreate(hipCtx_t *ctx, unsigned int flags, hipDevice_t device);
-  // DO-NOT-CHECK: result = hipCtxCreate(&context, flags, device);
-  // DO-NOT-CHECK-NEXT: result = hipCtxCreate(&context, flags, device);
-  result = cuCtxCreate(&context, flags, device);
-  result = cuCtxCreate_v2(&context, flags, device);
-#endif
 
   // CUDA: CUresult CUDAAPI cuCtxDestroy(CUcontext ctx);
   // HIP: DEPRECATED(DEPRECATED_MSG) hipError_t hipCtxDestroy(hipCtx_t ctx);
@@ -488,14 +479,14 @@ int main() {
   result = cuMemcpyHtoA_v2(array_, offset, dsthost, bytes);
 
   // CUDA: CUresult CUDAAPI cuMemcpyHtoD(CUdeviceptr dstDevice, const void *srcHost, size_t ByteCount);
-  // HIP: hipError_t hipMemcpyHtoD(hipDeviceptr_t dst, void* src, size_t sizeBytes);
+  // HIP: hipError_t hipMemcpyHtoD(hipDeviceptr_t dst, const void* src, size_t sizeBytes);
   // CHECK: result = hipMemcpyHtoD(deviceptr, dsthost, bytes);
   // CHECK-NEXT: result = hipMemcpyHtoD(deviceptr, dsthost, bytes);
   result = cuMemcpyHtoD(deviceptr, dsthost, bytes);
   result = cuMemcpyHtoD_v2(deviceptr, dsthost, bytes);
 
   // CUDA: CUresult CUDAAPI cuMemcpyHtoDAsync(CUdeviceptr dstDevice, const void *srcHost, size_t ByteCount, CUstream hStream);
-  // HIP: hipError_t hipMemcpyHtoDAsync(hipDeviceptr_t dst, void* src, size_t sizeBytes, hipStream_t stream);
+  // HIP: hipError_t hipMemcpyHtoDAsync(hipDeviceptr_t dst, const void* src, size_t sizeBytes, hipStream_t stream);
   // CHECK: result = hipMemcpyHtoDAsync(deviceptr, dsthost, bytes, stream);
   // CHECK-NEXT: result = hipMemcpyHtoDAsync(deviceptr, dsthost, bytes, stream);
   result = cuMemcpyHtoDAsync(deviceptr, dsthost, bytes, stream);
@@ -593,6 +584,46 @@ int main() {
   // HIP: hipError_t hipMemsetD8Async(hipDeviceptr_t dest, unsigned char value, size_t count, hipStream_t stream __dparm(0));
   // CHECK: result = hipMemsetD8Async(deviceptr, uc, bytes, stream);
   result = cuMemsetD8Async(deviceptr, uc, bytes, stream);
+
+  // CUDA: CUresult CUDAAPI cuMemsetD2D8   (CUdeviceptr dstDevice, size_t dstPitch, unsigned char uc, size_t Width, size_t Height);
+  // CUDA: CUresult CUDAAPI cuMemsetD2D8_v2(CUdeviceptr dstDevice, size_t dstPitch, unsigned char uc, size_t Width, size_t Height);
+  // HIP: hipError_t hipMemsetD2D8(hipDeviceptr_t dst, size_t dstPitch, unsigned char value, size_t width, size_t height);
+  // CHECK: result = hipMemsetD2D8(deviceptr, dstPitch, uc, width, height);
+  // CHECK-NEXT: result = hipMemsetD2D8(deviceptr, dstPitch, uc, width, height);
+  result = cuMemsetD2D8(deviceptr, dstPitch, uc, width, height);
+  result = cuMemsetD2D8_v2(deviceptr, dstPitch, uc, width, height);
+
+  // CUDA: CUresult CUDAAPI cuMemsetD2D8Async(CUdeviceptr dstDevice, size_t dstPitch, unsigned char uc, size_t Width, size_t Height, CUstream hStream);
+  // HIP: hipError_t hipMemsetD2D8Async(hipDeviceptr_t dst, size_t dstPitch, unsigned char value, size_t width, size_t height, hipStream_t stream __dparm(0));
+  // CHECK: result = hipMemsetD2D8Async(deviceptr, dstPitch, uc, width, height, stream);
+  result = cuMemsetD2D8Async(deviceptr, dstPitch, uc, width, height, stream);
+
+  // CUDA: CUresult CUDAAPI cuMemsetD2D16   (CUdeviceptr dstDevice, size_t dstPitch, unsigned short us, size_t Width, size_t Height);
+  // CUDA: CUresult CUDAAPI cuMemsetD2D16_v2(CUdeviceptr dstDevice, size_t dstPitch, unsigned short us, size_t Width, size_t Height);
+  // HIP: hipError_t hipMemsetD2D16(hipDeviceptr_t dst, size_t dstPitch, unsigned short value, size_t width, size_t height);
+  // CHECK: result = hipMemsetD2D16(deviceptr, dstPitch, us, width, height);
+  // CHECK-NEXT: result = hipMemsetD2D16(deviceptr, dstPitch, us, width, height);
+  result = cuMemsetD2D16(deviceptr, dstPitch, us, width, height);
+  result = cuMemsetD2D16_v2(deviceptr, dstPitch, us, width, height);
+
+  // CUDA: CUresult CUDAAPI cuMemsetD2D16Async(CUdeviceptr dstDevice, size_t dstPitch, unsigned short us, size_t Width, size_t Height, CUstream hStream);
+  // HIP: hipError_t hipMemsetD2D16Async(hipDeviceptr_t dst, size_t dstPitch, unsigned short value, size_t width, size_t height, hipStream_t stream __dparm(0));
+  // CHECK: result = hipMemsetD2D16Async(deviceptr, dstPitch, us, width, height, stream);
+  result = cuMemsetD2D16Async(deviceptr, dstPitch, us, width, height, stream);
+
+  unsigned int ui = 0;
+  // CUDA: CUresult CUDAAPI cuMemsetD2D32   (CUdeviceptr dstDevice, size_t dstPitch, unsigned int ui, size_t Width, size_t Height);
+  // CUDA: CUresult CUDAAPI cuMemsetD2D32_v2(CUdeviceptr dstDevice, size_t dstPitch, unsigned int ui, size_t Width, size_t Height);
+  // HIP: hipError_t hipMemsetD2D32(hipDeviceptr_t dst, size_t dstPitch, unsigned int value, size_t width, size_t height);
+  // CHECK: result = hipMemsetD2D32(deviceptr, dstPitch, ui, width, height);
+  // CHECK-NEXT: result = hipMemsetD2D32(deviceptr, dstPitch, ui, width, height);
+  result = cuMemsetD2D32(deviceptr, dstPitch, ui, width, height);
+  result = cuMemsetD2D32_v2(deviceptr, dstPitch, ui, width, height);
+
+  // CUDA: CUresult CUDAAPI cuMemsetD2D32Async(CUdeviceptr dstDevice, size_t dstPitch, unsigned int ui, size_t Width, size_t Height, CUstream hStream);
+  // HIP: hipError_t hipMemsetD2D32Async(hipDeviceptr_t dst, size_t dstPitch, unsigned int value, size_t width, size_t height, hipStream_t stream __dparm(0));
+  // CHECK: result = hipMemsetD2D32Async(deviceptr, dstPitch, ui, width, height, stream);
+  result = cuMemsetD2D32Async(deviceptr, dstPitch, ui, width, height, stream);
 
   // CUDA: CUresult CUDAAPI cuMipmappedArrayCreate(CUmipmappedArray *pHandle, const CUDA_ARRAY3D_DESCRIPTOR *pMipmappedArrayDesc, unsigned int numMipmapLevels);
   // HIP: hipError_t hipMipmappedArrayCreate(hipMipmappedArray_t* pHandle, HIP_ARRAY3D_DESCRIPTOR* pMipmappedArrayDesc, unsigned int numMipmapLevels);
@@ -1040,19 +1071,6 @@ int main() {
   CUmem_range_attribute MemoryRangeAttribute;
   CUmem_advise MemoryAdvise;
 
-  // [TODO][#2062] Rename all DO-NOT-CHECK back
-#if CUDA_VERSION < 13000
-  // CUDA: CUresult CUDAAPI cuMemAdvise(CUdeviceptr devPtr, size_t count, CUmem_advise advice, CUdevice device);
-  // HIP: hipError_t hipMemAdvise(const void* dev_ptr, size_t count, hipMemoryAdvise advice, int device);
-  // DO-NOT-CHECK: result = hipMemAdvise(deviceptr, bytes, MemoryAdvise, device);
-  result = cuMemAdvise(deviceptr, bytes, MemoryAdvise, device);
-
-  // CUDA: CUresult CUDAAPI cuMemPrefetchAsync(CUdeviceptr devPtr, size_t count, CUdevice dstDevice, CUstream hStream);
-  // HIP: hipError_t hipMemPrefetchAsync(const void* dev_ptr, size_t count, int device, hipStream_t stream __dparm(0));
-  // DO-NOT-CHECK: result = hipMemPrefetchAsync(deviceptr, bytes, device, stream);
-  result = cuMemPrefetchAsync(deviceptr, bytes, device, stream);
-#endif
-
   // CUDA: CUresult CUDAAPI cuMemRangeGetAttribute(void *data, size_t dataSize, CUmem_range_attribute attribute, CUdeviceptr devPtr, size_t count);
   // HIP: hipError_t hipMemRangeGetAttribute(void* data, size_t data_size, hipMemRangeAttribute attribute, const void* dev_ptr, size_t count);
   // CHECK: result = hipMemRangeGetAttribute(image, bytes, MemoryRangeAttribute, deviceptr, bytes);
@@ -1213,34 +1231,6 @@ int main() {
   // HIP: hipError_t hipWaitExternalSemaphoresAsync(const hipExternalSemaphore_t* extSemArray, const hipExternalSemaphoreWaitParams* paramsArray, unsigned int numExtSems, hipStream_t stream);
   // CHECK: result = hipWaitExternalSemaphoresAsync(&externalSemaphore, &EXTERNAL_SEMAPHORE_WAIT_PARAMS, flags, stream);
   result = cuWaitExternalSemaphoresAsync(&externalSemaphore, &EXTERNAL_SEMAPHORE_WAIT_PARAMS, flags, stream);
-
-  // [TODO][#2062] Rename all DO-NOT-CHECK back
-#if CUDA_VERSION < 13000
-  // CUDA: CUresult CUDAAPI cuGraphAddDependencies(CUgraph hGraph, const CUgraphNode *from, const CUgraphNode *to, size_t numDependencies);
-  // HIP: hipError_t hipGraphAddDependencies(hipGraph_t graph, const hipGraphNode_t* from, const hipGraphNode_t* to, size_t numDependencies);
-  // DO-NOT-CHECK: result = hipGraphAddDependencies(graph, &graphNode, &graphNode2, bytes);
-  result = cuGraphAddDependencies(graph, &graphNode, &graphNode2, bytes);
-
-  // CUDA: CUresult CUDAAPI cuGraphRemoveDependencies(CUgraph hGraph, const CUgraphNode *from, const CUgraphNode *to, size_t numDependencies);
-  // HIP: hipError_t hipGraphRemoveDependencies(hipGraph_t graph, const hipGraphNode_t* from, const hipGraphNode_t* to, size_t numDependencies);
-  // DO-NOT-CHECK: result = hipGraphRemoveDependencies(graph, &graphNode, &graphNode2, bytes);
-  result = cuGraphRemoveDependencies(graph, &graphNode, &graphNode2, bytes);
-
-  // CUDA: CUresult CUDAAPI cuGraphGetEdges(CUgraph hGraph, CUgraphNode *from, CUgraphNode *to, size_t *numEdges);
-  // HIP: hipError_t hipGraphGetEdges(hipGraph_t graph, hipGraphNode_t* from, hipGraphNode_t* to, size_t* numEdges);
-  // DO-NOT-CHECK: result = hipGraphGetEdges(graph, &graphNode, &graphNode2, &bytes);
-  result = cuGraphGetEdges(graph, &graphNode, &graphNode2, &bytes);
-
-  // CUDA: CUresult CUDAAPI cuGraphNodeGetDependencies(CUgraphNode hNode, CUgraphNode *dependencies, size_t *numDependencies);
-  // HIP: hipError_t hipGraphNodeGetDependencies(hipGraphNode_t node, hipGraphNode_t* pDependencies, size_t* pNumDependencies);
-  // DO-NOT-CHECK: result = hipGraphNodeGetDependencies(graphNode, &graphNode2, &bytes);
-  result = cuGraphNodeGetDependencies(graphNode, &graphNode2, &bytes);
-
-  // CUDA: CUresult CUDAAPI cuGraphNodeGetDependentNodes(CUgraphNode hNode, CUgraphNode *dependentNodes, size_t *numDependentNodes);
-  // HIP: hipError_t hipGraphNodeGetDependentNodes(hipGraphNode_t node, hipGraphNode_t* pDependentNodes, size_t* pNumDependentNodes);
-  // DO-NOT-CHECK: result = hipGraphNodeGetDependentNodes(graphNode, &graphNode2, &bytes);
-  result = cuGraphNodeGetDependentNodes(graphNode, &graphNode2, &bytes);
-#endif
 
   // CUDA: CUresult CUDAAPI cuGraphAddEmptyNode(CUgraphNode *phGraphNode, CUgraph hGraph, const CUgraphNode *dependencies, size_t numDependencies);
   // HIP: hipError_t hipGraphAddEmptyNode(hipGraphNode_t* pGraphNode, hipGraph_t graph, const hipGraphNode_t* pDependencies, size_t numDependencies);
@@ -1547,6 +1537,22 @@ int main() {
   // HIP: hipError_t hipGraphKernelNodeCopyAttributes(hipGraphNode_t hSrc, hipGraphNode_t hDst);
   // CHECK: result = hipGraphKernelNodeCopyAttributes(graphNode, graphNode2);
   result = cuGraphKernelNodeCopyAttributes(graphNode, graphNode2);
+
+  // CHECK: hipLaunchAttributeID streamAttrID;
+  CUstreamAttrID streamAttrID;
+
+  // CHECK: hipLaunchAttributeValue streamAttrValue;
+  CUstreamAttrValue streamAttrValue;
+
+  // CUDA: CUresult CUDAAPI cuStreamSetAttribute(CUstream hStream, CUstreamAttrID attr, const CUstreamAttrValue* value);
+  // HIP: hipError_t hipStreamSetAttribute(hipStream_t stream, hipStreamAttrID attr, const hipStreamAttrValue* value);
+  // CHECK: result = hipStreamSetAttribute(stream, streamAttrID, &streamAttrValue);
+  result = cuStreamSetAttribute(stream, streamAttrID, &streamAttrValue);
+
+  // CUDA: CUresult CUDAAPI cuStreamGetAttribute(CUstream hStream, CUstreamAttrID attr, CUstreamAttrValue* value_out);
+  // HIP: hipError_t hipStreamGetAttribute(hipStream_t stream, hipStreamAttrID attr, hipStreamAttrValue* value_out);
+  // CHECK: result = hipStreamGetAttribute(stream, streamAttrID, &streamAttrValue);
+  result = cuStreamGetAttribute(stream, streamAttrID, &streamAttrValue);
 #endif
 
 #if CUDA_VERSION >= 11000 && CUDA_VERSION < 12000
@@ -1769,14 +1775,6 @@ int main() {
 #endif
 
 #if CUDA_VERSION >= 11030
-  // [TODO][#2062] Rename all DO-NOT-CHECK back
-#if CUDA_VERSION < 13000
-  // CUDA: CUresult CUDAAPI cuStreamUpdateCaptureDependencies(CUstream hStream, CUgraphNode *dependencies, size_t numDependencies, unsigned int flags);
-  // HIP: hipError_t hipStreamUpdateCaptureDependencies(hipStream_t stream, hipGraphNode_t* dependencies, size_t numDependencies, unsigned int flags __dparm(0));
-  // DO-NOT-CHECK: result = hipStreamUpdateCaptureDependencies(stream, &graphNode, bytes, flags);
-  result = cuStreamUpdateCaptureDependencies(stream, &graphNode, bytes, flags);
-#endif
-
   // CHECK: hipUserObject_t userObject;
   CUuserObject userObject;
 
@@ -1861,14 +1859,6 @@ int main() {
 #if CUDA_VERSION < 12020
   // CHECK: hipMemAllocNodeParams MEM_ALLOC_NODE_PARAMS_st;
   CUDA_MEM_ALLOC_NODE_PARAMS_st MEM_ALLOC_NODE_PARAMS_st;
-#endif
-
-  // [TODO][#2062] Rename all DO-NOT-CHECK back
-#if CUDA_VERSION < 13000
-  // DO-NOT-CUDA: CUresult CUDAAPI cuDeviceGetUuid_v2(CUuuid *uuid, CUdevice dev);
-  // HIP: hipError_t hipDeviceGetUuid(hipUUID* uuid, hipDevice_t device);
-  // CHECK: result = hipDeviceGetUuid(&uuid, device);
-  result = cuDeviceGetUuid_v2(&uuid, device);
 #endif
 
 #endif
@@ -1967,19 +1957,6 @@ int main() {
   CUDA_GRAPH_INSTANTIATE_PARAMS_st GRAPH_INSTANTIATE_PARAMS_st;
   CUDA_GRAPH_INSTANTIATE_PARAMS GRAPH_INSTANTIATE_PARAMS;
 
-  // [TODO][#2062] Rename all DO-NOT-CHECK back
-#if CUDA_VERSION < 13000
-  // TODO: [#782] Introduce 1-to-N conditional matcher
-  //       Implement "conditional" matching in hipify-clang, based on CUDA_VERSION first;
-  //       below the transformation cuStreamGetCaptureInfo -> hipStreamGetCaptureInfo_v2 should be applied for CUDA_VERSION >= 12000,
-  //       otherwise, cuStreamGetCaptureInfo -> hipStreamGetCaptureInfo should be applied
-  // CUDA < 12000: CUresult CUDAAPI cuStreamGetCaptureInfo(CUstream hStream, CUstreamCaptureStatus *captureStatus_out, cuuint64_t *id_out);
-  // CUDA:         CUresult CUDAAPI cuStreamGetCaptureInfo(CUstream hStream, CUstreamCaptureStatus *captureStatus_out, cuuint64_t *id_out, CUgraph *graph_out, const CUgraphNode **dependencies_out, size_t *numDependencies_out);
-  // HIP: hipError_t hipStreamGetCaptureInfo_v2(hipStream_t stream, hipStreamCaptureStatus* captureStatus_out, unsigned long long* id_out __dparm(0), hipGraph_t* graph_out __dparm(0), const hipGraphNode_t** dependencies_out __dparm(0), size_t* numDependencies_out __dparm(0));
-  //
-  result = cuStreamGetCaptureInfo(stream, &streamCaptureStatus, &ull, &graph, &pGraphNode, &bytes);
-#endif
-
   // NOTE: not implemented yet in HIP
   // CUDA < 12000: CUresult CUDAAPI cuGraphExecUpdate(CUgraphExec hGraphExec, CUgraph hGraph, CUgraphNode *hErrorNode_out, CUgraphExecUpdateResult *updateResult_out);
   // CUDA:         CUresult CUDAAPI cuGraphExecUpdate(CUgraphExec hGraphExec, CUgraph hGraph, CUgraphExecUpdateResultInfo *resultInfo);
@@ -2007,19 +1984,16 @@ int main() {
   // HIP: hipError_t hipGraphExecGetFlags(hipGraphExec_t graphExec, unsigned long long* flags);
   // CHECK: result = hipGraphExecGetFlags(graphExec, &ull);
   result = cuGraphExecGetFlags(graphExec, &ull);
+
+  // CUDA: CUresult CUDAAPI cuStreamGetId(CUstream hStream, unsigned long long *streamId);
+  // HIP: hipError_t hipStreamGetId(hipStream_t stream, unsigned long long* streamId);
+  // CHECK: result = hipStreamGetId(stream, &ull_2);
+  result = cuStreamGetId(stream, &ull_2);
 #endif
 
 #if CUDA_VERSION >= 12020
   // CHECK: hipGraphNodeParams graphNodeParams;
   CUgraphNodeParams graphNodeParams;
-
-  // [TODO][#2062] Rename all DO-NOT-CHECK back
-#if CUDA_VERSION < 13000
-  // CUDA: CUresult CUDAAPI cuGraphAddNode(CUgraphNode *phGraphNode, CUgraph hGraph, const CUgraphNode *dependencies, size_t numDependencies, CUgraphNodeParams *nodeParams);
-  // HIP: hipError_t hipGraphAddNode(hipGraphNode_t *pGraphNode, hipGraph_t graph, const hipGraphNode_t *pDependencies, size_t numDependencies, hipGraphNodeParams *nodeParams);
-  // DO-NOT-CHECK: result = hipGraphAddNode(&graphNode, graph, &graphNode2, bytes, &graphNodeParams);
-  result = cuGraphAddNode(&graphNode, graph, &graphNode2, bytes, &graphNodeParams);
-#endif
 
   // CUDA: CUresult CUDAAPI cuGraphNodeSetParams(CUgraphNode hNode, CUgraphNodeParams *nodeParams);
   // HIP: hipError_t hipGraphNodeSetParams(hipGraphNode_t node, hipGraphNodeParams *nodeParams);

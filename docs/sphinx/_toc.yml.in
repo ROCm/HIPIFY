@@ -6,7 +6,8 @@ root: index
 subtrees:
 - caption: Building
   entries:
-  - file: building/building-hipify
+  - file: building/build-hipify-clang-linux
+  - file: building/build-hipify-clang-windows
   - file: building/build-hipify-perl
 - caption: How to
   entries:
@@ -19,12 +20,13 @@ subtrees:
   - file: reference/hipify-clang-cmd
   - file: reference/hipify-perl-cmd
   - file: reference/supported_apis
+  - file: reference/hip_supported_apis
     subtrees:
     - entries:
-      - file: reference/tables/CUDA_Runtime_API_functions_supported_by_HIP     
-        title: CUDA Runtime functions
+      - file: reference/tables/CUDA_Runtime_API_functions_supported_by_HIP
+        title: CUDA Runtime API
       - file: reference/tables/CUDA_Driver_API_functions_supported_by_HIP
-        title: CUDA Driver functions
+        title: CUDA Driver API
       - file: reference/tables/cuComplex_API_supported_by_HIP
         title: cuComplex API
       - file: reference/tables/CUDA_Device_API_supported_by_HIP
@@ -34,19 +36,37 @@ subtrees:
       - file: reference/tables/CUBLAS_API_supported_by_HIP
         title: cuBLAS API
       - file: reference/tables/CUSPARSE_API_supported_by_HIP
-        title: cuSPARSE
+        title: cuSPARSE API
       - file: reference/tables/CUSOLVER_API_supported_by_HIP
         title: cuSOLVER API
-      - file: reference/tables/CURAND_API_supported_by_HIP      
+      - file: reference/tables/CURAND_API_supported_by_HIP
         title: cuRAND API
       - file: reference/tables/CUFFT_API_supported_by_HIP
         title: cuFFT API
-      - file: reference/tables/CUDNN_API_supported_by_HIP     
-        title: cuDNN API
-      - file: reference/tables/CUTENSOR_API_supported_by_HIP     
+      - file: reference/tables/CUTENSOR_API_supported_by_HIP
         title: cuTENSOR API
       - file: reference/tables/CUB_API_supported_by_HIP
         title: CUB API
+  - file: reference/roc_supported_apis
+    subtrees:
+    - entries:
+      - file: reference/tables/CUBLAS_API_supported_by_ROC
+        title: cuBLAS API
+      - file: reference/tables/CUSPARSE_API_supported_by_ROC
+        title: cuSPARSE API
+      - file: reference/tables/CURAND_API_supported_by_ROC
+        title: cuRAND API
+      - file: reference/tables/CUDNN_API_supported_by_MIOPEN
+        title: cuDNN API
+  - file: reference/hip_roc_supported_apis
+    subtrees:
+    - entries:
+      - file: reference/tables/CUBLAS_API_supported_by_HIP_and_ROC
+        title: cuBLAS API
+      - file: reference/tables/CUSPARSE_API_supported_by_HIP_and_ROC
+        title: cuSPARSE API
+      - file: reference/tables/CURAND_API_supported_by_HIP_and_ROC
+        title: cuRAND API
 - caption: About
   entries:
   - file: license

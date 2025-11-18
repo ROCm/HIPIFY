@@ -9,7 +9,7 @@ from rocm_docs import ROCmDocs
 # for PDF output on Read the Docs
 project = "HIPIFY Documentation"
 author = "Advanced Micro Devices, Inc."
-copyright = "Copyright (c) 2023 Advanced Micro Devices, Inc. All rights reserved."
+copyright = "Copyright (c) 2025 Advanced Micro Devices, Inc. All rights reserved."
 
 external_toc_path = "./sphinx/_toc.yml"
 

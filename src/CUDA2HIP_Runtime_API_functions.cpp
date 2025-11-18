@@ -91,6 +91,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   {"cudaDeviceGetMemPool",                                    {"hipDeviceGetMemPool",                                    "", CONV_DEVICE, API_RUNTIME, SEC::DEVICE}},
   //
   {"cudaInitDevice",                                          {"hipInitDevice",                                          "", CONV_DEVICE, API_RUNTIME, SEC::DEVICE, HIP_UNSUPPORTED}},
+  // cuDeviceGetHostAtomicCapabilities
+  {"cudaDeviceGetHostAtomicCapabilities",                     {"hipDeviceGetHostAtomicCapabilities",                     "", CONV_DEVICE, API_RUNTIME, SEC::DEVICE, HIP_UNSUPPORTED}},
+  // cuDeviceGetP2PAtomicCapabilities
+  {"cudaDeviceGetP2PAtomicCapabilities",                      {"hipDeviceGetP2PAtomicCapabilities",                      "", CONV_DEVICE, API_RUNTIME, SEC::DEVICE, HIP_UNSUPPORTED}},
 
   // 2. Device Management [DEPRECATED]
   // cuCtxGetSharedMemConfig -> hipCtxGetSharedMemConfig
@@ -135,9 +139,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuStreamEndCapture
   {"cudaStreamEndCapture",                                    {"hipStreamEndCapture",                                    "", CONV_STREAM, API_RUNTIME, SEC::STREAM}},
   // cuStreamGetAttribute
-  {"cudaStreamGetAttribute",                                  {"hipStreamGetAttribute",                                  "", CONV_STREAM, API_RUNTIME, SEC::STREAM, HIP_UNSUPPORTED}},
+  {"cudaStreamGetAttribute",                                  {"hipStreamGetAttribute",                                  "", CONV_STREAM, API_RUNTIME, SEC::STREAM, HIP_EXPERIMENTAL}},
   // cuStreamSetAttribute
-  {"cudaStreamSetAttribute",                                  {"hipStreamSetAttribute",                                  "", CONV_STREAM, API_RUNTIME, SEC::STREAM, HIP_UNSUPPORTED}},
+  {"cudaStreamSetAttribute",                                  {"hipStreamSetAttribute",                                  "", CONV_STREAM, API_RUNTIME, SEC::STREAM, HIP_EXPERIMENTAL}},
   // cuStreamGetFlags
   {"cudaStreamGetFlags",                                      {"hipStreamGetFlags",                                      "", CONV_STREAM, API_RUNTIME, SEC::STREAM}},
   // cuStreamGetPriority
@@ -145,11 +149,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuStreamIsCapturing
   {"cudaStreamIsCapturing",                                   {"hipStreamIsCapturing",                                   "", CONV_STREAM, API_RUNTIME, SEC::STREAM}},
   // cuStreamGetCaptureInfo
-  {"cudaStreamGetCaptureInfo",                                {"hipStreamGetCaptureInfo",                                "", CONV_STREAM, API_RUNTIME, SEC::STREAM}},
+  {"cudaStreamGetCaptureInfo",                                {"hipStreamGetCaptureInfo",                                "", CONV_STREAM, API_RUNTIME, SEC::STREAM, HIP_PARTIALLY_SUPPORTED}},
   // cuStreamGetCaptureInfo_v3
   {"cudaStreamGetCaptureInfo_v3",                             {"hipStreamGetCaptureInfo_v3",                             "", CONV_STREAM, API_RUNTIME, SEC::STREAM, HIP_UNSUPPORTED}},
   // cuStreamUpdateCaptureDependencies
-  {"cudaStreamUpdateCaptureDependencies",                     {"hipStreamUpdateCaptureDependencies",                     "", CONV_STREAM, API_RUNTIME, SEC::STREAM}},
+  {"cudaStreamUpdateCaptureDependencies",                     {"hipStreamUpdateCaptureDependencies",                     "", CONV_STREAM, API_RUNTIME, SEC::STREAM, HIP_PARTIALLY_SUPPORTED}},
   // cuStreamUpdateCaptureDependencies_v2
   {"cudaStreamUpdateCaptureDependencies_v2",                  {"hipStreamUpdateCaptureDependencies_v2",                  "", CONV_STREAM, API_RUNTIME, SEC::STREAM, HIP_UNSUPPORTED}},
   // cuStreamQuery
@@ -161,7 +165,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuThreadExchangeStreamCaptureMode
   {"cudaThreadExchangeStreamCaptureMode",                     {"hipThreadExchangeStreamCaptureMode",                     "", CONV_STREAM, API_RUNTIME, SEC::STREAM}},
   // cuStreamGetId
-  {"cudaStreamGetId",                                         {"hipStreamGetId",                                         "", CONV_STREAM, API_RUNTIME, SEC::STREAM, HIP_UNSUPPORTED}},
+  {"cudaStreamGetId",                                         {"hipStreamGetId",                                         "", CONV_STREAM, API_RUNTIME, SEC::STREAM, HIP_EXPERIMENTAL}},
   // cuStreamGetDevice
   {"cudaStreamGetDevice",                                     {"hipStreamGetDevice",                                     "", CONV_STREAM, API_RUNTIME, SEC::STREAM, HIP_UNSUPPORTED}},
 
@@ -222,19 +226,19 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   {"cudaLaunchCooperativeKernel",                             {"hipLaunchCooperativeKernel",                             "", CONV_EXECUTION, API_RUNTIME, SEC::EXECUTION}},
   // no analogue
   // NOTE: Not equal to cuLaunchCooperativeKernelMultiDevice due to different signatures
-  {"cudaLaunchCooperativeKernelMultiDevice",                  {"hipLaunchCooperativeKernelMultiDevice",                  "", CONV_EXECUTION, API_RUNTIME, SEC::EXECUTION, CUDA_DEPRECATED}},
+  {"cudaLaunchCooperativeKernelMultiDevice",                  {"hipLaunchCooperativeKernelMultiDevice",                  "", CONV_EXECUTION, API_RUNTIME, SEC::EXECUTION, CUDA_DEPRECATED | CUDA_REMOVED}},
   // cuLaunchHostFunc
   {"cudaLaunchHostFunc",                                      {"hipLaunchHostFunc",                                      "", CONV_EXECUTION, API_RUNTIME, SEC::EXECUTION}},
   // no analogue
   // NOTE: Not equal to cuLaunchKernel due to different signatures
   {"cudaLaunchKernel",                                        {"hipLaunchKernel",                                        "", CONV_EXECUTION, API_RUNTIME, SEC::EXECUTION}},
   // no analogue
-  {"cudaSetDoubleForDevice",                                  {"hipSetDoubleForDevice",                                  "", CONV_EXECUTION, API_RUNTIME, SEC::EXECUTION, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cudaSetDoubleForDevice",                                  {"hipSetDoubleForDevice",                                  "", CONV_EXECUTION, API_RUNTIME, SEC::EXECUTION, HIP_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
   // no analogue
-  {"cudaSetDoubleForHost",                                    {"hipSetDoubleForHost",                                    "", CONV_EXECUTION, API_RUNTIME, SEC::EXECUTION, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
+  {"cudaSetDoubleForHost",                                    {"hipSetDoubleForHost",                                    "", CONV_EXECUTION, API_RUNTIME, SEC::EXECUTION, HIP_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
   // no analogue
   // NOTE: Not equal to cuLaunchKernelEx due to different signatures
-  {"cudaLaunchKernelExC",                                     {"hipLaunchKernelExC",                                     "", CONV_EXECUTION, API_RUNTIME, SEC::EXECUTION, HIP_EXPERIMENTAL}},
+  {"cudaLaunchKernelExC",                                     {"hipLaunchKernelExC",                                     "", CONV_EXECUTION, API_RUNTIME, SEC::EXECUTION}},
   // cuFuncGetName
   {"cudaFuncGetName",                                         {"hipFuncGetName",                                         "", CONV_EXECUTION, API_RUNTIME, SEC::EXECUTION, HIP_UNSUPPORTED}},
   // cuFuncGetParamInfo
@@ -313,7 +317,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // NOTE: Not equal to cuMemAllocPitch due to different signatures
   {"cudaMallocPitch",                                         {"hipMallocPitch",                                         "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY}},
   // cuMemAdvise
-  {"cudaMemAdvise",                                           {"hipMemAdvise",                                           "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY}},
+  {"cudaMemAdvise",                                           {"hipMemAdvise",                                           "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_PARTIALLY_SUPPORTED}},
   // cuMemAdvise_v2
   {"cudaMemAdvise_v2",                                        {"hipMemAdvise_v2",                                        "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_UNSUPPORTED}},
   // no analogue
@@ -371,7 +375,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuMemGetInfo
   {"cudaMemGetInfo",                                          {"hipMemGetInfo",                                          "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY}},
   // cuMemPrefetchAsync
-  {"cudaMemPrefetchAsync",                                    {"hipMemPrefetchAsync",                                    "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY}},
+  {"cudaMemPrefetchAsync",                                    {"hipMemPrefetchAsync",                                    "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_PARTIALLY_SUPPORTED}},
   // cuMemPrefetchAsync_v2
   {"cudaMemPrefetchAsync_v2",                                 {"hipMemPrefetchAsync_v2",                                 "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_UNSUPPORTED}},
   // cuMemRangeGetAttribute
@@ -406,6 +410,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   {"cudaDeviceRegisterAsyncNotification",                     {"hipDeviceRegisterAsyncNotification",                     "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_UNSUPPORTED}},
   // cuDeviceUnregisterAsyncNotification
   {"cudaDeviceUnregisterAsyncNotification",                   {"hipDeviceUnregisterAsyncNotification",                   "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_UNSUPPORTED}},
+  // cuMemDiscardBatchAsync
+  {"cudaMemDiscardBatchAsync",                                {"hipMemDiscardBatchAsync",                                "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_UNSUPPORTED}},
+  // cuMemDiscardAndPrefetchBatchAsync
+  {"cudaMemDiscardAndPrefetchBatchAsync",                     {"hipMemDiscardAndPrefetchBatchAsync",                     "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_UNSUPPORTED}},
+  // cuMemPrefetchBatchAsync
+  {"cudaMemPrefetchBatchAsync",                               {"hipMemPrefetchBatchAsync",                               "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_UNSUPPORTED}},
 
   // 11. Memory Management [DEPRECATED]
   // no analogue
@@ -450,6 +460,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   {"cudaMemPoolExportPointer",                                {"hipMemPoolExportPointer",                                "", CONV_MEMORY, API_RUNTIME, SEC::ORDERED_MEMORY}},
   // cuMemPoolImportPointer
   {"cudaMemPoolImportPointer",                                {"hipMemPoolImportPointer",                                "", CONV_MEMORY, API_RUNTIME, SEC::ORDERED_MEMORY}},
+  // cuMemGetDefaultMemPool
+  {"cudaMemGetDefaultMemPool",                                {"hipMemGetDefaultMemPool",                                "", CONV_MEMORY, API_RUNTIME, SEC::ORDERED_MEMORY, HIP_UNSUPPORTED}},
+  // cuMemGetMemPool
+  {"cudaMemGetMemPool",                                       {"hipMemGetMemPool",                                       "", CONV_MEMORY, API_RUNTIME, SEC::ORDERED_MEMORY, HIP_UNSUPPORTED}},
+  // cuMemSetMemPool
+  {"cudaMemSetMemPool",                                       {"hipMemSetMemPool",                                       "", CONV_MEMORY, API_RUNTIME, SEC::ORDERED_MEMORY, HIP_UNSUPPORTED}},
 
   // 13. Unified Addressing
   // no analogue
@@ -670,13 +686,23 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // no analogue
   {"cudaRuntimeGetVersion",                                   {"hipRuntimeGetVersion",                                   "", CONV_VERSION, API_RUNTIME, SEC::VERSION}},
 
-  // 29. TODO: Version Management
+  // 29. Log Management Functions
+  // cuLogsRegisterCallback
+  {"cudaLogsRegisterCallback",                                {"hipLogsRegisterCallback",                                "", CONV_ERROR_LOG, API_RUNTIME, SEC::ERROR_LOG, HIP_UNSUPPORTED}},
+  // cuLogsUnregisterCallback
+  {"cudaLogsUnregisterCallback",                              {"hipLogsUnregisterCallback",                              "", CONV_ERROR_LOG, API_RUNTIME, SEC::ERROR_LOG, HIP_UNSUPPORTED}},
+  // cuLogsCurrent
+  {"cudaLogsCurrent",                                         {"hipLogsCurrent",                                         "", CONV_ERROR_LOG, API_RUNTIME, SEC::ERROR_LOG, HIP_UNSUPPORTED}},
+  // cuLogsDumpToFile
+  {"cudaLogsDumpToFile",                                      {"hipLogsDumpToFile",                                      "", CONV_ERROR_LOG, API_RUNTIME, SEC::ERROR_LOG, HIP_UNSUPPORTED}},
+  // cuLogsDumpToMemory
+  {"cudaLogsDumpToMemory",                                    {"hipLogsDumpToMemory",                                    "", CONV_ERROR_LOG, API_RUNTIME, SEC::ERROR_LOG, HIP_UNSUPPORTED}},
 
   // 30. Graph Management
   // cuGraphAddChildGraphNode
   {"cudaGraphAddChildGraphNode",                              {"hipGraphAddChildGraphNode",                              "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH}},
   // cuGraphAddDependencies
-  {"cudaGraphAddDependencies",                                {"hipGraphAddDependencies",                                "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH}},
+  {"cudaGraphAddDependencies",                                {"hipGraphAddDependencies",                                "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_PARTIALLY_SUPPORTED}},
   // cuGraphAddDependencies_v2
   {"cudaGraphAddDependencies_v2",                             {"hipGraphAddDependencies_v2",                             "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_UNSUPPORTED}},
   // cuGraphAddEmptyNode
@@ -710,7 +736,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuGraphExecDestroy
   {"cudaGraphExecDestroy",                                    {"hipGraphExecDestroy",                                    "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH}},
   // cuGraphGetEdges
-  {"cudaGraphGetEdges",                                       {"hipGraphGetEdges",                                       "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH}},
+  {"cudaGraphGetEdges",                                       {"hipGraphGetEdges",                                       "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_PARTIALLY_SUPPORTED}},
   // cuGraphGetEdges_v2
   {"cudaGraphGetEdges_v2",                                    {"hipGraphGetEdges_v2",                                    "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_UNSUPPORTED}},
   // cuGraphGetNodes
@@ -758,11 +784,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuGraphNodeFindInClone
   {"cudaGraphNodeFindInClone",                                {"hipGraphNodeFindInClone",                                "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH}},
   // cuGraphNodeGetDependencies
-  {"cudaGraphNodeGetDependencies",                            {"hipGraphNodeGetDependencies",                            "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH}},
+  {"cudaGraphNodeGetDependencies",                            {"hipGraphNodeGetDependencies",                            "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_PARTIALLY_SUPPORTED}},
   // cuGraphNodeGetDependencies_v2
   {"cudaGraphNodeGetDependencies_v2",                         {"hipGraphNodeGetDependencies_v2",                         "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_UNSUPPORTED}},
   // cuGraphNodeGetDependentNodes
-  {"cudaGraphNodeGetDependentNodes",                          {"hipGraphNodeGetDependentNodes",                          "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH}},
+  {"cudaGraphNodeGetDependentNodes",                          {"hipGraphNodeGetDependentNodes",                          "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_PARTIALLY_SUPPORTED}},
   // cuGraphNodeGetDependentNodes_v2
   {"cudaGraphNodeGetDependentNodes_v2",                       {"hipGraphNodeGetDependentNodes_v2",                       "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_UNSUPPORTED}},
   // cuGraphNodeGetEnabled
@@ -770,7 +796,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuGraphNodeGetType
   {"cudaGraphNodeGetType",                                    {"hipGraphNodeGetType",                                    "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH}},
   // cuGraphRemoveDependencies
-  {"cudaGraphRemoveDependencies",                             {"hipGraphRemoveDependencies",                             "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH}},
+  {"cudaGraphRemoveDependencies",                             {"hipGraphRemoveDependencies",                             "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_PARTIALLY_SUPPORTED}},
   // cuGraphRemoveDependencies_v2
   {"cudaGraphRemoveDependencies_v2",                          {"hipGraphRemoveDependencies_v2",                          "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_UNSUPPORTED}},
   // no analogue
@@ -861,7 +887,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuGraphExecGetFlags
   {"cudaGraphExecGetFlags",                                   {"hipGraphExecGetFlags",                                   "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH}},
   // cuGraphAddNode
-  {"cudaGraphAddNode",                                        {"hipGraphAddNode",                                        "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH}},
+  {"cudaGraphAddNode",                                        {"hipGraphAddNode",                                        "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_PARTIALLY_SUPPORTED}},
   // cuGraphAddNode_v2
   {"cudaGraphAddNode_v2",                                     {"hipGraphAddNode_v2",                                     "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_UNSUPPORTED}},
   // cuGraphNodeSetParams
@@ -873,7 +899,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
 
   // 31. Driver Entry Point Access
   // cuGetProcAddress
-  {"cudaGetDriverEntryPoint",                                 {"hipGetProcAddress",                                      "", CONV_DRIVER_ENTRY_POINT, API_RUNTIME, SEC::DRIVER_ENTRY_POINT}},
+  {"cudaGetDriverEntryPoint",                                 {"hipGetProcAddress",                                      "", CONV_DRIVER_ENTRY_POINT, API_RUNTIME, SEC::DRIVER_ENTRY_POINT, CUDA_DEPRECATED}},
   //
   {"cudaGetDriverEntryPointByVersion",                        {"hipGetDriverEntryPointByVersion",                        "", CONV_DRIVER_ENTRY_POINT, API_RUNTIME, SEC::DRIVER_ENTRY_POINT, HIP_UNSUPPORTED}},
 
@@ -996,10 +1022,10 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_FUNCTION_VER_MAP {
   {"cudaWaitExternalSemaphoresAsync",                         {CUDA_100, CUDA_0,   CUDA_0  }},
   {"cudaFuncSetAttribute",                                    {CUDA_90,  CUDA_0,   CUDA_0  }},
   {"cudaLaunchCooperativeKernel",                             {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cudaLaunchCooperativeKernelMultiDevice",                  {CUDA_90,  CUDA_113, CUDA_0  }},
+  {"cudaLaunchCooperativeKernelMultiDevice",                  {CUDA_90,  CUDA_113, CUDA_130}},
   {"cudaLaunchHostFunc",                                      {CUDA_100, CUDA_0,   CUDA_0  }},
-  {"cudaSetDoubleForDevice",                                  {CUDA_0,   CUDA_100, CUDA_0  }},
-  {"cudaSetDoubleForHost",                                    {CUDA_0,   CUDA_100, CUDA_0  }},
+  {"cudaSetDoubleForDevice",                                  {CUDA_0,   CUDA_100, CUDA_130}},
+  {"cudaSetDoubleForHost",                                    {CUDA_0,   CUDA_100, CUDA_130}},
   {"cudaOccupancyAvailableDynamicSMemPerBlock",               {CUDA_110, CUDA_0,   CUDA_0  }},
   {"cudaMemAdvise",                                           {CUDA_80,  CUDA_0,   CUDA_0  }},
   {"cudaMemPrefetchAsync",                                    {CUDA_80,  CUDA_0,   CUDA_0  }},
@@ -1161,7 +1187,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_FUNCTION_VER_MAP {
   {"cudaUserObjectRelease",                                   {CUDA_113, CUDA_0,   CUDA_0  }},
   {"cudaGraphRetainUserObject",                               {CUDA_113, CUDA_0,   CUDA_0  }},
   {"cudaGraphReleaseUserObject",                              {CUDA_113, CUDA_0,   CUDA_0  }},
-  {"cudaGetDriverEntryPoint",                                 {CUDA_113, CUDA_0,   CUDA_0  }},
+  {"cudaGetDriverEntryPoint",                                 {CUDA_113, CUDA_130, CUDA_0  }},
   {"cudaGraphAddMemAllocNode",                                {CUDA_114, CUDA_0,   CUDA_0  }},
   {"cudaGraphMemAllocNodeGetParams",                          {CUDA_114, CUDA_0,   CUDA_0  }},
   {"cudaGraphAddMemFreeNode",                                 {CUDA_114, CUDA_0,   CUDA_0  }},
@@ -1221,6 +1247,19 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_FUNCTION_VER_MAP {
   {"cudaKernelSetAttributeForDevice",                         {CUDA_128, CUDA_0,   CUDA_0  }},
   {"cudaLibraryGetKernelCount",                               {CUDA_128, CUDA_0,   CUDA_0  }},
   {"cudaLibraryEnumerateKernels",                             {CUDA_128, CUDA_0,   CUDA_0  }},
+  {"cudaDeviceGetHostAtomicCapabilities",                     {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaDeviceGetP2PAtomicCapabilities",                      {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaMemDiscardBatchAsync",                                {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaMemDiscardAndPrefetchBatchAsync",                     {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaMemPrefetchBatchAsync",                               {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaMemGetDefaultMemPool",                                {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaMemGetMemPool",                                       {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaMemSetMemPool",                                       {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaLogsRegisterCallback",                                {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaLogsUnregisterCallback",                              {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaLogsCurrent",                                         {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaLogsDumpToFile",                                      {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaLogsDumpToMemory",                                    {CUDA_130, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP {
@@ -1484,11 +1523,46 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP {
   {"hipGraphExecGetFlags",                                    {HIP_6030, HIP_0,    HIP_0   }},
   {"hipGraphNodeSetParams",                                   {HIP_6030, HIP_0,    HIP_0   }},
   {"hipGraphExecNodeSetParams",                               {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipLaunchKernelExC",                                      {HIP_7000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipLaunchKernelExC",                                      {HIP_7000, HIP_0,    HIP_0   }},
+  {"hipDeviceGetTexture1DLinearMaxWidth",                     {HIP_6040, HIP_0,    HIP_0   }},
+  {"hipStreamGetId",                                          {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipStreamSetAttribute",                                   {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipStreamGetAttribute",                                   {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
 };
 
 const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_RUNTIME_FUNCTION_CHANGED_VER_MAP {
   {"cudaGetDriverEntryPoint",                                 {CUDA_120}},
+  {"cudaStreamGetCaptureInfo",                                {CUDA_130}},
+  {"cudaStreamUpdateCaptureDependencies",                     {CUDA_130}},
+  {"cudaMemcpyBatchAsync",                                    {CUDA_130}},
+  {"cudaMemcpy3DBatchAsync",                                  {CUDA_130}},
+  {"cudaMemPrefetchAsync",                                    {CUDA_130}},
+  {"cudaMemAdvise",                                           {CUDA_130}},
+  {"cudaGraphGetEdges",                                       {CUDA_130}},
+  {"cudaGraphNodeGetDependencies",                            {CUDA_130}},
+  {"cudaGraphNodeGetDependentNodes",                          {CUDA_130}},
+  {"cudaGraphAddDependencies",                                {CUDA_130}},
+  {"cudaGraphRemoveDependencies",                             {CUDA_130}},
+  {"cudaGraphAddNode",                                        {CUDA_130}},
+  // [IMP] Changed semantics: Dst <-> Src
+  {"cudaGraphKernelNodeCopyAttributes",                       {CUDA_130}},
+};
+
+const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_RUNTIME_FUNCTION_CHANGED_VER_MAP {
+  {"hipDeviceGetTexture1DLinearMaxWidth",                     {HIP_7000}},
+};
+
+const std::map<llvm::StringRef, cudaAPIUnsupportedVersions> CUDA_RUNTIME_FUNCTION_UNSUPPORTED_VER_MAP {
+  {"cudaStreamGetCaptureInfo",                                {CUDA_130}},
+  {"cudaStreamUpdateCaptureDependencies",                     {CUDA_130}},
+  {"cudaMemAdvise",                                           {CUDA_130}},
+  {"cudaMemPrefetchAsync",                                    {CUDA_130}},
+  {"cudaGraphAddDependencies",                                {CUDA_130}},
+  {"cudaGraphGetEdges",                                       {CUDA_130}},
+  {"cudaGraphNodeGetDependencies",                            {CUDA_130}},
+  {"cudaGraphNodeGetDependentNodes",                          {CUDA_130}},
+  {"cudaGraphRemoveDependencies",                             {CUDA_130}},
+  {"cudaGraphAddNode",                                        {CUDA_130}},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_RUNTIME_API_SECTION_MAP {
@@ -1520,6 +1594,7 @@ const std::map<unsigned int, llvm::StringRef> CUDA_RUNTIME_API_SECTION_MAP {
   {SEC::TEXTURE, "Texture Object Management"},
   {SEC::SURFACE, "Surface Object Management"},
   {SEC::VERSION, "Version Management"},
+  {SEC::ERROR_LOG, "Error Log Management"},
   {SEC::GRAPH, "Graph Management"},
   {SEC::DRIVER_ENTRY_POINT, "Driver Entry Point Access"},
   {SEC::LIBRARY, "Library Management"},

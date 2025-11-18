@@ -538,12 +538,17 @@ int main() {
 #if CUDA_VERSION >= 9000
   // CHECK: hipDeviceAttribute_t DevAttrReserved94 = hipDeviceAttributeCanUseStreamWaitValue;
   // CHECK-NEXT: hipDeviceAttribute_t DevAttrCooperativeLaunch = hipDeviceAttributeCooperativeLaunch;
-  // CHECK-NEXT: hipDeviceAttribute_t DevAttrCooperativeMultiDeviceLaunch = hipDeviceAttributeCooperativeMultiDeviceLaunch;
   // CHECK-NEXT: hipDeviceAttribute_t DevAttrMaxSharedMemoryPerBlockOptin = hipDeviceAttributeSharedMemPerBlockOptin;
   cudaDeviceAttr DevAttrReserved94 = cudaDevAttrReserved94;
   cudaDeviceAttr DevAttrCooperativeLaunch = cudaDevAttrCooperativeLaunch;
-  cudaDeviceAttr DevAttrCooperativeMultiDeviceLaunch = cudaDevAttrCooperativeMultiDeviceLaunch;
   cudaDeviceAttr DevAttrMaxSharedMemoryPerBlockOptin = cudaDevAttrMaxSharedMemoryPerBlockOptin;
+#if CUDA_VERSION < 13000
+  // CHECK: hipDeviceAttribute_t DevAttrCooperativeMultiDeviceLaunch = hipDeviceAttributeCooperativeMultiDeviceLaunch;
+  cudaDeviceAttr DevAttrCooperativeMultiDeviceLaunch = cudaDevAttrCooperativeMultiDeviceLaunch;
+#elif CUDA_VERSION >= 13000
+  // CHECK: hipDeviceAttribute_t DevAttrReserved96 = hipDeviceAttributeCooperativeMultiDeviceLaunch;
+  cudaDeviceAttr DevAttrReserved96 = cudaDevAttrReserved96;
+#endif
 
   // CHECK: hipError_t ErrorCooperativeLaunchTooLarge = hipErrorCooperativeLaunchTooLarge;
   cudaError_t ErrorCooperativeLaunchTooLarge = cudaErrorCooperativeLaunchTooLarge;
@@ -728,6 +733,24 @@ int main() {
   cudaAccessProperty AccessPropertyNormal = cudaAccessPropertyNormal;
   cudaAccessProperty AccessPropertyStreaming = cudaAccessPropertyStreaming;
   cudaAccessProperty AccessPropertyPersisting = cudaAccessPropertyPersisting;
+
+  // CHECK: hipSynchronizationPolicy synchronizationPolicy;
+  // CHECK-NEXT: hipSynchronizationPolicy SYNC_POLICY_AUTO = hipSyncPolicyAuto;
+  // CHECK-NEXT: hipSynchronizationPolicy SYNC_POLICY_SPIN = hipSyncPolicySpin;
+  // CHECK-NEXT: hipSynchronizationPolicy SYNC_POLICY_YIELD = hipSyncPolicyYield;
+  // CHECK-NEXT: hipSynchronizationPolicy SYNC_POLICY_BLOCKING_SYNC = hipSyncPolicyBlockingSync;
+  cudaSynchronizationPolicy synchronizationPolicy;
+  cudaSynchronizationPolicy SYNC_POLICY_AUTO = cudaSyncPolicyAuto;
+  cudaSynchronizationPolicy SYNC_POLICY_SPIN = cudaSyncPolicySpin;
+  cudaSynchronizationPolicy SYNC_POLICY_YIELD = cudaSyncPolicyYield;
+  cudaSynchronizationPolicy SYNC_POLICY_BLOCKING_SYNC = cudaSyncPolicyBlockingSync;
+
+  // CHECK: hipLaunchAttributeID StreamAttrID;
+  // CHECK-NEXT:hipLaunchAttributeID StreamAttributeAccessPolicyWindow = hipLaunchAttributeAccessPolicyWindow;
+  // CHECK-NEXT:hipLaunchAttributeID StreamAttributeSynchronizationPolicy = hipLaunchAttributeSynchronizationPolicy;
+  cudaStreamAttrID StreamAttrID;
+  cudaStreamAttrID StreamAttributeAccessPolicyWindow = cudaStreamAttributeAccessPolicyWindow;
+  cudaStreamAttrID StreamAttributeSynchronizationPolicy = cudaStreamAttributeSynchronizationPolicy;
 #endif
 
 #if CUDA_VERSION >= 11010
@@ -866,6 +889,15 @@ int main() {
   cudaGPUDirectRDMAWritesOrdering GPU_DIRECT_RDMA_WRITES_ORDERING_NONE = cudaGPUDirectRDMAWritesOrderingNone;
   cudaGPUDirectRDMAWritesOrdering GPU_DIRECT_RDMA_WRITES_ORDERING_OWNER = cudaGPUDirectRDMAWritesOrderingOwner;
   cudaGPUDirectRDMAWritesOrdering GPU_DIRECT_RDMA_WRITES_ORDERING_ALL_DEVICES = cudaGPUDirectRDMAWritesOrderingAllDevices;
+
+  // NOTE [HIP]: Why these numbers implemented as defines and not as enum values like in CUDA?
+  // TODO [HIP]: Consider changing them to enum values in future HIP releases: enum cudaGetDriverEntryPointFlags -> enum hipGetDriverEntryPointFlags
+  // CHECK: int EnableDefault = hipEnableDefault;
+  // CHECK-NEXT: int EnableLegacyStream = hipEnableLegacyStream;
+  // CHECK-NEXT: int EnablePerThreadDefaultStream = hipEnablePerThreadDefaultStream;
+  int EnableDefault = cudaEnableDefault;
+  int EnableLegacyStream = cudaEnableLegacyStream;
+  int EnablePerThreadDefaultStream = cudaEnablePerThreadDefaultStream;
 #endif
 
 #if CUDA_VERSION >= 11040
@@ -903,6 +935,11 @@ int main() {
   cudaKernelNodeAttrID KernelNodeAttributePriority = cudaKernelNodeAttributePriority;
 #endif
 
+#if CUDA_VERSION >= 11080
+  // CHECK: hipLaunchAttributeID LaunchAttributeSynchronizationPolicy = hipLaunchAttributeSynchronizationPolicy;
+  cudaLaunchAttributeID LaunchAttributeSynchronizationPolicy = cudaLaunchAttributeSynchronizationPolicy;
+#endif
+
 #if CUDA_VERSION >= 12000
   // CHECK: hipGraphInstantiateFlags GraphInstantiateFlagUpload = hipGraphInstantiateFlagUpload;
   // CHECK-NEXT: hipGraphInstantiateFlags GraphInstantiateFlagDeviceLaunch = hipGraphInstantiateFlagDeviceLaunch;
@@ -931,14 +968,42 @@ int main() {
   cudaLaunchAttributeID LAUNCH_ATTRIBUTE_COOPERATIVE = cudaLaunchAttributeCooperative;
   cudaLaunchAttributeID LAUNCH_ATTRIBUTE_PRIORITY = cudaLaunchAttributePriority;
 
-  // CHECK: hipDriverProcAddressQueryResult driverProcAddressQueryResult;
-  // CHECK-NEXT:hipDriverProcAddressQueryResult GET_PROC_ADDRESS_SUCCESS = HIP_GET_PROC_ADDRESS_SUCCESS;
-  // CHECK-NEXT:hipDriverProcAddressQueryResult GET_PROC_ADDRESS_SYMBOL_NOT_FOUND = HIP_GET_PROC_ADDRESS_SYMBOL_NOT_FOUND;
-  // CHECK-NEXT:hipDriverProcAddressQueryResult GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT = HIP_GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT;
+  // CHECK: hipDriverEntryPointQueryResult driverProcAddressQueryResult;
+  // CHECK-NEXT:hipDriverEntryPointQueryResult GET_PROC_ADDRESS_SUCCESS = hipDriverEntryPointSuccess;
+  // CHECK-NEXT:hipDriverEntryPointQueryResult GET_PROC_ADDRESS_SYMBOL_NOT_FOUND = hipDriverEntryPointSymbolNotFound;
+  // CHECK-NEXT:hipDriverEntryPointQueryResult GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT = hipDriverEntryPointVersionNotSufficent;
   cudaDriverEntryPointQueryResult driverProcAddressQueryResult;
   cudaDriverEntryPointQueryResult GET_PROC_ADDRESS_SUCCESS = cudaDriverEntryPointSuccess;
   cudaDriverEntryPointQueryResult GET_PROC_ADDRESS_SYMBOL_NOT_FOUND = cudaDriverEntryPointSymbolNotFound;
   cudaDriverEntryPointQueryResult GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT = cudaDriverEntryPointVersionNotSufficent;
+
+  // CHECK: hipLaunchAttributeID LaunchAttributeMemSyncDomainMap = hipLaunchAttributeMemSyncDomainMap;
+  // CHECK-NEXT: hipLaunchAttributeID LaunchAttributeMemSyncDomain = hipLaunchAttributeMemSyncDomain;
+  cudaLaunchAttributeID LaunchAttributeMemSyncDomainMap = cudaLaunchAttributeMemSyncDomainMap;
+  cudaLaunchAttributeID LaunchAttributeMemSyncDomain = cudaLaunchAttributeMemSyncDomain;
+
+  // CHECK: hipLaunchMemSyncDomain LaunchMemSyncDomain;
+  // CHECK-NEXT: hipLaunchMemSyncDomain LaunchMemSyncDomainDefault = hipLaunchMemSyncDomainDefault;
+  // CHECK-NEXT: hipLaunchMemSyncDomain LaunchMemSyncDomainRemote = hipLaunchMemSyncDomainRemote;
+  cudaLaunchMemSyncDomain LaunchMemSyncDomain;
+  cudaLaunchMemSyncDomain LaunchMemSyncDomainDefault = cudaLaunchMemSyncDomainDefault;
+  cudaLaunchMemSyncDomain LaunchMemSyncDomainRemote = cudaLaunchMemSyncDomainRemote;
+
+  // CHECK:hipLaunchAttributeID StreamAttributePriority = hipLaunchAttributePriority;
+  // CHECK-NEXT:hipLaunchAttributeID StreamAttributeMemSyncDomainMap = hipLaunchAttributeMemSyncDomainMap;
+  // CHECK-NEXT:hipLaunchAttributeID StreamAttributeMemSyncDomain = hipLaunchAttributeMemSyncDomain;
+  cudaStreamAttrID StreamAttributePriority = cudaStreamAttributePriority;
+  cudaStreamAttrID StreamAttributeMemSyncDomainMap = cudaStreamAttributeMemSyncDomainMap;
+  cudaStreamAttrID StreamAttributeMemSyncDomain = cudaStreamAttributeMemSyncDomain;
+#endif
+
+#if CUDA_VERSION >= 12020
+  // CHECK: hipMemLocationType MemLocationTypeHost = hipMemLocationTypeHost;
+  // CHECK-NEXT: hipMemLocationType MemLocationTypeHostNuma = hipMemLocationTypeHostNuma;
+  // CHECK-NEXT: hipMemLocationType MemLocationTypeHostNumaCurrent = hipMemLocationTypeHostNumaCurrent;
+  cudaMemLocationType MemLocationTypeHost = cudaMemLocationTypeHost;
+  cudaMemLocationType MemLocationTypeHostNuma = cudaMemLocationTypeHostNuma;
+  cudaMemLocationType MemLocationTypeHostNumaCurrent = cudaMemLocationTypeHostNumaCurrent;
 #endif
 
 #if CUDA_VERSION >= 12030
@@ -989,6 +1054,40 @@ int main() {
   cudaJitOption JIT_MIN_CTA_PER_SM = cudaJitMinCtaPerSm;
   cudaJitOption JIT_MAX_THREADS_PER_BLOCK = cudaJitMaxThreadsPerBlock;
   cudaJitOption JIT_OVERRIDE_DIRECTIVE_VALUES = cudaJitOverrideDirectiveValues;
+
+  // CHECK: hipMemcpyFlags MemcpyFlags;
+  // CHECK-NEXT: hipMemcpyFlags MemcpyFlagDefault = hipMemcpyFlagDefault;
+  // CHECK-NEXT: hipMemcpyFlags MemcpyFlagPreferOverlapWithCompute = hipMemcpyFlagPreferOverlapWithCompute;
+  cudaMemcpyFlags MemcpyFlags;
+  cudaMemcpyFlags MemcpyFlagDefault = cudaMemcpyFlagDefault;
+  cudaMemcpyFlags MemcpyFlagPreferOverlapWithCompute = cudaMemcpyFlagPreferOverlapWithCompute;
+
+  // CHECK: hipMemcpySrcAccessOrder MemcpySrcAccessOrder;
+  // CHECK-NEXT: hipMemcpySrcAccessOrder MemcpySrcAccessOrderInvalid = hipMemcpySrcAccessOrderInvalid;
+  // CHECK-NEXT: hipMemcpySrcAccessOrder MemcpySrcAccessOrderStream = hipMemcpySrcAccessOrderStream;
+  // CHECK-NEXT: hipMemcpySrcAccessOrder MemcpySrcAccessOrderDuringApiCall = hipMemcpySrcAccessOrderDuringApiCall;
+  // CHECK-NEXT: hipMemcpySrcAccessOrder MemcpySrcAccessOrderAny = hipMemcpySrcAccessOrderAny;
+  // CHECK-NEXT: hipMemcpySrcAccessOrder MemcpySrcAccessOrderMax = hipMemcpySrcAccessOrderMax;
+  cudaMemcpySrcAccessOrder MemcpySrcAccessOrder;
+  cudaMemcpySrcAccessOrder MemcpySrcAccessOrderInvalid = cudaMemcpySrcAccessOrderInvalid;
+  cudaMemcpySrcAccessOrder MemcpySrcAccessOrderStream = cudaMemcpySrcAccessOrderStream;
+  cudaMemcpySrcAccessOrder MemcpySrcAccessOrderDuringApiCall = cudaMemcpySrcAccessOrderDuringApiCall;
+  cudaMemcpySrcAccessOrder MemcpySrcAccessOrderAny = cudaMemcpySrcAccessOrderAny;
+  cudaMemcpySrcAccessOrder MemcpySrcAccessOrderMax = cudaMemcpySrcAccessOrderMax;
+
+  // CHECK: hipMemcpy3DOperandType Memcpy3DOperandType;
+  // CHECK-NEXT: hipMemcpy3DOperandType MemcpyOperandTypePointer = hipMemcpyOperandTypePointer;
+  // CHECK-NEXT: hipMemcpy3DOperandType MemcpyOperandTypeArray = hipMemcpyOperandTypeArray;
+  // CHECK-NEXT: hipMemcpy3DOperandType MemcpyOperandTypeMax = hipMemcpyOperandTypeMax;
+  cudaMemcpy3DOperandType Memcpy3DOperandType;
+  cudaMemcpy3DOperandType MemcpyOperandTypePointer = cudaMemcpyOperandTypePointer;
+  cudaMemcpy3DOperandType MemcpyOperandTypeArray = cudaMemcpyOperandTypeArray;
+  cudaMemcpy3DOperandType MemcpyOperandTypeMax = cudaMemcpyOperandTypeMax;
+#endif
+
+#if CUDA_VERSION >= 13000
+  // CHECK: hipMemLocationType MemLocationTypeNone = hipMemLocationTypeNone;
+  cudaMemLocationType MemLocationTypeNone = cudaMemLocationTypeNone;
 #endif
 
   return 0;

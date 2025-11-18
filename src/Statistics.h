@@ -30,6 +30,10 @@ THE SOFTWARE.
 #include <list>
 #include <llvm/ADT/StringRef.h>
 #include <llvm/Support/raw_ostream.h>
+#if LLVM_VERSION_MAJOR > 3
+#include "clang/Basic/Cuda.h"
+#endif
+#include "StringUtils.h"
 
 namespace chr = std::chrono;
 
@@ -119,6 +123,7 @@ enum ConvTypes {
   //  driver::GREEN_CONTEXT
   CONV_GREEN_CONTEXT,
   //  driver::ERROR_LOG
+  // runtime::ERROR_LOG
   CONV_ERROR_LOG,
   // runtime::DRIVER_INTERACT
   CONV_DRIVER_INTERACT,
@@ -202,7 +207,9 @@ enum SupportDegree {
   REMOVED = 0x400,
   HIP_EXPERIMENTAL = 0x800,
   HIP_SUPPORTED_V2_ONLY = 0x1000,
-  CUDA_OVERLOADED = 0x2000
+  CUDA_OVERLOADED = 0x2000,
+  HIP_PARTIALLY_SUPPORTED = 0x4000,
+  ROC_PARTIALLY_SUPPORTED = 0x8000,
 };
 
 enum cudaVersions {
@@ -252,6 +259,7 @@ enum cudaVersions {
   CUDA_129 = 12090,
   CUDA_130 = 13000,
   CUDA_LATEST = CUDA_129,
+  CUDA_PARTIALLY_SUPPORTED = CUDA_130,
   CUDNN_10 = 100,
   CUDNN_20 = 200,
   CUDNN_30 = 300,
@@ -312,7 +320,10 @@ enum cudaVersions {
   CUDNN_990 = 990,
   CUDNN_9100 = 9100,
   CUDNN_9110 = 9110,
-  CUDNN_LATEST = CUDNN_9110,
+  CUDNN_9120 = 9120,
+  CUDNN_9130 = 9130,
+  CUDNN_9140 = 9140,
+  CUDNN_LATEST = CUDNN_9140,
   CUTENSOR_1010 = 100010,
   CUTENSOR_1100 = 100100,
   CUTENSOR_1200 = 100200,
@@ -334,6 +345,7 @@ enum cudaVersions {
   CUTENSOR_2021 = 200021,
   CUTENSOR_2109 = 200109,
   CUTENSOR_2200 = 200200,
+  CUTENSOR_2300 = 200300,
   CUTENSOR_LATEST = CUTENSOR_2200,
 };
 
@@ -407,7 +419,8 @@ enum hipVersions {
   HIP_6030 = 6030,
   HIP_6040 = 6040,
   HIP_7000 = 7000,
-  HIP_LATEST = HIP_7000,
+  HIP_7010 = 7010,
+  HIP_LATEST = HIP_7010,
 };
 
 struct cudaAPIversions {
@@ -425,6 +438,7 @@ struct hipAPIversions {
 
 typedef std::list<hipVersions> hipAPIChangedVersions;
 typedef std::list<cudaVersions> cudaAPIChangedVersions;
+typedef std::list<cudaVersions> cudaAPIUnsupportedVersions;
 
 // The names of various fields in in the statistics reports.
 extern const char *counterNames[NUM_CONV_TYPES];
@@ -463,6 +477,7 @@ public:
   * Tracks the statistics for a single input file.
   */
 class Statistics {
+  friend class HipifyAction;
   StatCounter supported;
   StatCounter unsupported;
   std::string fileName;
@@ -473,6 +488,9 @@ class Statistics {
   unsigned totalBytes = 0;
   chr::steady_clock::time_point startTime;
   chr::steady_clock::time_point completionTime;
+  // CUDA Toolkit version provided by clang at runtime and converted to HIPIFY cudaVersions enum.
+  static cudaVersions cudaVersionUsedByClang;
+  static unsigned cudaVersion;
 
 public:
   Statistics(const std::string &name);
@@ -515,13 +533,17 @@ public:
   // Check the counter and option TranslateToRoc whether it should be translated to Roc or not.
   static bool isToRoc(const hipCounter &counter);
   // Check the counter and option TranslateToMIOpen whether it should be translated to MIOpen or not.
-  static bool isToMIOpen(const hipCounter& counter);
+  static bool isToMIOpen(const hipCounter &counter);
   // Check whether the counter is HIP_EXPERIMENTAL or not.
   static bool isHipExperimental(const hipCounter &counter);
+  // Check whether the counter is HIP_PARTIALLY_SUPPORTED or not.
+  static bool isHipPartiallySupported(const hipCounter &counter);
   // Check whether the counter is HIP_UNSUPPORTED or not.
   static bool isHipUnsupported(const hipCounter &counter);
   // Check whether the counter is ROC_UNSUPPORTED or not.
   static bool isRocUnsupported(const hipCounter &counter);
+  // Check whether the counter is ROC_PARTIALLY_SUPPORTED or not.
+  static bool isRocPartiallySupported(const hipCounter &counter);
   // Check whether the counter is ROC_UNSUPPORTED/HIP_UNSUPPORTED/UNSUPPORTED or not.
   static bool isUnsupported(const hipCounter &counter);
   // Check whether the counter is CUDA_DEPRECATED or not.
@@ -550,4 +572,14 @@ public:
   static std::string getHipVersion(const hipVersions &ver);
   // Set this flag in case of hipification errors.
   bool hasErrors = false;
+#if LLVM_VERSION_MAJOR > 3
+  // Converts CUDA version used by clang to CUDA version HIPIFY type.
+  static cudaVersions convertCudaToolkitVersion(const clang::CudaVersion &ver);
+#endif
+  // Get CUDA version used by clang in the HIPIFY CUDA version format.
+  static cudaVersions getCudaVersionUsedByClang() { return cudaVersionUsedByClang; }
+  // Get actual CUDA version.
+  static unsigned getCudaVersion() { return cudaVersion; }
+  // Detects actual CUDA version based on the provided cuda.h file.
+  static void setCudaVersion(llvm::StringRef cuda_h_file);
 };

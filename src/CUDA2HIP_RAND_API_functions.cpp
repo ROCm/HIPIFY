@@ -62,7 +62,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RAND_FUNCTION_MAP {
   {"curand_log_normal2",                            {"hiprand_log_normal2",                            "rocrand_log_normal2",                                        CONV_LIB_DEVICE_FUNC, API_RAND, 3}},
   {"curand_log_normal2_double",                     {"hiprand_log_normal2_double",                     "rocrand_log_normal_double2",                                 CONV_LIB_DEVICE_FUNC, API_RAND, 3}},
   {"curand_log_normal4",                            {"hiprand_log_normal4",                            "rocrand_log_normal4",                                        CONV_LIB_DEVICE_FUNC, API_RAND, 3}},
-  {"curand_log_normal4_double",                     {"hiprand_log_normal4_double",                     "rocrand_log_normal_double4",                                 CONV_LIB_DEVICE_FUNC, API_RAND, 3}},
+  {"curand_log_normal4_double",                     {"hiprand_log_normal4_double",                     "rocrand_log_normal_double4",                                 CONV_LIB_DEVICE_FUNC, API_RAND, 3, CUDA_DEPRECATED}},
   {"curand_mtgp32_single",                          {"hiprand_mtgp32_single",                          "",                                                           CONV_LIB_DEVICE_FUNC, API_RAND, 3, UNSUPPORTED}},
   {"curand_mtgp32_single_specific",                 {"hiprand_mtgp32_single_specific",                 "",                                                           CONV_LIB_DEVICE_FUNC, API_RAND, 3, UNSUPPORTED}},
   {"curand_mtgp32_specific",                        {"hiprand_mtgp32_specific",                        "",                                                           CONV_LIB_DEVICE_FUNC, API_RAND, 3, UNSUPPORTED}},
@@ -76,7 +76,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RAND_FUNCTION_MAP {
   {"curand_uniform_double",                         {"hiprand_uniform_double",                         "rocrand_uniform_double",                                     CONV_LIB_DEVICE_FUNC, API_RAND, 3}},
   {"curand_uniform2_double",                        {"hiprand_uniform2_double",                        "rocrand_uniform_double2",                                    CONV_LIB_DEVICE_FUNC, API_RAND, 3}},
   {"curand_uniform4",                               {"hiprand_uniform4",                               "rocrand_uniform4",                                           CONV_LIB_DEVICE_FUNC, API_RAND, 3}},
-  {"curand_uniform4_double",                        {"hiprand_uniform4_double",                        "rocrand_uniform_double4",                                    CONV_LIB_DEVICE_FUNC, API_RAND, 3}},
+  {"curand_uniform4_double",                        {"hiprand_uniform4_double",                        "rocrand_uniform_double4",                                    CONV_LIB_DEVICE_FUNC, API_RAND, 3, CUDA_DEPRECATED}},
   {"curand_discrete",                               {"hiprand_discrete",                               "rocrand_discrete",                                           CONV_LIB_DEVICE_FUNC, API_RAND, 3}},
   {"curand_discrete4",                              {"hiprand_discrete4",                              "rocrand_discrete4",                                          CONV_LIB_DEVICE_FUNC, API_RAND, 3}},
   {"curand_poisson",                                {"hiprand_poisson",                                "rocrand_poisson",                                            CONV_LIB_DEVICE_FUNC, API_RAND, 3}},
@@ -89,6 +89,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RAND_FUNCTION_MAP {
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_RAND_FUNCTION_VER_MAP {
   {"curandGetProperty",                             {CUDA_80,  CUDA_0,   CUDA_0   }},
   {"__curand_umul",                                 {CUDA_115, CUDA_0,   CUDA_0   }},
+  {"curand_log_normal4_double",                     {CUDA_0,   CUDA_130, CUDA_0   }},
+  {"curand_uniform4_double",                        {CUDA_0,   CUDA_130, CUDA_0   }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_RAND_FUNCTION_VER_MAP {
