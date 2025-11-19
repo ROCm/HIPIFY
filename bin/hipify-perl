@@ -4417,6 +4417,10 @@ sub simpleSubstitutions {
     subst("cuModuleLoadData", "hipModuleLoadData", "module");
     subst("cuModuleLoadDataEx", "hipModuleLoadDataEx", "module");
     subst("cuModuleUnload", "hipModuleUnload", "module");
+    subst("cuKernelGetLibrary", "hipKernelGetLibrary", "library");
+    subst("cuKernelGetName", "hipKernelGetName", "library");
+    subst("cuLibraryEnumerateKernels", "hipLibraryEnumerateKernels", "library");
+    subst("cudaLibraryEnumerateKernels", "hipLibraryEnumerateKernels", "library");
     subst("cuArray3DCreate", "hipArray3DCreate", "memory");
     subst("cuArray3DCreate_v2", "hipArray3DCreate", "memory");
     subst("cuArray3DGetDescriptor", "hipArray3DGetDescriptor", "memory");
@@ -4612,6 +4616,7 @@ sub simpleSubstitutions {
     subst("cuStreamBeginCapture", "hipStreamBeginCapture", "stream");
     subst("cuStreamBeginCaptureToGraph", "hipStreamBeginCaptureToGraph", "stream");
     subst("cuStreamBeginCapture_v2", "hipStreamBeginCapture", "stream");
+    subst("cuStreamCopyAttributes", "hipStreamCopyAttributes", "stream");
     subst("cuStreamCreate", "hipStreamCreateWithFlags", "stream");
     subst("cuStreamCreateWithPriority", "hipStreamCreateWithPriority", "stream");
     subst("cuStreamDestroy", "hipStreamDestroy", "stream");
@@ -4631,6 +4636,7 @@ sub simpleSubstitutions {
     subst("cudaStreamAttachMemAsync", "hipStreamAttachMemAsync", "stream");
     subst("cudaStreamBeginCapture", "hipStreamBeginCapture", "stream");
     subst("cudaStreamBeginCaptureToGraph", "hipStreamBeginCaptureToGraph", "stream");
+    subst("cudaStreamCopyAttributes", "hipStreamCopyAttributes", "stream");
     subst("cudaStreamCreate", "hipStreamCreate", "stream");
     subst("cudaStreamCreateWithFlags", "hipStreamCreateWithFlags", "stream");
     subst("cudaStreamCreateWithPriority", "hipStreamCreateWithPriority", "stream");
@@ -4874,10 +4880,12 @@ sub simpleSubstitutions {
     subst("cudaUserObjectCreate", "hipUserObjectCreate", "graph");
     subst("cudaUserObjectRelease", "hipUserObjectRelease", "graph");
     subst("cudaUserObjectRetain", "hipUserObjectRetain", "graph");
+    subst("cuOccupancyAvailableDynamicSMemPerBlock", "hipOccupancyAvailableDynamicSMemPerBlock", "occupancy");
     subst("cuOccupancyMaxActiveBlocksPerMultiprocessor", "hipModuleOccupancyMaxActiveBlocksPerMultiprocessor", "occupancy");
     subst("cuOccupancyMaxActiveBlocksPerMultiprocessorWithFlags", "hipModuleOccupancyMaxActiveBlocksPerMultiprocessorWithFlags", "occupancy");
     subst("cuOccupancyMaxPotentialBlockSize", "hipModuleOccupancyMaxPotentialBlockSize", "occupancy");
     subst("cuOccupancyMaxPotentialBlockSizeWithFlags", "hipModuleOccupancyMaxPotentialBlockSizeWithFlags", "occupancy");
+    subst("cudaOccupancyAvailableDynamicSMemPerBlock", "hipOccupancyAvailableDynamicSMemPerBlock", "occupancy");
     subst("cudaOccupancyMaxActiveBlocksPerMultiprocessor", "hipOccupancyMaxActiveBlocksPerMultiprocessor", "occupancy");
     subst("cudaOccupancyMaxActiveBlocksPerMultiprocessorWithFlags", "hipOccupancyMaxActiveBlocksPerMultiprocessorWithFlags", "occupancy");
     subst("cudaOccupancyMaxPotentialBlockSize", "hipOccupancyMaxPotentialBlockSize", "occupancy");
@@ -8961,6 +8969,7 @@ sub simpleSubstitutions {
     subst("CU_DEVICE_ATTRIBUTE_GLOBAL_MEMORY_BUS_WIDTH", "hipDeviceAttributeMemoryBusWidth", "numeric_literal");
     subst("CU_DEVICE_ATTRIBUTE_GPU_OVERLAP", "hipDeviceAttributeAsyncEngineCount", "numeric_literal");
     subst("CU_DEVICE_ATTRIBUTE_HOST_NATIVE_ATOMIC_SUPPORTED", "hipDeviceAttributeHostNativeAtomicSupported", "numeric_literal");
+    subst("CU_DEVICE_ATTRIBUTE_HOST_NUMA_ID", "hipDeviceAttributeHostNumaId", "numeric_literal");
     subst("CU_DEVICE_ATTRIBUTE_HOST_REGISTER_SUPPORTED", "hipDeviceAttributeHostRegisterSupported", "numeric_literal");
     subst("CU_DEVICE_ATTRIBUTE_INTEGRATED", "hipDeviceAttributeIntegrated", "numeric_literal");
     subst("CU_DEVICE_ATTRIBUTE_KERNEL_EXEC_TIMEOUT", "hipDeviceAttributeKernelExecTimeout", "numeric_literal");
@@ -9372,6 +9381,7 @@ sub simpleSubstitutions {
     subst("cudaDevAttrGlobalMemoryBusWidth", "hipDeviceAttributeMemoryBusWidth", "numeric_literal");
     subst("cudaDevAttrGpuOverlap", "hipDeviceAttributeAsyncEngineCount", "numeric_literal");
     subst("cudaDevAttrHostNativeAtomicSupported", "hipDeviceAttributeHostNativeAtomicSupported", "numeric_literal");
+    subst("cudaDevAttrHostNumaId", "hipDeviceAttributeHostNumaId", "numeric_literal");
     subst("cudaDevAttrHostRegisterSupported", "hipDeviceAttributeHostRegisterSupported", "numeric_literal");
     subst("cudaDevAttrIntegrated", "hipDeviceAttributeIntegrated", "numeric_literal");
     subst("cudaDevAttrIsMultiGpuBoard", "hipDeviceAttributeIsMultiGpuBoard", "numeric_literal");
@@ -11863,7 +11873,6 @@ sub warnRemovedFunctions {
     "cudaStreamUpdateCaptureDependencies_v2",
     "cudaStreamGetDevice",
     "cudaStreamGetCaptureInfo_v3",
-    "cudaStreamCopyAttributes",
     "cudaSharedmemCarveoutMaxShared",
     "cudaSharedmemCarveoutMaxL1",
     "cudaSharedmemCarveoutDefault",
@@ -11877,7 +11886,6 @@ sub warnRemovedFunctions {
     "cudaOutputMode",
     "cudaOccupancyMaxPotentialClusterSize",
     "cudaOccupancyMaxActiveClusters",
-    "cudaOccupancyAvailableDynamicSMemPerBlock",
     "cudaNvSciSyncAttrWait",
     "cudaNvSciSyncAttrSignal",
     "cudaMemsetParamsV2",
@@ -11931,7 +11939,6 @@ sub warnRemovedFunctions {
     "cudaLibraryGetKernelCount",
     "cudaLibraryGetKernel",
     "cudaLibraryGetGlobal",
-    "cudaLibraryEnumerateKernels",
     "cudaLibraryBinaryIsPreserved",
     "cudaLibMgMatrixDesc_t",
     "cudaLibMgGrid_t",
@@ -12310,7 +12317,6 @@ sub warnRemovedFunctions {
     "cudaDevAttrHostRegisterReadOnlySupported",
     "cudaDevAttrHostNumaMultinodeIpcSupported",
     "cudaDevAttrHostNumaMemoryPoolsSupported",
-    "cudaDevAttrHostNumaId",
     "cudaDevAttrHostMemoryPoolsSupported",
     "cudaDevAttrGpuPciSubsystemId",
     "cudaDevAttrGpuPciDeviceId",
@@ -12615,7 +12621,6 @@ sub warnRemovedFunctions {
     "cuStreamGetCtx_v2",
     "cuStreamGetCtx",
     "cuStreamGetCaptureInfo_v3",
-    "cuStreamCopyAttributes",
     "cuStreamBeginCapture_ptsz",
     "cuProfilerInitialize",
     "cuParamSetv",
@@ -12625,7 +12630,6 @@ sub warnRemovedFunctions {
     "cuParamSetSize",
     "cuOccupancyMaxPotentialClusterSize",
     "cuOccupancyMaxActiveClusters",
-    "cuOccupancyAvailableDynamicSMemPerBlock",
     "cuMulticastUnbind",
     "cuMulticastGetGranularity",
     "cuMulticastCreate",
@@ -12669,15 +12673,12 @@ sub warnRemovedFunctions {
     "cuLibraryGetKernelCount",
     "cuLibraryGetKernel",
     "cuLibraryGetGlobal",
-    "cuLibraryEnumerateKernels",
     "cuLaunchGridAsync",
     "cuLaunchGrid",
     "cuLaunch",
     "cuKernelSetCacheConfig",
     "cuKernelSetAttribute",
     "cuKernelGetParamInfo",
-    "cuKernelGetName",
-    "cuKernelGetLibrary",
     "cuKernelGetFunction",
     "cuKernelGetAttribute",
     "cuGreenCtxWaitEvent",
@@ -13360,7 +13361,6 @@ sub warnRemovedFunctions {
     "CU_DEVICE_ATTRIBUTE_HOST_NUMA_VIRTUAL_MEMORY_MANAGEMENT_SUPPORTED",
     "CU_DEVICE_ATTRIBUTE_HOST_NUMA_MULTINODE_IPC_SUPPORTED",
     "CU_DEVICE_ATTRIBUTE_HOST_NUMA_MEMORY_POOLS_SUPPORTED",
-    "CU_DEVICE_ATTRIBUTE_HOST_NUMA_ID",
     "CU_DEVICE_ATTRIBUTE_HOST_MEMORY_POOLS_SUPPORTED",
     "CU_DEVICE_ATTRIBUTE_HOST_ALLOC_DMA_BUF_SUPPORTED",
     "CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_WIN32_KMT_HANDLE_SUPPORTED",

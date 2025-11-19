@@ -456,7 +456,7 @@
 |`CU_DEVICE_ATTRIBUTE_HOST_ALLOC_DMA_BUF_SUPPORTED`|13.0| | | | | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_HOST_MEMORY_POOLS_SUPPORTED`|13.0| | | | | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_HOST_NATIVE_ATOMIC_SUPPORTED`|8.0| | | |`hipDeviceAttributeHostNativeAtomicSupported`|4.3.0| | | | | |
-|`CU_DEVICE_ATTRIBUTE_HOST_NUMA_ID`|12.2| | | | | | | | | | |
+|`CU_DEVICE_ATTRIBUTE_HOST_NUMA_ID`|12.2| | | |`hipDeviceAttributeHostNumaId`|7.2.0| | | | | |
 |`CU_DEVICE_ATTRIBUTE_HOST_NUMA_MEMORY_POOLS_SUPPORTED`|12.9| | | | | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_HOST_NUMA_MULTINODE_IPC_SUPPORTED`|12.8| | | | | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_HOST_NUMA_VIRTUAL_MEMORY_MANAGEMENT_SUPPORTED`|12.9| | | | | | | | | | |
@@ -1753,12 +1753,12 @@
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:-:|
 |`cuKernelGetAttribute`|12.0| | | | | | | | | | |
 |`cuKernelGetFunction`|12.0| | | | | | | | | | |
-|`cuKernelGetLibrary`|12.5| | | | | | | | | | |
-|`cuKernelGetName`|12.3| | | | | | | | | | |
+|`cuKernelGetLibrary`|12.5| | | |`hipKernelGetLibrary`|7.2.0| | | | | |
+|`cuKernelGetName`|12.3| | | |`hipKernelGetName`|7.2.0| | | | | |
 |`cuKernelGetParamInfo`|12.4| | | | | | | | | | |
 |`cuKernelSetAttribute`|12.0| | | | | | | | | | |
 |`cuKernelSetCacheConfig`|12.0| | | | | | | | | | |
-|`cuLibraryEnumerateKernels`|12.4| | | | | | | | | | |
+|`cuLibraryEnumerateKernels`|12.4| | | |`hipLibraryEnumerateKernels`|7.2.0| | | | | |
 |`cuLibraryGetGlobal`|12.0| | | | | | | | | | |
 |`cuLibraryGetKernel`|12.0| | | | | | | | | | |
 |`cuLibraryGetKernelCount`|12.4| | | | | | | | | | |
@@ -1963,7 +1963,7 @@
 |`cuStreamBeginCaptureToGraph`|12.3| | | |`hipStreamBeginCaptureToGraph`|6.2.0| | | | | |
 |`cuStreamBeginCapture_ptsz`|10.1| | | | | | | | | | |
 |`cuStreamBeginCapture_v2`|10.1| | | |`hipStreamBeginCapture`|4.3.0| | | | | |
-|`cuStreamCopyAttributes`|11.0| | | | | | | | | | |
+|`cuStreamCopyAttributes`|11.0| | | |`hipStreamCopyAttributes`|7.2.0| | | | | |
 |`cuStreamCreate`| | | | |`hipStreamCreateWithFlags`|1.6.0| | | | | |
 |`cuStreamCreateWithPriority`| | | | |`hipStreamCreateWithPriority`|2.0.0| | | | | |
 |`cuStreamDestroy`| | | | |`hipStreamDestroy`|1.6.0| | | | | |
@@ -2163,7 +2163,7 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**U**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:-:|
-|`cuOccupancyAvailableDynamicSMemPerBlock`|11.0| | | | | | | | | | |
+|`cuOccupancyAvailableDynamicSMemPerBlock`|11.0| | | |`hipOccupancyAvailableDynamicSMemPerBlock`|7.2.0| | | | | |
 |`cuOccupancyMaxActiveBlocksPerMultiprocessor`| | | | |`hipModuleOccupancyMaxActiveBlocksPerMultiprocessor`|3.5.0| | | | | |
 |`cuOccupancyMaxActiveBlocksPerMultiprocessorWithFlags`| | | | |`hipModuleOccupancyMaxActiveBlocksPerMultiprocessorWithFlags`|3.5.0| | | | | |
 |`cuOccupancyMaxActiveClusters`|11.8| | | | | | | | | | |
