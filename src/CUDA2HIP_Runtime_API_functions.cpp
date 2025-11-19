@@ -126,7 +126,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuStreamBeginCaptureToGraph
   {"cudaStreamBeginCaptureToGraph",                           {"hipStreamBeginCaptureToGraph",                           "", CONV_STREAM, API_RUNTIME, SEC::STREAM}},
   // cuStreamCopyAttributes
-  {"cudaStreamCopyAttributes",                                {"hipStreamCopyAttributes",                                "", CONV_STREAM, API_RUNTIME, SEC::STREAM, HIP_UNSUPPORTED}},
+  {"cudaStreamCopyAttributes",                                {"hipStreamCopyAttributes",                                "", CONV_STREAM, API_RUNTIME, SEC::STREAM}},
   // no analogue
   // NOTE: Not equal to cuStreamCreate due to different signatures
   {"cudaStreamCreate",                                        {"hipStreamCreate",                                        "", CONV_STREAM, API_RUNTIME, SEC::STREAM}},
@@ -251,7 +251,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
 
   // 9. Occupancy
   // cuOccupancyAvailableDynamicSMemPerBlock
-  {"cudaOccupancyAvailableDynamicSMemPerBlock",               {"hipOccupancyAvailableDynamicSMemPerBlock",               "", CONV_OCCUPANCY, API_RUNTIME, SEC::OCCUPANCY, HIP_UNSUPPORTED}},
+  {"cudaOccupancyAvailableDynamicSMemPerBlock",               {"hipOccupancyAvailableDynamicSMemPerBlock",               "", CONV_OCCUPANCY, API_RUNTIME, SEC::OCCUPANCY}},
   // cuOccupancyMaxActiveBlocksPerMultiprocessor
   {"cudaOccupancyMaxActiveBlocksPerMultiprocessor",           {"hipOccupancyMaxActiveBlocksPerMultiprocessor",           "", CONV_OCCUPANCY, API_RUNTIME, SEC::OCCUPANCY}},
   // cuOccupancyMaxActiveBlocksPerMultiprocessorWithFlags
@@ -923,7 +923,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuLibraryGetKernelCount
   {"cudaLibraryGetKernelCount",                               {"hipLibraryGetKernelCount",                               "", CONV_LIBRARY, API_RUNTIME, SEC::LIBRARY, HIP_UNSUPPORTED}},
   // cuLibraryEnumerateKernels
-  {"cudaLibraryEnumerateKernels",                             {"hipLibraryEnumerateKernels",                             "", CONV_LIBRARY, API_RUNTIME, SEC::LIBRARY, HIP_UNSUPPORTED}},
+  {"cudaLibraryEnumerateKernels",                             {"hipLibraryEnumerateKernels",                             "", CONV_LIBRARY, API_RUNTIME, SEC::LIBRARY}},
 
   // 33. C++ API Routines
   {"cudaGetKernel",                                           {"hipGetKernel",                                           "", CONV_CPP, API_RUNTIME, SEC::CPP, HIP_UNSUPPORTED}},
