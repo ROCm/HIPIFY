@@ -1233,6 +1233,16 @@ int main() {
   // HIP: hipError_t hipStreamGetAttribute(hipStream_t stream, hipStreamAttrID attr, hipStreamAttrValue* value_out);
   // CHECK: result = hipStreamGetAttribute(stream, StreamAttrID, &StreamAttrValue);
   result = cudaStreamGetAttribute(stream, StreamAttrID, &StreamAttrValue);
+
+  // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaStreamCopyAttributes(cudaStream_t dst, cudaStream_t src);
+  // HIP: hipError_t hipStreamCopyAttributes(hipStream_t dst, hipStream_t src);
+  // CHECK: result = hipStreamCopyAttributes(stream, stream);
+  result = cudaStreamCopyAttributes(stream, stream);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaOccupancyAvailableDynamicSMemPerBlock(size_t* dynamicSmemSize, const void *func, int numBlocks, int blockSize);
+  // HIP: hipError_t hipOccupancyAvailableDynamicSMemPerBlock(size_t* dynamicSmemSize, const void* func, int numBlocks, int blockSize);
+  // CHECK: result = hipOccupancyAvailableDynamicSMemPerBlock(&bytes, func, intVal, device);
+  result = cudaOccupancyAvailableDynamicSMemPerBlock(&bytes, func, intVal, device);
 #endif
 
 #if CUDA_VERSION >= 11010
