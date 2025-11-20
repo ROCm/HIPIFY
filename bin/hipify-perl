@@ -1680,6 +1680,8 @@ my %removed_funcs = (
 );
 
 my %experimental_funcs = (
+    "fftwf_set_timelimit" => "7.1.0",
+    "fftwf_print_plan" => "7.1.0",
     "fftwf_plan_dft_r2c_3d" => "7.1.0",
     "fftwf_plan_dft_r2c_2d" => "7.1.0",
     "fftwf_plan_dft_r2c_1d" => "7.1.0",
@@ -1693,7 +1695,14 @@ my %experimental_funcs = (
     "fftwf_plan_dft_1d" => "7.1.0",
     "fftwf_plan_dft" => "7.1.0",
     "fftwf_plan" => "7.1.0",
+    "fftwf_flops" => "7.1.0",
+    "fftwf_execute" => "7.1.0",
+    "fftwf_destroy_plan" => "7.1.0",
+    "fftwf_cost" => "7.1.0",
     "fftwf_complex" => "7.1.0",
+    "fftwf_cleanup" => "7.1.0",
+    "fftw_set_timelimit" => "7.1.0",
+    "fftw_print_plan" => "7.1.0",
     "fftw_plan_dft_r2c_3d" => "7.1.0",
     "fftw_plan_dft_r2c_2d" => "7.1.0",
     "fftw_plan_dft_r2c_1d" => "7.1.0",
@@ -1706,8 +1715,12 @@ my %experimental_funcs = (
     "fftw_plan_dft_1d" => "7.1.0",
     "fftw_plan_dft" => "7.1.0",
     "fftw_plan" => "7.1.0",
+    "fftw_flops" => "7.1.0",
     "fftw_execute" => "7.1.0",
+    "fftw_destroy_plan" => "7.1.0",
+    "fftw_cost" => "7.1.0",
     "fftw_complex" => "7.1.0",
+    "fftw_cleanup" => "7.1.0",
     "cudaSynchronizationPolicy" => "7.1.0",
     "cudaSyncPolicyYield" => "7.1.0",
     "cudaSyncPolicySpin" => "7.1.0",
@@ -1992,7 +2005,11 @@ sub experimentalSubstitutions {
     subst("cudaStreamGetAttribute", "hipStreamGetAttribute", "stream");
     subst("cudaStreamGetId", "hipStreamGetId", "stream");
     subst("cudaStreamSetAttribute", "hipStreamSetAttribute", "stream");
+    subst("fftw_cleanup", "fftw_cleanup", "library");
+    subst("fftw_cost", "fftw_cost", "library");
+    subst("fftw_destroy_plan", "fftw_destroy_plan", "library");
     subst("fftw_execute", "fftw_execute", "library");
+    subst("fftw_flops", "fftw_flops", "library");
     subst("fftw_plan_dft", "fftw_plan_dft", "library");
     subst("fftw_plan_dft_1d", "fftw_plan_dft_1d", "library");
     subst("fftw_plan_dft_2d", "fftw_plan_dft_2d", "library");
@@ -2005,6 +2022,13 @@ sub experimentalSubstitutions {
     subst("fftw_plan_dft_r2c_1d", "fftw_plan_dft_r2c_1d", "library");
     subst("fftw_plan_dft_r2c_2d", "fftw_plan_dft_r2c_2d", "library");
     subst("fftw_plan_dft_r2c_3d", "fftw_plan_dft_r2c_3d", "library");
+    subst("fftw_print_plan", "fftw_print_plan", "library");
+    subst("fftw_set_timelimit", "fftw_set_timelimit", "library");
+    subst("fftwf_cleanup", "fftwf_cleanup", "library");
+    subst("fftwf_cost", "fftwf_cost", "library");
+    subst("fftwf_destroy_plan", "fftwf_destroy_plan", "library");
+    subst("fftwf_execute", "fftwf_execute", "library");
+    subst("fftwf_flops", "fftwf_flops", "library");
     subst("fftwf_plan_dft", "fftwf_plan_dft", "library");
     subst("fftwf_plan_dft_1d", "fftwf_plan_dft_1d", "library");
     subst("fftwf_plan_dft_2d", "fftwf_plan_dft_2d", "library");
@@ -2017,6 +2041,8 @@ sub experimentalSubstitutions {
     subst("fftwf_plan_dft_r2c_1d", "fftwf_plan_dft_r2c_1d", "library");
     subst("fftwf_plan_dft_r2c_2d", "fftwf_plan_dft_r2c_2d", "library");
     subst("fftwf_plan_dft_r2c_3d", "fftwf_plan_dft_r2c_3d", "library");
+    subst("fftwf_print_plan", "fftwf_print_plan", "library");
+    subst("fftwf_set_timelimit", "fftwf_set_timelimit", "library");
     subst("CUDA_MEMCPY3D_BATCH_OP", "hipMemcpy3DBatchOp", "type");
     subst("CUDA_MEMCPY3D_BATCH_OP_st", "hipMemcpy3DBatchOp", "type");
     subst("CUDA_MEMCPY3D_BATCH_OP_v1", "hipMemcpy3DBatchOp", "type");
