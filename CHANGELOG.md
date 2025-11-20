@@ -3,6 +3,25 @@
 Documentation for HIPIFY is available at
 [https://rocmdocs.amd.com/projects/HIPIFY/en/latest/](https://rocmdocs.amd.com/projects/HIPIFY/en/latest/).
 
+## HIPIFY for ROCm 7.2.0
+
+### Added
+
+* Partial support for CUDA 13.0.0 support
+* cuDNN 9.14.0 support
+* cuTENSOR 2.3.1.0 support
+* LLVM 21.1.6 support
+* Full `hipFFTw` support
+* [#2062](https://github.com/ROCm/HIPIFY/issues/2062) Partial hipification support for a particular CUDA API
+* [#2073](https://github.com/ROCm/HIPIFY/issues/2073) Detect CUDA version before hipification
+* New options:
+  * `--local-headers` to enable hipification of quoted local headers (non-recursive)
+  * `--local-headers-recursive` to enable hipification of quoted local headers recursively
+
+### Resolved issues
+
+* [#2088](https://github.com/ROCm/HIPIFY/issues/2088) Missing support of `cuda_bf16.h` import in hipification
+
 ## HIPIFY for ROCm 7.0.0
 
 ### Added
