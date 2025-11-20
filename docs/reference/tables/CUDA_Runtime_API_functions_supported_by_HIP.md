@@ -73,22 +73,22 @@
 |`cudaStreamAttachMemAsync`| | | | |`hipStreamAttachMemAsync`|3.7.0| | | | | |
 |`cudaStreamBeginCapture`|10.0| | | |`hipStreamBeginCapture`|4.3.0| | | | | |
 |`cudaStreamBeginCaptureToGraph`|12.3| | | |`hipStreamBeginCaptureToGraph`|6.2.0| | | | | |
-|`cudaStreamCopyAttributes`|11.0| | | |`hipStreamCopyAttributes`|7.2.0| | | | | |
+|`cudaStreamCopyAttributes`|11.0| | | |`hipStreamCopyAttributes`|7.2.0| | | | |7.2.0|
 |`cudaStreamCreate`| | | | |`hipStreamCreate`|1.6.0| | | | | |
 |`cudaStreamCreateWithFlags`| | | | |`hipStreamCreateWithFlags`|1.6.0| | | | | |
 |`cudaStreamCreateWithPriority`| | | | |`hipStreamCreateWithPriority`|2.0.0| | | | | |
 |`cudaStreamDestroy`| | | | |`hipStreamDestroy`|1.6.0| | | | | |
 |`cudaStreamEndCapture`|10.0| | | |`hipStreamEndCapture`|4.3.0| | | | | |
-|`cudaStreamGetAttribute`|11.0| | | |`hipStreamGetAttribute`|7.1.0| | | | |7.1.0|
+|`cudaStreamGetAttribute`|11.0| | | |`hipStreamGetAttribute`|7.1.0| | | | |7.2.0|
 |`cudaStreamGetCaptureInfo`|10.1| |13.0| |`hipStreamGetCaptureInfo`|5.0.0| | | |13.0| |
 |`cudaStreamGetCaptureInfo_v3`|12.3| | | | | | | | | | |
 |`cudaStreamGetDevice`|12.8| | | | | | | | | | |
 |`cudaStreamGetFlags`| | | | |`hipStreamGetFlags`|1.6.0| | | | | |
-|`cudaStreamGetId`|12.0| | | |`hipStreamGetId`|7.1.0| | | | |7.1.0|
+|`cudaStreamGetId`|12.0| | | |`hipStreamGetId`|7.1.0| | | | |7.2.0|
 |`cudaStreamGetPriority`| | | | |`hipStreamGetPriority`|2.0.0| | | | | |
 |`cudaStreamIsCapturing`|10.0| | | |`hipStreamIsCapturing`|5.0.0| | | | | |
 |`cudaStreamQuery`| | | | |`hipStreamQuery`|1.6.0| | | | | |
-|`cudaStreamSetAttribute`|11.0| | | |`hipStreamSetAttribute`|7.1.0| | | | |7.1.0|
+|`cudaStreamSetAttribute`|11.0| | | |`hipStreamSetAttribute`|7.1.0| | | | |7.2.0|
 |`cudaStreamSynchronize`| | | | |`hipStreamSynchronize`|1.6.0| | | | | |
 |`cudaStreamUpdateCaptureDependencies`|11.3| |13.0| |`hipStreamUpdateCaptureDependencies`|5.0.0| | | |13.0| |
 |`cudaStreamUpdateCaptureDependencies_v2`|12.3| | | | | | | | | | |
@@ -151,7 +151,7 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**U**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:-:|
-|`cudaOccupancyAvailableDynamicSMemPerBlock`|11.0| | | |`hipOccupancyAvailableDynamicSMemPerBlock`|7.2.0| | | | | |
+|`cudaOccupancyAvailableDynamicSMemPerBlock`|11.0| | | |`hipOccupancyAvailableDynamicSMemPerBlock`|7.2.0| | | | |7.2.0|
 |`cudaOccupancyMaxActiveBlocksPerMultiprocessor`| | | | |`hipOccupancyMaxActiveBlocksPerMultiprocessor`|1.6.0| | | | | |
 |`cudaOccupancyMaxActiveBlocksPerMultiprocessorWithFlags`| | | | |`hipOccupancyMaxActiveBlocksPerMultiprocessorWithFlags`|2.6.0| | | | | |
 |`cudaOccupancyMaxActiveClusters`|11.8| | | | | | | | | | |
@@ -553,7 +553,7 @@
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**U**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:-:|
 |`cudaKernelSetAttributeForDevice`|12.8| | | | | | | | | | |
-|`cudaLibraryEnumerateKernels`|12.8| | | |`hipLibraryEnumerateKernels`|7.2.0| | | | | |
+|`cudaLibraryEnumerateKernels`|12.8| | | |`hipLibraryEnumerateKernels`|7.2.0| | | | |7.2.0|
 |`cudaLibraryGetGlobal`|12.8| | | | | | | | | | |
 |`cudaLibraryGetKernel`|12.8| | | | | | | | | | |
 |`cudaLibraryGetKernelCount`|12.8| | | | | | | | | | |
@@ -858,7 +858,7 @@
 |`cudaDevAttrGpuPciSubsystemId`|12.8| | | | | | | | | | |
 |`cudaDevAttrHostMemoryPoolsSupported`|13.0| | | | | | | | | | |
 |`cudaDevAttrHostNativeAtomicSupported`|8.0| | | |`hipDeviceAttributeHostNativeAtomicSupported`|4.3.0| | | | | |
-|`cudaDevAttrHostNumaId`|12.2| | | |`hipDeviceAttributeHostNumaId`|7.2.0| | | | | |
+|`cudaDevAttrHostNumaId`|12.2| | | |`hipDeviceAttributeHostNumaId`|7.2.0| | | | |7.2.0|
 |`cudaDevAttrHostNumaMemoryPoolsSupported`|12.9| | | | | | | | | | |
 |`cudaDevAttrHostNumaMultinodeIpcSupported`|12.8| | | | | | | | | | |
 |`cudaDevAttrHostRegisterReadOnlySupported`|11.1| | | | | | | | | | |
@@ -992,10 +992,10 @@
 |`cudaDeviceScheduleSpin`| | | | |`hipDeviceScheduleSpin`|1.6.0| | | | | |
 |`cudaDeviceScheduleYield`| | | | |`hipDeviceScheduleYield`|1.6.0| | | | | |
 |`cudaDeviceSyncMemops`|12.1| | | | | | | | | | |
-|`cudaDriverEntryPointQueryResult`|12.0| | | |`hipDriverEntryPointQueryResult`|7.1.0| | | | |7.1.0|
-|`cudaDriverEntryPointSuccess`|12.0| | | |`hipDriverEntryPointSuccess`|7.1.0| | | | |7.1.0|
-|`cudaDriverEntryPointSymbolNotFound`|12.0| | | |`hipDriverEntryPointSymbolNotFound`|7.1.0| | | | |7.1.0|
-|`cudaDriverEntryPointVersionNotSufficent`|12.0| | | |`hipDriverEntryPointVersionNotSufficent`|7.1.0| | | | |7.1.0|
+|`cudaDriverEntryPointQueryResult`|12.0| | | |`hipDriverEntryPointQueryResult`|7.1.0| | | | |7.2.0|
+|`cudaDriverEntryPointSuccess`|12.0| | | |`hipDriverEntryPointSuccess`|7.1.0| | | | |7.2.0|
+|`cudaDriverEntryPointSymbolNotFound`|12.0| | | |`hipDriverEntryPointSymbolNotFound`|7.1.0| | | | |7.2.0|
+|`cudaDriverEntryPointVersionNotSufficent`|12.0| | | |`hipDriverEntryPointVersionNotSufficent`|7.1.0| | | | |7.2.0|
 |`cudaEglColorFormat`|9.1| | | | | | | | | | |
 |`cudaEglColorFormatA`|9.1| | | | | | | | | | |
 |`cudaEglColorFormatABGR`|9.1| | | | | | | | | | |
@@ -1126,9 +1126,9 @@
 |`cudaEglStreamConnection`|9.1| | | | | | | | | | |
 |`cudaEmulationStrategy`|13.0| | | | | | | | | | |
 |`cudaEmulationStrategy_t`|13.0| | | | | | | | | | |
-|`cudaEnableDefault`|11.3| | | |`hipEnableDefault`|7.1.0| | | | |7.1.0|
-|`cudaEnableLegacyStream`|11.3| | | |`hipEnableLegacyStream`|7.1.0| | | | |7.1.0|
-|`cudaEnablePerThreadDefaultStream`|11.3| | | |`hipEnablePerThreadDefaultStream`|7.1.0| | | | |7.1.0|
+|`cudaEnableDefault`|11.3| | | |`hipEnableDefault`|7.1.0| | | | |7.2.0|
+|`cudaEnableLegacyStream`|11.3| | | |`hipEnableLegacyStream`|7.1.0| | | | |7.2.0|
+|`cudaEnablePerThreadDefaultStream`|11.3| | | |`hipEnablePerThreadDefaultStream`|7.1.0| | | | |7.2.0|
 |`cudaError`| | | | |`hipError_t`|1.5.0| | | | | |
 |`cudaErrorAddressOfConstant`| |3.1| | | | | | | | | |
 |`cudaErrorAlreadyAcquired`|10.1| | | |`hipErrorAlreadyAcquired`|1.6.0| | | | | |
@@ -1519,7 +1519,7 @@
 |`cudaKernelNodeAttributePriority`|11.7| | | |`hipKernelNodeAttributePriority`|6.2.0| | | | | |
 |`cudaKernelNodeParams`|10.0| | | |`hipKernelNodeParams`|4.3.0| | | | | |
 |`cudaKernelNodeParamsV2`|12.2| | | | | | | | | | |
-|`cudaKernel_t`|12.1| | | |`hipKernel_t`|7.1.0| | | | |7.1.0|
+|`cudaKernel_t`|12.1| | | |`hipKernel_t`|7.1.0| | | | |7.2.0|
 |`cudaKeyValuePair`| | | |12.0| | | | | | | |
 |`cudaLaunchAttribute`|11.8| | | |`hipLaunchAttribute`|7.0.0| | | | | |
 |`cudaLaunchAttributeAccessPolicyWindow`|11.8| | | |`hipLaunchAttributeAccessPolicyWindow`|6.2.0| | | | | |
@@ -1530,29 +1530,29 @@
 |`cudaLaunchAttributeID`|11.8| | | |`hipLaunchAttributeID`|6.2.0| | | | | |
 |`cudaLaunchAttributeIgnore`|11.8| | | | | | | | | | |
 |`cudaLaunchAttributeLaunchCompletionEvent`|12.3| | | | | | | | | | |
-|`cudaLaunchAttributeMemSyncDomain`|12.0| | | |`hipLaunchAttributeMemSyncDomain`|7.1.0| | | | |7.1.0|
-|`cudaLaunchAttributeMemSyncDomainMap`|12.0| | | |`hipLaunchAttributeMemSyncDomainMap`|7.1.0| | | | |7.1.0|
+|`cudaLaunchAttributeMemSyncDomain`|12.0| | | |`hipLaunchAttributeMemSyncDomain`|7.1.0| | | | |7.2.0|
+|`cudaLaunchAttributeMemSyncDomainMap`|12.0| | | |`hipLaunchAttributeMemSyncDomainMap`|7.1.0| | | | |7.2.0|
 |`cudaLaunchAttributeNvlinkUtilCentricScheduling`|13.0| | | | | | | | | | |
 |`cudaLaunchAttributePreferredClusterDimension`|12.8| | | | | | | | | | |
 |`cudaLaunchAttributePreferredSharedMemoryCarveout`|12.5| | | | | | | | | | |
 |`cudaLaunchAttributePriority`|11.8| | | |`hipLaunchAttributePriority`|6.2.0| | | | | |
 |`cudaLaunchAttributeProgrammaticEvent`|11.8| | | | | | | | | | |
 |`cudaLaunchAttributeProgrammaticStreamSerialization`|11.8| | | | | | | | | | |
-|`cudaLaunchAttributeSynchronizationPolicy`|11.8| | | |`hipLaunchAttributeSynchronizationPolicy`|7.1.0| | | | |7.1.0|
+|`cudaLaunchAttributeSynchronizationPolicy`|11.8| | | |`hipLaunchAttributeSynchronizationPolicy`|7.1.0| | | | |7.2.0|
 |`cudaLaunchAttributeValue`|11.8| |13.0| |`hipLaunchAttributeValue`|6.2.0| |7.1.0| | | |
 |`cudaLaunchAttribute_st`|11.8| | | |`hipLaunchAttribute_st`|7.0.0| | | | | |
 |`cudaLaunchConfig_st`|11.8| | | |`hipLaunchConfig_st`|7.0.0| | | | | |
 |`cudaLaunchConfig_t`|11.8| | | |`hipLaunchConfig_t`|7.0.0| | | | | |
-|`cudaLaunchMemSyncDomain`|12.0| | | |`hipLaunchMemSyncDomain`|7.1.0| | | | |7.1.0|
-|`cudaLaunchMemSyncDomainDefault`|12.0| | | |`hipLaunchMemSyncDomainDefault`|7.1.0| | | | |7.1.0|
-|`cudaLaunchMemSyncDomainMap`|12.0| | | |`hipLaunchMemSyncDomainMap`|7.1.0| | | | |7.1.0|
-|`cudaLaunchMemSyncDomainMap_st`|12.0| | | |`hipLaunchMemSyncDomainMap`|7.1.0| | | | |7.1.0|
-|`cudaLaunchMemSyncDomainRemote`|12.0| | | |`hipLaunchMemSyncDomainRemote`|7.1.0| | | | |7.1.0|
+|`cudaLaunchMemSyncDomain`|12.0| | | |`hipLaunchMemSyncDomain`|7.1.0| | | | |7.2.0|
+|`cudaLaunchMemSyncDomainDefault`|12.0| | | |`hipLaunchMemSyncDomainDefault`|7.1.0| | | | |7.2.0|
+|`cudaLaunchMemSyncDomainMap`|12.0| | | |`hipLaunchMemSyncDomainMap`|7.1.0| | | | |7.2.0|
+|`cudaLaunchMemSyncDomainMap_st`|12.0| | | |`hipLaunchMemSyncDomainMap`|7.1.0| | | | |7.2.0|
+|`cudaLaunchMemSyncDomainRemote`|12.0| | | |`hipLaunchMemSyncDomainRemote`|7.1.0| | | | |7.2.0|
 |`cudaLaunchParams`|9.0| | |13.0|`hipLaunchParams`|2.6.0| | | | | |
 |`cudaLibraryBinaryIsPreserved`|12.8| | | | | | | | | | |
 |`cudaLibraryHostUniversalFunctionAndDataTable`|12.8| | | | | | | | | | |
 |`cudaLibraryOption`|12.8| | | | | | | | | | |
-|`cudaLibrary_t`|12.8| | | |`hipLibrary_t`|7.1.0| | | | |7.1.0|
+|`cudaLibrary_t`|12.8| | | |`hipLibrary_t`|7.1.0| | | | |7.2.0|
 |`cudaLimit`| | | | |`hipLimit_t`|1.6.0| | | | | |
 |`cudaLimitDevRuntimePendingLaunchCount`| | | | | | | | | | | |
 |`cudaLimitDevRuntimeSyncDepth`| | | | | | | | | | | |
@@ -1599,11 +1599,11 @@
 |`cudaMemLocation`|11.2| | | |`hipMemLocation`|5.2.0| | | | | |
 |`cudaMemLocationType`|11.2| | | |`hipMemLocationType`|5.2.0| | | | | |
 |`cudaMemLocationTypeDevice`|11.2| | | |`hipMemLocationTypeDevice`|5.2.0| | | | | |
-|`cudaMemLocationTypeHost`|12.2| | | |`hipMemLocationTypeHost`|7.1.0| | | | |7.1.0|
-|`cudaMemLocationTypeHostNuma`|12.2| | | |`hipMemLocationTypeHostNuma`|7.1.0| | | | |7.1.0|
-|`cudaMemLocationTypeHostNumaCurrent`|12.2| | | |`hipMemLocationTypeHostNumaCurrent`|7.1.0| | | | |7.1.0|
+|`cudaMemLocationTypeHost`|12.2| | | |`hipMemLocationTypeHost`|7.1.0| | | | |7.2.0|
+|`cudaMemLocationTypeHostNuma`|12.2| | | |`hipMemLocationTypeHostNuma`|7.1.0| | | | |7.2.0|
+|`cudaMemLocationTypeHostNumaCurrent`|12.2| | | |`hipMemLocationTypeHostNumaCurrent`|7.1.0| | | | |7.2.0|
 |`cudaMemLocationTypeInvalid`|11.2| | | |`hipMemLocationTypeInvalid`|5.2.0| | | | | |
-|`cudaMemLocationTypeNone`|13.0| | | |`hipMemLocationTypeNone`|7.1.0| | | | |7.1.0|
+|`cudaMemLocationTypeNone`|13.0| | | |`hipMemLocationTypeNone`|7.1.0| | | | |7.2.0|
 |`cudaMemPoolAttr`|11.2| | | |`hipMemPoolAttr`|5.2.0| | | | | |
 |`cudaMemPoolAttrReleaseThreshold`|11.2| | | |`hipMemPoolAttrReleaseThreshold`|5.2.0| | | | | |
 |`cudaMemPoolAttrReservedMemCurrent`|11.3| | | |`hipMemPoolAttrReservedMemCurrent`|5.2.0| | | | | |
@@ -1626,31 +1626,31 @@
 |`cudaMemRangeAttributePreferredLocationId`|12.2| | | | | | | | | | |
 |`cudaMemRangeAttributePreferredLocationType`|12.2| | | | | | | | | | |
 |`cudaMemRangeAttributeReadMostly`|8.0| | | |`hipMemRangeAttributeReadMostly`|3.7.0| | | | | |
-|`cudaMemcpy3DBatchOp`|12.8| | | |`hipMemcpy3DBatchOp`|7.1.0| | | | |7.1.0|
-|`cudaMemcpy3DOperand`|12.8| | | |`hipMemcpy3DOperand`|7.1.0| | | | |7.1.0|
-|`cudaMemcpy3DOperandType`|12.8| | | |`hipMemcpy3DOperandType`|7.1.0| | | | |7.1.0|
+|`cudaMemcpy3DBatchOp`|12.8| | | |`hipMemcpy3DBatchOp`|7.1.0| | | | |7.2.0|
+|`cudaMemcpy3DOperand`|12.8| | | |`hipMemcpy3DOperand`|7.1.0| | | | |7.2.0|
+|`cudaMemcpy3DOperandType`|12.8| | | |`hipMemcpy3DOperandType`|7.1.0| | | | |7.2.0|
 |`cudaMemcpy3DParms`| | | | |`hipMemcpy3DParms`|1.7.0| | | | | |
-|`cudaMemcpy3DPeerParms`| | | | |`hipMemcpy3DPeerParms`|7.1.0| | | | |7.1.0|
-|`cudaMemcpyAttributes`|12.8| | | |`hipMemcpyAttributes`|7.1.0| | | | |7.1.0|
+|`cudaMemcpy3DPeerParms`| | | | |`hipMemcpy3DPeerParms`|7.1.0| | | | |7.2.0|
+|`cudaMemcpyAttributes`|12.8| | | |`hipMemcpyAttributes`|7.1.0| | | | |7.2.0|
 |`cudaMemcpyDefault`| | | | |`hipMemcpyDefault`|1.5.0| | | | | |
 |`cudaMemcpyDeviceToDevice`| | | | |`hipMemcpyDeviceToDevice`|1.5.0| | | | | |
 |`cudaMemcpyDeviceToHost`| | | | |`hipMemcpyDeviceToHost`|1.5.0| | | | | |
-|`cudaMemcpyFlagDefault`|12.8| | | |`hipMemcpyFlagDefault`|7.1.0| | | | |7.1.0|
-|`cudaMemcpyFlagPreferOverlapWithCompute`|12.8| | | |`hipMemcpyFlagPreferOverlapWithCompute`|7.1.0| | | | |7.1.0|
-|`cudaMemcpyFlags`|12.8| | | |`hipMemcpyFlags`|7.1.0| | | | |7.1.0|
+|`cudaMemcpyFlagDefault`|12.8| | | |`hipMemcpyFlagDefault`|7.1.0| | | | |7.2.0|
+|`cudaMemcpyFlagPreferOverlapWithCompute`|12.8| | | |`hipMemcpyFlagPreferOverlapWithCompute`|7.1.0| | | | |7.2.0|
+|`cudaMemcpyFlags`|12.8| | | |`hipMemcpyFlags`|7.1.0| | | | |7.2.0|
 |`cudaMemcpyHostToDevice`| | | | |`hipMemcpyHostToDevice`|1.5.0| | | | | |
 |`cudaMemcpyHostToHost`| | | | |`hipMemcpyHostToHost`|1.5.0| | | | | |
 |`cudaMemcpyKind`| | | | |`hipMemcpyKind`|1.5.0| | | | | |
 |`cudaMemcpyNodeParams`|12.2| | | |`hipMemcpyNodeParams`|6.1.0| | | | | |
-|`cudaMemcpyOperandTypeArray`|12.8| | | |`hipMemcpyOperandTypeArray`|7.1.0| | | | |7.1.0|
-|`cudaMemcpyOperandTypeMax`|12.8| | | |`hipMemcpyOperandTypeMax`|7.1.0| | | | |7.1.0|
-|`cudaMemcpyOperandTypePointer`|12.8| | | |`hipMemcpyOperandTypePointer`|7.1.0| | | | |7.1.0|
-|`cudaMemcpySrcAccessOrder`|12.8| | | |`hipMemcpySrcAccessOrder`|7.1.0| | | | |7.1.0|
-|`cudaMemcpySrcAccessOrderAny`|12.8| | | |`hipMemcpySrcAccessOrderAny`|7.1.0| | | | |7.1.0|
-|`cudaMemcpySrcAccessOrderDuringApiCall`|12.8| | | |`hipMemcpySrcAccessOrderDuringApiCall`|7.1.0| | | | |7.1.0|
-|`cudaMemcpySrcAccessOrderInvalid`|12.8| | | |`hipMemcpySrcAccessOrderInvalid`|7.1.0| | | | |7.1.0|
-|`cudaMemcpySrcAccessOrderMax`|12.8| | | |`hipMemcpySrcAccessOrderMax`|7.1.0| | | | |7.1.0|
-|`cudaMemcpySrcAccessOrderStream`|12.8| | | |`hipMemcpySrcAccessOrderStream`|7.1.0| | | | |7.1.0|
+|`cudaMemcpyOperandTypeArray`|12.8| | | |`hipMemcpyOperandTypeArray`|7.1.0| | | | |7.2.0|
+|`cudaMemcpyOperandTypeMax`|12.8| | | |`hipMemcpyOperandTypeMax`|7.1.0| | | | |7.2.0|
+|`cudaMemcpyOperandTypePointer`|12.8| | | |`hipMemcpyOperandTypePointer`|7.1.0| | | | |7.2.0|
+|`cudaMemcpySrcAccessOrder`|12.8| | | |`hipMemcpySrcAccessOrder`|7.1.0| | | | |7.2.0|
+|`cudaMemcpySrcAccessOrderAny`|12.8| | | |`hipMemcpySrcAccessOrderAny`|7.1.0| | | | |7.2.0|
+|`cudaMemcpySrcAccessOrderDuringApiCall`|12.8| | | |`hipMemcpySrcAccessOrderDuringApiCall`|7.1.0| | | | |7.2.0|
+|`cudaMemcpySrcAccessOrderInvalid`|12.8| | | |`hipMemcpySrcAccessOrderInvalid`|7.1.0| | | | |7.2.0|
+|`cudaMemcpySrcAccessOrderMax`|12.8| | | |`hipMemcpySrcAccessOrderMax`|7.1.0| | | | |7.2.0|
+|`cudaMemcpySrcAccessOrderStream`|12.8| | | |`hipMemcpySrcAccessOrderStream`|7.1.0| | | | |7.2.0|
 |`cudaMemoryAdvise`|8.0| | | |`hipMemoryAdvise`|3.7.0| | | | | |
 |`cudaMemoryType`| | | | |`hipMemoryType`|1.6.0| | | | | |
 |`cudaMemoryTypeDevice`| | | | |`hipMemoryTypeDevice`|1.6.0| | | | | |
@@ -1666,7 +1666,7 @@
 |`cudaNvSciSyncAttrWait`|10.2| | | | | | | | | | |
 |`cudaOccupancyDefault`| | | | |`hipOccupancyDefault`|3.2.0| | | | | |
 |`cudaOccupancyDisableCachingOverride`| | | | |`hipOccupancyDisableCachingOverride`|5.5.0| | | | | |
-|`cudaOffset3D`|12.8| | | |`hipOffset3D`|7.1.0| | | | |7.1.0|
+|`cudaOffset3D`|12.8| | | |`hipOffset3D`|7.1.0| | | | |7.2.0|
 |`cudaOutputMode`| | | |12.0| | | | | | | |
 |`cudaOutputMode_t`| | | |12.0| | | | | | | |
 |`cudaPitchedPtr`| | | | |`hipPitchedPtr`|1.7.0| | | | | |
@@ -1731,10 +1731,10 @@
 |`cudaStreamAttrID`|11.0| | | |`hipLaunchAttributeID`|6.2.0| | | | | |
 |`cudaStreamAttrValue`|11.0| | | |`hipLaunchAttributeValue`|6.2.0| |7.1.0| | | |
 |`cudaStreamAttributeAccessPolicyWindow`|11.0| | | |`hipLaunchAttributeAccessPolicyWindow`|6.2.0| | | | | |
-|`cudaStreamAttributeMemSyncDomain`|12.0| | | |`hipLaunchAttributeMemSyncDomain`|7.1.0| | | | |7.1.0|
-|`cudaStreamAttributeMemSyncDomainMap`|12.0| | | |`hipLaunchAttributeMemSyncDomainMap`|7.1.0| | | | |7.1.0|
+|`cudaStreamAttributeMemSyncDomain`|12.0| | | |`hipLaunchAttributeMemSyncDomain`|7.1.0| | | | |7.2.0|
+|`cudaStreamAttributeMemSyncDomainMap`|12.0| | | |`hipLaunchAttributeMemSyncDomainMap`|7.1.0| | | | |7.2.0|
 |`cudaStreamAttributePriority`|12.0| | | |`hipLaunchAttributePriority`|6.2.0| | | | | |
-|`cudaStreamAttributeSynchronizationPolicy`|11.0| | | |`hipLaunchAttributeSynchronizationPolicy`|7.1.0| | | | |7.1.0|
+|`cudaStreamAttributeSynchronizationPolicy`|11.0| | | |`hipLaunchAttributeSynchronizationPolicy`|7.1.0| | | | |7.2.0|
 |`cudaStreamCallback_t`| | | | |`hipStreamCallback_t`|1.6.0| | | | | |
 |`cudaStreamCaptureMode`|10.1| | | |`hipStreamCaptureMode`|4.3.0| | | | | |
 |`cudaStreamCaptureModeGlobal`|10.1| | | |`hipStreamCaptureModeGlobal`|4.3.0| | | | | |
@@ -1755,11 +1755,11 @@
 |`cudaSurfaceBoundaryMode`| | | | |`hipSurfaceBoundaryMode`|1.9.0| | | | | |
 |`cudaSurfaceFormatMode`| | | | | | | | | | | |
 |`cudaSurfaceObject_t`| | | | |`hipSurfaceObject_t`|1.9.0| | | | | |
-|`cudaSyncPolicyAuto`|11.0| | | |`hipSyncPolicyAuto`|7.1.0| | | | |7.1.0|
-|`cudaSyncPolicyBlockingSync`|11.0| | | |`hipSyncPolicyBlockingSync`|7.1.0| | | | |7.1.0|
-|`cudaSyncPolicySpin`|11.0| | | |`hipSyncPolicySpin`|7.1.0| | | | |7.1.0|
-|`cudaSyncPolicyYield`|11.0| | | |`hipSyncPolicyYield`|7.1.0| | | | |7.1.0|
-|`cudaSynchronizationPolicy`|11.0| | | |`hipSynchronizationPolicy`|7.1.0| | | | |7.1.0|
+|`cudaSyncPolicyAuto`|11.0| | | |`hipSyncPolicyAuto`|7.1.0| | | | |7.2.0|
+|`cudaSyncPolicyBlockingSync`|11.0| | | |`hipSyncPolicyBlockingSync`|7.1.0| | | | |7.2.0|
+|`cudaSyncPolicySpin`|11.0| | | |`hipSyncPolicySpin`|7.1.0| | | | |7.2.0|
+|`cudaSyncPolicyYield`|11.0| | | |`hipSyncPolicyYield`|7.1.0| | | | |7.2.0|
+|`cudaSynchronizationPolicy`|11.0| | | |`hipSynchronizationPolicy`|7.1.0| | | | |7.2.0|
 |`cudaTextureAddressMode`| | | | |`hipTextureAddressMode`|1.7.0| | | | | |
 |`cudaTextureDesc`| | | | |`hipTextureDesc`|1.7.0| | | | | |
 |`cudaTextureFilterMode`| | | | |`hipTextureFilterMode`|1.6.0| | | | | |
