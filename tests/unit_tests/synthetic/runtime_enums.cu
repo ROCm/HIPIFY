@@ -1001,9 +1001,11 @@ int main() {
   // CHECK: hipMemLocationType MemLocationTypeHost = hipMemLocationTypeHost;
   // CHECK-NEXT: hipMemLocationType MemLocationTypeHostNuma = hipMemLocationTypeHostNuma;
   // CHECK-NEXT: hipMemLocationType MemLocationTypeHostNumaCurrent = hipMemLocationTypeHostNumaCurrent;
+  // CHECK-NEXT: hipDeviceAttribute_t DevAttrHostNumaId = hipDeviceAttributeHostNumaId;
   cudaMemLocationType MemLocationTypeHost = cudaMemLocationTypeHost;
   cudaMemLocationType MemLocationTypeHostNuma = cudaMemLocationTypeHostNuma;
   cudaMemLocationType MemLocationTypeHostNumaCurrent = cudaMemLocationTypeHostNumaCurrent;
+  cudaDeviceAttr DevAttrHostNumaId = cudaDevAttrHostNumaId;
 #endif
 
 #if CUDA_VERSION >= 12030

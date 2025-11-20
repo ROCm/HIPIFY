@@ -191,11 +191,15 @@
 |`cufftXtSetGPUs`| | | | |`hipfftXtSetGPUs`|6.0.0| | | | | |
 |`cufftXtSetWorkArea`| | | | | | | | | | | |
 |`cufftXtSetWorkAreaPolicy`|9.2| | | | | | | | | | |
+|`fftw_cleanup`| | | | |`fftw_cleanup`|7.1.0| | | | |7.1.0|
+|`fftw_cost`| | | | |`fftw_cost`|7.1.0| | | | |7.1.0|
+|`fftw_destroy_plan`| | | | |`fftw_destroy_plan`|7.1.0| | | | |7.1.0|
 |`fftw_execute`| | | | |`fftw_execute`|7.1.0| | | | |7.1.0|
 |`fftw_execute_dft`| | | | | | | | | | | |
 |`fftw_execute_dft_c2r`| | | | | | | | | | | |
 |`fftw_execute_dft_r2c`| | | | | | | | | | | |
 |`fftw_export_wisdom_to_file`| | | | | | | | | | | |
+|`fftw_flops`| | | | |`fftw_flops`|7.1.0| | | | |7.1.0|
 |`fftw_import_wisdom_from_file`| | | | | | | | | | | |
 |`fftw_plan_dft`| | | | |`fftw_plan_dft`|7.1.0| | | | |7.1.0|
 |`fftw_plan_dft_1d`| | | | |`fftw_plan_dft_1d`|7.1.0| | | | |7.1.0|
@@ -218,10 +222,17 @@
 |`fftw_plan_many_dft`| | | | | | | | | | | |
 |`fftw_plan_many_dft_c2r`| | | | | | | | | | | |
 |`fftw_plan_many_dft_r2c`| | | | | | | | | | | |
+|`fftw_print_plan`| | | | |`fftw_print_plan`|7.1.0| | | | |7.1.0|
+|`fftw_set_timelimit`| | | | |`fftw_set_timelimit`|7.1.0| | | | |7.1.0|
+|`fftwf_cleanup`| | | | |`fftwf_cleanup`|7.1.0| | | | |7.1.0|
+|`fftwf_cost`| | | | |`fftwf_cost`|7.1.0| | | | |7.1.0|
+|`fftwf_destroy_plan`| | | | |`fftwf_destroy_plan`|7.1.0| | | | |7.1.0|
+|`fftwf_execute`| | | | |`fftwf_execute`|7.1.0| | | | |7.1.0|
 |`fftwf_execute_dft`| | | | | | | | | | | |
 |`fftwf_execute_dft_c2r`| | | | | | | | | | | |
 |`fftwf_execute_dft_r2c`| | | | | | | | | | | |
 |`fftwf_export_wisdom_to_file`| | | | | | | | | | | |
+|`fftwf_flops`| | | | |`fftwf_flops`|7.1.0| | | | |7.1.0|
 |`fftwf_import_wisdom_from_file`| | | | | | | | | | | |
 |`fftwf_plan_dft`| | | | |`fftwf_plan_dft`|7.1.0| | | | |7.1.0|
 |`fftwf_plan_dft_1d`| | | | |`fftwf_plan_dft_1d`|7.1.0| | | | |7.1.0|
@@ -244,4 +255,6 @@
 |`fftwf_plan_many_dft`| | | | | | | | | | | |
 |`fftwf_plan_many_dft_c2r`| | | | | | | | | | | |
 |`fftwf_plan_many_dft_r2c`| | | | | | | | | | | |
+|`fftwf_print_plan`| | | | |`fftwf_print_plan`|7.1.0| | | | |7.1.0|
+|`fftwf_set_timelimit`| | | | |`fftwf_set_timelimit`|7.1.0| | | | |7.1.0|
 
