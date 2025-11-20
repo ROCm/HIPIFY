@@ -17,7 +17,7 @@ int main() {
   cudaKernel_t* kernelArray;
   unsigned int numKernels = 0;
 
-#if CUDA_VERSION >= 12000
+#if CUDA_VERSION >= 12080
   // CUDA:extern __host__cudaError_t cudaLibraryEnumerateKernels(cudaKernel_t* kernels, unsigned int numKernels, cudaLibrary_t lib)
   // HIP: hipError_t hipLibraryEnumerateKernels(hipKernel_t* kernels, unsigned int numKernels, hipLibrary_t lib)
   // CHECK: result = hipLibraryEnumerateKernels(kernelArray, numKernels, library);

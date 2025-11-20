@@ -126,7 +126,6 @@ int main() {
   CUkernel kernel;
   CUkernel* kernels = nullptr;
 
-  // CHECK: unsigned int numKernels = 0;
   unsigned int numKernels = 0;
 #endif
 
