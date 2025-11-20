@@ -4872,7 +4872,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {
   {"hipLibrary_t",                                                     {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
   {"ihipKernel_t",                                                     {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipKernel_t",                                                      {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipDeviceAttributeHostNumaId",                                     {HIP_7020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipDeviceAttributeHostNumaId",                                     {HIP_7020, HIP_0,    HIP_0,  HIP_7020}},
 };
 
 const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_DRIVER_TYPE_CHANGED_VER_MAP {

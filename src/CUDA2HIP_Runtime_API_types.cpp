@@ -3738,5 +3738,5 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {
   {"hipLaunchAttributeSynchronizationPolicy",                          {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipLaunchAttributeMemSyncDomainMap",                               {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipLaunchAttributeMemSyncDomain",                                  {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipDeviceAttributeHostNumaId",                                     {HIP_7020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipDeviceAttributeHostNumaId",                                     {HIP_7020, HIP_0,    HIP_0,  HIP_7020}},
 };

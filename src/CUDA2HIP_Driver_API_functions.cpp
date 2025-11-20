@@ -1777,11 +1777,11 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_FUNCTION_VER_MAP {
   {"hipMemsetD2D16Async",                                         {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipMemsetD2D32",                                              {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipMemsetD2D32Async",                                         {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipKernelGetName",                                            {HIP_7020, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipLibraryEnumerateKernels",                                  {HIP_7020, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipKernelGetLibrary",                                         {HIP_7020, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipStreamCopyAttributes",                                     {HIP_7020, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipOccupancyAvailableDynamicSMemPerBlock",                    {HIP_7020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipKernelGetName",                                            {HIP_7020, HIP_0,    HIP_0,  HIP_7020}},
+  {"hipLibraryEnumerateKernels",                                  {HIP_7020, HIP_0,    HIP_0,  HIP_7020}},
+  {"hipKernelGetLibrary",                                         {HIP_7020, HIP_0,    HIP_0,  HIP_7020}},
+  {"hipStreamCopyAttributes",                                     {HIP_7020, HIP_0,    HIP_0,  HIP_7020}},
+  {"hipOccupancyAvailableDynamicSMemPerBlock",                    {HIP_7020, HIP_0,    HIP_0,  HIP_7020}},
 };
 
 const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_DRIVER_FUNCTION_CHANGED_VER_MAP {

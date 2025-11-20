@@ -221,9 +221,9 @@
 |`CUDA_MEMCPY2D_v1_st`| | | | |`hip_Memcpy2D`|1.7.0| | | | | |
 |`CUDA_MEMCPY2D_v2`|11.3| | | |`hip_Memcpy2D`|1.7.0| | | | | |
 |`CUDA_MEMCPY3D`| | | | |`HIP_MEMCPY3D`|3.2.0| | | | | |
-|`CUDA_MEMCPY3D_BATCH_OP`|12.8| | | |`hipMemcpy3DBatchOp`|7.1.0| | | | |7.2.0|
-|`CUDA_MEMCPY3D_BATCH_OP_st`|12.8| | | |`hipMemcpy3DBatchOp`|7.1.0| | | | |7.2.0|
-|`CUDA_MEMCPY3D_BATCH_OP_v1`|12.8| | | |`hipMemcpy3DBatchOp`|7.1.0| | | | |7.2.0|
+|`CUDA_MEMCPY3D_BATCH_OP`|12.8| | | |`hipMemcpy3DBatchOp`|7.1.0| | | | |7.1.0|
+|`CUDA_MEMCPY3D_BATCH_OP_st`|12.8| | | |`hipMemcpy3DBatchOp`|7.1.0| | | | |7.1.0|
+|`CUDA_MEMCPY3D_BATCH_OP_v1`|12.8| | | |`hipMemcpy3DBatchOp`|7.1.0| | | | |7.1.0|
 |`CUDA_MEMCPY3D_PEER`| | | | | | | | | | | |
 |`CUDA_MEMCPY3D_PEER_st`| | | | | | | | | | | |
 |`CUDA_MEMCPY3D_PEER_v1`|11.3| | | | | | | | | | |
@@ -723,9 +723,9 @@
 |`CU_FUNC_CACHE_PREFER_L1`| | | | |`hipFuncCachePreferL1`|1.6.0| | | | | |
 |`CU_FUNC_CACHE_PREFER_NONE`| | | | |`hipFuncCachePreferNone`|1.6.0| | | | | |
 |`CU_FUNC_CACHE_PREFER_SHARED`| | | | |`hipFuncCachePreferShared`|1.6.0| | | | | |
-|`CU_GET_PROC_ADDRESS_DEFAULT`|11.3| | | |`hipEnableDefault`|7.1.0| | | | |7.2.0|
-|`CU_GET_PROC_ADDRESS_LEGACY_STREAM`|11.3| | | |`hipEnableLegacyStream`|7.1.0| | | | |7.2.0|
-|`CU_GET_PROC_ADDRESS_PER_THREAD_DEFAULT_STREAM`|11.3| | | |`hipEnablePerThreadDefaultStream`|7.1.0| | | | |7.2.0|
+|`CU_GET_PROC_ADDRESS_DEFAULT`|11.3| | | |`hipEnableDefault`|7.1.0| | | | |7.1.0|
+|`CU_GET_PROC_ADDRESS_LEGACY_STREAM`|11.3| | | |`hipEnableLegacyStream`|7.1.0| | | | |7.1.0|
+|`CU_GET_PROC_ADDRESS_PER_THREAD_DEFAULT_STREAM`|11.3| | | |`hipEnablePerThreadDefaultStream`|7.1.0| | | | |7.1.0|
 |`CU_GET_PROC_ADDRESS_SUCCESS`|12.0| | | |`HIP_GET_PROC_ADDRESS_SUCCESS`|6.2.0| | | | | |
 |`CU_GET_PROC_ADDRESS_SYMBOL_NOT_FOUND`|12.0| | | |`HIP_GET_PROC_ADDRESS_SYMBOL_NOT_FOUND`|6.2.0| | | | | |
 |`CU_GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT`|12.0| | | |`HIP_GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT`|6.2.0| | | | | |
@@ -869,18 +869,18 @@
 |`CU_LAUNCH_ATTRIBUTE_IGNORE`|11.8| | | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_LAUNCH_COMPLETION_EVENT`|12.3| | | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_MAX`|12.1| | | |`hipLaunchAttributeMax`|7.0.0| | | | | |
-|`CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN`|12.0| | | |`hipLaunchAttributeMemSyncDomain`|7.1.0| | | | |7.2.0|
-|`CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP`|12.0| | | |`hipLaunchAttributeMemSyncDomainMap`|7.1.0| | | | |7.2.0|
+|`CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN`|12.0| | | |`hipLaunchAttributeMemSyncDomain`|7.1.0| | | | |7.1.0|
+|`CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP`|12.0| | | |`hipLaunchAttributeMemSyncDomainMap`|7.1.0| | | | |7.1.0|
 |`CU_LAUNCH_ATTRIBUTE_NVLINK_UTIL_CENTRIC_SCHEDULING`|13.0| | | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_PREFERRED_CLUSTER_DIMENSION`|12.8| | | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_PREFERRED_SHARED_MEMORY_CARVEOUT`|12.5| | | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_PRIORITY`|11.8| | | |`hipLaunchAttributePriority`|6.2.0| | | | | |
 |`CU_LAUNCH_ATTRIBUTE_PROGRAMMATIC_EVENT`|11.8| | | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_PROGRAMMATIC_STREAM_SERIALIZATION`|11.8| | | | | | | | | | |
-|`CU_LAUNCH_ATTRIBUTE_SYNCHRONIZATION_POLICY`|11.8| | | |`hipLaunchAttributeSynchronizationPolicy`|7.1.0| | | | |7.2.0|
+|`CU_LAUNCH_ATTRIBUTE_SYNCHRONIZATION_POLICY`|11.8| | | |`hipLaunchAttributeSynchronizationPolicy`|7.1.0| | | | |7.1.0|
 |`CU_LAUNCH_KERNEL_REQUIRED_BLOCK_DIM`|12.9| | | | | | | | | | |
-|`CU_LAUNCH_MEM_SYNC_DOMAIN_DEFAULT`|12.0| | | |`hipLaunchMemSyncDomainDefault`|7.1.0| | | | |7.2.0|
-|`CU_LAUNCH_MEM_SYNC_DOMAIN_REMOTE`|12.0| | | |`hipLaunchMemSyncDomainRemote`|7.1.0| | | | |7.2.0|
+|`CU_LAUNCH_MEM_SYNC_DOMAIN_DEFAULT`|12.0| | | |`hipLaunchMemSyncDomainDefault`|7.1.0| | | | |7.1.0|
+|`CU_LAUNCH_MEM_SYNC_DOMAIN_REMOTE`|12.0| | | |`hipLaunchMemSyncDomainRemote`|7.1.0| | | | |7.1.0|
 |`CU_LAUNCH_PARAM_BUFFER_POINTER`| | | | |`HIP_LAUNCH_PARAM_BUFFER_POINTER`|1.6.0| | | | | |
 |`CU_LAUNCH_PARAM_BUFFER_POINTER_AS_INT`|11.7| | | | | | | | | | |
 |`CU_LAUNCH_PARAM_BUFFER_SIZE`| | | | |`HIP_LAUNCH_PARAM_BUFFER_SIZE`|1.6.0| | | | | |
@@ -903,16 +903,16 @@
 |`CU_LIMIT_STACK_SIZE`| | | | |`hipLimitStackSize`|5.3.0| | | | | |
 |`CU_LOG_LEVEL_ERROR`|12.9| | | | | | | | | | |
 |`CU_LOG_LEVEL_WARNING`|12.9| | | | | | | | | | |
-|`CU_MEMCPY_FLAG_DEFAULT`|12.8| | | |`hipMemcpyFlagDefault`|7.1.0| | | | |7.2.0|
-|`CU_MEMCPY_FLAG_PREFER_OVERLAP_WITH_COMPUTE`|12.8| | | |`hipMemcpyFlagPreferOverlapWithCompute`|7.1.0| | | | |7.2.0|
-|`CU_MEMCPY_OPERAND_TYPE_ARRAY`|12.8| | | |`hipMemcpyOperandTypeArray`|7.1.0| | | | |7.2.0|
-|`CU_MEMCPY_OPERAND_TYPE_MAX`|12.8| | | |`hipMemcpyOperandTypeMax`|7.1.0| | | | |7.2.0|
-|`CU_MEMCPY_OPERAND_TYPE_POINTER`|12.8| | | |`hipMemcpyOperandTypePointer`|7.1.0| | | | |7.2.0|
-|`CU_MEMCPY_SRC_ACCESS_ORDER_ANY`|12.8| | | |`hipMemcpySrcAccessOrderAny`|7.1.0| | | | |7.2.0|
-|`CU_MEMCPY_SRC_ACCESS_ORDER_DURING_API_CALL`|12.8| | | |`hipMemcpySrcAccessOrderDuringApiCall`|7.1.0| | | | |7.2.0|
-|`CU_MEMCPY_SRC_ACCESS_ORDER_INVALID`|12.8| | | |`hipMemcpySrcAccessOrderInvalid`|7.1.0| | | | |7.2.0|
-|`CU_MEMCPY_SRC_ACCESS_ORDER_MAX`|12.8| | | |`hipMemcpySrcAccessOrderMax`|7.1.0| | | | |7.2.0|
-|`CU_MEMCPY_SRC_ACCESS_ORDER_STREAM`|12.8| | | |`hipMemcpySrcAccessOrderStream`|7.1.0| | | | |7.2.0|
+|`CU_MEMCPY_FLAG_DEFAULT`|12.8| | | |`hipMemcpyFlagDefault`|7.1.0| | | | |7.1.0|
+|`CU_MEMCPY_FLAG_PREFER_OVERLAP_WITH_COMPUTE`|12.8| | | |`hipMemcpyFlagPreferOverlapWithCompute`|7.1.0| | | | |7.1.0|
+|`CU_MEMCPY_OPERAND_TYPE_ARRAY`|12.8| | | |`hipMemcpyOperandTypeArray`|7.1.0| | | | |7.1.0|
+|`CU_MEMCPY_OPERAND_TYPE_MAX`|12.8| | | |`hipMemcpyOperandTypeMax`|7.1.0| | | | |7.1.0|
+|`CU_MEMCPY_OPERAND_TYPE_POINTER`|12.8| | | |`hipMemcpyOperandTypePointer`|7.1.0| | | | |7.1.0|
+|`CU_MEMCPY_SRC_ACCESS_ORDER_ANY`|12.8| | | |`hipMemcpySrcAccessOrderAny`|7.1.0| | | | |7.1.0|
+|`CU_MEMCPY_SRC_ACCESS_ORDER_DURING_API_CALL`|12.8| | | |`hipMemcpySrcAccessOrderDuringApiCall`|7.1.0| | | | |7.1.0|
+|`CU_MEMCPY_SRC_ACCESS_ORDER_INVALID`|12.8| | | |`hipMemcpySrcAccessOrderInvalid`|7.1.0| | | | |7.1.0|
+|`CU_MEMCPY_SRC_ACCESS_ORDER_MAX`|12.8| | | |`hipMemcpySrcAccessOrderMax`|7.1.0| | | | |7.1.0|
+|`CU_MEMCPY_SRC_ACCESS_ORDER_STREAM`|12.8| | | |`hipMemcpySrcAccessOrderStream`|7.1.0| | | | |7.1.0|
 |`CU_MEMHOSTALLOC_DEVICEMAP`| | | | |`hipHostMallocMapped`|1.6.0| | | | | |
 |`CU_MEMHOSTALLOC_PORTABLE`| | | | |`hipHostMallocPortable`|1.6.0| | | | | |
 |`CU_MEMHOSTALLOC_WRITECOMBINED`| | | | |`hipHostMallocWriteCombined`|1.6.0| | | | | |
@@ -965,12 +965,12 @@
 |`CU_MEM_HANDLE_TYPE_WIN32`|10.2| | | |`hipMemHandleTypeWin32`|5.2.0| | | | | |
 |`CU_MEM_HANDLE_TYPE_WIN32_KMT`|10.2| | | |`hipMemHandleTypeWin32Kmt`|5.2.0| | | | | |
 |`CU_MEM_LOCATION_TYPE_DEVICE`|10.2| | | |`hipMemLocationTypeDevice`|5.2.0| | | | | |
-|`CU_MEM_LOCATION_TYPE_HOST`|12.2| | | |`hipMemLocationTypeHost`|7.1.0| | | | |7.2.0|
-|`CU_MEM_LOCATION_TYPE_HOST_NUMA`|12.2| | | |`hipMemLocationTypeHostNuma`|7.1.0| | | | |7.2.0|
-|`CU_MEM_LOCATION_TYPE_HOST_NUMA_CURRENT`|12.2| | | |`hipMemLocationTypeHostNumaCurrent`|7.1.0| | | | |7.2.0|
+|`CU_MEM_LOCATION_TYPE_HOST`|12.2| | | |`hipMemLocationTypeHost`|7.1.0| | | | |7.1.0|
+|`CU_MEM_LOCATION_TYPE_HOST_NUMA`|12.2| | | |`hipMemLocationTypeHostNuma`|7.1.0| | | | |7.1.0|
+|`CU_MEM_LOCATION_TYPE_HOST_NUMA_CURRENT`|12.2| | | |`hipMemLocationTypeHostNumaCurrent`|7.1.0| | | | |7.1.0|
 |`CU_MEM_LOCATION_TYPE_INVALID`|10.2| | | |`hipMemLocationTypeInvalid`|5.2.0| | | | | |
 |`CU_MEM_LOCATION_TYPE_MAX`|10.2| | | | | | | | | | |
-|`CU_MEM_LOCATION_TYPE_NONE`|13.0| | | |`hipMemLocationTypeNone`|7.1.0| | | | |7.2.0|
+|`CU_MEM_LOCATION_TYPE_NONE`|13.0| | | |`hipMemLocationTypeNone`|7.1.0| | | | |7.1.0|
 |`CU_MEM_OPERATION_TYPE_MAP`|11.1| | | |`hipMemOperationTypeMap`|5.2.0| | | | | |
 |`CU_MEM_OPERATION_TYPE_UNMAP`|11.1| | | |`hipMemOperationTypeUnmap`|5.2.0| | | | | |
 |`CU_MEM_POOL_CREATE_USAGE_HW_DECOMPRESS`|12.8| | | | | | | | | | |
@@ -1069,10 +1069,10 @@
 |`CU_SHARED_MEM_CONFIG_FOUR_BYTE_BANK_SIZE`| | | | |`hipSharedMemBankSizeFourByte`|1.6.0| | | | | |
 |`CU_STREAM_ADD_CAPTURE_DEPENDENCIES`|11.3| | | |`hipStreamAddCaptureDependencies`|5.0.0| | | | | |
 |`CU_STREAM_ATTRIBUTE_ACCESS_POLICY_WINDOW`|11.0| | | |`hipLaunchAttributeAccessPolicyWindow`|6.2.0| | | | | |
-|`CU_STREAM_ATTRIBUTE_MEM_SYNC_DOMAIN`|12.0| | | |`hipLaunchAttributeMemSyncDomain`|7.1.0| | | | |7.2.0|
-|`CU_STREAM_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP`|12.0| | | |`hipLaunchAttributeMemSyncDomainMap`|7.1.0| | | | |7.2.0|
+|`CU_STREAM_ATTRIBUTE_MEM_SYNC_DOMAIN`|12.0| | | |`hipLaunchAttributeMemSyncDomain`|7.1.0| | | | |7.1.0|
+|`CU_STREAM_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP`|12.0| | | |`hipLaunchAttributeMemSyncDomainMap`|7.1.0| | | | |7.1.0|
 |`CU_STREAM_ATTRIBUTE_PRIORITY`|12.0| | | |`hipLaunchAttributePriority`|6.2.0| | | | | |
-|`CU_STREAM_ATTRIBUTE_SYNCHRONIZATION_POLICY`|11.0| | | |`hipLaunchAttributeSynchronizationPolicy`|7.1.0| | | | |7.2.0|
+|`CU_STREAM_ATTRIBUTE_SYNCHRONIZATION_POLICY`|11.0| | | |`hipLaunchAttributeSynchronizationPolicy`|7.1.0| | | | |7.1.0|
 |`CU_STREAM_CAPTURE_MODE_GLOBAL`|10.1| | | |`hipStreamCaptureModeGlobal`|4.3.0| | | | | |
 |`CU_STREAM_CAPTURE_MODE_RELAXED`|10.1| | | |`hipStreamCaptureModeRelaxed`|4.3.0| | | | | |
 |`CU_STREAM_CAPTURE_MODE_THREAD_LOCAL`|10.1| | | |`hipStreamCaptureModeThreadLocal`|4.3.0| | | | | |
@@ -1099,10 +1099,10 @@
 |`CU_STREAM_WAIT_VALUE_NOR`|9.0| | | |`hipStreamWaitValueNor`|4.2.0| | | | | |
 |`CU_STREAM_WRITE_VALUE_DEFAULT`|8.0| | | | | | | | | | |
 |`CU_STREAM_WRITE_VALUE_NO_MEMORY_BARRIER`|8.0| | | | | | | | | | |
-|`CU_SYNC_POLICY_AUTO`|11.0| | | |`hipSyncPolicyAuto`|7.1.0| | | | |7.2.0|
-|`CU_SYNC_POLICY_BLOCKING_SYNC`|11.0| | | |`hipSyncPolicyBlockingSync`|7.1.0| | | | |7.2.0|
-|`CU_SYNC_POLICY_SPIN`|11.0| | | |`hipSyncPolicySpin`|7.1.0| | | | |7.2.0|
-|`CU_SYNC_POLICY_YIELD`|11.0| | | |`hipSyncPolicyYield`|7.1.0| | | | |7.2.0|
+|`CU_SYNC_POLICY_AUTO`|11.0| | | |`hipSyncPolicyAuto`|7.1.0| | | | |7.1.0|
+|`CU_SYNC_POLICY_BLOCKING_SYNC`|11.0| | | |`hipSyncPolicyBlockingSync`|7.1.0| | | | |7.1.0|
+|`CU_SYNC_POLICY_SPIN`|11.0| | | |`hipSyncPolicySpin`|7.1.0| | | | |7.1.0|
+|`CU_SYNC_POLICY_YIELD`|11.0| | | |`hipSyncPolicyYield`|7.1.0| | | | |7.1.0|
 |`CU_TARGET_COMPUTE_10`| | | |9.0| | | | | | | |
 |`CU_TARGET_COMPUTE_100`|12.8| | | | | | | | | | |
 |`CU_TARGET_COMPUTE_100A`|12.8| | | | | | | | | | |
@@ -1404,8 +1404,8 @@
 |`CUjit_option_enum`| | | | |`hipJitOption`|1.6.0| | | | | |
 |`CUjit_target`| | | | | | | | | | | |
 |`CUjit_target_enum`| | | | | | | | | | | |
-|`CUkern_st`|12.0| | | |`ihipKernel_t`|7.1.0| | | | |7.2.0|
-|`CUkernel`|12.0| | | |`hipKernel_t`|7.1.0| | | | |7.2.0|
+|`CUkern_st`|12.0| | | |`ihipKernel_t`|7.1.0| | | | |7.1.0|
+|`CUkernel`|12.0| | | |`hipKernel_t`|7.1.0| | | | |7.1.0|
 |`CUkernelNodeAttrID`|11.0| | | |`hipKernelNodeAttrID`|5.2.0| | | | | |
 |`CUkernelNodeAttrID_enum`|11.0| | |11.8|`hipKernelNodeAttrID`|5.2.0| | | | | |
 |`CUkernelNodeAttrValue`|11.0| | | |`hipKernelNodeAttrValue`|5.2.0| | | | | |
@@ -1419,12 +1419,12 @@
 |`CUlaunchAttribute_st`|11.8| | | |`hipLaunchAttribute_st`|7.0.0| | | | | |
 |`CUlaunchConfig`|11.8| | | |`HIP_LAUNCH_CONFIG`|7.0.0| | | | | |
 |`CUlaunchConfig_st`|11.8| | | |`HIP_LAUNCH_CONFIG_st`|7.0.0| | | | | |
-|`CUlaunchMemSyncDomain`|12.0| | | |`hipLaunchMemSyncDomain`|7.1.0| | | | |7.2.0|
-|`CUlaunchMemSyncDomainMap`|12.0| | | |`hipLaunchMemSyncDomainMap`|7.1.0| | | | |7.2.0|
-|`CUlaunchMemSyncDomainMap_st`|12.0| | | |`hipLaunchMemSyncDomainMap`|7.1.0| | | | |7.2.0|
-|`CUlaunchMemSyncDomain_enum`|12.0| | | |`hipLaunchMemSyncDomain`|7.1.0| | | | |7.2.0|
-|`CUlib_st`|12.0| | | |`ihipLibrary_t`|7.1.0| | | | |7.2.0|
-|`CUlibrary`|12.0| | | |`hipLibrary_t`|7.1.0| | | | |7.2.0|
+|`CUlaunchMemSyncDomain`|12.0| | | |`hipLaunchMemSyncDomain`|7.1.0| | | | |7.1.0|
+|`CUlaunchMemSyncDomainMap`|12.0| | | |`hipLaunchMemSyncDomainMap`|7.1.0| | | | |7.1.0|
+|`CUlaunchMemSyncDomainMap_st`|12.0| | | |`hipLaunchMemSyncDomainMap`|7.1.0| | | | |7.1.0|
+|`CUlaunchMemSyncDomain_enum`|12.0| | | |`hipLaunchMemSyncDomain`|7.1.0| | | | |7.1.0|
+|`CUlib_st`|12.0| | | |`ihipLibrary_t`|7.1.0| | | | |7.1.0|
+|`CUlibrary`|12.0| | | |`hipLibrary_t`|7.1.0| | | | |7.1.0|
 |`CUlibraryHostUniversalFunctionAndDataTable`|12.0| | | | | | | | | | |
 |`CUlibraryHostUniversalFunctionAndDataTable_st`|12.0| | | | | | | | | | |
 |`CUlibraryOption`|12.0| | | | | | | | | | |
@@ -1490,18 +1490,18 @@
 |`CUmem_advise_enum`|8.0| | | |`hipMemoryAdvise`|3.7.0| | | | | |
 |`CUmem_range_attribute`|8.0| | | |`hipMemRangeAttribute`|3.7.0| | | | | |
 |`CUmem_range_attribute_enum`|8.0| | | |`hipMemRangeAttribute`|3.7.0| | | | | |
-|`CUmemcpy3DOperand`|12.8| | | |`hipMemcpy3DOperand`|7.1.0| | | | |7.2.0|
-|`CUmemcpy3DOperandType`|12.8| | | |`hipMemcpy3DOperandType`|7.1.0| | | | |7.2.0|
-|`CUmemcpy3DOperandType_enum`|12.8| | | |`hipMemcpy3DOperandType`|7.1.0| | | | |7.2.0|
-|`CUmemcpy3DOperand_st`|12.8| | | |`hipMemcpy3DOperand`|7.1.0| | | | |7.2.0|
-|`CUmemcpy3DOperand_v1`|12.8| | | |`hipMemcpy3DOperand`|7.1.0| | | | |7.2.0|
-|`CUmemcpyAttributes`|12.8| | | |`hipMemcpyAttributes`|7.1.0| | | | |7.2.0|
-|`CUmemcpyAttributes_st`|12.8| | | |`hipMemcpyAttributes`|7.1.0| | | | |7.2.0|
-|`CUmemcpyAttributes_v1`|12.8| | | |`hipMemcpyAttributes`|7.1.0| | | | |7.2.0|
-|`CUmemcpyFlags`|12.8| | | |`hipMemcpyFlags`|7.1.0| | | | |7.2.0|
-|`CUmemcpyFlags_enum`|12.8| | | |`hipMemcpyFlags`|7.1.0| | | | |7.2.0|
-|`CUmemcpySrcAccessOrder`|12.8| | | |`hipMemcpySrcAccessOrder`|7.1.0| | | | |7.2.0|
-|`CUmemcpySrcAccessOrder_enum`|12.8| | | |`hipMemcpySrcAccessOrder`|7.1.0| | | | |7.2.0|
+|`CUmemcpy3DOperand`|12.8| | | |`hipMemcpy3DOperand`|7.1.0| | | | |7.1.0|
+|`CUmemcpy3DOperandType`|12.8| | | |`hipMemcpy3DOperandType`|7.1.0| | | | |7.1.0|
+|`CUmemcpy3DOperandType_enum`|12.8| | | |`hipMemcpy3DOperandType`|7.1.0| | | | |7.1.0|
+|`CUmemcpy3DOperand_st`|12.8| | | |`hipMemcpy3DOperand`|7.1.0| | | | |7.1.0|
+|`CUmemcpy3DOperand_v1`|12.8| | | |`hipMemcpy3DOperand`|7.1.0| | | | |7.1.0|
+|`CUmemcpyAttributes`|12.8| | | |`hipMemcpyAttributes`|7.1.0| | | | |7.1.0|
+|`CUmemcpyAttributes_st`|12.8| | | |`hipMemcpyAttributes`|7.1.0| | | | |7.1.0|
+|`CUmemcpyAttributes_v1`|12.8| | | |`hipMemcpyAttributes`|7.1.0| | | | |7.1.0|
+|`CUmemcpyFlags`|12.8| | | |`hipMemcpyFlags`|7.1.0| | | | |7.1.0|
+|`CUmemcpyFlags_enum`|12.8| | | |`hipMemcpyFlags`|7.1.0| | | | |7.1.0|
+|`CUmemcpySrcAccessOrder`|12.8| | | |`hipMemcpySrcAccessOrder`|7.1.0| | | | |7.1.0|
+|`CUmemcpySrcAccessOrder_enum`|12.8| | | |`hipMemcpySrcAccessOrder`|7.1.0| | | | |7.1.0|
 |`CUmemoryPool`|11.2| | | |`hipMemPool_t`|5.2.0| | | | | |
 |`CUmemorytype`| | | | |`hipMemoryType`|1.6.0| | | | | |
 |`CUmemorytype_enum`| | | | |`hipMemoryType`|1.6.0| | | | | |
@@ -1519,9 +1519,9 @@
 |`CUoccupancyB2DSize`| | | | |`void*`| | | | | | |
 |`CUoccupancy_flags`| | | | | | | | | | | |
 |`CUoccupancy_flags_enum`| | | | | | | | | | | |
-|`CUoffset3D`|12.8| | | |`hipOffset3D`|7.1.0| | | | |7.2.0|
-|`CUoffset3D_st`|12.8| | | |`hipOffset3D`|7.1.0| | | | |7.2.0|
-|`CUoffset3D_v1`|12.8| | | |`hipOffset3D`|7.1.0| | | | |7.2.0|
+|`CUoffset3D`|12.8| | | |`hipOffset3D`|7.1.0| | | | |7.1.0|
+|`CUoffset3D_st`|12.8| | | |`hipOffset3D`|7.1.0| | | | |7.1.0|
+|`CUoffset3D_v1`|12.8| | | |`hipOffset3D`|7.1.0| | | | |7.1.0|
 |`CUpointer_attribute`| | | | |`hipPointer_attribute`|5.0.0| | | | | |
 |`CUpointer_attribute_enum`| | | | |`hipPointer_attribute`|5.0.0| | | | | |
 |`CUprocessState`|12.8| | | | | | | | | | |
@@ -1567,8 +1567,8 @@
 |`CUsurfObject_v1`|11.3| | | |`hipSurfaceObject_t`|1.9.0| | | | | |
 |`CUsurfref`| | | | | | | | | | | |
 |`CUsurfref_st`| | | | | | | | | | | |
-|`CUsynchronizationPolicy`|11.0| | | |`hipSynchronizationPolicy`|7.1.0| | | | |7.2.0|
-|`CUsynchronizationPolicy_enum`|11.0| | | |`hipSynchronizationPolicy`|7.1.0| | | | |7.2.0|
+|`CUsynchronizationPolicy`|11.0| | | |`hipSynchronizationPolicy`|7.1.0| | | | |7.1.0|
+|`CUsynchronizationPolicy_enum`|11.0| | | |`hipSynchronizationPolicy`|7.1.0| | | | |7.1.0|
 |`CUtensorMap`|12.0| | | | | | | | | | |
 |`CUtensorMapDataType`|12.0| | | | | | | | | | |
 |`CUtensorMapDataType_enum`|12.0| | | | | | | | | | |
@@ -1864,15 +1864,15 @@
 |`cuMemsetD16`| | | | |`hipMemsetD16`|3.0.0| | | | | |
 |`cuMemsetD16Async`| | | | |`hipMemsetD16Async`|3.0.0| | | | | |
 |`cuMemsetD16_v2`| | | | |`hipMemsetD16`|3.0.0| | | | | |
-|`cuMemsetD2D16`| | | | |`hipMemsetD2D16`|7.1.0| | | | |7.2.0|
-|`cuMemsetD2D16Async`| | | | |`hipMemsetD2D16Async`|7.1.0| | | | |7.2.0|
-|`cuMemsetD2D16_v2`| | | | |`hipMemsetD2D16`|7.1.0| | | | |7.2.0|
-|`cuMemsetD2D32`| | | | |`hipMemsetD2D32`|7.1.0| | | | |7.2.0|
-|`cuMemsetD2D32Async`| | | | |`hipMemsetD2D32Async`|7.1.0| | | | |7.2.0|
-|`cuMemsetD2D32_v2`| | | | |`hipMemsetD2D32`|7.1.0| | | | |7.2.0|
-|`cuMemsetD2D8`| | | | |`hipMemsetD2D8`|7.1.0| | | | |7.2.0|
-|`cuMemsetD2D8Async`| | | | |`hipMemsetD2D8Async`|7.1.0| | | | |7.2.0|
-|`cuMemsetD2D8_v2`| | | | |`hipMemsetD2D8`|7.1.0| | | | |7.2.0|
+|`cuMemsetD2D16`| | | | |`hipMemsetD2D16`|7.1.0| | | | |7.1.0|
+|`cuMemsetD2D16Async`| | | | |`hipMemsetD2D16Async`|7.1.0| | | | |7.1.0|
+|`cuMemsetD2D16_v2`| | | | |`hipMemsetD2D16`|7.1.0| | | | |7.1.0|
+|`cuMemsetD2D32`| | | | |`hipMemsetD2D32`|7.1.0| | | | |7.1.0|
+|`cuMemsetD2D32Async`| | | | |`hipMemsetD2D32Async`|7.1.0| | | | |7.1.0|
+|`cuMemsetD2D32_v2`| | | | |`hipMemsetD2D32`|7.1.0| | | | |7.1.0|
+|`cuMemsetD2D8`| | | | |`hipMemsetD2D8`|7.1.0| | | | |7.1.0|
+|`cuMemsetD2D8Async`| | | | |`hipMemsetD2D8Async`|7.1.0| | | | |7.1.0|
+|`cuMemsetD2D8_v2`| | | | |`hipMemsetD2D8`|7.1.0| | | | |7.1.0|
 |`cuMemsetD32`| | | | |`hipMemsetD32`|2.3.0| | | | | |
 |`cuMemsetD32Async`| | | | |`hipMemsetD32Async`|2.3.0| | | | | |
 |`cuMemsetD32_v2`| | | | |`hipMemsetD32`|2.3.0| | | | | |
@@ -1969,7 +1969,7 @@
 |`cuStreamDestroy`| | | | |`hipStreamDestroy`|1.6.0| | | | | |
 |`cuStreamDestroy_v2`| | | | |`hipStreamDestroy`|1.6.0| | | | | |
 |`cuStreamEndCapture`|10.0| | | |`hipStreamEndCapture`|4.3.0| | | | | |
-|`cuStreamGetAttribute`|11.0| | | |`hipStreamGetAttribute`|7.1.0| | | | |7.2.0|
+|`cuStreamGetAttribute`|11.0| | | |`hipStreamGetAttribute`|7.1.0| | | | |7.1.0|
 |`cuStreamGetCaptureInfo`|10.1| |13.0| |`hipStreamGetCaptureInfo`|5.0.0| | | |13.0| |
 |`cuStreamGetCaptureInfo_v2`|11.3| | | |`hipStreamGetCaptureInfo_v2`|5.0.0| | | | | |
 |`cuStreamGetCaptureInfo_v3`|12.3| | | | | | | | | | |
@@ -1977,11 +1977,11 @@
 |`cuStreamGetCtx_v2`|12.5| | | | | | | | | | |
 |`cuStreamGetDevice`|12.8| | | | | | | | | | |
 |`cuStreamGetFlags`| | | | |`hipStreamGetFlags`|1.6.0| | | | | |
-|`cuStreamGetId`|12.0| | | |`hipStreamGetId`|7.1.0| | | | |7.2.0|
+|`cuStreamGetId`|12.0| | | |`hipStreamGetId`|7.1.0| | | | |7.1.0|
 |`cuStreamGetPriority`| | | | |`hipStreamGetPriority`|2.0.0| | | | | |
 |`cuStreamIsCapturing`|10.0| | | |`hipStreamIsCapturing`|5.0.0| | | | | |
 |`cuStreamQuery`| | | | |`hipStreamQuery`|1.6.0| | | | | |
-|`cuStreamSetAttribute`|11.0| | | |`hipStreamSetAttribute`|7.1.0| | | | |7.2.0|
+|`cuStreamSetAttribute`|11.0| | | |`hipStreamSetAttribute`|7.1.0| | | | |7.1.0|
 |`cuStreamSynchronize`| | | | |`hipStreamSynchronize`|1.6.0| | | | | |
 |`cuStreamUpdateCaptureDependencies`|11.3| |13.0| |`hipStreamUpdateCaptureDependencies`|5.0.0| | | |13.0| |
 |`cuStreamUpdateCaptureDependencies_v2`|12.3| | | | | | | | | | |

@@ -1528,9 +1528,9 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP {
   {"hipStreamGetId",                                          {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipStreamSetAttribute",                                   {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipStreamGetAttribute",                                   {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipStreamCopyAttributes",                                 {HIP_7020, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipOccupancyAvailableDynamicSMemPerBlock",                {HIP_7020, HIP_0,    HIP_0,  HIP_LATEST}},
-  {"hipLibraryEnumerateKernels",                              {HIP_7020, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipStreamCopyAttributes",                                 {HIP_7020, HIP_0,    HIP_0,  HIP_7020}},
+  {"hipOccupancyAvailableDynamicSMemPerBlock",                {HIP_7020, HIP_0,    HIP_0,  HIP_7020}},
+  {"hipLibraryEnumerateKernels",                              {HIP_7020, HIP_0,    HIP_0,  HIP_7020}},
 };
 
 const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_RUNTIME_FUNCTION_CHANGED_VER_MAP {

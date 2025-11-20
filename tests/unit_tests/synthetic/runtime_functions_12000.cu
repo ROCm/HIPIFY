@@ -47,7 +47,7 @@ int main() {
   // NOTE: [HIP] hipDriverEntryPointQueryResult should be used instead of hipDriverProcAddressQueryResult
   // HIP: hipError_t hipGetProcAddress(const char* symbol, void** pfn, int hipVersion, uint64_t flags, hipDriverProcAddressQueryResult* symbolStatus);
   // TODO: add an explicit static_cast<uint64_t> for ull
-  // CHECK: result = hipGetProcAddress(symbol.c_str(), &pfn, 702, ull, &driverProcAddressQueryResult);
+  // CHECK: result = hipGetProcAddress(symbol.c_str(), &pfn, 701, ull, &driverProcAddressQueryResult);
   result = cudaGetDriverEntryPoint(symbol.c_str(), &pfn, ull, &driverProcAddressQueryResult);
 #endif
 

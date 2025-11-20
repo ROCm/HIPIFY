@@ -1729,10 +1729,12 @@ my %experimental_funcs = (
     "cudaStreamSetAttribute" => "7.1.0",
     "cudaStreamGetId" => "7.1.0",
     "cudaStreamGetAttribute" => "7.1.0",
+    "cudaStreamCopyAttributes" => "7.2.0",
     "cudaStreamAttributeSynchronizationPolicy" => "7.1.0",
     "cudaStreamAttributeMemSyncDomainMap" => "7.1.0",
     "cudaStreamAttributeMemSyncDomain" => "7.1.0",
     "cudaOffset3D" => "7.1.0",
+    "cudaOccupancyAvailableDynamicSMemPerBlock" => "7.2.0",
     "cudaMemcpySrcAccessOrderStream" => "7.1.0",
     "cudaMemcpySrcAccessOrderMax" => "7.1.0",
     "cudaMemcpySrcAccessOrderInvalid" => "7.1.0",
@@ -1755,6 +1757,7 @@ my %experimental_funcs = (
     "cudaMemLocationTypeHostNuma" => "7.1.0",
     "cudaMemLocationTypeHost" => "7.1.0",
     "cudaLibrary_t" => "7.1.0",
+    "cudaLibraryEnumerateKernels" => "7.2.0",
     "cudaLaunchMemSyncDomainRemote" => "7.1.0",
     "cudaLaunchMemSyncDomainMap_st" => "7.1.0",
     "cudaLaunchMemSyncDomainMap" => "7.1.0",
@@ -1771,9 +1774,12 @@ my %experimental_funcs = (
     "cudaDriverEntryPointSymbolNotFound" => "7.1.0",
     "cudaDriverEntryPointSuccess" => "7.1.0",
     "cudaDriverEntryPointQueryResult" => "7.1.0",
+    "cudaDevAttrHostNumaId" => "7.2.0",
     "cuStreamSetAttribute" => "7.1.0",
     "cuStreamGetId" => "7.1.0",
     "cuStreamGetAttribute" => "7.1.0",
+    "cuStreamCopyAttributes" => "7.2.0",
+    "cuOccupancyAvailableDynamicSMemPerBlock" => "7.2.0",
     "cuMemsetD2D8_v2" => "7.1.0",
     "cuMemsetD2D8Async" => "7.1.0",
     "cuMemsetD2D8" => "7.1.0",
@@ -1783,6 +1789,9 @@ my %experimental_funcs = (
     "cuMemsetD2D16_v2" => "7.1.0",
     "cuMemsetD2D16Async" => "7.1.0",
     "cuMemsetD2D16" => "7.1.0",
+    "cuLibraryEnumerateKernels" => "7.2.0",
+    "cuKernelGetName" => "7.2.0",
+    "cuKernelGetLibrary" => "7.2.0",
     "FFTW_WISDOM_ONLY" => "7.1.0",
     "FFTW_UNALIGNED" => "7.1.0",
     "FFTW_PRESERVE_INPUT" => "7.1.0",
@@ -1845,15 +1854,15 @@ my %experimental_funcs = (
     "CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP" => "7.1.0",
     "CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN" => "7.1.0",
     "CU_LAUNCH_ATTRIBUTE_ACCESS_POLICY_WINDOW" => "",
-    "CU_GET_PROC_ADDRESS_PER_THREAD_DEFAULT_STREAM" => "7.2.0",
-    "CU_GET_PROC_ADDRESS_LEGACY_STREAM" => "7.2.0",
-    "CU_GET_PROC_ADDRESS_DEFAULT" => "7.2.0",
+    "CU_GET_PROC_ADDRESS_PER_THREAD_DEFAULT_STREAM" => "7.1.0",
+    "CU_GET_PROC_ADDRESS_LEGACY_STREAM" => "7.1.0",
+    "CU_GET_PROC_ADDRESS_DEFAULT" => "7.1.0",
     "CU_DEVICE_ATTRIBUTE_HOST_NUMA_ID" => "7.2.0",
-    "CUDA_MEMCPY3D_BATCH_OP_v1" => "7.2.0",
-    "CUDA_MEMCPY3D_BATCH_OP_st" => "7.2.0",
-    "CUDA_MEMCPY3D_BATCH_OP" => "7.2.0",
-    "CUBLASLT_EPILOGUE_RELU_AUX_BIAS" => "7.2.0",
-    "CUBLASLT_EPILOGUE_RELU_AUX" => "7.2.0"
+    "CUDA_MEMCPY3D_BATCH_OP_v1" => "7.1.0",
+    "CUDA_MEMCPY3D_BATCH_OP_st" => "7.1.0",
+    "CUDA_MEMCPY3D_BATCH_OP" => "7.1.0",
+    "CUBLASLT_EPILOGUE_RELU_AUX_BIAS" => "7.1.0",
+    "CUBLASLT_EPILOGUE_RELU_AUX" => "7.1.0"
 );
 
 $print_stats = 1 if $examine;
@@ -2012,6 +2021,8 @@ sub experimentalSubstitutions {
     subst("cudaStreamGetAttribute", "hipStreamGetAttribute", "stream");
     subst("cudaStreamGetId", "hipStreamGetId", "stream");
     subst("cudaStreamSetAttribute", "hipStreamSetAttribute", "stream");
+    subst("cuOccupancyAvailableDynamicSMemPerBlock", "hipOccupancyAvailableDynamicSMemPerBlock", "occupancy");
+    subst("cudaOccupancyAvailableDynamicSMemPerBlock", "hipOccupancyAvailableDynamicSMemPerBlock", "occupancy");
     subst("fftw_cleanup", "fftw_cleanup", "library");
     subst("fftw_cost", "fftw_cost", "library");
     subst("fftw_destroy_plan", "fftw_destroy_plan", "library");
@@ -17888,7 +17899,7 @@ if ($help) {
     print STDERR "$USAGE\n";
 }
 if ($version) {
-    print STDERR "HIP version 7.2.0\n";
+    print STDERR "HIP version 7.1.0\n";
 }
 while (@ARGV) {
     $fileName=shift (@ARGV);
