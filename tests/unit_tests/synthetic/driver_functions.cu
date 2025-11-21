@@ -43,7 +43,6 @@ int main() {
   void *extraparamsprt = nullptr;
   void *jitOptionsValues = nullptr;
   void *libraryOptionValues = nullptr;
-  const char *const_ch = nullptr;
   std::string name = "str";
   std::string symbol = "symbol";
   uint32_t u_value = 0;
@@ -2029,21 +2028,6 @@ int main() {
   // HIP: hipError_t hipLibraryLoadData(hipLibrary_t* library, const void* code, hipJitOption** jitOptions, void** jitOptionsValues, unsigned int numJitOptions, hipLibraryOption** libraryOptions, void** libraryOptionValues, unsigned int numLibraryOptions);
   // CHECK: result = hipLibraryLoadData(&library, code, &jit_option, &jitOptionsValues, count, &LibraryOption, &libraryOptionValues, numLibraryOptions);
   result = cuLibraryLoadData(&library, code, &jit_option, &jitOptionsValues, count, &LibraryOption, &libraryOptionValues, numLibraryOptions);
-
-  // CUDA: CUresult CUDAAPI cuLibraryLoadFromFile(CUlibrary *library, const char *fileName, CUjit_option* jitOptions, void** jitOptionsValues, unsigned int numJitOptions, CUlibraryOption* libraryOptions, void** libraryOptionValues, unsigned int numLibraryOptions);
-  // HIP: hipError_t hipLibraryLoadFromFile(hipLibrary_t* library, const char* fileName, hipJitOption** jitOptions, void** jitOptionsValues, unsigned int numJitOptions, hipLibraryOption** libraryOptions, void** libraryOptionValues, unsigned int numLibraryOptions);
-  // CHECK: result = hipLibraryLoadFromFile(&library, const_ch, &jit_option, &jitOptionsValues, count, &LibraryOption, &libraryOptionValues, numLibraryOptions);
-  result = cuLibraryLoadFromFile(&library, const_ch, &jit_option, &jitOptionsValues, count, &LibraryOption, &libraryOptionValues, numLibraryOptions);
-
-  // CUDA: CUresult CUDAAPI cuLibraryUnload(CUlibrary library);
-  // HIP: hipError_t hipLibraryUnload(hipLibrary_t library);
-  // CHECK: result = hipLibraryUnload(library);
-  result = cuLibraryUnload(library);
-
-  // CUDA: CUresult CUDAAPI cuLibraryGetKernel(CUkernel *pKernel, CUlibrary library, const char *name);
-  // HIP: hipError_t hipLibraryGetKernel(hipKernel_t* pKernel, hipLibrary_t library, const char* name);
-  // CHECK: result = hipLibraryGetKernel(kernels, library, const_ch);
-  result = cuLibraryGetKernel(kernels, library, const_ch);
 #endif
 
 #if CUDA_VERSION >= 12020

@@ -2710,14 +2710,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT",                       {"HIP_GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT",              "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}},
 
   // cudaLibraryOption
-  {"CUlibraryOption",                                                  {"hipLibraryOption",                                         "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES}},
+  {"CUlibraryOption",                                                  {"hipLibraryOption",                                         "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
   // cudaLibraryOption
-  {"CUlibraryOption_enum",                                             {"hipLibraryOption_e",                                       "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES}},
+  {"CUlibraryOption_enum",                                             {"hipLibraryOption_e",                                       "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
   // CUlibraryOption enum values
   // cudaLibraryHostUniversalFunctionAndDataTable
-  {"CU_LIBRARY_HOST_UNIVERSAL_FUNCTION_AND_DATA_TABLE",                {"hipLibraryHostUniversalFunctionAndDataTable",              "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}},
+  {"CU_LIBRARY_HOST_UNIVERSAL_FUNCTION_AND_DATA_TABLE",                {"hipLibraryHostUniversalFunctionAndDataTable",              "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
   // cudaLibraryBinaryIsPreserved
-  {"CU_LIBRARY_BINARY_IS_PRESERVED",                                   {"hipLibraryBinaryIsPreserved",                              "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}},
+  {"CU_LIBRARY_BINARY_IS_PRESERVED",                                   {"hipLibraryBinaryIsPreserved",                              "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
   //
   {"CU_LIBRARY_NUM_OPTIONS",                                           {"hipLibraryNumOptions",                                     "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
@@ -4868,11 +4868,11 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {
   {"hipMemRangeFlags",                                                 {HIP_7000, HIP_0,    HIP_0   }},
   {"hipMemRangeFlagDmaBufMappingTypePcie",                             {HIP_7000, HIP_0,    HIP_0   }},
   {"hipLaunchAttributeMax",                                            {HIP_7000, HIP_0,    HIP_0   }},
-  {"ihipLibrary_t",                                                    {HIP_7010, HIP_0,    HIP_0   }},
-  {"hipLibrary_t",                                                     {HIP_7010, HIP_0,    HIP_0   }},
-  {"ihipKernel_t",                                                     {HIP_7010, HIP_0,    HIP_0   }},
-  {"hipKernel_t",                                                      {HIP_7010, HIP_0,    HIP_0   }},
-  {"hipLibraryOption_e",                                               {HIP_7010, HIP_0,    HIP_0   }},
+  {"ihipLibrary_t",                                                    {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipLibrary_t",                                                     {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"ihipKernel_t",                                                     {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipKernel_t",                                                      {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipLibraryOption_e",                                               {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipDeviceAttributeHostNumaId",                                     {HIP_7020, HIP_0,    HIP_0,  HIP_7020}},
 };
 

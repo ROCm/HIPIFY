@@ -343,10 +343,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   {"cudaMemcpy3DAsync",                                       {"hipMemcpy3DAsync",                                       "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY}},
   // no analogue
   // NOTE: Not equal to cuMemcpy3DPeer due to different signatures
-  {"cudaMemcpy3DPeer",                                        {"hipMemcpy3DPeer",                                        "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY}},
+  {"cudaMemcpy3DPeer",                                        {"hipMemcpy3DPeer",                                        "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_EXPERIMENTAL}},
   // no analogue
   // NOTE: Not equal to cuMemcpy3DPeerAsync due to different signatures
-  {"cudaMemcpy3DPeerAsync",                                   {"hipMemcpy3DPeerAsync",                                   "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY}},
+  {"cudaMemcpy3DPeerAsync",                                   {"hipMemcpy3DPeerAsync",                                   "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_EXPERIMENTAL}},
   // no analogue
   // NOTE: Not equal to cuMemcpyAsync due to different signatures
   {"cudaMemcpyAsync",                                         {"hipMemcpyAsync",                                         "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY}},
@@ -365,9 +365,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // no analogue
   {"cudaMemcpyToSymbolAsync",                                 {"hipMemcpyToSymbolAsync",                                 "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY}},
   // cuMemcpyBatchAsync
-  {"cudaMemcpyBatchAsync",                                    {"hipMemcpyBatchAsync",                                    "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_PARTIALLY_SUPPORTED}},
+  {"cudaMemcpyBatchAsync",                                    {"hipMemcpyBatchAsync",                                    "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_PARTIALLY_SUPPORTED | HIP_EXPERIMENTAL}},
   // cuMemcpy3DBatchAsync
-  {"cudaMemcpy3DBatchAsync",                                  {"hipMemcpy3DBatchAsync",                                  "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_PARTIALLY_SUPPORTED}},
+  {"cudaMemcpy3DBatchAsync",                                  {"hipMemcpy3DBatchAsync",                                  "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_PARTIALLY_SUPPORTED | HIP_EXPERIMENTAL}},
   // cuMemGetInfo
   {"cudaMemGetInfo",                                          {"hipMemGetInfo",                                          "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY}},
   // cuMemPrefetchAsync
@@ -901,7 +901,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
 
   // 32. Library Management
   // cuLibraryLoadData
-  {"cudaLibraryLoadData",                                     {"hipLibraryLoadData",                                     "", CONV_LIBRARY, API_RUNTIME, SEC::LIBRARY}},
+  {"cudaLibraryLoadData",                                     {"hipLibraryLoadData",                                     "", CONV_LIBRARY, API_RUNTIME, SEC::LIBRARY, HIP_EXPERIMENTAL}},
   // cuLibraryLoadFromFile
   {"cudaLibraryLoadFromFile",                                 {"hipLibraryLoadFromFile",                                 "", CONV_LIBRARY, API_RUNTIME, SEC::LIBRARY}},
   // cuLibraryUnload
@@ -1521,19 +1521,14 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP {
   {"hipGraphExecNodeSetParams",                               {HIP_6030, HIP_0,    HIP_0   }},
   {"hipLaunchKernelExC",                                      {HIP_7000, HIP_0,    HIP_0   }},
   {"hipDeviceGetTexture1DLinearMaxWidth",                     {HIP_6040, HIP_0,    HIP_0   }},
-  {"hipStreamGetId",                                          {HIP_7010, HIP_0,    HIP_0   }},
-  {"hipStreamSetAttribute",                                   {HIP_7010, HIP_0,    HIP_0   }},
-  {"hipStreamGetAttribute",                                   {HIP_7010, HIP_0,    HIP_0   }},
-  {"hipMemcpyBatchAsync",                                     {HIP_7010, HIP_0,    HIP_0   }},
-  {"hipMemcpy3DBatchAsync",                                   {HIP_7010, HIP_0,    HIP_0   }},
-  {"hipMemcpy3DPeer",                                         {HIP_7010, HIP_0,    HIP_0   }},
-  {"hipMemcpy3DPeerAsync",                                    {HIP_7010, HIP_0,    HIP_0   }},
-  {"hipLibraryLoadData",                                      {HIP_7010, HIP_0,    HIP_0   }},
-  {"hipLibraryLoadFromFile",                                  {HIP_7010, HIP_0,    HIP_0   }},
-  {"hipLibraryUnload",                                        {HIP_7010, HIP_0,    HIP_0   }},
-  {"hipLibraryGetKernel",                                     {HIP_7010, HIP_0,    HIP_0   }},
-  {"hipLibraryGetKernelCount",                                {HIP_7010, HIP_0,    HIP_0   }},
-  {"hipGetDriverEntryPoint",                                  {HIP_7010, HIP_0,    HIP_0   }},
+  {"hipStreamGetId",                                          {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipStreamSetAttribute",                                   {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipStreamGetAttribute",                                   {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemcpyBatchAsync",                                     {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemcpy3DBatchAsync",                                   {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemcpy3DPeer",                                         {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemcpy3DPeerAsync",                                    {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipLibraryLoadData",                                      {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipStreamCopyAttributes",                                 {HIP_7020, HIP_0,    HIP_0,  HIP_7020}},
   {"hipOccupancyAvailableDynamicSMemPerBlock",                {HIP_7020, HIP_0,    HIP_0,  HIP_7020}},
   {"hipLibraryEnumerateKernels",                              {HIP_7020, HIP_0,    HIP_0,  HIP_7020}},
