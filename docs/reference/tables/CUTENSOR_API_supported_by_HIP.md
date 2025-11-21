@@ -232,7 +232,7 @@
 |`cutensorEstimateWorkspaceSize`|2.0.0.0| | | |`hiptensorEstimateWorkspaceSize`|7.0.0| | | | | |
 |`cutensorGetCudartVersion`|1.0.1.0| | | |`hiptensorGetHiprtVersion`|5.7.0| | | | | |
 |`cutensorGetErrorString`|1.0.1.0| | | |`hiptensorGetErrorString`|5.7.0| | | | | |
-|`cutensorGetVersion`|1.0.1.0| | | | | | | | | | |
+|`cutensorGetVersion`|1.0.1.0| | | |`hiptensorGetVersion`|7.2.0| | | | |7.2.0|
 |`cutensorHandleReadPlanCacheFromFile`|2.0.0.0| | | |`hiptensorHandleReadPlanCacheFromFile`|7.0.0| | | | | |
 |`cutensorHandleResizePlanCache`|2.0.0.0| | | |`hiptensorHandleResizePlanCache`|7.0.0| | | | | |
 |`cutensorHandleWritePlanCacheToFile`|2.0.0.0| | | |`hiptensorHandleWritePlanCacheToFile`|7.0.0| | | | | |

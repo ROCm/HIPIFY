@@ -347,10 +347,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   {"cudaMemcpy3DAsync",                                       {"hipMemcpy3DAsync",                                       "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY}},
   // no analogue
   // NOTE: Not equal to cuMemcpy3DPeer due to different signatures
-  {"cudaMemcpy3DPeer",                                        {"hipMemcpy3DPeer",                                        "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_UNSUPPORTED}},
+  {"cudaMemcpy3DPeer",                                        {"hipMemcpy3DPeer",                                        "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_EXPERIMENTAL}},
   // no analogue
   // NOTE: Not equal to cuMemcpy3DPeerAsync due to different signatures
-  {"cudaMemcpy3DPeerAsync",                                   {"hipMemcpy3DPeerAsync",                                   "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_UNSUPPORTED}},
+  {"cudaMemcpy3DPeerAsync",                                   {"hipMemcpy3DPeerAsync",                                   "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_EXPERIMENTAL}},
   // no analogue
   // NOTE: Not equal to cuMemcpyAsync due to different signatures
   {"cudaMemcpyAsync",                                         {"hipMemcpyAsync",                                         "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY}},
@@ -369,9 +369,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // no analogue
   {"cudaMemcpyToSymbolAsync",                                 {"hipMemcpyToSymbolAsync",                                 "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY}},
   // cuMemcpyBatchAsync
-  {"cudaMemcpyBatchAsync",                                    {"hipMemcpyBatchAsync",                                    "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_UNSUPPORTED}},
+  {"cudaMemcpyBatchAsync",                                    {"hipMemcpyBatchAsync",                                    "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_PARTIALLY_SUPPORTED | HIP_EXPERIMENTAL}},
   // cuMemcpy3DBatchAsync
-  {"cudaMemcpy3DBatchAsync",                                  {"hipMemcpy3DBatchAsync",                                  "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_UNSUPPORTED}},
+  {"cudaMemcpy3DBatchAsync",                                  {"hipMemcpy3DBatchAsync",                                  "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_PARTIALLY_SUPPORTED | HIP_EXPERIMENTAL}},
   // cuMemGetInfo
   {"cudaMemGetInfo",                                          {"hipMemGetInfo",                                          "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY}},
   // cuMemPrefetchAsync
@@ -905,7 +905,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
 
   // 32. Library Management
   // cuLibraryLoadData
-  {"cudaLibraryLoadData",                                     {"hipLibraryLoadData",                                     "", CONV_LIBRARY, API_RUNTIME, SEC::LIBRARY, HIP_UNSUPPORTED}},
+  {"cudaLibraryLoadData",                                     {"hipLibraryLoadData",                                     "", CONV_LIBRARY, API_RUNTIME, SEC::LIBRARY, HIP_EXPERIMENTAL}},
   // cuLibraryLoadFromFile
   {"cudaLibraryLoadFromFile",                                 {"hipLibraryLoadFromFile",                                 "", CONV_LIBRARY, API_RUNTIME, SEC::LIBRARY, HIP_UNSUPPORTED}},
   // cuLibraryUnload
@@ -1528,6 +1528,11 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP {
   {"hipStreamGetId",                                          {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipStreamSetAttribute",                                   {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipStreamGetAttribute",                                   {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemcpyBatchAsync",                                     {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemcpy3DBatchAsync",                                   {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemcpy3DPeer",                                         {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemcpy3DPeerAsync",                                    {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipLibraryLoadData",                                      {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipStreamCopyAttributes",                                 {HIP_7020, HIP_0,    HIP_0,  HIP_7020}},
   {"hipOccupancyAvailableDynamicSMemPerBlock",                {HIP_7020, HIP_0,    HIP_0,  HIP_7020}},
   {"hipLibraryEnumerateKernels",                              {HIP_7020, HIP_0,    HIP_0,  HIP_7020}},
@@ -1558,6 +1563,8 @@ const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_RUNTIME_FUNCTION_CHAN
 const std::map<llvm::StringRef, cudaAPIUnsupportedVersions> CUDA_RUNTIME_FUNCTION_UNSUPPORTED_VER_MAP {
   {"cudaStreamGetCaptureInfo",                                {CUDA_130}},
   {"cudaStreamUpdateCaptureDependencies",                     {CUDA_130}},
+  {"cudaMemcpyBatchAsync",                                    {CUDA_130}},
+  {"cudaMemcpy3DBatchAsync",                                  {CUDA_130}},
   {"cudaMemAdvise",                                           {CUDA_130}},
   {"cudaMemPrefetchAsync",                                    {CUDA_130}},
   {"cudaGraphAddDependencies",                                {CUDA_130}},

@@ -1302,6 +1302,15 @@ int main() {
   CUlaunchMemSyncDomain_enum launchMemSyncDomain_enum;
   CUlaunchMemSyncDomain LAUNCH_MEM_SYNC_DOMAIN_DEFAULT = CU_LAUNCH_MEM_SYNC_DOMAIN_DEFAULT;
   CUlaunchMemSyncDomain LAUNCH_MEM_SYNC_DOMAIN_REMOTE = CU_LAUNCH_MEM_SYNC_DOMAIN_REMOTE;
+
+  // CHECK: hipLibraryOption LibraryOption;
+  // CHECK-NEXT: hipLibraryOption_e LibraryOption_enum;
+  // CHECK-NEXT: hipLibraryOption LibraryHostUniversalFunctionAndDataTable = hipLibraryHostUniversalFunctionAndDataTable;
+  // CHECK-NEXT: hipLibraryOption LibraryBinaryIsPreserved = hipLibraryBinaryIsPreserved;
+  CUlibraryOption LibraryOption;
+  CUlibraryOption_enum LibraryOption_enum;
+  CUlibraryOption LibraryHostUniversalFunctionAndDataTable = CU_LIBRARY_HOST_UNIVERSAL_FUNCTION_AND_DATA_TABLE;
+  CUlibraryOption LibraryBinaryIsPreserved = CU_LIBRARY_BINARY_IS_PRESERVED;
 #endif
 
 #if CUDA_VERSION >= 12010

@@ -887,8 +887,8 @@
 |`CU_LAUNCH_PARAM_BUFFER_SIZE_AS_INT`|11.7| | | | | | | | | | |
 |`CU_LAUNCH_PARAM_END`| | | | |`HIP_LAUNCH_PARAM_END`|1.6.0| | | | | |
 |`CU_LAUNCH_PARAM_END_AS_INT`|11.7| | | | | | | | | | |
-|`CU_LIBRARY_BINARY_IS_PRESERVED`|12.0| | | | | | | | | | |
-|`CU_LIBRARY_HOST_UNIVERSAL_FUNCTION_AND_DATA_TABLE`|12.0| | | | | | | | | | |
+|`CU_LIBRARY_BINARY_IS_PRESERVED`|12.0| | | |`hipLibraryBinaryIsPreserved`|7.1.0| | | | |7.1.0|
+|`CU_LIBRARY_HOST_UNIVERSAL_FUNCTION_AND_DATA_TABLE`|12.0| | | |`hipLibraryHostUniversalFunctionAndDataTable`|7.1.0| | | | |7.1.0|
 |`CU_LIBRARY_NUM_OPTIONS`|12.0| | | | | | | | | | |
 |`CU_LIMIT_CIG_ENABLED`|12.5| | | | | | | | | | |
 |`CU_LIMIT_CIG_SHMEM_FALLBACK_ENABLED`|12.5| | | | | | | | | | |
@@ -1427,8 +1427,8 @@
 |`CUlibrary`|12.0| | | |`hipLibrary_t`|7.1.0| | | | |7.1.0|
 |`CUlibraryHostUniversalFunctionAndDataTable`|12.0| | | | | | | | | | |
 |`CUlibraryHostUniversalFunctionAndDataTable_st`|12.0| | | | | | | | | | |
-|`CUlibraryOption`|12.0| | | | | | | | | | |
-|`CUlibraryOption_enum`|12.0| | | | | | | | | | |
+|`CUlibraryOption`|12.0| | | |`hipLibraryOption`|7.1.0| | | | |7.1.0|
+|`CUlibraryOption_enum`|12.0| | | |`hipLibraryOption_e`|7.1.0| | | | |7.1.0|
 |`CUlimit`| | | | |`hipLimit_t`|1.6.0| | | | | |
 |`CUlimit_enum`| | | | |`hipLimit_t`|1.6.0| | | | | |
 |`CUlinkState`| | | | |`hiprtcLinkState`|5.3.0| | | | | |
@@ -1737,7 +1737,7 @@
 |`cuModuleLoad`| | | | |`hipModuleLoad`|1.6.0| | | | | |
 |`cuModuleLoadData`| | | | |`hipModuleLoadData`|1.6.0| | | | | |
 |`cuModuleLoadDataEx`| | | | |`hipModuleLoadDataEx`|1.6.0| | | | | |
-|`cuModuleLoadFatBinary`| | | | | | | | | | | |
+|`cuModuleLoadFatBinary`| | | | |`hipModuleLoadFatBinary`|7.1.0| | | | |7.1.0|
 |`cuModuleUnload`| | | | |`hipModuleUnload`|1.6.0| | | | | |
 
 ## **11. Module Management [DEPRECATED]**
@@ -1765,7 +1765,7 @@
 |`cuLibraryGetManaged`|12.0| | | | | | | | | | |
 |`cuLibraryGetModule`|12.0| | | | | | | | | | |
 |`cuLibraryGetUnifiedFunction`|12.0| | | | | | | | | | |
-|`cuLibraryLoadData`|12.0| | | | | | | | | | |
+|`cuLibraryLoadData`|12.0| | | |`hipLibraryLoadData`|7.1.0| | | | |7.1.0|
 |`cuLibraryLoadFromFile`|12.0| | | | | | | | | | |
 |`cuLibraryUnload`|12.0| | | | | | | | | | |
 
@@ -1827,7 +1827,7 @@
 |`cuMemcpy3D`| | | | |`hipDrvMemcpy3D`|3.5.0| | | | | |
 |`cuMemcpy3DAsync`| | | | |`hipDrvMemcpy3DAsync`|3.5.0| | | | | |
 |`cuMemcpy3DAsync_v2`| | | | |`hipDrvMemcpy3DAsync`|3.5.0| | | | | |
-|`cuMemcpy3DBatchAsync`|12.8| |13.0| | | | | | | | |
+|`cuMemcpy3DBatchAsync`|12.8| |13.0| |`hipMemcpy3DBatchAsync`|7.1.0| | | |13.0|7.1.0|
 |`cuMemcpy3DPeer`| | | | | | | | | | | |
 |`cuMemcpy3DPeerAsync`| | | | | | | | | | | |
 |`cuMemcpy3D_v2`| | | | |`hipDrvMemcpy3D`|3.5.0| | | | | |
@@ -1840,7 +1840,7 @@
 |`cuMemcpyAtoHAsync`| | | | |`hipMemcpyAtoHAsync`|6.2.0| | | | | |
 |`cuMemcpyAtoHAsync_v2`| | | | |`hipMemcpyAtoHAsync`|6.2.0| | | | | |
 |`cuMemcpyAtoH_v2`| | | | |`hipMemcpyAtoH`|1.9.0| | | | | |
-|`cuMemcpyBatchAsync`|12.8| |13.0| | | | | | | | |
+|`cuMemcpyBatchAsync`|12.8| |13.0| |`hipMemcpyBatchAsync`|7.1.0| | | |13.0|7.1.0|
 |`cuMemcpyDtoA`| | | | |`hipMemcpyDtoA`|6.2.0| | | | | |
 |`cuMemcpyDtoA_v2`| | | | |`hipMemcpyDtoA`|6.2.0| | | | | |
 |`cuMemcpyDtoD`| | | | |`hipMemcpyDtoD`|1.6.0| | | | | |
