@@ -178,6 +178,11 @@ int main() {
   // HIP: int hiptensorGetHiprtVersion();
   // CHECK: ver = hiptensorGetHiprtVersion();
   ver = cutensorGetCudartVersion();
+
+  // CUDA: size_t cutensorGetVersion();
+  // HIP: size_t hiptensorGetVersion();
+  // CHECK: ver = hiptensorGetVersion();
+  ver = cutensorGetVersion();
 #endif
 
 #if (CUTENSOR_MAJOR == 1 && CUTENSOR_MINOR >= 4) || CUTENSOR_MAJOR >= 2

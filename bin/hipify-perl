@@ -1721,6 +1721,7 @@ my %experimental_funcs = (
     "fftw_cost" => "7.1.0",
     "fftw_complex" => "7.1.0",
     "fftw_cleanup" => "7.1.0",
+    "cutensorGetVersion" => "7.2.0",
     "cudaSynchronizationPolicy" => "7.1.0",
     "cudaSyncPolicyYield" => "7.1.0",
     "cudaSyncPolicySpin" => "7.1.0",
@@ -2048,6 +2049,7 @@ sub experimentalSubstitutions {
     subst("cudaStreamSetAttribute", "hipStreamSetAttribute", "stream");
     subst("cuOccupancyAvailableDynamicSMemPerBlock", "hipOccupancyAvailableDynamicSMemPerBlock", "occupancy");
     subst("cudaOccupancyAvailableDynamicSMemPerBlock", "hipOccupancyAvailableDynamicSMemPerBlock", "occupancy");
+    subst("cutensorGetVersion", "hiptensorGetVersion", "library");
     subst("fftw_cleanup", "fftw_cleanup", "library");
     subst("fftw_cost", "fftw_cost", "library");
     subst("fftw_destroy_plan", "fftw_destroy_plan", "library");
@@ -11363,7 +11365,6 @@ sub warnRemovedFunctions {
     "cutensorMgContractionDescriptor_s",
     "cutensorMgContraction",
     "cutensorMgAlgo_t",
-    "cutensorGetVersion",
     "cutensorDestroyBlockSparseTensorDescriptor",
     "cutensorCreateContractionTrinary",
     "cutensorCreateBlockSparseTensorDescriptor",
@@ -14749,7 +14750,6 @@ sub warnHipOnlyUnsupportedFunctions {
     "cutensorMgContractionDescriptor_s",
     "cutensorMgContraction",
     "cutensorMgAlgo_t",
-    "cutensorGetVersion",
     "cutensorDestroyBlockSparseTensorDescriptor",
     "cutensorCreateContractionTrinary",
     "cutensorCreateBlockSparseTensorDescriptor",
