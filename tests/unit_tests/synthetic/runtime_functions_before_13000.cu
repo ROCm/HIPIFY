@@ -22,6 +22,8 @@ int main() {
   printf("12. CUDA Runtime API Functions synthetic test\n");
 
   size_t bytes = 0;
+  size_t sizes = 0;
+  size_t counts = 0;
   size_t width = 0;
   size_t height = 0;
   size_t wOffset = 0;
@@ -30,6 +32,10 @@ int main() {
   size_t hOffset_src = 0;
   size_t pitch = 0;
   size_t pitch_2 = 0;
+  size_t attrsIdxs = 0;
+  size_t numAttrs = 0;
+  size_t numOps = 0;
+  size_t failIdx = 0;
   int device = 0;
   int deviceId = 0;
   int intVal = 0;
@@ -1673,6 +1679,24 @@ int main() {
   // HIP: hipError_t hipStreamBeginCaptureToGraph(hipStream_t stream, hipGraph_t graph, const hipGraphNode_t* dependencies, const hipGraphEdgeData* dependencyData, size_t numDependencies, hipStreamCaptureMode mode);
   // CHECK: result = hipStreamBeginCaptureToGraph(stream, Graph_t, &graphNode_2, &graphEdgeData, bytes, streamCaptureMode);
   result = cudaStreamBeginCaptureToGraph(stream, Graph_t, &graphNode_2, &graphEdgeData, bytes, streamCaptureMode);
+#endif
+
+#if CUDA_VERSION >= 12080
+  // CHECK: hipMemcpyAttributes MemcpyAttributes;
+  cudaMemcpyAttributes MemcpyAttributes;
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMemcpyBatchAsync(void **dsts, void **srcs, size_t *sizes, size_t count, struct cudaMemcpyAttributes *attrs, size_t *attrsIdxs, size_t numAttrs, size_t *failIdx, cudaStream_t stream);
+  // HIP: hipError_t hipMemcpyBatchAsync(void** dsts, void** srcs, size_t* sizes, size_t count, hipMemcpyAttributes* attrs, size_t* attrsIdxs, size_t numAttrs, size_t* failIdx, hipStream_t stream __dparm(0));
+  // CHECK: result = hipMemcpyBatchAsync(&dst, &src, &sizes, counts, &MemcpyAttributes, &attrsIdxs, numAttrs, &failIdx, stream);
+  result = cudaMemcpyBatchAsync(&dst, &src, &sizes, counts, &MemcpyAttributes, &attrsIdxs, numAttrs, &failIdx, stream);
+
+  // CHECK: hipMemcpy3DBatchOp Memcpy3DBatchOp;
+  cudaMemcpy3DBatchOp Memcpy3DBatchOp;
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMemcpy3DBatchAsync(size_t numOps, struct cudaMemcpy3DBatchOp *opList, size_t *failIdx, unsigned long long flags, cudaStream_t stream);
+  // HIP: hipError_t hipMemcpy3DBatchAsync(size_t numOps, struct hipMemcpy3DBatchOp* opList, size_t* failIdx, unsigned long long flags, hipStream_t stream __dparm(0));
+  // CHECK: result = hipMemcpy3DBatchAsync(numOps, &Memcpy3DBatchOp, &failIdx, ull_2, stream);
+  result = cudaMemcpy3DBatchAsync(numOps, &Memcpy3DBatchOp, &failIdx, ull_2, stream);
 #endif
 
   return 0;

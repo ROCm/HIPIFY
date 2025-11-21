@@ -325,9 +325,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   // NOTE: Not equal to cudaMemcpyPeerAsync due to different signatures
   {"cuMemcpyPeerAsync",                                           {"hipMemcpyPeerAsync_",                                         "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_UNSUPPORTED}},
   // cudaMemcpyBatchAsync
-  {"cuMemcpyBatchAsync",                                          {"hipMemcpyBatchAsync",                                         "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_UNSUPPORTED}},
+  {"cuMemcpyBatchAsync",                                          {"hipMemcpyBatchAsync",                                         "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_PARTIALLY_SUPPORTED | HIP_EXPERIMENTAL}},
   // cudaMemcpy3DBatchAsync
-  {"cuMemcpy3DBatchAsync",                                        {"hipMemcpy3DBatchAsync",                                       "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_UNSUPPORTED}},
+  {"cuMemcpy3DBatchAsync",                                        {"hipMemcpy3DBatchAsync",                                       "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_PARTIALLY_SUPPORTED | HIP_EXPERIMENTAL}},
   //
   {"cuMemBatchDecompressAsync",                                   {"hipMemBatchDecompressAsync",                                  "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_UNSUPPORTED}},
   // cudaFree
@@ -1809,6 +1809,8 @@ const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_DRIVER_FUNCTION_CHANG
 const std::map<llvm::StringRef, cudaAPIUnsupportedVersions> CUDA_DRIVER_FUNCTION_UNSUPPORTED_VER_MAP {
   {"cuCtxCreate",                                                 {CUDA_130}},
   {"cuCtxCreate_v2",                                              {CUDA_130}},
+  {"cuMemcpyBatchAsync",                                          {CUDA_130}},
+  {"cuMemcpy3DBatchAsync",                                        {CUDA_130}},
   {"cuMemAdvise",                                                 {CUDA_130}},
   {"cuMemPrefetchAsync",                                          {CUDA_130}},
   {"cuStreamGetCaptureInfo",                                      {CUDA_130}},

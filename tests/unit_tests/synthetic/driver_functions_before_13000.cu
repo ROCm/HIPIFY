@@ -34,6 +34,12 @@ int main() {
   int hipVersion = 0;
   size_t bytes = 0;
   size_t bytes_2 = 0;
+  size_t sizes = 0;
+  size_t counts = 0;
+  size_t attrsIdxs = 0;
+  size_t numAttrs = 0;
+  size_t numOps = 0;
+  size_t failIdx = 0;
   void *image = nullptr;
   void *pfn = nullptr;
   void *paramsprt = nullptr;
@@ -64,6 +70,8 @@ int main() {
   // CHECK-NEXT: hipModule_t module_;
   // CHECK-NEXT: hipDeviceptr_t deviceptr;
   // CHECK-NEXT: hipDeviceptr_t deviceptr_2;
+  // CHECK-NEXT: hipDeviceptr_t deviceptr_dst;
+  // CHECK-NEXT: hipDeviceptr_t deviceptr_src;
   // CHECK-NEXT: hipTexRef texref;
   // CHECK-NEXT: hipJitOption jit_option;
   // CHECK-NEXT: hipArray_t array_;
@@ -94,6 +102,8 @@ int main() {
   CUmodule module_;
   CUdeviceptr deviceptr;
   CUdeviceptr deviceptr_2;
+  CUdeviceptr deviceptr_dst;
+  CUdeviceptr deviceptr_src;
   CUtexref texref;
   CUjit_option jit_option;
   CUarray array_;
@@ -2040,6 +2050,22 @@ int main() {
   // HIP: hipError_t hipEventElapsedTime(float* ms, hipEvent_t start, hipEvent_t stop);
   // CHECK: result = hipEventElapsedTime(&ms, event_start, event_end);
   result = cuEventElapsedTime_v2(&ms, event_start, event_end);
+
+  // CHECK: hipMemcpyAttributes memcpyAttributes;
+  CUmemcpyAttributes memcpyAttributes;
+
+  // CUDA: CUresult CUDAAPI cuMemcpyBatchAsync(CUdeviceptr *dsts, CUdeviceptr *srcs, size_t *sizes, size_t count, CUmemcpyAttributes* attrs, size_t* attrsIdxs, size_t numAttrs, size_t* failIdx, CUstream hStream);
+  // HIP: hipError_t hipMemcpyBatchAsync(void** dsts, void** srcs, size_t* sizes, size_t count, hipMemcpyAttributes* attrs, size_t* attrsIdxs, size_t numAttrs, size_t* failIdx, hipStream_t stream __dparm(0));
+  // CHECK: result = hipMemcpyBatchAsync(&deviceptr_dst, &deviceptr_src, &sizes, counts, &memcpyAttributes, &attrsIdxs, numAttrs, &failIdx, stream);
+  result = cuMemcpyBatchAsync(&deviceptr_dst, &deviceptr_src, &sizes, counts, &memcpyAttributes, &attrsIdxs, numAttrs, &failIdx, stream);
+
+  // CHECK: hipMemcpy3DBatchOp Memcpy3DBatchOp;
+  CUDA_MEMCPY3D_BATCH_OP Memcpy3DBatchOp;
+
+  // CUDA: CUresult CUDAAPI cuMemcpy3DBatchAsync(size_t numOps, CUDA_MEMCPY3D_BATCH_OP *opList, size_t* failIdx, unsigned long long flags, CUstream hStream);
+  // HIP: hipError_t hipMemcpy3DBatchAsync(size_t numOps, struct hipMemcpy3DBatchOp* opList, size_t* failIdx, unsigned long long flags, hipStream_t stream __dparm(0));
+  // CHECK: result = hipMemcpy3DBatchAsync(numOps, &Memcpy3DBatchOp, &failIdx, ull_2, stream);
+  result = cuMemcpy3DBatchAsync(numOps, &Memcpy3DBatchOp, &failIdx, ull_2, stream);
 #endif
 
   return 0;
