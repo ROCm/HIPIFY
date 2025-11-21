@@ -840,6 +840,19 @@ int main() {
   // CHECK: result = hipMemcpy2DArrayToArray(Array_t, wOffset, hOffset, Array_const_t, wOffset_src, hOffset_src, width, height, MemcpyKind);
   result = cudaMemcpy2DArrayToArray(Array_t, wOffset, hOffset, Array_const_t, wOffset_src, hOffset_src, width, height, MemcpyKind);
 
+  // CHECK: hipMemcpy3DPeerParms Memcpy3DPeerParms;
+  cudaMemcpy3DPeerParms Memcpy3DPeerParms;
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMemcpy3DPeer(const struct cudaMemcpy3DPeerParms *p);
+  // HIP: hipError_t hipMemcpy3DPeer(hipMemcpy3DPeerParms* p);
+  // CHECK: result = hipMemcpy3DPeer(&Memcpy3DPeerParms);
+  result = cudaMemcpy3DPeer(&Memcpy3DPeerParms);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMemcpy3DPeerAsync(const struct cudaMemcpy3DPeerParms *p, cudaStream_t stream __dv(0));
+  // HIP: hipError_t hipMemcpy3DPeerAsync(hipMemcpy3DPeerParms* p, hipStream_t stream __dparm(0));
+  // CHECK: result = hipMemcpy3DPeerAsync(&Memcpy3DPeerParms, stream);
+  result = cudaMemcpy3DPeerAsync(&Memcpy3DPeerParms, stream);
+
 #if CUDA_VERSION >= 8000
   // CHECK: hipDeviceP2PAttr DeviceP2PAttr;
   cudaDeviceP2PAttr DeviceP2PAttr;

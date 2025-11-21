@@ -1827,7 +1827,7 @@
 |`cuMemcpy3D`| | | | |`hipDrvMemcpy3D`|3.5.0| | | | | |
 |`cuMemcpy3DAsync`| | | | |`hipDrvMemcpy3DAsync`|3.5.0| | | | | |
 |`cuMemcpy3DAsync_v2`| | | | |`hipDrvMemcpy3DAsync`|3.5.0| | | | | |
-|`cuMemcpy3DBatchAsync`|12.8| |13.0| | | | | | | | |
+|`cuMemcpy3DBatchAsync`|12.8| |13.0| |`hipMemcpy3DBatchAsync`|7.1.0| | | |13.0|7.1.0|
 |`cuMemcpy3DPeer`| | | | | | | | | | | |
 |`cuMemcpy3DPeerAsync`| | | | | | | | | | | |
 |`cuMemcpy3D_v2`| | | | |`hipDrvMemcpy3D`|3.5.0| | | | | |
@@ -1840,7 +1840,7 @@
 |`cuMemcpyAtoHAsync`| | | | |`hipMemcpyAtoHAsync`|6.2.0| | | | | |
 |`cuMemcpyAtoHAsync_v2`| | | | |`hipMemcpyAtoHAsync`|6.2.0| | | | | |
 |`cuMemcpyAtoH_v2`| | | | |`hipMemcpyAtoH`|1.9.0| | | | | |
-|`cuMemcpyBatchAsync`|12.8| |13.0| | | | | | | | |
+|`cuMemcpyBatchAsync`|12.8| |13.0| |`hipMemcpyBatchAsync`|7.1.0| | | |13.0|7.1.0|
 |`cuMemcpyDtoA`| | | | |`hipMemcpyDtoA`|6.2.0| | | | | |
 |`cuMemcpyDtoA_v2`| | | | |`hipMemcpyDtoA`|6.2.0| | | | | |
 |`cuMemcpyDtoD`| | | | |`hipMemcpyDtoD`|1.6.0| | | | | |
