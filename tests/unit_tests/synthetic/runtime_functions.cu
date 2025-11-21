@@ -40,15 +40,19 @@ int main() {
   unsigned int flags = 0;
   unsigned int levels = 0;
   unsigned int count = 0;
+  unsigned int numLibraryOptions = 0;
   float ms = 0;
   void *deviceptr = nullptr;
   void *deviceptr_2 = nullptr;
   void *symbolptr = nullptr;
   void* flagsprt = nullptr;
   void *image = nullptr;
+  void *code = nullptr;
   void *func = nullptr;
   void *src = nullptr;
   void *dst = nullptr;
+  void *jitOptionsValues = nullptr;
+  void *libraryOptionValues = nullptr;
   char *ch = nullptr;
   const char *const_ch = nullptr;
   dim3 gridDim;
@@ -839,6 +843,19 @@ int main() {
   // HIP: hipError_t hipMemcpy2DArrayToArray(hipArray_t dst, size_t wOffsetDst, size_t hOffsetDst, hipArray_const_t src, size_t wOffsetSrc, size_t hOffsetSrc, size_t width, size_t height, hipMemcpyKind kind);
   // CHECK: result = hipMemcpy2DArrayToArray(Array_t, wOffset, hOffset, Array_const_t, wOffset_src, hOffset_src, width, height, MemcpyKind);
   result = cudaMemcpy2DArrayToArray(Array_t, wOffset, hOffset, Array_const_t, wOffset_src, hOffset_src, width, height, MemcpyKind);
+
+  // CHECK: hipMemcpy3DPeerParms Memcpy3DPeerParms;
+  cudaMemcpy3DPeerParms Memcpy3DPeerParms;
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMemcpy3DPeer(const struct cudaMemcpy3DPeerParms *p);
+  // HIP: hipError_t hipMemcpy3DPeer(hipMemcpy3DPeerParms* p);
+  // CHECK: result = hipMemcpy3DPeer(&Memcpy3DPeerParms);
+  result = cudaMemcpy3DPeer(&Memcpy3DPeerParms);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMemcpy3DPeerAsync(const struct cudaMemcpy3DPeerParms *p, cudaStream_t stream __dv(0));
+  // HIP: hipError_t hipMemcpy3DPeerAsync(hipMemcpy3DPeerParms* p, hipStream_t stream __dparm(0));
+  // CHECK: result = hipMemcpy3DPeerAsync(&Memcpy3DPeerParms, stream);
+  result = cudaMemcpy3DPeerAsync(&Memcpy3DPeerParms, stream);
 
 #if CUDA_VERSION >= 8000
   // CHECK: hipDeviceP2PAttr DeviceP2PAttr;
@@ -1654,6 +1671,31 @@ int main() {
   // HIP: hipError_t hipStreamBeginCaptureToGraph(hipStream_t stream, hipGraph_t graph, const hipGraphNode_t* dependencies, const hipGraphEdgeData* dependencyData, size_t numDependencies, hipStreamCaptureMode mode);
   // CHECK: result = hipStreamBeginCaptureToGraph(stream, Graph_t, &graphNode_2, &graphEdgeData, bytes, streamCaptureMode);
   result = cudaStreamBeginCaptureToGraph(stream, Graph_t, &graphNode_2, &graphEdgeData, bytes, streamCaptureMode);
+#endif
+
+#if CUDA_VERSION >= 12080
+
+  // CHECK: hipLibrary_t library;
+  cudaLibrary_t library;
+  // CHECK: hipKernel_t *kernelArray = nullptr;
+  cudaKernel_t *kernelArray = nullptr;
+  unsigned int numKernels = 0;
+
+  // CUDA:extern __host__cudaError_t cudaLibraryEnumerateKernels(cudaKernel_t* kernels, unsigned int numKernels, cudaLibrary_t lib)
+  // HIP: hipError_t hipLibraryEnumerateKernels(hipKernel_t* kernels, unsigned int numKernels, hipLibrary_t lib)
+  // CHECK: result = hipLibraryEnumerateKernels(kernelArray, numKernels, library);
+  result = cudaLibraryEnumerateKernels(kernelArray, numKernels, library);
+
+  // CHECK: hipJitOption jit_option;
+  cudaJitOption jit_option;
+
+  // CHECK: hipLibraryOption LibraryOption;
+  cudaLibraryOption LibraryOption;
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaLibraryLoadData(cudaLibrary_t *library, const void *code, enum cudaJitOption* jitOptions, void** jitOptionsValues, unsigned int numJitOptions, enum cudaLibraryOption* libraryOptions, void** libraryOptionValues, unsigned int numLibraryOptions);
+  // HIP: hipError_t hipLibraryLoadData(hipLibrary_t* library, const void* code, hipJitOption** jitOptions, void** jitOptionsValues, unsigned int numJitOptions, hipLibraryOption** libraryOptions, void** libraryOptionValues, unsigned int numLibraryOptions);
+  // CHECK: result = hipLibraryLoadData(&library, code, &jit_option, &jitOptionsValues, count, &LibraryOption, &libraryOptionValues, numLibraryOptions);
+  result = cudaLibraryLoadData(&library, code, &jit_option, &jitOptionsValues, count, &LibraryOption, &libraryOptionValues, numLibraryOptions);
 #endif
 
   return 0;

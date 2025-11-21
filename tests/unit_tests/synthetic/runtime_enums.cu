@@ -1085,6 +1085,13 @@ int main() {
   cudaMemcpy3DOperandType MemcpyOperandTypePointer = cudaMemcpyOperandTypePointer;
   cudaMemcpy3DOperandType MemcpyOperandTypeArray = cudaMemcpyOperandTypeArray;
   cudaMemcpy3DOperandType MemcpyOperandTypeMax = cudaMemcpyOperandTypeMax;
+
+  // CHECK: hipLibraryOption LibraryOption;
+  // CHECK-NEXT: hipLibraryOption LibraryHostUniversalFunctionAndDataTable = hipLibraryHostUniversalFunctionAndDataTable;
+  // CHECK-NEXT: hipLibraryOption LibraryBinaryIsPreserved = hipLibraryBinaryIsPreserved;
+  cudaLibraryOption LibraryOption;
+  cudaLibraryOption LibraryHostUniversalFunctionAndDataTable = cudaLibraryHostUniversalFunctionAndDataTable;
+  cudaLibraryOption LibraryBinaryIsPreserved = cudaLibraryBinaryIsPreserved;
 #endif
 
 #if CUDA_VERSION >= 13000

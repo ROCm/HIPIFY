@@ -167,7 +167,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuModuleLoad",                                                {"hipModuleLoad",                                               "", CONV_MODULE, API_DRIVER, SEC::MODULE}},
   {"cuModuleLoadData",                                            {"hipModuleLoadData",                                           "", CONV_MODULE, API_DRIVER, SEC::MODULE}},
   {"cuModuleLoadDataEx",                                          {"hipModuleLoadDataEx",                                         "", CONV_MODULE, API_DRIVER, SEC::MODULE}},
-  {"cuModuleLoadFatBinary",                                       {"hipModuleLoadFatBinary",                                      "", CONV_MODULE, API_DRIVER, SEC::MODULE, HIP_UNSUPPORTED}},
+  {"cuModuleLoadFatBinary",                                       {"hipModuleLoadFatBinary",                                      "", CONV_MODULE, API_DRIVER, SEC::MODULE, HIP_EXPERIMENTAL}},
   {"cuModuleUnload",                                              {"hipModuleUnload",                                             "", CONV_MODULE, API_DRIVER, SEC::MODULE}},
   {"cuModuleGetLoadingMode",                                      {"hipModuleGetLoadingMode",                                     "", CONV_MODULE, API_DRIVER, SEC::MODULE, HIP_UNSUPPORTED}},
   {"cuModuleGetFunctionCount",                                    {"hipModuleGetFunctionCount",                                   "", CONV_MODULE, API_DRIVER, SEC::MODULE, HIP_UNSUPPORTED}},
@@ -179,7 +179,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
 
   // 12. Library Management
   // cudaLibraryLoadData
-  {"cuLibraryLoadData",                                           {"hipLibraryLoadData",                                          "", CONV_LIBRARY, API_DRIVER, SEC::LIBRARY, HIP_UNSUPPORTED}},
+  {"cuLibraryLoadData",                                           {"hipLibraryLoadData",                                          "", CONV_LIBRARY, API_DRIVER, SEC::LIBRARY, HIP_EXPERIMENTAL}},
   // cudaLibraryLoadFromFile
   {"cuLibraryLoadFromFile",                                       {"hipLibraryLoadFromFile",                                      "", CONV_LIBRARY, API_DRIVER, SEC::LIBRARY, HIP_UNSUPPORTED}},
   // cudaLibraryUnload
@@ -325,9 +325,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   // NOTE: Not equal to cudaMemcpyPeerAsync due to different signatures
   {"cuMemcpyPeerAsync",                                           {"hipMemcpyPeerAsync_",                                         "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_UNSUPPORTED}},
   // cudaMemcpyBatchAsync
-  {"cuMemcpyBatchAsync",                                          {"hipMemcpyBatchAsync",                                         "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_UNSUPPORTED}},
+  {"cuMemcpyBatchAsync",                                          {"hipMemcpyBatchAsync",                                         "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_PARTIALLY_SUPPORTED | HIP_EXPERIMENTAL}},
   // cudaMemcpy3DBatchAsync
-  {"cuMemcpy3DBatchAsync",                                        {"hipMemcpy3DBatchAsync",                                       "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_UNSUPPORTED}},
+  {"cuMemcpy3DBatchAsync",                                        {"hipMemcpy3DBatchAsync",                                       "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_PARTIALLY_SUPPORTED | HIP_EXPERIMENTAL}},
   //
   {"cuMemBatchDecompressAsync",                                   {"hipMemBatchDecompressAsync",                                  "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_UNSUPPORTED}},
   // cudaFree
@@ -1777,6 +1777,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_FUNCTION_VER_MAP {
   {"hipMemsetD2D16Async",                                         {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipMemsetD2D32",                                              {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipMemsetD2D32Async",                                         {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipModuleLoadFatBinary",                                      {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipKernelGetName",                                            {HIP_7020, HIP_0,    HIP_0,  HIP_7020}},
   {"hipKernelGetLibrary",                                         {HIP_7020, HIP_0,    HIP_0,  HIP_7020}},
 };
@@ -1809,6 +1810,8 @@ const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_DRIVER_FUNCTION_CHANG
 const std::map<llvm::StringRef, cudaAPIUnsupportedVersions> CUDA_DRIVER_FUNCTION_UNSUPPORTED_VER_MAP {
   {"cuCtxCreate",                                                 {CUDA_130}},
   {"cuCtxCreate_v2",                                              {CUDA_130}},
+  {"cuMemcpyBatchAsync",                                          {CUDA_130}},
+  {"cuMemcpy3DBatchAsync",                                        {CUDA_130}},
   {"cuMemAdvise",                                                 {CUDA_130}},
   {"cuMemPrefetchAsync",                                          {CUDA_130}},
   {"cuStreamGetCaptureInfo",                                      {CUDA_130}},
