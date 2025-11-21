@@ -416,6 +416,11 @@ int main() {
   int HostRegisterReadOnly = cudaHostRegisterReadOnly;
 #endif
 
+#if CUDA_VERSION >= 12020
+  // CHECK: int DevAttrHostNumaId = hipDeviceAttributeHostNumaId;
+  int DevAttrHostNumaId = cudaDevAttrHostNumaId;
+#endif
+
 #if CUDA_VERSION >= 12030
   // CHECK: int GRAPH_KERNEL_NODE_PORT_DEFAULT = hipGraphKernelNodePortDefault;
   int GRAPH_KERNEL_NODE_PORT_DEFAULT = cudaGraphKernelNodePortDefault;
