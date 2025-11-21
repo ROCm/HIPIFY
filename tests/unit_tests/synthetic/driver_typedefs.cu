@@ -69,5 +69,6 @@ int main() {
   // CHECK: hipLibrary_t library_t;
   CUlibrary library_t;
 #endif
+
   return 0;
 }
