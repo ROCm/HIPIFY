@@ -1680,6 +1680,8 @@ my %removed_funcs = (
 );
 
 my %experimental_funcs = (
+    "fftwf_set_timelimit" => "7.1.0",
+    "fftwf_print_plan" => "7.1.0",
     "fftwf_plan_dft_r2c_3d" => "7.1.0",
     "fftwf_plan_dft_r2c_2d" => "7.1.0",
     "fftwf_plan_dft_r2c_1d" => "7.1.0",
@@ -1693,7 +1695,14 @@ my %experimental_funcs = (
     "fftwf_plan_dft_1d" => "7.1.0",
     "fftwf_plan_dft" => "7.1.0",
     "fftwf_plan" => "7.1.0",
+    "fftwf_flops" => "7.1.0",
+    "fftwf_execute" => "7.1.0",
+    "fftwf_destroy_plan" => "7.1.0",
+    "fftwf_cost" => "7.1.0",
     "fftwf_complex" => "7.1.0",
+    "fftwf_cleanup" => "7.1.0",
+    "fftw_set_timelimit" => "7.1.0",
+    "fftw_print_plan" => "7.1.0",
     "fftw_plan_dft_r2c_3d" => "7.1.0",
     "fftw_plan_dft_r2c_2d" => "7.1.0",
     "fftw_plan_dft_r2c_1d" => "7.1.0",
@@ -1706,8 +1715,12 @@ my %experimental_funcs = (
     "fftw_plan_dft_1d" => "7.1.0",
     "fftw_plan_dft" => "7.1.0",
     "fftw_plan" => "7.1.0",
+    "fftw_flops" => "7.1.0",
     "fftw_execute" => "7.1.0",
+    "fftw_destroy_plan" => "7.1.0",
+    "fftw_cost" => "7.1.0",
     "fftw_complex" => "7.1.0",
+    "fftw_cleanup" => "7.1.0",
     "cudaSynchronizationPolicy" => "7.1.0",
     "cudaSyncPolicyYield" => "7.1.0",
     "cudaSyncPolicySpin" => "7.1.0",
@@ -1716,10 +1729,12 @@ my %experimental_funcs = (
     "cudaStreamSetAttribute" => "7.1.0",
     "cudaStreamGetId" => "7.1.0",
     "cudaStreamGetAttribute" => "7.1.0",
+    "cudaStreamCopyAttributes" => "7.2.0",
     "cudaStreamAttributeSynchronizationPolicy" => "7.1.0",
     "cudaStreamAttributeMemSyncDomainMap" => "7.1.0",
     "cudaStreamAttributeMemSyncDomain" => "7.1.0",
     "cudaOffset3D" => "7.1.0",
+    "cudaOccupancyAvailableDynamicSMemPerBlock" => "7.2.0",
     "cudaMemcpySrcAccessOrderStream" => "7.1.0",
     "cudaMemcpySrcAccessOrderMax" => "7.1.0",
     "cudaMemcpySrcAccessOrderInvalid" => "7.1.0",
@@ -1742,6 +1757,7 @@ my %experimental_funcs = (
     "cudaMemLocationTypeHostNuma" => "7.1.0",
     "cudaMemLocationTypeHost" => "7.1.0",
     "cudaLibrary_t" => "7.1.0",
+    "cudaLibraryEnumerateKernels" => "7.2.0",
     "cudaLaunchMemSyncDomainRemote" => "7.1.0",
     "cudaLaunchMemSyncDomainMap_st" => "7.1.0",
     "cudaLaunchMemSyncDomainMap" => "7.1.0",
@@ -1758,9 +1774,12 @@ my %experimental_funcs = (
     "cudaDriverEntryPointSymbolNotFound" => "7.1.0",
     "cudaDriverEntryPointSuccess" => "7.1.0",
     "cudaDriverEntryPointQueryResult" => "7.1.0",
+    "cudaDevAttrHostNumaId" => "7.2.0",
     "cuStreamSetAttribute" => "7.1.0",
     "cuStreamGetId" => "7.1.0",
     "cuStreamGetAttribute" => "7.1.0",
+    "cuStreamCopyAttributes" => "7.2.0",
+    "cuOccupancyAvailableDynamicSMemPerBlock" => "7.2.0",
     "cuMemsetD2D8_v2" => "7.1.0",
     "cuMemsetD2D8Async" => "7.1.0",
     "cuMemsetD2D8" => "7.1.0",
@@ -1770,6 +1789,9 @@ my %experimental_funcs = (
     "cuMemsetD2D16_v2" => "7.1.0",
     "cuMemsetD2D16Async" => "7.1.0",
     "cuMemsetD2D16" => "7.1.0",
+    "cuLibraryEnumerateKernels" => "7.2.0",
+    "cuKernelGetName" => "7.2.0",
+    "cuKernelGetLibrary" => "7.2.0",
     "FFTW_WISDOM_ONLY" => "7.1.0",
     "FFTW_UNALIGNED" => "7.1.0",
     "FFTW_PRESERVE_INPUT" => "7.1.0",
@@ -1835,6 +1857,7 @@ my %experimental_funcs = (
     "CU_GET_PROC_ADDRESS_PER_THREAD_DEFAULT_STREAM" => "7.1.0",
     "CU_GET_PROC_ADDRESS_LEGACY_STREAM" => "7.1.0",
     "CU_GET_PROC_ADDRESS_DEFAULT" => "7.1.0",
+    "CU_DEVICE_ATTRIBUTE_HOST_NUMA_ID" => "7.2.0",
     "CUDA_MEMCPY3D_BATCH_OP_v1" => "7.1.0",
     "CUDA_MEMCPY3D_BATCH_OP_st" => "7.1.0",
     "CUDA_MEMCPY3D_BATCH_OP" => "7.1.0",
@@ -1977,6 +2000,10 @@ sub subst {
 }
 
 sub experimentalSubstitutions {
+    subst("cuKernelGetLibrary", "hipKernelGetLibrary", "library");
+    subst("cuKernelGetName", "hipKernelGetName", "library");
+    subst("cuLibraryEnumerateKernels", "hipLibraryEnumerateKernels", "library");
+    subst("cudaLibraryEnumerateKernels", "hipLibraryEnumerateKernels", "library");
     subst("cuMemsetD2D16", "hipMemsetD2D16", "memory");
     subst("cuMemsetD2D16Async", "hipMemsetD2D16Async", "memory");
     subst("cuMemsetD2D16_v2", "hipMemsetD2D16", "memory");
@@ -1986,13 +2013,21 @@ sub experimentalSubstitutions {
     subst("cuMemsetD2D8", "hipMemsetD2D8", "memory");
     subst("cuMemsetD2D8Async", "hipMemsetD2D8Async", "memory");
     subst("cuMemsetD2D8_v2", "hipMemsetD2D8", "memory");
+    subst("cuStreamCopyAttributes", "hipStreamCopyAttributes", "stream");
     subst("cuStreamGetAttribute", "hipStreamGetAttribute", "stream");
     subst("cuStreamGetId", "hipStreamGetId", "stream");
     subst("cuStreamSetAttribute", "hipStreamSetAttribute", "stream");
+    subst("cudaStreamCopyAttributes", "hipStreamCopyAttributes", "stream");
     subst("cudaStreamGetAttribute", "hipStreamGetAttribute", "stream");
     subst("cudaStreamGetId", "hipStreamGetId", "stream");
     subst("cudaStreamSetAttribute", "hipStreamSetAttribute", "stream");
+    subst("cuOccupancyAvailableDynamicSMemPerBlock", "hipOccupancyAvailableDynamicSMemPerBlock", "occupancy");
+    subst("cudaOccupancyAvailableDynamicSMemPerBlock", "hipOccupancyAvailableDynamicSMemPerBlock", "occupancy");
+    subst("fftw_cleanup", "fftw_cleanup", "library");
+    subst("fftw_cost", "fftw_cost", "library");
+    subst("fftw_destroy_plan", "fftw_destroy_plan", "library");
     subst("fftw_execute", "fftw_execute", "library");
+    subst("fftw_flops", "fftw_flops", "library");
     subst("fftw_plan_dft", "fftw_plan_dft", "library");
     subst("fftw_plan_dft_1d", "fftw_plan_dft_1d", "library");
     subst("fftw_plan_dft_2d", "fftw_plan_dft_2d", "library");
@@ -2005,6 +2040,13 @@ sub experimentalSubstitutions {
     subst("fftw_plan_dft_r2c_1d", "fftw_plan_dft_r2c_1d", "library");
     subst("fftw_plan_dft_r2c_2d", "fftw_plan_dft_r2c_2d", "library");
     subst("fftw_plan_dft_r2c_3d", "fftw_plan_dft_r2c_3d", "library");
+    subst("fftw_print_plan", "fftw_print_plan", "library");
+    subst("fftw_set_timelimit", "fftw_set_timelimit", "library");
+    subst("fftwf_cleanup", "fftwf_cleanup", "library");
+    subst("fftwf_cost", "fftwf_cost", "library");
+    subst("fftwf_destroy_plan", "fftwf_destroy_plan", "library");
+    subst("fftwf_execute", "fftwf_execute", "library");
+    subst("fftwf_flops", "fftwf_flops", "library");
     subst("fftwf_plan_dft", "fftwf_plan_dft", "library");
     subst("fftwf_plan_dft_1d", "fftwf_plan_dft_1d", "library");
     subst("fftwf_plan_dft_2d", "fftwf_plan_dft_2d", "library");
@@ -2017,6 +2059,8 @@ sub experimentalSubstitutions {
     subst("fftwf_plan_dft_r2c_1d", "fftwf_plan_dft_r2c_1d", "library");
     subst("fftwf_plan_dft_r2c_2d", "fftwf_plan_dft_r2c_2d", "library");
     subst("fftwf_plan_dft_r2c_3d", "fftwf_plan_dft_r2c_3d", "library");
+    subst("fftwf_print_plan", "fftwf_print_plan", "library");
+    subst("fftwf_set_timelimit", "fftwf_set_timelimit", "library");
     subst("CUDA_MEMCPY3D_BATCH_OP", "hipMemcpy3DBatchOp", "type");
     subst("CUDA_MEMCPY3D_BATCH_OP_st", "hipMemcpy3DBatchOp", "type");
     subst("CUDA_MEMCPY3D_BATCH_OP_v1", "hipMemcpy3DBatchOp", "type");
@@ -2066,6 +2110,7 @@ sub experimentalSubstitutions {
     subst("fftwf_plan", "fftwf_plan", "type");
     subst("CUBLASLT_EPILOGUE_RELU_AUX", "HIPBLASLT_EPILOGUE_RELU_AUX", "numeric_literal");
     subst("CUBLASLT_EPILOGUE_RELU_AUX_BIAS", "HIPBLASLT_EPILOGUE_RELU_AUX_BIAS", "numeric_literal");
+    subst("CU_DEVICE_ATTRIBUTE_HOST_NUMA_ID", "hipDeviceAttributeHostNumaId", "numeric_literal");
     subst("CU_GET_PROC_ADDRESS_DEFAULT", "hipEnableDefault", "numeric_literal");
     subst("CU_GET_PROC_ADDRESS_LEGACY_STREAM", "hipEnableLegacyStream", "numeric_literal");
     subst("CU_GET_PROC_ADDRESS_PER_THREAD_DEFAULT_STREAM", "hipEnablePerThreadDefaultStream", "numeric_literal");
@@ -2096,6 +2141,7 @@ sub experimentalSubstitutions {
     subst("CU_SYNC_POLICY_BLOCKING_SYNC", "hipSyncPolicyBlockingSync", "numeric_literal");
     subst("CU_SYNC_POLICY_SPIN", "hipSyncPolicySpin", "numeric_literal");
     subst("CU_SYNC_POLICY_YIELD", "hipSyncPolicyYield", "numeric_literal");
+    subst("cudaDevAttrHostNumaId", "hipDeviceAttributeHostNumaId", "numeric_literal");
     subst("cudaDriverEntryPointSuccess", "hipDriverEntryPointSuccess", "numeric_literal");
     subst("cudaDriverEntryPointSymbolNotFound", "hipDriverEntryPointSymbolNotFound", "numeric_literal");
     subst("cudaDriverEntryPointVersionNotSufficent", "hipDriverEntryPointVersionNotSufficent", "numeric_literal");
@@ -11837,7 +11883,6 @@ sub warnRemovedFunctions {
     "cudaStreamUpdateCaptureDependencies_v2",
     "cudaStreamGetDevice",
     "cudaStreamGetCaptureInfo_v3",
-    "cudaStreamCopyAttributes",
     "cudaSharedmemCarveoutMaxShared",
     "cudaSharedmemCarveoutMaxL1",
     "cudaSharedmemCarveoutDefault",
@@ -11851,7 +11896,6 @@ sub warnRemovedFunctions {
     "cudaOutputMode",
     "cudaOccupancyMaxPotentialClusterSize",
     "cudaOccupancyMaxActiveClusters",
-    "cudaOccupancyAvailableDynamicSMemPerBlock",
     "cudaNvSciSyncAttrWait",
     "cudaNvSciSyncAttrSignal",
     "cudaMemsetParamsV2",
@@ -11905,7 +11949,6 @@ sub warnRemovedFunctions {
     "cudaLibraryGetKernelCount",
     "cudaLibraryGetKernel",
     "cudaLibraryGetGlobal",
-    "cudaLibraryEnumerateKernels",
     "cudaLibraryBinaryIsPreserved",
     "cudaLibMgMatrixDesc_t",
     "cudaLibMgGrid_t",
@@ -12284,7 +12327,6 @@ sub warnRemovedFunctions {
     "cudaDevAttrHostRegisterReadOnlySupported",
     "cudaDevAttrHostNumaMultinodeIpcSupported",
     "cudaDevAttrHostNumaMemoryPoolsSupported",
-    "cudaDevAttrHostNumaId",
     "cudaDevAttrHostMemoryPoolsSupported",
     "cudaDevAttrGpuPciSubsystemId",
     "cudaDevAttrGpuPciDeviceId",
@@ -12589,7 +12631,6 @@ sub warnRemovedFunctions {
     "cuStreamGetCtx_v2",
     "cuStreamGetCtx",
     "cuStreamGetCaptureInfo_v3",
-    "cuStreamCopyAttributes",
     "cuStreamBeginCapture_ptsz",
     "cuProfilerInitialize",
     "cuParamSetv",
@@ -12599,7 +12640,6 @@ sub warnRemovedFunctions {
     "cuParamSetSize",
     "cuOccupancyMaxPotentialClusterSize",
     "cuOccupancyMaxActiveClusters",
-    "cuOccupancyAvailableDynamicSMemPerBlock",
     "cuMulticastUnbind",
     "cuMulticastGetGranularity",
     "cuMulticastCreate",
@@ -12643,15 +12683,12 @@ sub warnRemovedFunctions {
     "cuLibraryGetKernelCount",
     "cuLibraryGetKernel",
     "cuLibraryGetGlobal",
-    "cuLibraryEnumerateKernels",
     "cuLaunchGridAsync",
     "cuLaunchGrid",
     "cuLaunch",
     "cuKernelSetCacheConfig",
     "cuKernelSetAttribute",
     "cuKernelGetParamInfo",
-    "cuKernelGetName",
-    "cuKernelGetLibrary",
     "cuKernelGetFunction",
     "cuKernelGetAttribute",
     "cuGreenCtxWaitEvent",
@@ -13334,7 +13371,6 @@ sub warnRemovedFunctions {
     "CU_DEVICE_ATTRIBUTE_HOST_NUMA_VIRTUAL_MEMORY_MANAGEMENT_SUPPORTED",
     "CU_DEVICE_ATTRIBUTE_HOST_NUMA_MULTINODE_IPC_SUPPORTED",
     "CU_DEVICE_ATTRIBUTE_HOST_NUMA_MEMORY_POOLS_SUPPORTED",
-    "CU_DEVICE_ATTRIBUTE_HOST_NUMA_ID",
     "CU_DEVICE_ATTRIBUTE_HOST_MEMORY_POOLS_SUPPORTED",
     "CU_DEVICE_ATTRIBUTE_HOST_ALLOC_DMA_BUF_SUPPORTED",
     "CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_WIN32_KMT_HANDLE_SUPPORTED",
