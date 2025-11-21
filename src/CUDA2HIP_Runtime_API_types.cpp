@@ -2185,12 +2185,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"cudaJitOverrideDirectiveValues",                                   {"hipJitOptionOverrideDirectiveValues",                      "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}}, // 33
 
   // CUlibraryOption
-  {"cudaLibraryOption",                                                {"hipLibraryOption",                                         "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"cudaLibraryOption",                                                {"hipLibraryOption",                                         "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
   // cudaLibraryOption enum values
   // CU_LIBRARY_HOST_UNIVERSAL_FUNCTION_AND_DATA_TABLE
-  {"cudaLibraryHostUniversalFunctionAndDataTable",                     {"HIP_LIBRARY_HOST_UNIVERSAL_FUNCTION_AND_DATA_TABLE",       "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"cudaLibraryHostUniversalFunctionAndDataTable",                     {"hipLibraryHostUniversalFunctionAndDataTable",              "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
   // CU_LIBRARY_BINARY_IS_PRESERVED
-  {"cudaLibraryBinaryIsPreserved",                                     {"HIP_LIBRARY_BINARY_IS_PRESERVED",                          "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"cudaLibraryBinaryIsPreserved",                                     {"hipLibraryBinaryIsPreserved",                              "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}},
 
   // CUjit_cacheMode
   {"cudaJit_CacheMode",                                                {"hipJitCacheMode",                                          "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
@@ -3738,5 +3738,8 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {
   {"hipLaunchAttributeSynchronizationPolicy",                          {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipLaunchAttributeMemSyncDomainMap",                               {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipLaunchAttributeMemSyncDomain",                                  {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipLibraryOption",                                                 {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipLibraryHostUniversalFunctionAndDataTable",                      {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipLibraryBinaryIsPreserved",                                      {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipDeviceAttributeHostNumaId",                                     {HIP_7020, HIP_0,    HIP_0,  HIP_7020}},
 };

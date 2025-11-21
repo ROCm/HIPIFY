@@ -1761,7 +1761,11 @@ my %experimental_funcs = (
     "cudaMemLocationTypeHostNuma" => "7.1.0",
     "cudaMemLocationTypeHost" => "7.1.0",
     "cudaLibrary_t" => "7.1.0",
+    "cudaLibraryOption" => "7.1.0",
+    "cudaLibraryLoadData" => "7.1.0",
+    "cudaLibraryHostUniversalFunctionAndDataTable" => "7.1.0",
     "cudaLibraryEnumerateKernels" => "7.2.0",
+    "cudaLibraryBinaryIsPreserved" => "7.1.0",
     "cudaLaunchMemSyncDomainRemote" => "7.1.0",
     "cudaLaunchMemSyncDomainMap_st" => "7.1.0",
     "cudaLaunchMemSyncDomainMap" => "7.1.0",
@@ -1784,6 +1788,7 @@ my %experimental_funcs = (
     "cuStreamGetAttribute" => "7.1.0",
     "cuStreamCopyAttributes" => "7.2.0",
     "cuOccupancyAvailableDynamicSMemPerBlock" => "7.2.0",
+    "cuModuleLoadFatBinary" => "7.1.0",
     "cuMemsetD2D8_v2" => "7.1.0",
     "cuMemsetD2D8Async" => "7.1.0",
     "cuMemsetD2D8" => "7.1.0",
@@ -1795,6 +1800,7 @@ my %experimental_funcs = (
     "cuMemsetD2D16" => "7.1.0",
     "cuMemcpyBatchAsync" => "7.1.0",
     "cuMemcpy3DBatchAsync" => "7.1.0",
+    "cuLibraryLoadData" => "7.1.0",
     "cuLibraryEnumerateKernels" => "7.2.0",
     "cuKernelGetName" => "7.2.0",
     "cuKernelGetLibrary" => "7.2.0",
@@ -1825,6 +1831,8 @@ my %experimental_funcs = (
     "CUmemcpy3DOperandType_enum" => "7.1.0",
     "CUmemcpy3DOperandType" => "7.1.0",
     "CUmemcpy3DOperand" => "7.1.0",
+    "CUlibraryOption_enum" => "7.1.0",
+    "CUlibraryOption" => "7.1.0",
     "CUlibrary" => "7.1.0",
     "CUlib_st" => "7.1.0",
     "CUlaunchMemSyncDomain_enum" => "7.1.0",
@@ -1854,6 +1862,8 @@ my %experimental_funcs = (
     "CU_MEMCPY_OPERAND_TYPE_ARRAY" => "7.1.0",
     "CU_MEMCPY_FLAG_PREFER_OVERLAP_WITH_COMPUTE" => "7.1.0",
     "CU_MEMCPY_FLAG_DEFAULT" => "7.1.0",
+    "CU_LIBRARY_HOST_UNIVERSAL_FUNCTION_AND_DATA_TABLE" => "7.1.0",
+    "CU_LIBRARY_BINARY_IS_PRESERVED" => "7.1.0",
     "CU_LAUNCH_MEM_SYNC_DOMAIN_REMOTE" => "7.1.0",
     "CU_LAUNCH_MEM_SYNC_DOMAIN_DEFAULT" => "7.1.0",
     "CU_LAUNCH_ATTRIBUTE_SYNCHRONIZATION_POLICY" => "7.1.0",
@@ -2006,10 +2016,13 @@ sub subst {
 }
 
 sub experimentalSubstitutions {
+    subst("cuModuleLoadFatBinary", "hipModuleLoadFatBinary", "module");
     subst("cuKernelGetLibrary", "hipKernelGetLibrary", "library");
     subst("cuKernelGetName", "hipKernelGetName", "library");
     subst("cuLibraryEnumerateKernels", "hipLibraryEnumerateKernels", "library");
+    subst("cuLibraryLoadData", "hipLibraryLoadData", "library");
     subst("cudaLibraryEnumerateKernels", "hipLibraryEnumerateKernels", "library");
+    subst("cudaLibraryLoadData", "hipLibraryLoadData", "library");
     subst("cuMemcpy3DBatchAsync", "hipMemcpy3DBatchAsync", "memory");
     subst("cuMemcpyBatchAsync", "hipMemcpyBatchAsync", "memory");
     subst("cuMemsetD2D16", "hipMemsetD2D16", "memory");
@@ -2084,6 +2097,8 @@ sub experimentalSubstitutions {
     subst("CUlaunchMemSyncDomain_enum", "hipLaunchMemSyncDomain", "type");
     subst("CUlib_st", "ihipLibrary_t", "type");
     subst("CUlibrary", "hipLibrary_t", "type");
+    subst("CUlibraryOption", "hipLibraryOption", "type");
+    subst("CUlibraryOption_enum", "hipLibraryOption_e", "type");
     subst("CUmemcpy3DOperand", "hipMemcpy3DOperand", "type");
     subst("CUmemcpy3DOperandType", "hipMemcpy3DOperandType", "type");
     subst("CUmemcpy3DOperandType_enum", "hipMemcpy3DOperandType", "type");
@@ -2106,6 +2121,7 @@ sub experimentalSubstitutions {
     subst("cudaLaunchMemSyncDomain", "hipLaunchMemSyncDomain", "type");
     subst("cudaLaunchMemSyncDomainMap", "hipLaunchMemSyncDomainMap", "type");
     subst("cudaLaunchMemSyncDomainMap_st", "hipLaunchMemSyncDomainMap", "type");
+    subst("cudaLibraryOption", "hipLibraryOption", "type");
     subst("cudaLibrary_t", "hipLibrary_t", "type");
     subst("cudaMemcpy3DBatchOp", "hipMemcpy3DBatchOp", "type");
     subst("cudaMemcpy3DOperand", "hipMemcpy3DOperand", "type");
@@ -2132,6 +2148,8 @@ sub experimentalSubstitutions {
     subst("CU_LAUNCH_ATTRIBUTE_SYNCHRONIZATION_POLICY", "hipLaunchAttributeSynchronizationPolicy", "numeric_literal");
     subst("CU_LAUNCH_MEM_SYNC_DOMAIN_DEFAULT", "hipLaunchMemSyncDomainDefault", "numeric_literal");
     subst("CU_LAUNCH_MEM_SYNC_DOMAIN_REMOTE", "hipLaunchMemSyncDomainRemote", "numeric_literal");
+    subst("CU_LIBRARY_BINARY_IS_PRESERVED", "hipLibraryBinaryIsPreserved", "numeric_literal");
+    subst("CU_LIBRARY_HOST_UNIVERSAL_FUNCTION_AND_DATA_TABLE", "hipLibraryHostUniversalFunctionAndDataTable", "numeric_literal");
     subst("CU_MEMCPY_FLAG_DEFAULT", "hipMemcpyFlagDefault", "numeric_literal");
     subst("CU_MEMCPY_FLAG_PREFER_OVERLAP_WITH_COMPUTE", "hipMemcpyFlagPreferOverlapWithCompute", "numeric_literal");
     subst("CU_MEMCPY_OPERAND_TYPE_ARRAY", "hipMemcpyOperandTypeArray", "numeric_literal");
@@ -2165,6 +2183,8 @@ sub experimentalSubstitutions {
     subst("cudaLaunchAttributeSynchronizationPolicy", "hipLaunchAttributeSynchronizationPolicy", "numeric_literal");
     subst("cudaLaunchMemSyncDomainDefault", "hipLaunchMemSyncDomainDefault", "numeric_literal");
     subst("cudaLaunchMemSyncDomainRemote", "hipLaunchMemSyncDomainRemote", "numeric_literal");
+    subst("cudaLibraryBinaryIsPreserved", "hipLibraryBinaryIsPreserved", "numeric_literal");
+    subst("cudaLibraryHostUniversalFunctionAndDataTable", "hipLibraryHostUniversalFunctionAndDataTable", "numeric_literal");
     subst("cudaMemLocationTypeHost", "hipMemLocationTypeHost", "numeric_literal");
     subst("cudaMemLocationTypeHostNuma", "hipMemLocationTypeHostNuma", "numeric_literal");
     subst("cudaMemLocationTypeHostNumaCurrent", "hipMemLocationTypeHostNumaCurrent", "numeric_literal");
@@ -11948,16 +11968,12 @@ sub warnRemovedFunctions {
     "cudaLimitDevRuntimeSyncDepth",
     "cudaLimitDevRuntimePendingLaunchCount",
     "cudaLibraryUnload",
-    "cudaLibraryOption",
     "cudaLibraryLoadFromFile",
-    "cudaLibraryLoadData",
-    "cudaLibraryHostUniversalFunctionAndDataTable",
     "cudaLibraryGetUnifiedFunction",
     "cudaLibraryGetManaged",
     "cudaLibraryGetKernelCount",
     "cudaLibraryGetKernel",
     "cudaLibraryGetGlobal",
-    "cudaLibraryBinaryIsPreserved",
     "cudaLibMgMatrixDesc_t",
     "cudaLibMgGrid_t",
     "cudaLaunchAttributeProgrammaticStreamSerialization",
@@ -12654,7 +12670,6 @@ sub warnRemovedFunctions {
     "cuMulticastBindMem",
     "cuMulticastBindAddr",
     "cuMulticastAddDevice",
-    "cuModuleLoadFatBinary",
     "cuModuleGetSurfRef",
     "cuModuleGetLoadingMode",
     "cuModuleGetFunctionCount",
@@ -12682,7 +12697,6 @@ sub warnRemovedFunctions {
     "cuLogsCurrent",
     "cuLibraryUnload",
     "cuLibraryLoadFromFile",
-    "cuLibraryLoadData",
     "cuLibraryGetUnifiedFunction",
     "cuLibraryGetModule",
     "cuLibraryGetManaged",
@@ -12918,8 +12932,6 @@ sub warnRemovedFunctions {
     "CUlogLevel_enum",
     "CUlogLevel",
     "CUlogIterator",
-    "CUlibraryOption_enum",
-    "CUlibraryOption",
     "CUlibraryHostUniversalFunctionAndDataTable_st",
     "CUlibraryHostUniversalFunctionAndDataTable",
     "CUjit_target_enum",
@@ -13180,8 +13192,6 @@ sub warnRemovedFunctions {
     "CU_LIMIT_CIG_SHMEM_FALLBACK_ENABLED",
     "CU_LIMIT_CIG_ENABLED",
     "CU_LIBRARY_NUM_OPTIONS",
-    "CU_LIBRARY_HOST_UNIVERSAL_FUNCTION_AND_DATA_TABLE",
-    "CU_LIBRARY_BINARY_IS_PRESERVED",
     "CU_LAUNCH_PARAM_END_AS_INT",
     "CU_LAUNCH_PARAM_BUFFER_SIZE_AS_INT",
     "CU_LAUNCH_PARAM_BUFFER_POINTER_AS_INT",

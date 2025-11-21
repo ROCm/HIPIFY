@@ -559,7 +559,7 @@
 |`cudaLibraryGetKernelCount`|12.8| | | | | | | | | | |
 |`cudaLibraryGetManaged`|12.8| | | | | | | | | | |
 |`cudaLibraryGetUnifiedFunction`|12.8| | | | | | | | | | |
-|`cudaLibraryLoadData`|12.8| | | | | | | | | | |
+|`cudaLibraryLoadData`|12.8| | | |`hipLibraryLoadData`|7.1.0| | | | |7.1.0|
 |`cudaLibraryLoadFromFile`|12.8| | | | | | | | | | |
 |`cudaLibraryUnload`|12.8| | | | | | | | | | |
 
@@ -1549,9 +1549,9 @@
 |`cudaLaunchMemSyncDomainMap_st`|12.0| | | |`hipLaunchMemSyncDomainMap`|7.1.0| | | | |7.1.0|
 |`cudaLaunchMemSyncDomainRemote`|12.0| | | |`hipLaunchMemSyncDomainRemote`|7.1.0| | | | |7.1.0|
 |`cudaLaunchParams`|9.0| | |13.0|`hipLaunchParams`|2.6.0| | | | | |
-|`cudaLibraryBinaryIsPreserved`|12.8| | | | | | | | | | |
-|`cudaLibraryHostUniversalFunctionAndDataTable`|12.8| | | | | | | | | | |
-|`cudaLibraryOption`|12.8| | | | | | | | | | |
+|`cudaLibraryBinaryIsPreserved`|12.8| | | |`hipLibraryBinaryIsPreserved`|7.1.0| | | | |7.1.0|
+|`cudaLibraryHostUniversalFunctionAndDataTable`|12.8| | | |`hipLibraryHostUniversalFunctionAndDataTable`|7.1.0| | | | |7.1.0|
+|`cudaLibraryOption`|12.8| | | |`hipLibraryOption`|7.1.0| | | | |7.1.0|
 |`cudaLibrary_t`|12.8| | | |`hipLibrary_t`|7.1.0| | | | |7.1.0|
 |`cudaLimit`| | | | |`hipLimit_t`|1.6.0| | | | | |
 |`cudaLimitDevRuntimePendingLaunchCount`| | | | | | | | | | | |

@@ -27,6 +27,7 @@ int main() {
   uint64_t flags_64 = 0;
   int dim = 0;
   int count = 0;
+  unsigned int numLibraryOptions = 0;
   int iBlockSize = 0;
   int iBlockSize_2 = 0;
   int cudaVersion = 0;
@@ -36,9 +37,12 @@ int main() {
   size_t bytes_2 = 0;
   size_t dstPitch = 0;
   void *image = nullptr;
+  void *code = nullptr;
   void *pfn = nullptr;
   void *paramsprt = nullptr;
   void *extraparamsprt = nullptr;
+  void *jitOptionsValues = nullptr;
+  void *libraryOptionValues = nullptr;
   std::string name = "str";
   std::string symbol = "symbol";
   uint32_t u_value = 0;
@@ -1077,6 +1081,11 @@ int main() {
   result = cuMemcpyHtoAAsync(array_, offset, dsthost, bytes, stream);
   result = cuMemcpyHtoAAsync_v2(array_, offset, dsthost, bytes, stream);
 
+  // CUDA: CUresult CUDAAPI cuModuleLoadFatBinary(CUmodule *module, const void *fatCubin);
+  // HIP: hipError_t hipModuleLoadFatBinary(hipModule_t* module, const void* fatbin);
+  // CHECK: result = hipModuleLoadFatBinary(&module_, &image);
+  result = cuModuleLoadFatBinary(&module_, &image);
+
 #if CUDA_VERSION >= 8000
   // CHECK: hipMemRangeAttribute MemoryRangeAttribute;
   // CHECK-NEXT: hipMemoryAdvise MemoryAdvise;
@@ -2011,6 +2020,14 @@ int main() {
   // HIP: hipError_t hipStreamGetId(hipStream_t stream, unsigned long long* streamId);
   // CHECK: result = hipStreamGetId(stream, &ull_2);
   result = cuStreamGetId(stream, &ull_2);
+
+  // CHECK: hipLibraryOption LibraryOption;
+  CUlibraryOption LibraryOption;
+
+  // CUDA: CUresult CUDAAPI cuLibraryLoadData(CUlibrary *library, const void *code, CUjit_option* jitOptions, void** jitOptionsValues, unsigned int numJitOptions, CUlibraryOption* libraryOptions, void** libraryOptionValues, unsigned int numLibraryOptions);
+  // HIP: hipError_t hipLibraryLoadData(hipLibrary_t* library, const void* code, hipJitOption** jitOptions, void** jitOptionsValues, unsigned int numJitOptions, hipLibraryOption** libraryOptions, void** libraryOptionValues, unsigned int numLibraryOptions);
+  // CHECK: result = hipLibraryLoadData(&library, code, &jit_option, &jitOptionsValues, count, &LibraryOption, &libraryOptionValues, numLibraryOptions);
+  result = cuLibraryLoadData(&library, code, &jit_option, &jitOptionsValues, count, &LibraryOption, &libraryOptionValues, numLibraryOptions);
 #endif
 
 #if CUDA_VERSION >= 12020

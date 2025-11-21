@@ -905,7 +905,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
 
   // 32. Library Management
   // cuLibraryLoadData
-  {"cudaLibraryLoadData",                                     {"hipLibraryLoadData",                                     "", CONV_LIBRARY, API_RUNTIME, SEC::LIBRARY, HIP_UNSUPPORTED}},
+  {"cudaLibraryLoadData",                                     {"hipLibraryLoadData",                                     "", CONV_LIBRARY, API_RUNTIME, SEC::LIBRARY, HIP_EXPERIMENTAL}},
   // cuLibraryLoadFromFile
   {"cudaLibraryLoadFromFile",                                 {"hipLibraryLoadFromFile",                                 "", CONV_LIBRARY, API_RUNTIME, SEC::LIBRARY, HIP_UNSUPPORTED}},
   // cuLibraryUnload
@@ -1532,6 +1532,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP {
   {"hipMemcpy3DBatchAsync",                                   {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipMemcpy3DPeer",                                         {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipMemcpy3DPeerAsync",                                    {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipLibraryLoadData",                                      {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipStreamCopyAttributes",                                 {HIP_7020, HIP_0,    HIP_0,  HIP_7020}},
   {"hipOccupancyAvailableDynamicSMemPerBlock",                {HIP_7020, HIP_0,    HIP_0,  HIP_7020}},
   {"hipLibraryEnumerateKernels",                              {HIP_7020, HIP_0,    HIP_0,  HIP_7020}},
