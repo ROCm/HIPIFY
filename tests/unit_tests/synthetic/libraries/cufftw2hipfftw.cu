@@ -50,6 +50,11 @@ int main() {
   unsigned int flags = 0;
   double d_in = 0.0f;
   double d_out = 0.0f;
+  double seconds = 0.0f;
+  double cost = 0.0f;
+  double add = 0.0f;
+  double mul = 0.0f;
+  double fma = 0.0f;
   float f_in = 0.0f;
   float f_out = 0.0f;
 
@@ -177,6 +182,71 @@ int main() {
   // HIP: HIPFFT_EXPORT fftwf_plan fftwf_plan_dft_c2r(int rank, const int* n, fftwf_complex* in, float* out, unsigned flags);
   // CHECK: twf_plan = fftwf_plan_dft_c2r(rank, &n, &wf_complex_in, &f_out, flags);
   twf_plan = fftwf_plan_dft_c2r(rank, &n, &wf_complex_in, &f_out, flags);
+
+  // CUDA: void CUFFTAPI fftwf_execute(const fftw_plan plan);
+  // HIP: HIPFFT_EXPORT void fftwf_execute(const fftwf_plan plan);
+  // CHECK: fftwf_execute(twf_plan);
+  fftwf_execute(twf_plan);
+
+  // CUDA: void CUFFTAPI fftw_print_plan(const fftw_plan plan);
+  // HIP: HIPFFT_EXPORT void fftw_print_plan(const fftw_plan);
+  // CHECK: fftw_print_plan(w_plan);
+  fftw_print_plan(w_plan);
+
+  // CUDA: void CUFFTAPI fftwf_print_plan(const fftwf_plan plan);
+  // HIP: HIPFFT_EXPORT void fftwf_print_plan(const fftwf_plan);
+  // CHECK: fftwf_print_plan(twf_plan);
+  fftwf_print_plan(twf_plan);
+
+  // CUDA: void CUFFTAPI fftw_set_timelimit(double seconds);
+  // HIP: HIPFFT_EXPORT void fftw_set_timelimit(double);
+  // CHECK: fftw_set_timelimit(seconds);
+  fftw_set_timelimit(seconds);
+
+  // CUDA: void CUFFTAPI fftwf_set_timelimit(double seconds);
+  // HIP: HIPFFT_EXPORT void fftwf_set_timelimit(double);
+  // CHECK: fftwf_set_timelimit(seconds);
+  fftwf_set_timelimit(seconds);
+
+  // CUDA: double CUFFTAPI fftw_cost(const fftw_plan plan);
+  // HIP: HIPFFT_EXPORT double fftw_cost(const fftw_plan);
+  // CHECK: cost = fftw_cost(w_plan);
+  cost = fftw_cost(w_plan);
+
+  // CUDA: double CUFFTAPI fftwf_cost(const fftw_plan plan);
+  // HIP: HIPFFT_EXPORT double fftwf_cost(const fftw_plan);
+  // CHECK: cost = fftwf_cost(w_plan);
+  cost = fftwf_cost(w_plan);
+
+  // CUDA: void CUFFTAPI fftw_flops(const fftw_plan plan, double *add, double *mul, double *fma);
+  // HIP: HIPFFT_EXPORT void fftw_flops(const fftw_plan, double*, double*, double*);
+  // CHECK: fftw_flops(w_plan, &add, &mul, &fma);
+  fftw_flops(w_plan, &add, &mul, &fma);
+
+  // CUDA: void CUFFTAPI fftwf_flops(const fftw_plan plan, double *add, double *mul, double *fma);
+  // HIP: HIPFFT_EXPORT void fftwf_flops(const fftw_plan, double*, double*, double*);
+  // CHECK: fftwf_flops(w_plan, &add, &mul, &fma);
+  fftwf_flops(w_plan, &add, &mul, &fma);
+
+  // CUDA: void CUFFTAPI fftw_destroy_plan(fftw_plan plan);
+  // HIP: HIPFFT_EXPORT void fftw_destroy_plan(fftw_plan plan);
+  // CHECK: fftw_destroy_plan(w_plan);
+  fftw_destroy_plan(w_plan);
+
+  // CUDA: void CUFFTAPI fftwf_destroy_plan(fftwf_plan plan);
+  // HIP: HIPFFT_EXPORT void fftwf_destroy_plan(fftwf_plan plan);
+  // CHECK: fftwf_destroy_plan(twf_plan);
+  fftwf_destroy_plan(twf_plan);
+
+  // CUDA: void CUFFTAPI fftw_cleanup(void);
+  // HIP: HIPFFT_EXPORT void fftw_cleanup();
+  // CHECK: fftw_cleanup();
+  fftw_cleanup();
+
+  // CUDA: void CUFFTAPI fftwf_cleanup(void);
+  // HIP: HIPFFT_EXPORT void fftwf_cleanup();
+  // CHECK: fftwf_cleanup();
+  fftwf_cleanup();
 
   return 0;
 }

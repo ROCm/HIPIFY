@@ -116,7 +116,19 @@ int main() {
   CUgraphicsResource graphicsResource;
   CUuuid uuid;
 
-  // CHECK: hipError_t result;
+#if CUDA_VERSION >= 12000
+  // CHECK: hipLibrary_t library;
+  // CHECK-NEXT: hipLibrary_t* library_t;
+  // CHECK-NEXT: hipKernel_t kernel;
+  // CHECK-NEXT: hipKernel_t* kernels = nullptr;
+  CUlibrary library;
+  CUlibrary* library_t;
+  CUkernel kernel;
+  CUkernel* kernels = nullptr;
+
+  unsigned int numKernels = 0;
+#endif
+
   CUresult result;
 
   unsigned int gridDimX = 0, gridDimY = 0, gridDimZ = 0, blockDimX = 0, blockDimY = 0, blockDimZ = 0, sharedMemBytes = 0;
@@ -1553,6 +1565,16 @@ int main() {
   // HIP: hipError_t hipStreamGetAttribute(hipStream_t stream, hipStreamAttrID attr, hipStreamAttrValue* value_out);
   // CHECK: result = hipStreamGetAttribute(stream, streamAttrID, &streamAttrValue);
   result = cuStreamGetAttribute(stream, streamAttrID, &streamAttrValue);
+
+  // CUDA: CUresult CUDAAPI cuStreamCopyAttributes(CUstream dst, CUstream src);
+  // HIP: hipError_t hipStreamCopyAttributes(hipStream_t dst, hipStream_t src);
+  // CHECK: result = hipStreamCopyAttributes(stream, stream);
+  result = cuStreamCopyAttributes(stream, stream);
+
+  // CUDA: CUresult CUDAAPI cuOccupancyAvailableDynamicSMemPerBlock(size_t* dynamicSmemSizeOut, CUfunction func, int numBlocks, int blockSize);
+  // HIP: hipError_t hipOccupancyAvailableDynamicSMemPerBlock(size_t* dynamicSmemSizeOut, hipFunction_t func, int numBlocks, int blockSize);
+  // CHECK: result = hipOccupancyAvailableDynamicSMemPerBlock(&bytes, function, iBlockSize, iBlockSize_2);
+  result = cuOccupancyAvailableDynamicSMemPerBlock(&bytes, function, iBlockSize, iBlockSize_2);
 #endif
 
 #if CUDA_VERSION >= 11000 && CUDA_VERSION < 12000
@@ -2012,10 +2034,18 @@ int main() {
   CUgraphEdgeData_st graphEdgeData_st;
   CUgraphEdgeData graphEdgeData;
 
+  // CHECK: const char* kernelName = nullptr;
+  const char* kernelName = nullptr;
+
   // CUDA: CUresult CUDAAPI cuStreamBeginCaptureToGraph(CUstream hStream, CUgraph hGraph, const CUgraphNode *dependencies, const CUgraphEdgeData *dependencyData, size_t numDependencies, CUstreamCaptureMode mode);
   // HIP: hipError_t hipStreamBeginCaptureToGraph(hipStream_t stream, hipGraph_t graph, const hipGraphNode_t* dependencies, const hipGraphEdgeData* dependencyData, size_t numDependencies, hipStreamCaptureMode mode);
   // CHECK: result = hipStreamBeginCaptureToGraph(stream, graph, &graphNode2, &graphEdgeData, bytes, streamCaptureMode);
   result = cuStreamBeginCaptureToGraph(stream, graph, &graphNode2, &graphEdgeData, bytes, streamCaptureMode);
+
+  // CUDA: CUresult CUDAAPI cuKernelGetName(const char** name, CUkernel hKernel);
+  // HIP: hipError_t hipKernelGetName(const char** name, hipKernel_t kernel);
+  // CHECK: result = hipKernelGetName(&kernelName, kernel);
+  result = cuKernelGetName(&kernelName, kernel);
 #endif
 
 #if CUDA_VERSION >= 12080
@@ -2023,6 +2053,16 @@ int main() {
   // HIP: hipError_t hipEventElapsedTime(float* ms, hipEvent_t start, hipEvent_t stop);
   // CHECK: result = hipEventElapsedTime(&ms, event_start, event_end);
   result = cuEventElapsedTime_v2(&ms, event_start, event_end);
+
+  // CUDA: CUresult CUDAAPI cuLibraryEnumerateKernels(CUkernel* kernels, unsigned int numKernels, CUlibrary library);
+  // HIP: hipError_t hipLibraryEnumerateKernels(hipKernel_t* kernels, unsigned int numKernels, hipLibrary_t library);
+  // CHECK: result = hipLibraryEnumerateKernels(kernels, numKernels, library);
+  result = cuLibraryEnumerateKernels(kernels, numKernels, library);
+
+  // CUDA: CUresult CUDAAPI cuKernelGetLibrary(CUlibrary* library, CUkernel hKernel);
+  // HIP: hipError_t hipKernelGetLibrary(hipLibrary_t* library, hipKernel_t kernel);
+  // CHECK: result = hipKernelGetLibrary(&library, kernel);
+  result = cuKernelGetLibrary(&library, kernel);
 #endif
 
   return 0;
