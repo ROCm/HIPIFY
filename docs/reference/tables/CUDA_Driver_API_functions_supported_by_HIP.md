@@ -1730,7 +1730,7 @@
 |`cuLinkDestroy`| | | | |`hiprtcLinkDestroy`|5.3.0| | | | | |
 |`cuModuleEnumerateFunctions`|12.4| | | | | | | | | | |
 |`cuModuleGetFunction`| | | | |`hipModuleGetFunction`|1.6.0| | | | | |
-|`cuModuleGetFunctionCount`|12.4| | | | | | | | | | |
+|`cuModuleGetFunctionCount`|12.4| | | |`hipModuleGetFunctionCount`|7.1.0| | | | |7.1.0|
 |`cuModuleGetGlobal`| | | | |`hipModuleGetGlobal`|1.6.0| | | | | |
 |`cuModuleGetGlobal_v2`| | | | |`hipModuleGetGlobal`|1.6.0| | | | | |
 |`cuModuleGetLoadingMode`|11.7| | | | | | | | | | |
@@ -1760,14 +1760,14 @@
 |`cuKernelSetCacheConfig`|12.0| | | | | | | | | | |
 |`cuLibraryEnumerateKernels`|12.4| | | |`hipLibraryEnumerateKernels`|7.2.0| | | | |7.2.0|
 |`cuLibraryGetGlobal`|12.0| | | | | | | | | | |
-|`cuLibraryGetKernel`|12.0| | | | | | | | | | |
-|`cuLibraryGetKernelCount`|12.4| | | | | | | | | | |
+|`cuLibraryGetKernel`|12.0| | | |`hipLibraryGetKernel`|7.1.0| | | | |7.1.0|
+|`cuLibraryGetKernelCount`|12.4| | | |`hipLibraryGetKernelCount`|7.1.0| | | | |7.1.0|
 |`cuLibraryGetManaged`|12.0| | | | | | | | | | |
 |`cuLibraryGetModule`|12.0| | | | | | | | | | |
 |`cuLibraryGetUnifiedFunction`|12.0| | | | | | | | | | |
 |`cuLibraryLoadData`|12.0| | | |`hipLibraryLoadData`|7.1.0| | | | |7.1.0|
-|`cuLibraryLoadFromFile`|12.0| | | | | | | | | | |
-|`cuLibraryUnload`|12.0| | | | | | | | | | |
+|`cuLibraryLoadFromFile`|12.0| | | |`hipLibraryLoadFromFile`|7.1.0| | | | |7.1.0|
+|`cuLibraryUnload`|12.0| | | |`hipLibraryUnload`|7.1.0| | | | |7.1.0|
 
 ## **13. Memory Management**
 
@@ -2269,7 +2269,7 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**U**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:-:|
-|`cuGetProcAddress`|11.3| |12.0| |`hipGetProcAddress`|6.2.0| | | | | |
+|`cuGetProcAddress`|11.3| |12.0| |`hipGetProcAddress`|6.2.0| | | |11.3 11.4 11.5 11.6 11.7 11.8| |
 
 ## **34. Coredump Attributes Control API**
 
