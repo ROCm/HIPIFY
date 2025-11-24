@@ -899,7 +899,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
 
   // 31. Driver Entry Point Access
   // cuGetProcAddress
-  {"cudaGetDriverEntryPoint",                                 {"hipGetProcAddress",                                      "", CONV_DRIVER_ENTRY_POINT, API_RUNTIME, SEC::DRIVER_ENTRY_POINT, CUDA_DEPRECATED}},
+  {"cudaGetDriverEntryPoint",                                 {"hipGetDriverEntryPoint",                                 "", CONV_DRIVER_ENTRY_POINT, API_RUNTIME, SEC::DRIVER_ENTRY_POINT, CUDA_DEPRECATED | HIP_EXPERIMENTAL}},
   //
   {"cudaGetDriverEntryPointByVersion",                        {"hipGetDriverEntryPointByVersion",                        "", CONV_DRIVER_ENTRY_POINT, API_RUNTIME, SEC::DRIVER_ENTRY_POINT, HIP_UNSUPPORTED}},
 
@@ -907,11 +907,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuLibraryLoadData
   {"cudaLibraryLoadData",                                     {"hipLibraryLoadData",                                     "", CONV_LIBRARY, API_RUNTIME, SEC::LIBRARY, HIP_EXPERIMENTAL}},
   // cuLibraryLoadFromFile
-  {"cudaLibraryLoadFromFile",                                 {"hipLibraryLoadFromFile",                                 "", CONV_LIBRARY, API_RUNTIME, SEC::LIBRARY, HIP_UNSUPPORTED}},
+  {"cudaLibraryLoadFromFile",                                 {"hipLibraryLoadFromFile",                                 "", CONV_LIBRARY, API_RUNTIME, SEC::LIBRARY, HIP_EXPERIMENTAL}},
   // cuLibraryUnload
-  {"cudaLibraryUnload",                                       {"hipLibraryUnload",                                       "", CONV_LIBRARY, API_RUNTIME, SEC::LIBRARY, HIP_UNSUPPORTED}},
+  {"cudaLibraryUnload",                                       {"hipLibraryUnload",                                       "", CONV_LIBRARY, API_RUNTIME, SEC::LIBRARY, HIP_EXPERIMENTAL}},
   // cuLibraryGetKernel
-  {"cudaLibraryGetKernel",                                    {"hipLibraryGetKernel",                                    "", CONV_LIBRARY, API_RUNTIME, SEC::LIBRARY, HIP_UNSUPPORTED}},
+  {"cudaLibraryGetKernel",                                    {"hipLibraryGetKernel",                                    "", CONV_LIBRARY, API_RUNTIME, SEC::LIBRARY, HIP_EXPERIMENTAL}},
   // cuLibraryGetGlobal
   {"cudaLibraryGetGlobal",                                    {"hipLibraryGetGlobal",                                    "", CONV_LIBRARY, API_RUNTIME, SEC::LIBRARY, HIP_UNSUPPORTED}},
   // cuLibraryGetManaged
@@ -921,7 +921,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP {
   // cuKernelSetAttribute
   {"cudaKernelSetAttributeForDevice",                         {"hipKernelSetAttribute",                                  "", CONV_LIBRARY, API_RUNTIME, SEC::LIBRARY, HIP_UNSUPPORTED}},
   // cuLibraryGetKernelCount
-  {"cudaLibraryGetKernelCount",                               {"hipLibraryGetKernelCount",                               "", CONV_LIBRARY, API_RUNTIME, SEC::LIBRARY, HIP_UNSUPPORTED}},
+  {"cudaLibraryGetKernelCount",                               {"hipLibraryGetKernelCount",                               "", CONV_LIBRARY, API_RUNTIME, SEC::LIBRARY, HIP_EXPERIMENTAL}},
   // cuLibraryEnumerateKernels
   {"cudaLibraryEnumerateKernels",                             {"hipLibraryEnumerateKernels",                             "", CONV_LIBRARY, API_RUNTIME, SEC::LIBRARY, HIP_EXPERIMENTAL}},
 
@@ -1533,6 +1533,11 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP {
   {"hipMemcpy3DPeer",                                         {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipMemcpy3DPeerAsync",                                    {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipLibraryLoadData",                                      {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipLibraryLoadFromFile",                                  {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipLibraryUnload",                                        {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipLibraryGetKernel",                                     {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipLibraryGetKernelCount",                                {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipGetDriverEntryPoint",                                  {HIP_7010, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipStreamCopyAttributes",                                 {HIP_7020, HIP_0,    HIP_0,  HIP_7020}},
   {"hipOccupancyAvailableDynamicSMemPerBlock",                {HIP_7020, HIP_0,    HIP_0,  HIP_7020}},
   {"hipLibraryEnumerateKernels",                              {HIP_7020, HIP_0,    HIP_0,  HIP_7020}},
@@ -1573,6 +1578,7 @@ const std::map<llvm::StringRef, cudaAPIUnsupportedVersions> CUDA_RUNTIME_FUNCTIO
   {"cudaGraphNodeGetDependentNodes",                          {CUDA_130}},
   {"cudaGraphRemoveDependencies",                             {CUDA_130}},
   {"cudaGraphAddNode",                                        {CUDA_130}},
+  {"cudaGetDriverEntryPoint",                                 {CUDA_113, CUDA_114, CUDA_115, CUDA_116, CUDA_117, CUDA_118}},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_RUNTIME_API_SECTION_MAP {

@@ -545,7 +545,7 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**U**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:-:|
-|`cudaGetDriverEntryPoint`|11.3|13.0|12.0| |`hipGetProcAddress`|6.2.0| | | | | |
+|`cudaGetDriverEntryPoint`|11.3|13.0|12.0| |`hipGetDriverEntryPoint`|7.1.0| | | |11.3 11.4 11.5 11.6 11.7 11.8|7.1.0|
 |`cudaGetDriverEntryPointByVersion`|12.5| | | | | | | | | | |
 
 ## **32. Library Management**
@@ -555,13 +555,13 @@
 |`cudaKernelSetAttributeForDevice`|12.8| | | | | | | | | | |
 |`cudaLibraryEnumerateKernels`|12.8| | | |`hipLibraryEnumerateKernels`|7.2.0| | | | |7.2.0|
 |`cudaLibraryGetGlobal`|12.8| | | | | | | | | | |
-|`cudaLibraryGetKernel`|12.8| | | | | | | | | | |
-|`cudaLibraryGetKernelCount`|12.8| | | | | | | | | | |
+|`cudaLibraryGetKernel`|12.8| | | |`hipLibraryGetKernel`|7.1.0| | | | |7.1.0|
+|`cudaLibraryGetKernelCount`|12.8| | | |`hipLibraryGetKernelCount`|7.1.0| | | | |7.1.0|
 |`cudaLibraryGetManaged`|12.8| | | | | | | | | | |
 |`cudaLibraryGetUnifiedFunction`|12.8| | | | | | | | | | |
 |`cudaLibraryLoadData`|12.8| | | |`hipLibraryLoadData`|7.1.0| | | | |7.1.0|
-|`cudaLibraryLoadFromFile`|12.8| | | | | | | | | | |
-|`cudaLibraryUnload`|12.8| | | | | | | | | | |
+|`cudaLibraryLoadFromFile`|12.8| | | |`hipLibraryLoadFromFile`|7.1.0| | | | |7.1.0|
+|`cudaLibraryUnload`|12.8| | | |`hipLibraryUnload`|7.1.0| | | | |7.1.0|
 
 ## **33. C++ API Routines**
 
