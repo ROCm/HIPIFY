@@ -1696,6 +1696,26 @@ int main() {
   // HIP: hipError_t hipLibraryLoadData(hipLibrary_t* library, const void* code, hipJitOption** jitOptions, void** jitOptionsValues, unsigned int numJitOptions, hipLibraryOption** libraryOptions, void** libraryOptionValues, unsigned int numLibraryOptions);
   // CHECK: result = hipLibraryLoadData(&library, code, &jit_option, &jitOptionsValues, count, &LibraryOption, &libraryOptionValues, numLibraryOptions);
   result = cudaLibraryLoadData(&library, code, &jit_option, &jitOptionsValues, count, &LibraryOption, &libraryOptionValues, numLibraryOptions);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaLibraryLoadFromFile(cudaLibrary_t *library, const char *fileName, enum cudaJitOption* jitOptions, void** jitOptionsValues, unsigned int numJitOptions, enum cudaLibraryOption* libraryOptions, void** libraryOptionValues, unsigned int numLibraryOptions);
+  // HIP: hipError_t hipLibraryLoadFromFile(hipLibrary_t* library, const char* fileName, hipJitOption** jitOptions, void** jitOptionsValues, unsigned int numJitOptions, hipLibraryOption** libraryOptions, void** libraryOptionValues, unsigned int numLibraryOptions);
+  // CHECK: result = hipLibraryLoadFromFile(&library, const_ch, &jit_option, &jitOptionsValues, count, &LibraryOption, &libraryOptionValues, numLibraryOptions);
+  result = cudaLibraryLoadFromFile(&library, const_ch, &jit_option, &jitOptionsValues, count, &LibraryOption, &libraryOptionValues, numLibraryOptions);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaLibraryUnload(cudaLibrary_t library);
+  // HIP: hipError_t hipLibraryUnload(hipLibrary_t library);
+  // CHECK: result = hipLibraryUnload(library);
+  result = cudaLibraryUnload(library);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaLibraryGetKernel(cudaKernel_t *pKernel, cudaLibrary_t library, const char *name);
+  // HIP: hipError_t hipLibraryGetKernel(hipKernel_t* pKernel, hipLibrary_t library, const char* name);
+  // CHECK: result = hipLibraryGetKernel(kernelArray, library, const_ch);
+  result = cudaLibraryGetKernel(kernelArray, library, const_ch);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaLibraryGetKernelCount(unsigned int *count, cudaLibrary_t lib);
+  // HIP: hipError_t hipLibraryGetKernelCount(unsigned int *count, hipLibrary_t library);
+  // CHECK: result = hipLibraryGetKernelCount(&count, library);
+  result = cudaLibraryGetKernelCount(&count, library);
 #endif
 
   return 0;

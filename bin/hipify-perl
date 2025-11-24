@@ -1762,9 +1762,13 @@ my %experimental_funcs = (
     "cudaMemLocationTypeHostNuma" => "7.1.0",
     "cudaMemLocationTypeHost" => "7.1.0",
     "cudaLibrary_t" => "7.1.0",
+    "cudaLibraryUnload" => "7.1.0",
     "cudaLibraryOption" => "7.1.0",
+    "cudaLibraryLoadFromFile" => "7.1.0",
     "cudaLibraryLoadData" => "7.1.0",
     "cudaLibraryHostUniversalFunctionAndDataTable" => "7.1.0",
+    "cudaLibraryGetKernelCount" => "7.1.0",
+    "cudaLibraryGetKernel" => "7.1.0",
     "cudaLibraryEnumerateKernels" => "7.2.0",
     "cudaLibraryBinaryIsPreserved" => "7.1.0",
     "cudaLaunchMemSyncDomainRemote" => "7.1.0",
@@ -1776,6 +1780,7 @@ my %experimental_funcs = (
     "cudaLaunchAttributeMemSyncDomainMap" => "7.1.0",
     "cudaLaunchAttributeMemSyncDomain" => "7.1.0",
     "cudaKernel_t" => "7.1.0",
+    "cudaGetDriverEntryPoint" => "7.1.0",
     "cudaEnablePerThreadDefaultStream" => "7.1.0",
     "cudaEnableLegacyStream" => "7.1.0",
     "cudaEnableDefault" => "7.1.0",
@@ -1790,6 +1795,7 @@ my %experimental_funcs = (
     "cuStreamCopyAttributes" => "7.2.0",
     "cuOccupancyAvailableDynamicSMemPerBlock" => "7.2.0",
     "cuModuleLoadFatBinary" => "7.1.0",
+    "cuModuleGetFunctionCount" => "7.1.0",
     "cuMemsetD2D8_v2" => "7.1.0",
     "cuMemsetD2D8Async" => "7.1.0",
     "cuMemsetD2D8" => "7.1.0",
@@ -1801,7 +1807,11 @@ my %experimental_funcs = (
     "cuMemsetD2D16" => "7.1.0",
     "cuMemcpyBatchAsync" => "7.1.0",
     "cuMemcpy3DBatchAsync" => "7.1.0",
+    "cuLibraryUnload" => "7.1.0",
+    "cuLibraryLoadFromFile" => "7.1.0",
     "cuLibraryLoadData" => "7.1.0",
+    "cuLibraryGetKernelCount" => "7.1.0",
+    "cuLibraryGetKernel" => "7.1.0",
     "cuLibraryEnumerateKernels" => "7.2.0",
     "cuKernelGetName" => "7.2.0",
     "cuKernelGetLibrary" => "7.2.0",
@@ -2017,13 +2027,22 @@ sub subst {
 }
 
 sub experimentalSubstitutions {
+    subst("cuModuleGetFunctionCount", "hipModuleGetFunctionCount", "module");
     subst("cuModuleLoadFatBinary", "hipModuleLoadFatBinary", "module");
     subst("cuKernelGetLibrary", "hipKernelGetLibrary", "library");
     subst("cuKernelGetName", "hipKernelGetName", "library");
     subst("cuLibraryEnumerateKernels", "hipLibraryEnumerateKernels", "library");
+    subst("cuLibraryGetKernel", "hipLibraryGetKernel", "library");
+    subst("cuLibraryGetKernelCount", "hipLibraryGetKernelCount", "library");
     subst("cuLibraryLoadData", "hipLibraryLoadData", "library");
+    subst("cuLibraryLoadFromFile", "hipLibraryLoadFromFile", "library");
+    subst("cuLibraryUnload", "hipLibraryUnload", "library");
     subst("cudaLibraryEnumerateKernels", "hipLibraryEnumerateKernels", "library");
+    subst("cudaLibraryGetKernel", "hipLibraryGetKernel", "library");
+    subst("cudaLibraryGetKernelCount", "hipLibraryGetKernelCount", "library");
     subst("cudaLibraryLoadData", "hipLibraryLoadData", "library");
+    subst("cudaLibraryLoadFromFile", "hipLibraryLoadFromFile", "library");
+    subst("cudaLibraryUnload", "hipLibraryUnload", "library");
     subst("cuMemcpy3DBatchAsync", "hipMemcpy3DBatchAsync", "memory");
     subst("cuMemcpyBatchAsync", "hipMemcpyBatchAsync", "memory");
     subst("cuMemsetD2D16", "hipMemsetD2D16", "memory");
@@ -2049,6 +2068,7 @@ sub experimentalSubstitutions {
     subst("cudaStreamSetAttribute", "hipStreamSetAttribute", "stream");
     subst("cuOccupancyAvailableDynamicSMemPerBlock", "hipOccupancyAvailableDynamicSMemPerBlock", "occupancy");
     subst("cudaOccupancyAvailableDynamicSMemPerBlock", "hipOccupancyAvailableDynamicSMemPerBlock", "occupancy");
+    subst("cudaGetDriverEntryPoint", "hipGetDriverEntryPoint", "driver_entry_point");
     subst("cutensorGetVersion", "hiptensorGetVersion", "library");
     subst("fftw_cleanup", "fftw_cleanup", "library");
     subst("fftw_cost", "fftw_cost", "library");
@@ -5007,7 +5027,6 @@ sub simpleSubstitutions {
     subst("cudaGraphicsUnmapResources", "hipGraphicsUnmapResources", "graphics");
     subst("cudaGraphicsUnregisterResource", "hipGraphicsUnregisterResource", "graphics");
     subst("cuGetProcAddress", "hipGetProcAddress", "driver_entry_point");
-    subst("cudaGetDriverEntryPoint", "hipGetProcAddress", "driver_entry_point");
     subst("cudaGetFuncBySymbol", "hipGetFuncBySymbol", "driver_interact");
     subst("cuProfilerStart", "hipProfilerStart", "profiler");
     subst("cuProfilerStop", "hipProfilerStop", "profiler");
@@ -11968,12 +11987,8 @@ sub warnRemovedFunctions {
     "cudaLimitMaxL2FetchGranularity",
     "cudaLimitDevRuntimeSyncDepth",
     "cudaLimitDevRuntimePendingLaunchCount",
-    "cudaLibraryUnload",
-    "cudaLibraryLoadFromFile",
     "cudaLibraryGetUnifiedFunction",
     "cudaLibraryGetManaged",
-    "cudaLibraryGetKernelCount",
-    "cudaLibraryGetKernel",
     "cudaLibraryGetGlobal",
     "cudaLibMgMatrixDesc_t",
     "cudaLibMgGrid_t",
@@ -12673,7 +12688,6 @@ sub warnRemovedFunctions {
     "cuMulticastAddDevice",
     "cuModuleGetSurfRef",
     "cuModuleGetLoadingMode",
-    "cuModuleGetFunctionCount",
     "cuModuleEnumerateFunctions",
     "cuMipmappedArrayGetMemoryRequirements",
     "cuMemcpyPeerAsync",
@@ -12696,13 +12710,9 @@ sub warnRemovedFunctions {
     "cuLogsDumpToMemory",
     "cuLogsDumpToFile",
     "cuLogsCurrent",
-    "cuLibraryUnload",
-    "cuLibraryLoadFromFile",
     "cuLibraryGetUnifiedFunction",
     "cuLibraryGetModule",
     "cuLibraryGetManaged",
-    "cuLibraryGetKernelCount",
-    "cuLibraryGetKernel",
     "cuLibraryGetGlobal",
     "cuLaunchGridAsync",
     "cuLaunchGrid",
