@@ -75,7 +75,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuDeviceGetExecAffinitySupport",                              {"hipDeviceGetExecAffinitySupport",                             "", CONV_DEVICE, API_DRIVER, SEC::DEVICE, HIP_UNSUPPORTED}},
   // cudaDeviceFlushGPUDirectRDMAWrites
   {"cuFlushGPUDirectRDMAWrites",                                  {"hipDeviceFlushGPUDirectRDMAWrites",                           "", CONV_DEVICE, API_DRIVER, SEC::DEVICE, HIP_UNSUPPORTED}},
-  // cudaDeviceGetHostAtomicCapabilities
+  //
   {"cuDeviceGetHostAtomicCapabilities",                           {"hipDeviceGetHostAtomicCapabilities",                          "", CONV_DEVICE, API_DRIVER, SEC::DEVICE, HIP_UNSUPPORTED}},
 
   // 6. Device Management [DEPRECATED]
@@ -972,7 +972,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   {"cuDeviceCanAccessPeer",                                       {"hipDeviceCanAccessPeer",                                      "", CONV_PEER, API_DRIVER, SEC::PEER}},
   // cudaDeviceGetP2PAttribute
   {"cuDeviceGetP2PAttribute",                                     {"hipDeviceGetP2PAttribute",                                    "", CONV_PEER, API_DRIVER, SEC::PEER}},
-  // cudaDeviceGetP2PAtomicCapabilities
+  //
   {"cuDeviceGetP2PAtomicCapabilities",                            {"hipDeviceGetP2PAtomicCapabilities",                           "", CONV_PEER, API_DRIVER, SEC::PEER, HIP_UNSUPPORTED}},
 
   // 32. Graphics Interoperability

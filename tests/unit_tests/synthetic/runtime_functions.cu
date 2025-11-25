@@ -896,7 +896,6 @@ int main() {
   // CHECK: result = hipLaunchCooperativeKernelMultiDevice(&LaunchParams, intVal, flags);
   result = cudaLaunchCooperativeKernelMultiDevice(&LaunchParams, intVal, flags);
 #endif
-#endif
 
 #if CUDA_VERSION <= 10000
   // CUDA: extern __host__ cudaError_t CUDARTAPI cudaConfigureCall(dim3 gridDim, dim3 blockDim, size_t sharedMem __dv(0), cudaStream_t stream __dv(0));
