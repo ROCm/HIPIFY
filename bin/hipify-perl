@@ -1815,6 +1815,12 @@ my %experimental_funcs = (
     "cuLibraryEnumerateKernels" => "7.2.0",
     "cuKernelGetName" => "7.2.0",
     "cuKernelGetLibrary" => "7.2.0",
+    "__hsub_rn" => "7.1.0",
+    "__hsub2_rn" => "7.1.0",
+    "__hmul_rn" => "7.1.0",
+    "__hmul2_rn" => "7.1.0",
+    "__hadd_rn" => "7.1.0",
+    "__hadd2_rn" => "7.1.0",
     "FFTW_WISDOM_ONLY" => "7.1.0",
     "FFTW_UNALIGNED" => "7.1.0",
     "FFTW_PRESERVE_INPUT" => "7.1.0",
@@ -2108,6 +2114,12 @@ sub experimentalSubstitutions {
     subst("fftwf_plan_dft_r2c_3d", "fftwf_plan_dft_r2c_3d", "library");
     subst("fftwf_print_plan", "fftwf_print_plan", "library");
     subst("fftwf_set_timelimit", "fftwf_set_timelimit", "library");
+    subst("__hadd2_rn", "__hadd2_rn", "device_function");
+    subst("__hadd_rn", "__hadd_rn", "device_function");
+    subst("__hmul2_rn", "__hmul2_rn", "device_function");
+    subst("__hmul_rn", "__hmul_rn", "device_function");
+    subst("__hsub2_rn", "__hsub2_rn", "device_function");
+    subst("__hsub_rn", "__hsub_rn", "device_function");
     subst("CUDA_MEMCPY3D_BATCH_OP", "hipMemcpy3DBatchOp", "type");
     subst("CUDA_MEMCPY3D_BATCH_OP_st", "hipMemcpy3DBatchOp", "type");
     subst("CUDA_MEMCPY3D_BATCH_OP_v1", "hipMemcpy3DBatchOp", "type");
@@ -10535,7 +10547,9 @@ sub transformHostFunctions {
     "__int2double_rn",
     "__int2bfloat16_rn",
     "__hsub_sat",
+    "__hsub_rn",
     "__hsub2_sat",
+    "__hsub2_rn",
     "__hsub2",
     "__hsub",
     "__hneu2",
@@ -10545,7 +10559,9 @@ sub transformHostFunctions {
     "__hne2",
     "__hne",
     "__hmul_sat",
+    "__hmul_rn",
     "__hmul2_sat",
+    "__hmul2_rn",
     "__hmul2",
     "__hmul",
     "__hmin_nan",
@@ -10634,7 +10650,9 @@ sub transformHostFunctions {
     "__half2float",
     "__half22float2",
     "__hadd_sat",
+    "__hadd_rn",
     "__hadd2_sat",
+    "__hadd2_rn",
     "__hadd2",
     "__hadd",
     "__habs2",
@@ -10971,12 +10989,8 @@ sub countSupportedDeviceFunctions {
     "__int2bfloat16_rz",
     "__int2bfloat16_ru",
     "__int2bfloat16_rd",
-    "__hsub_rn",
-    "__hsub2_rn",
     "__hneu2_mask",
     "__hne2_mask",
-    "__hmul_rn",
-    "__hmul2_rn",
     "__hmin2_nan",
     "__hmax2_nan",
     "__hltu2_mask",
@@ -10994,8 +11008,6 @@ sub countSupportedDeviceFunctions {
     "__hcmadd",
     "__half2uchar_rz",
     "__half2char_rz",
-    "__hadd_rn",
-    "__hadd2_rn",
     "__fsub_rz",
     "__fsub_ru",
     "__fsub_rd",
