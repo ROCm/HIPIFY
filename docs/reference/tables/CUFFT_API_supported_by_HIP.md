@@ -71,17 +71,17 @@
 |`CUFFT_XT_FORMAT_OUTPUT`| | | | |`HIPFFT_XT_FORMAT_OUTPUT`|6.0.0| | | | | |
 |`CUFFT_Z2D`| | | | |`HIPFFT_Z2D`|1.7.0| | | | | |
 |`CUFFT_Z2Z`| | | | |`HIPFFT_Z2Z`|1.7.0| | | | | |
-|`FFTW_BACKWARD`| | | | |`FFTW_BACKWARD`|7.1.0| | | | |7.1.0|
-|`FFTW_DESTROY_INPUT`| | | | |`FFTW_DESTROY_INPUT`|7.1.0| | | | |7.1.0|
-|`FFTW_ESTIMATE`| | | | |`FFTW_ESTIMATE`|7.1.0| | | | |7.1.0|
-|`FFTW_EXHAUSTIVE`| | | | |`FFTW_EXHAUSTIVE`|7.1.0| | | | |7.1.0|
-|`FFTW_FORWARD`| | | | |`FFTW_FORWARD`|7.1.0| | | | |7.1.0|
+|`FFTW_BACKWARD`| | | | |`FFTW_BACKWARD`|7.1.0| | | | | |
+|`FFTW_DESTROY_INPUT`| | | | |`FFTW_DESTROY_INPUT`|7.1.0| | | | | |
+|`FFTW_ESTIMATE`| | | | |`FFTW_ESTIMATE`|7.1.0| | | | | |
+|`FFTW_EXHAUSTIVE`| | | | |`FFTW_EXHAUSTIVE`|7.1.0| | | | | |
+|`FFTW_FORWARD`| | | | |`FFTW_FORWARD`|7.1.0| | | | | |
 |`FFTW_INVERSE`| | | | | | | | | | | |
-|`FFTW_MEASURE`| | | | |`FFTW_MEASURE`|7.1.0| | | | |7.1.0|
-|`FFTW_PATIENT`| | | | |`FFTW_PATIENT`|7.1.0| | | | |7.1.0|
-|`FFTW_PRESERVE_INPUT`| | | | |`FFTW_PRESERVE_INPUT`|7.1.0| | | | |7.1.0|
-|`FFTW_UNALIGNED`| | | | |`FFTW_UNALIGNED`|7.1.0| | | | |7.1.0|
-|`FFTW_WISDOM_ONLY`| | | | |`FFTW_WISDOM_ONLY`|7.1.0| | | | |7.1.0|
+|`FFTW_MEASURE`| | | | |`FFTW_MEASURE`|7.1.0| | | | | |
+|`FFTW_PATIENT`| | | | |`FFTW_PATIENT`|7.1.0| | | | | |
+|`FFTW_PRESERVE_INPUT`| | | | |`FFTW_PRESERVE_INPUT`|7.1.0| | | | | |
+|`FFTW_UNALIGNED`| | | | |`FFTW_UNALIGNED`|7.1.0| | | | | |
+|`FFTW_WISDOM_ONLY`| | | | |`FFTW_WISDOM_ONLY`|7.1.0| | | | | |
 |`MAX_CUFFT_ERROR`| | | | | | | | | | | |
 |`NVFFT_PLAN_PROPERTY_INT64_MAX_NUM_HOST_THREADS`|12.5| | | | | | | | | | |
 |`NVFFT_PLAN_PROPERTY_INT64_PATIENT_JIT`|12.4| | | | | | | | | | |
@@ -114,14 +114,14 @@
 |`cufftXtSubFormat_t`| | | | |`hipfftXtSubFormat_t`|6.0.0| | | | | |
 |`cufftXtWorkAreaPolicy`|9.2| | | | | | | | | | |
 |`cufftXtWorkAreaPolicy_t`|9.2| | | | | | | | | | |
-|`fftw_complex`| | | | |`fftw_complex`|7.1.0| | | | |7.1.0|
+|`fftw_complex`| | | | |`fftw_complex`|7.1.0| | | | | |
 |`fftw_iodim`| | | | | | | | | | | |
 |`fftw_iodim64`| | | | | | | | | | | |
-|`fftw_plan`| | | | |`fftw_plan`|7.1.0| | | | |7.1.0|
-|`fftwf_complex`| | | | |`fftwf_complex`|7.1.0| | | | |7.1.0|
+|`fftw_plan`| | | | |`fftw_plan`|7.1.0| | | | | |
+|`fftwf_complex`| | | | |`fftwf_complex`|7.1.0| | | | | |
 |`fftwf_iodim`| | | | | | | | | | | |
 |`fftwf_iodim64`| | | | | | | | | | | |
-|`fftwf_plan`| | | | |`fftwf_plan`|7.1.0| | | | |7.1.0|
+|`fftwf_plan`| | | | |`fftwf_plan`|7.1.0| | | | | |
 
 ## **2. CUFFT API functions**
 
@@ -191,28 +191,28 @@
 |`cufftXtSetGPUs`| | | | |`hipfftXtSetGPUs`|6.0.0| | | | | |
 |`cufftXtSetWorkArea`| | | | | | | | | | | |
 |`cufftXtSetWorkAreaPolicy`|9.2| | | | | | | | | | |
-|`fftw_cleanup`| | | | |`fftw_cleanup`|7.1.0| | | | |7.1.0|
-|`fftw_cost`| | | | |`fftw_cost`|7.1.0| | | | |7.1.0|
-|`fftw_destroy_plan`| | | | |`fftw_destroy_plan`|7.1.0| | | | |7.1.0|
-|`fftw_execute`| | | | |`fftw_execute`|7.1.0| | | | |7.1.0|
+|`fftw_cleanup`| | | | |`fftw_cleanup`|7.1.0| | | | | |
+|`fftw_cost`| | | | |`fftw_cost`|7.1.0| | | | | |
+|`fftw_destroy_plan`| | | | |`fftw_destroy_plan`|7.1.0| | | | | |
+|`fftw_execute`| | | | |`fftw_execute`|7.1.0| | | | | |
 |`fftw_execute_dft`| | | | | | | | | | | |
 |`fftw_execute_dft_c2r`| | | | | | | | | | | |
 |`fftw_execute_dft_r2c`| | | | | | | | | | | |
 |`fftw_export_wisdom_to_file`| | | | | | | | | | | |
-|`fftw_flops`| | | | |`fftw_flops`|7.1.0| | | | |7.1.0|
+|`fftw_flops`| | | | |`fftw_flops`|7.1.0| | | | | |
 |`fftw_import_wisdom_from_file`| | | | | | | | | | | |
-|`fftw_plan_dft`| | | | |`fftw_plan_dft`|7.1.0| | | | |7.1.0|
-|`fftw_plan_dft_1d`| | | | |`fftw_plan_dft_1d`|7.1.0| | | | |7.1.0|
-|`fftw_plan_dft_2d`| | | | |`fftw_plan_dft_2d`|7.1.0| | | | |7.1.0|
-|`fftw_plan_dft_3d`| | | | |`fftw_plan_dft_3d`|7.1.0| | | | |7.1.0|
-|`fftw_plan_dft_c2r`| | | | |`fftw_plan_dft_c2r`|7.1.0| | | | |7.1.0|
+|`fftw_plan_dft`| | | | |`fftw_plan_dft`|7.1.0| | | | | |
+|`fftw_plan_dft_1d`| | | | |`fftw_plan_dft_1d`|7.1.0| | | | | |
+|`fftw_plan_dft_2d`| | | | |`fftw_plan_dft_2d`|7.1.0| | | | | |
+|`fftw_plan_dft_3d`| | | | |`fftw_plan_dft_3d`|7.1.0| | | | | |
+|`fftw_plan_dft_c2r`| | | | |`fftw_plan_dft_c2r`|7.1.0| | | | | |
 |`fftw_plan_dft_c2r_1d`| | | | |`fftw_plan_dft_c2r_1d`| | | | | | |
-|`fftw_plan_dft_c2r_2d`| | | | |`fftw_plan_dft_c2r_2d`|7.1.0| | | | |7.1.0|
-|`fftw_plan_dft_c2r_3d`| | | | |`fftw_plan_dft_c2r_3d`|7.1.0| | | | |7.1.0|
-|`fftw_plan_dft_r2c`| | | | |`fftw_plan_dft_r2c`|7.1.0| | | | |7.1.0|
-|`fftw_plan_dft_r2c_1d`| | | | |`fftw_plan_dft_r2c_1d`|7.1.0| | | | |7.1.0|
-|`fftw_plan_dft_r2c_2d`| | | | |`fftw_plan_dft_r2c_2d`|7.1.0| | | | |7.1.0|
-|`fftw_plan_dft_r2c_3d`| | | | |`fftw_plan_dft_r2c_3d`|7.1.0| | | | |7.1.0|
+|`fftw_plan_dft_c2r_2d`| | | | |`fftw_plan_dft_c2r_2d`|7.1.0| | | | | |
+|`fftw_plan_dft_c2r_3d`| | | | |`fftw_plan_dft_c2r_3d`|7.1.0| | | | | |
+|`fftw_plan_dft_r2c`| | | | |`fftw_plan_dft_r2c`|7.1.0| | | | | |
+|`fftw_plan_dft_r2c_1d`| | | | |`fftw_plan_dft_r2c_1d`|7.1.0| | | | | |
+|`fftw_plan_dft_r2c_2d`| | | | |`fftw_plan_dft_r2c_2d`|7.1.0| | | | | |
+|`fftw_plan_dft_r2c_3d`| | | | |`fftw_plan_dft_r2c_3d`|7.1.0| | | | | |
 |`fftw_plan_guru64_dft`|10.0| | | | | | | | | | |
 |`fftw_plan_guru64_dft_c2r`|10.0| | | | | | | | | | |
 |`fftw_plan_guru64_dft_r2c`|10.0| | | | | | | | | | |
@@ -222,30 +222,30 @@
 |`fftw_plan_many_dft`| | | | | | | | | | | |
 |`fftw_plan_many_dft_c2r`| | | | | | | | | | | |
 |`fftw_plan_many_dft_r2c`| | | | | | | | | | | |
-|`fftw_print_plan`| | | | |`fftw_print_plan`|7.1.0| | | | |7.1.0|
-|`fftw_set_timelimit`| | | | |`fftw_set_timelimit`|7.1.0| | | | |7.1.0|
-|`fftwf_cleanup`| | | | |`fftwf_cleanup`|7.1.0| | | | |7.1.0|
-|`fftwf_cost`| | | | |`fftwf_cost`|7.1.0| | | | |7.1.0|
-|`fftwf_destroy_plan`| | | | |`fftwf_destroy_plan`|7.1.0| | | | |7.1.0|
-|`fftwf_execute`| | | | |`fftwf_execute`|7.1.0| | | | |7.1.0|
+|`fftw_print_plan`| | | | |`fftw_print_plan`|7.1.0| | | | | |
+|`fftw_set_timelimit`| | | | |`fftw_set_timelimit`|7.1.0| | | | | |
+|`fftwf_cleanup`| | | | |`fftwf_cleanup`|7.1.0| | | | | |
+|`fftwf_cost`| | | | |`fftwf_cost`|7.1.0| | | | | |
+|`fftwf_destroy_plan`| | | | |`fftwf_destroy_plan`|7.1.0| | | | | |
+|`fftwf_execute`| | | | |`fftwf_execute`|7.1.0| | | | | |
 |`fftwf_execute_dft`| | | | | | | | | | | |
 |`fftwf_execute_dft_c2r`| | | | | | | | | | | |
 |`fftwf_execute_dft_r2c`| | | | | | | | | | | |
 |`fftwf_export_wisdom_to_file`| | | | | | | | | | | |
-|`fftwf_flops`| | | | |`fftwf_flops`|7.1.0| | | | |7.1.0|
+|`fftwf_flops`| | | | |`fftwf_flops`|7.1.0| | | | | |
 |`fftwf_import_wisdom_from_file`| | | | | | | | | | | |
-|`fftwf_plan_dft`| | | | |`fftwf_plan_dft`|7.1.0| | | | |7.1.0|
-|`fftwf_plan_dft_1d`| | | | |`fftwf_plan_dft_1d`|7.1.0| | | | |7.1.0|
-|`fftwf_plan_dft_2d`| | | | |`fftwf_plan_dft_2d`|7.1.0| | | | |7.1.0|
-|`fftwf_plan_dft_3d`| | | | |`fftwf_plan_dft_3d`|7.1.0| | | | |7.1.0|
-|`fftwf_plan_dft_c2r`| | | | |`fftwf_plan_dft_c2r`|7.1.0| | | | |7.1.0|
-|`fftwf_plan_dft_c2r_1d`| | | | |`fftwf_plan_dft_c2r_1d`|7.1.0| | | | |7.1.0|
-|`fftwf_plan_dft_c2r_2d`| | | | |`fftwf_plan_dft_c2r_2d`|7.1.0| | | | |7.1.0|
-|`fftwf_plan_dft_c2r_3d`| | | | |`fftwf_plan_dft_c2r_3d`|7.1.0| | | | |7.1.0|
-|`fftwf_plan_dft_r2c`| | | | |`fftwf_plan_dft_r2c`|7.1.0| | | | |7.1.0|
-|`fftwf_plan_dft_r2c_1d`| | | | |`fftwf_plan_dft_r2c_1d`|7.1.0| | | | |7.1.0|
-|`fftwf_plan_dft_r2c_2d`| | | | |`fftwf_plan_dft_r2c_2d`|7.1.0| | | | |7.1.0|
-|`fftwf_plan_dft_r2c_3d`| | | | |`fftwf_plan_dft_r2c_3d`|7.1.0| | | | |7.1.0|
+|`fftwf_plan_dft`| | | | |`fftwf_plan_dft`|7.1.0| | | | | |
+|`fftwf_plan_dft_1d`| | | | |`fftwf_plan_dft_1d`|7.1.0| | | | | |
+|`fftwf_plan_dft_2d`| | | | |`fftwf_plan_dft_2d`|7.1.0| | | | | |
+|`fftwf_plan_dft_3d`| | | | |`fftwf_plan_dft_3d`|7.1.0| | | | | |
+|`fftwf_plan_dft_c2r`| | | | |`fftwf_plan_dft_c2r`|7.1.0| | | | | |
+|`fftwf_plan_dft_c2r_1d`| | | | |`fftwf_plan_dft_c2r_1d`|7.1.0| | | | | |
+|`fftwf_plan_dft_c2r_2d`| | | | |`fftwf_plan_dft_c2r_2d`|7.1.0| | | | | |
+|`fftwf_plan_dft_c2r_3d`| | | | |`fftwf_plan_dft_c2r_3d`|7.1.0| | | | | |
+|`fftwf_plan_dft_r2c`| | | | |`fftwf_plan_dft_r2c`|7.1.0| | | | | |
+|`fftwf_plan_dft_r2c_1d`| | | | |`fftwf_plan_dft_r2c_1d`|7.1.0| | | | | |
+|`fftwf_plan_dft_r2c_2d`| | | | |`fftwf_plan_dft_r2c_2d`|7.1.0| | | | | |
+|`fftwf_plan_dft_r2c_3d`| | | | |`fftwf_plan_dft_r2c_3d`|7.1.0| | | | | |
 |`fftwf_plan_guru64_dft`|10.0| | | | | | | | | | |
 |`fftwf_plan_guru64_dft_c2r`|10.0| | | | | | | | | | |
 |`fftwf_plan_guru64_dft_r2c`|10.0| | | | | | | | | | |
@@ -255,6 +255,6 @@
 |`fftwf_plan_many_dft`| | | | | | | | | | | |
 |`fftwf_plan_many_dft_c2r`| | | | | | | | | | | |
 |`fftwf_plan_many_dft_r2c`| | | | | | | | | | | |
-|`fftwf_print_plan`| | | | |`fftwf_print_plan`|7.1.0| | | | |7.1.0|
-|`fftwf_set_timelimit`| | | | |`fftwf_set_timelimit`|7.1.0| | | | |7.1.0|
+|`fftwf_print_plan`| | | | |`fftwf_print_plan`|7.1.0| | | | | |
+|`fftwf_set_timelimit`| | | | |`fftwf_set_timelimit`|7.1.0| | | | | |
 
