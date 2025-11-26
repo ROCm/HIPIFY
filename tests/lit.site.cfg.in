@@ -36,18 +36,18 @@ def get_lib_major_ver(file_name):
     return 0
 
 def get_cudnn_major_ver():
-    ver_file = config.cuda_dnn_root + '/include/cudnn_version.h'
+    ver_file = config.cuda_dnn_root + '/cudnn_version.h'
     ver = get_lib_major_ver(ver_file)
     if ver == 0:
-        ver_file = config.cuda_dnn_root + '/include/cudnn_version_v9.h'
+        ver_file = config.cuda_dnn_root + '/cudnn_version_v9.h'
         ver = get_lib_major_ver(ver_file)
     if ver == 0:
-        ver_file = config.cuda_dnn_root + '/include/cudnn_version_v999.h'
+        ver_file = config.cuda_dnn_root + '/cudnn_version_v999.h'
         ver = get_lib_major_ver(ver_file)
     return int(ver)
 
 def get_cutensor_major_ver():
-    ver_file = config.cuda_tensor_root + '/include/cutensor.h'
+    ver_file = config.cuda_tensor_root + '/cutensor.h'
     ver = get_lib_major_ver(ver_file)
     if ver == 0:
         ver = 1

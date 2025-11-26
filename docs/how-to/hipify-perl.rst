@@ -34,7 +34,7 @@ Using hipify-perl
 Example
 =======
 
-For additional details on the following ``hipify-perl`` command options, see :ref:`hipify_perl-command`. For more advanced translation needs use ``hipify-clang`` as it is more comprehensive and accurate. 
+For additional details on the following ``hipify-perl`` command options, see :ref:`hipify-perl-cmd`. For more advanced translation needs use ``hipify-clang`` as it is more comprehensive and accurate.
 
 Convert a simple CUDA file (``square.cu``) to HIP using ``hipify-perl``:
 

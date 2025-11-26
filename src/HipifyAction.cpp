@@ -30,6 +30,9 @@ THE SOFTWARE.
 #include "clang/ASTMatchers/ASTMatchFinder.h"
 #include "clang/ASTMatchers/ASTMatchers.h"
 #include "clang/Lex/HeaderSearch.h"
+#if LLVM_VERSION_MAJOR < 17
+#include "clang/Basic/TargetInfo.h"
+#endif
 #include "LLVMCompat.h"
 #include "CUDA2HIP.h"
 #include "StringUtils.h"
@@ -2295,6 +2298,11 @@ void HipifyAction::FindAndReplace(StringRef name,
     return;
   Statistics::current().incrementCounter(found->second, name.str());
   clang::DiagnosticsEngine &DE = getCompilerInstance().getDiagnostics();
+
+  // [ToDo] Remove after final implementing #2073
+  // const auto ID = DE.getCustomDiagID(clang::DiagnosticsEngine::Warning, "'%0' is the CUDA version, used by clang");
+  // DE.Report(sl, ID) << Statistics::getCudaVersion(Statistics::getCudaVersionUsedByClang());
+
   // Warn about the deprecated identifier in CUDA but hipify it.
   if (Statistics::isCudaDeprecated(found->second)) {
     const auto ID = DE.getCustomDiagID(clang::DiagnosticsEngine::Warning, "'%0' is deprecated in CUDA.");
@@ -2329,6 +2337,24 @@ void HipifyAction::FindAndReplace(StringRef name,
     const auto ID = DE.getCustomDiagID(clang::DiagnosticsEngine::Warning, "'%0' is unsupported in '%1'.");
     DE.Report(sl, ID) << found->first << sWarn;
     return;
+  }
+  if (Statistics::isHipPartiallySupported(found->second)) {
+    unsigned ver = Statistics::getCudaVersion();
+    bool bPartiallySupported = false;
+    const auto it = CUDA_UNSUPPORTED_VER_MAP().find(name);
+    if (it != CUDA_UNSUPPORTED_VER_MAP().end()) {
+      for (const auto &v : it->second) {
+        if (v == ver) {
+          bPartiallySupported = true;
+          break;
+        }
+      }
+      if (bPartiallySupported) {
+        const auto ID = DE.getCustomDiagID(clang::DiagnosticsEngine::Warning, "'%0' of CUDA version '%1' is not supported.");
+        DE.Report(sl, ID) << found->first << ver;
+        return;
+      }
+    }
   }
   if (!bReplace) {
     return;
@@ -3292,6 +3318,10 @@ void HipifyAction::ExecuteAction() {
   clang::Preprocessor &PP = getCompilerInstance().getPreprocessor();
   // Register yourself as the preprocessor callback, by proxy.
   PP.addPPCallbacks(std::unique_ptr<PPCallbackProxy>(new PPCallbackProxy(*this)));
+#if LLVM_VERSION_MAJOR > 3
+  Statistics::cudaVersionUsedByClang = Statistics::convertCudaToolkitVersion(clang::ToCudaVersion(PP.getTargetInfo().getSDKVersion()));
+  llvm::errs() << " !!!!!!! CUDA SDK version detected: " << int(clang::ToCudaVersion(PP.getTargetInfo().getSDKVersion())) << "\n";
+#endif
   // Now we're done futzing with the lexer, have the subclass proceeed with Sema and AST matching.
   clang::ASTFrontendAction::ExecuteAction();
   auto &SM = getCompilerInstance().getSourceManager();

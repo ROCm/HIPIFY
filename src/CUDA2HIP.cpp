@@ -32,6 +32,7 @@ const std::map <llvm::StringRef, hipCounter> CUDA_INCLUDE_MAP {
   {"channel_descriptor.h",                                  {"hip/channel_descriptor.h",                              "",                                                               CONV_INCLUDE,                API_RUNTIME, 0}},
   {"device_functions.h",                                    {"hip/device_functions.h",                                "",                                                               CONV_INCLUDE,                API_RUNTIME, 0}},
   {"driver_types.h",                                        {"hip/driver_types.h",                                    "",                                                               CONV_INCLUDE,                API_RUNTIME, 0}},
+  {"cuda_bf16.h",                                           {"hip/hip_bf16.h",                                        "",                                                               CONV_INCLUDE,                API_RUNTIME, 0}},
   {"cuda_fp16.h",                                           {"hip/hip_fp16.h",                                        "",                                                               CONV_INCLUDE,                API_RUNTIME, 0}},
   {"cuda_fp8.h",                                            {"hip/hip_fp8.h",                                         "",                                                               CONV_INCLUDE,                API_RUNTIME, 0}},
   {"cuda_fp4.h",                                            {"hip/hip_fp4.h",                                         "",                                                               CONV_INCLUDE,                API_RUNTIME, 0}},
@@ -78,6 +79,7 @@ const std::map <llvm::StringRef, hipCounter> CUDA_INCLUDE_MAP {
   // cuFFT includes
   {"cufft.h",                                               {"hipfft/hipfft.h",                                       "",                                                               CONV_INCLUDE_CUDA_MAIN_H,    API_FFT, 0}},
   {"cufftXt.h",                                             {"hipfft/hipfftXt.h",                                     "",                                                               CONV_INCLUDE,                API_FFT, 0}},
+  {"cufftw.h",                                              {"hipfft/hipfftw.h",                                      "",                                                               CONV_INCLUDE,                API_FFT, 0}},
   // cuSPARSE includes
   {"cusparse.h",                                            {"hipsparse.h",                                           "rocsparse.h",                                                    CONV_INCLUDE_CUDA_MAIN_H,    API_SPARSE, 0}},
   {"cusparse_v2.h",                                         {"hipsparse.h",                                           "rocsparse.h",                                                    CONV_INCLUDE_CUDA_MAIN_V2_H, API_SPARSE, 0}},
@@ -138,6 +140,15 @@ const std::map<llvm::StringRef, hipCounter> &CUDA_RENAMES_MAP() {
   ret.insert(CUDA_SOLVER_FUNCTION_MAP.begin(), CUDA_SOLVER_FUNCTION_MAP.end());
   ret.insert(CUDA_TENSOR_TYPE_NAME_MAP.begin(), CUDA_TENSOR_TYPE_NAME_MAP.end());
   ret.insert(CUDA_TENSOR_FUNCTION_MAP.begin(), CUDA_TENSOR_FUNCTION_MAP.end());
+  return ret;
+};
+
+const std::map<llvm::StringRef, cudaAPIUnsupportedVersions> &CUDA_UNSUPPORTED_VER_MAP() {
+  static std::map<llvm::StringRef, cudaAPIUnsupportedVersions> ret;
+  if (!ret.empty())
+    return ret;
+  ret.insert(CUDA_DRIVER_FUNCTION_UNSUPPORTED_VER_MAP.begin(), CUDA_DRIVER_FUNCTION_UNSUPPORTED_VER_MAP.end());
+  ret.insert(CUDA_RUNTIME_FUNCTION_UNSUPPORTED_VER_MAP.begin(), CUDA_RUNTIME_FUNCTION_UNSUPPORTED_VER_MAP.end());
   return ret;
 };
 

@@ -2,13 +2,13 @@
    :description: Tools to automatically translate CUDA source code into portable HIP C++
    :keywords: HIPIFY, ROCm, library, tool, CUDA, CUDA2HIP, hipify-clang, hipify-perl
 
-.. _hipify_perl-command:
+.. _hipify-perl-cmd:
 
 **************************************************************************
-hipify-perl command
+hipify-perl commands
 **************************************************************************
 
-For a list of ``hipify-perl`` options, run: 
+For a list of ``hipify-perl`` options, run:
 
 .. code-block:: cpp
 
@@ -27,8 +27,8 @@ Usage
 Options
 -------
 
-.. # COMMENT: The following lines define a break for use in the table below. 
-.. |br| raw:: html 
+.. # COMMENT: The following lines define a break for use in the table below.
+.. |br| raw:: html
 
     <br />
 
@@ -38,48 +38,47 @@ Options
     * - **Options**
       - **Description**
 
-    * - ``-cuda-kernel-execution-syntax`` 
+    * - ``-cuda-kernel-execution-syntax``
       - Keep CUDA kernel launch syntax (default)
 
-    * - ``-examine``                      
+    * - ``-examine``
       - Combines ``-no-output`` and ``-print-stats`` options
 
-    * - ``-exclude-dirs=<string>``               
+    * - ``-exclude-dirs=<string>``
       - Exclude directories
 
-    * - ``-exclude-files=<string>``              
+    * - ``-exclude-files=<string>``
       - Exclude files
 
-    * - ``-experimental``                 
+    * - ``-experimental``
       - HIPIFY experimentally supported APIs
 
-    * - ``-help``                         
+    * - ``-help``
       - Display available options
 
-    * - ``-hip-kernel-execution-syntax``  
+    * - ``-hip-kernel-execution-syntax``
       - Transform CUDA kernel launch syntax to a regular HIP function call (overrides ``--cuda-kernel-execution-syntax``)
 
-    * - ``-inplace``                      
+    * - ``-inplace``
       - Backs up the input file in ``.prehip`` file, and modifies the input file in-place
 
-    * - ``-no-output``                    
+    * - ``-no-output``
       - Don't write any translated output to stdout
 
-    * - ``-o=<string>``                          
+    * - ``-o=<string>``
       - Output filename
 
-    * - ``-print-stats``                  
+    * - ``-print-stats``
       - Print translation statistics as described in :ref:`hipify-stats`
 
-    * - ``-quiet-warnings``                
+    * - ``-quiet-warnings``
       - Don't print warnings on unknown CUDA identifiers
 
-    * - ``-roc``                          
+    * - ``-roc``
       - Translate to ``roc`` libraries instead of ``hip`` libraries where possible
 
-    * - ``-version``                      
+    * - ``-version``
       - The supported HIP version
 
-    * - ``-whitelist=<string>``                  
+    * - ``-whitelist=<string>``
       - Whitelist of identifiers
-

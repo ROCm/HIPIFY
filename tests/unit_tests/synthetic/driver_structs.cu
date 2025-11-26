@@ -335,6 +335,16 @@ int main() {
   // CHECK-NEXT: hipGraphInstantiateParams GRAPH_INSTANTIATE_PARAMS;
   CUDA_GRAPH_INSTANTIATE_PARAMS_st GRAPH_INSTANTIATE_PARAMS_st;
   CUDA_GRAPH_INSTANTIATE_PARAMS GRAPH_INSTANTIATE_PARAMS;
+
+  // CHECK: hipLaunchMemSyncDomainMap launchMemSyncDomainMap_st;
+  // CHECK-NEXT: hipLaunchMemSyncDomainMap launchMemSyncDomainMap;
+  CUlaunchMemSyncDomainMap_st launchMemSyncDomainMap_st;
+  CUlaunchMemSyncDomainMap launchMemSyncDomainMap;
+
+  // CHECK: ihipKernel_t *kern_st = nullptr;
+// CHECK-NEXT: hipKernel_t kernel;
+  CUkern_st *kern_st = nullptr;
+  CUkernel kernel;
 #endif
 
 #if CUDA_VERSION >= 12020
@@ -398,6 +408,36 @@ int main() {
   // CHECK-NEXT: hipGraphEdgeData graphEdgeData;
   CUgraphEdgeData_st graphEdgeData_st;
   CUgraphEdgeData graphEdgeData;
+#endif
+
+#if CUDA_VERSION >= 12080
+  // CHECK: hipMemcpyAttributes memcpyAttributes_st;
+  // CHECK-NEXT: hipMemcpyAttributes memcpyAttributes;
+  // CHECK-NEXT: hipMemcpyAttributes memcpyAttributes_v1;
+  CUmemcpyAttributes_st memcpyAttributes_st;
+  CUmemcpyAttributes memcpyAttributes;
+  CUmemcpyAttributes_v1 memcpyAttributes_v1;
+
+  // CHECK: hipOffset3D offset3D;
+  // CHECK-NEXT: hipOffset3D offset3D_st;
+  // CHECK-NEXT: hipOffset3D offset3D_v1;
+  CUoffset3D offset3D;
+  CUoffset3D_st offset3D_st;
+  CUoffset3D_v1 offset3D_v1;
+
+  // CHECK: hipMemcpy3DOperand memcpy3DOperand;
+  // CHECK-NEXT: hipMemcpy3DOperand memcpy3DOperand_st;
+  // CHECK-NEXT: hipMemcpy3DOperand memcpy3DOperand_v1;
+  CUmemcpy3DOperand memcpy3DOperand;
+  CUmemcpy3DOperand_st memcpy3DOperand_st;
+  CUmemcpy3DOperand_v1  memcpy3DOperand_v1;
+
+  // CHECK: hipMemcpy3DBatchOp Memcpy3DBatchOp;
+  // CHECK-NEXT: hipMemcpy3DBatchOp Memcpy3DBatchOp_st;
+  // CHECK-NEXT: hipMemcpy3DBatchOp Memcpy3DBatchOp_v1;
+  CUDA_MEMCPY3D_BATCH_OP Memcpy3DBatchOp;
+  CUDA_MEMCPY3D_BATCH_OP_st Memcpy3DBatchOp_st;
+  CUDA_MEMCPY3D_BATCH_OP_v1  Memcpy3DBatchOp_v1;
 #endif
 
   return 0;
