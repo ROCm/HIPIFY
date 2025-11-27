@@ -125,15 +125,10 @@ namespace doc {
   const string sROCSPARSE_csv = sROCSPARSE + csv_ext;
   const string sCUSPARSE = "CUSPARSE";
 
-  /* hipFile / rocFile */
+  /* hipFile */
   const string sHIPFILE             = "cuFile_API_supported_by_HIP";
   const string sHIPFILE_md          = sHIPFILE + md_ext;
   const string sHIPFILE_csv         = sHIPFILE + csv_ext;
-  const string sHIPFILE_and_ROC_md  = sHIPFILE + sandROC + md_ext;
-  const string sHIPFILE_and_ROC_csv = sHIPFILE + sandROC + csv_ext;
-  const string sROCFILE             = "cuFile_API_supported_by_ROC";
-  const string sROCFILE_md          = sROCFILE + md_ext;
-  const string sROCFILE_csv         = sROCFILE + csv_ext;
   const string sCUFILE              = "cuFile";
 
   const string sDEVICE = "CUDA_Device_API_supported_by_HIP";
@@ -877,8 +872,7 @@ namespace doc {
       virtual ~HIPFILE() {}
     protected:
       const string sMetaKeywords = "hipFile, cuFile";
-      const string sMetaKeywordsJoint = sMetaKeywords + ", rocFile";
-      const string &getAdditionalMetaKeywords() const override { return roc == joint ? sMetaKeywordsJoint : sMetaKeywords; }
+      const string &getAdditionalMetaKeywords() const override { return sMetaKeywords; }
 
       const sectionMap &getSections() const override { return CUDA_FILE_API_SECTION_MAP; }
       const functionMap &getFunctions() const override { return CUDA_FILE_FUNCTION_MAP; }
@@ -891,37 +885,19 @@ namespace doc {
       const hipVersionMap &getHipTypeVersions() const override { return HIP_FILE_TYPE_NAME_VER_MAP; }
 
       const string &getName() const override { return sCUFILE; }
-      const string &getSecondAPI() const override { return sROC; }
-      const string &getJointAPI() const override { return sHIPandROC; }
+      const string &getSecondAPI() const override { return sEmpty; }
+      const string &getJointAPI() const override { return sEmpty; }
       const string &getFileName(docType format) const override {
         switch (format) {
           case none:
           default: return sEmpty;
-          case md: return roc == joint ? sHIPFILE_and_ROC_md : sHIPFILE_md;
-          case csv: return roc == joint ? sHIPFILE_and_ROC_csv : sHIPFILE_csv;
+          case md: return sHIPFILE_md;
+          case csv: return sHIPFILE_csv;
         }
       }
   };
 
-  class ROCFILE : public HIPFILE {
-  public:
-    ROCFILE(const string &outDir) : HIPFILE(outDir) { hasROC = false; isROC = true; }
-    virtual ~ROCFILE() {}
-  protected:
-    const string sMetaKeywords = "hipFile, cuFile, rocFile";
-    const string &getAdditionalMetaKeywords() const override { return sMetaKeywords; }
-    const string &getAPI() const override { return sROC; }
-    const string &getFileName(docType format) const override {
-      switch (format) {
-      case none:
-      default: return sEmpty;
-      case md: return sROCFILE_md;
-      case csv: return sROCFILE_csv;
-      }
-    }
-  };
-
-   class DEVICE : public DOC {
+  class DEVICE : public DOC {
     public:
       DEVICE(const string &outDir): DOC(outDir) {}
       virtual ~DEVICE() {}
@@ -1071,7 +1047,6 @@ namespace doc {
     ROCSOLVER rocsolver(sOut);
     MIOPEN miopen(sOut);
     ROCSPARSE rocsparse(sOut);
-    ROCFILE rocfile(sOut);
     RAND rand(sOut);
     docs.addDoc(&rand);
     ROCRAND rocrand(sOut);
@@ -1080,7 +1055,6 @@ namespace doc {
       docs.addDoc(&rocrand);
       docs.addDoc(&miopen);
       docs.addDoc(&rocsparse);
-      docs.addDoc(&rocfile);
       docs.addDoc(&rocsolver);
     }
     if (HipDnnSupport) {
