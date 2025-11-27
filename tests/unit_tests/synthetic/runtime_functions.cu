@@ -1120,11 +1120,6 @@ int main() {
   // HIP: hipError_t hipThreadExchangeStreamCaptureMode(hipStreamCaptureMode* mode);
   // CHECK: result = hipThreadExchangeStreamCaptureMode(&streamCaptureMode);
   result = cudaThreadExchangeStreamCaptureMode(&streamCaptureMode);
-
-  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaThreadExchangeStreamCaptureMode(enum cudaStreamCaptureMode *mode);
-  // HIP: hipError_t hipThreadExchangeStreamCaptureMode(hipStreamCaptureMode* mode);
-  // CHECK: result = hipThreadExchangeStreamCaptureMode(&streamCaptureMode);
-  result = cudaThreadExchangeStreamCaptureMode(&streamCaptureMode);
 #endif
 
 #if CUDA_VERSION >= 10020
