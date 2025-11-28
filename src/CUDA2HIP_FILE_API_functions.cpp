@@ -1,14 +1,5 @@
 #include "CUDA2HIP.h"
 
-//struct hipCounter {
-//  llvm::StringRef hipName;
-//  llvm::StringRef rocName;
-//  ConvTypes type;
-//  ApiTypes apiType;
-//  unsigned int apiSection;
-//  unsigned int supportDegree;
-//};
-
 /* clang-format off */
 const std::map<llvm::StringRef, hipCounter> CUDA_FILE_FUNCTION_MAP {
   {"cufileop_status_error",           {"hipFileOpStatusError",             "", CONV_LIB_FUNC, API_FILE, 4, FULL}},
