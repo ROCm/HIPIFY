@@ -978,11 +978,34 @@ int main() {
   CUkernelNodeAttrID kernelNodeAttrID;
   CUkernelNodeAttrID KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW = CU_KERNEL_NODE_ATTRIBUTE_ACCESS_POLICY_WINDOW;
   CUkernelNodeAttrID KERNEL_NODE_ATTRIBUTE_COOPERATIVE = CU_KERNEL_NODE_ATTRIBUTE_COOPERATIVE;
+
+  // CHECK: hipSynchronizationPolicy synchronizationPolicy;
+  // CHECK-NEXT: hipSynchronizationPolicy synchronizationPolicy_enum;
+  // CHECK-NEXT: hipSynchronizationPolicy SYNC_POLICY_AUTO = hipSyncPolicyAuto;
+  // CHECK-NEXT: hipSynchronizationPolicy SYNC_POLICY_SPIN = hipSyncPolicySpin;
+  // CHECK-NEXT: hipSynchronizationPolicy SYNC_POLICY_YIELD = hipSyncPolicyYield;
+  // CHECK-NEXT: hipSynchronizationPolicy SYNC_POLICY_BLOCKING_SYNC = hipSyncPolicyBlockingSync;
+  CUsynchronizationPolicy synchronizationPolicy;
+  CUsynchronizationPolicy_enum synchronizationPolicy_enum;
+  CUsynchronizationPolicy SYNC_POLICY_AUTO = CU_SYNC_POLICY_AUTO;
+  CUsynchronizationPolicy SYNC_POLICY_SPIN = CU_SYNC_POLICY_SPIN;
+  CUsynchronizationPolicy SYNC_POLICY_YIELD = CU_SYNC_POLICY_YIELD;
+  CUsynchronizationPolicy SYNC_POLICY_BLOCKING_SYNC = CU_SYNC_POLICY_BLOCKING_SYNC; 
+
+  // CHECK: hipLaunchAttributeID streamAttrID;
+  // CHECK-NEXT: hipLaunchAttributeID STREAM_ATTRIBUTE_ACCESS_POLICY_WINDOW = hipLaunchAttributeAccessPolicyWindow;
+  // CHECK-NEXT: hipLaunchAttributeID STREAM_ATTRIBUTE_SYNCHRONIZATION_POLICY = hipLaunchAttributeSynchronizationPolicy;
+  CUstreamAttrID streamAttrID;
+  CUstreamAttrID STREAM_ATTRIBUTE_ACCESS_POLICY_WINDOW = CU_STREAM_ATTRIBUTE_ACCESS_POLICY_WINDOW;
+  CUstreamAttrID STREAM_ATTRIBUTE_SYNCHRONIZATION_POLICY = CU_STREAM_ATTRIBUTE_SYNCHRONIZATION_POLICY;
 #endif
 
 #if CUDA_VERSION >= 11000 && CUDA_VERSION < 11080
   // CHECK: hipKernelNodeAttrID kernelNodeAttrID_enum;
   CUkernelNodeAttrID_enum kernelNodeAttrID_enum;
+
+  // CHECK: hipLaunchAttributeID streamAttrID_enum;
+  CUstreamAttrID_enum streamAttrID_enum;
 #endif
 
 #if CUDA_VERSION >= 11010
@@ -1134,6 +1157,15 @@ int main() {
   CUGPUDirectRDMAWritesOrdering GPU_DIRECT_RDMA_WRITES_ORDERING_NONE = CU_GPU_DIRECT_RDMA_WRITES_ORDERING_NONE;
   CUGPUDirectRDMAWritesOrdering GPU_DIRECT_RDMA_WRITES_ORDERING_OWNER = CU_GPU_DIRECT_RDMA_WRITES_ORDERING_OWNER;
   CUGPUDirectRDMAWritesOrdering GPU_DIRECT_RDMA_WRITES_ORDERING_ALL_DEVICES = CU_GPU_DIRECT_RDMA_WRITES_ORDERING_ALL_DEVICES;
+
+  // NOTE [HIP]: Why these numbers implemented as defines and not as enum values like in CUDA?
+  // TODO [HIP]: Consider changing them to enum values in future HIP releases: enum cudaGetDriverEntryPointFlags -> enum hipGetDriverEntryPointFlags
+  // CHECK: int EnableDefault = hipEnableDefault;
+  // CHECK-NEXT: int EnableLegacyStream = hipEnableLegacyStream;
+  // CHECK-NEXT: int EnablePerThreadDefaultStream = hipEnablePerThreadDefaultStream;
+  int EnableDefault = CU_GET_PROC_ADDRESS_DEFAULT;
+  int EnableLegacyStream = CU_GET_PROC_ADDRESS_LEGACY_STREAM;
+  int EnablePerThreadDefaultStream = CU_GET_PROC_ADDRESS_PER_THREAD_DEFAULT_STREAM;
 #endif
 
 #if CUDA_VERSION >= 11040
@@ -1205,11 +1237,13 @@ int main() {
   // CHECK-NEXT: hipLaunchAttributeID launchAttributeID_enum;
   // CHECK-NEXT: hipLaunchAttributeID LAUNCH_ATTRIBUTE_ACCESS_POLICY_WINDOW = hipLaunchAttributeAccessPolicyWindow;
   // CHECK-NEXT: hipLaunchAttributeID LAUNCH_ATTRIBUTE_COOPERATIVE = hipLaunchAttributeCooperative;
+  // CHECK-NEXT: hipLaunchAttributeID LAUNCH_ATTRIBUTE_SYNCHRONIZATION_POLICY = hipLaunchAttributeSynchronizationPolicy;
   // CHECK-NEXT: hipLaunchAttributeID LAUNCH_ATTRIBUTE_PRIORITY = hipLaunchAttributePriority;
   CUlaunchAttributeID launchAttributeID;
   CUlaunchAttributeID_enum launchAttributeID_enum;
   CUlaunchAttributeID LAUNCH_ATTRIBUTE_ACCESS_POLICY_WINDOW = CU_LAUNCH_ATTRIBUTE_ACCESS_POLICY_WINDOW;
   CUlaunchAttributeID LAUNCH_ATTRIBUTE_COOPERATIVE = CU_LAUNCH_ATTRIBUTE_COOPERATIVE;
+  CUlaunchAttributeID LAUNCH_ATTRIBUTE_SYNCHRONIZATION_POLICY = CU_LAUNCH_ATTRIBUTE_SYNCHRONIZATION_POLICY;
   CUlaunchAttributeID LAUNCH_ATTRIBUTE_PRIORITY = CU_LAUNCH_ATTRIBUTE_PRIORITY;
 #endif
 
@@ -1247,6 +1281,52 @@ int main() {
   CUdriverProcAddressQueryResult GET_PROC_ADDRESS_SUCCESS = CU_GET_PROC_ADDRESS_SUCCESS;
   CUdriverProcAddressQueryResult GET_PROC_ADDRESS_SYMBOL_NOT_FOUND = CU_GET_PROC_ADDRESS_SYMBOL_NOT_FOUND;
   CUdriverProcAddressQueryResult GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT = CU_GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT;
+
+  // CHECK: hipLaunchAttributeID STREAM_ATTRIBUTE_PRIORITY = hipLaunchAttributePriority;
+  // CHECK-NEXT: hipLaunchAttributeID STREAM_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP = hipLaunchAttributeMemSyncDomainMap;
+  // CHECK-NEXT: hipLaunchAttributeID STREAM_ATTRIBUTE_MEM_SYNC_DOMAIN = hipLaunchAttributeMemSyncDomain;
+  CUstreamAttrID STREAM_ATTRIBUTE_PRIORITY = CU_STREAM_ATTRIBUTE_PRIORITY;
+  CUstreamAttrID STREAM_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP = CU_STREAM_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP;
+  CUstreamAttrID STREAM_ATTRIBUTE_MEM_SYNC_DOMAIN = CU_STREAM_ATTRIBUTE_MEM_SYNC_DOMAIN;
+
+  // CHECK: hipLaunchAttributeID LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP = hipLaunchAttributeMemSyncDomainMap;
+  // CHECK-NEXT: hipLaunchAttributeID LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN = hipLaunchAttributeMemSyncDomain;
+  CUlaunchAttributeID LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP = CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP;
+  CUlaunchAttributeID LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN = CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN;
+
+  // CHECK: hipLaunchMemSyncDomain launchMemSyncDomain;
+  // CHECK-NEXT: hipLaunchMemSyncDomain launchMemSyncDomain_enum;
+  // CHECK-NEXT: hipLaunchMemSyncDomain LAUNCH_MEM_SYNC_DOMAIN_DEFAULT = hipLaunchMemSyncDomainDefault;
+  // CHECK-NEXT: hipLaunchMemSyncDomain LAUNCH_MEM_SYNC_DOMAIN_REMOTE = hipLaunchMemSyncDomainRemote;
+  CUlaunchMemSyncDomain launchMemSyncDomain;
+  CUlaunchMemSyncDomain_enum launchMemSyncDomain_enum;
+  CUlaunchMemSyncDomain LAUNCH_MEM_SYNC_DOMAIN_DEFAULT = CU_LAUNCH_MEM_SYNC_DOMAIN_DEFAULT;
+  CUlaunchMemSyncDomain LAUNCH_MEM_SYNC_DOMAIN_REMOTE = CU_LAUNCH_MEM_SYNC_DOMAIN_REMOTE;
+
+  // CHECK: hipLibraryOption LibraryOption;
+  // CHECK-NEXT: hipLibraryOption_e LibraryOption_enum;
+  // CHECK-NEXT: hipLibraryOption LibraryHostUniversalFunctionAndDataTable = hipLibraryHostUniversalFunctionAndDataTable;
+  // CHECK-NEXT: hipLibraryOption LibraryBinaryIsPreserved = hipLibraryBinaryIsPreserved;
+  CUlibraryOption LibraryOption;
+  CUlibraryOption_enum LibraryOption_enum;
+  CUlibraryOption LibraryHostUniversalFunctionAndDataTable = CU_LIBRARY_HOST_UNIVERSAL_FUNCTION_AND_DATA_TABLE;
+  CUlibraryOption LibraryBinaryIsPreserved = CU_LIBRARY_BINARY_IS_PRESERVED;
+#endif
+
+#if CUDA_VERSION >= 12010
+  // CHECK: hipLaunchAttributeID LAUNCH_ATTRIBUTE_MAX = hipLaunchAttributeMax;
+  CUlaunchAttributeID LAUNCH_ATTRIBUTE_MAX = CU_LAUNCH_ATTRIBUTE_MAX;
+#endif
+
+#if CUDA_VERSION >= 12020
+  // CHECK: hipMemLocationType MEM_LOCATION_TYPE_HOST = hipMemLocationTypeHost;
+  // CHECK-NEXT: hipMemLocationType MEM_LOCATION_TYPE_HOST_NUMA = hipMemLocationTypeHostNuma;
+  // CHECK-NEXT: hipMemLocationType MEM_LOCATION_TYPE_HOST_NUMA_CURRENT = hipMemLocationTypeHostNumaCurrent;
+  // CHECK-NEXT: hipDeviceAttribute_t DEVICE_ATTRIBUTE_HOST_NUMA_ID = hipDeviceAttributeHostNumaId;
+  CUmemLocationType MEM_LOCATION_TYPE_HOST = CU_MEM_LOCATION_TYPE_HOST;
+  CUmemLocationType MEM_LOCATION_TYPE_HOST_NUMA = CU_MEM_LOCATION_TYPE_HOST_NUMA;
+  CUmemLocationType MEM_LOCATION_TYPE_HOST_NUMA_CURRENT = CU_MEM_LOCATION_TYPE_HOST_NUMA_CURRENT;
+  CUdevice_attribute DEVICE_ATTRIBUTE_HOST_NUMA_ID = CU_DEVICE_ATTRIBUTE_HOST_NUMA_ID;
 #endif
 
 #if CUDA_VERSION >= 12030
@@ -1279,6 +1359,44 @@ int main() {
   CUmemRangeFlags MemRangeFlags;
   CUmemRangeFlags_enum MemRangeFlags_enum;
   CUmemRangeFlags MEM_RANGE_FLAG_DMA_BUF_MAPPING_TYPE_PCIE = CU_MEM_RANGE_FLAG_DMA_BUF_MAPPING_TYPE_PCIE;
+
+  // CHECK: hipMemcpyFlags MemcpyFlags;
+  // CHECK-NEXT: hipMemcpyFlags memcpyFlags_enum;
+  // CHECK-NEXT: hipMemcpyFlags MemcpyFlagDefault = hipMemcpyFlagDefault;
+  // CHECK-NEXT: hipMemcpyFlags MemcpyFlagPreferOverlapWithCompute = hipMemcpyFlagPreferOverlapWithCompute;
+  CUmemcpyFlags MemcpyFlags;
+  CUmemcpyFlags_enum memcpyFlags_enum;
+  CUmemcpyFlags MemcpyFlagDefault = CU_MEMCPY_FLAG_DEFAULT;
+  CUmemcpyFlags MemcpyFlagPreferOverlapWithCompute = CU_MEMCPY_FLAG_PREFER_OVERLAP_WITH_COMPUTE;
+
+  // CHECK: hipMemcpySrcAccessOrder MemcpySrcAccessOrder;
+  // CHECK-NEXT: hipMemcpySrcAccessOrder MemcpySrcAccessOrderInvalid = hipMemcpySrcAccessOrderInvalid;
+  // CHECK-NEXT: hipMemcpySrcAccessOrder MemcpySrcAccessOrderStream = hipMemcpySrcAccessOrderStream;
+  // CHECK-NEXT: hipMemcpySrcAccessOrder MemcpySrcAccessOrderDuringApiCall = hipMemcpySrcAccessOrderDuringApiCall;
+  // CHECK-NEXT: hipMemcpySrcAccessOrder MemcpySrcAccessOrderAny = hipMemcpySrcAccessOrderAny;
+  // CHECK-NEXT: hipMemcpySrcAccessOrder MemcpySrcAccessOrderMax = hipMemcpySrcAccessOrderMax;
+  CUmemcpySrcAccessOrder MemcpySrcAccessOrder;
+  CUmemcpySrcAccessOrder MemcpySrcAccessOrderInvalid = CU_MEMCPY_SRC_ACCESS_ORDER_INVALID;
+  CUmemcpySrcAccessOrder MemcpySrcAccessOrderStream = CU_MEMCPY_SRC_ACCESS_ORDER_STREAM;
+  CUmemcpySrcAccessOrder MemcpySrcAccessOrderDuringApiCall = CU_MEMCPY_SRC_ACCESS_ORDER_DURING_API_CALL;
+  CUmemcpySrcAccessOrder MemcpySrcAccessOrderAny = CU_MEMCPY_SRC_ACCESS_ORDER_ANY;
+  CUmemcpySrcAccessOrder MemcpySrcAccessOrderMax = CU_MEMCPY_SRC_ACCESS_ORDER_MAX;
+
+  // CHECK: hipMemcpy3DOperandType memcpy3DOperandType;
+  // CHECK-NEXT: hipMemcpy3DOperandType memcpy3DOperandType_enum;
+  // CHECK-NEXT: hipMemcpy3DOperandType MemcpyOperandTypePointer = hipMemcpyOperandTypePointer;
+  // CHECK-NEXT: hipMemcpy3DOperandType MemcpyOperandTypeArray = hipMemcpyOperandTypeArray;
+  // CHECK-NEXT: hipMemcpy3DOperandType MemcpyOperandTypeMax = hipMemcpyOperandTypeMax;
+  CUmemcpy3DOperandType memcpy3DOperandType;
+  CUmemcpy3DOperandType_enum memcpy3DOperandType_enum;
+  CUmemcpy3DOperandType MemcpyOperandTypePointer = CU_MEMCPY_OPERAND_TYPE_POINTER;
+  CUmemcpy3DOperandType MemcpyOperandTypeArray = CU_MEMCPY_OPERAND_TYPE_ARRAY;
+  CUmemcpy3DOperandType MemcpyOperandTypeMax = CU_MEMCPY_OPERAND_TYPE_MAX;
+#endif
+
+#if CUDA_VERSION >= 13000
+  // CHECK: hipMemLocationType MEM_LOCATION_TYPE_NONE = hipMemLocationTypeNone;
+  CUmemLocationType MEM_LOCATION_TYPE_NONE = CU_MEM_LOCATION_TYPE_NONE;
 #endif
 
   return 0;

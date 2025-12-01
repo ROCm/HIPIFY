@@ -1,11 +1,10 @@
 <head>
   <meta charset="UTF-8">
-  <meta name="description" content="NVIDIA CUDA APIs supported by HIPIFY">
-
-  <meta name="keywords" content="HIPIFY, ROCm, NVIDIA, CUDA, CUDA2HIP, hipify-clang, hipify-perl">
+  <meta name="description" content="Supported CUDA APIs">
+  <meta name="keywords" content="HIPIFY, ROC, ROCm, HIP, CUDA, CUDA2HIP, hipify-clang, hipify-perl">
 </head>
 
-# Supported NVIDIA CUDA APIs
+# Supported CUDA APIs
 
 |     **CUDA**     | **HIP**                                                           |                            **ROC**                        |                            **HIP & ROC**                                |
 |:-----------------|:------------------------------------------------------------------|:----------------------------------------------------------|:------------------------------------------------------------------------|
@@ -23,4 +22,5 @@
 | CUTENSOR API     | [HIP TENSOR API](tables/CUTENSOR_API_supported_by_HIP.md)         |                                                           |                                                                         |
 | CUB API          | [HIP CUB API](tables/CUB_API_supported_by_HIP.md)                 |                                                           |                                                                         |
 
-To generate the above documentation with the information about all supported CUDA APIs in Markdown format, run `hipify-clang --md --doc-format=full` with or without specifying the output directory (`-o`), for HIP and ROC separately `--doc-roc=separate` or in the joint format (ROC & HIP) `--doc-roc=joint`.
+To generate the above documentation with the information about all supported CUDA APIs in Markdown format, run `hipify-clang --md --doc-format=full --doc-roc=joint` with or without specifying the output directory (`-o`).
+By running `hipify-clang --csv --doc-format=full --doc-roc=joint`, the documentation will be generated in CSV format.

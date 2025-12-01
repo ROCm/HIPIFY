@@ -85,7 +85,10 @@ int main() {
   // CHECK: hipUUID_t uuid_st;
   CUuuid_st uuid_st;
 
-#if CUDA_VERSION >= 9000
+  // CHECK: hipMemcpy3DPeerParms Memcpy3DPeerParms;
+  cudaMemcpy3DPeerParms Memcpy3DPeerParms;
+
+#if CUDA_VERSION >= 9000 && CUDA_VERSION < 13000
   // CHECK: hipLaunchParams LaunchParams;
   cudaLaunchParams LaunchParams;
 #endif
@@ -146,12 +149,13 @@ int main() {
 #endif
 
 #if CUDA_VERSION >= 11020
+#if CUDA_VERSION < 11030
   // CHECK: hipExternalSemaphoreSignalParams ExternalSemaphoreSignalParams_v1;
   cudaExternalSemaphoreSignalParams_v1 ExternalSemaphoreSignalParams_v1;
 
   // CHECK: hipExternalSemaphoreWaitParams ExternalSemaphoreWaitParams_v1;
   cudaExternalSemaphoreWaitParams_v1 ExternalSemaphoreWaitParams_v1;
-
+#endif
   // CHECK: hipMemPool_t memPool_t;
   cudaMemPool_t memPool_t;
 
@@ -206,6 +210,16 @@ int main() {
   // CHECK-NEXT: hipGraphInstantiateParams GRAPH_INSTANTIATE_PARAMS;
   cudaGraphInstantiateParams_st GRAPH_INSTANTIATE_PARAMS_st;
   cudaGraphInstantiateParams GRAPH_INSTANTIATE_PARAMS;
+
+  // CHECK: hipLaunchMemSyncDomainMap LaunchMemSyncDomainMap_st;
+  // CHECK-NEXT: hipLaunchMemSyncDomainMap LaunchMemSyncDomainMap;
+  cudaLaunchMemSyncDomainMap_st LaunchMemSyncDomainMap_st;
+  cudaLaunchMemSyncDomainMap LaunchMemSyncDomainMap;
+#endif
+
+#if CUDA_VERSION >= 12010
+  // CHECK: hipKernel_t Kernel_t;
+  cudaKernel_t Kernel_t;
 #endif
 
 #if CUDA_VERSION >= 12020
@@ -236,6 +250,20 @@ int main() {
   // CHECK-NEXT: hipGraphEdgeData graphEdgeData;
   cudaGraphEdgeData_st graphEdgeData_st;
   cudaGraphEdgeData graphEdgeData;
+#endif
+
+#if CUDA_VERSION >= 12080
+  // CHECK: hipMemcpyAttributes MemcpyAttributes;
+  cudaMemcpyAttributes MemcpyAttributes;
+
+  // CHECK: hipOffset3D Offset3D;
+  cudaOffset3D Offset3D;
+
+  // CHECK: hipMemcpy3DOperand Memcpy3DOperand;
+  cudaMemcpy3DOperand Memcpy3DOperand;
+
+  // CHECK: hipMemcpy3DBatchOp Memcpy3DBatchOp;
+  cudaMemcpy3DBatchOp Memcpy3DBatchOp;
 #endif
 
   return 0;

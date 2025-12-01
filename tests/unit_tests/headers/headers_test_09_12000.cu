@@ -12,7 +12,6 @@
 // CHECK: #include "hip/driver_types.h"
 // CHECK: #include "hip/hip_complex.h"
 // CHECK: #include "hip/hip_fp16.h"
-// CHECK: #include "hip/hip_texture_types.h"
 // CHECK: #include "hip/hip_vector_types.h"
 
 // CHECK: #include <iostream>
@@ -67,7 +66,6 @@
 #include "driver_types.h"
 #include "cuComplex.h"
 #include "cuda_fp16.h"
-#include "cuda_texture_types.h"
 #include "vector_types.h"
 
 #include <iostream>

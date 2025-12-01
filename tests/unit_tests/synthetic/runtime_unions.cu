@@ -10,6 +10,9 @@ int main() {
 #if CUDA_VERSION >= 11000
   // CHECK: hipKernelNodeAttrValue KernelNodeAttrValue;
   cudaKernelNodeAttrValue KernelNodeAttrValue;
+
+  // CHECK: hipLaunchAttributeValue StreamAttrValue;
+  cudaStreamAttrValue StreamAttrValue;
 #endif
 
 #if CUDA_VERSION >= 11080

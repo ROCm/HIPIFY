@@ -17,16 +17,25 @@ int main() {
 #if CUDA_VERSION >= 11000
   // CHECK: hipKernelNodeAttrValue kernelNodeAttrValue;
   CUkernelNodeAttrValue kernelNodeAttrValue;
+
+  // CHECK: hipLaunchAttributeValue streamAttrValue;
+  CUstreamAttrValue streamAttrValue;
 #endif
 
 #if CUDA_VERSION >= 11000 && CUDA_VERSION < 11080
   // CHECK: hipKernelNodeAttrValue kernelNodeAttrValue_union;
   CUkernelNodeAttrValue_union kernelNodeAttrValue_union;
+
+  // CHECK: hipLaunchAttributeValue streamAttrValue_union;
+  CUstreamAttrValue_union streamAttrValue_union;
 #endif
 
 #if CUDA_VERSION >= 11030
   // CHECK: hipKernelNodeAttrValue kernelNodeAttrValue_v1;
   CUkernelNodeAttrValue_v1 kernelNodeAttrValue_v1;
+
+  // CHECK: hipLaunchAttributeValue streamAttrValue_v1;
+  CUstreamAttrValue_v1 streamAttrValue_v1;
 #endif
 
 #if CUDA_VERSION >= 11080

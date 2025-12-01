@@ -65,5 +65,10 @@ int main() {
   CUstreamBatchMemOpParams_v1 streamBatchMemOpParams_v1;
 #endif
 
+#if CUDA_VERSION >= 12080
+  // CHECK: hipLibrary_t library_t;
+  CUlibrary library_t;
+#endif
+
   return 0;
 }
