@@ -715,6 +715,19 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"CUDNN_ATTR_OPERATION_SDPA_FWD_STATSDESC",                          {"HIPDNN_ATTR_OPERATION_SDPA_FWD_STATSDESC",                        "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 2804
   {"CUDNN_ATTR_OPERATION_SDPA_FWD_SCALEDESC",                          {"HIPDNN_ATTR_OPERATION_SDPA_FWD_SCALEDESC",                        "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 2805
   {"CUDNN_ATTR_OPERATION_SDPA_FWD_BLOCK_MASK_DESC",                    {"HIPDNN_ATTR_OPERATION_SDPA_FWD_BLOCK_MASK_DESC",                  "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 2806
+  {"CUDNN_ATTR_OPERATION_SDPA_FWD_PAGE_TABLE_KDESC",                   {"HIPDNN_ATTR_OPERATION_SDPA_FWD_PAGE_TABLE_KDESC",                 "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 2807
+  {"CUDNN_ATTR_OPERATION_SDPA_FWD_PAGE_TABLE_VDESC",                   {"HIPDNN_ATTR_OPERATION_SDPA_FWD_PAGE_TABLE_VDESC",                 "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 2808
+  {"CUDNN_ATTR_OPERATION_SDPA_FWD_SEQ_LEN_QDESC",                      {"HIPDNN_ATTR_OPERATION_SDPA_FWD_SEQ_LEN_QDESC",                    "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 2809
+  {"CUDNN_ATTR_OPERATION_SDPA_FWD_SEQ_LEN_KVDESC",                     {"HIPDNN_ATTR_OPERATION_SDPA_FWD_SEQ_LEN_KVDESC",                   "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 2810
+  {"CUDNN_ATTR_OPERATION_MOE_GROUPED_MATMUL_MODE",                     {"HIPDNN_ATTR_OPERATION_MOE_GROUPED_MATMUL_MODE",                   "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 2900
+  {"CUDNN_ATTR_OPERATION_MOE_GROUPED_MATMUL_MATH_PREC",                {"HIPDNN_ATTR_OPERATION_MOE_GROUPED_MATMUL_MATH_PREC",              "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 2901
+  {"CUDNN_ATTR_OPERATION_MOE_GROUPED_MATMUL_TOKEN_DESC",               {"HIPDNN_ATTR_OPERATION_MOE_GROUPED_MATMUL_TOKEN_DESC",             "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 2902
+  {"CUDNN_ATTR_OPERATION_MOE_GROUPED_MATMUL_WEIGHT_DESC",              {"HIPDNN_ATTR_OPERATION_MOE_GROUPED_MATMUL_WEIGHT_DESC",            "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 2903
+  {"CUDNN_ATTR_OPERATION_MOE_GROUPED_MATMUL_FIRST_TOKEN_OFFSET_DESC",  {"HIPDNN_ATTR_OPERATION_MOE_GROUPED_MATMUL_FIRST_TOKEN_OFFSET_DESC","",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 2904
+  {"CUDNN_ATTR_OPERATION_MOE_GROUPED_MATMUL_OUTPUT_DESC",              {"HIPDNN_ATTR_OPERATION_MOE_GROUPED_MATMUL_OUTPUT_DESC",            "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 2905
+  {"CUDNN_ATTR_OPERATION_MOE_GROUPED_MATMUL_TOKEN_INDEX_DESC",         {"HIPDNN_ATTR_OPERATION_MOE_GROUPED_MATMUL_TOKEN_INDEX_DESC",       "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 2906
+  {"CUDNN_ATTR_OPERATION_MOE_GROUPED_MATMUL_TOKEN_KS_DESC",            {"HIPDNN_ATTR_OPERATION_MOE_GROUPED_MATMUL_TOKEN_KS_DESC",          "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 2907
+  {"CUDNN_ATTR_OPERATION_MOE_GROUPED_MATMUL_TOP_K",                    {"HIPDNN_ATTR_OPERATION_MOE_GROUPED_MATMUL_TOP_K",                  "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 2908
   {"cudnnBackendAttributeType_t",                                      {"hipdnnBackendAttributeType_t",                                    "miopenBackendAttributeType_t",                                    CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
   {"CUDNN_TYPE_HANDLE",                                                {"HIPDNN_TYPE_HANDLE",                                              "MIOPEN_TYPE_HANDLE",                                              CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},
   {"CUDNN_TYPE_DATA_TYPE",                                             {"HIPDNN_TYPE_DATA_TYPE",                                           "MIOPEN_TYPE_DATA_TYPE",                                           CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},
@@ -746,6 +759,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"CUDNN_TYPE_NORM_MODE",                                             {"HIPDNN_TYPE_NORM_MODE",                                           "MIOPEN_TYPE_NORM_MODE",                                           CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},
   {"CUDNN_TYPE_NORM_FWD_PHASE",                                        {"HIPDNN_TYPE_NORM_FWD_PHASE",                                      "MIOPEN_TYPE_NORM_FWD_PHASE",                                      CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},
   {"CUDNN_TYPE_RNG_DISTRIBUTION",                                      {"HIPDNN_TYPE_RNG_DISTRIBUTION",                                    "MIOPEN_TYPE_RNG_DISTRIBUTION",                                    CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},
+  {"CUDNN_TYPE_MOE_GROUPED_MATMUL_MODE",                               {"HIPDNN_TYPE_MOE_GROUPED_MATMUL_MODE",                             "MIOPEN_TYPE_RNG_DISTRIBUTION",                                    CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},
   {"cudnnBackendDescriptorType_t",                                     {"hipdnnBackendDescriptorType_t",                                   "miopenBackendDescriptorType_t",                                   CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
   {"CUDNN_BACKEND_POINTWISE_DESCRIPTOR",                               {"HIPDNN_BACKEND_POINTWISE_DESCRIPTOR",                             "MIOPEN_BACKEND_POINTWISE_DESCRIPTOR",                             CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},
   {"CUDNN_BACKEND_CONVOLUTION_DESCRIPTOR",                             {"HIPDNN_BACKEND_CONVOLUTION_DESCRIPTOR",                           "MIOPEN_BACKEND_CONVOLUTION_DESCRIPTOR",                           CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},
@@ -789,6 +803,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"CUDNN_BACKEND_OPERATION_BLOCK_SCALE_QUANTIZE_DESCRIPTOR",          {"HIPDNN_BACKEND_OPERATION_BLOCK_SCALE_QUANTIZE_DESCRIPTOR",        "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_BACKEND_OPERATION_BLOCK_SCALE_DEQUANTIZE_DESCRIPTOR",        {"HIPDNN_BACKEND_OPERATION_BLOCK_SCALE_DEQUANTIZE_DESCRIPTOR",      "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_BACKEND_DEVICEPROP_DESCRIPTOR",                              {"HIPDNN_BACKEND_DEVICEPROP_DESCRIPTOR",                            "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_BACKEND_OPERATION_MOE_GROUPED_MATMUL_DESCRIPTOR",            {"HIPDNN_BACKEND_DEVICEPROP_DESCRIPTOR",                            "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
   {"cudnnBackendNumericalNote_t",                                      {"hipdnnBackendNumericalNote_t",                                    "",                                                                CONV_TYPE, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_NUMERICAL_NOTE_TENSOR_CORE",                                 {"HIPDNN_NUMERICAL_NOTE_TENSOR_CORE",                               "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_NUMERICAL_NOTE_DOWN_CONVERT_INPUTS",                         {"HIPDNN_NUMERICAL_NOTE_DOWN_CONVERT_INPUTS",                       "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
@@ -876,6 +891,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"CUDNN_BEHAVIOR_NOTE_REQUIRES_FILTER_INT8x32_REORDER",              {"HIPDNN_BEHAVIOR_NOTE_REQUIRES_FILTER_INT8x32_REORDER",            "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},  // 1
   {"CUDNN_BEHAVIOR_NOTE_REQUIRES_BIAS_INT8x32_REORDER",                {"HIPDNN_BEHAVIOR_NOTE_REQUIRES_BIAS_INT8x32_REORDER",              "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},  // 2
   {"CUDNN_BEHAVIOR_NOTE_SUPPORTS_CUDA_GRAPH_NATIVE_API",               {"HIPDNN_BEHAVIOR_NOTE_SUPPORTS_CUDA_GRAPH_NATIVE_API",             "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},  // 3
+  {"CUDNN_BEHAVIOR_NOTE_CUBLASLT_DEPENDENCY",                          {"HIPDNN_BEHAVIOR_NOTE_CUBLASLT_DEPENDENCY",                        "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},  // 5
   {"CUDNN_BEHAVIOR_NOTE_TYPE_COUNT",                                   {"HIPDNN_BEHAVIOR_NOTE_TYPE_COUNT",                                 "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
   {"cudnnResampleMode_t",                                              {"hipdnnResampleMode_t",                                            "",                                                                CONV_TYPE, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_RESAMPLE_NEAREST",                                           {"HIPDNN_RESAMPLE_NEAREST",                                         "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
@@ -913,6 +929,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"cudnnCTCGradMode_t",                                               {"hipdnnCTCGradMode_t",                                             "",                                                                CONV_TYPE, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_CTC_ZERO_OOB_GRADIENTS",                                     {"HIPDNN_CTC_ZERO_OOB_GRADIENTS",                                   "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_CTC_SKIP_OOB_GRADIENTS",                                     {"HIPDNN_CTC_SKIP_OOB_GRADIENTS",                                   "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"cudnnMoeGroupedMatmulMode_t",                                      {"hipdnnMoeGroupedMatmulMode_t",                                    "",                                                                CONV_TYPE, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_MOE_GROUPED_MATMUL_MODE_NONE",                               {"HIPDNN_MOE_GROUPED_MATMUL_MODE_NONE",                             "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_MOE_GROUPED_MATMUL_MODE_GATHER",                             {"HIPDNN_MOE_GROUPED_MATMUL_MODE_GATHER",                           "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_MOE_GROUPED_MATMUL_MODE_SCATTER",                            {"HIPDNN_MOE_GROUPED_MATMUL_MODE_SCATTER",                          "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
 
   // cuDNN types
   {"cudnnContext",                                                     {"hipdnnContext",                                                   "miopenHandle",                                                    CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED}},
@@ -1929,6 +1949,26 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_TYPE_NAME_VER_MAP {
   {"CUDNN_DATA_COMPLEX_FP32",                                          {CUDNN_9140,CUDA_0,    CUDA_0   }},
   {"CUDNN_DATA_COMPLEX_FP64",                                          {CUDNN_9140,CUDA_0,    CUDA_0   }},
   {"CUDNN_ATTR_OPERATION_SDPA_FWD_BLOCK_MASK_DESC",                    {CUDNN_9140,CUDA_0,    CUDA_0   }},
+  {"cudnnMoeGroupedMatmulMode_t",                                      {CUDNN_9150,CUDA_0,    CUDA_0   }},
+  {"CUDNN_MOE_GROUPED_MATMUL_MODE_NONE",                               {CUDNN_9150,CUDA_0,    CUDA_0   }},
+  {"CUDNN_MOE_GROUPED_MATMUL_MODE_GATHER",                             {CUDNN_9150,CUDA_0,    CUDA_0   }},
+  {"CUDNN_MOE_GROUPED_MATMUL_MODE_SCATTER",                            {CUDNN_9150,CUDA_0,    CUDA_0   }},
+  {"CUDNN_ATTR_OPERATION_SDPA_FWD_PAGE_TABLE_KDESC",                   {CUDNN_9150,CUDA_0,    CUDA_0   }},
+  {"CUDNN_ATTR_OPERATION_SDPA_FWD_PAGE_TABLE_VDESC",                   {CUDNN_9150,CUDA_0,    CUDA_0   }},
+  {"CUDNN_ATTR_OPERATION_SDPA_FWD_SEQ_LEN_QDESC",                      {CUDNN_9150,CUDA_0,    CUDA_0   }},
+  {"CUDNN_ATTR_OPERATION_SDPA_FWD_SEQ_LEN_KVDESC",                     {CUDNN_9150,CUDA_0,    CUDA_0   }},
+  {"CUDNN_ATTR_OPERATION_MOE_GROUPED_MATMUL_MODE",                     {CUDNN_9150,CUDA_0,    CUDA_0   }},
+  {"CUDNN_ATTR_OPERATION_MOE_GROUPED_MATMUL_MATH_PREC",                {CUDNN_9150,CUDA_0,    CUDA_0   }},
+  {"CUDNN_ATTR_OPERATION_MOE_GROUPED_MATMUL_TOKEN_DESC",               {CUDNN_9150,CUDA_0,    CUDA_0   }},
+  {"CUDNN_ATTR_OPERATION_MOE_GROUPED_MATMUL_WEIGHT_DESC",              {CUDNN_9150,CUDA_0,    CUDA_0   }},
+  {"CUDNN_ATTR_OPERATION_MOE_GROUPED_MATMUL_FIRST_TOKEN_OFFSET_DESC",  {CUDNN_9150,CUDA_0,    CUDA_0   }},
+  {"CUDNN_ATTR_OPERATION_MOE_GROUPED_MATMUL_OUTPUT_DESC",              {CUDNN_9150,CUDA_0,    CUDA_0   }},
+  {"CUDNN_ATTR_OPERATION_MOE_GROUPED_MATMUL_TOKEN_INDEX_DESC",         {CUDNN_9150,CUDA_0,    CUDA_0   }},
+  {"CUDNN_ATTR_OPERATION_MOE_GROUPED_MATMUL_TOKEN_KS_DESC",            {CUDNN_9150,CUDA_0,    CUDA_0   }},
+  {"CUDNN_ATTR_OPERATION_MOE_GROUPED_MATMUL_TOP_K",                    {CUDNN_9150,CUDA_0,    CUDA_0   }},
+  {"CUDNN_TYPE_MOE_GROUPED_MATMUL_MODE",                               {CUDNN_9150,CUDA_0,    CUDA_0   }},
+  {"CUDNN_BACKEND_OPERATION_MOE_GROUPED_MATMUL_DESCRIPTOR",            {CUDNN_9150,CUDA_0,    CUDA_0   }},
+  {"CUDNN_BEHAVIOR_NOTE_CUBLASLT_DEPENDENCY",                          {CUDNN_9150,CUDA_0,    CUDA_0   }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_DNN_TYPE_NAME_VER_MAP {
