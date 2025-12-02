@@ -2274,6 +2274,22 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"CUDA_EMULATION_STRATEGY_PERFORMANT",                               {"HIP_EMULATION_STRATEGY_PERFORMANT",                        "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   {"CUDA_EMULATION_STRATEGY_EAGER",                                    {"HIP_EMULATION_STRATEGY_EAGER",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
+  // [ToDo] Move to a separated Library types, common for Runtime, Driver and Libraries APIs
+  {"cudaEmulationMantissaControl_t",                                   {"hipEmulationMantissaControl_t",                            "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"cudaEmulationMantissaControl",                                     {"hipEmulationMantissaControl",                              "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // cudaEmulationMantissaControl enum values
+  {"CUDA_EMULATION_MANTISSA_CONTROL_DYNAMIC",                          {"HIP_EMULATION_MANTISSA_CONTROL_DYNAMIC",                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CUDA_EMULATION_MANTISSA_CONTROL_FIXED",                            {"HIP_EMULATION_MANTISSA_CONTROL_FIXED",                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+
+  // [ToDo] Move to a separated Library types, common for Runtime, Driver and Libraries APIs
+  {"cudaEmulationSpecialValuesSupport_t",                              {"hipEmulationSpecialValuesSupport_t",                       "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"cudaEmulationSpecialValuesSupport",                                {"hipEmulationSpecialValuesSupport",                         "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // cudaEmulationSpecialValuesSupport enum values
+  {"CUDA_EMULATION_SPECIAL_VALUES_SUPPORT_DEFAULT",                    {"HIP_EMULATION_SPECIAL_VALUES_SUPPORT_DEFAULT",             "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CUDA_EMULATION_SPECIAL_VALUES_SUPPORT_NONE",                       {"HIP_EMULATION_SPECIAL_VALUES_SUPPORT_NONE",                "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CUDA_EMULATION_SPECIAL_VALUES_SUPPORT_INFINITY",                   {"HIP_EMULATION_SPECIAL_VALUES_SUPPORT_INFINITY",            "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CUDA_EMULATION_SPECIAL_VALUES_SUPPORT_NAN",                        {"HIP_EMULATION_SPECIAL_VALUES_SUPPORT_NAN",                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+
   // 4. Typedefs
 
   // CUhostFn
@@ -3313,6 +3329,16 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_TYPE_NAME_VER_MAP 
   {"CUDA_EMULATION_STRATEGY_DEFAULT",                                  {CUDA_130, CUDA_0,   CUDA_0  }},
   {"CUDA_EMULATION_STRATEGY_PERFORMANT",                               {CUDA_130, CUDA_0,   CUDA_0  }},
   {"CUDA_EMULATION_STRATEGY_EAGER",                                    {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaEmulationMantissaControl_t",                                   {CUDA_130, CUDA_0,   CUDA_0  }}, // [#2143] CUDA 13.0.2
+  {"cudaEmulationMantissaControl",                                     {CUDA_130, CUDA_0,   CUDA_0  }}, // [#2143] CUDA 13.0.2
+  {"CUDA_EMULATION_MANTISSA_CONTROL_DYNAMIC",                          {CUDA_130, CUDA_0,   CUDA_0  }}, // [#2143] CUDA 13.0.2
+  {"CUDA_EMULATION_MANTISSA_CONTROL_FIXED",                            {CUDA_130, CUDA_0,   CUDA_0  }}, // [#2143] CUDA 13.0.2
+  {"cudaEmulationSpecialValuesSupport_t",                              {CUDA_130, CUDA_0,   CUDA_0  }}, // [#2143] CUDA 13.0.2
+  {"cudaEmulationSpecialValuesSupport",                                {CUDA_130, CUDA_0,   CUDA_0  }}, // [#2143] CUDA 13.0.2
+  {"CUDA_EMULATION_SPECIAL_VALUES_SUPPORT_DEFAULT",                    {CUDA_130, CUDA_0,   CUDA_0  }}, // [#2143] CUDA 13.0.2
+  {"CUDA_EMULATION_SPECIAL_VALUES_SUPPORT_NONE",                       {CUDA_130, CUDA_0,   CUDA_0  }}, // [#2143] CUDA 13.0.2
+  {"CUDA_EMULATION_SPECIAL_VALUES_SUPPORT_INFINITY",                   {CUDA_130, CUDA_0,   CUDA_0  }}, // [#2143] CUDA 13.0.2
+  {"CUDA_EMULATION_SPECIAL_VALUES_SUPPORT_NAN",                        {CUDA_130, CUDA_0,   CUDA_0  }}, // [#2143] CUDA 13.0.2
 };
 
 const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_RUNTIME_TYPE_CHANGED_VER_MAP {
