@@ -1678,6 +1678,12 @@ my %removed_funcs = (
 );
 
 my %experimental_funcs = (
+    "fftwf_execute_dft_r2c" => "7.2.0",
+    "fftwf_execute_dft_c2r" => "7.2.0",
+    "fftwf_execute_dft" => "7.2.0",
+    "fftw_execute_dft_r2c" => "7.2.0",
+    "fftw_execute_dft_c2r" => "7.2.0",
+    "fftw_execute_dft" => "7.2.0",
     "cutensorGetVersion" => "7.2.0",
     "cudaStreamCopyAttributes" => "7.2.0",
     "cudaOccupancyAvailableDynamicSMemPerBlock" => "7.2.0",
@@ -1843,6 +1849,12 @@ sub experimentalSubstitutions {
     subst("cudaStreamCopyAttributes", "hipStreamCopyAttributes", "stream");
     subst("cudaOccupancyAvailableDynamicSMemPerBlock", "hipOccupancyAvailableDynamicSMemPerBlock", "occupancy");
     subst("cutensorGetVersion", "hiptensorGetVersion", "library");
+    subst("fftw_execute_dft", "fftw_execute_dft", "library");
+    subst("fftw_execute_dft_c2r", "fftw_execute_dft_c2r", "library");
+    subst("fftw_execute_dft_r2c", "fftw_execute_dft_r2c", "library");
+    subst("fftwf_execute_dft", "fftwf_execute_dft", "library");
+    subst("fftwf_execute_dft_c2r", "fftwf_execute_dft_c2r", "library");
+    subst("fftwf_execute_dft_r2c", "fftwf_execute_dft_r2c", "library");
     subst("CUmemcpy3DOperandType", "hipMemcpy3DOperandType", "type");
     subst("CUmemcpy3DOperandType_enum", "hipMemcpy3DOperandType", "type");
     subst("CUmemcpyFlags", "hipMemcpyFlags", "type");
@@ -11146,9 +11158,6 @@ sub warnRemovedFunctions {
     "fftwf_iodim",
     "fftwf_import_wisdom_from_file",
     "fftwf_export_wisdom_to_file",
-    "fftwf_execute_dft_r2c",
-    "fftwf_execute_dft_c2r",
-    "fftwf_execute_dft",
     "fftw_plan_many_dft_r2c",
     "fftw_plan_many_dft_c2r",
     "fftw_plan_many_dft",
@@ -11162,9 +11171,6 @@ sub warnRemovedFunctions {
     "fftw_iodim",
     "fftw_import_wisdom_from_file",
     "fftw_export_wisdom_to_file",
-    "fftw_execute_dft_r2c",
-    "fftw_execute_dft_c2r",
-    "fftw_execute_dft",
     "cutensorMgTensorDescriptor_t",
     "cutensorMgTensorDescriptor_s",
     "cutensorMgHostDevice_t",
