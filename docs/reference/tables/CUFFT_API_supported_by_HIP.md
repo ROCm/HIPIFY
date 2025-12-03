@@ -195,9 +195,9 @@
 |`fftw_cost`| | | | |`fftw_cost`|7.1.0| | | | | |
 |`fftw_destroy_plan`| | | | |`fftw_destroy_plan`|7.1.0| | | | | |
 |`fftw_execute`| | | | |`fftw_execute`|7.1.0| | | | | |
-|`fftw_execute_dft`| | | | | | | | | | | |
-|`fftw_execute_dft_c2r`| | | | | | | | | | | |
-|`fftw_execute_dft_r2c`| | | | | | | | | | | |
+|`fftw_execute_dft`| | | | |`fftw_execute_dft`|7.2.0| | | | |7.2.0|
+|`fftw_execute_dft_c2r`| | | | |`fftw_execute_dft_c2r`|7.2.0| | | | |7.2.0|
+|`fftw_execute_dft_r2c`| | | | |`fftw_execute_dft_r2c`|7.2.0| | | | |7.2.0|
 |`fftw_export_wisdom_to_file`| | | | | | | | | | | |
 |`fftw_flops`| | | | |`fftw_flops`|7.1.0| | | | | |
 |`fftw_import_wisdom_from_file`| | | | | | | | | | | |
@@ -228,9 +228,9 @@
 |`fftwf_cost`| | | | |`fftwf_cost`|7.1.0| | | | | |
 |`fftwf_destroy_plan`| | | | |`fftwf_destroy_plan`|7.1.0| | | | | |
 |`fftwf_execute`| | | | |`fftwf_execute`|7.1.0| | | | | |
-|`fftwf_execute_dft`| | | | | | | | | | | |
-|`fftwf_execute_dft_c2r`| | | | | | | | | | | |
-|`fftwf_execute_dft_r2c`| | | | | | | | | | | |
+|`fftwf_execute_dft`| | | | |`fftwf_execute_dft`|7.2.0| | | | |7.2.0|
+|`fftwf_execute_dft_c2r`| | | | |`fftwf_execute_dft_c2r`|7.2.0| | | | |7.2.0|
+|`fftwf_execute_dft_r2c`| | | | |`fftwf_execute_dft_r2c`|7.2.0| | | | |7.2.0|
 |`fftwf_export_wisdom_to_file`| | | | | | | | | | | |
 |`fftwf_flops`| | | | |`fftwf_flops`|7.1.0| | | | | |
 |`fftwf_import_wisdom_from_file`| | | | | | | | | | | |
