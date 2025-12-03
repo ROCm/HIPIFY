@@ -123,6 +123,21 @@ int main() {
   // CHECK: fftw_execute(w_plan);
   fftw_execute(w_plan);
 
+  // CUDA: void CUFFTAPI fftw_execute_dft(const fftw_plan plan, fftw_complex* in, fftw_complex* out);
+  // HIP: HIPFFT_EXPORT void fftw_execute_dft(const fftw_plan plan, fftw_complex* in, fftw_complex* out);
+  // CHECK: fftw_execute_dft(w_plan, &w_complex_in, &w_complex_out);
+  fftw_execute_dft(w_plan, &w_complex_in, &w_complex_out);
+
+  // CUDA: void CUFFTAPI fftw_execute_dft_r2c(const fftw_plan plan, double* in, fftw_complex* out);
+  // HIP: HIPFFT_EXPORT void fftw_execute_dft_r2c(const fftw_plan plan, double* in, fftw_complex* out);
+  // CHECK: fftw_execute_dft_r2c(w_plan, &d_in, &w_complex_out);
+  fftw_execute_dft_r2c(w_plan, &d_in, &w_complex_out);
+
+  // CUDA: void CUFFTAPI fftw_execute_dft_c2r(const fftw_plan plan, fftw_complex* in, double* out);
+  // HIP: HIPFFT_EXPORT void fftw_execute_dft_c2r(const fftw_plan plan, fftw_complex* in, double* out);
+  // CHECK: fftw_execute_dft_c2r(w_plan, &w_complex_in, &d_out);
+  fftw_execute_dft_c2r(w_plan, &w_complex_in, &d_out);
+
   // CUDA: fftwf_plan CUFFTAPI fftwf_plan_dft_1d(int n, fftwf_complex* in, fftwf_complex* out, int sign, unsigned flags);
   // HIP: HIPFFT_EXPORT fftwf_plan fftwf_plan_dft_1d(int n, fftwf_complex* in, fftwf_complex* out, int sign, unsigned flags);
   // CHECK: twf_plan = fftwf_plan_dft_1d(n, &wf_complex_in, &wf_complex_out, sign, flags);
@@ -187,6 +202,21 @@ int main() {
   // HIP: HIPFFT_EXPORT void fftwf_execute(const fftwf_plan plan);
   // CHECK: fftwf_execute(twf_plan);
   fftwf_execute(twf_plan);
+
+  // CUDA: void CUFFTAPI fftwf_execute_dft(const fftwf_plan plan, fftwf_complex* in, fftwf_complex* out);
+  // HIP: HIPFFT_EXPORT void fftwf_execute_dft(const fftwf_plan plan, fftwf_complex* in, fftwf_complex* out);
+  // CHECK: fftwf_execute_dft(twf_plan, &wf_complex_in, &wf_complex_out);
+  fftwf_execute_dft(twf_plan, &wf_complex_in, &wf_complex_out);
+
+  // CUDA: void CUFFTAPI fftwf_execute_dft_r2c(const fftwf_plan plan, float* in, fftwf_complex* out);
+  // HIP: HIPFFT_EXPORT void fftwf_execute_dft_r2c(const fftwf_plan plan, float* in, fftwf_complex* out);
+  // CHECK: fftwf_execute_dft_r2c(twf_plan, &f_in, &wf_complex_out);
+  fftwf_execute_dft_r2c(twf_plan, &f_in, &wf_complex_out);
+
+  // CUDA: void CUFFTAPI fftwf_execute_dft_c2r(const fftwf_plan plan, fftwf_complex* in, float* out);
+  // HIP: HIPFFT_EXPORT void fftwf_execute_dft_c2r(const fftwf_plan plan, fftwf_complex* in, float* out);
+  // CHECK: fftwf_execute_dft_c2r(twf_plan, &wf_complex_in, &f_out);
+  fftwf_execute_dft_c2r(twf_plan, &wf_complex_in, &f_out);
 
   // CUDA: void CUFFTAPI fftw_print_plan(const fftw_plan plan);
   // HIP: HIPFFT_EXPORT void fftw_print_plan(const fftw_plan);
