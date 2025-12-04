@@ -1666,7 +1666,7 @@
 |`cudaMemoryTypeDevice`| | | | |`hipMemoryTypeDevice`|1.6.0| | | | | |
 |`cudaMemoryTypeHost`| | | | |`hipMemoryTypeHost`|1.6.0| | | | | |
 |`cudaMemoryTypeManaged`|10.0| | | |`hipMemoryTypeManaged`|5.3.0| | | | | |
-|`cudaMemoryTypeUnregistered`| | | | | | | | | | | |
+|`cudaMemoryTypeUnregistered`|10.0| | | |`hipMemoryTypeUnregistered`|6.0.0| | | | | |
 |`cudaMemsetParams`|10.0| | | |`hipMemsetParams`|4.3.0| | | | | |
 |`cudaMemsetParamsV2`|12.2| | | | | | | | | | |
 |`cudaMipmappedArray`| | | | |`hipMipmappedArray`|1.7.0| | | | | |

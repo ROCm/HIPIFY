@@ -9554,6 +9554,7 @@ sub simpleSubstitutions {
     subst("cudaMemoryTypeDevice", "hipMemoryTypeDevice", "numeric_literal");
     subst("cudaMemoryTypeHost", "hipMemoryTypeHost", "numeric_literal");
     subst("cudaMemoryTypeManaged", "hipMemoryTypeManaged", "numeric_literal");
+    subst("cudaMemoryTypeUnregistered", "hipMemoryTypeUnregistered", "numeric_literal");
     subst("cudaReadModeElementType", "hipReadModeElementType", "numeric_literal");
     subst("cudaReadModeNormalizedFloat", "hipReadModeNormalizedFloat", "numeric_literal");
     subst("cudaResViewFormatFloat1", "hipResViewFormatFloat1", "numeric_literal");
@@ -11774,7 +11775,6 @@ sub warnRemovedFunctions {
     "cudaNvSciSyncAttrWait",
     "cudaNvSciSyncAttrSignal",
     "cudaMemsetParamsV2",
-    "cudaMemoryTypeUnregistered",
     "cudaMemcpyToArrayAsync",
     "cudaMemcpyFromArrayAsync",
     "cudaMemcpyArrayToArray",
