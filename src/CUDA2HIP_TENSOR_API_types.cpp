@@ -434,7 +434,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_TENSOR_TYPE_NAME_VER_MAP {
   {"CUTENSOR_COMPUTE_DESC_9X16BF",                     {CUTENSOR_2300, CUDA_0,        CUDA_0        }},
   {"cutensorBlockSparseTensorDescriptor_t",            {CUTENSOR_2300, CUDA_0,        CUDA_0        }},
   {"cutensorBlockSparseTensorDescriptor",              {CUTENSOR_2300, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_COMPUTE_DESC_8XINT8",                     {CUTENSOR_2310, CUDA_0,        CUDA_0        }},
+  {"CUTENSOR_COMPUTE_DESC_8XINT8",                     {CUTENSOR_2400, CUDA_0,        CUDA_0        }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_TENSOR_TYPE_NAME_VER_MAP {

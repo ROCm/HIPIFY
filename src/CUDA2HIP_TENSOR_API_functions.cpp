@@ -119,7 +119,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_TENSOR_FUNCTION_VER_MAP {
   {"cutensorCreatePlanPreference",                   {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
   {"cutensorDestroyPlanPreference",                  {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
   {"cutensorPlanPreferenceSetAttribute",             {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"cutensorPlanPreferenceGetAttribute",             {CUTENSOR_2310, CUDA_0,        CUDA_0        }},
+  {"cutensorPlanPreferenceGetAttribute",             {CUTENSOR_2400, CUDA_0,        CUDA_0        }},
   {"cutensorPlanGetAttribute",                       {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
   {"cutensorEstimateWorkspaceSize",                  {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
   {"cutensorCreatePlan",                             {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
