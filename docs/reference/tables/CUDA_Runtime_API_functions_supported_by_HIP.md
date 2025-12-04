@@ -682,6 +682,12 @@
 |`CUDART_ZERO`| | | | |`HIP_ZERO`|5.7.0| | | | | |
 |`CUDART_ZERO_F`| | | | |`HIP_ZERO_F`|5.3.0| | | | | |
 |`CUDA_EGL_MAX_PLANES`|9.1| | | | | | | | | | |
+|`CUDA_EMULATION_MANTISSA_CONTROL_DYNAMIC`|13.0| | | | | | | | | | |
+|`CUDA_EMULATION_MANTISSA_CONTROL_FIXED`|13.0| | | | | | | | | | |
+|`CUDA_EMULATION_SPECIAL_VALUES_SUPPORT_DEFAULT`|13.0| | | | | | | | | | |
+|`CUDA_EMULATION_SPECIAL_VALUES_SUPPORT_INFINITY`|13.0| | | | | | | | | | |
+|`CUDA_EMULATION_SPECIAL_VALUES_SUPPORT_NAN`|13.0| | | | | | | | | | |
+|`CUDA_EMULATION_SPECIAL_VALUES_SUPPORT_NONE`|13.0| | | | | | | | | | |
 |`CUDA_EMULATION_STRATEGY_DEFAULT`|13.0| | | | | | | | | | |
 |`CUDA_EMULATION_STRATEGY_EAGER`|13.0| | | | | | | | | | |
 |`CUDA_EMULATION_STRATEGY_PERFORMANT`|13.0| | | | | | | | | | |
@@ -1124,6 +1130,10 @@
 |`cudaEglResourceLocationSysmem`|9.1| | | | | | | | | | |
 |`cudaEglResourceLocationVidmem`|9.1| | | | | | | | | | |
 |`cudaEglStreamConnection`|9.1| | | | | | | | | | |
+|`cudaEmulationMantissaControl`|13.0| | | | | | | | | | |
+|`cudaEmulationMantissaControl_t`|13.0| | | | | | | | | | |
+|`cudaEmulationSpecialValuesSupport`|13.0| | | | | | | | | | |
+|`cudaEmulationSpecialValuesSupport_t`|13.0| | | | | | | | | | |
 |`cudaEmulationStrategy`|13.0| | | | | | | | | | |
 |`cudaEmulationStrategy_t`|13.0| | | | | | | | | | |
 |`cudaEnableDefault`|11.3| | | |`hipEnableDefault`|7.1.0| | | | | |
