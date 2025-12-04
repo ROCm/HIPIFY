@@ -1481,7 +1481,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // NOTE: CUmemorytype is partial analogue
   {"cudaMemoryType",                                                   {"hipMemoryType",                                            "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES}},
   // cudaMemoryType enum values
-  {"cudaMemoryTypeUnregistered",                                       {"hipMemoryTypeUnregistered",                                "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0
+  {"cudaMemoryTypeUnregistered",                                       {"hipMemoryTypeUnregistered",                                "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}}, // 0
   {"cudaMemoryTypeHost",                                               {"hipMemoryTypeHost",                                        "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}}, // 1
   {"cudaMemoryTypeDevice",                                             {"hipMemoryTypeDevice",                                      "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}}, // 2
   {"cudaMemoryTypeManaged",                                            {"hipMemoryTypeManaged",                                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}}, // 3
@@ -2872,6 +2872,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_TYPE_NAME_VER_MAP 
   {"cudaCpuDeviceId",                                                  {CUDA_80,  CUDA_0,   CUDA_0  }},
   {"cudaInvalidDeviceId",                                              {CUDA_80,  CUDA_0,   CUDA_0  }},
   {"cudaExternalMemoryDedicated",                                      {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"cudaMemoryTypeUnregistered",                                       {CUDA_100, CUDA_0,   CUDA_0  }},
   {"cudaExternalSemaphoreSignalSkipNvSciBufMemSync",                   {CUDA_102, CUDA_0,   CUDA_0  }},
   {"cudaExternalSemaphoreWaitSkipNvSciBufMemSync",                     {CUDA_102, CUDA_0,   CUDA_0  }},
   {"cudaNvSciSyncAttrSignal",                                          {CUDA_102, CUDA_0,   CUDA_0  }},
@@ -3715,6 +3716,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {
   {"HIP_TWO_TO_M1022",                                                 {HIP_5070, HIP_0,    HIP_0   }},
   {"HIP_TRIG_PLOSS",                                                   {HIP_5070, HIP_0,    HIP_0   }},
   {"HIP_DBL2INT_CVT",                                                  {HIP_5070, HIP_0,    HIP_0   }},
+  {"hipMemoryTypeUnregistered",                                        {HIP_6000, HIP_0,    HIP_0   }},
   {"hipErrorInvalidChannelDescriptor",                                 {HIP_6040, HIP_0,    HIP_0   }},
   {"hipErrorInvalidTexture",                                           {HIP_6040, HIP_0,    HIP_0   }},
   {"hipEventRecordDefault",                                            {HIP_6040, HIP_0,    HIP_0   }},
