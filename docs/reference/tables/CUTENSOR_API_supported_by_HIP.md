@@ -41,6 +41,7 @@
 |`CUTENSOR_COMPUTE_DESC_32F`|2.0.0.0| | | |`HIPTENSOR_COMPUTE_DESC_32F`|7.0.0| | | | | |
 |`CUTENSOR_COMPUTE_DESC_3XTF32`|2.0.0.0| | | | | | | | | | |
 |`CUTENSOR_COMPUTE_DESC_64F`|2.0.0.0| | | |`HIPTENSOR_COMPUTE_DESC_64F`|7.0.0| | | | | |
+|`CUTENSOR_COMPUTE_DESC_8XINT8`|2.3.1.0| | | | | | | | | | |
 |`CUTENSOR_COMPUTE_DESC_9X16BF`|2.3.0.0| | | | | | | | | | |
 |`CUTENSOR_COMPUTE_DESC_TF32`|2.0.0.0| | | | | | | | | | |
 |`CUTENSOR_COMPUTE_TF32`|1.0.1.0| | |2.0.0.0| | | | | | | |
@@ -267,6 +268,7 @@
 |`cutensorPermutation`|1.0.1.0| | |2.0.0.0|`hiptensorPermutation`|6.1.0| | | | | |
 |`cutensorPermute`|2.0.0.0| | | |`hiptensorPermute`|7.0.0| | | | | |
 |`cutensorPlanGetAttribute`|2.0.0.0| | | |`hiptensorPlanGetAttribute`|7.0.0| | | | | |
+|`cutensorPlanPreferenceGetAttribute`|2.3.1.0| | | | | | | | | | |
 |`cutensorPlanPreferenceSetAttribute`|2.0.0.0| | | |`hiptensorPlanPreferenceSetAttribute`|7.0.0| | | | | |
 |`cutensorReadKernelCacheFromFile`|2.0.0.0| | | |`hiptensorReadKernelCacheFromFile`|7.0.0| | | | | |
 |`cutensorReduce`|2.0.0.0| | | |`hiptensorReduce`|7.0.0| | | | | |

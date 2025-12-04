@@ -594,6 +594,7 @@ std::string Statistics::getCudaVersion(const cudaVersions &ver) {
     case CUTENSOR_2109: return "2.1.0.9";
     case CUTENSOR_2200: return "2.2.0.0";
     case CUTENSOR_2300: return "2.3.0.0";
+    case CUTENSOR_2310: return "2.3.1.0";
   }
   return "";
 }
