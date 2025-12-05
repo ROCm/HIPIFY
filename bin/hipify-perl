@@ -11172,6 +11172,7 @@ sub warnRemovedFunctions {
     "fftw_iodim",
     "fftw_import_wisdom_from_file",
     "fftw_export_wisdom_to_file",
+    "cutensorPlanPreferenceGetAttribute",
     "cutensorMgTensorDescriptor_t",
     "cutensorMgTensorDescriptor_s",
     "cutensorMgHostDevice_t",
@@ -13392,6 +13393,7 @@ sub warnRemovedFunctions {
     "CUTENSOR_COMPUTE_TF32",
     "CUTENSOR_COMPUTE_DESC_TF32",
     "CUTENSOR_COMPUTE_DESC_9X16BF",
+    "CUTENSOR_COMPUTE_DESC_8XINT8",
     "CUTENSOR_COMPUTE_DESC_3XTF32",
     "CUTENSOR_COMPUTE_3XTF32",
     "CUTENSOR_ALGO_TTGT",
@@ -14555,6 +14557,7 @@ sub warnHipOnlyUnsupportedFunctions {
 }
 
 @RocOnlyUnsupportedFunctions = (
+    "cutensorPlanPreferenceGetAttribute",
     "cutensorMgTensorDescriptor_t",
     "cutensorMgTensorDescriptor_s",
     "cutensorMgHostDevice_t",
@@ -15028,6 +15031,7 @@ sub warnHipOnlyUnsupportedFunctions {
     "CUTENSOR_COMPUTE_TF32",
     "CUTENSOR_COMPUTE_DESC_TF32",
     "CUTENSOR_COMPUTE_DESC_9X16BF",
+    "CUTENSOR_COMPUTE_DESC_8XINT8",
     "CUTENSOR_COMPUTE_DESC_3XTF32",
     "CUTENSOR_COMPUTE_3XTF32",
     "CUTENSOR_ALGO_TTGT",
