@@ -133,6 +133,7 @@ nest-asyncio==1.6.0
 packaging==24.0
     # via
     #   ipykernel
+    #   pydata-sphinx-theme
     #   sphinx
 parso==0.8.4
     # via jedi
@@ -150,7 +151,7 @@ pure-eval==0.2.3
     # via stack-data
 pycparser==2.22
     # via cffi
-pydata-sphinx-theme==0.16.1
+pydata-sphinx-theme==0.15.4
     # via
     #   rocm-docs-core
     #   sphinx-book-theme
@@ -187,7 +188,7 @@ requests==2.32.4
     # via
     #   pygithub
     #   sphinx
-rocm-docs-core==1.30.1
+rocm-docs-core==1.31.0
     # via -r requirements.in
 rpds-py==0.22.3
     # via
@@ -213,7 +214,7 @@ sphinx==7.3.7
     #   sphinx-design
     #   sphinx-external-toc
     #   sphinx-notfound-page
-sphinx-book-theme==1.1.2
+sphinx-book-theme==1.1.4
     # via rocm-docs-core
 sphinx-copybutton==0.5.2
     # via rocm-docs-core
