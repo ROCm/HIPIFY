@@ -3769,5 +3769,5 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {
   {"hipLibraryOption",                                                 {HIP_7010, HIP_0,    HIP_0   }},
   {"hipLibraryHostUniversalFunctionAndDataTable",                      {HIP_7010, HIP_0,    HIP_0   }},
   {"hipLibraryBinaryIsPreserved",                                      {HIP_7010, HIP_0,    HIP_0   }},
-  {"hipDeviceAttributeHostNumaId",                                     {HIP_7020, HIP_0,    HIP_0,  HIP_7020}},
+  {"hipDeviceAttributeHostNumaId",                                     {HIP_7020, HIP_0,    HIP_0   }},
 };
