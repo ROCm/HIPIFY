@@ -1038,6 +1038,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP {
   {"CUBLASLT_MATMUL_DESC_EPILOGUE_AUX_SCALE_MODE",                   {"HIPBLASLT_MATMUL_DESC_EPILOGUE_AUX_SCALE_MODE",                     "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
   {"CUBLASLT_MATMUL_DESC_D_OUT_SCALE_POINTER",                       {"HIPBLASLT_MATMUL_DESC_D_OUT_SCALE_POINTER",                         "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
   {"CUBLASLT_MATMUL_DESC_D_OUT_SCALE_MODE",                          {"HIPBLASLT_MATMUL_DESC_D_OUT_SCALE_MODE",                            "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_MATMUL_DESC_EMULATION_DESCRIPTOR",                      {"HIPBLASLT_MATMUL_DESC_EMULATION_DESCRIPTOR",                        "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
   {"cublasLtMatrixTransformDescAttributes_t",                        {"hipblasLtMatrixTransformDescAttributes_t",                          "",                                                         CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED}},
   {"CUBLASLT_MATRIX_TRANSFORM_DESC_SCALE_TYPE",                      {"HIPBLASLT_MATRIX_TRANSFORM_DESC_SCALE_TYPE",                        "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED}},
   {"CUBLASLT_MATRIX_TRANSFORM_DESC_POINTER_MODE",                    {"HIPBLASLT_MATRIX_TRANSFORM_DESC_POINTER_MODE",                      "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED}},
@@ -1132,6 +1133,15 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP {
   {"cublasLtBatchMode_t",                                            {"hipblasLtBatchMode_t",                                              "",                                                         CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
   {"CUBLASLT_BATCH_MODE_STRIDED",                                    {"HIPBLASLT_BATCH_MODE_STRIDED",                                      "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
   {"CUBLASLT_BATCH_MODE_POINTER_ARRAY",                              {"HIPBLASLT_BATCH_MODE_POINTER_ARRAY",                                "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"cublasLtEmulationDesc_t",                                        {"hipblasLtEmulationDesc_t",                                          "",                                                         CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"cublasLtEmulationDescOpaque_t",                                  {"hipblasLtEmulationDescOpaque_t",                                    "",                                                         CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"cublasLtEmulationDescAttributes_t",                              {"hipblasLtEmulationDescAttributes_t",                                "",                                                         CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_EMULATION_DESC_STRATEGY",                               {"HIPBLASLT_EMULATION_DESC_STRATEGY",                                 "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_EMULATION_DESC_SPECIAL_VALUES_SUPPORT",                 {"HIPBLASLT_EMULATION_DESC_SPECIAL_VALUES_SUPPORT",                   "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_EMULATION_DESC_FIXEDPOINT_MANTISSA_CONTROL",            {"HIPBLASLT_EMULATION_DESC_FIXEDPOINT_MANTISSA_CONTROL",              "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_EMULATION_DESC_FIXEDPOINT_MAX_MANTISSA_BIT_COUNT",      {"HIPBLASLT_EMULATION_DESC_FIXEDPOINT_MAX_MANTISSA_BIT_COUNT",        "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_EMULATION_DESC_FIXEDPOINT_MANTISSA_BIT_OFFSET",         {"HIPBLASLT_EMULATION_DESC_FIXEDPOINT_MANTISSA_BIT_OFFSET",           "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
+  {"CUBLASLT_EMULATION_DESC_FIXEDPOINT_MANTISSA_BIT_COUNT_POINTER",  {"HIPBLASLT_EMULATION_DESC_FIXEDPOINT_MANTISSA_BIT_COUNT_POINTER",    "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_TYPE_NAME_VER_MAP {
@@ -2172,6 +2182,16 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_TYPE_NAME_VER_MAP {
   {"CUBLASLT_ALGO_CAP_FLOATING_POINT_EMULATION_SUPPORT",             {CUDA_129, CUDA_0,   CUDA_0  }},
   {"CUBLAS_GEMM_AUTOTUNE",                                           {CUDA_130, CUDA_0,   CUDA_0  }},
   {"CUBLASLT_MATMUL_STAGES_768xAUTO",                                {CUDA_130, CUDA_0,   CUDA_0  }}, // CUBLAS_VERSION 130002 CUDA 13.0.1
+  {"cublasLtEmulationDesc_t",                                        {CUDA_130, CUDA_0,   CUDA_0  }}, // CUBLAS_VERSION 130100 CUDA 13.0.2
+  {"cublasLtEmulationDescOpaque_t",                                  {CUDA_130, CUDA_0,   CUDA_0  }}, // CUBLAS_VERSION 130100 CUDA 13.0.2
+  {"CUBLASLT_MATMUL_DESC_EMULATION_DESCRIPTOR",                      {CUDA_130, CUDA_0,   CUDA_0  }}, // CUBLAS_VERSION 130100 CUDA 13.0.2
+  {"cublasLtEmulationDescAttributes_t",                              {CUDA_130, CUDA_0,   CUDA_0  }}, // CUBLAS_VERSION 130100 CUDA 13.0.2
+  { "CUBLASLT_EMULATION_DESC_STRATEGY",                              {CUDA_130, CUDA_0,   CUDA_0  }}, // CUBLAS_VERSION 130100 CUDA 13.0.2
+  {"CUBLASLT_EMULATION_DESC_SPECIAL_VALUES_SUPPORT",                 {CUDA_130, CUDA_0,   CUDA_0  }}, // CUBLAS_VERSION 130100 CUDA 13.0.2
+  {"CUBLASLT_EMULATION_DESC_FIXEDPOINT_MANTISSA_CONTROL",            {CUDA_130, CUDA_0,   CUDA_0  }}, // CUBLAS_VERSION 130100 CUDA 13.0.2
+  {"CUBLASLT_EMULATION_DESC_FIXEDPOINT_MAX_MANTISSA_BIT_COUNT",      {CUDA_130, CUDA_0,   CUDA_0  }}, // CUBLAS_VERSION 130100 CUDA 13.0.2
+  {"CUBLASLT_EMULATION_DESC_FIXEDPOINT_MANTISSA_BIT_OFFSET",         {CUDA_130, CUDA_0,   CUDA_0  }}, // CUBLAS_VERSION 130100 CUDA 13.0.2
+  {"CUBLASLT_EMULATION_DESC_FIXEDPOINT_MANTISSA_BIT_COUNT_POINTER",  {CUDA_130, CUDA_0,   CUDA_0  }}, // CUBLAS_VERSION 130100 CUDA 13.0.2
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_TYPE_NAME_VER_MAP {
