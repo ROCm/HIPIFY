@@ -198,13 +198,13 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP {
   // cudaKernelSetAttributeForDevice
   {"cuKernelSetAttribute",                                        {"hipKernelSetAttribute",                                       "", CONV_LIBRARY, API_DRIVER, SEC::LIBRARY, HIP_UNSUPPORTED}},
   {"cuKernelSetCacheConfig",                                      {"hipKernelSetCacheConfig",                                     "", CONV_LIBRARY, API_DRIVER, SEC::LIBRARY, HIP_UNSUPPORTED}},
-  {"cuKernelGetName",                                             {"hipKernelGetName",                                            "", CONV_LIBRARY, API_DRIVER, SEC::LIBRARY, HIP_EXPERIMENTAL}},
+  {"cuKernelGetName",                                             {"hipKernelGetName",                                            "", CONV_LIBRARY, API_DRIVER, SEC::LIBRARY}},
   // cudaLibraryGetKernelCount
   {"cuLibraryGetKernelCount",                                     {"hipLibraryGetKernelCount",                                    "", CONV_LIBRARY, API_DRIVER, SEC::LIBRARY}},
   // cudaLibraryEnumerateKernels
   {"cuLibraryEnumerateKernels",                                   {"hipLibraryEnumerateKernels",                                  "", CONV_LIBRARY, API_DRIVER, SEC::LIBRARY}},
   {"cuKernelGetParamInfo",                                        {"hipKernelGetParamInfo",                                       "", CONV_LIBRARY, API_DRIVER, SEC::LIBRARY, HIP_UNSUPPORTED}},
-  {"cuKernelGetLibrary",                                          {"hipKernelGetLibrary",                                         "", CONV_LIBRARY, API_DRIVER, SEC::LIBRARY, HIP_EXPERIMENTAL}},
+  {"cuKernelGetLibrary",                                          {"hipKernelGetLibrary",                                         "", CONV_LIBRARY, API_DRIVER, SEC::LIBRARY}},
 
   // 13. Memory Management
   // no analogue
@@ -1779,8 +1779,8 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_FUNCTION_VER_MAP {
   {"hipMemsetD2D32Async",                                         {HIP_7010, HIP_0,    HIP_0   }},
   {"hipModuleLoadFatBinary",                                      {HIP_7010, HIP_0,    HIP_0   }},
   {"hipModuleGetFunctionCount",                                   {HIP_7010, HIP_0,    HIP_0   }},
-  {"hipKernelGetName",                                            {HIP_7020, HIP_0,    HIP_0,  HIP_7020}},
-  {"hipKernelGetLibrary",                                         {HIP_7020, HIP_0,    HIP_0,  HIP_7020}},
+  {"hipKernelGetName",                                            {HIP_7020, HIP_0,    HIP_0   }},
+  {"hipKernelGetLibrary",                                         {HIP_7020, HIP_0,    HIP_0   }},
 };
 
 const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_DRIVER_FUNCTION_CHANGED_VER_MAP {
