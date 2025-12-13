@@ -449,7 +449,7 @@
 |`CU_DEVICE_ATTRIBUTE_GPU_OVERLAP`| |5.0| | |`hipDeviceAttributeAsyncEngineCount`|4.3.0| | | | | |
 |`CU_DEVICE_ATTRIBUTE_GPU_PCI_DEVICE_ID`|12.8| | | | | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_GPU_PCI_SUBSYSTEM_ID`|12.8| | | | | | | | | | |
-|`CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_FABRIC_SUPPORTED`|12.3| | | | | | | | | | |
+|`CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_FABRIC_SUPPORTED`|12.3| | | |`hipDeviceAttributeHandleTypeFabricSupported`|8.0.0| | | | |8.0.0|
 |`CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_POSIX_FILE_DESCRIPTOR_SUPPORTED`|10.2| | | | | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_WIN32_HANDLE_SUPPORTED`|10.2| | | | | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_WIN32_KMT_HANDLE_SUPPORTED`|10.2| | | | | | | | | | |
@@ -957,7 +957,7 @@
 |`CU_MEM_DECOMPRESS_ALGORITHM_LZ4`|12.9| | | | | | | | | | |
 |`CU_MEM_DECOMPRESS_ALGORITHM_SNAPPY`|12.8| | | | | | | | | | |
 |`CU_MEM_DECOMPRESS_UNSUPPORTED`|12.8| | | | | | | | | | |
-|`CU_MEM_HANDLE_TYPE_FABRIC`|12.3| | | | | | | | | | |
+|`CU_MEM_HANDLE_TYPE_FABRIC`|12.3| | | |`hipMemHandleTypeFabric`|8.0.0| | | | |8.0.0|
 |`CU_MEM_HANDLE_TYPE_GENERIC`|11.1| | | |`hipMemHandleTypeGeneric`|5.2.0| | | | | |
 |`CU_MEM_HANDLE_TYPE_MAX`|10.2| | | | | | | | | | |
 |`CU_MEM_HANDLE_TYPE_NONE`|11.2| | | |`hipMemHandleTypeNone`|5.2.0| | | | | |
