@@ -1678,7 +1678,8 @@ my %removed_funcs = (
 );
 
 my %experimental_funcs = (
-    "cudaDevAttrHostNumaId" => ""
+    "CU_MEM_HANDLE_TYPE_FABRIC" => "8.0.0",
+    "CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_FABRIC_SUPPORTED" => "8.0.0"
 );
 
 $print_stats = 1 if $examine;
@@ -1816,7 +1817,8 @@ sub subst {
 }
 
 sub experimentalSubstitutions {
-    subst("cudaDevAttrHostNumaId", "hipDeviceAttributeHostNumaId", "numeric_literal");
+    subst("CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_FABRIC_SUPPORTED", "hipDeviceAttributeHandleTypeFabricSupported", "numeric_literal");
+    subst("CU_MEM_HANDLE_TYPE_FABRIC", "hipMemHandleTypeFabric", "numeric_literal");
 }
 
 sub rocSubstitutions {
@@ -9203,6 +9205,7 @@ sub simpleSubstitutions {
     subst("cudaDevAttrGlobalMemoryBusWidth", "hipDeviceAttributeMemoryBusWidth", "numeric_literal");
     subst("cudaDevAttrGpuOverlap", "hipDeviceAttributeAsyncEngineCount", "numeric_literal");
     subst("cudaDevAttrHostNativeAtomicSupported", "hipDeviceAttributeHostNativeAtomicSupported", "numeric_literal");
+    subst("cudaDevAttrHostNumaId", "hipDeviceAttributeHostNumaId", "numeric_literal");
     subst("cudaDevAttrHostRegisterSupported", "hipDeviceAttributeHostRegisterSupported", "numeric_literal");
     subst("cudaDevAttrIntegrated", "hipDeviceAttributeIntegrated", "numeric_literal");
     subst("cudaDevAttrIsMultiGpuBoard", "hipDeviceAttributeIsMultiGpuBoard", "numeric_literal");
@@ -12985,7 +12988,6 @@ sub warnRemovedFunctions {
     "CU_MEM_POOL_CREATE_USAGE_HW_DECOMPRESS",
     "CU_MEM_LOCATION_TYPE_MAX",
     "CU_MEM_HANDLE_TYPE_MAX",
-    "CU_MEM_HANDLE_TYPE_FABRIC",
     "CU_MEM_DECOMPRESS_UNSUPPORTED",
     "CU_MEM_DECOMPRESS_ALGORITHM_SNAPPY",
     "CU_MEM_DECOMPRESS_ALGORITHM_LZ4",
@@ -13205,7 +13207,6 @@ sub warnRemovedFunctions {
     "CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_WIN32_KMT_HANDLE_SUPPORTED",
     "CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_WIN32_HANDLE_SUPPORTED",
     "CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_POSIX_FILE_DESCRIPTOR_SUPPORTED",
-    "CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_FABRIC_SUPPORTED",
     "CU_DEVICE_ATTRIBUTE_GPU_PCI_SUBSYSTEM_ID",
     "CU_DEVICE_ATTRIBUTE_GPU_PCI_DEVICE_ID",
     "CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_WRITES_ORDERING",
@@ -17792,7 +17793,7 @@ if ($help) {
     print STDERR "$USAGE\n";
 }
 if ($version) {
-    print STDERR "HIP version 7.2.0\n";
+    print STDERR "HIP version 8.0.0\n";
 }
 while (@ARGV) {
     $fileName=shift (@ARGV);
