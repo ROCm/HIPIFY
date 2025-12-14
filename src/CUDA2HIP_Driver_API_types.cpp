@@ -1015,7 +1015,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaDevAttrReserved127
   {"CU_DEVICE_ATTRIBUTE_TENSOR_MAP_ACCESS_SUPPORTED",                  {"hipDeviceAttributeTensorMapAccessSupported",               "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 127
   //
-  {"CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_FABRIC_SUPPORTED",                 {"hipDeviceAttributeHandleTypeFabricSupported",              "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 128
+  {"CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_FABRIC_SUPPORTED",                 {"hipDeviceAttributeHandleTypeFabricSupported",              "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}}, // 128
   // cudaDevAttrReserved129
   {"CU_DEVICE_ATTRIBUTE_UNIFIED_FUNCTION_POINTERS",                    {"hipDeviceAttributeUnifiedFunctionPointers",                "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 129
   // cudaDevAttrNumaConfig
@@ -2239,7 +2239,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaMemHandleTypeWin32Kmt
   {"CU_MEM_HANDLE_TYPE_WIN32_KMT",                                     {"hipMemHandleTypeWin32Kmt",                                 "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}}, // 0x4
   // cudaMemHandleTypeFabric
-  {"CU_MEM_HANDLE_TYPE_FABRIC",                                        {"hipMemHandleTypeFabric",                                   "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0x8
+  {"CU_MEM_HANDLE_TYPE_FABRIC",                                        {"hipMemHandleTypeFabric",                                   "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}}, // 0x8
   // no analogue
   {"CU_MEM_HANDLE_TYPE_MAX",                                           {"hipMemHandleTypeMax",                                      "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0x7FFFFFFF
 
@@ -4874,6 +4874,8 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {
   {"hipKernel_t",                                                      {HIP_7010, HIP_0,    HIP_0   }},
   {"hipLibraryOption_e",                                               {HIP_7010, HIP_0,    HIP_0   }},
   {"hipDeviceAttributeHostNumaId",                                     {HIP_7020, HIP_0,    HIP_0   }},
+  {"hipDeviceAttributeHandleTypeFabricSupported",                      {HIP_8000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemHandleTypeFabric",                                           {HIP_8000, HIP_0,    HIP_0,  HIP_LATEST}},
 };
 
 const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_DRIVER_TYPE_CHANGED_VER_MAP {
