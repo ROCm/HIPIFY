@@ -25,6 +25,17 @@ THE SOFTWARE.
 #include <sstream>
 #include <iomanip>
 #include <cmath>
+
+#if defined(__has_include) && __has_include(<optional>)
+#include <optional>
+using std::optional;
+#elif __has_include(<experimental/optional>)
+#include <experimental/optional>
+using std::experimental::optional;
+#else
+#error "A standard or experimental <optional> header is required."
+#endif
+
 #include "ArgParse.h"
 
 const char *counterNames[NUM_CONV_TYPES] = {
@@ -744,7 +755,7 @@ cudaVersions Statistics::convertCudaToolkitVersion(const clang::CudaVersion &ver
 
 void Statistics::setCudaVersion(llvm::StringRef cuda_h_file) {
   auto StartsWithWords =
-    [](llvm::StringRef l, const llvm::SmallVector<llvm::StringRef, 3> words) -> std::optional<llvm::StringRef> {
+    [](llvm::StringRef l, const llvm::SmallVector<llvm::StringRef, 3> words) -> optional<llvm::StringRef> {
       for (llvm::StringRef word : words) {
         if (!l.consume_front(word)) return {};
         l = l.ltrim();
