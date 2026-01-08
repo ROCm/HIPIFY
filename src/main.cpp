@@ -206,6 +206,7 @@ bool appendArgumentsAdjusters(ct::RefactoringTool &Tool, const std::string &sSou
       Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-D", ct::ArgumentInsertPosition::BEGIN));
     }
   }
+ 
   // Standard c++ to use in hipification by default
   llcompat::setStdCPP(Tool);
   std::string sInclude = "-I" + sys::path::parent_path(sSourceAbsPath).str();
@@ -239,7 +240,13 @@ bool hipifySingleSource(const std::string &srcPath,
                                ct::CommonOptionsParser *OptionsParserPtr,
                                const char *hipify_exe_path,
                                const std::string &mainContextPath,
-                               bool preserveTemp) {
+                               bool preserveTemp,
+                               bool silent) {
+  // Print info message for each file being hipified (unless silent)
+  if (!silent) {
+    llvm::outs() << sHipify << "Hipifying source: " << srcPath << "\n";
+  }
+
   std::error_code EC;
   SmallString<128> tmpFile;
   StringRef srcFileName = sys::path::filename(srcPath);
