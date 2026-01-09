@@ -1990,6 +1990,10 @@
 |`cublasLtCreate`|10.1| | | |`hipblasLtCreate`|5.5.0| | | | | |
 |`cublasLtDestroy`|10.1| | | |`hipblasLtDestroy`|5.5.0| | | | | |
 |`cublasLtDisableCpuInstructionsSetMask`|12.1| | | | | | | | | | |
+|`cublasLtEmulationDescDestroy`|13.0| | | | | | | | | | |
+|`cublasLtEmulationDescGetAttribute`|13.0| | | | | | | | | | |
+|`cublasLtEmulationDescInit`|13.0| | | | | | | | | | |
+|`cublasLtEmulationDescSetAttribute`|13.0| | | | | | | | | | |
 |`cublasLtGetCudartVersion`|10.1| | | | | | | | | | |
 |`cublasLtGetProperty`|10.1| | | | | | | | | | |
 |`cublasLtGetStatusName`|11.4| | | | | | | | | | |
