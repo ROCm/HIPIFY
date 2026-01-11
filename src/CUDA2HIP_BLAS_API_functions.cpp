@@ -1133,6 +1133,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
   {"cublasLtLoggerSetLevel",                               {"hipblasLtLoggerSetLevel",                                   "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
   {"cublasLtLoggerSetMask",                                {"hipblasLtLoggerSetMask",                                    "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
   {"cublasLtLoggerForceDisable",                           {"hipblasLtLoggerForceDisable",                               "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
+  {"cublasLtEmulationDescInit",                            {"hipblasLtEmulationDescInit",                                "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
+  {"cublasLtEmulationDescDestroy",                         {"hipblasLtEmulationDescDestroy",                             "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
+  {"cublasLtEmulationDescSetAttribute",                    {"hipblasLtEmulationDescSetAttribute",                        "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
+  {"cublasLtEmulationDescGetAttribute",                    {"hipblasLtEmulationDescGetAttribute",                        "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_FUNCTION_VER_MAP {
@@ -1634,6 +1638,10 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_FUNCTION_VER_MAP {
   {"cublasSetEmulationStrategy",                           {CUDA_129, CUDA_0,   CUDA_0   }},
   {"cublasSetWorkspace",                                   {CUDA_110, CUDA_0,   CUDA_0   }}, // A: CUDA_VERSION 11003, CUBLAS_VERSION 11200, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 2
   {"cublasSetWorkspace_v2",                                {CUDA_110, CUDA_0,   CUDA_0   }}, // A: CUDA_VERSION 11003, CUBLAS_VERSION 11200, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 2
+  {"cublasLtEmulationDescInit",                            {CUDA_130, CUDA_0,   CUDA_0   }}, // A: CUDA 13.0.2, CUBLAS_VERSION 130100
+  {"cublasLtEmulationDescDestroy",                         {CUDA_130, CUDA_0,   CUDA_0   }}, // A: CUDA 13.0.2, CUBLAS_VERSION 130100
+  {"cublasLtEmulationDescSetAttribute",                    {CUDA_130, CUDA_0,   CUDA_0   }}, // A: CUDA 13.0.2, CUBLAS_VERSION 130100
+  {"cublasLtEmulationDescGetAttribute",                    {CUDA_130, CUDA_0,   CUDA_0   }}, // A: CUDA 13.0.2, CUBLAS_VERSION 130100
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_FUNCTION_VER_MAP {
