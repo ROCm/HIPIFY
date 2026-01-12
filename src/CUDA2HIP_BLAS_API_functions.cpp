@@ -43,8 +43,18 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
   {"cublasSetSmCountTarget",                               {"hipblasSetSmCountTarget",                                   "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
   {"cublasGetEmulationStrategy",                           {"hipblasGetEmulationStrategy",                               "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
   {"cublasSetEmulationStrategy",                           {"hipblasSetEmulationStrategy",                               "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
+  {"cublasGetEmulationSpecialValuesSupport",               {"hipblasGetEmulationSpecialValuesSupport",                   "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
+  {"cublasSetEmulationSpecialValuesSupport",               {"hipblasSetEmulationSpecialValuesSupport",                   "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
   {"cublasGetStatusName",                                  {"hipblasGetStatusName",                                      "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
   {"cublasGetStatusString",                                {"hipblasGetStatusString",                                    "rocblas_status_to_string",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, HIP_UNSUPPORTED}},
+  {"cublasGetFixedPointEmulationMantissaControl",          {"hipblasGetFixedPointEmulationMantissaControl",              "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
+  {"cublasSetFixedPointEmulationMantissaControl",          {"hipblasSetFixedPointEmulationMantissaControl",              "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
+  {"cublasGetFixedPointEmulationMaxMantissaBitCount",      {"hipblasGetFixedPointEmulationMaxMantissaBitCount",          "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
+  {"cublasSetFixedPointEmulationMaxMantissaBitCount",      {"hipblasSetFixedPointEmulationMaxMantissaBitCount",          "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
+  {"cublasGetFixedPointEmulationMantissaBitOffset",        {"hipblasGetFixedPointEmulationMantissaBitOffset",            "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
+  {"cublasSetFixedPointEmulationMantissaBitOffset",        {"hipblasSetFixedPointEmulationMantissaBitOffset",            "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
+  {"cublasSetFixedPointEmulationMantissaBitCountPointer",  {"hipblasGetFixedPointEmulationMantissaBitCountPointer",      "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
+  {"cublasGetFixedPointEmulationMantissaBitCountPointer",  {"hipblasSetFixedPointEmulationMantissaBitCountPointer",      "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
 
   // Blas logging
   {"cublasLogCallback",                                    {"hipblasLogCallback",                                        "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
@@ -1642,6 +1652,16 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_FUNCTION_VER_MAP {
   {"cublasLtEmulationDescDestroy",                         {CUDA_130, CUDA_0,   CUDA_0   }}, // A: CUDA 13.0.2, CUBLAS_VERSION 130100
   {"cublasLtEmulationDescSetAttribute",                    {CUDA_130, CUDA_0,   CUDA_0   }}, // A: CUDA 13.0.2, CUBLAS_VERSION 130100
   {"cublasLtEmulationDescGetAttribute",                    {CUDA_130, CUDA_0,   CUDA_0   }}, // A: CUDA 13.0.2, CUBLAS_VERSION 130100
+  {"cublasGetEmulationSpecialValuesSupport",               {CUDA_130, CUDA_0,   CUDA_0   }}, // A: CUDA 13.0.2, CUBLAS_VERSION 130100
+  {"cublasSetEmulationSpecialValuesSupport",               {CUDA_130, CUDA_0,   CUDA_0   }}, // A: CUDA 13.0.2, CUBLAS_VERSION 130100
+  {"cublasGetFixedPointEmulationMantissaControl",          {CUDA_130, CUDA_0,   CUDA_0   }}, // A: CUDA 13.0.2, CUBLAS_VERSION 130100
+  {"cublasSetFixedPointEmulationMantissaControl",          {CUDA_130, CUDA_0,   CUDA_0   }}, // A: CUDA 13.0.2, CUBLAS_VERSION 130100
+  {"cublasGetFixedPointEmulationMaxMantissaBitCount",      {CUDA_130, CUDA_0,   CUDA_0   }}, // A: CUDA 13.0.2, CUBLAS_VERSION 130100
+  {"cublasSetFixedPointEmulationMaxMantissaBitCount",      {CUDA_130, CUDA_0,   CUDA_0   }}, // A: CUDA 13.0.2, CUBLAS_VERSION 130100
+  {"cublasGetFixedPointEmulationMantissaBitOffset",        {CUDA_130, CUDA_0,   CUDA_0   }}, // A: CUDA 13.0.2, CUBLAS_VERSION 130100
+  {"cublasSetFixedPointEmulationMantissaBitOffset",        {CUDA_130, CUDA_0,   CUDA_0   }}, // A: CUDA 13.0.2, CUBLAS_VERSION 130100
+  {"cublasGetFixedPointEmulationMantissaBitCountPointer",  {CUDA_130, CUDA_0,   CUDA_0   }}, // A: CUDA 13.0.2, CUBLAS_VERSION 130100
+  {"cublasGetFixedPointEmulationMantissaBitCountPointer",  {CUDA_130, CUDA_0,   CUDA_0   }}, // A: CUDA 13.0.2, CUBLAS_VERSION 130100
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_FUNCTION_VER_MAP {
