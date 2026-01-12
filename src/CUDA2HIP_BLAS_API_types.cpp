@@ -81,6 +81,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP {
   {"CUBLAS_PEDANTIC_MATH",                                           {"HIPBLAS_PEDANTIC_MATH",                                             "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, ROC_UNSUPPORTED}}, // 2
   {"CUBLAS_TF32_TENSOR_OP_MATH",                                     {"HIPBLAS_TF32_TENSOR_OP_MATH",                                       "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, ROC_UNSUPPORTED}}, // 3
   {"CUBLAS_FP32_EMULATED_BF16X9_MATH",                               {"HIPBLAS_FP32_EMULATED_BF16X9_MATH",                                 "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, ROC_UNSUPPORTED}}, // 4
+  {"CUBLAS_FP64_EMULATED_FIXEDPOINT_MATH",                           {"HIPBLAS_FP64_EMULATED_FIXEDPOINT_MATH",                             "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, UNSUPPORTED}}, // 8
   {"CUBLAS_MATH_DISALLOW_REDUCED_PRECISION_REDUCTION",               {"HIPBLAS_MATH_DISALLOW_REDUCED_PRECISION_REDUCTION",                 "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, ROC_UNSUPPORTED}}, // 16
 
   // Blass different GEMM algorithms
@@ -189,6 +190,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP {
   {"CUBLAS_COMPUTE_32F_EMULATED_16BFX9",                             {"HIPBLAS_COMPUTE_32F_EMULATED_16BFX9",                               "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, UNSUPPORTED}}, // 78
   {"CUBLAS_COMPUTE_64F",                                             {"HIPBLAS_COMPUTE_64F",                                               "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, ROC_UNSUPPORTED}}, // 70
   {"CUBLAS_COMPUTE_64F_PEDANTIC",                                    {"HIPBLAS_COMPUTE_64F_PEDANTIC",                                      "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, ROC_UNSUPPORTED}}, // 71
+  {"CUBLAS_COMPUTE_64F_EMULATED_FIXEDPOINT",                         {"HIPBLAS_COMPUTE_64F_EMULATED_FIXEDPOINT",                           "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, UNSUPPORTED}}, // 79
   {"CUBLAS_COMPUTE_32I",                                             {"HIPBLAS_COMPUTE_32I",                                               "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, ROC_UNSUPPORTED}}, // 72
   {"CUBLAS_COMPUTE_32I_PEDANTIC",                                    {"HIPBLAS_COMPUTE_32I_PEDANTIC",                                      "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES, ROC_UNSUPPORTED}}, // 73
 
@@ -2192,6 +2194,8 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_TYPE_NAME_VER_MAP {
   {"CUBLASLT_EMULATION_DESC_FIXEDPOINT_MAX_MANTISSA_BIT_COUNT",      {CUDA_130, CUDA_0,   CUDA_0  }}, // CUBLAS_VERSION 130100 CUDA 13.0.2
   {"CUBLASLT_EMULATION_DESC_FIXEDPOINT_MANTISSA_BIT_OFFSET",         {CUDA_130, CUDA_0,   CUDA_0  }}, // CUBLAS_VERSION 130100 CUDA 13.0.2
   {"CUBLASLT_EMULATION_DESC_FIXEDPOINT_MANTISSA_BIT_COUNT_POINTER",  {CUDA_130, CUDA_0,   CUDA_0  }}, // CUBLAS_VERSION 130100 CUDA 13.0.2
+  {"CUBLAS_FP64_EMULATED_FIXEDPOINT_MATH",                           {CUDA_130, CUDA_0,   CUDA_0  }}, // CUBLAS_VERSION 130100 CUDA 13.0.2
+  {"CUBLAS_COMPUTE_64F_EMULATED_FIXEDPOINT",                         {CUDA_130, CUDA_0,   CUDA_0  }}, // CUBLAS_VERSION 130100 CUDA 13.0.2
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_TYPE_NAME_VER_MAP {
