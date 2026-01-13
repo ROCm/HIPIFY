@@ -27,6 +27,7 @@
 |`CUBLAS_COMPUTE_32I`|11.0| | | |`HIPBLAS_COMPUTE_32I`|6.0.0| | | | | |
 |`CUBLAS_COMPUTE_32I_PEDANTIC`|11.0| | | |`HIPBLAS_COMPUTE_32I_PEDANTIC`|6.0.0| | | | | |
 |`CUBLAS_COMPUTE_64F`|11.0| | | |`HIPBLAS_COMPUTE_64F`|6.0.0| | | | | |
+|`CUBLAS_COMPUTE_64F_EMULATED_FIXEDPOINT`|13.0| | | | | | | | | | |
 |`CUBLAS_COMPUTE_64F_PEDANTIC`|11.0| | | |`HIPBLAS_COMPUTE_64F_PEDANTIC`|6.0.0| | | | | |
 |`CUBLAS_DEFAULT_MATH`|9.0| | | |`HIPBLAS_DEFAULT_MATH`|6.1.0| | | | | |
 |`CUBLAS_DIAG_NON_UNIT`| | | | |`HIPBLAS_DIAG_NON_UNIT`|1.8.2| | | | | |
@@ -38,6 +39,7 @@
 |`CUBLAS_FILL_MODE_LOWER`| | | | |`HIPBLAS_FILL_MODE_LOWER`|1.8.2| | | | | |
 |`CUBLAS_FILL_MODE_UPPER`| | | | |`HIPBLAS_FILL_MODE_UPPER`|1.8.2| | | | | |
 |`CUBLAS_FP32_EMULATED_BF16X9_MATH`|12.9| | | |`HIPBLAS_FP32_EMULATED_BF16X9_MATH`| | | | | | |
+|`CUBLAS_FP64_EMULATED_FIXEDPOINT_MATH`|13.0| | | | | | | | | | |
 |`CUBLAS_GEMM_ALGO0`|8.0| | | | | | | | | | |
 |`CUBLAS_GEMM_ALGO0_TENSOR_OP`|9.0| | | | | | | | | | |
 |`CUBLAS_GEMM_ALGO1`|8.0| | | | | | | | | | |
@@ -1119,8 +1121,13 @@
 |`cublasFree`| | | | | | | | | | | |
 |`cublasGetAtomicsMode`| | | | |`hipblasGetAtomicsMode`|3.10.0| | | | | |
 |`cublasGetCudartVersion`|10.1| | | | | | | | | | |
+|`cublasGetEmulationSpecialValuesSupport`|13.0| | | | | | | | | | |
 |`cublasGetEmulationStrategy`|12.9| | | | | | | | | | |
 |`cublasGetError`| | | | | | | | | | | |
+|`cublasGetFixedPointEmulationMantissaBitCountPointer`|13.0| | | | | | | | | | |
+|`cublasGetFixedPointEmulationMantissaBitOffset`|13.0| | | | | | | | | | |
+|`cublasGetFixedPointEmulationMantissaControl`|13.0| | | | | | | | | | |
+|`cublasGetFixedPointEmulationMaxMantissaBitCount`|13.0| | | | | | | | | | |
 |`cublasGetLoggerCallback`|9.2| | | | | | | | | | |
 |`cublasGetMathMode`|9.0| | | |`hipblasGetMathMode`|6.1.0| | | | | |
 |`cublasGetMatrix`| | | | |`hipblasGetMatrix`|1.8.2| | | | | |
@@ -1146,7 +1153,12 @@
 |`cublasLoggerConfigure`|9.2| | | | | | | | | | |
 |`cublasMigrateComputeType`|11.0| | | | | | | | | | |
 |`cublasSetAtomicsMode`| | | | |`hipblasSetAtomicsMode`|3.10.0| | | | | |
+|`cublasSetEmulationSpecialValuesSupport`|13.0| | | | | | | | | | |
 |`cublasSetEmulationStrategy`|12.9| | | | | | | | | | |
+|`cublasSetFixedPointEmulationMantissaBitCountPointer`| | | | | | | | | | | |
+|`cublasSetFixedPointEmulationMantissaBitOffset`|13.0| | | | | | | | | | |
+|`cublasSetFixedPointEmulationMantissaControl`|13.0| | | | | | | | | | |
+|`cublasSetFixedPointEmulationMaxMantissaBitCount`|13.0| | | | | | | | | | |
 |`cublasSetKernelStream`| | | | | | | | | | | |
 |`cublasSetLoggerCallback`|9.2| | | | | | | | | | |
 |`cublasSetMathMode`|9.0| | | |`hipblasSetMathMode`|6.1.0| | | | | |
